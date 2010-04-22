@@ -41,6 +41,11 @@ class QSignalMapper;
 class KAction;
 class QPropertyAnimation;
 
+namespace Plasma
+{
+    class Service;
+} // namespace Plasma
+
 class Pastebin : public Plasma::Applet
 {
     Q_OBJECT
@@ -106,12 +111,14 @@ private slots:
     void updateTheme();
     void resetActionState();
     void copyToClipboard(const QString &url);
+    void postingFinished(Plasma::ServiceJob *job);
 
     void editTextServer();
     void saveTextServer();
     void editImageServer();
     void saveImageServer();
     void closeServerDialog();
+
 private:
     int iconSize();
     void showOverlay(bool show);
@@ -145,7 +152,7 @@ private:
     int m_imagePrivacy;
     QString m_server;
 
-    QTimer *timer;
+    QTimer *m_timer;
 
     int m_historySize;
     QSignalMapper *m_signalMapper;
@@ -157,12 +164,13 @@ private:
 
     // custom server dialog
     QWidget *m_servers;
-    bool m_waiting;
 
     QClipboard::Mode lastMode;
 
     Ui::pastebinConfig uiConfig;
     Ui::pastebinServersConfig uiServers;
+
+    Plasma::Service *m_postingService;
 };
 
 K_EXPORT_PLASMA_APPLET(pastebin, Pastebin)

@@ -35,6 +35,7 @@
 
 #include <Plasma/Theme>
 #include <Plasma/Service>
+#include <Plasma/ServiceJob>
 
 #include <QApplication>
 #include <QClipboard>
@@ -53,23 +54,25 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_textBackend(0), m_imageBackend(0), m_imagePrivacy(0),
       m_historySize(3), m_signalMapper(new QSignalMapper()), m_paste(0),
-      m_topSeparator(0), m_bottomSeparator(0), m_servers(0), m_waiting(false)
+      m_topSeparator(0), m_bottomSeparator(0), m_servers(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::ConstrainedSquare);
     setMinimumSize(16, 16);
     resize(150, 150);
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(showErrors()));
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(showErrors()));
 
     connect(m_signalMapper, SIGNAL(mapped(const QString &)),
              this, SLOT(copyToClipboard(const QString &)));
     connect(this, SIGNAL(activate()), this, SLOT(postClipboard()));
 
     Plasma::DataEngine *engine = dataEngine("pastebin");
-    engine->connectSource("result", this);
-    engine->connectSource("error", this);
+    m_postingService = engine->serviceForSource("");
+    connect(m_postingService, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(postingFinished(Plasma::ServiceJob*)));
+    engine->connectSource("textservers", this);
+    engine->connectSource("imageservers", this);
 }
 
 Pastebin::~Pastebin()
@@ -77,6 +80,7 @@ Pastebin::~Pastebin()
     delete m_topSeparator;
     delete m_bottomSeparator;
     delete m_icon;
+    delete m_postingService;
     QString history;
     for (int i = 0; i < m_actionHistory.size(); ++i) {
         history.prepend(m_actionHistory.at(i)->text());
@@ -116,24 +120,7 @@ void Pastebin::init()
 
 void Pastebin::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    // if it's something not generated from this applet, ignore it
-    if (!m_waiting) {
-        return;
-    }
-
-    // initialization of data
-    if (data["result"].toString().isEmpty() && data["error"].toString().isEmpty()) {
-        return;
-    }
-
-    m_waiting = false;
-    const QString msg(data[sourceName].toString());
-    if (sourceName == "result") {
-        const QString result(data["result"].toString());
-        showResults(msg);
-    } else {
-        showErrors();
-    }
+    //TODO: use the mappings!
 }
 
 void Pastebin::setHistorySize(int max)
@@ -208,7 +195,7 @@ void Pastebin::setActionState(ActionState state)
             toolTipData.setImage(KIcon("dialog-cancel"));
             // Notification ...
             QTimer::singleShot(15000, this, SLOT(resetActionState()));
-            timer->stop();
+            m_timer->stop();
             break;
         case IdleSuccess:
             setBusy(false);
@@ -216,7 +203,7 @@ void Pastebin::setActionState(ActionState state)
             toolTipData.setImage(KIcon("dialog-ok"));
             // Notification ...
             QTimer::singleShot(15000, this, SLOT(resetActionState()));
-            timer->stop();
+            m_timer->stop();
             break;
         case Sending:
             setBusy(true);
@@ -588,7 +575,7 @@ void Pastebin::configAccepted()
 
 void Pastebin::showResults(const QString &url)
 {
-    timer->stop();
+    m_timer->stop();
     m_url = url;
     setActionState(IdleSuccess);
     copyToClipboard(url);
@@ -786,61 +773,48 @@ void Pastebin::postContent(QString text, QImage imageData)
     KUrl testPath(text);
     bool validPath = QFile::exists(testPath.toLocalFile());
     bool image = false;
+    QString operationName;
 
     if (validPath) {
         KMimeType::Ptr type = KMimeType::findByPath(testPath.path());
 
         if (type->name().indexOf("image/") != -1) {
+            operationName = "image";
             image = true;
+        } else {
+            operationName = "text";
         }
+    } else if (imageData.isNull()) {
+        operationName = "literalText";
     } else {
-        if (!imageData.isNull()) {
-            image = true;
+        operationName = "image";
+        image = true;
 
-            KTemporaryFile tempFile;
-            if (tempFile.open()) {
-                tempFile.setAutoRemove(false);
+        KTemporaryFile tempFile;
+        if (tempFile.open()) {
+            tempFile.setAutoRemove(false);
 
-                QDataStream stream(&tempFile);
-                QByteArray data;
-                QBuffer buffer(&data);
+            QDataStream stream(&tempFile);
+            QByteArray data;
+            QBuffer buffer(&data);
 
-                buffer.open(QIODevice::ReadWrite);
-                imageData.save(&buffer, "JPEG");
-                stream.writeRawData(data, data.size());
-                tempFile.close();
+            buffer.open(QIODevice::ReadWrite);
+            imageData.save(&buffer, "JPEG");
+            stream.writeRawData(data, data.size());
+            tempFile.close();
 
-                text = tempFile.fileName();
-            } else {
-                setActionState(IdleError);
-                return;
-            }
+            text = tempFile.fileName();
+        } else {
+            setActionState(IdleError);
+            return;
         }
     }
 
     KConfigGroup cg = config();
 
-    if (!image) {
-        Plasma::Service *service = dataEngine("pastebin")->serviceForSource("");
-        KConfigGroup ops = service->operationDescription("text");
-
-        switch(m_textBackend) {
-            case Pastebin::PASTEBINCA:
-                ops.writeEntry("server", cg.readEntry("pastebinca", "http://pastebin.ca"));
-                break;
-
-            case Pastebin::PASTEBINCOM:
-                ops.writeEntry("server", cg.readEntry("pastebincom", "http://pastebin.com"));
-                break;
-        }
-
-        ops.writeEntry("fileName", text);
-        ops.writeEntry("backend", m_textBackend);
-        service->startOperationCall(ops);
-    } else {
-        Plasma::Service *service = dataEngine("pastebin")->serviceForSource("");
-        KConfigGroup ops = service->operationDescription("image");
-
+    KConfigGroup ops = m_postingService->operationDescription(operationName);
+    kDebug() << image << validPath << operationName;
+    if (image) {
         switch(m_imageBackend) {
             case Pastebin::IMAGEBINCA:
                 ops.writeEntry("server", cg.readEntry("imagebinca", "http://imagebin.ca"));
@@ -863,14 +837,41 @@ void Pastebin::postContent(QString text, QImage imageData)
         ops.writeEntry("fileName", text);
         ops.writeEntry("privacy", m_imagePrivacy);
         ops.writeEntry("backend", m_imageBackend);
+    } else {
+        switch (m_textBackend) {
+            case Pastebin::PASTEBINCA:
+                ops.writeEntry("server", cg.readEntry("pastebinca", "http://pastebin.ca"));
+                break;
 
-        service->startOperationCall(ops);
+            case Pastebin::PASTEBINCOM:
+                ops.writeEntry("server", cg.readEntry("pastebincom", "http://pastebin.com"));
+                break;
+        }
+
+        if (validPath) {
+            ops.writeEntry("fileName", text);
+        } else {
+            ops.writeEntry("text", text);
+        }
+
+        ops.writeEntry("backend", m_textBackend);
     }
 
+    Plasma::ServiceJob *job = m_postingService->startOperationCall(ops);
     setActionState(Sending);
-    timer->start(20000);
-    m_waiting = true;
+    m_timer->start(20000);
+    job->start();
 }
+
+void Pastebin::postingFinished(Plasma::ServiceJob *job)
+{
+    if (job->error()) {
+        showErrors();
+    } else {
+        showResults(job->result().toString());
+    }
+}
+
 
 
 #include "pastebin.moc"
