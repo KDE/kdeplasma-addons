@@ -13,7 +13,7 @@ if (@ARGV == 0)
 $hostname = "204.93.161.247"; # Running from my computer
 $database = "sandros_kde";
 $user = "sandros_scripty";
-$password = "oBse_4s";
+$password = "yTpi_4$s";
 
 $driver = "mysql";
 $dsn = "DBI:$driver:database=$database;host=$hostname";
