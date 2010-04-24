@@ -2,6 +2,7 @@
 Name=special characters
 Name[en_GB]=special characters
 Name[kk]=арнаулы таңбалар
+Name[nb]=spesialtegn
 Name[pt]=caracteres especiais
 Name[pt_BR]=caracteres especiais
 Name[sv]=specialtecken
@@ -10,6 +11,7 @@ Name[x-test]=xxspecial charactersxx
 Icon=accessories-character-map
 Comment=creates special characters from its hexadecimal-code
 Comment[kk]=оналтылық кодымен арнаулы таңбаларды енгізу
+Comment[nb]=lager spesialtegn ut fra den heksadesimale koden
 Comment[pt]=cria caracteres especiais a partir do seu código hexadecimal
 Comment[pt_BR]=cria caracteres especiais de seus códigos hexadecimais
 Comment[sv]=skapar specialtecken från hexadecimal kod
