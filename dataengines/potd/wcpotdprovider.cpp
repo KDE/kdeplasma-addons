@@ -55,7 +55,7 @@ void WcpotdProvider::Private::pageRequestFinished( KJob *_job )
 	return;
     }
 
-    KUrl picUrl( QString( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" ) );  KIO::StoredTransferJob *imageJob = KIO::storedGet( picUrl );
+    KUrl picUrl( QString( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" ) );  KIO::StoredTransferJob *imageJob = KIO::storedGet( picUrl, KIO::NoReload, KIO::HideProgressInfo );
     mParent->connect( imageJob, SIGNAL( finished( KJob *) ), SLOT( imageRequestFinished( KJob* ) ) );
 }
 
@@ -82,7 +82,7 @@ WcpotdProvider::WcpotdProvider( QObject *parent, const QVariantList &args )
 
     KUrl url( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" );
 
-    KIO::StoredTransferJob *job = KIO::storedGet( url );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL( finished( KJob *) ), SLOT( pageRequestFinished( KJob* ) ) );
 }
 

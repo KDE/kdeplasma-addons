@@ -56,7 +56,7 @@ void OseiProvider::Private::pageRequestFinished( KJob *_job )
     }
     // TODO check if this location is always the one for the picture with the same name
     KUrl url( QString( "http://www.osei.noaa.gov/IOD/OSEIiod.jpg" ) );
-    KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
+    KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
 }
 
@@ -82,7 +82,7 @@ OseiProvider::OseiProvider( QObject *parent, const QVariantList &args )
 	Q_ASSERT( false && "Invalid type passed to potd provider" );
 
     KUrl url( QString( "http://www.osei.noaa.gov/OSEIiod.html" ) );
-    KIO::StoredTransferJob *job = KIO::storedGet( url );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL( finished( KJob *) ), SLOT( pageRequestFinished( KJob* ) ) );
 }
 

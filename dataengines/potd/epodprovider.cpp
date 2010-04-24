@@ -64,7 +64,7 @@ void EpodProvider::Private::pageRequestFinished(KJob *_job)
     int pos = exp.indexIn( data ) + pattern.length();
     const QString sub = data.mid( pos-4, pattern.length()+6);
     KUrl url( QString("http://epod.usra.edu/.a/%1-pi") .arg(sub)  );
-    KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
+    KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     QObject::connect(imageJob, SIGNAL( finished( KJob* )), mParent, SLOT( imageRequestFinished( KJob* ) ) );
 }
 
@@ -90,7 +90,7 @@ EpodProvider::EpodProvider( QObject *parent, const QVariantList &args )
 	Q_ASSERT( false && "Invalid type passed to potd provider" );
 
     KUrl url( QString( "http://epod.usra.edu/blog/" ) );
-    KIO::StoredTransferJob *job = KIO::storedGet( url );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
 
     connect( job, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
 }

@@ -84,7 +84,7 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
                     mActualDate = mActualDate.addDays(-2);
 
                             KUrl url( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" + mActualDate.toString( Qt::ISODate) );
-                            KIO::StoredTransferJob *pageJob = KIO::storedGet( url );
+                            KIO::StoredTransferJob *pageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
                             mParent->connect( pageJob, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
                     return;
                 }
@@ -107,7 +107,7 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
 
     if (m_photoList.begin() != m_photoList.end()) {
         KUrl url( m_photoList.at(qrand() % m_photoList.size()) );
-            KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
+            KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
             mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
     } else {
         kDebug() << "empty list";

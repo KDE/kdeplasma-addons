@@ -65,7 +65,7 @@ void ApodProvider::Private::pageRequestFinished( KJob *_job )
     const QString sub = data.mid( pos, exp.matchedLength() -21);
 
     KUrl url( QString( "http://antwrp.gsfc.nasa.gov/apod/image/%1/%2" ).arg(QDate::currentDate().toString( "yyMM" ) ).arg( sub ) );
-    KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
+    KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
 }
 
@@ -91,7 +91,7 @@ ApodProvider::ApodProvider( QObject *parent, const QVariantList &args )
 	Q_ASSERT( false && "Invalid type passed to potd provider" );
 
     KUrl url( QString( "http://antwrp.gsfc.nasa.gov/apod/" ) );
-    KIO::StoredTransferJob *job = KIO::storedGet( url );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL( finished( KJob *) ), SLOT( pageRequestFinished( KJob* ) ) );
 }
 
