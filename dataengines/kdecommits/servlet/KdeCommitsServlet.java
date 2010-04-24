@@ -11,7 +11,7 @@ public class KdeCommitsServlet extends HttpServlet
         String dbHost = "localhost";
         String dbName = "sandros_kde";
         String username = "sandros_kdeob";
-        String password = "oBse_4s";
+        String password = "oBse_4$s";
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
