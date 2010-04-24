@@ -108,7 +108,7 @@ void Frame::init()
     m_slideshowTime = cg.readEntry("slideshow time", 60); // default to 1 minute
     m_currentUrl = cg.readEntry("url", m_currentUrl);
     setAssociatedApplicationUrls(m_currentUrl);
-    m_potdProvider = cg.readEntry("potdProvider", "wcpotd");
+    m_potdProvider = cg.readEntry("potdProvider", QString());
     m_potd = cg.readEntry("potd", false);
     m_autoUpdateIntervall = cg.readEntry("autoupdate time", 0);
 
@@ -494,8 +494,11 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     m_configDialog->imageUi.randomCheckBox->setCheckState(m_random ? Qt::Checked : Qt::Unchecked);
     m_configDialog->imageUi.recursiveCheckBox->setCheckState(m_recursiveSlideShow ? Qt::Checked : Qt::Unchecked);
 
-    m_configDialog->imageUi.potdComboBox->setCurrentIndex(m_configDialog->imageUi.potdComboBox->findData(m_potdProvider));
-
+    if (!m_potdProvider.isEmpty())
+        m_configDialog->imageUi.potdComboBox->setCurrentIndex(m_configDialog->imageUi.potdComboBox->findData(m_potdProvider));
+    else 
+        m_configDialog->imageUi.potdComboBox->setCurrentIndex(0);
+    
     m_configDialog->setCurrentUrl(m_currentUrl);
     m_configDialog->imageUi.slideShowDirList->clear();
     m_configDialog->imageUi.slideShowDirList->addItems(m_slideShowPaths);
