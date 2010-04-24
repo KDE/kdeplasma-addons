@@ -37,7 +37,7 @@ class FlickrProvider::Private
     Private( FlickrProvider *parent )
       : mParent( parent )
     {
-	qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+        qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
     }
 
     void pageRequestFinished( KJob* );
@@ -59,10 +59,10 @@ class FlickrProvider::Private
 void FlickrProvider::Private::pageRequestFinished( KJob *_job )
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
-    if ( job->error() ) {
-	emit mParent->error( mParent );
-	kDebug() << "pageRequestFinished error";
-	return;
+    if (job->error()) {
+        emit mParent->error( mParent );
+        kDebug() << "pageRequestFinished error";
+        return;
     }
 
     const QString data = QString::fromUtf8( job->data() );
@@ -73,52 +73,44 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
     xml.clear();
     xml.addData(data);
 
-    while ( !xml.atEnd() )
-    {
-	xml.readNext();
+    while (!xml.atEnd()) {
+        xml.readNext();
 
-	if ( xml.isStartElement() )
-	{
-	    if ( xml.name() == "rsp" )
-	    {
-		/* no pictures available for the specified parameters */
-		if (xml.attributes().value ( "stat" ).toString() == "fail")
-		{
-		    /* To be sure, decrement the date to two days earlier... @TODO */
-		    mActualDate = mActualDate.addDays(-2);
+        if (xml.isStartElement()) {
+            if (xml.name() == "rsp") {
+                /* no pictures available for the specified parameters */
+                if (xml.attributes().value ( "stat" ).toString() == "fail") {
+                    /* To be sure, decrement the date to two days earlier... @TODO */
+                    mActualDate = mActualDate.addDays(-2);
 
-                    KUrl url( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" + mActualDate.toString( Qt::ISODate) );
-                    KIO::StoredTransferJob *pageJob = KIO::storedGet( url );
-                    mParent->connect( pageJob, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
-		    return;
-		}
-	    }
-	    else if ( xml.name() == "photo" )
-	    {
-	    	if (xml.attributes().value ( "ispublic" ).toString() != "1")
-		    continue;
+                            KUrl url( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" + mActualDate.toString( Qt::ISODate) );
+                            KIO::StoredTransferJob *pageJob = KIO::storedGet( url );
+                            mParent->connect( pageJob, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
+                    return;
+                }
+            } else if (xml.name() == "photo") {
+                if (xml.attributes().value ( "ispublic" ).toString() != "1")
+                continue;
 
-	    	QString fileUrl = QString("http://farm" + xml.attributes().value ( "farm" ).toString() + ".static.flickr.com/"
-		    + xml.attributes().value ( "server" ).toString() + '/' + xml.attributes().value ( "id" ).toString()
-		    + '_' + xml.attributes().value ( "secret" ).toString() + ".jpg");
+                QString fileUrl = QString("http://farm" + xml.attributes().value ( "farm" ).toString() + ".static.flickr.com/"
+                + xml.attributes().value ( "server" ).toString() + '/' + xml.attributes().value ( "id" ).toString()
+                + '_' + xml.attributes().value ( "secret" ).toString() + ".jpg");
 
-		m_photoList.append(fileUrl);
-	    }
-	}
+                m_photoList.append(fileUrl);
+            }
+        }
     }
 
-    if ( xml.error() && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError )
-    {
-	qWarning() << "XML ERROR:" << xml.lineNumber() << ": " << xml.errorString();
+    if (xml.error() && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError) {
+        qWarning() << "XML ERROR:" << xml.lineNumber() << ": " << xml.errorString();
     }
 
-    if (m_photoList.begin() != m_photoList.end())
-    {
-	KUrl url( m_photoList.at(qrand() % m_photoList.size()) );
-        KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
-        mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
-    }else{
-	kDebug() << "empty list";
+    if (m_photoList.begin() != m_photoList.end()) {
+        KUrl url( m_photoList.at(qrand() % m_photoList.size()) );
+            KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
+            mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
+    } else {
+        kDebug() << "empty list";
     }
 }
 
@@ -126,8 +118,8 @@ void FlickrProvider::Private::imageRequestFinished( KJob *_job )
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if ( job->error() ) {
-	emit mParent->error( mParent );
-	return;
+        emit mParent->error( mParent );
+        return;
     }
 
     mImage = QImage::fromData( job->data() );
