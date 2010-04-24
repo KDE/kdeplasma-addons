@@ -47,6 +47,7 @@ class FlickrProvider::Private
     FlickrProvider *mParent;
     QByteArray mPage;
     QDate mDate;
+    QDate mActualDate;
     QImage mImage;
 
     QXmlStreamReader xml;
@@ -84,11 +85,11 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
 		if (xml.attributes().value ( "stat" ).toString() == "fail")
 		{
 		    /* To be sure, decrement the date to two days earlier... @TODO */
-		    QDate tempDate = mDate.addDays(-2);
+		    mActualDate = mActualDate.addDays(-2);
 
-                    KUrl url( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" + tempDate.toString( Qt::ISODate) );
-                    KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
-                    mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
+                    KUrl url( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" + mActualDate.toString( Qt::ISODate) );
+                    KIO::StoredTransferJob *pageJob = KIO::storedGet( url );
+                    mParent->connect( pageJob, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
 		    return;
 		}
 	    }
@@ -137,10 +138,12 @@ FlickrProvider::FlickrProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
     const QString type = args[ 0 ].toString();
-    if ( type == "Date" )
+    if ( type == "Date" ) {
         d->mDate = args[ 1 ].toDate();
-    else
-	Q_ASSERT( false && "Invalid type passed to potd provider" );
+        d->mActualDate = d->mDate;
+    } else {
+        Q_ASSERT( false && "Invalid type passed to potd provider" );
+    }
 
     KUrl url("http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" + d->mDate.toString( Qt::ISODate ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url );
