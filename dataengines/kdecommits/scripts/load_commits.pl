@@ -40,7 +40,7 @@ my $year  = substr $ARGV[0], 0, 4;
 my $month = substr $ARGV[0], 5, 2;
 
 my $r = 1;
-my $commitCounter = 0;
+my $commitCounter  = 0;
 my $invalidCounter = 0;
 
 my $foundData = 0;
@@ -49,6 +49,7 @@ my $finished  = 0;
 while (!$finished)
 {
     my $url = 'http://lists.kde.org/?l=kde-commits&r=' . $r . '&b=' . $year . $month . '&w=4';
+    my $foundCommit = 0;
 
     print "Getting url $url\n";
     my $content = get $url;
@@ -68,63 +69,64 @@ while (!$finished)
 
     foreach my $line (@lines)
     {
-	if ($line =~ /^\s*(\d+)\.\s(\d\d\d\d-\d\d-\d\d)\s\s<a href="(.+?)">(.+?)<\/a>\s*<a href="\?l=kde-commits&w=4">kde-commits<\/a>\s\s(.+)/)
-	{
-	    my ($commitNumber, $commitDate, $commitLink, $commitPath, $commitDeveloper)  = ($1, $2, $3, $4, $5);
+        if ($line =~ /^\s*(\d+)\.\s(\d\d\d\d-\d\d-\d\d)\s\s<a href="(.+?)">(.+?)<\/a>\s*<a href="\?l=kde-commits&w=4">kde-commits<\/a>\s\s(.+)/)
+        {
+            $foundCommit = 1;
+            my ($commitNumber, $commitDate, $commitLink, $commitPath, $commitDeveloper)  = ($1, $2, $3, $4, $5);
 
-	    if ($commitDate eq $ARGV[0])
-	    {
-		$foundData = 1;
-		$commitDeveloper =~ s/\s+$//;
+            if ($commitDate eq $ARGV[0])
+            {
+                $foundData = 1;
+                $commitDeveloper =~ s/\s+$//;
 
-		my $commitContent = get "http://lists.kde.org/" . $commitLink;
+                my $commitContent = get "http://lists.kde.org/" . $commitLink;
                 if (!defined $commitContent)
                 {
                     print "Failed to get content url. 2nd attempt !\n";
-		    $commitContent = get "http://lists.kde.org/" . $commitLink;
+                    $commitContent = get "http://lists.kde.org/" . $commitLink;
                 }
                 if (!defined $commitContent)
                 {
                     print "Failed to get content url. 3rd attempt !\n";
-		    $commitContent = get "http://lists.kde.org/" . $commitLink;
+                    $commitContent = get "http://lists.kde.org/" . $commitLink;
                 }
-		die "Couldn't get content $url" unless defined $commitContent;
+                die "Couldn't get content $url" unless defined $commitContent;
 
-		my @contentLines = split('\n', $commitContent);
-	      
-		my $commitDateTime = "";
-		my $commitSVNAccount = "";
-		my $commitLog = "";
-		my $enteredLogSection = 0;
-		foreach my $contentLine (@contentLines)
-		{
-		    if ($contentLine =~ /Date:\s{7}<a href="\?l=kde-commits&r=\d+&w=4&b=\d{6}">(\d\d\d\d)-(\d\d)-(\d\d)\s(\d{1,2}):(\d\d):(\d\d)<\/a>/)
-		    {
+                my @contentLines = split('\n', $commitContent);
+                
+                my $commitDateTime = "";
+                my $commitSVNAccount = "";
+                my $commitLog = "";
+                my $enteredLogSection = 0;
+                foreach my $contentLine (@contentLines)
+                {
+                    if ($contentLine =~ /Date:\s{7}<a href="\?l=kde-commits&r=\d+&w=4&b=\d{6}">(\d\d\d\d)-(\d\d)-(\d\d)\s(\d{1,2}):(\d\d):(\d\d)<\/a>/)
+                    {
                         my ($year, $month, $day, $hour, $min, $sec) = ($1, $2, $3, $4, $5, $6);
                         $commitDateTime = sprintf ("%04d-%02d-%02d %02d:%02d:%02d", $year, $month, $day, $hour, $min, $sec);
-		    }
-		    elsif ($contentLine =~ /SVN commit \d+ by (.+):/)
-		    {
-			$commitSVNAccount = $1;
-			$enteredLogSection = 1;
-		    }
-		    elsif ($contentLine =~ /^\s_?[AMDUGC]\s*(\+\d+\s*\-\d+)?\s*\S+/)
-		    {
-			$enteredLogSection = 0;
-			last;
-		    }
-		    elsif ($enteredLogSection)
-		    {
-			if ($commitLog ne "" and $contentLine ne "")
-			{
-			    $commitLog = $commitLog . "\n";
-			}
-			$commitLog = $commitLog . $contentLine;
-		    }
-		}
+                    }
+                    elsif ($contentLine =~ /SVN commit \d+ by (.+):/)
+                    {
+                        $commitSVNAccount = $1;
+                        $enteredLogSection = 1;
+                    }
+                    elsif ($contentLine =~ /^\s_?[AMDUGC]\s*(\+\d+\s*\-\d+)?\s*\S+/)
+                    {
+                        $enteredLogSection = 0;
+                        last;
+                    }
+                    elsif ($enteredLogSection)
+                    {
+                        if ($commitLog ne "" and $contentLine ne "")
+                        {
+                            $commitLog = $commitLog . "\n";
+                        }
+                        $commitLog = $commitLog . $contentLine;
+                    }
+                }
 
-		print "\"$commitNumber\"\n";
-		#print "\"$commitNumber\"\n\"$commitDateTime\"\n\"$commitLink\"\n\"$commitPath\"\n\"$commitDeveloper\"\n\"$commitSVNAccount\"\n\"$commitLog\"\n\n";
+                print "\"$commitNumber\"\n";
+                #print "\"$commitNumber\"\n\"$commitDateTime\"\n\"$commitLink\"\n\"$commitPath\"\n\"$commitDeveloper\"\n\"$commitSVNAccount\"\n\"$commitLog\"\n\n";
                 if ($commitSVNAccount ne "")
                 {
                     $commitCounter++;
@@ -152,13 +154,17 @@ while (!$finished)
                 {
                     $invalidCounter++;
                 }
-	    }
+            }
             elsif ($foundData)
-	    {
+            {
                 $finished = 1;
                 last;
-	    }
-	} 
+            }
+        } 
+    }
+    if (!$foundCommit)
+    {
+        $finished = 1;
     }
     $r++;
 }
