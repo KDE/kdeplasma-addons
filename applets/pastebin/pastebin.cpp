@@ -860,7 +860,6 @@ void Pastebin::postContent(QString text, QImage imageData)
     Plasma::ServiceJob *job = m_postingService->startOperationCall(ops);
     setActionState(Sending);
     m_timer->start(20000);
-    job->start();
 }
 
 void Pastebin::postingFinished(Plasma::ServiceJob *job)
