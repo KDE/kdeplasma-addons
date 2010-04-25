@@ -54,8 +54,8 @@ public:
     } Commit;
 
 protected Q_SLOTS:
-    virtual void requestFinished (int id, bool error);
-
+    virtual void replyFinished(QNetworkReply *reply);
+    
 private:
     bool m_fullUpdate;
     int  m_commitsRead;
@@ -64,13 +64,11 @@ private:
 
     int m_extent;
     int m_page;
-    int m_connectId;
     long long m_stopCollectingDay;
     long long m_lastDay;
     int m_dayCounter;
 
     QStack<Commit> m_commits;
-    QHttpRequestHeader m_header;
     QString m_archiveName;
     QString m_lastArchiveRead;
     QString m_initialArchiveName;

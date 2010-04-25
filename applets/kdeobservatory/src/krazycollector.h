@@ -39,23 +39,21 @@ public:
     virtual void run();
 
 protected Q_SLOTS:
-    virtual void requestFinished (int id, bool error);
+    virtual void replyFinished(QNetworkReply *reply);
 
 private:
     void collectProject(const QString &project);
-    void parseReport(int id);
-    void processModule(int id);
+    void parseReport(QNetworkReply *reply);
+    void processModule(QNetworkReply *reply);
 
-    QHttpRequestHeader m_header;
-    int m_connectId;
     int m_projectsCollected;
     int m_activeProjects;
     int m_projectsCountDelta;
     QString m_source;
     const QHash<QString, bool> &m_krazyReportViewProjects;
     const QMap<QString, KdeObservatory::Project> &m_projects;
-    QMap<int, QString> m_idFilePrefixMap;
-    QMap<int, QString> m_idProjectNameMap;
+    QMap<QNetworkReply *, QString> m_idFilePrefixMap;
+    QMap<QNetworkReply *, QString> m_idProjectNameMap;
 
     QString m_lastCollect;
 };

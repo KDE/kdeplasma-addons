@@ -27,15 +27,10 @@
 
 KrazyCollector::KrazyCollector(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QObject *parent)
 : ICollector(parent),
-  m_header("GET", "/krazy/index.php"),
   m_krazyReportViewProjects(krazyReportViewProjects),
   m_projects(projects),
   m_lastCollect("")
 {
-    m_connectId = setHost("www.englishbreakfastnetwork.org", QHttp::ConnectionModeHttp, 0);
-    m_header.setValue("Host", "www.englishbreakfastnetwork.org");
-    m_header.setValue( "User-Agent", "User Agent");
-    m_header.setContentType("application/x-www-form-urlencoded");
 }
 
 KrazyCollector::~KrazyCollector()
@@ -86,42 +81,43 @@ void KrazyCollector::run()
         emit collectFinished();
 }
 
-void KrazyCollector::requestFinished (int id, bool error)
+void KrazyCollector::replyFinished(QNetworkReply *reply)
 {
-    if (error)
-        emit collectError(errorString());
+    m_source = QString((QByteArray(reply->readAll())));
 
-    if (id == m_connectId)
-        return;
-
-    m_source = readAll();
+    if (m_source.isEmpty())
+        emit collectError(reply->error());
 
     if (m_source.contains("<h1>Not Found</h1>"))
-        kDebug() << "Krazy report not found for:" << m_idProjectNameMap[id] << ". Please, check configuration.";
+        kDebug() << "Krazy report not found for:" << m_idProjectNameMap[reply] << ". Please, check configuration.";
 
     if (m_source.contains("<table style=\"clear: right;\" class=\"sortable\" id=\"reportTable\" cellspacing=\"0\" border=\"0\" width=\"100%\">"))
-        processModule(id);
+        processModule(reply);
     else
-        parseReport(id);
+        parseReport(reply);
+
+    m_idFilePrefixMap.remove(reply);
+    m_idProjectNameMap.remove(reply);
+    reply->deleteLater();
 }
 
 void KrazyCollector::collectProject(const QString &project)
 {
-    int id = 0;
+    QNetworkReply *reply = 0;
     QString krazyReport = m_projects[project].krazyReport;
     if (krazyReport.contains("reports"))
-        id = get(QUrl::toPercentEncoding("/krazy/" + krazyReport, "!$&'()*+,;=:@/"));
+        reply = get(QNetworkRequest(QUrl("http://www.englishbreakfastnetwork.org/krazy/" + krazyReport)));
     else if (krazyReport.contains("component="))
-        id = get(QString("/krazy/index.php?" + krazyReport).toUtf8());
-    m_idFilePrefixMap[id] = m_projects[project].krazyFilePrefix;
-    m_idProjectNameMap[id] = project;
+        reply = get(QNetworkRequest(QUrl(QString("http://www.englishbreakfastnetwork.org/krazy/index.php?" + krazyReport).toUtf8())));
+    m_idFilePrefixMap[reply] = m_projects[project].krazyFilePrefix;
+    m_idProjectNameMap[reply] = project;
 }
 
-void KrazyCollector::parseReport(int id)
+void KrazyCollector::parseReport(QNetworkReply *reply)
 {
     QRegExp regExp1("<li><b><u>(.*)</u></b><ol>");
     QRegExp regExp2("<li><span class=\"toolmsg\">(.*)<b>");
-    QRegExp regExp3("<li><a href=\"http://lxr.kde.org/source/[^<>]*" + m_idFilePrefixMap[id] + "(.*)\">.*</a>:\\s*(.*)\\s*</li>");
+    QRegExp regExp3("<li><a href=\"http://lxr.kde.org/source/[^<>]*" + m_idFilePrefixMap[reply] + "(.*)\">.*</a>:\\s*(.*)\\s*</li>");
     regExp1.setMinimal(true);
     regExp2.setMinimal(true);
     regExp3.setMinimal(true);
@@ -151,7 +147,7 @@ void KrazyCollector::parseReport(int id)
         }
         else if (pos == pos3)
         {
-            KdeObservatoryDatabase::self()->addKrazyError(m_idProjectNameMap[id], fileType, testName, regExp3.cap(1), regExp3.cap(2));
+            KdeObservatoryDatabase::self()->addKrazyError(m_idProjectNameMap[reply], fileType, testName, regExp3.cap(1), regExp3.cap(2));
             pos += regExp3.matchedLength();
         }
         pos1 = regExp1.indexIn(m_source, pos);
@@ -164,7 +160,7 @@ void KrazyCollector::parseReport(int id)
         emit collectFinished();
 }
 
-void KrazyCollector::processModule(int id)
+void KrazyCollector::processModule(QNetworkReply *reply)
 {
     QRegExp exp("<a href=\"(reports.*)\"");
     exp.setMinimal(true);
@@ -173,9 +169,9 @@ void KrazyCollector::processModule(int id)
     while ((pos = exp.indexIn(m_source, pos)) != -1)
     {
         ++m_projectsCountDelta;
-        int newId = get(QUrl::toPercentEncoding("/krazy/" + exp.cap(1), "!$&'()*+,;=:@/"));
-        m_idFilePrefixMap[newId] = m_idFilePrefixMap[id];
-        m_idProjectNameMap[newId] = m_idProjectNameMap[id];
+        QNetworkReply *newReply = get(QNetworkRequest(QUrl("http://www.englishbreakfastnetwork.org/krazy/" + exp.cap(1))));
+        m_idFilePrefixMap[newReply] = m_idFilePrefixMap[reply];
+        m_idProjectNameMap[newReply] = m_idProjectNameMap[reply];
         pos += exp.matchedLength();
     }
 }

@@ -21,9 +21,10 @@
 #ifndef ICOLLECTOR_HEADER
 #define ICOLLECTOR_HEADER
 
-#include <QHttp>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
-class ICollector : public QHttp
+class ICollector : public QNetworkAccessManager
 {
     Q_OBJECT
 public:
@@ -36,10 +37,10 @@ Q_SIGNALS:
     void progressMaximum(int value);
     void progressValue(int value);
     void collectFinished();
-    void collectError(QString error);
+    void collectError(QNetworkReply::NetworkError error);
 
 protected Q_SLOTS:
-    virtual void requestFinished (int id, bool error) = 0;
+    virtual void replyFinished(QNetworkReply *reply) = 0;
 };
 
 #endif

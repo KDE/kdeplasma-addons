@@ -33,12 +33,8 @@ CommitCollector::CommitCollector(QObject *parent)
   m_commitsToBeRead(-1),
   m_initialCommitsToBeRead(-1),
   m_extent(7),
-  m_header("POST", "/"),
   m_lastArchiveRead("")
 {
-    m_connectId = setHost("lists.kde.org", QHttp::ConnectionModeHttp, 0);
-    m_header.setValue("Host", "lists.kde.org");
-    m_header.setContentType("application/x-www-form-urlencoded");
 }
 
 CommitCollector::~CommitCollector()
@@ -106,19 +102,16 @@ void CommitCollector::run()
     m_commits.clear();
     m_initialArchiveName = m_archiveName = now.toString("yyyyMM");
     emit progressMaximum(m_extent);
-    request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
+    get(QNetworkRequest(QUrl(QString("http://lists.kde.org?l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8())));
 }
 
-void CommitCollector::requestFinished (int id, bool error)
+void CommitCollector::replyFinished(QNetworkReply *reply)
 {
-    if (error)
-        emit collectError(errorString());
+    QString source (QByteArray(reply->readAll()));
 
-    if (id == m_connectId)
-        return;
-
-    QString source = readAll();
-
+    if (source.isEmpty())
+        emit collectError(reply->error());
+    
     if (m_page == 1)
     {
         QRegExp regExpMsg(m_archiveName.left(4) + '-' + m_archiveName.right(2) + ".*\\((\\d+) messages\\)");
@@ -190,5 +183,6 @@ void CommitCollector::requestFinished (int id, bool error)
         m_archiveName = QDate::fromString(m_archiveName + "01", "yyyyMMdd").addDays(-1).toString("yyyyMM");
     }
 
-    request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
+    reply->deleteLater();
+    get(QNetworkRequest(QUrl(QString("http://lists.kde.org?l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8())));
 }

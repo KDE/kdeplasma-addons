@@ -21,10 +21,10 @@
 #include "icollector.h"
 
 ICollector::ICollector(QObject *parent)
-: QHttp(parent)
+: QNetworkAccessManager(parent)
 {
-    connect (this, SIGNAL(requestFinished(int, bool)),
-             this, SLOT  (requestFinished(int, bool)));
+    connect (this, SIGNAL(finished(QNetworkReply *)),
+             this, SLOT  (replyFinished(QNetworkReply *)));
 }
 
 ICollector::~ICollector()

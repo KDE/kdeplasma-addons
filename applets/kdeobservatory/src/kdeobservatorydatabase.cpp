@@ -166,7 +166,7 @@ QStringList KdeObservatoryDatabase::krazyFilesByProjectTypeAndTest(const QString
     QStringList result;
     if (!m_query.exec())
     {
-        kDebug() << "Error when executing krazy files by project, type, and test -" << m_db.lastError();
+        kDebug() << "Error when executing krazy files by project '" + project +"', type '" + fileType + "', and test '" + testName + "' -" << m_db.lastError();
         return result;
     }
     while(m_query.next())
