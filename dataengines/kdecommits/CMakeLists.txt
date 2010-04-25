@@ -10,10 +10,15 @@ include_directories(
    ${KDE4_INCLUDES}
    )
  
-set(kdecommits_engine_SRCS kdecommitsengine.cpp)
+set(kdecommits_engine_SRCS
+    src/kdecommitsengine.cpp
+    src/kdepresets.cpp
+    src/commitcollector.cpp
+)
  
 kde4_add_plugin(plasma_engine_kdecommits ${kdecommits_engine_SRCS})
 target_link_libraries(plasma_engine_kdecommits
+                      ${QT_QTNETWORK_LIBRARY}
                       ${KDE4_KDECORE_LIBS}
                       ${KDE4_PLASMA_LIBS})
  

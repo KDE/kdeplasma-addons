@@ -1,5 +1,5 @@
 /*************************************************************************
- * Copyright 2010 Sandro Andrade sandroandrade@kde.org                   *
+ * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
  *                                                                       *
  * This program is free software; you can redistribute it and/or         *
  * modify it under the terms of the GNU General Public License as        *
@@ -18,21 +18,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  * ***********************************************************************/
 
-#ifndef KDECOMMITSENGINE_HEADER
-#define KDECOMMITSENGINE_HEADER
+#include "commitcollector.h"
 
-#include <Plasma/DataEngine>
+#include <QStringList>
+#include <QNetworkReply>
 
-class KdeCommitsEngine : public Plasma::DataEngine
+CommitCollector::CommitCollector(QObject *parent) : QNetworkAccessManager(parent)
 {
-    Q_OBJECT
-public:
-    KdeCommitsEngine(QObject *parent, const QVariantList &args);
-    void init();
+}
 
-protected:
-    bool sourceRequestEvent(const QString& name);
-    bool updateSourceEvent(const QString& source);
-};
+CommitCollector::~CommitCollector()
+{
+}
 
-#endif
+QNetworkReply *CommitCollector::runServletOperation(const QString &operation, const QStringList &args)
+{
+    QString url = "http://sandroandrade.org/servlets/KdeCommitsServlet?op=" + operation;
+    int i = 0;
+    foreach (QString value, args)
+        url += QString("&p") + (i++) + QString("=") + value;
+    return get(QNetworkRequest(QUrl(url.toUtf8())));
+}

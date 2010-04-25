@@ -20,14 +20,23 @@
 
 #include "kdecommitsengine.h"
 
+#include <QNetworkReply>
+
+#include "commitcollector.h"
+#include "kdepresets.h"
+
 K_EXPORT_PLASMA_DATAENGINE(kdecommits, KdeCommitsEngine)
 
-KdeCommitsEngine::KdeCommitsEngine(QObject *parent, const QVariantList &args) : Plasma::DataEngine(parent, args)
+KdeCommitsEngine::KdeCommitsEngine(QObject *parent, const QVariantList &args)
+: Plasma::DataEngine(parent, args),
+  m_commitCollector(new CommitCollector(this))
 {
 }
 
 void KdeCommitsEngine::init()
 {
+    m_presetsReply = m_commitCollector->runServletOperation("allProjectsInfo", QStringList());
+    connect (m_presetsReply, SIGNAL(finished()), SLOT (presetsReplyFinished()));    
 }
 
 bool KdeCommitsEngine::sourceRequestEvent(const QString& name)
@@ -67,6 +76,12 @@ bool KdeCommitsEngine::updateSourceEvent(const QString& source)
 {
     kDebug() << "Update Source para " << source;
     return true;
+}
+
+void KdeCommitsEngine::presetsReplyFinished()
+{
+    KdePresets::init(QString(m_presetsReply->readAll()));
+    m_presetsReply->deleteLater();
 }
 
 #include "kdecommitsengine.moc"

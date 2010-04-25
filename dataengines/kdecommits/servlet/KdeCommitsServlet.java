@@ -19,7 +19,7 @@ public class KdeCommitsServlet extends HttpServlet
         }
         catch(ClassNotFoundException msg)
         {
-            out.println("Error loading driver:" + msg.getMessage());
+            System.out.println("Error loading driver:" + msg.getMessage());
         }
 
         try
@@ -36,20 +36,31 @@ public class KdeCommitsServlet extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
     {
-        response.setContentType("text/plain");
-        String operation = request.getParameter("op");
-        Class[] paramTypes = new Class[request.getParameterMap().size()-1];
-        Object[] paramValues = new Object[paramTypes.length];
-
-        for (int i = 0; i < paramValues.length; ++i)
-        {
-            paramTypes[i] = String.class;
-            paramValues[i] = request.getParameter("p" + i);
-        }
+        String operation = null;
+        Class[] paramTypes = null;
+        Object[] paramValues = null;
 
         try
         {
             out = response.getWriter();
+
+            if (request.getParameterMap().size() == 0)
+            {
+                out.println("No operation supplied !");
+                return;
+            }
+
+            response.setContentType("text/plain");
+            operation = request.getParameter("op");
+            paramTypes = new Class[request.getParameterMap().size()-1];
+            paramValues = new Object[paramTypes.length];
+
+            for (int i = 0; i < paramValues.length; ++i)
+            {
+                paramTypes[i] = String.class;
+                paramValues[i] = request.getParameter("p" + i);
+            }
+
             Method method = getClass().getDeclaredMethod(operation, paramTypes);
             method.invoke(this, paramValues);
         }
