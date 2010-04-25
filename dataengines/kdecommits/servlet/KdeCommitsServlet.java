@@ -1,26 +1,17 @@
 import java.io.*;
 import java.sql.*;
+import java.lang.reflect.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class KdeCommitsServlet extends HttpServlet
 {
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws IOException, ServletException
+    public void init()
     {
         String dbHost = "localhost";
         String dbName = "sandros_kde";
         String username = "sandros_kdeob";
         String password = "oBse_4$s";
-
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Hello World!</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>Hello World!</h1>");
 
         try
         {
@@ -34,23 +25,86 @@ public class KdeCommitsServlet extends HttpServlet
         try
         {
             String url ="jdbc:mysql://" + dbHost + ":3306/" + dbName;
-            Connection Conn = DriverManager.getConnection(url, username, password);
-            Statement Stmt = Conn.createStatement();
-            String query = "select p.commit_subject, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 group by p.commit_subject order by count(*) desc";
-            ResultSet res = Stmt.executeQuery(query);
-            out.println("Query result :</br>");
-            while(res.next())
-            {
-                out.println(res.getObject(1) + " - " + res.getObject(2) + "</br>");
-            }
-            out.println("</br>");
+            conn = DriverManager.getConnection(url, username, password);
+            stmt = conn.createStatement();
         }
         catch(SQLException e)
         {
             String err1Msg = e.getMessage();
         }
-
-        out.println("</body>");
-        out.println("</html>");
     }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    {
+        response.setContentType("text/plain");
+        String operation = request.getParameter("op");
+        Class[] paramTypes = new Class[request.getParameterMap().size()-1];
+        Object[] paramValues = new Object[paramTypes.length];
+
+        for (int i = 0; i < paramValues.length; ++i)
+        {
+            paramTypes[i] = String.class;
+            paramValues[i] = request.getParameter("p" + i);
+        }
+
+        try
+        {
+            out = response.getWriter();
+            Method method = getClass().getDeclaredMethod(operation, paramTypes);
+            method.invoke(this, paramValues);
+        }
+        catch (NoSuchMethodException e)
+        {
+            out.println("Unsupported operation " + operation + " with " + paramTypes.length + " String parameters !");
+        }
+        catch (Exception e)
+        {
+            out.println("Exception: " + e.getClass().getName() + " " + e.getMessage());
+        }
+    }
+
+    public void topProjects(String n) throws SQLException
+    {
+        String query = "select p.commit_subject, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 group by p.commit_subject order by count(*) desc";
+        if (!n.equals("0"))
+            query = query + " limit 0 , " + n;
+        ResultSet res = stmt.executeQuery(query);
+        printResultSet(res);
+    }
+
+    public void allProjectsInfo() throws SQLException
+    {
+        String query = "select name, commit_subject, krazy_report, krazy_identifier, icon, add_in_view from projects";
+        ResultSet res = stmt.executeQuery(query);
+        printResultSet(res);
+    }
+
+    public void topDevelopers(String project, String n) throws SQLException
+    {
+        String query;
+        if (!project.equals(""))
+            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, p.name, count(*) from projects p, commits c, developers d where INSTR(c.path, p.commit_subject) > 0 and d.svn_account = c.svn_account and p.name = '" + project + "' group by d.full_name, p.name order by count(*) desc";
+        else
+            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from commits c, developers d where d.svn_account = c.svn_account group by d.full_name order by count(*) desc";
+        if (!n.equals("0"))
+            query = query + " limit 0 , " + n;
+        out.println(query);
+        ResultSet res = stmt.executeQuery(query);
+        printResultSet(res);
+    }
+
+    private void printResultSet(ResultSet res) throws SQLException
+    {
+        int count = res.getMetaData().getColumnCount();
+        while(res.next())
+        {
+            for (int i = 1; i < count; ++i)
+                out.print(res.getObject(i) + ";");
+            out.println(res.getObject(count));
+        }
+    }
+
+    private PrintWriter out;
+    private Connection conn;
+    private Statement stmt;
 }
