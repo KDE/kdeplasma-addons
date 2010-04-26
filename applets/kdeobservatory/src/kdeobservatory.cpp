@@ -135,6 +135,7 @@ QGraphicsWidget *KdeObservatory::graphicsWidget()
         m_mainContainer->setPreferredSize(300, 200);
         m_mainContainer->setMinimumSize(300, 200);
     }
+    
     return m_mainContainer;
 }
 
@@ -144,7 +145,6 @@ bool KdeObservatory::eventFilter(QObject *receiver, QEvent *event)
         dynamic_cast<QGraphicsWidget *>(receiver) == m_mainContainer &&
         event->type() == QEvent::GraphicsSceneResize)
     {
-        prepareUpdateViews();
         createViews();
     }
     return Plasma::PopupApplet::eventFilter(receiver, event);
@@ -162,10 +162,29 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
 void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
+    kDebug() << "DATA UPDATED" << sourceName;
+    
+    m_synchronizationTimer->stop();
+    m_right->setEnabled(false);
+    m_left->setEnabled(false);
+    m_updateLabel->hide();
+    m_horizontalLayout->removeItem(m_updateLabel);
+    m_horizontalLayout->insertItem(1, m_collectorProgress);
+    m_collectorProgress->show();
+    setBusy(true);
+
     if (sourceName == "topActiveProjects")
-    {
         m_viewProviders[i18n("Top Active Projects")]->updateViews(data);
-    }
+
+    setBusy(false);
+    m_collectorProgress->hide();
+    m_horizontalLayout->removeItem(m_collectorProgress);
+    m_horizontalLayout->insertItem(1, m_updateLabel);
+    m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
+    m_updateLabel->show();
+    m_left->setEnabled(true);
+    m_right->setEnabled(true);
+    m_synchronizationTimer->start();
 }
 
 void KdeObservatory::safeInit()
@@ -173,6 +192,7 @@ void KdeObservatory::safeInit()
     loadConfig();
     graphicsWidget();
     createViewProviders();
+    createTimers();
     createViews();
 
     m_engine->connectSource("topActiveProjects", this);
@@ -183,39 +203,6 @@ void KdeObservatory::safeInit()
     updateSources();
 }
 
-/*
-void KdeObservatory::sourceReady(const QString &source)
-{
-    kDebug() << "Source updated" << source;
-    if (source != "presets")
-        ++m_sourcesUpdated;
-    
-    if (source == "topActiveProjects")
-    {
-        kDebug() << "Endereco" << &(m_viewData["Top Active Projects"].first);
-        kDebug() << (m_viewData["Top Active Projects"].first)["topActiveProjects"].value< QMultiMap<int, QString> >();
-    }
-
-    if (m_sourcesUpdated == m_viewData.count())
-    {
-        kDebug() << "All sources updated";
-        prepareUpdateViews();
-
-        setBusy(false);
-        m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
-        m_collectorProgress->hide();
-        m_horizontalLayout->removeItem(m_collectorProgress);
-        m_horizontalLayout->insertItem(1, m_updateLabel);
-        m_updateLabel->show();
-        m_right->setEnabled(true);
-        m_left->setEnabled(true);
-
-        updateViews();
-
-        m_synchronizationTimer->start();
-    }
-}
-*/
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 {
     m_configGeneral = new KdeObservatoryConfigGeneral(parent);
@@ -272,8 +259,6 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 
 void KdeObservatory::configAccepted()
 {
-    prepareUpdateViews();
-
     // General properties
     m_commitExtent = m_configGeneral->commitExtent->value();
     QTime synchronizationDelay = m_configGeneral->synchronizationDelay->time();
@@ -332,7 +317,10 @@ void KdeObservatory::configAccepted()
 
     saveConfig();
 
+    m_lastViewCount = m_views.count();
+    createTimers();
     createViews();
+    updateSources();
 }
 
 void KdeObservatory::moveViewRight()
@@ -396,7 +384,13 @@ void KdeObservatory::switchViews(int delta)
     }
 }
 
-void KdeObservatory::prepareUpdateViews()
+void KdeObservatory::updateSources()
+{
+    kDebug() << "Updating sources";
+    m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
+}
+
+void KdeObservatory::createViews()
 {
     m_viewTransitionTimer->stop();
     m_synchronizationTimer->stop();
@@ -405,29 +399,7 @@ void KdeObservatory::prepareUpdateViews()
 
     foreach(QGraphicsWidget *widget, m_views)
         widget->hide();
-}
 
-void KdeObservatory::updateSources()
-{
-    m_right->setEnabled(false);
-    m_left->setEnabled(false);
-
-    setBusy(true);
-    m_updateLabel->hide();
-    m_horizontalLayout->removeItem(m_updateLabel);
-    m_horizontalLayout->insertItem(1, m_collectorProgress);
-    m_collectorProgress->show();
-
-    m_lastViewCount = m_views.count();
-    m_synchronizationTimer->stop();
-
-    kDebug() << "Updating sources";
-    m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
-}
-
-void KdeObservatory::createViews()
-{
-    createTimers();
     m_views.clear();
     int count = m_activeViews.count();
     for (int i = 0; i < count; ++i)
@@ -459,7 +431,7 @@ void KdeObservatory::loadConfig()
 
     // Config - General
     m_commitExtent = m_configGroup.readEntry("commitExtent", 7);
-    m_synchronizationDelay = m_configGroup.readEntry("synchronizationDelay", 60 * 60000);
+    m_synchronizationDelay = m_configGroup.readEntry("synchronizationDelay", 300);
     m_enableAutoViewChange = m_configGroup.readEntry("enableAutoViewChange", true);
     m_viewsDelay = m_configGroup.readEntry("viewsDelay", 5);
 
@@ -540,6 +512,7 @@ void KdeObservatory::saveConfig()
     m_configGroup.writeEntry("commitExtent", m_commitExtent);
     m_configGroup.writeEntry("synchronizationDelay", m_synchronizationDelay);
     m_configGroup.writeEntry("enableAutoViewChange", m_enableAutoViewChange);
+    kDebug() << "Gravando delay" << m_viewsDelay;
     m_configGroup.writeEntry("viewsDelay", m_viewsDelay);
 
     QStringList viewNames;
@@ -599,9 +572,10 @@ void KdeObservatory::createTimers()
 {
     delete m_viewTransitionTimer;
     delete m_synchronizationTimer;
-
+    
     m_viewTransitionTimer = new QTimer(this);
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
+    kDebug() << "Interval" << m_viewTransitionTimer->interval();
     connect(m_viewTransitionTimer, SIGNAL(timeout()), this, SLOT(moveViewRight()));
 
     m_synchronizationTimer = new QTimer(this);

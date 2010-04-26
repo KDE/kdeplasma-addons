@@ -63,32 +63,35 @@ void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
     {
         i2.previous();
         QString project = i2.value();
-        int rank = i2.key();
-        if (j == 0)
-            maxRank = rank;
+        if (m_topActiveProjectsViewProjects[project])
+        {
+            int rank = i2.key();
+            if (j == 0)
+                maxRank = rank;
 
-        qreal widthFactor = (width-24)/maxRank;
-        qreal yItem = (j*step)+2;
+            qreal widthFactor = (width-24)/maxRank;
+            qreal yItem = (j*step)+2;
 
-        if (yItem + step-4 > container->geometry().height())
-            break;
+            if (yItem + step-4 > container->geometry().height())
+                break;
 
-        QGraphicsRectItem *projectRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
-        projectRect->setPos(0, yItem);
-        projectRect->setPen(QPen(QColor(0, 0, 0)));
-        projectRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-        projectRect->setToolTip(project + " - " + QString::number(rank) + ' ' + i18n("commits"));
-        projectRect->setAcceptHoverEvents(true);
-        projectRect->installSceneEventFilter(kdeObservatory);
+            QGraphicsRectItem *projectRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
+            projectRect->setPos(0, yItem);
+            projectRect->setPen(QPen(QColor(0, 0, 0)));
+            projectRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+            projectRect->setToolTip(project + " - " + QString::number(rank) + ' ' + i18n("commits"));
+            projectRect->setAcceptHoverEvents(true);
+            projectRect->installSceneEventFilter(kdeObservatory);
 
-        QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[project].icon).pixmap(22, 22), container);
-        icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
+            QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[project].icon).pixmap(22, 22), container);
+            icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
 
-        QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank), projectRect);
-        commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
-        commitsNumber->setFont(KGlobalSettings::smallestReadableFont());
-        commitsNumber->setPos((qreal) ((projectRect->rect().width())/2)-(commitsNumber->boundingRect().width()/2),
-                              (qreal) ((projectRect->rect().height())/2)-(commitsNumber->boundingRect().height()/2));
-        j++;
+            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank), projectRect);
+            commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
+            commitsNumber->setFont(KGlobalSettings::smallestReadableFont());
+            commitsNumber->setPos((qreal) ((projectRect->rect().width())/2)-(commitsNumber->boundingRect().width()/2),
+                                (qreal) ((projectRect->rect().height())/2)-(commitsNumber->boundingRect().height()/2));
+            j++;
+        }
     }
 }

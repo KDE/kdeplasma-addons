@@ -84,7 +84,6 @@ protected Q_SLOTS:
     void switchViews(int delta);
 
 private:
-    void prepareUpdateViews();
     void createViews();
     void loadConfig();
     void saveConfig();
