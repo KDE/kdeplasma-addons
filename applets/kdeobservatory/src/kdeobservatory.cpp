@@ -53,8 +53,8 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
   m_mainContainer(0),
   m_currentView(0),
   m_viewTransitionTimer(0),
-  m_transitionTimer(0),
-  m_synchronizationTimer(0)
+  m_synchronizationTimer(0),
+  m_transitionTimer(0)
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);
@@ -162,8 +162,8 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
 void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    kDebug() << "DATA UPDATED" << sourceName;
-    
+    kDebug() << "Data updated" << sourceName;
+
     m_synchronizationTimer->stop();
     m_right->setEnabled(false);
     m_left->setEnabled(false);
@@ -196,7 +196,7 @@ void KdeObservatory::safeInit()
     createViews();
 
     m_engine->connectSource("topActiveProjects", this);
-    m_engine->connectSource("topDevelopers", this);
+    m_engine->connectSource("topProjectDevelopers", this);
     m_engine->connectSource("commitHistory", this);
     m_engine->connectSource("krazyReport", this);
 
@@ -386,8 +386,20 @@ void KdeObservatory::switchViews(int delta)
 
 void KdeObservatory::updateSources()
 {
-    kDebug() << "Updating sources";
     m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
+/*
+    QHashIterator<QString, bool> i(m_topDevelopersViewProjects);
+    while (i.hasNext())
+    {
+        i.next();
+        if (i.value())
+        {
+            KConfigGroup ops = m_service->operationDescription("topProjectDevelopers");
+            ops.writeEntry("project", i.key());
+            m_service->startOperationCall(ops);
+        }
+    }
+    */
 }
 
 void KdeObservatory::createViews()
@@ -512,7 +524,6 @@ void KdeObservatory::saveConfig()
     m_configGroup.writeEntry("commitExtent", m_commitExtent);
     m_configGroup.writeEntry("synchronizationDelay", m_synchronizationDelay);
     m_configGroup.writeEntry("enableAutoViewChange", m_enableAutoViewChange);
-    kDebug() << "Gravando delay" << m_viewsDelay;
     m_configGroup.writeEntry("viewsDelay", m_viewsDelay);
 
     QStringList viewNames;
@@ -575,7 +586,6 @@ void KdeObservatory::createTimers()
     
     m_viewTransitionTimer = new QTimer(this);
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
-    kDebug() << "Interval" << m_viewTransitionTimer->interval();
     connect(m_viewTransitionTimer, SIGNAL(timeout()), this, SLOT(moveViewRight()));
 
     m_synchronizationTimer = new QTimer(this);

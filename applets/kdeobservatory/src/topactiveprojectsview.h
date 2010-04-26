@@ -40,7 +40,4 @@ private:
     const QMap<QString, KdeObservatory::Project> &m_projects;
 };
 
-typedef QMultiMap<int, QString> TopProjectsMap;
-Q_DECLARE_METATYPE(TopProjectsMap)
-
 #endif
