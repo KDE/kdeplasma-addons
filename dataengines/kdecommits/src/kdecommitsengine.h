@@ -31,12 +31,16 @@ class KdeCommitsEngine : public Plasma::DataEngine
     Q_OBJECT
 public:
     KdeCommitsEngine(QObject *parent, const QVariantList &args);
-    
+
     void init();
-    
+
+    bool sourceRequestEvent (const QString &source);
     Plasma::Service *serviceForSource(const QString &source);
-    
+
     friend class KdeCommitsService;
+
+Q_SIGNALS:
+    void engineReady();
 };
 
 #endif

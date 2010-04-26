@@ -20,6 +20,7 @@
 
 #include "kdecommitsengine.h"
 
+#include "kdepresets.h"
 #include "kdecommitsservice.h"
 
 K_EXPORT_PLASMA_DATAENGINE(kdecommits, KdeCommitsEngine)
@@ -31,11 +32,27 @@ KdeCommitsEngine::KdeCommitsEngine(QObject *parent, const QVariantList &args)
 
 void KdeCommitsEngine::init()
 {
-    /*
-    Plasma::Service *service = serviceforSource("");
-    KConfigGroup ops = service->operationDescription("allProjectsInfo");
-    service->startOperationCall(ops);
-    */
+    setData("topActiveProjects", "");
+    setData("topDevelopers", "");
+    setData("commitHistory", "");
+    setData("krazyReport", "");
+}
+
+bool KdeCommitsEngine::sourceRequestEvent (const QString &source)
+{
+    if (source == "allProjectsInfo")
+    {
+        setData("allProjectsInfo", "views", KdePresets::viewsPreset());
+        setData("allProjectsInfo", "viewsActive", KdePresets::viewsActivePreset());
+        setData("allProjectsInfo", "automaticallyInViews", KdePresets::automaticallyInViews());
+        setData("allProjectsInfo", "projectNames", KdePresets::preset(KdePresets::ProjectName));
+        setData("allProjectsInfo", "projectCommitSubjects", KdePresets::preset(KdePresets::ProjectCommitSubject));
+        setData("allProjectsInfo", "projectKrazyReports", KdePresets::preset(KdePresets::ProjectKrazyReport));
+        setData("allProjectsInfo", "projectKrazyFilePrefixes", KdePresets::preset(KdePresets::ProjectKrazyFilePrefix));
+        setData("allProjectsInfo", "projectIcons", KdePresets::preset(KdePresets::ProjectIcon));
+        return true;
+    }
+    return false;
 }
 
 Plasma::Service *KdeCommitsEngine::serviceForSource(const QString &source)
