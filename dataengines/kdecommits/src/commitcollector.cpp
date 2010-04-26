@@ -23,6 +23,8 @@
 #include <QStringList>
 #include <QNetworkReply>
 
+#include <KDebug>
+
 CommitCollector::CommitCollector(QObject *parent) : QNetworkAccessManager(parent)
 {
 }
@@ -36,6 +38,7 @@ QNetworkReply *CommitCollector::runServletOperation(const QString &operation, co
     QString url = "http://sandroandrade.org/servlets/KdeCommitsServlet?op=" + operation;
     int i = 0;
     foreach (QString value, args)
-        url += QString("&p") + (i++) + QString("=") + value;
+        url += QString("&p") + QString::number(i++) + QString("=") + value;
+
     return get(QNetworkRequest(QUrl(url.toUtf8())));
 }

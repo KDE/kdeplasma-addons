@@ -36,8 +36,8 @@ KdeCommitsEngine::KdeCommitsEngine(QObject *parent, const QVariantList &args)
 void KdeCommitsEngine::init()
 {
     m_presetsReply = m_commitCollector->runServletOperation("allProjectsInfo", QStringList());
-    connect (m_presetsReply, SIGNAL(finished()), SLOT (presetsReplyFinished()));
-    // NOTE: data engine needs to be checked for complete initialization. See KdeObservatory::init()
+    connect (m_presetsReply, SIGNAL(finished()), SLOT(presetsReplyFinished()));
+    // NOTE: data engine needs to be checked for complete initialization. See KdeObservatory::init().
 }
 
 bool KdeCommitsEngine::sourceRequestEvent(const QString& name)
@@ -47,14 +47,8 @@ bool KdeCommitsEngine::sourceRequestEvent(const QString& name)
 
 bool KdeCommitsEngine::updateSourceEvent(const QString& source)
 {
-    kDebug() << "Update Source para " << source;
+    kDebug() << "Update source " << source;
     return true;
-}
-
-void KdeCommitsEngine::presetsReplyFinished()
-{
-    KdePresets::init(QString(m_presetsReply->readAll()));
-    m_presetsReply->deleteLater();
 }
 
 void KdeCommitsEngine::presetsSource()
@@ -67,6 +61,82 @@ void KdeCommitsEngine::presetsSource()
     setData("presets", "projectKrazyReports", KdePresets::preset(KdePresets::ProjectKrazyReport));
     setData("presets", "projectKrazyFilePrefixes", KdePresets::preset(KdePresets::ProjectKrazyFilePrefix));
     setData("presets", "projectIcons", KdePresets::preset(KdePresets::ProjectIcon));
+
+    emit sourceReady("presets");
+}
+
+void KdeCommitsEngine::presetsReplyFinished()
+{
+    KdePresets::init(QString(m_presetsReply->readAll()));
+    m_presetsReply->deleteLater();
+    emit engineReady();
+}
+
+void KdeCommitsEngine::topActiveProjectsSource()
+{
+    kDebug() << "Updating source topActiveProjects";
+    m_topActiveProjectsReply = m_commitCollector->runServletOperation("topProjects", QStringList() << "0");
+    connect (m_topActiveProjectsReply, SIGNAL(finished()), SLOT(topActiveProjectsReplyFinished()));
+}
+
+void KdeCommitsEngine::topActiveProjectsReplyFinished()
+{
+    QMultiMap<int, QString> topActiveProjects;
+    
+    QString data (m_topActiveProjectsReply->readAll());
+    if (!data.isEmpty())
+        foreach (QString row, data.split('\n'))
+            if (!row.isEmpty())
+            {
+                QStringList list = row.split(';');
+                QString commits = list.at(1);
+                topActiveProjects.insert(commits.remove('\r').toInt(), list.at(0));
+            }
+
+    setData("topActiveProjects", QVariant::fromValue< QMultiMap<int, QString> >(topActiveProjects));
+    
+    m_topActiveProjectsReply->deleteLater();
+
+    emit sourceReady("topActiveProjects");
+}
+
+void KdeCommitsEngine::topDevelopersSource()
+{
+    kDebug() << "Updating source topDevelopers";
+//    m_topActiveProjectsReply = m_commitCollector->runServletOperation("topProjects", QStringList() << "0");
+//    connect (m_topActiveProjectsReply, SIGNAL(finished()), SLOT(topActiveProjectsReplyFinished()));
+    topDevelopersReplyFinished();
+}
+
+void KdeCommitsEngine::topDevelopersReplyFinished()
+{
+    emit sourceReady("topDevelopers");
+}
+
+void KdeCommitsEngine::commitHistorySource()
+{
+    kDebug() << "Updating source commitHistory";
+//    m_topActiveProjectsReply = m_commitCollector->runServletOperation("topProjects", QStringList() << "0");
+//    connect (m_topActiveProjectsReply, SIGNAL(finished()), SLOT(topActiveProjectsReplyFinished()));
+    commitHistoryReplyFinished();
+}
+
+void KdeCommitsEngine::commitHistoryReplyFinished()
+{
+    emit sourceReady("commitHistory");
+}
+
+void KdeCommitsEngine::krazyReportSource()
+{
+    kDebug() << "Updating source krazyReport";
+//    m_topActiveProjectsReply = m_commitCollector->runServletOperation("topProjects", QStringList() << "0");
+//    connect (m_topActiveProjectsReply, SIGNAL(finished()), SLOT(topActiveProjectsReplyFinished()));
+    krazyReportReplyFinished();
+}
+
+void KdeCommitsEngine::krazyReportReplyFinished()
+{
+    emit sourceReady("krazyReport");
 }
 
 #include "kdecommitsengine.moc"

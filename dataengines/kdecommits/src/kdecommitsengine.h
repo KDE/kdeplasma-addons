@@ -37,14 +37,33 @@ protected:
     bool sourceRequestEvent(const QString& name);
     bool updateSourceEvent(const QString& source);
     
+Q_SIGNALS:
+    void engineReady();
+    void sourceReady(const QString &source);
+        
 protected Q_SLOTS:
+    void presetsSource();
     void presetsReplyFinished();
 
-    void presetsSource();
+    void topActiveProjectsSource();
+    void topActiveProjectsReplyFinished();
     
+    void topDevelopersSource();
+    void topDevelopersReplyFinished();
+
+    void commitHistorySource();
+    void commitHistoryReplyFinished();
+
+    void krazyReportSource();
+    void krazyReportReplyFinished();
+
 private:
     CommitCollector *m_commitCollector;
     QNetworkReply *m_presetsReply;
+    QNetworkReply *m_topActiveProjectsReply;
 };
+
+typedef QMultiMap<int, QString> TopProjectsMap;
+Q_DECLARE_METATYPE(TopProjectsMap)
 
 #endif
