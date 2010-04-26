@@ -33,7 +33,7 @@ void KdePresets::init(const QString &data)
             {
                 QStringList list;
                 foreach (QString token, row.split(';'))
-                        list << token;
+                    list << token.remove('\r');
                 presets << list;
             }
 }
@@ -47,12 +47,13 @@ QStringList KdePresets::preset(PresetInfo info)
     return list;
 }
 
-QList<bool> KdePresets::automaticallyInViews()
+QList<QVariant> KdePresets::automaticallyInViews()
 {
-    QList<bool> list;
+    QList<QVariant> list;
     int count = presets.count();
     for (int i = 0; i < count; ++i)
         list << ((presets.at(i).last() == "false") ? false:true);
+
     return list;
 }
 
@@ -61,7 +62,7 @@ QStringList KdePresets::viewsPreset()
     return QStringList() << i18n("Top Active Projects") << i18n("Commit History") << i18n("Top Developers") << i18n("Krazy Report");
 }
 
-QList<bool> KdePresets::viewsActivePreset()
+QList<QVariant> KdePresets::viewsActivePreset()
 {
-    return QList<bool>() << true << true << true << true;
+    return QList<QVariant>() << true << true << true << true;
 }

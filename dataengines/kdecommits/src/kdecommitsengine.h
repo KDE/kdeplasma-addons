@@ -24,7 +24,6 @@
 #include <Plasma/DataEngine>
 
 class QNetworkReply;
-
 class CommitCollector;
 
 class KdeCommitsEngine : public Plasma::DataEngine
@@ -40,6 +39,8 @@ protected:
     
 protected Q_SLOTS:
     void presetsReplyFinished();
+
+    void presetsSource();
     
 private:
     CommitCollector *m_commitCollector;

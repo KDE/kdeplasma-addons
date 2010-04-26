@@ -31,16 +31,16 @@ public:
     enum PresetInfo
     {
         ProjectName = 0,
-        CommitSubject,
-        KrazyReport,
-        KrazyFilePrefix,
-        Icon
+        ProjectCommitSubject,
+        ProjectKrazyReport,
+        ProjectKrazyFilePrefix,
+        ProjectIcon
     };
 
     static QStringList preset(PresetInfo info);
-    static QList<bool> automaticallyInViews();
+    static QList<QVariant> automaticallyInViews();
     static QStringList viewsPreset();
-    static QList<bool> viewsActivePreset();
+    static QList<QVariant> viewsActivePreset();
 
 private:
     static QList<QStringList> presets;
