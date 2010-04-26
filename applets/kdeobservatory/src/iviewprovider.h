@@ -39,16 +39,19 @@ public:
     explicit IViewProvider(QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~IViewProvider();
 
-    QGraphicsWidget *createView(const QString &title);
+    void createView(const QString &title);
+    QGraphicsWidget *containerForView(const QString &title);
     void deleteViews();
     const QList<QGraphicsWidget *> views() const;
 
-    virtual void updateViews() = 0;
+    virtual void createViews() = 0;
+    virtual void updateViews(const Plasma::DataEngine::Data &data) = 0;
 
 protected:
     QGraphicsWidget *m_parent;
     Qt::WindowFlags m_wFlags;
-    QList<QGraphicsWidget *> m_views;
+    QHash<QString, QGraphicsWidget *> m_views;
+    QHash<QString, QGraphicsWidget *> m_viewContainers;
 };
 
 #endif

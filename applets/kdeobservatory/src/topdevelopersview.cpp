@@ -25,8 +25,6 @@
 #include <KIcon>
 #include <KGlobalSettings>
 
-#include "kdeobservatorydatabase.h"
-
 TopDevelopersView::TopDevelopersView(const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
 : IViewProvider(parent, wFlags),
   m_topDevelopersViewProjects(topDevelopersViewProjects),
@@ -38,10 +36,21 @@ TopDevelopersView::~TopDevelopersView()
 {
 }
 
-void TopDevelopersView::updateViews()
+void TopDevelopersView::createViews()
 {
     deleteViews();
+    QHashIterator<QString, bool> i(m_topDevelopersViewProjects);
+    while (i.hasNext())
+    {
+        i.next();
+        if (i.value())
+            createView(i18n("Top Developers") + " - " + i.key());
+    }
+}
 
+void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
+{
+/*
     QMap< QString, QMultiMap<int, QString> > topDevelopers;
     QHashIterator<QString, bool> i1(m_topDevelopersViewProjects);
     while (i1.hasNext())
@@ -100,4 +109,5 @@ void TopDevelopersView::updateViews()
             j++;
         }
     }
+*/
 }

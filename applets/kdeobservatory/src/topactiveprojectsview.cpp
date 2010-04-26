@@ -26,8 +26,6 @@
 #include <KIcon>
 #include <KGlobalSettings>
 
-#include "kdeobservatorydatabase.h"
-
 TopActiveProjectsView::TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
 : IViewProvider(parent, wFlags),
   m_parent(parent),
@@ -40,16 +38,19 @@ TopActiveProjectsView::~TopActiveProjectsView()
 {
 }
 
-void TopActiveProjectsView::updateViews()
+void TopActiveProjectsView::createViews()
 {
     deleteViews();
-/*
+    createView(i18n("Top Active Projects"));
+}
+
+void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
+{
     QMultiMap<int, QString> topActiveProjects = data["topActiveProjects"].value< QMultiMap<int, QString> >();
-    kDebug() << "Top active projects list" << topActiveProjects;
-    
+
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 
-    QGraphicsWidget *container = createView(i18n("Top Active Projects"));
+    QGraphicsWidget *container = containerForView(i18n("Top Active Projects"));
 
     int maxRank = 0;
     qreal width = container->geometry().width();
@@ -90,5 +91,4 @@ void TopActiveProjectsView::updateViews()
                               (qreal) ((projectRect->rect().height())/2)-(commitsNumber->boundingRect().height()/2));
         j++;
     }
-*/
 }

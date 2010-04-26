@@ -31,7 +31,6 @@ class QTimeLine;
 class QNetworkReply;
 class QGraphicsLinearLayout;
 
-class ICollector;
 class IViewProvider;
 class KdeObservatoryConfigViews;
 class KdeObservatoryConfigGeneral;
@@ -51,8 +50,9 @@ class KdeObservatory : public Plasma::PopupApplet
 public:
     KdeObservatory(QObject *parent, const QVariantList &args);
     ~KdeObservatory();
+
     void init();
-    
+
     virtual QGraphicsWidget* graphicsWidget();
 
     struct Project
@@ -69,13 +69,14 @@ protected:
 
 public Q_SLOTS:
     void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
-        
+
 protected Q_SLOTS:
     void safeInit();
     void updateSources();
 
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
+
     void moveViewRight();
     void moveViewLeft();
     void moveViewRightClicked();
@@ -84,7 +85,7 @@ protected Q_SLOTS:
 
 private:
     void prepareUpdateViews();
-    void updateViews();
+    void createViews();
     void loadConfig();
     void saveConfig();
     void createTimers();
@@ -92,9 +93,9 @@ private:
 
     KConfigGroup m_configGroup;
 
-    KdeObservatoryConfigGeneral *m_configGeneral;
+    KdeObservatoryConfigGeneral  *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;
-    KdeObservatoryConfigViews *m_configViews;
+    KdeObservatoryConfigViews    *m_configViews;
 
     // Config - General
     int  m_commitExtent;

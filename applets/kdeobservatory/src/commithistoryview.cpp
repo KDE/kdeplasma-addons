@@ -29,8 +29,6 @@
 #include <qwt_plot_curve.h>
 #include <qwt_scale_widget.h>
 
-#include "kdeobservatorydatabase.h"
-
 class TimeScaleDraw : public QwtScaleDraw
 {
 public:
@@ -59,8 +57,13 @@ CommitHistoryView::~CommitHistoryView()
 {
 }
 
-void CommitHistoryView::updateViews()
+void CommitHistoryView::createViews()
 {
+}
+
+void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
+{
+    /*
     deleteViews();
 
     QMap< QString, QList< QPair<QString, int> > > commitHistory;
@@ -139,4 +142,5 @@ void CommitHistoryView::updateViews()
             plot->setGeometry(0, 0, container->geometry().width(), container->geometry().height());
         }
     }
+    */
 }

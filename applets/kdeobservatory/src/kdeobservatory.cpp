@@ -42,8 +42,6 @@
 #include "commithistoryview.h"
 #include "topactiveprojectsview.h"
 
-#include "kdeobservatorypresets.h"
-#include "kdeobservatorydatabase.h"
 #include "kdeobservatoryconfigviews.h"
 #include "kdeobservatoryconfiggeneral.h"
 #include "kdeobservatoryconfigprojects.h"
@@ -54,7 +52,9 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::PopupApplet(parent, args),
   m_mainContainer(0),
   m_currentView(0),
-  m_transitionTimer(0)
+  m_viewTransitionTimer(0),
+  m_transitionTimer(0),
+  m_synchronizationTimer(0)
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);
@@ -70,19 +70,12 @@ KdeObservatory::~KdeObservatory()
         delete m_viewProviders[i18n("Top Developers")];
         delete m_viewProviders[i18n("Commit History")];
         delete m_viewProviders[i18n("Krazy Report")];
-
-        KdeObservatoryDatabase::self()->~KdeObservatoryDatabase();
     }
 }
 
 void KdeObservatory::init()
 {
     m_engine = dataEngine("kdecommits");
-
-    m_engine->connectSource("topActiveProjects", this);
-    m_engine->connectSource("topDevelopers", this);
-    m_engine->connectSource("commitHistory", this);
-    m_engine->connectSource("krazyReport", this);
 
     m_service = m_engine->serviceForSource("");
     connect(m_service, SIGNAL(engineReady()), SLOT(safeInit()));
@@ -152,7 +145,7 @@ bool KdeObservatory::eventFilter(QObject *receiver, QEvent *event)
         event->type() == QEvent::GraphicsSceneResize)
     {
         prepareUpdateViews();
-        updateViews();
+        createViews();
     }
     return Plasma::PopupApplet::eventFilter(receiver, event);
 }
@@ -169,7 +162,10 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
 void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    kDebug() << "CHAMOU PORRA" << sourceName;
+    if (sourceName == "topActiveProjects")
+    {
+        m_viewProviders[i18n("Top Active Projects")]->updateViews(data);
+    }
 }
 
 void KdeObservatory::safeInit()
@@ -177,7 +173,13 @@ void KdeObservatory::safeInit()
     loadConfig();
     graphicsWidget();
     createViewProviders();
-    createTimers();
+    createViews();
+
+    m_engine->connectSource("topActiveProjects", this);
+    m_engine->connectSource("topDevelopers", this);
+    m_engine->connectSource("commitHistory", this);
+    m_engine->connectSource("krazyReport", this);
+
     updateSources();
 }
 
@@ -330,7 +332,7 @@ void KdeObservatory::configAccepted()
 
     saveConfig();
 
-    updateViews();
+    createViews();
 }
 
 void KdeObservatory::moveViewRight()
@@ -420,11 +422,12 @@ void KdeObservatory::updateSources()
     m_synchronizationTimer->stop();
 
     kDebug() << "Updating sources";
-    //m_service->startOperationCall(m_service->operationDescription("allProjectsInfo"));
+    m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
 }
 
-void KdeObservatory::updateViews()
+void KdeObservatory::createViews()
 {
+    createTimers();
     m_views.clear();
     int count = m_activeViews.count();
     for (int i = 0; i < count; ++i)
@@ -433,8 +436,7 @@ void KdeObservatory::updateViews()
         const QString &view = pair.first;
         if (pair.second && m_viewProviders.value(view))
         {
-            kDebug() << "Atualizando view" << view;
-            m_viewProviders[view]->updateViews();
+            m_viewProviders[view]->createViews();
             m_views.append(m_viewProviders[view]->views());
         }
     }
@@ -457,12 +459,12 @@ void KdeObservatory::loadConfig()
 
     // Config - General
     m_commitExtent = m_configGroup.readEntry("commitExtent", 7);
-    m_synchronizationDelay = m_configGroup.readEntry("synchronizationDelay", 300);
+    m_synchronizationDelay = m_configGroup.readEntry("synchronizationDelay", 60 * 60000);
     m_enableAutoViewChange = m_configGroup.readEntry("enableAutoViewChange", true);
     m_viewsDelay = m_configGroup.readEntry("viewsDelay", 5);
 
     Plasma::DataEngine::Data presetsData = m_engine->query("allProjectsInfo");
-    
+
     QStringList viewNames = m_configGroup.readEntry("viewNames", presetsData["views"].toStringList());
     QList<QVariant> viewActives = m_configGroup.readEntry("viewActives", presetsData["viewsActive"].toList());
 
@@ -595,6 +597,9 @@ void KdeObservatory::saveConfig()
 
 void KdeObservatory::createTimers()
 {
+    delete m_viewTransitionTimer;
+    delete m_synchronizationTimer;
+
     m_viewTransitionTimer = new QTimer(this);
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
     connect(m_viewTransitionTimer, SIGNAL(timeout()), this, SLOT(moveViewRight()));

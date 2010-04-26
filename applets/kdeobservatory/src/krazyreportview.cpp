@@ -25,8 +25,6 @@
 #include <KIcon>
 #include <KGlobalSettings>
 
-#include "kdeobservatorydatabase.h"
-
 KrazyReportView::KrazyReportView(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
 : IViewProvider(parent, wFlags),
   m_krazyReportViewProjects(krazyReportViewProjects),
@@ -38,8 +36,13 @@ KrazyReportView::~KrazyReportView()
 {
 }
 
-void KrazyReportView::updateViews()
+void KrazyReportView::createViews()
 {
+}
+
+void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
+{
+    /*
     deleteViews();
 
     QMap< QString, QMap<QString, QMultiMap<int, QString> > > krazyReports;
@@ -113,4 +116,5 @@ void KrazyReportView::updateViews()
             }
         }
     }
+    */
 }

@@ -31,7 +31,8 @@ public:
     KrazyReportView(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~KrazyReportView();
 
-    virtual void updateViews();
+    virtual void createViews();
+    virtual void updateViews(const Plasma::DataEngine::Data &data);
 
 private:
     const QHash<QString, bool> &m_krazyReportViewProjects;

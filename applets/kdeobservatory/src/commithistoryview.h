@@ -31,7 +31,8 @@ public:
     CommitHistoryView(const QHash<QString, bool> &commitHistoryViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~CommitHistoryView();
 
-    virtual void updateViews();
+    virtual void createViews();
+    virtual void updateViews(const Plasma::DataEngine::Data &data);
 
 private:
     const QHash<QString, bool> &m_commitHistoryViewProjects;

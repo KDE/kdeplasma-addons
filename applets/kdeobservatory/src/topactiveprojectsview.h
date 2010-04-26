@@ -31,7 +31,8 @@ public:
     TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~TopActiveProjectsView();
 
-    virtual void updateViews();
+    virtual void createViews();
+    virtual void updateViews(const Plasma::DataEngine::Data &data);
 
 private:
     QGraphicsWidget *m_parent;

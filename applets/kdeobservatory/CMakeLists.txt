@@ -22,8 +22,6 @@ set(kdeobservatory_SRCS
     src/topdevelopersview.cpp
     src/commithistoryview.cpp
     src/topactiveprojectsview.cpp
-    src/kdeobservatorypresets.cpp
-    src/kdeobservatorydatabase.cpp
     src/kdeobservatoryconfigviews.cpp
     src/kdeobservatoryconfiggeneral.cpp
     src/kdeobservatoryconfigprojects.cpp
