@@ -23,6 +23,7 @@
 #include <QUrl>
 #include <QDate>
 #include <QRegExp>
+#include <QStringList>
 
 #include "kdeobservatorydatabase.h"
 
@@ -103,6 +104,15 @@ void CommitCollector::run()
     m_initialArchiveName = m_archiveName = now.toString("yyyyMM");
     emit progressMaximum(m_extent);
     get(QNetworkRequest(QUrl(QString("http://lists.kde.org?l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8())));
+}
+
+QNetworkReply *CommitCollector::runServletOperation(const QString &operation, const QStringList &args)
+{
+    QString url = "http://sandroandrade.org/servlets/KdeCommitsServlet?op=" + operation;
+    int i = 0;
+    foreach (QString value, args)
+        url += QString("&p") + (i++) + QString("=") + value;
+    return get(QNetworkRequest(QUrl(url.toUtf8())));
 }
 
 void CommitCollector::replyFinished(QNetworkReply *reply)

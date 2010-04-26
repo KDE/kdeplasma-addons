@@ -69,7 +69,8 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 
     connect(m_collectors["Commit Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
     connect(m_collectors["Krazy Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
-    KdeObservatoryPresets::init();
+
+    m_engine = dataEngine("kdecommits");
 }
 
 KdeObservatory::~KdeObservatory()
@@ -86,31 +87,11 @@ KdeObservatory::~KdeObservatory()
 
 void KdeObservatory::init()
 {
-    loadConfig();
     graphicsWidget();
     createTimers();
-    createViewProviders();
     runCollectors();
     setPopupIcon(KIcon("kdeobservatory"));
-    Plasma::DataEngine *engine = dataEngine("kdecommits");
-    if (!engine) kDebug() << "Nao leu engine"; else kDebug() << "Leu o engine !";
-    Plasma::DataEngine::Data data = engine->query("top-projects");
-    kDebug() << "Top project names  : " << data["projects"].toStringList();
-    kDebug() << "Top project commit#: " << data["commits"].toStringList();
-
-    Plasma::DataEngine::Data data2 = engine->query("top-developers/plasma");
-    kDebug() << "Top plasma developer names  : " << data2["developers"].toStringList();
-    kDebug() << "Top plasma developer commit#: " << data2["commits"].toStringList();
-
-    Plasma::DataEngine::Data data3 = engine->query("krazy-report/plasma");
-    QStringList list1 = data3["types"].toStringList();
-    QList<QVariant> list2 = data3["errorLists"].toList();
-    
-    for (int i = 0; i < list1.size(); ++i)
-    {
-        QStringList list3 = list2.at(i).toStringList();
-        kDebug() << "Error of type " << list1.at(i) << list3;
-    }
+    safeInit();
 }
 
 QGraphicsWidget *KdeObservatory::graphicsWidget()
@@ -191,6 +172,20 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     if (event->type() == QEvent::GraphicsSceneHoverLeave && m_enableAutoViewChange)
         m_viewTransitionTimer->start();
     return false;
+}
+
+void KdeObservatory::safeInit()
+{
+    Plasma::DataEngine::Data presetsData = m_engine->query("presets");
+    if (presetsData["projectNames"].toStringList().count() == 0)
+    {
+        // Data engine not ready, schedule reinitialization
+        QTimer::singleShot(500, this, SLOT(safeInit()));
+        return;
+    }
+ 
+    loadConfig();
+    createViewProviders();
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -495,20 +490,22 @@ void KdeObservatory::loadConfig()
     m_enableAutoViewChange = m_configGroup.readEntry("enableAutoViewChange", true);
     m_viewsDelay = m_configGroup.readEntry("viewsDelay", 5);
 
-    QStringList viewNames = m_configGroup.readEntry("viewNames", KdeObservatoryPresets::viewsPreset());
-    QList<bool> viewActives = m_configGroup.readEntry("viewActives", KdeObservatoryPresets::viewsActivePreset());
+    Plasma::DataEngine::Data presetsData = m_engine->query("presets");
+    
+    QStringList viewNames = m_configGroup.readEntry("viewNames", presetsData["views"].toStringList());
+    QList<QVariant> viewActives = m_configGroup.readEntry("viewActives", presetsData["viewsActive"].toList());
 
     m_activeViews.clear();
     int viewsCount = viewNames.count();
     for (int i = 0; i < viewsCount; ++i)
-        m_activeViews.append(QPair<QString, bool>(viewNames.at(i), viewActives.at(i)));
+        m_activeViews.append(QPair<QString, bool>(viewNames.at(i), viewActives.at(i).toBool()));
 
     // Config - Projects
-    QStringList projectNames = m_configGroup.readEntry("projectNames", KdeObservatoryPresets::preset(KdeObservatoryPresets::ProjectName));
-    QStringList projectCommitSubjects = m_configGroup.readEntry("projectCommitSubjects", KdeObservatoryPresets::preset(KdeObservatoryPresets::CommitSubject));
-    QStringList projectKrazyReports = m_configGroup.readEntry("projectKrazyReports", KdeObservatoryPresets::preset(KdeObservatoryPresets::KrazyReport));
-    QStringList projectKrazyFilePrefix = m_configGroup.readEntry("projectKrazyFilePrefix", KdeObservatoryPresets::preset(KdeObservatoryPresets::KrazyFilePrefix));
-    QStringList projectIcons = m_configGroup.readEntry("projectIcons", KdeObservatoryPresets::preset(KdeObservatoryPresets::Icon));
+    QStringList projectNames = m_configGroup.readEntry("projectNames", presetsData["projectNames"].toStringList());
+    QStringList projectCommitSubjects = m_configGroup.readEntry("projectCommitSubjects", presetsData["projectCommitSubjects"].toStringList());
+    QStringList projectKrazyReports = m_configGroup.readEntry("projectKrazyReports", presetsData["projectKrazyReports"].toStringList());
+    QStringList projectKrazyFilePrefix = m_configGroup.readEntry("projectKrazyFilePrefix", presetsData["projectKrazyFilePrefixes"].toStringList());
+    QStringList projectIcons = m_configGroup.readEntry("projectIcons", presetsData["projectIcons"].toStringList());
 
     m_projects.clear();
     int projectsCount = projectNames.count();
@@ -522,41 +519,44 @@ void KdeObservatory::loadConfig()
         m_projects[projectNames.at(i)] = project;
     }
 
+    QStringList defaultProjectNames = presetsData["projectNames"].toStringList();
+    QList<QVariant> automaticallyInViews = presetsData["automaticallyInViews"].toList();
+
     // Config - Top Active Projects
-    QStringList topActiveProjectsViewNames = m_configGroup.readEntry("topActiveProjectsViewNames", KdeObservatoryPresets::preset(KdeObservatoryPresets::ProjectName));
-    QList<bool> topActiveProjectsViewActives = m_configGroup.readEntry("topActiveProjectsViewActives", KdeObservatoryPresets::automaticallyInViews());
+    QStringList topActiveProjectsViewNames = m_configGroup.readEntry("topActiveProjectsViewNames", defaultProjectNames);
+    QList<QVariant> topActiveProjectsViewActives = m_configGroup.readEntry("topActiveProjectsViewActives", automaticallyInViews);
 
     m_topActiveProjectsViewProjects.clear();
     int topActiveProjectsViewsCount = topActiveProjectsViewNames.count();
     for (int i = 0; i < topActiveProjectsViewsCount; ++i)
-        m_topActiveProjectsViewProjects[topActiveProjectsViewNames.at(i)] = topActiveProjectsViewActives.at(i);
+        m_topActiveProjectsViewProjects[topActiveProjectsViewNames.at(i)] = topActiveProjectsViewActives.at(i).toBool();
 
     // Config - Top Developers
-    QStringList topDevelopersViewNames = m_configGroup.readEntry("topDevelopersViewNames", KdeObservatoryPresets::preset(KdeObservatoryPresets::ProjectName));
-    QList<bool> topDevelopersViewActives = m_configGroup.readEntry("topDevelopersViewActives", KdeObservatoryPresets::automaticallyInViews());
+    QStringList topDevelopersViewNames = m_configGroup.readEntry("topDevelopersViewNames", defaultProjectNames);
+    QList<QVariant> topDevelopersViewActives = m_configGroup.readEntry("topDevelopersViewActives", automaticallyInViews);
 
     m_topDevelopersViewProjects.clear();
     int topDevelopersViewsCount = topDevelopersViewNames.count();
     for (int i = 0; i < topDevelopersViewsCount; ++i)
-        m_topDevelopersViewProjects[topDevelopersViewNames.at(i)] = topDevelopersViewActives.at(i);
+        m_topDevelopersViewProjects[topDevelopersViewNames.at(i)] = topDevelopersViewActives.at(i).toBool();
 
     // Config - Commit History
-    QStringList commitHistoryViewNames = m_configGroup.readEntry("commitHistoryViewNames", KdeObservatoryPresets::preset(KdeObservatoryPresets::ProjectName));
-    QList<bool> commitHistoryViewActives = m_configGroup.readEntry("commitHistoryViewActives", KdeObservatoryPresets::automaticallyInViews());
+    QStringList commitHistoryViewNames = m_configGroup.readEntry("commitHistoryViewNames", defaultProjectNames);
+    QList<QVariant> commitHistoryViewActives = m_configGroup.readEntry("commitHistoryViewActives", automaticallyInViews);
 
     m_commitHistoryViewProjects.clear();
     int commitHistoryViewsCount = commitHistoryViewNames.count();
     for (int i = 0; i < commitHistoryViewsCount; ++i)
-        m_commitHistoryViewProjects[commitHistoryViewNames.at(i)] = commitHistoryViewActives.at(i);
+        m_commitHistoryViewProjects[commitHistoryViewNames.at(i)] = commitHistoryViewActives.at(i).toBool();
 
     // Config - Krazy Report
-    QStringList krazyReportViewNames = m_configGroup.readEntry("krazyReportViewNames", KdeObservatoryPresets::preset(KdeObservatoryPresets::ProjectName));
-    QList<bool> krazyReportViewActives = m_configGroup.readEntry("krazyReportViewActives", KdeObservatoryPresets::automaticallyInViews());
+    QStringList krazyReportViewNames = m_configGroup.readEntry("krazyReportViewNames", defaultProjectNames);
+    QList<QVariant> krazyReportViewActives = m_configGroup.readEntry("krazyReportViewActives", automaticallyInViews);
 
     m_krazyReportViewProjects.clear();
     int krazyReportViewsCount = krazyReportViewNames.count();
     for (int i = 0; i < krazyReportViewsCount; ++i)
-        m_krazyReportViewProjects[krazyReportViewNames.at(i)] = krazyReportViewActives.at(i);
+        m_krazyReportViewProjects[krazyReportViewNames.at(i)] = krazyReportViewActives.at(i).toBool();
 
     commitCollector->setExtent(m_commitExtent);
     saveConfig();

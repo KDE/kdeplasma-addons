@@ -27,6 +27,7 @@
 
 class QTimer;
 class QTimeLine;
+class QNetworkReply;
 class QGraphicsLinearLayout;
 
 class ICollector;
@@ -39,6 +40,7 @@ namespace Plasma
 {
     class Label;
     class Meter;
+    class Engine;
     class PushButton;
 }
 
@@ -48,8 +50,8 @@ class KdeObservatory : public Plasma::PopupApplet
 public:
     KdeObservatory(QObject *parent, const QVariantList &args);
     ~KdeObservatory();
-
     void init();
+    
     virtual QGraphicsWidget* graphicsWidget();
 
     struct Project
@@ -65,6 +67,7 @@ protected:
     bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
 
 protected Q_SLOTS:
+    void safeInit();
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
     void collectFinished();
@@ -135,6 +138,8 @@ private:
     // Collectors
     QMap<QString, ICollector *> m_collectors;
     int m_collectorsFinished;
+    
+    Plasma::DataEngine *m_engine;
 };
 
 #endif

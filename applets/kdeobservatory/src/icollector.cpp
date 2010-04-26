@@ -23,8 +23,8 @@
 ICollector::ICollector(QObject *parent)
 : QNetworkAccessManager(parent)
 {
-    connect (this, SIGNAL(finished(QNetworkReply *)),
-             this, SLOT  (replyFinished(QNetworkReply *)));
+//    connect (this, SIGNAL(finished(QNetworkReply *)),
+//             this, SLOT  (replyFinished(QNetworkReply *)));
 }
 
 ICollector::~ICollector()

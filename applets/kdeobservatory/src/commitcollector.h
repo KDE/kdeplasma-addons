@@ -53,9 +53,11 @@ public:
         QString developer;
     } Commit;
 
+    QNetworkReply *runServletOperation(const QString &operation, const QStringList &args);
+
 protected Q_SLOTS:
     virtual void replyFinished(QNetworkReply *reply);
-    
+
 private:
     bool m_fullUpdate;
     int  m_commitsRead;

@@ -26,7 +26,7 @@
 class KdeObservatoryPresets
 {
 public:
-    static void init();
+    static void init(const QString &data);
 
     enum PresetInfo
     {
