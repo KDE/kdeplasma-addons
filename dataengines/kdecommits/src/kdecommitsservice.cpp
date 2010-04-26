@@ -29,17 +29,14 @@
 KdeCommitsService::KdeCommitsService(KdeCommitsEngine *engine)
 : Plasma::Service()
 {
-    m_engine = engine;
     setName("kdecommits");
+    m_engine = engine;
     m_manager = new QNetworkAccessManager(this);
     connect(m_manager, SIGNAL(finished(QNetworkReply *)), SLOT(finished(QNetworkReply *)));
 }
 
 Plasma::ServiceJob *KdeCommitsService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
-    kDebug() << "Criando job ao chamar metodo" << operation;
-
-    Q_UNUSED(parameters);
     if (operation == "allProjectsInfo")
         allProjectsInfo();
     else if (operation == "topActiveProjects")
@@ -74,20 +71,24 @@ void KdeCommitsService::finished(QNetworkReply *reply)
     }
     else if (url.contains("op=topActiveProjects"))
     {
-        QMultiMap<int, QString> topActiveProjects;
+        if (reply->header(QNetworkRequest::ContentTypeHeader).toString().contains("text/plain"))
+        {
+            QMultiMap<int, QString> topActiveProjects;
 
-        QString data (reply->readAll());
-        kDebug() << "data" << data;
-        if (!data.isEmpty())
-            foreach (QString row, data.split('\n'))
-                if (!row.isEmpty())
-                {
-                    QStringList list = row.split(';');
-                    QString commits = list.at(1);
-                    topActiveProjects.insert(commits.remove('\r').toInt(), list.at(0));
-                }
+            QString data (reply->readAll());
+            if (!data.isEmpty())
+                foreach (QString row, data.split('\n'))
+                    if (!row.isEmpty())
+                    {
+                        QStringList list = row.split(';');
+                        QString commits = list.at(1);
+                        topActiveProjects.insert(commits.remove('\r').toInt(), list.at(0));
+                    }
 
-        m_engine->setData("topActiveProjects", "topActiveProjects", QVariant::fromValue< QMultiMap<int, QString> >(topActiveProjects));
+            m_engine->setData("topActiveProjects", "topActiveProjects", QVariant::fromValue< QMultiMap<int, QString> >(topActiveProjects));
+        }
+        else
+            emit engineError();
     }
     
     reply->deleteLater();

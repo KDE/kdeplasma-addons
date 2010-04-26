@@ -26,7 +26,6 @@
 #include <Plasma/Service>
 
 class QNetworkAccessManager;
-class QNetworkReply;
 
 namespace Plasma
 {

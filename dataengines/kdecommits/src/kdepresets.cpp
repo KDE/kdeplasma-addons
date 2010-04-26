@@ -20,7 +20,6 @@
 
 #include "kdepresets.h"
 
-#include <KDebug>
 #include <KLocale>
 
 QList<QStringList> KdePresets::presets;
@@ -28,7 +27,9 @@ QList<QStringList> KdePresets::presets;
 void KdePresets::init(const QString &data)
 {
     if (!data.isEmpty())
+    {
         foreach (QString row, data.split('\n'))
+        {
             if (!row.isEmpty())
             {
                 QStringList list;
@@ -36,6 +37,8 @@ void KdePresets::init(const QString &data)
                     list << token.remove('\r');
                 presets << list;
             }
+        }
+    }
 }
 
 QStringList KdePresets::preset(PresetInfo info)

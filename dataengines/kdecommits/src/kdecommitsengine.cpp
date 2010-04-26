@@ -50,6 +50,7 @@ bool KdeCommitsEngine::sourceRequestEvent (const QString &source)
         setData("allProjectsInfo", "projectKrazyReports", KdePresets::preset(KdePresets::ProjectKrazyReport));
         setData("allProjectsInfo", "projectKrazyFilePrefixes", KdePresets::preset(KdePresets::ProjectKrazyFilePrefix));
         setData("allProjectsInfo", "projectIcons", KdePresets::preset(KdePresets::ProjectIcon));
+
         return true;
     }
     return false;

@@ -85,7 +85,7 @@ public class KdeCommitsServlet extends HttpServlet
 
     public void topActiveProjects(String n) throws SQLException
     {
-        String query = "select p.commit_subject, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 group by p.commit_subject order by count(*) desc";
+        String query = "select p.name, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 group by p.commit_subject order by count(*) desc";
         if (!n.equals("0"))
             query = query + " limit 0 , " + n;
         ResultSet res = stmt.executeQuery(query);
