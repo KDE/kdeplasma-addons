@@ -23,6 +23,8 @@
 
 #include "kdecommitsengine.h"
 
+#include <QMutex>
+
 #include <Plasma/Service>
 
 class QNetworkAccessManager;
@@ -42,20 +44,22 @@ public:
 protected:
     void allProjectsInfo();
     void topActiveProjects();
+    void topProjectDevelopers(const QString &project);
 
 Q_SIGNALS:
     void engineReady();
     void engineError();
-        
+
 protected slots:
     void finished(QNetworkReply *reply);
 
 private:
     KdeCommitsEngine      *m_engine;
     QNetworkAccessManager *m_manager;
+    mutable QMutex         m_replyMutex;
 };
 
-typedef QMultiMap<int, QString> TopProjectsMap;
-Q_DECLARE_METATYPE(TopProjectsMap)
+typedef QMultiMap<int, QString> RankValueMap;
+Q_DECLARE_METATYPE(RankValueMap)
 
 #endif

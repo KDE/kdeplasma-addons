@@ -20,9 +20,10 @@
 
 #include "kdecommitsservice.h"
 
-#include <QNetworkAccessManager>
+#include <QMutexLocker>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QNetworkAccessManager>
 
 #include "kdepresets.h"
 
@@ -37,10 +38,14 @@ KdeCommitsService::KdeCommitsService(KdeCommitsEngine *engine)
 
 Plasma::ServiceJob *KdeCommitsService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
+    kDebug() << "Starting service operation" << operation;
+    
     if (operation == "allProjectsInfo")
         allProjectsInfo();
     else if (operation == "topActiveProjects")
         topActiveProjects();
+    else if (operation == "topProjectDevelopers")
+        topProjectDevelopers(parameters["project"].toString());
 
     return 0;
 }
@@ -52,45 +57,75 @@ void KdeCommitsService::allProjectsInfo()
 
 void KdeCommitsService::topActiveProjects()
 {
+    kDebug() << "Invocando" << QUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topActiveProjects&p0=0");
     m_manager->get(QNetworkRequest(QUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topActiveProjects&p0=0")));
+}
+
+void KdeCommitsService::topProjectDevelopers(const QString &project)
+{
+    kDebug() << "Invocando" << QUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topProjectDevelopers&p0=" + project + "&p1=0");
+    m_manager->get(QNetworkRequest(QUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topProjectDevelopers&p0=" + project + "&p1=0")));    
 }
 
 void KdeCommitsService::finished(QNetworkReply *reply)
 {
-    QString url = reply->url().toString();
-    
-    if (url.contains("op=allProjectsInfo"))
+    QString data;
+    QString url;
+    QString mimeType;
     {
-        if (reply->header(QNetworkRequest::ContentTypeHeader).toString().contains("text/plain"))
+        QMutexLocker locker(&m_replyMutex);
+        data = reply->readAll();
+        url = reply->url().toString();
+        mimeType = reply->header(QNetworkRequest::ContentTypeHeader).toString();
+    }
+    
+    kDebug() << url << "retornou" << mimeType;
+    
+    if (!data.isEmpty() && mimeType.contains("text/plain"))
+    {
+        if (url.contains("op=allProjectsInfo"))
         {
-            KdePresets::init(QString(reply->readAll()));
+            KdePresets::init(data);
             emit engineReady();
         }
-        else
-            emit engineError();
-    }
-    else if (url.contains("op=topActiveProjects"))
-    {
-        if (reply->header(QNetworkRequest::ContentTypeHeader).toString().contains("text/plain"))
+        else if (url.contains("op=topActiveProjects"))
         {
-            QMultiMap<int, QString> topActiveProjects;
+            RankValueMap topActiveProjects;
+            foreach (QString row, data.split('\n'))
+            {
+                if (!row.isEmpty())
+                {
+                    QStringList list = row.split(';');
+                    QString commits = list.at(1);
+                    topActiveProjects.insert(commits.remove('\r').toInt(), list.at(0));
+                }
+            }
 
-            QString data (reply->readAll());
-            if (!data.isEmpty())
-                foreach (QString row, data.split('\n'))
-                    if (!row.isEmpty())
-                    {
-                        QStringList list = row.split(';');
-                        QString commits = list.at(1);
-                        topActiveProjects.insert(commits.remove('\r').toInt(), list.at(0));
-                    }
-
-            m_engine->setData("topActiveProjects", "topActiveProjects", QVariant::fromValue< QMultiMap<int, QString> >(topActiveProjects));
+            m_engine->setData("topActiveProjects", "topActiveProjects", QVariant::fromValue<RankValueMap>(topActiveProjects));
         }
-        else
-            emit engineError();
+        else if (url.contains("op=topProjectDevelopers"))
+        {
+            QRegExp regexp("\\&p0=(.*)\\&p1");
+            regexp.indexIn(url, 0);
+            QString project = regexp.cap(1);
+            
+            RankValueMap projectTopDevelopers;
+            foreach (QString row, data.split('\n'))
+            {
+                if (!row.isEmpty())
+                {
+                    QStringList list = row.split(';');
+                    QString commits = list.at(4);
+                    projectTopDevelopers.insert(commits.remove('\r').toInt(), list.at(0));
+                }
+            }
+
+            m_engine->setData("topProjectDevelopers", regexp.cap(1), QVariant::fromValue<RankValueMap>(projectTopDevelopers));
+        }
     }
-    
+    else
+        emit engineError();
+
     reply->deleteLater();
 }
 

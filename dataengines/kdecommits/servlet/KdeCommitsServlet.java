@@ -92,16 +92,15 @@ public class KdeCommitsServlet extends HttpServlet
         printResultSet(res);
     }
 
-    public void topDevelopers(String project, String n) throws SQLException
+    public void topProjectDevelopers(String project, String n) throws SQLException
     {
         String query;
         if (!project.equals(""))
-            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, p.name, count(*) from projects p, commits c, developers d where INSTR(c.path, p.commit_subject) > 0 and d.svn_account = c.svn_account and p.name = '" + project + "' group by d.full_name, p.name order by count(*) desc";
+            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from projects p, commits c, developers d where INSTR(c.path, p.commit_subject) > 0 and d.svn_account = c.svn_account and p.name = '" + project + "' group by d.full_name, p.name order by count(*) desc";
         else
             query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from commits c, developers d where d.svn_account = c.svn_account group by d.full_name order by count(*) desc";
         if (!n.equals("0"))
             query = query + " limit 0 , " + n;
-        out.println(query);
         ResultSet res = stmt.executeQuery(query);
         printResultSet(res);
     }

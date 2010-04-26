@@ -21,6 +21,7 @@
 #include "kdepresets.h"
 
 #include <KLocale>
+#include <KDebug>
 
 QList<QStringList> KdePresets::presets;
 
@@ -38,6 +39,7 @@ void KdePresets::init(const QString &data)
                 presets << list;
             }
         }
+        kDebug() << "Atualizados" << presets.count() << "presets";
     }
 }
 

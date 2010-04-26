@@ -5,4 +5,9 @@
     </group>
     <group name="topActiveProjects">
     </group>
+    <group name="topProjectDevelopers">
+        <entry name="project" type="String">
+            <label>The project from which to acquire developers</label>
+        </entry>
+    </group>
 </kcfg>

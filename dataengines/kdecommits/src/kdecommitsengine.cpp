@@ -33,7 +33,7 @@ KdeCommitsEngine::KdeCommitsEngine(QObject *parent, const QVariantList &args)
 void KdeCommitsEngine::init()
 {
     setData("topActiveProjects", "");
-    setData("topDevelopers", "");
+    setData("topProjectDevelopers", "");
     setData("commitHistory", "");
     setData("krazyReport", "");
 }
