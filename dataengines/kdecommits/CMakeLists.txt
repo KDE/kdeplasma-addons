@@ -13,7 +13,6 @@ include_directories(
  
 set(kdecommits_engine_SRCS
     src/kdepresets.cpp
-    src/commitcollector.cpp
     src/kdecommitsengine.cpp
     src/kdecommitsservice.cpp
 )
