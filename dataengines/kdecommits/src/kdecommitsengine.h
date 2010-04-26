@@ -31,39 +31,12 @@ class KdeCommitsEngine : public Plasma::DataEngine
     Q_OBJECT
 public:
     KdeCommitsEngine(QObject *parent, const QVariantList &args);
+    
     void init();
-
-protected:
-    bool sourceRequestEvent(const QString& name);
-    bool updateSourceEvent(const QString& source);
     
-Q_SIGNALS:
-    void engineReady();
-    void sourceReady(const QString &source);
-        
-protected Q_SLOTS:
-    void presetsSource();
-    void presetsReplyFinished();
-
-    void topActiveProjectsSource();
-    void topActiveProjectsReplyFinished();
+    Plasma::Service *serviceForSource(const QString &source);
     
-    void topDevelopersSource();
-    void topDevelopersReplyFinished();
-
-    void commitHistorySource();
-    void commitHistoryReplyFinished();
-
-    void krazyReportSource();
-    void krazyReportReplyFinished();
-
-private:
-    CommitCollector *m_commitCollector;
-    QNetworkReply *m_presetsReply;
-    QNetworkReply *m_topActiveProjectsReply;
+    friend class KdeCommitsService;
 };
-
-typedef QMultiMap<int, QString> TopProjectsMap;
-Q_DECLARE_METATYPE(TopProjectsMap)
 
 #endif

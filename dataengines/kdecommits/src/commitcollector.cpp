@@ -40,5 +40,6 @@ QNetworkReply *CommitCollector::runServletOperation(const QString &operation, co
     foreach (QString value, args)
         url += QString("&p") + QString::number(i++) + QString("=") + value;
 
+    kDebug() << "Obtendo pagina" << url;
     return get(QNetworkRequest(QUrl(url.toUtf8())));
 }
