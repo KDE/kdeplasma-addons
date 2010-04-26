@@ -60,16 +60,6 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(300, 200);
-
-    m_engine = dataEngine("kdecommits");
-/*
-    m_engine->connectSource("allProjectsInfo", this);
-    m_engine->connectSource("topActiveProjects", this);
-    m_engine->connectSource("topDevelopers", this);
-    m_engine->connectSource("commitHistory", this);
-    m_engine->connectSource("krazyReport", this);
-    */
-    m_engine->connectAllSources(this);
 }
 
 KdeObservatory::~KdeObservatory()
@@ -87,12 +77,18 @@ KdeObservatory::~KdeObservatory()
 
 void KdeObservatory::init()
 {
-    loadConfig();
-    graphicsWidget();
-    createViewProviders();
-    createTimers();
+    m_engine = dataEngine("kdecommits");
+
+    m_engine->connectSource("topActiveProjects", this);
+    m_engine->connectSource("topDevelopers", this);
+    m_engine->connectSource("commitHistory", this);
+    m_engine->connectSource("krazyReport", this);
+
+    m_service = m_engine->serviceForSource("");
+    connect(m_service, SIGNAL(engineReady()), SLOT(safeInit()));
+    m_service->startOperationCall(m_service->operationDescription("allProjectsInfo"));
+
     setPopupIcon(KIcon("kdeobservatory"));
-    updateSources();
 }
 
 QGraphicsWidget *KdeObservatory::graphicsWidget()
@@ -173,8 +169,18 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
 void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    kDebug() << "Data Updated for source" << sourceName;
+    kDebug() << "CHAMOU PORRA" << sourceName;
 }
+
+void KdeObservatory::safeInit()
+{
+    loadConfig();
+    graphicsWidget();
+    createViewProviders();
+    createTimers();
+    updateSources();
+}
+
 /*
 void KdeObservatory::sourceReady(const QString &source)
 {
@@ -413,9 +419,8 @@ void KdeObservatory::updateSources()
     m_lastViewCount = m_views.count();
     m_synchronizationTimer->stop();
 
-    Plasma::Service *service = dataEngine("kdecommits")->serviceForSource("");
-    KConfigGroup ops = service->operationDescription("allProjectsInfo");
-    service->startOperationCall(ops);
+    kDebug() << "Updating sources";
+    //m_service->startOperationCall(m_service->operationDescription("allProjectsInfo"));
 }
 
 void KdeObservatory::updateViews()
@@ -456,7 +461,7 @@ void KdeObservatory::loadConfig()
     m_enableAutoViewChange = m_configGroup.readEntry("enableAutoViewChange", true);
     m_viewsDelay = m_configGroup.readEntry("viewsDelay", 5);
 
-    Plasma::DataEngine::Data presetsData = m_engine->query("presets");
+    Plasma::DataEngine::Data presetsData = m_engine->query("allProjectsInfo");
     
     QStringList viewNames = m_configGroup.readEntry("viewNames", presetsData["views"].toStringList());
     QList<QVariant> viewActives = m_configGroup.readEntry("viewActives", presetsData["viewsActive"].toList());

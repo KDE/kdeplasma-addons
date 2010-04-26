@@ -71,6 +71,7 @@ public Q_SLOTS:
     void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
         
 protected Q_SLOTS:
+    void safeInit();
     void updateSources();
 
     void createConfigurationInterface(KConfigDialog *parent);
@@ -139,6 +140,7 @@ private:
     QTimeLine *m_transitionTimer;
 
     Plasma::DataEngine *m_engine;
+    Plasma::Service *m_service;
     int m_sourcesUpdated;
 };
 
