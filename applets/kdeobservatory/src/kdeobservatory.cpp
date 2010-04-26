@@ -62,8 +62,14 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
     resize(300, 200);
 
     m_engine = dataEngine("kdecommits");
-    connect (m_engine, SIGNAL(engineReady()), SLOT(safeInit()));
-    connect (m_engine, SIGNAL(sourceReady(const QString &)), SLOT(sourceReady(const QString &)));
+/*
+    m_engine->connectSource("allProjectsInfo", this);
+    m_engine->connectSource("topActiveProjects", this);
+    m_engine->connectSource("topDevelopers", this);
+    m_engine->connectSource("commitHistory", this);
+    m_engine->connectSource("krazyReport", this);
+    */
+    m_engine->connectAllSources(this);
 }
 
 KdeObservatory::~KdeObservatory()
@@ -81,9 +87,12 @@ KdeObservatory::~KdeObservatory()
 
 void KdeObservatory::init()
 {
+    loadConfig();
     graphicsWidget();
+    createViewProviders();
     createTimers();
     setPopupIcon(KIcon("kdeobservatory"));
+    updateSources();
 }
 
 QGraphicsWidget *KdeObservatory::graphicsWidget()
@@ -162,19 +171,23 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     return false;
 }
 
-void KdeObservatory::safeInit()
+void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    loadConfig();
-    createViewProviders();
-    updateSources();
+    kDebug() << "Data Updated for source" << sourceName;
 }
-
+/*
 void KdeObservatory::sourceReady(const QString &source)
 {
     kDebug() << "Source updated" << source;
     if (source != "presets")
         ++m_sourcesUpdated;
     
+    if (source == "topActiveProjects")
+    {
+        kDebug() << "Endereco" << &(m_viewData["Top Active Projects"].first);
+        kDebug() << (m_viewData["Top Active Projects"].first)["topActiveProjects"].value< QMultiMap<int, QString> >();
+    }
+
     if (m_sourcesUpdated == m_viewData.count())
     {
         kDebug() << "All sources updated";
@@ -194,7 +207,7 @@ void KdeObservatory::sourceReady(const QString &source)
         m_synchronizationTimer->start();
     }
 }
-
+*/
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 {
     m_configGeneral = new KdeObservatoryConfigGeneral(parent);
@@ -400,14 +413,9 @@ void KdeObservatory::updateSources()
     m_lastViewCount = m_views.count();
     m_synchronizationTimer->stop();
 
-    m_sourcesUpdated = 0;
-    QMapIterator<QString, QPair<Plasma::DataEngine::Data, QString> > i(m_viewData);
-    while (i.hasNext())
-    {
-        i.next();
-        QPair<Plasma::DataEngine::Data, QString> pair = i.value();
-        pair.first = m_engine->query(pair.second);
-    }
+    Plasma::Service *service = dataEngine("kdecommits")->serviceForSource("");
+    KConfigGroup ops = service->operationDescription("allProjectsInfo");
+    service->startOperationCall(ops);
 }
 
 void KdeObservatory::updateViews()
@@ -420,6 +428,7 @@ void KdeObservatory::updateViews()
         const QString &view = pair.first;
         if (pair.second && m_viewProviders.value(view))
         {
+            kDebug() << "Atualizando view" << view;
             m_viewProviders[view]->updateViews();
             m_views.append(m_viewProviders[view]->views());
         }
@@ -592,15 +601,10 @@ void KdeObservatory::createTimers()
 
 void KdeObservatory::createViewProviders()
 {
-    m_viewData[i18n("Top Active Projects")] = QPair<Plasma::DataEngine::Data, QString>(Plasma::DataEngine::Data(), "topActiveProjects");
-    m_viewData[i18n("Top Developers")] = QPair<Plasma::DataEngine::Data, QString>(Plasma::DataEngine::Data(), "topDevelopers");
-    m_viewData[i18n("Commit History")] = QPair<Plasma::DataEngine::Data, QString>(Plasma::DataEngine::Data(), "commitHistory");
-    m_viewData[i18n("Krazy Report")] = QPair<Plasma::DataEngine::Data, QString>(Plasma::DataEngine::Data(), "krazyReport");
-    
-    m_viewProviders[i18n("Top Active Projects")] = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewData[i18n("Top Active Projects")].first, m_viewContainer);
-    m_viewProviders[i18n("Top Developers")] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewData[i18n("Top Developers")].first, m_viewContainer);
-    m_viewProviders[i18n("Commit History")] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewData[i18n("Commit History")].first, m_viewContainer);
-    m_viewProviders[i18n("Krazy Report")] = new KrazyReportView(m_krazyReportViewProjects, m_projects, m_viewData[i18n("Krazy Report")].first, m_viewContainer);
+    m_viewProviders[i18n("Top Active Projects")] = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Top Developers")] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Commit History")] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Krazy Report")] = new KrazyReportView(m_krazyReportViewProjects, m_projects, m_viewContainer);
 }
 
 #include "kdeobservatory.moc"

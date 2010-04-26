@@ -36,7 +36,7 @@ class IViewProvider : public QObject
 {
     Q_OBJECT
 public:
-    explicit IViewProvider(const Plasma::DataEngine::Data &data, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
+    explicit IViewProvider(QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~IViewProvider();
 
     QGraphicsWidget *createView(const QString &title);
@@ -46,7 +46,6 @@ public:
     virtual void updateViews() = 0;
 
 protected:
-    const Plasma::DataEngine::Data &m_data;
     QGraphicsWidget *m_parent;
     Qt::WindowFlags m_wFlags;
     QList<QGraphicsWidget *> m_views;

@@ -28,8 +28,8 @@
 
 #include "kdeobservatorydatabase.h"
 
-TopActiveProjectsView::TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const Plasma::DataEngine::Data &data, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(data, parent, wFlags),
+TopActiveProjectsView::TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(parent, wFlags),
   m_parent(parent),
   m_topActiveProjectsViewProjects(topActiveProjectsViewProjects),
   m_projects(projects)
@@ -43,19 +43,10 @@ TopActiveProjectsView::~TopActiveProjectsView()
 void TopActiveProjectsView::updateViews()
 {
     deleteViews();
-
-    QMultiMap<int, QString> topActiveProjects;
-    QHashIterator<QString, bool> i1(m_topActiveProjectsViewProjects);
-    while (i1.hasNext())
-    {
-        i1.next();
-        if (i1.value())
-        {
-            int rank = KdeObservatoryDatabase::self()->commitsByProject(m_projects[i1.key()].commitSubject);
-            topActiveProjects.insert(rank, i1.key());
-        }
-    }
-
+/*
+    QMultiMap<int, QString> topActiveProjects = data["topActiveProjects"].value< QMultiMap<int, QString> >();
+    kDebug() << "Top active projects list" << topActiveProjects;
+    
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 
     QGraphicsWidget *container = createView(i18n("Top Active Projects"));
@@ -99,4 +90,5 @@ void TopActiveProjectsView::updateViews()
                               (qreal) ((projectRect->rect().height())/2)-(commitsNumber->boundingRect().height()/2));
         j++;
     }
+*/
 }

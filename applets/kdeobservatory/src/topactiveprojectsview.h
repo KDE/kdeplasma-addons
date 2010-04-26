@@ -28,7 +28,7 @@
 class TopActiveProjectsView : public IViewProvider
 {
 public:
-    TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const Plasma::DataEngine::Data &data, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
+    TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~TopActiveProjectsView();
 
     virtual void updateViews();
@@ -38,5 +38,8 @@ private:
     const QHash<QString, bool> &m_topActiveProjectsViewProjects;
     const QMap<QString, KdeObservatory::Project> &m_projects;
 };
+
+typedef QMultiMap<int, QString> TopProjectsMap;
+Q_DECLARE_METATYPE(TopProjectsMap)
 
 #endif

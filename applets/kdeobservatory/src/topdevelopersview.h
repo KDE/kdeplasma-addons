@@ -28,7 +28,7 @@
 class TopDevelopersView : public IViewProvider
 {
 public:
-    TopDevelopersView(const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const Plasma::DataEngine::Data &data, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
+    TopDevelopersView(const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~TopDevelopersView();
 
     virtual void updateViews();

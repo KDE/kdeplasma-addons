@@ -67,11 +67,12 @@ protected:
     bool eventFilter(QObject *receiver, QEvent *event);
     bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
 
+public Q_SLOTS:
+    void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
+        
 protected Q_SLOTS:
-    void safeInit();
-    void sourceReady(const QString &source);
     void updateSources();
-    
+
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
     void moveViewRight();
@@ -129,7 +130,6 @@ private:
 
     // View providers and data
     QMap<QString, IViewProvider *> m_viewProviders;
-    QMap<QString, QPair<Plasma::DataEngine::Data, QString> > m_viewData;
     
     QList<QGraphicsWidget *> m_views;
     int m_currentView;

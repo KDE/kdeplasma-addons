@@ -25,9 +25,8 @@
 
 #include <Plasma/Frame>
 
-IViewProvider::IViewProvider(const Plasma::DataEngine::Data &data, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+IViewProvider::IViewProvider(QGraphicsWidget *parent, Qt::WindowFlags wFlags)
 : QObject(),
-  m_data(data),
   m_parent(parent),
   m_wFlags(wFlags)
 {

@@ -28,7 +28,7 @@
 class KrazyReportView : public IViewProvider
 {
 public:
-    KrazyReportView(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const Plasma::DataEngine::Data &data, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
+    KrazyReportView(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~KrazyReportView();
 
     virtual void updateViews();

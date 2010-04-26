@@ -48,8 +48,8 @@ private:
     QDate m_minDate;
 };
 
-CommitHistoryView::CommitHistoryView(const QHash<QString, bool> &commitHistoryViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const Plasma::DataEngine::Data &data, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(data, parent, wFlags),
+CommitHistoryView::CommitHistoryView(const QHash<QString, bool> &commitHistoryViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(parent, wFlags),
   m_commitHistoryViewProjects(commitHistoryViewProjects),
   m_projects(projects)
 {

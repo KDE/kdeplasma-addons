@@ -27,8 +27,8 @@
 
 #include "kdeobservatorydatabase.h"
 
-KrazyReportView::KrazyReportView(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const Plasma::DataEngine::Data &data, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(data, parent, wFlags),
+KrazyReportView::KrazyReportView(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(parent, wFlags),
   m_krazyReportViewProjects(krazyReportViewProjects),
   m_projects(projects)
 {
