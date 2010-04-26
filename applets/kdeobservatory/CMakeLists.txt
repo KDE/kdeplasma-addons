@@ -16,11 +16,8 @@ include_directories(
 )
  
 set(kdeobservatory_SRCS
-    src/icollector.cpp
     src/iviewprovider.cpp
     src/kdeobservatory.cpp
-    src/krazycollector.cpp
-    src/commitcollector.cpp
     src/krazyreportview.cpp
     src/topdevelopersview.cpp
     src/commithistoryview.cpp

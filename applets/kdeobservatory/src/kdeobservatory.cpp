@@ -37,9 +37,6 @@
 #include <Plasma/DataEngine>
 #include <Plasma/PushButton>
 
-#include "krazycollector.h"
-#include "commitcollector.h"
-
 #include "krazyreportview.h"
 #include "topdevelopersview.h"
 #include "commithistoryview.h"
@@ -64,13 +61,9 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(300, 200);
 
-    m_collectors["Commit Collector"] = new CommitCollector(this);
-    m_collectors["Krazy Collector"] = new KrazyCollector(m_krazyReportViewProjects, m_projects, this);
-
-    connect(m_collectors["Commit Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
-    connect(m_collectors["Krazy Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
-
     m_engine = dataEngine("kdecommits");
+    connect (m_engine, SIGNAL(engineReady()), SLOT(safeInit()));
+    connect (m_engine, SIGNAL(sourceReady(const QString &)), SLOT(sourceReady(const QString &)));
 }
 
 KdeObservatory::~KdeObservatory()
@@ -81,6 +74,7 @@ KdeObservatory::~KdeObservatory()
         delete m_viewProviders[i18n("Top Developers")];
         delete m_viewProviders[i18n("Commit History")];
         delete m_viewProviders[i18n("Krazy Report")];
+
         KdeObservatoryDatabase::self()->~KdeObservatoryDatabase();
     }
 }
@@ -89,17 +83,13 @@ void KdeObservatory::init()
 {
     graphicsWidget();
     createTimers();
-    runCollectors();
     setPopupIcon(KIcon("kdeobservatory"));
-    safeInit();
 }
 
 QGraphicsWidget *KdeObservatory::graphicsWidget()
 {
     if (!m_mainContainer)
     {
-        CommitCollector *commitCollector = qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]);
-
         m_mainContainer = new QGraphicsWidget(this);
         m_mainContainer->installEventFilter(this);
 
@@ -125,8 +115,6 @@ QGraphicsWidget *KdeObservatory::graphicsWidget()
         m_collectorProgress->setMeterType(Plasma::Meter::BarMeterHorizontal);
         m_collectorProgress->setMaximumHeight(22);
         m_collectorProgress->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        connect(commitCollector, SIGNAL(progressMaximum(int)), m_collectorProgress, SLOT(setMaximum(int)));
-        connect(commitCollector, SIGNAL(progressValue(int)), m_collectorProgress, SLOT(setValue(int)));
         m_collectorProgress->hide();
 
         m_updateLabel = new Plasma::Label(m_mainContainer);
@@ -176,16 +164,35 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
 void KdeObservatory::safeInit()
 {
-    Plasma::DataEngine::Data presetsData = m_engine->query("presets");
-    if (presetsData["projectNames"].toStringList().count() == 0)
-    {
-        // Data engine not ready, schedule reinitialization
-        QTimer::singleShot(500, this, SLOT(safeInit()));
-        return;
-    }
- 
     loadConfig();
     createViewProviders();
+    updateSources();
+}
+
+void KdeObservatory::sourceReady(const QString &source)
+{
+    kDebug() << "Source updated" << source;
+    if (source != "presets")
+        ++m_sourcesUpdated;
+    
+    if (m_sourcesUpdated == m_viewData.count())
+    {
+        kDebug() << "All sources updated";
+        prepareUpdateViews();
+
+        setBusy(false);
+        m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
+        m_collectorProgress->hide();
+        m_horizontalLayout->removeItem(m_collectorProgress);
+        m_horizontalLayout->insertItem(1, m_updateLabel);
+        m_updateLabel->show();
+        m_right->setEnabled(true);
+        m_left->setEnabled(true);
+
+        updateViews();
+
+        m_synchronizationTimer->start();
+    }
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -246,21 +253,6 @@ void KdeObservatory::configAccepted()
 {
     prepareUpdateViews();
 
-    CommitCollector *commitCollector = qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]);
-
-    bool commitExtentChanged = false;
-    if (m_configGeneral->commitExtent->value() != m_commitExtent)
-    {
-        if (m_configGeneral->commitExtent->value() > m_commitExtent)
-        {
-            commitCollector->setFullUpdate(true);
-        }
-        else
-        {
-            commitExtentChanged = true;
-        }
-    }
-
     // General properties
     m_commitExtent = m_configGeneral->commitExtent->value();
     QTime synchronizationDelay = m_configGeneral->synchronizationDelay->time();
@@ -283,7 +275,6 @@ void KdeObservatory::configAccepted()
         viewActives << viewActive;
     }
 
-    commitCollector->setExtent(m_commitExtent);
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
     m_synchronizationTimer->setInterval(m_synchronizationDelay * 1000);
 
@@ -320,37 +311,7 @@ void KdeObservatory::configAccepted()
 
     saveConfig();
 
-    if (commitCollector->fullUpdate() || commitExtentChanged)
-        runCollectors();
-    else
-        updateViews();
-}
-
-void KdeObservatory::collectFinished()
-{
-    ++m_collectorsFinished;
-
-    if (m_collectorsFinished == m_collectors.count())
-    {
-        prepareUpdateViews();
-
-        setBusy(false);
-        m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
-        m_collectorProgress->hide();
-        m_horizontalLayout->removeItem(m_collectorProgress);
-        m_horizontalLayout->insertItem(1, m_updateLabel);
-        m_updateLabel->show();
-        m_right->setEnabled(true);
-        m_left->setEnabled(true);
-
-        updateViews();
-
-        m_configGroup.writeEntry("commitsRead", (qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]))->commitsRead());
-        m_configGroup.writeEntry("lastArchiveRead", (qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]))->lastArchiveRead());
-        m_configGroup.writeEntry("lastKrazyCollect", (qobject_cast<KrazyCollector *>(m_collectors["Krazy Collector"]))->lastCollect());
-
-        m_synchronizationTimer->start();
-    }
+    updateViews();
 }
 
 void KdeObservatory::moveViewRight()
@@ -414,7 +375,18 @@ void KdeObservatory::switchViews(int delta)
     }
 }
 
-void KdeObservatory::runCollectors()
+void KdeObservatory::prepareUpdateViews()
+{
+    m_viewTransitionTimer->stop();
+    m_synchronizationTimer->stop();
+    if (m_transitionTimer)
+        m_transitionTimer->stop();
+
+    foreach(QGraphicsWidget *widget, m_views)
+        widget->hide();
+}
+
+void KdeObservatory::updateSources()
 {
     m_right->setEnabled(false);
     m_left->setEnabled(false);
@@ -425,23 +397,17 @@ void KdeObservatory::runCollectors()
     m_horizontalLayout->insertItem(1, m_collectorProgress);
     m_collectorProgress->show();
 
-    m_collectorsFinished = 0;
     m_lastViewCount = m_views.count();
     m_synchronizationTimer->stop();
 
-    foreach (ICollector *collector, m_collectors)
-        collector->run();
-}
-
-void KdeObservatory::prepareUpdateViews()
-{
-    m_viewTransitionTimer->stop();
-    m_synchronizationTimer->stop();
-    if (m_transitionTimer)
-        m_transitionTimer->stop();
-
-    foreach(QGraphicsWidget *widget, m_views)
-        widget->hide();
+    m_sourcesUpdated = 0;
+    QMapIterator<QString, QPair<Plasma::DataEngine::Data, QString> > i(m_viewData);
+    while (i.hasNext())
+    {
+        i.next();
+        QPair<Plasma::DataEngine::Data, QString> pair = i.value();
+        pair.first = m_engine->query(pair.second);
+    }
 }
 
 void KdeObservatory::updateViews()
@@ -467,22 +433,13 @@ void KdeObservatory::updateViews()
         if (m_enableAutoViewChange)
             m_viewTransitionTimer->start();
     }
+
     m_synchronizationTimer->start();
 }
 
 void KdeObservatory::loadConfig()
 {
     m_configGroup = config();
-
-    CommitCollector *commitCollector = qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]);
-    KrazyCollector  *krazyCollector  = qobject_cast<KrazyCollector * >(m_collectors["Krazy Collector"]);
-
-    commitCollector->setCommitsRead(m_configGroup.readEntry("commitsRead", 0));
-    commitCollector->setLastArchiveRead(m_configGroup.readEntry("lastArchiveRead", QString()));
-    krazyCollector->setLastCollect(m_configGroup.readEntry("lastKrazyCollect", QString()));
-
-    if (commitCollector->commitsRead() == 0)
-        commitCollector->setFullUpdate(true);
 
     // Config - General
     m_commitExtent = m_configGroup.readEntry("commitExtent", 7);
@@ -558,7 +515,6 @@ void KdeObservatory::loadConfig()
     for (int i = 0; i < krazyReportViewsCount; ++i)
         m_krazyReportViewProjects[krazyReportViewNames.at(i)] = krazyReportViewActives.at(i).toBool();
 
-    commitCollector->setExtent(m_commitExtent);
     saveConfig();
 }
 
@@ -631,15 +587,20 @@ void KdeObservatory::createTimers()
 
     m_synchronizationTimer = new QTimer(this);
     m_synchronizationTimer->setInterval(m_synchronizationDelay * 1000);
-    connect(m_synchronizationTimer, SIGNAL(timeout()), this, SLOT(runCollectors()));
+    connect(m_synchronizationTimer, SIGNAL(timeout()), this, SLOT(updateSources()));
 }
 
 void KdeObservatory::createViewProviders()
 {
-    m_viewProviders[i18n("Top Active Projects")] = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer);
-    m_viewProviders[i18n("Top Developers")] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer);
-    m_viewProviders[i18n("Commit History")] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewContainer);
-    m_viewProviders[i18n("Krazy Report")] = new KrazyReportView(m_krazyReportViewProjects, m_projects, m_viewContainer);
+    m_viewData[i18n("Top Active Projects")] = QPair<Plasma::DataEngine::Data, QString>(Plasma::DataEngine::Data(), "topActiveProjects");
+    m_viewData[i18n("Top Developers")] = QPair<Plasma::DataEngine::Data, QString>(Plasma::DataEngine::Data(), "topDevelopers");
+    m_viewData[i18n("Commit History")] = QPair<Plasma::DataEngine::Data, QString>(Plasma::DataEngine::Data(), "commitHistory");
+    m_viewData[i18n("Krazy Report")] = QPair<Plasma::DataEngine::Data, QString>(Plasma::DataEngine::Data(), "krazyReport");
+    
+    m_viewProviders[i18n("Top Active Projects")] = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewData[i18n("Top Active Projects")].first, m_viewContainer);
+    m_viewProviders[i18n("Top Developers")] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewData[i18n("Top Developers")].first, m_viewContainer);
+    m_viewProviders[i18n("Commit History")] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewData[i18n("Commit History")].first, m_viewContainer);
+    m_viewProviders[i18n("Krazy Report")] = new KrazyReportView(m_krazyReportViewProjects, m_projects, m_viewData[i18n("Krazy Report")].first, m_viewContainer);
 }
 
 #include "kdeobservatory.moc"

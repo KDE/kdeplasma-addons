@@ -24,6 +24,7 @@
 #include <KConfigGroup>
 
 #include <Plasma/PopupApplet>
+#include <Plasma/DataEngine>
 
 class QTimer;
 class QTimeLine;
@@ -68,15 +69,16 @@ protected:
 
 protected Q_SLOTS:
     void safeInit();
+    void sourceReady(const QString &source);
+    void updateSources();
+    
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
-    void collectFinished();
     void moveViewRight();
     void moveViewLeft();
     void moveViewRightClicked();
     void moveViewLeftClicked();
     void switchViews(int delta);
-    void runCollectors();
 
 private:
     void prepareUpdateViews();
@@ -125,9 +127,10 @@ private:
     Plasma::PushButton *m_right;
     Plasma::PushButton *m_left;
 
-    // View providers
+    // View providers and data
     QMap<QString, IViewProvider *> m_viewProviders;
-
+    QMap<QString, QPair<Plasma::DataEngine::Data, QString> > m_viewData;
+    
     QList<QGraphicsWidget *> m_views;
     int m_currentView;
 
@@ -135,11 +138,8 @@ private:
     QTimer *m_synchronizationTimer;
     QTimeLine *m_transitionTimer;
 
-    // Collectors
-    QMap<QString, ICollector *> m_collectors;
-    int m_collectorsFinished;
-    
     Plasma::DataEngine *m_engine;
+    int m_sourcesUpdated;
 };
 
 #endif

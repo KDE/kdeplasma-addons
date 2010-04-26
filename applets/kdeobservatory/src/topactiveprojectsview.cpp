@@ -28,8 +28,8 @@
 
 #include "kdeobservatorydatabase.h"
 
-TopActiveProjectsView::TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(parent, wFlags),
+TopActiveProjectsView::TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const Plasma::DataEngine::Data &data, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(data, parent, wFlags),
   m_parent(parent),
   m_topActiveProjectsViewProjects(topActiveProjectsViewProjects),
   m_projects(projects)

@@ -27,8 +27,8 @@
 
 #include "kdeobservatorydatabase.h"
 
-TopDevelopersView::TopDevelopersView(const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(parent, wFlags),
+TopDevelopersView::TopDevelopersView(const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const Plasma::DataEngine::Data &data, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(data, parent, wFlags),
   m_topDevelopersViewProjects(topDevelopersViewProjects),
   m_projects(projects)
 {
