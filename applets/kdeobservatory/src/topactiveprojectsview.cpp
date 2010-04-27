@@ -56,16 +56,16 @@ void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
     qreal width = container->geometry().width();
     qreal step = 22;
 
-    QMapIterator<int, QString> i2(topActiveProjects);
-    i2.toBack();
+    QMapIterator<int, QString> i(topActiveProjects);
+    i.toBack();
     int j = 0;
-    while (i2.hasPrevious())
+    while (i.hasPrevious())
     {
-        i2.previous();
-        QString project = i2.value();
+        i.previous();
+        QString project = i.value();
         if (m_topActiveProjectsViewProjects[project])
         {
-            int rank = i2.key();
+            int rank = i.key();
             if (j == 0)
                 maxRank = rank;
 

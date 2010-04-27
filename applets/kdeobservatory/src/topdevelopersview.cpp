@@ -50,64 +50,51 @@ void TopDevelopersView::createViews()
 
 void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
 {
-/*
-    QMap< QString, QMultiMap<int, QString> > topDevelopers;
-    QHashIterator<QString, bool> i1(m_topDevelopersViewProjects);
-    while (i1.hasNext())
-    {
-        i1.next();
-        if (i1.value())
-            topDevelopers.insert(i1.key(), KdeObservatoryDatabase::self()->developersByProject(m_projects[i1.key()].commitSubject));
-    }
+    QString project = data["project"].toString();
+    if (project.isEmpty())
+        return;
+    
+    kDebug() << "Project" << project;
+    QMultiMap<int, QString> topProjectDevelopers = data["topProjectDevelopers"].value< QMultiMap<int, QString> >();
+    kDebug() << "#developers" << topProjectDevelopers.count();
 
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 
-    QMapIterator< QString, QMultiMap<int, QString> > i2(topDevelopers);
-    while (i2.hasNext())
+    QGraphicsWidget *container = containerForView(i18n("Top Developers") + " - " + project);
+
+    int maxRank = 0;
+    qreal width = container->geometry().width();
+    qreal step = 22;
+
+    QMapIterator<int, QString> i(topProjectDevelopers);
+    i.toBack();
+    int j = 0;
+    while (i.hasPrevious())
     {
-        i2.next();
+        i.previous();
+        QString developer = i.value();
+        int rank = i.key();
+        if (j == 0)
+            maxRank = rank;
 
-        QString project = i2.key();
-        const QMultiMap<int, QString> &projectDevelopers = i2.value();
+        qreal widthFactor = (width-24)/maxRank;
+        qreal yItem = (j*step)+2;
 
-        QMapIterator<int, QString> i3(projectDevelopers);
-        i3.toBack();
+        if (yItem + step-4 > container->geometry().height())
+            break;
 
-        QGraphicsWidget *container = createView(i18n("Top Developers") + " - " + project);
+        QGraphicsRectItem *developerRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
+        developerRect->setPos(0, yItem);
+        developerRect->setPen(QPen(QColor(0, 0, 0)));
+        developerRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+        developerRect->setToolTip(developer + " - " + QString::number(rank) + ' ' + i18n("commits"));
+        developerRect->setAcceptHoverEvents(true);
+        developerRect->installSceneEventFilter(kdeObservatory);
 
-        int maxRank = 0;
-        qreal width = container->geometry().width();
-        qreal step = 22;
-
-        int j = 0;
-        while (i3.hasPrevious())
-        {
-            i3.previous();
-            QString developer = i3.value();
-            int rank = i3.key();
-            if (j == 0)
-                maxRank = rank;
-
-            qreal widthFactor = (width-24)/maxRank;
-            qreal yItem = (j*step)+2;
-
-            if (yItem + step-4 > container->geometry().height())
-                break;
-
-            QGraphicsRectItem *developerRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
-            developerRect->setPos(0, yItem);
-            developerRect->setPen(QPen(QColor(0, 0, 0)));
-            developerRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-            developerRect->setToolTip(developer + " - " + QString::number(rank) + ' ' + i18n("commits"));
-            developerRect->setAcceptHoverEvents(true);
-            developerRect->installSceneEventFilter(kdeObservatory);
-
-            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(developer.split(' ')[0], developerRect);
-            commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
-            commitsNumber->setFont(KGlobalSettings::smallestReadableFont());
-            commitsNumber->setPos((qreal) 0, (qreal) ((developerRect->rect().height())/2)-(commitsNumber->boundingRect().height()/2));
-            j++;
-        }
+        QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(developer.split(' ')[0], developerRect);
+        commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
+        commitsNumber->setFont(KGlobalSettings::smallestReadableFont());
+        commitsNumber->setPos((qreal) 0, (qreal) ((developerRect->rect().height())/2)-(commitsNumber->boundingRect().height()/2));
+        j++;
     }
-*/
 }
