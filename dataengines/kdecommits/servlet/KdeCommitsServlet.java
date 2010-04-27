@@ -8,8 +8,8 @@ public class KdeCommitsServlet extends HttpServlet
 {
     public void init()
     {
-        String dbHost = "";
-        String dbName = "";
+        String dbHost   = "";
+        String dbName   = "";
         String username = "";
         String password = "";
 

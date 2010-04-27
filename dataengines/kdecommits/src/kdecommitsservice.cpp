@@ -42,7 +42,7 @@ Plasma::ServiceJob *KdeCommitsService::createJob(const QString &operation, QMap<
     else if (operation == "topProjectDevelopers")
         topProjectDevelopers(parameters["project"].toString());
     else if (operation == "commitHistory")
-        topProjectDevelopers(parameters["project"].toString());
+        commitHistory(parameters["project"].toString());
 
     return 0;
 }
@@ -90,7 +90,7 @@ void KdeCommitsService::result(KJob *job)
             QString project = "";
             QRegExp regexp("\\&p0=(.*)\\&p1");
             if (regexp.indexIn(url, 0) != -1)
-                QString project = regexp.cap(1);
+                project = regexp.cap(1);
             
             if (url.contains("op=allProjectsInfo"))
             {
