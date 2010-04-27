@@ -40,7 +40,7 @@ public:
     void setLabel(const QString &label);
     void switchKey(bool isLevel2, bool isAlternative, bool isLocked); 
 
-private:
+protected:
     virtual void paintLabel(QPainter *painter);
 
 private:

@@ -28,10 +28,12 @@
 #include "BackspaceKey.h"
 #include "BoardKey.h"
 #include "CapsKey.h"
+#include "DualKey.h"
 #include "EnterKey.h"
 #include "FuncKey.h"
 #include "ShiftKey.h"
 #include "StickyKey.h"
+#include "SwitchKey.h"
 #include "TabKey.h"
 
 #include <QFile>
@@ -40,9 +42,11 @@
 #include <QTimer>
 #include <QPainter>
 #include <plasma/theme.h>
+
 #include "Helpers.h"
 
 QChar Helpers::mapXtoUTF8[0xffff+1];
+int Helpers::keysymsPerKeycode;
 
 PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     : Plasma::Applet(parent)
@@ -247,6 +251,8 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_9), QString(i18nc("9 key on the keypad", "9")));
     else if(action == "KEYPAD0")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_0), QString(i18nc("0 key on the keypad", "0")));
+    else if(action == "SWITCH")
+        return new SwitchKey(point, size, Helpers::keysymToKeycode(XK_VoidSymbol), this);
     else
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString("Unkown"));
 }
@@ -311,9 +317,10 @@ void PlasmaboardWidget::deleteKeys()
 
     m_keys.clear();
     m_altKeys.clear();
-    m_altgrKeys.clear();;
+    m_altgrKeys.clear();
     m_capsKeys.clear();
-    m_ctlKeys.clear();;
+    m_ctlKeys.clear();
+    m_dualKeys.clear();
     m_shiftKeys.clear();
     m_superKeys.clear();
 }
@@ -402,7 +409,14 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
                 currentSize = QSize(currentWidth, currentHeight);
 
                 if(m_xmlReader.name() == "key"){
-                    m_alphaKeys << new AlphaNumKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt());
+                    if(m_xmlReader.attributes().hasAttribute("alt")){
+                        DualKey* key = new DualKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt(), m_xmlReader.attributes().value("alt").toString());
+                        m_alphaKeys << key;
+                        m_dualKeys << key;
+                    }
+                    else {
+                        m_alphaKeys << new AlphaNumKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt());
+                    }
                 }
                 else if(m_xmlReader.name() == "fkey"){
                     m_funcKeys << createFunctionKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString());
@@ -463,6 +477,8 @@ void PlasmaboardWidget::mouseMoveEvent ( QGraphicsSceneMouseEvent * event )
             }
         }
     }
+
+    Plasma::Applet::mouseMoveEvent(event);
 }
 
 void PlasmaboardWidget::mousePressEvent ( QGraphicsSceneMouseEvent * event )
@@ -474,6 +490,7 @@ void PlasmaboardWidget::mousePressEvent ( QGraphicsSceneMouseEvent * event )
             return;
         }
     }
+    Plasma::Applet::mousePressEvent(event);
 }
 
 void PlasmaboardWidget::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event )
@@ -485,6 +502,7 @@ void PlasmaboardWidget::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event )
             return;
         }
     }
+    Plasma::Applet::mouseReleaseEvent(event);
 }
 
 /*bool PlasmaboardWidget::event ( QEvent * event )
@@ -614,6 +632,13 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
         m_tooltip -> resize( key->size()*2 );
         m_tooltip -> show();
     }
+}
+
+void PlasmaboardWidget::switchAlternative(bool alt){
+    Q_FOREACH(DualKey* key, m_dualKeys){
+        key->setAlternative(alt);
+    }
+    relabelKeys();
 }
 
 void PlasmaboardWidget::themeChanged()

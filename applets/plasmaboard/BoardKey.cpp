@@ -60,13 +60,11 @@ QString BoardKey::label() const
 
 void BoardKey::paint(QPainter *painter)
 {
-    qDebug() << "Paint: " << m_rect;
     //painter->eraseRect(m_rect);
     //painter->fillRect(m_rect, QColor(Qt::transparent));
     painter->drawPixmap(m_rect.topLeft(), *m_pixmap);
     //painter->drawPixmap(m_rect.toRect(), *m_pixmap);
     //painter->drawRect(QRect(m_position, QPoint( frames[m_size].width() + m_position.x(), frames[m_size].height() + m_position.y() )));
-
 }
 
 QPoint BoardKey::position() const
@@ -117,6 +115,10 @@ void BoardKey::sendKeyPress()
 void BoardKey::sendKeyRelease()
 {
      Helpers::fakeKeyRelease(getKeycode());
+}
+
+void BoardKey::setKeycode(unsigned int keycode){
+    m_keycode = keycode;
 }
 
 void BoardKey::setPixmap(QPixmap *pixmap)

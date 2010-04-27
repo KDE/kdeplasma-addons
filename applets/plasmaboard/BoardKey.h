@@ -51,6 +51,7 @@ public:
       * Called to "unpress" the button
       */
     virtual void reset();
+    void setKeycode(unsigned int keycode);
     virtual void setPixmap(QPixmap *pixmap);
     QSize size() const;
     virtual void unpressed();
@@ -58,8 +59,8 @@ public:
 
 protected:    
     void sendKey();
-    void sendKeyPress();
-    void sendKeyRelease();
+    virtual void sendKeyPress();
+    virtual void sendKeyRelease();
     void setUpPainter(QPainter *painter) const;
 
 private:

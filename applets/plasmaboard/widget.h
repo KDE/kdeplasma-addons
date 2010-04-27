@@ -36,6 +36,7 @@
 
 class AlphaNumKey;
 class BoardKey;
+class DualKey;
 class FuncKey;
 class QTimer;
 class StickyKey;
@@ -83,6 +84,10 @@ public:
       */
     void reset();
 
+    /**
+      *
+      */
+    void switchAlternative(bool alt);
 
 protected:
     virtual void mouseMoveEvent ( QGraphicsSceneMouseEvent * event );
@@ -192,6 +197,7 @@ private:
     QList<StickyKey*> m_altgrKeys; // List of all AltGr keys on keyboard
     QList<FuncKey*> m_capsKeys; // List of all caps keys on keyboard
     QList<StickyKey*> m_ctlKeys; // List of Control keys on keyboard
+    QList<DualKey*> m_dualKeys; // List of dual keys on keyboard
     Plasma::DataEngine* m_engine; // key state data engine
     Plasma::FrameSvg* m_frame; // svg in normal state
     QHash<QSize, QPixmap*> m_frames; // cace of all pixmap sizes with normal state

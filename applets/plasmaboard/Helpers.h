@@ -21,6 +21,7 @@
 #define HELPERS_H
 
 #include <QChar>
+#include <QString>
 #include <qx11info_x11.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
@@ -28,7 +29,28 @@
 class Helpers {
 public:
 
-    static unsigned int keycodeToKeysym(const unsigned int &code, int &level){
+    static void changeKeycodeMapping(unsigned int code, QString &sym){
+        KeySym keysym = XStringToKeysym(sym.toAscii());
+        KeySym keysyms[keysymsPerKeycode];
+        for(int i = 0; i < keysymsPerKeycode; i++){
+            keysyms[i] = keysym;
+        }
+        XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode, keysyms, 1);
+        XSync(QX11Info::display(), False);
+    }
+
+    static void changeKeycodeMapping(unsigned int code, KeySym* keysyms){
+        XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode, keysyms, 1);
+        XSync(QX11Info::display(), False);
+    }
+
+    static KeySym *getKeycodeMapping(unsigned int code){
+        return XGetKeyboardMapping(QX11Info::display(), code, 1, &keysymsPerKeycode);
+    }
+
+
+
+    static unsigned int keycodeToKeysym(const unsigned int &code, int level){
 #ifdef Q_WS_X11
         return (unsigned int)XKeycodeToKeysym(QX11Info::display(), code, level);
 #else
@@ -58,6 +80,7 @@ public:
     }
 
     static QChar mapXtoUTF8[0xffff+1];
+    static int keysymsPerKeycode;
     // what follows is a long and ugly list of mappings
 
     static QChar mapToUnicode(const unsigned int &keysym){

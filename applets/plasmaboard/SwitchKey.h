@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Björn Ruberg <bjoern@ruberg-wegener.de>    *
+ *   Copyright (C) 2009 by Björn Ruberg <bjoern@ruberg-wegener.de>         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,41 +18,23 @@
  ***************************************************************************/
 
 
-#include "FuncKey.h"
+#ifndef SWITCHKEY_H
+#define SWITCHKEY_H
 
-#include <kpushbutton.h>
-#include <QPainter>
-#include <plasma/theme.h>
+#include "StickyKey.h"
+#include "widget.h"
 
-FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label):
-        AlphaNumKey(relativePosition, relativeSize, keycode) {
-    setLabel(label);
-}
-
-void FuncKey::paint(QPainter *painter){
-    AlphaNumKey::paint(painter);
-}
-
-void FuncKey::paintArrow(QPainter *painter){
-
-    int unit = qMin(size().width(), size().height()) / 8;
-    painter->drawLine(-1*unit, 0 , 3*unit, 0);
-
-	const QPointF points[3] = {
-         QPointF(-3*unit, 0),
-         QPointF(-1*unit, 1*unit),
-         QPointF(-1*unit, -1*unit),
-	 };
-
-	painter->drawConvexPolygon(points, 3);
-}
-
-void FuncKey::paintLabel(QPainter *painter)
+class SwitchKey : public StickyKey
 {
-    painter->save();
-    int fontSize = qMin(size().width(), size().height()) / 5 - (label().size()/6 + 1);
-    painter->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize ));
-    painter->drawText(rect(), Qt::AlignCenter, label());
-    
-    painter->restore();
-}
+public:
+    SwitchKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, PlasmaboardWidget* widget);
+
+protected:
+    virtual void sendKeyPress();
+    virtual void sendKeyRelease();
+
+private:
+    PlasmaboardWidget* m_keyboard;
+};
+
+#endif // SWITCHKEY_H
