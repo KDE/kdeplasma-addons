@@ -35,8 +35,6 @@ KdeCommitsService::KdeCommitsService(KdeCommitsEngine *engine)
 
 Plasma::ServiceJob *KdeCommitsService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
-    kDebug() << "Starting service operation" << operation;
-    
     if (operation == "allProjectsInfo")
         allProjectsInfo();
     else if (operation == "topActiveProjects")
