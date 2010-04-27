@@ -75,7 +75,7 @@ KdeObservatory::~KdeObservatory()
 
 void KdeObservatory::init()
 {
-    m_engine = dataEngine("kdecommits");
+    m_engine = dataEngine("kdeobservatory");
 
     m_service = m_engine->serviceForSource("");
     connect(m_service, SIGNAL(engineReady()), SLOT(safeInit()));
