@@ -1,5 +1,5 @@
 /*************************************************************************
- * Copyright 2010 Sandro Andrade sandroandrade@kde.org                   *
+ * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
  *                                                                       *
  * This program is free software; you can redistribute it and/or         *
  * modify it under the terms of the GNU General Public License as        *
@@ -18,29 +18,48 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  * ***********************************************************************/
 
-#ifndef KDECOMMITSENGINE_HEADER
-#define KDECOMMITSENGINE_HEADER
+#ifndef KDEOBSERVATORYSERVICE_HEADER
+#define KDEOBSERVATORYSERVICE_HEADER
 
-#include <Plasma/DataEngine>
+#include "kdeobservatoryengine.h"
 
-class QNetworkReply;
-class CommitCollector;
+#include <Plasma/Service>
 
-class KdeCommitsEngine : public Plasma::DataEngine
+class KJob;
+
+namespace Plasma
+{
+    class ServiceJob;
+}
+
+class KdeObservatoryService : public Plasma::Service
 {
     Q_OBJECT
 public:
-    KdeCommitsEngine(QObject *parent, const QVariantList &args);
+    KdeObservatoryService(KdeObservatoryEngine *engine);
+    Plasma::ServiceJob *createJob(const QString &operation, QMap<QString, QVariant> &parameters);
 
-    void init();
-
-    bool sourceRequestEvent (const QString &source);
-    Plasma::Service *serviceForSource(const QString &source);
-
-    friend class KdeCommitsService;
+protected:
+    void allProjectsInfo();
+    void topActiveProjects();
+    void topProjectDevelopers(const QString &project);
+    void commitHistory(const QString &project);
 
 Q_SIGNALS:
     void engineReady();
+    void engineError();
+
+protected slots:
+    void result(KJob *job);
+
+private:
+    KdeObservatoryEngine *m_engine;
 };
+
+typedef QMultiMap<int, QString> RankValueMap;
+Q_DECLARE_METATYPE(RankValueMap)
+
+typedef QList< QPair<QString, int> > DateCommitList;
+Q_DECLARE_METATYPE(DateCommitList)
 
 #endif

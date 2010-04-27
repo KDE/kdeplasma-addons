@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  * ***********************************************************************/
 
-#include "kdecommitsservice.h"
+#include "kdeobservatoryservice.h"
 
 #include <KUrl>
 #include <KIO/Job>
@@ -26,14 +26,14 @@
 
 #include "kdepresets.h"
 
-KdeCommitsService::KdeCommitsService(KdeCommitsEngine *engine)
+KdeObservatoryService::KdeObservatoryService(KdeObservatoryEngine *engine)
 : Plasma::Service()
 {
-    setName("kdecommits");
+    setName("kdeobservatory");
     m_engine = engine;
 }
 
-Plasma::ServiceJob *KdeCommitsService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
+Plasma::ServiceJob *KdeObservatoryService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
     if (operation == "allProjectsInfo")
         allProjectsInfo();
@@ -47,31 +47,31 @@ Plasma::ServiceJob *KdeCommitsService::createJob(const QString &operation, QMap<
     return 0;
 }
 
-void KdeCommitsService::allProjectsInfo()
+void KdeObservatoryService::allProjectsInfo()
 {
     KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=allProjectsInfo"), KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
-void KdeCommitsService::topActiveProjects()
+void KdeObservatoryService::topActiveProjects()
 {
     KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topActiveProjects&p0=0"), KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
-void KdeCommitsService::topProjectDevelopers(const QString &project)
+void KdeObservatoryService::topProjectDevelopers(const QString &project)
 {
     KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topProjectDevelopers&p0=" + project + "&p1=0"), KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
-void KdeCommitsService::commitHistory(const QString &project)
+void KdeObservatoryService::commitHistory(const QString &project)
 {
     KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=commitHistory&p0=" + project + "&p1=0"), KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
-void KdeCommitsService::result(KJob *job)
+void KdeObservatoryService::result(KJob *job)
 {
     if (job->error())
     {
@@ -150,4 +150,4 @@ void KdeCommitsService::result(KJob *job)
     }
 }
 
-#include "kdecommitsservice.moc"
+#include "kdeobservatoryservice.moc"

@@ -18,19 +18,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  * ***********************************************************************/
 
-#include "kdecommitsengine.h"
+#include "kdeobservatoryengine.h"
 
 #include "kdepresets.h"
-#include "kdecommitsservice.h"
+#include "kdeobservatoryservice.h"
 
-K_EXPORT_PLASMA_DATAENGINE(kdecommits, KdeCommitsEngine)
+K_EXPORT_PLASMA_DATAENGINE(kdeobservatory, KdeObservatoryEngine)
 
-KdeCommitsEngine::KdeCommitsEngine(QObject *parent, const QVariantList &args)
+KdeObservatoryEngine::KdeObservatoryEngine(QObject *parent, const QVariantList &args)
 : Plasma::DataEngine(parent, args)
 {
 }
 
-void KdeCommitsEngine::init()
+void KdeObservatoryEngine::init()
 {
     setData("topActiveProjects", "");
     setData("topProjectDevelopers", "");
@@ -38,7 +38,7 @@ void KdeCommitsEngine::init()
     setData("krazyReport", "");
 }
 
-bool KdeCommitsEngine::sourceRequestEvent (const QString &source)
+bool KdeObservatoryEngine::sourceRequestEvent (const QString &source)
 {
     if (source == "allProjectsInfo")
     {
@@ -56,12 +56,12 @@ bool KdeCommitsEngine::sourceRequestEvent (const QString &source)
     return false;
 }
 
-Plasma::Service *KdeCommitsEngine::serviceForSource(const QString &source)
+Plasma::Service *KdeObservatoryEngine::serviceForSource(const QString &source)
 {
     Q_UNUSED(source);
-    KdeCommitsService *service = new KdeCommitsService(this);
+    KdeObservatoryService *service = new KdeObservatoryService(this);
     service->setParent(this);
     return service;
 }
 
-#include "kdecommitsengine.moc"
+#include "kdeobservatoryengine.moc"

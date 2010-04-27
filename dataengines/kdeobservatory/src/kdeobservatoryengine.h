@@ -1,5 +1,5 @@
 /*************************************************************************
- * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
+ * Copyright 2010 Sandro Andrade sandroandrade@kde.org                   *
  *                                                                       *
  * This program is free software; you can redistribute it and/or         *
  * modify it under the terms of the GNU General Public License as        *
@@ -18,48 +18,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  * ***********************************************************************/
 
-#ifndef KDECOMMITSSERVICE_HEADER
-#define KDECOMMITSSERVICE_HEADER
+#ifndef KDEOBSERVATORYENGINE_HEADER
+#define KDEOBSERVATORYENGINE_HEADER
 
-#include "kdecommitsengine.h"
+#include <Plasma/DataEngine>
 
-#include <Plasma/Service>
-
-class KJob;
-
-namespace Plasma
-{
-    class ServiceJob;
-}
-
-class KdeCommitsService : public Plasma::Service
+class KdeObservatoryEngine : public Plasma::DataEngine
 {
     Q_OBJECT
 public:
-    KdeCommitsService(KdeCommitsEngine *engine);
-    Plasma::ServiceJob *createJob(const QString &operation, QMap<QString, QVariant> &parameters);
+    KdeObservatoryEngine(QObject *parent, const QVariantList &args);
 
-protected:
-    void allProjectsInfo();
-    void topActiveProjects();
-    void topProjectDevelopers(const QString &project);
-    void commitHistory(const QString &project);
+    void init();
+
+    bool sourceRequestEvent (const QString &source);
+    Plasma::Service *serviceForSource(const QString &source);
+
+    friend class KdeObservatoryService;
 
 Q_SIGNALS:
     void engineReady();
-    void engineError();
-
-protected slots:
-    void result(KJob *job);
-
-private:
-    KdeCommitsEngine      *m_engine;
 };
-
-typedef QMultiMap<int, QString> RankValueMap;
-Q_DECLARE_METATYPE(RankValueMap)
-
-typedef QList< QPair<QString, int> > DateCommitList;
-Q_DECLARE_METATYPE(DateCommitList)
 
 #endif
