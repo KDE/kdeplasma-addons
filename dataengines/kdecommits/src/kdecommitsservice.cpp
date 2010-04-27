@@ -76,7 +76,7 @@ void KdeCommitsService::result(KJob *job)
         KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>(job);
         
         QString data (storedJob->data());
-        QString url = storedJob->url().prettyUrl();
+        QString url = QUrl::fromPercentEncoding(storedJob->url().prettyUrl().toUtf8());
         QString mimeType = storedJob->mimetype();
 
         if (!data.isEmpty() && mimeType.contains("text/plain"))
@@ -113,13 +113,13 @@ void KdeCommitsService::result(KJob *job)
                     if (!row.isEmpty())
                     {
                         QStringList list = row.split(';');
-                        kDebug() << "list" << list;
                         QString commits = list.at(4);
                         projectTopDevelopers.insert(commits.remove('\r').toInt(), list.at(0));
                     }
                 }
 
-                m_engine->setData("topProjectDevelopers", regexp.cap(1), QVariant::fromValue<RankValueMap>(projectTopDevelopers));
+                m_engine->setData("topProjectDevelopers", "project", project);
+                m_engine->setData("topProjectDevelopers", "topProjectDevelopers", QVariant::fromValue<RankValueMap>(projectTopDevelopers));
             }
         }
         else
