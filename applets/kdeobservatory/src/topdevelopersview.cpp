@@ -54,9 +54,7 @@ void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
     if (project.isEmpty())
         return;
     
-    kDebug() << "Project" << project;
     QMultiMap<int, QString> topProjectDevelopers = data["topProjectDevelopers"].value< QMultiMap<int, QString> >();
-    kDebug() << "#developers" << topProjectDevelopers.count();
 
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 
