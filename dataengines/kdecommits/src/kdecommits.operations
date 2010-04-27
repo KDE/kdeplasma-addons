@@ -10,4 +10,9 @@
             <label>The project from which to acquire developers</label>
         </entry>
     </group>
+    <group name="commitHistory">
+        <entry name="project" type="String">
+            <label>The project from which to acquire commits</label>
+        </entry>
+    </group>
 </kcfg>

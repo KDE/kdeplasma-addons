@@ -43,6 +43,7 @@ protected:
     void allProjectsInfo();
     void topActiveProjects();
     void topProjectDevelopers(const QString &project);
+    void commitHistory(const QString &project);
 
 Q_SIGNALS:
     void engineReady();
@@ -57,5 +58,8 @@ private:
 
 typedef QMultiMap<int, QString> RankValueMap;
 Q_DECLARE_METATYPE(RankValueMap)
+
+typedef QList< QPair<QString, int> > DateCommitList;
+Q_DECLARE_METATYPE(DateCommitList)
 
 #endif

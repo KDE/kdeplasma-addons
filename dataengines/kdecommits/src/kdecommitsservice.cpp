@@ -41,6 +41,8 @@ Plasma::ServiceJob *KdeCommitsService::createJob(const QString &operation, QMap<
         topActiveProjects();
     else if (operation == "topProjectDevelopers")
         topProjectDevelopers(parameters["project"].toString());
+    else if (operation == "commitHistory")
+        topProjectDevelopers(parameters["project"].toString());
 
     return 0;
 }
@@ -63,6 +65,12 @@ void KdeCommitsService::topProjectDevelopers(const QString &project)
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
+void KdeCommitsService::commitHistory(const QString &project)
+{
+    KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=commitHistory&p0=" + project + "&p1=0"), KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+}
+
 void KdeCommitsService::result(KJob *job)
 {
     if (job->error())
@@ -79,6 +87,11 @@ void KdeCommitsService::result(KJob *job)
 
         if (!data.isEmpty() && mimeType.contains("text/plain"))
         {
+            QString project = "";
+            QRegExp regexp("\\&p0=(.*)\\&p1");
+            if (regexp.indexIn(url, 0) != -1)
+                QString project = regexp.cap(1);
+            
             if (url.contains("op=allProjectsInfo"))
             {
                 KdePresets::init(data);
@@ -101,10 +114,6 @@ void KdeCommitsService::result(KJob *job)
             }
             else if (url.contains("op=topProjectDevelopers"))
             {
-                QRegExp regexp("\\&p0=(.*)\\&p1");
-                regexp.indexIn(url, 0);
-                QString project = regexp.cap(1);
-                
                 RankValueMap projectTopDevelopers;
                 foreach (QString row, data.split('\n'))
                 {
@@ -118,6 +127,22 @@ void KdeCommitsService::result(KJob *job)
 
                 m_engine->setData("topProjectDevelopers", "project", project);
                 m_engine->setData("topProjectDevelopers", "topProjectDevelopers", QVariant::fromValue<RankValueMap>(projectTopDevelopers));
+            }
+            else if (url.contains("op=commitHistory"))
+            {
+                DateCommitList commitHistory;
+                foreach (QString row, data.split('\n'))
+                {
+                    if (!row.isEmpty())
+                    {
+                        QStringList list = row.split(';');
+                        QString commits = list.at(1);
+                        commitHistory.append(QPair<QString, int>(list.at(0), commits.remove('\r').toInt()));
+                    }
+                }
+
+                m_engine->setData("commitHistory", "project", project);
+                m_engine->setData("commitHistory", "commitHistory", QVariant::fromValue<DateCommitList>(commitHistory));
             }
         }
         else

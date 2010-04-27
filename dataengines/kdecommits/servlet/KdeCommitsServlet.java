@@ -8,10 +8,10 @@ public class KdeCommitsServlet extends HttpServlet
 {
     public void init()
     {
-        String dbHost = "localhost";
-        String dbName = "sandros_kde";
-        String username = "sandros_kdeob";
-        String password = "oBse_4$s";
+        String dbHost = "";
+        String dbName = "";
+        String username = "";
+        String password = "";
 
         try
         {
@@ -113,6 +113,20 @@ public class KdeCommitsServlet extends HttpServlet
             query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from projects p, commits c, developers d where INSTR(c.path, p.commit_subject) > 0 and d.svn_account = c.svn_account and p.name = '" + project + "' group by d.full_name, p.name order by count(*) desc";
         else
             query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from commits c, developers d where d.svn_account = c.svn_account group by d.full_name order by count(*) desc";
+        if (!n.equals("0"))
+            query = query + " limit 0 , " + n;
+        Statement stmt = conn.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        printResultSet(out, res);
+    }
+
+    public void commitHistory(PrintWriter out, String project, String n) throws SQLException
+    {
+        String query;
+        if (!project.equals(""))
+            query = "select date(c.date_time) date, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 and p.name = '" + project + "' group by date order by date desc";
+        else
+            query = "select date(c.date_time) date, count(*) from commits c group by date order by date desc";
         if (!n.equals("0"))
             query = query + " limit 0 , " + n;
         Statement stmt = conn.createStatement();
