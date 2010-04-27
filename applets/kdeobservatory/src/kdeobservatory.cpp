@@ -175,6 +175,8 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
         m_viewProviders[i18n("Top Active Projects")]->updateViews(data);
     else if (sourceName == "topProjectDevelopers")
         m_viewProviders[i18n("Top Developers")]->updateViews(data);
+    else if (sourceName == "commitHistory")
+        m_viewProviders[i18n("Commit History")]->updateViews(data);
 
     setBusy(false);
     m_collectorProgress->hide();
@@ -388,14 +390,26 @@ void KdeObservatory::updateSources()
 {
     m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
 
-    QHashIterator<QString, bool> i(m_topDevelopersViewProjects);
-    while (i.hasNext())
+    QHashIterator<QString, bool> i1(m_topDevelopersViewProjects);
+    while (i1.hasNext())
     {
-        i.next();
-        if (i.value())
+        i1.next();
+        if (i1.value())
         {
             KConfigGroup ops = m_service->operationDescription("topProjectDevelopers");
-            ops.writeEntry("project", i.key());
+            ops.writeEntry("project", i1.key());
+            m_service->startOperationCall(ops);
+        }
+    }
+
+    QHashIterator<QString, bool> i2(m_commitHistoryViewProjects);
+    while (i2.hasNext())
+    {
+        i2.next();
+        if (i2.value())
+        {
+            KConfigGroup ops = m_service->operationDescription("commitHistory");
+            ops.writeEntry("project", i2.key());
             m_service->startOperationCall(ops);
         }
     }

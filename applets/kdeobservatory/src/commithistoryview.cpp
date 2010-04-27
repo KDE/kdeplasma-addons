@@ -59,88 +59,80 @@ CommitHistoryView::~CommitHistoryView()
 
 void CommitHistoryView::createViews()
 {
+    deleteViews();
+    QHashIterator<QString, bool> i(m_commitHistoryViewProjects);
+    while (i.hasNext())
+    {
+        i.next();
+        if (i.value())
+            createView(i18n("Commit History") + " - " + i.key());
+    }
 }
 
 void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
 {
-    /*
-    deleteViews();
+    QString project = data["project"].toString();
+    if (project.isEmpty())
+        return;
 
-    QMap< QString, QList< QPair<QString, int> > > commitHistory;
-    QHashIterator<QString, bool> i1(m_commitHistoryViewProjects);
-    while (i1.hasNext())
+    const DateCommitList &projectCommits = data["commitHistory"].value<DateCommitList>();
+
+    if (projectCommits.count() > 0)
     {
-        i1.next();
-        if (i1.value())
-            commitHistory.insert(i1.key(), KdeObservatoryDatabase::self()->commitHistory(m_projects[i1.key()].commitSubject));
-    }
+        int maxCommit = 0;
 
-    QMapIterator< QString, QList< QPair<QString, int> > > i2(commitHistory);
-    while (i2.hasNext())
-    {
-        i2.next();
+        QString tmpStr = projectCommits.at(0).first;
+        qlonglong minDate = tmpStr.remove('-').toLongLong();
+        double x[30];
+        double y[30];
 
-        QString project = i2.key();
-        const QList< QPair<QString, int> > &projectCommits = i2.value();
-
-        if (projectCommits.count() > 0)
+        int count = projectCommits.count();
+        int j;
+        for (j = 0; j < count; ++j)
         {
-            int maxCommit = 0;
-
-            QString tmpStr = projectCommits.at(0).first;
-            qlonglong minDate = tmpStr.remove('-').toLongLong();
-            double x[30];
-            double y[30];
-
-            int count = projectCommits.count();
-            int j;
-            for (j = 0; j < count; ++j)
-            {
-                const QPair<QString, int> &pair = projectCommits.at(j);
-                tmpStr = pair.first;
-                x[j] = j;
-                y[j] = pair.second;
-                if (y[j] > maxCommit)
-                    maxCommit = y[j];
-            }
-
-            QGraphicsWidget *container = createView(i18n("Commit History") + " - " + project);
-            QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(container);
-            proxy->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
-
-            QwtPlot *plot = new QwtPlot;
-            plot->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-            plot->setAttribute(Qt::WA_TranslucentBackground, true);
-
-            plot->setAxisScale(QwtPlot::yLeft, 0, qRound((maxCommit/5.)+0.5)*5, qRound((maxCommit/5.)+0.5));
-
-            plot->setAxisScaleDraw(QwtPlot::xBottom, new TimeScaleDraw(QDate::fromString(QString::number(minDate), "yyyyMMdd")));
-
-            plot->setAxisFont(QwtPlot::yLeft, KGlobalSettings::smallestReadableFont());
-            plot->setAxisFont(QwtPlot::xBottom, KGlobalSettings::smallestReadableFont());
-
-            plot->setAxisLabelRotation(QwtPlot::xBottom, -15);
-
-            plot->setCanvasBackground(QColor(0, 0, 140));
-
-            QwtPlotCurve *curve = new QwtPlotCurve;
-            curve->setData(x, y, j);
-
-            curve->attach(plot);
-            QPen pen = curve->pen();
-            pen.setColor(QColor(255, 255, 0));
-            curve->setPen(pen);
-            plot->replot();
-
-            QwtPlotGrid *grid = new QwtPlotGrid;
-            grid->enableXMin(true);
-            grid->setMajPen(QPen(Qt::white, 0, Qt::DotLine));
-            grid->setMinPen(QPen(Qt::NoPen));
-            grid->attach(plot);
-
-            proxy->setWidget(plot);
-            plot->setGeometry(0, 0, container->geometry().width(), container->geometry().height());
+            const QPair<QString, int> &pair = projectCommits.at(j);
+            tmpStr = pair.first;
+            x[j] = j;
+            y[j] = pair.second;
+            if (y[j] > maxCommit)
+                maxCommit = y[j];
         }
+
+        QGraphicsWidget *container = containerForView(i18n("Commit History") + " - " + project);
+        QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(container);
+        proxy->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
+
+        QwtPlot *plot = new QwtPlot;
+        plot->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        plot->setAttribute(Qt::WA_TranslucentBackground, true);
+
+        plot->setAxisScale(QwtPlot::yLeft, 0, qRound((maxCommit/5.)+0.5)*5, qRound((maxCommit/5.)+0.5));
+
+        plot->setAxisScaleDraw(QwtPlot::xBottom, new TimeScaleDraw(QDate::fromString(QString::number(minDate), "yyyyMMdd")));
+
+        plot->setAxisFont(QwtPlot::yLeft, KGlobalSettings::smallestReadableFont());
+        plot->setAxisFont(QwtPlot::xBottom, KGlobalSettings::smallestReadableFont());
+
+        plot->setAxisLabelRotation(QwtPlot::xBottom, -15);
+
+        plot->setCanvasBackground(QColor(0, 0, 140));
+
+        QwtPlotCurve *curve = new QwtPlotCurve;
+        curve->setData(x, y, j);
+
+        curve->attach(plot);
+        QPen pen = curve->pen();
+        pen.setColor(QColor(255, 255, 0));
+        curve->setPen(pen);
+        plot->replot();
+
+        QwtPlotGrid *grid = new QwtPlotGrid;
+        grid->enableXMin(true);
+        grid->setMajPen(QPen(Qt::white, 0, Qt::DotLine));
+        grid->setMinPen(QPen(Qt::NoPen));
+        grid->attach(plot);
+
+        proxy->setWidget(plot);
+        plot->setGeometry(0, 0, container->geometry().width(), container->geometry().height());
     }
-    */
 }

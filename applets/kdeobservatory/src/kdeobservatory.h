@@ -144,6 +144,10 @@ private:
 };
 
 typedef QMultiMap<int, QString> RankValueMap;
+typedef QMapIterator<int, QString> RankValueMapIterator;
 Q_DECLARE_METATYPE(RankValueMap)
+
+typedef QList< QPair<QString, int> > DateCommitList;
+Q_DECLARE_METATYPE(DateCommitList)
 
 #endif

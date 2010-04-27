@@ -54,7 +54,7 @@ void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
     if (project.isEmpty())
         return;
     
-    QMultiMap<int, QString> topProjectDevelopers = data["topProjectDevelopers"].value< QMultiMap<int, QString> >();
+    RankValueMap topProjectDevelopers = data["topProjectDevelopers"].value<RankValueMap>();
 
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 
@@ -64,7 +64,7 @@ void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
     qreal width = container->geometry().width();
     qreal step = 22;
 
-    QMapIterator<int, QString> i(topProjectDevelopers);
+    RankValueMapIterator i(topProjectDevelopers);
     i.toBack();
     int j = 0;
     while (i.hasPrevious())
