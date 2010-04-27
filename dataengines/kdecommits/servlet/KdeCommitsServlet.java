@@ -17,16 +17,15 @@ public class KdeCommitsServlet extends HttpServlet
         {
             Class.forName("com.mysql.jdbc.Driver");
         }
-        catch(ClassNotFoundException msg)
+        catch(ClassNotFoundException e)
         {
-            System.out.println("Error loading driver:" + msg.getMessage());
+            System.out.println("Error loading driver:" + e.getMessage());
         }
 
         try
         {
             String url ="jdbc:mysql://" + dbHost + ":3306/" + dbName;
             conn = DriverManager.getConnection(url, username, password);
-            stmt = conn.createStatement();
         }
         catch(SQLException e)
         {
@@ -40,25 +39,38 @@ public class KdeCommitsServlet extends HttpServlet
         Class[] paramTypes = null;
         Object[] paramValues = null;
 
+        PrintWriter out = null;
         try
         {
             out = response.getWriter();
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error acquiring writer:" + e.getMessage());
+        }
+
+        try
+        {
 
             if (request.getParameterMap().size() == 0)
             {
+                response.setContentType("text/html");
                 out.println("No operation supplied !");
                 return;
             }
 
             response.setContentType("text/plain");
             operation = request.getParameter("op");
-            paramTypes = new Class[request.getParameterMap().size()-1];
+            paramTypes = new Class[request.getParameterMap().size()];
             paramValues = new Object[paramTypes.length];
 
-            for (int i = 0; i < paramValues.length; ++i)
+            paramTypes[0] = PrintWriter.class;
+            paramValues[0] = out;
+
+            for (int i = 0; i < paramValues.length - 1; ++i)
             {
-                paramTypes[i] = String.class;
-                paramValues[i] = request.getParameter("p" + i);
+                paramTypes[i+1] = String.class;
+                paramValues[i+1] = request.getParameter("p" + i);
             }
 
             Method method = getClass().getDeclaredMethod(operation, paramTypes);
@@ -76,23 +88,25 @@ public class KdeCommitsServlet extends HttpServlet
         }
     }
 
-    public void allProjectsInfo() throws SQLException
+    public void allProjectsInfo(PrintWriter out) throws SQLException
     {
         String query = "select name, commit_subject, krazy_report, krazy_identifier, icon, add_in_view from projects";
+        Statement stmt = conn.createStatement();
         ResultSet res = stmt.executeQuery(query);
-        printResultSet(res);
+        printResultSet(out, res);
     }
 
-    public void topActiveProjects(String n) throws SQLException
+    public void topActiveProjects(PrintWriter out, String n) throws SQLException
     {
         String query = "select p.name, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 group by p.commit_subject order by count(*) desc";
         if (!n.equals("0"))
             query = query + " limit 0 , " + n;
+        Statement stmt = conn.createStatement();
         ResultSet res = stmt.executeQuery(query);
-        printResultSet(res);
+        printResultSet(out, res);
     }
 
-    public void topProjectDevelopers(String project, String n) throws SQLException
+    public void topProjectDevelopers(PrintWriter out, String project, String n) throws SQLException
     {
         String query;
         if (!project.equals(""))
@@ -101,11 +115,12 @@ public class KdeCommitsServlet extends HttpServlet
             query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from commits c, developers d where d.svn_account = c.svn_account group by d.full_name order by count(*) desc";
         if (!n.equals("0"))
             query = query + " limit 0 , " + n;
+        Statement stmt = conn.createStatement();
         ResultSet res = stmt.executeQuery(query);
-        printResultSet(res);
+        printResultSet(out, res);
     }
 
-    private void printResultSet(ResultSet res) throws SQLException
+    private void printResultSet(PrintWriter out, ResultSet res) throws SQLException
     {
         int count = res.getMetaData().getColumnCount();
         while(res.next())
@@ -116,7 +131,5 @@ public class KdeCommitsServlet extends HttpServlet
         }
     }
 
-    private PrintWriter out;
     private Connection conn;
-    private Statement stmt;
 }

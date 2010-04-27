@@ -22,6 +22,7 @@ kde4_add_plugin(plasma_engine_kdecommits ${kdecommits_engine_SRCS})
 target_link_libraries(plasma_engine_kdecommits
                       ${QT_QTNETWORK_LIBRARY}
                       ${KDE4_KDECORE_LIBS}
+                      ${KDE4_KIO_LIBS}
                       ${KDE4_PLASMA_LIBS})
  
 install(TARGETS plasma_engine_kdecommits

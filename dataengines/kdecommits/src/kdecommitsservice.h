@@ -23,11 +23,9 @@
 
 #include "kdecommitsengine.h"
 
-#include <QMutex>
-
 #include <Plasma/Service>
 
-class QNetworkAccessManager;
+class KJob;
 
 namespace Plasma
 {
@@ -51,12 +49,10 @@ Q_SIGNALS:
     void engineError();
 
 protected slots:
-    void finished(QNetworkReply *reply);
+    void result(KJob *job);
 
 private:
     KdeCommitsEngine      *m_engine;
-    QNetworkAccessManager *m_manager;
-    mutable QMutex         m_replyMutex;
 };
 
 typedef QMultiMap<int, QString> RankValueMap;
