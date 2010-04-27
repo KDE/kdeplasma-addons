@@ -162,8 +162,6 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
 void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    kDebug() << "Data updated" << sourceName;
-
     m_synchronizationTimer->stop();
     m_right->setEnabled(false);
     m_left->setEnabled(false);
@@ -175,6 +173,8 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
 
     if (sourceName == "topActiveProjects")
         m_viewProviders[i18n("Top Active Projects")]->updateViews(data);
+    else if (sourceName == "topProjectDevelopers")
+        m_viewProviders[i18n("Top Developers")]->updateViews(data);
 
     setBusy(false);
     m_collectorProgress->hide();
@@ -387,7 +387,7 @@ void KdeObservatory::switchViews(int delta)
 void KdeObservatory::updateSources()
 {
     m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
-/*
+
     QHashIterator<QString, bool> i(m_topDevelopersViewProjects);
     while (i.hasNext())
     {
@@ -399,7 +399,6 @@ void KdeObservatory::updateSources()
             m_service->startOperationCall(ops);
         }
     }
-    */
 }
 
 void KdeObservatory::createViews()

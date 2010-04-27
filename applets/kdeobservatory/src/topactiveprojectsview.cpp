@@ -63,7 +63,6 @@ void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
     {
         i2.previous();
         QString project = i2.value();
-        kDebug() << "m_topActiveProjectsViewProjects[" + project + "]" << m_topActiveProjectsViewProjects[project];
         if (m_topActiveProjectsViewProjects[project])
         {
             int rank = i2.key();
