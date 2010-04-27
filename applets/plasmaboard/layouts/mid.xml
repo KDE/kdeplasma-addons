@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keyboard title="MID" spacing="20" description="Keyboard for very small screens like on MIDs or phones"> 
+<row height="2500" width="970">
+  <key code="24" alt="1"></key>
+  <key code="25" alt="2"></key>
+  <key code="26" alt="3"></key>
+  <key code="27" alt="4"></key>
+  <key code="28" alt="5"></key>
+  <key code="29" alt="6"></key>
+  <key code="30" alt="7"></key>
+  <key code="31" alt="8"></key>
+  <key code="32" alt="9"></key>
+  <key code="33" alt="0"></key>
+</row>
+<row height="2500" width="970">
+  <fkey action="SWITCH" width="1100"></fkey>
+  <key code="38" alt="period"  altshifted="less"></key>
+  <key code="39" alt="dead_circumflex"  altshifted="dead_acute"></key>
+  <key code="40" alt="colon"  altshifted="greater"></key>
+  <key code="41" alt="exclam"  altshifted="dead_tilde"></key>
+  <key code="42" alt="quotedbl"></key>
+  <key code="43" alt="numbersign"></key>
+  <key code="44" alt="dollar"></key>
+  <key code="45" alt="percent"></key>
+  <key code="46" alt="ampersand"></key>
+</row>
+<row height="2500" width="970">
+  <fkey action="SHIFT" width="1400"></fkey>
+  <key code="52" alt="parenright" altshifted="bracketright"></key>
+  <key code="53" alt="asterisk"></key>
+  <key code="54" alt="plus"></key>
+  <key code="55" alt="slash"></key>
+  <key code="56" alt="equal"></key>
+  <key code="57" alt="comma"></key>
+  <key code="58" alt="semicolon"></key>
+  <fkey action="BACKSPACE" width="1650"></fkey>
+</row>
+<row height="2500" width="800">
+  <key code="34" alt="at" ></key>
+   <key code="47" alt="apostrophe" altshifted="dead_grave"></key>
+  <fkey action="SPACE" width="4800"></fkey>
+  <key code="20" alt="minus" altshifted="underscore"></key>
+  <key code="48" alt="parenleft" altshifted="bracketleft"></key>  
+  <fkey action="ENTER" width="1950"></fkey>
+</row>
+</keyboard>
+
+<!-- 
+  <key code="35" ></key> 
+  <key code="20"></key>
+  <key code="51" alt="at"></key> 
+  <key code="61" ></key>
+  <key code="59" alt=""></key>
+  <key code="60" ></key>
+-!>

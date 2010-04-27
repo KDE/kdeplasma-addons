@@ -44,11 +44,10 @@
 </row>
 <row height="2500" width="800">
   <key code="35" ></key> 
-  <!--<key code="94"></key>-->
   <key code="61" ></key>
   <fkey action="SPACE" width="4800"></fkey>
   <key code="20"></key>
-  <key code="51" ></key> 
+  <key code="51" alt="at"></key> 
   <fkey action="ENTER" width="1950"></fkey>
 </row>
 </keyboard>
