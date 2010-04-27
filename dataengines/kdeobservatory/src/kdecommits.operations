@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+<kcfg>
+    <group name="allProjectsInfo">
+    </group>
+    <group name="topActiveProjects">
+    </group>
+    <group name="topProjectDevelopers">
+        <entry name="project" type="String">
+            <label>The project from which to acquire developers</label>
+        </entry>
+    </group>
+    <group name="commitHistory">
+        <entry name="project" type="String">
+            <label>The project from which to acquire commits</label>
+        </entry>
+    </group>
+</kcfg>

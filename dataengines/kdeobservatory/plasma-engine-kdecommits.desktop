@@ -1,0 +1,27 @@
+[Desktop Entry]
+Name=KDE Commits Engine
+Name[pt]=Motor de Envios de Código para o KDE
+Name[pt_BR]=Mecanismo de envio (commit) do KDE
+Name[sv]=KDE-incheckningsgränssnitt
+Name[uk]=Рушій внесків до KDE
+Name[x-test]=xxKDE Commits Enginexx
+Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
+Comment[pt]=Um motor de dados para adquirir os dados consolidados dos envios de SVN do KDE
+Comment[pt_BR]=Um mecanismo de dados para adquirir dados consolidados sobre os envios (commits) do SVN do KDE
+Comment[sv]=Ett datagränssnitt för att hämta sammanställd data om incheckningar i KDE:s SVN-arkiv
+Comment[uk]=Рушій даних для отримання загальних даних щодо внесків до SVN KDE
+Comment[x-test]=xxA Data Engine for acquiring consolidated data about KDE SVN Commitsxx
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/DataEngine
+X-KDE-Library=plasma_engine_kdecommits
+X-Plasma-EngineName=kdecommits
+X-KDE-PluginInfo-Author=Sandro Andrade
+X-KDE-PluginInfo-Email=sandroandrade@kde.org
+X-KDE-PluginInfo-Name=kdecommits
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Development Tools
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
