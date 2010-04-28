@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=KDE Observatory Data Engine
+Name[x-test]=xxKDE Observatory Data Enginexx
 Comment=A Data Engine for acquiring consolidated data about KDE projects
+Comment[x-test]=xxA Data Engine for acquiring consolidated data about KDE projectsxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/DataEngine
