@@ -27,6 +27,8 @@
 PotdEngine::PotdEngine( QObject* parent, const QVariantList& args )
     : Plasma::DataEngine( parent, args )
 {
+    setMinimumPollingInterval(1000);
+    setPollingInterval( 2*1000 );// 2 seconds
 }
 
 PotdEngine::~PotdEngine()
@@ -82,7 +84,6 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
 
     connect( provider, SIGNAL( finished( PotdProvider* ) ), this, SLOT( finished( PotdProvider* ) ) );
     connect( provider, SIGNAL( error( PotdProvider* ) ), this, SLOT( error( PotdProvider* ) ) );
-
     return true;
 }
 
