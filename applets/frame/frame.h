@@ -75,6 +75,7 @@ private Q_SLOTS:
     void scalePictureAndUpdate();
     void imageScaled(const QImage &img);
     void reloadImage();
+    void checkDayChanged();
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
@@ -117,10 +118,13 @@ private:
     bool m_random;
     bool m_recursiveSlideShow;
     SlideShow* m_mySlideShow;
-    /// Autoupdate
+    /// Auto update
     int m_autoUpdateIntervall;
     bool m_doAutoUpdate;
     QTimer* m_autoUpdateTimer;
+    /// Day Change for PoTD
+    QTimer *m_dateChangedTimer;
+    QDate m_currentDay;
 
     QPixmap m_pixmap;
     QImage m_scaledImage;
