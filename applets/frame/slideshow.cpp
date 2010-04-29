@@ -203,7 +203,7 @@ void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data 
         m_picture->setMessage(i18n("No Picture from this Provider."));
         return;
     }
-
+    
     m_image = data[name].value<QImage>();
     //Compatibility with old dataengines
     if (m_image.isNull()) {
@@ -212,6 +212,7 @@ void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data 
             m_image = tmpPixmap.toImage();
         }
     }
+    
     m_picture->setMessage(QString());
     emit pictureUpdated();
 }

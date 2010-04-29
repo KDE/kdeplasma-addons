@@ -75,6 +75,7 @@ void Picture::setPicture(const KUrl &currentUrl)
     m_currentUrl = currentUrl;
     ImageLoader *loader;
     kDebug() << currentUrl;
+    
     if (!m_currentUrl.isEmpty() && !m_currentUrl.isLocalFile()) {
         kDebug() << "Not a local file, downloading" << currentUrl;
         m_job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::DefaultFlags );
@@ -125,6 +126,7 @@ void Picture::slotFinished( KJob *job )
     QString filename = m_currentUrl.fileName();
     QString path = KStandardDirs::locateLocal("cache", "plasma-frame/" +  m_currentUrl.fileName());
     QImage image;
+    
     if (job->error()) {
         kDebug() << "Error loading image:" << job->errorString();
         image = defaultPicture(i18n("Error loading image: %1", job->errorString()));
@@ -136,6 +138,7 @@ void Picture::slotFinished( KJob *job )
         kDebug() << "Saved to" << path;
         setPath(path);
     }
+    
     emit checkImageLoaded(ImageLoader::correctRotation(image));
 }
 
