@@ -583,6 +583,7 @@ void Frame::stopPotd()
     Plasma::DataEngine *engine = dataEngine("potd");
     const QString identifier = m_potdProvider + ':' + m_currentDay.toString(Qt::ISODate);
     engine->disconnectSource(identifier, m_mySlideShow);
+    m_autoUpdateTimer->stop();
 }
 
 void Frame::initSlideShow()
@@ -733,18 +734,20 @@ void Frame::checkDayChanged()
 {
     if ( ( m_currentDay != QDate::currentDate() ) ) {
         reloadImage();
+        //keep after reloadImage()
+        m_currentDay = QDate::currentDate();
     }
-    
-    m_currentDay = QDate::currentDate();
 }
 
 void Frame::reloadImage()
 {
     if (m_potd) {
         Plasma::DataEngine *engine = dataEngine("potd");
+        //disconnect yesterday's source
         QString identifier = m_potdProvider + ':' + m_currentDay.toString(Qt::ISODate);
         engine->disconnectSource(identifier, m_mySlideShow);
-        identifier = m_potdProvider + ':' + QDate::currentDate().toString(Qt::ISODate);
+        //connect today's source
+        identifier = m_potdProvider + ':' + QDate::currentDate().toString(Qt::ISODate); 
         engine->connectSource(identifier, m_mySlideShow);
     } else {
         m_mySlideShow->updateImage(m_currentUrl.url());
