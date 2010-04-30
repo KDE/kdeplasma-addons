@@ -56,18 +56,13 @@ void EpodProvider::Private::pageRequestFinished(KJob *_job)
     }
     
     const QString data = QString::fromUtf8( job->data() );
-    //kDebug() << "####### data " << data << endl;
-
-    const QString pattern( "<strong><a href=*" );
+    const QString pattern( "http://epod.usra.edu/.a/*-pi" );
     QRegExp exp( pattern );
     exp.setPatternSyntax(QRegExp::Wildcard);
     
     int pos = exp.indexIn( data ) + pattern.length();
-    //kDebug() << "length " << pattern.length() << endl;
-    const QString sub = data.mid( pos, pattern.length()+41);
-    //kDebug() << "####### sub " << sub << endl; //TODO should return *.jpg
-    
-    KUrl url(  sub  );
+    const QString sub = data.mid( pos-4, pattern.length()+6);
+    KUrl url( QString("http://epod.usra.edu/.a/%1-pi") .arg(sub) );
 
     KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
     QObject::connect(imageJob, SIGNAL( finished( KJob* )), mParent, SLOT( imageRequestFinished( KJob* ) ) );
