@@ -46,7 +46,7 @@ void CharacterRunner::reloadConfiguration()
   m_aliases = grp.readEntry(CONFIG_ALIASES, QStringList());
   m_codes = grp.readEntry(CONFIG_CODES, QStringList());
   addSyntax(Plasma::RunnerSyntax(m_triggerWord + ":q:",
-                                 i18n("Creates Characters from :q: if it's a hexadecimal code or a defined alias.")));
+                                 i18n("Creates Characters from :q: if it is a hexadecimal code or defined alias.")));
 }
 
 void CharacterRunner::match(Plasma::RunnerContext &context)
