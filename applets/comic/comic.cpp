@@ -314,7 +314,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
         p.setFont( font );
         QString title = i18n( "Getting comic strip failed:" );
         p.drawText( QRect( 10, 10 , 480, 100 ), Qt::TextWordWrap | Qt::AlignHCenter | Qt::AlignVCenter, title );
-        QString text = i18n( "Maybe there is no internet connection.\nMaybe the comic plugin is broken.\nAnother reason might be that there is no comic for this day/number/string, so choosing a different one might work." );
+        QString text = i18n( "Maybe there is no Internet connection.\nMaybe the comic plugin is broken.\nAnother reason might be that there is no comic for this day/number/string, so choosing a different one might work." );
 
         mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
         mNextIdentifierSuffix.clear();
