@@ -10,13 +10,7 @@ Name[uk]=Спеціальні символи
 Name[x-test]=xxspecial charactersxx
 Icon=accessories-character-map
 Comment=Creates special characters from their hexadecimal codes
-Comment[kk]=оналтылық кодымен арнаулы таңбаларды енгізу
-Comment[nb]=lager spesialtegn ut fra den heksadesimale koden
-Comment[pt]=cria caracteres especiais a partir do seu código hexadecimal
-Comment[pt_BR]=cria caracteres especiais de seus códigos hexadecimais
-Comment[sv]=skapar specialtecken från hexadecimal kod
-Comment[uk]=створює спеціальні символи за їх шістнадцятковим кодом
-Comment[x-test]=xxcreates special characters from its hexadecimal-codexx
+Comment[x-test]=xxCreates special characters from their hexadecimal codesxx
 Type=Service
 X-KDE-ServiceTypes=Plasma/Runner
 
