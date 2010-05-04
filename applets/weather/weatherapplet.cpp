@@ -710,11 +710,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (!m_setupLayout) {
-        QGraphicsWidget *spacer = new QGraphicsWidget(this);
-        spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        spacer->setMinimumWidth(KIconLoader::SizeMedium);
-        spacer->setMaximumWidth(KIconLoader::SizeHuge);
-        m_bottomLayout->addItem(spacer);
         m_bottomLayout->addItem(m_tabBar);
         m_bottomLayout->setStretchFactor(m_tabBar, 2);
         m_layout->addItem(m_bottomLayout);
