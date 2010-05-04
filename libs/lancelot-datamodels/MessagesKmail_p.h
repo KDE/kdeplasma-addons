@@ -33,6 +33,7 @@ class MessagesKmail::Private: public QObject {
 public:
     Private(MessagesKmail * parent);
 
+#ifdef LANCELOT_DATAMODELS_HAS_PIMLIBS
     QHash < KJob *, Akonadi::Collection > collectionJobs;
 
     QString entityName(const Akonadi::Collection & collection) const;
@@ -42,6 +43,7 @@ public:
 public Q_SLOTS:
     void fetchEmailCollectionsDone(KJob * job);
     void fetchCollectionStatisticsDone(KJob * job);
+#endif
 
 private:
     MessagesKmail * const q;

@@ -29,6 +29,8 @@
 
 #ifndef LANCELOT_DATAMODELS_HAS_PIMLIBS
 
+#warning "Pimlibs are not present"
+
     #define DummyModelClassName MessagesKmail
     #define DummyModelInit \
         setSelfTitle(i18n("Unread messages"));  \
