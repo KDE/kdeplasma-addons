@@ -91,7 +91,6 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         m_forecastTemps(new Plasma::Label),
         m_conditionsLabel(new Plasma::Label),
         m_tempLabel(new Plasma::Label),
-        m_windIcon(new Plasma::IconWidget),
         m_courtesyLabel(new Plasma::Label),
         m_tabBar(new Plasma::TabBar),
         m_fiveDaysModel(0),
@@ -151,10 +150,6 @@ void WeatherApplet::init()
     m_conditionsLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
     m_conditionsLabel->nativeWidget()->setWordWrap(false);
     m_conditionsLabel->setMinimumWidth(55);
-
-    m_windIcon->setMaximumSize(0,0);
-    m_windIcon->setOrientation(Qt::Horizontal);
-    m_windIcon->setTextBackgroundColor(QColor());
 
     m_tempLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
     m_tempLabel->nativeWidget()->setFont(m_titleFont);
@@ -364,28 +359,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
     } else {
         m_tempLabel->setText(i18nc("Not available","N/A"));
-    }
-
-    if (!m_windIcon) {
-        kDebug() << "Create new Plasma::IconWidget (wind)";
-        m_windIcon = new Plasma::IconWidget();
-        m_windIcon->setOrientation(Qt::Horizontal);
-        m_windIcon->setDrawBackground(false);
-    }
-
-    if (data["Wind Speed"] != "N/A" && data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
-        KUnitConversion::Value v(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt());
-        v = v.convertTo(speedUnit());
-        m_windIcon->setText(i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
-                clampValue(v.number(), 1), v.unit()->symbol()));
-    } else {
-        if (data["Wind Speed"] == "N/A") {
-            m_windIcon->setText(i18nc("Not available","N/A"));
-        } else {
-            if (data["Wind Speed"].toInt() == 0 || data["Wind Speed"] == "Calm") {
-                m_windIcon->setText(i18nc("Wind condition","Calm"));
-            }
-        }
     }
 
     m_courtesyLabel->setText(data["Credit"].toString());
@@ -622,13 +595,22 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         Plasma::Svg svgWindIcon;
         svgWindIcon.setImagePath("weather/wind-arrows");
         QIcon windIcon = svgWindIcon.pixmap(data["Wind Direction"].toString());
-        m_windIcon->setIcon(windIcon);
-        m_windIcon->setMaximumSize(m_windIcon->sizeFromIconSize(KIconLoader::SizeSmall));
-        m_windIcon->update();
 
-        QStandardItem *windInfo = new QStandardItem(m_windIcon->icon(), NULL);
+        QString text;
+        if (data["Wind Speed"] != "N/A" && data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
+            KUnitConversion::Value v(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt());
+            v = v.convertTo(speedUnit());
+            text = i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
+                        clampValue(v.number(), 1), v.unit()->symbol());
+        } else if (data["Wind Speed"] == "N/A") {
+                text = i18nc("Not available","N/A");
+        } else if (data["Wind Speed"].toInt() == 0 || data["Wind Speed"] == "Calm") {
+                    text = i18nc("Wind condition","Calm");
+        }
+
+        QStandardItem *windInfo = new QStandardItem(windIcon, NULL);
         windInfo->setTextAlignment(Qt::AlignRight);
-        windInfo->setText(m_windIcon->text());
+        windInfo->setText(text);
         m_detailsModel->appendRow(windInfo);
     }
 

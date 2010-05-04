@@ -75,7 +75,6 @@ private:
     Plasma::Label *m_forecastTemps;
     Plasma::Label *m_conditionsLabel;
     Plasma::Label *m_tempLabel;
-    Plasma::IconWidget *m_windIcon;
     Plasma::Label *m_courtesyLabel;
     Plasma::TabBar *m_tabBar;
 
