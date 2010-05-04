@@ -1,5 +1,5 @@
 /*************************************************************************
- * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
+ * Copyright 2009-2010 Sandro Andrade sandroandrade@kde.org              *
  *                                                                       *
  * This program is free software; you can redistribute it and/or         *
  * modify it under the terms of the GNU General Public License as        *
@@ -79,6 +79,7 @@ void KdeObservatory::init()
 
     m_service = m_engine->serviceForSource("");
     connect(m_service, SIGNAL(engineReady()), SLOT(safeInit()));
+    connect(m_service, SIGNAL(engineError(const QString &, const QString &)), SLOT(engineError(const QString &, const QString &)));
     m_service->startOperationCall(m_service->operationDescription("allProjectsInfo"));
 
     setPopupIcon(KIcon("kdeobservatory"));
@@ -203,6 +204,11 @@ void KdeObservatory::safeInit()
     m_engine->connectSource("krazyReport", this);
 
     updateSources();
+}
+
+void KdeObservatory::engineError(const QString &source, const QString &error)
+{
+    kDebug() << "Engine error" << error << "in source" << source;
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -410,6 +416,20 @@ void KdeObservatory::updateSources()
         {
             KConfigGroup ops = m_service->operationDescription("commitHistory");
             ops.writeEntry("project", i2.key());
+            m_service->startOperationCall(ops);
+        }
+    }
+
+    QHashIterator<QString, bool> i3(m_krazyReportViewProjects);
+    while (i3.hasNext())
+    {
+        i3.next();
+        if (i3.value())
+        {
+            KConfigGroup ops = m_service->operationDescription("krazyReport");
+            ops.writeEntry("project", i3.key());
+            ops.writeEntry("krazyReport", m_projects[i3.key()].krazyReport);
+            ops.writeEntry("krazyFilePrefix", m_projects[i3.key()].krazyFilePrefix);
             m_service->startOperationCall(ops);
         }
     }

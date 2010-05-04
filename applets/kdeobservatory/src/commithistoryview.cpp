@@ -1,5 +1,5 @@
 /*************************************************************************
- * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
+ * Copyright 2009-2010 Sandro Andrade sandroandrade@kde.org              *
  *                                                                       *
  * This program is free software; you can redistribute it and/or         *
  * modify it under the terms of the GNU General Public License as        *
@@ -77,14 +77,15 @@ void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
 
     const DateCommitList &projectCommits = data["commitHistory"].value<DateCommitList>();
 
-    if (projectCommits.count() > 0)
+    int count = projectCommits.count();
+    if (count > 0)
     {
         int maxCommit = 0;
 
         QString tmpStr = projectCommits.at(0).first;
         qlonglong minDate = tmpStr.remove('-').toLongLong();
-        double x[30];
-        double y[30];
+        double *x = new double[count];
+        double *y = new double[count];
 
         int count = projectCommits.count();
         int j;
@@ -119,6 +120,8 @@ void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
 
         QwtPlotCurve *curve = new QwtPlotCurve;
         curve->setData(x, y, j);
+        delete []x;
+        delete []y;
 
         curve->attach(plot);
         QPen pen = curve->pen();

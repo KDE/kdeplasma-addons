@@ -1,5 +1,5 @@
 /*************************************************************************
- * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
+ * Copyright 2009-2010 Sandro Andrade sandroandrade@kde.org              *
  *                                                                       *
  * This program is free software; you can redistribute it and/or         *
  * modify it under the terms of the GNU General Public License as        *
@@ -72,6 +72,7 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
     void safeInit();
+    void engineError(const QString &source, const QString &error);
     void updateSources();
 
     void createConfigurationInterface(KConfigDialog *parent);
