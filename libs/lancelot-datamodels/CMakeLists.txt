@@ -95,19 +95,10 @@ set(lancelot_datamodels_LIB_SRCS
 )
 
 set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.freedesktop.ScreenSaver.xml)
+if (NOT EXISTS ${screensaver_xml})
+   set(kopete_xml external/org.freedesktop.ScreenSaver.xml)
+endif (NOT EXISTS ${screensaver_xml})
 qt4_add_dbus_interface(lancelot_datamodels_LIB_SRCS ${screensaver_xml} screensaver_interface)
-
-set(kmail_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.kmail.kmail.xml)
-if (NOT EXISTS ${kmail_xml})
-   set(kmail_xml external/org.kde.kmail.kmail.xml)
-endif (NOT EXISTS ${kmail_xml})
-qt4_add_dbus_interface(lancelot_datamodels_LIB_SRCS ${kmail_xml} kmail_interface)
-
-set(kmail_folder_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.kmail.folder.xml)
-if (NOT EXISTS ${kmail_folder_xml})
-   set(kmail_folder_xml external/org.kde.kmail.folder.xml)
-endif (NOT EXISTS ${kmail_folder_xml})
-qt4_add_dbus_interface(lancelot_datamodels_LIB_SRCS ${kmail_folder_xml} kmailfolder_interface)
 
 set(kopete_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.Kopete.xml)
 if (NOT EXISTS ${kopete_xml})
