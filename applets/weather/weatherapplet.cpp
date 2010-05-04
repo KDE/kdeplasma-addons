@@ -70,7 +70,7 @@ public:
         update();
     }
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0)
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
     {
         if (m_currentWeather.isNull()) {
             return;
