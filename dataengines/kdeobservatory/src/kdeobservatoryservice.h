@@ -1,5 +1,5 @@
 /*************************************************************************
- * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
+ * Copyright 2010 Sandro Andrade sandroandrade@kde.org                   *
  *                                                                       *
  * This program is free software; you can redistribute it and/or         *
  * modify it under the terms of the GNU General Public License as        *
@@ -44,10 +44,11 @@ protected:
     void topActiveProjects();
     void topProjectDevelopers(const QString &project);
     void commitHistory(const QString &project);
+    void krazyReport(const QString &project, const QString &krazyReport, const QString &krazyFilePrefix);
 
 Q_SIGNALS:
     void engineReady();
-    void engineError();
+    void engineError(const QString &source, const QString &error);
 
 protected slots:
     void result(KJob *job);

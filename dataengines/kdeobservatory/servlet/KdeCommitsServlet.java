@@ -124,9 +124,9 @@ public class KdeCommitsServlet extends HttpServlet
     {
         String query;
         if (!project.equals(""))
-            query = "select date(c.date_time) date, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 and p.name = '" + project + "' group by date order by date desc";
+            query = "select date(c.date_time) date, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 and p.name = '" + project + "' group by date order by date asc";
         else
-            query = "select date(c.date_time) date, count(*) from commits c group by date order by date desc";
+            query = "select date(c.date_time) date, count(*) from commits c group by date order by date asc";
         if (!n.equals("0"))
             query = query + " limit 0 , " + n;
         Statement stmt = conn.createStatement();

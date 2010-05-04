@@ -1,5 +1,5 @@
 /*************************************************************************
- * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
+ * Copyright 2010 Sandro Andrade sandroandrade@kde.org                   *
  *                                                                       *
  * This program is free software; you can redistribute it and/or         *
  * modify it under the terms of the GNU General Public License as        *
@@ -43,6 +43,8 @@ Plasma::ServiceJob *KdeObservatoryService::createJob(const QString &operation, Q
         topProjectDevelopers(parameters["project"].toString());
     else if (operation == "commitHistory")
         commitHistory(parameters["project"].toString());
+    else if (operation == "krazyReport")
+        krazyReport(parameters["project"].toString(), parameters["krazyReport"].toString(), parameters["krazyFilePrefix"].toString());
 
     return 0;
 }
@@ -71,26 +73,39 @@ void KdeObservatoryService::commitHistory(const QString &project)
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
+void KdeObservatoryService::krazyReport(const QString &project, const QString &krazyReport, const QString &krazyFilePrefix)
+{
+    kDebug() << "Atualizando krazy para projeto" << project << "report:" << krazyReport << "prefix:" << krazyFilePrefix;
+
+//    KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=commitHistory&p0=" + project + "&p1=0"), KIO::NoReload, KIO::HideProgressInfo);
+//    connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+}
+
 void KdeObservatoryService::result(KJob *job)
 {
+    KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>(job);
+    
+    QString url = QUrl::fromPercentEncoding(storedJob->url().prettyUrl().toUtf8());
+    QString mimeType = storedJob->mimetype();
+    QString source = "";
+    QRegExp regexp1("\\?op=(.*)(\\&|$)");
+    if (regexp1.indexIn(url, 0) != -1)
+        source = regexp1.cap(1);
+    
     if (job->error())
     {
-        kDebug() << "Job error:" << job->errorText();
+        emit engineError(source, job->errorText());
     }
     else
     {
-        KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>(job);
-        
         QString data (storedJob->data());
-        QString url = QUrl::fromPercentEncoding(storedJob->url().prettyUrl().toUtf8());
-        QString mimeType = storedJob->mimetype();
 
         if (!data.isEmpty() && mimeType.contains("text/plain"))
         {
             QString project = "";
-            QRegExp regexp("\\&p0=(.*)\\&p1");
-            if (regexp.indexIn(url, 0) != -1)
-                project = regexp.cap(1);
+            QRegExp regexp2("\\&p0=(.*)\\&p1");
+            if (regexp2.indexIn(url, 0) != -1)
+                project = regexp2.cap(1);
             
             if (url.contains("op=allProjectsInfo"))
             {
@@ -146,7 +161,7 @@ void KdeObservatoryService::result(KJob *job)
             }
         }
         else
-            emit engineError();
+            emit engineError(source, i18n("Empty data or incorrect returned mymetype"));
     }
 }
 

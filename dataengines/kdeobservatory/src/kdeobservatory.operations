@@ -15,4 +15,15 @@
             <label>The project from which to acquire commits</label>
         </entry>
     </group>
+    <group name="krazyReport">
+        <entry name="project" type="String">
+            <label>The project from which to acquire krazy errors</label>
+        </entry>
+        <entry name="krazyReport" type="String">
+            <label>Krazy url</label>
+        </entry>
+        <entry name="krazyFilePrefix" type="String">
+            <label>Prefix for recursive looking for krazy reports</label>
+        </entry>
+    </group>
 </kcfg>

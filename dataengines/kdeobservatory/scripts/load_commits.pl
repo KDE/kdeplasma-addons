@@ -9,10 +9,9 @@ if (@ARGV == 0)
     exit();
 }
 
-#$hostname = ""; # Running from Mocha Host
-$hostname = ""; # Running from my computer
+$hostname = "";
 $database = "";
-$user = "";
+$user     = "";
 $password = "";
 
 $driver = "mysql";
