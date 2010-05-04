@@ -41,6 +41,8 @@ namespace Plasma
     class WeatherView;
 }
 
+class BackgroundWidget;
+
 class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
@@ -72,7 +74,6 @@ private:
     Plasma::Label *m_locationLabel;
     Plasma::Label *m_forecastTemps;
     Plasma::Label *m_conditionsLabel;
-    Plasma::IconWidget *m_currentIcon;
     Plasma::Label *m_tempLabel;
     Plasma::IconWidget *m_windIcon;
     Plasma::Label *m_courtesyLabel;
@@ -89,7 +90,7 @@ private:
     QGraphicsLinearLayout *m_layout;
     QGraphicsGridLayout *m_titlePanel;
     QGraphicsLinearLayout *m_bottomLayout;
-    QGraphicsWidget *m_graphicsWidget;
+    BackgroundWidget *m_graphicsWidget;
 
     Plasma::Frame *m_titleFrame;
     QFont m_titleFont;

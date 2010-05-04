@@ -26,6 +26,7 @@
 #include <QApplication>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsGridLayout>
+#include <QPainter>
 #include <QStandardItemModel>
 
 #include <KGlobalSettings>
@@ -50,12 +51,45 @@ template <typename T> T clampValue(T value, int decimals)
         const T mul = std::pow(static_cast<T>(10), decimals); return int(value * mul) / mul;
 }
 
+class BackgroundWidget : public QGraphicsWidget
+{
+public:
+    BackgroundWidget(QGraphicsWidget *parent)
+        : QGraphicsWidget(parent)
+    {
+    }
+
+    KIcon currentWeather() const
+    {
+        return m_currentWeather;
+    }
+
+    void setCurrentWeather(const KIcon &currentWeather)
+    {
+        m_currentWeather = currentWeather;
+        update();
+    }
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0)
+    {
+        if (m_currentWeather.isNull()) {
+            return;
+        }
+
+        QSize s(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
+        s.boundedTo(size().toSize());
+        painter->drawPixmap(QPoint(0, 0), m_currentWeather.pixmap(s));
+    }
+
+private:
+    KIcon m_currentWeather;
+};
+
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         : WeatherPopupApplet(parent, args),
         m_locationLabel(new Plasma::Label),
         m_forecastTemps(new Plasma::Label),
         m_conditionsLabel(new Plasma::Label),
-        m_currentIcon(0),
         m_tempLabel(new Plasma::Label),
         m_windIcon(new Plasma::IconWidget),
         m_courtesyLabel(new Plasma::Label),
@@ -80,7 +114,7 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
 void WeatherApplet::init()
 {
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
-    m_graphicsWidget = new QGraphicsWidget(this);
+    m_graphicsWidget = new BackgroundWidget(this);
 
     switch (formFactor()) {
     case Plasma::Horizontal:
@@ -332,20 +366,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_tempLabel->setText(i18nc("Not available","N/A"));
     }
 
-    if (!m_currentIcon) {
-        kDebug() << "Create new Plasma::IconWidget (condition)";
-        m_currentIcon = new Plasma::IconWidget(m_graphicsWidget);
-        m_currentIcon->resize(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
-        m_currentIcon->setMinimumWidth(KIconLoader::SizeSmall);
-        m_currentIcon->setZValue(900);
-        m_currentIcon->setPos(0,0);
-        //m_currentIcon = new Plasma::IconWidget(KIcon(data["Condition Icon"].toString()), QString(), this);
-        //m_currentIcon->icon().pixmap(QSize(KIconLoader::SizeEnormous,KIconLoader::SizeEnormous));
-        m_currentIcon->setDrawBackground(false);
-        m_currentIcon->setAcceptHoverEvents(false);
-        m_currentIcon->show();
-    }
-
     if (!m_windIcon) {
         kDebug() << "Create new Plasma::IconWidget (wind)";
         m_windIcon = new Plasma::IconWidget();
@@ -383,15 +403,14 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
         if (fiveDayTokens.count() > 2) {
             // if there is no specific icon, show the current weather
-            m_currentIcon->setIcon(KIcon(fiveDayTokens[1]));
+            m_graphicsWidget->setCurrentWeather(KIcon(fiveDayTokens[1]));
         } else {
             // if we are inside here, we could not find any proper icon
             // then just hide it
-            m_currentIcon->hide();
+            m_graphicsWidget->setCurrentWeather(KIcon());
         }
     } else {
-        m_currentIcon->setIcon(KIcon(data["Condition Icon"].toString()));
-        m_currentIcon->show();
+        m_graphicsWidget->setCurrentWeather(KIcon(data["Condition Icon"].toString()));
         setPopupIcon(data["Condition Icon"].toString());
     }
 
@@ -709,7 +728,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (!m_setupLayout) {
-        //m_bottomLayout->addItem(m_currentIcon);
         QGraphicsWidget *spacer = new QGraphicsWidget(this);
         spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         spacer->setMinimumWidth(KIconLoader::SizeMedium);
