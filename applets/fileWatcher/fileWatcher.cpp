@@ -203,7 +203,7 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
-    ui.pathUrlRequester->setPath(file->fileName());
+    ui.pathUrlRequester->setUrl(file->fileName());
     ui.fontRequester->setFont(textItem->font());
     ui.fontColorButton->setColor(textItem->defaultTextColor());
 
