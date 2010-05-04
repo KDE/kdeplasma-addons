@@ -178,6 +178,11 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
         m_viewProviders[i18n("Top Developers")]->updateViews(data);
     else if (sourceName == "commitHistory")
         m_viewProviders[i18n("Commit History")]->updateViews(data);
+    else if (sourceName == "krazyReport")
+    {
+        m_viewProviders[i18n("Krazy Report")]->updateViews(data);
+        updateViews();
+    }
 
     setBusy(false);
     m_collectorProgress->hide();
@@ -437,6 +442,19 @@ void KdeObservatory::updateSources()
 
 void KdeObservatory::createViews()
 {
+    int count = m_activeViews.count();
+    for (int i = 0; i < count; ++i)
+    {
+        const QPair<QString, bool> &pair = m_activeViews.at(i);
+        const QString &view = pair.first;
+        if (pair.second && m_viewProviders.value(view))
+            m_viewProviders[view]->createViews();
+    }
+    updateViews();
+}
+
+void KdeObservatory::updateViews()
+{
     m_viewTransitionTimer->stop();
     m_synchronizationTimer->stop();
     if (m_transitionTimer)
@@ -452,10 +470,7 @@ void KdeObservatory::createViews()
         const QPair<QString, bool> &pair = m_activeViews.at(i);
         const QString &view = pair.first;
         if (pair.second && m_viewProviders.value(view))
-        {
-            m_viewProviders[view]->createViews();
             m_views.append(m_viewProviders[view]->views());
-        }
     }
 
     if (m_views.count() > 0)

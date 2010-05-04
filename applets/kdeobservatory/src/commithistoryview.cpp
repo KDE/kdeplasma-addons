@@ -65,7 +65,7 @@ void CommitHistoryView::createViews()
     {
         i.next();
         if (i.value())
-            createView(i18n("Commit History") + " - " + i.key());
+            createView(i18n("Commit History") + " - " + i.key(), i18n("Commit History") + " - " + i.key());
     }
 }
 
@@ -75,7 +75,7 @@ void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
     if (project.isEmpty())
         return;
 
-    const DateCommitList &projectCommits = data["commitHistory"].value<DateCommitList>();
+    const DateCommitList &projectCommits = data[project].value<DateCommitList>();
 
     int count = projectCommits.count();
     if (count > 0)

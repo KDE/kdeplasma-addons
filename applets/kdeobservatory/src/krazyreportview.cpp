@@ -38,83 +38,96 @@ KrazyReportView::~KrazyReportView()
 
 void KrazyReportView::createViews()
 {
+    deleteViews();
+    // We don't know in advance how many Krazy report views will be created
+    // so view creation is postponed to the updateViews function.
 }
 
 void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
 {
-    /*
-    deleteViews();
+    QString project = data["project"].toString();
+    if (project.isEmpty())
+        return;
 
-    QMap< QString, QMap<QString, QMultiMap<int, QString> > > krazyReports;
-    QHashIterator<QString, bool> i1(m_krazyReportViewProjects);
+    KrazyReportMap krazyReportMap = data[project].value<KrazyReportMap>();
+
+    foreach (const QString &fileType, krazyReportMap.keys())
+        createView(i18n("Krazy Report") + " - " + project, i18n("Krazy Report") + " - " + project + " - " + fileType);
+    
+    KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
+
+    KrazyReportMapIterator i1(krazyReportMap);
+
+    // For each file type
     while (i1.hasNext())
     {
         i1.next();
-        if (i1.value())
-            krazyReports[i1.key()] = KdeObservatoryDatabase::self()->krazyErrorsByProject(i1.key());
-    }
 
-    KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
+        QString fileType = i1.key();
+        const QMap< QString, FileTypeKrazyReportMap > &projectFileTypeKrazyReport = i1.value();
 
-    QMapIterator< QString, QMap<QString, QMultiMap<int, QString> > > i2(krazyReports);
-    while (i2.hasNext())
-    {
-        i2.next();
+        QGraphicsWidget *container = containerForView(i18n("Krazy Report") + " - " + project + " - " + fileType);
 
-        QString project = i2.key();
-        const QMap<QString, QMultiMap<int, QString> > &projectKrazyReport = i2.value();
+        QGraphicsTextItem *fileTypeText = new QGraphicsTextItem(fileType, container);
+        fileTypeText->setDefaultTextColor(QColor(0, 0, 0));
+        fileTypeText->setFont(KGlobalSettings::smallestReadableFont());
+        fileTypeText->setPos((qreal) ((container->rect().width())/2)-(fileTypeText->boundingRect().width()/2), (qreal) 0);
 
-        QMapIterator< QString, QMultiMap<int, QString> > i3(projectKrazyReport);
+        int maxRank = 0;
+        qreal height = container->geometry().height() - fileTypeText->boundingRect().height();
+        qreal step = qMin(container->geometry().width() / projectFileTypeKrazyReport.size(), (qreal) 22);
 
-        while (i3.hasNext())
+        QMultiMap<int, QString> orderedTestMap;
+        
+        QMapIterator< QString, FileTypeKrazyReportMap > i2(projectFileTypeKrazyReport);
+        int errors;
+        while (i2.hasNext())
         {
-            i3.next();
+            i2.next();
+            errors = 0;
+            foreach (const QStringList &list, i2.value())
+                errors += list.count();
+            orderedTestMap.insert(errors, i2.key());
+        }
+        
+        int j = 0;
+        QMapIterator<int, QString> i3(orderedTestMap);
+        i3.toBack();
+        
+        // For each krazy test
+        while (i3.hasPrevious())
+        {
+            i3.previous();
+            QString testName = i3.value();
+            int rank = i3.key();
+            if (j == 0)
+                maxRank = rank;
 
-            QString fileType = i3.key();
-            const QMultiMap<int, QString> &projectFileTypeKrazyReport = i3.value();
+            qreal heightFactor = height/maxRank;
+            qreal xItem = (j*step)+2;
 
-            QGraphicsWidget *container = createView(i18n("Krazy Report") + " - " + project);
+            QGraphicsRectItem *testNameRect = new QGraphicsRectItem(0, 0, (qreal) step-4, (qreal) heightFactor*rank, container);
+            testNameRect->setPos(xItem, container->geometry().height() - testNameRect->rect().height());
+            testNameRect->setPen(QPen(QColor(0, 0, 0)));
+            testNameRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+            QString toolTip = "<html><body><h5>" + testName + ' ' + QString::number(rank) + ' ' + i18np("error", "errors", rank) + "<ul>";
 
-            QGraphicsTextItem *fileTypeText = new QGraphicsTextItem(fileType, container);
-            fileTypeText->setDefaultTextColor(QColor(0, 0, 0));
-            fileTypeText->setFont(KGlobalSettings::smallestReadableFont());
-            fileTypeText->setPos((qreal) ((container->rect().width())/2)-(fileTypeText->boundingRect().width()/2), (qreal) 0);
-
-            int maxRank = 0;
-            qreal height = container->geometry().height() - fileTypeText->boundingRect().height();
-            qreal step = qMin(container->geometry().width() / projectFileTypeKrazyReport.size(), (qreal) 22);
-
-            int j = 0;
-            QMapIterator<int, QString> i4(projectFileTypeKrazyReport);
-            i4.toBack();
-            while (i4.hasPrevious())
+            const FileTypeKrazyReportMap &fileErrors = projectFileTypeKrazyReport[testName];
+            QMapIterator<QString, QStringList > i4(fileErrors);
+            while (i4.hasNext())
             {
-                i4.previous();
-                QString testName = i4.value();
-                int rank = i4.key();
-                if (j == 0)
-                    maxRank = rank;
-
-                qreal heightFactor = height/maxRank;
-                qreal xItem = (j*step)+2;
-
-                QGraphicsRectItem *testNameRect = new QGraphicsRectItem(0, 0, (qreal) step-4, (qreal) heightFactor*rank, container);
-                testNameRect->setPos(xItem, container->geometry().height() - testNameRect->rect().height());
-                testNameRect->setPen(QPen(QColor(0, 0, 0)));
-                testNameRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-                QString toolTip = "<html><body><h5>" + testName + ' ' + QString::number(rank) + ' ' + i18np("error", "errors", rank) + "<ul>";
-
-                QStringList files = KdeObservatoryDatabase::self()->krazyFilesByProjectTypeAndTest(project, fileType, testName);
-                foreach (const QString &fileName, files)
-                    toolTip += "<li>" + fileName + "</li>";
-                toolTip += "</ul></h5></body></html>";
-                testNameRect->setToolTip(toolTip);
-                testNameRect->setAcceptHoverEvents(true);
-                testNameRect->installSceneEventFilter(kdeObservatory);
-
-                j++;
+                i4.next();
+                foreach (const QString &error, i4.value())
+                    toolTip += "<li>" + i4.key() + ": " + error + "</li>";
             }
+
+            toolTip += "</ul></h5></body></html>";
+            testNameRect->setToolTip(toolTip);
+
+            testNameRect->setAcceptHoverEvents(true);
+            testNameRect->installSceneEventFilter(kdeObservatory);
+
+            j++;
         }
     }
-    */
 }

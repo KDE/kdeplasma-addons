@@ -41,7 +41,7 @@ TopActiveProjectsView::~TopActiveProjectsView()
 void TopActiveProjectsView::createViews()
 {
     deleteViews();
-    createView(i18n("Top Active Projects"));
+    createView(i18n("Top Active Projects"), i18n("Top Active Projects"));
 }
 
 void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)

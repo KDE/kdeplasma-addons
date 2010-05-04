@@ -44,7 +44,7 @@ void TopDevelopersView::createViews()
     {
         i.next();
         if (i.value())
-            createView(i18n("Top Developers") + " - " + i.key());
+            createView(i18n("Top Developers") + " - " + i.key(), i18n("Top Developers") + " - " + i.key());
     }
 }
 
@@ -54,7 +54,7 @@ void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
     if (project.isEmpty())
         return;
     
-    RankValueMap topProjectDevelopers = data["topProjectDevelopers"].value<RankValueMap>();
+    RankValueMap topProjectDevelopers = data[project].value<RankValueMap>();
 
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 

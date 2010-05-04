@@ -86,6 +86,7 @@ protected Q_SLOTS:
 
 private:
     void createViews();
+    void updateViews();
     void loadConfig();
     void saveConfig();
     void createTimers();
@@ -150,5 +151,12 @@ Q_DECLARE_METATYPE(RankValueMap)
 
 typedef QList< QPair<QString, int> > DateCommitList;
 Q_DECLARE_METATYPE(DateCommitList)
+
+//            FileType      TestName      FileName Errors
+typedef QMap< QString, QMap<QString, QMap<QString, QStringList> > > KrazyReportMap;
+typedef QMapIterator< QString, QMap<QString, QMap<QString, QStringList > > > KrazyReportMapIterator;
+Q_DECLARE_METATYPE(KrazyReportMap)
+
+typedef QMap<QString, QStringList> FileTypeKrazyReportMap;
 
 #endif

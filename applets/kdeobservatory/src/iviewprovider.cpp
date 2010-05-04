@@ -36,7 +36,7 @@ IViewProvider::~IViewProvider()
 {
 }
 
-void IViewProvider::createView(const QString &title)
+void IViewProvider::createView(const QString &title, const QString &id)
 {
     QGraphicsWidget *view = new QGraphicsWidget(m_parent);
     view->setHandlesChildEvents(true);
@@ -56,13 +56,13 @@ void IViewProvider::createView(const QString &title)
     view->setLayout(layout);
     view->setGeometry(m_parent->geometry());
 
-    m_views.insert(title, view);
-    m_viewContainers.insert(title, container);
+    m_views.insert(id, view);
+    m_viewContainers.insert(id, container);
 }
 
-QGraphicsWidget *IViewProvider::containerForView(const QString &title)
+QGraphicsWidget *IViewProvider::containerForView(const QString &id)
 {
-    return m_viewContainers[title];
+    return m_viewContainers[id];
 }
 
 void IViewProvider::deleteViews()

@@ -39,8 +39,8 @@ public:
     explicit IViewProvider(QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~IViewProvider();
 
-    void createView(const QString &title);
-    QGraphicsWidget *containerForView(const QString &title);
+    void createView(const QString &title, const QString &id);
+    QGraphicsWidget *containerForView(const QString &id);
     void deleteViews();
     const QList<QGraphicsWidget *> views() const;
 
