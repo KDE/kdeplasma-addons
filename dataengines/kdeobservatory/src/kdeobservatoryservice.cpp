@@ -52,36 +52,42 @@ Plasma::ServiceJob *KdeObservatoryService::createJob(const QString &operation, Q
 void KdeObservatoryService::allProjectsInfo()
 {
     KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=allProjectsInfo"), KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(resultServlet(KJob*)));
 }
 
 void KdeObservatoryService::topActiveProjects()
 {
     KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topActiveProjects&p0=0"), KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(resultServlet(KJob*)));
 }
 
 void KdeObservatoryService::topProjectDevelopers(const QString &project)
 {
     KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topProjectDevelopers&p0=" + project + "&p1=0"), KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(resultServlet(KJob*)));
 }
 
 void KdeObservatoryService::commitHistory(const QString &project)
 {
     KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=commitHistory&p0=" + project + "&p1=0"), KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(resultServlet(KJob*)));
 }
 
 void KdeObservatoryService::krazyReport(const QString &project, const QString &krazyReport, const QString &krazyFilePrefix)
 {
-    kDebug() << "Atualizando krazy para projeto" << project << "report:" << krazyReport << "prefix:" << krazyFilePrefix;
+    KIO::StoredTransferJob *job;
 
-//    KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=commitHistory&p0=" + project + "&p1=0"), KIO::NoReload, KIO::HideProgressInfo);
-//    connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+    if (krazyReport.contains("reports"))
+        job = KIO::storedGet(KUrl("http://www.englishbreakfastnetwork.org/krazy/" + krazyReport), KIO::NoReload, KIO::HideProgressInfo);
+    else if (krazyReport.contains("component="))
+        job = KIO::storedGet(KUrl("http://www.englishbreakfastnetwork.org/krazy/index.php?" + krazyReport), KIO::NoReload, KIO::HideProgressInfo);
+    
+    m_krazyJobMap[job] = QPair<QString, QString>(project, krazyFilePrefix);
+
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(resultEBN(KJob*)));
 }
 
-void KdeObservatoryService::result(KJob *job)
+void KdeObservatoryService::resultServlet(KJob *job)
 {
     KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>(job);
     
@@ -141,7 +147,7 @@ void KdeObservatoryService::result(KJob *job)
                 }
 
                 m_engine->setData("topProjectDevelopers", "project", project);
-                m_engine->setData("topProjectDevelopers", "topProjectDevelopers", QVariant::fromValue<RankValueMap>(projectTopDevelopers));
+                m_engine->setData("topProjectDevelopers", project, QVariant::fromValue<RankValueMap>(projectTopDevelopers));
             }
             else if (url.contains("op=commitHistory"))
             {
@@ -157,12 +163,91 @@ void KdeObservatoryService::result(KJob *job)
                 }
 
                 m_engine->setData("commitHistory", "project", project);
-                m_engine->setData("commitHistory", "commitHistory", QVariant::fromValue<DateCommitList>(commitHistory));
+                m_engine->setData("commitHistory", project, QVariant::fromValue<DateCommitList>(commitHistory));
             }
         }
         else
             emit engineError(source, i18n("Empty data or incorrect returned mymetype"));
     }
+}
+
+void KdeObservatoryService::resultEBN(KJob *job)
+{
+    KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>(job);
+    
+    if (job->error())
+    {
+        emit engineError("krazyReport", job->errorText());
+    }
+    else
+    {
+        QString data (storedJob->data());
+
+        if (!data.isEmpty())
+        {
+            if (data.contains("<h1>Not Found</h1>"))
+            {
+                emit engineError("krazyReport", i18n("Krazy report not found !"));
+                return;
+            }
+
+            if (data.contains("<table style=\"clear: right;\" class=\"sortable\" id=\"reportTable\" cellspacing=\"0\" border=\"0\" width=\"100%\">"))
+            {
+            //    processModule(data, storedJob);
+            }
+            else
+                parseReport(data, storedJob);
+        }
+        else
+            emit engineError("krazyReport", i18n("Empty data or incorrect returned mymetype"));
+    }
+}
+
+void KdeObservatoryService::parseReport(const QString &data, KIO::StoredTransferJob *storedJob)
+{
+    QRegExp regExp1("<li><b><u>(.*)</u></b><ol>");
+    QRegExp regExp2("<li><span class=\"toolmsg\">(.*)<b>");
+    QRegExp regExp3("<li><a href=\"http://lxr.kde.org/source/[^<>]*" + m_krazyJobMap[storedJob].second + "(.*)\">.*</a>:\\s*(.*)\\s*</li>");
+    regExp1.setMinimal(true);
+    regExp2.setMinimal(true);
+    regExp3.setMinimal(true);
+
+    int pos = 0, pos1, pos2, pos3;
+    QString fileType;
+    QString testName;
+    pos1 = regExp1.indexIn(data, pos);
+    pos2 = regExp2.indexIn(data, pos);
+    pos3 = regExp3.indexIn(data, pos);
+
+    KrazyReportMap krazyReportMap;
+    while (pos1 != -1 || pos2 != -1 || pos3 != -1)
+    {
+        pos = pos1;
+        if ((pos == -1) || (pos2 != -1 && pos2 < pos))
+            pos = pos2;
+        if ((pos == -1) || (pos3 != -1 && pos3 < pos))
+            pos = pos3;
+        if (pos == pos1)
+        {
+            fileType = regExp1.cap(1);
+            pos += regExp1.matchedLength();
+        }
+        else if (pos == pos2)
+        {
+            testName = regExp2.cap(1);
+            pos += regExp2.matchedLength();
+        }
+        else if (pos == pos3)
+        {
+            krazyReportMap[fileType][testName][regExp3.cap(1)].append(regExp3.cap(2));
+            pos += regExp3.matchedLength();
+        }
+        pos1 = regExp1.indexIn(data, pos);
+        pos2 = regExp2.indexIn(data, pos);
+        pos3 = regExp3.indexIn(data, pos);
+    }
+    m_engine->setData("krazyReport", "project", m_krazyJobMap[storedJob].first);
+    m_engine->setData("krazyReport", m_krazyJobMap[storedJob].first, QVariant::fromValue<KrazyReportMap>(krazyReportMap));
 }
 
 #include "kdeobservatoryservice.moc"

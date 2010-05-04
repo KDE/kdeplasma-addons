@@ -27,6 +27,11 @@
 
 class KJob;
 
+namespace KIO
+{
+    class StoredTransferJob;
+}
+
 namespace Plasma
 {
     class ServiceJob;
@@ -51,10 +56,14 @@ Q_SIGNALS:
     void engineError(const QString &source, const QString &error);
 
 protected slots:
-    void result(KJob *job);
+    void resultServlet(KJob *job);
+    void resultEBN(KJob *job);
 
 private:
+    void parseReport(const QString &data, KIO::StoredTransferJob *storedJob);
+    
     KdeObservatoryEngine *m_engine;
+    QMap< KIO::StoredTransferJob *, QPair<QString, QString> > m_krazyJobMap;
 };
 
 typedef QMultiMap<int, QString> RankValueMap;
@@ -62,5 +71,9 @@ Q_DECLARE_METATYPE(RankValueMap)
 
 typedef QList< QPair<QString, int> > DateCommitList;
 Q_DECLARE_METATYPE(DateCommitList)
+
+//            FileType      TestName      FileName       Error
+typedef QMap< QString, QMap<QString, QMap<QString, QList<QString> > > > KrazyReportMap;
+Q_DECLARE_METATYPE(KrazyReportMap)
 
 #endif
