@@ -317,10 +317,12 @@ void NowPlaying::playerAdded(const QString &name)
         m_watchingPlayer = name;
 
         m_controller = dataEngine("nowplaying")->serviceForSource(m_watchingPlayer);
-        m_controller->associateWidget(m_positionSlider, "seek");
-        m_controller->associateWidget(m_volumeSlider, "volume");
-        emit controllerChanged(m_controller);
+        if (m_controller) {
+            m_controller->associateWidget(m_positionSlider, "seek");
+            m_controller->associateWidget(m_volumeSlider, "volume");
+        }
 
+        emit controllerChanged(m_controller);
         dataEngine("nowplaying")->connectSource(m_watchingPlayer, this, 500);
     }
 }
@@ -351,10 +353,12 @@ void NowPlaying::findPlayer()
         m_watchingPlayer = players.first();
 
         m_controller = dataEngine("nowplaying")->serviceForSource(m_watchingPlayer);
-        m_controller->associateWidget(m_positionSlider, "seek");
-        m_controller->associateWidget(m_volumeSlider, "volume");
-        emit controllerChanged(m_controller);
+        if (m_controller) {
+            m_controller->associateWidget(m_positionSlider, "seek");
+            m_controller->associateWidget(m_volumeSlider, "volume");
+        }
 
+        emit controllerChanged(m_controller);
         kDebug() << "Installing" << m_watchingPlayer << "as watched player";
         dataEngine("nowplaying")->connectSource(m_watchingPlayer, this, 999);
     }
