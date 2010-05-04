@@ -18,7 +18,6 @@
  */
 
 #include "weatherconfigsearch.h"
-#include <KMessageBox>
 #include <KInputDialog>
 
 WeatherConfigSearch::WeatherConfigSearch(QWidget *parent)
@@ -73,7 +72,6 @@ void WeatherConfigSearch::setDataEngine(Plasma::DataEngine* dataengine)
     m_validator.setDataEngine(dataengine);
     providerComboBox->clear();
     if (m_dataengine) {
-        m_dataengine->setProperty("update", true);
         const QVariantList plugins = m_dataengine->query("ions").values();
         foreach (const QVariant& plugin, plugins) {
             const QStringList pluginInfo = plugin.toString().split('|');

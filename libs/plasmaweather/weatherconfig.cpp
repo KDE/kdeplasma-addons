@@ -22,7 +22,6 @@
 #include "weathervalidator.h"
 #include "weatheri18ncatalog.h"
 #include "ui_weatherconfig.h"
-#include <KMessageBox>
 #include <KInputDialog>
 
 #include <KNS3/DownloadDialog>
@@ -129,10 +128,6 @@ void WeatherConfig::getNewStuff()
     KNS3::DownloadDialog dialog("kmediafactory.knsrc", this);
     dialog.exec();
     KNS3::Entry::List entries = dialog.changedEntries();
-    if (entries.size() > 0) {
-        kDebug() << "About to ask WeatherEngine for plugin update!";
-        d->m_engine->setProperty("update", true);
-    }
 }
 
 void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
