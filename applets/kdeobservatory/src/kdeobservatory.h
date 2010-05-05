@@ -143,6 +143,8 @@ private:
 
     Plasma::DataEngine *m_engine;
     Plasma::Service *m_service;
+    
+    int m_sourceCounter;
 };
 
 typedef QMultiMap<int, QString> RankValueMap;

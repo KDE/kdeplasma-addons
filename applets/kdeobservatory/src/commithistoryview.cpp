@@ -72,8 +72,6 @@ void CommitHistoryView::createViews()
 void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
 {
     QString project = data["project"].toString();
-    if (project.isEmpty())
-        return;
 
     const DateCommitList &projectCommits = data[project].value<DateCommitList>();
 

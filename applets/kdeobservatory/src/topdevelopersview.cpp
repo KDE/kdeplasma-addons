@@ -51,8 +51,6 @@ void TopDevelopersView::createViews()
 void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
 {
     QString project = data["project"].toString();
-    if (project.isEmpty())
-        return;
     
     RankValueMap topProjectDevelopers = data[project].value<RankValueMap>();
 

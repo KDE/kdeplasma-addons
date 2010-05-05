@@ -46,8 +46,6 @@ void KrazyReportView::createViews()
 void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
 {
     QString project = data["project"].toString();
-    if (project.isEmpty())
-        return;
 
     KrazyReportMap krazyReportMap = data[project].value<KrazyReportMap>();
 

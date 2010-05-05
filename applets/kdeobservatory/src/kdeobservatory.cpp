@@ -163,36 +163,33 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
 void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    m_synchronizationTimer->stop();
-    m_right->setEnabled(false);
-    m_left->setEnabled(false);
-    m_updateLabel->hide();
-    m_horizontalLayout->removeItem(m_updateLabel);
-    m_horizontalLayout->insertItem(1, m_collectorProgress);
-    m_collectorProgress->show();
-    setBusy(true);
+    QString project = data["project"].toString();
 
     if (sourceName == "topActiveProjects")
         m_viewProviders[i18n("Top Active Projects")]->updateViews(data);
-    else if (sourceName == "topProjectDevelopers")
+    else if (sourceName == "topProjectDevelopers" && !project.isEmpty())
         m_viewProviders[i18n("Top Developers")]->updateViews(data);
-    else if (sourceName == "commitHistory")
+    else if (sourceName == "commitHistory" && !project.isEmpty())
         m_viewProviders[i18n("Commit History")]->updateViews(data);
-    else if (sourceName == "krazyReport")
-    {
+    else if (sourceName == "krazyReport" && !project.isEmpty())
         m_viewProviders[i18n("Krazy Report")]->updateViews(data);
-        updateViews();
-    }
 
-    setBusy(false);
-    m_collectorProgress->hide();
-    m_horizontalLayout->removeItem(m_collectorProgress);
-    m_horizontalLayout->insertItem(1, m_updateLabel);
-    m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
-    m_updateLabel->show();
-    m_left->setEnabled(true);
-    m_right->setEnabled(true);
-    m_synchronizationTimer->start();
+    --m_sourceCounter;
+    kDebug() << "m_sourceCounter =" << m_sourceCounter << "SourceName =" << sourceName << "Project =" << project;
+
+    if (m_sourceCounter == 0)
+    {
+        setBusy(false);
+        updateViews();
+        m_collectorProgress->hide();
+        m_horizontalLayout->removeItem(m_collectorProgress);
+        m_horizontalLayout->insertItem(1, m_updateLabel);
+        m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
+        m_updateLabel->show();
+        m_left->setEnabled(true);
+        m_right->setEnabled(true);
+        m_synchronizationTimer->start();
+    }
 }
 
 void KdeObservatory::safeInit()
@@ -203,6 +200,8 @@ void KdeObservatory::safeInit()
     createTimers();
     createViews();
 
+    m_sourceCounter = 4;
+    
     m_engine->connectSource("topActiveProjects", this);
     m_engine->connectSource("topProjectDevelopers", this);
     m_engine->connectSource("commitHistory", this);
@@ -399,7 +398,17 @@ void KdeObservatory::switchViews(int delta)
 
 void KdeObservatory::updateSources()
 {
+    m_synchronizationTimer->stop();
+    m_right->setEnabled(false);
+    m_left->setEnabled(false);
+    m_updateLabel->hide();
+    m_horizontalLayout->removeItem(m_updateLabel);
+    m_horizontalLayout->insertItem(1, m_collectorProgress);
+    m_collectorProgress->show();
+    setBusy(true);
+    
     m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
+    m_sourceCounter = 1;
 
     QHashIterator<QString, bool> i1(m_topDevelopersViewProjects);
     while (i1.hasNext())
@@ -410,6 +419,7 @@ void KdeObservatory::updateSources()
             KConfigGroup ops = m_service->operationDescription("topProjectDevelopers");
             ops.writeEntry("project", i1.key());
             m_service->startOperationCall(ops);
+            ++m_sourceCounter;
         }
     }
 
@@ -422,6 +432,7 @@ void KdeObservatory::updateSources()
             KConfigGroup ops = m_service->operationDescription("commitHistory");
             ops.writeEntry("project", i2.key());
             m_service->startOperationCall(ops);
+            ++m_sourceCounter;
         }
     }
 
@@ -436,12 +447,14 @@ void KdeObservatory::updateSources()
             ops.writeEntry("krazyReport", m_projects[i3.key()].krazyReport);
             ops.writeEntry("krazyFilePrefix", m_projects[i3.key()].krazyFilePrefix);
             m_service->startOperationCall(ops);
+            ++m_sourceCounter;
         }
     }
 }
 
 void KdeObservatory::createViews()
 {
+    m_views.clear();
     int count = m_activeViews.count();
     for (int i = 0; i < count; ++i)
     {
@@ -450,7 +463,6 @@ void KdeObservatory::createViews()
         if (pair.second && m_viewProviders.value(view))
             m_viewProviders[view]->createViews();
     }
-    updateViews();
 }
 
 void KdeObservatory::updateViews()
@@ -649,4 +661,3 @@ void KdeObservatory::createViewProviders()
     m_viewProviders[i18n("Krazy Report")] = new KrazyReportView(m_krazyReportViewProjects, m_projects, m_viewContainer);
 }
 
-#include "kdeobservatory.moc"
