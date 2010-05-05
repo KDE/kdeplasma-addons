@@ -77,11 +77,19 @@ void KdeObservatoryService::krazyReport(const QString &project, const QString &k
 {
     KIO::StoredTransferJob *job;
 
+    m_projectKrazyReportMap[project].clear();
+
     if (krazyReport.contains("reports"))
+    {
+        m_projectCounterMap[project] = 1;
         job = KIO::storedGet(KUrl("http://www.englishbreakfastnetwork.org/krazy/" + krazyReport), KIO::NoReload, KIO::HideProgressInfo);
+    }
     else if (krazyReport.contains("component="))
+    {
+        m_projectCounterMap[project] = 0;
         job = KIO::storedGet(KUrl("http://www.englishbreakfastnetwork.org/krazy/index.php?" + krazyReport), KIO::NoReload, KIO::HideProgressInfo);
-    
+    }
+
     m_krazyJobMap[job] = QPair<QString, QString>(project, krazyFilePrefix);
 
     connect(job, SIGNAL(result(KJob*)), this, SLOT(resultEBN(KJob*)));
@@ -90,14 +98,14 @@ void KdeObservatoryService::krazyReport(const QString &project, const QString &k
 void KdeObservatoryService::resultServlet(KJob *job)
 {
     KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>(job);
-    
+
     QString url = QUrl::fromPercentEncoding(storedJob->url().prettyUrl().toUtf8());
     QString mimeType = storedJob->mimetype();
     QString source = "";
     QRegExp regexp1("\\?op=(.*)(\\&|$)");
     if (regexp1.indexIn(url, 0) != -1)
         source = regexp1.cap(1);
-    
+
     if (job->error())
     {
         emit engineError(source, job->errorText());
@@ -112,7 +120,7 @@ void KdeObservatoryService::resultServlet(KJob *job)
             QRegExp regexp2("\\&p0=(.*)\\&p1");
             if (regexp2.indexIn(url, 0) != -1)
                 project = regexp2.cap(1);
-            
+
             if (url.contains("op=allProjectsInfo"))
             {
                 KdePresets::init(data);
@@ -132,6 +140,7 @@ void KdeObservatoryService::resultServlet(KJob *job)
                 }
 
                 m_engine->setData("topActiveProjects", "topActiveProjects", QVariant::fromValue<RankValueMap>(topActiveProjects));
+                m_engine->forceImmediateUpdateOfAllVisualizations();
             }
             else if (url.contains("op=topProjectDevelopers"))
             {
@@ -147,7 +156,9 @@ void KdeObservatoryService::resultServlet(KJob *job)
                 }
 
                 m_engine->setData("topProjectDevelopers", "project", project);
+                kDebug() << "Setting topProjectDevelopers" << project;
                 m_engine->setData("topProjectDevelopers", project, QVariant::fromValue<RankValueMap>(projectTopDevelopers));
+                m_engine->forceImmediateUpdateOfAllVisualizations();
             }
             else if (url.contains("op=commitHistory"))
             {
@@ -163,7 +174,9 @@ void KdeObservatoryService::resultServlet(KJob *job)
                 }
 
                 m_engine->setData("commitHistory", "project", project);
+                kDebug() << "Setting commitHistory" << project;
                 m_engine->setData("commitHistory", project, QVariant::fromValue<DateCommitList>(commitHistory));
+                m_engine->forceImmediateUpdateOfAllVisualizations();
             }
         }
         else
@@ -187,20 +200,51 @@ void KdeObservatoryService::resultEBN(KJob *job)
         {
             if (data.contains("<h1>Not Found</h1>"))
             {
-                emit engineError("krazyReport", i18n("Krazy report not found !"));
+                emit engineError("krazyReport", i18n("Krazy report not found: ") + QUrl::fromPercentEncoding(storedJob->url().prettyUrl().toUtf8()));
                 return;
             }
 
             if (data.contains("<table style=\"clear: right;\" class=\"sortable\" id=\"reportTable\" cellspacing=\"0\" border=\"0\" width=\"100%\">"))
             {
-            //    processModule(data, storedJob);
+                processModule(data, storedJob);
             }
             else
+            {
                 parseReport(data, storedJob);
+            }
         }
         else
             emit engineError("krazyReport", i18n("Empty data or incorrect returned mymetype"));
     }
+}
+
+void KdeObservatoryService::processModule(const QString &data, KIO::StoredTransferJob *storedJob)
+{
+    QRegExp exp("<a href=\"(reports.*)\".*<td.*>.*(\\d+).*</td>");
+    exp.setMinimal(true);
+
+    QString project = m_krazyJobMap[storedJob].first;
+    
+    m_projectCounterMap[project] = 0;
+    m_projectKrazyReportMap[project].clear();
+
+    int pos = 0;
+    while ((pos = exp.indexIn(data, pos)) != -1)
+    {
+        if (exp.cap(2).toInt() > 0)
+        {
+            ++m_projectCounterMap[project];
+
+            KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://www.englishbreakfastnetwork.org/krazy/" + exp.cap(1)), KIO::NoReload, KIO::HideProgressInfo);
+            connect(job, SIGNAL(result(KJob*)), this, SLOT(resultEBN(KJob*)));
+
+            m_krazyJobMap[job] = m_krazyJobMap[storedJob];
+        }
+
+        pos += exp.matchedLength();
+    }
+
+    m_krazyJobMap.remove(storedJob);
 }
 
 void KdeObservatoryService::parseReport(const QString &data, KIO::StoredTransferJob *storedJob)
@@ -218,8 +262,9 @@ void KdeObservatoryService::parseReport(const QString &data, KIO::StoredTransfer
     pos1 = regExp1.indexIn(data, pos);
     pos2 = regExp2.indexIn(data, pos);
     pos3 = regExp3.indexIn(data, pos);
+    
+    QString project = m_krazyJobMap[storedJob].first;
 
-    KrazyReportMap krazyReportMap;
     while (pos1 != -1 || pos2 != -1 || pos3 != -1)
     {
         pos = pos1;
@@ -239,15 +284,23 @@ void KdeObservatoryService::parseReport(const QString &data, KIO::StoredTransfer
         }
         else if (pos == pos3)
         {
-            krazyReportMap[fileType][testName][regExp3.cap(1)].append(regExp3.cap(2));
+            m_projectKrazyReportMap[project][fileType][testName][regExp3.cap(1)].append(regExp3.cap(2));
             pos += regExp3.matchedLength();
         }
         pos1 = regExp1.indexIn(data, pos);
         pos2 = regExp2.indexIn(data, pos);
         pos3 = regExp3.indexIn(data, pos);
     }
-    m_engine->setData("krazyReport", "project", m_krazyJobMap[storedJob].first);
-    m_engine->setData("krazyReport", m_krazyJobMap[storedJob].first, QVariant::fromValue<KrazyReportMap>(krazyReportMap));
-}
 
-#include "kdeobservatoryservice.moc"
+    --m_projectCounterMap[project];
+    if (m_projectCounterMap[project] == 0)
+    {
+        m_engine->setData("krazyReport", "project", project);
+        m_engine->setData("krazyReport", project, QVariant::fromValue<KrazyReportMap>(m_projectKrazyReportMap[project]));
+        m_engine->forceImmediateUpdateOfAllVisualizations();
+        m_projectCounterMap.remove(project);
+        m_projectKrazyReportMap.remove(project);
+    }
+
+    m_krazyJobMap.remove(storedJob);
+}

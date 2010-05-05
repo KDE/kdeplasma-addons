@@ -63,5 +63,3 @@ Plasma::Service *KdeObservatoryEngine::serviceForSource(const QString &source)
     service->setParent(this);
     return service;
 }
-
-#include "kdeobservatoryengine.moc"

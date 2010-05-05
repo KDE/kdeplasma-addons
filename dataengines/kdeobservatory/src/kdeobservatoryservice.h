@@ -37,6 +37,12 @@ namespace Plasma
     class ServiceJob;
 }
 
+typedef QMultiMap<int, QString> RankValueMap;
+typedef QList< QPair<QString, int> > DateCommitList;
+
+//            FileType      TestName      FileName       Error
+typedef QMap< QString, QMap<QString, QMap<QString, QList<QString> > > > KrazyReportMap;
+
 class KdeObservatoryService : public Plasma::Service
 {
     Q_OBJECT
@@ -60,20 +66,17 @@ protected slots:
     void resultEBN(KJob *job);
 
 private:
+    void processModule(const QString &data, KIO::StoredTransferJob *storedJob);
     void parseReport(const QString &data, KIO::StoredTransferJob *storedJob);
     
     KdeObservatoryEngine *m_engine;
     QMap< KIO::StoredTransferJob *, QPair<QString, QString> > m_krazyJobMap;
+    QMap<QString, KrazyReportMap> m_projectKrazyReportMap;
+    QMap<QString, int> m_projectCounterMap;
 };
 
-typedef QMultiMap<int, QString> RankValueMap;
 Q_DECLARE_METATYPE(RankValueMap)
-
-typedef QList< QPair<QString, int> > DateCommitList;
 Q_DECLARE_METATYPE(DateCommitList)
-
-//            FileType      TestName      FileName       Error
-typedef QMap< QString, QMap<QString, QMap<QString, QList<QString> > > > KrazyReportMap;
 Q_DECLARE_METATYPE(KrazyReportMap)
 
 #endif
