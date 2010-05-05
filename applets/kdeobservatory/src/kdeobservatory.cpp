@@ -53,7 +53,6 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
   m_mainContainer(0),
   m_currentView(0),
   m_viewTransitionTimer(0),
-  m_synchronizationTimer(0),
   m_transitionTimer(0)
 {
     setBackgroundHints(DefaultBackground);
@@ -114,6 +113,7 @@ QGraphicsWidget *KdeObservatory::graphicsWidget()
         m_collectorProgress->setMeterType(Plasma::Meter::BarMeterHorizontal);
         m_collectorProgress->setMaximumHeight(22);
         m_collectorProgress->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        m_collectorProgress->setValue(0);
         m_collectorProgress->hide();
 
         m_updateLabel = new Plasma::Label(m_mainContainer);
@@ -175,7 +175,7 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
         m_viewProviders[i18n("Krazy Report")]->updateViews(data);
 
     --m_sourceCounter;
-    kDebug() << "m_sourceCounter =" << m_sourceCounter << "SourceName =" << sourceName << "Project =" << project;
+    m_collectorProgress->setValue(m_collectorProgress->maximum() -  m_sourceCounter);
 
     if (m_sourceCounter == 0)
     {
@@ -188,7 +188,6 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
         m_updateLabel->show();
         m_left->setEnabled(true);
         m_right->setEnabled(true);
-        m_synchronizationTimer->start();
     }
 }
 
@@ -239,7 +238,6 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 
     // Config - General
     m_configGeneral->commitExtent->setValue(m_commitExtent);
-    m_configGeneral->synchronizationDelay->setTime(QTime(m_synchronizationDelay/3600, (m_synchronizationDelay/60)%60, m_synchronizationDelay%60));
     m_configGeneral->enableAutoViewChange->setChecked(m_enableAutoViewChange);
     m_configGeneral->viewsDelay->setTime(QTime(m_viewsDelay/3600, (m_viewsDelay/60)%60, m_viewsDelay%60));
 
@@ -273,8 +271,6 @@ void KdeObservatory::configAccepted()
 {
     // General properties
     m_commitExtent = m_configGeneral->commitExtent->value();
-    QTime synchronizationDelay = m_configGeneral->synchronizationDelay->time();
-    m_synchronizationDelay = synchronizationDelay.second() + synchronizationDelay.minute()*60 + synchronizationDelay.hour()*3600;
     m_enableAutoViewChange = (m_configGeneral->enableAutoViewChange->checkState() == Qt::Checked) ? true:false;
     QTime viewsDelay = m_configGeneral->viewsDelay->time();
     m_viewsDelay = viewsDelay.second() + viewsDelay.minute()*60 + viewsDelay.hour()*3600;
@@ -294,7 +290,6 @@ void KdeObservatory::configAccepted()
     }
 
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
-    m_synchronizationTimer->setInterval(m_synchronizationDelay * 1000);
 
     // Projects properties
     QStringList projectNames;
@@ -398,11 +393,11 @@ void KdeObservatory::switchViews(int delta)
 
 void KdeObservatory::updateSources()
 {
-    m_synchronizationTimer->stop();
     m_right->setEnabled(false);
     m_left->setEnabled(false);
     m_updateLabel->hide();
     m_horizontalLayout->removeItem(m_updateLabel);
+    m_collectorProgress->setValue(0);
     m_horizontalLayout->insertItem(1, m_collectorProgress);
     m_collectorProgress->show();
     setBusy(true);
@@ -450,6 +445,9 @@ void KdeObservatory::updateSources()
             ++m_sourceCounter;
         }
     }
+
+    m_collectorProgress->setMaximum(m_sourceCounter);
+    m_collectorProgress->setValue(0);
 }
 
 void KdeObservatory::createViews()
@@ -468,7 +466,6 @@ void KdeObservatory::createViews()
 void KdeObservatory::updateViews()
 {
     m_viewTransitionTimer->stop();
-    m_synchronizationTimer->stop();
     if (m_transitionTimer)
         m_transitionTimer->stop();
 
@@ -493,8 +490,6 @@ void KdeObservatory::updateViews()
         if (m_enableAutoViewChange)
             m_viewTransitionTimer->start();
     }
-
-    m_synchronizationTimer->start();
 }
 
 void KdeObservatory::loadConfig()
@@ -503,7 +498,6 @@ void KdeObservatory::loadConfig()
 
     // Config - General
     m_commitExtent = m_configGroup.readEntry("commitExtent", 7);
-    m_synchronizationDelay = m_configGroup.readEntry("synchronizationDelay", 300);
     m_enableAutoViewChange = m_configGroup.readEntry("enableAutoViewChange", true);
     m_viewsDelay = m_configGroup.readEntry("viewsDelay", 5);
 
@@ -582,7 +576,6 @@ void KdeObservatory::saveConfig()
 {
     // General properties
     m_configGroup.writeEntry("commitExtent", m_commitExtent);
-    m_configGroup.writeEntry("synchronizationDelay", m_synchronizationDelay);
     m_configGroup.writeEntry("enableAutoViewChange", m_enableAutoViewChange);
     m_configGroup.writeEntry("viewsDelay", m_viewsDelay);
 
@@ -642,15 +635,10 @@ void KdeObservatory::saveConfig()
 void KdeObservatory::createTimers()
 {
     delete m_viewTransitionTimer;
-    delete m_synchronizationTimer;
     
     m_viewTransitionTimer = new QTimer(this);
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
     connect(m_viewTransitionTimer, SIGNAL(timeout()), this, SLOT(moveViewRight()));
-
-    m_synchronizationTimer = new QTimer(this);
-    m_synchronizationTimer->setInterval(m_synchronizationDelay * 1000);
-    connect(m_synchronizationTimer, SIGNAL(timeout()), this, SLOT(updateSources()));
 }
 
 void KdeObservatory::createViewProviders()

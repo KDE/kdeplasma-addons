@@ -76,43 +76,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="lblSynchronize">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Synchronize data every:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" colspan="3">
-      <widget class="QTimeEdit" name="synchronizationDelay">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="displayFormat">
-        <string>hh 'Hours' mm 'Mins' ss 'Secs'</string>
-       </property>
-       <property name="time">
-        <time>
-         <hour>0</hour>
-         <minute>5</minute>
-         <second>0</second>
-        </time>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0" colspan="2">
+     <item row="1" column="0" colspan="2">
       <widget class="QCheckBox" name="enableAutoViewChange">
        <property name="text">
         <string>Enable automatic view change</string>

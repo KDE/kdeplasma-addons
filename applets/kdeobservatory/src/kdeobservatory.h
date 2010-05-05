@@ -100,7 +100,6 @@ private:
 
     // Config - General
     int  m_commitExtent;
-    int  m_synchronizationDelay;
     bool m_cacheContents;
     bool m_enableAutoViewChange;
     int  m_viewsDelay;
@@ -138,7 +137,6 @@ private:
     int m_currentView;
 
     QTimer *m_viewTransitionTimer;
-    QTimer *m_synchronizationTimer;
     QTimeLine *m_transitionTimer;
 
     Plasma::DataEngine *m_engine;

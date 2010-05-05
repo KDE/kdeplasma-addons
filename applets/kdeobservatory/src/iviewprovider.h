@@ -50,7 +50,7 @@ public:
 protected:
     QGraphicsWidget *m_parent;
     Qt::WindowFlags m_wFlags;
-    QHash<QString, QGraphicsWidget *> m_views;
+    QMap<QString, QGraphicsWidget *> m_views;
     QHash<QString, QGraphicsWidget *> m_viewContainers;
 };
 
