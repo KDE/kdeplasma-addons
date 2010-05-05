@@ -29,3 +29,9 @@ KdeObservatoryConfigGeneral::KdeObservatoryConfigGeneral(QWidget *parent, Qt::Wi
 KdeObservatoryConfigGeneral::~KdeObservatoryConfigGeneral()
 {
 }
+
+void KdeObservatoryConfigGeneral::on_activitiesInRange_toggled(bool value)
+{
+    fromDate->setEnabled(value);
+    toDate->setEnabled(value);
+}

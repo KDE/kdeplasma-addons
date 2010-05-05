@@ -110,11 +110,11 @@ QGraphicsWidget *KdeObservatory::graphicsWidget()
         connect(m_left, SIGNAL(clicked()), this, SLOT(moveViewLeftClicked()));
 
         m_collectorProgress = new Plasma::Meter(m_mainContainer);
+        m_collectorProgress->hide();
         m_collectorProgress->setMeterType(Plasma::Meter::BarMeterHorizontal);
         m_collectorProgress->setMaximumHeight(22);
         m_collectorProgress->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         m_collectorProgress->setValue(0);
-        m_collectorProgress->hide();
 
         m_updateLabel = new Plasma::Label(m_mainContainer);
         m_updateLabel->setText("");
@@ -237,7 +237,14 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
             m_configViews, SLOT(projectRemoved(const QString &)));
 
     // Config - General
+    if (m_activityRangeType == 0)
+        m_configGeneral->activitiesInPastDays->setChecked(true);
+    else
+        m_configGeneral->activitiesInRange->setChecked(true);
     m_configGeneral->commitExtent->setValue(m_commitExtent);
+    m_configGeneral->fromDate->setDate(QDate::fromString(m_commitFrom, "yyyyMMdd"));
+    m_configGeneral->toDate  ->setDate(QDate::fromString(m_commitTo  , "yyyyMMdd"));
+    
     m_configGeneral->enableAutoViewChange->setChecked(m_enableAutoViewChange);
     m_configGeneral->viewsDelay->setTime(QTime(m_viewsDelay/3600, (m_viewsDelay/60)%60, m_viewsDelay%60));
 
@@ -270,7 +277,10 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 void KdeObservatory::configAccepted()
 {
     // General properties
+    m_activityRangeType = (m_configGeneral->activitiesInPastDays->isChecked()) ? 0:1;
     m_commitExtent = m_configGeneral->commitExtent->value();
+    m_commitFrom = m_configGeneral->fromDate->date().toString("yyyyMMdd");
+    m_commitTo   = m_configGeneral->toDate  ->date().toString("yyyyMMdd");
     m_enableAutoViewChange = (m_configGeneral->enableAutoViewChange->checkState() == Qt::Checked) ? true:false;
     QTime viewsDelay = m_configGeneral->viewsDelay->time();
     m_viewsDelay = viewsDelay.second() + viewsDelay.minute()*60 + viewsDelay.hour()*3600;
@@ -401,6 +411,21 @@ void KdeObservatory::updateSources()
     m_horizontalLayout->insertItem(1, m_collectorProgress);
     m_collectorProgress->show();
     setBusy(true);
+
+    QString commitFrom = "";
+    QString commitTo = "";
+    
+    if (m_activityRangeType == 1)
+    {
+        commitFrom = m_commitFrom;
+        commitTo   = m_commitTo;
+    }
+    else
+    {
+        QDate currentDate = QDate::currentDate();
+        commitTo   = currentDate.toString("yyyyMMdd");
+        commitFrom = currentDate.addDays(-m_commitExtent).toString("yyyyMMdd");
+    }
     
     m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
     m_sourceCounter = 1;
@@ -413,6 +438,8 @@ void KdeObservatory::updateSources()
         {
             KConfigGroup ops = m_service->operationDescription("topProjectDevelopers");
             ops.writeEntry("project", i1.key());
+            ops.writeEntry("commitFrom", commitFrom);
+            ops.writeEntry("commitTo"  , commitTo);
             m_service->startOperationCall(ops);
             ++m_sourceCounter;
         }
@@ -426,6 +453,8 @@ void KdeObservatory::updateSources()
         {
             KConfigGroup ops = m_service->operationDescription("commitHistory");
             ops.writeEntry("project", i2.key());
+            ops.writeEntry("commitFrom", commitFrom);
+            ops.writeEntry("commitTo"  , commitTo);
             m_service->startOperationCall(ops);
             ++m_sourceCounter;
         }
@@ -497,7 +526,10 @@ void KdeObservatory::loadConfig()
     m_configGroup = config();
 
     // Config - General
+    m_activityRangeType = m_configGroup.readEntry("activityRangeType", 0);
     m_commitExtent = m_configGroup.readEntry("commitExtent", 7);
+    m_commitFrom = m_configGroup.readEntry("commitFrom", QDate::currentDate().toString("yyyyMMdd"));
+    m_commitTo   = m_configGroup.readEntry("commitTo"  , QDate::currentDate().toString("yyyyMMdd"));
     m_enableAutoViewChange = m_configGroup.readEntry("enableAutoViewChange", true);
     m_viewsDelay = m_configGroup.readEntry("viewsDelay", 5);
 
@@ -575,7 +607,10 @@ void KdeObservatory::loadConfig()
 void KdeObservatory::saveConfig()
 {
     // General properties
+    m_configGroup.writeEntry("activityRangeType", m_activityRangeType);
     m_configGroup.writeEntry("commitExtent", m_commitExtent);
+    m_configGroup.writeEntry("commitFrom", m_commitFrom);
+    m_configGroup.writeEntry("commitTo"  , m_commitTo);
     m_configGroup.writeEntry("enableAutoViewChange", m_enableAutoViewChange);
     m_configGroup.writeEntry("viewsDelay", m_viewsDelay);
 

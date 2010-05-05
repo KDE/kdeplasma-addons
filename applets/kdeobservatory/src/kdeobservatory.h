@@ -99,7 +99,10 @@ private:
     KdeObservatoryConfigViews    *m_configViews;
 
     // Config - General
-    int  m_commitExtent;
+    int m_activityRangeType;
+    int m_commitExtent;
+    QString m_commitFrom;
+    QString m_commitTo;
     bool m_cacheContents;
     bool m_enableAutoViewChange;
     int  m_viewsDelay;

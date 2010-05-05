@@ -30,6 +30,9 @@ class KdeObservatoryConfigGeneral : public QWidget, public Ui::KdeObservatoryCon
 public:
     explicit KdeObservatoryConfigGeneral(QWidget *parent = 0, Qt::WindowFlags f = 0);
     virtual ~KdeObservatoryConfigGeneral();
+    
+protected Q_SLOTS:
+    void on_activitiesInRange_toggled(bool value);
 };
 
 #endif
