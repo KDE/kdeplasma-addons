@@ -129,7 +129,7 @@ void KdeObservatoryService::resultServlet(KJob *job)
             else if (url.contains("op=topActiveProjects"))
             {
                 RankValueMap topActiveProjects;
-                foreach (QString row, data.split('\n'))
+                foreach (const QString &row, data.split('\n'))
                 {
                     if (!row.isEmpty())
                     {
@@ -145,7 +145,7 @@ void KdeObservatoryService::resultServlet(KJob *job)
             else if (url.contains("op=topProjectDevelopers"))
             {
                 RankValueMap projectTopDevelopers;
-                foreach (QString row, data.split('\n'))
+                foreach (const QString &row, data.split('\n'))
                 {
                     if (!row.isEmpty())
                     {
@@ -162,7 +162,7 @@ void KdeObservatoryService::resultServlet(KJob *job)
             else if (url.contains("op=commitHistory"))
             {
                 DateCommitList commitHistory;
-                foreach (QString row, data.split('\n'))
+                foreach (const QString &row, data.split('\n'))
                 {
                     if (!row.isEmpty())
                     {

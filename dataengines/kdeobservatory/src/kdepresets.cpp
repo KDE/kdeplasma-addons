@@ -28,13 +28,16 @@ void KdePresets::init(const QString &data)
 {
     if (!data.isEmpty())
     {
-        foreach (QString row, data.split('\n'))
+        foreach (const QString &row, data.split('\n'))
         {
             if (!row.isEmpty())
             {
                 QStringList list;
-                foreach (QString token, row.split(';'))
-                    list << token.remove('\r');
+                foreach (const QString &token, row.split(';'))
+                {
+                    QString newToken = token;
+                    list << newToken.remove('\r');
+                }
                 presets << list;
             }
         }
