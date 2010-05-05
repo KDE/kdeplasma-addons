@@ -137,7 +137,6 @@ void WeatherApplet::init()
 
     m_titlePanel->setHorizontalSpacing(0);
     m_titlePanel->setVerticalSpacing(0);
-    m_bottomLayout = new QGraphicsLinearLayout(Qt::Horizontal);
 
     m_locationLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
     m_titleFont = QApplication::font();
@@ -299,7 +298,7 @@ void WeatherApplet::setVisibleLayout(bool val)
     }
 
     setVisible(val, m_titlePanel);
-    setVisible(val, m_bottomLayout);
+    m_tabBar->setVisible(val);
 
     m_courtesyLabel->setVisible(val);
 }
@@ -710,9 +709,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (!m_setupLayout) {
-        m_bottomLayout->addItem(m_tabBar);
-        m_bottomLayout->setStretchFactor(m_tabBar, 2);
-        m_layout->addItem(m_bottomLayout);
+        m_layout->addItem(m_tabBar);
         m_layout->addItem(m_courtesyLabel);
         m_setupLayout = 1;
     }

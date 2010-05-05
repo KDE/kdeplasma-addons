@@ -88,7 +88,6 @@ private:
     int m_setupLayout;
     QGraphicsLinearLayout *m_layout;
     QGraphicsGridLayout *m_titlePanel;
-    QGraphicsLinearLayout *m_bottomLayout;
     BackgroundWidget *m_graphicsWidget;
 
     Plasma::Frame *m_titleFrame;
