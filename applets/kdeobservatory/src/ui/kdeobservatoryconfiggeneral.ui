@@ -71,7 +71,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>days</string>
+             <string comment="noun, the 24-hour period" extracomment="noun, the 24-hour period">days</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -98,7 +98,7 @@
           <item>
            <widget class="QRadioButton" name="activitiesInRange">
             <property name="text">
-             <string>From</string>
+             <string comment="The beginning of a range" extracomment="The beginning of a range">From</string>
             </property>
            </widget>
           </item>
@@ -130,7 +130,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>to</string>
+             <string comment="The end of a range" extracomment="The end of a range">to</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

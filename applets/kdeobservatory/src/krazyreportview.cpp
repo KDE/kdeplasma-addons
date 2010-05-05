@@ -49,7 +49,8 @@ void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
 
     KrazyReportMap krazyReportMap = data[project].value<KrazyReportMap>();
 
-    foreach (const QString &fileType, krazyReportMap.keys())
+    const QList<QString> &keys = krazyReportMap.keys();
+    foreach (const QString &fileType, keys)
         createView(i18n("Krazy Report") + " - " + project, i18n("Krazy Report") + " - " + project + " - " + fileType);
     
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
