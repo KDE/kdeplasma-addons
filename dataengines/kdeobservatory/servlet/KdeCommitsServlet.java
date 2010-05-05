@@ -51,7 +51,6 @@ public class KdeCommitsServlet extends HttpServlet
 
         try
         {
-
             if (request.getParameterMap().size() == 0)
             {
                 response.setContentType("text/html");
@@ -96,39 +95,73 @@ public class KdeCommitsServlet extends HttpServlet
         printResultSet(out, res);
     }
 
-    public void topActiveProjects(PrintWriter out, String n) throws SQLException
+    public void topActiveProjects(PrintWriter out, String n, String fromDate, String toDate) throws SQLException
     {
-        String query = "select p.name, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 group by p.commit_subject order by count(*) desc";
+        String query = "select p.name, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0";
+
+        if (!fromDate.equals(""))
+            query = query + " and date(c.date_time) >= '" + fromDate + "'";
+
+        if (!toDate.equals(""))
+            query = query + " and date(c.date_time) <= '" + toDate + "'";
+
+        query = query + " group by p.commit_subject order by count(*) desc";
+
         if (!n.equals("0"))
             query = query + " limit 0 , " + n;
+
         Statement stmt = conn.createStatement();
         ResultSet res = stmt.executeQuery(query);
         printResultSet(out, res);
     }
 
-    public void topProjectDevelopers(PrintWriter out, String project, String n) throws SQLException
+    public void topProjectDevelopers(PrintWriter out, String project, String n, String fromDate, String toDate) throws SQLException
     {
         String query;
         if (!project.equals(""))
-            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from projects p, commits c, developers d where INSTR(c.path, p.commit_subject) > 0 and d.svn_account = c.svn_account and p.name = '" + project + "' group by d.full_name, p.name order by count(*) desc";
+            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from projects p, commits c, developers d where INSTR(c.path, p.commit_subject) > 0 and d.svn_account = c.svn_account and p.name = '" + project + "'";
         else
-            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from commits c, developers d where d.svn_account = c.svn_account group by d.full_name order by count(*) desc";
+            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from commits c, developers d where d.svn_account = c.svn_account";
+
+        if (!fromDate.equals(""))
+            query = query + " and date(c.date_time) >= '" + fromDate + "'";
+
+        if (!toDate.equals(""))
+            query = query + " and date(c.date_time) <= '" + toDate + "'";
+
+        if (!project.equals(""))
+            query = query + " group by d.full_name, p.name order by count(*) desc";
+        else
+            query = query + " group by d.full_name order by count(*) desc";
+
         if (!n.equals("0"))
             query = query + " limit 0 , " + n;
+
         Statement stmt = conn.createStatement();
         ResultSet res = stmt.executeQuery(query);
         printResultSet(out, res);
     }
 
-    public void commitHistory(PrintWriter out, String project, String n) throws SQLException
+    public void commitHistory(PrintWriter out, String project, String n, String fromDate, String toDate) throws SQLException
     {
         String query;
         if (!project.equals(""))
-            query = "select date(c.date_time) date, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 and p.name = '" + project + "' group by date order by date asc";
+            query = "select date(c.date_time) date, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 and p.name = '" + project + "'";
         else
-            query = "select date(c.date_time) date, count(*) from commits c group by date order by date asc";
+            query = "select date(c.date_time) date, count(*) from commits c";
+        
+        if (!fromDate.equals(""))
+            query = query + " and date(c.date_time) >= '" + fromDate + "'";
+
+        if (!toDate.equals(""))
+            query = query + " and date(c.date_time) <= '" + toDate + "'";
+
+        if (!project.equals(""))
+        query = query + " group by date order by date asc";
+
         if (!n.equals("0"))
             query = query + " limit 0 , " + n;
+
         Statement stmt = conn.createStatement();
         ResultSet res = stmt.executeQuery(query);
         printResultSet(out, res);

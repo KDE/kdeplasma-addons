@@ -4,15 +4,33 @@
     <group name="allProjectsInfo">
     </group>
     <group name="topActiveProjects">
+        <entry name="commitFrom" type="String">
+            <label>Initial date</label>
+        </entry>
+        <entry name="commitTo" type="String">
+            <label>Final date</label>
+        </entry>
     </group>
     <group name="topProjectDevelopers">
         <entry name="project" type="String">
             <label>The project from which to acquire developers</label>
         </entry>
+        <entry name="commitFrom" type="String">
+            <label>Initial date</label>
+        </entry>
+        <entry name="commitTo" type="String">
+            <label>Final date</label>
+        </entry>
     </group>
     <group name="commitHistory">
         <entry name="project" type="String">
             <label>The project from which to acquire commits</label>
+        </entry>
+        <entry name="commitFrom" type="String">
+            <label>Initial date</label>
+        </entry>
+        <entry name="commitTo" type="String">
+            <label>Final date</label>
         </entry>
     </group>
     <group name="krazyReport">

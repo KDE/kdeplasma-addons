@@ -38,11 +38,11 @@ Plasma::ServiceJob *KdeObservatoryService::createJob(const QString &operation, Q
     if (operation == "allProjectsInfo")
         allProjectsInfo();
     else if (operation == "topActiveProjects")
-        topActiveProjects();
+        topActiveProjects(parameters["commitFrom"].toString(), parameters["commitTo"].toString());
     else if (operation == "topProjectDevelopers")
-        topProjectDevelopers(parameters["project"].toString());
+        topProjectDevelopers(parameters["project"].toString(), parameters["commitFrom"].toString(), parameters["commitTo"].toString());
     else if (operation == "commitHistory")
-        commitHistory(parameters["project"].toString());
+        commitHistory(parameters["project"].toString(), parameters["commitFrom"].toString(), parameters["commitTo"].toString());
     else if (operation == "krazyReport")
         krazyReport(parameters["project"].toString(), parameters["krazyReport"].toString(), parameters["krazyFilePrefix"].toString());
 
@@ -55,21 +55,21 @@ void KdeObservatoryService::allProjectsInfo()
     connect(job, SIGNAL(result(KJob*)), this, SLOT(resultServlet(KJob*)));
 }
 
-void KdeObservatoryService::topActiveProjects()
+void KdeObservatoryService::topActiveProjects(const QString &commitFrom, const QString &commitTo)
 {
-    KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topActiveProjects&p0=0"), KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topActiveProjects&p0=0&p1=" + commitFrom + "&p2=" + commitTo), KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(resultServlet(KJob*)));
 }
 
-void KdeObservatoryService::topProjectDevelopers(const QString &project)
+void KdeObservatoryService::topProjectDevelopers(const QString &project, const QString &commitFrom, const QString &commitTo)
 {
-    KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topProjectDevelopers&p0=" + project + "&p1=0"), KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=topProjectDevelopers&p0=" + project + "&p1=0&p2=" + commitFrom + "&p3=" + commitTo), KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(resultServlet(KJob*)));
 }
 
-void KdeObservatoryService::commitHistory(const QString &project)
+void KdeObservatoryService::commitHistory(const QString &project, const QString &commitFrom, const QString &commitTo)
 {
-    KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=commitHistory&p0=" + project + "&p1=0"), KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *job = KIO::storedGet(KUrl("http://sandroandrade.org/servlets/KdeCommitsServlet?op=commitHistory&p0=" + project + "&p1=0&p2=" + commitFrom + "&p3=" + commitTo), KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(resultServlet(KJob*)));
 }
 
@@ -156,7 +156,6 @@ void KdeObservatoryService::resultServlet(KJob *job)
                 }
 
                 m_engine->setData("topProjectDevelopers", "project", project);
-                kDebug() << "Setting topProjectDevelopers" << project;
                 m_engine->setData("topProjectDevelopers", project, QVariant::fromValue<RankValueMap>(projectTopDevelopers));
                 m_engine->forceImmediateUpdateOfAllVisualizations();
             }
@@ -174,7 +173,6 @@ void KdeObservatoryService::resultServlet(KJob *job)
                 }
 
                 m_engine->setData("commitHistory", "project", project);
-                kDebug() << "Setting commitHistory" << project;
                 m_engine->setData("commitHistory", project, QVariant::fromValue<DateCommitList>(commitHistory));
                 m_engine->forceImmediateUpdateOfAllVisualizations();
             }

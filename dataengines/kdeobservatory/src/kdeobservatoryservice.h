@@ -52,9 +52,9 @@ public:
 
 protected:
     void allProjectsInfo();
-    void topActiveProjects();
-    void topProjectDevelopers(const QString &project);
-    void commitHistory(const QString &project);
+    void topActiveProjects(const QString &commitFrom, const QString &commitTo);
+    void topProjectDevelopers(const QString &project, const QString &commitFrom, const QString &commitTo);
+    void commitHistory(const QString &project, const QString &commitFrom, const QString &commitTo);
     void krazyReport(const QString &project, const QString &krazyReport, const QString &krazyFilePrefix);
 
 Q_SIGNALS:
