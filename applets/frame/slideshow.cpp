@@ -200,7 +200,7 @@ void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data 
 {
     if (data.isEmpty()) {
         m_image = QImage();
-        m_picture->setMessage(i18n("No Picture for this Provider."));
+        m_picture->setMessage(i18n("No Picture from this Provider."));
         return;
     }
 
