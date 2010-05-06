@@ -174,6 +174,9 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
     else if (sourceName == "krazyReport" && !project.isEmpty())
         m_viewProviders[i18n("Krazy Report")]->updateViews(data);
 
+    if (sourceName != "topActiveProjects" && !data.contains(project) && !data.contains("error"))
+        return;
+
     --m_sourceCounter;
     m_collectorProgress->setValue(m_collectorProgress->maximum() -  m_sourceCounter);
 
