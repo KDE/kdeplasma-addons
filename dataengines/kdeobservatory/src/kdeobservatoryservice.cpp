@@ -101,14 +101,16 @@ void KdeObservatoryService::resultServlet(KJob *job)
 
     QString url = QUrl::fromPercentEncoding(storedJob->url().prettyUrl().toUtf8());
     QString mimeType = storedJob->mimetype();
+
     QString source = "";
     QRegExp regexp1("\\?op=(.*)(\\&|$)");
+    regexp1.setMinimal(true);
     if (regexp1.indexIn(url, 0) != -1)
         source = regexp1.cap(1);
 
     if (job->error())
     {
-        emit engineError(source, job->errorText());
+        emit engineError(source, job->errorString());
     }
     else
     {
@@ -126,7 +128,7 @@ void KdeObservatoryService::resultServlet(KJob *job)
                 KdePresets::init(data);
                 emit engineReady();
             }
-            else if (url.contains("op=topActiveProjects"))
+            else if (source == "topActiveProjects")
             {
                 RankValueMap topActiveProjects;
                 foreach (const QString &row, data.split('\n'))
@@ -142,7 +144,7 @@ void KdeObservatoryService::resultServlet(KJob *job)
                 m_engine->setData("topActiveProjects", "topActiveProjects", QVariant::fromValue<RankValueMap>(topActiveProjects));
                 m_engine->forceImmediateUpdateOfAllVisualizations();
             }
-            else if (url.contains("op=topProjectDevelopers"))
+            else if (source == "topProjectDevelopers")
             {
                 RankValueMap projectTopDevelopers;
                 foreach (const QString &row, data.split('\n'))
@@ -159,7 +161,7 @@ void KdeObservatoryService::resultServlet(KJob *job)
                 m_engine->setData("topProjectDevelopers", project, QVariant::fromValue<RankValueMap>(projectTopDevelopers));
                 m_engine->forceImmediateUpdateOfAllVisualizations();
             }
-            else if (url.contains("op=commitHistory"))
+            else if (source == "commitHistory")
             {
                 DateCommitList commitHistory;
                 foreach (const QString &row, data.split('\n'))
@@ -302,3 +304,4 @@ void KdeObservatoryService::parseReport(const QString &data, KIO::StoredTransfer
 
     m_krazyJobMap.remove(storedJob);
 }
+
