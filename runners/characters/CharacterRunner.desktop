@@ -12,6 +12,7 @@ Icon=accessories-character-map
 Comment=Creates special characters from their hexadecimal codes
 Comment[en_GB]=Creates special characters from their hexadecimal codes
 Comment[pt]=Cria caracteres especiais a partir do seu código hexadecimal
+Comment[pt_BR]=Cria caracteres especiais de seus códigos hexadecimais
 Comment[sv]=Skapar specialtecken från deras hexadecimala koder
 Comment[uk]=Створення спеціальних символів за їх шістнадцятковим кодом
 Comment[x-test]=xxCreates special characters from their hexadecimal codesxx
