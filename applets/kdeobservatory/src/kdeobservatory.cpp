@@ -212,6 +212,7 @@ void KdeObservatory::safeInit()
 void KdeObservatory::engineError(const QString &source, const QString &error)
 {
     kDebug() << "Engine error" << error << "in source" << source;
+    --m_sourceCounter;
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -464,7 +465,7 @@ void KdeObservatory::updateSources()
     while (i3.hasNext())
     {
         i3.next();
-        if (i3.value())
+        if (i3.value() && (m_projects[i3.key()].krazyReport.contains("reports") || m_projects[i3.key()].krazyReport.contains("component=")))
         {
             KConfigGroup ops = m_service->operationDescription("krazyReport");
             ops.writeEntry("project", i3.key());
