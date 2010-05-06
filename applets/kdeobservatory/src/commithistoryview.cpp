@@ -39,7 +39,11 @@ public:
 
     virtual QwtText label(double v) const
     {
-        return QwtText(m_minDate.addDays((int)v).toString("dd/MM"));
+        QString dateFormat = KGlobal::locale()->dateFormatShort();
+        if (dateFormat == "%Y-%m-%d")
+            return QwtText(m_minDate.addDays((int)v).toString("MM/dd"));
+        else
+            return QwtText(m_minDate.addDays((int)v).toString("dd/MM"));
     }
 
 private:
