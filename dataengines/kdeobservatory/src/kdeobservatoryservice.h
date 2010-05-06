@@ -37,12 +37,6 @@ namespace Plasma
     class ServiceJob;
 }
 
-typedef QMultiMap<int, QString> RankValueMap;
-typedef QList< QPair<QString, int> > DateCommitList;
-
-//            FileType      TestName      FileName       Error
-typedef QMap< QString, QMap<QString, QMap<QString, QList<QString> > > > KrazyReportMap;
-
 class KdeObservatoryService : public Plasma::Service
 {
     Q_OBJECT
@@ -52,9 +46,9 @@ public:
 
 protected:
     void allProjectsInfo();
-    void topActiveProjects(const QString &commitFrom, const QString &commitTo);
-    void topProjectDevelopers(const QString &project, const QString &commitFrom, const QString &commitTo);
-    void commitHistory(const QString &project, const QString &commitFrom, const QString &commitTo);
+    void topActiveProjects(QMap<QString, QVariant> &parameters);
+    void topProjectDevelopers(QMap<QString, QVariant> &parameters);
+    void commitHistory(QMap<QString, QVariant> &parameters);
     void krazyReport(const QString &project, const QString &krazyReport, const QString &krazyFilePrefix);
 
 Q_SIGNALS:
@@ -73,10 +67,7 @@ private:
     QMap< KIO::StoredTransferJob *, QPair<QString, QString> > m_krazyJobMap;
     QMap<QString, KrazyReportMap> m_projectKrazyReportMap;
     QMap<QString, int> m_projectCounterMap;
+    QMap< KIO::StoredTransferJob *, QMap<QString, QVariant> > m_jobParametersMap;
 };
-
-Q_DECLARE_METATYPE(RankValueMap)
-Q_DECLARE_METATYPE(DateCommitList)
-Q_DECLARE_METATYPE(KrazyReportMap)
 
 #endif

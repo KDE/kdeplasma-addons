@@ -23,6 +23,12 @@
 
 #include <Plasma/DataEngine>
 
+typedef QMultiMap<int, QString> RankValueMap;
+typedef QList< QPair<QString, int> > DateCommitList;
+
+//            FileType      TestName      FileName       Error
+typedef QMap< QString, QMap<QString, QMap<QString, QList<QString> > > > KrazyReportMap;
+
 class KdeObservatoryEngine : public Plasma::DataEngine
 {
     Q_OBJECT
@@ -38,6 +44,13 @@ public:
 
 Q_SIGNALS:
     void engineReady();
+
+private:
+    QHash< QString, QPair <QMap<QString, QVariant>, QVariant> > m_dataCache;
 };
+
+Q_DECLARE_METATYPE(RankValueMap)
+Q_DECLARE_METATYPE(DateCommitList)
+Q_DECLARE_METATYPE(KrazyReportMap)
 
 #endif
