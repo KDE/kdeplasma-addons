@@ -97,6 +97,12 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
          */
         virtual void configChanged();
 
+    Q_SIGNALS:
+        /**
+         * Emitted when the applet begins a fetch for a new weather source
+         */
+        void newWeatherSource();
+
     protected:
         /**
          * Connects applet to dataengine

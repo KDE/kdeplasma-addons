@@ -207,6 +207,7 @@ void WeatherPopupApplet::init()
 
 void WeatherPopupApplet::connectToEngine()
 {
+    emit newWeatherSource();
     setBusy(true);
     d->busyTimer->start();
     if (d->source.isEmpty()) {
