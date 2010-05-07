@@ -439,7 +439,6 @@ void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data
                     }
                 }
 
-                
                 data.itemNumber = m_list->size();
                 m_list->append(data);
             }

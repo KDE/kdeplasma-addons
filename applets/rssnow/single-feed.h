@@ -23,6 +23,7 @@
 #include "feeddata.h"
 #include <QGraphicsItem>
 #include <QGraphicsWidget>
+#include <QTextDocument>
 
 class QRect;
 
@@ -50,8 +51,8 @@ class SingleFeedItem : public QGraphicsWidget
         QRect m_rect;
         FeedData m_feeditem;
         Plasma::Svg * m_background;
-        QGraphicsTextItem * m_html;
         bool m_displayExtra;
+        QTextDocument m_doc;
        // QImage m_htmlImg;
 };
 

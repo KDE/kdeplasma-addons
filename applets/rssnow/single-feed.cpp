@@ -49,13 +49,6 @@ SingleFeedItem::SingleFeedItem(QGraphicsItem * parent) : QGraphicsWidget(parent)
 {
     m_background = new Plasma::Svg(this);
     m_background->setImagePath("rssnow/background");
-
-    //ok, so why use a QGraphicsTextItem and not display it? It causes a lot of
-    //clipping issues, so it's easier to only use the convert to plain text
-    //functionality of QGraphicsTextItem. TODO: find a more direct and elegant
-    //way to accomplish this.
-    m_html = new QGraphicsTextItem(this);
-    m_html->hide();
 }
 
 SingleFeedItem::~SingleFeedItem()
@@ -97,15 +90,19 @@ void SingleFeedItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option,
     } else {
         text = m_feeditem.title;
     }
+
+    m_doc.setHtml(text);
+    text = m_doc.toPlainText();
     p->drawText(QRectF(22, 2, width - 24, 16),
                 Qt::AlignLeft | Qt::AlignBottom, text);
 
     //draw text
     font.setBold(false);
     p->setFont(font);
+    m_doc.setHtml(m_feeditem.text);
     p->drawText(QRectF(2, 20, width - 4, height - 22),
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap,
-                m_html->toPlainText());
+                m_doc.toPlainText());
 }
 
 void SingleFeedItem::setRect(const QRect& rect)
@@ -120,7 +117,6 @@ void SingleFeedItem::setFeedData(FeedData feeddata)
 {
     //set feed item and repaint
     m_feeditem = feeddata;
-    m_html->setHtml(feeddata.text);
     if (!feeddata.url.isEmpty()) {
         setCursor(Qt::PointingHandCursor);
     } else {
