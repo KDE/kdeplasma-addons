@@ -1,7 +1,13 @@
 [Desktop Entry]
 Name=KDE Observatory Data Engine
+Name[pt]=Motor de Dados do Observatório do KDE
+Name[sv]=Datagränssnitt för KDE-observatorium
+Name[uk]=Рушій даних Спостережного пункту KDE
 Name[x-test]=xxKDE Observatory Data Enginexx
 Comment=A Data Engine for acquiring consolidated data about KDE projects
+Comment[pt]=Um motor de dados para adquirir dados consolidados sobre os projectos do KDE
+Comment[sv]=Ett datagränssnitt för att inhämta samlad data om KDE-projekt
+Comment[uk]=Рушій даних для отримання загальних даних щодо внесків до проектів KDE
 Comment[x-test]=xxA Data Engine for acquiring consolidated data about KDE projectsxx
 Type=Service
 
