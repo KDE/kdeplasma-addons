@@ -79,7 +79,6 @@ Pastebin::~Pastebin()
 {
     delete m_topSeparator;
     delete m_bottomSeparator;
-    delete m_icon;
     delete m_postingService;
     QString history;
     for (int i = 0; i < m_actionHistory.size(); ++i) {
@@ -110,7 +109,6 @@ void Pastebin::init()
     setHistorySize(historySize);
     setActionState(Idle);
     setInteractionState(Waiting);
-    m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
 
     updateTheme();
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
@@ -317,10 +315,9 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
         QPixmap iconok = KIcon("dialog-cancel").pixmap(QSize(iconsize, iconsize));
         paintPixmap(p, iconok, iconRect, pix_alpha);
     } else {
-        QPixmap iconpix = m_icon->pixmap(QSize(iconsize, iconsize));
+        QPixmap iconpix = KIcon("edit-paste").pixmap(QSize(iconsize, iconsize));
         paintPixmap(p, iconpix, iconRect, pix_alpha);
     }
-
 
     // Draw background
     if (m_interactionState == DraggedOver) {

@@ -142,7 +142,6 @@ private:
     QPen m_linePen;
     QColor m_fgColor;
     QColor m_bgColor;
-    KIcon* m_icon;
 
     Plasma::ToolTipContent toolTipData;
     QString m_url;
