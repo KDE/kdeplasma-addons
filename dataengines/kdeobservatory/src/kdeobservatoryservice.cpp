@@ -215,7 +215,7 @@ void KdeObservatoryService::resultServlet(KJob *job)
             }
         }
         else
-            emit engineError(source, i18n("Empty data or incorrect returned mymetype"));
+            emit engineError(source, i18n("Empty data or incorrect returned MIME type"));
     }
 }
 
@@ -249,7 +249,7 @@ void KdeObservatoryService::resultEBN(KJob *job)
             }
         }
         else
-            emit engineError("krazyReport", i18n("Empty data or incorrect returned mymetype"));
+            emit engineError("krazyReport", i18n("Empty data or incorrect returned MIME type"));
     }
 }
 
