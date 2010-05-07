@@ -18,11 +18,13 @@
  */
 
 #include "weatherconfig.h"
-#include "weatherconfigsearch.h"
 #include "weathervalidator.h"
 #include "weatheri18ncatalog.h"
 #include "ui_weatherconfig.h"
 #include <KInputDialog>
+#include <KPixmapSequence>
+#include <kpixmapsequencewidget.h>
+//#include <KPixmapSequenceWidget>
 
 #include <KNS3/DownloadDialog>
 #include <KUnitConversion/Converter>
@@ -34,23 +36,42 @@ class WeatherConfig::Private
 public:
     Private(WeatherConfig *weatherconfig)
         : q(weatherconfig),
-          searchDlg(weatherconfig)
+          dataengine(0),
+          dlg(0),
+          busyWidget(0),
+          checkedInCount(0)
     {
+    }
+
+    void setSource(int index)
+    {
+        QString text = ui.locationCombo->itemData(index).toString();
+        if (!text.isEmpty()) {
+            source = text;
+            emit q->settingsChanged();
+        }
     }
 
     void changePressed()
     {
-        searchDlg.setSource(source);
-        searchDlg.show();
-    }
+        checkedInCount = 0;
+        QString text = ui.locationCombo->currentText();
 
-    void searchResult(int result)
-    {
-        if (result == QDialog::Accepted) {
-            q->setSource(searchDlg.source());
-            searchDlg.hide();
-        } else {
-            searchDlg.hide();
+        if (text.isEmpty()) {
+            return;
+        }
+
+        ui.locationCombo->clear();
+
+        if (!busyWidget) {
+            busyWidget = new KPixmapSequenceWidget(q);
+            KPixmapSequence seq("process-working", 22);
+            busyWidget->setSequence(seq);
+            ui.locationSearchLayout->insertWidget(1, busyWidget);
+        }
+
+        foreach (WeatherValidator *validator, validators) {
+            validator->validate(text, true);
         }
     }
 
@@ -61,12 +82,18 @@ public:
         }
     }
 
+    void addSources(const QMap<QString, QString> &sources);
+    void validatorError(const QString &error);
+
     WeatherConfig *q;
-    WeatherConfigSearch searchDlg;
-    Plasma::DataEngine *m_engine;
+    //QHash<QString, QString> ions;
+    QList<WeatherValidator *> validators;
+    Plasma::DataEngine *dataengine;
     QString source;
     Ui::WeatherConfig ui;
     KDialog *dlg;
+    KPixmapSequenceWidget *busyWidget;
+    int checkedInCount;
 };
 
 WeatherConfig::WeatherConfig(QWidget *parent)
@@ -100,7 +127,6 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     d->ui.ghnsProviderButton->hide();
 
     connect(d->ui.changeButton, SIGNAL(clicked()), this, SLOT(changePressed()));
-    connect(&d->searchDlg, SIGNAL(finished(int)), this, SLOT(searchResult(int)));
 
     connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setUpdateInterval(int)));
@@ -115,7 +141,8 @@ WeatherConfig::WeatherConfig(QWidget *parent)
             this, SIGNAL(settingsChanged()));
     connect(d->ui.visibilityComboBox, SIGNAL(currentIndexChanged(int)),
             this, SIGNAL(settingsChanged()));
-
+    connect(d->ui.locationCombo, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(setSource(int)));
 }
 
 WeatherConfig::~WeatherConfig()
@@ -132,23 +159,63 @@ void WeatherConfig::getNewStuff()
 
 void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
 {
-    d->m_engine = dataengine;
-    d->searchDlg.setDataEngine(dataengine);
+    d->dataengine = dataengine;
+    //d->ions.clear();
+    qDeleteAll(d->validators);
+    d->validators.clear();
+    if (d->dataengine) {
+        const QVariantList plugins = d->dataengine->query("ions").values();
+        foreach (const QVariant& plugin, plugins) {
+            const QStringList pluginInfo = plugin.toString().split('|');
+            if (pluginInfo.count() > 1) {
+                //kDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
+                //d->ions.insert(pluginInfo[1], pluginInfo[0]);
+                WeatherValidator *validator = new WeatherValidator(this);
+                connect(validator, SIGNAL(error(QString)), this, SLOT(validatorError(QString)));
+                connect(validator, SIGNAL(finished(QMap<QString,QString>)), this, SLOT(addSources(QMap<QString,QString>)));
+                validator->setDataEngine(dataengine);
+                validator->setIon(pluginInfo[1]);
+                d->validators.append(validator);
+            }
+        }
+    }
 }
 
-
-void WeatherConfig::setSource(const QString& source)
+void WeatherConfig::Private::validatorError(const QString &error)
 {
+    kDebug() << error;
+}
+
+void WeatherConfig::Private::addSources(const QMap<QString, QString> &sources)
+{
+    ++checkedInCount;
+    QMapIterator<QString, QString> it(sources);
+    if (ui.locationCombo->count() == 0) {
+        ui.locationCombo->insertItem(0, QString());
+    }
+
+    while (it.hasNext()) {
+        it.next();
+        QStringList list = it.value().split('|', QString::SkipEmptyParts);
+        if (list.count() > 2) {
+            //kDebug() << list;
+            QString result = i18nc("A weather station location and the weather service it comes from",
+                                   "%1 (%2)", list[2], list[0]); // the names are too looong ions.value(list[0]));
+            ui.locationCombo->addItem(result, it.value());
+        }
+    }
+
+    if (checkedInCount >= validators.count()) {
+        delete busyWidget;
+        busyWidget = 0;
+        ui.locationCombo->showPopup();
+    }
+
+    /*
     d->source = source;
-    QStringList list = source.split('|', QString::SkipEmptyParts);
-    if (list.count() > 0) {
-        d->ui.providerTextLabel->setText(d->searchDlg.nameForPlugin(list[0]));
-    }
-    if (list.count() > 2) {
-        d->ui.cityTextLabel->setText(list[2]);
-    }
     d->enableOK();
     emit settingsChanged();
+    */
 }
 
 void WeatherConfig::setUpdateInterval(int interval)
@@ -191,6 +258,12 @@ void WeatherConfig::setVisibilityUnit(int unit)
     if (index != -1) {
         d->ui.visibilityComboBox->setCurrentIndex(index);
     }
+}
+
+void WeatherConfig::setSource(const QString &source)
+{
+    //kDebug() << "source set to" << source;
+    d->source = source;
 }
 
 QString WeatherConfig::source()

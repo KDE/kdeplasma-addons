@@ -37,27 +37,52 @@ public:
     virtual ~WeatherValidator();
 
     /**
-     * Validate city
+     * Validate location 
      *
      * @param plugin the name of the ion
-     * @param city the name of the city to find
+     * @param location the name of the location to find
      * @param silent if true don't show any dialogs
      **/
-    void validate(const QString& plugin, const QString& city, bool silent = false);
-    
+    void validate(const QString& plugin, const QString& location, bool silent = true);
+
+    /**
+     * Validate location; plugin must already have been set
+     *
+     * @param location the name of the location to find
+     * @param silent if true don't show any dialogs
+     */
+    void validate(const QString& location, bool silent = false);
+
+    /**
+     * Sets the ion to use
+     * @arg plugin the name of the ion
+     */
+    void setIon(const QString &plugin);
+
+    /**
+     * @return the ion currently set to validate with
+     */
+    QString ion() const;
+
     /**
      * Sets dataengine to use
      *
      * @param dataengine use this dataengine
      **/
     void setDataEngine(Plasma::DataEngine* dataengine);
-    
+
 Q_SIGNALS:
     /**
-     * Emitted when validation is done
+     * Emitted when an error in validation occurs
      **/
-    void finished(const QString& source);
-    
+    void error(const QString& message);
+
+    /**
+     * Emitted when validation is done
+     * @arg sources a mapping of user-friendly names to the DataEngine source
+     **/
+    void finished(const QMap<QString, QString> &sources);
+
 public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 

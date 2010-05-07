@@ -136,7 +136,9 @@ private:
     Private * const d;
 
     Q_PRIVATE_SLOT(d, void changePressed())
-    Q_PRIVATE_SLOT(d, void searchResult(int result))
+    Q_PRIVATE_SLOT(d, void setSource(int))
+    Q_PRIVATE_SLOT(d, void addSources(const QMap<QString, QString> &sources))
+    Q_PRIVATE_SLOT(d, void validatorError(const QString &error))
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(WeatherConfig::ConfigurableUnits)

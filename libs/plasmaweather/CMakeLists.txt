@@ -3,7 +3,6 @@ set(plasmaweather_LIB_SRCS
     weathervalidator.cpp
     weatherlocation.cpp
     weatherconfig.cpp
-    weatherconfigsearch.cpp
     weatheri18ncatalog.cpp
 )
 
@@ -16,7 +15,6 @@ set(plasmaweather_HEADERS
 )
 
 kde4_add_ui_files(plasmaweather_LIB_SRCS
-    weatherconfigsearch.ui
     weatherconfig.ui
 )
 

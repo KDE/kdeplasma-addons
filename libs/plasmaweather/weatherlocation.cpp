@@ -24,19 +24,33 @@
 class WeatherLocation::Private
 {
 public:
-    Private()
+    Private(WeatherLocation *location)
+        : q(location),
+          locationEngine(0)
     {}
+
+    void validatorFinished(const QMap<QString, QString> &results)
+    {
+        QString source;
+        if (!results.isEmpty()) {
+            source = results.begin().value();
+        }
+
+        emit q->finished(source);
+    }
+
+    WeatherLocation *q;
     Plasma::DataEngine *locationEngine;
     WeatherValidator validator;
 };
 
 WeatherLocation::WeatherLocation(QObject *parent)
     : QObject(parent)
-    , d(new Private())
+    , d(new Private(this))
 {
     Weatheri18nCatalog::loadCatalog();
-    QObject::connect(&d->validator, SIGNAL(finished(const QString&)),
-                     this, SIGNAL(finished(const QString&)));
+    QObject::connect(&d->validator, SIGNAL(finished(QMap<QString,QString>)),
+                     this, SLOT(validatorFinished(QMap<QString,QString>)));
 }
 
 WeatherLocation::~WeatherLocation()
@@ -52,7 +66,7 @@ void WeatherLocation::setDataEngines(Plasma::DataEngine* location, Plasma::DataE
 
 void WeatherLocation::getDefault()
 {
-    if (d->locationEngine->isValid()) {
+    if (d->locationEngine && d->locationEngine->isValid()) {
         d->locationEngine->connectSource("location", this);
     } else {
         emit finished(QString());
@@ -61,6 +75,10 @@ void WeatherLocation::getDefault()
 
 void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
+    if (!d->locationEngine) {
+        return;
+    }
+
     d->locationEngine->disconnectSource(source, this);
 
     QString city = data["city"].toString();
