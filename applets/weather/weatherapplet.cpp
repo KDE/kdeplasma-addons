@@ -66,6 +66,7 @@ public:
 
     void setCurrentWeather(const KIcon &currentWeather)
     {
+        kDebug() << "!!!!!!!!!!!!!!!!!!!!!!!";
         m_currentWeather = currentWeather;
         update();
     }
@@ -76,6 +77,7 @@ public:
             return;
         }
 
+        kDebug() << "happily painting";
         QSize s(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
         s.boundedTo(size().toSize());
         painter->drawPixmap(QPoint(0, 0), m_currentWeather.pixmap(s));
@@ -114,6 +116,7 @@ void WeatherApplet::init()
 {
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
     m_graphicsWidget = new BackgroundWidget(this);
+    connect(this, SIGNAL(newWeatherSource()), this, SLOT(clearCurrentWeatherIcon()));
 
     switch (formFactor()) {
     case Plasma::Horizontal:
@@ -204,6 +207,11 @@ void WeatherApplet::toolTipAboutToShow()
          data.setSubText(i18nc("%1 is the weather condition, %2 is the temperature, both come from the weather provider", "%1 %2", m_conditionsLabel->text(), m_tempLabel->text()));
     }
     Plasma::ToolTipManager::self()->setContent(this, data);
+}
+
+void WeatherApplet::clearCurrentWeatherIcon()
+{
+    m_graphicsWidget->setCurrentWeather(KIcon());
 }
 
 void WeatherApplet::resizeView()
@@ -398,7 +406,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         if (!m_fiveDaysView) {
             kDebug() << "Create 5 Days Plasma::WeatherView";
             m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
-            connect(m_fiveDaysView->nativeWidget()->header(), SIGNAL(sectionResized(int, int, int)), this, SLOT(fiveDaysColumnResized(int, int, int)));
         }
 
         if (!m_fiveDaysModel) {

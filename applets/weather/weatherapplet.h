@@ -60,6 +60,7 @@ public Q_SLOTS:
 protected Q_SLOTS:
     void configAccepted();
     void toolTipAboutToShow();
+    void clearCurrentWeatherIcon();
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
