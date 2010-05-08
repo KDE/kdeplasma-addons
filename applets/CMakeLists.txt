@@ -64,12 +64,6 @@ if ( QALCULATE_FOUND )
     add_subdirectory(qalculate)
 endif( QALCULATE_FOUND )
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/kdeobservatory/cmake/modules)
-macro_optional_find_package(Qwt)
-if ( Qwt5-Qt4_FOUND )
-  add_subdirectory(kdeobservatory)
-endif( Qwt5-Qt4_FOUND )
-
 if(NOT WIN32)
   add_subdirectory(lancelot)
   add_subdirectory(incomingmsg)
