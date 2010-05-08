@@ -36,7 +36,8 @@
 
 Luna::Luna(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      counter(-1)
+      counter(-1),
+      m_theme(0)
 {
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::ConstrainedSquare);
@@ -107,6 +108,9 @@ void Luna::configAccepted()
 void Luna::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
 {
     Q_UNUSED(option)
+    if (!m_theme) {
+        return;
+    }
 
     if (northHemisphere){
         m_theme->paint(p, contentsRect, QString::number(counter));
