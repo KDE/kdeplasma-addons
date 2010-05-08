@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KDE Observatory
 Name[en_GB]=KDE Observatory
+Name[es]=Observatorio KDE
 Name[et]=KDE ülevaataja
 Name[pt]=Observatório do KDE
 Name[sv]=KDE-observatorium
@@ -9,6 +10,7 @@ Name[uk]=Спостережний пункт KDE
 Name[x-test]=xxKDE Observatoryxx
 Comment=Visualize the KDE ecosystem
 Comment[en_GB]=Visualise the KDE ecosystem
+Comment[es]=Visualizar el ecosistema KDE
 Comment[et]=KDE ökosüsteemi näitamine
 Comment[pt]=Visualizar o ecossistema do KDE
 Comment[sv]=Åskådliggör KDE:s ekosystem
