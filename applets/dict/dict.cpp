@@ -73,13 +73,23 @@ void DictApplet::init()
     setHasConfigurationInterface(engineChoice);
 
     // tooltip stuff
-    Plasma::ToolTipContent toolTipData = Plasma::ToolTipContent();
+    Plasma::ToolTipContent toolTipData;
     toolTipData.setAutohide(true);
     toolTipData.setMainText(name());
     toolTipData.setImage(KIcon("accessories-dictionary"));
 
-    Plasma::ToolTipManager::self()->registerWidget(this);
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);
+
+    // Only register the tooltip in panels
+    switch (formFactor()) {
+        case Plasma::Horizontal:
+        case Plasma::Vertical:
+            Plasma::ToolTipManager::self()->registerWidget(this);
+            break;
+        default:
+            Plasma::ToolTipManager::self()->unregisterWidget(this);
+            break;
+    }
 }
 
 DictApplet::~DictApplet()
