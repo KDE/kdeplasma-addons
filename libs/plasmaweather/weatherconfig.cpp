@@ -266,6 +266,12 @@ void WeatherConfig::setVisibilityUnit(int unit)
 void WeatherConfig::setSource(const QString &source)
 {
     //kDebug() << "source set to" << source;
+    const QStringList list = source.split('|');
+    if (list.count() > 2) {
+        QString result = i18nc("A weather station location and the weather service it comes from",
+                               "%1 (%2)", list[2], list[0]);
+        d->ui.locationCombo->lineEdit()->setText(result);
+    }
     d->source = source;
 }
 
