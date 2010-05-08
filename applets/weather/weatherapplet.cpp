@@ -77,7 +77,6 @@ public:
             return;
         }
 
-        kDebug() << "happily painting";
         QSize s(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
         s.boundedTo(size().toSize());
         painter->drawPixmap(QPoint(0, 0), m_currentWeather.pixmap(s));
