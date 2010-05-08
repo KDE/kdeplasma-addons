@@ -796,7 +796,7 @@ void Pastebin::postContent(QString text, QImage imageData)
             QBuffer buffer(&data);
 
             buffer.open(QIODevice::ReadWrite);
-            imageData.save(&buffer, "JPEG");
+            imageData.save(&buffer, "PNG");
             stream.writeRawData(data, data.size());
             tempFile.close();
 
