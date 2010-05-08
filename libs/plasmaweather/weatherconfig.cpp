@@ -18,9 +18,9 @@
  */
 
 #include "weatherconfig.h"
-#include "weathervalidator.h"
-#include "weatheri18ncatalog.h"
-#include "ui_weatherconfig.h"
+
+#include <QLineEdit>
+
 #include <KInputDialog>
 #include <KPixmapSequence>
 #include <kpixmapsequencewidget.h>
@@ -29,6 +29,9 @@
 #include <KNS3/DownloadDialog>
 #include <KUnitConversion/Converter>
 
+#include "weathervalidator.h"
+#include "weatheri18ncatalog.h"
+#include "ui_weatherconfig.h"
 using namespace KUnitConversion;
 
 class WeatherConfig::Private
@@ -46,7 +49,9 @@ public:
     void setSource(int index)
     {
         QString text = ui.locationCombo->itemData(index).toString();
-        if (!text.isEmpty()) {
+        if (text.isEmpty()) {
+            ui.locationCombo->lineEdit()->setText(QString());
+        } else {
             source = text;
             emit q->settingsChanged();
         }
@@ -62,6 +67,7 @@ public:
         }
 
         ui.locationCombo->clear();
+        ui.locationCombo->lineEdit()->setText(text);
 
         if (!busyWidget) {
             busyWidget = new KPixmapSequenceWidget(q);
@@ -188,11 +194,7 @@ void WeatherConfig::Private::validatorError(const QString &error)
 
 void WeatherConfig::Private::addSources(const QMap<QString, QString> &sources)
 {
-    ++checkedInCount;
     QMapIterator<QString, QString> it(sources);
-    if (ui.locationCombo->count() == 0) {
-        ui.locationCombo->insertItem(0, QString());
-    }
 
     while (it.hasNext()) {
         it.next();
@@ -205,17 +207,18 @@ void WeatherConfig::Private::addSources(const QMap<QString, QString> &sources)
         }
     }
 
+    ++checkedInCount;
     if (checkedInCount >= validators.count()) {
         delete busyWidget;
         busyWidget = 0;
+        kDebug() << ui.locationCombo->count();
+        if (ui.locationCombo->count() == 0 && ui.locationCombo->itemText(0).isEmpty()) {
+            const QString current = ui.locationCombo->currentText();
+            ui.locationCombo->addItem(i18n("No weather stations found for '%1'", current));
+            ui.locationCombo->lineEdit()->setText(current);
+        }
         ui.locationCombo->showPopup();
     }
-
-    /*
-    d->source = source;
-    d->enableOK();
-    emit settingsChanged();
-    */
 }
 
 void WeatherConfig::setUpdateInterval(int interval)
