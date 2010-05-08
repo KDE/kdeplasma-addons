@@ -556,7 +556,9 @@ void WeatherWallpaper::updateBackground(const QImage &img)
 
 void WeatherWallpaper::updateScreenshot(QPersistentModelIndex index)
 {
-    m_advancedUi.m_wallpaperView->view()->update(index);
+    if (m_advancedDialog) {
+        m_advancedUi.m_wallpaperView->view()->update(index);
+    }
 }
 
 qreal WeatherWallpaper::fadeValue()
