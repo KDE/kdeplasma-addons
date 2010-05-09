@@ -251,7 +251,7 @@ Useful if you want a live cam or weather data to be up to date.</string>
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Include Subfolders:</string>
+            <string>Include subfolders:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

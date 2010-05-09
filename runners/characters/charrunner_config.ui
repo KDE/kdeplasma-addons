@@ -44,7 +44,7 @@
         <item>
          <widget class="QLabel" name="label_alias">
           <property name="text">
-           <string>alias:</string>
+           <string>Alias:</string>
           </property>
          </widget>
         </item>
@@ -58,7 +58,7 @@
         <item>
          <widget class="QLabel" name="label_hex">
           <property name="text">
-           <string>hex.-code:</string>
+           <string>Hex Code:</string>
           </property>
          </widget>
         </item>
@@ -86,12 +86,12 @@
           </attribute>
           <column>
            <property name="text">
-            <string notr="true">alias</string>
+            <string notr="true">Alias</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string notr="true">code</string>
+            <string notr="true">Code</string>
            </property>
           </column>
          </widget>
@@ -101,14 +101,14 @@
           <item>
            <widget class="QPushButton" name="addItem">
             <property name="text">
-             <string>add Item</string>
+             <string>Add Item</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="deleteItem">
             <property name="text">
-             <string>delete Item</string>
+             <string>Delete Item</string>
             </property>
            </widget>
           </item>
