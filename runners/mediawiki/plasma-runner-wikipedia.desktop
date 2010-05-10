@@ -84,5 +84,6 @@ X-KDE-PluginInfo-Name=wikipedia
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=false
+X-Plasma-AdvertiseSingleRunnerQueryMode=true
 
 X-Plasma-Args=http://en.wikipedia.org/w/api.php

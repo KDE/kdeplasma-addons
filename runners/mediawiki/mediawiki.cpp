@@ -230,7 +230,7 @@ bool MediaWiki::processSearchResult( QIODevice *source )
 
             kDebug() << "Got result: url=" << r.url << "title=" << r.title;
 
-            d->results.append( r );
+            d->results.prepend( r );
             }
         } else if ( tokenType == QXmlStreamReader::Invalid ) {
             return false;

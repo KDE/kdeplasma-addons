@@ -69,8 +69,16 @@ void MediaWikiRunner::match(Plasma::RunnerContext &context)
 {
     // TODO: check for networkconnection
 
-    const QString term = context.query();
+    QString term = context.query();
+    if (!context.singleRunnerQueryMode()) {
+        if (!term.startsWith("wiki ")) {
+            return;
+        } else {
+            term = term.remove("wiki ");
+        }
+    }
     if (!m_apiUrl.isValid() || term.length() < 3) {
+        //kDebug() << "yours is too short" << term;
         return;
     }
 
@@ -87,7 +95,11 @@ void MediaWikiRunner::match(Plasma::RunnerContext &context)
     }
 
     MediaWiki mediawiki;
-    mediawiki.setMaxItems(3);
+    if (context.singleRunnerQueryMode()) {
+        mediawiki.setMaxItems(10);
+    } else {
+        mediawiki.setMaxItems(3);
+    }
     mediawiki.setApiUrl( m_apiUrl );
     connect( &mediawiki, SIGNAL(finished(bool)), &loop, SLOT(quit()) );
 
@@ -99,6 +111,9 @@ void MediaWikiRunner::match(Plasma::RunnerContext &context)
     if (!context.isValid()) {
         return;
     }
+    qreal relevance = 0.5;
+    qreal stepRelevance = 0.1;
+
     foreach(const MediaWiki::Result& res, mediawiki.results()) {
         kDebug() << "Match:" << res.url << res.title;
         Plasma::QueryMatch match(this);
@@ -106,6 +121,9 @@ void MediaWikiRunner::match(Plasma::RunnerContext &context)
         match.setIcon(m_icon);
         match.setText(QString("%1: %2").arg(m_name, res.title));
         match.setData(res.url);
+        match.setRelevance(relevance);
+        relevance +=stepRelevance;
+        stepRelevance *=0.5;
         context.addMatch(res.title, match);
     }
 }
