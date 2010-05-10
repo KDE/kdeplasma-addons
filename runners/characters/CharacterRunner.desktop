@@ -1,13 +1,6 @@
 [Desktop Entry]
 Name=Special Characters
-Name[en_GB]=special characters
-Name[kk]=арнаулы таңбалар
-Name[nb]=spesialtegn
-Name[pt]=caracteres especiais
-Name[pt_BR]=caracteres especiais
-Name[sv]=specialtecken
-Name[uk]=Спеціальні символи
-Name[x-test]=xxspecial charactersxx
+Name[x-test]=xxSpecial Charactersxx
 Icon=accessories-character-map
 Comment=Creates special characters from their hexadecimal codes
 Comment[en_GB]=Creates special characters from their hexadecimal codes
