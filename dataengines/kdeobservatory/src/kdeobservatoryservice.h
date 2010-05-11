@@ -24,6 +24,7 @@
 #include "kdeobservatoryengine.h"
 
 #include <Plasma/Service>
+#include <solid/networking.h>
 
 class KJob;
 
@@ -56,6 +57,7 @@ Q_SIGNALS:
     void engineError(const QString &source, const QString &error);
 
 protected slots:
+    void networkStatusChanged(Solid::Networking::Status status);
     void resultServlet(KJob *job);
     void resultEBN(KJob *job);
 

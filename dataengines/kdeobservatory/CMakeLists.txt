@@ -23,6 +23,7 @@ target_link_libraries(plasma_engine_kdeobservatory
                       ${QT_QTNETWORK_LIBRARY}
                       ${KDE4_KDECORE_LIBS}
                       ${KDE4_KIO_LIBS}
+                      ${KDE4_SOLID_LIBS}
                       ${KDE4_PLASMA_LIBS})
  
 install(TARGETS plasma_engine_kdeobservatory

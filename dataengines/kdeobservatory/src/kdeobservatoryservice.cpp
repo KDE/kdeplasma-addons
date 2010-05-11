@@ -31,6 +31,9 @@ KdeObservatoryService::KdeObservatoryService(KdeObservatoryEngine *engine)
 {
     setName("kdeobservatory");
     m_engine = engine;
+
+    connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
+            this, SLOT(networkStatusChanged(Solid::Networking::Status)));
 }
 
 Plasma::ServiceJob *KdeObservatoryService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
@@ -125,6 +128,14 @@ void KdeObservatoryService::krazyReport(const QString &project, const QString &k
     m_krazyJobMap[job] = QPair<QString, QString>(project, krazyFilePrefix);
 
     connect(job, SIGNAL(result(KJob*)), this, SLOT(resultEBN(KJob*)));
+}
+
+void KdeObservatoryService::networkStatusChanged(Solid::Networking::Status status)
+{
+    if (status == Solid::Networking::Connected)
+        startOperationCall(operationDescription("allProjectsInfo"));
+    else
+        emit engineError("solid", i18n("No active network connection"));
 }
 
 void KdeObservatoryService::resultServlet(KJob *job)
