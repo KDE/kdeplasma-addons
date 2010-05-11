@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=Special Characters
+Name[pt]=Caracteres Especiais
+Name[pt_BR]=Caracteres especiais
+Name[sv]=Specialtecken
+Name[uk]=Спеціальні символи
 Name[x-test]=xxSpecial Charactersxx
 Icon=accessories-character-map
 Comment=Creates special characters from their hexadecimal codes
