@@ -36,7 +36,7 @@ kde4_add_ui_files(kdeobservatory_SRCS
  
 kde4_add_plugin(plasma_applet_kdeobservatory ${kdeobservatory_SRCS})
 target_link_libraries(plasma_applet_kdeobservatory 
-                      ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTSQL_LIBRARY} ${Qwt5-Qt4_LIBRARY})
+                      ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_SOLID_LIBS} ${QT_QTSQL_LIBRARY} ${Qwt5-Qt4_LIBRARY})
  
 install(TARGETS plasma_applet_kdeobservatory
         DESTINATION ${PLUGIN_INSTALL_DIR})

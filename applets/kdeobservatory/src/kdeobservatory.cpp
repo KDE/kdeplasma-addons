@@ -38,6 +38,8 @@
 #include <Plasma/DataEngine>
 #include <Plasma/PushButton>
 
+#include <solid/networking.h>
+
 #include "krazyreportview.h"
 #include "topdevelopersview.h"
 #include "commithistoryview.h"
@@ -52,6 +54,7 @@ K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::PopupApplet(parent, args),
   m_mainContainer(0),
+  m_errorView(0),
   m_currentView(0),
   m_viewTransitionTimer(0),
   m_transitionTimer(0)
@@ -80,9 +83,16 @@ void KdeObservatory::init()
     m_service = m_engine->serviceForSource("");
     connect(m_service, SIGNAL(engineReady()), SLOT(safeInit()));
     connect(m_service, SIGNAL(engineError(const QString &, const QString &)), SLOT(engineError(const QString &, const QString &)));
-    m_service->startOperationCall(m_service->operationDescription("allProjectsInfo"));
 
     setPopupIcon(KIcon("kdeobservatory"));
+
+    if (Solid::Networking::status() != Solid::Networking::Connected)
+    {
+        engineError("solid", i18n("No active network connection"));
+        return;
+    }
+
+    m_service->startOperationCall(m_service->operationDescription("allProjectsInfo"));
 }
 
 QGraphicsWidget *KdeObservatory::graphicsWidget()
@@ -102,12 +112,14 @@ QGraphicsWidget *KdeObservatory::graphicsWidget()
         m_right->setIcon(KIcon("go-next-view"));
         m_right->setToolTip(i18n("Go to previous view"));
         m_right->setMaximumSize(22, 22);
+        m_right->setEnabled(false);
         connect(m_right, SIGNAL(clicked()), this, SLOT(moveViewRightClicked()));
 
         m_left = new Plasma::PushButton(m_mainContainer);
         m_left->setIcon(KIcon("go-previous-view"));
         m_left->setToolTip(i18n("Go to next view"));
         m_left->setMaximumSize(22, 22);
+        m_left->setEnabled(false);
         connect(m_left, SIGNAL(clicked()), this, SLOT(moveViewLeftClicked()));
 
         m_collectorProgress = new Plasma::Meter(m_mainContainer);
@@ -137,7 +149,7 @@ QGraphicsWidget *KdeObservatory::graphicsWidget()
         m_mainContainer->setPreferredSize(300, 200);
         m_mainContainer->setMinimumSize(300, 200);
     }
-    
+
     return m_mainContainer;
 }
 
@@ -199,8 +211,10 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
 
 void KdeObservatory::safeInit()
 {
+    if (m_errorView)
+        m_errorView->hide();
+
     loadConfig();
-    graphicsWidget();
     createViewProviders();
     createTimers();
     createViews();
@@ -217,7 +231,33 @@ void KdeObservatory::safeInit()
 
 void KdeObservatory::engineError(const QString &source, const QString &error)
 {
-    kDebug() << "Engine error" << error << "in source" << source;
+    if (source == "solid" && m_views.count() == 0)
+    {
+        if (!m_errorView)
+        {
+            // Creating error view
+            m_errorView = new QGraphicsWidget(this);
+            m_errorView->hide();
+
+            m_errorLabel = new Plasma::Label(m_errorView);
+            m_errorLabel->setAlignment(Qt::AlignCenter);
+            m_errorLabel->setScaledContents(true);
+
+            QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Vertical, m_errorView);
+            QGraphicsLinearLayout *layout2 = new QGraphicsLinearLayout(Qt::Horizontal, layout);
+            layout2->addItem(m_errorLabel);
+            
+            layout->addStretch();
+            layout->addItem(layout2);
+            layout->addStretch();
+
+            m_errorView->setLayout(layout);
+            m_errorView->setGeometry(this->geometry());
+        }
+
+        m_errorLabel->setText(error);
+        m_errorView->show();
+    }
     --m_sourceCounter;
 }
 
