@@ -235,7 +235,7 @@ void KdeObservatoryService::resultEBN(KJob *job)
         {
             if (data.contains("<h1>Not Found</h1>"))
             {
-                emit engineError("krazyReport", i18n("Krazy report not found: ") + QUrl::fromPercentEncoding(storedJob->url().prettyUrl().toUtf8()));
+                emit engineError("krazyReport", i18n("Krazy report '%1' not found !", QUrl::fromPercentEncoding(storedJob->url().prettyUrl().toUtf8())));
                 return;
             }
 
