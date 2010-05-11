@@ -69,7 +69,7 @@ void CommitHistoryView::createViews()
     {
         i.next();
         if (i.value())
-            createView(i18n("Commit History") + " - " + i.key(), i18n("Commit History") + " - " + i.key());
+        createView(i18nc("Commit history for a given project %1", "Commit History - %1", i.key()), QString("Commit History - ") + i.key());
     }
 }
 
@@ -101,7 +101,7 @@ void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
                 maxCommit = y[j];
         }
 
-        QGraphicsWidget *container = containerForView(i18n("Commit History") + " - " + project);
+        QGraphicsWidget *container = containerForView(QString("Commit History - ") + project);
         QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(container);
         proxy->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
 

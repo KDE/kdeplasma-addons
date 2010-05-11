@@ -51,7 +51,7 @@ void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
 
     const QList<QString> &keys = krazyReportMap.keys();
     foreach (const QString &fileType, keys)
-        createView(i18n("Krazy Report") + " - " + project, i18n("Krazy Report") + " - " + project + " - " + fileType);
+        createView(i18nc("Krazy report for a given project %1", "Krazy Report - %1", project), QString("Krazy Report") + " - " + project + " - " + fileType);
     
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 
@@ -65,7 +65,7 @@ void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
         QString fileType = i1.key();
         const QMap< QString, FileTypeKrazyReportMap > &projectFileTypeKrazyReport = i1.value();
 
-        QGraphicsWidget *container = containerForView(i18n("Krazy Report") + " - " + project + " - " + fileType);
+        QGraphicsWidget *container = containerForView(QString("Krazy Report") + " - " + project + " - " + fileType);
 
         QGraphicsTextItem *fileTypeText = new QGraphicsTextItem(fileType, container);
         fileTypeText->setDefaultTextColor(QColor(0, 0, 0));
@@ -109,7 +109,8 @@ void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
             testNameRect->setPos(xItem, container->geometry().height() - testNameRect->rect().height());
             testNameRect->setPen(QPen(QColor(0, 0, 0)));
             testNameRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-            QString toolTip = "<html><body><h5>" + testName + ' ' + QString::number(rank) + ' ' + i18np("error", "errors", rank) + "<ul>";
+            QString toolTipContents = i18np("%2 %1 error", "%2 %1 errors", rank, testName);
+            QString toolTip = "<html><body><h5>" + toolTipContents + "<ul>";
 
             const FileTypeKrazyReportMap &fileErrors = projectFileTypeKrazyReport[testName];
             QMapIterator<QString, QStringList > i4(fileErrors);

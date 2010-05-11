@@ -44,7 +44,7 @@ void TopDevelopersView::createViews()
     {
         i.next();
         if (i.value())
-            createView(i18n("Top Developers") + " - " + i.key(), i18n("Top Developers") + " - " + i.key());
+            createView(i18n("Top Developers - %1", i.key()), QString("Top Developers") + " - " + i.key());
     }
 }
 
@@ -56,7 +56,7 @@ void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
 
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 
-    QGraphicsWidget *container = containerForView(i18n("Top Developers") + " - " + project);
+    QGraphicsWidget *container = containerForView(QString("Top Developers") + " - " + project);
 
     int maxRank = 0;
     qreal width = container->geometry().width();
@@ -83,7 +83,7 @@ void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
         developerRect->setPos(0, yItem);
         developerRect->setPen(QPen(QColor(0, 0, 0)));
         developerRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-        developerRect->setToolTip(developer + " - " + QString::number(rank) + ' ' + i18n("commits"));
+        developerRect->setToolTip(i18np("%2 - %1 commit", "%2 - %1 commits", rank, developer));
         developerRect->setAcceptHoverEvents(true);
         developerRect->installSceneEventFilter(kdeObservatory);
 

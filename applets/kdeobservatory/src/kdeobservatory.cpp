@@ -29,6 +29,7 @@
 #include <QGraphicsItemAnimation>
 
 #include <KConfig>
+#include <KDateTime>
 #include <KConfigDialog>
 #include <KGlobalSettings>
 
@@ -187,7 +188,9 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
         m_collectorProgress->hide();
         m_horizontalLayout->removeItem(m_collectorProgress);
         m_horizontalLayout->insertItem(1, m_updateLabel);
-        m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
+        KDateTime currentTime = KDateTime::currentLocalDateTime();
+        KLocale *locale = KGlobal::locale();
+        m_updateLabel->setText(i18n("Last update: %1 %2", currentTime.toString(locale->dateFormatShort()), currentTime.toString(locale->timeFormat())));
         m_updateLabel->show();
         m_left->setEnabled(true);
         m_right->setEnabled(true);

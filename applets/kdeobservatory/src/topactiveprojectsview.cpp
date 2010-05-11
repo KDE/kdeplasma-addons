@@ -41,7 +41,7 @@ TopActiveProjectsView::~TopActiveProjectsView()
 void TopActiveProjectsView::createViews()
 {
     deleteViews();
-    createView(i18n("Top Active Projects"), i18n("Top Active Projects"));
+    createView(i18n("Top Active Projects"), "Top Active Projects");
 }
 
 void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
@@ -50,7 +50,7 @@ void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
 
     KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 
-    QGraphicsWidget *container = containerForView(i18n("Top Active Projects"));
+    QGraphicsWidget *container = containerForView("Top Active Projects");
 
     int maxRank = 0;
     qreal width = container->geometry().width();
@@ -79,7 +79,7 @@ void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
             projectRect->setPos(0, yItem);
             projectRect->setPen(QPen(QColor(0, 0, 0)));
             projectRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-            projectRect->setToolTip(project + " - " + QString::number(rank) + ' ' + i18n("commits"));
+            projectRect->setToolTip(i18np("%2 - %1 commit", "%2 - %1 commits", rank, project));
             projectRect->setAcceptHoverEvents(true);
             projectRect->installSceneEventFilter(kdeObservatory);
 
