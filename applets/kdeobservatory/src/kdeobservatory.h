@@ -30,6 +30,7 @@ class QTimer;
 class QTimeLine;
 class QNetworkReply;
 class QGraphicsLinearLayout;
+class QGraphicsItemAnimation;
 
 class IViewProvider;
 class KdeObservatoryConfigViews;
@@ -84,6 +85,7 @@ protected Q_SLOTS:
     void moveViewRightClicked();
     void moveViewLeftClicked();
     void switchViews(int delta);
+    void timeLineFinished();
 
 private:
     void createViews();
@@ -145,6 +147,9 @@ private:
 
     QTimer *m_viewTransitionTimer;
     QTimeLine *m_transitionTimer;
+    
+    QGraphicsItemAnimation *m_animationPrevious;
+    QGraphicsItemAnimation *m_animationNew;
 
     Plasma::DataEngine *m_engine;
     Plasma::Service *m_service;

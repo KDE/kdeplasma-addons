@@ -56,13 +56,16 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
   m_mainContainer(0),
   m_errorView(0),
   m_currentView(0),
-  m_viewTransitionTimer(0),
-  m_transitionTimer(0)
+  m_viewTransitionTimer(new QTimer(this)),
+  m_transitionTimer(new QTimeLine(500, this))
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(300, 200);
+
+    connect(m_transitionTimer, SIGNAL(finished()), this, SLOT(timeLineFinished()));
+    connect(m_viewTransitionTimer, SIGNAL(timeout()), this, SLOT(moveViewRight()));
 }
 
 KdeObservatory::~KdeObservatory()
@@ -86,9 +89,9 @@ void KdeObservatory::init()
 
     setPopupIcon(KIcon("kdeobservatory"));
 
-    if (Solid::Networking::status() != Solid::Networking::Connected)
+    if (Solid::Networking::status() != Solid::Networking::Connected && Solid::Networking::status() != Solid::Networking::Unknown)
     {
-        engineError("solid", i18n("No active network connection"));
+        engineError("fatal", i18n("No active network connection"));
         return;
     }
 
@@ -192,7 +195,6 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
         return;
 
     --m_sourceCounter;
-    kDebug() << "Source:" << sourceName << "Project:" << project << "diminuiu sourceCounter para" << m_sourceCounter;
     m_collectorProgress->setValue(m_collectorProgress->maximum() -  m_sourceCounter);
 
     if (m_sourceCounter == 0)
@@ -221,13 +223,12 @@ void KdeObservatory::safeInit()
 
 void KdeObservatory::engineError(const QString &source, const QString &error)
 {
-    if (source == "solid" && m_views.count() == 0)
+    if (source == "fatal" && m_views.count() == 0)
     {
         if (!m_errorView)
         {
             // Creating error view
             m_errorView = new QGraphicsWidget(this);
-            m_errorView->hide();
 
             m_errorLabel = new Plasma::Label(m_errorView);
             m_errorLabel->setAlignment(Qt::AlignCenter);
@@ -245,12 +246,19 @@ void KdeObservatory::engineError(const QString &source, const QString &error)
             m_errorView->setGeometry(this->geometry());
         }
 
+        m_viewTransitionTimer->stop();
+
+        foreach(QGraphicsWidget *widget, m_views)
+            widget->hide();
+
+        m_views.clear();
+
         m_errorLabel->setText(error);
         m_errorView->show();
     }
 
     --m_sourceCounter;
-    kDebug() << "Source:" << source << "Error:" << error << "diminuiu sourceCounter para" << m_sourceCounter;
+
     if (m_sourceCounter == 0)
         setBusy(false);
 }
@@ -411,7 +419,7 @@ void KdeObservatory::moveViewLeftClicked()
 
 void KdeObservatory::switchViews(int delta)
 {
-    if (m_views.count() > 0)
+    if (m_views.count() > 0 && m_transitionTimer->state() == QTimeLine::NotRunning)
     {
         int previousView = m_currentView;
         int newView = m_currentView + delta;
@@ -422,24 +430,29 @@ void KdeObservatory::switchViews(int delta)
         currentViewWidget->setPos(currentViewWidget->geometry().width(), 0);
         currentViewWidget->show();
 
-        m_transitionTimer = new QTimeLine(500, this);
         m_transitionTimer->setFrameRange(0, 1);
         m_transitionTimer->setCurveShape(QTimeLine::EaseOutCurve);
 
-        QGraphicsItemAnimation *animationPrevious = new QGraphicsItemAnimation(this);
-        animationPrevious->setItem(previousViewWidget);
-        animationPrevious->setTimeLine(m_transitionTimer);
-        animationPrevious->setPosAt(0, QPointF(0, 0));
-        animationPrevious->setPosAt(1, -delta*QPointF(previousViewWidget->geometry().width(), 0));
+        m_animationPrevious = new QGraphicsItemAnimation(this);
+        m_animationPrevious->setItem(previousViewWidget);
+        m_animationPrevious->setTimeLine(m_transitionTimer);
+        m_animationPrevious->setPosAt(0, QPointF(0, 0));
+        m_animationPrevious->setPosAt(1, -delta*QPointF(previousViewWidget->geometry().width(), 0));
 
-        QGraphicsItemAnimation *animationNew = new QGraphicsItemAnimation(this);
-        animationNew->setItem(currentViewWidget);
-        animationNew->setTimeLine(m_transitionTimer);
-        animationNew->setPosAt(0, delta*QPointF(currentViewWidget->geometry().width(), 0));
-        animationNew->setPosAt(1, QPointF(0, 0));
+        m_animationNew = new QGraphicsItemAnimation(this);
+        m_animationNew->setItem(currentViewWidget);
+        m_animationNew->setTimeLine(m_transitionTimer);
+        m_animationNew->setPosAt(0, delta*QPointF(currentViewWidget->geometry().width(), 0));
+        m_animationNew->setPosAt(1, QPointF(0, 0));
 
         m_transitionTimer->start();
     }
+}
+
+void KdeObservatory::timeLineFinished()
+{
+    delete m_animationPrevious;
+    delete m_animationNew;
 }
 
 void KdeObservatory::setBusy(bool value)
@@ -558,8 +571,6 @@ void KdeObservatory::createViews()
 void KdeObservatory::updateViews()
 {
     m_viewTransitionTimer->stop();
-    if (m_transitionTimer)
-        m_transitionTimer->stop();
 
     foreach(QGraphicsWidget *widget, m_views)
         widget->hide();
@@ -579,7 +590,7 @@ void KdeObservatory::updateViews()
         if (m_views.count() != m_lastViewCount)
             m_currentView = m_views.count()-1;
         moveViewRight();
-        if (m_enableAutoViewChange)
+        if (m_enableAutoViewChange && m_views.count() > 1)
             m_viewTransitionTimer->start();
     }
 }
@@ -732,11 +743,7 @@ void KdeObservatory::saveConfig()
 
 void KdeObservatory::createTimers()
 {
-    delete m_viewTransitionTimer;
-    
-    m_viewTransitionTimer = new QTimer(this);
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
-    connect(m_viewTransitionTimer, SIGNAL(timeout()), this, SLOT(moveViewRight()));
 }
 
 void KdeObservatory::createViewProviders()
