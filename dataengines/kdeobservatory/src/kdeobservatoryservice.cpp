@@ -138,9 +138,10 @@ void KdeObservatoryService::krazyReport(const QString &project, const QString &k
 
 void KdeObservatoryService::networkStatusChanged(Solid::Networking::Status status)
 {
+    kDebug() << "Network status changed to" << status;
     if (status == Solid::Networking::Connected)
         startOperationCall(operationDescription("allProjectsInfo"));
-    else
+    else if (status == Solid::Networking::Unconnected)
         emit engineError("fatal", i18n("No active network connection"));
 }
 
