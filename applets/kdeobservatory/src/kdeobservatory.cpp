@@ -283,9 +283,12 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 
     // Config - General
     if (m_activityRangeType == 0)
+        m_configGeneral->activitiesFullHistory->setChecked(true);
+    else if (m_activityRangeType == 1)
         m_configGeneral->activitiesInPastDays->setChecked(true);
     else
         m_configGeneral->activitiesInRange->setChecked(true);
+    
     m_configGeneral->commitExtent->setValue(m_commitExtent);
     m_configGeneral->fromDate->setDate(QDate::fromString(m_commitFrom, "yyyyMMdd"));
     m_configGeneral->toDate  ->setDate(QDate::fromString(m_commitTo  , "yyyyMMdd"));
@@ -324,7 +327,7 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 void KdeObservatory::configAccepted()
 {
     // General properties
-    m_activityRangeType = (m_configGeneral->activitiesInPastDays->isChecked()) ? 0:1;
+    m_activityRangeType = (m_configGeneral->activitiesFullHistory->isChecked()) ? 0:(m_configGeneral->activitiesInPastDays->isChecked()) ? 1:2;
     m_commitExtent = m_configGeneral->commitExtent->value();
     m_commitFrom = m_configGeneral->fromDate->date().toString("yyyyMMdd");
     m_commitTo   = m_configGeneral->toDate  ->date().toString("yyyyMMdd");
@@ -487,12 +490,12 @@ void KdeObservatory::updateSources()
     QString commitFrom = "";
     QString commitTo = "";
 
-    if (m_activityRangeType == 1)
+    if (m_activityRangeType == 2)
     {
         commitFrom = m_commitFrom;
         commitTo   = m_commitTo;
     }
-    else
+    else if (m_activityRangeType == 1)
     {
         QDate currentDate = QDate::currentDate();
         commitTo   = currentDate.toString("yyyyMMdd");
@@ -601,7 +604,7 @@ void KdeObservatory::loadConfig()
     m_configGroup = config();
 
     // Config - General
-    m_activityRangeType = m_configGroup.readEntry("activityRangeType", 0);
+    m_activityRangeType = m_configGroup.readEntry("activityRangeType", 1);
     m_commitExtent = m_configGroup.readEntry("commitExtent", 7);
     m_commitFrom = m_configGroup.readEntry("commitFrom", QDate::currentDate().toString("yyyyMMdd"));
     m_commitTo   = m_configGroup.readEntry("commitTo"  , QDate::currentDate().toString("yyyyMMdd"));

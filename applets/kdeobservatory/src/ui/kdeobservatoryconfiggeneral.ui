@@ -20,11 +20,18 @@
       <item row="0" column="0">
        <layout class="QVBoxLayout" name="verticalLayout1">
         <item>
+         <widget class="QRadioButton" name="activitiesFullHistory">
+          <property name="text">
+           <string>&amp;Full history</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout1">
           <item>
            <widget class="QRadioButton" name="activitiesInPastDays">
             <property name="text">
-             <string>Past</string>
+             <string>&amp;Past</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -98,7 +105,7 @@
           <item>
            <widget class="QRadioButton" name="activitiesInRange">
             <property name="text">
-             <string comment="The beginning of a range" extracomment="The beginning of a range">From</string>
+             <string comment="The beginning of a range" extracomment="The beginning of a range">Fro&amp;m</string>
             </property>
            </widget>
           </item>
@@ -184,7 +191,7 @@
      <item>
       <widget class="QCheckBox" name="enableAutoViewChange">
        <property name="text">
-        <string>Enable automatic view change</string>
+        <string>&amp;Enable automatic view change</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -309,12 +316,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>29</x>
-     <y>56</y>
+     <x>44</x>
+     <y>92</y>
     </hint>
     <hint type="destinationlabel">
-     <x>84</x>
-     <y>55</y>
+     <x>111</x>
+     <y>94</y>
     </hint>
    </hints>
   </connection>
