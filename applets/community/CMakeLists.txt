@@ -32,7 +32,7 @@ target_link_libraries(
     plasma_applet_opendesktop
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
-    ${KDE4_KUTILS_LIBS}
+    ${KDE4_KCMUTILS_LIBS}
     ${QT_QTWEBKIT_LIBRARY}
 )
 

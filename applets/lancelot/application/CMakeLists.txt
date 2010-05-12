@@ -76,7 +76,7 @@ target_link_libraries(
    lancelot-menu
    ${KDE4_KIO_LIBS}
    ${KDE4_PLASMA_LIBS}
-   ${KDE4_KUTILS_LIBS}
+   ${KDE4_KCMUTILS_LIBS}
    ${LANCELOT_LIBS}
    ${LANCELOT_DATAMODELS_LIBS}
    )
