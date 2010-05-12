@@ -133,7 +133,6 @@ QGraphicsWidget *KdeObservatory::graphicsWidget()
         m_collectorProgress->setValue(0);
 
         m_updateLabel = new Plasma::Label(m_mainContainer);
-        m_updateLabel->setText("");
         m_updateLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         m_updateLabel->setFont(KGlobalSettings::smallestReadableFont());
         m_updateLabel->setAlignment(Qt::AlignCenter);
@@ -200,6 +199,7 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
     {
         KDateTime currentTime = KDateTime::currentLocalDateTime();
         KLocale *locale = KGlobal::locale();
+        m_updateLabel->setStyleSheet(QString("QLabel{color:rgb(0, 0, 0);}"));
         m_updateLabel->setText(i18n("Last update: %1 %2", currentTime.toString(locale->dateFormatShort()), currentTime.toString(locale->timeFormat())));
         setBusy(false);
         updateViews();
@@ -228,6 +228,7 @@ void KdeObservatory::safeInit()
 
 void KdeObservatory::engineError(const QString &source, const QString &error)
 {
+    kDebug() << "Source:" << source << "Error:" << error;
     if (source == "fatal" && m_sourceCounter > 0)
     {
         m_viewTransitionTimer->stop();
@@ -238,6 +239,7 @@ void KdeObservatory::engineError(const QString &source, const QString &error)
         m_views.clear();
 
         graphicsWidget();
+        m_updateLabel->setStyleSheet(QString("QLabel{color:rgb(255, 0, 0);}"));
         m_updateLabel->setText(error);
         setBusy(false);
         
@@ -250,6 +252,7 @@ void KdeObservatory::engineError(const QString &source, const QString &error)
     {
         KDateTime currentTime = KDateTime::currentLocalDateTime();
         KLocale *locale = KGlobal::locale();
+        m_updateLabel->setStyleSheet(QString("QLabel{color:rgb(0, 0, 0);}"));
         m_updateLabel->setText(i18n("Last update: %1 %2", currentTime.toString(locale->dateFormatShort()), currentTime.toString(locale->timeFormat())));
         setBusy(false);
         updateViews();
@@ -314,6 +317,8 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    
+    m_viewTransitionTimer->stop();
 }
 
 void KdeObservatory::configAccepted()
