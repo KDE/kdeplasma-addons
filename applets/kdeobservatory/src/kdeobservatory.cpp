@@ -92,6 +92,7 @@ void KdeObservatory::init()
         return;
     }
 
+    Plasma::PopupApplet::setBusy(true);
     m_service->startOperationCall(m_service->operationDescription("allProjectsInfo"));
 }
 
@@ -191,22 +192,11 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
         return;
 
     --m_sourceCounter;
+    kDebug() << "Source:" << sourceName << "Project:" << project << "diminuiu sourceCounter para" << m_sourceCounter;
     m_collectorProgress->setValue(m_collectorProgress->maximum() -  m_sourceCounter);
 
     if (m_sourceCounter == 0)
-    {
         setBusy(false);
-        updateViews();
-        m_collectorProgress->hide();
-        m_horizontalLayout->removeItem(m_collectorProgress);
-        m_horizontalLayout->insertItem(1, m_updateLabel);
-        KDateTime currentTime = KDateTime::currentLocalDateTime();
-        KLocale *locale = KGlobal::locale();
-        m_updateLabel->setText(i18n("Last update: %1 %2", currentTime.toString(locale->dateFormatShort()), currentTime.toString(locale->timeFormat())));
-        m_updateLabel->show();
-        m_left->setEnabled(true);
-        m_right->setEnabled(true);
-    }
 }
 
 void KdeObservatory::safeInit()
@@ -258,7 +248,11 @@ void KdeObservatory::engineError(const QString &source, const QString &error)
         m_errorLabel->setText(error);
         m_errorView->show();
     }
+
     --m_sourceCounter;
+    kDebug() << "Source:" << source << "Error:" << error << "diminuiu sourceCounter para" << m_sourceCounter;
+    if (m_sourceCounter == 0)
+        setBusy(false);
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -448,17 +442,39 @@ void KdeObservatory::switchViews(int delta)
     }
 }
 
+void KdeObservatory::setBusy(bool value)
+{
+    if (value)
+    {
+        m_right->setEnabled(false);
+        m_left->setEnabled(false);
+        m_updateLabel->hide();
+        m_horizontalLayout->removeItem(m_updateLabel);
+        m_collectorProgress->setValue(0);
+        m_horizontalLayout->insertItem(1, m_collectorProgress);
+        m_collectorProgress->show();
+        Plasma::PopupApplet::setBusy(true);
+    }
+    else
+    {
+        Plasma::PopupApplet::setBusy(false);
+        updateViews();
+        m_collectorProgress->hide();
+        m_horizontalLayout->removeItem(m_collectorProgress);
+        m_horizontalLayout->insertItem(1, m_updateLabel);
+        KDateTime currentTime = KDateTime::currentLocalDateTime();
+        KLocale *locale = KGlobal::locale();
+        m_updateLabel->setText(i18n("Last update: %1 %2", currentTime.toString(locale->dateFormatShort()), currentTime.toString(locale->timeFormat())));
+        m_updateLabel->show();
+        m_left->setEnabled(true);
+        m_right->setEnabled(true);
+    }
+}
+
 void KdeObservatory::updateSources()
 {
-    m_right->setEnabled(false);
-    m_left->setEnabled(false);
-    m_updateLabel->hide();
-    m_horizontalLayout->removeItem(m_updateLabel);
-    m_collectorProgress->setValue(0);
-    m_horizontalLayout->insertItem(1, m_collectorProgress);
-    m_collectorProgress->show();
     setBusy(true);
-
+    
     QString commitFrom = "";
     QString commitTo = "";
     

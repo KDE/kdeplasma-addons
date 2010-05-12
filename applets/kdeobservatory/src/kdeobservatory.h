@@ -73,6 +73,7 @@ public Q_SLOTS:
 protected Q_SLOTS:
     void safeInit();
     void engineError(const QString &source, const QString &error);
+    void setBusy(bool value);
     void updateSources();
 
     void createConfigurationInterface(KConfigDialog *parent);
