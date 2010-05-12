@@ -140,8 +140,6 @@ private:
     QMap<QString, IViewProvider *> m_viewProviders;
     
     QList<QGraphicsWidget *> m_views;
-    QGraphicsWidget *m_errorView;
-    Plasma::Label *m_errorLabel;
 
     int m_currentView;
 

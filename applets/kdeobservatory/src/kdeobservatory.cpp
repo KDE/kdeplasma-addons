@@ -54,7 +54,6 @@ K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::PopupApplet(parent, args),
   m_mainContainer(0),
-  m_errorView(0),
   m_currentView(0),
   m_viewTransitionTimer(new QTimer(this)),
   m_transitionTimer(new QTimeLine(500, this))
@@ -198,54 +197,39 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
     m_collectorProgress->setValue(m_collectorProgress->maximum() -  m_sourceCounter);
 
     if (m_sourceCounter == 0)
+    {
+        KDateTime currentTime = KDateTime::currentLocalDateTime();
+        KLocale *locale = KGlobal::locale();
+        m_updateLabel->setText(i18n("Last update: %1 %2", currentTime.toString(locale->dateFormatShort()), currentTime.toString(locale->timeFormat())));
         setBusy(false);
+        updateViews();
+    }
 }
 
 void KdeObservatory::safeInit()
 {
-    if (m_errorView)
-        m_errorView->hide();
+    if (m_projects.count() == 0)
+    {
+        loadConfig();
+        createViewProviders();
+        createTimers();
+        createViews();
 
-    loadConfig();
-    createViewProviders();
-    createTimers();
-    createViews();
-
-    m_sourceCounter = 4;
-    
-    m_engine->connectSource("topActiveProjects", this);
-    m_engine->connectSource("topProjectDevelopers", this);
-    m_engine->connectSource("commitHistory", this);
-    m_engine->connectSource("krazyReport", this);
+        m_sourceCounter = 4;
+        
+        m_engine->connectSource("topActiveProjects", this);
+        m_engine->connectSource("topProjectDevelopers", this);
+        m_engine->connectSource("commitHistory", this);
+        m_engine->connectSource("krazyReport", this);
+    }
 
     updateSources();
 }
 
 void KdeObservatory::engineError(const QString &source, const QString &error)
 {
-    if (source == "fatal" && m_views.count() == 0)
+    if (source == "fatal" && m_sourceCounter > 0)
     {
-        if (!m_errorView)
-        {
-            // Creating error view
-            m_errorView = new QGraphicsWidget(this);
-
-            m_errorLabel = new Plasma::Label(m_errorView);
-            m_errorLabel->setAlignment(Qt::AlignCenter);
-            m_errorLabel->setScaledContents(true);
-
-            QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Vertical, m_errorView);
-            QGraphicsLinearLayout *layout2 = new QGraphicsLinearLayout(Qt::Horizontal, layout);
-            layout2->addItem(m_errorLabel);
-            
-            layout->addStretch();
-            layout->addItem(layout2);
-            layout->addStretch();
-
-            m_errorView->setLayout(layout);
-            m_errorView->setGeometry(this->geometry());
-        }
-
         m_viewTransitionTimer->stop();
 
         foreach(QGraphicsWidget *widget, m_views)
@@ -253,14 +237,23 @@ void KdeObservatory::engineError(const QString &source, const QString &error)
 
         m_views.clear();
 
-        m_errorLabel->setText(error);
-        m_errorView->show();
+        graphicsWidget();
+        m_updateLabel->setText(error);
+        setBusy(false);
+        
+        return;
     }
 
     --m_sourceCounter;
 
     if (m_sourceCounter == 0)
+    {
+        KDateTime currentTime = KDateTime::currentLocalDateTime();
+        KLocale *locale = KGlobal::locale();
+        m_updateLabel->setText(i18n("Last update: %1 %2", currentTime.toString(locale->dateFormatShort()), currentTime.toString(locale->timeFormat())));
         setBusy(false);
+        updateViews();
+    }
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -457,40 +450,38 @@ void KdeObservatory::timeLineFinished()
 
 void KdeObservatory::setBusy(bool value)
 {
-    if (value)
+    if (m_mainContainer)
     {
-        m_right->setEnabled(false);
-        m_left->setEnabled(false);
-        m_updateLabel->hide();
-        m_horizontalLayout->removeItem(m_updateLabel);
-        m_collectorProgress->setValue(0);
-        m_horizontalLayout->insertItem(1, m_collectorProgress);
-        m_collectorProgress->show();
-        Plasma::PopupApplet::setBusy(true);
+        if (value)
+        {
+            m_right->setEnabled(false);
+            m_left->setEnabled(false);
+            m_updateLabel->hide();
+            m_horizontalLayout->removeItem(m_updateLabel);
+            m_collectorProgress->setValue(0);
+            m_horizontalLayout->insertItem(1, m_collectorProgress);
+            m_collectorProgress->show();
+        }
+        else
+        {
+            m_collectorProgress->hide();
+            m_horizontalLayout->removeItem(m_collectorProgress);
+            m_horizontalLayout->insertItem(1, m_updateLabel);
+            m_updateLabel->show();
+            m_left->setEnabled(true);
+            m_right->setEnabled(true);
+        }
     }
-    else
-    {
-        Plasma::PopupApplet::setBusy(false);
-        updateViews();
-        m_collectorProgress->hide();
-        m_horizontalLayout->removeItem(m_collectorProgress);
-        m_horizontalLayout->insertItem(1, m_updateLabel);
-        KDateTime currentTime = KDateTime::currentLocalDateTime();
-        KLocale *locale = KGlobal::locale();
-        m_updateLabel->setText(i18n("Last update: %1 %2", currentTime.toString(locale->dateFormatShort()), currentTime.toString(locale->timeFormat())));
-        m_updateLabel->show();
-        m_left->setEnabled(true);
-        m_right->setEnabled(true);
-    }
+    Plasma::PopupApplet::setBusy(value);
 }
 
 void KdeObservatory::updateSources()
 {
     setBusy(true);
-    
+
     QString commitFrom = "";
     QString commitTo = "";
-    
+
     if (m_activityRangeType == 1)
     {
         commitFrom = m_commitFrom;
@@ -502,7 +493,7 @@ void KdeObservatory::updateSources()
         commitTo   = currentDate.toString("yyyyMMdd");
         commitFrom = currentDate.addDays(-m_commitExtent).toString("yyyyMMdd");
     }
-    
+
     m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
     m_sourceCounter = 1;
 
@@ -557,6 +548,11 @@ void KdeObservatory::updateSources()
 
 void KdeObservatory::createViews()
 {
+    m_viewTransitionTimer->stop();
+
+    foreach(QGraphicsWidget *widget, m_views)
+        widget->hide();
+
     m_views.clear();
     int count = m_activeViews.count();
     for (int i = 0; i < count; ++i)
