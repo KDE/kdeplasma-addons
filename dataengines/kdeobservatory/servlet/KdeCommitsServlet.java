@@ -87,94 +87,129 @@ public class KdeCommitsServlet extends HttpServlet
         }
     }
 
-    public void allProjectsInfo(PrintWriter out) throws SQLException
+    public void allProjectsInfo(PrintWriter out)
     {
-        String query = "select name, commit_subject, krazy_report, krazy_identifier, icon, add_in_view from projects";
-        Statement stmt = conn.createStatement();
-        ResultSet res = stmt.executeQuery(query);
-        printResultSet(out, res);
+        try
+        {
+            String query = "select name, commit_subject, krazy_report, krazy_identifier, icon, add_in_view from projects";
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery(query);
+            printResultSet(out, res);
+        }
+        catch(Exception e)
+        {
+            out.println("Exception: " + e.getClass().getName() + " " + e.getMessage());
+        }
     }
 
-    public void topActiveProjects(PrintWriter out, String n, String fromDate, String toDate) throws SQLException
+    public void topActiveProjects(PrintWriter out, String n, String fromDate, String toDate)
     {
-        String query = "select p.name, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0";
+        try
+        {
+            String query = "select p.name, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0";
 
-        if (!fromDate.equals(""))
-            query = query + " and date(c.date_time) >= '" + fromDate + "'";
+            if (!fromDate.equals(""))
+                query = query + " and date(c.date_time) >= '" + fromDate + "'";
 
-        if (!toDate.equals(""))
-            query = query + " and date(c.date_time) <= '" + toDate + "'";
+            if (!toDate.equals(""))
+                query = query + " and date(c.date_time) <= '" + toDate + "'";
 
-        query = query + " group by p.commit_subject order by count(*) desc";
+            query = query + " group by p.commit_subject order by count(*) desc";
 
-        if (!n.equals("0"))
-            query = query + " limit 0 , " + n;
+            if (!n.equals("0"))
+                query = query + " limit 0 , " + n;
 
-        Statement stmt = conn.createStatement();
-        ResultSet res = stmt.executeQuery(query);
-        printResultSet(out, res);
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery(query);
+            printResultSet(out, res);
+        }
+        catch(Exception e)
+        {
+            out.println("Exception: " + e.getClass().getName() + " " + e.getMessage());
+        }
     }
 
-    public void topProjectDevelopers(PrintWriter out, String project, String n, String fromDate, String toDate) throws SQLException
+    public void topProjectDevelopers(PrintWriter out, String project, String n, String fromDate, String toDate)
     {
-        String query;
-        if (!project.equals(""))
-            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from projects p, commits c, developers d where INSTR(c.path, p.commit_subject) > 0 and d.svn_account = c.svn_account and p.name = '" + project + "'";
-        else
-            query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from commits c, developers d where d.svn_account = c.svn_account";
+        try
+        {
+            String query;
+            if (!project.equals(""))
+                query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from projects p, commits c, developers d where INSTR(c.path, p.commit_subject) > 0 and d.svn_account = c.svn_account and p.name = '" + project + "'";
+            else
+                query = "select d.full_name, d.svn_account, d.first_commit, d.last_commit, count(*) from commits c, developers d where d.svn_account = c.svn_account";
 
-        if (!fromDate.equals(""))
-            query = query + " and date(c.date_time) >= '" + fromDate + "'";
+            if (!fromDate.equals(""))
+                query = query + " and date(c.date_time) >= '" + fromDate + "'";
 
-        if (!toDate.equals(""))
-            query = query + " and date(c.date_time) <= '" + toDate + "'";
+            if (!toDate.equals(""))
+                query = query + " and date(c.date_time) <= '" + toDate + "'";
 
-        if (!project.equals(""))
-            query = query + " group by d.full_name, p.name order by count(*) desc";
-        else
-            query = query + " group by d.full_name order by count(*) desc";
+            if (!project.equals(""))
+                query = query + " group by d.full_name, p.name order by count(*) desc";
+            else
+                query = query + " group by d.full_name order by count(*) desc";
 
-        if (!n.equals("0"))
-            query = query + " limit 0 , " + n;
+            if (!n.equals("0"))
+                query = query + " limit 0 , " + n;
 
-        Statement stmt = conn.createStatement();
-        ResultSet res = stmt.executeQuery(query);
-        printResultSet(out, res);
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery(query);
+            printResultSet(out, res);
+        }
+        catch(Exception e)
+        {
+            out.println("Exception: " + e.getClass().getName() + " " + e.getMessage());
+        }
     }
 
-    public void commitHistory(PrintWriter out, String project, String n, String fromDate, String toDate) throws SQLException
+    public void commitHistory(PrintWriter out, String project, String n, String fromDate, String toDate)
     {
-        String query;
-        if (!project.equals(""))
-            query = "select date(c.date_time) date, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 and p.name = '" + project + "'";
-        else
-            query = "select date(c.date_time) date, count(*) from commits c";
-        
-        if (!fromDate.equals(""))
-            query = query + " and date(c.date_time) >= '" + fromDate + "'";
+        try
+        {
+            String query;
+            if (!project.equals(""))
+                query = "select date(c.date_time) date, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 and p.name = '" + project + "'";
+            else
+                query = "select date(c.date_time) date, count(*) from commits c";
+            
+            if (!fromDate.equals(""))
+                query = query + " and date(c.date_time) >= '" + fromDate + "'";
 
-        if (!toDate.equals(""))
-            query = query + " and date(c.date_time) <= '" + toDate + "'";
+            if (!toDate.equals(""))
+                query = query + " and date(c.date_time) <= '" + toDate + "'";
 
-        if (!project.equals(""))
-        query = query + " group by date order by date asc";
+            if (!project.equals(""))
+            query = query + " group by date order by date asc";
 
-        if (!n.equals("0"))
-            query = query + " limit 0 , " + n;
+            if (!n.equals("0"))
+                query = query + " limit 0 , " + n;
 
-        Statement stmt = conn.createStatement();
-        ResultSet res = stmt.executeQuery(query);
-        printResultSet(out, res);
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery(query);
+            printResultSet(out, res);
+        }
+        catch(Exception e)
+        {
+            out.println("Exception: " + e.getClass().getName() + " " + e.getMessage());
+        }
     }
 
-    private void printResultSet(PrintWriter out, ResultSet res) throws SQLException
+    private void printResultSet(PrintWriter out, ResultSet res)
     {
+        try
+        {
         int count = res.getMetaData().getColumnCount();
         while(res.next())
         {
             for (int i = 1; i < count; ++i)
                 out.print(res.getObject(i) + ";");
             out.println(res.getObject(count));
+        }
+        }
+        catch(Exception e)
+        {
+            out.println("printResultSet Exception: " + e.getClass().getName() + " " + e.getMessage());
         }
     }
 

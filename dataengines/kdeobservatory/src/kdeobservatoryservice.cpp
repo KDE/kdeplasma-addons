@@ -38,6 +38,12 @@ KdeObservatoryService::KdeObservatoryService(KdeObservatoryEngine *engine)
 
 Plasma::ServiceJob *KdeObservatoryService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
+    if (Solid::Networking::status() != Solid::Networking::Connected && Solid::Networking::status() != Solid::Networking::Unknown)
+    {
+        emit engineError("fatal", i18n("No active network connection"));
+        return 0;
+    }
+
 /*
     if (m_engine->m_dataCache.contains(operation) && m_engine->m_dataCache[operation].first == parameters)
     {
@@ -135,7 +141,7 @@ void KdeObservatoryService::networkStatusChanged(Solid::Networking::Status statu
     if (status == Solid::Networking::Connected)
         startOperationCall(operationDescription("allProjectsInfo"));
     else
-        emit engineError("solid", i18n("No active network connection"));
+        emit engineError("fatal", i18n("No active network connection"));
 }
 
 void KdeObservatoryService::resultServlet(KJob *job)
