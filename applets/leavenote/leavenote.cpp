@@ -56,6 +56,7 @@ LeaveNote::LeaveNote(QObject *parent, const QVariantList &args)
 {
     // this will get us the standard applet background, for free!
     setBackgroundHints(NoBackground);
+    setStatus(Plasma::AcceptingInputStatus);
     resize(340, 250);
     //setMinimumSize(300, 200); // replace with correct numbers
 }
