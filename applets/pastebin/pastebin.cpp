@@ -316,7 +316,9 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
         paintPixmap(p, iconok, iconRect, pix_alpha);
     } else {
         QPixmap iconpix = KIcon("edit-paste").pixmap(QSize(iconsize, iconsize));
-        paintPixmap(p, iconpix, iconRect, pix_alpha);
+        if (!iconpix.isNull()) {
+            paintPixmap(p, iconpix, iconRect, pix_alpha);
+        }
     }
 
     // Draw background
