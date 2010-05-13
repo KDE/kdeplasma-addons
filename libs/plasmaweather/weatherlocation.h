@@ -62,7 +62,7 @@ private:
     class Private;
     Private * const d;
 
-    Q_PRIVATE_SLOT(d, void validatorFinished(const QMap<QString, QString> &results));
+    Q_PRIVATE_SLOT(d, void validatorFinished(const QMap<QString, QString> &results))
 };
 
 #endif

@@ -22,6 +22,7 @@
 
 #include <QChar>
 #include <QString>
+#include <QVarLengthArray>
 #include <qx11info_x11.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
@@ -31,11 +32,11 @@ public:
 
     static void changeKeycodeMapping(unsigned int code, QString &sym){
         KeySym keysym = XStringToKeysym(sym.toAscii());
-        KeySym keysyms[keysymsPerKeycode];
+        QVarLengthArray<KeySym> keysyms(keysymsPerKeycode);
         for(int i = 0; i < keysymsPerKeycode; i++){
             keysyms[i] = keysym;
         }
-        XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode, keysyms, 1);
+        XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode, keysyms.data(), 1);
         XSync(QX11Info::display(), False);
     }
 
