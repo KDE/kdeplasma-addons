@@ -250,6 +250,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
       m_layout(0),
       m_textEdit(0)
 {
+    setStatus(Plasma::AcceptingInputStatus);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
