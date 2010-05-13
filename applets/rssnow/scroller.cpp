@@ -79,10 +79,9 @@ Scroller::Scroller(QGraphicsItem *parent) :
     connect(m_right, SIGNAL(clicked()), this, SLOT(rightClicked()));
 }
 
-Scroller::~Scroller() {
-    foreach (KIcon * icon, m_feedIcons) {
-	   delete icon;
-    }
+Scroller::~Scroller()
+{
+    qDeleteAll(m_feedIcons);
     delete m_list;
     delete m_itemlist;
     delete m_activeitemlist;
@@ -119,6 +118,7 @@ void Scroller::listUpdated()
         data.icon = m_feedIcons["generic"];
         m_list->append(data);
     }
+
     if (m_list->size() < 1) { //the item is fetching feeds atm
         FeedData data;
         data.title = i18n("Fetching feeds");
@@ -126,11 +126,13 @@ void Scroller::listUpdated()
         data.icon = m_feedIcons["generic"];
         m_list->append(data);
     }
+
     if (m_current > (m_list->size() - 1) && m_list->size() > 0) {
         //feed has grown smaller, just display the first item.
         kDebug() << "feed has grown smaller";
         m_current = 0;
     }
+
     //TODO: it would be neat if the actual contents of the feeditems
     //was checked so after an update the same item is displayed.
     if (m_itemlist->size() < 1) {
@@ -413,7 +415,7 @@ void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data
             QMap<QString, QVariant> item = tmp.toMap();
             QString title = item["title"].toString();
             QString url = item["link"].toString();
-            QString icon = item["icon"].toString();
+            QString iconName = item["icon"].toString();
             QString feedtitle = item["feed_title"].toString();
             QString feedurl = item["feed_url"].toString();
 
@@ -429,14 +431,19 @@ void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data
                 data.url = url;
                 data.time = timestamp;
 
-                if (!m_feedIcons.contains(icon)) {
-                    QPixmap p = QPixmap(icon);
+                KIcon *icon = m_feedIcons.value(iconName);
+                if (!icon) {
+                    QPixmap p = QPixmap(iconName);
                     if (!p.isNull()) {
-                        m_feedIcons[icon] = new KIcon(p.scaled(16, 16));
-			data.icon = m_feedIcons[icon];
-                    } else {
-			data.icon = m_feedIcons["generic"];
+                        icon = new KIcon(p.scaled(16, 16));
+                        m_feedIcons.insert(iconName, icon);
                     }
+                }
+
+                if (icon) {
+                    data.icon = icon;
+                } else {
+                    data.icon = m_feedIcons["generic"];
                 }
 
                 data.itemNumber = m_list->size();
@@ -468,13 +475,13 @@ void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data
                                          .arg(m_list->at(i).title);
         }
 
-        FeedData noitems;
-        noitems.title = "no items to display";
-        noitems.extrainfo = "no items to display";
-        noitems.text = data["title"].toString();
-        noitems.icon = m_feedIcons["generic"];
-
         if (m_list->size() < 1) {
+            FeedData noitems;
+            noitems.title = "no items to display";
+            noitems.extrainfo = "no items to display";
+            noitems.text = data["title"].toString();
+            noitems.icon = m_feedIcons["generic"];
+
             m_list->append(noitems);
         }
 
