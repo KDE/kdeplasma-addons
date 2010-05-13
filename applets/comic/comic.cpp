@@ -407,7 +407,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
         QTimer::singleShot( 1, this, SLOT( updateSize()) );//HACK
     }
 
-    //prefechtes the previous and following comic for faster navigation
+    //prefetch the previous and following comic for faster navigation
     if ( !mNextIdentifierSuffix.isEmpty() ) {
         mEngine->query( mComicIdentifier + ':' + mNextIdentifierSuffix );
     }
