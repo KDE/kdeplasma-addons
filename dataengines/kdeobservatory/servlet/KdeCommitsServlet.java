@@ -8,29 +8,6 @@ public class KdeCommitsServlet extends HttpServlet
 {
     public void init()
     {
-        String dbHost   = "";
-        String dbName   = "";
-        String username = "";
-        String password = "";
-
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch(ClassNotFoundException e)
-        {
-            System.out.println("Error loading driver:" + e.getMessage());
-        }
-
-        try
-        {
-            String url ="jdbc:mysql://" + dbHost + ":3306/" + dbName;
-            conn = DriverManager.getConnection(url, username, password);
-        }
-        catch(SQLException e)
-        {
-            String err1Msg = e.getMessage();
-        }
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -72,8 +49,27 @@ public class KdeCommitsServlet extends HttpServlet
                 paramValues[i+1] = request.getParameter("p" + i);
             }
 
+            String dbHost   = "";
+            String dbName   = "";
+            String username = "";
+            String password = "";
+
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String url ="jdbc:mysql://" + dbHost + ":3306/" + dbName;
+            conn = DriverManager.getConnection(url, username, password);
+
             Method method = getClass().getDeclaredMethod(operation, paramTypes);
             method.invoke(this, paramValues);
+            conn.close();
+        }
+        catch(ClassNotFoundException e)
+        {
+            System.out.println("Error loading driver:" + e.getMessage());
+        }
+        catch(SQLException e)
+        {
+            String err1Msg = e.getMessage();
         }
         catch (NoSuchMethodException e)
         {
