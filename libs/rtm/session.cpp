@@ -65,8 +65,10 @@ bool RTM::Session::currentlyOnline() const {
 void RTM::Session::showLoginWindow()
 {
   //FIXME: What happens when auth wasn't created?
-  if (!d->auth)
+  if (!d->auth) {
+    kWarning() << "Auth should have already been created, creating anyway";
     d->auth = new RTM::Auth(d->permissions, d->apiKey, d->sharedSecret);
+  }
   d->auth->showLoginWebpage();
 }
 
