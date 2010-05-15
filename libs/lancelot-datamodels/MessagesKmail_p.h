@@ -24,6 +24,8 @@
 #include <Akonadi/Entity>
 #include <Akonadi/Collection>
 
+#include "config-lancelot-datamodels.h"
+
 namespace Lancelot {
 namespace Models {
 
