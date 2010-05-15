@@ -24,7 +24,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QCoreApplication>
-#include <QWebView>
+#include <KWebView>
 #include <QPushButton>
 
 #include <KDebug>
@@ -72,7 +72,7 @@ void RTM::Auth::showLoginWindowInternal(RTM::Request *rawReply)
   QWidget *authWidget = new QWidget();
   QVBoxLayout *layout = new QVBoxLayout(authWidget);
   QPushButton *button = new QPushButton(authWidget);
-  QWebView *authPage  = new QWebView(authWidget);
+  KWebView *authPage  = new KWebView(authWidget);
   
   button->setText(i18n("Click here after you have logged in and authorized the applet"));
 
