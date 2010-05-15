@@ -321,7 +321,10 @@ void ScrollPane::scrollTo(QRectF rect) //>
     QSizeF scrollableSize = d->widget->sizeFor(viewportSize);
 
     // Vertical scroll
-    if (d->vertical->isVisible()) {
+    // TODO: It would be prettier to do this differently
+    // (a variable indicating whether pane can scroll or smth)
+    // We have this in a few places
+    if (d->layout->size(FullBorderLayout::RightBorder) != 0) {
         if (d->vertical->value() > rect.top()) {
             scrollVertical(rect.top());
         } else if (d->vertical->value() + viewportSize.height() < rect.bottom()) {
@@ -330,7 +333,7 @@ void ScrollPane::scrollTo(QRectF rect) //>
     }
 
     // Horizontal scroll
-    if (d->horizontal->isVisible()) {
+    if (d->layout->size(FullBorderLayout::BottomBorder) != 0) {
         if (d->horizontal->value() > rect.left()) {
             scrollHorizontal(rect.left());
         } else if (d->horizontal->value() + viewportSize.width() < rect.right()) {
