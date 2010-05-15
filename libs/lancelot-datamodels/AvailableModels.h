@@ -39,7 +39,10 @@ public:
 
     ActionListModel * modelForSerializedData(const QString & data);
     ActionListModel * modelForItem(int index);
+
     QString serializedDataForItem(int index);
+
+    QString titleForModel(const QString & modelId);
 
 private:
     AvailableModels();

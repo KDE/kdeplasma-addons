@@ -171,6 +171,23 @@ ActionListModel * AvailableModels::modelForItem(int index)
         serializedDataForItem(index));
 }
 
+QString AvailableModels::titleForModel(const QString & modelId)
+{
+    kDebug() << modelId;
+
+    if (modelId.startsWith("Folder ")) {
+        QString result = modelId;
+        result.replace("Folder ", QString());
+        return result;
+    }
+
+    for (int i = 0; i < size(); i++) {
+        if (itemAt(i)->data.toString() == modelId) {
+            return itemAt(i)->title;
+        }
+    }
+}
+
 } // namespace Models
 } // namespace Lancelot
 

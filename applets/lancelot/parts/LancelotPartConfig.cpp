@@ -163,7 +163,10 @@ void LancelotPartConfig::setItemData(
     QMap < QString, QString > dataMap =
         Lancelot::Models::Serializator::deserialize(itemData);
 
-    item->setData(Qt::DisplayRole, dataMap["model"]);
+    item->setData(Qt::DisplayRole,
+        //dataMap["model"]);
+        Lancelot::Models::AvailableModels::self()->titleForModel(dataMap["model"]));
+
     item->setData(Qt::UserRole, itemData);
     item->setData(Qt::SizeHintRole, QSize(0, 48));
     item->setData(Qt::DecorationRole, KIcon("plasmaapplet-shelf"));
