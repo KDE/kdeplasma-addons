@@ -1,8 +1,14 @@
 [Desktop Entry]
 Name=Date and Time
+Name[pt]=Data e Hora
+Name[sv]=Datum och tid
+Name[uk]=Дата і час
 Name[x-test]=xxDate and Timexx
 
 Comment=The current date and time, locally or in any timezone
+Comment[pt]=A data e hora actuais, a nível local ou noutro fuso-horário qualquer
+Comment[sv]=Nuvarande datum och tid, lokalt eller i godtycklig tidszon
+Comment[uk]=Поточна дата і час, місцевий або час будь-якого часового поясу
 Comment[x-test]=xxThe current date and time, locally or in any timezonexx
 
 X-KDE-ServiceTypes=Plasma/Runner
