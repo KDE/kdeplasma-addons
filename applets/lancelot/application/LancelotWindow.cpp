@@ -721,6 +721,17 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
             case Qt::Key_Escape:
                 lancelotHide(true);
             case Qt::Key_Tab:
+                {
+                QKeyEvent * endKeyEvent =
+                    new QKeyEvent(QEvent::KeyPress, Qt::Key_End,
+                               Qt::NoModifier);
+                QCoreApplication::sendEvent(editSearch->nativeWidget(), endKeyEvent);
+
+                endKeyEvent =
+                    new QKeyEvent(QEvent::KeyRelease, Qt::Key_End,
+                               Qt::NoModifier);
+                QCoreApplication::sendEvent(editSearch->nativeWidget(), endKeyEvent);
+                }
                 return true;
             case Qt::Key_Return:
             case Qt::Key_Enter:

@@ -186,6 +186,8 @@ QString AvailableModels::titleForModel(const QString & modelId)
             return itemAt(i)->title;
         }
     }
+
+    return QString();
 }
 
 } // namespace Models
