@@ -24,10 +24,12 @@
 #include <Plasma/AbstractRunner>
 
 #include <Akonadi/Collection>
+#include <Akonadi/Item>
 
 #include <KIcon>
 
 #include <QMap>
+#include <QMutex>
 
 #include "datetime_parser.h"
 
@@ -43,36 +45,50 @@ public:
 
     void match(Plasma::RunnerContext &context);
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
-    
+
     void reloadConfiguration();
-    
+
 private slots:
-    
+
     /**
       Called when Akonadi collections loaded
     */
     void collectionsReceived( const Akonadi::Collection::List & list );
-    
+
 private:
 
-    enum IncidentType {
-        Event,
-        Todo
+    enum MatchType {
+        CreateEvent,
+        CreateTodo,
+        CompleteTodo,
+        CommentIncidence
     };
 
 private:
 
-    Plasma::QueryMatch createQueryMatch( const QString & definition, IncidentType type );
+    QStringList splitArguments( const QString & str );
+
+    /**
+      Select items by text query synchroniously
+    */
+    Akonadi::Item::List selectItems( const QString & query, const QStringList & mimeTypes );
+
+    Plasma::QueryMatch createQueryMatch( const QString & definition, MatchType type );
+    Plasma::QueryMatch createUpdateMatch( const Akonadi::Item & item, MatchType type, const QStringList & args );
 
     void describeSyntaxes();
 
 private:
 
     DateTimeParser dateTimeParser;
-    
+
     Akonadi::Collection eventsCollection;
     Akonadi::Collection todoCollection;
-    
+
+    Akonadi::Item::List cachedItems;
+    bool cachedItemsLoaded;
+    QMutex cachedItemsMutex;
+
     KIcon icon;
 };
 

@@ -13,6 +13,12 @@ This is Plasma Runner Plugin, which provides you ability to add new events or to
 * `todo Complete site design; in 2 days after 10:30`
 * And others...
 
+Besides of incident creation you may update existing incidences in some ways:
+
+* `complete Buy new phone` - mark selected task as completed!
+* `complete Fix localization issues; 30` - set task as 30%-completed;
+* `comment Birthday party; It was cool!` - append some text to task description.
+
 Features
 --------
 
@@ -28,7 +34,7 @@ Now following date/time specifications are available:
 * `in 10 days/weeks/months/years [after ...]`
 * `from ... to ...`
 
-You can specify event categories as third argument like in KOrganizer:
+You can specify event categories as third argument like they are displayed in KOrganizer:
 
 * `Business`
 * `Education:Exam`
@@ -66,5 +72,5 @@ Restart krunner:
 
 Alt-F2 to launch KRunner and in the runners list you will find events runner.
 
-Copyright © 2009 Alexey Noskov, released under the GPLv3 license 
+Copyright © 2010 Alexey Noskov, released under the GPLv3 license 
 Idea by SebastianHRO, published at http://forum.kde.org/brainstorm.php#idea85167

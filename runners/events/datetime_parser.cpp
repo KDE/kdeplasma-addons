@@ -23,21 +23,24 @@
 #include <KLocalizedString>
 #include <QDebug>
 
-QRegExp inMinutes("in\\s*([+-]?\\d+)\\s*minutes\\s*(after\\s+)?");
-QRegExp inHours("in\\s*([+-]?\\d+)\\s*hours\\s*(after\\s+)?");
-QRegExp inDays("in\\s*([+-]?\\d+)\\s*days\\s*(after\\s+)?");
-QRegExp inWeeks("in\\s*([+-]?\\d+)\\s*weeks\\s*(after\\s+)?");
-QRegExp inMonths("in\\s*([+-]?\\d+)\\s*months\\s*(after\\s+)?");
-QRegExp inYears("in\\s*([+-]?\\d+)\\s*years\\s*(after\\s+)?");
+// Phrase regular expressions
+static const QRegExp inMinutes( i18nc( "In number of minutes phrase (may contain regexp symbols)", "in %1 minutes (after)?", "([+-]?\\d+)" ).replace(" ","\\s*") );
+static const QRegExp inHours( i18nc( "In number of hours phrase (may contain regexp symbols)", "in %1 hours (after)?", "([+-]?\\d+)" ).replace(" ","\\s*") );
+static const QRegExp inDays( i18nc( "In number of days phrase (may contain regexp symbols)", "in %1 days (after)?", "([+-]?\\d+)" ).replace(" ","\\s*") );
+static const QRegExp inWeeks( i18nc( "In number of weeks phrase (may contain regexp symbols)", "in %1 weeks (after)?", "([+-]?\\d+)" ).replace(" ","\\s*") );
+static const QRegExp inMonths( i18nc( "In number of months phrase (may contain regexp symbols)", "in %1 months (after)?", "([+-]?\\d+)" ).replace(" ","\\s*") );
+static const QRegExp inYears( i18nc( "In number of years phrase (may contain regexp symbols)", "in %1 years (after)?", "([+-]?\\d+)" ).replace(" ","\\s*") );
+
+// Keywords
+static const QString now = i18nc( "Current time keyword", "now" );
+static const QString today = i18nc( "Current day keyword", "today" );
+static const QString tomorrow = i18nc( "Next day keyword", "tomorrow" );
+static const QString yesterday = i18nc( "Previous day keyword", "yesterday" );
+
+static const QString from = i18nc( "Keyword for start datetime", "from" ) + " ";
+static const QString to = i18nc( "Keyword for finish datetime", "to" ) + " ";
 
 DateTimeParser::DateTimeParser() {
-    now = i18nc( "Current time keyword", "now" );
-    today = i18nc( "Current day keyword", "today" );
-    tomorrow = i18nc( "Next day keyword", "tomorrow" );
-    yesterday = i18nc( "Previous day keyword", "yesterday" );
-    from = i18nc( "Keyword for start datetime", "from" ) + " ";
-    to = i18nc( "Keyword for finish datetime", "to" ) + " ";
-    
     addTimeFormat( "h:mm" );
     
     addDateFormat( "d.M.yyyy" );
@@ -53,8 +56,7 @@ void DateTimeParser::addTimeFormat( const QString & s ) {
     formatRegexp.replace( QRegExp("h|m|s"), "\\d\\d?" );
     formatRegexp.replace( "zzz", "\\d\\d\\d" );
     formatRegexp.replace( "z", "\\d\\d?\\d?" );
-    formatRegexp.replace( "AP", "(AM|PM)" );
-    formatRegexp.replace( "ap", "(am|pm)" );
+    formatRegexp.replace( QRegExp("AP|ap"), "\\w{2}" );
     
     timeFormats.insert( s, QRegExp( formatRegexp ) );
 }
@@ -68,8 +70,7 @@ void DateTimeParser::addDateFormat( const QString & s ) {
     formatRegexp.replace( 'd', 'D' );
     formatRegexp.replace( "yyyy", "\\d\\d\\d\\d" );
     formatRegexp.replace( QRegExp("DDDD|MMMM"), "\\w+" );
-    formatRegexp.replace( "DDD", "(Mon|Tue|Wed|Thu|Fri|Sat|Sun)" );
-    formatRegexp.replace( "MMM", "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)" );
+    formatRegexp.replace( QRegExp("DDD|MMM"), "\\w{3}" );
     formatRegexp.replace( QRegExp("DD|MM|yy"), "\\d\\d" );
     formatRegexp.replace( QRegExp("D|M"), "\\d\\d?" );
     
