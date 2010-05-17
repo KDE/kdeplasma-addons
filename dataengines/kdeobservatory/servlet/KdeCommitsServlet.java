@@ -35,20 +35,6 @@ public class KdeCommitsServlet extends HttpServlet
                 return;
             }
 
-            response.setContentType("text/plain");
-            operation = request.getParameter("op");
-            paramTypes = new Class[request.getParameterMap().size()];
-            paramValues = new Object[paramTypes.length];
-
-            paramTypes[0] = PrintWriter.class;
-            paramValues[0] = out;
-
-            for (int i = 0; i < paramValues.length - 1; ++i)
-            {
-                paramTypes[i+1] = String.class;
-                paramValues[i+1] = request.getParameter("p" + i);
-            }
-
             String dbHost   = "";
             String dbName   = "";
             String username = "";
@@ -57,7 +43,24 @@ public class KdeCommitsServlet extends HttpServlet
             Class.forName("com.mysql.jdbc.Driver");
 
             String url ="jdbc:mysql://" + dbHost + ":3306/" + dbName;
-            conn = DriverManager.getConnection(url, username, password);
+
+            Connection conn = DriverManager.getConnection(url, username, password);
+
+            response.setContentType("text/plain");
+            operation = request.getParameter("op");
+            paramTypes = new Class[request.getParameterMap().size()+1];
+            paramValues = new Object[paramTypes.length];
+
+            paramTypes[0] = PrintWriter.class;
+            paramValues[0] = out;
+            paramTypes[1] = Connection.class;
+            paramValues[1] = conn;
+
+            for (int i = 0; i < paramValues.length - 2; ++i)
+            {
+                paramTypes[i+2] = String.class;
+                paramValues[i+2] = request.getParameter("p" + i);
+            }
 
             Method method = getClass().getDeclaredMethod(operation, paramTypes);
             method.invoke(this, paramValues);
@@ -83,7 +86,7 @@ public class KdeCommitsServlet extends HttpServlet
         }
     }
 
-    public void allProjectsInfo(PrintWriter out)
+    public void allProjectsInfo(PrintWriter out, Connection conn) throws Exception
     {
         try
         {
@@ -95,10 +98,11 @@ public class KdeCommitsServlet extends HttpServlet
         catch(Exception e)
         {
             out.println("Exception: " + e.getClass().getName() + " " + e.getMessage());
+            throw e;
         }
     }
 
-    public void topActiveProjects(PrintWriter out, String n, String fromDate, String toDate)
+    public void topActiveProjects(PrintWriter out, Connection conn, String n, String fromDate, String toDate) throws Exception
     {
         try
         {
@@ -122,10 +126,11 @@ public class KdeCommitsServlet extends HttpServlet
         catch(Exception e)
         {
             out.println("Exception: " + e.getClass().getName() + " " + e.getMessage());
+            throw e;
         }
     }
 
-    public void topProjectDevelopers(PrintWriter out, String project, String n, String fromDate, String toDate)
+    public void topProjectDevelopers(PrintWriter out, Connection conn, String project, String n, String fromDate, String toDate) throws Exception
     {
         try
         {
@@ -156,10 +161,11 @@ public class KdeCommitsServlet extends HttpServlet
         catch(Exception e)
         {
             out.println("Exception: " + e.getClass().getName() + " " + e.getMessage());
+            throw e;
         }
     }
 
-    public void commitHistory(PrintWriter out, String project, String n, String fromDate, String toDate)
+    public void commitHistory(PrintWriter out, Connection conn, String project, String n, String fromDate, String toDate) throws Exception
     {
         try
         {
@@ -188,10 +194,11 @@ public class KdeCommitsServlet extends HttpServlet
         catch(Exception e)
         {
             out.println("Exception: " + e.getClass().getName() + " " + e.getMessage());
+            throw e;
         }
     }
 
-    private void printResultSet(PrintWriter out, ResultSet res)
+    private void printResultSet(PrintWriter out, ResultSet res) throws Exception
     {
         try
         {
@@ -206,8 +213,7 @@ public class KdeCommitsServlet extends HttpServlet
         catch(Exception e)
         {
             out.println("printResultSet Exception: " + e.getClass().getName() + " " + e.getMessage());
+            throw e;
         }
     }
-
-    private Connection conn;
 }

@@ -233,7 +233,12 @@ void KdeObservatoryService::resultServlet(KJob *job)
             }
         }
         else
+        {
+            if (source == "allProjectsInfo")
+                source = "fatal";
+            kDebug() << "Error:" << data;
             emit engineError(source, i18n("Empty data or incorrect returned MIME type"));
+        }
     }
 }
 
