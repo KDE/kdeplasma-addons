@@ -502,51 +502,70 @@ void KdeObservatory::updateSources()
         commitFrom = currentDate.addDays(-m_commitExtent).toString("yyyyMMdd");
     }
 
-    m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
-    m_sourceCounter = 1;
-
-    QHashIterator<QString, bool> i1(m_topDevelopersViewProjects);
-    while (i1.hasNext())
+    int viewsCount = m_activeViews.count();
+    m_sourceCounter = 0;
+    for (int i = 0; i < viewsCount; ++i)
     {
-        i1.next();
-        if (i1.value())
+        const QPair<QString, bool> &pair = m_activeViews.at(i);
+
+        if (pair.first == i18n("Top Active Projects") && pair.second)
         {
-            KConfigGroup ops = m_service->operationDescription("topProjectDevelopers");
-            ops.writeEntry("project", i1.key());
-            ops.writeEntry("commitFrom", commitFrom);
-            ops.writeEntry("commitTo"  , commitTo);
-            m_service->startOperationCall(ops);
+            m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
             ++m_sourceCounter;
         }
-    }
 
-    QHashIterator<QString, bool> i2(m_commitHistoryViewProjects);
-    while (i2.hasNext())
-    {
-        i2.next();
-        if (i2.value())
+        if (pair.first == i18n("Top Developers") && pair.second)
         {
-            KConfigGroup ops = m_service->operationDescription("commitHistory");
-            ops.writeEntry("project", i2.key());
-            ops.writeEntry("commitFrom", commitFrom);
-            ops.writeEntry("commitTo"  , commitTo);
-            m_service->startOperationCall(ops);
-            ++m_sourceCounter;
+            QHashIterator<QString, bool> i1(m_topDevelopersViewProjects);
+            while (i1.hasNext())
+            {
+                i1.next();
+                if (i1.value())
+                {
+                    KConfigGroup ops = m_service->operationDescription("topProjectDevelopers");
+                    ops.writeEntry("project", i1.key());
+                    ops.writeEntry("commitFrom", commitFrom);
+                    ops.writeEntry("commitTo"  , commitTo);
+                    m_service->startOperationCall(ops);
+                    ++m_sourceCounter;
+                }
+            }
         }
-    }
 
-    QHashIterator<QString, bool> i3(m_krazyReportViewProjects);
-    while (i3.hasNext())
-    {
-        i3.next();
-        if (i3.value() && (m_projects[i3.key()].krazyReport.contains("reports") || m_projects[i3.key()].krazyReport.contains("component=")))
+        if (pair.first == i18n("Commit History") && pair.second)
         {
-            KConfigGroup ops = m_service->operationDescription("krazyReport");
-            ops.writeEntry("project", i3.key());
-            ops.writeEntry("krazyReport", m_projects[i3.key()].krazyReport);
-            ops.writeEntry("krazyFilePrefix", m_projects[i3.key()].krazyFilePrefix);
-            m_service->startOperationCall(ops);
-            ++m_sourceCounter;
+            QHashIterator<QString, bool> i2(m_commitHistoryViewProjects);
+            while (i2.hasNext())
+            {
+                i2.next();
+                if (i2.value())
+                {
+                    KConfigGroup ops = m_service->operationDescription("commitHistory");
+                    ops.writeEntry("project", i2.key());
+                    ops.writeEntry("commitFrom", commitFrom);
+                    ops.writeEntry("commitTo"  , commitTo);
+                    m_service->startOperationCall(ops);
+                    ++m_sourceCounter;
+                }
+            }    
+        }
+
+        if (pair.first == i18n("Krazy Report") && pair.second)
+        {
+            QHashIterator<QString, bool> i3(m_krazyReportViewProjects);
+            while (i3.hasNext())
+            {
+                i3.next();
+                if (i3.value() && (m_projects[i3.key()].krazyReport.contains("reports") || m_projects[i3.key()].krazyReport.contains("component=")))
+                {
+                    KConfigGroup ops = m_service->operationDescription("krazyReport");
+                    ops.writeEntry("project", i3.key());
+                    ops.writeEntry("krazyReport", m_projects[i3.key()].krazyReport);
+                    ops.writeEntry("krazyFilePrefix", m_projects[i3.key()].krazyFilePrefix);
+                    m_service->startOperationCall(ops);
+                    ++m_sourceCounter;
+                }
+            }
         }
     }
 
