@@ -170,6 +170,8 @@ private:
     Ui::pastebinServersConfig uiServers;
 
     Plasma::Service *m_postingService;
+
+    QString m_hoverText;
 };
 
 K_EXPORT_PLASMA_APPLET(pastebin, Pastebin)

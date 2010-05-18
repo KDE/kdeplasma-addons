@@ -62,6 +62,7 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     setMinimumSize(16, 16);
     resize(150, 150);
     m_timer = new QTimer(this);
+    m_hoverText = i18n("Drop!");
     connect(m_timer, SIGNAL(timeout()), this, SLOT(showErrors()));
 
     connect(m_signalMapper, SIGNAL(mapped(const QString &)),
@@ -220,10 +221,9 @@ void Pastebin::setActionState(ActionState state)
 void Pastebin::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & (Plasma::FormFactorConstraint | Plasma::SizeConstraint)) {
-        int minSize = KGlobalSettings::smallestReadableFont().pointSize();
-        int dynSize = qMax((qreal)1.0, (qreal)(qMin(contentsRect().width(), contentsRect().height()) / 4));
-        //kDebug() << "Min : Dyn" << minSize << dynSize << qMax(minSize, dynSize);
-        m_font.setPointSize(qMax(minSize, dynSize));
+        QFontMetrics fm(m_font);
+        int textWidthInPixels = fm.width(m_hoverText);
+        m_font.setPointSize((int)(m_font.pointSize() * ((double)contentsRect().width() / textWidthInPixels)));
     }
     if (constraints & Plasma::FormFactorConstraint) {
         if (formFactor() == Plasma::Horizontal || formFactor() == Plasma::Vertical ) {
@@ -341,13 +341,13 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
     qreal round_radius = 35.0;
     p->drawRoundedRect(contentsRect, round_radius / proportion, round_radius, Qt::RelativeSize);
 
-    QString hoverText = i18n("Drop!");
     if (m_interactionState == DraggedOver) {
         m_fgColor.setAlphaF(m_alpha * 0.8);
     } else if (m_interactionState == Hovered) {
         m_fgColor.setAlphaF(m_alpha * 0.6);
     }
-    p->drawText(contentsRect, Qt::AlignCenter, hoverText);
+
+    p->drawText(contentsRect, Qt::AlignCenter, m_hoverText);
     p->setPen(m_fgColor);
 
     if (m_actionState == IdleSuccess) {
@@ -363,7 +363,7 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
         p->drawText(contentsRect, Qt::AlignCenter, i18n("Error: Try Again"));
     } else {
         p->setFont(m_font);
-        p->drawText(contentsRect, Qt::AlignCenter, hoverText);
+        p->drawText(contentsRect, Qt::AlignCenter, m_hoverText);
     }
 }
 
