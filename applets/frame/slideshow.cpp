@@ -91,7 +91,7 @@ void SlideShow::addImage(const QString &imagePath)
 
 void SlideShow::addDir(const QString &path, bool recursive)
 {
-    QDirIterator dirIterator(path, m_filters, QDir::Files, (recursive ? QDirIterator::Subdirectories : QDirIterator::NoIteratorFlags));
+    QDirIterator dirIterator(path, m_filters, QDir::Files, (recursive ? QDirIterator::Subdirectories | QDirIterator::FollowSymlinks : QDirIterator::NoIteratorFlags));
     QStringList dirPicturePaths;
 
     while (dirIterator.hasNext()) {
