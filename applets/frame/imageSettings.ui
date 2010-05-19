@@ -61,7 +61,7 @@
             <bool>true</bool>
            </property>
            <property name="filter">
-            <string>*.png *.jpeg *.jpg *.svg *.svgz</string>
+            <string>*.png *.jpeg *.jpg *.svg *.svgz *.bmp</string>
            </property>
            <property name="mode">
             <set>KFile::ExistingOnly|KFile::File</set>
