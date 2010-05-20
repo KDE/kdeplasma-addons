@@ -93,14 +93,16 @@ void SingleFeedItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option,
 
     m_doc.setHtml(text);
     text = m_doc.toPlainText();
-    p->drawText(QRectF(22, 2, width - 24, 16),
+    QFontMetrics fm(font);
+    const int titleHeight = qMax(16, fm.height());
+    p->drawText(QRectF(22, 2, width - 24, titleHeight),
                 Qt::AlignLeft | Qt::AlignBottom, text);
 
     //draw text
     font.setBold(false);
     p->setFont(font);
     m_doc.setHtml(m_feeditem.text);
-    p->drawText(QRectF(2, 20, width - 4, height - 22),
+    p->drawText(QRectF(2, titleHeight + 4, width - 4, height - titleHeight - 6),
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap,
                 m_doc.toPlainText());
 }
@@ -113,6 +115,25 @@ void SingleFeedItem::setRect(const QRect& rect)
     m_background->resize(m_rect.width(), m_rect.height());
 }
 
+int SingleFeedItem::preferredHeight(int width)
+{
+    QFont font = KGlobalSettings::smallestReadableFont();
+    m_doc.setTextWidth(width);
+    m_doc.setDefaultFont(font);
+    m_doc.setHtml(m_feeditem.text);
+    m_doc.setPlainText(m_doc.toPlainText());
+    int totalHeight = m_doc.size().height();
+
+    font.setBold(true);
+    m_doc.setDefaultFont(font);
+    m_doc.setHtml(m_displayExtra ? m_feeditem.extrainfo : m_feeditem.title);
+    m_doc.setPlainText(m_doc.toPlainText());
+    totalHeight += m_doc.size().height();
+
+    kDebug() << "preferred height is" << totalHeight;
+    return totalHeight;
+}
+
 void SingleFeedItem::setFeedData(FeedData feeddata)
 {
     //set feed item and repaint
@@ -122,6 +143,7 @@ void SingleFeedItem::setFeedData(FeedData feeddata)
     } else {
         setCursor(Qt::ArrowCursor);
     }
+
     update();
 }
 

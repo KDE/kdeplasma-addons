@@ -53,7 +53,7 @@ public:
 
     virtual void setGeometry(const QRectF &geometry);
 
-    QList<FeedData> * list();
+    QList<FeedData> list();
     void delayedMoveNext(int delay);
     void listUpdated();
 
@@ -79,6 +79,7 @@ protected:
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
 
 protected slots:
     void leftClicked();
@@ -106,14 +107,14 @@ private:
 
     bool m_droptarget;
 
-    QList<FeedData> *m_list;
+    QList<FeedData> m_list;
     //itemlist contains all SingleFeedItems that are currently in
     //memory and should be cleared later.
-    QList<SingleFeedItem *> *m_itemlist;
+    QList<SingleFeedItem *> m_itemlist;
     //activeitemlist contains all SingleFeedItems that are currently
     //displayed (always 1 or 2 in a horizontal scroller, but a future
     //vertical scroller might need more so we use a list
-    QList<SingleFeedItem *> *m_activeitemlist;
+    QList<SingleFeedItem *> m_activeitemlist;
     QMap<QString, KIcon *> m_feedIcons;
 
     Plasma::IconWidget *m_left;

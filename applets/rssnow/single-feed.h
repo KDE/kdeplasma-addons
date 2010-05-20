@@ -42,6 +42,7 @@ class SingleFeedItem : public QGraphicsWidget
         int itemNumber() const;
         void setDisplayExtra(bool extra);
         bool displayExtra() const;
+        int preferredHeight(int width);
 
         virtual QRectF boundingRect() const;
         virtual void paint(QPainter *p,

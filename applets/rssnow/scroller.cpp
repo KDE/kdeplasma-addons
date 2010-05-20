@@ -46,18 +46,12 @@ Scroller::Scroller(QGraphicsItem *parent) :
         m_delayedPrev(0),
         m_maxAge(0),
         m_droptarget(false),
-        m_list(new QList<FeedData>()),
-        m_itemlist(new QList<SingleFeedItem *>()),
-        m_activeitemlist(new QList<SingleFeedItem *>()),
         m_left(new Plasma::IconWidget(this)),
         m_right(new Plasma::IconWidget(this)),
         m_isAnimating(false)
 {
 
     setAcceptedMouseButtons(Qt::LeftButton);
-    setMaximumSize(QSizeF(600, 64));
-    setMinimumSize(QSizeF(100, 32));
-    setPreferredSize(QSizeF(300, 56));
     setAcceptsHoverEvents(true);
     setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
 
@@ -82,12 +76,9 @@ Scroller::Scroller(QGraphicsItem *parent) :
 Scroller::~Scroller()
 {
     qDeleteAll(m_feedIcons);
-    delete m_list;
-    delete m_itemlist;
-    delete m_activeitemlist;
 }
 
-QList<FeedData> * Scroller::list()
+QList<FeedData> Scroller::list()
 {
     return m_list;
 }
@@ -105,46 +96,51 @@ bool Scroller::dropTarget() const
 void Scroller::setDropTarget(bool droptarget)
 {
     m_droptarget = droptarget;
+    updateGeometry();
 }
 
 void Scroller::listUpdated()
 {
-    if (m_list->size() < 1 && m_droptarget) {
+    if (m_droptarget && m_list.isEmpty()) {
         FeedData data;
         data.title = i18n("Drop a feed here...");
         data.extrainfo = i18n("Drop a feed here...");
         //TODO: the wording of this phrase could be better:
         data.text = i18n("...to start a new group or drop a feed on an existing group to add the feed there");
         data.icon = m_feedIcons["generic"];
-        m_list->append(data);
+        m_list.append(data);
     }
 
-    if (m_list->size() < 1) { //the item is fetching feeds atm
+    if (m_list.isEmpty()) { //the item is fetching feeds atm
         FeedData data;
         data.title = i18n("Fetching feeds");
         data.extrainfo = i18n("Fetching feeds");
         data.icon = m_feedIcons["generic"];
-        m_list->append(data);
+        m_list.append(data);
     }
 
-    if (m_current > (m_list->size() - 1) && m_list->size() > 0) {
+    if (m_current > (m_list.size() - 1) && !m_list.isEmpty()) {
         //feed has grown smaller, just display the first item.
-        kDebug() << "feed has grown smaller";
+        //kDebug() << "feed has grown smaller";
         m_current = 0;
     }
 
     //TODO: it would be neat if the actual contents of the feeditems
     //was checked so after an update the same item is displayed.
-    if (m_itemlist->size() < 1) {
+    if (m_itemlist.size() < 1) {
         SingleFeedItem * item = new SingleFeedItem(this);
-        item->setFeedData(m_list->at(m_current));
+        item->setFeedData(m_list.at(m_current));
         item->setZValue(0);
         item->setPos(0, 0);
         item->show();
-        m_itemlist->append(item);
-        m_activeitemlist->append(item);
+        m_itemlist.append(item);
+        m_activeitemlist.append(item);
     } else {
-        m_itemlist->at(m_itemlist->size() - 1)->setFeedData(m_list->at(m_current));
+        m_itemlist.at(m_itemlist.size() - 1)->setFeedData(m_list.at(m_current));
+    }
+
+    if (m_droptarget) {
+        updateGeometry();
     }
 }
 
@@ -161,7 +157,7 @@ void Scroller::movePrev()
         if (m_current > 0) {
             m_current--;
         } else {
-            m_current = m_list->size() - 1;
+            m_current = m_list.size() - 1;
         }
         doAnimation(QAbstractAnimation::Backward);
     }
@@ -172,7 +168,7 @@ void Scroller::moveNext()
     if (m_isAnimating) {
         m_delayedNext++;
     } else {
-        if (m_current < (m_list->size()-1)) {
+        if (m_current < (m_list.size()-1)) {
             m_current++;
         } else {
             m_current = 0;
@@ -181,20 +177,45 @@ void Scroller::moveNext()
     }
 }
 
+QSizeF Scroller::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
+{
+    if (which ==  Qt::MinimumSize) {
+        return QSizeF(100, 32); 
+    } else  if (which == Qt::PreferredSize) {
+        if (m_droptarget && !m_itemlist.isEmpty()) {
+            SingleFeedItem *item = m_itemlist.at(0);
+            const int w = constraint.width() < 1 ? (size().width() > 0 ? size().width() : 300) : constraint.width();
+            QSizeF s(w, item->preferredHeight(w));
+            return s;
+        } else {
+            return QSizeF(300, 56);
+        }
+    } else if (which == Qt::MaximumSize) {
+        if (m_droptarget) {
+            return QSizeF(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+        } else {
+            return QSizeF(600, 64);
+        }
+
+    }
+
+    return QGraphicsWidget::sizeHint(which, constraint);
+}
+
 void Scroller::doAnimation(QAbstractAnimation::Direction direction)
 {
-    if (m_list->size() > 1) {
+    if (m_list.size() > 1) {
         if (m_animations && !m_isAnimating) {
             SingleFeedItem * item = new SingleFeedItem(this);
-            item->setFeedData(m_list->at(m_current));
+            item->setFeedData(m_list.at(m_current));
             item->setDisplayExtra(m_hovered);
-            item->setZValue(m_itemlist->size() + 1);
+            item->setZValue(m_itemlist.size() + 1);
             item->show();
             item->setPos((direction == QAbstractAnimation::Forward? 1 : -1) * size().width(), 0);
             item->setRect(QRect(0, 0, size().width(), size().height()));
-            if (!m_itemlist->contains(item)) {
-                m_itemlist->append(item);
-                m_activeitemlist->append(item);
+            if (!m_itemlist.contains(item)) {
+                m_itemlist.append(item);
+                m_activeitemlist.append(item);
             }
             //acellerate while scrolling:
             int frames, time, queuelength;
@@ -227,7 +248,7 @@ void Scroller::doAnimation(QAbstractAnimation::Direction direction)
             }
             m_isAnimating = true;
         } else {
-            m_itemlist->at(m_itemlist->size() - 1)->setFeedData(m_list->at(m_current));
+            m_itemlist.at(m_itemlist.size() - 1)->setFeedData(m_list.at(m_current));
         }
     }
 }
@@ -236,7 +257,7 @@ void Scroller::animationComplete()
 {
     m_isAnimating = false;
 
-    m_activeitemlist->takeFirst(); //remove the first item.
+    m_activeitemlist.takeFirst(); //remove the first item.
     if (m_delayedNext > 0) {
         m_delayedPrev = 0;
         m_delayedNext--;
@@ -245,7 +266,7 @@ void Scroller::animationComplete()
         m_delayedNext = 0;
         m_delayedPrev--;
         QTimer::singleShot(50, this, SLOT(movePrev()));
-    } else if (m_itemlist->size() > 2) {
+    } else if (m_itemlist.size() > 2) {
         QTimer::singleShot(0, this, SLOT(clearUnusedItems()));
     }
 }
@@ -254,7 +275,7 @@ qreal Scroller::animValue() const
 {
     qreal xPosition = 0.0;
 
-    foreach (SingleFeedItem *item, *m_activeitemlist) {
+    foreach (SingleFeedItem *item, m_activeitemlist) {
         if (m_current == item->itemNumber()) {
             xPosition = item->pos().x();
             break;
@@ -274,7 +295,7 @@ void Scroller::animate(qreal value)
     const bool isForward = m_animation.data()->direction() == QAbstractAnimation::Forward;
     int xPosition;
 
-    foreach (SingleFeedItem * item, *m_activeitemlist) {
+    foreach (SingleFeedItem * item, m_activeitemlist) {
         if (m_current == item->itemNumber()) {
             xPosition = (isForward ? 1 * (1-value) : -1 * value) * width;
         } else {
@@ -286,16 +307,15 @@ void Scroller::animate(qreal value)
 
 void Scroller::clearUnusedItems()
 {
-    kDebug() << "clearing items";
     //Why is this so heavy on the resources? It makes all animations stutter.
     //So let's make sure we don't this this while animations are happening.
-    foreach (SingleFeedItem * item, *m_itemlist) {
-        if (!m_activeitemlist->contains(item)) {
-            m_itemlist->removeAll(item);
+    foreach (SingleFeedItem * item, m_itemlist) {
+        if (!m_activeitemlist.contains(item)) {
+            m_itemlist.removeAll(item);
             delete item;
         }
     }
-    m_itemlist->last()->setZValue(0);
+    m_itemlist.last()->setZValue(0);
 }
 
 void Scroller::setGeometry(const QRectF &geometry)
@@ -306,26 +326,26 @@ void Scroller::setGeometry(const QRectF &geometry)
 
 void Scroller::updateSize()
 {
-    SingleFeedItem * item;
     qreal width = geometry().width();
     qreal height = geometry().height();
-    QRect rect;
-    rect.setWidth(width);
-    rect.setHeight(height);
-    if (m_itemlist != 0 && !m_isAnimating) {
-        for (int i = 0; i < m_itemlist->size(); i++) {
-            item = m_itemlist->at(i);
+    QRect rect(0, 0, width, height);
+
+    if (!m_isAnimating) {
+        foreach (SingleFeedItem *item, m_itemlist) {
             item->setRect(rect);
         }
     }
+
     if (m_left != 0) {
         m_left->setPos(width - m_left->geometry().width(),
                        height - m_left->geometry().height());
     }
+
     if (m_right != 0) {
         m_right->setPos(width - m_right->geometry().width(), 0);
     }
 }
+
 void Scroller::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
     if (event->delta() < 0) {
@@ -355,8 +375,8 @@ void Scroller::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     Q_UNUSED(event);
 
     QString url;
-    if (m_current < m_list->size()) {
-        url = m_list->at(m_current).url;
+    if (m_current < m_list.size()) {
+        url = m_list.at(m_current).url;
     }
 
     KRun::runUrl(KUrl(url), "text/html", 0);
@@ -365,12 +385,12 @@ void Scroller::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void Scroller::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if (m_list->size() > 1) {
+    if (m_list.size() > 1) {
         m_left->show();
         m_right->show();
     }
     m_hovered = true;
-    foreach (SingleFeedItem * item, *m_activeitemlist) {
+    foreach (SingleFeedItem * item, m_activeitemlist) {
         item->setDisplayExtra(true);
         item->update();
     }
@@ -380,12 +400,12 @@ void Scroller::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void Scroller::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if (m_list->size() > 1) {
+    if (m_list.size() > 1) {
         m_left->hide();
         m_right->hide();
     }
     m_hovered = false;
-    foreach (SingleFeedItem * item, *m_activeitemlist) {
+    foreach (SingleFeedItem * item, m_activeitemlist) {
         item->setDisplayExtra(false);
         item->update();
     }
@@ -405,10 +425,9 @@ bool Scroller::animations() const
 void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     if (!data.isEmpty()) {
-        list()->clear();
+        m_list.clear();
 
-        kDebug() << "feed " << source << " updated.";
-
+        //kDebug() << "feed " << source << " updated.";
         QVariantList items = data["items"].toList();
 
         foreach (const QVariant &tmp, items) {
@@ -446,43 +465,43 @@ void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data
                     data.icon = m_feedIcons["generic"];
                 }
 
-                data.itemNumber = m_list->size();
-                m_list->append(data);
+                data.itemNumber = m_list.size();
+                m_list.append(data);
             }
         }
 
         //TODO: separate this and use a timer to update fuzzyDate
         //every minute.
-        const int listSize = m_list->size();
+        const int listSize = m_list.size();
         for (int i = 0; i < listSize; ++i) {
-            uint timestamp = m_list->at(i).time;
+            uint timestamp = m_list.at(i).time;
             if (timestamp != 0) {
                 QDateTime datetime;
                 datetime.setTime_t(timestamp);
-                (*m_list)[i].extrainfo = QString("(%1/%2) %3")
+                m_list[i].extrainfo = QString("(%1/%2) %3")
                                                  .arg(i+1)
-                                                 .arg(m_list->size())
+                                                 .arg(m_list.size())
                                                  .arg(fuzzyDate(datetime));
             } else {
-                (*m_list)[i].extrainfo = QString("(%1/%2) %3")
+                m_list[i].extrainfo = QString("(%1/%2) %3")
                                                  .arg(i+1)
-                                                 .arg(m_list->size())
-                                                 .arg(m_list->at(i).title);
+                                                 .arg(m_list.size())
+                                                 .arg(m_list.at(i).title);
             }
-            (*m_list)[i].title = QString("(%1/%2) %3")
+            m_list[i].title = QString("(%1/%2) %3")
                                          .arg(i+1)
-                                         .arg(m_list->size())
-                                         .arg(m_list->at(i).title);
+                                         .arg(m_list.size())
+                                         .arg(m_list.at(i).title);
         }
 
-        if (m_list->size() < 1) {
+        if (m_list.size() < 1) {
             FeedData noitems;
             noitems.title = "no items to display";
             noitems.extrainfo = "no items to display";
             noitems.text = data["title"].toString();
             noitems.icon = m_feedIcons["generic"];
 
-            m_list->append(noitems);
+            m_list.append(noitems);
         }
 
         listUpdated();

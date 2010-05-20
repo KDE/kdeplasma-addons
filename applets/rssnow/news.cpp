@@ -70,6 +70,7 @@ void News::init()
 
     m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
     m_layout->setSpacing(2);
+    setLayout(m_layout);
 
     m_header = new Header(this);
     m_timer = new QTimer(this);
@@ -248,9 +249,9 @@ void News::updateScrollers()
     m_timer->stop();
     m_timer->setInterval(m_switchInterval * 1000);
 
-    while (m_layout->count()) {
-        m_layout->removeAt(0);
-    }
+    m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
+    m_layout->setSpacing(2);
+    setLayout(m_layout);
 
     if (m_logo) {
         m_layout->addItem(m_header);
@@ -272,12 +273,17 @@ void News::updateScrollers()
 
     if (m_showdroptarget) {
         Scroller * scroller = new Scroller(this);
-        m_layout->addItem(scroller);
         m_scrollerList.append(scroller);
+        m_layout->addItem(scroller);
         scroller->setAnimations(m_animations);
         scroller->setDropTarget(true);
         scroller->setMaxAge(m_maxAge);
         scroller->listUpdated();
+    }
+
+
+    foreach (Scroller *scroller, m_scrollerList) {
+        m_layout->addItem(scroller);
     }
 
     adjustSize();
