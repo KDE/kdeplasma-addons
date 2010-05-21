@@ -24,10 +24,4 @@ install(TARGETS plasma_applet_qalculate
 install(FILES plasma-applet-qalculate.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
-install(FILES
-icons/128x128/qalculate-applet.png
-DESTINATION ${ICON_INSTALL_DIR}/hicolor/128x128/apps/)
-
-install(FILES
-icons/48x48/qalculate-applet.png
-DESTINATION ${ICON_INSTALL_DIR}/hicolor/48x48/apps/)
+add_subdirectory(icons)
