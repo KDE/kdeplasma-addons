@@ -44,6 +44,8 @@ public:
     ~ImageSource();
 
     void loadImage(const QString &who, const KUrl &url);
+    void loadStarted();
+    void loadFinished();
 
 private slots:
     void recv(KIO::Job*, const QByteArray& data);
@@ -54,6 +56,7 @@ private:
     QHash<KJob *, QByteArray> m_jobData;
     int m_runningJobs;
     QList<QPair<QString, KUrl> > m_queuedJobs;
+    Plasma::DataEngine::Data m_cachedData;
 };
 
 #endif

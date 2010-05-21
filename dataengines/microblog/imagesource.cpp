@@ -33,11 +33,26 @@ ImageSource::~ImageSource()
 {
 }
 
+void ImageSource::loadStarted()
+{
+    m_cachedData = data();
+    removeAllData();
+}
+
+void ImageSource::loadFinished()
+{
+    m_cachedData.clear();
+}
+
 void ImageSource::loadImage(const QString &who, const KUrl &url)
 {
     //FIXME: since kio_http bombs the system with too many request put a temporary arbitrary limit here
     // revert as soon as BUG 192625 is fixed
     if (m_runningJobs < 5) {
+        if (m_cachedData.contains(who)) {
+            setData(who, m_cachedData.value(who));
+        }
+
         m_runningJobs++;
         KIO::Job *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
         job->setAutoDelete(true);

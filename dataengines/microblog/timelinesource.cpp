@@ -174,6 +174,7 @@ void TimelineSource::result(KJob *job)
     }
 
     removeAllData();
+    m_imageSource->loadStarted();
     if (job->error()) {
         //kDebug() << "job error!";
         // TODO: error handling
@@ -183,6 +184,7 @@ void TimelineSource::result(KJob *job)
         parse(reader);
         //kDebug() << "parsing through .." << data().count();
     }
+    m_imageSource->loadFinished();
 
     checkForUpdate();
     m_xml.clear();
