@@ -84,7 +84,7 @@ void QalculateApplet::init()
     
     graphicsWidget();
     setupActions();
-    setPopupIcon(KIcon("qalculate"));
+    setPopupIcon(KIcon("qalculate-applet"));
     createTooltip();
 }
 
@@ -170,7 +170,7 @@ void QalculateApplet::createTooltip()
     Plasma::ToolTipContent data;
     data.setMainText(i18n("Qalculate!"));
     data.setSubText(m_engine->lastResult());
-    data.setImage(KIcon("qalculate").pixmap(IconSize(KIconLoader::Desktop)));
+    data.setImage(KIcon("qalculate-applet").pixmap(IconSize(KIconLoader::Desktop)));
     Plasma::ToolTipManager::self()->setContent(this, data);
 }
 
@@ -236,7 +236,7 @@ void QalculateApplet::configChanged()
 void QalculateApplet::clearOutputLabel()
 {
     if (m_input->text().isEmpty()) {
-        m_output->nativeWidget()->setPixmap(KIcon("qalculate").pixmap(IconSize(KIconLoader::Desktop)));
+        m_output->nativeWidget()->setPixmap(KIcon("qalculate-applet").pixmap(IconSize(KIconLoader::Desktop)));
     }
 }
 
