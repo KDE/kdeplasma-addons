@@ -78,7 +78,7 @@
      <item>
       <widget class="KIntSpinBox" name="historySizeSpinBox">
        <property name="maximum">
-        <number>20</number>
+        <number>500</number>
        </property>
        <property name="value">
         <number>3</number>
