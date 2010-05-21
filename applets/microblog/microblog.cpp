@@ -254,7 +254,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_layout->addItem(m_scrollWidget);
 
     //hook up some sources
-    m_imageQuery = "UserImages:"+m_serviceUrl;
+    m_imageQuery = "UserImages:" + m_serviceUrl;
     m_engine->connectSource(m_imageQuery, this);
 
 
@@ -451,7 +451,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
                 m_pictureMap[user] = pm;
                 m_avatarHistory.removeAll(user);
                 m_avatarHistory.append(user);
-                if (m_avatarHistory.size() > 30) {
+                while (m_avatarHistory.size() > 30) {
                     QString oldestUser = m_avatarHistory.first();
                     m_avatarHistory.pop_front();
                     m_pictureMap.remove(oldestUser);
@@ -608,7 +608,7 @@ void MicroBlog::configAccepted()
         m_lastTweet = 0;
     }
 
-    m_imageQuery = "UserImages:"+m_serviceUrl;
+    m_imageQuery = "UserImages:" + m_serviceUrl;
     m_engine->connectSource(m_imageQuery, this);
 
     if (m_password != password) {
