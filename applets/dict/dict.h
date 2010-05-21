@@ -52,6 +52,7 @@ class DictApplet: public Plasma::PopupApplet
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void autoDefine(const QString &word);
         void linkDefine(const QString &word);
+        void configChanged();
 
     protected slots:
         void define();

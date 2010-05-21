@@ -70,7 +70,6 @@ void DictApplet::init()
     bool engineChoice = dataEngine(dataEngines[1])->isValid();
 //     bool engineChoice = false; //for testing
     m_dataEngine = dataEngines[int(engineChoice)];
-    setHasConfigurationInterface(engineChoice);
 
     // tooltip stuff
     Plasma::ToolTipContent toolTipData;
@@ -166,12 +165,7 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_flash->setPos(25,-10);
     m_flash->resize(QSize(200,20));*/
 
-    KConfigGroup cg = config();
-    m_dicts = cg.readEntry("KnownDictionaries", QStringList());
-    QStringList activeDictNames = cg.readEntry("ActiveDictionaries", QStringList());
-    for (QStringList::const_iterator i = m_dicts.constBegin(); i != m_dicts.constEnd(); ++i) {
-        m_activeDicts[*i]=activeDictNames.contains(*i);
-    }
+    configChanged();
 
     m_graphicsWidget = new QGraphicsWidget(this);
     m_graphicsWidget->setLayout(m_layout);
@@ -187,6 +181,15 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     return m_graphicsWidget;
 }
 
+void DictApplet::configChanged()
+{
+    KConfigGroup cg = config();
+    m_dicts = cg.readEntry("KnownDictionaries", QStringList());
+    QStringList activeDictNames = cg.readEntry("ActiveDictionaries", QStringList());
+    for (QStringList::const_iterator i = m_dicts.constBegin(); i != m_dicts.constEnd(); ++i) {
+        m_activeDicts[*i]=activeDictNames.contains(*i);
+    }
+}
 
 void DictApplet::linkDefine(const QString &text)
 {
@@ -331,23 +334,25 @@ public:
 
 void DictApplet::createConfigurationInterface(KConfigDialog *parent)
 {
-    QTreeView* widget=new QTreeView(parent);
-    widget->setDragEnabled(true);
-    widget->setAcceptDrops(true);
-    widget->setDragDropMode(QAbstractItemView::InternalMove);
-    widget->setDropIndicatorShown(true);
-    widget->setItemsExpandable(false);
-    widget->setAllColumnsShowFocus(true);
-    widget->setRootIsDecorated(false);
+    if (dataEngine("qstardict")->isValid()) {
+        QTreeView* widget=new QTreeView(parent);
+        widget->setDragEnabled(true);
+        widget->setAcceptDrops(true);
+        widget->setDragDropMode(QAbstractItemView::InternalMove);
+        widget->setDropIndicatorShown(true);
+        widget->setItemsExpandable(false);
+        widget->setAllColumnsShowFocus(true);
+        widget->setRootIsDecorated(false);
 
-    delete m_dictsModel.data();
-    CheckableStringListModel *model = new CheckableStringListModel(parent,m_dicts,m_activeDicts);
-    m_dictsModel = model;
-    widget->setModel(model);
+        delete m_dictsModel.data();
+        CheckableStringListModel *model = new CheckableStringListModel(parent,m_dicts,m_activeDicts);
+        m_dictsModel = model;
+        widget->setModel(model);
 
-    parent->addPage(widget, parent->windowTitle(), Applet::icon());
-    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+        parent->addPage(widget, parent->windowTitle(), Applet::icon());
+        connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+        connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    }
 }
 
 void DictApplet::popupEvent(bool shown)
