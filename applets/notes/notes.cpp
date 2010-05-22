@@ -348,7 +348,7 @@ void Notes::init()
     m_useThemeColor = cg.readEntry("useThemeColor", true);
     m_useNoColor = cg.readEntry("useNoColor", true);
     if (m_useThemeColor) {
-        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor);
         connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
     } else {
         m_textColor = cg.readEntry("textColor", m_textColor);
