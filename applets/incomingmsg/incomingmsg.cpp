@@ -379,24 +379,6 @@ void IncomingMsg::configAccepted()
     initLayout();
 }
 
-void IncomingMsg::constraintsEvent(Plasma::Constraints constraints)
-{
-    if (mLayout && (constraints & Plasma::SizeConstraint ||
-                    constraints & Plasma::FormFactorConstraint)) {
-        QRectF layoutRectF = mLayout->geometry();
-        QRectF appletRectF = geometry();
-        appletRectF.setHeight(layoutRectF.height() + 10);
-
-        if (formFactor() == Plasma::Vertical) {
-            setMinimumSize(0, appletRectF.height());
-        } else if (formFactor() == Plasma::Horizontal) {
-            setMinimumSize(appletRectF.width(), 0);
-        } else if (layoutRectF.height() > appletRectF.height()) {
-            setMinimumSize(appletRectF.size());
-        }
-    }
-}
-
 void IncomingMsg::slotNewEvolutionMail()
 {
     KIcon icon("evolution");

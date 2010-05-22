@@ -49,7 +49,6 @@ public:
 
 protected:
     void createConfigurationInterface(KConfigDialog *parent);
-    void constraintsEvent(Plasma::Constraints);
 
     void initEvolutionLayout();
     void initKMailLayout();
