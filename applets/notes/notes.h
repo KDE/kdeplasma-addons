@@ -108,6 +108,10 @@ class PlasmaTextEdit : public Plasma::TextEdit {
       PlasmaTextEdit(QGraphicsWidget *parent = 0);
       ~PlasmaTextEdit();
       NotesTextEdit* native;
+
+    protected:
+      void mousePressEvent(QGraphicsSceneMouseEvent *event);
+      void focusOutEvent(QFocusEvent *event);
 };
 
 class Notes : public Plasma::Applet
