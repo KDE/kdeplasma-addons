@@ -91,6 +91,7 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
 
 PlasmaboardWidget::~PlasmaboardWidget()
 {
+    reset();
     delete m_frame;
     delete m_activeFrame;
     delete m_tooltip;
@@ -251,8 +252,11 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_9), QString(i18nc("9 key on the keypad", "9")));
     else if(action == "KEYPAD0")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_0), QString(i18nc("0 key on the keypad", "0")));
-    else if(action == "SWITCH")
-        return new SwitchKey(point, size, Helpers::keysymToKeycode(XK_VoidSymbol), this);
+    else if(action == "SWITCH"){
+        SwitchKey* key = new SwitchKey(point, size, Helpers::keysymToKeycode(XK_VoidSymbol), this);
+        m_switchKeys << key;
+        return key;
+    }
     else
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString("Unkown"));
 }
@@ -322,6 +326,7 @@ void PlasmaboardWidget::deleteKeys()
     m_ctlKeys.clear();
     m_dualKeys.clear();
     m_shiftKeys.clear();
+    m_switchKeys.clear();
     m_superKeys.clear();
 }
 
@@ -410,7 +415,14 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
 
                 if(m_xmlReader.name() == "key"){
                     if(m_xmlReader.attributes().hasAttribute("alt")){
-                        DualKey* key = new DualKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt(), m_xmlReader.attributes().value("alt").toString());
+                        DualKey* key;
+                        if(m_xmlReader.attributes().hasAttribute("altshifted")){
+                            key = new DualKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt(), m_xmlReader.attributes().value("alt").toString(), m_xmlReader.attributes().value("altshifted").toString());
+                        }
+                        else{
+                            key = new DualKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt(), m_xmlReader.attributes().value("alt").toString());
+                        }
+
                         m_alphaKeys << key;
                         m_dualKeys << key;
                     }
@@ -516,6 +528,7 @@ void PlasmaboardWidget::paint(QPainter *p,
                               QWidget* widget)
 {
     Q_UNUSED(widget);
+    qDebug() << "Painting: " << option->exposedRect;
     //Plasma::Containment::paint(p, option, widget);
 
     p->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
@@ -559,7 +572,6 @@ void PlasmaboardWidget::refreshKeys()
 
 void PlasmaboardWidget::relabelKeys()
 {
-    qDebug() << "Relabeling";
     foreach (AlphaNumKey* key, m_alphaKeys){
         key->switchKey(m_isLevel2, m_isAlternative, m_isLocked);
         update(key->rect());
@@ -621,6 +633,10 @@ void PlasmaboardWidget::reset(){
         key->reset();
     }
 
+    Q_FOREACH(SwitchKey* key, m_switchKeys){
+        key->reset();
+        unpress(key);
+    }
 }
 
 void PlasmaboardWidget::setTooltip(BoardKey* key)

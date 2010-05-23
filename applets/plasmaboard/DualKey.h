@@ -27,6 +27,7 @@ class DualKey : public AlphaNumKey
 {
 public:
     DualKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString altKeyString);
+    DualKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString altKeyString, QString shiftedAltKeyString);
     virtual ~DualKey();
 
     bool alternative() const;
@@ -36,7 +37,8 @@ private:
     //virtual void paintLabel(QPainter *painter);
 
 private:
-    QString m_altKeyString;
+    QString m_altKeyString; // String (Xlibs key name) of the alternative key on this
+    QString m_shiftedAltKeyString; // shifted alternative key
     void* m_defaultMapping;
     bool m_isAlt;
 };

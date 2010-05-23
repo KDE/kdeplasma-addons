@@ -40,6 +40,17 @@ public:
         XSync(QX11Info::display(), False);
     }
 
+    static void changeKeycodeMapping(unsigned int code, QString &sym, QString &shiftedSym){
+        KeySym keysym = XStringToKeysym(sym.toAscii());
+        QVarLengthArray<KeySym> keysyms(keysymsPerKeycode);
+        for(int i = 0; i < keysymsPerKeycode; i++){
+            keysyms[i] = keysym;
+        }
+        keysyms[1] = XStringToKeysym(shiftedSym.toAscii());
+        XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode, keysyms.data(), 1);
+        XSync(QX11Info::display(), False);
+    }
+
     static void changeKeycodeMapping(unsigned int code, KeySym* keysyms){
         XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode, keysyms, 1);
         XSync(QX11Info::display(), False);

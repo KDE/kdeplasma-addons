@@ -40,6 +40,7 @@ class DualKey;
 class FuncKey;
 class QTimer;
 class StickyKey;
+class SwitchKey;
 
 namespace {
     class DataEngine;
@@ -211,6 +212,7 @@ private:
     QTimer* m_repeatTimer;
     QList<StickyKey*> m_shiftKeys; // list of Shift-Keys on keyboard
     QList<StickyKey*> m_superKeys; // list of all super-keys on keyboard
+    QList<SwitchKey*> m_switchKeys; // list of all switch keys on keyboard
     Tooltip* m_tooltip; // pointer to widget which is used as tooltip
     QXmlStreamReader m_xmlReader; // instance of QXMLStreamReader for parsing layout files
 };
