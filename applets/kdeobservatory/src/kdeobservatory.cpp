@@ -178,6 +178,10 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
 void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
+    // Prevent for being update from another instance update request
+    if (data["appletId"].toUInt() != id())
+        return;
+
     QString project = data["project"].toString();
 
     if (sourceName == "topActiveProjects")
@@ -504,6 +508,7 @@ void KdeObservatory::updateSources()
 
     int viewsCount = m_activeViews.count();
     m_sourceCounter = 0;
+    uint appletId = id();
     for (int i = 0; i < viewsCount; ++i)
     {
         const QPair<QString, bool> &pair = m_activeViews.at(i);
@@ -511,6 +516,7 @@ void KdeObservatory::updateSources()
         if (pair.first == i18n("Top Active Projects") && pair.second)
         {
             KConfigGroup ops = m_service->operationDescription("topActiveProjects");
+            ops.writeEntry("appletId", appletId);
             ops.writeEntry("commitFrom", commitFrom);
             ops.writeEntry("commitTo"  , commitTo);
             m_service->startOperationCall(ops);
@@ -526,6 +532,7 @@ void KdeObservatory::updateSources()
                 if (i1.value())
                 {
                     KConfigGroup ops = m_service->operationDescription("topProjectDevelopers");
+                    ops.writeEntry("appletId", appletId);
                     ops.writeEntry("project", i1.key());
                     ops.writeEntry("commitFrom", commitFrom);
                     ops.writeEntry("commitTo"  , commitTo);
@@ -544,6 +551,7 @@ void KdeObservatory::updateSources()
                 if (i2.value())
                 {
                     KConfigGroup ops = m_service->operationDescription("commitHistory");
+                    ops.writeEntry("appletId", appletId);
                     ops.writeEntry("project", i2.key());
                     ops.writeEntry("commitFrom", commitFrom);
                     ops.writeEntry("commitTo"  , commitTo);
@@ -562,6 +570,7 @@ void KdeObservatory::updateSources()
                 if (i3.value() && (m_projects[i3.key()].krazyReport.contains("reports") || m_projects[i3.key()].krazyReport.contains("component=")))
                 {
                     KConfigGroup ops = m_service->operationDescription("krazyReport");
+                    ops.writeEntry("appletId", appletId);
                     ops.writeEntry("project", i3.key());
                     ops.writeEntry("krazyReport", m_projects[i3.key()].krazyReport);
                     ops.writeEntry("krazyFilePrefix", m_projects[i3.key()].krazyFilePrefix);
