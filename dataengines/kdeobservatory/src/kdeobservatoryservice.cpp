@@ -43,7 +43,6 @@ Plasma::ServiceJob *KdeObservatoryService::createJob(const QString &operation, Q
         emit engineError("fatal", i18n("No active network connection"));
         return 0;
     }
-
 /*
     if (m_engine->m_dataCache.contains(operation) && m_engine->m_dataCache[operation].first == parameters)
     {
@@ -61,7 +60,6 @@ Plasma::ServiceJob *KdeObservatoryService::createJob(const QString &operation, Q
         return 0;
     }
 */
-
     if (operation == "allProjectsInfo")
         allProjectsInfo();
     else if (operation == "topActiveProjects")
@@ -173,63 +171,66 @@ void KdeObservatoryService::resultServlet(KJob *job)
             if (regexp2.indexIn(url, 0) != -1)
                 project = regexp2.cap(1);
 
-            if (url.contains("op=allProjectsInfo"))
+            if (source == "allProjectsInfo")
             {
                 KdePresets::init(data);
                 emit engineReady();
             }
-            else if (source == "topActiveProjects")
+            else
             {
-                RankValueMap topActiveProjects;
-                foreach (const QString &row, data.split('\n'))
+                if (source == "topActiveProjects")
                 {
-                    if (!row.isEmpty())
+                    RankValueMap topActiveProjects;
+                    foreach (const QString &row, data.split('\n'))
                     {
-                        QStringList list = row.split(';');
-                        QString commits = list.at(1);
-                        topActiveProjects.insert(commits.remove('\r').toInt(), list.at(0));
+                        if (!row.isEmpty())
+                        {
+                            QStringList list = row.split(';');
+                            QString commits = list.at(1);
+                            topActiveProjects.insert(commits.remove('\r').toInt(), list.at(0));
+                        }
                     }
-                }
 
-                m_engine->setData("topActiveProjects", "topActiveProjects", QVariant::fromValue<RankValueMap>(topActiveProjects));
-//                m_engine->m_dataCache.insert("topActiveProjects", QPair<QMap<QString, QVariant>, QVariant>(m_jobParametersMap[storedJob], QVariant::fromValue<RankValueMap>(topActiveProjects)));
-                m_engine->forceImmediateUpdateOfAllVisualizations();
-            }
-            else if (source == "topProjectDevelopers")
-            {
-                RankValueMap projectTopDevelopers;
-                foreach (const QString &row, data.split('\n'))
+                    m_engine->setData("topActiveProjects", "topActiveProjects", QVariant::fromValue<RankValueMap>(topActiveProjects));
+    //                m_engine->m_dataCache.insert("topActiveProjects", QPair<QMap<QString, QVariant>, QVariant>(m_jobParametersMap[storedJob], QVariant::fromValue<RankValueMap>(topActiveProjects)));
+                }
+                else if (source == "topProjectDevelopers")
                 {
-                    if (!row.isEmpty())
+                    RankValueMap projectTopDevelopers;
+                    foreach (const QString &row, data.split('\n'))
                     {
-                        QStringList list = row.split(';');
-                        QString commits = list.at(4);
-                        projectTopDevelopers.insert(commits.remove('\r').toInt(), list.at(0));
+                        if (!row.isEmpty())
+                        {
+                            QStringList list = row.split(';');
+                            QString commits = list.at(4);
+                            projectTopDevelopers.insert(commits.remove('\r').toInt(), list.at(0));
+                        }
                     }
-                }
 
-                m_engine->setData("topProjectDevelopers", "project", project);
-                m_engine->setData("topProjectDevelopers", project, QVariant::fromValue<RankValueMap>(projectTopDevelopers));
-//                m_engine->m_dataCache.insert("topProjectDevelopers", QPair<QMap<QString, QVariant>, QVariant>(m_jobParametersMap[storedJob], QVariant::fromValue<RankValueMap>(projectTopDevelopers)));
-                m_engine->forceImmediateUpdateOfAllVisualizations();
-            }
-            else if (source == "commitHistory")
-            {
-                DateCommitList commitHistory;
-                foreach (const QString &row, data.split('\n'))
+                    m_engine->setData("topProjectDevelopers", "project", project);
+                    m_engine->setData("topProjectDevelopers", project, QVariant::fromValue<RankValueMap>(projectTopDevelopers));
+    //                m_engine->m_dataCache.insert("topProjectDevelopers", QPair<QMap<QString, QVariant>, QVariant>(m_jobParametersMap[storedJob], QVariant::fromValue<RankValueMap>(projectTopDevelopers)));
+                }
+                else if (source == "commitHistory")
                 {
-                    if (!row.isEmpty())
+                    DateCommitList commitHistory;
+                    foreach (const QString &row, data.split('\n'))
                     {
-                        QStringList list = row.split(';');
-                        QString commits = list.at(1);
-                        commitHistory.append(QPair<QString, int>(list.at(0), commits.remove('\r').toInt()));
+                        if (!row.isEmpty())
+                        {
+                            QStringList list = row.split(';');
+                            QString commits = list.at(1);
+                            commitHistory.append(QPair<QString, int>(list.at(0), commits.remove('\r').toInt()));
+                        }
                     }
-                }
 
-                m_engine->setData("commitHistory", "project", project);
-                m_engine->setData("commitHistory", project, QVariant::fromValue<DateCommitList>(commitHistory));
-//                m_engine->m_dataCache.insert("commitHistory", QPair<QMap<QString, QVariant>, QVariant>(m_jobParametersMap[storedJob], QVariant::fromValue<DateCommitList>(commitHistory)));
+                    m_engine->setData("commitHistory", "project", project);
+                    m_engine->setData("commitHistory", project, QVariant::fromValue<DateCommitList>(commitHistory));
+    //                m_engine->m_dataCache.insert("commitHistory", QPair<QMap<QString, QVariant>, QVariant>(m_jobParametersMap[storedJob], QVariant::fromValue<DateCommitList>(commitHistory)));
+                }
+                m_engine->setData(source, "appletId", m_jobParametersMap[storedJob]["appletId"]);
                 m_engine->forceImmediateUpdateOfAllVisualizations();
+                m_jobParametersMap.remove(storedJob);
             }
         }
         else
@@ -362,4 +363,3 @@ void KdeObservatoryService::parseReport(const QString &data, KIO::StoredTransfer
 
     m_krazyJobMap.remove(storedJob);
 }
-
