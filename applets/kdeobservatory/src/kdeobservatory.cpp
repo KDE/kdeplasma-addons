@@ -510,7 +510,10 @@ void KdeObservatory::updateSources()
 
         if (pair.first == i18n("Top Active Projects") && pair.second)
         {
-            m_service->startOperationCall(m_service->operationDescription("topActiveProjects"));
+            KConfigGroup ops = m_service->operationDescription("topActiveProjects");
+            ops.writeEntry("commitFrom", commitFrom);
+            ops.writeEntry("commitTo"  , commitTo);
+            m_service->startOperationCall(ops);
             ++m_sourceCounter;
         }
 
