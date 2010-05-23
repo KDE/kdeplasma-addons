@@ -324,7 +324,8 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    
+    connect(parent, SIGNAL(cancelClicked()), m_viewTransitionTimer, SLOT(start()));
+
     m_viewTransitionTimer->stop();
 }
 
