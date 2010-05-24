@@ -96,7 +96,7 @@ set(lancelot_datamodels_LIB_SRCS
 
 set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.freedesktop.ScreenSaver.xml)
 if (NOT EXISTS ${screensaver_xml})
-   set(kopete_xml external/org.freedesktop.ScreenSaver.xml)
+   set(screensaver_xml external/org.freedesktop.ScreenSaver.xml)
 endif (NOT EXISTS ${screensaver_xml})
 qt4_add_dbus_interface(lancelot_datamodels_LIB_SRCS ${screensaver_xml} screensaver_interface)
 
