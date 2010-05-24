@@ -51,7 +51,7 @@ set(plasma_lancelot_application_SRCS
 #    "ui/LancelotWindowBase.xml"
 # )
 
-set(ksmserver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.KSMServerInterface.xml)
+set(ksmserver_xml ${KDE4WORKSPACE_DBUS_INTERFACES_DIR}/org.kde.KSMServerInterface.xml)
 qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${ksmserver_xml} ksmserver_interface)
 
 qt4_add_dbus_adaptor(plasma_lancelot_application_SRCS org.kde.lancelot.xml

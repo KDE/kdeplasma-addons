@@ -94,7 +94,7 @@ set(lancelot_datamodels_LIB_SRCS
    XbelModel.cpp
 )
 
-set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.freedesktop.ScreenSaver.xml)
+set(screensaver_xml ${KDE4WORKSPACE_DBUS_INTERFACES_DIR}/org.freedesktop.ScreenSaver.xml)
 if (NOT EXISTS ${screensaver_xml})
    set(screensaver_xml external/org.freedesktop.ScreenSaver.xml)
 endif (NOT EXISTS ${screensaver_xml})
