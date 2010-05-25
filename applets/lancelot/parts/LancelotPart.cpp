@@ -93,10 +93,10 @@ void LancelotPart::init()
     m_model = new Models::PartsMergedModel();
     m_list->setModel(m_model);
 
-    m_root->setMinimumSize(300, 200);
+    m_root->setMinimumSize(200, 200);
     m_root->setPreferredSize(300, 400);
 
-    m_list->setMinimumWidth(300);
+    m_list->setMinimumWidth(200);
 
     m_layout->addItem(m_searchText);
     m_layout->addItem(m_list);
