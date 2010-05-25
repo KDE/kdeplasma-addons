@@ -61,6 +61,7 @@ protected Q_SLOTS:
     void applyConfig();
     void loadConfig();
     void saveConfig();
+    void iconSizeChanged(int group);
 
 private:
     class Private;

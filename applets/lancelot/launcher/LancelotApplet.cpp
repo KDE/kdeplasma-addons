@@ -26,6 +26,7 @@
 
 #include <KDebug>
 #include <KIcon>
+#include <KGlobalSettings>
 
 #include <Plasma/Corona>
 
@@ -170,6 +171,9 @@ LancelotApplet::LancelotApplet(QObject * parent,
 
     d->waitClick.setInterval(500); // 1/2 sec
     d->waitClick.setSingleShot(true);
+
+    connect(KGlobalSettings::self(), SIGNAL(iconChanged(int)),
+        this, SLOT(iconSizeChanged(int)));
 }
 
 // void LancelotApplet::paint(QPainter * p,
@@ -208,14 +212,44 @@ void LancelotApplet::applyConfig()
 {
     d->layout->setContentsMargins(0, 0, 0, 0);
     d->layout->setSpacing(SPACING);
+
     if (d->showCategories) {
         d->createCategoriesButtons();
     } else {
         d->createMainButton();
     }
+
+    // We want to update the size hints
+    iconSizeChanged(KIconLoader::Desktop);
+
     emit configNeedsSaving();
     update();
     setAspectRatioMode(Plasma::KeepAspectRatio);
+}
+
+void LancelotApplet::iconSizeChanged(int group)
+{
+    if (group == KIconLoader::Desktop || group == KIconLoader::Panel) {
+        int iconSize;
+
+        switch (formFactor()) {
+            case Plasma::Planar:
+            case Plasma::MediaCenter:
+                iconSize = IconSize(KIconLoader::Desktop);
+                break;
+
+            case Plasma::Horizontal:
+            case Plasma::Vertical:
+                iconSize = IconSize(KIconLoader::Panel);
+                break;
+        }
+
+        foreach (Lancelot::HoverIcon * icon, d->buttons) {
+            icon->setPreferredSize(QSizeF(iconSize, iconSize));
+        }
+
+        updateGeometry();
+    }
 }
 
 void LancelotApplet::init()
@@ -387,9 +421,11 @@ QSizeF LancelotApplet::sizeHint(Qt::SizeHint which, const QSizeF & constraint) c
     if (formFactor() == Plasma::Horizontal &&
             (which == Qt::MaximumSize || size().height() <= KIconLoader::SizeLarge)) {
         hint.setWidth(size().height() * d->buttons.size());
+
     } else if (formFactor() == Plasma::Vertical &&
             (which == Qt::MaximumSize || size().width() <= KIconLoader::SizeLarge)) {
         hint.setHeight(size().width() * d->buttons.size());
+
     }
 
     return hint;
