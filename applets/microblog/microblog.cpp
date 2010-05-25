@@ -274,10 +274,10 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     return m_graphicsWidget;
 }
 
-void MicroBlog::modeChanged(int index)
+void MicroBlog::modeChanged(int)
 {
     m_tweetMap.clear();
-    m_lastTweet=0;
+    m_lastTweet = 0;
     downloadHistory();
 }
 
@@ -720,6 +720,10 @@ bool MicroBlog::eventFilter(QObject *obj, QEvent *event)
 
 void MicroBlog::updateStatus()
 {
+    if (!m_service) {
+        return;
+    }
+
     createTimelineService();
     QString status = m_statusEdit->nativeWidget()->toPlainText();
 
@@ -727,9 +731,7 @@ void MicroBlog::updateStatus()
     cg.writeEntry("password", m_password);
     cg.writeEntry("status", status);
 
-    if (m_updateJobs.isEmpty()) {
-        connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)));
-    }
+    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
 
     m_updateJobs.insert(m_service->startOperationCall(cg));
     m_statusEdit->nativeWidget()->setPlainText("");
@@ -773,9 +775,12 @@ void MicroBlog::downloadHistory()
         m_service->startOperationCall(cg);
     } else {
         createTimelineService();
-        KConfigGroup cg = m_service->operationDescription("auth");
-        cg.writeEntry("password", m_password);
-        m_service->startOperationCall(cg);
+
+        if (m_service) {
+            KConfigGroup cg = m_service->operationDescription("auth");
+            cg.writeEntry("password", m_password);
+            m_service->startOperationCall(cg);
+        }
     }
 
     //get the profile to retrieve the user icon
