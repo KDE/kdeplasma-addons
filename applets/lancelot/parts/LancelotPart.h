@@ -70,6 +70,7 @@ private Q_SLOTS:
 private:
     bool loadFromList(const QStringList & list);
     void showSearchBox(bool value);
+    void updateIcon();
 
     void saveConfig();
     void loadConfig();

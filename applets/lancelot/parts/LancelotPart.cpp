@@ -133,6 +133,7 @@ void LancelotPart::init()
     KGlobal::locale()->insertCatalog("lancelot");
 
     modelContentsUpdated();
+    updateIcon();
 }
 
 void LancelotPart::modelContentsUpdated()
@@ -303,11 +304,9 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
     parent->addPage(m_config.pageAdvanced, i18n("Advanced"), "configure");
 }
 
-void LancelotPart::applyConfig()
+void LancelotPart::updateIcon()
 {
-    KConfigGroup kcg = config();
-
-    QString icon = kcg.readEntry("iconLocation", DEFAULT_ICON);
+    QString icon = config().readEntry("iconLocation", DEFAULT_ICON);
     setPopupIcon(icon);
 
     if (icon == DEFAULT_ICON) {
@@ -318,6 +317,14 @@ void LancelotPart::applyConfig()
             }
         }
     }
+}
+
+void LancelotPart::applyConfig()
+{
+    KConfigGroup kcg = config();
+
+    updateIcon();
+
     m_iconClickActivation = kcg.readEntry("iconClickActivation", true);
 
     if (!kcg.readEntry("contentsClickActivation", m_list->parentItem() == NULL)) {
