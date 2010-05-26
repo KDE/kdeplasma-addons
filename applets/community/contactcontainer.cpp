@@ -69,10 +69,6 @@ void ContactContainer::personAdded(const QString& person)
 {
     ContactWidget* widget = new ContactWidget(m_engine, this);
 
-    if (m_scrollWidget) {
-        m_scrollWidget->registerAsDragHandle(widget);
-    }
-
     widget->setProvider(m_provider);
     widget->setId(person);
     widget->setIsFriend(m_friendWatcher.contains(person));
