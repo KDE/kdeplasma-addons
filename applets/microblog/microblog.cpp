@@ -288,14 +288,14 @@ void MicroBlog::reply(const QString &to)
     QTextCursor cursor = m_statusEdit->nativeWidget()->textCursor();
     cursor.movePosition(QTextCursor::End);
     m_statusEdit->nativeWidget()->setTextCursor(cursor);
-    m_statusEdit->nativeWidget()->setFocus();
+    m_statusEdit->setFocus();
 }
 
 void MicroBlog::forward(const QString &rt)
 {
     m_scrollWidget->ensureItemVisible(m_headerFrame);
     m_statusEdit->nativeWidget()->setPlainText(rt);
-    m_statusEdit->nativeWidget()->setFocus();
+    m_statusEdit->setFocus();
 }
 
 void MicroBlog::getWallet()
