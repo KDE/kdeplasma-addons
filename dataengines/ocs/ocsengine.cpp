@@ -71,11 +71,7 @@ Plasma::Service* OcsEngine::serviceForSource(const QString& source)
         QString id = arguments.value("id");
         QString providerString = arguments.value("provider");
         if (!id.isEmpty() && !providerString.isEmpty()) {
-            QPair<QString, QString> key = qMakePair(providerString, id);
-            if (!m_personServices.contains(key)) {
-                m_personServices[key] = new PersonService(m_providers.value(providerString), id, m_serviceUpdates, this);
-            }
-            return m_personServices[key];
+            return new PersonService(m_providers.value(providerString), id, m_serviceUpdates, this);
         }
     }
     return Plasma::DataEngine::serviceForSource(source);

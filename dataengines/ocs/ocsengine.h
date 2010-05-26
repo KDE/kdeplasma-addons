@@ -98,7 +98,6 @@ private:
     QHash<KJob*, QString> m_pixmapJobs;
     QHash<KJob*, QByteArray> m_pixmapData;
 
-    QHash<QPair<QString, QString>, PersonService*> m_personServices;
     QHash<QPair<QString, QString>, Attica::Person> m_personCache;
     QHash<QPair<QString, QString>, Attica::Message> m_messageCache;
     QHash<QString, QSharedPointer<Attica::Provider> > m_providers;
