@@ -111,6 +111,7 @@ void FriendManagementWidget::accept()
     Service* service = m_engine->serviceForSource(personQuery(m_provider, m_id));
     KConfigGroup cg = service->operationDescription("approveFriendship");
     service->startOperationCall(cg);
+    delete service;
 }
 
 
@@ -119,6 +120,7 @@ void FriendManagementWidget::decline()
     Service* service = m_engine->serviceForSource(personQuery(m_provider, m_id));
     KConfigGroup cg = service->operationDescription("declineFriendship");
     service->startOperationCall(cg);
+    delete service;
 }
 
 

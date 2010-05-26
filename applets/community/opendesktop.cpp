@@ -354,6 +354,7 @@ void OpenDesktop::configAccepted()
         cg.writeEntry("username", ui.username->text());
         cg.writeEntry("password", ui.password->text());
         ServiceJob* job = service->startOperationCall(cg);
+        delete service;
     }
     syncGeoLocation();
 }

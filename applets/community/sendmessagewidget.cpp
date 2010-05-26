@@ -141,6 +141,7 @@ void SendMessageWidget::send() {
     cg.writeEntry("Body", m_body->nativeWidget()->toPlainText());
     ServiceJob* job = service->startOperationCall(cg);
     connect(job, SIGNAL(finished(KJob*)), SIGNAL(endWork()));
+    delete service;
 
     // FIXME: We do not wait for the result atm
     emit done();
