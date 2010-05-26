@@ -43,9 +43,9 @@
 KnowledgeBase::KnowledgeBase(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
       m_graphicsWidget(0),
+      m_provider("https://api.opendesktop.org/v1/"),
       m_currentPage(1),
-      m_totalPages(1),
-      m_provider("https://api.opendesktop.org/v1/")
+      m_totalPages(1)
 {
     setHasConfigurationInterface(true);
     setPopupIcon("help-contents");
@@ -58,6 +58,7 @@ KnowledgeBase::~KnowledgeBase()
 
 void KnowledgeBase::init()
 {
+    graphicsWidget();
     m_searchTimeout = new QTimer(this);
     m_searchTimeout->setSingleShot(true);
     connect(m_searchTimeout, SIGNAL(timeout()), this, SLOT(doQuery()));
@@ -233,7 +234,6 @@ void KnowledgeBase::dataUpdated(const QString &source, const Plasma::DataEngine:
                 kbItem->setAtticaData(kbData);
                 //we want inverted order
                 m_KBItemsLayout->insertItem(0, kbItem);
-                m_KBItemsScroll->registerAsDragHandle(kbItem->dragTitle());
                 QString user = kbData["User"].toString();
 
                 if (!m_kbItemsByUser.contains(user)) {
