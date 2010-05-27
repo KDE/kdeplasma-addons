@@ -720,8 +720,10 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
         switch (keyEvent->key()) {
             case Qt::Key_Escape:
                 lancelotHide(true);
+                break;
+
             case Qt::Key_Tab:
-                {
+            {
                 QKeyEvent * endKeyEvent =
                     new QKeyEvent(QEvent::KeyPress, Qt::Key_End,
                                Qt::NoModifier);
@@ -731,8 +733,10 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
                     new QKeyEvent(QEvent::KeyRelease, Qt::Key_End,
                                Qt::NoModifier);
                 QCoreApplication::sendEvent(editSearch->nativeWidget(), endKeyEvent);
-                }
+
                 return true;
+            }
+
             case Qt::Key_Return:
             case Qt::Key_Enter:
                 if (m_activeSection == "search") {
@@ -745,23 +749,32 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
                         m_configUi.setSearchHistory(m_completion->items());
                     }
                 }
+
+                sendKeyEvent(keyEvent);
+                break;
+
             case Qt::Key_Up:
             case Qt::Key_Down:
             case Qt::Key_Menu:
                 sendKeyEvent(keyEvent);
                 break;
+
             case Qt::Key_Left:
                 m_focusIndex--;
                 break;
+
             case Qt::Key_Right:
                 m_focusIndex++;
                 break;
+
             case Qt::Key_PageUp:
                 nextSection(-1);
                 return true;
+
             case Qt::Key_PageDown:
                 nextSection(1);
                 return true;
+
             default:
                 pass = true;
         }
