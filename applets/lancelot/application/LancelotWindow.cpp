@@ -1018,8 +1018,22 @@ void LancelotWindow::lancelotContext()
                 this, SLOT(showAboutDialog()));
     }
 
-    //menuLancelotContext->show();
-    menuLancelotContext->exec(QCursor::pos());
+    // menuLancelotContext->show();
+    // menuLancelotContext->exec(QCursor::pos());
+
+    menuLancelotContext->updateSize();
+
+    QRect g = buttonLancelotContext->geometry().toRect();
+    g.moveTopLeft(g.topLeft() + geometry().topLeft());
+
+    if (layoutMain->flip() & Plasma::VerticalFlip) {
+        menuLancelotContext->move(g.bottomLeft());
+    } else {
+        menuLancelotContext->move(g.topLeft()
+            - QPoint(0, menuLancelotContext->geometry().height()));
+    }
+
+    menuLancelotContext->exec(menuLancelotContext->pos());
 }
 
 void LancelotWindow::configureMenu()

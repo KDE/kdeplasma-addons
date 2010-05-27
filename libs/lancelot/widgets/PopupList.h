@@ -101,6 +101,11 @@ public:
      */
     void exec(const QPoint & p);
 
+//    /**
+//     * Shows the widget
+//     */
+//    void show();
+
 protected:
     L_Override void showEvent(QShowEvent * event);
     L_Override void hideEvent(QHideEvent * event);
@@ -126,11 +131,6 @@ protected:
      * @returns the parent PopupList
      */
     PopupList * parentList() const;
-
-    /**
-     * Shows the widget
-     */
-    void show();
 
 Q_SIGNALS:
     void activated(int index);

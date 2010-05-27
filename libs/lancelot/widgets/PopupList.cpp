@@ -26,7 +26,7 @@
 #include <Plasma/Theme>
 
 #include <KMessageBox>
-#include <KWindowSystem>
+// #include <KWindowSystem>
 
 #define ITEM_HEIGHT 24
 #define ICON_SIZE QSize(16, 16)
@@ -228,12 +228,12 @@ void PopupList::showEvent(QShowEvent * event)
     d->timer.stop();
 }
 
-void PopupList::show()
-{
-    Plasma::Dialog::show();
-
-    KWindowSystem::forceActiveWindow(winId());
-}
+// void PopupList::show()
+// {
+//     Plasma::Dialog::show();
+//
+//     KWindowSystem::forceActiveWindow(winId());
+// }
 
 void PopupList::hideEvent(QHideEvent * event)
 {
