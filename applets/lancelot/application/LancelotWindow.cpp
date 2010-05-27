@@ -507,7 +507,7 @@ void LancelotWindow::systemButtonClicked()
         menuSystemButton->move(g.topLeft() - QPoint(0, menuSystemButton->geometry().height()));
     }
 
-    menuSystemButton->show();
+    menuSystemButton->exec(menuSystemButton->pos());
 }
 
 void LancelotWindow::setupModels()

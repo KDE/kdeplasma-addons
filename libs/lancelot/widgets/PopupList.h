@@ -127,6 +127,11 @@ protected:
      */
     PopupList * parentList() const;
 
+    /**
+     * Shows the widget
+     */
+    void show();
+
 Q_SIGNALS:
     void activated(int index);
 
