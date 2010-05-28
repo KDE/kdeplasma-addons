@@ -1,6 +1,7 @@
 [Global]
 IconName=system-users
 Comment=OpenDesktop Activities Widget
+Comment[da]=Widget til openDesktop-aktiviteter
 Comment[de]=openDesktop-Aktivitäten-Miniprogramm
 Comment[en_GB]=OpenDesktop Activities Widget
 Comment[es]=Plasmoide de actividades de OpenDesktop

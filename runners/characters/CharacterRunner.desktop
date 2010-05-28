@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Special Characters
+Name[da]=Specialtegn
 Name[de]=Sonderzeichen
 Name[km]=តួអក្សរ​ពិសេស
 Name[pt]=Caracteres Especiais
@@ -9,6 +10,7 @@ Name[uk]=Спеціальні символи
 Name[x-test]=xxSpecial Charactersxx
 Icon=accessories-character-map
 Comment=Creates special characters from their hexadecimal codes
+Comment[da]=Opretter specialtegn via deres hexadecimal-koder
 Comment[de]=Erstellt Sonderzeichen aus ihren Hexadezimalwerten
 Comment[en_GB]=Creates special characters from their hexadecimal codes
 Comment[km]=បង្កើត​តួអក្សរ​ពិសេស​ពី​កូដ​គោល​ដប់​ប្រាំមួយ​របស់​ពួកវា
