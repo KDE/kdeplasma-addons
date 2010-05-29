@@ -2,6 +2,7 @@
 Name=Special Characters
 Name[da]=Specialtegn
 Name[de]=Sonderzeichen
+Name[kk]=Арнаулы таңбалар
 Name[km]=តួអក្សរ​ពិសេស
 Name[pt]=Caracteres Especiais
 Name[pt_BR]=Caracteres especiais
@@ -13,6 +14,7 @@ Comment=Creates special characters from their hexadecimal codes
 Comment[da]=Opretter specialtegn via deres hexadecimal-koder
 Comment[de]=Erstellt Sonderzeichen aus ihren Hexadezimalwerten
 Comment[en_GB]=Creates special characters from their hexadecimal codes
+Comment[kk]=Оналтылық кодымен арнаулы таңбаларды енгізу
 Comment[km]=បង្កើត​តួអក្សរ​ពិសេស​ពី​កូដ​គោល​ដប់​ប្រាំមួយ​របស់​ពួកវា
 Comment[pt]=Cria caracteres especiais a partir do seu código hexadecimal
 Comment[pt_BR]=Cria caracteres especiais de seus códigos hexadecimais
