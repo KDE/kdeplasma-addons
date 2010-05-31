@@ -2,6 +2,8 @@
 Name=KDE Observatory Data Engine
 Name[da]=Datamotor til KDE-observatorium
 Name[de]=Datentreiber für das KDE-Observatorium
+Name[en_GB]=KDE Observatory Data Engine
+Name[fr]=Observatoire de KDE
 Name[kk]=KDE бақылау бекетінің деректер тетігі
 Name[km]=ម៉ាស៊ីន​ទិន្នន័យ​អង្កេត​របស់ KDE
 Name[pt]=Motor de Dados do Observatório do KDE
@@ -11,6 +13,8 @@ Name[uk]=Рушій даних Спостережного пункту KDE
 Name[x-test]=xxKDE Observatory Data Enginexx
 Comment=A Data Engine for acquiring consolidated data about KDE projects
 Comment[da]=En datamotor til at hente samlede data om KDE-projekter
+Comment[en_GB]=A Data Engine for acquiring consolidated data about KDE projects
+Comment[fr]=Un moteur permettant d'obtenir des information à propos des projets KDE
 Comment[kk]=KDE жобалар туралы біріктірген деректерді жинайтын тетігі
 Comment[km]=ម៉ាស៊ីន​ទិន្នន័យ ដើម្បី​ការទាមទារ​ទិន្នន័យ​ដែល​បាន​បង្រួម​អំពី​គម្រោង​របស់ KDE
 Comment[pt]=Um motor de dados para adquirir dados consolidados acerca dos projectos do KDE
