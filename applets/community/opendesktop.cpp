@@ -35,6 +35,7 @@
 #include <Plasma/TabBar>
 #include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
+#include <Plasma/ServiceJob>
 #include <Plasma/ScrollWidget>
 #include <Plasma/ToolTipManager>
 
@@ -354,7 +355,7 @@ void OpenDesktop::configAccepted()
         cg.writeEntry("username", ui.username->text());
         cg.writeEntry("password", ui.password->text());
         ServiceJob* job = service->startOperationCall(cg);
-        delete service;
+        connect(job, SIGNAL(finished(KJob*)), service, SLOT(deleteLater()));
     }
     syncGeoLocation();
 }

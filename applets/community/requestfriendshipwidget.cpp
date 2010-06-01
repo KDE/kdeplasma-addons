@@ -30,6 +30,7 @@
 
 #include <Plasma/IconWidget>
 #include <Plasma/Service>
+#include <Plasma/ServiceJob>
 
 #include "contactimage.h"
 #include "utils.h"
@@ -127,7 +128,8 @@ void RequestFriendshipWidget::send() {
     Service* service = m_engine->serviceForSource(personQuery(m_provider, m_id));
     KConfigGroup cg = service->operationDescription("invite");
     cg.writeEntry("Message", m_body->nativeWidget()->toPlainText());
-    service->startOperationCall(cg);
+    KJob *job = service->startOperationCall(cg);
+    connect(job, SIGNAL(finished(KJob*)), service, SLOT(deleteLater()));
 
     // FIXME: We do not wait for the result atm
     emit done();

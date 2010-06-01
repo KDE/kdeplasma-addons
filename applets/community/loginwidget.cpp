@@ -108,6 +108,7 @@ void LoginWidget::login()
         cg.writeEntry("password", m_passwordEdit->text());
         ServiceJob* job = service->startOperationCall(cg);
         connect(job, SIGNAL(finished(KJob*)), this, SLOT(loginJobFinished(KJob*)));
+        connect(job, SIGNAL(finished(KJob*)), service, SLOT(deleteLater()));
         delete service;
     }
 }
