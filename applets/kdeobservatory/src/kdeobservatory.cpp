@@ -56,7 +56,9 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
   m_mainContainer(0),
   m_currentView(0),
   m_viewTransitionTimer(new QTimer(this)),
-  m_transitionTimer(new QTimeLine(500, this))
+  m_transitionTimer(new QTimeLine(500, this)),
+  m_engine(0),
+  m_service(0)
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);
@@ -76,6 +78,8 @@ KdeObservatory::~KdeObservatory()
         delete m_viewProviders[i18n("Commit History")];
         delete m_viewProviders[i18n("Krazy Report")];
     }
+
+    delete m_service;
 }
 
 void KdeObservatory::init()
