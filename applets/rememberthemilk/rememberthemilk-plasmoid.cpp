@@ -92,6 +92,7 @@ void RememberTheMilkPlasmoid::init() {
   m_engine->connectSource("Auth", this);
   
   m_authService = m_engine->serviceForSource("Auth");
+  m_authService->setParent(this);
   connect(m_authService, SIGNAL(finished(Plasma::ServiceJob*)), SLOT(jobFinished(Plasma::ServiceJob*)));
   
   if (m_token.isNull())
@@ -241,6 +242,7 @@ void RememberTheMilkPlasmoid::createTask(const QString& task)
 {
     if (!m_taskService) {
       m_taskService = m_engine->serviceForSource("Tasks");
+      m_taskService->setParent(this);
       connect(m_taskService, SIGNAL(finished(Plasma::ServiceJob*)), SLOT(jobFinished(Plasma::ServiceJob*)));
     }
     KConfigGroup cg = m_taskService->operationDescription("create");
