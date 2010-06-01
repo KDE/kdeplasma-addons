@@ -316,7 +316,9 @@ void NowPlaying::playerAdded(const QString &name)
         kDebug() << "Installing" << name << "as watched player";
         m_watchingPlayer = name;
 
+        delete m_controller;
         m_controller = dataEngine("nowplaying")->serviceForSource(m_watchingPlayer);
+        m_controller->setParent(this);
         if (m_controller) {
             m_controller->associateWidget(m_positionSlider, "seek");
             m_controller->associateWidget(m_volumeSlider, "volume");
@@ -352,7 +354,9 @@ void NowPlaying::findPlayer()
     } else {
         m_watchingPlayer = players.first();
 
+        delete m_controller;
         m_controller = dataEngine("nowplaying")->serviceForSource(m_watchingPlayer);
+        m_controller->setParent(this);
         if (m_controller) {
             m_controller->associateWidget(m_positionSlider, "seek");
             m_controller->associateWidget(m_volumeSlider, "volume");
