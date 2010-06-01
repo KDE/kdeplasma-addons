@@ -205,6 +205,7 @@ QString UserWidget::addRow(const QString& title, const QString& text)
 
 void UserWidget::setStyleSheet(const QString &stylesheet)
 {
+    Q_UNUSED(stylesheet)
     // kDebug() << "Setting new stylesheet" << stylesheet;
     updateColors();
     setName();
