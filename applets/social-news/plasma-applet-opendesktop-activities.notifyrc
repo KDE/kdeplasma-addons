@@ -7,6 +7,7 @@ Comment[en_GB]=OpenDesktop Activities Widget
 Comment[es]=Plasmoide de actividades de OpenDesktop
 Comment[et]=OpenDesktopi tegevuste vidin
 Comment[fr]=Plasmoïde Agencements Open-Desktop
+Comment[it]=Oggetto delle attività di OpenDesktop
 Comment[kk]=OpenDesktop оқиғалар виджеті
 Comment[km]=ធាតុក្រាហ្វិក​សកម្មភាព OpenDesktop
 Comment[nb]=OpenDesktop aktivititeter-plasmoide
@@ -16,6 +17,7 @@ Comment[pt_BR]=Widget de atividades do OpenDesktop
 Comment[sv]=OpenDesktop grafisk aktivitetskomponent
 Comment[uk]=Віджет просторів дій OpenDesktop
 Comment[x-test]=xxOpenDesktop Activities Widgetxx
+Comment[zh_TW]=openDesktop 活動元件
 
 [Event/activity]
 Name=New Activity
