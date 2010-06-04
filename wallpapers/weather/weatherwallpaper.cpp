@@ -94,7 +94,7 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     m_weatherMap["weather-mist"] = config.readEntry("mistPaper", m_dir + "Fresh_Morning/");
     m_weatherMap["weather-storm"] = config.readEntry("stormPaper", m_dir + "Lightning/");
     m_weatherMap["weather-scattered-storms"] = m_weatherMap["weather-storm"];
-    m_weatherMap["weather-hail"] = config.readEntry("hailPaper", m_dir + "Hail/");
+    m_weatherMap["weather-hail"] = config.readEntry("hailPaper", m_dir + "Lightning/");
     m_weatherMap["weather-snow"] = config.readEntry("snowPaper", m_dir + "Winter_Track/");
     m_weatherMap["weather-snow-scattered"] = config.readEntry("snowScatteredPaper", m_dir + "Winter_Track/");
     m_weatherMap["weather-few-clouds-night"] = config.readEntry("partlyCloudyNightPaper", m_dir + "JK_Bridge_at_Night/");
