@@ -104,6 +104,7 @@ QGraphicsWidget *News::graphicsWidget()
     m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
     m_news = new Plasma::WebView(this);
+    m_news->setDragToScroll(true);
     m_news->installEventFilter(this);
     m_news->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
     connect(m_news->page(), SIGNAL(linkClicked(const QUrl&)),
