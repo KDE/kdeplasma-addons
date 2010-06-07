@@ -116,6 +116,11 @@ void ComicProviderKross::pageError( int id, const QString &message )
     m_wrapper.pageError( id, message );
 }
 
+void ComicProviderKross::redirected( int id, const KUrl &newUrl )
+{
+    m_wrapper.redirected( id, newUrl );
+}
+
 Plasma::PackageStructure::Ptr ComicProviderKross::packageStructure()
 {
     if ( !m_packageStructure ) {

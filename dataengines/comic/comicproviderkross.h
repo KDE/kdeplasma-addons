@@ -53,6 +53,7 @@ class ComicProviderKross : public ComicProvider
     protected:
         virtual void pageRetrieved( int id, const QByteArray &data );
         virtual void pageError( int id, const QString &message );
+        virtual void redirected( int id, const KUrl &newUrl );
         QString identifierToString( const QVariant &identifier ) const;
 
     private:

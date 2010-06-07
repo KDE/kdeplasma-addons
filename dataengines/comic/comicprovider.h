@@ -243,6 +243,15 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         void requestPage( const KUrl &url, int id, const MetaInfos &infos = MetaInfos() );
 
         /**
+         * This method can be used to find the place url points to, when finished
+         * urlRetrieved() is called, either with the original url or a redirected url
+         * @param url to check for redirections
+         * @param id A unique id that identifies this request.
+         * @param infos A list of meta information passed to KIO.
+         */
+        void requestRedirectedUrl( const KUrl &url, int id, const MetaInfos &infos = MetaInfos() );
+
+        /**
          * This method is called whenever a request done by requestPage() was successful.
          *
          * @param id The unique identifier of that request.
@@ -258,11 +267,21 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          */
         virtual void pageError( int id, const QString &message );
 
+        /**
+         * This method is called whenever a request by requestRedirectedUrl() was done
+         * @param id The unique identifier of that request.
+         * @param newUrl The redirected Url
+         */
+        virtual void redirected( int id, const KUrl &newUrl );
+
     private:
         class Private;
         Private* const d;
 
         Q_PRIVATE_SLOT( d, void jobDone( KJob* ) )
+        Q_PRIVATE_SLOT( d, void slotRedirection( KIO::Job*, KUrl ) )
+        Q_PRIVATE_SLOT( d, void slotRedirection( KIO::Job*, KUrl, KUrl ) )
+        Q_PRIVATE_SLOT( d, void slotRedirectionDone( KJob* ) )
 };
 
 #endif

@@ -119,6 +119,7 @@ class ComicProviderWrapper : public QObject
         Q_ENUMS( IdentifierType )
         Q_ENUMS( RequestType )
         Q_ENUMS( PositionType )
+        Q_ENUMS( RedirectedUrlType )
         Q_PROPERTY( bool identifierSpecified READ identifierSpecified )
         Q_PROPERTY( QString textCodec READ textCodec WRITE setTextCodec )
         Q_PROPERTY( QString comicAuthor READ comicAuthor WRITE setComicAuthor )
@@ -133,6 +134,7 @@ class ComicProviderWrapper : public QObject
         Q_PROPERTY( QVariant lastIdentifier READ lastIdentifier WRITE setLastIdentifier )
         Q_PROPERTY( bool isLeftToRight READ isLeftToRight WRITE setLeftToRight )
         Q_PROPERTY( bool isTopToBottom READ isTopToBottom WRITE setTopToBottom )
+        Q_PROPERTY( int apiVersion READ apiVersion )
     public:
         enum PositionType {
             Left = 0,
@@ -151,13 +153,25 @@ class ComicProviderWrapper : public QObject
             StringIdentifier = ComicProvider::StringIdentifier
         };
 
+        enum RedirectedUrlType {
+            PreviousUrl = 0,
+            CurrentUrl = 1,
+            NextUrl = 2,
+            FirstUrl = 3,
+            LastUrl = 4,
+            UserUrl = 10
+        };
+
         ComicProviderWrapper( ComicProviderKross *parent );
         ~ComicProviderWrapper();
+
+        int apiVersion() const { return 4450; }
 
         ComicProvider::IdentifierType identifierType() const;
         QImage comicImage();
         void pageRetrieved( int id, const QByteArray &data );
         void pageError( int id, const QString &message );
+        void redirected( int id, const KUrl &newUrl );
 
         bool identifierSpecified() const;
         QString textCodec() const;
@@ -198,6 +212,7 @@ class ComicProviderWrapper : public QObject
         void error() const;
 
         void requestPage( const QString &url, int id, const QVariantMap &infos = QVariantMap() );
+        void requestRedirectedUrl( const QString &url, int id, const QVariantMap &infos = QVariantMap() );
         void combine( const QVariant &image, PositionType position = Top );
         QObject* image();
 
