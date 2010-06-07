@@ -696,6 +696,15 @@ void ComicProviderWrapper::pageError( int id, const QString &message )
     }
 }
 
+void ComicProviderWrapper::redirected(int id, const KUrl &newUrl)
+{
+    --mRequests;
+    callFunction( "redirected", QVariantList() << id << newUrl );
+    if ( mRequests < 1 ) { //Don't finish while there are still requests
+        finished();
+    }
+}
+
 void ComicProviderWrapper::finished() const
 {
     kDebug() << QString( "Author" ).leftJustified( 22, '.' ) << comicAuthor();
@@ -726,6 +735,18 @@ void ComicProviderWrapper::requestPage( const QString &url, int id, const QVaria
     mProvider->requestPage( KUrl( url ), id, map );
     ++mRequests;
 }
+
+void ComicProviderWrapper::requestRedirectedUrl( const QString &url, int id, const QVariantMap &infos )
+{
+    QMap<QString, QString> map;
+
+    foreach ( const QString& key, infos.keys() ) {
+        map[key] = infos[key].toString();
+    }
+    mProvider->requestRedirectedUrl( KUrl( url ), id, map );
+    ++mRequests;
+}
+
 
 bool ComicProviderWrapper::functionCalled() const
 {

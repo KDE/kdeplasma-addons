@@ -44,6 +44,32 @@ class ComicProvider::Private
             }
         }
 
+        void slotRedirection( KIO::Job *job, KUrl newUrl )
+        {
+            slotRedirection( job, KUrl(), newUrl );
+        }
+
+        void slotRedirection( KIO::Job *job, KUrl oldUrl, KUrl newUrl )
+        {
+            Q_UNUSED(oldUrl)
+
+            mParent->redirected( job->property( "uid" ).toInt(), newUrl );
+            mRedirections.remove( job );
+        }
+
+        void slotRedirectionDone( KJob *job )
+        {
+            if ( job->error() ) {
+                kDebug() << "Redirection job with id" << job->property( "uid" ).toInt() <<  "finished with an error.";
+            }
+
+            if ( mRedirections.contains( job ) ) {
+                //no redirection took place, return the original url
+                mParent->redirected( job->property( "uid" ).toInt(), mRedirections[ job ] );
+                mRedirections.remove( job );
+            }
+        }
+
         ComicProvider *mParent;
         QString mRequestedId;
         QString mRequestedComicName;
@@ -56,6 +82,7 @@ class ComicProvider::Private
         int mRequestedNumber;
         int mFirstStripNumber;
         KPluginInfo mComicDescription;
+        QHash< KJob*, KUrl > mRedirections;
 };
 
 ComicProvider::ComicProvider( QObject *parent, const QVariantList &args )
@@ -196,11 +223,34 @@ void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos
     }
 }
 
+void ComicProvider::requestRedirectedUrl( const KUrl &url, int id, const MetaInfos &infos )
+{
+
+    KIO::MimetypeJob *job = KIO::mimetype( url, KIO::HideProgressInfo );
+    job->setProperty( "uid", id );
+    d->mRedirections[job] = url;
+    connect(job, SIGNAL( redirection( KIO::Job*, KUrl ) ), this, SLOT( slotRedirection( KIO::Job*, KUrl ) ) );
+    connect(job, SIGNAL( permanentRedirection( KIO::Job*, KUrl, KUrl ) ), this, SLOT( slotRedirection( KIO::Job*, KUrl, KUrl ) ) );
+    connect(job, SIGNAL( result(KJob* ) ), this, SLOT( slotRedirectionDone( KJob* ) ) );
+
+    if ( !infos.isEmpty() ) {
+        QMapIterator<QString, QString> it( infos );
+        while ( it.hasNext() ) {
+            it.next();
+            job->addMetaData( it.key(), it.value() );
+        }
+    }
+}
+
 void ComicProvider::pageRetrieved( int, const QByteArray& )
 {
 }
 
 void ComicProvider::pageError( int, const QString& )
+{
+}
+
+void ComicProvider::redirected( int, const KUrl& )
 {
 }
 
