@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Bookmarks
+Name[ca]=Adreces d'interès
 Name[da]=Bogmærker
 Name[de]=Lesezeichen
 Name[en_GB]=Bookmarks
@@ -22,6 +23,7 @@ Name[uk]=Закладки
 Name[x-test]=xxBookmarksxx
 Name[zh_TW]=書籤
 Comment=Quick Access to the Bookmarks
+Comment[ca]=Accés ràpid a les adreces d'interès
 Comment[da]=Hurtig adgang til bogmærker
 Comment[de]=Schnellzugriff auf die Lesezeichen
 Comment[en_GB]=Quick Access to the Bookmarks

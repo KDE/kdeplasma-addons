@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Date and Time
+Name[ca]=Data i hora
 Name[da]=Dato og tid
 Name[de]=Datum und Zeit
 Name[en_GB]=Date and Time
@@ -17,6 +18,7 @@ Name[x-test]=xxDate and Timexx
 Name[zh_TW]=日期與時間
 
 Comment=The current date and time, locally or in any timezone
+Comment[ca]=La data i l'hora actuals, localment o en qualsevol zona horària
 Comment[da]=Den nuværende dato og tid, lokalt eller i en enhver tidszone
 Comment[de]=Aktuelles Datum und Zeit; lokal oder in einer anderen Zeitzone
 Comment[en_GB]=The current date and time, locally or in any timezone

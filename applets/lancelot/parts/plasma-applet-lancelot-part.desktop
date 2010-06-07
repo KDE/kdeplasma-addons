@@ -2,7 +2,9 @@
 Icon=plasmaapplet-shelf
 
 Name=Shelf
+Name[ca]=Shelf
 Name[da]=Hylde
+Name[de]=Regal
 Name[en_GB]=Shelf
 Name[et]=Sahtel
 Name[fr]=Présentoir
