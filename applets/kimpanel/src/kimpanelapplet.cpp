@@ -100,7 +100,7 @@ void KIMPanelApplet::init()
     m_statusbarGraphics->setContentsMargins(0,0,0,0);
 
     m_statusbarGraphics->setCollapsible(true);
-    m_statusbar = new KIMStatusBar();
+    m_statusbar = new KIMStatusBar(static_cast<Plasma::Corona *>(scene()));
     QAction *action = new QAction(KIcon("configure"),i18n("IM Panel Settings"),this);
     connect(action,SIGNAL(triggered()),this,SLOT(showConfigurationInterface()));
     m_statusbar->addAction(action);
@@ -108,7 +108,7 @@ void KIMPanelApplet::init()
     connect(m_statusbarGraphics,SIGNAL(iconCountChanged()),SLOT(adjustSelf()));
     connect(m_statusbarGraphics,SIGNAL(collapsed(bool)),SLOT(toggleCollapse(bool)));
 
-    m_lookup_table = new KIMLookupTable(m_panel_agent);
+    m_lookup_table = new KIMLookupTable(m_panel_agent, static_cast<Plasma::Corona *>(scene()));
 
     m_logoIcon = new Plasma::IconWidget(KIcon("draw-freehand"),"",this);
     m_logoIcon->hide();
