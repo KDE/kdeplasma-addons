@@ -165,9 +165,17 @@ bool KdeObservatory::eventFilter(QObject *receiver, QEvent *event)
         dynamic_cast<QGraphicsWidget *>(receiver) == m_mainContainer &&
         event->type() == QEvent::GraphicsSceneResize)
     {
-        createViews();
+        QTimer::singleShot(0, this, SLOT(refreshViews()));
     }
     return Plasma::PopupApplet::eventFilter(receiver, event);
+}
+
+void KdeObservatory::refreshViews()
+{
+        m_viewTransitionTimer->stop();
+        createViews();
+        updateSources();
+        m_viewTransitionTimer->start();    
 }
 
 bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
@@ -307,8 +315,9 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     int viewsCount = m_activeViews.count();
     for (int i = 0; i < viewsCount; ++i)
     {
-        QListWidgetItem * item = m_configViews->activeViews->findItems(m_activeViews.at(i).first, Qt::MatchFixedString).first();
-        item->setCheckState(m_activeViews.at(i).second == true ? Qt::Checked:Qt::Unchecked);
+        const QPair<QString, bool> &pair = m_activeViews.at(i);
+        QListWidgetItem * item = m_configViews->activeViews->findItems(pair.first, Qt::MatchFixedString).first();
+        item->setCheckState(pair.second == true ? Qt::Checked:Qt::Unchecked);
         m_configViews->activeViews->takeItem(m_configViews->activeViews->row(item));
         m_configViews->activeViews->insertItem(i, item);
     }
@@ -494,6 +503,7 @@ void KdeObservatory::setBusy(bool value)
 
 void KdeObservatory::updateSources()
 {
+    kDebug();
     setBusy(true);
 
     QString commitFrom = "";
@@ -514,9 +524,11 @@ void KdeObservatory::updateSources()
     int viewsCount = m_activeViews.count();
     m_sourceCounter = 0;
     uint appletId = id();
-    for (int i = 0; i < viewsCount; ++i)
+
+    QListIterator< QPair<QString, bool> > i (m_activeViews);
+    while (i.hasNext())
     {
-        const QPair<QString, bool> &pair = m_activeViews.at(i);
+        const QPair<QString, bool> &pair = i.next();
 
         if (pair.first == i18n("Top Active Projects") && pair.second)
         {
@@ -598,10 +610,11 @@ void KdeObservatory::createViews()
         widget->hide();
 
     m_views.clear();
-    int count = m_activeViews.count();
-    for (int i = 0; i < count; ++i)
+
+    QListIterator< QPair<QString, bool> > i (m_activeViews);
+    while (i.hasNext())
     {
-        const QPair<QString, bool> &pair = m_activeViews.at(i);
+        const QPair<QString, bool> &pair = i.next();
         const QString &view = pair.first;
         if (pair.second && m_viewProviders.value(view))
             m_viewProviders[view]->createViews();
@@ -616,10 +629,10 @@ void KdeObservatory::updateViews()
         widget->hide();
 
     m_views.clear();
-    int count = m_activeViews.count();
-    for (int i = 0; i < count; ++i)
+    QListIterator< QPair<QString, bool> > i (m_activeViews);
+    while (i.hasNext())
     {
-        const QPair<QString, bool> &pair = m_activeViews.at(i);
+        const QPair<QString, bool> &pair = i.next();
         const QString &view = pair.first;
         if (pair.second && m_viewProviders.value(view))
             m_views.append(m_viewProviders[view]->views());
@@ -731,10 +744,10 @@ void KdeObservatory::saveConfig()
     QStringList viewNames;
     QList<bool> viewActives;
 
-    int count = m_activeViews.count();
-    for (int i = 0; i < count; ++i)
+    QListIterator< QPair<QString, bool> > i1(m_activeViews);
+    while (i1.hasNext())
     {
-        const QPair<QString, bool> &pair = m_activeViews.at(i);
+        const QPair<QString, bool> &pair = i1.next();
         viewNames << pair.first;
         viewActives << pair.second;
     }
@@ -748,12 +761,12 @@ void KdeObservatory::saveConfig()
     QStringList projectKrazyFilePrefix;
     QStringList projectIcons;
 
-    QMapIterator<QString, Project> i(m_projects);
-    while (i.hasNext())
+    QMapIterator<QString, Project> i2(m_projects);
+    while (i2.hasNext())
     {
-        i.next();
-        const Project &project = i.value();
-        projectNames << i.key();
+        i2.next();
+        const Project &project = i2.value();
+        projectNames << i2.key();
         projectCommitSubjects << project.commitSubject;
         projectKrazyReports << project.krazyReport;
         projectKrazyFilePrefix << project.krazyFilePrefix;
