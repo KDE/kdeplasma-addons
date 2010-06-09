@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Special Characters
 Name[ca]=Caràcters especials
+Name[ca@valencia]=Caràcters especials
 Name[da]=Specialtegn
 Name[de]=Sonderzeichen
 Name[en_GB]=Special Characters
@@ -18,6 +19,7 @@ Name[zh_TW]=特殊字元
 Icon=accessories-character-map
 Comment=Creates special characters from their hexadecimal codes
 Comment[ca]=Crea caràcters especials a partir dels seus codis hexadecimals
+Comment[ca@valencia]=Crea caràcters especials a partir dels seus codis hexadecimals
 Comment[da]=Opretter specialtegn via deres hexadecimal-koder
 Comment[de]=Erstellt Sonderzeichen aus ihren Hexadezimalwerten
 Comment[en_GB]=Creates special characters from their hexadecimal codes

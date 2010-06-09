@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KDE Observatory Data Engine
 Name[ca]=Motor de dades de l'observatori del KDE
+Name[ca@valencia]=Motor de dades de l'observatori del KDE
 Name[da]=Datamotor til KDE-observatorium
 Name[de]=Datentreiber für das KDE-Observatorium
 Name[en_GB]=KDE Observatory Data Engine
@@ -16,6 +17,7 @@ Name[x-test]=xxKDE Observatory Data Enginexx
 Name[zh_TW]=KDE 觀測資料引擎
 Comment=A Data Engine for acquiring consolidated data about KDE projects
 Comment[ca]=Un motor de dades de captura de dades consolidades quant als projectes del KDE
+Comment[ca@valencia]=Un motor de dades de captura de dades consolidades quant als projectes del KDE
 Comment[da]=En datamotor til at hente samlede data om KDE-projekter
 Comment[de]=Ein Datenmodul zum Erwerb von zusammengefassten Daten über KDE-Projekte.
 Comment[en_GB]=A Data Engine for acquiring consolidated data about KDE projects
