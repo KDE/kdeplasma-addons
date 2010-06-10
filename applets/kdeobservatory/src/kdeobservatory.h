@@ -76,7 +76,6 @@ protected Q_SLOTS:
     void engineError(const QString &source, const QString &error);
     void setBusy(bool value);
     void updateSources();
-    void refreshViews();
 
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
@@ -145,7 +144,7 @@ private:
     int m_currentView;
 
     QTimer *m_viewTransitionTimer;
-    QTimeLine *m_transitionTimer;
+    QPointer<QTimeLine> m_transitionTimer;
     
     QGraphicsItemAnimation *m_animationPrevious;
     QGraphicsItemAnimation *m_animationNew;

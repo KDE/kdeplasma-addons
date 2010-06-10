@@ -68,7 +68,7 @@ QGraphicsWidget *IViewProvider::containerForView(const QString &id)
 void IViewProvider::deleteViews()
 {
     foreach(QGraphicsWidget *view, m_views)
-        delete view;
+        view->deleteLater();
     m_views.clear();
 }
 

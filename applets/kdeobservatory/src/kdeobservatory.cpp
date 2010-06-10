@@ -71,6 +71,10 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 
 KdeObservatory::~KdeObservatory()
 {
+    delete m_viewTransitionTimer;
+    delete m_transitionTimer;
+    delete m_service;
+
     if (!hasFailedToLaunch())
     {
         delete m_viewProviders[i18n("Top Active Projects")];
@@ -78,8 +82,6 @@ KdeObservatory::~KdeObservatory()
         delete m_viewProviders[i18n("Commit History")];
         delete m_viewProviders[i18n("Krazy Report")];
     }
-
-    delete m_service;
 }
 
 void KdeObservatory::init()
@@ -165,17 +167,15 @@ bool KdeObservatory::eventFilter(QObject *receiver, QEvent *event)
         dynamic_cast<QGraphicsWidget *>(receiver) == m_mainContainer &&
         event->type() == QEvent::GraphicsSceneResize)
     {
-        QTimer::singleShot(0, this, SLOT(refreshViews()));
-    }
-    return Plasma::PopupApplet::eventFilter(receiver, event);
-}
-
-void KdeObservatory::refreshViews()
-{
+        delete m_transitionTimer;
         m_viewTransitionTimer->stop();
         createViews();
         updateSources();
-        m_viewTransitionTimer->start();    
+        m_viewTransitionTimer->start();
+        m_transitionTimer = new QTimeLine(500, this);
+        connect(m_transitionTimer, SIGNAL(finished()), this, SLOT(timeLineFinished()));
+    }
+    return Plasma::PopupApplet::eventFilter(receiver, event);
 }
 
 bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
