@@ -50,8 +50,8 @@ private:
     QDate m_minDate;
 };
 
-CommitHistoryView::CommitHistoryView(const QHash<QString, bool> &commitHistoryViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(parent, wFlags),
+CommitHistoryView::CommitHistoryView(KdeObservatory *kdeObservatory, const QHash<QString, bool> &commitHistoryViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(kdeObservatory, parent, wFlags),
   m_commitHistoryViewProjects(commitHistoryViewProjects),
   m_projects(projects)
 {
@@ -102,6 +102,9 @@ void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
         }
 
         QGraphicsWidget *container = containerForView(QString("Commit History - ") + project);
+        if (!container)
+            return;
+        
         QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(container);
         proxy->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
 

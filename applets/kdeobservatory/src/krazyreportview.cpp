@@ -25,8 +25,8 @@
 #include <KIcon>
 #include <KGlobalSettings>
 
-KrazyReportView::KrazyReportView(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(parent, wFlags),
+KrazyReportView::KrazyReportView(KdeObservatory *kdeObservatory, const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(kdeObservatory, parent, wFlags),
   m_krazyReportViewProjects(krazyReportViewProjects),
   m_projects(projects)
 {
@@ -53,8 +53,6 @@ void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
     foreach (const QString &fileType, keys)
         createView(i18nc("Krazy report for a given project %1", "Krazy Report - %1", project), QString("Krazy Report") + " - " + project + " - " + fileType);
     
-    KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
-
     KrazyReportMapIterator i1(krazyReportMap);
 
     // For each file type
@@ -66,6 +64,8 @@ void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
         const QMap< QString, FileTypeKrazyReportMap > &projectFileTypeKrazyReport = i1.value();
 
         QGraphicsWidget *container = containerForView(QString("Krazy Report") + " - " + project + " - " + fileType);
+        if (!container)
+            return;
 
         QGraphicsTextItem *fileTypeText = new QGraphicsTextItem(fileType, container);
         fileTypeText->setDefaultTextColor(QColor(0, 0, 0));
@@ -125,7 +125,7 @@ void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
             testNameRect->setToolTip(toolTip);
 
             testNameRect->setAcceptHoverEvents(true);
-            testNameRect->installSceneEventFilter(kdeObservatory);
+            testNameRect->installSceneEventFilter(m_kdeObservatory);
 
             j++;
         }

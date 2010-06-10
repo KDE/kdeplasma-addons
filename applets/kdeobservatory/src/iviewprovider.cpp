@@ -25,8 +25,8 @@
 
 #include <Plasma/Frame>
 
-IViewProvider::IViewProvider(QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: QObject(),
+IViewProvider::IViewProvider(KdeObservatory *kdeObservatory, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: m_kdeObservatory(kdeObservatory),
   m_parent(parent),
   m_wFlags(wFlags)
 {

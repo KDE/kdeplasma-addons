@@ -32,11 +32,13 @@ namespace Plasma
     class Frame;
 }
 
+class KdeObservatory;
+
 class IViewProvider : public QObject
 {
     Q_OBJECT
 public:
-    explicit IViewProvider(QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
+    explicit IViewProvider(KdeObservatory *kdeObservatory, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~IViewProvider();
 
     void createView(const QString &title, const QString &id);
@@ -48,6 +50,7 @@ public:
     virtual void updateViews(const Plasma::DataEngine::Data &data) = 0;
 
 protected:
+    KdeObservatory *m_kdeObservatory;
     QGraphicsWidget *m_parent;
     Qt::WindowFlags m_wFlags;
     QMap<QString, QGraphicsWidget *> m_views;

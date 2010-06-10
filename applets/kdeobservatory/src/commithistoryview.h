@@ -28,7 +28,7 @@
 class CommitHistoryView : public IViewProvider
 {
 public:
-    CommitHistoryView(const QHash<QString, bool> &commitHistoryViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
+    CommitHistoryView(KdeObservatory *kdeObservatory, const QHash<QString, bool> &commitHistoryViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~CommitHistoryView();
 
     virtual void createViews();

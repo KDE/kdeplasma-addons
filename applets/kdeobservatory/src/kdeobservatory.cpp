@@ -174,8 +174,10 @@ bool KdeObservatory::eventFilter(QObject *receiver, QEvent *event)
         m_viewTransitionTimer->start();
         m_transitionTimer = new QTimeLine(500, this);
         connect(m_transitionTimer, SIGNAL(finished()), this, SLOT(timeLineFinished()));
+        return true;
     }
-    return Plasma::PopupApplet::eventFilter(receiver, event);
+    else
+        return Plasma::PopupApplet::eventFilter(receiver, event);
 }
 
 bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
@@ -183,18 +185,23 @@ bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     Q_UNUSED(watched);
     if (event->type() == QEvent::GraphicsSceneHoverEnter && m_enableAutoViewChange)
         m_viewTransitionTimer->stop();
-    if (event->type() == QEvent::GraphicsSceneHoverLeave && m_enableAutoViewChange)
+    else if (event->type() == QEvent::GraphicsSceneHoverLeave && m_enableAutoViewChange)
         m_viewTransitionTimer->start();
-    return false;
+    else
+        return Plasma::PopupApplet::sceneEventFilter(watched, event);
+    return true;
 }
 
 void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    // Prevent for being update from another instance update request
+    // Prevent for being updated from another instance update request
     if (data["appletId"].toUInt() != id())
         return;
 
     QString project = data["project"].toString();
+
+    if (sourceName != "topActiveProjects" && !data.contains(project) && !data.contains("error"))
+        return;
 
     if (sourceName == "topActiveProjects")
         m_viewProviders[i18n("Top Active Projects")]->updateViews(data);
@@ -204,9 +211,6 @@ void KdeObservatory::dataUpdated(const QString &sourceName, const Plasma::DataEn
         m_viewProviders[i18n("Commit History")]->updateViews(data);
     else if (sourceName == "krazyReport" && !project.isEmpty())
         m_viewProviders[i18n("Krazy Report")]->updateViews(data);
-
-    if (sourceName != "topActiveProjects" && !data.contains(project) && !data.contains("error"))
-        return;
 
     --m_sourceCounter;
     m_collectorProgress->setValue(m_collectorProgress->maximum() -  m_sourceCounter);
@@ -801,9 +805,12 @@ void KdeObservatory::createTimers()
 
 void KdeObservatory::createViewProviders()
 {
-    m_viewProviders[i18n("Top Active Projects")] = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer);
-    m_viewProviders[i18n("Top Developers")] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer);
-    m_viewProviders[i18n("Commit History")] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewContainer);
-    m_viewProviders[i18n("Krazy Report")] = new KrazyReportView(m_krazyReportViewProjects, m_projects, m_viewContainer);
+    if (!m_viewContainer)
+        graphicsWidget();
+    
+    m_viewProviders[i18n("Top Active Projects")] = new TopActiveProjectsView(this, m_topActiveProjectsViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Top Developers")] = new TopDevelopersView(this, m_topDevelopersViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Commit History")] = new CommitHistoryView(this, m_commitHistoryViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Krazy Report")] = new KrazyReportView(this, m_krazyReportViewProjects, m_projects, m_viewContainer);
 }
 

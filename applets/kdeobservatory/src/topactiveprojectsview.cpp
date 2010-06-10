@@ -26,8 +26,8 @@
 #include <KIcon>
 #include <KGlobalSettings>
 
-TopActiveProjectsView::TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(parent, wFlags),
+TopActiveProjectsView::TopActiveProjectsView(KdeObservatory *kdeObservatory, const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(kdeObservatory, parent, wFlags),
   m_parent(parent),
   m_topActiveProjectsViewProjects(topActiveProjectsViewProjects),
   m_projects(projects)
@@ -48,9 +48,9 @@ void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
 {
     QMultiMap<int, QString> topActiveProjects = data["topActiveProjects"].value< QMultiMap<int, QString> >();
 
-    KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
-
     QGraphicsWidget *container = containerForView("Top Active Projects");
+    if (!container)
+        return;
 
     int maxRank = 0;
     qreal width = container->geometry().width();
@@ -81,7 +81,7 @@ void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
             projectRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
             projectRect->setToolTip(i18np("%2 - %1 commit", "%2 - %1 commits", rank, project));
             projectRect->setAcceptHoverEvents(true);
-            projectRect->installSceneEventFilter(kdeObservatory);
+            projectRect->installSceneEventFilter(m_kdeObservatory);
 
             QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[project].icon).pixmap(22, 22), container);
             icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);

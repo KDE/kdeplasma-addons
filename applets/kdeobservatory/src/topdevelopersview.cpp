@@ -25,8 +25,8 @@
 #include <KIcon>
 #include <KGlobalSettings>
 
-TopDevelopersView::TopDevelopersView(const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(parent, wFlags),
+TopDevelopersView::TopDevelopersView(KdeObservatory *kdeObservatory, const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(kdeObservatory, parent, wFlags),
   m_topDevelopersViewProjects(topDevelopersViewProjects),
   m_projects(projects)
 {
@@ -54,9 +54,9 @@ void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
     
     RankValueMap topProjectDevelopers = data[project].value<RankValueMap>();
 
-    KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
-
     QGraphicsWidget *container = containerForView(QString("Top Developers") + " - " + project);
+    if (!container)
+        return;
 
     int maxRank = 0;
     qreal width = container->geometry().width();
@@ -85,7 +85,7 @@ void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
         developerRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
         developerRect->setToolTip(i18np("%2 - %1 commit", "%2 - %1 commits", rank, developer));
         developerRect->setAcceptHoverEvents(true);
-        developerRect->installSceneEventFilter(kdeObservatory);
+        developerRect->installSceneEventFilter(m_kdeObservatory);
 
         QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(developer.split(' ')[0], developerRect);
         commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
