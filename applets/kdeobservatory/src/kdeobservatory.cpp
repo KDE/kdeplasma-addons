@@ -119,14 +119,14 @@ QGraphicsWidget *KdeObservatory::graphicsWidget()
         m_right->setIcon(KIcon("go-next-view"));
         m_right->setToolTip(i18n("Go to previous view"));
         m_right->setMaximumSize(22, 22);
-        m_right->setEnabled(false);
+        m_right->hide();
         connect(m_right, SIGNAL(clicked()), this, SLOT(moveViewRightClicked()));
 
         m_left = new Plasma::PushButton(m_mainContainer);
         m_left->setIcon(KIcon("go-previous-view"));
         m_left->setToolTip(i18n("Go to next view"));
         m_left->setMaximumSize(22, 22);
-        m_left->setEnabled(false);
+        m_left->hide();
         connect(m_left, SIGNAL(clicked()), this, SLOT(moveViewLeftClicked()));
 
         m_collectorProgress = new Plasma::Meter(m_mainContainer);
@@ -480,8 +480,8 @@ void KdeObservatory::setBusy(bool value)
     {
         if (value)
         {
-            m_right->setEnabled(false);
-            m_left->setEnabled(false);
+            m_right->hide();
+            m_left->hide();
             m_updateLabel->hide();
             m_horizontalLayout->removeItem(m_updateLabel);
             m_collectorProgress->setValue(0);
@@ -494,8 +494,8 @@ void KdeObservatory::setBusy(bool value)
             m_horizontalLayout->removeItem(m_collectorProgress);
             m_horizontalLayout->insertItem(1, m_updateLabel);
             m_updateLabel->show();
-            m_left->setEnabled(true);
-            m_right->setEnabled(true);
+            m_left->show();
+            m_right->show();
         }
     }
     Plasma::PopupApplet::setBusy(value);
