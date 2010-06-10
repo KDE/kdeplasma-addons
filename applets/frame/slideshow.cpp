@@ -31,7 +31,7 @@
 SlideShow::SlideShow(QObject *parent)
     : QObject(parent)
 {
-    m_filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz"; // use mime types?
+    m_filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz" << "*.bmp" << "*.tif"; // use mime types?
     m_slideNumber = 0;
     m_useRandom = false;
 

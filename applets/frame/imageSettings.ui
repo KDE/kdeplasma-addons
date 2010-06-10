@@ -70,7 +70,7 @@
             <bool>true</bool>
            </property>
            <property name="filter">
-            <string>*.png *.jpeg *.jpg *.svg *.svgz</string>
+            <string>*.png *.jpeg *.jpg *.svg *.svgz *.bmp *.tif</string>
            </property>
            <property name="fileDialogModality">
             <enum>Qt::NonModal</enum>
