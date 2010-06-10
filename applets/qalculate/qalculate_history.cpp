@@ -38,11 +38,8 @@ QString QalculateHistory::currentItem()
     qDebug() << "Current item: " << m_currentItem;
     qDebug() << "History size: " << m_history.size();
     
-    if (m_history.isEmpty())
+    if (m_history.isEmpty()) {
         return QString();
-
-    if (m_currentItem < 0) {
-        m_currentItem = 0;
     }
 
     if (m_currentItem >= m_history.size()) {
@@ -52,6 +49,10 @@ QString QalculateHistory::currentItem()
         } else {
             m_currentItem = m_history.size() - 1;
         }
+    }
+
+    if (m_currentItem < 0) {
+        m_currentItem = 0;
     }
 
     qDebug() << "Final current item: " << m_currentItem;
@@ -74,6 +75,10 @@ QString QalculateHistory::previousItem()
 
 void QalculateHistory::setBackup(const QString& backup)
 {
+    if (m_history.isEmpty()) {
+        return;
+    }
+
     if (backup != m_history.last()) {
         m_backup = backup;
         m_currentItem++;
