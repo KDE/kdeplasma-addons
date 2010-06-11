@@ -19,6 +19,7 @@ Comment[pt_BR]=Widget de atividades do OpenDesktop
 Comment[sv]=OpenDesktop grafisk aktivitetskomponent
 Comment[uk]=Віджет просторів дій OpenDesktop
 Comment[x-test]=xxOpenDesktop Activities Widgetxx
+Comment[zh_CN]=OpenDesktop 活动部件
 Comment[zh_TW]=openDesktop 活動元件
 
 [Event/activity]
@@ -75,7 +76,7 @@ Comment[gl]=Algo interesante  sucedeu na súa rede de amigos
 Comment[it]=Si è verificato qualcosa di interessante nella rete dei tuoi amici
 Comment[kk]=Достар желіде бір қызық оқиға орын алды
 Comment[km]=មាន​អ្វីដែលចាប់អារម្មណ៍​​បានកើត​ឡើង​នៅ​ក្នុង​បណ្ដាញ​មិត្តភក្ដិ​របស់​អ្នក
-Comment[lv]=Kautkas interesants ir noticis jūsu draugu tīklā
+Comment[lv]=Jūsu draugu tīklā ir noticis kaut kas interesants
 Comment[nb]=Det har skjedd noe interessant i ditt vennenettverk
 Comment[nds]=Dor hett sik sünnerlich wat daan in Dien Mackers-Nettwark
 Comment[nl]=Er is iets interessants gebeurt in het netwerk van uw vriend

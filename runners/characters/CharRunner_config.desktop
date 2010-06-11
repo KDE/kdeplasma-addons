@@ -16,6 +16,7 @@ Name[pt_BR]=caracteres especiais
 Name[sv]=specialtecken
 Name[uk]=Спеціальні символи
 Name[x-test]=xxspecial Charactersxx
+Name[zh_CN]=特殊字符
 Name[zh_TW]=特殊字元
 Type=Service
 X-KDE-ServiceTypes=KCModule
