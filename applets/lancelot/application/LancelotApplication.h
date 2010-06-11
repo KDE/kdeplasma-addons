@@ -50,6 +50,7 @@ public Q_SLOTS:
     static bool search(const QString & string);
 
     static bool isShowing();
+    static bool isShowing(const QString & section);
 
     void configureShortcuts();
     void configurationChanged();

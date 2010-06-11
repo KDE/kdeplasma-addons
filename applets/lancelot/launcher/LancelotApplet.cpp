@@ -324,7 +324,7 @@ void LancelotApplet::showLancelotSection(const QString & section)
 
 void LancelotApplet::toggleLancelotSection(const QString & section)
 {
-    if (d->lancelot->isShowing()) {
+    if (d->lancelot->isShowing(section)) {
         d->toggleHide();
     } else {
         d->offline = false;

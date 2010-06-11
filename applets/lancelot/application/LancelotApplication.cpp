@@ -124,6 +124,13 @@ bool LancelotApplication::isShowing()
     return !(LancelotApplication::m_application->window->isHidden());
 }
 
+bool LancelotApplication::isShowing(const QString & section)
+{
+    if (!m_application) return false;
+    kDebug() << LancelotApplication::m_application->window->currentSection() << section;
+    return (LancelotApplication::m_application->window->currentSection() == section);
+}
+
 bool LancelotApplication::show(int x, int y)
 {
     if (!m_application) return false;

@@ -29,6 +29,10 @@
     <method name="isShowing">
       <arg type="b" direction="out"/>
     </method>
+    <method name="isShowing">
+      <arg type="b" direction="out"/>
+      <arg name="section" type="s" direction="in"/>
+    </method>
     <method name="configureShortcuts">
     </method>
     <method name="configurationChanged">

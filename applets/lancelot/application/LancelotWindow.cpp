@@ -420,10 +420,23 @@ QStringList LancelotWindow::sectionIcons()
     return res;
 }
 
+QString LancelotWindow::currentSection()
+{
+    if (isHidden()) {
+        return QString();
+    }
+
+    return tabbarSections->currentTab();
+}
+
 void LancelotWindow::sectionActivated(const QString & item)
 {
+    kDebug() << item;
     tabbarSections->setCurrentTab(item);
 
+    // TODO: m_activeSection should be examined
+    // - since we have a tabbarSections, it is not really
+    // used and it is not representing the active section
     if (item == m_activeSection) {
         return;
     }

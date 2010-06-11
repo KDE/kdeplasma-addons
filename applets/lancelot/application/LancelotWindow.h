@@ -132,6 +132,11 @@ public:
      */
     QStringList sectionIcons();
 
+    /**
+     * @returns currently open section
+     */
+    QString currentSection();
+
 public Q_SLOTS:
     /**
      * Opens the configure shortcuts dialog
