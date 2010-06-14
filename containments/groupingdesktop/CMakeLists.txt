@@ -12,7 +12,7 @@ include_directories(${CMAKE_SOURCE_DIR}
 
 set(groupingcontainment_SRCS
         lib/groupingcontainment.cpp
-        lib/grouphandle.cpp
+        lib/handle.cpp
         lib/abstractgroup.cpp
         lib/floatinggroup.cpp
         lib/gridgroup.cpp

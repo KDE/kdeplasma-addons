@@ -34,8 +34,6 @@ class AbstractGroupPrivate
         void destroyGroup();
         void appletDestroyed(Plasma::Applet *applet);
         void subGroupDestroyed(AbstractGroup *subGroup);
-        void callLayoutChild();
-        void repositionRemovedChild();
 
         Plasma::Applet::List applets;
         QList<AbstractGroup *> subGroups;
@@ -45,8 +43,6 @@ class AbstractGroupPrivate
         unsigned int id;
         Plasma::FrameSvg *background;
         Plasma::ImmutabilityType immutability;
-        QGraphicsWidget *currChild;
-        QPointF currChildPos;
         AbstractGroup::GroupType groupType;
         AbstractGroup *interestingGroup;
         bool isMainGroup;

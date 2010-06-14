@@ -117,46 +117,15 @@ void AbstractGroupPrivate::subGroupDestroyed(AbstractGroup *subGroup)
     }
 }
 
-void AbstractGroupPrivate::callLayoutChild()
-{
-    if (!currChild || currChildPos.isNull()) {
-        return;
-    }
-
-    currChild->setFlag(QGraphicsItem::ItemIsMovable, false);
-    currChild->setPos(currChildPos);
-    q->layoutChild(currChild, currChildPos);
-
-    currChild->installEventFilter(q);
-
-    currChild = 0;
-    currChildPos = QPointF();
-}
-
-void AbstractGroupPrivate::repositionRemovedChild()
-{
-    if (!currChild || currChildPos.isNull()) {
-        return;
-    }
-
-    currChild->setPos(currChild->parentItem()->mapFromScene(currChildPos));
-
-    currChild = 0;
-    currChildPos = QPointF();
-}
-
 void AbstractGroupPrivate::addChild(QGraphicsWidget *child, bool layoutChild)
 {
     QPointF newPos = q->mapFromScene(child->scenePos());
     child->setParentItem(q);
-    //FIXME this simple line breaks everything when adding plasmoids from the containment!! Why???
-//     applet->setPos(newPos);
 
     if (layoutChild) {
-        currChild = child;
-        currChildPos = newPos;
-        //HACK so i workarounded the above-mentioned problem with this QTimer::singleShot
-        QTimer::singleShot(0, q, SLOT(callLayoutChild()));
+        child->setPos(newPos);
+        q->layoutChild(child, newPos);
+        child->installEventFilter(q);
     } else {
 //         child->installEventFilter(q);
     }
@@ -166,14 +135,9 @@ void AbstractGroupPrivate::addChild(QGraphicsWidget *child, bool layoutChild)
 
 void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
 {
-    currChild = child;
-    currChildPos = (child->scenePos());
-
-//     child->removeEventFilter(q);
+    QPointF newPos = child->scenePos();
     child->setParentItem(q->parentItem());
-
-    //HACK like the one in addChild
-    QTimer::singleShot(0, q, SLOT(repositionRemovedChild()));
+    child->setPos(child->parentItem()->mapFromScene(newPos));
 }
 
 //-----------------------------AbstractGroup------------------------------
@@ -425,6 +389,8 @@ void AbstractGroup::setIsMainGroup(bool isMainGroup)
 {
     d->isMainGroup = isMainGroup;
     setFlag(QGraphicsItem::ItemIsMovable, false);
+    setZValue(0);
+kDebug()<<flags();
 }
 
 bool AbstractGroup::isMainGroup() const
@@ -443,7 +409,7 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
     } else if (group) {
         widget = group;
     }
-    kDebug()<<d->subGroups.count();
+//     kDebug()<<d->subGroups.count();
     if (widget) {
 //         switch (event->type()) {
 //             case QEvent::GraphicsSceneMove:

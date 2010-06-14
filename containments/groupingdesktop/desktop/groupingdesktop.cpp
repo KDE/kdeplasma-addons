@@ -24,6 +24,7 @@ GroupingDesktop::GroupingDesktop(QObject* parent, const QVariantList& args)
                : GroupingContainment(parent, args)
 {
     setContainmentType(Plasma::Containment::DesktopContainment);
+    useMainGroup("floating");
 }
 
 GroupingDesktop::~GroupingDesktop()
@@ -33,6 +34,7 @@ GroupingDesktop::~GroupingDesktop()
 void GroupingDesktop::init()
 {
     GroupingContainment::init();
+
 }
 
 #include "groupingdesktop.moc"

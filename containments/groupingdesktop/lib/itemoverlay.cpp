@@ -80,7 +80,7 @@ void ItemOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)
         } else {
             m_moving = true;
             m_startPos = event->pos();
-            emit startMoving();
+//             emit startMoving();
         }
     }
 }
@@ -89,7 +89,7 @@ void ItemOverlay::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
     if (m_moving) {
         QPointF p(event->pos() - m_startPos);
-        emit movedOf(p.x(), p.y(), event->pos());
+//         emit movedOf(p.x(), p.y(), event->pos());
     }
 }
 
@@ -98,7 +98,7 @@ void ItemOverlay::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     if (m_moving) {
         QPointF p(event->pos() - m_startPos);
 //         kDebug()<<geometry()<<event->pos();
-        emit movedOf(p.x(), p.y(), event->pos());
+//         emit movedOf(p.x(), p.y(), event->pos());
     }
 }
 

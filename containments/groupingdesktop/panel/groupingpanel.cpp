@@ -69,6 +69,7 @@ GroupingPanel::GroupingPanel(QObject *parent, const QVariantList &args)
     resize(m_currentSize);
     setMinimumSize(m_currentSize);
     setMaximumSize(m_currentSize);
+    useMainGroup("grid");
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeUpdated()));
 }
@@ -244,10 +245,6 @@ void GroupingPanel::constraintsEvent(Plasma::Constraints constraints)
         if (constraints & Plasma::LocationConstraint) {
             setFormFactorFromLocation(location());
         }
-    }
-
-    if ((mainGroup() == 0) && (constraints & Plasma::StartupCompletedConstraint)) {
-        setMainGroup("grid");
     }
 
     if (constraints & Plasma::ImmutableConstraint) {

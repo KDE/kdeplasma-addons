@@ -199,7 +199,7 @@ void GridGroup::showDropZone(const QPointF &pos, bool showAlwaysSomething)
 
     const int rows = m_layout->rowCount();
     const int columns = m_layout->columnCount();
-
+kDebug()<<rows<<columns;
     if (columns == 0) {
         insertItemAt(m_spacer, 0, 0, Horizontal);
         return;
@@ -213,47 +213,49 @@ void GridGroup::showDropZone(const QPointF &pos, bool showAlwaysSomething)
 
     const int i = x / columnWidth;
     const int j = y / rowHeight;
-
+kDebug()<<pos;
     int n;
     if ((n = nearestBoundair(x, columnWidth)) != -1) {
         if (itemPosition(m_spacer).isValid()) {
             removeItem(m_spacer);
         }
         m_spacer->lastOrientation = Horizontal;
+        kDebug()<<pos<<j<<n<<"h";
         insertItemAt(m_spacer, j, n, Horizontal);
-        if (m_interestingGroup) {
-            m_interestingGroup->showDropZone(QPointF());
-            m_interestingGroup = 0;
-        }
+//         if (m_interestingGroup) {
+//             m_interestingGroup->showDropZone(QPointF());
+//             m_interestingGroup = 0;
+//         }
     } else if ((n = nearestBoundair(y, rowHeight)) != -1) {
         if (itemPosition(m_spacer).isValid()) {
             removeItem(m_spacer);
         }
         m_spacer->lastOrientation = Vertical;
+        kDebug()<<pos<<j<<n<<"v";
         insertItemAt(m_spacer, n, i, Vertical);
-        if (m_interestingGroup) {
-            m_interestingGroup->showDropZone(QPointF());
-            m_interestingGroup = 0;
-        }
+//         if (m_interestingGroup) {
+//             m_interestingGroup->showDropZone(QPointF());
+//             m_interestingGroup = 0;
+//         }
     } else if (showAlwaysSomething) {
-        AbstractGroup *group = 0;
-        foreach (AbstractGroup *subGroup, subGroups()) {
-            if (subGroup->geometry().contains(pos)) {
-                group = subGroup;
-            }
-        }
-        if (group && (m_overlay->item() != group)) {
-            group->showDropZone(mapToItem(group, pos));
-            m_interestingGroup = group;
-        } else {
-            kDebug()<<m_interestingGroup;
-            if (m_interestingGroup) {
-                m_interestingGroup->showDropZone(QPointF());
-                m_interestingGroup = 0;
-            }
-            m_overlay->setGeometry(m_spacer->geometry());
-            insertItemAt(m_spacer, itemPos.row, itemPos.column, m_spacer->lastOrientation);
-        }
+//         AbstractGroup *group = 0;
+//         foreach (AbstractGroup *subGroup, subGroups()) {
+//             if (subGroup->geometry().contains(pos)) {
+//                 group = subGroup;
+//             }
+//         }
+//         if (group && (m_overlay->item() != group)) {
+//             group->showDropZone(mapToItem(group, pos));
+//             m_interestingGroup = group;
+//         } else {
+//             kDebug()<<m_interestingGroup;
+//             if (m_interestingGroup) {
+//                 m_interestingGroup->showDropZone(QPointF());
+//                 m_interestingGroup = 0;
+//             }
+//             m_overlay->setGeometry(m_spacer->geometry());
+//             insertItemAt(m_spacer, itemPos.row, itemPos.column, m_spacer->lastOrientation);
+//         }
     }
 }
 
@@ -340,7 +342,6 @@ void GridGroup::insertItemAt(QGraphicsWidget *item, int row, int column, Orienta
     }
 
     m_layout->addItem(item, row, column);
-    m_layout->activate();
 }
 
 Position GridGroup::itemPosition(QGraphicsItem *item) const
@@ -359,8 +360,6 @@ Position GridGroup::itemPosition(QGraphicsItem *item) const
 
 void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 {
-    Q_UNUSED(pos)
-
     if (!m_spacer->isVisible()) {
         showDropZone(pos);
     }
@@ -552,18 +551,21 @@ bool GridGroup::eventFilter(QObject *watched, QEvent *event)
 
     if (widget && children().contains(widget)) {
         switch (event->type()) {
+            case QEvent::GraphicsSceneMousePress:
+                removeItem(widget);
+                break;
         case QEvent::GraphicsSceneHoverMove:
         case QEvent::GraphicsSceneHoverEnter:
             {
-                if (!m_overlay) {
-                    m_overlay = new ItemOverlay(widget);
-                    connect(m_overlay, SIGNAL(startMoving()), this, SLOT(overlayStartsMoving()));
-                    connect(m_overlay, SIGNAL(endMoving()), this, SLOT(overlayEndsMoving()));
-                    connect(m_overlay, SIGNAL(movedOf(qreal, qreal, const QPointF &)),
-                            this, SLOT(overlayMoving(qreal, qreal, const QPointF &)));
-                    connect(m_overlay, SIGNAL(itemMovedOutside(qreal, qreal)),
-                            this, SLOT(onItemMovedOutside(qreal, qreal)));
-                }
+//                 if (!m_overlay) {
+//                     m_overlay = new ItemOverlay(widget);
+//                     connect(m_overlay, SIGNAL(startMoving()), this, SLOT(overlayStartsMoving()));
+//                     connect(m_overlay, SIGNAL(endMoving()), this, SLOT(overlayEndsMoving()));
+//                     connect(m_overlay, SIGNAL(movedOf(qreal, qreal, const QPointF &)),
+//                             this, SLOT(overlayMoving(qreal, qreal, const QPointF &)));
+//                     connect(m_overlay, SIGNAL(itemMovedOutside(qreal, qreal)),
+//                             this, SLOT(onItemMovedOutside(qreal, qreal)));
+//                 }
             }
             break;
 

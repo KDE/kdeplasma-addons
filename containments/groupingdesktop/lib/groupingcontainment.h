@@ -41,13 +41,14 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
         QList<AbstractGroup *> groups() const;
 
     protected:
+        virtual void constraintsEvent(Plasma::Constraints constraints);
         virtual bool eventFilter(QObject *obj, QEvent *event);
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
         virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
         virtual void saveContents(KConfigGroup &group) const;
         virtual void restoreContents(KConfigGroup &group);
-        void setMainGroup(const QString &name);
+        void useMainGroup(const QString &name);
         void setMainGroup(AbstractGroup *group);
         AbstractGroup *mainGroup() const;
 
