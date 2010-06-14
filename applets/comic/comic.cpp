@@ -294,6 +294,7 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
 {
     setBusy( false );
+    setConfigurationRequired( false );
     slotStartTimer();
     if ( data[ "Error" ].toBool() ) {
         if ( !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
