@@ -191,6 +191,8 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         void setImmutability(Plasma::ImmutabilityType immutability);
 
     protected:
+        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+
         /**
          * Reimplemented from QGraphicsWidget
          **/

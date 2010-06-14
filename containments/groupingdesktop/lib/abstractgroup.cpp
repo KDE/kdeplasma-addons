@@ -497,6 +497,19 @@ int AbstractGroup::type() const
     return Type;
 }
 
+QVariant AbstractGroup::itemChange(GraphicsItemChange change, const QVariant &value)
+{
+    if (!isMainGroup()) {
+        return value;
+    }
+
+    if (change == ItemPositionChange) {
+        return pos();
+    }
+
+    return QGraphicsWidget::itemChange(change, value);
+}
+
 void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option);

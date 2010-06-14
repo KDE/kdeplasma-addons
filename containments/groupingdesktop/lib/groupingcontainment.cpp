@@ -506,7 +506,7 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                         QPointF c = widget->contentsRect().center();
                         c += mapFromScene(widget->scenePos());
                         QPointF pos = mapToItem(parentGroup, c);
-                        kDebug()<<pos;
+                        kDebug()<<widget->contentsRect().center()<<widget->scenePos()<<pos;
                         if (pos.x() > 0 && pos.y() > 0) {
                             parentGroup->showDropZone(pos);
                             d->interestingGroup = parentGroup;
