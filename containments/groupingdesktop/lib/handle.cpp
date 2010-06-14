@@ -155,7 +155,7 @@ void Handle::detachWidget()
 
     if (m_applet && (m_applet->geometry() != m_originalGeom || m_applet->transform() != m_originalTransform)) {
 //         emit m_applet->appletTransformedByUser(); //FIXME: protected!
-    } else if (m_group->geometry() != m_originalGeom || m_group->transform() != m_originalTransform) {
+    } else if (m_group && (m_group->geometry() != m_originalGeom || m_group->transform() != m_originalTransform)) {
         emit m_group->groupTransformedByUser();
     }
 
@@ -554,6 +554,7 @@ void Handle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
                 } else {
                     m_group->destroy();
                 }
+                return;
             }
             break;
         case MoveButton:

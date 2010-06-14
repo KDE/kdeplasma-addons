@@ -466,7 +466,7 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
 
 void AbstractGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-//     showDropZone(event->pos());
+    showDropZone(event->pos());
 }
 
 void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)

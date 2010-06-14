@@ -126,6 +126,19 @@ class GroupingContainmentPrivate
             emit q->groupRemoved(group);
         }
 
+        void onAppletRemoved(Plasma::Applet *applet)
+        {
+            kDebug()<<"Removed applet"<<applet->id();
+
+            applet->removeEventFilter(q);
+
+            if (handles.contains(applet)) {
+                Handle *handle = handles.value(applet);
+                handles.remove(applet);
+                delete handle;
+            }
+        }
+
         AbstractGroup *groupAt(const QPointF &pos, QGraphicsItem *uppermostItem = 0)
         {
             if (pos.isNull()) {
@@ -171,7 +184,7 @@ class GroupingContainmentPrivate
                 applet->installEventFilter(q);
             }
 
-            q->connect(applet, SIGNAL(appletTransformedByUser()), q, SLOT(onAppletMoved()));
+            q->connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)), q, SLOT(onAppletRemoved(Plasma::Applet*)));
         }
 
         void manageGroup(AbstractGroup *subGroup, const QPointF &pos)
@@ -313,8 +326,8 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     group->d->containment = this;
     connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
             group, SLOT(setImmutability(Plasma::ImmutabilityType)));
-    connect(group, SIGNAL(groupDestroyed(AbstractGroup *)),
-            this, SLOT(onGroupRemoved(AbstractGroup *)));
+    connect(group, SIGNAL(groupDestroyed(AbstractGroup*)),
+            this, SLOT(onGroupRemoved(AbstractGroup*)));
     connect(group, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(onAppletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)));
     connect(group, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
@@ -369,7 +382,7 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
     Plasma::Applet *applet = qgraphicsitem_cast<Plasma::Applet *>(watched);
     AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(watched);
 
-    if (group) {
+    if (group && !group->isMainGroup()) {
         if ((immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable)) {
             AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(group->parentItem());
 
