@@ -301,6 +301,7 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
 {
     setBusy( false );
+    setConfigurationRequired( false );
     slotStartTimer();
 
     //there was an error, display information as image

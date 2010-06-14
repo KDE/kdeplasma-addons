@@ -176,6 +176,10 @@ void ComicEngine::finished( ComicProvider *provider )
     if ( !mIdentifierError.isEmpty() && provider->identifier().indexOf( temp ) == -1 ) {
         mIdentifierError.clear();
     }
+    // comic strip with error worked now
+    if ( !mIdentifierError.isEmpty() && ( mIdentifierError == provider->identifier() ) ){
+        mIdentifierError.clear();
+    }
 
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic
