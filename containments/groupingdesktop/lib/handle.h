@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@gmail.com>
+ *   Copyright 2007 by Kevin Ottens <ervin@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -17,31 +17,35 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GROUPHANDLE_P_H
-#define GROUPHANDLE_P_H
+#ifndef PLASMA_APPLETHANDLE_P_H
+#define PLASMA_APPLETHANDLE_P_H
 
 #include <QtCore/QObject>
 #include <QtGui/QGraphicsObject>
-#include <QtCore/QTimer>
+#include <QTimer>
+#include <QWeakPointer>
+#include <QPropertyAnimation>
 
+#include <Plasma/Animator>
 #include <Plasma/Svg>
 
 class QGraphicsView;
 
-namespace Plasma {
+namespace Plasma
+{
+    class Applet;
     class FrameSvg;
     class View;
 };
 
-class GroupingContainment;
 class AbstractGroup;
+class GroupingContainment;
 
-class GroupHandle : public QGraphicsObject
+class Handle : public QGraphicsObject
 {
     Q_OBJECT
-#if QT_VERSION >= 0x040600
+    Q_PROPERTY(qreal fadeAnimation READ fadeAnimation WRITE setFadeAnimation)
     Q_INTERFACES(QGraphicsItem)
-#endif
     public:
         enum FadeType {
             FadeIn,
@@ -53,15 +57,19 @@ class GroupHandle : public QGraphicsObject
             RotateButton,
             ConfigureButton,
             RemoveButton,
-            ResizeButton
+            ResizeButton,
+            MaximizeButton
         };
 
-        GroupHandle(GroupingContainment *parent, AbstractGroup *group, const QPointF &hoverPos);
-        virtual ~GroupHandle();
+        Handle(GroupingContainment *parent, Plasma::Applet *applet, const QPointF &hoverPos);
+        Handle(GroupingContainment *parent, AbstractGroup *group, const QPointF &hoverPos);
+        virtual ~Handle();
 
-        void detachGroup ();
+        void detachWidget();
 
+        Plasma::Applet *applet() const;
         AbstractGroup *group() const;
+        QGraphicsWidget *widget() const;
 
         QRectF boundingRect() const;
         QPainterPath shape() const;
@@ -77,14 +85,17 @@ class GroupHandle : public QGraphicsObject
         void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
         bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
+        bool sceneEvent(QEvent*);
 
     Q_SIGNALS:
-       void disappearDone(GroupHandle *self);
+       void disappearDone(Handle *self);
+       void widgetMoved(QGraphicsWidget *widget);
 
     private Q_SLOTS:
-        void fadeAnimation(qreal progress);
-        void groupDestroyed();
-        void groupResized();
+        void setFadeAnimation(qreal progress);
+        qreal fadeAnimation() const;
+        void widgetDestroyed();
+        void widgetResized();
         void hoverTimeout();
         void leaveTimeout();
         void emitDisappear();
@@ -92,13 +103,14 @@ class GroupHandle : public QGraphicsObject
     private:
         static const int HANDLE_MARGIN = 3;
 
+        void init();
         void calculateSize();
         ButtonType mapToButton(const QPointF &point) const;
         void forceDisappear();
         int minimumHeight();
 
         /**
-         * move our applet to another containment
+         * move our widget to another containment
          * @param containment the containment to move to
          * @param pos the (scene-relative) position to place it at
          */
@@ -110,11 +122,13 @@ class GroupHandle : public QGraphicsObject
         QRectF m_totalRect;
         ButtonType m_pressedButton;
         GroupingContainment *m_containment;
+        Plasma::Applet *m_applet;
         AbstractGroup *m_group;
+        QGraphicsWidget *m_widget;
         int m_iconSize;
         qreal m_opacity;
-        FadeType m_anim;
-        int m_animId;
+        FadeType m_animType;
+        QWeakPointer<QPropertyAnimation> m_anim;
         qreal m_angle;
         QColor m_gradientColor;
         QTimer *m_hoverTimer;
@@ -132,8 +146,8 @@ class GroupHandle : public QGraphicsObject
         QTransform m_originalTransform;
 
         // used for both resize and rotate
-        QPointF m_origGroupCenter;
-        QPointF m_origGroupSize;
+        QPointF m_origWidgetCenter;
+        QPointF m_origWidgetSize;
 
         // used for resize
         QPointF m_resizeStaticPoint;

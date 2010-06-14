@@ -23,6 +23,7 @@
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QGraphicsLinearLayout>
 
+#include <KDebug>
 #include <KIcon>
 
 #include <QtCore/QTimer>
@@ -75,7 +76,7 @@ void ItemOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         if (m_moving) {
             m_moving = false;
-            emit endMoving();
+//             emit endMoving();
         } else {
             m_moving = true;
             m_startPos = event->pos();
@@ -96,6 +97,7 @@ void ItemOverlay::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_moving) {
         QPointF p(event->pos() - m_startPos);
+//         kDebug()<<geometry()<<event->pos();
         emit movedOf(p.x(), p.y(), event->pos());
     }
 }
@@ -104,7 +106,8 @@ void ItemOverlay::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_moving) {
         QPointF p(event->pos() - m_startPos);
-        emit itemMovedOutside(p.x(), p.y());
+//         kDebug()<<geometry()<<event->pos();
+//         emit itemMovedOutside(p.x(), p.y());
     }
 }
 

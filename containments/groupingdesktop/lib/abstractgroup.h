@@ -118,7 +118,9 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         /**
          * Saves state information about this group.
          **/
-        void save(KConfigGroup &group) const;
+        virtual void save(KConfigGroup &group) const;
+
+        virtual void restore(KConfigGroup &group);
 
         /**
          * Shows a visual clue for drag and drop
@@ -175,6 +177,8 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
             Type = UserType + 2
         };
         virtual int type() const;
+
+        void raise();
 
     public slots:
         /**
@@ -277,7 +281,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         AbstractGroupPrivate *const d;
 
         friend class AbstractGroupPrivate;
-        friend class GroupHandle;
+        friend class Handle;
         friend class GroupingContainment;
         friend class GroupingContainmentPrivate;
 };

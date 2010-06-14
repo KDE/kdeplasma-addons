@@ -51,6 +51,8 @@ class AbstractGroupPrivate
         AbstractGroup *interestingGroup;
         bool isMainGroup;
 
+        static int maxZValue;
+
     private:
         KConfigGroup *m_mainConfig;
 };

@@ -129,7 +129,7 @@ GridGroup::~GridGroup()
 void GridGroup::onAppletAdded(Plasma::Applet* applet, AbstractGroup* group)
 {
     Q_UNUSED(group)
-kDebug()<<"JKJN";
+
     applet->installEventFilter(this);
 }
 
@@ -180,7 +180,6 @@ void GridGroup::showDropZone(const QPointF &pos)
 
 void GridGroup::showDropZone(const QPointF &pos, bool showAlwaysSomething)
 {
-kDebug()<<pos<<contentsRect();
     if ((pos.isNull() || !contentsRect().contains(pos)) && m_spacer->isVisible()) {
         m_spacer->hide();
         removeItem(m_spacer);
@@ -222,12 +221,20 @@ kDebug()<<pos<<contentsRect();
         }
         m_spacer->lastOrientation = Horizontal;
         insertItemAt(m_spacer, j, n, Horizontal);
+        if (m_interestingGroup) {
+            m_interestingGroup->showDropZone(QPointF());
+            m_interestingGroup = 0;
+        }
     } else if ((n = nearestBoundair(y, rowHeight)) != -1) {
         if (itemPosition(m_spacer).isValid()) {
             removeItem(m_spacer);
         }
         m_spacer->lastOrientation = Vertical;
         insertItemAt(m_spacer, n, i, Vertical);
+        if (m_interestingGroup) {
+            m_interestingGroup->showDropZone(QPointF());
+            m_interestingGroup = 0;
+        }
     } else if (showAlwaysSomething) {
         AbstractGroup *group = 0;
         foreach (AbstractGroup *subGroup, subGroups()) {
@@ -239,6 +246,12 @@ kDebug()<<pos<<contentsRect();
             group->showDropZone(mapToItem(group, pos));
             m_interestingGroup = group;
         } else {
+            kDebug()<<m_interestingGroup;
+            if (m_interestingGroup) {
+                m_interestingGroup->showDropZone(QPointF());
+                m_interestingGroup = 0;
+            }
+            m_overlay->setGeometry(m_spacer->geometry());
             insertItemAt(m_spacer, itemPos.row, itemPos.column, m_spacer->lastOrientation);
         }
     }
@@ -299,6 +312,11 @@ void GridGroup::insertItemAt(QGraphicsWidget *item, int row, int column, Orienta
         return;
     }
 
+    if (row < 0 || column < 0) {
+        kDebug()<<"Warning: row ="<<row<<", column ="<<column;
+        return;
+    }
+
     const int rows = m_layout->rowCount();
     const int columns = m_layout->columnCount();
 
@@ -353,6 +371,25 @@ void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
         removeItemAt(spacerPos, false);
         insertItemAt(child, spacerPos.row, spacerPos.column, Horizontal);
     }
+
+//     Position pos = itemPosition(m_spacer);
+//     QGraphicsWidget *item = m_overlay->item();
+//     if (pos.isValid()) {
+//         removeItemAt(pos, false);
+//         m_layout->addItem(item, pos.row, pos.column);
+//     } else if (m_interestingGroup) {
+//         Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(item);
+//         AbstractGroup *group = qobject_cast<AbstractGroup *>(item);
+//         if (applet) {
+//             removeApplet(applet, m_interestingGroup);
+//         } else {
+//             removeSubGroup(group, m_interestingGroup);
+//         }
+//     }
+    if (m_overlay) {
+        delete m_overlay;
+        m_overlay = 0;
+    }
 }
 
 int GridGroup::nearestBoundair(qreal pos, qreal size) const
@@ -392,7 +429,7 @@ void GridGroup::overlayStartsMoving()
         m_overlay->setZ(z);
 
         removeItemAt(pos, false);
-        m_layout->addItem(m_spacer, pos.row, pos.column);
+//         m_layout->addItem(m_spacer, pos.row, pos.column);
         m_spacer->show();
     }
 }
@@ -431,12 +468,11 @@ void GridGroup::overlayMoving(qreal x, qreal y, const QPointF &mousePos)
 
         AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(parentItem());
         if (group) {
-            kDebug()<<mousePos;
-            group->showDropZone(mapToParent(mousePos));
+//             group->showDropZone(mapToParent(mousePos));
         }
     }
 
-    showDropZone(mapFromItem(m_overlay, mousePos), true);
+//     showDropZone(mapFromItem(m_overlay, mousePos), true);
 }
 
 void GridGroup::overlayEndsMoving()
@@ -466,7 +502,7 @@ void GridGroup::onItemMovedOutside(qreal x, qreal y)
     if (isMainGroup()) {
         return;
     }
-
+    kDebug()<<"JHGJUHGJ";
     QGraphicsWidget *item = m_overlay->item();
     QPointF newPos(item->pos() + QPointF(x, y));
     item->moveBy(x, y);
@@ -475,10 +511,11 @@ void GridGroup::onItemMovedOutside(qreal x, qreal y)
     if (!newGroup) {
         newGroup = qgraphicsitem_cast<AbstractGroup *>(parentItem());
     }
+    m_interestingGroup = newGroup;
     if (applet) {
         removeApplet(applet, newGroup);
     } else {
-        removeSubGroup(qgraphicsitem_cast<AbstractGroup *>(item), newGroup);
+        removeSubGroup(static_cast<AbstractGroup *>(item), newGroup);
     }
 }
 

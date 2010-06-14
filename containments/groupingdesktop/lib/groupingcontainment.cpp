@@ -30,7 +30,7 @@
 
 #include "abstractgroup.h"
 #include "abstractgroup_p.h"
-#include "grouphandle.h"
+#include "handle.h"
 #include "gridgroup.h"
 #include "floatinggroup.h"
 
@@ -98,11 +98,11 @@ class GroupingContainmentPrivate
             return group;
         }
 
-        void handleDisappeared(GroupHandle *handle)
+        void handleDisappeared(Handle *handle)
         {
-            if (handles.contains(handle->group())) {
-                handles.remove(handle->group());
-                handle->detachGroup();
+            if (handles.contains(handle->widget())) {
+                handles.remove(handle->widget());
+                handle->detachWidget();
                 if (q->scene()) {
                     q->scene()->removeItem(handle);
                 }
@@ -118,7 +118,7 @@ class GroupingContainmentPrivate
             group->removeEventFilter(q);
 
             if (handles.contains(group)) {
-                GroupHandle *handle = handles.value(group);
+                Handle *handle = handles.value(group);
                 handles.remove(group);
                 delete handle;
             }
@@ -126,24 +126,29 @@ class GroupingContainmentPrivate
             emit q->groupRemoved(group);
         }
 
-        AbstractGroup *groupAt(const QPointF &pos)
+        AbstractGroup *groupAt(const QPointF &pos, QGraphicsItem *uppermostItem = 0)
         {
             if (pos.isNull()) {
                 return 0;
             }
 
-            QGraphicsItem *item = q->scene()->itemAt(q->mapToScene(pos));
+            QList<QGraphicsItem *> items = q->scene()->items(q->mapToScene(pos),
+                                                             Qt::IntersectsItemShape,
+                                                             Qt::DescendingOrder);
 
-            while (item != q) {
-                if (!item) {
-                    return 0;
-                }
-                AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(item);
+            bool goOn;
+            if (uppermostItem) {
+                do {
+                    goOn = items.first() != uppermostItem;
+                    items.removeFirst();
+                } while (goOn);
+            }
+
+            for (int i = 0; i < items.size(); ++i) {
+                AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(items.at(i));
                 if (group) {
                     return group;
                 }
-
-                item = item->parentItem();
             }
 
             return 0;
@@ -151,8 +156,13 @@ class GroupingContainmentPrivate
 
         void manageApplet(Plasma::Applet *applet, const QPointF &pos)
         {
+            const int APPLET_Z_MINIMUM = 10000;
+            if (applet->zValue() < APPLET_Z_MINIMUM) {
+                applet->setZValue(applet->zValue() + APPLET_Z_MINIMUM); //FIXME: i don't like this at all
+            }                                                           // but the groupss need to be
+                                                                        //behind the applets.
             AbstractGroup *group = groupAt(pos);
-            kDebug()<<group;
+
             if (group) {
                 group->addApplet(applet);
 
@@ -160,6 +170,8 @@ class GroupingContainmentPrivate
             } else {
                 applet->installEventFilter(q);
             }
+
+            q->connect(applet, SIGNAL(appletTransformedByUser()), q, SLOT(onAppletMoved()));
         }
 
         void manageGroup(AbstractGroup *subGroup, const QPointF &pos)
@@ -213,10 +225,35 @@ class GroupingContainmentPrivate
             }
         }
 
+        void onWidgetMoved(QGraphicsWidget *widget)
+        {
+            if (interestingGroup) {
+
+//                 widget->removeEventFilter(q);
+
+                Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
+                AbstractGroup *group = static_cast<AbstractGroup *>(widget);
+                if (applet) {
+                    interestingGroup->addApplet(applet);
+                } else if (!group->isAncestorOf(interestingGroup)) {
+                    interestingGroup->addSubGroup(group);
+                }
+
+                interestingGroup->layoutChild(widget, q->mapToItem(interestingGroup, widget->geometry().center()));
+
+                Handle *h = handles.value(widget);
+                if (h) {
+                    h->deleteLater();
+                    handles.remove(widget);
+                }
+                interestingGroup = 0;
+            }
+        }
+
         GroupingContainment *q;
         QList<AbstractGroup *> groups;
         AbstractGroup *interestingGroup;
-        QMap<AbstractGroup *, GroupHandle *> handles;
+        QMap<QGraphicsWidget *, Handle *> handles;
         QAction *newGroupAction;
         KMenu *newGroupMenu;
         QAction *newGridGroup;
@@ -282,6 +319,7 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     }
 
     emit groupAdded(group, pos);
+    emit configNeedsSaving();
 }
 
 QList<AbstractGroup *> GroupingContainment::groups() const
@@ -332,18 +370,20 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
                     case QEvent::GraphicsSceneHoverEnter: {
                         QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
                         if (d->handles.contains(group)) {
-                            GroupHandle *handle = d->handles.value(group);
+                            Handle *handle = d->handles.value(group);
                             if (handle) {
                                 handle->setHoverPos(he->pos());
                             }
                         } else {
     //                         kDebug() << "generated group handle";
-                            GroupHandle *handle = new GroupHandle(this, group, he->pos());
+                            Handle *handle = new Handle(this, group, he->pos());
                             d->handles[group] = handle;
-                            connect(handle, SIGNAL(disappearDone(GroupHandle *)),
-                                    this, SLOT(handleDisappeared(GroupHandle *)));
+                            connect(handle, SIGNAL(disappearDone(Handle*)),
+                                    this, SLOT(handleDisappeared(Handle*)));
                             connect(group, SIGNAL(geometryChanged()),
-                                    handle, SLOT(groupResized()));
+                                    handle, SLOT(widgetResized()));
+                            connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
+                                    this, SLOT(onWidgetMoved(QGraphicsWidget*)));
                         }
                     }
                     break;
@@ -351,7 +391,7 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
                     case QEvent::GraphicsSceneHoverMove: {
                         QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
                         if (d->handles.contains(group)) {
-                            GroupHandle *handle = d->handles.value(group);
+                            Handle *handle = d->handles.value(group);
                             if (handle) {
                                 handle->setHoverPos(he->pos());
                             }
@@ -369,23 +409,45 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
     }
 
     if (applet) {
-        switch (event->type()) {
-        case QEvent::GraphicsSceneHoverMove:
-        case QEvent::GraphicsSceneHoverEnter:
-            foreach (AbstractGroup *group, d->groups) {
-                if (group->applets().contains(applet)) {
-                    if (group->groupType() == AbstractGroup::ConstrainedGroup) {
-                        return Plasma::Applet::sceneEventFilter(watched, event);
-                    } else {
-                        return Plasma::Containment::sceneEventFilter(watched, event);
+        if ((immutability() == Plasma::Mutable) && (applet->immutability() == Plasma::Mutable)) {
+            AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(applet->parentItem());
+
+            if (!parentGroup || (parentGroup && parentGroup->groupType() != AbstractGroup::ConstrainedGroup)) {
+                switch (event->type()) {
+                case QEvent::GraphicsSceneHoverMove: {
+                        QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
+                        if (d->handles.contains(applet)) {
+                            Handle *handle = d->handles.value(applet);
+                            handle->setHoverPos(he->pos());
+                        } else {
+                            Handle *handle = new Handle(this, applet, he->pos());
+                            d->handles[applet] = handle;
+                            connect(handle, SIGNAL(disappearDone(Handle*)),
+                                    this, SLOT(handleDisappeared(Handle*)));
+                            connect(applet, SIGNAL(geometryChanged()),
+                                    handle, SLOT(widgetResized()));
+                            connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
+                                    this, SLOT(onWidgetMoved(QGraphicsWidget*)));
+                        }
                     }
+                    break;
+
+                case QEvent::GraphicsSceneHoverEnter: {
+                        QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
+                        if (d->handles.contains(applet)) {
+                            Handle *handle = d->handles.value(applet);
+                            handle->setHoverPos(he->pos());
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
                 }
             }
-            break;
-
-        default:
-            break;
         }
+
+        return Plasma::Applet::sceneEventFilter(watched, event);
     }
 
     return Plasma::Containment::sceneEventFilter(watched, event);
@@ -405,38 +467,38 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
 
     if (widget) {
         switch (event->type()) {
-            case QEvent::GraphicsSceneMove:
-                foreach (AbstractGroup *parentGroup, d->groups) {
-                    if (!parentGroup->children().contains(widget) && (parentGroup != group) &&
-                        (parentGroup->parentItem() == this)) {
-                        QRectF rect = parentGroup->contentsRect();
-                        rect.translate(parentGroup->pos());
-                        if (rect.contains(widget->geometry())) {
-                            widget->removeEventFilter(this);
-                            d->interestingGroup = 0;
-                            if (applet) {
-                                kDebug()<<parentGroup->id();
-                                parentGroup->addApplet(applet);
-                            } else if (!group->isAncestorOf(parentGroup)) {
-                                parentGroup->addSubGroup(group);
-                            }
-                            break;
-                        } else {
-                            QRectF intersected(rect.intersected(widget->geometry()));
-                            if (intersected.isValid()) {
-                                parentGroup->showDropZone(mapToItem(parentGroup, intersected.center()));
-                                d->interestingGroup = parentGroup;
-                                break;
-                            } else {
-                                if (parentGroup == d->interestingGroup) {
-                                    parentGroup->showDropZone(QPointF());
-                                    d->interestingGroup = 0;
-                                }
-                            }
-                        }
+            case QEvent::GraphicsSceneMousePress:
+                if (group) {
+                    group->raise();
+                }
 
+                break;
+
+            case QEvent::GraphicsSceneMove: {
+                    AbstractGroup *parentGroup = d->groupAt(mapFromItem(widget, widget->contentsRect().center()), widget);
+
+                    if (d->interestingGroup && d->interestingGroup != parentGroup) {
+                        d->interestingGroup->showDropZone(QPointF());
+                        d->interestingGroup = 0;
+                    }
+                    if (parentGroup && parentGroup != group) {
+                        kDebug()<<widget->geometry().center();
+                        QPointF c = widget->contentsRect().center();
+                        c += mapFromScene(widget->scenePos());
+                        QPointF pos = mapToItem(parentGroup, c);
+                        kDebug()<<pos<<widget<<parentGroup;
+                        if (pos.x() > 0 && pos.y() > 0) {
+                            parentGroup->showDropZone(mapToItem(parentGroup, c));
+                            d->interestingGroup = parentGroup;
+                        }
                     }
                 }
+
+                break;
+
+            case QEvent::GraphicsSceneMouseRelease:
+                d->onWidgetMoved(widget);
+
                 break;
 
             default:
@@ -468,12 +530,15 @@ void GroupingContainment::saveContents(KConfigGroup &group) const
     KConfigGroup groupsConfig(&group, "Groups");
     foreach (AbstractGroup *group, d->groups) {
         KConfigGroup groupConfig(&groupsConfig, QString::number(group->id()));
+        groupConfig.writeEntry("plugin", group->pluginName());
+        QRectF rect = group->contentsRect();
+        rect.translate(mapToItem(this, group->pos()));
+        groupConfig.writeEntry("geometry", rect);
         group->save(groupConfig);
     }
 
     foreach (AbstractGroup *group, d->groups) {
         foreach (Plasma::Applet *applet, group->applets()) {
-            kDebug()<<applet->id();
             KConfigGroup appletConfig = applet->config().parent();
             KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
             groupConfig.writeEntry("Group", group->id());
@@ -483,7 +548,6 @@ void GroupingContainment::saveContents(KConfigGroup &group) const
         }
         foreach (AbstractGroup *subGroup, group->subGroups()) {
             KConfigGroup subGroupConfig = subGroup->config().parent();
-            kDebug()<<subGroupConfig.name();
             KConfigGroup groupInfoConfig(&subGroupConfig, QString("GroupInformation"));
             groupInfoConfig.writeEntry("Group", group->id());
             group->saveChildGroupInfo(subGroup, groupInfoConfig);
@@ -514,6 +578,7 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
         AbstractGroup *group = d->createGroup(plugin, geometry.topLeft(), id);
         if (group) {
             group->resize(geometry.size());
+            group->restore(groupConfig);
         }
     }
 

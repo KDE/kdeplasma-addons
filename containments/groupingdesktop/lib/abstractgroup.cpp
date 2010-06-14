@@ -35,6 +35,8 @@
 
 #include "groupingcontainment.h"
 
+int AbstractGroupPrivate::maxZValue = 0;
+
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
         destroying(false),
@@ -156,7 +158,7 @@ void AbstractGroupPrivate::addChild(QGraphicsWidget *child, bool layoutChild)
         //HACK so i workarounded the above-mentioned problem with this QTimer::singleShot
         QTimer::singleShot(0, q, SLOT(callLayoutChild()));
     } else {
-        child->installEventFilter(q);
+//         child->installEventFilter(q);
     }
 
     emit q->configNeedsSaving();
@@ -167,7 +169,7 @@ void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
     currChild = child;
     currChildPos = (child->scenePos());
 
-    child->removeEventFilter(q);
+//     child->removeEventFilter(q);
     child->setParentItem(q->parentItem());
 
     //HACK like the one in addChild
@@ -218,6 +220,11 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
 
     kDebug()<<"adding applet"<<applet->id()<<"in group"<<id()<<"of type"<<pluginName();
 
+    AbstractGroup *parent = qgraphicsitem_cast<AbstractGroup *>(applet->parentItem());
+    if (parent) {
+        parent->removeApplet(applet);
+    }
+
     d->applets << applet;
     d->addChild(applet, layoutApplet);
 
@@ -234,6 +241,11 @@ void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
     }
 
     kDebug()<<"adding sub group"<<group->id()<<"in group"<<id()<<"of type"<<pluginName();
+
+    AbstractGroup *parent = qgraphicsitem_cast<AbstractGroup *>(group->parentItem());
+    if (parent) {
+        parent->removeSubGroup(group);
+    }
 
     d->subGroups << group;
     d->addChild(group, layoutGroup);
@@ -277,7 +289,6 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet, AbstractGroup *newGroup
     groupConfig.deleteGroup();
     emit configNeedsSaving();
 
-            kDebug()<<newGroup;
     if (newGroup) {
         newGroup->addApplet(applet);
     } else {
@@ -372,8 +383,20 @@ void AbstractGroup::save(KConfigGroup &group) const
         group = *d->mainConfigGroup();
     }
 
-    group.writeEntry("plugin", pluginName());
-    group.writeEntry("geometry", geometry());
+    group.writeEntry("zvalue", zValue());
+}
+
+void AbstractGroup::restore(KConfigGroup &group)
+{
+    qreal z = group.readEntry("zvalue", 0);
+
+    if (z >= AbstractGroupPrivate::maxZValue) {
+         AbstractGroupPrivate::maxZValue = z;
+    }
+
+    if (z > 0) {
+        setZValue(z);
+    }
 }
 
 void AbstractGroup::showDropZone(const QPointF& pos)
@@ -381,6 +404,11 @@ void AbstractGroup::showDropZone(const QPointF& pos)
     Q_UNUSED(pos)
 
     //base implementation does nothing
+}
+
+void AbstractGroup::raise()
+{
+    setZValue(++AbstractGroupPrivate::maxZValue);
 }
 
 void AbstractGroup::setGroupType(AbstractGroup::GroupType type)
@@ -415,53 +443,56 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
     } else if (group) {
         widget = group;
     }
-
+    kDebug()<<d->subGroups.count();
     if (widget) {
-        switch (event->type()) {
-            case QEvent::GraphicsSceneMove:
-                foreach (AbstractGroup *parentGroup, d->subGroups) {
-                    if (!parentGroup->children().contains(widget) && (parentGroup != group)) {
-                        QRectF rect = parentGroup->contentsRect();
-                        rect.translate(parentGroup->pos());
-                        if (rect.contains(widget->geometry())) {
-                            if (applet) {
-                                d->applets.removeAll(applet);
-                                parentGroup->addApplet(applet);
-                            } else if (!group->isAncestorOf(parentGroup)) {
-                                d->subGroups.removeAll(group);
-                                parentGroup->addSubGroup(group);
-                            }
-                            widget->removeEventFilter(this);
-                            d->interestingGroup = 0;
-                            break;
-                        } else {
-                            QRectF intersected(rect.intersected(widget->geometry()));
-                            if (intersected.isValid()) {
-                                parentGroup->showDropZone(mapToItem(parentGroup, intersected.center()));
-                                d->interestingGroup = parentGroup;
-                                break;
-                            } else {
-                                if (parentGroup == d->interestingGroup) {
-                                    parentGroup->showDropZone(QPointF());
-                                    d->interestingGroup = 0;
-                                }
-                            }
-                        }
-                    }
-                }
-                if (children().contains(widget) && !contentsRect().contains(widget->geometry()) && !isMainGroup()) {
-                    AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(parentItem());
-                    if (applet) {
-                        removeApplet(applet, parentGroup);
-                    } else {
-                        removeSubGroup(group, parentGroup);
-                    }
-                }
-                break;
+//         switch (event->type()) {
+//             case QEvent::GraphicsSceneMove:
+//                 foreach (AbstractGroup *parentGroup, d->subGroups) {
+//                     if (!parentGroup->children().contains(widget) && (parentGroup != group)) {
+//                         QRectF rect = parentGroup->contentsRect();
+//                         rect.translate(parentGroup->pos());
+//
+//                         QRectF intersected(rect.intersected(widget->geometry()));
+//                         kDebug()<<this<<intersected;
+//                         if (intersected.isValid()) {
+//                             parentGroup->showDropZone(mapToItem(parentGroup, intersected.center()));
+//                             d->interestingGroup = parentGroup;
+//                             break;
+//                         } else {
+//                             if (parentGroup == d->interestingGroup) {
+//                                 parentGroup->showDropZone(QPointF());
+//                                 d->interestingGroup = 0;
+//                             }
+//                         }
+//                     }
+//                 }
+//                 if (children().contains(widget) && !contentsRect().contains(widget->geometry()) && !isMainGroup()) {
+//                     AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(parentItem());
+//                     if (applet) {
+//                         removeApplet(applet, parentGroup);
+//                     } else {
+//                         removeSubGroup(group, parentGroup);
+//                     }
+//                 }
+//                 break;
 
-            default:
-                break;
-        }
+//             case QEvent::GraphicsSceneMouseRelease:
+//                 if (d->interestingGroup) {
+//                     if (applet) {
+//                         d->applets.removeAll(applet);
+//                         d->interestingGroup->addApplet(applet);
+//                     } else if (!group->isAncestorOf(d->interestingGroup)) {
+//                         d->subGroups.removeAll(group);
+//                         d->interestingGroup->addSubGroup(group);
+//                     }
+//                     widget->removeEventFilter(this);
+//                     d->interestingGroup = 0;
+//                 }
+//                 break;
+//
+//             default:
+//                 break;
+//         }
     }
 
     return QGraphicsWidget::eventFilter(obj, event);
@@ -469,7 +500,7 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
 
 void AbstractGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-    showDropZone(event->pos());
+//     showDropZone(event->pos());
 }
 
 void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
@@ -508,7 +539,7 @@ void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     if (isMainGroup()) {
         return;
     }
-    
+
 //     if (d->background && (d->containment->formFactor() != Plasma::Vertical) &&
 //                          (d->containment->formFactor() != Plasma::Horizontal)) {
         d->background->paintFrame(painter);
