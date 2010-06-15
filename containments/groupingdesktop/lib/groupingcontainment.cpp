@@ -28,257 +28,245 @@
 #include <KMenu>
 #include <KIcon>
 
+#include "groupingcontainment_p.h"
 #include "abstractgroup.h"
 #include "abstractgroup_p.h"
 #include "handle.h"
 #include "gridgroup.h"
 #include "floatinggroup.h"
 
-class GroupingContainmentPrivate
+//----------------------GroupingContainmentPrivate-----------------------
+
+GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *containment)
+                           : q(containment),
+                             interestingGroup(0),
+                             mainGroup(0),
+                             mainGroupId(0),
+                             layout(0),
+                             movingWidget(0)
 {
-    public:
-        GroupingContainmentPrivate(GroupingContainment *containment)
-            : q(containment),
-              interestingGroup(0),
-              mainGroup(0),
-              mainGroupId(0),
-              layout(0)
-        {
-            newGroupAction = new QAction(i18n("Add a new group"), q);
-            newGroupMenu = new KMenu(i18n("Add a new group"), 0);
-            newGroupAction->setMenu(newGroupMenu);
-            newGridGroup = new QAction(i18n("Add a new grid group"), q);
-            newGridGroup->setData("grid");
-            newFloatingGroup = new QAction(i18n("Add a new floating group"), q);
-            newFloatingGroup->setData("floating");
-            newGroupMenu->addAction(newGridGroup);
-            newGroupMenu->addAction(newFloatingGroup);
+    newGroupAction = new QAction(i18n("Add a new group"), q);
+    newGroupMenu = new KMenu(i18n("Add a new group"), 0);
+    newGroupAction->setMenu(newGroupMenu);
+    newGridGroup = new QAction(i18n("Add a new grid group"), q);
+    newGridGroup->setData("grid");
+    newFloatingGroup = new QAction(i18n("Add a new floating group"), q);
+    newFloatingGroup->setData("floating");
+    newGroupMenu->addAction(newGridGroup);
+    newGroupMenu->addAction(newFloatingGroup);
 
-            deleteGroupAction = new QAction(i18n("Remove this group"), q);
-            deleteGroupAction->setIcon(KIcon("edit-delete"));
-            deleteGroupAction->setVisible(false);
+    deleteGroupAction = new QAction(i18n("Remove this group"), q);
+    deleteGroupAction->setIcon(KIcon("edit-delete"));
+    deleteGroupAction->setVisible(false);
 
-            separator = new QAction(q);
-            separator->setSeparator(true);
+    separator = new QAction(q);
+    separator->setSeparator(true);
 
-            q->connect(newGroupMenu, SIGNAL(triggered(QAction *)), q, SLOT(newGroupClicked(QAction *)));
-            q->connect(deleteGroupAction, SIGNAL(triggered()), q, SLOT(deleteGroup()));
+    q->connect(newGroupMenu, SIGNAL(triggered(QAction *)), q, SLOT(newGroupClicked(QAction *)));
+    q->connect(deleteGroupAction, SIGNAL(triggered()), q, SLOT(deleteGroup()));
+}
+
+GroupingContainmentPrivate::~GroupingContainmentPrivate()
+{}
+
+AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, const QPointF &pos, unsigned int id)
+{
+    AbstractGroup *group = 0;
+    if (plugin == "grid") {
+        group = new GridGroup(q);
+    } else if (plugin == "floating") {
+        group = new FloatingGroup(q);
+    }
+
+    if (!group) {
+        return 0;
+    }
+
+    if (groups.contains(group)) {
+        delete group;
+        return 0;
+    }
+
+    if (id == 0) {
+        id = groups.count() + 1;
+    }
+    group->d->id = id;
+
+    groups << group;
+
+    q->addGroup(group, pos);
+
+    return group;
+}
+
+void GroupingContainmentPrivate::handleDisappeared(Handle *handle)
+{
+    if (handles.contains(handle->widget())) {
+        handles.remove(handle->widget());
+        handle->detachWidget();
+        if (q->scene()) {
+            q->scene()->removeItem(handle);
         }
+        handle->deleteLater();
+    }
+}
 
-        ~GroupingContainmentPrivate()
-        {}
+void GroupingContainmentPrivate::onGroupRemoved(AbstractGroup *group)
+{
+    kDebug()<<"Removed group"<<group->id();
 
-        AbstractGroup *createGroup(const QString &plugin, const QPointF &pos, unsigned int id)
-        {
-            AbstractGroup *group = 0;
-            if (plugin == "grid") {
-                group = new GridGroup(q);
-            } else if (plugin == "floating") {
-                group = new FloatingGroup(q);
-            }
+    groups.removeAll(group);
+    group->removeEventFilter(q);
 
-            if (!group) {
-                return 0;
-            }
+    if (handles.contains(group)) {
+        Handle *handle = handles.value(group);
+        handles.remove(group);
+        delete handle;
+    }
 
-            if (groups.contains(group)) {
-                delete group;
-                return 0;
-            }
+    emit q->groupRemoved(group);
+}
 
-            if (id == 0) {
-                id = groups.count() + 1;
-            }
-            group->d->id = id;
+void GroupingContainmentPrivate::onAppletRemoved(Plasma::Applet *applet)
+{
+    kDebug()<<"Removed applet"<<applet->id();
 
-            groups << group;
+    applet->removeEventFilter(q);
 
-            q->addGroup(group, pos);
+    if (handles.contains(applet)) {
+        Handle *handle = handles.value(applet);
+        handles.remove(applet);
+        delete handle;
+    }
+}
 
+AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphicsWidget *uppermostItem)
+{
+    if (pos.isNull()) {
+        return 0;
+    }
+
+    QList<QGraphicsItem *> items = q->scene()->items(q->mapToScene(pos),
+                                                        Qt::IntersectsItemShape,
+                                                        Qt::DescendingOrder);
+
+    bool goOn;
+    if (uppermostItem) {
+        do {
+            goOn = items.first() != uppermostItem;
+            items.removeFirst();
+        } while (goOn);
+    }
+// kDebug()<<items;
+    for (int i = 0; i < items.size(); ++i) {
+        AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(items.at(i));
+        if (group) {
             return group;
         }
+    }
 
-        void handleDisappeared(Handle *handle)
-        {
-            if (handles.contains(handle->widget())) {
-                handles.remove(handle->widget());
-                handle->detachWidget();
-                if (q->scene()) {
-                    q->scene()->removeItem(handle);
-                }
-                handle->deleteLater();
-            }
+    return 0;
+}
+
+void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPointF &pos)
+{
+    const int APPLET_Z_MINIMUM = 10000;
+    if (applet->zValue() < APPLET_Z_MINIMUM) {
+        applet->setZValue(applet->zValue() + APPLET_Z_MINIMUM); //FIXME: i don't like this at all
+    }                                                           // but the groupss need to be
+                                                                //behind the applets.
+    AbstractGroup *group = groupAt(pos);
+
+    if (group) {
+        group->addApplet(applet);
+
+        applet->installSceneEventFilter(q);
+    } else {
+        applet->installEventFilter(q);
+    }
+
+    q->connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)), q, SLOT(onAppletRemoved(Plasma::Applet*)));
+}
+
+void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPointF &pos)
+{
+    //FIXME i don't like this setPos's at all
+    subGroup->setPos(q->geometry().bottomRight());
+    AbstractGroup *group = groupAt(pos);
+    subGroup->setPos(pos);
+
+    if (group && (group != subGroup)) {
+        group->addSubGroup(subGroup);
+    }
+
+    subGroup->installEventFilter(q);
+}
+
+void GroupingContainmentPrivate::newGroupClicked(QAction *action)
+{
+    kDebug()<<action->data();
+    createGroup(action->data().toString(), lastClick, 0);
+}
+
+void GroupingContainmentPrivate::deleteGroup()
+{
+    int id = deleteGroupAction->data().toInt();
+
+    foreach (AbstractGroup *group, groups) {
+        if ((int)group->id() == id) {
+            group->destroy();
+
+            return;
         }
+    }
+}
 
-        void onGroupRemoved(AbstractGroup *group)
-        {
-            kDebug()<<"Removed group"<<group->id();
+void GroupingContainmentPrivate::onAppletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group)
+{
+    Q_UNUSED(group)
 
-            groups.removeAll(group);
-            group->removeEventFilter(q);
+    if (applet->parentItem() == q) {
+        applet->installEventFilter(q);
+    }
+}
 
-            if (handles.contains(group)) {
-                Handle *handle = handles.value(group);
-                handles.remove(group);
-                delete handle;
-            }
+void GroupingContainmentPrivate::onSubGroupRemovedFromGroup(AbstractGroup *subGroup, AbstractGroup *group)
+{
+    Q_UNUSED(group)
 
-            emit q->groupRemoved(group);
-        }
+    if (subGroup->parentItem() == q) {
+        subGroup->installEventFilter(q);
+    }
+}
 
-        void onAppletRemoved(Plasma::Applet *applet)
-        {
-            kDebug()<<"Removed applet"<<applet->id();
-
-            applet->removeEventFilter(q);
-
-            if (handles.contains(applet)) {
-                Handle *handle = handles.value(applet);
-                handles.remove(applet);
-                delete handle;
-            }
-        }
-
-        AbstractGroup *groupAt(const QPointF &pos, QGraphicsItem *uppermostItem = 0)
-        {
-            if (pos.isNull()) {
-                return 0;
-            }
-
-            QList<QGraphicsItem *> items = q->scene()->items(q->mapToScene(pos),
-                                                             Qt::IntersectsItemShape,
-                                                             Qt::DescendingOrder);
-
-            bool goOn;
-            if (uppermostItem) {
-                do {
-                    goOn = items.first() != uppermostItem;
-                    items.removeFirst();
-                } while (goOn);
-            }
-// kDebug()<<items;
-            for (int i = 0; i < items.size(); ++i) {
-                AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(items.at(i));
-                if (group) {
-                    return group;
-                }
-            }
-
-            return 0;
-        }
-
-        void manageApplet(Plasma::Applet *applet, const QPointF &pos)
-        {
-            const int APPLET_Z_MINIMUM = 10000;
-            if (applet->zValue() < APPLET_Z_MINIMUM) {
-                applet->setZValue(applet->zValue() + APPLET_Z_MINIMUM); //FIXME: i don't like this at all
-            }                                                           // but the groupss need to be
-                                                                        //behind the applets.
-            AbstractGroup *group = groupAt(pos);
-
-            if (group) {
-                group->addApplet(applet);
-
-                applet->installSceneEventFilter(q);
-            } else {
-                applet->installEventFilter(q);
-            }
-
-            q->connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)), q, SLOT(onAppletRemoved(Plasma::Applet*)));
-        }
-
-        void manageGroup(AbstractGroup *subGroup, const QPointF &pos)
-        {
-            //FIXME i don't like this setPos's at all
-            subGroup->setPos(q->geometry().bottomRight());
-            AbstractGroup *group = groupAt(pos);
-            subGroup->setPos(pos);
-
-            if (group && (group != subGroup)) {
-                group->addSubGroup(subGroup);
-            }
-
-            subGroup->installEventFilter(q);
-        }
-
-        void newGroupClicked(QAction *action)
-        {
-            kDebug()<<action->data();
-            createGroup(action->data().toString(), lastClick, 0);
-        }
-
-        void deleteGroup()
-        {
-            int id = deleteGroupAction->data().toInt();
-
-            foreach (AbstractGroup *group, groups) {
-                if ((int)group->id() == id) {
-                    group->destroy();
-
-                    return;
-                }
-            }
-        }
-
-        void onAppletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group)
-        {
-            Q_UNUSED(group)
-
-            if (applet->parentItem() == q) {
-                applet->installEventFilter(q);
-            }
-        }
-
-        void onSubGroupRemovedFromGroup(AbstractGroup *subGroup, AbstractGroup *group)
-        {
-            Q_UNUSED(group)
-
-            if (subGroup->parentItem() == q) {
-                subGroup->installEventFilter(q);
-            }
-        }
-
-        void onWidgetMoved(QGraphicsWidget *widget)
-        {
-            if (interestingGroup) {
+void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
+{
+    if (interestingGroup) {
 
 //                 widget->removeEventFilter(q);
 
-                Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
-                AbstractGroup *group = static_cast<AbstractGroup *>(widget);
-                if (applet) {
-                    interestingGroup->addApplet(applet);
-                } else if (!group->isAncestorOf(interestingGroup)) {
-                    interestingGroup->addSubGroup(group);
-                }
-
-                interestingGroup->layoutChild(widget, q->mapToItem(interestingGroup, widget->geometry().center()));
-
-                Handle *h = handles.value(widget);
-                if (h) {
-                    h->deleteLater();
-                    handles.remove(widget);
-                }
-                interestingGroup = 0;
-            }
+        Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
+        AbstractGroup *group = static_cast<AbstractGroup *>(widget);
+        if (applet) {
+            interestingGroup->addApplet(applet);
+        } else if (!group->isAncestorOf(interestingGroup)) {
+            interestingGroup->addSubGroup(group);
         }
 
-        GroupingContainment *q;
-        QList<AbstractGroup *> groups;
-        AbstractGroup *interestingGroup;
-        QMap<QGraphicsWidget *, Handle *> handles;
-        QAction *newGroupAction;
-        KMenu *newGroupMenu;
-        QAction *newGridGroup;
-        QAction *newFloatingGroup;
-        QAction *separator;
-        QAction *deleteGroupAction;
-        QPointF lastClick;
-        AbstractGroup *mainGroup;
-        unsigned int mainGroupId;
-        QGraphicsLinearLayout *layout;
-        QString mainGroupPlugin;
-};
+        interestingGroup->layoutChild(widget, q->mapToItem(interestingGroup, widget->geometry().center()));
+
+        Handle *h = handles.value(widget);
+        if (h) {
+            h->deleteLater();
+            handles.remove(widget);
+        }
+        interestingGroup = 0;
+    }
+
+    movingWidget = 0;
+}
+
+//------------------------GroupingContainment------------------------------
 
 GroupingContainment::GroupingContainment(QObject* parent, const QVariantList& args)
                : Containment(parent, args),
@@ -485,20 +473,23 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
     } else if (group) {
         widget = group;
     }
-// kDebug()<<widget;
+
     if (widget) {
         switch (event->type()) {
-            case QEvent::GraphicsSceneMousePress:
+            case QEvent::GraphicsSceneMousePress: {
                 if (group && !group->isMainGroup()) {
                     group->raise();
                 }
+                d->movingWidget = widget;
+            }
 
                 break;
 
             case QEvent::GraphicsSceneMove: {
+                if (widget == d->movingWidget) {
                     AbstractGroup *parentGroup = d->groupAt(mapFromItem(widget, widget->contentsRect().center()), widget);
 
-                    if (d->interestingGroup /*&& d->interestingGroup != parentGroup*/) {
+                    if (d->interestingGroup) {
                         d->interestingGroup->showDropZone(QPointF());
                         d->interestingGroup = 0;
                     }
@@ -506,13 +497,13 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                         QPointF c = widget->contentsRect().center();
                         c += mapFromScene(widget->scenePos());
                         QPointF pos = mapToItem(parentGroup, c);
-                        kDebug()<<widget->contentsRect().center()<<widget->scenePos()<<pos;
                         if (pos.x() > 0 && pos.y() > 0) {
                             parentGroup->showDropZone(pos);
                             d->interestingGroup = parentGroup;
                         }
                     }
                 }
+            }
 
                 break;
 
@@ -682,6 +673,11 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
     event->ignore();
 
     Plasma::Containment::contextMenuEvent(event);
+}
+
+void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
+{
+    d->movingWidget = widget;
 }
 
 #include "groupingcontainment.moc"

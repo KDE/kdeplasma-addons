@@ -481,6 +481,10 @@ void Handle::mousePressEvent(QGraphicsSceneMouseEvent *event)
             setZValue(m_zValue);
         }
 
+        if (m_pressedButton == MoveButton) {
+            m_containment->setMovingWidget(m_widget);
+        }
+
         if (m_pressedButton == ResizeButton || m_pressedButton == RotateButton) {
             m_originalGeom = mapToScene(QRectF(QPoint(0,0), m_widget->size())).boundingRect();
             m_origWidgetCenter = m_originalGeom.center();

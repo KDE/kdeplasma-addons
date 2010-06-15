@@ -180,9 +180,11 @@ void GridGroup::showDropZone(const QPointF &pos)
 
 void GridGroup::showDropZone(const QPointF &pos, bool showAlwaysSomething)
 {
-    if ((pos.isNull() || !contentsRect().contains(pos)) && m_spacer->isVisible()) {
-        m_spacer->hide();
-        removeItem(m_spacer);
+    if (pos.isNull() || !contentsRect().contains(pos)) {
+        if (m_spacer->isVisible()) {
+            m_spacer->hide();
+            removeItem(m_spacer);
+        }
 
         return;
     }
@@ -199,7 +201,7 @@ void GridGroup::showDropZone(const QPointF &pos, bool showAlwaysSomething)
 
     const int rows = m_layout->rowCount();
     const int columns = m_layout->columnCount();
-kDebug()<<rows<<columns;
+
     if (columns == 0) {
         insertItemAt(m_spacer, 0, 0, Horizontal);
         return;
@@ -213,14 +215,13 @@ kDebug()<<rows<<columns;
 
     const int i = x / columnWidth;
     const int j = y / rowHeight;
-kDebug()<<pos;
+
     int n;
     if ((n = nearestBoundair(x, columnWidth)) != -1) {
         if (itemPosition(m_spacer).isValid()) {
             removeItem(m_spacer);
         }
         m_spacer->lastOrientation = Horizontal;
-        kDebug()<<pos<<j<<n<<"h";
         insertItemAt(m_spacer, j, n, Horizontal);
 //         if (m_interestingGroup) {
 //             m_interestingGroup->showDropZone(QPointF());
@@ -231,7 +232,6 @@ kDebug()<<pos;
             removeItem(m_spacer);
         }
         m_spacer->lastOrientation = Vertical;
-        kDebug()<<pos<<j<<n<<"v";
         insertItemAt(m_spacer, n, i, Vertical);
 //         if (m_interestingGroup) {
 //             m_interestingGroup->showDropZone(QPointF());

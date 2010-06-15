@@ -40,6 +40,12 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
         void addGroup(AbstractGroup *group, const QPointF &pos);
         QList<AbstractGroup *> groups() const;
 
+        /**
+        * Call this function when an applet or a group is being moved by the user.
+        * @param widget the widget to be monitored
+        **/
+        void setMovingWidget(QGraphicsWidget *widget);
+
     protected:
         virtual void constraintsEvent(Plasma::Constraints constraints);
         virtual bool eventFilter(QObject *obj, QEvent *event);

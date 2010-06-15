@@ -499,11 +499,7 @@ int AbstractGroup::type() const
 
 QVariant AbstractGroup::itemChange(GraphicsItemChange change, const QVariant &value)
 {
-    if (!isMainGroup()) {
-        return value;
-    }
-
-    if (change == ItemPositionChange) {
+    if (change == ItemPositionChange && isMainGroup()) {
         return pos();
     }
 
