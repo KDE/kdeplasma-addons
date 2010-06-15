@@ -481,6 +481,15 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                     group->raise();
                 }
                 d->movingWidget = widget;
+
+                //need to do do this because when you have a grid group in a grid group in a grid group,
+                //when you move the upper one outside of the second one boundaries appears the
+                //first one' spacer that causes the second one to move, so the third one
+                //will move accordingly, causing the spacer to flicker. setting the third one' parent
+                //to this avoids this
+                QPointF p(mapFromScene(widget->scenePos()));
+                widget->setParentItem(this);
+                widget->setPos(p);
             }
 
                 break;

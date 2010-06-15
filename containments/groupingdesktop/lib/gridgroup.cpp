@@ -553,7 +553,9 @@ bool GridGroup::eventFilter(QObject *watched, QEvent *event)
         switch (event->type()) {
             case QEvent::GraphicsSceneMousePress:
                 removeItem(widget);
+
                 break;
+
         case QEvent::GraphicsSceneHoverMove:
         case QEvent::GraphicsSceneHoverEnter:
             {
