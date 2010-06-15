@@ -52,6 +52,7 @@ class GridGroup : public AbstractGroup
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
     private slots:
+        void onInitCompleted();
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
         void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
@@ -60,6 +61,7 @@ class GridGroup : public AbstractGroup
         void overlayEndsMoving();
         void overlayMoving(qreal x, qreal y, const QPointF &mousePos);
         void onItemMovedOutside(qreal x, qreal y);
+        void onWidgetStartsMoving(QGraphicsWidget *widget);
 
     private:
         enum Orientation {

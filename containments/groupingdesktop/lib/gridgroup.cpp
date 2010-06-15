@@ -111,6 +111,7 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_spacer->setZValue(1000);
     m_spacer->hide();
 
+    connect(this, SIGNAL(initCompleted()), this, SLOT(onInitCompleted()));
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(onAppletRemoved(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
@@ -124,6 +125,19 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 GridGroup::~GridGroup()
 {
 
+}
+
+void GridGroup::onInitCompleted()
+{
+    connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
+            this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
+}
+
+void GridGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
+{
+    if (children().contains(widget)) {
+        removeItem(widget);
+    }
 }
 
 void GridGroup::onAppletAdded(Plasma::Applet* applet, AbstractGroup* group)
@@ -552,7 +566,7 @@ bool GridGroup::eventFilter(QObject *watched, QEvent *event)
     if (widget && children().contains(widget)) {
         switch (event->type()) {
             case QEvent::GraphicsSceneMousePress:
-                removeItem(widget);
+//                 removeItem(widget);
 
                 break;
 

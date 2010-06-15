@@ -95,6 +95,7 @@ AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, co
     groups << group;
 
     q->addGroup(group, pos);
+    emit group->initCompleted();
 
     return group;
 }
@@ -372,45 +373,42 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
 
     if (group && !group->isMainGroup()) {
         if ((immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable)) {
-            AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(group->parentItem());
 
-            if (!parentGroup || (parentGroup && parentGroup->groupType() != AbstractGroup::ConstrainedGroup)) {
-                switch (event->type()) {
-                    case QEvent::GraphicsSceneHoverEnter: {
-                        QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
-                        if (d->handles.contains(group)) {
-                            Handle *handle = d->handles.value(group);
-                            if (handle) {
-                                handle->setHoverPos(he->pos());
-                            }
-                        } else {
-    //                         kDebug() << "generated group handle";
-                            Handle *handle = new Handle(this, group, he->pos());
-                            d->handles[group] = handle;
-                            connect(handle, SIGNAL(disappearDone(Handle*)),
-                                    this, SLOT(handleDisappeared(Handle*)));
-                            connect(group, SIGNAL(geometryChanged()),
-                                    handle, SLOT(widgetResized()));
-                            connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
-                                    this, SLOT(onWidgetMoved(QGraphicsWidget*)));
+            switch (event->type()) {
+                case QEvent::GraphicsSceneHoverEnter: {
+                    QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
+                    if (d->handles.contains(group)) {
+                        Handle *handle = d->handles.value(group);
+                        if (handle) {
+                            handle->setHoverPos(he->pos());
                         }
+                    } else {
+//                         kDebug() << "generated group handle";
+                        Handle *handle = new Handle(this, group, he->pos());
+                        d->handles[group] = handle;
+                        connect(handle, SIGNAL(disappearDone(Handle*)),
+                                this, SLOT(handleDisappeared(Handle*)));
+                        connect(group, SIGNAL(geometryChanged()),
+                                handle, SLOT(widgetResized()));
+                        connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
+                                this, SLOT(onWidgetMoved(QGraphicsWidget*)));
                     }
-                    break;
-
-                    case QEvent::GraphicsSceneHoverMove: {
-                        QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
-                        if (d->handles.contains(group)) {
-                            Handle *handle = d->handles.value(group);
-                            if (handle) {
-                                handle->setHoverPos(he->pos());
-                            }
-                        }
-                    }
-                    break;
-
-                    default:
-                        break;
                 }
+                break;
+
+                case QEvent::GraphicsSceneHoverMove: {
+                    QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
+                    if (d->handles.contains(group)) {
+                        Handle *handle = d->handles.value(group);
+                        if (handle) {
+                            handle->setHoverPos(he->pos());
+                        }
+                    }
+                }
+                break;
+
+                default:
+                    break;
             }
         }
 
@@ -419,40 +417,37 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
 
     if (applet) {
         if ((immutability() == Plasma::Mutable) && (applet->immutability() == Plasma::Mutable)) {
-            AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(applet->parentItem());
 
-            if (!parentGroup || (parentGroup && parentGroup->groupType() != AbstractGroup::ConstrainedGroup)) {
-                switch (event->type()) {
-                case QEvent::GraphicsSceneHoverMove: {
-                        QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
-                        if (d->handles.contains(applet)) {
-                            Handle *handle = d->handles.value(applet);
-                            handle->setHoverPos(he->pos());
-                        } else {
-                            Handle *handle = new Handle(this, applet, he->pos());
-                            d->handles[applet] = handle;
-                            connect(handle, SIGNAL(disappearDone(Handle*)),
-                                    this, SLOT(handleDisappeared(Handle*)));
-                            connect(applet, SIGNAL(geometryChanged()),
-                                    handle, SLOT(widgetResized()));
-                            connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
-                                    this, SLOT(onWidgetMoved(QGraphicsWidget*)));
-                        }
+            switch (event->type()) {
+            case QEvent::GraphicsSceneHoverMove: {
+                    QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
+                    if (d->handles.contains(applet)) {
+                        Handle *handle = d->handles.value(applet);
+                        handle->setHoverPos(he->pos());
+                    } else {
+                        Handle *handle = new Handle(this, applet, he->pos());
+                        d->handles[applet] = handle;
+                        connect(handle, SIGNAL(disappearDone(Handle*)),
+                                this, SLOT(handleDisappeared(Handle*)));
+                        connect(applet, SIGNAL(geometryChanged()),
+                                handle, SLOT(widgetResized()));
+                        connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
+                                this, SLOT(onWidgetMoved(QGraphicsWidget*)));
                     }
-                    break;
-
-                case QEvent::GraphicsSceneHoverEnter: {
-                        QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
-                        if (d->handles.contains(applet)) {
-                            Handle *handle = d->handles.value(applet);
-                            handle->setHoverPos(he->pos());
-                        }
-                    }
-                    break;
-
-                default:
-                    break;
                 }
+                break;
+
+            case QEvent::GraphicsSceneHoverEnter: {
+                    QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
+                    if (d->handles.contains(applet)) {
+                        Handle *handle = d->handles.value(applet);
+                        handle->setHoverPos(he->pos());
+                    }
+                }
+                break;
+
+            default:
+                break;
             }
         }
 
@@ -480,16 +475,7 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 if (group && !group->isMainGroup()) {
                     group->raise();
                 }
-                d->movingWidget = widget;
-
-                //need to do do this because when you have a grid group in a grid group in a grid group,
-                //when you move the upper one outside of the second one boundaries appears the
-                //first one' spacer that causes the second one to move, so the third one
-                //will move accordingly, causing the spacer to flicker. setting the third one' parent
-                //to this avoids this
-                QPointF p(mapFromScene(widget->scenePos()));
-                widget->setParentItem(this);
-                widget->setPos(p);
+                setMovingWidget(widget);
             }
 
                 break;
@@ -687,6 +673,17 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
 {
     d->movingWidget = widget;
+
+    //need to do do this because when you have a grid group in a grid group in a grid group,
+    //when you move the upper one outside of the second one boundaries appears the
+    //first one' spacer that causes the second one to move, so the third one
+    //will move accordingly, causing the spacer to flicker. setting the third one' parent
+    //to this avoids this
+    QPointF p(mapFromScene(widget->scenePos()));
+    widget->setParentItem(this);
+    widget->setPos(p);
+
+    emit widgetStartsMoving(widget);
 }
 
 #include "groupingcontainment.moc"

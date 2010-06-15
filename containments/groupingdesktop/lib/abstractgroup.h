@@ -274,6 +274,8 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
 
         void configNeedsSaving();
 
+        void initCompleted();
+
     private:
         Q_PRIVATE_SLOT(d, void appletDestroyed(Plasma::Applet *applet))
         Q_PRIVATE_SLOT(d, void subGroupDestroyed(AbstractGroup *subGroup))

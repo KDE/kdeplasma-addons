@@ -61,6 +61,7 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
     signals:
         void groupAdded(AbstractGroup *group, const QPointF &pos);
         void groupRemoved(AbstractGroup *group);
+        void widgetStartsMoving(QGraphicsWidget *widget);
 
     private:
         Q_PRIVATE_SLOT(d, void handleDisappeared(Handle *handle))
