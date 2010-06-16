@@ -62,6 +62,7 @@ class GroupingContainmentPrivate
         KMenu *newGroupMenu;
         QAction *newGridGroup;
         QAction *newFloatingGroup;
+        QAction *newStackingGroup;
         QAction *separator;
         QAction *deleteGroupAction;
         QPointF lastClick;

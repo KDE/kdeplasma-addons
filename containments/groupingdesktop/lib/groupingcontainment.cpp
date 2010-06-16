@@ -34,6 +34,7 @@
 #include "handle.h"
 #include "gridgroup.h"
 #include "floatinggroup.h"
+#include "stackinggroup.h"
 
 //----------------------GroupingContainmentPrivate-----------------------
 
@@ -54,8 +55,11 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
     newGridGroup->setData("grid");
     newFloatingGroup = new QAction(i18n("Add a new floating group"), q);
     newFloatingGroup->setData("floating");
+    newStackingGroup = new QAction(i18n("Add a new stacking group"), q);
+    newStackingGroup->setData("stacking");
     newGroupMenu->addAction(newGridGroup);
     newGroupMenu->addAction(newFloatingGroup);
+    newGroupMenu->addAction(newStackingGroup);
 
     deleteGroupAction = new QAction(i18n("Remove this group"), q);
     deleteGroupAction->setIcon(KIcon("edit-delete"));
@@ -78,6 +82,8 @@ AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, co
         group = new GridGroup(q);
     } else if (plugin == "floating") {
         group = new FloatingGroup(q);
+    } else if (plugin == "stacking") {
+        group = new StackingGroup(q);
     }
 
     if (!group) {
@@ -185,9 +191,9 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
         group->addApplet(applet);
 
         applet->installSceneEventFilter(q);
-    } else {
-        applet->installEventFilter(q);
     }
+
+    applet->installEventFilter(q);
 
     q->connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)), q, SLOT(onAppletRemoved(Plasma::Applet*)));
 }

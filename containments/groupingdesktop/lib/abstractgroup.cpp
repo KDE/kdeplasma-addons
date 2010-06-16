@@ -183,6 +183,7 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
     kDebug()<<"adding applet"<<applet->id()<<"in group"<<id()<<"of type"<<pluginName();
 
     AbstractGroup *parent = qgraphicsitem_cast<AbstractGroup *>(applet->parentItem());
+    kDebug()<<parent;
     if (parent) {
         parent->removeApplet(applet);
     }
