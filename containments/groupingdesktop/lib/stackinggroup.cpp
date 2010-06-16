@@ -47,7 +47,7 @@ QString StackingGroup::pluginName() const
 
 void StackingGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
 {
-    m_children.insert(group.readEntry("Index", 0), child);
+    m_children.move(m_children.indexOf(child), group.readEntry("Index", 0));
 
     drawStack();
 }
@@ -59,7 +59,9 @@ void StackingGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup grou
 
 void StackingGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
 {
-    m_children << child;
+    if (!m_children.contains(child)) {
+        m_children << child;
+    }
 
     drawStack();
 }
