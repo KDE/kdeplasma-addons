@@ -506,7 +506,7 @@ void SystemLoadViewer::paintCPUUsage(QPainter *p, const QStyleOptionGraphicsItem
     p->save();
     p->scale(contentsRect.width(), 1.0);
 
-    qreal height = contentsRect.height() * cpu.idle;
+    qreal height = contentsRect.height() * (1 - (cpu.nice + cpu.user + cpu.disk + cpu.sys));//cpu.idle;
     drawSection(p, m_freeResourceColor, QRectF(0, contentsRect.top(), 1.0, height));
 
     height = contentsRect.height() * cpu.nice;
@@ -626,7 +626,7 @@ void SystemLoadViewer::toolTipAboutToShow()
     // CPU Usage
     if (m_showMultiCPU) {
         for (uint i = 0; i < m_numCPUs; ++i) {
-            cpuUsage = qRound((1 - m_cpuInfo[i].idle) * 100);
+            cpuUsage = qRound((m_cpuInfo[i].nice + m_cpuInfo[i].user + m_cpuInfo[i].disk + m_cpuInfo[i].sys) * 100);
             if (m_cpuInfo[i].clockValid) {
                 content += i18n("CPU %1 Usage: %2% at %3 MHz<br />", i+1, cpuUsage, m_cpuInfo[i].clock);
             }
@@ -635,7 +635,7 @@ void SystemLoadViewer::toolTipAboutToShow()
             }
         }
     } else {
-        cpuUsage = qRound((1 - m_cpuInfo[0].idle) * 100);
+        cpuUsage = qRound((m_cpuInfo[0].nice + m_cpuInfo[0].user + m_cpuInfo[0].disk + m_cpuInfo[0].sys) * 100);
         if (m_cpuInfo[0].clockValid) {
             if (m_numCPUs >1) {
                 content += i18n("CPU Usage: %1% at %2 MHz/CPU<br />", cpuUsage, m_cpuInfo[0].clock);
