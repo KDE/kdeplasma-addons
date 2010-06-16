@@ -35,6 +35,8 @@
 
 #include "groupingcontainment.h"
 
+Q_DECLARE_METATYPE(AbstractGroup *)
+
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
       destroying(false),
@@ -119,6 +121,7 @@ void AbstractGroupPrivate::addChild(QGraphicsWidget *child, bool layoutChild)
 {
     QPointF newPos = q->mapFromScene(child->scenePos());
     child->setParentItem(q);
+    child->setProperty("group", QVariant::fromValue(q));
 
     if (layoutChild) {
         child->setPos(newPos);
@@ -182,10 +185,9 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
 
     kDebug()<<"adding applet"<<applet->id()<<"in group"<<id()<<"of type"<<pluginName();
 
-    AbstractGroup *parent = qgraphicsitem_cast<AbstractGroup *>(applet->parentItem());
-    kDebug()<<parent;
-    if (parent) {
-        parent->removeApplet(applet);
+    QVariant pGroup = applet->property("group");
+    if (pGroup.isValid()) {
+        pGroup.value<AbstractGroup *>()->removeApplet(applet);
     }
 
     d->applets << applet;
@@ -205,9 +207,9 @@ void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
 
     kDebug()<<"adding sub group"<<group->id()<<"in group"<<id()<<"of type"<<pluginName();
 
-    AbstractGroup *parent = qgraphicsitem_cast<AbstractGroup *>(group->parentItem());
-    if (parent) {
-        parent->removeSubGroup(group);
+    QVariant pGroup = group->property("group");
+    if (pGroup.isValid()) {
+        pGroup.value<AbstractGroup *>()->removeSubGroup(group);
     }
 
     d->subGroups << group;
