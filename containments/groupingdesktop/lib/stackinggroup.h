@@ -22,6 +22,8 @@
 
 #include "abstractgroup.h"
 
+class Spacer;
+
 class StackingGroup : public AbstractGroup
 {
     Q_OBJECT
@@ -32,10 +34,12 @@ class StackingGroup : public AbstractGroup
         virtual QString pluginName() const;
         virtual void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         virtual void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
+        void showDropZone(const QPointF &pos);
 
     protected:
         virtual void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
+        bool eventFilter(QObject *watched, QEvent *event);
 
     private slots:
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
@@ -47,7 +51,9 @@ class StackingGroup : public AbstractGroup
         void drawStack();
 
         QList<QGraphicsWidget *> m_children;
+        Spacer *m_spacer;
 
+        friend class Spacer;
 };
 
 #endif // STACKINGGROUP_H

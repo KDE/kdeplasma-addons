@@ -256,13 +256,15 @@ void GroupingContainmentPrivate::onSubGroupRemovedFromGroup(AbstractGroup *subGr
 
 void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 {
+    movingWidget = 0;
+
     if (interestingGroup) {
         Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
         AbstractGroup *group = static_cast<AbstractGroup *>(widget);
         if (applet) {
-            interestingGroup->addApplet(applet);
+            interestingGroup->addApplet(applet, false);
         } else if (!group->isAncestorOf(interestingGroup) && interestingGroup != group) {
-            interestingGroup->addSubGroup(group);
+            interestingGroup->addSubGroup(group, false);
         }
 
         interestingGroup->layoutChild(widget, q->mapToItem(interestingGroup, widget->geometry().center()));
@@ -274,8 +276,6 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
         }
         interestingGroup = 0;
     }
-
-    movingWidget = 0;
 
     emit q->configNeedsSaving();
 }

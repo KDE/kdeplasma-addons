@@ -19,11 +19,60 @@
 
 #include "stackinggroup.h"
 
+#include <QtGui/QGraphicsSceneDragDropEvent>
+#include <QPainter>
+
+#include <Plasma/PaintUtils>
+
+class Spacer : public QGraphicsWidget
+{
+    public:
+        Spacer(QGraphicsWidget *parent)
+        : QGraphicsWidget(parent),
+        m_visible(true)
+        {
+            setAcceptDrops(true);
+        }
+
+        ~Spacer()
+        {}
+
+        StackingGroup *parent;
+        bool m_visible;
+
+    protected:
+        void dropEvent(QGraphicsSceneDragDropEvent *event)
+        {
+            event->setPos(mapToParent(event->pos()));
+            parent->dropEvent(event);
+        }
+
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget = 0)
+        {
+            Q_UNUSED(option)
+            Q_UNUSED(widget)
+
+            if (!m_visible) {
+                return;
+            }
+
+            //TODO: make this a pretty gradient?
+            painter->setRenderHint(QPainter::Antialiasing);
+            QPainterPath p = Plasma::PaintUtils::roundedRectangle(contentsRect().adjusted(1, 1, -2, -2), 4);
+            QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+            c.setAlphaF(0.3);
+
+            painter->fillPath(p, c);
+        }
+};
+
 StackingGroup::StackingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
-             : AbstractGroup(parent, wFlags)
+             : AbstractGroup(parent, wFlags),
+               m_spacer(new Spacer(this))
 {
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
+    m_spacer->hide();
 
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(onAppletRemoved(Plasma::Applet*,AbstractGroup*)));
@@ -65,6 +114,11 @@ void StackingGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
         m_children << m_children.takeAt(m_children.indexOf(child));
     }
 
+    if (m_spacer->isVisible()) {
+        m_children.removeOne(m_spacer);
+        m_spacer->hide();
+    }
+
     drawStack();
 }
 
@@ -92,11 +146,12 @@ void StackingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
     if (!m_children.contains(applet)) {
         m_children << applet;
     }
+
+    applet->installEventFilter(this);
 }
 
 void StackingGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *)
 {
-    kDebug()<<m_children;
     m_children.removeOne(applet);
 
     drawStack();
@@ -107,6 +162,8 @@ void StackingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
     if (!m_children.contains(subGroup)) {
         m_children << subGroup;
     }
+
+    subGroup->installEventFilter(this);
 }
 
 void StackingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
@@ -114,6 +171,41 @@ void StackingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
     m_children.removeOne(subGroup);
 
     drawStack();
+}
+
+void StackingGroup::showDropZone(const QPointF &pos)
+{
+    if (m_children.contains(m_spacer)) {
+        m_children.removeOne(m_spacer);
+    }
+
+    if (pos.isNull()) {
+        m_spacer->hide();
+        return;
+    } else {
+        m_spacer->show();
+        m_children << m_spacer;
+    }
+
+    drawStack();
+}
+
+bool StackingGroup::eventFilter(QObject *watched, QEvent *event)
+{
+    QGraphicsWidget *widget = qobject_cast<QGraphicsWidget *>(watched);
+    if (widget && children().contains(widget)) {
+        switch (event->type()) {
+            case QEvent::GraphicsSceneMousePress:
+                m_children.removeOne(widget);
+
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    return AbstractGroup::eventFilter(watched, event);
 }
 
 #include "stackinggroup.moc"

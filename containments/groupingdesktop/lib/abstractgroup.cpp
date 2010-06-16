@@ -122,9 +122,9 @@ void AbstractGroupPrivate::addChild(QGraphicsWidget *child, bool layoutChild)
     QPointF newPos = q->mapFromScene(child->scenePos());
     child->setParentItem(q);
     child->setProperty("group", QVariant::fromValue(q));
+    child->setPos(newPos);
 
     if (layoutChild) {
-        child->setPos(newPos);
         q->layoutChild(child, newPos);
         child->installEventFilter(q);
     } else {
