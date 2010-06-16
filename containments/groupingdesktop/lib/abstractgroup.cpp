@@ -35,17 +35,15 @@
 
 #include "groupingcontainment.h"
 
-int AbstractGroupPrivate::maxZValue = 0;
-
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
-        destroying(false),
-        containment(0),
-        immutability(Plasma::Mutable),
-        groupType(AbstractGroup::FreeGroup),
-        interestingGroup(0),
-        isMainGroup(false),
-        m_mainConfig(0)
+      destroying(false),
+      containment(0),
+      immutability(Plasma::Mutable),
+      groupType(AbstractGroup::FreeGroup),
+      interestingGroup(0),
+      isMainGroup(false),
+      m_mainConfig(0)
 {
     background = new Plasma::FrameSvg(q);
     background->setImagePath("widgets/translucentbackground");
@@ -354,10 +352,6 @@ void AbstractGroup::restore(KConfigGroup &group)
 {
     qreal z = group.readEntry("zvalue", 0);
 
-    if (z >= AbstractGroupPrivate::maxZValue) {
-         AbstractGroupPrivate::maxZValue = z;
-    }
-
     if (z > 0) {
         setZValue(z);
     }
@@ -372,7 +366,7 @@ void AbstractGroup::showDropZone(const QPointF& pos)
 
 void AbstractGroup::raise()
 {
-    setZValue(++AbstractGroupPrivate::maxZValue);
+    containment()->raise(this);
 }
 
 void AbstractGroup::setGroupType(AbstractGroup::GroupType type)

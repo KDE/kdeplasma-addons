@@ -472,11 +472,7 @@ void Handle::mousePressEvent(QGraphicsSceneMouseEvent *event)
         m_pressedButton = mapToButton(event->pos());
         //kDebug() << "button pressed:" << m_pressedButton;
         if (m_pressedButton != NoButton) {
-            if (m_applet) {
-                m_applet->raise();
-            } else {
-                m_group->raise();
-            }
+            m_containment->raise(m_widget);
             m_zValue = m_widget->zValue();
             setZValue(m_zValue);
         }

@@ -70,6 +70,8 @@ class GroupingContainmentPrivate
         QGraphicsLinearLayout *layout;
         QString mainGroupPlugin;
         QGraphicsWidget *movingWidget;
+
+        static int s_maxZValue;
 };
 
 #endif

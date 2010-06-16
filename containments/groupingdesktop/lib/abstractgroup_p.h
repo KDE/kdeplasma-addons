@@ -35,9 +35,9 @@ class AbstractGroupPrivate
         void appletDestroyed(Plasma::Applet *applet);
         void subGroupDestroyed(AbstractGroup *subGroup);
 
+        AbstractGroup *q;
         Plasma::Applet::List applets;
         QList<AbstractGroup *> subGroups;
-        AbstractGroup *q;
         bool destroying;
         GroupingContainment *containment;
         unsigned int id;
@@ -46,8 +46,6 @@ class AbstractGroupPrivate
         AbstractGroup::GroupType groupType;
         AbstractGroup *interestingGroup;
         bool isMainGroup;
-
-        static int maxZValue;
 
     private:
         KConfigGroup *m_mainConfig;

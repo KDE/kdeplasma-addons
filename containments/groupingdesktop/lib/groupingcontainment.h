@@ -46,6 +46,8 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
         **/
         void setMovingWidget(QGraphicsWidget *widget);
 
+        void raise(QGraphicsWidget *widget);
+
     protected:
         virtual void constraintsEvent(Plasma::Constraints constraints);
         virtual bool eventFilter(QObject *obj, QEvent *event);

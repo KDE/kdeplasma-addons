@@ -37,6 +37,8 @@
 
 //----------------------GroupingContainmentPrivate-----------------------
 
+int GroupingContainmentPrivate::s_maxZValue = 0;
+
 GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *containment)
                            : q(containment),
                              interestingGroup(0),
@@ -126,6 +128,7 @@ void GroupingContainmentPrivate::onGroupRemoved(AbstractGroup *group)
     }
 
     emit q->groupRemoved(group);
+    emit q->configNeedsSaving();
 }
 
 void GroupingContainmentPrivate::onAppletRemoved(Plasma::Applet *applet)
@@ -158,7 +161,7 @@ AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphics
             items.removeFirst();
         } while (goOn);
     }
-// kDebug()<<items;
+
     for (int i = 0; i < items.size(); ++i) {
         AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(items.at(i));
         if (group) {
@@ -171,11 +174,11 @@ AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphics
 
 void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPointF &pos)
 {
-    const int APPLET_Z_MINIMUM = 10000;
-    if (applet->zValue() < APPLET_Z_MINIMUM) {
-        applet->setZValue(applet->zValue() + APPLET_Z_MINIMUM); //FIXME: i don't like this at all
-    }                                                           // but the groupss need to be
-                                                                //behind the applets.
+    int z = applet->zValue();
+    if (GroupingContainmentPrivate::s_maxZValue < z) {
+        GroupingContainmentPrivate::s_maxZValue = z;
+    }
+
     AbstractGroup *group = groupAt(pos);
 
     if (group) {
@@ -191,6 +194,11 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
 
 void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPointF &pos)
 {
+    int z = subGroup->zValue();
+    if (GroupingContainmentPrivate::s_maxZValue < z) {
+        GroupingContainmentPrivate::s_maxZValue = z;
+    }
+
     //FIXME i don't like this setPos's at all
     subGroup->setPos(q->geometry().bottomRight());
     AbstractGroup *group = groupAt(pos);
@@ -243,9 +251,6 @@ void GroupingContainmentPrivate::onSubGroupRemovedFromGroup(AbstractGroup *subGr
 void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 {
     if (interestingGroup) {
-
-//                 widget->removeEventFilter(q);
-
         Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
         AbstractGroup *group = static_cast<AbstractGroup *>(widget);
         if (applet) {
@@ -265,6 +270,8 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
     }
 
     movingWidget = 0;
+
+    emit q->configNeedsSaving();
 }
 
 //------------------------GroupingContainment------------------------------
@@ -359,6 +366,8 @@ void GroupingContainment::setMainGroup(AbstractGroup *group)
     }
     d->layout->addItem(group);
     group->setIsMainGroup(true);
+
+    emit configNeedsSaving();
 }
 
 AbstractGroup *GroupingContainment::mainGroup() const
@@ -471,12 +480,11 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
 
     if (widget) {
         switch (event->type()) {
-            case QEvent::GraphicsSceneMousePress: {
-                if (group && !group->isMainGroup()) {
-                    group->raise();
+            case QEvent::GraphicsSceneMousePress:
+                if (applet || (group && !group->isMainGroup())) {
+                    raise(widget);
+                    setMovingWidget(widget);
                 }
-                setMovingWidget(widget);
-            }
 
                 break;
 
@@ -684,6 +692,11 @@ void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
     widget->setPos(p);
 
     emit widgetStartsMoving(widget);
+}
+
+void GroupingContainment::raise(QGraphicsWidget *widget)
+{
+    widget->setZValue(++GroupingContainmentPrivate::s_maxZValue);
 }
 
 #include "groupingcontainment.moc"
