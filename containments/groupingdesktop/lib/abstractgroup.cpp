@@ -179,7 +179,17 @@ uint AbstractGroup::id() const
 
 void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
 {
-    if (!applet || applets().contains(applet)) {
+    if (!applet) {
+        return;
+    }
+
+    if (applets().contains(applet)) {
+        if (applet->parentItem() != this) {
+            QPointF p(mapFromScene(applet->scenePos()));
+            applet->setParentItem(this);
+            applet->setPos(p);
+        }
+
         return;
     }
 
@@ -201,7 +211,17 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
 
 void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
 {
-    if (!group || subGroups().contains(group)) {
+    if (!group) {
+        return;
+    }
+
+    if (subGroups().contains(group)) {
+        if (group->parentItem() != this) {
+            QPointF p(mapFromScene(group->scenePos()));
+            group->setParentItem(this);
+            group->setPos(p);
+        }
+
         return;
     }
 
