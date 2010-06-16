@@ -97,7 +97,7 @@ void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
             destroying = false;
         }
 
-//         emit q->appletRemovedFromGroup(applet, q);
+        emit q->appletRemovedFromGroup(applet, q);
     }
 }
 
@@ -113,7 +113,7 @@ void AbstractGroupPrivate::subGroupDestroyed(AbstractGroup *subGroup)
             destroying = false;
         }
 
-//         emit q->appletRemovedFromGroup(applet, q);
+        emit q->subGroupRemovedFromGroup(subGroup, q);
     }
 }
 

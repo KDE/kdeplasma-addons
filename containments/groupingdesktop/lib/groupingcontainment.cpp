@@ -261,7 +261,7 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
         AbstractGroup *group = static_cast<AbstractGroup *>(widget);
         if (applet) {
             interestingGroup->addApplet(applet);
-        } else if (!group->isAncestorOf(interestingGroup)) {
+        } else if (!group->isAncestorOf(interestingGroup) && interestingGroup != group) {
             interestingGroup->addSubGroup(group);
         }
 

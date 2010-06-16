@@ -61,6 +61,8 @@ void StackingGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
 {
     if (!m_children.contains(child)) {
         m_children << child;
+    } else {
+        m_children << m_children.takeAt(m_children.indexOf(child));
     }
 
     drawStack();
