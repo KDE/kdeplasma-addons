@@ -24,6 +24,8 @@
 
 #include <Plasma/PaintUtils>
 
+#include "groupingcontainment.h"
+
 class Spacer : public QGraphicsWidget
 {
     public:
@@ -74,6 +76,7 @@ StackingGroup::StackingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setGroupType(AbstractGroup::ConstrainedGroup);
     m_spacer->hide();
 
+    connect(this, SIGNAL(initCompleted()), this, SLOT(onInitCompleted()));
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(onAppletRemoved(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
@@ -141,13 +144,24 @@ void StackingGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
     drawStack();
 }
 
+void StackingGroup::onInitCompleted()
+{
+    connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
+            this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
+}
+
+void StackingGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
+{
+    if (children().contains(widget)) {
+        m_children.removeOne(widget);
+    }
+}
+
 void StackingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
 {
     if (!m_children.contains(applet)) {
         m_children << applet;
     }
-
-    applet->installEventFilter(this);
 }
 
 void StackingGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *)
@@ -162,8 +176,6 @@ void StackingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
     if (!m_children.contains(subGroup)) {
         m_children << subGroup;
     }
-
-    subGroup->installEventFilter(this);
 }
 
 void StackingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
@@ -188,24 +200,6 @@ void StackingGroup::showDropZone(const QPointF &pos)
     }
 
     drawStack();
-}
-
-bool StackingGroup::eventFilter(QObject *watched, QEvent *event)
-{
-    QGraphicsWidget *widget = qobject_cast<QGraphicsWidget *>(watched);
-    if (widget && children().contains(widget)) {
-        switch (event->type()) {
-            case QEvent::GraphicsSceneMousePress:
-                m_children.removeOne(widget);
-
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    return AbstractGroup::eventFilter(watched, event);
 }
 
 #include "stackinggroup.moc"
