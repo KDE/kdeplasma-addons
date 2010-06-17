@@ -28,6 +28,8 @@
 #include <KMenu>
 #include <KIcon>
 
+#include <Plasma/Corona>
+
 #include "groupingcontainment_p.h"
 #include "abstractgroup.h"
 #include "abstractgroup_p.h"
@@ -259,12 +261,14 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
     movingWidget = 0;
 
     if (interestingGroup) {
-        Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
-        AbstractGroup *group = static_cast<AbstractGroup *>(widget);
-        if (applet) {
-            interestingGroup->addApplet(applet, false);
-        } else if (!group->isAncestorOf(interestingGroup) && interestingGroup != group) {
-            interestingGroup->addSubGroup(group, false);
+        if (q->corona()->immutability() == Plasma::Mutable) {
+            Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
+            AbstractGroup *group = static_cast<AbstractGroup *>(widget);
+            if (applet) {
+                interestingGroup->addApplet(applet, false);
+            } else if (!group->isAncestorOf(interestingGroup) && interestingGroup != group) {
+                interestingGroup->addSubGroup(group, false);
+            }
         }
 
         interestingGroup->layoutChild(widget, q->mapToItem(interestingGroup, widget->geometry().center()));
@@ -701,9 +705,11 @@ void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
     //first one' spacer that causes the second one to move, so the third one
     //will move accordingly, causing the spacer to flicker. setting the third one' parent
     //to this avoids this
-    QPointF p(mapFromScene(widget->scenePos()));
-    widget->setParentItem(this);
-    widget->setPos(p);
+    if (corona()->immutability() == Plasma::Mutable) {
+        QPointF p(mapFromScene(widget->scenePos()));
+        widget->setParentItem(this);
+        widget->setPos(p);
+    }
 
     emit widgetStartsMoving(widget);
 

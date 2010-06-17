@@ -163,6 +163,13 @@ void AbstractGroup::setImmutability(Plasma::ImmutabilityType immutability)
         setFlag(QGraphicsItem::ItemIsMovable, immutability == Plasma::Mutable);
     }
     d->immutability = immutability;
+
+    foreach (Plasma::Applet *applet, applets()) {
+        applet->setImmutability(immutability);
+    }
+    foreach (AbstractGroup *group, subGroups()) {
+        group->setImmutability(immutability);
+    }
 }
 
 Plasma::ImmutabilityType AbstractGroup::immutability() const

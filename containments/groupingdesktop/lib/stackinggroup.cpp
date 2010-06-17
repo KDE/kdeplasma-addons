@@ -23,6 +23,7 @@
 #include <QPainter>
 
 #include <Plasma/PaintUtils>
+#include <Plasma/Corona>
 
 #include "groupingcontainment.h"
 
@@ -129,15 +130,22 @@ void StackingGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
 
 void StackingGroup::drawStack()
 {
+    Plasma::Corona *c = static_cast<Plasma::Corona *>(scene());
+    Plasma::ImmutabilityType mut = c->immutability();
+    c->setImmutability(Plasma::Mutable);
+    setImmutability(Plasma::Mutable);
+
     int gap = 20;
     foreach (QGraphicsWidget *widget, m_children) {
         if (widget) {
-            QRectF rect(QPoint(gap, gap), contentsRect().bottomRight());
-            widget->setGeometry(rect);
+            widget->resize(contentsRect().size());
+            widget->setPos(gap, gap);
             widget->setZValue(gap);
             gap = gap + 20;
         }
     }
+    c->setImmutability(mut);
+    setImmutability(mut);
 }
 
 void StackingGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
