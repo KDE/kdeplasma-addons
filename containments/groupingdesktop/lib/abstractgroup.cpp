@@ -277,7 +277,6 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet, AbstractGroup *newGroup
     KConfigGroup appletConfig = applet->config().parent();
     KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
     groupConfig.deleteGroup();
-    emit configNeedsSaving();
 
     if (newGroup) {
         newGroup->addApplet(applet);
@@ -286,6 +285,7 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet, AbstractGroup *newGroup
     }
 
     emit appletRemovedFromGroup(applet, this);
+    emit configNeedsSaving();
 }
 
 void AbstractGroup::removeSubGroup(AbstractGroup *subGroup, AbstractGroup *newGroup)
@@ -296,7 +296,6 @@ void AbstractGroup::removeSubGroup(AbstractGroup *subGroup, AbstractGroup *newGr
     KConfigGroup subGroupConfig = subGroup->config().parent();
     KConfigGroup groupConfig(&subGroupConfig, QString("GroupInformation"));
     groupConfig.deleteGroup();
-    emit configNeedsSaving();
 
     if (newGroup) {
         newGroup->addSubGroup(subGroup);
@@ -305,6 +304,7 @@ void AbstractGroup::removeSubGroup(AbstractGroup *subGroup, AbstractGroup *newGr
     }
 
     emit subGroupRemovedFromGroup(subGroup, this);
+    emit configNeedsSaving();
 }
 
 void AbstractGroup::destroy()
@@ -512,6 +512,7 @@ void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
     d->background->resizeFrame(event->newSize());
 
     emit geometryChanged();
+    emit configNeedsSaving();
 }
 
 int AbstractGroup::type() const
