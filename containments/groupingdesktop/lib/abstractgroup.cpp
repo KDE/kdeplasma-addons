@@ -35,8 +35,6 @@
 
 #include "groupingcontainment.h"
 
-Q_DECLARE_METATYPE(AbstractGroup *)
-
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
       destroying(false),

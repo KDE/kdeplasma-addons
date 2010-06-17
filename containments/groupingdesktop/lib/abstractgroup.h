@@ -288,4 +288,6 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         friend class GroupingContainmentPrivate;
 };
 
+Q_DECLARE_METATYPE(AbstractGroup *)
+
 #endif // ABSTRACTGROUP_H

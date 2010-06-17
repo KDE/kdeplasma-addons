@@ -74,6 +74,8 @@ StackingGroup::StackingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 {
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
+
+    m_spacer->parent = this;
     m_spacer->hide();
 
     connect(this, SIGNAL(initCompleted()), this, SLOT(onInitCompleted()));
@@ -127,12 +129,13 @@ void StackingGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
 
 void StackingGroup::drawStack()
 {
-    int gap = 10;
+    int gap = 20;
     foreach (QGraphicsWidget *widget, m_children) {
         if (widget) {
             QRectF rect(QPoint(gap, gap), contentsRect().bottomRight());
             widget->setGeometry(rect);
-            gap = gap + 10;
+            widget->setZValue(gap);
+            gap = gap + 20;
         }
     }
 }

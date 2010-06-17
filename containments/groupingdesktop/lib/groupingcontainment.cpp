@@ -698,6 +698,7 @@ void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
 
     emit widgetStartsMoving(widget);
 
+    d->interestingGroup = widget->property("group").value<AbstractGroup *>();
     d->movingWidget = widget;
 }
 
