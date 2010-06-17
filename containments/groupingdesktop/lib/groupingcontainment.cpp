@@ -489,7 +489,7 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
             case QEvent::GraphicsSceneMousePress:
                 if ((applet || (group && !group->isMainGroup())) &&
                     static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton) {
-                    raise(widget);
+
                     setMovingWidget(widget);
                 }
 
@@ -687,6 +687,15 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 
 void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
 {
+    if (d->movingWidget) {
+        if (d->movingWidget == widget) {
+            return;
+        }
+        d->onWidgetMoved(d->movingWidget);
+    }
+
+    raise(widget);
+
     //need to do do this because when you have a grid group in a grid group in a grid group,
     //when you move the upper one outside of the second one boundaries appears the
     //first one' spacer that causes the second one to move, so the third one
