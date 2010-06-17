@@ -90,12 +90,13 @@ void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
 
         applets.removeAll(applet);
 
+        emit q->appletRemovedFromGroup(applet, q);
+        emit q->configNeedsSaving();
+
         if (destroying && (q->children().count() == 0)) {
             destroyGroup();
             destroying = false;
         }
-
-        emit q->appletRemovedFromGroup(applet, q);
     }
 }
 
@@ -106,12 +107,13 @@ void AbstractGroupPrivate::subGroupDestroyed(AbstractGroup *subGroup)
 
         subGroups.removeAll(subGroup);
 
+        emit q->subGroupRemovedFromGroup(subGroup, q);
+        emit q->configNeedsSaving();
+
         if (destroying && (q->children().count() == 0)) {
             destroyGroup();
             destroying = false;
         }
-
-        emit q->subGroupRemovedFromGroup(subGroup, q);
     }
 }
 
