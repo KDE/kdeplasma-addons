@@ -269,6 +269,7 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
             } else if (!group->isAncestorOf(interestingGroup) && interestingGroup != group) {
                 interestingGroup->addSubGroup(group, false);
             } else {
+                interestingGroup = 0;
                 return;
             }
         }
