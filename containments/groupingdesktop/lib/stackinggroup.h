@@ -53,8 +53,6 @@ class StackingGroup : public AbstractGroup
 
         QList<QGraphicsWidget *> m_children;
         Spacer *m_spacer;
-
-        friend class Spacer;
 };
 
 #endif // STACKINGGROUP_H

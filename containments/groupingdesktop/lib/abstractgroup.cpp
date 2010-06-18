@@ -430,6 +430,11 @@ void AbstractGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
     d->containment->d->dragMove(mapToItem(d->containment, event->pos()));
 }
 
+void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *)
+{
+    showDropZone(QPointF());
+}
+
 void AbstractGroup::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     scene()->sendEvent(d->containment, event);

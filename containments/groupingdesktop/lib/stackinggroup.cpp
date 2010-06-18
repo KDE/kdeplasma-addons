@@ -33,9 +33,7 @@ class Spacer : public QGraphicsWidget
         Spacer(QGraphicsWidget *parent)
         : QGraphicsWidget(parent),
         m_visible(true)
-        {
-            setAcceptDrops(true);
-        }
+        {}
 
         ~Spacer()
         {}
@@ -44,12 +42,6 @@ class Spacer : public QGraphicsWidget
         bool m_visible;
 
     protected:
-        void dropEvent(QGraphicsSceneDragDropEvent *event)
-        {
-            event->setPos(mapToParent(event->pos()));
-            parent->dropEvent(event);
-        }
-
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget = 0)
         {
             Q_UNUSED(option)
