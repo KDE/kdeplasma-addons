@@ -34,6 +34,7 @@
 #include <Plasma/Animation>
 
 #include "groupingcontainment.h"
+#include "groupingcontainment_p.h"
 
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
@@ -147,7 +148,6 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : QGraphicsWidget(parent, wFlags),
                d(new AbstractGroupPrivate(this))
 {
-    setAcceptHoverEvents(true);
     setAcceptDrops(true);
 //     setContentsMargins(0, 10, 10, 10);
 }
@@ -490,18 +490,7 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
 
 void AbstractGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-    showDropZone(event->pos());
-}
-
-void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
-{
-    event->ignore();
-
-    QPointF pos(event->pos());
-    if (pos.y() < 1 || abs(pos.y() - size().height()) < 2 ||
-        pos.x() < 1 || abs(pos.x() - size().width()) < 2) {
-        showDropZone(QPointF());
-    }
+    d->containment->d->dragMove(mapToItem(d->containment, event->pos()));
 }
 
 void AbstractGroup::dropEvent(QGraphicsSceneDragDropEvent *event)

@@ -79,6 +79,7 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
         GroupingContainmentPrivate *const d;
 
         friend class GroupingContainmentPrivate;
+        friend class AbstractGroup;
 };
 
 #endif // GROUPINGCONTAINMENT_H

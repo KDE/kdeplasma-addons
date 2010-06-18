@@ -287,6 +287,19 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
     emit q->configNeedsSaving();
 }
 
+void GroupingContainmentPrivate::dragMove(const QPointF &pos)
+{
+    AbstractGroup *group = groupAt(pos);
+    if (interestingGroup) {
+        interestingGroup->showDropZone(QPointF());
+        interestingGroup = 0;
+    }
+    if (group) {
+        group->showDropZone(q->mapToItem(group, pos));
+        interestingGroup = group;
+    }
+}
+
 //------------------------GroupingContainment------------------------------
 
 GroupingContainment::GroupingContainment(QObject* parent, const QVariantList& args)
