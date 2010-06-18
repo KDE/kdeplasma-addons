@@ -4,12 +4,11 @@ This little project will provide the user the ability to layout his applets
 in a more advanced way. He will be able to group them inside special
 QGraphicsWidgets called Groups, in a way that depends on the specific group.
 So, e.g. there is a grid group that layouts the applets in a grid, a
-floating group that leaves them free to move inside the group and others to
-come. I want to develop a desktop containment and a panel one. The panel
-isn't yet started.
+floating group that leaves them free to move inside the group, one that stacks
+them and others to come. I want to develop a desktop containment and a panel one.
 The applets are added to a group dropping them from the "add applet" thing
 or moving them over the group. If it is necessary (like in the grid group) a
-drop zone will be shown (like in the panel).
+drop zone will be shown (like the one in the panel).
 
  =====================================================================
 
@@ -17,7 +16,7 @@ More technical stuff:
 This is composed of a library and two containments.
 The library consists of a base class for the containments,
 GroupingContainment, and a base class for the groups, AbstractGroup plus
-internal class(es) like GroupHandle.
+internal classes like Handle.
 This classes provide all the things needed to write a simple, basic group or
 a simple, basic containment with grouping support and they co-operate well
 together. So, e.g. the floating group has only few lines of code, most of
@@ -25,10 +24,10 @@ which are the copyright header and constructor and destructor, as the
 desktop containment, while the grid group that is more specialised is more
 "fat".
 In order to be able to have many types of groups with their different needs
-when speaking of saving the configuration, i moved this from the containment
+when speaking of saving the configuration, I moved this from the containment
 to the groups: AbstractGroup has two pure virtual methods,
-saveAppletLayoutInfo(Plasma::Applet, KConfigGroup) and
-restoreAppletLayoutInfo(Plasma::Applet, KConfigGroup) which its subclasses
+saveChildLayoutInfo(QGraphicsWidget *child, KConfigGroup &group) and
+restoreChildLayoutInfo(QGraphicsWidget *child, KConfigGroup &group) which its subclasses
 must reimplement, which actually save and restore the configuration. This
 way it isn't the containment that saves, but it delegates this to the
 specific groups that know how the applets are arranged and so know the best
@@ -39,10 +38,19 @@ keys, one of which is mandatory (Group=id of the group), while others will
 depend on the type of the group.
 The configuration of the groups are instead saved in [Containments][Id][Groups][Id].
 
-There are two groups right now, a grid group and a floating group, and one
+There is support for groups-in-groups too. Every group can contain every other group like
+if it was an applet. This way I avoid to duplicate code. I mean, the panel containment
+layouts its applets and groups in a grid. Instead of implementing in the panel code the grid
+layout, GroupingContainment has a method useMainGroup(const QString &groupType) that sets a
+transparent group as big as the containment. This way the panel sets a GridGroup as main group,
+so it delegates all the grid layouting to it.
+Currently this main group system assumes the main group won't change, but I could modify it
+to let it change in runtime, selected by the user. I have to think about it.
+Note that to simplify the management of the groups the code assumes there is always a main group.
+
+There are two groups right now, a grid group, a stack group and a floating group, and one
 desktop containment.
-Other groups will come, I think, like a tab group, a stack group,... like a
-panel containment.
+Other groups will come, I think, like a tab group.
 ======================================================================
 
 TODO: (with more or less a decreasing priority)
@@ -51,4 +59,3 @@ TODO: (with more or less a decreasing priority)
 -create a nice interface to add groups;
 -decide if make the groups pluginnable;
 -add support for configurations of the groups;
--group in group support;
