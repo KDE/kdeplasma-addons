@@ -170,6 +170,8 @@ void Luna::calcStatus(time_t time)
     if ( fm.daysTo( now ) == 0 ) {
         counter = 14;
         toolTipData.setMainText( i18n( "Full Moon" ) );
+        Plasma::ToolTipManager::self()->setContent(this, toolTipData);
+        update();
         return;
     } else if ( counter <= 15 && counter >= 13 ) {
         counter = 14 + fm.daysTo( now );
