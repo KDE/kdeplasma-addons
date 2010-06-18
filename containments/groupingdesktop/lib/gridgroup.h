@@ -33,7 +33,6 @@ namespace Plasma
 
 class Position;
 class Spacer;
-class ItemOverlay;
 
 class GridGroup : public AbstractGroup
 {
@@ -48,19 +47,12 @@ class GridGroup : public AbstractGroup
         virtual void showDropZone(const QPointF &pos);
 
     protected:
-        bool eventFilter(QObject *watched, QEvent *event);
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
     private slots:
         void onInitCompleted();
-        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
-        void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
         void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
-        void overlayStartsMoving();
-        void overlayEndsMoving();
-        void overlayMoving(qreal x, qreal y, const QPointF &mousePos);
-        void onItemMovedOutside(qreal x, qreal y);
         void onWidgetStartsMoving(QGraphicsWidget *widget);
 
     private:
@@ -69,7 +61,6 @@ class GridGroup : public AbstractGroup
             Vertical = 1
         };
 
-        void showDropZone(const QPointF &pos, bool showAlwaysSomething);
         QGraphicsLayoutItem *removeItemAt(int row, int column, bool fillLayout = true);
         QGraphicsLayoutItem *removeItemAt(const Position &position, bool fillLayout = true);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
@@ -79,10 +70,6 @@ class GridGroup : public AbstractGroup
 
         QGraphicsGridLayout *m_layout;
         Spacer *m_spacer;
-        AbstractGroup *m_interestingGroup;
-
-        QPointF posOfClick;
-        ItemOverlay *m_overlay;
 
         friend class Spacer;
 };

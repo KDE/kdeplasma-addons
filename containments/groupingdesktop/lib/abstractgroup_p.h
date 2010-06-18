@@ -29,7 +29,7 @@ class AbstractGroupPrivate
         AbstractGroupPrivate(AbstractGroup *group);
         ~AbstractGroupPrivate();
         KConfigGroup *mainConfigGroup();
-        void addChild(QGraphicsWidget *child, bool layoutChild);
+        void addChild(QGraphicsWidget *child);
         void removeChild(QGraphicsWidget *child);
         void destroyGroup();
         void appletDestroyed(Plasma::Applet *applet);

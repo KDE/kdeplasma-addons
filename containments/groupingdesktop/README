@@ -48,7 +48,7 @@ Currently this main group system assumes the main group won't change, but I coul
 to let it change in runtime, selected by the user. I have to think about it.
 Note that to simplify the management of the groups the code assumes there is always a main group.
 
-There are two groups right now, a grid group, a stack group and a floating group, and one
+There are three groups right now, a grid group, a stack group and a floating group, and one
 desktop containment.
 Other groups will come, I think, like a tab group.
 ======================================================================

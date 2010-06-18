@@ -18,6 +18,7 @@
  */
 
 #include "groupingcontainment.h"
+#include "groupingcontainment_p.h"
 
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsSceneContextMenuEvent>
@@ -30,7 +31,6 @@
 
 #include <Plasma/Corona>
 
-#include "groupingcontainment_p.h"
 #include "abstractgroup.h"
 #include "abstractgroup_p.h"
 #include "handle.h"

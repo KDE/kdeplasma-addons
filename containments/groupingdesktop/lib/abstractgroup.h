@@ -209,11 +209,6 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
 
         /**
-         * Reimplemented from QGraphicsWidget
-         **/
-        virtual bool eventFilter(QObject *obj, QEvent *event);
-
-        /**
          * Lay outs a child inside the group
          * A child group probably wants to reimplement this function
          * @param child the child to be layed out
