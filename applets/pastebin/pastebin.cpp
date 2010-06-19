@@ -83,7 +83,7 @@ Pastebin::~Pastebin()
     delete m_postingService;
     QString history;
     for (int i = 0; i < m_actionHistory.size(); ++i) {
-        history.prepend(m_actionHistory.at(i)->text());
+        history.prepend(m_actionHistory.at(i)->toolTip());
         history.prepend("|");
         delete m_actionHistory.at(i);
     }
@@ -586,6 +586,7 @@ void Pastebin::copyToClipboard(const QString &url)
 {
     QApplication::clipboard()->setText(url, lastMode);
     kDebug() << "Copying:" << url;
+    m_oldUrl = url;
     QPixmap pix = KIcon("edit-paste").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
 
     KNotification *notify = new KNotification("urlcopied");
@@ -603,9 +604,13 @@ void Pastebin::showErrors()
     setActionState(IdleError);
 }
 
-void Pastebin::openLink()
+void Pastebin::openLink(bool old)
 {
-    KToolInvocation::invokeBrowser(m_url);
+    if(old) {
+      KToolInvocation::invokeBrowser(m_oldUrl);
+    } else {
+      KToolInvocation::invokeBrowser(m_url);
+    }
 }
 
 void Pastebin::resetActionState()
@@ -619,7 +624,7 @@ void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (m_url.isEmpty() || event->button() != Qt::LeftButton) {
         Plasma::Applet::mousePressEvent(event);
     } else {
-        openLink();
+        openLink(false);
     }
     if (event->button() == Qt::MidButton) {
         if (m_actionState == Idle) {

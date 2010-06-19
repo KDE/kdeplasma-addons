@@ -92,7 +92,7 @@ protected slots:
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
     void showResults(const QString &url);
     void showErrors();
-    void openLink();
+    void openLink(bool old = true);
     void postClipboard();
 
 protected:
@@ -145,6 +145,7 @@ private:
 
     Plasma::ToolTipContent toolTipData;
     QString m_url;
+    QString m_oldUrl;
 
     int m_textBackend;
     int m_imageBackend;
