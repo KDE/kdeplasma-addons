@@ -34,6 +34,7 @@ public:
 signals:
     void postFinished(const QString &data);
     void postError();
+    void postError(const QString &error);
 
 protected:
     // abstract class
