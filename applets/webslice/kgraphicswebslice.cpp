@@ -108,7 +108,7 @@ void KGraphicsWebSlice::createSlice()
     QWebFrame *frame = d->view->page()->mainFrame();
     if (geo.isValid()) {
         d->originalGeometry = geo;
-        d->view->resize( geo.size() );
+        d->view->resize( geo.size().boundedTo(size()) );
         frame->setScrollPosition( geo.topLeft().toPoint() );
         refresh();
         emit sizeChanged(geo.size());
@@ -149,7 +149,7 @@ void KGraphicsWebSlice::refresh()
     if (!geo.isValid()) {
         return;
     }
-    d->view->resize( geo.size() );
+    d->view->resize( geo.size().boundedTo(size()) );
     QWebFrame *frame = d->view->page()->mainFrame();
     frame->setScrollPosition( geo.topLeft().toPoint() );
     setPreferredSize(geo.size());
