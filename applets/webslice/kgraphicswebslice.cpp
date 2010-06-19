@@ -133,8 +133,7 @@ QRectF KGraphicsWebSlice::sliceGeometry()
         if ( !element.isNull() ) {
             geo = element.geometry();
         }
-    }
-    if (d->sliceGeometry.isValid()) {
+    } else if (!d->sliceGeometry.isEmpty()) {
         geo = d->sliceGeometry;
     } else {
         QWebElement element = frame->documentElement();
