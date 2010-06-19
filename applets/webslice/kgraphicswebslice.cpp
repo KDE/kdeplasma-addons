@@ -108,7 +108,10 @@ void KGraphicsWebSlice::createSlice()
     QWebFrame *frame = d->view->page()->mainFrame();
     if (geo.isValid()) {
         d->originalGeometry = geo;
-        d->view->resize( geo.size().boundedTo(size()) );
+
+        QSizeF viewSize = geo.size();
+        viewSize.scale(size(), Qt::KeepAspectRatio);
+        d->view->resize(viewSize);
         frame->setScrollPosition( geo.topLeft().toPoint() );
         refresh();
         emit sizeChanged(geo.size());
@@ -149,7 +152,11 @@ void KGraphicsWebSlice::refresh()
     if (!geo.isValid()) {
         return;
     }
-    d->view->resize( geo.size().boundedTo(size()) );
+
+    QSizeF viewSize = geo.size();
+    viewSize.scale(size(), Qt::KeepAspectRatio);
+    d->view->resize(viewSize);
+
     QWebFrame *frame = d->view->page()->mainFrame();
     frame->setScrollPosition( geo.topLeft().toPoint() );
     setPreferredSize(geo.size());
@@ -167,7 +174,13 @@ void KGraphicsWebSlice::resizeEvent ( QGraphicsSceneResizeEvent * event )
         qDebug() << "giant size, what's going on???????" << o.width();
         return;
     }
-    qreal f = n.width() / o.width();
+    qreal f;
+    if ((o.width() >= o.height() && event->newSize().width() >= event->newSize().height()) ||
+        (o.width() <= o.height() && event->newSize().width() <= event->newSize().height())) {
+        f = n.width() / o.width();
+    } else {
+        f = n.height() / o.height();
+    }
     if (f > 0.1 && f < 8) {
         d->view->setZoomFactor(f);
         refresh();
