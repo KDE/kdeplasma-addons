@@ -48,6 +48,7 @@ WebSlice::WebSlice(QObject *parent, const QVariantList &args)
     setAcceptsHoverEvents(true);
 
     setMinimumSize(64, 64);
+    resize(300, 300);
 }
 
 void WebSlice::init()
