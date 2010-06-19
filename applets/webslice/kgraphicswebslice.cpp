@@ -112,6 +112,8 @@ void KGraphicsWebSlice::createSlice()
         QSizeF viewSize = geo.size();
         viewSize.scale(size(), Qt::KeepAspectRatio);
         d->view->resize(viewSize);
+        QSizeF center = size()/2 - viewSize/2;
+        d->view->setPos(center.width(), center.height());
         frame->setScrollPosition( geo.topLeft().toPoint() );
         refresh();
         emit sizeChanged(geo.size());
@@ -156,6 +158,8 @@ void KGraphicsWebSlice::refresh()
     QSizeF viewSize = geo.size();
     viewSize.scale(size(), Qt::KeepAspectRatio);
     d->view->resize(viewSize);
+    QSizeF center = size()/2 - viewSize/2;
+    d->view->setPos(center.width(), center.height());
 
     QWebFrame *frame = d->view->page()->mainFrame();
     frame->setScrollPosition( geo.topLeft().toPoint() );
