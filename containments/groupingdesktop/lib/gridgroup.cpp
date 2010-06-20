@@ -143,7 +143,7 @@ QString GridGroup::pluginName() const
 
 void GridGroup::showDropZone(const QPointF &pos)
 {
-    if (pos.isNull() || !contentsRect().contains(pos)) {
+    if (pos.isNull() || !boundingRect().contains(pos)) {
         if (m_spacer->isVisible()) {
             m_spacer->hide();
             removeItem(m_spacer);
