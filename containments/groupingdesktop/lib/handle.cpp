@@ -297,27 +297,33 @@ void Handle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
         QRectF iconRect(QPointF(0, m_decorationRect.height() + 1), iconSize);
         if (m_buttonsOnRight) {
             iconRect.moveLeft(
-                pixmapSize.width() - m_iconSize - m_background->marginSize(LeftMargin));
-            m_configureIcons->paint(&buffPainter, iconRect, "size-diagonal-tr2bl");
+            pixmapSize.width() - m_iconSize - m_background->marginSize(LeftMargin));
         } else {
             iconRect.moveLeft(m_background->marginSize(RightMargin));
-            m_configureIcons->paint(&buffPainter, iconRect, "size-diagonal-tl2br");
+        }
+        AbstractGroup *group = m_widget->property("group").value<AbstractGroup *>();
+        if (!(group && group->groupType() == AbstractGroup::ConstrainedGroup)) {
+            if (m_buttonsOnRight) {
+                m_configureIcons->paint(&buffPainter, iconRect, "size-diagonal-tr2bl");
+            } else {
+                m_configureIcons->paint(&buffPainter, iconRect, "size-diagonal-tl2br");
+            }
+            iconRect.translate(0, m_iconSize);
+
+            m_configureIcons->paint(&buffPainter, iconRect, "rotate");
+            iconRect.translate(0, m_iconSize);
         }
 
-        iconRect.translate(0, m_iconSize);
-        m_configureIcons->paint(&buffPainter, iconRect, "rotate");
-
         if (m_applet && m_applet->hasConfigurationInterface()) {
-            iconRect.translate(0, m_iconSize);
             m_configureIcons->paint(&buffPainter, iconRect, "configure");
+            iconRect.translate(0, m_iconSize);
         }
 
         if (m_applet && m_applet->hasValidAssociatedApplication()) {
-            iconRect.translate(0, m_iconSize);
             m_configureIcons->paint(&buffPainter, iconRect, "maximize");
+            iconRect.translate(0, m_iconSize);
         }
 
-        iconRect.translate(0, m_iconSize);
         m_configureIcons->paint(&buffPainter, iconRect, "close");
 
         buffPainter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
@@ -372,36 +378,39 @@ void Handle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
         sourceIconRect.moveLeft(m_background->marginSize(RightMargin));
     }
 
-    if (m_group || (m_applet && m_applet->aspectRatioMode() != FixedSize)) {
-        //resize
-        painter->drawPixmap(
-            QRectF(basePoint + shiftM, iconSize), *m_backgroundBuffer, sourceIconRect);
+    AbstractGroup *group = m_widget->property("group").value<AbstractGroup *>();
+    if (!(group && group->groupType() == AbstractGroup::ConstrainedGroup)) {
+        if (m_group || (m_applet && m_applet->aspectRatioMode() != FixedSize)) {
+            //resize
+            painter->drawPixmap(
+                QRectF(basePoint + shiftM, iconSize), *m_backgroundBuffer, sourceIconRect);
+            basePoint += step;
+        }
+        sourceIconRect.translate(0, m_iconSize);
+
+        //rotate
+        painter->drawPixmap(QRectF(basePoint + shiftR, iconSize), *m_backgroundBuffer, sourceIconRect);
+        sourceIconRect.translate(0, m_iconSize);
         basePoint += step;
     }
-
-    //rotate
-    sourceIconRect.translate(0, m_iconSize);
-    painter->drawPixmap(QRectF(basePoint + shiftR, iconSize), *m_backgroundBuffer, sourceIconRect);
-
     //configure
     if (m_applet && m_applet->hasConfigurationInterface()) {
-        basePoint += step;
-        sourceIconRect.translate(0, m_iconSize);
         painter->drawPixmap(
             QRectF(basePoint + shiftC, iconSize), *m_backgroundBuffer, sourceIconRect);
+        sourceIconRect.translate(0, m_iconSize);
+        basePoint += step;
     }
 
     //maximize
     if (m_applet && m_applet->hasValidAssociatedApplication()) {
-        basePoint += step;
-        sourceIconRect.translate(0, m_iconSize);
         painter->drawPixmap(
             QRectF(basePoint + shiftMx, iconSize), *m_backgroundBuffer, sourceIconRect);
+        sourceIconRect.translate(0, m_iconSize);
+        basePoint += step;
     }
 
     //close
     basePoint = m_rect.bottomLeft() + QPointF(HANDLE_MARGIN, 0) - step;
-    sourceIconRect.translate(0, m_iconSize);
     painter->drawPixmap(QRectF(basePoint + shiftD, iconSize), *m_backgroundBuffer, sourceIconRect);
 }
 
@@ -421,26 +430,29 @@ Handle::ButtonType Handle::mapToButton(const QPointF &point) const
 
     QRectF activeArea = QRectF(basePoint, QSizeF(m_iconSize, m_iconSize));
 
-    if (m_group || (m_applet && m_applet->aspectRatioMode() != FixedSize)) {
+    AbstractGroup *group = m_widget->property("group").value<AbstractGroup *>();
+    if (!(group && group->groupType() == AbstractGroup::ConstrainedGroup)) {
+        if (m_group || (m_applet && m_applet->aspectRatioMode() != FixedSize)) {
+            if (activeArea.contains(point)) {
+                return ResizeButton;
+            }
+            activeArea.translate(step);
+        }
+
         if (activeArea.contains(point)) {
-            return ResizeButton;
+            return RotateButton;
         }
         activeArea.translate(step);
-    }
-
-    if (activeArea.contains(point)) {
-        return RotateButton;
     }
 
     if (m_applet && m_applet->hasConfigurationInterface()) {
-        activeArea.translate(step);
         if (activeArea.contains(point)) {
             return ConfigureButton;
         }
+        activeArea.translate(step);
     }
 
     if (m_applet && m_applet->hasValidAssociatedApplication()) {
-        activeArea.translate(step);
         if (activeArea.contains(point)) {
             return MaximizeButton;
         }
