@@ -22,9 +22,6 @@
 
 #include "abstractgroup.h"
 
-class QGraphicsGridLayout;
-class QGraphicsLinearLayout;
-
 namespace Plasma
 {
     class Applet;
@@ -33,6 +30,17 @@ namespace Plasma
 
 class Position;
 class Spacer;
+
+struct LayoutItem {
+    int row;
+    int column;
+    QGraphicsWidget *widget;
+
+    bool operator==(const LayoutItem &i)
+    {
+        return (widget == i.widget);
+    }
+};
 
 class GridGroup : public AbstractGroup
 {
@@ -48,6 +56,7 @@ class GridGroup : public AbstractGroup
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
+        void resizeEvent(QGraphicsSceneResizeEvent *event);
 
     private slots:
         void onInitCompleted();
@@ -61,15 +70,20 @@ class GridGroup : public AbstractGroup
             Vertical = 1
         };
 
-        QGraphicsLayoutItem *removeItemAt(int row, int column, bool fillLayout = true);
-        QGraphicsLayoutItem *removeItemAt(const Position &position, bool fillLayout = true);
+        QGraphicsWidget *itemAt(int row, int column) const;
+        QGraphicsWidget *removeItemAt(int row, int column, bool fillLayout = true);
+        QGraphicsWidget *removeItemAt(const Position &position, bool fillLayout = true);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
-        void insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation = Horizontal);
-        Position itemPosition(QGraphicsItem *item) const;
+        void insertItemAt(QGraphicsWidget *item, int row, int column);
+        void insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation);
+        Position itemPosition(QGraphicsWidget *item) const;
         int nearestBoundair(qreal pos, qreal size) const;
+        void adjustCells();
+        int columnCount() const;
+        int rowCount() const;
 
-        QGraphicsGridLayout *m_layout;
         Spacer *m_spacer;
+        QList<LayoutItem> m_layoutItems;
 
         friend class Spacer;
 };
