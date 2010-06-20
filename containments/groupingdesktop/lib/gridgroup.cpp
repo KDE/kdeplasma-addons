@@ -117,7 +117,7 @@ void GridGroup::onInitCompleted()
 
 void GridGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
 {
-    if (children().contains(widget)) {
+    if (children().contains(widget) && immutability() == Plasma::Mutable) {
         removeItem(widget);
     }
 }
