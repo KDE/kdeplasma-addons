@@ -765,7 +765,7 @@ void Handle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         m_widget->resize(newSize.x(), newSize.y());
         // apply position, no need if we're rotating
         if (m_pressedButton != RotateButton) {
-            m_widget->setPos(m_containment->mapFromScene(newCenter - newSize/2));
+            m_widget->setPos(m_widget->parentItem()->mapFromScene(newCenter - newSize/2));
         }
 
         // apply angle
