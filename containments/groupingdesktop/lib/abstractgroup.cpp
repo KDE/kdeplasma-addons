@@ -317,7 +317,7 @@ void AbstractGroup::destroy()
 {
     kDebug()<<"destroying group"<<id()<<"of type"<<pluginName();
 
-    if (applets().count() == 0) {
+    if (children().count() == 0) {
         d->destroyGroup();
         return;
     }
