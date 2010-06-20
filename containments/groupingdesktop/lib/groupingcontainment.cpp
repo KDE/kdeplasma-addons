@@ -572,7 +572,7 @@ void GroupingContainment::saveContents(KConfigGroup &group) const
     foreach (AbstractGroup *group, d->groups) {
         KConfigGroup groupConfig(&groupsConfig, QString::number(group->id()));
         groupConfig.writeEntry("plugin", group->pluginName());
-        QRectF rect = group->contentsRect();
+        QRectF rect = group->boundingRect();
         rect.translate(mapToItem(this, group->pos()));
         groupConfig.writeEntry("geometry", rect);
         group->save(groupConfig);
