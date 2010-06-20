@@ -109,9 +109,17 @@ void KGraphicsWebSlice::createSlice()
     if (geo.isValid()) {
         d->originalGeometry = geo;
 
+        qreal f = size().width() / geo.width();
+
+        if (f > 0.1 && f < 8) {
+            d->view->setZoomFactor(f);
+            d->currentZoom = f;
+        }
+
         QSizeF viewSize = geo.size();
         viewSize.scale(size(), Qt::KeepAspectRatio);
         d->view->resize(viewSize);
+
         QSizeF center = size()/2 - viewSize/2;
         d->view->setPos(center.width(), center.height());
         frame->setScrollPosition( geo.topLeft().toPoint() );
@@ -131,11 +139,14 @@ QRectF KGraphicsWebSlice::sliceGeometry()
     if (!d->selector.isEmpty()) {
         QWebElement element = frame->findFirstElement(d->selector);
         if ( !element.isNull() ) {
+            d->view->page()->setPreferredContentsSize(QSize(1024,768));
             geo = element.geometry();
         }
     } else if (!d->sliceGeometry.isEmpty()) {
+        d->view->page()->setPreferredContentsSize(QSize(1024,768));
         geo = d->sliceGeometry;
     } else {
+        d->view->page()->setPreferredContentsSize(QSize(-1,-1));
         QWebElement element = frame->documentElement();
         geo = element.geometry();
     }
@@ -155,7 +166,8 @@ void KGraphicsWebSlice::refresh()
     }
 
     QSizeF viewSize = geo.size();
-    viewSize.scale(size(), Qt::KeepAspectRatio);
+    viewSize.scale(size(), Qt::KeepAspectRatioByExpanding);
+    viewSize = viewSize.boundedTo(size());
     d->view->resize(viewSize);
     QSizeF center = size()/2 - viewSize/2;
     d->view->setPos(center.width(), center.height());
@@ -177,15 +189,11 @@ void KGraphicsWebSlice::resizeEvent ( QGraphicsSceneResizeEvent * event )
         qDebug() << "giant size, what's going on???????" << o.width();
         return;
     }
-    qreal f;
-    if ((o.width() >= o.height() && event->newSize().width() >= event->newSize().height()) ||
-        (o.width() <= o.height() && event->newSize().width() <= event->newSize().height())) {
-        f = n.width() / o.width();
-    } else {
-        f = n.height() / o.height();
-    }
+    qreal f = n.width() / o.width();
+
     if (f > 0.1 && f < 8) {
         d->view->setZoomFactor(f);
+        d->currentZoom = f;
         refresh();
         qDebug() << "Zoom  :" << n.width() << " / " <<  o.width() << " = " << f;
     }
