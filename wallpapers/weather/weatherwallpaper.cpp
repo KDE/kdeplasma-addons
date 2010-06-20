@@ -99,7 +99,7 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     m_weatherMap["weather-snow-scattered"] = config.readEntry("snowScatteredPaper", m_dir + "Winter_Track/");
     m_weatherMap["weather-few-clouds-night"] = config.readEntry("partlyCloudyNightPaper", m_dir + "JK_Bridge_at_Night/");
     m_weatherMap["weather-clouds-night"] = config.readEntry("cloudyNightPaper", m_dir + "JK_Bridge_at_Night/");
-    m_weatherMap["weather-clear-night"] = config.readEntry("clearNightPaper", m_dir + "At_Night/");
+    m_weatherMap["weather-clear-night"] = config.readEntry("clearNightPaper", m_dir + "City_at_Night/");
     m_weatherMap["weather-freezing-rain"] = config.readEntry("freezingRainPaper", m_dir + "Icy_Tree/");
     m_weatherMap["weather-snow-rain"] = config.readEntry("snowRainPaper", m_dir + "Icy_Tree/");
 
