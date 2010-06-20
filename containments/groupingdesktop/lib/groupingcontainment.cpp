@@ -610,7 +610,7 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
     Plasma::Containment::restoreContents(group);
 
     KConfigGroup groupsConfig(&group, "Groups");
-    foreach (QString groupId, groupsConfig.groupList()) {
+    foreach (const QString &groupId, groupsConfig.groupList()) {
         int id = groupId.toInt();
         KConfigGroup groupConfig(&groupsConfig, groupId);
         QRectF geometry = groupConfig.readEntry("geometry", QRectF());

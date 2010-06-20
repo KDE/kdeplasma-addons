@@ -28,7 +28,7 @@ class StackingGroup : public AbstractGroup
 {
     Q_OBJECT
     public:
-        StackingGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+        explicit StackingGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         virtual ~StackingGroup();
 
         virtual QString pluginName() const;

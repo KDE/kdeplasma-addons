@@ -28,7 +28,7 @@ class ItemOverlay : public QGraphicsWidget
 {
     Q_OBJECT
     public:
-        ItemOverlay(QGraphicsWidget *item, Qt::WindowFlags wFlags = 0);
+        explicit ItemOverlay(QGraphicsWidget *item, Qt::WindowFlags wFlags = 0);
         ~ItemOverlay();
 
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);

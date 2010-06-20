@@ -215,7 +215,8 @@ QGraphicsWidget *GridGroup::removeItemAt(int row, int column, bool fillLayout)
 {
     LayoutItem lItem;
     lItem.row = -1;
-    foreach (const LayoutItem item, m_layoutItems) {
+    lItem.widget = 0;
+    foreach (const LayoutItem &item, m_layoutItems) {
         if (item.row == row && item.column == column) {
             lItem = item;
             break;
@@ -283,7 +284,7 @@ void GridGroup::insertItemAt(QGraphicsWidget *item, int row, int column, Orienta
 
 QGraphicsWidget *GridGroup::itemAt(int row, int column) const
 {
-    foreach (const LayoutItem item, m_layoutItems) {
+    foreach (const LayoutItem &item, m_layoutItems) {
         if (item.row == row && item.column == column) {
             return item.widget;
         }
@@ -381,7 +382,7 @@ void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 int GridGroup::columnCount() const
 {
     int columns = 0;
-    foreach (const LayoutItem item, m_layoutItems) {
+    foreach (const LayoutItem &item, m_layoutItems) {
         if (item.column + 1 > columns) {
             columns = item.column + 1;
         }
@@ -393,7 +394,7 @@ int GridGroup::columnCount() const
 int GridGroup::rowCount() const
 {
     int rows = 0;
-    foreach (const LayoutItem item, m_layoutItems) {
+    foreach (const LayoutItem &item, m_layoutItems) {
         if (item.row + 1 > rows) {
             rows = item.row + 1;
         }
@@ -411,7 +412,7 @@ void GridGroup::adjustCells()
     qreal width = (columns != 0 ? rect.width() / columns : 1);
     qreal height = (rows != 0 ? rect.height() / rows : 1);
 
-    foreach (const LayoutItem item, m_layoutItems) {
+    foreach (const LayoutItem &item, m_layoutItems) {
         item.widget->setPos(QPointF(width * item.column, height * item.row) + rect.topLeft());
         item.widget->resize(width, height);
     }

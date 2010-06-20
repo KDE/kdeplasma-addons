@@ -46,7 +46,7 @@ class GridGroup : public AbstractGroup
 {
     Q_OBJECT
     public:
-        GridGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+        explicit GridGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         ~GridGroup();
 
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;

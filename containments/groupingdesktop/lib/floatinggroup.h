@@ -26,7 +26,7 @@ class FloatingGroup : public AbstractGroup
 {
     Q_OBJECT
     public:
-        FloatingGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+        explicit FloatingGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         virtual ~FloatingGroup();
 
         virtual QString pluginName() const;

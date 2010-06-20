@@ -51,7 +51,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         /**
          * Constructor of the abstract class.
          **/
-        AbstractGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+        explicit AbstractGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
 
         /**
          * Default destructor
@@ -213,7 +213,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         /**
          * Lay outs a child inside the group
          * A child group probably wants to reimplement this function
-         * @param child the child to be layed out
+         * @param child the child to be laid out
          * @param pos the position of the applet mapped to the group's coordinates
          **/
         virtual void layoutChild(QGraphicsWidget *child, const QPointF &pos) = 0;

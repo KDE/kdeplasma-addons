@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef ABSTRACTGROPUPRIVATE_H
+#ifndef ABSTRACTGROUPPRIVATE_H
 #define ABSTRACTGROUPPRIVATE_H
 
 #include "abstractgroup.h"
