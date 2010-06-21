@@ -415,6 +415,7 @@ void GridGroup::adjustCells()
     foreach (const LayoutItem &item, m_layoutItems) {
         item.widget->setPos(QPointF(width * item.column, height * item.row) + rect.topLeft());
         item.widget->resize(width, height);
+        item.widget->setMaximumSize(width, height);
     }
 }
 
