@@ -63,6 +63,7 @@ class GridGroup : public AbstractGroup
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
         void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
         void onWidgetStartsMoving(QGraphicsWidget *widget);
+        void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
 
     private:
         enum Orientation {
@@ -81,9 +82,11 @@ class GridGroup : public AbstractGroup
         void adjustCells();
         int columnCount() const;
         int rowCount() const;
+        void setChildBorders(QGraphicsWidget *widget);
 
         Spacer *m_spacer;
         QList<LayoutItem> m_layoutItems;
+        QMap<QGraphicsWidget *, Plasma::Applet::BackgroundHints> m_savedHints;
 
         friend class Spacer;
 };

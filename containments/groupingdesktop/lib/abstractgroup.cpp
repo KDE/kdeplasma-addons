@@ -165,6 +165,8 @@ void AbstractGroup::setImmutability(Plasma::ImmutabilityType immutability)
     foreach (AbstractGroup *group, subGroups()) {
         group->setImmutability(immutability);
     }
+
+    emit immutabilityChanged(immutability);
 }
 
 Plasma::ImmutabilityType AbstractGroup::immutability() const

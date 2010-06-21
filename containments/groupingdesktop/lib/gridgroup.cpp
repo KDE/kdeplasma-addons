@@ -102,6 +102,8 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             this, SLOT(onAppletRemoved(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
             this, SLOT(onSubGroupRemoved(AbstractGroup*, AbstractGroup*)));
+    connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+            this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
 }
 
 GridGroup::~GridGroup()
@@ -134,6 +136,28 @@ void GridGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group)
     Q_UNUSED(group)
 
     removeItem(subGroup);
+}
+
+void GridGroup::onImmutabilityChanged(Plasma::ImmutabilityType)
+{
+    foreach (const LayoutItem &item, m_layoutItems) {
+        setChildBorders(item.widget);
+    }
+}
+
+void GridGroup::setChildBorders(QGraphicsWidget *widget)
+{
+    Plasma::Applet *a = qobject_cast<Plasma::Applet *>(widget);
+    if (a) {
+        if (immutability() == Plasma::Mutable) {
+            if (m_savedHints.contains(widget)) {
+                a->setBackgroundHints(m_savedHints.value(widget));
+            }
+        } else if (a->backgroundHints() != Plasma::Applet::NoBackground) {
+                m_savedHints.insert(widget, a->backgroundHints());
+                a->setBackgroundHints(Plasma::Applet::NoBackground);
+        }
+    }
 }
 
 QString GridGroup::pluginName() const
@@ -296,6 +320,7 @@ QGraphicsWidget *GridGroup::itemAt(int row, int column) const
 void GridGroup::insertItemAt(QGraphicsWidget *item, int row, int column)
 {
     item->show();
+    setChildBorders(item);
 
     LayoutItem i;
     i.row = row;

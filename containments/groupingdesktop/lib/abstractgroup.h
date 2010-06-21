@@ -271,6 +271,8 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
 
         void initCompleted();
 
+        void immutabilityChanged(Plasma::ImmutabilityType immutability);
+
     private:
         Q_PRIVATE_SLOT(d, void appletDestroyed(Plasma::Applet *applet))
         Q_PRIVATE_SLOT(d, void subGroupDestroyed(AbstractGroup *subGroup))
