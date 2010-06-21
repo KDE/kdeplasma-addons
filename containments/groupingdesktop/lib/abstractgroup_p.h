@@ -31,6 +31,7 @@ class AbstractGroupPrivate
         KConfigGroup *mainConfigGroup();
         void addChild(QGraphicsWidget *child);
         void removeChild(QGraphicsWidget *child);
+        void startDestroyAnimation();
         void destroyGroup();
         void appletDestroyed(Plasma::Applet *applet);
         void subGroupDestroyed(AbstractGroup *subGroup);

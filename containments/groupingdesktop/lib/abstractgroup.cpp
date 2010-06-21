@@ -74,14 +74,16 @@ void AbstractGroupPrivate::destroyGroup()
     mainConfigGroup()->deleteGroup();
     emit q->configNeedsSaving();
 
-    Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::DisappearAnimation, q);
-    if (anim) {
-    anim->setTargetWidget(q);
-    anim->start();
-    }
-
     q->scene()->removeItem(q);
     delete q;
+}
+
+void AbstractGroupPrivate::startDestroyAnimation()
+{
+    Plasma::Animation *zoomAnim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
+    q->connect(zoomAnim, SIGNAL(finished()), q, SLOT(destroyGroup()));
+    zoomAnim->setTargetWidget(q);
+    zoomAnim->start();
 }
 
 void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
@@ -95,7 +97,7 @@ void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
         emit q->configNeedsSaving();
 
         if (destroying && (q->children().count() == 0)) {
-            destroyGroup();
+            startDestroyAnimation();
             destroying = false;
         }
     }
@@ -112,7 +114,7 @@ void AbstractGroupPrivate::subGroupDestroyed(AbstractGroup *subGroup)
         emit q->configNeedsSaving();
 
         if (destroying && (q->children().count() == 0)) {
-            destroyGroup();
+            startDestroyAnimation();
             destroying = false;
         }
     }
@@ -318,7 +320,7 @@ void AbstractGroup::destroy()
     kDebug()<<"destroying group"<<id()<<"of type"<<pluginName();
 
     if (children().count() == 0) {
-        d->destroyGroup();
+        d->startDestroyAnimation();
         return;
     }
 

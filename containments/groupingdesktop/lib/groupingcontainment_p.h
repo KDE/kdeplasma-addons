@@ -54,6 +54,7 @@ class GroupingContainmentPrivate
         void onSubGroupRemovedFromGroup(AbstractGroup *subGroup, AbstractGroup *group);
         void onWidgetMoved(QGraphicsWidget *widget);
         void dragMove(const QPointF &pos);
+        void groupAppearAnimationComplete();
 
         GroupingContainment *q;
         QList<AbstractGroup *> groups;

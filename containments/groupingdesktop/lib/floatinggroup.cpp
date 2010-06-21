@@ -50,7 +50,7 @@ void FloatingGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup grou
 
 void FloatingGroup::layoutChild(QGraphicsWidget *, const QPointF &)
 {
-
+    
 }
 
 #include "floatinggroup.moc"

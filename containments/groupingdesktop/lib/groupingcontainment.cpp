@@ -30,6 +30,8 @@
 #include <KIcon>
 
 #include <Plasma/Corona>
+#include <Plasma/Animator>
+#include <Plasma/Animation>
 
 #include "abstractgroup.h"
 #include "abstractgroup_p.h"
@@ -178,6 +180,17 @@ AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphics
     }
 
     return 0;
+}
+
+void GroupingContainmentPrivate::groupAppearAnimationComplete()
+{
+    Plasma::Animation *anim = qobject_cast<Plasma::Animation *>(q->sender());
+    if (anim) {
+        AbstractGroup *group = qobject_cast<AbstractGroup *>(anim->targetWidget());
+        if (group) {
+            manageGroup(group, group->pos());
+        }
+    }
 }
 
 void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPointF &pos)
@@ -356,7 +369,16 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
             this, SLOT(onSubGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)));
     connect(group, SIGNAL(configNeedsSaving()), this, SIGNAL(configNeedsSaving()));
     group->setPos(pos);
-    d->manageGroup(group, pos);
+
+    Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
+    if (anim) {
+        connect(anim, SIGNAL(finished()), this, SLOT(groupAppearAnimationComplete()));
+        anim->setTargetWidget(group);
+        anim->setProperty("zoom", 1.0);
+        anim->start(QAbstractAnimation::DeleteWhenStopped);
+    } else {
+        d->manageGroup(group, pos);
+    }
 
     if (containmentType() == Plasma::Containment::DesktopContainment) {
         group->installSceneEventFilter(this);
