@@ -296,7 +296,6 @@ QGraphicsWidget *GridGroup::itemAt(int row, int column) const
 void GridGroup::insertItemAt(QGraphicsWidget *item, int row, int column)
 {
     item->show();
-    item->setAcceptDrops(false);
 
     LayoutItem i;
     i.row = row;
@@ -414,8 +413,8 @@ void GridGroup::adjustCells()
 
     foreach (const LayoutItem &item, m_layoutItems) {
         item.widget->setPos(QPointF(width * item.column, height * item.row) + rect.topLeft());
-        item.widget->resize(width, height);
         item.widget->setMaximumSize(width, height);
+        item.widget->resize(width, height);
     }
 }
 
