@@ -47,7 +47,7 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
     m_from = new Plasma::Label(this);
     m_from->nativeWidget()->setWordWrap(false);
     m_text = new Plasma::TextBrowser(this);
-    m_text->nativeWidget()->setTextInteractionFlags(Qt::NoTextInteraction);
+    m_text->nativeWidget()->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::LinksAccessibleByKeyboard);
     m_text->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_text->nativeWidget()->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     m_text->nativeWidget()->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
