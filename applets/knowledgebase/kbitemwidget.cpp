@@ -128,6 +128,7 @@ void KBItemWidget::setDetailsShown(const bool show)
         question->setText(i18n("<body><b>Question:</b> %1</body>" ,m_ocsData["Description"].toString()));
         question->nativeWidget()->document()->setDefaultStyleSheet(Plasma::Theme::defaultTheme()->styleSheet());
         question->setText(i18n("<body><b>Question:</b> %1</body>" ,m_ocsData["Description"].toString()));
+        question->nativeWidget()->setTextInteractionFlags(Qt::NoTextInteraction);
 
         Plasma::TextBrowser *answer = new Plasma::TextBrowser(m_detailsWidget);
         answer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -140,6 +141,7 @@ void KBItemWidget::setDetailsShown(const bool show)
         } else {
             answer->setText(i18n("<body><b>Not answered yet</b> </body>"));
         }
+        answer->nativeWidget()->setTextInteractionFlags(Qt::NoTextInteraction);
 
         m_layout->addItem(m_detailsWidget);
     } else {
