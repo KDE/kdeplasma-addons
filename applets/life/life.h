@@ -58,6 +58,7 @@ class Life : public Plasma::Applet
         void startUpdateTimer();
 
         int neighbors(int i);
+	    int isAlive(int i);
         void step();
         void initGame();
         void resetGame();

@@ -156,12 +156,10 @@ void Life::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, c
     int x1 = x;
     for (int i = 0; i < cellsArrayHeight; i++){
         for (int j = 0; j < cellsArrayWidth; j++){
-            k++;
-
             if (cells[k]) {
                 p->fillRect(x1, y, cellWidth, cellHeight, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
             }
-
+            k++;
             x1 += cellWidth;
         }
 
@@ -172,28 +170,43 @@ void Life::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, c
 
 int Life::neighbors(int i)
 {
-    return cells[i - cellsArrayWidth - 1] + cells[i - cellsArrayWidth] + cells[i - cellsArrayWidth + 1] +
-           cells[i - 1] + cells[i + 1] +
-           cells[i + cellsArrayWidth - 1] + cells[i + cellsArrayWidth] + cells[i + cellsArrayWidth + 1];
+    int neighbors = 0;
+    if (!((i % cellsArrayWidth) == 0)) // Not on the left edge, safe to check '-1's
+    {
+        neighbors += isAlive(i - cellsArrayWidth - 1) + isAlive(i - 1)
+            + isAlive(i + cellsArrayWidth - 1);
+    }
+    if (!((i % cellsArrayWidth) == (cellsArrayWidth - 1))) // Not on the right edge, safe to check '+1's
+    {
+        neighbors += isAlive(i - cellsArrayWidth + 1) + isAlive(i + 1)
+            + isAlive(i + cellsArrayWidth + 1);
+    }
+
+    return neighbors + isAlive(i - cellsArrayWidth)
+        + isAlive(i + cellsArrayWidth);
+}
+
+int Life::isAlive(int i)
+{
+    if ((i < 0) || (i >= (cellsArrayHeight * cellsArrayWidth))) // Out of bounds
+        return 0;
+    return cells[i];
 }
 
 void Life::step()
 {
-	for (int i = cellsArrayWidth + 1; i < cellsArrayHeight * cellsArrayWidth - cellsArrayWidth; i += ((i % cellsArrayWidth) != cellsArrayWidth - 2) ? 1 : 3){
+    for (int i = 0; i < ((cellsArrayHeight * cellsArrayWidth) - 1); i++){
 		switch(neighbors(i)){
 			case 2:
 				nextGenerationCells[i] = cells[i];
-		
 				break;
 		
 			case 3:
 				nextGenerationCells[i] = 1;
-		
 				break;
 		
 			default:
 				nextGenerationCells[i] = 0;
-	
 				break;
 		}
 	}
@@ -217,7 +230,7 @@ void Life::initGame()
 
 void Life::resetGame()
 {
-    for (int i = cellsArrayWidth + 1; i < cellsArrayHeight * cellsArrayWidth - cellsArrayWidth; i += ((i % cellsArrayWidth) != cellsArrayWidth - 2) ? 1 : 3){
+    for (int i = 0; i < ((cellsArrayHeight * cellsArrayWidth) - 1); i++){
         cells[i] = rand() % 2;
     }
 
