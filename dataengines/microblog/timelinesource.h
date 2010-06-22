@@ -54,6 +54,8 @@ private slots:
 
 private:
     KUrl m_url;
+    QString m_status;
+    TimelineSource *m_source;
 };
 
 class TimelineService : public Plasma::Service
@@ -92,14 +94,21 @@ public:
     QString password() const;
     KUrl serviceBaseUrl() const;
 
-    Plasma::Service *createService();
+    bool useOAuth() const;
+    QByteArray oauthToken() const;
+    QByteArray oauthTokenSecret() const;
 
-    ImageSource *imageSource() const;
+    Plasma::Service* createService();
+
+    ImageSource* imageSource() const;
     void setImageSource(ImageSource *);
 
 private slots:
     void recv(KIO::Job*, const QByteArray& data);
     void result(KJob*);
+
+    void auth(KIO::Job*, const QByteArray& data);
+    void authFinished(KJob*);
 
 private:
     void parse(QXmlStreamReader &xml);
@@ -108,6 +117,9 @@ private:
     void readDirectMessage(QXmlStreamReader &xml);
     void skipTag(QXmlStreamReader &xml, const QString &tagName);
 
+    // OAuth constants
+    static const QString AccessTokenUrl;
+
     KUrl m_url;
     KUrl m_serviceBaseUrl;
     ImageSource *m_imageSource;
@@ -115,6 +127,13 @@ private:
     Plasma::DataEngine::Data m_tempData;
     KIO::Job * m_job;
     QString m_id;
+
+    bool m_useOAuth;
+    QString m_user;
+    QByteArray m_oauthTemp;
+    KIO::Job *m_authJob;
+    QByteArray m_oauthToken;
+    QByteArray m_oauthTokenSecret;
 };
 
 #endif
