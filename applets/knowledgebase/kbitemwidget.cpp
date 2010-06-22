@@ -32,6 +32,7 @@
 #include <KIcon>
 #include <KIconLoader>
 #include <KToolInvocation>
+#include <KTextBrowser>
 
 // Plasma
 #include <Plasma/Theme>
@@ -124,17 +125,20 @@ void KBItemWidget::setDetailsShown(const bool show)
         question->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         question->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         lay->addItem(question, 0, 1);
-        question->setText(i18n("<b>Question:</b> %1" ,m_ocsData["Description"].toString()));
+        question->setText(i18n("<body><b>Question:</b> %1</body>" ,m_ocsData["Description"].toString()));
+        question->nativeWidget()->document()->setDefaultStyleSheet(Plasma::Theme::defaultTheme()->styleSheet());
+        question->setText(i18n("<body><b>Question:</b> %1</body>" ,m_ocsData["Description"].toString()));
 
         Plasma::TextBrowser *answer = new Plasma::TextBrowser(m_detailsWidget);
         answer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         answer->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         lay->addItem(answer, 1, 0, 1, 2);
+        answer->nativeWidget()->document()->setDefaultStyleSheet(Plasma::Theme::defaultTheme()->styleSheet());
         QString answerText = m_ocsData["Answer"].toString();
         if (answerText.length() > 0) {
-            answer->setText(i18n("<b>Answer:</b> %1", answerText));
+            answer->setText(i18n("<body><b>Answer:</b> %1</body>", answerText));
         } else {
-            answer->setText(i18n("<b>Not answered yet</b> "));
+            answer->setText(i18n("<body><b>Not answered yet</b> </body>"));
         }
 
         m_layout->addItem(m_detailsWidget);
