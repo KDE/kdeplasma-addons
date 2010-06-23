@@ -64,8 +64,6 @@ void WeatherStation::init()
     m_lcdPanel->hide();
 
     //m_lcd->setItemOn("under_construction");
-    configChanged();
-
     WeatherPopupApplet::init();
 }
 
