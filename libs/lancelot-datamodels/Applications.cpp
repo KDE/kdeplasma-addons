@@ -27,6 +27,7 @@
 #include <KStandardDirs>
 #include <KSycoca>
 #include <KUrl>
+#include <KToolInvocation>
 
 #include "FavoriteApplications.h"
 #include "Logger.h"
@@ -207,8 +208,15 @@ void Applications::activate(int index)
     }
 
     QString data = d->items.at(index - d->submodels.size()).desktopFile;
+
+    int result = KToolInvocation::startServiceByDesktopPath(data, QStringList(), 0, 0, 0, "", true);
+
     Logger::self()->log("applications-model", data);
-    new KRun(KUrl(data), 0);
+
+    if (result != 0) {
+        new KRun(KUrl(data), 0);
+    }
+
     ApplicationConnector::self()->hide(true);
 }
 
