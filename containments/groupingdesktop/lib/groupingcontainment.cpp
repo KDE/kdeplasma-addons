@@ -50,7 +50,8 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              mainGroup(0),
                              mainGroupId(0),
                              layout(0),
-                             movingWidget(0)
+                             movingWidget(0),
+                             loading(true)
 {
     newGroupAction = new QAction(i18n("Add a new group"), q);
     newGroupMenu = new KMenu(i18n("Add a new group"), 0);
@@ -370,14 +371,16 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     connect(group, SIGNAL(configNeedsSaving()), this, SIGNAL(configNeedsSaving()));
     group->setPos(pos);
 
-    Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
-    if (anim) {
-        connect(anim, SIGNAL(finished()), this, SLOT(groupAppearAnimationComplete()));
-        anim->setTargetWidget(group);
-        anim->setProperty("zoom", 1.0);
-        anim->start(QAbstractAnimation::DeleteWhenStopped);
-    } else {
-        d->manageGroup(group, pos);
+    if (!d->loading) {
+        Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
+        if (anim) {
+            connect(anim, SIGNAL(finished()), this, SLOT(groupAppearAnimationComplete()));
+            anim->setTargetWidget(group);
+            anim->setProperty("zoom", 1.0);
+            anim->start(QAbstractAnimation::DeleteWhenStopped);
+        } else {
+            d->manageGroup(group, pos);
+        }
     }
 
     if (containmentType() == Plasma::Containment::DesktopContainment) {
@@ -700,6 +703,8 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
             }
         }
     }
+
+    d->loading = false;
 }
 
 void GroupingContainment::mousePressEvent(QGraphicsSceneMouseEvent *event)

@@ -73,6 +73,7 @@ class GroupingContainmentPrivate
         QGraphicsLinearLayout *layout;
         QString mainGroupPlugin;
         QGraphicsWidget *movingWidget;
+        bool loading;
 
         static int s_maxZValue;
 };
