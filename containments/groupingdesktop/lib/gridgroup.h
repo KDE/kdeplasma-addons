@@ -52,15 +52,20 @@ class GridGroup : public AbstractGroup
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup& group);
         QString pluginName() const;
-        virtual void showDropZone(const QPointF &pos);
+        void showDropZone(const QPointF &pos);
+        void save(KConfigGroup &group) const;
+        void restore(KConfigGroup &group);
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
+        bool sceneEventFilter(QGraphicsItem *item, QEvent *event);
         void resizeEvent(QGraphicsSceneResizeEvent *event);
 
     private slots:
         void onInitCompleted();
+        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
+        void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
         void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
         void onWidgetStartsMoving(QGraphicsWidget *widget);
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
@@ -83,10 +88,22 @@ class GridGroup : public AbstractGroup
         int columnCount() const;
         int rowCount() const;
         void setChildBorders(QGraphicsWidget *widget);
+        int isOnAColumnBorder(qreal x) const;
+
+        void insertColumnAt(int column);
+        void removeColumnAt(int column);
+        void insertRowAt(int row);
+        void removeRowAt(int row);
 
         Spacer *m_spacer;
         QList<LayoutItem> m_layoutItems;
         QMap<QGraphicsWidget *, Plasma::Applet::BackgroundHints> m_savedHints;
+        QList<qreal> m_rowHeights;
+        QList<qreal> m_rowY;
+        QList<qreal> m_columnWidths;
+        QList<qreal> m_columnX;
+        int m_movingColumn;
+        bool m_cursorOverriden;
 
         friend class Spacer;
 };
