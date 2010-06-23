@@ -1,15 +1,18 @@
+find_package(QCA2 REQUIRED)
+
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
-${QT_QTNETWORK_INCLUDES} ${QT_QTXML_INCLUDES} )
+${QT_QTNETWORK_INCLUDES} ${QT_QTXML_INCLUDES} ${QCA2_INCLUDE_DIR})
 
 set(twitter_engine_SRCS
     imagesource.cpp
+    oauth.cpp
     timelinesource.cpp
     twitterengine.cpp
 )
 
 kde4_add_plugin(plasma_engine_microblog ${twitter_engine_SRCS})
 target_link_libraries(plasma_engine_microblog ${KDE4_KIO_LIBS}
-${KDE4_PLASMA_LIBS} ${QT_QTXML_LIBS} ${QT_QTNETWORK_LIBS})
+${KDE4_PLASMA_LIBS} ${QT_QTXML_LIBS} ${QT_QTNETWORK_LIBS} ${QCA2_LIBRARIES})
 
 install(TARGETS plasma_engine_microblog DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-dataengine-microblog.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
