@@ -28,6 +28,7 @@
 #include <KSycoca>
 #include <KUrl>
 #include <KToolInvocation>
+#include <KDebug>
 
 #include "FavoriteApplications.h"
 #include "Logger.h"

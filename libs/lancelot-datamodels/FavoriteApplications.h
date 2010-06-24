@@ -58,7 +58,11 @@ protected:
 private:
     FavoriteApplications();
     virtual ~FavoriteApplications();
+
     static FavoriteApplications * m_instance;
+
+    class Private;
+    Private const * d;
 
 };
 

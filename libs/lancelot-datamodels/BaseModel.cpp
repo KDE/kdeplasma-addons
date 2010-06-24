@@ -19,7 +19,9 @@
  */
 
 #include "BaseModel.h"
+
 #include <QFileInfo>
+#include <QApplication>
 
 #include <KRun>
 #include <KLocalizedString>
@@ -30,7 +32,8 @@
 #include <KGlobal>
 #include <KMimeType>
 #include <KUrl>
-#include <QApplication>
+#include <KToolInvocation>
+
 #include <lancelot/models/PlasmaServiceListModel.h>
 
 #include "Logger.h"
@@ -120,7 +123,17 @@ void BaseModel::activate(int index)
     QString data = itemAt(index).data.toString();
 
     Logger::self()->log("base-model", data);
-    new KRun(KUrl(data), 0);
+
+    int result = -1;
+
+    if (data.endsWith(".desktop")) {
+        result = KToolInvocation::startServiceByDesktopPath(data, QStringList(), 0, 0, 0, "", true);
+    }
+
+    if (result != 0) {
+        new KRun(KUrl(data), 0);
+    }
+
     hideApplicationWindow();
 }
 
@@ -151,6 +164,9 @@ int BaseModel::addServices(const QStringList & serviceNames)
 bool BaseModel::addService(const QString & serviceName)
 {
     const KService::Ptr service = KService::serviceByStorageId(serviceName);
+
+    qDebug() << "BaseModel::addService Applic:" << service->isValid() << " " << serviceName;
+
     return addService(service);
 }
 

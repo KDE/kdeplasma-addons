@@ -46,7 +46,11 @@ FavoriteApplications::~FavoriteApplications()
 
 bool FavoriteApplications::addFavorite(QString url)
 {
-    if (addUrl(url)) {
+    if (url.endsWith(".desktop")) {
+        addService(url);
+        save();
+
+    } else if (addUrl(url)) {
         save();
         return true;
     }
@@ -72,7 +76,15 @@ void FavoriteApplications::load()
         loadDefaultApplications();
         save();
     } else {
-        addUrls(favoriteList);
+        foreach (const QString & favoriteItem, favoriteList) {
+            if (favoriteItem.endsWith(".desktop")) {
+                addService(favoriteItem);
+
+            } else {
+                addUrl(favoriteItem);
+
+            }
+        }
     }
 }
 
