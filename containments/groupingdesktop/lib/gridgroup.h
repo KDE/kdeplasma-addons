@@ -31,17 +31,6 @@ namespace Plasma
 class Position;
 class Spacer;
 
-struct LayoutItem {
-    int row;
-    int column;
-    QGraphicsWidget *widget;
-
-    bool operator==(const LayoutItem &i)
-    {
-        return (widget == i.widget);
-    }
-};
-
 class GridGroup : public AbstractGroup
 {
     Q_OBJECT
@@ -71,13 +60,10 @@ class GridGroup : public AbstractGroup
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
 
     private:
-        QGraphicsWidget *itemAt(int row, int column) const;
         void addItem(QGraphicsWidget *widget, int row, int column);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
         Position itemPosition(QGraphicsWidget *item) const;
         void adjustCells();
-        int columnCount() const;
-        int rowCount() const;
         void setChildBorders(QGraphicsWidget *widget);
         int isOnAColumnBorder(qreal x) const;
         int isOnARowBorder(qreal y) const;
@@ -88,7 +74,6 @@ class GridGroup : public AbstractGroup
         void removeRowAt(int row);
 
         Spacer *m_spacer;
-        QList<LayoutItem> m_layoutItems;
         QList<QList<QGraphicsWidget *> > m_children;
         QMap<QGraphicsWidget *, Plasma::Applet::BackgroundHints> m_savedHints;
         QList<qreal> m_rowHeights;
@@ -96,7 +81,7 @@ class GridGroup : public AbstractGroup
         QList<qreal> m_columnWidths;
         QList<qreal> m_columnX;
         int m_movingColumn;
-        bool m_movingRow;
+        int m_movingRow;
         bool m_cursorOverriden;
 
         friend class Spacer;

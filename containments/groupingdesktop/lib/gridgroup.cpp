@@ -127,6 +127,7 @@ void GridGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
 {
     if (children().contains(widget) && immutability() == Plasma::Mutable) {
         removeItem(widget);
+        widget->removeEventFilter(this);
     }
 }
 
@@ -145,6 +146,7 @@ void GridGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
     Q_UNUSED(group)
 
     removeItem(applet);
+    applet->removeEventFilter(this);
 }
 
 void GridGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group)
@@ -152,12 +154,15 @@ void GridGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group)
     Q_UNUSED(group)
 
     removeItem(subGroup);
+    subGroup->removeEventFilter(this);
 }
 
 void GridGroup::onImmutabilityChanged(Plasma::ImmutabilityType)
 {
-    foreach (const LayoutItem &item, m_layoutItems) {
-        setChildBorders(item.widget);
+    for (int i = 0; i < m_children.size(); ++i) {
+        for (int j = 0; j < m_children.at(0).size(); ++j) {
+            setChildBorders(m_children.at(i).at(j));
+        }
     }
 }
 
@@ -272,17 +277,6 @@ void GridGroup::removeItem(QGraphicsWidget *item, bool fillLayout)
     }
 
     adjustCells();
-}
-
-QGraphicsWidget *GridGroup::itemAt(int row, int column) const
-{
-    foreach (const LayoutItem &item, m_layoutItems) {
-        if (item.row == row && item.column == column) {
-            return item.widget;
-        }
-    }
-
-    return 0;
 }
 
 void GridGroup::insertColumnAt(int column)
@@ -473,16 +467,28 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
         case QEvent::GraphicsSceneHoverMove: {
             int col = isOnAColumnBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).x());
             int row = isOnARowBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).y());
-            if (col != -1) {
+            if (col > 0 && col < m_columnWidths.size()) {
                 m_cursorOverriden = true;
+                if (m_movingRow != -1) {
+                    m_movingRow = -1;
+                    QApplication::restoreOverrideCursor();
+                }
                 QApplication::setOverrideCursor(QCursor(Qt::SplitHCursor));
+                m_movingColumn = col;
                 return true;
-            } else if (row != -1) {
+            } else if (row > 0 && row < m_rowHeights.size()) {
                 m_cursorOverriden = true;
+                if (m_movingColumn != -1) {
+                    m_movingColumn = -1;
+                    QApplication::restoreOverrideCursor();
+                }
                 QApplication::setOverrideCursor(QCursor(Qt::SplitVCursor));
+                m_movingRow = row;
                 return true;
             } else if(m_cursorOverriden) {
                 m_cursorOverriden = false;
+                m_movingColumn = -1;
+                m_movingRow = -1;
                 QApplication::restoreOverrideCursor();
             }
         }
@@ -492,11 +498,11 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
         case QEvent::GraphicsSceneMousePress: {
             int col = isOnAColumnBorder(mapFromItem(item, static_cast<QGraphicsSceneMouseEvent *>(event)->pos()).x());
             int row = isOnARowBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).y());
-            if (col != -1) {
-                m_movingColumn = col;
+            if (col > 0 && col < m_columnWidths.size()) {
+//                 m_movingColumn = col;
                 return true;
-            } else if (row != -1) {
-                m_movingRow = row;
+            } else if (row > 0 && row < m_rowHeights.size()) {
+//                 m_movingRow = row;
                 return true;
             }
         }
@@ -576,30 +582,6 @@ int GridGroup::isOnARowBorder(qreal y) const
     }
 
     return -1;
-}
-
-int GridGroup::columnCount() const
-{
-    int columns = 0;
-    foreach (const LayoutItem &item, m_layoutItems) {
-        if (item.column + 1 > columns) {
-            columns = item.column + 1;
-        }
-    }
-
-    return columns;
-}
-
-int GridGroup::rowCount() const
-{
-    int rows = 0;
-    foreach (const LayoutItem &item, m_layoutItems) {
-        if (item.row + 1 > rows) {
-            rows = item.row + 1;
-        }
-    }
-
-    return rows;
 }
 
 void GridGroup::adjustCells()
