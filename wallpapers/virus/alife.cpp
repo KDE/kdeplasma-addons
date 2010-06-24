@@ -535,9 +535,11 @@ void Alife::virusMove()
   
     m_current_eat = qMax(MAX_EAT, (int)(((double)m_livingCells.size()/ (double) (m_maxViruses / 4.0)) * MAX_EAT));
     m_current_eat_best = qMax(MIN_EAT, (int)(((double)m_livingCells.size()/ (double) (m_maxViruses / 4.0)) * (MIN_EAT * 2)));
+    bool reseted = false;
     //kDebug() << m_current_eat_best << m_current_eat << m_livingCells.size() << m_maxViruses;
     if(m_livingCells.size() < m_startViruses / 3) {
         createViruses(m_startViruses);
+        reseted = true;
     }
 
     if(!m_max_attended && m_livingCells.size() > m_maxViruses / 10) {
@@ -592,11 +594,14 @@ void Alife::virusMove()
         for(int i = 0; i < size; i++) {
             struct cell* cell = m_livingCells.at(i);
             newImage.setPixel(cell->x,cell->y,qRgb(cell->r,cell->g,cell->b));
-            updateAffectedArea(cell->x,cell->y);
+            if(!reseted){
+                updateAffectedArea(cell->x,cell->y);
+            }
         }
 
         m_current = newImage;
     } else {
+        //TODO: also only update affected area
         m_current = m_image;
     }
 }
