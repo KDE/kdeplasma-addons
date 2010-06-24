@@ -143,6 +143,7 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 {
     setAcceptDrops(true);
     setAcceptHoverEvents(true);
+    setContentsMargins(10, 10, 10, 10);
 }
 
 AbstractGroup::~AbstractGroup()

@@ -175,7 +175,7 @@ AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphics
 
     for (int i = 0; i < items.size(); ++i) {
         AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(items.at(i));
-        if (group) {
+        if (group && group->contentsRect().contains(q->mapToItem(group, pos))) {
             return group;
         }
     }
