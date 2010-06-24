@@ -61,7 +61,6 @@ class Spacer : public QGraphicsWidget
 
         GridGroup *parent;
         bool m_visible;
-        GridGroup::Orientation lastOrientation;
 
     protected:
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget = 0)
@@ -87,6 +86,7 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(parent, wFlags),
             m_spacer(new Spacer(this)),
             m_movingColumn(-1),
+            m_movingRow(-1),
             m_cursorOverriden(false)
 {
     resize(200,200);
@@ -196,19 +196,15 @@ void GridGroup::showDropZone(const QPointF &pos)
         return;
     }
 
-    Position itemPos = itemPosition(m_spacer);
-    if (itemPos.isValid()) {
-        removeItemAt(itemPos, true);
-        m_spacer->hide();
-    }
-
-    const int rows = rowCount();
-    const int columns = columnCount();
-
-    if (columns == 0) {
-        insertItemAt(m_spacer, 0, 0);
+    if (m_children.size() == 0) {
+        insertRowAt(0);
+        insertColumnAt(0);
+        addItem(m_spacer, 0, 0);
         return;
     }
+
+    const int rows = m_children.size();
+    const int columns = m_children.at(0).size();
 
     const qreal rowHeight = contentsRect().height() / rows;
     const qreal columnWidth = contentsRect().width() / columns;
@@ -220,24 +216,24 @@ void GridGroup::showDropZone(const QPointF &pos)
     const int j = y / rowHeight;
 
     int n;
-    if ((n = nearestBoundair(x, columnWidth)) != -1) {
-        if (itemPosition(m_spacer).isValid()) {
-            removeItem(m_spacer);
-        }
-        m_spacer->lastOrientation = Horizontal;
-        insertItemAt(m_spacer, j, n, Horizontal);
-    } else if ((n = nearestBoundair(y, rowHeight)) != -1) {
-        if (itemPosition(m_spacer).isValid()) {
-            removeItem(m_spacer);
-        }
-        m_spacer->lastOrientation = Vertical;
-        insertItemAt(m_spacer, n, i, Vertical);
+    if ((n = isOnAColumnBorder(x)) != -1) {
+        insertColumnAt(n);
+        addItem(m_spacer, j, n);
+    } else if ((n = isOnARowBorder(y)) != -1) {
+        insertRowAt(n);
+        addItem(m_spacer, n, i);
     }
 }
 
-QGraphicsWidget *GridGroup::removeItemAt(const Position &position, bool fillLayout)
+void GridGroup::addItem(QGraphicsWidget *widget, int row, int column)
 {
-    return removeItemAt(position.row, position.column, fillLayout);
+    widget->show();
+    if (m_children.size() > row && m_children.at(row).size() > column &&
+        m_children.at(row).at(column) == 0) {
+        m_children[row].replace(column, widget);
+    }
+
+    adjustCells();
 }
 
 void GridGroup::removeItem(QGraphicsWidget *item, bool fillLayout)
@@ -248,93 +244,34 @@ void GridGroup::removeItem(QGraphicsWidget *item, bool fillLayout)
         return;
     }
 
-    removeItemAt(pos, fillLayout);
-}
+    m_children[pos.row].replace(pos.column, 0);
 
-QGraphicsWidget *GridGroup::removeItemAt(int row, int column, bool fillLayout)
-{
-    LayoutItem lItem;
-    lItem.column = -1;
-    lItem.row = -1;
-    lItem.widget = 0;
-    foreach (const LayoutItem &item, m_layoutItems) {
-        if (item.row == row && item.column == column) {
-            lItem.row = item.row;
-            lItem.column = item.column;
-            lItem.widget = item.widget;
-            break;
+    if (fillLayout) {
+        bool removeCol = true;
+        for (int i = 0; i < m_children.size(); ++i) {
+            if (m_children.at(i).at(pos.column)) {
+                removeCol = false;
+                break;
+            }
+        }
+        if (removeCol) {
+            removeColumnAt(pos.column);
+        }
+
+        bool removeRow = true;
+        QList<QGraphicsWidget *> row = m_children.at(pos.row);
+        foreach (QGraphicsWidget *widget, row) {
+            if (widget) {
+                removeRow = false;
+                break;
+            }
+        }
+        if (removeRow) {
+            removeRowAt(pos.row);
         }
     }
 
-    if (lItem.row != -1) {
-        int columns = columnCount();
-        int rows = rowCount();
-        m_layoutItems.removeOne(lItem);
-        if (fillLayout) {
-            if (columnCount() > column + 1) {
-                QGraphicsWidget *movingWidget = removeItemAt(row, column + 1);
-                if (movingWidget) {
-                    insertItemAt(movingWidget, row, column);
-                }
-            }
-            if (rowCount() > row + 1) {
-                QGraphicsWidget *movingWidget = removeItemAt(row + 1, column);
-                if (movingWidget) {
-                    insertItemAt(movingWidget, row, column);
-                }
-            }
-
-            if (columnCount() < columns) {
-                removeColumnAt(lItem.column);
-            }
-            if (rowCount() < rows) {
-                removeRowAt(lItem.row);
-            }
-        }
-        kDebug()<<row<<column;
-        kDebug()<<m_columnWidths<<m_columnX;
-        kDebug()<<m_rowHeights<<m_rowY;
-        adjustCells();
-        return lItem.widget;
-    }
-
-    return 0;
-}
-
-void GridGroup::insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation)
-{
-    if (!item) {
-        return;
-    }
-
-    if (row < 0 || column < 0) {
-        kDebug()<<"Warning: row ="<<row<<", column ="<<column;
-        return;
-    }
-
-    const int rows = rowCount();
-    const int columns = columnCount();
-
-    item->show();
-    if ((rows > row) && (columns > column) && itemAt(row, column)) {
-        if (orientation == Horizontal) {
-            for (int i = columns - 1; i >= column; --i) {
-                QGraphicsWidget *nextItem = removeItemAt(row, i, false);
-                if (nextItem) {
-                    insertItemAt(nextItem, row, i + 1);
-                }
-            }
-        } else {
-            for (int i = rows - 1; i >= row; --i) {
-                QGraphicsWidget *nextItem = removeItemAt(i, column, false);
-                if (nextItem) {
-                    insertItemAt(nextItem, i + 1, column);
-                }
-            }
-        }
-    }
-
-    insertItemAt(item, row, column);
+    adjustCells();
 }
 
 QGraphicsWidget *GridGroup::itemAt(int row, int column) const
@@ -348,107 +285,92 @@ QGraphicsWidget *GridGroup::itemAt(int row, int column) const
     return 0;
 }
 
-void GridGroup::insertItemAt(QGraphicsWidget *item, int row, int column)
-{
-    item->show();
-    setChildBorders(item);
-
-    insertColumnAt(column);
-    insertRowAt(row);
-
-    kDebug()<<row<<column;
-    kDebug()<<m_columnWidths<<m_columnX;
-    kDebug()<<m_rowHeights<<m_rowY;
-
-    LayoutItem i;
-    i.row = row;
-    i.column = column;
-    i.widget = item;
-    m_layoutItems << i;
-
-    adjustCells();
-}
-
 void GridGroup::insertColumnAt(int column)
 {
-    if (m_columnWidths.size() <= column) {
-        if (m_columnWidths.size() == 0) {
-            m_columnWidths.insert(0, contentsRect().width());
-            m_columnX.insert(0, 0);
-        } else {
-            int otherCol = (column != 0 ? column - 1: column);
-            qreal width = m_columnWidths.at(otherCol) / 2.;
-            m_columnWidths.replace(otherCol, width);
-            m_columnWidths.insert(column, width);
-            if (column == 0) {
-                m_columnX.insert(0, 0);
-                m_columnX.replace(1, width);
-            } else {
-                m_columnX.insert(column, m_columnX.at(otherCol) + width);
-            }
-        }
+    int rows = m_children.size();
+    for (int i = 0; i < rows; ++i) {
+        m_children[i].insert(column, 0);
+    }
+
+    int cols = m_columnWidths.size();
+    qreal width = contentsRect().width() / (cols + 1);
+    qreal w = (cols == 0 ? width : width / cols);
+    m_columnWidths.insert(column, width + w);
+    m_columnX.insert(column, 0);
+    width = w;
+    qreal x = 0;
+    for (int i = 0; i < m_columnWidths.size(); ++i) {
+        m_columnWidths.replace(i, m_columnWidths.at(i) - width);
+        m_columnX.replace(i, x);
+        x += m_columnWidths.at(i);
     }
 }
 
 void GridGroup::removeColumnAt(int column)
 {
-    if (columnCount() > 0) {
-        if (column == 0) {
-            m_columnWidths.replace(1, m_columnWidths.at(0) + m_columnWidths.at(1));
-            m_columnX.replace(1, 0);
-        } else {
-            m_columnWidths.replace(column - 1, m_columnWidths.at(column - 1) +
-                                               m_columnWidths.at(column));
-        }
+    int rows = m_children.size();
+    for (int i = 0; i < rows; ++i) {
+        m_children[i].removeAt(column);
+    }
 
+    if (m_columnWidths.size() > column) {
+        qreal width = m_columnWidths.at(column) / (m_columnWidths.size() - 1);
         m_columnWidths.removeAt(column);
         m_columnX.removeAt(column);
+        qreal x = 0;
+        for (int i = 0; i < m_columnWidths.size(); ++i) {
+            m_columnWidths.replace(i, m_columnWidths.at(i) + width);
+            m_columnX.replace(i, x);
+            x += m_columnWidths.at(i);
+        }
     }
 }
 
 void GridGroup::insertRowAt(int row)
 {
-    if (m_rowHeights.size() <= row) {
-        if (m_rowHeights.size() == 0) {
-            m_rowHeights.insert(0, contentsRect().height());
-            m_rowY.insert(0, 0);
-        } else {
-            int otherRow = (row != 0 ? row - 1: row);
-            qreal height = m_rowHeights.at(otherRow) / 2.;
-            m_rowHeights.replace(otherRow, height);
-            m_rowHeights.insert(row, height);
-            if (row == 0) {
-                m_rowY.insert(0, 0);
-                m_rowY.replace(1, height);
-            } else {
-                m_rowY.insert(row, m_rowY.at(otherRow) + height);
-            }
-        }
+    int size = (m_children.size() != 0 ? m_children.at(0).size() : 0);
+    QList<QGraphicsWidget *> newRow;
+    for (int i = 0; i < size; ++i) {
+        newRow.append(0);
+    }
+    m_children.insert(row, newRow);
+
+    int rows = m_rowHeights.size();
+    qreal height = contentsRect().height() / (rows + 1);
+    qreal h = (rows == 0 ? height : height / rows);
+    m_rowHeights.insert(row, height + h);
+    m_rowY.insert(row, 0);
+    height = h;
+    qreal y = 0;
+    for (int i = 0; i < m_rowHeights.size(); ++i) {
+        m_rowHeights.replace(i, m_rowHeights.at(i) - height);
+        m_rowY.replace(i, y);
+        y += m_rowHeights.at(i);
     }
 }
 
 void GridGroup::removeRowAt(int row)
 {
-    if (rowCount() > 0) {
-        if (row == 0) {
-            m_rowHeights.replace(1, m_rowHeights.at(0) + m_rowHeights.at(1));
-            m_rowY.replace(1, 0);
-        } else {
-            m_rowHeights.replace(row - 1, m_rowHeights.at(row - 1) +
-                                          m_rowHeights.at(row));
-        }
+    m_children.removeAt(row);
 
+    if (m_rowHeights.size() > row) {
+        qreal height = m_rowHeights.at(row) / (m_rowHeights.size() - 1);
         m_rowHeights.removeAt(row);
         m_rowY.removeAt(row);
+        qreal y = 0;
+        for (int i = 0; i < m_rowHeights.size(); ++i) {
+            m_rowHeights.replace(i, m_rowHeights.at(i) + height);
+            m_rowY.replace(i, y);
+            y += m_rowHeights.at(i);
+        }
     }
 }
 
 Position GridGroup::itemPosition(QGraphicsWidget *widget) const
 {
-    for (int i = 0; i < rowCount(); ++i) {
-        for (int j = 0; j < columnCount(); ++j) {
-            QGraphicsWidget *w = itemAt(i, j);
-            if (w == widget) {
+    for (int i = 0; i < m_children.size(); ++i) {
+        for (int j = 0; j < m_children.at(i).size(); ++j) {
+            if (m_children.at(i).at(j) == widget) {
                 return Position(i, j);
             }
         }
@@ -466,31 +388,9 @@ void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
     Position spacerPos = itemPosition(m_spacer);
     if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
         m_spacer->hide();
-        removeItemAt(spacerPos, false);
-        insertItemAt(child, spacerPos.row, spacerPos.column, Horizontal);
+        m_children[spacerPos.row].replace(spacerPos.column, child);
+        adjustCells();
     }
-}
-
-int GridGroup::nearestBoundair(qreal pos, qreal size) const
-{
-    const qreal gap = size / 3.0;
-
-    int x = pos / size;
-    qreal n = pos / size;
-    while (n > 1) { //equivalent of "pos % size" that won't work
-        --n;        //because they are qreal
-    }
-
-    if (n * size > size / 2.0) {
-        ++x;
-    }
-
-    const qreal y = x * size;
-    if (((pos < y) && (pos > y - gap)) || ((pos > y) && (pos < y + gap))) {
-        return x;
-    }
-
-    return -1;
 }
 
 void GridGroup::save(KConfigGroup &group) const
@@ -515,6 +415,14 @@ void GridGroup::restore(KConfigGroup &group)
     m_rowHeights = group.readEntry("RowHeights", QList<qreal>());
     m_rowY = group.readEntry("RowY", QList<qreal>());
 
+    for (int i = 0; i < m_rowHeights.size(); ++i) {
+        QList<QGraphicsWidget *> row;
+        for (int j = 0; j < m_columnWidths.size(); ++j) {
+            row.append(0);
+        }
+        m_children.append(row);
+    }
+
     kDebug()<<m_columnWidths<<m_columnX;
     kDebug()<<m_rowHeights<<m_rowY;
 }
@@ -531,25 +439,28 @@ void GridGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup
     int row = group.readEntry("Row", -1);
     int column = group.readEntry("Column", -1);
 
-    insertItemAt(child, row, column);
+    addItem(child, row, column);
 }
 
 void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     AbstractGroup::resizeEvent(event);
 
-    qreal widthRatio = (event->newSize().width() - 20) / (event->oldSize().width() - 20);
-    qreal heightRatio = (event->newSize().height() - 20) / (event->oldSize().height() - 20);
-    for (int i = 0; i < columnCount(); ++i) {
-        m_columnWidths.insert(i, m_columnWidths.value(i) * widthRatio);
-        m_columnX.insert(i, m_columnX.value(i) * widthRatio);
-    }
-    for (int i = 0; i < rowCount(); ++i) {
-        m_rowHeights.insert(i, m_rowHeights.value(i) * heightRatio);
-        m_rowY.insert(i, m_rowY.value(i) * heightRatio);
-    }
+    if (!m_children.isEmpty()) {
+        qreal widthRatio = (event->newSize().width() - 20) / (event->oldSize().width() - 20);
+        qreal heightRatio = (event->newSize().height() - 20) / (event->oldSize().height() - 20);
 
-    adjustCells();
+        for (int i = 0; i < m_children.at(0).size(); ++i) {
+            m_columnWidths.replace(i, m_columnWidths.value(i) * widthRatio);
+            m_columnX.replace(i, m_columnX.value(i) * widthRatio);
+        }
+        for (int i = 0; i < m_children.size(); ++i) {
+            m_rowHeights.replace(i, m_rowHeights.value(i) * heightRatio);
+            m_rowY.replace(i, m_rowY.value(i) * heightRatio);
+        }
+
+        adjustCells();
+    }
 }
 
 bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
@@ -561,11 +472,16 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
     switch (event->type()) {
         case QEvent::GraphicsSceneHoverMove: {
             int col = isOnAColumnBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).x());
+            int row = isOnARowBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).y());
             if (col != -1) {
                 m_cursorOverriden = true;
                 QApplication::setOverrideCursor(QCursor(Qt::SplitHCursor));
                 return true;
-            } else if (m_cursorOverriden) {
+            } else if (row != -1) {
+                m_cursorOverriden = true;
+                QApplication::setOverrideCursor(QCursor(Qt::SplitVCursor));
+                return true;
+            } else if(m_cursorOverriden) {
                 m_cursorOverriden = false;
                 QApplication::restoreOverrideCursor();
             }
@@ -575,9 +491,12 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
 
         case QEvent::GraphicsSceneMousePress: {
             int col = isOnAColumnBorder(mapFromItem(item, static_cast<QGraphicsSceneMouseEvent *>(event)->pos()).x());
+            int row = isOnARowBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).y());
             if (col != -1) {
                 m_movingColumn = col;
-                kDebug()<<col;
+                return true;
+            } else if (row != -1) {
+                m_movingRow = row;
                 return true;
             }
         }
@@ -596,7 +515,17 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
                 m_columnX.replace(m_movingColumn, x);
 
                 adjustCells();
+                return true;
+            } else if (m_movingRow != -1) {
+                qreal y = mapFromItem(item, static_cast<QGraphicsSceneMouseEvent *>(event)->pos()).y();
 
+                qreal pos = m_rowY.at(m_movingRow - 1);
+                qreal nextPos = m_rowY.at(m_movingRow) + m_rowHeights.at(m_movingRow);
+                m_rowHeights.replace(m_movingRow - 1, y - pos);
+                m_rowHeights.replace(m_movingRow, nextPos - y);
+                m_rowY.replace(m_movingRow, y);
+
+                adjustCells();
                 return true;
             }
 
@@ -604,6 +533,7 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
 
         case QEvent::GraphicsSceneMouseRelease:
             m_movingColumn = -1;
+            m_movingRow = -1;
             m_cursorOverriden = false;
             QApplication::restoreOverrideCursor();
 
@@ -618,11 +548,31 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
 
 int GridGroup::isOnAColumnBorder(qreal x) const
 {
-    for (int i = 1; i < columnCount(); ++i) {
-        qreal pos = m_columnX.value(i);
+    qreal pos = 0;
+    for (int i = 0; i < m_columnWidths.size(); ++i) {
         if (pos > x - 20 && pos < x + 20) {
             return i;
         }
+        pos += m_columnWidths.at(i);
+    }
+    if (pos > x - 20 && pos < x + 20) {
+        return m_columnWidths.size();
+    }
+
+    return -1;
+}
+
+int GridGroup::isOnARowBorder(qreal y) const
+{
+    qreal pos = 0;
+    for (int i = 0; i < m_rowHeights.size(); ++i) {
+        if (pos > y - 20 && pos < y + 20) {
+            return i;
+        }
+        pos += m_rowHeights.at(i);
+    }
+    if (pos > y - 20 && pos < y + 20) {
+        return m_rowHeights.size();
     }
 
     return -1;
@@ -656,16 +606,18 @@ void GridGroup::adjustCells()
 {
     QRectF rect(contentsRect());
 
-    foreach (const LayoutItem &item, m_layoutItems) {
-        kDebug()<<item.row<<item.column;
-        kDebug()<<m_columnWidths<<m_columnX;
-        kDebug()<<m_rowHeights<<m_rowY;
-        qreal width = m_columnWidths.value(item.column);
-        qreal height = m_rowHeights.value(item.row);
-
-        item.widget->setPos(QPointF(m_columnX.value(item.column), m_rowY.value(item.row)) + rect.topLeft());
-        item.widget->setMaximumSize(width, height);
-        item.widget->resize(width, height);
+    for (int i = 0; i < m_children.size(); ++i) {
+        qreal height = m_rowHeights.at(i);
+        qreal y = m_rowY.at(i);
+        for (int j = 0; j < m_children.at(i).size(); ++j) {
+            QGraphicsWidget *widget = m_children.at(i).at(j);
+            if (widget) {
+                qreal width = m_columnWidths.at(j);
+                widget->setPos(QPointF(m_columnX.value(j), y) + rect.topLeft());
+                widget->setMaximumSize(width, height);
+                widget->resize(width, height);
+            }
+        }
     }
 }
 

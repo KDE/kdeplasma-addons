@@ -71,24 +71,16 @@ class GridGroup : public AbstractGroup
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
 
     private:
-        enum Orientation {
-            Horizontal = 0,
-            Vertical = 1
-        };
-
         QGraphicsWidget *itemAt(int row, int column) const;
-        QGraphicsWidget *removeItemAt(int row, int column, bool fillLayout = true);
-        QGraphicsWidget *removeItemAt(const Position &position, bool fillLayout = true);
+        void addItem(QGraphicsWidget *widget, int row, int column);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
-        void insertItemAt(QGraphicsWidget *item, int row, int column);
-        void insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation);
         Position itemPosition(QGraphicsWidget *item) const;
-        int nearestBoundair(qreal pos, qreal size) const;
         void adjustCells();
         int columnCount() const;
         int rowCount() const;
         void setChildBorders(QGraphicsWidget *widget);
         int isOnAColumnBorder(qreal x) const;
+        int isOnARowBorder(qreal y) const;
 
         void insertColumnAt(int column);
         void removeColumnAt(int column);
@@ -97,12 +89,14 @@ class GridGroup : public AbstractGroup
 
         Spacer *m_spacer;
         QList<LayoutItem> m_layoutItems;
+        QList<QList<QGraphicsWidget *> > m_children;
         QMap<QGraphicsWidget *, Plasma::Applet::BackgroundHints> m_savedHints;
         QList<qreal> m_rowHeights;
         QList<qreal> m_rowY;
         QList<qreal> m_columnWidths;
         QList<qreal> m_columnX;
         int m_movingColumn;
+        bool m_movingRow;
         bool m_cursorOverriden;
 
         friend class Spacer;
