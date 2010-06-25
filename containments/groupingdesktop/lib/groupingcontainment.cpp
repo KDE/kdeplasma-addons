@@ -54,6 +54,7 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              loading(true)
 {
     newGroupAction = new QAction(i18n("Add a new group"), q);
+    newGroupAction->setIcon(KIcon("list-add"));
     newGroupMenu = new KMenu(i18n("Add a new group"), 0);
     newGroupAction->setMenu(newGroupMenu);
     newGridGroup = new QAction(i18n("Add a new grid group"), q);
