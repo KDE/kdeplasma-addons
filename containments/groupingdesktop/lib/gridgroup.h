@@ -76,7 +76,8 @@ class GridGroup : public AbstractGroup
 
         Spacer *m_spacer;
         QList<QList<QGraphicsWidget *> > m_children;
-        QMap<QGraphicsWidget *, Plasma::Applet::BackgroundHints> m_savedHints;
+        QMap<Plasma::Applet *, Plasma::Applet::BackgroundHints> m_savedAppletsHints;
+        QMap<AbstractGroup *, AbstractGroup::BackgroundHints> m_savedGroupsHints;
         QList<qreal> m_rowHeights;
         QList<qreal> m_rowY;
         QList<qreal> m_columnWidths;

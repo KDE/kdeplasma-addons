@@ -48,6 +48,12 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
             FreeGroup = 1           /**< The applets can be freely transformed */
         };
 
+        enum BackgroundHints {
+            NoBackground  = 0,
+            StandardBackground = 1,
+            PlainBackground = 2
+        };
+
         /**
          * Constructor of the abstract class.
          **/
@@ -167,6 +173,9 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         void setIsMainGroup(bool isMainGroup);
 
         bool isMainGroup() const;
+
+        void setBackgroundHints(BackgroundHints hint);
+        BackgroundHints backgroundHints() const;
 
         /**
          * Reimplemented from QGraphicsWidget

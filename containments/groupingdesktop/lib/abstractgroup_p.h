@@ -47,6 +47,7 @@ class AbstractGroupPrivate
         AbstractGroup::GroupType groupType;
         AbstractGroup *interestingGroup;
         bool isMainGroup;
+        AbstractGroup::BackgroundHints backgroundHints;
 
     private:
         KConfigGroup *m_mainConfig;

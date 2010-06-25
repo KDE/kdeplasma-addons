@@ -169,13 +169,25 @@ void GridGroup::setChildBorders(QGraphicsWidget *widget)
     Plasma::Applet *a = qobject_cast<Plasma::Applet *>(widget);
     if (a) {
         if (immutability() == Plasma::Mutable) {
-            if (m_savedHints.contains(widget)) {
-                a->setBackgroundHints(m_savedHints.value(widget));
+            if (m_savedAppletsHints.contains(a)) {
+                a->setBackgroundHints(m_savedAppletsHints.value(a));
             }
         } else if (a->backgroundHints() != Plasma::Applet::NoBackground) {
-                m_savedHints.insert(widget, a->backgroundHints());
+                m_savedAppletsHints.insert(a, a->backgroundHints());
                 a->setBackgroundHints(Plasma::Applet::NoBackground);
         }
+
+        return;
+    }
+
+    AbstractGroup *g = static_cast<AbstractGroup *>(widget);
+    if (immutability() == Plasma::Mutable) {
+        if (m_savedGroupsHints.contains(g)) {
+            g->setBackgroundHints(m_savedGroupsHints.value(g));
+        }
+    } else if (g->backgroundHints() != AbstractGroup::PlainBackground) {
+            m_savedGroupsHints.insert(g, g->backgroundHints());
+            g->setBackgroundHints(AbstractGroup::PlainBackground);
     }
 }
 

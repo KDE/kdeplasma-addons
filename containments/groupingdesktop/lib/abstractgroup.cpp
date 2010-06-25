@@ -44,10 +44,10 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
       groupType(AbstractGroup::FreeGroup),
       interestingGroup(0),
       isMainGroup(false),
+      backgroundHints(AbstractGroup::NoBackground),
       m_mainConfig(0)
 {
     background = new Plasma::FrameSvg(q);
-    background->setImagePath("widgets/translucentbackground");
     background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
 }
 
@@ -144,6 +144,7 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setAcceptDrops(true);
     setAcceptHoverEvents(true);
     setContentsMargins(10, 10, 10, 10);
+    setBackgroundHints(StandardBackground);
 }
 
 AbstractGroup::~AbstractGroup()
@@ -428,6 +429,32 @@ void AbstractGroup::setIsMainGroup(bool isMainGroup)
 bool AbstractGroup::isMainGroup() const
 {
     return d->isMainGroup;
+}
+
+void AbstractGroup::setBackgroundHints(BackgroundHints hints)
+{
+    d->backgroundHints = hints;
+    switch (hints) {
+        case StandardBackground:
+            d->background->setImagePath("widgets/translucentbackground");
+            d->background->setElementPrefix(QString());
+        break;
+
+        case PlainBackground:
+            d->background->setImagePath("widgets/frame");
+            d->background->setElementPrefix("sunken");
+        break;
+
+        default:
+        break;
+    }
+
+    update();
+}
+
+AbstractGroup::BackgroundHints AbstractGroup::backgroundHints() const
+{
+    return d->backgroundHints;
 }
 
 void AbstractGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
