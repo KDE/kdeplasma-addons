@@ -20,9 +20,7 @@
 #include "gridgroup.h"
 
 #include <QtGui/QGraphicsScene>
-#include <QtGui/QGraphicsLinearLayout>
-#include <QtGui/QGraphicsGridLayout>
-#include <QtGui/QGraphicsSceneDragDropEvent>
+#include <QtGui/QGraphicsSceneResizeEvent>
 #include <QPainter>
 
 #include <Plasma/Applet>
@@ -391,9 +389,6 @@ void GridGroup::save(KConfigGroup &group) const
 {
     AbstractGroup::save(group);
 
-    kDebug()<<m_columnWidths<<m_columnX;
-    kDebug()<<m_rowHeights<<m_rowY;
-
     group.writeEntry("ColumnWidths", m_columnWidths);
     group.writeEntry("ColumnX", m_columnX);
     group.writeEntry("RowHeights", m_rowHeights);
@@ -416,9 +411,6 @@ void GridGroup::restore(KConfigGroup &group)
         }
         m_children.append(row);
     }
-
-    kDebug()<<m_columnWidths<<m_columnX;
-    kDebug()<<m_rowHeights<<m_rowY;
 }
 
 void GridGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
@@ -457,11 +449,19 @@ void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
     }
 }
 
+void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
+{
+    if (m_cursorOverriden) {
+        m_cursorOverriden = false;
+        QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
+    }
+}
+
 bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
 {
-//     if (!children().contains(qgraphicsitem_cast<QGraphicsWidget *>(item))) {
-//         return false;
-//     }
+    if (immutability() != Plasma::Mutable) {
+        return false;
+    }
 
     switch (event->type()) {
         case QEvent::GraphicsSceneHoverMove: {
@@ -469,27 +469,15 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
             int row = isOnARowBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).y());
             if (col > 0 && col < m_columnWidths.size()) {
                 m_cursorOverriden = true;
-                if (m_movingRow != -1) {
-                    m_movingRow = -1;
-                    QApplication::restoreOverrideCursor();
-                }
                 QApplication::setOverrideCursor(QCursor(Qt::SplitHCursor));
-                m_movingColumn = col;
                 return true;
             } else if (row > 0 && row < m_rowHeights.size()) {
                 m_cursorOverriden = true;
-                if (m_movingColumn != -1) {
-                    m_movingColumn = -1;
-                    QApplication::restoreOverrideCursor();
-                }
                 QApplication::setOverrideCursor(QCursor(Qt::SplitVCursor));
-                m_movingRow = row;
                 return true;
             } else if(m_cursorOverriden) {
                 m_cursorOverriden = false;
-                m_movingColumn = -1;
-                m_movingRow = -1;
-                QApplication::restoreOverrideCursor();
+                QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
             }
         }
 
@@ -499,10 +487,10 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
             int col = isOnAColumnBorder(mapFromItem(item, static_cast<QGraphicsSceneMouseEvent *>(event)->pos()).x());
             int row = isOnARowBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).y());
             if (col > 0 && col < m_columnWidths.size()) {
-//                 m_movingColumn = col;
+                m_movingColumn = col;
                 return true;
             } else if (row > 0 && row < m_rowHeights.size()) {
-//                 m_movingRow = row;
+                m_movingRow = row;
                 return true;
             }
         }
@@ -541,7 +529,7 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
             m_movingColumn = -1;
             m_movingRow = -1;
             m_cursorOverriden = false;
-            QApplication::restoreOverrideCursor();
+            QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
 
         break;
 

@@ -49,6 +49,7 @@ class GridGroup : public AbstractGroup
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         bool sceneEventFilter(QGraphicsItem *item, QEvent *event);
         void resizeEvent(QGraphicsSceneResizeEvent *event);
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
     private slots:
         void onInitCompleted();
