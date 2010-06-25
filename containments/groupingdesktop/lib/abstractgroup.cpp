@@ -422,6 +422,7 @@ AbstractGroup::GroupType AbstractGroup::groupType() const
 void AbstractGroup::setIsMainGroup(bool isMainGroup)
 {
     d->isMainGroup = isMainGroup;
+    setBackgroundHints(NoBackground);
     setFlag(QGraphicsItem::ItemIsMovable, false);
     setZValue(0);
 }
@@ -517,7 +518,7 @@ void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    if (isMainGroup()) {
+    if (d->backgroundHints == NoBackground) {
         return;
     }
 
