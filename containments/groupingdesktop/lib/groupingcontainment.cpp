@@ -295,17 +295,9 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
     emit q->configNeedsSaving();
 }
 
-void GroupingContainmentPrivate::dragMove(const QPointF &pos)
+void GroupingContainmentPrivate::onImmutabilityChanged(Plasma::ImmutabilityType immutability)
 {
-    AbstractGroup *group = groupAt(pos);
-    if (interestingGroup) {
-        interestingGroup->showDropZone(QPointF());
-        interestingGroup = 0;
-    }
-    if (group) {
-        group->showDropZone(q->mapToItem(group, pos));
-        interestingGroup = group;
-    }
+    newGroupAction->setVisible(immutability == Plasma::Mutable);
 }
 
 void GroupingContainmentPrivate::onImmutabilityChanged(Plasma::ImmutabilityType immutability)
@@ -545,7 +537,7 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                     setMovingWidget(widget);
                 }
 
-                break;
+            break;
 
             case QEvent::GraphicsSceneMove: {
                 if (widget == d->movingWidget) {
@@ -567,15 +559,30 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 }
             }
 
-                break;
+            break;
+
+            case QEvent::GraphicsSceneDragMove: {
+                QPointF pos(mapFromScene(static_cast<QGraphicsSceneDragDropEvent *>(event)->scenePos()));
+                AbstractGroup *group = d->groupAt(pos);
+
+                if (d->interestingGroup) {
+                    d->interestingGroup->showDropZone(QPointF());
+                    d->interestingGroup = 0;
+                }
+                if (group) {
+                    group->showDropZone(mapToItem(group, pos));
+                    d->interestingGroup = group;
+                }
+            }
+            break;
 
             case QEvent::GraphicsSceneMouseRelease:
                 d->onWidgetMoved(widget);
 
-                break;
+            break;
 
             default:
-                break;
+            break;
         }
     }
 

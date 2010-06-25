@@ -205,8 +205,6 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         /**
          * Reimplemented from QGraphicsWidget
          **/
-        virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
-
         virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
 
         /**

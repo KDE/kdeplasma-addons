@@ -458,11 +458,6 @@ AbstractGroup::BackgroundHints AbstractGroup::backgroundHints() const
     return d->backgroundHints;
 }
 
-void AbstractGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
-{
-    d->containment->d->dragMove(mapToItem(d->containment, event->pos()));
-}
-
 void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *)
 {
     showDropZone(QPointF());
