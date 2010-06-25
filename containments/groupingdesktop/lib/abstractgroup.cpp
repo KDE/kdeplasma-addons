@@ -460,8 +460,26 @@ int AbstractGroup::type() const
 
 QVariant AbstractGroup::itemChange(GraphicsItemChange change, const QVariant &value)
 {
-    if (change == ItemPositionChange && isMainGroup()) {
-        return pos();
+    switch (change) {
+        case ItemPositionChange:
+            if (isMainGroup() || immutability() != Plasma::Mutable) {
+                return pos();
+            }
+        break;
+
+        case ItemPositionHasChanged:
+            emit geometryChanged();
+
+        break;
+
+        case ItemTransformChange:
+            if (immutability() != Plasma::Mutable) {
+                return transform();
+            }
+        break;
+
+        default:
+        break;
     }
 
     return QGraphicsWidget::itemChange(change, value);
