@@ -307,6 +307,11 @@ void GroupingContainmentPrivate::dragMove(const QPointF &pos)
     }
 }
 
+void GroupingContainmentPrivate::onImmutabilityChanged(Plasma::ImmutabilityType immutability)
+{
+    newGroupAction->setVisible(immutability == Plasma::Mutable);
+}
+
 //------------------------GroupingContainment------------------------------
 
 GroupingContainment::GroupingContainment(QObject* parent, const QVariantList& args)
@@ -327,6 +332,8 @@ void GroupingContainment::init()
 
     connect(this, SIGNAL(appletAdded(Plasma::Applet*, QPointF)),
             this, SLOT(manageApplet(Plasma::Applet*, QPointF)));
+    connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+            this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
 
 //     addGroup("grid", QPointF(100,100), 0);
 }

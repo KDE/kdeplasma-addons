@@ -55,6 +55,7 @@ class GroupingContainmentPrivate
         void onWidgetMoved(QGraphicsWidget *widget);
         void dragMove(const QPointF &pos);
         void groupAppearAnimationComplete();
+        void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
 
         GroupingContainment *q;
         QList<AbstractGroup *> groups;
