@@ -516,22 +516,26 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
                 qreal pos = m_columnX.at(m_movingColumn - 1);
                 qreal nextPos = m_columnX.at(m_movingColumn) +
                                 m_columnWidths.at(m_movingColumn);
-                m_columnWidths.replace(m_movingColumn - 1, x - pos);
-                m_columnWidths.replace(m_movingColumn, nextPos - x);
-                m_columnX.replace(m_movingColumn, x);
+                if (x - pos > 30 && nextPos - x > 30) {
+                    m_columnWidths.replace(m_movingColumn - 1, x - pos);
+                    m_columnWidths.replace(m_movingColumn, nextPos - x);
+                    m_columnX.replace(m_movingColumn, x);
 
-                adjustCells();
+                    adjustCells();
+                }
                 return true;
             } else if (m_movingRow != -1) {
                 qreal y = mapFromItem(item, static_cast<QGraphicsSceneMouseEvent *>(event)->pos()).y();
 
                 qreal pos = m_rowY.at(m_movingRow - 1);
                 qreal nextPos = m_rowY.at(m_movingRow) + m_rowHeights.at(m_movingRow);
-                m_rowHeights.replace(m_movingRow - 1, y - pos);
-                m_rowHeights.replace(m_movingRow, nextPos - y);
-                m_rowY.replace(m_movingRow, y);
+                if (y - pos > 30 && nextPos - y > 30) {
+                    m_rowHeights.replace(m_movingRow - 1, y - pos);
+                    m_rowHeights.replace(m_movingRow, nextPos - y);
+                    m_rowY.replace(m_movingRow, y);
 
-                adjustCells();
+                    adjustCells();
+                }
                 return true;
             }
 
