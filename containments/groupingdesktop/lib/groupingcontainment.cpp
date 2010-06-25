@@ -216,11 +216,6 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
 
 void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPointF &pos)
 {
-    int z = subGroup->zValue();
-    if (GroupingContainmentPrivate::s_maxZValue < z) {
-        GroupingContainmentPrivate::s_maxZValue = z;
-    }
-
     //FIXME i don't like this setPos's at all
     subGroup->setPos(q->geometry().bottomRight());
     AbstractGroup *group = groupAt(pos);
@@ -229,8 +224,6 @@ void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPoi
     if (group && (group != subGroup)) {
         group->addSubGroup(subGroup);
     }
-
-    subGroup->installEventFilter(q);
 }
 
 void GroupingContainmentPrivate::newGroupClicked(QAction *action)
@@ -383,6 +376,12 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
         }
     }
 
+    int z = group->zValue();
+    if (GroupingContainmentPrivate::s_maxZValue < z) {
+        GroupingContainmentPrivate::s_maxZValue = z;
+    }
+
+    group->installEventFilter(this);
     if (containmentType() == Plasma::Containment::DesktopContainment) {
         group->installSceneEventFilter(this);
     }
