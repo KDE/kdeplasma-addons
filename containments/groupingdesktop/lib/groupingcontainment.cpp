@@ -571,6 +571,15 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
             }
             break;
 
+            case QEvent::GraphicsSceneDrop:
+                if (group) {
+                    QGraphicsSceneDragDropEvent *e = static_cast<QGraphicsSceneDragDropEvent *>(event);
+                    e->setPos(mapFromScene(e->scenePos()));
+                    dropEvent(e);
+                }
+
+            break;
+
             case QEvent::GraphicsSceneMouseRelease:
                 d->onWidgetMoved(widget);
 

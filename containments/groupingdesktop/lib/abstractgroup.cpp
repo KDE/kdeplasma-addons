@@ -463,11 +463,6 @@ void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *)
     showDropZone(QPointF());
 }
 
-void AbstractGroup::dropEvent(QGraphicsSceneDragDropEvent *event)
-{
-    scene()->sendEvent(d->containment, event);
-}
-
 void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     d->background->resizeFrame(event->newSize());
