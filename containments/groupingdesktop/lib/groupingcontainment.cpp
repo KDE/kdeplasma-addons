@@ -438,7 +438,9 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
                         }
                     } else {
 //                         kDebug() << "generated group handle";
-                        Handle *handle = new Handle(this, group, he->pos());
+                        AbstractGroup *parent = group->property("group").value<AbstractGroup *>();
+                        Handle *handle = parent->createHandleForChild(group);
+                        handle->setHoverPos(he->pos());
                         d->handles[group] = handle;
                         connect(handle, SIGNAL(disappearDone(Handle*)),
                                 this, SLOT(handleDisappeared(Handle*)));
@@ -479,7 +481,9 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
                         Handle *handle = d->handles.value(applet);
                         handle->setHoverPos(he->pos());
                     } else {
-                        Handle *handle = new Handle(this, applet, he->pos());
+                        AbstractGroup *parent = group->property("group").value<AbstractGroup *>();
+                        Handle *handle = parent->createHandleForChild(applet);
+                        handle->setHoverPos(he->pos());
                         d->handles[applet] = handle;
                         connect(handle, SIGNAL(disappearDone(Handle*)),
                                 this, SLOT(handleDisappeared(Handle*)));

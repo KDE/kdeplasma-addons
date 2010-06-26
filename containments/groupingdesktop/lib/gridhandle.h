@@ -17,47 +17,34 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef ITEMOVERLAY_H
-#define ITEMOVERLAY_H
+#ifndef GRIDHANDLE_H
+#define GRIDHANDLE_H
 
-#include <QtGui/QGraphicsWidget>
+#include "handle.h"
 
-class QGraphicsLinearLayout;
-
-class ItemOverlay : public QGraphicsWidget
+class GridHandle : public Handle
 {
     Q_OBJECT
     public:
-        explicit ItemOverlay(QGraphicsWidget *item, Qt::WindowFlags wFlags = 0);
-        ~ItemOverlay();
+        GridHandle(GroupingContainment *containment, Plasma::Applet *applet);
+        GridHandle(GroupingContainment *containment, AbstractGroup *group);
+        virtual ~GridHandle();
 
-        void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
-        QGraphicsWidget *item() const;
-        bool isMoving() const;
-        void setZ(int value);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
     protected:
         void mousePressEvent(QGraphicsSceneMouseEvent *event);
         void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
-        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-
-    signals:
-        void startMoving();
-        void movedOf(qreal x, qreal y, const QPointF &pos);
-        void endMoving();
-        void itemMovedOutside(qreal x, qreal y);
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
     private slots:
         void syncGeometry();
         void delayedSyncGeometry();
 
     private:
-        QGraphicsWidget *m_item;
-        QGraphicsLinearLayout *m_layout;
         bool m_moving;
         QPointF m_startPos;
         int m_savedZValue;
 };
 
-#endif // APPLETOVERLAY_H
+#endif

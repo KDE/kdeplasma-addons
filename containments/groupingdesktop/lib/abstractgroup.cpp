@@ -34,7 +34,7 @@
 #include <Plasma/Animation>
 
 #include "groupingcontainment.h"
-#include "groupingcontainment_p.h"
+#include "freehandle.h"
 
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
@@ -407,6 +407,20 @@ void AbstractGroup::showDropZone(const QPointF& pos)
 void AbstractGroup::raise()
 {
     containment()->raise(this);
+}
+
+Handle *AbstractGroup::createHandleForChild(QGraphicsWidget *child)
+{
+    if (!children().contains(child)) {
+        return 0;
+    }
+
+    Plasma::Applet *a = qobject_cast<Plasma::Applet *>(child);
+    if (a) {
+        return new FreeHandle(containment(), a);
+    }
+
+    return new FreeHandle(containment(), static_cast<AbstractGroup *>(child));
 }
 
 void AbstractGroup::setGroupType(AbstractGroup::GroupType type)

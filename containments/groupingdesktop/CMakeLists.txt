@@ -13,11 +13,12 @@ include_directories(${CMAKE_SOURCE_DIR}
 set(groupingcontainment_SRCS
         lib/groupingcontainment.cpp
         lib/handle.cpp
+        lib/freehandle.cpp
+        lib/gridhandle.cpp
         lib/abstractgroup.cpp
         lib/floatinggroup.cpp
         lib/stackinggroup.cpp
-        lib/gridgroup.cpp
-        lib/itemoverlay.cpp)
+        lib/gridgroup.cpp)
 
 set(groupingdesktop_SRCS desktop/groupingdesktop.cpp)
 

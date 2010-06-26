@@ -26,6 +26,7 @@
 class KConfigGroup;
 
 class GroupingContainment;
+class Handle;
 class AbstractGroupPrivate;
 
 /**
@@ -189,6 +190,15 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
 
         void raise();
 
+        virtual Handle *createHandleForChild(QGraphicsWidget *child);
+
+        /**
+        * @return the type of this group
+        * @see setGroupType
+        * @see GroupType
+        */
+        GroupType groupType() const;
+
     public slots:
         /**
          * Sets the immutability type for this group (not immutable,
@@ -226,13 +236,6 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          * @see GroupType
          */
         void setGroupType(GroupType type);
-
-        /**
-         * @return the type of this group
-         * @see setGroupType
-         * @see GroupType
-         */
-        GroupType groupType() const;
 
     signals:
         /**
