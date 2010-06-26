@@ -300,11 +300,6 @@ void GroupingContainmentPrivate::onImmutabilityChanged(Plasma::ImmutabilityType 
     newGroupAction->setVisible(immutability == Plasma::Mutable);
 }
 
-void GroupingContainmentPrivate::onImmutabilityChanged(Plasma::ImmutabilityType immutability)
-{
-    newGroupAction->setVisible(immutability == Plasma::Mutable);
-}
-
 //------------------------GroupingContainment------------------------------
 
 GroupingContainment::GroupingContainment(QObject* parent, const QVariantList& args)
