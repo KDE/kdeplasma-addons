@@ -473,7 +473,7 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
         if ((immutability() == Plasma::Mutable) && (applet->immutability() == Plasma::Mutable)) {
 
             switch (event->type()) {
-            case QEvent::GraphicsSceneHoverMove: {
+            case QEvent::GraphicsSceneHoverEnter: {
                     QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
                     if (d->handles.contains(applet)) {
                         Handle *handle = d->handles.value(applet);
@@ -491,7 +491,7 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
                 }
                 break;
 
-            case QEvent::GraphicsSceneHoverEnter: {
+            case QEvent::GraphicsSceneHoverMove: {
                     QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
                     if (d->handles.contains(applet)) {
                         Handle *handle = d->handles.value(applet);
