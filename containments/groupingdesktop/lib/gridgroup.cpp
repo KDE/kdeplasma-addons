@@ -495,17 +495,18 @@ bool GridGroup::sceneEventFilter(QGraphicsItem *item, QEvent *event)
 
         break;
 
-        case QEvent::GraphicsSceneMousePress: {
-            int col = isOnAColumnBorder(mapFromItem(item, static_cast<QGraphicsSceneMouseEvent *>(event)->pos()).x());
-            int row = isOnARowBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).y());
-            if (col > 0 && col < m_columnWidths.size()) {
-                m_movingColumn = col;
-                return true;
-            } else if (row > 0 && row < m_rowHeights.size()) {
-                m_movingRow = row;
-                return true;
+        case QEvent::GraphicsSceneMousePress:
+            if (static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton) {
+                int col = isOnAColumnBorder(mapFromItem(item, static_cast<QGraphicsSceneMouseEvent *>(event)->pos()).x());
+                int row = isOnARowBorder(mapFromItem(item, static_cast<QGraphicsSceneHoverEvent *>(event)->pos()).y());
+                if (col > 0 && col < m_columnWidths.size()) {
+                    m_movingColumn = col;
+                    return true;
+                } else if (row > 0 && row < m_rowHeights.size()) {
+                    m_movingRow = row;
+                    return true;
+                }
             }
-        }
 
         break;
 
