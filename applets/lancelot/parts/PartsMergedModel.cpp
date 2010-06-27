@@ -223,9 +223,12 @@ bool PartsMergedModel::loadFromFile(const QString & url)
 bool PartsMergedModel::loadDirectory(const QString & url)
 {
     QMap < QString, QString > data;
+
+    QString path = KUrl(url).toLocalFile();
+
     data["version"]     = "1.0";
     data["type"]        = "list";
-    data["model"]       = "Folder " + url;
+    data["model"]       = "Folder " + path;
     return load(Lancelot::Models::Serializator::serialize(data));
 }
 
@@ -243,14 +246,12 @@ bool PartsMergedModel::load(const QString & input)
     if (data["version"] <= "1.0") {
         if (data["type"] == "list") {
             QStringList modelDef = data["model"].split(' ');
-            QString modelID = modelDef[0];
+            QString modelID = modelDef.takeFirst();
             QString modelExtraData;
 
             kDebug() << modelDef << modelID << modelExtraData;
 
-            if (modelDef.size() != 1) {
-                modelExtraData = modelDef[1];
-            }
+            modelExtraData = modelDef.join(" ");
             Lancelot::ActionListModel * model = NULL;
 
             if (modelID == "Places") {
@@ -323,6 +324,7 @@ bool PartsMergedModel::load(const QString & input)
                         modelExtraData,
                         model = new Lancelot::Models::Applications(modelExtraData, QString(), QIcon(), true));
                 } else {
+                    qDebug() << modelExtraData;
                     addModel(modelExtraData,
                         QIcon(),
                         modelExtraData,
