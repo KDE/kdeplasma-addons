@@ -206,11 +206,10 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
 
     if (group) {
         group->addApplet(applet);
-
-        applet->installSceneEventFilter(q);
     }
 
     applet->installEventFilter(q);
+    applet->installSceneEventFilter(q);
 
     q->connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)), q, SLOT(onAppletRemoved(Plasma::Applet*)));
 }
@@ -425,81 +424,41 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
     Plasma::Applet *applet = qgraphicsitem_cast<Plasma::Applet *>(watched);
     AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(watched);
 
-    if (group && !group->isMainGroup()) {
-        if ((immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable)) {
+    QGraphicsWidget *widget = 0;
+    if (applet) {
+        widget = applet;
+    } else if (group) {
+        widget = group;
+    }
+
+    if ((group && !group->isMainGroup()) || applet) {
+        if (immutability() == Plasma::Mutable) {
 
             switch (event->type()) {
-                case QEvent::GraphicsSceneHoverEnter: {
+                case QEvent::GraphicsSceneHoverEnter:
+                case QEvent::GraphicsSceneHoverMove: {
                     QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
-                    if (d->handles.contains(group)) {
-                        Handle *handle = d->handles.value(group);
+                    if (d->handles.contains(widget)) {
+                        Handle *handle = d->handles.value(widget);
                         if (handle) {
                             handle->setHoverPos(he->pos());
                         }
                     } else {
 //                         kDebug() << "generated group handle";
-                        AbstractGroup *parent = group->property("group").value<AbstractGroup *>();
-                        Handle *handle = parent->createHandleForChild(group);
-                        handle->setHoverPos(he->pos());
-                        d->handles[group] = handle;
-                        connect(handle, SIGNAL(disappearDone(Handle*)),
-                                this, SLOT(handleDisappeared(Handle*)));
-                        connect(group, SIGNAL(geometryChanged()),
-                                handle, SLOT(widgetResized()));
-                        connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
-                                this, SLOT(onWidgetMoved(QGraphicsWidget*)));
-                    }
-                }
-                break;
-
-                case QEvent::GraphicsSceneHoverMove: {
-                    QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
-                    if (d->handles.contains(group)) {
-                        Handle *handle = d->handles.value(group);
-                        if (handle) {
-                            handle->setHoverPos(he->pos());
+                        AbstractGroup *parent = widget->property("group").value<AbstractGroup *>();
+                        if (parent) {
+                            Handle *handle = parent->createHandleForChild(widget);
+                            if (handle) {
+                                handle->setHoverPos(he->pos());
+                                d->handles[widget] = handle;
+                                connect(handle, SIGNAL(disappearDone(Handle*)),
+                                        this, SLOT(handleDisappeared(Handle*)));
+                                connect(widget, SIGNAL(geometryChanged()),
+                                        handle, SLOT(widgetResized()));
+                                connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
+                                        this, SLOT(onWidgetMoved(QGraphicsWidget*)));
+                            }
                         }
-                    }
-                }
-                break;
-
-                default:
-                    break;
-            }
-        }
-
-        return false;
-    }
-
-    if (applet) {
-        if ((immutability() == Plasma::Mutable) && (applet->immutability() == Plasma::Mutable)) {
-
-            switch (event->type()) {
-            case QEvent::GraphicsSceneHoverEnter: {
-                    QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
-                    if (d->handles.contains(applet)) {
-                        Handle *handle = d->handles.value(applet);
-                        handle->setHoverPos(he->pos());
-                    } else {
-                        AbstractGroup *parent = applet->property("group").value<AbstractGroup *>();
-                        Handle *handle = parent->createHandleForChild(applet);
-                        handle->setHoverPos(he->pos());
-                        d->handles[applet] = handle;
-                        connect(handle, SIGNAL(disappearDone(Handle*)),
-                                this, SLOT(handleDisappeared(Handle*)));
-                        connect(applet, SIGNAL(geometryChanged()),
-                                handle, SLOT(widgetResized()));
-                        connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
-                                this, SLOT(onWidgetMoved(QGraphicsWidget*)));
-                    }
-                }
-                break;
-
-            case QEvent::GraphicsSceneHoverMove: {
-                    QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
-                    if (d->handles.contains(applet)) {
-                        Handle *handle = d->handles.value(applet);
-                        handle->setHoverPos(he->pos());
                     }
                 }
                 break;
@@ -508,11 +467,9 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
                 break;
             }
         }
-
-        return Plasma::Applet::sceneEventFilter(watched, event);
     }
 
-    return Plasma::Containment::sceneEventFilter(watched, event);
+    return false;
 }
 
 bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)

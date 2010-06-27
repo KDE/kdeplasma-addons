@@ -30,6 +30,7 @@ namespace Plasma
 
 class Position;
 class Spacer;
+class Handle;
 
 class GridGroup : public AbstractGroup
 {
@@ -44,12 +45,17 @@ class GridGroup : public AbstractGroup
         void showDropZone(const QPointF &pos);
         void save(KConfigGroup &group) const;
         void restore(KConfigGroup &group);
+        Handle *createHandleForChild(QGraphicsWidget *child);
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
-        bool sceneEventFilter(QGraphicsItem *item, QEvent *event);
         void resizeEvent(QGraphicsSceneResizeEvent *event);
+        void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event);
+        void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+        bool eventFilter(QObject *obj, QEvent *event);
 
     private slots:
         void onInitCompleted();

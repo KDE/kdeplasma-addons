@@ -27,19 +27,22 @@
 #include <KIcon>
 
 #include <Plasma/Applet>
+#include <Plasma/PaintUtils>
+
+#include "groupingcontainment.h"
 
 GridHandle::GridHandle(GroupingContainment *containment, Plasma::Applet *applet)
           : Handle(containment, applet),
             m_moving(false)
 {
-//     setGeometry(applet->contentsRect());
+    setZValue(-1000);
 }
 
 GridHandle::GridHandle(GroupingContainment *containment, AbstractGroup *group)
           : Handle(containment, group),
             m_moving(false)
 {
-//     setGeometry(applet->contentsRect());
+    setZValue(-1000);
 }
 
 GridHandle::~GridHandle()
@@ -47,25 +50,22 @@ GridHandle::~GridHandle()
 
 }
 
-void GridHandle::delayedSyncGeometry()
+QRectF GridHandle::boundingRect() const
 {
-    QTimer::singleShot(0, this, SLOT(syncGeometry()));
+    return widget()->boundingRect();
 }
 
-void GridHandle::syncGeometry()
+void GridHandle::widgetResized()
 {
-//     setGeometry(m_item->contentsRect());
+
 }
 
 void GridHandle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        if (m_moving) {
-            m_moving = false;
-        } else {
-            m_moving = true;
-            m_startPos = event->pos();
-        }
+        m_moving = true;
+        m_startPos = event->pos();
+        containment()->setMovingWidget(widget());
     }
 }
 
@@ -80,20 +80,34 @@ void GridHandle::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 void GridHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     m_moving = false;
+    emit widgetMoved(widget());
 }
 
-void GridHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void GridHandle::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    emit disappearDone(this);
+    deleteLater();
+}
+
+void GridHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
 {
     Q_UNUSED(option)
-    Q_UNUSED(widget)
+
+    QRectF rect = widget()->contentsRect();
+
+    painter->setRenderHint(QPainter::Antialiasing);
+    QPainterPath p = Plasma::PaintUtils::roundedRectangle(rect.adjusted(1, 1, -2, -2), 4);
+    QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+    c.setAlphaF(0.3);
+
+    painter->fillPath(p, c);
 
     KIcon icon("transform-move");
 
-//     int iconSize = qMin(qMin((int)geometry().height(), int(m_item->size().width())), 64);
-    int iconSize = 20;
-//     QRect iconRect(rect().center().toPoint() - QPoint(iconSize / 2, iconSize / 2), QSize(iconSize, iconSize));
+    int iconSize = qMin(qMin((int)rect.height(), int(rect.size().width())), 64);
+    QRect iconRect(rect.center().toPoint() - QPoint(iconSize / 2, iconSize / 2), QSize(iconSize, iconSize));
 
-//     painter->drawPixmap(iconRect, icon.pixmap(iconSize, iconSize));
+    painter->drawPixmap(iconRect, icon.pixmap(iconSize, iconSize));
 }
 
 #include "gridhandle.moc"

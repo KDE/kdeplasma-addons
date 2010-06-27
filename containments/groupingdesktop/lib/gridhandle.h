@@ -30,16 +30,17 @@ class GridHandle : public Handle
         GridHandle(GroupingContainment *containment, AbstractGroup *group);
         virtual ~GridHandle();
 
+        QRectF boundingRect() const;
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+
+    public slots:
+        void widgetResized();
 
     protected:
         void mousePressEvent(QGraphicsSceneMouseEvent *event);
         void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
         void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-
-    private slots:
-        void syncGeometry();
-        void delayedSyncGeometry();
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
     private:
         bool m_moving;

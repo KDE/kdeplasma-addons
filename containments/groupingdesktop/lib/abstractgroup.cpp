@@ -397,7 +397,7 @@ void AbstractGroup::restore(KConfigGroup &group)
     }
 }
 
-void AbstractGroup::showDropZone(const QPointF& pos)
+void AbstractGroup::showDropZone(const QPointF &pos)
 {
     Q_UNUSED(pos)
 

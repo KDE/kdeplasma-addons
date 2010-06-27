@@ -808,7 +808,7 @@ bool FreeHandle::sceneEvent(QEvent *event)
 void FreeHandle::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    //kDebug() << "hover enter";
+//     kDebug() << "hover enter";
 
     //if a disappear was scheduled stop the timer
     if (m_leaveTimer->isActive()) {
