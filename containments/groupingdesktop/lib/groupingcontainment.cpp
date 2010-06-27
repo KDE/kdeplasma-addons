@@ -481,7 +481,7 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
                         Handle *handle = d->handles.value(applet);
                         handle->setHoverPos(he->pos());
                     } else {
-                        AbstractGroup *parent = group->property("group").value<AbstractGroup *>();
+                        AbstractGroup *parent = applet->property("group").value<AbstractGroup *>();
                         Handle *handle = parent->createHandleForChild(applet);
                         handle->setHoverPos(he->pos());
                         d->handles[applet] = handle;
