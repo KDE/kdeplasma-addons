@@ -472,7 +472,7 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
 
         foreach (Handle *handle, d->handles) {
             QGraphicsWidget *w = d->handles.key(handle);
-            if (w != widget) {
+            if (w != widget && handle) {
                 handle->setHoverPos(w->mapFromScene(he->scenePos()));
             }
         }

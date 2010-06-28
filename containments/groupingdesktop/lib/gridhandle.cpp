@@ -30,6 +30,7 @@
 #include <Plasma/PaintUtils>
 
 #include "groupingcontainment.h"
+#include "abstractgroup.h"
 
 GridHandle::GridHandle(GroupingContainment *containment, Plasma::Applet *applet)
           : Handle(containment, applet),
@@ -57,9 +58,26 @@ QRectF GridHandle::boundingRect() const
 
 void GridHandle::setHoverPos(const QPointF &hoverPos)
 {
-    if (!boundingRect().contains(hoverPos) || scene()->itemAt(mapToScene(hoverPos)) != this) {
+    QList<QGraphicsItem *> items = scene()->items(mapToScene(hoverPos),
+                                                  Qt::IntersectsItemShape,
+                                                  Qt::DescendingOrder);
+
+    bool upper = true;
+    for (int i = 0; i < items.size(); ++i) {
+        AbstractGroup *g = qgraphicsitem_cast<AbstractGroup *>(items.at(i));
+        if (g && g != group()) {
+            upper = false;
+            break;
+        }
+        Plasma::Applet *a = qgraphicsitem_cast<Plasma::Applet *>(items.at(i));
+        if (a && a != applet()) {
+            upper = false;
+            break;
+        }
+    }
+
+    if (!boundingRect().contains(hoverPos) || !upper) {
         emit disappearDone(this);
-        deleteLater();
     }
 }
 
@@ -93,8 +111,9 @@ void GridHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void GridHandle::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    emit disappearDone(this);
-    deleteLater();
+    if (!boundingRect().contains(event->pos())) {
+        emit disappearDone(this);
+    }
 }
 
 void GridHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)

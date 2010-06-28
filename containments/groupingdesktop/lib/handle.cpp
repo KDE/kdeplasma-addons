@@ -178,7 +178,6 @@ void Handle::setHoverPos(const QPointF &hoverPos)
 {
     if (!boundingRect().contains(hoverPos)) {
         emit disappearDone(this);
-        deleteLater();
     }
 }
 

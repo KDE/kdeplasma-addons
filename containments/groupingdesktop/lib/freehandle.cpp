@@ -402,7 +402,6 @@ void FreeHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 void FreeHandle::emitDisappear()
 {
     emit disappearDone(this);
-    deleteLater();
 }
 
 Handle::ButtonType FreeHandle::mapToButton(const QPointF &point) const
