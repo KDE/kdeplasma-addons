@@ -329,7 +329,7 @@ void GroupingContainment::init()
 void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::StartupCompletedConstraint) {
-        if (d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
+        if (!d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
             AbstractGroup *group = addGroup(d->mainGroupPlugin);
             setMainGroup(group);
         }

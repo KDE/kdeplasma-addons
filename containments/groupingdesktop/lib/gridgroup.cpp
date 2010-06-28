@@ -289,6 +289,8 @@ void GridGroup::removeItem(QGraphicsWidget *item, bool fillLayout)
         }
     }
 
+    item->setMaximumSize(QSizeF());
+
     adjustCells();
 }
 
