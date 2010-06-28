@@ -171,8 +171,6 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         virtual QString pluginName() const = 0;
 
-        void setIsMainGroup(bool isMainGroup);
-
         bool isMainGroup() const;
 
         void setBackgroundHints(BackgroundHints hint);

@@ -306,6 +306,7 @@ GroupingContainment::GroupingContainment(QObject* parent, const QVariantList& ar
                  d(new GroupingContainmentPrivate(this))
 {
     setContainmentType(Plasma::Containment::NoContainmentType);
+    useMainGroup("floating");
 }
 
 GroupingContainment::~GroupingContainment()
@@ -327,9 +328,14 @@ void GroupingContainment::init()
 
 void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
 {
-    if ((constraints & Plasma::StartupCompletedConstraint) && !d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
-        AbstractGroup *group = addGroup(d->mainGroupPlugin);
-        setMainGroup(group);
+    if (constraints & Plasma::StartupCompletedConstraint) {
+        if (d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
+            AbstractGroup *group = addGroup(d->mainGroupPlugin);
+            setMainGroup(group);
+        }
+        if (!d->mainGroup) {
+            kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";
+        }
     }
 }
 
@@ -398,18 +404,24 @@ QList<QAction *> GroupingContainment::contextualActions()
 
 void GroupingContainment::useMainGroup(const QString &name)
 {
-    d->mainGroupPlugin = name;
+    if (!name.isEmpty()) {
+        d->mainGroupPlugin = name;
+    }
 }
 
 void GroupingContainment::setMainGroup(AbstractGroup *group)
 {
+    if (!group) {
+        return;
+    }
+
     d->mainGroup = group;
     if (!d->layout) {
         d->layout = new QGraphicsLinearLayout(this);
         d->layout->setContentsMargins(0, 0, 0, 0);
     }
     d->layout->addItem(group);
-    group->setIsMainGroup(true);
+    group->d->setIsMainGroup();
 
     emit configNeedsSaving();
 }

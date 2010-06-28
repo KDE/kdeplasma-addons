@@ -135,6 +135,14 @@ void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
     child->setPos(child->parentItem()->mapFromScene(newPos));
 }
 
+void AbstractGroupPrivate::setIsMainGroup()
+{
+    isMainGroup = true;
+    q->setBackgroundHints(AbstractGroup::NoBackground);
+    q->setFlag(QGraphicsItem::ItemIsMovable, false);
+    q->setZValue(0);
+}
+
 //-----------------------------AbstractGroup------------------------------
 
 AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
@@ -431,14 +439,6 @@ void AbstractGroup::setGroupType(AbstractGroup::GroupType type)
 AbstractGroup::GroupType AbstractGroup::groupType() const
 {
     return d->groupType;
-}
-
-void AbstractGroup::setIsMainGroup(bool isMainGroup)
-{
-    d->isMainGroup = isMainGroup;
-    setBackgroundHints(NoBackground);
-    setFlag(QGraphicsItem::ItemIsMovable, false);
-    setZValue(0);
 }
 
 bool AbstractGroup::isMainGroup() const

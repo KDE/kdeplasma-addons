@@ -35,6 +35,7 @@ class AbstractGroupPrivate
         void destroyGroup();
         void appletDestroyed(Plasma::Applet *applet);
         void subGroupDestroyed(AbstractGroup *subGroup);
+        void setIsMainGroup();
 
         AbstractGroup *q;
         Plasma::Applet::List applets;
