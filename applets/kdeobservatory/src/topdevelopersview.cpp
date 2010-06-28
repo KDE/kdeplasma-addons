@@ -21,8 +21,10 @@
 #include "topdevelopersview.h"
 
 #include <QPen>
+#include <QLinearGradient>
 
 #include <KIcon>
+#include <KColorUtils>
 #include <KGlobalSettings>
 
 TopDevelopersView::TopDevelopersView(KdeObservatory *kdeObservatory, const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
@@ -82,7 +84,11 @@ void TopDevelopersView::updateViews(const Plasma::DataEngine::Data &data)
         QGraphicsRectItem *developerRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
         developerRect->setPos(0, yItem);
         developerRect->setPen(QPen(QColor(0, 0, 0)));
-        developerRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+        QColor color = QColor::fromHsv(qrand() % 256, 255, 190);
+        QLinearGradient grad (0.0, 0.0, (qreal) widthFactor*rank, 0.0);
+        grad.setColorAt(0, KColorUtils::darken(color, 0.8));
+        grad.setColorAt(1, color);
+        developerRect->setBrush(QBrush(grad));
         developerRect->setToolTip(i18np("%2 - %1 commit", "%2 - %1 commits", rank, developer));
         developerRect->setAcceptHoverEvents(true);
         developerRect->installSceneEventFilter(m_kdeObservatory);

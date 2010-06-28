@@ -22,8 +22,10 @@
 
 #include <QPen>
 #include <QFontMetrics>
+#include <QLinearGradient>
 
 #include <KIcon>
+#include <KColorUtils>
 #include <KGlobalSettings>
 
 TopActiveProjectsView::TopActiveProjectsView(KdeObservatory *kdeObservatory, const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
@@ -78,7 +80,11 @@ void TopActiveProjectsView::updateViews(const Plasma::DataEngine::Data &data)
             QGraphicsRectItem *projectRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
             projectRect->setPos(0, yItem);
             projectRect->setPen(QPen(QColor(0, 0, 0)));
-            projectRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+            QColor color = QColor::fromHsv(qrand() % 256, 255, 190);
+            QLinearGradient grad (0.0, 0.0, (qreal) widthFactor*rank, 0.0);
+            grad.setColorAt(0, KColorUtils::darken(color, 0.8));
+            grad.setColorAt(1, color);
+            projectRect->setBrush(QBrush(grad));
             projectRect->setToolTip(i18np("%2 - %1 commit", "%2 - %1 commits", rank, project));
             projectRect->setAcceptHoverEvents(true);
             projectRect->installSceneEventFilter(m_kdeObservatory);

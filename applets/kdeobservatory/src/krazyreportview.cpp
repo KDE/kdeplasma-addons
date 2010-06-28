@@ -21,8 +21,10 @@
 #include "krazyreportview.h"
 
 #include <QPen>
+#include <QLinearGradient>
 
 #include <KIcon>
+#include <KColorUtils>
 #include <KGlobalSettings>
 
 KrazyReportView::KrazyReportView(KdeObservatory *kdeObservatory, const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
@@ -108,7 +110,11 @@ void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
             QGraphicsRectItem *testNameRect = new QGraphicsRectItem(0, 0, (qreal) step-4, (qreal) heightFactor*rank, container);
             testNameRect->setPos(xItem, container->geometry().height() - testNameRect->rect().height());
             testNameRect->setPen(QPen(QColor(0, 0, 0)));
-            testNameRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+            QColor color = QColor::fromHsv(qrand() % 256, 255, 190);
+            QLinearGradient grad (0.0, 0.0, 0.0, (qreal) heightFactor*rank);
+            grad.setColorAt(0, KColorUtils::darken(color, 0.8));
+            grad.setColorAt(1, color);
+            testNameRect->setBrush(QBrush(grad));
             QString toolTipContents = i18np("%2 %1 error", "%2 %1 errors", rank, testName);
             QString toolTip = "<html><body><h5>" + toolTipContents + "<ul>";
 
