@@ -31,6 +31,7 @@ class GridHandle : public Handle
         virtual ~GridHandle();
 
         QRectF boundingRect() const;
+        void setHoverPos(const QPointF &hoverPos);
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
     public slots:

@@ -20,8 +20,8 @@
 #include "gridhandle.h"
 
 #include <QtGui/QPainter>
+#include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsSceneMouseEvent>
-#include <QtGui/QGraphicsLinearLayout>
 
 #include <KDebug>
 #include <KIcon>
@@ -53,6 +53,14 @@ GridHandle::~GridHandle()
 QRectF GridHandle::boundingRect() const
 {
     return widget()->boundingRect();
+}
+
+void GridHandle::setHoverPos(const QPointF &hoverPos)
+{
+    if (!boundingRect().contains(hoverPos) || scene()->itemAt(mapToScene(hoverPos)) != this) {
+        emit disappearDone(this);
+        deleteLater();
+    }
 }
 
 void GridHandle::widgetResized()

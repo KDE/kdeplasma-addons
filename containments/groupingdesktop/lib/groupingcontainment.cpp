@@ -431,41 +431,35 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
         widget = group;
     }
 
-    if ((group && !group->isMainGroup()) || applet) {
-        if (immutability() == Plasma::Mutable) {
-
-            switch (event->type()) {
-                case QEvent::GraphicsSceneHoverEnter:
-                case QEvent::GraphicsSceneHoverMove: {
-                    QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
-                    if (d->handles.contains(widget)) {
-                        Handle *handle = d->handles.value(widget);
-                        if (handle) {
-                            handle->setHoverPos(he->pos());
-                        }
-                    } else {
-//                         kDebug() << "generated group handle";
-                        AbstractGroup *parent = widget->property("group").value<AbstractGroup *>();
-                        if (parent) {
-                            Handle *handle = parent->createHandleForChild(widget);
-                            if (handle) {
-                                handle->setHoverPos(he->pos());
-                                d->handles[widget] = handle;
-                                connect(handle, SIGNAL(disappearDone(Handle*)),
-                                        this, SLOT(handleDisappeared(Handle*)));
-                                connect(widget, SIGNAL(geometryChanged()),
-                                        handle, SLOT(widgetResized()));
-                                connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
-                                        this, SLOT(onWidgetMoved(QGraphicsWidget*)));
-                            }
-                        }
+    if (event->type() == QEvent::GraphicsSceneHoverEnter || event->type() == QEvent::GraphicsSceneHoverMove) {
+        QGraphicsSceneHoverEvent *he = static_cast<QGraphicsSceneHoverEvent *>(event);
+        if (immutability() == Plasma::Mutable && ((group && !group->isMainGroup()) || applet)) {
+            if (d->handles.contains(widget)) {
+                Handle *handle = d->handles.value(widget);
+                if (handle) {
+                    handle->setHoverPos(he->pos());
+                }
+            } else {
+//              kDebug() << "generated group handle";
+                AbstractGroup *parent = widget->property("group").value<AbstractGroup *>();
+                if (parent) {
+                    Handle *handle = parent->createHandleForChild(widget);
+                    if (handle) {
+                        handle->setHoverPos(he->pos());
+                        d->handles[widget] = handle;
+                        connect(handle, SIGNAL(disappearDone(Handle*)),
+                                this, SLOT(handleDisappeared(Handle*)));
+                        connect(widget, SIGNAL(geometryChanged()),
+                                handle, SLOT(widgetResized()));
+                        connect(handle, SIGNAL(widgetMoved(QGraphicsWidget*)),
+                                this, SLOT(onWidgetMoved(QGraphicsWidget*)));
                     }
                 }
-                break;
-
-            default:
-                break;
             }
+        }
+
+        foreach (Handle *handle, d->handles) {
+            handle->setHoverPos(d->handles.key(handle)->mapFromScene(he->scenePos()));
         }
     }
 
