@@ -124,6 +124,8 @@ void FreeHandle::init()
     m_background = new FrameSvg(this);
     m_background->setImagePath("widgets/background");
     widget()->installSceneEventFilter(this);
+
+    calculateSize();
 }
 
 // void FreeHandle::detachWidget()
@@ -400,6 +402,7 @@ void FreeHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 void FreeHandle::emitDisappear()
 {
     emit disappearDone(this);
+    deleteLater();
 }
 
 Handle::ButtonType FreeHandle::mapToButton(const QPointF &point) const
@@ -898,6 +901,10 @@ void FreeHandle::widgetResized()
 void FreeHandle::setHoverPos(const QPointF &hoverPos)
 {
     m_entryPos = hoverPos;
+
+    if (!boundingRect().contains(hoverPos)) {
+        m_leaveTimer->start();
+    }
 }
 
 void FreeHandle::startFading(FadeType anim, const QPointF &hoverPos, bool preserveSide)
