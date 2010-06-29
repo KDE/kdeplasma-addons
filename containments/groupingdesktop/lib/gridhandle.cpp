@@ -65,13 +65,17 @@ void GridHandle::setHoverPos(const QPointF &hoverPos)
     bool upper = true;
     for (int i = 0; i < items.size(); ++i) {
         AbstractGroup *g = qgraphicsitem_cast<AbstractGroup *>(items.at(i));
-        if (g && g != group()) {
-            upper = false;
+        if (g) {
+            if (g != group()) {
+                upper = false;
+            }
             break;
         }
         Plasma::Applet *a = qgraphicsitem_cast<Plasma::Applet *>(items.at(i));
-        if (a && a != applet()) {
-            upper = false;
+        if (a) {
+            if (a != applet()) {
+                upper = false;
+            }
             break;
         }
     }
