@@ -43,6 +43,7 @@
 //----------------------GroupingContainmentPrivate-----------------------
 
 int GroupingContainmentPrivate::s_maxZValue = 0;
+unsigned int GroupingContainmentPrivate::s_groupId = 0;
 
 GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *containment)
                            : q(containment),
@@ -102,7 +103,9 @@ AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, co
     }
 
     if (id == 0) {
-        id = groups.count() + 1;
+        id = ++s_groupId;
+    } else if (id > s_groupId) {
+        s_groupId = id;
     }
     group->d->id = id;
 

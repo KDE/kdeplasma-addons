@@ -76,6 +76,7 @@ class GroupingContainmentPrivate
         bool loading;
 
         static int s_maxZValue;
+        static unsigned int s_groupId;
 };
 
 #endif
