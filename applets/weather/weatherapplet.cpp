@@ -383,10 +383,12 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         if (fiveDayTokens.count() > 2) {
             // if there is no specific icon, show the current weather
             m_graphicsWidget->setCurrentWeather(KIcon(fiveDayTokens[1]));
+            setPopupIcon(KIcon(fiveDayTokens[1]));
         } else {
             // if we are inside here, we could not find any proper icon
             // then just hide it
             m_graphicsWidget->setCurrentWeather(KIcon());
+            setPopupIcon(KIcon("weather-none-available"));
         }
     } else {
         m_graphicsWidget->setCurrentWeather(KIcon(data["Condition Icon"].toString()));
