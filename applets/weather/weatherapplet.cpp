@@ -103,7 +103,7 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         m_titleFrame(new Plasma::Frame)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    setPopupIcon("weather-not-available");
+    setPopupIcon("weather-none-available");
 }
 
 QGraphicsWidget *WeatherApplet::graphicsWidget()
