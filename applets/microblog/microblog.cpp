@@ -72,6 +72,7 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
     setPopupIcon("view-pim-journal");
+    setAssociatedApplication("choqok");
 }
 
 void MicroBlog::init()
