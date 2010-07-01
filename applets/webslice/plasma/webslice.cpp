@@ -72,8 +72,8 @@ void WebSlice::init()
 
     KConfigGroup cg = config();
     if (!m_url.isValid() || m_url.isEmpty()) {
-        m_url = cg.readEntry("url", "http://www.kde.org/");
-        m_element = cg.readEntry("element", "#hotspot");
+        m_url = cg.readEntry("url", "http://dot.kde.org/");
+        m_element = cg.readEntry("element", "#block-views-planetkde-block_1");
 
         // for testing geometry
         //m_url = cg.readEntry("url", "http://buienradar.nl/");
