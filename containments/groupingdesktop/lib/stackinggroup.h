@@ -29,16 +29,16 @@ class StackingGroup : public AbstractGroup
     Q_OBJECT
     public:
         explicit StackingGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
-        virtual ~StackingGroup();
+        ~StackingGroup();
 
-        virtual QString pluginName() const;
-        virtual void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
-        virtual void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
+        QString pluginName() const;
+        void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
+        void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         void showDropZone(const QPointF &pos);
 
     protected:
-        virtual void layoutChild(QGraphicsWidget *child, const QPointF &pos);
-        virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
+        void layoutChild(QGraphicsWidget *child, const QPointF &pos);
+        void resizeEvent(QGraphicsSceneResizeEvent *event);
 
     private slots:
         void onInitCompleted();
@@ -47,6 +47,7 @@ class StackingGroup : public AbstractGroup
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
         void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
         void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
+        void onAppletActivated();
 
     private:
         void drawStack();

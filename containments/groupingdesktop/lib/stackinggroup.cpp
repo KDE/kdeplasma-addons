@@ -164,6 +164,7 @@ void StackingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
 {
     if (!m_children.contains(applet)) {
         m_children << applet;
+        connect(applet, SIGNAL(activate()), this, SLOT(onAppletActivated()));
     }
 }
 
@@ -203,6 +204,17 @@ void StackingGroup::showDropZone(const QPointF &pos)
     }
 
     drawStack();
+}
+
+void StackingGroup::onAppletActivated()
+{
+    Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(sender());
+
+    if (applet && m_children.contains(applet)) {
+        m_children << m_children.takeAt(m_children.indexOf(applet));
+
+        drawStack();
+    }
 }
 
 #include "stackinggroup.moc"
