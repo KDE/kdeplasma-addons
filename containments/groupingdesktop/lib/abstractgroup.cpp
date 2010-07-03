@@ -45,6 +45,7 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
       interestingGroup(0),
       isMainGroup(false),
       backgroundHints(AbstractGroup::NoBackground),
+      isLoading(true),
       m_mainConfig(0)
 {
     background = new Plasma::FrameSvg(q);
@@ -143,6 +144,11 @@ void AbstractGroupPrivate::setIsMainGroup()
     q->setZValue(0);
 }
 
+void AbstractGroupPrivate::onInitCompleted()
+{
+    isLoading = false;
+}
+
 //-----------------------------AbstractGroup------------------------------
 
 AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
@@ -153,6 +159,8 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setAcceptHoverEvents(true);
     setContentsMargins(10, 10, 10, 10);
     setBackgroundHints(StandardBackground);
+
+    connect(this, SIGNAL(initCompleted()), this, SLOT(onInitCompleted()));
 }
 
 AbstractGroup::~AbstractGroup()
@@ -219,9 +227,11 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
 
     if (layoutApplet) {
         layoutChild(applet, applet->pos());
-    }
 
-    emit configNeedsSaving();
+        save(*(d->mainConfigGroup()));
+        saveChildren();
+        emit configNeedsSaving();
+    }
 
     connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)),
             this, SLOT(appletDestroyed(Plasma::Applet*)));
@@ -257,9 +267,11 @@ void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
 
     if (layoutGroup) {
         layoutChild(group, group->pos());
-    }
 
-    emit configNeedsSaving();
+        save(*(d->mainConfigGroup()));
+        saveChildren();
+        emit configNeedsSaving();
+    }
 
     connect(group, SIGNAL(groupDestroyed(AbstractGroup*)),
             this, SLOT(subGroupDestroyed(AbstractGroup*)));
@@ -305,6 +317,8 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet, AbstractGroup *newGroup
     }
 
     emit appletRemovedFromGroup(applet, this);
+
+    saveChildren();
     emit configNeedsSaving();
 }
 
@@ -324,6 +338,8 @@ void AbstractGroup::removeSubGroup(AbstractGroup *subGroup, AbstractGroup *newGr
     }
 
     emit subGroupRemovedFromGroup(subGroup, this);
+
+    saveChildren();
     emit configNeedsSaving();
 }
 
@@ -394,6 +410,26 @@ void AbstractGroup::save(KConfigGroup &group) const
     }
 
     group.writeEntry("zvalue", zValue());
+    group.writeEntry("plugin", pluginName());
+    QRectF rect = boundingRect();
+    rect.translate(containment()->mapFromScene(scenePos()));
+    group.writeEntry("geometry", rect);
+}
+
+void AbstractGroup::saveChildren() const
+{
+    foreach (Plasma::Applet *applet, d->applets) {
+        KConfigGroup appletConfig = applet->config().parent();
+        KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
+        groupConfig.writeEntry("Group", id());
+        saveChildGroupInfo(applet, groupConfig);
+    }
+    foreach (AbstractGroup *subGroup, d->subGroups) {
+        KConfigGroup subGroupConfig = subGroup->config().parent();
+        KConfigGroup groupConfig(&subGroupConfig, QString("GroupInformation"));
+        groupConfig.writeEntry("Group", id());
+        saveChildGroupInfo(subGroup, groupConfig);
+    }
 }
 
 void AbstractGroup::restore(KConfigGroup &group)
@@ -481,8 +517,12 @@ void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     d->background->resizeFrame(event->newSize());
 
-    emit geometryChanged();
-    emit configNeedsSaving();
+    if (!d->isLoading) {
+        emit geometryChanged();
+
+        save(*(d->mainConfigGroup()));
+        emit configNeedsSaving();
+    }
 }
 
 int AbstractGroup::type() const

@@ -127,6 +127,8 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         virtual void save(KConfigGroup &group) const;
 
+        virtual void saveChildren() const;
+
         virtual void restore(KConfigGroup &group);
 
         /**
@@ -280,6 +282,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         Q_PRIVATE_SLOT(d, void appletDestroyed(Plasma::Applet *applet))
         Q_PRIVATE_SLOT(d, void subGroupDestroyed(AbstractGroup *subGroup))
         Q_PRIVATE_SLOT(d, void destroyGroup())
+        Q_PRIVATE_SLOT(d, void onInitCompleted())
 
         AbstractGroupPrivate *const d;
 

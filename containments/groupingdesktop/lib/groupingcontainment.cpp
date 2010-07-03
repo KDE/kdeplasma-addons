@@ -112,7 +112,10 @@ AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, co
     groups << group;
 
     q->addGroup(group, pos);
-    emit group->initCompleted();
+
+    if (!loading) {
+        emit group->initCompleted();
+    }
 
     return group;
 }
@@ -231,7 +234,6 @@ void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPoi
 
 void GroupingContainmentPrivate::newGroupClicked(QAction *action)
 {
-    kDebug()<<action->data();
     createGroup(action->data().toString(), lastClick, 0);
 }
 
@@ -288,7 +290,12 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
             }
         }
 
-        interestingGroup->layoutChild(widget, q->mapToItem(interestingGroup, widget->geometry().center()));
+        QPointF c = widget->contentsRect().center();
+        c += q->mapFromScene(widget->scenePos());
+        QPointF pos = q->mapToItem(interestingGroup, c);
+        interestingGroup->layoutChild(widget, pos);
+        interestingGroup->save(*(interestingGroup->d->mainConfigGroup()));
+        interestingGroup->saveChildren();
 
         Handle *h = handles.value(widget);
         if (h) {
@@ -381,6 +388,9 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
         } else {
             d->manageGroup(group, pos);
         }
+
+        group->save(*(group->d->mainConfigGroup()));
+        emit configNeedsSaving();
     }
 
     int z = group->zValue();
@@ -394,7 +404,6 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     }
 
     emit groupAdded(group, pos);
-    emit configNeedsSaving();
 }
 
 QList<AbstractGroup *> GroupingContainment::groups() const
@@ -589,32 +598,9 @@ void GroupingContainment::saveContents(KConfigGroup &group) const
     Plasma::Containment::saveContents(group);
 
     KConfigGroup groupsConfig(&group, "Groups");
-    foreach (AbstractGroup *group, d->groups) {
-        KConfigGroup groupConfig(&groupsConfig, QString::number(group->id()));
-        groupConfig.writeEntry("plugin", group->pluginName());
-        QRectF rect = group->boundingRect();
-        rect.translate(mapToItem(this, group->pos()));
-        groupConfig.writeEntry("geometry", rect);
-        group->save(groupConfig);
-    }
-
-    foreach (AbstractGroup *group, d->groups) {
-        foreach (Plasma::Applet *applet, group->applets()) {
-            KConfigGroup appletConfig = applet->config().parent();
-            KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
-            groupConfig.writeEntry("Group", group->id());
-            group->saveChildGroupInfo(applet, groupConfig);
-
-            groupConfig.sync();
-        }
-        foreach (AbstractGroup *subGroup, group->subGroups()) {
-            KConfigGroup subGroupConfig = subGroup->config().parent();
-            KConfigGroup groupInfoConfig(&subGroupConfig, QString("GroupInformation"));
-            groupInfoConfig.writeEntry("Group", group->id());
-            group->saveChildGroupInfo(subGroup, groupInfoConfig);
-
-            subGroupConfig.sync();
-        }
+    foreach (AbstractGroup *g, d->groups) {
+        g->save(*(g->d->mainConfigGroup()));
+        g->saveChildren();
     }
 }
 
@@ -671,6 +657,7 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
                     parentGroup->addSubGroup(group, false);
                     parentGroup->restoreChildGroupInfo(group, groupInfoConfig);
                 }
+                emit group->initCompleted();
             }
         }
     }

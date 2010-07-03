@@ -36,6 +36,7 @@ class AbstractGroupPrivate
         void appletDestroyed(Plasma::Applet *applet);
         void subGroupDestroyed(AbstractGroup *subGroup);
         void setIsMainGroup();
+        void onInitCompleted();
 
         AbstractGroup *q;
         Plasma::Applet::List applets;
@@ -49,6 +50,7 @@ class AbstractGroupPrivate
         AbstractGroup *interestingGroup;
         bool isMainGroup;
         AbstractGroup::BackgroundHints backgroundHints;
+        bool isLoading;
 
     private:
         KConfigGroup *m_mainConfig;

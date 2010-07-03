@@ -24,6 +24,15 @@ FloatingGroup::FloatingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 {
     resize(200,200);
     setGroupType(AbstractGroup::FreeGroup);
+
+    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
+            this, SLOT(onAppletAdded(Plasma::Applet*,AbstractGroup*)));
+    connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
+            this, SLOT(onSubGroupAdded(AbstractGroup*, AbstractGroup*)));
+    connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
+            this, SLOT(onAppletRemoved(Plasma::Applet*,AbstractGroup*)));
+    connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
+            this, SLOT(onSubGroupRemoved(AbstractGroup*, AbstractGroup*)));
 }
 
 FloatingGroup::~FloatingGroup()
@@ -51,6 +60,32 @@ void FloatingGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup grou
 void FloatingGroup::layoutChild(QGraphicsWidget *, const QPointF &)
 {
 
+}
+
+void FloatingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
+{
+    connect(applet, SIGNAL(geometryChanged()), this, SLOT(onGeometryChanged()));
+}
+
+void FloatingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
+{
+    connect(subGroup, SIGNAL(geometryChanged()), this, SLOT(onGeometryChanged()));
+}
+
+void FloatingGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *)
+{
+    applet->disconnect(this);
+}
+
+void FloatingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
+{
+    subGroup->disconnect(this);
+}
+
+void FloatingGroup::onGeometryChanged()
+{
+    saveChildren();
+    emit configNeedsSaving();
 }
 
 #include "floatinggroup.moc"

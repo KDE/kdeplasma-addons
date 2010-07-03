@@ -27,14 +27,21 @@ class FloatingGroup : public AbstractGroup
     Q_OBJECT
     public:
         explicit FloatingGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
-        virtual ~FloatingGroup();
+        ~FloatingGroup();
 
-        virtual QString pluginName() const;
-        virtual void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
-        virtual void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
+        QString pluginName() const;
+        void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
+        void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
 
     protected:
-        virtual void layoutChild(QGraphicsWidget *child, const QPointF &pos);
+        void layoutChild(QGraphicsWidget *child, const QPointF &pos);
+
+    private slots:
+        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
+        void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
+        void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
+        void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
+        void onGeometryChanged();
 
 };
 
