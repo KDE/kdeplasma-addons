@@ -507,7 +507,6 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                     static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton) {
 
                     setMovingWidget(widget);
-                    return true;
                 }
 
             break;
@@ -529,8 +528,6 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                             d->interestingGroup = parentGroup;
                         }
                     }
-
-                    return true;
                 }
             }
 
@@ -562,7 +559,6 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
 
             case QEvent::GraphicsSceneMouseRelease:
                 d->onWidgetMoved(widget);
-                return true;
 
             break;
 
