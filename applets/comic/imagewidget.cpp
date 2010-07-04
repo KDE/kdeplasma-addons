@@ -26,8 +26,8 @@
 #include <Plasma/ScrollBar>
 
 ImageWidget::ImageWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
-    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mIsLeftToRight( true ),
-      mIsTopToBottom( true ), mLastSize( QSizeF( 200, 200 ) )
+    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mDifferentImage( true ),
+      mIsLeftToRight( true ), mIsTopToBottom( true ), mLastSize( QSizeF( 200, 200 ) )
 {
     setCacheMode( ItemCoordinateCache );//TODO change back to DeviceCoordinateCache, when that works with Dashboard
     mScrollBarHoriz = new Plasma::ScrollBar( this );
