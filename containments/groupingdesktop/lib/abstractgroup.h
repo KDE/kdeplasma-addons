@@ -283,6 +283,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         Q_PRIVATE_SLOT(d, void subGroupDestroyed(AbstractGroup *subGroup))
         Q_PRIVATE_SLOT(d, void destroyGroup())
         Q_PRIVATE_SLOT(d, void onInitCompleted())
+        Q_PRIVATE_SLOT(d, void onChildGeometryChanged())
 
         AbstractGroupPrivate *const d;
 

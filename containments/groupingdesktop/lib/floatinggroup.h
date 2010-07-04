@@ -36,13 +36,6 @@ class FloatingGroup : public AbstractGroup
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
-    private slots:
-        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
-        void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
-        void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
-        void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
-        void onGeometryChanged();
-
 };
 
 #endif // FLOATINGGROUP_H

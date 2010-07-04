@@ -127,6 +127,10 @@ void AbstractGroupPrivate::addChild(QGraphicsWidget *child)
     child->setParentItem(q);
     child->setProperty("group", QVariant::fromValue(q));
     child->setPos(newPos);
+
+    if (groupType == AbstractGroup::FreeGroup) {
+        q->connect(child, SIGNAL(geometryChanged()), q, SLOT(onChildGeometryChanged()));
+    }
 }
 
 void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
@@ -134,6 +138,8 @@ void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
     QPointF newPos = child->scenePos();
     child->setParentItem(q->parentItem());
     child->setPos(child->parentItem()->mapFromScene(newPos));
+
+    child->disconnect(q);
 }
 
 void AbstractGroupPrivate::setIsMainGroup()
@@ -147,6 +153,12 @@ void AbstractGroupPrivate::setIsMainGroup()
 void AbstractGroupPrivate::onInitCompleted()
 {
     isLoading = false;
+}
+
+void AbstractGroupPrivate::onChildGeometryChanged()
+{
+    q->saveChildren();
+    emit q->configNeedsSaving();
 }
 
 //-----------------------------AbstractGroup------------------------------

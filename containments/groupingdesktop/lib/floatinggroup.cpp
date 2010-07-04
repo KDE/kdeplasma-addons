@@ -62,30 +62,4 @@ void FloatingGroup::layoutChild(QGraphicsWidget *, const QPointF &)
 
 }
 
-void FloatingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
-{
-    connect(applet, SIGNAL(geometryChanged()), this, SLOT(onGeometryChanged()));
-}
-
-void FloatingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
-{
-    connect(subGroup, SIGNAL(geometryChanged()), this, SLOT(onGeometryChanged()));
-}
-
-void FloatingGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *)
-{
-    applet->disconnect(this);
-}
-
-void FloatingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
-{
-    subGroup->disconnect(this);
-}
-
-void FloatingGroup::onGeometryChanged()
-{
-    saveChildren();
-    emit configNeedsSaving();
-}
-
 #include "floatinggroup.moc"

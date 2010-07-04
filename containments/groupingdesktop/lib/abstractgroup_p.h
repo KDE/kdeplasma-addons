@@ -37,6 +37,7 @@ class AbstractGroupPrivate
         void subGroupDestroyed(AbstractGroup *subGroup);
         void setIsMainGroup();
         void onInitCompleted();
+        void onChildGeometryChanged();
 
         AbstractGroup *q;
         Plasma::Applet::List applets;
