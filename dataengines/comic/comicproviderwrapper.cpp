@@ -1,5 +1,6 @@
 /*
  *   Copyright (C) 2008 Petri Damstén <damu@iki.fi>
+ *   Copyright (C) 2010 Matthias Fuchs <mat69@gmx.net>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -34,10 +35,12 @@
 
 QStringList ComicProviderWrapper::mExtensions;
 
-ImageWrapper::ImageWrapper( QObject *parent, const QImage &image )
-: QObject( parent )
-, mImage( image )
+ImageWrapper::ImageWrapper( QObject *parent, const QByteArray &data )
+  : QObject( parent ),
+    mImage( QImage::fromData( data ) ),
+    mRawData( data )
 {
+    resetImageReader();
 }
 
 QImage ImageWrapper::image() const
@@ -48,20 +51,50 @@ QImage ImageWrapper::image() const
 void ImageWrapper::setImage( const QImage &image )
 {
     mImage = image;
+    mRawData.clear();
+
+    resetImageReader();
 }
 
 QByteArray ImageWrapper::rawData() const
 {
-    QByteArray data;
-    QBuffer buffer( &data );
-    mImage.save( &buffer );
-    return data;
+    if ( mRawData.isNull() ) {
+        QBuffer buffer( &mRawData );
+        mImage.save( &buffer );
+    }
+
+    return mRawData;
 }
 
 void ImageWrapper::setRawData( const QByteArray &rawData )
 {
-    mImage = QImage::fromData( rawData );
+    mRawData = rawData;
+    mImage = QImage::fromData( mRawData );
+
+    resetImageReader();
 }
+
+void ImageWrapper::resetImageReader()
+{
+    if ( mBuffer.isOpen() ) {
+        mBuffer.close();
+    }
+    rawData(); //to update the rawData if needed
+    mBuffer.setBuffer( &mRawData );
+    mBuffer.open( QIODevice::ReadOnly );
+    mImageReader.setDevice( &mBuffer );
+}
+
+int ImageWrapper::imageCount() const
+{
+    return mImageReader.imageCount();
+}
+
+QImage ImageWrapper::read()
+{
+    return mImageReader.read();
+}
+
 
 DateWrapper::DateWrapper( QObject *parent, const QDate &date )
 : QObject( parent )
@@ -666,8 +699,7 @@ void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
 {
     --mRequests;
     if ( id == Image ) {
-        ImageWrapper *img = new ImageWrapper( this, QImage::fromData( data ) );
-        mKrossImage = img;
+        mKrossImage = new ImageWrapper( this, data );
         callFunction( "pageRetrieved", QVariantList() << id <<
                       qVariantFromValue( qobject_cast<QObject*>( mKrossImage ) ) );
         if ( mRequests < 1 ) { // Don't finish if we still have pageRequests

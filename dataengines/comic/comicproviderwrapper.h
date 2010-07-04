@@ -1,5 +1,6 @@
 /*
  *   Copyright (C) 2008 Petri Damstén <damu@iki.fi>
+ *   Copyright (C) 2010 Matthias Fuchs <mat69@gmx.net>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -21,7 +22,9 @@
 
 #include "comicprovider.h"
 
+#include <QBuffer>
 #include <QImage>
+#include <QImageReader>
 #include <QByteArray>
 
 namespace Kross {
@@ -38,15 +41,45 @@ class ImageWrapper : public QObject
         Q_PROPERTY( QImage image READ image WRITE setImage )
         Q_PROPERTY( QByteArray rawData READ rawData WRITE setRawData )
     public:
-        explicit ImageWrapper( QObject *parent = 0, const QImage &image = QImage() );
+        explicit ImageWrapper( QObject *parent = 0, const QByteArray &image = QByteArray() );
 
         QImage image() const;
+        /**
+         * Sets the image, rawData is changed to the new set image
+         */
         void setImage( const QImage &image );
         QByteArray rawData() const;
+
+        /**
+         * Sets the rawData, image is changed to the new rawData
+         */
         void setRawData( const QByteArray &rawData );
+
+    public slots:
+        /**
+         * Returns the numbers of images contained in the image
+         * 0 if there is just one image, > 0 if the image format supports animation (the number of frames),
+         * -1 if there was an error
+         * @since 4600
+         */
+        int imageCount() const;
+
+        /**
+         * Returns an image, if it did not work an null image is returned
+         * For animations returns the next frame upon each call, if there are no frames left returns a null image
+         * @see imageCount()
+         * @since 4600
+         */
+        QImage read();
+
+    private:
+        void resetImageReader();
 
     private:
         QImage mImage;
+        mutable QByteArray mRawData;
+        QBuffer mBuffer;
+        QImageReader mImageReader;
 };
 
 class DateWrapper : public QObject
@@ -165,7 +198,7 @@ class ComicProviderWrapper : public QObject
         ComicProviderWrapper( ComicProviderKross *parent );
         ~ComicProviderWrapper();
 
-        int apiVersion() const { return 4450; }
+        int apiVersion() const { return 4600; }
 
         ComicProvider::IdentifierType identifierType() const;
         QImage comicImage();
