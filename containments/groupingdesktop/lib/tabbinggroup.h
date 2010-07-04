@@ -17,39 +17,45 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef TABBEDGROUP_H
-#define TABBEDGROUP_H
+#ifndef TABBINGGROUP_H
+#define TABBINGGROUP_H
 
 #include <lib/abstractgroup.h>
-#include <Plasma/TabBar>
-#include <QtGui/QGraphicsLinearLayout>
-#include <Plasma/PushButton>
-#include <KDE/KConfigDialog>
+
 #include "ui_tabbinggroup_config.h"
+
+class QGraphicsLinearLayout;
+
+class KConfigDialog;
+
+namespace Plasma {
+    class TabBar;
+    class PushButton;
+};
 
 class TabbingGroup : public AbstractGroup
 {
     Q_OBJECT
 
     public:
-        explicit TabbingGroup ( QGraphicsItem* parent = 0, Qt::WindowFlags wFlags = 0 );
-        virtual ~TabbingGroup();
-        virtual QString pluginName() const;
-        virtual void restoreChildGroupInfo ( QGraphicsWidget* child, const KConfigGroup& group );
-        virtual void saveChildGroupInfo ( QGraphicsWidget* child, KConfigGroup group ) const;
+        explicit TabbingGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+        ~TabbingGroup();
+        QString pluginName() const;
+        void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
+        void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         void save(KConfigGroup &group) const;
         void restore(KConfigGroup &group);
-        virtual void createConfigurationInterface(KConfigDialog *parent);
+        void createConfigurationInterface(KConfigDialog *parent);
 
     protected:
-        virtual void layoutChild ( QGraphicsWidget* child, const QPointF& pos );
+        void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
     private slots:
-        void tabbarIndexChanged ( int index );
-        void onAppletAdded ( Plasma::Applet *applet, AbstractGroup * );
-        void onAppletRemoved ( Plasma::Applet *applet, AbstractGroup * );
-        void onSubGroupAdded ( AbstractGroup *subGroup, AbstractGroup * );
-        void onSubGroupRemoved ( AbstractGroup *subGroup, AbstractGroup * );
+        void tabbarIndexChanged(int index);
+        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
+        void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
+        void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
+        void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
         //void addTab();
         void callConfig();
         void configAddTab();
@@ -62,15 +68,16 @@ class TabbingGroup : public AbstractGroup
     private:
         void hideChildren(int index);
         void showChildren(int index);
-        void renameTabs(QStringList titles);
-        Plasma::TabBar* tabbar;
-        QGraphicsLinearLayout* layout;
-        QMultiMap<int, QGraphicsWidget*> m_children;
-        QList<int> config_mapper;
-        int current_index;
-        QGraphicsWidget *tabwidget;
-        Plasma::PushButton *addbutton;
-        Ui_TabbingGroupConfig ui;
+        void renameTabs(const QStringList &titles);
+
+        Plasma::TabBar *m_tabbar;
+        QGraphicsLinearLayout *m_layout;
+        QMultiMap<int, QGraphicsWidget *> m_children;
+        QList<int> m_config_mapper;
+        int m_current_index;
+        QGraphicsWidget *m_tabwidget;
+        Plasma::PushButton *m_addbutton;
+        Ui_TabbingGroupConfig m_ui;
 };
 
 #endif // TABBEDGROUP_H
