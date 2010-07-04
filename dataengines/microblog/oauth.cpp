@@ -120,7 +120,8 @@ QByteArray createSignature(const QString &requestUrl, HttpMethod method, const Q
 //     kDebug() << "SIG BASE STRING: " << signatureBaseString;
 
     if (!QCA::isSupported("hmac(sha1)")) {
-        qFatal("HMAC(SHA1) is not supported!");
+        kError() << "Hashing algo not supported, update your QCA";
+        return QByteArray();
     }
     // create key for HMAC-SHA1 hashing
     QByteArray key(ConsumerSecret + "&" + tokenSecret);
