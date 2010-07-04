@@ -65,6 +65,7 @@ class GroupingContainmentPrivate
         QAction *newGridGroup;
         QAction *newFloatingGroup;
         QAction *newStackingGroup;
+        QAction *newTabbingGroup;
         QAction *separator;
         QAction *deleteGroupAction;
         QPointF lastClick;

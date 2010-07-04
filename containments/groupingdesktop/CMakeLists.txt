@@ -11,6 +11,7 @@ include_directories(${CMAKE_SOURCE_DIR}
                     ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kephal)
 
 set(groupingcontainment_SRCS
+        lib/tabbinggroup.cpp
         lib/groupingcontainment.cpp
         lib/handle.cpp
         lib/freehandle.cpp
@@ -24,6 +25,7 @@ set(groupingdesktop_SRCS desktop/groupingdesktop.cpp)
 
 set(groupingpanel_SRCS panel/groupingpanel.cpp)
 
+kde4_add_ui_files(groupingcontainment_SRCS lib/tabbinggroup_config.ui)
 kde4_add_library(plasma_groupingcontainment SHARED ${groupingcontainment_SRCS})
 kde4_add_plugin(plasma_containment_groupingdesktop ${groupingdesktop_SRCS})
 # kde4_add_plugin(plasma_containment_groupingpanel ${groupingpanel_SRCS})

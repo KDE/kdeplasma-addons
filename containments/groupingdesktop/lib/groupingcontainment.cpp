@@ -39,6 +39,7 @@
 #include "gridgroup.h"
 #include "floatinggroup.h"
 #include "stackinggroup.h"
+#include "tabbinggroup.h"
 
 //----------------------GroupingContainmentPrivate-----------------------
 
@@ -64,9 +65,12 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
     newFloatingGroup->setData("floating");
     newStackingGroup = new QAction(i18n("Add a new stacking group"), q);
     newStackingGroup->setData("stacking");
+    newTabbingGroup = new QAction(i18n("Add a new tabbing group"), q);
+    newTabbingGroup->setData("tabbing");
     newGroupMenu->addAction(newGridGroup);
     newGroupMenu->addAction(newFloatingGroup);
     newGroupMenu->addAction(newStackingGroup);
+    newGroupMenu->addAction(newTabbingGroup);
 
     deleteGroupAction = new QAction(i18n("Remove this group"), q);
     deleteGroupAction->setIcon(KIcon("edit-delete"));
@@ -91,6 +95,8 @@ AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, co
         group = new FloatingGroup(q);
     } else if (plugin == "stacking") {
         group = new StackingGroup(q);
+    } else if (plugin == "tabbing") {
+        group = new TabbingGroup(q);
     }
 
     if (!group) {
