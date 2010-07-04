@@ -228,10 +228,7 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
 
 void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPointF &pos)
 {
-    //FIXME i don't like this setPos's at all
-    subGroup->setPos(q->geometry().bottomRight());
-    AbstractGroup *group = groupAt(pos);
-    subGroup->setPos(pos);
+    AbstractGroup *group = groupAt(pos, subGroup);
 
     if (group && (group != subGroup)) {
         group->addSubGroup(subGroup);

@@ -123,7 +123,7 @@ void AbstractGroupPrivate::subGroupDestroyed(AbstractGroup *subGroup)
 
 void AbstractGroupPrivate::addChild(QGraphicsWidget *child)
 {
-    QPointF newPos = q->mapFromScene(child->scenePos());
+    QPointF newPos = q->mapFromItem(child->parentItem(), child->pos());
     child->setParentItem(q);
     child->setProperty("group", QVariant::fromValue(q));
     child->setPos(newPos);
@@ -287,7 +287,6 @@ void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
 
     connect(group, SIGNAL(groupDestroyed(AbstractGroup*)),
             this, SLOT(subGroupDestroyed(AbstractGroup*)));
-
 }
 
 Plasma::Applet::List AbstractGroup::applets() const
