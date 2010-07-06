@@ -147,6 +147,24 @@ void StackingGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
     drawStack();
 }
 
+void StackingGroup::wheelEvent(QGraphicsSceneWheelEvent *event)
+{
+    if (m_children.size() < 2) {
+        return;
+    }
+
+    if (event->delta() > 0) {
+        m_children.move(m_children.size() - 1, 0);
+    } else {
+        m_children << m_children.takeAt(0);
+    }
+
+    drawStack();
+    saveChildren();
+
+    event->accept();
+}
+
 void StackingGroup::onInitCompleted()
 {
     connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),

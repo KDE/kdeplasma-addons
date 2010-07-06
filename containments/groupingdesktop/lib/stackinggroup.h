@@ -39,6 +39,7 @@ class StackingGroup : public AbstractGroup
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         void resizeEvent(QGraphicsSceneResizeEvent *event);
+        void wheelEvent(QGraphicsSceneWheelEvent *event);
 
     private slots:
         void onInitCompleted();
