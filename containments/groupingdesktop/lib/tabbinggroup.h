@@ -57,7 +57,6 @@ class TabbingGroup : public AbstractGroup
         void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
         void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
         //void addTab();
-        void callConfig();
         void configAddTab();
         void configModTab();
         void configDelTab();

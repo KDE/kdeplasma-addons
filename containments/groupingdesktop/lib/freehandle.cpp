@@ -286,8 +286,8 @@ void FreeHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         } else {
             iconRect.moveLeft(m_background->marginSize(RightMargin));
         }
-        AbstractGroup *group = this->widget()->property("group").value<AbstractGroup *>();
-        if (!(group && group->groupType() == AbstractGroup::ConstrainedGroup)) {
+        AbstractGroup *parentGroup = this->widget()->property("group").value<AbstractGroup *>();
+        if (!(parentGroup && parentGroup->groupType() == AbstractGroup::ConstrainedGroup)) {
             if (m_buttonsOnRight) {
                 m_configureIcons->paint(&buffPainter, iconRect, "size-diagonal-tr2bl");
             } else {
@@ -299,7 +299,7 @@ void FreeHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
             iconRect.translate(0, m_iconSize);
         }
 
-        if (applet() && applet()->hasConfigurationInterface()) {
+        if ((applet() && applet()->hasConfigurationInterface()) || (group() && group()->hasConfigurationInterface())) {
             m_configureIcons->paint(&buffPainter, iconRect, "configure");
             iconRect.translate(0, m_iconSize);
         }
@@ -363,9 +363,9 @@ void FreeHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         sourceIconRect.moveLeft(m_background->marginSize(RightMargin));
     }
 
-    AbstractGroup *group = this->widget()->property("group").value<AbstractGroup *>();
-    if (!(group && group->groupType() == AbstractGroup::ConstrainedGroup)) {
-        if (this->group() || (applet() && applet()->aspectRatioMode() != FixedSize)) {
+    AbstractGroup *parentGroup = this->widget()->property("group").value<AbstractGroup *>();
+    if (!(parentGroup && parentGroup->groupType() == AbstractGroup::ConstrainedGroup)) {
+        if (group() || (applet() && applet()->aspectRatioMode() != FixedSize)) {
             //resize
             painter->drawPixmap(
                 QRectF(basePoint + shiftM, iconSize), *m_backgroundBuffer, sourceIconRect);
@@ -379,7 +379,7 @@ void FreeHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         basePoint += step;
     }
     //configure
-    if (applet() && applet()->hasConfigurationInterface()) {
+    if ((applet() && applet()->hasConfigurationInterface()) || (group() && group()->hasConfigurationInterface())) {
         painter->drawPixmap(
             QRectF(basePoint + shiftC, iconSize), *m_backgroundBuffer, sourceIconRect);
         sourceIconRect.translate(0, m_iconSize);
@@ -415,9 +415,9 @@ Handle::ButtonType FreeHandle::mapToButton(const QPointF &point) const
 
     QRectF activeArea = QRectF(basePoint, QSizeF(m_iconSize, m_iconSize));
 
-    AbstractGroup *group = widget()->property("group").value<AbstractGroup *>();
-    if (!(group && group->groupType() == AbstractGroup::ConstrainedGroup)) {
-        if (this->group() || (applet() && applet()->aspectRatioMode() != FixedSize)) {
+    AbstractGroup *parentGroup = widget()->property("group").value<AbstractGroup *>();
+    if (!(parentGroup && parentGroup->groupType() == AbstractGroup::ConstrainedGroup)) {
+        if (group() || (applet() && applet()->aspectRatioMode() != FixedSize)) {
             if (activeArea.contains(point)) {
                 return ResizeButton;
             }
@@ -430,7 +430,7 @@ Handle::ButtonType FreeHandle::mapToButton(const QPointF &point) const
         activeArea.translate(step);
     }
 
-    if (applet() && applet()->hasConfigurationInterface()) {
+    if ((applet() && applet()->hasConfigurationInterface()) || (group() && group()->hasConfigurationInterface())) {
         if (activeArea.contains(point)) {
             return ConfigureButton;
         }
@@ -526,6 +526,8 @@ void FreeHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             //FIXME: Remove this call once the configuration management change was done
             if (applet() && m_pressedButton == releasedAtButton) {
                 applet()->showConfigurationInterface();
+            } else if (group() && group()->hasConfigurationInterface()) {
+                group()->showConfigurationInterface();
             }
             break;
         case RemoveButton:

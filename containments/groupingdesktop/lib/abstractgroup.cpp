@@ -25,6 +25,8 @@
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsSceneResizeEvent>
 
+#include <KDE/KConfigDialog>
+#include <KDE/KWindowSystem>
 #include <kservice.h>
 #include <kservicetypetrader.h>
 
@@ -46,6 +48,7 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
       isMainGroup(false),
       backgroundHints(AbstractGroup::NoBackground),
       isLoading(true),
+      hasInterface(false),
       m_mainConfig(0)
 {
     background = new Plasma::FrameSvg(q);
@@ -165,6 +168,11 @@ void AbstractGroupPrivate::onChildGeometryChanged()
     emit q->configNeedsSaving();
 }
 
+QString AbstractGroupPrivate::configDialogId()
+{
+    return QString("%1settings%2").arg(id).arg(q->pluginName());
+}
+
 //-----------------------------AbstractGroup------------------------------
 
 AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
@@ -184,6 +192,7 @@ AbstractGroup::~AbstractGroup()
     emit groupDestroyed(this);
 
     delete d;
+    delete KConfigDialog::exists(d->configDialogId());
 }
 
 void AbstractGroup::setImmutability(Plasma::ImmutabilityType immutability)
@@ -587,6 +596,46 @@ void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 //     } else {
         //TODO draw a halo, something
 //     }
+}
+
+void AbstractGroup::showConfigurationInterface()
+{
+    KConfigDialog *dlg = KConfigDialog::exists(d->configDialogId());
+
+    if (dlg) {
+        KWindowSystem::setOnDesktop(dlg->winId(), KWindowSystem::currentDesktop());
+        dlg->show();
+        KWindowSystem::activateWindow(dlg->winId());
+        return;
+    }
+
+    KConfigSkeleton *nullManager = new KConfigSkeleton(0);
+    KConfigDialog *dialog = new KConfigDialog(0, d->configDialogId(), nullManager);
+    dialog->setFaceType(KPageDialog::Auto);
+    dialog->setWindowTitle(i18n("Group Configuration"));
+    dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    createConfigurationInterface(dialog);
+    //TODO: Apply button does not correctly work for now, so do not show it
+    dialog->showButton(KDialog::Apply, false);
+    dialog->showButton(KDialog::Default, false);
+    QObject::connect(dialog, SIGNAL(finished()), nullManager, SLOT(deleteLater()));
+
+    dialog->show();
+}
+
+void AbstractGroup::createConfigurationInterface(KConfigDialog *)
+{
+
+}
+
+bool AbstractGroup::hasConfigurationInterface() const
+{
+    return d->hasInterface;
+}
+
+void AbstractGroup::setHasConfigurationInterface(bool hasInterface)
+{
+    d->hasInterface = hasInterface;
 }
 
 #include "abstractgroup.moc"

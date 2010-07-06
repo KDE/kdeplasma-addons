@@ -199,6 +199,10 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         */
         GroupType groupType() const;
 
+        virtual void createConfigurationInterface(KConfigDialog *parent);
+
+        bool hasConfigurationInterface() const;
+
     public slots:
         /**
          * Sets the immutability type for this group (not immutable,
@@ -208,6 +212,8 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          * @see Plasma::ImmutabilityType
          */
         void setImmutability(Plasma::ImmutabilityType immutability);
+
+        virtual void showConfigurationInterface();
 
     protected:
         virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
@@ -236,6 +242,8 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          * @see GroupType
          */
         void setGroupType(GroupType type);
+
+        void setHasConfigurationInterface(bool hasInterface);
 
     signals:
         /**

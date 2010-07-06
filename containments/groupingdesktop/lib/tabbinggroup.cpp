@@ -50,6 +50,7 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
     resize(200, 200);
     setGroupType(AbstractGroup::FreeGroup);
+    setHasConfigurationInterface(true);
 
     connect(m_tabbar, SIGNAL(currentChanged(int)),
             this, SLOT(tabbarIndexChanged(int)));
@@ -63,7 +64,7 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*, AbstractGroup*)),
             this, SLOT(onSubGroupAdded(AbstractGroup*, AbstractGroup*)));
 
-    connect(m_addbutton, SIGNAL(clicked()), this, SLOT(callConfig()));
+    connect(m_addbutton, SIGNAL(clicked()), this, SLOT(showConfigurationInterface()));
 }
 
 TabbingGroup::~TabbingGroup()
@@ -371,28 +372,6 @@ void TabbingGroup::renameTabs(const QStringList &titles)
 
         ++index;
     }
-}
-
-void TabbingGroup::callConfig()
-{
-    if (KConfigDialog::showDialog("tabbingconfig")) {
-        return;
-    }
-
-    KConfigSkeleton *nullManager = new KConfigSkeleton(0);
-    KConfigDialog *dialog = new KConfigDialog(0, "tabbingconfig", nullManager);
-    dialog->setFaceType(KPageDialog::Auto);
-    dialog->setWindowTitle(i18n("Tabbinggroup Configuration"));
-    dialog->setAttribute(Qt::WA_DeleteOnClose, true);
-    createConfigurationInterface(dialog);
-    //TODO: Apply button does not correctly work for now, so do not show it
-    dialog->showButton(KDialog::Apply, false);
-    dialog->showButton(KDialog::Default, false);
-    //QObject::connect(dialog, SIGNAL(applyClicked()), q, SLOT(configDialogFinished()));
-    //QObject::connect(dialog, SIGNAL(okClicked()), q, SLOT(configDialogFinished()));
-    QObject::connect(dialog, SIGNAL(finished()), nullManager, SLOT(deleteLater()));
-
-    dialog->show();
 }
 
 #include "tabbinggroup.moc"

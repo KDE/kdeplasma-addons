@@ -38,6 +38,7 @@ class AbstractGroupPrivate
         void setIsMainGroup();
         void onInitCompleted();
         void onChildGeometryChanged();
+        QString configDialogId();
 
         AbstractGroup *q;
         Plasma::Applet::List applets;
@@ -52,6 +53,7 @@ class AbstractGroupPrivate
         bool isMainGroup;
         AbstractGroup::BackgroundHints backgroundHints;
         bool isLoading;
+        bool hasInterface;
 
     private:
         KConfigGroup *m_mainConfig;
