@@ -84,8 +84,11 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="suffix">
-      <string> sec</string>
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>0</height>
+      </size>
      </property>
      <property name="minimum">
       <number>1</number>
@@ -113,8 +116,11 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="suffix">
-      <string> gens</string>
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>0</height>
+      </size>
      </property>
      <property name="minimum">
       <number>10</number>
