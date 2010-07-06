@@ -95,6 +95,8 @@ void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
         applets.removeAll(applet);
 
         emit q->appletRemovedFromGroup(applet, q);
+
+        q->saveChildren();
         emit q->configNeedsSaving();
 
         if (destroying && (q->children().count() == 0)) {
@@ -112,6 +114,8 @@ void AbstractGroupPrivate::subGroupDestroyed(AbstractGroup *subGroup)
         subGroups.removeAll(subGroup);
 
         emit q->subGroupRemovedFromGroup(subGroup, q);
+
+        q->saveChildren();
         emit q->configNeedsSaving();
 
         if (destroying && (q->children().count() == 0)) {
