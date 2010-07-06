@@ -94,9 +94,14 @@ QString StackingGroup::pluginName() const
 
 void StackingGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
 {
-    m_children.move(m_children.indexOf(child), group.readEntry("Index", 0));
+    int from = m_children.indexOf(child);
+    int to = group.readEntry("Index", 0);
 
-    drawStack();
+    if (m_children.size() > to) {
+        m_children.move(from, to);
+
+        drawStack();
+    }
 }
 
 void StackingGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
