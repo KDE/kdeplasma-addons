@@ -170,7 +170,7 @@ void AbstractGroupPrivate::onChildGeometryChanged()
 
 QString AbstractGroupPrivate::configDialogId()
 {
-    return QString("%1settings%2").arg(id).arg(q->pluginName());
+    return QString("%1settings").arg(id);
 }
 
 //-----------------------------AbstractGroup------------------------------
