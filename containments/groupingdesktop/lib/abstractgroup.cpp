@@ -191,8 +191,8 @@ AbstractGroup::~AbstractGroup()
 {
     emit groupDestroyed(this);
 
-    delete d;
     delete KConfigDialog::exists(d->configDialogId());
+    delete d;
 }
 
 void AbstractGroup::setImmutability(Plasma::ImmutabilityType immutability)
