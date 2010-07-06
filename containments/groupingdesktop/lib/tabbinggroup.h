@@ -40,11 +40,11 @@ class TabbingGroup : public AbstractGroup
     public:
         explicit TabbingGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         ~TabbingGroup();
+
+        void init();
         QString pluginName() const;
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
-        void save(KConfigGroup &group) const;
-        void restore(KConfigGroup &group);
         void createConfigurationInterface(KConfigDialog *parent);
 
     protected:

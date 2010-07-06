@@ -66,6 +66,13 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         virtual ~AbstractGroup();
 
         /**
+        * Method called a little after the constructor.
+        * If you need methods like config() or containment() use them here,
+        * not in the constructor.
+        **/
+        virtual void init();
+
+        /**
          * Adds an Applet to this Group
          * @param applet the applet to be managed by this
          * @param layoutApplets if true calls layoutApplet(applet)

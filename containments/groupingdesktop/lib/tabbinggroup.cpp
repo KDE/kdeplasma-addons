@@ -71,6 +71,30 @@ TabbingGroup::~TabbingGroup()
 {
 }
 
+void TabbingGroup::init()
+{
+    KConfigGroup group = config();
+
+    QString tabs = group.readEntry("tabs", i18n("Default"));
+    renameTabs(tabs.split(","));
+
+    //put children from non existing groups in first groups
+    QMultiMap<int, QGraphicsWidget *>::iterator it = m_children.begin();
+    while (it != m_children.end()) {
+        if (it.key() >= m_tabbar->count()) {
+            QGraphicsWidget *item = it.value();
+            it = m_children.erase(it);
+            m_children.insert(0, item);
+        } else {
+            ++it;
+        }
+    }/*
+    hideChildren(current_index);
+    current_index = group.readEntry("currenttab", 0);
+    showChildren(current_index);*/
+    m_tabbar->setCurrentIndex(group.readEntry("currenttab", 0));
+}
+
 void TabbingGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 {
     Q_UNUSED(child)
@@ -135,6 +159,9 @@ void TabbingGroup::tabbarIndexChanged(int index)
     hideChildren(m_current_index);
     m_current_index = index;
     showChildren(m_current_index);
+
+    config().writeEntry("currenttab", m_current_index);
+    emit configNeedsSaving();
 }
 
 void TabbingGroup::hideChildren(int index)
@@ -152,49 +179,6 @@ void TabbingGroup::showChildren(int index)
         item->show();
     }
 }
-
-
-void TabbingGroup::save(KConfigGroup &group) const
-{
-    AbstractGroup::save(group);
-    QString tabs;
-
-    for (int i = 0;i < m_tabbar->count();++i) {
-        if (i > 0) {
-            tabs += ',';
-        }
-
-        tabs += m_tabbar->tabText(i);
-    }
-
-    group.writeEntry("tabs", tabs);
-    group.writeEntry("currenttab", m_current_index);
-}
-
-void TabbingGroup::restore(KConfigGroup &group)
-{
-    AbstractGroup::restore(group);
-
-    QString tabs = group.readEntry("tabs", i18n("Default"));
-    renameTabs(tabs.split(","));
-
-    //put children from non existing groups in first groups
-    QMultiMap<int, QGraphicsWidget *>::iterator it = m_children.begin();
-    while (it != m_children.end()) {
-        if (it.key() >= m_tabbar->count()) {
-            QGraphicsWidget *item = it.value();
-            it = m_children.erase(it);
-            m_children.insert(0, item);
-        } else {
-            ++it;
-        }
-    }/*
-    hideChildren(current_index);
-    current_index = group.readEntry("currenttab", 0);
-    showChildren(current_index);*/
-    m_tabbar->setCurrentIndex(group.readEntry("currenttab", 0));
-}
-
 
 void TabbingGroup::createConfigurationInterface(KConfigDialog *parent)
 {
@@ -346,6 +330,21 @@ void TabbingGroup::configAccepted()
     m_children = new_m;
     m_tabbar->setCurrentIndex(m_current_index);
     showChildren(m_current_index);
+
+    KConfigGroup group = config();
+    QString tabs;
+    for (int i = 0;i < m_tabbar->count();++i) {
+        if (i > 0) {
+            tabs += ',';
+        }
+
+        tabs += m_tabbar->tabText(i);
+    }
+
+    group.writeEntry("tabs", tabs);
+    group.writeEntry("currenttab", m_current_index);
+
+    emit configNeedsSaving();
 }
 
 void TabbingGroup::renameTabs(const QStringList &titles)

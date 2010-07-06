@@ -116,6 +116,24 @@ GridGroup::~GridGroup()
 
 }
 
+void GridGroup::init()
+{
+    KConfigGroup group = config();
+
+    m_columnWidths = group.readEntry("ColumnWidths", QList<qreal>());
+    m_columnX = group.readEntry("ColumnX", QList<qreal>());
+    m_rowHeights = group.readEntry("RowHeights", QList<qreal>());
+    m_rowY = group.readEntry("RowY", QList<qreal>());
+
+    for (int i = 0; i < m_rowHeights.size(); ++i) {
+        QList<QGraphicsWidget *> row;
+        for (int j = 0; j < m_columnWidths.size(); ++j) {
+            row.append(0);
+        }
+        m_children.append(row);
+    }
+}
+
 void GridGroup::onInitCompleted()
 {
     connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
@@ -313,6 +331,8 @@ void GridGroup::insertColumnAt(int column)
         m_columnX.replace(i, x);
         x += m_columnWidths.at(i);
     }
+
+    saveCellsInfo();
 }
 
 void GridGroup::removeColumnAt(int column)
@@ -333,6 +353,8 @@ void GridGroup::removeColumnAt(int column)
             x += m_columnWidths.at(i);
         }
     }
+
+    saveCellsInfo();
 }
 
 void GridGroup::insertRowAt(int row)
@@ -356,6 +378,8 @@ void GridGroup::insertRowAt(int row)
         m_rowY.replace(i, y);
         y += m_rowHeights.at(i);
     }
+
+    saveCellsInfo();
 }
 
 void GridGroup::removeRowAt(int row)
@@ -373,6 +397,8 @@ void GridGroup::removeRowAt(int row)
             y += m_rowHeights.at(i);
         }
     }
+
+    saveCellsInfo();
 }
 
 Position GridGroup::itemPosition(QGraphicsWidget *widget) const
@@ -402,32 +428,16 @@ void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
     }
 }
 
-void GridGroup::save(KConfigGroup &group) const
+void GridGroup::saveCellsInfo()
 {
-    AbstractGroup::save(group);
+    KConfigGroup group = config();
 
     group.writeEntry("ColumnWidths", m_columnWidths);
     group.writeEntry("ColumnX", m_columnX);
     group.writeEntry("RowHeights", m_rowHeights);
     group.writeEntry("RowY", m_rowY);
-}
 
-void GridGroup::restore(KConfigGroup &group)
-{
-    AbstractGroup::restore(group);
-
-    m_columnWidths = group.readEntry("ColumnWidths", QList<qreal>());
-    m_columnX = group.readEntry("ColumnX", QList<qreal>());
-    m_rowHeights = group.readEntry("RowHeights", QList<qreal>());
-    m_rowY = group.readEntry("RowY", QList<qreal>());
-
-    for (int i = 0; i < m_rowHeights.size(); ++i) {
-        QList<QGraphicsWidget *> row;
-        for (int j = 0; j < m_columnWidths.size(); ++j) {
-            row.append(0);
-        }
-        m_children.append(row);
-    }
+    emit configNeedsSaving();
 }
 
 void GridGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
@@ -548,6 +558,7 @@ void GridGroup::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     m_movingRow = -1;
     m_cursorOverriden = false;
     QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
+    saveCellsInfo();
 
     AbstractGroup::mouseReleaseEvent(event);
 }

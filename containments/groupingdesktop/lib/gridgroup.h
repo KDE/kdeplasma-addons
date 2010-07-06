@@ -39,12 +39,11 @@ class GridGroup : public AbstractGroup
         explicit GridGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         ~GridGroup();
 
+        void init();
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup& group);
         QString pluginName() const;
         void showDropZone(const QPointF &pos);
-        void save(KConfigGroup &group) const;
-        void restore(KConfigGroup &group);
         Handle *createHandleForChild(QGraphicsWidget *child);
 
     protected:
@@ -74,6 +73,7 @@ class GridGroup : public AbstractGroup
         void setChildBorders(QGraphicsWidget *widget);
         int isOnAColumnBorder(qreal x) const;
         int isOnARowBorder(qreal y) const;
+        void saveCellsInfo();
 
         void insertColumnAt(int column);
         void removeColumnAt(int column);

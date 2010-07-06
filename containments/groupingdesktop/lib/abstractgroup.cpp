@@ -179,6 +179,7 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : QGraphicsWidget(parent, wFlags),
                d(new AbstractGroupPrivate(this))
 {
+
     setAcceptDrops(true);
     setAcceptHoverEvents(true);
     setContentsMargins(10, 10, 10, 10);
@@ -193,6 +194,11 @@ AbstractGroup::~AbstractGroup()
 
     delete KConfigDialog::exists(d->configDialogId());
     delete d;
+}
+
+void AbstractGroup::init()
+{
+
 }
 
 void AbstractGroup::setImmutability(Plasma::ImmutabilityType immutability)

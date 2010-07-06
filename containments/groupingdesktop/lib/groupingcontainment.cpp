@@ -119,6 +119,8 @@ AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, co
 
     q->addGroup(group, pos);
 
+    group->init();
+
     if (!loading) {
         emit group->initCompleted();
     }
