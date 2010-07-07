@@ -253,7 +253,7 @@ void Fifteen::swapPieceWithBlank(Piece *item)
       animation->pause();
   }
 
-  animation->setProperty("distancePointF", m_blank->pos());
+  animation->setProperty("distancePointF", m_blank->pos() - item->pos());
   animation->start(QAbstractAnimation::DeleteWhenStopped);
 
   m_blank->setPos(pos);
