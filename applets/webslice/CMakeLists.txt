@@ -16,6 +16,7 @@ target_link_libraries(webslice
     ${QT_QTCORE_LIBRARY}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTWEBKIT_LIBRARY}
+    ${QT_QTSCRIPT_LIBRARY}
 )
 
 add_subdirectory(plasma)

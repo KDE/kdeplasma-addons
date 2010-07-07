@@ -20,7 +20,7 @@ kde4_add_ui_files(plasmaboard_SRCS config.ui)
 # Now make sure all files get to the right place
 kde4_add_plugin(plasma_applet_plasmaboard ${plasmaboard_SRCS})
 target_link_libraries(plasma_applet_plasmaboard 
-                ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} kephal plasmaclock ${X11_XTest_LIB} ${X11_X11_LIB} ${X11_LIBS})
+                ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${X11_XTest_LIB} ${X11_X11_LIB} ${X11_LIBS})
  
 install(TARGETS plasma_applet_plasmaboard DESTINATION ${PLUGIN_INSTALL_DIR})
 
