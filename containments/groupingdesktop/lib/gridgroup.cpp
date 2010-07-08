@@ -613,7 +613,7 @@ void GridGroup::adjustCells()
 {
     QRectF rect(contentsRect());
 
-    int spacing = (immutability() == Plasma::Mutable ? 3 : 0);
+    const int spacing = 3;
 
     for (int i = 0; i < m_children.size(); ++i) {
         qreal height = m_rowHeights.at(i) * contentsRect().height() - 2 * spacing;
