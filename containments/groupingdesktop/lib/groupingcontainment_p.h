@@ -50,6 +50,7 @@ class GroupingContainmentPrivate
         void manageGroup(AbstractGroup *subGroup, const QPointF &pos);
         void newGroupClicked(QAction *action);
         void deleteGroup();
+        void configureGroup();
         void onAppletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group);
         void onSubGroupRemovedFromGroup(AbstractGroup *subGroup, AbstractGroup *group);
         void onWidgetMoved(QGraphicsWidget *widget);
@@ -68,6 +69,7 @@ class GroupingContainmentPrivate
         QAction *newTabbingGroup;
         QAction *separator;
         QAction *deleteGroupAction;
+        QAction *configureGroupAction;
         QPointF lastClick;
         AbstractGroup *mainGroup;
         unsigned int mainGroupId;

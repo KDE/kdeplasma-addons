@@ -76,11 +76,17 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
     deleteGroupAction->setIcon(KIcon("edit-delete"));
     deleteGroupAction->setVisible(false);
 
+    configureGroupAction = new QAction(i18n("Configure this group"), q);
+    configureGroupAction->setIcon(KIcon("configure"));
+    configureGroupAction->setVisible(false);
+
+
     separator = new QAction(q);
     separator->setSeparator(true);
 
     q->connect(newGroupMenu, SIGNAL(triggered(QAction *)), q, SLOT(newGroupClicked(QAction *)));
     q->connect(deleteGroupAction, SIGNAL(triggered()), q, SLOT(deleteGroup()));
+    q->connect(configureGroupAction, SIGNAL(triggered()), q, SLOT(configureGroup()));
 }
 
 GroupingContainmentPrivate::~GroupingContainmentPrivate()
@@ -255,6 +261,19 @@ void GroupingContainmentPrivate::deleteGroup()
     }
 }
 
+void GroupingContainmentPrivate::configureGroup()
+{
+    int id = configureGroupAction->data().toInt();
+
+    foreach (AbstractGroup *group, groups) {
+        if ((int)group->id() == id) {
+            group->showConfigurationInterface();
+
+            return;
+        }
+    }
+}
+
 void GroupingContainmentPrivate::onAppletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group)
 {
     Q_UNUSED(group)
@@ -419,7 +438,7 @@ QList<AbstractGroup *> GroupingContainment::groups() const
 QList<QAction *> GroupingContainment::contextualActions()
 {
     QList<QAction *> list;
-    list << d->newGroupAction << d->separator << d->deleteGroupAction;
+    list << d->newGroupAction << d->separator << d->configureGroupAction << d->deleteGroupAction;
     return list;
 }
 
@@ -697,6 +716,7 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
 void GroupingContainment::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     d->deleteGroupAction->setVisible(false);
+    d->configureGroupAction->setVisible(false);
     d->lastClick = event->pos();
 
     Plasma::Containment::mousePressEvent(event);
@@ -709,6 +729,10 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
     if (group && (immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable) && !group->isMainGroup()) {
         d->deleteGroupAction->setVisible(true);
         d->deleteGroupAction->setData(group->id());
+        if (group->hasConfigurationInterface()) {
+            d->configureGroupAction->setVisible(true);
+            d->configureGroupAction->setData(group->id());
+        }
         d->lastClick = event->pos();
         showContextMenu(event->pos(), event->screenPos());
         return;
