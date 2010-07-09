@@ -81,7 +81,9 @@ class GridGroup : public AbstractGroup
         void removeRowAt(int row);
 
         Spacer *m_spacer;
-        QList<QList<QGraphicsWidget *> > m_children;
+        QList<QList<QGraphicsWidget *> > m_children; //the inner list is the column, the outer one the row
+                                                     // |m_children.at(0).at(0)|m_children.at(0).at(1)|
+                                                     // |m_children.at(1).at(0)|m_children.at(1).at(1)|
         QMap<Plasma::Applet *, Plasma::Applet::BackgroundHints> m_savedAppletsHints;
         QMap<AbstractGroup *, AbstractGroup::BackgroundHints> m_savedGroupsHints;
         QList<qreal> m_rowHeights;

@@ -139,6 +139,36 @@ void GridGroup::onChildrenRestored()
     connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
             this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
 
+    //check if we have empty rows
+    for (int i = 0; i < m_children.size(); ++i) {
+        bool removeRow = true;
+        for (int j = 0; j < m_children.at(i).size(); ++j) {
+            if (m_children.at(i).at(j)) {
+                removeRow = false;
+                break;
+            }
+        }
+
+        if (removeRow) {
+            removeRowAt(i);
+        }
+    }
+
+    //check if we have empty columns
+    for (int i = 0; i < m_columnWidths.size(); ++i) {
+        bool removeCol = true;
+        for (int j = 0; j < m_children.size(); ++j) {
+            if (m_children.at(j).at(i)) {
+                removeCol = false;
+                break;
+            }
+        }
+
+        if (removeCol) {
+            removeColumnAt(i);
+        }
+    }
+
     adjustCells();
 }
 
