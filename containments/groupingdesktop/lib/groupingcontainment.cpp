@@ -337,6 +337,13 @@ void GroupingContainmentPrivate::onImmutabilityChanged(Plasma::ImmutabilityType 
     newGroupAction->setVisible(immutability == Plasma::Mutable);
 }
 
+void GroupingContainmentPrivate::emitChildrenRestored()
+{
+    foreach (AbstractGroup *group, groups) {
+        emit group->childrenRestored();
+    }
+}
+
 //------------------------GroupingContainment------------------------------
 
 GroupingContainment::GroupingContainment(QObject* parent, const QVariantList& args)
@@ -709,6 +716,11 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
             }
         }
     }
+
+    //delay so to allow the applets and subGroup to prepare themselves.
+    //without this PopupApplets in GridGroups would be restored always expanded,
+    //even if they were iconified the last session.
+    QTimer::singleShot(0, this, SLOT(emitChildrenRestored()));
 
     d->loading = false;
 }

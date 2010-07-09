@@ -57,19 +57,19 @@ class GridGroup : public AbstractGroup
         bool eventFilter(QObject *obj, QEvent *event);
 
     private slots:
-        void onInitCompleted();
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
         void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
         void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
         void onWidgetStartsMoving(QGraphicsWidget *widget);
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
+        void onChildrenRestored();
+        void adjustCells();
 
     private:
-        void addItem(QGraphicsWidget *widget, int row, int column);
+        void addItem(QGraphicsWidget *widget, int row, int column, bool update = true);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
         Position itemPosition(QGraphicsWidget *item) const;
-        void adjustCells();
         void setChildBorders(QGraphicsWidget *widget);
         int isOnAColumnBorder(qreal x) const;
         int isOnARowBorder(qreal y) const;

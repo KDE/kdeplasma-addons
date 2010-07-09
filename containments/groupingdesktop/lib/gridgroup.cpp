@@ -98,7 +98,7 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_spacer->setZValue(1000);
     m_spacer->hide();
 
-    connect(this, SIGNAL(initCompleted()), this, SLOT(onInitCompleted()));
+    connect(this, SIGNAL(childrenRestored()), this, SLOT(onChildrenRestored()));
     connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(onAppletAdded(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
@@ -134,10 +134,12 @@ void GridGroup::init()
     }
 }
 
-void GridGroup::onInitCompleted()
+void GridGroup::onChildrenRestored()
 {
     connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
             this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
+
+    adjustCells();
 }
 
 void GridGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
@@ -261,7 +263,7 @@ void GridGroup::showDropZone(const QPointF &pos)
     }
 }
 
-void GridGroup::addItem(QGraphicsWidget *widget, int row, int column)
+void GridGroup::addItem(QGraphicsWidget *widget, int row, int column, bool update)
 {
     widget->show();
     if (m_children.size() > row && m_children.at(row).size() > column &&
@@ -269,7 +271,9 @@ void GridGroup::addItem(QGraphicsWidget *widget, int row, int column)
         m_children[row].replace(column, widget);
     }
 
-    adjustCells();
+    if (update) {
+        adjustCells();
+    }
 }
 
 void GridGroup::removeItem(QGraphicsWidget *item, bool fillLayout)
@@ -452,7 +456,7 @@ void GridGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup
     int row = group.readEntry("Row", -1);
     int column = group.readEntry("Column", -1);
 
-    addItem(child, row, column);
+    addItem(child, row, column, false);
 }
 
 void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
