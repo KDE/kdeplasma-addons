@@ -78,7 +78,7 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
         Q_PRIVATE_SLOT(d, void onWidgetMoved(QGraphicsWidget *widget))
         Q_PRIVATE_SLOT(d, void groupAppearAnimationComplete());
         Q_PRIVATE_SLOT(d, void onImmutabilityChanged(Plasma::ImmutabilityType immutability));
-        Q_PRIVATE_SLOT(d, void emitChildrenRestored());
+        Q_PRIVATE_SLOT(d, void restoreGroups());
 
         GroupingContainmentPrivate *const d;
 

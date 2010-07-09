@@ -139,6 +139,7 @@ void GridGroup::onChildrenRestored()
     connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
             this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
 
+    bool modified = false;
     //check if we have empty rows
     for (int i = 0; i < m_children.size(); ++i) {
         bool removeRow = true;
@@ -150,6 +151,7 @@ void GridGroup::onChildrenRestored()
         }
 
         if (removeRow) {
+            modified = true;
             removeRowAt(i);
         }
     }
@@ -165,11 +167,14 @@ void GridGroup::onChildrenRestored()
         }
 
         if (removeCol) {
+            modified = true;
             removeColumnAt(i);
         }
     }
 
-    adjustCells();
+    if (modified) {
+        adjustCells();
+    }
 }
 
 void GridGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
@@ -293,7 +298,7 @@ void GridGroup::showDropZone(const QPointF &pos)
     }
 }
 
-void GridGroup::addItem(QGraphicsWidget *widget, int row, int column, bool update)
+void GridGroup::addItem(QGraphicsWidget *widget, int row, int column)
 {
     widget->show();
     if (m_children.size() > row && m_children.at(row).size() > column &&
@@ -301,9 +306,7 @@ void GridGroup::addItem(QGraphicsWidget *widget, int row, int column, bool updat
         m_children[row].replace(column, widget);
     }
 
-    if (update) {
-        adjustCells();
-    }
+    adjustCells();
 }
 
 void GridGroup::removeItem(QGraphicsWidget *item, bool fillLayout)
@@ -486,7 +489,7 @@ void GridGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup
     int row = group.readEntry("Row", -1);
     int column = group.readEntry("Column", -1);
 
-    addItem(child, row, column, false);
+    addItem(child, row, column);
 }
 
 void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)

@@ -67,7 +67,7 @@ class GridGroup : public AbstractGroup
         void adjustCells();
 
     private:
-        void addItem(QGraphicsWidget *widget, int row, int column, bool update = true);
+        void addItem(QGraphicsWidget *widget, int row, int column);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
         Position itemPosition(QGraphicsWidget *item) const;
         void setChildBorders(QGraphicsWidget *widget);

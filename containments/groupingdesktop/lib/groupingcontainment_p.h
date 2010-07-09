@@ -56,7 +56,7 @@ class GroupingContainmentPrivate
         void onWidgetMoved(QGraphicsWidget *widget);
         void groupAppearAnimationComplete();
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
-        void emitChildrenRestored();
+        void restoreGroups();
 
         GroupingContainment *q;
         QList<AbstractGroup *> groups;

@@ -337,8 +337,57 @@ void GroupingContainmentPrivate::onImmutabilityChanged(Plasma::ImmutabilityType 
     newGroupAction->setVisible(immutability == Plasma::Mutable);
 }
 
-void GroupingContainmentPrivate::emitChildrenRestored()
+void GroupingContainmentPrivate::restoreGroups()
 {
+    KConfigGroup groupsConfig = q->config("Groups");
+    foreach (AbstractGroup *group, groups) {
+        KConfigGroup groupConfig(&groupsConfig, QString::number(group->id()));
+        KConfigGroup groupInfoConfig(&groupConfig, "GroupInformation");
+
+        if (groupInfoConfig.isValid()) {
+            int groupId = groupInfoConfig.readEntry("Group", -1);
+
+            if (groupId != -1) {
+                AbstractGroup *parentGroup = 0;
+                foreach (AbstractGroup *g, groups) {
+                    if ((int)g->id() == groupId) {
+                        parentGroup = g;
+                        break;
+                    }
+                }
+                if (parentGroup) {
+                    parentGroup->addSubGroup(group, false);
+                    parentGroup->restoreChildGroupInfo(group, groupInfoConfig);
+                }
+                emit group->initCompleted();
+            }
+        }
+    }
+
+    KConfigGroup appletsConfig = q->config("Applets");
+    foreach (Plasma::Applet *applet, q->applets()) {
+        KConfigGroup appletConfig(&appletsConfig, QString::number(applet->id()));
+        KConfigGroup groupConfig(&appletConfig, "GroupInformation");
+
+        if (groupConfig.isValid()) {
+            int groupId = groupConfig.readEntry("Group", -1);
+
+            if (groupId != -1) {
+                AbstractGroup *group = 0;
+                foreach (AbstractGroup *g, groups) {
+                    if ((int)g->id() == groupId) {
+                        group = g;
+                        break;
+                    }
+                }
+                if (group) {
+                    group->addApplet(applet, false);
+                    group->restoreChildGroupInfo(applet, groupConfig);
+                }
+            }
+        }
+    }
+
     foreach (AbstractGroup *group, groups) {
         emit group->childrenRestored();
     }
@@ -668,59 +717,10 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
         }
     }
 
-    //restore nested groups
-    foreach (AbstractGroup *group, d->groups) {
-        KConfigGroup groupConfig(&groupsConfig, QString::number(group->id()));
-        KConfigGroup groupInfoConfig(&groupConfig, "GroupInformation");
-
-        if (groupInfoConfig.isValid()) {
-            int groupId = groupInfoConfig.readEntry("Group", -1);
-
-            if (groupId != -1) {
-                AbstractGroup *parentGroup = 0;
-                foreach (AbstractGroup *g, d->groups) {
-                    if ((int)g->id() == groupId) {
-                        parentGroup = g;
-                        break;
-                    }
-                }
-                if (parentGroup) {
-                    parentGroup->addSubGroup(group, false);
-                    parentGroup->restoreChildGroupInfo(group, groupInfoConfig);
-                }
-                emit group->initCompleted();
-            }
-        }
-    }
-
-    KConfigGroup appletsConfig(&group, "Applets");
-    foreach (Applet *applet, applets()) {
-        KConfigGroup appletConfig(&appletsConfig, QString::number(applet->id()));
-        KConfigGroup groupConfig(&appletConfig, "GroupInformation");
-
-        if (groupConfig.isValid()) {
-            int groupId = groupConfig.readEntry("Group", -1);
-
-            if (groupId != -1) {
-                AbstractGroup *group = 0;
-                foreach (AbstractGroup *g, d->groups) {
-                    if ((int)g->id() == groupId) {
-                        group = g;
-                        break;
-                    }
-                }
-                if (group) {
-                    group->addApplet(applet, false);
-                    group->restoreChildGroupInfo(applet, groupConfig);
-                }
-            }
-        }
-    }
-
     //delay so to allow the applets and subGroup to prepare themselves.
     //without this PopupApplets in GridGroups would be restored always expanded,
     //even if they were iconified the last session.
-    QTimer::singleShot(0, this, SLOT(emitChildrenRestored()));
+    QTimer::singleShot(0, this, SLOT(restoreGroups()));
 
     d->loading = false;
 }
