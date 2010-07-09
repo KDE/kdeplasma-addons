@@ -54,6 +54,7 @@ Logger::Logger(bool enabled)
 
 Logger::~Logger()
 {
+    delete d;
 }
 
 Logger * Logger::self(bool enabled)

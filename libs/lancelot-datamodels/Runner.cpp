@@ -88,6 +88,7 @@ Runner::Runner(QStringList allowedRunners, QString search)
 
 Runner::~Runner()
 {
+    delete d;
 }
 
 void Runner::reloadConfiguration()
