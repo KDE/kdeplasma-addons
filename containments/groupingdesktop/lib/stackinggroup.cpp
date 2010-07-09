@@ -135,8 +135,9 @@ void StackingGroup::drawStack()
     int gap = 20;
     foreach (QGraphicsWidget *widget, m_children) {
         if (widget) {
-            widget->resize(contentsRect().size());
-            widget->setPos(gap, gap);
+            QRectF rect(QPointF(gap, gap), contentsRect().size());
+            widget->setMaximumSize(rect.size());
+            widget->setGeometry(rect);
             widget->setZValue(gap);
             gap = gap + 20;
         }
