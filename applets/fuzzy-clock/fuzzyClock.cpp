@@ -169,6 +169,7 @@ void Clock::dataUpdated(const QString& source, const Plasma::DataEngine::Data &d
     if (Plasma::ToolTipManager::self()->isVisible(this)) {
         updateTipContent();
     }
+    updateClockApplet();
 
     m_lastTimeSeen = m_time;
 
