@@ -33,7 +33,8 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
               m_tabBar(new Plasma::TabBar(this)),
               m_layout(new QGraphicsLinearLayout(Qt::Horizontal)),
               m_newTab(new Plasma::PushButton(this)),
-              m_closeTab(new Plasma::PushButton(this))
+              m_closeTab(new Plasma::PushButton(this)),
+              m_deletingTab(false)
 {
     m_tabBar->nativeWidget()->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
     m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -66,8 +67,11 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setGroupType(AbstractGroup::FreeGroup);
     setHasConfigurationInterface(true);
 
+    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
+            this, SLOT(onAppletAdded(Plasma::Applet*,AbstractGroup*)));
+    connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
+            this, SLOT(onSubGroupAdded(AbstractGroup*, AbstractGroup*)));
     connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(tabBarIndexChanged(int)));
-
     connect(m_newTab, SIGNAL(clicked()), this, SLOT(addTab()));
     connect(m_closeTab, SIGNAL(clicked()), this, SLOT(closeTab()));
 }
@@ -91,6 +95,18 @@ void TabbingGroup::init()
     }
 
     m_tabBar->setCurrentIndex(group.readEntry("CurrentIndex", 0));
+}
+
+void TabbingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
+{
+    connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)),
+            this, SLOT(onAppletDestroyed(Plasma::Applet*)));
+}
+
+void TabbingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
+{
+    connect(subGroup, SIGNAL(groupDestroyed(AbstractGroup*)),
+            this, SLOT(onGroupDestroyed(AbstractGroup*)));
 }
 
 void TabbingGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
@@ -177,19 +193,17 @@ void TabbingGroup::closeTab(int index)
         index = m_tabBar->currentIndex();
     }
 
+    m_deletingTab = true;
+
     foreach (Plasma::Applet *applet, applets()) {
         if (m_children.value(applet) == index) {
-            connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)),
-                    this, SLOT(onAppletDestroyed(Plasma::Applet*)));
-                    applet->destroy();
+            applet->destroy();
         }
     }
 
     foreach (AbstractGroup *group, subGroups()) {
         if (m_children.value(group) == index) {
-            connect(group, SIGNAL(groupDestroyed(AbstractGroup*)),
-                    this, SLOT(onGroupDestroyed(AbstractGroup*)));
-                    group->destroy();
+            group->destroy();
         }
     }
 }
@@ -205,10 +219,17 @@ void TabbingGroup::deleteTab(int index)
     }
 
     saveTabs();
+
+    m_deletingTab = false;
 }
 
 void TabbingGroup::onAppletDestroyed(Plasma::Applet *applet)
 {
+    if (!m_deletingTab) {
+        m_children.remove(applet);
+        return;
+    }
+
     int tab = m_children.value(applet);
 
     m_children.remove(applet);
@@ -219,6 +240,11 @@ void TabbingGroup::onAppletDestroyed(Plasma::Applet *applet)
 
 void TabbingGroup::onGroupDestroyed(AbstractGroup *group)
 {
+    if (!m_deletingTab) {
+        m_children.remove(group);
+        return;
+    }
+
     int tab = m_children.value(group);
 
     m_children.remove(group);

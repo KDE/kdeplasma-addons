@@ -51,6 +51,8 @@ class TabbingGroup : public AbstractGroup
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
     private slots:
+        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
+        void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
         void tabBarIndexChanged(int index);
         void addTab(const QString &name = QString(), int pos = -1);
         void closeTab(int index = -1);
@@ -72,6 +74,7 @@ class TabbingGroup : public AbstractGroup
         Plasma::PushButton *m_newTab;
         Plasma::PushButton *m_closeTab;
         Ui_TabbingGroupConfig m_ui;
+        bool m_deletingTab;
 };
 
 #endif // TABBEDGROUP_H
