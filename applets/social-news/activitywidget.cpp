@@ -33,7 +33,7 @@
 // Plasma
 #include <Plasma/IconWidget>
 #include <Plasma/Label>
-
+#include <Plasma/Applet>
 
 using namespace Plasma;
 
@@ -55,8 +55,9 @@ ActivityWidget::ActivityWidget(DataEngine* engine, QGraphicsWidget* parent)
     m_layout->addItem(m_messageLabel);
 
     int s = KIconLoader::SizeSmallMedium; // The size for the action icons
-
-    if (hasAuthorization("LaunchApp"))
+    
+    Applet *parentApplet = qobject_cast<Applet *>(parent);
+    if (parentApplet && parentApplet->hasAuthorization("LaunchApp"))
     {
         m_link = new Plasma::IconWidget(this);
         m_link->setIcon("go-jump");
