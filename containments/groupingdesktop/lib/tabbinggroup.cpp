@@ -237,6 +237,17 @@ void TabbingGroup::closeTab(int index)
 
 void TabbingGroup::deleteTab(int index)
 {
+    //HACK workaround for a bug in 4.4 Plasma::TabBar. Fixed in 4.5 and trunk
+    int count = m_tabBar->count();
+    if (count > 1) {
+        if (index == 0) {
+            m_tabBar->setCurrentIndex(1);
+        } else {
+            m_tabBar->setCurrentIndex(0);
+        }
+    }
+    //end of HACK
+
     m_tabBar->removeTab(index);
     m_tabWidgets.removeAt(index);
 
