@@ -21,6 +21,9 @@
 #include "tabbinggroup.h"
 
 #include <QtGui/QGraphicsLinearLayout>
+#include <QtGui/QGraphicsView>
+#include <QtGui/QGraphicsSceneDragDropEvent>
+#include <QtCore/QTimer>
 
 #include <KDE/KConfigDialog>
 #include <KDE/KPushButton>
@@ -34,7 +37,9 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
               m_layout(new QGraphicsLinearLayout(Qt::Horizontal)),
               m_newTab(new Plasma::PushButton(this)),
               m_closeTab(new Plasma::PushButton(this)),
-              m_deletingTab(false)
+              m_deletingTab(false),
+              m_changeTabTimer(new QTimer(this)),
+              m_changingTab(-1)
 {
     m_tabBar->nativeWidget()->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
     m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -63,6 +68,9 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_closeTab->setIcon(KIcon("tab-close"));
     m_closeTab->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
+    m_changeTabTimer->setInterval(500); //should see what is the delay used in other apps
+    m_changeTabTimer->setSingleShot(true);
+
     resize(200, 200);
     setGroupType(AbstractGroup::FreeGroup);
     setHasConfigurationInterface(true);
@@ -77,6 +85,7 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(tabBarIndexChanged(int)));
     connect(m_newTab, SIGNAL(clicked()), this, SLOT(addTab()));
     connect(m_closeTab, SIGNAL(clicked()), this, SLOT(closeTab()));
+    connect(m_changeTabTimer, SIGNAL(timeout()), this, SLOT(changeTab()));
 }
 
 TabbingGroup::~TabbingGroup()
@@ -102,12 +111,14 @@ void TabbingGroup::init()
 
 void TabbingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
 {
+    applet->installEventFilter(this);
     connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)),
             this, SLOT(onAppletDestroyed(Plasma::Applet*)));
 }
 
 void TabbingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
 {
+    subGroup->installEventFilter(this);
     connect(subGroup, SIGNAL(groupDestroyed(AbstractGroup*)),
             this, SLOT(onGroupDestroyed(AbstractGroup*)));
 }
@@ -346,15 +357,65 @@ void TabbingGroup::configAccepted()
         }
     }
 
-    //reparent children of moved tabs
-    QList<QGraphicsWidget *> children = childrenToBeMoved.keys();
-    foreach (QGraphicsWidget *child, children) {
-        int tab = childrenToBeMoved.value(child);
-        child->setParentItem(m_tabBar->tabAt(tab)->graphicsItem());
-        m_children.insert(child, tab);
+    if (!childrenToBeMoved.isEmpty()) {
+        //reparent children of moved tabs
+        QList<QGraphicsWidget *> children = childrenToBeMoved.keys();
+        foreach (QGraphicsWidget *child, children) {
+            int tab = childrenToBeMoved.value(child);
+            child->setParentItem(m_tabBar->tabAt(tab)->graphicsItem());
+            m_children.insert(child, tab);
+        }
+
+        saveChildren();
     }
 
     saveTabs();
+}
+
+bool TabbingGroup::eventFilter(QObject *obj, QEvent *event)
+{
+    QGraphicsWidget *w = static_cast<QGraphicsWidget *>(obj);
+    if (!children().contains(w)) {
+        return false;
+    }
+
+    if (event->type() == QEvent::GraphicsSceneMove) {
+        QGraphicsView *v = view();
+        QPointF pos = m_tabBar->mapFromScene(v->mapToScene(v->mapFromGlobal(QCursor::pos())));
+
+        int index = m_tabBar->nativeWidget()->tabAt(pos.toPoint());
+        if (index == -1) {
+            m_changingTab = -1;
+            m_changeTabTimer->stop();
+        } else {
+            m_changingTab = index;
+            m_changeTabTimer->start();
+        }
+    }
+
+    return false;
+}
+
+void TabbingGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    QPointF pos = m_tabBar->mapFromScene(static_cast<QGraphicsSceneDragDropEvent *>(event)->scenePos());
+
+    int index = m_tabBar->nativeWidget()->tabAt(pos.toPoint());
+    if (index == -1) {
+        m_changingTab = -1;
+        m_changeTabTimer->stop();
+    } else {
+        m_changingTab = index;
+        m_changeTabTimer->start();
+    }
+}
+
+void TabbingGroup::changeTab()
+{
+    if (m_changingTab != -1) {
+        m_tabBar->setCurrentIndex(m_changingTab);
+        m_changingTab = -1;
+    }
 }
 
 #include "tabbinggroup.moc"

@@ -49,6 +49,8 @@ class TabbingGroup : public AbstractGroup
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
+        bool eventFilter(QObject *obj, QEvent *event);
+        void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
 
     private slots:
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
@@ -63,6 +65,7 @@ class TabbingGroup : public AbstractGroup
         void onAppletDestroyed(Plasma::Applet *applet);
         void onGroupDestroyed(AbstractGroup *group);
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
+        void changeTab();
 
     private:
         void saveTabs();
@@ -76,6 +79,8 @@ class TabbingGroup : public AbstractGroup
         Plasma::PushButton *m_closeTab;
         Ui_TabbingGroupConfig m_ui;
         bool m_deletingTab;
+        QTimer *m_changeTabTimer;
+        int m_changingTab;
 };
 
 #endif // TABBEDGROUP_H
