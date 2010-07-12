@@ -56,8 +56,10 @@ void WeatherStation::init()
     m_lcd->setLabel("humidity-label", i18n("HUMIDITY"));
     m_lcd->setLabel("wind-label", i18n("WIND"));
     m_lcd->setLabel("provider-label", QString());
-    connect(m_lcd, SIGNAL(clicked(const QString&)), this, SLOT(clicked(const QString&)));
-
+    if (hasAuthorization("LaunchApp")) {
+        connect(m_lcd, SIGNAL(clicked(const QString&)), this, SLOT(clicked(const QString&)));
+    }
+    
     m_lcdPanel = new LCD(this);
     m_lcdPanel->setSvg("weatherstation/lcd_panel");
     m_lcdPanel->setLabel("temperature-label", i18n("OUTDOOR TEMP"));

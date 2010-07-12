@@ -56,16 +56,19 @@ ActivityWidget::ActivityWidget(DataEngine* engine, QGraphicsWidget* parent)
 
     int s = KIconLoader::SizeSmallMedium; // The size for the action icons
 
-    m_link = new Plasma::IconWidget(this);
-    m_link->setIcon("go-jump");
-    m_link->setToolTip(i18n("More information"));
-    m_link->setMinimumHeight(s);
-    m_link->setMaximumHeight(s);
-    m_link->setMinimumWidth(s);
-    m_link->setMaximumWidth(s);
-    m_layout->addItem(m_link);
-    m_link->setVisible(true);
-    connect(m_link, SIGNAL(clicked()), this, SLOT(followLink()));
+    if (hasAuthorization("LaunchApp"))
+    {
+        m_link = new Plasma::IconWidget(this);
+        m_link->setIcon("go-jump");
+        m_link->setToolTip(i18n("More information"));
+        m_link->setMinimumHeight(s);
+        m_link->setMaximumHeight(s);
+        m_link->setMinimumWidth(s);
+        m_link->setMaximumWidth(s);
+        m_layout->addItem(m_link);
+        m_link->setVisible(true);
+        connect(m_link, SIGNAL(clicked()), this, SLOT(followLink()));
+    }
 }
 
 ActivityWidget::~ActivityWidget()

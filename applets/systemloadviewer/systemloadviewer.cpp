@@ -292,7 +292,9 @@ void SystemLoadViewer::mousePressEvent(QGraphicsSceneMouseEvent *event){
 void SystemLoadViewer::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
  
   if(event->button() == Qt::LeftButton && ((event->screenPos() - m_mousePressLoc).manhattanLength()) < QApplication::startDragDistance()){
-      QDBusInterface("org.kde.krunner", "/App", "org.kde.krunner.App").call(QDBus::NoBlock, "showTaskManager");
+      if(hasAuthorization("LaunchApp")){
+        QDBusInterface("org.kde.krunner", "/App", "org.kde.krunner.App").call(QDBus::NoBlock, "showTaskManager");
+      }
   }
   
 }
