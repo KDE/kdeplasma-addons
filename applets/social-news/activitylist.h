@@ -30,7 +30,6 @@
 #include <Plasma/ScrollWidget>
 
 
-class ActivityWidget;
 
 class ActivityList : public Plasma::ScrollWidget
 {
