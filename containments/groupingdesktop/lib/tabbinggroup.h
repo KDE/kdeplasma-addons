@@ -58,9 +58,12 @@ class TabbingGroup : public AbstractGroup
         void configUpTab();
         void configDownTab();
         void configAccepted();
+        void onAppletDestroyed(Plasma::Applet *applet);
+        void onGroupDestroyed(AbstractGroup *group);
 
     private:
         void saveTabs();
+        void deleteTab(int index);
 
         Plasma::TabBar *m_tabBar;
         QGraphicsLinearLayout *m_layout;

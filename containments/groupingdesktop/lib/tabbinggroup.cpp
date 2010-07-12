@@ -177,6 +177,25 @@ void TabbingGroup::closeTab(int index)
         index = m_tabBar->currentIndex();
     }
 
+    foreach (Plasma::Applet *applet, applets()) {
+        if (m_children.value(applet) == index) {
+            connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)),
+                    this, SLOT(onAppletDestroyed(Plasma::Applet*)));
+                    applet->destroy();
+        }
+    }
+
+    foreach (AbstractGroup *group, subGroups()) {
+        if (m_children.value(group) == index) {
+            connect(group, SIGNAL(groupDestroyed(AbstractGroup*)),
+                    this, SLOT(onGroupDestroyed(AbstractGroup*)));
+                    group->destroy();
+        }
+    }
+}
+
+void TabbingGroup::deleteTab(int index)
+{
     m_tabBar->removeTab(index);
     m_tabWidgets.removeAt(index);
 
@@ -186,6 +205,26 @@ void TabbingGroup::closeTab(int index)
     }
 
     saveTabs();
+}
+
+void TabbingGroup::onAppletDestroyed(Plasma::Applet *applet)
+{
+    int tab = m_children.value(applet);
+
+    m_children.remove(applet);
+    if (m_children.keys(tab).count() == 0) {
+        deleteTab(tab);
+    }
+}
+
+void TabbingGroup::onGroupDestroyed(AbstractGroup *group)
+{
+    int tab = m_children.value(group);
+
+    m_children.remove(group);
+    if (m_children.keys(tab).count() == 0) {
+        deleteTab(tab);
+    }
 }
 
 void TabbingGroup::saveTabs()
@@ -272,7 +311,6 @@ void TabbingGroup::configAccepted()
         child->setParentItem(m_tabBar->tabAt(tab)->graphicsItem());
         m_children.insert(child, tab);
     }
-
 
     saveTabs();
 }
