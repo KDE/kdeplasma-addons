@@ -25,7 +25,6 @@
 // Qt
 #include <QGraphicsSceneResizeEvent>
 #include <QLabel>
-#include <QSlider>
 
 #include <QGraphicsLinearLayout>
 
