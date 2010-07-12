@@ -203,17 +203,24 @@ void TabbingGroup::closeTab(int index)
     }
 
     m_deletingTab = true;
+    bool deleteNow = true;
 
     foreach (Plasma::Applet *applet, applets()) {
         if (m_children.value(applet) == index) {
+            deleteNow = false;
             applet->destroy();
         }
     }
 
     foreach (AbstractGroup *group, subGroups()) {
         if (m_children.value(group) == index) {
+            deleteNow = false;
             group->destroy();
         }
+    }
+
+    if (deleteNow) {
+        deleteTab(index);
     }
 }
 
