@@ -66,11 +66,14 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     resize(200, 200);
     setGroupType(AbstractGroup::FreeGroup);
     setHasConfigurationInterface(true);
+    onImmutabilityChanged(immutability());
 
     connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(onAppletAdded(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
             this, SLOT(onSubGroupAdded(AbstractGroup*, AbstractGroup*)));
+    connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+            this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
     connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(tabBarIndexChanged(int)));
     connect(m_newTab, SIGNAL(clicked()), this, SLOT(addTab()));
     connect(m_closeTab, SIGNAL(clicked()), this, SLOT(closeTab()));
@@ -107,6 +110,12 @@ void TabbingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
 {
     connect(subGroup, SIGNAL(groupDestroyed(AbstractGroup*)),
             this, SLOT(onGroupDestroyed(AbstractGroup*)));
+}
+
+void TabbingGroup::onImmutabilityChanged(Plasma::ImmutabilityType immutability)
+{
+    m_newTab->setVisible(immutability == Plasma::Mutable);
+    m_closeTab->setVisible(immutability == Plasma::Mutable);
 }
 
 void TabbingGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)

@@ -62,6 +62,7 @@ class TabbingGroup : public AbstractGroup
         void configAccepted();
         void onAppletDestroyed(Plasma::Applet *applet);
         void onGroupDestroyed(AbstractGroup *group);
+        void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
 
     private:
         void saveTabs();
