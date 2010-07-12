@@ -36,12 +36,7 @@
 #include "personwatch.h"
 
 
-class ContactImage;
 class KJob;
-
-namespace Plasma {
-    class IconWidget;
-}
 
 class LoginWidget : public QGraphicsWidget
 {
