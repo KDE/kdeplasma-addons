@@ -40,23 +40,9 @@
           <widget class="QLineEdit" name="tileEdit"/>
          </item>
          <item>
-          <widget class="QPushButton" name="addButton">
-           <property name="text">
-            <string>Add</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="modButton">
            <property name="text">
             <string>Modify</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="delButton">
-           <property name="text">
-            <string>Remove</string>
            </property>
           </widget>
          </item>

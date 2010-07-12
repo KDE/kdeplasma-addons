@@ -23,48 +23,53 @@
 #include <QtGui/QGraphicsLinearLayout>
 
 #include <KDE/KConfigDialog>
+#include <KDE/KPushButton>
 
 #include <Plasma/TabBar>
 #include <Plasma/PushButton>
 
 TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             : AbstractGroup(parent, wFlags),
-              m_tabbar(new Plasma::TabBar(this)),
+              m_tabBar(new Plasma::TabBar(this)),
               m_layout(new QGraphicsLinearLayout(Qt::Horizontal)),
-              m_current_index(0),
-              m_tabwidget(new QGraphicsWidget(this)),
-              m_addbutton(new Plasma::PushButton(this))
+              m_newTab(new Plasma::PushButton(this)),
+              m_closeTab(new Plasma::PushButton(this))
 {
+    m_tabBar->nativeWidget()->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
+    m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     setLayout(m_layout);
 
-    m_tabbar->addTab(QString("1"), m_tabwidget);
-    m_tabbar->addTab(QString("2"), m_tabwidget);
-    m_layout->addItem(m_tabbar);
+    //TODO: in trunk use these:
+    //     m_tabBar->setFirstPositionWidget(m_newTab);
+    //     m_tabBar->setLastPositionWidget(m_closeTab);
 
-    QGraphicsLinearLayout *sndlayout = new QGraphicsLinearLayout(Qt::Vertical);
-    m_addbutton->setIcon(KIcon("configure"));
-    m_addbutton->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-    sndlayout->addItem(m_addbutton);
-    sndlayout->addItem(new QGraphicsWidget());
-    m_layout->addItem(sndlayout);
+    QGraphicsLinearLayout *newTabLayout = new QGraphicsLinearLayout(Qt::Vertical);
+    newTabLayout->addItem(m_newTab);
+    newTabLayout->addStretch();
+
+    QGraphicsLinearLayout *closeTabLayout = new QGraphicsLinearLayout(Qt::Vertical);
+    closeTabLayout->addItem(m_closeTab);
+    closeTabLayout->addStretch();
+
+    m_layout->addItem(newTabLayout);
+    m_layout->addItem(m_tabBar);
+    m_layout->addItem(closeTabLayout);
+    m_layout->setStretchFactor(m_tabBar, 2);
+
+    m_newTab->setIcon(KIcon("tab-new"));
+    m_newTab->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    m_closeTab->setIcon(KIcon("tab-close"));
+    m_closeTab->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     resize(200, 200);
     setGroupType(AbstractGroup::FreeGroup);
     setHasConfigurationInterface(true);
 
-    connect(m_tabbar, SIGNAL(currentChanged(int)),
-            this, SLOT(tabbarIndexChanged(int)));
+    connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(tabBarIndexChanged(int)));
 
-    connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*, AbstractGroup*)),
-            this, SLOT(onAppletRemoved(Plasma::Applet*, AbstractGroup*)));
-    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*, AbstractGroup*)),
-            this, SLOT(onAppletAdded(Plasma::Applet*, AbstractGroup*)));
-    connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*, AbstractGroup*)),
-            this, SLOT(onSubGroupRemoved(AbstractGroup*, AbstractGroup*)));
-    connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*, AbstractGroup*)),
-            this, SLOT(onSubGroupAdded(AbstractGroup*, AbstractGroup*)));
-
-    connect(m_addbutton, SIGNAL(clicked()), this, SLOT(showConfigurationInterface()));
+    connect(m_newTab, SIGNAL(clicked()), this, SLOT(addTab()));
+    connect(m_closeTab, SIGNAL(clicked()), this, SLOT(closeTab()));
 }
 
 TabbingGroup::~TabbingGroup()
@@ -75,30 +80,28 @@ void TabbingGroup::init()
 {
     KConfigGroup group = config();
 
-    QString tabs = group.readEntry("tabs", i18n("Default"));
-    renameTabs(tabs.split(","));
+    QStringList tabs = group.readEntry("Tabs", QStringList());
 
-    //put children from non existing groups in first groups
-    QMultiMap<int, QGraphicsWidget *>::iterator it = m_children.begin();
-    while (it != m_children.end()) {
-        if (it.key() >= m_tabbar->count()) {
-            QGraphicsWidget *item = it.value();
-            it = m_children.erase(it);
-            m_children.insert(0, item);
-        } else {
-            ++it;
-        }
-    }/*
-    hideChildren(current_index);
-    current_index = group.readEntry("currenttab", 0);
-    showChildren(current_index);*/
-    m_tabbar->setCurrentIndex(group.readEntry("currenttab", 0));
+    if (tabs.isEmpty()) {
+        tabs << "New Tab";
+    }
+
+    foreach (const QString &tab, tabs) {
+        addTab(tab);
+    }
+
+    m_tabBar->setCurrentIndex(group.readEntry("CurrentIndex", 0));
 }
 
 void TabbingGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 {
-    Q_UNUSED(child)
     Q_UNUSED(pos)
+
+    QGraphicsWidget *w = m_tabWidgets.at(m_tabBar->currentIndex());
+    child->setParentItem(w);
+    child->setPos(mapToItem(w, child->pos()));
+
+    m_children.insert(child, m_tabBar->currentIndex());
 }
 
 QString TabbingGroup::pluginName() const
@@ -109,138 +112,92 @@ QString TabbingGroup::pluginName() const
 void TabbingGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
 {
     QPointF pos = group.readEntry("Position", QPointF());
-    int index = group.readEntry("SiteIndex", 0);
-    int key;
+    int index = group.readEntry("TabIndex", -1);
 
-    if ((key = m_children.key(child, -1)) != -1) {
-        m_children.remove(key, child);
-    }
-    if (index < m_tabbar->count()) {
-        m_children.insert(index, child);
-    } else {
-        m_children.insert(0, child);
-    }
-
-    if (index != m_current_index) {
-        child->hide();
-    }
-
+    QGraphicsWidget *w = m_tabWidgets.at(index);
+    child->setParentItem(w);
     child->setPos(pos);
+
+    m_children.insert(child, index);
 }
 
 void TabbingGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
 {
     group.writeEntry("Position", child->pos());
-    group.writeEntry("SiteIndex", m_children.key(child, 0));
+    group.writeEntry("TabIndex", m_children.value(child));
 }
 
-void TabbingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
+void TabbingGroup::tabBarIndexChanged(int index)
 {
-    m_children.insert(m_tabbar->currentIndex(), applet);
-}
-
-void TabbingGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *)
-{
-    m_children.remove(m_children.key(applet), applet);
-}
-
-void TabbingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
-{
-    m_children.insert(m_tabbar->currentIndex(), subGroup);
-}
-
-void TabbingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
-{
-    m_children.remove(m_children.key(subGroup), subGroup);
-}
-
-void TabbingGroup::tabbarIndexChanged(int index)
-{
-    hideChildren(m_current_index);
-    m_current_index = index;
-    showChildren(m_current_index);
-
-    config().writeEntry("currenttab", m_current_index);
+    config().writeEntry("CurrentIndex", index);
     emit configNeedsSaving();
-}
-
-void TabbingGroup::hideChildren(int index)
-{
-    QList<QGraphicsWidget *> items = m_children.values(index);
-    foreach(QGraphicsWidget *item, items) {
-        item->hide();
-    }
-}
-
-void TabbingGroup::showChildren(int index)
-{
-    QList<QGraphicsWidget *> items = m_children.values(index);
-    foreach(QGraphicsWidget * item, items) {
-        item->show();
-    }
 }
 
 void TabbingGroup::createConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     m_ui.setupUi(widget);
-    m_config_mapper.clear();
+    parent->addPage(widget, i18n("General"), "configure");
 
-    for (int i = 0;i < m_tabbar->count();++i) {
-        m_config_mapper.append(i);
-        m_ui.listWidget->addItem(m_tabbar->tabText(i));
+    for (int i = 0;i < m_tabBar->count();++i) {
+        QListWidgetItem *item = new QListWidgetItem(m_tabBar->tabText(i));
+        item->setData(Qt::UserRole, i);
+        m_ui.listWidget->addItem(item);
     }
 
-    connect(m_ui.addButton, SIGNAL(clicked()), this, SLOT(configAddTab()));
-
     connect(m_ui.modButton, SIGNAL(clicked()), this, SLOT(configModTab()));
-    connect(m_ui.delButton, SIGNAL(clicked()), this, SLOT(configDelTab()));
     connect(m_ui.upButton, SIGNAL(clicked()), this, SLOT(configUpTab()));
     connect(m_ui.downButton, SIGNAL(clicked()), this, SLOT(configDownTab()));
 
-    parent->addPage(widget, i18n("General"), "configure");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 }
 
-void TabbingGroup::configAddTab()
+void TabbingGroup::addTab(const QString &name, int pos)
 {
-    int pos = m_ui.listWidget->currentRow();
-
     if (pos == -1) { //insert after current position in list
-        pos = m_ui.listWidget->count();
-    } else {
-        ++pos;
+        pos = m_tabBar->count();
     }
 
-    m_config_mapper.insert(pos, -1);
-
-    QString title = m_ui.tileEdit->text();
-
-    if (title == QString()) {
-        title = "Default";
+    QString tab(name);
+    if (tab.isEmpty()) {
+        tab = i18n("New Tab");
     }
 
-    m_ui.listWidget->insertItem(pos, title);
+    QGraphicsWidget *w = new QGraphicsWidget(this);
+    m_tabBar->insertTab(pos, tab, w);
+    m_tabWidgets << w;
 
-    m_ui.listWidget->setCurrentRow(pos);
+    saveTabs();
 }
 
-void TabbingGroup::configDelTab()
+void TabbingGroup::closeTab(int index)
 {
-    if (m_ui.listWidget->count() == 1) {
+    if (index == -1) {
+        index = m_tabBar->currentIndex();
+    }
+
+    m_tabBar->removeTab(index);
+    m_tabWidgets.removeAt(index);
+
+    if (m_tabBar->count() == 0) {
+        addTab();
         return;
     }
 
-    int pos = m_ui.listWidget->currentRow();
+    saveTabs();
+}
 
-    if (pos == -1) {
-        return;
+void TabbingGroup::saveTabs()
+{
+    QStringList tabs;
+    for (int i = 0; i < m_tabBar->count(); ++i) {
+        tabs << m_tabBar->tabText(i);
     }
 
-    m_config_mapper.removeAt(pos);
+    config().writeEntry("Tabs", tabs);
 
-    m_ui.listWidget->takeItem(pos);
+    emit configNeedsSaving();
 }
 
 void TabbingGroup::configModTab()
@@ -268,8 +225,6 @@ void TabbingGroup::configUpTab()
         return;
     }
 
-    m_config_mapper.swap(pos, pos - 1);
-
     QListWidgetItem *item = m_ui.listWidget->takeItem(pos);
 
     m_ui.listWidget->insertItem(pos - 1, item);
@@ -284,8 +239,6 @@ void TabbingGroup::configDownTab()
         return;
     }
 
-    m_config_mapper.swap(pos, pos + 1);
-
     QListWidgetItem *item = m_ui.listWidget->takeItem(pos);
 
     m_ui.listWidget->insertItem(pos + 1, item);
@@ -294,83 +247,34 @@ void TabbingGroup::configDownTab()
 
 void TabbingGroup::configAccepted()
 {
-    hideChildren(m_current_index);
+    QStringList tabs;
+    QMap<QGraphicsWidget *, int> childrenToBeMoved;
+    for (int i = 0; i < m_ui.listWidget->count(); ++i) {
+        QListWidgetItem *item = m_ui.listWidget->item(i);
+        tabs.insert(i, item->text());
 
-    int future_index = 0;
-    QMultiMap<int, QGraphicsWidget *> new_m;
-    for (int i = 0; i < m_config_mapper.count(); ++i) {
-        if (m_config_mapper[i] != -1) {
-            QMultiMap<int, QGraphicsWidget *>::iterator it = m_children.find(m_config_mapper[i]);
+        int from = item->data(Qt::UserRole).toInt();
+        m_tabBar->setTabText(i, item->text());
 
-            while (it != m_children.end() && it.key() == m_config_mapper[i]) {
-                new_m.insert(i, it.value());
-                it = m_children.erase(it);
+        if (from != i) {
+            foreach (QGraphicsWidget *child, children()) {
+                if (m_children.value(child) == from) {
+                    childrenToBeMoved.insert(child, i);
+                }
             }
-
-            if (m_config_mapper[i] == m_current_index) {
-                future_index = i;
-            }
         }
     }
 
-    QMultiMap<int, QGraphicsWidget *>::iterator it = m_children.begin();
-    while (it != m_children.end()) {
-        new_m.insert(0, it.value());
-        it = m_children.erase(it);
+    //reparent children of moved tabs
+    QList<QGraphicsWidget *> children = childrenToBeMoved.keys();
+    foreach (QGraphicsWidget *child, children) {
+        int tab = childrenToBeMoved.value(child);
+        child->setParentItem(m_tabBar->tabAt(tab)->graphicsItem());
+        m_children.insert(child, tab);
     }
 
 
-    QStringList titles;
-    for (int i = 0; i < m_ui.listWidget->count();++i) {
-        titles.append(m_ui.listWidget->item(i)->text());
-    }
-    renameTabs(titles);
-
-    m_current_index = future_index;
-    m_children = new_m;
-    m_tabbar->setCurrentIndex(m_current_index);
-    showChildren(m_current_index);
-
-    KConfigGroup group = config();
-    QString tabs;
-    for (int i = 0;i < m_tabbar->count();++i) {
-        if (i > 0) {
-            tabs += ',';
-        }
-
-        tabs += m_tabbar->tabText(i);
-    }
-
-    group.writeEntry("tabs", tabs);
-    group.writeEntry("currenttab", m_current_index);
-
-    emit configNeedsSaving();
-}
-
-void TabbingGroup::renameTabs(const QStringList &titles)
-{
-    qDebug() << titles;
-    int current_count = m_tabbar->count();
-
-    if (current_count > titles.count()) {
-        for (int i = titles.count();i < current_count;++i) {
-            m_tabbar->removeTab(0);
-        }
-
-        current_count = titles.count();
-    }
-
-    int index = 0;
-
-    foreach(const QString &tab, titles) {
-        if (index < current_count) {
-            m_tabbar->setTabText(index, tab);
-        } else {
-            m_tabbar->addTab(tab, m_tabwidget);
-        }
-
-        ++index;
-    }
+    saveTabs();
 }
 
 #include "tabbinggroup.moc"
