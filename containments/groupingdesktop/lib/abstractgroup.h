@@ -237,7 +237,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
 
         virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
-        virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+        virtual void moveEvent(QGraphicsSceneMoveEvent *event);
 
         /**
          * Lay outs a child inside the group
