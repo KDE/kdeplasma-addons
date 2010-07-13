@@ -593,15 +593,6 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
 
     if (widget) {
         switch (event->type()) {
-            case QEvent::GraphicsSceneMousePress:
-                if ((applet || (group && !group->isMainGroup())) &&
-                    static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton) {
-
-                    setMovingWidget(widget);
-                }
-
-            break;
-
             case QEvent::GraphicsSceneMove: {
                 if (widget == d->movingWidget) {
                     AbstractGroup *parentGroup = d->groupAt(mapFromItem(widget, widget->contentsRect().center()), widget);

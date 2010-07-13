@@ -155,6 +155,7 @@ void AbstractGroupPrivate::setIsMainGroup()
     q->setBackgroundHints(AbstractGroup::NoBackground);
     q->setFlag(QGraphicsItem::ItemIsMovable, false);
     q->setZValue(0);
+    q->setContentsMargins(0, 0, 0, 0);
 }
 
 void AbstractGroupPrivate::onInitCompleted()
@@ -552,6 +553,15 @@ void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 
         save(*(d->mainConfigGroup()));
         emit configNeedsSaving();
+    }
+}
+
+void AbstractGroup::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsWidget::mousePressEvent(event);
+
+    if (event->button() == Qt::LeftButton) {
+        containment()->setMovingWidget(this);
     }
 }
 
