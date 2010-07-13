@@ -566,6 +566,15 @@ void AbstractGroup::mousePressEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsWidget::mousePressEvent(event);
 
     if (event->button() == Qt::LeftButton) {
+        event->accept();
+    }
+}
+
+void AbstractGroup::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsWidget::mouseMoveEvent(event);
+
+    if (event->button() == Qt::LeftButton) {
         containment()->setMovingWidget(this);
     }
 }

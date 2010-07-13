@@ -93,15 +93,17 @@ void GridHandle::widgetResized()
 void GridHandle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        m_moving = true;
         m_startPos = event->pos();
-        containment()->setMovingWidget(widget());
+        event->accept();
     }
 }
 
 void GridHandle::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
-    if (m_moving) {
+    if (!m_moving) {
+        m_moving = true;
+        containment()->setMovingWidget(widget());
+    } else {
         QPointF p(event->pos() - m_startPos);
         widget()->moveBy(p.x(), p.y());
     }
