@@ -80,8 +80,8 @@ GroupingPanel::~GroupingPanel()
 
 void GroupingPanel::init()
 {
-    setContainmentType(Containment::CustomPanelContainment);
-//     setContainmentType(Containment::PanelContainment);
+//     setContainmentType(Containment::CustomPanelContainment);
+    setContainmentType(Containment::PanelContainment);
 
     GroupingContainment::init();
     //FIXME: This should be enabled, but in that case proxywidgets won't get rendered
@@ -210,6 +210,8 @@ void GroupingPanel::updateBorders(const QRect &geom, bool themeChange)
 
 void GroupingPanel::constraintsEvent(Plasma::Constraints constraints)
 {
+    GroupingContainment::constraintsEvent(constraints);
+
     m_maskDirty = true;
 
     //we need to know if the width or height is 100%
