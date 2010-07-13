@@ -161,6 +161,11 @@ void AbstractGroupPrivate::setIsMainGroup()
 void AbstractGroupPrivate::onInitCompleted()
 {
     isLoading = false;
+
+    if (background && (containment->formFactor() == Plasma::Vertical ||
+                       containment->formFactor() == Plasma::Horizontal)) {
+        q->setBackgroundHints(AbstractGroup::PlainBackground);
+    }
 }
 
 void AbstractGroupPrivate::onChildGeometryChanged()
@@ -606,12 +611,7 @@ void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         return;
     }
 
-//     if (d->background && (d->containment->formFactor() != Plasma::Vertical) &&
-//                          (d->containment->formFactor() != Plasma::Horizontal)) {
-        d->background->paintFrame(painter);
-//     } else {
-        //TODO draw a halo, something
-//     }
+    d->background->paintFrame(painter);
 }
 
 void AbstractGroup::showConfigurationInterface()
