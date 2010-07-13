@@ -426,6 +426,8 @@ void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
         if (!d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
             AbstractGroup *group = addGroup(d->mainGroupPlugin);
             setMainGroup(group);
+            KConfigGroup g = config();
+            save(g);
         }
         if (!d->mainGroup) {
             kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";
@@ -667,7 +669,6 @@ void GroupingContainment::save(KConfigGroup &g) const
     }
 
     Plasma::Containment::save(group);
-
     if (d->mainGroup) {
         group.writeEntry("mainGroup", d->mainGroup->id());
     }
