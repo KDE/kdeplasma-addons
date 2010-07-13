@@ -49,7 +49,6 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
       backgroundHints(AbstractGroup::NoBackground),
       isLoading(true),
       hasInterface(false),
-      callMovingWidget(false),
       m_mainConfig(0)
 {
     background = new Plasma::FrameSvg(q);
@@ -559,26 +558,6 @@ void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 
         save(*(d->mainConfigGroup()));
         emit configNeedsSaving();
-    }
-}
-
-void AbstractGroup::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    QGraphicsWidget::mousePressEvent(event);
-
-    if (event->button() == Qt::LeftButton) {
-        event->accept();
-        d->callMovingWidget = true;
-    }
-}
-
-void AbstractGroup::moveEvent(QGraphicsSceneMoveEvent *event)
-{
-    QGraphicsWidget::moveEvent(event);
-
-    if (d->callMovingWidget) {
-        containment()->setMovingWidget(this);
-        d->callMovingWidget = false;
     }
 }
 

@@ -53,7 +53,8 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              mainGroupId(0),
                              layout(0),
                              movingWidget(0),
-                             loading(true)
+                             loading(true),
+                             interestingWidget(0)
 {
     newGroupAction = new QAction(i18n("Add a new group"), q);
     newGroupAction->setIcon(KIcon("list-add"));
@@ -593,6 +594,16 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
 
     if (widget) {
         switch (event->type()) {
+            case QEvent::GraphicsSceneMousePress:
+                d->interestingWidget = widget;
+            break;
+
+            case QEvent::GraphicsSceneMouseMove:
+                if (widget == d->interestingWidget) {
+                    setMovingWidget(widget);
+                }
+            break;
+
             case QEvent::GraphicsSceneMove: {
                 if (widget == d->movingWidget) {
                     AbstractGroup *parentGroup = d->groupAt(mapFromItem(widget, widget->contentsRect().center()), widget);
@@ -749,6 +760,8 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 
 void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
 {
+    d->interestingWidget = 0;
+
     if (d->movingWidget) {
         if (d->movingWidget == widget) {
             return;

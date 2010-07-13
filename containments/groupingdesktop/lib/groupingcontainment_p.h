@@ -78,6 +78,7 @@ class GroupingContainmentPrivate
         QString mainGroupPlugin;
         QGraphicsWidget *movingWidget;
         bool loading;
+        QGraphicsWidget *interestingWidget;
 
         static int s_maxZValue;
         static unsigned int s_groupId;

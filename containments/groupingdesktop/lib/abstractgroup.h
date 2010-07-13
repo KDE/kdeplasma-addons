@@ -235,10 +235,6 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
 
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-
-        virtual void moveEvent(QGraphicsSceneMoveEvent *event);
-
         /**
          * Lay outs a child inside the group
          * A child group probably wants to reimplement this function
