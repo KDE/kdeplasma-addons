@@ -132,13 +132,13 @@ void GridGroup::init()
         }
         m_children.append(row);
     }
+
+    connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
+            this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
 }
 
 void GridGroup::onChildrenRestored()
 {
-    connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
-            this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
-
     bool modified = false;
     //check if we have empty rows
     for (int i = 0; i < m_children.size(); ++i) {
