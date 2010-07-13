@@ -383,12 +383,12 @@ void AbstractGroup::destroy()
 {
     kDebug()<<"destroying group"<<id()<<"of type"<<pluginName();
 
+    d->destroying = true;
+
     if (children().count() == 0) {
         d->startDestroyAnimation();
         return;
     }
-
-    d->destroying = true;
 
     foreach (AbstractGroup *group, subGroups()) {
         group->destroy();
@@ -553,7 +553,7 @@ void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     d->background->resizeFrame(event->newSize());
 
-    if (!d->isLoading) {
+    if (!d->isLoading && !d->destroying) {
         emit geometryChanged();
 
         save(*(d->mainConfigGroup()));
