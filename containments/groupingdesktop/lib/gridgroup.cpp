@@ -133,6 +133,12 @@ void GridGroup::init()
         m_children.append(row);
     }
 
+    if (containment()->formFactor() == Plasma::Vertical ||
+        containment()->formFactor() == Plasma::Horizontal) {
+        setMinimumSize(QSizeF());
+        setContentsMargins(0, 0, 0, 0);
+    }
+
     connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
             this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
 }
