@@ -247,30 +247,41 @@ void AudioPlayerControlRunner::run(const Plasma::RunnerContext &context, const P
     QVariantList data = match.data().value<QVariantList>();
 
     /* Only Amarok part*/
-    if (QAction *a = match.selectedAction()) {
+    QString url = data[2].toString();
+    int pos = posInPlaylist(url);
+    kDebug() << "pos" << pos;
+    QAction *a = match.selectedAction();
+    if (data[3].toString().compare(NONE)) {
+        if (!a)
+        {
+            a = action(data[3].toString());
+        }
         if (a == action(QUEUE)) {
             KUrl::List list;
-            list << KUrl(data[2].toString());
+            list << KUrl(url);
             KRun::run("amarok --queue %u", list, 0);
         } else if (a == action(APPEND)) {
-            tracklist.call(QDBus::NoBlock, "AddTrack", data[2].toString(), false);
+            if (!(pos > -1)) {
+                tracklist.call(QDBus::NoBlock, "AddTrack", url , false);
+            }
         } else {
             //Action play was selected
-            tracklist.call(QDBus::NoBlock, "AddTrack",data[2].toString(), true);
+            if (pos > -1) {
+                tracklist.call(QDBus::NoBlock, "PlayTrack", pos);
+            } else {
+                tracklist.call(QDBus::NoBlock, "AddTrack", url, true);
+            }
         }
-    } else if (data[3].toString().compare(NONE)) {
-        //Append to playlist and play track (m_command oriented interface)
-        tracklist.call(QDBus::NoBlock, "AddTrack", data[2].toString(), true);
-    } /* Only Amarok part over */ else {
+    }/* Only Amarok part over */ else {
         if ((data[4].toString().compare("start") == 0)) {
-            //The players's interface isn't availalbe but it should be started
+            //The players's interface isn't available but it should be started
             if (!startPlayer()) {
                 return;
             }
         }
 
         QDBusMessage msg = QDBusMessage::createMethodCall(QString("org.mpris.%1").arg(m_player),data[0].toString(),
-                           data[1].toString(),data[2].toString());
+                           data[1].toString(), data[2].toString());
         kDebug() << msg;
         QVariantList args;
         for (int i = 5;data.length() > i;++i) {
@@ -393,6 +404,22 @@ bool AudioPlayerControlRunner::startPlayer()
     return true;
 }
 
+int AudioPlayerControlRunner::posInPlaylist(KUrl url)
+{
+    QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
+    for (int i = 0; i < songsInPlaylist(); i++)
+    {
+        QDBusPendingReply<QVariantMap> data = player.asyncCall("GetMetadata", i);
+        KUrl curl = KUrl(KUrl::fromPercentEncoding(data.value().value("location").toByteArray()));
+        kDebug() << curl << ":" << url;
+        if (curl == url)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 int AudioPlayerControlRunner::songsInPlaylist()
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
@@ -436,7 +463,7 @@ QList<Plasma::QueryMatch> AudioPlayerControlRunner::searchCollectionFor(const QS
                           "/Collection", "org.kde.amarok.Collection");
 
 
-    QString query("<query version=\"1.0\"><limit value=\"10\" /><filters>");
+    QString query("<query version=\"1.0\"><limit value=\"5\" /><filters>");
     QStringList queryItems = term.split(' ', QString::SkipEmptyParts);
     foreach(const QString &queryItem, queryItems) {
         query.append(QString("<or><include field=\"title\" value=\"%1\" />").arg(queryItem));
@@ -447,7 +474,7 @@ QList<Plasma::QueryMatch> AudioPlayerControlRunner::searchCollectionFor(const QS
 
     query.append("</filters><includeCollection id=\"localCollection\" /></query>");
 
-    QDBusPendingReply<QList<QVariantMap> > reply = amarok.asyncCall("Query", query);
+    QDBusPendingReply<QList<QVariantMap> > reply = amarok.asyncCall("MprisQuery", query);
     reply.waitForFinished();
 
     if (!reply.isValid()) {
@@ -458,10 +485,10 @@ QList<Plasma::QueryMatch> AudioPlayerControlRunner::searchCollectionFor(const QS
     data  << "/TrackList" << "org.freedesktop.MediaPlayer";
     QList<Plasma::QueryMatch> matches;
     foreach (const QVariantMap &map, reply.value()) {
-        QString artist = map["xesam:author"].toString();
-        QString title = map["xesam:title"].toString();
-        QString url = map["xesam:url"].toString();
-        double relevance = map["xesam:autoRating"].toDouble() / 100;
+        QString artist = map["artist"].toString();
+        QString title = map["title"].toString();
+        QString url = map["location"].toString();
+        double relevance = map["rating"].toInt()*0.2;
         //QString album = map["xesam:album"].toString();
 
         data << url << actionNames;
@@ -482,8 +509,7 @@ QList<Plasma::QueryMatch> AudioPlayerControlRunner::searchCollectionFor(const QS
 
 int AudioPlayerControlRunner::currentSong()
 {
-    QDBusPendingReply<int> current = QDBusInterface(QString("org.mpris.%1").arg(m_player), "/TrackList",
-                              "org.freedesktop.MediaPlayer").asyncCall("GetCurrentTrack");
+    QDBusPendingReply<int> current = QDBusInterface(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer").asyncCall("GetCurrentTrack");
     current.waitForFinished();
     return current;
 }

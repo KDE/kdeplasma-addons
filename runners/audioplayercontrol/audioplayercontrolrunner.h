@@ -65,6 +65,11 @@ private:
       */
     bool startPlayer();
 
+    /** Returns the position of the song @c song in the playlist
+      * @return the position of the song, -1 if the song is not in it
+      */
+    int posInPlaylist(KUrl url);
+    
     /** @return the number of the songs in the playlist */
     int songsInPlaylist();
 
