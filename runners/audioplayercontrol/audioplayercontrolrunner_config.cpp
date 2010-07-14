@@ -96,9 +96,9 @@ void AudioPlayerControlRunnerConfig::load()
     m_ui->pause_edit->setText(grp.readEntry(CONFIG_PAUSE, i18n("pause")));
     m_ui->next_edit->setText(grp.readEntry(CONFIG_NEXT, i18nc("next song", "next")));
     m_ui->mute_edit->setText(grp.readEntry(CONFIG_MUTE , i18n("mute")));
-    m_ui->up_edit->setText(grp.readEntry(CONFIG_INCREASE, i18nc("increase the sound volume", "up")));
+    m_ui->up_edit->setText(grp.readEntry(CONFIG_INCREASE, i18nc("increase the sound volume", "increase")));
     m_ui->up_value->setValue(grp.readEntry(CONFIG_INCREASE_BY , 15));
-    m_ui->down_edit->setText(grp.readEntry(CONFIG_DECREASE , i18nc("decrease the sound volume", "down")));
+    m_ui->down_edit->setText(grp.readEntry(CONFIG_DECREASE , i18nc("decrease the sound volume", "decrease")));
     m_ui->down_value->setValue(grp.readEntry(CONFIG_DECREASE_BY, 15));
     m_ui->prev_edit->setText(grp.readEntry(CONFIG_PREV , i18nc("previous song", "prev")));
     m_ui->stop_edit->setText(grp.readEntry(CONFIG_STOP , i18n("stop")));
@@ -167,7 +167,7 @@ void AudioPlayerControlRunnerConfig::defaults()
     m_ui->down_value->setValue(15);
     m_ui->prev_edit->setText(i18n("Prev"));
     m_ui->stop_edit->setText(i18n("Stop"));
-    m_ui->volume_edit->setText(i18n("Volume="));
+    m_ui->volume_edit->setText(i18n("Volume"));
     m_ui->quit_edit->setText(i18n("Quit"));
 
     emit changed(true);

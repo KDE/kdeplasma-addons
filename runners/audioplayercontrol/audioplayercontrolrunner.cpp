@@ -20,27 +20,27 @@
 
 #include "audioplayercontrolrunner.h"
 
-#include <QDBusInterface>
-#include <QDBusMetaType>
-#include <QDBusReply>
-#include <QDBusMessage>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusMetaType>
+#include <QtDBus/QDBusPendingReply>
+#include <QtDBus/QDBusMessage>
 
-#include <KMessageBox>
-#include <KDebug>
-#include <KIcon>
-#include <KRun>
-#include <KUrl>
+#include <KDE/KMessageBox>
+#include <KDE/KDebug>
+#include <KDE/KIcon>
+#include <KDE/KRun>
+#include <KDE/KUrl>
 
 #include "audioplayercontrolrunner_config.h"
 #include "audioplayercontrolconfigkeys.h"
 
 Q_DECLARE_METATYPE(QList<QVariantMap>)
 
-/** The variable PLAY contains the action labels for play */
+/** The variable PLAY contains the action label for play */
 static const QString PLAY("play");
-/** The variable APPEND contains the action labels for append */
+/** The variable APPEND contains the action label for append */
 static const QString APPEND("append");
-/** The variable QUEUE contains the action labels for queue */
+/** The variable QUEUE contains the action label for queue */
 static const QString QUEUE("queue");
 /** The variable NONE says that no action is needed */
 static const QString NONE("none");
@@ -57,7 +57,7 @@ AudioPlayerControlRunner::AudioPlayerControlRunner(QObject *parent, const QVaria
     qDBusRegisterMetaType<QList<QVariantMap> >();
 
     connect(this, SIGNAL(prepare()), this, SLOT(prep()));
-    
+
     reloadConfiguration();
 }
 
@@ -98,20 +98,22 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         /* The commands */
 
         //Play
-        if (m_comPlay.startsWith(term, Qt::CaseInsensitive) && (!m_running || m_songsInPlaylist)) {
+        if (context.isValid() && m_comPlay.startsWith(term, Qt::CaseInsensitive) &&
+	    (!m_running || m_songsInPlaylist)) {
             QVariantList data = playcontrol;
             data << ((currentSong() == -1) ? "Next" : "Play") << NONE << "start";
             matches << createMatch(this, i18n("Start playing"), i18n("Audio player control"), "play",
                                    KIcon("media-playback-start"), data, 1.0);
         }
 
-        if (!m_running) {
-            //The interface of the player isn't availalbe, so the rest of the commands aren't needed
+        if (!context.isValid() || !m_running) {
+            //The interface of the player is not availalbe, so the rest of the commands
+            //is not needed
             context.addMatches(term,matches);
             return;
         }
 
-        if (m_songsInPlaylist) {
+        if (context.isValid() && m_songsInPlaylist) {
             //The playlist isn't empty
             //Next song
             if (m_comNext.startsWith(term,Qt::CaseInsensitive)
@@ -123,7 +125,7 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
             }
 
             //Previous song
-            if (m_comPrev.startsWith(term,Qt::CaseInsensitive)
+            if (context.isValid() && m_comPrev.startsWith(term,Qt::CaseInsensitive)
                     && m_prevSongAvailable) {
                 QVariantList data = playcontrol;
                 data << "Prev" << NONE << "nostart";
@@ -133,7 +135,7 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         }//--- if (m_songsInPlaylist)
 
         //Pause
-        if (m_comPause.startsWith(term,Qt::CaseInsensitive)) {
+        if (context.isValid() && m_comPause.startsWith(term,Qt::CaseInsensitive)) {
             QVariantList data = playcontrol;
             data << "Pause" << NONE << "nostart";
             matches << createMatch(this, i18n("Pause playing"), i18n("Audio player control"),
@@ -141,7 +143,7 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         }
 
         //Stop
-        if (m_comStop.startsWith(term,Qt::CaseInsensitive)) {
+        if (context.isValid() && m_comStop.startsWith(term,Qt::CaseInsensitive)) {
             QVariantList data = playcontrol;
             data << "Stop" << NONE << "nostart";
             matches << createMatch(this, i18n("Stop playing"), i18n("Audio player control"),
@@ -149,12 +151,12 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         }
 
         //Increase
-        if (m_comIncrease.startsWith(term,Qt::CaseInsensitive)) {
+        if (context.isValid() && m_comIncrease.startsWith(term,Qt::CaseInsensitive)) {
             QVariantList data = playcontrol;
             data << "VolumeUp" << NONE << "nostart" << m_increaseBy;
             matches << createMatch(this, i18n("Increase volume by %1" , m_increaseBy),
                                    "volumeup", i18n("Audio player control"), KIcon("audio-volume-high"), data, 1.0);
-        } else if (equals(term, QRegExp(m_comIncrease + " \\d{1,2}0{0,1}"))) {
+        } else if (context.isValid() && equals(term, QRegExp(m_comIncrease + " \\d{1,2}0{0,1}"))) {
             int volumeChange = getNumber(term, ' ');
             QVariantList data = playcontrol;
             data << "VolumeUp" << NONE << "nostart" << volumeChange;
@@ -163,12 +165,12 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         }
 
         //Decrease
-        if (m_comDecrease.startsWith(term,Qt::CaseInsensitive)) {
+        if (context.isValid() && m_comDecrease.startsWith(term,Qt::CaseInsensitive)) {
             QVariantList data = playcontrol;
             data << "VolumeDown" << NONE << "nostart" << m_decreaseBy;
             matches << createMatch(this, i18n("Reduce volume by %1", m_decreaseBy),
                                    "volumedown", i18n("Audio player control"), KIcon("audio-volume-low"), data, 1.0);
-        } else if (equals(term, QRegExp(m_comDecrease + " \\d{1,2}0{0,1}"))) {
+        } else if (context.isValid() && equals(term, QRegExp(m_comDecrease + " \\d{1,2}0{0,1}"))) {
             int volumeChange = getNumber(term, ' ');
             QVariantList data = playcontrol;
             data << "VolumeDown" << NONE << "nostart" << volumeChange;
@@ -177,16 +179,16 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         }
 
         //Set volume to
-        if (equals(term, QRegExp(m_comVolume + "\\d{1,2}0{0,1}"))) {
+        if (context.isValid() && equals(term, QRegExp(m_comVolume + " \\d{1,2}0{0,1}"))) {
             QVariantList data = playcontrol;
-            int newVolume = getNumber(term , '=');
+            int newVolume = getNumber(term , ' ');
             data << "VolumeSet" << NONE << "nostart" << newVolume;
             matches << createMatch(this, i18n("Set volume to %1%" , newVolume),
                                    "volume", i18n("Audio player control"), KIcon("audio-volume-medium"), data, 1.0);
         }
 
         //Mute
-        if (m_comMute.startsWith(term,Qt::CaseInsensitive)) {
+        if (context.isValid() && m_comMute.startsWith(term,Qt::CaseInsensitive)) {
             QVariantList data = playcontrol;
             data << "Mute" << NONE << "nostart";
             matches << createMatch(this, i18n("Mute"), i18n("Audio player control"),
@@ -194,7 +196,7 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         }
 
         //Quit player
-        if (m_comQuit.startsWith(term,Qt::CaseInsensitive)) {
+        if (context.isValid() && m_comQuit.startsWith(term,Qt::CaseInsensitive)) {
             QVariantList data;
             data  << "/" << "org.freedesktop.MediaPlayer" << "Quit" << NONE
             << "nostart";
@@ -203,7 +205,7 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         }
     }//--- if (m_useCommands)
 
-    if (m_searchCollection) {
+    if (context.isValid() && m_searchCollection) {
         QString actionNames;
         QString searchTerm = term;
         QString command;
@@ -224,6 +226,10 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
             actionNames = QString("%1,%2,%3").arg(PLAY).arg(APPEND).arg(QUEUE);
         }
 
+	if (!context.isValid())
+	{
+	    return;
+	}
         searchTerm = searchTerm.right(searchTerm.length() - (command.length() + 1));
         matches << searchCollectionFor(searchTerm, actionNames);
         //Adds matches for all song matches for term
@@ -380,33 +386,37 @@ bool AudioPlayerControlRunner::startPlayer()
         return false;
     }
 
-    while (!playerRunning()) {
+    /*while (!playerRunning()) {
         //Waiting for the player's interface to appear
         ;
-    }
+    }*/
     return true;
 }
 
 int AudioPlayerControlRunner::songsInPlaylist()
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
-    QDBusReply<int> length = player.asyncCall("GetLength");
-    return length;
+    QDBusPendingReply<int> length = player.asyncCall("GetLength");
+    length.waitForFinished();
+    return length.value();
 }
 
 bool AudioPlayerControlRunner::nextSongAvailable()
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
-    QDBusReply<int> length = player.asyncCall("GetLength");
-    QDBusReply<int> current = player.asyncCall("GetCurrentTrack");
-    return !((length - 1) == current);
+    QDBusPendingReply<int> length = player.asyncCall("GetLength");
+    QDBusPendingReply<int> current = player.asyncCall("GetCurrentTrack");
+    length.waitForFinished();
+    current.waitForFinished();
+    return !((length.value() - 1) == current.value());
 }
 
 bool AudioPlayerControlRunner::prevSongAvailable()
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
-    QDBusReply<int> current = player.asyncCall("GetCurrentTrack");
-    return current > 0;
+    QDBusPendingReply<int> current = player.asyncCall("GetCurrentTrack");
+    current.waitForFinished();
+    return current.value() > 0;
 }
 
 bool AudioPlayerControlRunner::equals(const QString &text, QRegExp reg)
@@ -437,7 +447,8 @@ QList<Plasma::QueryMatch> AudioPlayerControlRunner::searchCollectionFor(const QS
 
     query.append("</filters><includeCollection id=\"localCollection\" /></query>");
 
-    QDBusReply<QList<QVariantMap> > reply = amarok.asyncCall("Query", query);
+    QDBusPendingReply<QList<QVariantMap> > reply = amarok.asyncCall("Query", query);
+    reply.waitForFinished();
 
     if (!reply.isValid()) {
         return QList<Plasma::QueryMatch>();
@@ -471,8 +482,9 @@ QList<Plasma::QueryMatch> AudioPlayerControlRunner::searchCollectionFor(const QS
 
 int AudioPlayerControlRunner::currentSong()
 {
-    QDBusReply<int> current = QDBusInterface(QString("org.mpris.%1").arg(m_player), "/TrackList",
+    QDBusPendingReply<int> current = QDBusInterface(QString("org.mpris.%1").arg(m_player), "/TrackList",
                               "org.freedesktop.MediaPlayer").asyncCall("GetCurrentTrack");
+    current.waitForFinished();
     return current;
 }
 #include "audioplayercontrolrunner.moc"
