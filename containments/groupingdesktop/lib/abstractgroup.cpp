@@ -161,11 +161,6 @@ void AbstractGroupPrivate::setIsMainGroup()
 void AbstractGroupPrivate::onInitCompleted()
 {
     isLoading = false;
-
-    if (background && (containment->formFactor() == Plasma::Vertical ||
-                       containment->formFactor() == Plasma::Horizontal)) {
-        q->setBackgroundHints(AbstractGroup::PlainBackground);
-    }
 }
 
 void AbstractGroupPrivate::onChildGeometryChanged()
@@ -561,6 +556,11 @@ void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
     }
 }
 
+void AbstractGroup::constraintsEvent(Plasma::Constraints constraints)
+{
+
+}
+
 int AbstractGroup::type() const
 {
     return Type;
@@ -643,6 +643,18 @@ bool AbstractGroup::hasConfigurationInterface() const
 void AbstractGroup::setHasConfigurationInterface(bool hasInterface)
 {
     d->hasInterface = hasInterface;
+}
+
+void AbstractGroup::updateConstraints(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (d->background && (d->containment->formFactor() == Plasma::Vertical ||
+                              d->containment->formFactor() == Plasma::Horizontal)) {
+            setBackgroundHints(AbstractGroup::PlainBackground);
+        }
+    }
+
+    constraintsEvent(constraints);
 }
 
 #include "abstractgroup.moc"

@@ -55,6 +55,7 @@ class GridGroup : public AbstractGroup
         void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
         void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
         bool eventFilter(QObject *obj, QEvent *event);
+        void constraintsEvent(Plasma::Constraints constraints);
 
     private slots:
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);

@@ -210,6 +210,8 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
 
         bool hasConfigurationInterface() const;
 
+        void updateConstraints(Plasma::Constraints constraints = Plasma::AllConstraints);
+
     public slots:
         /**
          * Sets the immutability type for this group (not immutable,
@@ -251,6 +253,8 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         void setGroupType(GroupType type);
 
         void setHasConfigurationInterface(bool hasInterface);
+
+        virtual void constraintsEvent(Plasma::Constraints constraints);
 
     signals:
         /**

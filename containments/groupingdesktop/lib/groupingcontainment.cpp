@@ -464,6 +464,10 @@ void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
             kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";
         }
     }
+
+    foreach (AbstractGroup *g, d->groups) {
+        g->updateConstraints(constraints);
+    }
 }
 
 AbstractGroup *GroupingContainment::addGroup(const QString &plugin, const QPointF &pos, int id)
@@ -490,6 +494,7 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
             this, SLOT(onSubGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)));
     connect(group, SIGNAL(configNeedsSaving()), this, SIGNAL(configNeedsSaving()));
     group->setPos(pos);
+    group->updateConstraints();
 
     if (!d->loading) {
         Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);

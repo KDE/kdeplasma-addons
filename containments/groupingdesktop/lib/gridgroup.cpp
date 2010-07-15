@@ -133,12 +133,6 @@ void GridGroup::init()
         m_children.append(row);
     }
 
-    if (containment()->formFactor() == Plasma::Vertical ||
-        containment()->formFactor() == Plasma::Horizontal) {
-        setMinimumSize(QSizeF());
-        setContentsMargins(0, 0, 0, 0);
-    }
-
     connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
             this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
 }
@@ -604,6 +598,17 @@ void GridGroup::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     saveCellsInfo();
 
     AbstractGroup::mouseReleaseEvent(event);
+}
+
+void GridGroup::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (containment()->formFactor() == Plasma::Vertical ||
+            containment()->formFactor() == Plasma::Horizontal) {
+            setMinimumSize(QSizeF());
+            setContentsMargins(0, 0, 0, 0);
+        }
+    }
 }
 
 bool GridGroup::eventFilter(QObject *, QEvent *event)
