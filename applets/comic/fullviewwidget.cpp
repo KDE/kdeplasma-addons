@@ -44,9 +44,9 @@ void FullViewWidget::adaptPosition( const QPoint &pos )
 {
     int x = pos.x();
     int y = pos.y();
-    if ( x + width() > mDesktopSize.width() )
+    if ( x + mImage.width() > mDesktopSize.width() )
         x = mDesktopSize.left();
-    if ( y + height() > mDesktopSize.height() )
+    if ( y + mImage.height() > mDesktopSize.height() )
         y = mDesktopSize.top();
 
     move( x, y );
