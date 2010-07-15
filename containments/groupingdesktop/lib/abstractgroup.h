@@ -49,10 +49,13 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
             FreeGroup = 1           /**< The applets can be freely transformed */
         };
 
+        /**
+         * Description on how draw a background for the applet
+         */
         enum BackgroundHints {
-            NoBackground  = 0,
-            StandardBackground = 1,
-            PlainBackground = 2
+            NoBackground  = 0,        /**< Don't draw anything */
+            StandardBackground = 1,   /**< Draw the translucent background from the theme */
+            PlainBackground = 2       /**< Draw a plain, simpler background */
         };
 
         /**
@@ -61,7 +64,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         explicit AbstractGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
 
         /**
-         * Default destructor
+         * Default destructor.
          **/
         virtual ~AbstractGroup();
 
@@ -73,40 +76,69 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         virtual void init();
 
         /**
-         * Adds an Applet to this Group
-         * @param applet the applet to be managed by this
-         * @param layoutApplets if true calls layoutApplet(applet)
+         * Adds an Applet to this Group.
+         *
+         * @param applet the Applet to be managed by this
+         * @param layoutApplets if true calls layoutChild(applet)
+         *
          * @see applets
          * @see removeApplet
          **/
         void addApplet(Plasma::Applet *applet, bool layoutApplet = true);
 
+        /**
+         * Adds a Group to this Group.
+         *
+         * @param group, the Group to be managed by this
+         * @param layoutGroup if true calls layoutChild(group)
+         *
+         * @see subGroups
+         * @see removeSubGroup
+         **/
         void addSubGroup(AbstractGroup *group, bool layoutGroup = true);
 
         /**
-         * Removes an applet from this group.
+         * Removes an Applet from this Group.
+         *
          * @param applet the applet to be removed
+         * @param newGroup the group in which the Applet must be added
+         * after it is removed from this
+         *
          * @see addApplet
          * @see applets
          **/
         void removeApplet(Plasma::Applet *applet, AbstractGroup *newGroup = 0);
 
+        /**
+         * Removes a Group from this Group.
+         *
+         * @param group the Group to be removed
+         * @param newGroup the Group in which the Group must be added
+         * after it is removed from this
+         *
+         * @see addSubGroup
+         * @see subGroups
+         **/
         void removeSubGroup(AbstractGroup *group, AbstractGroup *newGroup = 0);
 
         /**
-         * Saves the group's specific configurations for an applet.
-         * This function must be reimplemented by a child class.
-         * @param applet the applet which will be saved
+         * Saves the group's specific configurations for a child.
+         * This function must be reimplemented by a sub class.
+         *
+         * @param child the child whose info will be saved
          * @param group the config group for the configuration
+         *
          * @see restoreChildGroupInfo
          **/
         virtual void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup config) const = 0;
 
         /**
-         * Restores the group's specific configurations for an applet.
-         * This function must be reimplemented by a child class.
-         * @param applet the applet which will be restored
+         * Restores the group's specific configurations for a chils.
+         * This function must be reimplemented by a sub class.
+         *
+         * @param child the child whose info will be restored
          * @param group the config group for the configuration
+         *
          * @see saveChildGroupInfo
          **/
         virtual void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group) = 0;
@@ -114,28 +146,48 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         /**
          * Returns the view this widget is visible on, or 0 if none can be found.
          * @warning do NOT assume this will always return a view!
-         * a null view probably means that either plasma isn't finished loading, or your group is
+         * a null view probably means that either plasma hasn't finished loading, or your group is
          * on an activity that's not being shown anywhere.
          */
         QGraphicsView *view() const;
 
         /**
-         * Destroyed this groups and its applet, deleting the configurations too
+         * Destroy this Groups and its children, deleting the configurations too
          **/
         void destroy();
 
         /**
-         * Returns the KConfigGroup to access the group configuration.
+         * Returns the KConfigGroup to access the Group configuration.
          **/
         KConfigGroup config() const;
 
         /**
-         * Saves state information about this group.
+         * Saves state information about this Group.
+         * Normally you don't reimplement this to save the
+         * configuration of the Group, but you save it using config().
+         *
+         * @see saveChildren
+         * @see restore
+         * @see config
          **/
         virtual void save(KConfigGroup &group) const;
 
+        /**
+         * Calls saveChildGroupInfo for every child.
+         *
+         * @see save
+         * @see saveChildGroupInfo
+         **/
         virtual void saveChildren() const;
 
+        /**
+         * Restore the state information about this Group.
+         * Normally you don't reimplement this to restore the configuration
+         * of the Group, but you restore it in init() using config().
+         *
+         * @see save
+         * @see config
+         **/
         virtual void restore(KConfigGroup &group);
 
         /**
@@ -145,90 +197,176 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          *
          * @param pos point where to show the drop target; if an invalid point is passed in
          *        the drop zone should not be shown
-         */
+         **/
         virtual void showDropZone(const QPointF &pos);
 
         /**
-         * Returns a list of the applets managed by this group
+         * Returns a list of the applets managed by this Group.
+         *
          * @see addApplet
          * @see removeApplet
          **/
         Plasma::Applet::List applets() const;
 
+        /**
+         * Returns a list of the groups managed by this Group.
+         *
+         * @see addSubGroup
+         * @see removeSubGroup
+         **/
         QList<AbstractGroup *> subGroups() const;
 
+        /**
+         * Returns a list of all the children managed by this Group.
+         *
+         * @see applets
+         * @see subGroups
+         **/
         QList<QGraphicsWidget *> children() const;
 
         /**
-         * Returns the id of this group
+         * Returns the id of this Group.
          **/
         uint id() const;
 
         /**
-         * Returns the type of immutability of this group
+         * Returns the type of immutability of this Group.
+         *
          * @see setImmutability
          **/
         Plasma::ImmutabilityType immutability() const;
 
         /**
-         * Returns a pointer to the containment this group is displayed in.
+         * Returns a pointer to the containment this Group is displayed in.
          **/
         GroupingContainment *containment() const;
 
         /**
-         * Returns the plugin name for the group
+         * Returns the plugin name for the Group
          **/
         virtual QString pluginName() const = 0;
 
+        /**
+         * Returns true if this Group is the MainGroup of its Containment.
+         *
+         * @see GroupingContainment::useMainGroup
+         **/
         bool isMainGroup() const;
 
+        /**
+         * Sets the BackgroundHints for this Group.
+         *
+         * @see backgroundHints
+         * @see BackgroundHints
+         **/
         void setBackgroundHints(BackgroundHints hint);
+
+        /**
+         * Returns the BackgroundHints set for this Group.
+         *
+         * @see setBackgroundHints
+         * @see BackGroundHints
+         **/
         BackgroundHints backgroundHints() const;
 
         /**
-         * Reimplemented from QGraphicsWidget
+         * Reimplemented from QGraphicsItem
          **/
         virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
+        /**
+         * Reimplemented from QGraphicsItem
+         **/
         enum {
             Type = UserType + 2
         };
         virtual int type() const;
 
+        /**
+         * Brings this Group on top of the other Groups and Applet
+         **/
         void raise();
 
+        /**
+         * Returns an handle for a child of this Group.
+         * Reimplement this if you want to provide a different handle than
+         * the default one.
+         *
+         * @param child the child for which it must be created an handle
+         *
+         * @return the handle just created
+         **/
         virtual Handle *createHandleForChild(QGraphicsWidget *child);
 
         /**
-        * @return the type of this group
-        * @see setGroupType
-        * @see GroupType
-        */
+         * Returns the type of this Group
+         *
+         * @see setGroupType
+         * @see GroupType
+         **/
         GroupType groupType() const;
 
+        /**
+         * Reimplement this method to provide a configuration interface,
+         * parented to the supplied widget.
+         * Ownership of the widgets is passed to the parent widget.
+         *
+         * @param parent the dialog which is the parent of the configuration widgets
+         **/
         virtual void createConfigurationInterface(KConfigDialog *parent);
 
+        /**
+         * Returns true if this Group provides a GUI configuration.
+         *
+         * @see setHasConfigurationInterface
+         **/
         bool hasConfigurationInterface() const;
 
+        /**
+         * Called when any of the geometry constraints have been updated.
+         * This method calls constraintsEvent, which may be reimplemented,
+         * once the Group has been prepared for updating the constraints.
+         *
+         * @param constraints the type of constraints that were updated
+         *
+         * @see constraintsEvent
+         **/
         void updateConstraints(Plasma::Constraints constraints = Plasma::AllConstraints);
 
     public slots:
         /**
-         * Sets the immutability type for this group (not immutable,
+         * Sets the immutability type for this Group (not immutable,
          * user immutable or system immutable)
-         * @param immutable the new immutability type of this applet
+         *
+         * @param immutable the new immutability type of this Group
+         *
          * @see immutability
          * @see Plasma::ImmutabilityType
-         */
+         **/
         void setImmutability(Plasma::ImmutabilityType immutability);
 
+        /**
+         * Lets the user interact with the Group options.
+         * Called when the user selects the configure entry
+         * from the context menu.
+         *
+         * Unless there is a good reason for overriding this method,
+         * AbstractGroup subclasses should actually override
+         * createConfigurationInterface instead.
+         *
+         * @see createConfigurationInterface
+         * @see setHasConfigurationInterface
+         **/
         virtual void showConfigurationInterface();
 
     protected:
+        /**
+         * Reimplemented from QGraphicsItem
+         **/
         virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
         /**
-         * Reimplemented from QGraphicsWidget
+         * Reimplemented from QGraphicsItem
          **/
         virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
 
@@ -238,65 +376,123 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
 
         /**
-         * Lay outs a child inside the group
-         * A child group probably wants to reimplement this function
+         * Lays out a child inside the Group
+         * A sub class probably wants to reimplement this function
+         *
          * @param child the child to be laid out
-         * @param pos the position of the applet mapped to the group's coordinates
+         * @param pos the position of the child mapped to the Group's coordinates
          **/
         virtual void layoutChild(QGraphicsWidget *child, const QPointF &pos) = 0;
 
         /**
-         * Sets the type of this group
+         * Sets the type of this Group
+         *
          * @see groupType
          * @see GroupType
          */
         void setGroupType(GroupType type);
 
+        /**
+         * Sets whether or not this Group provides a user interface for
+         * configuring it.
+         *
+         * It defaults to false, and if true is passed in you should
+         * also reimplement createConfigurationInterface()
+         *
+         * @param hasInterface whether or not there is a user interface available
+         *
+         * @see createConfigurationInterface
+         **/
         void setHasConfigurationInterface(bool hasInterface);
 
+        /**
+         * Called when any of the geometry constraints have been updated.
+         *
+         * @param constraints the type of constraints that were updated
+         **/
         virtual void constraintsEvent(Plasma::Constraints constraints);
 
     signals:
         /**
-         * This signal is emitted when the group's destructor is called.
-         * @param group a pointer to the group
+         * This signal is emitted when the Group's destructor is called.
+         *
+         * @param group a pointer to this Group
          **/
         void groupDestroyed(AbstractGroup *group);
 
         /**
-         * Emitted when an applet is assigned to this group.
-         * @param applet a pointer to the applet added
-         * @param group a pointer to this group
+         * Emitted when an Applet is assigned to this Group.
+         *
+         * @param applet a pointer to the Applet added
+         * @param group a pointer to this Group
+         *
+         * @see subGroupAddedInGroup
          **/
         void appletAddedInGroup(Plasma::Applet *applet, AbstractGroup *group);
 
+        /**
+         * Emitted when a Group is assigned to this Group.
+         *
+         * @param subGroup a pointer to the Group added
+         * @param group a pointer to this Group
+         *
+         * @see appletAddedInGroup
+         **/
         void subGroupAddedInGroup(AbstractGroup *subGroup, AbstractGroup *group);
 
         /**
-         * Emitted when an applet is removed from this group.
-         * @param applet a pointer to the applet removed
-         * @param group a pointer to this group
+         * Emitted when an Applet is removed from this Group.
+         *
+         * @param applet a pointer to the Applet removed
+         * @param group a pointer to this Group
+         *
+         * @see subGroupRemovedFromGroup
          **/
         void appletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group);
 
+        /**
+         * Emitted when a Group is removed from this Group.
+         *
+         * @param subGroup a pointer to the Group removed
+         * @param group a pointer to this Group
+         *
+         * @see appletRemovedFromGroup
+         **/
         void subGroupRemovedFromGroup(AbstractGroup *subGroup, AbstractGroup *group);
 
         /**
-         * This signal is emitted when the group's geometry changes.
+         * This signal is emitted when the Group's geometry changes.
          **/
         void geometryChanged();
 
         /**
-         * This signal is emitted when the group is transformed by the user.
+         * This signal is emitted when the Group is transformed by the user.
          **/
         void groupTransformedByUser();
 
+        /**
+         * Emitted when a Group has changed values in its configuration
+         * and wishes for them to be saved at the next save point. As this implies
+         * disk activity, this signal should be used with care.
+         **/
         void configNeedsSaving();
 
+        /**
+         * Emitted when the Group has completed all its initialization routines
+         * and has been completely restored.
+         **/
         void initCompleted();
 
+        /**
+         * Emitted when the immutability changes.
+         *
+         * @param immutability the new immutability
+         **/
         void immutabilityChanged(Plasma::ImmutabilityType immutability);
 
+        /**
+         * Emitted when all the children of this Group are restored.
+         **/
         void childrenRestored();
 
     private:

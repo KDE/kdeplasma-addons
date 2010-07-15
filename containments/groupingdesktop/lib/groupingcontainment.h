@@ -29,40 +29,182 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
 {
     Q_OBJECT
     public:
+        /**
+         * Default constructor.
+         **/
         GroupingContainment(QObject *parent, const QVariantList &args);
+
+        /**
+         * Default destructor.
+         **/
         virtual ~GroupingContainment();
 
+        /**
+         * Reimplemented from Plasma::Applet
+         **/
         void init();
+
+        /**
+         * Reimplemented from Plasma::Applet
+         **/
         virtual void save(KConfigGroup &group) const;
+
+        /**
+         * Reimplemented from Plasma::Containment
+         **/
         virtual void restore(KConfigGroup &group);
+
+        /**
+         * Reimplemented from Plasma::Applet
+         **/
         QList<QAction *> contextualActions();
+
+        /**
+         * Creates a new Group and it adds it to this Containment.
+         *
+         * @param plugin the name of the type of Group
+         * @param pos the position where it should be created
+         * @param id the identifier for the Group. Passing 0 will set a unique one
+         *
+         * @return the newly created Group
+         *
+         * @see addGroup
+         * @see groups
+         **/
         AbstractGroup *addGroup(const QString &plugin, const QPointF &pos = QPointF(0, 0), int id = 0);
+
+        /**
+         * Adds a new Group to this Containment.
+         *
+         * @param group the Group to be added
+         * @param pos the position where it should be added
+         *
+         * @see addGroup
+         * @see groups
+         **/
         void addGroup(AbstractGroup *group, const QPointF &pos);
+
+        /**
+         * Returns a list of all the Groups contained in this Containment
+         *
+         * @see addGroup
+         **/
         QList<AbstractGroup *> groups() const;
 
         /**
-        * Call this function when an applet or a group is being moved by the user.
-        * @param widget the widget to be monitored
-        **/
+         * Call this function when an Applet or a Group is being moved by the user.
+         * It will be monitored to see if it is placed in a Group.
+         *
+         * @param widget the Applet or Group to be monitored
+         *
+         * @see widgetStartsMoving
+         **/
         void setMovingWidget(QGraphicsWidget *widget);
 
+        /**
+         * Raises a widget above all the other Applets or Groups.
+         **/
         void raise(QGraphicsWidget *widget);
 
     protected:
+        /**
+         * Reimplemented from Plasma::Applet
+         **/
         virtual void constraintsEvent(Plasma::Constraints constraints);
+
+        /**
+         * Reimplemented from QObject
+         **/
         virtual bool eventFilter(QObject *obj, QEvent *event);
+
+        /**
+         * Reimplemented from QGraphicsItem
+         **/
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
+
+        /**
+         * Reimplemented from QGraphicsItem
+         **/
         virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
+        /**
+         * Reimplemented from QGraphicsItem
+         **/
         virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
+
+        /**
+         * Reimplemented from Plasma::Containment
+         **/
         virtual void saveContents(KConfigGroup &group) const;
+
+        /**
+         * Reimplemented from Plasma::Containment
+         **/
         virtual void restoreContents(KConfigGroup &group);
-        void useMainGroup(const QString &name);
+
+        /**
+         * Tells the Containment to use a Main Group of the given type.
+         * It will overlap to the Containment, so it will be the root of
+         * the Groups hierarchy.
+         *
+         * @warning every sub class of this MUST set a Main Group, or it will
+         * encounter breackages. GroupingContainment sets by default a FloatingGroup.
+         *
+         * @param type the type of the wanted Main Group
+         *
+         * @see setMainGroup
+         * @see mainGroup
+         * @see AbstractGroup::isMainGroup
+         **/
+        void useMainGroup(const QString &type);
+
+        /**
+         * Sets a Main Group for this Containment.
+         * Normally you will use useMainGroup instead of this.
+         *
+         * @param group the group to be set Main Group
+         *
+         * @see useMainGroup
+         * @see mainGroup
+         * @see AbstractGroup::isMainGroup
+         **/
         void setMainGroup(AbstractGroup *group);
+
+        /**
+         * Returns the Main Group of this Containment.
+         *
+         * @see useMainGroup
+         * @see AbstractGroup::isMainGroup
+         **/
         AbstractGroup *mainGroup() const;
 
     signals:
+        /**
+         * Emitted when a new Group is added to this Containment.
+         *
+         * @param group the newly added Group
+         * @param pos the position where it has been added
+         *
+         * @see groupRemoved
+         **/
         void groupAdded(AbstractGroup *group, const QPointF &pos);
+
+        /**
+         * Emitted when a Group is removed from this Containment.
+         *
+         * @param group the group which was removed
+         *
+         * @see groupAdded
+         **/
         void groupRemoved(AbstractGroup *group);
+
+        /**
+         * Emitted when an Applet or a Group start to be moved by the user.
+         * A Group might want to connect to this to free the widget from
+         * a grid or whatever, so to allow it to be moved.
+         *
+         * @see setMovingWidget
+         **/
         void widgetStartsMoving(QGraphicsWidget *widget);
 
     private:
