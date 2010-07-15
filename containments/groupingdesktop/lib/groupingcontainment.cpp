@@ -52,7 +52,7 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              mainGroup(0),
                              mainGroupId(0),
                              layout(0),
-                             loading(true),
+                             loading(false),
                              movingWidget(0),
                              interestingWidget(0),
                              movementHelperWidget(new QGraphicsWidget(q)),
@@ -718,6 +718,7 @@ void GroupingContainment::saveContents(KConfigGroup &group) const
 
 void GroupingContainment::restore(KConfigGroup &group)
 {
+    d->loading = true;
     d->mainGroupId = group.readEntry("mainGroup", 0);
 
     Plasma::Containment::restore(group);
