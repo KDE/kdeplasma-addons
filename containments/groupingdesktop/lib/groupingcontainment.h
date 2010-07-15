@@ -28,6 +28,8 @@ class GroupingContainmentPrivate;
 class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
 {
     Q_OBJECT
+    Q_PROPERTY(AbstractGroup *mainGroup READ mainGroup WRITE setMainGroup)
+
     public:
         /**
          * Default constructor.
@@ -94,6 +96,7 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
         /**
          * Call this function when an Applet or a Group is being moved by the user.
          * It will be monitored to see if it is placed in a Group.
+         * Typically this method will be called by an handle.
          *
          * @param widget the Applet or Group to be monitored
          *

@@ -29,6 +29,8 @@ class GroupingContainment;
 class Handle;
 class AbstractGroupPrivate;
 
+typedef Plasma::ImmutabilityType ImmutabilityType;
+
 /**
  * @class AbstractGroup
  *
@@ -39,6 +41,12 @@ class AbstractGroupPrivate;
 class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
 {
     Q_OBJECT
+    Q_PROPERTY(bool hasInterface READ hasConfigurationInterface)
+    Q_PROPERTY(ImmutabilityType immutability READ immutability WRITE setImmutability)
+    Q_PROPERTY(uint id READ id)
+    Q_PROPERTY(GroupType groupType READ groupType())
+    Q_PROPERTY(bool isMainGroup READ isMainGroup())
+
     public:
         /**
          * Defines if the applets inside the group can be freely transformed or not by the user
@@ -52,11 +60,12 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         /**
          * Description on how draw a background for the applet
          */
-        enum BackgroundHints {
+        enum BackgroundHint {
             NoBackground  = 0,        /**< Don't draw anything */
             StandardBackground = 1,   /**< Draw the translucent background from the theme */
             PlainBackground = 2       /**< Draw a plain, simpler background */
         };
+        Q_DECLARE_FLAGS(BackgroundHints, BackgroundHint)
 
         /**
          * Constructor of the abstract class.
@@ -257,7 +266,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          * Sets the BackgroundHints for this Group.
          *
          * @see backgroundHints
-         * @see BackgroundHints
+         * @see BackgroundHint
          **/
         void setBackgroundHints(BackgroundHints hint);
 
@@ -265,7 +274,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          * Returns the BackgroundHints set for this Group.
          *
          * @see setBackgroundHints
-         * @see BackGroundHints
+         * @see BackGroundHint
          **/
         BackgroundHints backgroundHints() const;
 

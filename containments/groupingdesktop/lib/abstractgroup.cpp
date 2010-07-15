@@ -556,7 +556,7 @@ void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
     }
 }
 
-void AbstractGroup::constraintsEvent(Plasma::Constraints constraints)
+void AbstractGroup::constraintsEvent(Plasma::Constraints)
 {
 
 }
