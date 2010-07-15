@@ -57,6 +57,7 @@ class GroupingContainmentPrivate
         void groupAppearAnimationComplete();
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
         void restoreGroups();
+        void prepareWidgetToMove();
 
         GroupingContainment *q;
         QList<AbstractGroup *> groups;
@@ -76,9 +77,11 @@ class GroupingContainmentPrivate
         unsigned int mainGroupId;
         QGraphicsLinearLayout *layout;
         QString mainGroupPlugin;
-        QGraphicsWidget *movingWidget;
         bool loading;
+        QGraphicsWidget *movingWidget;
         QGraphicsWidget *interestingWidget;
+        QGraphicsWidget *movementHelperWidget;
+        QGraphicsWidget *widgetToBeSetMoving;
 
         static int s_maxZValue;
         static unsigned int s_groupId;

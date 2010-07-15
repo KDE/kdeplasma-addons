@@ -52,9 +52,11 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              mainGroup(0),
                              mainGroupId(0),
                              layout(0),
-                             movingWidget(0),
                              loading(true),
-                             interestingWidget(0)
+                             movingWidget(0),
+                             interestingWidget(0),
+                             movementHelperWidget(new QGraphicsWidget(q)),
+                             widgetToBeSetMoving(0)
 {
     newGroupAction = new QAction(i18n("Add a new group"), q);
     newGroupAction->setIcon(KIcon("list-add"));
@@ -80,7 +82,6 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
     configureGroupAction = new QAction(i18n("Configure this group"), q);
     configureGroupAction->setIcon(KIcon("configure"));
     configureGroupAction->setVisible(false);
-
 
     separator = new QAction(q);
     separator->setSeparator(true);
@@ -300,6 +301,7 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
     }
 
     movingWidget = 0;
+    interestingWidget = 0;
 
     if (interestingGroup) {
         if (q->corona()->immutability() == Plasma::Mutable) {
@@ -392,6 +394,34 @@ void GroupingContainmentPrivate::restoreGroups()
     foreach (AbstractGroup *group, groups) {
         emit group->childrenRestored();
     }
+}
+
+void GroupingContainmentPrivate::prepareWidgetToMove()
+{
+    q->raise(widgetToBeSetMoving);
+    q->raise(movementHelperWidget);
+
+    //need to do do this because when you have a grid group in a grid group in a grid group,
+    //when you move the upper one outside of the second one boundaries appears the
+    //first one' spacer that causes the second one to move, so the third one
+    //will move accordingly, causing the spacer to flicker. setting the third one' parent
+    //to movementHelperWidget resolves this.
+    //i use that widget and not "q" or others because, setting its position equal to
+    //the parentItem's one, it doesn't break the movement via ItemIsMovable.
+    if (q->immutability() == Plasma::Mutable) {
+        QPointF p(q->mapFromScene(widgetToBeSetMoving->parentItem()->scenePos()));
+        movementHelperWidget->setPos(p);
+        widgetToBeSetMoving->setParentItem(movementHelperWidget);
+    }
+
+    interestingGroup = widgetToBeSetMoving->property("group").value<AbstractGroup *>();
+    movingWidget = widgetToBeSetMoving;
+
+    if (q->immutability() != Plasma::Mutable) {
+        onWidgetMoved(widgetToBeSetMoving);
+    }
+
+    widgetToBeSetMoving = 0;
 }
 
 //------------------------GroupingContainment------------------------------
@@ -598,13 +628,10 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 d->interestingWidget = widget;
             break;
 
-            case QEvent::GraphicsSceneMouseMove:
-                if (widget == d->interestingWidget) {
+            case QEvent::GraphicsSceneMove: {
+                if (!d->movingWidget && widget == d->interestingWidget) {
                     setMovingWidget(widget);
                 }
-            break;
-
-            case QEvent::GraphicsSceneMove: {
                 if (widget == d->movingWidget) {
                     AbstractGroup *parentGroup = d->groupAt(mapFromItem(widget, widget->contentsRect().center()), widget);
 
@@ -651,7 +678,9 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
             break;
 
             case QEvent::GraphicsSceneMouseRelease:
-                d->onWidgetMoved(widget);
+                if (d->movingWidget) {
+                    d->onWidgetMoved(widget);
+                }
 
             break;
 
@@ -769,27 +798,12 @@ void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
         d->onWidgetMoved(d->movingWidget);
     }
 
-    raise(widget);
-
-    //need to do do this because when you have a grid group in a grid group in a grid group,
-    //when you move the upper one outside of the second one boundaries appears the
-    //first one' spacer that causes the second one to move, so the third one
-    //will move accordingly, causing the spacer to flicker. setting the third one' parent
-    //to this avoids this
-    if (corona()->immutability() == Plasma::Mutable) {
-        QPointF p(mapFromScene(widget->scenePos()));
-        widget->setParentItem(this);
-        widget->setPos(p);
-    }
-
     emit widgetStartsMoving(widget);
 
-    d->interestingGroup = widget->property("group").value<AbstractGroup *>();
-    d->movingWidget = widget;
-
-    if (immutability() != Plasma::Mutable) {
-        d->onWidgetMoved(widget);
-    }
+    d->widgetToBeSetMoving = widget;
+    //delay so to allow the widget to receive and react to the events caused by the changes
+    //done by the groups connected with widgetStartsMoving()
+    QTimer::singleShot(0, this, SLOT(prepareWidgetToMove()));
 }
 
 void GroupingContainment::raise(QGraphicsWidget *widget)
