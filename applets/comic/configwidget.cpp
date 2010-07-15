@@ -108,10 +108,8 @@ void ConfigWidget::getNewStuff()
 void ConfigWidget::newStuffFinished()
 {
     if ( mNewStuffDialog->changedEntries().count() ) {
+        mCurrentIndex = QModelIndex();
         mModel->setComics( mEngine->query( "providers" ), mModel->selected() );
-
-        int index = ( mProxyModel->rowCount() ? 0 : -1 );
-        mCurrentIndex = mProxyModel->index( index, 0 );
 
         comicUi.listView_comic->resizeColumnToContents( 0 );
 
