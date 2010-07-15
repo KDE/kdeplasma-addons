@@ -512,9 +512,7 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     }
 
     group->installEventFilter(this);
-    if (containmentType() == Plasma::Containment::DesktopContainment) {
-        group->installSceneEventFilter(this);
-    }
+    group->installSceneEventFilter(this);
 
     emit groupAdded(group, pos);
 }
