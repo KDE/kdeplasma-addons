@@ -626,8 +626,9 @@ bool GridGroup::eventFilter(QObject *, QEvent *event)
 int GridGroup::isOnAColumnBorder(qreal x) const
 {
     qreal pos = 0;
-    int gap = 20;
+    int gap;
     for (int i = 0; i < m_columnWidths.size(); ++i) {
+        gap = m_columnWidths.at(i) * contentsRect().width() / 3.;
         if (pos > x - gap && pos < x + gap) {
             return i;
         }
@@ -643,8 +644,9 @@ int GridGroup::isOnAColumnBorder(qreal x) const
 int GridGroup::isOnARowBorder(qreal y) const
 {
     qreal pos = 0;
-    int gap = 20;
+    int gap;
     for (int i = 0; i < m_rowHeights.size(); ++i) {
+        gap = m_rowHeights.at(i) * contentsRect().height() / 3.;
         if (pos > y - gap && pos < y + gap) {
             return i;
         }
