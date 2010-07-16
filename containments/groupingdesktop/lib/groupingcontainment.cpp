@@ -338,6 +338,12 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 void GroupingContainmentPrivate::onImmutabilityChanged(Plasma::ImmutabilityType immutability)
 {
     newGroupAction->setVisible(immutability == Plasma::Mutable);
+
+    if (immutability != Plasma::Mutable) {
+        foreach (Handle *handle, handles) {
+            handleDisappeared(handle);
+        }
+    }
 }
 
 void GroupingContainmentPrivate::restoreGroups()
