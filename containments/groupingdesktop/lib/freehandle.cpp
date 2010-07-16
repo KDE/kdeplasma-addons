@@ -1,5 +1,6 @@
 /*
  *   Copyright 2007 by Kevin Ottens <ervin@kde.org>
+ *   Copyright 2009-2010 by Giulio Camuffo <giuliocamuffo@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
