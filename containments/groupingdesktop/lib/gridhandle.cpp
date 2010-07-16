@@ -53,7 +53,12 @@ GridHandle::~GridHandle()
 
 QRectF GridHandle::boundingRect() const
 {
-    return widget()->boundingRect();
+    QRectF rect(widget()->boundingRect());
+    if (rect.width() >= rect.height()) {
+        return QRectF(0, 0, 20, rect.height());
+    } else {
+        return QRectF(0, 0, rect.width(), 20);
+    }
 }
 
 void GridHandle::setHoverPos(const QPointF &hoverPos)
@@ -80,7 +85,7 @@ void GridHandle::setHoverPos(const QPointF &hoverPos)
         }
     }
 
-    if (!boundingRect().contains(hoverPos) || !upper) {
+    if (!widget()->contentsRect().contains(hoverPos) || !upper) {
         emit disappearDone(this);
     }
 }
@@ -126,7 +131,7 @@ void GridHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 {
     Q_UNUSED(option)
 
-    QRectF rect = widget()->contentsRect();
+    QRectF rect = boundingRect();
 
     painter->setRenderHint(QPainter::Antialiasing);
     QPainterPath p = Plasma::PaintUtils::roundedRectangle(rect.adjusted(1, 1, -2, -2), 4);
