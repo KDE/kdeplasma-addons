@@ -236,8 +236,18 @@ bool GridHandle::enoughRoom()
     const QSize iconSize(KIconLoader::SizeSmall, KIconLoader::SizeSmall);
     bool horizontal = (boundingRect().x() < 0);
 
-    return ((horizontal && boundingRect().height() > 4 * iconSize.height()) ||
-           (!horizontal && boundingRect().width() > 4 * iconSize.width()));
+    int buttonsCount = 2;
+
+    if ((applet() && applet()->hasConfigurationInterface()) || (group() && group()->hasConfigurationInterface())) {
+        ++buttonsCount;
+    }
+
+    if (applet() && applet()->hasValidAssociatedApplication()) {
+        ++buttonsCount;
+    }
+
+    return ((horizontal && boundingRect().height() > buttonsCount * iconSize.height()) ||
+           (!horizontal && boundingRect().width() > buttonsCount * iconSize.width()));
 }
 
 void GridHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
