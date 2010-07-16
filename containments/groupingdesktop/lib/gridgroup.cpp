@@ -97,6 +97,7 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_spacer->parent = this;
     m_spacer->setZValue(1000);
     m_spacer->hide();
+    m_spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     connect(this, SIGNAL(childrenRestored()), this, SLOT(onChildrenRestored()));
     connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
@@ -675,7 +676,20 @@ void GridGroup::adjustCells()
                 widget->setPos(QPointF(m_columnX.value(j) * contentsRect().width() + spacing, y) +
                                rect.topLeft());
                 widget->setMaximumSize(width, height);
-                widget->resize(width, height);
+                QSizePolicy p = widget->sizePolicy();
+                QSizeF size;
+                if (contentsRect().width() >= contentsRect().height()) {
+                    size = QSizeF(height, height);
+                } else {
+                    size = QSizeF(width, width);
+                }
+                if (QSizePolicy::ExpandFlag & p.verticalPolicy()) {
+                    size.setHeight(height);
+                }
+                if (QSizePolicy::ExpandFlag & p.horizontalPolicy()) {
+                    size.setWidth(width);
+                }
+                widget->resize(size);
             }
         }
     }

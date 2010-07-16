@@ -185,6 +185,7 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setAcceptHoverEvents(true);
     setContentsMargins(10, 10, 10, 10);
     setBackgroundHints(StandardBackground);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     connect(this, SIGNAL(initCompleted()), this, SLOT(onInitCompleted()));
 }
