@@ -37,6 +37,7 @@ GridHandle::GridHandle(GroupingContainment *containment, Plasma::Applet *applet)
             m_moving(false)
 {
     setZValue(-1000);
+    m_widgetPos = applet->pos();
 }
 
 GridHandle::GridHandle(GroupingContainment *containment, AbstractGroup *group)
@@ -44,6 +45,7 @@ GridHandle::GridHandle(GroupingContainment *containment, AbstractGroup *group)
             m_moving(false)
 {
     setZValue(-1000);
+    m_widgetPos = group->pos();
 }
 
 GridHandle::~GridHandle()
@@ -51,42 +53,29 @@ GridHandle::~GridHandle()
 
 }
 
+void GridHandle::detachWidget()
+{
+    widget()->setPos(m_widgetPos);
+
+    Handle::detachWidget();
+}
+
 QRectF GridHandle::boundingRect() const
 {
     QRectF rect(widget()->boundingRect());
     if (rect.width() >= rect.height()) {
-        return QRectF(0, 0, 20, rect.height());
+        return QRectF(-20, 0, 20, rect.height());
     } else {
-        return QRectF(0, 0, rect.width(), 20);
+        return QRectF(0, -20, rect.width(), 20);
     }
 }
 
 void GridHandle::setHoverPos(const QPointF &hoverPos)
 {
-    QList<QGraphicsItem *> items = scene()->items(mapToScene(hoverPos),
-                                                  Qt::IntersectsItemShape,
-                                                  Qt::DescendingOrder);
-
-    bool upper = true;
-    for (int i = 0; i < items.size(); ++i) {
-        AbstractGroup *g = qgraphicsitem_cast<AbstractGroup *>(items.at(i));
-        if (g) {
-            if (g != group()) {
-                upper = false;
-            }
-            break;
-        }
-        Plasma::Applet *a = qgraphicsitem_cast<Plasma::Applet *>(items.at(i));
-        if (a) {
-            if (a != applet()) {
-                upper = false;
-            }
-            break;
-        }
-    }
-
-    if (!widget()->contentsRect().contains(hoverPos) || !upper) {
+    if (!widget()->boundingRect().contains(hoverPos)) {
         emit disappearDone(this);
+    } else {
+        widget()->setPos(m_widgetPos - boundingRect().topLeft());
     }
 }
 
@@ -118,6 +107,8 @@ void GridHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     m_moving = false;
     emit widgetMoved(widget());
+
+    m_widgetPos = widget()->pos();
 }
 
 void GridHandle::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)

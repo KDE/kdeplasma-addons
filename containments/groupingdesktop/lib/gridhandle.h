@@ -30,6 +30,7 @@ class GridHandle : public Handle
         GridHandle(GroupingContainment *containment, AbstractGroup *group);
         virtual ~GridHandle();
 
+        void detachWidget();
         QRectF boundingRect() const;
         void setHoverPos(const QPointF &hoverPos);
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
@@ -47,6 +48,7 @@ class GridHandle : public Handle
         bool m_moving;
         QPointF m_startPos;
         int m_savedZValue;
+        QPointF m_widgetPos;
 };
 
 #endif
