@@ -51,6 +51,13 @@ template <typename T> T clampValue(T value, int decimals)
         const T mul = std::pow(static_cast<T>(10), decimals); return int(value * mul) / mul;
 }
 
+bool isValidIconName(const QString &icon)
+{
+    return !icon.isEmpty() &&
+           !KIconLoader::global()->loadIcon(icon, KIconLoader::Desktop, 0,
+                                            KIconLoader::DefaultState, QStringList(), 0, true).isNull();
+}
+
 class BackgroundWidget : public QGraphicsWidget
 {
 public:
@@ -64,10 +71,15 @@ public:
         return m_currentWeather;
     }
 
-    void setCurrentWeather(const KIcon &currentWeather)
+    void setCurrentWeather(const QString &currentWeather = QString())
     {
-        kDebug() << "!!!!!!!!!!!!!!!!!!!!!!!";
-        m_currentWeather = currentWeather;
+        kDebug() << "!!!!!!!!!!!!!!!!!!!!!!!" << currentWeather;
+        if (isValidIconName(currentWeather)) {
+            m_currentWeather = KIcon(currentWeather);
+        } else {
+            m_currentWeather = KIcon();
+        }
+
         update();
     }
 
@@ -210,7 +222,7 @@ void WeatherApplet::toolTipAboutToShow()
 
 void WeatherApplet::clearCurrentWeatherIcon()
 {
-    m_graphicsWidget->setCurrentWeather(KIcon());
+    m_graphicsWidget->setCurrentWeather(QString());
 }
 
 void WeatherApplet::resizeView()
@@ -382,17 +394,22 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
         if (fiveDayTokens.count() > 2) {
             // if there is no specific icon, show the current weather
-            m_graphicsWidget->setCurrentWeather(KIcon(fiveDayTokens[1]));
+            m_graphicsWidget->setCurrentWeather(fiveDayTokens[1]);
             setPopupIcon(KIcon(fiveDayTokens[1]));
         } else {
             // if we are inside here, we could not find any proper icon
             // then just hide it
-            m_graphicsWidget->setCurrentWeather(KIcon());
+            m_graphicsWidget->setCurrentWeather();
             setPopupIcon(KIcon("weather-none-available"));
         }
     } else {
-        m_graphicsWidget->setCurrentWeather(KIcon(data["Condition Icon"].toString()));
-        setPopupIcon(data["Condition Icon"].toString());
+        m_graphicsWidget->setCurrentWeather(data["Condition Icon"].toString());
+        const QString condition(data["Condition Icon"].toString());
+        if (isValidIconName(condition)) {
+            setPopupIcon(condition);
+        } else {
+            setPopupIcon("weather-not-available");
+        }
     }
 
     m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -453,7 +470,11 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             // If we see N/U (Not Used) we skip the item
             if (fiveDayTokens[1] != "N/U") {
                 Plasma::IconWidget *fiveDayIcon = new Plasma::IconWidget(this);
-                fiveDayIcon->setIcon(KIcon(fiveDayTokens[1]));
+                if (isValidIconName(fiveDayTokens[1])) {
+                    fiveDayIcon->setIcon(KIcon(fiveDayTokens[1]));
+                } else {
+                    fiveDayIcon->setIcon(KIcon("weather-not-available"));
+                }
                 fiveDayIcon->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
                 fiveDayIcon->setDrawBackground(false);
                 fiveDayIcon->hide();
