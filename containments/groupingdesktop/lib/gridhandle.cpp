@@ -138,9 +138,11 @@ void GridHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     switch (button) {
         case MoveButton:
-            m_moving = false;
-            emit widgetMoved(widget());
-            m_widgetPos = widget()->pos();
+            if (m_moving) {
+                m_moving = false;
+                emit widgetMoved(widget());
+                m_widgetPos = widget()->pos();
+            }
 
         break;
 
