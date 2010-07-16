@@ -30,6 +30,7 @@ class GridHandle : public Handle
         GridHandle(GroupingContainment *containment, AbstractGroup *group);
         virtual ~GridHandle();
 
+        void init();
         void detachWidget();
         QRectF boundingRect() const;
         void setHoverPos(const QPointF &hoverPos);
@@ -45,10 +46,15 @@ class GridHandle : public Handle
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
     private:
+        bool enoughRoom();
+        Handle::ButtonType mapToButton(const QPointF &pos);
+
         bool m_moving;
         QPointF m_startPos;
         int m_savedZValue;
         QPointF m_widgetPos;
+        Plasma::Svg *m_configureIcons;
+        Handle::ButtonType m_lastButton;
 };
 
 #endif
