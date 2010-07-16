@@ -108,8 +108,6 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             this, SLOT(onAppletRemoved(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
             this, SLOT(onSubGroupRemoved(AbstractGroup*, AbstractGroup*)));
-    connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
-            this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
 }
 
 GridGroup::~GridGroup()
@@ -188,65 +186,51 @@ void GridGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
 
 void GridGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
 {
+    setChildBorders(applet, true);
     applet->installEventFilter(this);
 }
 
 void GridGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
 {
+    setChildBorders(subGroup, true);
     subGroup->installEventFilter(this);
 }
 
-void GridGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
+void GridGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *)
 {
-    Q_UNUSED(group)
-
     removeItem(applet);
+    setChildBorders(applet, false);
     applet->removeEventFilter(this);
 }
 
-void GridGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group)
+void GridGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
 {
-    Q_UNUSED(group)
-
     removeItem(subGroup);
+    setChildBorders(subGroup, false);
     subGroup->removeEventFilter(this);
 }
 
-void GridGroup::onImmutabilityChanged(Plasma::ImmutabilityType)
+void GridGroup::setChildBorders(Plasma::Applet *a, bool added)
 {
-    for (int i = 0; i < m_children.size(); ++i) {
-        for (int j = 0; j < m_children.at(0).size(); ++j) {
-            setChildBorders(m_children.at(i).at(j));
+    if (added) {
+        m_savedAppletsHints.insert(a, a->backgroundHints());
+        a->setBackgroundHints(Plasma::Applet::NoBackground);
+    } else if (a->backgroundHints() != Plasma::Applet::NoBackground) {
+        if (m_savedAppletsHints.contains(a)) {
+            a->setBackgroundHints(m_savedAppletsHints.value(a));
         }
     }
-
-    adjustCells();
 }
 
-void GridGroup::setChildBorders(QGraphicsWidget *widget)
+void GridGroup::setChildBorders(AbstractGroup *g, bool added)
 {
-    Plasma::Applet *a = qobject_cast<Plasma::Applet *>(widget);
-    if (a) {
-        if (immutability() == Plasma::Mutable) {
-            if (m_savedAppletsHints.contains(a)) {
-                a->setBackgroundHints(m_savedAppletsHints.value(a));
-            }
-        } else if (a->backgroundHints() != Plasma::Applet::NoBackground) {
-                m_savedAppletsHints.insert(a, a->backgroundHints());
-                a->setBackgroundHints(Plasma::Applet::NoBackground);
-        }
-
-        return;
-    }
-
-    AbstractGroup *g = static_cast<AbstractGroup *>(widget);
-    if (immutability() == Plasma::Mutable) {
+    if (added) {
+        m_savedGroupsHints.insert(g, g->backgroundHints());
+        g->setBackgroundHints(AbstractGroup::PlainBackground);
+    } else if (g->backgroundHints() != AbstractGroup::PlainBackground) {
         if (m_savedGroupsHints.contains(g)) {
             g->setBackgroundHints(m_savedGroupsHints.value(g));
         }
-    } else if (g->backgroundHints() != AbstractGroup::PlainBackground) {
-            m_savedGroupsHints.insert(g, g->backgroundHints());
-            g->setBackgroundHints(AbstractGroup::PlainBackground);
     }
 }
 

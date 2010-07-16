@@ -63,7 +63,6 @@ class GridGroup : public AbstractGroup
         void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
         void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
         void onWidgetStartsMoving(QGraphicsWidget *widget);
-        void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
         void onChildrenRestored();
         void adjustCells();
 
@@ -71,7 +70,8 @@ class GridGroup : public AbstractGroup
         void addItem(QGraphicsWidget *widget, int row, int column);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
         Position itemPosition(QGraphicsWidget *item) const;
-        void setChildBorders(QGraphicsWidget *widget);
+        void setChildBorders(Plasma::Applet *applet, bool added);
+        void setChildBorders(AbstractGroup *group, bool added);
         int isOnAColumnBorder(qreal x) const;
         int isOnARowBorder(qreal y) const;
         void saveCellsInfo();
