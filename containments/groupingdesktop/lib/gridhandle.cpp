@@ -106,6 +106,8 @@ void GridHandle::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
         event->accept();
         update();
+    } else {
+        event->ignore();
     }
 }
 
@@ -119,6 +121,9 @@ void GridHandle::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
             QPointF p(event->pos() - m_startPos);
             widget()->moveBy(p.x(), p.y());
         }
+        event->accept();
+    } else {
+        event->ignore();
     }
 }
 
@@ -126,12 +131,14 @@ void GridHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() != Qt::LeftButton) {
         m_lastButton = NoButton;
+        event->ignore();
         return;
     }
 
     Handle::ButtonType button = mapToButton(event->pos());
     if (button != m_lastButton) {
         m_lastButton = NoButton;
+        event->ignore();
         update();
         return;
     }
