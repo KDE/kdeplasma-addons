@@ -40,11 +40,6 @@ struct GroupInfo
         return gi.name == name;
     }
 
-//     bool operator<(GroupInfo const &gi)
-//     {
-//         return gi.name < name;
-//     }
-
     QString name;
     QString prettyName;
 };

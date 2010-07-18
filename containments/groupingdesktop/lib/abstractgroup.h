@@ -557,7 +557,3 @@ Q_DECLARE_METATYPE(AbstractGroup *)
     static const bool g_##name = AbstractGroup::registerGroup<class>(#name);
 
 #endif // ABSTRACTGROUP_H
-
-
-
-

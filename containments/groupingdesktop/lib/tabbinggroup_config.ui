@@ -37,7 +37,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QLineEdit" name="tileEdit"/>
+          <widget class="KLineEdit" name="tileEdit"/>
          </item>
          <item>
           <widget class="QPushButton" name="modButton">
@@ -81,6 +81,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
  <slots>

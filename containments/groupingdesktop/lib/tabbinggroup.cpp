@@ -315,7 +315,7 @@ void TabbingGroup::configModTab()
 
     QString title = m_ui.tileEdit->text();
 
-    if (title == QString()) {
+    if (title.isEmpty()) {
         return;
     }
 
