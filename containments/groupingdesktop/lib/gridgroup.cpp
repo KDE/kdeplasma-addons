@@ -263,25 +263,40 @@ void GridGroup::showDropZone(const QPointF &pos)
         return;
     }
 
-    const int rows = m_children.size();
-    const int columns = m_children.at(0).size();
-
-    const qreal rowHeight = contentsRect().height() / rows;
-    const qreal columnWidth = contentsRect().width() / columns;
-
     const qreal x = pos.x();
     const qreal y = pos.y();
 
-    const int i = x / columnWidth;
-    const int j = y / rowHeight;
+    int column = 0;
+    qreal p = 0;
+    for (int i = 0; i < m_columnWidths.size(); ++i) {
+        qreal next = m_columnWidths.at(i) * contentsRect().width();
+        if (x >= p && x < p + next) {
+            column = i;
+            break;
+        }
+
+        p += next;
+    }
+
+    int row = 0;
+    p = 0;
+    for (int i = 0; i < m_rowHeights.size(); ++i) {
+        qreal next = m_rowHeights.at(i) * contentsRect().height();
+        if (y >= p && y < p + next) {
+            row = i;
+            break;
+        }
+
+        p += next;
+    }
 
     int n;
     if ((n = isOnAColumnBorder(x)) != -1) {
         insertColumnAt(n);
-        addItem(m_spacer, j, n);
+        addItem(m_spacer, row, n);
     } else if ((n = isOnARowBorder(y)) != -1) {
         insertRowAt(n);
-        addItem(m_spacer, n, i);
+        addItem(m_spacer, n, column);
     }
 }
 
