@@ -70,8 +70,8 @@ class GridGroup : public AbstractGroup
         Position itemPosition(QGraphicsWidget *item) const;
         void setChildBorders(Plasma::Applet *applet, bool added);
         void setChildBorders(AbstractGroup *group, bool added);
-        int isOnAColumnBorder(qreal x) const;
-        int isOnARowBorder(qreal y) const;
+        int isOnAColumnBorder(qreal x, int space = 0) const;
+        int isOnARowBorder(qreal y, int space = 0) const;
         void saveCellsInfo();
 
         void insertColumnAt(int column);

@@ -513,8 +513,8 @@ void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
         return;
     }
 
-    int col = isOnAColumnBorder(event->pos().x());
-    int row = isOnARowBorder(event->pos().y());
+    int col = isOnAColumnBorder(event->pos().x(), 5);
+    int row = isOnARowBorder(event->pos().y(), 5);
     if (col > 0 && col < m_columnWidths.size()) {
         m_cursorOverriden = true;
         QApplication::setOverrideCursor(QCursor(Qt::SplitHCursor));
@@ -543,8 +543,8 @@ void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 void GridGroup::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        int col = isOnAColumnBorder(event->pos().x());
-        int row = isOnARowBorder(event->pos().y());
+        int col = isOnAColumnBorder(event->pos().x(), 5);
+        int row = isOnARowBorder(event->pos().y(), 5);
         if (col > 0 && col < m_columnWidths.size()) {
             m_movingColumn = col;
             return;
@@ -629,12 +629,16 @@ bool GridGroup::eventFilter(QObject *, QEvent *event)
     return false;
 }
 
-int GridGroup::isOnAColumnBorder(qreal x) const
+int GridGroup::isOnAColumnBorder(qreal x, int space) const
 {
     qreal pos = 0;
     int gap = 0;
     for (int i = 0; i < m_columnWidths.size(); ++i) {
-        gap = m_columnWidths.at(i) * contentsRect().width() / 3.;
+        if (space == 0) {
+            gap = m_columnWidths.at(i) * contentsRect().width() / 3.;
+        } else {
+            gap = space;
+        }
         if (pos > x - gap && pos < x + gap) {
             return i;
         }
@@ -647,12 +651,16 @@ int GridGroup::isOnAColumnBorder(qreal x) const
     return -1;
 }
 
-int GridGroup::isOnARowBorder(qreal y) const
+int GridGroup::isOnARowBorder(qreal y, int space) const
 {
     qreal pos = 0;
     int gap = 0;
     for (int i = 0; i < m_rowHeights.size(); ++i) {
-        gap = m_rowHeights.at(i) * contentsRect().height() / 3.;
+        if (space == 0) {
+            gap = m_rowHeights.at(i) * contentsRect().height() / 3.;
+        } else {
+            gap = space;
+        }
         if (pos > y - gap && pos < y + gap) {
             return i;
         }
