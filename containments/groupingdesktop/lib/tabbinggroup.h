@@ -48,6 +48,8 @@ class TabbingGroup : public AbstractGroup
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         void createConfigurationInterface(KConfigDialog *parent);
 
+        static QString prettyName();
+
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         bool eventFilter(QObject *obj, QEvent *event);

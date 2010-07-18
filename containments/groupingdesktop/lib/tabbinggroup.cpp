@@ -31,6 +31,8 @@
 #include <Plasma/TabBar>
 #include <Plasma/PushButton>
 
+REGISTER_GROUP(tabbing, TabbingGroup)
+
 TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             : AbstractGroup(parent, wFlags),
               m_tabBar(new Plasma::TabBar(this)),
@@ -427,6 +429,11 @@ void TabbingGroup::changeTab()
         m_tabBar->setCurrentIndex(m_changingTab);
         m_changingTab = -1;
     }
+}
+
+QString TabbingGroup::prettyName()
+{
+    return i18n("Tabbing Group");
 }
 
 #include "tabbinggroup.moc"

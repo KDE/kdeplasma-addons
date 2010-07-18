@@ -36,6 +36,8 @@ class StackingGroup : public AbstractGroup
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         void showDropZone(const QPointF &pos);
 
+        static QString prettyName();
+
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         void resizeEvent(QGraphicsSceneResizeEvent *event);

@@ -58,22 +58,18 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              movementHelperWidget(new QGraphicsWidget(q)),
                              widgetToBeSetMoving(0)
 {
+    QStringList groups = AbstractGroup::availableGroups();
+
     newGroupAction = new QAction(i18n("Add a new group"), q);
     newGroupAction->setIcon(KIcon("list-add"));
     newGroupMenu = new KMenu(i18n("Add a new group"), 0);
     newGroupAction->setMenu(newGroupMenu);
-    newGridGroup = new QAction(i18n("Add a new grid group"), q);
-    newGridGroup->setData("grid");
-    newFloatingGroup = new QAction(i18n("Add a new floating group"), q);
-    newFloatingGroup->setData("floating");
-    newStackingGroup = new QAction(i18n("Add a new stacking group"), q);
-    newStackingGroup->setData("stacking");
-    newTabbingGroup = new QAction(i18n("Add a new tabbing group"), q);
-    newTabbingGroup->setData("tabbing");
-    newGroupMenu->addAction(newGridGroup);
-    newGroupMenu->addAction(newFloatingGroup);
-    newGroupMenu->addAction(newStackingGroup);
-    newGroupMenu->addAction(newTabbingGroup);
+    foreach (const QString &group, groups) {
+        QAction *action = new QAction(i18n("Add a new ") + AbstractGroup::prettyName(group), q);
+        action->setData(group);
+
+        newGroupMenu->addAction(action);
+    }
 
     deleteGroupAction = new QAction(i18n("Remove this group"), q);
     deleteGroupAction->setIcon(KIcon("edit-delete"));
@@ -96,16 +92,7 @@ GroupingContainmentPrivate::~GroupingContainmentPrivate()
 
 AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, const QPointF &pos, unsigned int id)
 {
-    AbstractGroup *group = 0;
-    if (plugin == "grid") {
-        group = new GridGroup(q);
-    } else if (plugin == "floating") {
-        group = new FloatingGroup(q);
-    } else if (plugin == "stacking") {
-        group = new StackingGroup(q);
-    } else if (plugin == "tabbing") {
-        group = new TabbingGroup(q);
-    }
+    AbstractGroup *group = AbstractGroup::load(plugin, q);
 
     if (!group) {
         return 0;

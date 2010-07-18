@@ -65,10 +65,7 @@ class GroupingContainmentPrivate
         QMap<QGraphicsWidget *, Handle *> handles;
         QAction *newGroupAction;
         KMenu *newGroupMenu;
-        QAction *newGridGroup;
-        QAction *newFloatingGroup;
-        QAction *newStackingGroup;
-        QAction *newTabbingGroup;
+        QList<QAction *> newGroupActions;
         QAction *separator;
         QAction *deleteGroupAction;
         QAction *configureGroupAction;

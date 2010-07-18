@@ -33,6 +33,8 @@ class FloatingGroup : public AbstractGroup
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
 
+        static QString prettyName();
+
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 

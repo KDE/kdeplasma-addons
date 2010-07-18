@@ -11,12 +11,13 @@ include_directories(${CMAKE_SOURCE_DIR}
                     ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kephal)
 
 set(groupingcontainment_SRCS
+        lib/abstractgroup.cpp
+        lib/groupfactory.cpp
         lib/tabbinggroup.cpp
         lib/groupingcontainment.cpp
         lib/handle.cpp
         lib/freehandle.cpp
         lib/gridhandle.cpp
-        lib/abstractgroup.cpp
         lib/floatinggroup.cpp
         lib/stackinggroup.cpp
         lib/gridgroup.cpp)

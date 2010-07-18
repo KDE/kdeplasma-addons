@@ -46,6 +46,8 @@ class GridGroup : public AbstractGroup
         void showDropZone(const QPointF &pos);
         Handle *createHandleForChild(QGraphicsWidget *child);
 
+        static QString prettyName();
+
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         void resizeEvent(QGraphicsSceneResizeEvent *event);

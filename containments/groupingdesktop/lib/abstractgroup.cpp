@@ -658,4 +658,31 @@ void AbstractGroup::updateConstraints(Plasma::Constraints constraints)
     constraintsEvent(constraints);
 }
 
+AbstractGroup *AbstractGroup::load(const QString &name, QGraphicsItem *parent)
+{
+    return GroupFactory::load(name, parent);
+}
+
+QStringList AbstractGroup::availableGroups()
+{
+    QStringList groups;
+
+    foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
+        groups << gi.name;
+    }
+
+    return groups;
+}
+
+QString AbstractGroup::prettyName(const QString &name)
+{
+    foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
+        if (gi.name == name) {
+            return gi.prettyName;
+        }
+    }
+
+    return QString();
+}
+
 #include "abstractgroup.moc"

@@ -23,6 +23,8 @@
 #include <QtGui/QGraphicsWidget>
 #include <Plasma/Applet>
 
+#include "groupfactory_p.h"
+
 class KConfigGroup;
 
 class GroupingContainment;
@@ -342,6 +344,35 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         void updateConstraints(Plasma::Constraints constraints = Plasma::AllConstraints);
 
+        /**
+         * Used to register a Group to the GroupFactory. You shouldn't
+         * use this, but the macro REGISTER_GROUP(identifier, class name) instead.
+         **/
+        template<class T> static bool registerGroup(const QString &name)
+        {
+            return GroupFactory::registerGroup<T>(name);
+        }
+
+        /**
+         * Creates a new Group.
+         *
+         * @param name the identifier for the type of Group to be created
+         * @param parent the parent of the new Group
+         **/
+        static AbstractGroup *load(const QString &name, QGraphicsItem *parent = 0);
+
+        /**
+         * Returns a list of all identifiers of the available Groups.
+         **/
+        static QStringList availableGroups();
+
+        /**
+         * Returns a user friendly name for a Group type.
+         *
+         * @param name the identifier of the Group type
+         **/
+        static QString prettyName(const QString &name);
+
     public slots:
         /**
          * Sets the immutability type for this Group (not immutable,
@@ -517,8 +548,16 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         friend class Handle;
         friend class GroupingContainment;
         friend class GroupingContainmentPrivate;
+
 };
 
 Q_DECLARE_METATYPE(AbstractGroup *)
 
+#define REGISTER_GROUP(name, class) \
+    static const bool g_##name = AbstractGroup::registerGroup<class>(#name);
+
 #endif // ABSTRACTGROUP_H
+
+
+
+

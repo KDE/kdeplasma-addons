@@ -27,6 +27,8 @@
 
 #include "groupingcontainment.h"
 
+REGISTER_GROUP(stacking, StackingGroup)
+
 class Spacer : public QGraphicsWidget
 {
     public:
@@ -239,6 +241,11 @@ void StackingGroup::onAppletActivated()
 
         drawStack();
     }
+}
+
+QString StackingGroup::prettyName()
+{
+    return i18n("Stacking Group");
 }
 
 #include "stackinggroup.moc"

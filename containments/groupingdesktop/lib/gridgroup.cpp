@@ -30,6 +30,8 @@
 #include "groupingcontainment.h"
 #include "gridhandle.h"
 
+REGISTER_GROUP(grid, GridGroup)
+
 class Position {
     public:
         Position(int r = -1, int c = -1)
@@ -691,6 +693,11 @@ Handle *GridGroup::createHandleForChild(QGraphicsWidget *child)
     }
 
     return new GridHandle(containment(), static_cast<AbstractGroup *>(child));
+}
+
+QString GridGroup::prettyName()
+{
+    return i18n("Grid Group");
 }
 
 #include "gridgroup.moc"

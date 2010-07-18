@@ -19,6 +19,8 @@
 
 #include "floatinggroup.h"
 
+REGISTER_GROUP(floating, FloatingGroup)
+
 FloatingGroup::FloatingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : AbstractGroup(parent, wFlags)
 {
@@ -51,6 +53,11 @@ void FloatingGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup grou
 void FloatingGroup::layoutChild(QGraphicsWidget *, const QPointF &)
 {
 
+}
+
+QString FloatingGroup::prettyName()
+{
+    return i18n("Floating Group");
 }
 
 #include "floatinggroup.moc"
