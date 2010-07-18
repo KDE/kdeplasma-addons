@@ -53,6 +53,8 @@ class GridHandle : public Handle
         QPointF m_startPos;
         int m_savedZValue;
         QPointF m_widgetPos;
+        QSizeF m_widgetSize;
+        QSizeF m_maxWidgetSize;
         Plasma::Svg *m_configureIcons;
         Handle::ButtonType m_lastButton;
 };

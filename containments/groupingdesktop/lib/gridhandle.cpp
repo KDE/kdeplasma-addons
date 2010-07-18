@@ -36,9 +36,6 @@ GridHandle::GridHandle(GroupingContainment *containment, Plasma::Applet *applet)
           : Handle(containment, applet),
             m_moving(false)
 {
-    setZValue(-1000);
-    m_widgetPos = applet->pos();
-
     init();
 }
 
@@ -46,9 +43,6 @@ GridHandle::GridHandle(GroupingContainment *containment, AbstractGroup *group)
           : Handle(containment, group),
             m_moving(false)
 {
-    setZValue(-1000);
-    m_widgetPos = group->pos();
-
     init();
 }
 
@@ -59,6 +53,11 @@ GridHandle::~GridHandle()
 
 void GridHandle::init()
 {
+    QGraphicsWidget *w = widget();
+    m_widgetPos = w->pos();
+    m_widgetSize = w->size();
+    m_maxWidgetSize = w->maximumSize();
+
     m_lastButton = Handle::NoButton;
 
     m_configureIcons = new Plasma::Svg(this);
@@ -68,7 +67,10 @@ void GridHandle::init()
 
 void GridHandle::detachWidget()
 {
-    widget()->setPos(m_widgetPos);
+    QGraphicsWidget *w = widget();
+    w->setPos(m_widgetPos);
+    w->setMaximumSize(m_maxWidgetSize);
+    w->resize(m_widgetSize);
 
     Handle::detachWidget();
 }
@@ -89,6 +91,11 @@ void GridHandle::setHoverPos(const QPointF &hoverPos)
         emit disappearDone(this);
     } else {
         widget()->setPos(m_widgetPos - boundingRect().topLeft());
+        if (boundingRect().x() < 0) { //horizontal
+            widget()->setMaximumSize(m_maxWidgetSize.width() - 20, m_maxWidgetSize.height());
+        } else {    //vertical
+            widget()->setMaximumSize(m_maxWidgetSize.width(), m_maxWidgetSize.height() - 20);
+        }
     }
 }
 
