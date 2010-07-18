@@ -77,11 +77,10 @@ void GridHandle::detachWidget()
 
 QRectF GridHandle::boundingRect() const
 {
-    QRectF rect(widget()->boundingRect());
-    if (rect.width() >= rect.height()) {
-        return QRectF(-20, 0, 20, rect.height());
+    if (m_widgetSize.width() >= m_widgetSize.height()) {
+        return QRectF(-20, 0, 20, m_widgetSize.height());
     } else {
-        return QRectF(0, -20, rect.width(), 20);
+        return QRectF(0, -20, m_widgetSize.width(), 20);
     }
 }
 
