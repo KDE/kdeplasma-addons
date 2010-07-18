@@ -25,6 +25,8 @@
 
 #include <KDebug>
 
+#include <Plasma/Plasma>
+
 class QGraphicsItem;
 class AbstractGroup;
 
@@ -42,6 +44,7 @@ struct GroupInfo
 
     QString name;
     QString prettyName;
+    QSet<Plasma::FormFactor> formFactor;
 };
 
 inline bool operator<(const GroupInfo &g1, const GroupInfo &g2)
@@ -62,6 +65,7 @@ class GroupFactory
 
             GroupInfo gi(name);
             gi.prettyName = T::prettyName();
+            gi.formFactor = T::availableOnFormFactors();
 
             m_groups->insert(gi, &createGroup<T>);
             return true;

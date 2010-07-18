@@ -436,4 +436,13 @@ QString TabbingGroup::prettyName()
     return i18n("Tabbing Group");
 }
 
+QSet<Plasma::FormFactor> TabbingGroup::availableOnFormFactors()
+{
+    QSet<Plasma::FormFactor> set;
+    set.insert(Plasma::Planar);
+    set.insert(Plasma::MediaCenter);
+
+    return set;
+}
+
 #include "tabbinggroup.moc"

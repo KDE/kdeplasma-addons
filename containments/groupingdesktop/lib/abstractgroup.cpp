@@ -663,12 +663,14 @@ AbstractGroup *AbstractGroup::load(const QString &name, QGraphicsItem *parent)
     return GroupFactory::load(name, parent);
 }
 
-QStringList AbstractGroup::availableGroups()
+QStringList AbstractGroup::availableGroups(Plasma::FormFactor formFactor)
 {
     QStringList groups;
 
     foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
-        groups << gi.name;
+        if (gi.formFactor.contains(formFactor)) {
+            groups << gi.name;
+        }
     }
 
     return groups;

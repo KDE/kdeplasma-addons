@@ -34,6 +34,7 @@ class FloatingGroup : public AbstractGroup
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
 
         static QString prettyName();
+        static QSet<Plasma::FormFactor> availableOnFormFactors();
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);

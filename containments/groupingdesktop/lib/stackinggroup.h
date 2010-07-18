@@ -37,6 +37,7 @@ class StackingGroup : public AbstractGroup
         void showDropZone(const QPointF &pos);
 
         static QString prettyName();
+        static QSet<Plasma::FormFactor> availableOnFormFactors();
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);

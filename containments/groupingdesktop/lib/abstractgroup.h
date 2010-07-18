@@ -364,7 +364,7 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
         /**
          * Returns a list of all identifiers of the available Groups.
          **/
-        static QStringList availableGroups();
+        static QStringList availableGroups(Plasma::FormFactor formFactor);
 
         /**
          * Returns a user friendly name for a Group type.

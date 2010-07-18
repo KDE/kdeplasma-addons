@@ -41,6 +41,7 @@ class GroupingContainmentPrivate
         GroupingContainmentPrivate(GroupingContainment *containment);
         ~GroupingContainmentPrivate();
 
+        void createActions();
         AbstractGroup *createGroup(const QString &plugin, const QPointF &pos, unsigned int id);
         void handleDisappeared(Handle *handle);
         void onGroupRemoved(AbstractGroup *group);
@@ -65,7 +66,6 @@ class GroupingContainmentPrivate
         QMap<QGraphicsWidget *, Handle *> handles;
         QAction *newGroupAction;
         KMenu *newGroupMenu;
-        QList<QAction *> newGroupActions;
         QAction *separator;
         QAction *deleteGroupAction;
         QAction *configureGroupAction;

@@ -700,4 +700,15 @@ QString GridGroup::prettyName()
     return i18n("Grid Group");
 }
 
+QSet<Plasma::FormFactor> GridGroup::availableOnFormFactors()
+{
+    QSet<Plasma::FormFactor> set;
+    set.insert(Plasma::Planar);
+    set.insert(Plasma::MediaCenter);
+    set.insert(Plasma::Horizontal);
+    set.insert(Plasma::Vertical);
+
+    return set;
+}
+
 #include "gridgroup.moc"

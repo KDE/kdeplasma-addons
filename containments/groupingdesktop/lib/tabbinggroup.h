@@ -49,6 +49,7 @@ class TabbingGroup : public AbstractGroup
         void createConfigurationInterface(KConfigDialog *parent);
 
         static QString prettyName();
+        static QSet<Plasma::FormFactor> availableOnFormFactors();
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);

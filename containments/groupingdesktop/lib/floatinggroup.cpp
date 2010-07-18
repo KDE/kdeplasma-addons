@@ -60,4 +60,13 @@ QString FloatingGroup::prettyName()
     return i18n("Floating Group");
 }
 
+QSet<Plasma::FormFactor> FloatingGroup::availableOnFormFactors()
+{
+    QSet<Plasma::FormFactor> set;
+    set.insert(Plasma::Planar);
+    set.insert(Plasma::MediaCenter);
+
+    return set;
+}
+
 #include "floatinggroup.moc"

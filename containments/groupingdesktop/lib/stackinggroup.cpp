@@ -248,4 +248,13 @@ QString StackingGroup::prettyName()
     return i18n("Stacking Group");
 }
 
+QSet<Plasma::FormFactor> StackingGroup::availableOnFormFactors()
+{
+    QSet<Plasma::FormFactor> set;
+    set.insert(Plasma::Planar);
+    set.insert(Plasma::MediaCenter);
+
+    return set;
+}
+
 #include "stackinggroup.moc"

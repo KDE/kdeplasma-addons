@@ -58,18 +58,10 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              movementHelperWidget(new QGraphicsWidget(q)),
                              widgetToBeSetMoving(0)
 {
-    QStringList groups = AbstractGroup::availableGroups();
-
     newGroupAction = new QAction(i18n("Add a new group"), q);
     newGroupAction->setIcon(KIcon("list-add"));
     newGroupMenu = new KMenu(i18n("Add a new group"), 0);
     newGroupAction->setMenu(newGroupMenu);
-    foreach (const QString &group, groups) {
-        QAction *action = new QAction(i18n("Add a new ") + AbstractGroup::prettyName(group), q);
-        action->setData(group);
-
-        newGroupMenu->addAction(action);
-    }
 
     deleteGroupAction = new QAction(i18n("Remove this group"), q);
     deleteGroupAction->setIcon(KIcon("edit-delete"));
@@ -82,6 +74,8 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
     separator = new QAction(q);
     separator->setSeparator(true);
 
+    createActions();
+
     q->connect(newGroupMenu, SIGNAL(triggered(QAction *)), q, SLOT(newGroupClicked(QAction *)));
     q->connect(deleteGroupAction, SIGNAL(triggered()), q, SLOT(deleteGroup()));
     q->connect(configureGroupAction, SIGNAL(triggered()), q, SLOT(configureGroup()));
@@ -89,6 +83,24 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
 
 GroupingContainmentPrivate::~GroupingContainmentPrivate()
 {}
+
+void GroupingContainmentPrivate::createActions()
+{
+    QStringList groups = AbstractGroup::availableGroups(q->formFactor());
+
+    foreach (QAction *action, newGroupMenu->actions()) {
+        newGroupMenu->removeAction(action);
+        action->deleteLater();
+    }
+    foreach (const QString &group, groups) {
+        QAction *action = new QAction(i18n("Add a new ") + AbstractGroup::prettyName(group), q);
+        action->setData(group);
+
+        newGroupMenu->addAction(action);
+    }
+
+    newGroupAction->setVisible(newGroupMenu->actions().count());
+}
 
 AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, const QPointF &pos, unsigned int id)
 {
@@ -456,6 +468,9 @@ void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
         if (!d->mainGroup) {
             kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";
         }
+    }
+    if (constraints & Plasma::FormFactorConstraint) {
+        d->createActions();
     }
 
     foreach (AbstractGroup *g, d->groups) {
