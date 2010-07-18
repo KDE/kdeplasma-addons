@@ -217,7 +217,7 @@ void GridGroup::setChildBorders(Plasma::Applet *a, bool added)
     if (added) {
         m_savedAppletsHints.insert(a, a->backgroundHints());
         a->setBackgroundHints(Plasma::Applet::NoBackground);
-    } else if (a->backgroundHints() != Plasma::Applet::NoBackground) {
+    } else {
         if (m_savedAppletsHints.contains(a)) {
             a->setBackgroundHints(m_savedAppletsHints.value(a));
         }
@@ -229,7 +229,7 @@ void GridGroup::setChildBorders(AbstractGroup *g, bool added)
     if (added) {
         m_savedGroupsHints.insert(g, g->backgroundHints());
         g->setBackgroundHints(AbstractGroup::PlainBackground);
-    } else if (g->backgroundHints() != AbstractGroup::PlainBackground) {
+    } else {
         if (m_savedGroupsHints.contains(g)) {
             g->setBackgroundHints(m_savedGroupsHints.value(g));
         }
