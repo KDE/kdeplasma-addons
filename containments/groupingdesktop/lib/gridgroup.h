@@ -22,12 +22,6 @@
 
 #include "abstractgroup.h"
 
-namespace Plasma
-{
-    class Applet;
-    class IconWidget;
-}
-
 class Position;
 class Spacer;
 class Handle;
@@ -45,6 +39,7 @@ class GridGroup : public AbstractGroup
         QString pluginName() const;
         void showDropZone(const QPointF &pos);
         Handle *createHandleForChild(QGraphicsWidget *child);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
         static QString prettyName();
         static QSet<Plasma::FormFactor> availableOnFormFactors();
@@ -97,6 +92,7 @@ class GridGroup : public AbstractGroup
         int m_movingColumn;
         int m_movingRow;
         bool m_cursorOverriden;
+        Plasma::Svg *m_separator;
 
         friend class Spacer;
 };

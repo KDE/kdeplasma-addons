@@ -36,10 +36,6 @@
 #include "abstractgroup.h"
 #include "abstractgroup_p.h"
 #include "handle.h"
-#include "gridgroup.h"
-#include "floatinggroup.h"
-#include "stackinggroup.h"
-#include "tabbinggroup.h"
 
 //----------------------GroupingContainmentPrivate-----------------------
 

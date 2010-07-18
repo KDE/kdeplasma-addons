@@ -88,7 +88,8 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             m_spacer(new Spacer(this)),
             m_movingColumn(-1),
             m_movingRow(-1),
-            m_cursorOverriden(false)
+            m_cursorOverriden(false),
+            m_separator(new Plasma::Svg())
 {
     resize(200,200);
     setMinimumSize(100,50);
@@ -100,6 +101,9 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_spacer->setZValue(1000);
     m_spacer->hide();
     m_spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    m_separator->setImagePath("widgets/line");
+    m_separator->setContainsMultipleImages(true);
 
     connect(this, SIGNAL(childrenRestored()), this, SLOT(onChildrenRestored()));
     connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
@@ -694,6 +698,8 @@ void GridGroup::adjustCells()
             }
         }
     }
+
+    update();
 }
 
 Handle *GridGroup::createHandleForChild(QGraphicsWidget *child)
@@ -708,6 +714,31 @@ Handle *GridGroup::createHandleForChild(QGraphicsWidget *child)
     }
 
     return new GridHandle(containment(), static_cast<AbstractGroup *>(child));
+}
+
+void GridGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    AbstractGroup::paint(painter, option, widget);
+
+    if (m_children.isEmpty() || immutability() != Plasma::Mutable) {
+        return;
+    }
+
+    QRectF rect(contentsRect());
+
+    QSizeF lineSize(m_separator->elementSize("vertical-line").width(), rect.height());
+    for (int i = 1; i < m_columnX.size(); ++i) {
+        const qreal x = m_columnX.at(i) * rect.width();
+        QRectF r(rect.topLeft() + QPointF(x, 0), lineSize);
+        m_separator->paint(painter, r, "vertical-line");
+    }
+
+    lineSize = QSizeF(rect.width(), m_separator->elementSize("horizontal-line").height());
+    for (int i = 1; i < m_rowY.size(); ++i) {
+        const qreal y = m_rowY.at(i) * rect.height();
+        QRectF r(rect.topLeft() + QPointF(0, y), lineSize);
+        m_separator->paint(painter, r, "horizontal-line");
+    }
 }
 
 QString GridGroup::prettyName()
