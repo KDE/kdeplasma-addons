@@ -57,6 +57,7 @@ void GridHandle::init()
     m_widgetPos = w->pos();
     m_widgetSize = w->size();
     m_maxWidgetSize = w->maximumSize();
+    w->installEventFilter(this);
 
     m_lastButton = Handle::NoButton;
 
@@ -68,11 +69,23 @@ void GridHandle::init()
 void GridHandle::detachWidget()
 {
     QGraphicsWidget *w = widget();
+    w->removeEventFilter(this);
     w->setPos(m_widgetPos);
     w->setMaximumSize(m_maxWidgetSize);
     w->resize(m_widgetSize);
 
     Handle::detachWidget();
+}
+
+bool GridHandle::eventFilter(QObject *obj, QEvent *event)
+{
+    QGraphicsWidget *w = qobject_cast<QGraphicsWidget *>(obj);
+
+    if (w == widget() && event->type() == QEvent::GraphicsSceneHoverLeave) {
+        emit disappearDone(this);
+    }
+
+    return false;
 }
 
 QRectF GridHandle::boundingRect() const

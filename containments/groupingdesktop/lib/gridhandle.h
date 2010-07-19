@@ -44,6 +44,7 @@ class GridHandle : public Handle
         void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
         void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+        bool eventFilter(QObject *obj, QEvent *event);
 
     private:
         bool enoughRoom();
