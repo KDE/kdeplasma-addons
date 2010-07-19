@@ -627,7 +627,9 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
     if (widget) {
         switch (event->type()) {
             case QEvent::GraphicsSceneMousePress:
-                d->interestingWidget = widget;
+                if (static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton) {
+                    d->interestingWidget = widget;
+                }
             break;
 
             case QEvent::GraphicsSceneMove: {
@@ -683,6 +685,7 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 if (d->movingWidget) {
                     d->onWidgetMoved(widget);
                 }
+                d->interestingWidget = 0;
 
             break;
 
