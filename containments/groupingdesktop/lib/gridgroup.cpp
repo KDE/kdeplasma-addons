@@ -62,6 +62,10 @@ class Spacer : public QGraphicsWidget
 
         GridGroup *parent;
         bool m_visible;
+        int lastRow;
+        int lastColumn;
+        bool lastRowWasAdded;
+        bool lastColumnWasAdded;
 
     protected:
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget = 0)
@@ -297,22 +301,58 @@ void GridGroup::showDropZone(const QPointF &pos)
     int n;
     if ((n = isOnAColumnBorder(x)) != -1) {
         insertColumnAt(n);
+        m_spacer->lastRow = row;
+        m_spacer->lastColumn = n;
+        m_spacer->lastRowWasAdded = false;
+        m_spacer->lastColumnWasAdded = true;
         addItem(m_spacer, row, n);
     } else if ((n = isOnARowBorder(y)) != -1) {
         insertRowAt(n);
+        m_spacer->lastRow = n;
+        m_spacer->lastColumn = column;
+        m_spacer->lastRowWasAdded = true;
+        m_spacer->lastColumnWasAdded = false;
         addItem(m_spacer, n, column);
+    } else if (addItem(m_spacer, row, column)) {
+        m_spacer->lastRow = row;
+        m_spacer->lastColumn = column;
+        m_spacer->lastRowWasAdded = false;
+        m_spacer->lastColumnWasAdded = false;
+    } else {
+        bool show = true;
+        foreach (AbstractGroup *group, subGroups()) {
+            if (group->contentsRect().translated(group->pos()).contains(pos)) {
+                show = false;
+                break;
+            }
+        }
+        if (show) {
+            row = m_spacer->lastRow;
+            column = m_spacer->lastColumn;
+            if (m_spacer->lastRowWasAdded) {
+                insertRowAt(row);
+            }
+            if (m_spacer->lastColumnWasAdded) {
+                insertColumnAt(column);
+            }
+            addItem(m_spacer, row, column);
+        }
     }
 }
 
-void GridGroup::addItem(QGraphicsWidget *widget, int row, int column)
+bool GridGroup::addItem(QGraphicsWidget *widget, int row, int column)
 {
     widget->show();
     if (m_children.size() > row && m_children.at(row).size() > column &&
         m_children.at(row).at(column) == 0) {
         m_children[row].replace(column, widget);
+
+        adjustCells();
+
+        return true;
     }
 
-    adjustCells();
+    return false;
 }
 
 void GridGroup::removeItem(QGraphicsWidget *item, bool fillLayout)

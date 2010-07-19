@@ -65,7 +65,7 @@ class GridGroup : public AbstractGroup
         void adjustCells();
 
     private:
-        void addItem(QGraphicsWidget *widget, int row, int column);
+        bool addItem(QGraphicsWidget *widget, int row, int column);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
         Position itemPosition(QGraphicsWidget *item) const;
         void setChildBorders(Plasma::Applet *applet, bool added);
