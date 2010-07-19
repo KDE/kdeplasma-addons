@@ -49,6 +49,7 @@ class GridHandle : public Handle
     private:
         bool enoughRoom();
         Handle::ButtonType mapToButton(const QPointF &pos);
+        QRectF fullRect() const;
 
         bool m_moving;
         QPointF m_startPos;

@@ -82,7 +82,9 @@ bool GridHandle::eventFilter(QObject *obj, QEvent *event)
     QGraphicsWidget *w = qobject_cast<QGraphicsWidget *>(obj);
 
     if (w == widget() && event->type() == QEvent::GraphicsSceneHoverLeave) {
-        emit disappearDone(this);
+        if (!fullRect().contains(static_cast<QGraphicsSceneHoverEvent *>(event)->pos())) {
+            emit disappearDone(this);
+        }
     }
 
     return false;
@@ -99,7 +101,7 @@ QRectF GridHandle::boundingRect() const
 
 void GridHandle::setHoverPos(const QPointF &hoverPos)
 {
-    if (!widget()->boundingRect().contains(hoverPos)) {
+    if (!fullRect().contains(hoverPos)) {
         emit disappearDone(this);
     } else {
         widget()->setPos(m_widgetPos - boundingRect().topLeft());
@@ -204,9 +206,14 @@ void GridHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     update();
 }
 
+QRectF GridHandle::fullRect() const
+{
+    return QRectF(boundingRect().topLeft(), widget()->boundingRect().bottomRight());
+}
+
 void GridHandle::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (!boundingRect().contains(event->pos())) {
+    if (!fullRect().contains(event->pos())) {
         emit disappearDone(this);
     }
 }
