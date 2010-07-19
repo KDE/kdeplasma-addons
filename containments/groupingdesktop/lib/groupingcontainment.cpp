@@ -48,7 +48,7 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              mainGroup(0),
                              mainGroupId(0),
                              layout(0),
-                             loading(false),
+                             loading(true),
                              movingWidget(0),
                              interestingWidget(0),
                              movementHelperWidget(new QGraphicsWidget(q)),
@@ -100,6 +100,12 @@ void GroupingContainmentPrivate::createActions()
 
 AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, const QPointF &pos, unsigned int id)
 {
+    foreach (AbstractGroup *group, groups) {
+        if (group->id() == id) {
+            return 0;
+        }
+    }
+
     AbstractGroup *group = AbstractGroup::load(plugin, q);
 
     if (!group) {
@@ -217,6 +223,8 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
     int z = applet->zValue();
     if (GroupingContainmentPrivate::s_maxZValue < z) {
         GroupingContainmentPrivate::s_maxZValue = z;
+    } else {
+        applet->setZValue(GroupingContainmentPrivate::s_maxZValue);
     }
 
     AbstractGroup *group = groupAt(pos);
@@ -373,7 +381,7 @@ void GroupingContainmentPrivate::restoreGroups()
         KConfigGroup appletConfig(&appletsConfig, QString::number(applet->id()));
         KConfigGroup groupConfig(&appletConfig, "GroupInformation");
 
-        if (groupConfig.isValid()) {
+        if (groupConfig.isValid() && groupConfig.exists()) {
             int groupId = groupConfig.readEntry("Group", -1);
 
             if (groupId != -1) {
@@ -389,6 +397,8 @@ void GroupingContainmentPrivate::restoreGroups()
                     group->restoreChildGroupInfo(applet, groupConfig);
                 }
             }
+        } else { //happens when changing a desktop activity to GroupingDesktop
+            manageApplet(applet, applet->pos());
         }
     }
 
@@ -448,23 +458,10 @@ void GroupingContainment::init()
             this, SLOT(manageApplet(Plasma::Applet*, QPointF)));
     connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
             this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
-
-//     addGroup("grid", QPointF(100,100), 0);
 }
 
 void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
 {
-    if (constraints & Plasma::StartupCompletedConstraint) {
-        if (!d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
-            AbstractGroup *group = addGroup(d->mainGroupPlugin);
-            setMainGroup(group);
-            KConfigGroup g = config();
-            save(g);
-        }
-        if (!d->mainGroup) {
-            kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";
-        }
-    }
     if (constraints & Plasma::FormFactorConstraint) {
         d->createActions();
     }
@@ -558,8 +555,6 @@ void GroupingContainment::setMainGroup(AbstractGroup *group)
     }
     d->layout->addItem(group);
     group->d->setIsMainGroup();
-
-    emit configNeedsSaving();
 }
 
 AbstractGroup *GroupingContainment::mainGroup() const
@@ -749,12 +744,22 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
         }
     }
 
-    if (d->mainGroupId != 0) {
+    if (d->mainGroupId != 0 && !d->mainGroup) {
         foreach (AbstractGroup *group, d->groups) {
             if (group->id() == d->mainGroupId) {
                 setMainGroup(group);
             }
         }
+    }
+
+    if (!d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
+        AbstractGroup *group = addGroup(d->mainGroupPlugin);
+        setMainGroup(group);
+        KConfigGroup g = config();
+        save(g);
+    }
+    if (!d->mainGroup) {
+        kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";
     }
 
     //delay so to allow the applets and subGroup to prepare themselves.
