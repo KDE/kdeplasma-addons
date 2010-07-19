@@ -19,32 +19,11 @@
 
 #include "groupingpanel.h"
 
-#include <limits>
-
 #include <QAction>
-#include <QApplication>
-#include <QBitmap>
-#include <QComboBox>
-#include <QDesktopWidget>
-#include <QGraphicsLinearLayout>
-#include <QGridLayout>
-#include <QGraphicsLayout>
-#include <QGraphicsSceneDragDropEvent>
-#include <QLabel>
-#include <QMenu>
-#include <QTimer>
-#include <QPainter>
-#include <QSignalMapper>
 
 #include <KDebug>
 #include <KIcon>
-#include <KDialog>
-#include <KIntNumInput>
-#include <KMessageBox>
 
-#include <Plasma/Corona>
-#include <Plasma/FrameSvg>
-#include <Plasma/Theme>
 #include <Plasma/AbstractToolBox>
 #include <Plasma/View>
 #include <Plasma/PaintUtils>
@@ -125,7 +104,7 @@ void GroupingPanel::backgroundChanged()
     constraintsEvent(Plasma::LocationConstraint);
 }
 
-void GroupingPanel::updateBorders(const QRect &geom, bool themeChange)
+void GroupingPanel::updateBorders(const QRect &geom)
 {
     Plasma::Location loc = location();
     FrameSvg::EnabledBorders enabledBorders = FrameSvg::AllBorders;
@@ -269,7 +248,7 @@ void GroupingPanel::saveState(KConfigGroup &config) const
 
 void GroupingPanel::themeUpdated()
 {
-    updateBorders(geometry().toRect(), true);
+    updateBorders(geometry().toRect());
 }
 
 void GroupingPanel::paintInterface(QPainter *painter,

@@ -18,13 +18,12 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PLASMA_PANEL_H
-#define PLASMA_PANEL_H
+#ifndef GROUPINGPANEL_H
+#define GROUPINGPANEL_H
 
 #include "../lib/groupingcontainment.h"
 
 class QAction;
-class QGraphicsLinearLayout;
 
 namespace Plasma
 {
@@ -63,7 +62,7 @@ class GroupingPanel : public GroupingContainment
         /**
         * recalculate which borders to show
         */
-        void updateBorders(const QRect &geom, bool themeChange = false);
+        void updateBorders(const QRect &geom);
 
         Plasma::FrameSvg *m_background;
         QAction* m_configureAction;
