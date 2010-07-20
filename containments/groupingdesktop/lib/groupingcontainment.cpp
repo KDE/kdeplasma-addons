@@ -465,6 +465,11 @@ void GroupingContainment::init()
 
 void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
 {
+    if (constraints & Plasma::StartupCompletedConstraint) {
+        KConfigGroup g = config();
+        restore(g);
+    }
+
     if (constraints & Plasma::FormFactorConstraint) {
         d->createActions();
     }
