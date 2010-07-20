@@ -458,7 +458,8 @@ void GroupingContainment::init()
             this, SLOT(manageApplet(Plasma::Applet*, QPointF)));
     connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
             this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
-    
+
+    d->newGroupAction->setVisible(immutability() == Plasma::Mutable);
     addToolBoxAction(d->newGroupAction);
 }
 
