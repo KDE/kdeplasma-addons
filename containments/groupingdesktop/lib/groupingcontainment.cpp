@@ -227,7 +227,7 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
         applet->setZValue(GroupingContainmentPrivate::s_maxZValue);
     }
 
-    AbstractGroup *group = groupAt(pos);
+    AbstractGroup *group = groupAt(pos.x() < 0 || pos.y() < 0 ? QPointF(10, 10) : pos);
 
     if (group) {
         group->addApplet(applet);
