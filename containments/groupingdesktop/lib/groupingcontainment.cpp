@@ -422,6 +422,7 @@ void GroupingContainmentPrivate::prepareWidgetToMove()
     if (q->immutability() == Plasma::Mutable) {
         QPointF p(q->mapFromScene(widgetToBeSetMoving->parentItem()->scenePos()));
         movementHelperWidget->setPos(p);
+        movementHelperWidget->setMinimumSize(widgetToBeSetMoving->size());
         widgetToBeSetMoving->setParentItem(movementHelperWidget);
     }
 
