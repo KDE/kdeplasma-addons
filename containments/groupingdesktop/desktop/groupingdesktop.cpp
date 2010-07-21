@@ -24,7 +24,7 @@ K_EXPORT_PLASMA_APPLET(groupingdesktop, GroupingDesktop)
 GroupingDesktop::GroupingDesktop(QObject* parent, const QVariantList& args)
                : GroupingContainment(parent, args)
 {
-    setContainmentType(Plasma::Containment::DesktopContainment);
+    setHasConfigurationInterface(true);
 }
 
 GroupingDesktop::~GroupingDesktop()
@@ -33,8 +33,9 @@ GroupingDesktop::~GroupingDesktop()
 
 void GroupingDesktop::init()
 {
-    GroupingContainment::init();
+    setContainmentType(Plasma::Containment::DesktopContainment);
 
+    GroupingContainment::init();
 }
 
 #include "groupingdesktop.moc"
