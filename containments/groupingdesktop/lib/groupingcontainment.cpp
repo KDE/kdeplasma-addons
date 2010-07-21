@@ -455,11 +455,6 @@ void GroupingContainment::init()
 {
     Plasma::Containment::init();
 
-    connect(this, SIGNAL(appletAdded(Plasma::Applet*, QPointF)),
-            this, SLOT(manageApplet(Plasma::Applet*, QPointF)));
-    connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
-            this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
-
     d->newGroupAction->setVisible(immutability() == Plasma::Mutable);
     addToolBoxAction(d->newGroupAction);
 }
@@ -467,8 +462,10 @@ void GroupingContainment::init()
 void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::StartupCompletedConstraint) {
-        KConfigGroup g = config();
-        restore(g);
+        connect(this, SIGNAL(appletAdded(Plasma::Applet*, QPointF)),
+                this, SLOT(manageApplet(Plasma::Applet*, QPointF)));
+        connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+                this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
     }
 
     if (constraints & Plasma::FormFactorConstraint) {
@@ -564,6 +561,9 @@ void GroupingContainment::setMainGroup(AbstractGroup *group)
     }
     d->layout->addItem(group);
     group->d->setIsMainGroup();
+
+    config().writeEntry("mainGroup", group->id());
+    emit configNeedsSaving();
 }
 
 AbstractGroup *GroupingContainment::mainGroup() const
@@ -706,19 +706,6 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
     return Plasma::Containment::eventFilter(obj, event);
 }
 
-void GroupingContainment::save(KConfigGroup &g) const
-{
-    KConfigGroup group = g;
-    if (!group.isValid()) {
-        group = config();
-    }
-
-    Plasma::Containment::save(group);
-    if (d->mainGroup) {
-        group.writeEntry("mainGroup", d->mainGroup->id());
-    }
-}
-
 void GroupingContainment::saveContents(KConfigGroup &group) const
 {
     Plasma::Containment::saveContents(group);
@@ -730,17 +717,23 @@ void GroupingContainment::saveContents(KConfigGroup &group) const
     }
 }
 
-void GroupingContainment::restore(KConfigGroup &group)
-{
-    d->loading = true;
-    d->mainGroupId = group.readEntry("mainGroup", 0);
-
-    Plasma::Containment::restore(group);
-}
-
-void GroupingContainment::restoreContents(KConfigGroup& group)
+void GroupingContainment::restoreContents(KConfigGroup &group)
 {
     Plasma::Containment::restoreContents(group);
+
+    //FIXME: I don't like this, but i'll keep it as a workaround.
+    //When swapping desktop containments restore is called twice, but the first time the group is empty.
+    //So if you swap from Desktop to GroupingDesktop to Desktop to GroupingDesktop the rc file
+    //will have the MainGroup entry, but the group not, so returning here will prevent creating a new MainGroup.
+    //On the other hand when creating a new panel restore is called only once and the group will be empty too.
+    //So in that case we must let it go on.
+    if (group.exists() &&
+        containmentType() != Plasma::Containment::PanelContainment &&
+        containmentType() != Plasma::Containment::CustomPanelContainment) {
+        return;
+    }
+
+    d->mainGroupId = group.readEntry("mainGroup", 0);
 
     KConfigGroup groupsConfig(&group, "Groups");
     foreach (const QString &groupId, groupsConfig.groupList()) {
@@ -767,8 +760,6 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
     if (!d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
         AbstractGroup *group = addGroup(d->mainGroupPlugin);
         setMainGroup(group);
-        KConfigGroup g = config();
-        save(g);
     }
     if (!d->mainGroup) {
         kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";

@@ -49,16 +49,6 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
         /**
          * Reimplemented from Plasma::Applet
          **/
-        virtual void save(KConfigGroup &group) const;
-
-        /**
-         * Reimplemented from Plasma::Containment
-         **/
-        virtual void restore(KConfigGroup &group);
-
-        /**
-         * Reimplemented from Plasma::Applet
-         **/
         QList<QAction *> contextualActions();
 
         /**
