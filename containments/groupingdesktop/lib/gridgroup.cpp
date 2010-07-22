@@ -582,6 +582,11 @@ void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 
 void GridGroup::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    if (immutability() != Plasma::Mutable) {
+        AbstractGroup::mousePressEvent(event);
+        return;
+    }
+
     if (event->button() == Qt::LeftButton) {
         int col = isOnAColumnBorder(event->pos().x(), 5);
         int row = isOnARowBorder(event->pos().y(), 5);
@@ -599,6 +604,11 @@ void GridGroup::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void GridGroup::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    if (immutability() != Plasma::Mutable) {
+        AbstractGroup::mouseMoveEvent(event);
+        return;
+    }
+
     if (m_movingColumn != -1) {
         qreal x = event->pos().x() / contentsRect().width();
 
