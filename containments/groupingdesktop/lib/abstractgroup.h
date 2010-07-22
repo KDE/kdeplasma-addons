@@ -31,8 +31,6 @@ class GroupingContainment;
 class Handle;
 class AbstractGroupPrivate;
 
-typedef Plasma::ImmutabilityType ImmutabilityType;
-
 /**
  * @class AbstractGroup
  *
@@ -44,10 +42,9 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
 {
     Q_OBJECT
     Q_PROPERTY(bool hasInterface READ hasConfigurationInterface)
-    Q_PROPERTY(ImmutabilityType immutability READ immutability WRITE setImmutability)
     Q_PROPERTY(uint id READ id)
-    Q_PROPERTY(GroupType groupType READ groupType())
-    Q_PROPERTY(bool isMainGroup READ isMainGroup())
+    Q_PROPERTY(GroupType groupType READ groupType)
+    Q_PROPERTY(bool isMainGroup READ isMainGroup)
 
     public:
         /**
@@ -58,9 +55,10 @@ class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
                                          e.g. a layout */
             FreeGroup = 1           /**< The applets can be freely transformed */
         };
+        Q_ENUMS(GroupType)
 
         /**
-         * Description on how draw a background for the applet
+         * Description on how draw a background for the group
          */
         enum BackgroundHint {
             NoBackground  = 0,        /**< Don't draw anything */
