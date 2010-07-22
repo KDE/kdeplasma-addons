@@ -34,14 +34,16 @@
 
 GridHandle::GridHandle(GroupingContainment *containment, Plasma::Applet *applet)
           : Handle(containment, applet),
-            m_moving(false)
+            m_moving(false),
+            SIZE(20)
 {
     init();
 }
 
 GridHandle::GridHandle(GroupingContainment *containment, AbstractGroup *group)
           : Handle(containment, group),
-            m_moving(false)
+            m_moving(false),
+            SIZE(20)
 {
     init();
 }
@@ -53,10 +55,11 @@ GridHandle::~GridHandle()
 
 void GridHandle::init()
 {
+    m_location = NoLocation;
+
     QGraphicsWidget *w = widget();
     m_widgetPos = w->pos();
     m_widgetSize = w->size();
-    m_maxWidgetSize = w->maximumSize();
     w->installEventFilter(this);
 
     m_lastButton = Handle::NoButton;
@@ -71,8 +74,6 @@ void GridHandle::detachWidget()
     QGraphicsWidget *w = widget();
     w->removeEventFilter(this);
     w->setPos(m_widgetPos);
-    w->setMaximumSize(m_maxWidgetSize);
-    w->resize(m_widgetSize);
 
     Handle::detachWidget();
 }
@@ -92,30 +93,78 @@ bool GridHandle::eventFilter(QObject *obj, QEvent *event)
 
 QRectF GridHandle::boundingRect() const
 {
-    if (m_widgetSize.width() >= m_widgetSize.height()) {
-        return QRectF(-20, 0, 20, m_widgetSize.height());
-    } else {
-        return QRectF(0, -20, m_widgetSize.width(), 20);
+    switch (m_location) {
+        case Left:
+            return QRectF(-SIZE, 0, SIZE, m_widgetSize.height());
+
+        case Top:
+            return QRectF(0, -SIZE, m_widgetSize.width(), SIZE);
+
+        case Right:
+            return QRectF(m_widgetSize.width(), 0, SIZE, m_widgetSize.height());
+
+        case Bottom:
+            return QRectF(0, m_widgetSize.height(), m_widgetSize.width(), SIZE);
+
+        default:
+            return QRectF();
     }
 }
 
 void GridHandle::setHoverPos(const QPointF &hoverPos)
 {
-    if (!fullRect().contains(hoverPos)) {
-        emit disappearDone(this);
+    if (isHorizontal()) {
+        const qreal width = m_widgetSize.width() / 2.;
+        QRectF left(0, 0, width, m_widgetSize.height());
+        QRectF right(width, 0, width, m_widgetSize.height());
+        if (left.contains(hoverPos)) {
+            m_location = Left;
+        } else if (right.contains(hoverPos)) {
+            m_location = Right;
+        }
     } else {
-        widget()->setPos(m_widgetPos - boundingRect().topLeft());
-        if (boundingRect().x() < 0) { //horizontal
-            widget()->setMaximumSize(m_maxWidgetSize.width() - 20, m_maxWidgetSize.height());
-        } else {    //vertical
-            widget()->setMaximumSize(m_maxWidgetSize.width(), m_maxWidgetSize.height() - 20);
+        const qreal height = m_widgetSize.height() / 2.;
+        QRectF top(0, 0, m_widgetSize.width(), height);
+        QRectF bottom(0, height, m_widgetSize.width(), height);
+        if (top.contains(hoverPos)) {
+            m_location = Top;
+        } else if (bottom.contains(hoverPos)) {
+            m_location = Bottom;
         }
     }
+
+    switch (m_location) {
+        case Left:
+            widget()->setPos(m_widgetPos + QPointF(SIZE, 0));
+        break;
+
+        case Top:
+            widget()->setPos(m_widgetPos + QPointF(0, SIZE));
+        break;
+
+        case Right:
+            widget()->setPos(m_widgetPos + QPointF(-SIZE, 0));
+        break;
+
+        case Bottom:
+            widget()->setPos(m_widgetPos + QPointF(0, -SIZE));
+        break;
+
+        default:
+            emit disappearDone(this);
+        break;
+    }
+}
+
+bool GridHandle::isHorizontal() const
+{
+    QRectF rect(widget()->parentItem()->boundingRect());
+    return rect.width() >= rect.height();
 }
 
 void GridHandle::widgetResized()
 {
-
+    m_widgetSize = widget()->size();
 }
 
 void GridHandle::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -223,14 +272,13 @@ Handle::ButtonType GridHandle::mapToButton(const QPointF &pos)
     if (enoughRoom()) {
         const QSize iconSize(KIconLoader::SizeSmall, KIconLoader::SizeSmall);
         QRectF iconRect(boundingRect().topLeft() + QPointF(2, 2), iconSize);
-        bool horizontal = (iconRect.x() < 0);
 
         if ((applet() && applet()->hasConfigurationInterface()) || (group() && group()->hasConfigurationInterface())) {
             if (iconRect.contains(pos)) {
                 return Handle::ConfigureButton;
             }
 
-            if (horizontal) {
+            if (isHorizontal()) {
                 iconRect.translate(0, iconSize.height());
             } else {
                 iconRect.translate(iconSize.width(), 0);
@@ -243,7 +291,7 @@ Handle::ButtonType GridHandle::mapToButton(const QPointF &pos)
             }
         }
 
-        if (horizontal) {
+        if (isHorizontal()) {
             iconRect.moveTo(boundingRect().bottomLeft() - QPointF(-2, iconSize.height() + 2));
         } else {
             iconRect.moveTo(boundingRect().topRight() - QPointF(iconSize.width() + 2, -2));
@@ -260,8 +308,6 @@ Handle::ButtonType GridHandle::mapToButton(const QPointF &pos)
 bool GridHandle::enoughRoom()
 {
     const QSize iconSize(KIconLoader::SizeSmall, KIconLoader::SizeSmall);
-    bool horizontal = (boundingRect().x() < 0);
-
     int buttonsCount = 2;
 
     if ((applet() && applet()->hasConfigurationInterface()) || (group() && group()->hasConfigurationInterface())) {
@@ -272,8 +318,8 @@ bool GridHandle::enoughRoom()
         ++buttonsCount;
     }
 
-    return ((horizontal && boundingRect().height() > buttonsCount * iconSize.height()) ||
-           (!horizontal && boundingRect().width() > buttonsCount * iconSize.width()));
+    return ((isHorizontal() && boundingRect().height() > buttonsCount * iconSize.height()) ||
+           (!isHorizontal() && boundingRect().width() > buttonsCount * iconSize.width()));
 }
 
 void GridHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
@@ -316,11 +362,10 @@ void GridHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     const QSize iconSize(KIconLoader::SizeSmall, KIconLoader::SizeSmall);
     QRectF iconRect(boundingRect().topLeft() + QPointF(2, 2), iconSize);
-    bool horizontal = (iconRect.x() < 0);
 
     if ((applet() && applet()->hasConfigurationInterface()) || (group() && group()->hasConfigurationInterface())) {
         m_configureIcons->paint(painter, iconRect.translated(shiftC), "configure");
-        if (horizontal) {
+        if (isHorizontal()) {
             iconRect.translate(0, iconSize.height());
         } else {
             iconRect.translate(iconSize.width(), 0);
@@ -331,7 +376,7 @@ void GridHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         m_configureIcons->paint(painter, iconRect.translated(shiftMx), "maximize");
     }
 
-    if (horizontal) {
+    if (isHorizontal()) {
         iconRect.moveTo(boundingRect().bottomLeft() - QPointF(-2, iconSize.height() + 2));
     } else {
         iconRect.moveTo(boundingRect().topRight() - QPointF(iconSize.width() + 2, -2));

@@ -47,18 +47,28 @@ class GridHandle : public Handle
         bool eventFilter(QObject *obj, QEvent *event);
 
     private:
+        enum Location {
+            NoLocation,
+            Top,
+            Right,
+            Bottom,
+            Left
+        };
+
         bool enoughRoom();
         Handle::ButtonType mapToButton(const QPointF &pos);
         QRectF fullRect() const;
+        bool isHorizontal() const;
 
         bool m_moving;
         QPointF m_startPos;
         int m_savedZValue;
         QPointF m_widgetPos;
         QSizeF m_widgetSize;
-        QSizeF m_maxWidgetSize;
         Plasma::Svg *m_configureIcons;
         Handle::ButtonType m_lastButton;
+        Location m_location;
+        const int SIZE;
 };
 
 #endif
