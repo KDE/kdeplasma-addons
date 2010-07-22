@@ -155,6 +155,7 @@ void GroupingContainmentPrivate::onGroupRemoved(AbstractGroup *group)
 
     groups.removeAll(group);
     group->removeEventFilter(q);
+    group->removeSceneEventFilter(q);
 
     if (handles.contains(group)) {
         Handle *handle = handles.value(group);
@@ -171,6 +172,7 @@ void GroupingContainmentPrivate::onAppletRemoved(Plasma::Applet *applet)
     kDebug()<<"Removed applet"<<applet->id();
 
     applet->removeEventFilter(q);
+    applet->removeSceneEventFilter(q);
 
     if (handles.contains(applet)) {
         Handle *handle = handles.value(applet);
