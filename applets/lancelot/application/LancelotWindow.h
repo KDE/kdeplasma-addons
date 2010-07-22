@@ -162,8 +162,10 @@ public Q_SLOTS:
 protected:
     /**
      * Resizes window and relayouts everything.
+     * @returns if it was actually resized (false if
+     * the old size is the new size)
      */
-    void resizeWindow();
+    bool updateWindowSize();
 
     /**
      * Shows window
@@ -250,6 +252,14 @@ private:
     // Additional widgets
     Lancelot::PopupList * menuSystemButton;
     Lancelot::PopupMenu * menuLancelotContext;
+
+    // Caches
+    QPoint          m_cachedOpenPosition;
+    QSize           m_cachedWindowSize;
+    Plasma::Flip    m_cachedFlip;
+    bool            m_cachedOpenPositionCentered : 1;
+    bool            m_cachedShowingFull : 1;
+    bool            m_firstOpen : 1;
 };
 
 #endif /*LANCELOTWINDOW_H*/

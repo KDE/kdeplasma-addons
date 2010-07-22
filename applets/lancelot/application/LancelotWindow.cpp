@@ -85,7 +85,13 @@ LancelotWindow::LancelotWindow()
     m_mainSize(mainWidthDefault, windowHeightDefault),
     m_skipEvent(false),
     menuSystemButton(NULL),
-    menuLancelotContext(NULL)
+    menuLancelotContext(NULL),
+    m_cachedOpenPosition(-1, -1),
+    m_cachedWindowSize(-1, -1),
+    m_cachedFlip(0),
+    m_cachedOpenPositionCentered(false),
+    m_cachedShowingFull(false),
+    m_firstOpen(true)
 {
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
@@ -218,10 +224,9 @@ void LancelotWindow::updateCollapsedSections(bool toggle)
     bool collapseSections = m_mainConfig.readEntry("collapseSections", false);
     if (toggle) {
         collapseSections = !collapseSections;
+        m_mainConfig.writeEntry("collapseSections", collapseSections);
+        m_mainConfig.sync();
     }
-
-    m_mainConfig.writeEntry("collapseSections", collapseSections);
-    m_mainConfig.sync();
 
     layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Lancelot::FullBorderLayout::LeftBorder);
 
@@ -233,8 +238,7 @@ void LancelotWindow::updateCollapsedSections(bool toggle)
         tabbarSections->setTextDirection(Qt::Vertical);
     }
 
-
-    resizeWindow();
+    updateWindowSize();
 }
 
 LancelotWindow::~LancelotWindow()
@@ -270,6 +274,7 @@ void LancelotWindow::lancelotHide(bool immediate)
             passagewayApplications->reset();
         }
         hide();
+
         return;
     }
 
@@ -279,10 +284,20 @@ void LancelotWindow::lancelotHide(bool immediate)
 
 void LancelotWindow::showWindow(int x, int y, bool centered)
 {
-    tabbarSections->setVisible(m_showingFull);
-    updateCollapsedSections();
+    kDebug() << "=== showing the window";
 
-    layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Lancelot::FullBorderLayout::LeftBorder);
+    if (m_firstOpen || m_cachedShowingFull == m_showingFull) {
+        m_cachedShowingFull = m_showingFull;
+
+        kDebug() << "cache for m_showingFull not used";
+        tabbarSections->setVisible(m_showingFull);
+        layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Lancelot::FullBorderLayout::LeftBorder);
+
+        // in this case, we should really update everything...
+        m_firstOpen = true;
+    }
+
+    updateCollapsedSections();
 
     m_resizeDirection = None;
     m_hideTimer.stop();
@@ -291,88 +306,103 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
         // We are exiting because we do not want to move already opened window
         // because most probably it is just invoked from the same applet and
         // needs to show only another category
-        resizeWindow();
+        updateWindowSize();
         return;
     }
 
     QRect screenRect = QApplication::desktop()->screenGeometry(QPoint(x, y));
-    resizeWindow();
+    updateWindowSize();
 
-    Plasma::Flip flip;
+    if (m_firstOpen ||
+            (m_cachedOpenPosition != QPoint(x, y) || m_cachedOpenPositionCentered != centered)) {
+        kDebug() << "cache for position not used";
 
-    if (!centered) {
-        flip = Plasma::VerticalFlip;
+        m_cachedOpenPosition = QPoint(x, y);
+        m_cachedOpenPositionCentered = centered;
 
-        if (x < screenRect.left()) {
-            x = screenRect.left();
-        }
+        Plasma::Flip flip;
 
-        if (y < screenRect.top()) {
-            y = screenRect.top();
-        }
+        if (!centered) {
+            flip = Plasma::VerticalFlip;
 
-        if (x + width() > screenRect.right()) {
-            x = x - width();
-            flip |= Plasma::HorizontalFlip;
-        }
-
-        if (y + height() > screenRect.bottom()) {
-            y = y - height();
-            flip &= ~Plasma::VerticalFlip;
-        }
-
-        if (m_showingFull) {
-            if (flip & Plasma::HorizontalFlip) {
-                x += sectionsWidth / 2;
-            } else {
-                x -= sectionsWidth / 2;
+            if (x < screenRect.left()) {
+                x = screenRect.left();
             }
+
+            if (y < screenRect.top()) {
+                y = screenRect.top();
+            }
+
+            if (x + width() > screenRect.right()) {
+                x = x - width();
+                flip |= Plasma::HorizontalFlip;
+            }
+
+            if (y + height() > screenRect.bottom()) {
+                y = y - height();
+                flip &= ~Plasma::VerticalFlip;
+            }
+
+            if (m_showingFull) {
+                if (flip & Plasma::HorizontalFlip) {
+                    x += sectionsWidth / 2;
+                } else {
+                    x -= sectionsWidth / 2;
+                }
+            }
+        } else {
+            flip = Plasma::NoFlip;
+
+            x = screenRect.left()
+                + (screenRect.width() - width()) / 2;
+            y = screenRect.top()
+                + (screenRect.height() - height()) / 2;
         }
-    } else {
-        flip = Plasma::NoFlip;
 
-        x = screenRect.left()
-            + (screenRect.width() - width()) / 2;
-        y = screenRect.top()
-            + (screenRect.height() - height()) / 2;
+        move(x, y);
+
+        if (m_firstOpen || m_cachedFlip != flip) {
+            kDebug() << "cache for flip not used";
+            m_cachedFlip = flip;
+
+            kDebug() << "Flip:" << flip;
+            layoutMain->setFlip(flip);
+            tabbarSections->setFlip(flip);
+
+            if (m_configUi.activationMethod() == LancelotConfig::NoClick) {
+                Lancelot::Global::self()->group("SystemButtons")->setProperty("extenderPosition", QVariant(
+                        (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)
+                ));
+                Lancelot::Global::self()->group("SystemButtons")
+                    ->setProperty("activationMethod", Lancelot::ExtenderActivate);
+            } else {
+                Lancelot::Global::self()->group("SystemButtons")
+                    ->setProperty("extenderPosition", QVariant(Lancelot::NoExtender));
+                Lancelot::Global::self()->group("SystemButtons")
+                    ->setProperty("activationMethod", Lancelot::ClickActivate);
+            }
+            Lancelot::Global::self()->group("LancelotContext")->setProperty("extenderPosition",
+                    Lancelot::Global::self()->group("SystemButtons")->property("extenderPosition"));
+            Lancelot::Global::self()->group("LancelotContext")->setProperty("activationMethod",
+                    Lancelot::Global::self()->group("SystemButtons")->property("activationMethod"));
+            Lancelot::Global::self()->group("SystemButtons")->notifyUpdated();
+            Lancelot::Global::self()->group("LancelotContext")->notifyUpdated();
+        }
     }
-
-    kDebug() << "Flip:" << flip;
-    layoutMain->setFlip(flip);
-    tabbarSections->setFlip(flip);
-
-    if (m_configUi.activationMethod() == LancelotConfig::NoClick) {
-        Lancelot::Global::self()->group("SystemButtons")->setProperty("extenderPosition", QVariant(
-                (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)
-        ));
-        Lancelot::Global::self()->group("SystemButtons")
-            ->setProperty("activationMethod", Lancelot::ExtenderActivate);
-    } else {
-        Lancelot::Global::self()->group("SystemButtons")
-            ->setProperty("extenderPosition", QVariant(Lancelot::NoExtender));
-        Lancelot::Global::self()->group("SystemButtons")
-            ->setProperty("activationMethod", Lancelot::ClickActivate);
-    }
-    Lancelot::Global::self()->group("LancelotContext")->setProperty("extenderPosition",
-            Lancelot::Global::self()->group("SystemButtons")->property("extenderPosition"));
-    Lancelot::Global::self()->group("LancelotContext")->setProperty("activationMethod",
-            Lancelot::Global::self()->group("SystemButtons")->property("activationMethod"));
-    Lancelot::Global::self()->group("SystemButtons")->notifyUpdated();
-    Lancelot::Global::self()->group("LancelotContext")->notifyUpdated();
 
     if (m_showingFull) {
         sectionActivated("applications");
     }
 
-    move(x, y);
     if (KWindowSystem::compositingActive()) {
-        if (flip & Plasma::VerticalFlip) {
+        if (m_cachedFlip & Plasma::VerticalFlip) {
             Plasma::WindowEffects::slideWindow(this, Plasma::TopEdge);
 
         } else {
             Plasma::WindowEffects::slideWindow(this, Plasma::BottomEdge);
         }
     }
+
     show();
 
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
@@ -381,14 +411,31 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     //editSearch->clearFocus();
     editSearch->nativeWidget()->setFocus();
     editSearch->setFocus();
+
+    m_firstOpen = false;
 }
 
-void LancelotWindow::resizeWindow()
+bool LancelotWindow::updateWindowSize()
 {
     QSize newSize = m_mainSize;
     if (m_showingFull) {
         newSize.rwidth() += sectionsWidth;
     }
+
+    if (!m_firstOpen && newSize == m_cachedWindowSize) {
+        return false;
+    }
+
+    kDebug() << "cache for size not used" << newSize << m_cachedWindowSize;
+    m_cachedWindowSize = newSize;
+
+    resize(newSize);
+    m_corona->
+        setSceneRect(QRectF(QPointF(), newSize));
+
+    m_root->
+        setGeometry(QRect(QPoint(), newSize));
+
     resize(newSize);
     m_root->group()->backgroundSvg()->resizeFrame(newSize);
 
@@ -396,6 +443,8 @@ void LancelotWindow::resizeWindow()
     // setMask(mask);
     Plasma::WindowEffects::enableBlurBehind(winId(), true, mask);
     Plasma::WindowEffects::overrideShadow(winId(), true);
+
+    return true;
 }
 
 QStringList LancelotWindow::sectionIDs()
@@ -1105,13 +1154,13 @@ void LancelotWindow::resizeEvent(QResizeEvent * event)
 {
     QWidget::resizeEvent(event);
 
-    m_corona->
-        setSceneRect(QRectF(QPointF(), event->size()));
+    if (updateWindowSize()) {
+    //     m_corona->
+    //         setSceneRect(QRectF(QPointF(), event->size()));
 
-    m_root->
-        setGeometry(QRect(QPoint(), event->size()));
-
-    resizeWindow();
+    //     m_root->
+    //         setGeometry(QRect(QPoint(), event->size()));
+    }
 }
 
 #include "LancelotWindow.moc"
