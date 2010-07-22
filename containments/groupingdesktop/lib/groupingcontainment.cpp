@@ -297,6 +297,13 @@ void GroupingContainmentPrivate::onSubGroupRemovedFromGroup(AbstractGroup *subGr
     }
 }
 
+void GroupingContainmentPrivate::widgetMovedAnimationComplete()
+{
+    Plasma::Animation *anim = static_cast<Plasma::Animation *>(q->sender());
+    QGraphicsWidget *widget = static_cast<QGraphicsWidget *>(anim->targetWidget());
+    widget->installSceneEventFilter(q);
+}
+
 void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 {
     if (movingWidget != widget) {
@@ -320,6 +327,8 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
             }
         }
 
+        QRectF geom(widget->geometry());
+
         QPointF c = widget->contentsRect().center();
         c += q->mapFromScene(widget->scenePos());
         QPointF pos = q->mapToItem(interestingGroup, c);
@@ -332,6 +341,18 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
             h->deleteLater();
             handles.remove(widget);
         }
+
+        widget->removeSceneEventFilter(q);
+
+        Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
+        if (anim) {
+            q->connect(anim, SIGNAL(finished()), q, SLOT(widgetMovedAnimationComplete()));
+            anim->setTargetWidget(widget);
+            anim->setProperty("startGeometry", geom);
+            anim->setProperty("targetGeometry", widget->geometry());
+            anim->start(QAbstractAnimation::DeleteWhenStopped);
+        }
+
         interestingGroup = 0;
     }
 

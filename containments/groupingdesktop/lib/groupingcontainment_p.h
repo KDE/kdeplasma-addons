@@ -59,6 +59,7 @@ class GroupingContainmentPrivate
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
         void restoreGroups();
         void prepareWidgetToMove();
+        void widgetMovedAnimationComplete();
 
         GroupingContainment *q;
         QList<AbstractGroup *> groups;
