@@ -605,18 +605,9 @@ void GridGroup::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         qreal pos = m_columnX.at(m_movingColumn - 1);
         qreal nextPos = m_columnX.at(m_movingColumn) +
                         m_columnWidths.at(m_movingColumn);
-        qreal minWidth = 0;
+        const qreal MIN_WIDTH = 30. / contentsRect().width();
 
-        for (int i = 0; i < m_children.size(); ++i) {
-            QGraphicsWidget *w = m_children.at(i).at(m_movingColumn - 1);
-            qreal width = w->minimumWidth() + 20;
-            if (minWidth < width) {
-                minWidth = width;
-            }
-        }
-        minWidth /= contentsRect().width();
-
-        if (x - pos > minWidth && nextPos - x > minWidth) {
+        if (x - pos > MIN_WIDTH && nextPos - x > MIN_WIDTH) {
             m_columnWidths.replace(m_movingColumn - 1, x - pos);
             m_columnWidths.replace(m_movingColumn, nextPos - x);
             m_columnX.replace(m_movingColumn, x);
@@ -680,7 +671,7 @@ bool GridGroup::eventFilter(QObject *, QEvent *event)
 
 int GridGroup::isOnAColumnBorder(qreal x, int space) const
 {
-    qreal pos = 0;
+    qreal pos = contentsRect().left();
     int gap = 0;
     for (int i = 0; i < m_columnWidths.size(); ++i) {
         if (space == 0) {
@@ -702,7 +693,7 @@ int GridGroup::isOnAColumnBorder(qreal x, int space) const
 
 int GridGroup::isOnARowBorder(qreal y, int space) const
 {
-    qreal pos = 0;
+    qreal pos = contentsRect().top();
     int gap = 0;
     for (int i = 0; i < m_rowHeights.size(); ++i) {
         if (space == 0) {
