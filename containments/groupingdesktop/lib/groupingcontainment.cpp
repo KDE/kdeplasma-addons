@@ -744,18 +744,6 @@ void GroupingContainment::restoreContents(KConfigGroup &group)
 {
     Plasma::Containment::restoreContents(group);
 
-    //FIXME: I don't like this, but i'll keep it as a workaround.
-    //When swapping desktop containments restore is called twice, but the first time the group is empty.
-    //So if you swap from Desktop to GroupingDesktop to Desktop to GroupingDesktop the rc file
-    //will have the MainGroup entry, but the group not, so returning here will prevent creating a new MainGroup.
-    //On the other hand when creating a new panel restore is called only once and the group will be empty too.
-    //So in that case we must let it go on.
-    if (group.exists() &&
-        containmentType() != Plasma::Containment::PanelContainment &&
-        containmentType() != Plasma::Containment::CustomPanelContainment) {
-        return;
-    }
-
     d->mainGroupId = group.readEntry("mainGroup", 0);
 
     KConfigGroup groupsConfig(&group, "Groups");
