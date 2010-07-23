@@ -28,7 +28,7 @@ class QWheelEvent;
 class FullViewWidget : public QWidget
 {
     public:
-        FullViewWidget();
+        FullViewWidget(QWidget *parent);
         ~FullViewWidget();
 
         void setImage( const QImage &image );
