@@ -21,6 +21,7 @@
 #define FILEWATCHER_H
 
 #include <Plasma/Applet>
+#include <Plasma/ToolTipManager>
 
 #include "ui_fileWatcherConfig.h"
 #include "ui_filtersConfig.h"

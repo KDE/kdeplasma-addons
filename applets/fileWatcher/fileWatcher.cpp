@@ -50,6 +50,7 @@ FileWatcher::~FileWatcher()
 
 void FileWatcher::init()
 {
+  Plasma::ToolTipManager::self()->registerWidget(this);
   file = new QFile(this);
   textStream = 0;
   watcher = new KDirWatch(this);
@@ -143,7 +144,9 @@ void FileWatcher::loadFile(const QString& path)
     textStream = new QTextStream(file);
 
     setConfigurationRequired(false);
-    QGraphicsItem::setToolTip(path);
+    Plasma::ToolTipContent toolTipData;
+    toolTipData.setMainText(path);
+    Plasma::ToolTipManager::self()->setContent(this, toolTipData);
     m_currentPath = path;
     textDocument->clear();
   }
