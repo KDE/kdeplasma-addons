@@ -86,12 +86,12 @@
           </attribute>
           <column>
            <property name="text">
-            <string notr="true">Alias</string>
+            <string>Alias</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string notr="true">Code</string>
+            <string>Code</string>
            </property>
           </column>
          </widget>
