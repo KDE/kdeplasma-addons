@@ -165,7 +165,7 @@ bool BaseModel::addService(const QString & serviceName)
 {
     const KService::Ptr service = KService::serviceByStorageId(serviceName);
 
-    qDebug() << "BaseModel::addService Applic:" << service->isValid() << " " << serviceName;
+    // qDebug() << "BaseModel::addService Applic:" << service->isValid() << " " << serviceName;
 
     return addService(service);
 }
