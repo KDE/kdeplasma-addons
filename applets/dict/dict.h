@@ -27,7 +27,6 @@
 class QTimer;
 class CheckableStringListModel;
 
-class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
 
 namespace Plasma
