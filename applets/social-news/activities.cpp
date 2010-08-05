@@ -22,7 +22,6 @@
 
 #include <QtCore/QTimer>
 
-#include <KLocale>
 
 #include <Plasma/DataEngine>
 
