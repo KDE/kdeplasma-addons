@@ -44,8 +44,6 @@ namespace Ui
     class GeneralWidget;
 }
 
-class QSizeF;
-class QSortFilterProxyModel;
 class TaskModel;
 
 class RememberTheMilkPlasmoid : public Plasma::PopupApplet

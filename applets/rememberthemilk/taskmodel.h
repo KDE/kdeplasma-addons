@@ -1,4 +1,3 @@
-class HeaderItem;
 /*
  *   Copyright 2009 Andrew Stromme <astromme@chatonka.com>
  *
