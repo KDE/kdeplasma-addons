@@ -36,7 +36,6 @@ class KUrl;
 class QGraphicsSceneWheelEvent;
 class QGraphicsSceneResizeEvent;
 class KFileItem;
-class QTimeLine;
 class QPropertyAnimation;
 
 class PreviewWidget : public QGraphicsWidget

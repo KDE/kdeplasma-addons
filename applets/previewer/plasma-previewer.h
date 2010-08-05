@@ -31,7 +31,6 @@
 namespace Plasma{
   class Dialog;
   class ScrollBar;
-  class PanelSvg;
 }
 namespace KParts{
    class ReadOnlyPart;
@@ -41,13 +40,10 @@ class KMenu;
 class QGraphicsSceneDragDropEvent;
 class QGraphicsWidget;
 class KUrl;
-class PreviewItemModel;
 class PreviewDialog;
-class KFileItem;
 class PreviewWidget;
 
 namespace KIO{
-   class PreviewJob;
 }
 
 // here we define the applet
