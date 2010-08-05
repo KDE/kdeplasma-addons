@@ -33,8 +33,6 @@ class QGraphicsLinearLayout;
 namespace Plasma
 {
 class Label;
-class PushButton;
-class TextEdit;
 }
 
 // Define our plasma Applet
