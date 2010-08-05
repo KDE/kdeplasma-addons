@@ -22,7 +22,6 @@
 //Project-Includes
 #include "ui_audioplayercontrolrunner_config.h"
 //Qt-Includes
-#include <QGridLayout>
 //KDE-Includes
 #include <KCModule>
 
