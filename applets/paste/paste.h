@@ -24,8 +24,6 @@
 class ListForm;
 class SnippetConfig;
 class AutoPasteConfig;
-class QGraphicsLinearLayout;
-class QGraphicsProxyWidget;
 namespace Plasma {
     class Icon;
 }
