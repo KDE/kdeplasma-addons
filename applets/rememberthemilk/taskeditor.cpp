@@ -29,8 +29,6 @@
 
 #include <QPainter>
 #include <QStringList>
-#include <QLabel>
-#include <QDateTime>
 
 #include <Plasma/Theme>
 #include <Plasma/Animator>
