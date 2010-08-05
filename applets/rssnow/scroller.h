@@ -39,7 +39,6 @@ namespace Plasma
 {
   // namespace Plasma
   class IconWidget;
-  class Svg;
 }
 
 class Scroller : public QGraphicsWidget

@@ -31,10 +31,6 @@
 #include "header.h"
 #include "feeddata.h"
 
-namespace Plasma {
-    class VBoxLayout;
-    class Svg;
-}
 
 class Scroller;
 class QGraphicsLinearLayout;
