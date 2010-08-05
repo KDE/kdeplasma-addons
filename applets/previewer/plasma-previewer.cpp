@@ -33,8 +33,6 @@
 #include <KParts/ReadOnlyPart>
 #include <KMimeTypeTrader>
 #include <KFileDialog>
-#include <KMenu>
-#include <KAction>
 #include <KUrl>
 #include <KService>
 #include <KIO/DeleteJob>
