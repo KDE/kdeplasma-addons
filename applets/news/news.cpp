@@ -30,7 +30,6 @@
 #include <KColorScheme>
 #include <KStandardDirs>
 #include <KRun>
-#include <KDesktopFile>
 
 #include <Plasma/Containment>
 #include <Plasma/Theme>
