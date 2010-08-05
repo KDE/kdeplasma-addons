@@ -26,10 +26,10 @@
 
 #include <KConfigGroup>
 #include <KIconLoader>
-#include <KTextEdit>
 #include <KJob>
 #include <KCMultiDialog>
 #include <KLineEdit>
+#include <KToolInvocation>
 
 #include <Plasma/IconWidget>
 #include <Plasma/Service>

@@ -22,7 +22,6 @@
 #include "actionstack.h"
 
 #include <Plasma/TabBar>
-#include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include "contactlist.h"
 #include "requestfriendshipwidget.h"

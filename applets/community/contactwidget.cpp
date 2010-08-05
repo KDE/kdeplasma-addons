@@ -30,7 +30,6 @@
 #include <KIcon>
 #include <KIconLoader>
 #include <KGlobalSettings>
-#include <KToolInvocation>
 
 // Plasma
 #include <Plasma/Theme>

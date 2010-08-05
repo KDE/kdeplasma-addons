@@ -24,7 +24,6 @@
 
 #include <QtCore/QTimer>
 
-#include <KToolInvocation>
 
 #include <Plasma/DataEngine>
 #include <Plasma/Frame>

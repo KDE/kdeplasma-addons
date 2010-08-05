@@ -32,7 +32,6 @@
 #include <KGlobalSettings>
 #include <KIconLoader>
 #include <KLocale>
-#include <KStandardDirs>
 
 // Plasma
 #include <Plasma/Theme>

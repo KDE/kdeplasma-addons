@@ -25,8 +25,6 @@
 //KDE
 #include <KConfigDialog>
 #include <KLocale>
-#include <KToolInvocation>
-#include <KNotification>
 #include <KCMultiDialog>
 
 //plasma
