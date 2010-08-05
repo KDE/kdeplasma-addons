@@ -29,9 +29,6 @@
 #include "timerdigit.h"
 
 class QGraphicsSceneMouseEvent;
-class QGraphicsTextItem;
-class QMenu;
-class CustomTimeEditor;
 class QActionGroup;
 
 namespace Plasma
