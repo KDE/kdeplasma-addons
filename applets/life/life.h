@@ -26,10 +26,6 @@
 
 #include "ui_lifeConfig.h"
 
-namespace Plasma
-{
-    class DataEngine;
-}
 namespace Ui
 {
     class lifeConfig;
