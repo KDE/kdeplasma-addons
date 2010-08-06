@@ -37,7 +37,7 @@ Fifteen::Fifteen(QGraphicsItem* parent, int size)
   m_pieces.resize(size*size);
   m_splitPixmap = false;
   m_numerals = true;
-
+  m_wasShuffled = false;
   m_svg = new Plasma::Svg();
   startBoard();
   setCacheMode(DeviceCoordinateCache);
@@ -54,7 +54,6 @@ void Fifteen::setSize(int size)
 {
   m_size = size;
   startBoard();
-  updatePieces();
 }
 
 void Fifteen::setColor(const QColor& c)
@@ -111,6 +110,8 @@ void Fifteen::shuffle()
       itemAt(m_blank->boardX(), posClicked)->shuffling();
     }
   }
+  m_time.start();
+  m_wasShuffled = true;
 }
 
 void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
@@ -165,6 +166,7 @@ void Fifteen::setImage(const QString &path, bool identicalPieces)
 
 void Fifteen::updatePieces()
 {
+  bool sorted = true;
   QSizeF size = contentsRect().size();
   int width = size.width() / m_size;
   int height = size.height() / m_size;
@@ -183,6 +185,11 @@ void Fifteen::updatePieces()
     m_pieces[i]->setPos(m_pieces[i]->boardX() * width, m_pieces[i]->boardY() * height);
     m_pieces[i]->setFont(m_font);
     m_pieces[i]->update();
+    if(itemAt(i%m_size, i/m_size)->id() != i+1) sorted = false;
+  }
+  if(sorted && m_wasShuffled) {
+    emit puzzleSorted(m_time.elapsed());
+    m_wasShuffled = false;
   }
 }
 
@@ -221,6 +228,7 @@ void Fifteen::piecePressed(Piece *item)
       }
     }
   }
+  updatePieces();
 }
 
 Piece* Fifteen::itemAt(int gameX, int gameY)

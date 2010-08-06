@@ -23,6 +23,7 @@
 #include <QGraphicsWidget>
 #include <QHash>
 #include <QWeakPointer>
+#include <QTime>
 
 #include <Plasma/Svg>
 
@@ -42,6 +43,9 @@ class Fifteen : public QGraphicsWidget
     void updatePieces();
     int size() const;
     const QColor& color() const;
+    
+  signals:
+    void puzzleSorted(int ms);
 
   public slots:
     void piecePressed(Piece *item);
@@ -62,7 +66,8 @@ class Fifteen : public QGraphicsWidget
     void clearPieces();
     int m_size;
     QColor m_color;
-
+    QTime m_time;
+    bool m_wasShuffled;
     QVector<Piece *> m_pieces;
     Piece *m_blank;
     Plasma::Svg *m_svg;

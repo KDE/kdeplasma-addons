@@ -25,6 +25,7 @@
 
 //KDE
 #include <KConfigDialog>
+#include <KIcon>
 
 //Plasma
 #include <Plasma/Theme>
@@ -44,6 +45,7 @@ FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
   m_board->resize(192, 192); // 48 * 4 = 192
   resize(m_board->geometry().size());
   setPreferredSize(192, 192);
+  connect(m_board, SIGNAL(puzzleSorted(int)), this, SLOT(showSolvedMessage(int)));
 }
 
 void FifteenPuzzle::init()
@@ -121,6 +123,13 @@ void FifteenPuzzle::configAccepted()
   updateBoard();
 
   emit configNeedsSaving();
+}
+
+void FifteenPuzzle::showSolvedMessage(int ms)
+{
+  QTime overallTime(0,0,0,0);
+  overallTime = overallTime.addMSecs(ms);
+  Plasma::Applet::showMessage(KIcon("dialog-information"), QString("Time elapsed: %1").arg(overallTime.toString("hh:mm:ss.zzz")), Plasma::ButtonOk);
 }
 
 void FifteenPuzzle::updateBoard()

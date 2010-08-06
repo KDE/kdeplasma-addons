@@ -36,6 +36,9 @@ class FifteenPuzzle : public Plasma::Applet
     virtual QList<QAction*> contextualActions();
   protected slots:
     void configAccepted();
+    
+  public slots:
+    void showSolvedMessage(int ms);
 
   private:
     void updateBoard();
