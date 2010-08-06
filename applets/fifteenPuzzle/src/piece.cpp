@@ -78,6 +78,12 @@ void Piece::setSplitImage(bool splitPixmap)
   m_splitPixmap = splitPixmap;
 }
 
+void Piece::setPartialPixmap(QPixmap pixmap)
+{
+  m_partialPixmap.setPixmap(pixmap);
+  m_splitPixmap = true;
+}
+
 void Piece::setFont(const QFont &font)
 {
   m_font = font;
@@ -91,15 +97,13 @@ void Piece::showNumeral(bool show)
 void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                   QWidget *widget)
 {
-  Q_UNUSED(option);
-  Q_UNUSED(widget);
-
   if (m_isBlank) {
     return;
   }
 
   if (m_splitPixmap) {
-    m_svg->paint(painter, QPointF(0, 0), "piece_" + QString::number(m_id));
+    kDebug() << "Painting the widget inside the fifteenpuzzle for " << m_id;
+    m_partialPixmap.paint(painter, option, widget);
   } else {
     // here we assume that the svg has already been resized correctly by Fifteen::updatePixmaps()
      QColor c(m_fifteen->color());

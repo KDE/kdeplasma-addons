@@ -73,6 +73,30 @@ const QColor& Fifteen:: color() const
   return m_color;
 }
 
+void Fifteen::setPixmap(QPixmap *pixmap)
+{
+  m_pixmap = pixmap;
+  updatePixmaps();
+}
+
+void Fifteen::updatePixmaps()
+{
+  QSize size = m_pieces[0]->size().toSize() * m_size;
+  QPixmap copyPixmap = m_pixmap->scaled(size);
+ 
+  for(int y = 0; y < m_size; y++) {
+    for(int x = 0; x < m_size; x++) {
+      int i = (y * m_size) + x;
+  
+      if(!m_pieces[i]) continue;
+      QRect rect = m_pieces[i]->boundingRect().toRect();
+      int posX = x * rect.width();
+      int posY = y * rect.height();
+      
+      m_pieces[i]->setPartialPixmap(copyPixmap.copy(posX, posY, rect.width(), rect.height()));
+    }
+  }
+}
 
 void Fifteen::clearPieces()
 {
@@ -156,7 +180,7 @@ void Fifteen::setShowNumerals(bool show)
   updatePieces();
 }
 
-void Fifteen::setImage(const QString &path, bool identicalPieces)
+void Fifteen::setSvg(const QString &path, bool identicalPieces)
 {
   m_svg->setImagePath(path);
   m_splitPixmap = !identicalPieces && m_svg->hasElement("piece_0");
@@ -171,12 +195,6 @@ void Fifteen::updatePieces()
   int width = size.width() / m_size;
   int height = size.height() / m_size;
 
-  if (m_splitPixmap) {
-    m_svg->resize(size);
-  } else {
-    m_svg->resize(width, height);
-  }
-
   for (int i = 0; i < (m_size * m_size); ++i) {
     if (!m_pieces[i]) continue;
     m_pieces[i]->showNumeral(m_numerals);
@@ -186,6 +204,9 @@ void Fifteen::updatePieces()
     m_pieces[i]->setFont(m_font);
     m_pieces[i]->update();
     if(itemAt(i%m_size, i/m_size)->id() != i+1) sorted = false;
+  }
+  if (m_splitPixmap) {
+    updatePixmaps();
   }
   if(sorted && m_wasShuffled) {
     emit puzzleSorted(m_time.elapsed());

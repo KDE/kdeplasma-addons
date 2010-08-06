@@ -43,7 +43,7 @@ class FifteenPuzzle : public Plasma::Applet
   private:
     void updateBoard();
     void createMenu();
-
+    QPixmap *m_pixmap;
     Fifteen *m_board;
     FifteenPuzzleConfig *m_configDialog;
     QList<QAction *> m_actions;

@@ -22,6 +22,7 @@
 
 #include <QFont>
 #include <QGraphicsWidget>
+#include <QGraphicsPixmapItem>
 
 #include <Plasma/Svg>
 class Fifteen;
@@ -39,6 +40,7 @@ class Piece : public QGraphicsWidget
     int boardPos() const;
     bool isBlank() const;
     void setGamePos(int gamePos);
+    void setPartialPixmap(QPixmap pixmap);
     void setSplitImage(bool splitPixmap);
     void setFont(const QFont &font);
     void shuffling();
@@ -49,6 +51,7 @@ class Piece : public QGraphicsWidget
     bool m_isBlank;
     int m_gamePos;
     bool m_splitPixmap;
+    QGraphicsPixmapItem m_partialPixmap;
     QFont m_font;
     Plasma::Svg *m_svg;
     QGraphicsRectItem *m_bg;

@@ -45,6 +45,7 @@ FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
   m_board->resize(192, 192); // 48 * 4 = 192
   resize(m_board->geometry().size());
   setPreferredSize(192, 192);
+  m_pixmap = 0;
   connect(m_board, SIGNAL(puzzleSorted(int)), this, SLOT(showSolvedMessage(int)));
 }
 
@@ -59,7 +60,6 @@ void FifteenPuzzle::init()
   m_showNumerals = cg.readEntry("ShowNumerals", true);
 
   m_board->setColor(cg.readEntry("boardColor", QColor()));
-  kDebug() << "SIZE IS: " << cg.readEntry("boardSize",4);
   m_board->setSize(qMax(4, cg.readEntry("boardSize",4)));
 
   // make sure nobody messed up with the config file
@@ -71,6 +71,12 @@ void FifteenPuzzle::init()
 
       if (m_imagePath.isEmpty()) {
           m_usePlainPieces = true;
+      }
+      else {
+	if(!m_pixmap) {
+	  m_pixmap = new QPixmap();
+	}
+	m_pixmap->load(m_imagePath);
       }
   }
 
@@ -120,6 +126,11 @@ void FifteenPuzzle::configAccepted()
   cg.writeEntry("boardSize",  m_configDialog->ui.size->value());
   cg.writeEntry("boardColor", m_configDialog->ui.color->color());
 
+  if (!m_usePlainPieces){
+    if(!m_pixmap) m_pixmap = new QPixmap();
+    m_pixmap->load(m_imagePath);
+    kDebug() << "LOADING PIXMAP";
+  }
   updateBoard();
 
   emit configNeedsSaving();
@@ -135,7 +146,12 @@ void FifteenPuzzle::showSolvedMessage(int ms)
 void FifteenPuzzle::updateBoard()
 {
   m_board->setShowNumerals(m_showNumerals);
-  m_board->setImage(m_usePlainPieces ? QLatin1String(defaultImage) : m_imagePath, m_usePlainPieces);
+  if(m_pixmap) {
+    m_board->setPixmap(m_pixmap);
+  }
+  else {
+    m_board->setSvg(m_usePlainPieces ? QLatin1String(defaultImage) : m_imagePath, m_usePlainPieces);
+  }
 }
 
 void FifteenPuzzle::createMenu()

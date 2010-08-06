@@ -49,7 +49,9 @@ class Fifteen : public QGraphicsWidget
 
   public slots:
     void piecePressed(Piece *item);
-    void setImage(const QString &path, bool identicalPieces);
+    void setSvg(const QString &path, bool identicalPieces);
+    void setPixmap(QPixmap *pixmap);
+    void updatePixmaps();
     void setShowNumerals(bool show);
     void startBoard();
     void shuffle();
@@ -66,6 +68,7 @@ class Fifteen : public QGraphicsWidget
     void clearPieces();
     int m_size;
     QColor m_color;
+    QPixmap *m_pixmap;
     QTime m_time;
     bool m_wasShuffled;
     QVector<Piece *> m_pieces;
