@@ -30,7 +30,7 @@ class Piece : public QGraphicsWidget
 {
   Q_OBJECT
   public:
-    Piece(int id, Fifteen * parent, Plasma::Svg *svg);
+    Piece(int id, int gamePos, Fifteen * parent, Plasma::Svg *svg);
     int id() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
@@ -38,6 +38,7 @@ class Piece : public QGraphicsWidget
     int boardX() const;
     int boardY() const;
     int boardPos() const;
+    bool isBlank() const;
     void setGamePos(int gamePos);
     void setSize(QSizeF size);
     void setSplitImage(bool splitPixmap);
@@ -47,6 +48,7 @@ class Piece : public QGraphicsWidget
   private:
     int m_id;
     bool m_numeral;
+    bool m_isBlank;
     int m_gamePos;
     bool m_splitPixmap;
     QSizeF m_size;

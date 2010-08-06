@@ -85,14 +85,14 @@ void Fifteen::clearPieces()
 void Fifteen::startBoard(){
   qDeleteAll(m_pieces);
   m_pieces.fill(NULL);
-  qreal d = m_size * m_size;
+  int d = m_size * m_size;
   m_pieces.resize(d);
   for (int i = 0; i < d; ++i) {
-    m_pieces[i] = new Piece(i, this, m_svg);
+    m_pieces[i] = new Piece(i+1, i, this, m_svg);
     connect(m_pieces[i], SIGNAL(pressed(Piece*)), this, SLOT(piecePressed(Piece*)));
   }
-  m_blank = m_pieces[0];
- updatePieces();
+  m_blank = m_pieces[d-1];
+  updatePieces();
 }
 
 void Fifteen::shuffle()

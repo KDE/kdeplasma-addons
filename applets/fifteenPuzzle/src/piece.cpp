@@ -30,12 +30,13 @@
 #include <KDebug>
 #include "fifteen.h"
 
-Piece::Piece(int id, Fifteen* parent, Plasma::Svg* svg)
+Piece::Piece(int id, int gamePos, Fifteen* parent, Plasma::Svg* svg)
     : QGraphicsWidget(parent)
 {
   m_id = id;
+  m_isBlank = (m_id == parent->size() * parent->size());
   m_numeral = true;
-  m_gamePos = id;
+  m_gamePos = gamePos;
   m_svg = svg;
   m_fifteen = parent;
   m_bg = new QGraphicsRectItem(this);
@@ -55,6 +56,11 @@ int Piece::boardX() const
 int Piece::boardY() const
 {
   return m_gamePos / m_fifteen->size();
+}
+
+bool Piece::isBlank() const
+{
+  return m_isBlank;
 }
 
 int Piece::boardPos() const
@@ -94,7 +100,7 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
   Q_UNUSED(option);
   Q_UNUSED(widget);
 
-  if (m_id == 0) {
+  if (m_isBlank) {
     return;
   }
 
@@ -149,7 +155,7 @@ QRectF Piece::boundingRect() const
 void Piece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
   Q_UNUSED(event);
-  if (m_id == 0 || event->button() != Qt::LeftButton) {
+  if (m_isBlank || event->button() != Qt::LeftButton) {
       event->ignore();
       return;
   }
