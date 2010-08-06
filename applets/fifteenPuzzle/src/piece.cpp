@@ -73,12 +73,6 @@ void Piece::setGamePos(int gamePos)
   m_gamePos = gamePos;
 }
 
-void Piece::setSize(QSizeF size)
-{
-  prepareGeometryChange();
-  m_size = size;
-}
-
 void Piece::setSplitImage(bool splitPixmap)
 {
   m_splitPixmap = splitPixmap;
@@ -119,9 +113,6 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     return;
   }
 
-  int width = m_size.width();
-  int height = m_size.height();
-
   painter->setFont(m_font);
 
   QFontMetrics m(m_font);
@@ -131,25 +122,20 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
   pen.setColor(QColor(0, 0, 0, 90));
   painter->setPen(pen);
-  painter->drawText(((width / 2) - m.width(text) / 2) + 2,
-                    ((height / 2) + m.ascent() / 2) + 2,
-                    text);
+  painter->drawText((( size().width() / 2) - m.width(text) / 2) + 2,
+                    (( size().height() / 2) + m.ascent() / 2) + 2, text);
+
 
   pen.setColor(QColor(Qt::white));
   painter->setPen(pen);
-  painter->drawText((width / 2) - m.width(text) / 2,
-                    (height / 2) + m.ascent() / 2,
-                    text);
+  painter->drawText(( size().width() / 2) - m.width(text) / 2,
+                    ( size().height() / 2) + m.ascent() / 2, text);
+
 }
 
 void Piece::shuffling()
 {
   emit pressed(this);
-}
-
-QRectF Piece::boundingRect() const
-{
-  return QRectF(QPointF(0, 0), m_size);
 }
 
 void Piece::mousePressEvent(QGraphicsSceneMouseEvent *event)

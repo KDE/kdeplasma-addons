@@ -179,7 +179,7 @@ void Fifteen::updatePieces()
     if (!m_pieces[i]) continue;
     m_pieces[i]->showNumeral(m_numerals);
     m_pieces[i]->setSplitImage(m_splitPixmap);
-    m_pieces[i]->setSize(QSizeF(width, height));
+    m_pieces[i]->resize(QSizeF(width, height));
     m_pieces[i]->setPos(m_pieces[i]->boardX() * width, m_pieces[i]->boardY() * height);
     m_pieces[i]->setFont(m_font);
     m_pieces[i]->update();

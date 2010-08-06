@@ -33,14 +33,12 @@ class Piece : public QGraphicsWidget
     Piece(int id, int gamePos, Fifteen * parent, Plasma::Svg *svg);
     int id() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    QRectF boundingRect() const;
     void showNumeral(bool show);
     int boardX() const;
     int boardY() const;
     int boardPos() const;
     bool isBlank() const;
     void setGamePos(int gamePos);
-    void setSize(QSizeF size);
     void setSplitImage(bool splitPixmap);
     void setFont(const QFont &font);
     void shuffling();
@@ -51,7 +49,6 @@ class Piece : public QGraphicsWidget
     bool m_isBlank;
     int m_gamePos;
     bool m_splitPixmap;
-    QSizeF m_size;
     QFont m_font;
     Plasma::Svg *m_svg;
     QGraphicsRectItem *m_bg;
