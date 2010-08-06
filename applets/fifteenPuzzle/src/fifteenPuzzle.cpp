@@ -130,6 +130,11 @@ void FifteenPuzzle::configAccepted()
     if(!m_pixmap) m_pixmap = new QPixmap();
     m_pixmap->load(m_imagePath);
     kDebug() << "LOADING PIXMAP";
+  }else{
+    if( m_pixmap ){
+	delete m_pixmap;
+	m_pixmap = 0;
+    }
   }
   updateBoard();
 
@@ -149,10 +154,12 @@ void FifteenPuzzle::updateBoard()
   if(m_pixmap) {
     m_board->setPixmap(m_pixmap);
   }
-  else {
-    m_board->setSvg(m_usePlainPieces ? QLatin1String(defaultImage) : m_imagePath, m_usePlainPieces);
+  else {    
+    m_board->setPixmap(0);  // remove the pixmap from the board.
+    m_board->setSvg( QLatin1String(defaultImage), m_usePlainPieces);
   }
 }
+
 
 void FifteenPuzzle::createMenu()
 {

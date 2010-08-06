@@ -36,6 +36,7 @@ Piece::Piece(int id, int gamePos, Fifteen* parent, Plasma::Svg* svg)
   m_id = id;
   m_isBlank = (m_id == parent->size() * parent->size());
   m_numeral = true;
+  m_splitPixmap = false;
   m_gamePos = gamePos;
   m_svg = svg;
   m_fifteen = parent;
@@ -102,7 +103,6 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
   }
 
   if (m_splitPixmap) {
-    kDebug() << "Painting the widget inside the fifteenpuzzle for " << m_id;
     m_partialPixmap.paint(painter, option, widget);
   } else {
     // here we assume that the svg has already been resized correctly by Fifteen::updatePixmaps()

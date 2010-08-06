@@ -40,6 +40,7 @@ Fifteen::Fifteen(QGraphicsItem* parent, int size)
   m_wasShuffled = false;
   m_svg = new Plasma::Svg();
   startBoard();
+  m_pixmap = 0;
   setCacheMode(DeviceCoordinateCache);
 }
 
@@ -76,7 +77,9 @@ const QColor& Fifteen:: color() const
 void Fifteen::setPixmap(QPixmap *pixmap)
 {
   m_pixmap = pixmap;
-  updatePixmaps();
+  if( m_pixmap ){
+    updatePieces();
+  }
 }
 
 void Fifteen::updatePixmaps()
@@ -183,7 +186,6 @@ void Fifteen::setShowNumerals(bool show)
 void Fifteen::setSvg(const QString &path, bool identicalPieces)
 {
   m_svg->setImagePath(path);
-  m_splitPixmap = !identicalPieces && m_svg->hasElement("piece_0");
   m_numerals = m_numerals || identicalPieces;
   updatePieces();
 }
@@ -198,16 +200,21 @@ void Fifteen::updatePieces()
   for (int i = 0; i < (m_size * m_size); ++i) {
     if (!m_pieces[i]) continue;
     m_pieces[i]->showNumeral(m_numerals);
-    m_pieces[i]->setSplitImage(m_splitPixmap);
+    m_pieces[i]->setSplitImage( (m_pixmap)?true:false );
     m_pieces[i]->resize(QSizeF(width, height));
     m_pieces[i]->setPos(m_pieces[i]->boardX() * width, m_pieces[i]->boardY() * height);
     m_pieces[i]->setFont(m_font);
     m_pieces[i]->update();
     if(itemAt(i%m_size, i/m_size)->id() != i+1) sorted = false;
   }
-  if (m_splitPixmap) {
+  
+  if (m_pixmap) {
     updatePixmaps();
+  }else{
+     QRect r = m_pieces[1]->boundingRect().toRect();
+    m_svg->resize( r.width(), r.height());
   }
+  
   if(sorted && m_wasShuffled) {
     emit puzzleSorted(m_time.elapsed());
     m_wasShuffled = false;
