@@ -40,20 +40,29 @@ public:
       */
     virtual void pressed();
 
+    /**
+      * This should be called when the key is pressed for a longer time with out releasing or moving the pointer
+      */
     virtual void pressRepeated();
     QRectF rect() const;
     QSize relativeSize() const;
     /**
-      * called when button is pressed
+      * called when button is released after being pressed
+      * This will usually create an X-Event. It may be a key release for functional keys
+      * or a press and release for alphanumeric keys
       */
     virtual void released();
     /**
-      * Called to "unpress" the button
+      * Called to make sticky (switch) buttons accepting unpressable again.
       */
     virtual void reset();
     void setKeycode(unsigned int keycode);
     virtual void setPixmap(QPixmap *pixmap);
     QSize size() const;
+    /**
+      * Called to unpress the button. This will undo a key press and is usually used when the pointer slides away from the key
+      * No X-event is emitted, the button is just brought back into its default state
+      */
     virtual void unpressed();
     void updateDimensions(double factor_x, double factor_y);
 
