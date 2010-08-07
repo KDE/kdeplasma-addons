@@ -127,7 +127,7 @@ void PanelIcon::init() {
         m_layout = file;
     }
     else{ // fallback to default layout
-        m_layout = KStandardDirs::locate("data", "plasmaboard/qwert_layout.xml");
+        m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
     }
 
 }
