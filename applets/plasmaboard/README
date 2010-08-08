@@ -1,4 +1,4 @@
-Welcome to plasmaboard, a virtual keyboard for your desktop! It is designed especially with keyboard users in mind.
+Welcome to plasmaboard, a virtual keyboard for your desktop! It is designed especially with touchscreen users in mind. You can use it with KDE 4.4 and above
 
 REQUIREMENTS:
 - You need a working GNU Compiler toolchain. 
@@ -19,10 +19,7 @@ In the main directory run
 
 KNOWN ISSUES
 
-- KEYBOARD DOES NOT WORK
-Since KDE 4.2.2 plasmaboard does not work anymore on most distributions. The problem is caused by a change in the plasma library. 
-To fix that I needed to commit a patch to KDE. Sadly it didn't make into the 4.2.4 release. I hope some package maintainers will integrate the patch.
-Plasmaboard works with KDE 4.3 RC1.
+- Plasmaboard does only (!) work when you place it in the panel. You can place it on the desktop but clicking on its buttons will do nothing
 
 - When pressing "Alt Gr" the symbols on the keyboard do not adapt. This is an issue with the underlying X-Function, which seems
 only to do mapping for the shift key correctly. No known solution yet. Despite of that AltGr works as expected 
@@ -31,4 +28,5 @@ only to do mapping for the shift key correctly. No known solution yet. Despite o
 
 - Backspace key does not work in eclipse. Don't know why. If you find other applications in which plasmaboard doesn't work as expected, please report
 
-- Caps lock does not work for some keys. Don't know why. Shift works.
+
+

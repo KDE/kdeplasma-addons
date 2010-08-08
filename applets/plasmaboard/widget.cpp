@@ -41,9 +41,13 @@
 #include <QGraphicsSceneResizeEvent>
 #include <QTimer>
 #include <QPainter>
+#include <QSignalMapper>
 #include <plasma/theme.h>
 
 #include "Helpers.h"
+
+#define REPEAT_TIMER 1500
+#define STICKY_TIMER 500
 
 QChar Helpers::mapXtoUTF8[0xffff+1];
 int Helpers::keysymsPerKeycode;
@@ -82,10 +86,12 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
         m_engine -> connectAllSources(this);
     }
 
+    m_signalMapper = new QSignalMapper(this);
+    connect(m_signalMapper, SIGNAL(mapped(int)), this, SLOT(stickyKey_Mapper(int)));
+
     m_repeatTimer = new QTimer(this);
     connect(m_repeatTimer, SIGNAL(timeout()), this, SLOT(repeatKeys()));
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
-
 }
 
 
@@ -517,12 +523,6 @@ void PlasmaboardWidget::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event )
     Plasma::Applet::mouseReleaseEvent(event);
 }
 
-/*bool PlasmaboardWidget::event ( QEvent * event )
-{
-    qDebug() << event->type();
-    return QGraphicsWidget::event(event);
-}*/
-
 void PlasmaboardWidget::paint(QPainter *p,
                               const QStyleOptionGraphicsItem *option,
                               QWidget* widget)
@@ -548,7 +548,7 @@ void PlasmaboardWidget::press(BoardKey *key)
     m_pressedList << key;    
     update(key->rect());
     setTooltip(key);
-    m_repeatTimer->start(1500);
+    m_repeatTimer->start(REPEAT_TIMER);
 }
 
 void PlasmaboardWidget::press(FuncKey *key)
@@ -567,7 +567,6 @@ void PlasmaboardWidget::refreshKeys()
         key->updateDimensions(factor_x, factor_y);
         key->setPixmap(getFrame(key->size()));
     }
-
 }
 
 void PlasmaboardWidget::relabelKeys()
@@ -580,17 +579,21 @@ void PlasmaboardWidget::relabelKeys()
 
 void PlasmaboardWidget::release(BoardKey *key)
 {    
-    key->released();
-    key->setPixmap(getFrame(key->size()));
-    m_pressedList.removeAll(key);
-    update(key->rect());
-    clearTooltip();
-
+    key->released(); // trigger X-unpress event done by key
+    m_pressedList.removeAll(key);    
+    clearTooltip(); // remove displayed tooltip
     if(m_alphaKeys.contains((AlphaNumKey*) key)){
         reset();
     }
-
     m_repeatTimer->stop();
+
+    int id = qrand();
+    m_stickyKeys[id] = key;
+
+    QTimer* timer = new QTimer(this);    
+    connect(timer, SIGNAL(timeout()), m_signalMapper, SLOT(map()));
+    m_signalMapper->setMapping(timer, id);
+    timer->start(STICKY_TIMER);
 }
 
 void PlasmaboardWidget::repeatKeys()
@@ -648,6 +651,16 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
         m_tooltip -> resize( key->size()*2 );
         m_tooltip -> show();
     }
+}
+
+void PlasmaboardWidget::stickyKey_Mapper(int id)
+{    
+    BoardKey* key = m_stickyKeys[id];
+    key->setPixmap(getFrame(key->size()));
+    update(key->rect());
+
+    delete (m_signalMapper->mapping(id)); // delete the QTimer
+    m_stickyKeys.remove(id);
 }
 
 void PlasmaboardWidget::switchAlternative(bool alt){

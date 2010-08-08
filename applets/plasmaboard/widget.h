@@ -27,6 +27,7 @@
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
 
+
 #include <QXmlStreamReader>
 
 #define XK_TECHNICAL
@@ -38,6 +39,7 @@ class AlphaNumKey;
 class BoardKey;
 class DualKey;
 class FuncKey;
+class QSignalMapper;
 class QTimer;
 class StickyKey;
 class SwitchKey;
@@ -190,6 +192,9 @@ public Q_SLOTS:
       */
     void themeChanged();
 
+protected Q_SLOTS:
+    void stickyKey_Mapper(int id);
+
 private:
     Plasma::FrameSvg* m_activeFrame; // svg with active state
     QHash<QSize, QPixmap*> m_activeFrames; // cache of all pixmap sizes with active state
@@ -210,7 +215,9 @@ private:
     QList<BoardKey*> m_keys; // list of all keys displayed
     QList<BoardKey*> m_pressedList; // list all currently pressed keys
     QTimer* m_repeatTimer;
+    QSignalMapper* m_signalMapper;
     QList<StickyKey*> m_shiftKeys; // list of Shift-Keys on keyboard
+    QMap<int,BoardKey*> m_stickyKeys; // list of keys waiting for being unpressed
     QList<StickyKey*> m_superKeys; // list of all super-keys on keyboard
     QList<SwitchKey*> m_switchKeys; // list of all switch keys on keyboard
     Tooltip* m_tooltip; // pointer to widget which is used as tooltip
