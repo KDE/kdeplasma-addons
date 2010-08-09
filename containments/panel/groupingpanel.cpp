@@ -21,14 +21,14 @@
 
 #include <QAction>
 
+#include <KLocale>
 #include <KDebug>
 #include <KIcon>
 
 #include <Plasma/AbstractToolBox>
 #include <Plasma/View>
 #include <Plasma/PaintUtils>
-
-#include <kephal/screens.h>
+#include <Plasma/Corona>
 
 #include "../lib/abstractgroup.h"
 
@@ -37,9 +37,10 @@ using namespace Plasma;
 GroupingPanel::GroupingPanel(QObject *parent, const QVariantList &args)
     : GroupingContainment(parent, args),
       m_configureAction(0),
-      m_currentSize(QSize(Kephal::ScreenUtils::screenSize(screen()).width(), 35)),
       m_maskDirty(true)
 {
+    KGlobal::locale()->insertCatalog("libplasma_groupingcontainment");
+
     m_background = new Plasma::FrameSvg(this);
     m_background->setImagePath("widgets/panel-background");
     m_background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
@@ -60,6 +61,8 @@ GroupingPanel::~GroupingPanel()
 void GroupingPanel::init()
 {
     setContainmentType(Containment::CustomPanelContainment);
+
+    m_currentSize = QSize(corona()->screenGeometry(screen()).width(), 35);
 
     GroupingContainment::init();
     //FIXME: This should be enabled, but in that case proxywidgets won't get rendered
@@ -120,7 +123,7 @@ void GroupingPanel::updateBorders(const QRect &geom)
     if (s < 0) {
         // do nothing in this case, we want all the borders
     } else if (loc == BottomEdge || loc == TopEdge) {
-        QRect r = Kephal::ScreenUtils::screenGeometry(s);
+        QRect r = corona()->screenGeometry(s);
 
         if (loc == BottomEdge) {
             enabledBorders ^= FrameSvg::BottomBorder;
@@ -141,7 +144,7 @@ void GroupingPanel::updateBorders(const QRect &geom)
 
         //kDebug() << "top/bottom: Width:" << width << ", height:" << height;
     } else if (loc == LeftEdge || loc == RightEdge) {
-        QRect r = Kephal::ScreenUtils::screenGeometry(s);
+        QRect r = corona()->screenGeometry(s);
 
         if (loc == RightEdge) {
             enabledBorders ^= FrameSvg::RightBorder;
@@ -195,7 +198,7 @@ void GroupingPanel::constraintsEvent(Plasma::Constraints constraints)
     //we need to know if the width or height is 100%
     if (constraints & Plasma::LocationConstraint || constraints & Plasma::SizeConstraint) {
         m_currentSize = geometry().size().toSize();
-        QRectF screenRect = screen() >= 0 ? Kephal::ScreenUtils::screenGeometry(screen()) :
+        QRectF screenRect = screen() >= 0 ? corona()->screenGeometry(screen()) :
                                             geometry();
 
         if ((formFactor() == Horizontal && m_currentSize.width() >= screenRect.width()) ||

@@ -24,6 +24,7 @@
 #include <QtGui/QGraphicsSceneContextMenuEvent>
 #include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QAction>
+#include <QTimer>
 
 #include <KDebug>
 #include <KMenu>
@@ -72,7 +73,7 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
 
     createActions();
 
-    q->connect(newGroupMenu, SIGNAL(triggered(QAction *)), q, SLOT(newGroupClicked(QAction *)));
+    q->connect(newGroupMenu, SIGNAL(triggered(QAction*)), q, SLOT(newGroupClicked(QAction*)));
     q->connect(deleteGroupAction, SIGNAL(triggered()), q, SLOT(deleteGroup()));
     q->connect(configureGroupAction, SIGNAL(triggered()), q, SLOT(configureGroup()));
 }
@@ -89,7 +90,7 @@ void GroupingContainmentPrivate::createActions()
         action->deleteLater();
     }
     foreach (const QString &group, groups) {
-        QAction *action = new QAction(i18n("Add a new ") + AbstractGroup::prettyName(group), q);
+        QAction *action = new QAction(i18nc("%1 is the name of the group", "Add a new %1", AbstractGroup::prettyName(group)), q);
         action->setData(group);
 
         newGroupMenu->addAction(action);
@@ -314,8 +315,22 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 
     movingWidget = 0;
     interestingWidget = 0;
+    movementHelperWidget->setZValue(0);
 
     if (interestingGroup) {
+        QGraphicsItem *parent = widget->parentItem();
+        QPointF initialPos(widget->pos());
+
+        //removing the handle if changing group, because the new group could provide a different type.
+        //would like to find a way to know if it is the case, but don't know how.
+        if (interestingGroup != widget->property("group").value<AbstractGroup *>()) {
+            Handle *h = handles.value(widget);
+            if (h) {
+                h->deleteLater();
+                handles.remove(widget);
+            }
+        }
+
         if (q->corona()->immutability() == Plasma::Mutable) {
             Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
             AbstractGroup *group = static_cast<AbstractGroup *>(widget);
@@ -329,30 +344,27 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
             }
         }
 
-        QRectF geom(widget->geometry());
+        QRectF geom(widget->boundingRect());
 
-        QPointF c = widget->contentsRect().center();
-        c += q->mapFromScene(widget->scenePos());
-        QPointF pos = q->mapToItem(interestingGroup, c);
+        QPointF pos = interestingGroup->mapFromItem(parent, initialPos);
         interestingGroup->layoutChild(widget, pos);
         interestingGroup->save(*(interestingGroup->d->mainConfigGroup()));
         interestingGroup->saveChildren();
 
-        Handle *h = handles.value(widget);
-        if (h) {
-            h->deleteLater();
-            handles.remove(widget);
-        }
+        geom.translate(widget->parentItem()->mapFromItem(parent, initialPos));
+        QRectF newGeom(widget->geometry());
 
-        widget->removeSceneEventFilter(q);
+        if (geom != newGeom) {
+            widget->removeSceneEventFilter(q);
 
-        Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
-        if (anim) {
-            q->connect(anim, SIGNAL(finished()), q, SLOT(widgetMovedAnimationComplete()));
-            anim->setTargetWidget(widget);
-            anim->setProperty("startGeometry", geom);
-            anim->setProperty("targetGeometry", widget->geometry());
-            anim->start(QAbstractAnimation::DeleteWhenStopped);
+            Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
+            if (anim) {
+                q->connect(anim, SIGNAL(finished()), q, SLOT(widgetMovedAnimationComplete()));
+                anim->setTargetWidget(widget);
+                anim->setProperty("startGeometry", geom);
+                anim->setProperty("targetGeometry", newGeom);
+                anim->start(QAbstractAnimation::DeleteWhenStopped);
+            }
         }
 
         interestingGroup = 0;
@@ -391,8 +403,10 @@ void GroupingContainmentPrivate::restoreGroups()
                     }
                 }
                 if (parentGroup) {
+                    QTransform t = group->transform();
                     parentGroup->addSubGroup(group, false);
                     parentGroup->restoreChildGroupInfo(group, groupInfoConfig);
+                    group->setTransform(t);
                 }
                 emit group->initCompleted();
             }
@@ -416,8 +430,10 @@ void GroupingContainmentPrivate::restoreGroups()
                     }
                 }
                 if (group) {
+                    QTransform t = applet->transform();
                     group->addApplet(applet, false);
                     group->restoreChildGroupInfo(applet, groupConfig);
+                    applet->setTransform(t);
                 }
             }
         } else { //happens when changing a desktop activity to GroupingDesktop
@@ -443,7 +459,12 @@ void GroupingContainmentPrivate::prepareWidgetToMove()
     //i use that widget and not "q" or others because, setting its position equal to
     //the parentItem's one, it doesn't break the movement via ItemIsMovable.
     if (q->immutability() == Plasma::Mutable) {
-        QPointF p(q->mapFromScene(widgetToBeSetMoving->parentItem()->scenePos()));
+        movementHelperWidget->setTransform(QTransform());
+        QGraphicsItem *parent = widgetToBeSetMoving->parentItem();
+        QTransform t(parent->itemTransform(movementHelperWidget));
+        QTransform tr(t.m11(), t.m12(), t.m21(), t.m22(), 0, 0);
+        movementHelperWidget->setTransform(tr);
+        QPointF p(q->mapFromItem(parent, QPointF(0, 0)));
         movementHelperWidget->setPos(p);
         movementHelperWidget->setMinimumSize(widgetToBeSetMoving->size());
         widgetToBeSetMoving->setParentItem(movementHelperWidget);
@@ -480,17 +501,15 @@ void GroupingContainment::init()
 
     d->newGroupAction->setVisible(immutability() == Plasma::Mutable);
     addToolBoxAction(d->newGroupAction);
+
+    connect(this, SIGNAL(appletAdded(Plasma::Applet*,QPointF)),
+            this, SLOT(manageApplet(Plasma::Applet*,QPointF)));
+    connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+            this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
 }
 
 void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
 {
-    if (constraints & Plasma::StartupCompletedConstraint) {
-        connect(this, SIGNAL(appletAdded(Plasma::Applet*, QPointF)),
-                this, SLOT(manageApplet(Plasma::Applet*, QPointF)));
-        connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
-                this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
-    }
-
     if (constraints & Plasma::FormFactorConstraint) {
         d->createActions();
     }
@@ -750,12 +769,10 @@ void GroupingContainment::restoreContents(KConfigGroup &group)
     foreach (const QString &groupId, groupsConfig.groupList()) {
         int id = groupId.toInt();
         KConfigGroup groupConfig(&groupsConfig, groupId);
-        QRectF geometry = groupConfig.readEntry("geometry", QRectF());
         QString plugin = groupConfig.readEntry("plugin", QString());
 
-        AbstractGroup *group = d->createGroup(plugin, geometry.topLeft(), id);
+        AbstractGroup *group = d->createGroup(plugin, QPointF(), id);
         if (group) {
-            group->resize(geometry.size());
             group->restore(groupConfig);
         }
     }

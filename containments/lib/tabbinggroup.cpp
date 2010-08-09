@@ -101,7 +101,7 @@ void TabbingGroup::init()
     QStringList tabs = group.readEntry("Tabs", QStringList());
 
     if (tabs.isEmpty()) {
-        tabs << "New Tab";
+        tabs << i18n("New Tab");
     }
 
     foreach (const QString &tab, tabs) {
@@ -137,7 +137,7 @@ void TabbingGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 
     QGraphicsWidget *w = m_tabWidgets.at(m_tabBar->currentIndex());
     child->setParentItem(w);
-    child->setPos(mapToItem(w, child->pos()));
+    child->setPos(mapToItem(w, pos));
 
     m_children.insert(child, m_tabBar->currentIndex());
 }
@@ -175,7 +175,7 @@ void TabbingGroup::createConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     m_ui.setupUi(widget);
-    parent->addPage(widget, i18n("General"), "configure");
+    parent->addPage(widget, i18nc("a general page in the config dialog", "General"), "configure");
 
     for (int i = 0;i < m_tabBar->count();++i) {
         QListWidgetItem *item = new QListWidgetItem(m_tabBar->tabText(i));
@@ -372,9 +372,12 @@ void TabbingGroup::configAccepted()
 
     if (!childrenToBeMoved.isEmpty()) {
         //reparent children of moved tabs
-        QList<QGraphicsWidget *> children = childrenToBeMoved.keys();
-        foreach (QGraphicsWidget *child, children) {
-            int tab = childrenToBeMoved.value(child);
+        QMapIterator<QGraphicsWidget *, int> i(childrenToBeMoved);
+        while (i.hasNext()) {
+            i.next();
+
+            QGraphicsWidget *child = i.key();
+            int tab = i.value();
             child->setParentItem(m_tabBar->tabAt(tab)->graphicsItem());
             m_children.insert(child, tab);
         }
@@ -394,15 +397,17 @@ bool TabbingGroup::eventFilter(QObject *obj, QEvent *event)
 
     if (event->type() == QEvent::GraphicsSceneMove) {
         QGraphicsView *v = view();
-        QPointF pos = m_tabBar->mapFromScene(v->mapToScene(v->mapFromGlobal(QCursor::pos())));
+        if (v) {
+            QPointF pos = m_tabBar->mapFromScene(v->mapToScene(v->mapFromGlobal(QCursor::pos())));
 
-        int index = m_tabBar->nativeWidget()->tabAt(pos.toPoint());
-        if (index == -1) {
-            m_changingTab = -1;
-            m_changeTabTimer->stop();
-        } else {
-            m_changingTab = index;
-            m_changeTabTimer->start();
+            int index = m_tabBar->nativeWidget()->tabAt(pos.toPoint());
+            if (index == -1) {
+                m_changingTab = -1;
+                m_changeTabTimer->stop();
+            } else {
+                m_changingTab = index;
+                m_changeTabTimer->start();
+            }
         }
     }
 

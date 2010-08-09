@@ -21,17 +21,12 @@
 #include "handle.h"
 
 #include <QApplication>
-#include <QBitmap>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QLinearGradient>
 #include <QtGui/QPainter>
 #include <QtGui/QApplication>
 #include <QtGui/QMenu>
 #include <QTouchEvent>
-#include <QMatrix>
-#include <QTransform>
-#include <QWeakPointer>
-#include <QPropertyAnimation>
 
 #include <kcolorscheme.h>
 #include <kglobalsettings.h>

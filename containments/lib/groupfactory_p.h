@@ -30,6 +30,8 @@
 class QGraphicsItem;
 class AbstractGroup;
 
+typedef AbstractGroup *(*CreatorFunction)(QGraphicsItem *);
+
 struct GroupInfo
 {
     GroupInfo(const QString &n)
@@ -60,7 +62,7 @@ class GroupFactory
         template<class T> static bool registerGroup(const QString &name)
         {
             if (!m_groups) {
-                m_groups = new QMap<GroupInfo, AbstractGroup *(*)(QGraphicsItem *)>;
+                m_groups = new QMap<GroupInfo, CreatorFunction>;
             }
 
             GroupInfo gi(name);
@@ -80,7 +82,7 @@ class GroupFactory
             return new T(parent);
         }
 
-        static QMap<GroupInfo, AbstractGroup *(*)(QGraphicsItem *)> *m_groups;
+        static QMap<GroupInfo, CreatorFunction> *m_groups;
 };
 
 #endif // GROUPFACTORY_H

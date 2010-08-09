@@ -38,6 +38,9 @@
 #include "groupingcontainment.h"
 #include "freehandle.h"
 
+#include <cmath>
+#include <math.h>
+
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
       destroying(false),
@@ -131,6 +134,21 @@ void AbstractGroupPrivate::subGroupDestroyed(AbstractGroup *subGroup)
 void AbstractGroupPrivate::addChild(QGraphicsWidget *child)
 {
     QPointF newPos = q->mapFromItem(child->parentItem(), child->pos());
+    if (groupType == AbstractGroup::ConstrainedGroup) {
+        child->setTransform(QTransform());
+    } else {
+        QTransform t(child->itemTransform(q));
+        if (t.m11() != 0) {
+            qreal angle = (t.m12() > 0 ? acos(t.m11()) : -acos(t.m11()));
+            QTransform at;
+            QSizeF size(child->size());
+            at.translate(size.width() / 2, size.height() / 2);
+            at.rotateRadians(angle);
+            at.translate(-size.width() / 2, -size.height() / 2);
+            child->setTransform(at);
+            newPos -= QPointF(at.dx(), at.dy());
+        }
+    }
     child->setParentItem(q);
     child->setProperty("group", QVariant::fromValue(q));
     child->setPos(newPos);
@@ -143,8 +161,19 @@ void AbstractGroupPrivate::addChild(QGraphicsWidget *child)
 void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
 {
     QPointF newPos = child->scenePos();
-    child->setParentItem(q->parentItem());
-    child->setPos(child->parentItem()->mapFromScene(newPos));
+    QGraphicsItem *parent = q->parentItem();
+    QTransform t(child->itemTransform(parent));
+    if (t.m11() != 0) {
+        qreal angle = (t.m12() > 0 ? acos(t.m11()) : -acos(t.m11()));
+        QTransform at;
+        QSizeF size(child->size());
+        at.translate(size.width() / 2, size.height() / 2);
+        at.rotateRadians(angle);
+        at.translate(-size.width() / 2, -size.height() / 2);
+        child->setTransform(at);
+    }
+    child->setParentItem(parent);
+    child->setPos(parent->mapFromScene(newPos));
 
     child->disconnect(q);
 }
@@ -238,9 +267,7 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
 
     if (applets().contains(applet)) {
         if (applet->parentItem() != this) {
-            QPointF p(mapFromScene(applet->scenePos()));
             applet->setParentItem(this);
-            applet->setPos(p);
         }
 
         return;
@@ -278,9 +305,7 @@ void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
 
     if (subGroups().contains(group)) {
         if (group->parentItem() != this) {
-            QPointF p(mapFromScene(group->scenePos()));
             group->setParentItem(this);
-            group->setPos(p);
         }
 
         return;
@@ -437,6 +462,10 @@ KConfigGroup AbstractGroup::config() const
 
 void AbstractGroup::save(KConfigGroup &group) const
 {
+    if (d->isLoading) {
+        return;
+    }
+
     if (!group.isValid()) {
         group = *d->mainConfigGroup();
     }
@@ -446,6 +475,15 @@ void AbstractGroup::save(KConfigGroup &group) const
     QRectF rect = boundingRect();
     rect.translate(containment()->mapFromScene(scenePos()));
     group.writeEntry("geometry", rect);
+
+    if (transform() == QTransform()) {
+        group.deleteEntry("transform");
+    } else {
+        QList<qreal> m;
+        QTransform t = transform();
+        m << t.m11() << t.m12() << t.m13() << t.m21() << t.m22() << t.m23() << t.m31() << t.m32() << t.m33();
+        group.writeEntry("transform", m);
+    }
 }
 
 void AbstractGroup::saveChildren() const
@@ -466,7 +504,15 @@ void AbstractGroup::saveChildren() const
 
 void AbstractGroup::restore(KConfigGroup &group)
 {
+    QList<qreal> m = group.readEntry("transform", QList<qreal>());
+    if (m.count() == 9) {
+        QTransform t(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8]);
+        setTransform(t);
+    }
+
     qreal z = group.readEntry("zvalue", 0);
+    QRectF geom = group.readEntry("geometry", QRectF());
+    setGeometry(geom);
 
     if (z > 0) {
         setZValue(z);
@@ -576,14 +622,23 @@ QVariant AbstractGroup::itemChange(GraphicsItemChange change, const QVariant &va
             }
         break;
 
+        case ItemTransformChange:
+            if (isMainGroup() || immutability() != Plasma::Mutable) {
+                return transform();
+            }
+            break;
+
         case ItemPositionHasChanged:
             emit geometryChanged();
 
-        break;
-
-        case ItemTransformChange:
+        case ItemTransformHasChanged:
             if (immutability() != Plasma::Mutable) {
                 return transform();
+            } else {
+                // invalid group, will result in save using the default group
+                KConfigGroup cg;
+                save(cg);
+                emit configNeedsSaving();
             }
         break;
 
@@ -601,6 +656,11 @@ void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     if (d->backgroundHints == NoBackground) {
         return;
+    }
+
+    if (sceneTransform().isRotating()) {
+        painter->setRenderHint(QPainter::SmoothPixmapTransform);
+        painter->setRenderHint(QPainter::Antialiasing);
     }
 
     d->background->paintFrame(painter);

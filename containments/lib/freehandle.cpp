@@ -21,7 +21,6 @@
 #include "freehandle.h"
 
 #include <QApplication>
-#include <QBitmap>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QLinearGradient>
 #include <QtGui/QPainter>
@@ -30,7 +29,6 @@
 #include <QTouchEvent>
 #include <QMatrix>
 #include <QTransform>
-#include <QWeakPointer>
 #include <QPropertyAnimation>
 
 #include <kcolorscheme.h>
@@ -467,6 +465,11 @@ void FreeHandle::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
 
     if (event->button() == Qt::LeftButton) {
+        m_originalGeom = mapToScene(QRectF(QPoint(0,0), widget()->size())).boundingRect();
+        QPointF center = widget()->boundingRect().center();
+        m_originalTransform = widget()->transform();
+        m_angle = _k_pointAngle(m_originalTransform.map(center + QPointF(1.0, 0.0)) - center);
+
         m_pressedButton = mapToButton(event->pos());
         //kDebug() << "button pressed:" << m_pressedButton;
         if (m_pressedButton != NoButton) {
@@ -646,10 +649,14 @@ void FreeHandle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             }
         }
 
-        if (widget()) {
-            QPointF mappedPoint = transform().map(QPointF(deltaScene.x(), deltaScene.y()));
-            widget()->moveBy(mappedPoint.x(), mappedPoint.y());
-        }
+        QPointF curPos = event->pos();
+        QPointF lastPos = event->lastPos();
+
+        QTransform transform = widget()->transform();
+        //we need to discard translation from the transform
+        QTransform t(transform.m11(), transform.m12(), transform.m21(), transform.m22(), 0, 0);
+        QPointF delta = t.map(curPos - lastPos);
+        widget()->moveBy(delta.x(), delta.y());
     } else if (m_pressedButton == ResizeButton || m_pressedButton == RotateButton) {
         QPointF cursorPoint = event->scenePos();
 
@@ -693,9 +700,14 @@ void FreeHandle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             }
         } else {
             // un-rotate screen points so we can read differences of coordinates
-            QPointF rStaticPoint = _k_rotatePoint(m_resizeStaticPoint, -m_angle);
-            QPointF rCursorPoint = _k_rotatePoint(cursorPoint, -m_angle);
-            QPointF rGrabPoint = _k_rotatePoint(m_resizeGrabPoint, -m_angle);
+
+            QTransform t(widget()->sceneTransform());
+            //take the angle relative to the scene
+            qreal angle = (t.m12() > 0 ? acos(t.m11()) : -acos(t.m11()));
+
+            QPointF rStaticPoint = _k_rotatePoint(m_resizeStaticPoint, -angle);
+            QPointF rCursorPoint = _k_rotatePoint(cursorPoint, -angle);
+            QPointF rGrabPoint = _k_rotatePoint(m_resizeGrabPoint, -angle);
 
             if (m_buttonsOnRight) {
                 newSize = m_origWidgetSize + QPointF(rCursorPoint.x() - rGrabPoint.x(), rGrabPoint.y() - rCursorPoint.y());
@@ -725,10 +737,10 @@ void FreeHandle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             // move center such that the static corner remains in the same place
             if (m_buttonsOnRight) {
                 newCenter =  _k_rotatePoint(QPointF(rStaticPoint.x() + newSize.x()/2,
-                            rStaticPoint.y() - newSize.y()/2), m_angle);
+                            rStaticPoint.y() - newSize.y()/2), angle);
             } else {
                 newCenter =  _k_rotatePoint(QPointF(rStaticPoint.x() - newSize.x()/2,
-                            rStaticPoint.y() - newSize.y()/2), m_angle);
+                            rStaticPoint.y() - newSize.y()/2), angle);
             }
 
             newAngle = m_angle;
@@ -736,6 +748,7 @@ void FreeHandle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         // apply size
         widget()->resize(newSize.x(), newSize.y());
+
         // apply position, no need if we're rotating
         if (m_pressedButton != RotateButton) {
             widget()->setPos(widget()->parentItem()->mapFromScene(newCenter - newSize/2));

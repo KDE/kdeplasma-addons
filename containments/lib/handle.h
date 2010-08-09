@@ -23,9 +23,6 @@
 
 #include <QtCore/QObject>
 #include <QtGui/QGraphicsObject>
-#include <QTimer>
-#include <QWeakPointer>
-#include <QPropertyAnimation>
 
 #include <Plasma/Animator>
 #include <Plasma/Svg>
@@ -35,7 +32,6 @@ class QGraphicsView;
 namespace Plasma
 {
     class Applet;
-    class FrameSvg;
     class View;
 };
 

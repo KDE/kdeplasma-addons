@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009-2010 by Giulio Camuffo <giuliocamuffo@gmail.com>
+ *   Copyright 2010 by Giulio Camuffo <giuliocamuffo@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -17,25 +17,24 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "groupingdesktop.h"
+#include "groupfactory_p.h"
 
-K_EXPORT_PLASMA_APPLET(groupingdesktop, GroupingDesktop)
+#include "abstractgroup.h"
 
-GroupingDesktop::GroupingDesktop(QObject* parent, const QVariantList& args)
-               : GroupingContainment(parent, args)
+QMap<GroupInfo, CreatorFunction> *GroupFactory::m_groups = 0;
+
+AbstractGroup *GroupFactory::load(const QString &name, QGraphicsItem *parent)
 {
-    setHasConfigurationInterface(true);
+    GroupInfo gi(name);
+    CreatorFunction creator = m_groups->value(gi);
+    if (creator) {
+        return (creator)(parent);
+    }
+
+    return 0;
 }
 
-GroupingDesktop::~GroupingDesktop()
+QList<GroupInfo> GroupFactory::groupInfos()
 {
+    return m_groups->keys();
 }
-
-void GroupingDesktop::init()
-{
-    setContainmentType(Plasma::Containment::DesktopContainment);
-
-    GroupingContainment::init();
-}
-
-#include "groupingdesktop.moc"

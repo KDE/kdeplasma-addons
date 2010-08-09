@@ -21,7 +21,7 @@
 #ifndef TABBINGGROUP_H
 #define TABBINGGROUP_H
 
-#include <lib/abstractgroup.h>
+#include "abstractgroup.h"
 
 #include "ui_tabbinggroup_config.h"
 

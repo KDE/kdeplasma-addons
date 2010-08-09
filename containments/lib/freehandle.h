@@ -31,13 +31,11 @@
 
 #include "handle.h"
 
-class QGraphicsView;
 
 namespace Plasma
 {
     class Applet;
     class FrameSvg;
-    class View;
 };
 
 class AbstractGroup;
