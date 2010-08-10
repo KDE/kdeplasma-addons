@@ -39,6 +39,7 @@ using namespace Plasma;
 
 ActivityWidget::ActivityWidget(DataEngine* engine, QGraphicsWidget* parent)
     : Frame(parent),
+      m_link(0),
       m_isHovered(false)
 {
     setAcceptHoverEvents(true);
@@ -70,6 +71,7 @@ ActivityWidget::ActivityWidget(DataEngine* engine, QGraphicsWidget* parent)
         m_link->setVisible(true);
         connect(m_link, SIGNAL(clicked()), this, SLOT(followLink()));
     }
+    updateActions();
 }
 
 ActivityWidget::~ActivityWidget()
@@ -117,7 +119,9 @@ void ActivityWidget::followLink()
 
 void ActivityWidget::updateActions()
 {
-    m_link->setVisible(m_isHovered && m_atticaData.value("link").value<QUrl>().isValid());
+    if (m_link) {
+        m_link->setVisible(m_isHovered && m_atticaData.value("link").value<QUrl>().isValid());
+    }
 }
 
 
