@@ -23,8 +23,8 @@
 #include <QtGui/QPainter>
 #include <QWheelEvent>
 
-FullViewWidget::FullViewWidget( QWidget *parent )
-  : QWidget( parent, Qt::Popup )
+FullViewWidget::FullViewWidget()
+    : QWidget( 0, Qt::Popup )
 {
     const QDesktopWidget desktop;
     mDesktopSize = desktop.availableGeometry( this );

@@ -1044,7 +1044,7 @@ void ComicApplet::buttonBar()
 void ComicApplet::fullView()
 {
     if ( !mFullViewWidget ) {
-        mFullViewWidget = new FullViewWidget( view() );
+        mFullViewWidget = new FullViewWidget();
     }
 
     if ( !mFullViewWidget->isVisible() ) {
