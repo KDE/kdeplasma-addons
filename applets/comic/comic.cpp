@@ -1051,9 +1051,9 @@ void ComicApplet::fullView()
         mFullViewWidget->setImage( mImage );
         foreach (QGraphicsView *view, scene()->views()) {
             if (view->sceneRect().contains(mMainWidget->pos())) {
-                QPoint viewPos = view->pos();
-                QPoint relPos = mapToScene( 0, 0 ).toPoint();
-                mFullViewWidget->adaptPosition( relPos + view->mapToGlobal(viewPos) );
+                QPoint viewSceneOrigin = view->sceneRect().topLeft().toPoint();
+                QPoint finalPos = view->pos() + ( scenePos().toPoint() - viewSceneOrigin );
+                mFullViewWidget->adaptPosition( finalPos );
                 break;
             }
         }
