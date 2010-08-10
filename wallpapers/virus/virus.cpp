@@ -232,13 +232,28 @@ void Virus::setSingleImage()
     }
 
     QString img;
-    Plasma::Package b(m_wallpaper, packageStructure(this));
 
-    img = b.filePath("preferred");
-    kDebug() << img << m_wallpaper;
-    if (img.isEmpty()) {
-        img = m_wallpaper;
+    if (QDir::isAbsolutePath(m_wallpaper)) {
+        Plasma::Package b(m_wallpaper, packageStructure(this));
+        img = b.filePath("preferred");
+        kDebug() << img << m_wallpaper;
+
+        if (img.isEmpty()) {
+            img = m_wallpaper;
+        }
+    //if it's not an absolute path, check if it's just a wallpaper name
+    } else {
+        const QString path = KStandardDirs::locate("wallpaper", m_wallpaper + "/metadata.desktop");
+
+        if (!path.isEmpty()) {
+            QDir dir(path);
+            dir.cdUp();
+
+            Plasma::Package b(dir.path(), packageStructure(this));
+            img = b.filePath("preferred");
+        }
     }
+
 
     if (!m_size.isEmpty()) {
         renderWallpaper(img);
