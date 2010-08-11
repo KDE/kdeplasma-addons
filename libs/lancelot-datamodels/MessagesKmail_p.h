@@ -21,10 +21,13 @@
 #include <QHash>
 #include <KIcon>
 #include <KJob>
-#include <Akonadi/Entity>
-#include <Akonadi/Collection>
 
 #include "config-lancelot-datamodels.h"
+
+#ifdef LANCELOT_DATAMODELS_HAS_PIMLIBS
+#include <Akonadi/Entity>
+#include <Akonadi/Collection>
+#endif
 
 namespace Lancelot {
 namespace Models {
