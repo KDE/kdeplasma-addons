@@ -20,6 +20,7 @@
 #include "configdata.h"
 #include <KDebug>
 #include <QCheckBox>
+#include <QPointer>
 
 AutoPasteConfig::AutoPasteConfig(QWidget *parent)
     : QWidget(parent)
@@ -72,13 +73,15 @@ void AutoPasteConfig::getData(ConfigData *data)
 
 void AutoPasteConfig::addClicked()
 {
-    AppKey dlg(this);
-    if (dlg.exec() == QDialog::Accepted) {
-        QStandardItem *appItem = new QStandardItem(KIcon(dlg.app.toLower()), dlg.app);
-        QStandardItem *keyItem = new QStandardItem(dlg.pasteButton->keySequence().toString());
+    QPointer<AppKey> dlg = new AppKey(this);
+    if (dlg->exec() == QDialog::Accepted) {
+        QStandardItem *appItem = new QStandardItem(KIcon(dlg->app.toLower()), dlg->app);
+        QStandardItem *keyItem = new QStandardItem(dlg->pasteButton->keySequence().toString());
         m_appModel.appendRow(QList<QStandardItem*>() << appItem << keyItem);
         enableWidgets();
     }
+
+    delete dlg;
 }
 
 void AutoPasteConfig::removeClicked()
@@ -89,18 +92,20 @@ void AutoPasteConfig::removeClicked()
 
 void AutoPasteConfig::editClicked()
 {
-    AppKey dlg(this);
+    QPointer<AppKey> dlg = new AppKey(this);
     int row = appsTreeView->selectionModel()->currentIndex().row();
     QStandardItem *appItem = m_appModel.item(row, 0);
     QStandardItem *keyItem = m_appModel.item(row, 1);
-    dlg.appButton->setText(appItem->text());
-    dlg.appButton->setIcon(KIcon(appItem->text().toLower()));
-    dlg.pasteButton->setKeySequence(QKeySequence::fromString(keyItem->text()));
-    if (dlg.exec() == QDialog::Accepted) {
-        appItem->setText(dlg.app);
-        appItem->setIcon(KIcon(dlg.app.toLower()));
-        keyItem->setText(dlg.pasteButton->keySequence().toString());
+    dlg->appButton->setText(appItem->text());
+    dlg->appButton->setIcon(KIcon(appItem->text().toLower()));
+    dlg->pasteButton->setKeySequence(QKeySequence::fromString(keyItem->text()));
+    if (dlg->exec() == QDialog::Accepted) {
+        appItem->setText(dlg->app);
+        appItem->setIcon(KIcon(dlg->app.toLower()));
+        keyItem->setText(dlg->pasteButton->keySequence().toString());
     }
+
+    delete dlg;
 }
 
 void AutoPasteConfig::enableWidgets()
