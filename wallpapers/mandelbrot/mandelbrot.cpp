@@ -459,6 +459,10 @@ QString Mandelbrot::key() const
 
 void Mandelbrot::computeStats()
 {
+    if (height() < 1 || width() < 1) {
+        return;
+    }
+
     // run a little simulation on 15x15 samples to estimate roughly the minimum iteration count before divergence.
     // This number, m_min_iter_divergence, will be used to tune gradients.
     int max_iter = maxIter();
