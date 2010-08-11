@@ -48,11 +48,14 @@ ActivityWidget::ActivityWidget(DataEngine* engine, QGraphicsWidget* parent)
     
     m_image = new ContactImage(engine, this);
     m_image->setMinimumSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
-    m_image->setMaximumSize(m_image->minimumSize());
+    m_image->setMaximumWidth(m_image->minimumSize().width());
+    m_image->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 
     m_layout->addItem(m_image);
 
     m_messageLabel = new Plasma::Label(this);
+    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+    m_messageLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     m_layout->addItem(m_messageLabel);
 
     int s = KIconLoader::SizeSmallMedium; // The size for the action icons
