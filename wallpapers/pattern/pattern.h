@@ -45,11 +45,16 @@ public:
 
 protected:
     void init(const KConfigGroup & config);
+
+private:
+    QPixmap generatePattern(const QString &patternFile, const QColor &fg, const QColor &bg) const;
+    void loadPattern();
+    void updateConfigThumbs();
+
 private slots:
     void widgetChanged();
-private:
-    void loadPattern();
 
+private:
     Ui_PatternSettingsWidget m_ui;
     QColor m_fgColor;
     QColor m_bgColor;

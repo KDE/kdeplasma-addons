@@ -61,15 +61,7 @@ void PatternWallpaper::init(const KConfigGroup & config)
 void PatternWallpaper::loadPattern()
 {
     if (!m_patternName.isEmpty()) {
-        const QString pattern = m_dirs->findResource(PATTERN_RESOURCE_TYPE, m_patternName);
-        QImage m_patternImage;
-
-        if (m_patternImage.load(pattern, 0)) {
-            m_patternImage = Blitz::flatten(m_patternImage, m_fgColor, m_bgColor);
-            m_pattern = QPixmap::fromImage(m_patternImage);
-        } else {
-            kDebug() << "pattern" << m_patternName << "at" << pattern << "failed to load";
-        }
+        m_pattern = generatePattern(m_patternName, m_fgColor, m_bgColor);
     }
 }
 
@@ -112,28 +104,38 @@ QWidget * PatternWallpaper::createConfigurationInterface(QWidget * parent)
             patternComment = fi.baseName();
         }
 
-        QPixmap texture = QPixmap::fromImage(QImage(m_dirs->findResource(PATTERN_RESOURCE_TYPE, patternFile)));
-        QPixmap pattern(80, 80);
-        QPainter p(&pattern);
-        p.drawTiledPixmap(pattern.rect(), texture, QPoint(0,0));
-        p.end();
-
-        QListWidgetItem *item = new QListWidgetItem(QIcon(pattern), patternComment, m_ui.m_pattern);
+        QListWidgetItem *item = new QListWidgetItem(patternComment, m_ui.m_pattern);
         item->setData(Qt::UserRole, patternFile);
 
         m_ui.m_pattern->addItem(item);
         ++i;
     }
+
+    updateConfigThumbs();
+
     if (configuredPatternIndex != -1) {
         m_ui.m_pattern->setCurrentRow(configuredPatternIndex);
     }
 
     connect(m_ui.m_fgColor, SIGNAL(changed(const QColor&)), SLOT(widgetChanged()));
     connect(m_ui.m_bgColor, SIGNAL(changed(const QColor&)), SLOT(widgetChanged()));
-    connect(m_ui.m_pattern, SIGNAL(currentIndexChanged(int)), SLOT(widgetChanged()));
+    connect(m_ui.m_pattern, SIGNAL(currentRowChanged(int)), SLOT(widgetChanged()));
 
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     return configWidget;
+}
+
+QPixmap PatternWallpaper::generatePattern(const QString &patternFile, const QColor &fg, const QColor &bg) const
+{
+    QImage img;
+    const QString path = m_dirs->findResource(PATTERN_RESOURCE_TYPE, patternFile);
+
+    if (!img.load(path, 0)) {
+        kDebug() << "pattern" << patternFile << "at" << path << "failed to load";
+        return QPixmap();
+    }
+
+    return QPixmap::fromImage(Blitz::flatten(img, fg, bg));
 }
 
 void PatternWallpaper::save(KConfigGroup & config)
@@ -150,13 +152,42 @@ void PatternWallpaper::paint(QPainter * painter, const QRectF & exposedRect)
     }
 }
 
+void PatternWallpaper::updateConfigThumbs()
+{
+    for (int i = 0; i < m_ui.m_pattern->count(); ++i) {
+        QListWidgetItem *item = m_ui.m_pattern->item(i);
+        if (!item) {
+            continue;
+        }
+
+        const QString patternFile = item->data(Qt::UserRole).toString();
+
+        QPixmap pix(80, 80);
+        QPainter p(&pix);
+        p.drawTiledPixmap(pix.rect(), generatePattern(patternFile, m_fgColor, m_bgColor), QPoint(0,0));
+        p.end();
+
+        item->setIcon(QIcon(pix));
+    }
+}
+
 void PatternWallpaper::widgetChanged()
 {
-    m_fgColor = m_ui.m_fgColor->color();
-    m_bgColor = m_ui.m_bgColor->color();
+    const QColor newFgColor = m_ui.m_fgColor->color();
+    const QColor newBgColor = m_ui.m_bgColor->color();
+    const bool updateThumbs = (m_fgColor != newFgColor) || (m_bgColor != newBgColor);
+
+    m_fgColor = newFgColor;
+    m_bgColor = newBgColor;
+
+    if (updateThumbs) {
+        updateConfigThumbs();
+    }
+
     if (m_ui.m_pattern->count()) {
         m_patternName = m_ui.m_pattern->item(m_ui.m_pattern->currentRow())->data(Qt::UserRole).toString();
     }
+
     loadPattern();
     emit settingsChanged(true);
     emit update(boundingRect());
