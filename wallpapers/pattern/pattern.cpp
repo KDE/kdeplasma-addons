@@ -112,11 +112,20 @@ QWidget * PatternWallpaper::createConfigurationInterface(QWidget * parent)
             patternComment = fi.baseName();
         }
 
-        m_ui.m_pattern->addItem(patternComment, patternFile);
+        QPixmap texture = QPixmap::fromImage(QImage(m_dirs->findResource(PATTERN_RESOURCE_TYPE, patternFile)));
+        QPixmap pattern(80, 80);
+        QPainter p(&pattern);
+        p.drawTiledPixmap(pattern.rect(), texture, QPoint(0,0));
+        p.end();
+
+        QListWidgetItem *item = new QListWidgetItem(QIcon(pattern), patternComment, m_ui.m_pattern);
+        item->setData(Qt::UserRole, patternFile);
+
+        m_ui.m_pattern->addItem(item);
         ++i;
     }
     if (configuredPatternIndex != -1) {
-        m_ui.m_pattern->setCurrentIndex(configuredPatternIndex);
+        m_ui.m_pattern->setCurrentRow(configuredPatternIndex);
     }
 
     connect(m_ui.m_fgColor, SIGNAL(changed(const QColor&)), SLOT(widgetChanged()));
@@ -146,7 +155,7 @@ void PatternWallpaper::widgetChanged()
     m_fgColor = m_ui.m_fgColor->color();
     m_bgColor = m_ui.m_bgColor->color();
     if (m_ui.m_pattern->count()) {
-        m_patternName = m_ui.m_pattern->itemData(m_ui.m_pattern->currentIndex()).toString();
+        m_patternName = m_ui.m_pattern->item(m_ui.m_pattern->currentRow())->data(Qt::UserRole).toString();
     }
     loadPattern();
     emit settingsChanged(true);
