@@ -41,6 +41,7 @@ Mandelbrot::Mandelbrot(QObject *parent, const QVariantList &args)
       m_imageIsReady(false),
       m_firstInit(true)
 {
+    setPreviewDuringConfiguration(true);
     qRegisterMetaType<MandelbrotTile>();
     m_hasSSE2 = system_has_SSE2();
     m_renderThreadCount = QThread::idealThreadCount();

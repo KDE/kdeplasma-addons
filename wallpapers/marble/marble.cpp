@@ -53,6 +53,7 @@ namespace Marble {
 MarbleWallpaper::MarbleWallpaper(QObject * parent, const QVariantList & args)
     : Plasma::Wallpaper(parent, args), m_timer(0), m_map(0)
 {
+    setPreviewDuringConfiguration(true);
     KGlobal::locale()->insertCatalog("marble");
 }
 
