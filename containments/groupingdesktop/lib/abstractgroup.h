@@ -24,6 +24,7 @@
 #include <Plasma/Applet>
 
 #include "groupfactory_p.h"
+#include "groupingcontainment_export.h"
 
 class KConfigGroup;
 
@@ -38,7 +39,7 @@ class AbstractGroupPrivate;
  *
  * AbstractGroup is a base class for special widgets thoughts to contain Plasma::Applet
  */
-class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
+class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
 {
     Q_OBJECT
     Q_PROPERTY(bool hasInterface READ hasConfigurationInterface)

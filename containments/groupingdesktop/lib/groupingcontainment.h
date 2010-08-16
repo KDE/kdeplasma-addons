@@ -22,10 +22,12 @@
 
 #include <Plasma/Containment>
 
+#include "groupingcontainment_export.h"
+
 class AbstractGroup;
 class GroupingContainmentPrivate;
 
-class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
+class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Containment
 {
     Q_OBJECT
     Q_PROPERTY(AbstractGroup *mainGroup READ mainGroup WRITE setMainGroup)
