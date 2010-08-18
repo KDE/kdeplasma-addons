@@ -21,6 +21,7 @@
 //#define MINIMIZE_ONLY
 
 #include <Plasma/Applet>
+#include <QGraphicsSceneDragDropEvent>
 
 class ShowDesktop : public Plasma::Applet
 {
@@ -32,12 +33,15 @@ class ShowDesktop : public Plasma::Applet
         virtual void init();
 
     public slots:
-        void pressed();
+        void minimizeAll();
 #ifndef MINIMIZE_ONLY
         void reset();
         void delay();
 #endif
 
+    protected:
+        void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+  
     private:
         bool m_wm2ShowingDesktop;
 #ifndef MINIMIZE_ONLY

@@ -36,6 +36,7 @@ ShowDesktop::ShowDesktop(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::ConstrainedSquare);
     int iconSize = IconSize(KIconLoader::Desktop);
     resize(iconSize * 2, iconSize * 2);
+    setAcceptDrops(true);
 }
 
 ShowDesktop::~ShowDesktop()
@@ -44,7 +45,7 @@ ShowDesktop::~ShowDesktop()
 
 void ShowDesktop::init()
 {
-    connect(this, SIGNAL(activate()), this, SLOT(pressed()));
+    connect(this, SIGNAL(activate()), this, SLOT(minimizeAll()));
 
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -53,7 +54,7 @@ void ShowDesktop::init()
     Plasma::IconWidget *icon = new Plasma::IconWidget(KIcon("user-desktop"), QString(), this);
     layout->addItem(icon);
     registerAsDragHandle(icon);
-    connect(icon, SIGNAL(clicked()), this, SLOT(pressed()));
+    connect(icon, SIGNAL(clicked()), this, SLOT(minimizeAll()));
 
     Plasma::ToolTipContent toolTipData(i18n("Show the Desktop"),
                                        i18n("Minimize all open windows and show the Desktop"),
@@ -70,7 +71,7 @@ void ShowDesktop::init()
 #endif
 }
 
-void ShowDesktop::pressed()
+void ShowDesktop::minimizeAll()
 {
     if (m_wm2ShowingDesktop) {
         NETRootInfo info(QX11Info::display(), 0);
@@ -84,6 +85,12 @@ void ShowDesktop::pressed()
         info.setShowingDesktop(true);
 #endif
     }
+}
+
+void ShowDesktop::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
+{
+    event->accept();
+    minimizeAll();
 }
 
 #ifndef MINIMIZE_ONLY
