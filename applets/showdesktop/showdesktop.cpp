@@ -28,7 +28,9 @@
 #include <QGraphicsLinearLayout>
 
 ShowDesktop::ShowDesktop(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_wm2ShowingDesktop(false)
+    : Plasma::Applet(parent, args),
+      m_wm2ShowingDesktop(false),
+      m_triggerTimer(new QTimer(this))
 #ifndef MINIMIZE_ONLY
       , m_down(false), m_goingDown(false)
 #endif
@@ -36,6 +38,11 @@ ShowDesktop::ShowDesktop(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::ConstrainedSquare);
     int iconSize = IconSize(KIconLoader::Desktop);
     resize(iconSize * 2, iconSize * 2);
+
+    m_triggerTimer->setSingleShot(true);
+    m_triggerTimer->setInterval(750);
+    connect(m_triggerTimer, SIGNAL(timeout()), this, SLOT(minimizeAll()));
+
     setAcceptDrops(true);
 }
 
@@ -90,7 +97,7 @@ void ShowDesktop::minimizeAll()
 void ShowDesktop::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
     event->accept();
-    minimizeAll();
+    m_triggerTimer->start();
 }
 
 #ifndef MINIMIZE_ONLY

@@ -41,9 +41,10 @@ class ShowDesktop : public Plasma::Applet
 
     protected:
         void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
-  
+
     private:
         bool m_wm2ShowingDesktop;
+        QTimer *m_triggerTimer;
 #ifndef MINIMIZE_ONLY
         bool m_down;
         bool m_goingDown;
