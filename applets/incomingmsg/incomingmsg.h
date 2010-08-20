@@ -1,5 +1,6 @@
 /*
- *   Copyright (C) 2008 Christian Weilbach <dunsens@web.de>
+ *   Copyright (C) 2008-2010 Christian Weilbach <dunsens@web.de>
+ *   Copyright (C) 2010 Ruslan Nigmatullin <euroelessar@ya.ru>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -29,6 +30,7 @@
 #include "ui_widget.h"
 
 class QGraphicsLinearLayout;
+class QDBusObjectPath;
 
 namespace Plasma
 {
@@ -53,6 +55,7 @@ protected:
     void initXChatLayout();
     void initKopeteLayout();
     void initPidginLayout();
+    void initQutIMLayout();
 
 protected slots:
     void configAccepted();
@@ -60,18 +63,23 @@ protected slots:
 private:
     void clearLayout();
     void initLayout();
+    void updateQutIMStatus(bool saveIcon);
 
     // text labels
     Plasma::Label *mEvolutionLabel, *mEvolutionIconLabel,
         *mKMailLabel, *mKMailIconLabel, *mXChatLabel,
         *mXChatIconLabel, *mKopeteLabel, *mKopeteIconLabel,
-        *mPidginLabel, *mPidginIconLabel, *mErrorLabel;
+        *mPidginLabel, *mPidginIconLabel, *mQutIMLabel,
+        *mQutIMIconLabel, *mErrorLabel;
 
     QGraphicsLinearLayout *mLayout, *mEvolutionLayout,
         *mKMailLayout, *mXChatLayout, *mKopeteLayout,
-        *mPidginLayout;
+        *mPidginLayout, *mQutIMLayout;
 
-    bool mShowKMail, mShowXChat, mShowKopete, mShowPidgin;
+    bool mShowKMail, mShowXChat, mShowKopete, mShowPidgin, mShowQutIM;
+    
+    QHash<QString, int> mQutIMUnread;
+    int mQutIUnreadCount;
 
     Ui::incomingmsgConfig ui;
 
@@ -81,6 +89,7 @@ private slots:
     void slotNewPidginIM();
     void slotNewKopeteIM(const QString&);
     void slotNewXChatIM();
+    void slotNewQutIM(const QDBusMessage &msg, QString path = QString());
 };
 
 // This is the command that links your applet to the .desktop file

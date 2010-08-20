@@ -1,5 +1,6 @@
 /*
- *   Copyright (C) 2008 Christian Weilbach <dunsens@web.de>
+ *   Copyright (C) 2008-2010 Christian Weilbach <dunsens@web.de>
+ *   Copyright (C) 2010 Ruslan Nigmatullin <euroelessar@ya.ru>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -53,10 +54,12 @@ IncomingMsg::IncomingMsg(QObject *parent, const QVariantList &args)
           mXChatLabel(0), mXChatIconLabel(0),
           mKopeteLabel(0), mKopeteIconLabel(0),
           mPidginLabel(0), mPidginIconLabel(0),
+          mQutIMLabel(0), mQutIMIconLabel(0),
           mErrorLabel(0), mLayout(0),
           mEvolutionLayout(0), mKMailLayout(0),
           mXChatLayout(0), mKopeteLayout(0),
-          mPidginLayout(0)
+          mPidginLayout(0), mQutIMLayout(0),
+          mQutIUnreadCount(0)
 {
     // this will get us the standard applet background, for free!
     setBackgroundHints(DefaultBackground);
@@ -80,6 +83,10 @@ IncomingMsg::~IncomingMsg()
     delete mPidginLayout;
     delete mPidginIconLabel;
     delete mPidginLabel;
+    
+    delete mQutIMLayout;
+    delete mQutIMIconLabel;
+    delete mQutIMLabel;
 }
 
 void IncomingMsg::init()
@@ -91,6 +98,7 @@ void IncomingMsg::init()
     mShowXChat = cg.readEntry("showXChat", true);
     mShowKopete = cg.readEntry("showKopete", true);
     mShowPidgin = cg.readEntry("showPidgin", true);
+    mShowQutIM = cg.readEntry("showQutIM", true);
 
     initLayout();
 }
@@ -289,6 +297,71 @@ void IncomingMsg::initPidginLayout()
     }
 }
 
+void IncomingMsg::initQutIMLayout()
+{
+    if (mShowQutIM) {
+        QDBusInterface qutimDBusTest("org.qutim", "/ChatLayer", "org.qutim.ChatLayer");
+        QDBusReply<QList<QDBusObjectPath> > sessionsReply = qutimDBusTest.call("sessions");
+        if (!sessionsReply.isValid())
+            kDebug() << "qutIM DBus interface test error: " << sessionsReply.error();
+        else {
+            QList<QDBusObjectPath> sessions = sessionsReply.value();
+            for (int i = 0; i < sessions.size(); i++) {
+                QDBusInterface qutimSession("org.qutim", sessions.at(i).path(),
+                                            "org.freedesktop.DBus.Properties");
+                QDBusMessage msg = qutimSession.call("Get", "org.qutim.ChatSession", "unread");
+                slotNewQutIM(msg, sessions.at(i).path());
+            }
+            QDBusConnection mDBus = QDBusConnection::sessionBus();
+            if (!mDBus.connect("org.qutim", QString(),
+                               "org.qutim.ChatSession", "unreadChanged",
+                               this, SLOT(slotNewQutIM(QDBusMessage))))
+                kDebug() << "Could not connect to qutIM on DBus.";
+            else {
+                mQutIMLayout = new QGraphicsLinearLayout(Qt::Horizontal);
+                mQutIMLabel = new Plasma::Label(this);
+                mQutIMIconLabel = new Plasma::Label(this);
+                mQutIMIconLabel->setMinimumWidth(32);
+                mQutIMIconLabel->setMinimumHeight(32);
+
+                updateQutIMStatus(false);
+
+                mQutIMLayout->addItem(mQutIMIconLabel);
+                mQutIMLayout->addItem(mQutIMLabel);
+                mQutIMLayout->setAlignment(mQutIMLabel, Qt::AlignLeft);
+
+                mLayout->addItem(mQutIMLayout);
+            }
+        }
+    }
+}
+
+void IncomingMsg::updateQutIMStatus(bool saveIcon)
+{
+    if (!saveIcon) {
+        KIcon icon("qutim");
+        if (mQutIUnreadCount == 0) {
+            KIconEffect effect;
+            mQutIMIconLabel->nativeWidget()->setPixmap(
+                effect.apply(icon.pixmap(32, 32), KIconEffect::ToGray, 1, QColor(), QColor(), true)
+            );
+        } else {
+            mQutIMIconLabel->nativeWidget()->setPixmap(icon.pixmap(32, 32));
+        }
+    }
+    if (mQutIUnreadCount > 0) {
+        kDebug() << i18np("You have new qutIM message.",
+                          "You have new %1 qutIM messages.",
+                          mQutIUnreadCount);
+        mQutIMLabel->setText(i18np("You have new qutIM message.",
+                                   "You have new %1 qutIM messages.",
+                                   mQutIUnreadCount));
+    } else {
+        kDebug() << i18n("No new qutIM messages.");
+        mQutIMLabel->setText(i18n("No new qutIM messages."));
+    }
+}
+
 void IncomingMsg::clearLayout()
 {
     delete mKMailLayout;
@@ -318,6 +391,15 @@ void IncomingMsg::clearLayout()
     mPidginIconLabel = NULL;
     delete mPidginLabel;
     mPidginLabel = NULL;
+    
+    delete mQutIMLayout;
+    mQutIMLayout = NULL;
+    delete mQutIMIconLabel;
+    mQutIMIconLabel = NULL;
+    delete mQutIMLabel;
+    mQutIMLabel = NULL;
+    mQutIMUnread.clear();
+    mQutIUnreadCount = 0;
 
     delete mErrorLabel;
     mErrorLabel = NULL;
@@ -332,12 +414,13 @@ void IncomingMsg::initLayout()
     initXChatLayout();
     initKopeteLayout();
     initPidginLayout();
+    initQutIMLayout();
 
     if (!mLayout->count()) {
         mErrorLabel = new Plasma::Label();
-        mErrorLabel->setText(i18n("No running messaging apps found. Supported apps are %1, %2, %3, %4.",
+        mErrorLabel->setText(i18n("No running messaging apps found. Supported apps are %1, %2, %3, %4, %5.",
                                   QString("KMail"), QString("XChat"), QString("Kopete"),
-                                  QString("Pidgin")));
+                                  QString("Pidgin"), QString("qutIM")));
         mLayout->addItem(mErrorLabel);
     }
 
@@ -354,6 +437,7 @@ void IncomingMsg::createConfigurationInterface(KConfigDialog *dialog)
     ui.showXChat->setChecked(cg.readEntry("showXChat", true));
     ui.showKopete->setChecked(cg.readEntry("showKopete", true));
     ui.showPidgin->setChecked(cg.readEntry("showPidgin", true));
+    ui.showQutIM->setChecked(cg.readEntry("showQutIM", true));
 
     connect(dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
@@ -368,12 +452,14 @@ void IncomingMsg::configAccepted()
     mShowXChat = ui.showXChat->isChecked();
     mShowKopete = ui.showKopete->isChecked();
     mShowPidgin = ui.showPidgin->isChecked();
+    mShowQutIM = ui.showQutIM->isChecked();
 
     KConfigGroup cg = config();
     cg.writeEntry("showKMail", ui.showKMail->isChecked());
     cg.writeEntry("showXChat", ui.showXChat->isChecked());
     cg.writeEntry("showKopete", ui.showKopete->isChecked());
     cg.writeEntry("showPidgin", ui.showPidgin->isChecked());
+    cg.writeEntry("showQutIM", ui.showQutIM->isChecked());
 
     clearLayout();
     initLayout();
@@ -398,6 +484,42 @@ void IncomingMsg::slotNewXChatIM()
     KIcon icon("xchat");
     mXChatIconLabel->nativeWidget()->setPixmap(icon.pixmap(32, 32));
     mXChatLabel->setText(i18n("You have new XChat messages."));
+}
+
+void IncomingMsg::slotNewQutIM(const QDBusMessage &msg, QString path)
+{
+    if (path.isNull())
+        path = msg.path();
+    bool hasUnread = mQutIUnreadCount > 0;
+    QVariant var = msg.arguments().value(0);
+    if (var.canConvert<QDBusVariant>())
+        var = var.value<QDBusVariant>().variant();
+    int currentCount = mQutIMUnread.value(path, 0);
+    int count = 0;
+    const QDBusArgument arg = qvariant_cast<QDBusArgument>(var);
+    // Parse aa{sv} value
+    arg.beginArray();
+    while (!arg.atEnd()) {
+        arg.beginMap();
+        while (!arg.atEnd()) {
+            QString key;
+            QVariant value;
+            arg.beginMapEntry();
+            arg >> key >> value;
+            arg.endMapEntry();
+        }
+        arg.endMap();
+        count++;
+    }
+    arg.endArray();
+    mQutIUnreadCount -= currentCount;
+    mQutIUnreadCount += count;
+    if (count > 0)
+        mQutIMUnread.insert(path, count);
+    else
+        mQutIMUnread.remove(path);
+    if (mQutIMLayout)
+        updateQutIMStatus(hasUnread == (mQutIUnreadCount > 0));
 }
 
 void IncomingMsg::slotNewKopeteIM(const QString& contactId)

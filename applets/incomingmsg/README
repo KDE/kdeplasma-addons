@@ -7,5 +7,5 @@ any other service, ...).
 It uses DBus and only adds information for apps that are
 running (it checks for the dbus interface). At the moment
 sadly only kmail notifies over DBus for new messages.
-Hopefully Kopete can be added soon.
+Also qutIM notifies about count of unreaded messages.
 Hack on it as you like.

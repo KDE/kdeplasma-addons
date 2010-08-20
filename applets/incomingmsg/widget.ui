@@ -1,23 +1,32 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>incomingmsgConfig</class>
- <widget class="QWidget" name="incomingmsgConfig" >
-  <layout class="QGridLayout" name="gridLayout" >
-   <item row="0" column="0" colspan="2" >
-    <widget class="QLabel" name="topLabel" >
-     <property name="text" >
+ <widget class="QWidget" name="incomingmsgConfig">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>284</width>
+    <height>175</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="topLabel">
+     <property name="text">
       <string>Show these applications if they are running:</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" >
-    <spacer name="horizontalSpacer" >
-     <property name="orientation" >
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>20</height>
@@ -25,76 +34,76 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="1" >
-    <widget class="QCheckBox" name="showKMail" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+   <item row="1" column="1">
+    <widget class="QCheckBox" name="showKMail">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>KMail</string>
      </property>
-     <property name="checked" >
+     <property name="checked">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="2" column="1" >
-    <widget class="QCheckBox" name="showKopete" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="showKopete">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Kopete</string>
      </property>
-     <property name="checked" >
+     <property name="checked">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="3" column="1" >
-    <widget class="QCheckBox" name="showPidgin" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="showPidgin">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Pidgin</string>
      </property>
-     <property name="checked" >
+     <property name="checked">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="4" column="1" >
-    <widget class="QCheckBox" name="showXChat" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="showXChat">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>XChat</string>
      </property>
-     <property name="checked" >
+     <property name="checked">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="5" column="1" >
-    <spacer name="verticalSpacer" >
-     <property name="orientation" >
+   <item row="6" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>40</height>
@@ -102,25 +111,35 @@
      </property>
     </spacer>
    </item>
+   <item row="4" column="1">
+    <widget class="QCheckBox" name="showQutIM">
+     <property name="text">
+      <string>qutIM</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
- <layoutdefault spacing="4" margin="4" />
+ <layoutdefault spacing="4" margin="4"/>
  <resources/>
  <connections/>
  <designerdata>
-  <property name="gridDeltaX" >
+  <property name="gridDeltaX">
    <number>10</number>
   </property>
-  <property name="gridDeltaY" >
+  <property name="gridDeltaY">
    <number>10</number>
   </property>
-  <property name="gridSnapX" >
+  <property name="gridSnapX">
    <bool>true</bool>
   </property>
-  <property name="gridSnapY" >
+  <property name="gridSnapY">
    <bool>true</bool>
   </property>
-  <property name="gridVisible" >
+  <property name="gridVisible">
    <bool>true</bool>
   </property>
  </designerdata>
