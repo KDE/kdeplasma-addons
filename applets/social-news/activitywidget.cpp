@@ -61,9 +61,10 @@ ActivityWidget::ActivityWidget(DataEngine* engine, QGraphicsWidget* parent)
     int s = KIconLoader::SizeSmallMedium; // The size for the action icons
     
     Applet *parentApplet = qobject_cast<Applet *>(parent);
+    m_link = new Plasma::IconWidget(this);
+
     if (parentApplet && parentApplet->hasAuthorization("LaunchApp"))
     {
-        m_link = new Plasma::IconWidget(this);
         m_link->setIcon("go-jump");
         m_link->setToolTip(i18n("More information"));
         m_link->setMinimumHeight(s);
