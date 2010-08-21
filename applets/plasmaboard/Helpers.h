@@ -25,6 +25,7 @@
 #include <QVarLengthArray>
 #include <qx11info_x11.h>
 #include <X11/Xlib.h>
+#include <X11/XKBlib.h>
 #include <X11/extensions/XTest.h>
 
 class Helpers {
@@ -64,7 +65,10 @@ public:
 
     static unsigned int keycodeToKeysym(const unsigned int &code, int level){
 #ifdef Q_WS_X11
-        return (unsigned int)XKeycodeToKeysym(QX11Info::display(), code, level);
+        XkbStateRec xkbState;
+        XkbGetState(QX11Info::display(), XkbUseCoreKbd, &xkbState );
+        int vector = xkbState.group * 2 + level;
+        return (unsigned int)XKeycodeToKeysym(QX11Info::display(), code, vector);
 #else
         return 0;
 #endif
