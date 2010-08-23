@@ -173,13 +173,13 @@ int Life::neighbors(int i)
     int neighbors = 0;
     if (!((i % cellsArrayWidth) == 0)) // Not on the left edge, safe to check '-1's
     {
-        neighbors += isAlive(i - cellsArrayWidth - 1) + isAlive(i - 1)
-            + isAlive(i + cellsArrayWidth - 1);
+        neighbors += isAlive((i - cellsArrayWidth) - 1) + isAlive(i - 1)
+            + isAlive((i + cellsArrayWidth) - 1);
     }
     if (!((i % cellsArrayWidth) == (cellsArrayWidth - 1))) // Not on the right edge, safe to check '+1's
     {
-        neighbors += isAlive(i - cellsArrayWidth + 1) + isAlive(i + 1)
-            + isAlive(i + cellsArrayWidth + 1);
+        neighbors += isAlive((i - cellsArrayWidth) + 1) + isAlive(i + 1)
+            + isAlive((i + cellsArrayWidth) + 1);
     }
 
     return neighbors + isAlive(i - cellsArrayWidth)
@@ -195,16 +195,16 @@ int Life::isAlive(int i)
 
 void Life::step()
 {
-    for (int i = 0; i < ((cellsArrayHeight * cellsArrayWidth) - 1); i++){
+    for (int i = 0; i < (cellsArrayHeight * cellsArrayWidth); i++){
 		switch(neighbors(i)){
 			case 2:
 				nextGenerationCells[i] = cells[i];
 				break;
-		
+
 			case 3:
 				nextGenerationCells[i] = 1;
 				break;
-		
+
 			default:
 				nextGenerationCells[i] = 0;
 				break;
@@ -230,7 +230,7 @@ void Life::initGame()
 
 void Life::resetGame()
 {
-    for (int i = 0; i < ((cellsArrayHeight * cellsArrayWidth) - 1); i++){
+    for (int i = 0; i < (cellsArrayHeight * cellsArrayWidth); i++){
         cells[i] = rand() % 2;
     }
 
