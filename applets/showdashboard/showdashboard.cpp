@@ -38,6 +38,8 @@ ShowDashboard::ShowDashboard(QObject *parent, const QVariantList &args)
     setBackgroundHints(NoBackground);
     //setAspectRatioMode(Plasma::Square);
     resize(80, 80);
+    setAcceptDrops(true);
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(toggleShowDashboard()));
 }
 
 void ShowDashboard::init()
@@ -73,9 +75,20 @@ void ShowDashboard::toggleShowDashboard(bool pressed)
 
 void ShowDashboard::toggleShowDashboard()
 {
+    m_timer.stop();
     QDBusInterface plasmaApp( "org.kde.plasma-desktop", "/App" );
     plasmaApp.call( "toggleDashboard" );
 }
 
+void ShowDashboard::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
+{
+    m_timer.start(750);
+    event->accept();
+}
+
+void ShowDashboard::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    m_timer.stop();
+}
 
 #include "showdashboard.moc"

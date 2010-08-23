@@ -24,6 +24,8 @@
 
 
 #include <Plasma/Applet>
+#include <QTimer>
+#include <QGraphicsSceneDragDropEvent>
 
 
 class ShowDashboard : public Plasma::Applet
@@ -37,6 +39,13 @@ class ShowDashboard : public Plasma::Applet
     protected slots:
         void toggleShowDashboard(bool);
         void toggleShowDashboard();
+
+    protected:
+        void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+        void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
+
+    private:
+        QTimer m_timer;
 };
 
 K_EXPORT_PLASMA_APPLET(showdashboard, ShowDashboard)
