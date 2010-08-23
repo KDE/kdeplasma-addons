@@ -21,6 +21,7 @@
 //#define MINIMIZE_ONLY
 
 #include <Plasma/Applet>
+#include <QTimer>
 #include <QGraphicsSceneDragDropEvent>
 
 class ShowDesktop : public Plasma::Applet
@@ -41,14 +42,16 @@ class ShowDesktop : public Plasma::Applet
 
     protected:
         void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+        void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
 
     private:
         bool m_wm2ShowingDesktop;
-        QTimer *m_triggerTimer;
+
 #ifndef MINIMIZE_ONLY
         bool m_down;
         bool m_goingDown;
 #endif
+        QTimer m_timer;
 };
 
 K_EXPORT_PLASMA_APPLET(showdesktop, ShowDesktop)
