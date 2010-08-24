@@ -164,6 +164,7 @@ class ComicApplet : public Plasma::PopupApplet
         void loadConfig();
         void saveConfig();
         bool isInPanel() const;
+        void setTabBarVisible( bool isVisible );//HACK what was in 4.4 does not seem to work anymore, so this was added
 
     private:
         ComicModel *mModel;
@@ -203,6 +204,8 @@ class ComicApplet : public Plasma::PopupApplet
         QTimer *mReloadTimer;
         QList<QAction*> mActions;
         QGraphicsWidget *mMainWidget;
+        QGraphicsLinearLayout *mCentralLayout;
+        QGraphicsLinearLayout *mBottomLayout;
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
@@ -232,6 +235,7 @@ class ComicApplet : public Plasma::PopupApplet
         //Tabs
         bool mUseTabs;
         bool mShowTabBar;
+        bool mTabAdded;
         bool mSwitchTabs;
         int mSwitchTabTime;
         ComicTabBar *mTabBar;
