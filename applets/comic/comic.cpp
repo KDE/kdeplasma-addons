@@ -116,6 +116,8 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mArrowsOnHover( true ),
       mMiddleClick( true ),
       mMainWidget( 0 ),
+      mCentralLayout( 0 ),
+      mBottomLayout( 0 ),
       mFullViewWidget( 0 ),
       mActionShop( 0 ),
       mEngine( 0 ),
@@ -123,7 +125,8 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mFrameAnim( 0 ),
       mPrevButton( 0 ),
       mNextButton( 0 ),
-      mZoomButton( 0 )
+      mZoomButton( 0 ),
+      mTabAdded( false )
 {
     setHasConfigurationInterface( true );
     resize( 600, 250 );
@@ -220,20 +223,19 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         layout->setContentsMargins( 0, 0, 0, 0 );
         layout->setSpacing( 0 );
 
-        QGraphicsLinearLayout *centralLayout = new QGraphicsLinearLayout;
-        centralLayout->setOrientation( Qt::Vertical );
-        centralLayout->setContentsMargins( 0, 0, 0, 0 );
-        centralLayout->setSpacing( 0 );
+        mCentralLayout = new QGraphicsLinearLayout;
+        mCentralLayout->setOrientation( Qt::Vertical );
+        mCentralLayout->setContentsMargins( 0, 0, 0, 0 );
+        mCentralLayout->setSpacing( 0 );
 
-        QGraphicsLinearLayout *bottomLayout = new QGraphicsLinearLayout;
-        bottomLayout->setContentsMargins( 0, 2, 0, 0 );
-        bottomLayout->setSpacing( 0 );
+        mBottomLayout = new QGraphicsLinearLayout;
+        mBottomLayout->setContentsMargins( 0, 2, 0, 0 );
+        mBottomLayout->setSpacing( 0 );
 
         mTabBar = new ComicTabBar( mMainWidget );
         mTabBar->nativeWidget()->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
         mTabBar->hide();
         connect( mTabBar, SIGNAL( currentChanged( int ) ), this, SLOT( slotTabChanged( int ) ) );
-        centralLayout->addItem( mTabBar );
 
         mLabelTop = new ComicLabel( mMainWidget );
         mLabelTop->setMinimumWidth( 0 );
@@ -241,13 +243,12 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         mLabelTop->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
         mLabelTop->setAlignment( Qt::AlignCenter );
         mLabelTop->hide();
-        centralLayout->addItem( mLabelTop );
-        centralLayout->setItemSpacing( 1, 2 );
+        mCentralLayout->addItem( mLabelTop );
 
         mImageWidget = new ImageWidget( mMainWidget );
         mImageWidget->setZValue( 0 );
         mImageWidget->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding ) );
-        centralLayout->addItem( mImageWidget );
+        mCentralLayout->addItem( mImageWidget );
 
         mLabelId = new ComicLabel( mMainWidget );
         mLabelId->setMinimumWidth( 0 );
@@ -256,8 +257,8 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         mLabelId->nativeWidget()->setToolTip( i18n( "Jump to Strip ..." ) );
         mLabelId->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
         mLabelId->hide();
-        bottomLayout->addItem( mLabelId );
-        bottomLayout->addStretch( 1 );
+        mBottomLayout->addItem( mLabelId );
+        mBottomLayout->addStretch( 1 );
 
         mLabelUrl = new ComicLabel( mMainWidget );
         mLabelUrl->setMinimumWidth( 0 );
@@ -268,8 +269,8 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         }
         mLabelUrl->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
         mLabelUrl->hide();
-        bottomLayout->addItem( mLabelUrl );
-        centralLayout->addItem( bottomLayout );
+        mBottomLayout->addItem( mLabelUrl );
+        mCentralLayout->addItem( mBottomLayout );
 
         mLeftArrow = new ArrowWidget( mMainWidget );
         mLeftArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
@@ -277,7 +278,7 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         mLeftArrow->hide();
         connect( mLeftArrow, SIGNAL( clicked() ), this, SLOT( slotPreviousDay() ) );
         layout->addItem( mLeftArrow );
-        layout->addItem( centralLayout );
+        layout->addItem( mCentralLayout );
 
         mRightArrow = new ArrowWidget( mMainWidget );
         mRightArrow->setDirection( Plasma::Right );
@@ -296,6 +297,22 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
     }
 
     return mMainWidget;
+}
+
+void ComicApplet::setTabBarVisible( bool isVisible )
+{
+    if ( !mCentralLayout ) {
+        return;
+    }
+
+    mTabBar->setVisible( isVisible );
+    if ( !mTabAdded && isVisible ) {
+        mCentralLayout->insertItem( 0, mTabBar );
+        mTabAdded = true;
+    } else if ( mTabAdded && !isVisible ) {
+        mCentralLayout->removeItem( mTabBar );
+        mTabAdded = false;
+    }
 }
 
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
@@ -389,10 +406,18 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mLabelUrl->setText( mWebsiteUrl.host() );
     mImageWidget->setScaled( !mScaleComic );
 
-    mTabBar->setVisible( mShowTabBar && mUseTabs );
+    setTabBarVisible( mShowTabBar && mUseTabs );
     mLabelTop->setVisible( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() );
     mLabelId->setVisible( mShowComicIdentifier && !mLabelId->text().isEmpty() );
     mLabelUrl->setVisible( mShowComicUrl && !mLabelUrl->text().isEmpty() );
+    const int spacing = ( mLabelTop->isVisible() ? 2 : 0 );
+    const int id = ( mShowTabBar && mUseTabs ? 1 : 0 );
+    mCentralLayout->setItemSpacing( id, spacing );
+    if ( mLabelId->isVisible() || mLabelUrl->isVisible() ) {
+        mBottomLayout->setContentsMargins( 0, 2, 0, 0 );
+    } else {
+        mBottomLayout->setContentsMargins( 0, 0, 0, 0 );
+    }
 
     updateButtons();
     updateContextMenu();
