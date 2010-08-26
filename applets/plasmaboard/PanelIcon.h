@@ -40,6 +40,7 @@ public:
 	 * Adds the layout switching entry to the context menu
 	 */
 
+    void configChanged();
     //QList<QAction*> contextualActions();
 
 

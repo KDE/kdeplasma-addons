@@ -53,6 +53,26 @@ void PanelIcon::configAccepted()
     initKeyboard(m_layout);
 }
 
+void PanelIcon::configChanged()
+{
+    QStringList layoutList = KGlobal::dirs()->findAllResources("data", "plasmaboard/*.xml");
+    Q_FOREACH(QString path, layoutList){
+        m_layouts << new Layout(path);
+    }
+
+
+    KConfigGroup cg = config();
+    QString layout;
+    layout = cg.readEntry("layout", layout);
+
+    QString file = KStandardDirs::locate("data", layout); // lookup whether saved layout exists
+    if (layout.size() > 0 && file.size() > 0){
+        m_layout = file;
+    } else { // fallback to default layout
+        m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
+    }
+}
+
 void PanelIcon::layoutNameChanged(QString name)
 {
     Layout *lay = m_layouts[0];
@@ -106,24 +126,7 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
 
 void PanelIcon::init() {
 
-    QStringList layoutList = KGlobal::dirs()->findAllResources("data", "plasmaboard/*.xml");
-    Q_FOREACH(QString path, layoutList){
-        m_layouts << new Layout(path);
-    }
-
-
-    KConfigGroup cg = config();
-    QString layout;
-    layout = cg.readEntry("layout", layout);
-
-    QString file = KStandardDirs::locate("data", layout); // lookup whether saved layout exists
-    if(layout.size() > 0 && file.size() > 0){
-        m_layout = file;
-    }
-    else{ // fallback to default layout
-        m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
-    }
-
+    configChanged();
 }
 
 void PanelIcon::initKeyboard() {
