@@ -53,7 +53,7 @@ void PanelIcon::configAccepted()
     initKeyboard(m_layout);
 }
 
-void PanelIcon::configChanged(QString name)
+void PanelIcon::layoutNameChanged(QString name)
 {
     Layout *lay = m_layouts[0];
 
@@ -100,7 +100,7 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
         }
     }
 
-    connect(ui.layoutsComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(configChanged(QString)));
+    connect(ui.layoutsComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(layoutNameChanged(QString)));
 }
 
 

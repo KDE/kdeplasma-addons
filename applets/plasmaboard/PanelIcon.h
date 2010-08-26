@@ -45,7 +45,7 @@ public:
 
 public Q_SLOTS:
     void configAccepted();
-    void configChanged(QString name);
+    void layoutNameChanged(QString name);
     /**
       * Initialize the keyboard with the configured layout
       */
