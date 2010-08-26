@@ -52,8 +52,9 @@
 QChar Helpers::mapXtoUTF8[0xffff+1];
 int Helpers::keysymsPerKeycode;
 
-PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
-    : Plasma::Applet(parent)
+PlasmaboardWidget::PlasmaboardWidget(Plasma::Applet *parent)
+    : QGraphicsWidget(parent),
+      m_applet(parent)
 {
     setPreferredSize(500, 200);
     setMinimumSize(200,100);
@@ -61,7 +62,6 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     setFocusPolicy(Qt::NoFocus);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    setBackgroundHints(Plasma::Applet::TranslucentBackground);
 
     Helpers::buildUp();
     m_isLevel2 = false;
@@ -81,9 +81,9 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     m_activeFrame->setImagePath("widgets/button");
     m_activeFrame->setElementPrefix("pressed");
 
-    m_engine = dataEngine("keystate");
+    m_engine = m_applet->dataEngine("keystate");
     if(m_engine){
-        m_engine -> connectAllSources(this);
+        m_engine->connectAllSources(this);
     }
 
     m_signalMapper = new QSignalMapper(this);
@@ -496,7 +496,7 @@ void PlasmaboardWidget::mouseMoveEvent ( QGraphicsSceneMouseEvent * event )
         }
     }
 
-    Plasma::Applet::mouseMoveEvent(event);
+    QGraphicsWidget::mouseMoveEvent(event);
 }
 
 void PlasmaboardWidget::mousePressEvent ( QGraphicsSceneMouseEvent * event )
@@ -508,7 +508,7 @@ void PlasmaboardWidget::mousePressEvent ( QGraphicsSceneMouseEvent * event )
             return;
         }
     }
-    Plasma::Applet::mousePressEvent(event);
+    QGraphicsWidget::mousePressEvent(event);
 }
 
 void PlasmaboardWidget::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event )
@@ -520,7 +520,7 @@ void PlasmaboardWidget::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event )
             return;
         }
     }
-    Plasma::Applet::mouseReleaseEvent(event);
+    QGraphicsWidget::mouseReleaseEvent(event);
 }
 
 void PlasmaboardWidget::paint(QPainter *p,
@@ -647,14 +647,14 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
     QString label = key->label();
     if(label.size() > 0) {
         m_tooltip -> setText( key->label() );
-        m_tooltip -> move( popupPosition( key->size()*2 ) + key->position() - QPoint(key->size().width()/2, 0) );
+        m_tooltip -> move( m_applet->popupPosition( key->size()*2 ) + key->position() - QPoint(key->size().width()/2, 0) );
         m_tooltip -> resize( key->size()*2 );
         m_tooltip -> show();
     }
 }
 
 void PlasmaboardWidget::stickyKey_Mapper(int id)
-{    
+{
     BoardKey* key = m_stickyKeys[id];
     key->setPixmap(getFrame(key->size()));
     update(key->rect());

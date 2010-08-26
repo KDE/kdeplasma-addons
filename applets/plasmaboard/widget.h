@@ -24,6 +24,7 @@
 
 #include "tooltip.h"
 
+#include <QGraphicsWidget>
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
 
@@ -58,12 +59,12 @@ namespace {
  *
  */
 
-class PlasmaboardWidget : public Plasma::Applet
+class PlasmaboardWidget : public QGraphicsWidget
 {
     Q_OBJECT
 public:
 
-    PlasmaboardWidget(QGraphicsWidget *parent);
+    PlasmaboardWidget(Plasma::Applet *parent);
     ~PlasmaboardWidget();
 
     /**
@@ -222,6 +223,7 @@ private:
     QList<SwitchKey*> m_switchKeys; // list of all switch keys on keyboard
     Tooltip* m_tooltip; // pointer to widget which is used as tooltip
     QXmlStreamReader m_xmlReader; // instance of QXMLStreamReader for parsing layout files
+    Plasma::Applet *m_applet;
 };
 
 inline uint qHash(const QSize &key)
