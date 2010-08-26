@@ -119,7 +119,7 @@ private:
       * @param String which classifys the functional key that should be returned
       * @return FuncKey corresponding to the action
       */
-    FuncKey *createFunctionKey(QPoint &point, QSize &size, QString action);
+    FuncKey *createFunctionKey(const QPoint &point, const QSize &size, const QString &action);
 
     /**
       * @param Size of the pixmap requested

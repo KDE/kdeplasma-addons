@@ -128,7 +128,7 @@ void PlasmaboardWidget::clearTooltip()
     m_tooltip->hide();
 }
 
-FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QString action)
+FuncKey* PlasmaboardWidget::createFunctionKey(const QPoint &point, const QSize &size, const QString &action)
 {
 
     if(action == "ALT"){

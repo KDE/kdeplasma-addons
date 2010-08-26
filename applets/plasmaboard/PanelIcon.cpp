@@ -32,8 +32,10 @@
 #include <Plasma/ToolTipContent>
 
 
-PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
-        Plasma::PopupApplet(parent, args), m_plasmaboard(0){
+PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)
+    : Plasma::PopupApplet(parent, args),
+      m_plasmaboard(0)
+{
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("preferences-desktop-keyboard");
     //setFocusPolicy(Qt::NoFocus);
@@ -43,8 +45,9 @@ PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
 }
 
 
-PanelIcon::~PanelIcon() {
-	Plasma::ToolTipManager::self()->unregisterWidget(this);
+PanelIcon::~PanelIcon()
+{
+    Plasma::ToolTipManager::self()->unregisterWidget(this);
     qDeleteAll(m_layouts);
 }
 
@@ -73,7 +76,7 @@ void PanelIcon::configChanged()
     }
 }
 
-void PanelIcon::layoutNameChanged(QString name)
+void PanelIcon::layoutNameChanged(const QString &name)
 {
     Layout *lay = m_layouts[0];
 
@@ -124,12 +127,14 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
 }
 
 
-void PanelIcon::init() {
+void PanelIcon::init()
+{
 
     configChanged();
 }
 
-void PanelIcon::initKeyboard() {
+void PanelIcon::initKeyboard()
+{
     QString path = ((QAction*)sender())->data().toString();
     m_plasmaboard->deleteKeys();
     m_plasmaboard->initKeyboard(path);
@@ -138,7 +143,8 @@ void PanelIcon::initKeyboard() {
     saveLayout(path);
 }
 
-void PanelIcon::initKeyboard(QString layoutFile) {
+void PanelIcon::initKeyboard(const QString &layoutFile)
+{
     m_plasmaboard->deleteKeys();
     m_plasmaboard->initKeyboard(layoutFile);
     m_plasmaboard->refreshKeys();
@@ -162,21 +168,21 @@ QGraphicsWidget *PanelIcon::graphicsWidget()
     return m_plasmaboard;
 }
 
-void PanelIcon::popupEvent(bool show){
-	if ( !show ) {
+void PanelIcon::popupEvent(bool show)
+{
+    if (!show) {
         m_plasmaboard->reset();
-	}
+    }
 }
 
-void PanelIcon::saveLayout(QString path) {
-
+void PanelIcon::saveLayout(const QString &path)
+{
     int pos = path.indexOf("plasmaboard");
 
     KConfigGroup cg = config();
     cg.writeEntry("layout", path.right(path.size() - pos));
 
     emit configNeedsSaving();
-
 }
 
 void PanelIcon::constraintsEvent(Plasma::Constraints constraints)

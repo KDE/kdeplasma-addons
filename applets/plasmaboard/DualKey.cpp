@@ -38,11 +38,13 @@ DualKey::~DualKey()
     XFree(m_defaultMapping);
 }
 
-bool DualKey::alternative() const{
+bool DualKey::alternative() const
+{
     return m_isAlt;
 }
 
-void DualKey::setAlternative(bool alt){
+void DualKey::setAlternative(bool alt)
+{
     if(alt){
         m_defaultMapping = Helpers::getKeycodeMapping(getKeycode());
         Helpers::changeKeycodeMapping(getKeycode(), m_altKeyString, m_shiftedAltKeyString);

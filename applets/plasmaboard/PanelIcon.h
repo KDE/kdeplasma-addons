@@ -31,22 +31,22 @@ class Layout;
 class PanelIcon: public Plasma::PopupApplet {
     Q_OBJECT
 public:
-	PanelIcon(QObject *parent, const QVariantList &args);
-	virtual ~PanelIcon();
-	QGraphicsWidget *graphicsWidget();
+    PanelIcon(QObject *parent, const QVariantList &args);
+    virtual ~PanelIcon();
+    QGraphicsWidget *graphicsWidget();
 
     void constraintsEvent(Plasma::Constraints constraints);
-	/*
-	 * Adds the layout switching entry to the context menu
-	 */
 
+    /*
+     * Adds the layout switching entry to the context menu
+     */
     void configChanged();
     //QList<QAction*> contextualActions();
 
 
 public Q_SLOTS:
     void configAccepted();
-    void layoutNameChanged(QString name);
+    void layoutNameChanged(const QString &name);
     /**
       * Initialize the keyboard with the configured layout
       */
@@ -54,21 +54,22 @@ public Q_SLOTS:
 
 protected:
     void createConfigurationInterface(KConfigDialog *parent);
-	/*
-	 * Clears all pressed keys when keyboard is cloased
-	 */
-	virtual void popupEvent(bool show);
+
+    /*
+     * Clears all pressed keys when keyboard is cloased
+     */
+    virtual void popupEvent(bool show);
 
 private:
     void init();
-    void initKeyboard(QString layoutFile);
-    void saveLayout(QString path);
+    void initKeyboard(const QString &layoutFile);
+    void saveLayout(const QString &path);
 
 private:
     QString m_layout;
     QList<Layout*> m_layouts;
-	PlasmaboardWidget *m_plasmaboard;
-	const QVariantList args;
+    PlasmaboardWidget *m_plasmaboard;
+    const QVariantList args;
 
     Ui::config ui;
 
