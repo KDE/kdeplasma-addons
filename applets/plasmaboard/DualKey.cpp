@@ -35,9 +35,7 @@ DualKey::DualKey(QPoint relativePosition, QSize relativeSize, unsigned int keyco
 
 DualKey::~DualKey()
 {
-
-    delete m_defaultMapping;
-
+    XFree(m_defaultMapping);
 }
 
 bool DualKey::alternative() const{
