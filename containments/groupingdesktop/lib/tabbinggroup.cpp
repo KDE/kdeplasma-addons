@@ -48,21 +48,10 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
     setLayout(m_layout);
 
-    //TODO: in trunk use these:
-    //     m_tabBar->setFirstPositionWidget(m_newTab);
-    //     m_tabBar->setLastPositionWidget(m_closeTab);
+    m_tabBar->setFirstPositionWidget(m_newTab);
+    m_tabBar->setLastPositionWidget(m_closeTab);
 
-    QGraphicsLinearLayout *newTabLayout = new QGraphicsLinearLayout(Qt::Vertical);
-    newTabLayout->addItem(m_newTab);
-    newTabLayout->addStretch();
-
-    QGraphicsLinearLayout *closeTabLayout = new QGraphicsLinearLayout(Qt::Vertical);
-    closeTabLayout->addItem(m_closeTab);
-    closeTabLayout->addStretch();
-
-    m_layout->addItem(newTabLayout);
     m_layout->addItem(m_tabBar);
-    m_layout->addItem(closeTabLayout);
     m_layout->setStretchFactor(m_tabBar, 2);
 
     m_newTab->setIcon(KIcon("tab-new"));
