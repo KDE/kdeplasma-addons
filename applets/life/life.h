@@ -59,16 +59,20 @@ class Life : public Plasma::Applet
         void initGame();
         void resetGame();
 
-        char *cells;
-        char *nextGenerationCells;
+        char *m_cells;
+        char *m_nextGenerationCells;
 
-        int cellsArrayHeight;
-        int cellsArrayWidth;
+        int m_cellsArrayHeight;
+        int m_cellsArrayWidth;
 
-        int stepInterval;
-        int maxGensNumber;
+        int m_stepInterval;
+        int m_maxGensNumber;
+        int m_popDensityNumber;
 
-        int gensCounter;
+        int m_gensCounter;
+
+        bool m_reflectVertical;
+        bool m_reflectHorizontal;
 
         Ui::lifeConfig ui;
         QTimer timer;

@@ -40,16 +40,19 @@ void Life::init()
 {
     KConfigGroup cg = config();
 
-    cellsArrayHeight = cg.readEntry("verticalCells", 64) + 2;
-    cellsArrayWidth = cg.readEntry("horizontalCells", 64) + 2;
-    stepInterval = cg.readEntry("stepInterval", 1);
-    maxGensNumber = cg.readEntry("maxGensNumber", 600);
+    m_cellsArrayHeight = cg.readEntry("verticalCells", 64);
+    m_cellsArrayWidth = cg.readEntry("horizontalCells", 64);
+    m_stepInterval = cg.readEntry("stepInterval", 1);
+    m_maxGensNumber = cg.readEntry("maxGensNumber", 600);
+    m_reflectVertical = cg.readEntry("vertReflectCheckbox", false);
+    m_reflectHorizontal = cg.readEntry("horizReflectCheckbox", false);
+    m_popDensityNumber = cg.readEntry("popDensityNumber", 50);
 
     qreal left, top, right, bottom;
     getContentsMargins(&left, &top, &right, &bottom);
-    setPreferredSize(cellsArrayWidth + left + right,
-                     cellsArrayHeight + top + bottom);
-    setMinimumSize(cellsArrayWidth + left + right, cellsArrayHeight + top + bottom);
+    setPreferredSize(m_cellsArrayWidth + left + right,
+                     m_cellsArrayHeight + top + bottom);
+    setMinimumSize(m_cellsArrayWidth + left + right, m_cellsArrayHeight + top + bottom);
 
     initGame();
 
@@ -58,21 +61,21 @@ void Life::init()
 
 Life::~Life()
 {
-    delete cells;
-    delete nextGenerationCells;
+    delete m_cells;
+    delete m_nextGenerationCells;
 }
 
 void Life::startUpdateTimer()
 {
     connect(&timer, SIGNAL(timeout()), this, SLOT(updateGame()));
-    timer.start( stepInterval * 1000 );
+    timer.start( m_stepInterval * 1000 );
 }
 
 void Life::updateGame()
 {
-    if (gensCounter < maxGensNumber) {
+    if (m_gensCounter < m_maxGensNumber) {
         step();
-        gensCounter++;
+        m_gensCounter++;
     } else {
         resetGame();
     }
@@ -88,12 +91,15 @@ void Life::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     parent->addPage(widget, parent->windowTitle(), icon());
 
-    ui.verticalCells->setValue(cellsArrayHeight - 2);
-    ui.horizontalCells->setValue(cellsArrayWidth - 2);
-    ui.stepInterval->setValue(stepInterval);
-    ui.maxGensNumber->setValue(maxGensNumber);
+    ui.verticalCells->setValue(m_cellsArrayHeight);
+    ui.horizontalCells->setValue(m_cellsArrayWidth);
+    ui.stepInterval->setValue(m_stepInterval);
+    ui.maxGensNumber->setValue(m_maxGensNumber);
     ui.stepInterval->setSuffix(ki18np(" second", " seconds"));
     ui.maxGensNumber->setSuffix(ki18np(" generation", " generations"));
+    ui.vertReflectCheckbox->setChecked(m_reflectVertical);
+    ui.horizReflectCheckbox->setChecked(m_reflectHorizontal);
+    ui.popDensityNumber->setValue(m_popDensityNumber);
 
     QRectF cSize = geometry();
     const int maxCells = (cSize.height() < cSize.width()) ? cSize.height() : cSize.width();
@@ -111,28 +117,34 @@ void Life::configAccepted()
     int newArrayHeight = ui.verticalCells->value();
     int newArrayWidth = ui.horizontalCells->value();
 
-    if (newArrayHeight != cellsArrayHeight ||
-        newArrayWidth != cellsArrayWidth) {
-        cellsArrayHeight = ui.verticalCells->value();
-        cellsArrayWidth = ui.horizontalCells->value();
-        cg.writeEntry("verticalCells", cellsArrayHeight - 2);
-        cg.writeEntry("horizontalCells", cellsArrayWidth - 2);
+    if (newArrayHeight != m_cellsArrayHeight ||
+        newArrayWidth != m_cellsArrayWidth) {
+        m_cellsArrayHeight = ui.verticalCells->value();
+        m_cellsArrayWidth = ui.horizontalCells->value();
+        cg.writeEntry("verticalCells", m_cellsArrayHeight);
+        cg.writeEntry("horizontalCells", m_cellsArrayWidth);
 
         qreal left, top, right, bottom;
         getContentsMargins(&left, &top, &right, &bottom);
-        setPreferredSize(cellsArrayWidth + left + right,
-                         cellsArrayHeight + top + bottom);
-        setMinimumSize(cellsArrayWidth + left + right, cellsArrayHeight + top + bottom);
+        setPreferredSize(m_cellsArrayWidth + left + right,
+                         m_cellsArrayHeight + top + bottom);
+        setMinimumSize(m_cellsArrayWidth + left + right, m_cellsArrayHeight + top + bottom);
     }
 
-    stepInterval = ui.stepInterval->value();
-    maxGensNumber = ui.maxGensNumber->value();
+    m_stepInterval = ui.stepInterval->value();
+    m_maxGensNumber = ui.maxGensNumber->value();
+    m_reflectVertical = ui.vertReflectCheckbox->isChecked();
+    m_reflectHorizontal = ui.horizReflectCheckbox->isChecked();
+    m_popDensityNumber = ui.popDensityNumber->value();
 
-    cg.writeEntry("stepInterval", stepInterval);
-    cg.writeEntry("maxGensNumber", maxGensNumber);
+    cg.writeEntry("stepInterval", m_stepInterval);
+    cg.writeEntry("maxGensNumber", m_maxGensNumber);
+    cg.writeEntry("vertReflectCheckbox", m_reflectVertical);
+    cg.writeEntry("horizReflectCheckbox", m_reflectHorizontal);
+    cg.writeEntry("popDensityNumber", m_popDensityNumber);
 
-    delete cells;
-    delete nextGenerationCells;
+    delete m_cells;
+    delete m_nextGenerationCells;
 
     initGame();
 
@@ -149,16 +161,16 @@ void Life::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, c
 {
     Q_UNUSED(option)
 
-    const int cellHeight = (int) qMax(1, contentsRect.height() / cellsArrayHeight);
-    const int cellWidth = (int) qMax(1, contentsRect.width() / cellsArrayWidth);
-    int y = contentsRect.y() + (contentsRect.height() - cellHeight * cellsArrayHeight) / 2;
-    const int x = contentsRect.x() + (contentsRect.width() - cellWidth * cellsArrayWidth) / 2;
+    const int cellHeight = (int) qMax(1, contentsRect.height() / m_cellsArrayHeight);
+    const int cellWidth = (int) qMax(1, contentsRect.width() / m_cellsArrayWidth);
+    int y = contentsRect.y() + (contentsRect.height() - cellHeight * m_cellsArrayHeight) / 2;
+    const int x = contentsRect.x() + (contentsRect.width() - cellWidth * m_cellsArrayWidth) / 2;
 
     int k = 0;
     int x1 = x;
-    for (int i = 0; i < cellsArrayHeight; i++){
-        for (int j = 0; j < cellsArrayWidth; j++){
-            if (cells[k]) {
+    for (int i = 0; i < m_cellsArrayHeight; i++){
+        for (int j = 0; j < m_cellsArrayWidth; j++){
+            if (m_cells[k]) {
                 p->fillRect(x1, y, cellWidth, cellHeight, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
             }
             k++;
@@ -173,70 +185,90 @@ void Life::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, c
 int Life::neighbors(int i)
 {
     int neighbors = 0;
-    if (!((i % cellsArrayWidth) == 0)) // Not on the left edge, safe to check '-1's
+    if (!((i % m_cellsArrayWidth) == 0)) // Not on the left edge, safe to check '-1's
     {
-        neighbors += isAlive((i - cellsArrayWidth) - 1) + isAlive(i - 1)
-            + isAlive((i + cellsArrayWidth) - 1);
+        neighbors += isAlive((i - m_cellsArrayWidth) - 1) + isAlive(i - 1)
+            + isAlive((i + m_cellsArrayWidth) - 1);
     }
-    if (!((i % cellsArrayWidth) == (cellsArrayWidth - 1))) // Not on the right edge, safe to check '+1's
+    if (!((i % m_cellsArrayWidth) == (m_cellsArrayWidth - 1))) // Not on the right edge, safe to check '+1's
     {
-        neighbors += isAlive((i - cellsArrayWidth) + 1) + isAlive(i + 1)
-            + isAlive((i + cellsArrayWidth) + 1);
+        neighbors += isAlive((i - m_cellsArrayWidth) + 1) + isAlive(i + 1)
+            + isAlive((i + m_cellsArrayWidth) + 1);
     }
 
-    return neighbors + isAlive(i - cellsArrayWidth)
-        + isAlive(i + cellsArrayWidth);
+    return neighbors + isAlive(i - m_cellsArrayWidth)
+        + isAlive(i + m_cellsArrayWidth);
 }
 
 int Life::isAlive(int i)
 {
-    if ((i < 0) || (i >= (cellsArrayHeight * cellsArrayWidth))) // Out of bounds
+    if ((i < 0) || (i >= (m_cellsArrayHeight * m_cellsArrayWidth))) // Out of bounds
         return 0;
-    return cells[i];
+    return m_cells[i];
 }
 
 void Life::step()
 {
-    for (int i = 0; i < (cellsArrayHeight * cellsArrayWidth); i++){
+    for (int i = 0; i < (m_cellsArrayHeight * m_cellsArrayWidth); i++){
 		switch(neighbors(i)){
 			case 2:
-				nextGenerationCells[i] = cells[i];
+				m_nextGenerationCells[i] = m_cells[i];
 				break;
 
 			case 3:
-				nextGenerationCells[i] = 1;
+				m_nextGenerationCells[i] = 1;
 				break;
 
 			default:
-				nextGenerationCells[i] = 0;
+				m_nextGenerationCells[i] = 0;
 				break;
 		}
 	}
 
 	//Cells arrays swap
-	char *tmp = cells;
-	cells = nextGenerationCells;
-	nextGenerationCells = tmp;
+	char *tmp = m_cells;
+	m_cells = m_nextGenerationCells;
+	m_nextGenerationCells = tmp;
 }
 
 void Life::initGame()
 {
-    cells = new char[cellsArrayHeight * cellsArrayWidth];
-    nextGenerationCells = new char[cellsArrayHeight * cellsArrayWidth];
+    m_cells = new char[m_cellsArrayHeight * m_cellsArrayWidth];
+    m_nextGenerationCells = new char[m_cellsArrayHeight * m_cellsArrayWidth];
 
-    memset(cells, 0, cellsArrayHeight * cellsArrayWidth * sizeof(char));
-    memset(nextGenerationCells, 0, cellsArrayHeight * cellsArrayWidth * sizeof(char));
+    memset(m_cells, 0, m_cellsArrayHeight * m_cellsArrayWidth * sizeof(char));
+    memset(m_nextGenerationCells, 0, m_cellsArrayHeight * m_cellsArrayWidth * sizeof(char));
 
     resetGame();
 }
 
 void Life::resetGame()
 {
-    for (int i = 0; i < (cellsArrayHeight * cellsArrayWidth); i++){
-        cells[i] = rand() % 2;
+    for (int i = 0; i < (m_cellsArrayHeight * m_cellsArrayWidth); i++){
+        m_cells[i] = (rand() % 100) < m_popDensityNumber ? 1 : 0;
     }
 
-    gensCounter = 0;
+    if (m_reflectHorizontal){
+        int hMP = m_cellsArrayHeight / 2;
+        for (int i = 0; i < hMP; i++){
+            for (int j = 0; j < m_cellsArrayWidth; j++){
+                int currValue = m_cells[(i * m_cellsArrayWidth) + j];
+                m_cells[(((m_cellsArrayHeight - 1) - i) * m_cellsArrayWidth) + j] = currValue;
+            }
+        }
+    }
+
+    if (m_reflectVertical){
+        int wMP = m_cellsArrayWidth / 2;
+        for (int i = 0; i < m_cellsArrayHeight; i++){
+            for (int j = 0; j < wMP; j++){
+                int currValue = m_cells[(i * m_cellsArrayWidth) + j];
+                m_cells[(i * m_cellsArrayWidth) + ((m_cellsArrayWidth - 1) - j)] = currValue;
+            }
+        }
+    }
+
+    m_gensCounter = 0;
 }
 
 #include "life.moc"
