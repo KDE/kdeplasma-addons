@@ -35,6 +35,7 @@ public:
 	virtual ~PanelIcon();
 	QGraphicsWidget *graphicsWidget();
 
+    void constraintsEvent(Plasma::Constraints constraints);
 	/*
 	 * Adds the layout switching entry to the context menu
 	 */

@@ -111,12 +111,6 @@ void PanelIcon::init() {
         m_layouts << new Layout(path);
     }
 
-    Plasma::ToolTipManager::self()->registerWidget(this);
-    Plasma::ToolTipContent toolTip;
-    toolTip.setImage(KIcon("preferences-desktop-keyboard"));
-    toolTip.setMainText(i18n("Virtual Keyboard"));
-    Plasma::ToolTipManager::self()->setContent(this, toolTip);
-
 
     KConfigGroup cg = config();
     QString layout;
@@ -180,6 +174,21 @@ void PanelIcon::saveLayout(QString path) {
 
     emit configNeedsSaving();
 
+}
+
+void PanelIcon::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (formFactor() == Plasma::Horizontal || formFactor() == Plasma::Vertical) {
+            Plasma::ToolTipManager::self()->registerWidget(this);
+            Plasma::ToolTipContent toolTip;
+            toolTip.setImage(KIcon("preferences-desktop-keyboard"));
+            toolTip.setMainText(i18n("Virtual Keyboard"));
+            Plasma::ToolTipManager::self()->setContent(this, toolTip);
+        } else {
+            Plasma::ToolTipManager::self()->unregisterWidget(this);
+        }
+    }
 }
 
 // This is the command that links your applet to the .desktop file
