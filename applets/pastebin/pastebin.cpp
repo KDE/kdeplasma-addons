@@ -28,7 +28,7 @@
 
 #include <kmimetype.h>
 #include <KTemporaryFile>
-
+#include <KDE/KIO/MimetypeJob>
 
 #include <kio/global.h>
 #include <kio/job.h>
@@ -52,9 +52,8 @@
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      m_textBackend(0), m_imageBackend(0), m_imagePrivacy(0),
       m_historySize(3), m_signalMapper(new QSignalMapper()), m_paste(0),
-      m_topSeparator(0), m_bottomSeparator(0), m_servers(0)
+      m_topSeparator(0), m_bottomSeparator(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -69,18 +68,17 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
              this, SLOT(copyToClipboard(const QString &)));
     connect(this, SIGNAL(activate()), this, SLOT(postClipboard()));
 
-    Plasma::DataEngine *engine = dataEngine("pastebin");
-    m_postingService = engine->serviceForSource("");
-    connect(m_postingService, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(postingFinished(Plasma::ServiceJob*)));
-    engine->connectSource("textservers", this);
-    engine->connectSource("imageservers", this);
+    // connect to all sources of our 'share' dataengine
+    m_engine = dataEngine("org.kde.plasma.dataengine.share");
+    m_engine->connectAllSources(this);
 }
 
 Pastebin::~Pastebin()
 {
     delete m_topSeparator;
     delete m_bottomSeparator;
-    delete m_postingService;
+
+    // save history of URLs
     QString history;
     for (int i = 0; i < m_actionHistory.size(); ++i) {
         history.prepend(m_actionHistory.at(i)->toolTip());
@@ -96,11 +94,7 @@ void Pastebin::init()
 {
     KConfigGroup cg = config();
 
-    m_textBackend = cg.readEntry("TextBackend", "0").toInt();
-    m_imageBackend = cg.readEntry("ImageBackend", "0").toInt();
-    m_imagePrivacy = cg.readEntry("imagePrivacy", "0").toInt();
     int historySize = cg.readEntry("HistorySize", "3").toInt();
-
     QStringList history = cg.readEntry("History", "").split('|', QString::SkipEmptyParts);
 
     for (int i = 0; i < history.size(); ++i) {
@@ -119,7 +113,18 @@ void Pastebin::init()
 
 void Pastebin::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    //TODO: use the mappings!
+    // update the options
+    if (sourceName != "Mimetypes") {
+        const QString mimetype = data.value("Mimetypes").toString();
+
+        if (mimetype.startsWith("text/")) {
+            m_txtServers.insert(data.value("Name").toString(), sourceName);
+        } else if (mimetype.startsWith("image/")) {
+            m_imgServers.insert(data.value("Name").toString(), sourceName);
+        } else {
+            kDebug() << "Mimetype not supported by this applet";
+        }
+    }
 }
 
 void Pastebin::setHistorySize(int max)
@@ -430,145 +435,21 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(cancelClicked()), this, SLOT(closeServerDialog()));
     parent->addPage(general, i18n("General"), Applet::icon());
 
-    uiConfig.textServer->setCurrentIndex(m_textBackend);
-    uiConfig.imageServer->setCurrentIndex(m_imageBackend);
+    uiConfig.textServer->addItems(m_txtServers.keys());
+    uiConfig.imageServer->addItems(m_imgServers.keys());
     uiConfig.historySize->setValue(m_historySize);
-    uiConfig.imagePrivacy->setCurrentIndex(m_imagePrivacy);
-
-    uiConfig.editTextServer->setIcon(KIcon("document-edit"));
-    uiConfig.editImageServer->setIcon(KIcon("document-edit"));
-
-    connect(uiConfig.editTextServer, SIGNAL(clicked()), this, SLOT(editTextServer()));
-    connect(uiConfig.editImageServer, SIGNAL(clicked()), this, SLOT(editImageServer()));
-}
-
-void Pastebin::editTextServer()
-{
-    KConfigGroup cg = config();
-
-    // avoid memory leaks as its not modal and the user can click again
-    // on the edit button
-    delete m_servers;
-
-    m_servers = new QWidget();
-    uiServers.setupUi(m_servers);
-    m_servers->show();
-    connect(uiServers.buttonBox, SIGNAL(accepted()), this, SLOT(saveTextServer()));
-    connect(uiServers.buttonBox, SIGNAL(rejected()), this, SLOT(closeServerDialog()));
-    QString serverAddress;
-    switch(uiConfig.textServer->currentIndex()) {
-        case Pastebin::PASTEBINCA:
-            serverAddress = cg.readEntry("pastebinca", "http://pastebin.ca");
-            break;
-
-        case Pastebin::PASTEBINCOM:
-           serverAddress = cg.readEntry("pastebincom", "http://pastebin.com");
-           break;
-    }
-
-    uiServers.server->setText(serverAddress);
-}
-
-void Pastebin::saveTextServer()
-{
-    KConfigGroup cg = config();
-
-    switch(uiConfig.textServer->currentIndex()) {
-        case Pastebin::PASTEBINCA:
-            cg.writeEntry("pastebinca", uiServers.server->text());
-            break;
-
-        case Pastebin::PASTEBINCOM:
-            cg.writeEntry("pastebincom", uiServers.server->text());
-            break;
-    }
-
-    closeServerDialog();
-}
-
-void Pastebin::closeServerDialog()
-{
-    delete m_servers;
-    m_servers = 0;
-}
-
-void Pastebin::editImageServer()
-{
-    KConfigGroup cg = config();
-
-    // avoid memory leaks as its not modal and the user can click again
-    // on the edit button
-    delete m_servers;
-
-    m_servers = new QWidget();
-    uiServers.setupUi(m_servers);
-    m_servers->show();
-    connect(uiServers.buttonBox, SIGNAL(accepted()), this, SLOT(saveImageServer()));
-    connect( uiServers.buttonBox, SIGNAL( rejected() ), this, SLOT( closeServerDialog() ) );
-    QString serverAddress;
-    switch(uiConfig.imageServer->currentIndex()) {
-        case Pastebin::IMAGEBINCA:
-            serverAddress = cg.readEntry("imagebinca", "http://imagebin.ca");
-            break;
-
-        case Pastebin::IMAGESHACK:
-            serverAddress = cg.readEntry("imageshack", "http://imageshack.us");
-            break;
-
-        case Pastebin::SIMPLESTIMAGEHOSTING:
-            serverAddress = cg.readEntry("simplestimagehosting",
-                                         "http://api.simplest-image-hosting.net");
-            break;
-
-        case Pastebin::IMGUR:
-            serverAddress = cg.readEntry("imgur", "http://imgur.com/api/upload");
-            break;
-    }
-
-    uiServers.server->setText(serverAddress);
-}
-
-void Pastebin::saveImageServer()
-{
-    KConfigGroup cg = config();
-
-    switch(uiConfig.imageServer->currentIndex()) {
-        case Pastebin::IMAGEBINCA:
-            cg.writeEntry("imagebinca", uiServers.server->text());
-            break;
-
-        case Pastebin::IMAGESHACK:
-            cg.writeEntry("imageshack", uiServers.server->text());
-            break;
-
-        case Pastebin::SIMPLESTIMAGEHOSTING:
-            cg.writeEntry("simplestimagehosting", uiServers.server->text());
-            break;
-
-        case Pastebin::IMGUR:
-            cg.writeEntry("imgur", uiServers.server->text());
-            break;
-
-    }
-    closeServerDialog();
 }
 
 void Pastebin::configAccepted()
 {
     KConfigGroup cg = config();
-    m_textBackend = uiConfig.textServer->currentIndex();
-    m_imageBackend = uiConfig.imageServer->currentIndex();
-    m_imagePrivacy = uiConfig.imagePrivacy->currentIndex();
-
     int historySize = uiConfig.historySize->value();
     setHistorySize(historySize);
 
-    cg.writeEntry("TextBackend", m_textBackend);
-    cg.writeEntry("ImageBackend", m_imageBackend);
-    cg.writeEntry("imagePrivacy", m_imagePrivacy);
+    cg.writeEntry("TextProvider", uiConfig.textServer->currentText());
+    cg.writeEntry("ImageProvider", uiConfig.imageServer->currentText());
     cg.writeEntry("HistorySize", historySize);
 
-    closeServerDialog();
     emit configNeedsSaving();
 }
 
@@ -578,7 +459,6 @@ void Pastebin::showResults(const QString &url)
     m_url = url;
     setActionState(IdleSuccess);
     copyToClipboard(url);
-
     addToHistory(url);
 }
 
@@ -774,25 +654,37 @@ void Pastebin::postClipboard(bool preferSelection)
 
 void Pastebin::postContent(QString text, QImage imageData)
 {
+    QString sourceName;
     KUrl testPath(text);
-    bool validPath = QFile::exists(testPath.toLocalFile());
-    bool image = false;
-    QString operationName;
+    bool validPath = true;
+
+    // use KIO to check if the file exists using mimetype job
+    KIO::MimetypeJob *mjob = KIO::mimetype(testPath);
+    if (!mjob->exec()) {
+        // it's not a file - usually this happens when we are
+        // just sharing plain text or image
+        validPath = false;
+    }
+
+    KConfigGroup cg = config();
+    // This is needed to provide smooth transition between old config and new one
+    const QString txtProvider = cg.readEntry("TextProvider", m_txtServers.keys().at(0));
+    const QString imgProvider = cg.readEntry("ImageProvider", m_imgServers.keys().at(0));
 
     if (validPath) {
         KMimeType::Ptr type = KMimeType::findByPath(testPath.path());
 
         if (type->name().indexOf("image/") != -1) {
-            operationName = "image";
-            image = true;
+            // its image
+            sourceName = m_imgServers.value(imgProvider);
         } else {
-            operationName = "text";
+            // its text
+            sourceName = m_txtServers.value(txtProvider);
         }
     } else if (imageData.isNull()) {
-        operationName = "literalText";
+        sourceName = m_txtServers.value(txtProvider);
     } else {
-        operationName = "image";
-        image = true;
+        sourceName = m_imgServers.value(imgProvider);
 
         KTemporaryFile tempFile;
         if (tempFile.open()) {
@@ -814,64 +706,33 @@ void Pastebin::postContent(QString text, QImage imageData)
         }
     }
 
-    KConfigGroup cg = config();
+    kDebug() << "Is valid path: " << validPath;
+    kDebug() << "Provider used: " << sourceName;
 
-    KConfigGroup ops = m_postingService->operationDescription(operationName);
-    kDebug() << image << validPath << operationName;
-    if (image) {
-        switch(m_imageBackend) {
-            case Pastebin::IMAGEBINCA:
-                ops.writeEntry("server", cg.readEntry("imagebinca", "http://imagebin.ca"));
-                break;
-
-            case Pastebin::IMAGESHACK:
-                ops.writeEntry("server", cg.readEntry("imageshack", "http://imageshack.us"));
-                break;
-
-            case Pastebin::SIMPLESTIMAGEHOSTING:
-                ops.writeEntry("server", cg.readEntry("simplestimagehosting",
-                                                      "http://api.simplest-image-hosting.net"));
-                break;
-
-            case Pastebin::IMGUR:
-                ops.writeEntry("server", cg.readEntry("imgur", "http://imgur.com/api/upload"));
-                break;
-        }
-
-        ops.writeEntry("fileName", text);
-        ops.writeEntry("privacy", m_imagePrivacy);
-        ops.writeEntry("backend", m_imageBackend);
-    } else {
-        switch (m_textBackend) {
-            case Pastebin::PASTEBINCA:
-                ops.writeEntry("server", cg.readEntry("pastebinca", "http://pastebin.ca"));
-                break;
-
-            case Pastebin::PASTEBINCOM:
-                ops.writeEntry("server", cg.readEntry("pastebincom", "http://pastebin.com"));
-                break;
-        }
-
-        if (validPath) {
-            ops.writeEntry("fileName", text);
-        } else {
-            ops.writeEntry("text", text);
-        }
-
-        ops.writeEntry("backend", m_textBackend);
+    if (sourceName.isEmpty()) {
+        // no provider was configured
+        showErrors();
+        return;
     }
 
+    m_postingService = m_engine->serviceForSource(sourceName);
+    KConfigGroup ops = m_postingService->operationDescription("share");
+    ops.writeEntry("content", text);
+
     Plasma::ServiceJob *job = m_postingService->startOperationCall(ops);
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(postingFinished(KJob*)));
+
     setActionState(Sending);
     m_timer->start(20000);
 }
 
-void Pastebin::postingFinished(Plasma::ServiceJob *job)
+void Pastebin::postingFinished(KJob *job)
 {
-    if (job->error()) {
+    Plasma::ServiceJob *sjob = static_cast<Plasma::ServiceJob*>(job);
+    if (sjob->error()) {
         showErrors();
     } else {
-        showResults(job->result().toString());
+        showResults(sjob->result().toString());
     }
 }
 

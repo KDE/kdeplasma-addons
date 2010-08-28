@@ -111,13 +111,7 @@ private slots:
     void updateTheme();
     void resetActionState();
     void copyToClipboard(const QString &url);
-    void postingFinished(Plasma::ServiceJob *job);
-
-    void editTextServer();
-    void saveTextServer();
-    void editImageServer();
-    void saveImageServer();
-    void closeServerDialog();
+    void postingFinished(KJob *job);
 
 private:
     int iconSize();
@@ -147,11 +141,7 @@ private:
     QString m_url;
     QString m_oldUrl;
 
-    int m_textBackend;
-    int m_imageBackend;
-    int m_imagePrivacy;
-    QString m_server;
-
+    QString m_hoverText;
     QTimer *m_timer;
 
     int m_historySize;
@@ -162,17 +152,15 @@ private:
     QAction *m_topSeparator;
     QAction *m_bottomSeparator;
 
-    // custom server dialog
-    QWidget *m_servers;
-
     QClipboard::Mode lastMode;
 
-    Ui::pastebinConfig uiConfig;
-    Ui::pastebinServersConfig uiServers;
 
+    // New version - below here vars after refactor
+    QHash<QString, QString> m_txtServers;
+    QHash<QString, QString> m_imgServers;
+    Plasma::DataEngine *m_engine;
     Plasma::Service *m_postingService;
-
-    QString m_hoverText;
+    Ui::pastebinConfig uiConfig;
 };
 
 K_EXPORT_PLASMA_APPLET(pastebin, Pastebin)
