@@ -129,8 +129,10 @@ private:
 
     bool m_isHovered;
     bool m_fadeIn;
-    QWeakPointer<QPropertyAnimation> m_animation;
     qreal m_alpha;
+
+    QTimer *m_timer;
+    QWeakPointer<QPropertyAnimation> m_animation;
 
     QFont m_font;
     QPen m_linePen;
@@ -140,9 +142,6 @@ private:
     Plasma::ToolTipContent toolTipData;
     QString m_url;
     QString m_oldUrl;
-
-    QString m_hoverText;
-    QTimer *m_timer;
 
     int m_historySize;
     QSignalMapper *m_signalMapper;
