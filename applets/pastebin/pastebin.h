@@ -21,7 +21,6 @@
 #define PASTEBIN_H
 
 #include "ui_pastebinConfig.h"
-#include "ui_pastebinServersConfig.h"
 
 #include <KDE/KIO/TransferJob>
 #include <KDE/KIO/Job>
