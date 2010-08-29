@@ -192,6 +192,10 @@ AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphics
                                                         Qt::IntersectsItemShape,
                                                         Qt::DescendingOrder);
 
+    if (items.isEmpty()) {
+        return 0;
+    }
+
     bool goOn;
     if (uppermostItem) {
         do {
@@ -602,7 +606,7 @@ void GroupingContainment::setMainGroup(AbstractGroup *group)
         d->layout->setContentsMargins(0, 0, 0, 0);
     }
     d->layout->addItem(group);
-    group->d->setIsMainGroup();
+    group->setIsMainGroup();
 
     config().writeEntry("mainGroup", group->id());
     emit configNeedsSaving();

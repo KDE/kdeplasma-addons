@@ -79,11 +79,16 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
         virtual ~AbstractGroup();
 
         /**
-        * Method called a little after the constructor.
-        * If you need methods like config() or containment() use them here,
-        * not in the constructor.
-        **/
+         * Method called a little after the constructor.
+         * If you need methods like config() or containment() use them here,
+         * not in the constructor.
+         **/
         virtual void init();
+
+        /**
+         * Returns the Group that contains this one, 0 if there is no one.
+         **/
+        AbstractGroup *parentGroup() const;
 
         /**
          * Adds an Applet to this Group.
@@ -255,6 +260,8 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * Returns the plugin name for the Group
          **/
         virtual QString pluginName() const = 0;
+
+        void setIsMainGroup();
 
         /**
          * Returns true if this Group is the MainGroup of its Containment.

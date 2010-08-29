@@ -43,6 +43,7 @@
 
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
+      parentGroup(0),
       destroying(false),
       containment(0),
       immutability(Plasma::Mutable),
@@ -71,9 +72,9 @@ KConfigGroup *AbstractGroupPrivate::mainConfigGroup()
 
     KConfigGroup containmentGroup = containment->config();
     KConfigGroup groupsConfig = KConfigGroup(&containmentGroup, "Groups");
-    KConfigGroup *mainConfig = new KConfigGroup(&groupsConfig, QString::number(id));
+    m_mainConfig = new KConfigGroup(&groupsConfig, QString::number(id));
 
-    return mainConfig;
+    return m_mainConfig;
 }
 
 void AbstractGroupPrivate::destroyGroup()
@@ -118,6 +119,9 @@ void AbstractGroupPrivate::subGroupDestroyed(AbstractGroup *subGroup)
         kDebug()<<"removed sub group"<<subGroup->id()<<"from group"<<id<<"of type"<<q->pluginName();
 
         subGroups.removeAll(subGroup);
+        KConfigGroup subGroupConfig = subGroup->config().parent();
+        KConfigGroup groupConfig(&subGroupConfig, QString("GroupInformation"));
+        groupConfig.deleteGroup();
 
         emit q->subGroupRemovedFromGroup(subGroup, q);
 
@@ -176,15 +180,6 @@ void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
     child->setPos(parent->mapFromScene(newPos));
 
     child->disconnect(q);
-}
-
-void AbstractGroupPrivate::setIsMainGroup()
-{
-    isMainGroup = true;
-    q->setBackgroundHints(AbstractGroup::NoBackground);
-    q->setFlag(QGraphicsItem::ItemIsMovable, false);
-    q->setZValue(0);
-    q->setContentsMargins(0, 0, 0, 0);
 }
 
 void AbstractGroupPrivate::onInitCompleted()
@@ -259,6 +254,11 @@ uint AbstractGroup::id() const
     return d->id;
 }
 
+AbstractGroup *AbstractGroup::parentGroup() const
+{
+    return d->parentGroup;
+}
+
 void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
 {
     if (!applet) {
@@ -311,13 +311,14 @@ void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
         return;
     }
 
-    QVariant pGroup = group->property("group");
-    if (pGroup.isValid()) {
-        pGroup.value<AbstractGroup *>()->removeSubGroup(group);
+    AbstractGroup *parent = group->parentGroup();
+    if (parent) {
+        parent->removeSubGroup(group);
     }
 
     kDebug()<<"adding sub group"<<group->id()<<"in group"<<id()<<"of type"<<pluginName();
 
+    group->d->parentGroup = this;
     d->subGroups << group;
     d->addChild(group);
 
@@ -392,6 +393,7 @@ void AbstractGroup::removeSubGroup(AbstractGroup *subGroup, AbstractGroup *newGr
         newGroup->addSubGroup(subGroup);
     } else {
         d->removeChild(subGroup);
+        subGroup->d->parentGroup = 0;
     }
 
     emit subGroupRemovedFromGroup(subGroup, this);
@@ -555,6 +557,15 @@ AbstractGroup::GroupType AbstractGroup::groupType() const
     return d->groupType;
 }
 
+void AbstractGroup::setIsMainGroup()
+{
+    d->isMainGroup = true;
+    setBackgroundHints(AbstractGroup::NoBackground);
+    setFlag(QGraphicsItem::ItemIsMovable, false);
+    setZValue(0);
+    setContentsMargins(0, 0, 0, 0);
+}
+
 bool AbstractGroup::isMainGroup() const
 {
     return d->isMainGroup;
@@ -617,13 +628,13 @@ QVariant AbstractGroup::itemChange(GraphicsItemChange change, const QVariant &va
 {
     switch (change) {
         case ItemPositionChange:
-            if (isMainGroup() || immutability() != Plasma::Mutable) {
+            if (immutability() != Plasma::Mutable) {
                 return pos();
             }
         break;
 
         case ItemTransformChange:
-            if (isMainGroup() || immutability() != Plasma::Mutable) {
+            if (immutability() != Plasma::Mutable) {
                 return transform();
             }
             break;

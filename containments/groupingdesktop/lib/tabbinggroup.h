@@ -34,6 +34,8 @@ namespace Plasma {
     class PushButton;
 };
 
+class GridGroup;
+
 class TabbingGroup : public AbstractGroup
 {
     Q_OBJECT
@@ -57,7 +59,6 @@ class TabbingGroup : public AbstractGroup
         void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
 
     private slots:
-        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
         void tabBarIndexChanged(int index);
         void addTab(const QString &name = QString(), int pos = -1);
@@ -66,8 +67,7 @@ class TabbingGroup : public AbstractGroup
         void configUpTab();
         void configDownTab();
         void configAccepted();
-        void onAppletDestroyed(Plasma::Applet *applet);
-        void onGroupDestroyed(AbstractGroup *group);
+        void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
         void changeTab();
 
@@ -77,14 +77,14 @@ class TabbingGroup : public AbstractGroup
 
         Plasma::TabBar *m_tabBar;
         QGraphicsLinearLayout *m_layout;
-        QMap<QGraphicsWidget *, int> m_children;
-        QList<QGraphicsWidget *> m_tabWidgets;
+        QList<AbstractGroup *> m_tabGroups;
         Plasma::PushButton *m_newTab;
         Plasma::PushButton *m_closeTab;
         Ui_TabbingGroupConfig m_ui;
-        bool m_deletingTab;
         QTimer *m_changeTabTimer;
         int m_changingTab;
+        bool m_deletingTab;
+        QStringList m_tabs;
 };
 
 #endif // TABBEDGROUP_H

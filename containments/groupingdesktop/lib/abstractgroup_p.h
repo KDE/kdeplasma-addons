@@ -35,12 +35,12 @@ class AbstractGroupPrivate
         void destroyGroup();
         void appletDestroyed(Plasma::Applet *applet);
         void subGroupDestroyed(AbstractGroup *subGroup);
-        void setIsMainGroup();
         void onInitCompleted();
         void onChildGeometryChanged();
         QString configDialogId();
 
         AbstractGroup *q;
+        AbstractGroup *parentGroup;
         Plasma::Applet::List applets;
         QList<AbstractGroup *> subGroups;
         bool destroying;

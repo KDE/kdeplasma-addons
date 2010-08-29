@@ -31,6 +31,8 @@
 #include <Plasma/TabBar>
 #include <Plasma/PushButton>
 
+#include "groupingcontainment.h"
+
 REGISTER_GROUP(tabbing, TabbingGroup)
 
 TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
@@ -39,9 +41,9 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
               m_layout(new QGraphicsLinearLayout(Qt::Horizontal)),
               m_newTab(new Plasma::PushButton(this)),
               m_closeTab(new Plasma::PushButton(this)),
-              m_deletingTab(false),
               m_changeTabTimer(new QTimer(this)),
-              m_changingTab(-1)
+              m_changingTab(-1),
+              m_deletingTab(false)
 {
     m_tabBar->nativeWidget()->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
     m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -67,10 +69,10 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setHasConfigurationInterface(true);
     onImmutabilityChanged(immutability());
 
-    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
-            this, SLOT(onAppletAdded(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
             this, SLOT(onSubGroupAdded(AbstractGroup*, AbstractGroup*)));
+    connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
+            this, SLOT(onSubGroupRemoved(AbstractGroup*, AbstractGroup*)));
     connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
             this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
     connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(tabBarIndexChanged(int)));
@@ -87,31 +89,26 @@ void TabbingGroup::init()
 {
     KConfigGroup group = config();
 
-    QStringList tabs = group.readEntry("Tabs", QStringList());
+    m_tabs = group.readEntry("Tabs", QStringList());
 
-    if (tabs.isEmpty()) {
-        tabs << i18n("New Tab");
-    }
-
-    foreach (const QString &tab, tabs) {
-        addTab(tab);
+    if (m_tabs.isEmpty()) {
+        addTab();
     }
 
     m_tabBar->setCurrentIndex(group.readEntry("CurrentIndex", 0));
 }
 
-void TabbingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
-{
-    applet->installEventFilter(this);
-    connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)),
-            this, SLOT(onAppletDestroyed(Plasma::Applet*)));
-}
-
 void TabbingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
 {
     subGroup->installEventFilter(this);
-    connect(subGroup, SIGNAL(groupDestroyed(AbstractGroup*)),
-            this, SLOT(onGroupDestroyed(AbstractGroup*)));
+}
+
+void TabbingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
+{
+    subGroup->removeEventFilter(this);
+    if (m_deletingTab) {
+        deleteTab(m_tabGroups.indexOf(subGroup));
+    }
 }
 
 void TabbingGroup::onImmutabilityChanged(Plasma::ImmutabilityType immutability)
@@ -124,11 +121,9 @@ void TabbingGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 {
     Q_UNUSED(pos)
 
-    QGraphicsWidget *w = m_tabWidgets.at(m_tabBar->currentIndex());
+    QGraphicsWidget *w = m_tabGroups.at(m_tabBar->currentIndex());
     child->setParentItem(w);
     child->setPos(mapToItem(w, pos));
-
-    m_children.insert(child, m_tabBar->currentIndex());
 }
 
 QString TabbingGroup::pluginName() const
@@ -138,20 +133,18 @@ QString TabbingGroup::pluginName() const
 
 void TabbingGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
 {
-    QPointF pos = group.readEntry("Position", QPointF());
     int index = group.readEntry("TabIndex", -1);
+    QString name = m_tabs.at(index);
 
-    QGraphicsWidget *w = m_tabWidgets.at(index);
-    child->setParentItem(w);
-    child->setPos(pos);
-
-    m_children.insert(child, index);
+    AbstractGroup *g = static_cast<AbstractGroup *>(child);
+    g->setIsMainGroup();
+    m_tabBar->insertTab(index, name, child);
+    m_tabGroups << g;
 }
 
 void TabbingGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
 {
-    group.writeEntry("Position", child->pos());
-    group.writeEntry("TabIndex", m_children.value(child));
+    group.writeEntry("TabIndex", m_tabGroups.indexOf(static_cast<AbstractGroup *>(child)));
 }
 
 void TabbingGroup::tabBarIndexChanged(int index)
@@ -166,10 +159,11 @@ void TabbingGroup::createConfigurationInterface(KConfigDialog *parent)
     m_ui.setupUi(widget);
     parent->addPage(widget, i18nc("a general page in the config dialog", "General"), "configure");
 
-    for (int i = 0;i < m_tabBar->count();++i) {
+    for (int i = 0; i < m_tabGroups.count(); ++i) {
         QListWidgetItem *item = new QListWidgetItem(m_tabBar->tabText(i));
         item->setData(Qt::UserRole, i);
         m_ui.listWidget->addItem(item);
+        m_ui.listWidget->setCurrentItem(item);
     }
 
     connect(m_ui.modButton, SIGNAL(clicked()), this, SLOT(configModTab()));
@@ -191,10 +185,13 @@ void TabbingGroup::addTab(const QString &name, int pos)
         tab = i18n("New Tab");
     }
 
-    QGraphicsWidget *w = new QGraphicsWidget(this);
-    m_tabBar->insertTab(pos, tab, w);
-    m_tabWidgets << w;
+    AbstractGroup *g = containment()->addGroup("grid");
+    addSubGroup(g, false);
+    m_tabBar->insertTab(pos, tab, g);
+    g->setIsMainGroup();
+    m_tabGroups << g;
 
+    m_tabs << tab;
     saveTabs();
 }
 
@@ -205,42 +202,16 @@ void TabbingGroup::closeTab(int index)
     }
 
     m_deletingTab = true;
-    bool deleteNow = true;
 
-    foreach (Plasma::Applet *applet, applets()) {
-        if (m_children.value(applet) == index) {
-            deleteNow = false;
-            applet->destroy();
-        }
-    }
-
-    foreach (AbstractGroup *group, subGroups()) {
-        if (m_children.value(group) == index) {
-            deleteNow = false;
-            group->destroy();
-        }
-    }
-
-    if (deleteNow) {
-        deleteTab(index);
-    }
+    AbstractGroup *group = m_tabGroups.at(index);
+    group->destroy();
 }
 
 void TabbingGroup::deleteTab(int index)
 {
-    //HACK workaround for a bug in 4.4 Plasma::TabBar. Fixed in 4.5 and trunk
-    int count = m_tabBar->count();
-    if (count > 1) {
-        if (index == 0) {
-            m_tabBar->setCurrentIndex(1);
-        } else {
-            m_tabBar->setCurrentIndex(0);
-        }
-    }
-    //end of HACK
-
     m_tabBar->removeTab(index);
-    m_tabWidgets.removeAt(index);
+    m_tabGroups.removeAt(index);
+    m_tabs.removeAt(index);
 
     if (m_tabBar->count() == 0) {
         addTab();
@@ -252,44 +223,9 @@ void TabbingGroup::deleteTab(int index)
     m_deletingTab = false;
 }
 
-void TabbingGroup::onAppletDestroyed(Plasma::Applet *applet)
-{
-    if (!m_deletingTab) {
-        m_children.remove(applet);
-        return;
-    }
-
-    int tab = m_children.value(applet);
-
-    m_children.remove(applet);
-    if (m_children.keys(tab).count() == 0) {
-        deleteTab(tab);
-    }
-}
-
-void TabbingGroup::onGroupDestroyed(AbstractGroup *group)
-{
-    if (!m_deletingTab) {
-        m_children.remove(group);
-        return;
-    }
-
-    int tab = m_children.value(group);
-
-    m_children.remove(group);
-    if (m_children.keys(tab).count() == 0) {
-        deleteTab(tab);
-    }
-}
-
 void TabbingGroup::saveTabs()
 {
-    QStringList tabs;
-    for (int i = 0; i < m_tabBar->count(); ++i) {
-        tabs << m_tabBar->tabText(i);
-    }
-
-    config().writeEntry("Tabs", tabs);
+    config().writeEntry("Tabs", m_tabs);
 
     emit configNeedsSaving();
 }
@@ -341,39 +277,27 @@ void TabbingGroup::configDownTab()
 
 void TabbingGroup::configAccepted()
 {
+    QList<AbstractGroup *> newTabs;
     QStringList tabs;
-    QMap<QGraphicsWidget *, int> childrenToBeMoved;
     for (int i = 0; i < m_ui.listWidget->count(); ++i) {
         QListWidgetItem *item = m_ui.listWidget->item(i);
-        tabs.insert(i, item->text());
-
-        int from = item->data(Qt::UserRole).toInt();
-        m_tabBar->setTabText(i, item->text());
-
-        if (from != i) {
-            foreach (QGraphicsWidget *child, children()) {
-                if (m_children.value(child) == from) {
-                    childrenToBeMoved.insert(child, i);
-                }
-            }
-        }
+        tabs << item->text();
+        newTabs << m_tabGroups.at(item->data(Qt::UserRole).toInt());
     }
 
-    if (!childrenToBeMoved.isEmpty()) {
-        //reparent children of moved tabs
-        QMapIterator<QGraphicsWidget *, int> i(childrenToBeMoved);
-        while (i.hasNext()) {
-            i.next();
-
-            QGraphicsWidget *child = i.key();
-            int tab = i.value();
-            child->setParentItem(m_tabBar->tabAt(tab)->graphicsItem());
-            m_children.insert(child, tab);
-        }
-
-        saveChildren();
+    KTabBar *tabBar = m_tabBar->nativeWidget();
+    while (tabBar->count() > 0) {
+        tabBar->removeTab(0);
     }
 
+    for (int i = 0; i < newTabs.count(); ++i) {
+        m_tabBar->insertTab(i, tabs.at(i), newTabs.at(i));
+    }
+
+    m_tabGroups = newTabs;
+    m_tabs = tabs;
+
+    saveChildren();
     saveTabs();
 }
 
