@@ -348,6 +348,12 @@ void TabbingGroup::changeTab()
     }
 }
 
+QRectF TabbingGroup::childrenRect() const
+{
+    AbstractGroup *g = m_tabGroups.at(m_tabBar->currentIndex());
+    return g->contentsRect().translated(mapFromScene(g->scenePos()));
+}
+
 QString TabbingGroup::prettyName()
 {
     return i18n("Tabbing Group");

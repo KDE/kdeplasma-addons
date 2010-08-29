@@ -287,6 +287,13 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
         BackgroundHints backgroundHints() const;
 
         /**
+         * Returns the area the Group reserves for its children.
+         * The default is its contentsRect(). Reimplement this in your
+         * group subclass if you want to modify it.
+         **/
+        virtual QRectF childrenRect() const;
+
+        /**
          * Reimplemented from QGraphicsItem
          **/
         virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);

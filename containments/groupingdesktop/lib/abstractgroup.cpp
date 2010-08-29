@@ -597,6 +597,11 @@ AbstractGroup::BackgroundHints AbstractGroup::backgroundHints() const
     return d->backgroundHints;
 }
 
+QRectF AbstractGroup::childrenRect() const
+{
+    return contentsRect();
+}
+
 void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *)
 {
     showDropZone(QPointF());
