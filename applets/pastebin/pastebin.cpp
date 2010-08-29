@@ -441,7 +441,7 @@ void Pastebin::copyToClipboard(const QString &url)
     KNotification *notify = new KNotification("urlcopied");
     notify->setComponentData(KComponentData("plasma_pastebin"));
     notify->setText(i18nc("Notification when the pastebin applet has copied the URL to the clipboard",
-                          "%1 has been copied to your clipboard", url));
+                          "The url for your paste has been copied to your clipboard"));
     notify->setPixmap(pix);
     notify->setActions(QStringList(i18n("Open browser")));
     connect(notify, SIGNAL(action1Activated()), this, SLOT(openLink()));
