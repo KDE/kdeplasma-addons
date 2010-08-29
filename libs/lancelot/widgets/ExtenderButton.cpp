@@ -41,13 +41,12 @@ public:
             ExtenderButton * parent)
       : BasicWidget(icon, "", "")
     {
-        iconInSvg.setImagePath("lancelot/extender-button-icon");
+        iconInSvg().setUsingRenderingCache(true);
 
-        qDebug() << "ASDASDASD ####### ######" << iconInSvg.isValid();
-        iconInSvg.setContainsMultipleImages(true);
+        iconInSvg().setContainsMultipleImages(true);
 
         frameCount = 0;
-        while (iconInSvg.hasElement("frame" + QString::number(frameCount))) {
+        while (iconInSvg().hasElement("frame" + QString::number(frameCount))) {
             frameCount++;
         }
         frameCount--;
@@ -58,31 +57,11 @@ public:
         setZValue(EXTENDER_Z_VALUE);
     }
 
-    // Needed because of a Qt bug - making it public
-    // so that ExtenderButton can invoke it directly
-    // void hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
-    // {
-    //     BasicWidget::hoverLeaveEvent(event);
-    // }
-
-    // void paint(QPainter * painter,
-    //         const QStyleOptionGraphicsItem * option, QWidget * widget)
-    // {
-    //     Q_UNUSED(option);
-    //     Q_UNUSED(widget);
-
-    //     if (Plasma::FrameSvg * svg = group()->backgroundSvg()) {
-    //         svg->setEnabledBorders(borders);
-    //     }
-
-    //     BasicWidget::paint(painter, option, widget);
-    // }
-
     L_Override void hoverEnterEvent(QGraphicsSceneHoverEvent * event)
     {
         timer.start(ACTIVATION_TIME / frameCount, this);
 
-        // BasicWidget::hoverEnterEvent(event);
+        BasicWidget::hoverEnterEvent(event);
     }
 
     L_Override void hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
@@ -90,7 +69,7 @@ public:
         timer.stop();
         frame = 0;
 
-        // BasicWidget::hoverLeaveEvent(event);
+        BasicWidget::hoverLeaveEvent(event);
     }
 
     void paint(QPainter * painter,
@@ -100,12 +79,12 @@ public:
         Q_UNUSED(widget);
 
         // BasicWidget::paint(painter, option, widget);
-        if (iconInSvg.isValid()) {
+        if (iconInSvg().isValid()) {
             QRectF iconRect = QRectF(QPointF(), iconSize());
             QSizeF sizeDiff = size() - iconRect.size();
 
             iconRect.setTopLeft(QPointF(sizeDiff.width() / 2, sizeDiff.height() / 2));
-            iconInSvg.paint(painter,
+            iconInSvg().paint(painter,
                 iconRect.left(),
                 iconRect.top(),
                 "frame" + QString::number(frame));
@@ -123,11 +102,11 @@ public:
             frame ++;
 
             if (frame > frameCount) {
-                qDebug() << "ASDASD CLICKEDDDDDDD!!!!";
-                emit clicked();
-
                 timer.stop();
                 frame = 0;
+
+                emit clicked();
+
             } else {
                 update();
             }
@@ -136,7 +115,7 @@ public:
         BasicWidget::timerEvent(event);
     }
 
-    Plasma::Svg iconInSvg;
+    // Plasma::Svg iconInSvg;
     int frameCount;
 
 public:
@@ -206,15 +185,6 @@ public:
             result->setVisible(false);
             result->setIconSize(QSize(16, 16));
 
-            connect(
-                    result, SIGNAL(mouseHoverEnter()),
-                    timer, SLOT(start())
-                   );
-            connect(
-                    result, SIGNAL(mouseHoverLeave()),
-                    timer, SLOT(stop())
-                   );
-
             m_extenders[q->scene()] = result;
         } else {
             result = m_extenders[q->scene()];
@@ -231,6 +201,10 @@ public:
                     );
 
             connectTimer();
+
+            disconnect(result, SIGNAL(clicked()), 0, 0);
+            connect(result, SIGNAL(clicked()),
+                    q, SLOT(activate()));
             relayoutExtender();
         }
 
@@ -426,6 +400,7 @@ void ExtenderButton::activate()
     d->releaseExtender();
 
     update();
+
     emit activated();
 }
 
