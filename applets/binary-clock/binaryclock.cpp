@@ -129,7 +129,7 @@ void BinaryClock::dataUpdated(const QString& source, const Plasma::DataEngine::D
     if (Plasma::ToolTipManager::self()->isVisible(this)) {
         updateTipContent();
     }
-    //updateClockApplet();
+    updateClockApplet();
 
     m_lastTimeSeen = m_time;
 
