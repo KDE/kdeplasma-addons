@@ -285,9 +285,8 @@ void TabbingGroup::configAccepted()
         newTabs << m_tabGroups.at(item->data(Qt::UserRole).toInt());
     }
 
-    KTabBar *tabBar = m_tabBar->nativeWidget();
-    while (tabBar->count() > 0) {
-        tabBar->removeTab(0);
+    while (m_tabBar->count() > 0) {
+        m_tabBar->takeTab(0);
     }
 
     for (int i = 0; i < newTabs.count(); ++i) {
