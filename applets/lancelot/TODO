@@ -41,10 +41,14 @@ Feature requests:
  - mail message titles/senders - probably
  - status of mails in the contacts icon - possibly
  - add to panel/desktop action - probably
- - additional sub-applets: keep-open (yes), collapse sect btns (possibly) ...
- - advanced parts widget: list mode, icons mode, ... - maybe
+ - additional sub-applets: keep-open (yes), ...
+ - advanced Shelf widget: list mode, icons mode, ... - maybe
  - sticky Favourites section (https://bugs.kde.org/show_bug.cgi?id=191350) - maybe
- - configurable sizes for item heights - maybe
+ - configurable sizes for item heights - not likely
  - file actions move/delete for folder model - not likely
  - move right cols to the left when left col is empty - probably
+ - rearange items in sections - maybe
+ - option to set a custom icon for the Shelf applet - yes
+ - DnD reordering of sections (inside the menu and inside the applet) - probably
+
 
