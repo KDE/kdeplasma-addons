@@ -103,6 +103,9 @@ public Q_SLOTS:
     void clearSelection();
     void initialSelection();
 
+    void hide();
+    void show();
+
 protected:
     L_Override bool sceneEventFilter(QGraphicsItem * watched,
             QEvent * event);

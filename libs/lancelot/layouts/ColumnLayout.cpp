@@ -21,7 +21,14 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsWidget>
+#include <QPropertyAnimation>
 #include <QList>
+#include <QDebug>
+#include <QPointer>
+
+#include <Global.h>
+#include <KConfig>
+#include <KConfigGroup>
 
 #define GOLDEN_SIZE  0.381966011250105  // 1 / (1 + phi); phi = (sqrt(5) + 1) / 2
 
@@ -89,15 +96,106 @@ class ColumnLayout::Private {
 public:
     ColumnLayout * q;
     QList < QGraphicsWidget * > items;
+    QHash < QGraphicsWidget *, QPointer < QPropertyAnimation > > animators;
+
     QGraphicsItem * parentItem;
     ColumnLayout::ColumnSizer * sizer;
+
     int count;
+    bool animate;
 
     enum RelayoutType { Clean, Push, Pop, Resize };
 
     Private(ColumnLayout * parent)
         : q(parent), parentItem(NULL),
-          sizer(new GoldenColumnSizer()), count(2) {}
+          sizer(new GoldenColumnSizer()), count(2)
+    {
+        animate = !Global::self()->config("Animation", "disableAnimations", false)
+                && Global::self()->config("Animation", "columnLayoutAnimaiton", true);
+    }
+
+    QPropertyAnimation * animator(QGraphicsWidget * item, const QByteArray & property)
+    {
+        QPropertyAnimation * result;
+
+        if (animators.contains(item) && animators[item]) {
+            result = animators[item];
+            result->stop();
+            result->setPropertyName(property);
+
+        } else {
+            animators[item] = new QPropertyAnimation(item, property);
+            result = animators[item];
+        }
+
+        return result;
+    }
+
+    void moveItemTo(QGraphicsWidget * item, QRectF newGeometry)
+    {
+        if (!animate) {
+            item->setGeometry(newGeometry);
+            item->show();
+            item->setOpacity(1);
+            return;
+        }
+
+        if (newGeometry.width() < 1) {
+            hideItem(item);
+        }
+
+        if (item->isVisible()) {
+            // Moving the item
+
+            if (item->geometry().height() == newGeometry.height()) {
+                QPropertyAnimation * animation = animator(item, "geometry");
+                animation->setDuration(300);
+                animation->setStartValue(item->geometry());
+                animation->setEndValue(newGeometry);
+                animation->start();
+
+            } else {
+                item->setGeometry(newGeometry);
+
+            }
+
+        } else {
+            // Showing the item
+
+            item->setGeometry(newGeometry);
+            item->setOpacity(0);
+            item->show();
+
+            QPropertyAnimation * animation = animator(item, "opacity");
+            animation->setDuration(300);
+            animation->setStartValue(0);
+            animation->setEndValue(1);
+            animation->start();
+
+       }
+    }
+
+    void hideItem(QGraphicsWidget * item)
+    {
+        if (!animate) {
+            item->hide();
+            return;
+        }
+
+        if (!item->isVisible()) {
+            return;
+        }
+
+        item->setOpacity(1);
+
+        QPropertyAnimation * animation = animator(item, "opacity");
+        animation->setDuration(300);
+        animation->setStartValue(1);
+        animation->setEndValue(0.5);
+        animation->start();
+
+        //item->connect(animation, SIGNAL(finished()), SLOT(hide()));
+    }
 
     void relayout(RelayoutType type = Clean)
     {
@@ -114,18 +212,16 @@ public:
 
         foreach (QGraphicsWidget * item, items) {
             if (items.size() - showItems > i++) {
-                item->setVisible(false);
-            } else {
-                qreal itemWidth = sizer->size() * width;
-                if (itemWidth != 0) {
-                    newGeometry.setWidth(itemWidth);
-                    item->setGeometry(newGeometry);
-                    item->show();
+                hideItem(item);
 
-                    newGeometry.moveLeft(newGeometry.left() + itemWidth);
-                } else {
-                    item->setVisible(false);
-                }
+            } else {
+                int itemWidth = sizer->size() * width;
+
+                newGeometry.setWidth(itemWidth);
+
+                moveItemTo(item, newGeometry);
+
+                newGeometry.moveLeft(newGeometry.left() + itemWidth);
             }
         }
     }
@@ -145,6 +241,9 @@ public:
     QGraphicsWidget * pop()
     {
         QGraphicsWidget * widget = items.takeLast();
+
+        animators.remove(widget);
+
         relayout(Pop);
         return widget;
     }

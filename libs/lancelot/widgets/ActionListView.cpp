@@ -1211,6 +1211,16 @@ void ActionListView::hoverLeaveEvent(QGraphicsSceneHoverEvent * event) //>
     }
 } //<
 
+void ActionListView::show()
+{
+    setVisible(true);
+}
+
+void ActionListView::hide()
+{
+    setVisible(false);
+}
+
 //<
 
 } // namespace Lancelot

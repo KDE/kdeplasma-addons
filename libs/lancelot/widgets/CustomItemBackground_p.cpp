@@ -34,8 +34,8 @@ namespace Lancelot
 CustomItemBackground::CustomItemBackground(QGraphicsWidget * parent)
     : Plasma::ItemBackground(parent), m_group(NULL)
 {
-    KConfigGroup config(Global::self()->config(), "Main");
-    m_animation = config.readEntry("itemViewBackgroundAnimation", true);
+    m_animation = !Global::self()->config("Animation", "disableAnimations", false)
+                && Global::self()->config("Animation", "itemViewBackgroundAnimation", true);
 }
 
 CustomItemBackground::~CustomItemBackground()

@@ -202,6 +202,30 @@ public:
     KConfig * config();
 
     /**
+     * @param group config group name
+     * @param field field name
+     * @param defaultValue devault value, if it is not present in the config file
+     * @return
+     */
+    bool config(const QString & group, const QString & field, bool defaultValue) const;
+
+    /**
+     * @param group config group name
+     * @param field field name
+     * @param defaultValue devault value, if it is not present in the config file
+     * @return
+     */
+    int  config(const QString & group, const QString & field, int  defaultValue) const;
+
+    /**
+     * @param group config group name
+     * @param field field name
+     * @param defaultValue devault value, if it is not present in the config file
+     * @return
+     */
+    QString config(const QString & group, const QString & field, const QString &  defaultValue) const;
+
+    /**
      * @param name group name
      * @returns a pointer to the group with specified name
      */

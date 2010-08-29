@@ -502,6 +502,24 @@ Plasma::ImmutabilityType Global::immutability() const
     return d->immutability;
 }
 
+bool Global::config(const QString & group, const QString & field, bool defaultValue) const
+{
+    KConfigGroup config(Global::self()->config(), group);
+    return  config.readEntry(field, defaultValue);
+}
+
+int Global::config(const QString & group, const QString & field, int defaultValue) const
+{
+    KConfigGroup config(Global::self()->config(), group);
+    return  config.readEntry(field, defaultValue);
+}
+
+QString Global::config(const QString & group, const QString & field, const QString & defaultValue) const
+{
+    KConfigGroup config(Global::self()->config(), group);
+    return  config.readEntry(field, defaultValue);
+}
+
 
 } // namespace Lancelot
 

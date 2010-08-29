@@ -55,6 +55,9 @@ public:
         setInnerOrientation(Qt::Vertical);
         setAlignment(Qt::AlignCenter);
         setZValue(EXTENDER_Z_VALUE);
+
+        animate = !Global::self()->config("Animation", "disableAnimations", false)
+                && Global::self()->config("Animation", "extenderActivationFeedback", true);
     }
 
     L_Override void hoverEnterEvent(QGraphicsSceneHoverEvent * event)
@@ -84,10 +87,20 @@ public:
             QSizeF sizeDiff = size() - iconRect.size();
 
             iconRect.setTopLeft(QPointF(sizeDiff.width() / 2, sizeDiff.height() / 2));
-            iconInSvg().paint(painter,
-                iconRect.left(),
-                iconRect.top(),
-                "frame" + QString::number(frame));
+            if (animate) {
+                iconInSvg().paint(painter,
+                    iconRect.left(),
+                    iconRect.top(),
+                    "frame" + QString::number(frame));
+            } else {
+                iconInSvg().paint(painter,
+                    iconRect.left(),
+                    iconRect.top(),
+                    "frame" + QString::number(
+                        (frame > 0) ? frameCount : 0
+                    ));
+
+            }
         }
     }
 
@@ -108,15 +121,17 @@ public:
                 emit clicked();
 
             } else {
-                update();
+                if (animate || frame == 1) {
+                    update();
+                }
             }
         }
 
         BasicWidget::timerEvent(event);
     }
 
-    // Plasma::Svg iconInSvg;
     int frameCount;
+    bool animate;
 
 public:
     // Plasma::FrameSvg::EnabledBorders borders;
