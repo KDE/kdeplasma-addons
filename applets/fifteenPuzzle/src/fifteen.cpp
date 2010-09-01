@@ -31,7 +31,8 @@
 #include <Plasma/Animator>
 
 Fifteen::Fifteen(QGraphicsItem* parent, int size)
-    : QGraphicsWidget(parent)
+    : QGraphicsWidget(parent),
+      m_pixmap(0)
 {
   m_size = size;
   m_pieces.resize(size*size);
@@ -40,7 +41,6 @@ Fifteen::Fifteen(QGraphicsItem* parent, int size)
   m_wasShuffled = false;
   m_svg = new Plasma::Svg();
   startBoard();
-  m_pixmap = 0;
   setCacheMode(DeviceCoordinateCache);
 }
 
@@ -84,6 +84,9 @@ void Fifteen::setPixmap(QPixmap *pixmap)
 
 void Fifteen::updatePixmaps()
 {
+  if (!m_pixmap) {
+      return;
+  }
   QSize size = m_pieces[0]->size().toSize() * m_size;
   QPixmap copyPixmap = m_pixmap->scaled(size);
  
