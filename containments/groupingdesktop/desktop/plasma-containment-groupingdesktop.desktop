@@ -6,6 +6,7 @@ Name[pt_BR]=GroupingDesktop
 Name[sv]=Gruppera skrivbord
 Name[uk]=Впорядкування стільниці
 Name[x-test]=xxGroupingDesktopxx
+Name[zh_TW]=群組桌面
 Icon=
 Type=Service
 X-KDE-ServiceTypes=Plasma/Containment

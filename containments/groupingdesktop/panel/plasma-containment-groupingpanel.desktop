@@ -6,6 +6,7 @@ Name[pt_BR]=GroupingPanel
 Name[sv]=Gruppera panel
 Name[uk]=Впорядкування панелі
 Name[x-test]=xxGroupingPanelxx
+Name[zh_TW]=群組面板
 Icon=
 Type=Service
 X-KDE-ServiceTypes=Plasma/Containment
