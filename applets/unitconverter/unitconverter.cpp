@@ -39,7 +39,7 @@ Q_DECLARE_METATYPE(UnitCategory*)
 
 UnitConverter::UnitConverter(QObject *parent, const QVariantList &args)
 : Plasma::PopupApplet(parent, args)
-, m_widget(0)
+, m_widget(0), m_bCalculateReverse(false)
 {
     KGlobal::locale()->insertCatalog("libconversion");
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
@@ -95,15 +95,29 @@ void UnitConverter::sltCategoryChanged(int index)
 void UnitConverter::sltUnitChanged(int index)
 {
     Q_UNUSED(index);
-    calculate();
+    if ( m_bCalculateReverse ) {
+        calculateReverse();
+    }
+    else {
+        calculate();
+    }
 }
 
 void UnitConverter::sltValueChanged(const QString &sNewValue)
 {
     Q_UNUSED(sNewValue);
+    m_bCalculateReverse = false; // store calculation direction
     calculate();
 }
 
+void UnitConverter::sltValueChangedReverse(const QString &sNewValue)
+{
+    Q_UNUSED(sNewValue);
+    m_bCalculateReverse = true; // store calculation direction
+    calculateReverse();
+}
+
+/// Calculates from left to right
 void UnitConverter::calculate()
 {
     UnitPtr in = m_pCmbUnit1->nativeWidget()->itemData(
@@ -120,6 +134,27 @@ void UnitConverter::calculate()
            m_pTxtValue2->setText(addZero);
         } else {
            m_pTxtValue2->setText(QString::number(dblValueOut.number()));
+        }
+    }
+}
+
+/// Calculates from right to left
+void UnitConverter::calculateReverse()
+{
+    UnitPtr in = m_pCmbUnit2->nativeWidget()->itemData(
+            m_pCmbUnit2->nativeWidget()->currentIndex()).value<UnitPtr>();
+    UnitPtr out = m_pCmbUnit1->nativeWidget()->itemData(
+            m_pCmbUnit1->nativeWidget()->currentIndex()).value<UnitPtr>();
+    if (!in.isNull() && !out.isNull()) {
+        Value dblValueIn(m_pTxtValue2->text().toDouble(), in);
+        Value dblValueOut = dblValueIn.convertTo(out->id());
+        QRegExp decimalCheck("^\\d+\\.0$");
+        QRegExp onlyDecimal("^\\d+$");
+        if(decimalCheck.exactMatch(m_pTxtValue2->text()) && onlyDecimal.exactMatch(QString::number(dblValueOut.number()))) {
+           QString addZero = QString::number(dblValueOut.number()) + ".0";
+           m_pTxtValue1->setText(addZero);
+        } else {
+           m_pTxtValue1->setText(QString::number(dblValueOut.number()));
         }
     }
 }
@@ -164,8 +199,10 @@ QGraphicsWidget *UnitConverter::graphicsWidget()
         }
         m_pCmbCategory->nativeWidget()->model()->sort(0);
 
-        connect(m_pTxtValue1->nativeWidget(), SIGNAL(textChanged(const QString&)),
+        connect(m_pTxtValue1->nativeWidget(), SIGNAL(textEdited(const QString&)),
                 this, SLOT(sltValueChanged(const QString&)));
+        connect(m_pTxtValue2->nativeWidget(), SIGNAL(textEdited(const QString&)),
+                this, SLOT(sltValueChangedReverse(const QString&)));
         connect(m_pCmbCategory->nativeWidget(), SIGNAL(currentIndexChanged(int)),
                 this, SLOT(sltCategoryChanged(int)));
         connect(m_pCmbUnit1->nativeWidget(), SIGNAL(currentIndexChanged(int)),

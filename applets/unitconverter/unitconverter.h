@@ -47,11 +47,13 @@ class UnitConverter : public Plasma::PopupApplet
 
     private slots:
         void sltValueChanged(const QString &sNewValue);
+        void sltValueChangedReverse(const QString &sNewValue);
         void sltUnitChanged(int index);
         void sltCategoryChanged(int index);
 
     private:
         void calculate();
+        void calculateReverse();
 
     private:
         QGraphicsWidget  *m_widget;
@@ -63,6 +65,7 @@ class UnitConverter : public Plasma::PopupApplet
         Plasma::Label    *m_pInfo;
         int               m_iCategory;
         KUnitConversion::Converter m_converter;
+        bool              m_bCalculateReverse;
 };
 
 // This is the command that links your applet to the .desktop file
