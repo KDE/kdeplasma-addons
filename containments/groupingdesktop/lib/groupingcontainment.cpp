@@ -547,7 +547,6 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     }
 
     kDebug()<<"adding group"<<group->id();
-    group->setImmutability(immutability());
     group->d->containment = this;
     connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
             group, SLOT(setImmutability(Plasma::ImmutabilityType)));
@@ -559,6 +558,7 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
             this, SLOT(onSubGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)));
     connect(group, SIGNAL(configNeedsSaving()), this, SIGNAL(configNeedsSaving()));
     group->setPos(pos);
+    group->setImmutability(immutability());
     group->updateConstraints();
 
     if (!d->loading) {

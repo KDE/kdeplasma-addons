@@ -474,9 +474,7 @@ void AbstractGroup::save(KConfigGroup &group) const
 
     group.writeEntry("zvalue", zValue());
     group.writeEntry("plugin", pluginName());
-    QRectF rect = boundingRect();
-    rect.translate(containment()->mapFromScene(scenePos()));
-    group.writeEntry("geometry", rect);
+    group.writeEntry("geometry", geometry());
 
     if (transform() == QTransform()) {
         group.deleteEntry("transform");
