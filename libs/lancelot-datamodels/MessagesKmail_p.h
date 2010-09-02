@@ -22,12 +22,12 @@
 #include <KIcon>
 #include <KJob>
 
+#include "config-lancelot-datamodels.h"
+
 #ifdef LANCELOT_DATAMODELS_HAS_PIMLIBS
 #include <Akonadi/Entity>
 #include <Akonadi/Collection>
 #endif
-
-#include "config-lancelot-datamodels.h"
 
 namespace Lancelot {
 namespace Models {
