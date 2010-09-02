@@ -353,9 +353,10 @@ bool GridGroup::showDropZone(const QPointF &pos)
 
 bool GridGroup::addItem(QGraphicsWidget *widget, int row, int column)
 {
-    widget->show();
     if (m_children.size() > row && m_children.at(row).size() > column &&
         m_children.at(row).at(column) == 0) {
+
+        widget->show();
         m_children[row].replace(column, widget);
 
         adjustCells();
