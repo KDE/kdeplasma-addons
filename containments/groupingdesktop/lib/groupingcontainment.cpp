@@ -182,18 +182,20 @@ void GroupingContainmentPrivate::onAppletRemoved(Plasma::Applet *applet)
     }
 }
 
-AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphicsWidget *uppermostItem)
+QList<AbstractGroup *> GroupingContainmentPrivate::groupsAt(const QPointF &pos, QGraphicsWidget *uppermostItem)
 {
+    QList<AbstractGroup *> groups;
+
     if (pos.isNull()) {
-        return 0;
+        return groups;
     }
 
     QList<QGraphicsItem *> items = q->scene()->items(q->mapToScene(pos),
-                                                        Qt::IntersectsItemShape,
-                                                        Qt::DescendingOrder);
+                                                     Qt::IntersectsItemShape,
+                                                     Qt::DescendingOrder);
 
     if (items.isEmpty()) {
-        return 0;
+        return groups;
     }
 
     bool goOn;
@@ -206,12 +208,22 @@ AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphics
 
     for (int i = 0; i < items.size(); ++i) {
         AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(items.at(i));
-        if (group && group->childrenRect().contains(q->mapToItem(group, pos))) {
-            return group;
+        if (group && group->contentsRect().contains(q->mapToItem(group, pos))) {
+            groups << group;
         }
     }
 
-    return 0;
+    return groups;
+}
+
+AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphicsWidget *uppermostItem)
+{
+    QList<AbstractGroup *> groups = groupsAt(pos, uppermostItem);
+    if (groups.isEmpty()) {
+        return 0;
+    }
+
+    return groups.first();
 }
 
 void GroupingContainmentPrivate::groupAppearAnimationComplete()
@@ -692,19 +704,21 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                     setMovingWidget(widget);
                 }
                 if (widget == d->movingWidget) {
-                    AbstractGroup *parentGroup = d->groupAt(mapFromItem(widget, widget->contentsRect().center()), widget);
-
                     if (d->interestingGroup) {
                         d->interestingGroup->showDropZone(QPointF());
                         d->interestingGroup = 0;
                     }
-                    if (parentGroup) {
-                        QPointF c = widget->contentsRect().center();
-                        c += mapFromScene(widget->scenePos());
+
+                    QList<AbstractGroup *> groups = d->groupsAt(mapFromItem(widget, widget->contentsRect().center()), widget);
+                    QPointF c = widget->contentsRect().center();
+                    c += mapFromScene(widget->scenePos());
+                    foreach (AbstractGroup *parentGroup, groups) {
                         QPointF pos = mapToItem(parentGroup, c);
                         if (pos.x() > 0 && pos.y() > 0) {
-                            parentGroup->showDropZone(pos);
-                            d->interestingGroup = parentGroup;
+                            if (parentGroup->showDropZone(pos)) {
+                                d->interestingGroup = parentGroup;
+                                break;
+                            }
                         }
                     }
                 }

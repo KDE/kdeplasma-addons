@@ -47,6 +47,7 @@ class GroupingContainmentPrivate
         void onGroupRemoved(AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet);
         AbstractGroup *groupAt(const QPointF &pos, QGraphicsWidget *uppermostWidget = 0);
+        QList<AbstractGroup *> groupsAt(const QPointF &pos, QGraphicsWidget *uppermostWidget = 0);
         void manageApplet(Plasma::Applet *applet, const QPointF &pos);
         void manageGroup(AbstractGroup *subGroup, const QPointF &pos);
         void newGroupClicked(QAction *action);

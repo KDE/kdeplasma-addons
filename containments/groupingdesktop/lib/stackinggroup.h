@@ -34,7 +34,7 @@ class StackingGroup : public AbstractGroup
         QString pluginName() const;
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
-        void showDropZone(const QPointF &pos);
+        bool showDropZone(const QPointF &pos);
 
         static QString prettyName();
         static QSet<Plasma::FormFactor> availableOnFormFactors();

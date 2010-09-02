@@ -215,7 +215,7 @@ void StackingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
     drawStack();
 }
 
-void StackingGroup::showDropZone(const QPointF &pos)
+bool StackingGroup::showDropZone(const QPointF &pos)
 {
     if (m_children.contains(m_spacer)) {
         m_children.removeOne(m_spacer);
@@ -223,13 +223,15 @@ void StackingGroup::showDropZone(const QPointF &pos)
 
     if (pos.isNull() || (!m_children.isEmpty() && boundingRect().translated(20, 20).contains(pos))) {
         m_spacer->hide();
-        return;
+        return false;
     } else {
         m_spacer->show();
         m_children << m_spacer;
     }
 
     drawStack();
+
+    return true;
 }
 
 void StackingGroup::onAppletActivated()

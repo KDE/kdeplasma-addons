@@ -521,11 +521,13 @@ void AbstractGroup::restore(KConfigGroup &group)
     }
 }
 
-void AbstractGroup::showDropZone(const QPointF &pos)
+bool AbstractGroup::showDropZone(const QPointF &pos)
 {
     Q_UNUSED(pos)
 
     //base implementation does nothing
+
+    return true;
 }
 
 void AbstractGroup::raise()
@@ -595,11 +597,6 @@ void AbstractGroup::setBackgroundHints(BackgroundHints hints)
 AbstractGroup::BackgroundHints AbstractGroup::backgroundHints() const
 {
     return d->backgroundHints;
-}
-
-QRectF AbstractGroup::childrenRect() const
-{
-    return contentsRect();
 }
 
 void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *)

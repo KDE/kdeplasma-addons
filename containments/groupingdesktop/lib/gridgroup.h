@@ -37,7 +37,7 @@ class GridGroup : public AbstractGroup
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup& group);
         QString pluginName() const;
-        void showDropZone(const QPointF &pos);
+        bool showDropZone(const QPointF &pos);
         Handle *createHandleForChild(QGraphicsWidget *child);
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 

@@ -249,7 +249,7 @@ QString GridGroup::pluginName() const
     return QString("grid");
 }
 
-void GridGroup::showDropZone(const QPointF &pos)
+bool GridGroup::showDropZone(const QPointF &pos)
 {
     if (pos.isNull() || !boundingRect().contains(pos)) {
         if (m_spacer->isVisible()) {
@@ -257,18 +257,19 @@ void GridGroup::showDropZone(const QPointF &pos)
             removeItem(m_spacer);
         }
 
-        return;
+        return false;
     }
 
     if ((m_spacer->isVisible()) && (m_spacer->geometry().contains(pos))) {
-        return;
+        return true;
     }
 
     if (m_children.size() == 0) {
         insertRowAt(0);
         insertColumnAt(0);
         addItem(m_spacer, 0, 0);
-        return;
+
+        return true;
     }
 
     const qreal x = pos.x();
@@ -306,6 +307,8 @@ void GridGroup::showDropZone(const QPointF &pos)
         m_spacer->lastRowWasAdded = false;
         m_spacer->lastColumnWasAdded = true;
         addItem(m_spacer, row, n);
+
+        return true;
     } else if ((n = isOnARowBorder(y)) != -1) {
         insertRowAt(n);
         m_spacer->lastRow = n;
@@ -313,11 +316,15 @@ void GridGroup::showDropZone(const QPointF &pos)
         m_spacer->lastRowWasAdded = true;
         m_spacer->lastColumnWasAdded = false;
         addItem(m_spacer, n, column);
+
+        return true;
     } else if (addItem(m_spacer, row, column)) {
         m_spacer->lastRow = row;
         m_spacer->lastColumn = column;
         m_spacer->lastRowWasAdded = false;
         m_spacer->lastColumnWasAdded = false;
+
+        return true;
     } else {
         bool show = true;
         foreach (AbstractGroup *group, subGroups()) {
@@ -336,8 +343,12 @@ void GridGroup::showDropZone(const QPointF &pos)
                 insertColumnAt(column);
             }
             addItem(m_spacer, row, column);
+
+            return true;
         }
     }
+
+    return false;
 }
 
 bool GridGroup::addItem(QGraphicsWidget *widget, int row, int column)

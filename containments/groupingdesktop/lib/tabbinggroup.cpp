@@ -348,10 +348,9 @@ void TabbingGroup::changeTab()
     }
 }
 
-QRectF TabbingGroup::childrenRect() const
+bool TabbingGroup::showDropZone(const QPointF &pos)
 {
-    AbstractGroup *g = m_tabGroups.at(m_tabBar->currentIndex());
-    return g->contentsRect().translated(mapFromScene(g->scenePos()));
+    return false;
 }
 
 QString TabbingGroup::prettyName()

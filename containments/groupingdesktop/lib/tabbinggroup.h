@@ -49,7 +49,7 @@ class TabbingGroup : public AbstractGroup
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         void createConfigurationInterface(KConfigDialog *parent);
-        QRectF childrenRect() const;
+        bool showDropZone(const QPointF &pos);
 
         static QString prettyName();
         static QSet<Plasma::FormFactor> availableOnFormFactors();

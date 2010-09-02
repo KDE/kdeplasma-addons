@@ -207,13 +207,14 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
 
         /**
          * Shows a visual clue for drag and drop
-         * The default implementation does nothing,
-         * reimplement in groups that need it
+         * The default implementation does nothing, reimplement it in groups that need it
          *
          * @param pos point where to show the drop target; if an invalid point is passed in
          *        the drop zone should not be shown
+         *
+         * @return true if it can accept a child at the passed position
          **/
-        virtual void showDropZone(const QPointF &pos);
+        virtual bool showDropZone(const QPointF &pos);
 
         /**
          * Returns a list of the applets managed by this Group.
@@ -285,13 +286,6 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * @see BackGroundHint
          **/
         BackgroundHints backgroundHints() const;
-
-        /**
-         * Returns the area the Group reserves for its children.
-         * The default is its contentsRect(). Reimplement this in your
-         * group subclass if you want to modify it.
-         **/
-        virtual QRectF childrenRect() const;
 
         /**
          * Reimplemented from QGraphicsItem
