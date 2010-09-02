@@ -260,10 +260,6 @@ bool GridGroup::showDropZone(const QPointF &pos)
         return false;
     }
 
-    if ((m_spacer->isVisible()) && (m_spacer->geometry().contains(pos))) {
-        return true;
-    }
-
     if (m_children.size() == 0) {
         insertRowAt(0);
         insertColumnAt(0);
