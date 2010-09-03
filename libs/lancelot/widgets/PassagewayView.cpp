@@ -89,6 +89,7 @@ public:
 
         buttonsLayout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
         buttonsLayout->setMaximumSize(INT_MAX, INT_MAX);
+        buttonsLayout->setContentsMargins(EXTENDER_SIZE, 0, 0, 0);
 
         // ExtenderButton * spacer =
         //     new ExtenderButton(parent);

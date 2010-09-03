@@ -203,10 +203,14 @@ public:
         if (items.size() == 0) return;
 
         int showItems   = qMin(items.size(), count);
-        qreal width     = q->geometry().width();
         sizer->init(showItems);
 
-        QRectF newGeometry = q->geometry();
+        qreal left, top, right, bottom;
+        q->getContentsMargins(&left, &top, &right, &bottom);
+
+        QRectF newGeometry = q->geometry().adjusted(left, top, right, bottom);
+        qreal width = newGeometry.width();
+
 
         int i = 0;
 
