@@ -26,6 +26,7 @@
 #include "ui_tabbinggroup_config.h"
 
 class QGraphicsLinearLayout;
+class QGraphicsProxyWidget;
 
 class KConfigDialog;
 
@@ -75,8 +76,10 @@ class TabbingGroup : public AbstractGroup
     private:
         void saveTabs();
         void deleteTab(int index);
+        void moveToTabAt(const QPointF &pos);
 
         Plasma::TabBar *m_tabBar;
+        QGraphicsProxyWidget *m_actualTabBar;
         QGraphicsLinearLayout *m_layout;
         QList<AbstractGroup *> m_tabGroups;
         Plasma::PushButton *m_newTab;

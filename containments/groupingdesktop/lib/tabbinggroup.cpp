@@ -45,6 +45,14 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
               m_changingTab(-1),
               m_deletingTab(false)
 {
+    QList<QGraphicsItem *> items = m_tabBar->childItems();
+    foreach (QGraphicsItem *child, items) {
+        m_actualTabBar = qgraphicsitem_cast<QGraphicsProxyWidget *>(child);
+        if (m_actualTabBar) {
+            break;
+        }
+    }
+
     m_tabBar->nativeWidget()->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
     m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -328,16 +336,7 @@ bool TabbingGroup::eventFilter(QObject *obj, QEvent *event)
 
 void TabbingGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-    QPointF pos = m_tabBar->mapFromScene(static_cast<QGraphicsSceneDragDropEvent *>(event)->scenePos());
-
-    int index = m_tabBar->nativeWidget()->tabAt(pos.toPoint());
-    if (index == -1) {
-        m_changingTab = -1;
-        m_changeTabTimer->stop();
-    } else {
-        m_changingTab = index;
-        m_changeTabTimer->start();
-    }
+    moveToTabAt(static_cast<QGraphicsSceneDragDropEvent *>(event)->scenePos());
 }
 
 void TabbingGroup::changeTab()
@@ -350,7 +349,23 @@ void TabbingGroup::changeTab()
 
 bool TabbingGroup::showDropZone(const QPointF &pos)
 {
+    moveToTabAt(mapToScene(pos));
+
     return false;
+}
+
+void TabbingGroup::moveToTabAt(const QPointF &scenePos)
+{
+    QPointF pos = m_actualTabBar->mapFromScene(scenePos);
+
+    int index = m_tabBar->nativeWidget()->tabAt(pos.toPoint());
+    if (index == -1) {
+        m_changingTab = -1;
+        m_changeTabTimer->stop();
+    } else {
+        m_changingTab = index;
+        m_changeTabTimer->start();
+    }
 }
 
 QString TabbingGroup::prettyName()
