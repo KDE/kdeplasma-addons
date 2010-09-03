@@ -74,6 +74,9 @@ void PanelIcon::configChanged()
     } else { // fallback to default layout
         m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
     }
+    if (m_plasmaboard) {
+        initKeyboard(m_layout);
+    }
 }
 
 void PanelIcon::layoutNameChanged(const QString &name)
@@ -129,7 +132,6 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
 
 void PanelIcon::init()
 {
-
     configChanged();
 }
 
