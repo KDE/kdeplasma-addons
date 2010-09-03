@@ -76,20 +76,27 @@ public:
         layout->setMaximumSize(INT_MAX, INT_MAX);
 
         layout->addItem(
-            buttonsLayout = new QGraphicsLinearLayout(Qt::Horizontal),
+            buttonsLayout = new ColumnLayout(),
             NodeLayout::NodeCoordinate(0, 0, 0, 0),
             NodeLayout::NodeCoordinate(1, 0, 0, 32)
         );
+        buttonsLayout->setSizer(
+            ColumnLayout::ColumnSizer::create(
+                ColumnLayout::ColumnSizer::EqualSizer
+            )
+        );
+        buttonsLayout->setColumnCount(30);
+
         buttonsLayout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
         buttonsLayout->setMaximumSize(INT_MAX, INT_MAX);
 
-        ExtenderButton * spacer =
-            new ExtenderButton(parent);
-        spacer->setGroupByName("PassagewayView-Spacer");
-        spacer->setMaximumSize(QSizeF(EXTENDER_SIZE, 32));
-        spacer->setPreferredSize(QSizeF(EXTENDER_SIZE, 32));
-        spacer->setMinimumSize(QSizeF(EXTENDER_SIZE, 32));
-        buttonsLayout->addItem(spacer);
+        // ExtenderButton * spacer =
+        //     new ExtenderButton(parent);
+        // spacer->setGroupByName("PassagewayView-Spacer");
+        // spacer->setMaximumSize(QSizeF(EXTENDER_SIZE, 32));
+        // spacer->setPreferredSize(QSizeF(EXTENDER_SIZE, 32));
+        // spacer->setMinimumSize(QSizeF(EXTENDER_SIZE, 32));
+        // buttonsLayout->push(spacer);
 
         layout->addItem(
             listsLayout = new ColumnLayout(),
@@ -101,7 +108,7 @@ public:
         listsLayout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
         listsLayout->setMaximumSize(INT_MAX, INT_MAX);
 
-        buttonsLayout->setSpacing(0.0);
+        //buttonsLayout->setSpacing(0.0);
 
         next(Step("", QIcon(), entranceModel));
         next(Step("", QIcon(), atlasModel));
@@ -134,32 +141,32 @@ public:
     };
 
     class BreadcrumbItem : public Lancelot::ExtenderButton {
-        public:
-            BreadcrumbItem(QIcon icon, QString title, QString description,
-                    QGraphicsItem * parent, PassagewayView::Private * parent_private)
-                : Lancelot::ExtenderButton(icon, title, description, parent),
-                  d(parent_private)
-            {
-            }
+    public:
+        BreadcrumbItem(QIcon icon, QString title, QString description,
+                QGraphicsItem * parent, PassagewayView::Private * parent_private)
+            : Lancelot::ExtenderButton(icon, title, description, parent),
+              d(parent_private)
+        {
+        }
 
-            void mousePressEvent(QGraphicsSceneMouseEvent * event)
-            {
-                m_mousePos = event->pos();
-                ExtenderButton::mousePressEvent(event);
-            }
+        void mousePressEvent(QGraphicsSceneMouseEvent * event)
+        {
+            m_mousePos = event->pos();
+            ExtenderButton::mousePressEvent(event);
+        }
 
-            void mouseMoveEvent(QGraphicsSceneMouseEvent * event)
-            {
-                ExtenderButton::mouseMoveEvent(event);
-                if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
-                    setDown(false);
-                    d->startDrag(this, event);
-                }
+        void mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+        {
+            ExtenderButton::mouseMoveEvent(event);
+            if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
+                setDown(false);
+                d->startDrag(this, event);
             }
+        }
 
-        private:
-            PassagewayView::Private * d;
-            QPointF m_mousePos;
+    private:
+        PassagewayView::Private * d;
+        QPointF m_mousePos;
     };
 
     void back(int steps, bool deselectLast = true)
@@ -185,7 +192,8 @@ public:
 
             path.takeLast();
 
-            buttonsLayout->removeItem(button);
+            // buttonsLayout->removeItem(button);
+            buttonsLayout->pop();
 
             // This really shouldn't be needed :(
             buttonsLayout->setGeometry(buttonsLayout->geometry());
@@ -240,7 +248,7 @@ public:
 
         path.append(step);
 
-        buttonsLayout->addItem(button);
+        buttonsLayout->push(button);
         listsLayout->push(list);
 
         // This really shouldn't be needed :(
@@ -306,7 +314,8 @@ public:
 
     NodeLayout                  * layout;
     ColumnLayout::ColumnSizer   * sizer;
-    QGraphicsLinearLayout       * buttonsLayout;
+    // QGraphicsLinearLayout       * buttonsLayout;
+    ColumnLayout                * buttonsLayout;
     ColumnLayout                * listsLayout;
     PassagewayView              * parent;
     QPointer < PopupMenu >        popup;
