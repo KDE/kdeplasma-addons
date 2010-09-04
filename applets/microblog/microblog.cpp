@@ -77,10 +77,12 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
 
 void MicroBlog::init()
 {
+    m_engine = dataEngine("microblog");
     m_flash = new Plasma::FlashingLabel(this);
     m_theme = new Plasma::Svg(this);
     m_theme->setImagePath("widgets/microblog");
     m_theme->setContainsMultipleImages(true);
+    configChanged();
 }
 
 void MicroBlog::constraintsEvent(Plasma::Constraints constraints)
@@ -160,17 +162,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_colorScheme = new KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
 
-    //config stuff
-    KConfigGroup cg = config();
-    m_serviceUrl = cg.readEntry("serviceUrl", "https://identi.ca/api/");
-    m_username = cg.readEntry("username");
-    m_password = KStringHandler::obscure(cg.readEntry("password"));
-    m_historySize = cg.readEntry("historySize", 6);
-    m_historyRefresh = cg.readEntry("historyRefresh", 5);
-    m_includeFriends = cg.readEntry("includeFriends", true);
-
-    m_engine = dataEngine("microblog");
-    if (! m_engine->isValid()) {
+    if (!m_engine->isValid()) {
         setFailedToLaunch(true, i18n("Failed to load twitter DataEngine"));
         return m_graphicsWidget;
     }
@@ -222,6 +214,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     QGraphicsLinearLayout *statusEditLayout = new QGraphicsLinearLayout(statusEditFrame);
     m_statusEdit = new Plasma::TextEdit(this);
     m_statusEdit->setPreferredHeight(fm.height() * 4);
+    m_statusEdit->setEnabled(!configurationRequired());
 
     connect(m_statusEdit, SIGNAL(textChanged()), this, SLOT(editTextChanged()));
     statusEditLayout->addItem(m_statusEdit);
@@ -254,12 +247,95 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
 
     m_layout->addItem(m_scrollWidget);
 
-    //hook up some sources
-    m_imageQuery = "UserImages:" + m_serviceUrl;
-    m_engine->connectSource(m_imageQuery, this);
+    m_graphicsWidget->setPreferredSize(300, 400);
 
+    if (!m_imageQuery.isEmpty()) {
+        m_engine->connectSource(m_imageQuery, this);
+    }
 
+    return m_graphicsWidget;
+}
+
+void MicroBlog::configChanged()
+{
+    //config stuff
+    KConfigGroup cg = config();
+    QString serviceUrl = cg.readEntry("serviceUrl", "https://identi.ca/api/");
+    QString username = cg.readEntry("username");
+    QString password = KStringHandler::obscure(cg.readEntry("password"));
+    int historySize = cg.readEntry("historySize", 6);
+    int historyRefresh = cg.readEntry("historyRefresh", 5);
+    bool includeFriends = cg.readEntry("includeFriends", true);
+    bool changed = false;
+    bool reloadRequired = false;
+
+    if (m_serviceUrl != serviceUrl) {
+        m_serviceUrl = serviceUrl;
+        changed = true;
+        reloadRequired = true;
+    }
+
+    if (username != m_username) {
+        m_username = username;
+        changed = true;
+        reloadRequired = true;
+        m_tweetMap.clear();
+        m_lastTweet = 0;
+
+        if (m_graphicsWidget) {
+            m_icon->setIcon(KIcon("user-identity"));
+            m_icon->setText(m_username);
+        }
+    }
+
+    //if (m_walletWait == Read)
+    //then the user is a dumbass.
+    //we're going to ignore that, which drops the read attempt
+    //I hope that doesn't cause trouble.
+    if (!m_username.isEmpty() && (changed || m_password.isEmpty())) {
+        //a change in name *or* pass means we need to update the wallet
+        //if the user doesn't set a password, see if it's already in our wallet
+        m_walletWait = m_password.isEmpty() ? Read : Write;
+        getWallet();
+    }
+
+    if (m_historyRefresh != historyRefresh) {
+        changed = true;
+        m_historyRefresh = historyRefresh;
+    }
+
+    if (m_includeFriends != includeFriends) {
+        changed = true;
+        reloadRequired = true;
+        m_includeFriends = includeFriends;
+        m_tweetMap.clear();
+        m_lastTweet = 0;
+    }
+
+    if (m_historySize != historySize) {
+        //kDebug() << m_historySize << historySize;
+        if (m_historySize < historySize) {
+            reloadRequired = true;
+        } else if (!reloadRequired) {
+            showTweets();
+        }
+
+        changed = true;
+        m_historySize = historySize;
+    }
+
+    //kDebug() << changed << reloadRequired;
     //set things in motion
+    //hook up some sources
+    if (!m_imageQuery.isEmpty()) {
+        m_engine->disconnectSource(m_imageQuery, this);
+    }
+
+    m_imageQuery = "UserImages:" + m_serviceUrl;
+    if (m_graphicsWidget) {
+        m_engine->connectSource(m_imageQuery, this);
+    }
+
     if (m_username.isEmpty()) {
         setAuthRequired(true);
     } else if (m_password.isEmpty()) {
@@ -271,8 +347,24 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
         downloadHistory();
     }
 
-    m_graphicsWidget->setPreferredSize(300, 400);
-    return m_graphicsWidget;
+    if (changed) {
+        if (m_service) {
+            m_service->deleteLater();
+            m_service = 0;
+        }
+
+        if (m_profileService) {
+            m_profileService->deleteLater();
+            m_profileService = 0;
+        }
+    }
+
+    if (reloadRequired) {
+        m_lastTweet = 0;
+        downloadHistory();
+    }
+
+    setAuthRequired(m_username.isEmpty());
 }
 
 void MicroBlog::modeChanged(int)
@@ -352,7 +444,7 @@ void MicroBlog::readWallet(bool success)
     } else if (m_password.isEmpty()) {
         //FIXME: when out of string freeze, tell the user WHY they need
         //       to configure the widget;
-        setConfigurationRequired(true);
+        setConfigurationRequired(true, i18n("Your password is required."));
         kDebug() << "failed to read password";
     }
 
@@ -377,8 +469,10 @@ bool MicroBlog::enterWalletFolder(const QString &folder)
 
 void MicroBlog::setAuthRequired(bool required)
 {
-    setConfigurationRequired(required);
-    m_statusEdit->setEnabled(!required);
+    setConfigurationRequired(required, i18n("Your account information is incomplete."));
+    if (m_graphicsWidget) {
+        m_statusEdit->setEnabled(!required);
+    }
 }
 
 void MicroBlog::writeConfigPassword()
@@ -496,6 +590,10 @@ void MicroBlog::scheduleShowTweets()
 
 void MicroBlog::showTweets()
 {
+    if (!m_graphicsWidget) {
+        return;
+    }
+
     prepareGeometryChange();
     // Adjust the number of the TweetWidgets if the configuration has changed
     // Add more tweetWidgets if there are not enough
@@ -577,87 +675,18 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
 
 void MicroBlog::configAccepted()
 {
-    QString serviceUrl = configUi.serviceUrlCombo->currentText();
-    QString username = configUi.usernameEdit->text();
-    QString password = configUi.passwordEdit->text();
-    int historyRefresh = configUi.historyRefreshSpinBox->value();
-    int historySize = configUi.historySizeSpinBox->value();
-    bool includeFriends = configUi.checkIncludeFriends->isChecked();
-    bool changed = false;
-    bool reloadRequired = false;
-
     KConfigGroup cg = config();
 
-    m_engine->disconnectSource(m_imageQuery, this);
+    cg.writeEntry("serviceUrl", configUi.serviceUrlCombo->currentText());
+    cg.writeEntry("username", configUi.passwordEdit->text());
+    cg.writeEntry("historyRefresh", configUi.historyRefreshSpinBox->value());
+    cg.writeEntry("includeFriends", configUi.checkIncludeFriends->isChecked());
+    cg.writeEntry("historySize", configUi.historySizeSpinBox->value());
 
-    if (m_serviceUrl != serviceUrl) {
-        changed = true;
-        reloadRequired = true;
-        m_serviceUrl = serviceUrl;
-        cg.writeEntry( "serviceUrl", m_serviceUrl );
-    }
-
-
-    if (m_username != username) {
-        changed = true;
-        reloadRequired = true;
-        m_username = username;
-        m_icon->setIcon( QIcon() );
-        m_icon->setText( m_username );
-        cg.writeEntry( "username", m_username );
-        m_tweetMap.clear();
-        m_lastTweet = 0;
-    }
-
-    m_imageQuery = "UserImages:" + m_serviceUrl;
-    m_engine->connectSource(m_imageQuery, this);
-
+    QString password = configUi.passwordEdit->text();
     if (m_password != password) {
-        changed = true;
         m_password = password;
-    }
 
-    //if (m_walletWait == Read)
-    //then the user is a dumbass.
-    //we're going to ignore that, which drops the read attempt
-    //I hope that doesn't cause trouble.
-    if (!m_username.isEmpty() && (changed || m_password.isEmpty())) {
-        //a change in name *or* pass means we need to update the wallet
-        //if the user doesn't set a password, see if it's already in our wallet
-        m_walletWait = m_password.isEmpty() ? Read : Write;
-        getWallet();
-    }
-
-    if (m_historyRefresh != historyRefresh) {
-        changed = true;
-        m_historyRefresh = historyRefresh;
-        cg.writeEntry("historyRefresh", m_historyRefresh);
-    }
-
-    if (m_includeFriends != includeFriends) {
-        changed = true;
-        reloadRequired = true;
-        m_includeFriends = includeFriends;
-        m_tweetMap.clear();
-        m_lastTweet = 0;
-        cg.writeEntry("includeFriends", m_includeFriends);
-    }
-
-    if (m_historySize != historySize) {
-        //kDebug() << m_historySize << historySize;
-        if (m_historySize < historySize) {
-            reloadRequired = true;
-        } else if (!reloadRequired) {
-            showTweets();
-        }
-
-        changed = true;
-        m_historySize = historySize;
-        cg.writeEntry("historySize", m_historySize);
-    }
-
-    //kDebug() << changed << reloadRequired;
-    if (changed) {
         if (m_service) {
             m_service->deleteLater();
             m_service = 0;
@@ -667,16 +696,9 @@ void MicroBlog::configAccepted()
             m_profileService->deleteLater();
             m_profileService = 0;
         }
-
-        if (reloadRequired) {
-            m_lastTweet = 0;
-            downloadHistory();
-        }
-
-        emit configNeedsSaving();
     }
 
-    setAuthRequired(m_username.isEmpty());
+    emit configNeedsSaving();
 }
 
 MicroBlog::~MicroBlog()

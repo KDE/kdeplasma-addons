@@ -67,6 +67,8 @@ class MicroBlog : public Plasma::PopupApplet
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void createConfigurationInterface( KConfigDialog *parent );
+        void configChanged();
+
         /**
          * read from the opened KWallet
          * @param success whether we got to open it
