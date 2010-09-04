@@ -91,16 +91,7 @@ Pastebin::~Pastebin()
 
 void Pastebin::init()
 {
-    KConfigGroup cg = config();
-
-    int historySize = cg.readEntry("HistorySize", "3").toInt();
-    QStringList history = cg.readEntry("History", "").split('|', QString::SkipEmptyParts);
-
-    for (int i = 0; i < history.size(); ++i) {
-        addToHistory(history.at(i));
-    }
-
-    setHistorySize(historySize);
+    configChanged();
     setActionState(Idle);
     setInteractionState(Waiting);
 
@@ -405,7 +396,11 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(general, i18n("General"), Applet::icon());
 
     uiConfig.textServer->addItems(m_txtServers.keys());
+    uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", ""));
+
     uiConfig.imageServer->addItems(m_imgServers.keys());
+    uiConfig.textServer->setCurrentItem(cg.readEntry("ImageProvider", ""));
+
     uiConfig.historySize->setValue(m_historySize);
 }
 
@@ -420,6 +415,19 @@ void Pastebin::configAccepted()
     cg.writeEntry("HistorySize", historySize);
 
     emit configNeedsSaving();
+}
+
+void Pastebin::configChanged()
+{
+    KConfigGroup cg = config();
+    int historySize = cg.readEntry("HistorySize", "3").toInt();
+    QStringList history = cg.readEntry("History", "").split('|', QString::SkipEmptyParts);
+
+    m_actionHistory.clear();
+    for (int i = 0; i < history.size(); ++i) {
+        addToHistory(history.at(i));
+    }
+    setHistorySize(historySize);
 }
 
 void Pastebin::showResults(const QString &url)

@@ -84,6 +84,7 @@ public:
 
 public slots:
     void configAccepted();
+    void configChanged();
     void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
 
 protected slots:
