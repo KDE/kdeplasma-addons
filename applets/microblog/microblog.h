@@ -96,16 +96,17 @@ class MicroBlog : public Plasma::PopupApplet
         void reply(const QString &to);
         void forward(const QString &rt);
 
+        /**
+         * attempt to get the wallet from KWallet
+         * */
+        void getWallet();
+
     protected:
         bool eventFilter(QObject *obj, QEvent *event);
         void popupEvent(bool show);
         void focusInEvent(QFocusEvent *event);
 
     private:
-        /**
-         * attempt to get the wallet from KWallet
-         * */
-        void getWallet();
         /**
          * convenience function for setting the folder
          */
@@ -175,6 +176,7 @@ class MicroBlog : public Plasma::PopupApplet
         Ui::TwitterConfig configUi;
 
         QTimer *m_showTweetsTimer;
+        QTimer *m_getWalletDelayTimer;
 };
 
 K_EXPORT_PLASMA_APPLET(microblog, MicroBlog)

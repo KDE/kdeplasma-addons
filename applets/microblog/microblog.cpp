@@ -67,7 +67,8 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
       m_wallet(0),
       m_walletWait(None),
       m_colorScheme(0),
-      m_showTweetsTimer(0)
+      m_showTweetsTimer(0),
+      m_getWalletDelayTimer(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
@@ -395,11 +396,31 @@ void MicroBlog::getWallet()
 {
     //TODO: maybe Plasma in general should handle the wallet
     delete m_wallet;
+    m_wallet = 0;
 
     QGraphicsView *v = view();
     WId w = 0;
     if (v) {
         w = v->winId();
+    }
+
+    if (!w) {
+        //KWallet requires a valid window id to work, wait until we have one
+        if (!m_getWalletDelayTimer) {
+            m_getWalletDelayTimer = new QTimer(this);
+            m_getWalletDelayTimer->setSingleShot(true);
+            m_getWalletDelayTimer->setInterval(100);
+            connect(m_getWalletDelayTimer, SIGNAL(timeout()), this, SLOT(getWallet()));
+        }
+
+        if (!m_getWalletDelayTimer->isActive()) {
+            m_getWalletDelayTimer->start();
+        }
+
+        return;
+    } else {
+        delete m_getWalletDelayTimer;
+        m_getWalletDelayTimer = 0;
     }
 
     kDebug() << "opening wallet";
