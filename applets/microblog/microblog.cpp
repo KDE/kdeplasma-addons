@@ -548,7 +548,7 @@ void MicroBlog::showTweets()
     }
 
     //are we complete?
-    if (layout()->itemAt(0) != m_graphicsWidget) {
+    if (layout() && layout()->itemAt(0) != m_graphicsWidget) {
         paintIcon();
     }
 }
