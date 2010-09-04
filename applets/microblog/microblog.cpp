@@ -678,7 +678,7 @@ void MicroBlog::configAccepted()
     KConfigGroup cg = config();
 
     cg.writeEntry("serviceUrl", configUi.serviceUrlCombo->currentText());
-    cg.writeEntry("username", configUi.passwordEdit->text());
+    cg.writeEntry("username", configUi.usernameEdit->text());
     cg.writeEntry("historyRefresh", configUi.historyRefreshSpinBox->value());
     cg.writeEntry("includeFriends", configUi.checkIncludeFriends->isChecked());
     cg.writeEntry("historySize", configUi.historySizeSpinBox->value());
