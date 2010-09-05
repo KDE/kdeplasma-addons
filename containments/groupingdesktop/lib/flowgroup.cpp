@@ -146,6 +146,18 @@ void FlowGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
     m_layout->insertItem(m_spacerIndex, child);
 }
 
+void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::FormFactorConstraint) {
+        Plasma::FormFactor f = containment()->formFactor();
+        if (f == Plasma::Vertical) {
+            m_layout->setOrientation(Qt::Vertical);
+        } else {
+            m_layout->setOrientation(Qt::Horizontal);
+        }
+    }
+}
+
 QString FlowGroup::prettyName()
 {
     return i18n("Flow Group");

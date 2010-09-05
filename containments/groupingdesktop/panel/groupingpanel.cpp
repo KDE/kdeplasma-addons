@@ -100,7 +100,13 @@ QList<QAction *> GroupingPanel::contextualActions()
         constraintsEvent(Plasma::ImmutableConstraint);
     }
     if (!m_newRowAction) {
-        m_newRowAction = new QAction(i18n("New Row"), this);
+        m_newRowAction = new QAction(this);
+        m_newRowAction->setIcon(KIcon("list-add"));
+        if (formFactor() == Plasma::Vertical) {
+            m_newRowAction->setText(i18n("Add A New Column"));
+        } else {
+            m_newRowAction->setText(i18n("Add A New Row"));
+        }
         connect(m_newRowAction, SIGNAL(triggered()), this, SLOT(addNewRow()));
     }
 
@@ -309,11 +315,15 @@ void GroupingPanel::setFormFactorFromLocation(Plasma::Location loc) {
         case TopEdge:
             //kDebug() << "setting horizontal form factor";
             setFormFactor(Plasma::Horizontal);
+            m_layout->setOrientation(Qt::Vertical);
+            m_newRowAction->setText(i18n("Add A New Row"));
             break;
         case RightEdge:
         case LeftEdge:
             //kDebug() << "setting vertical form factor";
             setFormFactor(Plasma::Vertical);
+            m_layout->setOrientation(Qt::Horizontal);
+            m_newRowAction->setText(i18n("Add A New Column"));
             break;
         case Floating:
             //TODO: implement a form factor for floating panels

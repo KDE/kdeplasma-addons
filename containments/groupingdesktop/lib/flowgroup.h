@@ -44,6 +44,7 @@ class FlowGroup : public AbstractGroup
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
+        void constraintsEvent(Plasma::Constraints constraints);
 
     private:
         QGraphicsLinearLayout *m_layout;
