@@ -561,7 +561,7 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     group->setImmutability(immutability());
     group->updateConstraints();
 
-    if (!d->loading) {
+    if (!d->loading && !pos.isNull()) {
         Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
         if (anim) {
             connect(anim, SIGNAL(finished()), this, SLOT(groupAppearAnimationComplete()));
@@ -613,15 +613,21 @@ void GroupingContainment::setMainGroup(AbstractGroup *group)
     }
 
     d->mainGroup = group;
-    if (!d->layout) {
-        d->layout = new QGraphicsLinearLayout(this);
-        d->layout->setContentsMargins(0, 0, 0, 0);
-    }
-    d->layout->addItem(group);
+
+    layoutMainGroup(group);
     group->setIsMainGroup();
 
     config().writeEntry("mainGroup", group->id());
     emit configNeedsSaving();
+}
+
+void GroupingContainment::layoutMainGroup(AbstractGroup *mainGroup)
+{
+    if (!d->layout) {
+        d->layout = new QGraphicsLinearLayout(this);
+        d->layout->setContentsMargins(0, 0, 0, 0);
+    }
+    d->layout->addItem(mainGroup);
 }
 
 AbstractGroup *GroupingContainment::mainGroup() const

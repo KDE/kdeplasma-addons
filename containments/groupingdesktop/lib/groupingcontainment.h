@@ -173,6 +173,8 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
          **/
         AbstractGroup *mainGroup() const;
 
+        virtual void layoutMainGroup(AbstractGroup *mainGroup);
+
     signals:
         /**
          * Emitted when a new Group is added to this Containment.

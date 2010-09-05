@@ -614,6 +614,7 @@ bool AbstractGroup::isMainGroup() const
 
 void AbstractGroup::setBackgroundHints(BackgroundHints hints)
 {
+    kDebug()<<this<<hints;
     d->backgroundHints = hints;
     switch (hints) {
         case StandardBackground:
@@ -791,7 +792,9 @@ void AbstractGroup::updateConstraints(Plasma::Constraints constraints)
     if (constraints & Plasma::FormFactorConstraint) {
         if (d->background && (d->containment->formFactor() == Plasma::Vertical ||
                               d->containment->formFactor() == Plasma::Horizontal)) {
-            setBackgroundHints(AbstractGroup::PlainBackground);
+            if (backgroundHints() == AbstractGroup::StandardBackground) {
+                setBackgroundHints(AbstractGroup::PlainBackground);
+            }
         }
     }
 

@@ -20,6 +20,7 @@
 #include "groupingpanel.h"
 
 #include <QAction>
+#include <QGraphicsLinearLayout>
 
 #include <KLocale>
 #include <KDebug>
@@ -37,6 +38,7 @@ using namespace Plasma;
 GroupingPanel::GroupingPanel(QObject *parent, const QVariantList &args)
     : GroupingContainment(parent, args),
       m_configureAction(0),
+      m_newRowAction(0),
       m_maskDirty(true)
 {
     KGlobal::locale()->insertCatalog("libplasma_groupingcontainment");
@@ -75,16 +77,20 @@ void GroupingPanel::init()
     m_currentSize = cg.readEntry("minimumSize", m_currentSize);
     if (formFactor() == Plasma::Vertical) {
         m_currentSize.expandedTo(QSize(0, 35));
+        m_layout = new QGraphicsLinearLayout(Qt::Horizontal);
     } else {
         m_currentSize.expandedTo(QSize(35, 0));
+        m_layout = new QGraphicsLinearLayout(Qt::Vertical);
     }
+    m_layout->setContentsMargins(0, 0, 0, 0);
+    setLayout(m_layout);
 
     setMinimumSize(cg.readEntry("minimumSize", m_currentSize));
     setMaximumSize(cg.readEntry("maximumSize", m_currentSize));
     setDrawWallpaper(false);
 }
 
-QList<QAction*> GroupingPanel::contextualActions()
+QList<QAction *> GroupingPanel::contextualActions()
 {
     if (!m_configureAction) {
         m_configureAction = new QAction(i18n("Panel Settings"), this);
@@ -93,12 +99,23 @@ QList<QAction*> GroupingPanel::contextualActions()
 
         constraintsEvent(Plasma::ImmutableConstraint);
     }
+    if (!m_newRowAction) {
+        m_newRowAction = new QAction(i18n("New Row"), this);
+        connect(m_newRowAction, SIGNAL(triggered()), this, SLOT(addNewRow()));
+    }
 
-    QList<QAction*> actions;
+    QList<QAction *> actions = GroupingContainment::contextualActions();
 
-    actions.append(m_configureAction);
+    actions << m_configureAction << m_newRowAction;
+    return actions;
+}
 
-    return GroupingContainment::contextualActions();
+void GroupingPanel::addNewRow()
+{
+    AbstractGroup *g = addGroup("flow");
+    g->show();
+    m_layout->addItem(g);
+    g->setIsMainGroup();
 }
 
 void GroupingPanel::backgroundChanged()
@@ -304,6 +321,46 @@ void GroupingPanel::setFormFactorFromLocation(Plasma::Location loc) {
             break;
         default:
             kDebug() << "invalid location!!";
+    }
+}
+
+void GroupingPanel::layoutMainGroup(AbstractGroup *mainGroup)
+{
+    m_layout->addItem(mainGroup);
+}
+
+void GroupingPanel::restore(KConfigGroup &group)
+{
+    GroupingContainment::restore(group);
+
+    KConfigGroup groupsConfig(&group, "Groups");
+
+    QMap<int, Applet *> oderedApplets;
+    QList<Applet *> unoderedApplets;
+
+    foreach (AbstractGroup *group, groups()) {
+        KConfigGroup groupConfig(&groupsConfig, QString::number(group->id()));
+        KConfigGroup layoutConfig(&groupConfig, "LayoutInformation");
+
+        if (layoutConfig.isValid()) {
+            int order = layoutConfig.readEntry("Index", -1);
+
+            m_layout->insertItem(order, group);
+        }
+    }
+}
+
+void GroupingPanel::saveContents(KConfigGroup &group) const
+{
+    GroupingContainment::saveContents(group);
+
+    KConfigGroup groupsConfig(&group, "Groups");
+    for (int order = 0; order < m_layout->count(); ++order) {
+        const AbstractGroup *g = static_cast<AbstractGroup *>(m_layout->itemAt(order));
+        KConfigGroup groupConfig(&groupsConfig, QString::number(g->id()));
+        KConfigGroup layoutConfig(&groupConfig, "LayoutInformation");
+
+        layoutConfig.writeEntry("Index", order);
     }
 }
 

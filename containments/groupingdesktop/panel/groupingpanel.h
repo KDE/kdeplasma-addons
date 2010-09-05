@@ -24,6 +24,7 @@
 #include "../lib/groupingcontainment.h"
 
 class QAction;
+class QGraphicsLinearLayout;
 
 namespace Plasma
 {
@@ -47,11 +48,15 @@ class GroupingPanel : public GroupingContainment
         void paintBackground(QPainter *painter, const QRect &contentsRect);
 
     protected:
+        void layoutMainGroup(AbstractGroup *mainGroup);
         void saveState(KConfigGroup &config) const;
+        void saveContents(KConfigGroup &group) const;
+        void restore(KConfigGroup &group);
 
     private slots:
         void themeUpdated();
         void backgroundChanged();
+        void addNewRow();
 
     private:
         /**
@@ -65,7 +70,9 @@ class GroupingPanel : public GroupingContainment
         void updateBorders(const QRect &geom);
 
         Plasma::FrameSvg *m_background;
-        QAction* m_configureAction;
+        QAction *m_configureAction;
+        QAction *m_newRowAction;
+        QGraphicsLinearLayout *m_layout;
 
         //cached values
         QSize m_currentSize;
