@@ -614,7 +614,6 @@ bool AbstractGroup::isMainGroup() const
 
 void AbstractGroup::setBackgroundHints(BackgroundHints hints)
 {
-    kDebug()<<this<<hints;
     d->backgroundHints = hints;
     switch (hints) {
         case StandardBackground:
