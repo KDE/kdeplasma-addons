@@ -49,7 +49,7 @@ GroupingPanel::GroupingPanel(QObject *parent, const QVariantList &args)
     resize(m_currentSize);
     setMinimumSize(m_currentSize);
     setMaximumSize(m_currentSize);
-    useMainGroup("grid");
+    useMainGroup("flow");
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeUpdated()));
 }

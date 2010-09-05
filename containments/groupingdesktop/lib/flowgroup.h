@@ -37,6 +37,7 @@ class FlowGroup : public AbstractGroup
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         bool showDropZone(const QPointF &pos);
+        Handle *createHandleForChild(QGraphicsWidget *child);
 
         static QString prettyName();
         static QSet<Plasma::FormFactor> availableOnFormFactors();

@@ -25,6 +25,9 @@
 #include <Plasma/Theme>
 #include <Plasma/PaintUtils>
 
+#include "gridhandle.h"
+#include "groupingcontainment.h"
+
 REGISTER_GROUP(flow, FlowGroup)
 
 class Spacer : public QGraphicsWidget
@@ -61,11 +64,15 @@ FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             m_layout(new QGraphicsLinearLayout(Qt::Horizontal)),
             m_spacer(new Spacer(this))
 {
+    resize(200,200);
+
+    m_layout->setSpacing(4);
+    m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    m_layout->addStretch();
     setLayout(m_layout);
 
     m_spacer->hide();
 
-    resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
     setUseSimplerBackgroundForChildren(true);
 }
@@ -107,19 +114,14 @@ bool FlowGroup::showDropZone(const QPointF &pos)
         return false;
     }
 
-    //lucky case: the spacer is already in the right position
-//     if (m_spacer->geometry().contains(pos)) {
-//         return true;
-//     }
-
-//     Plasma::FormFactor f = formFactor();
+    Plasma::FormFactor f = containment()->formFactor();
     int insertIndex = m_layout->count();
 
     //FIXME: needed in two places, make it a function?
     for (int i = 0; i < m_layout->count(); ++i) {
         QRectF siblingGeometry = m_layout->itemAt(i)->geometry();
 
-//         if (f == Plasma::Horizontal) {
+        if (f == Plasma::Horizontal) {
             qreal middle = siblingGeometry.left() + (siblingGeometry.width() / 2.0);
             if (pos.x() < middle) {
                 insertIndex = i;
@@ -128,16 +130,16 @@ bool FlowGroup::showDropZone(const QPointF &pos)
                 insertIndex = i + 1;
                 break;
             }
-//         } else { // Plasma::Vertical
-//             qreal middle = siblingGeometry.top() + (siblingGeometry.height() / 2.0);
-//             if (pos.y() < middle) {
-//                 insertIndex = i;
-//                 break;
-//             } else if (pos.y() <= siblingGeometry.bottom()) {
-//                 insertIndex = i + 1;
-//                 break;
-//             }
-//         }
+        } else { // Plasma::Vertical
+            qreal middle = siblingGeometry.top() + (siblingGeometry.height() / 2.0);
+            if (pos.y() < middle) {
+                insertIndex = i;
+                break;
+            } else if (pos.y() <= siblingGeometry.bottom()) {
+                insertIndex = i + 1;
+                break;
+            }
+        }
     }
 
     m_spacer->index = insertIndex;
@@ -149,6 +151,20 @@ bool FlowGroup::showDropZone(const QPointF &pos)
     }
 
     return false;
+}
+
+Handle *FlowGroup::createHandleForChild(QGraphicsWidget *child)
+{
+    if (!children().contains(child)) {
+        return 0;
+    }
+
+    Plasma::Applet *a = qobject_cast<Plasma::Applet *>(child);
+    if (a) {
+        return new GridHandle(containment(), a);
+    }
+
+    return new GridHandle(containment(), static_cast<AbstractGroup *>(child));
 }
 
 void FlowGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
