@@ -164,6 +164,7 @@ QWidget * WeatherWallpaper::createConfigurationInterface(QWidget * parent)
 {
     QWidget *top = new QWidget(parent);
     QVBoxLayout *layout = new QVBoxLayout(top);
+    layout->setMargin(0);
     m_configWidget = new WeatherConfig(top);
     connect(m_configWidget, SIGNAL(destroyed(QObject*)), this, SLOT(configWidgetDestroyed()));
     m_configWidget->setDataEngine(weatherEngine);
