@@ -27,37 +27,9 @@
 
 #include "gridhandle.h"
 #include "groupingcontainment.h"
+#include "spacer.h"
 
 REGISTER_GROUP(flow, FlowGroup)
-
-class Spacer : public QGraphicsWidget
-{
-    public:
-        Spacer(QGraphicsWidget *parent)
-        : QGraphicsWidget(parent)
-        {}
-
-        ~Spacer()
-        {}
-
-        int index;
-
-    protected:
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget = 0)
-        {
-            Q_UNUSED(option)
-            Q_UNUSED(widget)
-
-            //TODO: make this a pretty gradient?
-            painter->setRenderHint(QPainter::Antialiasing);
-            QPainterPath p = Plasma::PaintUtils::roundedRectangle(contentsRect().adjusted(1, 1, -2, -2), 4);
-            QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-            c.setAlphaF(0.3);
-
-            painter->fillPath(p, c);
-        }
-};
-
 
 FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(parent, wFlags),
@@ -142,7 +114,7 @@ bool FlowGroup::showDropZone(const QPointF &pos)
         }
     }
 
-    m_spacer->index = insertIndex;
+    m_spacerIndex = insertIndex;
     if (insertIndex != -1) {
         m_spacer->show();
         m_layout->insertItem(insertIndex, m_spacer);
@@ -171,7 +143,7 @@ void FlowGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
 {
     m_spacer->hide();
     m_layout->removeItem(m_spacer);
-    m_layout->insertItem(m_spacer->index, child);
+    m_layout->insertItem(m_spacerIndex, child);
 }
 
 QString FlowGroup::prettyName()

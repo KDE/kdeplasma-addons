@@ -29,6 +29,7 @@
 
 #include "groupingcontainment.h"
 #include "gridhandle.h"
+#include "spacer.h"
 
 REGISTER_GROUP(grid, GridGroup)
 
@@ -49,44 +50,6 @@ class Position {
         int column;
 };
 
-class Spacer : public QGraphicsWidget
-{
-    public:
-        Spacer(QGraphicsWidget *parent)
-        : QGraphicsWidget(parent),
-        m_visible(true)
-        {}
-
-        ~Spacer()
-        {}
-
-        GridGroup *parent;
-        bool m_visible;
-        int lastRow;
-        int lastColumn;
-        bool lastRowWasAdded;
-        bool lastColumnWasAdded;
-
-    protected:
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget = 0)
-        {
-            Q_UNUSED(option)
-            Q_UNUSED(widget)
-
-            if (!m_visible) {
-                return;
-            }
-
-            //TODO: make this a pretty gradient?
-            painter->setRenderHint(QPainter::Antialiasing);
-            QPainterPath p = Plasma::PaintUtils::roundedRectangle(contentsRect().adjusted(1, 1, -2, -2), 4);
-            QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-            c.setAlphaF(0.3);
-
-            painter->fillPath(p, c);
-        }
-};
-
 GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(parent, wFlags),
             m_spacer(new Spacer(this)),
@@ -102,7 +65,6 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
     setContentsMargins(10, 10, 10, 10);
 
-    m_spacer->parent = this;
     m_spacer->setZValue(1000);
     m_spacer->hide();
     m_spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -271,27 +233,27 @@ bool GridGroup::showDropZone(const QPointF &pos)
     int n;
     if ((n = isOnAColumnBorder(x)) != -1) {
         insertColumnAt(n);
-        m_spacer->lastRow = row;
-        m_spacer->lastColumn = n;
-        m_spacer->lastRowWasAdded = false;
-        m_spacer->lastColumnWasAdded = true;
+        lastSpacerRow = row;
+        lastSpacerColumn = n;
+        lastSpacerRowWasAdded = false;
+        lastSpacerColumnWasAdded = true;
         addItem(m_spacer, row, n);
 
         return true;
     } else if ((n = isOnARowBorder(y)) != -1) {
         insertRowAt(n);
-        m_spacer->lastRow = n;
-        m_spacer->lastColumn = column;
-        m_spacer->lastRowWasAdded = true;
-        m_spacer->lastColumnWasAdded = false;
+        lastSpacerRow = n;
+        lastSpacerColumn = column;
+        lastSpacerRowWasAdded = true;
+        lastSpacerColumnWasAdded = false;
         addItem(m_spacer, n, column);
 
         return true;
     } else if (addItem(m_spacer, row, column)) {
-        m_spacer->lastRow = row;
-        m_spacer->lastColumn = column;
-        m_spacer->lastRowWasAdded = false;
-        m_spacer->lastColumnWasAdded = false;
+        lastSpacerRow = row;
+        lastSpacerColumn = column;
+        lastSpacerRowWasAdded = false;
+        lastSpacerColumnWasAdded = false;
 
         return true;
     } else {
@@ -303,12 +265,12 @@ bool GridGroup::showDropZone(const QPointF &pos)
             }
         }
         if (show) {
-            row = m_spacer->lastRow;
-            column = m_spacer->lastColumn;
-            if (m_spacer->lastRowWasAdded) {
+            row = lastSpacerRow;
+            column = lastSpacerColumn;
+            if (lastSpacerRowWasAdded) {
                 insertRowAt(row);
             }
-            if (m_spacer->lastColumnWasAdded) {
+            if (lastSpacerColumnWasAdded) {
                 insertColumnAt(column);
             }
             addItem(m_spacer, row, column);

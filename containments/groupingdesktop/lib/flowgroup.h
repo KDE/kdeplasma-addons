@@ -49,6 +49,8 @@ class FlowGroup : public AbstractGroup
         QGraphicsLinearLayout *m_layout;
         Spacer *m_spacer;
 
+        int m_spacerIndex;
+
 };
 
 #endif // FLOWGROUP_H

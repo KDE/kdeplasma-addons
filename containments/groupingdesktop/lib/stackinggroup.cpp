@@ -26,42 +26,9 @@
 #include <Plasma/Corona>
 
 #include "groupingcontainment.h"
+#include "spacer.h"
 
 REGISTER_GROUP(stacking, StackingGroup)
-
-class Spacer : public QGraphicsWidget
-{
-    public:
-        Spacer(QGraphicsWidget *parent)
-        : QGraphicsWidget(parent),
-        m_visible(true)
-        {}
-
-        ~Spacer()
-        {}
-
-        StackingGroup *parent;
-        bool m_visible;
-
-    protected:
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget = 0)
-        {
-            Q_UNUSED(option)
-            Q_UNUSED(widget)
-
-            if (!m_visible) {
-                return;
-            }
-
-            //TODO: make this a pretty gradient?
-            painter->setRenderHint(QPainter::Antialiasing);
-            QPainterPath p = Plasma::PaintUtils::roundedRectangle(contentsRect().adjusted(1, 1, -2, -2), 4);
-            QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-            c.setAlphaF(0.3);
-
-            painter->fillPath(p, c);
-        }
-};
 
 StackingGroup::StackingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : AbstractGroup(parent, wFlags),
@@ -70,7 +37,6 @@ StackingGroup::StackingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
 
-    m_spacer->parent = this;
     m_spacer->hide();
 
     connect(this, SIGNAL(initCompleted()), this, SLOT(onInitCompleted()));

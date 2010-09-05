@@ -7,6 +7,7 @@ set(groupingcontainment_SRCS
         handle.cpp
         freehandle.cpp
         gridhandle.cpp
+        spacer.cpp
         floatinggroup.cpp
         stackinggroup.cpp
         gridgroup.cpp

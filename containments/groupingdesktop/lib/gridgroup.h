@@ -90,6 +90,11 @@ class GridGroup : public AbstractGroup
         bool m_cursorOverriden;
         Plasma::Svg *m_separator;
 
+        int lastSpacerRow;
+        int lastSpacerColumn;
+        bool lastSpacerRowWasAdded;
+        bool lastSpacerColumnWasAdded;
+
         friend class Spacer;
 };
 
