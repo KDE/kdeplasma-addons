@@ -163,23 +163,30 @@ void WeatherWallpaper::advancedDialogDestroyed()
 
 QWidget * WeatherWallpaper::createConfigurationInterface(QWidget * parent)
 {
-    m_configWidget = new WeatherConfig(parent);
+    QWidget *top = new QWidget(parent);
+    QVBoxLayout *layout = new QVBoxLayout(top);
+    m_configWidget = new WeatherConfig(top);
     connect(m_configWidget, SIGNAL(destroyed(QObject*)), this, SLOT(configWidgetDestroyed()));
     m_configWidget->setDataEngine(weatherEngine);
     m_configWidget->setSource(m_source);
     m_configWidget->setUpdateInterval(m_weatherUpdateTime);
     m_configWidget->setConfigurableUnits(WeatherConfig::None);
     m_configWidget->setHeadersVisible(false);
+    layout->addWidget(m_configWidget);
 
-    KPushButton *m_buttonAdvanced = new KPushButton(m_configWidget);
-    m_buttonAdvanced->setText( i18n( "&Advanced..." ) );
-    m_configWidget->layout()->addWidget(m_buttonAdvanced);
+    QHBoxLayout *buttonLayout = new QHBoxLayout;
+    KPushButton *buttonAdvanced = new KPushButton(m_configWidget);
+    buttonAdvanced->setText( i18n( "&Advanced..." ) );
+    m_configWidget->layout()->addWidget(buttonAdvanced);
+    buttonLayout->addStretch();
+    buttonLayout->addWidget(buttonAdvanced);
+    layout->addLayout(buttonLayout);
 
-    connect(m_buttonAdvanced, SIGNAL(clicked()), this, SLOT(showAdvancedDialog()));
+    connect(buttonAdvanced, SIGNAL(clicked()), this, SLOT(showAdvancedDialog()));
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     connect(m_configWidget, SIGNAL(settingsChanged()), this, SIGNAL(settingsChanged()));
 
-    return m_configWidget;
+    return top;
 }
 
 void WeatherWallpaper::calculateGeometry()
