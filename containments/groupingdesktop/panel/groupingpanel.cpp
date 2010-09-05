@@ -119,9 +119,16 @@ QList<QAction *> GroupingPanel::contextualActions()
 void GroupingPanel::addNewRow()
 {
     AbstractGroup *g = addGroup("flow");
-    g->show();
     m_layout->addItem(g);
     g->setIsMainGroup();
+
+    KConfigGroup groupsConfig = config("Groups");
+    KConfigGroup groupConfig(&groupsConfig, QString::number(g->id()));
+    KConfigGroup layoutConfig(&groupConfig, "LayoutInformation");
+
+    layoutConfig.writeEntry("Index", m_layout->count() - 1);
+
+    emit configNeedsSaving();
 }
 
 void GroupingPanel::backgroundChanged()
@@ -316,14 +323,18 @@ void GroupingPanel::setFormFactorFromLocation(Plasma::Location loc) {
             //kDebug() << "setting horizontal form factor";
             setFormFactor(Plasma::Horizontal);
             m_layout->setOrientation(Qt::Vertical);
-            m_newRowAction->setText(i18n("Add A New Row"));
+            if (m_newRowAction) {
+                m_newRowAction->setText(i18n("Add A New Row"));
+            }
             break;
         case RightEdge:
         case LeftEdge:
             //kDebug() << "setting vertical form factor";
             setFormFactor(Plasma::Vertical);
             m_layout->setOrientation(Qt::Horizontal);
-            m_newRowAction->setText(i18n("Add A New Column"));
+            if (m_newRowAction) {
+                m_newRowAction->setText(i18n("Add A New Column"));
+            }
             break;
         case Floating:
             //TODO: implement a form factor for floating panels
@@ -337,6 +348,12 @@ void GroupingPanel::setFormFactorFromLocation(Plasma::Location loc) {
 void GroupingPanel::layoutMainGroup(AbstractGroup *mainGroup)
 {
     m_layout->addItem(mainGroup);
+
+    KConfigGroup groupsConfig = config("Groups");
+    KConfigGroup groupConfig(&groupsConfig, QString::number(mainGroup->id()));
+    KConfigGroup layoutConfig(&groupConfig, "LayoutInformation");
+
+    layoutConfig.writeEntry("Index", m_layout->count() - 1);
 }
 
 void GroupingPanel::restore(KConfigGroup &group)
@@ -344,9 +361,6 @@ void GroupingPanel::restore(KConfigGroup &group)
     GroupingContainment::restore(group);
 
     KConfigGroup groupsConfig(&group, "Groups");
-
-    QMap<int, Applet *> oderedApplets;
-    QList<Applet *> unoderedApplets;
 
     foreach (AbstractGroup *group, groups()) {
         KConfigGroup groupConfig(&groupsConfig, QString::number(group->id()));
@@ -356,21 +370,8 @@ void GroupingPanel::restore(KConfigGroup &group)
             int order = layoutConfig.readEntry("Index", -1);
 
             m_layout->insertItem(order, group);
+            group->setIsMainGroup();
         }
-    }
-}
-
-void GroupingPanel::saveContents(KConfigGroup &group) const
-{
-    GroupingContainment::saveContents(group);
-
-    KConfigGroup groupsConfig(&group, "Groups");
-    for (int order = 0; order < m_layout->count(); ++order) {
-        const AbstractGroup *g = static_cast<AbstractGroup *>(m_layout->itemAt(order));
-        KConfigGroup groupConfig(&groupsConfig, QString::number(g->id()));
-        KConfigGroup layoutConfig(&groupConfig, "LayoutInformation");
-
-        layoutConfig.writeEntry("Index", order);
     }
 }
 

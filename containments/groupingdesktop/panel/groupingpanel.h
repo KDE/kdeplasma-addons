@@ -50,7 +50,6 @@ class GroupingPanel : public GroupingContainment
     protected:
         void layoutMainGroup(AbstractGroup *mainGroup);
         void saveState(KConfigGroup &config) const;
-        void saveContents(KConfigGroup &group) const;
         void restore(KConfigGroup &group);
 
     private slots:
