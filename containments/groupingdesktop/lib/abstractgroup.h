@@ -262,11 +262,21 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         virtual QString pluginName() const = 0;
 
+        /**
+         * Tells this Group it is a Main Group, causing it to:
+         *  not paint a background;
+         *  not be movable;
+         *  not have contents margins.
+         *
+         * @see isMainGroup
+         * @see GroupingContainment::useMainGroup
+         **/
         void setIsMainGroup();
 
         /**
-         * Returns true if this Group is the MainGroup of its Containment.
+         * Returns true if this Group is a MainGroup.
          *
+         * @see setIsMainGroup
          * @see GroupingContainment::useMainGroup
          **/
         bool isMainGroup() const;
@@ -287,6 +297,11 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         BackgroundHints backgroundHints() const;
 
+        /**
+         * Returns true if this Group uses a simpler background for its children.
+         *
+         * @see setUseSimplerBackgroundForChildren
+         **/
         bool useSimplerBackgroundForChildren() const;
 
         /**
@@ -454,6 +469,15 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         void setHasConfigurationInterface(bool hasInterface);
 
+        /**
+         * Sets wether or not this Group should make its children have
+         * a simpler background instead of the default one.
+         * Default is false.
+         *
+         * @param use wether or not it should use a simpler background
+         *
+         * @see useSimplerBackgroundForChildren
+         **/
         void setUseSimplerBackgroundForChildren(bool use);
 
         /**
