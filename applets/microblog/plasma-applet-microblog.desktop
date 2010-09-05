@@ -90,6 +90,7 @@ Comment[uk]=Оновіть і перегляньте ваш стан у міні
 Comment[x-test]=xxUpdate and view your microblog status.xx
 Comment[zh_CN]=更新并浏览您的微博客状态
 Comment[zh_TW]=更新並檢視您的 microblog 狀態。
+Keywords=identi.ca,twitter
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=view-pim-journal
