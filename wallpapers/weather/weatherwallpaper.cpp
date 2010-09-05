@@ -56,7 +56,6 @@ WeatherWallpaper::WeatherWallpaper(QObject * parent, const QVariantList & args )
     , m_model(0)
     , m_newStuffDialog(0)
 {
-    setPreviewDuringConfiguration(true);
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
 }
 
