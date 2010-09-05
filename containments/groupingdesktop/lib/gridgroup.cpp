@@ -98,6 +98,7 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     resize(200,200);
     setMinimumSize(100,50);
     setGroupType(AbstractGroup::ConstrainedGroup);
+    setUseSimplerBackgroundForChildren(true);
 
     setContentsMargins(10, 10, 10, 10);
 
@@ -196,52 +197,24 @@ void GridGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
 
 void GridGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
 {
-    setChildBorders(applet, true);
     applet->installEventFilter(this);
 }
 
 void GridGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
 {
-    setChildBorders(subGroup, true);
     subGroup->installEventFilter(this);
 }
 
 void GridGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *)
 {
     removeItem(applet);
-    setChildBorders(applet, false);
     applet->removeEventFilter(this);
 }
 
 void GridGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
 {
     removeItem(subGroup);
-    setChildBorders(subGroup, false);
     subGroup->removeEventFilter(this);
-}
-
-void GridGroup::setChildBorders(Plasma::Applet *a, bool added)
-{
-    if (added) {
-        m_savedAppletsHints.insert(a, a->backgroundHints());
-        a->setBackgroundHints(Plasma::Applet::NoBackground);
-    } else {
-        if (m_savedAppletsHints.contains(a)) {
-            a->setBackgroundHints(m_savedAppletsHints.value(a));
-        }
-    }
-}
-
-void GridGroup::setChildBorders(AbstractGroup *g, bool added)
-{
-    if (added) {
-        m_savedGroupsHints.insert(g, g->backgroundHints());
-        g->setBackgroundHints(AbstractGroup::PlainBackground);
-    } else {
-        if (m_savedGroupsHints.contains(g)) {
-            g->setBackgroundHints(m_savedGroupsHints.value(g));
-        }
-    }
 }
 
 QString GridGroup::pluginName() const

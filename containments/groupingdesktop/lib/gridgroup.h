@@ -68,8 +68,6 @@ class GridGroup : public AbstractGroup
         bool addItem(QGraphicsWidget *widget, int row, int column);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
         Position itemPosition(QGraphicsWidget *item) const;
-        void setChildBorders(Plasma::Applet *applet, bool added);
-        void setChildBorders(AbstractGroup *group, bool added);
         int isOnAColumnBorder(qreal x, int space = 0) const;
         int isOnARowBorder(qreal y, int space = 0) const;
         void saveCellsInfo();
@@ -83,8 +81,6 @@ class GridGroup : public AbstractGroup
         QList<QList<QGraphicsWidget *> > m_children; //the inner list is the column, the outer one the row
                                                      // |m_children.at(0).at(0)|m_children.at(0).at(1)|
                                                      // |m_children.at(1).at(0)|m_children.at(1).at(1)|
-        QMap<Plasma::Applet *, Plasma::Applet::BackgroundHints> m_savedAppletsHints;
-        QMap<AbstractGroup *, AbstractGroup::BackgroundHints> m_savedGroupsHints;
         QList<qreal> m_rowHeights;
         QList<qreal> m_rowY;
         QList<qreal> m_columnWidths;

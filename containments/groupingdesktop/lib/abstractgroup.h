@@ -287,6 +287,8 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         BackgroundHints backgroundHints() const;
 
+        bool useSimplerBackgroundForChildren() const;
+
         /**
          * Reimplemented from QGraphicsItem
          **/
@@ -451,6 +453,8 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * @see createConfigurationInterface
          **/
         void setHasConfigurationInterface(bool hasInterface);
+
+        void setUseSimplerBackgroundForChildren(bool use);
 
         /**
          * Called when any of the geometry constraints have been updated.

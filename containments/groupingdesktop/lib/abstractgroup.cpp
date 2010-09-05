@@ -53,6 +53,7 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
       backgroundHints(AbstractGroup::NoBackground),
       isLoading(true),
       hasInterface(false),
+      simplerBackgroundChildren(false),
       m_mainConfig(0)
 {
     background = new Plasma::FrameSvg(q);
@@ -198,6 +199,30 @@ QString AbstractGroupPrivate::configDialogId()
     return QString("%1settings").arg(id);
 }
 
+void AbstractGroupPrivate::setChildBorders(Plasma::Applet *a, bool added)
+{
+    if (added) {
+        m_savedAppletsHints.insert(a, a->backgroundHints());
+        a->setBackgroundHints(Plasma::Applet::NoBackground);
+    } else {
+        if (m_savedAppletsHints.contains(a)) {
+            a->setBackgroundHints(m_savedAppletsHints.value(a));
+        }
+    }
+}
+
+void AbstractGroupPrivate::setChildBorders(AbstractGroup *g, bool added)
+{
+    if (added) {
+        m_savedGroupsHints.insert(g, g->backgroundHints());
+        g->setBackgroundHints(AbstractGroup::PlainBackground);
+    } else {
+        if (m_savedGroupsHints.contains(g)) {
+            g->setBackgroundHints(m_savedGroupsHints.value(g));
+        }
+    }
+}
+
 //-----------------------------AbstractGroup------------------------------
 
 AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
@@ -280,6 +305,10 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
 
     kDebug()<<"adding applet"<<applet->id()<<"in group"<<id()<<"of type"<<pluginName();
 
+    if (d->simplerBackgroundChildren) {
+        d->setChildBorders(applet, true);
+    }
+
     d->applets << applet;
     d->addChild(applet);
 
@@ -317,6 +346,10 @@ void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
     }
 
     kDebug()<<"adding sub group"<<group->id()<<"in group"<<id()<<"of type"<<pluginName();
+
+    if (d->simplerBackgroundChildren) {
+        d->setChildBorders(group, true);
+    }
 
     group->d->parentGroup = this;
     d->subGroups << group;
@@ -363,6 +396,10 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet, AbstractGroup *newGroup
 {
     kDebug()<<"removing applet"<<applet->id()<<"from group"<<id()<<"of type"<<pluginName();
 
+    if (d->simplerBackgroundChildren) {
+        d->setChildBorders(applet, false);
+    }
+
     d->applets.removeAll(applet);
     KConfigGroup appletConfig = applet->config().parent();
     KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
@@ -383,6 +420,10 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet, AbstractGroup *newGroup
 void AbstractGroup::removeSubGroup(AbstractGroup *subGroup, AbstractGroup *newGroup)
 {
     kDebug()<<"removing sub group"<<subGroup->id()<<"from group"<<id()<<"of type"<<pluginName();
+
+    if (d->simplerBackgroundChildren) {
+        d->setChildBorders(subGroup, false);
+    }
 
     d->subGroups.removeAll(subGroup);
     KConfigGroup subGroupConfig = subGroup->config().parent();
@@ -595,6 +636,34 @@ void AbstractGroup::setBackgroundHints(BackgroundHints hints)
 AbstractGroup::BackgroundHints AbstractGroup::backgroundHints() const
 {
     return d->backgroundHints;
+}
+
+void AbstractGroup::setUseSimplerBackgroundForChildren(bool use)
+{
+    if (d->simplerBackgroundChildren != use) {
+        if (use) {
+            foreach (Plasma::Applet *applet, d->applets) {
+                d->setChildBorders(applet, true);
+            }
+            foreach (AbstractGroup *group, d->subGroups) {
+                d->setChildBorders(group, true);
+            }
+        } else {
+            foreach (Plasma::Applet *applet, d->applets) {
+                d->setChildBorders(applet, false);
+            }
+            foreach (AbstractGroup *group, d->subGroups) {
+                d->setChildBorders(group, false);
+            }
+        }
+
+        d->simplerBackgroundChildren = use;
+    }
+}
+
+bool AbstractGroup::useSimplerBackgroundForChildren() const
+{
+    return d->simplerBackgroundChildren;
 }
 
 void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *)

@@ -9,7 +9,8 @@ set(groupingcontainment_SRCS
         gridhandle.cpp
         floatinggroup.cpp
         stackinggroup.cpp
-        gridgroup.cpp)
+        gridgroup.cpp
+        flowgroup.cpp)
 
 
 kde4_add_ui_files(groupingcontainment_SRCS tabbinggroup_config.ui)

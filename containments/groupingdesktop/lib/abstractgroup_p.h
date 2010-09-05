@@ -38,6 +38,8 @@ class AbstractGroupPrivate
         void onInitCompleted();
         void onChildGeometryChanged();
         QString configDialogId();
+        void setChildBorders(Plasma::Applet *applet, bool added);
+        void setChildBorders(AbstractGroup *group, bool added);
 
         AbstractGroup *q;
         AbstractGroup *parentGroup;
@@ -54,6 +56,9 @@ class AbstractGroupPrivate
         AbstractGroup::BackgroundHints backgroundHints;
         bool isLoading;
         bool hasInterface;
+        bool simplerBackgroundChildren;
+        QMap<Plasma::Applet *, Plasma::Applet::BackgroundHints> m_savedAppletsHints;
+        QMap<AbstractGroup *, AbstractGroup::BackgroundHints> m_savedGroupsHints;
 
     private:
         KConfigGroup *m_mainConfig;
