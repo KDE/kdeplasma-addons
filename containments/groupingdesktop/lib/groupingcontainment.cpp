@@ -462,6 +462,16 @@ void GroupingContainmentPrivate::restoreGroups()
     foreach (AbstractGroup *group, groups) {
         emit group->childrenRestored();
     }
+
+    //since a Main Group won't have any modification that would cause it to save its settings
+    //we make sure here it saves all it has to save.
+    AbstractGroup *group = mainGroup;
+    if (group) {
+        KConfigGroup cg;
+        group->save(cg);
+        group->saveChildren();
+        emit q->configNeedsSaving();
+    }
 }
 
 void GroupingContainmentPrivate::prepareWidgetToMove()
@@ -818,11 +828,6 @@ void GroupingContainment::restoreContents(KConfigGroup &group)
     if (!d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
         AbstractGroup *group = addGroup(d->mainGroupPlugin);
         setMainGroup(group);
-        emit group->initCompleted();
-        KConfigGroup cg;
-        group->save(cg);
-        group->saveChildren();
-        emit configNeedsSaving();
     }
     if (!d->mainGroup) {
         kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";
