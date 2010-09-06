@@ -64,6 +64,7 @@ GroupingPanel::GroupingPanel(QObject *parent, const QVariantList &args)
 
 GroupingPanel::~GroupingPanel()
 {
+    delete m_separator;
 }
 
 void GroupingPanel::init()

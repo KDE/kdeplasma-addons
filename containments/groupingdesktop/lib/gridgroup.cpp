@@ -85,7 +85,7 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
 GridGroup::~GridGroup()
 {
-
+    delete m_separator;
 }
 
 void GridGroup::init()
