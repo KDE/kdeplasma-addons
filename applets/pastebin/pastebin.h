@@ -116,7 +116,7 @@ private slots:
 private:
     int iconSize();
     void showOverlay(bool show);
-    void postContent(QString text, QImage imageData);
+    void postContent(QString text, const QImage& imageData);
     void postClipboard(bool preferSelection);
 
     void addToHistory(const QString &url);

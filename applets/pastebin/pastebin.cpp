@@ -79,9 +79,10 @@ Pastebin::~Pastebin()
 
     // save history of URLs
     QString history;
-    for (int i = 0; i < m_actionHistory.size(); ++i) {
+    const int numberOfActionHistory = m_actionHistory.size();
+    for (int i = 0; i < numberOfActionHistory; ++i) {
         history.prepend(m_actionHistory.at(i)->toolTip());
-        history.prepend("|");
+        history.prepend('|');
         delete m_actionHistory.at(i);
     }
 
@@ -424,7 +425,8 @@ void Pastebin::configChanged()
     QStringList history = cg.readEntry("History", "").split('|', QString::SkipEmptyParts);
 
     m_actionHistory.clear();
-    for (int i = 0; i < history.size(); ++i) {
+    const int numberOfItems = history.size();
+    for (int i = 0; i < numberOfItems; ++i) {
         addToHistory(history.at(i));
     }
     setHistorySize(historySize);
@@ -629,7 +631,7 @@ void Pastebin::postClipboard(bool preferSelection)
 #endif //Q_WS_WIN
 }
 
-void Pastebin::postContent(QString text, QImage imageData)
+void Pastebin::postContent(QString text, const QImage& imageData)
 {
     QString sourceName;
     KUrl testPath(text);
