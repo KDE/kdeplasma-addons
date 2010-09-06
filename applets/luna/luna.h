@@ -38,7 +38,8 @@ class Luna : public Plasma::Applet
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-
+        void configChanged();
+        
     protected slots:
         void configAccepted();
 

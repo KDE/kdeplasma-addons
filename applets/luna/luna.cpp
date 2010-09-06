@@ -47,6 +47,7 @@ Luna::Luna(QObject *parent, const QVariantList &args)
 
 void Luna::init()
 {
+    configChanged();
     m_theme = new Plasma::Svg(this);
     m_theme->setImagePath("widgets/luna");
     m_theme->setContainsMultipleImages(true);
@@ -58,14 +59,17 @@ void Luna::init()
 
     Plasma::ToolTipManager::self()->registerWidget(this);
 
-    northHemisphere = config().readEntry("northHemisphere", true);
-
     connectToEngine();
 }
 
 Luna::~Luna()
 {
     delete m_theme;
+}
+
+void Luna::configChanged()
+{
+    northHemisphere = config().readEntry("northHemisphere", true);
 }
 
 void Luna::connectToEngine()
