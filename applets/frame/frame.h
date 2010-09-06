@@ -57,6 +57,7 @@ public:
 
 public slots:
     void createConfigurationInterface(KConfigDialog *parent);
+    void configChanged();
 
 protected Q_SLOTS:
     void dropEvent(QGraphicsSceneDragDropEvent *event);

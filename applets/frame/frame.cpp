@@ -97,6 +97,36 @@ void Frame::init()
     m_currentDay = QDate::currentDate();
     
     m_slideNumber = 0;
+
+    // Frame & Shadow dimensions
+    m_frameOutline = 8;
+    m_swOutline = 8;
+
+    // Initialize the slideshow timer
+    connect(m_mySlideShow, SIGNAL(pictureUpdated()), this, SLOT(scalePictureAndUpdate()));
+
+    connect(&m_waitForResize, SIGNAL(timeout()), this, SLOT(scalePictureAndUpdate()));
+    m_waitForResize.setSingleShot(true);
+    m_waitForResize.setInterval(200);
+    
+    configChanged();
+    initSlideShow();
+    
+    KConfigGroup cg = config();
+    if (frameReceivedUrlArgs) {
+        cg.writeEntry("url", m_currentUrl);
+        emit configNeedsSaving();
+    }
+
+    m_menuPresent = false;
+
+    QAction *openAction = action("run associated application");
+    openAction->setIcon(SmallIcon("image-x-generic"));
+    openAction->setText(i18n("&Open Picture..."));    
+}
+
+void Frame::configChanged()
+{
     // Get config values
     KConfigGroup cg = config();
     m_frameColor = cg.readEntry("frameColor", QColor(70, 90, 130)); //theme?
@@ -113,29 +143,6 @@ void Frame::init()
     m_potdProvider = cg.readEntry("potdProvider", QString());
     m_potd = cg.readEntry("potd", false);
     m_autoUpdateIntervall = cg.readEntry("autoupdate time", 0);
-
-    // Frame & Shadow dimensions
-    m_frameOutline = 8;
-    m_swOutline = 8;
-
-    // Initialize the slideshow timer
-    connect(m_mySlideShow, SIGNAL(pictureUpdated()), this, SLOT(scalePictureAndUpdate()));
-
-    connect(&m_waitForResize, SIGNAL(timeout()), this, SLOT(scalePictureAndUpdate()));
-    m_waitForResize.setSingleShot(true);
-    m_waitForResize.setInterval(200);
-
-    initSlideShow();
-    if (frameReceivedUrlArgs) {
-        cg.writeEntry("url", m_currentUrl);
-        emit configNeedsSaving();
-    }
-
-    m_menuPresent = false;
-
-    QAction *openAction = action("run associated application");
-    openAction->setIcon(SmallIcon("image-x-generic"));
-    openAction->setText(i18n("&Open Picture..."));
 }
 
 void Frame::slotOpenPicture()
