@@ -87,32 +87,32 @@ public:
     /**
      * @return ion source to use
      **/
-    QString source();
+    QString source() const;
 
     /**
      * @return update interval
      **/
-    int updateInterval();
+    int updateInterval() const;
 
     /**
      * @return temperature unit
      **/
-    int temperatureUnit();
+    int temperatureUnit() const;
 
     /**
      * @return pressure unit
      **/
-    int pressureUnit();
+    int pressureUnit() const;
 
     /**
      * @return speed unit
      **/
-    int speedUnit();
+    int speedUnit() const;
 
     /**
      * @return visibility unit
      **/
-    int visibilityUnit();
+    int visibilityUnit() const;
 
     /**
      * Sets header labels visible/hidden

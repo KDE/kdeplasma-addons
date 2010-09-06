@@ -275,32 +275,32 @@ void WeatherConfig::setSource(const QString &source)
     d->source = source;
 }
 
-QString WeatherConfig::source()
+QString WeatherConfig::source() const 
 {
     return d->source;
 }
 
-int WeatherConfig::updateInterval()
+int WeatherConfig::updateInterval() const
 {
     return d->ui.updateIntervalSpinBox->value();
 }
 
-int WeatherConfig::temperatureUnit()
+int WeatherConfig::temperatureUnit() const
 {
     return d->ui.temperatureComboBox->itemData(d->ui.temperatureComboBox->currentIndex()).toInt();
 }
 
-int WeatherConfig::pressureUnit()
+int WeatherConfig::pressureUnit() const
 {
     return d->ui.pressureComboBox->itemData(d->ui.pressureComboBox->currentIndex()).toInt();
 }
 
-int WeatherConfig::speedUnit()
+int WeatherConfig::speedUnit() const
 {
     return d->ui.speedComboBox->itemData(d->ui.speedComboBox->currentIndex()).toInt();
 }
 
-int WeatherConfig::visibilityUnit()
+int WeatherConfig::visibilityUnit() const
 {
     return d->ui.visibilityComboBox->itemData(d->ui.visibilityComboBox->currentIndex()).toInt();
 }
