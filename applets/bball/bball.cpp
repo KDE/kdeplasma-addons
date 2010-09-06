@@ -285,7 +285,7 @@ void bballApplet::readConfiguration()
     m_image_url = cg.readEntry("ImgURL", KStandardDirs::locate("data", "bball/bball.svgz"));
     m_overlay_enabled = cg.readEntry("OverlayEnabled", false);
     m_overlay_colour = cg.readEntry("OverlayColour", QColor(Qt::white));
-    m_overlay_opacity = cg.readEntry("OverlayOpactiy", 0);
+    m_overlay_opacity = cg.readEntry("OverlayOpacity", 0);
     m_ballSvg.setImagePath(m_image_url);
     updateScaledBallImage();
 
