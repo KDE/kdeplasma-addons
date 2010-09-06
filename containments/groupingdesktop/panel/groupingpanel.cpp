@@ -42,13 +42,16 @@ GroupingPanel::GroupingPanel(QObject *parent, const QVariantList &args)
       m_configureAction(0),
       m_newRowAction(0),
       m_delRowAction(0),
-      m_maskDirty(true)
+      m_maskDirty(true),
+      m_separator(new Plasma::Svg())
 {
     KGlobal::locale()->insertCatalog("libplasma_groupingcontainment");
 
     m_background = new Plasma::FrameSvg(this);
     m_background->setImagePath("widgets/panel-background");
     m_background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+    m_separator->setImagePath("widgets/line");
+    m_separator->setContainsMultipleImages(true);
     connect(m_background, SIGNAL(repaintNeeded()), this, SLOT(backgroundChanged()));
     setZValue(150);
     resize(m_currentSize);
@@ -302,9 +305,8 @@ void GroupingPanel::themeUpdated()
 
 void GroupingPanel::paintInterface(QPainter *painter,
                            const QStyleOptionGraphicsItem *option,
-                           const QRect& contentsRect)
+                           const QRect &)
 {
-    Q_UNUSED(contentsRect)
     //FIXME: this background drawing is bad and ugly =)
     // draw the background untransformed (saves lots of per-pixel-math)
     painter->resetTransform();
@@ -331,6 +333,24 @@ void GroupingPanel::paintInterface(QPainter *painter,
     painter->setRenderHint(QPainter::Antialiasing);
 
     m_background->paintFrame(painter, option->exposedRect);
+
+    QRectF rect = contentsRect();
+
+    if (formFactor() == Plasma::Vertical) {
+        QSizeF lineSize(m_separator->elementSize("vertical-line").width(), rect.height());
+        for (int i = 1; i < m_layout->count(); ++i) {
+            const qreal x = m_layout->itemAt(i)->geometry().topLeft().x();
+            QRectF r(rect.topLeft() + QPointF(x, 0), lineSize);
+            m_separator->paint(painter, r, "vertical-line");
+        }
+    } else {
+        QSizeF lineSize = QSizeF(rect.width(), m_separator->elementSize("horizontal-line").height());
+        for (int i = 1; i < m_layout->count(); ++i) {
+            const qreal y = m_layout->itemAt(i)->geometry().topLeft().y();
+            QRectF r(rect.topLeft() + QPointF(0, y), lineSize);
+            m_separator->paint(painter, r, "horizontal-line");
+        }
+    }
 }
 
 void GroupingPanel::setFormFactorFromLocation(Plasma::Location loc) {

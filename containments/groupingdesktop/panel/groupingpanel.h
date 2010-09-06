@@ -75,6 +75,7 @@ class GroupingPanel : public GroupingContainment
         QAction *m_newRowAction;
         QAction *m_delRowAction;
         QGraphicsLinearLayout *m_layout;
+        Plasma::Svg *m_separator;
 
         //cached values
         QSize m_currentSize;
