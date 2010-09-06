@@ -73,7 +73,7 @@ bballApplet::bballApplet(QObject * parent, const QVariantList & args):
 
 void bballApplet::init()
 {
-    readConfiguration();
+    configChanged();
     // monitor the scene for size changes (so we change the bouncing rect)
     if (scene())
         connect(scene(), SIGNAL(sceneRectChanged(QRectF)), this, SLOT(updateScreenRect()));
@@ -277,7 +277,7 @@ void bballApplet::configurationChanged()
     update();
 }
 
-void bballApplet::readConfiguration()
+void bballApplet::configChanged()
 {
     KConfigGroup cg = config ();
 

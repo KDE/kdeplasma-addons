@@ -65,8 +65,10 @@ protected Q_SLOTS:
     void updateScreenRect();
     void configurationChanged();
 
+public slots:
+    void configChanged();
+    
 private:
-    void readConfiguration();
     void updatePhysics();
     void playBoingSound();
     void syncGeometry();
