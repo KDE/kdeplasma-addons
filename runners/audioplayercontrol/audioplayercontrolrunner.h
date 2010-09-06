@@ -58,26 +58,26 @@ private:
     /** Tests if the player is running
       * @return @c true if the DBus interface of the player is availalbe, @c false in any other case
       */
-    bool playerRunning();
+    bool playerRunning() const;
 
     /** Starts the player detached from the current progress if it isn't started already.
       * @return @c true if it was successful, @c false in any other case
       */
-    bool startPlayer();
+    bool startPlayer() const;
 
     /** Returns the position of the song @c song in the playlist
       * @return the position of the song, -1 if the song is not in it
       */
-    int posInPlaylist(KUrl url);
+    int posInPlaylist(const KUrl& url);
     
     /** @return the number of the songs in the playlist */
-    int songsInPlaylist();
+    int songsInPlaylist() const;
 
     /** @return @c true if there's a next song, @c false in any other case */
-    bool nextSongAvailable();
+    bool nextSongAvailable() const;
 
     /** @return @c true if there's a previous song, @c false in any other case */
-    bool prevSongAvailable();
+    bool prevSongAvailable() const;
 
     /** Tests, if text and reg match
       * @param text the string

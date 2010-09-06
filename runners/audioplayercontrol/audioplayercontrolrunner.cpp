@@ -378,13 +378,13 @@ Plasma::QueryMatch AudioPlayerControlRunner::createMatch(Plasma::AbstractRunner*
     return match;
 }
 
-bool AudioPlayerControlRunner::playerRunning()
+bool AudioPlayerControlRunner::playerRunning() const
 {
     QDBusInterface intf(QString("org.mpris.%1").arg(m_player), "/");
     return intf.isValid();
 }
 
-bool AudioPlayerControlRunner::startPlayer()
+bool AudioPlayerControlRunner::startPlayer() const
 {
     if (playerRunning()) {
         return true;
@@ -404,7 +404,7 @@ bool AudioPlayerControlRunner::startPlayer()
     return true;
 }
 
-int AudioPlayerControlRunner::posInPlaylist(KUrl url)
+int AudioPlayerControlRunner::posInPlaylist(const KUrl& url)
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
     for (int i = 0; i < songsInPlaylist(); i++)
@@ -420,7 +420,7 @@ int AudioPlayerControlRunner::posInPlaylist(KUrl url)
     return -1;
 }
 
-int AudioPlayerControlRunner::songsInPlaylist()
+int AudioPlayerControlRunner::songsInPlaylist() const
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
     QDBusPendingReply<int> length = player.asyncCall("GetLength");
@@ -428,7 +428,7 @@ int AudioPlayerControlRunner::songsInPlaylist()
     return length.value();
 }
 
-bool AudioPlayerControlRunner::nextSongAvailable()
+bool AudioPlayerControlRunner::nextSongAvailable() const
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
     QDBusPendingReply<int> length = player.asyncCall("GetLength");
@@ -438,7 +438,7 @@ bool AudioPlayerControlRunner::nextSongAvailable()
     return !((length.value() - 1) == current.value());
 }
 
-bool AudioPlayerControlRunner::prevSongAvailable()
+bool AudioPlayerControlRunner::prevSongAvailable() const
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
     QDBusPendingReply<int> current = player.asyncCall("GetCurrentTrack");
