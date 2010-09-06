@@ -51,11 +51,13 @@ class GroupingPanel : public GroupingContainment
         void layoutMainGroup(AbstractGroup *mainGroup);
         void saveState(KConfigGroup &config) const;
         void restore(KConfigGroup &group);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
     private slots:
         void themeUpdated();
         void backgroundChanged();
         void addNewRow();
+        void delRow();
 
     private:
         /**
@@ -71,6 +73,7 @@ class GroupingPanel : public GroupingContainment
         Plasma::FrameSvg *m_background;
         QAction *m_configureAction;
         QAction *m_newRowAction;
+        QAction *m_delRowAction;
         QGraphicsLinearLayout *m_layout;
 
         //cached values

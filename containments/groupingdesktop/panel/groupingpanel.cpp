@@ -21,6 +21,8 @@
 
 #include <QAction>
 #include <QGraphicsLinearLayout>
+#include <QGraphicsSceneContextMenuEvent>
+#include <QGraphicsSceneMouseEvent>
 
 #include <KLocale>
 #include <KDebug>
@@ -39,6 +41,7 @@ GroupingPanel::GroupingPanel(QObject *parent, const QVariantList &args)
     : GroupingContainment(parent, args),
       m_configureAction(0),
       m_newRowAction(0),
+      m_delRowAction(0),
       m_maskDirty(true)
 {
     KGlobal::locale()->insertCatalog("libplasma_groupingcontainment");
@@ -110,9 +113,11 @@ QList<QAction *> GroupingPanel::contextualActions()
         connect(m_newRowAction, SIGNAL(triggered()), this, SLOT(addNewRow()));
     }
 
+    m_delRowAction->setVisible(m_delRowAction->data().toInt() != -1);
+
     QList<QAction *> actions = GroupingContainment::contextualActions();
 
-    actions << m_configureAction << m_newRowAction;
+    actions << m_configureAction << m_newRowAction << m_delRowAction;
     return actions;
 }
 
@@ -129,6 +134,18 @@ void GroupingPanel::addNewRow()
     layoutConfig.writeEntry("Index", m_layout->count() - 1);
 
     emit configNeedsSaving();
+}
+
+void GroupingPanel::delRow()
+{
+    AbstractGroup *g = static_cast<AbstractGroup *>(m_layout->itemAt(m_delRowAction->data().toInt()));
+    m_layout->removeItem(g);
+    if (mainGroup() == g) {
+        setMainGroup(static_cast<AbstractGroup *>(m_layout->itemAt(0)));
+    }
+    g->destroy();
+
+    m_delRowAction->setData(-1);
 }
 
 void GroupingPanel::backgroundChanged()
@@ -325,6 +342,7 @@ void GroupingPanel::setFormFactorFromLocation(Plasma::Location loc) {
             m_layout->setOrientation(Qt::Vertical);
             if (m_newRowAction) {
                 m_newRowAction->setText(i18n("Add A New Row"));
+                m_delRowAction->setText(i18n("Remove This Row"));
             }
             break;
         case RightEdge:
@@ -334,6 +352,7 @@ void GroupingPanel::setFormFactorFromLocation(Plasma::Location loc) {
             m_layout->setOrientation(Qt::Horizontal);
             if (m_newRowAction) {
                 m_newRowAction->setText(i18n("Add A New Column"));
+                m_delRowAction->setText(i18n("Remove This Column"));
             }
             break;
         case Floating:
@@ -373,6 +392,35 @@ void GroupingPanel::restore(KConfigGroup &group)
             group->setIsMainGroup();
         }
     }
+}
+
+void GroupingPanel::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (!m_delRowAction) {
+        m_delRowAction = new QAction(this);
+        m_delRowAction->setIcon(KIcon("list-remove"));
+        m_delRowAction->setData(-1);
+        if (formFactor() == Plasma::Vertical) {
+            m_delRowAction->setText(i18n("Remove This Column"));
+        } else {
+            m_delRowAction->setText(i18n("Remove This Row"));
+        }
+        connect(m_delRowAction, SIGNAL(triggered()), this, SLOT(delRow()));
+    }
+
+    if (m_layout->count() > 1) {
+        QPointF pos = event->pos();
+        for (int i = 0; i < m_layout->count(); ++i) {
+            if (m_layout->itemAt(i)->geometry().contains(pos)) {
+                m_delRowAction->setData(i);
+                break;
+            }
+        }
+    } else {
+        m_delRowAction->setData(-1);
+    }
+
+    GroupingContainment::mousePressEvent(event);
 }
 
 K_EXPORT_PLASMA_APPLET(groupingpanel, GroupingPanel)
