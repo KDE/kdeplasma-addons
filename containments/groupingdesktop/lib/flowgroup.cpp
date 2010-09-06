@@ -54,6 +54,12 @@ FlowGroup::~FlowGroup()
 
 }
 
+void FlowGroup::init()
+{
+    connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
+            this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
+}
+
 QString FlowGroup::pluginName() const
 {
     return QString("flow");
@@ -75,6 +81,11 @@ void FlowGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) c
     }
 
     group.writeEntry("Position", pos);
+}
+
+void FlowGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
+{
+    m_layout->removeItem(widget);
 }
 
 bool FlowGroup::showDropZone(const QPointF &pos)

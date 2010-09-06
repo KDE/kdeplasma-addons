@@ -33,6 +33,7 @@ class FlowGroup : public AbstractGroup
         explicit FlowGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         ~FlowGroup();
 
+        void init();
         QString pluginName() const;
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
@@ -45,6 +46,9 @@ class FlowGroup : public AbstractGroup
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         void constraintsEvent(Plasma::Constraints constraints);
+
+    private slots:
+        void onWidgetStartsMoving(QGraphicsWidget *widget);
 
     private:
         QGraphicsLinearLayout *m_layout;
