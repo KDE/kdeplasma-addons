@@ -45,7 +45,6 @@ unsigned int GroupingContainmentPrivate::s_groupId = 0;
 
 GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *containment)
                            : q(containment),
-                             interestingGroup(0),
                              mainGroup(0),
                              mainGroupId(0),
                              layout(0),
@@ -249,8 +248,8 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
 
     AbstractGroup *group = 0;
     if (interestingGroup) {
-        group = interestingGroup;
-        interestingGroup = 0;
+        group = interestingGroup.data();
+        interestingGroup.clear();
     } else {
         group = groupAt(pos.x() < 0 || pos.y() < 0 ? QPointF(10, 10) : pos);
     }
@@ -269,8 +268,8 @@ void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPoi
 {
     AbstractGroup *group = 0;
     if (interestingGroup) {
-        group = interestingGroup;
-        interestingGroup = 0;
+        group = interestingGroup.data();
+        interestingGroup.clear();
     } else {
         group = groupAt(pos, subGroup);
     }
@@ -345,6 +344,8 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
     movementHelperWidget->setZValue(0);
 
     if (interestingGroup) {
+        AbstractGroup *interesting = interestingGroup.data();
+
         QGraphicsItem *parent = widget->parentItem();
         QPointF initialPos(widget->pos());
 
@@ -352,7 +353,7 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 
         //removing the handle if changing group, because the new group could provide a different type.
         //would like to find a way to know if it is the case, but don't know how.
-        if (interestingGroup != widget->property("group").value<AbstractGroup *>()) {
+        if (interesting != widget->property("group").value<AbstractGroup *>()) {
             Handle *h = handles.value(widget);
             if (h) {
                 h->deleteLater();
@@ -364,21 +365,21 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
             Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
             AbstractGroup *group = static_cast<AbstractGroup *>(widget);
             if (applet) {
-                interestingGroup->addApplet(applet, false);
-            } else if (!group->isAncestorOf(interestingGroup) && interestingGroup != group) {
-                interestingGroup->addSubGroup(group, false);
+                interesting->addApplet(applet, false);
+            } else if (!group->isAncestorOf(interesting) && interesting != group) {
+                interesting->addSubGroup(group, false);
             } else {
-                interestingGroup = 0;
+                interestingGroup.clear();
                 return;
             }
         }
 
         QRectF geom(widget->boundingRect());
 
-        QPointF pos = interestingGroup->mapFromItem(parent, initialPos);
-        interestingGroup->layoutChild(widget, pos);
-        interestingGroup->save(*(interestingGroup->d->mainConfigGroup()));
-        interestingGroup->saveChildren();
+        QPointF pos = interesting->mapFromItem(parent, initialPos);
+        interesting->layoutChild(widget, pos);
+        interesting->save(*(interesting->d->mainConfigGroup()));
+        interesting->saveChildren();
 
         geom.translate(widget->parentItem()->mapFromItem(parent, initialPos));
         QRectF newGeom(widget->geometry());
@@ -396,7 +397,7 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
             blockSceneEventFilter = false;
         }
 
-        interestingGroup = 0;
+        interestingGroup.clear();
 
     }
 
@@ -739,8 +740,8 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 }
                 if (widget == d->movingWidget) {
                     if (d->interestingGroup) {
-                        d->interestingGroup->showDropZone(QPointF());
-                        d->interestingGroup = 0;
+                        d->interestingGroup.data()->showDropZone(QPointF());
+                        d->interestingGroup.clear();
                     }
 
                     QList<AbstractGroup *> groups = d->groupsAt(mapFromItem(widget, widget->contentsRect().center()), widget);
@@ -762,8 +763,8 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
 
             case QEvent::GraphicsSceneDragMove: {
                 if (d->interestingGroup) {
-                    d->interestingGroup->showDropZone(QPointF());
-                    d->interestingGroup = 0;
+                    d->interestingGroup.data()->showDropZone(QPointF());
+                    d->interestingGroup.clear();
                 }
 
                 QPointF pos(mapFromScene(static_cast<QGraphicsSceneDragDropEvent *>(event)->scenePos()));

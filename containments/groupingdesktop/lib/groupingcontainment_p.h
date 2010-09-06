@@ -64,7 +64,7 @@ class GroupingContainmentPrivate
 
         GroupingContainment *q;
         QList<AbstractGroup *> groups;
-        AbstractGroup *interestingGroup;
+        QWeakPointer<AbstractGroup> interestingGroup;
         QMap<QGraphicsWidget *, Handle *> handles;
         QAction *newGroupAction;
         KMenu *newGroupMenu;
