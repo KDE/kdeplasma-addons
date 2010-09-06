@@ -53,7 +53,8 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              movingWidget(0),
                              interestingWidget(0),
                              movementHelperWidget(new QGraphicsWidget(q)),
-                             widgetToBeSetMoving(0)
+                             widgetToBeSetMoving(0),
+                             blockSceneEventFilter(false)
 {
     newGroupAction = new QAction(i18n("Add a new group"), q);
     newGroupAction->setIcon(KIcon("list-add"));
@@ -318,9 +319,7 @@ void GroupingContainmentPrivate::onSubGroupRemovedFromGroup(AbstractGroup *subGr
 
 void GroupingContainmentPrivate::widgetMovedAnimationComplete()
 {
-    Plasma::Animation *anim = static_cast<Plasma::Animation *>(q->sender());
-    QGraphicsWidget *widget = static_cast<QGraphicsWidget *>(anim->targetWidget());
-    widget->installSceneEventFilter(q);
+    blockSceneEventFilter = false;
 }
 
 void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
@@ -336,6 +335,8 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
     if (interestingGroup) {
         QGraphicsItem *parent = widget->parentItem();
         QPointF initialPos(widget->pos());
+
+        blockSceneEventFilter = true;
 
         //removing the handle if changing group, because the new group could provide a different type.
         //would like to find a way to know if it is the case, but don't know how.
@@ -371,8 +372,6 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
         QRectF newGeom(widget->geometry());
 
         if (geom != newGeom) {
-            widget->removeSceneEventFilter(q);
-
             Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
             if (anim) {
                 q->connect(anim, SIGNAL(finished()), q, SLOT(widgetMovedAnimationComplete()));
@@ -381,9 +380,12 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
                 anim->setProperty("targetGeometry", newGeom);
                 anim->start(QAbstractAnimation::DeleteWhenStopped);
             }
+        } else {
+            blockSceneEventFilter = false;
         }
 
         interestingGroup = 0;
+
     }
 
     emit q->configNeedsSaving();
@@ -637,6 +639,10 @@ AbstractGroup *GroupingContainment::mainGroup() const
 
 bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event)
 {
+    if (d->blockSceneEventFilter) {
+        return true;
+    }
+
     Plasma::Applet *applet = qgraphicsitem_cast<Plasma::Applet *>(watched);
     AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(watched);
 

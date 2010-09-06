@@ -155,6 +155,8 @@ void FlowGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
     m_spacer->hide();
     m_layout->removeItem(m_spacer);
     m_layout->insertItem(m_spacerIndex, child);
+
+    m_layout->activate();
 }
 
 void FlowGroup::constraintsEvent(Plasma::Constraints constraints)

@@ -82,10 +82,17 @@ bool GridHandle::eventFilter(QObject *obj, QEvent *event)
 {
     QGraphicsWidget *w = qobject_cast<QGraphicsWidget *>(obj);
 
-    if (w == widget() && event->type() == QEvent::GraphicsSceneHoverLeave) {
+    if (w != widget()) {
+        return true;
+    }
+
+    if (event->type() == QEvent::GraphicsSceneHoverLeave) {
         if (!fullRect().contains(static_cast<QGraphicsSceneHoverEvent *>(event)->pos())) {
             emit disappearDone(this);
         }
+    } else if (event->type() == QEvent::GraphicsSceneMove) {
+        QGraphicsSceneMoveEvent *e = static_cast<QGraphicsSceneMoveEvent *>(event);
+        m_widgetPos = e->newPos();
     }
 
     return false;
@@ -133,6 +140,7 @@ void GridHandle::setHoverPos(const QPointF &hoverPos)
         }
     }
 
+    widget()->removeEventFilter(this);
     switch (m_location) {
         case Left:
             widget()->setPos(m_widgetPos + QPointF(SIZE, 0));
@@ -154,6 +162,7 @@ void GridHandle::setHoverPos(const QPointF &hoverPos)
             emit disappearDone(this);
         break;
     }
+    widget()->installEventFilter(this);
 }
 
 bool GridHandle::isHorizontal() const

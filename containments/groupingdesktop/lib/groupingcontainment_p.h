@@ -81,6 +81,7 @@ class GroupingContainmentPrivate
         QGraphicsWidget *interestingWidget;
         QGraphicsWidget *movementHelperWidget;
         QGraphicsWidget *widgetToBeSetMoving;
+        bool blockSceneEventFilter;
 
         static int s_maxZValue;
         static unsigned int s_groupId;
