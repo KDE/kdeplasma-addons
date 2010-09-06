@@ -54,6 +54,10 @@ class Timer : public Plasma::Applet
         void createConfigurationInterface(KConfigDialog *parent);
         void createMenuAction();
         void constraintsEvent(Plasma::Constraints constraints);
+        
+    public slots:
+        void configChanged();
+        
     private slots:
         void updateTimer();
         void slotCountDone();
@@ -93,6 +97,12 @@ class Timer : public Plasma::Applet
         QList<QAction *>actions;
         QActionGroup *lstActionTimer;
         QString m_separatorBasename;
+        QDateTime m_startedAt;
+        int running;
+        bool m_showTitle;
+        QString m_timerTitle;
+        bool m_hideSeconds;
+        
     protected slots:
         void configAccepted();
 };

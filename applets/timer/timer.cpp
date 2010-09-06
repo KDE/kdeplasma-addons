@@ -53,6 +53,7 @@ Timer::~Timer()
 
 void Timer::init()
 {
+    configChanged();
     m_svg = new Plasma::Svg(this);
     m_svg->setImagePath("widgets/timer");
     m_svg->setContainsMultipleImages(true);
@@ -77,38 +78,19 @@ void Timer::init()
     m_title = new Plasma::Label(this);
     m_title->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 
+    m_title->setVisible(m_showTitle);
+    m_title->setText(m_timerTitle);
+    
+    m_secondsDigit[0]->setVisible(!m_hideSeconds);
+    m_secondsDigit[1]->setVisible(!m_hideSeconds);
+    m_separator[1]->setVisible(!m_hideSeconds);
+    
     connect(m_hoursDigit[0], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
     connect(m_hoursDigit[1], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
     connect(m_minutesDigit[0], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
     connect(m_minutesDigit[1], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
     connect(m_secondsDigit[0], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
     connect(m_secondsDigit[1], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
-
-    KConfigGroup cg = config();
-    m_predefinedTimers = cg.readEntry("predefinedTimers", QStringList() << "00:00:30" << "00:01:00"
-                                                       << "00:02:00" << "00:05:00" << "00:07:30"
-                                                       << "00:10:00" << "00:15:00" << "00:20:00"
-                                                       << "00:25:00" << "00:30:00" << "00:45:00"
-                                                       << "01:00:00");
-    m_title->setVisible(cg.readEntry("showTitle", false));
-    m_title->setText(cg.readEntry("title", i18n("Timer")));
-
-    bool hideSeconds = cg.readEntry("hideSeconds", false);
-    m_secondsDigit[0]->setVisible(!hideSeconds);
-    m_secondsDigit[1]->setVisible(!hideSeconds);
-    m_separator[1]->setVisible(!hideSeconds);
-
-    m_showMessage = cg.readEntry("showMessage", true);
-    m_message = cg.readEntry("message", i18n("Timer Timeout"));
-    m_runCommand = cg.readEntry("runCommand", false);
-    m_command = cg.readEntry("command", "");
-
-    // Timers are kept non-localized in the config, to work across language changes.
-    QStringList localizedTimers;
-    foreach (const QString &timer, m_predefinedTimers) {
-        localizedTimers.append(CustomTimeEditor::toLocalizedTimer(timer));
-    }
-    m_predefinedTimers = localizedTimers;
 
     connect(&timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
 
@@ -124,13 +106,10 @@ void Timer::init()
     m_resetAction->setEnabled(false);
     connect(m_resetAction, SIGNAL(triggered(bool)), this, SLOT(resetTimer()));
     createMenuAction();
-
-    int running = cg.readEntry("running", 0);
+    
     m_running = running > 0;
-    m_startingSeconds = cg.readEntry("seconds", 0);
     if (m_running) {
-        QDateTime startedAt = cg.readEntry("startedAt", QDateTime::currentDateTime());
-        int tmpSeconds = running - startedAt.secsTo(QDateTime::currentDateTime());
+        int tmpSeconds = running - m_startedAt.secsTo(QDateTime::currentDateTime());
         if (tmpSeconds > 0){
             setSeconds(tmpSeconds);
             startTimer();
@@ -145,6 +124,35 @@ void Timer::init()
             m_resetAction->setEnabled(true);
         }
     }
+}
+
+void Timer::configChanged()
+{
+    KConfigGroup cg = config();
+    m_predefinedTimers = cg.readEntry("predefinedTimers", QStringList() << "00:00:30" << "00:01:00"
+                                                       << "00:02:00" << "00:05:00" << "00:07:30"
+                                                       << "00:10:00" << "00:15:00" << "00:20:00"
+                                                       << "00:25:00" << "00:30:00" << "00:45:00"
+                                                       << "01:00:00");
+    m_showTitle = cg.readEntry("showTitle", false);
+    m_timerTitle = cg.readEntry("title", i18n("Timer"));
+    m_hideSeconds = cg.readEntry("hideSeconds", false);
+    m_showMessage = cg.readEntry("showMessage", true);
+    m_message = cg.readEntry("message", i18n("Timer Timeout"));
+    m_runCommand = cg.readEntry("runCommand", false);
+    m_command = cg.readEntry("command", "");
+
+    // Timers are kept non-localized in the config, to work across language changes.
+    QStringList localizedTimers;
+    foreach (const QString &timer, m_predefinedTimers) {
+        localizedTimers.append(CustomTimeEditor::toLocalizedTimer(timer));
+    }
+    m_predefinedTimers = localizedTimers;
+    
+    m_startedAt = cg.readEntry("startedAt", QDateTime::currentDateTime());
+    
+    running = cg.readEntry("running", 0);
+    m_startingSeconds = cg.readEntry("seconds", 0);
 }
 
 void Timer::constraintsEvent(Plasma::Constraints constraints)
