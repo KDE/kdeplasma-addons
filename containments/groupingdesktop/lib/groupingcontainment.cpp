@@ -247,7 +247,13 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
         applet->setZValue(GroupingContainmentPrivate::s_maxZValue);
     }
 
-    AbstractGroup *group = groupAt(pos.x() < 0 || pos.y() < 0 ? QPointF(10, 10) : pos);
+    AbstractGroup *group = 0;
+    if (interestingGroup) {
+        group = interestingGroup;
+        interestingGroup = 0;
+    } else {
+        group = groupAt(pos.x() < 0 || pos.y() < 0 ? QPointF(10, 10) : pos);
+    }
 
     if (group) {
         group->addApplet(applet);
@@ -261,7 +267,13 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
 
 void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPointF &pos)
 {
-    AbstractGroup *group = groupAt(pos, subGroup);
+    AbstractGroup *group = 0;
+    if (interestingGroup) {
+        group = interestingGroup;
+        interestingGroup = 0;
+    } else {
+        group = groupAt(pos, subGroup);
+    }
 
     if (group && (group != subGroup)) {
         group->addSubGroup(subGroup);
@@ -749,16 +761,18 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
             break;
 
             case QEvent::GraphicsSceneDragMove: {
-                QPointF pos(mapFromScene(static_cast<QGraphicsSceneDragDropEvent *>(event)->scenePos()));
-                AbstractGroup *group = d->groupAt(pos);
-
                 if (d->interestingGroup) {
                     d->interestingGroup->showDropZone(QPointF());
                     d->interestingGroup = 0;
                 }
-                if (group) {
-                    group->showDropZone(mapToItem(group, pos));
-                    d->interestingGroup = group;
+
+                QPointF pos(mapFromScene(static_cast<QGraphicsSceneDragDropEvent *>(event)->scenePos()));
+                QList<AbstractGroup *> groups = d->groupsAt(pos);
+                foreach (AbstractGroup *group, groups) {
+                    if (group->showDropZone(mapToItem(group, pos))) {
+                        d->interestingGroup = group;
+                        break;
+                    }
                 }
             }
             break;
