@@ -69,8 +69,7 @@ void LeaveNote::init()
 {
     /* do config stuff */
     setHasConfigurationInterface(true);
-    KConfigGroup cg = config();
-    mUseKNotes = cg.readEntry("useKNotes", true);
+    configChanged();
 
     /* initialize layout */
     mTheme.setImagePath("widgets/notes");
@@ -150,7 +149,7 @@ void LeaveNote::createConfigurationInterface(KConfigDialog *dialog)
     ui.setupUi(widget);
 
     KConfigGroup cg = config();
-    ui.useKNotesCheckBox->setChecked(cg.readEntry("useKNotes", true));
+    ui.useKNotesCheckBox->setChecked(mUseKNotes);
 
     connect(dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
@@ -161,10 +160,14 @@ void LeaveNote::createConfigurationInterface(KConfigDialog *dialog)
 
 void LeaveNote::configAccepted()
 {
-    mUseKNotes = ui.useKNotesCheckBox->isChecked();
-
     KConfigGroup cg = config();
     cg.writeEntry("useKNotes", ui.useKNotesCheckBox->isChecked());
+}
+
+void LeaveNote::configChanged()
+{
+    KConfigGroup cg = config();
+    mUseKNotes = cg.readEntry("useKNotes", true);
 }
 
 bool LeaveNote::checkKNotesDBusInterface()

@@ -50,6 +50,9 @@ public:
     void paintInterface(QPainter *painter,
                         const QStyleOptionGraphicsItem *option,
                         const QRect& contentsRect);
+public slots:
+    void configChanged();
+
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
     void createConfigurationInterface(KConfigDialog *parent);
