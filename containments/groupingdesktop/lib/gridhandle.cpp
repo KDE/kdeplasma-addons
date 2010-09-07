@@ -160,7 +160,7 @@ void GridHandle::setHoverPos(const QPointF &hoverPos)
 
         default:
             emit disappearDone(this);
-        break;
+            return;
     }
     widget()->installEventFilter(this);
 }

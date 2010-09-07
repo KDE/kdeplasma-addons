@@ -34,13 +34,18 @@ REGISTER_GROUP(flow, FlowGroup)
 FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(parent, wFlags),
             m_layout(new QGraphicsLinearLayout(Qt::Horizontal)),
-            m_spacer(new Spacer(this))
+            m_spacer(new Spacer(this)),
+            m_spaceFiller(new QGraphicsWidget(this))
 {
     resize(200,200);
 
+    //using this widget to fill the empty space. Unfortunately it will cause 2*spacing of empty
+    //space, but i don't know how to do otherwise. addStretch() isn't enough.
+    m_spaceFiller->setMinimumSize(QSizeF(0, 0));
+    m_spaceFiller->setPreferredSize(QSizeF(0.1, 0.1)); //it doesn't like 0
+
     m_layout->setSpacing(4);
     m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-    m_layout->addStretch();
     setLayout(m_layout);
 
     m_spacer->hide();
@@ -56,6 +61,9 @@ FlowGroup::~FlowGroup()
 
 void FlowGroup::init()
 {
+    int stretchIndex = config().readEntry("StretchIndex", 0);
+    m_layout->insertItem(stretchIndex, m_spaceFiller);
+
     connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
             this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
 }
@@ -157,6 +165,15 @@ void FlowGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
     m_layout->insertItem(m_spacerIndex, child);
 
     m_layout->activate();
+
+    for (int i = 0; i < m_layout->count(); ++i) {
+        if (m_layout->itemAt(i) == m_spaceFiller) {
+            config().writeEntry("StretchIndex", i);
+            emit configNeedsSaving();
+
+            return;
+        }
+    }
 }
 
 void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
@@ -165,8 +182,10 @@ void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
         Plasma::FormFactor f = containment()->formFactor();
         if (f == Plasma::Vertical) {
             m_layout->setOrientation(Qt::Vertical);
+            m_spacer->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum));
         } else {
             m_layout->setOrientation(Qt::Horizontal);
+            m_spacer->setSizePolicy(QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred));
         }
     }
 }

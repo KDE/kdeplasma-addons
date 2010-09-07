@@ -53,6 +53,7 @@ class FlowGroup : public AbstractGroup
     private:
         QGraphicsLinearLayout *m_layout;
         Spacer *m_spacer;
+        QGraphicsWidget *m_spaceFiller;
 
         int m_spacerIndex;
 
