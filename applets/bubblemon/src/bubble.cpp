@@ -95,32 +95,18 @@ void
 Bubble::init()
 {
     m_svg->resize(geometry().width(), geometry().height());
-  
+
     m_sensorModel = new QStandardItemModel(this);
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
-    
+
     m_animator = new QTimer(this);
     m_animator->setInterval(75);
     connect(m_animator, SIGNAL(timeout()), this, SLOT(moveBubbles()));
-    
-    KConfigGroup cg = config();
-    m_animated = cg.readEntry("animated", true);
-    m_showText = cg.readEntry("showText", false);
-    showLabel(m_showText);
-    m_speed = cg.readEntry("speed", 500);
-    m_sensor = cg.readEntry("sensor", QString());
-    if (m_sensor.isEmpty())
-        setConfigurationRequired(true);
-    
-    if (m_animated)
-        m_animator->start();
-    else
-        m_animator->stop();
-    
-    m_interpolator = new QTimeLine(m_speed*1.5, this);
+
+    m_interpolator = new QTimeLine(m_speed, this);
     connect(m_interpolator, SIGNAL(frameChanged(int)), this, SLOT(interpolateValue()));
-    
+
     m_engine = dataEngine("systemmonitor");
     if (!m_engine->isValid()) {
         setFailedToLaunch(true,
@@ -129,7 +115,9 @@ Bubble::init()
     } else {
         connect(m_engine, SIGNAL(sourceAdded(const QString)), this, SLOT(connectSensor()));
     }
-    m_engine->connectSource(m_sensor, this, m_speed);
+
+    configChanged();
+
     m_bubbleHeight = m_svg->elementSize("bubble").height();
 }
 
@@ -470,40 +458,69 @@ void
 Bubble::configAccepted()
 {
     KConfigGroup cg = config();
+    bool changed = false;
+
     if (m_animated != ui.animateBubbles->isChecked()) {
-        m_animated = ui.animateBubbles->isChecked();
+        changed = true;
         cg.writeEntry("animated", m_animated);
-        if (m_animated)
-            m_animator->start();
-        else
-            m_animator->stop();
     }
 
     if (m_showText != ui.showText->isChecked()) {
-        m_showText = ui.showText->isChecked();
-        if (!m_showText)
-            showLabel(m_showText);
+        changed = true;
         cg.writeEntry("showText", m_showText);
     }
-    
+
     if (m_speed != ui.updateSpeed->value()) {
-        m_speed = ui.updateSpeed->value();
-        m_interpolator->setDuration(m_speed);
+        changed = true;
         cg.writeEntry("speed", m_speed);
         reconnectSensor();
     }
 
     QItemSelectionModel *selection = ui.sensorView->selectionModel();
     if (m_sensor != selection->currentIndex().data(Qt::UserRole+1)) {
-        disconnectSensor();
-        m_sensor = selection->currentIndex().data(Qt::UserRole+1).toString();
-        cg.writeEntry("sensor", m_sensor);
+        changed = true;
+        const QString sensor = selection->currentIndex().data(Qt::UserRole+1).toString();
+        cg.writeEntry("sensor", sensor);
         setConfigurationRequired(false);
+    }
+
+
+    if (changed) {
+        emit configNeedsSaving();
+        m_rebuildClip = true;
+        update();
+    }
+}
+
+void
+Bubble::configChanged()
+{
+    KConfigGroup cg = config();
+    m_animated = cg.readEntry("animated", true);
+    m_showText = cg.readEntry("showText", false);
+    showLabel(m_showText);
+
+    m_speed = cg.readEntry("speed", m_speed);
+    m_speed = ui.updateSpeed->value();
+    m_interpolator->setDuration(m_speed);
+
+    const QString sensor = cg.readEntry("sensor", m_sensor);
+    if (m_sensor != sensor) {
+        if (!m_sensor.isEmpty()) {
+            disconnectSensor();
+        }
+
+        m_sensor = sensor;
         connectSensor();
     }
-    
 
-    emit configNeedsSaving();
-    m_rebuildClip = true;
-    update();
+    if (m_sensor.isEmpty())
+        setConfigurationRequired(true);
+
+    if (m_animated)
+        m_animator->start();
+    else
+        m_animator->stop();
 }
+
+

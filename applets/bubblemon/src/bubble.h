@@ -51,7 +51,8 @@ class Bubble : public Plasma::Applet {
 
     public slots:
         void dataUpdated(QString name, Plasma::DataEngine::Data data);
-        
+        void configChanged();
+
     protected:
         QPainterPath shape() const;
         void constraintsEvent(Plasma::Constraints constraints);
