@@ -65,7 +65,7 @@ SystemLoadViewer::~SystemLoadViewer()
 
 void SystemLoadViewer::init()
 {
-    readConfig();
+    configChanged();
 
     sys_mon = dataEngine("systemmonitor");
     connect(sys_mon, SIGNAL(sourceAdded(const QString &)), this, SLOT(sourcesAdded(const QString &)));
@@ -600,7 +600,7 @@ void SystemLoadViewer::paintInterface(QPainter *p, const QStyleOptionGraphicsIte
     p->restore();
 }
 
-void SystemLoadViewer::readConfig()
+void SystemLoadViewer::configChanged()
 {
     KConfigGroup cg = config();
 

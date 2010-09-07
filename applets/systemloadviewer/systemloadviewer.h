@@ -60,7 +60,10 @@ public:
 protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-    
+
+    public slots:
+        void configChanged();
+        
 protected slots:
     void dataUpdated(const QString& source, const Plasma::DataEngine::Data &data);
     void configUpdated();
@@ -78,7 +81,6 @@ private:
     inline int cpuCount() const;
     inline int barCount() const;
 
-    void readConfig();
     void createConfigurationInterface(KConfigDialog *parent);
 
     void reconnectSources();
