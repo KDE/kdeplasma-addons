@@ -39,6 +39,7 @@ class FifteenPuzzle : public Plasma::Applet
     
   public slots:
     void showSolvedMessage(int ms);
+    void configChanged();
 
   private:
     void updateBoard();

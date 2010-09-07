@@ -53,14 +53,7 @@ void FifteenPuzzle::init()
 {
   createMenu();
 
-  KConfigGroup cg = config();
-
-  m_imagePath = cg.readEntry("ImagePath", QString());
-  m_usePlainPieces = m_imagePath.isEmpty() || cg.readEntry("UsePlainPieces", true);
-  m_showNumerals = cg.readEntry("ShowNumerals", true);
-
-  m_board->setColor(cg.readEntry("boardColor", QColor()));
-  m_board->setSize(qMax(4, cg.readEntry("boardSize",4)));
+  configChanged();
 
   // make sure nobody messed up with the config file
   if (!m_usePlainPieces) {
@@ -81,6 +74,18 @@ void FifteenPuzzle::init()
   }
 
   updateBoard();
+}
+
+void FifteenPuzzle::configChanged()
+{
+  KConfigGroup cg = config();
+
+  m_imagePath = cg.readEntry("ImagePath", QString());
+  m_usePlainPieces = m_imagePath.isEmpty() || cg.readEntry("UsePlainPieces", true);
+  m_showNumerals = cg.readEntry("ShowNumerals", true);
+
+  m_board->setColor(cg.readEntry("boardColor", QColor()));
+  m_board->setSize(qMax(4, cg.readEntry("boardSize",4)));
 }
 
 void FifteenPuzzle::constraintsEvent(Plasma::Constraints constraints)
