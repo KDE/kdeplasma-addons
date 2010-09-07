@@ -44,16 +44,7 @@ BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
 void BinaryClock::init()
 {
     ClockApplet::init();
-    KConfigGroup cg = config();
-    m_showSeconds = cg.readEntry("showSeconds", m_showSeconds);
-    m_showGrid = cg.readEntry("showGrid", m_showGrid);
-    m_showOffLeds = cg.readEntry("showOffLeds", m_showOffLeds);
-
-    m_customOnLedsColor = cg.readEntry("customOnLedsColor", false);
-    m_customOffLedsColor = cg.readEntry("customOffLedsColor", false);
-    m_customGridColor = cg.readEntry("customGridColor", false);
-
-    setCurrentTimezone(cg.readEntry("timezone", localTimezone()));
+    clockConfigChanged();
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
 
@@ -180,15 +171,15 @@ void BinaryClock::clockConfigAccepted()
     m_customGridColor = ui.gridCustomColorRadioButton->isChecked();
 
     if (m_customOnLedsColor){
-         m_onLedsColor = ui.onLedsCustomColorButton->color();
+        m_onLedsColor = ui.onLedsCustomColorButton->color();
     }
 
     if (m_customOffLedsColor){
-         m_offLedsColor = ui.offLedsCustomColorButton->color();
+        m_offLedsColor = ui.offLedsCustomColorButton->color();
     }
 
     if (m_customGridColor){
-         m_gridColor = ui.gridCustomColorButton->color();
+        m_gridColor = ui.gridCustomColorButton->color();
     }
 
     cg.writeEntry("showSeconds", m_showSeconds);
@@ -206,11 +197,22 @@ void BinaryClock::clockConfigAccepted()
     dataEngine("time")->disconnectSource(currentTimezone(), this);
     connectToEngine();
 
-    updateColors();
-
-    constraintsEvent(Plasma::AllConstraints);
     update();
     emit configNeedsSaving();
+}
+
+void BinaryClock::clockConfigChanged()
+{
+    KConfigGroup cg = config();
+    m_showSeconds = cg.readEntry("showSeconds", m_showSeconds);
+    m_showGrid = cg.readEntry("showGrid", m_showGrid);
+    m_showOffLeds = cg.readEntry("showOffLeds", m_showOffLeds);
+
+    m_customOnLedsColor = cg.readEntry("customOnLedsColor", false);
+    m_customOffLedsColor = cg.readEntry("customOffLedsColor", false);
+    m_customGridColor = cg.readEntry("customGridColor", false);
+
+    updateColors();
 }
 
 void BinaryClock::changeEngineTimezone(const QString &oldTimezone, const QString &newTimezone)

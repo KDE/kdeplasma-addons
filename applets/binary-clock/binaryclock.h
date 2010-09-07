@@ -51,6 +51,7 @@ class BinaryClock : public ClockApplet
     protected:
         void createClockConfigurationInterface(KConfigDialog *parent);
         void clockConfigAccepted();
+        void clockConfigChanged();
         void changeEngineTimezone(const QString &oldTimezone, const QString &newTimezone);
 
     private slots:
