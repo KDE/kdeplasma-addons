@@ -38,25 +38,7 @@ Life::Life(QObject *parent, const QVariantList &args)
 
 void Life::init()
 {
-    KConfigGroup cg = config();
-
-    m_cellsArrayHeight = cg.readEntry("verticalCells", 64);
-    m_cellsArrayWidth = cg.readEntry("horizontalCells", 64);
-    m_stepInterval = cg.readEntry("stepInterval", 1);
-    m_maxGensNumber = cg.readEntry("maxGensNumber", 600);
-    m_reflectVertical = cg.readEntry("vertReflectCheckbox", false);
-    m_reflectHorizontal = cg.readEntry("horizReflectCheckbox", false);
-    m_popDensityNumber = cg.readEntry("popDensityNumber", 50);
-
-    qreal left, top, right, bottom;
-    getContentsMargins(&left, &top, &right, &bottom);
-    setPreferredSize(m_cellsArrayWidth + left + right,
-                     m_cellsArrayHeight + top + bottom);
-    setMinimumSize(m_cellsArrayWidth + left + right, m_cellsArrayHeight + top + bottom);
-
-    initGame();
-
-    startUpdateTimer();
+    configChanged();
 }
 
 Life::~Life()
@@ -108,6 +90,29 @@ void Life::createConfigurationInterface(KConfigDialog *parent)
     ui.horizontalCells->setMaximum(maxCells);
 }
 
+void Life::configChanged()
+{
+    KConfigGroup cg = config();
+
+    m_cellsArrayHeight = cg.readEntry("verticalCells", 64);
+    m_cellsArrayWidth = cg.readEntry("horizontalCells", 64);
+    m_stepInterval = cg.readEntry("stepInterval", 1);
+    m_maxGensNumber = cg.readEntry("maxGensNumber", 600);
+    m_reflectVertical = cg.readEntry("vertReflectCheckbox", false);
+    m_reflectHorizontal = cg.readEntry("horizReflectCheckbox", false);
+    m_popDensityNumber = cg.readEntry("popDensityNumber", 50);
+
+    qreal left, top, right, bottom;
+    getContentsMargins(&left, &top, &right, &bottom);
+    setPreferredSize(m_cellsArrayWidth + left + right,
+                     m_cellsArrayHeight + top + bottom);
+    setMinimumSize(m_cellsArrayWidth + left + right, m_cellsArrayHeight + top + bottom);
+
+    initGame();
+
+    startUpdateTimer();
+}
+
 void Life::configAccepted()
 {
     KConfigGroup cg = config();
@@ -145,14 +150,6 @@ void Life::configAccepted()
 
     delete m_cells;
     delete m_nextGenerationCells;
-
-    initGame();
-
-    update();
-
-    startUpdateTimer();
-
-    updateConstraints(Plasma::AllConstraints);
 
     emit configNeedsSaving();
 }

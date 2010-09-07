@@ -43,6 +43,7 @@ class Life : public Plasma::Applet
 
     public slots:
         void createConfigurationInterface(KConfigDialog *parent);
+        void configChanged();
 
     protected slots:
         void configAccepted();
