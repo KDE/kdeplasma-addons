@@ -106,7 +106,6 @@ bool FlowGroup::showDropZone(const QPointF &pos)
         return false;
     }
 
-    const Plasma::FormFactor f = containment()->formFactor();
     int insertIndex = m_layout->count();
     const qreal x = pos.x();
     const qreal y = pos.y();
@@ -115,7 +114,7 @@ bool FlowGroup::showDropZone(const QPointF &pos)
     for (int i = 0; i < m_layout->count(); ++i) {
         QRectF siblingGeometry = m_layout->itemAt(i)->geometry();
 
-        if (f == Plasma::Horizontal) {
+        if (m_layout->orientation() == Qt::Horizontal) {
             const qreal middle = siblingGeometry.left() + (siblingGeometry.width() / 2.0);
             if (x <= middle && x > siblingGeometry.left() - 2) {
                 insertIndex = i;
@@ -124,7 +123,7 @@ bool FlowGroup::showDropZone(const QPointF &pos)
                 insertIndex = i + 1;
                 break;
             }
-        } else { // Plasma::Vertical
+        } else { // Vertical
             const qreal middle = siblingGeometry.top() + (siblingGeometry.height() / 2.0);
             if (y <= middle && y > siblingGeometry.top() - 2) {
                 insertIndex = i;
