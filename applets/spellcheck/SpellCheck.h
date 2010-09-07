@@ -1,6 +1,6 @@
 /***********************************************************************************
 * Spell Check: Plasmoid for fast spell checking.
-* Copyright (C) 2008 - 2009 Michal Dutkiewicz aka Emdek <emdeck@gmail.com>
+* Copyright (C) 2008 - 2010 Michal Dutkiewicz aka Emdek <emdeck@gmail.com>
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -41,6 +41,9 @@ public:
     ~SpellCheck();
 
     void init();
+
+public slots:
+    void configChanged();
 
 protected:
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);

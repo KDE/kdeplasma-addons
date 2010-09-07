@@ -1,6 +1,6 @@
 /***********************************************************************************
 * Spell Check: Plasmoid for fast spell checking.
-* Copyright (C) 2008 - 2009 Michal Dutkiewicz aka Emdek <emdeck@gmail.com>
+* Copyright (C) 2008 - 2010 Michal Dutkiewicz aka Emdek <emdeck@gmail.com>
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -170,6 +170,17 @@ void SpellCheck::timerEvent(QTimerEvent *event)
     killTimer(event->timerId());
 }
 
+void SpellCheck::configChanged()
+{
+    if (m_spellingDialog) {
+        m_spellingDialog->resize(config().readEntry("dialogSize", m_spellingDialog->size()));
+    }
+
+    if (m_textEdit) {
+        setLanguage(config().readEntry("dictionary", m_textEdit->highlighter()->currentLanguage()));
+    }
+}
+
 void SpellCheck::toggleDialog(bool pasteText, bool preferSelection)
 {
     if (!m_spellingDialog) {
@@ -178,7 +189,6 @@ void SpellCheck::toggleDialog(bool pasteText, bool preferSelection)
         m_spellingDialog->setWindowTitle(i18n("Spell checking"));
         m_spellingDialog->setWindowIcon(KIcon("tools-check-spelling"));
         m_spellingDialog->setResizeHandleCorners(Plasma::Dialog::All);
-        m_spellingDialog->resize(config().readEntry("dialogSize", m_spellingDialog->size()));
 
         m_textEdit = new KTextEdit(m_spellingDialog);
         m_textEdit->enableFindReplace(false);
@@ -213,7 +223,7 @@ void SpellCheck::toggleDialog(bool pasteText, bool preferSelection)
         verticalLayout->addWidget(m_textEdit);
         verticalLayout->addLayout(horizontalLayout);
 
-        setLanguage(config().readEntry("dictionary", m_textEdit->highlighter()->currentLanguage()));
+        configChanged();
 
         connect(m_spellingDialog, SIGNAL(dialogResized()), this, SLOT(dialogResized()));
         connect(spellingAction, SIGNAL(triggered()), m_textEdit, SLOT(checkSpelling()));
