@@ -57,6 +57,9 @@ protected:
     void initPidginLayout();
     void initQutIMLayout();
 
+public slots:
+    void configChanged();
+        
 protected slots:
     void configAccepted();
 

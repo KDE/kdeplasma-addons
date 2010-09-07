@@ -93,14 +93,20 @@ void IncomingMsg::init()
 {
     /* initialize layout */
     setHasConfigurationInterface(true);
+
+    configChanged();
+
+    initLayout();
+}
+
+void IncomingMsg::configChanged()
+{
     KConfigGroup cg = config();
     mShowKMail = cg.readEntry("showKMail", true);
     mShowXChat = cg.readEntry("showXChat", true);
     mShowKopete = cg.readEntry("showKopete", true);
     mShowPidgin = cg.readEntry("showPidgin", true);
     mShowQutIM = cg.readEntry("showQutIM", true);
-
-    initLayout();
 }
 
 void IncomingMsg::initEvolutionLayout()
