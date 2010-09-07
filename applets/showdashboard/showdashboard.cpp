@@ -30,6 +30,7 @@
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/tooltipmanager.h>
 #include <KIconLoader>
+#include <KGlobalSettings>
 
 
 ShowDashboard::ShowDashboard(QObject *parent, const QVariantList &args)
@@ -62,6 +63,8 @@ void ShowDashboard::init()
 
     connect(icon, SIGNAL(pressed(bool)),this, SLOT(toggleShowDashboard(bool)));
     connect(this, SIGNAL(activate()), this, SLOT(toggleShowDashboard()));
+    connect(KGlobalSettings::self(), SIGNAL(iconChanged(int)),
+        this, SLOT(iconSizeChanged(int)));
 }
 
 void ShowDashboard::toggleShowDashboard(bool pressed)
@@ -89,6 +92,36 @@ void ShowDashboard::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 void ShowDashboard::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
 {
     m_timer.stop();
+}
+
+QSizeF ShowDashboard::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
+{
+    if (which == Qt::PreferredSize) {
+        int iconSize;
+
+        switch (formFactor()) {
+            case Plasma::Planar:
+            case Plasma::MediaCenter:
+                iconSize = IconSize(KIconLoader::Desktop);
+                break;
+
+            case Plasma::Horizontal:
+            case Plasma::Vertical:
+                iconSize = IconSize(KIconLoader::Panel);
+                break;
+        }
+
+        return QSizeF(iconSize, iconSize);
+    }
+
+    return Plasma::Applet::sizeHint(which, constraint);
+}
+
+void ShowDashboard::iconSizeChanged(int group)
+{
+    if (group == KIconLoader::Desktop || group == KIconLoader::Panel) {
+        updateGeometry();
+    }
 }
 
 #include "showdashboard.moc"

@@ -43,6 +43,10 @@ class ShowDashboard : public Plasma::Applet
     protected:
         void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
         void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
+        QSizeF sizeHint(Qt::SizeHint which, const QSizeF & constraint = QSizeF()) const;
+        
+    private slots:
+        void iconSizeChanged(int group);
 
     private:
         QTimer m_timer;
