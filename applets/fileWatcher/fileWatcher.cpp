@@ -63,6 +63,15 @@ void FileWatcher::init()
   QObject::connect(watcher, SIGNAL(created(QString)), this, SLOT(loadFile(QString)));
   QObject::connect(watcher, SIGNAL(deleted(QString)), this, SLOT(fileDeleted(QString)));
 
+  configChanged();
+
+  updateRows();
+
+  textItem->update();
+}
+
+void FileWatcher::configChanged()
+{
   KConfigGroup cg = config();
 
   QString path = cg.readEntry("path", QString());
@@ -73,11 +82,7 @@ void FileWatcher::init()
   m_filters = cg.readEntry("filters", QStringList());
   m_showOnlyMatches = cg.readEntry("showOnlyMatches", false);
   m_useRegularExpressions = cg.readEntry("useRegularExpressions", false);
-
-  updateRows();
-
-  textItem->update();
-
+  
   if (path.isEmpty()) {
       setConfigurationRequired(true, i18n("Select a file to watch."));
   } else {
