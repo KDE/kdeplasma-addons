@@ -56,6 +56,7 @@ Qt::Orientations expandingDirections() const;
         void constraintsEvent(Plasma::Constraints constraints);
         void createClockConfigurationInterface(KConfigDialog *parent);
         void clockConfigAccepted();
+        void clockConfigChanged();
         void changeEngineTimezone(const QString &oldTimezone, const QString &newTimezone);
 
     private:

@@ -70,6 +70,22 @@ void Clock::init()
 
     m_locale = KGlobal::locale();
 
+    clockConfigChanged();
+
+    //By default we use the smallest readable font.
+    m_fontDate = QFont ( KGlobalSettings::smallestReadableFont() );
+
+    m_margin = 2;
+    m_verticalSpacing = 2;
+
+    Plasma::DataEngine* timeEngine = dataEngine("time");
+    timeEngine->connectSource(currentTimezone(), this, 6000, Plasma::AlignToMinute);
+
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(updateColors()));
+}
+
+void Clock::clockConfigChanged()
+{
     KConfigGroup cg = config();
 
     m_showTimezone = cg.readEntry("showTimezone", false);
@@ -93,17 +109,6 @@ void Clock::init()
     m_fontTime.setItalic(m_fontTimeItalic);
 
     m_adjustToHeight = cg.readEntry("adjustToHeight", 1);
-
-    //By default we use the smallest readable font.
-    m_fontDate = QFont ( KGlobalSettings::smallestReadableFont() );
-
-    m_margin = 2;
-    m_verticalSpacing = 2;
-
-    Plasma::DataEngine* timeEngine = dataEngine("time");
-    timeEngine->connectSource(currentTimezone(), this, 6000, Plasma::AlignToMinute);
-
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(updateColors()));
 }
 
 Qt::Orientations Clock::expandingDirections() const
