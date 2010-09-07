@@ -151,6 +151,9 @@ class ComicApplet : public Plasma::PopupApplet
         void fullView();
         void updateSize();
 
+    public slots:
+        void configChanged();
+        
     protected:
         QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
         bool eventFilter( QObject *receiver, QEvent *event );
@@ -161,7 +164,6 @@ class ComicApplet : public Plasma::PopupApplet
         void updateUsedComics();
         void updateButtons();
         void updateContextMenu();
-        void loadConfig();
         void saveConfig();
         bool isInPanel() const;
         void setTabBarVisible( bool isVisible );//HACK what was in 4.4 does not seem to work anymore, so this was added

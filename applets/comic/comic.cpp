@@ -143,8 +143,10 @@ void ComicApplet::init()
 
     Plasma::ToolTipManager::self()->registerWidget( this );
 
-    loadConfig();
-
+    configChanged();
+    
+    buttonBar();
+    
     mEngine = dataEngine( "comic" );
     mModel = new ComicModel( mEngine->query( "providers" ), mTabIdentifier, this );
     mProxy = new QSortFilterProxyModel( this );
@@ -568,7 +570,7 @@ void ComicApplet::checkDayChanged()
     mCurrentDay = QDate::currentDate();
 }
 
-void ComicApplet::loadConfig()
+void ComicApplet::configChanged()
 {
     KConfigGroup cg = config();
     mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList( QString() ) );
@@ -596,7 +598,7 @@ void ComicApplet::loadConfig()
     mSavingDir = cg.readEntry( "savingDir", QString() );
     mOldSource = mComicIdentifier + ':' + mStoredIdentifierSuffix;
 
-    buttonBar();
+    
 }
 
 void ComicApplet::saveConfig()
