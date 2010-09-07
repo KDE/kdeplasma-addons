@@ -43,6 +43,9 @@ class WebSlice: public Plasma::PopupApplet
         void createConfigurationInterface(KConfigDialog *parent);
         void configAccepted();
 
+    public slots:
+        void configChanged();
+        
     private slots:
         void sizeChanged (QSizeF newsize);
         void loadFinished(bool);

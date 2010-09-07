@@ -69,6 +69,15 @@ void WebSlice::init()
         }
     }
 
+    configChanged();
+}
+
+WebSlice::~WebSlice ()
+{
+}
+
+void WebSlice::configChanged()
+{
     KConfigGroup cg = config();
     if (!m_url.isValid() || m_url.isEmpty()) {
         m_url = cg.readEntry("url", "http://dot.kde.org/");
@@ -82,11 +91,7 @@ void WebSlice::init()
     m_size = cg.readEntry("size", m_size);
     setAssociatedApplicationUrls(KUrl::List(m_url));
 
-    //kDebug() << "url/element/slicegeometry:" << m_url << m_element << m_sliceGeometry;
-}
-
-WebSlice::~WebSlice ()
-{
+    //kDebug() << "url/element/slicegeometry:" << m_url << m_element << m_sliceGeometry;    
 }
 
 QGraphicsWidget* WebSlice::graphicsWidget()
