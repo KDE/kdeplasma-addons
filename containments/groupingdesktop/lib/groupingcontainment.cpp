@@ -439,7 +439,6 @@ void GroupingContainmentPrivate::restoreGroups()
                     parentGroup->restoreChildGroupInfo(group, groupInfoConfig);
                     group->setTransform(t);
                 }
-                emit group->initCompleted();
             }
         }
     }
@@ -473,6 +472,7 @@ void GroupingContainmentPrivate::restoreGroups()
     }
 
     foreach (AbstractGroup *group, groups) {
+        emit group->initCompleted();
         emit group->childrenRestored();
     }
 
