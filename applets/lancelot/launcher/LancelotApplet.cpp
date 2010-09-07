@@ -294,6 +294,12 @@ void LancelotApplet::showLancelot()
     d->lancelot->show(position.x(), position.y());
 }
 
+void LancelotApplet::configChanged()
+{
+    loadConfig();
+    applyConfig();
+}
+
 void LancelotApplet::toggleLancelot()
 {
     // If lancelot is not shown, we are going to show it

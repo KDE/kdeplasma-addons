@@ -136,6 +136,11 @@ void LancelotPart::init()
     updateIcon();
 }
 
+void LancelotPart::configChanged()
+{
+    applyConfig();
+}
+
 void LancelotPart::modelContentsUpdated()
 {
     kDebug() << m_model->modelCount();

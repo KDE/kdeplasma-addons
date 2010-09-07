@@ -50,6 +50,9 @@ public:
     L_Override void dragEnterEvent(QGraphicsSceneDragDropEvent * event);
     L_Override void dropEvent(QGraphicsSceneDragDropEvent * event);
 
+public Q_SLOTS:
+    void configChanged();
+
 private Q_SLOTS:
     void configAccepted();
     void search(const QString & query);

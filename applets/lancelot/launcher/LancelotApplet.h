@@ -41,6 +41,8 @@ public:
     void init();
     virtual QList< QAction * > contextualActions();
 
+public Q_SLOTS:
+    void configChanged();
 
 protected Q_SLOTS:
     void showLancelot();
