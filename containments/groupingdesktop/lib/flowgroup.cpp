@@ -100,33 +100,36 @@ bool FlowGroup::showDropZone(const QPointF &pos)
 {
     if (pos == QPointF()) {
         m_layout->removeItem(m_spacer);
+        m_layout->activate();
         m_spacer->hide();
 
         return false;
     }
 
-    Plasma::FormFactor f = containment()->formFactor();
+    const Plasma::FormFactor f = containment()->formFactor();
     int insertIndex = m_layout->count();
+    const qreal x = pos.x();
+    const qreal y = pos.y();
 
     //FIXME: needed in two places, make it a function?
     for (int i = 0; i < m_layout->count(); ++i) {
         QRectF siblingGeometry = m_layout->itemAt(i)->geometry();
 
         if (f == Plasma::Horizontal) {
-            qreal middle = siblingGeometry.left() + (siblingGeometry.width() / 2.0);
-            if (pos.x() < middle) {
+            const qreal middle = siblingGeometry.left() + (siblingGeometry.width() / 2.0);
+            if (x <= middle && x > siblingGeometry.left() - 2) {
                 insertIndex = i;
                 break;
-            } else if (pos.x() <= siblingGeometry.right()) {
+            } else if (x >= middle && x <= siblingGeometry.right() + 2) {
                 insertIndex = i + 1;
                 break;
             }
         } else { // Plasma::Vertical
-            qreal middle = siblingGeometry.top() + (siblingGeometry.height() / 2.0);
-            if (pos.y() < middle) {
+            const qreal middle = siblingGeometry.top() + (siblingGeometry.height() / 2.0);
+            if (y <= middle && y > siblingGeometry.top() - 2) {
                 insertIndex = i;
                 break;
-            } else if (pos.y() <= siblingGeometry.bottom()) {
+            } else if (y >= middle && y <= siblingGeometry.bottom() + 2) {
                 insertIndex = i + 1;
                 break;
             }
