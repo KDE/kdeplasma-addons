@@ -19,6 +19,7 @@
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/containment.h>
 #include <plasma/tooltipmanager.h>
+#include <KGlobalSettings>
 #include <KIcon>
 #include <kwindowsystem.h>
 #include <netwm.h>
@@ -70,6 +71,9 @@ void ShowDesktop::init()
         connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)), this, SLOT(reset()));
     }
 #endif
+
+    connect(KGlobalSettings::self(), SIGNAL(iconChanged(int)),
+        this, SLOT(iconSizeChanged(int)));
 }
 
 void ShowDesktop::minimizeAll()
@@ -110,6 +114,36 @@ void ShowDesktop::reset()
 {
     if (!m_goingDown) {
         m_down = false;
+    }
+}
+
+QSizeF ShowDesktop::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
+{
+    if (which == Qt::PreferredSize) {
+        int iconSize;
+
+        switch (formFactor()) {
+            case Plasma::Planar:
+            case Plasma::MediaCenter:
+                iconSize = IconSize(KIconLoader::Desktop);
+                break;
+
+            case Plasma::Horizontal:
+            case Plasma::Vertical:
+                iconSize = IconSize(KIconLoader::Panel);
+                break;
+        }
+
+        return QSizeF(iconSize, iconSize);
+    }
+
+    return Plasma::Applet::sizeHint(which, constraint);
+}
+
+void ShowDesktop::iconSizeChanged(int group)
+{
+    if (group == KIconLoader::Desktop || group == KIconLoader::Panel) {
+        updateGeometry();
     }
 }
 
