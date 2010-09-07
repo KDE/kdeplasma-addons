@@ -42,8 +42,8 @@ GroupingPanel::GroupingPanel(QObject *parent, const QVariantList &args)
       m_configureAction(0),
       m_newRowAction(0),
       m_delRowAction(0),
-      m_maskDirty(true),
-      m_separator(new Plasma::Svg())
+      m_separator(new Plasma::Svg()),
+      m_maskDirty(true)
 {
     KGlobal::locale()->insertCatalog("libplasma_groupingcontainment");
 
@@ -128,6 +128,7 @@ QList<QAction *> GroupingPanel::contextualActions()
 void GroupingPanel::addNewRow()
 {
     AbstractGroup *g = addGroup("flow");
+    g->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
     m_layout->addItem(g);
     g->setIsMainGroup();
 
@@ -340,15 +341,15 @@ void GroupingPanel::paintInterface(QPainter *painter,
     if (formFactor() == Plasma::Vertical) {
         QSizeF lineSize(m_separator->elementSize("vertical-line").width(), rect.height());
         for (int i = 1; i < m_layout->count(); ++i) {
-            const qreal x = m_layout->itemAt(i)->geometry().topLeft().x();
-            QRectF r(rect.topLeft() + QPointF(x, 0), lineSize);
+            const qreal x = rect.width() * i / m_layout->count();
+            QRectF r(rect.topLeft() + QPointF(x - lineSize.width() / 2., 0), lineSize);
             m_separator->paint(painter, r, "vertical-line");
         }
     } else {
         QSizeF lineSize = QSizeF(rect.width(), m_separator->elementSize("horizontal-line").height());
         for (int i = 1; i < m_layout->count(); ++i) {
-            const qreal y = m_layout->itemAt(i)->geometry().topLeft().y();
-            QRectF r(rect.topLeft() + QPointF(0, y), lineSize);
+            const qreal y = rect.height() * i / m_layout->count();
+            QRectF r(rect.topLeft() + QPointF(0, y - lineSize.height() / 2.), lineSize);
             m_separator->paint(painter, r, "horizontal-line");
         }
     }
@@ -387,6 +388,7 @@ void GroupingPanel::setFormFactorFromLocation(Plasma::Location loc) {
 
 void GroupingPanel::layoutMainGroup(AbstractGroup *mainGroup)
 {
+    mainGroup->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
     m_layout->addItem(mainGroup);
 
     KConfigGroup groupsConfig = config("Groups");
