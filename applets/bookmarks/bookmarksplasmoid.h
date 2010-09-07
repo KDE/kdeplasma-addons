@@ -52,6 +52,9 @@ public: // Plasma::Applet API
     virtual QList<QAction*> contextualActions();
     virtual void createConfigurationInterface(KConfigDialog* parent);
 
+public Q_SLOTS:
+    virtual void configChanged();
+
 protected:
     void updateFolderData();
 

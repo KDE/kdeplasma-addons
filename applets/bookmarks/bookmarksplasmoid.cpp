@@ -62,10 +62,6 @@ void BookmarksPlasmoid::init()
     mBookmarkManager->setEditorOptions(name(), true);
     connect(mBookmarkManager, SIGNAL(changed(const QString&, const QString&)), SLOT(onBookmarksChanged(const QString&)));
 
-    // read config
-    KConfigGroup configGroup = config();
-    mBookmarkFolderAddress = configGroup.readEntry(bookmarkFolderAddressConfigKey);
-
     // general
     setHasConfigurationInterface(true);
     connect(this, SIGNAL(activate()), SLOT(toggleMenu()));
@@ -90,7 +86,7 @@ void BookmarksPlasmoid::init()
 
     resize(IconSize(KIconLoader::Desktop) * 2, IconSize(KIconLoader::Desktop) * 2);
 
-    updateFolderData();
+    configChanged();
 }
 
 QList<QAction*> BookmarksPlasmoid::contextualActions()
@@ -163,13 +159,21 @@ void BookmarksPlasmoid::applyConfigChanges()
     const QString& bookmarkFolderAddress = mGeneralConfigEditor->bookmarkFolderAddress();
 
     if (mBookmarkFolderAddress != bookmarkFolderAddress) {
-        mBookmarkFolderAddress = bookmarkFolderAddress;
-
         KConfigGroup configGroup = config();
         configGroup.writeEntry(bookmarkFolderAddressConfigKey, mBookmarkFolderAddress);
 
         emit configNeedsSaving();
+    }
+}
 
+void BookmarksPlasmoid::configChanged()
+{
+    // read config
+    KConfigGroup configGroup = config();
+    const QString bookmarkFolderAddress = configGroup.readEntry(bookmarkFolderAddressConfigKey, mBookmarkFolderAddress);
+
+    if (mBookmarkFolderAddress != bookmarkFolderAddress) {
+        mBookmarkFolderAddress = bookmarkFolderAddress;
         updateFolderData();
     }
 }
