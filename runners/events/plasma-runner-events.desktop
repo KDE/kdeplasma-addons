@@ -1,7 +1,15 @@
 [Desktop Entry]
 Name=Calendar Events
+Name[pt]=Eventos do Calendário
+Name[pt_BR]=Eventos do calendário
+Name[sv]=Kalenderhändelser
+Name[uk]=Події календаря
 Name[x-test]=xxCalendar Eventsxx
 Comment=Calendar Events runner
+Comment[pt]=Execução dos eventos do calendário
+Comment[pt_BR]=Execução de eventos do calendário
+Comment[sv]=Visa kalenderhändelser
+Comment[uk]=Інструмент роботи з подіями календаря
 Comment[x-test]=xxCalendar Events runnerxx
 Icon=korganizer
 Type=Service
