@@ -63,7 +63,11 @@ void KnowledgeBase::init()
     m_searchTimeout->setSingleShot(true);
     connect(m_searchTimeout, SIGNAL(timeout()), this, SLOT(doQuery()));
     delayedQuery();
+    configChanged();
+}
 
+void KnowledgeBase::configChanged()    
+{
     m_refreshTime = config().readEntry("refreshTime", 5);
     //setAssociatedApplicationUrls(KUrl("http://opendesktop.org/knowledgebase"));
 }

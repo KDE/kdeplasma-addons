@@ -51,6 +51,9 @@ public:
     void init();
     QGraphicsWidget *graphicsWidget();
 
+public slots:
+    void configChanged();
+
 public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
     void configAccepted();
