@@ -31,11 +31,11 @@ ImageLoader::ImageLoader(const QString &path)
     m_path = path;
 }
 
-QImage ImageLoader::correctRotation(const QImage& tempImage)
+QImage ImageLoader::correctRotation(const QImage& tempImage, const QString &path)
 {
     QImage image = QImage();
     if (!tempImage.isNull()) {
-#ifdef HAVE_KEXIV2
+#ifdef HAVE_KEXIV2 
         KExiv2Iface::KExiv2 exif(path);
         QMatrix m;
         switch (exif.getImageOrientation()) {
@@ -81,7 +81,7 @@ QImage ImageLoader::correctRotation(const QImage& tempImage)
 
 void ImageLoader::run()
 {
-    QImage img = correctRotation(QImage(m_path));
+    QImage img = correctRotation(QImage(m_path), m_path);
     emit loaded(img);
 }
 

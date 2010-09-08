@@ -32,7 +32,7 @@ class ImageLoader : public QObject, public QRunnable
 
 public:
     ImageLoader(const QString &path);
-    static QImage correctRotation(const QImage& tempImage);
+    static QImage correctRotation(const QImage& tempImage, const QString &path);
     void run();
 
 Q_SIGNALS:
