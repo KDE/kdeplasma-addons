@@ -38,6 +38,8 @@ class GridGroup : public AbstractGroup
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup& group);
         QString pluginName() const;
         bool showDropZone(const QPointF &pos);
+        void restoreChildren();
+        void releaseChild(QGraphicsWidget *child);
         Handle *createHandleForChild(QGraphicsWidget *child);
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
@@ -60,8 +62,6 @@ class GridGroup : public AbstractGroup
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
         void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
         void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
-        void onWidgetStartsMoving(QGraphicsWidget *widget);
-        void onChildrenRestored();
         void adjustCells();
 
     private:

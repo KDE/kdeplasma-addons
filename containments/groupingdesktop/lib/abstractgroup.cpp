@@ -183,8 +183,10 @@ void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
     child->disconnect(q);
 }
 
-void AbstractGroupPrivate::onInitCompleted()
+void AbstractGroupPrivate::restoreChildren()
 {
+    q->restoreChildren();
+
     isLoading = false;
 }
 
@@ -235,8 +237,6 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setContentsMargins(10, 10, 10, 10);
     setBackgroundHints(StandardBackground);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-    connect(this, SIGNAL(initCompleted()), this, SLOT(onInitCompleted()));
 }
 
 AbstractGroup::~AbstractGroup()
@@ -560,6 +560,20 @@ void AbstractGroup::restore(KConfigGroup &group)
     }
 }
 
+void AbstractGroup::restoreChildren()
+{
+    foreach (Plasma::Applet *applet, d->applets) {
+        KConfigGroup appletConfig = applet->config().parent();
+        KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
+        restoreChildGroupInfo(applet, groupConfig);
+    }
+    foreach (AbstractGroup *subGroup, d->subGroups) {
+        KConfigGroup subGroupConfig = subGroup->config().parent();
+        KConfigGroup groupConfig(&subGroupConfig, QString("GroupInformation"));
+        restoreChildGroupInfo(subGroup, groupConfig);
+    }
+}
+
 bool AbstractGroup::showDropZone(const QPointF &pos)
 {
     Q_UNUSED(pos)
@@ -798,6 +812,11 @@ void AbstractGroup::updateConstraints(Plasma::Constraints constraints)
     }
 
     constraintsEvent(constraints);
+}
+
+void AbstractGroup::releaseChild(QGraphicsWidget *)
+{
+
 }
 
 AbstractGroup *AbstractGroup::load(const QString &name, QGraphicsItem *parent)

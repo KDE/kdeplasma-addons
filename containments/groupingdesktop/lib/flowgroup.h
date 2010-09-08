@@ -38,6 +38,7 @@ class FlowGroup : public AbstractGroup
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         bool showDropZone(const QPointF &pos);
+        void releaseChild(QGraphicsWidget *child);
         Handle *createHandleForChild(QGraphicsWidget *child);
 
         static QString prettyName();
@@ -46,9 +47,6 @@ class FlowGroup : public AbstractGroup
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         void constraintsEvent(Plasma::Constraints constraints);
-
-    private slots:
-        void onWidgetStartsMoving(QGraphicsWidget *widget);
 
     private:
         QGraphicsLinearLayout *m_layout;

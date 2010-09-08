@@ -35,6 +35,7 @@ class StackingGroup : public AbstractGroup
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         bool showDropZone(const QPointF &pos);
+        void releaseChild(QGraphicsWidget *child);
 
         static QString prettyName();
         static QSet<Plasma::FormFactor> availableOnFormFactors();
@@ -45,8 +46,6 @@ class StackingGroup : public AbstractGroup
         void wheelEvent(QGraphicsSceneWheelEvent *event);
 
     private slots:
-        void onInitCompleted();
-        void onWidgetStartsMoving(QGraphicsWidget *widget);
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
         void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);

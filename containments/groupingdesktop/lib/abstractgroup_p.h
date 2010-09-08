@@ -35,7 +35,7 @@ class AbstractGroupPrivate
         void destroyGroup();
         void appletDestroyed(Plasma::Applet *applet);
         void subGroupDestroyed(AbstractGroup *subGroup);
-        void onInitCompleted();
+        void restoreChildren();
         void onChildGeometryChanged();
         QString configDialogId();
         void setChildBorders(Plasma::Applet *applet, bool added);

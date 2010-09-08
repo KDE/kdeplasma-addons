@@ -72,7 +72,6 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_separator->setImagePath("widgets/line");
     m_separator->setContainsMultipleImages(true);
 
-    connect(this, SIGNAL(childrenRestored()), this, SLOT(onChildrenRestored()));
     connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(onAppletAdded(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
@@ -104,13 +103,12 @@ void GridGroup::init()
         }
         m_children.append(row);
     }
-
-    connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
-            this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
 }
 
-void GridGroup::onChildrenRestored()
+void GridGroup::restoreChildren()
 {
+    AbstractGroup::restoreChildren();
+
     bool modified = false;
     //check if we have empty rows
     for (int i = 0; i < m_children.size(); ++i) {
@@ -149,11 +147,11 @@ void GridGroup::onChildrenRestored()
     }
 }
 
-void GridGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
+void GridGroup::releaseChild(QGraphicsWidget *child)
 {
-    if (children().contains(widget) && immutability() == Plasma::Mutable) {
-        removeItem(widget);
-        widget->removeEventFilter(this);
+    if (children().contains(child) && immutability() == Plasma::Mutable) {
+        removeItem(child);
+        child->removeEventFilter(this);
     }
 }
 

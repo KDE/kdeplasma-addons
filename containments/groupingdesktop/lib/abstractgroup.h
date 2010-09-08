@@ -200,10 +200,20 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * Normally you don't reimplement this to restore the configuration
          * of the Group, but you restore it in init() using config().
          *
+         * @see restoreChildren
          * @see save
          * @see config
          **/
         virtual void restore(KConfigGroup &group);
+
+        /**
+         * Calls restoreChildGroupInfo for every child. When it is called
+         * applets(), subGroups() and children() are already available.
+         *
+         * @see restore
+         * @see restoreChildGroupInfo
+         **/
+        virtual void restoreChildren();
 
         /**
          * Shows a visual clue for drag and drop
@@ -367,6 +377,13 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * @see constraintsEvent
          **/
         void updateConstraints(Plasma::Constraints constraints = Plasma::AllConstraints);
+
+        /**
+         * Called when an Applet or a Group starts to be moved by the user.
+         * A Group might want to reimplement this to free the widget from
+         * a layout or whatever, so to allow it to be moved.
+         **/
+        virtual void releaseChild(QGraphicsWidget *child);
 
         /**
          * Used to register a Group to the GroupFactory. You shouldn't
@@ -553,28 +570,16 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
         void configNeedsSaving();
 
         /**
-         * Emitted when the Group has completed all its initialization routines
-         * and has been completely restored.
-         **/
-        void initCompleted();
-
-        /**
          * Emitted when the immutability changes.
          *
          * @param immutability the new immutability
          **/
         void immutabilityChanged(Plasma::ImmutabilityType immutability);
 
-        /**
-         * Emitted when all the children of this Group are restored.
-         **/
-        void childrenRestored();
-
     private:
         Q_PRIVATE_SLOT(d, void appletDestroyed(Plasma::Applet *applet))
         Q_PRIVATE_SLOT(d, void subGroupDestroyed(AbstractGroup *subGroup))
         Q_PRIVATE_SLOT(d, void destroyGroup())
-        Q_PRIVATE_SLOT(d, void onInitCompleted())
         Q_PRIVATE_SLOT(d, void onChildGeometryChanged())
 
         AbstractGroupPrivate *const d;

@@ -39,7 +39,6 @@ StackingGroup::StackingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
     m_spacer->hide();
 
-    connect(this, SIGNAL(initCompleted()), this, SLOT(onInitCompleted()));
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(onAppletRemoved(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
@@ -139,17 +138,9 @@ void StackingGroup::wheelEvent(QGraphicsSceneWheelEvent *event)
     event->accept();
 }
 
-void StackingGroup::onInitCompleted()
+void StackingGroup::releaseChild(QGraphicsWidget *child)
 {
-    connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
-            this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
-}
-
-void StackingGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
-{
-    if (children().contains(widget)) {
-        m_children.removeOne(widget);
-    }
+    m_children.removeOne(child);
 }
 
 void StackingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)

@@ -63,9 +63,6 @@ void FlowGroup::init()
 {
     int stretchIndex = config().readEntry("StretchIndex", 0);
     m_layout->insertItem(stretchIndex, m_spaceFiller);
-
-    connect(containment(), SIGNAL(widgetStartsMoving(QGraphicsWidget*)),
-            this, SLOT(onWidgetStartsMoving(QGraphicsWidget*)));
 }
 
 QString FlowGroup::pluginName() const
@@ -91,9 +88,9 @@ void FlowGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) c
     group.writeEntry("Position", pos);
 }
 
-void FlowGroup::onWidgetStartsMoving(QGraphicsWidget *widget)
+void FlowGroup::releaseChild(QGraphicsWidget *child)
 {
-    m_layout->removeItem(widget);
+    m_layout->removeItem(child);
 }
 
 bool FlowGroup::showDropZone(const QPointF &pos)

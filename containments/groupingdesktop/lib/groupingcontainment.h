@@ -91,8 +91,6 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
          * Typically this method will be called by an handle.
          *
          * @param widget the Applet or Group to be monitored
-         *
-         * @see widgetStartsMoving
          **/
         void setMovingWidget(QGraphicsWidget *widget);
 
@@ -201,15 +199,6 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
          * @see groupAdded
          **/
         void groupRemoved(AbstractGroup *group);
-
-        /**
-         * Emitted when an Applet or a Group start to be moved by the user.
-         * A Group might want to connect to this to free the widget from
-         * a grid or whatever, so to allow it to be moved.
-         *
-         * @see setMovingWidget
-         **/
-        void widgetStartsMoving(QGraphicsWidget *widget);
 
     private:
         Q_PRIVATE_SLOT(d, void handleDisappeared(Handle *handle))

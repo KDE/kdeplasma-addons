@@ -132,7 +132,7 @@ AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, co
     group->init();
 
     if (!loading) {
-        emit group->initCompleted();
+        group->d->restoreChildren();
     }
 
     return group;
@@ -436,7 +436,6 @@ void GroupingContainmentPrivate::restoreGroups()
                 if (parentGroup) {
                     QTransform t = group->transform();
                     parentGroup->addSubGroup(group, false);
-                    parentGroup->restoreChildGroupInfo(group, groupInfoConfig);
                     group->setTransform(t);
                 }
             }
@@ -462,7 +461,6 @@ void GroupingContainmentPrivate::restoreGroups()
                 if (group) {
                     QTransform t = applet->transform();
                     group->addApplet(applet, false);
-                    group->restoreChildGroupInfo(applet, groupConfig);
                     applet->setTransform(t);
                 }
             }
@@ -472,8 +470,7 @@ void GroupingContainmentPrivate::restoreGroups()
     }
 
     foreach (AbstractGroup *group, groups) {
-        emit group->initCompleted();
-        emit group->childrenRestored();
+        group->d->restoreChildren();
     }
 
     //since a Main Group won't have any modification that would cause it to save its settings
@@ -897,7 +894,10 @@ void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
         d->onWidgetMoved(d->movingWidget);
     }
 
-    emit widgetStartsMoving(widget);
+    AbstractGroup *group = widget->property("group").value<AbstractGroup *>();
+    if (group) {
+        group->releaseChild(widget);
+    }
 
     d->widgetToBeSetMoving = widget;
     //delay so to allow the widget to receive and react to the events caused by the changes
