@@ -97,13 +97,13 @@ bool FlowGroup::showDropZone(const QPointF &pos)
 {
     if (pos == QPointF()) {
         m_layout->removeItem(m_spacer);
-        m_layout->activate();
         m_spacer->hide();
 
         return false;
     }
 
     int insertIndex = m_layout->count();
+    qreal currPos = contentsRect().left();
     const qreal x = pos.x();
     const qreal y = pos.y();
 
@@ -112,6 +112,7 @@ bool FlowGroup::showDropZone(const QPointF &pos)
         QRectF siblingGeometry = m_layout->itemAt(i)->geometry();
 
         if (m_layout->orientation() == Qt::Horizontal) {
+            siblingGeometry.moveTopLeft(QPointF(currPos, 0));
             const qreal middle = siblingGeometry.left() + (siblingGeometry.width() / 2.0);
             if (x <= middle && x > siblingGeometry.left() - 2) {
                 insertIndex = i;
@@ -120,7 +121,10 @@ bool FlowGroup::showDropZone(const QPointF &pos)
                 insertIndex = i + 1;
                 break;
             }
+
+            currPos += siblingGeometry.width() + 4;
         } else { // Vertical
+            siblingGeometry.moveTopLeft(QPointF(0, currPos));
             const qreal middle = siblingGeometry.top() + (siblingGeometry.height() / 2.0);
             if (y <= middle && y > siblingGeometry.top() - 2) {
                 insertIndex = i;
@@ -129,6 +133,8 @@ bool FlowGroup::showDropZone(const QPointF &pos)
                 insertIndex = i + 1;
                 break;
             }
+
+            currPos += siblingGeometry.height() + 4;
         }
     }
 
