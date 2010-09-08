@@ -55,7 +55,7 @@ QalculateApplet::QalculateApplet(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
 
     m_settings = new QalculateSettings(this);
-    m_engine = new QalculateEngine(m_settings);
+    m_engine = new QalculateEngine(m_settings, this);
     m_history = new QalculateHistory(this);
     connect(m_engine, SIGNAL(formattedResultReady(const QString&)), this, SLOT(displayResult(const QString&)));
     connect(m_engine, SIGNAL(resultReady(const QString&)), this, SLOT(createTooltip()));
