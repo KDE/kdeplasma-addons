@@ -42,6 +42,7 @@
 #include <QTimer>
 #include <QPainter>
 #include <QSignalMapper>
+#include <plasma/containment.h>
 #include <plasma/corona.h>
 #include <plasma/theme.h>
 
@@ -648,9 +649,16 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
     QString label = key->label();
     if(label.size() > 0) {
         m_tooltip -> setText( key->label() );
-        Plasma::Corona * corona = qobject_cast<Plasma::Corona*>(scene());
-        m_tooltip -> move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + key->position() - QPoint(key->size().width()/2, 0) );
         m_tooltip -> resize( key->size()*2 );
+
+        Plasma::Containment *c = m_applet->containment();
+        if(c){
+            Plasma::Corona *corona = c->corona();
+            if(corona){
+                m_tooltip -> move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + key->position() - QPoint(key->size().width()/2, 0) );
+            }
+        }
+
         m_tooltip -> show();
     }
 }
