@@ -70,6 +70,7 @@ protected:
 
 public Q_SLOTS:
     void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
+    void configChanged();
 
 protected Q_SLOTS:
     void safeInit();
@@ -90,12 +91,9 @@ protected Q_SLOTS:
 private:
     void createViews();
     void updateViews();
-    void loadConfig();
     void saveConfig();
     void createTimers();
     void createViewProviders();
-
-    KConfigGroup m_configGroup;
 
     KdeObservatoryConfigGeneral  *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;

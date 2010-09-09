@@ -230,13 +230,14 @@ void KdeObservatory::safeInit()
 {
     if (m_projects.count() == 0)
     {
-        loadConfig();
+        configChanged();
+        saveConfig();
         createViewProviders();
         createTimers();
         createViews();
 
         m_sourceCounter = 4;
-        
+
         m_engine->connectSource("topActiveProjects", this);
         m_engine->connectSource("topProjectDevelopers", this);
         m_engine->connectSource("commitHistory", this);
@@ -340,6 +341,7 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configProjects->projects->resizeColumnsToContents();
     m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
 
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(cancelClicked()), m_viewTransitionTimer, SLOT(start()));
 
@@ -652,22 +654,22 @@ void KdeObservatory::updateViews()
     }
 }
 
-void KdeObservatory::loadConfig()
+void KdeObservatory::configChanged()
 {
-    m_configGroup = config();
+    KConfigGroup configGroup = config();
 
     // Config - General
-    m_activityRangeType = m_configGroup.readEntry("activityRangeType", 1);
-    m_commitExtent = m_configGroup.readEntry("commitExtent", 7);
-    m_commitFrom = m_configGroup.readEntry("commitFrom", QDate::currentDate().toString("yyyyMMdd"));
-    m_commitTo   = m_configGroup.readEntry("commitTo"  , QDate::currentDate().toString("yyyyMMdd"));
-    m_enableAutoViewChange = m_configGroup.readEntry("enableAutoViewChange", true);
-    m_viewsDelay = m_configGroup.readEntry("viewsDelay", 5);
+    m_activityRangeType = configGroup.readEntry("activityRangeType", 1);
+    m_commitExtent = configGroup.readEntry("commitExtent", 7);
+    m_commitFrom = configGroup.readEntry("commitFrom", QDate::currentDate().toString("yyyyMMdd"));
+    m_commitTo   = configGroup.readEntry("commitTo"  , QDate::currentDate().toString("yyyyMMdd"));
+    m_enableAutoViewChange = configGroup.readEntry("enableAutoViewChange", true);
+    m_viewsDelay = configGroup.readEntry("viewsDelay", 5);
 
     Plasma::DataEngine::Data presetsData = m_engine->query("allProjectsInfo");
 
-    QStringList viewNames = m_configGroup.readEntry("viewNames", presetsData["views"].toStringList());
-    QList<QVariant> viewActives = m_configGroup.readEntry("viewActives", presetsData["viewsActive"].toList());
+    QStringList viewNames = configGroup.readEntry("viewNames", presetsData["views"].toStringList());
+    QList<QVariant> viewActives = configGroup.readEntry("viewActives", presetsData["viewsActive"].toList());
 
     m_activeViews.clear();
     int viewsCount = viewNames.count();
@@ -675,11 +677,11 @@ void KdeObservatory::loadConfig()
         m_activeViews.append(QPair<QString, bool>(viewNames.at(i), viewActives.at(i).toBool()));
 
     // Config - Projects
-    QStringList projectNames = m_configGroup.readEntry("projectNames", presetsData["projectNames"].toStringList());
-    QStringList projectCommitSubjects = m_configGroup.readEntry("projectCommitSubjects", presetsData["projectCommitSubjects"].toStringList());
-    QStringList projectKrazyReports = m_configGroup.readEntry("projectKrazyReports", presetsData["projectKrazyReports"].toStringList());
-    QStringList projectKrazyFilePrefix = m_configGroup.readEntry("projectKrazyFilePrefix", presetsData["projectKrazyFilePrefixes"].toStringList());
-    QStringList projectIcons = m_configGroup.readEntry("projectIcons", presetsData["projectIcons"].toStringList());
+    QStringList projectNames = configGroup.readEntry("projectNames", presetsData["projectNames"].toStringList());
+    QStringList projectCommitSubjects = configGroup.readEntry("projectCommitSubjects", presetsData["projectCommitSubjects"].toStringList());
+    QStringList projectKrazyReports = configGroup.readEntry("projectKrazyReports", presetsData["projectKrazyReports"].toStringList());
+    QStringList projectKrazyFilePrefix = configGroup.readEntry("projectKrazyFilePrefix", presetsData["projectKrazyFilePrefixes"].toStringList());
+    QStringList projectIcons = configGroup.readEntry("projectIcons", presetsData["projectIcons"].toStringList());
 
     m_projects.clear();
     int projectsCount = projectNames.count();
@@ -697,8 +699,8 @@ void KdeObservatory::loadConfig()
     QList<QVariant> automaticallyInViews = presetsData["automaticallyInViews"].toList();
 
     // Config - Top Active Projects
-    QStringList topActiveProjectsViewNames = m_configGroup.readEntry("topActiveProjectsViewNames", defaultProjectNames);
-    QList<QVariant> topActiveProjectsViewActives = m_configGroup.readEntry("topActiveProjectsViewActives", automaticallyInViews);
+    QStringList topActiveProjectsViewNames = configGroup.readEntry("topActiveProjectsViewNames", defaultProjectNames);
+    QList<QVariant> topActiveProjectsViewActives = configGroup.readEntry("topActiveProjectsViewActives", automaticallyInViews);
 
     m_topActiveProjectsViewProjects.clear();
     int topActiveProjectsViewsCount = topActiveProjectsViewNames.count();
@@ -706,8 +708,8 @@ void KdeObservatory::loadConfig()
         m_topActiveProjectsViewProjects[topActiveProjectsViewNames.at(i)] = topActiveProjectsViewActives.at(i).toBool();
 
     // Config - Top Developers
-    QStringList topDevelopersViewNames = m_configGroup.readEntry("topDevelopersViewNames", defaultProjectNames);
-    QList<QVariant> topDevelopersViewActives = m_configGroup.readEntry("topDevelopersViewActives", automaticallyInViews);
+    QStringList topDevelopersViewNames = configGroup.readEntry("topDevelopersViewNames", defaultProjectNames);
+    QList<QVariant> topDevelopersViewActives = configGroup.readEntry("topDevelopersViewActives", automaticallyInViews);
 
     m_topDevelopersViewProjects.clear();
     int topDevelopersViewsCount = topDevelopersViewNames.count();
@@ -715,8 +717,8 @@ void KdeObservatory::loadConfig()
         m_topDevelopersViewProjects[topDevelopersViewNames.at(i)] = topDevelopersViewActives.at(i).toBool();
 
     // Config - Commit History
-    QStringList commitHistoryViewNames = m_configGroup.readEntry("commitHistoryViewNames", defaultProjectNames);
-    QList<QVariant> commitHistoryViewActives = m_configGroup.readEntry("commitHistoryViewActives", automaticallyInViews);
+    QStringList commitHistoryViewNames = configGroup.readEntry("commitHistoryViewNames", defaultProjectNames);
+    QList<QVariant> commitHistoryViewActives = configGroup.readEntry("commitHistoryViewActives", automaticallyInViews);
 
     m_commitHistoryViewProjects.clear();
     int commitHistoryViewsCount = commitHistoryViewNames.count();
@@ -724,26 +726,26 @@ void KdeObservatory::loadConfig()
         m_commitHistoryViewProjects[commitHistoryViewNames.at(i)] = commitHistoryViewActives.at(i).toBool();
 
     // Config - Krazy Report
-    QStringList krazyReportViewNames = m_configGroup.readEntry("krazyReportViewNames", defaultProjectNames);
-    QList<QVariant> krazyReportViewActives = m_configGroup.readEntry("krazyReportViewActives", automaticallyInViews);
+    QStringList krazyReportViewNames = configGroup.readEntry("krazyReportViewNames", defaultProjectNames);
+    QList<QVariant> krazyReportViewActives = configGroup.readEntry("krazyReportViewActives", automaticallyInViews);
 
     m_krazyReportViewProjects.clear();
     int krazyReportViewsCount = krazyReportViewNames.count();
     for (int i = 0; i < krazyReportViewsCount; ++i)
         m_krazyReportViewProjects[krazyReportViewNames.at(i)] = krazyReportViewActives.at(i).toBool();
-
-    saveConfig();
 }
 
 void KdeObservatory::saveConfig()
 {
     // General properties
-    m_configGroup.writeEntry("activityRangeType", m_activityRangeType);
-    m_configGroup.writeEntry("commitExtent", m_commitExtent);
-    m_configGroup.writeEntry("commitFrom", m_commitFrom);
-    m_configGroup.writeEntry("commitTo"  , m_commitTo);
-    m_configGroup.writeEntry("enableAutoViewChange", m_enableAutoViewChange);
-    m_configGroup.writeEntry("viewsDelay", m_viewsDelay);
+    KConfigGroup configGroup = config();
+
+    configGroup.writeEntry("activityRangeType", m_activityRangeType);
+    configGroup.writeEntry("commitExtent", m_commitExtent);
+    configGroup.writeEntry("commitFrom", m_commitFrom);
+    configGroup.writeEntry("commitTo"  , m_commitTo);
+    configGroup.writeEntry("enableAutoViewChange", m_enableAutoViewChange);
+    configGroup.writeEntry("viewsDelay", m_viewsDelay);
 
     QStringList viewNames;
     QList<bool> viewActives;
@@ -755,8 +757,8 @@ void KdeObservatory::saveConfig()
         viewNames << pair.first;
         viewActives << pair.second;
     }
-    m_configGroup.writeEntry("viewNames", viewNames);
-    m_configGroup.writeEntry("viewActives", viewActives);
+    configGroup.writeEntry("viewNames", viewNames);
+    configGroup.writeEntry("viewActives", viewActives);
 
     // Projects properties
     QStringList projectNames;
@@ -777,23 +779,23 @@ void KdeObservatory::saveConfig()
         projectIcons << project.icon;
     }
 
-    m_configGroup.writeEntry("projectNames", projectNames);
-    m_configGroup.writeEntry("projectCommitSubjects", projectCommitSubjects);
-    m_configGroup.writeEntry("projectKrazyReports", projectKrazyReports);
-    m_configGroup.writeEntry("projectKrazyFilePrefix", projectKrazyFilePrefix);
-    m_configGroup.writeEntry("projectIcons", projectIcons);
+    configGroup.writeEntry("projectNames", projectNames);
+    configGroup.writeEntry("projectCommitSubjects", projectCommitSubjects);
+    configGroup.writeEntry("projectKrazyReports", projectKrazyReports);
+    configGroup.writeEntry("projectKrazyFilePrefix", projectKrazyFilePrefix);
+    configGroup.writeEntry("projectIcons", projectIcons);
 
-    m_configGroup.writeEntry("topActiveProjectsViewNames", m_topActiveProjectsViewProjects.keys());
-    m_configGroup.writeEntry("topActiveProjectsViewActives", m_topActiveProjectsViewProjects.values());
+    configGroup.writeEntry("topActiveProjectsViewNames", m_topActiveProjectsViewProjects.keys());
+    configGroup.writeEntry("topActiveProjectsViewActives", m_topActiveProjectsViewProjects.values());
 
-    m_configGroup.writeEntry("topDevelopersViewNames", m_topDevelopersViewProjects.keys());
-    m_configGroup.writeEntry("topDevelopersViewActives", m_topDevelopersViewProjects.values());
+    configGroup.writeEntry("topDevelopersViewNames", m_topDevelopersViewProjects.keys());
+    configGroup.writeEntry("topDevelopersViewActives", m_topDevelopersViewProjects.values());
 
-    m_configGroup.writeEntry("commitHistoryViewNames", m_commitHistoryViewProjects.keys());
-    m_configGroup.writeEntry("commitHistoryViewActives", m_commitHistoryViewProjects.values());
+    configGroup.writeEntry("commitHistoryViewNames", m_commitHistoryViewProjects.keys());
+    configGroup.writeEntry("commitHistoryViewActives", m_commitHistoryViewProjects.values());
 
-    m_configGroup.writeEntry("krazyReportViewNames", m_krazyReportViewProjects.keys());
-    m_configGroup.writeEntry("krazyReportViewActives", m_krazyReportViewProjects.values());
+    configGroup.writeEntry("krazyReportViewNames", m_krazyReportViewProjects.keys());
+    configGroup.writeEntry("krazyReportViewActives", m_krazyReportViewProjects.values());
 
     emit configNeedsSaving();
 }
