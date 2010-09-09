@@ -148,7 +148,8 @@ ColorIcon::ColorIcon(const QColor &color)
 }
 
 Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_grabWidget(0)
+    : Plasma::Applet(parent, args),
+      m_grabWidget(0)
 {
     resize(40, 80);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
@@ -216,6 +217,14 @@ Kolourpicker::~Kolourpicker()
 
 void Kolourpicker::init()
 {
+    configChanged();
+}
+
+void Kolourpicker::configChanged()
+{
+    // remove old entries, we are only interested in ones from the config now
+    clearHistory(false);
+
     KConfigGroup cg = config();
 
     QList<QString> colorList = cg.readEntry("Colors", QList<QString>());
@@ -225,7 +234,6 @@ void Kolourpicker::init()
         addColor(QColor(color), false);
     }
 }
-
 
 void Kolourpicker::constraintsEvent(Plasma::Constraints constraints)
 {
@@ -273,7 +281,7 @@ bool Kolourpicker::eventFilter(QObject *watched, QEvent *event)
         const QColor color = pickColor(me->globalPos());
         kDebug() << event->type() << me->globalPos() << color;
         addColor(color);
-	colorActionTriggered(color);
+        colorActionTriggered(color);
     }
     return Plasma::Applet::eventFilter(watched, event);
 }

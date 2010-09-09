@@ -34,6 +34,7 @@ class Kolourpicker : public Plasma::Applet
 
     public Q_SLOTS:
         virtual void init();
+        void configChanged();
 
     protected:
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
@@ -45,23 +46,23 @@ class Kolourpicker : public Plasma::Applet
         void grabClicked();
         void historyClicked();
         void colorActionTriggered(QAction *act);
-	void colorActionTriggered(const QColor& color);
+        void colorActionTriggered(const QColor& color);
         void clearHistory(bool save = true);
         void installFilter();
-	void setDefaultColorFormat(QAction* act);
+        void setDefaultColorFormat(QAction* act);
 
     private:
         void addColor(const QColor &color, bool save = true);
         void saveData(KConfigGroup &cg);
-	QString toLatex(const QColor& color);
+        QString toLatex(const QColor& color);
         Plasma::ToolButton *m_grabButton;
         Plasma::ToolButton *m_configAndHistory;
         QMenu *m_configAndHistoryMenu;
         QHash<QColor, QAction *> m_menus;
         QStringList m_colors;
-	QStringList m_colors_format;
+        QStringList m_colors_format;
         QWidget *m_grabWidget;
-	QString m_color_format;
+        QString m_color_format;
 };
 
 inline uint qHash(const QColor &color)
