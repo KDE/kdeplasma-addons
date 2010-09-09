@@ -853,17 +853,12 @@ void GroupingContainment::restoreContents(KConfigGroup &group)
     d->loading = false;
 }
 
-void GroupingContainment::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     d->deleteGroupAction->setVisible(false);
     d->configureGroupAction->setVisible(false);
     d->lastClick = event->pos();
 
-    Plasma::Containment::mousePressEvent(event);
-}
-
-void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
     AbstractGroup *group = d->groupAt(event->pos());
 
     if (group && (immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable) && !group->isMainGroup()) {
@@ -873,9 +868,6 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
             d->configureGroupAction->setVisible(true);
             d->configureGroupAction->setData(group->id());
         }
-        d->lastClick = event->pos();
-        showContextMenu(event->pos(), event->screenPos());
-        return;
     }
 
     event->ignore();

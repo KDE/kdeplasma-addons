@@ -51,7 +51,7 @@ class GroupingPanel : public GroupingContainment
         void layoutMainGroup(AbstractGroup *mainGroup);
         void saveState(KConfigGroup &config) const;
         void restore(KConfigGroup &group);
-        void mousePressEvent(QGraphicsSceneMouseEvent *event);
+        void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 
     private slots:
         void themeUpdated();

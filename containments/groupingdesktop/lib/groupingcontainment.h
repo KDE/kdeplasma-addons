@@ -118,11 +118,6 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
         /**
          * Reimplemented from QGraphicsItem
          **/
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-
-        /**
-         * Reimplemented from QGraphicsItem
-         **/
         virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 
         /**

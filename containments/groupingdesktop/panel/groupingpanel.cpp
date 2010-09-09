@@ -22,7 +22,6 @@
 #include <QAction>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsSceneContextMenuEvent>
-#include <QGraphicsSceneMouseEvent>
 
 #include <KLocale>
 #include <KDebug>
@@ -417,7 +416,7 @@ void GroupingPanel::restore(KConfigGroup &group)
     }
 }
 
-void GroupingPanel::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void GroupingPanel::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     if (!m_delRowAction) {
         m_delRowAction = new QAction(this);
@@ -443,7 +442,7 @@ void GroupingPanel::mousePressEvent(QGraphicsSceneMouseEvent *event)
         m_delRowAction->setData(-1);
     }
 
-    GroupingContainment::mousePressEvent(event);
+    GroupingContainment::contextMenuEvent(event);
 }
 
 K_EXPORT_PLASMA_APPLET(groupingpanel, GroupingPanel)
