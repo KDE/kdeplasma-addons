@@ -42,6 +42,7 @@
 #include <QTimer>
 #include <QPainter>
 #include <QSignalMapper>
+#include <plasma/corona.h>
 #include <plasma/theme.h>
 
 #include "Helpers.h"
@@ -52,7 +53,7 @@
 QChar Helpers::mapXtoUTF8[0xffff+1];
 int Helpers::keysymsPerKeycode;
 
-PlasmaboardWidget::PlasmaboardWidget(Plasma::Applet *parent)
+PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     : QGraphicsWidget(parent),
       m_applet(parent)
 {
@@ -647,7 +648,8 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
     QString label = key->label();
     if(label.size() > 0) {
         m_tooltip -> setText( key->label() );
-        m_tooltip -> move( m_applet->popupPosition( key->size()*2 ) + key->position() - QPoint(key->size().width()/2, 0) );
+        Plasma::Corona * corona = qobject_cast<Plasma::Corona*>(scene());
+        m_tooltip -> move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + key->position() - QPoint(key->size().width()/2, 0) );
         m_tooltip -> resize( key->size()*2 );
         m_tooltip -> show();
     }
