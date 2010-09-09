@@ -128,6 +128,7 @@ class Notes : public Plasma::Applet
                             const QRect& contentsRect);
 
     public Q_SLOTS:
+        void configChanged();
         void configAccepted();
         void showOptions(bool show);
 

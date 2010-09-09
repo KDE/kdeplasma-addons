@@ -342,6 +342,15 @@ void Notes::init()
 
     m_autoFont = false;
 
+    configChanged();
+
+    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote()));
+    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(lineChanged()));
+    connect(m_textEdit, SIGNAL(mouseUnhovered()), this, SLOT(mouseUnhovered()));
+}
+
+void Notes::configChanged()
+{
     KConfigGroup cg = config();
     m_color = cg.readEntry("color", "yellow");
     // color must be before setPlainText("foo")
@@ -389,9 +398,8 @@ void Notes::init()
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     updateTextGeometry();
 
-    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote()));
-    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(lineChanged()));
-    connect(m_textEdit, SIGNAL(mouseUnhovered()), this, SLOT(mouseUnhovered()));
+    // make sure changes to the background colour take effect immediately
+    update();
 }
 
 /**
