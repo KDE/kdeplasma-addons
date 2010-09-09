@@ -58,12 +58,6 @@ void PanelIcon::configAccepted()
 
 void PanelIcon::configChanged()
 {
-    QStringList layoutList = KGlobal::dirs()->findAllResources("data", "plasmaboard/*.xml");
-    Q_FOREACH(QString path, layoutList){
-        m_layouts << new Layout(path);
-    }
-
-
     KConfigGroup cg = config();
     QString layout;
     layout = cg.readEntry("layout", layout);
@@ -75,6 +69,7 @@ void PanelIcon::configChanged()
         m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
     }
     if (m_plasmaboard) {
+        // TODO: Just do if layout actually changed
         initKeyboard(m_layout);
     }
 }
@@ -112,6 +107,11 @@ void PanelIcon::layoutNameChanged(const QString &name)
 
 void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
 {
+    QStringList layoutList = KGlobal::dirs()->findAllResources("data", "plasmaboard/*.xml");
+    Q_FOREACH(QString path, layoutList){
+        m_layouts << new Layout(path);
+    }
+
     QWidget *widget = new QWidget(parent);
     ui.setupUi(widget);
     parent->addPage(widget, i18nc("Different keyboard layouts","Layouts"), "plasmaboard");
