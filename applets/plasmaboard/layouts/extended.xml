@@ -62,7 +62,7 @@
   <fkey action="PAGEUP"></fkey>
 </row>
 <row height="1700" width="550">
-  <fkey action="CAPSLOCK" width="950"></fkey>
+  <skey action="CAPSLOCK" width="950"></skey>
   <key code="38"></key>
   <key code="39" ></key>
   <key code="40" ></key>
@@ -80,7 +80,7 @@
   <fkey action="PAGEDOWN"></fkey>
 </row>
 <row height="1700" width="550">
-  <fkey action="SHIFT" width="700"></fkey>
+  <skey action="SHIFT" width="700"></skey>
   <key code="94"></key>
   <key code="52"></key>
   <key code="53" ></key>
@@ -92,17 +92,17 @@
   <key code="59" ></key>
   <key code="60" ></key>
   <key code="61" ></key>
-  <fkey action="SHIFT" width="1500"></fkey>
+  <skey action="SHIFT" width="1500"></skey>
   <space width="130"></space>
   <fkey action="ARROWUP"></fkey>
 </row>
 <row height="1700" width="700">
-  <fkey action="CONTROLLEFT"></fkey>
-  <fkey action="SUPERLEFT"></fkey>
-  <fkey action="ALT"></fkey>
+  <skey action="CONTROLLEFT"></skey>
+  <skey action="SUPERLEFT"></skey>
+  <skey action="ALT"></skey>
   <fkey action="SPACE" width="4300"></fkey>
-  <fkey action="ALTGR"></fkey>
-  <fkey action="CONTROLRIGHT"></fkey>
+  <skey action="ALTGR"></skey>
+  <skey action="CONTROLRIGHT"></skey>
   <space width="210"></space>
   <fkey action="ARROWLEFT" width="550"></fkey>
   <fkey action="ARROWDOWN" width="550"></fkey>

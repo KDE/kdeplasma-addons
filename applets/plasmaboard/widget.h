@@ -122,6 +122,14 @@ private:
     FuncKey *createFunctionKey(const QPoint &point, const QSize &size, const QString &action);
 
     /**
+      * @param Position of the key
+      * @param Size of the key
+      * @param String which classifys the functional key that should be returned
+      * @return FuncKey corresponding to the action
+      */
+    FuncKey *createStickyKey(const QPoint &point, const QSize &size, const QString &action);
+
+    /**
       * @param Size of the pixmap requested
       * @return QPixmap in pressed state with correct size
       */
@@ -218,6 +226,7 @@ private:
     QTimer* m_repeatTimer;
     QSignalMapper* m_signalMapper;
     QList<StickyKey*> m_shiftKeys; // list of Shift-Keys on keyboard
+    QList<FuncKey*> m_specialKeys; // list of special keys like Backspace, F[1-12], Enter and so on
     QMap<int,BoardKey*> m_stickyKeys; // list of keys waiting for being unpressed
     QList<StickyKey*> m_superKeys; // list of all super-keys on keyboard
     QList<SwitchKey*> m_switchKeys; // list of all switch keys on keyboard

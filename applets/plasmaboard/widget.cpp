@@ -132,48 +132,12 @@ void PlasmaboardWidget::clearTooltip()
 
 FuncKey* PlasmaboardWidget::createFunctionKey(const QPoint &point, const QSize &size, const QString &action)
 {
-
-    if(action == "ALT"){
-        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Alt_L), QString(i18n("Alt")));
-        m_altKeys << k;
-        return k;
-    }
-    else if(action == "ALTGR"){
-        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_ISO_Level3_Shift), QString( i18nc("The Alt Gr key on a keyboard", "Alt Gr")));
-        m_altgrKeys << k;
-        return k;
-    }
-    else if(action == "BACKSPACE")
+    if(action == "BACKSPACE")
         return new BackspaceKey(point, size);
-    else if(action == "CAPSLOCK"){
-        CapsKey *k = new CapsKey(point, size);
-        m_capsKeys << k;
-        return k;
-    }
-    else if(action == "CONTROLLEFT"){
-        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Control_L), QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
-        m_ctlKeys << k;
-        return k;
-    }
-    else if(action == "CONTROLRIGHT"){
-        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Control_R), QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
-        m_ctlKeys << k;
-        return k;
-    }
     else if(action == "ENTER")
         return new EnterKey(point, size);
-    else if(action == "SHIFT") {
-        ShiftKey *k = new ShiftKey(point, size);
-        m_shiftKeys << k;
-        return k;
-    }
     else if(action == "SPACE")
-        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString());
-    else if(action == "SUPERLEFT"){
-        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Super_L), QString( i18nc("The super (windows) key on a keyboard", "Super")));
-        m_superKeys << k;
-        return k;
-    }
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString());    
     else if(action == "TAB")
         return new TabKey(point, size);
     else if(action == "ESCAPE")
@@ -259,7 +223,48 @@ FuncKey* PlasmaboardWidget::createFunctionKey(const QPoint &point, const QSize &
     else if(action == "KEYPAD9")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_9), QString(i18nc("9 key on the keypad", "9")));
     else if(action == "KEYPAD0")
-        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_0), QString(i18nc("0 key on the keypad", "0")));
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_0), QString(i18nc("0 key on the keypad", "0")));    
+    else
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString("Unkown"));
+}
+
+FuncKey* PlasmaboardWidget::createStickyKey(const QPoint &point, const QSize &size, const QString &action)
+{
+    if(action == "ALT"){
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Alt_L), QString(i18n("Alt")));
+        m_altKeys << k;
+        return k;
+    }
+    else if(action == "ALTGR"){
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_ISO_Level3_Shift), QString( i18nc("The Alt Gr key on a keyboard", "Alt Gr")));
+        m_altgrKeys << k;
+        return k;
+    }
+    else if(action == "CAPSLOCK"){
+        CapsKey *k = new CapsKey(point, size);
+        m_capsKeys << k;
+        return k;
+    }
+    else if(action == "CONTROLLEFT"){
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Control_L), QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
+        m_ctlKeys << k;
+        return k;
+    }
+    else if(action == "CONTROLRIGHT"){
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Control_R), QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
+        m_ctlKeys << k;
+        return k;
+    }
+    else if(action == "SHIFT") {
+        ShiftKey *k = new ShiftKey(point, size);
+        m_shiftKeys << k;
+        return k;
+    }
+    else if(action == "SUPERLEFT"){
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Super_L), QString( i18nc("The super (windows) key on a keyboard", "Super")));
+        m_superKeys << k;
+        return k;
+    }
     else if(action == "SWITCH"){
         SwitchKey* key = new SwitchKey(point, size, Helpers::keysymToKeycode(XK_VoidSymbol), this);
         m_switchKeys << key;
@@ -321,11 +326,11 @@ void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::Dat
 
 void PlasmaboardWidget::deleteKeys()
 {
-    qDeleteAll(m_funcKeys);
-    m_funcKeys.clear();
+    qDeleteAll(m_keys);
 
-    qDeleteAll(m_alphaKeys);
     m_alphaKeys.clear();
+    m_funcKeys.clear();
+    m_specialKeys.clear();
 
     m_keys.clear();
     m_altKeys.clear();
@@ -439,7 +444,10 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
                     }
                 }
                 else if(m_xmlReader.name() == "fkey"){
-                    m_funcKeys << createFunctionKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString());
+                    m_specialKeys << createFunctionKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString());
+                }
+                else if(m_xmlReader.name() == "skey"){
+                    m_funcKeys << createStickyKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString());
                 }
 
                 m_xmlReader.skipCurrentElement();
@@ -456,6 +464,9 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
         m_keys << key;
     }
     Q_FOREACH(BoardKey* key, m_funcKeys){
+        m_keys << key;
+    }
+    Q_FOREACH(BoardKey* key, m_specialKeys){
         m_keys << key;
     }
 
@@ -584,7 +595,7 @@ void PlasmaboardWidget::release(BoardKey *key)
     key->released(); // trigger X-unpress event done by key
     m_pressedList.removeAll(key);    
     clearTooltip(); // remove displayed tooltip
-    if(m_alphaKeys.contains((AlphaNumKey*) key)){
+    if(m_alphaKeys.contains((AlphaNumKey*) key) || m_specialKeys.contains((FuncKey*) key)){
         reset();
     }
     m_repeatTimer->stop();

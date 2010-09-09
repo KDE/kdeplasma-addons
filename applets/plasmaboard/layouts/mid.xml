@@ -13,7 +13,7 @@
   <key code="33" alt="0"></key>
 </row>
 <row height="2500" width="970">
-  <fkey action="SWITCH" width="1100"></fkey>
+  <skey action="SWITCH" width="1100"></skey>
   <key code="38" alt="period"  altshifted="less"></key>
   <key code="39" alt="dead_circumflex"  altshifted="dead_acute"></key>
   <key code="40" alt="colon"  altshifted="greater"></key>
@@ -25,7 +25,7 @@
   <key code="46" alt="ampersand"></key>
 </row>
 <row height="2500" width="970">
-  <fkey action="SHIFT" width="1400"></fkey>
+  <skey action="SHIFT" width="1400"></skey>
   <key code="52" alt="parenright" altshifted="bracketright"></key>
   <key code="53" alt="asterisk"></key>
   <key code="54" alt="plus"></key>

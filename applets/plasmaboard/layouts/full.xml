@@ -74,7 +74,7 @@
   <fkey action="KEYPADADD" width="450" height="3400"></fkey> 
 </row>
 <row height="1700" width="400">
-  <fkey action="CAPSLOCK" width="700"></fkey>
+  <skey action="CAPSLOCK" width="700"></skey>
   <key code="38"></key>
   <key code="39" ></key>
   <key code="40" ></key>
@@ -106,7 +106,7 @@
   <key code="59" ></key>
   <key code="60" ></key>
   <key code="61" ></key>
-  <fkey action="SHIFT" width="1075"></fkey>
+  <skey action="SHIFT" width="1075"></skey>
   <space width="250"></space>
   <fkey action="ARROWUP" width="450"></fkey>
   <space width="880"></space>
@@ -116,12 +116,12 @@
   <fkey action="KEYPADENTER" width="450" height="3400"></fkey> 
 </row>
 <row height="1600" width="550">
-  <fkey action="CONTROLLEFT"></fkey>
-  <fkey action="SUPERLEFT"></fkey>
-  <fkey action="ALT"></fkey>
+  <skey action="CONTROLLEFT"></skey>
+  <skey action="SUPERLEFT"></skey>
+  <skey action="ALT"></skey>
   <fkey action="SPACE" width="3100"></fkey>
-  <fkey action="ALTGR"></fkey>
-  <fkey action="CONTROLRIGHT"></fkey>
+  <skey action="ALTGR"></skey>
+  <skey action="CONTROLRIGHT"></skey>
   <space width="210"></space>
   <fkey action="ARROWLEFT" width="450"></fkey>
   <fkey action="ARROWDOWN" width="450"></fkey>

@@ -16,7 +16,7 @@
  
 </row>
 <row height="2500" width="800">
-  <fkey action="SWITCH" width="1000"></fkey>
+  <skey action="SWITCH" width="1000"></skey>
   <key code="38" alt="dead_acute"></key>
   <key code="39" alt="dead_circumflex"></key>
   <key code="40" alt="dead_tilde"></key>
@@ -30,7 +30,7 @@
   <key code="48" alt="parenleft"></key>  
 </row>
 <row height="2500" width="800">
-  <fkey action="SHIFT" width="1300"></fkey>
+  <skey action="SHIFT" width="1300"></skey>
   <key code="52" alt="parenright"></key>
   <key code="53" alt="asterisk"></key>
   <key code="54" alt="plus"></key>
