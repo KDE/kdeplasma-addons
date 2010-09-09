@@ -99,10 +99,6 @@ void TabbingGroup::init()
 
     m_tabs = group.readEntry("Tabs", QStringList());
 
-    if (m_tabs.isEmpty()) {
-        addTab();
-    }
-
     m_tabBar->setCurrentIndex(group.readEntry("CurrentIndex", 0));
 }
 
@@ -137,6 +133,15 @@ void TabbingGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 QString TabbingGroup::pluginName() const
 {
     return QString("tabbing");
+}
+
+void TabbingGroup::restoreChildren()
+{
+    AbstractGroup::restoreChildren();
+
+    if (m_tabs.isEmpty()) {
+        addTab();
+    }
 }
 
 void TabbingGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
