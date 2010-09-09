@@ -62,14 +62,14 @@ void PanelIcon::configChanged()
     QString layout;
     layout = cg.readEntry("layout", layout);
 
+    QString old_layout = m_layout;
     QString file = KStandardDirs::locate("data", layout); // lookup whether saved layout exists
     if (layout.size() > 0 && file.size() > 0){
         m_layout = file;
     } else { // fallback to default layout
         m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
     }
-    if (m_plasmaboard) {
-        // TODO: Just do if layout actually changed
+    if (m_plasmaboard && old_layout != m_layout) { // just rebuild the keyboard if the layout has actually changed
         initKeyboard(m_layout);
     }
 }
@@ -107,6 +107,8 @@ void PanelIcon::layoutNameChanged(const QString &name)
 
 void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
 {
+    qDeleteAll(m_layouts);
+    m_layouts.clear();
     QStringList layoutList = KGlobal::dirs()->findAllResources("data", "plasmaboard/*.xml");
     Q_FOREACH(QString path, layoutList){
         m_layouts << new Layout(path);
