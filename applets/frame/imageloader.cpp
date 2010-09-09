@@ -31,7 +31,7 @@ ImageLoader::ImageLoader(const QString &path)
     m_path = path;
 }
 
-QImage ImageLoader::correctRotation(const QImage& tempImage)
+QImage ImageLoader::correctRotation(const QImage& tempImage, const QString &path)
 {
     QImage image = QImage();
     if (!tempImage.isNull()) {
@@ -81,7 +81,7 @@ QImage ImageLoader::correctRotation(const QImage& tempImage)
 
 void ImageLoader::run()
 {
-    QImage img = correctRotation(QImage(m_path));
+    QImage img = correctRotation(QImage(m_path), m_path);
     emit loaded(img);
 }
 

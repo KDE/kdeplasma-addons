@@ -139,7 +139,7 @@ void Picture::slotFinished( KJob *job )
         setPath(path);
     }
     
-    emit checkImageLoaded(ImageLoader::correctRotation(image));
+    emit checkImageLoaded(ImageLoader::correctRotation(image, path));
 }
 
 void Picture::checkImageLoaded(QImage newImage)
