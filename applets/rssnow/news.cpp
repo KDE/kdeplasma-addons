@@ -58,6 +58,22 @@ News::~News()
 
 void News::init()
 {
+    m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
+    m_layout->setSpacing(2);
+    setLayout(m_layout);
+
+    m_header = new Header(this);
+    m_timer = new QTimer(this);
+
+    setAssociatedApplication("akregator");
+
+    configChanged();
+
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(switchItems()));
+}
+
+void News::configChanged()
+{
     KConfigGroup cg = config();
 
     m_interval       = cg.readEntry("interval", 30);
@@ -68,17 +84,7 @@ void News::init()
     m_showdroptarget = cg.readEntry("droptarget", true);
     m_feedlist       = cg.readEntry("feeds", QStringList("http://dot.kde.org/rss.xml"));
 
-    m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
-    m_layout->setSpacing(2);
-    setLayout(m_layout);
-
-    m_header = new Header(this);
-    m_timer = new QTimer(this);
-
-    setAssociatedApplication("akregator");
-
     updateScrollers();
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(switchItems()));
 }
 
 void News::switchItems()
@@ -125,7 +131,8 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     ui.setupUi(widget);
     QWidget *fWidget = new QWidget(0);
     feedsUi.setupUi(fWidget);
-    connect(parent, SIGNAL(accepted()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(feedsUi.addFeed, SIGNAL(clicked()), this, SLOT(addFeed()));
     connect(feedsUi.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));
     connect(feedsUi.feedList, SIGNAL( itemSelectionChanged ()), this, SLOT(slotItemChanged()));
@@ -240,8 +247,10 @@ void News::configAccepted()
     cg.writeEntry("droptarget", m_showdroptarget);
     cg.writeEntry("maxAge", m_maxAge);
 
-    updateScrollers();
     emit configNeedsSaving();
+
+    // updateScrollers() is already called from configChanged(), which will
+    // always be called after this method when the config dialog is applied
 }
 
 void News::updateScrollers()
@@ -339,7 +348,6 @@ void News::dropEvent(QGraphicsSceneDragDropEvent *event)
             emit configNeedsSaving();
 
             updateScrollers();
-            connectToEngine();
         }
     }
 }
@@ -369,8 +377,6 @@ void News::constraintsEvent(Plasma::Constraints constraints)
                 updateScrollers();
             } else {
                 m_collapsed = false;
-                m_logo = config().readEntry("logo", true);
-                m_feedlist = config().readEntry("feeds", QStringList("http://dot.kde.org/rss.xml"));
                 updateScrollers();
             }
         }

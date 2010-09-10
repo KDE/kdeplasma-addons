@@ -45,6 +45,7 @@ class News : public Plasma::Applet
         void init();
 
     public slots:
+        void configChanged();
         void createConfigurationInterface(KConfigDialog *parent);
         void switchItems();
 
