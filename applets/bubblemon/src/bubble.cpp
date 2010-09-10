@@ -462,17 +462,17 @@ Bubble::configAccepted()
 
     if (m_animated != ui.animateBubbles->isChecked()) {
         changed = true;
-        cg.writeEntry("animated", m_animated);
+        cg.writeEntry("animated", ui.animateBubbles->isChecked());
     }
 
     if (m_showText != ui.showText->isChecked()) {
         changed = true;
-        cg.writeEntry("showText", m_showText);
+        cg.writeEntry("showText", ui.showText->isChecked());
     }
 
     if (m_speed != ui.updateSpeed->value()) {
         changed = true;
-        cg.writeEntry("speed", m_speed);
+        cg.writeEntry("speed", ui.updateSpeed->value());
         reconnectSensor();
     }
 
@@ -487,6 +487,7 @@ Bubble::configAccepted()
 
     if (changed) {
         emit configNeedsSaving();
+        configChanged();
         m_rebuildClip = true;
         update();
     }
@@ -501,7 +502,6 @@ Bubble::configChanged()
     showLabel(m_showText);
 
     m_speed = cg.readEntry("speed", m_speed);
-    m_speed = ui.updateSpeed->value();
     m_interpolator->setDuration(m_speed);
 
     const QString sensor = cg.readEntry("sensor", m_sensor);
