@@ -63,7 +63,7 @@ class Bubble : public Plasma::Applet {
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
         
     private slots:
-        void configAccepted();
+        void writeConfig();
         void moveBubbles();
         void showLabel(bool);
         void interpolateValue();

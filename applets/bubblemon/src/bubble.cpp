@@ -447,15 +447,15 @@ Bubble::createConfigurationInterface(KConfigDialog* dlg)
     ui.searchBox->setProxy(proxy);
 
     dlg->addPage(page, i18nc("@title:group Title for the bubblemon settings page","General"), icon());
-    connect(dlg, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-    connect(dlg, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    connect(dlg, SIGNAL(applyClicked()), this, SLOT(writeConfig()));
+    connect(dlg, SIGNAL(okClicked()), this, SLOT(writeConfig()));
     ui.animateBubbles->setChecked(m_animated ? Qt::Checked : Qt::Unchecked);
     ui.showText->setChecked(m_showText ? Qt::Checked : Qt::Unchecked);
     ui.updateSpeed->setValue(m_speed);
 }
 
 void
-Bubble::configAccepted()
+Bubble::writeConfig()
 {
     KConfigGroup cg = config();
     bool changed = false;
@@ -473,13 +473,12 @@ Bubble::configAccepted()
     if (m_speed != ui.updateSpeed->value()) {
         changed = true;
         cg.writeEntry("speed", ui.updateSpeed->value());
-        reconnectSensor();
     }
 
     QItemSelectionModel *selection = ui.sensorView->selectionModel();
-    if (m_sensor != selection->currentIndex().data(Qt::UserRole+1)) {
+    const QString sensor = selection->currentIndex().data(Qt::UserRole+1).toString();
+    if (m_sensor != sensor) {
         changed = true;
-        const QString sensor = selection->currentIndex().data(Qt::UserRole+1).toString();
         cg.writeEntry("sensor", sensor);
         setConfigurationRequired(false);
     }
@@ -487,9 +486,7 @@ Bubble::configAccepted()
 
     if (changed) {
         emit configNeedsSaving();
-        configChanged();
         m_rebuildClip = true;
-        update();
     }
 }
 
@@ -501,6 +498,7 @@ Bubble::configChanged()
     m_showText = cg.readEntry("showText", false);
     showLabel(m_showText);
 
+    const int oldSpeed = m_speed;
     m_speed = cg.readEntry("speed", m_speed);
     m_interpolator->setDuration(m_speed);
 
@@ -512,6 +510,8 @@ Bubble::configChanged()
 
         m_sensor = sensor;
         connectSensor();
+    } else if (oldSpeed != m_speed && !m_sensor.isEmpty()) {
+        reconnectSensor();
     }
 
     if (m_sensor.isEmpty())
@@ -521,6 +521,8 @@ Bubble::configChanged()
         m_animator->start();
     else
         m_animator->stop();
+
+    update();
 }
 
 
