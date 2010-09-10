@@ -23,11 +23,13 @@
 #include <QPainter>
 
 CapsKey::CapsKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Caps_Lock), QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Caps_Lock), QString())
+{
 
 }
 
-void CapsKey::paint(QPainter *painter){
+void CapsKey::paint(QPainter *painter)
+{
     FuncKey::paint(painter);
 
     painter->save();

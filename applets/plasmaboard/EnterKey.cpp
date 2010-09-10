@@ -23,11 +23,13 @@
 #include <QPainter>
 
 EnterKey::EnterKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Return), QString()) {
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Return), QString())
+{
 }
 
 
-void EnterKey::paint(QPainter *painter){
+void EnterKey::paint(QPainter *painter)
+{
     FuncKey::paint(painter);
 
     painter->save();

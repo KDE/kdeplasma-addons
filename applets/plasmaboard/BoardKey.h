@@ -35,6 +35,7 @@ public:
     virtual QString label() const;
     virtual void paint(QPainter *painter);
     QPoint position() const;
+
     /**
       * called when button is pressed
       */
@@ -46,12 +47,14 @@ public:
     virtual void pressRepeated();
     QRectF rect() const;
     QSize relativeSize() const;
+
     /**
       * called when button is released after being pressed
       * This will usually create an X-Event. It may be a key release for functional keys
       * or a press and release for alphanumeric keys
       */
     virtual void released();
+
     /**
       * Called to make sticky (switch) buttons accepting unpressable again.
       */

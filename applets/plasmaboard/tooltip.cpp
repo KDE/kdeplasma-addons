@@ -54,27 +54,26 @@ Tooltip::~Tooltip() {
 
 }
 
-void Tooltip::setColors(){
+void Tooltip::setColors()
+{
     QPalette pal = palette();
     pal.setColor(backgroundRole(), Qt::transparent);
     pal.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
     setPalette(pal);
 }
 
-void Tooltip::setText(QString text) {
+void Tooltip::setText(QString text)
+{
     label->setText(text);
 }
 
-void Tooltip::resizeEvent(QResizeEvent *event) {
+void Tooltip::resizeEvent(QResizeEvent *event) 
+{
     QSize size = event->size();
     QWidget::resize(size);
     setFont(QFont ( "Helvetica", qMin(size.height(),size.width()) / 3) );
     frame->resizeFrame(size);
     updateMask();
-    /*
-    QImage img( size, QImage::Format_Mono);
-    img.fill(0);
-    setMask(QBitmap::fromImage(img, Qt::MonoOnly));*/
 }
 
 void Tooltip::showEvent(QShowEvent * event)
@@ -95,7 +94,8 @@ void Tooltip::updateMask()
     }
 }
 
-void Tooltip::paintEvent ( QPaintEvent * event ){
+void Tooltip::paintEvent ( QPaintEvent * event )
+{
     QPainter painter(this);
     painter.setRenderHint(QPainter::SmoothPixmapTransform);
     painter.setRenderHint(QPainter::Antialiasing);
@@ -103,13 +103,3 @@ void Tooltip::paintEvent ( QPaintEvent * event ){
     painter.fillRect(rect(), Qt::transparent);
     frame->paintFrame(&painter, event->rect());
 }
-
-/*bool Tooltip::paintEvent(QPaintEvent *event)
-{
-    if (event->type() == QEvent::Paint) {
-	QPainter painter(this);
-
-    }
-
-    return QWidget::event(event);
-}*/

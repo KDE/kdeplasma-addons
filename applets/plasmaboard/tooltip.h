@@ -40,7 +40,9 @@ protected:
     void paintEvent ( QPaintEvent * event );
     void resizeEvent(QResizeEvent *event);
     void showEvent(QShowEvent * event);
-    //bool event(QEvent *event);
+
+public Q_SLOTS:
+    void setColors();
 
 protected Q_SLOTS:
     void updateMask();
@@ -50,8 +52,6 @@ private:
     QLabel* label;
     QHBoxLayout* m_layout;
 
-  public Q_SLOTS:
-    void setColors();
 };
 
 #endif // TOOLTIP_H

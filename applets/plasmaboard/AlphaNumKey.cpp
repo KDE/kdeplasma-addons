@@ -24,12 +24,14 @@
 #include <plasma/theme.h>
 
 AlphaNumKey::AlphaNumKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode):
-        BoardKey(relativePosition, relativeSize, keycode){
+        BoardKey(relativePosition, relativeSize, keycode)
+{
 
     setLabel(0);
 }
 
-AlphaNumKey::~AlphaNumKey() {
+AlphaNumKey::~AlphaNumKey()
+{
 
 }
 

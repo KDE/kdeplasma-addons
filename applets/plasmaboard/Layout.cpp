@@ -42,16 +42,19 @@ Layout::Layout(QString path)
     delete xmlReader;
 }
 
-QString Layout::description() {
+QString Layout::description() const
+{
     return m_description;
 }
 
 
-QString Layout::name() {
+QString Layout::name() const
+{
     return m_name;
 }
 
 
-QString Layout::path() {
+QString Layout::path() const
+{
     return m_path;
 }

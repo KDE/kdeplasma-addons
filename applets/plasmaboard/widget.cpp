@@ -684,7 +684,8 @@ void PlasmaboardWidget::stickyKey_Mapper(int id)
     m_stickyKeys.remove(id);
 }
 
-void PlasmaboardWidget::switchAlternative(bool alt){
+void PlasmaboardWidget::switchAlternative(bool alt)
+{
     Q_FOREACH(DualKey* key, m_dualKeys){
         key->setAlternative(alt);
     }

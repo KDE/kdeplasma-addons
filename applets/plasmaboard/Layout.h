@@ -26,9 +26,9 @@ class Layout
 {
 public:
     Layout(QString path);
-    QString description();
-    QString name();
-    QString path();
+    QString description() const;
+    QString name() const;
+    QString path() const;
 
 private:
     QString m_name;

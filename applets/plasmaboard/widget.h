@@ -17,19 +17,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-
-
 #ifndef WIDGET_H
 #define WIDGET_H
 
 #include "tooltip.h"
 
 #include <QGraphicsWidget>
+#include <QXmlStreamReader>
 #include <plasma/popupapplet.h>
 #include <plasma/dataengine.h>
-
-
-#include <QXmlStreamReader>
 
 #define XK_TECHNICAL
 #define XK_PUBLISHING
@@ -208,6 +204,7 @@ private:
     Plasma::FrameSvg* m_activeFrame; // svg with active state
     QHash<QSize, QPixmap*> m_activeFrames; // cache of all pixmap sizes with active state
     QList<AlphaNumKey*> m_alphaKeys; // normal keys labeled with symbols like a, b, c
+    Plasma::PopupApplet *m_applet;
     QList<StickyKey*> m_altKeys; // List of all AltKeys on keyboard
     QList<StickyKey*> m_altgrKeys; // List of all AltGr keys on keyboard
     QList<FuncKey*> m_capsKeys; // List of all caps keys on keyboard
@@ -231,8 +228,7 @@ private:
     QList<StickyKey*> m_superKeys; // list of all super-keys on keyboard
     QList<SwitchKey*> m_switchKeys; // list of all switch keys on keyboard
     Tooltip* m_tooltip; // pointer to widget which is used as tooltip
-    QXmlStreamReader m_xmlReader; // instance of QXMLStreamReader for parsing layout files
-    Plasma::PopupApplet *m_applet;
+    QXmlStreamReader m_xmlReader; // instance of QXMLStreamReader for parsing layout files    
 };
 
 inline uint qHash(const QSize &key)

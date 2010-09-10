@@ -31,7 +31,8 @@
 class Helpers {
 public:
 
-    static void changeKeycodeMapping(unsigned int code, QString &sym){
+    static void changeKeycodeMapping(unsigned int code, QString &sym)
+    {
         KeySym keysym = XStringToKeysym(sym.toAscii());
         QVarLengthArray<KeySym> keysyms(keysymsPerKeycode);
         for(int i = 0; i < keysymsPerKeycode; i++){
@@ -41,7 +42,8 @@ public:
         XSync(QX11Info::display(), False);
     }
 
-    static void changeKeycodeMapping(unsigned int code, QString &sym, QString &shiftedSym){
+    static void changeKeycodeMapping(unsigned int code, QString &sym, QString &shiftedSym)
+    {
         KeySym keysym = XStringToKeysym(sym.toAscii());
         QVarLengthArray<KeySym> keysyms(keysymsPerKeycode);
         for(int i = 0; i < keysymsPerKeycode; i++){
@@ -52,18 +54,19 @@ public:
         XSync(QX11Info::display(), False);
     }
 
-    static void changeKeycodeMapping(unsigned int code, KeySym* keysyms){
+    static void changeKeycodeMapping(unsigned int code, KeySym* keysyms)
+    {
         XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode, keysyms, 1);
         XSync(QX11Info::display(), False);
     }
 
-    static KeySym *getKeycodeMapping(unsigned int code){
+    static KeySym *getKeycodeMapping(unsigned int code)
+    {
         return XGetKeyboardMapping(QX11Info::display(), code, 1, &keysymsPerKeycode);
     }
 
-
-
-    static unsigned int keycodeToKeysym(const unsigned int &code, int level){
+    static unsigned int keycodeToKeysym(const unsigned int &code, int level)
+    {
 #ifdef Q_WS_X11
         XkbStateRec xkbState;
         XkbGetState(QX11Info::display(), XkbUseCoreKbd, &xkbState );
@@ -74,7 +77,8 @@ public:
 #endif
     }
 
-    static unsigned int keysymToKeycode(const unsigned int &code){
+    static unsigned int keysymToKeycode(const unsigned int &code)
+    {
 #ifdef Q_WS_X11
         return ((unsigned int) XKeysymToKeycode(QX11Info::display(), code));
 #else
@@ -82,13 +86,15 @@ public:
 #endif
     }
 
-    static void fakeKeyPress(const unsigned int &code){
+    static void fakeKeyPress(const unsigned int &code)
+    {
 #ifdef Q_WS_X11
         XTestFakeKeyEvent(QX11Info::display(), code, true, 0);
         XSync(QX11Info::display(), False);
 #endif
     }
-    static void fakeKeyRelease(const unsigned int &code){
+    static void fakeKeyRelease(const unsigned int &code)
+    {
 #ifdef Q_WS_X11
         XTestFakeKeyEvent(QX11Info::display(), code, false, 0);
         XSync(QX11Info::display(), False);
@@ -99,7 +105,8 @@ public:
     static int keysymsPerKeycode;
     // what follows is a long and ugly list of mappings
 
-    static QChar mapToUnicode(const unsigned int &keysym){
+    static QChar mapToUnicode(const unsigned int &keysym)
+    {
 
         /*if(keysym >= 0xffff){
 			return 0;
@@ -109,8 +116,8 @@ public:
     }
 
 
-    static void buildUp(){
-
+    static void buildUp()
+    {
         mapXtoUTF8[0x0020]=QChar(0x0020);
         mapXtoUTF8[0x0021]=QChar(0x0021);
         mapXtoUTF8[0x0022]=QChar(0x0022);
@@ -1738,7 +1745,6 @@ public:
         mapXtoUTF8[0xfe60]=QChar(0x0323);
         mapXtoUTF8[0xfe61]=QChar(0x0309);
         mapXtoUTF8[0xfe62]=QChar(0x031b);
-
     }
 };
 

@@ -23,11 +23,13 @@
 #include <QPainter>
 
 ArrowLeftKey::ArrowLeftKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Left), QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Left), QString())
+{
 
 }
 
-void ArrowLeftKey::paint(QPainter *painter){
+void ArrowLeftKey::paint(QPainter *painter)
+{
     FuncKey::paint(painter);
 
     painter->save();

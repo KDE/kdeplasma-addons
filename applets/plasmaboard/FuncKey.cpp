@@ -25,15 +25,18 @@
 #include <plasma/theme.h>
 
 FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label):
-        AlphaNumKey(relativePosition, relativeSize, keycode) {
+        AlphaNumKey(relativePosition, relativeSize, keycode)
+{
     setLabel(label);
 }
 
-void FuncKey::paint(QPainter *painter){
+void FuncKey::paint(QPainter *painter)
+{
     AlphaNumKey::paint(painter);
 }
 
-void FuncKey::paintArrow(QPainter *painter){
+void FuncKey::paintArrow(QPainter *painter)
+{
 
     int unit = qMin(size().width(), size().height()) / 8;
     painter->drawLine(-1*unit, 0 , 3*unit, 0);

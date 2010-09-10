@@ -24,11 +24,13 @@
 
 
 ArrowTopKey::ArrowTopKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Up), QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Up), QString())
+{
 
 }
 
-void ArrowTopKey::paint(QPainter *painter){
+void ArrowTopKey::paint(QPainter *painter)
+{
     FuncKey::paint(painter);
 
     painter->save();

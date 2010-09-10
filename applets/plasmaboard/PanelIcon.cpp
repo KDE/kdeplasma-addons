@@ -74,36 +74,20 @@ void PanelIcon::configChanged()
     }
 }
 
-void PanelIcon::layoutNameChanged(const QString &name)
+void PanelIcon::constraintsEvent(Plasma::Constraints constraints)
 {
-    Layout *lay = m_layouts[0];
-
-    Q_FOREACH(Layout* l, m_layouts){
-        if(l->name() == name){
-            lay = l;
-            break;
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (formFactor() == Plasma::Horizontal || formFactor() == Plasma::Vertical) {
+            Plasma::ToolTipManager::self()->registerWidget(this);
+            Plasma::ToolTipContent toolTip;
+            toolTip.setImage(KIcon("preferences-desktop-keyboard"));
+            toolTip.setMainText(i18n("Virtual Keyboard"));
+            Plasma::ToolTipManager::self()->setContent(this, toolTip);
+        } else {
+            Plasma::ToolTipManager::self()->unregisterWidget(this);
         }
     }
-
-    m_layout = lay->path();
-    ui.descriptionLabel->setText(lay->description());
 }
-
-/*QList<QAction*> PanelIcon::contextualActions(){
-    QList<QAction*> list;
-    Q_FOREACH(Layout* l, m_layouts){
-        QAction *action = new QAction(l->name(), this);
-        action->setData(l->path());
-        connect(action, SIGNAL(triggered(bool)), this, SLOT(initKeyboard()));
-        list << action;
-    }
-
-    QAction *sep = new QAction(this);
-    sep->setSeparator(true);
-    list << sep;
-
-    return list;
-}*/
 
 void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
 {
@@ -131,6 +115,36 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
     connect(ui.layoutsComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(layoutNameChanged(QString)));
 }
 
+QGraphicsWidget *PanelIcon::graphicsWidget()
+{
+    if (!m_plasmaboard) {
+        m_plasmaboard = new PlasmaboardWidget(this);
+        initKeyboard(m_layout);
+    }
+
+    QGraphicsView *window = view();
+    if (window) {
+        KWindowInfo info = KWindowSystem::windowInfo(window->effectiveWinId(),  NET::WMWindowType);
+        m_plasmaboard->setEnabled(info.windowType(NET::AllTypesMask) == NET::Dock);
+    }
+
+    return m_plasmaboard;
+}
+
+void PanelIcon::layoutNameChanged(const QString &name)
+{
+    Layout *lay = m_layouts[0];
+
+    Q_FOREACH(Layout* l, m_layouts){
+        if(l->name() == name){
+            lay = l;
+            break;
+        }
+    }
+
+    m_layout = lay->path();
+    ui.descriptionLabel->setText(lay->description());
+}
 
 void PanelIcon::init()
 {
@@ -156,22 +170,6 @@ void PanelIcon::initKeyboard(const QString &layoutFile)
     saveLayout(layoutFile);
 }
 
-QGraphicsWidget *PanelIcon::graphicsWidget()
-{
-    if (!m_plasmaboard) {
-        m_plasmaboard = new PlasmaboardWidget(this);
-        initKeyboard(m_layout);
-    }
-
-    QGraphicsView *window = view();
-    if (window) {
-        KWindowInfo info = KWindowSystem::windowInfo(window->effectiveWinId(),  NET::WMWindowType);
-        m_plasmaboard->setEnabled(info.windowType(NET::AllTypesMask) == NET::Dock);
-    }
-
-    return m_plasmaboard;
-}
-
 void PanelIcon::popupEvent(bool show)
 {
     if (!show) {
@@ -187,21 +185,6 @@ void PanelIcon::saveLayout(const QString &path)
     cg.writeEntry("layout", path.right(path.size() - pos));
 
     emit configNeedsSaving();
-}
-
-void PanelIcon::constraintsEvent(Plasma::Constraints constraints)
-{
-    if (constraints & Plasma::FormFactorConstraint) {
-        if (formFactor() == Plasma::Horizontal || formFactor() == Plasma::Vertical) {
-            Plasma::ToolTipManager::self()->registerWidget(this);
-            Plasma::ToolTipContent toolTip;
-            toolTip.setImage(KIcon("preferences-desktop-keyboard"));
-            toolTip.setMainText(i18n("Virtual Keyboard"));
-            Plasma::ToolTipManager::self()->setContent(this, toolTip);
-        } else {
-            Plasma::ToolTipManager::self()->unregisterWidget(this);
-        }
-    }
 }
 
 // This is the command that links your applet to the .desktop file

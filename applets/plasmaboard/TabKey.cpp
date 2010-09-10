@@ -24,12 +24,12 @@
 
 
 TabKey::TabKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Tab), QString()){
-
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Tab), QString())
+{
 }
 
-void TabKey::paint(QPainter *painter){
-
+void TabKey::paint(QPainter *painter)
+{
     FuncKey::paint(painter);
 
     painter->save();

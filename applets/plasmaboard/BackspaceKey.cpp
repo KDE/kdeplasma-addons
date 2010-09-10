@@ -24,11 +24,13 @@
 
 
 BackspaceKey::BackspaceKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_BackSpace), QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_BackSpace), QString())
+{
 
 }
 
-void BackspaceKey::paint(QPainter *painter){
+void BackspaceKey::paint(QPainter *painter)
+{
     FuncKey::paint(painter);
 
     painter->save();

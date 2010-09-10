@@ -23,11 +23,13 @@
 #include <QPainter>
 
 ArrowBottomKey::ArrowBottomKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Down), QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Down), QString())
+{
 
 }
 
-void ArrowBottomKey::paint(QPainter *painter){
+void ArrowBottomKey::paint(QPainter *painter)
+{
     FuncKey::paint(painter);
 
     painter->save();

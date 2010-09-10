@@ -23,11 +23,13 @@
 #include <QPainter>
 
 ShiftKey::ShiftKey(QPoint relativePosition, QSize relativeSize) :
-        StickyKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Shift_L), QString()){
+        StickyKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Shift_L), QString())
+{
 
 }
 
-void ShiftKey::paint(QPainter *painter){
+void ShiftKey::paint(QPainter *painter)
+{
     FuncKey::paint(painter);
 
     painter->save();
