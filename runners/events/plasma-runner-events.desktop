@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Calendar Events
+Name[en_GB]=Calendar Events
 Name[pt]=Eventos do Calendário
 Name[pt_BR]=Eventos do calendário
 Name[sv]=Kalenderhändelser
 Name[uk]=Події календаря
 Name[x-test]=xxCalendar Eventsxx
 Comment=Calendar Events runner
+Comment[en_GB]=Calendar Events runner
 Comment[pt]=Execução dos eventos do calendário
 Comment[pt_BR]=Execução de eventos do calendário
 Comment[sv]=Visa kalenderhändelser
