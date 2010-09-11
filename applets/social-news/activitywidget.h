@@ -43,8 +43,8 @@ public:
     explicit ActivityWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
     virtual ~ActivityWidget();
     
-    QDateTime timestamp();
-    QString message();
+    QDateTime timestamp() const;
+    QString message() const;
 
 public Q_SLOTS:
     void setActivityData(Plasma::DataEngine::Data data);

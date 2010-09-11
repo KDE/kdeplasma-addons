@@ -99,12 +99,12 @@ void ActivityWidget::setActivityData(Plasma::DataEngine::Data data)
     updateActions();
 }
 
-QString ActivityWidget::message()
+QString ActivityWidget::message() const
 {
     return m_messageLabel->text();
 }
 
-QDateTime ActivityWidget::timestamp()
+QDateTime ActivityWidget::timestamp() const
 {
     return m_timestamp;
 }
