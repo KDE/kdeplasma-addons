@@ -356,14 +356,12 @@ void IncomingMsg::updateQutIMStatus(bool saveIcon)
         }
     }
     if (mQutIUnreadCount > 0) {
-        kDebug() << i18np("You have new qutIM message.",
-                          "You have new %1 qutIM messages.",
-                          mQutIUnreadCount);
-        mQutIMLabel->setText(i18np("You have new qutIM message.",
-                                   "You have new %1 qutIM messages.",
+        kDebug() << "You have " << mQutIUnreadCount << " new qutIM message(s).";
+        mQutIMLabel->setText(i18np("You have a new qutIM message.",
+                                   "You have %1 new qutIM messages.",
                                    mQutIUnreadCount));
     } else {
-        kDebug() << i18n("No new qutIM messages.");
+        kDebug() << "No new qutIM messages.";
         mQutIMLabel->setText(i18n("No new qutIM messages."));
     }
 }
