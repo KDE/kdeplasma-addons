@@ -36,7 +36,11 @@
 #include "fileWatcherTextItem.h"
 
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+    : Plasma::Applet(parent, args),
+      file(new QFile(this)),
+      textStream(0),
+      watcher(new KDirWatch(this)),
+      textItem(new FileWatcherTextItem(this))
 {
   setAspectRatioMode(Plasma::IgnoreAspectRatio);
   setHasConfigurationInterface(true);
@@ -51,10 +55,6 @@ FileWatcher::~FileWatcher()
 void FileWatcher::init()
 {
   Plasma::ToolTipManager::self()->registerWidget(this);
-  file = new QFile(this);
-  textStream = 0;
-  watcher = new KDirWatch(this);
-  textItem = new FileWatcherTextItem(this);
   textItem->moveBy(contentsRect().x(), contentsRect().y());
   textItem->setSize((int) contentsRect().width(), (int) contentsRect().height());
   textDocument = textItem->document();
