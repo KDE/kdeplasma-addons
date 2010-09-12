@@ -824,17 +824,30 @@ AbstractGroup *AbstractGroup::load(const QString &name, QGraphicsItem *parent)
     return GroupFactory::load(name, parent);
 }
 
-QStringList AbstractGroup::availableGroups(Plasma::FormFactor formFactor)
+QStringList AbstractGroup::availableGroups()
 {
     QStringList groups;
 
     foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
-        if (gi.formFactor.contains(formFactor)) {
-            groups << gi.name;
-        }
+        groups << gi.name;
     }
 
     return groups;
+}
+
+bool AbstractGroup::availableOnFormFactor(const QString &name, Plasma::FormFactor f)
+{
+    foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
+        if (name == gi.name) {
+            if (gi.formFactor.contains(f)) {
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    return false;
 }
 
 QString AbstractGroup::prettyName(const QString &name)

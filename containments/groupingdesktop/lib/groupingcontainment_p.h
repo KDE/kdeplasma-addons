@@ -41,7 +41,6 @@ class GroupingContainmentPrivate
         GroupingContainmentPrivate(GroupingContainment *containment);
         ~GroupingContainmentPrivate();
 
-        void createActions();
         AbstractGroup *createGroup(const QString &plugin, const QPointF &pos, unsigned int id);
         void handleDisappeared(Handle *handle);
         void onGroupRemoved(AbstractGroup *group);
@@ -50,7 +49,7 @@ class GroupingContainmentPrivate
         QList<AbstractGroup *> groupsAt(const QPointF &pos, QGraphicsWidget *uppermostWidget = 0);
         void manageApplet(Plasma::Applet *applet, const QPointF &pos);
         void manageGroup(AbstractGroup *subGroup, const QPointF &pos);
-        void newGroupClicked(QAction *action);
+        void newGroupClicked();
         void deleteGroup();
         void configureGroup();
         void onAppletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group);
@@ -67,7 +66,6 @@ class GroupingContainmentPrivate
         QWeakPointer<AbstractGroup> interestingGroup;
         QMap<QGraphicsWidget *, Handle *> handles;
         QAction *newGroupAction;
-        KMenu *newGroupMenu;
         QAction *separator;
         QAction *deleteGroupAction;
         QAction *configureGroupAction;

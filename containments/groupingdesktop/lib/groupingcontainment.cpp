@@ -30,13 +30,19 @@
 #include <KMenu>
 #include <KIcon>
 
+#include <kwindowsystem.h>
+#include <netwm.h>
+
 #include <Plasma/Corona>
 #include <Plasma/Animator>
 #include <Plasma/Animation>
+#include <Plasma/WindowEffects>
 
 #include "abstractgroup.h"
 #include "abstractgroup_p.h"
 #include "handle.h"
+
+#include "groupexplorer/explorerwindow.h"
 
 //----------------------GroupingContainmentPrivate-----------------------
 
@@ -57,8 +63,6 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
 {
     newGroupAction = new QAction(i18n("Add a new group"), q);
     newGroupAction->setIcon(KIcon("list-add"));
-    newGroupMenu = new KMenu(i18n("Add a new group"), 0);
-    newGroupAction->setMenu(newGroupMenu);
 
     deleteGroupAction = new QAction(i18n("Remove this group"), q);
     deleteGroupAction->setIcon(KIcon("edit-delete"));
@@ -71,32 +75,17 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
     separator = new QAction(q);
     separator->setSeparator(true);
 
-    createActions();
-
-    q->connect(newGroupMenu, SIGNAL(triggered(QAction*)), q, SLOT(newGroupClicked(QAction*)));
+    q->connect(newGroupAction, SIGNAL(triggered()), q, SLOT(newGroupClicked()));
     q->connect(deleteGroupAction, SIGNAL(triggered()), q, SLOT(deleteGroup()));
     q->connect(configureGroupAction, SIGNAL(triggered()), q, SLOT(configureGroup()));
 }
 
 GroupingContainmentPrivate::~GroupingContainmentPrivate()
-{}
-
-void GroupingContainmentPrivate::createActions()
 {
-    QStringList groups = AbstractGroup::availableGroups(q->formFactor());
-
-    foreach (QAction *action, newGroupMenu->actions()) {
-        newGroupMenu->removeAction(action);
-        action->deleteLater();
-    }
-    foreach (const QString &group, groups) {
-        QAction *action = new QAction(i18nc("%1 is the name of the group", "Add a new %1", AbstractGroup::prettyName(group)), q);
-        action->setData(group);
-
-        newGroupMenu->addAction(action);
-    }
-
-    newGroupAction->setVisible(newGroupMenu->actions().count());
+    //ensure we don't remain with an instance of ExplorerWindow when we don't have
+    //grouping containments anymore. Not the best way to do it but it won't cause
+    //any harm because it will be recreated the next time it's needed.
+    delete ExplorerWindow::instance();
 }
 
 AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, const QPointF &pos, unsigned int id)
@@ -279,9 +268,23 @@ void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPoi
     }
 }
 
-void GroupingContainmentPrivate::newGroupClicked(QAction *action)
+void GroupingContainmentPrivate::newGroupClicked()
 {
-    createGroup(action->data().toString(), lastClick, 0);
+    ExplorerWindow *w = ExplorerWindow::instance();
+    w->setContainment(q);
+    w->setLocation(q->location());
+    w->move(0,0);
+    w->showGroupExplorer();
+
+    QRect geom = q->corona()->screenGeometry(q->screen());
+    w->resize(w->sizeHint());
+    w->setGeometry(geom.x(), geom.bottom() - w->height(), geom.width(), w->height());
+
+    w->show();
+    Plasma::WindowEffects::slideWindow(w, Plasma::BottomEdge);
+    KWindowSystem::setOnAllDesktops(w->winId(), true);
+    KWindowSystem::activateWindow(w->winId());
+    KWindowSystem::setState(w->winId(), NET::SkipTaskbar | NET::SkipPager | NET::Sticky | NET::KeepAbove);
 }
 
 void GroupingContainmentPrivate::deleteGroup()
@@ -548,10 +551,6 @@ void GroupingContainment::init()
 
 void GroupingContainment::constraintsEvent(Plasma::Constraints constraints)
 {
-    if (constraints & Plasma::FormFactorConstraint) {
-        d->createActions();
-    }
-
     foreach (AbstractGroup *g, d->groups) {
         g->updateConstraints(constraints);
     }
@@ -764,12 +763,21 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                     d->interestingGroup.clear();
                 }
 
-                QPointF pos(mapFromScene(static_cast<QGraphicsSceneDragDropEvent *>(event)->scenePos()));
-                QList<AbstractGroup *> groups = d->groupsAt(pos);
-                foreach (AbstractGroup *group, groups) {
-                    if (group->showDropZone(mapToItem(group, pos))) {
-                        d->interestingGroup = group;
-                        break;
+                QGraphicsSceneDragDropEvent *e = static_cast<QGraphicsSceneDragDropEvent *>(event);
+                const QMimeData *mime = e->mimeData();
+                if (mime->hasFormat("plasma/group")) {
+                    QString name = mime->data("plasma/group");
+                    if (AbstractGroup::availableOnFormFactor(name, formFactor())) {
+                        QPointF pos(mapFromScene(e->scenePos()));
+                        QList<AbstractGroup *> groups = d->groupsAt(pos);
+                        foreach (AbstractGroup *group, groups) {
+                            if (group->showDropZone(mapToItem(group, pos))) {
+                                d->interestingGroup = group;
+                                break;
+                            }
+                        }
+                    } else {
+                        e->ignore();
                     }
                 }
             }
@@ -873,6 +881,19 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
     event->ignore();
 
     Plasma::Containment::contextMenuEvent(event);
+}
+
+void GroupingContainment::dropEvent(QGraphicsSceneDragDropEvent *event)
+{
+    const QMimeData *mime = event->mimeData();
+    if (mime->hasFormat("plasma/group")) {
+        QString name = mime->data("plasma/group");
+        if (AbstractGroup::availableOnFormFactor(name, formFactor())) {
+            d->createGroup(name, event->pos(), 0);
+        }
+    } else {
+        Plasma::Containment::dropEvent(event);
+    }
 }
 
 void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)

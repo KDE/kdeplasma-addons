@@ -121,6 +121,11 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
         virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 
         /**
+         * Reimplemented from QGraphicsItem
+         **/
+        virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
+
+        /**
          * Reimplemented from Plasma::Containment
          **/
         virtual void saveContents(KConfigGroup &group) const;
@@ -200,7 +205,7 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
         Q_PRIVATE_SLOT(d, void onGroupRemoved(AbstractGroup *group))
         Q_PRIVATE_SLOT(d, void onAppletRemoved(Plasma::Applet *applet))
         Q_PRIVATE_SLOT(d, void manageApplet(Plasma::Applet *applet, const QPointF &pos))
-        Q_PRIVATE_SLOT(d, void newGroupClicked(QAction *action))
+        Q_PRIVATE_SLOT(d, void newGroupClicked())
         Q_PRIVATE_SLOT(d, void deleteGroup())
         Q_PRIVATE_SLOT(d, void configureGroup())
         Q_PRIVATE_SLOT(d, void onAppletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group))

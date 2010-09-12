@@ -405,7 +405,9 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
         /**
          * Returns a list of all identifiers of the available Groups.
          **/
-        static QStringList availableGroups(Plasma::FormFactor formFactor);
+        static QStringList availableGroups();
+
+        static bool availableOnFormFactor(const QString &name, Plasma::FormFactor f);
 
         /**
          * Returns a user friendly name for a Group type.

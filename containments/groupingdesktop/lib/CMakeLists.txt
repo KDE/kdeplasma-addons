@@ -12,7 +12,17 @@ set(groupingcontainment_SRCS
         groups/gridgroup.cpp
         groups/flowgroup.cpp
         groups/stackinggroup.cpp
-        groups/tabbinggroup.cpp)
+        groups/tabbinggroup.cpp
+
+        # Taken from kdebase/workspace/libs/plasmagenericshell
+        groupexplorer/abstracticon.cpp
+        groupexplorer/abstracticonlist.cpp
+
+        groupexplorer/explorerwindow.cpp
+        groupexplorer/groupexplorer.cpp
+        groupexplorer/groupicon.cpp
+        groupexplorer/grouplist.cpp
+)
 
 
 kde4_add_ui_files(groupingcontainment_SRCS groups/tabbinggroup_config.ui)
