@@ -18,6 +18,7 @@ TODO: M09   (a) Speed up
 TODO: M13 h (m) make configuration for plug-ins for contacts (maybe more?)
 TODO: M16 m (e) Run as administrator context menu
 TODO: M17 m (e) Save session http://forum.kde.org/viewtopic.php?f=67&t=82859
+TODO: M18       Unlock/Lock inside L https://bugs.kde.org/show_bug.cgi?id=251150
 
 Library:
 TODO: L01   (e) check for memory leaks related to Private
