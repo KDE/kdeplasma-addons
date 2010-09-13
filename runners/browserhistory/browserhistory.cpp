@@ -33,19 +33,19 @@ BrowserHistoryRunner::BrowserHistoryRunner(QObject *parent, const QVariantList& 
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args);
-    setObjectName("Browser History");
-    m_icon = KIcon("view-history");
+    setObjectName(QLatin1String( "Browser History" ));
+    m_icon = KIcon(QLatin1String( "view-history" ));
 
     loadHistory();
 
     // listen for changes to the list of recent documents
     KDirWatch *historyWatch = new KDirWatch(this);
-    historyWatch->addFile(KStandardDirs::locate("config", "konq_history"));
+    historyWatch->addFile(KStandardDirs::locate("config", QLatin1String( "konq_history" )));
     connect(historyWatch,SIGNAL(dirty(QString)),this,SLOT(loadHistory()));
     connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadHistory()));
     connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadHistory()));
 
-    addSyntax(Plasma::RunnerSyntax(":q:", i18n("Finds web sites you have visited matching :q:.")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( ":q:" ), i18n("Finds web sites you have visited matching :q:.")));
 }
 
 BrowserHistoryRunner::~BrowserHistoryRunner()
@@ -54,7 +54,7 @@ BrowserHistoryRunner::~BrowserHistoryRunner()
 
 void BrowserHistoryRunner::loadHistory()
 {
-    KConfig *konq_config = new KConfig("konq_history", KConfig::NoGlobals);
+    KConfig *konq_config = new KConfig(QLatin1String( "konq_history" ), KConfig::NoGlobals);
     KConfigGroup locationBarGroup( konq_config, "Location Bar" );
     QStringList lstHistory = locationBarGroup.readPathEntry( "ComboContents", QStringList() );
     delete konq_config;
@@ -89,10 +89,10 @@ void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
             match.setIcon(m_icon);
             match.setData(historyitem);
             QString text = historyitem;
-            text.remove("http://");
-            text.remove("https://");
+            text.remove(QLatin1String( "http://" ));
+            text.remove(QLatin1String( "https://" ));
             match.setSubtext(text);
-            text.remove(QRegExp("/.*"));
+            text.remove(QRegExp(QLatin1String( "/.*" )));
             match.setText(text);
             context.addMatch(term, match);
         }

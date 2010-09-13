@@ -27,7 +27,7 @@ CharacterRunner::CharacterRunner( QObject* parent, const QVariantList &args )
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args)
-    setObjectName("CharacterRunner");
+    setObjectName(QLatin1String( "CharacterRunner" ));
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
                          Plasma::RunnerContext::NetworkLocation | Plasma::RunnerContext::Executable |
                          Plasma::RunnerContext::ShellCommand);
@@ -45,7 +45,7 @@ void CharacterRunner::reloadConfiguration()
   m_triggerWord = grp.readEntry(CONFIG_TRIGGERWORD, "#"); //read out the triggerword
   m_aliases = grp.readEntry(CONFIG_ALIASES, QStringList());
   m_codes = grp.readEntry(CONFIG_CODES, QStringList());
-  addSyntax(Plasma::RunnerSyntax(m_triggerWord + ":q:",
+  addSyntax(Plasma::RunnerSyntax(m_triggerWord + QLatin1String( ":q:" ),
                                  i18n("Creates Characters from :q: if it is a hexadecimal code or defined alias.")));
 }
 
@@ -54,7 +54,7 @@ void CharacterRunner::match(Plasma::RunnerContext &context)
     QString term = context.query();
     QString specChar;
 
-    term = term.replace(' ', ""); //remove blanks
+    term = term.replace(QLatin1Char( ' ' ), QLatin1String( "" )); //remove blanks
     if (term.length() < 2) //ignore too short queries
     {
         return;
@@ -64,28 +64,28 @@ void CharacterRunner::match(Plasma::RunnerContext &context)
       return;
     }
     term = term.remove(0, m_triggerWord.length()); //remove the triggerword
-    
+
     if (m_aliases.contains(term)) //replace aliases by their hex.-code
     {
       term = m_codes[m_aliases.indexOf(term)];
     }
-    
+
     bool ok; //checkvariable
     int hex = term.toInt(&ok, 16); //convert query into int
     if (!ok) //check if conversion was successful
     {
       return;
     }
-    
+
     //make special caracter out of the hex.-code
     specChar=QString();
     specChar.toUtf8();
     specChar[0]=hex;
-    
+
     //create match
     Plasma::QueryMatch match(this);
     match.setType(Plasma::QueryMatch::InformationalMatch);
-    match.setIcon(KIcon("accessories-character-map"));
+    match.setIcon(KIcon(QLatin1String( "accessories-character-map" )));
     match.setText(specChar);
     match.setData(specChar);
     match.setId(QString());

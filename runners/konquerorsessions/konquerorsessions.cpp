@@ -37,13 +37,13 @@ KonquerorSessions::KonquerorSessions(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args);
-    setObjectName("Konqueror Sessions");
+    setObjectName(QLatin1String( "Konqueror Sessions" ));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
-    m_icon = KIcon("konqueror");
+    m_icon = KIcon(QLatin1String( "konqueror" ));
     loadSessions();
 
     KDirWatch *historyWatch = new KDirWatch(this);
-    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", "konqueror/profiles/");
+    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String( "konqueror/profiles/" ));
     foreach (const QString &dir, sessiondirs) {
         historyWatch->addDir(dir);
     }
@@ -52,11 +52,11 @@ KonquerorSessions::KonquerorSessions(QObject *parent, const QVariantList& args)
     connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
     connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
 
-    Plasma::RunnerSyntax s(":q:", i18n("Finds Konqueror profiles matching :q:."));
-    s.addExampleQuery("konqueror :q:");
+    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds Konqueror profiles matching :q:."));
+    s.addExampleQuery(QLatin1String( "konqueror :q:" ));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax("konqueror", i18n("Lists all the Konqueror profiles in your account.")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "konqueror" ), i18n("Lists all the Konqueror profiles in your account.")));
 }
 
 KonquerorSessions::~KonquerorSessions()
@@ -65,7 +65,7 @@ KonquerorSessions::~KonquerorSessions()
 
 void KonquerorSessions::loadSessions()
 {
-    const QStringList list = KGlobal::dirs()->findAllResources( "data", "konqueror/profiles/*", KStandardDirs::NoDuplicates );
+    const QStringList list = KGlobal::dirs()->findAllResources( "data", QLatin1String( "konqueror/profiles/*" ), KStandardDirs::NoDuplicates );
     QStringList::ConstIterator end = list.constEnd();
     for (QStringList::ConstIterator it = list.constBegin(); it != end; ++it) {
         QFileInfo info(*it);
@@ -96,7 +96,7 @@ void KonquerorSessions::match(Plasma::RunnerContext &context)
         return;
     }
 
-    if (term.toLower() == "konqueror") {
+    if (term.toLower() == QLatin1String( "konqueror" )) {
         QHashIterator<QString, QString> i(m_sessions);
         while (i.hasNext()) {
             i.next();
@@ -105,7 +105,7 @@ void KonquerorSessions::match(Plasma::RunnerContext &context)
             match.setRelevance(0.8);
             match.setIcon(m_icon);
             match.setData(i.key());
-            match.setText("Konqueror: " + i.value());
+            match.setText(QLatin1String( "Konqueror: " ) + i.value());
             context.addMatch(term, match);
         }
     } else {
@@ -119,7 +119,7 @@ void KonquerorSessions::match(Plasma::RunnerContext &context)
                 match.setType(Plasma::QueryMatch::PossibleMatch);
                 match.setIcon(m_icon);
                 match.setData(i.key());
-                match.setText("Konqueror: " + i.value());
+                match.setText(QLatin1String( "Konqueror: " ) + i.value());
 
                 if (i.value().toLower() == term) {
                     match.setRelevance(1.0);
@@ -141,10 +141,10 @@ void KonquerorSessions::run(const Plasma::RunnerContext &context, const Plasma::
 
     if (!session.isEmpty()) {
         QStringList args;
-        args << "--profile";
+        args << QLatin1String( "--profile" );
         args << session;
         //kDebug() << "=== START: konqueror" << args;
-        KToolInvocation::kdeinitExec("konqueror", args);
+        KToolInvocation::kdeinitExec(QLatin1String( "konqueror" ), args);
     }
 }
 

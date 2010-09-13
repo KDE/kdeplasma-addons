@@ -69,7 +69,7 @@ void SpellCheckConfig::load()
     KCModule::load();
 
     //FIXME: This shouldn't be hardcoded!
-    KSharedConfig::Ptr cfg = KSharedConfig::openConfig( "krunnerrc" );
+    KSharedConfig::Ptr cfg = KSharedConfig::openConfig( QLatin1String( "krunnerrc" ) );
     KConfigGroup conf = cfg->group( "Runners" );
     KConfigGroup grp = KConfigGroup( &conf, "Spell Checker");
 
@@ -89,7 +89,7 @@ void SpellCheckConfig::load()
 void SpellCheckConfig::save()
 {
     //FIXME: This shouldn't be hardcoded!
-    KSharedConfig::Ptr cfg = KSharedConfig::openConfig( "krunnerrc" );
+    KSharedConfig::Ptr cfg = KSharedConfig::openConfig( QLatin1String( "krunnerrc" ) );
     KConfigGroup conf = cfg->group( "Runners" );
     KConfigGroup grp = KConfigGroup( &conf, "Spell Checker");
 

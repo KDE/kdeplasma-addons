@@ -28,8 +28,8 @@ SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args)
-    KGlobal::locale()->insertCatalog("krunner_spellcheckrunner");
-    setObjectName("Spell Checker");
+    KGlobal::locale()->insertCatalog(QLatin1String( "krunner_spellcheckrunner" ));
+    setObjectName(QLatin1String( "Spell Checker" ));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     setSpeed(AbstractRunner::SlowSpeed);
 
@@ -44,7 +44,7 @@ void SpellCheckRunner::reloadConfiguration()
 {
     m_triggerWord = config().readEntry("trigger", i18n("spell"));
     //Processing will be triggered by "keyword "
-    m_triggerWord += ' ';
+    m_triggerWord += QLatin1Char( ' ' );
 
     m_requireTriggerWord = config().readEntry("requireTriggerWord", true);
 
@@ -53,7 +53,7 @@ void SpellCheckRunner::reloadConfiguration()
                            i18n("Checks the spelling of :q:."));
 
     if (!m_requireTriggerWord) {
-        s.addExampleQuery(":q:");
+        s.addExampleQuery(QLatin1String( ":q:" ));
     }
 
     QList<Plasma::RunnerSyntax> syns;
@@ -91,11 +91,11 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
     match.setType(Plasma::QueryMatch::InformationalMatch);
 
     if (correct) {
-        match.setIcon(KIcon("checkbox"));
+        match.setIcon(KIcon(QLatin1String( "checkbox" )));
         match.setText(i18n("Correct"));
     } else {
-        match.setIcon(KIcon("edit-delete"));
-        const QString recommended = i18n("Suggested words: %1", suggestions.join (", "));
+        match.setIcon(KIcon(QLatin1String( "edit-delete" )));
+        const QString recommended = i18n("Suggested words: %1", suggestions.join (QLatin1String( ", " )));
         //TODO: try setting a text and a subtext, with the subtext being the suggestions
         match.setText(recommended);
         match.setData(suggestions);

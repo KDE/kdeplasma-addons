@@ -38,15 +38,15 @@ bool katesessions_runner_compare_sessions(const QString &s1, const QString &s2) 
 KateSessions::KateSessions(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
-    setObjectName("Kate Sessions");
+    setObjectName(QLatin1String("Kate Sessions"));
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
-    m_icon = KIcon("kate");
+    m_icon = KIcon(QLatin1String("kate"));
 
     loadSessions();
 
     // listen for changes to the list of kate sessions
     KDirWatch *historyWatch = new KDirWatch(this);
-    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", "kate/sessions/");
+    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String("kate/sessions/"));
     foreach (const QString &dir, sessiondirs) {
         historyWatch->addDir(dir);
     }
@@ -54,11 +54,11 @@ KateSessions::KateSessions(QObject *parent, const QVariantList& args)
     connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
     connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
 
-    Plasma::RunnerSyntax s(":q:", i18n("Finds Kate sessions matching :q:."));
-    s.addExampleQuery("kate :q:");
+    Plasma::RunnerSyntax s(QLatin1String(":q:"), i18n("Finds Kate sessions matching :q:."));
+    s.addExampleQuery(QLatin1String("kate :q:"));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax("kate", i18n("Lists all the Kate editor sessions in your account.")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String("kate"), i18n("Lists all the Kate editor sessions in your account.")));
 }
 
 KateSessions::~KateSessions()
@@ -70,7 +70,7 @@ void KateSessions::loadSessions()
     // Switch kate session: -u
     // Should we add a match for this option or would that clutter the matches too much?
     QStringList sessions = QStringList();
-    const QStringList list = KGlobal::dirs()->findAllResources( "data", "kate/sessions/*.katesession", KStandardDirs::NoDuplicates );
+    const QStringList list = KGlobal::dirs()->findAllResources( "data", QLatin1String("kate/sessions/*.katesession"), KStandardDirs::NoDuplicates );
     KUrl url;
     for (QStringList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it)
     {
@@ -104,8 +104,8 @@ void KateSessions::match(Plasma::RunnerContext &context)
         if (term.trimmed().compare(QLatin1String("kate"), Qt::CaseInsensitive) == 0) {
             listAll = true;
             term.clear();
-        } else if (term.at(4) == ' ' ) {
-            term.remove("kate", Qt::CaseInsensitive);
+        } else if (term.at(4) == QLatin1Char(' ') ) {
+            term.remove(QLatin1String("kate"), Qt::CaseInsensitive);
             term = term.trimmed();
         } else {
             term.clear();
@@ -155,8 +155,8 @@ void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::Query
 
     if (!session.isEmpty()) {
         QStringList args;
-       	args << "--start" << session << "-n";
-        KToolInvocation::kdeinitExec("kate", args);
+       	args << QLatin1String("--start") << session << QLatin1String("-n");
+        KToolInvocation::kdeinitExec(QLatin1String("kate"), args);
     }
 }
 

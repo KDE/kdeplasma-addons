@@ -48,16 +48,16 @@ void CharacterRunnerConfig::addItem() //add Item to the list-view widget
   item->setText(0, m_ui->edit_alias->text());
   item->setText(1, m_ui->edit_hex->text());
   m_ui->list->addTopLevelItem(item);
-  m_ui->edit_alias->setText("");
-  m_ui->edit_hex->setText("");
-  
+  m_ui->edit_alias->clear();
+  m_ui->edit_hex->clear();
+
   emit changed(true);
 }
 
 void CharacterRunnerConfig::deleteItem() //remove Item to the list-view widget
 {
   m_ui->list->takeTopLevelItem(m_ui->list->indexOfTopLevelItem(m_ui->list->currentItem()));
-  
+
   emit changed(true);
 }
 
@@ -66,11 +66,11 @@ void CharacterRunnerConfig::load()
     KCModule::load();
 
     //create config-object
-    KSharedConfig::Ptr cfg = KSharedConfig::openConfig("krunnerrc");
+    KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QLatin1String( "krunnerrc" ));
     KConfigGroup grp = cfg->group("Runners");
     grp = KConfigGroup(&grp, "CharacterRunner");
-    
-    m_ui->edit_trigger->setText(grp.readEntry(CONFIG_TRIGGERWORD, "#")); //read out triggerword and put into the trigger-lineEdit    
+
+    m_ui->edit_trigger->setText(grp.readEntry(CONFIG_TRIGGERWORD, "#")); //read out triggerword and put into the trigger-lineEdit
     for(int i=0; i<grp.readEntry(CONFIG_ALIASES, QList<QString>()).size(); i++) //read out aliaslist and add Items to the list-view widget
     {
       QTreeWidgetItem* item = new QTreeWidgetItem(m_ui->list, 2);
@@ -84,14 +84,14 @@ void CharacterRunnerConfig::load()
 void CharacterRunnerConfig::save()
 {
     KCModule::save();
-    
+
     //create config-object
-    KSharedConfig::Ptr cfg = KSharedConfig::openConfig("krunnerrc");
+    KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QLatin1String( "krunnerrc" ));
     KConfigGroup grp = cfg->group("Runners");
     grp = KConfigGroup(&grp, "CharacterRunner");
-    
+
     grp.writeEntry(CONFIG_TRIGGERWORD,m_ui->edit_trigger->text()); //write content from the triggerword-line Edit into the config
-    
+
     //Write the content of the List into the config
     QList<QString> aliaslist;
     QList<QString> codelist;
@@ -103,7 +103,7 @@ void CharacterRunnerConfig::save()
     }
     grp.writeEntry(CONFIG_ALIASES, aliaslist);
     grp.writeEntry(CONFIG_CODES, codelist);
-    
+
     emit changed(false);
 }
 
@@ -111,7 +111,7 @@ void CharacterRunnerConfig::defaults()
 {
     KCModule::defaults();
 
-    m_ui->edit_trigger->setText("#"); //set the content of the triggerword-lineEdit to default '#'
+    m_ui->edit_trigger->setText(QLatin1String( "#" )); //set the content of the triggerword-lineEdit to default '#'
     for(int i=0; i<m_ui->list->topLevelItemCount(); i++) //remove every item from the alias-list
     {
       m_ui->list->takeTopLevelItem(i);
