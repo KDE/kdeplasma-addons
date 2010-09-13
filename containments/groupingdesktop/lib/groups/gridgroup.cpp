@@ -31,7 +31,7 @@
 #include "gridhandle.h"
 #include "spacer.h"
 
-REGISTER_GROUP(grid, GridGroup)
+REGISTER_GROUP(GridGroup)
 
 class Position {
     public:
@@ -740,20 +740,14 @@ void GridGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     }
 }
 
-QString GridGroup::prettyName()
+GroupInfo GridGroup::groupInfo()
 {
-    return i18n("Grid Group");
-}
+    GroupInfo gi("grid", i18n("Grid Group"));
+    QSet<Plasma::FormFactor> f;
+    f << Plasma::Planar << Plasma::MediaCenter << Plasma::Horizontal << Plasma::Vertical;
+    gi.setFormFactors(f);
 
-QSet<Plasma::FormFactor> GridGroup::availableOnFormFactors()
-{
-    QSet<Plasma::FormFactor> set;
-    set.insert(Plasma::Planar);
-    set.insert(Plasma::MediaCenter);
-    set.insert(Plasma::Horizontal);
-    set.insert(Plasma::Vertical);
-
-    return set;
+    return gi;
 }
 
 #include "gridgroup.moc"

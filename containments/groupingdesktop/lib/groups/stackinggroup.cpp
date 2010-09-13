@@ -28,7 +28,7 @@
 #include "groupingcontainment.h"
 #include "spacer.h"
 
-REGISTER_GROUP(stacking, StackingGroup)
+REGISTER_GROUP(StackingGroup)
 
 StackingGroup::StackingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : AbstractGroup(parent, wFlags),
@@ -202,18 +202,11 @@ void StackingGroup::onAppletActivated()
     }
 }
 
-QString StackingGroup::prettyName()
+GroupInfo StackingGroup::groupInfo()
 {
-    return i18n("Stacking Group");
-}
+    GroupInfo gi("stacking", i18n("Stacking Group"));
 
-QSet<Plasma::FormFactor> StackingGroup::availableOnFormFactors()
-{
-    QSet<Plasma::FormFactor> set;
-    set.insert(Plasma::Planar);
-    set.insert(Plasma::MediaCenter);
-
-    return set;
+    return gi;
 }
 
 #include "stackinggroup.moc"

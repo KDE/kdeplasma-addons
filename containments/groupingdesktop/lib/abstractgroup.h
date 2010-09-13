@@ -23,6 +23,7 @@
 #include <QtGui/QGraphicsWidget>
 #include <Plasma/Applet>
 
+#include "groupinfo.h"
 #include "groupfactory_p.h"
 #include "groupingcontainment_export.h"
 
@@ -389,9 +390,9 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * Used to register a Group to the GroupFactory. You shouldn't
          * use this, but the macro REGISTER_GROUP(identifier, class name) instead.
          **/
-        template<class T> static bool registerGroup(const QString &name)
+        template<class T> static bool registerGroup()
         {
-            return GroupFactory::registerGroup<T>(name);
+            return GroupFactory::registerGroup<T>();
         }
 
         /**
@@ -407,14 +408,7 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         static QStringList availableGroups();
 
-        static bool availableOnFormFactor(const QString &name, Plasma::FormFactor f);
-
-        /**
-         * Returns a user friendly name for a Group type.
-         *
-         * @param name the identifier of the Group type
-         **/
-        static QString prettyName(const QString &name);
+        static GroupInfo groupInfo(const QString &name);
 
     public slots:
         /**
@@ -595,7 +589,7 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
 
 Q_DECLARE_METATYPE(AbstractGroup *)
 
-#define REGISTER_GROUP(name, class) \
-    static const bool g_##name = AbstractGroup::registerGroup<class>(#name);
+#define REGISTER_GROUP(class) \
+    static const bool g_##class = AbstractGroup::registerGroup<class>();
 
 #endif // ABSTRACTGROUP_H

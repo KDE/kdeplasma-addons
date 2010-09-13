@@ -41,8 +41,7 @@ class FlowGroup : public AbstractGroup
         void releaseChild(QGraphicsWidget *child);
         Handle *createHandleForChild(QGraphicsWidget *child);
 
-        static QString prettyName();
-        static QSet<Plasma::FormFactor> availableOnFormFactors();
+        static GroupInfo groupInfo();
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);

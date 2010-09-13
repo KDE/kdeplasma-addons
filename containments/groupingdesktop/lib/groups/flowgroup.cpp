@@ -29,7 +29,7 @@
 #include "groupingcontainment.h"
 #include "spacer.h"
 
-REGISTER_GROUP(flow, FlowGroup)
+REGISTER_GROUP(FlowGroup)
 
 FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(parent, wFlags),
@@ -195,20 +195,14 @@ void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-QString FlowGroup::prettyName()
+GroupInfo FlowGroup::groupInfo()
 {
-    return i18n("Flow Group");
-}
+    GroupInfo gi("flow", i18n("Flow Group"));
+    QSet<Plasma::FormFactor> f;
+    f << Plasma::Planar << Plasma::MediaCenter << Plasma::Horizontal << Plasma::Vertical;
+    gi.setFormFactors(f);
 
-QSet<Plasma::FormFactor> FlowGroup::availableOnFormFactors()
-{
-    QSet<Plasma::FormFactor> set;
-    set.insert(Plasma::Planar);
-    set.insert(Plasma::MediaCenter);
-    set.insert(Plasma::Vertical);
-    set.insert(Plasma::Horizontal);
-
-    return set;
+    return gi;
 }
 
 #include "flowgroup.moc"

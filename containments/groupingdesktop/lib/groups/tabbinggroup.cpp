@@ -33,7 +33,7 @@
 
 #include "groupingcontainment.h"
 
-REGISTER_GROUP(tabbing, TabbingGroup)
+REGISTER_GROUP(TabbingGroup)
 
 TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             : AbstractGroup(parent, wFlags),
@@ -373,18 +373,11 @@ void TabbingGroup::moveToTabAt(const QPointF &scenePos)
     }
 }
 
-QString TabbingGroup::prettyName()
+GroupInfo TabbingGroup::groupInfo()
 {
-    return i18n("Tabbing Group");
-}
+    GroupInfo gi("tabbing", i18n("Tabbing Group"));
 
-QSet<Plasma::FormFactor> TabbingGroup::availableOnFormFactors()
-{
-    QSet<Plasma::FormFactor> set;
-    set.insert(Plasma::Planar);
-    set.insert(Plasma::MediaCenter);
-
-    return set;
+    return gi;
 }
 
 #include "tabbinggroup.moc"

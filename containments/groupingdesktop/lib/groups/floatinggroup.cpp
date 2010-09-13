@@ -19,7 +19,7 @@
 
 #include "floatinggroup.h"
 
-REGISTER_GROUP(floating, FloatingGroup)
+REGISTER_GROUP(FloatingGroup)
 
 FloatingGroup::FloatingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : AbstractGroup(parent, wFlags)
@@ -55,18 +55,11 @@ void FloatingGroup::layoutChild(QGraphicsWidget *, const QPointF &)
 
 }
 
-QString FloatingGroup::prettyName()
+GroupInfo FloatingGroup::groupInfo()
 {
-    return i18n("Floating Group");
-}
+    GroupInfo gi("floating", i18n("Floating Group"));
 
-QSet<Plasma::FormFactor> FloatingGroup::availableOnFormFactors()
-{
-    QSet<Plasma::FormFactor> set;
-    set.insert(Plasma::Planar);
-    set.insert(Plasma::MediaCenter);
-
-    return set;
+    return gi;
 }
 
 #include "floatinggroup.moc"

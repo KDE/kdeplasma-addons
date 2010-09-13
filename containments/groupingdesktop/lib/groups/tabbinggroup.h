@@ -53,8 +53,7 @@ class TabbingGroup : public AbstractGroup
         bool showDropZone(const QPointF &pos);
         void restoreChildren();
 
-        static QString prettyName();
-        static QSet<Plasma::FormFactor> availableOnFormFactors();
+        static GroupInfo groupInfo();
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);

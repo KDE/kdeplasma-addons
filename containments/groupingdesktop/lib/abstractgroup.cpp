@@ -829,36 +829,21 @@ QStringList AbstractGroup::availableGroups()
     QStringList groups;
 
     foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
-        groups << gi.name;
+        groups << gi.name();
     }
 
     return groups;
 }
 
-bool AbstractGroup::availableOnFormFactor(const QString &name, Plasma::FormFactor f)
+GroupInfo AbstractGroup::groupInfo(const QString &name)
 {
     foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
-        if (name == gi.name) {
-            if (gi.formFactor.contains(f)) {
-                return true;
-            }
-
-            return false;
+        if (gi.name() == name) {
+            return gi;
         }
     }
 
-    return false;
-}
-
-QString AbstractGroup::prettyName(const QString &name)
-{
-    foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
-        if (gi.name == name) {
-            return gi.prettyName;
-        }
-    }
-
-    return QString();
+    return GroupInfo("");
 }
 
 #include "abstractgroup.moc"

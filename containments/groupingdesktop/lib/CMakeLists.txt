@@ -1,6 +1,7 @@
 
 set(groupingcontainment_SRCS
         abstractgroup.cpp
+        groupinfo.cpp
         groupfactory.cpp
         groupingcontainment.cpp
         handle.cpp

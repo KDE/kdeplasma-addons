@@ -25,7 +25,8 @@ GroupIcon::GroupIcon(const QString &name)
     :AbstractIcon(0),
     m_name(name)
 {
-    setName(AbstractGroup::prettyName(name));
+    GroupInfo gi = AbstractGroup::groupInfo(name);
+    setName(gi.prettyName());
     setDraggable(true);
 }
 

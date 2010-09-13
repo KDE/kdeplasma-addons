@@ -43,8 +43,7 @@ class GridGroup : public AbstractGroup
         Handle *createHandleForChild(QGraphicsWidget *child);
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
-        static QString prettyName();
-        static QSet<Plasma::FormFactor> availableOnFormFactors();
+        static GroupInfo groupInfo();
 
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);

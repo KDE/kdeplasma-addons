@@ -49,7 +49,7 @@ class GroupExplorerPrivate
         Plasma::ToolButton *close;
         Plasma::Containment *containment;
 
-        /// Widget that lists the applets
+        /// Widget that lists the groups
         GroupList *groupList;
         QGraphicsLinearLayout *filteringLayout;
         QGraphicsLinearLayout *mainLayout;

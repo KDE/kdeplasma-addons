@@ -767,7 +767,8 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 const QMimeData *mime = e->mimeData();
                 if (mime->hasFormat("plasma/group")) {
                     QString name = mime->data("plasma/group");
-                    if (AbstractGroup::availableOnFormFactor(name, formFactor())) {
+                    GroupInfo gi = AbstractGroup::groupInfo(name);
+                    if (gi.formFactors().contains(formFactor())) {
                         QPointF pos(mapFromScene(e->scenePos()));
                         QList<AbstractGroup *> groups = d->groupsAt(pos);
                         foreach (AbstractGroup *group, groups) {
@@ -888,7 +889,8 @@ void GroupingContainment::dropEvent(QGraphicsSceneDragDropEvent *event)
     const QMimeData *mime = event->mimeData();
     if (mime->hasFormat("plasma/group")) {
         QString name = mime->data("plasma/group");
-        if (AbstractGroup::availableOnFormFactor(name, formFactor())) {
+        GroupInfo gi = AbstractGroup::groupInfo(name);
+        if (gi.formFactors().contains(formFactor())) {
             d->createGroup(name, event->pos(), 0);
         }
     } else {

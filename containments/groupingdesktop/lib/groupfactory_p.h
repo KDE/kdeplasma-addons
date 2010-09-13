@@ -27,47 +27,25 @@
 
 #include <Plasma/Plasma>
 
+#include "groupinfo.h"
+
 class QGraphicsItem;
 class AbstractGroup;
 
 typedef AbstractGroup *(*CreatorFunction)(QGraphicsItem *);
-
-struct GroupInfo
-{
-    GroupInfo(const QString &n)
-    {
-        name = n;
-    }
-
-    bool operator==(const GroupInfo &gi)
-    {
-        return gi.name == name;
-    }
-
-    QString name;
-    QString prettyName;
-    QSet<Plasma::FormFactor> formFactor;
-};
-
-inline bool operator<(const GroupInfo &g1, const GroupInfo &g2)
-{
-    return g1.name < g2.name;
-}
 
 class GroupFactory
 {
 
     public:
 
-        template<class T> static bool registerGroup(const QString &name)
+        template<class T> static bool registerGroup()
         {
             if (!m_groups) {
                 m_groups = new QMap<GroupInfo, CreatorFunction>;
             }
 
-            GroupInfo gi(name);
-            gi.prettyName = T::prettyName();
-            gi.formFactor = T::availableOnFormFactors();
+            GroupInfo gi = T::groupInfo();
 
             m_groups->insert(gi, &createGroup<T>);
             return true;
