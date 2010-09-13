@@ -64,6 +64,7 @@ class OpenDesktop : public Plasma::PopupApplet
         void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
         void endWork();
         void configAccepted();
+        void configChanged();
         void startWork();
 
     protected:

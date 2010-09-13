@@ -94,14 +94,7 @@ void OpenDesktop::init()
 
     m_engine->connectSource("Providers", this);
 
-    KConfigGroup cg = config();
-    m_geolocation->city = cg.readEntry("geoCity", QString());
-    m_geolocation->country = cg.readEntry("geoCountry", QString());
-    m_geolocation->countryCode = cg.readEntry("geoCountryCode", QString());
-    m_geolocation->latitude = cg.readEntry("geoLatitude", 0.0);
-    m_geolocation->longitude = cg.readEntry("geoLongitude", 0.0);
-    
-    m_provider = cg.readEntry("provider", QString("https://api.opendesktop.org/v1/"));
+    configChanged();
 
     connectGeolocation();
 }
@@ -339,9 +332,6 @@ void OpenDesktop::configAccepted()
     QString provider = ui.provider->itemData(ui.provider->currentIndex()).toString();
     if(provider != m_provider) {
         kDebug() << "Provider changed" << provider;
-        m_provider = provider;
-        m_credentialsSource = QString("Credentials\\provider:%1").arg(m_provider),
-        emit providerChanged(m_provider);
         KConfigGroup cg = config();
         cg.writeEntry("provider", m_provider);
         emit configNeedsSaving();
@@ -356,6 +346,23 @@ void OpenDesktop::configAccepted()
         connect(job, SIGNAL(finished(KJob*)), service, SLOT(deleteLater()));
     }
     syncGeoLocation();
+}
+
+void OpenDesktop::configChanged()
+{
+    KConfigGroup cg = config();
+    m_geolocation->city = cg.readEntry("geoCity", QString());
+    m_geolocation->country = cg.readEntry("geoCountry", QString());
+    m_geolocation->countryCode = cg.readEntry("geoCountryCode", QString());
+    m_geolocation->latitude = cg.readEntry("geoLatitude", 0.0);
+    m_geolocation->longitude = cg.readEntry("geoLongitude", 0.0);
+    
+    QString provider = cg.readEntry("provider", QString("https://api.opendesktop.org/v1/"));
+    if (provider != m_provider) {
+        m_provider = provider;
+        m_credentialsSource = QString("Credentials\\provider:%1").arg(m_provider);
+        emit providerChanged(m_provider);
+    }
 }
 
 void OpenDesktop::registerAccount()
