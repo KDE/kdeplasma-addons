@@ -205,6 +205,7 @@ void StackingGroup::onAppletActivated()
 GroupInfo StackingGroup::groupInfo()
 {
     GroupInfo gi("stacking", i18n("Stacking Group"));
+    gi.setIcon("object-order-raise"); //FIXME: isn't there a better one?
 
     return gi;
 }

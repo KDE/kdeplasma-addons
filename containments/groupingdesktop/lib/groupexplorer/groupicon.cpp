@@ -27,6 +27,7 @@ GroupIcon::GroupIcon(const QString &name)
 {
     GroupInfo gi = AbstractGroup::groupInfo(name);
     setName(gi.prettyName());
+    m_icon = KIcon(gi.icon());
     setDraggable(true);
 }
 
@@ -36,7 +37,7 @@ GroupIcon::~GroupIcon()
 
 QPixmap GroupIcon::pixmap(const QSize &size)
 {
-    return QPixmap();
+    return m_icon.pixmap(size);
 }
 
 QMimeData* GroupIcon::mimeData()
@@ -44,9 +45,4 @@ QMimeData* GroupIcon::mimeData()
     QMimeData *data = new QMimeData();
     data->setData("plasma/group", m_name.toAscii());
     return data;
-}
-
-void GroupIcon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    AbstractIcon::paint(painter, option, widget);
 }

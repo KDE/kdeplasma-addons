@@ -746,6 +746,7 @@ GroupInfo GridGroup::groupInfo()
     QSet<Plasma::FormFactor> f;
     f << Plasma::Planar << Plasma::MediaCenter << Plasma::Horizontal << Plasma::Vertical;
     gi.setFormFactors(f);
+    gi.setIcon("view-grid");
 
     return gi;
 }

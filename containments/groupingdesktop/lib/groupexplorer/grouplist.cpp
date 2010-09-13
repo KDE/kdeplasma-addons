@@ -47,6 +47,6 @@ void GroupList::updateVisibleIcons()
 {
 }
 
-void GroupList::setSearch(const QString &searchString)
+void GroupList::setSearch(const QString &)
 {
 }

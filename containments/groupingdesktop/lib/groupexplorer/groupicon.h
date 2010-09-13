@@ -20,6 +20,8 @@
 #ifndef GROUPICON_H
 #define GROUPICON_H
 
+#include <KIcon>
+
 #include "abstracticon.h"
 
 class AbstractGroup;
@@ -33,10 +35,10 @@ class GroupIcon : public Plasma::AbstractIcon
 
         QPixmap pixmap(const QSize &size);
         QMimeData* mimeData();
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
     private:
         QString m_name;
+        KIcon m_icon;
 };
 
 #endif //GROUPICON_H

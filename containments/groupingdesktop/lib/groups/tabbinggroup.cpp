@@ -376,6 +376,7 @@ void TabbingGroup::moveToTabAt(const QPointF &scenePos)
 GroupInfo TabbingGroup::groupInfo()
 {
     GroupInfo gi("tabbing", i18n("Tabbing Group"));
+    gi.setIcon("tab-new");
 
     return gi;
 }
