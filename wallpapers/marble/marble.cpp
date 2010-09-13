@@ -53,7 +53,7 @@ MarbleWallpaper::MarbleWallpaper(QObject * parent, const QVariantList & args)
     : Plasma::Wallpaper(parent, args), m_timer(0), m_map(0)
 {
     setPreviewDuringConfiguration(true);
-    KGlobal::locale()->insertCatalog("marble");
+    KGlobal::locale()->insertCatalog(QLatin1String( "marble" ));
 }
 
 MarbleWallpaper::~MarbleWallpaper()
@@ -82,7 +82,7 @@ void MarbleWallpaper::init(const KConfigGroup &config)
 
         // Disable all render plugins (scale bar, compass, etc.) except the "stars" plugin
         foreach (RenderPlugin *item, m_map->renderPlugins()) {
-            if (item->nameId() == "stars") {
+            if (item->nameId() == QLatin1String( "stars" )) {
                 item->setVisible(true);
                 item->setEnabled(true);
             } else {

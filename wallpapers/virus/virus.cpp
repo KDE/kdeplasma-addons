@@ -39,7 +39,7 @@ Virus::Virus(QObject *parent, const QVariantList &args)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
     connect(&alife, SIGNAL(finished()), this, SLOT(virusUpdated()));
-    
+
     //m_timer = QTimer(this);
     m_timer.setSingleShot(true);
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(requestUpdate()));
@@ -54,14 +54,14 @@ Virus::~Virus()
 void Virus::init(const KConfigGroup &config)
 {
     m_timer.stop();
-    m_mode = "SingleImage";//renderingMode().name();
+    m_mode = QLatin1String( "SingleImage" );//renderingMode().name();
     calculateGeometry();
 
     m_resizeMethod = (ResizeMethod)config.readEntry("wallpaperposition", (int)ScaledResize);
     m_wallpaper = config.readEntry("wallpaper", QString());
     if (m_wallpaper.isEmpty()) {
         m_wallpaper = Plasma::Theme::defaultTheme()->wallpaperPath();
-        int index = m_wallpaper.indexOf("/contents/images/");
+        int index = m_wallpaper.indexOf(QLatin1String( "/contents/images/" ));
         if (index > -1) { // We have file from package -> get path to package
             m_wallpaper = m_wallpaper.left(index);
         }
@@ -139,7 +139,7 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     }
     connect(m_uiVirus.m_view, SIGNAL(activated(const QModelIndex &)), this, SLOT(pictureChanged(const QModelIndex &)));
 
-    m_uiVirus.m_pictureUrlButton->setIcon(KIcon("document-open"));
+    m_uiVirus.m_pictureUrlButton->setIcon(KIcon(QLatin1String( "document-open" )));
     connect(m_uiVirus.m_pictureUrlButton, SIGNAL(clicked()), this, SLOT(showFileDialog()));
 
     m_uiVirus.m_resizeMethod->addItem(i18n("Scaled & Cropped"), ScaledAndCroppedResize);
@@ -156,8 +156,8 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     }
     connect(m_uiVirus.m_resizeMethod, SIGNAL(currentIndexChanged(int)),
             this, SLOT(positioningChanged(int)));
-    m_uiVirus.m_newStuff->setIcon(KIcon("get-hot-new-stuff"));
-   
+    m_uiVirus.m_newStuff->setIcon(KIcon(QLatin1String( "get-hot-new-stuff" )));
+
     m_uiVirus.m_color->setColor(m_color);
     connect(m_uiVirus.m_color, SIGNAL(changed(const QColor&)), this, SLOT(colorChanged(const QColor&)));
 
@@ -171,11 +171,11 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     connect(m_uiVirus.m_showCells, SIGNAL(stateChanged(int)), this, SLOT(showCellsChanged(int)));
 
     connect(m_uiVirus.m_newStuff, SIGNAL(clicked()), this, SLOT(getNewWallpaper()));
-    
+
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
-    
+
     connect(m_uiVirus.m_view, SIGNAL(clicked(const QModelIndex &)), this, SLOT(modified()));
-    
+
     return m_configWidget;
 }
 
@@ -243,7 +243,7 @@ void Virus::setSingleImage()
         }
     //if it's not an absolute path, check if it's just a wallpaper name
     } else {
-        const QString path = KStandardDirs::locate("wallpaper", m_wallpaper + "/metadata.desktop");
+        const QString path = KStandardDirs::locate("wallpaper", m_wallpaper + QLatin1String( "/metadata.desktop" ));
 
         if (!path.isEmpty()) {
             QDir dir(path);
@@ -263,7 +263,7 @@ void Virus::setSingleImage()
 void Virus::getNewWallpaper()
 {
     KNS::Engine engine(m_configWidget);
-    if (engine.init("virus_wallpaper.knsrc")) {
+    if (engine.init(QLatin1String( "virus_wallpaper.knsrc" ))) {
         KNS::Entry::List entries = engine.downloadDialogModal(m_configWidget);
 
         if (entries.size() > 0 && m_model) {
@@ -358,7 +358,7 @@ bool Virus::setMetadata(QLabel *label, const QString &text)
 void Virus::showFileDialog()
 {
     if (!m_dialog) {
-        m_dialog = new KFileDialog(KUrl(), "*.png *.jpeg *.jpg *.xcf *.svg *.svgz *.bmp", m_configWidget);
+        m_dialog = new KFileDialog(KUrl(), QLatin1String( "*.png *.jpeg *.jpg *.xcf *.svg *.svgz *.bmp" ), m_configWidget);
         m_dialog->setOperationMode(KFileDialog::Opening);
         m_dialog->setInlinePreviewShown(true);
         m_dialog->setCaption(i18n("Select Wallpaper Image File"));
@@ -419,7 +419,7 @@ void Virus::renderWallpaper(const QString& image)
 QString Virus::cacheId() const
 {
     QSize s = boundingRect().size().toSize();
-    return QString("%5_%3_%4_%1x%2").arg(s.width()).arg(s.height()).arg(m_color.name()).arg(m_resizeMethod).arg(m_img);
+    return QString(QLatin1String( "%5_%3_%4_%1x%2" )).arg(s.width()).arg(s.height()).arg(m_color.name()).arg(m_resizeMethod).arg(m_img);
 }
 
 void Virus::updateBackground(const QImage &img)

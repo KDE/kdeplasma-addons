@@ -1,18 +1,18 @@
 // Copyright 2008-2010 by Benoît Jacob <jacob.benoit.1@gmail.com>
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
 // published by the Free Software Foundation; either version 2 of
 // the License or (at your option) version 3 or any later version
 // accepted by the membership of KDE e.V. (or its successor approved
-// by the membership of KDE e.V.), which shall act as a proxy 
+// by the membership of KDE e.V.), which shall act as a proxy
 // defined in Section 14 of version 3 of the license.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -75,7 +75,7 @@ void Mandelbrot::updateCache()
 {
     // Don't let the mini-previewer in Desktop Settings affect the cache.
     if(isPreviewing()) return;
-    
+
     QString k = key();
 
     // if the view parameters changed since we loaded from cache, or if we couldn't load from cache
@@ -174,9 +174,9 @@ QWidget* Mandelbrot::createConfigurationInterface(QWidget* parent)
     connect(m_ui.m_color3, SIGNAL(changed(const QColor&)), this, SLOT(setColor3(const QColor&)));
     connect(m_ui.m_quality, SIGNAL(activated(int)), this, SLOT(setQuality(int)));
     connect(m_ui.m_lock, SIGNAL(stateChanged(int)), this, SLOT(setLock(int)));
-    
+
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
-    
+
     return widget;
 }
 
@@ -447,7 +447,7 @@ QString Mandelbrot::key() const
     // QString::number doesn't honor any locale setting, that's good for us. The Qt documentation doesn't say
     // whether that's also the case of arg() so let's play safe and use QString::number.
     // notice how we separate the numbers by a space. That prevents "12 3" giving the same key as "1 23".
-    QString s = QString("%1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13 %14 %15")
+    QString s = QString(QLatin1String( "%1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13 %14 %15" ))
               .arg(QString::number(m_center.x(), 'g', digits))
               .arg(QString::number(m_center.y(), 'g', digits))
               .arg(QString::number(m_zoom, 'g', digits))
@@ -455,7 +455,7 @@ QString Mandelbrot::key() const
               .arg(m_color1.red()).arg(m_color1.green()).arg(m_color1.blue())
               .arg(m_color2.red()).arg(m_color2.green()).arg(m_color2.blue())
               .arg(m_color3.red()).arg(m_color3.green()).arg(m_color3.blue());
-    return QString("mandelbrot-%1").arg(qHash(s));
+    return QString(QLatin1String( "mandelbrot-%1" )).arg(qHash(s));
 }
 
 void Mandelbrot::computeStats()
@@ -500,7 +500,7 @@ void Mandelbrot::exportImage()
 {
     KUrl url = KFileDialog::getSaveUrl(
                    KUrl(),
-                   "*.png|PNG images",
+                   QLatin1String( "*.png|" )+i18n( "PNG images" ),
                    0,
                    QString(),
                    KFileDialog::ConfirmOverwrite
@@ -517,7 +517,7 @@ void Mandelbrot::exportConfig()
 {
     QString file = KFileDialog::getSaveFileName(
                      KUrl(),
-                     "*.txt|Text files",
+                     QLatin1String( "*.txt|" )+i18n( "Text files" ),
                      0,
                      QString(),
                      KFileDialog::ConfirmOverwrite
@@ -532,7 +532,7 @@ void Mandelbrot::importConfig()
 {
     QString file = KFileDialog::getOpenFileName(
                      KUrl(),
-                     "*.txt|Text files",
+                     QLatin1String( "*.txt|" )+i18n( "Text files" ),
                      0,
                      QString()
                    );
