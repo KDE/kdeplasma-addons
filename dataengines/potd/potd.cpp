@@ -1,10 +1,10 @@
 /*
  *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
  *
- *   This program is free software; you can redistribute it and/or modify  
- *   it under the terms of the GNU General Public License as published by  
- *   the Free Software Foundation; either version 2 of the License, or     
- *   (at your option) any later version.   
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
  *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -37,11 +37,11 @@ PotdEngine::~PotdEngine()
 
 void PotdEngine::init()
 {
-    KService::List services = KServiceTypeTrader::self()->query("PlasmaPoTD/Plugin");
+    KService::List services = KServiceTypeTrader::self()->query(QLatin1String( "PlasmaPoTD/Plugin" ));
     Q_FOREACH ( const KService::Ptr &service, services ) {
-        QString provider = service->property("X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String).toString();
+        QString provider = service->property(QLatin1String( "X-KDE-PlasmaPoTDProvider-Identifier" ), QVariant::String).toString();
         mFactories.insert(provider, service);
-        setData("Providers", service->name(), provider);
+        setData(QLatin1String( "Providers" ), service->name(), provider);
     }
 }
 
@@ -50,7 +50,7 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
     // check whether it is cached already...
     if ( CachedProvider::isCached( identifier ) ) {
         QVariantList args;
-        args << "String" << identifier;
+        args << QLatin1String( "String" ) << identifier;
 
         CachedProvider *provider = new CachedProvider( identifier, this, args );
         connect( provider, SIGNAL( finished( PotdProvider* ) ), this, SLOT( finished( PotdProvider* ) ) );
@@ -58,7 +58,7 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
         return true;
     }
 
-    const QStringList parts = identifier.split( ':', QString::SkipEmptyParts );
+    const QStringList parts = identifier.split( QLatin1Char( ':' ), QString::SkipEmptyParts );
 
     //: are mandatory
     if ( parts.count() < 2 )
@@ -78,7 +78,7 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
     QVariantList args;
     PotdProvider *provider = 0;
 
-    args << "Date" << date;
+    args << QLatin1String( "Date" ) << date;
 
     provider = qobject_cast<PotdProvider*>( service->createInstance<QObject>( this, args ) );
 

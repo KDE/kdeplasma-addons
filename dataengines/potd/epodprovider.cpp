@@ -1,11 +1,11 @@
 /*
  *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
- *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>                 
+ *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>
  *
- *   This program is free software; you can redistribute it and/or modify  
- *   it under the terms of the GNU General Public License as published by  
- *   the Free Software Foundation; either version 2 of the License, or     
- *   (at your option) any later version.   
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
  *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -54,16 +54,16 @@ void EpodProvider::Private::pageRequestFinished(KJob *_job)
 	emit mParent->error( mParent );
 	return;
     }
-    
+
     const QString data = QString::fromUtf8( job->data() );
-    
-    const QString pattern( "http://epod.usra.edu/.a/*-pi" );
+
+    const QString pattern( QLatin1String( "http://epod.usra.edu/.a/*-pi" ) );
     QRegExp exp( pattern );
     exp.setPatternSyntax(QRegExp::Wildcard);
-    
+
     int pos = exp.indexIn( data ) + pattern.length();
     const QString sub = data.mid( pos-4, pattern.length()+6);
-    KUrl url( QString("http://epod.usra.edu/.a/%1-pi") .arg(sub)  );
+    KUrl url( QString(QLatin1String( "http://epod.usra.edu/.a/%1-pi" )) .arg(sub)  );
     KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     QObject::connect(imageJob, SIGNAL( finished( KJob* )), mParent, SLOT( imageRequestFinished( KJob* ) ) );
 }
@@ -84,12 +84,12 @@ EpodProvider::EpodProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
     const QString type = args[ 0 ].toString();
-    if ( type == "Date" )
+    if ( type == QLatin1String( "Date" ) )
         d->mDate = args[ 1 ].toDate();
     else
 	Q_ASSERT( false && "Invalid type passed to potd provider" );
 
-    KUrl url( QString( "http://epod.usra.edu/blog/" ) );
+    KUrl url( QLatin1String( "http://epod.usra.edu/blog/" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
 
     connect( job, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
@@ -107,7 +107,7 @@ QImage EpodProvider::image() const
 
 QString EpodProvider::identifier() const
 {
-    return QString( "epod:%1" ).arg( d->mDate.toString( Qt::ISODate ));
+    return QString( QLatin1String( "epod:%1" ) ).arg( d->mDate.toString( Qt::ISODate ));
 }
 
 #include "epodprovider.moc"

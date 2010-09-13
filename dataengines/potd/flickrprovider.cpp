@@ -3,10 +3,10 @@
  *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>
  *   Copyright  2008 by Georges Toth <gtoth@trypill.org>
  *
- *   This program is free software; you can redistribute it and/or modify  
- *   it under the terms of the GNU General Public License as published by  
- *   the Free Software Foundation; either version 2 of the License, or     
- *   (at your option) any later version.   
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
  *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -79,22 +79,22 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
         if (xml.isStartElement()) {
             if (xml.name() == "rsp") {
                 /* no pictures available for the specified parameters */
-                if (xml.attributes().value ( "stat" ).toString() == "fail") {
+                if (xml.attributes().value ( QLatin1String( "stat" ) ).toString() == QLatin1String( "fail" ) ) {
                     /* To be sure, decrement the date to two days earlier... @TODO */
                     mActualDate = mActualDate.addDays(-2);
 
-                            KUrl url( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" + mActualDate.toString( Qt::ISODate) );
+                            KUrl url( QLatin1String( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" ) + mActualDate.toString( Qt::ISODate) );
                             KIO::StoredTransferJob *pageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
                             mParent->connect( pageJob, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
                     return;
                 }
-            } else if (xml.name() == "photo") {
-                if (xml.attributes().value ( "ispublic" ).toString() != "1")
+            } else if (xml.name() == QLatin1String( "photo" )) {
+                if (xml.attributes().value ( QLatin1String( "ispublic" ) ).toString() != QLatin1String( "1" ))
                 continue;
 
-                QString fileUrl = QString("http://farm" + xml.attributes().value ( "farm" ).toString() + ".static.flickr.com/"
-                + xml.attributes().value ( "server" ).toString() + '/' + xml.attributes().value ( "id" ).toString()
-                + '_' + xml.attributes().value ( "secret" ).toString() + ".jpg");
+                QString fileUrl = QString(QLatin1String( "http://farm" ) + xml.attributes().value ( QLatin1String( "farm" ) ).toString() + QLatin1String( ".static.flickr.com/" )
+                + xml.attributes().value ( QLatin1String( "server" ) ).toString() + QLatin1Char( '/' ) + xml.attributes().value ( QLatin1String( "id" ) ).toString()
+                                          + QLatin1Char( '_' ) + xml.attributes().value ( QLatin1String( "secret" ) ).toString() + QLatin1String( ".jpg" ));
 
                 m_photoList.append(fileUrl);
             }
@@ -130,14 +130,14 @@ FlickrProvider::FlickrProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
     const QString type = args[ 0 ].toString();
-    if ( type == "Date" ) {
+    if ( type == QLatin1String( "Date" ) ) {
         d->mDate = args[ 1 ].toDate();
         d->mActualDate = d->mDate;
     } else {
         Q_ASSERT( false && "Invalid type passed to potd provider" );
     }
 
-    KUrl url("http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" + d->mDate.toString( Qt::ISODate ) );
+    KUrl url(QLatin1String( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" ) + d->mDate.toString( Qt::ISODate ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url );
     connect( job, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
 }
@@ -154,7 +154,7 @@ QImage FlickrProvider::image() const
 
 QString FlickrProvider::identifier() const
 {
-    return QString( "flickr:%1" ).arg( d->mDate.toString( Qt::ISODate ));
+    return QString( QLatin1String( "flickr:%1" ) ).arg( d->mDate.toString( Qt::ISODate ));
 }
 
 #include "flickrprovider.moc"

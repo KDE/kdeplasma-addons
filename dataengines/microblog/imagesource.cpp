@@ -26,7 +26,7 @@ ImageSource::ImageSource(QObject* parent)
     : Plasma::DataContainer(parent),
       m_runningJobs(0)
 {
-    setObjectName("UserImages");
+    setObjectName(QLatin1String("UserImages"));
 }
 
 ImageSource::~ImageSource()

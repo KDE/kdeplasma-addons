@@ -1,11 +1,11 @@
 /*
  *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
- *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>                 
+ *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>
  *
- *   This program is free software; you can redistribute it and/or modify  
- *   it under the terms of the GNU General Public License as published by  
- *   the Free Software Foundation; either version 2 of the License, or     
- *   (at your option) any later version.   
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
  *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -55,7 +55,7 @@ void WcpotdProvider::Private::pageRequestFinished( KJob *_job )
 	return;
     }
 
-    KUrl picUrl( QString( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" ) );  KIO::StoredTransferJob *imageJob = KIO::storedGet( picUrl, KIO::NoReload, KIO::HideProgressInfo );
+    KUrl picUrl( QLatin1String( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" ) );  KIO::StoredTransferJob *imageJob = KIO::storedGet( picUrl, KIO::NoReload, KIO::HideProgressInfo );
     mParent->connect( imageJob, SIGNAL( finished( KJob *) ), SLOT( imageRequestFinished( KJob* ) ) );
 }
 
@@ -75,12 +75,12 @@ WcpotdProvider::WcpotdProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
     const QString type = args[ 0 ].toString();
-    if ( type == "Date" )
+    if ( type == QLatin1String( "Date" ) )
         d->mDate = args[ 1 ].toDate();
     else
 	Q_ASSERT( false && "Invalid type passed to potd provider" );
 
-    KUrl url( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" );
+    KUrl url( QLatin1String( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" ));
 
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL( finished( KJob *) ), SLOT( pageRequestFinished( KJob* ) ) );
@@ -98,7 +98,7 @@ QImage WcpotdProvider::image() const
 
 QString WcpotdProvider::identifier() const
 {
-    return QString( "wcpotd:%1" ).arg( d->mDate.toString( Qt::ISODate ));
+    return QString( QLatin1String( "wcpotd:%1" ) ).arg( d->mDate.toString( Qt::ISODate ));
 }
 
 #include "wcpotdprovider.moc"

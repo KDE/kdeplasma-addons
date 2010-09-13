@@ -1,12 +1,12 @@
 /*
  *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
- *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>                 
+ *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>
  *
- *   This program is free software; you can redistribute it and/or modify  
- *   it under the terms of the GNU General Public License as published by  
- *   the Free Software Foundation; either version 2 of the License, or     
- *   (at your option) any later version.  
- *                                 
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -54,17 +54,17 @@ void ApodProvider::Private::pageRequestFinished( KJob *_job )
 	emit mParent->error( mParent );
 	return;
     }
-    
+
     const QString data = QString::fromUtf8( job->data() );
-    
-    const QString pattern( "<IMG SRC=\"image/*.jpg" );
+
+    const QString pattern( QLatin1String( "<IMG SRC=\"image/*.jpg" ) );
     QRegExp exp( pattern );
     exp.setPatternSyntax(QRegExp::Wildcard);
-    
+
     int pos = exp.indexIn( data ) + pattern.length();
     const QString sub = data.mid( pos, exp.matchedLength() -21);
 
-    KUrl url( QString( "http://antwrp.gsfc.nasa.gov/apod/image/%1/%2" ).arg(QDate::currentDate().toString( "yyMM" ) ).arg( sub ) );
+    KUrl url( QString( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/image/%1/%2" ) ).arg(QDate::currentDate().toString( QLatin1String( "yyMM" ) ) ).arg( sub ) );
     KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
 }
@@ -85,12 +85,12 @@ ApodProvider::ApodProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
     const QString type = args[ 0 ].toString();
-    if ( type == "Date" )
+    if ( type == QLatin1String( "Date" ) )
         d->mDate = args[ 1 ].toDate();
     else
 	Q_ASSERT( false && "Invalid type passed to potd provider" );
 
-    KUrl url( QString( "http://antwrp.gsfc.nasa.gov/apod/" ) );
+    KUrl url( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL( finished( KJob *) ), SLOT( pageRequestFinished( KJob* ) ) );
 }
@@ -107,7 +107,7 @@ QImage ApodProvider::image() const
 
 QString ApodProvider::identifier() const
 {
-    return QString( "apod:%1" ).arg( d->mDate.toString( Qt::ISODate ));
+    return QString( QLatin1String( "apod:%1" ) ).arg( d->mDate.toString( Qt::ISODate ));
 }
 
 #include "apodprovider.moc"
