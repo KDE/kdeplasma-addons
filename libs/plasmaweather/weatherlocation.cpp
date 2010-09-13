@@ -67,7 +67,7 @@ void WeatherLocation::setDataEngines(Plasma::DataEngine* location, Plasma::DataE
 void WeatherLocation::getDefault()
 {
     if (d->locationEngine && d->locationEngine->isValid()) {
-        d->locationEngine->connectSource("location", this);
+        d->locationEngine->connectSource(QLatin1String( "location" ), this);
     } else {
         emit finished(QString());
     }
@@ -81,13 +81,13 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
 
     d->locationEngine->disconnectSource(source, this);
 
-    QString city = data["city"].toString();
+    QString city = data[QLatin1String( "city" )].toString();
 
-    if (city.contains(","))
-        city.truncate(city.indexOf(',') - 1);
+    if (city.contains(QLatin1Char( ',' )))
+        city.truncate(city.indexOf(QLatin1Char( ',' )) - 1);
 
     if (!city.isEmpty()) {
-        d->validator.validate("bbcukmet", city, true);
+        d->validator.validate(QLatin1String( "bbcukmet" ), city, true);
         return;
     }
 

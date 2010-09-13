@@ -92,11 +92,11 @@ public:
     {
         q->setBusy(false);
 
-        QStringList list = source.split('|', QString::SkipEmptyParts);
+        QStringList list = source.split(QLatin1Char( '|' ), QString::SkipEmptyParts);
         if (list.count() < 3) {
             q->setConfigurationRequired(true);
         } else {
-            q->showMessage(KIcon("dialog-error"),
+            q->showMessage(KIcon(QLatin1String( "dialog-error" )),
                            i18n("Weather information retrieval for %1 timed out.", list.value(2)),
                            Plasma::ButtonNone);
         }
@@ -106,9 +106,9 @@ public:
     {
         qreal t;
 
-        if (tendency.toLower() == "rising") {
+        if (tendency.toLower() == QLatin1String( "rising" )) {
             t = 0.75;
-        } else if (tendency.toLower() == "falling") {
+        } else if (tendency.toLower() == QLatin1String( "falling" )) {
             t = -0.75;
         } else {
             t = Value(tendency.toDouble(), pressure.unit()).convertTo(Kilopascal).number();
@@ -120,7 +120,7 @@ public:
     {
         QString result;
         if (!pressure.isValid()) {
-            return "weather-none-available";
+            return QLatin1String( "weather-none-available" );
         }
         qreal temp = temperature.convertTo(Celsius).number();
         qreal p = pressure.convertTo(Kilopascal).number();
@@ -130,46 +130,46 @@ public:
         p += t * 10;
 
         Plasma::DataEngine::Data data = timeEngine->query(
-                QString("Local|Solar|Latitude=%1|Longitude=%2").arg(latitude).arg(longitude));
-        bool day = (data["Corrected Elevation"].toDouble() > 0.0);
+                QString(QLatin1String( "Local|Solar|Latitude=%1|Longitude=%2" )).arg(latitude).arg(longitude));
+        bool day = (data[QLatin1String( "Corrected Elevation" )].toDouble() > 0.0);
 
         if (p > 103.0) {
             if (day) {
-                result = "weather-clear";
+                result = QLatin1String( "weather-clear" );
             } else {
-                result = "weather-clear-night";
+                result = QLatin1String( "weather-clear-night" );
             }
         } else if (p > 100.0) {
             if (day) {
-                result = "weather-clouds";
+                result = QLatin1String( "weather-clouds" );
             } else {
-                result = "weather-clouds-night";
+                result = QLatin1String( "weather-clouds-night" );
             }
         } else if (p > 99.0) {
             if (day) {
                 if (temp > 1.0) {
-                    result = "weather-showers-scattered-day";
+                    result = QLatin1String( "weather-showers-scattered-day" );
                 } else if (temp < -1.0)  {
-                    result = "weather-snow-scattered-day";
+                    result = QLatin1String( "weather-snow-scattered-day" );
                 } else {
-                    result = "weather-snow-rain";
+                    result = QLatin1String( "weather-snow-rain" );
                 }
             } else {
                 if (temp > 1.0) {
-                    result = "weather-showers-scattered-night";
+                    result = QLatin1String( "weather-showers-scattered-night" );
                 } else if (temp < -1.0)  {
-                    result = "weather-snow-scattered-night";
+                    result = QLatin1String( "weather-snow-scattered-night" );
                 } else {
-                    result = "weather-snow-rain";
+                    result = QLatin1String( "weather-snow-rain" );
                 }
             }
         } else {
             if (temp > 1.0) {
-                result = "weather-showers";
+                result = QLatin1String( "weather-showers" );
             } else if (temp < -1.0)  {
-                result = "weather-snow";
+                result = QLatin1String( "weather-snow" );
             } else {
-                result = "weather-snow-rain";
+                result = QLatin1String( "weather-snow-rain" );
             }
         }
         //kDebug() << result;
@@ -211,7 +211,7 @@ void WeatherPopupApplet::connectToEngine()
     setBusy(true);
     d->busyTimer->start();
     if (d->source.isEmpty()) {
-        d->location.setDataEngines(dataEngine("geolocation"), d->weatherEngine);
+        d->location.setDataEngines(dataEngine(QLatin1String( "geolocation" )), d->weatherEngine);
         d->location.getDefault();
     } else {
         d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
@@ -276,8 +276,8 @@ void WeatherPopupApplet::configChanged()
     d->updateInterval = cfg.readEntry("updateWeather", 30);
     d->source = cfg.readEntry("source", "");
 
-    d->weatherEngine = dataEngine("weather");
-    d->timeEngine = dataEngine("time");
+    d->weatherEngine = dataEngine(QLatin1String( "weather" ));
+    d->timeEngine = dataEngine(QLatin1String( "time" ));
 
     connectToEngine();
 }
@@ -291,17 +291,17 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
         return;
     }
 
-    d->conditionIcon = data["Condition Icon"].toString();
-    if (data["Pressure"].toString() != "N/A") {
-        d->pressure = Value(data["Pressure"].toDouble(), data["Pressure Unit"].toInt());
+    d->conditionIcon = data[QLatin1String( "Condition Icon" )].toString();
+    if (data[QLatin1String( "Pressure" )].toString() != QLatin1String( "N/A" )) {
+        d->pressure = Value(data[QLatin1String( "Pressure" )].toDouble(), data[QLatin1String( "Pressure Unit" )].toInt());
     } else {
         d->pressure = Value();
     }
-    d->tend = data["Pressure Tendency"].toString();
-    d->temperature = Value(data["Temperature"].toDouble(), data["Temperature Unit"].toInt());
-    d->latitude = data["Latitude"].toDouble();
-    d->longitude = data["Longitude"].toDouble();
-    setAssociatedApplicationUrls(KUrl(data.value("Credit Url").toString()));
+    d->tend = data[QLatin1String( "Pressure Tendency" )].toString();
+    d->temperature = Value(data[QLatin1String( "Temperature" )].toDouble(), data[QLatin1String( "Temperature Unit" )].toInt());
+    d->latitude = data[QLatin1String( "Latitude" )].toDouble();
+    d->longitude = data[QLatin1String( "Longitude" )].toDouble();
+    setAssociatedApplicationUrls(KUrl(data.value(QLatin1String( "Credit Url" )).toString()));
 
     d->busyTimer->stop();
     showMessage(QIcon(), QString(), Plasma::ButtonNone);
@@ -330,7 +330,7 @@ UnitPtr WeatherPopupApplet::visibilityUnit()
 
 QString WeatherPopupApplet::conditionIcon()
 {
-    if (d->conditionIcon.isEmpty() || d->conditionIcon == "weather-none-available") {
+    if (d->conditionIcon.isEmpty() || d->conditionIcon == QLatin1String( "weather-none-available" )) {
         d->conditionIcon = d->conditionFromPressure();
     }
     return d->conditionIcon;

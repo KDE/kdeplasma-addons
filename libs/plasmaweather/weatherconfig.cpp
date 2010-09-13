@@ -71,7 +71,7 @@ public:
 
         if (!busyWidget) {
             busyWidget = new KPixmapSequenceWidget(q);
-            KPixmapSequence seq("process-working", 22);
+            KPixmapSequence seq(QLatin1String( "process-working" ), 22);
             busyWidget->setSequence(seq);
             ui.locationSearchLayout->insertWidget(1, busyWidget);
         }
@@ -158,7 +158,7 @@ WeatherConfig::~WeatherConfig()
 
 void WeatherConfig::getNewStuff()
 {
-    KNS3::DownloadDialog dialog("kmediafactory.knsrc", this);
+    KNS3::DownloadDialog dialog(QLatin1String( "kmediafactory.knsrc" ), this);
     dialog.exec();
     KNS3::Entry::List entries = dialog.changedEntries();
 }
@@ -170,9 +170,9 @@ void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
     qDeleteAll(d->validators);
     d->validators.clear();
     if (d->dataengine) {
-        const QVariantList plugins = d->dataengine->query("ions").values();
+        const QVariantList plugins = d->dataengine->query(QLatin1String( "ions" )).values();
         foreach (const QVariant& plugin, plugins) {
-            const QStringList pluginInfo = plugin.toString().split('|');
+            const QStringList pluginInfo = plugin.toString().split(QLatin1Char( '|' ));
             if (pluginInfo.count() > 1) {
                 //kDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
                 //d->ions.insert(pluginInfo[1], pluginInfo[0]);
@@ -198,7 +198,7 @@ void WeatherConfig::Private::addSources(const QMap<QString, QString> &sources)
 
     while (it.hasNext()) {
         it.next();
-        QStringList list = it.value().split('|', QString::SkipEmptyParts);
+        QStringList list = it.value().split(QLatin1Char( '|' ), QString::SkipEmptyParts);
         if (list.count() > 2) {
             //kDebug() << list;
             QString result = i18nc("A weather station location and the weather service it comes from",
@@ -266,7 +266,7 @@ void WeatherConfig::setVisibilityUnit(int unit)
 void WeatherConfig::setSource(const QString &source)
 {
     //kDebug() << "source set to" << source;
-    const QStringList list = source.split('|');
+    const QStringList list = source.split(QLatin1Char( '|' ));
     if (list.count() > 2) {
         QString result = i18nc("A weather station location and the weather service it comes from",
                                "%1 (%2)", list[2], list[0]);
@@ -275,7 +275,7 @@ void WeatherConfig::setSource(const QString &source)
     d->source = source;
 }
 
-QString WeatherConfig::source() const 
+QString WeatherConfig::source() const
 {
     return d->source;
 }

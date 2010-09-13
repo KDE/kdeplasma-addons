@@ -29,7 +29,7 @@ void Weatheri18nCatalog::loadCatalog() {
 
 	loadingMutex.lock();
 	if (!catalogLoaded) {
-		KGlobal::locale()->insertCatalog("libplasmaweather");
+		KGlobal::locale()->insertCatalog(QLatin1String( "libplasmaweather" ));
 		catalogLoaded = true;
 	}
 	loadingMutex.unlock();
