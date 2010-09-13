@@ -25,7 +25,7 @@
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/UnitCategory>
 
-#define CONVERSION_CHAR '>'
+#define CONVERSION_CHAR QLatin1Char( '>' )
 
 using namespace KUnitConversion;
 
@@ -62,7 +62,7 @@ public:
             if (type == GetString && number) {
                 break;
             }
-            if(current == CONVERSION_CHAR) {
+            if(current == QLatin1Char( CONVERSION_CHAR )) {
                 break;
             }
             ++m_index;
@@ -76,7 +76,7 @@ public:
         if (ch.isNumber()) {
             return true;
         }
-        if (QString(".,-+").contains(ch)) {
+        if (QString(QLatin1String( ".,-+" )).contains( ch )) {
             return true;
         }
         return false;
@@ -124,11 +124,11 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args)
-    setObjectName("Converter");
+    setObjectName(QLatin1String( "Converter" ));
 
-    m_separators << QString(CONVERSION_CHAR);
+    m_separators << QString( CONVERSION_CHAR );
     m_separators << i18nc("list of words that can used as amount of 'unit1' [in|to|as] 'unit2'",
-                          "in;to;as").split(';');
+                          "in;to;as").split(QLatin1Char( ';' ));
 
     //can not ignore commands: we have things like m4
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
@@ -137,7 +137,7 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
     QString description = i18n("Converts the value of :q: when :q: is made up of "
                                "\"value unit [>, to, as, in] unit\". You can use the "
                                "Unit converter applet to find all available units.");
-    addSyntax(Plasma::RunnerSyntax("=:q:", description));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "=:q:" ), description));
 }
 
 ConverterRunner::~ConverterRunner()
@@ -171,7 +171,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     const QString s = cmd.get(StringParser::GetString);
 
     if (!s.isEmpty() && !m_separators.contains(s)) {
-        unit1 += ' ' + s;
+        unit1 += QLatin1Char( ' ' ) + s;
     }
     if (s.isEmpty() || !m_separators.contains(s)) {
         cmd.pass(m_separators);
@@ -234,8 +234,8 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         Value v = category->convert(Value(value.toDouble(), u1), u);
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
-        match.setIcon(KIcon("edit-copy"));
-        match.setText(QString("%1 (%2)").arg(v.toString()).arg(u->symbol()));
+        match.setIcon(KIcon(QLatin1String( "edit-copy" )));
+        match.setText(QString(QLatin1String( "%1 (%2)" )).arg(v.toString()).arg(u->symbol()));
         match.setData(v.number());
         context.addMatch(term, match);
     }
@@ -243,7 +243,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     if (units.count() > 0 && !category->description().isEmpty()) {
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::PossibleMatch);
-        match.setIcon(KIcon("document-open-remote"));
+        match.setIcon(KIcon(QLatin1String( "document-open-remote" )));
         match.setText(category->description());
         match.setData(category->url().prettyUrl());
         context.addMatch(term, match);
