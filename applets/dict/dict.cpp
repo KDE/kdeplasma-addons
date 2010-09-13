@@ -60,22 +60,22 @@ DictApplet::DictApplet(QObject *parent, const QVariantList &args)
     , m_graphicsWidget(0)
     , m_wordEdit(0)
 {
-    setPopupIcon("accessories-dictionary");
+    setPopupIcon(QLatin1String( "accessories-dictionary" ));
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
 }
 
 void DictApplet::init()
 {
     const char* dataEngines[]={"dict","qstardict"};
-    bool engineChoice = dataEngine(dataEngines[1])->isValid();
+    bool engineChoice = dataEngine(QString( QLatin1String( dataEngines[1] ) ) )->isValid();
 //     bool engineChoice = false; //for testing
-    m_dataEngine = dataEngines[int(engineChoice)];
+    m_dataEngine = QLatin1String( dataEngines[int(engineChoice)] );
 
     // tooltip stuff
     Plasma::ToolTipContent toolTipData;
     toolTipData.setAutohide(true);
     toolTipData.setMainText(name());
-    toolTipData.setImage(KIcon("accessories-dictionary"));
+    toolTipData.setImage(KIcon(QLatin1String( "accessories-dictionary" )));
 
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);
 
@@ -113,7 +113,7 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_defBrowser = new Plasma::TextBrowser();
     m_defBrowser->nativeWidget()->setNotifyClick(true);
     connect(m_defBrowser->nativeWidget(),SIGNAL(urlClick(QString)),this,SLOT(linkDefine(QString)));
-    m_defBrowser->nativeWidget()->document()->setDefaultStyleSheet(QString(translationCSS)
+    m_defBrowser->nativeWidget()->document()->setDefaultStyleSheet(QString(QLatin1String( translationCSS ))
                                                 .arg(colorScheme.foreground().color().name())
                                                 .arg(colorScheme.foreground(KColorScheme::LinkText).color().name())
                                                 .arg(colorScheme.foreground(KColorScheme::VisitedText).color().name()));
@@ -121,7 +121,7 @@ QGraphicsWidget *DictApplet::graphicsWidget()
 
 //  Icon in upper-left corner
     m_icon = new Plasma::IconWidget(this);
-    m_icon->setIcon("accessories-dictionary");
+    m_icon->setIcon(QLatin1String( "accessories-dictionary" ));
 
 //  Position lineedits
     //const int wordEditOffset = 40;
@@ -148,7 +148,7 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     connect(m_wordEdit, SIGNAL(editingFinished()), this, SLOT(define()));
     connect(m_wordEdit->nativeWidget(), SIGNAL(textChanged(QString)), this, SLOT(autoDefine(QString)));
 
-    dataEngine(m_dataEngine)->connectSource("list-dictionaries", this);
+    dataEngine(m_dataEngine)->connectSource(QLatin1String( "list-dictionaries" ), this);
 
     //connect(m_defEdit, SIGNAL(linkActivated(const QString&)), this, SLOT(linkDefine(const QString&)));
 
@@ -200,8 +200,8 @@ void DictApplet::linkDefine(const QString &text)
 
 void DictApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    if (source=="list-dictionaries") {
-        QStringList newDicts = data["dictionaries"].toStringList();
+    if (source==QLatin1String( "list-dictionaries" )) {
+        QStringList newDicts = data[QLatin1String( "dictionaries" )].toStringList();
         bool changed = false;
         for (QStringList::const_iterator i = newDicts.constBegin(); i != newDicts.constEnd(); ++i) {
             if (!m_dicts.contains(*i)) {
@@ -230,8 +230,8 @@ void DictApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
         m_defBrowser->show();
     }
 
-    if (data.contains("text")) {
-        m_defBrowser->nativeWidget()->setHtml(data[QString("text")].toString());
+    if (data.contains(QLatin1String( "text" ))) {
+        m_defBrowser->nativeWidget()->setHtml(data[QLatin1String("text")].toString());
     }
 
     updateGeometry();
@@ -253,7 +253,7 @@ void DictApplet::define()
     }
 
     if (!newSource.isEmpty() && !dictsList.isEmpty()) {
-        newSource.prepend(dictsList.join(",")+':');
+        newSource.prepend(dictsList.join(QLatin1String( "," ) )+QLatin1Char( ':' ));
     }
 
     if (newSource == m_source) {
@@ -334,7 +334,7 @@ public:
 
 void DictApplet::createConfigurationInterface(KConfigDialog *parent)
 {
-    if (dataEngine("qstardict")->isValid()) {
+    if (dataEngine(QLatin1String( "qstardict" ))->isValid()) {
         QTreeView* widget=new QTreeView(parent);
         widget->setDragEnabled(true);
         widget->setAcceptDrops(true);
