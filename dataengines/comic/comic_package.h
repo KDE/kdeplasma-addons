@@ -24,7 +24,7 @@
 class ComicPackage : public Plasma::PackageStructure
 {
     public:
-        explicit ComicPackage( QObject *parent = 0, QVariantList args = QVariantList() );
+        explicit ComicPackage( QObject *parent = 0, const QVariantList& args = QVariantList() );
 };
 
 #endif

@@ -21,7 +21,7 @@
 #include "plasma/applet.h"
 #include "plasma/package.h"
 
-ComicPackage::ComicPackage( QObject *parent, QVariantList args )
+ComicPackage::ComicPackage( QObject *parent, const QVariantList& args )
     : Plasma::PackageStructure( parent, "Comic" )
 {
     Q_UNUSED( args )
