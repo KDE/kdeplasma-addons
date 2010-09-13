@@ -95,23 +95,7 @@ void RememberTheMilkPlasmoid::init() {
   m_authService->setParent(this);
   connect(m_authService, SIGNAL(finished(Plasma::ServiceJob*)), SLOT(jobFinished(Plasma::ServiceJob*)));
   
-  if (m_token.isNull())
-    setConfigurationRequired(true, i18n("Authentication to Remember The Milk needed"));
-  else {
-    KConfigGroup cg = m_authService->operationDescription("AuthWithToken");
-    cg.writeEntry("token", m_token);
-    busyUntil(m_authService->startOperationCall(cg)); 
-    busyUntil(0); // Sets busy until we manually call jobFinished(0). Busy until first tasks refresh
-  }
-  
-  QString sortBy = config().readEntry("SortBy").toLower();  
-  kDebug() << "Config says sort by " << sortBy;
-  if (sortBy == "date" || sortBy == "due")
-    setSortBy(SortDue);
-  else if (sortBy == "priority")
-    setSortBy(SortPriority);
-  else
-    setSortBy(SortDue); // Default
+  configChanged();
 
   Plasma::Applet::init();
   setAssociatedApplicationUrls(KUrl("http://rememberthemilk.com"));
@@ -377,10 +361,6 @@ QGraphicsWidget* RememberTheMilkPlasmoid::graphicsWidget() {
   m_graphicsWidget->setMinimumSize(250, 300);
   m_graphicsWidget->setPreferredSize(300, 500);
 
-  KConfigGroup cg = config();
-  m_token = cg.readEntry("token");
-  kDebug() << "Token from config: " << m_token;
- 
   m_taskEditor = new TaskEditor(m_engine, m_tasksView);
   m_taskEditor->hide();
   connect(m_taskEditor, SIGNAL(requestDiscardChanges()), this, SLOT(onTaskEditorHide()));
@@ -389,6 +369,31 @@ QGraphicsWidget* RememberTheMilkPlasmoid::graphicsWidget() {
   connect(m_taskEditor, SIGNAL(jobFinished(Plasma::ServiceJob*)), SLOT(jobFinished(Plasma::ServiceJob*)));
   
   return m_graphicsWidget;
+}
+
+void RememberTheMilkPlasmoid::configChanged()
+{
+  KConfigGroup cg = config();
+  m_token = cg.readEntry("token");
+  kDebug() << "Token from config: " << m_token;
+
+  if (m_token.isNull())
+    setConfigurationRequired(true, i18n("Authentication to Remember The Milk needed"));
+  else {
+    KConfigGroup cg = m_authService->operationDescription("AuthWithToken");
+    cg.writeEntry("token", m_token);
+    busyUntil(m_authService->startOperationCall(cg)); 
+    busyUntil(0); // Sets busy until we manually call jobFinished(0). Busy until first tasks refresh
+  }
+  
+  QString sortBy = config().readEntry("SortBy").toLower();  
+  kDebug() << "Config says sort by " << sortBy;
+  if (sortBy == "date" || sortBy == "due")
+    setSortBy(SortDue);
+  else if (sortBy == "priority")
+    setSortBy(SortPriority);
+  else
+    setSortBy(SortDue); // Default
 }
 
 #include "rememberthemilk-plasmoid.moc"
