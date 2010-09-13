@@ -6,16 +6,24 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDEPIMLIBS_INCLUDE
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 
-# We add our source code here
-set(events_SRCS events.cpp datetime_parser.cpp datetime_range.cpp)
+# Plasma runner
+set(events_SRCS events.cpp datetime_parser.cpp datetime_range.cpp collection_selector.cpp)
 
 kde4_add_plugin(plasma_runner_events ${events_SRCS})
 target_link_libraries(plasma_runner_events ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_AKONADI_LIBS} ${KDEPIMLIBS_KCAL_LIBS})
 
-install(TARGETS plasma_runner_events
+# Config module
+set(kcm_events_SRCS events_config.cpp collection_selector.cpp)
+
+kde4_add_ui_files(kcm_events_SRCS events_config.ui)
+kde4_add_plugin(kcm_plasma_runner_events ${kcm_events_SRCS})
+target_link_libraries(kcm_plasma_runner_events ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_AKONADI_LIBS} ${KDEPIMLIBS_KCAL_LIBS})
+
+# Installation
+install(TARGETS plasma_runner_events kcm_plasma_runner_events
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install(FILES plasma-runner-events.desktop
+install(FILES plasma-runner-events.desktop plasma-runner-events_config.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
 # Unit tests

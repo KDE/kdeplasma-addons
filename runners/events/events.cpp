@@ -19,12 +19,13 @@
  */
 
 #include "events.h"
+#include "events_config.h"
+#include "collection_selector.h"
 
 #include <KDebug>
 #include <KMimeType>
 #include <KIconLoader>
 
-#include <Akonadi/CollectionFetchJob>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/ItemCreateJob>
@@ -40,10 +41,6 @@
 
 // This is the command that links the applet to the .desktop file
 K_EXPORT_PLASMA_RUNNER(events, EventsRunner)
-
-// Mime types
-static const QString eventMimeType( "application/x-vnd.akonadi.calendar.event" );
-static const QString todoMimeType( "application/x-vnd.akonadi.calendar.todo" );
 
 // Keywords
 static const QString eventKeyword( i18nc( "Event creation keyword", "event" ) );
@@ -73,33 +70,30 @@ EventsRunner::EventsRunner(QObject *parent, const QVariantList& args)
 {
     Q_UNUSED(args);
 
-    setObjectName("events_runner");
+    setObjectName(RUNNER_NAME);
 
     icon = KIcon( KIconLoader().loadMimeTypeIcon( KMimeType::mimeType( "text/calendar" )->iconName(), KIconLoader::NoGroup ) );
 
-    CollectionFetchJob *job = new CollectionFetchJob( Collection::root(), CollectionFetchJob::Recursive, this );
-
-    connect( job, SIGNAL( collectionsReceived(Akonadi::Collection::List) ), this, SLOT( collectionsReceived(Akonadi::Collection::List) ) );
-
     describeSyntaxes();
+    reloadConfiguration();
 }
 
 EventsRunner::~EventsRunner() {
 }
 
 void EventsRunner::reloadConfiguration() {
+    CollectionSelector * selector = new CollectionSelector( this );
+    connect( selector, SIGNAL( collectionsReceived(CollectionSelector &) ), this, SLOT( collectionsReceived(CollectionSelector &) ) );
+    selector->receiveCollections();
 }
 
-void EventsRunner::collectionsReceived( const Collection::List & list ) {
-    foreach ( const Collection & coll, list ) {
-        if ( !eventsCollection.isValid() && coll.contentMimeTypes().contains( eventMimeType ) ) {
-            eventsCollection = coll;
-        }
+void EventsRunner::collectionsReceived( CollectionSelector & selector ) {
+    KConfigGroup cfg = config();
 
-        if ( !todoCollection.isValid() && coll.contentMimeTypes().contains( todoMimeType ) ) {
-            todoCollection = coll;
-        }
-    }
+    todoCollection = selector.selectTodoCollection( cfg.readEntry( CONFIG_TODO_COLLECTION, (Collection::Id)0 ) );
+    eventCollection = selector.selectEventCollection( cfg.readEntry( CONFIG_TODO_COLLECTION, (Collection::Id)0 ) );
+
+    selector.deleteLater(); // No need to store it in memory anymore
 }
 
 Akonadi::Item::List EventsRunner::selectItems( const QString & query, const QStringList & mimeTypes ) {
@@ -330,7 +324,7 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
     QMap<QString,QVariant> data = match.data().toMap();
 
     if ( data["type"].toInt() == CreateEvent ) {
-        if ( !eventsCollection.isValid() ) {
+        if ( !eventCollection.isValid() ) {
             qDebug() << "No valid collection for events available";
             return;
         }
@@ -350,7 +344,7 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
         Item item( eventMimeType );
         item.setPayload<KCal::Event::Ptr>( event );
 
-        new Akonadi::ItemCreateJob( item, eventsCollection, this );
+        new Akonadi::ItemCreateJob( item, eventCollection, this );
     } else if ( data["type"].toInt() == CreateTodo ) {
         if ( !todoCollection.isValid() ) {
             qDebug() << "No valid collection for todos available";

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Calendar Events
+Comment=Calendar Events runner
+
+Icon=korganizer
+Type=Service
+
+X-KDE-ServiceTypes=KCModule
+X-KDE-Library=kcm_plasma_runner_events
+X-KDE-ParentComponents=org.kde.events_runner
+X-KDE-PluginKeyword=kcm_events_runner

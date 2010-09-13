@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EventsRunnerConfig</class>
+ <widget class="QWidget" name="EventsRunnerConfig">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>332</width>
+    <height>252</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="configLayout">
+   <item>
+    <widget class="QGroupBox" name="akonadiGroup">
+     <property name="title">
+      <string>Akonadi collections</string>
+     </property>
+     <layout class="QGridLayout" name="akonadiGroupLayout">
+      <item row="0" column="1">
+       <widget class="KComboBox" name="eventCollectionCombo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="eventCollectionLabel">
+        <property name="text">
+         <string>Insert events into:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="KComboBox" name="todoCollectionCombo"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="todoCollectionLabel">
+        <property name="text">
+         <string>Insert tasks into:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

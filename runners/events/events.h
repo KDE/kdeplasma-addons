@@ -21,6 +21,8 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
+#include "datetime_parser.h"
+
 #include <Plasma/AbstractRunner>
 
 #include <Akonadi/Collection>
@@ -31,7 +33,7 @@
 #include <QMap>
 #include <QMutex>
 
-#include "datetime_parser.h"
+class CollectionSelector;
 
 /**
 */
@@ -53,7 +55,7 @@ private slots:
     /**
       Called when Akonadi collections loaded
     */
-    void collectionsReceived( const Akonadi::Collection::List & list );
+    void collectionsReceived( CollectionSelector & selector );
 
 private:
 
@@ -82,9 +84,7 @@ private:
 
     DateTimeParser dateTimeParser;
 
-    Akonadi::Collection eventsCollection;
-    Akonadi::Collection todoCollection;
-
+    Akonadi::Collection eventCollection, todoCollection;
     Akonadi::Item::List cachedItems;
     bool cachedItemsLoaded;
     QMutex cachedItemsMutex;
