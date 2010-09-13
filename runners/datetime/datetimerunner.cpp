@@ -36,12 +36,12 @@ static const QString timeWord = i18nc("Note this is a KRunner keyword", "time");
 DateTimeRunner::DateTimeRunner(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
-    setObjectName("DataTimeRunner");
+    setObjectName(QLatin1String( "DataTimeRunner" ));
 
     addSyntax(Plasma::RunnerSyntax(dateWord, i18n("Displays the current date")));
-    addSyntax(Plasma::RunnerSyntax(dateWord + " :q:", i18n("Displays the current date in a given timezone")));
+    addSyntax(Plasma::RunnerSyntax(dateWord + QLatin1String( " :q:" ), i18n("Displays the current date in a given timezone")));
     addSyntax(Plasma::RunnerSyntax(timeWord, i18n("Displays the current time")));
-    addSyntax(Plasma::RunnerSyntax(timeWord + " :q:", i18n("Displays the current time in a given timezone")));
+    addSyntax(Plasma::RunnerSyntax(timeWord + QLatin1String( " :q:" ), i18n("Displays the current time in a given timezone")));
 }
 
 DateTimeRunner::~DateTimeRunner()
@@ -54,7 +54,7 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
     if (term.compare(dateWord, Qt::CaseInsensitive) == 0) {
         const QString date = KGlobal::locale()->formatDate(QDate::currentDate());
         addMatch(i18n("Today's date is %1", date), date, context);
-    } else if (term.startsWith(dateWord + ' ', Qt::CaseInsensitive)) {
+    } else if (term.startsWith(dateWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
         QDateTime dt = datetime(term, true, tzName);
         if (dt.isValid()) {
@@ -64,7 +64,7 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
     } else if (term.compare(timeWord, Qt::CaseInsensitive) == 0) {
         const QString time = KGlobal::locale()->formatTime(QTime::currentTime());
         addMatch(i18n("The current time is %1", time), time, context);
-    } else if (term.startsWith(timeWord + ' ', Qt::CaseInsensitive)) {
+    } else if (term.startsWith(timeWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
         QDateTime dt = datetime(term, true, tzName);
         if (dt.isValid()) {
@@ -79,8 +79,8 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
     QDateTime dt;
     const QString tz = term.right(term.length() - (date ? dateWord.length() : timeWord.length()) - 1);
 
-    if (tz.compare("UTC", Qt::CaseInsensitive) == 0) {
-        tzName = "UTC";
+    if (tz.compare(QLatin1String( "UTC" ), Qt::CaseInsensitive) == 0) {
+        tzName = QLatin1String( "UTC" );
         dt = KDateTime::currentDateTime(KTimeZone::utc()).dateTime();
         return dt;
     }
@@ -100,7 +100,7 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
                 dt = KDateTime::currentDateTime(it.value()).dateTime();
             } else {
                 foreach (const QByteArray &abbrev, it.value().abbreviations()) {
-                    if (QString(abbrev).contains(tz, Qt::CaseInsensitive)) {
+                    if (QString( abbrev ).contains(tz, Qt::CaseInsensitive)) {
                         tzName = abbrev;
                         dt = KDateTime::currentDateTime(it.value()).dateTime();
                     }
@@ -118,7 +118,7 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
     match.setText(text);
     match.setData(clipboardText);
     match.setType(Plasma::QueryMatch::InformationalMatch);
-    match.setIcon(KIcon("clock"));
+    match.setIcon(KIcon(QLatin1String( "clock" )));
 
     QList<Plasma::QueryMatch> matches;
     matches << match;
