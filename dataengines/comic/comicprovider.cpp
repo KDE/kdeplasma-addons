@@ -92,14 +92,14 @@ ComicProvider::ComicProvider( QObject *parent, const QVariantList &args )
     Q_ASSERT( args.count() >= 2 );
     const QString type = args[ 0 ].toString();
 
-    if ( type == "Date" )
+    if ( type == QLatin1String( "Date" ) )
         d->mRequestedDate = args[ 1 ].toDate();
-    else if ( type == "Number" )
+    else if ( type == QLatin1String( "Number" ) )
         d->mRequestedNumber = args[ 1 ].toInt();
-    else if ( type == "String" ) {
+    else if ( type == QLatin1String( "String" ) ) {
         d->mRequestedId = args[ 1 ].toString();
 
-        int index = d->mRequestedId.indexOf( ':' );
+        int index = d->mRequestedId.indexOf( QLatin1Char( ':' ) );
         d->mRequestedComicName = d->mRequestedId.mid( 0, index );
     }
     else
@@ -275,7 +275,7 @@ QString ComicProvider::suffixType() const
     if ( !d->mComicDescription.isValid() ) {
         return QString();
     }
-    return d->mComicDescription.property( "X-KDE-PlasmaComicProvider-SuffixType" ).toString();
+    return d->mComicDescription.property( QLatin1String( "X-KDE-PlasmaComicProvider-SuffixType" ) ).toString();
 }
 
 KPluginInfo ComicProvider::description() const

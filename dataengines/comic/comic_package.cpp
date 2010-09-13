@@ -22,21 +22,21 @@
 #include "plasma/package.h"
 
 ComicPackage::ComicPackage( QObject *parent, const QVariantList& args )
-    : Plasma::PackageStructure( parent, "Comic" )
+    : Plasma::PackageStructure( parent, QLatin1String( "Comic" ) )
 {
     Q_UNUSED( args )
-    addDirectoryDefinition( "images", "images", i18n( "Images" ) );
+    addDirectoryDefinition( "images", QLatin1String( "images" ), i18n( "Images" ) );
     QStringList mimetypes;
-    mimetypes << "image/svg+xml" << "image/png" << "image/jpeg";
+    mimetypes << QLatin1String( "image/svg+xml" ) << QLatin1String( "image/png" ) << QLatin1String( "image/jpeg" );
     setMimetypes( "images", mimetypes );
 
-    addDirectoryDefinition( "scripts", "code", i18n( "Executable Scripts" ) );
+    addDirectoryDefinition( "scripts", QLatin1String( "code" ), i18n( "Executable Scripts" ) );
     mimetypes.clear();
-    mimetypes << "text/*";
+    mimetypes << QLatin1String( "text/*" );
     setMimetypes( "scripts", mimetypes );
 
-    addFileDefinition( "mainscript", "code/main", i18n( "Main Script File" ) );
+    addFileDefinition( "mainscript", QLatin1String( "code/main" ), i18n( "Main Script File" ) );
 
-    setDefaultPackageRoot( "plasma/comics/" );
-    setServicePrefix( "plasma-comic-" );
+    setDefaultPackageRoot( QLatin1String( "plasma/comics/" ) );
+    setServicePrefix( QLatin1String( "plasma-comic-" ) );
 }

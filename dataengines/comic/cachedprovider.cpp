@@ -29,9 +29,9 @@
 
 static QString identifierToPath( const QString &identifier )
 {
-    const QString dataDir = KStandardDirs::locateLocal( "data", "plasma_engine_comic/" );
+    const QString dataDir = KStandardDirs::locateLocal( "data", QLatin1String( "plasma_engine_comic/" ));
 
-    return QString( dataDir + QUrl::toPercentEncoding( identifier ) );
+    return QString( dataDir + QString::fromAscii( QUrl::toPercentEncoding( identifier ) ) );
 }
 
 
@@ -68,56 +68,56 @@ QString CachedProvider::identifier() const
 
 QString CachedProvider::nextIdentifier() const
 {
-    QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "nextIdentifier", QString() ).toString();
+    QSettings settings( identifierToPath( requestedString() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "nextIdentifier" ), QString() ).toString();
 }
 
 QString CachedProvider::previousIdentifier() const
 {
-    QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "previousIdentifier", QString() ).toString();
+    QSettings settings( identifierToPath( requestedString() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "previousIdentifier" ), QString() ).toString();
 }
 
 QString CachedProvider::firstStripIdentifier() const
 {
-    QSettings settings( identifierToPath( requestedComicName() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "firstStripIdentifier", QString() ).toString();
+    QSettings settings( identifierToPath( requestedComicName() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "firstStripIdentifier" ), QString() ).toString();
 }
 
 QString CachedProvider::lastCachedStripIdentifier() const
 {
-    QSettings settings( identifierToPath( requestedComicName() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "lastCachedStripIdentifier", QString() ).toString();
+    QSettings settings( identifierToPath( requestedComicName() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "lastCachedStripIdentifier" ), QString() ).toString();
 }
 
 QString CachedProvider::comicAuthor() const
 {
-    QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "comicAuthor", QString() ).toString();
+    QSettings settings( identifierToPath( requestedString() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "comicAuthor" ), QString() ).toString();
 }
 
 QString CachedProvider::stripTitle() const
 {
-    QSettings settings( identifierToPath ( requestedString() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "stripTitle", QString() ).toString();
+    QSettings settings( identifierToPath ( requestedString() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "stripTitle" ), QString() ).toString();
 }
 
 QString CachedProvider::additionalText() const
 {
-    QSettings settings( identifierToPath ( requestedString() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "additionalText", QString() ).toString();
+    QSettings settings( identifierToPath ( requestedString() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "additionalText" ), QString() ).toString();
 }
 
 QString CachedProvider::suffixType() const
 {
-    QSettings settings( identifierToPath ( requestedComicName() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "suffixType", QString() ).toString();
+    QSettings settings( identifierToPath ( requestedComicName() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "suffixType" ), QString() ).toString();
 }
 
 QString CachedProvider::name() const
 {
-    QSettings settings( identifierToPath ( requestedComicName() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "title", QString() ).toString();
+    QSettings settings( identifierToPath ( requestedComicName() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "title" ), QString() ).toString();
 }
 
 void CachedProvider::triggerFinished()
@@ -134,18 +134,18 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
 {
     const QString path = identifierToPath( identifier );
 
-    int index = identifier.indexOf( ':' );
+    int index = identifier.indexOf( QLatin1Char( ':' ) );
     const QString pathMain = identifierToPath( identifier.mid( 0, index ) );
 
     if ( !info.isEmpty() ) {
-        QSettings settings( path + ".conf", QSettings::IniFormat );
-        QSettings settingsMain( pathMain + ".conf", QSettings::IniFormat );
+        QSettings settings( path + QLatin1String( ".conf" ), QSettings::IniFormat );
+        QSettings settingsMain( pathMain + QLatin1String( ".conf" ), QSettings::IniFormat );
 
         for ( Settings::const_iterator i = info.constBegin(); i != info.constEnd(); ++i ) {
-                if ( ( i.key() == "firstStripIdentifier" ) || ( i.key() == "title" ) ||
-                     ( i.key() == "lastCachedStripIdentifier" ) || ( i.key() == "suffixType" ) ||
-                     ( i.key() == "shopUrl" ) || ( i.key() == "isLeftToRight" ) ||
-                     ( i.key() == "isTopToBottom" ) ) {
+                if ( ( i.key() == QLatin1String( "firstStripIdentifier" ) ) || ( i.key() == QLatin1String( "title" ) ) ||
+                     ( i.key() == QLatin1String( "lastCachedStripIdentifier" ) ) || ( i.key() == QLatin1String( "suffixType" ) ) ||
+                     ( i.key() == QLatin1String( "shopUrl" ) ) || ( i.key() == QLatin1String( "isLeftToRight" ) ) ||
+                     ( i.key() == QLatin1String( "isTopToBottom" ) ) ) {
                     settingsMain.setValue( i.key(), i.value() );
                 } else {
                     settings.setValue( i.key(), i.value() );
@@ -158,26 +158,26 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
 
 KUrl CachedProvider::websiteUrl() const
 {
-    QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
-    return KUrl( settings.value( "websiteUrl", QString() ).toString() );
+    QSettings settings( identifierToPath( requestedString() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return KUrl( settings.value( QLatin1String( "websiteUrl" ), QString() ).toString() );
 }
 
 KUrl CachedProvider::shopUrl() const
 {
-    QSettings settings( identifierToPath( requestedComicName() ) + ".conf", QSettings::IniFormat );
-    return KUrl( settings.value( "shopUrl", QString() ).toString() );
+    QSettings settings( identifierToPath( requestedComicName() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return KUrl( settings.value( QLatin1String( "shopUrl" ), QString() ).toString() );
 }
 
 bool CachedProvider::isLeftToRight() const
 {
-    QSettings settings( identifierToPath( requestedComicName() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "isLeftToRight", true ).toBool();
+    QSettings settings( identifierToPath( requestedComicName() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "isLeftToRight" ), true ).toBool();
 }
 
 bool CachedProvider::isTopToBottom() const
 {
-    QSettings settings( identifierToPath( requestedComicName() ) + ".conf", QSettings::IniFormat );
-    return settings.value( "isTopToBottom", true ).toBool();
+    QSettings settings( identifierToPath( requestedComicName() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return settings.value( QLatin1String( "isTopToBottom" ), true ).toBool();
 }
 
 #include "cachedprovider.moc"

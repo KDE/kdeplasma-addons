@@ -78,7 +78,7 @@ QString ComicProviderKross::identifierToString( const QVariant &identifier ) con
 
 QString ComicProviderKross::identifier() const
 {
-    return pluginName() + ':' + identifierToString( m_wrapper.identifierVariant() );
+    return pluginName() + QLatin1Char( ':' ) + identifierToString( m_wrapper.identifierVariant() );
 }
 
 QString ComicProviderKross::nextIdentifier() const

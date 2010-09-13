@@ -293,7 +293,7 @@ ComicProviderWrapper::~ComicProviderWrapper()
 
 void ComicProviderWrapper::init()
 {
-    const QString path = KStandardDirs::locate( "data", "plasma/comics/" + mProvider->pluginName() + '/' );
+    const QString path = KStandardDirs::locate( "data", QLatin1String( "plasma/comics/" ) + mProvider->pluginName() + QLatin1Char( '/' ) );
     if ( !path.isEmpty() ) {
         mPackage = new Plasma::Package( path, ComicProviderKross::packageStructure() );
 
@@ -310,15 +310,15 @@ void ComicProviderWrapper::init()
             if ( info.exists() ) {
                 mAction = new Kross::Action( parent(), mProvider->pluginName() );
                 if ( mAction ) {
-                    mAction->addObject( this, "comic" );
-                    mAction->addObject( new StaticDateWrapper( this ), "date" );
+                    mAction->addObject( this, QLatin1String( "comic" ) );
+                    mAction->addObject( new StaticDateWrapper( this ), QLatin1String( "date" ) );
                     mAction->setFile( info.filePath() );
                     mAction->trigger();
                     mFunctions = mAction->functionNames();
 
                     mIdentifierSpecified = !mProvider->isCurrent();
                     setIdentifierToDefault();
-                    callFunction( "init" );
+                    callFunction( QLatin1String( "init" ) );
                 }
             }
         }
@@ -335,8 +335,8 @@ const QStringList& ComicProviderWrapper::extensions() const
         foreach( const QString &interpretername, Kross::Manager::self().interpreters() ) {
             info = Kross::Manager::self().interpreterInfo( interpretername );
             wildcards = info->wildcard();
-            wildcards.remove( '*' );
-            mExtensions << wildcards.split( ' ' );
+            wildcards.remove( QLatin1Char( '*' ) );
+            mExtensions << wildcards.split( QLatin1Char( ' ' ) );
         }
     }
     return mExtensions;
@@ -345,12 +345,12 @@ const QStringList& ComicProviderWrapper::extensions() const
 ComicProvider::IdentifierType ComicProviderWrapper::identifierType() const
 {
     ComicProvider::IdentifierType result = ComicProvider::StringIdentifier;
-    const QString type = mProvider->description().property( "X-KDE-PlasmaComicProvider-SuffixType" ).toString();
-    if ( type == "Date" ) {
+    const QString type = mProvider->description().property( QLatin1String( "X-KDE-PlasmaComicProvider-SuffixType" ) ).toString();
+    if ( type == QLatin1String( "Date" ) ) {
         result = ComicProvider::DateIdentifier;
-    } else if ( type == "Number" ) {
+    } else if ( type == QLatin1String( "Number" ) ) {
         result = ComicProvider::NumberIdentifier;
-    } else if ( type == "String" ) {
+    } else if ( type == QLatin1String( "String" ) ) {
         result = ComicProvider::StringIdentifier;
     }
     return result;
@@ -358,7 +358,7 @@ ComicProvider::IdentifierType ComicProviderWrapper::identifierType() const
 
 QImage ComicProviderWrapper::comicImage()
 {
-    ImageWrapper* img = qobject_cast<ImageWrapper*>( callFunction( "image" ).value<QObject*>() );
+    ImageWrapper* img = qobject_cast<ImageWrapper*>( callFunction( QLatin1String( "image" ) ).value<QObject*>() );
     if ( functionCalled() && img ) {
         return img->image();
     }
@@ -471,7 +471,7 @@ void ComicProviderWrapper::setTopToBottom( bool ttb )
 
 QString ComicProviderWrapper::textCodec() const
 {
-    return QString( mTextCodec );
+    return QString::fromAscii( mTextCodec );
 }
 
 void ComicProviderWrapper::setTextCodec( const QString &textCodec )
@@ -700,7 +700,7 @@ void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
     --mRequests;
     if ( id == Image ) {
         mKrossImage = new ImageWrapper( this, data );
-        callFunction( "pageRetrieved", QVariantList() << id <<
+        callFunction( QLatin1String( "pageRetrieved" ), QVariantList() << id <<
                       qVariantFromValue( qobject_cast<QObject*>( mKrossImage ) ) );
         if ( mRequests < 1 ) { // Don't finish if we still have pageRequests
             finished();
@@ -715,14 +715,14 @@ void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
         }
         QString html = codec->toUnicode( data );
 
-        callFunction( "pageRetrieved", QVariantList() << id << html );
+        callFunction( QLatin1String( "pageRetrieved" ), QVariantList() << id << html );
     }
 }
 
 void ComicProviderWrapper::pageError( int id, const QString &message )
 {
     --mRequests;
-    callFunction( "pageError", QVariantList() << id << message );
+    callFunction( QLatin1String( "pageError" ), QVariantList() << id << message );
     if ( !functionCalled() ) {
         emit mProvider->error( mProvider );
     }
@@ -731,7 +731,7 @@ void ComicProviderWrapper::pageError( int id, const QString &message )
 void ComicProviderWrapper::redirected(int id, const KUrl &newUrl)
 {
     --mRequests;
-    callFunction( "redirected", QVariantList() << id << newUrl );
+    callFunction( QLatin1String( "redirected" ), QVariantList() << id << newUrl );
     if ( mRequests < 1 ) { //Don't finish while there are still requests
         finished();
     }
@@ -739,16 +739,16 @@ void ComicProviderWrapper::redirected(int id, const KUrl &newUrl)
 
 void ComicProviderWrapper::finished() const
 {
-    kDebug() << QString( "Author" ).leftJustified( 22, '.' ) << comicAuthor();
-    kDebug() << QString( "Website URL" ).leftJustified( 22, '.' ) << mWebsiteUrl;
-    kDebug() << QString( "Shop URL" ).leftJustified( 22, '.' ) << mShopUrl;
-    kDebug() << QString( "Title" ).leftJustified( 22, '.' ) << mTitle;
-    kDebug() << QString( "Additional Text" ).leftJustified( 22, '.' ) << mAdditionalText;
-    kDebug() << QString( "Identifier" ).leftJustified( 22, '.' ) << mIdentifier;
-    kDebug() << QString( "First Identifier" ).leftJustified( 22, '.' ) << mFirstIdentifier;
-    kDebug() << QString( "Last Identifier" ).leftJustified( 22, '.' ) << mLastIdentifier;
-    kDebug() << QString( "Next Identifier" ).leftJustified( 22, '.' ) << mNextIdentifier;
-    kDebug() << QString( "Previous Identifier" ).leftJustified( 22, '.' ) << mPreviousIdentifier;
+    kDebug() << QString( QLatin1String( "Author" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << comicAuthor();
+    kDebug() << QString( QLatin1String( "Website URL" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mWebsiteUrl;
+    kDebug() << QString( QLatin1String( "Shop URL" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mShopUrl;
+    kDebug() << QString( QLatin1String( "Title" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mTitle;
+    kDebug() << QString( QLatin1String( "Additional Text" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mAdditionalText;
+    kDebug() << QString( QLatin1String( "Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mIdentifier;
+    kDebug() << QString( QLatin1String( "First Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mFirstIdentifier;
+    kDebug() << QString( QLatin1String( "Last Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mLastIdentifier;
+    kDebug() << QString( QLatin1String( "Next Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mNextIdentifier;
+    kDebug() << QString( QLatin1String( "Previous Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mPreviousIdentifier;
     emit mProvider->finished( mProvider );
 }
 
