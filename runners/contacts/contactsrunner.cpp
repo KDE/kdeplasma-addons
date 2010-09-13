@@ -37,13 +37,13 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args);
-    setObjectName("Contacts");
+    setObjectName(QLatin1String( "Contacts" ));
 
     m_book = KABC::StdAddressBook::self(true /*asynchronous*/);
 
-    m_icon = KIcon("internet-mail");
+    m_icon = KIcon(QLatin1String( "internet-mail" ));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
-    addSyntax(Plasma::RunnerSyntax(":q:", i18n("Finds people in your address book matching :q:.")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( ":q:" ), i18n("Finds people in your address book matching :q:.")));
     setDefaultSyntax(Plasma::RunnerSyntax(i18nc("list of all people in address book", "contacts"),
                                    i18n("List all people in your address book.")));
 }
@@ -70,7 +70,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
         bool matchedName;
         bool matchedMail;
 
-        if (term.compare(i18nc("list of all people in address book", "contacts"), Qt::CaseInsensitive) == 0 || term.compare("contacts", Qt::CaseInsensitive) == 0) {
+        if (term.compare(i18nc("list of all people in address book", "contacts"), Qt::CaseInsensitive) == 0 || term.compare(QLatin1String( "contacts" ), Qt::CaseInsensitive) == 0) {
             matchedName = true;
             matchedMail = true;
         } else {
@@ -81,7 +81,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
         if (!matchedName && !matchedMail) {
             // Name didn't match, so lets try the name portion of the email address
             const int indexOf = a.preferredEmail().indexOf(term, Qt::CaseInsensitive);
-            matchedMail = indexOf > -1 && indexOf < a.preferredEmail().indexOf('@');
+            matchedMail = indexOf > -1 && indexOf < a.preferredEmail().indexOf(QLatin1Char( '@' ));
         }
 
         if ((matchedName || matchedMail) && !a.preferredEmail().isEmpty()) {
@@ -111,7 +111,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
             match.setText(i18nc("Open the default mail program to mail someone", "Mail to %1", a.realName()));
 
             if (!a.realName().isEmpty()) {
-                match.setData(a.realName() + '<' + a.preferredEmail() + '>');
+                match.setData(a.realName() + QLatin1Char( '<' ) + a.preferredEmail() + QLatin1Char( '>' ));
             } else {
                 match.setData(a.preferredEmail());
             }
