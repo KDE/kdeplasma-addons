@@ -16,7 +16,7 @@
 #include <KLocalizedString>
 
 BackgroundDelegate::BackgroundDelegate(QObject *listener, float ratio, QObject *parent)
-    : QAbstractItemDelegate(parent), 
+    : QAbstractItemDelegate(parent),
       m_listener(listener),
       m_ratio(ratio)
 {
@@ -66,7 +66,7 @@ void BackgroundDelegate::paint(QPainter *painter,
     if (!author.isEmpty()) {
         authorCaption = i18nc("Caption to wallpaper preview, %1 author name",
                               "by %1", author);
-        text += '\n' + authorCaption;
+        text += QLatin1Char( '\n' ) + authorCaption;
     }
 
     QRect boundingRect = painter->boundingRect(

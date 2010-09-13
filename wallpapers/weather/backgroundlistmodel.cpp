@@ -61,7 +61,7 @@ void BackgroundListModel::reload()
 
 void BackgroundListModel::reload(const QStringList &selected)
 {
-    QStringList dirs = KGlobal::dirs()->findDirs("wallpaper", "");
+    QStringList dirs = KGlobal::dirs()->findDirs("wallpaper", QLatin1String( "" ));
     QList<Plasma::Package *> tmp;
 
     if (!m_packages.isEmpty()) {
@@ -147,8 +147,8 @@ QSize BackgroundListModel::bestSize(Plasma::Package *package) const
     }
 
     KFileMetaInfo info(image, QString(), KFileMetaInfo::TechnicalInfo);
-    QSize size(info.item("http://freedesktop.org/standards/xesam/1.0/core#width").value().toInt(),
-               info.item("http://freedesktop.org/standards/xesam/1.0/core#height").value().toInt());
+    QSize size(info.item(QLatin1String( "http://freedesktop.org/standards/xesam/1.0/core#width" )).value().toInt(),
+               info.item(QLatin1String( "http://freedesktop.org/standards/xesam/1.0/core#height" )).value().toInt());
 
     //backup solution if strigi does not work
     if (size.width() == 0 || size.height() == 0) {
@@ -221,7 +221,7 @@ QVariant BackgroundListModel::data(const QModelIndex &index, int role) const
         QSize size = bestSize(b);
 
         if (size.isValid()) {
-            return QString("%1x%2").arg(size.width()).arg(size.height());
+            return QString(QLatin1String( "%1x%2" )).arg(size.width()).arg(size.height());
         }
 
         return QString();
@@ -290,12 +290,12 @@ QList<Plasma::Package *> BackgroundListModel::findAllBackgrounds(Plasma::Wallpap
     QSet<QString> validPackages;
     foreach (const QString &packagePath, packages) {
         QCoreApplication::processEvents();
-        progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + "\n\n" +
+        progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + QLatin1String( "\n\n" ) +
                                i18n("Testing %1 for a Wallpaper package", packagePath));
         Plasma::PackageStructure::Ptr structure = Plasma::Wallpaper::packageStructure(structureParent);
         Plasma::Package *pkg = new Plasma::Package(path + packagePath, structure);
         if (pkg->isValid() && (!container || !container->contains(pkg->path()))) {
-            progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + "\n\n" +
+            progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + QLatin1String( "\n\n" ) +
                                    i18n("Adding wallpaper package in %1", packagePath));
             res.append(pkg);
             //kDebug() << "    adding valid package:" << packagePath;
@@ -309,7 +309,7 @@ QList<Plasma::Package *> BackgroundListModel::findAllBackgrounds(Plasma::Wallpap
     //kDebug() << "listing normal files";
     QDir dir(path);
     QStringList filters;
-    filters << "*.png" << "*.jpeg" << "*.jpg" << "*.svg" << "*.svgz";
+    filters << QLatin1String( "*.png" ) << QLatin1String( "*.jpeg" ) << QLatin1String( "*.jpg" ) << QLatin1String( "*.svg" ) << QLatin1String( "*.svgz" );
     dir.setNameFilters(filters);
     dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
     QFileInfoList files = dir.entryInfoList();
@@ -317,7 +317,7 @@ QList<Plasma::Package *> BackgroundListModel::findAllBackgrounds(Plasma::Wallpap
         QCoreApplication::processEvents();
         if (!container || !container->contains(wp.filePath())) {
             //kDebug() << "     adding image file" << wp.filePath();
-            progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + "\n\n" +
+            progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + QLatin1String( "\n\n" ) +
                                    i18n("Adding image %1", wp.filePath()));
             Plasma::PackageStructure::Ptr structure = Plasma::Wallpaper::packageStructure(structureParent);
             res.append(new Plasma::Package(wp.filePath(), structure));
@@ -332,7 +332,7 @@ QList<Plasma::Package *> BackgroundListModel::findAllBackgrounds(Plasma::Wallpap
     foreach (const QFileInfo &wp, files) {
         QCoreApplication::processEvents();
         QString name = wp.fileName();
-        if (name != "." && name != ".." && !validPackages.contains(wp.fileName())) {
+        if (name != QLatin1String( "." ) && name != QLatin1String( ".." ) && !validPackages.contains(wp.fileName())) {
             //kDebug() << "    " << name << wp.filePath();
             res += findAllBackgrounds(structureParent, container, wp.filePath(), ratio, progress);
         }

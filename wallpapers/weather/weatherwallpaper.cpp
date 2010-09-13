@@ -67,7 +67,7 @@ WeatherWallpaper::~WeatherWallpaper()
 void WeatherWallpaper::init(const KConfigGroup & config)
 {
     // Connect to weather engine.
-    weatherEngine = dataEngine("weather");
+    weatherEngine = dataEngine(QLatin1String( "weather" ));
 
     // Set custom weather options
     m_source = config.readEntry("source");
@@ -84,24 +84,24 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     m_animation->setProperty("startValue", 0.0);
     m_animation->setProperty("endValue", 1.0);
 
-    m_weatherMap["weather-clear"] = config.readEntry("clearPaper", m_dir + "Fields_of_Peace/");
-    m_weatherMap["weather-few-clouds"] = config.readEntry("partlyCloudyPaper", m_dir + "Evening/");
-    m_weatherMap["weather-clouds"] = config.readEntry("cloudyPaper", m_dir + "Colorado_Farm/");
-    m_weatherMap["weather-many-clouds"] = config.readEntry("manyCloudsPaper", m_dir + "Beach_Reflecting_Clouds/");
-    m_weatherMap["weather-showers"] = config.readEntry("showersPaper", m_dir + "There_is_Rain_on_the_Table/");
-    m_weatherMap["weather-showers-scattered"] = config.readEntry("showersScatteredPaper", m_dir + "There_is_Rain_on_the_Table/");
-    m_weatherMap["weather-rain"] = config.readEntry("rainPaper", m_dir + "There_is_Rain_on_the_Table/");
-    m_weatherMap["weather-mist"] = config.readEntry("mistPaper", m_dir + "Fresh_Morning/");
-    m_weatherMap["weather-storm"] = config.readEntry("stormPaper", m_dir + "Lightning/");
-    m_weatherMap["weather-scattered-storms"] = m_weatherMap["weather-storm"];
-    m_weatherMap["weather-hail"] = config.readEntry("hailPaper", m_dir + "Lightning/");
-    m_weatherMap["weather-snow"] = config.readEntry("snowPaper", m_dir + "Winter_Track/");
-    m_weatherMap["weather-snow-scattered"] = config.readEntry("snowScatteredPaper", m_dir + "Winter_Track/");
-    m_weatherMap["weather-few-clouds-night"] = config.readEntry("partlyCloudyNightPaper", m_dir + "JK_Bridge_at_Night/");
-    m_weatherMap["weather-clouds-night"] = config.readEntry("cloudyNightPaper", m_dir + "JK_Bridge_at_Night/");
-    m_weatherMap["weather-clear-night"] = config.readEntry("clearNightPaper", m_dir + "City_at_Night/");
-    m_weatherMap["weather-freezing-rain"] = config.readEntry("freezingRainPaper", m_dir + "Icy_Tree/");
-    m_weatherMap["weather-snow-rain"] = config.readEntry("snowRainPaper", m_dir + "Icy_Tree/");
+    m_weatherMap[QLatin1String( "weather-clear" )] = config.readEntry("clearPaper", m_dir + QLatin1String( "Fields_of_Peace/" ));
+    m_weatherMap[QLatin1String( "weather-few-clouds" )] = config.readEntry("partlyCloudyPaper", m_dir + QLatin1String( "Evening/" ));
+    m_weatherMap[QLatin1String( "weather-clouds" )] = config.readEntry("cloudyPaper", m_dir + QLatin1String( "Colorado_Farm/" ));
+    m_weatherMap[QLatin1String( "weather-many-clouds" )] = config.readEntry("manyCloudsPaper", m_dir + QLatin1String( "Beach_Reflecting_Clouds/" ));
+    m_weatherMap[QLatin1String( "weather-showers" )] = config.readEntry("showersPaper", m_dir + QLatin1String( "There_is_Rain_on_the_Table/" ));
+    m_weatherMap[QLatin1String( "weather-showers-scattered" )] = config.readEntry("showersScatteredPaper", m_dir + QLatin1String( "There_is_Rain_on_the_Table/" ));
+    m_weatherMap[QLatin1String( "weather-rain" )] = config.readEntry("rainPaper", m_dir + QLatin1String( "There_is_Rain_on_the_Table/" ));
+    m_weatherMap[QLatin1String( "weather-mist" )] = config.readEntry("mistPaper", m_dir + QLatin1String( "Fresh_Morning/" ));
+    m_weatherMap[QLatin1String( "weather-storm" )] = config.readEntry("stormPaper", m_dir + QLatin1String( "Lightning/" ));
+    m_weatherMap[QLatin1String( "weather-scattered-storms" )] = m_weatherMap[QLatin1String( "weather-storm" )];
+    m_weatherMap[QLatin1String( "weather-hail" )] = config.readEntry("hailPaper", m_dir + QLatin1String( "Lightning/" ));
+    m_weatherMap[QLatin1String( "weather-snow" )] = config.readEntry("snowPaper", m_dir + QLatin1String( "Winter_Track/" ));
+    m_weatherMap[QLatin1String( "weather-snow-scattered" )] = config.readEntry("snowScatteredPaper", m_dir + QLatin1String( "Winter_Track/" ));
+    m_weatherMap[QLatin1String( "weather-few-clouds-night" )] = config.readEntry("partlyCloudyNightPaper", m_dir + QLatin1String( "JK_Bridge_at_Night/" ));
+    m_weatherMap[QLatin1String( "weather-clouds-night" )] = config.readEntry("cloudyNightPaper", m_dir + QLatin1String( "JK_Bridge_at_Night/" ));
+    m_weatherMap[QLatin1String( "weather-clear-night" )] = config.readEntry("clearNightPaper", m_dir + QLatin1String( "City_at_Night/" ));
+    m_weatherMap[QLatin1String( "weather-freezing-rain" )] = config.readEntry("freezingRainPaper", m_dir + QLatin1String( "Icy_Tree/" ));
+    m_weatherMap[QLatin1String( "weather-snow-rain" )] = config.readEntry("snowRainPaper", m_dir + QLatin1String( "Icy_Tree/" ));
 
     calculateGeometry();
     connectWeatherSource();
@@ -130,23 +130,23 @@ void WeatherWallpaper::save(KConfigGroup & config)
     config.writeEntry("wallpapercolor", m_color);
     config.writeEntry("userswallpapers", m_usersWallpapers);
     // Save custom wallpaper/weather pairings
-    config.writeEntry("clearPaper", m_weatherMap["weather-clear"]);
-    config.writeEntry("partlyCloudyPaper", m_weatherMap["weather-few-clouds"]);
-    config.writeEntry("cloudyPaper", m_weatherMap["weather-clouds"]);
-    config.writeEntry("manyCloudsPaper", m_weatherMap["weather-many-clouds"]);
-    config.writeEntry("showersPaper", m_weatherMap["weather-showers"]);
-    config.writeEntry("showersScatteredPaper", m_weatherMap["weather-showers-scattered"]);
-    config.writeEntry("rainPaper", m_weatherMap["weather-rain"]);
-    config.writeEntry("mistPaper", m_weatherMap["weather-mist"]);
-    config.writeEntry("stormPaper", m_weatherMap["weather-storm"]);
-    config.writeEntry("hailPaper", m_weatherMap["weather-hail"]);
-    config.writeEntry("snowPaper", m_weatherMap["weather-snow"]);
-    config.writeEntry("snowScatteredPaper", m_weatherMap["weather-snow-scattered"]);
-    config.writeEntry("partlyCloudyNightPaper", m_weatherMap["weather-few-clouds-night"]);
-    config.writeEntry("cloudyNightPaper", m_weatherMap["weather-clouds-night"]);
-    config.writeEntry("clearNightPaper", m_weatherMap["weather-clear-night"]);
-    config.writeEntry("freezingRainPaper", m_weatherMap["weather-freezing-rain"]);
-    config.writeEntry("snowRainPaper", m_weatherMap["weather-snow-rain"]);
+    config.writeEntry("clearPaper", m_weatherMap[QLatin1String( "weather-clear" )]);
+    config.writeEntry("partlyCloudyPaper", m_weatherMap[QLatin1String( "weather-few-clouds" )]);
+    config.writeEntry("cloudyPaper", m_weatherMap[QLatin1String( "weather-clouds" )]);
+    config.writeEntry("manyCloudsPaper", m_weatherMap[QLatin1String( "weather-many-clouds" )]);
+    config.writeEntry("showersPaper", m_weatherMap[QLatin1String( "weather-showers" )]);
+    config.writeEntry("showersScatteredPaper", m_weatherMap[QLatin1String( "weather-showers-scattered" )]);
+    config.writeEntry("rainPaper", m_weatherMap[QLatin1String( "weather-rain" )]);
+    config.writeEntry("mistPaper", m_weatherMap[QLatin1String( "weather-mist" )]);
+    config.writeEntry("stormPaper", m_weatherMap[QLatin1String( "weather-storm" )]);
+    config.writeEntry("hailPaper", m_weatherMap[QLatin1String( "weather-hail" )]);
+    config.writeEntry("snowPaper", m_weatherMap[QLatin1String( "weather-snow" )]);
+    config.writeEntry("snowScatteredPaper", m_weatherMap[QLatin1String( "weather-snow-scattered" )]);
+    config.writeEntry("partlyCloudyNightPaper", m_weatherMap[QLatin1String( "weather-few-clouds-night" )]);
+    config.writeEntry("cloudyNightPaper", m_weatherMap[QLatin1String( "weather-clouds-night" )]);
+    config.writeEntry("clearNightPaper", m_weatherMap[QLatin1String( "weather-clear-night" )]);
+    config.writeEntry("freezingRainPaper", m_weatherMap[QLatin1String( "weather-freezing-rain" )]);
+    config.writeEntry("snowRainPaper", m_weatherMap[QLatin1String( "weather-snow-rain" )]);
 }
 
 void WeatherWallpaper::configWidgetDestroyed()
@@ -284,29 +284,29 @@ void WeatherWallpaper::showAdvancedDialog()
         m_advancedUi.m_wallpaperView->view()->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 
         connect(m_advancedUi.m_conditionCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(conditionChanged(int)));
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-clear"), i18nc("weather condition", "Clear"), "weather-clear");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-few-clouds"), i18n("Partly Cloudy"), "weather-few-clouds");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-clouds"), i18n("Cloudy"), "weather-clouds");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-many-clouds"), i18n("Very Cloudy"), "weather-many-clouds");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-showers"), i18n("Showering"), "weather-showers");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-showers-scattered"), i18n("Scattered Showers"), "weather-showers-scattered");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-showers"), i18n("Rainy"), "weather-rain");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-mist"), i18n("Misty"), "weather-mist");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-storm"), i18n("Storming"), "weather-storm");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-hail"), i18n("Hailing"), "weather-hail");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-snow"), i18n("Snowing"), "weather-snow");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-snow-scattered"), i18n("Scattered Snow"), "weather-snow-scattered");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-few-clouds-night"), i18n("Partly Cloudy Night"), "weather-few-clouds-night");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-clouds-night"), i18n("Cloudy Night"), "weather-clouds-night");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-clear-night"), i18n("Clear Night"), "weather-clear-night");
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-snow-rain"), i18n("Mixed Precipitation"), "weather-snow-rain");
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-clear" )), i18nc("weather condition", "Clear"), QLatin1String( "weather-clear" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-few-clouds" )), i18n("Partly Cloudy"), QLatin1String( "weather-few-clouds" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-clouds") ), i18n("Cloudy"), QLatin1String( "weather-clouds") );
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-many-clouds") ), i18n("Very Cloudy"), QLatin1String( "weather-many-clouds") );
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-showers") ), i18n("Showering"), QLatin1String( "weather-showers") );
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-showers-scattered") ), i18n("Scattered Showers"), QLatin1String( "weather-showers-scattered" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-showers") ), i18n("Rainy"), QLatin1String( "weather-rain") );
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-mist") ), i18n("Misty"), QLatin1String( "weather-mist") );
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-storm") ), i18n("Storming"), QLatin1String( "weather-storm" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-hail") ), i18n("Hailing"), QLatin1String( "weather-hail" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-snow") ), i18n("Snowing"), QLatin1String( "weather-snow" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-snow-scattered") ), i18n("Scattered Snow"), QLatin1String( "weather-snow-scattered" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-few-clouds-night") ), i18n("Partly Cloudy Night"), QLatin1String( "weather-few-clouds-night" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-clouds-night") ), i18n("Cloudy Night"), QLatin1String( "weather-clouds-night" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-clear-night") ), i18n("Clear Night"), QLatin1String( "weather-clear-night" ));
+        m_advancedUi.m_conditionCombo->addItem(KIcon(QLatin1String( "weather-snow-rain") ), i18n("Mixed Precipitation"), QLatin1String( "weather-snow-rain" ));
         // Set to the current weather condition
         m_advancedUi.m_conditionCombo->setCurrentIndex(m_advancedUi.m_conditionCombo->findData(m_condition));
 
 
         connect(m_advancedUi.m_wallpaperView, SIGNAL(currentIndexChanged(int)), this, SLOT(pictureChanged(int)));
 
-        m_advancedUi.m_pictureUrlButton->setIcon(KIcon("document-open"));
+        m_advancedUi.m_pictureUrlButton->setIcon(KIcon(QLatin1String( "document-open" )));
         connect(m_advancedUi.m_pictureUrlButton, SIGNAL(clicked()), this, SLOT(showFileDialog()));
 
         m_advancedUi.m_emailLine->setTextInteractionFlags(Qt::TextSelectableByMouse);
@@ -327,7 +327,7 @@ void WeatherWallpaper::showAdvancedDialog()
                 this, SLOT(positioningChanged(int)));
 
         m_advancedUi.m_color->setColor(m_color);
-        m_advancedUi.m_newStuff->setIcon(KIcon("get-hot-new-stuff"));
+        m_advancedUi.m_newStuff->setIcon(KIcon(QLatin1String( "get-hot-new-stuff" )));
         connect(m_advancedUi.m_color, SIGNAL(changed(const QColor&)), this, SLOT(colorChanged(const QColor&)));
         connect(m_advancedUi.m_newStuff, SIGNAL(clicked()), this, SLOT(getNewWallpaper()));
     }
@@ -339,7 +339,7 @@ void WeatherWallpaper::showAdvancedDialog()
 void WeatherWallpaper::getNewWallpaper()
 {
     if (!m_newStuffDialog) {
-        m_newStuffDialog = new KNS3::DownloadDialog( "wallpaper.knsrc", m_configWidget );
+        m_newStuffDialog = new KNS3::DownloadDialog( QLatin1String( "wallpaper.knsrc" ), m_configWidget );
         connect(m_newStuffDialog, SIGNAL(accepted()), SLOT(newStuffFinished()));
     }
     m_newStuffDialog->show();
@@ -458,7 +458,7 @@ bool WeatherWallpaper::setMetadata(QLabel *label, const QString &text)
 void WeatherWallpaper::showFileDialog()
 {
     if (!m_fileDialog) {
-        m_fileDialog = new KFileDialog(KUrl(), "*.png *.jpeg *.jpg *.xcf *.svg *.svgz", m_advancedDialog);
+        m_fileDialog = new KFileDialog(KUrl(), QLatin1String( "*.png *.jpeg *.jpg *.xcf *.svg *.svgz" ), m_advancedDialog);
         m_fileDialog->setOperationMode(KFileDialog::Opening);
         m_fileDialog->setInlinePreviewShown(true);
         m_fileDialog->setCaption(i18n("Select Wallpaper Image File"));
@@ -531,7 +531,7 @@ void WeatherWallpaper::connectWeatherSource()
         m_weatherLocation = new WeatherLocation(this);
         connect(m_weatherLocation, SIGNAL(finished(const QString&)),
                 this, SLOT(locationReady(const QString&)));
-        m_weatherLocation->setDataEngines(dataEngine("geolocation"), weatherEngine);
+        m_weatherLocation->setDataEngines(dataEngine(QLatin1String( "geolocation" )), weatherEngine);
         m_weatherLocation->getDefault();
     } else {
         weatherEngine->connectSource(m_source, this, m_weatherUpdateTime * 60 * 1000);
@@ -593,7 +593,7 @@ void WeatherWallpaper::setFadeValue(qreal value)
     p.begin(&m_oldFadedPixmap);
     p.drawPixmap(0, 0, m_oldPixmap);
 
-    p.setCompositionMode(QPainter::CompositionMode_DestinationIn);  
+    p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
     p.fillRect(m_oldFadedPixmap.rect(), QColor(0, 0, 0, 254 * (1-m_fadeValue)));//255*((150 - m_fadeValue)/150)));
 
     p.end();
@@ -608,7 +608,7 @@ void WeatherWallpaper::dataUpdated(const QString &source, const Plasma::DataEngi
         return;
     }
 
-    m_condition = data["Condition Icon"].toString();
+    m_condition = data[QLatin1String( "Condition Icon" )].toString();
 
     loadImage();
 }
