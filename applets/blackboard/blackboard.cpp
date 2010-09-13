@@ -59,7 +59,7 @@ void BlackBoard::init()
     addColorButton(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
 
     Plasma::ToolButton *eraseB = new Plasma::ToolButton(this);
-    eraseB->setIcon(KIcon("edit-delete"));
+    eraseB->setIcon(KIcon(QLatin1String("edit-delete")));
     buttonsLayout->addItem(eraseB);
     connect(eraseB, SIGNAL(clicked()), blackBoard, SLOT(erase())); 
     

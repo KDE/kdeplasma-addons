@@ -46,7 +46,7 @@ CalculatorApplet::CalculatorApplet( QObject *parent, const QVariantList &args )
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(300,300);
-    setPopupIcon("accessories-calculator");
+    setPopupIcon(QLatin1String( "accessories-calculator" ));
 }
 
 QGraphicsWidget *CalculatorApplet::graphicsWidget()
@@ -61,7 +61,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
 
         int buttonX,buttonY;
 
-        inputText = QString('0');
+        inputText = QLatin1Char('0');
         sum = 0;
         factor = 0;
         waitingForDigit = true;
@@ -85,7 +85,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonDigit[0] = new Plasma::PushButton(m_widget);
         QFontMetrics metric1(mButtonDigit[0]->font());
         buttonY=metric1.height()*1.3;
-        buttonX=metric1.width("00");
+        buttonX=metric1.width(QLatin1String( "00" ));
         mButtonDigit[0]->setText( QString::number(0) );
         connect( mButtonDigit[0], SIGNAL( clicked() ), this, SLOT( slotDigitClicked() ) );
         mButtonDigit[0]->setMinimumSize(buttonX,buttonY);
@@ -150,7 +150,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonMultiply->setVisible( true );
 
         mButtonDivide = new Plasma::PushButton(m_widget);
-        mButtonDivide->setText( i18nc("The ∕ button of the calculator", "∕") );
+        mButtonDivide->setText( i18nc("The ? button of the calculator", "?") );
         mButtonDivide->setMinimumSize(buttonX,buttonY);
         mButtonDivide->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
@@ -320,7 +320,7 @@ void CalculatorApplet::slotDigitClicked()
     Plasma::PushButton *clickedButton = qobject_cast<Plasma::PushButton *>(sender());
     int newDigit = clickedButton->text().toInt();
 
-    if (inputText == "0" && newDigit == 0.0)
+    if (inputText == QLatin1String( "0" ) && newDigit == 0.0)
         return;
 
     if (inputText.length() >= MaxInputLength)
@@ -351,7 +351,7 @@ void CalculatorApplet::slotDecimalClicked()
 {
 
     if (waitingForDigit) {
-        inputText = '0';
+        inputText = QLatin1Char( '0' );
         mOutputDisplay->setText(inputText);
     }
 
@@ -382,7 +382,7 @@ void CalculatorApplet::slotAddClicked()
         sum = currentValue;
     }
 
-    inputText = '0';  //this is so if you click "1 + =" you'll get 1 instead of 2
+    inputText = QLatin1Char( '0' );  //this is so if you click "1 + =" you'll get 1 instead of 2
     previousAddSubOperation=calcPlus;
     waitingForDigit = true;
 }
@@ -402,7 +402,7 @@ void CalculatorApplet::slotSubtractClicked()
         sum = currentValue;
     }
 
-    inputText = '0';  //this is so if you click "1 - =" you'll get 1 instead of 0
+    inputText = QLatin1Char( '0' );  //this is so if you click "1 - =" you'll get 1 instead of 0
     previousAddSubOperation = calcMinus;
     waitingForDigit = true;
 }
@@ -417,7 +417,7 @@ void CalculatorApplet::slotMultiplyClicked()
         factor = currentValue;
     }
 
-    inputText = '0';  //this is so if you click "6 * =" you'll get 6 instead of 36
+    inputText = QLatin1Char( '0' );  //this is so if you click "6 * =" you'll get 6 instead of 36
     previousMulDivOperation=calcMult;
     waitingForDigit = true;
 }
@@ -432,7 +432,7 @@ void CalculatorApplet::slotDivideClicked()
         factor = currentValue;
     }
 
-    inputText = '0';  //this is if you click "6 / =" you'll get 6 instead of 1
+    inputText = QLatin1Char( '0' );  //this is if you click "6 / =" you'll get 6 instead of 1
     previousMulDivOperation = calcDiv;
     waitingForDigit = true;
 }
@@ -467,7 +467,7 @@ void CalculatorApplet::slotEqualsClicked()
     int decimalIndex = inputText.indexOf(KGlobal::locale()->decimalSymbol());
 
     if (decimalIndex != -1) {
-        while (inputText.size() > decimalIndex && inputText.endsWith('0')) {
+        while (inputText.size() > decimalIndex && inputText.endsWith(QLatin1Char( '0' ))) {
             inputText = inputText.left(inputText.size() - 1);
         }
 
@@ -487,7 +487,7 @@ void CalculatorApplet::slotEqualsClicked()
 
 void CalculatorApplet::slotClearClicked()
 {
-    inputText = '0';
+    inputText = QLatin1Char( '0' );
     waitingForDigit = true;
     mOutputDisplay->setText(inputText);
 }
@@ -498,7 +498,7 @@ void CalculatorApplet::slotAllClearClicked()
     factor = 0;
     previousAddSubOperation=calcNone;
     previousMulDivOperation=calcNone;
-    inputText = '0';
+    inputText = QLatin1Char( '0' );
     waitingForDigit = true;
     mOutputDisplay->setText(inputText);
 }
@@ -540,7 +540,7 @@ void CalculatorApplet::handleError(const QString &errorMessage)
     previousAddSubOperation=calcNone;
     previousMulDivOperation=calcNone;
     mOutputDisplay->setText(errorMessage);
-    inputText = '0';
+    inputText = QLatin1Char( '0' );
     waitingForDigit = true;
 
 }

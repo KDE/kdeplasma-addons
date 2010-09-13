@@ -33,16 +33,16 @@ Eyes::Eyes(QObject *parent, const QVariantList &args)
     resize(192, 128);
 
     m_svg = new Plasma::Svg(this);
-    m_svg->setImagePath("widgets/eyes");
+    m_svg->setImagePath(QLatin1String( "widgets/eyes" ));
     m_svg->setContainsMultipleImages(true);
 
     rightPupil = new Plasma::SvgWidget(this);
     rightPupil->setSvg(m_svg);
-    rightPupil->setElementID("rightPupil");
+    rightPupil->setElementID(QLatin1String( "rightPupil" ));
 
     leftPupil = new Plasma::SvgWidget(this);
     leftPupil->setSvg(m_svg);
-    leftPupil->setElementID("leftPupil");
+    leftPupil->setElementID(QLatin1String( "leftPupil" ));
 
     timerId = startTimer(50);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
@@ -69,7 +69,7 @@ void Eyes::constraintsEvent(Plasma::Constraints constraints)
         } else if(formFactor() == Plasma::Horizontal) {
             setMinimumSize(QSizeF(boundingRect().height()*1.5,0));
             setMaximumSize(QSizeF(boundingRect().height()*1.5,-1));
-        } else { 
+        } else {
             setMinimumSize(QSizeF());
             setMaximumSize(QSizeF());
         }
@@ -89,9 +89,9 @@ void Eyes::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
     Q_UNUSED(option)
     QRect rect = contentsRect;
     rect.setWidth(rect.width()/2 - 2);
-    m_svg->paint(p, rect, "leftEye");
+    m_svg->paint(p, rect, QLatin1String( "leftEye" ));
     rect.translate(rect.width() + 2*2 , 0);
-    m_svg->paint(p, rect, "rightEye");
+    m_svg->paint(p, rect, QLatin1String( "rightEye" ));
 }
 
 
@@ -115,11 +115,11 @@ static QPointF pupilPos( const QRectF &eyesRect, const QPointF &mousePos)
     const qreal b = eyesRect.height() / 2;
     const qreal tan_alpha = vect.y() / vect.x();
 
-    /* 
+    /*
         the pupil need to be on the intersection between the line
            y = x * tan_alpha
         and the ellipse
-           x^2/a^2 + y^2/b^2 
+           x^2/a^2 + y^2/b^2
     */
 
     qreal x = a*b / sqrt(b*b + a*a * tan_alpha*tan_alpha);

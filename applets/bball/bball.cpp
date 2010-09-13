@@ -282,7 +282,7 @@ void bballApplet::configChanged()
     KConfigGroup cg = config ();
 
     // Appearance
-    m_image_url = cg.readEntry("ImgURL", KStandardDirs::locate("data", "bball/bball.svgz"));
+    m_image_url = cg.readEntry("ImgURL", KStandardDirs::locate("data", QLatin1String( "bball/bball.svgz" )));
     m_overlay_enabled = cg.readEntry("OverlayEnabled", false);
     m_overlay_colour = cg.readEntry("OverlayColour", QColor(Qt::white));
     m_overlay_opacity = cg.readEntry("OverlayOpacity", 0);
@@ -296,7 +296,7 @@ void bballApplet::configChanged()
 
     // Sound
     m_sound_enabled = cg.readEntry("SoundEnabled", false);
-    m_sound_url = cg.readEntry("SoundURL", KStandardDirs::locate ("data", "bball/bounce.ogg"));
+    m_sound_url = cg.readEntry("SoundURL", KStandardDirs::locate ("data", QLatin1String( "bball/bounce.ogg" )));
     m_sound_volume = cg.readEntry("SoundVolume", 100);
 
     // Misc

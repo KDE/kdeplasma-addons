@@ -34,8 +34,8 @@ BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
       m_showGrid(true),
       m_time(0, 0)
 {
-    KGlobal::locale()->insertCatalog("libplasmaclock");
-    KGlobal::locale()->insertCatalog("timezones4");
+    KGlobal::locale()->insertCatalog(QLatin1String("libplasmaclock"));
+    KGlobal::locale()->insertCatalog(QLatin1String("timezones4"));
 
     setHasConfigurationInterface(true);
     resize(getWidthFromHeight(128), 128);
@@ -96,7 +96,7 @@ void BinaryClock::constraintsEvent(Plasma::Constraints constraints)
 
 void BinaryClock::connectToEngine()
 {
-    Plasma::DataEngine* timeEngine = dataEngine("time");
+    Plasma::DataEngine* timeEngine = dataEngine(QLatin1String("time"));
 
     if (m_showSeconds) {
         timeEngine->connectSource(currentTimezone(), this, 500);
@@ -109,7 +109,7 @@ void BinaryClock::dataUpdated(const QString& source, const Plasma::DataEngine::D
 {
     Q_UNUSED(source);
 
-    m_time = data["Time"].toTime();
+    m_time = data[QLatin1String("Time")].toTime();
 
     if (m_time.minute() == m_lastTimeSeen.minute() &&
         m_time.second() == m_lastTimeSeen.second()) {
@@ -131,7 +131,7 @@ void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
-    parent->addPage(widget, i18n("Appearance"), "view-media-visualization");
+    parent->addPage(widget, i18n("Appearance"), QLatin1String("view-media-visualization"));
 
     ui.showSecondHandCheckBox->setChecked(m_showSeconds);
     ui.showGridCheckBox->setChecked(m_showGrid);
@@ -194,7 +194,7 @@ void BinaryClock::clockConfigAccepted()
     cg.writeEntry("offLedsColor", ui.offLedsCustomColorButton->color());
     cg.writeEntry("gridColor", ui.gridCustomColorButton->color());
 
-    dataEngine("time")->disconnectSource(currentTimezone(), this);
+    dataEngine(QLatin1String("time"))->disconnectSource(currentTimezone(), this);
     connectToEngine();
 
     update();
@@ -217,9 +217,9 @@ void BinaryClock::clockConfigChanged()
 
 void BinaryClock::changeEngineTimezone(const QString &oldTimezone, const QString &newTimezone)
 {
-    dataEngine("time")->disconnectSource(oldTimezone, this);
+    dataEngine(QLatin1String("time"))->disconnectSource(oldTimezone, this);
 
-    Plasma::DataEngine* timeEngine = dataEngine("time");
+    Plasma::DataEngine* timeEngine = dataEngine(QLatin1String("time"));
     if (m_showSeconds) {
         timeEngine->connectSource(newTimezone, this, 500);
     } else {

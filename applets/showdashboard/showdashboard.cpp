@@ -49,7 +49,7 @@ void ShowDashboard::init()
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
-    Plasma::IconWidget *icon = new Plasma::IconWidget(KIcon("dashboard-show"), QString(), this);
+    Plasma::IconWidget *icon = new Plasma::IconWidget(KIcon(QLatin1String("dashboard-show")), QString(), this);
     registerAsDragHandle(icon);
     icon->setMinimumSize(16, 16);
     setMinimumSize(16, 16);
@@ -79,8 +79,8 @@ void ShowDashboard::toggleShowDashboard(bool pressed)
 void ShowDashboard::toggleShowDashboard()
 {
     m_timer.stop();
-    QDBusInterface plasmaApp( "org.kde.plasma-desktop", "/App" );
-    plasmaApp.call( "toggleDashboard" );
+    QDBusInterface plasmaApp( QLatin1String("org.kde.plasma-desktop"), QLatin1String("/App") );
+    plasmaApp.call( QLatin1String("toggleDashboard") );
 }
 
 void ShowDashboard::dragEnterEvent(QGraphicsSceneDragDropEvent *event)

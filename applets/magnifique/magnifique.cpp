@@ -57,7 +57,7 @@ void Magnifique::init()
     layout->setContentsMargins(0, 0, 0, 0);
 
     Plasma::IconWidget *icon = new Plasma::IconWidget(this);
-    icon->setIcon("zoom-in");
+    icon->setIcon(QLatin1String("zoom-in"));
     layout->addItem(icon);
     setAspectRatioMode(Plasma::ConstrainedSquare);
 
@@ -66,7 +66,7 @@ void Magnifique::init()
     Plasma::ToolTipContent data;
     data.setMainText(i18n("Magnifying glass"));
     data.setSubText(i18n("See the contents of your desktop through the windows"));
-    data.setImage(KIcon("zoom-in"));
+    data.setImage(KIcon(QLatin1String("zoom-in")));
     Plasma::ToolTipManager::self()->setContent(this, data);
 }
 
