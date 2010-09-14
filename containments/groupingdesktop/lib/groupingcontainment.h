@@ -99,6 +99,14 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
          **/
         void raise(QGraphicsWidget *widget);
 
+    protected Q_SLOTS:
+        /**
+         * Lays out the Main Group.
+         * The default implementation makes it as big as the Containment.
+         * You may want to reimplement this in subclasses if you want other behaviours.
+         **/
+        virtual void layoutMainGroup();
+
     protected:
         /**
          * Reimplemented from Plasma::Applet
@@ -170,15 +178,6 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
          * @see AbstractGroup::isMainGroup
          **/
         AbstractGroup *mainGroup() const;
-
-        /**
-         * Lays out the Main Group.
-         * The default implementation makes it as big as the Containment.
-         * You may want to reimplement this in subclasses if you want other behaviours.
-         *
-         * @param mainGroup the Main Group to be layed out.
-         **/
-        virtual void layoutMainGroup(AbstractGroup *mainGroup);
 
     signals:
         /**

@@ -48,7 +48,7 @@ class GroupingPanel : public GroupingContainment
         void paintBackground(QPainter *painter, const QRect &contentsRect);
 
     protected:
-        void layoutMainGroup(AbstractGroup *mainGroup);
+        void layoutMainGroup();
         void saveState(KConfigGroup &config) const;
         void restore(KConfigGroup &group);
         void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);

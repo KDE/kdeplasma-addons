@@ -638,20 +638,20 @@ void GroupingContainment::setMainGroup(AbstractGroup *group)
 
     d->mainGroup = group;
 
-    layoutMainGroup(group);
+    layoutMainGroup();
     group->setIsMainGroup();
 
     config().writeEntry("mainGroup", group->id());
     emit configNeedsSaving();
 }
 
-void GroupingContainment::layoutMainGroup(AbstractGroup *mainGroup)
+void GroupingContainment::layoutMainGroup()
 {
     if (!d->layout) {
         d->layout = new QGraphicsLinearLayout(this);
         d->layout->setContentsMargins(0, 0, 0, 0);
     }
-    d->layout->addItem(mainGroup);
+    d->layout->addItem(d->mainGroup);
 }
 
 AbstractGroup *GroupingContainment::mainGroup() const

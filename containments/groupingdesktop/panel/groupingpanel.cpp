@@ -385,13 +385,13 @@ void GroupingPanel::setFormFactorFromLocation(Plasma::Location loc) {
     }
 }
 
-void GroupingPanel::layoutMainGroup(AbstractGroup *mainGroup)
+void GroupingPanel::layoutMainGroup()
 {
-    mainGroup->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
-    m_layout->addItem(mainGroup);
+    mainGroup()->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
+    m_layout->addItem(mainGroup());
 
     KConfigGroup groupsConfig = config("Groups");
-    KConfigGroup groupConfig(&groupsConfig, QString::number(mainGroup->id()));
+    KConfigGroup groupConfig(&groupsConfig, QString::number(mainGroup()->id()));
     KConfigGroup layoutConfig(&groupConfig, "LayoutInformation");
 
     layoutConfig.writeEntry("Index", m_layout->count() - 1);
