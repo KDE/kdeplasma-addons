@@ -24,7 +24,8 @@
 #include <QtGui/QGraphicsSceneContextMenuEvent>
 #include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QAction>
-#include <QTimer>
+#include <QtGui/QGraphicsView>
+#include <QtCore/QTimer>
 
 #include <KDebug>
 #include <KMenu>
@@ -273,12 +274,25 @@ void GroupingContainmentPrivate::newGroupClicked()
     ExplorerWindow *w = ExplorerWindow::instance();
     w->setContainment(q);
     w->setLocation(q->location());
-    w->move(0,0);
     w->showGroupExplorer();
-
-    QRect geom = q->corona()->screenGeometry(q->screen());
     w->resize(w->sizeHint());
-    w->setGeometry(geom.x(), geom.bottom() - w->height(), geom.width(), w->height());
+
+    bool moved = false;
+    if (q->containmentType() == Plasma::Containment::PanelContainment ||
+        q->containmentType() == Plasma::Containment::CustomPanelContainment) {
+        // try to align it with the appropriate panel view
+        QGraphicsView *view = q->view();
+        if (view) {
+            w->move(w->positionForPanelGeometry(view->geometry()));
+            moved = true;
+        }
+    }
+
+    if (!moved) {
+        // set it to the bottom of the screen as we have no better hints to go by
+        QRect geom = q->corona()->screenGeometry(q->screen());
+        w->setGeometry(geom.x(), geom.bottom() - w->height(), geom.width(), w->height());
+    }
 
     w->show();
     Plasma::WindowEffects::slideWindow(w, Plasma::BottomEdge);
@@ -764,22 +778,27 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 }
 
                 QGraphicsSceneDragDropEvent *e = static_cast<QGraphicsSceneDragDropEvent *>(event);
+                bool ok = true;
                 const QMimeData *mime = e->mimeData();
-                if (mime->hasFormat("plasma/group")) {
-                    QString name = mime->data("plasma/group");
+                if (mime->hasFormat(AbstractGroup::mimeType())) {
+                    QString name = mime->data(AbstractGroup::mimeType());
                     GroupInfo gi = AbstractGroup::groupInfo(name);
-                    if (gi.formFactors().contains(formFactor())) {
-                        QPointF pos(mapFromScene(e->scenePos()));
-                        QList<AbstractGroup *> groups = d->groupsAt(pos);
-                        foreach (AbstractGroup *group, groups) {
-                            if (group->showDropZone(mapToItem(group, pos))) {
-                                d->interestingGroup = group;
-                                break;
-                            }
-                        }
-                    } else {
-                        e->ignore();
+                    if (!gi.formFactors().contains(formFactor())) {
+                        ok = false;
                     }
+                }
+
+                if (ok) {
+                    QPointF pos(mapFromScene(e->scenePos()));
+                    QList<AbstractGroup *> groups = d->groupsAt(pos);
+                    foreach (AbstractGroup *group, groups) {
+                        if (group->showDropZone(mapToItem(group, pos))) {
+                            d->interestingGroup = group;
+                            break;
+                        }
+                    }
+                } else {
+                    e->ignore();
                 }
             }
             break;
@@ -887,8 +906,8 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 void GroupingContainment::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     const QMimeData *mime = event->mimeData();
-    if (mime->hasFormat("plasma/group")) {
-        QString name = mime->data("plasma/group");
+    if (mime->hasFormat(AbstractGroup::mimeType())) {
+        QString name = mime->data(AbstractGroup::mimeType());
         GroupInfo gi = AbstractGroup::groupInfo(name);
         if (gi.formFactors().contains(formFactor())) {
             d->createGroup(name, event->pos(), 0);

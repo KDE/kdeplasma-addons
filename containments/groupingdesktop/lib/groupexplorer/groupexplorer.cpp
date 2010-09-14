@@ -22,13 +22,15 @@
 
 #include "groupexplorer.h"
 
+#include <QGraphicsLinearLayout>
+
 #include <KIcon>
 
 #include <Plasma/Corona>
 #include <Plasma/Containment>
 #include <Plasma/ToolButton>
 
-#include "grouplist.h"
+#include "groupiconlist.h"
 
 class GroupExplorerPrivate
 {
@@ -40,30 +42,28 @@ class GroupExplorerPrivate
         {
         }
 
-        void init(Qt::Orientation orientation);
+        void init();
         void containmentDestroyed();
         void setOrientation(Qt::Orientation orientation);
 
-        Qt::Orientation orientation;
         GroupExplorer *q;
         Plasma::ToolButton *close;
         Plasma::Containment *containment;
 
         /// Widget that lists the groups
-        GroupList *groupList;
+        GroupIconList *groupList;
         QGraphicsLinearLayout *filteringLayout;
         QGraphicsLinearLayout *mainLayout;
         int iconSize;
 };
 
-void GroupExplorerPrivate::init(Qt::Orientation orient)
+void GroupExplorerPrivate::init()
 {
     //init widgets
-    orientation = orient;
     mainLayout = new QGraphicsLinearLayout(Qt::Vertical);
     mainLayout->setSpacing(0);
     filteringLayout = new QGraphicsLinearLayout(Qt::Horizontal);
-    groupList = new GroupList(Plasma::BottomEdge);
+    groupList = new GroupIconList(Plasma::BottomEdge);
     close = new Plasma::ToolButton;
     close->setIcon(KIcon("dialog-close"));
 
@@ -74,34 +74,19 @@ void GroupExplorerPrivate::init(Qt::Orientation orient)
     groupList->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     mainLayout->setAlignment(groupList, Qt::AlignTop | Qt::AlignHCenter);
 
+    q->setLayout(mainLayout);
+}
+
+void GroupExplorerPrivate::setOrientation(Qt::Orientation orientation)
+{
     if (orientation == Qt::Horizontal) {
+//         mainLayout->removeItem(filteringWidget);
+        mainLayout->removeItem(close);
         filteringLayout->addStretch();
         filteringLayout->addItem(close);
         filteringLayout->setAlignment(close, Qt::AlignVCenter | Qt::AlignHCenter);
     } else {
-        mainLayout->setStretchFactor(groupList, 10);
-        mainLayout->addItem(close);
-    }
-
-    q->setLayout(mainLayout);
-}
-
-void GroupExplorerPrivate::setOrientation(Qt::Orientation orient)
-{
-    if (orientation == orient) {
-        return;
-    }
-//FIXME bet I could make this more efficient
-    orientation = orient;
-    groupList->setLocation(containment->location());
-    if (orientation == Qt::Horizontal) {
-//         mainLayout->removeItem(filteringWidget);
-        mainLayout->removeItem(close);
-//         filteringLayout->addItem(filteringWidget);
-        filteringLayout->addItem(close);
-        filteringLayout->setAlignment(close, Qt::AlignVCenter | Qt::AlignHCenter);
-    } else {
-//         filteringLayout->removeItem(filteringWidget);
+        filteringLayout->removeAt(0);
         filteringLayout->removeItem(close);
 //         mainLayout->insertItem(0, filteringWidget);
         mainLayout->addItem(close);
@@ -114,20 +99,12 @@ void GroupExplorerPrivate::containmentDestroyed()
     containment = 0;
 }
 
-//GroupBar
-
-GroupExplorer::GroupExplorer(Qt::Orientation orientation, QGraphicsItem *parent)
-        :QGraphicsWidget(parent),
-        d(new GroupExplorerPrivate(this))
+GroupExplorer::GroupExplorer(Plasma::Location location)
+             : QGraphicsWidget(0),
+               d(new GroupExplorerPrivate(this))
 {
-    d->init(orientation);
-}
-
-GroupExplorer::GroupExplorer(QGraphicsItem *parent)
-        :QGraphicsWidget(parent),
-        d(new GroupExplorerPrivate(this))
-{
-    d->init(Qt::Horizontal);
+    d->init();
+    setLocation(location);
 }
 
 GroupExplorer::~GroupExplorer()
@@ -135,26 +112,17 @@ GroupExplorer::~GroupExplorer()
      delete d;
 }
 
-void GroupExplorer::setOrientation(Qt::Orientation orientation)
+void GroupExplorer::setLocation(Plasma::Location location)
 {
-    d->setOrientation(orientation);
-    emit orientationChanged(orientation);
-}
-
-Qt::Orientation GroupExplorer::orientation()
-{
-    return d->orientation;
+    d->setOrientation(location == Plasma::LeftEdge || location == Plasma::RightEdge ? Qt::Vertical : Qt::Horizontal);
+    d->groupList->setLocation(location);
+    d->groupList->updateList();
 }
 
 void GroupExplorer::setIconSize(int size)
 {
     d->groupList->setIconSize(size);
     adjustSize();
-}
-
-int GroupExplorer::iconSize() const
-{
-    return d->groupList->iconSize();
 }
 
 void GroupExplorer::setContainment(Plasma::Containment *containment)

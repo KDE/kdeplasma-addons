@@ -819,6 +819,11 @@ void AbstractGroup::releaseChild(QGraphicsWidget *)
 
 }
 
+QString AbstractGroup::mimeType()
+{
+    return QString("plasma/group");
+}
+
 AbstractGroup *AbstractGroup::load(const QString &name, QGraphicsItem *parent)
 {
     return GroupFactory::load(name, parent);

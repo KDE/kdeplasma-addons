@@ -44,7 +44,7 @@
 
 ExplorerWindow *ExplorerWindow::s_instance = 0;
 
-ExplorerWindow::ExplorerWindow(QWidget* parent)
+ExplorerWindow::ExplorerWindow(QWidget *parent)
    : QWidget(parent),
      m_location(Plasma::Floating),
      m_layout(new QBoxLayout(QBoxLayout::TopToBottom, this)),
@@ -71,7 +71,6 @@ ExplorerWindow::ExplorerWindow(QWidget* parent)
     setPalette(pal);
 
     Plasma::WindowEffects::overrideShadow(winId(), true);
-
 
     m_layout->setContentsMargins(0, 0, 0, 0);
 
@@ -135,6 +134,14 @@ void ExplorerWindow::setContainment(Plasma::Containment *containment)
         return;
     }
     m_corona = m_containment.data()->corona();
+
+    foreach (Plasma::Containment *containment, m_corona->containments()) {
+        connect(containment, SIGNAL(toolBoxToggled()), this, SLOT(close()));
+    }
+
+    if (m_groupManager) {
+        m_groupManager->setContainment(containment);
+    }
 }
 
 Plasma::Containment *ExplorerWindow::containment() const
@@ -281,8 +288,10 @@ void ExplorerWindow::setLocation(const Plasma::Location &loc)
     }
 
     if (m_groupManager) {
-        m_groupManager->setOrientation(orientation());
+        m_groupManager->setLocation(location());
     }
+
+    resize(sizeHint());
 }
 
 QPoint ExplorerWindow::positionForPanelGeometry(const QRect &panelGeom) const
@@ -294,7 +303,7 @@ QPoint ExplorerWindow::positionForPanelGeometry(const QRect &panelGeom) const
         return QPoint();
     }
 
-    QRect screenGeom = m_containment.data()->corona()->screenGeometry(screen);
+    QRect screenGeom = m_corona->screenGeometry(screen);
 
     switch (m_location) {
     case Plasma::LeftEdge:
@@ -331,11 +340,13 @@ Qt::Orientation ExplorerWindow::orientation() const
 void ExplorerWindow::showGroupExplorer()
 {
     if (!m_groupManager) {
-        m_groupManager = new GroupExplorer(orientation());
+        m_groupManager = new GroupExplorer(location());
 
         m_corona->addOffscreenWidget(m_groupManager);
         m_groupManager->show();
 
+        m_groupManager->setContainment(m_containment.data());
+        m_groupManager->setLocation(location());
         if (orientation() == Qt::Horizontal) {
             m_groupManager->resize(width(), m_groupManager->size().height());
         } else {
@@ -348,7 +359,7 @@ void ExplorerWindow::showGroupExplorer()
 
         connect(m_groupManager, SIGNAL(closeClicked()), this, SLOT(close()));
     } else {
-        m_groupManager->setOrientation(orientation());
+        m_groupManager->setLocation(location());
         m_groupManager->show();
         setGraphicsWidget(m_groupManager);
     }

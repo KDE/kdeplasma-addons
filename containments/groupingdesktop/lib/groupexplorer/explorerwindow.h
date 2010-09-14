@@ -17,13 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef MANAGERWINDOW_H
-#define MANAGERWINDOW_H
+#ifndef EXPLORERWINDOW_H
+#define EXPLORERWINDOW_H
 
 #include <QWidget>
 
 #include <Plasma/Plasma>
-#include <Plasma/Dialog>
 
 class QBoxLayout;
 class QGraphicsWidget;
@@ -34,8 +33,7 @@ namespace Plasma
     class Corona;
     class FrameSvg;
     class WidgetExplorer;
-    class Dialog;
-} // namespace Plasma
+}
 
 class GroupExplorer;
 

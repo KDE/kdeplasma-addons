@@ -386,9 +386,11 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          **/
         virtual void releaseChild(QGraphicsWidget *child);
 
+        static QString mimeType();
+
         /**
          * Used to register a Group to the GroupFactory. You shouldn't
-         * use this, but the macro REGISTER_GROUP(identifier, class name) instead.
+         * use this, but the macro REGISTER_GROUP(class name) instead.
          **/
         template<class T> static bool registerGroup()
         {

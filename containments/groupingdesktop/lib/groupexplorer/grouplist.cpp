@@ -24,12 +24,7 @@
 GroupList::GroupList(Plasma::Location location, QGraphicsItem *parent)
     : AbstractIconList(location, parent)
 {
-    QStringList groups = AbstractGroup::availableGroups();
-    foreach (const QString &group, groups) {
-        createGroupIcon(group);
-    }
 
-    updateList();
 }
 
 GroupList::~GroupList()
@@ -38,9 +33,7 @@ GroupList::~GroupList()
 
 void GroupList::createGroupIcon(const QString &name)
 {
-    GroupIcon *icon = new GroupIcon(name);
-    addIcon(icon);
-    m_allAppletsHash.insert(name, icon);
+
 }
 
 void GroupList::updateVisibleIcons()

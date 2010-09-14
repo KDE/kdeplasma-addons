@@ -15,14 +15,10 @@ set(groupingcontainment_SRCS
         groups/stackinggroup.cpp
         groups/tabbinggroup.cpp
 
-        # Taken from kdebase/workspace/libs/plasmagenericshell
-        groupexplorer/abstracticon.cpp
-        groupexplorer/abstracticonlist.cpp
-
         groupexplorer/explorerwindow.cpp
         groupexplorer/groupexplorer.cpp
+        groupexplorer/groupiconlist.cpp
         groupexplorer/groupicon.cpp
-        groupexplorer/grouplist.cpp
 )
 
 

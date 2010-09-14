@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GROUPMANAGER_H
-#define GROUPMANAGER_H
+#ifndef GROUPEXPLORER_H
+#define GROUPEXPLORER_H
 
 #include <QGraphicsWidget>
 #include <Plasma/Plasma>
@@ -34,8 +34,7 @@ class GroupExplorer : public QGraphicsWidget
 {
     Q_OBJECT
     public:
-        GroupExplorer(Qt::Orientation orientation, QGraphicsItem *parent=0);
-        GroupExplorer(QGraphicsItem *parent=0);
+        GroupExplorer(Plasma::Location location);
         ~GroupExplorer();
 
         /**
@@ -48,26 +47,14 @@ class GroupExplorer : public QGraphicsWidget
         /**
         * set orientation
         */
-        void setOrientation(Qt::Orientation orientation);
+        void setLocation(Plasma::Location location);
 
-        /**
-        * @return the orientation
-        */
-        Qt::Orientation orientation();
-
-        //FIXME what logic does this iconsize thing follow?
         /**
         * Sets the icon size
         */
         void setIconSize(int size);
 
-        /**
-        * @return the icon size
-        */
-        int iconSize() const;
-
     Q_SIGNALS:
-        void orientationChanged(Qt::Orientation orientation);
         void closeClicked();
 
     public Q_SLOTS:
