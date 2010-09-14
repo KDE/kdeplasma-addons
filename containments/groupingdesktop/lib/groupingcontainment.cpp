@@ -191,6 +191,9 @@ QList<AbstractGroup *> GroupingContainmentPrivate::groupsAt(const QPointF &pos, 
     bool goOn;
     if (uppermostItem) {
         do {
+            if (items.isEmpty()) {
+                return groups;
+            }
             goOn = items.first() != uppermostItem;
             items.removeFirst();
         } while (goOn);
@@ -384,7 +387,8 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 
         QRectF geom(widget->boundingRect());
 
-        QPointF pos = interesting->mapFromItem(parent, initialPos);
+        QGraphicsView *v = q->view();
+        QPointF pos = interesting->mapFromScene(v->mapToScene(v->mapFromGlobal(QCursor::pos())));
         interesting->layoutChild(widget, pos);
         interesting->save(*(interesting->d->mainConfigGroup()));
         interesting->saveChildren();
@@ -743,11 +747,11 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                         d->interestingGroup.clear();
                     }
 
-                    QList<AbstractGroup *> groups = d->groupsAt(mapFromItem(widget, widget->contentsRect().center()), widget);
-                    QPointF c = widget->contentsRect().center();
-                    c += mapFromScene(widget->scenePos());
-                    foreach (AbstractGroup *parentGroup, groups) {
-                        QPointF pos = mapToItem(parentGroup, c);
+                    QGraphicsView *v = view();
+                    QPointF p = mapFromScene(v->mapToScene(v->mapFromGlobal(QCursor::pos())));
+                    QList<AbstractGroup *> groups = d->groupsAt(p, widget);
+                    foreach (AbstractGroup *parentGroup ,groups) {
+                        QPointF pos = mapToItem(parentGroup, p);
                         if (pos.x() > 0 && pos.y() > 0) {
                             if (parentGroup->showDropZone(pos)) {
                                 d->interestingGroup = parentGroup;
