@@ -272,33 +272,35 @@ void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPoi
 void GroupingContainmentPrivate::newGroupClicked()
 {
     ExplorerWindow *w = ExplorerWindow::instance();
-    w->setContainment(q);
-    w->setLocation(q->location());
-    w->showGroupExplorer();
-    w->resize(w->sizeHint());
+    if (w->isHidden()) {
+        w->setContainment(q);
+        w->setLocation(q->location());
+        w->showGroupExplorer();
+        w->resize(w->sizeHint());
 
-    bool moved = false;
-    if (q->containmentType() == Plasma::Containment::PanelContainment ||
-        q->containmentType() == Plasma::Containment::CustomPanelContainment) {
-        // try to align it with the appropriate panel view
-        QGraphicsView *view = q->view();
-        if (view) {
-            w->move(w->positionForPanelGeometry(view->geometry()));
-            moved = true;
+        bool moved = false;
+        if (q->containmentType() == Plasma::Containment::PanelContainment ||
+            q->containmentType() == Plasma::Containment::CustomPanelContainment) {
+            // try to align it with the appropriate panel view
+            QGraphicsView *view = q->view();
+            if (view) {
+                w->move(w->positionForPanelGeometry(view->geometry()));
+                moved = true;
+            }
         }
-    }
 
-    if (!moved) {
-        // set it to the bottom of the screen as we have no better hints to go by
-        QRect geom = q->corona()->screenGeometry(q->screen());
-        w->setGeometry(geom.x(), geom.bottom() - w->height(), geom.width(), w->height());
-    }
+        if (!moved) {
+            // set it to the bottom of the screen as we have no better hints to go by
+            QRect geom = q->corona()->screenGeometry(q->screen());
+            w->setGeometry(geom.x(), geom.bottom() - w->height(), geom.width(), w->height());
+        }
 
-    w->show();
-    Plasma::WindowEffects::slideWindow(w, Plasma::BottomEdge);
-    KWindowSystem::setOnAllDesktops(w->winId(), true);
-    KWindowSystem::activateWindow(w->winId());
-    KWindowSystem::setState(w->winId(), NET::SkipTaskbar | NET::SkipPager | NET::Sticky | NET::KeepAbove);
+        w->show();
+        Plasma::WindowEffects::slideWindow(w, Plasma::BottomEdge);
+        KWindowSystem::setOnAllDesktops(w->winId(), true);
+        KWindowSystem::activateWindow(w->winId());
+        KWindowSystem::setState(w->winId(), NET::SkipTaskbar | NET::SkipPager | NET::Sticky | NET::KeepAbove);
+    }
 }
 
 void GroupingContainmentPrivate::deleteGroup()
