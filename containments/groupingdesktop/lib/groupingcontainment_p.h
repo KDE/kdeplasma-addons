@@ -55,7 +55,6 @@ class GroupingContainmentPrivate
         void onAppletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group);
         void onSubGroupRemovedFromGroup(AbstractGroup *subGroup, AbstractGroup *group);
         void onWidgetMoved(QGraphicsWidget *widget);
-        void groupAppearAnimationComplete();
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
         void restoreGroups();
         void prepareWidgetToMove();

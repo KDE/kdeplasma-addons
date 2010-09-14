@@ -211,7 +211,6 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
         Q_PRIVATE_SLOT(d, void onAppletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group))
         Q_PRIVATE_SLOT(d, void onSubGroupRemovedFromGroup(AbstractGroup *subGroup, AbstractGroup *group))
         Q_PRIVATE_SLOT(d, void onWidgetMoved(QGraphicsWidget *widget))
-        Q_PRIVATE_SLOT(d, void groupAppearAnimationComplete())
         Q_PRIVATE_SLOT(d, void onImmutabilityChanged(Plasma::ImmutabilityType immutability))
         Q_PRIVATE_SLOT(d, void restoreGroups())
         Q_PRIVATE_SLOT(d, void prepareWidgetToMove())

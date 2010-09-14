@@ -216,17 +216,6 @@ AbstractGroup *GroupingContainmentPrivate::groupAt(const QPointF &pos, QGraphics
     return groups.first();
 }
 
-void GroupingContainmentPrivate::groupAppearAnimationComplete()
-{
-    Plasma::Animation *anim = qobject_cast<Plasma::Animation *>(q->sender());
-    if (anim) {
-        AbstractGroup *group = qobject_cast<AbstractGroup *>(anim->targetWidget());
-        if (group) {
-            manageGroup(group, group->pos());
-        }
-    }
-}
-
 void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPointF &pos)
 {
     int z = applet->zValue();
@@ -598,30 +587,28 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     group->setImmutability(immutability());
     group->updateConstraints();
 
+    int z = group->zValue();
+    if (GroupingContainmentPrivate::s_maxZValue < z) {
+        GroupingContainmentPrivate::s_maxZValue = z;
+    }
+
+    emit groupAdded(group, pos);
+
     if (!d->loading && !pos.isNull()) {
-        Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
+        d->manageGroup(group, pos);
+        Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::AppearAnimation);
         if (anim) {
-            connect(anim, SIGNAL(finished()), this, SLOT(groupAppearAnimationComplete()));
             anim->setTargetWidget(group);
-            anim->setProperty("zoom", 1.0);
+            anim->setDirection(QAbstractAnimation::Backward);
             anim->start(QAbstractAnimation::DeleteWhenStopped);
-        } else {
-            d->manageGroup(group, pos);
         }
 
         group->save(*(group->d->mainConfigGroup()));
         emit configNeedsSaving();
     }
 
-    int z = group->zValue();
-    if (GroupingContainmentPrivate::s_maxZValue < z) {
-        GroupingContainmentPrivate::s_maxZValue = z;
-    }
-
     group->installEventFilter(this);
     group->installSceneEventFilter(this);
-
-    emit groupAdded(group, pos);
 }
 
 QList<AbstractGroup *> GroupingContainment::groups() const
