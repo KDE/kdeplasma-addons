@@ -22,7 +22,7 @@
 #include "plasma/package.h"
 
 ComicPackage::ComicPackage( QObject *parent, const QVariantList& args )
-    : Plasma::PackageStructure( parent, QLatin1String( "Comic" ) )
+    : Plasma::PackageStructure( parent, QLatin1String( "Plasma/Comic" ) )
 {
     Q_UNUSED( args )
     addDirectoryDefinition( "images", QLatin1String( "images" ), i18n( "Images" ) );
