@@ -22,9 +22,7 @@
 
 #include "abstractgroup.h"
 
-class Position;
 class Spacer;
-class Handle;
 
 class GridGroup : public AbstractGroup
 {
@@ -34,67 +32,26 @@ class GridGroup : public AbstractGroup
         ~GridGroup();
 
         void init();
-        void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
-        void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup& group);
         QString pluginName() const;
         bool showDropZone(const QPointF &pos);
-        void restoreChildren();
-        void releaseChild(QGraphicsWidget *child);
-        Handle *createHandleForChild(QGraphicsWidget *child);
+        void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
+        void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
         static GroupInfo groupInfo();
 
     protected:
-        void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         void resizeEvent(QGraphicsSceneResizeEvent *event);
-        void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
-        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-        void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
         bool eventFilter(QObject *obj, QEvent *event);
-        void constraintsEvent(Plasma::Constraints constraints);
-
-    private slots:
-        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
-        void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
-        void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
-        void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
-        void adjustCells();
+        void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
     private:
-        bool addItem(QGraphicsWidget *widget, int row, int column);
-        void removeItem(QGraphicsWidget *item, bool fillLayout = true);
-        Position itemPosition(QGraphicsWidget *item) const;
-        int isOnAColumnBorder(qreal x, int space = 0) const;
-        int isOnARowBorder(qreal y, int space = 0) const;
-        void saveCellsInfo();
+        int m_cellNumber;
+        bool m_showGrid;
+        QWeakPointer<Spacer> m_spacer;
+        Qt::Corner m_spacerCorner;
+        QPointF m_resizeStartPos;
 
-        void insertColumnAt(int column);
-        void removeColumnAt(int column);
-        void insertRowAt(int row);
-        void removeRowAt(int row);
-
-        Spacer *m_spacer;
-        QList<QList<QGraphicsWidget *> > m_children; //the inner list is the column, the outer one the row
-                                                     // |m_children.at(0).at(0)|m_children.at(0).at(1)|
-                                                     // |m_children.at(1).at(0)|m_children.at(1).at(1)|
-        QList<qreal> m_rowHeights;
-        QList<qreal> m_rowY;
-        QList<qreal> m_columnWidths;
-        QList<qreal> m_columnX;
-        int m_movingColumn;
-        int m_movingRow;
-        bool m_cursorOverriden;
-        Plasma::Svg *m_separator;
-
-        int lastSpacerRow;
-        int lastSpacerColumn;
-        bool lastSpacerRowWasAdded;
-        bool lastSpacerColumnWasAdded;
-
-        friend class Spacer;
 };
 
 #endif // GRIDGROUP_H
