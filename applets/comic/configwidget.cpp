@@ -24,10 +24,11 @@
 #include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
 
+#include <KConfigDialog>
 #include <KNS3/DownloadDialog>
 
-ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const QStringList &usedComics, QSortFilterProxyModel *proxy, QWidget *parent )
-    : QWidget( parent ), mEngine( engine ), mModel( model ), mUsedComics( usedComics ), mProxyModel( proxy ), mNewStuffDialog( 0 )
+ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const QStringList &usedComics, QSortFilterProxyModel *proxy, KConfigDialog *parent )
+    : QWidget( parent ), mEngine( engine ), mModel( model ), mProxyModel( proxy ), mNewStuffDialog( 0 )
 {
     comicSettings = new QWidget( this );
     comicUi.setupUi( comicSettings );
@@ -49,38 +50,23 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
         //set the correct initial item of the comboBox if it is defined
         const int index = comicUi.comboBox_comic->findData( usedComics.first() );
         comicUi.comboBox_comic->setCurrentIndex( index );
-        mCurrentIndex = mProxyModel->index( index, 0 );
     }
 
     comicUi.listView_comic->setModel( mProxyModel );
     comicUi.listView_comic->resizeColumnToContents( 0 );
 
-    connect( comicUi.comboBox_comic, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotCurrentIndexChanged( int ) ) );
+    connect( comicUi.checkBox_useTabs, SIGNAL( clicked( bool ) ), this, SLOT( slotListChosen() ) );
     connect( comicUi.checkBox_useTabs_2, SIGNAL( clicked( bool ) ), this, SLOT( slotComboBoxChosen() ) );
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(slotSave()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(slotSave()));
 }
 
 ConfigWidget::~ConfigWidget()
 {
 }
 
-void ConfigWidget::slotComboBoxChosen()
+void ConfigWidget::checkCurrentIndex()
 {
-    comicUi.comboBox_comic->setCurrentIndex( 0 );
-}
-
-void ConfigWidget::slotCurrentIndexChanged( int newIndex )
-{
-    if ( useTabs() || !mProxyModel->rowCount() ) {
-        return;
-    }
-
-    //decide wether to modify newIndex or not
-    const bool oldIsChecked = mCurrentIndex.isValid() && mCurrentIndex.data( Qt::CheckStateRole ) == Qt::Checked;
-    if ( !oldIsChecked ) {
-        //is not checked, i.e. comics have been added/removed, choose the first entry instead
-        newIndex = 0;
-    }
-
     //set all items of mProxyModel to unchecked
     for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
         QModelIndex index = mProxyModel->index( i, 0 );
@@ -88,12 +74,28 @@ void ConfigWidget::slotCurrentIndexChanged( int newIndex )
     }
 
     //check the selected index
-    mCurrentIndex = mProxyModel->index( newIndex, 0 );
-    mProxyModel->setData( mCurrentIndex, Qt::Checked, Qt::CheckStateRole );
+    QModelIndex index = mProxyModel->index( comicUi.comboBox_comic->currentIndex(), 0 );
+    mProxyModel->setData( index, Qt::Checked, Qt::CheckStateRole );
+}
 
-    if ( !oldIsChecked ) {
-        comicUi.comboBox_comic->setCurrentIndex( 0 );
+
+void ConfigWidget::slotSave()
+{
+    //useTabs() is already handled in the proxy itself
+    if ( !useTabs() ) {
+        checkCurrentIndex();
     }
+}
+
+
+void ConfigWidget::slotComboBoxChosen()
+{
+    comicUi.comboBox_comic->setCurrentIndex( 0 );
+}
+
+void ConfigWidget::slotListChosen()
+{
+    checkCurrentIndex();
 }
 
 void ConfigWidget::getNewStuff()
@@ -108,7 +110,6 @@ void ConfigWidget::getNewStuff()
 void ConfigWidget::newStuffFinished()
 {
     if ( mNewStuffDialog->changedEntries().count() ) {
-        mCurrentIndex = QModelIndex();
         mModel->setComics( mEngine->query( "providers" ), mModel->selected() );
 
         comicUi.listView_comic->resizeColumnToContents( 0 );

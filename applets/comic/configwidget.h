@@ -28,6 +28,7 @@
 #include <QTime>
 
 class ComicModel;
+class KConfigDialog;
 class QCheckBox;
 class QComboBox;
 class QSortFilterProxyModel;
@@ -45,7 +46,7 @@ class ConfigWidget : public QWidget
 {
         Q_OBJECT
     public:
-        ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const QStringList &usedComics, QSortFilterProxyModel *proxy, QWidget *parent );
+        ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const QStringList &usedComics, QSortFilterProxyModel *proxy, KConfigDialog *parent );
         ~ConfigWidget();
 
         void setShowComicUrl( bool show );
@@ -83,18 +84,20 @@ class ConfigWidget : public QWidget
         void newStuffFinished();
 
     private slots:
-        void slotCurrentIndexChanged( int newIndex );
         void slotComboBoxChosen();
+        void slotListChosen();
+        void slotSave();
+
+    private:
+        void checkCurrentIndex();
 
     private:
         Ui::ComicSettings comicUi;
         Ui::AppearanceSettings appearanceUi;
         Plasma::DataEngine *mEngine;
         ComicModel *mModel;
-        QStringList mUsedComics;
         QSortFilterProxyModel *mProxyModel;
         KNS3::DownloadDialog* mNewStuffDialog;
-        QModelIndex mCurrentIndex;
 };
 
 #endif
