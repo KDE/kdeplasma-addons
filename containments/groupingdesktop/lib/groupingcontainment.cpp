@@ -387,8 +387,7 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 
         QRectF geom(widget->boundingRect());
 
-        QGraphicsView *v = q->view();
-        QPointF pos = interesting->mapFromScene(v->mapToScene(v->mapFromGlobal(QCursor::pos())));
+        QPointF pos = interesting->mapFromItem(parent, initialPos);
         interesting->layoutChild(widget, pos);
         interesting->save(*(interesting->d->mainConfigGroup()));
         interesting->saveChildren();
@@ -747,8 +746,7 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                         d->interestingGroup.clear();
                     }
 
-                    QGraphicsView *v = view();
-                    QPointF p = mapFromScene(v->mapToScene(v->mapFromGlobal(QCursor::pos())));
+                    QPointF p = mapFromScene(widget->scenePos());
                     QList<AbstractGroup *> groups = d->groupsAt(p, widget);
                     foreach (AbstractGroup *parentGroup ,groups) {
                         QPointF pos = mapToItem(parentGroup, p);
