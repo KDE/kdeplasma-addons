@@ -400,7 +400,7 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", ""));
 
     uiConfig.imageServer->addItems(m_imgServers.keys());
-    uiConfig.textServer->setCurrentItem(cg.readEntry("ImageProvider", ""));
+    uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", ""));
 
     uiConfig.historySize->setValue(m_historySize);
 }
