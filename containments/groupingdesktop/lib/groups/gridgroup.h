@@ -22,6 +22,12 @@
 
 #include "abstractgroup.h"
 
+class QGraphicsLinearLayout;
+
+namespace Plasma {
+    class PushButton;
+};
+
 class Spacer;
 
 class GridGroup : public AbstractGroup
@@ -42,15 +48,28 @@ class GridGroup : public AbstractGroup
 
     protected:
         void resizeEvent(QGraphicsSceneResizeEvent *event);
+        void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
         bool eventFilter(QObject *obj, QEvent *event);
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
+    private slots:
+        void addNewRowOrColumn();
+        void removeRowOrColumn();
+
     private:
-        int m_cellNumber;
+        void updateGeometries();
+
+        int m_rowsNumber;
+        int m_colsNumber;
         bool m_showGrid;
         QWeakPointer<Spacer> m_spacer;
         Qt::Corner m_spacerCorner;
         QPointF m_resizeStartPos;
+        Spacer *m_gridManager;
+        QGraphicsLinearLayout *m_gridManagerLayout;
+        Plasma::PushButton *m_newRowCol;
+        Plasma::PushButton *m_delRowCol;
 
 };
 

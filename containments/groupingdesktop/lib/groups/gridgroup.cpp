@@ -22,9 +22,11 @@
 #include <QtGui/QPainter>
 #include <QtGui/QGraphicsSceneResizeEvent>
 #include <QtGui/QGraphicsSceneHoverEvent>
+#include <QtGui/QGraphicsLinearLayout>
 
 #include <Plasma/Theme>
 #include <Plasma/PaintUtils>
+#include <Plasma/PushButton>
 
 #include "spacer.h"
 
@@ -32,11 +34,33 @@ REGISTER_GROUP(GridGroup)
 
 GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
          : AbstractGroup(parent, wFlags),
-           m_showGrid(false)
+           m_showGrid(false),
+           m_gridManager(new Spacer(this)),
+           m_newRowCol(new Plasma::PushButton(m_gridManager)),
+           m_delRowCol(new Plasma::PushButton(m_gridManager))
 {
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
     setUseSimplerBackgroundForChildren(true);
+
+    m_gridManager->hide();
+
+    m_gridManagerLayout = new QGraphicsLinearLayout();
+    m_gridManager->setLayout(m_gridManagerLayout);
+    m_gridManager->setZValue(100000000);
+    m_gridManagerLayout->addItem(m_newRowCol);
+    m_gridManagerLayout->addStretch();
+    m_gridManagerLayout->addItem(m_delRowCol);
+
+    m_newRowCol->setIcon(KIcon("list-add"));
+    m_newRowCol->resize(20, 20);
+    m_newRowCol->setMaximumSize(20, 20);
+    m_delRowCol->setIcon(KIcon("list-remove"));
+    m_delRowCol->resize(20, 20);
+    m_delRowCol->setMaximumSize(20, 20);
+
+    connect(m_newRowCol, SIGNAL(clicked()), this, SLOT(addNewRowOrColumn()));
+    connect(m_delRowCol, SIGNAL(clicked()), this, SLOT(removeRowOrColumn()));
 }
 
 GridGroup::~GridGroup()
@@ -47,12 +71,18 @@ GridGroup::~GridGroup()
 void GridGroup::init()
 {
     KConfigGroup cg = config();
-    m_cellNumber = cg.readEntry("CellsNumber", 0);
+    m_rowsNumber = cg.readEntry("RowsNumber", 0);
+    m_colsNumber = cg.readEntry("ColsNumber", 0);
 
-    if (m_cellNumber == 0) {
-        m_cellNumber = contentsRect().width() / 50;
+    if (m_rowsNumber == 0) {
+        m_rowsNumber = contentsRect().width() / 50;
 
-        cg.writeEntry("CellsNumber", m_cellNumber);
+        cg.writeEntry("RowsNumber", m_rowsNumber);
+    }
+    if (m_colsNumber == 0) {
+        m_colsNumber = contentsRect().height() / 50;
+
+        cg.writeEntry("ColsNumber", m_colsNumber);
     }
 }
 
@@ -72,8 +102,8 @@ void GridGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup
 {
     QRectF rect(group.readEntry("Geometry", QRectF()));
     QRectF cRect(contentsRect());
-    const qreal width = cRect.width() / m_cellNumber;
-    const qreal height = cRect.height() / m_cellNumber;
+    const qreal width = cRect.width() / m_colsNumber;
+    const qreal height = cRect.height() / m_rowsNumber;
     child->setData(0, rect);
     child->setPos(rect.x() * width + cRect.x(), rect.y() * height + cRect.y());
     child->resize(rect.width() * width, rect.height() * height);
@@ -86,13 +116,55 @@ void GridGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) c
     group.writeEntry("Geometry", child->data(0).toRectF());
 }
 
+void GridGroup::addNewRowOrColumn()
+{
+    KConfigGroup cg = config();
+    if (m_gridManagerLayout->orientation() == Qt::Vertical) {
+        ++m_colsNumber;
+        cg.writeEntry("ColsNumber", m_colsNumber);
+    } else {
+        ++m_rowsNumber;
+        cg.writeEntry("RowsNumber", m_rowsNumber);
+    }
+    emit configNeedsSaving();
+
+    updateGeometries();
+}
+
+void GridGroup::removeRowOrColumn()
+{
+    KConfigGroup cg = config();
+    if (m_gridManagerLayout->orientation() == Qt::Vertical) {
+        m_colsNumber = (m_colsNumber > 1 ? m_colsNumber - 1 : 1);
+        cg.writeEntry("ColsNumber", m_colsNumber);
+    } else {
+        m_rowsNumber = (m_rowsNumber > 1 ? m_rowsNumber - 1 : 1);
+        cg.writeEntry("RowsNumber", m_rowsNumber);
+    }
+    emit configNeedsSaving();
+
+    updateGeometries();
+}
+
+void GridGroup::updateGeometries()
+{
+    QRectF rect(contentsRect());
+    const qreal width = rect.width() / m_colsNumber;
+    const qreal height = rect.height() / m_rowsNumber;
+    foreach (QGraphicsWidget *child, children()) {
+        QRectF r(child->data(0).toRectF());
+        child->setPos(r.x() * width + rect.x(), r.y() * height + rect.y());
+        child->resize(r.width() * width, r.height() * height);
+    }
+}
+
 void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 {
     QRectF rect(contentsRect());
-    const qreal width = rect.width() / m_cellNumber;
-    const qreal height = rect.height() / m_cellNumber;
-    for (int i = 0; i < m_cellNumber; ++i) {
-        for (int j = 0; j < m_cellNumber; ++j) {
+    const qreal width = rect.width() / m_colsNumber;
+    const qreal height = rect.height() / m_rowsNumber;
+    for (int i = 0; i < m_colsNumber; ++i) {
+        for (int j = 0; j < m_rowsNumber; ++j) {
             QRectF r(i * width + rect.x(), j * height + rect.y(), width, height);
             if (r.contains(pos)) {
                 int rows = child->size().width() / width;
@@ -118,13 +190,43 @@ void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     AbstractGroup::resizeEvent(event);
 
-    QRectF rect(contentsRect());
-    const qreal width = rect.width() / m_cellNumber;
-    const qreal height = rect.height() / m_cellNumber;
-    foreach (QGraphicsWidget *child, children()) {
-        QRectF r(child->data(0).toRectF());
-        child->setPos(r.x() * width + rect.x(), r.y() * height + rect.y());
-        child->resize(r.width() * width, r.height() * height);
+    updateGeometries();
+}
+
+void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+    QPointF pos(event->pos());
+    if (m_gridManager->geometry().contains(pos)) {
+        return;
+    }
+    QRectF bRect(boundingRect());
+    QRectF cRect(contentsRect());
+    if (QRectF(0, 0, 40, bRect.height()).contains(pos)) {
+        m_gridManagerLayout->setOrientation(Qt::Vertical);
+        m_gridManager->setGeometry(cRect.x(), cRect.y(), 20, cRect.height());
+        m_gridManager->show();
+    } else if (QRectF(bRect.width() - 40, 0, 40, bRect.height()).contains(pos)) {
+        m_gridManagerLayout->setOrientation(Qt::Vertical);
+        m_gridManager->setGeometry(cRect.right() - 20, cRect.y(), 20, cRect.height());
+        m_gridManager->show();
+    } else if (QRectF(0, 0, bRect.width(), 20).contains(pos)) {
+        m_gridManagerLayout->setOrientation(Qt::Horizontal);
+        m_gridManager->setGeometry(cRect.x(), cRect.y(), cRect.width(), 20);
+        m_gridManager->show();
+    } else if (QRectF(0, bRect.height() - 40, bRect.width(), 40).contains(pos)) {
+        m_gridManagerLayout->setOrientation(Qt::Horizontal);
+        m_gridManager->setGeometry(cRect.x(), cRect.bottom() - 20, cRect.width(), 20);
+        m_gridManager->show();
+    } else {
+        m_gridManager->hide();
+    }
+}
+
+void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
+{
+    m_gridManager->hide();
+    if (m_spacer) {
+        m_spacer.data()->hide();
     }
 }
 
@@ -222,10 +324,10 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
             if (obj == m_spacer.data()) {
                 QGraphicsWidget *child = m_spacer.data()->parentWidget();
                 QRectF rect(contentsRect());
-                const qreal width = rect.width() / m_cellNumber;
-                const qreal height = rect.height() / m_cellNumber;
-                for (int i = 0; i <= m_cellNumber; ++i) {
-                    for (int j = 0; j <= m_cellNumber; ++j) {
+                const qreal width = rect.width() / m_colsNumber;
+                const qreal height = rect.height() / m_rowsNumber;
+                for (int i = 0; i <= m_colsNumber; ++i) {
+                    for (int j = 0; j <= m_rowsNumber; ++j) {
                         QRectF r(i * width + rect.x() - width / 2., j * height + rect.y() - height / 2., width, height);
                         if (r.contains(child->pos())) {
                             int rows = qRound(child->size().width() / width);
@@ -261,10 +363,10 @@ void GridGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     if (m_showGrid) {
         painter->setRenderHint(QPainter::Antialiasing);
         QRectF rect(contentsRect());
-        const qreal width = rect.width() / m_cellNumber;
-        const qreal height = rect.height() / m_cellNumber;
-        for (int i = 0; i < m_cellNumber; ++i) {
-            for (int j = 0; j < m_cellNumber; ++j) {
+        const qreal width = rect.width() / m_colsNumber;
+        const qreal height = rect.height() / m_rowsNumber;
+        for (int i = 0; i < m_colsNumber; ++i) {
+            for (int j = 0; j < m_rowsNumber; ++j) {
                 QRectF r(i * width + rect.x(), j * height + rect.y(), width, height);
                 QPainterPath p = Plasma::PaintUtils::roundedRectangle(r.adjusted(2, 2, -2, -2), 4);
                 QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
