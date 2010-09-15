@@ -619,6 +619,16 @@ void AbstractGroup::setIsMainGroup()
     setFlag(QGraphicsItem::ItemIsMovable, false);
     setZValue(0);
     setContentsMargins(0, 0, 0, 0);
+
+    if (d->simplerBackgroundChildren) {
+        foreach (Plasma::Applet *applet, d->applets) {
+            d->setChildBorders(applet, false);
+        }
+        foreach (AbstractGroup *group, d->subGroups) {
+            d->setChildBorders(group, false);
+        }
+        d->simplerBackgroundChildren = false;
+    }
 }
 
 bool AbstractGroup::isMainGroup() const
@@ -654,7 +664,7 @@ AbstractGroup::BackgroundHints AbstractGroup::backgroundHints() const
 
 void AbstractGroup::setUseSimplerBackgroundForChildren(bool use)
 {
-    if (d->simplerBackgroundChildren != use) {
+    if (d->simplerBackgroundChildren != use && !d->isMainGroup) {
         if (use) {
             foreach (Plasma::Applet *applet, d->applets) {
                 d->setChildBorders(applet, true);
