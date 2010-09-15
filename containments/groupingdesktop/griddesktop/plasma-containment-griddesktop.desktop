@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=GridDesktop
+Name[x-test]=xxGridDesktopxx
 Icon=
 Type=Service
 X-KDE-ServiceTypes=Plasma/Containment
