@@ -40,7 +40,6 @@ GridDesktop::~GridDesktop()
 
 void GridDesktop::init()
 {
-    kDebug()<<corona()<<"JKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK";
     connect(corona(), SIGNAL(availableScreenRegionChanged()), this, SLOT(layoutMainGroup()));
 
     GroupingContainment::init();
@@ -49,7 +48,6 @@ void GridDesktop::init()
 void GridDesktop::layoutMainGroup()
 {
     QRectF rect = corona()->availableScreenRegion(screen()).boundingRect();
-    kDebug()<<rect;
     mainGroup()->setGeometry(rect);
 }
 
