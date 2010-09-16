@@ -107,7 +107,7 @@ void GroupIcon::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             drag->setPixmap(p);
 
             drag->setMimeData(data);
-            drag->exec();
+            drag->exec();   // krazy:exclude=crashy
 
             setCursor(Qt::OpenHandCursor);
         } else {

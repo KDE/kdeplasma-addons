@@ -58,6 +58,7 @@ class GridGroup : public AbstractGroup
         void removeRowOrColumn();
 
     private:
+        void updateChild(QGraphicsWidget *child);
         void updateGeometries();
 
         int m_rowsNumber;

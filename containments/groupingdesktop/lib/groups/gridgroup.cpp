@@ -146,6 +146,44 @@ void GridGroup::removeRowOrColumn()
     updateGeometries();
 }
 
+void GridGroup::updateChild(QGraphicsWidget *child)
+{
+    QPointF pos(child->pos());
+    QRectF rect(contentsRect());
+    if (pos.x() < rect.left()) {
+        pos.setX(rect.left());
+    }
+    if (pos.y() < rect.top()) {
+        pos.setY(rect.top());
+    }
+    QRectF geom(child->geometry());
+    geom.setTopLeft(pos);
+    const qreal width = rect.width() / m_colsNumber;
+    const qreal height = rect.height() / m_rowsNumber;
+    for (int i = 0; i < m_colsNumber; ++i) {
+        for (int j = 0; j < m_rowsNumber; ++j) {
+            QRectF r(i * width + rect.x() - width / 2., j * height + rect.y() - height / 2., width, height);
+            if (r.contains(pos)) {
+                int cols = qRound(geom.width() / width);
+                int rows = qRound(geom.height() / height);
+                rows = (rows > 0 ? rows : 1);
+                cols = (cols > 0 ? cols : 1);
+                if (i + cols > m_colsNumber) {
+                    cols = m_colsNumber - i;
+                }
+                if (j + rows > m_rowsNumber) {
+                    rows = m_rowsNumber - j;
+                }
+                child->setData(0, QRectF(i, j, cols, rows));
+                child->setGeometry(QRectF(i * width + rect.x(), j * height + rect.y(),
+                                          width * cols, height * rows));
+
+                return;
+            }
+        }
+    }
+}
+
 void GridGroup::updateGeometries()
 {
     QRectF rect(contentsRect());
@@ -158,32 +196,14 @@ void GridGroup::updateGeometries()
     }
 }
 
-void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
+void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
 {
-    QRectF rect(contentsRect());
-    const qreal width = rect.width() / m_colsNumber;
-    const qreal height = rect.height() / m_rowsNumber;
-    for (int i = 0; i < m_colsNumber; ++i) {
-        for (int j = 0; j < m_rowsNumber; ++j) {
-            QRectF r(i * width + rect.x(), j * height + rect.y(), width, height);
-            if (r.contains(pos)) {
-                int rows = child->size().width() / width;
-                int cols = child->size().height() / height;
-                rows = (rows > 0 ? rows : 1);
-                cols = (cols > 0 ? cols : 1);
-                child->setData(0, QRectF(i, j, rows, cols));
-                r.setWidth(width * rows);
-                r.setHeight(height * cols);
-                child->setGeometry(r);
-                child->installEventFilter(this);
+    updateChild(child);
 
-                m_showGrid = false;
-                update();
+    child->installEventFilter(this);
 
-                return;
-            }
-        }
-    }
+    m_showGrid = false;
+    update();
 }
 
 void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
@@ -323,29 +343,11 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
         case QEvent::GraphicsSceneMouseRelease:
             if (obj == m_spacer.data()) {
                 QGraphicsWidget *child = m_spacer.data()->parentWidget();
-                QRectF rect(contentsRect());
-                const qreal width = rect.width() / m_colsNumber;
-                const qreal height = rect.height() / m_rowsNumber;
-                for (int i = 0; i <= m_colsNumber; ++i) {
-                    for (int j = 0; j <= m_rowsNumber; ++j) {
-                        QRectF r(i * width + rect.x() - width / 2., j * height + rect.y() - height / 2., width, height);
-                        if (r.contains(child->pos())) {
-                            int rows = qRound(child->size().width() / width);
-                            int cols = qRound(child->size().height() / height);
-                            rows = (rows > 0 ? rows : 1);
-                            cols = (cols > 0 ? cols : 1);
-                            child->setData(0, QRectF(i, j, rows, cols));
-                            child->setGeometry(QRectF(i * width + rect.x(), j * height + rect.y(),
-                                                      width * rows, height * cols));
+                updateChild(child);
+                m_showGrid = false;
+                update();
 
-                            m_showGrid = false;
-                            update();
-
-                            saveChildren();
-                            return false;
-                        }
-                    }
-                }
+                saveChildren();
             }
             break;
 
