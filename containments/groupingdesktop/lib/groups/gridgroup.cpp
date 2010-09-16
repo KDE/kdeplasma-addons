@@ -412,7 +412,17 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
         case QEvent::GraphicsSceneMouseRelease:
             if (obj == m_cornerHandle.data()) {
                 QGraphicsWidget *child = m_cornerHandle.data()->parentWidget();
+                QRectF geom(child->geometry());
                 updateChild(child);
+
+                Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
+                if (anim) {
+                    anim->setTargetWidget(child);
+                    anim->setProperty("startGeometry", geom);
+                    anim->setProperty("targetGeometry", child->geometry());
+                    anim->start(QAbstractAnimation::DeleteWhenStopped);
+                }
+
                 m_showGrid = false;
                 update();
 
