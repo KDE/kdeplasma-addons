@@ -455,6 +455,14 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
         virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
 
         /**
+         * Reimplemented from QGraphicsWidget
+         *
+         * @note if you reimplement this be sure to call AbstractGroup::mousePressEvent
+         * or it will cause troubles.
+         **/
+        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
+        /**
          * Lays out a child inside the Group
          * A sub class probably wants to reimplement this function
          *

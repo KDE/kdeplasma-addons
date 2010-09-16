@@ -740,7 +740,7 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
             break;
 
             case QEvent::GraphicsSceneMove: {
-                if (!d->movingWidget && widget == d->interestingWidget) {
+                if (d->movingWidget != widget && widget == d->interestingWidget) {
                     setMovingWidget(widget);
                 }
                 if (widget == d->movingWidget) {
