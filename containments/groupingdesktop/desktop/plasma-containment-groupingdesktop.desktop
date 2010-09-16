@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=GroupingDesktop
+Name=Grouping Desktop
 Name[de]=Arbeitsflächengruppierung
 Name[en_GB]=GroupingDesktop
 Name[es]=Escritorio de agrupamiento
@@ -9,7 +9,7 @@ Name[sv]=Gruppera skrivbord
 Name[uk]=Впорядкування стільниці
 Name[x-test]=xxGroupingDesktopxx
 Name[zh_TW]=群組桌面
-Icon=
+Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Containment
 X-Plasma-ContainmentCategories=desktop
