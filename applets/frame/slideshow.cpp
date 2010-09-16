@@ -37,6 +37,7 @@ SlideShow::SlideShow(QObject *parent)
 
     m_picture = new Picture(this);
     connect(m_picture, SIGNAL(pictureLoaded(QImage)), this, SLOT(pictureLoaded(QImage)));
+    connect(this, SIGNAL(emptyDirMessage()), m_picture, SLOT(customizeEmptyMessage()));
 
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(nextPicture()));
@@ -72,8 +73,10 @@ void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
     // select 1st picture
     firstPicture();
 
-    // TODO do something meaningful if m_picturePaths.empty()
     kDebug() << "Loaded " << m_picturePaths.size() << " pictures in " << setDirStart.secsTo(QDateTime::currentDateTime()) << " seconds";
+    if( m_picturePaths.isEmpty()) {
+        emit emptyDirMessage();
+    }
 }
 
 void SlideShow::setImage(const QString &imagePath)

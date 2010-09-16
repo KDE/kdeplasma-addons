@@ -62,6 +62,7 @@ private Q_SLOTS:
     void slotFinished(KJob *job);
     void reload();
     void checkImageLoaded(QImage newImage);
+    void customizeEmptyMessage();
 
 private:
     void setPath(const QString &path);
@@ -70,6 +71,7 @@ private:
     KDirWatch *m_fileWatch;
     QString m_message;
     QString m_defaultImage;
+    bool m_checkDir;
 };
 
 

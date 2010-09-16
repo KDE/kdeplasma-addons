@@ -57,6 +57,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void pictureUpdated();
+    QString emptyDirMessage();
 
 private Q_SLOTS:
     void clearPicture();

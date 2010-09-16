@@ -39,6 +39,7 @@ Picture::Picture(QObject *parent)
         : QObject(parent)
 {
     m_defaultImage = KGlobal::dirs()->findResource("data", "plasma-applet-frame/picture-frame-default.jpg");
+    m_checkDir = false;
 
     // listen for changes to the file we're displaying
     m_fileWatch = new KDirWatch(this);
@@ -82,7 +83,11 @@ void Picture::setPicture(const KUrl &currentUrl)
         connect(m_job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
         emit pictureLoaded(defaultPicture(i18n("Loading image...")));
     } else {
-        if (currentUrl.isEmpty()) {
+        if (m_checkDir) {
+            loader = new ImageLoader(m_defaultImage);
+            m_message = i18nc("Info", "Dropped folder is empty. Please drop a folder with image(s)");
+            m_checkDir = false;
+        } else if (currentUrl.isEmpty()) {
             loader = new ImageLoader(m_defaultImage);
             m_message = i18nc("Info", "Put your photo here or drop a folder to start a slideshow");
             kDebug() << "default image ...";
@@ -119,6 +124,11 @@ void Picture::reload()
     ImageLoader *loader = new ImageLoader(m_path);
     connect(loader, SIGNAL(loaded(QImage)), this, SLOT(checkImageLoaded(QImage)));
     QThreadPool::globalInstance()->start(loader);
+}
+
+void Picture::customizeEmptyMessage() 
+{
+    m_checkDir = true;
 }
 
 void Picture::slotFinished( KJob *job )
