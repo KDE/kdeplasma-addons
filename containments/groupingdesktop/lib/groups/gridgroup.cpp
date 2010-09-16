@@ -267,7 +267,7 @@ void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     QPointF pos(event->pos());
-    if (m_gridManager->geometry().contains(pos) || immutability() != Plasma::Mutable) {
+    if ((m_gridManager->isVisible() && m_gridManager->geometry().contains(pos)) || immutability() != Plasma::Mutable) {
         return;
     }
     QRectF bRect(boundingRect());
