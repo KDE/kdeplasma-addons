@@ -89,7 +89,8 @@ GroupingContainmentPrivate::~GroupingContainmentPrivate()
     delete ExplorerWindow::instance();
 }
 
-AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, const QPointF &pos, unsigned int id)
+AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, const QPointF &pos,
+                                                       unsigned int id, bool delayInit)
 {
     foreach (AbstractGroup *group, groups) {
         if (group->id() == id) {
@@ -119,10 +120,12 @@ AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, co
 
     q->addGroup(group, pos);
 
-    group->init();
+    if (!delayInit) {
+        group->init();
 
-    if (!loading) {
-        group->d->restoreChildren();
+        if (!loading) {
+            group->d->restoreChildren();
+        }
     }
 
     return group;
@@ -858,8 +861,9 @@ void GroupingContainment::restoreContents(KConfigGroup &group)
     }
 
     if (!d->mainGroupPlugin.isEmpty() && !d->mainGroup) {
-        AbstractGroup *group = addGroup(d->mainGroupPlugin);
+        AbstractGroup *group = d->createGroup(d->mainGroupPlugin, QPointF(), 0, true);
         setMainGroup(group);
+        group->init();
     }
     if (!d->mainGroup) {
         kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";

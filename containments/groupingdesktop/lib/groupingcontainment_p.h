@@ -41,7 +41,7 @@ class GroupingContainmentPrivate
         GroupingContainmentPrivate(GroupingContainment *containment);
         ~GroupingContainmentPrivate();
 
-        AbstractGroup *createGroup(const QString &plugin, const QPointF &pos, unsigned int id);
+        AbstractGroup *createGroup(const QString &plugin, const QPointF &pos, unsigned int id, bool delayInit = false);
         void handleDisappeared(Handle *handle);
         void onGroupRemoved(AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet);
