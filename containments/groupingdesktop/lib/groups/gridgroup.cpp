@@ -214,7 +214,6 @@ void GridGroup::updateGeometries()
 void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
 {
     updateChild(child);
-    saveChildren();
 
     child->installEventFilter(this);
 
