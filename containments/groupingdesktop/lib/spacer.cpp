@@ -42,7 +42,7 @@ void Spacer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
     //TODO: make this a pretty gradient?
     painter->setRenderHint(QPainter::Antialiasing);
-    QPainterPath p = Plasma::PaintUtils::roundedRectangle(contentsRect().adjusted(1, 1, -2, -2), 4);
+    QPainterPath p = Plasma::PaintUtils::roundedRectangle(contentsRect(), 4);
     QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
     c.setAlphaF(0.3);
 

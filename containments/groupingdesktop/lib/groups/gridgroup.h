@@ -25,7 +25,8 @@
 class QGraphicsLinearLayout;
 
 namespace Plasma {
-    class PushButton;
+    class ToolButton;
+    class Animation;
 };
 
 class Spacer;
@@ -56,6 +57,7 @@ class GridGroup : public AbstractGroup
     private slots:
         void addNewRowOrColumn();
         void removeRowOrColumn();
+        void animationFinished();
 
     private:
         void updateChild(QGraphicsWidget *child);
@@ -69,8 +71,9 @@ class GridGroup : public AbstractGroup
         QPointF m_resizeStartPos;
         Spacer *m_gridManager;
         QGraphicsLinearLayout *m_gridManagerLayout;
-        Plasma::PushButton *m_newRowCol;
-        Plasma::PushButton *m_delRowCol;
+        Plasma::ToolButton *m_newRowCol;
+        Plasma::ToolButton *m_delRowCol;
+        Plasma::Animation *m_managerAnim;
 
 };
 

@@ -24,9 +24,13 @@
 #include <QtGui/QGraphicsSceneHoverEvent>
 #include <QtGui/QGraphicsLinearLayout>
 
+#include <KIcon>
+
 #include <Plasma/Theme>
 #include <Plasma/PaintUtils>
-#include <Plasma/PushButton>
+#include <Plasma/ToolButton>
+#include <Plasma/Animator>
+#include <Plasma/Animation>
 
 #include "spacer.h"
 
@@ -36,8 +40,8 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
          : AbstractGroup(parent, wFlags),
            m_showGrid(false),
            m_gridManager(new Spacer(this)),
-           m_newRowCol(new Plasma::PushButton(m_gridManager)),
-           m_delRowCol(new Plasma::PushButton(m_gridManager))
+           m_newRowCol(new Plasma::ToolButton(m_gridManager)),
+           m_delRowCol(new Plasma::ToolButton(m_gridManager))
 {
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
@@ -53,11 +57,15 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_gridManagerLayout->addItem(m_delRowCol);
 
     m_newRowCol->setIcon(KIcon("list-add"));
-    m_newRowCol->resize(20, 20);
-    m_newRowCol->setMaximumSize(20, 20);
+    m_newRowCol->setMinimumSize(QSizeF());
     m_delRowCol->setIcon(KIcon("list-remove"));
-    m_delRowCol->resize(20, 20);
-    m_delRowCol->setMaximumSize(20, 20);
+    m_delRowCol->setMinimumSize(QSizeF());
+
+    m_managerAnim = Plasma::Animator::create(Plasma::Animator::FadeAnimation);
+    m_managerAnim->setTargetWidget(m_gridManager);
+    m_managerAnim->setProperty("startOpacity", 0);
+    m_managerAnim->setProperty("targetOpacity", 1);
+    connect(m_managerAnim, SIGNAL(finished()), this, SLOT(animationFinished()));
 
     connect(m_newRowCol, SIGNAL(clicked()), this, SLOT(addNewRowOrColumn()));
     connect(m_delRowCol, SIGNAL(clicked()), this, SLOT(removeRowOrColumn()));
@@ -146,6 +154,13 @@ void GridGroup::removeRowOrColumn()
     updateGeometries();
 }
 
+void GridGroup::animationFinished()
+{
+    if (m_managerAnim->direction() == QAbstractAnimation::Backward) {
+        m_gridManager->hide();
+    }
+}
+
 void GridGroup::updateChild(QGraphicsWidget *child)
 {
     QPointF pos(child->pos());
@@ -199,6 +214,7 @@ void GridGroup::updateGeometries()
 void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
 {
     updateChild(child);
+    saveChildren();
 
     child->installEventFilter(this);
 
@@ -221,38 +237,48 @@ void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     }
     QRectF bRect(boundingRect());
     QRectF cRect(contentsRect());
-    if (QRectF(0, 0, 40, bRect.height()).contains(pos)) {
-        m_newRowCol->setToolTip(i18n("Add a new column"));
-        m_delRowCol->setToolTip(i18n("Remove a column"));
-        m_gridManagerLayout->setOrientation(Qt::Vertical);
-        m_gridManager->setGeometry(cRect.x(), cRect.y(), 20, cRect.height());
-        m_gridManager->show();
-    } else if (QRectF(bRect.width() - 40, 0, 40, bRect.height()).contains(pos)) {
-        m_newRowCol->setToolTip(i18n("Add a new column"));
-        m_delRowCol->setToolTip(i18n("Remove a column"));
-        m_gridManagerLayout->setOrientation(Qt::Vertical);
-        m_gridManager->setGeometry(cRect.right() - 20, cRect.y(), 20, cRect.height());
-        m_gridManager->show();
-    } else if (QRectF(0, 0, bRect.width(), 20).contains(pos)) {
-        m_newRowCol->setToolTip(i18n("Add a new row"));
-        m_delRowCol->setToolTip(i18n("Remove a row"));
-        m_gridManagerLayout->setOrientation(Qt::Horizontal);
-        m_gridManager->setGeometry(cRect.x(), cRect.y(), cRect.width(), 20);
-        m_gridManager->show();
-    } else if (QRectF(0, bRect.height() - 40, bRect.width(), 40).contains(pos)) {
-        m_newRowCol->setToolTip(i18n("Add a new row"));
-        m_delRowCol->setToolTip(i18n("Remove a row"));
-        m_gridManagerLayout->setOrientation(Qt::Horizontal);
-        m_gridManager->setGeometry(cRect.x(), cRect.bottom() - 20, cRect.width(), 20);
-        m_gridManager->show();
+    const qreal size = 30;
+    bool vertical;
+    QRectF geom;
+    if (QRectF(0, 0, 2 * size, bRect.height()).contains(pos)) {
+        vertical = true;
+        geom = QRect(cRect.x(), cRect.y(), size, cRect.height());
+    } else if (QRectF(bRect.width() - 2 * size, 0, 2 * size, bRect.height()).contains(pos)) {
+        vertical = true;
+        geom = QRectF(cRect.right() - size, cRect.y(), size, cRect.height());
+    } else if (QRectF(0, 0, bRect.width(), size).contains(pos)) {
+        vertical = false;
+        geom = QRectF(cRect.x(), cRect.y(), cRect.width(), size);
+    } else if (QRectF(0, bRect.height() - 2 * size, bRect.width(), 2 * size).contains(pos)) {
+        vertical = false;
+        geom = QRectF(cRect.x(), cRect.bottom() - size, cRect.width(), size);
     } else {
-        m_gridManager->hide();
+        m_managerAnim->setDirection(QAbstractAnimation::Backward);
+        m_managerAnim->start();
+        return;
+    }
+
+    if (vertical) {
+        m_newRowCol->setToolTip(i18n("Add a new column"));
+        m_delRowCol->setToolTip(i18n("Remove a column"));
+        m_gridManagerLayout->setOrientation(Qt::Vertical);
+    } else {
+        m_newRowCol->setToolTip(i18n("Add a new row"));
+        m_delRowCol->setToolTip(i18n("Remove a row"));
+        m_gridManagerLayout->setOrientation(Qt::Horizontal);
+    }
+    m_gridManager->setGeometry(geom);
+    if (!m_gridManager->isVisible()) {
+        m_gridManager->show();
+        m_managerAnim->setDirection(QAbstractAnimation::Forward);
+        m_managerAnim->start();
     }
 }
 
 void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 {
-    m_gridManager->hide();
+    m_managerAnim->setDirection(QAbstractAnimation::Backward);
+    m_managerAnim->start();
     if (m_spacer) {
         m_spacer.data()->hide();
     }
