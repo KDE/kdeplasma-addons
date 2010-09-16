@@ -71,6 +71,7 @@ class GridGroup : public AbstractGroup
         QWeakPointer<Spacer> m_cornerHandle;
         Qt::Corner m_handleCorner;
         QPointF m_resizeStartPos;
+        QRectF m_resizeStartGeom;
         Spacer *m_gridManager;
         QGraphicsLinearLayout *m_gridManagerLayout;
         Plasma::ToolButton *m_newRowCol;

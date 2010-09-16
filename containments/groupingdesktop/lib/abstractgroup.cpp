@@ -237,6 +237,7 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setContentsMargins(10, 10, 10, 10);
     setBackgroundHints(StandardBackground);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    setMinimumSize(20, 20);
 }
 
 AbstractGroup::~AbstractGroup()

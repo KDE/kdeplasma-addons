@@ -89,12 +89,12 @@ void GridGroup::init()
     m_colsNumber = cg.readEntry("ColsNumber", 0);
 
     if (m_rowsNumber == 0) {
-        m_rowsNumber = contentsRect().width() / 50;
+        m_rowsNumber = contentsRect().height() / 50;
 
         cg.writeEntry("RowsNumber", m_rowsNumber);
     }
     if (m_colsNumber == 0) {
-        m_colsNumber = contentsRect().height() / 50;
+        m_colsNumber = contentsRect().width() / 50;
 
         cg.writeEntry("ColsNumber", m_colsNumber);
     }
@@ -373,11 +373,16 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
         break;
 
         case QEvent::GraphicsSceneMousePress:
-            if (obj == m_cornerHandle.data() && static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton) {
-                event->accept();
-                m_showGrid = true;
-                update();
-                return true;
+            if (obj == m_cornerHandle.data()) {
+                QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent *>(event);
+                if (e->button() == Qt::LeftButton) {
+                    event->accept();
+                    m_showGrid = true;
+                    m_resizeStartPos = mapFromScene(e->scenePos());
+                    m_resizeStartGeom = m_cornerHandle.data()->parentWidget()->geometry();
+                    update();
+                    return true;
+                }
             }
         break;
 
@@ -385,26 +390,31 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
             if (obj == m_cornerHandle.data()) {
                 QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent *>(event);
                 QGraphicsWidget *child = m_cornerHandle.data()->parentWidget();
-                QRectF geom(child->geometry());
-                const QPointF delta = e->pos() - e->lastPos();
+                QRectF geom(m_resizeStartGeom);
+                QPointF pos(m_cornerHandle.data()->pos());
+                QSizeF size(child->minimumSize());
+                const QPointF delta = mapFromScene(e->scenePos()) - m_resizeStartPos;
                 switch (m_handleCorner) {
                     case Qt::TopLeftCorner:
                         geom.setTopLeft(geom.topLeft() + delta);
                         break;
                     case Qt::TopRightCorner:
                         geom.setTopRight(geom.topRight() + delta);
-                        m_cornerHandle.data()->setPos(m_cornerHandle.data()->pos() + QPointF(delta.x(), 0));
+                        pos = QPointF(geom.width() - 20, 0);
                         break;
                     case Qt::BottomRightCorner:
                         geom.setBottomRight(geom.bottomRight() + delta);
-                        m_cornerHandle.data()->setPos(m_cornerHandle.data()->pos() + delta);
+                        pos = QPointF(geom.width() - 20, geom.height() - 20);
                         break;
                     case Qt::BottomLeftCorner:
                         geom.setBottomLeft(geom.bottomLeft() + delta);
-                        m_cornerHandle.data()->setPos(m_cornerHandle.data()->pos() + QPointF(0, delta.y()));
+                        pos = QPointF(0, geom.height() - 20);
                         break;
                 }
-                child->setGeometry(geom);
+                if (geom.width() >= size.width() && geom.height() >= size.height()) {
+                    child->setGeometry(geom);
+                    m_cornerHandle.data()->setPos(pos);
+                }
                 event->accept();
             }
         break;
