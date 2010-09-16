@@ -747,6 +747,7 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                     }
 
                     QPointF p = mapFromScene(widget->scenePos());
+                    p += widget->contentsRect().topLeft();
                     QList<AbstractGroup *> groups = d->groupsAt(p, widget);
                     foreach (AbstractGroup *parentGroup ,groups) {
                         QPointF pos = mapToItem(parentGroup, p);
