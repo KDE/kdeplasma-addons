@@ -413,6 +413,8 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 
         interestingGroup.clear();
 
+    } else {
+        widget->setParentItem(q);
     }
 
     emit q->configNeedsSaving();

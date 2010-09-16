@@ -708,15 +708,6 @@ void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
     }
 }
 
-void AbstractGroup::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    QGraphicsWidget::mousePressEvent(event);
-
-    //must make sure we accept the event or the containment won't know that there was a
-    //mouse release and won't be able to reset interestingWidget
-    event->accept();
-}
-
 void AbstractGroup::constraintsEvent(Plasma::Constraints)
 {
 
