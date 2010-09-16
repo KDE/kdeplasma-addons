@@ -257,6 +257,10 @@ void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     AbstractGroup::resizeEvent(event);
 
+    if (m_managerAnim && m_gridManager->isVisible()) {
+        m_managerAnim->setDirection(QAbstractAnimation::Backward);
+        m_managerAnim->start();
+    }
     updateGeometries();
 }
 
