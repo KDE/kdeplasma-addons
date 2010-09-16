@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=GridDesktop
+Name[en_GB]=GridDesktop
+Name[pt]=GridDesktop
+Name[uk]=Стільничка ґратка
 Name[x-test]=xxGridDesktopxx
 Icon=
 Type=Service
