@@ -69,6 +69,11 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
     connect(m_newRowCol, SIGNAL(clicked()), this, SLOT(addNewRowOrColumn()));
     connect(m_delRowCol, SIGNAL(clicked()), this, SLOT(removeRowOrColumn()));
+
+    connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
+            this, SLOT(appletRemoved(Plasma::Applet*)));
+    connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
+            this, SLOT(subGroupRemoved(AbstractGroup*)));
 }
 
 GridGroup::~GridGroup()
@@ -154,6 +159,18 @@ void GridGroup::removeRowOrColumn()
     updateGeometries();
 }
 
+void GridGroup::appletRemoved(Plasma::Applet *)
+{
+    if (m_cornerHandle.data()->isVisible()) {
+        m_cornerHandle.data()->hide();
+        m_cornerHandle.data()->setParentItem(this);
+    }
+}
+
+void GridGroup::subGroupRemoved(AbstractGroup *)
+{
+    appletRemoved(0);
+}
 void GridGroup::animationFinished()
 {
     if (m_managerAnim->direction() == QAbstractAnimation::Backward) {
@@ -278,8 +295,8 @@ void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 {
     m_managerAnim->setDirection(QAbstractAnimation::Backward);
     m_managerAnim->start();
-    if (m_spacer) {
-        m_spacer.data()->hide();
+    if (m_cornerHandle) {
+        m_cornerHandle.data()->hide();
     }
 }
 
@@ -295,13 +312,13 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
             QGraphicsWidget *widget = qobject_cast<QGraphicsWidget *>(obj);
             QGraphicsSceneHoverEvent *e = static_cast<QGraphicsSceneHoverEvent *>(event);
             if (widget && children().contains(widget)) {
-                if (!m_spacer) {
-                    m_spacer = new Spacer(this);
-                    m_spacer.data()->hide();
-                    m_spacer.data()->resize(20, 20);
-                    m_spacer.data()->installEventFilter(this);
+                if (!m_cornerHandle) {
+                    m_cornerHandle = new Spacer(this);
+                    m_cornerHandle.data()->hide();
+                    m_cornerHandle.data()->resize(20, 20);
+                    m_cornerHandle.data()->installEventFilter(this);
                 }
-                m_spacer.data()->setParentItem(widget);
+                m_cornerHandle.data()->setParentItem(widget);
 
                 QPointF pos(e->pos());
                 QRectF rect(widget->boundingRect());
@@ -311,33 +328,33 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 QRectF topRight(width, 0, width, height);
                 QRectF bottomRight(width, height, width, height);
                 if (topLeft.contains(pos)) {
-                    m_spacer.data()->setGeometry(0, 0, 20, 20);
-                    m_spacerCorner = Qt::TopLeftCorner;
+                    m_cornerHandle.data()->setGeometry(0, 0, 20, 20);
+                    m_handleCorner = Qt::TopLeftCorner;
                 } else if (topRight.contains(pos)) {
-                    m_spacer.data()->setGeometry(rect.width() - 20, 0, 20, 20);
-                    m_spacerCorner = Qt::TopRightCorner;
+                    m_cornerHandle.data()->setGeometry(rect.width() - 20, 0, 20, 20);
+                    m_handleCorner = Qt::TopRightCorner;
                 } else if (bottomRight.contains(pos)) {
-                    m_spacer.data()->setGeometry(rect.width() - 20, rect.height() - 20, 20, 20);
-                    m_spacerCorner = Qt::BottomRightCorner;
+                    m_cornerHandle.data()->setGeometry(rect.width() - 20, rect.height() - 20, 20, 20);
+                    m_handleCorner = Qt::BottomRightCorner;
                 } else {
-                    m_spacer.data()->setGeometry(0, rect.height() - 20, 20, 20);
-                    m_spacerCorner = Qt::BottomLeftCorner;
+                    m_cornerHandle.data()->setGeometry(0, rect.height() - 20, 20, 20);
+                    m_handleCorner = Qt::BottomLeftCorner;
                 }
 
-                m_spacer.data()->show();
+                m_cornerHandle.data()->show();
             }
         }
         break;
 
         case QEvent::GraphicsSceneHoverLeave:
-            if (m_spacer) {
-                m_spacer.data()->setParentItem(this);
-                m_spacer.data()->hide();
+            if (m_cornerHandle) {
+                m_cornerHandle.data()->setParentItem(this);
+                m_cornerHandle.data()->hide();
             }
         break;
 
         case QEvent::GraphicsSceneMousePress:
-            if (obj == m_spacer.data() && static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton) {
+            if (obj == m_cornerHandle.data() && static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton) {
                 event->accept();
                 m_showGrid = true;
                 update();
@@ -346,26 +363,26 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
         break;
 
         case QEvent::GraphicsSceneMouseMove:
-            if (obj == m_spacer.data()) {
+            if (obj == m_cornerHandle.data()) {
                 QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent *>(event);
-                QGraphicsWidget *child = m_spacer.data()->parentWidget();
+                QGraphicsWidget *child = m_cornerHandle.data()->parentWidget();
                 QRectF geom(child->geometry());
                 const QPointF delta = e->pos() - e->lastPos();
-                switch (m_spacerCorner) {
+                switch (m_handleCorner) {
                     case Qt::TopLeftCorner:
                         geom.setTopLeft(geom.topLeft() + delta);
                         break;
                     case Qt::TopRightCorner:
                         geom.setTopRight(geom.topRight() + delta);
-                        m_spacer.data()->setPos(m_spacer.data()->pos() + QPointF(delta.x(), 0));
+                        m_cornerHandle.data()->setPos(m_cornerHandle.data()->pos() + QPointF(delta.x(), 0));
                         break;
                     case Qt::BottomRightCorner:
                         geom.setBottomRight(geom.bottomRight() + delta);
-                        m_spacer.data()->setPos(m_spacer.data()->pos() + delta);
+                        m_cornerHandle.data()->setPos(m_cornerHandle.data()->pos() + delta);
                         break;
                     case Qt::BottomLeftCorner:
                         geom.setBottomLeft(geom.bottomLeft() + delta);
-                        m_spacer.data()->setPos(m_spacer.data()->pos() + QPointF(0, delta.y()));
+                        m_cornerHandle.data()->setPos(m_cornerHandle.data()->pos() + QPointF(0, delta.y()));
                         break;
                 }
                 child->setGeometry(geom);
@@ -374,8 +391,8 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
         break;
 
         case QEvent::GraphicsSceneMouseRelease:
-            if (obj == m_spacer.data()) {
-                QGraphicsWidget *child = m_spacer.data()->parentWidget();
+            if (obj == m_cornerHandle.data()) {
+                QGraphicsWidget *child = m_cornerHandle.data()->parentWidget();
                 updateChild(child);
                 m_showGrid = false;
                 update();

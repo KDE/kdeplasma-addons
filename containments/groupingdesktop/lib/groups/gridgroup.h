@@ -58,6 +58,8 @@ class GridGroup : public AbstractGroup
         void addNewRowOrColumn();
         void removeRowOrColumn();
         void animationFinished();
+        void appletRemoved(Plasma::Applet *applet);
+        void subGroupRemoved(AbstractGroup *group);
 
     private:
         void updateChild(QGraphicsWidget *child);
@@ -66,8 +68,8 @@ class GridGroup : public AbstractGroup
         int m_rowsNumber;
         int m_colsNumber;
         bool m_showGrid;
-        QWeakPointer<Spacer> m_spacer;
-        Qt::Corner m_spacerCorner;
+        QWeakPointer<Spacer> m_cornerHandle;
+        Qt::Corner m_handleCorner;
         QPointF m_resizeStartPos;
         Spacer *m_gridManager;
         QGraphicsLinearLayout *m_gridManagerLayout;
