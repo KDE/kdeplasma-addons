@@ -222,18 +222,26 @@ void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     QRectF bRect(boundingRect());
     QRectF cRect(contentsRect());
     if (QRectF(0, 0, 40, bRect.height()).contains(pos)) {
+        m_newRowCol->setToolTip(i18n("Add a new column"));
+        m_delRowCol->setToolTip(i18n("Remove a column"));
         m_gridManagerLayout->setOrientation(Qt::Vertical);
         m_gridManager->setGeometry(cRect.x(), cRect.y(), 20, cRect.height());
         m_gridManager->show();
     } else if (QRectF(bRect.width() - 40, 0, 40, bRect.height()).contains(pos)) {
+        m_newRowCol->setToolTip(i18n("Add a new column"));
+        m_delRowCol->setToolTip(i18n("Remove a column"));
         m_gridManagerLayout->setOrientation(Qt::Vertical);
         m_gridManager->setGeometry(cRect.right() - 20, cRect.y(), 20, cRect.height());
         m_gridManager->show();
     } else if (QRectF(0, 0, bRect.width(), 20).contains(pos)) {
+        m_newRowCol->setToolTip(i18n("Add a new row"));
+        m_delRowCol->setToolTip(i18n("Remove a row"));
         m_gridManagerLayout->setOrientation(Qt::Horizontal);
         m_gridManager->setGeometry(cRect.x(), cRect.y(), cRect.width(), 20);
         m_gridManager->show();
     } else if (QRectF(0, bRect.height() - 40, bRect.width(), 40).contains(pos)) {
+        m_newRowCol->setToolTip(i18n("Add a new row"));
+        m_delRowCol->setToolTip(i18n("Remove a row"));
         m_gridManagerLayout->setOrientation(Qt::Horizontal);
         m_gridManager->setGeometry(cRect.x(), cRect.bottom() - 20, cRect.width(), 20);
         m_gridManager->show();
