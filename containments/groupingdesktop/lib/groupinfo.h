@@ -30,7 +30,7 @@ class GroupInfoPrivate;
 class GroupInfo
 {
     public:
-        GroupInfo(const QString &name, const QString &prettyName = QString());
+        explicit GroupInfo(const QString &name, const QString &prettyName = QString());
         ~GroupInfo();
         void setFormFactors(QSet<Plasma::FormFactor> formFactors);
         void setIcon(const QString &icon);

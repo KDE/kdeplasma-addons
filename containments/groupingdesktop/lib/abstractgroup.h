@@ -485,11 +485,11 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
         void setHasConfigurationInterface(bool hasInterface);
 
         /**
-         * Sets wether or not this Group should make its children have
+         * Sets whether or not this Group should make its children have
          * a simpler background instead of the default one.
          * Default is false.
          *
-         * @param use wether or not it should use a simpler background
+         * @param use whether or not it should use a simpler background
          *
          * @see useSimplerBackgroundForChildren
          **/

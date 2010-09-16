@@ -43,7 +43,7 @@ class GroupIconList : public QGraphicsWidget
 {
     Q_OBJECT
     public:
-        GroupIconList(Plasma::Location location = Plasma::BottomEdge, QGraphicsItem *parent = 0);
+        explicit GroupIconList(Plasma::Location location = Plasma::BottomEdge, QGraphicsItem *parent = 0);
         ~GroupIconList();
 
         void setLocation(Plasma::Location location);

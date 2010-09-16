@@ -27,7 +27,7 @@ class GroupList : public Plasma::AbstractIconList
 {
     Q_OBJECT
     public:
-        GroupList(Plasma::Location location = Plasma::BottomEdge, QGraphicsItem *parent = 0);
+        explicit GroupList(Plasma::Location location = Plasma::BottomEdge, QGraphicsItem *parent = 0);
         ~GroupList();
 
     protected:

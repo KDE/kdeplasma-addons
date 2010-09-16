@@ -248,7 +248,7 @@ void FreeHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
                 //kDebug() << "opaquePoint" << opaquePoint
                 //         << m_background->marginSize(LeftMargin) << m_decorationRect.width();
                 g.setColorAt(0.0, Qt::transparent);
-                g.setColorAt(qMax(0.0, opaquePoint - 0.05), Qt::transparent);
+                g.setColorAt(qMax(qreal(0.0), opaquePoint - qreal(0.05)), Qt::transparent);
                 g.setColorAt(opaquePoint, transparencyColor);
                 g.setColorAt(1.0, transparencyColor);
             } else {
