@@ -41,7 +41,8 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
            m_showGrid(false),
            m_gridManager(new Spacer(this)),
            m_newRowCol(new Plasma::ToolButton(m_gridManager)),
-           m_delRowCol(new Plasma::ToolButton(m_gridManager))
+           m_delRowCol(new Plasma::ToolButton(m_gridManager)),
+           m_managerAnim(0)
 {
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
@@ -148,9 +149,23 @@ void GridGroup::removeRowOrColumn()
 {
     KConfigGroup cg = config();
     if (m_gridManagerLayout->orientation() == Qt::Vertical) {
+        //check we don't remove columns with children in it
+        foreach (QGraphicsWidget *child, children()) {
+            QRectF rect = child->data(0).toRectF();
+            if (rect.contains(m_colsNumber, rect.y())) {
+                return;
+            }
+        }
         m_colsNumber = (m_colsNumber > 1 ? m_colsNumber - 1 : 1);
         cg.writeEntry("ColsNumber", m_colsNumber);
     } else {
+        //check we don't remove rows with children in it
+        foreach (QGraphicsWidget *child, children()) {
+            QRectF rect = child->data(0).toRectF();
+            if (rect.contains(rect.x(), m_rowsNumber)) {
+                return;
+            }
+        }
         m_rowsNumber = (m_rowsNumber > 1 ? m_rowsNumber - 1 : 1);
         cg.writeEntry("RowsNumber", m_rowsNumber);
     }
