@@ -1,9 +1,6 @@
 [Desktop Entry]
 Name=Grid Desktop
-Name[en_GB]=GridDesktop
-Name[pt]=GridDesktop
-Name[uk]=Стільничка ґратка
-Name[x-test]=xxGridDesktopxx
+Name[x-test]=xxGrid Desktopxx
 Icon=view-grid
 Type=Service
 X-KDE-ServiceTypes=Plasma/Containment
