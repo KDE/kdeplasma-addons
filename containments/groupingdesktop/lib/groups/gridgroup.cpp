@@ -19,6 +19,8 @@
 
 #include "gridgroup.h"
 
+#include <math.h>
+
 #include <QtGui/QPainter>
 #include <QtGui/QGraphicsSceneResizeEvent>
 #include <QtGui/QGraphicsSceneHoverEvent>
@@ -197,38 +199,129 @@ void GridGroup::updateChild(QGraphicsWidget *child)
 {
     QPointF pos(child->pos());
     QRectF rect(contentsRect());
-    if (pos.x() < rect.left()) {
-        pos.setX(rect.left());
-    }
-    if (pos.y() < rect.top()) {
-        pos.setY(rect.top());
-    }
     QRectF geom(child->geometry());
-    geom.setTopLeft(pos);
+
     const qreal width = rect.width() / m_colsNumber;
     const qreal height = rect.height() / m_rowsNumber;
-    for (int i = 0; i < m_colsNumber; ++i) {
-        for (int j = 0; j < m_rowsNumber; ++j) {
-            QRectF r(i * width + rect.x() - width / 2., j * height + rect.y() - height / 2., width, height);
-            if (r.contains(pos)) {
-                int cols = qRound(geom.width() / width);
-                int rows = qRound(geom.height() / height);
-                rows = (rows > 0 ? rows : 1);
-                cols = (cols > 0 ? cols : 1);
-                if (i + cols > m_colsNumber) {
-                    cols = m_colsNumber - i;
-                }
-                if (j + rows > m_rowsNumber) {
-                    rows = m_rowsNumber - j;
-                }
-                child->setData(0, QRectF(i, j, cols, rows));
-                child->setGeometry(QRectF(i * width + rect.x(), j * height + rect.y(),
-                                          width * cols, height * rows));
+    int i = qRound(pos.x() / width);
+    int j = qRound(pos.y() / height);
+    int cols = qRound(geom.width() / width);
+    int rows = qRound(geom.height() / height);
+    rows = (rows > 0 ? rows : 1);
+    cols = (cols > 0 ? cols : 1);
 
-                return;
+    i = (i < 0 ? 0 : i);
+    QGraphicsWidget *w = childAt(i, j);
+    //find the nearest hole in which the child can be put
+    if (w && w != child) {
+        bool done = false;
+        int ray = 1;
+        bool firstPhase = true;
+        while (!done && (ray < m_colsNumber || ray < m_rowsNumber)) {
+            for (int k = ray; k > -ray; --k) {
+                int col = k + i;
+                int row = (k >= 0 ? ray - k : ray + k) + j;
+                if (firstPhase) {
+                    qreal dist = sqrt((col - i) * (col - i) + (row - j) * (row - j));
+                    if (dist == ray) {
+                        continue;
+                    }
+                }
+                if (col >= 0 && row >= 0 && col < m_colsNumber && row < m_rowsNumber) {
+                    QGraphicsWidget *c = childAt(col, row);
+                    if (!c || c == child) {
+                        i = col;
+                        j = row;
+                        done = true;
+                        break;
+                    }
+                }
             }
+            if (!done) {
+                for (int k = -ray; k < ray; ++k) {
+                    int col = k + i;
+                    int row = (k >= 0 ? -ray + k : -ray - k) + j;
+                    if (firstPhase) {
+                        qreal dist = sqrt((col - i) * (col - i) + (row - j) * (row - j));
+                        if (dist == ray) {
+                            continue;
+                        }
+                    }
+                    if (col >= 0 && row >= 0 && col < m_colsNumber && row < m_rowsNumber) {
+                        QGraphicsWidget *c = childAt(col, row);
+                        if (!c || c == child) {
+                            i = col;
+                            j = row;
+                            done = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!firstPhase) {
+                ++ray;
+            }
+            firstPhase = !firstPhase;
+        }
+
+        if (!done) { //couldn't find an empty cell
+            w->hide(); //FIXME: do something, maybe should destroy it?
         }
     }
+
+    int colsNumber = m_colsNumber;
+    for (int col = i + 1; col < m_colsNumber; ++col) {
+        bool occupied = false;
+        for (int row = j; row < j + rows; ++row) {
+            QGraphicsWidget *c = childAt(col, row);
+            if (c && c != child) {
+                occupied = true;
+                break;
+            }
+        }
+        if (occupied) {
+            colsNumber = col;
+            break;
+        }
+    }
+    if (i + cols > colsNumber) {
+        cols = colsNumber - i;
+    }
+
+    int rowsNumber = m_rowsNumber;
+    for (int row = j + 1; row < m_rowsNumber; ++row) {
+        bool occupied = false;
+        for (int col = i; col < i + cols; ++col) {
+            QGraphicsWidget *c = childAt(col, row);
+            if (c && c != child) {
+                occupied = true;
+                break;
+            }
+        }
+        if (occupied) {
+            rowsNumber = row;
+            break;
+        }
+    }
+    if (j + rows > rowsNumber) {
+        rows = rowsNumber - j;
+    }
+
+    child->setData(0, QRectF(i, j, cols, rows));
+    child->setGeometry(QRectF(i * width + rect.x(), j * height + rect.y(),
+                                          width * cols, height * rows));
+}
+
+QGraphicsWidget *GridGroup::childAt(int column, int row)
+{
+    foreach (QGraphicsWidget *c, children()) {
+        QRectF rect = c->data(0).toRectF();
+        if (rect.contains(column, row) && column < rect.right() && row < rect.bottom()) {
+            return c;
+        }
+    }
+
+    return 0;
 }
 
 void GridGroup::updateGeometries()
@@ -423,7 +516,41 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
             if (obj == m_cornerHandle.data()) {
                 QGraphicsWidget *child = m_cornerHandle.data()->parentWidget();
                 QRectF geom(child->geometry());
-                updateChild(child);
+
+                QPointF pos(child->pos());
+                QRectF rect(contentsRect());
+
+                const qreal width = rect.width() / m_colsNumber;
+                const qreal height = rect.height() / m_rowsNumber;
+                int i = qRound(pos.x() / width);
+                int j = qRound(pos.y() / height);
+                int cols = qRound(geom.width() / width);
+                int rows = qRound(geom.height() / height);
+                rows = (rows > 0 ? rows : 1);
+                cols = (cols > 0 ? cols : 1);
+                i = (i > 0 ? i : 0);
+                j = (j > 0 ? j : 0);
+
+                QRectF newRect = QRectF(i, j, cols, rows);
+
+                bool intersects = false;
+                foreach (QGraphicsWidget *c, children()) {
+                    if (c != child) {
+                        QRectF r(c->data(0).toRectF());
+                        if (r.intersects(newRect)) {
+                            intersects = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (intersects) {
+                    newRect = child->data(0).toRectF();
+                } else {
+                    child->setData(0, newRect);
+                }
+                child->setGeometry(QRectF(newRect.x() * width + rect.x(), newRect.y() * height + rect.y(),
+                                          width * newRect.width(), height * newRect.height()));
 
                 Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
                 if (anim) {

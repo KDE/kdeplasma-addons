@@ -64,6 +64,7 @@ class GridGroup : public AbstractGroup
     private:
         void updateChild(QGraphicsWidget *child);
         void updateGeometries();
+        QGraphicsWidget *childAt(int column, int row);
 
         int m_rowsNumber;
         int m_colsNumber;
