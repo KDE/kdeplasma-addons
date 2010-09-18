@@ -70,7 +70,7 @@ Plasma::Service* OcsEngine::serviceForSource(const QString& source)
     if (request == "Person" || request == "Settings") {
         QString id = arguments.value("id");
         QString providerString = arguments.value("provider");
-        if (!id.isEmpty() && !providerString.isEmpty()) {
+        if (!id.isEmpty() && !providerString.isEmpty() && m_providers.value(providerString)) {
             return new PersonService(m_providers.value(providerString), id, m_serviceUpdates, this);
         }
     }
@@ -861,7 +861,6 @@ void OcsEngine::slotMessageListResult(BaseJob* j)
 
 void OcsEngine::providerAdded(const Attica::Provider& provider)
 {
-    
     qDebug() << "providerAdded" << provider.baseUrl();
 
     QString baseUrl = provider.baseUrl().toString();
