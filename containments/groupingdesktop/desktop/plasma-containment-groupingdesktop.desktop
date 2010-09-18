@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=Grouping Desktop
+Name[pt]=Ecrã Agrupado
+Name[sv]=Skrivbord med gruppering
+Name[uk]=Впорядкування стільниці
 Name[x-test]=xxGrouping Desktopxx
 Icon=user-desktop
 Type=Service

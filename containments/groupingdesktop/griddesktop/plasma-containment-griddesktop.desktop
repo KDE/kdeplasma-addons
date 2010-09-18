@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=Grid Desktop
+Name[pt]=Ecrã em Grelha
+Name[sv]=Skrivbord med rutnät
+Name[uk]=Стільничка ґратка
 Name[x-test]=xxGrid Desktopxx
 Icon=view-grid
 Type=Service
