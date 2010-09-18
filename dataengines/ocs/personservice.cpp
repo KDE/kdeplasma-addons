@@ -39,6 +39,10 @@ PersonService::PersonService(QSharedPointer<Provider> provider, const QString& i
 
 Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QString, QVariant>& parameters)
 {
+    if (!m_provider) {
+        return 0;
+    }
+
     kDebug() << "operation: " << operation << "params: " << parameters;
     if (operation == "sendMessage") {
         Message message;
@@ -76,6 +80,6 @@ Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QStr
         kDebug() << "Set credentials: " << parameters.value("username") << parameters.value("password");
         return job;
     } else {
-        return new Plasma::ServiceJob("", operation, parameters);
+        return 0;
     }
 }
