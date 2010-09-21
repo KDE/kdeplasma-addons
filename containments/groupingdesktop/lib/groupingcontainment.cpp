@@ -126,6 +126,8 @@ AbstractGroup *GroupingContainmentPrivate::createGroup(const QString &plugin, co
         if (!loading) {
             group->d->restoreChildren();
         }
+        group->save(*(group->d->mainConfigGroup()));
+        emit q->configNeedsSaving();
     }
 
     return group;
@@ -610,9 +612,6 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
             anim->setDirection(QAbstractAnimation::Backward);
             anim->start(QAbstractAnimation::DeleteWhenStopped);
         }
-
-        group->save(*(group->d->mainConfigGroup()));
-        emit configNeedsSaving();
     }
 
     group->installEventFilter(this);
