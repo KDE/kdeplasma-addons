@@ -178,7 +178,7 @@ void GridGroup::removeRowOrColumn()
 
 void GridGroup::appletRemoved(Plasma::Applet *)
 {
-    if (m_cornerHandle.data()->isVisible()) {
+    if (m_cornerHandle && m_cornerHandle.data()->isVisible()) {
         m_cornerHandle.data()->hide();
         m_cornerHandle.data()->setParentItem(this);
     }
