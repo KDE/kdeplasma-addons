@@ -721,30 +721,15 @@ int AbstractGroup::type() const
 QVariant AbstractGroup::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     switch (change) {
-        case ItemPositionChange:
-            if (immutability() != Plasma::Mutable) {
-                return pos();
-            }
-        break;
-
-        case ItemTransformChange:
-            if (immutability() != Plasma::Mutable) {
-                return transform();
-            }
-            break;
-
         case ItemPositionHasChanged:
             emit geometryChanged();
 
-        case ItemTransformHasChanged:
-            if (immutability() != Plasma::Mutable) {
-                return transform();
-            } else {
-                // invalid group, will result in save using the default group
-                KConfigGroup cg;
-                save(cg);
-                emit configNeedsSaving();
-            }
+        case ItemTransformHasChanged: {
+            // invalid group, will result in save using the default group
+            KConfigGroup cg;
+            save(cg);
+            emit configNeedsSaving();
+        }
         break;
 
         default:

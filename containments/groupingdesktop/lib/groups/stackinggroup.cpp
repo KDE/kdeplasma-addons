@@ -94,11 +94,6 @@ void StackingGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
 
 void StackingGroup::drawStack()
 {
-    Plasma::Corona *c = static_cast<Plasma::Corona *>(scene());
-    Plasma::ImmutabilityType mut = c->immutability();
-    c->setImmutability(Plasma::Mutable);
-    setImmutability(Plasma::Mutable);
-
     int gap = 20;
     foreach (QGraphicsWidget *widget, m_children) {
         if (widget) {
@@ -109,8 +104,6 @@ void StackingGroup::drawStack()
             gap = gap + 20;
         }
     }
-    c->setImmutability(mut);
-    setImmutability(mut);
 }
 
 void StackingGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
