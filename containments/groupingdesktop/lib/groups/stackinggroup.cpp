@@ -167,12 +167,9 @@ void StackingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
 
 bool StackingGroup::showDropZone(const QPointF &pos)
 {
-    if (m_children.contains(m_spacer)) {
-        m_children.removeOne(m_spacer);
-    }
-
-    if (pos.isNull() || (!m_children.isEmpty() && boundingRect().translated(20, 20).contains(pos))) {
+    if (pos.isNull()) {
         m_spacer->hide();
+        m_children.removeOne(m_spacer);
         return false;
     } else if (!m_spacer->isVisible()) {
         m_spacer->show();

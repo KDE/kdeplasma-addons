@@ -41,6 +41,7 @@ FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
     //using this widget to fill the empty space. Unfortunately it will cause 2*spacing of empty
     //space, but i don't know how to do otherwise. addStretch() isn't enough.
+    m_spaceFiller->setFlag(QGraphicsItem::ItemHasNoContents);
     m_spaceFiller->setMinimumSize(QSizeF(0, 0));
     m_spaceFiller->setPreferredSize(QSizeF(0.1, 0.1)); //it doesn't like 0
 
