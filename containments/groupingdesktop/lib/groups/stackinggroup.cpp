@@ -141,12 +141,14 @@ void StackingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *)
     if (!m_children.contains(applet)) {
         m_children << applet;
         connect(applet, SIGNAL(activate()), this, SLOT(onAppletActivated()));
+        applet->installEventFilter(this);
     }
 }
 
 void StackingGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *)
 {
     m_children.removeOne(applet);
+    applet->removeEventFilter(this);
 
     drawStack();
 }
@@ -155,12 +157,14 @@ void StackingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
 {
     if (!m_children.contains(subGroup)) {
         m_children << subGroup;
+        subGroup->installEventFilter(this);
     }
 }
 
 void StackingGroup::onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *)
 {
     m_children.removeOne(subGroup);
+    subGroup->removeEventFilter(this);
 
     drawStack();
 }
@@ -190,6 +194,20 @@ void StackingGroup::onAppletActivated()
 
         drawStack();
     }
+}
+
+bool StackingGroup::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::GraphicsSceneMousePress) {
+        QGraphicsWidget *widget = qobject_cast<QGraphicsWidget *>(obj);
+        if (m_children.contains(widget)) {
+            m_children << m_children.takeAt(m_children.indexOf(widget));
+
+            drawStack();
+        }
+    }
+
+    return AbstractGroup::eventFilter(obj, event);
 }
 
 GroupInfo StackingGroup::groupInfo()

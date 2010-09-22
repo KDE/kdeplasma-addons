@@ -43,6 +43,7 @@ class StackingGroup : public AbstractGroup
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         void resizeEvent(QGraphicsSceneResizeEvent *event);
         void wheelEvent(QGraphicsSceneWheelEvent *event);
+        bool eventFilter(QObject *obj, QEvent *event);
 
     private slots:
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
