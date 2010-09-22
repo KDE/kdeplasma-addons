@@ -495,24 +495,31 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 switch (m_handleCorner) {
                     case Qt::TopLeftCorner:
                         geom.setTopLeft(geom.topLeft() + delta);
+                        geom.setWidth(geom.width() >= size.width() ? geom.width() : size.width());
+                        geom.setHeight(geom.height() >= size.height() ? geom.height() : size.height());
                         break;
                     case Qt::TopRightCorner:
                         geom.setTopRight(geom.topRight() + delta);
+                        geom.setWidth(geom.width() >= size.width() ? geom.width() : size.width());
+                        geom.setHeight(geom.height() >= size.height() ? geom.height() : size.height());
                         pos = QPointF(geom.width() - 20, 0);
                         break;
                     case Qt::BottomRightCorner:
                         geom.setBottomRight(geom.bottomRight() + delta);
+                        geom.setWidth(geom.width() >= size.width() ? geom.width() : size.width());
+                        geom.setHeight(geom.height() >= size.height() ? geom.height() : size.height());
                         pos = QPointF(geom.width() - 20, geom.height() - 20);
                         break;
                     case Qt::BottomLeftCorner:
                         geom.setBottomLeft(geom.bottomLeft() + delta);
+                        geom.setWidth(geom.width() >= size.width() ? geom.width() : size.width());
+                        geom.setHeight(geom.height() >= size.height() ? geom.height() : size.height());
                         pos = QPointF(0, geom.height() - 20);
                         break;
                 }
-                if (geom.width() >= size.width() && geom.height() >= size.height()) {
-                    child->setGeometry(geom);
-                    m_cornerHandle.data()->setPos(pos);
-                }
+                child->setGeometry(geom);
+                m_cornerHandle.data()->setPos(pos);
+
                 event->accept();
             }
         break;
