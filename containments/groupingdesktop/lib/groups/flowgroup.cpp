@@ -106,6 +106,9 @@ bool FlowGroup::showDropZone(const QPointF &pos)
         return true;
     }
 
+    m_layout->removeItem(m_spacer);
+    m_spacer->hide();
+
     int insertIndex = m_layout->count();
     qreal currPos = contentsRect().left();
     const qreal x = pos.x();
