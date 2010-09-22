@@ -104,8 +104,12 @@ void GridGroup::init()
 
 bool GridGroup::showDropZone(const QPointF &pos)
 {
-    m_showGrid = !pos.isNull();
-    update();
+    bool showGrid = !pos.isNull();
+    if (showGrid != m_showGrid) {
+        m_showGrid = showGrid;
+        update();
+    }
+
     return m_showGrid;
 }
 

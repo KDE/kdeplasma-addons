@@ -102,12 +102,15 @@ bool FlowGroup::showDropZone(const QPointF &pos)
         return false;
     }
 
+    if (m_spacer->geometry().contains(pos)) {
+        return true;
+    }
+
     int insertIndex = m_layout->count();
     qreal currPos = contentsRect().left();
     const qreal x = pos.x();
     const qreal y = pos.y();
 
-    //FIXME: needed in two places, make it a function?
     for (int i = 0; i < m_layout->count(); ++i) {
         QRectF siblingGeometry = m_layout->itemAt(i)->geometry();
 

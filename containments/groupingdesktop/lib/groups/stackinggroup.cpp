@@ -174,7 +174,7 @@ bool StackingGroup::showDropZone(const QPointF &pos)
     if (pos.isNull() || (!m_children.isEmpty() && boundingRect().translated(20, 20).contains(pos))) {
         m_spacer->hide();
         return false;
-    } else {
+    } else if (!m_spacer->isVisible()) {
         m_spacer->show();
         m_children << m_spacer;
     }
