@@ -54,7 +54,6 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     }
 
     m_tabBar->nativeWidget()->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
-    m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     setLayout(m_layout);
 
@@ -62,20 +61,17 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_tabBar->setLastPositionWidget(m_closeTab);
 
     m_layout->addItem(m_tabBar);
-    m_layout->setStretchFactor(m_tabBar, 2);
 
     m_newTab->setIcon(KIcon("tab-new"));
-    m_newTab->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     m_closeTab->setIcon(KIcon("tab-close"));
-    m_closeTab->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     m_changeTabTimer->setInterval(500); //should see what is the delay used in other apps
     m_changeTabTimer->setSingleShot(true);
 
     resize(200, 200);
+    setMinimumSize(100, 150);
     setGroupType(AbstractGroup::FreeGroup);
     setHasConfigurationInterface(true);
-    onImmutabilityChanged(immutability());
 
     connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
             this, SLOT(onSubGroupAdded(AbstractGroup*, AbstractGroup*)));
@@ -100,6 +96,8 @@ void TabbingGroup::init()
     m_tabs = group.readEntry("Tabs", QStringList());
 
     m_tabBar->setCurrentIndex(group.readEntry("CurrentIndex", 0));
+
+    onImmutabilityChanged(immutability());
 }
 
 void TabbingGroup::onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *)
