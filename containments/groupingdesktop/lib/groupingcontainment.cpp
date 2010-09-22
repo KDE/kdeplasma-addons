@@ -767,11 +767,6 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
             break;
 
             case QEvent::GraphicsSceneDragMove: {
-                if (d->interestingGroup) {
-                    d->interestingGroup.data()->showDropZone(QPointF());
-                    d->interestingGroup.clear();
-                }
-
                 QGraphicsSceneDragDropEvent *e = static_cast<QGraphicsSceneDragDropEvent *>(event);
                 bool ok = true;
                 const QMimeData *mime = e->mimeData();
@@ -787,6 +782,10 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                     QPointF pos(mapFromScene(e->scenePos()));
                     QList<AbstractGroup *> groups = d->groupsAt(pos);
                     foreach (AbstractGroup *group, groups) {
+                        if (d->interestingGroup && d->interestingGroup.data() != group) {
+                            d->interestingGroup.data()->showDropZone(QPointF());
+                            d->interestingGroup.clear();
+                        }
                         if (group->showDropZone(mapToItem(group, pos))) {
                             d->interestingGroup = group;
                             break;

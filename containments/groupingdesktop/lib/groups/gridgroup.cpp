@@ -25,6 +25,7 @@
 #include <QtGui/QGraphicsSceneResizeEvent>
 #include <QtGui/QGraphicsSceneHoverEvent>
 #include <QtGui/QGraphicsLinearLayout>
+#include <QtGui/QStyleOptionGraphicsItem>
 
 #include <KIcon>
 
@@ -590,10 +591,12 @@ void GridGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         for (int i = 0; i < m_colsNumber; ++i) {
             for (int j = 0; j < m_rowsNumber; ++j) {
                 QRectF r(i * width + rect.x(), j * height + rect.y(), width, height);
-                QPainterPath p = Plasma::PaintUtils::roundedRectangle(r.adjusted(2, 2, -2, -2), 4);
-                QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-                c.setAlphaF(0.3);
-                painter->fillPath(p, c);
+                if (r.intersects(option->exposedRect)) {
+                    QPainterPath p = Plasma::PaintUtils::roundedRectangle(r.adjusted(2, 2, -2, -2), 4);
+                    QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+                    c.setAlphaF(0.3);
+                    painter->fillPath(p, c);
+                }
             }
         }
     }
