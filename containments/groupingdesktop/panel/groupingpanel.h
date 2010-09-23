@@ -81,6 +81,8 @@ class GroupingPanel : public GroupingContainment
         QSize m_currentSize;
         QRect m_lastViewGeom;
         bool m_maskDirty;
+        qreal m_rightBorder;
+        qreal m_bottomBorder;
 };
 
 

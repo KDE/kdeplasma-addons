@@ -41,8 +41,11 @@ GroupingPanel::GroupingPanel(QObject *parent, const QVariantList &args)
       m_configureAction(0),
       m_newRowAction(0),
       m_delRowAction(0),
+      m_layout(0),
       m_separator(new Plasma::Svg()),
-      m_maskDirty(true)
+      m_maskDirty(true),
+      m_rightBorder(0),
+      m_bottomBorder(0)
 {
     KGlobal::locale()->insertCatalog("libplasma_groupingcontainment");
 
@@ -88,7 +91,7 @@ void GroupingPanel::init()
         m_currentSize.expandedTo(QSize(35, 0));
         m_layout = new QGraphicsLinearLayout(Qt::Vertical);
     }
-    m_layout->setContentsMargins(0, 0, 0, 0);
+    m_layout->setContentsMargins(0, 0, m_rightBorder, m_bottomBorder);
     setLayout(m_layout);
 
     setMinimumSize(cg.readEntry("minimumSize", m_currentSize));
@@ -237,6 +240,18 @@ void GroupingPanel::updateBorders(const QRect &geom)
         }
     }
 
+    if (formFactor() == Vertical) {
+        m_bottomBorder = bottomHeight;
+        m_rightBorder = 0;
+    } else {
+        m_rightBorder = rightWidth;
+        m_bottomBorder = 0;
+    }
+
+    if (m_layout) {
+        m_layout->setContentsMargins(0, 0, m_rightBorder, m_bottomBorder);
+    }
+
     update();
 }
 
@@ -336,8 +351,8 @@ void GroupingPanel::paintInterface(QPainter *painter,
     m_background->paintFrame(painter, option->exposedRect);
 
     QRectF rect = contentsRect();
-
     if (formFactor() == Plasma::Vertical) {
+        rect.setHeight(rect.height() - m_bottomBorder);
         QSizeF lineSize(m_separator->elementSize("vertical-line").width(), rect.height());
         for (int i = 1; i < m_layout->count(); ++i) {
             const qreal x = rect.width() * i / m_layout->count();
@@ -345,6 +360,7 @@ void GroupingPanel::paintInterface(QPainter *painter,
             m_separator->paint(painter, r, "vertical-line");
         }
     } else {
+        rect.setWidth(rect.width() - m_rightBorder);
         QSizeF lineSize = QSizeF(rect.width(), m_separator->elementSize("horizontal-line").height());
         for (int i = 1; i < m_layout->count(); ++i) {
             const qreal y = rect.height() * i / m_layout->count();
