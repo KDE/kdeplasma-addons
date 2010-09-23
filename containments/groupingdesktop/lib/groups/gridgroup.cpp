@@ -212,6 +212,12 @@ void GridGroup::updateChild(QGraphicsWidget *child)
     int j = qRound(pos.y() / height);
     int cols = qRound(geom.width() / width);
     int rows = qRound(geom.height() / height);
+    while (cols * width < child->minimumSize().width()) {
+        ++cols;
+    }
+    while (rows * height < child->minimumSize().height()) {
+        ++rows;
+    }
     rows = (rows > 0 ? rows : 1);
     cols = (cols > 0 ? cols : 1);
 
@@ -538,8 +544,12 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 int j = qRound(pos.y() / height);
                 int cols = qRound(geom.width() / width);
                 int rows = qRound(geom.height() / height);
-                rows = (rows > 0 ? rows : 1);
-                cols = (cols > 0 ? cols : 1);
+                while (cols * width < child->minimumSize().width()) {
+                    ++cols;
+                }
+                while (rows * height < child->minimumSize().height()) {
+                    ++rows;
+                }
                 i = (i > 0 ? i : 0);
                 j = (j > 0 ? j : 0);
 
