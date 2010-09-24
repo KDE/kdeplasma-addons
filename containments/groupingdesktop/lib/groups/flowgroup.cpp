@@ -249,11 +249,11 @@ void FlowGroup::scrollPrev()
 {
     QRectF geom(m_scrollWidget->viewportGeometry());
     if (m_mainLayout->orientation() == Qt::Horizontal) {
-        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->scrollPosition() -
-                                                 QPointF(20, 0), QSize(20, geom.height())));
+        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->mapToItem(m_container, geom.topLeft()) -
+                                                 QPointF(40, 0), QSize(40, geom.height())));
     } else {
-        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->scrollPosition() -
-                                                 QPointF(0, 20), QSize(geom.width(), 20)));
+        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->mapToItem(m_container, geom.topLeft()) -
+                                                 QPointF(0, 40), QSize(geom.width(), 40)));
     }
 }
 
@@ -261,11 +261,11 @@ void FlowGroup::scrollNext()
 {
     QRectF geom(m_scrollWidget->viewportGeometry());
     if (m_mainLayout->orientation() == Qt::Horizontal) {
-        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->scrollPosition() + QPointF(20, 0) +
-                                                 QPointF(geom.width(), geom.height()), QSize(20, geom.height())));
+        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->mapToItem(m_container, geom.topRight()),
+                                                 QSize(40, geom.height())));
     } else {
-        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->scrollPosition() + QPointF(0, 20) +
-                                                 QPointF(geom.width(), geom.height()), QSize(geom.width(), 20)));
+        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->mapToItem(m_container, geom.bottomLeft()),
+                                                 QSize(geom.width(), 40)));
     }
 }
 
