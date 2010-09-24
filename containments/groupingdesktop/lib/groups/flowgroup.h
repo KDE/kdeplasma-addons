@@ -23,6 +23,13 @@
 #include "abstractgroup.h"
 
 class QGraphicsLinearLayout;
+class QGraphicsSceneResizeEvent;
+
+namespace Plasma {
+    class ScrollWidget;
+    class Svg;
+    class ToolButton;
+}
 
 class Spacer;
 
@@ -46,8 +53,22 @@ class FlowGroup : public AbstractGroup
     protected:
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
         void constraintsEvent(Plasma::Constraints constraints);
+        void resizeEvent(QGraphicsSceneResizeEvent *event);
+
+    private slots:
+        void updateContents();
+        void appletRemoved(Plasma::Applet *applet);
+        void groupRemoved(AbstractGroup *group);
+        void scrollPrev();
+        void scrollNext();
 
     private:
+        QGraphicsLinearLayout *m_mainLayout;
+        Plasma::Svg *m_arrows;
+        Plasma::ToolButton *m_prevArrow;
+        Plasma::ToolButton *m_nextArrow;
+        Plasma::ScrollWidget *m_scrollWidget;
+        QGraphicsWidget *m_container;
         QGraphicsLinearLayout *m_layout;
         Spacer *m_spacer;
         QGraphicsWidget *m_spaceFiller;

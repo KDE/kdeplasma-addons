@@ -22,8 +22,13 @@
 #include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QPainter>
 
+#include <KIconLoader>
+#include <KIcon>
+
 #include <Plasma/Theme>
 #include <Plasma/PaintUtils>
+#include <Plasma/ScrollWidget>
+#include <Plasma/ToolButton>
 
 #include "gridhandle.h"
 #include "groupingcontainment.h"
@@ -33,11 +38,29 @@ REGISTER_GROUP(FlowGroup)
 
 FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(parent, wFlags),
+            m_mainLayout(new QGraphicsLinearLayout(Qt::Horizontal)),
+            m_arrows(new Plasma::Svg(this)),
+            m_prevArrow(new Plasma::ToolButton(this)),
+            m_nextArrow(new Plasma::ToolButton(this)),
+            m_scrollWidget(new Plasma::ScrollWidget(this)),
+            m_container(new QGraphicsWidget(this)),
             m_layout(new QGraphicsLinearLayout(Qt::Horizontal)),
             m_spacer(new Spacer(this)),
             m_spaceFiller(new QGraphicsWidget(this))
 {
     resize(200,200);
+
+    m_arrows->setImagePath("widgets/arrows");
+    m_arrows->setContainsMultipleImages(true);
+    m_arrows->resize(KIconLoader::SizeSmall, KIconLoader::SizeSmall);
+
+    m_prevArrow->setPreferredSize(IconSize(KIconLoader::Panel), IconSize(KIconLoader::Panel));
+    m_prevArrow->hide();
+    m_nextArrow->setPreferredSize(IconSize(KIconLoader::Panel), IconSize(KIconLoader::Panel));
+    m_nextArrow->hide();
+
+    connect(m_prevArrow, SIGNAL(pressed()), this, SLOT(scrollPrev()));
+    connect(m_nextArrow, SIGNAL(pressed()), this, SLOT(scrollNext()));
 
     //using this widget to fill the empty space. Unfortunately it will cause 2*spacing of empty
     //space, but i don't know how to do otherwise. addStretch() isn't enough.
@@ -47,9 +70,18 @@ FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
     m_layout->setSpacing(4);
     m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-    setLayout(m_layout);
+    m_container->setLayout(m_layout);
+    m_container->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
+    m_scrollWidget->setWidget(m_container);
+    m_scrollWidget->setMinimumSize(0, 0);
+    m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_scrollWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    m_mainLayout->addItem(m_scrollWidget);
+    setLayout(m_mainLayout);
 
     m_spacer->hide();
+    m_spacer->setMinimumSize(20, 20);
 
     setGroupType(AbstractGroup::ConstrainedGroup);
     setUseSimplerBackgroundForChildren(true);
@@ -64,6 +96,15 @@ void FlowGroup::init()
 {
     int stretchIndex = config().readEntry("StretchIndex", 0);
     m_layout->insertItem(stretchIndex, m_spaceFiller);
+
+    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
+            this, SLOT(updateContents()));
+    connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
+            this, SLOT(updateContents()));
+    connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
+            this, SLOT(appletRemoved(Plasma::Applet*)));
+    connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
+            this, SLOT(groupRemoved(AbstractGroup*)));
 }
 
 QString FlowGroup::pluginName() const
@@ -99,6 +140,8 @@ bool FlowGroup::showDropZone(const QPointF &pos)
     if (pos == QPointF()) {
         m_layout->removeItem(m_spacer);
         m_spacer->hide();
+
+        updateContents();
 
         return false;
     }
@@ -150,6 +193,8 @@ bool FlowGroup::showDropZone(const QPointF &pos)
         m_spacer->show();
         m_layout->insertItem(insertIndex, m_spacer);
 
+        updateContents();
+
         return true;
     }
 
@@ -188,18 +233,98 @@ void FlowGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
     }
 }
 
+void FlowGroup::appletRemoved(Plasma::Applet *applet)
+{
+    m_layout->removeItem(applet);
+
+    updateContents();
+}
+
+void FlowGroup::groupRemoved(AbstractGroup *group)
+{
+    m_layout->removeItem(group);
+
+    updateContents();
+}
+
+void FlowGroup::scrollPrev()
+{
+    QRectF geom(m_scrollWidget->viewportGeometry());
+    if (m_mainLayout->orientation() == Qt::Horizontal) {
+        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->scrollPosition() -
+                                                 QPointF(20, 0), QSize(20, geom.height())));
+    } else {
+        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->scrollPosition() -
+                                                 QPointF(0, 20), QSize(geom.width(), 20)));
+    }
+}
+
+void FlowGroup::scrollNext()
+{
+    QRectF geom(m_scrollWidget->viewportGeometry());
+    if (m_mainLayout->orientation() == Qt::Horizontal) {
+        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->scrollPosition() + QPointF(20, 0) +
+                                                 QPointF(geom.width(), geom.height()), QSize(20, geom.height())));
+    } else {
+        m_scrollWidget->ensureRectVisible(QRectF(m_scrollWidget->scrollPosition() + QPointF(0, 20) +
+                                                 QPointF(geom.width(), geom.height()), QSize(geom.width(), 20)));
+    }
+}
+
+void FlowGroup::updateContents()
+{
+    m_mainLayout->removeItem(m_prevArrow);
+    m_mainLayout->removeItem(m_nextArrow);
+    m_mainLayout->activate();
+
+    const bool horizontal = (m_mainLayout->orientation() == Qt::Horizontal);
+    if (horizontal) {
+        m_container->setMinimumHeight(m_scrollWidget->viewportGeometry().height());
+    } else {
+        m_container->setMinimumWidth(m_scrollWidget->viewportGeometry().width());
+    }
+
+    if ((horizontal && m_container->size().width() > m_scrollWidget->viewportGeometry().width()) ||
+        (!horizontal && m_container->size().height() > m_scrollWidget->viewportGeometry().height())) {
+        m_mainLayout->insertItem(0, m_prevArrow);
+        m_mainLayout->addItem(m_nextArrow);
+        m_prevArrow->show();
+        m_nextArrow->show();
+    } else {
+        m_prevArrow->hide();
+        m_nextArrow->hide();
+    }
+}
+
 void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
         Plasma::FormFactor f = containment()->formFactor();
         if (f == Plasma::Vertical) {
+            m_mainLayout->setOrientation(Qt::Vertical);
             m_layout->setOrientation(Qt::Vertical);
             m_spacer->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum));
+            m_prevArrow->setIcon(KIcon(m_arrows->pixmap("up-arrow")));
+            m_nextArrow->setIcon(KIcon(m_arrows->pixmap("down-arrow")));
+            m_prevArrow->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+            m_nextArrow->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
         } else {
+            m_mainLayout->setOrientation(Qt::Horizontal);
             m_layout->setOrientation(Qt::Horizontal);
             m_spacer->setSizePolicy(QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred));
+            m_prevArrow->setIcon(KIcon(m_arrows->pixmap("left-arrow")));
+            m_nextArrow->setIcon(KIcon(m_arrows->pixmap("right-arrow")));
+            m_prevArrow->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+            m_nextArrow->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
         }
     }
+}
+
+void FlowGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
+{
+    AbstractGroup::resizeEvent(event);
+
+    updateContents();
 }
 
 GroupInfo FlowGroup::groupInfo()
