@@ -286,7 +286,7 @@ void FlowGroup::updateContents()
         if (m_prevArrow->isVisible()) {
             geom.setWidth(geom.width() + m_prevArrow->geometry().width() * 2 + spacing * 2);
         }
-        m_container->setMinimumHeight(geom.height());
+        m_container->resize(m_container->size().width(), geom.height());
     } else {
         for (int i = 0; i < m_layout->count(); ++i) {
             QGraphicsLayoutItem *item = m_layout->itemAt(i);
@@ -298,7 +298,7 @@ void FlowGroup::updateContents()
         if (m_prevArrow->isVisible()) {
             geom.setHeight(geom.height() + m_prevArrow->geometry().height() * 2 + spacing * 2);
         }
-        m_container->setMinimumWidth(geom.width());
+        m_container->resize(geom.width(), m_controller->size().height());
     }
 
     if ((horizontal && min > geom.width()) ||
