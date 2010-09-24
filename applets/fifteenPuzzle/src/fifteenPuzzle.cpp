@@ -33,18 +33,12 @@
 static const char defaultImage[] = "fifteenPuzzle/blanksquare";
 
 FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_configDialog(0)
+    : Plasma::PopupApplet(parent, args), m_configDialog(0)
 {
   setHasConfigurationInterface(true);
+  setPopupIcon("fifteenpuzzle");
   m_board = new Fifteen(this);
   m_board->setSize(4);
-  QGraphicsLinearLayout * lay = new QGraphicsLinearLayout(this);
-  lay->addItem(m_board);
-  lay->setContentsMargins(0,0,0,0);
-  setLayout(lay);
-  m_board->resize(192, 192); // 48 * 4 = 192
-  resize(m_board->geometry().size());
-  setPreferredSize(192, 192);
   m_pixmap = 0;
   connect(m_board, SIGNAL(puzzleSorted(int)), this, SLOT(showSolvedMessage(int)));
 }
@@ -76,6 +70,11 @@ void FifteenPuzzle::init()
   updateBoard();
 }
 
+QGraphicsWidget* FifteenPuzzle::graphicsWidget()
+{
+    return m_board;
+}
+
 void FifteenPuzzle::configChanged()
 {
   KConfigGroup cg = config();
@@ -86,13 +85,6 @@ void FifteenPuzzle::configChanged()
 
   m_board->setColor(cg.readEntry("boardColor", QColor()));
   m_board->setSize(qMax(4, cg.readEntry("boardSize",4)));
-}
-
-void FifteenPuzzle::constraintsEvent(Plasma::Constraints constraints)
-{
-  if (constraints & Plasma::SizeConstraint) {
-    m_board->resize(contentsRect().size());
-  }
 }
 
 void FifteenPuzzle::createConfigurationInterface(KConfigDialog *parent)

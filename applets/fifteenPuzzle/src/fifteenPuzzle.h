@@ -20,20 +20,20 @@
 #ifndef FIFTEENPUZZLE_H
 #define FIFTEENPUZZLE_H
 
-#include <plasma/applet.h>
+#include <plasma/popupapplet.h>
 
 #include "fifteen.h"
 #include "fifteenPuzzleConfig.h"
 
-class FifteenPuzzle : public Plasma::Applet
+class FifteenPuzzle : public Plasma::PopupApplet
 {
   Q_OBJECT
   public:
     FifteenPuzzle(QObject *parent, const QVariantList &args);
 
     void init();
-    void constraintsEvent(Plasma::Constraints constraints);
     virtual QList<QAction*> contextualActions();
+    virtual QGraphicsWidget* graphicsWidget();
   protected slots:
     void configAccepted();
     

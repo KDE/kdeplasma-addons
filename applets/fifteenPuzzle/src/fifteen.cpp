@@ -55,6 +55,8 @@ void Fifteen::setSize(int size)
 {
   m_size = size;
   startBoard();
+  setPreferredSize(48 * size, 48 * size);
+  setMinimumSize(24 * size, 24 * size);
 }
 
 void Fifteen::setColor(const QColor& c)
