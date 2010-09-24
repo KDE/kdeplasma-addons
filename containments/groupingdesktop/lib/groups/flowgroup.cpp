@@ -97,10 +97,6 @@ void FlowGroup::init()
     int stretchIndex = config().readEntry("StretchIndex", 0);
     m_layout->insertItem(stretchIndex, m_spaceFiller);
 
-    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
-            this, SLOT(updateContents()));
-    connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
-            this, SLOT(updateContents()));
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(appletRemoved(Plasma::Applet*)));
     connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
@@ -115,6 +111,7 @@ QString FlowGroup::pluginName() const
 void FlowGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
 {
     m_layout->insertItem(group.readEntry("Position", -1), child);
+    updateContents();
 }
 
 void FlowGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
@@ -154,9 +151,9 @@ bool FlowGroup::showDropZone(const QPointF &pos)
     m_spacer->hide();
 
     int insertIndex = m_layout->count();
-    qreal currPos = contentsRect().left();
-    const qreal x = pos.x();
-    const qreal y = pos.y();
+    qreal currPos = m_container->contentsRect().left();
+    const qreal x = mapToItem(m_container, pos).x();
+    const qreal y = mapToItem(m_container, pos).y();
 
     for (int i = 0; i < m_layout->count(); ++i) {
         QRectF siblingGeometry = m_layout->itemAt(i)->geometry();
@@ -222,6 +219,7 @@ void FlowGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
     m_layout->insertItem(m_spacerIndex, child);
 
     m_layout->activate();
+    updateContents();
 
     for (int i = 0; i < m_layout->count(); ++i) {
         if (m_layout->itemAt(i) == m_spaceFiller) {
@@ -273,24 +271,47 @@ void FlowGroup::scrollNext()
 
 void FlowGroup::updateContents()
 {
-    m_mainLayout->removeItem(m_prevArrow);
-    m_mainLayout->removeItem(m_nextArrow);
-    m_mainLayout->activate();
-
+    qreal min = 0;
+    QRectF geom(m_scrollWidget->viewportGeometry());
     const bool horizontal = (m_mainLayout->orientation() == Qt::Horizontal);
+    const int spacing = m_layout->spacing();
     if (horizontal) {
-        m_container->setMinimumHeight(m_scrollWidget->viewportGeometry().height());
+        for (int i = 0; i < m_layout->count(); ++i) {
+            QGraphicsLayoutItem *item = m_layout->itemAt(i);
+            if (item != m_spacer) {
+                min = min + item->minimumWidth() + spacing;
+            }
+        }
+        min += 30;
+        if (m_prevArrow->isVisible()) {
+            geom.setWidth(geom.width() + m_prevArrow->geometry().width() * 2 + spacing * 2);
+        }
+        m_container->setMinimumHeight(geom.height());
     } else {
-        m_container->setMinimumWidth(m_scrollWidget->viewportGeometry().width());
+        for (int i = 0; i < m_layout->count(); ++i) {
+            QGraphicsLayoutItem *item = m_layout->itemAt(i);
+            if (item != m_spacer) {
+                min = min + item->minimumHeight() + spacing;
+            }
+        }
+        min += 30;
+        if (m_prevArrow->isVisible()) {
+            geom.setHeight(geom.height() + m_prevArrow->geometry().height() * 2 + spacing * 2);
+        }
+        m_container->setMinimumWidth(geom.width());
     }
 
-    if ((horizontal && m_container->size().width() > m_scrollWidget->viewportGeometry().width()) ||
-        (!horizontal && m_container->size().height() > m_scrollWidget->viewportGeometry().height())) {
-        m_mainLayout->insertItem(0, m_prevArrow);
-        m_mainLayout->addItem(m_nextArrow);
-        m_prevArrow->show();
-        m_nextArrow->show();
-    } else {
+    if ((horizontal && min > geom.width()) ||
+        (!horizontal && min > geom.height())) {
+        if (!m_prevArrow->isVisible()) {
+            m_mainLayout->insertItem(0, m_prevArrow);
+            m_mainLayout->addItem(m_nextArrow);
+            m_prevArrow->show();
+            m_nextArrow->show();
+        }
+    } else if (m_prevArrow->isVisible()) {
+        m_mainLayout->removeItem(m_prevArrow);
+        m_mainLayout->removeItem(m_nextArrow);
         m_prevArrow->hide();
         m_nextArrow->hide();
     }

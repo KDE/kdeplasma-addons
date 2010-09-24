@@ -56,13 +56,14 @@ class FlowGroup : public AbstractGroup
         void resizeEvent(QGraphicsSceneResizeEvent *event);
 
     private slots:
-        void updateContents();
         void appletRemoved(Plasma::Applet *applet);
         void groupRemoved(AbstractGroup *group);
         void scrollPrev();
         void scrollNext();
 
     private:
+        void updateContents();
+
         QGraphicsLinearLayout *m_mainLayout;
         Plasma::Svg *m_arrows;
         Plasma::ToolButton *m_prevArrow;
