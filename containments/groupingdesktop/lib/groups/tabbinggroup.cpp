@@ -59,6 +59,7 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_tabBar->setLastPositionWidget(m_closeTab);
 
     m_layout->addItem(m_tabBar);
+    setLayout(m_layout);
 
     m_newTab->setIcon(KIcon("tab-new"));
     m_closeTab->setIcon(KIcon("tab-close"));
@@ -89,10 +90,6 @@ TabbingGroup::~TabbingGroup()
 
 void TabbingGroup::init()
 {
-    //if i put this in the ctor the start up size is the minimumSize(), no matters
-    //if i call resize. it is the tabbar that causes this, why??
-    setLayout(m_layout);
-
     KConfigGroup group = config();
 
     m_tabs = group.readEntry("Tabs", QStringList());
@@ -226,14 +223,14 @@ void TabbingGroup::deleteTab(int index)
     m_tabGroups.removeAt(index);
     m_tabs.removeAt(index);
 
+    m_deletingTab = false;
+
     if (m_tabBar->count() == 0) {
         addTab();
         return;
     }
 
     saveTabs();
-
-    m_deletingTab = false;
 }
 
 void TabbingGroup::saveTabs()
