@@ -298,7 +298,7 @@ void FlowGroup::updateContents()
         if (m_prevArrow->isVisible()) {
             geom.setHeight(geom.height() + m_prevArrow->geometry().height() * 2 + spacing * 2);
         }
-        m_container->resize(geom.width(), m_controller->size().height());
+        m_container->resize(geom.width(), m_container->size().height());
     }
 
     if ((horizontal && min > geom.width()) ||
