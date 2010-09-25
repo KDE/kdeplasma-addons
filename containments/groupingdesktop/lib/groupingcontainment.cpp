@@ -194,7 +194,7 @@ QList<AbstractGroup *> GroupingContainmentPrivate::groupsAt(const QPointF &pos, 
     }
 
     bool goOn;
-    if (uppermostItem) {
+    if (uppermostItem && items.contains(uppermostItem)) {
         do {
             if (items.isEmpty()) {
                 return groups;

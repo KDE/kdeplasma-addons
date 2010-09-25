@@ -287,6 +287,7 @@ void FlowGroup::updateContents()
             geom.setWidth(geom.width() + m_prevArrow->geometry().width() * 2 + spacing * 2);
         }
         m_container->resize(m_container->size().width(), geom.height());
+        m_container->setMaximumHeight(geom.height());
     } else {
         for (int i = 0; i < m_layout->count(); ++i) {
             QGraphicsLayoutItem *item = m_layout->itemAt(i);

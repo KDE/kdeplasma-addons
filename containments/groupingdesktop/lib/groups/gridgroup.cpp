@@ -471,8 +471,11 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
 
         case QEvent::GraphicsSceneHoverLeave:
             if (m_cornerHandle) {
-                m_cornerHandle.data()->setParentItem(this);
-                m_cornerHandle.data()->hide();
+                QGraphicsItem *child = m_cornerHandle.data()->parentItem();
+                if (!child->boundingRect().contains(static_cast<QGraphicsSceneHoverEvent *>(event)->pos())) {
+                    m_cornerHandle.data()->setParentItem(this);
+                    m_cornerHandle.data()->hide();
+                }
             }
         break;
 
