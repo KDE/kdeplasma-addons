@@ -507,13 +507,14 @@ void GroupingContainmentPrivate::prepareWidgetToMove()
     q->raise(widgetToBeSetMoving);
     q->raise(movementHelperWidget);
 
-    //need to do do this because when you have a grid group in a grid group in a grid group,
-    //when you move the upper one outside of the second one boundaries appears the
-    //first one' spacer that causes the second one to move, so the third one
-    //will move accordingly, causing the spacer to flicker. setting the third one' parent
-    //to movementHelperWidget resolves this.
-    //i use that widget and not "q" or others because, setting its position equal to
-    //the parentItem's one, it doesn't break the movement via ItemIsMovable.
+    //need to do do this because when you have, e.g a flow group in a flow group in a flow group,
+    //when you move the top one outside of the mid one boundaries appears the
+    //lower one's spacer that causes the mid one to move and to propagate the move to its children,
+    //so the upper one would move too. It could be that after the move the lower one decides
+    //that the spacer has to go, causing the mid one to return to its original position and
+    //causing the spacer to flicker. setting the third one's parent to movementHelperWidget
+    //resolves this. i use that widget and not "q" or others because, setting its position equal
+    //to the parentItem's one, it doesn't break the movement via ItemIsMovable.
     if (q->immutability() == Plasma::Mutable) {
         movementHelperWidget->setTransform(QTransform());
         QGraphicsItem *parent = widgetToBeSetMoving->parentItem();
@@ -735,15 +736,19 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
     if (widget) {
         switch (event->type()) {
             case QEvent::GraphicsSceneMousePress:
-                if (static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton) {
+                if (static_cast<QGraphicsSceneMouseEvent *>(event)->button() == Qt::LeftButton &&
+                    immutability() == Plasma::Mutable) {
                     d->interestingWidget = widget;
                 }
             break;
 
-            case QEvent::GraphicsSceneMove: {
+            case QEvent::GraphicsSceneMouseMove:
                 if (d->movingWidget != widget && widget == d->interestingWidget) {
                     setMovingWidget(widget);
                 }
+            break;
+
+            case QEvent::GraphicsSceneMove: {
                 if (widget == d->movingWidget) {
                     QPointF p = mapFromScene(widget->scenePos());
                     p += widget->contentsRect().topLeft();
@@ -930,7 +935,7 @@ void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
 
     d->widgetToBeSetMoving = widget;
     //delay so to allow the widget to receive and react to the events caused by the changes
-    //done by the groups connected with widgetStartsMoving()
+    //its group may do in releaseChild
     QTimer::singleShot(0, this, SLOT(prepareWidgetToMove()));
 }
 
