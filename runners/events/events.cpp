@@ -24,7 +24,6 @@
 
 #include <KDebug>
 #include <KMimeType>
-#include <KIconLoader>
 
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
@@ -72,7 +71,7 @@ EventsRunner::EventsRunner(QObject *parent, const QVariantList& args)
 
     setObjectName(RUNNER_NAME);
 
-    icon = KIcon( KIconLoader().loadMimeTypeIcon( KMimeType::mimeType( "text/calendar" )->iconName(), KIconLoader::NoGroup ) );
+    icon = KIcon( QLatin1String( "text-calendar" ) );
 
     describeSyntaxes();
     reloadConfiguration();
