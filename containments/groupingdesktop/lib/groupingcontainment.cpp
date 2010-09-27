@@ -742,13 +742,10 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 }
             break;
 
-            case QEvent::GraphicsSceneMouseMove:
+            case QEvent::GraphicsSceneMove: {
                 if (d->movingWidget != widget && widget == d->interestingWidget) {
                     setMovingWidget(widget);
                 }
-            break;
-
-            case QEvent::GraphicsSceneMove: {
                 if (widget == d->movingWidget) {
                     QPointF p = mapFromScene(widget->scenePos());
                     p += widget->contentsRect().topLeft();
