@@ -36,7 +36,6 @@ class Kolourpicker : public Plasma::Applet
         virtual void init();
 
     protected:
-        virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
         virtual bool eventFilter(QObject *watched, QEvent *event);
         virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
         void constraintsEvent(Plasma::Constraints constraints);
