@@ -159,6 +159,9 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     mainlay->setSpacing(4);
     mainlay->setContentsMargins(0.0, 0.0, 0.0, 0.0);
 
+    m_grabWidget = new QWidget( 0,  Qt::X11BypassWindowManagerHint );
+    m_grabWidget->move( -1000, -1000 );
+
     m_grabButton = new Plasma::ToolButton(this);
     m_grabButton->setMinimumSize(20, 20);
     mainlay->addItem(m_grabButton);
@@ -212,6 +215,7 @@ void Kolourpicker::setDefaultColorFormat(QAction *act)
 Kolourpicker::~Kolourpicker()
 {
     clearHistory(false);
+    delete m_grabWidget;
     delete m_configAndHistoryMenu;
 }
 
@@ -256,26 +260,11 @@ void Kolourpicker::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-bool Kolourpicker::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
-{
-    if (watched == m_grabButton && event->type() == QEvent::GraphicsSceneMouseRelease)
-    {
-        m_grabWidget = static_cast<QGraphicsSceneMouseEvent *>(event)->widget();
-        if (m_grabWidget && m_grabWidget->parentWidget()) {
-            m_grabWidget = m_grabWidget->parentWidget();
-        }
-
-        if (m_grabWidget) {
-            m_grabWidget->installEventFilter(this);
-        }
-    }
-    return false;
-}
-
 bool Kolourpicker::eventFilter(QObject *watched, QEvent *event)
 {
     if (watched == m_grabWidget && event->type() == QEvent::MouseButtonRelease) {
         m_grabWidget->removeEventFilter(this);
+	m_grabWidget->hide();
         m_grabWidget->releaseMouse();
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
         const QColor color = pickColor(me->globalPos());
@@ -297,6 +286,8 @@ QVariant Kolourpicker::itemChange(GraphicsItemChange change, const QVariant &val
 void Kolourpicker::grabClicked()
 {
     if (m_grabWidget) {
+	m_grabWidget->show();
+	m_grabWidget->installEventFilter( this );
         m_grabWidget->grabMouse(Qt::CrossCursor);
     }
 }
