@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <marble/GeoPainter.h>
 #include <marble/MapThemeManager.h>
 #include <marble/MarbleMap.h>
+#include <marble/MarbleModel.h>
 #include <marble/RenderPlugin.h>
 #include <marble/SunLocator.h>
 #include <marble/ViewportParams.h>
@@ -73,7 +74,7 @@ void MarbleWallpaper::init(const KConfigGroup &config)
         m_map = new MarbleMap();
 
         // Get default position from marble to initialize on first startup (empty config)
-        m_map->home(home_lon, home_lat, home_zoom);
+        m_map->model()->home(home_lon, home_lat, home_zoom);
 
         // These settings apply to Marble's "satellite" view mostly, e.g. make it beautiful
         m_map->setShowClouds(true);
