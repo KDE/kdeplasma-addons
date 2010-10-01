@@ -122,6 +122,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
     if (!imageSource) {
         imageSource = new ImageSource(this);
+        imageSource->setStorageEnabled(true);
 
         imageSource->setObjectName("UserImages:"+serviceBaseUrl);
         addSource(imageSource);
@@ -134,6 +135,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         source = new TimelineSource(who, requestType, this);
         source->setObjectName(name);
         source->setImageSource(imageSource);
+        source->setStorageEnabled(true);
 
         addSource(source);
     }
