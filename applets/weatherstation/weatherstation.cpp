@@ -23,7 +23,6 @@
 #include <Plasma/Containment>
 #include <Plasma/Theme>
 #include <Plasma/ToolTipManager>
-#include <plasma/weather/weatherutils.h>
 #include <KUnitConversion/Converter>
 #include <plasmaweather/weatherconfig.h>
 #include <math.h>
