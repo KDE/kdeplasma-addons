@@ -22,7 +22,6 @@
 
 #include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
-#include <plasma/weather/weatherutils.h>
 #include <plasmaweather/weatherpopupapplet.h>
 
 class QGraphicsGridLayout;
