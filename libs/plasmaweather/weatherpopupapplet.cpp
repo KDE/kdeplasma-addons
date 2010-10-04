@@ -25,7 +25,6 @@
 #include <KConfigGroup>
 #include <KConfigDialog>
 
-#include <plasma/weather/weatherutils.h>
 #include <KUnitConversion/Converter>
 
 #include "weatherconfig.h"
