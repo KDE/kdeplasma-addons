@@ -234,12 +234,14 @@ void MarbleWallpaper::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         // Choose spin direction by taking into account whether we
         // drag above or below the visible pole.
         if (m_projection == Spherical) {
+            qreal northPoleX, northPoleY;
+            m_map->screenCoordinates(0.0, +90.0, northPoleX, northPoleY);
             if (polarity > 0) {
-                if (event->screenPos().y() < (- m_map->northPoleY() + m_map->height() / 2))
+                if (event->screenPos().y() < (- northPoleY + m_map->height() / 2))
                     direction = -1;
             }
             else {
-                if (event->screenPos().y() > (+ m_map->northPoleY() + m_map->height() / 2))
+                if (event->screenPos().y() > (+ northPoleY + m_map->height() / 2))
                     direction = -1;
             }
         }
