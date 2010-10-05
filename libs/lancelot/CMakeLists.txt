@@ -108,7 +108,7 @@ install(FILES
 install(FILES
    widgets/ActionListView.h
    widgets/BasicWidget.h
-   #widgets/CustomListView.h
+   widgets/CustomListView.h
    widgets/ExtenderButton.h
    widgets/Panel.h
    widgets/PassagewayView.h
@@ -118,6 +118,8 @@ install(FILES
    widgets/TabBar.h
    widgets/PopupList.h
    widgets/PopupMenu.h
+   widgets/ScrollPane.h
+   widgets/ScrollBar.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/widgets COMPONENT Devel)
 
 install(FILES
