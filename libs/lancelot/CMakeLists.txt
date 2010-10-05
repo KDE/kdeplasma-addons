@@ -160,8 +160,6 @@ install(FILES
    Lancelot/Global
    Lancelot/HoverIcon
    Lancelot/Lancelot
-   Lancelot/LancelotTestApplication
-   Lancelot/LancelotTestWindow
    Lancelot/MergedActionListModel
    Lancelot/NodeLayout
    Lancelot/Panel
