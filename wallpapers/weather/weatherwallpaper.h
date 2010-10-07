@@ -25,7 +25,6 @@
 #include <Plasma/DataEngine>
 #include <Plasma/Package>
 #include <Plasma/Wallpaper>
-#include <plasma/weather/weatherutils.h>
 
 #include "ui_weatherAdvanced.h"
 
