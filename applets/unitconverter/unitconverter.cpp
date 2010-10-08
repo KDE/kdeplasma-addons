@@ -133,7 +133,7 @@ void UnitConverter::calculate()
            QString addZero = QString::number(dblValueOut.number()) + ".0";
            m_pTxtValue2->setText(addZero);
         } else {
-           m_pTxtValue2->setText(QString::number(dblValueOut.number()));
+           m_pTxtValue2->setText(QString::number(dblValueOut.number(), 'g', 15));
         }
     }
 }
@@ -154,7 +154,7 @@ void UnitConverter::calculateReverse()
            QString addZero = QString::number(dblValueOut.number()) + ".0";
            m_pTxtValue1->setText(addZero);
         } else {
-           m_pTxtValue1->setText(QString::number(dblValueOut.number()));
+           m_pTxtValue1->setText(QString::number(dblValueOut.number(), 'g', 15));
         }
     }
 }
