@@ -633,6 +633,9 @@ void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 
 void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
+    if (m_slideFrame) {
+        m_slideFrame->hide();
+    }
     KUrl droppedUrl = (KUrl::List::fromMimeData(event->mimeData())).at(0);
     kDebug() << "dropped URL" << droppedUrl.url();
     if (droppedUrl.protocol() == "desktop") {
@@ -664,8 +667,8 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void Frame::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
+    checkSlideFrame();
     if (m_slideShow) {
-        checkSlideFrame();
         m_slideFrame->show();
     }
     Applet::hoverEnterEvent(event);
@@ -683,6 +686,7 @@ void Frame::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 void Frame::checkSlideFrame()
 {
     if (m_slideFrame) {
+        m_slideFrame->hide();
         return;
     }
     m_slideFrame = new Plasma::Frame( this );
