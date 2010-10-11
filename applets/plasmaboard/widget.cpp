@@ -647,6 +647,7 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
         m_tooltip -> move( popupPosition( key->size()*2 ) + key->position() - QPoint(key->size().width()/2, 0) );
         m_tooltip -> resize( key->size()*2 );
         m_tooltip -> show();
+	m_tooltip -> raise(); // fix problem of tooltip being displayed behind keyboard. Happend after moving the panel around in KDE 4.5 with activated desktop effects
     }
 }
 
