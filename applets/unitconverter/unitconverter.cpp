@@ -26,13 +26,23 @@
 #include <QRegExp>
 #include <KComboBox>
 #include <KLineEdit>
-#include <Plasma/ComboBox>
 #include <Plasma/LineEdit>
 #include <Plasma/Label>
 #include <Plasma/Frame>
 #include <KUnitConversion/UnitCategory>
 
 using namespace KUnitConversion;
+
+ComboBox::ComboBox(QGraphicsWidget* parent)
+    : Plasma::ComboBox(parent)
+{
+}
+
+void ComboBox::mousePressEvent(QGraphicsSceneMouseEvent* event)
+{
+    emit mousePressed();
+    Plasma::ComboBox::mousePressEvent(event);
+}
 
 Q_DECLARE_METATYPE(UnitPtr)
 Q_DECLARE_METATYPE(UnitCategory*)
@@ -170,11 +180,14 @@ QGraphicsWidget *UnitConverter::graphicsWidget()
         Plasma::Label *pLabel = new Plasma::Label(this);
         pLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         pLabel->setText(i18n("Convert:"));
-        m_pCmbCategory = new Plasma::ComboBox(this);
+        m_pCmbCategory = new ComboBox(this);
+        connect(m_pCmbCategory, SIGNAL(mousePressed()), this, SLOT(raise()));
         m_pCmbCategory->setZValue(2);
 
-        m_pCmbUnit1 = new Plasma::ComboBox(this);
-        m_pCmbUnit2 = new Plasma::ComboBox(this);
+        m_pCmbUnit1 = new ComboBox(this);
+        m_pCmbUnit2 = new ComboBox(this);
+        connect(m_pCmbUnit1, SIGNAL(mousePressed()), this, SLOT(raise()));
+        connect(m_pCmbUnit2, SIGNAL(mousePressed()), this, SLOT(raise()));
         m_pCmbUnit1->setZValue(1);
         m_pCmbUnit2->setZValue(1);
         m_pTxtValue1 = new Plasma::LineEdit(this);

@@ -22,6 +22,7 @@
 #define UNITCONVERTER_H
 
 #include <Plasma/PopupApplet>
+#include <Plasma/ComboBox>
 #include <KUnitConversion/Converter>
 
 namespace Plasma {
@@ -29,6 +30,19 @@ namespace Plasma {
     class LineEdit;
     class Label;
 }
+
+class ComboBox : public Plasma::ComboBox
+{
+    Q_OBJECT
+public:
+    ComboBox(QGraphicsWidget* parent = 0);
+
+signals:
+    void mousePressed();
+
+protected:
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+};
 
 // Define our plasma Applet
 class UnitConverter : public Plasma::PopupApplet
