@@ -64,7 +64,7 @@ AudioPlayerControlRunnerConfig::AudioPlayerControlRunnerConfig(QWidget* parent, 
     m_ui->player_combo->setDuplicatesEnabled(false);
     connect(m_ui->player_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(onPlayerChanged(int)));
     connect(m_ui->player_combo, SIGNAL(editTextChanged(QString)), this, SLOT(onPlayerChanged(QString)));
-    m_ui->player_combo->addItem(i18n("Amarok"), "amarok");
+    m_ui->player_combo->addItem(i18n("Amarok"), QLatin1String("amarok"));
     /* template for adding other players:
      * m_ui->player_combo->addItem(i18n("player's name"), "the end of it's MPRIS interface");
      */
@@ -77,7 +77,7 @@ void AudioPlayerControlRunnerConfig::load()
 {
     KCModule::load();
 
-    KSharedConfig::Ptr cfg = KSharedConfig::openConfig("krunnerrc");
+    KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QLatin1String("krunnerrc"));
     KConfigGroup grp = cfg->group("Runners");
     grp = KConfigGroup(&grp, "Audio Player Control Runner");
     QString player = grp.readEntry(CONFIG_PLAYER, "amarok");
@@ -112,7 +112,7 @@ void AudioPlayerControlRunnerConfig::save()
 {
     KCModule::save();
 
-    KSharedConfig::Ptr cfg = KSharedConfig::openConfig("krunnerrc");
+    KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QLatin1String("krunnerrc"));
     KConfigGroup grp = cfg->group("Runners");
     grp = KConfigGroup(&grp, "Audio Player Control Runner");
     if (!m_ui->searchCollection->isEnabled()) {
@@ -152,7 +152,7 @@ void AudioPlayerControlRunnerConfig::defaults()
 {
     KCModule::defaults();
 
-    m_ui->player_combo->setCurrentIndex(m_ui->player_combo->findData("amarok"));
+    m_ui->player_combo->setCurrentIndex(m_ui->player_combo->findData(QLatin1String("amarok")));
     m_ui->searchCollection->setChecked(true);
     m_ui->commands->setChecked(true);
     m_ui->play_edit->setText(i18n("Play"));
@@ -175,8 +175,8 @@ void AudioPlayerControlRunnerConfig::defaults()
 
 void AudioPlayerControlRunnerConfig::onPlayerChanged(int index)
 {
-    QString data = m_ui->player_combo->itemData(index).toString();
-    if (data != "amarok") {
+    const QString data = m_ui->player_combo->itemData(index).toString();
+    if (data != QLatin1String("amarok")) {
         m_ui->searchCollection->setEnabled(false);
     } else {
         m_ui->searchCollection->setEnabled(true);

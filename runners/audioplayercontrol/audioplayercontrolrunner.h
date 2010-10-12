@@ -97,7 +97,7 @@ private:
       * album and title)
       * @param term the term to search for, it will be split at whitespaces
       * and it will be searched after every part
-      * @param actionNames contains the actions (play, append, queue) separated with a ','
+      * @param actionNames contains the actions (play, append, queue) separated with a QLatin1Char( ',' )
       * @return a list of Plasma::QueryMatch, where every element is for one match
       */
     QList<Plasma::QueryMatch> searchCollectionFor(const QString& term, const QString& actionNames);
