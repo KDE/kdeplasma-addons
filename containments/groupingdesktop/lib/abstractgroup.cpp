@@ -46,6 +46,7 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
       parentGroup(0),
       destroying(false),
       containment(0),
+      background(0),
       immutability(Plasma::Mutable),
       groupType(AbstractGroup::FreeGroup),
       interestingGroup(0),
@@ -56,8 +57,7 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
       simplerBackgroundChildren(false),
       m_mainConfig(0)
 {
-    background = new Plasma::FrameSvg(q);
-    background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+
 }
 
 AbstractGroupPrivate::~AbstractGroupPrivate()
@@ -639,6 +639,11 @@ bool AbstractGroup::isMainGroup() const
 
 void AbstractGroup::setBackgroundHints(BackgroundHints hints)
 {
+    if (!d->background) {
+        d->background = new Plasma::FrameSvg(this);
+        d->background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+    }
+
     d->backgroundHints = hints;
     switch (hints) {
         case StandardBackground:
@@ -698,7 +703,9 @@ void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *)
 
 void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
-    d->background->resizeFrame(event->newSize());
+    if (d->background) {
+        d->background->resizeFrame(event->newSize());
+    }
 
     if (!d->isLoading && !d->destroying) {
         emit geometryChanged();
