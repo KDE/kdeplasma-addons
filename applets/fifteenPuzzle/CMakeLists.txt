@@ -3,7 +3,7 @@ project(plasma-fifteenPuzzle)
 add_subdirectory(icons)
 include_directories( ${KDE4_INCLUDES} )
 
-set(fifteenPuzzle_SRCS src/fifteenPuzzleConfig.cpp src/fifteenPuzzle.cpp src/fifteen.cpp src/piece.cpp )
+set(fifteenPuzzle_SRCS src/fifteenPuzzle.cpp src/fifteen.cpp src/piece.cpp )
 
 kde4_add_ui_files(fifteenPuzzle_SRCS src/fifteenPuzzleConfig.ui )
 kde4_add_plugin(plasma_applet_fifteenPuzzle ${fifteenPuzzle_SRCS})

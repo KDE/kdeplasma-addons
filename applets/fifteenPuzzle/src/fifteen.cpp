@@ -32,15 +32,15 @@
 
 Fifteen::Fifteen(QGraphicsItem* parent, int size)
     : QGraphicsWidget(parent),
+      m_size(0), // this will get overwritten in setSize(), but needs an initial value
       m_pixmap(0)
 {
-  m_size = size;
   m_pieces.resize(size*size);
   m_splitPixmap = false;
   m_numerals = true;
   m_wasShuffled = false;
   m_svg = new Plasma::Svg();
-  startBoard();
+  setSize(size);
   setCacheMode(DeviceCoordinateCache);
 }
 
@@ -53,17 +53,19 @@ Fifteen::~Fifteen()
 
 void Fifteen::setSize(int size)
 {
-  m_size = size;
-  startBoard();
-  setPreferredSize(48 * size, 48 * size);
-  setMinimumSize(24 * size, 24 * size);
+    if (m_size == size) {
+        return;
+    }
+    m_size = size;
+    startBoard();
+    setPreferredSize(48 * size, 48 * size);
+    setMinimumSize(24 * size, 24 * size);
 }
 
 void Fifteen::setColor(const QColor& c)
 {
-  m_color = c;
-  updatePieces();
-  kDebug() << "Should have updated pieces.";
+    m_color = c;
+    updatePieces();
 }
 
 int Fifteen::size() const
@@ -79,8 +81,9 @@ const QColor& Fifteen:: color() const
 void Fifteen::setPixmap(QPixmap *pixmap)
 {
   m_pixmap = pixmap;
-  if( m_pixmap ){
+  if (m_pixmap) {
     updatePieces();
+    updatePixmaps();
   }
 }
 
@@ -124,6 +127,7 @@ void Fifteen::startBoard(){
   }
   m_blank = m_pieces[d-1];
   updatePieces();
+  updatePixmaps();
 }
 
 void Fifteen::shuffle()
@@ -180,6 +184,7 @@ void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
   m_font = f;
 
   updatePieces();
+  updatePixmaps();
 }
 
 void Fifteen::setShowNumerals(bool show)
@@ -213,11 +218,8 @@ void Fifteen::updatePieces()
     if(itemAt(i%m_size, i/m_size)->id() != i+1) sorted = false;
   }
   
-  if (m_pixmap) {
-    updatePixmaps();
-  }else{
-     QRect r = m_pieces[1]->boundingRect().toRect();
-    m_svg->resize( r.width(), r.height());
+  if (!m_pixmap) {
+    m_svg->resize(width, height);
   }
   
   if(sorted && m_wasShuffled) {

@@ -23,7 +23,7 @@
 #include <plasma/popupapplet.h>
 
 #include "fifteen.h"
-#include "fifteenPuzzleConfig.h"
+#include "ui_fifteenPuzzleConfig.h"
 
 class FifteenPuzzle : public Plasma::PopupApplet
 {
@@ -42,15 +42,14 @@ class FifteenPuzzle : public Plasma::PopupApplet
     void configChanged();
 
   private:
-    void updateBoard();
     void createMenu();
     QPixmap *m_pixmap;
     Fifteen *m_board;
-    FifteenPuzzleConfig *m_configDialog;
     QList<QAction *> m_actions;
     bool m_usePlainPieces;
     QString m_imagePath;
     bool m_showNumerals;
+    Ui::fifteenPuzzleConfig ui;
 
   private slots:
     void createConfigurationInterface(KConfigDialog *parent);
