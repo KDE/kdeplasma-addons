@@ -46,7 +46,6 @@ class AbstractGroupPrivate
         Plasma::Applet::List applets;
         QList<AbstractGroup *> subGroups;
         bool destroying;
-        GroupingContainment *containment;
         unsigned int id;
         Plasma::FrameSvg *background;
         Plasma::ImmutabilityType immutability;

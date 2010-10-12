@@ -45,7 +45,6 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
       parentGroup(0),
       destroying(false),
-      containment(0),
       background(0),
       immutability(Plasma::Mutable),
       groupType(AbstractGroup::FreeGroup),
@@ -71,7 +70,7 @@ KConfigGroup *AbstractGroupPrivate::mainConfigGroup()
         return m_mainConfig;
     }
 
-    KConfigGroup containmentGroup = containment->config();
+    KConfigGroup containmentGroup = q->containment()->config();
     KConfigGroup groupsConfig = KConfigGroup(&containmentGroup, "Groups");
     m_mainConfig = new KConfigGroup(&groupsConfig, QString::number(id));
 
@@ -494,7 +493,19 @@ QGraphicsView *AbstractGroup::view() const
 
 GroupingContainment *AbstractGroup::containment() const
 {
-    return d->containment;
+    QGraphicsItem *parent = parentItem();
+    GroupingContainment *c = 0;
+
+    while (parent) {
+        GroupingContainment *possibleC = dynamic_cast<GroupingContainment *>(parent);
+        if (possibleC) {
+            c = possibleC;
+            break;
+        }
+        parent = parent->parentItem();
+    }
+
+    return c;
 }
 
 KConfigGroup AbstractGroup::config() const
@@ -806,8 +817,8 @@ void AbstractGroup::setHasConfigurationInterface(bool hasInterface)
 void AbstractGroup::updateConstraints(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
-        if (d->background && (d->containment->formFactor() == Plasma::Vertical ||
-                              d->containment->formFactor() == Plasma::Horizontal)) {
+        Plasma::FormFactor f = containment()->formFactor();
+        if (d->background && (f == Plasma::Vertical || f == Plasma::Horizontal)) {
             if (backgroundHints() == AbstractGroup::StandardBackground) {
                 setBackgroundHints(AbstractGroup::PlainBackground);
             }
