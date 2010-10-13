@@ -206,8 +206,8 @@ void Runner::activate(int index)
     QString data = itemAt(index).data.value< QStringList >().at(0);
     Logger::self()->log("run-model", data);
     d->runnerManager->run(data);
-    d->runnerManager->reset();
-    changeApplicationSearchString(QString());
+    // d->runnerManager->reset();
+    // changeApplicationSearchString(QString());
     hideApplicationWindow();
 }
 

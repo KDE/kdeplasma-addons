@@ -383,13 +383,15 @@ void LancelotPart::immutabilityChanged(Plasma::ImmutabilityType value)
 
 void LancelotPart::search(const QString & query)
 {
+    kDebug() << "setting search query:" << query;
+
     if (!m_runnnerModel) {
         m_runnnerModel = new Lancelot::Models::Runner(true);
-        kDebug() << "connect " <<
-        connect(
-                m_runnnerModel, SIGNAL(itemActivated(int)),
-                this, SLOT(resetSearch())
-            );
+        // kDebug() << "connect " <<
+        // connect(
+        //         m_runnnerModel, SIGNAL(itemActivated(int)),
+        //         this, SLOT(resetSearch())
+        //     );
     }
 
     if (query.isEmpty()) {
