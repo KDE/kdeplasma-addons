@@ -92,8 +92,8 @@ PopupList::Private::Private(PopupList * parent)
       closeTimeout(1000),
       child(NULL),
       parentList(NULL),
-      hovered(false),
-      q(parent)
+      q(parent),
+      hovered(false)
 {
     scene = new QGraphicsScene();
     list = new ActionListView();
