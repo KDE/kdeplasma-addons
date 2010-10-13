@@ -187,6 +187,8 @@ void AbstractGroupPrivate::restoreChildren()
     q->restoreChildren();
 
     isLoading = false;
+    setBackground();
+    q->update();
 }
 
 void AbstractGroupPrivate::onChildGeometryChanged()
@@ -221,6 +223,34 @@ void AbstractGroupPrivate::setChildBorders(AbstractGroup *g, bool added)
         if (m_savedGroupsHints.contains(g)) {
             g->setBackgroundHints(m_savedGroupsHints.value(g));
         }
+    }
+}
+
+void AbstractGroupPrivate::setBackground()
+{
+    if ((backgroundHints & AbstractGroup::StandardBackground) ||
+        (backgroundHints & AbstractGroup::PlainBackground)) {
+        if (!background) {
+            background = new Plasma::FrameSvg(q);
+            background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+        }
+
+        if (backgroundHints & AbstractGroup::StandardBackground) {
+            background->setImagePath("widgets/translucentbackground");
+            background->setElementPrefix(QString());
+        } else {
+            background->setImagePath("widgets/frame");
+            background->setElementPrefix("sunken");
+        }
+
+        qreal left, top, right, bottom;
+        background->getMargins(left, top, right, bottom);
+        q->setContentsMargins(left, right, top, bottom);
+        background->resizeFrame(q->boundingRect().size());
+    } else if (background) {
+        delete background;
+        background = 0;
+        q->setContentsMargins(0, 0, 0, 0);
     }
 }
 
@@ -650,28 +680,15 @@ bool AbstractGroup::isMainGroup() const
 
 void AbstractGroup::setBackgroundHints(BackgroundHints hints)
 {
-    if (!d->background) {
-        d->background = new Plasma::FrameSvg(this);
-        d->background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+    if (d->backgroundHints == hints) {
+        return;
     }
 
     d->backgroundHints = hints;
-    switch (hints) {
-        case StandardBackground:
-            d->background->setImagePath("widgets/translucentbackground");
-            d->background->setElementPrefix(QString());
-        break;
-
-        case PlainBackground:
-            d->background->setImagePath("widgets/frame");
-            d->background->setElementPrefix("sunken");
-        break;
-
-        default:
-        break;
+    if (!d->isLoading) {
+        d->setBackground();
+        update();
     }
-
-    update();
 }
 
 AbstractGroup::BackgroundHints AbstractGroup::backgroundHints() const

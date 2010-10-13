@@ -40,6 +40,7 @@ class AbstractGroupPrivate
         QString configDialogId();
         void setChildBorders(Plasma::Applet *applet, bool added);
         void setChildBorders(AbstractGroup *group, bool added);
+        void setBackground();
 
         AbstractGroup *q;
         AbstractGroup *parentGroup;
