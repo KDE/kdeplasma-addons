@@ -239,7 +239,7 @@ int CustomList::itemAtPosition(int y) const
         }
     }
 
-    return NULL;
+    return 0;
 }
 
 CustomListItemFactory * CustomList::itemFactory() const //>
