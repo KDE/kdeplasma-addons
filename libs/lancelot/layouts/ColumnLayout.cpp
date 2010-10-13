@@ -191,7 +191,7 @@ public:
         QPropertyAnimation * animation = animator(item, "opacity");
         animation->setDuration(300);
         animation->setStartValue(1);
-        animation->setEndValue(0.5);
+        animation->setEndValue(0);
         animation->start();
 
         //item->connect(animation, SIGNAL(finished()), SLOT(hide()));
