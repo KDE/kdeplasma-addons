@@ -1,5 +1,7 @@
 add_subdirectory(comic)
-add_subdirectory(microblog)
+if(QCA2_FOUND)
+  add_subdirectory(microblog)
+endif(QCA2_FOUND)
 if(LIBATTICA_FOUND)
   add_subdirectory(ocs)
 endif(LIBATTICA_FOUND)
