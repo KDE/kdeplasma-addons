@@ -38,9 +38,9 @@
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       file(new QFile(this)),
-      textStream(0),
       watcher(new KDirWatch(this)),
-      textItem(new FileWatcherTextItem(this))
+      textItem(new FileWatcherTextItem(this)),
+      textStream(0)
 {
   setAspectRatioMode(Plasma::IgnoreAspectRatio);
   setHasConfigurationInterface(true);
