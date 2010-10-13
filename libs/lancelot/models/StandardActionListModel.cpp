@@ -51,7 +51,11 @@ bool StandardActionListModel::emitInhibited() const
 QString StandardActionListModel::title(int index) const
 {
     if (index >= d->items.size()) return "";
-    return d->items.at(index).title;
+
+    QString result = d->items.at(index).title;
+
+    result.replace('&', "&&");
+    return result;
 }
 
 QString StandardActionListModel::description(int index) const

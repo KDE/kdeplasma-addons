@@ -90,7 +90,8 @@ void Applications::Private::load()
                 continue;
 
             data.icon = KIcon(service->icon());
-            data.name = service->name().replace('&', "&&");
+            // data.name = service->name().replace('&', "&&");
+            data.name = service->name();
             data.description = service->genericName();
             data.desktopFile = service->entryPath();
 
