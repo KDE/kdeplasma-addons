@@ -126,9 +126,7 @@ void BaseModel::activate(int index)
 
     int result = -1;
 
-    if (data.endsWith(".desktop")) {
-        result = KToolInvocation::startServiceByDesktopPath(data, QStringList(), 0, 0, 0, "", true);
-    }
+    kDebug() << "starting:" << data;
 
     if (result != 0) {
         new KRun(KUrl(data), 0);
