@@ -689,20 +689,11 @@ AbstractGroup::BackgroundHints AbstractGroup::backgroundHints() const
 void AbstractGroup::setUseSimplerBackgroundForChildren(bool use)
 {
     if (d->simplerBackgroundChildren != use) {
-        if (use) {
-            foreach (Plasma::Applet *applet, d->applets) {
-                d->setChildBorders(applet, true);
-            }
-            foreach (AbstractGroup *group, d->subGroups) {
-                d->setChildBorders(group, true);
-            }
-        } else {
-            foreach (Plasma::Applet *applet, d->applets) {
-                d->setChildBorders(applet, false);
-            }
-            foreach (AbstractGroup *group, d->subGroups) {
-                d->setChildBorders(group, false);
-            }
+        foreach (Plasma::Applet *applet, d->applets) {
+            d->setChildBorders(applet, use);
+        }
+        foreach (AbstractGroup *group, d->subGroups) {
+            d->setChildBorders(group, use);
         }
 
         d->simplerBackgroundChildren = use;
