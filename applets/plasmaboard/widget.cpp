@@ -666,7 +666,12 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
         if(c){
             Plasma::Corona *corona = c->corona();
             if(corona){
-                m_tooltip -> move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + key->position() - QPoint(key->size().width()/2, 0) );
+		if(m_applet->location() == Plasma::TopEdge) {
+		  m_tooltip -> move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + QPoint(key->position().x() - key->size().width()/2, 0) - QPoint(0, size().height() - key->position().y() - key->size().height()) );
+		}
+		else {
+		  m_tooltip -> move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + key->position() - QPoint(key->size().width()/2, 0) );
+		}
             }
         }
 
