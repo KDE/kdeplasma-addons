@@ -676,6 +676,7 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
         }
 
         m_tooltip -> show();
+	m_tooltip -> raise();
     }
 }
 
