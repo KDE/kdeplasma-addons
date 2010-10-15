@@ -49,7 +49,6 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 {
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
-    setUseSimplerBackgroundForChildren(true);
 
     m_gridManager->hide();
 
