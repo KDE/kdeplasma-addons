@@ -304,7 +304,7 @@ QList<QAction*> AudioPlayerControlRunner::actionsForMatch(const Plasma::QueryMat
             addAction(APPEND, KIcon(QLatin1String( "media-track-add-amarok" )), i18n("Append to playlist"));
         }
 
-        QStringList actions = data[3].toString().split(QLatin1Char( ',' ));
+        const QStringList actions = data[3].toString().split(QLatin1Char( ',' ));
 
         for (int i = 0; i < actions.length(); ++i) {
             ret << action(actions[i]);
