@@ -175,7 +175,7 @@ QStringList EventsRunner::splitArguments( const QString & str ) {
 }
 
 QueryMatch EventsRunner::createQueryMatch( const QString & definition, MatchType type ) {
-    QStringList args = splitArguments( definition );
+    const QStringList args = splitArguments( definition );
 
     if ( args.size() < 2 || args[0].length() < 3 || args[1].length() < 3 )
         return QueryMatch( 0 ); // Return invalid match if not enough arguments
@@ -295,7 +295,7 @@ void EventsRunner::match( Plasma::RunnerContext &context ) {
         if ( match.isValid() )
             context.addMatch( term, match );
     } else if ( term.startsWith( completeKeyword ) ) {
-        QStringList args = splitArguments( term.mid( completeKeyword.length() ) );
+        const QStringList args = splitArguments( term.mid( completeKeyword.length() ) );
         Item::List items = selectItems( args[0], QStringList( todoMimeType ) );
 
         foreach ( const Item & item, items ) {
@@ -305,7 +305,7 @@ void EventsRunner::match( Plasma::RunnerContext &context ) {
                 context.addMatch( term, match );
         }
     } else if ( term.startsWith( commentKeyword ) ) {
-        QStringList args = splitArguments( term.mid( commentKeyword.length() ) );
+        const QStringList args = splitArguments( term.mid( commentKeyword.length() ) );
         Item::List items = selectItems( args[0], QStringList( todoMimeType ) << eventMimeType );
 
         foreach ( const Item & item, items ) {
