@@ -25,7 +25,7 @@
 
 #include <kdebug.h>
 #include <kicon.h>
-#include <krun.h>
+#include <ktoolinvocation.h>
 #include <QGraphicsItem>
 #include <QDateTime>
 #include <QTimer>
@@ -379,7 +379,7 @@ void Scroller::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         url = m_list.at(m_current).url;
     }
 
-    KRun::runUrl(KUrl(url), "text/html", 0);
+    KToolInvocation::invokeBrowser(url);
 }
 
 void Scroller::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
