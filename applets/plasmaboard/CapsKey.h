@@ -21,9 +21,9 @@
 #ifndef CAPSKEY_H
 #define CAPSKEY_H
 
-#include "FuncKey.h"
+#include "StickyKey.h"
 
-class CapsKey: public FuncKey {
+class CapsKey: public StickyKey {
 public:
     CapsKey(QPoint relativePosition, QSize relativeSize);
 

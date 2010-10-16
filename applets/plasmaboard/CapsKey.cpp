@@ -23,7 +23,7 @@
 #include <QPainter>
 
 CapsKey::CapsKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Caps_Lock), QString())
+        StickyKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Caps_Lock), QString())
 {
 
 }
