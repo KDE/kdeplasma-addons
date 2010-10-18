@@ -44,9 +44,8 @@ FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             m_nextArrow(new Plasma::ToolButton(this)),
             m_scrollWidget(new Plasma::ScrollWidget(this)),
             m_container(new QGraphicsWidget(this)),
-            m_layout(new QGraphicsLinearLayout(Qt::Horizontal)),
             m_spacer(new Spacer(this)),
-            m_spaceFiller(new QGraphicsWidget(this))
+            SPACING(4)
 {
     resize(200,200);
 
@@ -62,15 +61,6 @@ FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     connect(m_prevArrow, SIGNAL(pressed()), this, SLOT(scrollPrev()));
     connect(m_nextArrow, SIGNAL(pressed()), this, SLOT(scrollNext()));
 
-    //using this widget to fill the empty space. Unfortunately it will cause 2*spacing of empty
-    //space, but i don't know how to do otherwise. addStretch() isn't enough.
-    m_spaceFiller->setFlag(QGraphicsItem::ItemHasNoContents);
-    m_spaceFiller->setMinimumSize(QSizeF(0, 0));
-    m_spaceFiller->setPreferredSize(QSizeF(0.1, 0.1)); //it doesn't like 0
-
-    m_layout->setSpacing(4);
-    m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-    m_container->setLayout(m_layout);
     m_container->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
     m_scrollWidget->setWidget(m_container);
     m_scrollWidget->setMinimumSize(0, 0);
@@ -81,26 +71,19 @@ FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setLayout(m_mainLayout);
 
     m_spacer->hide();
-    m_spacer->setMinimumSize(20, 20);
 
     setGroupType(AbstractGroup::ConstrainedGroup);
     setUseSimplerBackgroundForChildren(true);
-}
-
-FlowGroup::~FlowGroup()
-{
-
-}
-
-void FlowGroup::init()
-{
-    int stretchIndex = config().readEntry("StretchIndex", 0);
-    m_layout->insertItem(stretchIndex, m_spaceFiller);
 
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(appletRemoved(Plasma::Applet*)));
     connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
             this, SLOT(groupRemoved(AbstractGroup*)));
+}
+
+FlowGroup::~FlowGroup()
+{
+
 }
 
 QString FlowGroup::pluginName() const
@@ -110,92 +93,55 @@ QString FlowGroup::pluginName() const
 
 void FlowGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
 {
-    m_layout->insertItem(group.readEntry("Position", -1), child);
+    QRectF rect;
+    if (m_mainLayout->orientation() == Qt::Horizontal) {
+        rect = QRectF(QPointF(group.readEntry("Position", 0), 0),
+                      QSizeF(group.readEntry("Size", 0), m_container->size().height()));
+    }
+    child->setParentItem(m_container);
+    child->setGeometry(rect);
+
     updateContents();
 }
 
 void FlowGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
 {
-    int pos = 0;
-    for (int i = 0; i < m_layout->count(); ++i) {
-        if (child == m_layout->itemAt(i)) {
-            pos = i;
-            break;
-        }
+    if (m_mainLayout->orientation() == Qt::Horizontal) {
+        group.writeEntry("Position", child->pos().x());
+        group.writeEntry("Size", child->size().width());
     }
-
-    group.writeEntry("Position", pos);
-}
-
-void FlowGroup::releaseChild(QGraphicsWidget *child)
-{
-    m_layout->removeItem(child);
 }
 
 bool FlowGroup::showDropZone(const QPointF &pos)
 {
     if (pos == QPointF()) {
-        m_layout->removeItem(m_spacer);
         m_spacer->hide();
-
         updateContents();
 
         return false;
     }
 
-    if (m_spacer->geometry().contains(pos)) {
-        return true;
+    m_spacer->show();
+    QGraphicsWidget *w = containment()->movingWidget();
+    QSizeF pref;
+    QSizeF min;
+    if (children().contains(w)) {
+        pref = QSizeF(w->effectiveSizeHint(Qt::PreferredSize));
+        min = QSizeF(w->effectiveSizeHint(Qt::MinimumSize));
+    } else {
+        pref = QSizeF(40, 40);
+        min = QSizeF(5, 5);
     }
-
-    m_layout->removeItem(m_spacer);
-    m_spacer->hide();
-
-    int insertIndex = m_layout->count();
-    qreal currPos = m_container->contentsRect().left();
-    const qreal x = mapToItem(m_container, pos).x();
-    const qreal y = mapToItem(m_container, pos).y();
-
-    for (int i = 0; i < m_layout->count(); ++i) {
-        QRectF siblingGeometry = m_layout->itemAt(i)->geometry();
-
-        if (m_layout->orientation() == Qt::Horizontal) {
-            siblingGeometry.moveTopLeft(QPointF(currPos, 0));
-            const qreal middle = siblingGeometry.left() + (siblingGeometry.width() / 2.0);
-            if (x <= middle && x > siblingGeometry.left() - 2) {
-                insertIndex = i;
-                break;
-            } else if (x >= middle && x <= siblingGeometry.right() + 2) {
-                insertIndex = i + 1;
-                break;
-            }
-
-            currPos += siblingGeometry.width() + 4;
-        } else { // Vertical
-            siblingGeometry.moveTopLeft(QPointF(0, currPos));
-            const qreal middle = siblingGeometry.top() + (siblingGeometry.height() / 2.0);
-            if (y <= middle && y > siblingGeometry.top() - 2) {
-                insertIndex = i;
-                break;
-            } else if (y >= middle && y <= siblingGeometry.bottom() + 2) {
-                insertIndex = i + 1;
-                break;
-            }
-
-            currPos += siblingGeometry.height() + 4;
-        }
+    if (m_mainLayout->orientation() == Qt::Horizontal) {
+        m_spacer->setPreferredWidth(pref.width());
+        m_spacer->setMinimumWidth(min.width());
+    } else {
+        m_spacer->setPreferredHeight(pref.height());
+        m_spacer->setMinimumHeight(min.height());
     }
+    addItem(m_spacer, mapToItem(m_container, pos));
 
-    m_spacerIndex = insertIndex;
-    if (insertIndex != -1) {
-        m_spacer->show();
-        m_layout->insertItem(insertIndex, m_spacer);
-
-        updateContents();
-
-        return true;
-    }
-
-    return false;
+    return true;
 }
 
 Handle *FlowGroup::createHandleForChild(QGraphicsWidget *child)
@@ -212,36 +158,34 @@ Handle *FlowGroup::createHandleForChild(QGraphicsWidget *child)
     return new GridHandle(containment(), static_cast<AbstractGroup *>(child));
 }
 
-void FlowGroup::layoutChild(QGraphicsWidget *child, const QPointF &)
+void FlowGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 {
+    addItem(child, mapToItem(m_container, pos));
     m_spacer->hide();
-    m_layout->removeItem(m_spacer);
-    m_layout->insertItem(m_spacerIndex, child);
-
-    m_layout->activate();
     updateContents();
+}
 
-    for (int i = 0; i < m_layout->count(); ++i) {
-        if (m_layout->itemAt(i) == m_spaceFiller) {
-            config().writeEntry("StretchIndex", i);
-            emit configNeedsSaving();
-
-            return;
-        }
+void FlowGroup::addItem(QGraphicsWidget *child, const QPointF &pos)
+{
+    child->setParentItem(m_container);
+    QRectF rect(pos, child->effectiveSizeHint(Qt::PreferredSize));
+    if (m_mainLayout->orientation() == Qt::Horizontal) {
+        rect.setY(0);
+    } else {
+        rect.setX(0);
     }
-}
-
-void FlowGroup::appletRemoved(Plasma::Applet *applet)
-{
-    m_layout->removeItem(applet);
+    child->setGeometry(rect);
 
     updateContents();
 }
 
-void FlowGroup::groupRemoved(AbstractGroup *group)
+void FlowGroup::appletRemoved(Plasma::Applet *)
 {
-    m_layout->removeItem(group);
+    updateContents();
+}
 
+void FlowGroup::groupRemoved(AbstractGroup *)
+{
     updateContents();
 }
 
@@ -271,35 +215,71 @@ void FlowGroup::scrollNext()
 
 void FlowGroup::updateContents()
 {
+    //generate a list of the children in a left-right or top-bottom order
+    QList<QGraphicsWidget *> list = children();
+    if (m_spacer->isVisible()) {
+        list << m_spacer;
+    }
+    list.removeOne(containment()->movingWidget());
+    QList<QGraphicsWidget *> childs;
+    foreach (QGraphicsWidget *child, list) {
+        for (int i = 0; i < childs.count(); ++i) {
+            QGraphicsWidget *c = childs.at(i);
+            if (child->pos().x() < c->pos().x()) {
+                childs.insert(i, child);
+                break;
+            }
+        }
+        if (!childs.contains(child)) {
+            childs << child;
+        }
+    }
+
+    const QRectF containerRect(m_container->boundingRect());
+    for (int i = 0; i < childs.count(); ++i) {
+        QGraphicsWidget *child = childs.at(i);
+        QRectF rect(child->geometry());
+        rect.setWidth(child->effectiveSizeHint(Qt::PreferredSize).width());
+
+        QGraphicsWidget *next = (i < childs.count() - 1 ? childs.at(i + 1) : 0);
+
+        if (m_mainLayout->orientation() == Qt::Horizontal) {
+            const qreal min = child->effectiveSizeHint(Qt::MinimumSize).width();
+
+            const qreal r = (next ? next->pos().x() - SPACING : containerRect.right());
+            if (r < rect.right() || QSizePolicy::ExpandFlag & child->sizePolicy().horizontalPolicy()) {
+                rect.setRight(r);
+            }
+
+            if (rect.width() < min) {
+                qreal newR = rect.x() + min;
+                if (newR > r) {
+                    newR = r;
+                }
+                rect.setRight(newR);
+            }
+        }
+
+        child->setGeometry(rect);
+    }
+
     qreal min = 0;
     QRectF geom(m_scrollWidget->viewportGeometry());
     const bool horizontal = (m_mainLayout->orientation() == Qt::Horizontal);
-    const int spacing = m_layout->spacing();
     if (horizontal) {
-        for (int i = 0; i < m_layout->count(); ++i) {
-            QGraphicsLayoutItem *item = m_layout->itemAt(i);
-            if (item != m_spacer) {
-                min = min + item->minimumWidth() + spacing;
-            }
+        if (!childs.isEmpty()) {
+            min = childs.last()->geometry().right();
         }
-        min += 30;
         if (m_prevArrow->isVisible()) {
-            geom.setWidth(geom.width() + m_prevArrow->geometry().width() * 2 + spacing * 2);
+            geom.setWidth(geom.width() + m_prevArrow->geometry().width() * 2 + SPACING * 2);
         }
-        m_container->resize(m_container->size().width(), geom.height());
+        m_container->resize(qMax(min, geom.width()), geom.height());
         m_container->setMaximumHeight(geom.height());
+        foreach (QGraphicsWidget *c, childs) {
+            c->resize(c->size().width(), geom.height());
+        }
     } else {
-        for (int i = 0; i < m_layout->count(); ++i) {
-            QGraphicsLayoutItem *item = m_layout->itemAt(i);
-            if (item != m_spacer) {
-                min = min + item->minimumHeight() + spacing;
-            }
-        }
-        min += 30;
-        if (m_prevArrow->isVisible()) {
-            geom.setHeight(geom.height() + m_prevArrow->geometry().height() * 2 + spacing * 2);
-        }
-        m_container->resize(geom.width(), m_container->size().height());
+
     }
 
     if ((horizontal && min > geom.width()) ||
@@ -324,7 +304,6 @@ void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
         Plasma::FormFactor f = containment()->formFactor();
         if (f == Plasma::Vertical) {
             m_mainLayout->setOrientation(Qt::Vertical);
-            m_layout->setOrientation(Qt::Vertical);
             m_spacer->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum));
             m_prevArrow->setIcon(KIcon(m_arrows->pixmap("up-arrow")));
             m_nextArrow->setIcon(KIcon(m_arrows->pixmap("down-arrow")));
@@ -332,7 +311,6 @@ void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
             m_nextArrow->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
         } else {
             m_mainLayout->setOrientation(Qt::Horizontal);
-            m_layout->setOrientation(Qt::Horizontal);
             m_spacer->setSizePolicy(QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred));
             m_prevArrow->setIcon(KIcon(m_arrows->pixmap("left-arrow")));
             m_nextArrow->setIcon(KIcon(m_arrows->pixmap("right-arrow")));

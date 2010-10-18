@@ -40,12 +40,10 @@ class FlowGroup : public AbstractGroup
         explicit FlowGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         ~FlowGroup();
 
-        void init();
         QString pluginName() const;
         void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
         void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
         bool showDropZone(const QPointF &pos);
-        void releaseChild(QGraphicsWidget *child);
         Handle *createHandleForChild(QGraphicsWidget *child);
 
         static GroupInfo groupInfo();
@@ -63,6 +61,7 @@ class FlowGroup : public AbstractGroup
 
     private:
         void updateContents();
+        void addItem(QGraphicsWidget *w, const QPointF &pos);
 
         QGraphicsLinearLayout *m_mainLayout;
         Plasma::Svg *m_arrows;
@@ -70,11 +69,10 @@ class FlowGroup : public AbstractGroup
         Plasma::ToolButton *m_nextArrow;
         Plasma::ScrollWidget *m_scrollWidget;
         QGraphicsWidget *m_container;
-        QGraphicsLinearLayout *m_layout;
         Spacer *m_spacer;
-        QGraphicsWidget *m_spaceFiller;
 
-        int m_spacerIndex;
+
+        const int SPACING;
 
 };
 

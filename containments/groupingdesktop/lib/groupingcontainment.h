@@ -95,6 +95,12 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Cont
         void setMovingWidget(QGraphicsWidget *widget);
 
         /**
+         * Returns the widget that is currently being moved by the user, or 0
+         * if there is not any.
+         **/
+        QGraphicsWidget *movingWidget() const;
+
+        /**
          * Raises a widget above all the other Applets or Groups.
          **/
         void raise(QGraphicsWidget *widget);

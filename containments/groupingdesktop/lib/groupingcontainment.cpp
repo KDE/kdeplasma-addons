@@ -935,6 +935,11 @@ void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
     QTimer::singleShot(0, this, SLOT(prepareWidgetToMove()));
 }
 
+QGraphicsWidget *GroupingContainment::movingWidget() const
+{
+    return d->movingWidget;
+}
+
 void GroupingContainment::raise(QGraphicsWidget *widget)
 {
     widget->setZValue(++GroupingContainmentPrivate::s_maxZValue);
