@@ -336,6 +336,9 @@ void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
             m_nextArrow->setIcon(KIcon(m_arrows->pixmap("down-arrow")));
             m_prevArrow->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
             m_nextArrow->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+            foreach (QGraphicsWidget *child, children()) {
+                child->setPos(0, child->pos().x());
+            }
         } else {
             m_mainLayout->setOrientation(Qt::Horizontal);
             m_spacer->setSizePolicy(QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred));
@@ -343,6 +346,9 @@ void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
             m_nextArrow->setIcon(KIcon(m_arrows->pixmap("right-arrow")));
             m_prevArrow->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
             m_nextArrow->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+            foreach (QGraphicsWidget *child, children()) {
+                child->setPos(child->pos().y(), 0);
+            }
         }
         updateContents();
     }
