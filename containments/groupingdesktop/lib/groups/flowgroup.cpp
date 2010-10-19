@@ -215,6 +215,8 @@ void FlowGroup::scrollNext()
 
 void FlowGroup::updateContents()
 {
+    const bool horizontal = (m_mainLayout->orientation() == Qt::Horizontal);
+
     //generate a list of the children in a left-right or top-bottom order
     QList<QGraphicsWidget *> list = children();
     if (m_spacer->isVisible()) {
@@ -225,7 +227,8 @@ void FlowGroup::updateContents()
     foreach (QGraphicsWidget *child, list) {
         for (int i = 0; i < childs.count(); ++i) {
             QGraphicsWidget *c = childs.at(i);
-            if (child->pos().x() < c->pos().x()) {
+            if ((horizontal && child->pos().x() < c->pos().x()) ||
+                (!horizontal && child->pos().y() < c->pos().y())) {
                 childs.insert(i, child);
                 break;
             }
@@ -243,7 +246,7 @@ void FlowGroup::updateContents()
 
         QGraphicsWidget *next = (i < childs.count() - 1 ? childs.at(i + 1) : 0);
 
-        if (m_mainLayout->orientation() == Qt::Horizontal) {
+        if (horizontal) {
             const qreal min = child->effectiveSizeHint(Qt::MinimumSize).width();
 
             const qreal r = (next ? next->pos().x() - SPACING : containerRect.right());
@@ -258,6 +261,21 @@ void FlowGroup::updateContents()
                 }
                 rect.setRight(newR);
             }
+        } else {
+            const qreal min = child->effectiveSizeHint(Qt::MinimumSize).height();
+
+            const qreal b = (next ? next->pos().y() - SPACING : containerRect.bottom());
+            if (b < rect.bottom() || QSizePolicy::ExpandFlag & child->sizePolicy().verticalPolicy()) {
+                rect.setBottom(b);
+            }
+
+            if (rect.height() < min) {
+                qreal newB = rect.y() + min;
+                if (newB > b) {
+                    newB = b;
+                }
+                rect.setBottom(newB);
+            }
         }
 
         child->setGeometry(rect);
@@ -265,7 +283,6 @@ void FlowGroup::updateContents()
 
     qreal min = 0;
     QRectF geom(m_scrollWidget->viewportGeometry());
-    const bool horizontal = (m_mainLayout->orientation() == Qt::Horizontal);
     if (horizontal) {
         if (!childs.isEmpty()) {
             min = childs.last()->geometry().right();
@@ -279,7 +296,17 @@ void FlowGroup::updateContents()
             c->resize(c->size().width(), geom.height());
         }
     } else {
-
+        if (!childs.isEmpty()) {
+            min = childs.last()->geometry().bottom();
+        }
+        if (m_prevArrow->isVisible()) {
+            geom.setHeight(geom.height() + m_prevArrow->geometry().height() * 2 + SPACING * 2);
+        }
+        m_container->resize(geom.width(), qMax(min, geom.height()));
+        m_container->setMaximumWidth(geom.width());
+        foreach (QGraphicsWidget *c, childs) {
+            c->resize(geom.width(), c->size().height());
+        }
     }
 
     if ((horizontal && min > geom.width()) ||
@@ -317,6 +344,7 @@ void FlowGroup::constraintsEvent(Plasma::Constraints constraints)
             m_prevArrow->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
             m_nextArrow->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
         }
+        updateContents();
     }
 }
 
