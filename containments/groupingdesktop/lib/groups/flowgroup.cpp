@@ -222,7 +222,10 @@ void FlowGroup::updateContents()
     if (m_spacer->isVisible()) {
         list << m_spacer;
     }
-    list.removeOne(containment()->movingWidget());
+    GroupingContainment *c = containment();
+    if (c) {
+        list.removeOne(c->movingWidget());
+    }
     QList<QGraphicsWidget *> childs;
     foreach (QGraphicsWidget *child, list) {
         for (int i = 0; i < childs.count(); ++i) {
