@@ -392,7 +392,14 @@ void GroupingContainmentPrivate::onWidgetMoved(QGraphicsWidget *widget)
 
         QRectF geom(widget->boundingRect());
 
+        QRectF rect(interesting->contentsRect());
         QPointF pos = interesting->mapFromItem(parent, initialPos);
+        if (pos.x() < rect.left()) {
+            pos.setX(rect.left());
+        }
+        if (pos.y() < rect.top()) {
+            pos.setY(rect.top());
+        }
         interesting->layoutChild(widget, pos);
         interesting->save(*(interesting->d->mainConfigGroup()));
         interesting->saveChildren();
@@ -759,10 +766,10 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                         }
                         QPointF pos = mapToItem(parentGroup, p + rect.topLeft());
                         if (pos.x() < rect.left()) {
-                            pos.setX(0);
+                            pos.setX(rect.left());
                         }
                         if (pos.y() < rect.top()) {
-                            pos.setY(0);
+                            pos.setY(rect.top());
                         }
                         if (parentGroup->showDropZone(pos)) {
                             d->interestingGroup = parentGroup;
