@@ -746,20 +746,27 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                     setMovingWidget(widget);
                 }
                 if (widget == d->movingWidget) {
+                    //use the center of the widget to find the possible groups, but pass to
+                    //their showDropZone the actual position of the widget, modulo an
+                    //eventual shift to make it fit into their contentsRect
                     QPointF p = mapFromScene(widget->scenePos());
-                    p += widget->contentsRect().topLeft();
-                    QList<AbstractGroup *> groups = d->groupsAt(p, widget);
+                    QRectF rect(widget->contentsRect());
+                    QList<AbstractGroup *> groups = d->groupsAt(p + rect.center(), widget);
                     foreach (AbstractGroup *parentGroup ,groups) {
                         if (d->interestingGroup && d->interestingGroup.data() != parentGroup) {
                             d->interestingGroup.data()->showDropZone(QPointF());
                             d->interestingGroup.clear();
                         }
-                        QPointF pos = mapToItem(parentGroup, p);
-                        if (pos.x() > 0 && pos.y() > 0) {
-                            if (parentGroup->showDropZone(pos)) {
-                                d->interestingGroup = parentGroup;
-                                break;
-                            }
+                        QPointF pos = mapToItem(parentGroup, p + rect.topLeft());
+                        if (pos.x() < rect.left()) {
+                            pos.setX(0);
+                        }
+                        if (pos.y() < rect.top()) {
+                            pos.setY(0);
+                        }
+                        if (parentGroup->showDropZone(pos)) {
+                            d->interestingGroup = parentGroup;
+                            break;
                         }
                     }
                 }
