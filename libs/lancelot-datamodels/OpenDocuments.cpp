@@ -21,6 +21,7 @@
 #include "OpenDocuments.h"
 #include "OpenDocuments_p.h"
 #include <KIcon>
+#include <KDebug>
 
 namespace Lancelot {
 namespace Models {
@@ -61,6 +62,8 @@ OpenDocuments::OpenDocuments()
 
 OpenDocuments::~OpenDocuments()
 {
+    kDebug() << "deleting...";
+    delete d;
 }
 
 void OpenDocuments::Private::connectTask(TaskPtr task)
@@ -163,19 +166,6 @@ int OpenDocuments::Private::indexOf(WId wid)
             return i;
         }
     }
-
-    /*
-    QListIterator<Item> i(m_items);
-    int index = 0;
-
-    while (i.hasNext()) {
-        const Item & item = i.next();
-        if (item.data.toUInt() == wid) {
-            return index;
-        }
-        ++index;
-    }
-    */
 
     return -1;
 }

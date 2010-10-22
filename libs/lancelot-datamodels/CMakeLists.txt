@@ -120,7 +120,7 @@ target_link_libraries(
    kworkspace
 )
 
-set_target_properties(lancelot-datamodels PROPERTIES VERSION 1.7.0 SOVERSION 0)
+set_target_properties(lancelot-datamodels PROPERTIES VERSION 1.7.0 SOVERSION 1)
 install(TARGETS lancelot-datamodels ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
