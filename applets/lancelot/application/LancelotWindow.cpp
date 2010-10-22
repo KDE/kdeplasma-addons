@@ -310,7 +310,13 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
         return;
     }
 
+    if (centered) {
+        x = QCursor::pos().x();
+        y = QCursor::pos().y();
+    }
+
     QRect screenRect = QApplication::desktop()->screenGeometry(QPoint(x, y));
+
     updateWindowSize();
 
     if (m_firstOpen ||
