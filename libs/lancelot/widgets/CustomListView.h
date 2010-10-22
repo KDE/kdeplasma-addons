@@ -137,10 +137,6 @@ protected Q_SLOTS:
     void factoryItemAltered(int position);
     void factoryUpdated();
 
-//protected:
-//    L_Override QSizeF sizeHint(Qt::SizeHint which,
-//            const QSizeF & constraint = QSizeF()) const;
-
 private:
     class Private;
     Private * const d;

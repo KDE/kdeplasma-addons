@@ -102,15 +102,6 @@ public:
             top += height;
         }
 
-        /*
-        if (factory->itemCount() > 0) {
-            q->resize(viewport.width(),
-                    item->geometry().bottom() + margins[Plasma::BottomMargin]);
-        } else {
-            q->resize(0, 0);
-        }
-        */
-
         viewportOriginUpdated();
     } //<
 
@@ -153,21 +144,12 @@ public:
     {
         returnIfFactoryNotSet;
 
-        // Due to strange Qt behaviour
-        // which shows items when show() is
-        // invoked although the parent is hidden
-        // if (!q->isVisible()) {
-        //    return;
-        // }
-
         QTransform transform;
         for (int i = 0; i < factory->itemCount(); i++) {
             QGraphicsWidget * item = itemForIndex(i);
             QRectF itemGeometry = item->geometry();
             if (viewport.intersects(itemGeometry)) {
-                //if (q->isVisible()) {
-                    item->show();
-                //}
+                item->show();
                 transform.reset();
                 if (!viewport.contains(itemGeometry)) {
                     QRectF clip = viewport.intersect(itemGeometry);
@@ -286,11 +268,11 @@ void CustomList::viewportChanged(QRectF viewport) //>
         resize(d->viewport.width(), sizeFor(viewport.size()).height());
         d->positionItems();
         d->viewportOriginUpdated();
-    } //else if (d->viewport.topLeft() != viewport.topLeft()) {
-        d->viewport = viewport;
-        d->viewportOriginUpdated();
-        setPos(- d->viewport.topLeft());
-    ///}
+    }
+
+    d->viewport = viewport;
+    d->viewportOriginUpdated();
+    setPos(- d->viewport.topLeft());
 
     d->viewport = viewport;
 } //<
@@ -323,14 +305,6 @@ void CustomList::factoryUpdated() //>
 {
     d->updateSizeInfo();
 } //<
-
-// QSizeF CustomList::sizeHint(Qt::SizeHint which,
-//             const QSizeF & constraint) const //>
-// {
-//     kDebug() << which << d->sizes[which];
-//
-//     return QSizeF(300, d->sizes[which]);
-// } //<
 
 void CustomList::setMargin(Plasma::MarginEdge margin, qreal value) //>
 {
