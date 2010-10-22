@@ -179,7 +179,7 @@ void PartsMergedModel::remove(int index)
     Lancelot::ActionListModel * model = modelAt(index);
     removeModel(index);
     if (m_models.contains(model)) {
-        delete model;
+        model->deleteLater();
         m_models.removeAll(model);
     }
 
