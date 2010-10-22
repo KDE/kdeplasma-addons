@@ -30,6 +30,7 @@
 #include <KMimeType>
 #include <KUrl>
 #include <KLineEdit>
+#include <KCompletion>
 
 #include <Plasma/FrameSvg>
 #include <Plasma/Corona>
@@ -84,6 +85,13 @@ void LancelotPart::init()
     m_searchText = new Plasma::LineEdit(m_root);
     m_searchText->nativeWidget()->setClearButtonShown(true);
     m_searchText->nativeWidget()->setClickMessage(i18nc("Enter the text to search for", "Search..."));
+    m_searchText->nativeWidget()->setContextMenuPolicy(Qt::NoContextMenu);
+    m_completion = new KCompletion();
+    m_searchText->nativeWidget()->setCompletionObject(m_completion);
+    m_searchText->nativeWidget()->setCompletionMode(
+        KGlobalSettings::CompletionMan);
+    m_completion->insertItems(config().readEntry("searchHistory", QStringList()));
+
     m_searchText->nativeWidget()->installEventFilter(this);
     connect(m_searchText->widget(),
         SIGNAL(textChanged(const QString &)),
@@ -206,6 +214,7 @@ void LancelotPart::saveConfig()
 {
     KConfigGroup kcg = config();
     kcg.writeEntry("partData", m_model->serializedData());
+    kcg.writeEntry("searchHistory", m_completion->items());
     kcg.sync();
 }
 
@@ -279,28 +288,31 @@ bool LancelotPart::eventFilter(QObject * object, QEvent * event)
                 break;
 
             case Qt::Key_Tab:
+            {
+                QKeyEvent * endKeyEvent =
+                    new QKeyEvent(QEvent::KeyPress, Qt::Key_End,
+                               Qt::NoModifier);
+                QCoreApplication::sendEvent(m_searchText->nativeWidget(), endKeyEvent);
+
+                endKeyEvent =
+                    new QKeyEvent(QEvent::KeyRelease, Qt::Key_End,
+                               Qt::NoModifier);
+                QCoreApplication::sendEvent(m_searchText->nativeWidget(), endKeyEvent);
+
                 return true;
-            // {
-            //     QKeyEvent * endKeyEvent =
-            //         new QKeyEvent(QEvent::KeyPress, Qt::Key_End,
-            //                    Qt::NoModifier);
-            //     QCoreApplication::sendEvent(editSearch->nativeWidget(), endKeyEvent);
-
-            //     endKeyEvent =
-            //         new QKeyEvent(QEvent::KeyRelease, Qt::Key_End,
-            //                    Qt::NoModifier);
-            //     QCoreApplication::sendEvent(editSearch->nativeWidget(), endKeyEvent);
-
-            //     return true;
-            // }
+            }
 
             case Qt::Key_Return:
             case Qt::Key_Enter:
                 m_list->initialSelection();
 
+                if (!m_searchText->text().isEmpty()) {
+                    m_completion->addItem(m_searchText->text());
+                    config().writeEntry("searchHistory", m_completion->items());
+                }
+
                 m_list->keyPressEvent(keyEvent);
                 return true;
-                // sendKeyEvent(keyEvent);
                 break;
 
             case Qt::Key_Up:

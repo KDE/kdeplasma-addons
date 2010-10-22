@@ -24,6 +24,7 @@
 #include <QGraphicsLinearLayout>
 
 #include <KConfigDialog>
+#include <KCompletion>
 
 #include <Plasma/Applet>
 #include <Plasma/PopupApplet>
@@ -97,6 +98,8 @@ private:
     bool m_iconClickActivation;
     QBasicTimer m_timer;
     int m_rootHeight;
+
+    KCompletion * m_completion;
 
     LancelotPartConfig m_config;
 };
