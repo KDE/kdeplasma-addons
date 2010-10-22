@@ -53,6 +53,7 @@ public:
 
 public Q_SLOTS:
     void configChanged();
+    void activated();
 
     void togglePopup();
     void setPopupVisible(bool show = true);

@@ -126,6 +126,9 @@ void LancelotPart::init()
     connect(m_list->list(), SIGNAL(sizeChanged()),
             this, SLOT(listSizeChanged()));
 
+    connect(this, SIGNAL(activate()),
+            this, SLOT(activated()));
+
     // Listening to immutability
     Plasma::Corona * corona = (Plasma::Corona *) scene();
     immutabilityChanged(corona->immutability());
@@ -546,6 +549,12 @@ void LancelotPart::updateShowingSize()
     m_root->setPreferredHeight(height);
     m_root->setMaximumHeight(height);
 
+}
+
+void LancelotPart::activated()
+{
+    m_searchText->nativeWidget()->setFocus();
+    m_searchText->setFocus();
 }
 
 #include "LancelotPart.moc"
