@@ -23,6 +23,7 @@
 #include <QGraphicsLayout>
 #include <QDataStream>
 #include <QMessageBox>
+#include <QDesktopWidget>
 
 #include <KDebug>
 #include <KIcon>
@@ -40,7 +41,7 @@
 LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
   : Plasma::PopupApplet(parent, args),
     m_list(NULL), m_model(NULL), m_runnnerModel(NULL),
-    m_icon(NULL)
+    m_icon(NULL), m_rootHeight(-1)
 {
     if (args.size() > 0) {
         m_cmdarg = KUrl(args[0].toString()).toLocalFile();
@@ -94,7 +95,7 @@ void LancelotPart::init()
     m_list->setModel(m_model);
 
     m_root->setMinimumSize(200, 200);
-    m_root->setPreferredSize(300, 400);
+    m_root->setPreferredSize(300, 300);
 
     m_list->setMinimumWidth(200);
 
@@ -111,6 +112,9 @@ void LancelotPart::init()
             m_model, SIGNAL(modelContentsUpdated()),
             this, SLOT(modelContentsUpdated())
     );
+
+    connect(m_list->list(), SIGNAL(sizeChanged()),
+            this, SLOT(listSizeChanged()));
 
     // Listening to immutability
     Plasma::Corona * corona = (Plasma::Corona *) scene();
@@ -233,13 +237,26 @@ void LancelotPart::timerEvent(QTimerEvent * event)
 {
     if (event->timerId() == m_timer.timerId()) {
         m_timer.stop();
-        showPopup();
+        setPopupVisible();
     }
     PopupApplet::timerEvent(event);
 }
 
 bool LancelotPart::eventFilter(QObject * object, QEvent * event)
 {
+    if (object == m_icon &&
+            event->type() == QEvent::GraphicsSceneMousePress) {
+
+        QGraphicsSceneMouseEvent * pressEvent =
+            static_cast < QGraphicsSceneMouseEvent * > (event);
+
+        if (pressEvent->button() == Qt::LeftButton) {
+            togglePopup();
+            return true;
+
+        }
+    }
+
     if (!m_iconClickActivation && object == m_icon) {
         if (event->type() == QEvent::GraphicsSceneHoverEnter) {
             m_timer.start(ACTIVATION_TIME, this);
@@ -272,6 +289,22 @@ bool LancelotPart::eventFilter(QObject * object, QEvent * event)
     }
 
     return Plasma::PopupApplet::eventFilter(object, event);
+}
+
+void LancelotPart::togglePopup()
+{
+    setPopupVisible(!isPopupShowing());
+}
+
+void LancelotPart::setPopupVisible(bool show)
+{
+    if (show) {
+        updateShowingSize();
+        Plasma::PopupApplet::showPopup();
+
+    } else {
+        Plasma::PopupApplet::hidePopup();
+    }
 }
 
 void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
@@ -405,11 +438,14 @@ void LancelotPart::showSearchBox(bool value)
     }
 
     m_searchText->setVisible(value);
+    listSizeChanged();
 
     if (value) {
         m_layout->insertItem(0, m_searchText);
+
     } else {
         m_layout->removeItem(m_searchText);
+
     }
 }
 
@@ -418,6 +454,47 @@ void LancelotPart::resetSearch()
     kDebug();
     m_searchText->setText(QString::null);
     search(QString::null);
+}
+
+void LancelotPart::listSizeChanged()
+{
+    if (isIconified()) {
+        qreal height = m_list->list()->preferredHeight();
+
+        if (m_searchText->isVisible()) {
+            height += m_searchText->geometry().height();
+        }
+
+        kDebug() << "setting Size for m_root" << height;
+
+        m_rootHeight = height;
+
+        updateShowingSize();
+    }
+}
+
+void LancelotPart::updateShowingSize()
+{
+    int height = m_rootHeight;
+
+    if (height < 0) {
+        listSizeChanged();
+        return;
+    }
+
+    kDebug() << height;
+
+    QRect screen = QApplication::desktop()->screenGeometry(QCursor::pos());
+    int screenHeight = screen.height();
+
+    if (height > screenHeight * 0.7) {
+        height = screenHeight * 0.7;
+    }
+
+    m_root->setMinimumHeight(height);
+    m_root->setPreferredHeight(height);
+    m_root->setMaximumHeight(height);
+
 }
 
 #include "LancelotPart.moc"

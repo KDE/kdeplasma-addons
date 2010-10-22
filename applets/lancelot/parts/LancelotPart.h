@@ -53,6 +53,9 @@ public:
 public Q_SLOTS:
     void configChanged();
 
+    void togglePopup();
+    void setPopupVisible(bool show = true);
+
 private Q_SLOTS:
     void configAccepted();
     void search(const QString & query);
@@ -69,6 +72,8 @@ private Q_SLOTS:
     void immutabilityChanged(Plasma::ImmutabilityType value);
     void modelContentsUpdated();
     void resetSearch();
+    void listSizeChanged();
+    void updateShowingSize();
 
 private:
     bool loadFromList(const QStringList & list);
@@ -91,6 +96,7 @@ private:
     Plasma::IconWidget * m_icon;
     bool m_iconClickActivation;
     QBasicTimer m_timer;
+    int m_rootHeight;
 
     LancelotPartConfig m_config;
 };

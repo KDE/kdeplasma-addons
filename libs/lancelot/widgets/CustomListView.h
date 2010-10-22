@@ -128,15 +128,24 @@ public:
     L_Override void viewportChanged(QRectF viewport);
     L_Override qreal scrollUnit(Qt::Orientation direction) const;
 
+Q_SIGNALS:
+    void sizeChanged();
+
 protected Q_SLOTS:
     void factoryItemInserted(int position);
     void factoryItemDeleted(int position);
     void factoryItemAltered(int position);
     void factoryUpdated();
 
+//protected:
+//    L_Override QSizeF sizeHint(Qt::SizeHint which,
+//            const QSizeF & constraint = QSizeF()) const;
+
 private:
     class Private;
     Private * const d;
+
+    friend class CustomListView;
 };
 
 /**
@@ -153,6 +162,10 @@ public:
     virtual ~CustomListView();
 
     CustomList * list() const;
+
+protected:
+    L_Override QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
 
 private:
     class Private;

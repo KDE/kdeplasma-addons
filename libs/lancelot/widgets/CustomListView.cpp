@@ -20,6 +20,7 @@
 #include "CustomListView.h"
 
 #include <KIcon>
+#include <KDebug>
 
 namespace Lancelot {
 
@@ -137,6 +138,15 @@ public:
             q->scrollPane()->scrollableWidgetSizeUpdateNeeded();
             sizeUpdate = false;
         }
+
+        q->setPreferredHeight(sizes[Qt::PreferredSize]);
+        q->setMinimumHeight(sizes[Qt::MinimumSize]);
+        q->setMaximumHeight(sizes[Qt::MaximumSize]);
+        q->updateGeometry();
+
+        kDebug() << "Sizes" << sizes[Qt::PreferredSize] << sizes[Qt::MinimumSize] << sizes[Qt::MaximumSize];
+
+        emit q->sizeChanged();
     } //<
 
     void viewportOriginUpdated() //>
@@ -314,6 +324,14 @@ void CustomList::factoryUpdated() //>
     d->updateSizeInfo();
 } //<
 
+// QSizeF CustomList::sizeHint(Qt::SizeHint which,
+//             const QSizeF & constraint) const //>
+// {
+//     kDebug() << which << d->sizes[which];
+//
+//     return QSizeF(300, d->sizes[which]);
+// } //<
+
 void CustomList::setMargin(Plasma::MarginEdge margin, qreal value) //>
 {
     d->margins[margin] = value;
@@ -360,6 +378,12 @@ CustomListView::~CustomListView()
 CustomList * CustomListView::list() const
 {
     return d->list;
+}
+
+QSizeF CustomListView::sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint) const
+{
+    return d->list->sizeHint(which, constraint);
 }
 
 //<
