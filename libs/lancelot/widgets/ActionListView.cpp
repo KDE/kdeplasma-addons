@@ -707,7 +707,7 @@ void ActionListViewItemFactory::itemHovered() //>
 
 } //<
 
-void ActionListViewItemFactory:: updateSelectedBackground(ActionListViewItem * item) //>
+void ActionListViewItemFactory::updateSelectedBackground(ActionListViewItem * item) //>
 {
     if (!item || !item->isEnabled()) {
         item = m_selectedItem;
@@ -1002,6 +1002,12 @@ QSize ActionListView::categoryIconSize() const
 void ActionListView::setShowsExtendersOutside(bool value)
 {
     d->showsExtendersOutside = value;
+    if (value) {
+        clearFlag(ScrollPane::ClipScrollable);
+    } else {
+        setFlag(ScrollPane::ClipScrollable);
+    }
+
     if (!d->itemFactory) {
         return;
     }
