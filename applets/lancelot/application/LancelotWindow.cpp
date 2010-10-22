@@ -269,7 +269,9 @@ void LancelotWindow::lancelotShowItem(int x, int y, const QString & name)
 void LancelotWindow::lancelotHide(bool immediate)
 {
     if (immediate) {
-        editSearch->setText(QString());
+        QTimer::singleShot(100, editSearch->nativeWidget(), SLOT(clear()));
+        // editSearch->setText(QString());
+
         if (m_configUi.appbrowserReset()) {
             passagewayApplications->reset();
         }
