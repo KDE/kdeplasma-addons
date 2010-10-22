@@ -54,6 +54,7 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
 
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
+    setPassivePopup(false);
 
     setPopupIcon(DEFAULT_ICON);
     setBackgroundHints(StandardBackground);
@@ -83,6 +84,7 @@ void LancelotPart::init()
     m_searchText = new Plasma::LineEdit(m_root);
     m_searchText->nativeWidget()->setClearButtonShown(true);
     m_searchText->nativeWidget()->setClickMessage(i18nc("Enter the text to search for", "Search..."));
+    m_searchText->nativeWidget()->installEventFilter(this);
     connect(m_searchText->widget(),
         SIGNAL(textChanged(const QString &)),
         this, SLOT(search(const QString &))
@@ -244,6 +246,7 @@ void LancelotPart::timerEvent(QTimerEvent * event)
 
 bool LancelotPart::eventFilter(QObject * object, QEvent * event)
 {
+    // m_icon events
     if (object == m_icon &&
             event->type() == QEvent::GraphicsSceneMousePress) {
 
@@ -265,27 +268,60 @@ bool LancelotPart::eventFilter(QObject * object, QEvent * event)
         }
     }
 
+    // other events
     if (event->type() == QEvent::KeyPress) {
         bool pass = false;
         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+
         switch (keyEvent->key()) {
+            case Qt::Key_Escape:
+                setPopupVisible(false);
+                break;
+
             case Qt::Key_Tab:
                 return true;
+            // {
+            //     QKeyEvent * endKeyEvent =
+            //         new QKeyEvent(QEvent::KeyPress, Qt::Key_End,
+            //                    Qt::NoModifier);
+            //     QCoreApplication::sendEvent(editSearch->nativeWidget(), endKeyEvent);
+
+            //     endKeyEvent =
+            //         new QKeyEvent(QEvent::KeyRelease, Qt::Key_End,
+            //                    Qt::NoModifier);
+            //     QCoreApplication::sendEvent(editSearch->nativeWidget(), endKeyEvent);
+
+            //     return true;
+            // }
+
             case Qt::Key_Return:
             case Qt::Key_Enter:
-                if (m_list->selectedIndex() == -1) {
-                    m_list->initialSelection();
-                }
+                m_list->initialSelection();
+
+                m_list->keyPressEvent(keyEvent);
+                return true;
+                // sendKeyEvent(keyEvent);
+                break;
+
+            case Qt::Key_Up:
+            case Qt::Key_Down:
+            case Qt::Key_Menu:
+                m_list->keyPressEvent(keyEvent);
+                // sendKeyEvent(keyEvent);
+                break;
+
             default:
                 pass = true;
         }
 
+        kDebug() << "passing the event to the list?" << pass;
         if (pass) {
             m_list->keyPressEvent(keyEvent);
         }
 
         m_searchText->nativeWidget()->setFocus();
         m_searchText->setFocus();
+
     }
 
     return Plasma::PopupApplet::eventFilter(object, event);
@@ -301,6 +337,9 @@ void LancelotPart::setPopupVisible(bool show)
     if (show) {
         updateShowingSize();
         Plasma::PopupApplet::showPopup();
+
+        m_searchText->nativeWidget()->setFocus();
+        m_searchText->setFocus();
 
     } else {
         Plasma::PopupApplet::hidePopup();
