@@ -278,7 +278,7 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
 {
     QWidget * widget = new QWidget();
     m_config.setupUi(widget);
-    m_config.panelIcon->setVisible(m_list->parentItem() == NULL);
+    m_config.panelIcon->setVisible(isIconified());
 
     KConfigGroup kcg = config();
 
@@ -387,11 +387,6 @@ void LancelotPart::search(const QString & query)
 
     if (!m_runnnerModel) {
         m_runnnerModel = new Lancelot::Models::Runner(true);
-        // kDebug() << "connect " <<
-        // connect(
-        //         m_runnnerModel, SIGNAL(itemActivated(int)),
-        //         this, SLOT(resetSearch())
-        //     );
     }
 
     if (query.isEmpty()) {
