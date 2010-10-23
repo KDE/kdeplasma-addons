@@ -210,7 +210,7 @@ QString ComicProvider::requestedComicName() const
 
 void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos )
 {
-    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::Reload, KIO::HideProgressInfo );
     job->setProperty( "uid", id );
     connect( job, SIGNAL( result( KJob* ) ), this, SLOT( jobDone( KJob* ) ) );
 
