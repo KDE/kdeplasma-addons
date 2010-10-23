@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Unit Converter
 Name[ar]=محول الوحدات
+Name[ast]=Conversor d'unidaes
 Name[ca]=Convertidor d'unitats
 Name[ca@valencia]=Convertidor d'unitats
 Name[cs]=Převod jednotek
@@ -52,6 +53,7 @@ Name[zh_CN]=单位转换器
 Name[zh_TW]=單位轉換器
 Comment=Convert values to different units
 Comment[ar]=حول قيمة الى وحدات مختلفة
+Comment[ast]=Convierte valores a distintes unidaes
 Comment[ca]=Converteix valors a diferents unitats
 Comment[ca@valencia]=Converteix valors a diferents unitats
 Comment[cs]=Převod jednotek

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Incoming Message
 Name[ar]=رسالة قادمة
+Name[ast]=Mensax entrante
 Name[ca]=Missatge entrant
 Name[ca@valencia]=Missatge entrant
 Name[cs]=Příchozí zpráva
@@ -55,6 +56,7 @@ Name[zh_TW]=進來的訊息
 Icon=mail-message-new
 Comment=Notification of new messages
 Comment[ar]=إخطار الرسائل الجديدة
+Comment[ast]=Notificación de mensaxes nuevos
 Comment[ca]=Notificació de missatges nous
 Comment[ca@valencia]=Notificació de missatges nous
 Comment[cs]=Upozornění na nové zprávy

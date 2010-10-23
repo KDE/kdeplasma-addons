@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Contacts
 Name[ar]=جهات الاتصال
+Name[ast]=Contautos
 Name[ca]=Contactes
 Name[ca@valencia]=Contactes
 Name[cs]=Kontakty
@@ -55,6 +56,7 @@ Name[zh_CN]=联系人
 Name[zh_TW]=聯絡人
 Comment=Finds entries in your address book
 Comment[ar]=تبحث عن مدخلات في دفتر العناوين
+Comment[ast]=Gueta entraes na so llibreta de señes
 Comment[ca]=Cerca entrades a la llibreta d'adreces
 Comment[ca@valencia]=Cerca entrades a la llibreta d'adreces
 Comment[cs]=Vyhledávání položek v adresáři

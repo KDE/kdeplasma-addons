@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Timer
 Name[ar]=مؤقت
+Name[ast]=Timer
 Name[ca]=Temporitzador
 Name[ca@valencia]=Temporitzador
 Name[cs]=Stopky
@@ -54,6 +55,7 @@ Name[zh_CN]=计时器
 Name[zh_TW]=計時器
 Comment=Countdown over a specified time period
 Comment[ar]=قم بالعد التنازلي خلال فترة زمنية محددة
+Comment[ast]=Cuenta atrás el periodu de tiempu especificáu
 Comment[ca]=Compte enrere durant un període de temps especificat
 Comment[ca@valencia]=Compte arrere durant un període de temps especificat
 Comment[cs]=Odpočítávání událostí

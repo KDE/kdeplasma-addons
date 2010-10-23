@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=LCD Weather Station
 Name[ar]=محطة الطقس المسطحة
+Name[ast]=Estación meteorolóxica LCD
 Name[ca]=Estació meteorològica LCD
 Name[ca@valencia]=Estació meteorològica LCD
 Name[cs]=LCD meteostanice
@@ -53,6 +54,7 @@ Name[zh_CN]=液晶气象站
 Name[zh_TW]=LCD 氣象站
 Comment=Weather reports with an LCD display style
 Comment[ar]=تقارير الطقس  بنمط عرض شاشة مسطحة
+Comment[ast]=Informes meteorolóxicos con un estilu de pantalla LCD
 Comment[ca]=Informes meteorològics en una pantalla d'estil LCD
 Comment[ca@valencia]=Informes meteorològics en una pantalla d'estil LCD
 Comment[cs]=Zprávy o počasí se stylem zobrazení LCD

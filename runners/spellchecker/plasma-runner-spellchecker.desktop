@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Spell Checker Runner
 Name[ar]=مشغل المدقق الإملائي
+Name[ast]=Executar la revisión ortográfica
 Name[ca]=Executor de la verificació ortogràfica
 Name[ca@valencia]=Executor de la verificació ortogràfica
 Name[cs]=Kontrola pravopisu
@@ -51,6 +52,7 @@ Name[zh_CN]=拼写检查运行器
 Name[zh_TW]=拼字檢查執行器
 Comment=Check the spelling of a word
 Comment[ar]=تحقق من هجاء الكلمات
+Comment[ast]=Comprobar la ortografía d'una pallabra
 Comment[ca]=Comprova l'ortografia d'una paraula
 Comment[ca@valencia]=Comprova l'ortografia d'una paraula
 Comment[cs]=Kontrola pravopisu

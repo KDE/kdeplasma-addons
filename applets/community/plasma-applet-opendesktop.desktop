@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Community
+Name[ast]=Comunidá
 Name[ca]=Comunitat
 Name[ca@valencia]=Comunitat
 Name[da]=Community
@@ -39,6 +40,7 @@ Name[zh_CN]=社区
 Name[zh_TW]=社群
 Comment=Communicate using the Social Desktop
 Comment[ar]=تواصبل باستخدام سطح المكتب الاجتماعي
+Comment[ast]=Comuníquese usando l'escritoriu social
 Comment[ca]=Comuniqueu-vos usant l'escriptori social
 Comment[ca@valencia]=Comuniqueu-vos usant l'escriptori social
 Comment[cs]=Komunikujte pomocí Sociálního desktopu
@@ -95,6 +97,7 @@ X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 Keywords=Utilities
 Keywords[ar]=أدوات
+Keywords[ast]=Utilidaes
 Keywords[ca]=Utilitats
 Keywords[ca@valencia]=Utilitats
 Keywords[cs]=Nástroje

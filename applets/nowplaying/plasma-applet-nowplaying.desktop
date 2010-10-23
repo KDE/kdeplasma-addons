@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Now Playing
 Name[ar]=المشغل الآن
+Name[ast]=Sonando agora...
 Name[ca]=Ara s'està escoltant
 Name[ca@valencia]=Ara s'està escoltant
 Name[cs]=Nyní se hraje
@@ -56,6 +57,7 @@ Name[zh_TW]=現正播放
 
 Comment=Displays currently playing audio
 Comment[ar]=أظهر الملفات الصوتية التي تعمل حاليا
+Comment[ast]=Amuesa l'audio que se ta reproduciendo nesti intre
 Comment[ca]=Mostra la reproducció d'àudio actual
 Comment[ca@valencia]=Mostra la reproducció d'àudio actual
 Comment[cs]=Zobrazení informací o právě přehrávaných skladbách

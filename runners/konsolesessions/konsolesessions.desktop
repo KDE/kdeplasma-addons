@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Konsole Sessions
 Name[ar]=جلسات كونسول
+Name[ast]=Sesiones de Konsole
 Name[ca]=Sessions del Konsole
 Name[ca@valencia]=Sessions del Konsole
 Name[cs]=Sezení Konsole
@@ -53,6 +54,7 @@ Name[zh_CN]=Konsole 会话
 Name[zh_TW]=Konsole 工作階段
 Comment=Matches Konsole Sessions
 Comment[ar]=تطابق جلسات كونسول
+Comment[ast]=Gueta sesiones de Konsole que concasen
 Comment[ca]=Coincideix amb les sessions del Konsole
 Comment[ca@valencia]=Coincideix amb les sessions del Konsole
 Comment[cs]=Vyhledávání v sezeních Konsole

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Notes
 Name[ar]=ملاحظات
+Name[ast]=Notes
 Name[be]=Заметкі
 Name[ca]=Notes
 Name[ca@valencia]=Notes
@@ -58,6 +59,7 @@ Name[zh_CN]=便笺
 Name[zh_TW]=便條
 Comment=Desktop sticky notes
 Comment[ar]=ملاحظات لاصقة على سطح المكتب
+Comment[ast]=Notas pegaes nel escritoriu
 Comment[ca]=Notes adherents d'escriptori
 Comment[ca@valencia]=Notes adherents d'escriptori
 Comment[cs]=Lepící poznámkové papírky na plochu

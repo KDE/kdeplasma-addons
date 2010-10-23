@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Bookmarks
+Name[ast]=Marcadores
 Name[ca]=Adreces d'interès
 Name[ca@valencia]=Adreces d'interés
 Name[da]=Bogmærker
@@ -42,6 +43,7 @@ Name[x-test]=xxBookmarksxx
 Name[zh_CN]=书签
 Name[zh_TW]=書籤
 Comment=Quick Access to the Bookmarks
+Comment[ast]=Accesu rápidu a Marcadores
 Comment[ca]=Accés ràpid a les adreces d'interès
 Comment[ca@valencia]=Accés ràpid a les adreces d'interés
 Comment[da]=Hurtig adgang til bogmærker

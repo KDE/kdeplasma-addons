@@ -1,6 +1,7 @@
 [Global]
 Name=Pastebin
 Name[ar]=سلة اللصق
+Name[ast]=Pastebin
 Name[ca]=Pastebin
 Name[ca@valencia]=Pastebin
 Name[cs]=Vkládací koš
@@ -53,6 +54,7 @@ Name[zh_TW]=Pastebin
 IconName=edit-paste
 Comment=Pastebin Widget
 Comment[ar]=ودجة سلة اللصق
+Comment[ast]=Miniaplicación de Pastebin
 Comment[ca]=Estri Pastebin
 Comment[ca@valencia]=Estri Pastebin
 Comment[cs]=Pastebin applet
@@ -102,6 +104,7 @@ Version=1
 [Event/urlcopied]
 Name=Copied pastebin link
 Name[ar]=وصلة سلطة اللصق منسوخة
+Name[ast]=Enllaz de pastebin copiáu
 Name[ca]=Enllaç pastebin copiat
 Name[ca@valencia]=Enllaç pastebin copiat
 Name[cs]=Pastebin odkaz zkopírován
@@ -147,6 +150,7 @@ Name[zh_CN]=已复制 pastebin 链接
 Name[zh_TW]=已複製 pastebin 連結
 Comment=The pastebin URL has been copied to the clipboard
 Comment[ar]=نسخت وصلة سلة اللصق إلى الحافظة.
+Comment[ast]=Copióse'l URL de pastebin al cartafueyu
 Comment[ca]=S'ha copiat l'URL de pastebin al porta-retalls
 Comment[ca@valencia]=S'ha copiat l'URL de pastebin al porta-retalls
 Comment[cs]=Pastebin URL bylo zkopírováno do schránky
