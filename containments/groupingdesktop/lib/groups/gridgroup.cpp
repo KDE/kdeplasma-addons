@@ -443,27 +443,30 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 m_cornerHandle.data()->setParentItem(widget);
 
                 QPointF pos(e->pos());
-                QRectF rect(widget->boundingRect());
-                const qreal width = rect.width() / 2.;
-                const qreal height = rect.height() / 2.;
-                QRectF topLeft(0, 0, width, height);
-                QRectF topRight(width, 0, width, height);
-                QRectF bottomRight(width, height, width, height);
+                QRectF rect(widget->contentsRect());
+                const qreal width = 20;
+                const qreal height = 20;
+                QRectF topLeft(rect.left() - width / 2., rect.top() - height / 2., width, height);
+                QRectF topRight(rect.right() - width / 2., rect.top() - height / 2., width, height);
+                QRectF bottomRight(rect.right() - width / 2., rect.bottom() - height / 2., width, height);
+                QRectF bottomLeft(rect.left() - width / 2., rect.bottom() - height / 2., width, height);
+                m_cornerHandle.data()->show();
                 if (topLeft.contains(pos)) {
-                    m_cornerHandle.data()->setGeometry(0, 0, 20, 20);
+                    m_cornerHandle.data()->setGeometry(topLeft);
                     m_handleCorner = Qt::TopLeftCorner;
                 } else if (topRight.contains(pos)) {
-                    m_cornerHandle.data()->setGeometry(rect.width() - 20, 0, 20, 20);
+                    m_cornerHandle.data()->setGeometry(topRight);
                     m_handleCorner = Qt::TopRightCorner;
                 } else if (bottomRight.contains(pos)) {
-                    m_cornerHandle.data()->setGeometry(rect.width() - 20, rect.height() - 20, 20, 20);
+                    m_cornerHandle.data()->setGeometry(bottomRight);
                     m_handleCorner = Qt::BottomRightCorner;
-                } else {
-                    m_cornerHandle.data()->setGeometry(0, rect.height() - 20, 20, 20);
+                } else if (bottomLeft.contains(pos)) {
+                    m_cornerHandle.data()->setGeometry(bottomLeft);
                     m_handleCorner = Qt::BottomLeftCorner;
+                } else {
+                    m_cornerHandle.data()->setParentItem(this);
+                    m_cornerHandle.data()->hide();
                 }
-
-                m_cornerHandle.data()->show();
             }
         }
         break;
