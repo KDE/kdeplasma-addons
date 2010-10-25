@@ -293,6 +293,7 @@ void FlowGroup::updateContents()
         if (m_prevArrow->isVisible()) {
             geom.setWidth(geom.width() + m_prevArrow->geometry().width() * 2 + SPACING * 2);
         }
+        m_container->setMinimumWidth(min);
         m_container->resize(qMax(min, geom.width()), geom.height());
         m_container->setMaximumHeight(geom.height());
         foreach (QGraphicsWidget *c, childs) {
@@ -305,6 +306,7 @@ void FlowGroup::updateContents()
         if (m_prevArrow->isVisible()) {
             geom.setHeight(geom.height() + m_prevArrow->geometry().height() * 2 + SPACING * 2);
         }
+        m_container->setMinimumHeight(min);
         m_container->resize(geom.width(), qMax(min, geom.height()));
         m_container->setMaximumWidth(geom.width());
         foreach (QGraphicsWidget *c, childs) {
