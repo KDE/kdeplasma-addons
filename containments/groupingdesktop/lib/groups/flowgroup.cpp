@@ -65,6 +65,7 @@ FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_scrollWidget->setMinimumSize(0, 0);
     m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_scrollWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_scrollWidget->setOverflowBordersVisible(false);
     m_container->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
 
     m_mainLayout->addItem(m_scrollWidget);
@@ -312,13 +313,28 @@ void FlowGroup::updateContents()
         }
     }
 
+    QRectF r;
+    if (!childs.isEmpty()) {
+        r = QRectF(childs.first()->pos(), childs.last()->geometry().bottomRight());
+    }
     if ((horizontal && min > geom.width()) ||
         (!horizontal && min > geom.height())) {
-        if (!m_prevArrow->isVisible()) {
-            m_mainLayout->insertItem(0, m_prevArrow);
-            m_mainLayout->addItem(m_nextArrow);
-            m_prevArrow->show();
-            m_nextArrow->show();
+        if ((horizontal && geom.width() >= r.width()) ||
+            (!horizontal && geom.height() >= r.height())) {
+            m_scrollWidget->ensureRectVisible(r);
+            if (m_prevArrow->isVisible()) {
+                m_mainLayout->removeItem(m_prevArrow);
+                m_mainLayout->removeItem(m_nextArrow);
+                m_prevArrow->hide();
+                m_nextArrow->hide();
+            }
+        } else {
+            if (!m_prevArrow->isVisible()) {
+                m_mainLayout->insertItem(0, m_prevArrow);
+                m_mainLayout->addItem(m_nextArrow);
+                m_prevArrow->show();
+                m_nextArrow->show();
+            }
         }
     } else if (m_prevArrow->isVisible()) {
         m_mainLayout->removeItem(m_prevArrow);
