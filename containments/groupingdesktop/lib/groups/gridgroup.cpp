@@ -422,6 +422,33 @@ void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
     }
 }
 
+void GridGroup::checkCorner(const QPointF &pos, const QRectF &rect)
+{
+    const qreal width = 20;
+    const qreal height = 20;
+    QRectF topLeft(rect.left() - width / 2., rect.top() - height / 2., width, height);
+    QRectF topRight(rect.right() - width / 2., rect.top() - height / 2., width, height);
+    QRectF bottomRight(rect.right() - width / 2., rect.bottom() - height / 2., width, height);
+    QRectF bottomLeft(rect.left() - width / 2., rect.bottom() - height / 2., width, height);
+    m_cornerHandle.data()->show();
+    if (topLeft.contains(pos)) {
+        m_cornerHandle.data()->setGeometry(topLeft);
+        m_handleCorner = Qt::TopLeftCorner;
+    } else if (topRight.contains(pos)) {
+        m_cornerHandle.data()->setGeometry(topRight);
+        m_handleCorner = Qt::TopRightCorner;
+    } else if (bottomRight.contains(pos)) {
+        m_cornerHandle.data()->setGeometry(bottomRight);
+        m_handleCorner = Qt::BottomRightCorner;
+    } else if (bottomLeft.contains(pos)) {
+        m_cornerHandle.data()->setGeometry(bottomLeft);
+        m_handleCorner = Qt::BottomLeftCorner;
+    } else {
+        m_cornerHandle.data()->setParentItem(this);
+        m_cornerHandle.data()->hide();
+    }
+}
+
 bool GridGroup::eventFilter(QObject *obj, QEvent *event)
 {
     if (immutability() != Plasma::Mutable) {
@@ -442,31 +469,7 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 }
                 m_cornerHandle.data()->setParentItem(widget);
 
-                QPointF pos(e->pos());
-                QRectF rect(widget->contentsRect());
-                const qreal width = 20;
-                const qreal height = 20;
-                QRectF topLeft(rect.left() - width / 2., rect.top() - height / 2., width, height);
-                QRectF topRight(rect.right() - width / 2., rect.top() - height / 2., width, height);
-                QRectF bottomRight(rect.right() - width / 2., rect.bottom() - height / 2., width, height);
-                QRectF bottomLeft(rect.left() - width / 2., rect.bottom() - height / 2., width, height);
-                m_cornerHandle.data()->show();
-                if (topLeft.contains(pos)) {
-                    m_cornerHandle.data()->setGeometry(topLeft);
-                    m_handleCorner = Qt::TopLeftCorner;
-                } else if (topRight.contains(pos)) {
-                    m_cornerHandle.data()->setGeometry(topRight);
-                    m_handleCorner = Qt::TopRightCorner;
-                } else if (bottomRight.contains(pos)) {
-                    m_cornerHandle.data()->setGeometry(bottomRight);
-                    m_handleCorner = Qt::BottomRightCorner;
-                } else if (bottomLeft.contains(pos)) {
-                    m_cornerHandle.data()->setGeometry(bottomLeft);
-                    m_handleCorner = Qt::BottomLeftCorner;
-                } else {
-                    m_cornerHandle.data()->setParentItem(this);
-                    m_cornerHandle.data()->hide();
-                }
+                checkCorner(e->pos(), widget->contentsRect());
             }
         }
         break;
@@ -579,12 +582,17 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 child->setGeometry(QRectF(newRect.x() * width + rect.x(), newRect.y() * height + rect.y(),
                                           width * newRect.width(), height * newRect.height()));
 
+                QPointF p(child->mapFromScene(static_cast<QGraphicsSceneMouseEvent *>(event)->scenePos()));
+                checkCorner(p, child->contentsRect());
+
                 Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
                 if (anim) {
+                    child->removeEventFilter(this);
                     anim->setTargetWidget(child);
                     anim->setProperty("startGeometry", geom);
                     anim->setProperty("targetGeometry", child->geometry());
                     anim->start(QAbstractAnimation::DeleteWhenStopped);
+                    connect(anim, SIGNAL(finished()), this, SLOT(resizeDone()));
                 }
 
                 m_showGrid = false;
@@ -599,6 +607,12 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
     }
 
     return AbstractGroup::eventFilter(obj, event);
+}
+
+void GridGroup::resizeDone()
+{
+    Plasma::Animation *anim = static_cast<Plasma::Animation *>(sender());
+    anim->targetWidget()->installEventFilter(this);
 }
 
 void GridGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

@@ -60,11 +60,13 @@ class GridGroup : public AbstractGroup
         void animationFinished();
         void appletRemoved(Plasma::Applet *applet);
         void subGroupRemoved(AbstractGroup *group);
+        void resizeDone();
 
     private:
         void updateChild(QGraphicsWidget *child);
         void updateGeometries();
         QGraphicsWidget *childAt(int column, int row);
+        void checkCorner(const QPointF &pos, const QRectF &rect);
 
         int m_rowsNumber;
         int m_colsNumber;
