@@ -61,11 +61,11 @@ FlowGroup::FlowGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     connect(m_prevArrow, SIGNAL(pressed()), this, SLOT(scrollPrev()));
     connect(m_nextArrow, SIGNAL(pressed()), this, SLOT(scrollNext()));
 
-    m_container->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
     m_scrollWidget->setWidget(m_container);
     m_scrollWidget->setMinimumSize(0, 0);
     m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_scrollWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_container->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
 
     m_mainLayout->addItem(m_scrollWidget);
     setLayout(m_mainLayout);
@@ -293,7 +293,6 @@ void FlowGroup::updateContents()
         if (m_prevArrow->isVisible()) {
             geom.setWidth(geom.width() + m_prevArrow->geometry().width() * 2 + SPACING * 2);
         }
-        m_container->setMinimumWidth(min);
         m_container->resize(qMax(min, geom.width()), geom.height());
         m_container->setMaximumHeight(geom.height());
         foreach (QGraphicsWidget *c, childs) {
@@ -306,7 +305,6 @@ void FlowGroup::updateContents()
         if (m_prevArrow->isVisible()) {
             geom.setHeight(geom.height() + m_prevArrow->geometry().height() * 2 + SPACING * 2);
         }
-        m_container->setMinimumHeight(min);
         m_container->resize(geom.width(), qMax(min, geom.height()));
         m_container->setMaximumWidth(geom.width());
         foreach (QGraphicsWidget *c, childs) {
