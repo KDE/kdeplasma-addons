@@ -39,6 +39,9 @@
 
 REGISTER_GROUP(GridGroup)
 
+static const int CORNERHANDLE_WIDTH = 20;
+static const int CORNERHANDLE_HEIGHT = 20;
+
 GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
          : AbstractGroup(parent, wFlags),
            m_showGrid(false),
@@ -425,12 +428,14 @@ void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 
 void GridGroup::checkCorner(const QPointF &pos, const QRectF &rect)
 {
-    const qreal width = 20;
-    const qreal height = 20;
-    QRectF topLeft(rect.left() - width / 2., rect.top() - height / 2., width, height);
-    QRectF topRight(rect.right() - width / 2., rect.top() - height / 2., width, height);
-    QRectF bottomRight(rect.right() - width / 2., rect.bottom() - height / 2., width, height);
-    QRectF bottomLeft(rect.left() - width / 2., rect.bottom() - height / 2., width, height);
+    QRectF topLeft(rect.left() - CORNERHANDLE_WIDTH / 2., rect.top() - CORNERHANDLE_HEIGHT / 2.,
+                   CORNERHANDLE_WIDTH, CORNERHANDLE_HEIGHT);
+    QRectF topRight(rect.right() - CORNERHANDLE_WIDTH / 2., rect.top() - CORNERHANDLE_HEIGHT / 2.,
+                    CORNERHANDLE_WIDTH, CORNERHANDLE_HEIGHT);
+    QRectF bottomRight(rect.right() - CORNERHANDLE_WIDTH / 2., rect.bottom() - CORNERHANDLE_HEIGHT / 2.,
+                       CORNERHANDLE_WIDTH, CORNERHANDLE_HEIGHT);
+    QRectF bottomLeft(rect.left() - CORNERHANDLE_WIDTH / 2., rect.bottom() - CORNERHANDLE_HEIGHT / 2.,
+                      CORNERHANDLE_WIDTH, CORNERHANDLE_HEIGHT);
     m_cornerHandle.data()->show();
     if (topLeft.contains(pos)) {
         m_cornerHandle.data()->setGeometry(topLeft);
@@ -465,7 +470,7 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 if (!m_cornerHandle) {
                     m_cornerHandle = new Spacer(this);
                     m_cornerHandle.data()->hide();
-                    m_cornerHandle.data()->resize(20, 20);
+                    m_cornerHandle.data()->resize(CORNERHANDLE_WIDTH, CORNERHANDLE_HEIGHT);
                     m_cornerHandle.data()->installEventFilter(this);
                 }
                 m_cornerHandle.data()->setParentItem(widget);
@@ -508,28 +513,42 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 QSizeF size(child->effectiveSizeHint(Qt::MinimumSize));
                 const QPointF delta = mapFromScene(e->scenePos()) - m_resizeStartPos;
                 switch (m_handleCorner) {
-                    case Qt::TopLeftCorner:
-                        geom.setTopLeft(geom.topLeft() + delta);
-                        geom.setWidth(geom.width() >= size.width() ? geom.width() : size.width());
-                        geom.setHeight(geom.height() >= size.height() ? geom.height() : size.height());
+                    case Qt::TopLeftCorner: {
+                            const qreal top = geom.top() + delta.y();
+                            const qreal left = geom.left() + delta.x();
+                            geom.setTop(geom.bottom() - top >= size.height() ? top : geom.bottom() - size.height());
+                            geom.setLeft(geom.right() - left >= size.width() ? left : geom.right() - size.width());
+                        }
                         break;
-                    case Qt::TopRightCorner:
-                        geom.setTopRight(geom.topRight() + delta);
-                        geom.setWidth(geom.width() >= size.width() ? geom.width() : size.width());
-                        geom.setHeight(geom.height() >= size.height() ? geom.height() : size.height());
-                        pos = QPointF(geom.width() - 10, 0);
+                    case Qt::TopRightCorner: {
+                            const qreal top = geom.top() + delta.y();
+                            const qreal right = geom.right() + delta.x();
+                            geom.setTop(geom.bottom() - top >= size.height() ? top : geom.bottom() - size.height());
+                            geom.setRight(right - geom.left() >= size.width() ? right : geom.left() + size.width());
+                            qreal l, t, r, b;
+                            child->getContentsMargins(&l, &t, &r, &b);
+                            pos = QPointF(geom.width() - r - CORNERHANDLE_WIDTH / 2., t - CORNERHANDLE_HEIGHT / 2.);
+                        }
                         break;
-                    case Qt::BottomRightCorner:
-                        geom.setBottomRight(geom.bottomRight() + delta);
-                        geom.setWidth(geom.width() >= size.width() ? geom.width() : size.width());
-                        geom.setHeight(geom.height() >= size.height() ? geom.height() : size.height());
-                        pos = QPointF(geom.width() - 10, geom.height() - 10);
+                    case Qt::BottomRightCorner: {
+                            const qreal bottom = geom.bottom() + delta.y();
+                            const qreal right = geom.right() + delta.x();
+                            geom.setBottom(bottom - geom.top() >= size.height() ? bottom : geom.top() + size.height());
+                            geom.setRight(right - geom.left() >= size.width() ? right : geom.left() + size.width());
+                            qreal l, t, r, b;
+                            child->getContentsMargins(&l, &t, &r, &b);
+                            pos = QPointF(geom.width() - r - CORNERHANDLE_WIDTH / 2., geom.height() - b - CORNERHANDLE_HEIGHT / 2.);
+                        }
                         break;
-                    case Qt::BottomLeftCorner:
-                        geom.setBottomLeft(geom.bottomLeft() + delta);
-                        geom.setWidth(geom.width() >= size.width() ? geom.width() : size.width());
-                        geom.setHeight(geom.height() >= size.height() ? geom.height() : size.height());
-                        pos = QPointF(0, geom.height() - 10);
+                    case Qt::BottomLeftCorner: {
+                            const qreal bottom = geom.bottom() + delta.y();
+                            const qreal left = geom.left() + delta.x();
+                            geom.setBottom(bottom - geom.top() >= size.height() ? bottom : geom.top() + size.height());
+                            geom.setLeft(geom.right() - left >= size.width() ? left : geom.right() - size.width());
+                            qreal l, t, r, b;
+                            child->getContentsMargins(&l, &t, &r, &b);
+                            pos = QPointF(l - CORNERHANDLE_WIDTH / 2., geom.height() - b - CORNERHANDLE_HEIGHT / 2.);
+                        }
                         break;
                 }
                 child->setGeometry(geom);
