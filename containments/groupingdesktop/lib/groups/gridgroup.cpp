@@ -211,10 +211,11 @@ void GridGroup::updateChild(QGraphicsWidget *child)
     int j = qRound(pos.y() / height);
     int cols = qRound(geom.width() / width);
     int rows = qRound(geom.height() / height);
-    while (cols * width < child->minimumSize().width()) {
+    QSizeF minSize(child->effectiveSizeHint(Qt::MinimumSize));
+    while (cols * width < minSize.width()) {
         ++cols;
     }
-    while (rows * height < child->minimumSize().height()) {
+    while (rows * height < minSize.height()) {
         ++rows;
     }
     rows = (rows > 0 ? rows : 1);
@@ -504,7 +505,7 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 QGraphicsWidget *child = m_cornerHandle.data()->parentWidget();
                 QRectF geom(m_resizeStartGeom);
                 QPointF pos(m_cornerHandle.data()->pos());
-                QSizeF size(child->minimumSize());
+                QSizeF size(child->effectiveSizeHint(Qt::MinimumSize));
                 const QPointF delta = mapFromScene(e->scenePos()) - m_resizeStartPos;
                 switch (m_handleCorner) {
                     case Qt::TopLeftCorner:
@@ -552,10 +553,11 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 int j = qRound(pos.y() / height);
                 int cols = qRound(geom.width() / width);
                 int rows = qRound(geom.height() / height);
-                while (cols * width < child->minimumSize().width()) {
+                QSizeF minSize(child->effectiveSizeHint(Qt::MinimumSize));
+                while (cols * width < minSize.width()) {
                     ++cols;
                 }
-                while (rows * height < child->minimumSize().height()) {
+                while (rows * height < minSize.height()) {
                     ++rows;
                 }
                 i = (i > 0 ? i : 0);
