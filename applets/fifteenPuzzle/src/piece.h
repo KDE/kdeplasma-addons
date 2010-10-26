@@ -25,38 +25,30 @@
 #include <QGraphicsPixmapItem>
 
 #include <Plasma/Svg>
+
 class Fifteen;
 
 class Piece : public QGraphicsWidget
 {
   Q_OBJECT
   public:
-    Piece(int id, int gamePos, Fifteen * parent, Plasma::Svg *svg);
+    Piece(int id, Fifteen * parent, Plasma::Svg *svg);
     int id() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void showNumeral(bool show);
-    int boardX() const;
-    int boardY() const;
-    int boardPos() const;
-    bool isBlank() const;
-    void setGamePos(int gamePos);
     void setPartialPixmap(QPixmap pixmap);
     void setSplitImage(bool splitPixmap);
     void setFont(const QFont &font);
-    void shuffling();
 
   private:
     int m_id;
     bool m_numeral;
-    bool m_isBlank;
-    int m_gamePos;
     bool m_splitPixmap;
     QGraphicsPixmapItem m_partialPixmap;
     QFont m_font;
     Plasma::Svg *m_svg;
     QGraphicsRectItem *m_bg;
     Fifteen *m_fifteen;
-
 
   protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

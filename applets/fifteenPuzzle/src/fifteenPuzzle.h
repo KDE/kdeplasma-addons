@@ -21,6 +21,11 @@
 #define FIFTEENPUZZLE_H
 
 #include <plasma/popupapplet.h>
+#include <Plasma/Label>
+#include <Plasma/PushButton>
+
+#include <QGraphicsWidget>
+#include <QTimer>
 
 #include "fifteen.h"
 #include "ui_fifteenPuzzleConfig.h"
@@ -38,14 +43,18 @@ class FifteenPuzzle : public Plasma::PopupApplet
     void configAccepted();
     
   public slots:
-    void showSolvedMessage(int ms);
     void configChanged();
 
   private:
     void createMenu();
+    QGraphicsWidget *m_graphicsWidget;
     QPixmap *m_pixmap;
     Fifteen *m_board;
     QList<QAction *> m_actions;
+    QTimer m_timer;
+    int m_seconds;
+    Plasma::Label *m_timeLabel;
+    Plasma::PushButton *m_shuffleButton;
     bool m_usePlainPieces;
     QString m_imagePath;
     bool m_showNumerals;
@@ -53,6 +62,8 @@ class FifteenPuzzle : public Plasma::PopupApplet
 
   private slots:
     void createConfigurationInterface(KConfigDialog *parent);
+    void startTimer();
+    void updateTimer();
 };
 
 K_EXPORT_PLASMA_APPLET(fifteenPuzzle, FifteenPuzzle)

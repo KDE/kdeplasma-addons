@@ -21,7 +21,7 @@
 
 //Qt
 #include <QtCore/QFile>
-#include <QGraphicsLinearLayout>
+#include <QGraphicsAnchorLayout>
 
 //KDE
 #include <KConfigDialog>
@@ -33,13 +33,44 @@
 static const char defaultImage[] = "fifteenPuzzle/blanksquare";
 
 FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
-    : Plasma::PopupApplet(parent, args)
+    : Plasma::PopupApplet(parent, args),
+      m_pixmap(0),
+      m_seconds(0)
 {
   setHasConfigurationInterface(true);
   setPopupIcon("fifteenpuzzle");
-  m_board = new Fifteen(this);
-  m_pixmap = 0;
-  connect(m_board, SIGNAL(puzzleSorted(int)), this, SLOT(showSolvedMessage(int)));
+
+  m_timer.setInterval(1000);
+  m_timer.setSingleShot(false);
+  connect(&m_timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
+
+  m_graphicsWidget = new QGraphicsWidget(this);
+  QGraphicsAnchorLayout *layout = new QGraphicsAnchorLayout();
+  m_graphicsWidget->setLayout(layout);
+
+  m_board = new Fifteen(m_graphicsWidget);
+  connect(m_board, SIGNAL(started()), this, SLOT(startTimer()));
+  connect(m_board, SIGNAL(solved()), &m_timer, SLOT(stop()));
+  layout->addAnchors(m_board, layout, Qt::Horizontal);
+  layout->addAnchor(m_board, Qt::AnchorTop, layout, Qt::AnchorTop);
+
+  m_shuffleButton = new Plasma::PushButton(m_graphicsWidget);
+  m_shuffleButton->setText(i18n("Shuffle"));
+  m_shuffleButton->setIcon(KIcon("roll"));
+  m_shuffleButton->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed,
+                                             QSizePolicy::PushButton));
+  connect(m_shuffleButton, SIGNAL(clicked()), m_board, SLOT(shuffle()));
+  layout->addAnchor(m_shuffleButton, Qt::AnchorTop, m_board, Qt::AnchorBottom);
+  layout->addCornerAnchors(m_shuffleButton, Qt::BottomLeftCorner, layout, Qt::BottomLeftCorner);
+
+  m_timeLabel = new Plasma::Label(m_graphicsWidget);
+  m_timeLabel->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed,
+                                         QSizePolicy::Label));
+  updateTimer();
+  layout->addAnchor(m_timeLabel, Qt::AnchorTop, m_board, Qt::AnchorBottom);
+  layout->addCornerAnchors(m_timeLabel, Qt::BottomRightCorner, layout, Qt::BottomRightCorner);
+
+  layout->addAnchor(m_shuffleButton, Qt::AnchorRight, m_timeLabel, Qt::AnchorLeft)->setSizePolicy(QSizePolicy::MinimumExpanding);
 }
 
 void FifteenPuzzle::init()
@@ -51,7 +82,7 @@ void FifteenPuzzle::init()
 
 QGraphicsWidget* FifteenPuzzle::graphicsWidget()
 {
-    return m_board;
+    return m_graphicsWidget;
 }
 
 void FifteenPuzzle::configChanged()
@@ -125,11 +156,21 @@ void FifteenPuzzle::configAccepted()
     emit configNeedsSaving();
 }
 
-void FifteenPuzzle::showSolvedMessage(int ms)
+void FifteenPuzzle::startTimer()
 {
-  QTime overallTime(0,0,0,0);
-  overallTime = overallTime.addMSecs(ms);
-  Plasma::Applet::showMessage(KIcon("dialog-information"), QString("Time elapsed: %1").arg(overallTime.toString("hh:mm:ss.zzz")), Plasma::ButtonOk);
+    m_seconds = 0;
+    updateTimer();
+    m_timer.start();
+}
+
+void FifteenPuzzle::updateTimer()
+{
+    // update the time before incrementing, as this will be called before any time has elapsed
+    QString min = QString::number(m_seconds / 60).rightJustified(2, QLatin1Char('0'), false);
+    QString sec = QString::number(m_seconds % 60).rightJustified(2, QLatin1Char('0'), false);
+    m_timeLabel->setText(i18nc("The time since the puzzle started, in minutes and seconds",
+                               "Time: %1:%2", min, sec));
+    m_seconds++;
 }
 
 void FifteenPuzzle::createMenu()

@@ -30,14 +30,12 @@
 #include <KDebug>
 #include "fifteen.h"
 
-Piece::Piece(int id, int gamePos, Fifteen* parent, Plasma::Svg* svg)
+Piece::Piece(int id, Fifteen* parent, Plasma::Svg* svg)
     : QGraphicsWidget(parent)
 {
   m_id = id;
-  m_isBlank = (m_id == parent->size() * parent->size());
   m_numeral = true;
   m_splitPixmap = false;
-  m_gamePos = gamePos;
   m_svg = svg;
   m_fifteen = parent;
   m_bg = new QGraphicsRectItem(this);
@@ -47,31 +45,6 @@ Piece::Piece(int id, int gamePos, Fifteen* parent, Plasma::Svg* svg)
 int Piece::id() const
 {
   return m_id;
-}
-
-int Piece::boardX() const
-{
- return m_gamePos % m_fifteen->size();
-}
-
-int Piece::boardY() const
-{
-  return m_gamePos / m_fifteen->size();
-}
-
-bool Piece::isBlank() const
-{
-  return m_isBlank;
-}
-
-int Piece::boardPos() const
-{
-  return m_gamePos;
-}
-
-void Piece::setGamePos(int gamePos)
-{
-  m_gamePos = gamePos;
 }
 
 void Piece::setSplitImage(bool splitPixmap)
@@ -98,15 +71,11 @@ void Piece::showNumeral(bool show)
 void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                   QWidget *widget)
 {
-  if (m_isBlank) {
-    return;
-  }
-
   if (m_splitPixmap) {
     m_partialPixmap.paint(painter, option, widget);
   } else {
     // here we assume that the svg has already been resized correctly by Fifteen::updatePixmaps()
-     QColor c(m_fifteen->color());
+    QColor c(m_fifteen->color());
     c.setAlphaF(0.5);
     painter->setBrush(c);
     painter->drawRect(boundingRect());
@@ -137,15 +106,10 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 }
 
-void Piece::shuffling()
-{
-  emit pressed(this);
-}
-
 void Piece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
   Q_UNUSED(event);
-  if (m_isBlank || event->button() != Qt::LeftButton) {
+  if (event->button() != Qt::LeftButton) {
       event->ignore();
       return;
   }

@@ -23,6 +23,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QFontMetrics>
+#include <QTime>
 
 #include <KDebug>
 #include <KGlobalSettings>
@@ -32,13 +33,13 @@
 
 Fifteen::Fifteen(QGraphicsItem* parent, int size)
     : QGraphicsWidget(parent),
-      m_size(0), // this will get overwritten in setSize(), but needs an initial value
+      m_size(0), // this will immediately get overwritten by setSize(size) below, but needs an initial value
       m_pixmap(0)
 {
   m_pieces.resize(size*size);
   m_splitPixmap = false;
   m_numerals = true;
-  m_wasShuffled = false;
+  m_solved = true;
   m_svg = new Plasma::Svg();
   setSize(size);
   setCacheMode(DeviceCoordinateCache);
@@ -56,7 +57,7 @@ void Fifteen::setSize(int size)
     if (m_size == size) {
         return;
     }
-    m_size = size;
+    m_size = qMax(size, 1);
     startBoard();
     setPreferredSize(48 * size, 48 * size);
     setMinimumSize(24 * size, 24 * size);
@@ -89,80 +90,137 @@ void Fifteen::setPixmap(QPixmap *pixmap)
 
 void Fifteen::updatePixmaps()
 {
-  if (!m_pixmap) {
-      return;
-  }
-  QSize size = m_pieces[0]->size().toSize() * m_size;
-  QPixmap copyPixmap = m_pixmap->scaled(size);
- 
-  for(int y = 0; y < m_size; y++) {
-    for(int x = 0; x < m_size; x++) {
-      int i = (y * m_size) + x;
-  
-      if(!m_pieces[i]) continue;
-      QRect rect = m_pieces[i]->boundingRect().toRect();
-      int posX = x * rect.width();
-      int posY = y * rect.height();
-      
-      m_pieces[i]->setPartialPixmap(copyPixmap.copy(posX, posY, rect.width(), rect.height()));
+    if (!m_pixmap) {
+        return;
     }
-  }
+    QSize size = m_pieces[0]->size().toSize() * m_size;
+    QPixmap copyPixmap = m_pixmap->scaled(size);
+ 
+    for (int i = 0; i < m_size * m_size; i++) {
+        if (!m_pieces[i]) continue;
+        QRect rect = m_pieces[i]->boundingRect().toRect();
+        // use the index of this piece in the solved puzzle to decide which pixmap
+        // tile to use; the index in the array (i) is just its current position
+        int index = m_pieces[i]->id() - 1;
+        int posX = (index % m_size) * rect.width();
+        int posY = (index / m_size) * rect.height();
+      
+        m_pieces[i]->setPartialPixmap(copyPixmap.copy(posX, posY, rect.width(), rect.height()));
+    }
 }
 
-void Fifteen::clearPieces()
+void Fifteen::startBoard()
 {
-  for (int i = 0; i < (m_size * m_size); ++i){
-    delete m_pieces[i];
-  }
-}
-
-void Fifteen::startBoard(){
   qDeleteAll(m_pieces);
   m_pieces.fill(NULL);
   int d = m_size * m_size;
   m_pieces.resize(d);
   for (int i = 0; i < d; ++i) {
-    m_pieces[i] = new Piece(i+1, i, this, m_svg);
-    connect(m_pieces[i], SIGNAL(pressed(Piece*)), this, SLOT(piecePressed(Piece*)));
+      m_pieces[i] = new Piece(i+1, this, m_svg);
+      if (i == d - 1) {
+          m_blank = m_pieces[i];
+      } else {
+          connect(m_pieces[i], SIGNAL(pressed(Piece*)), this, SLOT(piecePressed(Piece*)));
+      }
   }
-  m_blank = m_pieces[d-1];
+  m_solved = true;
   updatePieces();
   updatePixmaps();
 }
 
 void Fifteen::shuffle()
 {
-  int numSteps = m_size * m_size;
-  while(--numSteps){
-    bool orientation = (rand()%2 == 0); // true rols, false column
-    int posClicked = rand()%m_size;
-    while(posClicked == (orientation?m_blank->boardX():m_blank->boardY())){
-      posClicked = rand()%m_size;
+    // shuffle the array of pieces
+    qsrand(QTime::currentTime().msec());
+    for (int i = m_size * m_size - 1; i > 0; i--) {
+        // choose a random number such that 0 <= rand <= i
+        int rand = qrand() % (i + 1);
+        qSwap(m_pieces[i], m_pieces[rand]);
     }
-    if(orientation){
-      itemAt( posClicked, m_blank->boardY())->shuffling();
+
+    // make sure the new board is solveable
+    
+    // count the number of inversions
+    // an inversion is a pair of tiles at positions a, b where
+    // a < b but value(a) > value(b)
+
+    // also count the number of lines the blank tile is from the bottom
+    int inversions = 0;
+    int blankRow = -1;
+    for (int i = 0; i < m_size * m_size; i++) {
+        if (m_pieces[i] == m_blank) {
+            blankRow = i / m_size;
+            continue;
+        }
+        for (int j = 0; j < i; j++) {
+            if (m_pieces[j] == m_blank) {
+                continue;
+            }
+            if (m_pieces[i]->id() < m_pieces[j]->id()) {
+                inversions++;
+            }
+        }
     }
-    else{
-      itemAt(m_blank->boardX(), posClicked)->shuffling();
+
+    if (blankRow == -1) {
+        kDebug() << "Unable to find row of blank tile";
     }
-  }
-  m_time.start();
-  m_wasShuffled = true;
+
+    // we have a solveable board if:
+    // size is odd:  there are an even number of inversions
+    // size is even: the number of inversions is odd if and only if
+    //               the blank tile is on an odd row from the bottom
+    bool solveable = (m_size % 2 == 1 && inversions % 2 == 0) ||
+                     (m_size % 2 == 0 && (inversions % 2 == 0) == ((m_size - blankRow) % 2 == 1));
+    if (!solveable) {
+        // make the grid solveable by swapping two adjacent pieces around
+        int pieceA = 0;
+        int pieceB = 1;
+        if (m_pieces[pieceA] == m_blank) {
+            pieceA = m_size + 1;
+        } else if (m_pieces[pieceB] == m_blank) {
+            pieceB = m_size;
+        }
+        qSwap(m_pieces[pieceA], m_pieces[pieceB]);
+    }
+
+    // move the pieces to their new locations
+    for (int i = 0; i < m_size * m_size; i++) {
+        if (m_pieces[i] == m_blank) {
+            // don't animate the blank piece
+            int width = contentsRect().width() / m_size;
+            int height = contentsRect().height() / m_size;
+            m_pieces[i]->setPos((i % m_size) * width, (i / m_size) * height);
+        } else {
+            movePiece(m_pieces[i], i % m_size, i / m_size);
+        }
+    }
+
+    // assume the shuffle didn't result in a sorted board
+    // in the unlikely event that it did, the user just has to move a tile
+    // and put it back again to solve it
+    m_solved = false;
+    toggleBlank(false);
+    emit started();
 }
 
 void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
   Q_UNUSED(event);
 
-  QSizeF size = contentsRect().size();
-  int width = size.width() / m_size;
-  int height = size.height() / m_size;
+  updatePieces();
+  updatePixmaps();
+}
+
+void Fifteen::updateFont()
+{
+  int width = contentsRect().width() / m_size;
+  int height = contentsRect().height() / m_size;
 
   QString test = "99";
-  QFont f = font();
   int smallest = KGlobalSettings::smallestReadableFont().pixelSize();
-  Piece *x = m_pieces[0];
-  int fontSize = x?x->boundingRect().height()/3:14;
+  int fontSize = height / 3;
+  QFont f = font();
   f.setBold(true);
   f.setPixelSize(fontSize);
   
@@ -182,9 +240,6 @@ void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
   }
 
   m_font = f;
-
-  updatePieces();
-  updatePixmaps();
 }
 
 void Fifteen::setShowNumerals(bool show)
@@ -202,108 +257,145 @@ void Fifteen::setSvg(const QString &path, bool identicalPieces)
 
 void Fifteen::updatePieces()
 {
-  bool sorted = true;
-  QSizeF size = contentsRect().size();
-  int width = size.width() / m_size;
-  int height = size.height() / m_size;
+    updateFont();
 
-  for (int i = 0; i < (m_size * m_size); ++i) {
-    if (!m_pieces[i]) continue;
-    m_pieces[i]->showNumeral(m_numerals);
-    m_pieces[i]->setSplitImage( (m_pixmap)?true:false );
-    m_pieces[i]->resize(QSizeF(width, height));
-    m_pieces[i]->setPos(m_pieces[i]->boardX() * width, m_pieces[i]->boardY() * height);
-    m_pieces[i]->setFont(m_font);
-    m_pieces[i]->update();
-    if(itemAt(i%m_size, i/m_size)->id() != i+1) sorted = false;
-  }
+    QSizeF size = contentsRect().size();
+    int width = size.width() / m_size;
+    int height = size.height() / m_size;
+
+    for (int i = 0; i < m_size * m_size; ++i) {
+        m_pieces[i]->showNumeral(m_numerals);
+        m_pieces[i]->setSplitImage(m_pixmap != NULL);
+        m_pieces[i]->resize(QSizeF(width, height));
+        m_pieces[i]->setPos((i % m_size) * width, (i / m_size) * height);
+        m_pieces[i]->setFont(m_font);
+        m_pieces[i]->update();
+    }
   
-  if (!m_pixmap) {
-    m_svg->resize(width, height);
-  }
-  
-  if(sorted && m_wasShuffled) {
-    emit puzzleSorted(m_time.elapsed());
-    m_wasShuffled = false;
-  }
+    if (!m_pixmap) {
+        m_svg->resize(width, height);
+    }
+}
+
+void Fifteen::checkSolved()
+{
+    bool sorted = true;
+    for (int i = 0; i < m_size * m_size; i++) {
+        if (m_pieces[i]->id() != i + 1) {
+            sorted = false;
+            break;
+        }
+    }
+
+    if (m_solved && !sorted) {
+        // the board has already been solved, so the user is playing with tiles on a solved board
+        toggleBlank(false);
+    } else if (m_solved && sorted) {
+        // the user has finished playing with tiles on a solved board, and it is solved again
+        toggleBlank(true);
+    } else if (!m_solved && sorted) {
+        emit solved();
+        m_solved = true;
+        toggleBlank(true);
+    }
 }
 
 void Fifteen::piecePressed(Piece *item)
 {
-  int ix = item->boardX();
-  int iy = item->boardY();
-  int bx = m_blank->boardX();
-  int by = m_blank->boardY();
+    int itemX = -1, itemY = -1, blankX = -1, blankY = -1;
+    for (int i = 0; i < m_size * m_size; i++) {
+        if (item == m_pieces[i]) {
+            itemX = i % m_size;
+            itemY = i / m_size;
+        }
+        if (m_blank == m_pieces[i]) {
+            blankX = i % m_size;
+            blankY = i / m_size;
+        }
+    }
 
-  if (ix == bx && iy != by) {
-    if (iy > by) {
-      for (; by < iy; by++) {
-        // swap the piece at ix,by+1 with blank
-        swapPieceWithBlank(itemAt(ix, by + 1));
-      }
+    if (itemX == -1 || itemY == -1 || blankX == -1 || blankY == -1) {
+        kDebug() << "Missing piece!";
+        return;
     }
-    else if (iy < by) {
-      for (; by > iy; by--) {
-        // swap the piece at ix,by-1 with blank
-        swapPieceWithBlank(itemAt(ix, by - 1));
-      }
+
+    if (blankX == itemX && blankY != itemY) {
+        while (blankY < itemY) {
+            swapPieceWithBlank(itemX, blankY + 1, blankX, blankY);
+            blankY++;
+        }
+        while (blankY > itemY) {
+            swapPieceWithBlank(itemX, blankY - 1, blankX, blankY);
+            blankY--;
+        }
+    } else if (blankY == itemY && blankX != itemX) {
+        while (blankX < itemX) {
+            swapPieceWithBlank(blankX + 1, itemY, blankX, blankY);
+            blankX++;
+        }
+        while (blankX > itemX) {
+            swapPieceWithBlank(blankX - 1, itemY, blankX, blankY);
+            blankX--;
+        }
     }
-  }
-  else if (iy == by && ix != bx) {
-    if (ix > bx) {
-      for (; bx < ix; bx++) {
-        // swap the piece at bx+1,iy with blank
-        swapPieceWithBlank(itemAt(bx + 1, iy));
-      }
-    }
-    else if (ix < bx) {
-      for (; bx > ix; bx--) {
-        // swap the piece at bx-1,iy with blank
-        swapPieceWithBlank(itemAt(bx - 1, iy));
-      }
-    }
-  }
-  updatePieces();
+    
+    checkSolved();
 }
 
-Piece* Fifteen::itemAt(int gameX, int gameY)
+void Fifteen::swapPieceWithBlank(int pieceX, int pieceY, int blankX, int blankY)
 {
-  int gamePos = (gameY * m_size) + gameX;
-  for (int i = 0; i < (m_size * m_size); i++) {
-    if (m_pieces[i]->boardPos() == gamePos) {
-      return m_pieces[i];
-    }
-  }
-  return NULL;
+    Piece *piece = m_pieces[(pieceY * m_size) + pieceX];
+
+    int width = contentsRect().width() / m_size;
+    int height = contentsRect().height() / m_size;
+    QPointF pos = QPointF(pieceX * width, pieceY * height);
+
+    // swap widget positions
+    movePiece(piece, blankX, blankY);
+    m_blank->setPos(pos);
+
+    // swap game positions
+    qSwap(m_pieces[(pieceY * m_size) + pieceX],
+          m_pieces[(blankY * m_size) + blankX]);
 }
 
-void Fifteen::swapPieceWithBlank(Piece *item)
+void Fifteen::movePiece(Piece *piece, int newX, int newY)
 {
-  int width = contentsRect().size().width() / m_size;
-  int height = contentsRect().size().height() / m_size;
+    int width = contentsRect().width() / m_size;
+    int height = contentsRect().height() / m_size;
+    QPointF pos = QPointF(newX * width, newY * height);
 
-  // swap widget positions
-  QPointF pos = QPointF(item->boardX() * width, item->boardY() * height);
+    // stop and delete any existing animation
+    Plasma::Animation *animation = m_animations.value(piece).data();
+    if (animation) {
+        if (animation->state() == QAbstractAnimation::Running) {
+            animation->stop();
+        }
+        delete animation;
+        animation = NULL;
+    }
+    animation = Plasma::Animator::create(Plasma::Animator::SlideAnimation, this);
+    animation->setTargetWidget(piece);
+    animation->setProperty("easingCurve", QEasingCurve::InOutQuad);
+    animation->setProperty("movementDirection", Plasma::Animation::MoveAny);
+    animation->setProperty("distancePointF", pos - piece->pos());
+    m_animations[piece] = animation;
+    animation->start(QAbstractAnimation::DeleteWhenStopped);
+}
 
-  Plasma::Animation *animation = m_animations.value(item).data();
-  if (!animation) {
-      animation = Plasma::Animator::create(Plasma::Animator::SlideAnimation, this);
-      animation->setTargetWidget(item);
-      animation->setProperty("easingCurve", QEasingCurve::InOutQuad);
-      animation->setProperty("movementDirection", Plasma::Animation::MoveAny);
-      m_animations[item] = animation;
-  } else if (animation->state() == QAbstractAnimation::Running) {
-      animation->pause();
-  }
-
-  animation->setProperty("distancePointF", m_blank->pos() - item->pos());
-  animation->start(QAbstractAnimation::DeleteWhenStopped);
-
-  m_blank->setPos(pos);
-
-  // swap game positions
-  int blankPos = m_blank->boardPos();
-  m_blank->setGamePos(item->boardPos());
-  item->setGamePos(blankPos);
+void Fifteen::toggleBlank(bool show)
+{
+    if (show) {
+        if (!m_blank->isVisible()) {
+            Plasma::Animation *animation = Plasma::Animator::create(Plasma::Animator::FadeAnimation, this);
+            animation->setProperty("startOpacity", 0.0);
+            animation->setProperty("targetOpacity", 1.0);
+            animation->setTargetWidget(m_blank);
+            animation->start(QAbstractAnimation::DeleteWhenStopped);
+            m_blank->show();
+        }
+    } else {
+        m_blank->hide();
+    }
 }
 
