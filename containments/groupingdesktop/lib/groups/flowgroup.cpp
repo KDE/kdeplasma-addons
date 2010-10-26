@@ -242,7 +242,7 @@ void FlowGroup::updateContents()
         }
     }
 
-    const QRectF containerRect(m_container->boundingRect());
+    QRectF containerRect(m_container->boundingRect());
     for (int i = 0; i < childs.count(); ++i) {
         QGraphicsWidget *child = childs.at(i);
         QRectF rect(child->geometry());
@@ -252,6 +252,9 @@ void FlowGroup::updateContents()
 
         if (horizontal) {
             const qreal min = child->effectiveSizeHint(Qt::MinimumSize).width();
+            const qreal minRight = childs.last()->geometry().right();
+            containerRect.setRight(minRight);
+            m_container->resize(containerRect.size());
 
             const qreal r = (next ? next->pos().x() - SPACING : containerRect.right());
             if (r < rect.right() || QSizePolicy::ExpandFlag & child->sizePolicy().horizontalPolicy()) {
@@ -267,6 +270,9 @@ void FlowGroup::updateContents()
             }
         } else {
             const qreal min = child->effectiveSizeHint(Qt::MinimumSize).height();
+            const qreal minBottom = childs.last()->geometry().bottom();
+            containerRect.setBottom(minBottom);
+            m_container->resize(containerRect.size());
 
             const qreal b = (next ? next->pos().y() - SPACING : containerRect.bottom());
             if (b < rect.bottom() || QSizePolicy::ExpandFlag & child->sizePolicy().verticalPolicy()) {
@@ -285,28 +291,21 @@ void FlowGroup::updateContents()
         child->setGeometry(rect);
     }
 
-    qreal min = 0;
     QRectF geom(m_scrollWidget->viewportGeometry());
     if (horizontal) {
-        if (!childs.isEmpty()) {
-            min = childs.last()->geometry().right();
-        }
         if (m_prevArrow->isVisible()) {
             geom.setWidth(geom.width() + m_prevArrow->geometry().width() * 2 + SPACING * 2);
         }
-        m_container->resize(qMax(min, geom.width()), geom.height());
+        m_container->resize(qMax(m_container->size().width(), geom.width()), geom.height());
         m_container->setMaximumHeight(geom.height());
         foreach (QGraphicsWidget *c, childs) {
             c->resize(c->size().width(), geom.height());
         }
     } else {
-        if (!childs.isEmpty()) {
-            min = childs.last()->geometry().bottom();
-        }
         if (m_prevArrow->isVisible()) {
             geom.setHeight(geom.height() + m_prevArrow->geometry().height() * 2 + SPACING * 2);
         }
-        m_container->resize(geom.width(), qMax(min, geom.height()));
+        m_container->resize(geom.width(), qMax(m_container->size().height(), geom.height()));
         m_container->setMaximumWidth(geom.width());
         foreach (QGraphicsWidget *c, childs) {
             c->resize(geom.width(), c->size().height());
@@ -317,10 +316,12 @@ void FlowGroup::updateContents()
     if (!childs.isEmpty()) {
         r = QRectF(childs.first()->pos(), childs.last()->geometry().bottomRight());
     }
-    if ((horizontal && min > geom.width()) ||
-        (!horizontal && min > geom.height())) {
+    if ((horizontal && m_container->size().width() > geom.width()) ||
+        (!horizontal && m_container->size().height() > geom.height())) {
         if ((horizontal && geom.width() >= r.width()) ||
             (!horizontal && geom.height() >= r.height())) {
+            r.setLeft(r.right() - geom.width());
+            r.setTop(r.bottom() - geom.height());
             m_scrollWidget->ensureRectVisible(r);
             if (m_prevArrow->isVisible()) {
                 m_mainLayout->removeItem(m_prevArrow);
