@@ -51,6 +51,7 @@ FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
   m_board = new Fifteen(m_graphicsWidget);
   connect(m_board, SIGNAL(started()), this, SLOT(startTimer()));
   connect(m_board, SIGNAL(solved()), &m_timer, SLOT(stop()));
+  connect(m_board, SIGNAL(aborted()), this, SLOT(cancelTimer()));
   layout->addAnchors(m_board, layout, Qt::Horizontal);
   layout->addAnchor(m_board, Qt::AnchorTop, layout, Qt::AnchorTop);
 
@@ -66,7 +67,7 @@ FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
   m_timeLabel = new Plasma::Label(m_graphicsWidget);
   m_timeLabel->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed,
                                          QSizePolicy::Label));
-  updateTimer();
+  updateTimerLabel();
   layout->addAnchor(m_timeLabel, Qt::AnchorTop, m_board, Qt::AnchorBottom);
   layout->addCornerAnchors(m_timeLabel, Qt::BottomRightCorner, layout, Qt::BottomRightCorner);
 
@@ -159,18 +160,29 @@ void FifteenPuzzle::configAccepted()
 void FifteenPuzzle::startTimer()
 {
     m_seconds = 0;
-    updateTimer();
+    updateTimerLabel();
     m_timer.start();
 }
 
 void FifteenPuzzle::updateTimer()
 {
-    // update the time before incrementing, as this will be called before any time has elapsed
+    m_seconds++;
+    updateTimerLabel();
+}
+
+void FifteenPuzzle::cancelTimer()
+{
+    m_timer.stop();
+    m_seconds = 0;
+    updateTimerLabel();
+}
+
+void FifteenPuzzle::updateTimerLabel()
+{
     QString min = QString::number(m_seconds / 60).rightJustified(2, QLatin1Char('0'), false);
     QString sec = QString::number(m_seconds % 60).rightJustified(2, QLatin1Char('0'), false);
     m_timeLabel->setText(i18nc("The time since the puzzle started, in minutes and seconds",
                                "Time: %1:%2", min, sec));
-    m_seconds++;
 }
 
 void FifteenPuzzle::createMenu()

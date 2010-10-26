@@ -111,6 +111,10 @@ void Fifteen::updatePixmaps()
 
 void Fifteen::startBoard()
 {
+  // abort the old puzzle if necessary (this resets the puzzle's timer)
+  if (!m_solved) {
+      emit aborted();
+  }
   qDeleteAll(m_pieces);
   m_pieces.fill(NULL);
   int d = m_size * m_size;

@@ -46,6 +46,7 @@ class Fifteen : public QGraphicsWidget
   signals:
     void started();
     void solved();
+    void aborted();
 
   public slots:
     void piecePressed(Piece *item);

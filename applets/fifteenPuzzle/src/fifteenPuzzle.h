@@ -46,6 +46,7 @@ class FifteenPuzzle : public Plasma::PopupApplet
     void configChanged();
 
   private:
+    void updateTimerLabel();
     void createMenu();
     QGraphicsWidget *m_graphicsWidget;
     QPixmap *m_pixmap;
@@ -64,6 +65,7 @@ class FifteenPuzzle : public Plasma::PopupApplet
     void createConfigurationInterface(KConfigDialog *parent);
     void startTimer();
     void updateTimer();
+    void cancelTimer();
 };
 
 K_EXPORT_PLASMA_APPLET(fifteenPuzzle, FifteenPuzzle)
