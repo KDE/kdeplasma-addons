@@ -314,7 +314,7 @@ void MicroBlog::configChanged()
     }
 
     if (m_historySize != historySize) {
-        //kDebug() << m_historySize << historySize;
+        //kDebug() << "m_historysize,historysize: "<<m_historySize << historySize;
         if (m_historySize < historySize) {
             reloadRequired = true;
         } else if (!reloadRequired) {
@@ -340,11 +340,11 @@ void MicroBlog::configChanged()
     if (m_username.isEmpty()) {
         setAuthRequired(true);
     } else if (m_password.isEmpty()) {
-        kDebug() << "started, password is not in config file, trying wallet";
+        //kDebug() << "started, password is not in config file, trying wallet";
         m_walletWait = Read;
         getWallet();
     } else { //use config value
-        kDebug() << "password was in config file, using that to get twitter history";
+        //kDebug() << "password was in config file, using that to get twitter history";
         downloadHistory();
     }
 
@@ -423,7 +423,7 @@ void MicroBlog::getWallet()
         m_getWalletDelayTimer = 0;
     }
 
-    kDebug() << "opening wallet";
+    //kDebug() << "opening wallet";
     m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
                                            w, KWallet::Wallet::Asynchronous);
 
@@ -436,15 +436,15 @@ void MicroBlog::getWallet()
 
 void MicroBlog::writeWallet(bool success)
 {
-    kDebug() << success;
+    //kDebug() << success;
     if (success &&
         enterWalletFolder(QString::fromLatin1("Plasma-MicroBlog")) &&
         (m_wallet->writePassword(m_username, m_password) == 0)) {
-        kDebug() << "successfully put password in wallet, removing from config file";
+        //kDebug() << "successfully put password in wallet, removing from config file";
         config().deleteEntry("password");
         emit configNeedsSaving();
     } else {
-        kDebug() << "failed to store password in wallet, putting into config file instead";
+        //kDebug() << "failed to store password in wallet, putting into config file instead";
         writeConfigPassword();
     }
     m_walletWait = None;
@@ -454,20 +454,26 @@ void MicroBlog::writeWallet(bool success)
 
 void MicroBlog::readWallet(bool success)
 {
-    kDebug() << success;
+    //kDebug() << success;
     QString pwd;
     if (success &&
         enterWalletFolder(QString::fromLatin1("Plasma-MicroBlog")) &&
         (m_wallet->readPassword(m_username, pwd) == 0)) {
-        kDebug() << "successfully retrieved password from wallet";
+        //kDebug() << "successfully retrieved password from wallet";
         m_password = pwd;
         downloadHistory();
     } else if (m_password.isEmpty()) {
         //FIXME: when out of string freeze, tell the user WHY they need
         //       to configure the widget;
-        setConfigurationRequired(true, i18n("Your password is required."));
-        kDebug() << "failed to read password";
-    }
+		m_password = KStringHandler::obscure(config().readEntry("password"));
+		if(m_password.isEmpty()){
+	        setConfigurationRequired(true, i18n("Your password is required."));
+		}else{
+			//kDebug() << "reading from config";
+        	//kDebug() << "failed to read password";
+			downloadHistory();
+		}
+    }	
 
     m_walletWait = None;
     delete m_wallet;
@@ -480,11 +486,11 @@ bool MicroBlog::enterWalletFolder(const QString &folder)
     //why doesn't kwallet have this itself?
     m_wallet->createFolder(folder);
     if (! m_wallet->setFolder(folder)) {
-        kDebug() << "failed to open folder" << folder;
+        //kDebug() << "failed to open folder" << folder;
         return false;
     }
 
-    kDebug() << "wallet now on folder" << folder;
+    //kDebug() << "wallet now on folder" << folder;
     return true;
 }
 
@@ -697,7 +703,8 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
 void MicroBlog::configAccepted()
 {
     KConfigGroup cg = config();
-
+	//kDebug()<<"Inside configAccepted";
+	//kDebug()<<"username: "<<configUi.usernameEdit->text();
     cg.writeEntry("serviceUrl", configUi.serviceUrlCombo->currentText());
     cg.writeEntry("username", configUi.usernameEdit->text());
     cg.writeEntry("historyRefresh", configUi.historyRefreshSpinBox->value());
@@ -803,8 +810,9 @@ void MicroBlog::updateCompleted(Plasma::ServiceJob *job)
 //what this really means now is 'reconnect to the timeline source'
 void MicroBlog::downloadHistory()
 {
-    //kDebug() ;
+   // kDebug() << "Inside downloadhistory";
     if (m_username.isEmpty() || m_password.isEmpty()) {
+		//kDebug() << "BOOHYA got empty password";
         if (!m_curTimeline.isEmpty()) {
             m_engine->disconnectSource(m_curTimeline, this);
             m_engine->disconnectSource("Error:" + m_curTimeline, this);
