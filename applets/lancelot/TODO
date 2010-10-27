@@ -29,11 +29,11 @@ TODO: L18 m (e) 'flick' scrolling in locked mode
 Launcher Applet:
 None
 
-Parts Applet:
-None
+Shelf Applet:
+ - notification in the icon when model changes
+ - number of items showed in the icon
 
 Feature requests:
-
  - web history - page titles - interesting
  - hover activation for categories that are not in the last list of
      the PassagewayView - probably
