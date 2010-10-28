@@ -1,0 +1,6 @@
+[KNewStuff3]
+Categories=Pastebin Script
+TargetDir=plasma/shareprovider/
+Uncompress=never
+InstallationCommand=plasmapkg -t Plasma/ShareProvider -u %f
+UninstallCommand=plasmapkg -t Plasma/ShareProvider -r %f

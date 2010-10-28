@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Thomas Georgiou <TAGeorgiou@gmail.com>          *
- *                         Artur Duque de Souza <morpheuz@gmail.com>       *
+ *                         Artur Duque de Souza <asouza@kde.org>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -36,6 +36,7 @@
 #include <Plasma/Theme>
 #include <Plasma/Service>
 #include <Plasma/ServiceJob>
+#include <KNS3/DownloadDialog>
 
 #include <QApplication>
 #include <QClipboard>
@@ -52,8 +53,9 @@
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      m_historySize(3), m_signalMapper(new QSignalMapper()), m_paste(0),
-      m_topSeparator(0), m_bottomSeparator(0)
+      m_signalMapper(new QSignalMapper()), m_paste(0),
+      m_topSeparator(0), m_bottomSeparator(0),
+      m_historySize(3), m_newStuffDialog(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -76,6 +78,7 @@ Pastebin::~Pastebin()
 {
     delete m_topSeparator;
     delete m_bottomSeparator;
+    delete m_newStuffDialog;
 
     // save history of URLs
     QString history;
@@ -384,6 +387,34 @@ void Pastebin::animationUpdate(qreal progress)
     update();
 }
 
+void Pastebin::getNewStuff()
+{
+    if (!m_newStuffDialog) {
+        QString ghns("pastebin.knsrc");
+        m_newStuffDialog = new KNS3::DownloadDialog( ghns );
+        connect(m_newStuffDialog, SIGNAL(accepted()), SLOT(newStuffFinished()));
+    }
+    m_newStuffDialog->show();
+}
+
+void Pastebin::newStuffFinished()
+{
+    kDebug() << "\n\n\n\n\n----> CHANGED: " << m_newStuffDialog->changedEntries().count();
+
+    if ( m_newStuffDialog->changedEntries().count() ) {
+        KConfigGroup cg = config();
+
+        // setup text
+        uiConfig.textServer->clear();
+        uiConfig.textServer->addItems(m_txtServers.keys());
+        uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", ""));
+
+        // setup image
+        uiConfig.imageServer->clear();
+        uiConfig.imageServer->addItems(m_imgServers.keys());
+        uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", ""));
+    }
+}
 
 void Pastebin::createConfigurationInterface(KConfigDialog *parent)
 {
@@ -395,6 +426,9 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(cancelClicked()), this, SLOT(closeServerDialog()));
     parent->addPage(general, i18n("General"), Applet::icon());
+
+    uiConfig.ghnsButton->setIcon(KIcon("get-hot-new-stuff"));
+    connect(uiConfig.ghnsButton, SIGNAL(clicked()), this, SLOT(getNewStuff()));
 
     uiConfig.textServer->addItems(m_txtServers.keys());
     uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", ""));

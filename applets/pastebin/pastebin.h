@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Thomas Georgiou <TAGeorgiou@gmail.com>          *
+ *                         Artur Duque de Souza <asouza@kde.org>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -43,7 +44,11 @@ class QPropertyAnimation;
 namespace Plasma
 {
     class Service;
-} // namespace Plasma
+}
+
+namespace KNS3 {
+    class DownloadDialog;
+}
 
 class Pastebin : public Plasma::Applet
 {
@@ -112,6 +117,8 @@ private slots:
     void resetActionState();
     void copyToClipboard(const QString &url);
     void postingFinished(KJob *job);
+    void getNewStuff();
+    void newStuffFinished();
 
 private:
     int iconSize();
@@ -143,7 +150,6 @@ private:
     QString m_url;
     QString m_oldUrl;
 
-    int m_historySize;
     QSignalMapper *m_signalMapper;
     QList<QAction*> m_contextualActions;
     QList<QAction*> m_actionHistory;
@@ -151,15 +157,17 @@ private:
     QAction *m_topSeparator;
     QAction *m_bottomSeparator;
 
-    QClipboard::Mode lastMode;
-
-
     // New version - below here vars after refactor
+    int m_historySize;
+
     QHash<QString, QString> m_txtServers;
     QHash<QString, QString> m_imgServers;
     Plasma::DataEngine *m_engine;
     Plasma::Service *m_postingService;
     Ui::pastebinConfig uiConfig;
+    KNS3::DownloadDialog* m_newStuffDialog;
+
+    QClipboard::Mode lastMode;
 };
 
 K_EXPORT_PLASMA_APPLET(pastebin, Pastebin)
