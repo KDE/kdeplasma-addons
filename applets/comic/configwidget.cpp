@@ -163,6 +163,16 @@ bool ConfigWidget::showComicIdentifier() const
     return appearanceUi.checkBox_identifier->isChecked();
 }
 
+void ConfigWidget::setShowErrorPicture( bool show )
+{
+    advancedUi.errorPicture->setChecked( show );
+}
+
+bool ConfigWidget::showErrorPicture() const
+{
+    return advancedUi.errorPicture->isChecked();
+}
+
 void ConfigWidget::setArrowsOnHover( bool arrows )
 {
     return appearanceUi.checkBox_arrows->setChecked( arrows );

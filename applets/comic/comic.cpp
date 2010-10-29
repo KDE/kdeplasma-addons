@@ -113,6 +113,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mShowComicAuthor( false ),
       mShowComicTitle( false ),
       mShowComicIdentifier( false ),
+      mShowErrorPicture( true ),
       mArrowsOnHover( true ),
       mMiddleClick( true ),
       mMainWidget( 0 ),
@@ -331,6 +332,10 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
     //there was an error, display information as image
     if ( data[ "Error" ].toBool() ) {
+        if ( !mShowErrorPicture && !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
+            updateComic( data[ "Previous identifier suffix" ].toString() );
+            return;
+        }
         QPixmap errorPic( 500, 400 );
         errorPic.fill();
         QPainter p( &errorPic );
@@ -461,6 +466,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setShowComicAuthor( mShowComicAuthor );
     mConfigWidget->setShowComicTitle( mShowComicTitle );
     mConfigWidget->setShowComicIdentifier( mShowComicIdentifier );
+    mConfigWidget->setShowErrorPicture( mShowErrorPicture );
     mConfigWidget->setArrowsOnHover( mArrowsOnHover );
     mConfigWidget->setMiddleClick( mMiddleClick );
     QTime time = QTime( mSwitchTabTime / 3600, ( mSwitchTabTime / 60 ) % 60, mSwitchTabTime % 60 );
@@ -494,6 +500,7 @@ void ComicApplet::applyConfig()
     mShowComicAuthor = mConfigWidget->showComicAuthor();
     mShowComicTitle = mConfigWidget->showComicTitle();
     mShowComicIdentifier = mConfigWidget->showComicIdentifier();
+    mShowErrorPicture = mConfigWidget->showErrorPicture();
     mArrowsOnHover = mConfigWidget->arrowsOnHover();
     mMiddleClick = mConfigWidget->middleClick();
     const QTime time = mConfigWidget->tabSwitchTime();
@@ -606,6 +613,7 @@ void ComicApplet::configChanged()
     mShowComicAuthor = cg.readEntry( "showComicAuthor", false );
     mShowComicTitle = cg.readEntry( "showComicTitle", false );
     mShowComicIdentifier = cg.readEntry( "showComicIdentifier", false );
+    mShowErrorPicture = cg.readEntry( "showErrorPicture", true );
     mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
     mMiddleClick = cg.readEntry( "middleClick", true );
     mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
@@ -636,6 +644,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "showComicAuthor", mShowComicAuthor );
     cg.writeEntry( "showComicTitle", mShowComicTitle );
     cg.writeEntry( "showComicIdentifier", mShowComicIdentifier );
+    cg.writeEntry( "showErrorPicture", mShowErrorPicture );
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "switchTabTime", mSwitchTabTime );

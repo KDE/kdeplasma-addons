@@ -58,6 +58,8 @@ class ConfigWidget : public QWidget
         bool showComicTitle() const;
         void setShowComicIdentifier( bool show );
         bool showComicIdentifier() const;
+        void setShowErrorPicture( bool show );
+        bool showErrorPicture() const;
         void setArrowsOnHover( bool arrows );
         bool arrowsOnHover() const;
         void setMiddleClick( bool checked );

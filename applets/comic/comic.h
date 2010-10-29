@@ -200,6 +200,7 @@ class ComicApplet : public Plasma::PopupApplet
         bool mShowComicAuthor;
         bool mShowComicTitle;
         bool mShowComicIdentifier;
+        bool mShowErrorPicture;
         bool mArrowsOnHover;
         bool mMiddleClick;
         QTimer *mDateChangedTimer;
