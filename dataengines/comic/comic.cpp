@@ -78,6 +78,12 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
             setData( identifier, service->property( QLatin1String( "X-KDE-PluginInfo-Name" ), QVariant::String ).toString(), data );
         }
         return true;
+    } else if ( identifier.startsWith( QLatin1String( "setting_maxComicLimit:" ) ) ) {
+        bool worked;
+        const int maxComicLimit = identifier.mid( 22 ).toInt( &worked );
+        //wrong input sets it to the default (-1)
+        CachedProvider::setMaxComicLimit( worked ? maxComicLimit : -1 );
+        return worked;
     } else {
         // check whether it is cached already...
         if ( CachedProvider::isCached( identifier ) ) {

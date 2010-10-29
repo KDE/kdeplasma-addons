@@ -22,6 +22,7 @@
 #define CONFIGWIDGET_H
 
 #include "ui_appearanceSettings.h"
+#include "ui_advancedsettings.h"
 #include "ui_comicSettings.h"
 
 #include <QtGui/QWidget>
@@ -71,9 +72,14 @@ class ConfigWidget : public QWidget
         bool switchTabs() const;
         void setTabView( int tabView );
         int tabView() const;
+        bool useMaxComicLimit() const;
+        void setUseMaxComicLimit( bool use );
+        int maxComicLimit() const;
+        void setMaxComicLimit( int limit );
 
         QWidget *comicSettings;
         QWidget *appearanceSettings;
+        QWidget *advancedSettings;
 
     Q_SIGNALS:
         void maxSizeClicked();
@@ -94,6 +100,7 @@ class ConfigWidget : public QWidget
     private:
         Ui::ComicSettings comicUi;
         Ui::AppearanceSettings appearanceUi;
+        Ui::AdvancedSettings advancedUi;
         Plasma::DataEngine *mEngine;
         ComicModel *mModel;
         QSortFilterProxyModel *mProxyModel;

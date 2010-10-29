@@ -38,6 +38,9 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
     appearanceSettings = new QWidget();
     appearanceUi.setupUi( appearanceSettings );
 
+    advancedSettings = new QWidget();
+    advancedUi.setupUi( advancedSettings );
+
     connect( appearanceUi.pushButton_Size, SIGNAL( clicked() ), this, SIGNAL( maxSizeClicked() ) );
     connect( comicUi.pushButton_GHNS, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
 
@@ -230,6 +233,26 @@ void ConfigWidget::setTabView(int tabView)
 int ConfigWidget::tabView() const
 {
     return appearanceUi.kbuttongroup->selected();
+}
+
+bool ConfigWidget::useMaxComicLimit() const
+{
+    return advancedUi.useMaxComicLimit->isChecked();
+}
+
+void ConfigWidget::setUseMaxComicLimit( bool use )
+{
+    advancedUi.useMaxComicLimit->setChecked( use );
+}
+
+int ConfigWidget::maxComicLimit() const
+{
+    return advancedUi.maxComicLimit->value();
+}
+
+void ConfigWidget::setMaxComicLimit( int limit )
+{
+    advancedUi.maxComicLimit->setValue( limit );
 }
 
 #include "configwidget.moc"

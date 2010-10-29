@@ -154,6 +154,12 @@ void ComicApplet::init()
     mProxy->setSortCaseSensitivity( Qt::CaseInsensitive );
     mProxy->sort( 1, Qt::AscendingOrder );
 
+    //set maximum number of cached strips per comic, -1 means that there is no limit
+    KConfigGroup global = globalConfig();
+    const bool useMaxComicLimit = global.readEntry( "useMaxComicLimit", false );
+    const int maxComicLimit = global.readEntry( "maxComicLimit", 7 );
+    mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( useMaxComicLimit ? maxComicLimit : -1 ) );
+
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
     connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
@@ -464,9 +470,17 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setSwitchTabs( mSwitchTabs );
     mConfigWidget->setTabView( mTabView - 1);//-1 because counting starts at 0, yet we use flags that start at 1
 
+    //not storing this value, since other applets might have changed it inbetween
+    KConfigGroup global = globalConfig();
+    const bool useMaxComicLimit = global.readEntry( "useMaxComicLimit", false );
+    const int maxComicLimit = global.readEntry( "maxComicLimit", 7 );
+    mConfigWidget->setUseMaxComicLimit( useMaxComicLimit );
+    mConfigWidget->setMaxComicLimit( maxComicLimit );
+
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget->comicSettings, i18n( "General" ), icon(), i18n( "Press the \"Get New Comics ...\" button to install comics." ) );
     parent->addPage( mConfigWidget->appearanceSettings, i18n( "Appearance" ), "image" );
+    parent->addPage( mConfigWidget->advancedSettings, i18n( "Advanced" ), "system-run" );
 
     connect( mConfigWidget, SIGNAL( maxSizeClicked() ), this, SLOT( slotShowMaxSize() ) );
     connect( parent, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
@@ -488,6 +502,19 @@ void ComicApplet::applyConfig()
     mUseTabs = mConfigWidget->useTabs();
     mSwitchTabs = mConfigWidget->switchTabs();
     mTabView = mConfigWidget->tabView() + 1;//+1 because counting starts at 0, yet we use flags that start at 1
+
+    //not storing this value, since other applets might have changed it inbetween
+    KConfigGroup global = globalConfig();
+    const bool oldUseMaxComicLimit = global.readEntry( "useMaxComicLimit", false );
+    const bool useMaxComicLimit = mConfigWidget->useMaxComicLimit();
+    const int oldMaxComicLimit = global.readEntry( "maxComicLimit", 7 );
+    const int maxComicLimit = mConfigWidget->maxComicLimit();
+    if ( ( oldUseMaxComicLimit != useMaxComicLimit ) || ( oldMaxComicLimit != maxComicLimit ) ) {
+        global.writeEntry( "useMaxComicLimit", useMaxComicLimit );
+        global.writeEntry( "maxComicLimit", maxComicLimit );
+        mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( useMaxComicLimit ? maxComicLimit : -1 ) );
+    }
+
 
     updateUsedComics();
     slotStartTimer();

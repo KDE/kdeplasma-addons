@@ -145,6 +145,17 @@ class CachedProvider : public ComicProvider
          */
         virtual KUrl shopUrl() const;
 
+        /**
+          * Returns the maximum number of cached strips per comic, -1 means that there is no limit
+          * @note defaulte is -1
+          */
+        static int maxComicLimit();
+
+        /**
+          * Sets the maximum number of cached strips per comic, -1 means that there is no limit
+          */
+        static void setMaxComicLimit( int limit );
+
     private Q_SLOTS:
         void triggerFinished();
 };

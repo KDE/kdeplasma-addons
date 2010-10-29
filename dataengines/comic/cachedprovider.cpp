@@ -18,14 +18,15 @@
 
 #include "cachedprovider.h"
 
+#include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QSettings>
 #include <QtCore/QTimer>
 #include <QtGui/QImage>
 
+#include <KDebug>
 #include <kstandarddirs.h>
 #include <KUrl>
-
 
 static QString identifierToPath( const QString &identifier )
 {
@@ -135,7 +136,9 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
     const QString path = identifierToPath( identifier );
 
     int index = identifier.indexOf( QLatin1Char( ':' ) );
-    const QString pathMain = identifierToPath( identifier.mid( 0, index ) );
+    const QString comicName = identifier.mid( 0, index );
+    const QString pathMain = identifierToPath( comicName );
+    const QString dirPath = KStandardDirs::locateLocal( "data", QLatin1String( "plasma_engine_comic/" ) );
 
     if ( !info.isEmpty() ) {
         QSettings settings( path + QLatin1String( ".conf" ), QSettings::IniFormat );
@@ -151,6 +154,41 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
                     settings.setValue( i.key(), i.value() );
                 }
         }
+
+        QStringList comics;
+        if ( settingsMain.contains( QLatin1String( "comics" ) ) ) {
+            comics = settingsMain.value( QLatin1String( "comics" ), QStringList() ).toStringList();
+        } else {
+            //existing strips haven't been stored in the conf-file yet, do that now, oldest first, newest last
+            QDir dir( dirPath );
+            comics = dir.entryList( QStringList() << comicName + '*', QDir::Files, QDir::Time | QDir::Reversed );
+            QStringList::iterator it = comics.begin();
+            while ( it != comics.end() ) {
+                //only count images, not the conf files
+                if ( (*it).endsWith( QLatin1String( ".conf" ) ) ) {
+                    it = comics.erase(it);
+                } else {
+                    ++it;
+                }
+            }
+        }
+        comics.append( QUrl::toPercentEncoding( identifier ) );
+
+        const int limit = CachedProvider::maxComicLimit();
+        //limit is on
+        if ( limit > - 1) {
+            kDebug() << QLatin1String( "MaxComicLimit on." );
+            int comicsToRemove = comics.count() - limit;
+            QStringList::iterator it = comics.begin();
+            while ( comicsToRemove > 0 && it != comics.end() ) {
+                kDebug() << QLatin1String( "Remove file" ) << (dirPath + (*it));
+                QFile::remove( dirPath + (*it) );
+                QFile::remove( dirPath + (*it) + QLatin1String( ".conf" ) );
+                it = comics.erase(it);
+                -- comicsToRemove;
+            }
+        }
+        settingsMain.setValue( QLatin1String( "comics" ), comics );
     }
 
     return comic.save( path, "PNG" );
@@ -178,6 +216,20 @@ bool CachedProvider::isTopToBottom() const
 {
     QSettings settings( identifierToPath( requestedComicName() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
     return settings.value( QLatin1String( "isTopToBottom" ), true ).toBool();
+}
+
+int CachedProvider::maxComicLimit()
+{
+    QSettings settings( identifierToPath( QLatin1String( "comic_settings.conf" ) ), QSettings::IniFormat );
+    bool worked;
+    const int maxComics = settings.value( QLatin1String( "maxComics" ), -1 ).toInt( &worked );
+    return ( worked ? maxComics : - 1 );
+}
+
+void CachedProvider::setMaxComicLimit( int limit )
+{
+    QSettings settings( identifierToPath( QLatin1String( "comic_settings.conf" ) ), QSettings::IniFormat );
+    settings.setValue( QLatin1String( "maxComics" ), limit );
 }
 
 #include "cachedprovider.moc"
