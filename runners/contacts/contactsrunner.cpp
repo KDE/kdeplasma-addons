@@ -23,12 +23,14 @@
 #include <KLocale>
 #include <KIcon>
 #include <KToolInvocation>
+#include <akonadi/contact/contactdefaultactions.h>
 /*#include <KMimeType>
 
 */
 
 #include <kabc/stdaddressbook.h>
 #include <kabc/addressee.h>
+#include <kabc/phonenumber.h>
 #include <kabc/picture.h>
 
 #include "imageiconengine.h"
@@ -117,6 +119,48 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
             }
             matches.append(match);
         }
+
+        if (matchedName) {
+            KABC::PhoneNumber::TypeList list;
+            list << KABC::PhoneNumber::Home
+                 << KABC::PhoneNumber::Work
+                 << KABC::PhoneNumber::Voice
+                 << KABC::PhoneNumber::Cell
+                 << KABC::PhoneNumber::Video
+                 << KABC::PhoneNumber::Car;
+            foreach (const KABC::PhoneNumber::Type type, list) {
+                KABC::PhoneNumber phonenumber = a.phoneNumber(type);
+                if (!phonenumber.isEmpty()) {
+                    //kDebug() << "Possible match: " << a.realName() << " tel: " << phonenumber.number();
+                    Plasma::QueryMatch match(this);
+
+                    //TODO: exact match if the name is exact? =)
+                    match.setType(Plasma::QueryMatch::PossibleMatch);
+
+                    if (!a.photo().isEmpty()) {
+                        /* TODO it isn't anymore possible to use url as a photo for an user?
+                           if(a.photo().isIntern()) {
+                           }
+                           else {
+                           KURL url(a.photo().url());
+                           kDebug() << "photo url: " << url.prettyUrl() << endl;
+                           if(url.isLocalFile()) {
+                           icon = QIcon(url);
+                           }
+                           }*/
+                        QIcon icon(new ImageIconEngine(a.photo().data()));
+                        match.setIcon(icon);
+                    } else {
+                        match.setIcon(m_icon);
+                    }
+
+                    match.setText(i18nc("Open the default telephone program to call someone", "Call %1 at %2", a.realName(), phonenumber.typeLabel()));
+                    match.setSubtext(phonenumber.number());
+                    match.setData(QLatin1String("call:") + phonenumber.number());
+                    matches.append(match);
+                }
+            }
+	}
     }
 
     context.addMatches(term, matches);
@@ -130,7 +174,14 @@ void ContactsRunner::run(const Plasma::RunnerContext &context, const Plasma::Que
 
     kDebug() << "run name '" << name << "' with address '" << address << "'";
 
-    KToolInvocation::invokeMailer(address);
+    if (address.startsWith(QLatin1String("call:"))) {
+	KABC::PhoneNumber number;
+	number.setNumber(address.mid(5));
+	Akonadi::ContactDefaultActions actions;
+	actions.dialPhoneNumber( number );
+    } else {
+	KToolInvocation::invokeMailer(address);
+    }
 }
 
 #include "contactsrunner.moc"
