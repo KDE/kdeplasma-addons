@@ -128,7 +128,9 @@ void PostWidget::askReply()
 
 void PostWidget::askForward()
 {
-    emit forward(QChar(0x267B) + QString(" @") + m_author->text() + ' ' + m_text->nativeWidget()->toPlainText());
+    //Change !abc to #abc when forwarding, good etiquette
+    const QString forwardText = m_text->nativeWidget()->toPlainText().replace(QRegExp("\\!(\\w)"), "#\\1");
+    emit forward(QChar(0x267B) + QString(" @") + m_author->text() + ' ' + forwardText);
 }
 
 void PostWidget::askProfile()
