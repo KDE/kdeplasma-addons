@@ -375,8 +375,9 @@ void MicroBlog::modeChanged(int)
     downloadHistory();
 }
 
-void MicroBlog::reply(const QString &to)
+void MicroBlog::reply(const QString &replyToId, const QString &to)
 {
+    m_replyToId = replyToId;
     m_scrollWidget->ensureItemVisible(m_headerFrame);
     m_statusEdit->nativeWidget()->setPlainText(to);
     QTextCursor cursor = m_statusEdit->nativeWidget()->textCursor();
@@ -634,7 +635,7 @@ void MicroBlog::showTweets()
 
     while (m_tweetWidgets.count() < m_tweetMap.count()) {
         PostWidget *postWidget = new PostWidget(m_tweetsWidget);
-        connect(postWidget, SIGNAL(reply(const QString &)), this, SLOT(reply(const QString &)));
+        connect(postWidget, SIGNAL(reply(const QString &, const QString &)), this, SLOT(reply(const QString &, const QString &)));
         connect(postWidget, SIGNAL(forward(const QString &)), this, SLOT(forward(const QString &)));
         connect(postWidget, SIGNAL(openProfile(const QString &)), this, SLOT(openProfile(const QString &)));
         m_tweetWidgets.append(postWidget);
@@ -739,6 +740,10 @@ MicroBlog::~MicroBlog()
 void MicroBlog::editTextChanged()
 {
     m_flash->flash(i18np("%1 character left", "%1 characters left", 140 - m_statusEdit->nativeWidget()->toPlainText().length()), 2000);
+    //if the text has been cleared, discard
+    if (m_statusEdit->nativeWidget()->toPlainText().length() == 0) {
+        m_replyToId = QString();
+    }
 }
 
 bool MicroBlog::eventFilter(QObject *obj, QEvent *event)
@@ -781,6 +786,9 @@ void MicroBlog::updateStatus()
     KConfigGroup cg = m_service->operationDescription("update");
     cg.writeEntry("password", m_password);
     cg.writeEntry("status", status);
+    if (!m_replyToId.isEmpty()) {
+        cg.writeEntry("inReplyToStatusId", m_replyToId);
+    }
 
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
 

@@ -37,9 +37,12 @@ TweetJob::TweetJob(TimelineSource *source, const QMap<QString, QVariant> &parame
       m_source(source)
 {
     m_status = parameters.value("status").toString();
+    m_inReplyToStatusId = parameters.value("inReplyToStatusId").toString();
+
     if (!source->useOAuth()) {
         m_url.addQueryItem("status", m_status);
         m_url.addQueryItem("source", "kdemicroblog");
+        m_url.addQueryItem("in_reply_to_status_id", m_inReplyToStatusId);
 
         m_url.setUser(source->account());
         m_url.setPass(source->password());
@@ -49,12 +52,17 @@ TweetJob::TweetJob(TimelineSource *source, const QMap<QString, QVariant> &parame
 void TweetJob::start()
 {
     QByteArray data = (m_source->useOAuth()) ? "status=" + m_status.toUtf8().toPercentEncoding()
-                                    + "&source=kdemicroblog" : QByteArray();
+                         + "&source=kdemicroblog"
+                         + (!m_inReplyToStatusId.isEmpty()?"&in_reply_to_status_id=" + m_inReplyToStatusId.toLatin1() : "")
+                       : QByteArray();
     KIO::Job *job = KIO::http_post(m_url, data, KIO::HideProgressInfo);
     if (m_source->useOAuth()){
         OAuth::ParamMap params;
         params.insert("status", m_status.toUtf8().toPercentEncoding());
         params.insert("source", "kdemicroblog");
+        if (!m_inReplyToStatusId.isEmpty()) {
+            params.insert("in_reply_to_status_id", m_inReplyToStatusId.toLatin1());
+        }
         OAuth::signRequest(job, m_url.pathOrUrl(), OAuth::POST, m_source->oauthToken(),
                            m_source->oauthTokenSecret(), params);
     }
@@ -339,6 +347,7 @@ void TimelineSource::readStatus(QXmlStreamReader &xml)
             if (tag == "created_at") {
                 m_tempData["Date"] = cdata;
             } else if (tag == "id") {
+                m_tempData["Id"] = cdata;
                 m_id = cdata;
             } else if (tag == "text") {
                 m_tempData["Status"] = cdata;

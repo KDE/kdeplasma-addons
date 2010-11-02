@@ -93,7 +93,7 @@ class MicroBlog : public Plasma::PopupApplet
         void showTweets();
         void modeChanged(int index);
         void openProfile(const QString &user = QString());
-        void reply(const QString &to);
+        void reply(const QString &replyToId, const QString &to);
         void forward(const QString &rt);
 
         /**
@@ -160,6 +160,7 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::Service *m_profileService;
         QSet<Plasma::ServiceJob *> m_updateJobs;
         QString m_curTimeline;
+        QString m_replyToId;
         Plasma::Frame *m_headerFrame;
 
         QMap<QString, QPixmap> m_pictureMap;

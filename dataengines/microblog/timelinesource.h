@@ -55,6 +55,7 @@ private slots:
 private:
     KUrl m_url;
     QString m_status;
+    QString m_inReplyToStatusId;
     TimelineSource *m_source;
 };
 

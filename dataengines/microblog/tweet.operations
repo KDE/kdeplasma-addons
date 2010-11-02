@@ -18,5 +18,8 @@
         <entry name="status" type="String">
             <label>The tweet text</label>
         </entry>
+        <entry name="inReplyToStatusId" type="String">
+            <label>The Id we're replying to</label>
+        </entry>
     </group>
 </kcfg>

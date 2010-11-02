@@ -55,11 +55,12 @@ protected Q_SLOTS:
     void askProfile();
 
 Q_SIGNALS:
-    void reply(const QString &reply);
+    void reply(const QString messageId, const QString &reply);
     void forward(const QString &message);
     void openProfile(const QString &profile);
 
 private:
+    QString m_messageId;
     Plasma::Label *m_author;
     Plasma::IconWidget *m_picture;
     Plasma::Label *m_from;

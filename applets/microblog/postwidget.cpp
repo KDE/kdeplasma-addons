@@ -99,6 +99,7 @@ PostWidget::~PostWidget()
 
 void PostWidget::setData(const Plasma::DataEngine::Data &data)
 {
+    m_messageId = data["Id"].toString();
     m_author->setText(data["User"].toString());
     QLocale english(QLocale::English, QLocale::UnitedStates);
     QDateTime dt = english.toDateTime(data.value( "Date" ).toString(), "ddd MMM dd HH:mm:ss +0000 yyyy");
@@ -123,7 +124,7 @@ void PostWidget::setColorScheme(KColorScheme *scheme)
 
 void PostWidget::askReply()
 {
-    emit reply('@' + m_author->text() + ' ');
+    emit reply(m_messageId, '@' + m_author->text() + ' ');
 }
 
 void PostWidget::askForward()
