@@ -21,6 +21,7 @@
 
 #include <math.h>
 
+#include <qmath.h>
 #include <QtGui/QPainter>
 #include <QtGui/QGraphicsSceneResizeEvent>
 #include <QtGui/QGraphicsSceneHoverEvent>
@@ -236,7 +237,7 @@ void GridGroup::updateChild(QGraphicsWidget *child)
                 int col = k + i;
                 int row = (k >= 0 ? ray - k : ray + k) + j;
                 if (firstPhase) {
-                    qreal dist = sqrt((col - i) * (col - i) + (row - j) * (row - j));
+                    qreal dist = qSqrt((col - i) * (col - i) + (row - j) * (row - j));
                     if (dist == ray) {
                         continue;
                     }
@@ -256,7 +257,7 @@ void GridGroup::updateChild(QGraphicsWidget *child)
                     int col = k + i;
                     int row = (k >= 0 ? -ray + k : -ray - k) + j;
                     if (firstPhase) {
-                        qreal dist = sqrt((col - i) * (col - i) + (row - j) * (row - j));
+                        qreal dist = qSqrt((col - i) * (col - i) + (row - j) * (row - j));
                         if (dist == ray) {
                             continue;
                         }
