@@ -31,8 +31,8 @@ namespace Models {
 
 class SupportedTask {
 public:
-    explicit SupportedTask(const QString & classPattern = 0,
-            const QString & documentNameExtractor = 0);
+    explicit SupportedTask(const QString & classPattern = QString(),
+            const QString & documentNameExtractor = QString());
     QRegExp m_classPattern;
     QRegExp m_documentNameExtractor;
 };
