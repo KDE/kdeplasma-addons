@@ -20,7 +20,6 @@
 #include "FolderModel.h"
 #include <KStandardDirs>
 #include <KIcon>
-#include <KDebug>
 
 #include <QFileInfo>
 
@@ -118,15 +117,12 @@ void FolderModel::clear()
 
 void FolderModelPrivate::deleteItem(const KFileItem & fileItem)
 {
-    // kDebug() << fileItem.localPath() << fileItem.url() << m_items;
     for (int i = 0; i < q->size(); i++) {
         FolderModel::Item item = q->itemAt(i);
 
-        // kDebug() << "##" << item.data.toString();
         if (fileItem.localPath() == item.data.toString()
             || fileItem.url()    == item.data.toString()) {
             items.remove(item.data.toString());
-            // kDebug() << m_items;
             q->removeAt(i);
         }
     }
@@ -135,7 +131,6 @@ void FolderModelPrivate::deleteItem(const KFileItem & fileItem)
 void FolderModelPrivate::newItems(const KFileItemList &items)
 {
     foreach (const KFileItem &item, items) {
-        // kDebug() << item.localPath();
         QFileInfo info(item.localPath());
         if (info.isFile() || info.isDir()) {
             addItem(item);
@@ -175,9 +170,7 @@ void FolderModelPrivate::addItem(const KFileItem & item)
 {
     QString file = item.url().url();
 
-    qDebug() << "###" << item.url().url();
     if (items.contains(file)) {
-        qDebug() << "### already in";
         return;
     }
 
@@ -191,9 +184,7 @@ void FolderModelPrivate::addItem(const KUrl & url)
 {
     QString file = url.url();
 
-    qDebug() << "###" << url.url();
     if (items.contains(file)) {
-        qDebug() << "### already in";
         return;
     }
 
@@ -250,10 +241,6 @@ void FolderModel::save()
     for (int i = 0; i < size(); i++) {
         items << itemAt(i).data.toString();
     }
-
-    // kDebug() << "FolderModel::save:"
-    //     << dirPath
-    //     << items;
 
     KConfig cfg(KStandardDirs::locate("config", "lancelotrc"));
     KConfigGroup config = cfg.group("FolderModel");
