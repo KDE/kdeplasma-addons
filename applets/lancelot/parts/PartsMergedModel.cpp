@@ -328,7 +328,7 @@ bool PartsMergedModel::load(const QString & input)
                     addModel(modelExtraData,
                         QIcon(),
                         modelExtraData,
-                        model = new Lancelot::Models::FolderModel(modelExtraData));
+                        model = new Lancelot::Models::FolderModel(modelExtraData, QDir::Name | QDir::DirsFirst));
                 }
                 m_models.append(model);
 

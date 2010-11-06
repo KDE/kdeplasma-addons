@@ -30,6 +30,8 @@
 namespace Lancelot {
 namespace Models {
 
+class FolderModelPrivate;
+
 class LANCELOT_EXPORT FolderModel : public BaseModel {
     Q_OBJECT
 public:
@@ -39,22 +41,22 @@ public:
     L_Override bool dataDropAvailable(int where, const QMimeData * mimeData);
     L_Override void dataDropped(int where, const QMimeData * mimeData);
 
+    QString dirPath() const;
+
 protected:
     void load();
-    void save();
-
-protected:
-    void addItem(const KUrl & url);
-
-    KDirLister * m_dirLister;
-    QString m_dirPath;
-    QDir::SortFlags m_sort;
-    QStringList m_items;
 
 protected Q_SLOTS:
     void clear();
-    void deleteItem(const KFileItem & fileItem);
-    void newItems(const KFileItemList & items);
+    void save();
+    void update();
+
+private:
+    friend class FolderModelPrivate;
+    class FolderModelPrivate * const d;
+
+    Q_PRIVATE_SLOT(d, void deleteItem(const KFileItem & fileItem))
+    Q_PRIVATE_SLOT(d, void newItems(const KFileItemList & fileItems))
 };
 
 } // namespace Models

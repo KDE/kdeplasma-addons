@@ -68,13 +68,13 @@ void RecentDocuments::contextActivate(int index, QAction * context)
             break;
         case 1:
             // clearing the list
-            foreach (const QString &file, QDir(m_dirPath).entryList(QDir::Files)) {
-                QFile::remove(m_dirPath + '/' + file);
+            foreach (const QString &file, QDir(dirPath()).entryList(QDir::Files)) {
+                QFile::remove(dirPath() + '/' + file);
             }
             break;
     }
 
-    m_dirLister->updateDirectory(KUrl(m_dirPath));
+    update();
 }
 
 bool RecentDocuments::dataDropAvailable(int where, const QMimeData * mimeData)

@@ -36,7 +36,7 @@ namespace Models {
     }
 
 SystemServices::SystemServices()
-    : FolderModel(SystemServices::path(), QDir::Name)
+    : FolderModel(SystemServices::path(), QDir::NoSort)
 {
     setSelfTitle(i18n("System"));
     setSelfIcon(KIcon("computer"));

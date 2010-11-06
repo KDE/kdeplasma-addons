@@ -36,7 +36,7 @@ namespace Models {
     }
 
 NewDocuments::NewDocuments()
-    : FolderModel(NewDocuments::path(), QDir::Name)
+    : FolderModel(NewDocuments::path(), QDir::NoSort)
 {
     setSelfTitle(i18nc("New documents", "New:"));
     setSelfIcon(KIcon("document-new"));
