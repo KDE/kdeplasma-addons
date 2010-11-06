@@ -28,9 +28,11 @@
 #include <KMessageBox>
 // #include <KWindowSystem>
 
-#define ITEM_HEIGHT 24
-#define ICON_SIZE QSize(16, 16)
-#define MENU_WIDTH 200
+#define MINIMUM_ITEM_HEIGHT 24
+#define PREFERRED_ITEM_HEIGHT 32
+#define MAXIMUM_ITEM_HEIGHT 32
+#define ICON_SIZE QSize(24, 24)
+#define MENU_WIDTH 100
 #define POP_BORDER_OFFSET 16
 #define POP_MINIMUM_OFFSET 64
 
@@ -109,13 +111,13 @@ PopupList::Private::Private(PopupList * parent)
     list->setCategoriesGroup(Global::self()
          ->group("PopupList-Categories"));
 
-    list->setItemHeight(ITEM_HEIGHT, Qt::MinimumSize);
-    list->setItemHeight(ITEM_HEIGHT, Qt::PreferredSize);
-    list->setItemHeight(ITEM_HEIGHT, Qt::MaximumSize);
+    list->setItemHeight(MINIMUM_ITEM_HEIGHT, Qt::MinimumSize);
+    list->setItemHeight(PREFERRED_ITEM_HEIGHT, Qt::PreferredSize);
+    list->setItemHeight(MAXIMUM_ITEM_HEIGHT, Qt::MaximumSize);
 
-    list->setCategoryHeight(ITEM_HEIGHT, Qt::MinimumSize);
-    list->setCategoryHeight(ITEM_HEIGHT, Qt::PreferredSize);
-    list->setCategoryHeight(ITEM_HEIGHT, Qt::MaximumSize);
+    list->setCategoryHeight(MINIMUM_ITEM_HEIGHT, Qt::MinimumSize);
+    list->setCategoryHeight(PREFERRED_ITEM_HEIGHT, Qt::PreferredSize);
+    list->setCategoryHeight(MAXIMUM_ITEM_HEIGHT, Qt::MaximumSize);
 
     list->setItemIconSize(ICON_SIZE);
     list->setCategoryIconSize(ICON_SIZE);
@@ -308,7 +310,7 @@ void PopupList::updateSize()
     }
 
     qreal height =
-            (d->list->list()->itemFactory()->itemCount()) * ITEM_HEIGHT;
+            (d->list->list()->itemFactory()->itemCount()) * PREFERRED_ITEM_HEIGHT;
     d->list->resize(width, height);
 
     resize(width  + PopupListMarginCache::self()->width(),
