@@ -38,7 +38,58 @@
 
 namespace Lancelot {
 
-PopupListMarginCache * PopupListMarginCache::m_instance = NULL;
+/* PopupListArrayManager */
+
+PopupListArrayManager * PopupListArrayManager::s_instance = NULL;
+
+PopupListArrayManager * PopupListArrayManager::self()
+{
+    if (!s_instance) {
+        s_instance = new PopupListArrayManager();
+    }
+    return s_instance;
+}
+
+void PopupListArrayManager::addPopup(QWidget * w)
+{
+    QWidget * last =
+        m_widgets.count() > 0 ?
+            m_widgets.last() : NULL;
+
+    m_widgets << w;
+    connect(w, SIGNAL(destroyed(QObject *)),
+            this, SLOT(widgetDeleted(QObject *)));
+
+    if (last) {
+        QPoint position = last->geometry().topRight();
+
+        position.rx() -= w->geometry().width() + 64;
+
+        if (position.x() < last->geometry().left() + 64) {
+            position.setX(last->geometry().left() + 64);
+        }
+
+        w->move(position);
+    }
+}
+
+void PopupListArrayManager::widgetDeleted(QObject * w)
+{
+    m_widgets.removeAll(static_cast < QWidget * > (w));
+}
+
+PopupListArrayManager::PopupListArrayManager()
+{
+}
+
+PopupListArrayManager::~PopupListArrayManager()
+{
+}
+
+
+/* PopupListMarginCache */
+
+PopupListMarginCache * PopupListMarginCache::s_instance = NULL;
 
 PopupListMarginCache::PopupListMarginCache()
     : m_width(-1), m_height(-1)
@@ -47,12 +98,12 @@ PopupListMarginCache::PopupListMarginCache()
 
 PopupListMarginCache * PopupListMarginCache::self()
 {
-    if (!m_instance) {
-        m_instance = new PopupListMarginCache();
+    if (!s_instance) {
+        s_instance = new PopupListMarginCache();
         connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
-            m_instance, SLOT(plasmaThemeChanged()));
+            s_instance, SLOT(plasmaThemeChanged()));
     }
-    return m_instance;
+    return s_instance;
 }
 
 int PopupListMarginCache::width()
@@ -186,9 +237,9 @@ PopupList::PopupList(QWidget * parent, Qt::WindowFlags f)
     setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     d->list->setDisplayMode(ActionListView::SingleLineNameFirst);
 
-    d->animation = new QPropertyAnimation(this, "pos", this);
-    d->animation->setEasingCurve(QEasingCurve::InOutQuad);
-    d->animation->setDuration(250);
+    // d->animation = new QPropertyAnimation(this, "pos", this);
+    // d->animation->setEasingCurve(QEasingCurve::InOutQuad);
+    // d->animation->setDuration(250);
 }
 
 PopupList::~PopupList()
@@ -327,29 +378,30 @@ void PopupList::exec(const QPoint & p)
 {
     d->prepareToShow();
 
-    d->parentList = NULL;
+    // d->parentList = NULL;
 
-    QRect g = geometry();
-    g.moveTopLeft(p);
+    // QRect g = geometry();
+    // g.moveTopLeft(p);
 
-    QRect screen = QApplication::desktop()->screenGeometry(
-            QApplication::desktop()->screenNumber(p)
-        );
+    // QRect screen = QApplication::desktop()->screenGeometry(
+    //         QApplication::desktop()->screenNumber(p)
+    //     );
 
-    if (g.right() > screen.right()) {
-        g.moveRight(screen.right());
-    } else if (g.left() < screen.left()) {
-        g.moveLeft(screen.left());
-    }
+    // if (g.right() > screen.right()) {
+    //     g.moveRight(screen.right());
+    // } else if (g.left() < screen.left()) {
+    //     g.moveLeft(screen.left());
+    // }
 
-    if (g.bottom() > screen.bottom()) {
-        g.moveBottom(screen.bottom());
-    } else if (g.top() < screen.top()) {
-        g.moveTop(screen.top());
-    }
+    // if (g.bottom() > screen.bottom()) {
+    //     g.moveBottom(screen.bottom());
+    // } else if (g.top() < screen.top()) {
+    //     g.moveTop(screen.top());
+    // }
 
-    moveTo(g.topLeft());
+    // moveTo(g.topLeft());
 
+    PopupListArrayManager::self()->addPopup(this);
     show();
 }
 
@@ -359,79 +411,80 @@ void PopupList::exec(const QPoint & p, PopupList * parent)
 
     d->parentList = parent;
 
-    QRect selfGeometry = geometry();
-    selfGeometry.moveTopLeft(p);
+    // QRect selfGeometry = geometry();
+    // selfGeometry.moveTopLeft(p);
 
-    QRect screenGeometry = QApplication::desktop()->screenGeometry(
-            QApplication::desktop()->screenNumber(p)
-        );
+    // QRect screenGeometry = QApplication::desktop()->screenGeometry(
+    //         QApplication::desktop()->screenNumber(p)
+    //     );
 
-    QRect rootParentGeometry;
-    int numberOfParentLists = 0;
+    // QRect rootParentGeometry;
+    // int numberOfParentLists = 0;
 
-    PopupList * list = this;
+    // PopupList * list = this;
 
-    while (list->parentList()) {
-        list = list->parentList();
-        numberOfParentLists++;
-    }
+    // while (list->parentList()) {
+    //     list = list->parentList();
+    //     numberOfParentLists++;
+    // }
 
-    rootParentGeometry = list->geometry();
+    // rootParentGeometry = list->geometry();
 
     // Moving...
-    selfGeometry.moveLeft(rootParentGeometry.right() - POP_BORDER_OFFSET);
-    if (selfGeometry.right() > screenGeometry.right()) {
-        selfGeometry.moveRight(screenGeometry.right());
+    // selfGeometry.moveLeft(rootParentGeometry.right() - POP_BORDER_OFFSET);
+    // if (selfGeometry.right() > screenGeometry.right()) {
+    //     selfGeometry.moveRight(screenGeometry.right());
 
-        if (selfGeometry.left() - rootParentGeometry.left() <
-                numberOfParentLists * POP_MINIMUM_OFFSET) {
-            rootParentGeometry.moveLeft(selfGeometry.left()
-                - numberOfParentLists * POP_MINIMUM_OFFSET);
-        }
-    }
+    //     if (selfGeometry.left() - rootParentGeometry.left() <
+    //             numberOfParentLists * POP_MINIMUM_OFFSET) {
+    //         rootParentGeometry.moveLeft(selfGeometry.left()
+    //             - numberOfParentLists * POP_MINIMUM_OFFSET);
+    //     }
+    // }
 
-    if (selfGeometry.bottom() > screenGeometry.bottom()) {
-        selfGeometry.moveBottom(screenGeometry.bottom());
-    } else if (selfGeometry.top() < screenGeometry.top()) {
-        selfGeometry.moveTop(screenGeometry.top());
-    }
+    // if (selfGeometry.bottom() > screenGeometry.bottom()) {
+    //     selfGeometry.moveBottom(screenGeometry.bottom());
+    // } else if (selfGeometry.top() < screenGeometry.top()) {
+    //     selfGeometry.moveTop(screenGeometry.top());
+    // }
 
-    moveTo(selfGeometry.topLeft());
+    // moveTo(selfGeometry.topLeft());
 
-    list = this;
+    // list = this;
 
-    int shift = (selfGeometry.left() - rootParentGeometry.left())
-        / numberOfParentLists;
-    int left  = selfGeometry.left();
+    // int shift = (selfGeometry.left() - rootParentGeometry.left())
+    //     / numberOfParentLists;
+    // int left  = selfGeometry.left();
 
-    while (list->parentList()) {
-        list = list->parentList();
+    // while (list->parentList()) {
+    //     list = list->parentList();
 
-        QPoint parentPosition = list->pos();
+    //     QPoint parentPosition = list->pos();
 
-        left -= shift;
-        parentPosition.setX(left);
-        list->moveTo(parentPosition);
+    //     left -= shift;
+    //     parentPosition.setX(left);
+    //     list->moveTo(parentPosition);
 
-    }
+    // }
 
+    PopupListArrayManager::self()->addPopup(this);
     show();
 }
 
 void PopupList::moveTo(const QPoint & to)
 {
-    if (!isVisible() ||
-            !(KGlobalSettings::graphicEffectsLevel() & KGlobalSettings::SimpleAnimationEffects)) {
-        move(to);
-        return;
-    }
+    // if (!isVisible() ||
+    //         !(KGlobalSettings::graphicEffectsLevel() & KGlobalSettings::SimpleAnimationEffects)) {
+    //     move(to);
+    //     return;
+    // }
 
-    if (d->animation->state() == QAbstractAnimation::Running) {
-        d->animation->stop();
-    }
+    // if (d->animation->state() == QAbstractAnimation::Running) {
+    //     d->animation->stop();
+    // }
 
-    d->animation->setEndValue(to);
-    d->animation->start();
+    // d->animation->setEndValue(to);
+    // d->animation->start();
 }
 
 bool PopupList::eventFilter(QObject * object, QEvent * event)

@@ -34,6 +34,9 @@
 
 namespace Lancelot {
 
+/**
+ * Class for remembering theme border sizes
+ */
 class PopupListMarginCache: public QObject {
     Q_OBJECT
 public:
@@ -50,9 +53,32 @@ private:
     int m_height;
 
     void updateSizes();
-    static PopupListMarginCache * m_instance;
+    static PopupListMarginCache * s_instance;
     PopupListMarginCache();
 
+};
+
+/**
+ * Class for managing the array of open popups
+ */
+class PopupListArrayManager: public QObject {
+    Q_OBJECT
+public:
+    static PopupListArrayManager * self();
+
+    void addPopup(QWidget * w);
+    void closePopups(bool first = false);
+
+    ~PopupListArrayManager();
+
+private Q_SLOTS:
+    void widgetDeleted(QObject * widget);
+
+private:
+    QList < QWidget * > m_widgets;
+
+    PopupListArrayManager();
+    static PopupListArrayManager * s_instance;
 };
 
 class PopupList::Private: public QObject {
@@ -76,7 +102,7 @@ public:
     PopupList * parentList;
     PopupList * q;
 
-    QPropertyAnimation * animation;
+    // QPropertyAnimation * animation;
     bool hovered;
 
     void hidePopupAndParents();

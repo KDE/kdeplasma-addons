@@ -89,7 +89,7 @@ target_link_libraries(
    ${KDE4_PLASMA_LIBS}
 )
 
-set_target_properties(lancelot PROPERTIES VERSION 1.9.0 SOVERSION 1)
+set_target_properties(lancelot PROPERTIES VERSION 1.9.0 SOVERSION 2)
 install(TARGETS lancelot ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
