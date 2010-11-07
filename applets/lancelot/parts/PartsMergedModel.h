@@ -57,6 +57,7 @@ public:
     L_Override void dataDropped(int where, const QMimeData * mimeData);
 
     L_Override QString selfShortTitle() const;
+    L_Override QString selfTitle() const;
 
 private:
     QList < Lancelot::ActionListModel * > m_models;

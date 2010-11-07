@@ -353,6 +353,20 @@ QString PartsMergedModel::serializedData() const
     return m_data;
 }
 
+QString PartsMergedModel::selfTitle() const
+{
+    QString result;
+
+    foreach (Lancelot::ActionListModel * model, m_models) {
+        QString title = model->selfTitle();
+        if (!title.isEmpty()) {
+            result += title + '\n';
+        }
+    }
+
+    return result;
+}
+
 QString PartsMergedModel::selfShortTitle() const
 {
     if (m_models.size() > 0) {

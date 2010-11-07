@@ -60,6 +60,7 @@ public Q_SLOTS:
 
     void togglePopup();
     void setPopupVisible(bool show = true);
+    void toolTipAboutToShow();
 
 private Q_SLOTS:
     void configAccepted();

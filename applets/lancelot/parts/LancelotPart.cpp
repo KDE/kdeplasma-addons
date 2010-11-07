@@ -38,6 +38,7 @@
 #include <Plasma/Theme>
 #include <Plasma/IconWidget>
 #include <Plasma/PaintUtils>
+#include <Plasma/ToolTipManager>
 
 #define ACTIVATION_TIME 300
 #define DEFAULT_ICON "plasmaapplet-shelf"
@@ -121,6 +122,16 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
             m_icon->installEventFilter(this);
         }
     }
+}
+
+void LancelotPart::toolTipAboutToShow()
+{
+    Plasma::ToolTipContent tipData;
+
+    tipData.setMainText(m_model->selfTitle());
+
+    tipData.setAutohide(false);
+    Plasma::ToolTipManager::self()->setContent(this, tipData);
 }
 
 void LancelotPart::init()
@@ -227,6 +238,11 @@ void LancelotPart::updateOverlay()
         }
         m_iconOverlay->setTitle(m_model->selfShortTitle());
         m_iconOverlay->setGeometry(QRectF(QPointF(), geometry().size()));
+
+        Plasma::ToolTipContent tipData;
+        tipData.setMainText(m_model->selfTitle());
+        tipData.setImage(popupIcon());
+        Plasma::ToolTipManager::self()->setContent(m_icon, tipData);
 
     } else {
         if (m_iconOverlay) {
