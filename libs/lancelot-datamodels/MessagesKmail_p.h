@@ -26,7 +26,10 @@
 
 #ifdef LANCELOT_DATAMODELS_HAS_PIMLIBS
 #include <Akonadi/Entity>
+#include <Akonadi/Monitor>
 #include <Akonadi/Collection>
+#include <Akonadi/CollectionFetchJob>
+#include <Akonadi/CollectionFetchScope>
 #endif
 
 namespace Lancelot {
@@ -40,14 +43,13 @@ public:
 
 #ifdef LANCELOT_DATAMODELS_HAS_PIMLIBS
     QHash < KJob *, Akonadi::Collection > collectionJobs;
+    Akonadi::Monitor * monitor;
 
-    QString entityName(const Akonadi::Collection & collection) const;
     KIcon entityIcon(const Akonadi::Collection & collection) const;
-    QString entityPath(const Akonadi::Entity & entity) const;
 
 public Q_SLOTS:
     void fetchEmailCollectionsDone(KJob * job);
-    void fetchCollectionStatisticsDone(KJob * job);
+
 #endif
 
 private:

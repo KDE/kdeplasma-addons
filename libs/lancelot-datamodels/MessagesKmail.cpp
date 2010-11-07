@@ -78,29 +78,21 @@ void MessagesKmail::Private::fetchEmailCollectionsDone(KJob * job)
 
     foreach (const Akonadi::Collection & collection, cjob->collections()) {
         if (collection.contentMimeTypes().contains("message/rfc822")) {
-            Akonadi::CollectionStatisticsJob * job =
-                new Akonadi::CollectionStatisticsJob(collection);
-            connect(job, SIGNAL(result(KJob*)),
-                    this, SLOT(fetchCollectionStatisticsDone(KJob*)));
-
-            collectionJobs[job] = collection;
-
+            qDebug() << "###" << collection.id() << collection.url() <<
+                collection.name();
+            if (collection.statistics().unreadCount()) {
+                q->add(
+                        i18nc("Directory name (number of unread messages)",
+                            "%1 (%2)",
+                            collection.name(),
+                            collection.statistics().unreadCount()),
+                        QString::null,
+                        entityIcon(collection),
+                        collection.url()
+                    );
+            }
         }
     }
-}
-
-QString MessagesKmail::Private::entityName(const Akonadi::Collection & collection) const
-{
-    // Akonadi::EntityDisplayAttribute * displayAttribute =
-    //     static_cast < Akonadi::EntityDisplayAttribute * > (
-    //         collection.attribute < Akonadi::EntityDisplayAttribute > ()
-    //     );
-
-    // if (displayAttribute) {
-    //     return displayAttribute->displayName();
-    // }
-
-    return collection.name();
 }
 
 KIcon MessagesKmail::Private::entityIcon(const Akonadi::Collection & collection) const
@@ -117,65 +109,43 @@ KIcon MessagesKmail::Private::entityIcon(const Akonadi::Collection & collection)
     return KIcon("mail-folder-inbox");
 }
 
-QString MessagesKmail::Private::entityPath(const Akonadi::Entity & entity) const
-{
-    QString path;
-
-    Akonadi::Collection collection = entity.parentCollection();
-        kDebug() << path << collection.remoteId() << collection.url() << collection.parent();
-
-    while (collection.isValid()) {
-        path = entityName(collection) + "/" + path;
-        kDebug() << path << collection.remoteId() << collection.url();
-        collection = collection.parentCollection();
-    }
-
-    return path;
-}
-
-void MessagesKmail::Private::fetchCollectionStatisticsDone(KJob * job)
-{
-    if ( job->error() ) {
-        kDebug() << "Job Error:" << job->errorString();
-        return;
-    }
-
-    Akonadi::CollectionStatisticsJob * statisticsJob = qobject_cast < Akonadi::CollectionStatisticsJob * > (job);
-
-    const Akonadi::CollectionStatistics statistics = statisticsJob->statistics();
-    Akonadi::Collection & collection = collectionJobs[job];
-
-    if (statistics.unreadCount()) {
-        q->add(
-            i18nc("Directory name (number of unread messages)",
-                  "%1 (%2)",
-                  entityName(collection),
-                  statistics.unreadCount()),
-            QString::null,
-            entityIcon(collection),
-            collection.url()
-            );
-    }
-}
-
 MessagesKmail::MessagesKmail()
     : d(new Private(this))
 {
     setSelfTitle(i18n("Unread messages"));
     setSelfIcon(KIcon("kmail"));
+
+    d->monitor = new Akonadi::Monitor();
+    d->monitor->setCollectionMonitored(Akonadi::Collection::root());
+    d->monitor->fetchCollection(true);
+
+    connect(d->monitor, SIGNAL(collectionAdded(const Akonadi::Collection &, const Akonadi::Collection &)),
+            this, SLOT(update()));
+    connect(d->monitor, SIGNAL(collectionRemoved(const Akonadi::Collection &)),
+            this, SLOT(update()));
+    connect(d->monitor, SIGNAL(collectionChanged(const Akonadi::Collection &)),
+            this, SLOT(update()));
+    connect(d->monitor, SIGNAL(collectionStatisticsChanged(Akonadi::Collection::Id, const Akonadi::CollectionStatistics &)),
+            this, SLOT(update()));
+
     load();
 }
 
 MessagesKmail::~MessagesKmail()
 {
+    delete d->monitor;
+    delete d;
+}
+
+void MessagesKmail::update()
+{
+    clear();
+    load();
 }
 
 void MessagesKmail::activate(int index)
 {
     Q_UNUSED(index);
-
-    clear();
-    load();
 }
 
 void MessagesKmail::load()
@@ -185,8 +155,14 @@ void MessagesKmail::load()
     Akonadi::Collection emailCollection(Akonadi::Collection::root());
     emailCollection.setContentMimeTypes(QStringList() << "message/rfc822");
 
+    Akonadi::CollectionFetchScope scope;
+    scope.setIncludeStatistics(true);
+    scope.setContentMimeTypes(QStringList() << "message/rfc822");
+    scope.setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
+
     Akonadi::CollectionFetchJob * fetch = new Akonadi::CollectionFetchJob(
             emailCollection, Akonadi::CollectionFetchJob::Recursive);
+    fetch->setFetchScope(scope);
 
     connect(fetch, SIGNAL(result(KJob*)),
             d, SLOT(fetchEmailCollectionsDone(KJob*)));

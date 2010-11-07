@@ -52,6 +52,9 @@ protected:
 
     void load();
 
+protected Q_SLOTS:
+    void update();
+
 private:
     class Private;
     Private * const d;
