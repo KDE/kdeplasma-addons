@@ -52,6 +52,8 @@ protected:
 
     void load();
 
+    L_Override QString selfShortTitle() const;
+
 protected Q_SLOTS:
     void update();
 

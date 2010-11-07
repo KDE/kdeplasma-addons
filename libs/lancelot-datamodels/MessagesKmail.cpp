@@ -18,9 +18,14 @@
  */
 
 #include "MessagesKmail.h"
-#include <KIcon>
 
+#include <QDBusConnection>
+#include <QDBusInterface>
+#include <QDBusConnectionInterface>
+
+#include <KIcon>
 #include <KRun>
+#include <KToolInvocation>
 #include <KStandardDirs>
 
 #include "Logger.h"
@@ -62,7 +67,7 @@ namespace Lancelot {
 namespace Models {
 
 MessagesKmail::Private::Private(MessagesKmail * parent)
-  : q(parent)
+  : monitor(NULL), unread(0), q(parent)
 {
 }
 
@@ -76,23 +81,28 @@ void MessagesKmail::Private::fetchEmailCollectionsDone(KJob * job)
     Akonadi::CollectionFetchJob * cjob =
         static_cast < Akonadi::CollectionFetchJob * > ( job );
 
+    unread = 0;
+
     foreach (const Akonadi::Collection & collection, cjob->collections()) {
         if (collection.contentMimeTypes().contains("message/rfc822")) {
-            qDebug() << "###" << collection.id() << collection.url() <<
-                collection.name();
-            if (collection.statistics().unreadCount()) {
+            int unreadCount = collection.statistics().unreadCount();
+
+            if (unreadCount) {
                 q->add(
                         i18nc("Directory name (number of unread messages)",
                             "%1 (%2)",
                             collection.name(),
-                            collection.statistics().unreadCount()),
+                            unreadCount),
                         QString::null,
                         entityIcon(collection),
                         collection.url()
                     );
+                unread += unreadCount;
             }
         }
     }
+
+    qDebug() << "###" << unread;
 }
 
 KIcon MessagesKmail::Private::entityIcon(const Akonadi::Collection & collection) const
@@ -146,6 +156,20 @@ void MessagesKmail::update()
 void MessagesKmail::activate(int index)
 {
     Q_UNUSED(index);
+
+    if (QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmail")) {
+        QDBusInterface kmailInterface("org.kde.kmail", "/KMail", "org.kde.kmail.kmail");
+        qDebug() << "###" <<
+        kmailInterface.call("openReader");
+    } else {
+        qDebug() << "###" <<
+        KToolInvocation::startServiceByDesktopName("kmail");
+    }
+}
+
+QString MessagesKmail::selfShortTitle() const
+{
+    return QString::number(d->unread);
 }
 
 void MessagesKmail::load()

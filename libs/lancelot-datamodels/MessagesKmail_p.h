@@ -44,6 +44,7 @@ public:
 #ifdef LANCELOT_DATAMODELS_HAS_PIMLIBS
     QHash < KJob *, Akonadi::Collection > collectionJobs;
     Akonadi::Monitor * monitor;
+    int unread;
 
     KIcon entityIcon(const Akonadi::Collection & collection) const;
 
