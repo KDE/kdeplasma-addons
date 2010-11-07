@@ -115,6 +115,11 @@ QString ActionListModel::selfTitle() const
     return QString();
 }
 
+QString ActionListModel::selfShortTitle() const
+{
+    return QString();
+}
+
 QIcon ActionListModel::selfIcon() const
 {
     return QIcon();

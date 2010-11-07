@@ -132,6 +132,7 @@ public:
     virtual void contextActivate(int index, QAction * context);
 
     virtual QString selfTitle() const;
+    virtual QString selfShortTitle() const;
     virtual QIcon selfIcon() const;
     virtual QMimeData * selfMimeData() const;
 
