@@ -26,6 +26,7 @@
 #include <QDesktopWidget>
 
 #include <KDebug>
+#include <QDebug>
 #include <KIcon>
 #include <KMimeType>
 #include <KUrl>
@@ -34,15 +35,65 @@
 
 #include <Plasma/FrameSvg>
 #include <Plasma/Corona>
+#include <Plasma/Theme>
 #include <Plasma/IconWidget>
+#include <Plasma/PaintUtils>
 
 #define ACTIVATION_TIME 300
 #define DEFAULT_ICON "plasmaapplet-shelf"
 
+class IconOverlay: public QGraphicsWidget {
+public:
+    IconOverlay(LancelotPart * p)
+        : QGraphicsWidget(p), parent(p)
+    {
+    }
+
+    void setTitle(const QString & title)
+    {
+        m_title = title;
+        update();
+    }
+
+    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
+    {
+        const int radius = 2;
+
+        QColor background =
+                    Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
+        QColor text =
+                    Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+
+        QPixmap textPixmap = Plasma::PaintUtils::shadowText(
+                m_title, text, background, QPoint(1, 1), radius);
+
+        QRectF textRect = QRectF(QPointF(), textPixmap.size());
+        textRect.moveCenter(geometry().center());
+        textRect.moveBottom(geometry().bottom());
+
+        background.setAlphaF(.5);
+
+        painter->setRenderHint(QPainter::Antialiasing);
+
+        painter->fillPath(
+                Plasma::PaintUtils::roundedRectangle(
+                    textRect, radius),
+                    background
+                );
+
+        painter->drawPixmap(textRect.topLeft(), textPixmap);
+    }
+
+private:
+    QString m_title;
+    LancelotPart * parent;
+    /* data */
+};
+
 LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
   : Plasma::PopupApplet(parent, args),
     m_list(NULL), m_model(NULL), m_runnnerModel(NULL),
-    m_icon(NULL), m_rootHeight(-1)
+    m_icon(NULL), m_iconOverlay(NULL), m_rootHeight(-1)
 {
     if (args.size() > 0) {
         m_cmdarg = KUrl(args[0].toString()).toLocalFile();
@@ -86,6 +137,7 @@ void LancelotPart::init()
     m_searchText->nativeWidget()->setClearButtonShown(true);
     m_searchText->nativeWidget()->setClickMessage(i18nc("Enter the text to search for", "Search..."));
     m_searchText->nativeWidget()->setContextMenuPolicy(Qt::NoContextMenu);
+
     m_completion = new KCompletion();
     m_searchText->nativeWidget()->setCompletionObject(m_completion);
     m_searchText->nativeWidget()->setCompletionMode(
@@ -123,6 +175,15 @@ void LancelotPart::init()
             this, SLOT(modelContentsUpdated())
     );
 
+    connect(m_model, SIGNAL(updated()),
+            this, SLOT(updateOverlay()));
+    connect(m_model, SIGNAL(itemInserted(int)),
+            this, SLOT(updateOverlay()));
+    connect(m_model, SIGNAL(itemDeleted(int)),
+            this, SLOT(updateOverlay()));
+    connect(m_model, SIGNAL(itemAltered(int)),
+            this, SLOT(updateOverlay()));
+
     connect(m_list->list(), SIGNAL(sizeChanged()),
             this, SLOT(listSizeChanged()));
 
@@ -156,6 +217,31 @@ void LancelotPart::init()
 void LancelotPart::configChanged()
 {
     applyConfig();
+}
+
+void LancelotPart::updateOverlay()
+{
+    if (isIconified() && !m_model->selfShortTitle().isEmpty()) {
+        if (!m_iconOverlay) {
+            m_iconOverlay = new IconOverlay(this);
+        }
+        m_iconOverlay->setTitle(m_model->selfShortTitle());
+        m_iconOverlay->setGeometry(QRectF(QPointF(), geometry().size()));
+
+    } else {
+        if (m_iconOverlay) {
+            m_iconOverlay->hide();
+            m_iconOverlay->deleteLater();
+            m_iconOverlay = NULL;
+        }
+    }
+}
+
+void LancelotPart::setGeometry(const QRectF & rect)
+{
+    Plasma::PopupApplet::setGeometry(rect);
+
+    updateOverlay();
 }
 
 void LancelotPart::modelContentsUpdated()

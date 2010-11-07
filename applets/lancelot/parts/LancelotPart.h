@@ -40,6 +40,8 @@
 #include "PartsMergedModel.h"
 #include "LancelotPartConfig.h"
 
+class IconOverlay;
+
 class LancelotPart : public Plasma::PopupApplet
 {
     Q_OBJECT
@@ -50,6 +52,7 @@ public:
     void init();
     L_Override void dragEnterEvent(QGraphicsSceneDragDropEvent * event);
     L_Override void dropEvent(QGraphicsSceneDragDropEvent * event);
+    L_Override void setGeometry(const QRectF & rect);
 
 public Q_SLOTS:
     void configChanged();
@@ -75,7 +78,9 @@ private Q_SLOTS:
     void modelContentsUpdated();
     void resetSearch();
     void listSizeChanged();
+
     void updateShowingSize();
+    void updateOverlay();
 
 private:
     bool loadFromList(const QStringList & list);
@@ -96,6 +101,7 @@ private:
 
     QString m_cmdarg;
     Plasma::IconWidget * m_icon;
+    IconOverlay * m_iconOverlay;
     bool m_iconClickActivation;
     QBasicTimer m_timer;
     int m_rootHeight;

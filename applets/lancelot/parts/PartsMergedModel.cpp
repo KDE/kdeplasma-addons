@@ -353,4 +353,13 @@ QString PartsMergedModel::serializedData() const
     return m_data;
 }
 
+QString PartsMergedModel::selfShortTitle() const
+{
+    if (m_models.size() > 0) {
+        return m_models[0]->selfShortTitle();
+    }
+
+    return QString();
+}
+
 } // namespace Models

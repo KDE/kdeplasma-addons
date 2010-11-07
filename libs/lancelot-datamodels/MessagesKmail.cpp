@@ -102,6 +102,10 @@ void MessagesKmail::Private::fetchEmailCollectionsDone(KJob * job)
         }
     }
 
+    if (q->size() == 0) {
+        q->add(i18n("No unread mail"), "", KIcon("mail-folder-inbox"), QVariant());
+    }
+
     qDebug() << "###" << unread;
 }
 
@@ -169,7 +173,11 @@ void MessagesKmail::activate(int index)
 
 QString MessagesKmail::selfShortTitle() const
 {
-    return QString::number(d->unread);
+    if (d->unread) {
+        return QString::number(d->unread);
+    } else {
+        return QString();
+    }
 }
 
 void MessagesKmail::load()
