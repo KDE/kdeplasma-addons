@@ -107,6 +107,13 @@ void MessagesKmail::Private::fetchEmailCollectionsDone(KJob * job)
         q->add(i18n("No unread mail"), "", KIcon("mail-folder-inbox"), QVariant());
     }
 
+    if (unread) {
+        q->setSelfTitle(i18nc("Unread messages (number of unread messages)",
+                              "Unread messages (%1)", QString::number(unread)));
+    } else {
+        q->setSelfTitle(i18n("Unread messages"));
+    }
+
     q->setEmitInhibited(false);
     q->updated();
 }
