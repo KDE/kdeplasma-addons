@@ -73,40 +73,42 @@ MessagesKmail::Private::Private(MessagesKmail * parent)
 
 void MessagesKmail::Private::fetchEmailCollectionsDone(KJob * job)
 {
+    q->setEmitInhibited(true);
+
     if ( job->error() ) {
         kDebug() << "Job Error:" << job->errorString();
-        return;
-    }
 
-    Akonadi::CollectionFetchJob * cjob =
-        static_cast < Akonadi::CollectionFetchJob * > ( job );
+    } else {
+        Akonadi::CollectionFetchJob * cjob =
+            static_cast < Akonadi::CollectionFetchJob * > ( job );
 
-    unread = 0;
+        foreach (const Akonadi::Collection & collection, cjob->collections()) {
+            if (collection.contentMimeTypes().contains("message/rfc822")) {
+                int unreadCount = collection.statistics().unreadCount();
 
-    foreach (const Akonadi::Collection & collection, cjob->collections()) {
-        if (collection.contentMimeTypes().contains("message/rfc822")) {
-            int unreadCount = collection.statistics().unreadCount();
-
-            if (unreadCount) {
-                q->add(
-                        i18nc("Directory name (number of unread messages)",
-                            "%1 (%2)",
-                            collection.name(),
-                            unreadCount),
-                        QString::null,
-                        entityIcon(collection),
-                        collection.url()
-                    );
-                unread += unreadCount;
+                if (unreadCount) {
+                    q->add(
+                            i18nc("Directory name (number of unread messages)",
+                                "%1 (%2)",
+                                collection.name(),
+                                unreadCount),
+                            QString::null,
+                            entityIcon(collection),
+                            collection.url()
+                        );
+                    unread += unreadCount;
+                }
             }
         }
+
     }
 
     if (q->size() == 0) {
         q->add(i18n("No unread mail"), "", KIcon("mail-folder-inbox"), QVariant());
     }
 
-    qDebug() << "###" << unread;
+    q->setEmitInhibited(false);
+    q->updated();
 }
 
 KIcon MessagesKmail::Private::entityIcon(const Akonadi::Collection & collection) const
@@ -163,10 +165,8 @@ void MessagesKmail::activate(int index)
 
     if (QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmail")) {
         QDBusInterface kmailInterface("org.kde.kmail", "/KMail", "org.kde.kmail.kmail");
-        qDebug() << "###" <<
         kmailInterface.call("openReader");
     } else {
-        qDebug() << "###" <<
         KToolInvocation::startServiceByDesktopName("kmail");
     }
 }
@@ -183,6 +183,8 @@ QString MessagesKmail::selfShortTitle() const
 void MessagesKmail::load()
 {
     kDebug();
+
+    d->unread = 0;
 
     Akonadi::Collection emailCollection(Akonadi::Collection::root());
     emailCollection.setContentMimeTypes(QStringList() << "message/rfc822");
