@@ -91,14 +91,14 @@ void MessagesKmail::Private::fetchEmailCollectionsDone(KJob * job)
 
 QString MessagesKmail::Private::entityName(const Akonadi::Collection & collection) const
 {
-    Akonadi::EntityDisplayAttribute * displayAttribute =
-        static_cast < Akonadi::EntityDisplayAttribute * > (
-            collection.attribute < Akonadi::EntityDisplayAttribute > ()
-        );
+    // Akonadi::EntityDisplayAttribute * displayAttribute =
+    //     static_cast < Akonadi::EntityDisplayAttribute * > (
+    //         collection.attribute < Akonadi::EntityDisplayAttribute > ()
+    //     );
 
-    if (displayAttribute) {
-        return displayAttribute->displayName();
-    }
+    // if (displayAttribute) {
+    //     return displayAttribute->displayName();
+    // }
 
     return collection.name();
 }
@@ -147,9 +147,10 @@ void MessagesKmail::Private::fetchCollectionStatisticsDone(KJob * job)
 
     if (statistics.unreadCount()) {
         q->add(
-            i18nc("Directory name (number of unread messages)", "%1 (%2)")
-                .arg(entityName(collection))
-                .arg(QString::number(statistics.unreadCount())),
+            i18nc("Directory name (number of unread messages)",
+                  "%1 (%2)",
+                  entityName(collection),
+                  statistics.unreadCount()),
             QString::null,
             entityIcon(collection),
             collection.url()
