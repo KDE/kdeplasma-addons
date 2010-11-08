@@ -100,7 +100,7 @@ Version=1
 [Event/UsageLoggingOn]
 Name=Usage logging is activated
 Name[ar]=تستجيل الاستخدام نشط
-Name[ca]=L'ús del registre està activat
+Name[ca]=El registre d'ús està activat
 Name[ca@valencia]=L'ús del registre està activat
 Name[cs]=Je aktivován záznam použití
 Name[da]=Logning af anvendelse er aktiveret.
