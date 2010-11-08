@@ -90,7 +90,9 @@ public:
 public slots:
     void configAccepted();
     void configChanged();
-    void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
+    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+    void sourceAdded(const QString &source);
+    void sourceRemoved(const QString &source);
 
 protected slots:
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
@@ -119,6 +121,7 @@ private slots:
     void postingFinished(KJob *job);
     void getNewStuff();
     void newStuffFinished();
+    void refreshConfigDialog();
 
 private:
     int iconSize();

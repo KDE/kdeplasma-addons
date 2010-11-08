@@ -72,6 +72,12 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     // connect to all sources of our 'share' dataengine
     m_engine = dataEngine("org.kde.plasma.dataengine.share");
     m_engine->connectAllSources(this);
+
+    // to detect when the mimetypes were added again after a refresh
+    connect(m_engine, SIGNAL(sourceAdded(const QString&)),
+            this, SLOT(sourceAdded(const QString&)));
+    connect(m_engine, SIGNAL(sourceRemoved(const QString&)),
+            this, SLOT(sourceRemoved(const QString&)));
 }
 
 Pastebin::~Pastebin()
@@ -105,19 +111,48 @@ void Pastebin::init()
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);
 }
 
-void Pastebin::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
+void Pastebin::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     // update the options
-    if (sourceName != "Mimetypes") {
+    if (source != "Mimetypes") {
         const QString mimetype = data.value("Mimetypes").toString();
 
         if (mimetype.startsWith("text/")) {
-            m_txtServers.insert(data.value("Name").toString(), sourceName);
+            m_txtServers.insert(data.value("Name").toString(), source);
         } else if (mimetype.startsWith("image/")) {
-            m_imgServers.insert(data.value("Name").toString(), sourceName);
+            m_imgServers.insert(data.value("Name").toString(), source);
         } else {
             kDebug() << "Mimetype not supported by this applet";
         }
+    }
+}
+
+void Pastebin::sourceAdded(const QString &source)
+{
+    // update the options
+    if (source != "Mimetypes") {
+        const Plasma::DataEngine::Data data = m_engine->query(source);
+        const QString mimetype = data.value("Mimetypes").toString();
+
+        if (mimetype.startsWith("text/")) {
+            m_txtServers.insert(data.value("Name").toString(), source);
+        } else if (mimetype.startsWith("image/")) {
+            m_imgServers.insert(data.value("Name").toString(), source);
+        } else {
+            kDebug() << "Mimetype not supported by this applet";
+        }
+    }
+}
+
+void Pastebin::sourceRemoved(const QString &source)
+{
+    // update the options
+    if (source != "Mimetypes") {
+        QString key = m_txtServers.key(source);
+        m_txtServers.remove(key);
+
+        key = m_imgServers.key(source);
+        m_imgServers.remove(key);
     }
 }
 
@@ -392,28 +427,34 @@ void Pastebin::getNewStuff()
     if (!m_newStuffDialog) {
         QString ghns("pastebin.knsrc");
         m_newStuffDialog = new KNS3::DownloadDialog( ghns );
-        connect(m_newStuffDialog, SIGNAL(accepted()), SLOT(newStuffFinished()));
+        connect(m_newStuffDialog, SIGNAL(accepted()),
+                this, SLOT(newStuffFinished()));
     }
     m_newStuffDialog->show();
 }
 
 void Pastebin::newStuffFinished()
 {
-    kDebug() << "\n\n\n\n\n----> CHANGED: " << m_newStuffDialog->changedEntries().count();
-
     if ( m_newStuffDialog->changedEntries().count() ) {
+        // refresh the options of config dialog
+        refreshConfigDialog();
+
+        // setup the config dialog to last options
         KConfigGroup cg = config();
-
-        // setup text
-        uiConfig.textServer->clear();
-        uiConfig.textServer->addItems(m_txtServers.keys());
         uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", ""));
-
-        // setup image
-        uiConfig.imageServer->clear();
-        uiConfig.imageServer->addItems(m_imgServers.keys());
         uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", ""));
     }
+}
+
+void Pastebin::refreshConfigDialog()
+{
+    // setup text
+    uiConfig.textServer->clear();
+    uiConfig.textServer->addItems(m_txtServers.keys());
+
+    // setup image
+    uiConfig.imageServer->clear();
+    uiConfig.imageServer->addItems(m_imgServers.keys());
 }
 
 void Pastebin::createConfigurationInterface(KConfigDialog *parent)
@@ -424,16 +465,13 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     uiConfig.setupUi(general);
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    connect(parent, SIGNAL(cancelClicked()), this, SLOT(closeServerDialog()));
     parent->addPage(general, i18n("General"), Applet::icon());
 
     uiConfig.ghnsButton->setIcon(KIcon("get-hot-new-stuff"));
     connect(uiConfig.ghnsButton, SIGNAL(clicked()), this, SLOT(getNewStuff()));
 
-    uiConfig.textServer->addItems(m_txtServers.keys());
+    refreshConfigDialog();
     uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", ""));
-
-    uiConfig.imageServer->addItems(m_imgServers.keys());
     uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", ""));
 
     uiConfig.historySize->setValue(m_historySize);
