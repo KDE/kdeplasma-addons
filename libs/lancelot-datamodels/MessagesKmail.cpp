@@ -73,6 +73,9 @@ MessagesKmail::Private::Private(MessagesKmail * parent)
 
 void MessagesKmail::Private::fetchEmailCollectionsDone(KJob * job)
 {
+    q->clear();
+    unread = 0;
+
     q->setEmitInhibited(true);
 
     if ( job->error() ) {
@@ -100,7 +103,6 @@ void MessagesKmail::Private::fetchEmailCollectionsDone(KJob * job)
                 }
             }
         }
-
     }
 
     if (q->size() == 0) {
@@ -162,8 +164,7 @@ MessagesKmail::~MessagesKmail()
 
 void MessagesKmail::update()
 {
-    clear();
-    load();
+    QTimer::singleShot(200, this, SLOT(load()));
 }
 
 void MessagesKmail::activate(int index)
@@ -190,8 +191,6 @@ QString MessagesKmail::selfShortTitle() const
 void MessagesKmail::load()
 {
     kDebug();
-
-    d->unread = 0;
 
     Akonadi::Collection emailCollection(Akonadi::Collection::root());
     emailCollection.setContentMimeTypes(QStringList() << "message/rfc822");
