@@ -176,7 +176,11 @@ void ContactsKopete::load(bool forceReload)
             if (size() == 0) {
                 add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
                 d->noOnlineContacts = true;
+                setSelfTitle(i18n("Contacts"));
+            } else {
+                setSelfTitle(i18nc("Contacts (number of online contacts)", "Contacts (%1)", QString::number(size())));
             }
+
         }
     }
 

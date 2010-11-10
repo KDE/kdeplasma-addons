@@ -55,6 +55,7 @@ protected:
     L_Override QString selfShortTitle() const;
 
 protected Q_SLOTS:
+    void updateLater();
     void update();
 
 private:

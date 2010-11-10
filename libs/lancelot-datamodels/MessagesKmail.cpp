@@ -34,6 +34,12 @@
 
 #ifndef LANCELOT_DATAMODELS_HAS_PIMLIBS
 
+// just in case messages:
+I18N_NOOP("Unread messages");
+I18N_NOOP("Unable to find Kontact");
+I18N_NOOP("Start Akonadi server");
+I18N_NOOP("Akonadi server not running");
+
 #warning "Pimlibs are not present"
 
     #define DummyModelClassName MessagesKmail
@@ -145,13 +151,13 @@ MessagesKmail::MessagesKmail()
     d->monitor->fetchCollection(true);
 
     connect(d->monitor, SIGNAL(collectionAdded(const Akonadi::Collection &, const Akonadi::Collection &)),
-            this, SLOT(update()));
+            this, SLOT(updateLater()));
     connect(d->monitor, SIGNAL(collectionRemoved(const Akonadi::Collection &)),
-            this, SLOT(update()));
+            this, SLOT(updateLater()));
     connect(d->monitor, SIGNAL(collectionChanged(const Akonadi::Collection &)),
-            this, SLOT(update()));
+            this, SLOT(updateLater()));
     connect(d->monitor, SIGNAL(collectionStatisticsChanged(Akonadi::Collection::Id, const Akonadi::CollectionStatistics &)),
-            this, SLOT(update()));
+            this, SLOT(updateLater()));
 
     load();
 }
@@ -162,9 +168,14 @@ MessagesKmail::~MessagesKmail()
     delete d;
 }
 
+void MessagesKmail::updateLater()
+{
+    QTimer::singleShot(200, this, SLOT(update()));
+}
+
 void MessagesKmail::update()
 {
-    QTimer::singleShot(200, this, SLOT(load()));
+    load();
 }
 
 void MessagesKmail::activate(int index)
