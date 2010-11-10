@@ -62,14 +62,14 @@ GroupingContainmentPrivate::GroupingContainmentPrivate(GroupingContainment *cont
                              widgetToBeSetMoving(0),
                              blockSceneEventFilter(false)
 {
-    newGroupAction = new QAction(i18n("Add a new group"), q);
+    newGroupAction = new QAction(i18n("Add Groups"), q);
     newGroupAction->setIcon(KIcon("list-add"));
 
-    deleteGroupAction = new QAction(i18n("Remove this group"), q);
+    deleteGroupAction = new QAction(q);
     deleteGroupAction->setIcon(KIcon("edit-delete"));
     deleteGroupAction->setVisible(false);
 
-    configureGroupAction = new QAction(i18n("Configure this group"), q);
+    configureGroupAction = new QAction(q);
     configureGroupAction->setIcon(KIcon("configure"));
     configureGroupAction->setVisible(false);
 
@@ -902,8 +902,12 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
     if (group && (immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable) && !group->isMainGroup()) {
         d->deleteGroupAction->setVisible(true);
         d->deleteGroupAction->setData(group->id());
+        d->deleteGroupAction->setText(i18n("Remove this %1",
+                                           AbstractGroup::groupInfo(group->pluginName()).prettyName()));
         if (group->hasConfigurationInterface()) {
             d->configureGroupAction->setVisible(true);
+            d->configureGroupAction->setText(i18n("Configure this %1",
+                                                  AbstractGroup::groupInfo(group->pluginName()).prettyName()));
             d->configureGroupAction->setData(group->id());
         }
     }
