@@ -32,6 +32,8 @@
 #include <attica/provider.h>
 #include <attica/providermanager.h>
 
+#include <QDebug>
+#include <KDebug>
 #include <KIO/Job>
 
 #include <plasma/datacontainer.h>

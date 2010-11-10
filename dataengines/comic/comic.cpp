@@ -22,6 +22,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QSettings>
 
+#include <KDebug>
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
 

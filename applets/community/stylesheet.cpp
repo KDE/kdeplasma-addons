@@ -22,8 +22,10 @@
 //Qt
 #include <QFile>
 #include <QPalette>
+#include <QTextStream>
 
 // KDE
+#include <KDebug>
 #include <KDirWatch>
 #include <KGlobalSettings>
 #include <KStandardDirs>

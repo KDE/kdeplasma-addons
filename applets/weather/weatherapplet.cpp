@@ -29,6 +29,7 @@
 #include <QPainter>
 #include <QStandardItemModel>
 
+#include <KDebug>
 #include <KGlobalSettings>
 #include <KLocale>
 #include <KMessageBox>

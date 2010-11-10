@@ -541,7 +541,7 @@ void PlasmaboardWidget::paint(QPainter *p,
                               QWidget* widget)
 {
     Q_UNUSED(widget);
-    qDebug() << "Painting: " << option->exposedRect;
+    //qDebug() << "Painting: " << option->exposedRect;
     //Plasma::Containment::paint(p, option, widget);
 
     p->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));

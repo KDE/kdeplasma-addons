@@ -26,6 +26,7 @@
 #include <KAction>
 #include <KCmdLineArgs>
 #include <KCrash>
+#include <KDebug>
 #include <KLocale>
 
 #include <Lancelot/Global>

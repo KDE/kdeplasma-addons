@@ -23,6 +23,7 @@
 #include <QFile>
 #include <QThreadPool>
 
+#include <KDebug>
 #include <KGlobalSettings>
 #include <KUrl>
 #include <KIO/NetAccess>

@@ -32,6 +32,7 @@
 #include <QLineEdit>
 
 //KDE
+#include <kdebug.h>
 #include <kglobal.h>
 #include <kicon.h>
 #include <kconfigdialog.h>

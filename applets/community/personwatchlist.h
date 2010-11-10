@@ -23,6 +23,8 @@
 #define PERSONWATCHLIST_H
 
 #include <QtCore/QObject>
+#include <QtCore/QString>
+#include <QtCore/QSet>
 
 #include "sourcewatchlist.h"
 

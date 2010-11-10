@@ -29,6 +29,7 @@
 #include <QGraphicsLinearLayout>
 
 // KDE
+#include <KDebug>
 #include <KConfigDialog>
 #include <KServiceTypeTrader>
 

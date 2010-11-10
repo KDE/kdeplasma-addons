@@ -22,6 +22,7 @@
 #include <QGraphicsAnchorLayout>
 #include <QGraphicsLinearLayout>
 #include <QLabel>
+#include <QLocale>
 
 #include <KDateTime>
 #include <KColorScheme>

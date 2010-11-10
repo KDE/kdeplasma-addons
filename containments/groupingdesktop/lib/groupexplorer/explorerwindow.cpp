@@ -24,6 +24,7 @@
 
 #include <QApplication>
 #include <QBoxLayout>
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QPainter>
 #include <QTimer>

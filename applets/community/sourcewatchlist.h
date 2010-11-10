@@ -22,6 +22,9 @@
 #ifndef SOURCEWATCHLIST_H
 #define SOURCEWATCHLIST_H
 
+#include <QtCore/QString>
+#include <QtCore/QSet>
+
 #include <Plasma/DataEngine>
 
 

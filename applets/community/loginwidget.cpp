@@ -25,6 +25,7 @@
 #include <QtGui/QGraphicsLinearLayout>
 
 #include <KConfigGroup>
+#include <KDebug>
 #include <KIconLoader>
 #include <KJob>
 #include <KCMultiDialog>

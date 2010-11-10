@@ -27,6 +27,7 @@
 #include <QStringList>
 #include <QTextDocument>
 #include <QTextCursor>
+#include <QTextStream>
 
 #include <KConfigDialog>
 #include <KMimeType>

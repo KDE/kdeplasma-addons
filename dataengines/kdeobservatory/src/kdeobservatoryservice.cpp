@@ -20,6 +20,8 @@
 
 #include "kdeobservatoryservice.h"
 
+
+#include <KDebug>
 #include <KUrl>
 #include <KIO/Job>
 #include <KIO/StoredTransferJob>

@@ -24,6 +24,7 @@
 
 //KDE
 #include <KConfigDialog>
+#include <KDebug>
 #include <KLocale>
 #include <KCMultiDialog>
 

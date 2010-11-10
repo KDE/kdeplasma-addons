@@ -22,6 +22,7 @@
 
 #include <QXmlStreamReader>
 
+#include <KDebug>
 #include <KIO/Job>
 
 #include "imagesource.h"
@@ -274,7 +275,7 @@ void TimelineSource::authFinished(KJob *job)
     }
 
     if (job->error()) {
-        kDebug() << "Authentication Error " << job->error() << ": " << job->errorText() << endl;
+        kDebug() << "Authentication Error " << job->error() << ": " << job->errorText();
     } else {
         QList<QByteArray> pairs = m_oauthTemp.split('&');
 

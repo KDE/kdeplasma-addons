@@ -27,6 +27,7 @@
 
 #include <KConfigDialog>
 #include <KColorUtils>
+#include <KDebug>
 
 #include <QtGui/QPainter>
 #include <QtGui/QGraphicsSceneMouseEvent>

@@ -20,6 +20,7 @@
 #include "potd.h"
 
 #include <QtCore/QDate>
+#include <KDebug>
 #include <KServiceTypeTrader>
 
 #include "cachedprovider.h"

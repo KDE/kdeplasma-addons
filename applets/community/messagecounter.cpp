@@ -19,6 +19,8 @@
     USA.
 */
 
+#include <QSet>
+
 #include "messagecounter.h"
 #include "utils.h"
 

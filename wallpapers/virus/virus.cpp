@@ -15,6 +15,7 @@
 
 #include <QPainter>
 
+#include <KDebug>
 #include <KDirWatch>
 #include <KFileDialog>
 #include <KNS/Engine>

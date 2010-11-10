@@ -21,6 +21,8 @@
 
 #include "friendlist.h"
 
+#include <KDebug>
+
 #include "contactcontainer.h"
 #include "friendmanagementcontainer.h"
 #include "utils.h"

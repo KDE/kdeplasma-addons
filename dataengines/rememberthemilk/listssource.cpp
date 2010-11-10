@@ -23,6 +23,7 @@
 #include <rtm/list.h>
 #include <rtm/session.h>
 
+#include <KDebug>
 #include <Plasma/DataEngine>
 
 #include "rtmengine.h"

@@ -32,6 +32,7 @@
 
 #include <KConfigDialog>
 #include <KDatePicker>
+#include <KDebug>
 #include <KFileDialog>
 #include <KIO/NetAccess>
 #include <knuminput.h>

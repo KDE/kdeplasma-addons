@@ -25,6 +25,8 @@
 #include "controls.h"
 #include "infopanel.h"
 
+#include <KDebug>
+
 #include <Plasma/Slider>
 
 #include <QGraphicsGridLayout>

@@ -24,7 +24,7 @@
 #include <rtm/session.h>
 #include <rtm/request.h>
 
-
+#include <KDebug>
 #include <KIO/Job>
 #include "rtmengine.h"
 #include "tasksource.h"

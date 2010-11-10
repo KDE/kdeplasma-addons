@@ -21,6 +21,7 @@
 
 #include <QLineEdit>
 
+#include <KDebug>
 #include <KInputDialog>
 #include <KPixmapSequence>
 #include <kpixmapsequencewidget.h>
