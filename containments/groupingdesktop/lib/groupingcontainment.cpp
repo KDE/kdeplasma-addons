@@ -899,6 +899,13 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 
     AbstractGroup *group = d->groupAt(event->pos());
 
+    while (group->isMainGroup()) {
+        group = group->parentGroup();
+        if (!group) {
+            break;
+        }
+    }
+
     if (group && (immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable) && !group->isMainGroup()) {
         d->deleteGroupAction->setVisible(true);
         d->deleteGroupAction->setData(group->id());
