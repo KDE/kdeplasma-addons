@@ -239,11 +239,6 @@ void LancelotPart::updateOverlay()
         m_iconOverlay->setTitle(m_model->selfShortTitle());
         m_iconOverlay->setGeometry(QRectF(QPointF(), geometry().size()));
 
-        Plasma::ToolTipContent tipData;
-        tipData.setMainText(m_model->selfTitle());
-        tipData.setImage(popupIcon());
-        Plasma::ToolTipManager::self()->setContent(m_icon, tipData);
-
     } else {
         if (m_iconOverlay) {
             m_iconOverlay->hide();
@@ -251,6 +246,20 @@ void LancelotPart::updateOverlay()
             m_iconOverlay = NULL;
         }
     }
+
+    Plasma::ToolTipContent tipData;
+
+    QString title = m_model->selfTitle();
+
+    if (!title.contains('\n')) {
+        tipData.setMainText(m_model->selfTitle());
+    } else {
+        tipData.setMainText(i18n("Shelf"));
+        tipData.setSubText("<html>" + title.replace('\n', "<br>\n") + "</html>");
+    }
+
+    tipData.setImage(popupIcon());
+    Plasma::ToolTipManager::self()->setContent(m_icon, tipData);
 }
 
 void LancelotPart::setGeometry(const QRectF & rect)

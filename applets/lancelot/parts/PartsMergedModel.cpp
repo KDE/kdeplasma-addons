@@ -359,8 +359,13 @@ QString PartsMergedModel::selfTitle() const
 
     foreach (Lancelot::ActionListModel * model, m_models) {
         QString title = model->selfTitle();
+        qDebug() << "####" << title;
         if (!title.isEmpty()) {
-            result += title + '\n';
+            if (!result.isEmpty()) {
+                result += '\n';
+            }
+
+            result += title;
         }
     }
 

@@ -83,6 +83,8 @@ FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
     connect(d->dirLister, SIGNAL(newItems(const KFileItemList &)),
               this, SLOT(newItems(const KFileItemList &)));
 
+    setSelfTitle(i18nc("Folder: path/to/folder", "Folder: %1", dirPath));
+
     d->dirLister->openUrl(KUrl(d->dirPath), KDirLister::Keep);
 }
 

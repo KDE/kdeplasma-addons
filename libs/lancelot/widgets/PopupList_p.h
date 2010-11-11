@@ -66,13 +66,18 @@ class PopupListArrayManager: public QObject {
 public:
     static PopupListArrayManager * self();
 
-    void addPopup(QWidget * w);
+    void addPopup(QWidget * w, const QPoint & p = QPoint(-1, -1), QWidget * parent = NULL);
     void closePopups(bool first = false);
 
     ~PopupListArrayManager();
+    bool eventFilter(QObject *, QEvent *);
 
-private Q_SLOTS:
+public Q_SLOTS:
     void widgetDeleted(QObject * widget);
+    void widgetClosed(QWidget * widget);
+
+    bool closeChildren(QWidget * widget);
+    void closeAll();
 
 private:
     QList < QWidget * > m_widgets;
@@ -98,14 +103,13 @@ public:
     QBasicTimer timer;
     int closeTimeout;
 
-    QPointer < PopupList > child;
-    PopupList * parentList;
+    // QPointer < PopupList > child;
+    // PopupList * parentList;
     PopupList * q;
 
     // QPropertyAnimation * animation;
     bool hovered;
 
-    void hidePopupAndParents();
     void prepareToShow();
 
 public Q_SLOTS:

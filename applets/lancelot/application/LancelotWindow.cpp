@@ -605,20 +605,22 @@ void LancelotWindow::setupModels()
     m_modelGroups["ContactsRight"]  = new Lancelot::Models::BaseMergedModel();
 
     // Assignments: Model - Group:
-    #define MergedAddModel(MergedModel, ModelID, Model) \
+    #define MergedAddModel(MergedModel, ModelID, Model, Title) \
         ((Lancelot::Models::BaseMergedModel *)(MergedModel))      \
-        ->addModel((ModelID), QIcon(), (Model)->selfTitle(), Model);
+        ->addModel((ModelID), QIcon(), Title, Model);
 
-    MergedAddModel(m_modelGroups["ComputerLeft"], "Places", m_models["Places"]);
-    MergedAddModel(m_modelGroups["ComputerLeft"], "System", m_models["SystemServices"]);
+    MergedAddModel(m_modelGroups["ComputerLeft"], "Places", m_models["Places"], i18n("Places"));
+    MergedAddModel(m_modelGroups["ComputerLeft"], "System", m_models["SystemServices"], i18n("System"));
 
-    MergedAddModel(m_modelGroups["ComputerRight"], "Devices/Removable", m_models["Devices/Removable"]);
-    MergedAddModel(m_modelGroups["ComputerRight"], "Devices/Fixed", m_models["Devices/Fixed"]);
 
-    MergedAddModel(m_modelGroups["DocumentsLeft"], "NewDocuments", m_models["NewDocuments"]);
 
-    MergedAddModel(m_modelGroups["DocumentsRight"], "OpenDocuments", m_models["OpenDocuments"]);
-    MergedAddModel(m_modelGroups["DocumentsRight"], "RecentDocuments", m_models["RecentDocuments"]);
+    MergedAddModel(m_modelGroups["ComputerRight"], "Devices/Removable", m_models["Devices/Removable"], i18nc("@title Removable devices", "Removable"));
+    MergedAddModel(m_modelGroups["ComputerRight"], "Devices/Fixed", m_models["Devices/Fixed"], i18nc("@title Fixed devices", "Fixed"));
+
+    MergedAddModel(m_modelGroups["DocumentsLeft"], "NewDocuments", m_models["NewDocuments"], i18nc("@title New documents", "New"));
+
+    MergedAddModel(m_modelGroups["DocumentsRight"], "OpenDocuments", m_models["OpenDocuments"], i18nc("@title Open documents", "Open"));
+    MergedAddModel(m_modelGroups["DocumentsRight"], "RecentDocuments", m_models["RecentDocuments"], i18nc("@title Recent documents", "Recent"));
 
     QString plugins;
 
@@ -626,12 +628,12 @@ void LancelotWindow::setupModels()
     plugins = m_mainConfig.readEntry("mailPlugins", QString());
     if (plugins.isEmpty()) {
         m_models["Messages"]          = new Lancelot::Models::MessagesKmail();
-        MergedAddModel(m_modelGroups["ContactsLeft"], "Messages", m_models["Messages"]);
+        MergedAddModel(m_modelGroups["ContactsLeft"], "Messages", m_models["Messages"], i18n("Unread messages"));
     } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
         foreach (const QString &plugin, plugins.split(',')) {
             model = new Lancelot::PlasmaServiceListModel(plugin);
-            MergedAddModel(m_modelGroups["ContactsLeft"], model->selfTitle(), model);
+            MergedAddModel(m_modelGroups["ContactsLeft"], model->selfTitle(), model, i18n("Unread messages"));
         }
     }
 
@@ -639,12 +641,12 @@ void LancelotWindow::setupModels()
     plugins = m_mainConfig.readEntry("imPlugins", QString());
     if (plugins.isEmpty()) {
         m_models["Contacts"]          = new Lancelot::Models::ContactsKopete();
-        MergedAddModel(m_modelGroups["ContactsRight"], "Contacts", m_models["Contacts"]);
+        MergedAddModel(m_modelGroups["ContactsRight"], "Contacts", m_models["Contacts"], i18n("Online contacts"));
     } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
         foreach (const QString &plugin, plugins.split(',')) {
             model = new Lancelot::PlasmaServiceListModel(plugin);
-            MergedAddModel(m_modelGroups["ContactsRight"], model->selfTitle(), model);
+            MergedAddModel(m_modelGroups["ContactsRight"], model->selfTitle(), model, i18n("Online contacts"));
         }
     }
 
