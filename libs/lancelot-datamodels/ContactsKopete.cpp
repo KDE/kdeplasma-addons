@@ -188,6 +188,15 @@ void ContactsKopete::load(bool forceReload)
     emit updated();
 }
 
+QString ContactsKopete::selfShortTitle() const
+{
+    if (d->noOnlineContacts) {
+        return QString();
+    } else {
+        return QString::number(size());
+    }
+}
+
 void ContactsKopete::updateContactData(const QString & contact)
 {
     if (d->noOnlineContacts) {

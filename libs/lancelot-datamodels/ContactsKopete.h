@@ -43,6 +43,8 @@ public:
      */
     ~ContactsKopete();
 
+    L_Override QString selfShortTitle() const;
+
 protected:
     /**
      * Opens a chat window for the specified contact
