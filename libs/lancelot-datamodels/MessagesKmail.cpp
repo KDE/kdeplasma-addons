@@ -38,7 +38,7 @@
 I18N_NOOP("Unread messages");
 I18N_NOOP("Unable to find Kontact");
 I18N_NOOP("Start Akonadi server");
-I18N_NOOP("Akonadi server not running");
+I18N_NOOP("Akonadi server is not running");
 
 #warning "Pimlibs are not present"
 
@@ -159,6 +159,9 @@ MessagesKmail::MessagesKmail()
     connect(d->monitor, SIGNAL(collectionStatisticsChanged(Akonadi::Collection::Id, const Akonadi::CollectionStatistics &)),
             this, SLOT(updateLater()));
 
+    connect(Akonadi::ServerManager::self(), SIGNAL(stateChanged(Akonadi::ServerManager::State)),
+            this, SLOT(updateLater()));
+
     load();
 }
 
@@ -182,6 +185,12 @@ void MessagesKmail::activate(int index)
 {
     Q_UNUSED(index);
 
+    // TODO: This could be a bit prettier
+    if (index == 0 && d->unread == 0 && !Akonadi::ServerManager::isRunning()) {
+        Akonadi::ServerManager::start();
+        return;
+    }
+
     if (QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmail")) {
         QDBusInterface kmailInterface("org.kde.kmail", "/KMail", "org.kde.kmail.kmail");
         kmailInterface.call("openReader");
@@ -202,6 +211,14 @@ QString MessagesKmail::selfShortTitle() const
 void MessagesKmail::load()
 {
     kDebug();
+
+    if (!Akonadi::ServerManager::isRunning()) {
+        clear();
+        d->unread = 0;
+        add(i18n("Start Akonadi server"), i18n("Akonadi server is not running"), KIcon("akonadi"), QVariant("start-akonadi"));
+        return;
+
+    }
 
     Akonadi::Collection emailCollection(Akonadi::Collection::root());
     emailCollection.setContentMimeTypes(QStringList() << "message/rfc822");

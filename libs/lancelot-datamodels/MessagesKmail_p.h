@@ -30,6 +30,7 @@
 #include <Akonadi/Collection>
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/CollectionFetchScope>
+#include <Akonadi/ServerManager>
 #endif
 
 namespace Lancelot {
