@@ -22,6 +22,8 @@
 #include "Helpers.h"
 #include <QPainter>
 
+#include <Plasma/Theme>
+
 ShiftKey::ShiftKey(QPoint relativePosition, QSize relativeSize) :
         StickyKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Shift_L), QString())
 {
@@ -34,6 +36,7 @@ void ShiftKey::paint(QPainter *painter)
 
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
+    painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     setUpPainter(painter);
     int unit = qMin(size().width(), size().height()) / 8;
 

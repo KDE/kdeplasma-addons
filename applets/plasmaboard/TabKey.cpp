@@ -22,6 +22,7 @@
 #include "Helpers.h"
 #include <QPainter>
 
+#include <Plasma/Theme>
 
 TabKey::TabKey(QPoint relativePosition, QSize relativeSize) :
         FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Tab), QString())
@@ -34,6 +35,7 @@ void TabKey::paint(QPainter *painter)
 
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
+    painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     setUpPainter(painter);
     int unit = qMin(size().width(), size().height()) / 8;
 

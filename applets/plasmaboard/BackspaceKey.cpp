@@ -22,6 +22,8 @@
 #include "Helpers.h"
 #include <QPainter>
 
+#include <Plasma/Theme>
+
 
 BackspaceKey::BackspaceKey(QPoint relativePosition, QSize relativeSize) :
         FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_BackSpace), QString())
@@ -35,6 +37,7 @@ void BackspaceKey::paint(QPainter *painter)
 
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
+    painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     setUpPainter(painter);
 	paintArrow(painter);
     painter->restore();
