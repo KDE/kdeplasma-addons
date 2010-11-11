@@ -22,6 +22,8 @@
 #include "Helpers.h"
 #include <QPainter>
 
+#include <Plasma/Theme>
+
 ArrowRightKey::ArrowRightKey(QPoint relativePosition, QSize relativeSize) :
         FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Right), QString()){
 
@@ -33,6 +35,7 @@ void ArrowRightKey::paint(QPainter *painter){
     painter->save();
     setUpPainter(painter);
     painter->setRenderHint(QPainter::Antialiasing);
+    painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 	painter->rotate(180);
 	paintArrow(painter);
     painter->restore();

@@ -22,6 +22,8 @@
 #include "Helpers.h"
 #include <QPainter>
 
+#include <Plasma/Theme>
+
 CapsKey::CapsKey(QPoint relativePosition, QSize relativeSize) :
         FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Caps_Lock), QString()){
 
@@ -31,6 +33,7 @@ void CapsKey::paint(QPainter *painter){
     FuncKey::paint(painter);
 
     painter->save();
+    painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     painter->setRenderHint(QPainter::Antialiasing);
     setUpPainter(painter);
 
