@@ -248,14 +248,16 @@ void LancelotPart::updateOverlay()
     }
 
     Plasma::ToolTipContent tipData;
+    tipData.setMainText(i18n("Shelf"));
 
-    QString title = m_model->selfTitle();
+    if (m_model) {
+        QString title = m_model->selfTitle();
 
-    if (!title.contains('\n')) {
-        tipData.setMainText(m_model->selfTitle());
-    } else {
-        tipData.setMainText(i18n("Shelf"));
-        tipData.setSubText("<html>" + title.replace('\n', "<br>\n") + "</html>");
+        if (!title.contains('\n')) {
+            tipData.setMainText(m_model->selfTitle());
+        } else {
+            tipData.setSubText("<html>" + title.replace('\n', "<br>\n") + "</html>");
+        }
     }
 
     tipData.setImage(popupIcon());
