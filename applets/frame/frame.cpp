@@ -45,6 +45,8 @@
 #include <Plasma/DataEngine>
 #include <Plasma/ToolButton>
 #include <Plasma/Frame>
+#include <Plasma/ToolTipContent>
+#include <Plasma/ToolTipManager>
 
 #include <math.h>
 
@@ -273,6 +275,9 @@ void Frame::updatePicture()
     }
 
     kDebug() << "Rendering picture";
+    Plasma::ToolTipContent toolTipData;
+    toolTipData.setSubText(m_mySlideShow->currentUrl().fileName());
+    Plasma::ToolTipManager::self()->setContent(this, toolTipData);
 
     // create a QPixmap which can be drawn in paintInterface()
     QPixmap picture = QPixmap::fromImage(m_scaledImage);
