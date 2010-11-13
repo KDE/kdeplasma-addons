@@ -936,6 +936,10 @@ void GroupingContainment::dropEvent(QGraphicsSceneDragDropEvent *event)
     } else {
         Plasma::Containment::dropEvent(event);
     }
+    if (d->interestingGroup) {
+        d->interestingGroup.data()->showDropZone(QPointF());
+        d->interestingGroup.clear();
+    }
 }
 
 void GroupingContainment::setMovingWidget(QGraphicsWidget *widget)
