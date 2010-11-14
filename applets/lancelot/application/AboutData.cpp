@@ -37,7 +37,8 @@ AboutData::AboutData()
             ki18n("Ivan Čukić"),
             ki18n("Maintainer and lead developer"),
             "ivan.cukic(at)kde.org",
-            "http://ivan.fomentgroup.org"
+            "http://ivan.fomentgroup.org",
+            "ivancukic"
             );
 
     addCredit(
