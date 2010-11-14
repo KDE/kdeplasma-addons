@@ -324,7 +324,6 @@ bool PartsMergedModel::load(const QString & input)
                         modelExtraData,
                         model = new Lancelot::Models::Applications(modelExtraData, QString(), QIcon(), true));
                 } else {
-                    qDebug() << modelExtraData;
                     addModel(modelExtraData,
                         QIcon(),
                         modelExtraData,
@@ -359,7 +358,6 @@ QString PartsMergedModel::selfTitle() const
 
     foreach (Lancelot::ActionListModel * model, m_models) {
         QString title = model->selfTitle();
-        qDebug() << "####" << title;
         if (!title.isEmpty()) {
             if (!result.isEmpty()) {
                 result += '\n';
