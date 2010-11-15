@@ -84,21 +84,25 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         return;
     }
 
-    QStringList suggestions;
-    const bool correct = m_speller.checkAndSuggest(query,suggestions);
-
     Plasma::QueryMatch match(this);
     match.setType(Plasma::QueryMatch::InformationalMatch);
 
-    if (correct) {
-        match.setIcon(KIcon(QLatin1String( "checkbox" )));
-        match.setText(i18n("Correct"));
+    if (m_speller.isValid()) {
+        QStringList suggestions;
+        const bool correct = m_speller.checkAndSuggest(query,suggestions);
+        if (correct) {
+            match.setIcon(KIcon(QLatin1String( "checkbox" )));
+            match.setText(i18n("Correct"));
+        } else {
+            match.setIcon(KIcon(QLatin1String( "edit-delete" )));
+            const QString recommended = i18n("Suggested words: %1", suggestions.join(i18nc("seperator for a list of words", ", ")));
+            //TODO: try setting a text and a subtext, with the subtext being the suggestions
+            match.setText(recommended);
+            match.setData(suggestions);
+        }
     } else {
-        match.setIcon(KIcon(QLatin1String( "edit-delete" )));
-        const QString recommended = i18n("Suggested words: %1", suggestions.join (QLatin1String( ", " )));
-        //TODO: try setting a text and a subtext, with the subtext being the suggestions
-        match.setText(recommended);
-        match.setData(suggestions);
+        match.setIcon(KIcon(QLatin1String("task-attention")));
+        match.setText(i18n("Could not find a dictonary."));
     }
 
     context.addMatch(term, match);
