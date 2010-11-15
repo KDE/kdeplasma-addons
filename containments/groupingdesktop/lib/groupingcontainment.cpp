@@ -897,9 +897,7 @@ void GroupingContainment::restoreContents(KConfigGroup &group)
 
         //don't call destroy() because it will wait for the anim to finish before actually destroying it
         //and we don't have time to wait here
-        old->d->mainConfigGroup()->deleteGroup();
-        scene()->removeItem(old);
-        delete old;
+        old->d->destroyGroup();
     }
     if (!d->mainGroup) {
         kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";
