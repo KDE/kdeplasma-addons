@@ -253,6 +253,8 @@ void GroupingContainmentPrivate::manageApplet(Plasma::Applet *applet, const QPoi
 
 void GroupingContainmentPrivate::manageGroup(AbstractGroup *subGroup, const QPointF &pos)
 {
+    q->raise(subGroup);
+
     AbstractGroup *group = 0;
     if (interestingGroup) {
         group = interestingGroup.data();
@@ -447,7 +449,7 @@ void GroupingContainmentPrivate::restoreGroups()
         KConfigGroup groupConfig(&groupsConfig, QString::number(group->id()));
         KConfigGroup groupInfoConfig(&groupConfig, "GroupInformation");
 
-        if (groupInfoConfig.isValid()) {
+        if (groupInfoConfig.isValid() && groupInfoConfig.exists()) {
             int groupId = groupInfoConfig.readEntry("Group", -1);
 
             if (groupId != -1) {
@@ -462,8 +464,13 @@ void GroupingContainmentPrivate::restoreGroups()
                     QTransform t = group->transform();
                     parentGroup->addSubGroup(group, false);
                     group->setTransform(t);
+                } else {
+                    groupInfoConfig.deleteGroup();
+                    manageGroup(group, group->pos());
                 }
             }
+        } else {
+            manageGroup(group, group->pos());
         }
     }
 
@@ -487,6 +494,9 @@ void GroupingContainmentPrivate::restoreGroups()
                     QTransform t = applet->transform();
                     group->addApplet(applet, false);
                     applet->setTransform(t);
+                } else {
+                    groupConfig.deleteGroup();
+                    manageApplet(applet, applet->pos());
                 }
             }
         } else { //happens when changing a desktop activity to GroupingDesktop
@@ -878,6 +888,18 @@ void GroupingContainment::restoreContents(KConfigGroup &group)
         AbstractGroup *group = d->createGroup(d->mainGroupPlugin, QPointF(), 0, true);
         setMainGroup(group);
         group->init();
+    } else if (d->mainGroup && d->mainGroupPlugin != d->mainGroup->pluginName()) {
+        //switching activity between containments with different main groups
+        AbstractGroup *old = d->mainGroup;
+        AbstractGroup *group = d->createGroup(d->mainGroupPlugin, QPointF(), 0, true);
+        setMainGroup(group);
+        group->init();
+
+        //don't call destroy() because it will wait for the anim to finish before actually destroying it
+        //and we don't have time to wait here
+        old->d->mainConfigGroup()->deleteGroup();
+        scene()->removeItem(old);
+        delete old;
     }
     if (!d->mainGroup) {
         kWarning()<<"You have not set a Main Group! This will really cause troubles! You *must* set a Main Group!";

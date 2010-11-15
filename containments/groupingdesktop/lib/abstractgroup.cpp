@@ -760,7 +760,7 @@ void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    if (d->backgroundHints == NoBackground) {
+    if (d->backgroundHints == NoBackground || !d->background) {
         return;
     }
 
