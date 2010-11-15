@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Kopete Contact Runner
+Name=Kopete Contacts
 Name[ca]=Visualitzador de contactes del Kopete
 Name[ca@valencia]=Visualitzador de contactes del Kopete
 Name[da]=Runner til Kopete-kontakter
@@ -37,7 +37,7 @@ Name[uk]=Інструмент запуску контактів Kopete
 Name[x-test]=xxKopete Contact Runnerxx
 Name[zh_CN]=Kopete 联系人运行器
 Name[zh_TW]=Kopete 聯絡人執行器
-Comment=Kopete Contact runner
+Comment=Search contacts from Kopete
 Comment[ca]=Visualitzador de contactes del Kopete
 Comment[ca@valencia]=Visualitzador de contactes del Kopete
 Comment[da]=Runner til Kopete-kontakter

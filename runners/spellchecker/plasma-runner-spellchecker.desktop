@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Spell Checker Runner
+Name=Spell Checker
 Name[ar]=مشغل المدقق الإملائي
 Name[ast]=Executar la revisión ortográfica
 Name[ca]=Executor de la verificació ortogràfica
@@ -47,7 +47,7 @@ Name[th]=ผู้ตัวตรวจคำสะกด
 Name[tr]=Yazım Denetleyici Çalıştırıcı
 Name[uk]=Виконання перевірки правопису
 Name[wa]=Enondeu del coridjrece ortografike
-Name[x-test]=xxSpell Checker Runnerxx
+Name[x-test]=xxSpell Checkerxx
 Name[zh_CN]=拼写检查运行器
 Name[zh_TW]=拼字檢查執行器
 Comment=Check the spelling of a word
