@@ -39,8 +39,12 @@ public:
 
     void reloadConfiguration();
 
+protected slots:
+    void init();
+
 private:
     QString m_triggerWord;
+    QHash<QString, QString> m_languages;//key=language name, value=language code
     bool m_requireTriggerWord;
     Sonnet::Speller m_speller;
 };

@@ -22,6 +22,7 @@
 
 #include <KApplication>
 // #include <KDebug>
+#include <KGlobal>
 #include <KIcon>
 
 SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
@@ -32,12 +33,23 @@ SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
     setObjectName(QLatin1String( "Spell Checker" ));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     setSpeed(AbstractRunner::SlowSpeed);
-
-    reloadConfiguration();
 }
 
 SpellCheckRunner::~SpellCheckRunner()
 {
+}
+
+void SpellCheckRunner::init()
+{
+    Plasma::AbstractRunner::init();
+
+    //store all language names, makes it posible to type "spell german TERM" if english locale is set
+    KLocale *locale = KGlobal::locale();
+    QStringList codes = locale->allLanguagesList();
+    foreach (const QString &code, codes) {
+        const QString name = locale->languageCodeToName(code);
+        m_languages[name.toLower()] = code;
+    }
 }
 
 void SpellCheckRunner::reloadConfiguration()
@@ -77,7 +89,37 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
             return;
         }
 
+        QString language = m_speller.defaultLanguage();
         query = query.mid(len).trimmed();
+        QStringList terms = query.split(' ');
+
+        //two terms specified, check if first is a language
+        QString customLanguage;
+        if (terms.count() == 2) {
+            customLanguage = terms[0];
+            query = terms[1];
+        }
+        //three terms specified, check if first two are a language, e.g. "american english"
+        if (terms.count() == 3) {
+            customLanguage = terms[0] + ' ' + terms[1];
+            query = terms[2];
+        }
+
+        if (!customLanguage.isEmpty()) {
+            language = customLanguage;
+            m_speller.setLanguage(language);
+
+            //not valid, maybe it is a language name, not a code
+            if (!m_speller.isValid()) {
+                QHash<QString, QString>::const_iterator it = m_languages.find(language.toLower());
+                //is a valid language name
+                if (it != m_languages.constEnd()) {
+                    language = *it;
+                }
+            }
+        }
+
+        m_speller.setLanguage(language);
     }
 
     if (query.size() < 3) {
