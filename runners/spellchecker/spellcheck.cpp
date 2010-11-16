@@ -144,7 +144,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         }
     } else {
         match.setIcon(KIcon(QLatin1String("task-attention")));
-        match.setText(i18n("Could not find a dictonary."));
+        match.setText(i18n("Could not find a dictionary."));
     }
 
     context.addMatch(term, match);
