@@ -111,7 +111,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
 
             //not valid, maybe it is a language name, not a code
             if (!m_speller.isValid()) {
-                QHash<QString, QString>::const_iterator it = m_languages.find(language.toLower());
+                QHash<QString, QString>::const_iterator it = m_languages.constFind(language.toLower());
                 //is a valid language name
                 if (it != m_languages.constEnd()) {
                     language = *it;
