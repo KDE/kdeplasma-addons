@@ -1,6 +1,11 @@
 [Desktop Entry]
 Name=Spell Checker
+Name[pt]=Verificador Ortográfico
+Name[pt_BR]=Verificador ortográfico
+Name[sv]=Stavningskontroll
+Name[uk]=Перевірка правопису
 Name[x-test]=xxSpell Checkerxx
+Name[zh_TW]=拼字檢查器
 Comment=Check the spelling of a word
 Comment[ar]=تحقق من هجاء الكلمات
 Comment[ast]=Comprobar la ortografía d'una pallabra
