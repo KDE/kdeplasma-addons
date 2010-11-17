@@ -262,8 +262,8 @@ void ContactsKopete::updateContactData(const QString & contact)
             removeAt(index);
 
             if (size() == 0) {
-                add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
                 d->noOnlineContacts = true;
+                add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
             }
         }
     }
