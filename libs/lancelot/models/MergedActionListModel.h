@@ -155,6 +155,16 @@ public:
      */
     void setHideEmptyModels(bool hide);
 
+    /**
+     * @returns whether the model titles are shown
+     */
+    bool showModelTitles() const;
+
+    /**
+     * Sets whether model titles are shown
+     */
+    void setShowModelTitles(bool show);
+
 protected:
     L_Override void activate(int index);
 

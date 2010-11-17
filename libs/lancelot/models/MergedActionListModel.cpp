@@ -28,13 +28,16 @@ public:
 
     QList < ActionListModel * > models;
     QList < QPair < QString, QIcon > > modelsMetadata;
-    bool hideEmptyModels;
+
+    bool hideEmptyModels : 1;
+    bool showModelTitles : 1;
 };
 
 MergedActionListModel::MergedActionListModel()
   : d(new Private)
 {
     d->hideEmptyModels = true;
+    d->showModelTitles = true;
 }
 
 MergedActionListModel::~MergedActionListModel()
@@ -129,6 +132,7 @@ void MergedActionListModel::dataDragFinished(int index, Qt::DropAction action)
 {
     int model, modelIndex;
     d->toChildCoordinates(index, model, modelIndex);
+    d->showModelTitles = true;
 
     if (model == -1) return;
     if (modelIndex == -1) return modelDataDropped(model, action);
@@ -265,16 +269,18 @@ void MergedActionListModel::contextActivate(int index, QAction * context)
     d->models.at(model)->contextActivate(modelIndex, context);
 }
 
+#define TITLE_OFFSET (showModelTitles ? 1 : 0)
+
 void MergedActionListModel::Private::toChildCoordinates(int index, int & model, int & modelIndex) const
 {
     model = 0; modelIndex = 0;
     foreach (ActionListModel * m, models) {
         if (!hideEmptyModels || m->size() != 0) {
-            if (index <= m->size()) {
-                modelIndex = index - 1;
+            if (index < m->size() + TITLE_OFFSET) {
+                modelIndex = index - TITLE_OFFSET;
                 return;
             } else {
-                index -= m->size() + 1;
+                index -= m->size() + TITLE_OFFSET;
                 ++model;
             }
         } else {
@@ -295,9 +301,9 @@ void MergedActionListModel::Private::fromChildCoordinates(int & index, int model
     foreach (ActionListModel * m, models) {
         if (!hideEmptyModels || m->size() != 0) {
             if (model > 0) {
-                index += m->size() + 1;
+                index += m->size() + 1;//TITLE_OFFSET;
             } else {
-                index += modelIndex + 1;
+                index += modelIndex + 1;//TITLE_OFFSET;
                 return;
             }
         }
@@ -305,6 +311,8 @@ void MergedActionListModel::Private::fromChildCoordinates(int & index, int model
     }
     index = -1;
 }
+
+#undef TITLE_OFFSET
 
 void MergedActionListModel::addModel(ActionListModel * model)
 {
@@ -355,7 +363,7 @@ int MergedActionListModel::size() const
     int result = 0;
     foreach (ActionListModel * model, d->models) {
         if (d->hideEmptyModels && model->size() == 0) continue; // We will not show empty models
-        result += model->size() + 1;
+        result += model->size() + (d->showModelTitles ? 1 : 0);
     }
     return result;
 }
@@ -369,6 +377,18 @@ void MergedActionListModel::setHideEmptyModels(bool hide)
 {
     if (d->hideEmptyModels == hide) return;
     d->hideEmptyModels = hide;
+    emit updated();
+}
+
+bool MergedActionListModel::showModelTitles() const
+{
+    return d->showModelTitles;
+}
+
+void MergedActionListModel::setShowModelTitles(bool show)
+{
+    if (d->showModelTitles == show) return;
+    d->showModelTitles = show;
     emit updated();
 }
 

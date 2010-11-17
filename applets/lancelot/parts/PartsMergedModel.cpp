@@ -181,6 +181,7 @@ void PartsMergedModel::remove(int index)
     if (m_models.contains(model)) {
         model->deleteLater();
         m_models.removeAll(model);
+        modelCountUpdated();
     }
 
     QStringList configs = m_data.split('\n');
@@ -198,6 +199,7 @@ void PartsMergedModel::clear()
 
     qDeleteAll(m_models);
     m_models.clear();
+    modelCountUpdated();
 
     m_data.clear();
 }
@@ -343,6 +345,8 @@ bool PartsMergedModel::load(const QString & input)
         m_data += input;
     }
 
+    modelCountUpdated();
+
     emit modelContentsUpdated();
     return loaded;
 }
@@ -378,5 +382,25 @@ QString PartsMergedModel::selfShortTitle() const
 
     return QString();
 }
+
+void PartsMergedModel::modelCountUpdated()
+{
+    int count = 0;
+
+    if (hideEmptyModels()) {
+        for (int i = 0; i < modelCount(); i++) {
+            if (modelAt(i)->size() > 0) {
+                count++;
+
+                // we don't need to count them all
+                if (count > 1) break;
+            }
+        }
+    } else count = modelCount();
+
+    qDebug() << "###" << count;
+    setShowModelTitles(count > 1);
+}
+
 
 } // namespace Models

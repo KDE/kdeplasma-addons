@@ -63,6 +63,8 @@ private:
     QList < Lancelot::ActionListModel * > m_models;
     QString m_data;
 
+    void modelCountUpdated();
+
 Q_SIGNALS:
     void removeModelRequested(int index);
     void modelContentsUpdated();
