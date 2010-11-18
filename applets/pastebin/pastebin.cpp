@@ -472,9 +472,8 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     connect(uiConfig.ghnsButton, SIGNAL(clicked()), this, SLOT(getNewStuff()));
 
     refreshConfigDialog();
-    uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", ""));
-    uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", ""));
-
+    uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", m_txtServers.keys().at(0)));
+    uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", m_imgServers.keys().at(0)));
     uiConfig.historySize->setValue(m_historySize);
 }
 
