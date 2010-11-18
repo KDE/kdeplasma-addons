@@ -47,12 +47,13 @@ namespace Models {
 PartsMergedModel::PartsMergedModel()
     : Lancelot::Models::BaseMergedModel()
 {
+    connect(this, SIGNAL(updated()),
+            this, SLOT(modelCountUpdated()));
 }
 
 PartsMergedModel::~PartsMergedModel()
 {
     clear();
-    // qDeleteAll(m_models);
 }
 
 bool PartsMergedModel::hasModelContextActions(int index) const
@@ -101,8 +102,6 @@ void PartsMergedModel::modelDataDropped(int index, Qt::DropAction action)
 
 bool PartsMergedModel::dataDropAvailable(int where, const QMimeData * mimeData)
 {
-    kDebug() << mimeData->formats();
-
     if (mimeData->formats().contains("text/x-lancelotpart") ||
         mimeData->formats().contains("inode/directory")) {
         return true;
@@ -146,7 +145,6 @@ bool PartsMergedModel::append(const QMimeData * mimeData)
     }
 
     QString file = mimeData->data("text/uri-list");
-    kDebug() << file;
 
     KMimeType::Ptr mimeptr = KMimeType::findByUrl(KUrl(file));
     if (!mimeptr) {
@@ -228,16 +226,20 @@ bool PartsMergedModel::loadDirectory(const QString & url)
 
     QString path = KUrl(url).toLocalFile();
 
+    if (path.isEmpty()) {
+        path = url;
+    }
+
     data["version"]     = "1.0";
     data["type"]        = "list";
     data["model"]       = "Folder " + path;
+
     return load(Lancelot::Models::Serializator::serialize(data));
 }
 
 bool PartsMergedModel::load(const QString & input)
 {
     QMap < QString, QString > data = Lancelot::Models::Serializator::deserialize(input);
-    kDebug() << data;
 
     if (!data.contains("version")) {
         return false;
@@ -250,8 +252,6 @@ bool PartsMergedModel::load(const QString & input)
             QStringList modelDef = data["model"].split(' ');
             QString modelID = modelDef.takeFirst();
             QString modelExtraData;
-
-            kDebug() << modelDef << modelID << modelExtraData;
 
             modelExtraData = modelDef.join(" ");
             Lancelot::ActionListModel * model = NULL;
@@ -318,7 +318,6 @@ bool PartsMergedModel::load(const QString & input)
                 }
 
             } else if (modelID == "Folder") {
-                kDebug() << modelExtraData;
                 if (modelExtraData.startsWith(QLatin1String("applications:/"))) {
                     modelExtraData.remove(0, 14);
                     addModel(modelExtraData,
@@ -398,7 +397,6 @@ void PartsMergedModel::modelCountUpdated()
         }
     } else count = modelCount();
 
-    qDebug() << "###" << count;
     setShowModelTitles(count > 1);
 }
 

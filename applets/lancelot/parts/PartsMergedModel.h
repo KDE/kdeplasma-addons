@@ -63,6 +63,7 @@ private:
     QList < Lancelot::ActionListModel * > m_models;
     QString m_data;
 
+private Q_SLOTS:
     void modelCountUpdated();
 
 Q_SIGNALS:
