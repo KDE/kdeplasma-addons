@@ -400,7 +400,7 @@ void BasicWidget::paintForeground(QPainter * painter)
     }
     painter->setCompositionMode(QPainter::CompositionMode_DestinationIn);
     painter->fillRect(
-            0, 0, (int)size().width(), (int)size().height(),
+            0, 0, (int)ceil(size().width()), (int)ceil(size().height()),
             gradient);
     //
 
