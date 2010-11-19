@@ -79,3 +79,15 @@ void DateTimeRange::addYears( int years, Elements elems ) {
     if ( elems & Start ) start = start.addYears( years );
     if ( elems & Finish ) finish = finish.addYears( years );
 }
+
+bool DateTimeRange::includes( const KDateTime & dt ) const {
+    return dt >= start && dt <= finish;
+}
+
+bool DateTimeRange::intersects( const DateTimeRange & range ) const {
+    return range.finish >= start && range.start <= finish;
+}
+
+bool DateTimeRange::intersects( const KDateTime & rangeStart, const KDateTime & rangeFinish ) const {
+    return rangeFinish >= start && rangeStart <= finish;
+}

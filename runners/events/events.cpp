@@ -38,6 +38,8 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include <iostream>
+
 // This is the command that links the applet to the .desktop file
 K_EXPORT_PLASMA_RUNNER(events, EventsRunner)
 
@@ -46,6 +48,8 @@ static const QString eventKeyword( i18nc( "Event creation keyword", "event" ) );
 static const QString todoKeyword( i18nc( "Todo creation keyword", "todo" ) );
 static const QString completeKeyword( i18nc( "Todo completion keyword", "complete" ) );
 static const QString commentKeyword( i18nc( "Event comment keyword", "comment" ) );
+static const QString eventsKeyword( i18nc( "Event list keyword", "events" ) );
+static const QString todosKeyword( i18nc( "Todo list keyword", "todos" ) );
 
 using namespace Akonadi;
 
@@ -70,6 +74,7 @@ EventsRunner::EventsRunner(QObject *parent, const QVariantList& args)
     Q_UNUSED(args);
 
     setObjectName(RUNNER_NAME);
+    setSpeed(SlowSpeed);
 
     icon = KIcon( QLatin1String( "text-calendar" ) );
 
@@ -95,12 +100,7 @@ void EventsRunner::collectionsReceived( CollectionSelector & selector ) {
     selector.deleteLater(); // No need to store it in memory anymore
 }
 
-Akonadi::Item::List EventsRunner::selectItems( const QString & query, const QStringList & mimeTypes ) {
-    Item::List matchedItems;
-
-    if ( query.length() < 3 )
-        return matchedItems;
-
+Akonadi::Item::List EventsRunner::listAllItems() {
     QMutexLocker locker( &cachedItemsMutex ); // Lock cachedItems access
 
     if ( !cachedItemsLoaded ) {
@@ -117,10 +117,20 @@ Akonadi::Item::List EventsRunner::selectItems( const QString & query, const QStr
         job.start();
         loop.exec();
 
+        cachedItemsLoaded = true;
         cachedItems = job.items();
     }
 
-    foreach ( const Item & item, cachedItems ) {
+    return cachedItems;
+}
+
+Akonadi::Item::List EventsRunner::selectItems( const QString & query, const QStringList & mimeTypes ) {
+    Item::List matchedItems;
+
+    if ( query.length() < 3 )
+        return matchedItems;
+
+    foreach ( const Item & item, listAllItems() ) {
         if ( !mimeTypes.contains( item.mimeType() ) )
             continue;
 
@@ -134,6 +144,54 @@ Akonadi::Item::List EventsRunner::selectItems( const QString & query, const QStr
 
         if ( incidence->summary().contains( query, Qt::CaseInsensitive ) )
             matchedItems.append( item );
+
+        if ( matchedItems.size() >= 10 ) // Stop search when too many are found
+            break;
+    }
+
+    return matchedItems;
+}
+
+Akonadi::Item::List EventsRunner::selectItems( const DateTimeRange & query, const QStringList & mimeTypes ) {
+    Item::List matchedItems;
+
+    foreach ( const Item & item, listAllItems() ) {
+        if ( !mimeTypes.contains( item.mimeType() ) )
+            continue;
+
+        if ( !item.hasPayload<KCal::Incidence::Ptr>() )
+            continue;
+
+        KCal::Incidence::Ptr incidence = item.payload<KCal::Incidence::Ptr>();
+
+        if ( !incidence )
+            continue;
+
+        if ( KCal::Todo * todo = dynamic_cast<KCal::Todo *>( incidence.get() ) ) {
+            if ( todo->hasStartDate() && todo->hasDueDate() && !query.intersects( todo->dtStart(), todo->dtDue() ) )
+                continue;
+            else if ( todo->hasStartDate() && !query.includes( todo->dtStart() ) )
+                continue;
+            else if ( todo->hasDueDate() && !query.includes( todo->dtDue() ) )
+                continue;
+            else if ( !todo->hasDueDate() && !todo->hasStartDate() )
+                continue;
+        } else if ( KCal::Event * event = dynamic_cast<KCal::Event *>( incidence.get() ) ) {
+            if ( event->recurs() ) {
+                if ( event->recurrence()->timesInInterval( query.start, query.finish ).empty() )
+                    continue;
+            } else {
+                if ( event->hasEndDate() && !query.intersects( event->dtStart(), event->dtEnd() ) )
+                    continue;
+                else if ( !query.includes( event->dtStart() ) )
+                    continue;
+            }
+        } else {
+            if ( !query.intersects( incidence->dtStart(), incidence->dtEnd() ) )
+                continue;
+        }
+
+        matchedItems.append( item );
 
         if ( matchedItems.size() >= 10 ) // Stop search when too many are found
             break;
@@ -160,6 +218,14 @@ void EventsRunner::describeSyntaxes() {
     RunnerSyntax commentSyntax( QString("%1 :q: <comment>").arg( commentKeyword ), i18n("Selects event from calendar by its summary in :q: and append <comment> to its body.") );
     commentSyntax.setSearchTermDescription( i18n( "comment todo description" ) );
     syntaxes.append(commentSyntax);
+
+    RunnerSyntax eventsSyntax( QString("%1 :q:").arg( eventsKeyword ), i18n("Shows events from calendar by its date in :q:.") );
+    eventsSyntax.setSearchTermDescription( i18n( "event date/time" ) );
+    syntaxes.append(eventsSyntax);
+
+    RunnerSyntax todosSyntax( QString("%1 :q:").arg( eventsKeyword ), i18n("Shows todos from calendar by its date in :q:.") );
+    todosSyntax.setSearchTermDescription( i18n( "todo date/time" ) );
+    syntaxes.append(todosSyntax);
 
     setSyntaxes(syntaxes);
 }
@@ -278,13 +344,87 @@ Plasma::QueryMatch EventsRunner::createUpdateMatch( const Item & item, MatchType
     return match;
 }
 
+Plasma::QueryMatch EventsRunner::createShowMatch( const Item & item, MatchType type, const DateTimeRange & range ) {
+    QueryMatch match( this );
+
+    QMap<QString,QVariant> data; // Map for data
+
+    data["type"] = type;
+
+    if ( type == ShowIncidence ) {
+        KCal::Incidence::Ptr incidence = item.payload<KCal::Incidence::Ptr>();
+
+        match.setText( incidence->summary() );
+
+        if ( KCal::Todo * todo = dynamic_cast<KCal::Todo *>( incidence.get() ) ) {
+            match.setSubtext( i18n( "Date: %1", dateTimeToString( todo->dtDue() ) ) );
+        } else if ( KCal::Event * event = dynamic_cast<KCal::Event *>( incidence.get() ) ) {
+            if ( event->recurs() ) {
+                QString dates = "";
+
+                foreach ( const KDateTime & dt, event->recurrence()->timesInInterval( range.start, range.finish ) ) {
+                    if ( !dates.isEmpty() )
+                        dates += ", ";
+
+                    dates += dateTimeToString( dt );
+                }
+
+                match.setSubtext( i18n( "Date: %1", dates ) );
+            } else {
+                match.setSubtext( i18n( "Date: %1", dateTimeToString( event->dtStart() ) ) );
+            }
+        }
+
+        data["item"] = qVariantFromValue( item );
+    } else {
+        qDebug() << "Unknown match type: " << type;
+
+        return QueryMatch( 0 );
+    }
+
+    match.setData( data );
+    match.setRelevance( 0.8 );
+    match.setIcon( icon );
+    match.setId( QString("update-%1-%2").arg( item.id() ).arg( type )  );
+
+    return match;
+}
+
 void EventsRunner::match( Plasma::RunnerContext &context ) {
     const QString term = context.query();
 
     if ( term.length() < 8 )
         return;
 
-    if ( term.startsWith( eventKeyword ) ) {
+    if ( term.startsWith( eventsKeyword ) ) {
+        const QStringList args = splitArguments( term.mid( eventsKeyword.length() ) );
+        DateTimeRange range = dateTimeParser.parseRange( args[0].trimmed() );
+
+        if ( range.isValid() ) {
+            Item::List items = selectItems( range, QStringList( eventMimeType ) );
+
+            foreach ( const Item & item, items ) {
+                QueryMatch match = createShowMatch( item, ShowIncidence, range );
+
+                if ( match.isValid() )
+                    context.addMatch( term, match );
+            }
+        }
+    } else if ( term.startsWith( todosKeyword ) ) {
+        const QStringList args = splitArguments( term.mid( todosKeyword.length() ) );
+        DateTimeRange range = dateTimeParser.parseRange( args[0].trimmed() );
+
+        if ( range.isValid() ) {
+            Item::List items = selectItems( range, QStringList( todoMimeType ) );
+
+            foreach ( const Item & item, items ) {
+                QueryMatch match = createShowMatch( item, ShowIncidence, range );
+
+                if ( match.isValid() )
+                    context.addMatch( term, match );
+            }
+        }
+    } else if ( term.startsWith( eventKeyword ) ) {
         QueryMatch match = createQueryMatch( term.mid( eventKeyword.length() ), CreateEvent );
 
         if ( match.isValid() )
@@ -320,7 +460,7 @@ void EventsRunner::match( Plasma::RunnerContext &context ) {
 void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) {
     Q_UNUSED(context)
 
-    QMap<QString,QVariant> data = match.data().toMap();
+    const QMap<QString,QVariant> data = match.data().toMap();
 
     if ( data["type"].toInt() == CreateEvent ) {
         if ( !eventCollection.isValid() ) {
@@ -393,6 +533,8 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
         ItemModifyJob * job = new ItemModifyJob( item, this );
 
         job->setIgnorePayload( false ); // Update payload!!
+    } else if ( data["type"].toInt() == ShowIncidence ) {
+        // Do nothing yet
     } else {
         qDebug() << "Unknown match type: " << data["type"];
     }

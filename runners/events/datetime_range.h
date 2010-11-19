@@ -39,6 +39,10 @@ public:
         return start == finish;
     }
 
+    bool isValid() const {
+        return start.isValid() && finish.isValid() && start <= finish;
+    }
+
     void setDate( const QDate & date, Elements elems );
     void setTime( const QTime & time, Elements elems );
 
@@ -46,6 +50,10 @@ public:
     void addDays( int days, Elements elems );
     void addMonths( int months, Elements elems );
     void addYears( int years, Elements elems );
+
+    bool includes( const KDateTime & dt ) const;
+    bool intersects( const DateTimeRange & range ) const;
+    bool intersects( const KDateTime & rangeStart, const KDateTime & rangeFinish ) const;
 public:
     KDateTime start;
     KDateTime finish;

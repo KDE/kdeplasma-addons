@@ -63,7 +63,8 @@ private:
         CreateEvent,
         CreateTodo,
         CompleteTodo,
-        CommentIncidence
+        CommentIncidence,
+        ShowIncidence
     };
 
 private:
@@ -75,8 +76,13 @@ private:
     */
     Akonadi::Item::List selectItems( const QString & query, const QStringList & mimeTypes );
 
+    Akonadi::Item::List selectItems( const DateTimeRange & query, const QStringList & mimeTypes );
+
+    Akonadi::Item::List listAllItems();
+
     Plasma::QueryMatch createQueryMatch( const QString & definition, MatchType type );
     Plasma::QueryMatch createUpdateMatch( const Akonadi::Item & item, MatchType type, const QStringList & args );
+    Plasma::QueryMatch createShowMatch( const Akonadi::Item & item, MatchType type, const DateTimeRange & range );
 
     void describeSyntaxes();
 
