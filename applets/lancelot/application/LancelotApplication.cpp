@@ -92,6 +92,7 @@ LancelotApplication::~LancelotApplication()
 
 int LancelotApplication::main(int argc, char **argv)
 {
+    qDebug() << "load main catalog ###";
     KLocale::setMainCatalog("lancelot");
 
     KAboutData * about = new AboutData();
