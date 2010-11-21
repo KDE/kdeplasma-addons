@@ -619,8 +619,7 @@ void LancelotWindow::setupModels()
 
     MergedAddModel(m_modelGroups["DocumentsLeft"], "NewDocuments", m_models["NewDocuments"], i18nc("@title New documents", "New"));
 
-    //FIXME: "Open Documents" is not a good i18n context, as it could still mean "List of open documents" or "Open these documents".
-    MergedAddModel(m_modelGroups["DocumentsRight"], "OpenDocuments", m_models["OpenDocuments"], i18nc("@title Open documents", "Open"));
+    MergedAddModel(m_modelGroups["DocumentsRight"], "OpenDocuments", m_models["OpenDocuments"], i18nc("@title List of open documents", "Open"));
     MergedAddModel(m_modelGroups["DocumentsRight"], "RecentDocuments", m_models["RecentDocuments"], i18nc("@title Recent documents", "Recent"));
 
     QString plugins;
