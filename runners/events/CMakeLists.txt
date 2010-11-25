@@ -28,4 +28,5 @@ install(FILES plasma-runner-events.desktop plasma-runner-events_config.desktop
 
 # Unit tests
 kde4_add_unit_test(datetime_parser_test datetime_parser_test.cpp datetime_parser.cpp datetime_range.cpp)
-target_link_libraries(datetime_parser_test ${KDE4_KDEUI_LIBS} QtTest)
+target_link_libraries(datetime_parser_test ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
+
