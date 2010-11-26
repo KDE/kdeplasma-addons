@@ -241,6 +241,7 @@ void GridGroup::subGroupRemoved(AbstractGroup *)
 {
     appletRemoved(0);
 }
+
 void GridGroup::animationFinished()
 {
     if (m_managerAnim->direction() == QAbstractAnimation::Backward) {
@@ -428,11 +429,11 @@ void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     const qreal size = 30;
     bool vertical;
     QRectF geom;
-    if (QRectF(0, 0, 2 * size, bRect.height()).contains(pos)) {
+    if (QRectF(0, 0, size, bRect.height()).contains(pos)) {
         vertical = true;
         geom = QRect(cRect.x(), cRect.y(), size, cRect.height());
         m_gridManagerLocation = Plasma::LeftEdge;
-    } else if (QRectF(bRect.width() - 2 * size, 0, 2 * size, bRect.height()).contains(pos)) {
+    } else if (QRectF(bRect.width() - size, 0, size, bRect.height()).contains(pos)) {
         vertical = true;
         geom = QRectF(cRect.right() - size, cRect.y(), size, cRect.height());
         m_gridManagerLocation = Plasma::RightEdge;
@@ -440,7 +441,7 @@ void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
         vertical = false;
         geom = QRectF(cRect.x(), cRect.y(), cRect.width(), size);
         m_gridManagerLocation = Plasma::TopEdge;
-    } else if (QRectF(0, bRect.height() - 2 * size, bRect.width(), 2 * size).contains(pos)) {
+    } else if (QRectF(0, bRect.height() - size, bRect.width(), size).contains(pos)) {
         vertical = false;
         geom = QRectF(cRect.x(), cRect.bottom() - size, cRect.width(), size);
         m_gridManagerLocation = Plasma::BottomEdge;
