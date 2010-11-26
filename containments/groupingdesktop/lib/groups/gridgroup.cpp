@@ -124,11 +124,11 @@ QString GridGroup::pluginName() const
 
 void GridGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
 {
-    QRectF rect(group.readEntry("Geometry", QRectF()));
+    QRect rect(group.readEntry("Geometry", QRect()));
     QRectF cRect(contentsRect());
     const qreal width = cRect.width() / m_colsNumber;
     const qreal height = cRect.height() / m_rowsNumber;
-    child->setData(0, rect);
+    m_childrenRects.insert(child, rect);
     child->setPos(rect.x() * width + cRect.x(), rect.y() * height + cRect.y());
     child->resize(rect.width() * width, rect.height() * height);
 
@@ -137,7 +137,7 @@ void GridGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup
 
 void GridGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
 {
-    group.writeEntry("Geometry", child->data(0).toRectF());
+    group.writeEntry("Geometry", m_childrenRects.value(child));
 }
 
 void GridGroup::addNewRowOrColumn()
@@ -149,9 +149,9 @@ void GridGroup::addNewRowOrColumn()
         cg.writeEntry("ColsNumber", m_colsNumber);
         if (left) { //must move all the children one column right
             foreach (QGraphicsWidget *child, children()) {
-                QRectF r(child->data(0).toRectF());
+                QRect r(m_childrenRects.value(child));
                 r.translate(1, 0);
-                child->setData(0, r);
+                m_childrenRects.insert(child, r);
             }
         }
     } else {
@@ -159,9 +159,9 @@ void GridGroup::addNewRowOrColumn()
         cg.writeEntry("RowsNumber", m_rowsNumber);
         if (m_gridManagerLocation == Plasma::TopEdge) { //must move all the children one row down
             foreach (QGraphicsWidget *child, children()) {
-                QRectF r(child->data(0).toRectF());
+                QRect r(m_childrenRects.value(child));
                 r.translate(0, 1);
-                child->setData(0, r);
+                m_childrenRects.insert(child, r);
             }
         }
     }
@@ -178,7 +178,7 @@ void GridGroup::removeRowOrColumn()
     if (left || m_gridManagerLocation == Plasma::RightEdge) {
         //check we don't remove columns with children in it
         foreach (QGraphicsWidget *child, children()) {
-            QRectF rect = child->data(0).toRectF();
+            QRect rect = m_childrenRects.value(child);
             QPoint p;
             if (left) {
                 p = QPoint(0, rect.y());
@@ -193,16 +193,16 @@ void GridGroup::removeRowOrColumn()
         cg.writeEntry("ColsNumber", m_colsNumber);
         if (left) { //must move all the children one column left
             foreach (QGraphicsWidget *child, children()) {
-                QRectF r(child->data(0).toRectF());
+                QRect r(m_childrenRects.value(child));
                 r.translate(-1, 0);
-                child->setData(0, r);
+                m_childrenRects.insert(child, r);
             }
         }
     } else {
         //check we don't remove rows with children in it
         bool top = m_gridManagerLocation == Plasma::TopEdge;
         foreach (QGraphicsWidget *child, children()) {
-            QRectF rect = child->data(0).toRectF();
+            QRectF rect = m_childrenRects.value(child);
             QPoint p;
             if (top) {
                 p = QPoint(rect.x(), 0);
@@ -217,9 +217,9 @@ void GridGroup::removeRowOrColumn()
         cg.writeEntry("RowsNumber", m_rowsNumber);
         if (top) { //must move all the children one row up
             foreach (QGraphicsWidget *child, children()) {
-                QRectF r(child->data(0).toRectF());
+                QRect r(m_childrenRects.value(child));
                 r.translate(0, -1);
-                child->setData(0, r);
+                m_childrenRects.insert(child, r);
             }
         }
     }
@@ -368,7 +368,7 @@ void GridGroup::updateChild(QGraphicsWidget *child)
         rows = rowsNumber - j;
     }
 
-    child->setData(0, QRectF(i, j, cols, rows));
+    m_childrenRects.insert(child, QRect(i, j, cols, rows));
     child->setGeometry(QRectF(i * width + rect.x(), j * height + rect.y(),
                                           width * cols, height * rows));
 }
@@ -376,7 +376,7 @@ void GridGroup::updateChild(QGraphicsWidget *child)
 QGraphicsWidget *GridGroup::childAt(int column, int row)
 {
     foreach (QGraphicsWidget *c, children()) {
-        QRectF rect = c->data(0).toRectF();
+        QRectF rect = m_childrenRects.value(c);
         if (rect.contains(column, row) && column < rect.right() && row < rect.bottom()) {
             return c;
         }
@@ -391,7 +391,7 @@ void GridGroup::updateGeometries()
     const qreal width = rect.width() / m_colsNumber;
     const qreal height = rect.height() / m_rowsNumber;
     foreach (QGraphicsWidget *child, children()) {
-        QRectF r(child->data(0).toRectF());
+        QRectF r(m_childrenRects.value(child));
         child->setPos(r.x() * width + rect.x(), r.y() * height + rect.y());
         child->resize(r.width() * width, r.height() * height);
     }
@@ -633,12 +633,12 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 i = (i > 0 ? i : 0);
                 j = (j > 0 ? j : 0);
 
-                QRectF newRect = QRectF(i, j, cols, rows);
+                QRect newRect(i, j, cols, rows);
 
                 bool intersects = false;
                 foreach (QGraphicsWidget *c, children()) {
                     if (c != child) {
-                        QRectF r(c->data(0).toRectF());
+                        QRect r(m_childrenRects.value(c));
                         if (r.intersects(newRect)) {
                             intersects = true;
                             break;
@@ -647,9 +647,9 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 }
 
                 if (intersects) {
-                    newRect = child->data(0).toRectF();
+                    newRect = m_childrenRects.value(child);
                 } else {
-                    child->setData(0, newRect);
+                    m_childrenRects.insert(child, newRect);
                 }
                 child->setGeometry(QRectF(newRect.x() * width + rect.x(), newRect.y() * height + rect.y(),
                                           width * newRect.width(), height * newRect.height()));

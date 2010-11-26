@@ -71,6 +71,7 @@ class GridGroup : public AbstractGroup
         int m_rowsNumber;
         int m_colsNumber;
         bool m_showGrid;
+        QHash<QGraphicsWidget *, QRect> m_childrenRects;
         QWeakPointer<Spacer> m_cornerHandle;
         Qt::Corner m_handleCorner;
         QPointF m_resizeStartPos;
