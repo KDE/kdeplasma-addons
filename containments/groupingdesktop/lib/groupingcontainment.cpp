@@ -739,6 +739,10 @@ bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event
 
 bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
 {
+    if (immutability() != Plasma::Mutable) {
+        return false;
+    }
+
     AbstractGroup *group = qobject_cast<AbstractGroup *>(obj);
     Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(obj);
 
