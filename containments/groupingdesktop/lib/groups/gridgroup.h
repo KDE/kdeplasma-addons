@@ -77,6 +77,7 @@ class GridGroup : public AbstractGroup
         QRectF m_resizeStartGeom;
         Spacer *m_gridManager;
         QGraphicsLinearLayout *m_gridManagerLayout;
+        Plasma::Location m_gridManagerLocation;
         Plasma::ToolButton *m_newRowCol;
         Plasma::ToolButton *m_delRowCol;
         Plasma::Animation *m_managerAnim;

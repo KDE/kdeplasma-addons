@@ -143,13 +143,29 @@ void GridGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) c
 void GridGroup::addNewRowOrColumn()
 {
     KConfigGroup cg = config();
-    if (m_gridManagerLayout->orientation() == Qt::Vertical) {
+    bool left = m_gridManagerLocation == Plasma::LeftEdge;
+    if (left || m_gridManagerLocation == Plasma::RightEdge) {
         ++m_colsNumber;
         cg.writeEntry("ColsNumber", m_colsNumber);
+        if (left) { //must move all the children one column right
+            foreach (QGraphicsWidget *child, children()) {
+                QRectF r(child->data(0).toRectF());
+                r.translate(1, 0);
+                child->setData(0, r);
+            }
+        }
     } else {
         ++m_rowsNumber;
         cg.writeEntry("RowsNumber", m_rowsNumber);
+        if (m_gridManagerLocation == Plasma::TopEdge) { //must move all the children one row down
+            foreach (QGraphicsWidget *child, children()) {
+                QRectF r(child->data(0).toRectF());
+                r.translate(0, 1);
+                child->setData(0, r);
+            }
+        }
     }
+    saveChildren();
     emit configNeedsSaving();
 
     updateGeometries();
@@ -158,27 +174,56 @@ void GridGroup::addNewRowOrColumn()
 void GridGroup::removeRowOrColumn()
 {
     KConfigGroup cg = config();
-    if (m_gridManagerLayout->orientation() == Qt::Vertical) {
+    bool left = m_gridManagerLocation == Plasma::LeftEdge;
+    if (left || m_gridManagerLocation == Plasma::RightEdge) {
         //check we don't remove columns with children in it
         foreach (QGraphicsWidget *child, children()) {
             QRectF rect = child->data(0).toRectF();
-            if (rect.contains(m_colsNumber, rect.y())) {
+            QPoint p;
+            if (left) {
+                p = QPoint(0, rect.y());
+            } else {
+                p = QPoint(m_colsNumber, rect.y());
+            }
+            if (rect.contains(p)) {
                 return;
             }
         }
         m_colsNumber = (m_colsNumber > 1 ? m_colsNumber - 1 : 1);
         cg.writeEntry("ColsNumber", m_colsNumber);
+        if (left) { //must move all the children one column left
+            foreach (QGraphicsWidget *child, children()) {
+                QRectF r(child->data(0).toRectF());
+                r.translate(-1, 0);
+                child->setData(0, r);
+            }
+        }
     } else {
         //check we don't remove rows with children in it
+        bool top = m_gridManagerLocation == Plasma::TopEdge;
         foreach (QGraphicsWidget *child, children()) {
             QRectF rect = child->data(0).toRectF();
-            if (rect.contains(rect.x(), m_rowsNumber)) {
+            QPoint p;
+            if (top) {
+                p = QPoint(rect.x(), 0);
+            } else {
+                p = QPoint(rect.x(), m_rowsNumber);
+            }
+            if (rect.contains(p)) {
                 return;
             }
         }
         m_rowsNumber = (m_rowsNumber > 1 ? m_rowsNumber - 1 : 1);
         cg.writeEntry("RowsNumber", m_rowsNumber);
+        if (top) { //must move all the children one row up
+            foreach (QGraphicsWidget *child, children()) {
+                QRectF r(child->data(0).toRectF());
+                r.translate(0, -1);
+                child->setData(0, r);
+            }
+        }
     }
+    saveChildren();
     emit configNeedsSaving();
 
     updateGeometries();
@@ -386,15 +431,19 @@ void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     if (QRectF(0, 0, 2 * size, bRect.height()).contains(pos)) {
         vertical = true;
         geom = QRect(cRect.x(), cRect.y(), size, cRect.height());
+        m_gridManagerLocation = Plasma::LeftEdge;
     } else if (QRectF(bRect.width() - 2 * size, 0, 2 * size, bRect.height()).contains(pos)) {
         vertical = true;
         geom = QRectF(cRect.right() - size, cRect.y(), size, cRect.height());
+        m_gridManagerLocation = Plasma::RightEdge;
     } else if (QRectF(0, 0, bRect.width(), size).contains(pos)) {
         vertical = false;
         geom = QRectF(cRect.x(), cRect.y(), cRect.width(), size);
+        m_gridManagerLocation = Plasma::TopEdge;
     } else if (QRectF(0, bRect.height() - 2 * size, bRect.width(), 2 * size).contains(pos)) {
         vertical = false;
         geom = QRectF(cRect.x(), cRect.bottom() - size, cRect.width(), size);
+        m_gridManagerLocation = Plasma::BottomEdge;
     } else {
         m_managerAnim->setDirection(QAbstractAnimation::Backward);
         m_managerAnim->start();
