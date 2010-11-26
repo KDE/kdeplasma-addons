@@ -822,13 +822,17 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
             }
             break;
 
-            case QEvent::GraphicsSceneDrop:
+            case QEvent::GraphicsSceneDrop: {
                 if (group) {
                     QGraphicsSceneDragDropEvent *e = static_cast<QGraphicsSceneDragDropEvent *>(event);
                     e->setPos(mapFromScene(e->scenePos()));
                     dropEvent(e);
                 }
-
+                if (d->interestingGroup) {
+                    d->interestingGroup.data()->showDropZone(QPointF());
+                    d->interestingGroup.clear();
+                }
+            }
             break;
 
             case QEvent::GraphicsSceneMouseRelease:
@@ -955,10 +959,6 @@ void GroupingContainment::dropEvent(QGraphicsSceneDragDropEvent *event)
         }
     } else {
         Plasma::Containment::dropEvent(event);
-    }
-    if (d->interestingGroup) {
-        d->interestingGroup.data()->showDropZone(QPointF());
-        d->interestingGroup.clear();
     }
 }
 
