@@ -150,7 +150,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonMultiply->setVisible( true );
 
         mButtonDivide = new Plasma::PushButton(m_widget);
-        mButtonDivide->setText( i18nc("The ? button of the calculator", "?") );
+        mButtonDivide->setText( i18nc("The ÷ button of the calculator", "÷") );
         mButtonDivide->setMinimumSize(buttonX,buttonY);
         mButtonDivide->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
