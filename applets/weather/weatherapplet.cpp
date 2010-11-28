@@ -738,6 +738,9 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_tabBar->addTab(i18nc("weather notices", "Notices"), noticeLayout);
     }
 
+    // Hide the tab bar if there is only one tab to show
+    m_tabBar->setTabBarShown(m_tabBar->count() > 1);
+    
     if (!m_setupLayout) {
         m_layout->addItem(m_tabBar);
         m_layout->addItem(m_courtesyLabel);
