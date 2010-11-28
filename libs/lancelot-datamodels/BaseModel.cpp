@@ -38,6 +38,26 @@
 
 #include "Logger.h"
 
+// K_CATALOG_LOADER(liblancelot-datamodels)
+
+// K_CATALOG_LOADER fails for catalogs that have a dash in the name
+
+class KCatalogLoader_liblancelot_datamodels
+{
+    public:
+        KCatalogLoader_liblancelot_datamodels();
+};
+
+static KCatalogLoader_liblancelot_datamodels catalogLoader_liblancelot_datamodels;
+
+KCatalogLoader_liblancelot_datamodels::KCatalogLoader_liblancelot_datamodels()
+{
+    qDebug() << "## Loading catalog liblancelot-datamodels";
+    KGlobal::insertCatalog(QLatin1String("liblancelot-datamodels"));
+}
+
+// KCatalogLoader finished
+
 namespace Lancelot {
 namespace Models {
 
