@@ -19,6 +19,7 @@
 
 #include "weatherview.h"
 
+#include <QGraphicsSceneContextMenuEvent>
 #include <QTreeView>
 #include <QHeaderView>
 
@@ -98,6 +99,11 @@ QSizeF WeatherView::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
     default:
         return QSizeF(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
     }
+}
+
+void WeatherView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    event->ignore();
 }
 
 }
