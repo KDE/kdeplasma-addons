@@ -469,7 +469,7 @@ void GroupingContainmentPrivate::restoreGroups()
                     manageGroup(group, group->pos());
                 }
             }
-        } else {
+        } else if (group != mainGroup) {
             manageGroup(group, group->pos());
         }
     }
