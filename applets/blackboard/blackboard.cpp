@@ -31,6 +31,7 @@ BlackBoard::BlackBoard(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       blackBoard(0)
 {
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(200, 200);
     setHasConfigurationInterface(false);
     //setBackgroundHints(NoBackground);
