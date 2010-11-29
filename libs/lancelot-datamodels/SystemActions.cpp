@@ -34,7 +34,9 @@
 #include <Plasma/AbstractRunner>
 
 #include <kworkspace/kworkspace.h>
-#include <solid/control/powermanager.h>
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusMessage>
+#include <QtDBus/QDBusPendingCall>
 #include <solid/powermanagement.h>
 
 #include "screensaver_interface.h"
@@ -277,13 +279,20 @@ void SystemActions::Private::delayedActivate()
     QString cmd = q->root()->children.at(delayedActivateItemIndex)->data.toString();
 
     if (cmd == ID_SUSPEND_DISK || cmd == ID_SUSPEND_RAM) {
-        QDBusConnection dbus(QDBusConnection::sessionBus());
-        QDBusInterface iface("org.kde.kded", "/modules/powerdevil", "org.kde.PowerDevil", dbus);
+        QDBusMessage call;
 
         if (cmd == ID_SUSPEND_DISK) {
-            iface.asyncCall("suspend", Solid::Control::PowerManager::ToDisk);
+            call = QDBusMessage::createMethodCall("org.kde.Solid.PowerManagement",
+                                                  "/org/kde/Solid/PowerManagement",
+                                                  "org.kde.Solid.PowerManagement",
+                                                  "suspendToDisk");
+            QDBusConnection::sessionBus().asyncCall(call);
         } else {
-            iface.asyncCall("suspend", Solid::Control::PowerManager::ToRam);
+            call = QDBusMessage::createMethodCall("org.kde.Solid.PowerManagement",
+                                                  "/org/kde/Solid/PowerManagement",
+                                                  "org.kde.Solid.PowerManagement",
+                                                  "suspendToRam");
+             QDBusConnection::sessionBus().asyncCall(call);
         }
 
         ApplicationConnector::self()->hide(true);
