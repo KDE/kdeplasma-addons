@@ -73,7 +73,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mOutputDisplay->nativeWidget()->setWordWrap( true );
         frameLayout->addItem(mOutputDisplay);
         m_layout->addItem( displayFrame, 0, 0, 1, 4 );
-        mOutputDisplay->nativeWidget()->setAlignment(Qt::AlignRight);
+        mOutputDisplay->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         QFont font = Plasma::Theme::defaultTheme()->font( Plasma::Theme::DefaultFont );
         font.setBold(true);
         font.setPointSize(16);
