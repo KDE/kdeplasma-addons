@@ -33,6 +33,8 @@ namespace Plasma
 WeatherView::WeatherView(QGraphicsWidget *parent)
         : TreeView(parent)
 {
+    setAcceptedMouseButtons(Qt::NoButton);
+    
     QTreeView *native = nativeWidget();
     native->viewport()->setAutoFillBackground(false);
     native->header()->hide();
