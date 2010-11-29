@@ -361,6 +361,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         // fiveDayTokens[4] = Low Temperature
         if (fiveDayTokens[4] != "N/A" && fiveDayTokens[3] == "N/A") {  // Low temperature
             m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
+            m_tempLabel->show(); //m_tempLabel might be hidden if temperature was not available
             m_forecastTemps->setText(i18nc("Low temperature", "Low: %1", convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt(), true)));
         } else if (fiveDayTokens[3] != "N/A" && fiveDayTokens[4] == "N/A") { // High temperature
             m_forecastTemps->setText(i18nc("High temperature", "High: %1", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true)));
@@ -376,8 +377,9 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (isValidData(data["Temperature"])) {
         m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
+        m_tempLabel->show(); //m_tempLabel might be hidden if temperature was not available
     } else {
-        m_tempLabel->setText(i18nc("Not available","N/A"));
+        m_tempLabel->hide(); //temperature is not available (probability the engine doesn't support it)
     }
 
     m_courtesyLabel->setText(data["Credit"].toString());
