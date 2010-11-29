@@ -30,9 +30,11 @@
 #include <QFontMetrics>
 #include <QSizePolicy>
 
+#include <KAction>
 #include <KPushButton>
 #include <KGlobal>
 #include <KLocale>
+#include <KStandardAction>
 
 #include <Plasma/Theme>
 #include <Plasma/PushButton>
@@ -184,13 +186,8 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         getContentsMargins(&left, &top, &right, &bottom);
         m_widget->setMinimumSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left + right, top + bottom));
 
-        QAction *copy = new QAction(i18n( "Copy" ), this);
-        actions.append(copy);
-        connect(copy, SIGNAL(triggered(bool)), this, SLOT(slotCopy()));
-
-        QAction *paste = new QAction(i18n( "Paste" ), this);
-        actions.append(paste);
-        connect(paste, SIGNAL(triggered(bool)), this, SLOT(slotPaste()));
+        actions.append(KStandardAction::copy(this, SLOT(slotCopy()), this));
+        actions.append(KStandardAction::paste(this, SLOT(slotPaste()), this));
     }
 
     return m_widget;
