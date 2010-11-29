@@ -48,7 +48,9 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
            m_showGrid(false),
            m_gridManager(new Spacer(this)),
            m_newRowCol(new Plasma::ToolButton(m_gridManager)),
+           m_newRowCol2(new Plasma::ToolButton(m_gridManager)),
            m_delRowCol(new Plasma::ToolButton(m_gridManager)),
+           m_delRowCol2(new Plasma::ToolButton(m_gridManager)),
            m_managerAnim(0)
 {
     resize(200,200);
@@ -60,14 +62,20 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_gridManager->setLayout(m_gridManagerLayout);
     m_gridManager->setZValue(100000000);
     m_gridManagerLayout->addItem(m_newRowCol);
-    m_gridManagerLayout->addStretch();
     m_gridManagerLayout->addItem(m_delRowCol);
+    m_gridManagerLayout->addStretch();
+    m_gridManagerLayout->addItem(m_delRowCol2);
+    m_gridManagerLayout->addItem(m_newRowCol2);
 
     m_newRowCol->setIcon(KIcon("list-add"));
     m_newRowCol->setMinimumSize(QSizeF());
     m_delRowCol->setIcon(KIcon("list-remove"));
     m_delRowCol->setMinimumSize(QSizeF());
-
+    m_newRowCol2->setIcon(KIcon("list-add"));
+    m_newRowCol2->setMinimumSize(QSizeF());
+    m_delRowCol2->setIcon(KIcon("list-remove"));
+    m_delRowCol2->setMinimumSize(QSizeF());
+    
     m_managerAnim = Plasma::Animator::create(Plasma::Animator::FadeAnimation);
     m_managerAnim->setTargetWidget(m_gridManager);
     m_managerAnim->setProperty("startOpacity", 0);
@@ -76,6 +84,8 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
     connect(m_newRowCol, SIGNAL(clicked()), this, SLOT(addNewRowOrColumn()));
     connect(m_delRowCol, SIGNAL(clicked()), this, SLOT(removeRowOrColumn()));
+    connect(m_newRowCol2, SIGNAL(clicked()), this, SLOT(addNewRowOrColumn()));
+    connect(m_delRowCol2, SIGNAL(clicked()), this, SLOT(removeRowOrColumn()));
 
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(appletRemoved(Plasma::Applet*)));
@@ -454,10 +464,14 @@ void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     if (vertical) {
         m_newRowCol->setToolTip(i18n("Add a new column"));
         m_delRowCol->setToolTip(i18n("Remove a column"));
+        m_newRowCol2->setToolTip(i18n("Add a new column"));
+        m_delRowCol2->setToolTip(i18n("Remove a column"));
         m_gridManagerLayout->setOrientation(Qt::Vertical);
     } else {
         m_newRowCol->setToolTip(i18n("Add a new row"));
         m_delRowCol->setToolTip(i18n("Remove a row"));
+        m_newRowCol2->setToolTip(i18n("Add a new row"));
+        m_delRowCol2->setToolTip(i18n("Remove a row"));
         m_gridManagerLayout->setOrientation(Qt::Horizontal);
     }
     m_gridManager->setGeometry(geom);

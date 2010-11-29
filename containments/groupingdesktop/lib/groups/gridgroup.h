@@ -80,7 +80,9 @@ class GridGroup : public AbstractGroup
         QGraphicsLinearLayout *m_gridManagerLayout;
         Plasma::Location m_gridManagerLocation;
         Plasma::ToolButton *m_newRowCol;
+        Plasma::ToolButton *m_newRowCol2;
         Plasma::ToolButton *m_delRowCol;
+        Plasma::ToolButton *m_delRowCol2;
         Plasma::Animation *m_managerAnim;
 
 };
