@@ -12,3 +12,5 @@ install(TARGETS plasma_applet_life
  
 install(FILES plasma-applet-life.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
+
+kde4_install_icons(${ICON_INSTALL_DIR})

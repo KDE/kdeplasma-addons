@@ -103,7 +103,7 @@ Comment[wa]=Aplikete di Conway's Game of Life
 Comment[x-test]=xx Conway's Game of Life appletxx
 Comment[zh_CN]= 生命小程序的 Conway 游戏
 Comment[zh_TW]=Conway 的生命遊戲小程式
-#Icon=chronometer //TODO: missing icon
+Icon=lifegame
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet
