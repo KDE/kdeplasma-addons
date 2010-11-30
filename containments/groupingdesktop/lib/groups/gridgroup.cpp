@@ -246,6 +246,7 @@ void GridGroup::updateChild(QGraphicsWidget *child)
     cols = (cols > 0 ? cols : 1);
 
     i = (i < 0 ? 0 : i);
+    j = (j < 0 ? 0 : j);
     QGraphicsWidget *w = childAt(i, j);
     //find the nearest hole in which the child can be put
     if (w && w != child) {
