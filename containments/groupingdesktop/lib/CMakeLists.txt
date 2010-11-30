@@ -11,6 +11,7 @@ set(groupingcontainment_SRCS
 
         groups/floatinggroup.cpp
         groups/gridgroup.cpp
+        groups/gridmanager.cpp
         groups/flowgroup.cpp
         groups/stackinggroup.cpp
         groups/tabbinggroup.cpp

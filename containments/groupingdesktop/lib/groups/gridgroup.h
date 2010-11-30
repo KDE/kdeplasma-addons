@@ -24,12 +24,8 @@
 
 class QGraphicsLinearLayout;
 
-namespace Plasma {
-    class ToolButton;
-    class Animation;
-};
-
 class Spacer;
+class GridManager;
 
 class GridGroup : public AbstractGroup
 {
@@ -57,7 +53,6 @@ class GridGroup : public AbstractGroup
     private slots:
         void addNewRowOrColumn();
         void removeRowOrColumn();
-        void animationFinished();
         void appletRemoved(Plasma::Applet *applet);
         void subGroupRemoved(AbstractGroup *group);
         void resizeDone();
@@ -76,14 +71,7 @@ class GridGroup : public AbstractGroup
         Qt::Corner m_handleCorner;
         QPointF m_resizeStartPos;
         QRectF m_resizeStartGeom;
-        Spacer *m_gridManager;
-        QGraphicsLinearLayout *m_gridManagerLayout;
-        Plasma::Location m_gridManagerLocation;
-        Plasma::ToolButton *m_newRowCol;
-        Plasma::ToolButton *m_newRowCol2;
-        Plasma::ToolButton *m_delRowCol;
-        Plasma::ToolButton *m_delRowCol2;
-        Plasma::Animation *m_managerAnim;
+        GridManager *m_gridManager;
 
 };
 

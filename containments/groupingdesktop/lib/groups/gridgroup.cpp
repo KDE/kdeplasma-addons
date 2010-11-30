@@ -37,6 +37,7 @@
 #include <Plasma/Animation>
 
 #include "spacer.h"
+#include "gridmanager.h"
 
 REGISTER_GROUP(GridGroup)
 
@@ -46,46 +47,14 @@ static const int CORNERHANDLE_HEIGHT = 20;
 GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
          : AbstractGroup(parent, wFlags),
            m_showGrid(false),
-           m_gridManager(new Spacer(this)),
-           m_newRowCol(new Plasma::ToolButton(m_gridManager)),
-           m_newRowCol2(new Plasma::ToolButton(m_gridManager)),
-           m_delRowCol(new Plasma::ToolButton(m_gridManager)),
-           m_delRowCol2(new Plasma::ToolButton(m_gridManager)),
-           m_managerAnim(0)
+           m_gridManager(new GridManager(this))
 {
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
 
     m_gridManager->hide();
-
-    m_gridManagerLayout = new QGraphicsLinearLayout();
-    m_gridManager->setLayout(m_gridManagerLayout);
-    m_gridManager->setZValue(100000000);
-    m_gridManagerLayout->addItem(m_newRowCol);
-    m_gridManagerLayout->addItem(m_delRowCol);
-    m_gridManagerLayout->addStretch();
-    m_gridManagerLayout->addItem(m_delRowCol2);
-    m_gridManagerLayout->addItem(m_newRowCol2);
-
-    m_newRowCol->setIcon(KIcon("list-add"));
-    m_newRowCol->setMinimumSize(QSizeF());
-    m_delRowCol->setIcon(KIcon("list-remove"));
-    m_delRowCol->setMinimumSize(QSizeF());
-    m_newRowCol2->setIcon(KIcon("list-add"));
-    m_newRowCol2->setMinimumSize(QSizeF());
-    m_delRowCol2->setIcon(KIcon("list-remove"));
-    m_delRowCol2->setMinimumSize(QSizeF());
-    
-    m_managerAnim = Plasma::Animator::create(Plasma::Animator::FadeAnimation);
-    m_managerAnim->setTargetWidget(m_gridManager);
-    m_managerAnim->setProperty("startOpacity", 0);
-    m_managerAnim->setProperty("targetOpacity", 1);
-    connect(m_managerAnim, SIGNAL(finished()), this, SLOT(animationFinished()));
-
-    connect(m_newRowCol, SIGNAL(clicked()), this, SLOT(addNewRowOrColumn()));
-    connect(m_delRowCol, SIGNAL(clicked()), this, SLOT(removeRowOrColumn()));
-    connect(m_newRowCol2, SIGNAL(clicked()), this, SLOT(addNewRowOrColumn()));
-    connect(m_delRowCol2, SIGNAL(clicked()), this, SLOT(removeRowOrColumn()));
+    connect(m_gridManager, SIGNAL(newClicked()), this, SLOT(addNewRowOrColumn()));
+    connect(m_gridManager, SIGNAL(deleteClicked()), this, SLOT(removeRowOrColumn()));
 
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(appletRemoved(Plasma::Applet*)));
@@ -153,8 +122,9 @@ void GridGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) c
 void GridGroup::addNewRowOrColumn()
 {
     KConfigGroup cg = config();
-    bool left = m_gridManagerLocation == Plasma::LeftEdge;
-    if (left || m_gridManagerLocation == Plasma::RightEdge) {
+    Plasma::Location location = m_gridManager->location();
+    bool left = location == Plasma::LeftEdge;
+    if (left || location == Plasma::RightEdge) {
         ++m_colsNumber;
         cg.writeEntry("ColsNumber", m_colsNumber);
         if (left) { //must move all the children one column right
@@ -167,7 +137,7 @@ void GridGroup::addNewRowOrColumn()
     } else {
         ++m_rowsNumber;
         cg.writeEntry("RowsNumber", m_rowsNumber);
-        if (m_gridManagerLocation == Plasma::TopEdge) { //must move all the children one row down
+        if (location == Plasma::TopEdge) { //must move all the children one row down
             foreach (QGraphicsWidget *child, children()) {
                 QRect r(m_childrenRects.value(child));
                 r.translate(0, 1);
@@ -184,8 +154,9 @@ void GridGroup::addNewRowOrColumn()
 void GridGroup::removeRowOrColumn()
 {
     KConfigGroup cg = config();
-    bool left = m_gridManagerLocation == Plasma::LeftEdge;
-    if (left || m_gridManagerLocation == Plasma::RightEdge) {
+    Plasma::Location location = m_gridManager->location();
+    bool left = location == Plasma::LeftEdge;
+    if (left || location == Plasma::RightEdge) {
         //check we don't remove columns with children in it
         foreach (QGraphicsWidget *child, children()) {
             QRect rect = m_childrenRects.value(child);
@@ -210,7 +181,7 @@ void GridGroup::removeRowOrColumn()
         }
     } else {
         //check we don't remove rows with children in it
-        bool top = m_gridManagerLocation == Plasma::TopEdge;
+        bool top = location == Plasma::TopEdge;
         foreach (QGraphicsWidget *child, children()) {
             QRectF rect = m_childrenRects.value(child);
             QPoint p;
@@ -250,13 +221,6 @@ void GridGroup::appletRemoved(Plasma::Applet *)
 void GridGroup::subGroupRemoved(AbstractGroup *)
 {
     appletRemoved(0);
-}
-
-void GridGroup::animationFinished()
-{
-    if (m_managerAnim->direction() == QAbstractAnimation::Backward) {
-        m_gridManager->hide();
-    }
 }
 
 void GridGroup::updateChild(QGraphicsWidget *child)
@@ -421,71 +385,20 @@ void GridGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     AbstractGroup::resizeEvent(event);
 
-    if (m_managerAnim && m_gridManager->isVisible()) {
-        m_managerAnim->setDirection(QAbstractAnimation::Backward);
-        m_managerAnim->start();
-    }
+    m_gridManager->hideAnimated();
     updateGeometries();
 }
 
 void GridGroup::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-    QPointF pos(event->pos());
-    if ((m_gridManager->isVisible() && m_gridManager->geometry().contains(pos)) || immutability() != Plasma::Mutable) {
-        return;
-    }
-    QRectF bRect(boundingRect());
-    QRectF cRect(contentsRect());
-    const qreal size = 30;
-    bool vertical;
-    QRectF geom;
-    if (QRectF(0, 0, size, bRect.height()).contains(pos)) {
-        vertical = true;
-        geom = QRect(cRect.x(), cRect.y(), size, cRect.height());
-        m_gridManagerLocation = Plasma::LeftEdge;
-    } else if (QRectF(bRect.width() - size, 0, size, bRect.height()).contains(pos)) {
-        vertical = true;
-        geom = QRectF(cRect.right() - size, cRect.y(), size, cRect.height());
-        m_gridManagerLocation = Plasma::RightEdge;
-    } else if (QRectF(0, 0, bRect.width(), size).contains(pos)) {
-        vertical = false;
-        geom = QRectF(cRect.x(), cRect.y(), cRect.width(), size);
-        m_gridManagerLocation = Plasma::TopEdge;
-    } else if (QRectF(0, bRect.height() - size, bRect.width(), size).contains(pos)) {
-        vertical = false;
-        geom = QRectF(cRect.x(), cRect.bottom() - size, cRect.width(), size);
-        m_gridManagerLocation = Plasma::BottomEdge;
-    } else {
-        m_managerAnim->setDirection(QAbstractAnimation::Backward);
-        m_managerAnim->start();
-        return;
-    }
-
-    if (vertical) {
-        m_newRowCol->setToolTip(i18n("Add a new column"));
-        m_delRowCol->setToolTip(i18n("Remove a column"));
-        m_newRowCol2->setToolTip(i18n("Add a new column"));
-        m_delRowCol2->setToolTip(i18n("Remove a column"));
-        m_gridManagerLayout->setOrientation(Qt::Vertical);
-    } else {
-        m_newRowCol->setToolTip(i18n("Add a new row"));
-        m_delRowCol->setToolTip(i18n("Remove a row"));
-        m_newRowCol2->setToolTip(i18n("Add a new row"));
-        m_delRowCol2->setToolTip(i18n("Remove a row"));
-        m_gridManagerLayout->setOrientation(Qt::Horizontal);
-    }
-    m_gridManager->setGeometry(geom);
-    if (!m_gridManager->isVisible()) {
-        m_gridManager->show();
-        m_managerAnim->setDirection(QAbstractAnimation::Forward);
-        m_managerAnim->start();
+    if (immutability() == Plasma::Mutable) {
+        m_gridManager->checkLocation(event->pos());
     }
 }
 
 void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 {
-    m_managerAnim->setDirection(QAbstractAnimation::Backward);
-    m_managerAnim->start();
+    m_gridManager->hideAnimated();
     if (m_cornerHandle) {
         m_cornerHandle.data()->hide();
     }
