@@ -55,7 +55,7 @@ MediaWikiRunner::MediaWikiRunner(QObject *parent, const QVariantList& args)
     }
 
 
-    addSyntax(Plasma::RunnerSyntax(":q:", i18n("Searches %1 for :q:.", m_name)));
+    addSyntax(Plasma::RunnerSyntax("wiki :q:", i18n("Searches %1 for :q:.", m_name)));
 
     setSpeed( SlowSpeed );
 }
