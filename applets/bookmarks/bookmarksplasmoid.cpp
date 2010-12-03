@@ -79,12 +79,11 @@ void BookmarksPlasmoid::init()
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
-    mIcon = new IconWidget(this);
+    mIcon = new IconWidget(KIcon("bookmarks"),"",this);
     mIcon->setFlag(ItemIsMovable, false);
     connect(mIcon, SIGNAL(pressed(bool)), SLOT(toggleMenu(bool)));
     layout->addItem(mIcon);
 
-    resize(IconSize(KIconLoader::Desktop) * 2, IconSize(KIconLoader::Desktop) * 2);
 
     configChanged();
 }
@@ -136,7 +135,9 @@ void BookmarksPlasmoid::toggleMenu(bool toggle)
     // TODO: only renew if manager emits changed
     mBookmarkMenu = new KBookmarkMenu(mBookmarkManager, mBookmarkOwner, menu, mBookmarkFolderAddress);
 
-    menu->popup(popupPosition(menu->sizeHint()));
+    menu->popup(popupPosition(menu->size()));
+    menu->move(popupPosition(menu->size()));
+
 }
 
 void BookmarksPlasmoid::toggleMenu()
