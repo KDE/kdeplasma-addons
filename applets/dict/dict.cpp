@@ -107,16 +107,11 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_wordEdit->nativeWidget()->setClickMessage(i18n("Enter word to define here"));
     m_wordEdit->show();
 
-    // Gets the color scheme from default theme
-    KColorScheme colorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
-
     m_defBrowser = new Plasma::TextBrowser();
     m_defBrowser->nativeWidget()->setNotifyClick(true);
     connect(m_defBrowser->nativeWidget(),SIGNAL(urlClick(QString)),this,SLOT(linkDefine(QString)));
-    m_defBrowser->nativeWidget()->document()->setDefaultStyleSheet(QString(QLatin1String( translationCSS ))
-                                                .arg(colorScheme.foreground().color().name())
-                                                .arg(colorScheme.foreground(KColorScheme::LinkText).color().name())
-                                                .arg(colorScheme.foreground(KColorScheme::VisitedText).color().name()));
+    syncTheme();
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
     m_defBrowser->hide();
 
 //  Icon in upper-left corner
@@ -179,6 +174,17 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     zoomAnim->start(QAbstractAnimation::DeleteWhenStopped);
 
     return m_graphicsWidget;
+}
+
+void DictApplet::syncTheme()
+{
+    // Gets the color scheme from default theme
+    KColorScheme colorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
+
+    m_defBrowser->nativeWidget()->document()->setDefaultStyleSheet(QString(QLatin1String( translationCSS ))
+                                                .arg(colorScheme.foreground().color().name())
+                                                .arg(colorScheme.foreground(KColorScheme::LinkText).color().name())
+                                                .arg(colorScheme.foreground(KColorScheme::VisitedText).color().name()));
 }
 
 void DictApplet::configChanged()
