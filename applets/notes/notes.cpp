@@ -512,8 +512,10 @@ void Notes::saveNote()
 
 void Notes::themeChanged()
 {
-    m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor);
-    update();
+    if (m_useThemeColor) {
+        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor);
+        update();
+    }
 }
 
 void Notes::addColor(const QString &id, const QString &colorName)
