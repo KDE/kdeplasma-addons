@@ -107,12 +107,12 @@ public:
 //    void show();
 
 protected:
-    // L_Override void showEvent(QShowEvent * event);
-    // L_Override void hideEvent(QHideEvent * event);
+    L_Override void showEvent(QShowEvent * event);
+    L_Override void hideEvent(QHideEvent * event);
 
-    // L_Override void enterEvent(QEvent * event);
-    // L_Override void leaveEvent(QEvent * event);
-    // L_Override void timerEvent(QTimerEvent * event);
+    L_Override void enterEvent(QEvent * event);
+    L_Override void leaveEvent(QEvent * event);
+    L_Override void timerEvent(QTimerEvent * event);
     L_Override bool eventFilter(QObject * object, QEvent * event);
 
     /**
@@ -125,12 +125,12 @@ protected:
     /**
      * Moves the list to the specified point
      */
-    // void moveTo(const QPoint & p);
+    void moveTo(const QPoint & p);
 
     /**
      * @returns the parent PopupList
      */
-    // PopupList * parentList() const;
+    PopupList * parentList() const;
 
 Q_SIGNALS:
     void activated(int index);

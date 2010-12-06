@@ -38,121 +38,7 @@
 
 namespace Lancelot {
 
-/* PopupListArrayManager */
-
-PopupListArrayManager * PopupListArrayManager::s_instance = NULL;
-
-PopupListArrayManager * PopupListArrayManager::self()
-{
-    if (!s_instance) {
-        s_instance = new PopupListArrayManager();
-    }
-    return s_instance;
-}
-
-void PopupListArrayManager::addPopup(QWidget * w, const QPoint & point, QWidget * parent)
-{
-    QWidget * last =
-        m_widgets.count() > 0 ?
-            m_widgets.last() : NULL;
-
-    m_widgets << w;
-    connect(w, SIGNAL(destroyed(QObject *)),
-            this, SLOT(widgetDeleted(QObject *)));
-    w->installEventFilter(this);
-
-    QPoint position;
-
-    if (last) {
-        QPoint position = last->geometry().topRight();
-
-        position.rx() -= w->geometry().width() + 64;
-
-        if (position.x() < last->geometry().left() + 64) {
-            position.setX(last->geometry().left() + 64);
-        }
-    } else{
-        position = point;
-    }
-
-    closeChildren(parent);
-
-    w->move(position);
-    w->show();
-}
-
-bool PopupListArrayManager::eventFilter(QObject * w, QEvent * event)
-{
-    if (event->type() == QEvent::Hide) {
-        widgetClosed(static_cast < QWidget * > (w));
-    }
-
-    return false;
-}
-
-void PopupListArrayManager::widgetDeleted(QObject * w)
-{
-    widgetClosed(static_cast < QWidget * > (w));
-}
-
-void PopupListArrayManager::closeAll()
-{
-    if (m_widgets.count() > 0) {
-        m_widgets[0]->hide();
-    }
-
-    m_widgets.clear();
-}
-
-bool PopupListArrayManager::closeChildren(QWidget * w)
-{
-    // NOTE: w can be an invalid pointer
-    // that is, an already deleted widget
-
-    int  foundIndex = -1;
-
-    for (int i = 0; i < m_widgets.count(); i++) {
-        if (foundIndex > -1) {
-            m_widgets[i]->removeEventFilter(this);
-            m_widgets[i]->hide();
-        }
-
-        if (m_widgets[i] == w) {
-            foundIndex = i;
-        }
-    }
-
-    if (foundIndex > -1) {
-        while (m_widgets.count() > foundIndex + 1) {
-            m_widgets.takeLast();
-        }
-    }
-
-    return (foundIndex > -1);
-}
-
-void PopupListArrayManager::widgetClosed(QWidget * w)
-{
-    // NOTE: w can be an invalid pointer
-    // that is, an already deleted widget
-
-    if (closeChildren(w)) {
-        m_widgets.takeLast();
-    }
-}
-
-PopupListArrayManager::PopupListArrayManager()
-{
-}
-
-PopupListArrayManager::~PopupListArrayManager()
-{
-}
-
-
-/* PopupListMarginCache */
-
-PopupListMarginCache * PopupListMarginCache::s_instance = NULL;
+PopupListMarginCache * PopupListMarginCache::m_instance = NULL;
 
 PopupListMarginCache::PopupListMarginCache()
     : m_width(-1), m_height(-1)
@@ -161,12 +47,12 @@ PopupListMarginCache::PopupListMarginCache()
 
 PopupListMarginCache * PopupListMarginCache::self()
 {
-    if (!s_instance) {
-        s_instance = new PopupListMarginCache();
+    if (!m_instance) {
+        m_instance = new PopupListMarginCache();
         connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
-            s_instance, SLOT(plasmaThemeChanged()));
+            m_instance, SLOT(plasmaThemeChanged()));
     }
-    return s_instance;
+    return m_instance;
 }
 
 int PopupListMarginCache::width()
@@ -206,8 +92,8 @@ PopupList::Private::Private(PopupList * parent)
       treeModel(NULL),
       openAction(PopupList::PopupNew),
       closeTimeout(1000),
-      // child(NULL),
-      // parentList(NULL),
+      child(NULL),
+      parentList(NULL),
       q(parent),
       hovered(false)
 {
@@ -266,21 +152,31 @@ void PopupList::Private::listItemActivated(int index)
                 list->setModel(treeModel->child(index));
                 break;
             case PopupNew:
-            {
-                PopupList * child = new PopupList(q);
+                if (!child) {
+                    child = new PopupList(q);
+                }
                 child->setModel(treeModel->child(index));
                 child->exec(QCursor::pos(), q);
                 break;
-            }
             default:
                 break;
                 // nothing
         }
     } else {
-        PopupListArrayManager::self()->closeAll();
+        hidePopupAndParents();
     }
 
     emit q->activated(index);
+}
+
+void PopupList::Private::hidePopupAndParents()
+{
+    PopupList * list = q;
+
+    while (list) {
+        list->hide();
+        list = list->parentList();
+    }
 }
 
 PopupList::PopupList(QWidget * parent, Qt::WindowFlags f)
@@ -290,9 +186,9 @@ PopupList::PopupList(QWidget * parent, Qt::WindowFlags f)
     setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     d->list->setDisplayMode(ActionListView::SingleLineNameFirst);
 
-    // d->animation = new QPropertyAnimation(this, "pos", this);
-    // d->animation->setEasingCurve(QEasingCurve::InOutQuad);
-    // d->animation->setDuration(250);
+    d->animation = new QPropertyAnimation(this, "pos", this);
+    d->animation->setEasingCurve(QEasingCurve::InOutQuad);
+    d->animation->setDuration(250);
 }
 
 PopupList::~PopupList()
@@ -306,7 +202,9 @@ void PopupList::setModel(ActionListModel * model)
         return;
     }
 
-    PopupListArrayManager::self()->closeChildren(this);
+    if (d->child) {
+        d->child->hide();
+    }
 
     d->treeModel = dynamic_cast < ActionTreeModel * > (model);
 
@@ -325,12 +223,12 @@ void PopupList::setModel(ActionListModel * model)
     d->connectSignals();
 }
 
-// void PopupList::showEvent(QShowEvent * event)
-// {
-//     Plasma::Dialog::showEvent(event);
-//     d->list->setFocus();
-//     d->timer.stop();
-// }
+void PopupList::showEvent(QShowEvent * event)
+{
+    Plasma::Dialog::showEvent(event);
+    d->list->setFocus();
+    d->timer.stop();
+}
 
 // void PopupList::show()
 // {
@@ -339,20 +237,20 @@ void PopupList::setModel(ActionListModel * model)
 //     KWindowSystem::forceActiveWindow(winId());
 // }
 
-// void PopupList::hideEvent(QHideEvent * event)
-// {
-//     Plasma::Dialog::hideEvent(event);
-//
-//     if (d->child) {
-//         d->child->hide();
-//     }
-//
-//     if (parentList()) {
-//         if (!parentList()->d->hovered) {
-//             parentList()->close();
-//         }
-//     }
-// }
+void PopupList::hideEvent(QHideEvent * event)
+{
+    Plasma::Dialog::hideEvent(event);
+
+    if (d->child) {
+        d->child->hide();
+    }
+
+    if (parentList()) {
+        if (!parentList()->d->hovered) {
+            parentList()->close();
+        }
+    }
+}
 
 void PopupList::setCloseTimeout(int timeout)
 {
@@ -374,35 +272,35 @@ void PopupList::setSublevelOpenAction(SublevelOpenAction action)
     d->openAction = action;
 }
 
-// void PopupList::enterEvent(QEvent * event)
-// {
-//     d->timer.stop();
-//     Plasma::Dialog::enterEvent(event);
-//
-//     d->hovered = true;
-// }
-//
-// void PopupList::leaveEvent(QEvent * event)
-// {
-//     if (d->closeTimeout) {
-//         d->timer.start(d->closeTimeout, this);
-//     }
-//     Plasma::Dialog::leaveEvent(event);
-//
-//     d->hovered = false;
-// }
-//
-// void PopupList::timerEvent(QTimerEvent * event)
-// {
-//     if (d->timer.timerId() == event->timerId()) {
-//         if (!d->child || d->child->isHidden()) {
-//             close();
-//
-//             d->timer.stop();
-//         }
-//     }
-//     Plasma::Dialog::timerEvent(event);
-// }
+void PopupList::enterEvent(QEvent * event)
+{
+    d->timer.stop();
+    Plasma::Dialog::enterEvent(event);
+
+    d->hovered = true;
+}
+
+void PopupList::leaveEvent(QEvent * event)
+{
+    if (d->closeTimeout) {
+        d->timer.start(d->closeTimeout, this);
+    }
+    Plasma::Dialog::leaveEvent(event);
+
+    d->hovered = false;
+}
+
+void PopupList::timerEvent(QTimerEvent * event)
+{
+    if (d->timer.timerId() == event->timerId()) {
+        if (!d->child || d->child->isHidden()) {
+            close();
+
+            d->timer.stop();
+        }
+    }
+    Plasma::Dialog::timerEvent(event);
+}
 
 void PopupList::updateSize()
 {
@@ -429,114 +327,112 @@ void PopupList::exec(const QPoint & p)
 {
     d->prepareToShow();
 
-    // d->parentList = NULL;
+    d->parentList = NULL;
 
-    // QRect g = geometry();
-    // g.moveTopLeft(p);
+    QRect g = geometry();
+    g.moveTopLeft(p);
 
-    // QRect screen = QApplication::desktop()->screenGeometry(
-    //         QApplication::desktop()->screenNumber(p)
-    //     );
+    QRect screen = QApplication::desktop()->screenGeometry(
+            QApplication::desktop()->screenNumber(p)
+        );
 
-    // if (g.right() > screen.right()) {
-    //     g.moveRight(screen.right());
-    // } else if (g.left() < screen.left()) {
-    //     g.moveLeft(screen.left());
-    // }
+    if (g.right() > screen.right()) {
+        g.moveRight(screen.right());
+    } else if (g.left() < screen.left()) {
+        g.moveLeft(screen.left());
+    }
 
-    // if (g.bottom() > screen.bottom()) {
-    //     g.moveBottom(screen.bottom());
-    // } else if (g.top() < screen.top()) {
-    //     g.moveTop(screen.top());
-    // }
+    if (g.bottom() > screen.bottom()) {
+        g.moveBottom(screen.bottom());
+    } else if (g.top() < screen.top()) {
+        g.moveTop(screen.top());
+    }
 
-    // moveTo(g.topLeft());
+    moveTo(g.topLeft());
 
-    PopupListArrayManager::self()->addPopup(this, p);
-    // show();
+    show();
 }
 
 void PopupList::exec(const QPoint & p, PopupList * parent)
 {
     d->prepareToShow();
 
-    // d->parentList = parent;
+    d->parentList = parent;
 
-    // QRect selfGeometry = geometry();
-    // selfGeometry.moveTopLeft(p);
+    QRect selfGeometry = geometry();
+    selfGeometry.moveTopLeft(p);
 
-    // QRect screenGeometry = QApplication::desktop()->screenGeometry(
-    //         QApplication::desktop()->screenNumber(p)
-    //     );
+    QRect screenGeometry = QApplication::desktop()->screenGeometry(
+            QApplication::desktop()->screenNumber(p)
+        );
 
-    // QRect rootParentGeometry;
-    // int numberOfParentLists = 0;
+    QRect rootParentGeometry;
+    int numberOfParentLists = 0;
 
-    // PopupList * list = this;
+    PopupList * list = this;
 
-    // while (list->parentList()) {
-    //     list = list->parentList();
-    //     numberOfParentLists++;
-    // }
+    while (list->parentList()) {
+        list = list->parentList();
+        numberOfParentLists++;
+    }
 
-    // rootParentGeometry = list->geometry();
+    rootParentGeometry = list->geometry();
 
     // Moving...
-    // selfGeometry.moveLeft(rootParentGeometry.right() - POP_BORDER_OFFSET);
-    // if (selfGeometry.right() > screenGeometry.right()) {
-    //     selfGeometry.moveRight(screenGeometry.right());
+    selfGeometry.moveLeft(rootParentGeometry.right() - POP_BORDER_OFFSET);
+    if (selfGeometry.right() > screenGeometry.right()) {
+        selfGeometry.moveRight(screenGeometry.right());
 
-    //     if (selfGeometry.left() - rootParentGeometry.left() <
-    //             numberOfParentLists * POP_MINIMUM_OFFSET) {
-    //         rootParentGeometry.moveLeft(selfGeometry.left()
-    //             - numberOfParentLists * POP_MINIMUM_OFFSET);
-    //     }
-    // }
+        if (selfGeometry.left() - rootParentGeometry.left() <
+                numberOfParentLists * POP_MINIMUM_OFFSET) {
+            rootParentGeometry.moveLeft(selfGeometry.left()
+                - numberOfParentLists * POP_MINIMUM_OFFSET);
+        }
+    }
 
-    // if (selfGeometry.bottom() > screenGeometry.bottom()) {
-    //     selfGeometry.moveBottom(screenGeometry.bottom());
-    // } else if (selfGeometry.top() < screenGeometry.top()) {
-    //     selfGeometry.moveTop(screenGeometry.top());
-    // }
+    if (selfGeometry.bottom() > screenGeometry.bottom()) {
+        selfGeometry.moveBottom(screenGeometry.bottom());
+    } else if (selfGeometry.top() < screenGeometry.top()) {
+        selfGeometry.moveTop(screenGeometry.top());
+    }
 
-    // moveTo(selfGeometry.topLeft());
+    moveTo(selfGeometry.topLeft());
 
-    // list = this;
+    list = this;
 
-    // int shift = (selfGeometry.left() - rootParentGeometry.left())
-    //     / numberOfParentLists;
-    // int left  = selfGeometry.left();
+    int shift = (selfGeometry.left() - rootParentGeometry.left())
+        / numberOfParentLists;
+    int left  = selfGeometry.left();
 
-    // while (list->parentList()) {
-    //     list = list->parentList();
+    while (list->parentList()) {
+        list = list->parentList();
 
-    //     QPoint parentPosition = list->pos();
+        QPoint parentPosition = list->pos();
 
-    //     left -= shift;
-    //     parentPosition.setX(left);
-    //     list->moveTo(parentPosition);
+        left -= shift;
+        parentPosition.setX(left);
+        list->moveTo(parentPosition);
 
-    // }
+    }
 
-    PopupListArrayManager::self()->addPopup(this, p, parent);
-    // show();
+    show();
 }
 
-// void PopupList::moveTo(const QPoint & to)
-// {
-//     // if (!isVisible() ||
-//     //         !(KGlobalSettings::graphicEffectsLevel() & KGlobalSettings::SimpleAnimationEffects)) {
-//     //     move(to);
-//     //     return;
-//     // }
-//
-//     // if (d->animation->state() == QAbstractAnimation::Running) {
-//     //     d->animation->stop();
-//     // }
-//
-//     // d->animation->setEndValue(to);
-//     // d->animation->start();
-// }
+void PopupList::moveTo(const QPoint & to)
+{
+    if (!isVisible() ||
+            !(KGlobalSettings::graphicEffectsLevel() & KGlobalSettings::SimpleAnimationEffects)) {
+        move(to);
+        return;
+    }
+
+    if (d->animation->state() == QAbstractAnimation::Running) {
+        d->animation->stop();
+    }
+
+    d->animation->setEndValue(to);
+    d->animation->start();
+}
 
 bool PopupList::eventFilter(QObject * object, QEvent * event)
 {
@@ -549,10 +445,10 @@ bool PopupList::eventFilter(QObject * object, QEvent * event)
     return Plasma::Dialog::eventFilter(object, event);
 }
 
-// PopupList * PopupList::parentList() const
-// {
-//     return d->parentList;
-// }
+PopupList * PopupList::parentList() const
+{
+    return d->parentList;
+}
 
 } // namespace Lancelot
 
