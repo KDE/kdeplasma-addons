@@ -57,8 +57,8 @@ class AbstractGroupPrivate
         bool isLoading;
         bool hasInterface;
         bool simplerBackgroundChildren;
-        QMap<Plasma::Applet *, Plasma::Applet::BackgroundHints> m_savedAppletsHints;
-        QMap<AbstractGroup *, AbstractGroup::BackgroundHints> m_savedGroupsHints;
+        QHash<Plasma::Applet *, Plasma::Applet::BackgroundHints> savedAppletsHints;
+        QHash<AbstractGroup *, AbstractGroup::BackgroundHints> savedGroupsHints;
 
     private:
         KConfigGroup *m_mainConfig;

@@ -205,11 +205,11 @@ QString AbstractGroupPrivate::configDialogId()
 void AbstractGroupPrivate::setChildBorders(Plasma::Applet *a, bool added)
 {
     if (added) {
-        m_savedAppletsHints.insert(a, a->backgroundHints());
+        savedAppletsHints.insert(a, a->backgroundHints());
         a->setBackgroundHints(Plasma::Applet::NoBackground);
     } else {
-        if (m_savedAppletsHints.contains(a)) {
-            a->setBackgroundHints(m_savedAppletsHints.value(a));
+        if (savedAppletsHints.contains(a)) {
+            a->setBackgroundHints(savedAppletsHints.value(a));
         }
     }
 }
@@ -217,11 +217,11 @@ void AbstractGroupPrivate::setChildBorders(Plasma::Applet *a, bool added)
 void AbstractGroupPrivate::setChildBorders(AbstractGroup *g, bool added)
 {
     if (added) {
-        m_savedGroupsHints.insert(g, g->backgroundHints());
+        savedGroupsHints.insert(g, g->backgroundHints());
         g->setBackgroundHints(AbstractGroup::PlainBackground);
     } else {
-        if (m_savedGroupsHints.contains(g)) {
-            g->setBackgroundHints(m_savedGroupsHints.value(g));
+        if (savedGroupsHints.contains(g)) {
+            g->setBackgroundHints(savedGroupsHints.value(g));
         }
     }
 }
