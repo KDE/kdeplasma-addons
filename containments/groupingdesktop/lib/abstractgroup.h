@@ -389,15 +389,6 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
         static QString mimeType();
 
         /**
-         * Used to register a Group to the GroupFactory. You shouldn't
-         * use this, but the macro REGISTER_GROUP(class name) instead.
-         **/
-        template<class T> static bool registerGroup()
-        {
-            return GroupFactory::registerGroup<T>();
-        }
-
-        /**
          * Creates a new Group.
          *
          * @param name the identifier for the type of Group to be created
@@ -592,6 +583,6 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
 Q_DECLARE_METATYPE(AbstractGroup *)
 
 #define REGISTER_GROUP(class) \
-    static const bool g_##class = AbstractGroup::registerGroup<class>();
+    static const bool g_##class = GroupFactory::instance()->registerGroup<class>();
 
 #endif // ABSTRACTGROUP_H

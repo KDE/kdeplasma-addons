@@ -21,12 +21,17 @@
 
 #include "abstractgroup.h"
 
-QMap<GroupInfo, CreatorFunction> *GroupFactory::m_groups = 0;
+K_GLOBAL_STATIC(GroupFactory, s_instance)
+
+GroupFactory *GroupFactory::instance()
+{
+    return s_instance;
+}
 
 AbstractGroup *GroupFactory::load(const QString &name, QGraphicsItem *parent)
 {
     GroupInfo gi(name);
-    CreatorFunction creator = m_groups->value(gi);
+    CreatorFunction creator = m_groups.value(gi);
     if (creator) {
         return (creator)(parent);
     }
@@ -36,5 +41,5 @@ AbstractGroup *GroupFactory::load(const QString &name, QGraphicsItem *parent)
 
 QList<GroupInfo> GroupFactory::groupInfos()
 {
-    return m_groups->keys();
+    return m_groups.keys();
 }

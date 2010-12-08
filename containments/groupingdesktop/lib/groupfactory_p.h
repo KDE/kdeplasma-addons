@@ -38,29 +38,27 @@ class GroupFactory
 {
 
     public:
+        static GroupFactory *instance();
 
-        template<class T> static bool registerGroup()
+        template<class T> bool registerGroup()
         {
-            if (!m_groups) {
-                m_groups = new QMap<GroupInfo, CreatorFunction>;
-            }
-
             GroupInfo gi = T::groupInfo();
 
-            m_groups->insert(gi, &createGroup<T>);
+            m_groups.insert(gi, &createGroup<T>);
             return true;
         }
 
-        static AbstractGroup *load(const QString &name, QGraphicsItem *parent = 0);
+        AbstractGroup *load(const QString &name, QGraphicsItem *parent = 0);
 
-        QList<GroupInfo> static groupInfos();
+        QList<GroupInfo> groupInfos();
 
+    private:
         template<class T> static AbstractGroup *createGroup(QGraphicsItem *parent)
         {
             return new T(parent);
         }
 
-        static QMap<GroupInfo, CreatorFunction> *m_groups;
+        QMap<GroupInfo, CreatorFunction> m_groups;
 };
 
 #endif // GROUPFACTORY_H

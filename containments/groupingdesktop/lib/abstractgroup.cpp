@@ -838,14 +838,14 @@ QString AbstractGroup::mimeType()
 
 AbstractGroup *AbstractGroup::load(const QString &name, QGraphicsItem *parent)
 {
-    return GroupFactory::load(name, parent);
+    return GroupFactory::instance()->load(name, parent);
 }
 
 QStringList AbstractGroup::availableGroups()
 {
     QStringList groups;
 
-    foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
+    foreach (const GroupInfo &gi, GroupFactory::instance()->groupInfos()) {
         groups << gi.name();
     }
 
@@ -854,7 +854,7 @@ QStringList AbstractGroup::availableGroups()
 
 GroupInfo AbstractGroup::groupInfo(const QString &name)
 {
-    foreach (const GroupInfo &gi, GroupFactory::groupInfos()) {
+    foreach (const GroupInfo &gi, GroupFactory::instance()->groupInfos()) {
         if (gi.name() == name) {
             return gi;
         }
