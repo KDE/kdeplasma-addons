@@ -95,7 +95,7 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * Adds an Applet to this Group.
          *
          * @param applet the Applet to be managed by this
-         * @param layoutApplets if true calls layoutChild(applet)
+         * @param layoutApplet the parameter that defines if layoutChild(applet) will be called
          *
          * @see applets
          * @see removeApplet
@@ -106,7 +106,7 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * Adds a Group to this Group.
          *
          * @param group, the Group to be managed by this
-         * @param layoutGroup if true calls layoutChild(group)
+         * @param layoutGroup the parameter that defines if layoutChild(applet) will be called
          *
          * @see subGroups
          * @see removeSubGroup
@@ -142,7 +142,7 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * This function must be reimplemented by a sub class.
          *
          * @param child the child whose info will be saved
-         * @param group the config group for the configuration
+         * @param config the config group for the configuration
          *
          * @see restoreChildGroupInfo
          **/
@@ -408,7 +408,7 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
          * Sets the immutability type for this Group (not immutable,
          * user immutable or system immutable)
          *
-         * @param immutable the new immutability type of this Group
+         * @param immutability the new immutability type of this Group
          *
          * @see immutability
          * @see Plasma::ImmutabilityType
