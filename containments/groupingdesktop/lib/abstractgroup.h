@@ -582,6 +582,9 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
 
 Q_DECLARE_METATYPE(AbstractGroup *)
 
+/**
+ * Register a Group to the factory. Call this macro in the .cpp of your Group outside any function.
+ **/
 #define REGISTER_GROUP(class) \
     static const bool g_##class = GroupFactory::instance()->registerGroup<class>();
 

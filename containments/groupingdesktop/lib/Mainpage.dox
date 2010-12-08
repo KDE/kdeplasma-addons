@@ -1,0 +1,24 @@
+/** @mainpage Grouping Desktop library
+
+This library is an add-on to libplasma that provide a way to group Plasma Applets
+in various arrangements.
+It is designed in a modular way, with the introduction of the class AbstractGroup
+that can be subclassed to provide a new group type.
+The other fundamental class is GroupingContainment that manages all the groups and
+can be subclassed to create a new Containment with grouping support.
+
+@authors
+Giulio Camuffo \<giuliocamuffo@gmail.com\>
+
+@maintainers
+Giulio Camuffo \<giuliocamuffo@gmail.com\>
+
+@licenses
+@lgpl
+
+*/
+
+// DOXYGEN_SET_PROJECT_NAME = GroupingDesktop
+// DOXYGEN_SET_RECURSIVE = YES
+// DOXYGEN_EXCLUDE_PATTERNS = *_p.h */groups/*
+// vim:ts=4:sw=4:expandtab:filetype=doxygen

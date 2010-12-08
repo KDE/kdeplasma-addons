@@ -27,6 +27,14 @@
 class AbstractGroup;
 class GroupingContainmentPrivate;
 
+/**
+ * @class GroupingContainment
+ *
+ * @short The base Containment class
+ *
+ * GroupingContainment manages all the Groups and must be subclassed to create a new
+ * Containment with grouping support.
+ */
 class PLASMA_GROUPINGCONTAINMENT_EXPORT GroupingContainment: public Plasma::Containment
 {
     Q_OBJECT
