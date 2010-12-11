@@ -264,14 +264,19 @@ void WeatherStation::setPressure(const QString& condition, const Value& pressure
 
 void WeatherStation::setTemperature(const Value& temperature, bool hasDigit)
 {
-    hasDigit = hasDigit || (temperatureUnit() != temperature.unit());
-    Value v = temperature.convertTo(temperatureUnit());
-    m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
-    m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
-    QString tmp = hasDigit ? fitValue(v , 4) : QString::number(v.number());
-    m_lcd->setNumber("temperature", tmp);
-    tmp = hasDigit ? fitValue(v , 3) : QString::number(v.number());
-    m_lcdPanel->setNumber("temperature", tmp);
+    if (!temperature.isValid()) {
+        m_lcd->setNumber("temperature", "N/A");
+        m_lcdPanel->setNumber("temperature", "N/A");
+    } else {
+        hasDigit = hasDigit || (temperatureUnit() != temperature.unit());
+        Value v = temperature.convertTo(temperatureUnit());
+        m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
+        m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
+        QString tmp = hasDigit ? fitValue(v , 4) : QString::number(v.number());
+        m_lcd->setNumber("temperature", tmp);
+        tmp = hasDigit ? fitValue(v , 3) : QString::number(v.number());
+        m_lcdPanel->setNumber("temperature", tmp);
+    }
     setLCDIcon();
 }
 
