@@ -36,7 +36,7 @@ namespace Plasma
 {
     class Applet;
     class FrameSvg;
-};
+}
 
 class AbstractGroup;
 class GroupingContainment;

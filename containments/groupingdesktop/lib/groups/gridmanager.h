@@ -29,7 +29,7 @@ class QGraphicsLinearLayout;
 namespace Plasma {
     class ToolButton;
     class Animation;
-};
+}
 
 class GridManager : public QGraphicsWidget
 {

@@ -33,7 +33,7 @@ class KConfigDialog;
 namespace Plasma {
     class TabBar;
     class PushButton;
-};
+}
 
 class GridGroup;
 

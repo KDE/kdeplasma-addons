@@ -28,7 +28,7 @@
 
 namespace Plasma {
     class FrameSvg;
-};
+}
 
 class GroupIcon : public QGraphicsWidget
 {

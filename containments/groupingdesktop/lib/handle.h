@@ -33,7 +33,7 @@ namespace Plasma
 {
     class Applet;
     class View;
-};
+}
 
 class AbstractGroup;
 class GroupingContainment;
