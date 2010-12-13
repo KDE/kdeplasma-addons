@@ -58,7 +58,7 @@ void WeatherStation::init()
     if (hasAuthorization("LaunchApp")) {
         connect(m_lcd, SIGNAL(clicked(const QString&)), this, SLOT(clicked(const QString&)));
     }
-    
+
     m_lcdPanel = new LCD(this);
     m_lcdPanel->setSvg("weatherstation/lcd_panel");
     m_lcdPanel->setLabel("temperature-label", i18n("OUTDOOR TEMP"));
@@ -264,19 +264,15 @@ void WeatherStation::setPressure(const QString& condition, const Value& pressure
 
 void WeatherStation::setTemperature(const Value& temperature, bool hasDigit)
 {
-    if (!temperature.isValid()) {
-        m_lcd->setNumber("temperature", "N/A");
-        m_lcdPanel->setNumber("temperature", "N/A");
-    } else {
-        hasDigit = hasDigit || (temperatureUnit() != temperature.unit());
-        Value v = temperature.convertTo(temperatureUnit());
-        m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
-        m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
-        QString tmp = hasDigit ? fitValue(v , 4) : QString::number(v.number());
-        m_lcd->setNumber("temperature", tmp);
-        tmp = hasDigit ? fitValue(v , 3) : QString::number(v.number());
-        m_lcdPanel->setNumber("temperature", tmp);
-    }
+    hasDigit = hasDigit || (temperatureUnit() != temperature.unit());
+    Value v = temperature.convertTo(temperatureUnit());
+    qDebug() << v.isValid();
+    m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
+    m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
+    QString tmp = hasDigit ? fitValue(v , 4) : QString::number(v.number());
+    m_lcd->setNumber("temperature", tmp);
+    tmp = hasDigit ? fitValue(v , 3) : QString::number(v.number());
+    m_lcdPanel->setNumber("temperature", tmp);
     setLCDIcon();
 }
 
