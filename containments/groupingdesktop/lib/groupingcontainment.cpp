@@ -927,7 +927,7 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 
     AbstractGroup *group = d->groupAt(event->pos());
 
-    while (group->isMainGroup()) {
+    while (group && group->isMainGroup()) {
         group = group->parentGroup();
         if (!group) {
             break;
