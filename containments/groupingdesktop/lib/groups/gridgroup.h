@@ -61,7 +61,7 @@ class GridGroup : public AbstractGroup
         void updateChild(QGraphicsWidget *child);
         void updateGeometries();
         QGraphicsWidget *childAt(int column, int row);
-        void checkCorner(const QPointF &pos, const QRectF &rect);
+        void checkCorner(const QPointF &pos, QGraphicsWidget *widget);
 
         int m_rowsNumber;
         int m_colsNumber;

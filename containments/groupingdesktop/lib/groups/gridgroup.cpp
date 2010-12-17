@@ -405,8 +405,9 @@ void GridGroup::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
     }
 }
 
-void GridGroup::checkCorner(const QPointF &pos, const QRectF &rect)
+void GridGroup::checkCorner(const QPointF &pos, QGraphicsWidget *widget)
 {
+    const QRectF rect(widget->contentsRect());
     QRectF topLeft(rect.left() - CORNERHANDLE_WIDTH / 2., rect.top() - CORNERHANDLE_HEIGHT / 2.,
                    CORNERHANDLE_WIDTH, CORNERHANDLE_HEIGHT);
     QRectF topRight(rect.right() - CORNERHANDLE_WIDTH / 2., rect.top() - CORNERHANDLE_HEIGHT / 2.,
@@ -415,17 +416,25 @@ void GridGroup::checkCorner(const QPointF &pos, const QRectF &rect)
                        CORNERHANDLE_WIDTH, CORNERHANDLE_HEIGHT);
     QRectF bottomLeft(rect.left() - CORNERHANDLE_WIDTH / 2., rect.bottom() - CORNERHANDLE_HEIGHT / 2.,
                       CORNERHANDLE_WIDTH, CORNERHANDLE_HEIGHT);
+
+    //it would be better to check if pos is inside one of those rects above, but that way
+    //the corner handle wouldn't show up when hovering the analog clock of other applets with
+    //shape != boundingRect because they can be outside its shape.
+    const QRectF bRect(widget->boundingRect());
+    QRectF activeRect(bRect.topLeft(), bRect.size() / 2.);
     m_cornerHandle.data()->show();
-    if (topLeft.contains(pos)) {
+    qreal shiftWidth = bRect.width() / 2.;
+    qreal shiftHeight = bRect.height() / 2.;
+    if (activeRect.contains(pos)) {
         m_cornerHandle.data()->setGeometry(topLeft);
         m_handleCorner = Qt::TopLeftCorner;
-    } else if (topRight.contains(pos)) {
+    } else if (activeRect.translated(shiftWidth, 0).contains(pos)) {
         m_cornerHandle.data()->setGeometry(topRight);
         m_handleCorner = Qt::TopRightCorner;
-    } else if (bottomRight.contains(pos)) {
+    } else if (activeRect.translated(shiftWidth, shiftHeight).contains(pos)) {
         m_cornerHandle.data()->setGeometry(bottomRight);
         m_handleCorner = Qt::BottomRightCorner;
-    } else if (bottomLeft.contains(pos)) {
+    } else if (activeRect.translated(0, shiftHeight).contains(pos)) {
         m_cornerHandle.data()->setGeometry(bottomLeft);
         m_handleCorner = Qt::BottomLeftCorner;
     } else {
@@ -454,7 +463,7 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                 }
                 m_cornerHandle.data()->setParentItem(widget);
 
-                checkCorner(e->pos(), widget->contentsRect());
+                checkCorner(e->pos(), widget);
             }
         }
         break;
@@ -583,7 +592,7 @@ bool GridGroup::eventFilter(QObject *obj, QEvent *event)
                                           width * newRect.width(), height * newRect.height()));
 
                 QPointF p(child->mapFromScene(static_cast<QGraphicsSceneMouseEvent *>(event)->scenePos()));
-                checkCorner(p, child->contentsRect());
+                checkCorner(p, child);
 
                 Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
                 if (anim) {
