@@ -88,6 +88,8 @@ private:
     void stopPotd();
     void initSlideShow();
     void checkSlideFrame();
+    
+    QRect preparePainter(QPainter *p, const QRect &rect, const QFont &font, const QString &text);
 
     /// The current color of the frame
     QColor m_frameColor;

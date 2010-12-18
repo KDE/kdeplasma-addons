@@ -398,12 +398,15 @@ void Frame::updatePicture()
         // Set the font and draw text
         p->setRenderHint(QPainter::Antialiasing);
         QFont textFont = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
-        textFont.setPixelSize(qMax(KGlobalSettings::smallestReadableFont().pixelSize(), bgRect.height() / 6));
+        textFont.setPointSize(qMax(KGlobalSettings::smallestReadableFont().pointSize(), bgRect.height() / 6));
         p->setFont(textFont);
 
         QTextOption option;
         option.setAlignment(Qt::AlignCenter);
         option.setWrapMode(QTextOption::WordWrap);
+
+        preparePainter(p, bgRect, textFont, message);
+
         p->setPen(QPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p->drawText(bgRect, message, option);
     }
@@ -417,6 +420,33 @@ void Frame::updatePicture()
         m_autoUpdateTimer->start(m_autoUpdateIntervall * 1000);
     }
 }
+
+QRect Frame::preparePainter(QPainter *p, const QRect &rect, const QFont &font, const QString &text)
+{
+    QRect tmpRect;
+    QFont tmpFont = font;
+    bool first = true;
+
+    // Starting with the given font, decrease its size until it'll fit in the
+    // given rect allowing wrapping where possible
+    do {
+        if (first) {
+            first = false;
+        } else  {
+            tmpFont.setPointSize(qMax(KGlobalSettings::smallestReadableFont().pointSize(), tmpFont.pointSize() - 1));
+        }
+
+        const QFontMetrics fm(tmpFont);
+        int flags = Qt::TextWordWrap;
+
+        tmpRect = fm.boundingRect(rect, flags, text);
+    } while (tmpFont.pointSize() > KGlobalSettings::smallestReadableFont().pointSize() &&
+             (tmpRect.width() > rect.width() || tmpRect.height() > rect.height()));
+    
+    p->setFont(tmpFont);
+    return tmpRect;
+}
+
 
 void Frame::nextPicture()
 {
