@@ -21,6 +21,7 @@
 #include "timelinesource.h"
 
 #include <QXmlStreamReader>
+#include <QtCrypto>
 
 #include <KDebug>
 #include <KIO/Job>
@@ -100,7 +101,8 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
 TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObject* parent)
     : Plasma::DataContainer(parent),
       m_job(0),
-      m_authJob(0)
+      m_authJob(0),
+      m_qcaInitializer(0)
 {
     //who should be something like user@http://twitter.com, if there isn't any @, http://twitter.com will be the default
     QStringList account = who.split('@');
@@ -112,6 +114,9 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObj
     }
 
     m_useOAuth = (m_serviceBaseUrl == KUrl("https://twitter.com/")) ? true : false;
+
+        //just create it to correctly initialize QCA and clean up when createSignature() returns
+    m_qcaInitializer = new QCA::Initializer();
 
     // set up the url
     switch (requestType) {
@@ -143,6 +148,7 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObj
 
 TimelineSource::~TimelineSource()
 {
+    delete m_qcaInitializer;
 }
 
 Plasma::Service* TimelineSource::createService()

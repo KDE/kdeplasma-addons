@@ -38,6 +38,11 @@ namespace KIO
     class Job;
 } // namespace KIO
 
+namespace QCA
+{
+    class Initializer;
+}
+
 class TimelineSource;
 class ImageSource;
 
@@ -135,6 +140,7 @@ private:
     KIO::Job *m_authJob;
     QByteArray m_oauthToken;
     QByteArray m_oauthTokenSecret;
+    QCA::Initializer *m_qcaInitializer;
 };
 
 #endif
