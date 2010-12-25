@@ -244,25 +244,25 @@ public:
         case TopExtender:
             geometry.setHeight(EXTENDER_SIZE);
             geometry.moveTop(- EXTENDER_SIZE);
-            borders &= ~ Plasma::FrameSvg::TopBorder;
+            // borders &= ~ Plasma::FrameSvg::TopBorder;
             // extender()->borders &= ~ Plasma::FrameSvg::BottomBorder;
             break;
         case BottomExtender:
             geometry.moveTop(geometry.bottom());
             geometry.setHeight(EXTENDER_SIZE);
-            borders &= ~ Plasma::FrameSvg::BottomBorder;
+            // borders &= ~ Plasma::FrameSvg::BottomBorder;
             // extender()->borders &= ~ Plasma::FrameSvg::TopBorder;
             break;
         case LeftExtender:
             geometry.setWidth(EXTENDER_SIZE);
             geometry.moveLeft(- EXTENDER_SIZE);
-            borders &= ~ Plasma::FrameSvg::LeftBorder;
+            // borders &= ~ Plasma::FrameSvg::LeftBorder;
             // extender()->borders &= ~ Plasma::FrameSvg::RightBorder;
             break;
         case RightExtender:
             geometry.moveLeft(geometry.right());
             geometry.setWidth(EXTENDER_SIZE);
-            borders &= ~ Plasma::FrameSvg::RightBorder;
+            // borders &= ~ Plasma::FrameSvg::RightBorder;
             // extender()->borders &= ~ Plasma::FrameSvg::LeftBorder;
             break;
         case NoExtender:
@@ -431,13 +431,13 @@ void ExtenderButton::paint(QPainter * painter,
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    if (Plasma::FrameSvg * svg = group()->backgroundSvg()) {
-        if (isHovered() && (d->extenderPosition != NoExtender)) {
-            svg->setEnabledBorders(d->borders);
-        } else {
-            svg->setEnabledBorders(Plasma::FrameSvg::AllBorders);
-        }
-    }
+    // if (Plasma::FrameSvg * svg = group()->backgroundSvg()) {
+    //     if (isHovered() && (d->extenderPosition != NoExtender)) {
+    //         svg->setEnabledBorders(d->borders);
+    //     } else {
+    //         svg->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+    //     }
+    // }
 
     if (d->checked && !isDown()) {
         paintBackground(painter, "checked");
