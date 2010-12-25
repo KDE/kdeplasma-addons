@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.kde.lancelot
-Exec=@BIN_INSTALL_DIR@/lancelot

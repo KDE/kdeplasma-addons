@@ -87,18 +87,14 @@ endif(LANCELOT_HAVE_COMPOSITING)
 
 set_target_properties(lancelot-menu PROPERTIES OUTPUT_NAME lancelot)
 
-## DBUS service
-
-configure_file(org.kde.lancelot.service.in
-   ${CMAKE_CURRENT_BINARY_DIR}/org.kde.lancelot.service)
-
 ########### install applicaiton ###############
 
 # To regenerate .xml file:
 # qdbuscpp2xml -M -s LancelotApplication.h -o org.kde.lancelot.xml.new
-# And make the needed changes
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.lancelot.service DESTINATION ${DBUS_SERVICES_INSTALL_DIR}) # ${CMAKE_INSTALL_PREFIX}/share/dbus-1/services )
 
 install(TARGETS lancelot-menu ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES lancelot.notifyrc DESTINATION ${DATA_INSTALL_DIR}/lancelot)
+
+install(FILES lancelot.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+
