@@ -22,11 +22,13 @@
 
 #include <QDBusInterface>
 #include <QDBusReply>
+#include <QDBusConnection>
 #include <QGraphicsLinearLayout>
 
 #include <KDebug>
 #include <KIcon>
 #include <KGlobalSettings>
+#include <KToolInvocation>
 
 #include <Plasma/Corona>
 
@@ -40,6 +42,8 @@
 #define SIZE_CMAX 64
 #define SPACING 8
 
+#define LANCELOT_SERVICE_PATH "org.kde.lancelot"
+
 class LancelotApplet::Private {
 public:
     Private(LancelotApplet * parent)
@@ -50,10 +54,33 @@ public:
         q->setLayout(layout);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(0);
+
+        if (!lancelotRunning()) {
+            QString error;
+            int ret = KToolInvocation::startServiceByDesktopPath("lancelot.desktop", QStringList(), &error);
+
+            if (ret > 0) {
+                kDebug() << "Couldn't start lacelot: " << error << endl;
+            }
+
+            if (!lancelotRunning()) {
+                kDebug() << "Lancelot service is still not registered";
+            } else {
+                kDebug() << "Lancelot service has been registered";
+            }
+
+
+        }
+
         lancelot = new org::kde::lancelot::App(
-            "org.kde.lancelot", "/Lancelot",
+            LANCELOT_SERVICE_PATH, "/Lancelot",
             QDBusConnection::sessionBus()
         );
+    }
+
+    bool lancelotRunning() const
+    {
+        return QDBusConnection::sessionBus().interface()->isServiceRegistered(LANCELOT_SERVICE_PATH);
     }
 
     ~Private()
