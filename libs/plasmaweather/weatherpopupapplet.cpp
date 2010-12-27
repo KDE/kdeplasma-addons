@@ -254,7 +254,6 @@ void WeatherPopupApplet::configAccepted()
 
 void WeatherPopupApplet::configChanged()
 {
-    setConfigurationRequired(false);
     if (!d->source.isEmpty()) {
         d->weatherEngine->disconnectSource(d->source, this);
     }
@@ -274,6 +273,7 @@ void WeatherPopupApplet::configChanged()
     }
     d->updateInterval = cfg.readEntry("updateWeather", 30);
     d->source = cfg.readEntry("source", "");
+    setConfigurationRequired(d->source.isEmpty());
 
     d->weatherEngine = dataEngine(QLatin1String( "weather" ));
     d->timeEngine = dataEngine(QLatin1String( "time" ));
