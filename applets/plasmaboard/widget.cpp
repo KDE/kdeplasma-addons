@@ -36,12 +36,13 @@
 #include "SwitchKey.h"
 #include "TabKey.h"
 
+#include <QDBusConnection>
 #include <QFile>
-#include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneResizeEvent>
-#include <QTimer>
 #include <QPainter>
 #include <QSignalMapper>
+#include <QStyleOptionGraphicsItem>
+#include <QTimer>
 #include <plasma/containment.h>
 #include <plasma/corona.h>
 #include <plasma/theme.h>
@@ -94,6 +95,9 @@ PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     m_repeatTimer = new QTimer(this);
     connect(m_repeatTimer, SIGNAL(timeout()), this, SLOT(repeatKeys()));
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
+    
+    QDBusConnection dbus = QDBusConnection::sessionBus();
+    dbus.connect("org.kde.keyboard", "/Layouts", "org.kde.KeyboardLayouts", "currentLayoutChanged", this, SLOT(relabelKeys()));
 }
 
 
