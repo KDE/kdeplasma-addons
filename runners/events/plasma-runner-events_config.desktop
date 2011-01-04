@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Calendar Events
 Name[ca]=Esdeveniments del calendari
+Name[ca@valencia]=Esdeveniments del calendari
 Name[da]=Kalenderbegivenheder
 Name[de]=Kalenderereignisse
 Name[el]=Γεγονότα ημερολογίου
@@ -25,11 +26,13 @@ Name[sr@ijekavianlatin]=događaji kalendara
 Name[sr@latin]=događaji kalendara
 Name[sv]=Kalenderhändelser
 Name[uk]=Події календаря
+Name[wa]=Evenmints do calindrî
 Name[x-test]=xxCalendar Eventsxx
 Name[zh_CN]=日历事件
 Name[zh_TW]=行事曆事件
 Comment=Calendar Events runner
 Comment[ca]=Executor d'esdeveniments de calendari
+Comment[ca@valencia]=Executor d'esdeveniments de calendari
 Comment[da]=Runner til kalenderbegivenheder
 Comment[de]=Kalenderereignisse
 Comment[el]=Εκτελεστής γεγονότων ημερολογίου

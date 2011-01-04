@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Spell Checker
 Name[ca]=Corrector ortogràfic
+Name[ca@valencia]=Corrector ortogràfic
 Name[cs]=Kontrola pravopisu
 Name[da]=Stavekontrol
 Name[de]=Rechtschreibprüfung
@@ -24,6 +25,7 @@ Name[sr@ijekavianlatin]=pravopisar
 Name[sr@latin]=pravopisar
 Name[sv]=Stavningskontroll
 Name[uk]=Перевірка правопису
+Name[wa]=Coridjrece ortografike
 Name[x-test]=xxSpell Checkerxx
 Name[zh_TW]=拼字檢查器
 Comment=Check the spelling of a word
