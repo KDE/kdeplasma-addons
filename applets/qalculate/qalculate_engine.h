@@ -30,7 +30,7 @@ class QalculateEngine : public QObject
 {
     Q_OBJECT
 public:
-    QalculateEngine(QalculateSettings* settings, QObject* parent = 0);
+    explicit QalculateEngine(QalculateSettings* settings, QObject* parent = 0);
 
     QString lastResult() const {
         return m_lastResult;
