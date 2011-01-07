@@ -313,7 +313,7 @@ void NowPlaying::toolTipAboutToShow()
 void NowPlaying::playerAdded(const QString &name)
 {
     kDebug() << "Player" << name << "added";
-    if (m_watchingPlayer.isEmpty()) {
+    if (m_watchingPlayer == "players") {
         //findPlayer();
         kDebug() << "Installing" << name << "as watched player";
         m_watchingPlayer = name;
