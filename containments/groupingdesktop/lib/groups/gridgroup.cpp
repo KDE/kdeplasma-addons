@@ -164,7 +164,7 @@ void GridGroup::removeRowOrColumn()
             if (left) {
                 p = QPoint(0, rect.y());
             } else {
-                p = QPoint(m_colsNumber, rect.y());
+                p = QPoint(m_colsNumber - 1, rect.y());
             }
             if (rect.contains(p)) {
                 return;
