@@ -46,6 +46,6 @@ namespace OAuth {
     void signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod method, const QByteArray &token,
                          const QByteArray &tokenSecret, const ParamMap &params);
 
-};
+}
 
 #endif
