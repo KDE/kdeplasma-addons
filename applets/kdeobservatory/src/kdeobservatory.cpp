@@ -527,7 +527,6 @@ void KdeObservatory::updateSources()
         commitFrom = currentDate.addDays(-m_commitExtent).toString("yyyyMMdd");
     }
 
-    int viewsCount = m_activeViews.count();
     m_sourceCounter = 0;
     uint appletId = id();
 
