@@ -306,7 +306,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 
         if (f.open(QIODevice::ReadOnly)) {
             QTextStream t(&f);
-            m_textEdit->nativeWidget()->setHtml(t.readAll());
+            m_textEdit->nativeWidget()->setText(t.readAll());
             f.close();
         }
     }
