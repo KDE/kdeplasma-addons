@@ -363,7 +363,15 @@ void Notes::configChanged()
         m_textColor = cg.readEntry("textColor", m_textColor);
     }
     m_textBackgroundColor = cg.readEntry("textBackgroundColor", QColor(Qt::transparent));
-    m_textEdit->nativeWidget()->setTextColor(m_textColor);
+
+    m_font = cg.readEntry("font", KGlobalSettings::generalFont());
+
+    m_customFontSize = cg.readEntry("customFontSize", m_font.pointSize());
+    m_autoFont = cg.readEntry("autoFont", false);
+    m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
+
+    m_checkSpelling = cg.readEntry("checkSpelling", false);
+    m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
 
     QString text = cg.readEntry("autoSaveHtml", QString());
     if (text.isEmpty()) {
@@ -375,27 +383,21 @@ void Notes::configChanged()
             saveNote();
         }
     } else {
-        m_textEdit->setText(text);
+        m_textEdit->nativeWidget()->setHtml(text);
     }
+
+    //Set the font family and color, it may have changed from the outside
+    QTextCursor oldCursor = m_textEdit->nativeWidget()->textCursor();
+    m_textEdit->nativeWidget()->selectAll();
+    m_textEdit->setFont(m_font);
+    m_textEdit->nativeWidget()->setTextColor(m_textColor);
+    m_textEdit->nativeWidget()->setTextCursor(oldCursor);
 
     int scrollValue = cg.readEntry("scrollValue").toInt();
     if (scrollValue) {
         m_textEdit->nativeWidget()->verticalScrollBar()->setValue(scrollValue);
     }
 
-    m_font = cg.readEntry("font", KGlobalSettings::generalFont());
-    //Set the font family on init, it may have changed from the outside
-    QTextCursor oldCursor = m_textEdit->nativeWidget()->textCursor();
-    m_textEdit->nativeWidget()->selectAll();
-    m_textEdit->nativeWidget()->setFontFamily(m_font.family());
-    m_textEdit->nativeWidget()->setTextCursor(oldCursor);
-
-    m_customFontSize = cg.readEntry("customFontSize", m_font.pointSize());
-    m_autoFont = cg.readEntry("autoFont", false);
-    m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
-
-    m_checkSpelling = cg.readEntry("checkSpelling", false);
-    m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     updateTextGeometry();
 
     // make sure changes to the background colour take effect immediately
@@ -504,10 +506,14 @@ void Notes::delayedSaveNote()
 void Notes::saveNote()
 {
     KConfigGroup cg = config();
-    cg.writeEntry("autoSaveHtml", m_textEdit->text());
-    cg.writeEntry("scrollValue", QVariant(m_textEdit->nativeWidget()->verticalScrollBar()->value()));
-    //kDebug() << m_textEdit->nativeWidget()->toPlainText();
+    saveState(cg);
     emit configNeedsSaving();
+}
+
+void Notes::saveState(KConfigGroup &cg) const
+{
+    cg.writeEntry("autoSaveHtml", m_textEdit->nativeWidget()->toHtml());
+    cg.writeEntry("scrollValue", QVariant(m_textEdit->nativeWidget()->verticalScrollBar()->value()));
 }
 
 void Notes::themeChanged()
@@ -675,11 +681,12 @@ void Notes::configAccepted()
         textColorChanged = true;
         m_useThemeColor = ui.useThemeColor->isChecked();
         cg.writeEntry("useThemeColor", m_useThemeColor);
-        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-        connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
     }
 
-    if (!m_useThemeColor) {
+    if (m_useThemeColor) {
+        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+        connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
+    } else {
         QColor newColor = ui.textColorButton->color();
         if (m_textColor != newColor) {
             changed = true;
@@ -690,10 +697,10 @@ void Notes::configAccepted()
     }
 
     if (textColorChanged) {
-        QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+        QTextCursor oldCursor = m_textEdit->nativeWidget()->textCursor();
         m_textEdit->nativeWidget()->selectAll();
         m_textEdit->nativeWidget()->setTextColor(m_textColor);
-        m_textEdit->nativeWidget()->setTextCursor(textCursor);
+        m_textEdit->nativeWidget()->setTextCursor(oldCursor);
     }
 
     if (m_useNoColor != ui.useNoColor->isChecked()) {

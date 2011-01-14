@@ -135,6 +135,7 @@ class Notes : public Plasma::Applet
     protected:
         void constraintsEvent(Plasma::Constraints constraints);
         void createConfigurationInterface(KConfigDialog *parent);
+        void saveState(KConfigGroup &cg) const;
 
     private Q_SLOTS:
         void saveNote();
