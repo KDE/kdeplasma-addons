@@ -787,7 +787,7 @@ void MicroBlog::updateStatus()
     cg.writeEntry("password", m_password);
     cg.writeEntry("status", status);
     if (!m_replyToId.isEmpty()) {
-        cg.writeEntry("inReplyToStatusId", m_replyToId);
+        cg.writeEntry("in_reply_to_status_id", m_replyToId);
     }
 
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
