@@ -51,7 +51,7 @@ class TweetJob : public Plasma::ServiceJob
     Q_OBJECT
 
 public:
-    TweetJob(TimelineSource *source, const QMap<QString, QVariant> &parameters, QObject *parent = 0);
+    TweetJob(TimelineSource *source, const QString &operation, const QMap<QString, QVariant> &parameters, QObject *parent = 0);
     void start();
 
 private slots:
@@ -59,8 +59,7 @@ private slots:
 
 private:
     KUrl m_url;
-    QString m_status;
-    QString m_inReplyToStatusId;
+    QMap<QString, QVariant> m_parameters;
     TimelineSource *m_source;
 };
 

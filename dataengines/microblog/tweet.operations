@@ -22,4 +22,13 @@
             <label>The Id we're replying to</label>
         </entry>
     </group>
+
+    <group name="retweet">
+        <entry name="password" type="String">
+            <label>The log in password for the account.</label>
+        </entry>
+        <entry name="id" type="String">
+            <label>The Id we're retweeting</label>
+        </entry>
+    </group>
 </kcfg>

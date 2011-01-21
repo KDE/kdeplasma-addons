@@ -33,18 +33,29 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
 const QString TimelineSource::AccessTokenUrl = "https://api.twitter.com/oauth/access_token";
 
-TweetJob::TweetJob(TimelineSource *source, const QMap<QString, QVariant> &parameters, QObject *parent)
-    : Plasma::ServiceJob(source->account(), "update", parameters, parent),
-      m_url(source->serviceBaseUrl(), "statuses/update.xml"),
+TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<QString, QVariant> &parameters, QObject *parent)
+    : Plasma::ServiceJob(source->account(), operation, parameters, parent),
+      m_url(source->serviceBaseUrl()),
+      m_parameters(parameters),
       m_source(source)
 {
-    m_status = parameters.value("status").toString();
-    m_inReplyToStatusId = parameters.value("in_reply_to_status_id").toString();
+    if (operation == "retweet") {
+        m_url.setPath(m_url.path()+QString("statuses/retweet/%1.xml").arg(parameters.value("id").toString()));
+    //At the moment, just update
+    } else {
+        m_url.setPath(m_url.path()+QString("statuses/%1.xml").arg(operation));
+    }
 
     if (!source->useOAuth()) {
-        m_url.addQueryItem("status", m_status);
         m_url.addQueryItem("source", "kdemicroblog");
-        m_url.addQueryItem("in_reply_to_status_id", m_inReplyToStatusId);
+
+        QMapIterator<QString, QVariant> i(parameters);
+        while (i.hasNext()) {
+            i.next();
+            if (!i.value().toString().isEmpty() && i.key() != "password") {
+                m_url.addQueryItem(i.key(), i.value().toString().toLatin1());
+            }
+        }
 
         m_url.setUser(source->account());
         m_url.setPass(source->password());
@@ -53,18 +64,41 @@ TweetJob::TweetJob(TimelineSource *source, const QMap<QString, QVariant> &parame
 
 void TweetJob::start()
 {
-    QByteArray data = (m_source->useOAuth()) ? "status=" + m_status.toUtf8().toPercentEncoding()
-                         + "&source=kdemicroblog"
-                         + (!m_inReplyToStatusId.isEmpty()?"&in_reply_to_status_id=" + m_inReplyToStatusId.toLatin1() : "")
-                       : QByteArray();
-    KIO::Job *job = KIO::http_post(m_url, data, KIO::HideProgressInfo);
-    if (m_source->useOAuth()){
-        OAuth::ParamMap params;
-        params.insert("status", m_status.toUtf8().toPercentEncoding());
-        params.insert("source", "kdemicroblog");
-        if (!m_inReplyToStatusId.isEmpty()) {
-            params.insert("in_reply_to_status_id", m_inReplyToStatusId.toLatin1());
+    QByteArray data;
+
+    if (m_source->useOAuth()) {
+        data = "source=kdemicroblog";
+        QMapIterator<QString, QVariant> i(m_parameters);
+        while (i.hasNext()) {
+            i.next();
+            if (!i.value().toString().isEmpty() && i.key() != "password") {
+                if (i.key() == "status") {
+                    data = data.append("&status=" + i.value().toString().toUtf8().toPercentEncoding());
+                } else {
+                    data = data.append(QString("&"+i.key()+"="+i.value().toString()).toLatin1());
+                }
+            }
         }
+    }
+
+    KIO::Job *job = KIO::http_post(m_url, data, KIO::HideProgressInfo);
+
+    if (m_source->useOAuth()) {
+        OAuth::ParamMap params;
+        params.insert("source", "kdemicroblog");
+
+        QMapIterator<QString, QVariant> i(m_parameters);
+        while (i.hasNext()) {
+            i.next();
+            if (!i.value().toString().isEmpty() && i.key() != "password") {
+                if (i.key() == "status") {
+                    params.insert("status", i.value().toString().toUtf8().toPercentEncoding());
+                } else {
+                    params.insert(i.key().toLatin1(), i.value().toString().toLatin1());
+                }
+            }
+        }
+
         OAuth::signRequest(job, m_url.pathOrUrl(), OAuth::POST, m_source->oauthToken(),
                            m_source->oauthTokenSecret(), params);
     }
@@ -87,8 +121,8 @@ TimelineService::TimelineService(TimelineSource *parent)
 
 Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
-    if (operation == "update") {
-        return new TweetJob(m_source, parameters);
+    if (operation == "update" || operation == "retweet") {
+        return new TweetJob(m_source, operation, parameters);
     } else if (operation == "refresh") {
         m_source->update(true);
     } else if (operation == "auth") {
