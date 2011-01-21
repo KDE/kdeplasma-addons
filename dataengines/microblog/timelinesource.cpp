@@ -39,7 +39,7 @@ TweetJob::TweetJob(TimelineSource *source, const QMap<QString, QVariant> &parame
       m_source(source)
 {
     m_status = parameters.value("status").toString();
-    m_inReplyToStatusId = parameters.value("inReplyToStatusId").toString();
+    m_inReplyToStatusId = parameters.value("in_reply_to_status_id").toString();
 
     if (!source->useOAuth()) {
         m_url.addQueryItem("status", m_status);
