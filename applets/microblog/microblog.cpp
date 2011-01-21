@@ -389,7 +389,6 @@ void MicroBlog::reply(const QString &replyToId, const QString &to)
 void MicroBlog::forward(const QString &messageId)
 {
     KConfigGroup cg = m_service->operationDescription("retweet");
-    cg.writeEntry("password", m_password);
     cg.writeEntry("id", messageId);
 
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(retweetCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
@@ -789,7 +788,6 @@ void MicroBlog::updateStatus()
     QString status = m_statusEdit->nativeWidget()->toPlainText();
 
     KConfigGroup cg = m_service->operationDescription("update");
-    cg.writeEntry("password", m_password);
     cg.writeEntry("status", status);
     if (!m_replyToId.isEmpty()) {
         cg.writeEntry("in_reply_to_status_id", m_replyToId);
