@@ -75,21 +75,19 @@ QImage Picture::defaultPicture(const QString &message)
 void Picture::setPicture(const KUrl &currentUrl)
 {
     m_currentUrl = currentUrl;
-    ImageLoader *loader;
     kDebug() << currentUrl;
-    
+
     if (!m_currentUrl.isEmpty() && !m_currentUrl.isLocalFile()) {
         kDebug() << "Not a local file, downloading" << currentUrl;
         m_job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::DefaultFlags );
         connect(m_job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
         emit pictureLoaded(defaultPicture(i18n("Loading image...")));
     } else {
+        ImageLoader *loader = 0;
         if (m_checkDir) {
-            loader = new ImageLoader(m_defaultImage);
             m_message = i18nc("Info", "Dropped folder is empty. Please drop a folder with image(s)");
             m_checkDir = false;
         } else if (currentUrl.isEmpty()) {
-            loader = new ImageLoader(m_defaultImage);
             m_message = i18nc("Info", "Put your photo here or drop a folder to start a slideshow");
             kDebug() << "default image ...";
         } else {
@@ -97,6 +95,11 @@ void Picture::setPicture(const KUrl &currentUrl)
             setPath(m_currentUrl.path());
             m_message.clear();
         }
+
+        if (!loader) {
+            loader = new ImageLoader(m_defaultImage);
+        }
+
         connect(loader, SIGNAL(loaded(QImage)), this, SLOT(checkImageLoaded(QImage)));
         QThreadPool::globalInstance()->start(loader);
     }
