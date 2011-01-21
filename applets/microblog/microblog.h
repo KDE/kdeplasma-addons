@@ -84,6 +84,7 @@ class MicroBlog : public Plasma::PopupApplet
         void configAccepted();
         void updateStatus();
         void updateCompleted(Plasma::ServiceJob *job);
+        void retweetCompleted(Plasma::ServiceJob *job);
         void downloadHistory();
         void editTextChanged();
         void serviceFinished(Plasma::ServiceJob *job);
@@ -159,6 +160,7 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::Service *m_service;
         Plasma::Service *m_profileService;
         QSet<Plasma::ServiceJob *> m_updateJobs;
+        QSet<Plasma::ServiceJob *> m_retweetJobs;
         QString m_curTimeline;
         QString m_replyToId;
         Plasma::Frame *m_headerFrame;

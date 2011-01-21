@@ -386,11 +386,16 @@ void MicroBlog::reply(const QString &replyToId, const QString &to)
     m_statusEdit->setFocus();
 }
 
-void MicroBlog::forward(const QString &rt)
+void MicroBlog::forward(const QString &messageId)
 {
-    m_scrollWidget->ensureItemVisible(m_headerFrame);
-    m_statusEdit->nativeWidget()->setPlainText(rt);
-    m_statusEdit->setFocus();
+    KConfigGroup cg = m_service->operationDescription("retweet");
+    cg.writeEntry("password", m_password);
+    cg.writeEntry("id", messageId);
+
+    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(retweetCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
+
+    m_retweetJobs.insert(m_service->startOperationCall(cg));
+    setBusy(true);
 }
 
 void MicroBlog::getWallet()
@@ -794,6 +799,7 @@ void MicroBlog::updateStatus()
 
     m_updateJobs.insert(m_service->startOperationCall(cg));
     m_statusEdit->nativeWidget()->setPlainText("");
+    setBusy(true);
 }
 
 void MicroBlog::updateCompleted(Plasma::ServiceJob *job)
@@ -813,6 +819,29 @@ void MicroBlog::updateCompleted(Plasma::ServiceJob *job)
     }
 
     //m_statusUpdates.remove(job);
+    setBusy(false);
+}
+
+void MicroBlog::retweetCompleted(Plasma::ServiceJob *job)
+{
+    if (!m_retweetJobs.contains(job)) {
+        return;
+    }
+
+    m_retweetJobs.remove(job);
+    if (m_retweetJobs.isEmpty()) {
+        disconnect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(retweetCompleted(Plasma::ServiceJob*)));
+    }
+
+    if (!job->error()) {
+        //m_statusUpdates.value(job);
+        downloadHistory();
+        m_flash->flash(i18nc("Repeat of the post also called retweet", "Repeat completed"));
+    } else {
+        m_flash->flash(i18n("Repeat failed"));
+    }
+
+    setBusy(false);
 }
 
 //what this really means now is 'reconnect to the timeline source'

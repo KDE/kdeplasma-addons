@@ -56,7 +56,7 @@ protected Q_SLOTS:
 
 Q_SIGNALS:
     void reply(const QString messageId, const QString &reply);
-    void forward(const QString &message);
+    void forward(const QString &messageId);
     void openProfile(const QString &profile);
 
 private:
