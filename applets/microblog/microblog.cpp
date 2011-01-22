@@ -559,14 +559,15 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
             //kDebug() << i << m_lastTweet;
             if (i > m_lastTweet) {
                 newCount++;
-                QVariant v = data.value(id);
-                //Warning: This function is not available with MSVC 6
-                Plasma::DataEngine::Data t = v.value<Plasma::DataEngine::Data>();
-                m_tweetMap[i] = t;
+            }
 
-                if (i > maxId) {
-                    maxId = i;
-                }
+            QVariant v = data.value(id);
+            //Warning: This function is not available with MSVC 6
+            Plasma::DataEngine::Data t = v.value<Plasma::DataEngine::Data>();
+            m_tweetMap[i] = t;
+
+            if (i > maxId) {
+                maxId = i;
             }
         }
         //kDebug() << m_lastTweet << maxId << "<-- updated";

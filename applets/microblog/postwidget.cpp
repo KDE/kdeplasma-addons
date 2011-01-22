@@ -105,10 +105,8 @@ void PostWidget::setData(const Plasma::DataEngine::Data &data)
 
     m_text->setText(QString( "<p><font color='%1'>%2</font></p>" ).arg( m_colorScheme->foreground().color().name()).arg( status ));
 
-    if (data["IsFavorite"].toString() == "true") {
-        m_favoriteButton->setDown(true);
-        m_isFavorite = true;
-    }
+    m_isFavorite = (data["IsFavorite"].toString() == "true");
+    m_favoriteButton->setDown(m_isFavorite);
 }
 
 void PostWidget::setPicture(const QPixmap &picture)
