@@ -397,9 +397,16 @@ void MicroBlog::forward(const QString &messageId)
     setBusy(true);
 }
 
-void MicroBlog::favorite(const QString &messageId)
+void MicroBlog::favorite(const QString &messageId, const bool isFavorite)
 {
-    KConfigGroup cg = m_service->operationDescription("favorites/create");
+    QString operation;
+    if (isFavorite) {
+        operation = "favorites/create";
+    } else {
+        operation = "favorites/destroy";
+    }
+
+    KConfigGroup cg = m_service->operationDescription(operation);
     cg.writeEntry("id", messageId);
 
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(favoriteCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
@@ -652,7 +659,7 @@ void MicroBlog::showTweets()
         PostWidget *postWidget = new PostWidget(m_tweetsWidget);
         connect(postWidget, SIGNAL(reply(const QString &, const QString &)), this, SLOT(reply(const QString &, const QString &)));
         connect(postWidget, SIGNAL(forward(const QString &)), this, SLOT(forward(const QString &)));
-        connect(postWidget, SIGNAL(favorite(const QString &)), this, SLOT(favorite(const QString &)));
+        connect(postWidget, SIGNAL(favorite(const QString &, const bool)), this, SLOT(favorite(const QString &, const bool)));
         connect(postWidget, SIGNAL(openProfile(const QString &)), this, SLOT(openProfile(const QString &)));
         m_tweetWidgets.append(postWidget);
     }

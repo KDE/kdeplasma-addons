@@ -58,7 +58,7 @@ protected Q_SLOTS:
 Q_SIGNALS:
     void reply(const QString messageId, const QString &reply);
     void forward(const QString &messageId);
-    void favorite(const QString &messageId);
+    void favorite(const QString &messageId, const bool favorite);
     void openProfile(const QString &profile);
 
 private:
@@ -70,6 +70,7 @@ private:
     Plasma::ToolButton *m_replyButton;
     Plasma::ToolButton *m_forwardButton;
     Plasma::ToolButton *m_favoriteButton;
+    bool m_isFavorite;
     KTimeZone m_tz;
     KColorScheme *m_colorScheme;
 };

@@ -97,7 +97,7 @@ class MicroBlog : public Plasma::PopupApplet
         void openProfile(const QString &user = QString());
         void reply(const QString &replyToId, const QString &to);
         void forward(const QString &rt);
-        void favorite(const QString &rt);
+        void favorite(const QString &rt, const bool isFavourite);
 
         /**
          * attempt to get the wallet from KWallet

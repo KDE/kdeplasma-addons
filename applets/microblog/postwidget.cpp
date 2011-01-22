@@ -36,6 +36,7 @@
 
 PostWidget::PostWidget(QGraphicsWidget *parent)
     : Plasma::Frame(parent),
+      m_isFavorite(false),
       m_tz(KTimeZone::utc()),
       m_colorScheme(0)
 {
@@ -104,8 +105,9 @@ void PostWidget::setData(const Plasma::DataEngine::Data &data)
 
     m_text->setText(QString( "<p><font color='%1'>%2</font></p>" ).arg( m_colorScheme->foreground().color().name()).arg( status ));
 
-    if (data["IsFavourite"].toString() == "true") {
+    if (data["IsFavorite"].toString() == "true") {
         m_favoriteButton->setDown(true);
+        m_isFavorite = true;
     }
 }
 
@@ -131,7 +133,7 @@ void PostWidget::askForward()
 
 void PostWidget::askFavorite()
 {
-    emit favorite(m_messageId);
+    emit favorite(m_messageId, !m_isFavorite);
 }
 
 void PostWidget::askProfile()
