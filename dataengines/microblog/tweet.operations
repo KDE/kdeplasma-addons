@@ -2,6 +2,7 @@
 <!DOCTYPE kcfg SYSTEM
     "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
 <kcfg>
+    <!-- FIXME KDE5: refresh, auth and update to become statuses/refresh statuses/auth statuses/update -->
     <group name="refresh">
     </group>
 
@@ -20,9 +21,16 @@
         </entry>
     </group>
 
-    <group name="retweet">
+
+    <group name="statuses/retweet">
         <entry name="id" type="String">
             <label>The Id we're retweeting</label>
+        </entry>
+    </group>
+
+    <group name="favorites/create">
+        <entry name="id" type="String">
+            <label>The Id we're marking as favorite</label>
         </entry>
     </group>
 </kcfg>

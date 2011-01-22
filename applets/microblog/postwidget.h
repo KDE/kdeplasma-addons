@@ -52,11 +52,13 @@ protected:
 protected Q_SLOTS:
     void askReply();
     void askForward();
+    void askFavorite();
     void askProfile();
 
 Q_SIGNALS:
     void reply(const QString messageId, const QString &reply);
     void forward(const QString &messageId);
+    void favorite(const QString &messageId);
     void openProfile(const QString &profile);
 
 private:
@@ -67,6 +69,7 @@ private:
     Plasma::TextBrowser *m_text;
     Plasma::ToolButton *m_replyButton;
     Plasma::ToolButton *m_forwardButton;
+    Plasma::ToolButton *m_favoriteButton;
     KTimeZone m_tz;
     KColorScheme *m_colorScheme;
 };

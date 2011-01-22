@@ -39,11 +39,15 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
       m_parameters(parameters),
       m_source(source)
 {
-    if (operation == "retweet") {
-        m_url.setPath(m_url.path()+QString("statuses/retweet/%1.xml").arg(parameters.value("id").toString()));
-    //At the moment, just update
-    } else {
+    if (operation == "stauses/retweet" ||
+        operation == "favorites/create") {
+        m_url.setPath(m_url.path()+QString("%1/%2.xml").arg(operation).arg(parameters.value("id").toString()));
+
+    } else if (operation == "update") {
         m_url.setPath(m_url.path()+QString("statuses/%1.xml").arg(operation));
+
+    } else {
+        m_url.setPath(m_url.path()+operation+".xml");
     }
 
     if (!source->useOAuth()) {
@@ -121,7 +125,7 @@ TimelineService::TimelineService(TimelineSource *parent)
 
 Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
-    if (operation == "update" || operation == "retweet") {
+    if (operation == "update" || operation == "statuses/retweet" || operation == "favorites/create") {
         return new TweetJob(m_source, operation, parameters);
     } else if (operation == "refresh") {
         m_source->update(true);

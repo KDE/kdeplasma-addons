@@ -53,10 +53,15 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
     m_text->nativeWidget()->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     m_text->nativeWidget()->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     m_text->nativeWidget()->setCursor( Qt::ArrowCursor );
+    m_favoriteButton = new Plasma::ToolButton(this);
+    //hearth
+    m_favoriteButton->setText(QChar(0x2665));
+    connect(m_favoriteButton, SIGNAL(clicked()), this, SLOT(askFavorite()));
     m_replyButton = new Plasma::ToolButton(this);
     m_replyButton->setText("@");
     connect(m_replyButton, SIGNAL(clicked()), this, SLOT(askReply()));
     m_forwardButton = new Plasma::ToolButton(this);
+    //recycle
     m_forwardButton->setText(QChar(0x267B));
     connect(m_forwardButton, SIGNAL(clicked()), this, SLOT(askForward()));
 
@@ -69,7 +74,8 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
 
     lay->addCornerAnchors(lay, Qt::TopRightCorner, m_forwardButton, Qt::TopRightCorner);
     lay->addCornerAnchors(m_forwardButton, Qt::TopLeftCorner, m_replyButton, Qt::TopRightCorner);
-    lay->addCornerAnchors(m_replyButton, Qt::TopLeftCorner, m_author, Qt::TopRightCorner);
+    lay->addCornerAnchors(m_replyButton, Qt::TopLeftCorner, m_favoriteButton, Qt::TopRightCorner);
+    lay->addCornerAnchors(m_favoriteButton, Qt::TopLeftCorner, m_author, Qt::TopRightCorner);
 
     //vertical
     lay->addAnchor(m_from, Qt::AnchorBottom, m_text, Qt::AnchorTop);
@@ -97,6 +103,10 @@ void PostWidget::setData(const Plasma::DataEngine::Data &data)
     status.replace(QRegExp("((http|https)://[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]])"), "<a href='\\1'>\\1</a>");
 
     m_text->setText(QString( "<p><font color='%1'>%2</font></p>" ).arg( m_colorScheme->foreground().color().name()).arg( status ));
+
+    if (data["IsFavourite"].toString() == "true") {
+        m_favoriteButton->setDown(true);
+    }
 }
 
 void PostWidget::setPicture(const QPixmap &picture)
@@ -119,6 +129,11 @@ void PostWidget::askForward()
     emit forward(m_messageId);
 }
 
+void PostWidget::askFavorite()
+{
+    emit favorite(m_messageId);
+}
+
 void PostWidget::askProfile()
 {
     emit openProfile(m_author->text());
@@ -126,6 +141,7 @@ void PostWidget::askProfile()
 
 void PostWidget::setActionsShown(bool show)
 {
+    m_favoriteButton->setVisible(show);
     m_replyButton->setVisible(show);
     m_forwardButton->setVisible(show);
 }

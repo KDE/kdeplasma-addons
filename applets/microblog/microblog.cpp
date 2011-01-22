@@ -388,12 +388,23 @@ void MicroBlog::reply(const QString &replyToId, const QString &to)
 
 void MicroBlog::forward(const QString &messageId)
 {
-    KConfigGroup cg = m_service->operationDescription("retweet");
+    KConfigGroup cg = m_service->operationDescription("statuses/retweet");
     cg.writeEntry("id", messageId);
 
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(retweetCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
 
     m_retweetJobs.insert(m_service->startOperationCall(cg));
+    setBusy(true);
+}
+
+void MicroBlog::favorite(const QString &messageId)
+{
+    KConfigGroup cg = m_service->operationDescription("favorites/create");
+    cg.writeEntry("id", messageId);
+
+    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(favoriteCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
+
+    m_favoriteJobs.insert(m_service->startOperationCall(cg));
     setBusy(true);
 }
 
@@ -641,6 +652,7 @@ void MicroBlog::showTweets()
         PostWidget *postWidget = new PostWidget(m_tweetsWidget);
         connect(postWidget, SIGNAL(reply(const QString &, const QString &)), this, SLOT(reply(const QString &, const QString &)));
         connect(postWidget, SIGNAL(forward(const QString &)), this, SLOT(forward(const QString &)));
+        connect(postWidget, SIGNAL(favorite(const QString &)), this, SLOT(favorite(const QString &)));
         connect(postWidget, SIGNAL(openProfile(const QString &)), this, SLOT(openProfile(const QString &)));
         m_tweetWidgets.append(postWidget);
     }
@@ -837,6 +849,25 @@ void MicroBlog::retweetCompleted(Plasma::ServiceJob *job)
         m_flash->flash(i18nc("Repeat of the post also called retweet", "Repeat completed"));
     } else {
         m_flash->flash(i18n("Repeat failed"));
+    }
+
+    setBusy(false);
+}
+
+void MicroBlog::favoriteCompleted(Plasma::ServiceJob *job)
+{
+    if (!m_favoriteJobs.contains(job)) {
+        return;
+    }
+
+    m_favoriteJobs.remove(job);
+    if (m_favoriteJobs.isEmpty()) {
+        disconnect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(favoriteCompleted(Plasma::ServiceJob*)));
+    }
+
+    if (!job->error()) {
+        //m_statusUpdates.value(job);
+        downloadHistory();
     }
 
     setBusy(false);

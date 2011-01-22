@@ -85,6 +85,7 @@ class MicroBlog : public Plasma::PopupApplet
         void updateStatus();
         void updateCompleted(Plasma::ServiceJob *job);
         void retweetCompleted(Plasma::ServiceJob *job);
+        void favoriteCompleted(Plasma::ServiceJob *job);
         void downloadHistory();
         void editTextChanged();
         void serviceFinished(Plasma::ServiceJob *job);
@@ -96,6 +97,7 @@ class MicroBlog : public Plasma::PopupApplet
         void openProfile(const QString &user = QString());
         void reply(const QString &replyToId, const QString &to);
         void forward(const QString &rt);
+        void favorite(const QString &rt);
 
         /**
          * attempt to get the wallet from KWallet
@@ -161,6 +163,7 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::Service *m_profileService;
         QSet<Plasma::ServiceJob *> m_updateJobs;
         QSet<Plasma::ServiceJob *> m_retweetJobs;
+        QSet<Plasma::ServiceJob *> m_favoriteJobs;
         QString m_curTimeline;
         QString m_replyToId;
         Plasma::Frame *m_headerFrame;
