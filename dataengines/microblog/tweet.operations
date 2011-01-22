@@ -12,9 +12,6 @@
     </group>
 
     <group name="update">
-        <entry name="password" type="String">
-            <label>The log in password for the account.</label>
-        </entry>
         <entry name="status" type="String">
             <label>The tweet text</label>
         </entry>
@@ -24,9 +21,6 @@
     </group>
 
     <group name="retweet">
-        <entry name="password" type="String">
-            <label>The log in password for the account.</label>
-        </entry>
         <entry name="id" type="String">
             <label>The Id we're retweeting</label>
         </entry>

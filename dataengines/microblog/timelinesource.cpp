@@ -52,7 +52,7 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
         QMapIterator<QString, QVariant> i(parameters);
         while (i.hasNext()) {
             i.next();
-            if (!i.value().toString().isEmpty() && i.key() != "password") {
+            if (!i.value().toString().isEmpty()) {
                 m_url.addQueryItem(i.key(), i.value().toString().toLatin1());
             }
         }
@@ -71,7 +71,7 @@ void TweetJob::start()
         QMapIterator<QString, QVariant> i(m_parameters);
         while (i.hasNext()) {
             i.next();
-            if (!i.value().toString().isEmpty() && i.key() != "password") {
+            if (!i.value().toString().isEmpty()) {
                 if (i.key() == "status") {
                     data = data.append("&status=" + i.value().toString().toUtf8().toPercentEncoding());
                 } else {
@@ -90,7 +90,7 @@ void TweetJob::start()
         QMapIterator<QString, QVariant> i(m_parameters);
         while (i.hasNext()) {
             i.next();
-            if (!i.value().toString().isEmpty() && i.key() != "password") {
+            if (!i.value().toString().isEmpty()) {
                 if (i.key() == "status") {
                     params.insert("status", i.value().toString().toUtf8().toPercentEncoding());
                 } else {
