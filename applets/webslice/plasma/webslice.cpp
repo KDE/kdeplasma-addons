@@ -169,8 +169,14 @@ void WebSlice::updateElements()
         if (el.attributeNames().contains("id")) {
             elAttributeName = QString("id");
             elSelector = QString("#%1").arg(el.attribute("id")); // according to CSS selector syntax
-        } // handle non-id selectors as well here
-
+        } else {
+            /* don't add all elements for now, this really only clutters the combo
+            elSelector = el.localName();
+            if (!el.attribute("class").isEmpty()) {
+                elSelector.append("." + el.attribute("class"));
+            }
+            */
+        }
         // Add Item?
         if (!elSelector.isEmpty() && !(el.geometry().size().isNull())) {
             ui.elementCombo->addItem(elSelector, elAttributeName);
