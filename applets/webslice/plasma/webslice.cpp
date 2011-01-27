@@ -149,6 +149,7 @@ void WebSlice::createConfigurationInterface(KConfigDialog *parent)
     ui.urlEdit->setText(m_url.toString());
     ui.loadUrl->setIcon(KIcon("view-refresh"));
     ui.geometryEdit->setText(sliceGeometryToString());
+    ui.elementCombo->setEditable(true);
     updateElements();
 }
 

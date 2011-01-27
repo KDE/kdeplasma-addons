@@ -22,8 +22,9 @@
 
 #include <qdebug.h>
 #include <QGraphicsSceneResizeEvent>
-#include <qlabel.h>
 #include <qgraphicswebview.h>
+#include <qlabel.h>
+#include <qtimer.h>
 #include <qwebelement.h>
 #include <qwebpage.h>
 #include <qwebframe.h>
@@ -39,6 +40,9 @@ struct KGraphicsWebSlicePrivate
     QRectF originalGeometry;
     QString loadingText;
     qreal currentZoom;
+    QTimer* resizeTimer;
+    QSizeF resizeNew;
+    QSizeF resizeOriginal;
 };
 
 KGraphicsWebSlice::KGraphicsWebSlice( QGraphicsWidget *parent )
@@ -53,6 +57,11 @@ KGraphicsWebSlice::KGraphicsWebSlice( QGraphicsWidget *parent )
     QWebFrame *frame = d->view->page()->mainFrame();
     frame->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
     frame->setScrollBarPolicy( Qt::Vertical, Qt::ScrollBarAlwaysOff );
+
+    d->resizeTimer = new QTimer(this);
+    d->resizeTimer->setInterval(500);
+    d->resizeTimer->setSingleShot(true);
+    connect(d->resizeTimer, SIGNAL(timeout()), SLOT(resizeTimeout()));
 }
 
 KGraphicsWebSlice::~KGraphicsWebSlice()
@@ -196,9 +205,17 @@ void KGraphicsWebSlice::refresh()
 void KGraphicsWebSlice::resizeEvent ( QGraphicsSceneResizeEvent * event )
 {
     //qDebug() << "KGraphicsWebSlice::resizeEvent" << event->newSize() << "(" << event->oldSize() << ")";
-    QSizeF o = d->originalGeometry.size();
-    QSizeF n = event->newSize();
+    d->resizeOriginal = d->originalGeometry.size();
+    d->resizeNew = event->newSize();
+    qDebug() << "resize event";
+    d->resizeTimer->start();
+}
 
+void KGraphicsWebSlice::resizeTimeout()
+{
+    qDebug() << "Resizing....";
+    QSizeF n = d->resizeNew;
+    QSizeF o = d->resizeOriginal;
     // Prevent oopses.
     if (n.width() > 2400 || n.height() > 2400) {
         qDebug() << "giant size, what's going on???????" << o.width();

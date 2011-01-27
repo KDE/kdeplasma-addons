@@ -164,6 +164,11 @@ protected Q_SLOTS:
      */
     void resizeEvent ( QGraphicsSceneResizeEvent * event );
 
+    /**
+     * slot compressing resize events.
+     */
+    void resizeTimeout();
+
 private:
     /**
      * Initial creating of slice and setting of sizing information.
