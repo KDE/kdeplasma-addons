@@ -116,8 +116,23 @@ public:
      **/
     void setLoadingText(const QString &html);
 
+    /**
+     * Sets the color of the preview overlay mask, if nothing is set, default to black.
+     *
+     * @param color The color used to paint the preview mask
+     **/
+    void setPreviewMaskColor(const QColor &color);
+
+    /**
+     * Switches the widget to showing a specific slice.
+     *
+     * @param color The CSS selector used to identify the element of the webpage to show
+     **/
     void showSlice(const QString &selector = QString());
 
+    /**
+     * Shows the full page unsliced and zoomed out to fit into the widget.
+     **/
     void showPage();
 
 public Q_SLOTS:

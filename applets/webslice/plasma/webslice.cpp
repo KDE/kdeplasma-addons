@@ -34,6 +34,7 @@
 #include <KDebug>
 #include <KConfigDialog>
 #include <KServiceTypeTrader>
+#include <Plasma/Theme>
 
 // Plasma
 #include <Plasma/Label>
@@ -109,9 +110,12 @@ QGraphicsWidget* WebSlice::graphicsWidget()
 
         m_slice = new KGraphicsWebSlice(m_widget);
         m_slice->setMaximumSize(contentsRect().size());
-        m_slice->show();
+        //m_slice->show();
+        updateColors();
         //connect(m_slice, SIGNAL(sizeChanged(QSizeF)), this, SLOT(sizeChanged(QSizeF)));
         connect(m_slice, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));
+        connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(updateColors()));
+
         setBusy(true);
         m_slice->setLoadingText(i18nc("displayed in the widget while loading", "<h1>Loading...</h1>"));
         //m_slice->hide();
@@ -257,6 +261,12 @@ void WebSlice::loadFinished(bool ok)
     if (!ok) {
       return;
     }
+}
+
+void WebSlice::updateColors()
+{
+    m_slice->setPreviewMaskColor(
+        Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor));
 }
 
 #include "webslice.moc"

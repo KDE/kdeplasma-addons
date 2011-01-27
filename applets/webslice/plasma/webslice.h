@@ -52,6 +52,7 @@ class WebSlice: public Plasma::PopupApplet
         void updateElements();
         void disconnectLoadFinished();
         void preview(const QString &selector);
+        void updateColors();
 
     private:
         QString sliceGeometryToString(const QString &selector = QString());

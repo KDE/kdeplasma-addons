@@ -42,6 +42,7 @@ struct KGraphicsWebSlicePrivate
     QSizeF resizeNew;
     QRectF previewRect;
     bool previewMode;
+    QColor previewMaskColor;
     QSize fullContentSize;
     QWebElementCollection elementCache;
     QHash<QString, QRect> selectorGeometry;
@@ -54,8 +55,8 @@ KGraphicsWebSlice::KGraphicsWebSlice( QGraphicsWidget *parent )
     d = new KGraphicsWebSlicePrivate;
     d->originalGeometry = QRectF();
     d->fullContentSize = QSize(1024,768);
+    d->previewMaskColor = QColor("black");
     connect(this, SIGNAL(loadFinished(bool)), this, SLOT(finishedLoading(bool)));
-
 
     d->resizeTimer = new QTimer(this);
     d->resizeTimer->setInterval(100);
@@ -129,6 +130,7 @@ void KGraphicsWebSlice::refresh()
 
 void KGraphicsWebSlice::updateElementCache()
 {
+    // FIXME: works only with ids right now, switch to a pointer-indexed hash
     qDebug() << "updateElementCache()";
     d->elementCache = page()->mainFrame()->findAllElements("*");
     d->documentGeometry = page()->mainFrame()->documentElement().geometry();
@@ -286,16 +288,24 @@ QPixmap KGraphicsWebSlice::elementPixmap()
     return result;
 }
 
+void KGraphicsWebSlice::setPreviewMaskColor(const QColor &color)
+{
+    d->previewMaskColor = color;
+    if (d->previewMode) {
+        update();
+    }
+}
+
 void KGraphicsWebSlice::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget)
 {
     QGraphicsWebView::paint(painter, option, widget);
     if (!d->previewMode) {
         return;
     }
-    QColor c("orange");
-    painter->setPen(c);
-    c.setAlphaF(.5);
-    painter->setBrush(c);
+    d->previewMaskColor.setAlphaF(1.0);
+    painter->setPen(d->previewMaskColor);
+    d->previewMaskColor.setAlphaF(.5);
+    painter->setBrush(d->previewMaskColor);
 
     painter->drawRect(d->previewRect);
 }
