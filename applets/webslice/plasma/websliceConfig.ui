@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>513</width>
-    <height>88</height>
+    <width>277</width>
+    <height>344</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,9 +26,6 @@
    <string>Configure the System Bar</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
-   <property name="fieldGrowthPolicy">
-    <enum>QFormLayout::ExpandingFieldsGrow</enum>
-   </property>
    <item row="0" column="0">
     <widget class="QLabel" name="urlLabel">
      <property name="text">
@@ -37,7 +34,18 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="KLineEdit" name="urlEdit"/>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="KLineEdit" name="urlEdit"/>
+     </item>
+     <item>
+      <widget class="KPushButton" name="loadUrl">
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="elementLabel">
@@ -47,7 +55,7 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="KLineEdit" name="elementEdit"/>
+    <widget class="KComboBox" name="elementCombo"/>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label">
@@ -63,9 +71,19 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

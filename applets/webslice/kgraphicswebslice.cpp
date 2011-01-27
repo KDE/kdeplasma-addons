@@ -29,6 +29,8 @@
 #include <qwebframe.h>
 #include <qboxlayout.h>
 
+#include <qdebug.h>
+
 struct KGraphicsWebSlicePrivate
 {
     QGraphicsWebView *view;
@@ -127,15 +129,28 @@ void KGraphicsWebSlice::createSlice()
         emit sizeChanged(geo.size());
         emit loadFinished(true);
     } else {
-      qDebug() << "createSlice was unable to find the geometry (fail)";
+      qDebug() << "createSlice was unable to find the geometry (fail) for " << d->selector;
       emit loadFinished(false);
     }
 }
 
-QRectF KGraphicsWebSlice::sliceGeometry()
+QWebFrame* KGraphicsWebSlice::frame()
+{
+    return d->view->page()->mainFrame();
+}
+
+QRectF KGraphicsWebSlice::sliceGeometry(const QString &selector)
 {
     QWebFrame *frame = d->view->page()->mainFrame();
     QRectF geo = QRectF();
+    if (!selector.isEmpty()) {
+        QWebElement element = frame->findFirstElement(d->selector);
+        if (!element.isNull()) {
+            d->view->page()->setPreferredContentsSize(QSize(1024,768));
+            geo = element.geometry();
+        }
+        return geo;
+    }
     if (!d->selector.isEmpty()) {
         QWebElement element = frame->findFirstElement(d->selector);
         if ( !element.isNull() ) {
@@ -197,6 +212,11 @@ void KGraphicsWebSlice::resizeEvent ( QGraphicsSceneResizeEvent * event )
         refresh();
         qDebug() << "Zoom  :" << n.width() << " / " <<  o.width() << " = " << f;
     }
+}
+
+void KGraphicsWebSlice::preview(const QString &selector)
+{
+    qDebug() << "Previewing ..." << selector << sliceGeometry(selector);
 }
 
 QPixmap KGraphicsWebSlice::elementPixmap()

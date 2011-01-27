@@ -45,13 +45,17 @@ class WebSlice: public Plasma::PopupApplet
 
     public slots:
         void configChanged();
-        
+
     private slots:
         void sizeChanged (QSizeF newsize);
         void loadFinished(bool);
+        void loadUrl();
+        void updateElements();
+        void disconnectLoadFinished();
 
     private:
         QString sliceGeometryToString();
+        void loadSlice(const QString url, const QString selector = QString("body"));
         QUrl m_url;
         QString m_element;
         QSizeF m_size;

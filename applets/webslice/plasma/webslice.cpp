@@ -27,6 +27,8 @@
 #include <QLabel>
 
 #include <QGraphicsLinearLayout>
+#include <QWebElement>
+#include <QWebFrame>
 
 // KDE
 #include <KDebug>
@@ -43,16 +45,18 @@ WebSlice::WebSlice(QObject *parent, const QVariantList &args)
     m_size(192, 192)
 {
     setPopupIcon("internet-web-browser");
-    setAspectRatioMode(Plasma::IgnoreAspectRatio );
+    //setAspectRatioMode(Plasma::IgnoreAspectRatio );
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
 
     setMinimumSize(64, 64);
     resize(300, 300);
+    kDebug() << "0";
 }
 
 void WebSlice::init()
 {
+    kDebug() << "1";
     const QString constraint = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName());
     const KService::List offers = KServiceTypeTrader::self()->query("Plasma/Applet",
                                                                     constraint);
@@ -69,7 +73,7 @@ void WebSlice::init()
             }
         }
     }
-
+    kDebug() << "2";
     configChanged();
 }
 
@@ -119,7 +123,8 @@ QGraphicsWidget* WebSlice::graphicsWidget()
 
 void WebSlice::createConfigurationInterface(KConfigDialog *parent)
 {
-    QLabel *info = new QLabel(parent);
+    //QLabel *info = new QLabel(parent);
+    QLabel* info = new QLabel(parent);
     info->setWordWrap(true);
     info->setTextInteractionFlags(Qt::TextBrowserInteraction);
     info->setText(i18n("<p>The Webslice Widget allows you to display a part of a webpage on your desktop or in a panel. The webslice is fully interactive.</p>"
@@ -136,21 +141,65 @@ void WebSlice::createConfigurationInterface(KConfigDialog *parent)
     QWidget *widget = new QWidget(parent);
     ui.setupUi(widget);
     parent->addPage(widget, i18nc("general config page", "Webpage"), Applet::icon());
+    connect(ui.loadUrl, SIGNAL(clicked()), this, SLOT(loadUrl()));
+    connect(ui.elementCombo, SIGNAL(destroyed()), SLOT(disconnectLoadFinished()));
+    connect(ui.elementCombo, SIGNAL(activated(const QString&)), m_slice, SLOT(preview(const QString&)));
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     ui.urlEdit->setText(m_url.toString());
+    ui.loadUrl->setIcon(KIcon("view-refresh"));
     ui.geometryEdit->setText(sliceGeometryToString());
-    ui.elementEdit->setText(m_element);
+    updateElements();
+}
+
+void WebSlice::updateElements()
+{
+    ui.elementCombo->clear();
+    ui.elementCombo->addItem(QString("body"), QString("body"));
+    ui.elementCombo->addItem(m_element, m_element);
+    foreach(const QWebElement el, m_slice->frame()->findAllElements("*")) {
+        QString elSelector;
+        QString elAttributeName;
+        if (el.attributeNames().contains("id")) {
+            elAttributeName = QString("id");
+            elSelector = QString("#%1").arg(el.attribute("id")); // according to CSS selector syntax
+        } // handle non-id selectors as well here
+
+        // Add Item?
+        if (!elSelector.isEmpty()) {
+            ui.elementCombo->addItem(elSelector, elAttributeName);
+            kDebug() << "EL: " << elAttributeName << elSelector;
+        }
+    }
+}
+
+void WebSlice::disconnectLoadFinished()
+{
+    // we need to prevent the combo from being updated when it's gone
+    disconnect(m_slice, SIGNAL(loadFinished(bool)), this, SLOT(updateElements()));
+}
+
+void WebSlice::loadUrl()
+{
+    loadSlice(ui.urlEdit->text());
+    connect(m_slice, SIGNAL(loadFinished(bool)), SLOT(updateElements()));
+}
+
+void WebSlice::loadSlice(const QString url, const QString selector)
+{
+    m_slice->setUrl(url);
+    setAssociatedApplicationUrls(KUrl::List(url));
+    m_slice->setElement(selector);
 }
 
 void WebSlice::configAccepted()
 {
     if (m_url.toString() != ui.urlEdit->text() ||
-        m_element != ui.elementEdit->text() ||
+        m_element != ui.elementCombo->currentText() ||
         ui.geometryEdit->text() != sliceGeometryToString()) {
 
         m_url = QUrl(ui.urlEdit->text());
-        m_element = ui.elementEdit->text();
+        m_element = ui.elementCombo->currentText();
 
         QString geo = ui.geometryEdit->text();
         QStringList gel = geo.split(',');
@@ -223,7 +272,7 @@ void WebSlice::loadFinished(bool ok)
     m_slice->show();
     m_size = m_slice->geometry().size();
 
-    setAspectRatioMode(Plasma::KeepAspectRatio );
+    //setAspectRatioMode(Plasma::KeepAspectRatio );
 
     kDebug() << "done loading, resizing slice to:" << contentsRect().size();
     m_slice->setMaximumSize(contentsRect().size());

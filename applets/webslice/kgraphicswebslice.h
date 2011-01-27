@@ -25,6 +25,7 @@
 
 class QGraphicsSceneResizeEvent;
 class QUrl;
+class QWebFrame;
 
 /**
  * @class KGraphicsWebSlice plasma/kgraphicswebslice.h
@@ -77,12 +78,10 @@ public:
     void setSliceGeometry( const QRectF geo );
 
     /**
-     * Refresh the position of the slice. This function can be needed if the
-     * geometry changes, or anything else that influences painting and
-     * rendering of the webpage.
+     * Accessor to the internal QWebFrame.
      *
      **/
-    void refresh();
+    QWebFrame* frame();
 
     /**
      * Returns the URL of the webpage that is being sliced.
@@ -105,10 +104,11 @@ public:
      * the CSS selector mechanism, this function is not what you want. Use the
      * sizing mechanism of the widget instead.
      *
-     * @return The CSS selector used to identify the element to render as
-     * the slice
+     * @param selector Specify a selector to find the geometry of a specific element
+     * @return The geometry of the slice within the page, if selector is empty, the current
+     * element is show, if the slice is not found, a zero-size rect will be returned.
      **/
-    QRectF sliceGeometry();
+    QRectF sliceGeometry(const QString &selector = QString());
 
     /**
      * Returns a pixmap of the selected slice. Which slice to show is determined
@@ -127,7 +127,22 @@ public:
      **/
     void setLoadingText(const QString &html);
 
-signals:
+public Q_SLOTS:
+    /**
+     * Renders a preview for a specific element as overlay over the body of the page.
+     *
+     **/
+    void preview(const QString&);
+
+    /**
+     * Refresh the position of the slice. This function can be needed if the
+     * geometry changes, or anything else that influences painting and
+     * rendering of the webpage.
+     *
+     **/
+    void refresh();
+
+Q_SIGNALS:
     /**
      * Emitted when the webslice has found out its preferred geometry
      */
