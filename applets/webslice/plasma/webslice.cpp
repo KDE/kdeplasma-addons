@@ -266,7 +266,7 @@ void WebSlice::loadFinished(bool ok)
 void WebSlice::updateColors()
 {
     m_slice->setPreviewMaskColor(
-        Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor));
+        Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
 }
 
 #include "webslice.moc"

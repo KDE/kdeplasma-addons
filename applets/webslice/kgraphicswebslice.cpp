@@ -307,7 +307,11 @@ void KGraphicsWebSlice::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     d->previewMaskColor.setAlphaF(.5);
     painter->setBrush(d->previewMaskColor);
 
-    painter->drawRect(d->previewRect);
+    QPainterPath path;
+    path.addRect(boundingRect());
+    path.addRect(d->previewRect);
+    painter->drawPath(path);
+    //painter->drawRect(d->previewRect);
 }
 
 #include "kgraphicswebslice.moc"
