@@ -73,7 +73,6 @@ void WebSlice::init()
         }
     }
     void graphicsWidget();
-    configChanged();
 }
 
 WebSlice::~WebSlice ()

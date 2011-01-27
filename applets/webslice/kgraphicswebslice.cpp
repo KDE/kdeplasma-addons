@@ -30,8 +30,6 @@
 #include <qwebframe.h>
 #include <qboxlayout.h>
 
-#include <qdebug.h>
-
 struct KGraphicsWebSlicePrivate
 {
     QString selector;
@@ -45,7 +43,7 @@ struct KGraphicsWebSlicePrivate
     QColor previewMaskColor;
     QSize fullContentSize;
     QWebElementCollection elementCache;
-    QHash<QString, QRect> selectorGeometry;
+    QHash<uint, QRect> selectorGeometry;
     QRect documentGeometry;
 };
 
@@ -130,50 +128,26 @@ void KGraphicsWebSlice::refresh()
 
 void KGraphicsWebSlice::updateElementCache()
 {
-    // FIXME: works only with ids right now, switch to a pointer-indexed hash
     qDebug() << "updateElementCache()";
     d->elementCache = page()->mainFrame()->findAllElements("*");
     d->documentGeometry = page()->mainFrame()->documentElement().geometry();
     foreach(const QWebElement &el, d->elementCache) {
-        if (el.attributeNames().contains("id")) {
-            QString elSelector;
-            elSelector = QString("#%1").arg(el.attribute("id")); // according to CSS selector syntax
-            d->selectorGeometry[elSelector] = el.geometry();
-        }
-        // TODO: Fix other attributes
+        d->selectorGeometry[qHash(el.toOuterXml())] = el.geometry();
     }
-}
-
-QWebElement KGraphicsWebSlice::findElementById(const QString &selector)
-{
-    foreach(const QWebElement &el, d->elementCache) {
-        QString elSelector;
-        if (el.attributeNames().contains("id")) {
-            elSelector = QString("#%1").arg(el.attribute("id")); // according to CSS selector syntax
-            if (elSelector == selector) {
-                //qDebug() << "Found Element! :-)" << elSelector << el.geometry() << QRectF(el.geometry());
-                return el;
-            }
-        }
-    }
-    return QWebElement();
 }
 
 QRectF KGraphicsWebSlice::previewGeometry(const QString &selector)
 {
-    // Normalize slice with zoom within page
-    QRectF geo = findElementById(selector).geometry();
-    return geo;
+    return QRectF(page()->mainFrame()->findFirstElement(selector).geometry());
 }
 
 QRectF KGraphicsWebSlice::sliceGeometry(const QString &selector)
 {
-    //QWebFrame *frame = page()->mainFrame();
-    QRectF geo = QRectF();
-    if (!selector.isEmpty() && d->selectorGeometry.keys().contains(selector)) {
-        geo = d->selectorGeometry[selector];
+    QWebElement el = page()->mainFrame()->findFirstElement(selector);
+    if (d->selectorGeometry.keys().contains(qHash(el.toOuterXml()))) {
+        return d->selectorGeometry[qHash(el.toOuterXml())];
     }
-    return geo;
+    return QRectF();
 }
 
 void KGraphicsWebSlice::resizeEvent ( QGraphicsSceneResizeEvent * event )

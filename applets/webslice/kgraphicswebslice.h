@@ -181,7 +181,6 @@ private:
     void setPreviewMode(bool = true);
     QRectF previewGeometry(const QString &selector);
     void updateElementCache();
-    QWebElement findElementById(const QString &selector);
     QRectF mapFromPage(const QRectF &rectOnPage);
     struct KGraphicsWebSlicePrivate *d;
 
