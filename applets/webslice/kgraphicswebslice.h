@@ -21,7 +21,7 @@
 #ifndef KGRAPHICSWEBSLICE_H
 #define KGRAPHICSWEBSLICE_H
 
-#include <qgraphicswidget.h>
+#include <qgraphicswebview.h>
 
 class QGraphicsSceneResizeEvent;
 class QUrl;
@@ -40,13 +40,15 @@ class QWebFrame;
  * semantic information. When both options are given, element() takes
  * precedence.
  */
-class KGraphicsWebSlice : public QGraphicsWidget
+class KGraphicsWebSlice : public QGraphicsWebView
 {
     Q_OBJECT
 
 public:
     KGraphicsWebSlice( QGraphicsWidget *parent=0 );
     ~KGraphicsWebSlice();
+
+    virtual void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget = 0);
 
     /**
      * Set the URL of the webpage the is being sliced. If you want
@@ -57,7 +59,7 @@ public:
      *
      * @param url The page or frame URL to render
      **/
-    void setUrl( const QUrl &url );
+    void loadSlice(const QUrl &url, const QString &selector = QString());
 
     /**
      * Specify the element of the webpage to be rendered. selector can
@@ -67,7 +69,7 @@ public:
      *
      * @param selector the name of the group to access
      **/
-    void setElement( const QString &selector );
+    void setElement(const QString &selector);
 
     /**
      * Directly set the geometry of the piece that is cut out of the
@@ -82,13 +84,6 @@ public:
      *
      **/
     QWebFrame* frame();
-
-    /**
-     * Returns the URL of the webpage that is being sliced.
-     *
-     * @return The URL the webslice comes from
-     **/
-    QUrl url();
 
     /**
      * Returns the CSS selector used to identify the element that is being
@@ -127,12 +122,16 @@ public:
      **/
     void setLoadingText(const QString &html);
 
+    void showSlice(const QString &selector = QString());
+
+    void showPage();
+
 public Q_SLOTS:
     /**
      * Renders a preview for a specific element as overlay over the body of the page.
      *
      **/
-    void preview(const QString&);
+    void preview(const QString& = QString());
 
     /**
      * Refresh the position of the slice. This function can be needed if the
@@ -142,22 +141,21 @@ public Q_SLOTS:
      **/
     void refresh();
 
+    void zoom(const QRectF &area);
+
 Q_SIGNALS:
     /**
      * Emitted when the webslice has found out its preferred geometry
      */
     void sizeChanged(QSizeF);
 
-    /**
-     * Emitted when the webpage has loaded and the initial slicing is done
-     */
-    void loadFinished(bool);
-
 protected Q_SLOTS:
     /**
      * Slot to catch errors, passes on to createSlice()
      */
     void createSlice(bool ok);
+
+    void finishedLoading(bool ok);
 
     /**
      * Reimplemented from QGraphicsWidget
@@ -174,7 +172,13 @@ private:
      * Initial creating of slice and setting of sizing information.
      */
     void createSlice();
+    void setPreviewMode(bool = true);
+    QRectF previewGeometry(const QString &selector);
+    void updateElementCache();
+    QWebElement findElementById(const QString &selector);
+    QRectF mapFromPage(const QRectF &rectOnPage);
     struct KGraphicsWebSlicePrivate *d;
+
 };
 
 #endif // KGRAPHICSWEBSLICE_H

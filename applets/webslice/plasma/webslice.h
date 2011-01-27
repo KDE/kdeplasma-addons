@@ -20,6 +20,8 @@
 #ifndef WEBSLICE_HEADER
 #define WEBSLICE_HEADER
 
+#include <QString>
+
 #include <plasma/popupapplet.h>
 #include "ui_websliceConfig.h"
 
@@ -52,10 +54,11 @@ class WebSlice: public Plasma::PopupApplet
         void loadUrl();
         void updateElements();
         void disconnectLoadFinished();
+        void preview(const QString &selector);
 
     private:
-        QString sliceGeometryToString();
-        void loadSlice(const QString url, const QString selector = QString("body"));
+        QString sliceGeometryToString(const QString &selector = QString());
+        void loadSlice(const QUrl &url, const QString &selector = QString("body"));
         QUrl m_url;
         QString m_element;
         QSizeF m_size;

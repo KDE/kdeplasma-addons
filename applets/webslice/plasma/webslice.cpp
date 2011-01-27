@@ -45,18 +45,17 @@ WebSlice::WebSlice(QObject *parent, const QVariantList &args)
     m_size(192, 192)
 {
     setPopupIcon("internet-web-browser");
-    //setAspectRatioMode(Plasma::IgnoreAspectRatio );
+    setAspectRatioMode(Plasma::IgnoreAspectRatio );
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
 
     setMinimumSize(64, 64);
-    resize(300, 300);
+    resize(800, 600);
     kDebug() << "0";
 }
 
 void WebSlice::init()
 {
-    kDebug() << "1";
     const QString constraint = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName());
     const KService::List offers = KServiceTypeTrader::self()->query("Plasma/Applet",
                                                                     constraint);
@@ -73,7 +72,7 @@ void WebSlice::init()
             }
         }
     }
-    kDebug() << "2";
+    void graphicsWidget();
     configChanged();
 }
 
@@ -83,6 +82,7 @@ WebSlice::~WebSlice ()
 
 void WebSlice::configChanged()
 {
+    kDebug();
     KConfigGroup cg = config();
     if (!m_url.isValid() || m_url.isEmpty()) {
         m_url = cg.readEntry("url", "http://dot.kde.org/");
@@ -95,8 +95,11 @@ void WebSlice::configChanged()
     }
     m_size = cg.readEntry("size", m_size);
     setAssociatedApplicationUrls(KUrl::List(m_url));
-
-    //kDebug() << "url/element/slicegeometry:" << m_url << m_element << m_sliceGeometry;    
+    if (m_slice) {
+        m_slice->preview();
+    }
+    //kDebug() << "url/element/slicegeometry:" << m_url << m_element << m_sliceGeometry;
+    loadSlice(m_url, m_element);
 }
 
 QGraphicsWidget* WebSlice::graphicsWidget()
@@ -108,15 +111,15 @@ QGraphicsWidget* WebSlice::graphicsWidget()
 
 
         m_slice = new KGraphicsWebSlice(m_widget);
-        connect(m_slice, SIGNAL(sizeChanged(QSizeF)), this, SLOT(sizeChanged(QSizeF)));
+        m_slice->show();
+        //connect(m_slice, SIGNAL(sizeChanged(QSizeF)), this, SLOT(sizeChanged(QSizeF)));
         connect(m_slice, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));
         setBusy(true);
         m_slice->setLoadingText(i18nc("displayed in the widget while loading", "<h1>Loading...</h1>"));
-        m_slice->setUrl(m_url);
-        m_slice->setElement(m_element);
-        m_slice->setSliceGeometry(m_sliceGeometry);
-        m_slice->hide();
+        //m_slice->hide();
         l->addItem(m_slice);
+        kDebug() << "slice set up";
+        configChanged();
     }
     return m_widget;
 }
@@ -143,7 +146,7 @@ void WebSlice::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(widget, i18nc("general config page", "Webpage"), Applet::icon());
     connect(ui.loadUrl, SIGNAL(clicked()), this, SLOT(loadUrl()));
     connect(ui.elementCombo, SIGNAL(destroyed()), SLOT(disconnectLoadFinished()));
-    connect(ui.elementCombo, SIGNAL(activated(const QString&)), m_slice, SLOT(preview(const QString&)));
+    connect(ui.elementCombo, SIGNAL(activated(const QString&)), this, SLOT(preview(const QString&)));
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     ui.urlEdit->setText(m_url.toString());
@@ -151,13 +154,14 @@ void WebSlice::createConfigurationInterface(KConfigDialog *parent)
     ui.geometryEdit->setText(sliceGeometryToString());
     ui.elementCombo->setEditable(true);
     updateElements();
+    preview(m_element);
 }
 
 void WebSlice::updateElements()
 {
     ui.elementCombo->clear();
-    ui.elementCombo->addItem(QString("body"), QString("body"));
     ui.elementCombo->addItem(m_element, m_element);
+    ui.elementCombo->addItem(QString("body"), QString("body"));
     foreach(const QWebElement el, m_slice->frame()->findAllElements("*")) {
         QString elSelector;
         QString elAttributeName;
@@ -167,9 +171,9 @@ void WebSlice::updateElements()
         } // handle non-id selectors as well here
 
         // Add Item?
-        if (!elSelector.isEmpty()) {
+        if (!elSelector.isEmpty() && !(el.geometry().size().isNull())) {
             ui.elementCombo->addItem(elSelector, elAttributeName);
-            kDebug() << "EL: " << elAttributeName << elSelector;
+            //kDebug() << "EL: " << elAttributeName << elSelector << el.geometry();
         }
     }
 }
@@ -178,19 +182,28 @@ void WebSlice::disconnectLoadFinished()
 {
     // we need to prevent the combo from being updated when it's gone
     disconnect(m_slice, SIGNAL(loadFinished(bool)), this, SLOT(updateElements()));
+    m_slice->preview();
+}
+
+void WebSlice::preview(const QString &selector)
+{
+    ui.geometryEdit->setText(sliceGeometryToString(selector));
+
+    m_slice->preview(selector);
 }
 
 void WebSlice::loadUrl()
 {
-    loadSlice(ui.urlEdit->text());
+    loadSlice(QUrl(ui.urlEdit->text()));
     connect(m_slice, SIGNAL(loadFinished(bool)), SLOT(updateElements()));
 }
 
-void WebSlice::loadSlice(const QString url, const QString selector)
+void WebSlice::loadSlice(const QUrl &url, const QString &selector)
 {
-    m_slice->setUrl(url);
-    setAssociatedApplicationUrls(KUrl::List(url));
-    m_slice->setElement(selector);
+    if (m_slice) {
+        m_slice->loadSlice(url, selector);
+        setAssociatedApplicationUrls(KUrl::List(url));
+    }
 }
 
 void WebSlice::configAccepted()
@@ -223,11 +236,8 @@ void WebSlice::configAccepted()
                 kWarning() << "format error, use x,y,w,h" << gel << gel.length();
             }
         }
-
-        m_slice->setUrl(m_url);
-        setAssociatedApplicationUrls(KUrl::List(m_url));
-        m_slice->setElement( m_element );
-        m_slice->hide();
+        kDebug() << "config changed" << m_url;
+        //m_slice->hide();
 
         KConfigGroup cg = config();
         cg.writeEntry("url", m_url.toString());
@@ -236,13 +246,14 @@ void WebSlice::configAccepted()
             m_sliceGeometry = QRectF();
         }
         emit configNeedsSaving();
+        configChanged();
         //kDebug() << "config changed" << m_element << m_url;
     }
 }
 
-QString WebSlice::sliceGeometryToString()
+QString WebSlice::sliceGeometryToString(const QString &selector)
 {
-    QString s = QString("%1,%2,%3,%4").arg(m_sliceGeometry.x()).arg(m_sliceGeometry.y()).arg(m_sliceGeometry.width()).arg(m_sliceGeometry.height());
+    QString s = QString("%1,%2,%3,%4").arg(m_slice->sliceGeometry(selector).x()).arg(m_slice->sliceGeometry(selector).y()).arg(m_slice->sliceGeometry(selector).width()).arg(m_slice->sliceGeometry(selector).height());
     return s;
 }
 
@@ -250,12 +261,12 @@ QString WebSlice::sliceGeometryToString()
 void WebSlice::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & (Plasma::FormFactorConstraint | Plasma::SizeConstraint)) {
-        //kDebug() << "Constraint changed:" << mapToScene(contentsRect());
+        kDebug() << "Constraint changed:" << mapToScene(contentsRect());
         if (m_slice) {
             //kDebug() << "resizing slice to:" << contentsRect().size();
             m_slice->setMaximumSize(contentsRect().size());
             m_widget->setMinimumSize(64, 64);
-            m_slice->refresh();
+            //m_slice->refresh();
         }
     }
 }
@@ -266,7 +277,7 @@ void WebSlice::loadFinished(bool ok)
 
     if (!ok) {
       // TODO set error image
-      kDebug() << "loading failed, but at least we know...";
+      //kDebug() << "loading failed, but at least we know...";
       return;
     }
 
