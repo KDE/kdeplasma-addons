@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009 by Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2009-2011 by Sebastian Kügler <sebas@kde.org>
  *   Copyright 2009 by Richard Moore <rich@kde.org>
 
  *   This program is free software; you can redistribute it and/or modify
@@ -80,12 +80,6 @@ public:
     void setSliceGeometry( const QRectF geo );
 
     /**
-     * Accessor to the internal QWebFrame.
-     *
-     **/
-    QWebFrame* frame();
-
-    /**
      * Returns the CSS selector used to identify the element that is being
      * rendered.
      *
@@ -151,10 +145,8 @@ Q_SIGNALS:
 
 protected Q_SLOTS:
     /**
-     * Slot to catch errors, passes on to createSlice()
+     * Slot to catch loading errors, and initiating showing the slice or preview
      */
-    void createSlice(bool ok);
-
     void finishedLoading(bool ok);
 
     /**
@@ -171,7 +163,6 @@ private:
     /**
      * Initial creating of slice and setting of sizing information.
      */
-    void createSlice();
     void setPreviewMode(bool = true);
     QRectF previewGeometry(const QString &selector);
     void updateElementCache();

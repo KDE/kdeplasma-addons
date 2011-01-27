@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Sebastian Kügler <sebas@kde.org>                *
+ *   Copyright 2009-2011 by Sebastian Kügler <sebas@kde.org>               *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -21,7 +21,6 @@
 #define WEBSLICE_HEADER
 
 #include <QString>
-
 #include <plasma/popupapplet.h>
 #include "ui_websliceConfig.h"
 
@@ -38,7 +37,6 @@ class WebSlice: public Plasma::PopupApplet
 
     protected:
         QGraphicsWidget *graphicsWidget();
-        void constraintsEvent(Plasma::Constraints   constraints);
         KGraphicsWebSlice *m_slice;
 
     protected Q_SLOTS:
@@ -49,7 +47,6 @@ class WebSlice: public Plasma::PopupApplet
         void configChanged();
 
     private slots:
-        void sizeChanged (QSizeF newsize);
         void loadFinished(bool);
         void loadUrl();
         void updateElements();
@@ -61,7 +58,6 @@ class WebSlice: public Plasma::PopupApplet
         void loadSlice(const QUrl &url, const QString &selector = QString("body"));
         QUrl m_url;
         QString m_element;
-        QSizeF m_size;
         QRectF m_sliceGeometry;
         Ui::websliceConfig ui;
         QGraphicsWidget *m_widget;
