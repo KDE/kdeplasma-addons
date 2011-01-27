@@ -218,6 +218,9 @@ void RememberTheMilkPlasmoid::dataUpdated(const QString& name, const Plasma::Dat
 
 void RememberTheMilkPlasmoid::listChanged(int pos)
 {
+  if (pos < 0 || pos >= m_lists.size())
+    return;
+
   config().writeEntry("CurrentList", pos);
   m_model->switchToList(m_lists.at(pos));
 }
