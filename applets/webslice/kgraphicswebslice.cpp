@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009 by Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2009-2011 by Sebastian Kügler <sebas@kde.org>
  *   Copyright 2009 by Richard Moore <rich@kde.org>
 
  *   This program is free software; you can redistribute it and/or modify
@@ -22,8 +22,9 @@
 
 #include <qdebug.h>
 #include <QGraphicsSceneResizeEvent>
-#include <qlabel.h>
 #include <qgraphicswebview.h>
+#include <qlabel.h>
+#include <qtimer.h>
 #include <qwebelement.h>
 #include <qwebpage.h>
 #include <qwebframe.h>
@@ -31,26 +32,37 @@
 
 struct KGraphicsWebSlicePrivate
 {
-    QGraphicsWebView *view;
     QString selector;
     QRectF sliceGeometry;
     QRectF originalGeometry;
     QString loadingText;
-    qreal currentZoom;
+    QTimer* resizeTimer;
+    QSizeF resizeNew;
+    QRectF previewRect;
+    bool previewMode;
+    QColor previewMaskColor;
+    QSize fullContentSize;
+    QWebElementCollection elementCache;
+    QHash<uint, QRect> selectorGeometry;
+    QRect documentGeometry;
 };
 
 KGraphicsWebSlice::KGraphicsWebSlice( QGraphicsWidget *parent )
-    : QGraphicsWidget( parent )
+    : QGraphicsWebView( parent )
 {
     d = new KGraphicsWebSlicePrivate;
-    d->currentZoom = 1.0;
     d->originalGeometry = QRectF();
-    d->view = new QGraphicsWebView( this );
-    connect( d->view, SIGNAL( loadFinished(bool) ), this, SLOT( createSlice(bool) ) );
+    d->fullContentSize = QSize(1024,768);
+    d->previewMaskColor = QColor("black");
+    connect(this, SIGNAL(loadFinished(bool)), this, SLOT(finishedLoading(bool)));
 
-    QWebFrame *frame = d->view->page()->mainFrame();
-    frame->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
-    frame->setScrollBarPolicy( Qt::Vertical, Qt::ScrollBarAlwaysOff );
+    d->resizeTimer = new QTimer(this);
+    d->resizeTimer->setInterval(100);
+    d->resizeTimer->setSingleShot(true);
+    d->resizeNew = QSizeF();
+    connect(d->resizeTimer, SIGNAL(timeout()), SLOT(resizeTimeout()));
+
+    //resize(300, 300);
 }
 
 KGraphicsWebSlice::~KGraphicsWebSlice()
@@ -58,11 +70,16 @@ KGraphicsWebSlice::~KGraphicsWebSlice()
     delete d;
 }
 
-void KGraphicsWebSlice::setUrl( const QUrl &url )
+void KGraphicsWebSlice::loadSlice(const QUrl &u, const QString &selector)
 {
-    QWebFrame *frame = d->view->page()->mainFrame();
-    frame->setHtml(d->loadingText);
-    d->view->load( url );
+    if ( d->selector == selector && url() == u) {
+        return;
+    }
+    setElement(selector);
+    if (url() != u) {
+        QGraphicsWebView::load(u);
+    }
+    setZoomFactor(1.0);
 }
 
 void KGraphicsWebSlice::setLoadingText(const QString &html)
@@ -70,133 +87,162 @@ void KGraphicsWebSlice::setLoadingText(const QString &html)
     d->loadingText = html;
 }
 
-QUrl KGraphicsWebSlice::url()
-{
-    return d->view->url();
-}
-
-QString KGraphicsWebSlice::element()
-{
-    return d->selector;
-}
-
-void KGraphicsWebSlice::setElement( const QString &selector )
+void KGraphicsWebSlice::setElement(const QString &selector)
 {
     d->selector = selector;
 }
 
-void KGraphicsWebSlice::setSliceGeometry( const QRectF geo )
+void KGraphicsWebSlice::setSliceGeometry(const QRectF geo)
 {
     d->sliceGeometry = geo;
 }
 
-void KGraphicsWebSlice::createSlice(bool ok)
+void KGraphicsWebSlice::finishedLoading(bool ok)
 {
-    if (ok) {
-        createSlice();
+    if (!ok) {
+        return;
     }
-    else {
-      qDebug() << "loadFinished called createSlice with false";
-      emit loadFinished(false);
-    }
-}
+    // Normalize page
+    qDebug() << "loading finished" << ok << ", updating cache then slice or preview";
+    QWebFrame *frame = page()->mainFrame();
+    frame->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
+    frame->setScrollBarPolicy( Qt::Vertical, Qt::ScrollBarAlwaysOff );
+    page()->setPreferredContentsSize(d->fullContentSize);
 
-void KGraphicsWebSlice::createSlice()
-{
-    //qDebug() << "KGraphicsWebSlice::createSlice()";
-    QRectF geo = sliceGeometry();
-    QWebFrame *frame = d->view->page()->mainFrame();
-    if (geo.isValid()) {
-        d->originalGeometry = geo;
+    // Update geometry caches
+    updateElementCache();
 
-        qreal f = size().width() / geo.width();
-
-        if (f > 0.1 && f < 8) {
-            d->view->setZoomFactor(f);
-            d->currentZoom = f;
-        }
-
-        QSizeF viewSize = geo.size();
-        viewSize.scale(size(), Qt::KeepAspectRatio);
-        d->view->resize(viewSize);
-
-        QSizeF center = size()/2 - viewSize/2;
-        d->view->setPos(center.width(), center.height());
-        frame->setScrollPosition( geo.topLeft().toPoint() );
-        refresh();
-        emit sizeChanged(geo.size());
-        emit loadFinished(true);
-    } else {
-      qDebug() << "createSlice was unable to find the geometry (fail)";
-      emit loadFinished(false);
-    }
-}
-
-QRectF KGraphicsWebSlice::sliceGeometry()
-{
-    QWebFrame *frame = d->view->page()->mainFrame();
-    QRectF geo = QRectF();
-    if (!d->selector.isEmpty()) {
-        QWebElement element = frame->findFirstElement(d->selector);
-        if ( !element.isNull() ) {
-            d->view->page()->setPreferredContentsSize(QSize(1024,768));
-            geo = element.geometry();
-        }
-    } else if (!d->sliceGeometry.isEmpty()) {
-        d->view->page()->setPreferredContentsSize(QSize(1024,768));
-        geo = d->sliceGeometry;
-    } else {
-        d->view->page()->setPreferredContentsSize(QSize(-1,-1));
-        QWebElement element = frame->documentElement();
-        geo = element.geometry();
-    }
-
-    if (!geo.isValid()) {
-        return QRectF();
-    }
-
-    return geo;
+    // Zoom to slice or preview
+    refresh();
 }
 
 void KGraphicsWebSlice::refresh()
 {
-    QRectF geo = sliceGeometry();
-    if (!geo.isValid()) {
-        return;
+    // TODO: optimize for non-changes
+    if (!d->previewMode) {
+        showSlice(d->selector);
+    } else {
+        showPage();
     }
+}
 
-    QSizeF viewSize = geo.size();
-    viewSize.scale(size(), Qt::KeepAspectRatioByExpanding);
-    viewSize = viewSize.boundedTo(size());
-    d->view->resize(viewSize);
-    QSizeF center = size()/2 - viewSize/2;
-    d->view->setPos(center.width(), center.height());
+void KGraphicsWebSlice::updateElementCache()
+{
+    qDebug() << "updateElementCache()";
+    d->elementCache = page()->mainFrame()->findAllElements("*");
+    d->documentGeometry = page()->mainFrame()->documentElement().geometry();
+    foreach(const QWebElement &el, d->elementCache) {
+        d->selectorGeometry[qHash(el.toOuterXml())] = el.geometry();
+    }
+}
 
-    QWebFrame *frame = d->view->page()->mainFrame();
-    frame->setScrollPosition( geo.topLeft().toPoint() );
-    setPreferredSize(geo.size());
-    updateGeometry();
+QRectF KGraphicsWebSlice::previewGeometry(const QString &selector)
+{
+    return QRectF(page()->mainFrame()->findFirstElement(selector).geometry());
+}
+
+QRectF KGraphicsWebSlice::sliceGeometry(const QString &selector)
+{
+    QWebElement el = page()->mainFrame()->findFirstElement(selector);
+    if (d->selectorGeometry.keys().contains(qHash(el.toOuterXml()))) {
+        return d->selectorGeometry[qHash(el.toOuterXml())];
+    }
+    return QRectF();
 }
 
 void KGraphicsWebSlice::resizeEvent ( QGraphicsSceneResizeEvent * event )
 {
-    //qDebug() << "KGraphicsWebSlice::resizeEvent" << event->newSize() << "(" << event->oldSize() << ")";
-    QSizeF o = d->originalGeometry.size();
-    QSizeF n = event->newSize();
+    setTiledBackingStoreFrozen(true);
+    d->resizeNew = event->newSize();
+    d->resizeTimer->start();
+    event->accept();
+}
 
+void KGraphicsWebSlice::resizeTimeout()
+{
+    QSizeF n = d->resizeNew;
     // Prevent oopses.
     if (n.width() > 2400 || n.height() > 2400) {
-        qDebug() << "giant size, what's going on???????" << o.width();
+        qDebug() << "giant size, what's going on???????" << n.width();
         return;
     }
-    qreal f = n.width() / o.width();
+    refresh();
+    setTiledBackingStoreFrozen(false);
+}
 
-    if (f > 0.1 && f < 8) {
-        d->view->setZoomFactor(f);
-        d->currentZoom = f;
+void KGraphicsWebSlice::preview(const QString &selector)
+{
+    if (selector.isEmpty()) {
+        setPreviewMode(false);
         refresh();
-        qDebug() << "Zoom  :" << n.width() << " / " <<  o.width() << " = " << f;
+        return;
     }
+    setPreviewMode(true);
+    d->previewRect = previewGeometry(selector);
+    update();
+}
+
+void KGraphicsWebSlice::setPreviewMode(bool on)
+{
+    showPage();
+    if (on && !d->previewMode) {
+        d->previewMode = on;
+        refresh();
+    }
+    if (!on && d->previewMode) {
+        d->previewMode = on;
+        setZoomFactor(1.0);
+        refresh();
+    }
+}
+
+void KGraphicsWebSlice::showSlice(const QString &selector)
+{
+    QRectF r = sliceGeometry(selector);
+    if (!selector.isEmpty() && r.isValid()) {
+        zoom(r);
+    } else {
+        zoom(d->documentGeometry);
+    }
+}
+
+void KGraphicsWebSlice::zoom(const QRectF &area)
+{
+    if (!area.isValid()) {
+        qDebug() << "invalid zoom area" << area;
+        return;
+    }
+
+    qreal f = contentsRect().size().width() / qMax((qreal)1.0, area.width());
+
+    // size: zoom page
+    if (f > 0.1 && f < 32) { // within sane bounds?
+        setZoomFactor(f);
+    }
+
+    if (area != sliceGeometry(d->selector)) {
+        qDebug() << "different results.";
+    }
+
+    // position: move origin according to zoom
+    QPointF viewPosition = area.topLeft();
+    // We end up positioning too low, so move the new position up a little
+    viewPosition = QPointF(viewPosition.x() * f, (viewPosition.y() * f) - (16 * f));
+    page()->mainFrame()->setScrollPosition(viewPosition.toPoint());
+}
+
+void KGraphicsWebSlice::showPage()
+{
+    qreal zoom = 1.0;
+
+    QSizeF o = d->documentGeometry.size();
+    QSizeF s = o;
+    s.scale(contentsRect().size(), Qt::KeepAspectRatio);
+
+    zoom = s.width() / qMax((qreal)1.0, contentsRect().width());
+    setZoomFactor(zoom);
+    page()->mainFrame()->setScrollPosition(QPoint(0, 0));
+    update();
 }
 
 QPixmap KGraphicsWebSlice::elementPixmap()
@@ -210,8 +256,36 @@ QPixmap KGraphicsWebSlice::elementPixmap()
 
     QPainter painter( &result );
     painter.translate( -rect.x(), -rect.y() );
-    QWebFrame *frame = d->view->page()->mainFrame();
+    QWebFrame *frame = page()->mainFrame();
     frame->render( &painter, QRegion(rect.toRect()) );
 
     return result;
 }
+
+void KGraphicsWebSlice::setPreviewMaskColor(const QColor &color)
+{
+    d->previewMaskColor = color;
+    if (d->previewMode) {
+        update();
+    }
+}
+
+void KGraphicsWebSlice::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget)
+{
+    QGraphicsWebView::paint(painter, option, widget);
+    if (!d->previewMode) {
+        return;
+    }
+    d->previewMaskColor.setAlphaF(1.0);
+    painter->setPen(d->previewMaskColor);
+    d->previewMaskColor.setAlphaF(.5);
+    painter->setBrush(d->previewMaskColor);
+
+    QPainterPath path;
+    path.addRect(boundingRect());
+    path.addRect(d->previewRect);
+    painter->drawPath(path);
+    //painter->drawRect(d->previewRect);
+}
+
+#include "kgraphicswebslice.moc"
