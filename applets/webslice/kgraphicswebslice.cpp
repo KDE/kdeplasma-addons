@@ -58,7 +58,7 @@ KGraphicsWebSlice::KGraphicsWebSlice( QGraphicsWidget *parent )
 
 
     d->resizeTimer = new QTimer(this);
-    d->resizeTimer->setInterval(500);
+    d->resizeTimer->setInterval(100);
     d->resizeTimer->setSingleShot(true);
     d->resizeNew = QSizeF();
     connect(d->resizeTimer, SIGNAL(timeout()), SLOT(resizeTimeout()));
@@ -232,17 +232,12 @@ void KGraphicsWebSlice::showSlice(const QString &selector)
 
 void KGraphicsWebSlice::zoom(const QRectF &area)
 {
-    //QRectF geo = sliceGeometry();
     if (!area.isValid()) {
         qDebug() << "invalid zoom area" << area;
         return;
     }
 
     qreal f = contentsRect().size().width() / qMax((qreal)1.0, area.width());
-    //qreal fh = contentsRect().size().height() / qMax((qreal)1.0, area.height());
-    //qreal f = qMin(fw, fh);
-
-    qDebug() << "zoom()" << contentsRect().size() << area << f;
 
     // size: zoom page
     if (f > 0.1 && f < 32) { // within sane bounds?
