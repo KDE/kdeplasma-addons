@@ -31,7 +31,6 @@
 #include <KDE/KRun>
 #include <KDE/KUrl>
 
-#include "audioplayercontrolrunner_config.h"
 #include "audioplayercontrolconfigkeys.h"
 
 Q_DECLARE_METATYPE(QList<QVariantMap>)
