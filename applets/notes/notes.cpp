@@ -306,7 +306,8 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 
         if (f.open(QIODevice::ReadOnly)) {
             QTextStream t(&f);
-            m_textEdit->nativeWidget()->setText(t.readAll());
+            m_textEdit->nativeWidget()->setHtml(t.readAll());
+            QTimer::singleShot(1000, this, SLOT(saveNote()));
             f.close();
         }
     }
