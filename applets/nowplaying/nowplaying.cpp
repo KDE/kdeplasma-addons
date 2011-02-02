@@ -346,6 +346,7 @@ void NowPlaying::findPlayer()
     if (players.isEmpty()) {
         m_state = NoPlayer;
         m_watchingPlayer.clear();
+        delete m_controller;
         m_controller = 0;
 
         emit stateChanged(m_state);
