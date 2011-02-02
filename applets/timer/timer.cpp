@@ -19,7 +19,10 @@
 
 #include "timer.h"
 
-#include <QGraphicsSceneMouseEvent>
+#include <QSequentialAnimationGroup>
+#include <QPropertyAnimation>
+#include <QtCore/QEasingCurve>
+#include <QtGui/QGraphicsSceneMouseEvent>
 
 #include <KConfigDialog>
 #include <KDebug>
@@ -38,7 +41,8 @@ Timer::Timer(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_seconds(0),
       m_startingSeconds(0),
-      m_running(false)
+      m_running(false),
+      m_blinkAnim(0)
 {
     resize(315, 125);
     setHasConfigurationInterface(true);
@@ -52,7 +56,6 @@ Timer::~Timer()
 
 void Timer::init()
 {
-    configChanged();
     m_svg = new Plasma::Svg(this);
     m_svg->setImagePath("widgets/timer");
     m_svg->setContainsMultipleImages(true);
@@ -77,13 +80,6 @@ void Timer::init()
     m_title = new Plasma::Label(this);
     m_title->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 
-    m_title->setVisible(m_showTitle);
-    m_title->setText(m_timerTitle);
-    
-    m_secondsDigit[0]->setVisible(!m_hideSeconds);
-    m_secondsDigit[1]->setVisible(!m_hideSeconds);
-    m_separator[1]->setVisible(!m_hideSeconds);
-    
     connect(m_hoursDigit[0], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
     connect(m_hoursDigit[1], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
     connect(m_minutesDigit[0], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
@@ -91,7 +87,7 @@ void Timer::init()
     connect(m_secondsDigit[0], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
     connect(m_secondsDigit[1], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
 
-    connect(&timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
 
     m_startAction = new QAction(i18n("Start"), this);
     m_startAction->setEnabled(false);
@@ -105,24 +101,8 @@ void Timer::init()
     m_resetAction->setEnabled(false);
     connect(m_resetAction, SIGNAL(triggered(bool)), this, SLOT(resetTimer()));
     createMenuAction();
-    
-    m_running = running > 0;
-    if (m_running) {
-        int tmpSeconds = running - m_startedAt.secsTo(QDateTime::currentDateTime());
-        if (tmpSeconds > 0){
-            setSeconds(tmpSeconds);
-            startTimer();
-        }else{
-            //TODO: We should notify user about expired timer
-            m_running = false;
-        }
-    } else {
-        setSeconds(m_startingSeconds);
-        if (m_seconds){
-            m_startAction->setEnabled(true);
-            m_resetAction->setEnabled(true);
-        }
-    }
+
+    configChanged();
 }
 
 void Timer::configChanged()
@@ -141,17 +121,45 @@ void Timer::configChanged()
     m_runCommand = cg.readEntry("runCommand", false);
     m_command = cg.readEntry("command", "");
 
+    m_title->setVisible(m_showTitle);
+    m_title->setText(m_timerTitle);
+
+    m_secondsDigit[0]->setVisible(!m_hideSeconds);
+    m_secondsDigit[1]->setVisible(!m_hideSeconds);
+    m_separator[1]->setVisible(!m_hideSeconds);
+
     // Timers are kept non-localized in the config, to work across language changes.
     QStringList localizedTimers;
     foreach (const QString &timer, m_predefinedTimers) {
         localizedTimers.append(CustomTimeEditor::toLocalizedTimer(timer));
     }
     m_predefinedTimers = localizedTimers;
-    
+
+    if (isUserConfiguring()) {
+        return;
+    }
+
+    // everything from here down is run when not called due to the config UI
     m_startedAt = cg.readEntry("startedAt", QDateTime::currentDateTime());
-    
-    running = cg.readEntry("running", 0);
     m_startingSeconds = cg.readEntry("seconds", 0);
+    const int runningTime = config().readEntry("running", 0);
+    m_running = runningTime > 0;
+    if (m_running) {
+        int tmpSeconds = runningTime - m_startedAt.secsTo(QDateTime::currentDateTime());
+        if (tmpSeconds > 0) {
+            setSeconds(tmpSeconds);
+            startTimer();
+        } else {
+            //TODO: We should notify user about expired timer
+            m_running = false;
+        }
+    } else {
+        setSeconds(m_startingSeconds);
+        if (m_seconds){
+            m_startAction->setEnabled(true);
+            m_resetAction->setEnabled(true);
+        }
+    }
 }
 
 void Timer::constraintsEvent(Plasma::Constraints constraints)
@@ -287,7 +295,7 @@ void Timer::configAccepted()
 void Timer::updateTimer()
 {
     if (m_seconds < 2) {
-        timer.stop();
+        m_timer.stop();
         m_running = false;
 
         m_startAction->setEnabled(false);
@@ -325,7 +333,7 @@ void Timer::setSeconds(int secs)
 
         m_secondsDigit[0]->setElementID(QString::number(seconds / 10) + suffix);
         m_secondsDigit[1]->setElementID(QString::number(seconds % 10) + suffix);
-    }else{
+    } else {
         m_hoursDigit[0]->setElementID(QString::number(hours / 10) + suffix);
         m_hoursDigit[1]->setElementID(QString::number(hours % 10) + suffix);
 
@@ -339,11 +347,11 @@ void Timer::setSeconds(int secs)
 void Timer::slotCountDone()
 {
     if (m_showMessage){
-        //TODO: probably something with an OK button is better.
-        if (m_title->isVisible())
-          KNotification::event(KNotification::Notification, m_title->text() + " - " + m_message);
-        else
-          KNotification::event(KNotification::Notification, m_message);
+        if (m_title->isVisible()) {
+            KNotification::event(KNotification::Notification, m_title->text() + " - " + m_message);
+        } else {
+            KNotification::event(KNotification::Notification, m_message);
+        }
     }
 
     if (m_runCommand && !m_command.isEmpty()){
@@ -356,11 +364,7 @@ void Timer::slotCountDone()
 
 void Timer::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *)
 {
-    if (!m_running){
-        startTimer();
-    }else{
-        stopTimer();
-    }
+    resetTimer();
 }
 
 void Timer::saveTimer()
@@ -376,24 +380,21 @@ void Timer::saveTimer()
 void Timer::startTimer()
 {
     m_running = true;
-
     saveTimer();
-
-    timer.start(1000);
+    setBlinking(false);
+    m_timer.start(1000);
 
     m_startAction->setEnabled(false);
     m_resetAction->setEnabled(true);
     m_stopAction->setEnabled(true);
 }
 
-
 void Timer::stopTimer()
 {
     m_running = false;
-
     saveTimer();
-
-    timer.stop();
+    setBlinking(true);
+    m_timer.stop();
 
     m_startAction->setEnabled(true);
     m_resetAction->setEnabled(true);
@@ -402,17 +403,31 @@ void Timer::stopTimer()
 
 void Timer::resetTimer()
 {
-    stopTimer();
+    m_running = false;
     saveTimer();
+    setBlinking(false);
+    m_timer.stop();
 
     setSeconds(m_startingSeconds);
-    m_resetAction->setEnabled(false);
     m_startAction->setEnabled(true);
+    m_resetAction->setEnabled(false);
+    m_stopAction->setEnabled(false);
 }
 
 void Timer::mousePressEvent(QGraphicsSceneMouseEvent *)
 {
+    // does nothing but ensure the event is accepted so we get release events
+}
 
+void Timer::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && geometry().contains(event->pos())) {
+        if (m_running) {
+            stopTimer();
+        } else if (m_seconds > 0) {
+            startTimer();
+        }
+    }
 }
 
 QList<QAction*> Timer::contextualActions()
@@ -435,22 +450,87 @@ void Timer::startTimerFromAction()
 
 void Timer::digitChanged(int value)
 {
-    if (m_running) return;
+    if (m_running) {
+        return;
+    }
 
-    if (value < 0){
-        if (m_seconds >= abs(value)){
+    if (value < 0) {
+        if (m_seconds >= abs(value)) {
             setSeconds((m_seconds - abs(value)) % 86400);
         }
-    }else{
+    } else {
         setSeconds((m_seconds + abs(value)) % 86400);
     }
 
-    if (m_seconds != 0){
+    if (m_seconds != 0) {
         m_startAction->setEnabled(true);
         m_resetAction->setEnabled(true);
-    }else{
+    } else {
         m_startAction->setEnabled(false);
         m_resetAction->setEnabled(false);
+    }
+}
+
+void Timer::toggleTimerVisible()
+{
+    if (!m_blinkAnim) {
+        QSequentialAnimationGroup *animGroup = new QSequentialAnimationGroup(this);
+
+        QPropertyAnimation *anim = new QPropertyAnimation(this, "digitOpacity", animGroup);
+        anim->setDuration(800);
+        anim->setEasingCurve(QEasingCurve::InOutQuad);
+        anim->setStartValue(1.0);
+        anim->setEndValue(0.2);
+
+        animGroup->addAnimation(anim);
+        animGroup->addPause(400);
+
+        m_blinkAnim = animGroup;
+    }
+
+    m_blinkAnim->setDirection(qFuzzyCompare(m_hoursDigit[0]->opacity(), 1.0) ?
+                              QAbstractAnimation::Forward : QAbstractAnimation::Backward);
+    m_blinkAnim->start();
+}
+
+void Timer::setBlinking(bool blinking)
+{
+    if (blinking) {
+        toggleTimerVisible();
+        connect(m_blinkAnim, SIGNAL(finished()), this, SLOT(reverseBlinkAnim()));
+    } else if (m_blinkAnim) {
+        disconnect(m_blinkAnim, SIGNAL(finished()), this, SLOT(reverseBlinkAnim()));
+        m_blinkAnim->setDirection(QAbstractAnimation::Backward);
+    }
+}
+
+qreal Timer::digitOpacity() const
+{
+    return m_hoursDigit[0]->opacity();
+}
+
+void Timer::setDigitOpacity(qreal opacity)
+{
+    m_hoursDigit[0]->setOpacity(opacity);
+    m_hoursDigit[1]->setOpacity(opacity);
+
+    m_minutesDigit[0]->setOpacity(opacity);
+    m_minutesDigit[1]->setOpacity(opacity);
+
+    m_secondsDigit[0]->setOpacity(opacity);
+    m_secondsDigit[1]->setOpacity(opacity);
+
+    m_separator[0]->setOpacity(opacity);
+    m_separator[1]->setOpacity(opacity);
+}
+
+void Timer::reverseBlinkAnim()
+{
+    m_blinkAnim->setDirection(m_blinkAnim->direction() == QAbstractAnimation::Forward ?
+                              QAbstractAnimation::Backward :
+                              QAbstractAnimation::Forward);
+    if (m_blinkAnim->state() != QAbstractAnimation::Running) {
+        m_blinkAnim->start();
     }
 }
 

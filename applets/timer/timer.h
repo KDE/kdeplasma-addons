@@ -20,7 +20,8 @@
 #ifndef TIMER_HEADER
 #define TIMER_HEADER
 
-#include <QTimer>
+#include <QtCore/QList>
+#include <QtCore/QTimer>
 
 #include <Plasma/Applet>
 
@@ -30,6 +31,7 @@
 
 class QGraphicsSceneMouseEvent;
 class QActionGroup;
+class QAbstractAnimation;
 
 namespace Plasma
 {
@@ -41,6 +43,8 @@ namespace Plasma
 class Timer : public Plasma::Applet
 {
     Q_OBJECT
+    Q_PROPERTY(qreal digitOpacity READ digitOpacity WRITE setDigitOpacity)
+
     public:
         Timer(QObject *parent, const QVariantList &args);
         ~Timer();
@@ -48,16 +52,20 @@ class Timer : public Plasma::Applet
         void init();
         void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
         void mousePressEvent(QGraphicsSceneMouseEvent * event);
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
         QList<QAction*> contextualActions();
+
+        qreal digitOpacity() const;
+        void setDigitOpacity(qreal opacity);
 
     protected:
         void createConfigurationInterface(KConfigDialog *parent);
         void createMenuAction();
         void constraintsEvent(Plasma::Constraints constraints);
-        
+
     public slots:
         void configChanged();
-        
+
     private slots:
         void updateTimer();
         void slotCountDone();
@@ -66,8 +74,11 @@ class Timer : public Plasma::Applet
         void resetTimer();
         void startTimerFromAction();
         void digitChanged(int value);
+        void toggleTimerVisible();
+        void reverseBlinkAnim();
 
     private:
+        void setBlinking(bool blinking);
         void saveTimer();
         void setSeconds(int seconds);
 
@@ -75,7 +86,8 @@ class Timer : public Plasma::Applet
         int m_startingSeconds;
         bool m_running;
 
-        QTimer timer;
+        QTimer m_timer;
+        QAbstractAnimation *m_blinkAnim;
         Plasma::Svg *m_svg;
         TimerDigit *m_hoursDigit[2];
         TimerDigit *m_minutesDigit[2];
@@ -98,11 +110,10 @@ class Timer : public Plasma::Applet
         QActionGroup *lstActionTimer;
         QString m_separatorBasename;
         QDateTime m_startedAt;
-        int running;
         bool m_showTitle;
         QString m_timerTitle;
         bool m_hideSeconds;
-        
+
     protected slots:
         void configAccepted();
 };
