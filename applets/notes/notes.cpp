@@ -79,7 +79,8 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 
         if (f.open(QIODevice::ReadOnly)) {
             QTextStream t(&f);
-            m_textEdit->nativeWidget()->setText(t.readAll());
+            m_textEdit->nativeWidget()->setHtml(t.readAll());
+            QTimer::singleShot(1000, this, SLOT(saveNote()));
             f.close();
         }
     }
@@ -223,9 +224,9 @@ void Notes::lineChanged()
     QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
     QTextEdit::ExtraSelection textxtra;
     textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
-    textxtra.cursor.movePosition( QTextCursor::StartOfLine );
-    textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
-    textxtra.format.setBackground( m_textBackgroundColor );
+    textxtra.cursor.movePosition(QTextCursor::StartOfLine);
+    textxtra.cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+    textxtra.format.setBackground(m_textBackgroundColor);
 
     QList<QTextEdit::ExtraSelection> extras;
     extras << textxtra;
