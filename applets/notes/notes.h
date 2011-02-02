@@ -22,15 +22,10 @@
 #ifndef NOTES_HEADER
 #define NOTES_HEADER
 
-#include <QGraphicsLinearLayout>
 #include <QTimer>
-
-#include <KTextEdit>
-#include <KRichTextEdit>
 
 #include <Plasma/Applet>
 #include <Plasma/Svg>
-#include <Plasma/TextEdit>
 #include <Plasma/ToolButton>
 
 #include "ui_config.h"
@@ -38,81 +33,9 @@
 class QGraphicsLinearLayout;
 class QSizeF;
 class QContextMenuEvent;
-class QGraphicsWidget;
 class QParallelAnimationGroup;
 
-namespace Plasma
-{
-    class TextEdit;
-    class Animation;
-}
-
-/**
- * @short Notes Version von KTextEdit
- *
- * This is just a little subclass of KTextEdit which provides a customized context menu and the ability to save its content into a file
- *
- * @see QTextEdit
- * @author Björn Ruberg <bjoern@ruberg-wegener.de>
- */
-class NotesTextEdit : public KRichTextEdit {
-    Q_OBJECT
-
-    public:
-        NotesTextEdit(QWidget *parent = 0);
-        ~NotesTextEdit();
-
-        void setFormatMenu(QMenu *menu);
-
-    public slots:
-        virtual void saveToFile();
-        void italic();
-        void bold();
-        void underline();
-        void strikeOut();
-        void justifyCenter();
-        void justifyFill();
-
-    Q_SIGNALS:
-        void cursorMoved();
-        void mouseUnhovered();
-        void scrolledUp();
-        void scrolledDown();
-
-    protected:
-        virtual void contextMenuEvent ( QContextMenuEvent *e )  ;
-        void mousePressEvent ( QMouseEvent * event );
-        void keyPressEvent ( QKeyEvent * event );
-        void leaveEvent ( QEvent * event );
-        void wheelEvent ( QWheelEvent * event );
-
-    private:
-        QMenu *m_formatMenu;
-};
-
-/**
- * @short Notes Version von KTextEdit
- *
- * This is a Plasma::TextEdit which uses NotesTextEdit as native widget
- *
- * @see QTextEdit
- * @author Björn Ruberg <bjoern@ruberg-wegener.de>
- */
-class PlasmaTextEdit : public Plasma::TextEdit {
-    Q_OBJECT
-
-    signals:
-    void mouseUnhovered();
-
-    public:
-      PlasmaTextEdit(QGraphicsWidget *parent = 0);
-      ~PlasmaTextEdit();
-      NotesTextEdit* native;
-
-    protected:
-      void mousePressEvent(QGraphicsSceneMouseEvent *event);
-      void focusOutEvent(QFocusEvent *event);
-};
+class PlasmaTextEdit;
 
 class Notes : public Plasma::Applet
 {
@@ -147,6 +70,7 @@ class Notes : public Plasma::Applet
         void decreaseFontSize();
         void themeChanged();
         void updateOptions();
+        void showError(const QString &message);
 
     private:
         void createTextFormatingWidgets();
@@ -189,7 +113,5 @@ class Notes : public Plasma::Applet
         QParallelAnimationGroup *m_buttonAnimGroup;
         Plasma::Animation *m_buttonAnim[6];
 };
-
-K_EXPORT_PLASMA_APPLET(notes, Notes)
 
 #endif

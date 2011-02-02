@@ -25,6 +25,7 @@
 #include <QtCore/QTextStream>
 
 #include <QtGui/QGraphicsGridLayout>
+#include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QGraphicsTextItem>
 #include <QtGui/QScrollBar>
 #include <QtGui/QToolButton>
@@ -42,239 +43,11 @@
 #include <KAction>
 
 #include <Plasma/Animator>
-#include <plasma/animation.h>
+#include <Plasma/Animation>
 #include <Plasma/PushButton>
 #include <Plasma/Theme>
 
-NotesTextEdit::NotesTextEdit(QWidget *parent)
-    : KRichTextEdit(parent),
-      m_formatMenu(0)
-{
-}
-
-NotesTextEdit::~NotesTextEdit()
-{
-}
-
-void NotesTextEdit::setFormatMenu(QMenu *menu)
-{
-    m_formatMenu = menu;
-}
-
-/**
- * Customize the context menu
- */
-void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
-{
-    QMenu *popup = mousePopupMenu();
-
-    popup->addSeparator();
-    popup->addAction(KStandardAction::saveAs(this, SLOT(saveToFile()), this));
-
-    if (m_formatMenu) {
-        popup->addMenu(m_formatMenu);
-    }
-
-    popup->exec(event->pos());
-    delete popup;
-}
-
-void NotesTextEdit::italic()
-{
-    setTextItalic(!fontItalic());
-}
-
-void NotesTextEdit::bold()
-{
-    setTextBold(fontWeight() != 75);
-}
-
-void NotesTextEdit::underline()
-{
-    setTextUnderline(!fontUnderline());
-}
-
-void NotesTextEdit::strikeOut()
-{
-    QFont a = currentFont();
-    setTextStrikeOut(!a.strikeOut());
-}
-
-void NotesTextEdit::justifyCenter()
-{
-    if (alignment() == Qt::AlignHCenter) {
-        setAlignment(Qt::AlignLeft);
-    } else {
-        alignCenter();
-    }
-}
-
-void NotesTextEdit::justifyFill()
-{
-    if (alignment() == Qt::AlignJustify) {
-        setAlignment(Qt::AlignLeft);
-    } else {
-        alignJustify();
-    }
-}
-
-/**
- * Add to mousePressEvent a signal to change the edited line's background color
- */
-void NotesTextEdit::mousePressEvent ( QMouseEvent * event )
-{
-    KTextEdit::mousePressEvent(event);
-    if(event->button()== Qt::LeftButton)
-      emit cursorMoved();
-}
-
-/**
- * Same as mousePressEvent
- */
-void NotesTextEdit::keyPressEvent ( QKeyEvent * event )
-{
-  KTextEdit::keyPressEvent(event);
-  switch(event->key())
-  {
-    case Qt::Key_Left : emit cursorMoved(); break;
-    case Qt::Key_Right : emit cursorMoved(); break;
-    case Qt::Key_Down : emit cursorMoved(); break;
-    case Qt::Key_Up : emit cursorMoved(); break;
-    default:break;
-  }
-}
-
-/**
-* Scale text on wheel scrolling with control pressed
-*/
-void NotesTextEdit::wheelEvent ( QWheelEvent * event )
-{
-    if (event->modifiers() & Qt::ControlModifier ) {
-        if (event->orientation() == Qt::Horizontal) {
-            return;
-        } else {
-            if (event->delta() > 0) {
-                emit scrolledUp();
-            } else {
-                emit scrolledDown();
-            }
-        }
-        event->accept();
-    } else {
-        KTextEdit::wheelEvent(event);
-    }
-}
-
-/**
- * Add to the Note a signal to prevent from leaving the note and remove line background color
- * when there is no focus on the plasmoid
- */
-void NotesTextEdit::leaveEvent ( QEvent * event )
-{
-  KTextEdit::leaveEvent(event);
-  emit mouseUnhovered();
-}
-
-/**
- * Use notesTextEdit as native widget instead of KTextEdit
- */
-PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
-    : Plasma::TextEdit(parent)
-{
-    KTextEdit *w = nativeWidget();
-    native = new NotesTextEdit;
-    native->setWindowFlags(native->windowFlags() | Qt::BypassGraphicsProxyWidget);
-    //FIXME: we need a way to just add actions without changing the native widget under its feet
-    if (native->verticalScrollBar() && w->verticalScrollBar()) {
-        native->verticalScrollBar()->setStyle(w->verticalScrollBar()->style());
-    }
-    setNativeWidget(native);
-
-    connect(native, SIGNAL(cursorMoved()), this, SIGNAL(textChanged()));
-    connect(native, SIGNAL(mouseUnhovered()), this, SIGNAL(mouseUnhovered()));
-
-    // scrollwheel + ctrl changes font size
-    connect(native, SIGNAL(scrolledUp()), parent, SLOT(increaseFontSize()));
-    connect(native, SIGNAL(scrolledDown()), parent, SLOT(decreaseFontSize()));
-}
-
-PlasmaTextEdit::~PlasmaTextEdit()
-{
-}
-
-void PlasmaTextEdit::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    QGraphicsWidget *widget = parentWidget();
-    Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
-
-    while (!applet && widget) {
-        widget = widget->parentWidget();
-        applet = qobject_cast<Plasma::Applet *>(widget);
-    }
-
-    if (applet) {
-        applet->setStatus(Plasma::AcceptingInputStatus);
-    }
-    QGraphicsProxyWidget::mousePressEvent(event);
-}
-
-void PlasmaTextEdit::focusOutEvent(QFocusEvent *event)
-{
-    QGraphicsWidget *widget = parentWidget();
-    Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(widget);
-
-    while (!applet && widget) {
-        widget = widget->parentWidget();
-        applet = qobject_cast<Plasma::Applet *>(widget);
-    }
-
-    if (applet) {
-        applet->setStatus(Plasma::UnknownStatus);
-    }
-    QGraphicsProxyWidget::focusOutEvent(event);
-}
-
-/**
- * Save content to file
- */
-void NotesTextEdit::saveToFile()
-{
-    QString fileName = KFileDialog::getSaveFileName();
-
-    if (fileName.isEmpty()) {
-        return;
-    }
-
-    QFile file(fileName);
-
-    if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
-        KMessageBox::information(this, file.errorString(), i18n("Unable to open file"));
-        return;
-    }
-
-    QTextStream out(&file);
-    out << toPlainText();
-    file.close();
-}
-
-/**
-* remove the background color of the last line edited when leaving
-*/
-void Notes::mouseUnhovered()
-{
-    QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
-    QTextEdit::ExtraSelection textxtra;
-    textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
-    textxtra.cursor.movePosition( QTextCursor::StartOfLine );
-    textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
-    textxtra.format.setBackground( Qt::transparent );
-
-    QList<QTextEdit::ExtraSelection> extras;
-    extras << textxtra;
-    m_textEdit->nativeWidget()->setExtraSelections( extras );
-
-    update();
-}
+#include "textedit.h"
 
 Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
@@ -347,6 +120,7 @@ void Notes::init()
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote()));
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(lineChanged()));
     connect(m_textEdit, SIGNAL(mouseUnhovered()), this, SLOT(mouseUnhovered()));
+    connect(m_textEdit, SIGNAL(error(QString)), this, SLOT(showError(QString)));
 }
 
 void Notes::configChanged()
@@ -401,6 +175,30 @@ void Notes::configChanged()
     updateTextGeometry();
 
     // make sure changes to the background colour take effect immediately
+    update();
+}
+
+void Notes::showError(const QString &message)
+{
+    showMessage(KIcon("dialog-error"), message, Plasma::ButtonOk);
+}
+
+/**
+* remove the background color of the last line edited when leaving
+*/
+void Notes::mouseUnhovered()
+{
+    QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+    QTextEdit::ExtraSelection textxtra;
+    textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
+    textxtra.cursor.movePosition( QTextCursor::StartOfLine );
+    textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
+    textxtra.format.setBackground( Qt::transparent );
+
+    QList<QTextEdit::ExtraSelection> extras;
+    extras << textxtra;
+    m_textEdit->nativeWidget()->setExtraSelections( extras );
+
     update();
 }
 
@@ -833,7 +631,7 @@ void Notes::createTextFormatingWidgets()
 
     showOptions(false);
     connect(m_buttonOption->nativeWidget(), SIGNAL(toggled(bool)), this, SLOT(showOptions(bool)));
-    
+
     connect(m_textEdit->nativeWidget(), SIGNAL(cursorPositionChanged()), this, SLOT(updateOptions()));
 }
 
@@ -863,3 +661,6 @@ void Notes::updateOptions()
 }
 
 #include "notes.moc"
+
+K_EXPORT_PLASMA_APPLET(notes, Notes)
+
