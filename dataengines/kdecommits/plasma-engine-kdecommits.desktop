@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=KDE Commits Engine
+Name[uk]=Рушій внесків до KDE
+Name[x-test]=xxKDE Commits Enginexx
 Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
+Comment[uk]=Рушій даних для отримання загальних даних щодо внесків до SVN KDE
+Comment[x-test]=xxA Data Engine for acquiring consolidated data about KDE SVN Commitsxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/DataEngine
