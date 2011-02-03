@@ -24,6 +24,8 @@
 
 #include <KIcon>
 
+class QDBusPendingCallWatcher;
+
 class AudioPlayerControlRunner : public Plasma::AbstractRunner
 {
     Q_OBJECT
@@ -69,15 +71,6 @@ private:
       * @return the position of the song, -1 if the song is not in it
       */
     int posInPlaylist(const KUrl& url);
-    
-    /** @return the number of the songs in the playlist */
-    int songsInPlaylist() const;
-
-    /** @return @c true if there's a next song, @c false in any other case */
-    bool nextSongAvailable() const;
-
-    /** @return @c true if there's a previous song, @c false in any other case */
-    bool prevSongAvailable() const;
 
     /** Tests, if text and reg match
       * @param text the string
@@ -107,6 +100,8 @@ private:
 
 private slots:
     void prep();
+    void songsInPlaylist(QDBusPendingCallWatcher *call);
+    void prevNextSongAvailable(QDBusPendingCallWatcher *call);
 
 private:
     /** The player this runner controls */
@@ -144,6 +139,12 @@ private:
     /** How much to decrease */
     int m_decreaseBy;
 
+    /** The number of songs in the playlist */
+    int m_songsInPlaylist;
+
+    /** The current track, as set on prep */
+    int m_currentTrack;
+
     /** Search the collection */
     bool m_searchCollection : 1;
 
@@ -152,9 +153,6 @@ private:
 
     /** The running state of the player */
     bool m_running : 1;
-
-    /** The number of songs in the playlist */
-    int m_songsInPlaylist : 1;
 
     /** @c true if a next song is available */
     bool m_nextSongAvailable : 1;
