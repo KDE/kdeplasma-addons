@@ -23,6 +23,7 @@
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusMetaType>
 #include <QtDBus/QDBusPendingReply>
+#include <QtDBus/QDBusPendingCallWatcher>
 #include <QtDBus/QDBusMessage>
 
 #include <KDE/KMessageBox>
@@ -67,10 +68,22 @@ AudioPlayerControlRunner::~AudioPlayerControlRunner()
 
 void AudioPlayerControlRunner::prep()
 {
-    m_running = playerRunning();
-    m_songsInPlaylist = songsInPlaylist();
-    m_nextSongAvailable = nextSongAvailable();
-    m_prevSongAvailable = prevSongAvailable();
+    m_running = false;
+    m_songsInPlaylist = 0;
+    m_currentTrack = -1;
+    m_nextSongAvailable = false;
+    m_prevSongAvailable = false;
+
+    QDBusInterface player(QString::fromLatin1( "org.mpris.%1").arg(m_player), QLatin1String( "/TrackList" ), QLatin1String( "org.freedesktop.MediaPlayer" ));
+    QDBusPendingCall call = player.asyncCall(QLatin1String( "GetLength" ));
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(songsInPlaylist(QDBusPendingCallWatcher*)));
+
+    call = player.asyncCall(QLatin1String( "GetCurrentTrack" ));
+    watcher = new QDBusPendingCallWatcher(call, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(prevNextSongAvailable(QDBusPendingCallWatcher*)));
 }
 
 void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
@@ -379,8 +392,7 @@ Plasma::QueryMatch AudioPlayerControlRunner::createMatch(Plasma::AbstractRunner*
 
 bool AudioPlayerControlRunner::playerRunning() const
 {
-    QDBusInterface intf(QString::fromLatin1( "org.mpris.%1").arg(m_player), QLatin1String( "/" ));
-    return intf.isValid();
+    return m_running;
 }
 
 bool AudioPlayerControlRunner::startPlayer() const
@@ -392,7 +404,7 @@ bool AudioPlayerControlRunner::startPlayer() const
     if (!KRun::run(m_player, KUrl::List(), 0)) {
         //We couldn't start the player
         KMessageBox::error(0, i18n("%1 not found", m_player),
-                           i18n("%1 was not found so the runner is unable to work.",m_player));
+                           i18n("%1 was not found so the runner is unable to work.", m_player));
         return false;
     }
 
@@ -406,43 +418,51 @@ bool AudioPlayerControlRunner::startPlayer() const
 int AudioPlayerControlRunner::posInPlaylist(const KUrl& url)
 {
     QDBusInterface player(QString::fromLatin1( "org.mpris.%1").arg(m_player), QLatin1String( "/TrackList" ), QLatin1String( "org.freedesktop.MediaPlayer" ));
-    for (int i = 0; i < songsInPlaylist(); i++)
-    {
+    for (int i = 0; i < m_songsInPlaylist; i++) {
         QDBusPendingReply<QVariantMap> data = player.asyncCall(QLatin1String( "GetMetadata" ), i);
         KUrl curl = KUrl(KUrl::fromPercentEncoding(data.value().value(QLatin1String( "location" )).toByteArray()));
         kDebug() << curl << ":" << url;
-        if (curl == url)
-        {
+        if (curl == url) {
             return i;
         }
     }
     return -1;
 }
 
-int AudioPlayerControlRunner::songsInPlaylist() const
+void AudioPlayerControlRunner::songsInPlaylist(QDBusPendingCallWatcher *call)
 {
-    QDBusInterface player(QString::fromLatin1( "org.mpris.%1").arg(m_player), QLatin1String( "/TrackList" ), QLatin1String( "org.freedesktop.MediaPlayer" ));
-    QDBusPendingReply<int> length = player.asyncCall(QLatin1String( "GetLength" ));
-    length.waitForFinished();
-    return length.value();
+    QDBusPendingReply<int> reply = *call;
+    m_running = !reply.isError();
+
+    if (m_running) {
+        m_songsInPlaylist = reply.value();
+        if (m_currentTrack > -1) {
+            // calculate if the next song is available given the new count
+            m_nextSongAvailable = m_songsInPlaylist > m_currentTrack;
+        }
+    } else {
+        m_songsInPlaylist = 0;
+    }
+
+    call->deleteLater();
 }
 
-bool AudioPlayerControlRunner::nextSongAvailable() const
+void AudioPlayerControlRunner::prevNextSongAvailable(QDBusPendingCallWatcher *call)
 {
-    QDBusInterface player(QString::fromLatin1( "org.mpris.%1").arg(m_player), QLatin1String( "/TrackList" ), QLatin1String( "org.freedesktop.MediaPlayer" ));
-    QDBusPendingReply<int> length = player.asyncCall(QLatin1String( "GetLength" ));
-    QDBusPendingReply<int> current = player.asyncCall(QLatin1String( "GetCurrentTrack" ));
-    length.waitForFinished();
-    current.waitForFinished();
-    return !((length.value() - 1) == current.value());
-}
+    QDBusPendingReply<int> reply = *call;
+    m_running = !reply.isError();
 
-bool AudioPlayerControlRunner::prevSongAvailable() const
-{
-    QDBusInterface player(QString::fromLatin1( "org.mpris.%1").arg(m_player), QLatin1String( "/TrackList" ), QLatin1String( "org.freedesktop.MediaPlayer" ));
-    QDBusPendingReply<int> current = player.asyncCall(QLatin1String( "GetCurrentTrack" ));
-    current.waitForFinished();
-    return current.value() > 0;
+    if (m_running) {
+        m_currentTrack = reply.value();
+        if (m_songsInPlaylist > 0) {
+            m_nextSongAvailable = m_songsInPlaylist > m_currentTrack;
+            m_prevSongAvailable = m_currentTrack > 0;
+        }
+    } else {
+        m_currentTrack = 0;
+    }
+
+    call->deleteLater();
 }
 
 bool AudioPlayerControlRunner::equals(const QString &text, QRegExp reg)
