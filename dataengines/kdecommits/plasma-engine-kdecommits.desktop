@@ -1,11 +1,15 @@
 [Desktop Entry]
 Name=KDE Commits Engine
+Name[nl]=KDE commits-engine
 Name[pt]=Motor de Envios do KDE
+Name[pt_BR]=Mecanismo dos commits do KDE
 Name[sv]=KDE-gränssnitt för incheckningar
 Name[uk]=Рушій внесків до KDE
 Name[x-test]=xxKDE Commits Enginexx
 Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
+Comment[nl]=Een gegevens-engine voor het ophalen van geconsolideerde gegevens over KDE-SVN-commits
 Comment[pt]=Um motor de dados para adquirir dados consolidados acerca dos projectos envios do KDE para o SVN
+Comment[pt_BR]=Um mecanismo de dados para obtenção de dados consolidados sobre os commits do KDE SVN
 Comment[sv]=Ett datagränssnitt för att inhämta samlad data om KDE SVN-incheckningar
 Comment[uk]=Рушій даних для отримання загальних даних щодо внесків до SVN KDE
 Comment[x-test]=xxA Data Engine for acquiring consolidated data about KDE SVN Commitsxx
