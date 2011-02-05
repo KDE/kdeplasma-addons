@@ -11,6 +11,7 @@ set(events_SRCS events.cpp datetime_parser.cpp datetime_range.cpp collection_sel
 
 kde4_add_plugin(plasma_runner_events ${events_SRCS})
 target_link_libraries(plasma_runner_events ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_AKONADI_LIBS} ${KDEPIMLIBS_KCAL_LIBS})
+add_dependencies(plasma_runner_events kcm_plasma_runner_events)
 
 # Config module
 set(kcm_events_SRCS events_config.cpp collection_selector.cpp)
