@@ -99,6 +99,8 @@ void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
     m_appearanceConfig.backgroundCheckBox->setChecked(m_useBackground);
     m_appearanceConfig.tooltipCheckBox->setChecked(m_showToolTip);
     parent->addPage(w, i18n("Appearance"), icon());
+    connect(m_appearanceConfig.backgroundCheckBox, SIGNAL(clicked(bool)) , parent, SLOT(settingsModified()));
+    connect(m_appearanceConfig.tooltipCheckBox, SIGNAL(clicked(bool)) , parent, SLOT(settingsModified()));
 }
 
 void WeatherStation::configAccepted()
