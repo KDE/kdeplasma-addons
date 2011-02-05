@@ -150,6 +150,14 @@ WeatherConfig::WeatherConfig(QWidget *parent)
             this, SIGNAL(settingsChanged()));
     connect(d->ui.locationCombo, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setSource(int)));
+    
+    connect(d->ui.locationCombo, SIGNAL(currentIndexChanged(int)) , this , SIGNAL(configValueChanged()));
+    connect(d->ui.pressureComboBox, SIGNAL(currentIndexChanged(int)) , this , SIGNAL(configValueChanged()));
+    connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)) , this , SIGNAL(configValueChanged()));
+    connect(d->ui.temperatureComboBox, SIGNAL(currentIndexChanged(int)) , this , SIGNAL(configValueChanged()));
+    connect(d->ui.pressureComboBox, SIGNAL(currentIndexChanged(int)) , this , SIGNAL(configValueChanged()));
+    connect(d->ui.speedComboBox, SIGNAL(currentIndexChanged(int)) , this , SIGNAL(configValueChanged()));
+    connect(d->ui.visibilityComboBox, SIGNAL(currentIndexChanged(int)) , this , SIGNAL(configValueChanged()));
 }
 
 WeatherConfig::~WeatherConfig()

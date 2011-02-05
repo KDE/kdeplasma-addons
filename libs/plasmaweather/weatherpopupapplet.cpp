@@ -230,6 +230,7 @@ void WeatherPopupApplet::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(d->weatherConfig, i18n("Weather"), icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    connect(d->weatherConfig, SIGNAL(configValueChanged()) , parent , SLOT(settingsModified()));
 }
 
 void WeatherPopupApplet::configAccepted()

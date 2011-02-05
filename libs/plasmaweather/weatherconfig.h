@@ -121,6 +121,7 @@ public:
 
   signals:
     void settingsChanged();
+    void configValueChanged();
 
 public Q_SLOTS:
     /**
