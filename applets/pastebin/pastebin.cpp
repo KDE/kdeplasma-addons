@@ -475,6 +475,10 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", m_txtServers.keys().at(0)));
     uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", m_imgServers.keys().at(0)));
     uiConfig.historySize->setValue(m_historySize);
+    
+    connect(uiConfig.textServer , SIGNAL(currentIndexChanged(int)) , parent, SLOT(settingsModified()));
+    connect(uiConfig.imageServer , SIGNAL(currentIndexChanged(int)) , parent, SLOT(settingsModified()));
+    connect(uiConfig.historySize , SIGNAL(valueChanged(int)) , parent, SLOT(settingsModified()));
 }
 
 void Pastebin::configAccepted()
