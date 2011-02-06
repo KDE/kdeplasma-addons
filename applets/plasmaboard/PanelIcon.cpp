@@ -103,6 +103,7 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(widget, i18nc("Different keyboard layouts","Layouts"), "plasmaboard");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    
 
     Q_FOREACH(Layout* l, m_layouts){
         ui.layoutsComboBox->addItem(l->name(), l->path());
@@ -113,6 +114,7 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
     }
 
     connect(ui.layoutsComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(layoutNameChanged(QString)));
+    connect(ui.layoutsComboBox, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
 }
 
 QGraphicsWidget *PanelIcon::graphicsWidget()
