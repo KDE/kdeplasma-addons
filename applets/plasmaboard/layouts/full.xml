@@ -94,7 +94,7 @@
   <fkey action="KEYPAD6" width="450"></fkey> 	
 </row>
 <row height="1700" width="400">
-  <fkey action="SHIFT" width="600"></fkey>
+  <skey action="SHIFT" width="600"></skey>
   <key code="94"></key>
   <key code="52"></key>
   <key code="53" ></key>
