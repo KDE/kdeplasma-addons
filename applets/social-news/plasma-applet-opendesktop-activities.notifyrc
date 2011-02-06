@@ -42,7 +42,7 @@ Comment[zh_TW]=openDesktop 活動元件
 
 [Event/activity]
 Name=New Activity
-Name[ca]=Nova activitat
+Name[ca]=Activitat nova
 Name[ca@valencia]=Nova activitat
 Name[da]=Ny aktivitet
 Name[de]=Neue Aktivität
