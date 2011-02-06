@@ -414,6 +414,21 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
             }
         }
     }
+    
+    connect(ui.fontStyleComboBox, SIGNAL(currentFontChanged(QFont)), parent, SLOT(settingsModified()));
+    connect(ui.fontBoldCheckBox, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.fontItalicCheckBox, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.autoFontPercent, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.autoFont, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
+    connect(ui.customFontSizeSpinBox, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.textBackgroundColorButton, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(ui.textColorButton, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(ui.notesColorComboBox, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.checkSpelling, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.useThemeColor, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.useCustomColor, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.useCustomBackgroundColor, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.useNoColor, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
 }
 
 void Notes::configAccepted()
