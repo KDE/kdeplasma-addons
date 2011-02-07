@@ -223,6 +223,14 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     filtersUi.filtersListBox->setItems(m_filters);
     filtersUi.showOnlyMatchesCheckBox->setChecked(m_showOnlyMatches);
     filtersUi.useRegularExpressionsRadioButton->setChecked(m_useRegularExpressions);
+    
+    connect(ui.fontColorButton,SIGNAL(changed (QColor)),parent, SLOT(settingsModified()));
+    connect(ui.fontRequester,SIGNAL(fontSelected (QFont)),parent, SLOT(settingsModified()));
+    connect(ui.pathUrlRequester,SIGNAL(textChanged (QString)),parent, SLOT(settingsModified()));
+    connect(filtersUi.filtersListBox,SIGNAL(changed ()),parent, SLOT(settingsModified()));
+    connect(filtersUi.showOnlyMatchesCheckBox,SIGNAL(toggled (bool)),parent, SLOT(settingsModified()));
+    connect(filtersUi.useExactMatchRadioButton,SIGNAL(toggled (bool)),parent, SLOT(settingsModified()));
+    connect(filtersUi.useRegularExpressionsRadioButton,SIGNAL(toggled (bool)),parent, SLOT(settingsModified()));
 
 }
 
