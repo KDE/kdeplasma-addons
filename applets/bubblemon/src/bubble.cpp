@@ -449,6 +449,10 @@ Bubble::createConfigurationInterface(KConfigDialog* dlg)
     dlg->addPage(page, i18nc("@title:group Title for the bubblemon settings page","General"), icon());
     connect(dlg, SIGNAL(applyClicked()), this, SLOT(writeConfig()));
     connect(dlg, SIGNAL(okClicked()), this, SLOT(writeConfig()));
+    connect(ui.updateSpeed, SIGNAL(valueChanged(int)), dlg, SLOT(settingsModified()));
+    connect(ui.animateBubbles, SIGNAL(toggled(bool)), dlg, SLOT(settingsModified()));
+    connect(ui.showText, SIGNAL(toggled(bool)), dlg, SLOT(settingsModified()));
+    connect(ui.sensorView, SIGNAL(activated(QModelIndex)), dlg, SLOT(settingsModified()));
     ui.animateBubbles->setChecked(m_animated ? Qt::Checked : Qt::Unchecked);
     ui.showText->setChecked(m_showText ? Qt::Checked : Qt::Unchecked);
     ui.updateSpeed->setValue(m_speed);
