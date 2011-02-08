@@ -493,6 +493,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     connect( parent, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
     connect( parent, SIGNAL( okClicked() ), this, SLOT( applyConfig() ) );
     connect( parent, SIGNAL( finished() ), this, SLOT( slotStartTimer() ) );
+    connect(mConfigWidget, SIGNAL(enableApply()), parent, SLOT(settingsModified()));
 }
 
 void ComicApplet::applyConfig()

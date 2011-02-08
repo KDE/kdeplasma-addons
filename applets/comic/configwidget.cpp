@@ -62,6 +62,21 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
     connect( comicUi.checkBox_useTabs_2, SIGNAL( clicked( bool ) ), this, SLOT( slotComboBoxChosen() ) );
     connect(parent, SIGNAL(applyClicked()), this, SLOT(slotSave()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(slotSave()));
+    
+    // "Apply" button connections
+    connect(comicUi.comboBox_comic , SIGNAL(currentIndexChanged(int)), this , SIGNAL(enableApply()));
+    connect(comicUi.pushButton_GHNS , SIGNAL(clicked(bool)), this , SIGNAL(enableApply()));
+    connect(comicUi.checkBox_middle , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(comicUi.checkBox_useTabs , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.checkBox_arrows, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.checkBox_title, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.checkBox_identifier, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.checkBox_author, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.checkBox_url, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.kbuttongroup, SIGNAL(changed(int)), this , SIGNAL(enableApply()));
+    connect(advancedUi.useMaxComicLimit, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(advancedUi.maxComicLimit, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
+    connect(advancedUi.errorPicture, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
 }
 
 ConfigWidget::~ConfigWidget()

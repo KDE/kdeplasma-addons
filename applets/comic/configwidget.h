@@ -85,7 +85,7 @@ class ConfigWidget : public QWidget
 
     Q_SIGNALS:
         void maxSizeClicked();
-
+        void enableApply();
 
     protected slots:
         void getNewStuff();
