@@ -142,6 +142,12 @@ void FifteenPuzzle::createConfigurationInterface(KConfigDialog *parent)
     ui.cb_showNumerals->setChecked(m_showNumerals);
     ui.color->setColor(m_board->color());
     ui.size->setValue(m_board->size());
+    
+    connect(ui.size, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.color, SIGNAL(activated(QColor)), parent, SLOT(settingsModified()));
+    connect(ui.rb_identical, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.rb_split, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.cb_showNumerals, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
 }
 
 void FifteenPuzzle::configAccepted()
