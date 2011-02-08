@@ -23,12 +23,13 @@
 #include <KConfigGroup>
 #include <KConfigDialog>
 
-#include <QGridLayout>
+#include <QFormLayout>
 #include <QCheckBox>
+#include <QSpinBox>
 #include <QLabel>
 
 #include <KComboBox>
-#include <QSpinBox>
+
 
 QalculateSettings::QalculateSettings(QalculateApplet* applet): QObject(0), m_applet(applet)
 {
@@ -93,73 +94,69 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
 
     QWidget *page = new QWidget();
 
-    QGridLayout *layout = new QGridLayout(page);
+    QFormLayout *layout = new QFormLayout(page);
     // convert to best units
 
     m_unitsCheck = new QCheckBox(i18n("Convert to &best units"), page);
     m_unitsCheck->setCheckState(m_convertToBestUnits ? Qt::Checked : Qt::Unchecked);
+    connect(m_unitsCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
 
     m_copyToClipboardCheck = new QCheckBox(i18n("Copy result to clipboard"), page);
     m_copyToClipboardCheck->setCheckState(m_copyToClipboard ? Qt::Checked : Qt::Unchecked);
+    connect(m_copyToClipboardCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     m_resultsInlineCheck = new QCheckBox(i18n("Write results in input line edit"), page);
     m_resultsInlineCheck->setCheckState(m_resultsInline ? Qt::Checked : Qt::Unchecked);
+    connect(m_resultsInlineCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     m_liveEvaluationCheck = new QCheckBox(i18n("Live evaluation"), page);
     m_liveEvaluationCheck->setCheckState(m_liveEvaluation ? Qt::Checked : Qt::Unchecked);
+    connect(m_liveEvaluationCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     connect(m_liveEvaluationCheck, SIGNAL(stateChanged(int)), this, SLOT(checkValidity()));
     m_rpnCheck = new QCheckBox(i18n("Enable reverse Polish notation"), page);
     m_rpnCheck->setCheckState(m_rpn ? Qt::Checked : Qt::Unchecked);
+    connect(m_rpnCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
 
-    QLabel *baseLabel = new QLabel(i18n("Expression base:"), page);
     m_baseSpin = new QSpinBox(page);
     m_baseSpin->setValue(m_base);
     m_baseSpin->setMinimum(2);
     m_baseSpin->setMaximum(32);
+    connect(m_baseSpin, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
 
-    QLabel *baseDisplayLabel = new QLabel(i18n("Result base:"), page);
     m_baseDisplaySpin = new QSpinBox(page);
     m_baseDisplaySpin->setValue(m_baseDisplay);
     m_baseDisplaySpin->setMinimum(2);
     m_baseDisplaySpin->setMaximum(32);
-
-    QLabel *structuringLabel = new QLabel(i18n("Structuring mode:"), page);
+    connect(m_baseDisplaySpin, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
 
     m_structuringCombo = new KComboBox(page);
     m_structuringCombo->addItem(i18n("None"));
     m_structuringCombo->addItem(i18n("Simplify"));
     m_structuringCombo->addItem(i18n("Factorize"));
+    m_structuringCombo->setCurrentIndex(m_structuring);
+    connect(m_structuringCombo, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
 
-    QLabel *angleUnitLabel = new QLabel(i18n("Angle unit:"), page);
     m_angleUnitCombo = new KComboBox(page);
     m_angleUnitCombo->addItem(i18n("None"));
     m_angleUnitCombo->addItem(i18n("Radians"));
     m_angleUnitCombo->addItem(i18n("Degrees"));
     m_angleUnitCombo->addItem(i18n("Gradians"));
-
-    m_structuringCombo->setCurrentIndex(m_structuring);
     m_angleUnitCombo->setCurrentIndex(m_angleUnit);
-
-    layout->addWidget(m_unitsCheck, 0, 0);
-    layout->addWidget(m_copyToClipboardCheck, 1, 0);
-    layout->addWidget(m_resultsInlineCheck, 2, 0);
-    layout->addWidget(m_liveEvaluationCheck, 3, 0);
-    layout->addWidget(m_rpnCheck, 4, 0);
-    layout->addWidget(structuringLabel, 5, 0);
-    layout->addWidget(m_structuringCombo, 5, 1);
-    layout->addWidget(angleUnitLabel, 6, 0);
-    layout->addWidget(m_angleUnitCombo, 6, 1);
-    layout->addWidget(baseLabel, 7, 0);
-    layout->addWidget(m_baseSpin, 7, 1);
-    layout->addWidget(baseDisplayLabel, 8, 0);
-    layout->addWidget(m_baseDisplaySpin, 8, 1);
-    layout->setRowStretch(9, 10);
+    connect(m_angleUnitCombo, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));   
+    
+    layout->addRow(m_unitsCheck);
+    layout->addRow(m_copyToClipboardCheck);
+    layout->addRow(m_resultsInlineCheck);
+    layout->addRow(m_liveEvaluationCheck);
+    layout->addRow(m_rpnCheck);
+    layout->addRow(i18n("Structuring mode:"), m_structuringCombo);
+    layout->addRow(i18n("Angle unit:"), m_angleUnitCombo);
+    layout->addRow(i18n("Expression base:"), m_baseSpin);
+    layout->addRow(i18n("Result base:"), m_baseDisplaySpin);
 
     m_configDialog->addPage(page, i18nc("Evaluation", "Evaluation Settings"), m_applet->icon());
     
     QWidget *printPage = new QWidget();
 
-    QGridLayout *printLayout = new QGridLayout(printPage);
-
-    QLabel *fractionLabel = new QLabel(i18n("Number fraction format:"), printPage);
+    QFormLayout *printLayout = new QFormLayout(printPage);
 
     m_fractionCombo = new KComboBox(printPage);
     m_fractionCombo->addItem(i18n("Decimal"));
@@ -167,47 +164,47 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     m_fractionCombo->addItem(i18n("Fractional"));
     m_fractionCombo->addItem(i18n("Combined"));
     m_fractionCombo->setCurrentIndex(m_fractionDisplay);
-
-    QLabel *minExpLabel = new QLabel(i18n("Numerical display:"), printPage);
-
+    connect(m_fractionCombo, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
+    
     m_minExpCombo = new KComboBox(printPage);
     m_minExpCombo->addItem(i18n("None"));
     m_minExpCombo->addItem(i18n("Pure"));
     m_minExpCombo->addItem(i18n("Scientific"));
     m_minExpCombo->addItem(i18n("Precision"));
     m_minExpCombo->addItem(i18n("Engineering"));
-
     m_minExpCombo->setCurrentIndex(m_minExp);
+    connect(m_minExpCombo, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
 
     m_infiniteSeriesCheck = new QCheckBox(i18n("Indicate infinite series"), printPage);
     m_infiniteSeriesCheck->setCheckState(m_indicateInfiniteSeries ? Qt::Checked : Qt::Unchecked);
+    connect(m_infiniteSeriesCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     m_allPrefixesCheck = new QCheckBox(i18n("Use all prefixes"), printPage);
     m_allPrefixesCheck->setCheckState(m_useAllPrefixes ? Qt::Checked : Qt::Unchecked);
+    connect(m_allPrefixesCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     m_denominatorPrefixCheck = new QCheckBox(i18n("Use denominator prefix"), printPage);
     m_denominatorPrefixCheck->setCheckState(m_useDenominatorPrefix ? Qt::Checked : Qt::Unchecked);
+    connect(m_denominatorPrefixCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     m_negativeExponentsCheck = new QCheckBox(i18n("Negative exponents"), printPage);
     m_negativeExponentsCheck->setCheckState(m_negativeExponents ? Qt::Checked : Qt::Unchecked);
+    connect(m_negativeExponentsCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    
+    printLayout->addRow(i18n("Number fraction format:"), m_fractionCombo);
+    printLayout->addRow(i18n("Numerical display:"), m_minExpCombo);
 
-    printLayout->addWidget(fractionLabel, 0, 0);
-    printLayout->addWidget(m_fractionCombo, 0, 1);
-    printLayout->addWidget(minExpLabel, 1, 0);
-    printLayout->addWidget(m_minExpCombo, 1, 1);
-
-    printLayout->addWidget(m_infiniteSeriesCheck, 2, 0);
-    printLayout->addWidget(m_allPrefixesCheck, 3, 0);
-    printLayout->addWidget(m_denominatorPrefixCheck, 4, 0);
-    printLayout->addWidget(m_negativeExponentsCheck, 5, 0);
-    printLayout->setRowStretch(6, 10);
+    printLayout->addRow(m_infiniteSeriesCheck);
+    printLayout->addRow(m_allPrefixesCheck);
+    printLayout->addRow(m_denominatorPrefixCheck);
+    printLayout->addRow(m_negativeExponentsCheck);
 
     m_configDialog->addPage(printPage, i18nc("Print", "Print Settings"), m_applet->icon());
 
     QWidget *currencyPage = new QWidget();
-    QGridLayout *currencyLayout = new QGridLayout(currencyPage);
+    QFormLayout *currencyLayout = new QFormLayout(currencyPage);
 
     m_exchangeRatesCheck = new QCheckBox(i18n("Update exchange rates at startup"), currencyPage);
     m_exchangeRatesCheck->setCheckState(m_updateExchangeRatesAtStartup ? Qt::Checked : Qt::Unchecked);
-    currencyLayout->addWidget(m_exchangeRatesCheck, 0, 0);
-    currencyLayout->setRowStretch(1, 10);
+    connect(m_exchangeRatesCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    currencyLayout->addRow(m_exchangeRatesCheck);
 
     m_configDialog->addPage(currencyPage, i18nc("Currency", "Currency Settings"), m_applet->icon());
 }
@@ -216,7 +213,7 @@ void QalculateSettings::configAccepted()
 {
     writeSettings();
     readSettings();
-    emit configChanged();
+    emit accepted();
 }
 
 void QalculateSettings::checkValidity()

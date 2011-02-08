@@ -29,6 +29,7 @@
 #include <KLineEdit>
 #include <KIcon>
 #include <KAction>
+#include <KConfigDialog>
 
 #include <Plasma/LineEdit>
 #include <Plasma/Label>
@@ -60,7 +61,7 @@ QalculateApplet::QalculateApplet(QObject *parent, const QVariantList &args)
     connect(m_engine, SIGNAL(formattedResultReady(const QString&)), this, SLOT(displayResult(const QString&)));
     connect(m_engine, SIGNAL(resultReady(const QString&)), this, SLOT(createTooltip()));
     connect(m_engine, SIGNAL(resultReady(const QString&)), this, SLOT(receivedResult(const QString&)));
-    connect(m_settings, SIGNAL(configChanged()), this, SLOT(evalNoHist()));
+    connect(m_settings, SIGNAL(accepted()), this, SLOT(evalNoHist()));
   
     setHasConfigurationInterface(true);
 }

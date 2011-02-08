@@ -139,7 +139,7 @@ protected slots:
     void checkValidity();
 
 signals:
-    void configChanged();
+    void accepted();
 
 private:
     QalculateApplet* m_applet;
