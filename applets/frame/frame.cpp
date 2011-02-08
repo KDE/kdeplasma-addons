@@ -521,29 +521,6 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     connect(m_configDialog->imageUi.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
     connect(m_configDialog->imageUi.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
     connect(m_configDialog->imageUi.slideShowDirList, SIGNAL(currentRowChanged(int)), this, SLOT(updateButtons()));
-
-    connect(m_configDialog->imageUi.slideShowDelay, SIGNAL(timeChanged(QTime)), 
-                   parent, SLOT(settingsModified()));
-    connect(m_configDialog->imageUi.pictureComboBox, SIGNAL(currentIndexChanged ( int)), 
-                   parent, SLOT(settingsModified()));
-    connect(m_configDialog->imageUi.autoUpdateTime, SIGNAL(timeChanged(QTime)), 
-                    parent, SLOT(settingsModified()));
-    connect(m_configDialog->imageUi.addDirButton, SIGNAL(clicked(bool)), 
-                   parent, SLOT(settingsModified()));
-    connect(m_configDialog->imageUi.removeDirButton, SIGNAL(clicked(bool)), 
-                   parent, SLOT(settingsModified()));
-    connect(m_configDialog->imageUi.randomCheckBox, SIGNAL(toggled(bool)),
-                   parent, SLOT(settingsModified()));  
-    connect(m_configDialog->imageUi.recursiveCheckBox, SIGNAL(toggled(bool)),
-                   parent, SLOT(settingsModified()));  
-    connect(m_configDialog->appearanceUi.roundCheckBox, SIGNAL(toggled(bool)),
-                   parent, SLOT(settingsModified()));
-    connect(m_configDialog->appearanceUi.shadowCheckBox, SIGNAL(toggled(bool)),
-                   parent, SLOT(settingsModified()));
-    connect(m_configDialog->appearanceUi.frameCheckBox, SIGNAL(toggled(bool)),
-                   parent, SLOT(settingsModified()));
-    connect(m_configDialog->appearanceUi.changeFrameColor,SIGNAL(changed (QColor)),
-                    parent, SLOT(settingsModified()));
  
     m_configDialog->setRoundCorners(m_roundCorners);
     m_configDialog->setShadow(m_shadow);
@@ -573,6 +550,29 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     m_configDialog->imageUi.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
     m_configDialog->previewPicture(m_mySlideShow->image());
     m_configDialog->imageUi.autoUpdateTime->setTime(QTime(m_autoUpdateIntervall / 3600, (m_autoUpdateIntervall / 60) % 60));
+    
+    connect(m_configDialog->imageUi.slideShowDelay, SIGNAL(timeChanged(QTime)), 
+                   parent, SLOT(settingsModified()));
+    connect(m_configDialog->imageUi.pictureComboBox, SIGNAL(currentIndexChanged ( int)), 
+                   parent, SLOT(settingsModified()));
+    connect(m_configDialog->imageUi.autoUpdateTime, SIGNAL(timeChanged(QTime)), 
+                    parent, SLOT(settingsModified()));
+    connect(m_configDialog->imageUi.addDirButton, SIGNAL(clicked(bool)), 
+                   parent, SLOT(settingsModified()));
+    connect(m_configDialog->imageUi.removeDirButton, SIGNAL(clicked(bool)), 
+                   parent, SLOT(settingsModified()));
+    connect(m_configDialog->imageUi.randomCheckBox, SIGNAL(toggled(bool)),
+                   parent, SLOT(settingsModified()));  
+    connect(m_configDialog->imageUi.recursiveCheckBox, SIGNAL(toggled(bool)),
+                   parent, SLOT(settingsModified()));  
+    connect(m_configDialog->appearanceUi.roundCheckBox, SIGNAL(toggled(bool)),
+                   parent, SLOT(settingsModified()));
+    connect(m_configDialog->appearanceUi.shadowCheckBox, SIGNAL(toggled(bool)),
+                   parent, SLOT(settingsModified()));
+    connect(m_configDialog->appearanceUi.frameCheckBox, SIGNAL(toggled(bool)),
+                   parent, SLOT(settingsModified()));
+    connect(m_configDialog->appearanceUi.changeFrameColor,SIGNAL(changed (QColor)),
+                    parent, SLOT(settingsModified()));
 }
 
 void Frame::configAccepted()
