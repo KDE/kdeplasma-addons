@@ -447,6 +447,12 @@ void IncomingMsg::createConfigurationInterface(KConfigDialog *dialog)
     connect(dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
     dialog->addPage(widget, i18n("General"), icon());
+    
+    connect(ui.showKMail, SIGNAL(toggled(bool)), dialog, SLOT(settingsModified()));
+    connect(ui.showKopete, SIGNAL(toggled(bool)), dialog, SLOT(settingsModified()));
+    connect(ui.showPidgin, SIGNAL(toggled(bool)), dialog, SLOT(settingsModified()));
+    connect(ui.showQutIM, SIGNAL(toggled(bool)), dialog, SLOT(settingsModified()));
+    connect(ui.showXChat, SIGNAL(toggled(bool)), dialog, SLOT(settingsModified()));
 }
 
 
