@@ -156,6 +156,10 @@ void WebSlice::createConfigurationInterface(KConfigDialog *parent)
     ui.elementCombo->setEditable(true);
     updateElements();
     preview(m_element);
+    connect(ui.urlEdit, SIGNAL(userTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(ui.loadUrl, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.elementCombo, SIGNAL(editTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(ui.geometryEdit, SIGNAL(userTextChanged(QString)), parent, SLOT(settingsModified()));
 }
 
 void WebSlice::updateElements()
