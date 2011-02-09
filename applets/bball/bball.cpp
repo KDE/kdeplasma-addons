@@ -141,6 +141,18 @@ void bballApplet::createConfigurationInterface(KConfigDialog *parent)
     ui.autoBounceStrength->setEnabled(m_auto_bounce_enabled);
 
     parent->addPage(widget, i18n("General"), icon());
+    connect(ui.imageUrl, SIGNAL(textChanged(QString)), parent, SLOT(settingsModified()));
+    connect(ui.colourizeEnabled, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.colourize, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(ui.colourizeOpacitySlider, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.gravity, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.friction, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.resitution, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.soundEnabled, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.soundVolume, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.soundFile, SIGNAL(textChanged(QString)), parent, SLOT(settingsModified()));
+    connect(ui.autoBounceEnabled, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.autoBounceStrength, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
     connect(parent, SIGNAL(accepted()), this, SLOT(configurationChanged()));
 }
 

@@ -88,6 +88,14 @@ void Life::createConfigurationInterface(KConfigDialog *parent)
 
     ui.verticalCells->setMaximum(maxCells);
     ui.horizontalCells->setMaximum(maxCells);
+
+    connect(ui.horizontalCells, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.verticalCells, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.horizReflectCheckbox, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.vertReflectCheckbox, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.popDensityNumber, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.stepInterval, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.maxGensNumber, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
 }
 
 void Life::configChanged()

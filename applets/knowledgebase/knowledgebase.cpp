@@ -289,6 +289,8 @@ void KnowledgeBase::createConfigurationInterface(KConfigDialog *parent)
 
     ui.refreshTime->setValue(m_refreshTime);
     ui.refreshTime->setSuffix(ki18np(" minute", " minutes"));
+
+    connect(ui.refreshTime, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
 }
 
 void KnowledgeBase::configAccepted()
