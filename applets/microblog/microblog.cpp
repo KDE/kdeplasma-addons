@@ -723,6 +723,12 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
     configUi.checkIncludeFriends->setChecked(m_includeFriends);
 
     parent->addPage(configWidget, i18n("General"), icon());
+    connect(configUi.serviceUrlCombo, SIGNAL(editTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(configUi.usernameEdit, SIGNAL(userTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(configUi.passwordEdit, SIGNAL(userTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(configUi.historySizeSpinBox, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(configUi.historyRefreshSpinBox, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(configUi.checkIncludeFriends, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
 }
 
 void MicroBlog::configAccepted()
