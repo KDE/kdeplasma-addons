@@ -207,12 +207,13 @@ void WeatherPopupApplet::init()
 void WeatherPopupApplet::connectToEngine()
 {
     emit newWeatherSource();
-    setBusy(true);
     d->busyTimer->start();
     if (d->source.isEmpty()) {
+        setBusy(false);
         d->location.setDataEngines(dataEngine(QLatin1String( "geolocation" )), d->weatherEngine);
         d->location.getDefault();
     } else {
+        setBusy(true);
         d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
     }
 }
