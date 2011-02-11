@@ -177,6 +177,17 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     feedsUi.feedList->addItems(m_feedlist);
     parent->addPage(widget, i18n("General"), icon());
     parent->addPage(fWidget, i18n("Feeds"), icon());
+    
+    connect(ui.showDropTarget, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.logo, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.animations, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.intervalSpinBox, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.switchInterval, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.maxAge, SIGNAL(valueChanged(QString)), parent, SLOT(settingsModified()));
+    connect(feedsUi.feedComboBox, SIGNAL(editTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(feedsUi.addFeed, SIGNAL(released()), parent, SLOT(settingsModified()));
+    connect(feedsUi.removeFeed, SIGNAL(released()), parent, SLOT(settingsModified()));
+    connect(feedsUi.feedList, SIGNAL(itemSelectionChanged()), parent, SLOT(settingsModified())); 
 }
 
 void News::slotChangeText( const QString& text )
