@@ -9,6 +9,7 @@ Name[pt_BR]=Mecanismo dos commits do KDE
 Name[sv]=KDE-gränssnitt för incheckningar
 Name[uk]=Рушій внесків до KDE
 Name[x-test]=xxKDE Commits Enginexx
+Name[zh_TW]=KDE 提交引擎
 Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
 Comment[ca]=Un motor de dades de captura de dades consolidades quant als «commits» en el SVN del KDE
 Comment[en_GB]=A Data Engine for acquiring consolidated data about KDE SVN Commits
@@ -20,6 +21,7 @@ Comment[ru]=Поставщик данных для сбора общих дан�
 Comment[sv]=Ett datagränssnitt för att inhämta samlad data om KDE SVN-incheckningar
 Comment[uk]=Рушій даних для отримання загальних даних щодо внесків до SVN KDE
 Comment[x-test]=xxA Data Engine for acquiring consolidated data about KDE SVN Commitsxx
+Comment[zh_TW]=用於提交 KDE SVN 的聯合資料的資料引擎
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/DataEngine
