@@ -79,6 +79,7 @@ public:
             cfg.writeEntry("source", source);
             emit q->configNeedsSaving();
             q->connectToEngine();
+            q->setConfigurationRequired(false);
         } else {
             busyTimer->stop();
             q->showMessage(QIcon(), QString(), Plasma::ButtonNone);
