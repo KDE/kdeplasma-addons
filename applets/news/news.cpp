@@ -255,6 +255,16 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     ui.descriptionsCheckBox->setChecked(m_showDescriptions);
 
     feedsUi.feedList->addItems(m_feeds);
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    connect(ui.intervalSpinBox, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.timestampCheckBox, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.titlesCheckBox, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.descriptionsCheckBox, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(feedsUi.feedComboBox, SIGNAL(editTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(feedsUi.addFeed, SIGNAL(released()), parent, SLOT(settingsModified()));
+    connect(feedsUi.removeFeed, SIGNAL(released()), parent, SLOT(settingsModified()));
+    connect(feedsUi.feedList, SIGNAL(itemSelectionChanged()), parent, SLOT(settingsModified()));
 }
 
 void News::feedTextChanged(const QString& text)
