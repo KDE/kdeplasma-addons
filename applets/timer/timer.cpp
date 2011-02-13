@@ -24,6 +24,7 @@
 #include <QtCore/QEasingCurve>
 #include <QtGui/QGraphicsSceneMouseEvent>
 
+#include <KAuthorized>
 #include <KConfigDialog>
 #include <KDebug>
 #include <KNotification>
@@ -236,6 +237,12 @@ void Timer::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
+    //Allow sysadmins to run arbitrary commands on timeout
+    bool enableCommandLine = KAuthorized::authorizeKAction("run_command") && KAuthorized::authorizeKAction("shell_access");
+    m_runCommand = enableCommandLine;
+    ui.runCommandCheckBox->setEnabled(enableCommandLine);
+    ui.commandLineEdit->setEnabled(enableCommandLine);
+
     ui.showTitleCheckBox->setChecked(m_title->isVisible());
     ui.titleLineEdit->setEnabled(m_title->isVisible());
     ui.titleLineEdit->setText(m_title->text());
@@ -362,7 +369,7 @@ void Timer::slotCountDone()
         }
     }
 
-    if (m_runCommand && !m_command.isEmpty()){
+    if (m_runCommand && !m_command.isEmpty() && KAuthorized::authorizeKAction("run_command") && KAuthorized::authorizeKAction("shell_access")){
         QStringList args = KShell::splitArgs(m_command);
         QString command = args[0];
         args.removeFirst();
