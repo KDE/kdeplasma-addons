@@ -61,6 +61,9 @@ public:
 
     QToolButton  * buttonContentsRemove;
 
+signals:
+    void contentsChanged();
+
 public Q_SLOTS:
     void buttonContentsAddClicked();
     void buttonContentsRemoveClicked();

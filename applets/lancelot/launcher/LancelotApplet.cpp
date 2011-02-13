@@ -396,6 +396,19 @@ void LancelotApplet::createConfigurationInterface(KConfigDialog * parent)
 
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+
+    // menu part
+    connect(m_configMenu.qbgActivationMethod, SIGNAL(buttonClicked(int)), parent, SLOT(settingsModified()));
+    connect(m_configMenu.checkKeepOpen, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(&m_configMenu, SIGNAL(systemBottonChanged()), parent, SLOT(settingsModified()));
+    connect(m_configMenu.checkAppBrowserReset, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_configMenu.qbgAppbrowserColumnLimit, SIGNAL(buttonClicked(int)), parent, SLOT(settingsModified()));
+    connect(m_configMenu.buttonNewDocumentsEdit, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
+    connect(m_configMenu.buttonSystemApplicationsEdit, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
+    connect(m_configMenu.checkUsageStatisticsEnable, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_configMenu.buttonUsageStatisticsClear, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
+    connect(&m_configMenu, SIGNAL(searchPluginChanged()), parent, SLOT(settingsModified()));
+    connect(&m_config, SIGNAL(settingChanged()), parent, SLOT(settingsModified()));
 }
 
 void LancelotApplet::constraintsEvent(Plasma::Constraints constraints)

@@ -50,6 +50,9 @@ public:
     QMap < QString, QListWidgetItem * > icons;
     QString customIcon;
 
+signals:
+    void settingChanged();
+
 protected Q_SLOTS:
     void updateCard();
     void iconItemClicked();

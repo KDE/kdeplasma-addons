@@ -53,6 +53,7 @@ void LancelotConfig::setupUi(QWidget * widget)
         );
     tabWidget->addTab(m_searchPlugins, i18n("Search"));
 
+    connect(m_searchPlugins, SIGNAL(changed(bool)), this, SIGNAL(searchPluginChanged()));
 
     tabWidget->setCurrentIndex(0);
 
@@ -103,6 +104,7 @@ void LancelotConfig::systemButtonActionsMenuClicked()
     systemButtonActions[clickedSystemButton] =
         action->data().toString();
     setButtonData(clickedSystemButton);
+    emit(systemButtonChanged());
 }
 
 void LancelotConfig::setButtonData(QPushButton * button)

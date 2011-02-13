@@ -75,6 +75,9 @@ public:
     KConfig      m_config;
     KConfigGroup m_mainConfig;
 
+signals:
+    void systemButtonChanged();
+    void searchPluginChanged();
 private Q_SLOTS:
     void systemButtonClicked();
     void systemButtonActionsMenuClicked();

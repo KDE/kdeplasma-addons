@@ -507,6 +507,14 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
 
     parent->addPage(m_config.pageContents, i18n("Contents"), icon());
     parent->addPage(m_config.pageAdvanced, i18n("Advanced"), "configure");
+
+    connect(m_config.checkShowSearchBox, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_config.qbgIcon, SIGNAL(buttonClicked(int)), parent, SLOT(settingsModified()));
+    connect(m_config.qbgContentsExtenderPosition, SIGNAL(buttonClicked(int)), parent, SLOT(settingsModified()));
+    connect(m_config.radioContentsActivationClick, SIGNAL(toggled(bool)), parent , SLOT(settingsModified()));
+    connect(m_config.radioContentsActivationExtender, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_config.iconChooser, SIGNAL(iconChanged(QString)), parent, SLOT(settingsModified()));
+    connect(&m_config, SIGNAL(contentsChanged()), parent, SLOT(settingsModified()));
 }
 
 void LancelotPart::updateIcon()

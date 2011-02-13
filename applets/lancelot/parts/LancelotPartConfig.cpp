@@ -61,7 +61,7 @@ void LancelotPartConfig::setupUi(QWidget * widget)
     QObject::connect(
         buttonContentsRemove, SIGNAL(clicked()),
         this, SLOT(buttonContentsRemoveClicked()));
-
+    connect(buttonContentsRemove, SIGNAL(clicked()) , this, SIGNAL(contentsChanged()));
 }
 
 bool LancelotPartConfig::iconClickActivation() const
@@ -196,6 +196,7 @@ void LancelotPartConfig::buttonContentsAddClicked()
         popup = new Lancelot::PopupList();
         connect(popup, SIGNAL(activated(int)),
             this, SLOT(buttonContentsAddItemSelected(int)));
+	connect(popup, SIGNAL(activated(int)), this, SIGNAL(contentsChanged()));
         popup->setModel(Lancelot::Models::AvailableModels::self());
     }
 

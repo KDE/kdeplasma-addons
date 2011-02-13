@@ -80,6 +80,12 @@ void LancelotAppletConfig::setupUi(QWidget * widget)
         listSections->addItem(item);
         item->setSelected(true);
     }
+
+    connect(radioActivationClick, SIGNAL(clicked(bool)), this, SIGNAL(settingChanged()));
+    connect(radioActivationHover, SIGNAL(clicked(bool)), this, SIGNAL(settingChanged()));
+    connect(radioShowCategories, SIGNAL(clicked(bool)), this, SIGNAL(settingChanged()));
+    connect(radioShowMenuIconOnly, SIGNAL(clicked(bool)), this, SIGNAL(settingChanged()));
+    connect(listIcons, SIGNAL(itemClicked(QListWidgetItem*)), this, SIGNAL(settingChanged()));
 }
 
 void LancelotAppletConfig::iconItemClicked()
