@@ -157,6 +157,14 @@ void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
     ui.onLedsCustomColorButton->setColor(cg.readEntry("onLedsColor", m_onLedsColor));
     ui.offLedsCustomColorButton->setColor(cg.readEntry("offLedsColor", m_offLedsColor));
     ui.gridCustomColorButton->setColor(cg.readEntry("gridColor", m_gridColor));
+
+    connect(ui.showSecondHandCheckBox, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.showGridCheckBox, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.showOffLedsCheckBox, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(onLedsGroup, SIGNAL(buttonReleased(int)), parent, SLOT(settingsModified()));
+    connect(offLedsGroup, SIGNAL(buttonReleased(int)), parent, SLOT(settingsModified()));
+    connect(ui.showOffLedsCheckBox, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.showGridCheckBox, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
 }
 
 void BinaryClock::clockConfigAccepted()
