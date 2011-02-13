@@ -155,6 +155,7 @@ void LeaveNote::createConfigurationInterface(KConfigDialog *dialog)
     connect(dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
     dialog->addPage(widget, i18n("General"), icon());
+    connect(ui.useKNotesCheckBox, SIGNAL(toggled(bool)), dialog, SLOT(settingsModified()));
 }
 
 

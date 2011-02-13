@@ -325,6 +325,16 @@ void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
     // that this point is located in the middle of the ocean off the coast of Ghana
     if (m_geolocation->latitude == 0 && m_geolocation->longitude == 0) {
         locationUi.publishLocation->setEnabled(false);
+        
+    connect(ui.provider , SIGNAL(currentIndexChanged(int)), parent , SLOT(settingsModified()));
+    connect(ui.username , SIGNAL(textChanged(QString)), parent ,SLOT(settingsModified()));
+    connect(ui.password, SIGNAL(textChanged(QString)), parent, SLOT(settingsModified()));
+    connect(ui.registerButton, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
+    connect(locationUi.city , SIGNAL(textChanged(QString)), parent , SLOT(settingsModified()));
+    connect(locationUi.countryCombo, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
+    connect(locationUi.latitude, SIGNAL(textChanged(QString)), parent, SLOT(settingsModified()));
+    connect(locationUi.longitude, SIGNAL(textChanged(QString)), parent, SLOT(settingsModified()));
+    connect(locationUi.publishLocation, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
     }
 }
 

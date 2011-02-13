@@ -74,6 +74,18 @@ void Paste::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(m_autoPasteConfig, i18n("Automatic Paste"), "edit-paste");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    connect(m_snippetConfig->textEdit, SIGNAL(textChanged()), parent, SLOT(settingsModified()));
+    connect(m_snippetConfig->nameEdit, SIGNAL(userTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(m_snippetConfig->list, SIGNAL(itemSelectionChanged()), parent, SLOT(settingsModified()));
+    connect(m_snippetConfig->addMacroButton, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_snippetConfig->addButton, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_snippetConfig->removeButton, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_autoPasteConfig->autoPasteCheckBox, SIGNAL(toggled(bool)), parent, SLOT(settingsModified())); 
+    connect(m_autoPasteConfig->addButton, SIGNAL(clicked()), parent, SLOT(settingsModified())); 
+    connect(m_autoPasteConfig->editButton, SIGNAL(clicked()), parent, SLOT(settingsModified())); 
+    connect(m_autoPasteConfig->removeButton, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
+    connect(m_autoPasteConfig->pasteKeyButton, SIGNAL(keySequenceChanged(QKeySequence)), parent, SLOT(settingsModified()));
+    connect(m_autoPasteConfig->appsTreeView, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
 }
 
 void Paste::configAccepted()

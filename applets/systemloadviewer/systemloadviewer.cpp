@@ -333,6 +333,20 @@ void SystemLoadViewer::createConfigurationInterface(KConfigDialog *parent)
 
     parent->addPage(widGeneral, "General", icon(), QString(), false);
     parent->addPage(widColours, "Colours", icon(), QString(), false);
+
+    connect(uiGeneral.chkIsVertical, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(uiGeneral.chkShowAllProcessors, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(uiGeneral.spbxUpdateInterval, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(uiColours.kcbFreeResourceColour, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(uiColours.kcbCpuNice, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(uiColours.kcbCpuUser, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(uiColours.kcbCpuDisk, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(uiColours.kcbCpuSystem, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(uiColours.kcbRamBuffers, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(uiColours.kcbRamCached, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(uiColours.kcbRamUser, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(uiColours.kcbSwap, SIGNAL(changed(QColor)), parent, SLOT(settingsModified()));
+    connect(uiColours.hsldrFreeResourceTransparency, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
 }
 
 void SystemLoadViewer::configUpdated()
