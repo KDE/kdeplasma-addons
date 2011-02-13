@@ -104,6 +104,8 @@ class RememberTheMilkPlasmoid : public Plasma::PopupApplet
     Ui::GeneralWidget           *m_generalOptionsUi;
     QWidget                     *m_generalOptions;
     
+  signals:
+    void authenticated();
 };
  
 // This links the .desktop file to the applet

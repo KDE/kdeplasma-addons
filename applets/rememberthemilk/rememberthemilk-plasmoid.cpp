@@ -142,6 +142,9 @@ void RememberTheMilkPlasmoid::createConfigurationInterface(KConfigDialog* parent
     parent->setCurrentPage(auth);
   else
     parent->setCurrentPage(general);
+  
+  connect(m_generalOptionsUi->sortType, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
+  connect(this, SIGNAL(authenticated()), parent, SLOT(settingsModified()));
 }
 
 void RememberTheMilkPlasmoid::setSortBy(SortBy sortBy)
@@ -186,6 +189,8 @@ void RememberTheMilkPlasmoid::dataUpdated(const QString& name, const Plasma::Dat
       m_engine->connectSource("Lists", this);
       m_engine->connectSource("Tasks", this);
       busyUntil(0);
+      
+      emit authenticated();
     }
     else if (m_categoriesBar->count() == 1 && m_lists.isEmpty())
       m_categoriesBar->nativeWidget()->setTabText(0, i18n("Login Failed. Please try again."));
