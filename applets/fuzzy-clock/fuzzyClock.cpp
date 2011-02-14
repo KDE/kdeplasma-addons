@@ -216,6 +216,17 @@ void Clock::createClockConfigurationInterface(KConfigDialog *parent)
     ui.fontTime->setCurrentFont(m_fontTime);
     ui.fontColor->setColor(m_fontColor);
     ui.useCustomFontColor->setChecked(m_useCustomFontColor);
+
+    connect(ui.fontTime, SIGNAL(editTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(ui.fontTimeBold, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.fontTimeItalic, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.useThemeColor, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(ui.adjustToHeight, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.showDate, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.showDay, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.showYear, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.showTimezone, SIGNAL(stateChanged(int)), parent, SLOT(settingsModified()));
+    connect(ui.fuzzynessSlider, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
 }
 
 void Clock::clockConfigAccepted()

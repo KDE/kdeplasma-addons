@@ -55,7 +55,6 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
 {
     if (!m_widget) {
         m_widget = new QGraphicsWidget(this);
-        m_widget->setMinimumSize(150,150);
         m_layout = new QGraphicsGridLayout(m_widget);
 
         previousAddSubOperation=calcNone;
@@ -184,7 +183,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         // how this works in QGraphicsWidget.
         qreal left, top, right, bottom;
         getContentsMargins(&left, &top, &right, &bottom);
-        m_widget->setMinimumSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left + right, top + bottom));
+        m_widget->setPreferredSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left + right, top + bottom));
 
         actions.append(KStandardAction::copy(this, SLOT(slotCopy()), this));
         actions.append(KStandardAction::paste(this, SLOT(slotPaste()), this));
