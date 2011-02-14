@@ -37,6 +37,9 @@ Q_SIGNALS:
     void projectAdded(const QString &projectName, const QString &icon);
     void projectRemoved(const QString &projectName);
 
+    // I've added the QString argument for feature possible use, don't know if it's really needed!
+    void projectEdited(const QString &projectName);
+
 public Q_SLOTS:
     void on_psbAddProject_clicked();
     void on_psbRemoveProject_clicked();

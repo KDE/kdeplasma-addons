@@ -113,6 +113,7 @@ void KdeObservatoryConfigProjects::on_psbEditProject_clicked()
             projects->item(currentRow, 1)->setText(ui_configProjects->commitSubject->text());
             projects->item(currentRow, 2)->setText(ui_configProjects->krazyReport->text());
             projects->item(currentRow, 3)->setText(ui_configProjects->krazyFilePrefix->text());
+	    emit projectEdited(projects->item(currentRow, 0)->text());
         }
 
         delete ui_configProjects;

@@ -346,6 +346,28 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(cancelClicked()), m_viewTransitionTimer, SLOT(start()));
 
     m_viewTransitionTimer->stop();
+
+    connect(m_configGeneral->activitiesFullHistory, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_configGeneral->activitiesInPastDays, SIGNAL(toggled()), parent, SLOT(settingsModified()));
+    connect(m_configGeneral->activitiesInRange , SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_configGeneral->commitExtent, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
+    connect(m_configGeneral->fromDate, SIGNAL(dateChanged(QDate)), parent, SLOT(settingsModified()));
+    connect(m_configGeneral->toDate, SIGNAL(dateChanged(QDate)), parent, SLOT(settingsModified()));
+    connect(m_configGeneral->enableAutoViewChange, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_configGeneral->viewsDelay, SIGNAL(dateTimeChanged(QDateTime)), parent, SLOT(settingsModified()));
+
+    connect(m_configProjects, SIGNAL(projectAdded(QString,QString)), parent, SLOT(settingsModified()));
+    connect(m_configProjects, SIGNAL(projectRemoved(QString)), parent, SLOT(settingsModified()));
+    connect(m_configProjects->projects, SIGNAL(cellChanged(int,int)), parent, SLOT(settingsModified()));
+    connect(m_configProjects, SIGNAL(projectEdited(QString)) , parent, SLOT(settingsModified()));
+
+    connect(m_configViews->activeViews, SIGNAL(itemChanged(QListWidgetItem*)), parent, SLOT(settingsModified()));
+    connect(m_configViews->tlbUp, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
+    connect(m_configViews->tlbDown, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
+    connect(m_configViews->views, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
+    connect(m_configViews->projectsInView, SIGNAL(itemChanged(QListWidgetItem*)), parent, SLOT(settingsModified()));
+    connect(m_configViews->psbCheckAll, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_configViews->psbUncheckAll, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
 }
 
 void KdeObservatory::configAccepted()
