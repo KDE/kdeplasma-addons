@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KDE Commits Engine
 Name[ca]=Motor de «commits» del KDE
+Name[da]=Motor til KDE Commits
 Name[de]=KDE-Comic-Datentreiber
 Name[et]=KDE sissekannete mootor
 Name[it]=Motore depositi di KDE
@@ -14,6 +15,7 @@ Name[x-test]=xxKDE Commits Enginexx
 Name[zh_TW]=KDE 提交引擎
 Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
 Comment[ca]=Un motor de dades de captura de dades consolidades quant als «commits» en el SVN del KDE
+Comment[da]=En datamotor til at hente samlede data om KDE SVN-commits
 Comment[et]=Andmemootor, mis hangib konsolideeritud andmeid KDE SVN-i sissekannete kohta
 Comment[it]=Un motore di dati per l'acquisizione di dati consolidati sui depositi SVN di KDE
 Comment[kk]=KDE SVN Commits туралы біріктірген деректерді жинайтын тетігі
