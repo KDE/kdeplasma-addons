@@ -50,9 +50,9 @@
 #include "groupingcontainment.h"
 
 using namespace Plasma;
-qreal _k_distanceForPoint(QPointF point);
-qreal _k_pointAngle(QPointF point);
-QPointF _k_rotatePoint(QPointF point, qreal angle);
+qreal _k_distanceForPoint(const QPointF& point);
+qreal _k_pointAngle(const QPointF& point);
+QPointF _k_rotatePoint(const QPointF& point, qreal angle);
 QPointF _k_projectPoint(QPointF point, QPointF v);
 
 FreeHandle::FreeHandle(GroupingContainment *parent, Plasma::Applet *applet)
@@ -591,12 +591,12 @@ void FreeHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     update();
 }
 
-qreal _k_distanceForPoint(QPointF point)
+qreal _k_distanceForPoint(const QPointF& point)
 {
     return std::sqrt(point.x() * point.x() + point.y() * point.y());
 }
 
-qreal _k_pointAngle(QPointF point)
+qreal _k_pointAngle(const QPointF& point)
 {
     qreal r = sqrt(point.x() * point.x() + point.y() * point.y());
     qreal cosine = point.x() / r;
@@ -608,7 +608,7 @@ qreal _k_pointAngle(QPointF point)
     }
 }
 
-QPointF _k_rotatePoint(QPointF point, qreal angle)
+QPointF _k_rotatePoint(const QPointF& point, qreal angle)
 {
     return QTransform().rotateRadians(angle).map(point);
 }
