@@ -69,7 +69,8 @@ void PanelIcon::configChanged()
     } else { // fallback to default layout
         m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
     }
-    if (m_plasmaboard && old_layout != m_layout) { // just rebuild the keyboard if the layout has actually changed
+
+    if (m_plasmaboard && old_layout != m_layout) { // only rebuild the keyboard if the layout has actually changed
         initKeyboard(m_layout);
     }
 }

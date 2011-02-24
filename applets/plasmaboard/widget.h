@@ -94,6 +94,7 @@ protected:
     virtual void mousePressEvent ( QGraphicsSceneMouseEvent * event );
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void resizeEvent ( QGraphicsSceneResizeEvent * event );
+    virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
     //virtual bool event ( QEvent * event );
 
 private:
