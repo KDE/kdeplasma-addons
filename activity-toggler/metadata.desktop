@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Show activities
+Comment=Shows the activity bar
+Icon=plasma
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=qml/main.qml
+X-Plasma-DefaultSize=200,100
+
+X-KDE-PluginInfo-Author=Luiz Romário Santana Rios
+X-KDE-PluginInfo-Email=luizromario@gmail.com
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Windows and Tasks
+X-KDE-PluginInfo-Name=org.kde.toggleactivitybar
+X-KDE-PluginInfo-Version=0.0
+
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-ServiceTypes=Plasma/Applet
+Type=Service
