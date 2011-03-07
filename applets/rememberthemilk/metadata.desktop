@@ -1,4 +1,5 @@
 [Desktop Entry]
+Encoding=UTF-8
 Name=Remember The Milk
 Name[ar]=Remember The Milk
 Name[ast]=Remember The Milk
@@ -92,19 +93,18 @@ Comment[wa]=Aplikete des afés Si sovni do laecea
 Comment[x-test]=xxRemember The Milk Todo list appletxx
 Comment[zh_CN]=Remember The Milk 待办清单小程序
 Comment[zh_TW]=Remember The Milk 待辦清單小程式
-Type=Service
-X-KDE-ServiceTypes=Plasma/Applet
-Icon=basket
 
-X-KDE-Library=plasma_applet_rtm
-X-KDE-PluginInfo-Author=Andrew Stromme
-X-KDE-PluginInfo-Email=astromme@chatonka.com
-X-KDE-PluginInfo-Name=plasma_applet_rtm
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=basket
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=qml/main.qml
+X-KDE-PluginInfo-Author=Anton Kreuzkamp
+X-KDE-PluginInfo-Email=akreuzkamp@web.de
+X-KDE-PluginInfo-Name=org.kde.remember-the-milk-qml
 X-KDE-PluginInfo-Version=0.1
-X-KDE-PluginInfo-Website=http://blog.chatonka.com
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Online Services
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
-X-Plasma-Requires-FileDialog=Unused
-X-Plasma-Requires-LaunchApp=Unused

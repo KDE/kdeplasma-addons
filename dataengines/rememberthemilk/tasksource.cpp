@@ -42,7 +42,7 @@ TaskSource::~TaskSource()
 
 void TaskSource::updateRequest(Plasma::DataContainer* source) {
   Q_UNUSED(source)
-  kDebug() << "Update request of task: " << task->id();
+//   kDebug() << "Update request of task: " << id;
   update();
 }
 
@@ -55,8 +55,10 @@ Plasma::Service* TaskSource::createService() {
 void TaskSource::update() {
   if (!task) {
     task = session->taskFromId(id);
-    if (!task)
+    if (!task){
+      kDebug() << "No Task with id" << id;
       return;
+    }
   }
   
   for (int i = 0; i < task->metaObject()->propertyCount(); i++) { 
