@@ -41,6 +41,7 @@ QGraphicsWidget {
             onDataChanged: {
                 if (data["Auth"]["ValidToken"]) {
                     authMessage.opacity=0
+                    plasmoid.writeConfig("token", data["Auth"]["Token"])
                 }
                 var same = true
                 for (i in data["Lists"]) {
@@ -114,7 +115,7 @@ QGraphicsWidget {
         var authService = source.serviceForSource("Auth")
 
         var token = plasmoid.readConfig("token")
-        if (!token) {
+        if (token=="") {
             debug("token not found.")
             authMessage.opacity=1
         } else {
