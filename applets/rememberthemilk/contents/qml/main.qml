@@ -37,6 +37,7 @@ QGraphicsWidget {
             engine: "rtm"
             connectedSources: ["Lists","Tasks","Auth"]
             property variant tabList: []
+            interval: 30000
 
             onDataChanged: {
                 if (data["Auth"]["ValidToken"]) {
@@ -66,6 +67,7 @@ QGraphicsWidget {
         PlasmaCore.DataSource {
             id: lists
             engine: "rtm"
+            interval: 30000
 
             onDataChanged: {
                 for (s in data) {
@@ -77,7 +79,7 @@ QGraphicsWidget {
                         }
                     } else {
                         for (i in data[s]) {
-                            if (i != "smart" && i != "filter" && i != "id" && i != "name") {
+                            if (i != "smart" && i != "filter" && i != "id" && i != "name" && tasks.connectedSources.indexOf("Task:"+i) == -1) {
                                 tasks.connectSource("Task:"+i)
                             }
                         }
@@ -88,26 +90,8 @@ QGraphicsWidget {
 
         PlasmaCore.DataSource {
             id: tasks
+            interval: 60000
             engine: "rtm"
-            property variant taskList: []
-
-            onDataChanged: {
-                same = true
-                for (s in data) {
-                    if (data[s].name != taskList[i]) {
-                        same = false
-                        break
-                    }
-                }
-                if (!same) {
-                    todoList.clear()
-                    for (s in data) {
-                        taskList[s] = data[s].name
-                        todoList.append( {"todo": data[s].name, "priority":data[s].priority} )
-                    }
-                    plasmoid.busy = false
-                }
-            }
         }
     }
 
@@ -145,7 +129,9 @@ QGraphicsWidget {
             id: contactDelegate
             Item {
                 x:5; width: parent.width - x*2
-                height: bgMouse.containsMouse ? taskText.paintedHeight + 8 : 24
+                //FIXME: nice idea, doesn't seem to behave too well
+                //height: bgMouse.containsMouse ? taskText.paintedHeight + 8 : 24
+                height: 24
                 Rectangle {
                     id: background
                     x: 2; y: 2; width: parent.width - x*2; height: parent.height - y*2
@@ -158,7 +144,7 @@ QGraphicsWidget {
                         width: parent.width - x*2
                         wrapMode: bgMouse.containsMouse ? Text.Wrap : Text.NoWrap
                         clip: true
-                        text: '<b>'+todo+'</b>'
+                        text: '<b>'+name+'</b>'
                     }
                     MouseArea {
                         id: bgMouse
@@ -171,7 +157,10 @@ QGraphicsWidget {
 
         ListView {
             anchors.fill: parent
-            model: ListModel { id:todoList }
+            //model: ListModel { id:todoList }
+            model: PlasmaCore.DataModel {
+                dataSource: tasks
+            }
             delegate: contactDelegate
             focus: true
         }
