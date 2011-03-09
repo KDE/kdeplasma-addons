@@ -163,6 +163,7 @@ void LancelotPart::init()
 
     m_list = new Lancelot::ActionListView(m_root);
     m_list->setShowsExtendersOutside(false);
+    m_list->installEventFilter(this);
 
     m_model = new Models::PartsMergedModel();
     m_list->setModel(m_model);
@@ -393,8 +394,18 @@ bool LancelotPart::eventFilter(QObject * object, QEvent * event)
         }
     }
 
+    if (object == m_list) {
+        if (event->type() == QEvent::KeyPress) {
+            QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+
+            if (keyEvent->key() == Qt::Key_Escape) {
+                setPopupVisible(false);
+            }
+        }
+    }
+
     // other events
-    if (event->type() == QEvent::KeyPress) {
+    if (object != m_list && event->type() == QEvent::KeyPress) {
         bool pass = false;
         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
 
@@ -447,8 +458,7 @@ bool LancelotPart::eventFilter(QObject * object, QEvent * event)
             m_list->keyPressEvent(keyEvent);
         }
 
-        m_searchText->nativeWidget()->setFocus();
-        m_searchText->setFocus();
+        fixFocus();
 
     }
 
@@ -466,8 +476,7 @@ void LancelotPart::setPopupVisible(bool show)
         updateShowingSize();
         Plasma::PopupApplet::showPopup();
 
-        m_searchText->nativeWidget()->setFocus();
-        m_searchText->setFocus();
+        fixFocus();
 
     } else {
         Plasma::PopupApplet::hidePopup();
@@ -674,8 +683,17 @@ void LancelotPart::updateShowingSize()
 
 void LancelotPart::activated()
 {
-    m_searchText->nativeWidget()->setFocus();
-    m_searchText->setFocus();
+    fixFocus();
+}
+
+void LancelotPart::fixFocus()
+{
+    if (m_searchText->isVisible()) {
+        m_searchText->nativeWidget()->setFocus();
+        m_searchText->setFocus();
+    } else {
+        m_list->setFocus();
+    }
 }
 
 #include "LancelotPart.moc"

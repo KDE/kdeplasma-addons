@@ -65,6 +65,7 @@ public Q_SLOTS:
 private Q_SLOTS:
     void configAccepted();
     void search(const QString & query);
+    void fixFocus();
 
 protected:
     L_Override void createConfigurationInterface(KConfigDialog *parent);
