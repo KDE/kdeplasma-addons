@@ -50,7 +50,7 @@ Applications::Private::~Private()
 
 void Applications::Private::sycocaUpdated(const QStringList & resources)
 {
-    if (resources.contains("services")) {
+    if (resources.contains("services") || resources.contains("apps")) {
         load();
     }
 }
