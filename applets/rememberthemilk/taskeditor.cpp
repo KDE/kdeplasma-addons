@@ -192,6 +192,7 @@ void TaskEditor::paint(QPainter* painter, const QStyleOptionGraphicsItem* option
   Q_UNUSED(widget)
   QColor wash = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
   painter->setBrush(wash);
+  painter->setPen(QPen(Qt::NoPen));
   painter->drawRect(option->exposedRect);
 }
 
