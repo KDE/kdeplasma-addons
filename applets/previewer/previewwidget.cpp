@@ -167,7 +167,9 @@ void PreviewWidget::lookForPreview()
         f_items << KFileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(m_previewHistory[i]));
     }
 
-    KIO::PreviewJob *previewJob = new KIO::PreviewJob(f_items, 256, 512, 0, 0, false, true, 0);
+    KIO::PreviewJob *previewJob = new KIO::PreviewJob(f_items, QSize(256, 512));
+    previewJob->setOverlayIconAlpha(0);
+    previewJob->setScaleType(KIO::PreviewJob::Unscaled);
     connect(previewJob, SIGNAL(gotPreview(KFileItem,QPixmap)),
             this, SLOT(setPreview(KFileItem,QPixmap)));
 }
