@@ -28,7 +28,7 @@ install(FILES plasma-engine-translator.desktop
 
 # install( FILES plasma-translationprovider.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR} )
 
-set(translatorpackage_SRC translatorpackage.cpp)
+set(translatorpackage_SRC translatorpackage.cpp translatorpackage-plugin.cpp)
 
 kde4_add_plugin( plasma-packagestructure-translator ${translatorpackage_SRC} )
 target_link_libraries( plasma-packagestructure-translator ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS} )
