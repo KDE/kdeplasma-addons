@@ -28,6 +28,7 @@ Translator::Translator(QWidget* parent, QString from , QString to, QString plugi
 {
     const QString path = KStandardDirs::locate( "data", QLatin1String( "plasma/translators/" ) + pluginName + QLatin1Char( '/' ) );
     qDebug() << path;
+    m_action = 0;
     if (!path.isEmpty()) {
         m_package = new Plasma::Package(path, packageStructure());
         if (m_package->isValid()) {
@@ -58,13 +59,18 @@ Translator::Translator(QWidget* parent, QString from , QString to, QString plugi
 
 void Translator::translate(QString origText)
 {
-    QVariantList list;
-    list << origText;
-    list << m_from;
-    list << m_to;
-    QString url = m_action->callFunction("getUrl", list).toString();
-    qDebug() << "Translator: " << url;
-    retrivePage(url);
+    if(m_action) {
+        QVariantList list;
+        list << origText;
+        list << m_from;
+        list << m_to;
+        QString url = m_action->callFunction("getUrl", list).toString();
+        qDebug() << "Translator: " << url;
+        retrivePage(url);
+    }
+    else {
+        emit error(i18n("No plugin installed"));
+    }
 }
 
 QStringList Translator::supportedLangs()
