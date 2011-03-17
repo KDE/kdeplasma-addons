@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Translator
+Comment=Translator Package Structure
+
+Type=Service
+X-KDE-ServiceTypes=Plasma/PackageStructure
+
+X-KDE-Library=plasma_packagestructure_translator
+X-KDE-PluginInfo-Author=Farhad Hedayati Fard
+X-KDE-PluginInfo-Email=hf.farhad@gmail.com
+X-KDE-PluginInfo-Name=translator
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-License=GPLv3+
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-PackageFileFilter=*.translator
+X-Plasma-PackageFileMimetypes=application/zip
+X-KDE-PluginInfo-Name=Plasma/Translator

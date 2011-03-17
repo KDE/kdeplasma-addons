@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Translation Engine
+Comment=Scriptable translation engine
+Type=Service
+ 
+X-KDE-ServiceTypes=Plasma/DataEngine
+X-KDE-Library=plasma_engine_translator
+X-Plasma-EngineName=translator
+X-KDE-PluginInfo-Author=Farhad Hedayati Fard
+X-KDE-PluginInfo-Email=hf.farhad@gmail.com
+X-KDE-PluginInfo-Name=translator
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
