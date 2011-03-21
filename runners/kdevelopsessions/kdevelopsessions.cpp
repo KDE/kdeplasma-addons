@@ -41,7 +41,6 @@ KDevelopSessions::KDevelopSessions(QObject *parent, const QVariantList& args)
 {
     setObjectName(QLatin1String("KDevelop Sessions"));
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
-    m_icon = KIcon(QLatin1String("kdevelop"));
     Plasma::RunnerSyntax s(QLatin1String(":q:"), i18nc("syntax description", "Finds KDevelop sessions matching :q:."));
     s.addExampleQuery(QLatin1String("kdevelop :q:"));
     addSyntax(s);
@@ -148,7 +147,7 @@ void KDevelopSessions::match(Plasma::RunnerContext &context)
                     match.setRelevance(0.8);
                 }
             }
-            match.setIcon(m_icon);
+            match.setIcon(KIcon(QLatin1String("kdevelop")));
             match.setData(session);
             match.setText(session);
             match.setSubtext(i18n("Open KDevelop Session"));

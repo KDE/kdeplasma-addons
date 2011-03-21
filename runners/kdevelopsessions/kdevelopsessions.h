@@ -42,7 +42,6 @@ class KDevelopSessions : public Plasma::AbstractRunner {
         void slotTeardown();
 
     private:
-        KIcon m_icon;
         QStringList m_sessions;
         KDirWatch* m_sessionWatch;
 };
