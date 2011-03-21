@@ -37,7 +37,7 @@ TranslatorPackage::TranslatorPackage( QObject *parent, const QVariantList& args 
     
     addFileDefinition( "mainscript", QLatin1String( "code/main" ), i18n( "Main Script File" ) );
     
-    setDefaultPackageRoot( QLatin1String( "plasma/translator/" ) );
+    setDefaultPackageRoot( QLatin1String( "plasma/translators/" ) );
     setServicePrefix( QLatin1String( "plasma-translator-" ) );
 }
 
