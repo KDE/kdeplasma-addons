@@ -54,12 +54,10 @@ KDevelopSessions::KDevelopSessions(QObject *parent, const QVariantList& args)
 
 void KDevelopSessions::slotPrepare()
 {
-    kWarning() << " *** " << "loading sessions";
     loadSessions();
 
     // listen for changes to the list of kdevelop sessions
     if (!m_sessionWatch) {
-        kWarning() << " *** " << "new dirwatch";
         m_sessionWatch = new KDirWatch(this);
     }
     const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String("kdevelop/sessions/"));
@@ -86,19 +84,16 @@ void KDevelopSessions::loadSessions()
 {
     QStringList sessions = QStringList();
     const QStringList list = KGlobal::dirs()->findAllResources( "data", QLatin1String("kdevelop/sessions/*/sessionrc"), KStandardDirs::Recursive );
-    kWarning() << " *** " << "sessions ...";
 
     foreach (const QString &sessionfile, list) {
         KConfig cfg(sessionfile);
         QString sessionName = cfg.entryMap()["SessionName"];
         if (!sessionName.isEmpty()) {
             sessions.append(sessionName);
-            kWarning() << " ***     " << "session added:" << sessionName;
         }
     }
     qSort(sessions.begin(),sessions.end(),kdevelopsessions_runner_compare_sessions);
     m_sessions = sessions;
-    kWarning() << " *** " << m_sessions;
 
 }
 
