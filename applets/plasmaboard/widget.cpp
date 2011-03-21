@@ -59,9 +59,6 @@ PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     : QGraphicsWidget(parent),
       m_applet(parent)
 {
-    setPreferredSize(500, 200);
-    setMinimumSize(200,100);
-    setMaximumSize(20000,10000);
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     setFocusPolicy(Qt::NoFocus);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -683,6 +680,24 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
 	m_tooltip -> raise();
     }
 }
+
+QSizeF PlasmaboardWidget::sizeHint(Qt::SizeHint which, const QSizeF& constraint) const
+{
+    if(which == Qt::MinimumSize) {
+        return QSizeF(300, 100);
+    }
+    else if(which == Qt::PreferredSize) {
+        return QSizeF(500, 230);
+    }
+    else if(which == Qt::MaximumSize) {
+        return constraint;
+    }
+    else {
+        return QGraphicsWidget::sizeHint(which, constraint);
+    }
+
+}
+
 
 void PlasmaboardWidget::stickyKey_Mapper(int id)
 {

@@ -54,10 +54,12 @@ public:
                         const QRect &contentsRect);
     void init();
     QSizeF contentSizeHint() const;
+    virtual QList<QAction*> contextualActions();
 
 public slots:
     void createConfigurationInterface(KConfigDialog *parent);
     void configChanged();
+    void setImageAsWallpaper();
 
 protected Q_SLOTS:
     void dropEvent(QGraphicsSceneDragDropEvent *event);
@@ -128,6 +130,7 @@ private:
     /// Day Change for PoTD
     QTimer *m_dateChangedTimer;
     QDate m_currentDay;
+    QList<QAction *> actions;
 
     QPixmap m_pixmap;
     QImage m_scaledImage;

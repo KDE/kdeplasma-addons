@@ -98,7 +98,7 @@ void PostWidget::setData(const Plasma::DataEngine::Data &data)
     QLocale english(QLocale::English, QLocale::UnitedStates);
     QDateTime dt = english.toDateTime(data.value( "Date" ).toString(), "ddd MMM dd HH:mm:ss +0000 yyyy");
     dt.setTimeSpec(Qt::UTC);
-    m_from->setText(i18n("%1 from %2",timeDescription( dt ), data.value( "Source" ).toString()));
+    m_from->setText(i18nc("%1 is a time string like '1 hour ago' - %2 is the name of a microblogging client","%1 from %2",timeDescription( dt ), data.value( "Source" ).toString()));
 
     QString status = data["Status"].toString();
     status.replace(QRegExp("((http|https)://[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]])"), "<a href='\\1'>\\1</a>");

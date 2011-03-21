@@ -31,6 +31,8 @@
 #include <QFileInfo>
 #include <QStandardItemModel>
 #include <QThreadPool>
+#include <Plasma/Containment>
+#include <Plasma/Wallpaper>
 
 #include <KDebug>
 #include <KConfigDialog>
@@ -124,7 +126,51 @@ void Frame::init()
 
     QAction *openAction = action("run associated application");
     openAction->setIcon(SmallIcon("image-x-generic"));
-    openAction->setText(i18n("&Open Picture..."));    
+    openAction->setText(i18n("&Open Picture..."));
+    QAction *wallpaperAction = new QAction(KIcon("user-desktop"),i18n("Set as Wallpaper Image"), this);
+    actions.append(wallpaperAction);
+    connect(wallpaperAction, SIGNAL(triggered(bool)), this, SLOT(setImageAsWallpaper()));
+}
+
+QList<QAction*> Frame::contextualActions()
+{
+    return actions;
+}
+
+void Frame::setImageAsWallpaper()
+{
+  //setting current image of Picture frame as wallaper image
+    KUrl url;
+
+    if (m_slideShow) {
+        url = m_mySlideShow->currentUrl();
+    } else {
+        url = m_currentUrl;
+    }
+
+    kDebug() << KMimeType::findByUrl(url).data()->name();
+
+    if (containment()->wallpaper() && containment()->wallpaper()->supportsMimetype(KMimeType::findByUrl(url).data()->name())) {
+       containment()->wallpaper()->setUrls(url);
+    } else {
+      KPluginInfo::List wallpaperList = containment()->wallpaper()->listWallpaperInfoForMimetype(KMimeType::findByUrl(url).data()->name());
+      KPluginInfo wallpaper;
+      bool image = false;
+      foreach(wallpaper,wallpaperList) {
+        if (wallpaper.pluginName() == "image") {
+           image = true;
+           break;
+         }
+      }
+      if (image) {
+        containment()->setWallpaper("image");
+      } else {
+        containment()->setWallpaper(wallpaperList.at(0).name());
+      }
+      if (containment()->wallpaper()) {
+        containment()->wallpaper()->setUrls(url);
+      }
+    }
 }
 
 void Frame::configChanged()

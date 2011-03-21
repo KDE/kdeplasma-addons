@@ -202,7 +202,7 @@ public:
         Q_UNUSED(type);
         if (items.size() == 0) return;
 
-        int showItems   = qMin(items.size(), count);
+        int showItems   = qMin(items.size(), count + 1);
         sizer->init(showItems);
 
         qreal left, top, right, bottom;
