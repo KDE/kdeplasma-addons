@@ -24,6 +24,8 @@
 
 #include <KIcon>
 
+class KDirWatch;
+
 class KDevelopSessions : public Plasma::AbstractRunner {
     Q_OBJECT
 
@@ -36,10 +38,13 @@ class KDevelopSessions : public Plasma::AbstractRunner {
 
     private Q_SLOTS:
         void loadSessions();
+        void slotPrepare();
+        void slotTeardown();
 
     private:
         KIcon m_icon;
         QStringList m_sessions;
+        KDirWatch* m_sessionWatch;
 };
 
 K_EXPORT_PLASMA_RUNNER(kdevelopsessions, KDevelopSessions)

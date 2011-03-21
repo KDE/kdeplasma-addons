@@ -36,29 +36,45 @@ bool kdevelopsessions_runner_compare_sessions(const QString &s1, const QString &
 }
 
 KDevelopSessions::KDevelopSessions(QObject *parent, const QVariantList& args)
-    : Plasma::AbstractRunner(parent, args)
+    : Plasma::AbstractRunner(parent, args),
+    m_sessionWatch(0)
 {
     setObjectName(QLatin1String("KDevelop Sessions"));
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
     m_icon = KIcon(QLatin1String("kdevelop"));
-
-    loadSessions();
-
-    // listen for changes to the list of kdevelop sessions
-    KDirWatch *historyWatch = new KDirWatch(this);
-    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String("kdevelop/sessions/"));
-    foreach (const QString &dir, sessiondirs) {
-        historyWatch->addDir(dir);
-    }
-    connect(historyWatch,SIGNAL(dirty(QString)),this,SLOT(loadSessions()));
-    connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
-    connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
-
-    Plasma::RunnerSyntax s(QLatin1String(":q:"), i18n("Finds KDevelop sessions matching :q:."));
+    Plasma::RunnerSyntax s(QLatin1String(":q:"), i18nc("syntax description", "Finds KDevelop sessions matching :q:."));
     s.addExampleQuery(QLatin1String("kdevelop :q:"));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax(QLatin1String("kdevelop"), i18n("Lists all the KDevelop editor sessions in your account.")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String("kdevelop"), i18nc("syntax description", "Lists all the KDevelop sessions in your account.")));
+
+    connect(this, SIGNAL(prepare()), SLOT(slotPrepare()));
+    connect(this, SIGNAL(teardown()), SLOT(slotTeardown()));
+}
+
+void KDevelopSessions::slotPrepare()
+{
+    kWarning() << " *** " << "loading sessions";
+    loadSessions();
+
+    // listen for changes to the list of kdevelop sessions
+    if (!m_sessionWatch) {
+        kWarning() << " *** " << "new dirwatch";
+        m_sessionWatch = new KDirWatch(this);
+    }
+    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String("kdevelop/sessions/"));
+    foreach (const QString &dir, sessiondirs) {
+        m_sessionWatch->addDir(dir);
+    }
+    connect(m_sessionWatch,SIGNAL(dirty(QString)),this,SLOT(loadSessions()));
+    connect(m_sessionWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
+    connect(m_sessionWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
+}
+
+void KDevelopSessions::slotTeardown()
+{
+    delete m_sessionWatch;
+    m_sessions.clear();
 }
 
 KDevelopSessions::~KDevelopSessions()
@@ -69,17 +85,20 @@ void KDevelopSessions::loadSessions()
 {
     QStringList sessions = QStringList();
     const QStringList list = KGlobal::dirs()->findAllResources( "data", QLatin1String("kdevelop/sessions/*/sessionrc"), KStandardDirs::Recursive );
-    KUrl url;
-    foreach (const QString &sessionfile, list)
-    {
+    kWarning() << " *** " << "sessions ...";
+
+    foreach (const QString &sessionfile, list) {
         KConfig cfg(sessionfile);
         QString sessionName = cfg.entryMap()["SessionName"];
         if (!sessionName.isEmpty()) {
-            sessions.append( sessionName);
+            sessions.append(sessionName);
+            kWarning() << " ***     " << "session added:" << sessionName;
         }
     }
     qSort(sessions.begin(),sessions.end(),kdevelopsessions_runner_compare_sessions);
     m_sessions = sessions;
+    kWarning() << " *** " << m_sessions;
+
 }
 
 void KDevelopSessions::match(Plasma::RunnerContext &context)
@@ -99,7 +118,7 @@ void KDevelopSessions::match(Plasma::RunnerContext &context)
         if (term.trimmed().compare(QLatin1String("kdevelop"), Qt::CaseInsensitive) == 0) {
             listAll = true;
             term.clear();
-        } else if (term.at(4) == QLatin1Char(' ') ) {
+        } else if (term.at(8) == QLatin1Char(' ') ) {
             term.remove(QLatin1String("kdevelop"), Qt::CaseInsensitive);
             term = term.trimmed();
         } else {
