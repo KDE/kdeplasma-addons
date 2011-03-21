@@ -96,3 +96,4 @@ if (Q_WS_X11)
 endif (Q_WS_X11)
 
 add_subdirectory(webslice)
+add_subdirectory(translator)

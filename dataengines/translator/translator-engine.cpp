@@ -64,7 +64,7 @@ void TranslatorEngine::getDataFromTranslator(QString data)
     setData(m_sourceName, "text", m_translated);
 }
 
-K_EXPORT_PLASMA_DATAENGINE(translator, TranslatorEngine)
+K_EXPORT_PLASMA_DATAENGINE(org.kde.translator, TranslatorEngine)
 
 
 #include "translator-engine.moc"
