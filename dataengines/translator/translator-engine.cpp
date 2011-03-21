@@ -53,6 +53,7 @@ bool TranslatorEngine::updateSourceEvent(const QString& text)
         translator->setFrom(from);
         translator->setTo(to);
         translator->translate(original);
+        setData(m_sourceName, "text", QString());
         return true;
     }
 }
