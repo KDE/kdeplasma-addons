@@ -74,6 +74,7 @@ void KDevelopSessions::slotPrepare()
 void KDevelopSessions::slotTeardown()
 {
     delete m_sessionWatch;
+    m_sessionWatch = 0;
     m_sessions.clear();
 }
 
