@@ -49,7 +49,7 @@ Item {
 
   PlasmaCore.DataSource {
     id: source
-    engine: "translator"
+    engine: "org.kde.translator"
     onDataChanged: {
       plasmoid.busy = false
       printData()
