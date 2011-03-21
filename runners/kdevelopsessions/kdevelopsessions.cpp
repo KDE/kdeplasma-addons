@@ -38,7 +38,6 @@ bool kdevelopsessions_runner_compare_sessions(const QString &s1, const QString &
 KDevelopSessions::KDevelopSessions(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
-    kWarning() << "INIT KDEV";
     setObjectName(QLatin1String("KDevelop Sessions"));
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
     m_icon = KIcon(QLatin1String("kdevelop"));
@@ -68,27 +67,13 @@ KDevelopSessions::~KDevelopSessions()
 
 void KDevelopSessions::loadSessions()
 {
-    kWarning() << "LOADSESSION!.>>>";
-    // Switch kdevelop session: -u
-    // Should we add a match for this option or would that clutter the matches too much?
     QStringList sessions = QStringList();
     const QStringList list = KGlobal::dirs()->findAllResources( "data", QLatin1String("kdevelop/sessions/*/sessionrc"), KStandardDirs::Recursive );
     KUrl url;
     foreach (const QString &sessionfile, list)
-    //for (QStringList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it)
     {
-        kWarning() << "NEW SESSION:" << sessionfile;
         KConfig cfg(sessionfile);
-        //QString sessionName;
         QString sessionName = cfg.entryMap()["SessionName"];
-        kWarning() << "session:" << sessionName << cfg.entryMap()["SessionName"];
-/*        KConfig _config( *it, KConfig::SimpleConfig );
-        KConfigGroup config(&_config, "General" );
-        QString name =  config.readEntry( "Name" );*/
-        //url.setPath(*it);
-        //QString name=url.fileName();
-        //name = QUrl::fromPercentEncoding(QFile::encodeName(url.fileName()));
-        //name.chop(12);///.kdevelopsession==12
         if (!sessionName.isEmpty()) {
             sessions.append( sessionName);
         }

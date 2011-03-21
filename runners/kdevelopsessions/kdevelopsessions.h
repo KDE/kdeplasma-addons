@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef KATESESSIONS_H
-#define KATESESSIONS_H
+#ifndef KDEVELOPSESSIONS_H
+#define KDEVELOPSESSIONS_H
 
 #include <plasma/abstractrunner.h>
 
@@ -42,6 +42,6 @@ class KDevelopSessions : public Plasma::AbstractRunner {
         QStringList m_sessions;
 };
 
-K_EXPORT_PLASMA_RUNNER(katesessions, KDevelopSessions)
+K_EXPORT_PLASMA_RUNNER(kdevelopsessions, KDevelopSessions)
 
 #endif
