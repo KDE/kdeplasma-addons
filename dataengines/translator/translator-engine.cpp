@@ -33,21 +33,34 @@ bool TranslatorEngine::sourceRequestEvent(const QString& name)
 
 bool TranslatorEngine::updateSourceEvent(const QString& text)
 {
+    m_sourceName = text;
+    
+    if (m_sourceName == "providerName") {
+        setData(m_sourceName, "provider", translator->providerName());
+        return true;
+    }
+    
     QStringList args = text.split(':');
-    qDebug() << args;
-    QString from = args[0];
-    QString to = args[1];
-    m_original = args[2];
-    translator->setFrom(from);
-    translator->setTo(to);
-    translator->translate(m_original);
-    return true;
+    if (args.size() != 4 ) 
+        return false;
+    else {
+        qDebug() << args;
+        QString provider = args[0];
+        QString from = args[1];
+        QString to = args[2];
+        QString original = args[3];
+        translator->setProvider(provider);
+        translator->setFrom(from);
+        translator->setTo(to);
+        translator->translate(original);
+        return true;
+    }
 }
 
 void TranslatorEngine::getDataFromTranslator(QString data)
 {
     m_translated = data;
-    setData(translator->pluginName(), m_original, m_translated);
+    setData(m_sourceName, "text", m_translated);
 }
 
 K_EXPORT_PLASMA_DATAENGINE(translator, TranslatorEngine)

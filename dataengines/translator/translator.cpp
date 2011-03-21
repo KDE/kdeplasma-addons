@@ -24,11 +24,24 @@
 #include <Plasma/Package>
 #include <kross/core/interpreter.h>
 
-Translator::Translator(QWidget* parent, QString from , QString to, QString pluginName): QObject(parent)
+Translator::Translator(QWidget* parent, QString from , QString to, QString providerName): QObject(parent)
 {
-    const QString path = KStandardDirs::locate( "data", QLatin1String( "plasma/translators/" ) + pluginName + QLatin1Char( '/' ) );
-    qDebug() << path;
     m_action = 0;
+    setProvider(providerName);
+    connect(this, SIGNAL(retriveError(QString)), this, SLOT(retrivalError(QString)));
+    connect(this, SIGNAL(error(QString)), this, SLOT(translationError(QString)));
+    m_from = from;
+    m_to = to;
+}
+
+void Translator::setProvider(QString provider)
+{
+    if ( m_action ) {
+        delete m_action;
+        m_action = 0;
+    }
+    const QString path = KStandardDirs::locate( "data", QLatin1String( "plasma/translators/" ) + provider + QLatin1Char( '/' ) );
+    qDebug() << path;
     if (!path.isEmpty()) {
         m_package = new Plasma::Package(path, packageStructure());
         if (m_package->isValid()) {
@@ -43,18 +56,14 @@ Translator::Translator(QWidget* parent, QString from , QString to, QString plugi
             }
             qDebug() << info.filePath();
             if ( info.exists() ) {
-                m_action = new Kross::Action(this, pluginName);
+                m_action = new Kross::Action(this, provider);
                 m_action->setFile(info.filePath());
                 
                 m_action->trigger();
             }
         }
     }
-    connect(this, SIGNAL(retriveError(QString)), this, SLOT(retrivalError(QString)));
-    connect(this, SIGNAL(error(QString)), this, SLOT(translationError(QString)));
-    m_from = from;
-    m_to = to;
-    m_pluginName = pluginName;
+    m_providerName = provider;
 }
 
 void Translator::translate(QString origText)
@@ -127,9 +136,9 @@ void Translator::setTo(QString to)
     m_to = to;
 }
 
-QString Translator::pluginName()
+QString Translator::providerName()
 {
-    return m_pluginName;
+    return m_providerName;
 }
 
 Plasma::PackageStructure::Ptr Translator::packageStructure() {

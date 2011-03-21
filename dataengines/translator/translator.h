@@ -38,7 +38,8 @@ public:
   void retrivePage(QString);
   void setFrom(QString);
   void setTo(QString);
-  QString pluginName();
+  void setProvider(QString);
+  QString providerName();
   Plasma::PackageStructure::Ptr packageStructure();
   QStringList supportedScriptLangs();
 
@@ -57,7 +58,7 @@ private:
   Kross::Action *m_action;
   QString m_from;
   QString m_to;
-  QString m_pluginName;
+  QString m_providerName;
   Plasma::PackageStructure::Ptr m_packageStructure;
   Plasma::Package *m_package;
 };
