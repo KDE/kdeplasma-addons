@@ -114,8 +114,7 @@ void KDevelopSessions::match(Plasma::RunnerContext &context)
             listAll = true;
             term.clear();
         } else if (term.at(8) == QLatin1Char(' ') ) {
-            term.remove(QLatin1String("kdevelop"), Qt::CaseInsensitive);
-            term = term.trimmed();
+            term.remove(QLatin1String("kdevelop "), Qt::CaseInsensitive);
         } else {
             term.clear();
         }
