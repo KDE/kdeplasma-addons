@@ -44,8 +44,11 @@ Item {
   PlasmaCore.DataSource {
     id: source
     engine: "org.kde.translator"
+    interval: 0
     onDataChanged: {
       plasmoid.busy = false
+      var t = source.data["googletranslate" + ":" + "en" + ":" + "fa" + ":" + searchBox.text]["text"]
+      console.log("text: ", source.data["googletranslate" + ":" + "en" + ":" + "fa" + ":" + searchBox.text]["text"])
       console.log("\ndataChanged\n")
     }
     
@@ -79,15 +82,13 @@ Item {
   
     Flickable {
       clip: true
+      width: parent.width
+      height: parent.height - searchWidget.height
       Text {
         id: translation
         wrapMode: Text.Wrap
-        width: parent.parent.width
-        text: {
-            var t = source.data["googletranslate" + ":" + "en" + ":" + "fa" + ":" + searchBox.text]["text"]
-            console.log("text: ", source.data["googletranslate" + ":" + "en" + ":" + "fa" + ":" + searchBox.text]["text"])
-            t
-        }
+       // width: parent.width
+        text: source.data["googletranslate" + ":" + "en" + ":" + "fa" + ":" + searchBox.text]["text"]
       }
     }
   }
