@@ -36,33 +36,48 @@ bool katesessions_runner_compare_sessions(const QString &s1, const QString &s2) 
 }
 
 KateSessions::KateSessions(QObject *parent, const QVariantList& args)
-    : Plasma::AbstractRunner(parent, args)
+    : Plasma::AbstractRunner(parent, args),
+    m_sessionWatch(0)
 {
     setObjectName(QLatin1String("Kate Sessions"));
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
-    m_icon = KIcon(QLatin1String("kate"));
-
-    loadSessions();
-
-    // listen for changes to the list of kate sessions
-    KDirWatch *historyWatch = new KDirWatch(this);
-    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String("kate/sessions/"));
-    foreach (const QString &dir, sessiondirs) {
-        historyWatch->addDir(dir);
-    }
-    connect(historyWatch,SIGNAL(dirty(QString)),this,SLOT(loadSessions()));
-    connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
-    connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
 
     Plasma::RunnerSyntax s(QLatin1String(":q:"), i18n("Finds Kate sessions matching :q:."));
     s.addExampleQuery(QLatin1String("kate :q:"));
     addSyntax(s);
 
     addSyntax(Plasma::RunnerSyntax(QLatin1String("kate"), i18n("Lists all the Kate editor sessions in your account.")));
+
+    connect(this, SIGNAL(prepare()), SLOT(slotPrepare()));
+    connect(this, SIGNAL(teardown()), SLOT(slotTeardown()));
 }
 
 KateSessions::~KateSessions()
 {
+}
+
+void KateSessions::slotPrepare()
+{
+    loadSessions();
+
+    // listen for changes to the list of kate sessions
+    if (!m_sessionWatch) {
+        KDirWatch *m_sessionWatch = new KDirWatch(this);
+        const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String("kate/sessions/"));
+        foreach (const QString &dir, sessiondirs) {
+            m_sessionWatch->addDir(dir);
+        }
+        connect(m_sessionWatch,SIGNAL(dirty(QString)),this,SLOT(loadSessions()));
+        connect(m_sessionWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
+        connect(m_sessionWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
+    }
+}
+
+void KateSessions::slotTeardown()
+{
+    delete m_sessionWatch;
+    m_sessionWatch = 0;
+    m_sessions.clear();
 }
 
 void KateSessions::loadSessions()
@@ -138,7 +153,7 @@ void KateSessions::match(Plasma::RunnerContext &context)
                     match.setRelevance(0.8);
                 }
             }
-            match.setIcon(m_icon);
+            match.setIcon(KIcon(QLatin1String("kate")));
             match.setData(session);
             match.setText(session);
             match.setSubtext(i18n("Open Kate Session"));

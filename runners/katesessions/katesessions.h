@@ -22,7 +22,7 @@
 
 #include <plasma/abstractrunner.h>
 
-#include <KIcon>
+class KDirWatch;
 
 class KateSessions : public Plasma::AbstractRunner {
     Q_OBJECT
@@ -36,9 +36,11 @@ class KateSessions : public Plasma::AbstractRunner {
 
     private Q_SLOTS:
         void loadSessions();
+        void slotPrepare();
+        void slotTeardown();
 
     private:
-        KIcon m_icon;
+        KDirWatch* m_sessionWatch;
         QStringList m_sessions;
 };
 
