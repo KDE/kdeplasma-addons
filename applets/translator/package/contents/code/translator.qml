@@ -26,9 +26,9 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
   id: mainwindow
-  property string provider
-  property string from
-  property string to
+//   property string provider
+//   property string from
+//   property string to
   
   Component.onCompleted: {
     plasmoid.addEventListener('ConfigChanged', configChanged);
@@ -36,15 +36,9 @@ Item {
   
   function configChanged()
   {
-    provider = plasmoid.readConfig("provider");
-    from = plasmoid.readConfig("fromLanguage");
-    to = plasmoid.readConfig("toLanguage");
-  }
-  
-  function printData() {
-    for ( i in source.data.keys ) {
-      print ("K: "+i);
-    }
+//     provider = plasmoid.readConfig("provider");
+//     from = plasmoid.readConfig("fromLanguage");
+//     to = plasmoid.readConfig("toLanguage");
   }
 
   PlasmaCore.DataSource {
@@ -52,7 +46,7 @@ Item {
     engine: "org.kde.translator"
     onDataChanged: {
       plasmoid.busy = false
-      printData()
+      console.log("\ndataChanged\n")
     }
     
   }
@@ -76,7 +70,10 @@ Item {
         id: searchBox
         clearButtonShown: true
         width: parent.width
-        onTextEdited: timer.running = true
+        onTextEdited: {
+            timer.running = true
+            console.log("\ntext edited\n\n")
+        }
       }
     }
   
@@ -86,7 +83,11 @@ Item {
         id: translation
         wrapMode: Text.Wrap
         width: parent.parent.width
-        text: source.data["googletranslate" + ":" + "en" + ":" + "fa" + ":" + searchBox.text]["text"]
+        text: {
+            var t = source.data["googletranslate" + ":" + "en" + ":" + "fa" + ":" + searchBox.text]["text"]
+            console.log("text: ", source.data["googletranslate" + ":" + "en" + ":" + "fa" + ":" + searchBox.text]["text"])
+            t
+        }
       }
     }
   }
@@ -95,7 +96,7 @@ Item {
     id: timer
     running: false
     repeat: false
-    interval: 500
+    interval: 1000
     onTriggered: {
       plasmoid.busy = true
       source.connectedSources = ["googletranslate" + ":" + "en" + ":" + "fa" + ":" + searchBox.text]
