@@ -78,8 +78,8 @@ void MarbleWallpaper::init(const KConfigGroup &config)
 
         // These settings apply to Marble's "satellite" view mostly, e.g. make it beautiful
         m_map->setShowClouds(true);
-        m_map->sunLocator()->setCitylights(false);
-        m_map->sunLocator()->setShow(true);
+        m_map->model()->sunLocator()->setCitylights(false);
+        m_map->model()->sunLocator()->setShow(true);
 
         // Disable all render plugins (scale bar, compass, etc.) except the "stars" plugin
         foreach (RenderPlugin *item, m_map->renderPlugins()) {
@@ -290,12 +290,12 @@ void MarbleWallpaper::updateGlobe()
     m_timer->start();
 
     if (m_movement == FollowSun) {
-        m_map->sunLocator()->update();
-        if (m_map->sunLocator()->getLon() == m_map->centerLongitude()) {
+        m_map->model()->sunLocator()->update();
+        if (m_map->model()->sunLocator()->getLon() == m_map->centerLongitude()) {
             return;
         }
-        m_positionLon = m_map->sunLocator()->getLon();
-        m_positionLat = m_map->sunLocator()->getLat();
+        m_positionLon = m_map->model()->sunLocator()->getLon();
+        m_positionLat = m_map->model()->sunLocator()->getLat();
         m_map->centerOn(m_positionLon, m_positionLat);
     } else if (m_movement == Rotate) {
         m_map->rotateBy(m_rotationLon * m_rotationTimeout / 1000,
