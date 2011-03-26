@@ -28,6 +28,8 @@
 #include <QtGui/QWidget>
 #include <QTime>
 
+#include <KNS3/Entry>
+
 class ComicModel;
 class KConfigDialog;
 class QCheckBox;
@@ -37,11 +39,49 @@ class QPushButton;
 
 namespace KNS3 {
     class DownloadDialog;
+    class DownloadManager;
 }
 
 namespace Plasma {
     class DataEngine;
 }
+
+class ConfigWidget;
+
+class ComicUpdater : public QObject
+{
+    Q_OBJECT
+
+    public:
+        explicit ComicUpdater( QObject *parent = 0 );
+        ~ComicUpdater();
+
+        void init( const KConfigGroup &group );
+
+        void load();
+        void save();
+        void applyConfig( ConfigWidget *widget );
+
+    private slots:
+         /**
+          * Will check if an update is needed, if so will search
+          * for updates and do them automatically
+          */
+        void checkForUpdate();
+        void slotUpdatesFound( const KNS3::Entry::List &entries );
+
+    private:
+        KNS3::DownloadManager *downloadManager();
+
+    private:
+        KNS3::DownloadManager *mDownloadManager;
+        KConfigGroup mGroup;
+        bool mUpdatesActivated;
+        int mUpdateIntervall;
+        QDateTime mLastUpdate;
+        QTimer *m_updateTimer;
+
+};
 
 class ConfigWidget : public QWidget
 {
@@ -78,6 +118,10 @@ class ConfigWidget : public QWidget
         void setUseMaxComicLimit( bool use );
         int maxComicLimit() const;
         void setMaxComicLimit( int limit );
+        void setAutoUpdates( bool activated );
+        bool autoUpdates() const;
+        void setUpdateIntervall( int days );
+        int updateIntervall() const;
 
         QWidget *comicSettings;
         QWidget *appearanceSettings;
@@ -95,6 +139,7 @@ class ConfigWidget : public QWidget
         void slotComboBoxChosen();
         void slotListChosen();
         void slotSave();
+        void slotUpdateIntervallChanged( int newIntervall );
 
     private:
         void checkCurrentIndex();

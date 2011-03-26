@@ -62,6 +62,8 @@
 #include "fullviewwidget.h"
 #include "imagewidget.h"
 
+K_GLOBAL_STATIC( ComicUpdater, globalComicUpdater );
+
 //NOTE based on GotoPageDialog KDE/kdegraphics/okular/part.cpp
 //BEGIN choose a strip dialog
 class ChooseStripNumDialog : public KDialog
@@ -145,6 +147,7 @@ void ComicApplet::init()
 
     Plasma::ToolTipManager::self()->registerWidget( this );
 
+    globalComicUpdater->init( globalConfig() );
     configChanged();
     
     buttonBar();
@@ -483,6 +486,10 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     const int maxComicLimit = global.readEntry( "maxComicLimit", 7 );
     mConfigWidget->setUseMaxComicLimit( useMaxComicLimit );
     mConfigWidget->setMaxComicLimit( maxComicLimit );
+    const bool updatesActivated = global.readEntry( "autoUpdates", false );
+    const int updateIntervall = global.readEntry( "updateIntervall", 7 );
+    mConfigWidget->setAutoUpdates( updatesActivated );
+    mConfigWidget->setUpdateIntervall( updateIntervall );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget->comicSettings, i18n( "General" ), icon(), i18n( "Press the \"Get New Comics ...\" button to install comics." ) );
@@ -524,6 +531,8 @@ void ComicApplet::applyConfig()
         mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( useMaxComicLimit ? maxComicLimit : -1 ) );
     }
 
+
+    globalComicUpdater->applyConfig( mConfigWidget );
 
     updateUsedComics();
     slotStartTimer();
@@ -635,7 +644,7 @@ void ComicApplet::configChanged()
     mSavingDir = cg.readEntry( "savingDir", QString() );
     mOldSource = mComicIdentifier + ':' + mStoredIdentifierSuffix;
 
-    
+    globalComicUpdater->load();
 }
 
 void ComicApplet::saveConfig()
@@ -656,6 +665,8 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "switchTabs", mSwitchTabs );
     cg.writeEntry( "tabView", mTabView );
     cg.writeEntry( "savingDir", mSavingDir );
+
+    globalComicUpdater->save();
 }
 
 void ComicApplet::slotChosenDay( const QDate &date )

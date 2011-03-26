@@ -26,6 +26,81 @@
 
 #include <KConfigDialog>
 #include <KNS3/DownloadDialog>
+#include <knewstuff3/downloadmanager.h>
+
+ComicUpdater::ComicUpdater( QObject *parent )
+  : QObject( parent ),
+    mDownloadManager( 0 ),
+    mUpdatesActivated( false ),
+    mUpdateIntervall( 7 ),
+    m_updateTimer( 0 )
+{
+}
+
+ComicUpdater::~ComicUpdater()
+{
+}
+
+void ComicUpdater::init(const KConfigGroup &group)
+{
+    mGroup = group;
+}
+
+void ComicUpdater::load()
+{
+    //check when the last update happened and update if necessary
+    mUpdatesActivated = mGroup.readEntry( "autoUpdates", false );
+    if ( mUpdatesActivated ) {
+        mUpdateIntervall = mGroup.readEntry( "updateIntervall", 7 );
+        mLastUpdate = mGroup.readEntry( "lastUpdate", QDateTime() );
+        checkForUpdate();
+    }
+}
+
+void ComicUpdater::save()
+{
+    mGroup.writeEntry( "autoUpdates", mUpdatesActivated );
+    mGroup.writeEntry( "updateIntervall", mUpdateIntervall );
+}
+
+void ComicUpdater::applyConfig( ConfigWidget *widget )
+{
+    mUpdatesActivated = widget->autoUpdates();
+    mUpdateIntervall = widget->updateIntervall();
+}
+
+void ComicUpdater::checkForUpdate()
+{
+    //start a timer to check each hour, if KNS3 should look for updates
+    if ( !m_updateTimer ) {
+        m_updateTimer = new QTimer(this);
+        connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
+        m_updateTimer->start( 1 * 60 * 60 * 1000 );
+    }
+
+    if ( !mLastUpdate.isValid() || ( mLastUpdate.addDays( mUpdateIntervall ) < QDateTime::currentDateTime() ) ) {
+        mGroup.writeEntry( "lastUpdate", QDateTime::currentDateTime() );
+        downloadManager()->checkForUpdates();
+    }
+}
+
+void ComicUpdater::slotUpdatesFound( const KNS3::Entry::List &entries )
+{
+    for ( int i = 0; i < entries.count(); ++i ) {
+        downloadManager()->installEntry( entries[ i ] );
+    }
+}
+
+KNS3::DownloadManager *ComicUpdater::downloadManager()
+{
+    if ( !mDownloadManager ) {
+        mDownloadManager = new KNS3::DownloadManager( "comic.knsrc", this );
+        connect(mDownloadManager, SIGNAL(searchResult(KNS3::Entry::List)), this, SLOT(slotUpdatesFound(KNS3::Entry::List)));
+    }
+
+    return mDownloadManager;
+}
+
 
 ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const QStringList &usedComics, QSortFilterProxyModel *proxy, KConfigDialog *parent )
     : QWidget( parent ), mEngine( engine ), mModel( model ), mProxyModel( proxy ), mNewStuffDialog( 0 )
@@ -58,6 +133,8 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
     comicUi.listView_comic->setModel( mProxyModel );
     comicUi.listView_comic->resizeColumnToContents( 0 );
 
+    connect(comicUi.updateIntervall, SIGNAL(valueChanged(int)), this, SLOT(slotUpdateIntervallChanged(int)));
+    connect(comicUi.updateIntervall_2, SIGNAL(valueChanged(int)), this, SLOT(slotUpdateIntervallChanged(int)));
     connect( comicUi.checkBox_useTabs, SIGNAL( clicked( bool ) ), this, SLOT( slotListChosen() ) );
     connect( comicUi.checkBox_useTabs_2, SIGNAL( clicked( bool ) ), this, SLOT( slotComboBoxChosen() ) );
     connect(parent, SIGNAL(applyClicked()), this, SLOT(slotSave()));
@@ -114,6 +191,16 @@ void ConfigWidget::slotComboBoxChosen()
 void ConfigWidget::slotListChosen()
 {
     checkCurrentIndex();
+}
+
+void ConfigWidget::slotUpdateIntervallChanged( int newIntervall )
+{
+    if ( comicUi.updateIntervall->value() != newIntervall ) {
+        comicUi.updateIntervall->setValue( newIntervall );
+    }
+    if ( comicUi.updateIntervall_2->value() != newIntervall ) {
+        comicUi.updateIntervall_2->setValue( newIntervall );
+    }
 }
 
 void ConfigWidget::getNewStuff()
@@ -187,6 +274,7 @@ bool ConfigWidget::showErrorPicture() const
 {
     return advancedUi.errorPicture->isChecked();
 }
+
 
 void ConfigWidget::setArrowsOnHover( bool arrows )
 {
@@ -278,6 +366,27 @@ int ConfigWidget::maxComicLimit() const
 void ConfigWidget::setMaxComicLimit( int limit )
 {
     advancedUi.maxComicLimit->setValue( limit );
+}
+
+void ConfigWidget::setAutoUpdates( bool activated )
+{
+    comicUi.autoUpdates->setChecked( activated );
+    comicUi.autoUpdates_2->setChecked( activated );
+}
+
+bool ConfigWidget::autoUpdates() const
+{
+    return comicUi.autoUpdates->isChecked();
+}
+
+void ConfigWidget::setUpdateIntervall( int days )
+{
+    comicUi.updateIntervall->setValue( days );
+}
+
+int ConfigWidget::updateIntervall() const
+{
+    return comicUi.updateIntervall->value();
 }
 
 #include "configwidget.moc"
