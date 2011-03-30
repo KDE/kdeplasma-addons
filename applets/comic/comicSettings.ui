@@ -226,7 +226,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_12">
            <property name="text">
-            <string>Automaticall update comics:</string>
+            <string>Automatically update comics:</string>
            </property>
           </widget>
          </item>
@@ -421,7 +421,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_14">
            <property name="text">
-            <string>Automaticall update comics:</string>
+            <string>Automatically update comics:</string>
            </property>
           </widget>
          </item>
