@@ -86,12 +86,17 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         CachedProvider::setMaxComicLimit( worked ? maxComicLimit : -1 );
         return worked;
     } else {
+        if ( m_jobs.contains(identifier) ) {
+            return true;
+        }
+
         // check whether it is cached already...
         if ( CachedProvider::isCached( identifier ) ) {
             QVariantList args;
             args << QLatin1String( "String" ) << identifier;
 
             ComicProvider *provider = new CachedProvider( this, args );
+            m_jobs[identifier] = provider;
             connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
             connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
             return true;
@@ -156,6 +161,8 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         }
         provider->setIsCurrent( isCurrentComic );
 
+        m_jobs[identifier] = provider;
+
         connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
         connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
         return true;
@@ -175,6 +182,10 @@ void ComicEngine::finished( ComicProvider *provider )
     setComicData( provider );
     if ( provider->image().isNull() ) {
         error( provider );
+        const QString key = m_jobs.key(provider);
+        if (!key.isEmpty()) {
+            m_jobs.remove(key);
+        }
         return;
     }
 
@@ -224,6 +235,11 @@ void ComicEngine::finished( ComicProvider *provider )
         CachedProvider::storeInCache( provider->identifier(), provider->image(), info );
     }
     provider->deleteLater();
+
+    const QString key = m_jobs.key(provider);
+    if (!key.isEmpty()) {
+        m_jobs.remove(key);
+    }
 }
 
 void ComicEngine::error( ComicProvider *provider )

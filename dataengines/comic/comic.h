@@ -64,6 +64,7 @@ class ComicEngine : public Plasma::DataEngine
         QString lastCachedIdentifier( const QString &identifier ) const;
         QString mIdentifierError;
         QMap<QString, KService::Ptr> mFactories;
+        QHash<QString, ComicProvider*> m_jobs;
 };
 
 K_EXPORT_PLASMA_DATAENGINE( comic, ComicEngine )
