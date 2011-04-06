@@ -51,6 +51,12 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
             StringIdentifier      ///< References by arbitrary string
         };
 
+        enum RequestType {
+            Page = 0,
+            Image,
+            User
+        };
+
         /**
          * Creates a new comic provider.
          *
@@ -80,6 +86,14 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * Returns the url of the website where the comic of that particular date resides.
          */
         virtual KUrl websiteUrl() const = 0;
+
+        /**
+         * Returns the direct url to the comic, if the comic strip is a combination of multiple
+         * images, then this should return the url to one part of it
+         * @note the image url is automatically set by requestPage with the ComicProvider::Image id
+         * @see requestPage
+         */
+        virtual KUrl imageUrl() const;
 
         /**
          * Returns the url of the website where the comic has a shop.

@@ -140,6 +140,8 @@ class CachedProvider : public ComicProvider
          */
         virtual KUrl websiteUrl() const;
 
+        virtual KUrl imageUrl() const;
+
         /**
          * Returns the shop website of the comic.
          */

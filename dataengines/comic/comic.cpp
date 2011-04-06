@@ -202,11 +202,12 @@ void ComicEngine::finished( ComicProvider *provider )
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic
     // (if we're on today's comic it could become stale)
-    if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !provider->image().isNull() &&
+    if ( !provider->inherits("CachedProvider") && !provider->image().isNull() &&
          !provider->nextIdentifier().isEmpty() ) {
         CachedProvider::Settings info;
 
         info[ QLatin1String( "websiteUrl" ) ] = provider->websiteUrl().prettyUrl();
+        info[ QLatin1String( "imageUrl" ) ] = provider->imageUrl().url();
         info[ QLatin1String( "shopUrl" ) ] = provider->shopUrl().prettyUrl();
         info[ QLatin1String( "nextIdentifier" ) ] = provider->nextIdentifier();
         info[ QLatin1String( "previousIdentifier" ) ] = provider->previousIdentifier();
@@ -288,6 +289,7 @@ void ComicEngine::setComicData( ComicProvider *provider )
 
     setData( identifier, QLatin1String( "Image" ), provider->image() );
     setData( identifier, QLatin1String( "Website Url" ), provider->websiteUrl() );
+    setData( identifier, QLatin1String( "Image Url" ), provider->imageUrl() );
     setData( identifier, QLatin1String( "Shop Url" ), provider->shopUrl() );
     setData( identifier, QLatin1String( "Next identifier suffix" ), provider->nextIdentifier() );
     setData( identifier, QLatin1String( "Previous identifier suffix" ), provider->previousIdentifier() );

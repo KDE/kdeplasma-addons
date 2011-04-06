@@ -74,6 +74,7 @@ class ComicProvider::Private
         QString mRequestedId;
         QString mRequestedComicName;
         QString mComicAuthor;
+        KUrl mImageUrl;
         bool mIsCurrent;
         bool mIsLeftToRight;
         bool mIsTopToBottom;
@@ -210,6 +211,10 @@ QString ComicProvider::requestedComicName() const
 
 void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos )
 {
+    if (id == Image) {
+        d->mImageUrl = url;
+    }
+
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::Reload, KIO::HideProgressInfo );
     job->setProperty( "uid", id );
     connect( job, SIGNAL( result( KJob* ) ), this, SLOT( jobDone( KJob* ) ) );
@@ -225,7 +230,6 @@ void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos
 
 void ComicProvider::requestRedirectedUrl( const KUrl &url, int id, const MetaInfos &infos )
 {
-
     KIO::MimetypeJob *job = KIO::mimetype( url, KIO::HideProgressInfo );
     job->setProperty( "uid", id );
     d->mRedirections[job] = url;
@@ -286,6 +290,11 @@ KPluginInfo ComicProvider::description() const
 KUrl ComicProvider::shopUrl() const
 {
     return KUrl();
+}
+
+KUrl ComicProvider::imageUrl() const
+{
+    return d->mImageUrl;
 }
 
 bool ComicProvider::isLeftToRight() const

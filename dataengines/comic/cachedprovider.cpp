@@ -200,6 +200,12 @@ KUrl CachedProvider::websiteUrl() const
     return KUrl( settings.value( QLatin1String( "websiteUrl" ), QString() ).toString() );
 }
 
+KUrl CachedProvider::imageUrl() const
+{
+    QSettings settings( identifierToPath( requestedString() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
+    return KUrl( settings.value( QLatin1String( "imageUrl" ), QString() ).toString() );
+}
+
 KUrl CachedProvider::shopUrl() const
 {
     QSettings settings( identifierToPath( requestedComicName() ) + QLatin1String( ".conf" ), QSettings::IniFormat );
