@@ -176,9 +176,9 @@ class ComicProviderWrapper : public QObject
             Bottom
         };
         enum RequestType {
-            Page = 0,
-            Image,
-            User
+            Page = ComicProvider::Page,
+            Image = ComicProvider::Image,
+            User = ComicProvider::User
         };
         enum IdentifierType {
             DateIdentifier   = ComicProvider::DateIdentifier,

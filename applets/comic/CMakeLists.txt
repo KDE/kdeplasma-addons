@@ -19,7 +19,7 @@ target_link_libraries(plasma_applet_comic ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS}
 
 configure_file(config-nepomuk.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-nepomuk.h)
 if(HAVE_NEPOMUK)
-  target_link_libraries(plasma_applet_comic ${NEPOMUK_LIBRARIES} ${SOPRANO_LIBRARIES})
+  target_link_libraries(plasma_applet_comic ${NEPOMUK_LIBRARIES} ${NEPOMUK_UTILS_LIBRARIES} ${SOPRANO_LIBRARIES})
 endif(HAVE_NEPOMUK)
 
 install(TARGETS plasma_applet_comic DESTINATION ${PLUGIN_INSTALL_DIR})

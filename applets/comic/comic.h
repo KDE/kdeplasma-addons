@@ -175,6 +175,7 @@ class ComicApplet : public Plasma::PopupApplet
         QImage mImage;
         QDate mCurrentDay;
         KUrl mWebsiteUrl;
+        KUrl mImageUrl;
         KUrl mShopUrl;
         QString mComicIdentifier;
         QString mNextIdentifierSuffix;

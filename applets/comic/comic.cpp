@@ -1,7 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
- *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
+ *   Copyright (C) 2008-2011 Matthias Fuchs <mat69@gmx.net>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -46,9 +46,13 @@
 #include <Nepomuk/ResourceManager>
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
+#include <Nepomuk/Vocabulary/NCO>
+#include <Nepomuk/Vocabulary/NIE>
+#include <Nepomuk/Vocabulary/NFO>
+#include <Nepomuk/Vocabulary/PIMO>
+#include <nepomuk/utils.h>
 
-#include <Soprano/Vocabulary/NAO>
-#include <Soprano/Vocabulary/Xesam>
+using namespace Nepomuk::Vocabulary;
 #endif
 
 #include <Plasma/Theme>
@@ -372,6 +376,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
     setAssociatedApplicationUrls(mWebsiteUrl);
+    mImageUrl = data["Image Url"].value<KUrl>();
     mShopUrl = data[ "Shop Url" ].value<KUrl>();
     mFirstIdentifierSuffix = data[ "First strip identifier suffix" ].toString();
     mStripTitle = data[ "Strip title" ].toString();
@@ -928,26 +933,45 @@ void ComicApplet::slotSaveComicAs()
 #ifdef HAVE_NEPOMUK
     bool worked = KIO::NetAccess::file_copy( srcUrl, destUrl );
     //store additional data using Nepomuk
-    if ( worked ) {
-        Nepomuk::Resource res( destUrl );
-        Nepomuk::Tag tag( i18n( "Comic" ) );
+    if (worked) {
+        Nepomuk::Resource res(destUrl, NFO::FileDataObject());
 
-        tag.setLabel( i18n( "Comic" ) );
-        res.addTag( tag );
-        if ( !mAdditionalText.isEmpty() ) {
-            res.setDescription( mAdditionalText );
+        Nepomuk::Resource comicTopic("Comic", PIMO::Topic());
+        comicTopic.setLabel(i18n("Comic"));
+
+        if (!mAdditionalText.isEmpty() ) {
+            res.setProperty(NIE::description(), mAdditionalText);
         }
-        if ( !mComicAuthor.isEmpty() ) {
-            res.setProperty( Soprano::Vocabulary::NAO::creator(), Nepomuk::Variant( mComicAuthor ) );
+        if ((mSuffixType == "Date") && !mShownIdentifierSuffix.isEmpty()) {
+            res.setProperty(NIE::contentCreated(), QDateTime::fromString(mShownIdentifierSuffix, Qt::ISODate));
         }
-        if ( ( mSuffixType == "Date" ) && !mShownIdentifierSuffix.isEmpty() ) {
-            res.setProperty( Soprano::Vocabulary::NAO::created(), Nepomuk::Variant( QDate::fromString( mShownIdentifierSuffix, Qt::ISODate ) ) );
+        if (!mComicTitle.isEmpty()) {
+            Nepomuk::Resource topic(mComicTitle, PIMO::Topic());
+            topic.setLabel(mComicTitle);
+            topic.setProperty(PIMO::superTopic(), comicTopic);
+            res.addTag(topic);
+        } else {
+//             res.addTag(comicTopic);//TODO activate this, see below
+            ;
         }
-        if ( !mComicTitle.isEmpty() ) {
-            res.setProperty( Soprano::Vocabulary::Xesam::subject(), Nepomuk::Variant( mComicTitle ) );
+
+        //FIXME also set the comic topic as tag, this is redundant, as topic has this as super topic
+        //though at this point the gui does not manage to show the correct tags
+        res.addTag(comicTopic);
+
+        if (!mStripTitle.isEmpty()) {
+            res.setProperty(NIE::title(), mStripTitle);
         }
-        if ( !mStripTitle.isEmpty() ) {
-            res.setProperty( Soprano::Vocabulary::Xesam::title(), Nepomuk::Variant( mStripTitle ) );
+        if (!mWebsiteUrl.isEmpty()) {
+            Nepomuk::Resource copyEvent = Nepomuk::Utils::createCopyEvent(mImageUrl, destUrl, QDateTime(), mWebsiteUrl);
+        }
+
+        const QStringList authors = mComicAuthor.split(',', QString::SkipEmptyParts);
+        foreach (QString author, authors) {
+            author = author.trimmed();
+            Nepomuk::Resource authorRes(author, NCO::PersonContact());
+            authorRes.setProperty(NCO::fullname(), author);
+            res.addProperty(NCO::creator(), authorRes);
         }
     }
 #else
