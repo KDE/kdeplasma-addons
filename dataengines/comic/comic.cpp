@@ -121,6 +121,7 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         if ( status != Solid::Networking::Connected && status != Solid::Networking::Unknown ) {
             mIdentifierError = identifier;
             setData( identifier, QLatin1String( "Error" ), true );
+            setData( identifier, QLatin1String( "Error automatically fixable" ), true );
             setData( identifier, QLatin1String( "Identifier" ), identifier );
             setData( identifier, QLatin1String( "Previous identifier suffix" ), lastCachedIdentifier( identifier ) );
             kWarning() << "No connection.";

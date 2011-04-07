@@ -329,16 +329,26 @@ void ComicApplet::setTabBarVisible( bool isVisible )
     }
 }
 
-void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
+void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
 {
+    //disconnect prefetched comic strips
+    if ( source != mOldSource ) {
+        mEngine->disconnectSource( source, this );
+        return;
+    }
+
     setBusy( false );
     setConfigurationRequired( false );
     slotStartTimer();
 
     //there was an error, display information as image
-    if ( data[ "Error" ].toBool() ) {
-        if ( !mShowErrorPicture && !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
-            updateComic( data[ "Previous identifier suffix" ].toString() );
+    const bool hasError = data[ "Error" ].toBool();
+    const bool errorAutoFixable = data[ "Error automatically fixable" ].toBool();
+    if ( hasError ) {
+        const QString previousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
+        if ( !mShowErrorPicture && !previousIdentifierSuffix.isEmpty() ) {
+            mEngine->disconnectSource( source, this );
+            updateComic( previousIdentifierSuffix );
             return;
         }
         QPixmap errorPic( 500, 400 );
@@ -425,6 +435,11 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mLabelUrl->setText( mWebsiteUrl.host() );
     mImageWidget->setScaled( !mScaleComic );
 
+    //disconnect if there is either no error, or an error that can not be fixed automatically 
+    if ( !errorAutoFixable ) {
+        mEngine->disconnectSource( source, this );
+    }
+
     setTabBarVisible( mShowTabBar && mUseTabs );
     mLabelTop->setVisible( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() );
     mLabelId->setVisible( mShowComicIdentifier && !mLabelId->text().isEmpty() );
@@ -454,11 +469,14 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
     //prefetch the previous and following comic for faster navigation
     if ( !mNextIdentifierSuffix.isEmpty() ) {
-        mEngine->query( mComicIdentifier + ':' + mNextIdentifierSuffix );
+        const QString prefetch = mComicIdentifier + ':' + mNextIdentifierSuffix;
+        mEngine->connectSource( prefetch, this );
+        mEngine->query( prefetch );
     }
-
     if ( !mPreviousIdentifierSuffix.isEmpty() ) {
-        mEngine->query( mComicIdentifier + ':' + mPreviousIdentifierSuffix );
+        const QString prefetch = mComicIdentifier + ':' + mPreviousIdentifierSuffix;
+        mEngine->connectSource( prefetch, this );
+        mEngine->query( prefetch );
     }
 }
 
@@ -838,6 +856,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 
     setConfigurationRequired( mComicIdentifier.isEmpty() );
     if ( !mComicIdentifier.isEmpty() && mEngine && mEngine->isValid() ) {
+
         setBusy( true );
         const QString identifier = mComicIdentifier + ':' + identifierSuffix;
 
