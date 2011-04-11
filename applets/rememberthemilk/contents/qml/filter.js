@@ -1,6 +1,10 @@
 var tabIDs = new Array(); //FIXME: Would be much nicer to have it as a property of tabBar
 
-function isCurrentList(id)
+function isEmpty(id)
 {
-    return tabIDs[tabBar.currentIndex] == id;
+    for (i in lists.data["List:"+id]) {
+        if (i != "smart" && i != "filter" && i != "id" && i != "name")
+            return false
+    }
+    return true
 }

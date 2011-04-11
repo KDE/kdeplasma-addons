@@ -1,5 +1,5 @@
 /*
- *   Copyright 2010 Alexis Menard <menard@kde.org>
+ *   Copyright 2010 Anton Kreuzkamp <akreuzkamp@web.de>
  *
  *   This program is free software you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -33,33 +33,25 @@ QGraphicsWidget {
         id:main
 
         PlasmaCore.DataSource {
-            id: source
+            id: sources
             engine: "rtm"
-            connectedSources: ["Lists","Tasks","Auth"]
-            property variant tabList: []
+            connectedSources: ["Lists","Auth"]
             interval: 30000
 
             onDataChanged: {
-                if (data["Auth"]["ValidToken"]) {
-                    authMessage.opacity=0
-                    plasmoid.writeConfig("token", data["Auth"]["Token"])
-                }
-                var same = true
-                for (i in data["Lists"]) {
-                    if (data["Lists"][i] != tabList[i]) {
-                        same = false
-                        break
+                switch (source) {
+                case "Auth":
+                    if ( data["Auth"]["ValidToken"]) {
+                        authMessage.opacity=0
+                        plasmoid.writeConfig("token", data["Auth"]["Token"])
                     }
-                }
-                if (!same) {
-                    tabList = data["Lists"]
-                    while (tabBar.count)
-                        tabBar.removeTab(0)
-                    for (var i in data["Lists"]) {
-                        tabBar.addTab(data["Lists"][i])
-                        Filter.tabIDs[(tabBar.count-1)] = i
-                        lists.connectSource("List:" + i)
+                    break
+
+                case "Lists":
+                    for (i in data["Lists"]) {
+                        lists.connectSource("List:"+i)
                     }
+                    break
                 }
             }
         }
@@ -69,21 +61,40 @@ QGraphicsWidget {
             engine: "rtm"
             interval: 30000
 
+            onSourceDisconnected: {
+                var index = Filter.tabIDs.indexOf(source.slice(5))
+                if (index != -1) {
+                    tabBar.removeTab(index)
+                    Filter.tabIDs.splice(index,1)
+                }
+            }
+
             onDataChanged: {
-                for (s in data) {
-                    if (!Filter.isCurrentList(data[s].id)) {
-                        for (i in data[s]) {
-                            if (i != "smart" && i != "filter" && i != "id" && i != "name") {
-                                tasks.disconnectSource("Task:"+i)
-                            }
+                    var id = source.slice(5)
+                    var index = Filter.tabIDs.indexOf(id)
+                    tabBar.removeTab(index)
+                    if (plasmoid.readConfig("hideEmptyLists")==false || Filter.isEmpty(id) == false) {
+                        tabBar.insertTab(index, lists.data[source].name)
+                        Filter.tabIDs[index==-1?(tabBar.count-1):index] = id
+
+                        if (tabBar.count == 1) {
+                            currentChanged(source)
+                            plasmoid.busy = false
                         }
-                    } else {
-                        for (i in data[s]) {
-                            if (i != "smart" && i != "filter" && i != "id" && i != "name" && tasks.connectedSources.indexOf("Task:"+i) == -1) {
-                                tasks.connectSource("Task:"+i)
-                            }
-                        }
+                    } else  {
+                        if (index != -1)
+                            Filter.tabIDs.splice(index,1)
                     }
+            }
+
+            function currentChanged(newList)
+            {
+                for (i in tasks.connectedSources)
+                    tasks.disconnectSource(tasks.connectedSources[0])
+
+                for (i in data[newList]) {
+                    if (i != "smart" && i != "filter" && i != "id" && i != "name")
+                        tasks.connectSource("Task:"+i)
                 }
             }
         }
@@ -96,7 +107,7 @@ QGraphicsWidget {
     }
 
     Component.onCompleted: {
-        var authService = source.serviceForSource("Auth")
+        var authService = sources.serviceForSource("Auth")
 
         var token = plasmoid.readConfig("token")
         if (token=="") {
@@ -106,7 +117,6 @@ QGraphicsWidget {
             var cg = authService.operationDescription("AuthWithToken")
             cg.token=token
             authService.startOperationCall(cg)
-            tabBar.addTab("Loading...")
             plasmoid.busy = true
         }
     }
@@ -116,6 +126,8 @@ QGraphicsWidget {
             x: 2; width: parent.width - x*2
             anchors.topMargin : main
             tabBarShown: true
+
+            onCurrentChanged: lists.currentChanged("List:"+Filter.tabIDs[currentIndex])
     }
 
 //---------------------------------------------------------------Todo-List-------------------------------------
@@ -150,6 +162,10 @@ QGraphicsWidget {
                         id: bgMouse
                         anchors.fill: parent
                         hoverEnabled: true
+
+                        onClicked: {
+                            taskEditor.showEditor(id)
+                        }
                     }
                 }
             }
@@ -157,9 +173,9 @@ QGraphicsWidget {
 
         ListView {
             anchors.fill: parent
-            //model: ListModel { id:todoList }
             model: PlasmaCore.DataModel {
                 dataSource: tasks
+                id: todoList
             }
             delegate: contactDelegate
             focus: true
