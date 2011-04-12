@@ -38,17 +38,17 @@ QGraphicsWidget {
             connectedSources: ["Lists","Auth"]
             interval: 30000
 
-            onDataChanged: {
-                switch (source) {
+            onNewData: {
+                switch (sourceName) {
                 case "Auth":
-                    if ( data["Auth"]["ValidToken"]) {
+                    if ( data["ValidToken"]) {
                         authMessage.opacity=0
-                        plasmoid.writeConfig("token", data["Auth"]["Token"])
+                        plasmoid.writeConfig("token", data["Token"])
                     }
                     break
 
                 case "Lists":
-                    for (i in data["Lists"]) {
+                    for (i in data) {
                         lists.connectSource("List:"+i)
                     }
                     break
@@ -69,16 +69,16 @@ QGraphicsWidget {
                 }
             }
 
-            onDataChanged: {
-                    var id = source.slice(5)
+            onNewData: {
+                    var id = sourceName.slice(5)
                     var index = Filter.tabIDs.indexOf(id)
                     tabBar.removeTab(index)
                     if (plasmoid.readConfig("hideEmptyLists")==false || Filter.isEmpty(id) == false) {
-                        tabBar.insertTab(index, lists.data[source].name)
+                        tabBar.insertTab(index, data.name)
                         Filter.tabIDs[index==-1?(tabBar.count-1):index] = id
 
                         if (tabBar.count == 1) {
-                            currentChanged(source)
+                            currentChanged(sourceName)
                             plasmoid.busy = false
                         }
                     } else  {
@@ -204,9 +204,24 @@ QGraphicsWidget {
 
 //---------------------------------------------------------------Task-Editor-------------------------------------
     Rectangle {
-        x: 2; y: 50
-        width: page.width - x*2; height: page.height - y*2
-        anchors.bottom: page
+        id: taskEditor
+        anchors.fill: page
         opacity: 0
+        color: "#55aaaaaa"
+        property string task
+
+        Text {
+            color: "#ff000000"
+            text: "Name:"
+        }
+
+        PlasmaWidgets.LineEdit {
+            id: nameEdit
+        }
+
+        function showEditor(taskID) {
+            opacity=1
+            nameEdit.text = currentList.data[taskID].name
+        }
     }
 }
