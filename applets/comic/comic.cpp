@@ -665,7 +665,6 @@ void ComicApplet::configChanged()
     mSwitchTabs = cg.readEntry( "switchTabs", false );
     mTabView = cg.readEntry( "tabView", ShowText | ShowIcon );
     mSavingDir = cg.readEntry( "savingDir", QString() );
-    mOldSource = mComicIdentifier + ':' + mStoredIdentifierSuffix;
 
     globalComicUpdater->load();
 }
@@ -865,7 +864,6 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     mReloadTimer->stop();
 
     mEngine = dataEngine( "comic" );
-
     setConfigurationRequired( mComicIdentifier.isEmpty() );
     if ( !mComicIdentifier.isEmpty() && mEngine && mEngine->isValid() ) {
 
@@ -882,7 +880,6 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
             mEngine->disconnectSource( mOldSource, this );
         }
         mOldSource = identifier;
-
         mEngine->disconnectSource( identifier, this );
         mEngine->connectSource( identifier, this );
         const Plasma::DataEngine::Data data = mEngine->query( identifier );

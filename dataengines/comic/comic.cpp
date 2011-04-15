@@ -183,10 +183,6 @@ void ComicEngine::finished( ComicProvider *provider )
     setComicData( provider );
     if ( provider->image().isNull() ) {
         error( provider );
-        const QString key = m_jobs.key(provider);
-        if (!key.isEmpty()) {
-            m_jobs.remove(key);
-        }
         return;
     }
 
@@ -272,6 +268,11 @@ void ComicEngine::error( ComicProvider *provider )
         setData( identifier, QLatin1String( "Previous identifier suffix" ), lastCachedId );
     }
     setData( identifier, QLatin1String( "Next identifier suffix" ), QString() );
+
+    const QString key = m_jobs.key(provider);
+    if (!key.isEmpty()) {
+        m_jobs.remove(key);
+    }
 
     provider->deleteLater();
 }
