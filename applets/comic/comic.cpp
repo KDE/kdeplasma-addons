@@ -655,9 +655,6 @@ void ComicApplet::configChanged()
     mSwitchTabs = cg.readEntry( "switchTabs", false );
     mTabView = cg.readEntry( "tabView", ShowText | ShowIcon );
     mSavingDir = cg.readEntry( "savingDir", QString() );
-    mOldSource = mComicIdentifier + ':' + mStoredIdentifierSuffix;
-
-    
 }
 
 void ComicApplet::saveConfig()
