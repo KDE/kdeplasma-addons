@@ -289,3 +289,4 @@ void KGraphicsWebSlice::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 }
 
 #include "kgraphicswebslice.moc"
+
