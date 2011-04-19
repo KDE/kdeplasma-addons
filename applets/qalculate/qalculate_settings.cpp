@@ -27,6 +27,7 @@
 #include <QCheckBox>
 #include <QSpinBox>
 #include <QLabel>
+#include <QGroupBox>
 
 #include <KComboBox>
 
@@ -59,6 +60,10 @@ void QalculateSettings::readSettings()
     m_base = cfg.readEntry("base", 10);
     m_baseDisplay = cfg.readEntry("baseDisplay", 10);
     m_minExp = cfg.readEntry("minExp", 0);
+    m_showBinary = cfg.readEntry("showBinary", false);
+    m_showOctal = cfg.readEntry("showOctal", false);
+    m_showDecimal = cfg.readEntry("showDecimal", false);
+    m_showHexadecimal = cfg.readEntry("showHexadecimal", false);
 }
 
 void QalculateSettings::writeSettings()
@@ -82,6 +87,10 @@ void QalculateSettings::writeSettings()
     cfg.writeEntry("base", m_baseSpin->value());
     cfg.writeEntry("baseDisplay", m_baseDisplaySpin->value());
     cfg.writeEntry("minExp", m_minExpCombo->currentIndex());
+    cfg.writeEntry("showBinary", m_showBinaryCheck->checkState() == Qt::Checked);
+    cfg.writeEntry("showOctal", m_showOctalCheck->checkState() == Qt::Checked);
+    cfg.writeEntry("showDecimal", m_showDecimalCheck->checkState() == Qt::Checked);
+    cfg.writeEntry("showHexadecimal", m_showHexadecimalCheck->checkState() == Qt::Checked);
 }
 
 void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
@@ -188,6 +197,27 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     m_negativeExponentsCheck->setCheckState(m_negativeExponents ? Qt::Checked : Qt::Unchecked);
     connect(m_negativeExponentsCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     
+    QGroupBox *showBasesBox = new QGroupBox(i18n("Show integers also in base:"), printPage);
+    QGridLayout *layoutBases = new QGridLayout(showBasesBox);
+
+    m_showBinaryCheck = new QCheckBox(i18n("Binary"), printPage);
+    m_showBinaryCheck->setCheckState(m_showBinary ? Qt::Checked : Qt::Unchecked);
+    connect(m_showBinaryCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    m_showOctalCheck = new QCheckBox(i18n("Octal"), printPage);
+    m_showOctalCheck->setCheckState(m_showOctal ? Qt::Checked : Qt::Unchecked);
+    connect(m_showOctalCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    m_showDecimalCheck = new QCheckBox(i18n("Decimal"), printPage);
+    m_showDecimalCheck->setCheckState(m_showDecimal ? Qt::Checked : Qt::Unchecked);
+    connect(m_showDecimalCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    m_showHexadecimalCheck = new QCheckBox(i18n("Hexadecimal"), printPage);
+    m_showHexadecimalCheck->setCheckState(m_showHexadecimal ? Qt::Checked : Qt::Unchecked);
+    connect(m_showHexadecimalCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+
+    layoutBases->addWidget(m_showBinaryCheck, 0, 0);
+    layoutBases->addWidget(m_showOctalCheck, 1, 0);
+    layoutBases->addWidget(m_showDecimalCheck, 2, 0);
+    layoutBases->addWidget(m_showHexadecimalCheck, 3, 0);
+
     printLayout->addRow(i18n("Number fraction format:"), m_fractionCombo);
     printLayout->addRow(i18n("Numerical display:"), m_minExpCombo);
 
@@ -195,6 +225,7 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     printLayout->addRow(m_allPrefixesCheck);
     printLayout->addRow(m_denominatorPrefixCheck);
     printLayout->addRow(m_negativeExponentsCheck);
+    printLayout->addRow(showBasesBox);
 
     m_configDialog->addPage(printPage, i18nc("Print", "Print Settings"), m_applet->icon());
 

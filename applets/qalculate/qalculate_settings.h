@@ -127,6 +127,22 @@ public:
         return m_minExp;
     }
 
+    bool showBinary() const {
+      return m_showBinary;
+    }
+    bool showOctal() const {
+      return m_showOctal;
+    }
+    bool showDecimal() const {
+      return m_showDecimal;
+    }
+    bool showHexadecimal() const {
+      return m_showHexadecimal;
+    }
+    bool showOtherBases() const {
+      return m_showBinary || m_showOctal || m_showDecimal || m_showHexadecimal;
+    }
+
 public slots:
     void readSettings();
     void writeSettings();
@@ -151,6 +167,7 @@ private:
     bool m_rpn;
     bool m_preserveFormat;
     bool m_liveEvaluation;
+    bool m_showBinary, m_showOctal, m_showDecimal, m_showHexadecimal;
     int m_structuring;
     int m_fractionDisplay;
     int m_angleUnit;
@@ -163,6 +180,7 @@ private:
     QCheckBox *m_copyToClipboardCheck, *m_resultsInlineCheck, *m_liveEvaluationCheck;
     KComboBox *m_structuringCombo, *m_fractionCombo, *m_angleUnitCombo, *m_minExpCombo;
     QSpinBox *m_baseSpin, *m_baseDisplaySpin;
+    QCheckBox *m_showBinaryCheck, *m_showOctalCheck, *m_showDecimalCheck, *m_showHexadecimalCheck;
 };
 
 #endif // QALCULATESETTINGS_H

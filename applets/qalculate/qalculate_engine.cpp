@@ -162,7 +162,7 @@ void QalculateEngine::evaluate(const QString& expression)
     m_lastResult = result.print(po).c_str();
     emit resultReady(m_lastResult);
 
-    QalculateLabels label;
+    QalculateLabels label(m_settings);
     emit formattedResultReady(label.drawStructure(result, po));
 }
 

@@ -18,6 +18,7 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 #include "qalculate_labels.h"
+#include "qalculate_settings.h"
 
 #include <string>
 using namespace std;
@@ -83,6 +84,39 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
                 mstr += "</sup>" TEXT_TAGS_SMALL_END;
             }
         }
+
+        if (m.number().isInteger() && ips.depth == 0 && m_qalculateSettings->showOtherBases())
+        {
+          mstr += TEXT_TAGS_XSMALL;
+          PrintOptions po2 = po;
+          if (m_qalculateSettings->showBinary() && po.base != 2)
+          {
+            po2.base = 2;
+            mstr += "<br>0b";
+            mstr += m.number().print(po2, ips_n).c_str();
+          }
+          if (m_qalculateSettings->showOctal() && po.base != 8)
+          {
+            po2.base = 8;
+            mstr += "<br>0o";
+            mstr += m.number().print(po2, ips_n).c_str();
+          }
+          if (m_qalculateSettings->showDecimal() && po.base != 10)
+          {
+            po2.base = 10;
+            po2.min_exp = EXP_NONE;
+            mstr += "<br>0d";
+            mstr += m.number().print(po2, ips_n).c_str();
+          }
+          if (m_qalculateSettings->showHexadecimal() && po.base != 16)
+          {
+            po2.base = 16;
+            mstr += "<br>0x";
+            mstr += m.number().print(po2, ips_n).c_str();
+          }
+          mstr += TEXT_TAGS_XSMALL_END;
+        }
+
         STR_MARKUP_END(mstr);
         break;
     }

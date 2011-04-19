@@ -29,12 +29,17 @@
 
 #include <QString>
 
+class QalculateSettings;
+
 class QalculateLabels
 {
 public:
+    QalculateLabels(const QalculateSettings* qalculateSettings):
+        m_qalculateSettings(qalculateSettings) {}
     QString drawStructure(MathStructure& m, const PrintOptions& po, InternalPrintStruct ips = top_ips);
 
 private:
+    const QalculateSettings *m_qalculateSettings;
     vector<MathStructure> result_parts;
     bool in_matrix;
 };
