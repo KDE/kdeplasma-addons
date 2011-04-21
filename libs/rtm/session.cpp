@@ -267,12 +267,15 @@ void RTM::Session::addTask(const QString& task, RTM::ListId listId)
 {
   if (!currentlyOnline())
     return;
+  
+  RTM::List* list = listFromId(listId);
 
   kDebug() << "Adding Task: " << task << "to list with id: " << listId;
   RTM::Request *newTask = request("rtm.tasks.add"); // auth token is done for us
   newTask->addArgument("name", task);
   newTask->addArgument("parse", "1");
-  newTask->addArgument("list_id", QString::number(listId));
+  if (list && !list->isSmart())
+    newTask->addArgument("list_id", QString::number(listId));
   newTask->addArgument("timeline", QString::number(getTimeline()));
   
   connectTaskRequest(newTask);
