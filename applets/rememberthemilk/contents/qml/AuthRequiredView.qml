@@ -17,13 +17,25 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-var tabIDs = new Array(); //FIXME: Would be much nicer to have it as a property of tabBar
+import Qt 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
-function isEmpty(id)
-{
-    for (i in lists.data["List:"+id]) {
-        if (i != "smart" && i != "filter" && i != "id" && i != "name")
-            return false
+QGraphicsWidget {
+    id: authMessage
+    width: page.width; height: page.height
+
+    PlasmaWidgets.PushButton {
+        text: "Authenticate"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+
+        onClicked: {
+            var authService = sources.serviceForSource("Auth")
+            var cg = authService.operationDescription("Login")
+            authService.startOperationCall(cg)
+            plasmoid.busy=true
+        }
     }
-    return true
 }
