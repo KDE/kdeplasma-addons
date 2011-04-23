@@ -211,14 +211,15 @@ void TaskItemDelegate::paintTask(QPainter* painter, const QStyleOptionViewItem &
   if (smallTasks && date.isValid() && date < QDate::currentDate()) {
     // Elide (text with dots like th...) if wider than view and draw
     font.setBold(true);
-    task = largerFM.elidedText(task, Qt::ElideRight, option.rect.width()-COLORTAB-3*MARGIN - QFontMetrics(font).width(due));
+    QFontMetrics boldLargerFM(font);
     due = due.append(" "); // So that we have a space after the date before the task name
+    task = largerFM.elidedText(task, Qt::ElideRight, option.rect.width()-COLORTAB-3*MARGIN - boldLargerFM.width(due));
     painter->setFont(font);
     painter->drawText(option.rect.topLeft()+QPoint(COLORTAB+MARGIN,largerFM.height()),due);
     
     font.setBold(false);
     painter->setFont(font);
-    painter->drawText(option.rect.topLeft()+QPoint(COLORTAB+3*MARGIN + largerFM.width(due),largerFM.height()),task);
+    painter->drawText(option.rect.topLeft()+QPoint(COLORTAB+3*MARGIN + boldLargerFM.width(due),boldLargerFM.height()),task);
   }
   else {
     // Elide (text with dots like th...) if wider than view and draw
