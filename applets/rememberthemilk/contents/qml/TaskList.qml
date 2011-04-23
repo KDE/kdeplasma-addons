@@ -85,16 +85,47 @@ QGraphicsWidget {
                         clip: true
                         text: '<b>'+name+'</b>'
                     }
+                    PlasmaWidgets.IconWidget {
+                        id:completeButton
+                        x:background.width-25
+                        anchors.verticalCenter: background.verticalCenter
+                        width:20
+                        opacity:0
+                        Component.onCompleted: setIcon("dialog-ok")
+                        onClicked: {
+                            var service = tasks.serviceForSource("Task:"+id)
+                            var cg = service.operationDescription("setCompleted")
+                            cg.completed = true
+                            service.startOperationCall(cg)
+                            lists.currentChanged("List:"+Filter.tabIDs[tabBar.currentIndex])
+                        }
+                    }
                     MouseArea {
                         id: bgMouse
-                        anchors.fill: background
-                        hoverEnabled: true
+                        width: background.width-20
+                        height: background.height
 
                         onClicked: {
                             mainView.currentIndex=1
                             taskEditor.load(id)
                         }
                     }
+                    MouseArea {
+                        id: bgHover
+                        anchors.fill: background
+                        hoverEnabled: true
+                        acceptedButtons: Qt.LeftButton & Qt.RightButton //FIXME: very ugly
+                    }
+                }
+                states: State {
+                    name: "hovered"; when: bgHover.containsMouse
+                    PropertyChanges { target: completeButton; opacity:1}
+                    PropertyChanges { target: taskText; width: background.width - x*2 - 20}
+                }
+
+                transitions: Transition {
+                    NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad }
+                    NumberAnimation { properties: "width"; easing.type: Easing.InOutQuad }
                 }
             }
         }
