@@ -96,7 +96,7 @@ Comment[zh_TW]=Remember The Milk 待辦清單小程式
 
 Type=Service
 ServiceTypes=Plasma/Applet
-Icon=basket
+Icon=view-pim-tasks
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=qml/main.qml
 X-KDE-PluginInfo-Author=Anton Kreuzkamp
