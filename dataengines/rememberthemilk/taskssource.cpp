@@ -59,7 +59,6 @@ void TasksSource::refresh()
 {
   if (!m_session->authenticated())
     return; // We can't do anything with a non-authenticated session
-  m_session->createTimeline(); // Allow us to get new information that people entered on the website or in another api
   m_session->refreshTasksFromServer();
 }
 
