@@ -30,8 +30,8 @@ QGraphicsWidget {
     function updateLists(data)
     {
         var index = Filter.tabIDs.indexOf(data.id)
-        tabBar.removeTab(index)
-        if (plasmoid.readConfig("hideEmptyLists")==false || Filter.isEmpty(data.id) == false) {
+
+        if (index == -1 && (plasmoid.readConfig("hideEmptyLists")==false || Filter.isEmpty(data.id) == false) ) { //New Item that is to be shown
             tabBar.insertTab(index, data.name)
             Filter.tabIDs[index==-1?(tabBar.count-1):index] = data.id
 
@@ -39,9 +39,11 @@ QGraphicsWidget {
                 lists.currentChanged("List:"+data.id)
                 plasmoid.busy = false
             }
-        } else  {
-            if (index != -1)
-                Filter.tabIDs.splice(index,1)
+        } else if (index != -1 && plasmoid.readConfig("hideEmptyLists")==true && Filter.isEmpty(data.id) == true)  { //Existing Item that is no longer to be shown
+            Filter.tabIDs.splice(index,1)
+            tabBar.removeTab(index)
+        } else if (index != -1) { //Existing Item that is still to be shown => just update the name
+            tabBar.setTabText(index,data.name)
         }
     }
 
