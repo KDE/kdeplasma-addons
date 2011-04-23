@@ -143,4 +143,19 @@ QGraphicsWidget {
             focus: true
         }
     }
+    PlasmaWidgets.LineEdit {
+        id: addTaskEdit
+        width: parent.width
+        anchors.bottom: parent.bottom
+        clickMessage: "Add Task..."
+        onReturnPressed: {
+            var service = tasks.serviceForSource("Tasks")
+            var cg = service.operationDescription("create")
+            cg.task = text
+            cg.listid = Filter.tabIDs[tabBar.currentIndex]
+            service.startOperationCall(cg)
+            lists.currentChanged("List:"+Filter.tabIDs[tabBar.currentIndex])
+            text=""
+        }
+    }
 }
