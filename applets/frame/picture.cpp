@@ -79,7 +79,7 @@ void Picture::setPicture(const KUrl &currentUrl)
 
     if (!m_currentUrl.isEmpty() && !m_currentUrl.isLocalFile()) {
         kDebug() << "Not a local file, downloading" << currentUrl;
-        m_job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::DefaultFlags );
+        m_job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::HideProgressInfo);
         connect(m_job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
         emit pictureLoaded(defaultPicture(i18n("Loading image...")));
     } else {
