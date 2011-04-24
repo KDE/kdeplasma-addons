@@ -40,7 +40,9 @@ QGraphicsWidget {
                 tagEdit.text += ","
         }
 
-        dateEdit.text = task.due
+//         dateEdit.text = task.due //FIXME: Cannot assign QDateTime to QString
+
+        priorityBox.currentIndex = task.priority -1
     }
 
     Grid {
@@ -91,6 +93,30 @@ QGraphicsWidget {
             height:30
             PlasmaWidgets.LineEdit { width:parent.width; id: dateEdit }
         }
+
+        Item {
+            width:100
+            height:30
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Priority:"
+            }
+        }
+        Item {
+            width:page.width - 120
+            height:30
+            PlasmaWidgets.ComboBox {
+                width:parent.width
+                id: priorityBox
+                Component.onCompleted: {
+                    addItem("Top Priority")
+                    addItem("Medium Priority")
+                    addItem("Low Priority")
+                    addItem("No Priority")
+                }
+            }
+        }
     }
 
     Row {
@@ -125,6 +151,14 @@ QGraphicsWidget {
                         cg.tags=tagEdit.text.split(",")
                         service.startOperationCall(cg)
                     }
+
+                    if (task.priority != (priorityBox.currentIndex+1)) {
+                        var cg = service.operationDescription("setPriority")
+                        cg.priority = priorityBox.currentIndex +1
+                        service.startOperationCall(cg)
+                    }
+
+                    mainView.currentIndex=0
                 }
             }
         }
