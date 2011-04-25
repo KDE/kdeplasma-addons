@@ -215,7 +215,14 @@ void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos
         d->mImageUrl = url;
     }
 
-    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::Reload, KIO::HideProgressInfo );
+    KIO::StoredTransferJob *job;
+    if ( id == Image ) {
+        //use cached information for the image if available
+        job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+    } else {
+        //for webpages we always reload, making sure, that changes are recognised
+        job = KIO::storedGet( url, KIO::Reload, KIO::HideProgressInfo );
+    }
     job->setProperty( "uid", id );
     connect( job, SIGNAL( result( KJob* ) ), this, SLOT( jobDone( KJob* ) ) );
 
