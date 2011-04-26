@@ -117,7 +117,7 @@ void RTM::Task::setCompleted(bool completed) {
   request->sendRequest();
 }
 void RTM::Task::setDeleted(bool deleted) {
-  if (isCompleted() == deleted)
+  if (isDeleted() == deleted)
     return;
 
   RTM::Request *request;
