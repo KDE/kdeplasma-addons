@@ -500,7 +500,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setUpdateIntervall( updateIntervall );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-    parent->addPage( mConfigWidget->comicSettings, i18n( "General" ), icon(), i18n( "Press the \"Get New Comics ...\" button to install comics." ) );
+    parent->addPage( mConfigWidget->comicSettings, i18n( "General" ), icon() );
     parent->addPage( mConfigWidget->appearanceSettings, i18n( "Appearance" ), "image" );
     parent->addPage( mConfigWidget->advancedSettings, i18n( "Advanced" ), "system-run" );
 
