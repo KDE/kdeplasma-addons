@@ -307,16 +307,6 @@ QTime ConfigWidget::tabSwitchTime() const
     return comicUi.timeEdit_tabs->time();
 }
 
-void ConfigWidget::setHideTabBar( bool hide )
-{
-   comicUi.checkBox_hideTabBar->setChecked( hide );
-}
-
-bool ConfigWidget::hideTabBar() const
-{
-    return comicUi.checkBox_hideTabBar->isChecked();
-}
-
 void ConfigWidget::setUseTabs( bool use )
 {
     comicUi.checkBox_useTabs->setChecked( use );

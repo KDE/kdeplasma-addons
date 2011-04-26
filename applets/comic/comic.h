@@ -238,7 +238,6 @@ class ComicApplet : public Plasma::PopupApplet
 
         //Tabs
         bool mUseTabs;
-        bool mShowTabBar;
         bool mTabAdded;
         bool mSwitchTabs;
         int mSwitchTabTime;

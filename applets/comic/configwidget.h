@@ -106,8 +106,6 @@ class ConfigWidget : public QWidget
         bool middleClick() const;
         void setTabSwitchTime( const QTime &time );
         QTime tabSwitchTime() const;
-        void setHideTabBar( bool hide );
-        bool hideTabBar() const;
         void setUseTabs( bool use );
         bool useTabs() const;
         void setSwitchTabs( bool switchTabs );

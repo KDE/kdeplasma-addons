@@ -443,12 +443,12 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
         mEngine->disconnectSource( source, this );
     }
 
-    setTabBarVisible( mShowTabBar && mUseTabs );
+    setTabBarVisible( mUseTabs && ( mTabIdentifier.count() > 1 ) );
     mLabelTop->setVisible( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() );
     mLabelId->setVisible( mShowComicIdentifier && !mLabelId->text().isEmpty() );
     mLabelUrl->setVisible( mShowComicUrl && !mLabelUrl->text().isEmpty() );
     const int spacing = ( mLabelTop->isVisible() ? 2 : 0 );
-    const int id = ( mShowTabBar && mUseTabs ? 1 : 0 );
+    const int id = ( mUseTabs ? 1 : 0 );
     mCentralLayout->setItemSpacing( id, spacing );
     if ( mLabelId->isVisible() || mLabelUrl->isVisible() ) {
         mBottomLayout->setContentsMargins( 0, 2, 0, 0 );
@@ -498,7 +498,6 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setMiddleClick( mMiddleClick );
     QTime time = QTime( mSwitchTabTime / 3600, ( mSwitchTabTime / 60 ) % 60, mSwitchTabTime % 60 );
     mConfigWidget->setTabSwitchTime( time );
-    mConfigWidget->setHideTabBar( !mShowTabBar );
     mConfigWidget->setUseTabs( mUseTabs );
     mConfigWidget->setSwitchTabs( mSwitchTabs );
     mConfigWidget->setTabView( mTabView - 1);//-1 because counting starts at 0, yet we use flags that start at 1
@@ -537,7 +536,6 @@ void ComicApplet::applyConfig()
     mMiddleClick = mConfigWidget->middleClick();
     const QTime time = mConfigWidget->tabSwitchTime();
     mSwitchTabTime = time.second() + time.minute() * 60 + time.hour() * 3600;
-    mShowTabBar = !mConfigWidget->hideTabBar();
     mUseTabs = mConfigWidget->useTabs();
     mSwitchTabs = mConfigWidget->switchTabs();
     mTabView = mConfigWidget->tabView() + 1;//+1 because counting starts at 0, yet we use flags that start at 1
@@ -660,7 +658,6 @@ void ComicApplet::configChanged()
     mLastSize = mMaxSize;
 
     mSwitchTabTime = cg.readEntry( "switchTabTime", 10 );// 10 seconds as default
-    mShowTabBar = cg.readEntry( "showTabBar", true );
     mUseTabs = cg.readEntry( "useTabs", false );
     mSwitchTabs = cg.readEntry( "switchTabs", false );
     mTabView = cg.readEntry( "tabView", ShowText | ShowIcon );
@@ -681,7 +678,6 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "switchTabTime", mSwitchTabTime );
-    cg.writeEntry( "showTabBar", mShowTabBar );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
     cg.writeEntry( "useTabs", mUseTabs );
     cg.writeEntry( "switchTabs", mSwitchTabs );
@@ -1029,32 +1025,6 @@ bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
                 mFrameAnim->start();
             }
 
-            break;
-        case QEvent::GraphicsSceneWheel:
-            {
-                slotStartTimer();
-                QGraphicsSceneWheelEvent *e = static_cast<QGraphicsSceneWheelEvent *>( event );
-                if ( mImageWidget->isUnderMouse() && ( e->modifiers() == Qt::ControlModifier ) ) {
-                    const QPointF eventPos = e->pos();
-                    const int numDegrees = e->delta() / 8;
-                    const int numSteps = numDegrees / 15;
-
-                    int index = mTabBar->currentIndex();
-                    int count = mTabBar->count();
-                    int newIndex = 0;
-
-                    if ( numSteps % count != 0 ) {
-                        if ( numSteps < 0 ) {
-                            newIndex = ( index - numSteps ) % count;
-                        } else if ( numSteps > 0 ) {
-                            newIndex = index - ( numSteps % count );
-                            newIndex = newIndex < 0 ? newIndex + count : newIndex;
-                        }
-                        mTabBar->setCurrentIndex( newIndex );
-                    }
-                    e->accept();
-                }
-            }
             break;
         case QEvent::GraphicsSceneMousePress:
             {
