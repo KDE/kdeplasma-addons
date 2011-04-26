@@ -73,6 +73,7 @@ Comment[sr@ijekavian]=Испоставља знакове на основу њи
 Comment[sr@ijekavianlatin]=Ispostavlja znakove na osnovu njihovih heksadekadnih kodova
 Comment[sr@latin]=Ispostavlja znakove na osnovu njihovih heksadekadnih kodova
 Comment[sv]=Skapar specialtecken från deras hexadecimala koder
+Comment[tr]=Onaltılık kodlardan özel karakterler oluştur
 Comment[uk]=Створення спеціальних символів за їхнім шістнадцятковим кодом
 Comment[x-test]=xxCreates special characters from their hexadecimal codesxx
 Comment[zh_CN]=从十六进制码创建特殊字符
