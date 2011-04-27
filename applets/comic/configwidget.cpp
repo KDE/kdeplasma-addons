@@ -117,8 +117,6 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
     comicUi.listView_comic->setModel( mProxyModel );
     comicUi.listView_comic->resizeColumnToContents( 0 );
 
-    connect(comicUi.updateIntervall, SIGNAL(valueChanged(int)), this, SLOT(slotUpdateIntervallChanged(int)));
-
     // "Apply" button connections
     connect(comicUi.pushButton_GHNS , SIGNAL(clicked(bool)), this , SIGNAL(enableApply()));
     connect(comicUi.checkBox_middle , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
