@@ -548,6 +548,10 @@ QVariant ComicProviderWrapper::nextIdentifier()
 void ComicProviderWrapper::setNextIdentifier( const QVariant &nextIdentifier )
 {
     mNextIdentifier = identifierFromScript( nextIdentifier );
+    if ( mNextIdentifier == mIdentifier ) {
+        mNextIdentifier.clear();
+        kWarning() << "Next identifier is the same as the current one, clearing next identifier.";
+    }
 }
 
 QVariant ComicProviderWrapper::previousIdentifier()
@@ -558,6 +562,10 @@ QVariant ComicProviderWrapper::previousIdentifier()
 void ComicProviderWrapper::setPreviousIdentifier( const QVariant &previousIdentifier )
 {
     mPreviousIdentifier = identifierFromScript( previousIdentifier );
+    if ( mPreviousIdentifier == mIdentifier ) {
+        mPreviousIdentifier.clear();
+        kWarning() << "Previous identifier is the same as the current one, clearing previous identifier.";
+    }
 }
 
 QVariant ComicProviderWrapper::firstIdentifier()
