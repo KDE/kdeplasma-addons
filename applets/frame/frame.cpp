@@ -114,7 +114,6 @@ void Frame::init()
     m_waitForResize.setInterval(200);
     
     configChanged();
-    initSlideShow();
     
     KConfigGroup cg = config();
     if (frameReceivedUrlArgs) {
@@ -191,6 +190,8 @@ void Frame::configChanged()
     m_potdProvider = cg.readEntry("potdProvider", QString());
     m_potd = cg.readEntry("potd", false);
     m_autoUpdateIntervall = cg.readEntry("autoupdate time", 0);
+
+    initSlideShow();
 }
 
 void Frame::slotOpenPicture()
