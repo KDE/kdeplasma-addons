@@ -122,6 +122,7 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
     // "Apply" button connections
     connect(comicUi.pushButton_GHNS , SIGNAL(clicked(bool)), this , SIGNAL(enableApply()));
     connect(comicUi.checkBox_middle , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(comicUi.updateIntervall, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_arrows, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_title, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_identifier, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
