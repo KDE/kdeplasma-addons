@@ -34,6 +34,7 @@
 #include <KDatePicker>
 #include <KDebug>
 #include <KFileDialog>
+#include <KGlobalSettings>
 #include <KIO/NetAccess>
 #include <knuminput.h>
 #include <KPushButton>
@@ -174,10 +175,6 @@ void ComicApplet::init()
     connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
-    mReloadTimer = new QTimer( this );
-    slotStartTimer();
-    connect( mReloadTimer, SIGNAL( timeout() ), this, SLOT( slotReload() ) );
-
     mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "Jump to &first Strip" ), this );
     mActions.append( mActionGoFirst );
     connect( mActionGoFirst, SIGNAL( triggered( bool ) ), this, SLOT( slotFirstDay() ) );
@@ -188,8 +185,6 @@ void ComicApplet::init()
 
     mActionGoJump = new QAction( KIcon( "go-jump" ), i18n( "Jump to Strip ..." ), this );
     mActions.append( mActionGoJump );
-    //stop the timer to avoid tab switching while interacting with the applet
-    connect( mActionGoJump, SIGNAL( triggered( bool ) ), mReloadTimer, SLOT( stop() ) );
     connect( mActionGoJump, SIGNAL( triggered( bool ) ), this, SLOT( slotGoJump() ) );
 
     if ( hasAuthorization( "LaunchApp" ) ) {
@@ -202,8 +197,6 @@ void ComicApplet::init()
     if ( hasAuthorization( "FileDialog" ) ) {
         QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
         mActions.append( action );
-        //stop the timer to avoid tab switching while interacting with the applet
-        connect( action, SIGNAL( triggered( bool ) ), mReloadTimer, SLOT( stop() ) );
         connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
     }
 
@@ -342,7 +335,6 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
     setBusy( false );
     setConfigurationRequired( false );
-    slotStartTimer();
 
     //there was an error, display information as image
     const bool hasError = data[ "Error" ].toBool();
@@ -443,12 +435,13 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
         mEngine->disconnectSource( source, this );
     }
 
-    setTabBarVisible( mUseTabs && ( mTabIdentifier.count() > 1 ) );
+    const bool tabsVisible = (mTabIdentifier.count() > 1);
+    setTabBarVisible( tabsVisible );
     mLabelTop->setVisible( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() );
     mLabelId->setVisible( mShowComicIdentifier && !mLabelId->text().isEmpty() );
     mLabelUrl->setVisible( mShowComicUrl && !mLabelUrl->text().isEmpty() );
     const int spacing = ( mLabelTop->isVisible() ? 2 : 0 );
-    const int id = ( mUseTabs ? 1 : 0 );
+    const int id = ( tabsVisible ? 1 : 0 );
     mCentralLayout->setItemSpacing( id, spacing );
     if ( mLabelId->isVisible() || mLabelUrl->isVisible() ) {
         mBottomLayout->setContentsMargins( 0, 2, 0, 0 );
@@ -485,9 +478,6 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 {
-    //to not have tab switches while configurating things
-    mReloadTimer->stop();
-
     mConfigWidget = new ConfigWidget( dataEngine( "comic" ), mModel, mTabIdentifier, mProxy, parent );
     mConfigWidget->setShowComicUrl( mShowComicUrl );
     mConfigWidget->setShowComicAuthor( mShowComicAuthor );
@@ -496,10 +486,6 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setShowErrorPicture( mShowErrorPicture );
     mConfigWidget->setArrowsOnHover( mArrowsOnHover );
     mConfigWidget->setMiddleClick( mMiddleClick );
-    QTime time = QTime( mSwitchTabTime / 3600, ( mSwitchTabTime / 60 ) % 60, mSwitchTabTime % 60 );
-    mConfigWidget->setTabSwitchTime( time );
-    mConfigWidget->setUseTabs( mUseTabs );
-    mConfigWidget->setSwitchTabs( mSwitchTabs );
     mConfigWidget->setTabView( mTabView - 1);//-1 because counting starts at 0, yet we use flags that start at 1
 
     //not storing this value, since other applets might have changed it inbetween
@@ -521,7 +507,6 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     connect( mConfigWidget, SIGNAL( maxSizeClicked() ), this, SLOT( slotShowMaxSize() ) );
     connect( parent, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
     connect( parent, SIGNAL( okClicked() ), this, SLOT( applyConfig() ) );
-    connect( parent, SIGNAL( finished() ), this, SLOT( slotStartTimer() ) );
     connect(mConfigWidget, SIGNAL(enableApply()), parent, SLOT(settingsModified()));
 }
 
@@ -534,10 +519,6 @@ void ComicApplet::applyConfig()
     mShowErrorPicture = mConfigWidget->showErrorPicture();
     mArrowsOnHover = mConfigWidget->arrowsOnHover();
     mMiddleClick = mConfigWidget->middleClick();
-    const QTime time = mConfigWidget->tabSwitchTime();
-    mSwitchTabTime = time.second() + time.minute() * 60 + time.hour() * 3600;
-    mUseTabs = mConfigWidget->useTabs();
-    mSwitchTabs = mConfigWidget->switchTabs();
     mTabView = mConfigWidget->tabView() + 1;//+1 because counting starts at 0, yet we use flags that start at 1
 
     //not storing this value, since other applets might have changed it inbetween
@@ -556,7 +537,6 @@ void ComicApplet::applyConfig()
     globalComicUpdater->applyConfig( mConfigWidget );
 
     updateUsedComics();
-    slotStartTimer();
     saveConfig();
     buttonBar();
 
@@ -657,9 +637,6 @@ void ComicApplet::configChanged()
     mMaxSize = cg.readEntry( "maxSize", tempMaxSize );
     mLastSize = mMaxSize;
 
-    mSwitchTabTime = cg.readEntry( "switchTabTime", 10 );// 10 seconds as default
-    mUseTabs = cg.readEntry( "useTabs", false );
-    mSwitchTabs = cg.readEntry( "switchTabs", false );
     mTabView = cg.readEntry( "tabView", ShowText | ShowIcon );
     mSavingDir = cg.readEntry( "savingDir", QString() );
 
@@ -677,10 +654,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "showErrorPicture", mShowErrorPicture );
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
-    cg.writeEntry( "switchTabTime", mSwitchTabTime );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
-    cg.writeEntry( "useTabs", mUseTabs );
-    cg.writeEntry( "switchTabs", mSwitchTabs );
     cg.writeEntry( "tabView", mTabView );
     cg.writeEntry( "savingDir", mSavingDir );
 
@@ -734,15 +708,6 @@ void ComicApplet::slotReload()
     }
 }
 
-void ComicApplet::slotStartTimer()
-{
-    if ( mUseTabs && mSwitchTabTime && mSwitchTabs && mTabIdentifier.count() > 1 ) {
-        mReloadTimer->start( mSwitchTabTime * 1000 );
-    } else {
-        mReloadTimer->stop();
-    }
-}
-
 void ComicApplet::slotGoJump()
 {
     if ( mSuffixType == "Number" ) {
@@ -751,14 +716,12 @@ void ComicApplet::slotGoJump()
             updateComic( QString::number( pageDialog->getStripNumber() ) );
         }
         delete pageDialog;
-        slotStartTimer();
     } else if ( mSuffixType == "Date" ) {
         KDatePicker *calendar = new KDatePicker;
         calendar->setAttribute( Qt::WA_DeleteOnClose );//to have destroyed emitted upon closing
         calendar->setMinimumSize( calendar->sizeHint() );
         calendar->setDate( QDate::fromString( mCurrentIdentifierSuffix, "yyyy-MM-dd" ) );
 
-        connect( calendar, SIGNAL( destroyed( QObject* ) ), this, SLOT( slotStartTimer() ) );
         connect( calendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
         connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
         calendar->show();
@@ -856,9 +819,6 @@ QSizeF ComicApplet::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
 
 void ComicApplet::updateComic( const QString &identifierSuffix )
 {
-    //always stop the timer when changing the comic, as not all clicks are caught by mousePressEvent here
-    mReloadTimer->stop();
-
     mEngine = dataEngine( "comic" );
     setConfigurationRequired( mComicIdentifier.isEmpty() );
     if ( !mComicIdentifier.isEmpty() && mEngine && mEngine->isValid() ) {
@@ -886,7 +846,6 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     } else {
         kError() << "Either no identifier was specified or the engine could not be created:" << "id" << mComicIdentifier << "engine valid:" << ( mEngine && mEngine->isValid() );
         setConfigurationRequired( true );
-        slotStartTimer();
     }
 }
 
@@ -920,7 +879,6 @@ void ComicApplet::slotSaveComicAs()
     KTemporaryFile tempFile;
 
     if ( !tempFile.open() ) {
-        slotStartTimer();
         return;
     }
 
@@ -947,7 +905,6 @@ void ComicApplet::slotSaveComicAs()
 
     destUrl = KFileDialog::getSaveUrl( destUrl, "*.png" );
     if ( !destUrl.isValid() ) {
-        slotStartTimer();
         return;
     }
 
@@ -1001,8 +958,6 @@ void ComicApplet::slotSaveComicAs()
 #else
     KIO::NetAccess::file_copy( srcUrl, destUrl );
 #endif
-
-    slotStartTimer();
 }
 
 bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
@@ -1028,7 +983,6 @@ bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
             break;
         case QEvent::GraphicsSceneMousePress:
             {
-                slotStartTimer();
                 QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent *>( event );
                 if ( e->button() == Qt::LeftButton ) {
                     if ( mLabelUrl->isUnderMouse() ) {

@@ -138,7 +138,6 @@ class ComicApplet : public Plasma::PopupApplet
         void slotCurrentDay();
         void slotGoJump();
         void slotReload();
-        void slotStartTimer();
         void slotSaveComicAs();
         void slotScaleToContent();
         void slotShop();
@@ -205,7 +204,6 @@ class ComicApplet : public Plasma::PopupApplet
         bool mArrowsOnHover;
         bool mMiddleClick;
         QTimer *mDateChangedTimer;
-        QTimer *mReloadTimer;
         QList<QAction*> mActions;
         QGraphicsWidget *mMainWidget;
         QGraphicsLinearLayout *mCentralLayout;
@@ -237,10 +235,7 @@ class ComicApplet : public Plasma::PopupApplet
         ArrowWidget *mRightArrow;
 
         //Tabs
-        bool mUseTabs;
         bool mTabAdded;
-        bool mSwitchTabs;
-        int mSwitchTabTime;
         ComicTabBar *mTabBar;
         QStringList mTabIdentifier;
 

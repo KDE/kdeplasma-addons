@@ -108,7 +108,6 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
     comicSettings = new QWidget( this );
     comicUi.setupUi( comicSettings );
     comicUi.pushButton_GHNS->setIcon( KIcon( "get-hot-new-stuff" ) );
-    comicUi.pushButton_GHNS_2->setIcon( KIcon( "get-hot-new-stuff" ) );
 
     appearanceSettings = new QWidget();
     appearanceUi.setupUi( appearanceSettings );
@@ -119,32 +118,14 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
     connect( appearanceUi.pushButton_Size, SIGNAL( clicked() ), this, SIGNAL( maxSizeClicked() ) );
     connect( comicUi.pushButton_GHNS, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
 
-    comicUi.timeEdit_tabs->setMinimumTime( QTime( 0, 0, 10 ) );//minimum to 10 seconds
-
-    //initialize the comboBox
-    comicUi.comboBox_comic->setModel( mProxyModel );
-    comicUi.comboBox_comic->setModelColumn( 1 );
-    if ( mProxyModel->rowCount() && usedComics.count() ) {
-        //set the correct initial item of the comboBox if it is defined
-        const int index = comicUi.comboBox_comic->findData( usedComics.first() );
-        comicUi.comboBox_comic->setCurrentIndex( index );
-    }
-
     comicUi.listView_comic->setModel( mProxyModel );
     comicUi.listView_comic->resizeColumnToContents( 0 );
 
     connect(comicUi.updateIntervall, SIGNAL(valueChanged(int)), this, SLOT(slotUpdateIntervallChanged(int)));
-    connect(comicUi.updateIntervall_2, SIGNAL(valueChanged(int)), this, SLOT(slotUpdateIntervallChanged(int)));
-    connect( comicUi.checkBox_useTabs, SIGNAL( clicked( bool ) ), this, SLOT( slotListChosen() ) );
-    connect( comicUi.checkBox_useTabs_2, SIGNAL( clicked( bool ) ), this, SLOT( slotComboBoxChosen() ) );
-    connect(parent, SIGNAL(applyClicked()), this, SLOT(slotSave()));
-    connect(parent, SIGNAL(okClicked()), this, SLOT(slotSave()));
-    
+
     // "Apply" button connections
-    connect(comicUi.comboBox_comic , SIGNAL(currentIndexChanged(int)), this , SIGNAL(enableApply()));
     connect(comicUi.pushButton_GHNS , SIGNAL(clicked(bool)), this , SIGNAL(enableApply()));
     connect(comicUi.checkBox_middle , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
-    connect(comicUi.checkBox_useTabs , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_arrows, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_title, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_identifier, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
@@ -160,46 +141,10 @@ ConfigWidget::~ConfigWidget()
 {
 }
 
-void ConfigWidget::checkCurrentIndex()
-{
-    //set all items of mProxyModel to unchecked
-    for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
-        QModelIndex index = mProxyModel->index( i, 0 );
-        mProxyModel->setData( index, Qt::Unchecked, Qt::CheckStateRole );
-    }
-
-    //check the selected index
-    QModelIndex index = mProxyModel->index( comicUi.comboBox_comic->currentIndex(), 0 );
-    mProxyModel->setData( index, Qt::Checked, Qt::CheckStateRole );
-}
-
-
-void ConfigWidget::slotSave()
-{
-    //useTabs() is already handled in the proxy itself
-    if ( !useTabs() ) {
-        checkCurrentIndex();
-    }
-}
-
-
-void ConfigWidget::slotComboBoxChosen()
-{
-    comicUi.comboBox_comic->setCurrentIndex( 0 );
-}
-
-void ConfigWidget::slotListChosen()
-{
-    checkCurrentIndex();
-}
-
 void ConfigWidget::slotUpdateIntervallChanged( int newIntervall )
 {
     if ( comicUi.updateIntervall->value() != newIntervall ) {
         comicUi.updateIntervall->setValue( newIntervall );
-    }
-    if ( comicUi.updateIntervall_2->value() != newIntervall ) {
-        comicUi.updateIntervall_2->setValue( newIntervall );
     }
 }
 
@@ -218,10 +163,6 @@ void ConfigWidget::newStuffFinished()
         mModel->setComics( mEngine->query( "providers" ), mModel->selected() );
 
         comicUi.listView_comic->resizeColumnToContents( 0 );
-
-        if ( !useTabs() && mProxyModel->rowCount() ) {
-            comicUi.comboBox_comic->setCurrentIndex( 0 );
-        }
     }
 }
 
@@ -289,43 +230,11 @@ bool ConfigWidget::arrowsOnHover() const
 void ConfigWidget::setMiddleClick( bool checked )
 {
     comicUi.checkBox_middle->setChecked( checked );
-    comicUi.checkBox_middle_2->setChecked( checked );
 }
 
 bool ConfigWidget::middleClick() const
 {
     return comicUi.checkBox_middle->isChecked();
-}
-
-void ConfigWidget::setTabSwitchTime( const QTime &time )
-{
-    comicUi.timeEdit_tabs->setTime( time );
-}
-
-QTime ConfigWidget::tabSwitchTime() const
-{
-    return comicUi.timeEdit_tabs->time();
-}
-
-void ConfigWidget::setUseTabs( bool use )
-{
-    comicUi.checkBox_useTabs->setChecked( use );
-    comicUi.checkBox_useTabs_2->setChecked( use );
-}
-
-bool ConfigWidget::useTabs() const
-{
-    return comicUi.checkBox_useTabs->isChecked();
-}
-
-void ConfigWidget::setSwitchTabs( bool switchTabs )
-{
-    comicUi.checkBox_switchTabs->setChecked( switchTabs );
-}
-
-bool ConfigWidget::switchTabs() const
-{
-    return comicUi.checkBox_switchTabs->isChecked();
 }
 
 void ConfigWidget::setTabView(int tabView)
@@ -361,7 +270,6 @@ void ConfigWidget::setMaxComicLimit( int limit )
 void ConfigWidget::setAutoUpdates( bool activated )
 {
     comicUi.autoUpdates->setChecked( activated );
-    comicUi.autoUpdates_2->setChecked( activated );
 }
 
 bool ConfigWidget::autoUpdates() const

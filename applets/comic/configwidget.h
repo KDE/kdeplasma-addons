@@ -104,12 +104,6 @@ class ConfigWidget : public QWidget
         bool arrowsOnHover() const;
         void setMiddleClick( bool checked );
         bool middleClick() const;
-        void setTabSwitchTime( const QTime &time );
-        QTime tabSwitchTime() const;
-        void setUseTabs( bool use );
-        bool useTabs() const;
-        void setSwitchTabs( bool switchTabs );
-        bool switchTabs() const;
         void setTabView( int tabView );
         int tabView() const;
         bool useMaxComicLimit() const;
@@ -134,13 +128,7 @@ class ConfigWidget : public QWidget
         void newStuffFinished();
 
     private slots:
-        void slotComboBoxChosen();
-        void slotListChosen();
-        void slotSave();
         void slotUpdateIntervallChanged( int newIntervall );
-
-    private:
-        void checkCurrentIndex();
 
     private:
         Ui::ComicSettings comicUi;
