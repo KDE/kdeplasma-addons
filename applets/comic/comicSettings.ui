@@ -34,28 +34,6 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QLabel" name="label_5">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="toolTip">
-      <string>Choose a comic strip</string>
-     </property>
-     <property name="text">
-      <string>C&amp;omic:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>listView_comic</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
     <widget class="QTreeView" name="listView_comic">
      <property name="sizeIncrement">
       <size>
@@ -95,7 +73,7 @@
      </attribute>
     </widget>
    </item>
-   <item row="3" column="1">
+   <item row="2" column="1">
     <spacer name="verticalSpacer_4">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -111,7 +89,7 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="1">
+   <item row="3" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QPushButton" name="pushButton_GHNS">
@@ -138,7 +116,7 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="1">
+   <item row="4" column="1">
     <widget class="QCheckBox" name="checkBox_middle">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -154,7 +132,7 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="0" colspan="2">
+   <item row="6" column="0" colspan="2">
     <widget class="QLabel" name="label_13">
      <property name="font">
       <font>
@@ -163,11 +141,11 @@
       </font>
      </property>
      <property name="text">
-      <string>Update:</string>
+      <string>Update</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="1">
+   <item row="7" column="1">
     <layout class="QFormLayout" name="formLayout_4">
      <property name="fieldGrowthPolicy">
       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
@@ -203,7 +181,7 @@
      </item>
     </layout>
    </item>
-   <item row="6" column="0">
+   <item row="5" column="0">
     <spacer name="verticalSpacer_6">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
