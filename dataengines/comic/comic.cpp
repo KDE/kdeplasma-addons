@@ -82,8 +82,8 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
     } else if ( identifier.startsWith( QLatin1String( "setting_maxComicLimit:" ) ) ) {
         bool worked;
         const int maxComicLimit = identifier.mid( 22 ).toInt( &worked );
-        //wrong input sets it to the default (-1)
-        CachedProvider::setMaxComicLimit( worked ? maxComicLimit : -1 );
+        //wrong input sets it to the default (0)
+        CachedProvider::setMaxComicLimit( worked ? maxComicLimit : 0 );
         return worked;
     } else {
         if ( m_jobs.contains(identifier) ) {

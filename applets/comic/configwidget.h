@@ -106,8 +106,6 @@ class ConfigWidget : public QWidget
         bool middleClick() const;
         void setTabView( int tabView );
         int tabView() const;
-        bool useMaxComicLimit() const;
-        void setUseMaxComicLimit( bool use );
         int maxComicLimit() const;
         void setMaxComicLimit( int limit );
         void setAutoUpdates( bool activated );

@@ -166,9 +166,16 @@ void ComicApplet::init()
 
     //set maximum number of cached strips per comic, -1 means that there is no limit
     KConfigGroup global = globalConfig();
-    const bool useMaxComicLimit = global.readEntry( "useMaxComicLimit", false );
-    const int maxComicLimit = global.readEntry( "maxComicLimit", 7 );
-    mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( useMaxComicLimit ? maxComicLimit : -1 ) );
+    //convert old values
+    if ( global.hasKey( "useMaxComicLimit" ) ) {
+        const bool use = global.readEntry( "useMaxComicLimit", false );
+        if ( !use ) {
+            global.writeEntry( "maxComicLimit", 0 );
+        }
+        global.deleteEntry( "useMaxComicLimit" );
+    }
+    const int maxComicLimit = global.readEntry( "maxComicLimit", 0 );
+    mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ) );
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
@@ -490,9 +497,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 
     //not storing this value, since other applets might have changed it inbetween
     KConfigGroup global = globalConfig();
-    const bool useMaxComicLimit = global.readEntry( "useMaxComicLimit", false );
-    const int maxComicLimit = global.readEntry( "maxComicLimit", 7 );
-    mConfigWidget->setUseMaxComicLimit( useMaxComicLimit );
+    const int maxComicLimit = global.readEntry( "maxComicLimit", 0 );
     mConfigWidget->setMaxComicLimit( maxComicLimit );
     const bool updatesActivated = global.readEntry( "autoUpdates", false );
     const int updateIntervall = global.readEntry( "updateIntervall", 7 );
@@ -523,14 +528,11 @@ void ComicApplet::applyConfig()
 
     //not storing this value, since other applets might have changed it inbetween
     KConfigGroup global = globalConfig();
-    const bool oldUseMaxComicLimit = global.readEntry( "useMaxComicLimit", false );
-    const bool useMaxComicLimit = mConfigWidget->useMaxComicLimit();
-    const int oldMaxComicLimit = global.readEntry( "maxComicLimit", 7 );
+    const int oldMaxComicLimit = global.readEntry( "maxComicLimit", 0 );
     const int maxComicLimit = mConfigWidget->maxComicLimit();
-    if ( ( oldUseMaxComicLimit != useMaxComicLimit ) || ( oldMaxComicLimit != maxComicLimit ) ) {
-        global.writeEntry( "useMaxComicLimit", useMaxComicLimit );
+    if ( oldMaxComicLimit != maxComicLimit ) {
         global.writeEntry( "maxComicLimit", maxComicLimit );
-        mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( useMaxComicLimit ? maxComicLimit : -1 ) );
+        mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ) );
     }
 
 

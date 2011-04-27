@@ -227,9 +227,7 @@ bool CachedProvider::isTopToBottom() const
 int CachedProvider::maxComicLimit()
 {
     QSettings settings( identifierToPath( QLatin1String( "comic_settings.conf" ) ), QSettings::IniFormat );
-    bool worked;
-    const int maxComics = settings.value( QLatin1String( "maxComics" ), -1 ).toInt( &worked );
-    return ( worked ? maxComics : - 1 );
+    return  qMax( settings.value( QLatin1String( "maxComics" ), 0 ).toInt(), 0 );//old value was -1, thus use qMax
 }
 
 void CachedProvider::setMaxComicLimit( int limit )

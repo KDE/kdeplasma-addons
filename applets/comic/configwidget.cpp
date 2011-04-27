@@ -132,7 +132,6 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
     connect(appearanceUi.checkBox_author, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_url, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(appearanceUi.kbuttongroup, SIGNAL(changed(int)), this , SIGNAL(enableApply()));
-    connect(advancedUi.useMaxComicLimit, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(advancedUi.maxComicLimit, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
     connect(advancedUi.errorPicture, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
 }
@@ -245,16 +244,6 @@ void ConfigWidget::setTabView(int tabView)
 int ConfigWidget::tabView() const
 {
     return appearanceUi.kbuttongroup->selected();
-}
-
-bool ConfigWidget::useMaxComicLimit() const
-{
-    return advancedUi.useMaxComicLimit->isChecked();
-}
-
-void ConfigWidget::setUseMaxComicLimit( bool use )
-{
-    advancedUi.useMaxComicLimit->setChecked( use );
 }
 
 int ConfigWidget::maxComicLimit() const
