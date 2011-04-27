@@ -36,6 +36,7 @@ class ComicModel;
 class ConfigWidget;
 class FullViewWidget;
 class ImageWidget;
+class KJob;
 class QAction;
 class QGraphicsLayout;
 class QPropertyAnimation;
@@ -149,10 +150,13 @@ class ComicApplet : public Plasma::PopupApplet
         void buttonBar();
         void fullView();
         void updateSize();
+        void createComicBook();
+        void slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
+        void slotArchiveFinished( KJob *job );
 
     public slots:
         void configChanged();
-        
+
     protected:
         QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
         bool eventFilter( QObject *receiver, QEvent *event );

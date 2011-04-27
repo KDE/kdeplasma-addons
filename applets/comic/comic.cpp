@@ -20,6 +20,8 @@
  ***************************************************************************/
 
 #include "comic.h"
+#include "comicarchivedialog.h"
+#include "comicarchivejob.h"
 
 #include <QtCore/QPropertyAnimation>
 #include <QtCore/QTimer>
@@ -36,6 +38,8 @@
 #include <KFileDialog>
 #include <KGlobalSettings>
 #include <KIO/NetAccess>
+#include <KNotification>
+#include <kuiserverjobtracker.h>
 #include <knuminput.h>
 #include <KPushButton>
 #include <KRun>
@@ -205,6 +209,12 @@ void ComicApplet::init()
         QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
         mActions.append( action );
         connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
+    }
+
+    if ( hasAuthorization( "FileDialog" ) ) {
+        QAction *action = new QAction( KIcon( "application-epub+zip" ), i18n( "&Create Comic Book Archive..." ), this );
+        mActions.append( action );
+        connect( action, SIGNAL(triggered(bool)), this, SLOT(createComicBook()) );
     }
 
     mActionScaleContent = new QAction( KIcon( "zoom-original" ), i18nc( "@option:check Context menu of comic image", "&Actual Size" ), this );
@@ -796,6 +806,37 @@ void ComicApplet::updateSize()
         emit appletTransformedItself();
     }
     mImageWidget->update();
+}
+
+void ComicApplet::createComicBook()
+{
+    ComicArchiveDialog *dialog = new ComicArchiveDialog( mComicIdentifier, mComicTitle, mSuffixType, mCurrentIdentifierSuffix, mFirstIdentifierSuffix );
+    dialog->setAttribute( Qt::WA_DeleteOnClose );//to have destroyed emitted upon closing
+    connect( dialog, SIGNAL(archive(int,KUrl,QString,QString)), this, SLOT(slotArchive(int,KUrl,QString,QString)) );
+    dialog->show();
+}
+
+void ComicApplet::slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier )
+{
+    kDebug() << "Archiving:" << mComicIdentifier <<  archiveType << dest << fromIdentifier << toIdentifier;
+    ComicArchiveJob *job = new ComicArchiveJob( dest, mEngine, static_cast< ComicArchiveJob::ArchiveType >( archiveType ), mComicIdentifier, this );
+    job->setFromIdentifier( mComicIdentifier + ':' + fromIdentifier );
+    job->setToIdentifier( mComicIdentifier + ':' + toIdentifier );
+    if ( job->isValid() ) {
+        connect( job, SIGNAL(finished(KJob*)), this, SLOT(slotArchiveFinished(KJob*)) );
+        KIO::getJobTracker()->registerJob( job );
+        job->start();
+    } else {
+        kWarning() << "Archiving job is not valid.";
+        delete job;
+    }
+}
+
+void ComicApplet::slotArchiveFinished (KJob *job )
+{
+    if ( job->error() ) {
+        KNotification::event( KNotification::Warning, i18n( "Archiving comic failed" ), job->errorText(), KIcon( "dialog-warning" ).pixmap( KIconLoader::SizeMedium ) );
+    }
 }
 
 QList<QAction*> ComicApplet::contextualActions()

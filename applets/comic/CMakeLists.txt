@@ -6,13 +6,17 @@ set(comic_SRCS
     configwidget.cpp
     fullviewwidget.cpp
     imagewidget.cpp
-    arrowwidget.cpp)
+    arrowwidget.cpp
+    comicarchivejob.cpp
+    comicarchivedialog.cpp
+)
 
 kde4_add_ui_files(comic_SRCS
                   comicSettings.ui
                   appearanceSettings.ui
                   advancedsettings.ui
-                 )
+                  comicarchivedialog.ui
+)
 
 kde4_add_plugin(plasma_applet_comic ${comic_SRCS})
 target_link_libraries(plasma_applet_comic ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS} ${KDE4_SOLID_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KNEWSTUFF3_LIBS} )
