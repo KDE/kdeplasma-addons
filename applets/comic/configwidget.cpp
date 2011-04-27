@@ -31,8 +31,7 @@
 ComicUpdater::ComicUpdater( QObject *parent )
   : QObject( parent ),
     mDownloadManager( 0 ),
-    mUpdatesActivated( false ),
-    mUpdateIntervall( 7 ),
+    mUpdateIntervall( 0 ),
     m_updateTimer( 0 )
 {
 }
@@ -49,9 +48,8 @@ void ComicUpdater::init(const KConfigGroup &group)
 void ComicUpdater::load()
 {
     //check when the last update happened and update if necessary
-    mUpdatesActivated = mGroup.readEntry( "autoUpdates", false );
-    if ( mUpdatesActivated ) {
-        mUpdateIntervall = mGroup.readEntry( "updateIntervall", 7 );
+    mUpdateIntervall = mGroup.readEntry( "updateIntervall", 0 );
+    if ( mUpdateIntervall ) {
         mLastUpdate = mGroup.readEntry( "lastUpdate", QDateTime() );
         checkForUpdate();
     }
@@ -59,13 +57,11 @@ void ComicUpdater::load()
 
 void ComicUpdater::save()
 {
-    mGroup.writeEntry( "autoUpdates", mUpdatesActivated );
     mGroup.writeEntry( "updateIntervall", mUpdateIntervall );
 }
 
 void ComicUpdater::applyConfig( ConfigWidget *widget )
 {
-    mUpdatesActivated = widget->autoUpdates();
     mUpdateIntervall = widget->updateIntervall();
 }
 
@@ -138,13 +134,6 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const
 
 ConfigWidget::~ConfigWidget()
 {
-}
-
-void ConfigWidget::slotUpdateIntervallChanged( int newIntervall )
-{
-    if ( comicUi.updateIntervall->value() != newIntervall ) {
-        comicUi.updateIntervall->setValue( newIntervall );
-    }
 }
 
 void ConfigWidget::getNewStuff()
@@ -254,16 +243,6 @@ int ConfigWidget::maxComicLimit() const
 void ConfigWidget::setMaxComicLimit( int limit )
 {
     advancedUi.maxComicLimit->setValue( limit );
-}
-
-void ConfigWidget::setAutoUpdates( bool activated )
-{
-    comicUi.autoUpdates->setChecked( activated );
-}
-
-bool ConfigWidget::autoUpdates() const
-{
-    return comicUi.autoUpdates->isChecked();
 }
 
 void ConfigWidget::setUpdateIntervall( int days )

@@ -169,27 +169,23 @@
    </item>
    <item row="8" column="1">
     <layout class="QFormLayout" name="formLayout_4">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="label_14">
        <property name="text">
-        <string>Automatically update comics:</string>
+        <string>Automatically update comic plugins:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QCheckBox" name="autoUpdates">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
       <widget class="KIntNumInput" name="updateIntervall">
-       <property name="enabled">
-        <bool>false</bool>
+       <property name="value">
+        <number>0</number>
        </property>
        <property name="minimum">
-        <number>1</number>
+        <number>0</number>
        </property>
        <property name="maximum">
         <number>120</number>
@@ -201,7 +197,7 @@
         <string>every </string>
        </property>
        <property name="specialValueText">
-        <string>daily</string>
+        <string>never</string>
        </property>
       </widget>
      </item>
@@ -236,22 +232,5 @@
   <tabstop>pushButton_GHNS</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>autoUpdates</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>updateIntervall</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>354</x>
-     <y>243</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>354</x>
-     <y>268</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

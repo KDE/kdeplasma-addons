@@ -499,9 +499,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     KConfigGroup global = globalConfig();
     const int maxComicLimit = global.readEntry( "maxComicLimit", 0 );
     mConfigWidget->setMaxComicLimit( maxComicLimit );
-    const bool updatesActivated = global.readEntry( "autoUpdates", false );
-    const int updateIntervall = global.readEntry( "updateIntervall", 7 );
-    mConfigWidget->setAutoUpdates( updatesActivated );
+    const int updateIntervall = global.readEntry( "updateIntervall", 0 );
     mConfigWidget->setUpdateIntervall( updateIntervall );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );

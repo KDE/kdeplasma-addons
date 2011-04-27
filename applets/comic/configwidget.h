@@ -76,7 +76,6 @@ class ComicUpdater : public QObject
     private:
         KNS3::DownloadManager *mDownloadManager;
         KConfigGroup mGroup;
-        bool mUpdatesActivated;
         int mUpdateIntervall;
         QDateTime mLastUpdate;
         QTimer *m_updateTimer;
@@ -108,8 +107,6 @@ class ConfigWidget : public QWidget
         int tabView() const;
         int maxComicLimit() const;
         void setMaxComicLimit( int limit );
-        void setAutoUpdates( bool activated );
-        bool autoUpdates() const;
         void setUpdateIntervall( int days );
         int updateIntervall() const;
 
@@ -124,9 +121,6 @@ class ConfigWidget : public QWidget
     protected slots:
         void getNewStuff();
         void newStuffFinished();
-
-    private slots:
-        void slotUpdateIntervallChanged( int newIntervall );
 
     private:
         Ui::ComicSettings comicUi;
