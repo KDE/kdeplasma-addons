@@ -31,7 +31,7 @@
 ComicUpdater::ComicUpdater( QObject *parent )
   : QObject( parent ),
     mDownloadManager( 0 ),
-    mUpdateIntervall( 0 ),
+    mUpdateIntervall( 3 ),
     m_updateTimer( 0 )
 {
 }
@@ -48,7 +48,7 @@ void ComicUpdater::init(const KConfigGroup &group)
 void ComicUpdater::load()
 {
     //check when the last update happened and update if necessary
-    mUpdateIntervall = mGroup.readEntry( "updateIntervall", 0 );
+    mUpdateIntervall = mGroup.readEntry( "updateIntervall", 3 );
     if ( mUpdateIntervall ) {
         mLastUpdate = mGroup.readEntry( "lastUpdate", QDateTime() );
         checkForUpdate();
