@@ -37,6 +37,7 @@
 #include <KDebug>
 #include <KFileDialog>
 #include <KGlobalSettings>
+#include <KInputDialog>
 #include <KIO/NetAccess>
 #include <KNotification>
 #include <kuiserverjobtracker.h>
@@ -445,6 +446,8 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
         mFirstStripNum[ mComicIdentifier ] = temp.toInt();
     } else if ( mComicType == Date && QDate::fromString( temp, "yyyy-MM-dd" ).isValid() ) {
         mShownIdentifierSuffix = mCurrentIdentifierSuffix;
+    } else if ( mComicType == String ) {
+        mShownIdentifierSuffix = mCurrentIdentifierSuffix;
     }
 
     mLabelTop->setText( tempTop );
@@ -743,6 +746,12 @@ void ComicApplet::slotGoJump()
         connect( calendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
         connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
         calendar->show();
+    } else if ( mComicType == String ) {
+        bool ok;
+        const QString suffix = KInputDialog::getText( i18n( "Go to Strip" ), i18n( "Strip identifier:" ), mCurrentIdentifierSuffix, &ok );
+        if ( ok ) {
+            updateComic( suffix );
+        }
     }
 }
 
@@ -920,7 +929,6 @@ void ComicApplet::updateContextMenu()
     if (mActionShop) {
         mActionShop->setEnabled( mShopUrl.isValid() );
     }
-    mActionGoJump->setEnabled( mComicType != String );
 }
 
 void ComicApplet::slotSaveComicAs()
