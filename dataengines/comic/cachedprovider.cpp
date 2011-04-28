@@ -176,7 +176,7 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
 
         const int limit = CachedProvider::maxComicLimit();
         //limit is on
-        if ( limit > - 1) {
+        if ( limit > 0 ) {
             kDebug() << QLatin1String( "MaxComicLimit on." );
             int comicsToRemove = comics.count() - limit;
             QStringList::iterator it = comics.begin();
