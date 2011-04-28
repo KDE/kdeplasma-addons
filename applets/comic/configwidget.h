@@ -86,7 +86,7 @@ class ConfigWidget : public QWidget
 {
         Q_OBJECT
     public:
-        ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const QStringList &usedComics, QSortFilterProxyModel *proxy, KConfigDialog *parent );
+        ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSortFilterProxyModel *proxy, KConfigDialog *parent );
         ~ConfigWidget();
 
         void setShowComicUrl( bool show );

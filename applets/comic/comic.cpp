@@ -507,7 +507,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 {
-    mConfigWidget = new ConfigWidget( dataEngine( "comic" ), mModel, mTabIdentifier, mProxy, parent );
+    mConfigWidget = new ConfigWidget( dataEngine( "comic" ), mModel, mProxy, parent );
     mConfigWidget->setShowComicUrl( mShowComicUrl );
     mConfigWidget->setShowComicAuthor( mShowComicAuthor );
     mConfigWidget->setShowComicTitle( mShowComicTitle );

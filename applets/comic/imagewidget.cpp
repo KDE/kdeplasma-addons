@@ -141,7 +141,6 @@ void ImageWidget::resetScrollBars()
 
 void ImageWidget::wheelEvent( QGraphicsSceneWheelEvent *event )
 {
-    const QPointF eventPos = event->pos();
     const int numDegrees = event->delta() / 8;
     const int numSteps = numDegrees / 15;
 

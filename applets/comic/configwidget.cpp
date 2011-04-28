@@ -98,7 +98,7 @@ KNS3::DownloadManager *ComicUpdater::downloadManager()
 }
 
 
-ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const QStringList &usedComics, QSortFilterProxyModel *proxy, KConfigDialog *parent )
+ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSortFilterProxyModel *proxy, KConfigDialog *parent )
     : QWidget( parent ), mEngine( engine ), mModel( model ), mProxyModel( proxy ), mNewStuffDialog( 0 )
 {
     comicSettings = new QWidget( this );
