@@ -36,16 +36,18 @@
 using namespace Nepomuk::Vocabulary;
 #endif
 
-ComicArchiveJob::ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, ComicArchiveJob::ArchiveType archiveType, const QString &pluginName, QObject *parent )
+ComicArchiveJob::ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, ComicArchiveJob::ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent )
   : KJob( parent ),
     mType( archiveType ),
     mDirection( Undefined ),
+    mIdentifierType( identifierType ),
     mSuspend( false ),
     mFindAmount( true ),
     mHasVariants( false ),
     mDone( false ),
     mComicNumber( 0 ),
     mProcessedFiles( 0 ),
+    mTotalFiles( -1 ),
     mEngine( engine ),
     mZipFile( new KTemporaryFile ),
     mZip( 0 ),
@@ -101,11 +103,15 @@ bool ComicArchiveJob::isValid() const
 void ComicArchiveJob::setToIdentifier( const QString &toIdentifier )
 {
     mToIdentifier = toIdentifier;
+    mToIdentifierSuffix = mToIdentifier;
+    mToIdentifierSuffix.remove( mPluginName + ':' );
 }
 
 void ComicArchiveJob::setFromIdentifier( const QString &fromIdentifier )
 {
     mFromIdentifier = fromIdentifier;
+    mFromIdentifierSuffix = mFromIdentifier;
+    mFromIdentifierSuffix.remove( mPluginName + ':' );
 }
 
 void ComicArchiveJob::start()
@@ -116,17 +122,17 @@ void ComicArchiveJob::start()
             break;
         case ArchiveStartTo:
             requestComic( mToIdentifier );
-            mToIdentifier.clear();
             break;
         case ArchiveEndTo: {
-            mDirection = Foward;
-            const QString temp = mToIdentifier;
-            mToIdentifier.clear();//as it should be the last comic anyway
-            requestComic( temp );
+            setFromIdentifier( mToIdentifier );
+            mToIdentifier.clear();
+            mToIdentifierSuffix.clear();
+            requestComic( suffixToIdentifier( QString() ) );
             break;
         }
         case ArchiveFromTo:
             mDirection = Foward;
+            defineTotalNumber();
             requestComic( mFromIdentifier );
             break;
     }
@@ -142,11 +148,9 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
         return;
     }
 
-    QString sourceSuffix;
-    const int index = source.indexOf( QLatin1Char( ':' ) );
-    if ( index + 1 != source.length() ) {
-        sourceSuffix = source.mid( index + 1 );
-    }
+    const QString currentIdentifier = data[ "Identifier" ].toString();
+    QString currentIdentifierSuffix = currentIdentifier;
+    currentIdentifierSuffix.remove( mPluginName + ':' );
 
     const QImage image = data[ "Image" ].value<QImage>();
     const bool hasError = data[ "Error" ].toBool() || image.isNull();
@@ -172,9 +176,26 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
     }
 
     if ( mDirection == Undefined ) {
-        mDirection = ( firstIdentifierSuffix.isEmpty() ? Backward : Foward );
-        if ( mDirection == Foward ) {
-            requestComic( suffixToIdentifier( firstIdentifierSuffix ) );
+        if ( ( mType == ArchiveAll ) || ( mType == ArchiveStartTo ) ) {
+            if ( !firstIdentifierSuffix.isEmpty() ) {
+                setFromIdentifier( suffixToIdentifier( firstIdentifierSuffix ) );
+            }
+            if ( mType == ArchiveAll ) {
+                setToIdentifier( currentIdentifier );
+            }
+            mDirection = ( firstIdentifierSuffix.isEmpty() ? Backward : Foward );
+            if ( mDirection == Foward ) {
+                requestComic( suffixToIdentifier( firstIdentifierSuffix ) );
+                return;
+            } else {
+                //backward, i.e. the to identifier is unknown
+                mToIdentifier.clear();
+                mToIdentifierSuffix.clear();
+            }
+        } else if ( mType == ArchiveEndTo ) {
+            mDirection = Foward;
+            setToIdentifier( currentIdentifier );
+            requestComic( mFromIdentifier );
             return;
         }
     }
@@ -189,7 +210,7 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
         worked = ( worked ? addFileToZip( tempFile.fileName() ) : worked );
 
         if ( worked ) {
-            if ( ( sourceSuffix == mToIdentifier ) || ( sourceSuffix == nextIdentifierSuffix) || nextIdentifierSuffix.isEmpty() ) {
+            if ( ( currentIdentifier == mToIdentifier ) || ( currentIdentifierSuffix == nextIdentifierSuffix) || nextIdentifierSuffix.isEmpty() ) {
                 kDebug() << "Done downloading at:" << source;
                 copyZipFileToDestination();
             } else {
@@ -204,7 +225,7 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
         worked = ( worked ? image.save( tempFile->fileName(), "PNG" ) : worked );
 
         if ( worked ) {
-            if ( ( sourceSuffix == mToIdentifier ) || ( sourceSuffix == previousIdentifierSuffix ) || previousIdentifierSuffix.isEmpty() ) {
+            if ( ( currentIdentifier == mToIdentifier ) || ( currentIdentifierSuffix == previousIdentifierSuffix ) || previousIdentifierSuffix.isEmpty() ) {
                 kDebug() << "Done downloading at:" << source;
                 createBackwardZip();
             } else {
@@ -213,7 +234,11 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
         }
     }
 
+    defineTotalNumber( currentIdentifierSuffix );
     setProcessedAmount( Files, mProcessedFiles );
+    if ( mTotalFiles != -1 ) {
+        setPercent( ( 100 * mProcessedFiles ) / mTotalFiles );
+    }
 
     if ( !worked ) {
         kError() << "Could not write the file, identifier:" << source;
@@ -242,6 +267,68 @@ bool ComicArchiveJob::doResume()
         requestComic( mRequest );
     }
     return true;
+}
+
+void ComicArchiveJob::defineTotalNumber( const QString &currentSuffix )
+{
+    findTotalNumberFromTo();
+    if ( mTotalFiles == -1 ) {
+        kDebug() << "Unable to find the total number for" << mPluginName;
+        return;
+    }
+
+    //calculate a new value for total files, can be different from the previous one,
+    //if there are no strips for certain days/numbers
+    if ( !currentSuffix.isEmpty() ) {
+        if ( mIdentifierType == Date ) {
+            const QDate current = QDate::fromString( currentSuffix, "yyyy-MM-dd" );
+            const QDate to = QDate::fromString( mToIdentifierSuffix, "yyyy-MM-dd" );
+            if ( current.isValid() && to.isValid() ) {
+                //processed files + files still to download
+                mTotalFiles = mProcessedFiles + qAbs( current.daysTo( to ) );
+            }
+        } else if ( mIdentifierType == Number ) {
+            bool result = true;
+            bool ok;
+            const int current = currentSuffix.toInt( &ok );
+            result = ( result && ok );
+            const int to = mToIdentifierSuffix.toInt( &ok );
+            result = ( result && ok );
+            if ( result ) {
+                //processed files + files still to download
+                mTotalFiles = mProcessedFiles + qAbs( to - current );
+            }
+        }
+    }
+
+    if ( mTotalFiles != -1 ) {
+        setTotalAmount( Files, mTotalFiles );
+    }
+}
+
+void ComicArchiveJob::findTotalNumberFromTo()
+{
+    if ( mTotalFiles != -1 ) {
+        return;
+    }
+
+    if ( mIdentifierType == Date ) {
+        const QDate from = QDate::fromString( mFromIdentifierSuffix, "yyyy-MM-dd" );
+        const QDate to = QDate::fromString( mToIdentifierSuffix, "yyyy-MM-dd" );
+        if ( from.isValid() && to.isValid() ) {
+            mTotalFiles = qAbs( from.daysTo( to ) ) + 1;
+        }
+    } else if ( mIdentifierType == Number ) {
+        bool result = true;
+        bool ok;
+        const int from = mFromIdentifierSuffix.toInt( &ok );
+        result = ( result && ok );
+        const int to = mToIdentifierSuffix.toInt( &ok );
+        result = ( result && ok );
+        if ( result ) {
+            mTotalFiles = qAbs( to - from ) + 1;
+        }
+    }
 }
 
 QString ComicArchiveJob::suffixToIdentifier( const QString &suffix ) const

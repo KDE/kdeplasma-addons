@@ -836,7 +836,7 @@ void ComicApplet::createComicBook()
 void ComicApplet::slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier )
 {
     kDebug() << "Archiving:" << mComicIdentifier <<  archiveType << dest << fromIdentifier << toIdentifier;
-    ComicArchiveJob *job = new ComicArchiveJob( dest, mEngine, static_cast< ComicArchiveJob::ArchiveType >( archiveType ), mComicIdentifier, this );
+    ComicArchiveJob *job = new ComicArchiveJob( dest, mEngine, static_cast< ComicArchiveJob::ArchiveType >( archiveType ), mComicType,  mComicIdentifier, this );
     job->setFromIdentifier( mComicIdentifier + ':' + fromIdentifier );
     job->setToIdentifier( mComicIdentifier + ':' + toIdentifier );
     if ( job->isValid() ) {

@@ -20,6 +20,8 @@
 #ifndef COMIC_ARCHIVE_JOB_H
 #define COMIC_ARCHIVE_JOB_H
 
+#include "comicinfo.h"
+
 #include <KIO/Job>
 #include <Plasma/DataEngine>
 
@@ -48,7 +50,7 @@ class ComicArchiveJob : public KJob
          * "garfield:2010-03-04", here "garfield" is the plugin name
          * @see setToIdentifier, setFromIdentifier
          */
-        ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, ArchiveType archiveType, const QString &pluginName, QObject *parent = 0 );
+        ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent = 0 );
         ~ComicArchiveJob();
 
         /**
@@ -79,6 +81,20 @@ class ComicArchiveJob : public KJob
         virtual bool doResume();
 
     private:
+        /**
+         * Sets the total number of comics to download.
+         * @param currentSuffix if empty the from and to identifier suffix will be used.
+         * If a currentSuffix is defined it will check if the total number is different
+         * e.g. not a comic defined for every day etc.
+         */
+        void defineTotalNumber( const QString &currentSuffix = QString() );
+
+        /**
+         * Sets mTotalFiles if that is -1 and it can calculate at total number
+         * base on the from and to identifier suffix
+         */
+        void findTotalNumberFromTo();
+
         QString suffixToIdentifier( const QString &suffix ) const;
         void requestComic( QString identifier );
         bool addFileToZip( const QString &path );
@@ -102,18 +118,22 @@ class ComicArchiveJob : public KJob
 
         ArchiveType mType;
         ArchiveDirection mDirection;
+        IdentifierType mIdentifierType;
         bool mSuspend;
         bool mFindAmount;
         bool mHasVariants;
         bool mDone;
         int mComicNumber;
         int mProcessedFiles;
+        int mTotalFiles;
         Plasma::DataEngine *mEngine;
         KTemporaryFile *mZipFile;
         KZip *mZip;
         QString mPluginName;
         QString mToIdentifier;
+        QString mToIdentifierSuffix;
         QString mFromIdentifier;
+        QString mFromIdentifierSuffix;
         QString mComicTitle;
         QString mRequest;
         const KUrl mDest;
