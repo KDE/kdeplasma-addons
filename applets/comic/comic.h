@@ -22,6 +22,8 @@
 #ifndef COMIC_H
 #define COMIC_H
 
+#include "comicinfo.h"
+
 #include <QtCore/QDate>
 #include <QtGui/QImage>
 
@@ -188,7 +190,7 @@ class ComicApplet : public Plasma::PopupApplet
         QString mComicTitle;
         QString mStripTitle;
         QString mAdditionalText;
-        QString mSuffixType;
+        IdentifierType mComicType;
         QString mShownIdentifierSuffix;
         QString mCurrentIdentifierSuffix;
         QString mStoredIdentifierSuffix;

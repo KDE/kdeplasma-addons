@@ -404,8 +404,16 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     mStripTitle = data[ "Strip title" ].toString();
     mComicAuthor = data[ "Comic Author" ].toString();
     mComicTitle = data[ "Title" ].toString();
-    mSuffixType = data[ "SuffixType" ].toString();
     mScaleComic = mActionScaleContent->isChecked();
+
+    const QString suffixType = data[ "SuffixType" ].toString();
+    if ( suffixType == "Date" ) {
+        mComicType = Date;
+    } else if ( suffixType == "Number" ) {
+        mComicType = Number;
+    } else {
+        mComicType = String;
+    }
 
     // get the text at top
     QString tempTop;
@@ -425,7 +433,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
     KConfigGroup cg = config();
     mShownIdentifierSuffix = "";
-    if ( mSuffixType == "Number" ) {
+    if ( mComicType == Number ) {
         mShownIdentifierSuffix = i18nc("an abbreviation for Number", "# %1", mCurrentIdentifierSuffix);
         int tempNum = mCurrentIdentifierSuffix.toInt();
         if ( mMaxStripNum[ mComicIdentifier ] < tempNum ) {
@@ -435,7 +443,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
         temp = mFirstIdentifierSuffix.remove( mComicIdentifier + ':' );
         mFirstStripNum[ mComicIdentifier ] = temp.toInt();
-    } else if ( mSuffixType == "Date" && QDate::fromString( temp, "yyyy-MM-dd" ).isValid() ) {
+    } else if ( mComicType == Date && QDate::fromString( temp, "yyyy-MM-dd" ).isValid() ) {
         mShownIdentifierSuffix = mCurrentIdentifierSuffix;
     }
 
@@ -673,7 +681,7 @@ void ComicApplet::saveConfig()
 
 void ComicApplet::slotChosenDay( const QDate &date )
 {
-    if ( mSuffixType == "Date" ) {
+    if ( mComicType == Date ) {
         if ( date <= mCurrentDay ) {
             QDate temp = QDate::fromString( mFirstIdentifierSuffix, "yyyy-MM-dd" );
             if ( temp.isValid() && date >= temp ) {
@@ -720,13 +728,13 @@ void ComicApplet::slotReload()
 
 void ComicApplet::slotGoJump()
 {
-    if ( mSuffixType == "Number" ) {
+    if ( mComicType == Number ) {
         QPointer<ChooseStripNumDialog> pageDialog = new ChooseStripNumDialog( 0, mCurrentIdentifierSuffix.toInt(), mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
         if ( pageDialog->exec() == QDialog::Accepted ) {
             updateComic( QString::number( pageDialog->getStripNumber() ) );
         }
         delete pageDialog;
-    } else if ( mSuffixType == "Date" ) {
+    } else if ( mComicType == Date ) {
         KDatePicker *calendar = new KDatePicker;
         calendar->setAttribute( Qt::WA_DeleteOnClose );//to have destroyed emitted upon closing
         calendar->setMinimumSize( calendar->sizeHint() );
@@ -810,7 +818,7 @@ void ComicApplet::updateSize()
 
 void ComicApplet::createComicBook()
 {
-    ComicArchiveDialog *dialog = new ComicArchiveDialog( mComicIdentifier, mComicTitle, mSuffixType, mCurrentIdentifierSuffix, mFirstIdentifierSuffix );
+    ComicArchiveDialog *dialog = new ComicArchiveDialog( mComicIdentifier, mComicTitle, mComicType, mCurrentIdentifierSuffix, mFirstIdentifierSuffix );
     dialog->setAttribute( Qt::WA_DeleteOnClose );//to have destroyed emitted upon closing
     connect( dialog, SIGNAL(archive(int,KUrl,QString,QString)), this, SLOT(slotArchive(int,KUrl,QString,QString)) );
     dialog->show();
@@ -912,7 +920,7 @@ void ComicApplet::updateContextMenu()
     if (mActionShop) {
         mActionShop->setEnabled( mShopUrl.isValid() );
     }
-    mActionGoJump->setEnabled( mSuffixType != "String" );
+    mActionGoJump->setEnabled( mComicType != String );
 }
 
 void ComicApplet::slotSaveComicAs()
@@ -964,7 +972,7 @@ void ComicApplet::slotSaveComicAs()
         if (!mAdditionalText.isEmpty() ) {
             res.setProperty(NIE::description(), mAdditionalText);
         }
-        if ((mSuffixType == "Date") && !mShownIdentifierSuffix.isEmpty()) {
+        if ( ( mComicType == Date ) && !mShownIdentifierSuffix.isEmpty() ) {
             res.setProperty(NIE::contentCreated(), QDateTime::fromString(mShownIdentifierSuffix, Qt::ISODate));
         }
         if (!mComicTitle.isEmpty()) {

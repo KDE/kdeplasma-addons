@@ -22,8 +22,9 @@
 
 #include <KFileDialog>
 
-ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString &comicName, const QString &identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, QWidget *parent )
+ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString &comicName, IdentifierType identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, QWidget *parent )
   : KDialog( parent ),
+    mIdentifierType( identifierType ),
     mPluginName( pluginName )
 {
     QWidget *widget = new QWidget(this);
@@ -31,46 +32,49 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
     setCaption( i18n( "Create %1 Comic Book Archive", comicName ) );
     setMainWidget( widget );
 
-    if ( identifierType == QLatin1String( "Date" ) ) {
-        mIdentifierType = Date;
+    switch ( mIdentifierType ) {
+        case Date: {
+            const QDate current = QDate::fromString( currentIdentifierSuffix, "yyyy-MM-dd" );
+            const QDate first = QDate::fromString( firstIdentifierSuffix, "yyyy-MM-dd" );
+            const QDate today = QDate::currentDate();
+            QDate maxDate = today;
+            if ( current.isValid() ) {
+                ui.fromDate->setDate( current );
+                ui.toDate->setDate( current );
+                maxDate = ( today > current ? today : current );
+            }
+            if ( first.isValid() ) {
+                ui.fromDate->setMinimumDate( first );
+                ui.toDate->setMinimumDate( first );
+            }
 
-        const QDate current = QDate::fromString( currentIdentifierSuffix, "yyyy-MM-dd" );
-        const QDate first = QDate::fromString( firstIdentifierSuffix, "yyyy-MM-dd" );
-        const QDate today = QDate::currentDate();
-        QDate maxDate = today;
-        if ( current.isValid() ) {
-            ui.fromDate->setDate( current );
-            ui.toDate->setDate( current );
-            maxDate = ( today > current ? today : current );
+            connect( ui.fromDate, SIGNAL(dateChanged(QDate)), this, SLOT(fromDateChanged(QDate)) );
+            connect( ui.toDate, SIGNAL(dateChanged(QDate)), this, SLOT(toDateChanged(QDate)) );
+            break;
         }
-        if ( first.isValid() ) {
-            ui.fromDate->setMinimumDate( first );
-            ui.toDate->setMinimumDate( first );
+        case Number: {
+            bool ok;
+            const int current = currentIdentifierSuffix.toInt( &ok );
+            if ( ok ) {
+                ui.fromNumber->setValue( current );
+                ui.toNumber->setValue( current );
+            }
+            const int first = firstIdentifierSuffix.toInt( &ok );
+            if ( ok ) {
+                ui.fromNumber->setMinimum( first );
+                ui.toNumber->setMinimum( first );
+            }
+            break;
         }
-
-        connect( ui.fromDate, SIGNAL(dateChanged(QDate)), this, SLOT(fromDateChanged(QDate)) );
-        connect( ui.toDate, SIGNAL(dateChanged(QDate)), this, SLOT(toDateChanged(QDate)) );
-    } else if ( identifierType == QLatin1String( "Number" ) ) {
-        mIdentifierType = Number;
-
-        bool ok;
-        const int current = currentIdentifierSuffix.toInt( &ok );
-        if ( ok ) {
-            ui.fromNumber->setValue( current );
-            ui.toNumber->setValue( current );
+        case String: {
+            ui.fromString->setText( currentIdentifierSuffix );
+            ui.toString->setText( currentIdentifierSuffix );
+            connect( ui.fromString, SIGNAL(textEdited(QString)), this, SLOT(updateOkButton()) );
+            connect( ui.toString, SIGNAL(textEdited(QString)), this, SLOT(updateOkButton()) );
+            break;
         }
-        const int first = firstIdentifierSuffix.toInt( &ok );
-        if ( ok ) {
-            ui.fromNumber->setMinimum( first );
-            ui.toNumber->setMinimum( first );
-        }
-    } else {
-        mIdentifierType = String;
-        ui.fromString->setText( currentIdentifierSuffix );
-        ui.toString->setText( currentIdentifierSuffix );
-        connect( ui.fromString, SIGNAL(textEdited(QString)), this, SLOT(updateOkButton()) );
-        connect( ui.toString, SIGNAL(textEdited(QString)), this, SLOT(updateOkButton()) );
     }
+
     ui.types->setCurrentIndex( mIdentifierType );
 
     archiveTypeChanged( ComicArchiveJob::ArchiveAll );
