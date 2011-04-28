@@ -1,5 +1,10 @@
 project(plasma-comic)
 
+if(HAVE_NEPOMUK)
+    add_definitions(-DHAVE_NEPOMUK)
+    add_definitions(-DDISABLE_NEPOMUK_LEGACY)
+endif(HAVE_NEPOMUK)
+
 set(comic_SRCS
     comic.cpp
     comicmodel.cpp
@@ -21,7 +26,6 @@ kde4_add_ui_files(comic_SRCS
 kde4_add_plugin(plasma_applet_comic ${comic_SRCS})
 target_link_libraries(plasma_applet_comic ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS} ${KDE4_SOLID_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KNEWSTUFF3_LIBS} )
 
-configure_file(config-nepomuk.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-nepomuk.h)
 if(HAVE_NEPOMUK)
   target_link_libraries(plasma_applet_comic ${NEPOMUK_LIBRARIES} ${NEPOMUK_UTILS_LIBRARIES} ${SOPRANO_LIBRARIES})
 endif(HAVE_NEPOMUK)

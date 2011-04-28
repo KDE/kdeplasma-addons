@@ -24,7 +24,6 @@
 #include <KTemporaryFile>
 #include <KZip>
 
-#include <config-nepomuk.h>
 #ifdef HAVE_NEPOMUK
 #include <Nepomuk/Resource>
 #include <Nepomuk/Tag>

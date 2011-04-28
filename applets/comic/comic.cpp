@@ -46,7 +46,6 @@
 #include <KRun>
 #include <KTemporaryFile>
 
-#include <config-nepomuk.h>
 #ifdef HAVE_NEPOMUK
 #include <Nepomuk/Resource>
 #include <Nepomuk/ResourceManager>
