@@ -200,7 +200,7 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
         }
     }
 
-    bool worked;
+    bool worked = false;
     ++mProcessedFiles;
     if ( mDirection == Foward ) {
         KTemporaryFile tempFile;
