@@ -72,7 +72,7 @@ using namespace Nepomuk::Vocabulary;
 #include "fullviewwidget.h"
 #include "imagewidget.h"
 
-K_GLOBAL_STATIC( ComicUpdater, globalComicUpdater );
+K_GLOBAL_STATIC( ComicUpdater, globalComicUpdater )
 
 //NOTE based on GotoPageDialog KDE/kdegraphics/okular/part.cpp
 //BEGIN choose a strip dialog
