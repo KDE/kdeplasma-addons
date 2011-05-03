@@ -28,6 +28,8 @@
 #include <kstandarddirs.h>
 #include <KUrl>
 
+const int CachedProvider::CACHE_DEFAULT = 20;
+
 static QString identifierToPath( const QString &identifier )
 {
     const QString dataDir = KStandardDirs::locateLocal( "data", QLatin1String( "plasma_engine_comic/" ));
@@ -227,11 +229,15 @@ bool CachedProvider::isTopToBottom() const
 int CachedProvider::maxComicLimit()
 {
     QSettings settings( identifierToPath( QLatin1String( "comic_settings.conf" ) ), QSettings::IniFormat );
-    return  qMax( settings.value( QLatin1String( "maxComics" ), 0 ).toInt(), 0 );//old value was -1, thus use qMax
+    return  qMax( settings.value( QLatin1String( "maxComics" ), CACHE_DEFAULT ).toInt(), 0 );//old value was -1, thus use qMax
 }
 
 void CachedProvider::setMaxComicLimit( int limit )
 {
+    if ( limit < 0 ) {
+        kDebug() << "Wrong limit, setting to default.";
+        limit = CACHE_DEFAULT;
+    }
     QSettings settings( identifierToPath( QLatin1String( "comic_settings.conf" ) ), QSettings::IniFormat );
     settings.setValue( QLatin1String( "maxComics" ), limit );
 }

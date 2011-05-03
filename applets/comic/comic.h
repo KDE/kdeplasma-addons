@@ -174,6 +174,7 @@ class ComicApplet : public Plasma::PopupApplet
         void setTabBarVisible( bool isVisible );//HACK what was in 4.4 does not seem to work anymore, so this was added
 
     private:
+        static const int CACHE_LIMIT;
         ComicModel *mModel;
         QSortFilterProxyModel *mProxy;
 

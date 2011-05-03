@@ -74,6 +74,8 @@ using namespace Nepomuk::Vocabulary;
 
 K_GLOBAL_STATIC( ComicUpdater, globalComicUpdater )
 
+const int ComicApplet::CACHE_LIMIT = 20;
+
 //NOTE based on GotoPageDialog KDE/kdegraphics/okular/part.cpp
 //BEGIN choose a strip dialog
 class ChooseStripNumDialog : public KDialog
@@ -179,7 +181,7 @@ void ComicApplet::init()
         }
         global.deleteEntry( "useMaxComicLimit" );
     }
-    const int maxComicLimit = global.readEntry( "maxComicLimit", 0 );
+    const int maxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
     mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ) );
 
     mCurrentDay = QDate::currentDate();
@@ -518,7 +520,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 
     //not storing this value, since other applets might have changed it inbetween
     KConfigGroup global = globalConfig();
-    const int maxComicLimit = global.readEntry( "maxComicLimit", 0 );
+    const int maxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
     mConfigWidget->setMaxComicLimit( maxComicLimit );
     const int updateIntervall = global.readEntry( "updateIntervall", 3 );
     mConfigWidget->setUpdateIntervall( updateIntervall );
@@ -547,7 +549,7 @@ void ComicApplet::applyConfig()
 
     //not storing this value, since other applets might have changed it inbetween
     KConfigGroup global = globalConfig();
-    const int oldMaxComicLimit = global.readEntry( "maxComicLimit", 0 );
+    const int oldMaxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
     const int maxComicLimit = mConfigWidget->maxComicLimit();
     if ( oldMaxComicLimit != maxComicLimit ) {
         global.writeEntry( "maxComicLimit", maxComicLimit );

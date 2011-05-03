@@ -160,6 +160,9 @@ class CachedProvider : public ComicProvider
 
     private Q_SLOTS:
         void triggerFinished();
+
+    private:
+        static const int CACHE_DEFAULT;
 };
 
 #endif
