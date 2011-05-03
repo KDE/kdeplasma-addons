@@ -26,6 +26,8 @@
 
 #include <lancelot/layouts/FullBorderLayout.h>
 
+#include "kineticscroll_p.h"
+
 namespace Lancelot
 {
 
@@ -118,7 +120,7 @@ ScrollPane::ScrollPane(QGraphicsItem * parent) //>
 
     setLayout(d->layout);
 
-    Plasma::Animator::self()->registerScrollingManager(this);
+    new Plasma::KineticScrolling(this);
 } //<
 
 ScrollPane::~ScrollPane() //>

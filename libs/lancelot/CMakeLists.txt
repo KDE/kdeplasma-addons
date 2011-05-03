@@ -47,6 +47,7 @@ set(lancelot_LIB_SRCS
 
         widgets/ScrollBar.cpp
         widgets/ScrollPane.cpp
+        widgets/kineticscroll.cpp
 
         widgets/ActionListView.cpp
         widgets/PassagewayView.cpp
