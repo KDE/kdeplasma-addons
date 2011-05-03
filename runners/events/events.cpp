@@ -33,8 +33,8 @@
 
 #include <QEventLoop>
 
-#include <kcal/event.h>
-#include <kcal/todo.h>
+#include <kcalcore/event.h>
+#include <kcalcore/todo.h>
 
 #include <boost/shared_ptr.hpp>
 
@@ -134,10 +134,10 @@ Akonadi::Item::List EventsRunner::selectItems( const QString & query, const QStr
         if ( !mimeTypes.contains( item.mimeType() ) )
             continue;
 
-        if ( !item.hasPayload<KCal::Incidence::Ptr>() )
+        if ( !item.hasPayload<KCalCore::Incidence::Ptr>() )
             continue;
 
-        KCal::Incidence::Ptr incidence = item.payload<KCal::Incidence::Ptr>();
+        KCalCore::Incidence::Ptr incidence = item.payload<KCalCore::Incidence::Ptr>();
 
         if ( !incidence )
             continue;
@@ -159,15 +159,15 @@ Akonadi::Item::List EventsRunner::selectItems( const DateTimeRange & query, cons
         if ( !mimeTypes.contains( item.mimeType() ) )
             continue;
 
-        if ( !item.hasPayload<KCal::Incidence::Ptr>() )
+        if ( !item.hasPayload<KCalCore::Incidence::Ptr>() )
             continue;
 
-        KCal::Incidence::Ptr incidence = item.payload<KCal::Incidence::Ptr>();
+        KCalCore::Incidence::Ptr incidence = item.payload<KCalCore::Incidence::Ptr>();
 
         if ( !incidence )
             continue;
 
-        if ( KCal::Todo * todo = dynamic_cast<KCal::Todo *>( incidence.get() ) ) {
+        if ( KCalCore::Todo * todo = dynamic_cast<KCalCore::Todo *>( incidence.data() ) ) {
             if ( todo->hasStartDate() && todo->hasDueDate() && !query.intersects( todo->dtStart(), todo->dtDue() ) )
                 continue;
             else if ( todo->hasStartDate() && !query.includes( todo->dtStart() ) )
@@ -176,7 +176,7 @@ Akonadi::Item::List EventsRunner::selectItems( const DateTimeRange & query, cons
                 continue;
             else if ( !todo->hasDueDate() && !todo->hasStartDate() )
                 continue;
-        } else if ( KCal::Event * event = dynamic_cast<KCal::Event *>( incidence.get() ) ) {
+        } else if ( KCalCore::Event * event = dynamic_cast<KCalCore::Event *>( incidence.data() ) ) {
             if ( event->recurs() ) {
                 if ( event->recurrence()->timesInInterval( query.start, query.finish ).empty() )
                     continue;
@@ -187,7 +187,8 @@ Akonadi::Item::List EventsRunner::selectItems( const DateTimeRange & query, cons
                     continue;
             }
         } else {
-            if ( !query.intersects( incidence->dtStart(), incidence->dtEnd() ) )
+            KDateTime end = incidence->duration().end( incidence->dtStart() );
+            if ( !query.intersects( incidence->dtStart(), end ) )
                 continue;
         }
 
@@ -307,7 +308,7 @@ Plasma::QueryMatch EventsRunner::createUpdateMatch( const Item & item, MatchType
     data["type"] = type;
 
     if ( type == CompleteTodo ) {
-        KCal::Todo::Ptr todo = item.payload<KCal::Todo::Ptr>();
+        KCalCore::Todo::Ptr todo = item.payload<KCalCore::Todo::Ptr>();
 
         match.setText( i18n( "Complete todo \"%1\"", todo->summary() ) );
         match.setSubtext( i18n( "Date: %1", dateTimeToString( todo->dtDue() ) ) );
@@ -318,13 +319,13 @@ Plasma::QueryMatch EventsRunner::createUpdateMatch( const Item & item, MatchType
         if ( args.size() < 2 ) // There is no comment - skip match
             return QueryMatch( 0 );
 
-        KCal::Incidence::Ptr incidence = item.payload<KCal::Incidence::Ptr>();
+        KCalCore::Incidence::Ptr incidence = item.payload<KCalCore::Incidence::Ptr>();
 
         match.setText( i18n( "Comment incidence \"%1\"", incidence->summary() ) );
 
-        if ( KCal::Todo * todo = dynamic_cast<KCal::Todo *>( incidence.get() ) ) {
+        if ( KCalCore::Todo * todo = dynamic_cast<KCalCore::Todo *>( incidence.data() ) ) {
             match.setSubtext( i18n( "Date: %1", dateTimeToString( todo->dtDue() ) ) );
-        } else if ( KCal::Event * event = dynamic_cast<KCal::Event *>( incidence.get() ) ) {
+        } else if ( KCalCore::Event * event = dynamic_cast<KCalCore::Event *>( incidence.data() ) ) {
             match.setSubtext( i18n( "Date: %1", dateTimeToString( event->dtStart() ) ) );
         }
 
@@ -352,13 +353,13 @@ Plasma::QueryMatch EventsRunner::createShowMatch( const Item & item, MatchType t
     data["type"] = type;
 
     if ( type == ShowIncidence ) {
-        KCal::Incidence::Ptr incidence = item.payload<KCal::Incidence::Ptr>();
+        KCalCore::Incidence::Ptr incidence = item.payload<KCalCore::Incidence::Ptr>();
 
         match.setText( incidence->summary() );
 
-        if ( KCal::Todo * todo = dynamic_cast<KCal::Todo *>( incidence.get() ) ) {
+        if ( KCalCore::Todo * todo = dynamic_cast<KCalCore::Todo *>( incidence.data() ) ) {
             match.setSubtext( i18n( "Date: %1", dateTimeToString( todo->dtDue() ) ) );
-        } else if ( KCal::Event * event = dynamic_cast<KCal::Event *>( incidence.get() ) ) {
+        } else if ( KCalCore::Event * event = dynamic_cast<KCalCore::Event *>( incidence.data() ) ) {
             if ( event->recurs() ) {
                 QString dates = "";
 
@@ -468,7 +469,7 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
             return;
         }
 
-        KCal::Event::Ptr event( new KCal::Event() );
+        KCalCore::Event::Ptr event( new KCalCore::Event() );
         event->setSummary( data["summary"].toString() );
 
         event->setDtStart( variantToDateTime( data["start"] ) );
@@ -481,7 +482,7 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
             event->setCategories( data["categories"].toString() );
 
         Item item( eventMimeType );
-        item.setPayload<KCal::Event::Ptr>( event );
+        item.setPayload<KCalCore::Event::Ptr>( event );
 
         new Akonadi::ItemCreateJob( item, eventCollection, this );
     } else if ( data["type"].toInt() == CreateTodo ) {
@@ -490,7 +491,7 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
             return;
         }
 
-        KCal::Todo::Ptr todo( new KCal::Todo() );
+        KCalCore::Todo::Ptr todo( new KCalCore::Todo() );
         todo->setSummary( data["summary"].toString() );
         todo->setPercentComplete( 0 );
 
@@ -508,12 +509,12 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
             todo->setCategories( data["categories"].toString() );
 
         Item item( todoMimeType );
-        item.setPayload<KCal::Todo::Ptr>( todo );
+        item.setPayload<KCalCore::Todo::Ptr>( todo );
 
         new Akonadi::ItemCreateJob( item, todoCollection, this );
     } else if ( data["type"].toInt() == CompleteTodo ) {
         Item item = data["item"].value<Item>(); // Retrieve item
-        KCal::Todo::Ptr todo = item.payload<KCal::Todo::Ptr>(); // Retrieve item payload - todo
+        KCalCore::Todo::Ptr todo = item.payload<KCalCore::Todo::Ptr>(); // Retrieve item payload - todo
 
         todo->setPercentComplete( data["percent"].toInt() ); // Set item percent completed
 
@@ -522,7 +523,7 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
         job->setIgnorePayload( false ); // Update payload!!
     } else if ( data["type"].toInt() == CommentIncidence ) {
         Item item = data["item"].value<Item>(); // Retrieve item
-        KCal::Incidence::Ptr incidence = item.payload<KCal::Incidence::Ptr>(); // Retrieve item payload - incidence
+        KCalCore::Incidence::Ptr incidence = item.payload<KCalCore::Incidence::Ptr>(); // Retrieve item payload - incidence
 
         if ( incidence->descriptionIsRich() ) {
             incidence->setDescription( incidence->richDescription() + "\n\n" + data["comment"].toString(), true);
