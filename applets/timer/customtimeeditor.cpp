@@ -30,7 +30,7 @@ CustomTimeEditor::CustomTimeEditor()
     timeEdit=new QTimeEdit();
     timeEdit->setDisplayFormat(toLocalizedTimer(TIME_FORMAT));
     editor=new KLineEdit();
-    customEditor=new KEditListBox::CustomEditor(timeEdit, editor);
+    customEditor=new KEditListWidget::CustomEditor(timeEdit, editor);
     connect(timeEdit, SIGNAL(timeChanged( const QTime& )), this, SLOT(setEdit(const QTime&) ));
 }
 
@@ -57,7 +57,7 @@ void CustomTimeEditor::setEdit(const QTime &time)
 /*!
     \fn CustomTimeEditor::getCustomEditor()
  */
-KEditListBox::CustomEditor *CustomTimeEditor::getCustomEditor()
+KEditListWidget::CustomEditor *CustomTimeEditor::getCustomEditor()
 {
     return customEditor;
 }

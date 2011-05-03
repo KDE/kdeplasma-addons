@@ -20,7 +20,7 @@
 #ifndef CUSTOMTIMEEDITOR_H
 #define CUSTOMTIMEEDITOR_H
 
-#include <keditlistbox.h>
+#include <keditlistwidget.h>
 #include <QTime>
 
 class QTimeEdit;
@@ -35,7 +35,7 @@ public:
     CustomTimeEditor();
 
     ~CustomTimeEditor();
-    KEditListBox::CustomEditor *getCustomEditor();
+    KEditListWidget::CustomEditor *getCustomEditor();
     static QString timerSeparator();
     static QString toLocalizedTimer(const QString &timer);
     static QString fromLocalizedTimer(const QString &timer);
@@ -43,7 +43,7 @@ public:
 private:
     QTimeEdit* timeEdit;
     KLineEdit* editor;
-    KEditListBox::CustomEditor *customEditor;
+    KEditListWidget::CustomEditor *customEditor;
 protected slots:
     void setEdit(const QTime &time);
 };
