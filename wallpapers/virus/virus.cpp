@@ -18,7 +18,7 @@
 #include <KDebug>
 #include <KDirWatch>
 #include <KFileDialog>
-#include <KNS/Engine>
+#include <KNS3/DownloadDialog>
 #include <KStandardDirs>
 
 #include <Plasma/Theme>
@@ -122,7 +122,7 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     m_uiVirus.setupUi(m_configWidget);
 
     qreal ratio = m_size.isEmpty() ? 1.0 : m_size.width() / qreal(m_size.height());
-    m_model = new BackgroundListModel(ratio, this, m_configWidget);
+    m_model = new BackgroundListModel(this, m_configWidget);
     m_model->setResizeMethod(m_resizeMethod);
     m_model->setWallpaperSize(m_size);
     m_model->reload(m_usersWallpapers);
@@ -263,13 +263,10 @@ void Virus::setSingleImage()
 
 void Virus::getNewWallpaper()
 {
-    KNS::Engine engine(m_configWidget);
-    if (engine.init(QLatin1String( "virus_wallpaper.knsrc" ))) {
-        KNS::Entry::List entries = engine.downloadDialogModal(m_configWidget);
-
-        if (entries.size() > 0 && m_model) {
-            m_model->reload();
-        }
+    KNS3::DownloadDialog dialog("virus_wallpaper.knsrc", m_configWidget);
+    dialog.exec();
+    if (dialog.changedEntries().size() > 0 && m_model) {
+        m_model->reload();
     }
 }
 

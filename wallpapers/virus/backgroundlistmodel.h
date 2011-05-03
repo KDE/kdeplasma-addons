@@ -12,6 +12,8 @@
 
 #include <QAbstractListModel>
 #include <QPixmap>
+#include <QRunnable>
+#include <QThread>
 
 #include <KDirWatch>
 #include <KFileItem>
@@ -26,12 +28,26 @@ namespace Plasma
     class Package;
 } // namespace Plasma
 
+class ImageSizeFinder : public QObject, public QRunnable
+{
+    Q_OBJECT
+    public:
+        ImageSizeFinder(const QString &path, QObject *parent = 0);
+        void run();
+
+    Q_SIGNALS:
+        void sizeFound(const QString &path, const QSize &size);
+
+    private:
+        QString m_path;
+};
+
 class BackgroundListModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    BackgroundListModel(float ratio, Plasma::Wallpaper *listener, QObject *parent);
+    BackgroundListModel(Plasma::Wallpaper *listener, QObject *parent);
     virtual ~BackgroundListModel();
 
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -44,59 +60,53 @@ public:
     QModelIndex indexOf(const QString &path) const;
     virtual bool contains(const QString &bg) const;
 
-    static QStringList findAllBackgrounds(Plasma::Wallpaper *structureParent,
-                                                       const BackgroundListModel *container,
-                                                       const QStringList &path);
-    static void initProgressDialog(KProgressDialog *dialog);
-
-    void setWallpaperSize(QSize size);
+    void setWallpaperSize(const QSize& size);
     void setResizeMethod(Plasma::Wallpaper::ResizeMethod resizeMethod);
 
 protected Q_SLOTS:
     void removeBackground(const QString &path);
     void showPreview(const KFileItem &item, const QPixmap &preview);
     void previewFailed(const KFileItem &item);
+    void sizeFound(const QString &path, const QSize &s);
+    void backgroundsFound(const QStringList &paths, const QString &token);
+    void processPaths(const QStringList &paths);
 
 private:
     QSize bestSize(Plasma::Package *package) const;
 
-    Plasma::Wallpaper *m_listener;
     Plasma::Wallpaper *m_structureParent;
     QList<Plasma::Package *> m_packages;
     QHash<Plasma::Package *, QSize> m_sizeCache;
     QHash<Plasma::Package *, QPixmap> m_previews;
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
-    float m_ratio;
     KDirWatch m_dirwatch;
 
     QSize m_size;
     Plasma::Wallpaper::ResizeMethod m_resizeMethod;
+    QString m_findToken;
+    QPixmap m_previewUnavailablePix;
 };
 
-class BackgroundFinder : public QObject
+class BackgroundFinder : public QThread
 {
     Q_OBJECT
 
 public:
-    BackgroundFinder(Plasma::Wallpaper *structureParent,
-                     const BackgroundListModel *container,
-                     const QStringList &p,
-                     QEventLoop *eventLoop);
+    BackgroundFinder(Plasma::Wallpaper *structureParent, const QStringList &p);
+    ~BackgroundFinder();
 
-    QStringList papersFound() const;
-
-public slots:
-    void start();
+    QString token() const;
 
 signals:
-    void finished();
+    void backgroundsFound(const QStringList &paths, const QString &token);
+
+protected:
+    void run();
 
 private:
-    Plasma::Wallpaper *m_structureParent;
-    const BackgroundListModel *m_container;
+    Plasma::PackageStructure::Ptr m_structure;
     QStringList m_paths;
-    QStringList m_papersFound;
-    QEventLoop *m_eventLoop;
+    QString m_token;
 };
 
 #endif // BACKGROUNDLISTMODEL_H
