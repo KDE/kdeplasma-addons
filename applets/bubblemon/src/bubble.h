@@ -86,7 +86,7 @@ class Bubble : public Plasma::Applet {
         int m_bubbleCount;
         qreal m_labelTransparency;
         float m_bubbleSpeed;
-        float m_bubbleHeight;
+        QSizeF m_bubbleRect;
         QString m_sensor;
         Plasma::Svg *m_svg;
         QString m_label;

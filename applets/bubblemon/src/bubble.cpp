@@ -118,7 +118,7 @@ Bubble::init()
 
     configChanged();
 
-    m_bubbleHeight = m_svg->elementSize("bubble").height();
+    m_bubbleRect = m_svg->elementSize("bubble");
 }
 
 void
@@ -127,7 +127,7 @@ Bubble::resizeEvent(QGraphicsSceneResizeEvent *evt)
     Plasma::Applet::resizeEvent(evt);
     qreal size = qMin(contentsRect().size().width(), contentsRect().size().height());
     m_svg->resize(size, size);
-    m_bubbleHeight = m_svg->elementSize("bubble").height();
+    m_bubbleRect = m_svg->elementSize("bubble");
     m_rebuildClip = true;
 }
 
@@ -253,8 +253,8 @@ Bubble::paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option
         if (m_bubbleCount>0 && m_animated && !shouldConserveResources()) {
             painter->setClipPath(m_bubbleClip);
             for(int i = 0;i<m_bubbleCount;i++) {
-                if (m_bubbles.at(i).y()+m_bubbleHeight>m_clip.top())
-                    m_svg->paint(painter, m_bubbles.at(i), "bubble");
+                if (m_bubbles.at(i).y()+m_bubbleRect.height()>m_clip.top())
+                    m_svg->paint(painter, QRectF(m_bubbles.at(i), m_bubbleRect), "bubble");
             }
         }
         painter->setClipping(false);
@@ -303,15 +303,15 @@ Bubble::drawLabel(QPainter *painter, const QStyleOptionGraphicsItem *option, con
 void
 Bubble::moveBubbles()
 {
-    if (!boundingRect().isEmpty() && int(m_bubbleHeight * m_bubbleCount) > 0 && m_max > 0 && m_animated && !shouldConserveResources()) {
+    if (!boundingRect().isEmpty() && int(m_bubbleRect.height() * m_bubbleCount) > 0 && m_max > 0 && m_animated && !shouldConserveResources()) {
         QRectF rect = boundingRect();
         QVector<QPoint>::iterator i;
         bool needsUpdate = false;
-        int maxHeight = rect.height()-(m_val/(float)m_max*rect.height()+m_bubbleHeight);
+        int maxHeight = rect.height()-(m_val/(float)m_max*rect.height()+m_bubbleRect.height());
         for(i=m_bubbles.begin();i!=m_bubbles.end();++i) {
             (*i).setY((*i).y()-m_bubbleSpeed);
-            if ((*i).y()<maxHeight-m_bubbleHeight) {
-                (*i).setY(rect.bottom()+(qrand() % (int)( m_bubbleHeight*m_bubbleCount ) ) );
+            if ((*i).y()<maxHeight-m_bubbleRect.height()) {
+                (*i).setY(rect.bottom()+(qrand() % (int)( m_bubbleRect.height()*m_bubbleCount ) ) );
                 (*i).setX(qrand() % (int)rect.width());
                 needsUpdate = true;
             }
