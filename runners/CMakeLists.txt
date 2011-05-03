@@ -10,8 +10,10 @@ add_subdirectory(spellchecker)
 add_subdirectory(characters)
 
 if(KDEPIMLIBS_FOUND)
-add_subdirectory(contacts)
-add_subdirectory(events)
+ if (NOT KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
+  add_subdirectory(contacts)
+ endif (NOT KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
+ add_subdirectory(events)
 endif(KDEPIMLIBS_FOUND)
 
 if(NOT WIN32)
