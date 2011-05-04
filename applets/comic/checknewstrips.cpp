@@ -32,6 +32,9 @@ CheckNewStrips::CheckNewStrips( const QStringList &identifiers, Plasma::DataEngi
     timer->setInterval( minutes * 60 * 1000 );
     connect( timer, SIGNAL(timeout()), this, SLOT(start()) );
     timer->start();
+
+    //start at once, that way the user does not have to wait for minutes to get the initial result
+    start();
 }
 
 void CheckNewStrips::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )

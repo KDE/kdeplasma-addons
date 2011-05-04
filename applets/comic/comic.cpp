@@ -697,7 +697,7 @@ void ComicApplet::configChanged()
     mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
     mMaxStripNum[ mComicIdentifier ] = cg.readEntry( "maxStripNum_" + mComicIdentifier, 0 );
     mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, QString() );
-    mCheckNewComicStripsIntervall = cg.readEntry( "checkNewComicStripsIntervall", 20 );
+    mCheckNewComicStripsIntervall = cg.readEntry( "checkNewComicStripsIntervall", 30 );
 
     //use a decent default size
     const QSizeF tempMaxSize = isInPanel() ? QSizeF( 600, 250 ) : this->size();
