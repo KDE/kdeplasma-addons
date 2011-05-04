@@ -121,6 +121,7 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSort
     connect(comicUi.pushButton_GHNS , SIGNAL(clicked(bool)), this , SIGNAL(enableApply()));
     connect(comicUi.checkBox_middle , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(comicUi.updateIntervall, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
+    connect(comicUi.updateIntervallComicStrips, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_arrows, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_title, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(appearanceUi.checkBox_identifier, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
@@ -252,6 +253,16 @@ void ConfigWidget::setUpdateIntervall( int days )
 int ConfigWidget::updateIntervall() const
 {
     return comicUi.updateIntervall->value();
+}
+
+void ConfigWidget::setCheckNewComicStripsIntervall( int minutes )
+{
+    comicUi.updateIntervallComicStrips->setValue( minutes );
+}
+
+int ConfigWidget::checkNewComicStripsIntervall() const
+{
+    return comicUi.updateIntervallComicStrips->value();
 }
 
 #include "configwidget.moc"

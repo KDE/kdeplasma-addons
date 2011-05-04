@@ -22,6 +22,7 @@
 #include "comic.h"
 #include "comicarchivedialog.h"
 #include "comicarchivejob.h"
+#include "checknewstrips.h"
 
 #include <QtCore/QPropertyAnimation>
 #include <QtCore/QTimer>
@@ -130,6 +131,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mShowErrorPicture( true ),
       mArrowsOnHover( true ),
       mMiddleClick( true ),
+      mCheckNewStrips( 0 ),
       mMainWidget( 0 ),
       mCentralLayout( 0 ),
       mBottomLayout( 0 ),
@@ -187,6 +189,10 @@ void ComicApplet::init()
     mDateChangedTimer = new QTimer( this );
     connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
+
+    mActionNextNewStripTab = new QAction( KIcon( "go-next-view" ), i18nc( "here strip means comic strip", "&Next Tab with a new Strip" ), this );
+    mActions.append( mActionNextNewStripTab );
+    connect( mActionNextNewStripTab, SIGNAL(triggered(bool)), this, SLOT(slotNextNewStrip()) );
 
     mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "Jump to &first Strip" ), this );
     mActions.append( mActionGoFirst );
@@ -430,10 +436,26 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     QString temp = data[ "Identifier" ].toString();
     mCurrentIdentifierSuffix = temp.remove( mComicIdentifier + ':' );
 
+    //looking at the last index, thus not mark it as new
+    KConfigGroup cg = config();
+    if ( mNextIdentifierSuffix.isEmpty() || ( mCurrentIdentifierSuffix == mLastIdentifierSuffix ) ) {
+        cg.writeEntry( "lastStripVisited_" + mComicIdentifier, true );
+        const int index = mTabBar->currentIndex();
+        if ( mCheckNewComicStripsIntervall ) {
+            mTabBar->setTabHighlighted( index, false );
+            mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
+        }
+    }
+
+    //found a new last identifier
+    if ( mNextIdentifierSuffix.isEmpty() ) {
+        mLastIdentifierSuffix = mCurrentIdentifierSuffix;
+        cg.writeEntry( "lastStrip_" + mComicIdentifier, mCurrentIdentifierSuffix );
+    }
+
     //call the slot to check if the position needs to be saved
     slotStorePosition();
 
-    KConfigGroup cg = config();
     mShownIdentifierSuffix = "";
     if ( mComicType == Number ) {
         mShownIdentifierSuffix = i18nc("an abbreviation for Number", "# %1", mCurrentIdentifierSuffix);
@@ -516,6 +538,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setArrowsOnHover( mArrowsOnHover );
     mConfigWidget->setMiddleClick( mMiddleClick );
     mConfigWidget->setTabView( mTabView - 1);//-1 because counting starts at 0, yet we use flags that start at 1
+    mConfigWidget->setCheckNewComicStripsIntervall( mCheckNewComicStripsIntervall );
 
     //not storing this value, since other applets might have changed it inbetween
     KConfigGroup global = globalConfig();
@@ -545,6 +568,7 @@ void ComicApplet::applyConfig()
     mArrowsOnHover = mConfigWidget->arrowsOnHover();
     mMiddleClick = mConfigWidget->middleClick();
     mTabView = mConfigWidget->tabView() + 1;//+1 because counting starts at 0, yet we use flags that start at 1
+    mCheckNewComicStripsIntervall = mConfigWidget->checkNewComicStripsIntervall();
 
     //not storing this value, since other applets might have changed it inbetween
     KConfigGroup global = globalConfig();
@@ -569,6 +593,7 @@ void ComicApplet::changeComic( bool differentComic )
 {
     if ( differentComic ) {
         KConfigGroup cg = config();
+        mLastIdentifierSuffix = cg.readEntry( "lastStripVisited_" + mComicIdentifier, QString() );
         mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, "" );
         mActionStorePosition->setChecked( !mStoredIdentifierSuffix.isEmpty() );
 
@@ -593,6 +618,8 @@ void ComicApplet::updateUsedComics()
 
     bool isFirst = true;
     QModelIndex data;
+    KConfigGroup cg = config();
+    int tab = 0;
     for ( int i = 0; i < mProxy->rowCount(); ++i ) {
         if ( mProxy->index( i, 0 ).data( Qt::CheckStateRole) == Qt::Checked ) {
             data = mProxy->index( i, 1 );
@@ -606,6 +633,7 @@ void ComicApplet::updateUsedComics()
 
             QIcon icon;
             QString name;
+            const QString identifier = data.data( Qt::UserRole ).toString();
             if ( mTabView & ShowText ) {
                 name = data.data().toString();
             }
@@ -614,8 +642,24 @@ void ComicApplet::updateUsedComics()
             }
 
             mTabBar->addTab( icon, name );
-            mTabIdentifier << data.data( Qt::UserRole ).toString();
+
+            //found a newer strip last time, which was not visited
+            if ( mCheckNewComicStripsIntervall && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
+                mTabBar->setTabHighlighted( tab, true );
+            }
+
+            mTabIdentifier << identifier;
+            ++tab;
         }
+    }
+
+    mActionNextNewStripTab->setVisible( mCheckNewComicStripsIntervall );
+    mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
+
+    delete mCheckNewStrips;
+    if ( mCheckNewComicStripsIntervall ) {
+        mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsIntervall, this );
+        connect( mCheckNewStrips, SIGNAL(lastStrip(int,QString,QString)), this, SLOT(slotFoundLastStrip(int,QString,QString)) );
     }
 }
 
@@ -653,6 +697,7 @@ void ComicApplet::configChanged()
     mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
     mMaxStripNum[ mComicIdentifier ] = cg.readEntry( "maxStripNum_" + mComicIdentifier, 0 );
     mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, QString() );
+    mCheckNewComicStripsIntervall = cg.readEntry( "checkNewComicStripsIntervall", 20 );
 
     //use a decent default size
     const QSizeF tempMaxSize = isInPanel() ? QSizeF( 600, 250 ) : this->size();
@@ -679,6 +724,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
     cg.writeEntry( "tabView", mTabView );
     cg.writeEntry( "savingDir", mSavingDir );
+    cg.writeEntry( "checkNewComicStripsIntervall", mCheckNewComicStripsIntervall );
 
     globalComicUpdater->save();
 }
@@ -718,6 +764,18 @@ void ComicApplet::slotCurrentDay()
     updateComic( QString() );
 }
 
+void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, const QString &suffix )
+{
+    KConfigGroup cg = config();
+    if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
+        kDebug() << identifier << "has a newer strip.";
+        mTabBar->setTabHighlighted( index, true );
+        cg.writeEntry( "lastStripVisited_" + identifier, false );
+    }
+
+    mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
+}
+
 void ComicApplet::slotReload()
 {
     int index = mTabBar->currentIndex();
@@ -754,6 +812,12 @@ void ComicApplet::slotGoJump()
             updateComic( suffix );
         }
     }
+}
+
+void ComicApplet::slotNextNewStrip()
+{
+    const int index = mTabBar->currentIndex();
+    mTabBar->setCurrentIndex( mTabBar->nextHighlightedTab( index ) );
 }
 
 void ComicApplet::slotStorePosition()

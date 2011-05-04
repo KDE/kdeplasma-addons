@@ -14,6 +14,7 @@ set(comic_SRCS
     arrowwidget.cpp
     comicarchivejob.cpp
     comicarchivedialog.cpp
+    checknewstrips.cpp
 )
 
 kde4_add_ui_files(comic_SRCS

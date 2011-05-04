@@ -109,6 +109,8 @@ class ConfigWidget : public QWidget
         void setMaxComicLimit( int limit );
         void setUpdateIntervall( int days );
         int updateIntervall() const;
+        void setCheckNewComicStripsIntervall( int minutes );
+        int checkNewComicStripsIntervall() const;
 
         QWidget *comicSettings;
         QWidget *appearanceSettings;

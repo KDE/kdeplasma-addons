@@ -34,6 +34,7 @@
 #include <Plasma/TabBar>
 
 class ArrowWidget;
+class CheckNewStrips;
 class ComicModel;
 class ConfigWidget;
 class FullViewWidget;
@@ -62,6 +63,33 @@ class ComicTabBar : public Plasma::TabBar
             while ( this->count() ) {
                 this->removeTab( 0 );
             }
+        }
+
+        bool hasHighlightedTabs() const
+        {
+            for ( int i = 0; i < count(); ++i ) {
+                if ( isTabHighlighted( i ) ) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        int nextHighlightedTab( int index ) const
+        {
+            int firstHighlighted = -1;
+            for ( int i = 0; i < count(); ++i ) {
+                if ( isTabHighlighted( i ) ) {
+                    if ( i > index ) {
+                        return i;
+                    } else if ( firstHighlighted == -1 ) {
+                        firstHighlighted = i;
+                    }
+                }
+            }
+
+            return ( firstHighlighted != -1 ? firstHighlighted : index );
         }
 
     protected:
@@ -139,7 +167,9 @@ class ComicApplet : public Plasma::PopupApplet
         void slotPreviousDay();
         void slotFirstDay();
         void slotCurrentDay();
+        void slotFoundLastStrip( int index, const QString &identifier, const QString &suffix );
         void slotGoJump();
+        void slotNextNewStrip();
         void slotReload();
         void slotSaveComicAs();
         void slotScaleToContent();
@@ -187,6 +217,7 @@ class ComicApplet : public Plasma::PopupApplet
         QString mNextIdentifierSuffix;
         QString mPreviousIdentifierSuffix;
         QString mFirstIdentifierSuffix;
+        QString mLastIdentifierSuffix;
         QString mComicAuthor;
         QString mComicTitle;
         QString mStripTitle;
@@ -210,6 +241,8 @@ class ComicApplet : public Plasma::PopupApplet
         bool mShowErrorPicture;
         bool mArrowsOnHover;
         bool mMiddleClick;
+        int mCheckNewComicStripsIntervall;
+        CheckNewStrips *mCheckNewStrips;
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
         QGraphicsWidget *mMainWidget;
@@ -222,6 +255,7 @@ class ComicApplet : public Plasma::PopupApplet
         QAction *mActionScaleContent;
         QAction *mActionShop;
         QAction *mActionStorePosition;
+        QAction *mActionNextNewStripTab;
         QMap< QString, int > mFirstStripNum;
         QMap< QString, int > mMaxStripNum;
         QSizeF mMaxSize;

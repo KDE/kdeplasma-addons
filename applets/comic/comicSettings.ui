@@ -179,6 +179,35 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Check for new comic strips:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="KIntNumInput" name="updateIntervallComicStrips">
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="minimum">
+        <number>0</number>
+       </property>
+       <property name="maximum">
+        <number>1200</number>
+       </property>
+       <property name="suffix">
+        <string> minutes</string>
+       </property>
+       <property name="prefix">
+        <string>every </string>
+       </property>
+       <property name="specialValueText">
+        <string>never</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="5" column="0">
