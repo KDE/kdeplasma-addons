@@ -39,6 +39,7 @@ class ComicModel;
 class ConfigWidget;
 class FullViewWidget;
 class ImageWidget;
+class KAction;
 class KJob;
 class QAction;
 class QGraphicsLayout;
@@ -255,7 +256,7 @@ class ComicApplet : public Plasma::PopupApplet
         QAction *mActionScaleContent;
         QAction *mActionShop;
         QAction *mActionStorePosition;
-        QAction *mActionNextNewStripTab;
+        KAction *mActionNextNewStripTab;
         QMap< QString, int > mFirstStripNum;
         QMap< QString, int > mMaxStripNum;
         QSizeF mMaxSize;

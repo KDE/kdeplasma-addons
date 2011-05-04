@@ -33,6 +33,7 @@
 #include <QtGui/QGraphicsSceneWheelEvent>
 #include <QtGui/QSortFilterProxyModel>
 
+#include <KAction>
 #include <KConfigDialog>
 #include <KDatePicker>
 #include <KDebug>
@@ -45,6 +46,7 @@
 #include <knuminput.h>
 #include <KPushButton>
 #include <KRun>
+#include <KStandardShortcut>
 #include <KTemporaryFile>
 
 #ifdef HAVE_NEPOMUK
@@ -190,7 +192,9 @@ void ComicApplet::init()
     connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
-    mActionNextNewStripTab = new QAction( KIcon( "go-next-view" ), i18nc( "here strip means comic strip", "&Next Tab with a new Strip" ), this );
+    mActionNextNewStripTab = new KAction( KIcon( "go-next-view" ), i18nc( "here strip means comic strip", "&Next Tab with a new Strip" ), this );
+    mActionNextNewStripTab->setShortcut( KStandardShortcut::openNew() );
+    addAction( "next new strip" , mActionNextNewStripTab );
     mActions.append( mActionNextNewStripTab );
     connect( mActionNextNewStripTab, SIGNAL(triggered(bool)), this, SLOT(slotNextNewStrip()) );
 
