@@ -1084,8 +1084,8 @@ void ComicApplet::slotSaveComicAs()
 
 bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
 {
-    if ( dynamic_cast<QGraphicsWidget *>(receiver) != mMainWidget ) {
-        return false;
+    if ( receiver != mMainWidget ) {
+        return Plasma::PopupApplet::eventFilter( receiver, event );
     }
 
     switch (event->type()) {
@@ -1111,19 +1111,21 @@ bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
                         if ( hasAuthorization( "LaunchApp" ) ) {
                             // link clicked
                             KRun::runUrl( mWebsiteUrl, "text/html", 0 );
+                            return true;
                         }
                     } else if ( mLabelId->isUnderMouse() ) {
                         // identifierSuffix clicked clicked
                         slotGoJump();
+                        return true;
                     } else if ( mImageWidget->isUnderMouse() && ( mMainWidget->geometry().size() != mLastSize ) ) {
                         // only update the size by clicking on the image-rect if the user manual resized the applet
                         updateSize();
+                        return true;
                     }
                 } else if ( ( e->button() == Qt::MidButton ) && mMiddleClick ) { // handle full view
                     fullView();
+                    return true;
                 }
-
-                e->ignore();
             }
             break;
         case QEvent::GraphicsSceneResize:
