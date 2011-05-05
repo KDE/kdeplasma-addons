@@ -54,7 +54,6 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
 {
     m_svg = new Plasma::Svg(this);
     m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
-    m_svg->setContainsMultipleImages(true);
 
     connect(m_svg, SIGNAL(repaintNeeded()), this, SLOT(repaintNeeded()));
 
