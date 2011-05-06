@@ -892,7 +892,7 @@ void MicroBlog::downloadHistory()
 {
    // kDebug() << "Inside downloadhistory";
     if (m_username.isEmpty() || m_password.isEmpty()) {
-		//kDebug() << "BOOHYA got empty password";
+        //kDebug() << "BOOHYA got empty password";
         if (!m_curTimeline.isEmpty()) {
             m_engine->disconnectSource(m_curTimeline, this);
             m_engine->disconnectSource("Error:" + m_curTimeline, this);
