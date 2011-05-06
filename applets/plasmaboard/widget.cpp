@@ -458,8 +458,9 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
 
             currentPoint = QPoint(0, currentPoint.y() + rowHeight + spacing);
         }
-
     }
+
+    m_keyboardSize = currentSize;
 
     Q_FOREACH(BoardKey* key, m_alphaKeys){
         m_keys << key;
@@ -687,7 +688,11 @@ QSizeF PlasmaboardWidget::sizeHint(Qt::SizeHint which, const QSizeF& constraint)
         return QSizeF(300, 100);
     }
     else if(which == Qt::PreferredSize) {
-        return QSizeF(500, 230);
+        if (!m_keyboardSize.isEmpty()) {
+            return m_keyboardSize;
+        } else {
+            return QSizeF(800, 230);
+        }
     }
     else if(which == Qt::MaximumSize) {
         return constraint;

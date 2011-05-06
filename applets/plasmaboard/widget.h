@@ -206,6 +206,7 @@ private:
     QHash<QSize, QPixmap*> m_activeFrames; // cache of all pixmap sizes with active state
     QList<AlphaNumKey*> m_alphaKeys; // normal keys labeled with symbols like a, b, c
     Plasma::PopupApplet *m_applet;
+    QSize m_keyboardSize; // size configured in keyboard XML file
     QList<StickyKey*> m_altKeys; // List of all AltKeys on keyboard
     QList<StickyKey*> m_altgrKeys; // List of all AltGr keys on keyboard
     QList<FuncKey*> m_capsKeys; // List of all caps keys on keyboard
