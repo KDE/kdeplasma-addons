@@ -345,7 +345,7 @@ void MicroBlog::configChanged()
         getWallet();
     } else { //use config value
         //kDebug() << "password was in config file, using that to get twitter history";
-        downloadHistory();
+        reloadRequired = true;
     }
 
     if (changed) {
