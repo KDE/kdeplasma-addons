@@ -744,7 +744,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
     KUrl droppedUrl = (KUrl::List::fromMimeData(event->mimeData())).at(0);
     kDebug() << "dropped URL" << droppedUrl.url();
     if (droppedUrl.protocol() == "desktop") {
-        KUrl tmpUrl = KGlobalSettings::desktopPath() + droppedUrl.path();
+        KUrl tmpUrl = QString(KGlobalSettings::desktopPath() + droppedUrl.path());
         droppedUrl = tmpUrl;
     }
     // If the url is a local directory start slideshowmode

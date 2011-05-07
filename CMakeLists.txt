@@ -41,6 +41,7 @@ if (NEPOMUK_FOUND)
 endif (NEPOMUK_FOUND)
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 include_directories (${KDE4_INCLUDES}
                      ${KDE4WORKSPACE_INCLUDE_DIR}
                      ${KDEPIMLIBS_INCLUDE_DIR}

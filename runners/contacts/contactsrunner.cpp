@@ -113,7 +113,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
             match.setText(i18nc("Open the default mail program to mail someone", "Mail to %1", a.realName()));
 
             if (!a.realName().isEmpty()) {
-                match.setData(a.realName() + QLatin1String( " <" ) + a.preferredEmail() + QLatin1Char( '>' ));
+                match.setData(QString(a.realName() + QLatin1String( " <" ) + a.preferredEmail() + QLatin1Char( '>' )));
             } else {
                 match.setData(a.preferredEmail());
             }
@@ -156,7 +156,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
 
                     match.setText(i18nc("Open the default telephone program to call someone", "Call %1 at %2", a.realName(), phonenumber.typeLabel()));
                     match.setSubtext(phonenumber.number());
-                    match.setData(QLatin1String("call:") + phonenumber.number());
+                    match.setData(QString(QLatin1String("call:") + phonenumber.number()));
                     matches.append(match);
                 }
             }

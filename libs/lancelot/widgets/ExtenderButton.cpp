@@ -497,7 +497,7 @@ void ExtenderButton::setShortcutKey(const QString & key)
             scene()->views().at(0)->addAction(d->shortcut);
         }
 
-        d->shortcut->setShortcut("Alt+" + key);
+        d->shortcut->setShortcut(QString(QLatin1String("Alt+")+ key));
         connect(d->shortcut, SIGNAL(triggered()),
                 this, SIGNAL(activated()));
     }
