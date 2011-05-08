@@ -2,6 +2,7 @@
 Icon=plasmaapplet-shelf
 
 Name=Shelf
+Name[bs]=Shelf
 Name[ca]=Shelf
 Name[ca@valencia]=Shelf
 Name[da]=Hylde

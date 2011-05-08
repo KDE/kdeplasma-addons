@@ -2,6 +2,7 @@
 Name=Color Picker
 Name[ar]=منتق الألوان
 Name[ast]=Picacolor
+Name[bs]=Birač boja
 Name[ca]=Selector de color
 Name[ca@valencia]=Selector de color
 Name[cs]=Kapátko
@@ -56,6 +57,7 @@ Name[zh_TW]=顏色挑選器
 Comment=Pick a color from the desktop
 Comment[ar]=اختر لونا من سطح المكتب
 Comment[ast]=Esbilla un color del escritoriu
+Comment[bs]=Izaberite boju sa površi
 Comment[ca]=Selecciona un color de l'escriptori
 Comment[ca@valencia]=Selecciona un color de l'escriptori
 Comment[cs]=Vzít barvu z plochy

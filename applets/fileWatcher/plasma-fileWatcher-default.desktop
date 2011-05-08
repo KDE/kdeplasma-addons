@@ -2,6 +2,7 @@
 Name=File Watcher
 Name[ar]=مراقب الملفات
 Name[ast]=Monitor de ficheros
+Name[bs]=nadzirač datoteka
 Name[ca]=Vigilant de fitxers
 Name[ca@valencia]=Vigilant de fitxers
 Name[cs]=Sledování souborů
@@ -55,6 +56,7 @@ Name[zh_TW]=檔案監看器
 Comment=Watch for changes in specified files
 Comment[ar]=راقب التغييرات في ملفات محددة
 Comment[ast]=Avisa si hai cambeos nos ficheros indicaos
+Comment[bs]=Pratite promjene u određenim datotekama
 Comment[ca]=Vigila de canvis en els fitxers especificats
 Comment[ca@valencia]=Vigila de canvis en els fitxers especificats
 Comment[cs]=Sledování změn v zadaných souborech

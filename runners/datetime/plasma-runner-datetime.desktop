@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Date and Time
+Name[bs]=Datum i vrijeme
 Name[ca]=Data i hora
 Name[ca@valencia]=Data i hora
 Name[cs]=Datum a čas
@@ -44,6 +45,7 @@ Name[zh_CN]=日期和时间
 Name[zh_TW]=日期與時間
 
 Comment=The current date and time, locally or in any timezone
+Comment[bs]=Trenutni datum i vrijeme, lokalno ili u nekoj drugoj vremenskoj zoni
 Comment[ca]=La data i l'hora actuals, localment o en qualsevol zona horària
 Comment[ca@valencia]=La data i l'hora actuals, localment o en qualsevol zona horària
 Comment[da]=Den nuværende dato og tid, lokalt eller i en enhver tidszone

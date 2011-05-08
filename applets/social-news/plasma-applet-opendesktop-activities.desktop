@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Social News
+Name[bs]=Društvene vijesti
 Name[ca]=Notícies socials
 Name[ca@valencia]=Notícies socials
 Name[da]=Sociale nyheder
@@ -40,6 +41,7 @@ Name[x-test]=xxSocial Newsxx
 Name[zh_CN]=社会新闻
 Name[zh_TW]=Social 新聞
 Comment=Stay informed with the Social Desktop
+Comment[bs]=Informiranje sa Društenim vijestima
 Comment[ca]=Mantingueu-vos informat amb l'escriptori social
 Comment[ca@valencia]=Mantingueu-vos informat amb l'escriptori social
 Comment[cs]=Zůstaňte v obraze pomocí Sociálního desktopu
@@ -97,6 +99,7 @@ X-KDE-PluginInfo-Website=http://plasma.kde.org/
 Keywords=Utilities
 Keywords[ar]=أدوات
 Keywords[ast]=Utilidaes
+Keywords[bs]=Alatke
 Keywords[ca]=Utilitats
 Keywords[ca@valencia]=Utilitats
 Keywords[cs]=Nástroje

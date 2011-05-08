@@ -7,6 +7,7 @@ X-KDE-PlasmaPoTDProvider-Identifier=apod
 Icon=
 
 Name=Astronomy Picture of the Day
+Name[bs]=Astronomska slika dana
 Name[ca]=Imatge astronòmica del dia
 Name[ca@valencia]=Imatge astronòmica del dia
 Name[cs]=Obrázek dne z Astronomie
@@ -51,6 +52,7 @@ Name[zh_TW]=本日天文圖片
 Comment=Apod Provider
 Comment[ar]=المزود Apod
 Comment[ast]=Fornidor d'Apod
+Comment[bs]=Dobavljač Apod-a
 Comment[ca]=Proveïdor Apod
 Comment[ca@valencia]=Proveïdor Apod
 Comment[cs]=Poskytovatel Apodu

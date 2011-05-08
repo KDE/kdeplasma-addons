@@ -2,6 +2,7 @@
 Name=Leave A Note
 Name[ar]=اترك ملاحظة
 Name[ast]=Dexar una nota
+Name[bs]=Ostavljanje poruke
 Name[ca]=Deixa una nota
 Name[ca@valencia]=Deixa una nota
 Name[cs]=Zanechat vzkaz
@@ -55,6 +56,7 @@ Icon=knotes
 Comment=Leave notes for users while they are away
 Comment[ar]=اترك ملاحظة للمستخدمين غير الموجودين
 Comment[ast]=Dexar notes pa usuarios mientres tán ausentes
+Comment[bs]=Ostavite poruke korisnicima dok su odsutni
 Comment[ca]=Deixa notes pels usuaris que no hi són
 Comment[ca@valencia]=Deixa notes pels usuaris que no hi són
 Comment[cs]=Ponechte zprávy uživatelům, pokud jsou pryč
