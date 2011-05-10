@@ -277,21 +277,21 @@
       <item>
        <widget class="QRadioButton" name="radioButton_1">
         <property name="text">
-         <string extracomment="Tabbar will show text only">Text only</string>
+         <string comment="Tabbar will show text only">Text only</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="radioButton_2">
         <property name="text">
-         <string extracomment="Tabbar will show icons only">Icons only</string>
+         <string comment="Tabbar will show icons only">Icons only</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="radioButton_3">
         <property name="text">
-         <string extracomment="Tabbar will show both text and icons">Text and Icons</string>
+         <string comment="Tabbar will show both text and icons">Text and Icons</string>
         </property>
         <property name="checked">
          <bool>true</bool>

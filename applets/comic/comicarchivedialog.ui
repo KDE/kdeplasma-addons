@@ -97,14 +97,14 @@
        <item row="0" column="0">
         <widget class="QLabel" name="fromDateLabel">
          <property name="text">
-          <string extracomment="in a range: from to">From:</string>
+          <string comment="in a range: from to">From:</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="toDateLabel">
          <property name="text">
-          <string extracomment="in a range: from to">To:</string>
+          <string comment="in a range: from to">To:</string>
          </property>
         </widget>
        </item>
@@ -138,14 +138,14 @@
        <item row="0" column="0">
         <widget class="QLabel" name="fromNumberLabel">
          <property name="text">
-          <string extracomment="in a range: from to">From:</string>
+          <string comment="in a range: from to">From:</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="toNumberLabel">
          <property name="text">
-          <string extracomment="in a range: from to">To:</string>
+          <string comment="in a range: from to">To:</string>
          </property>
         </widget>
        </item>
@@ -173,14 +173,14 @@
        <item row="0" column="0">
         <widget class="QLabel" name="fromStringLabel">
          <property name="text">
-          <string extracomment="in a range: from to">From:</string>
+          <string comment="in a range: from to">From:</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="toStringLabel">
          <property name="text">
-          <string extracomment="in a range: from to">To:</string>
+          <string comment="in a range: from to">To:</string>
          </property>
         </widget>
        </item>

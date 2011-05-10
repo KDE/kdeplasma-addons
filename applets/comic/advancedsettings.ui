@@ -20,7 +20,7 @@
       </font>
      </property>
      <property name="text">
-      <string extracomment="refers to caching of files on the users hd">Cache</string>
+      <string comment="refers to caching of files on the users hd">Cache</string>
      </property>
     </widget>
    </item>
