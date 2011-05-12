@@ -78,7 +78,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string comment="noun, the 24-hour period" extracomment="noun, the 24-hour period">days</string>
+             <string comment="noun, the 24-hour period">days</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
