@@ -144,10 +144,7 @@ QRectF KGraphicsWebSlice::previewGeometry(const QString &selector) const
 QRectF KGraphicsWebSlice::sliceGeometry(const QString &selector) const
 {
     QWebElement el = page()->mainFrame()->findFirstElement(selector);
-    if (d->selectorGeometry.keys().contains(qHash(el.toOuterXml()))) {
-        return d->selectorGeometry[qHash(el.toOuterXml())];
-    }
-    return QRectF();
+    return d->selectorGeometry.value(qHash(el.toOuterXml()));
 }
 
 void KGraphicsWebSlice::resizeEvent ( QGraphicsSceneResizeEvent * event )
