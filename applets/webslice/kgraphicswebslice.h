@@ -86,7 +86,7 @@ public:
      * @return The CSS selector used to identify the element to render as
      * the slice
      **/
-    QString element();
+    QString element() const;
 
     /**
      * Returns the manually set sliceGeometry inside the page. If you are using
@@ -97,7 +97,7 @@ public:
      * @return The geometry of the slice within the page, if selector is empty, the current
      * element is show, if the slice is not found, a zero-size rect will be returned.
      **/
-    QRectF sliceGeometry(const QString &selector = QString());
+    QRectF sliceGeometry(const QString &selector = QString()) const;
 
     /**
      * Returns a pixmap of the selected slice. Which slice to show is determined
@@ -105,7 +105,7 @@ public:
      *
      * @return A QPixmap of a part of the webpage
      **/
-    QPixmap elementPixmap();
+    QPixmap elementPixmap() const;
 
     /**
      * Sets the text shown while the widget is loading. You can use HTML here,
@@ -179,9 +179,9 @@ private:
      * Initial creating of slice and setting of sizing information.
      */
     void setPreviewMode(bool = true);
-    QRectF previewGeometry(const QString &selector);
+    QRectF previewGeometry(const QString &selector) const;
     void updateElementCache();
-    QRectF mapFromPage(const QRectF &rectOnPage);
+    QRectF mapFromPage(const QRectF &rectOnPage) const;
     struct KGraphicsWebSlicePrivate *d;
 
 };

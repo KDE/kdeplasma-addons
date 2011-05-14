@@ -136,12 +136,12 @@ void KGraphicsWebSlice::updateElementCache()
     }
 }
 
-QRectF KGraphicsWebSlice::previewGeometry(const QString &selector)
+QRectF KGraphicsWebSlice::previewGeometry(const QString &selector) const
 {
     return QRectF(page()->mainFrame()->findFirstElement(selector).geometry());
 }
 
-QRectF KGraphicsWebSlice::sliceGeometry(const QString &selector)
+QRectF KGraphicsWebSlice::sliceGeometry(const QString &selector) const
 {
     QWebElement el = page()->mainFrame()->findFirstElement(selector);
     if (d->selectorGeometry.keys().contains(qHash(el.toOuterXml()))) {
@@ -245,7 +245,7 @@ void KGraphicsWebSlice::showPage()
     update();
 }
 
-QPixmap KGraphicsWebSlice::elementPixmap()
+QPixmap KGraphicsWebSlice::elementPixmap() const
 {
     QRectF rect = sliceGeometry();
     if (!rect.isValid()) {
