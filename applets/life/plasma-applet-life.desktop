@@ -57,6 +57,7 @@ Name[x-test]=xxLifexx
 Name[zh_CN]=生命
 Name[zh_TW]=生命
 Comment=Conway's Game of Life applet
+Comment[nl]=Applet voor Conway's Game of Life
 Comment[pt]='Applet' do Jogo da Vida da Conway
 Comment[sv]=Miniprogram med Conways Game of Life
 Comment[uk]=Аплет гри «Life» (Життя), вигаданої Конвеєм
