@@ -1,6 +1,6 @@
 # Project Needs a name ofcourse
 project(plasmaboard)
-	 
+
 # Find the required Libaries
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
@@ -11,9 +11,13 @@ include_directories(
    ${CMAKE_BINARY_DIR}
    ${KDE4_INCLUDES}
    )
-	 
+
 # We add our source code here
-set(plasmaboard_SRCS widget.cpp BoardKey.cpp PanelIcon.cpp AlphaNumKey.cpp DualKey.cpp FuncKey.cpp EnterKey.cpp BackspaceKey.cpp TabKey.cpp ShiftKey.cpp CapsKey.cpp ArrowTopKey.cpp ArrowBottomKey.cpp ArrowLeftKey.cpp ArrowRightKey.cpp tooltip.cpp StickyKey.cpp SwitchKey.cpp Layout.cpp)
+set(plasmaboard_SRCS widget.cpp BoardKey.cpp PanelIcon.cpp AlphaNumKey.cpp
+    DualKey.cpp FuncKey.cpp EnterKey.cpp BackspaceKey.cpp TabKey.cpp
+    ShiftKey.cpp CapsKey.cpp ArrowTopKey.cpp ArrowBottomKey.cpp
+    ArrowLeftKey.cpp ArrowRightKey.cpp tooltip.cpp StickyKey.cpp
+    SwitchKey.cpp Layout.cpp Helpers.cpp)
 
 kde4_add_ui_files(plasmaboard_SRCS config.ui)
 	 

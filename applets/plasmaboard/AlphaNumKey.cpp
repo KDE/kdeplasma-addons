@@ -59,7 +59,6 @@ void AlphaNumKey::paintLabel(QPainter *painter)
 
 void AlphaNumKey::setLabel(int level)
 {
-    //m_label = Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),level));
     setLabel(Helpers::mapToUnicode(getKeysymbol(level)));
 }
 
@@ -70,17 +69,17 @@ void AlphaNumKey::setLabel(const QString &label)
 
 void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked)
 {
-	if(isLocked){
-		isLevel2 = !isLevel2;
-	}
-	if(isLevel2){
-		isAlternative ? setLabel(4) : setLabel(1);
-	}
-	else{
-		setLabel(0);
-		/*isAlternative ?
-		setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),0)))) :
-		setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),0))));*/
+    if(isLocked){
+        isLevel2 = !isLevel2;
+    }
+    if(isLevel2){
+        isAlternative ? setLabel(4) : setLabel(1);
+    }
+    else{
+        setLabel(0);
+        /*isAlternative ?
+        setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),0)))) :
+        setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),0))));*/
     }
 }
 

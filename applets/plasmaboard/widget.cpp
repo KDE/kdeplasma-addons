@@ -49,11 +49,8 @@
 
 #include "Helpers.h"
 
-#define REPEAT_TIMER 1500
+#define REPEAT_TIMER 1000
 #define STICKY_TIMER 500
-
-QChar Helpers::mapXtoUTF8[0xffff+1];
-int Helpers::keysymsPerKeycode;
 
 PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     : QGraphicsWidget(parent),
@@ -63,7 +60,6 @@ PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     setFocusPolicy(Qt::NoFocus);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    Helpers::buildUp();
     m_isLevel2 = false;
     m_isAlternative = false;
     m_isLocked = false;
@@ -200,11 +196,11 @@ FuncKey* PlasmaboardWidget::createFunctionKey(const QPoint &point, const QSize &
     else if(action == "KEYPADADD")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Add), QString(i18nc("Plus sign Divider on the keypad", "+")));
     else if(action == "KEYPADSUBTRACT")
-        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Subtract), QString(i18nc("Plus sign Divider on the keypad", "+")));
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Subtract), QString(i18nc("Minus sign on the keypad", "+")));
     else if(action == "KEYPADENTER")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Enter), QString(i18nc("Enter key on the keypad", "Enter")));
     else if(action == "KEYPADSEPARATOR")
-        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Separator), QString(i18nc("Seperator key on the keypad", ".")));
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Separator), QString(i18nc("Separator key on the keypad", ".")));
     else if(action == "KEYPAD1")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_1), QString(i18nc("1 key on the keypad", "1")));
     else if(action == "KEYPAD2")
@@ -226,7 +222,7 @@ FuncKey* PlasmaboardWidget::createFunctionKey(const QPoint &point, const QSize &
     else if(action == "KEYPAD0")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_0), QString(i18nc("0 key on the keypad", "0")));    
     else
-        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString("Unkown"));
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString(i18n("Unknown")));
 }
 
 FuncKey* PlasmaboardWidget::createStickyKey(const QPoint &point, const QSize &size, const QString &action)
