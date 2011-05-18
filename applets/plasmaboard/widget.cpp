@@ -196,7 +196,7 @@ FuncKey* PlasmaboardWidget::createFunctionKey(const QPoint &point, const QSize &
     else if(action == "KEYPADADD")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Add), QString(i18nc("Plus sign Divider on the keypad", "+")));
     else if(action == "KEYPADSUBTRACT")
-        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Subtract), QString(i18nc("Minus sign on the keypad", "+")));
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Subtract), QString(i18nc("Minus sign on the keypad", "-")));
     else if(action == "KEYPADENTER")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Enter), QString(i18nc("Enter key on the keypad", "Enter")));
     else if(action == "KEYPADSEPARATOR")
