@@ -65,8 +65,9 @@ MarbleWallpaper::~MarbleWallpaper()
 
 void MarbleWallpaper::init(const KConfigGroup &config)
 {
-    qreal home_lon, home_lat;
-    int home_zoom;
+    qreal home_lon = 0;
+    qreal home_lat = 0;
+    int home_zoom = 0;
 
     // Only on first start, otherwise opening the config dialog lets us
     // lose the current position
@@ -113,7 +114,8 @@ void MarbleWallpaper::init(const KConfigGroup &config)
     m_map->setShowPlaces(m_showPlacemarks);
 
     if (!isInitialized()) {
-        m_map->zoomView(m_zoom);
+        qreal radius = pow(M_E, (m_zoom / 200.0));
+        m_map->setRadius(radius);
         m_map->centerOn(m_positionLon, m_positionLat);
     }
     updateGlobe();
@@ -208,8 +210,9 @@ void MarbleWallpaper::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
     if (m_movement == Interactive) {
         event->accept();
-        m_map->zoomViewBy(event->delta() > 0 ? 10 : -10);
-        m_zoom = m_map->zoom();
+        m_zoom = qMax(qreal(0), m_zoom + (event->delta() > 0 ? 10 : -10));
+        qreal radius = pow(M_E, (m_zoom / 200.0));
+        m_map->setRadius(radius);
 
         emit update(boundingRect());
     }
