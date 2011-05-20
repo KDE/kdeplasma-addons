@@ -64,6 +64,7 @@ Comment[pt]='Applet' do Jogo da Vida da Conway
 Comment[sv]=Miniprogram med Conways Game of Life
 Comment[uk]=Аплет гри «Life» (Життя), вигаданої Конвеєм
 Comment[x-test]=xxConway's Game of Life appletxx
+Comment[zh_TW]=Conway 的生命遊戲小程式
 Icon=lifegame
 Type=Service
 
