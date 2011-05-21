@@ -49,7 +49,9 @@ class RTM::SessionPrivate {
   SessionPrivate(Session *parent)
     : q(parent),
       auth(0),
-      online(true)
+      online(true),
+      tasksChanged(false),
+      listsChanged(false)
   {
       QObject::connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)), q, SLOT(networkStatusChanged(Solid::Networking::Status)));
       if (Solid::Networking::status() == Solid::Networking::Unconnected) {
@@ -110,7 +112,7 @@ class RTM::SessionPrivate {
     // We do this next bit manually so it doesn't get auto-connected to taskUpdate()
     RTM::Request *smartListRequest = new RTM::Request("rtm.tasks.getList", q->apiKey(), q->sharedSecret());
     smartListRequest->addArgument("auth_token", q->token());
-    smartListRequest->addArgument("rtm_internal_list_id", QString::number(list->id()));
+    smartListRequest->addArgument("list_id", QString::number(list->id()));
     smartListRequest->addArgument("filter", list->filter());
     
     QObject::connect(smartListRequest, SIGNAL(replyReceived(RTM::Request*)), q, SLOT(smartListReply(RTM::Request*)));
@@ -118,37 +120,107 @@ class RTM::SessionPrivate {
     smartListRequest->sendRequest();
   }
 
+  void updateSmartLists() {
+    if (!online)
+      return;
+
+    foreach (RTM::List* list, lists) {
+      if (list->isSmart()) {
+        populateSmartList(list);
+      }
+    }
+  }
+
   void taskUpdate(RTM::Request* reply) {
     TasksReader reader(reply, q);
     reader.read();
     lastRefresh = QDateTime::currentDateTime();
     reply->deleteLater();
+    applyTaskChanges();
+    if (!reply->readOnly()) {
+      updateSmartLists();
+    } else {
+      completeTaskChanges();
+    }
   }
 
   void listUpdate(RTM::Request* reply) {
     TasksReader reader(reply, q);
     reader.read();
     reply->deleteLater();
+    applyListChanges();
+    if (reply->readOnly()) {
+      completeListChanges();
+    }
+  }
+
+  void applyTaskChanges() {
+    foreach(RTM::Task* task, changedTasks) {
+      emit q->taskChanged(task);
+    }
+
+    if (changedTasks.count() > 0) {
+      tasksChanged = true;
+    }
+
+    changedTasks.clear();
+  }
+
+  void completeTaskChanges() {
+    if (tasksChanged) {
+      emit q->tasksChanged();
+    }
+
+    tasksChanged = false;
+  }
+
+  void applyListChanges() {
+    foreach(RTM::List* list, changedLists) {
+      emit q->listChanged(list);
+    }
+
+    if (changedLists.count() > 0) {
+      listsChanged = true;
+    }
+
+    changedLists.clear();
+  }
+
+   void completeListChanges() {
+    if (listsChanged) {
+      emit q->listsChanged();
+    }
+
+    listsChanged = false;
+  }
+
+  void applyChanges() {
+    applyTaskChanges();
+    completeTaskChanges();
+    applyListChanges();
+    completeListChanges();
   }
 
   void smartListReply(RTM::Request* reply) {
     QStringList parts = reply->requestUrl().split("&");
     RTM::ListId id = 0;
     foreach(const QString &part, parts)
-      if (part.contains("rtm_internal_list_id"))
+      if (part.contains("list_id"))
         id = part.split("=").last().toLongLong();
       
     kDebug() << id;
     TasksReader reader(reply, q);
     reader.read();
     RTM::List* list = lists.value(id);
-    foreach(RTM::Task* task, reader.readTasks()) {
-      list->tasks.insert(task->id(), task);
+    if (list) {
+      list->tasks.clear();
+      foreach(RTM::Task* task, changedTasks) {
+        list->tasks.insert(task->id(), task);
+      }
+      changedLists.push_back(list);
     }
+    applyChanges();
 
-    emit q->listChanged(list);
-    emit q->listsChanged();
-    
     reply->deleteLater();
   }
   void settingsReply(RTM::Request* request) {
@@ -200,6 +272,12 @@ class RTM::SessionPrivate {
 
   QHash<RTM::TaskId,RTM::Task*> tasks;
   QHash<RTM::ListId,RTM::List*> lists;
+
+  QList<RTM::Task*> changedTasks;
+  QList<RTM::List*> changedLists;
+
+  bool tasksChanged;
+  bool listsChanged;
 };
 
 #endif

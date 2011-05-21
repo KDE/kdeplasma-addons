@@ -44,6 +44,9 @@ Q_OBJECT
     QString response() const { return m_response; }
     RTM::State state() const { return m_state; }
 
+    void setReadOnly(bool readOnly) { m_readOnly = readOnly; }
+    bool readOnly() const { return m_readOnly; }
+
     virtual QString requestUrl(); // Conveniance
     QString method() const;
 
@@ -67,6 +70,8 @@ Q_OBJECT
     QString m_response;
     int retries;
     static const int MAX_RETRIES;
+    bool m_readOnly;
+
     RTM::State m_state;
     QString sharedSecret;
     KIO::TransferJob* currentJob;
