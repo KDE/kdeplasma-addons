@@ -209,7 +209,7 @@ void RTM::Session::refreshTasksFromServer() {
   RTM::Request *allTasks = request("rtm.tasks.getList");
   if (d->lastRefresh.isValid())
     allTasks->addArgument("last_sync", d->lastRefresh.toUTC().toString(Qt::ISODate));
-  connectTaskRequest(allTasks);
+  allTasks->setReadOnly(false);
   allTasks->sendRequest();
 }
 
@@ -277,8 +277,8 @@ void RTM::Session::addTask(const QString& task, RTM::ListId listId)
   if (list && !list->isSmart())
     newTask->addArgument("list_id", QString::number(listId));
   newTask->addArgument("timeline", QString::number(getTimeline()));
-  
-  connectTaskRequest(newTask);
+  newTask->setReadOnly(false);
+
   newTask->sendRequest();
 }
 

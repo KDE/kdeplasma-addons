@@ -40,6 +40,7 @@ class RTM::TaskPrivate {
       request->addArgument("list_id", QString::number(listId));
       request->addArgument("taskseries_id", QString::number(seriesId));
       request->addArgument("task_id", QString::number(taskId));
+      request->setReadOnly(false);
       return request;
     }
 

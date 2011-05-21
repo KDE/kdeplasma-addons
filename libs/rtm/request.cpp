@@ -33,7 +33,8 @@
 const int RTM::Request::MAX_RETRIES = 10;
 
 RTM::Request::Request(const QString &method, const QString &apiKey, const QString &sharedSecret)
-  : currentJob(0)
+  : m_readOnly(true),
+    currentJob(0)
 {
   arguments.insert("method", method);
   this->sharedSecret = sharedSecret;

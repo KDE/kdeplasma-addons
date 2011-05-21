@@ -238,12 +238,13 @@ ListItem* TaskModel::listFromId(qulonglong id) {
 
 void TaskModel::listUpdate(qulonglong listId)
 {
-  if (m_listItems.contains(listId)) {
-    foreach(const qulonglong &taskid, m_listItems.value(listId)->tasks) {
-        engine->connectSource("Task:" + QString::number(taskid), this);
-    }
+  if (!m_listItems.contains(listId)) {
+    engine->connectSource("List:" + QString::number(listId), this);
   }
-  else engine->connectSource("List:" + QString::number(listId), this);
+
+  foreach(const qulonglong &taskid, m_listItems.value(listId)->tasks) {
+    engine->connectSource("Task:" + QString::number(taskid), this);
+  }
 }
 
 void TaskModel::switchToList(qulonglong listId) {

@@ -54,14 +54,6 @@ RTM::TasksReader::TasksReader(RTM::Request* r, RTM::Session* s)
   request->seek(0);
 }
 
-QList< RTM::List* > RTM::TasksReader::readLists() const {
-  return changedLists;
-}
-
-QList< RTM::Task* > RTM::TasksReader::readTasks() const {
-  return changedTasks;
-}
-
 
 QDateTime RTM::TasksReader::parseDateTime(const QString& datetime)
 {
@@ -90,16 +82,6 @@ bool RTM::TasksReader::read() {
         readUnknownElement();
     }
   }
-
-  foreach(RTM::Task* task, changedTasks)
-    emit session->taskChanged(task);
-  foreach(RTM::List* list, changedLists)
-    emit session->listChanged(list);
-
-  if (changedTasks.count() > 0)
-    emit session->tasksChanged();
-  if (changedLists.count() > 0)
-    emit session->listsChanged();
 
   this->device()->close();
   return true; // !error();
@@ -192,14 +174,14 @@ void RTM::TasksReader::readList() {
   list->setName(attributes().value("name").toString());
   list->setSmart(attributes().value("smart").toString() == "1" ? true : false);
   
-  changedLists.append(list);
+  if (!session->d->changedLists.contains(list)) {
+    session->d->changedLists.append(list);
+  }
   
   while (!atEnd()) {
     readNext();
     if (isEndElement()) {
       session->d->lists.insert(list->id(), list);
-      if (list->isSmart())
-        session->d->populateSmartList(list);
       return;
     }
     if (isStartElement()) {
@@ -297,8 +279,13 @@ void RTM::TasksReader::readTask(TempProps *props) {
   if (!list)
     list = session->newBlankList(props->listId);
 
-  changedTasks.append(task);
-  changedLists.append(list);
+  if (!session->d->changedTasks.contains(task)) {
+    session->d->changedTasks.append(task);
+  }
+
+  if (!session->d->changedLists.contains(list)) {
+    session->d->changedLists.append(list);
+  }
 
   // Grab ID
   task->d->taskId = attributes().value("id").toString().toULong();

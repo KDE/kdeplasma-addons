@@ -41,8 +41,6 @@ public:
   TasksReader(RTM::Request *request, RTM::Session *session);
   
   bool read();
-  QList<RTM::List*> readLists() const;
-  QList<RTM::Task*> readTasks() const;
 
 private:
   Session * const session;
@@ -66,9 +64,6 @@ private:
   void readListsHeader();
     void readList();
       void readFilter(RTM::List* list);
-
-  QList<RTM::Task*> changedTasks;
-  QList<RTM::List*> changedLists;
 };
 
 } // Namespace RTM

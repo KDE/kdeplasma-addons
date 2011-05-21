@@ -117,8 +117,8 @@ bool RtmEngine::updateSourceEvent(const QString& source) {
     return true;
   }
   else if (source.startsWith("Lists")) {
-    ListsSource *listssoruce = static_cast<ListsSource*>(containerForSource(source)); 
-    listssoruce->refresh();
+    ListsSource *listssource = static_cast<ListsSource*>(containerForSource(source));
+    listssource->refresh();
     return true;
   }
   else if (source.startsWith("Tasks")) {
