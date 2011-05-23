@@ -76,6 +76,7 @@ void MarbleWallpaper::init(const KConfigGroup &config)
 
         // Get default position from marble to initialize on first startup (empty config)
         m_map->model()->home(home_lon, home_lat, home_zoom);
+        m_map->model()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
 
         // These settings apply to Marble's "satellite" view mostly, e.g. make it beautiful
         m_map->setShowClouds(true);
@@ -112,6 +113,7 @@ void MarbleWallpaper::init(const KConfigGroup &config)
     m_map->setShowCities(m_showPlacemarks);
     m_map->setShowOtherPlaces(m_showPlacemarks);
     m_map->setShowPlaces(m_showPlacemarks);
+    m_map->setShowTerrain(m_showPlacemarks);
 
     if (!isInitialized()) {
         qreal radius = pow(M_E, (m_zoom / 200.0));
