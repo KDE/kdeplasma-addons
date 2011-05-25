@@ -486,9 +486,11 @@ void IncomingMsg::slotNewEvolutionMail()
 
 void IncomingMsg::slotNewKMailMail()
 {
-    KIcon icon("kmail");
-    mKMailIconLabel->nativeWidget()->setPixmap(icon.pixmap(32, 32));
-    mKMailLabel->setText(i18n("Your KMail mail count has changed."));
+    if (mKMailIconLabel) {
+        KIcon icon("kmail");
+        mKMailIconLabel->nativeWidget()->setPixmap(icon.pixmap(32, 32));
+        mKMailLabel->setText(i18n("Your KMail mail count has changed."));
+    }
 }
 
 void IncomingMsg::slotNewXChatIM()
