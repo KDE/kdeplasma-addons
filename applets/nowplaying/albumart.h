@@ -27,6 +27,12 @@
 class QGraphicsPixmapItem;
 class QPixmap;
 
+namespace Plasma
+{
+    class Svg;
+} // namespace Plasma
+
+
 class AlbumArt : public QGraphicsWidget
 {
     Q_OBJECT
@@ -47,6 +53,7 @@ protected:
 private:
     QPixmap m_pixmap;
     QPixmap m_scaledPixmap;
+    Plasma::Svg *m_noAlbumSvg;
 };
 
 #endif // ALBUMART_H

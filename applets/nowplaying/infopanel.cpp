@@ -71,6 +71,7 @@ InfoPanel::InfoPanel(QGraphicsWidget *parent)
     m_barLayout->addItem(m_artwork);
     m_barLayout->addItem(m_layout);
 
+    m_artwork->setPixmap(QPixmap());
     setLayout(m_barLayout);
 }
 
@@ -97,6 +98,7 @@ void InfoPanel::updateLabels()
 
     // dirty hack to make sure the Artist: label is in line
     // FIXME: does this ever happen in plasma, or just in the plasmoidviewer?
+    m_layout->invalidate();
     m_barLayout->invalidate();
 }
 

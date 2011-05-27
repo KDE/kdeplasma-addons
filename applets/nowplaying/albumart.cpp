@@ -24,10 +24,13 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 
-#include <kdebug.h>
+#include <KDebug>
+
+#include <Plasma/Svg>
 
 AlbumArt::AlbumArt(QGraphicsWidget* parent)
-    : QGraphicsWidget(parent)
+    : QGraphicsWidget(parent),
+      m_noAlbumSvg(0)
 {
     QSizePolicy policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     //policy.setHeightForWidth(true);
@@ -43,8 +46,15 @@ void AlbumArt::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
-    if (m_pixmap.isNull())
+    if (m_pixmap.isNull()) {
+        if (m_noAlbumSvg) {
+            QSize s = m_noAlbumSvg->size();
+            QRectF r(QPointF(0, 0), s);
+            r.moveTo(rect().center().x() - (r.width() / 2), r.y());
+            m_noAlbumSvg->paint(painter, r);
+        }
         return;
+    }
 
     if (m_scaledPixmap.size() != size()) {
         QSize scaledSize (m_pixmap.size());
@@ -65,12 +75,25 @@ void AlbumArt::setPixmap(const QPixmap& pixmap)
     m_pixmap = pixmap;
     m_scaledPixmap = QPixmap();
     if (pixmap.isNull()) {
-        hide();
-        updateGeometry();
+        if (!m_noAlbumSvg) {
+            m_noAlbumSvg = new Plasma::Svg(this);
+            m_noAlbumSvg->setImagePath("widgets/nowplaying/nocover");
+            QSizeF s = size();
+            if (s.width() > s.height()) {
+                s.setWidth(s.height());
+            } else if (s.height() > s.width()) {
+                s.setHeight(s.width());
+            }
+            m_noAlbumSvg->resize(s);
+        }
     } else {
-        show();
-        updateGeometry();
+        delete m_noAlbumSvg;
+        m_noAlbumSvg = 0;
     }
+
+    show();
+    updateGeometry();
+    update();
 }
 
 void AlbumArt::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -85,6 +108,15 @@ void AlbumArt::resizeEvent(QGraphicsSceneResizeEvent* event)
         (newSize.height() != newSize.width())) {
         //kDebug() << "Old size:" << oldSize << "; new size:" << newSize;
         updateGeometry();
+        if (m_noAlbumSvg) {
+            QSizeF s = size();
+            if (s.width() > s.height()) {
+                s.setWidth(s.height());
+            } else if (s.height() > s.width()) {
+                s.setHeight(s.width());
+            }
+            m_noAlbumSvg->resize(s);
+        }
     }
 }
 
@@ -93,7 +125,11 @@ QSizeF AlbumArt::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
     QSizeF hint;
     if (which == Qt::PreferredSize) {
         if (m_pixmap.isNull()) {
-            hint = QSize(0, 0);
+            if (m_noAlbumSvg) {
+                hint = QGraphicsWidget::sizeHint(which, constraint).expandedTo(QSizeF(128, 128));
+            } else {
+                hint = QSize(0, 0);
+            }
         } else if (size().height() < 1) {
             hint = m_pixmap.size();
         } else {
