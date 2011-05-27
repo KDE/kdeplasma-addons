@@ -66,6 +66,7 @@ InfoPanel::InfoPanel(QGraphicsWidget *parent)
     m_layout->addItem(m_albumText, 2, 1);
     m_layout->addItem(m_timeLabel, 3, 0);
     m_layout->addItem(m_timeText, 3, 1);
+    m_layout->setRowStretchFactor(4, 100);
 
     m_barLayout->addItem(m_artwork);
     m_barLayout->addItem(m_layout);
