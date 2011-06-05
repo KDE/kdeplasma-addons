@@ -25,9 +25,9 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QDomDocument>
 #include <QCursor>
+#include <QSvgRenderer>
 #include <KDebug>
 #include <KFilterDev>
-#include <KSvgRenderer>
 #include <Plasma/Theme>
 
 class LCD::Private
@@ -37,7 +37,7 @@ class LCD::Private
         QString content;
         // We don't use Plasma::Svg here because it has some accuracy problems.
         // lcd numbers did not look good with that.
-        KSvgRenderer svg;
+        QSvgRenderer svg;
         bool dirty;
         bool xmlDirty;
         QPixmap img;
