@@ -203,6 +203,7 @@ class ComicApplet : public Plasma::PopupApplet
         void saveConfig();
         bool isInPanel() const;
         void setTabBarVisible( bool isVisible );//HACK what was in 4.4 does not seem to work anymore, so this was added
+        QString getSavingDir() const;
 
     private:
         static const int CACHE_LIMIT;

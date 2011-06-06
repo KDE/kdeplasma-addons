@@ -896,7 +896,7 @@ void ComicApplet::updateSize()
 
 void ComicApplet::createComicBook()
 {
-    ComicArchiveDialog *dialog = new ComicArchiveDialog( mComicIdentifier, mComicTitle, mComicType, mCurrentIdentifierSuffix, mFirstIdentifierSuffix );
+    ComicArchiveDialog *dialog = new ComicArchiveDialog( mComicIdentifier, mComicTitle, mComicType, mCurrentIdentifierSuffix, mFirstIdentifierSuffix, getSavingDir() );
     dialog->setAttribute( Qt::WA_DeleteOnClose );//to have destroyed emitted upon closing
     connect( dialog, SIGNAL(archive(int,KUrl,QString,QString)), this, SLOT(slotArchive(int,KUrl,QString,QString)) );
     dialog->show();
@@ -904,6 +904,9 @@ void ComicApplet::createComicBook()
 
 void ComicApplet::slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier )
 {
+    mSavingDir = dest.directory();
+    saveConfig();
+
     kDebug() << "Archiving:" << mComicIdentifier <<  archiveType << dest << fromIdentifier << toIdentifier;
     ComicArchiveJob *job = new ComicArchiveJob( dest, mEngine, static_cast< ComicArchiveJob::ArchiveType >( archiveType ), mComicType,  mComicIdentifier, this );
     job->setFromIdentifier( mComicIdentifier + ':' + fromIdentifier );
@@ -1000,6 +1003,22 @@ void ComicApplet::updateContextMenu()
     }
 }
 
+QString ComicApplet::getSavingDir() const
+{
+    QString dir = mSavingDir;
+    if ( dir.isEmpty() ) {
+        dir = KGlobalSettings::picturesPath();
+    }
+    if ( dir.isEmpty() ) {
+        dir = KGlobalSettings::downloadPath();
+    }
+    if ( dir.isEmpty() ) {
+        dir = QDir::homePath();
+    }
+
+    return dir;
+}
+
 void ComicApplet::slotSaveComicAs()
 {
     KTemporaryFile tempFile;
@@ -1013,20 +1032,9 @@ void ComicApplet::slotSaveComicAs()
 
     KUrl srcUrl( tempFile.fileName() );
 
-    QString dir = mSavingDir;
-    if ( dir.isEmpty() ) {
-        dir = KGlobalSettings::picturesPath();
-    }
-    if ( dir.isEmpty() ) {
-        dir = KGlobalSettings::downloadPath();
-    }
-    if ( dir.isEmpty() ) {
-        dir = QDir::homePath();
-    }
-
-    QString name = mComicTitle + " - " + mCurrentIdentifierSuffix + ".png";
-
-    KUrl destUrl = KUrl(dir);
+    QString dir = getSavingDir();
+    const QString name = mComicTitle + " - " + mCurrentIdentifierSuffix + ".png";
+    KUrl destUrl = KUrl( dir );
     destUrl.addPath( name );
 
     destUrl = KFileDialog::getSaveUrl( destUrl, "*.png" );

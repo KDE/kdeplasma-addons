@@ -22,7 +22,7 @@
 
 #include <KFileDialog>
 
-ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString &comicName, IdentifierType identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, QWidget *parent )
+ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString &comicName, IdentifierType identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, const QString &savingDir, QWidget *parent )
   : KDialog( parent ),
     mIdentifierType( identifierType ),
     mPluginName( pluginName )
@@ -81,6 +81,9 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
 
     //TODO suggest file name!
     ui.dest->fileDialog()->setOperationMode( KFileDialog::Saving );
+    if ( !savingDir.isEmpty() ) {
+        ui.dest->setStartDir( savingDir );
+    }
 
     connect( ui.archiveType, SIGNAL(currentIndexChanged(int)), this, SLOT(archiveTypeChanged(int)) );
     connect( ui.dest, SIGNAL(textChanged(QString)), this, SLOT(updateOkButton()) );
