@@ -241,6 +241,9 @@ void ComicApplet::init()
     mActions.append( mActionStorePosition );
     connect( mActionStorePosition, SIGNAL( triggered( bool ) ), this, SLOT( slotStorePosition() ) );
 
+    //make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
+    updateView();
+
     updateUsedComics();
     changeComic( true );
 }
@@ -490,6 +493,23 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
         mEngine->disconnectSource( source, this );
     }
 
+    //prefetch the previous and following comic for faster navigation
+    if ( !mNextIdentifierSuffix.isEmpty() ) {
+        const QString prefetch = mComicIdentifier + ':' + mNextIdentifierSuffix;
+        mEngine->connectSource( prefetch, this );
+        mEngine->query( prefetch );
+    }
+    if ( !mPreviousIdentifierSuffix.isEmpty() ) {
+        const QString prefetch = mComicIdentifier + ':' + mPreviousIdentifierSuffix;
+        mEngine->connectSource( prefetch, this );
+        mEngine->query( prefetch );
+    }
+
+    updateView();
+}
+
+void ComicApplet::updateView()
+{
     const bool tabsVisible = (mTabIdentifier.count() > 1);
     setTabBarVisible( tabsVisible );
     mLabelTop->setVisible( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() );
@@ -516,18 +536,6 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
     if ( !mImage.isNull() ) {
         QTimer::singleShot( 1, this, SLOT( updateSize()) );//HACK
-    }
-
-    //prefetch the previous and following comic for faster navigation
-    if ( !mNextIdentifierSuffix.isEmpty() ) {
-        const QString prefetch = mComicIdentifier + ':' + mNextIdentifierSuffix;
-        mEngine->connectSource( prefetch, this );
-        mEngine->query( prefetch );
-    }
-    if ( !mPreviousIdentifierSuffix.isEmpty() ) {
-        const QString prefetch = mComicIdentifier + ':' + mPreviousIdentifierSuffix;
-        mEngine->connectSource( prefetch, this );
-        mEngine->query( prefetch );
     }
 }
 
@@ -589,6 +597,9 @@ void ComicApplet::applyConfig()
     updateUsedComics();
     saveConfig();
     buttonBar();
+
+    //make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
+    updateView();
 
     changeComic( mDifferentComic );
 }

@@ -200,6 +200,7 @@ class ComicApplet : public Plasma::PopupApplet
         void updateUsedComics();
         void updateButtons();
         void updateContextMenu();
+        void updateView();
         void saveConfig();
         bool isInPanel() const;
         void setTabBarVisible( bool isVisible );//HACK what was in 4.4 does not seem to work anymore, so this was added
