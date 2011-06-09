@@ -296,6 +296,8 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         Q_PRIVATE_SLOT( d, void slotRedirection( KIO::Job*, KUrl ) )
         Q_PRIVATE_SLOT( d, void slotRedirection( KIO::Job*, KUrl, KUrl ) )
         Q_PRIVATE_SLOT( d, void slotRedirectionDone( KJob* ) )
+        Q_PRIVATE_SLOT( d, void slotTimeout() )
+        Q_PRIVATE_SLOT( d, void slotFinished() )
 };
 
 #endif

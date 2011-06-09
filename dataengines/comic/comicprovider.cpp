@@ -18,6 +18,8 @@
 
 #include "comicprovider.h"
 
+#include <QtCore/QTimer>
+
 #include <KDebug>
 #include <KIO/Job>
 #include <KIO/StoredTransferJob>
@@ -32,6 +34,10 @@ class ComicProvider::Private
               mFirstStripNumber( 1 ),
               mComicDescription( service )
         {
+            mTimer = new QTimer( parent );
+            mTimer->setSingleShot( true );
+            mTimer->setInterval( 15000 );//timeout after 15 seconds
+            connect( mTimer, SIGNAL(timeout()), mParent, SLOT(slotTimeout()) );
         }
 
         void jobDone( KJob *job )
@@ -70,6 +76,18 @@ class ComicProvider::Private
             }
         }
 
+        void slotTimeout()
+        {
+            //operation took too long, abort it
+            mParent->error( mParent );
+        }
+
+        void slotFinished()
+        {
+            //everything finished, stop the timeout timer
+            mTimer->stop();
+        }
+
         ComicProvider *mParent;
         QString mRequestedId;
         QString mRequestedComicName;
@@ -83,6 +101,7 @@ class ComicProvider::Private
         int mRequestedNumber;
         int mFirstStripNumber;
         KPluginInfo mComicDescription;
+        QTimer *mTimer;
         QHash< KJob*, KUrl > mRedirections;
 };
 
@@ -103,8 +122,12 @@ ComicProvider::ComicProvider( QObject *parent, const QVariantList &args )
         int index = d->mRequestedId.indexOf( QLatin1Char( ':' ) );
         d->mRequestedComicName = d->mRequestedId.mid( 0, index );
     }
-    else
+    else {
         Q_ASSERT( false && "Invalid type passed to comic provider" );
+    }
+
+    d->mTimer->start();
+    connect( this, SIGNAL(finished(ComicProvider*)), this, SLOT(slotFinished()) );
 }
 
 ComicProvider::~ComicProvider()
@@ -211,6 +234,9 @@ QString ComicProvider::requestedComicName() const
 
 void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos )
 {
+    //each request restarts the timer
+    d->mTimer->start();
+
     if (id == Image) {
         d->mImageUrl = url;
     }
