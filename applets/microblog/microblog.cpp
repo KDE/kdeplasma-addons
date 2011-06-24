@@ -806,11 +806,12 @@ bool MicroBlog::eventFilter(QObject *obj, QEvent *event)
 
 void MicroBlog::updateStatus()
 {
+    createTimelineService();
+
     if (!m_service) {
         return;
     }
 
-    createTimelineService();
     QString status = m_statusEdit->nativeWidget()->toPlainText();
 
     KConfigGroup cg = m_service->operationDescription("update");
@@ -902,17 +903,11 @@ void MicroBlog::downloadHistory()
 
     m_flash->flash(i18n("Refreshing timeline..."), -1);
 
-    if (m_service && m_tabBar->currentIndex() == m_lastMode) {
-        KConfigGroup cg = m_service->operationDescription("refresh");
+    createTimelineService();
+    if (m_service) {
+        KConfigGroup cg = m_service->operationDescription("auth");
+        cg.writeEntry("password", m_password);
         m_service->startOperationCall(cg);
-    } else {
-        createTimelineService();
-
-        if (m_service) {
-            KConfigGroup cg = m_service->operationDescription("auth");
-            cg.writeEntry("password", m_password);
-            m_service->startOperationCall(cg);
-        }
     }
 
     //get the profile to retrieve the user icon
@@ -934,15 +929,16 @@ void MicroBlog::downloadHistory()
 
 void MicroBlog::createTimelineService()
 {
-    if (m_service && m_lastMode == m_tabBar->currentIndex()) {
+    if (!m_tabBar || (m_service && m_lastMode == m_tabBar->currentIndex())) {
         return;
-    } else if (m_service) {
-        delete m_service;
-        m_lastMode = m_tabBar->currentIndex();
     }
 
+    delete m_service;
+    m_service = 0;
+    m_lastMode = m_tabBar->currentIndex();
+
     QString query;
-    switch(m_tabBar->currentIndex()) {
+    switch (m_tabBar->currentIndex()) {
     case 2:
         query = "Messages:%1@%2";
         break;
@@ -950,7 +946,7 @@ void MicroBlog::createTimelineService()
         query = "Replies:%1@%2";
         break;
     default:
-        if(m_includeFriends) {
+        if (m_includeFriends) {
             query = QString("TimelineWithFriends:%1@%2");
         } else {
             query = QString("Timeline:%1@%2");
