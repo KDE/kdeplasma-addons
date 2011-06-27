@@ -42,7 +42,7 @@ TasksSource::TasksSource(RtmEngine* engine, RTM::Session* session)
   timer.setInterval(1000*60*2); // 5 minute refresh. TODO: Make Configurable.
   timer.start();
   setObjectName("Tasks");
-  tasksChanged();
+  loadCache();
 }
 
 TasksSource::~TasksSource()
@@ -64,15 +64,20 @@ void TasksSource::refresh()
 
 void TasksSource::tasksChanged() {
   removeAllData();
-  kDebug() << "Updating Tasks. " << m_session->cachedTasks().count();
-  foreach(RTM::Task* task, m_session->cachedTasks())
-    setData(QString::number(task->id()), task->name()); // ids are unique, names are not
+  loadCache();
 }
 
 
 void TasksSource::taskChanged(RTM::Task* task) {
   setData(QString::number(task->id()), task->name());
   m_engine->updateTaskSource(QString::number(task->id()));
+}
+
+void TasksSource::loadCache() {
+  kDebug() << "Updating Tasks. " << m_session->cachedTasks().count();
+  foreach(RTM::Task* task, m_session->cachedTasks()) {
+    setData(QString::number(task->id()), task->name()); // ids are unique, names are not
+  }
 }
 
 #include "taskssource.moc"

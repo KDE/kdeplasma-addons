@@ -60,8 +60,13 @@ RtmEngine::~RtmEngine() {
 bool RtmEngine::tokenCheck(bool success)
 {
   if (success) {
-    session->refreshListsFromServer();
-    session->refreshTasksFromServer();
+    if (sources().contains("Lists")) {
+      session->refreshListsFromServer();
+    }
+
+    if (sources().contains("Tasks")) {
+      session->refreshTasksFromServer();
+    }
   }
   return updateSourceEvent("Auth");
 }
