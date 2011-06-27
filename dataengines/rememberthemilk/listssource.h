@@ -48,6 +48,7 @@ public slots:
 private slots:
     void listsChanged();
     void listChanged(RTM::List*);
+    void loadCache();
 
 private:
     RtmEngine *m_engine;

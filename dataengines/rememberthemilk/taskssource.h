@@ -54,6 +54,7 @@ public slots:
 private slots:
     void taskChanged(RTM::Task* task);
     void tasksChanged();
+    void loadCache();
 
 private:
     RtmEngine *m_engine;

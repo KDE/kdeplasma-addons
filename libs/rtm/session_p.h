@@ -66,25 +66,24 @@ class RTM::SessionPrivate {
 
   void networkStatusChanged(Solid::Networking::Status status) {
     switch (status) {
-    case Solid::Networking::Connected: case Solid::Networking::Unknown:
+    case Solid::Networking::Connected:
+    case Solid::Networking::Unknown:
         if (online)
           return;
 
         online = true;
         q->checkToken();
         refreshSettings();
-        q->refreshListsFromServer();
-        q->refreshTasksFromServer();
         break;
-      case Solid::Networking::Unconnected:
-      case Solid::Networking::Disconnecting:
-      case Solid::Networking::Connecting:
+    case Solid::Networking::Unconnected:
+    case Solid::Networking::Disconnecting:
+    case Solid::Networking::Connecting:
         if (!online)
           return;
 
         online = false;
         break;
-      }
+    }
   }
   
   void offlineError() {
@@ -252,7 +251,7 @@ class RTM::SessionPrivate {
     QObject::connect(settingsRequest, SIGNAL(replyReceived(RTM::Request*)), q, SLOT(settingsReply(RTM::Request*)));
     settingsRequest->sendRequest();
   }
-  
+
 
   friend class TasksReader;
   friend class Session;

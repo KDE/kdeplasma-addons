@@ -40,7 +40,7 @@ ListsSource::ListsSource(RtmEngine* engine, RTM::Session* session)
   timer.setInterval(1000*60*5); // 5 minute refresh. TODO: Make Configurable.
   timer.start();
   setObjectName("Lists");
-  listsChanged();
+  loadCache();
 }
 
 ListsSource::~ListsSource()
@@ -69,12 +69,15 @@ void ListsSource::listChanged(RTM::List* list) {
 
 void ListsSource::listsChanged() {
   removeAllData();
-  
+  loadCache();
+
+  checkForUpdate();
+}
+
+void ListsSource::loadCache() {
   foreach(RTM::List *list, m_session->cachedLists()) {
     setData(QString::number(list->id()), list->name());
   }
-  
-  checkForUpdate();
 }
 
 #include "listssource.moc"

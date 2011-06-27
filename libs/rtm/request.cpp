@@ -50,13 +50,19 @@ void RTM::Request::addArgument(const QString &name, const QString &value) {
 void RTM::Request::sendRequest()
 {
   static QDateTime lastRequest;
-  
+  static unsigned int queueSize;
+
+  int margin = lastRequest.msecsTo(QDateTime::currentDateTime());
+
   // Follow RTM's TOS and only do 1 request per second.
-  if (lastRequest.secsTo(QDateTime::currentDateTime()) <= 1) {
-    QTimer::singleShot(1000, this, SLOT(sendRequest())); 
-    //kDebug() << "Postponing Job for 1 second";
+  if (margin <= 1000) {
+    const int timeout = 1000 * (queueSize + 1) - margin + queueSize * 2 + 1;
+    QTimer::singleShot(timeout, this, SLOT(sendRequest())); 
+    //kDebug() << "Postponing Job for"<<timeout<<"ms";
+    ++queueSize;
     return;
   }
+  queueSize = 0;
   QString url = requestUrl();
   kDebug() << "Request ready. Url is: " << url;
   currentJob = KIO::get(KUrl(url.toUtf8()), KIO::NoReload, KIO::HideProgressInfo);
