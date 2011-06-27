@@ -57,7 +57,6 @@ protected:
   static const QString apiKey;
   static const QString sharedSecret;
 
-  QString token;
   RTM::Session *session;
     
 };
