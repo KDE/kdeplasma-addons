@@ -62,6 +62,7 @@ bool RtmEngine::tokenCheck(bool success)
   if (success) {
     session->refreshListsFromServer();
     session->refreshTasksFromServer();
+    this->token = session->token();
   }
   return updateSourceEvent("Auth");
 }
