@@ -58,6 +58,9 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_tabBar->setFirstPositionWidget(m_newTab);
     m_tabBar->setLastPositionWidget(m_closeTab);
 
+    m_newTab->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+    m_closeTab->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+
     m_layout->addItem(m_tabBar);
     setLayout(m_layout);
 
