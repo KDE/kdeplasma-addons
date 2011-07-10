@@ -223,7 +223,7 @@ public:
             new ActionListView(step->model, parent);
         list->setGroupByName(parent->group()->name() + "-Atlas");
 
-        button->setIconSize(QSize(24, 24));
+        button->setIconSize(QSize(22, 22));
         button->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
         button->setGroupByName(parent->group()->name() + "-InactiveButton");
