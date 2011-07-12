@@ -45,7 +45,7 @@ GroupInfo::GroupInfo(const QString &name, const QString &prettyName)
 
 GroupInfo::~GroupInfo()
 {
-
+    delete d;
 }
 
 void GroupInfo::setFormFactors(QSet<Plasma::FormFactor> formFactors)
