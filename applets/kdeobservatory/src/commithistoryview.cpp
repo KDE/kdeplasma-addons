@@ -124,7 +124,11 @@ void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
         plot->setCanvasBackground(QColor(0, 0, 140));
 
         QwtPlotCurve *curve = new QwtPlotCurve;
+#if QWT_VERSION >= (((6) << 16) | ((0) << 8) | (0))
+        curve->setSamples(x, y, j);
+#else
         curve->setData(x, y, j);
+#endif
         delete []x;
         delete []y;
 
