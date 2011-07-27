@@ -24,6 +24,7 @@
 
 #include <KDebug>
 #include <KServiceTypeTrader>
+#include <KSycoca>
 #include <KStandardDirs>
 
 #include "cachedprovider.h"
@@ -43,6 +44,7 @@ void ComicEngine::init()
 {
     connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
+    connect( KSycoca::self(), SIGNAL(databaseChanged(QStringList)), this, SLOT(sycocaUpdated(QStringList)) );
 }
 
 void ComicEngine::networkStatusChanged( Solid::Networking::Status status )
@@ -53,31 +55,40 @@ void ComicEngine::networkStatusChanged( Solid::Networking::Status status )
     }
 }
 
+void ComicEngine::sycocaUpdated( const QStringList &changedResources )
+{
+    if ( changedResources.contains( QLatin1String( "services" ) ) ) {
+        updateFactories();
+    }
+}
+
 void ComicEngine::updateFactories()
 {
     mFactories.clear();
+    removeAllData( QLatin1String( "providers" ) );
     KService::List services = KServiceTypeTrader::self()->query( QLatin1String( "Plasma/Comic" ) );
     Q_FOREACH ( const KService::Ptr &service, services ) {
         mFactories.insert( service->property( QLatin1String( "X-KDE-PluginInfo-Name" ), QVariant::String ).toString(),
                            service );
+        if ( service->isDeleted() ) {
+            continue;
+        }
+        QStringList data;
+        data << service->name();
+        QFileInfo file( service->icon() );
+        if ( file.isRelative() ) {
+            data << KStandardDirs::locate( "data", QString( QLatin1String( "plasma-comic/%1.png" ) ).arg( service->icon() ) );
+        } else {
+            data << service->icon();
+        }
+        setData( QLatin1String( "providers" ), service->property( QLatin1String( "X-KDE-PluginInfo-Name" ), QVariant::String ).toString(), data );
     }
 }
 
 bool ComicEngine::updateSourceEvent( const QString &identifier )
 {
     if ( identifier == QLatin1String( "providers" ) ) {
-        KService::List services = KServiceTypeTrader::self()->query( QLatin1String( "Plasma/Comic" ) );
-        foreach ( const KService::Ptr &service, services ) {
-            QStringList data;
-            data << service->name();
-            QFileInfo file( service->icon() );
-            if ( file.isRelative() ) {
-                data << KStandardDirs::locate( "data", QString( QLatin1String( "plasma-comic/%1.png" ) ).arg( service->icon() ) );
-            } else {
-                data << service->icon();
-            }
-            setData( identifier, service->property( QLatin1String( "X-KDE-PluginInfo-Name" ), QVariant::String ).toString(), data );
-        }
+        updateFactories();
         return true;
     } else if ( identifier.startsWith( QLatin1String( "setting_maxComicLimit:" ) ) ) {
         bool worked;
