@@ -26,8 +26,6 @@
 FullViewWidget::FullViewWidget()
     : QWidget( 0, Qt::Popup )
 {
-    const QDesktopWidget desktop;
-    mDesktopSize = desktop.availableGeometry( this );
 }
 
 FullViewWidget::~FullViewWidget()
@@ -42,12 +40,24 @@ void FullViewWidget::setImage( const QImage &image )
 
 void FullViewWidget::adaptPosition( const QPoint &pos )
 {
+    if ( !mDesktopSize.isValid() ) {
+        const QDesktopWidget desktop;
+        mDesktopSize = desktop.availableGeometry( pos );
+    }
+
     int x = pos.x();
     int y = pos.y();
-    if ( x + width() > mDesktopSize.width() )
+
+    //left() and top() needed for multiple screens
+    const int neededX = x - mDesktopSize.left() + width();
+    const int neededY = y - mDesktopSize.top() + height();
+
+    if ( neededX > mDesktopSize.width() ) {
         x = mDesktopSize.left();
-    if ( y + height() > mDesktopSize.height() )
+    }
+    if ( neededY > mDesktopSize.height() ) {
         y = mDesktopSize.top();
+    }
 
     move( x, y );
 }
