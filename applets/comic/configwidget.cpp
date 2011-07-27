@@ -130,28 +130,28 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSort
     connect(appearanceUi.kbuttongroup, SIGNAL(changed(int)), this , SIGNAL(enableApply()));
     connect(advancedUi.maxComicLimit, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
     connect(advancedUi.errorPicture, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+
+    mEngine->connectSource( QLatin1String( "providers" ), this );
 }
 
 ConfigWidget::~ConfigWidget()
 {
+    mEngine->disconnectSource( QLatin1String( "providers" ), this );
 }
 
 void ConfigWidget::getNewStuff()
 {
     if (!mNewStuffDialog) {
         mNewStuffDialog = new KNS3::DownloadDialog( "comic.knsrc", this );
-        connect(mNewStuffDialog, SIGNAL(accepted()), SLOT(newStuffFinished()));
     }
     mNewStuffDialog->show();
 }
 
-void ConfigWidget::newStuffFinished()
+void ConfigWidget::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
-    if ( mNewStuffDialog->changedEntries().count() ) {
-        mModel->setComics( mEngine->query( "providers" ), mModel->selected() );
-
-        comicUi.listView_comic->resizeColumnToContents( 0 );
-    }
+    Q_UNUSED(name);
+    mModel->setComics( data, mModel->selected() );
+    comicUi.listView_comic->resizeColumnToContents( 0 );
 }
 
 void ConfigWidget::setShowComicUrl( bool show )

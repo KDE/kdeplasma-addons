@@ -29,6 +29,7 @@
 #include <QTime>
 
 #include <KNS3/Entry>
+#include <Plasma/DataEngine>
 
 class ComicModel;
 class KConfigDialog;
@@ -120,9 +121,11 @@ class ConfigWidget : public QWidget
         void maxSizeClicked();
         void enableApply();
 
+    public slots:
+         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
+
     protected slots:
         void getNewStuff();
-        void newStuffFinished();
 
     private:
         Ui::ComicSettings comicUi;

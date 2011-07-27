@@ -57,6 +57,7 @@ class ComicEngine : public Plasma::DataEngine
         void finished( ComicProvider* );
         void error( ComicProvider* );
         void networkStatusChanged( Solid::Networking::Status );
+        void sycocaUpdated( const QStringList &changedResources );
 
     private:
         bool mEmptySuffix;
