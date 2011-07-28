@@ -83,7 +83,7 @@ void FileWatcher::configChanged()
   m_filters = cg.readEntry("filters", QStringList());
   m_showOnlyMatches = cg.readEntry("showOnlyMatches", false);
   m_useRegularExpressions = cg.readEntry("useRegularExpressions", false);
-  
+
   if (path.isEmpty()) {
       setConfigurationRequired(true, i18n("Select a file to watch."));
   } else {
@@ -172,11 +172,18 @@ void FileWatcher::newData()
     //Slight speed optimization hack for bigger files.
     //Doing this is faster than doing unnecessary insertText()
     QString data = textStream->readAll();
+
+    if (data.isEmpty()) {
+        textStream->seek(0);
+        data = textStream->readAll();
+        textDocument->clear();
+    }
+
     QStringList tmpList = data.split('\n', QString::SkipEmptyParts);
-  
+
     if (m_showOnlyMatches){
-            for (int i = tmpList.size() - 1; i >= 0; i--){
-                for (int j = 0; j < m_filters.size(); j++){
+            for (int i = tmpList.size() - 1; i >= 0; --i){
+                for (int j = 0; j < m_filters.size(); ++j){
                     if (tmpList.at(i).contains(QRegExp(m_filters.at(j), Qt::CaseSensitive, m_useRegularExpressions ? QRegExp::RegExp : QRegExp::FixedString))){
                         list.insert(0, tmpList.at(i));
                     }
@@ -184,13 +191,13 @@ void FileWatcher::newData()
 
                 if (list.size() == textDocument->maximumBlockCount()) break;
              }
-    }else{
+    } else {
         list = tmpList;
     }
   }
 
   // go through the lines of readed block
-  for (int i = 0; i < list.size(); i++){
+  for (int i = 0; i < list.size(); ++i){
     // insert new block before line, but skip insertion on beginning of document
     // because we don't want empty space on first line
     if (cursor.position() != 0){
@@ -223,7 +230,7 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     filtersUi.filtersListWidget->setItems(m_filters);
     filtersUi.showOnlyMatchesCheckBox->setChecked(m_showOnlyMatches);
     filtersUi.useRegularExpressionsRadioButton->setChecked(m_useRegularExpressions);
-    
+
     connect(ui.fontColorButton,SIGNAL(changed (QColor)),parent, SLOT(settingsModified()));
     connect(ui.fontRequester,SIGNAL(fontSelected (QFont)),parent, SLOT(settingsModified()));
     connect(ui.pathUrlRequester,SIGNAL(textChanged (QString)),parent, SLOT(settingsModified()));
