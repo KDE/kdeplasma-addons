@@ -32,7 +32,7 @@ class FullViewWidget : public QWidget
         ~FullViewWidget();
 
         void setImage( const QImage &image );
-        void adaptPosition( const QPoint &pos );
+        void adaptPosition( const QPoint &pos, int screenId );
 
     protected:
         virtual void paintEvent( QPaintEvent* );
