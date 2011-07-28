@@ -38,15 +38,16 @@ void FullViewWidget::setImage( const QImage &image )
     resize( mImage.size() );
 }
 
-void FullViewWidget::adaptPosition( const QPoint &pos )
+void FullViewWidget::adaptPosition( const QPoint &pos, int screenId )
 {
     if ( !mDesktopSize.isValid() ) {
         const QDesktopWidget desktop;
-        mDesktopSize = desktop.availableGeometry( pos );
+        mDesktopSize = desktop.screenGeometry( screenId );
     }
 
-    int x = pos.x();
-    int y = pos.y();
+    const bool contains = mDesktopSize.contains( pos, true );
+    int x = ( contains ? pos.x() : mDesktopSize.left() );
+    int y = ( contains ? pos.y() : mDesktopSize.top() );
 
     //left() and top() needed for multiple screens
     const int neededX = x - mDesktopSize.left() + width();

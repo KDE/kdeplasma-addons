@@ -63,9 +63,10 @@
 using namespace Nepomuk::Vocabulary;
 #endif
 
-#include <Plasma/Theme>
+#include <Plasma/Containment>
 #include <Plasma/Frame>
 #include <Plasma/PushButton>
+#include <Plasma/Theme>
 #include <plasma/tooltipmanager.h>
 
 #include "arrowwidget.h"
@@ -1236,14 +1237,7 @@ void ComicApplet::fullView()
 
     if ( !mFullViewWidget->isVisible() ) {
         mFullViewWidget->setImage( mImage );
-        foreach (QGraphicsView *view, scene()->views()) {
-            if (view->sceneRect().contains(mMainWidget->pos())) {
-                QPoint viewSceneOrigin = view->sceneRect().topLeft().toPoint();
-                const QPoint finalPos = view->pos() + ( scenePos().toPoint() - viewSceneOrigin );
-                mFullViewWidget->adaptPosition( finalPos );
-                break;
-            }
-        }
+        mFullViewWidget->adaptPosition( mMainWidget->mapToScene( mMainWidget->pos() ).toPoint(), containment()->screen() );
         mFullViewWidget->show();
     }
 }
