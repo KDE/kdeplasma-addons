@@ -80,8 +80,8 @@ void MarbleWallpaper::init(const KConfigGroup &config)
 
         // These settings apply to Marble's "satellite" view mostly, e.g. make it beautiful
         m_map->setShowClouds(true);
-        m_map->model()->sunLocator()->setCitylights(false);
-        m_map->model()->sunLocator()->setShow(true);
+        m_map->setShowCityLights(false);
+        m_map->setShowSunShading(true);
 
         // Disable all render plugins (scale bar, compass, etc.) except the "stars" plugin
         foreach (RenderPlugin *item, m_map->renderPlugins()) {
