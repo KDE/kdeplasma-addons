@@ -746,13 +746,7 @@ void Pastebin::postContent(QString text, const QImage& imageData)
         if (tempFile.open()) {
             tempFile.setAutoRemove(false);
 
-            QDataStream stream(&tempFile);
-            QByteArray data;
-            QBuffer buffer(&data);
-
-            buffer.open(QIODevice::ReadWrite);
-            imageData.save(&buffer, "PNG");
-            stream.writeRawData(data, data.size());
+            imageData.save(&tempFile, "PNG");
             tempFile.close();
 
             text = tempFile.fileName();
