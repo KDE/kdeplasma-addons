@@ -742,6 +742,7 @@ void Pastebin::postContent(QString text, const QImage& imageData)
         sourceName = m_imgServers.value(imgProvider);
 
         KTemporaryFile tempFile;
+        tempFile.setSuffix(".png");
         if (tempFile.open()) {
             tempFile.setAutoRemove(false);
 
