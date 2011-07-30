@@ -43,6 +43,12 @@ GroupInfo::GroupInfo(const QString &name, const QString &prettyName)
     d->prettyName = prettyName;
 }
 
+GroupInfo::GroupInfo(const GroupInfo &other)
+          : d(new GroupInfoPrivate())
+{
+    *d = *other.d;
+}
+
 GroupInfo::~GroupInfo()
 {
     delete d;
@@ -78,13 +84,12 @@ QString GroupInfo::icon() const
     return d->icon;
 }
 
-GroupInfo GroupInfo::operator=(const GroupInfo &gi)
+GroupInfo &GroupInfo::operator=(const GroupInfo &gi)
 {
-    GroupInfo g(gi.name(), gi.prettyName());
-    g.setFormFactors(gi.formFactors());
-    g.setIcon(gi.icon());
-
-    return g;
+    if (this != &gi) {
+        *d = *gi.d;
+    }
+    return *this;
 }
 
 bool GroupInfo::operator==(const GroupInfo &gi) const
