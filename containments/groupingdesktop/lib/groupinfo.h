@@ -31,6 +31,7 @@ class GroupInfo
 {
     public:
         explicit GroupInfo(const QString &name, const QString &prettyName = QString());
+        GroupInfo(const GroupInfo &other);
         ~GroupInfo();
         void setFormFactors(QSet<Plasma::FormFactor> formFactors);
         void setIcon(const QString &icon);
@@ -40,7 +41,7 @@ class GroupInfo
         QSet<Plasma::FormFactor> formFactors() const;
         QString icon() const;
 
-        GroupInfo operator=(const GroupInfo &gi);
+        GroupInfo &operator=(const GroupInfo &gi);
         bool operator==(const GroupInfo &gi) const;
         bool operator<(const GroupInfo &gi) const;
 
