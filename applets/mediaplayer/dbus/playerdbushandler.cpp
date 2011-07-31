@@ -60,7 +60,7 @@ PlayerDBusHandler::PlayerDBusHandler(QObject *parent, Phonon::MediaObject *media
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/Player", this);
 
-    connect(m_mediaObject, SIGNAL(stateChanged(Phonon::State, Phonon::State)), this, SLOT(stateChanged(Phonon::State, Phonon::State)));
+    connect(m_mediaObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(stateChanged(Phonon::State,Phonon::State)));
 
     connect(m_mediaObject, SIGNAL(seekableChanged(bool)), this, SLOT(seekableChanged(bool)));
 

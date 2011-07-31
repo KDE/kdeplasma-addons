@@ -190,7 +190,7 @@ void ComicApplet::init()
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
-    connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
+    connect( mDateChangedTimer, SIGNAL(timeout()), this, SLOT(checkDayChanged()) );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
     mActionNextNewStripTab = new KAction( KIcon( "go-next-view" ), i18nc( "here strip means comic strip", "&Next Tab with a new Strip" ), this );
@@ -201,27 +201,27 @@ void ComicApplet::init()
 
     mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "Jump to &first Strip" ), this );
     mActions.append( mActionGoFirst );
-    connect( mActionGoFirst, SIGNAL( triggered( bool ) ), this, SLOT( slotFirstDay() ) );
+    connect( mActionGoFirst, SIGNAL(triggered(bool)), this, SLOT(slotFirstDay()) );
 
     mActionGoLast = new QAction( KIcon( "go-last" ), i18n( "Jump to &current Strip" ), this );
     mActions.append( mActionGoLast );
-    connect( mActionGoLast, SIGNAL( triggered( bool ) ), this, SLOT( slotCurrentDay() ) );
+    connect( mActionGoLast, SIGNAL(triggered(bool)), this, SLOT(slotCurrentDay()) );
 
     mActionGoJump = new QAction( KIcon( "go-jump" ), i18n( "Jump to Strip ..." ), this );
     mActions.append( mActionGoJump );
-    connect( mActionGoJump, SIGNAL( triggered( bool ) ), this, SLOT( slotGoJump() ) );
+    connect( mActionGoJump, SIGNAL(triggered(bool)), this, SLOT(slotGoJump()) );
 
     if ( hasAuthorization( "LaunchApp" ) ) {
         mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
         mActionShop->setEnabled( false );
         mActions.append( mActionShop );
-        connect( mActionShop, SIGNAL( triggered( bool ) ), this, SLOT( slotShop() ) );
+        connect( mActionShop, SIGNAL(triggered(bool)), this, SLOT(slotShop()) );
     }
 
     if ( hasAuthorization( "FileDialog" ) ) {
         QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
         mActions.append( action );
-        connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
+        connect( action, SIGNAL(triggered(bool)), this , SLOT(slotSaveComicAs()) );
     }
 
     if ( hasAuthorization( "FileDialog" ) ) {
@@ -234,13 +234,13 @@ void ComicApplet::init()
     mActionScaleContent->setCheckable( true );
     mActionScaleContent->setChecked( mScaleComic );
     mActions.append( mActionScaleContent );
-    connect( mActionScaleContent, SIGNAL( triggered( bool ) ), this , SLOT( slotScaleToContent() ) );
+    connect( mActionScaleContent, SIGNAL(triggered(bool)), this , SLOT(slotScaleToContent()) );
 
     mActionStorePosition = new QAction( KIcon( "go-home" ), i18nc( "@option:check Context menu of comic image", "Store current &Position" ), this);
     mActionStorePosition->setCheckable( true );
     mActionStorePosition->setChecked( !mStoredIdentifierSuffix.isEmpty() );
     mActions.append( mActionStorePosition );
-    connect( mActionStorePosition, SIGNAL( triggered( bool ) ), this, SLOT( slotStorePosition() ) );
+    connect( mActionStorePosition, SIGNAL(triggered(bool)), this, SLOT(slotStorePosition()) );
 
     //make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
     updateView();
@@ -278,7 +278,7 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         mTabBar = new ComicTabBar( mMainWidget );
         mTabBar->nativeWidget()->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
         mTabBar->hide();
-        connect( mTabBar, SIGNAL( currentChanged( int ) ), this, SLOT( slotTabChanged( int ) ) );
+        connect( mTabBar, SIGNAL(currentChanged(int)), this, SLOT(slotTabChanged(int)) );
 
         mLabelTop = new ComicLabel( mMainWidget );
         mLabelTop->setMinimumWidth( 0 );
@@ -319,7 +319,7 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         mLeftArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
         mLeftArrow->setCursor( Qt::PointingHandCursor );
         mLeftArrow->hide();
-        connect( mLeftArrow, SIGNAL( clicked() ), this, SLOT( slotPreviousDay() ) );
+        connect( mLeftArrow, SIGNAL(clicked()), this, SLOT(slotPreviousDay()) );
         layout->addItem( mLeftArrow );
         layout->addItem( mCentralLayout );
 
@@ -328,7 +328,7 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         mRightArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
         mRightArrow->setCursor( Qt::PointingHandCursor );
         mRightArrow->hide();
-        connect( mRightArrow, SIGNAL( clicked() ), this, SLOT( slotNextDay() ) );
+        connect( mRightArrow, SIGNAL(clicked()), this, SLOT(slotNextDay()) );
         layout->addItem( mRightArrow );
 
         mMainWidget->setLayout( layout );
@@ -536,7 +536,7 @@ void ComicApplet::updateView()
     Plasma::ToolTipManager::self()->setContent( mMainWidget, toolTipData );
 
     if ( !mImage.isNull() ) {
-        QTimer::singleShot( 1, this, SLOT( updateSize()) );//HACK
+        QTimer::singleShot( 1, this, SLOT(updateSize()) );//HACK
     }
 }
 
@@ -565,9 +565,9 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     parent->addPage( mConfigWidget->appearanceSettings, i18n( "Appearance" ), "image" );
     parent->addPage( mConfigWidget->advancedSettings, i18n( "Advanced" ), "system-run" );
 
-    connect( mConfigWidget, SIGNAL( maxSizeClicked() ), this, SLOT( slotShowMaxSize() ) );
-    connect( parent, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
-    connect( parent, SIGNAL( okClicked() ), this, SLOT( applyConfig() ) );
+    connect( mConfigWidget, SIGNAL(maxSizeClicked()), this, SLOT(slotShowMaxSize()) );
+    connect( parent, SIGNAL(applyClicked()), this, SLOT(applyConfig()) );
+    connect( parent, SIGNAL(okClicked()), this, SLOT(applyConfig()) );
     connect(mConfigWidget, SIGNAL(enableApply()), parent, SLOT(settingsModified()));
 }
 
@@ -818,8 +818,8 @@ void ComicApplet::slotGoJump()
         calendar->setMinimumSize( calendar->sizeHint() );
         calendar->setDate( QDate::fromString( mCurrentIdentifierSuffix, "yyyy-MM-dd" ) );
 
-        connect( calendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
-        connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
+        connect( calendar, SIGNAL(dateSelected(QDate)), this, SLOT(slotChosenDay(QDate)) );
+        connect( calendar, SIGNAL(dateEntered(QDate)), this, SLOT(slotChosenDay(QDate)) );
         calendar->show();
     } else if ( mComicType == String ) {
         bool ok;
@@ -1189,7 +1189,7 @@ void ComicApplet::buttonBar()
             mPrevButton->nativeWidget()->setIcon( KIcon( "arrow-left" ) );
             mPrevButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
             mPrevButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
-            connect( mPrevButton, SIGNAL( clicked() ), this , SLOT( slotPreviousDay() ) );
+            connect( mPrevButton, SIGNAL(clicked()), this , SLOT(slotPreviousDay()) );
             l->addItem( mPrevButton );
 
             mZoomButton = new Plasma::PushButton( mFrame );
@@ -1197,14 +1197,14 @@ void ComicApplet::buttonBar()
             mZoomButton->nativeWidget()->setToolTip( i18n( "Show at actual size in a different view.  Alternatively, click with the middle mouse button on the comic." ) );
             mZoomButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
             mZoomButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
-            connect( mZoomButton, SIGNAL( clicked() ), this, SLOT( fullView() ) );
+            connect( mZoomButton, SIGNAL(clicked()), this, SLOT(fullView()) );
             l->addItem( mZoomButton );
 
             mNextButton = new Plasma::PushButton( mFrame );
             mNextButton->nativeWidget()->setIcon( KIcon( "arrow-right" ) );
             mNextButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
             mNextButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
-            connect( mNextButton, SIGNAL( clicked() ), this , SLOT( slotNextDay() ) );
+            connect( mNextButton, SIGNAL(clicked()), this , SLOT(slotNextDay()) );
             l->addItem( mNextButton );
             mFrame->setLayout( l );
             mFrame->setFrameShadow( Plasma::Frame::Raised );

@@ -36,7 +36,7 @@ static QString identifierToPath( const QString &identifier )
 CachedProvider::CachedProvider( const QString &identifier, QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), mIdentifier( identifier )
 {
-    QTimer::singleShot( 0, this, SLOT( triggerFinished() ) );
+    QTimer::singleShot( 0, this, SLOT(triggerFinished()) );
 }
 
 CachedProvider::~CachedProvider()

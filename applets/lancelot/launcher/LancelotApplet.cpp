@@ -286,12 +286,12 @@ void LancelotApplet::init()
     loadConfig();
     applyConfig();
     connect(
-        & d->signalMapper, SIGNAL(mapped(const QString &)),
-        this, SLOT(showLancelotSection(const QString &))
+        & d->signalMapper, SIGNAL(mapped(QString)),
+        this, SLOT(showLancelotSection(QString))
     );
     connect(
-        & d->signalMapperToggle, SIGNAL(mapped(const QString &)),
-        this, SLOT(toggleLancelotSection(const QString &))
+        & d->signalMapperToggle, SIGNAL(mapped(QString)),
+        this, SLOT(toggleLancelotSection(QString))
     );
     connect(
         this, SIGNAL(activate()),

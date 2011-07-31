@@ -29,8 +29,8 @@ ConfigData::ConfigData()
 {
     xmlFile = KStandardDirs::locateLocal("data", "plasma_applet_paste/snippets.xml");
     KDirWatch::self()->addFile(xmlFile);
-    connect(KDirWatch::self(), SIGNAL(dirty(const QString&)), this, SLOT(readEntries()));
-    connect(KDirWatch::self(), SIGNAL(created(const QString&)), this, SLOT(readEntries()));
+    connect(KDirWatch::self(), SIGNAL(dirty(QString)), this, SLOT(readEntries()));
+    connect(KDirWatch::self(), SIGNAL(created(QString)), this, SLOT(readEntries()));
 }
 
 ConfigData::~ConfigData()

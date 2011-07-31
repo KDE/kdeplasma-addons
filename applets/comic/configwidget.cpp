@@ -111,8 +111,8 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSort
     advancedSettings = new QWidget();
     advancedUi.setupUi( advancedSettings );
 
-    connect( appearanceUi.pushButton_Size, SIGNAL( clicked() ), this, SIGNAL( maxSizeClicked() ) );
-    connect( comicUi.pushButton_GHNS, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
+    connect( appearanceUi.pushButton_Size, SIGNAL(clicked()), this, SIGNAL(maxSizeClicked()) );
+    connect( comicUi.pushButton_GHNS, SIGNAL(clicked()), this, SLOT(getNewStuff()) );
 
     comicUi.listView_comic->setModel( mProxyModel );
     comicUi.listView_comic->resizeColumnToContents( 0 );

@@ -54,8 +54,8 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
         args << QLatin1String( "String" ) << identifier;
 
         CachedProvider *provider = new CachedProvider( identifier, this, args );
-        connect( provider, SIGNAL( finished( PotdProvider* ) ), this, SLOT( finished( PotdProvider* ) ) );
-        connect( provider, SIGNAL( error( PotdProvider* ) ), this, SLOT( error( PotdProvider* ) ) );
+        connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
+        connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
         return true;
     }
 
@@ -83,8 +83,8 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
 
     provider = qobject_cast<PotdProvider*>( service->createInstance<QObject>( this, args ) );
 
-    connect( provider, SIGNAL( finished( PotdProvider* ) ), this, SLOT( finished( PotdProvider* ) ) );
-    connect( provider, SIGNAL( error( PotdProvider* ) ), this, SLOT( error( PotdProvider* ) ) );
+    connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
+    connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
     return true;
 }
 

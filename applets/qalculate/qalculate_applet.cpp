@@ -58,9 +58,9 @@ QalculateApplet::QalculateApplet(QObject *parent, const QVariantList &args)
     m_settings = new QalculateSettings(this);
     m_engine = new QalculateEngine(m_settings, this);
     m_history = new QalculateHistory(this);
-    connect(m_engine, SIGNAL(formattedResultReady(const QString&)), this, SLOT(displayResult(const QString&)));
-    connect(m_engine, SIGNAL(resultReady(const QString&)), this, SLOT(createTooltip()));
-    connect(m_engine, SIGNAL(resultReady(const QString&)), this, SLOT(receivedResult(const QString&)));
+    connect(m_engine, SIGNAL(formattedResultReady(QString)), this, SLOT(displayResult(QString)));
+    connect(m_engine, SIGNAL(resultReady(QString)), this, SLOT(createTooltip()));
+    connect(m_engine, SIGNAL(resultReady(QString)), this, SLOT(receivedResult(QString)));
     connect(m_settings, SIGNAL(accepted()), this, SLOT(evalNoHist()));
   
     setHasConfigurationInterface(true);

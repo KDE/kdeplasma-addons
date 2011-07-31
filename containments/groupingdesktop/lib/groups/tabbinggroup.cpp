@@ -76,9 +76,9 @@ TabbingGroup::TabbingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     setHasConfigurationInterface(true);
 
     connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
-            this, SLOT(onSubGroupAdded(AbstractGroup*, AbstractGroup*)));
+            this, SLOT(onSubGroupAdded(AbstractGroup*,AbstractGroup*)));
     connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
-            this, SLOT(onSubGroupRemoved(AbstractGroup*, AbstractGroup*)));
+            this, SLOT(onSubGroupRemoved(AbstractGroup*,AbstractGroup*)));
     connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
             this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
     connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(tabBarIndexChanged(int)));

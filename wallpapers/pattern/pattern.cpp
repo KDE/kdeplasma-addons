@@ -117,8 +117,8 @@ QWidget * PatternWallpaper::createConfigurationInterface(QWidget * parent)
         m_ui.m_pattern->setCurrentRow(configuredPatternIndex);
     }
 
-    connect(m_ui.m_fgColor, SIGNAL(changed(const QColor&)), SLOT(widgetChanged()));
-    connect(m_ui.m_bgColor, SIGNAL(changed(const QColor&)), SLOT(widgetChanged()));
+    connect(m_ui.m_fgColor, SIGNAL(changed(QColor)), SLOT(widgetChanged()));
+    connect(m_ui.m_bgColor, SIGNAL(changed(QColor)), SLOT(widgetChanged()));
     connect(m_ui.m_pattern, SIGNAL(currentRowChanged(int)), SLOT(widgetChanged()));
 
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));

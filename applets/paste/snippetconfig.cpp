@@ -30,15 +30,15 @@ SnippetConfig::SnippetConfig(QWidget *parent)
     connect(addButton, SIGNAL(clicked()), this, SLOT(addClicked()));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
     connect(addMacroButton, SIGNAL(clicked()), this, SLOT(addMacroClicked()));
-    connect(list, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
-            this, SLOT(currentItemChanged(QListWidgetItem*, QListWidgetItem*)));
-    connect(list, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
+    connect(list, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
+            this, SLOT(currentItemChanged(QListWidgetItem*,QListWidgetItem*)));
+    connect(list, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
             this, SLOT(enableWidgets()));
-    connect(nameEdit, SIGNAL(textChanged(const QString&)),
-            this, SLOT(nameChanged(const QString&)));
+    connect(nameEdit, SIGNAL(textChanged(QString)),
+            this, SLOT(nameChanged(QString)));
     connect(textEdit, SIGNAL(textChanged()), this, SLOT(textChanged()));
-    connect(iconButton, SIGNAL(iconChanged(const QString &)),
-            this, SLOT(iconChanged(const QString &)));
+    connect(iconButton, SIGNAL(iconChanged(QString)),
+            this, SLOT(iconChanged(QString)));
     enableWidgets();
 }
 

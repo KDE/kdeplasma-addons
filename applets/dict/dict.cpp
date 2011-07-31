@@ -145,7 +145,7 @@ QGraphicsWidget *DictApplet::graphicsWidget()
 
     dataEngine(m_dataEngine)->connectSource(QLatin1String( "list-dictionaries" ), this);
 
-    //connect(m_defEdit, SIGNAL(linkActivated(const QString&)), this, SLOT(linkDefine(const QString&)));
+    //connect(m_defEdit, SIGNAL(linkActivated(QString)), this, SLOT(linkDefine(QString)));
 
 //  This is the fix for links/selecting text
     //QGraphicsItem::GraphicsItemFlags flags = m_defEdit->flags();

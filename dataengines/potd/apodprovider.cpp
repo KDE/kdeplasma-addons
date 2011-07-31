@@ -66,7 +66,7 @@ void ApodProvider::Private::pageRequestFinished( KJob *_job )
 
     KUrl url( QString( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/image/%1/%2" ) ).arg(QDate::currentDate().toString( QLatin1String( "yyMM" ) ) ).arg( sub ) );
     KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
-    mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
+    mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
 }
 
 void ApodProvider::Private::imageRequestFinished( KJob *_job )
@@ -92,7 +92,7 @@ ApodProvider::ApodProvider( QObject *parent, const QVariantList &args )
 
     KUrl url( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
-    connect( job, SIGNAL( finished( KJob *) ), SLOT( pageRequestFinished( KJob* ) ) );
+    connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
 }
 
 ApodProvider::~ApodProvider()

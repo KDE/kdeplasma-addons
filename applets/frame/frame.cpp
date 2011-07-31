@@ -293,7 +293,7 @@ void Frame::scalePictureAndUpdate()
 {
     QImage img = m_mySlideShow->image();
     ImageScaler *scaler = new ImageScaler(img, contentSizeHint().toSize());
-    connect(scaler, SIGNAL(scaled(const QImage&)), this, SLOT(imageScaled(const QImage&)));
+    connect(scaler, SIGNAL(scaled(QImage)), this, SLOT(imageScaled(QImage)));
     QThreadPool::globalInstance()->start(scaler);
 }
 
@@ -600,7 +600,7 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     
     connect(m_configDialog->imageUi.slideShowDelay, SIGNAL(timeChanged(QTime)), 
                    parent, SLOT(settingsModified()));
-    connect(m_configDialog->imageUi.pictureComboBox, SIGNAL(currentIndexChanged ( int)), 
+    connect(m_configDialog->imageUi.pictureComboBox, SIGNAL(currentIndexChanged(int)), 
                    parent, SLOT(settingsModified()));
     connect(m_configDialog->imageUi.autoUpdateTime, SIGNAL(timeChanged(QTime)), 
                     parent, SLOT(settingsModified()));
@@ -618,7 +618,7 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
                    parent, SLOT(settingsModified()));
     connect(m_configDialog->appearanceUi.frameCheckBox, SIGNAL(toggled(bool)),
                    parent, SLOT(settingsModified()));
-    connect(m_configDialog->appearanceUi.changeFrameColor,SIGNAL(changed (QColor)),
+    connect(m_configDialog->appearanceUi.changeFrameColor,SIGNAL(changed(QColor)),
                     parent, SLOT(settingsModified()));
 }
 
@@ -709,7 +709,7 @@ void Frame::initSlideShow()
         m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
     } else if (m_potd) {
         m_dateChangedTimer = new QTimer( this );//change picture at midnight
-        connect( m_dateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
+        connect( m_dateChangedTimer, SIGNAL(timeout()), this, SLOT(checkDayChanged()) );
         m_dateChangedTimer->start( 60 * 60 * 1000 ); // every hour
         Plasma::DataEngine *engine = dataEngine("potd");
         const QString identifier = m_potdProvider + ':' + m_currentDay.toString(Qt::ISODate);

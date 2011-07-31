@@ -169,9 +169,9 @@ QWidget* Mandelbrot::createConfigurationInterface(QWidget* parent)
     m_ui.m_color3->setColor(m_color3);
     m_ui.m_quality->setCurrentIndex(m_quality);
     m_ui.m_lock->setCheckState(m_lock);
-    connect(m_ui.m_color1, SIGNAL(changed(const QColor&)), this, SLOT(setColor1(const QColor&)));
-    connect(m_ui.m_color2, SIGNAL(changed(const QColor&)), this, SLOT(setColor2(const QColor&)));
-    connect(m_ui.m_color3, SIGNAL(changed(const QColor&)), this, SLOT(setColor3(const QColor&)));
+    connect(m_ui.m_color1, SIGNAL(changed(QColor)), this, SLOT(setColor1(QColor)));
+    connect(m_ui.m_color2, SIGNAL(changed(QColor)), this, SLOT(setColor2(QColor)));
+    connect(m_ui.m_color3, SIGNAL(changed(QColor)), this, SLOT(setColor3(QColor)));
     connect(m_ui.m_quality, SIGNAL(activated(int)), this, SLOT(setQuality(int)));
     connect(m_ui.m_lock, SIGNAL(stateChanged(int)), this, SLOT(setLock(int)));
 

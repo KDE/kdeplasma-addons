@@ -250,7 +250,7 @@ void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos
         job = KIO::storedGet( url, KIO::Reload, KIO::HideProgressInfo );
     }
     job->setProperty( "uid", id );
-    connect( job, SIGNAL( result( KJob* ) ), this, SLOT( jobDone( KJob* ) ) );
+    connect( job, SIGNAL(result(KJob*)), this, SLOT(jobDone(KJob*)) );
 
     if ( !infos.isEmpty() ) {
         QMapIterator<QString, QString> it( infos );
@@ -266,9 +266,9 @@ void ComicProvider::requestRedirectedUrl( const KUrl &url, int id, const MetaInf
     KIO::MimetypeJob *job = KIO::mimetype( url, KIO::HideProgressInfo );
     job->setProperty( "uid", id );
     d->mRedirections[job] = url;
-    connect(job, SIGNAL( redirection( KIO::Job*, KUrl ) ), this, SLOT( slotRedirection( KIO::Job*, KUrl ) ) );
-    connect(job, SIGNAL( permanentRedirection( KIO::Job*, KUrl, KUrl ) ), this, SLOT( slotRedirection( KIO::Job*, KUrl, KUrl ) ) );
-    connect(job, SIGNAL( result(KJob* ) ), this, SLOT( slotRedirectionDone( KJob* ) ) );
+    connect(job, SIGNAL(redirection(KIO::Job*,KUrl)), this, SLOT(slotRedirection(KIO::Job*,KUrl)) );
+    connect(job, SIGNAL(permanentRedirection(KIO::Job*,KUrl,KUrl)), this, SLOT(slotRedirection(KIO::Job*,KUrl,KUrl)) );
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(slotRedirectionDone(KJob*)) );
 
     if ( !infos.isEmpty() ) {
         QMapIterator<QString, QString> it( infos );

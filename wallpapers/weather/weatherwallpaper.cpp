@@ -328,7 +328,7 @@ void WeatherWallpaper::showAdvancedDialog()
 
         m_advancedUi.m_color->setColor(m_color);
         m_advancedUi.m_newStuff->setIcon(KIcon(QLatin1String( "get-hot-new-stuff" )));
-        connect(m_advancedUi.m_color, SIGNAL(changed(const QColor&)), this, SLOT(colorChanged(const QColor&)));
+        connect(m_advancedUi.m_color, SIGNAL(changed(QColor)), this, SLOT(colorChanged(QColor)));
         connect(m_advancedUi.m_newStuff, SIGNAL(clicked()), this, SLOT(getNewWallpaper()));
     }
     KDialog::centerOnScreen(m_advancedDialog);
@@ -529,8 +529,8 @@ void WeatherWallpaper::connectWeatherSource()
         loadImage();
         // We can see if we can be nice and figure out where the user is
         m_weatherLocation = new WeatherLocation(this);
-        connect(m_weatherLocation, SIGNAL(finished(const QString&)),
-                this, SLOT(locationReady(const QString&)));
+        connect(m_weatherLocation, SIGNAL(finished(QString)),
+                this, SLOT(locationReady(QString)));
         m_weatherLocation->setDataEngines(dataEngine(QLatin1String( "geolocation" )), weatherEngine);
         m_weatherLocation->getDefault();
     } else {

@@ -85,7 +85,7 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
 
                             KUrl url( QLatin1String( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" ) + mActualDate.toString( Qt::ISODate) );
                             KIO::StoredTransferJob *pageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-                            mParent->connect( pageJob, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
+                            mParent->connect( pageJob, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
                     return;
                 }
             } else if (xml.name() == QLatin1String( "photo" )) {
@@ -108,7 +108,7 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
     if (m_photoList.begin() != m_photoList.end()) {
         KUrl url( m_photoList.at(qrand() % m_photoList.size()) );
             KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-            mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
+            mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
     } else {
         kDebug() << "empty list";
     }
@@ -139,7 +139,7 @@ FlickrProvider::FlickrProvider( QObject *parent, const QVariantList &args )
 
     KUrl url(QLatin1String( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" ) + d->mDate.toString( Qt::ISODate ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url );
-    connect( job, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
+    connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
 }
 
 FlickrProvider::~FlickrProvider()

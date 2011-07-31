@@ -49,11 +49,11 @@ ListForm::ListForm(QWidget *parent)
     treeView->setFocusPolicy(Qt::NoFocus);
 
     if (KGlobalSettings::singleClick()) {
-        connect(treeView, SIGNAL(clicked(const QModelIndex &)),
-                this, SLOT(clicked(const QModelIndex &)));
+        connect(treeView, SIGNAL(clicked(QModelIndex)),
+                this, SLOT(clicked(QModelIndex)));
     } else {
-        connect(treeView, SIGNAL(doubleClicked(const QModelIndex &)),
-                this, SLOT(clicked(const QModelIndex &)));
+        connect(treeView, SIGNAL(doubleClicked(QModelIndex)),
+                this, SLOT(clicked(QModelIndex)));
     }
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
     themeChanged();

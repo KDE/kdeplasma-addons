@@ -65,7 +65,7 @@ MediaWiki::MediaWiki( QObject *parent )
     d->reply = 0;
     d->userAgent = QByteArray("KDE Plasma Silk; MediaWikiRunner; 1.0");
 
-    connect( d->manager, SIGNAL(finished(QNetworkReply*)), SLOT(finished(QNetworkReply *)) );
+    connect( d->manager, SIGNAL(finished(QNetworkReply*)), SLOT(finished(QNetworkReply*)) );
 }
 
 MediaWiki::~MediaWiki()
@@ -138,7 +138,7 @@ void MediaWiki::search( const QString &searchTerm )
         kDebug() << "mediawiki User-Agent" << req.rawHeader(QByteArray("UserAgent"));
 
         d->reply = d->manager->get( req );
-        QTimer::singleShot( d->timeout, this, SLOT( abort() ) );
+        QTimer::singleShot( d->timeout, this, SLOT(abort()) );
     } else if ( d->state == StateApiChanged ) {
         d->query = url;
         findBase();
@@ -181,7 +181,7 @@ void MediaWiki::finished( QNetworkReply *reply )
         QNetworkRequest req(d->query);
         req.setRawHeader( QByteArray("User-Agent"), d->userAgent );
         d->reply = d->manager->get( req );
-        QTimer::singleShot( d->timeout, this, SLOT( abort() ) );
+        QTimer::singleShot( d->timeout, this, SLOT(abort()) );
     } else {
         bool ok = processSearchResult( reply );
 

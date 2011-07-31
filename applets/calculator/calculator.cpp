@@ -88,7 +88,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         buttonY=metric1.height()*1.3;
         buttonX=metric1.width(QLatin1String( "00" ));
         mButtonDigit[0]->setText( QString::number(0) );
-        connect( mButtonDigit[0], SIGNAL( clicked() ), this, SLOT( slotDigitClicked() ) );
+        connect( mButtonDigit[0], SIGNAL(clicked()), this, SLOT(slotDigitClicked()) );
         mButtonDigit[0]->setMinimumSize(buttonX,buttonY);
         mButtonDigit[0]->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
         mButtonDigit[0]->setVisible( true );
@@ -99,7 +99,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
             int column = ((i - 1) % 3);
             mButtonDigit[i] = new Plasma::PushButton(m_widget);
             mButtonDigit[i]->setText( QString::number(i) );
-            connect( mButtonDigit[i], SIGNAL( clicked() ), this, SLOT( slotDigitClicked() ) );
+            connect( mButtonDigit[i], SIGNAL(clicked()), this, SLOT(slotDigitClicked()) );
             mButtonDigit[i]->setVisible( true );
             mButtonDigit[i]->setMinimumSize(buttonX,buttonY);
             mButtonDigit[i]->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
@@ -109,7 +109,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonDecimal = new Plasma::PushButton(m_widget);
         mButtonDecimal->setText( KGlobal::locale()->decimalSymbol() );
         m_layout->addItem( mButtonDecimal, 5, 2 );
-        connect( mButtonDecimal, SIGNAL( clicked() ), this, SLOT( slotDecimalClicked() ) );
+        connect( mButtonDecimal, SIGNAL(clicked()), this, SLOT(slotDecimalClicked()) );
         mButtonDecimal->setVisible( true );
         mButtonDecimal->setMinimumSize(buttonX,buttonY);
         mButtonDecimal->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
@@ -120,7 +120,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonEquals->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
         m_layout->addItem( mButtonEquals, 4, 3, 2,1 );
 
-        connect( mButtonEquals, SIGNAL( clicked() ), this, SLOT( slotEqualsClicked() ) );
+        connect( mButtonEquals, SIGNAL(clicked()), this, SLOT(slotEqualsClicked()) );
         mButtonEquals->setVisible( true );
 
         mButtonAdd = new Plasma::PushButton(m_widget);
@@ -129,7 +129,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonAdd->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
         m_layout->addItem( mButtonAdd, 3, 3 );
-        connect( mButtonAdd, SIGNAL( clicked() ), this, SLOT( slotAddClicked() ) );
+        connect( mButtonAdd, SIGNAL(clicked()), this, SLOT(slotAddClicked()) );
         mButtonAdd->setVisible( true );
 
         mButtonSubtract = new Plasma::PushButton(m_widget);
@@ -138,7 +138,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonSubtract->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
         m_layout->addItem( mButtonSubtract, 2, 3 );
 
-        connect( mButtonSubtract, SIGNAL( clicked() ), this, SLOT( slotSubtractClicked() ) );
+        connect( mButtonSubtract, SIGNAL(clicked()), this, SLOT(slotSubtractClicked()) );
         mButtonSubtract->setVisible( true );
 
         mButtonMultiply = new Plasma::PushButton(m_widget);
@@ -147,7 +147,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonMultiply->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
         m_layout->addItem( mButtonMultiply, 1, 2 );
 
-        connect( mButtonMultiply, SIGNAL( clicked() ), this, SLOT( slotMultiplyClicked() ) );
+        connect( mButtonMultiply, SIGNAL(clicked()), this, SLOT(slotMultiplyClicked()) );
         mButtonMultiply->setVisible( true );
 
         mButtonDivide = new Plasma::PushButton(m_widget);
@@ -157,7 +157,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
 
         m_layout->addItem( mButtonDivide, 1, 1 );
 
-        connect( mButtonDivide, SIGNAL( clicked() ), this, SLOT( slotDivideClicked() ) );
+        connect( mButtonDivide, SIGNAL(clicked()), this, SLOT(slotDivideClicked()) );
         mButtonDivide->setVisible( true );
 
         mButtonClear = new Plasma::PushButton(m_widget);
@@ -166,7 +166,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonClear->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
         m_layout->addItem( mButtonClear, 1, 0 );
-        connect( mButtonClear, SIGNAL( clicked() ), this, SLOT( slotClearClicked() ) );
+        connect( mButtonClear, SIGNAL(clicked()), this, SLOT(slotClearClicked()) );
         mButtonClear->setVisible( true );
 
         mButtonAllClear = new Plasma::PushButton(m_widget);
@@ -175,7 +175,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonAllClear->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
         m_layout->addItem( mButtonAllClear, 1, 3);
-        connect( mButtonAllClear, SIGNAL( clicked() ), this, SLOT( slotAllClearClicked() ) );
+        connect( mButtonAllClear, SIGNAL(clicked()), this, SLOT(slotAllClearClicked()) );
         mButtonAllClear->setVisible( true );
 
         // the following three lines are a complete pain and only partially work.

@@ -147,8 +147,8 @@ Applications::Applications(QString root, QString title, QIcon icon, bool flat)
     d->icon = icon;
     d->flat = flat;
 
-    connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
-            d, SLOT(sycocaUpdated(const QStringList &)));
+    connect(KSycoca::self(), SIGNAL(databaseChanged(QStringList)),
+            d, SLOT(sycocaUpdated(QStringList)));
     d->load();
 }
 

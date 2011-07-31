@@ -658,10 +658,10 @@ void MicroBlog::showTweets()
 
     while (m_tweetWidgets.count() < m_tweetMap.count()) {
         PostWidget *postWidget = new PostWidget(m_tweetsWidget);
-        connect(postWidget, SIGNAL(reply(const QString &, const QString &)), this, SLOT(reply(const QString &, const QString &)));
-        connect(postWidget, SIGNAL(forward(const QString &)), this, SLOT(forward(const QString &)));
-        connect(postWidget, SIGNAL(favorite(const QString &, const bool)), this, SLOT(favorite(const QString &, const bool)));
-        connect(postWidget, SIGNAL(openProfile(const QString &)), this, SLOT(openProfile(const QString &)));
+        connect(postWidget, SIGNAL(reply(QString,QString)), this, SLOT(reply(QString,QString)));
+        connect(postWidget, SIGNAL(forward(QString)), this, SLOT(forward(QString)));
+        connect(postWidget, SIGNAL(favorite(QString,bool)), this, SLOT(favorite(QString,bool)));
+        connect(postWidget, SIGNAL(openProfile(QString)), this, SLOT(openProfile(QString)));
         m_tweetWidgets.append(postWidget);
     }
 

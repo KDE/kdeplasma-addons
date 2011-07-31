@@ -106,7 +106,7 @@ QString Logger::path()
         notify->setPixmap(KIcon("view-history").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
         notify->setActions(QStringList(i18n("Configure")));
 
-        QObject::connect(notify, SIGNAL(activated(unsigned int)), Logger::self(), SLOT(configureMenu()));
+        QObject::connect(notify, SIGNAL(activated(uint)), Logger::self(), SLOT(configureMenu()));
 
         notify->sendEvent();
     }

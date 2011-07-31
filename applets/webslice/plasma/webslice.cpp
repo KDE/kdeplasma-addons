@@ -147,7 +147,7 @@ void WebSlice::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(widget, i18nc("general config page", "Webpage"), Applet::icon());
     connect(ui.loadUrl, SIGNAL(clicked()), this, SLOT(loadUrl()));
     connect(ui.elementCombo, SIGNAL(destroyed()), SLOT(disconnectLoadFinished()));
-    connect(ui.elementCombo, SIGNAL(activated(const QString&)), this, SLOT(preview(const QString&)));
+    connect(ui.elementCombo, SIGNAL(activated(QString)), this, SLOT(preview(QString)));
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     ui.urlEdit->setText(m_url.toString());

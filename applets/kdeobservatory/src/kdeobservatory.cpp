@@ -90,7 +90,7 @@ void KdeObservatory::init()
 
     m_service = m_engine->serviceForSource("");
     connect(m_service, SIGNAL(engineReady()), SLOT(safeInit()));
-    connect(m_service, SIGNAL(engineError(const QString &, const QString &)), SLOT(engineError(const QString &, const QString &)));
+    connect(m_service, SIGNAL(engineError(QString,QString)), SLOT(engineError(QString,QString)));
 
     setPopupIcon(KIcon("kdeobservatory"));
 
@@ -297,10 +297,10 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configViews->updateView(i18n("Top Active Projects"));
     parent->addPage(m_configViews, i18n("Views"), "view-presentation");
 
-    connect(m_configProjects, SIGNAL(projectAdded(const QString &, const QString &)),
-            m_configViews, SLOT(projectAdded(const QString &, const QString &)));
-    connect(m_configProjects, SIGNAL(projectRemoved(const QString &)),
-            m_configViews, SLOT(projectRemoved(const QString &)));
+    connect(m_configProjects, SIGNAL(projectAdded(QString,QString)),
+            m_configViews, SLOT(projectAdded(QString,QString)));
+    connect(m_configProjects, SIGNAL(projectRemoved(QString)),
+            m_configViews, SLOT(projectRemoved(QString)));
 
     // Config - General
     if (m_activityRangeType == 0)

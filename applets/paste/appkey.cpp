@@ -25,7 +25,7 @@ AppKey::AppKey(QWidget *parent)
     setButtons(KDialog::Ok | KDialog::Cancel);
     pasteButton->setClearButtonShown(false);
     connect(appButton, SIGNAL(clicked()), this, SLOT(appClicked()));
-    connect(pasteButton, SIGNAL(keySequenceChanged(const QKeySequence&)),
+    connect(pasteButton, SIGNAL(keySequenceChanged(QKeySequence)),
             this, SLOT(enableWidgets()));
     enableWidgets();
 }

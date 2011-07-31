@@ -211,8 +211,8 @@ void TimelineSource::setPassword(const QString &password)
             OAuth::signRequest(m_authJob, AccessTokenUrl, OAuth::POST, QByteArray(), QByteArray(), xauthArgs);
             m_authJob->addMetaData("content-type", "Content-Type: application/x-www-form-urlencoded");
 
-            connect(m_authJob, SIGNAL(data(KIO::Job*, const QByteArray&)),
-                    this, SLOT(auth(KIO::Job*, const QByteArray&)));
+            connect(m_authJob, SIGNAL(data(KIO::Job*,QByteArray)),
+                    this, SLOT(auth(KIO::Job*,QByteArray)));
             connect(m_authJob, SIGNAL(result(KJob*)), this, SLOT(authFinished(KJob*)));
             force = true;
         }
@@ -267,8 +267,8 @@ void TimelineSource::update(bool forcedUpdate)
     if (m_useOAuth) {
         OAuth::signRequest(m_job, m_url.pathOrUrl(), OAuth::GET, m_oauthToken, m_oauthTokenSecret, OAuth::ParamMap());
     }
-    connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-            this, SLOT(recv(KIO::Job*, const QByteArray&)));
+    connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)),
+            this, SLOT(recv(KIO::Job*,QByteArray)));
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 
     if (forcedUpdate) {

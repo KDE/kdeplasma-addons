@@ -44,20 +44,20 @@ AudioPlayerControlRunnerConfig::AudioPlayerControlRunnerConfig(QWidget* parent, 
     connect(m_ui->searchCollection, SIGNAL(stateChanged(int)),this,SLOT(changed()));
     connect(m_ui->player_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
     connect(m_ui->player_combo, SIGNAL(editTextChanged(QString)), this, SLOT(changed()));
-    connect(m_ui->play_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
-    connect(m_ui->append_edit, SIGNAL(textChanged(const QString)),this,SLOT(changed()));
-    connect(m_ui->queue_edit, SIGNAL(textChanged(const QString)),this,SLOT(changed()));
-    connect(m_ui->pause_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
-    connect(m_ui->next_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
-    connect(m_ui->mute_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
-    connect(m_ui->up_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
+    connect(m_ui->play_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
+    connect(m_ui->append_edit, SIGNAL(textChanged(QString)),this,SLOT(changed()));
+    connect(m_ui->queue_edit, SIGNAL(textChanged(QString)),this,SLOT(changed()));
+    connect(m_ui->pause_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
+    connect(m_ui->next_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
+    connect(m_ui->mute_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
+    connect(m_ui->up_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
     connect(m_ui->up_value, SIGNAL(valueChanged(int)), this, SLOT(changed()));
-    connect(m_ui->down_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
+    connect(m_ui->down_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
     connect(m_ui->down_value, SIGNAL(valueChanged(int)), this, SLOT(changed()));
-    connect(m_ui->prev_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
-    connect(m_ui->stop_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
-    connect(m_ui->volume_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
-    connect(m_ui->quit_edit, SIGNAL(textChanged(const QString)), this, SLOT(changed()));
+    connect(m_ui->prev_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
+    connect(m_ui->stop_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
+    connect(m_ui->volume_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
+    connect(m_ui->quit_edit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
 
 
     /* Setup the combobox to select the player */

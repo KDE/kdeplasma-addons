@@ -212,10 +212,10 @@ QGraphicsWidget *UnitConverter::graphicsWidget()
         }
         m_pCmbCategory->nativeWidget()->model()->sort(0);
 
-        connect(m_pTxtValue1->nativeWidget(), SIGNAL(textEdited(const QString&)),
-                this, SLOT(sltValueChanged(const QString&)));
-        connect(m_pTxtValue2->nativeWidget(), SIGNAL(textEdited(const QString&)),
-                this, SLOT(sltValueChangedReverse(const QString&)));
+        connect(m_pTxtValue1->nativeWidget(), SIGNAL(textEdited(QString)),
+                this, SLOT(sltValueChanged(QString)));
+        connect(m_pTxtValue2->nativeWidget(), SIGNAL(textEdited(QString)),
+                this, SLOT(sltValueChangedReverse(QString)));
         connect(m_pCmbCategory->nativeWidget(), SIGNAL(currentIndexChanged(int)),
                 this, SLOT(sltCategoryChanged(int)));
         connect(m_pCmbUnit1->nativeWidget(), SIGNAL(currentIndexChanged(int)),

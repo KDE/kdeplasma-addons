@@ -35,13 +35,13 @@ ImageWidget::ImageWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
     mScrollBarHoriz->setSingleStep( 80 );
     mScrollBarHoriz->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Maximum ) );
     mScrollBarHoriz->hide();
-    connect( mScrollBarHoriz, SIGNAL( valueChanged( int ) ), this, SLOT( slotScroll() ) );
+    connect( mScrollBarHoriz, SIGNAL(valueChanged(int)), this, SLOT(slotScroll()) );
 
     mScrollBarVert = new Plasma::ScrollBar( this );
     mScrollBarVert->setSingleStep( 80 );
     mScrollBarVert->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::MinimumExpanding ) );
     mScrollBarVert->hide();
-    connect( mScrollBarVert, SIGNAL( valueChanged( int ) ), this, SLOT( slotScroll() ) );
+    connect( mScrollBarVert, SIGNAL(valueChanged(int)), this, SLOT(slotScroll()) );
 }
 
 ImageWidget::~ImageWidget()

@@ -138,7 +138,7 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
             fillMetaInfo(b);
         }
     }
-    connect(m_uiVirus.m_view, SIGNAL(activated(const QModelIndex &)), this, SLOT(pictureChanged(const QModelIndex &)));
+    connect(m_uiVirus.m_view, SIGNAL(activated(QModelIndex)), this, SLOT(pictureChanged(QModelIndex)));
 
     m_uiVirus.m_pictureUrlButton->setIcon(KIcon(QLatin1String( "document-open" )));
     connect(m_uiVirus.m_pictureUrlButton, SIGNAL(clicked()), this, SLOT(showFileDialog()));
@@ -160,7 +160,7 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     m_uiVirus.m_newStuff->setIcon(KIcon(QLatin1String( "get-hot-new-stuff" )));
 
     m_uiVirus.m_color->setColor(m_color);
-    connect(m_uiVirus.m_color, SIGNAL(changed(const QColor&)), this, SLOT(colorChanged(const QColor&)));
+    connect(m_uiVirus.m_color, SIGNAL(changed(QColor)), this, SLOT(colorChanged(QColor)));
 
     m_uiVirus.m_maxCells->setValue(alife.getMaxViruses());
     connect(m_uiVirus.m_maxCells, SIGNAL(valueChanged(int)), this, SLOT(maxCellsChanged(int)));
@@ -175,7 +175,7 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
 
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
 
-    connect(m_uiVirus.m_view, SIGNAL(clicked(const QModelIndex &)), this, SLOT(modified()));
+    connect(m_uiVirus.m_view, SIGNAL(clicked(QModelIndex)), this, SLOT(modified()));
 
     return m_configWidget;
 }

@@ -150,13 +150,13 @@ MessagesKmail::MessagesKmail()
     d->monitor->setCollectionMonitored(Akonadi::Collection::root());
     d->monitor->fetchCollection(true);
 
-    connect(d->monitor, SIGNAL(collectionAdded(const Akonadi::Collection &, const Akonadi::Collection &)),
+    connect(d->monitor, SIGNAL(collectionAdded(Akonadi::Collection,Akonadi::Collection)),
             this, SLOT(updateLater()));
-    connect(d->monitor, SIGNAL(collectionRemoved(const Akonadi::Collection &)),
+    connect(d->monitor, SIGNAL(collectionRemoved(Akonadi::Collection)),
             this, SLOT(updateLater()));
-    connect(d->monitor, SIGNAL(collectionChanged(const Akonadi::Collection &)),
+    connect(d->monitor, SIGNAL(collectionChanged(Akonadi::Collection)),
             this, SLOT(updateLater()));
-    connect(d->monitor, SIGNAL(collectionStatisticsChanged(Akonadi::Collection::Id, const Akonadi::CollectionStatistics &)),
+    connect(d->monitor, SIGNAL(collectionStatisticsChanged(Akonadi::Collection::Id,Akonadi::CollectionStatistics)),
             this, SLOT(updateLater()));
 
     connect(Akonadi::ServerManager::self(), SIGNAL(stateChanged(Akonadi::ServerManager::State)),

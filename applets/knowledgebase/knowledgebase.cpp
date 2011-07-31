@@ -84,7 +84,7 @@ QGraphicsWidget *KnowledgeBase::graphicsWidget()
         m_questionInput->nativeWidget()->setClickMessage(i18n("Search Knowledge Base"));
         lay->addItem(m_questionInput);
         connect(m_questionInput, SIGNAL(returnPressed()), this, SLOT(doQuery()));
-        connect(m_questionInput, SIGNAL(textEdited(const QString&)), this, SLOT(delayedQuery()));
+        connect(m_questionInput, SIGNAL(textEdited(QString)), this, SLOT(delayedQuery()));
 
         m_KBItemsScroll= new Plasma::ScrollWidget(this);
         m_KBItemsScroll->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -233,7 +233,7 @@ void KnowledgeBase::dataUpdated(const QString &source, const Plasma::DataEngine:
                 Plasma::DataEngine::Data kbData = data[kb].value<Plasma::DataEngine::Data>();
 
                 KBItemWidget *kbItem = new KBItemWidget(m_KBItemsPage);
-                connect(kbItem, SIGNAL(detailsVisibilityChanged(KBItemWidget *, bool)), this, SLOT(detailsClicked(KBItemWidget *, bool)));
+                connect(kbItem, SIGNAL(detailsVisibilityChanged(KBItemWidget*,bool)), this, SLOT(detailsClicked(KBItemWidget*,bool)));
 
                 kbItem->setAtticaData(kbData);
                 //we want inverted order

@@ -51,7 +51,7 @@ PreviewWidget::PreviewWidget(QGraphicsItem *parent)
       m_closeStatus(true)
 {
     m_scrollBar = new Plasma::ScrollBar(this);
-    connect(m_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrolled( int )));
+    connect(m_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrolled(int)));
     m_scrollBar->setSingleStep(10);
     m_scrollBar->hide();
 

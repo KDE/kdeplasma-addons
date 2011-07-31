@@ -161,14 +161,14 @@ LancelotWindow::LancelotWindow()
     tabbarSections->setTextDirection(Qt::Vertical);
     /* End TODO */
 
-    connect(tabbarSections, SIGNAL(currentTabChanged(const QString &)),
-            layoutCenter, SLOT(showCard(const QString &)));
+    connect(tabbarSections, SIGNAL(currentTabChanged(QString)),
+            layoutCenter, SLOT(showCard(QString)));
 
     m_sectionsSignalMapper = new QSignalMapper(this);
     connect (m_sectionsSignalMapper,
-        SIGNAL(mapped(const QString &)),
+        SIGNAL(mapped(QString)),
         this,
-        SLOT(sectionActivated(const QString &))
+        SLOT(sectionActivated(QString))
     );
 
     connect(buttonSystem1, SIGNAL(activated()), this, SLOT(systemButtonClicked()));
@@ -178,15 +178,15 @@ LancelotWindow::LancelotWindow()
     connect(buttonLancelotContext,  SIGNAL(activated()), this, SLOT(lancelotContext()));
 
     connect(editSearch->widget(),
-        SIGNAL(textChanged(const QString &)),
-        this, SLOT(search(const QString &))
+        SIGNAL(textChanged(QString)),
+        this, SLOT(search(QString))
     );
 
     loadConfig();
     setupActions();
 
-    connect(QApplication::instance(), SIGNAL(focusChanged(QWidget *, QWidget *)),
-            this, SLOT(focusChanged(QWidget *, QWidget *)));
+    connect(QApplication::instance(), SIGNAL(focusChanged(QWidget*,QWidget*)),
+            this, SLOT(focusChanged(QWidget*,QWidget*)));
 
     setStyleSheet("LancelotWindow { background: black }");
 }
@@ -1129,8 +1129,8 @@ void LancelotWindow::configureMenu()
     dialog->addPage(m_configWidget, i18n("Configure Lancelot menu"), "lancelot");
     dialog->showButton(KDialog::Apply, false); // To follow the current Plasma applet style
     dialog->show();
-    connect(dialog, SIGNAL(applyClicked()), this, SLOT( saveConfig()));
-    connect(dialog, SIGNAL(okClicked()),    this, SLOT( saveConfig()));
+    connect(dialog, SIGNAL(applyClicked()), this, SLOT(saveConfig()));
+    connect(dialog, SIGNAL(okClicked()),    this, SLOT(saveConfig()));
 }
 
 void LancelotWindow::saveConfig()

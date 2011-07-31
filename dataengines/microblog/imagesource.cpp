@@ -57,8 +57,8 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
         KIO::Job *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
         job->setAutoDelete(true);
         m_jobs[job] = who;
-        connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-                this, SLOT(recv(KIO::Job*, const QByteArray&)));
+        connect(job, SIGNAL(data(KIO::Job*,QByteArray)),
+                this, SLOT(recv(KIO::Job*,QByteArray)));
         connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
     } else {
         m_queuedJobs.append(QPair<QString, KUrl>(who, url));

@@ -37,7 +37,7 @@ AutoPasteConfig::AutoPasteConfig(QWidget *parent)
     connect(editButton, SIGNAL(clicked()), this, SLOT(editClicked()));
     connect(autoPasteCheckBox, SIGNAL(clicked()), this, SLOT(enableWidgets()));
     connect(appsTreeView->selectionModel(),
-            SIGNAL(currentChanged(const QModelIndex&, const QModelIndex&)),
+            SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             this, SLOT(enableWidgets()));
     enableWidgets();
 }

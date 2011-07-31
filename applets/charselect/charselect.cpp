@@ -60,7 +60,7 @@ QWidget *CharSelectApplet::widget()
 
         m_charselect = new KCharSelect(m_mainWidget, 0, KCharSelect::BlockCombos|KCharSelect::CharacterTable|KCharSelect::FontCombo);
         m_charselect->setMinimumSize(300, 250);
-        connect( m_charselect, SIGNAL( charSelected(const QChar &) ), this, SLOT( slotCharSelect( const QChar& ) ) );
+        connect( m_charselect, SIGNAL(charSelected(QChar)), this, SLOT(slotCharSelect(QChar)) );
         layout->addWidget( m_charselect, 0, 0, 1, 2);
 
         m_lineEdit = new KLineEdit(m_mainWidget);
@@ -69,7 +69,7 @@ QWidget *CharSelectApplet::widget()
 
         m_addToClipboard = new KPushButton(m_mainWidget);
         m_addToClipboard->setText( i18n( "&Add to Clipboard" ) );
-        connect( m_addToClipboard, SIGNAL( clicked() ), this, SLOT( slotAddToClipboard() ) );
+        connect( m_addToClipboard, SIGNAL(clicked()), this, SLOT(slotAddToClipboard()) );
         layout->addWidget( m_addToClipboard, 1, 1 );
     }
 

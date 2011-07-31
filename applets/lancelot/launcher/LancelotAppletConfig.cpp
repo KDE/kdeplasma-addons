@@ -38,7 +38,7 @@ void LancelotAppletConfig::setupUi(QWidget * widget)
             this, SLOT(updateCard()));
     connect(radioShowMenuIconOnly, SIGNAL(clicked()),
             this, SLOT(updateCard()));
-    connect(listIcons, SIGNAL(itemClicked(QListWidgetItem *)),
+    connect(listIcons, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(iconItemClicked()));
 
     org::kde::lancelot::App lancelot(

@@ -482,8 +482,8 @@ void Global::setGroupForObject(QObject * object, Group * group) {
 
     if (group) {
         group->add(object);
-        connect(object, SIGNAL(destroyed(QObject *)),
-                d, SLOT(objectDeleted(QObject *)));
+        connect(object, SIGNAL(destroyed(QObject*)),
+                d, SLOT(objectDeleted(QObject*)));
     }
 }
 

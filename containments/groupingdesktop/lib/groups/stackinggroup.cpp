@@ -44,7 +44,7 @@ StackingGroup::StackingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
             this, SLOT(onAppletAdded(Plasma::Applet*,AbstractGroup*)));
     connect(this, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
-            this, SLOT(onSubGroupRemoved(AbstractGroup*, AbstractGroup*)));
+            this, SLOT(onSubGroupRemoved(AbstractGroup*,AbstractGroup*)));
     connect(this, SIGNAL(subGroupAddedInGroup(AbstractGroup*,AbstractGroup*)),
             this, SLOT(onSubGroupAdded(AbstractGroup*,AbstractGroup*)));
 }

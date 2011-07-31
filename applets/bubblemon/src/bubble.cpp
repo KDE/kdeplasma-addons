@@ -113,7 +113,7 @@ Bubble::init()
                            i18nc("@info:status The system monitor data engine could not be found or loaded",
                                   "Could not load the System Monitor data engine."));
     } else {
-        connect(m_engine, SIGNAL(sourceAdded(const QString)), this, SLOT(connectSensor()));
+        connect(m_engine, SIGNAL(sourceAdded(QString)), this, SLOT(connectSensor()));
     }
 
     configChanged();

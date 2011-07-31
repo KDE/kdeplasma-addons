@@ -42,8 +42,8 @@ public:
         , timeEngine(0)
         , updateInterval(0)
     {
-        QObject::connect(&location, SIGNAL(finished(const QString&)),
-                         q, SLOT(locationReady(const QString&)));
+        QObject::connect(&location, SIGNAL(finished(QString)),
+                         q, SLOT(locationReady(QString)));
         busyTimer = new QTimer(q);
         busyTimer->setSingleShot(true);
         busyTimer->setInterval(2*60*1000);

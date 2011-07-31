@@ -63,7 +63,7 @@ RememberTheMilkPlasmoid::RememberTheMilkPlasmoid(QObject* parent, const QVariant
     m_authWidget = new QWidget();
     m_authWidgetUi->setupUi(m_authWidget);
     m_generalOptions = new QWidget();
-    connect(m_authWidgetUi->signupLabel, SIGNAL(leftClickedUrl(const QString&)), KToolInvocation::self(), SLOT(invokeBrowser(const QString&)));
+    connect(m_authWidgetUi->signupLabel, SIGNAL(leftClickedUrl(QString)), KToolInvocation::self(), SLOT(invokeBrowser(QString)));
     m_generalOptionsUi->setupUi(m_generalOptions);
     m_generalOptionsUi->sortType->addItem(i18n("Due Date"));
     m_generalOptionsUi->sortType->addItem(i18n("Priority"));

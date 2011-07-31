@@ -91,3 +91,4 @@ bool DateTimeRange::intersects( const DateTimeRange & range ) const {
 bool DateTimeRange::intersects( const KDateTime & rangeStart, const KDateTime & rangeFinish ) const {
     return rangeFinish >= start && rangeStart <= finish;
 }
+

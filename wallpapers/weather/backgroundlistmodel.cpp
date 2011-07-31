@@ -200,10 +200,10 @@ QVariant BackgroundListModel::data(const QModelIndex &index, int role) const
                                                     QSize(BackgroundDelegate::SCREENSHOT_SIZE,
                                                           BackgroundDelegate::SCREENSHOT_SIZE));
 
-            connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-                    this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
-            connect(job, SIGNAL(failed(const KFileItem&)),
-                    this, SLOT(previewFailed(const KFileItem&)));
+            connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
+                    this, SLOT(showPreview(KFileItem,QPixmap)));
+            connect(job, SIGNAL(failed(KFileItem)),
+                    this, SLOT(previewFailed(KFileItem)));
             const_cast<BackgroundListModel *>(this)->m_previewJobs.insert(file, QPersistentModelIndex(index));
         }
 

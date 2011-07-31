@@ -42,8 +42,8 @@ ComicEngine::~ComicEngine()
 
 void ComicEngine::init()
 {
-    connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
-             this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
+    connect( Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
+             this, SLOT(networkStatusChanged(Solid::Networking::Status)) );
     connect( KSycoca::self(), SIGNAL(databaseChanged(QStringList)), this, SLOT(sycocaUpdated(QStringList)) );
 }
 
@@ -109,8 +109,8 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
 
             ComicProvider *provider = new CachedProvider( this, args );
             m_jobs[identifier] = provider;
-            connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
-            connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
+            connect( provider, SIGNAL(finished(ComicProvider*)), this, SLOT(finished(ComicProvider*)) );
+            connect( provider, SIGNAL(error(ComicProvider*)), this, SLOT(error(ComicProvider*)) );
             return true;
         }
 
@@ -176,8 +176,8 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
 
         m_jobs[identifier] = provider;
 
-        connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
-        connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
+        connect( provider, SIGNAL(finished(ComicProvider*)), this, SLOT(finished(ComicProvider*)) );
+        connect( provider, SIGNAL(error(ComicProvider*)), this, SLOT(error(ComicProvider*)) );
         return true;
     }
 }

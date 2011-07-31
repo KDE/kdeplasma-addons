@@ -21,7 +21,7 @@
 
 MandelbrotRenderThread::MandelbrotRenderThread(Mandelbrot *m) : m_mandelbrot(m)
 {
-    connect(this, SIGNAL(tileDone(const MandelbrotTile&)), m_mandelbrot, SLOT(tileDone(const MandelbrotTile&)));
+    connect(this, SIGNAL(tileDone(MandelbrotTile)), m_mandelbrot, SLOT(tileDone(MandelbrotTile)));
 }
 
 void MandelbrotRenderThread::run()

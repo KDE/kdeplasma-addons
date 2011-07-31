@@ -87,7 +87,7 @@ EventsRunner::~EventsRunner() {
 
 void EventsRunner::reloadConfiguration() {
     CollectionSelector * selector = new CollectionSelector( this );
-    connect( selector, SIGNAL( collectionsReceived(CollectionSelector &) ), this, SLOT( collectionsReceived(CollectionSelector &) ) );
+    connect( selector, SIGNAL(collectionsReceived(CollectionSelector&)), this, SLOT(collectionsReceived(CollectionSelector&)) );
     selector->receiveCollections();
 }
 
@@ -112,7 +112,7 @@ Akonadi::Item::List EventsRunner::listAllItems() {
 
         QEventLoop loop;
 
-        connect( &job, SIGNAL(finished( KJob * )), &loop, SLOT(quit()) );
+        connect( &job, SIGNAL(finished(KJob*)), &loop, SLOT(quit()) );
 
         job.start();
         loop.exec();

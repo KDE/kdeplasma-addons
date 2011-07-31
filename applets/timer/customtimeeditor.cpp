@@ -31,7 +31,7 @@ CustomTimeEditor::CustomTimeEditor()
     timeEdit->setDisplayFormat(toLocalizedTimer(TIME_FORMAT));
     editor=new KLineEdit();
     customEditor=new KEditListWidget::CustomEditor(timeEdit, editor);
-    connect(timeEdit, SIGNAL(timeChanged( const QTime& )), this, SLOT(setEdit(const QTime&) ));
+    connect(timeEdit, SIGNAL(timeChanged(QTime)), this, SLOT(setEdit(QTime)));
 }
 
 

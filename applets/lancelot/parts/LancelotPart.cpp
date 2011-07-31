@@ -157,8 +157,8 @@ void LancelotPart::init()
 
     m_searchText->nativeWidget()->installEventFilter(this);
     connect(m_searchText->widget(),
-        SIGNAL(textChanged(const QString &)),
-        this, SLOT(search(const QString &))
+        SIGNAL(textChanged(QString)),
+        this, SLOT(search(QString))
     );
 
     m_list = new Lancelot::ActionListView(m_root);

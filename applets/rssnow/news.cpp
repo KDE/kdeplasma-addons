@@ -136,8 +136,8 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(feedsUi.addFeed, SIGNAL(clicked()), this, SLOT(addFeed()));
     connect(feedsUi.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));
-    connect(feedsUi.feedList, SIGNAL( itemSelectionChanged ()), this, SLOT(slotItemChanged()));
-    connect(feedsUi.feedComboBox->lineEdit(), SIGNAL( textChanged( const QString& ) ), this, SLOT( slotChangeText(const QString& ) ) );
+    connect(feedsUi.feedList, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemChanged()));
+    connect(feedsUi.feedComboBox->lineEdit(), SIGNAL(textChanged(QString)), this, SLOT(slotChangeText(QString)) );
     feedsUi.removeFeed->setEnabled( false );
     KConfig feedsFile(QString("news/feeds"), KConfig::FullConfig, "data");
     m_defaultFeeds = feedsFile.group("feeds").entryMap();

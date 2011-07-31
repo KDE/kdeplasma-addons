@@ -71,7 +71,7 @@ GeneralConfigEditor::GeneralConfigEditor(KBookmarkManager* bookmarkManager, QWid
     pageLayout->addLayout(folderSelectLayout);
     pageLayout->addStretch();
 
-    connect(mBookmarkManager, SIGNAL(changed(const QString&, const QString&)), SLOT(onBookmarksChanged(const QString&)));
+    connect(mBookmarkManager, SIGNAL(changed(QString,QString)), SLOT(onBookmarksChanged(QString)));
     connect(mFolderSelectButton, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
 
     updateFolder();

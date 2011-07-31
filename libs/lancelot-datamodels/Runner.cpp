@@ -65,8 +65,8 @@ Runner::Runner(bool limitRunners, QString search)
     }
 
     connect(
-        d->runnerManager, SIGNAL(matchesChanged(const QList<Plasma::QueryMatch>&)),
-        this, SLOT(setQueryMatches(const QList<Plasma::QueryMatch>&))
+        d->runnerManager, SIGNAL(matchesChanged(QList<Plasma::QueryMatch>)),
+        this, SLOT(setQueryMatches(QList<Plasma::QueryMatch>))
     );
     setSearchString(search);
 }
@@ -81,8 +81,8 @@ Runner::Runner(QStringList allowedRunners, QString search)
     d->runnerManager->setAllowedRunners(allowedRunners);
 
     connect(
-        d->runnerManager, SIGNAL(matchesChanged(const QList<Plasma::QueryMatch>&)),
-        this, SLOT(setQueryMatches(const QList<Plasma::QueryMatch>&))
+        d->runnerManager, SIGNAL(matchesChanged(QList<Plasma::QueryMatch>)),
+        this, SLOT(setQueryMatches(QList<Plasma::QueryMatch>))
     );
     setSearchString(search);
 }

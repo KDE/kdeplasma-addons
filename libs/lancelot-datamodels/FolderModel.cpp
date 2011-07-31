@@ -78,10 +78,10 @@ FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
     d->dirLister = new KDirLister();
     connect(d->dirLister, SIGNAL(clear()),
               this, SLOT(clear()));
-    connect(d->dirLister, SIGNAL(deleteItem(const KFileItem &)),
-              this, SLOT(deleteItem(const KFileItem &)));
-    connect(d->dirLister, SIGNAL(newItems(const KFileItemList &)),
-              this, SLOT(newItems(const KFileItemList &)));
+    connect(d->dirLister, SIGNAL(deleteItem(KFileItem)),
+              this, SLOT(deleteItem(KFileItem)));
+    connect(d->dirLister, SIGNAL(newItems(KFileItemList)),
+              this, SLOT(newItems(KFileItemList)));
 
     setSelfTitle(i18nc("Folder: path/to/folder", "Folder: %1", dirPath));
 

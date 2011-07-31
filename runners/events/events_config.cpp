@@ -39,8 +39,8 @@ EventsRunnerConfig::EventsRunnerConfig(QWidget* parent, const QVariantList& args
     QGridLayout* layout = new QGridLayout(this);
     layout->addWidget(ui, 0, 0);
 
-    connect( ui->eventCollectionCombo, SIGNAL( currentIndexChanged(int) ), this, SLOT( changed() ) );
-    connect( ui->todoCollectionCombo, SIGNAL( currentIndexChanged(int) ), this, SLOT( changed() ) );
+    connect( ui->eventCollectionCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()) );
+    connect( ui->todoCollectionCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()) );
 }
 
 void EventsRunnerConfig::defaults() {
@@ -51,7 +51,7 @@ void EventsRunnerConfig::load() {
     KCModule::load();
 
     CollectionSelector * selector = new CollectionSelector( this );
-    connect( selector, SIGNAL( collectionsReceived(CollectionSelector &) ), this, SLOT( collectionsReceived(CollectionSelector &) ) );
+    connect( selector, SIGNAL(collectionsReceived(CollectionSelector&)), this, SLOT(collectionsReceived(CollectionSelector&)) );
     selector->receiveCollections();
 }
 

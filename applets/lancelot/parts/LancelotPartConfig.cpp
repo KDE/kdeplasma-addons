@@ -53,8 +53,8 @@ void LancelotPartConfig::setupUi(QWidget * widget)
     buttonContentsRemove->hide();
 
     QObject::connect(
-        listModels, SIGNAL(itemClicked(QListWidgetItem *)),
-        this, SLOT(listModelsItemClicked(QListWidgetItem *)));
+        listModels, SIGNAL(itemClicked(QListWidgetItem*)),
+        this, SLOT(listModelsItemClicked(QListWidgetItem*)));
     QObject::connect(
         listModels, SIGNAL(itemSelectionChanged()),
         this, SLOT(listModelsItemSelectionChanged()));

@@ -107,8 +107,8 @@ QGraphicsWidget *News::graphicsWidget()
     m_news->setDragToScroll(true);
     m_news->installEventFilter(this);
     m_news->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
-    connect(m_news->page(), SIGNAL(linkClicked(const QUrl&)),
-            this, SLOT(linkActivated(const QUrl&)));
+    connect(m_news->page(), SIGNAL(linkClicked(QUrl)),
+            this, SLOT(linkActivated(QUrl)));
     m_news->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
     m_layout->addItem(m_news);
 
@@ -233,8 +233,8 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(widget, i18n("General"), icon());
     parent->addPage(fWidget, i18n("Feeds"), "application-rss+xml");
 
-    connect(feedsUi.feedComboBox, SIGNAL(editTextChanged(const QString&)),
-            this, SLOT(feedTextChanged(const QString&)));
+    connect(feedsUi.feedComboBox, SIGNAL(editTextChanged(QString)),
+            this, SLOT(feedTextChanged(QString)));
     connect(parent, SIGNAL(accepted()), this, SLOT(configAccepted()));
     connect(feedsUi.addFeed, SIGNAL(clicked()), this, SLOT(addFeed()));
     connect(feedsUi.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));

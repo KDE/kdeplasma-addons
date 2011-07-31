@@ -52,8 +52,8 @@ public:
 
         interface = new org::kde::Kopete(
             KOPETE_SERVICE, "/Kopete", QDBusConnection::sessionBus());
-        connect(interface, SIGNAL(contactChanged(const QString &)),
-            q, SLOT(contactChanged(const QString &)));
+        connect(interface, SIGNAL(contactChanged(QString)),
+            q, SLOT(contactChanged(QString)));
 
         q->load(true);
     }
@@ -88,8 +88,8 @@ ContactsKopete::ContactsKopete()
     d->dbusWatcher = new QDBusServiceWatcher(
         KOPETE_SERVICE, QDBusConnection::sessionBus());
 
-    connect(d->dbusWatcher, SIGNAL(serviceOwnerChanged(const QString &, const QString &, const QString &)),
-            this, SLOT(kopeteServiceOwnerChanged(const QString &, const QString &, const QString &)));
+    connect(d->dbusWatcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
+            this, SLOT(kopeteServiceOwnerChanged(QString,QString,QString)));
 
     // other
 

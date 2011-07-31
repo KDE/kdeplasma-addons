@@ -36,7 +36,7 @@ CollectionSelector::CollectionSelector( QObject* parent ): QObject( parent ) {
 void CollectionSelector::receiveCollections() {
     CollectionFetchJob *job = new CollectionFetchJob( Collection::root(), CollectionFetchJob::Recursive, this );
 
-    connect( job, SIGNAL( collectionsReceived(Akonadi::Collection::List) ), this, SLOT( akonadiCollectionsReceived(Akonadi::Collection::List) ) );
+    connect( job, SIGNAL(collectionsReceived(Akonadi::Collection::List)), this, SLOT(akonadiCollectionsReceived(Akonadi::Collection::List)) );
 }
 
 void CollectionSelector::akonadiCollectionsReceived( const Collection::List& collections ) {

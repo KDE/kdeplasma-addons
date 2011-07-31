@@ -69,10 +69,10 @@ TabBar::Private::Private(TabBar * parent)
     groupName = QLatin1String("TabBarButton");
     tabIconSize = QSize(32, 32);
 
-    connect(&mapper, SIGNAL(mapped(const QString &)),
-            parent,  SIGNAL(currentTabChanged(const QString &)));
-    connect(&mapper, SIGNAL(mapped(const QString &)),
-            parent,  SLOT(setCurrentTab(const QString &)));
+    connect(&mapper, SIGNAL(mapped(QString)),
+            parent,  SIGNAL(currentTabChanged(QString)));
+    connect(&mapper, SIGNAL(mapped(QString)),
+            parent,  SLOT(setCurrentTab(QString)));
 }
 
 bool TabBar::Private::isRotated() const

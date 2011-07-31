@@ -46,7 +46,7 @@ SpellCheckConfig::SpellCheckConfig(QWidget* parent, const QVariantList& args) :
 
     connect(m_ui->m_requireTriggerWord, SIGNAL(stateChanged(int)), this, SLOT(changed()));
     connect(m_ui->m_requireTriggerWord, SIGNAL(stateChanged(int)), this, SLOT(toggleTriggerWord(int)));
-    connect(m_ui->m_triggerWord, SIGNAL(textChanged(const QString&)), this, SLOT(changed()));
+    connect(m_ui->m_triggerWord, SIGNAL(textChanged(QString)), this, SLOT(changed()));
 
     load();
 }

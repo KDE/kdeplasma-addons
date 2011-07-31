@@ -36,16 +36,16 @@ ActionTreeModelProxy::ActionTreeModelProxy(ActionListModel * model, QString titl
     d->selfTitle = title;
     d->selfIcon = icon;
 
-    connect(model, SIGNAL( itemActivated(int) ),
-            this,  SIGNAL( itemActivated(int) ));
-    connect(model, SIGNAL( itemInserted(int)  ),
-            this,  SIGNAL( itemInserted(int)  ));
-    connect(model, SIGNAL( itemAltered(int)   ),
-            this,  SIGNAL( itemAltered(int)   ));
-    connect(model, SIGNAL( itemDeleted(int)   ),
-            this,  SIGNAL( itemDeleted(int)   ));
-    connect(model, SIGNAL( updated()          ),
-            this,  SIGNAL( updated()          ));
+    connect(model, SIGNAL(itemActivated(int)),
+            this,  SIGNAL(itemActivated(int)));
+    connect(model, SIGNAL(itemInserted(int)),
+            this,  SIGNAL(itemInserted(int)));
+    connect(model, SIGNAL(itemAltered(int)),
+            this,  SIGNAL(itemAltered(int)));
+    connect(model, SIGNAL(itemDeleted(int)),
+            this,  SIGNAL(itemDeleted(int)));
+    connect(model, SIGNAL(updated()),
+            this,  SIGNAL(updated()));
 }
 
 ActionTreeModelProxy::~ActionTreeModelProxy()

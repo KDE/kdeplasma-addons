@@ -66,8 +66,8 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(showErrors()));
 
-    connect(m_signalMapper, SIGNAL(mapped(const QString &)),
-             this, SLOT(copyToClipboard(const QString &)));
+    connect(m_signalMapper, SIGNAL(mapped(QString)),
+             this, SLOT(copyToClipboard(QString)));
     connect(this, SIGNAL(activate()), this, SLOT(postClipboard()));
 
     // connect to all sources of our 'share' dataengine
@@ -75,10 +75,10 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     m_engine->connectAllSources(this);
 
     // to detect when the mimetypes were added again after a refresh
-    connect(m_engine, SIGNAL(sourceAdded(const QString&)),
-            this, SLOT(sourceAdded(const QString&)));
-    connect(m_engine, SIGNAL(sourceRemoved(const QString&)),
-            this, SLOT(sourceRemoved(const QString&)));
+    connect(m_engine, SIGNAL(sourceAdded(QString)),
+            this, SLOT(sourceAdded(QString)));
+    connect(m_engine, SIGNAL(sourceRemoved(QString)),
+            this, SLOT(sourceRemoved(QString)));
 }
 
 Pastebin::~Pastebin()

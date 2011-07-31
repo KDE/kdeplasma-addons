@@ -57,7 +57,7 @@ void OseiProvider::Private::pageRequestFinished( KJob *_job )
     // TODO check if this location is always the one for the picture with the same name
     KUrl url( QLatin1String( "http://www.osei.noaa.gov/IOD/OSEIiod.jpg" ) );
     KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
-    mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
+    mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
 }
 
 void OseiProvider::Private::imageRequestFinished( KJob *_job )
@@ -83,7 +83,7 @@ OseiProvider::OseiProvider( QObject *parent, const QVariantList &args )
 
     KUrl url( QLatin1String( "http://www.osei.noaa.gov/OSEIiod.html" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
-    connect( job, SIGNAL( finished( KJob *) ), SLOT( pageRequestFinished( KJob* ) ) );
+    connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
 }
 
 OseiProvider::~OseiProvider()

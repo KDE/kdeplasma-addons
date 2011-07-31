@@ -39,7 +39,7 @@ KonqProfilesApplet::KonqProfilesApplet(QObject *parent, const QVariantList &args
     {
         dirwatch->addDir( lst[i] );
     }
-    connect( dirwatch, SIGNAL(dirty (const QString &) ), this, SLOT( slotUpdateKonqProfiles() ) );
+    connect( dirwatch, SIGNAL(dirty(QString)), this, SLOT(slotUpdateKonqProfiles()) );
     setPopupIcon("konqueror");
 }
 
@@ -65,8 +65,8 @@ QWidget *KonqProfilesApplet::widget()
 
         initSessionFiles();
 
-        connect(m_listView, SIGNAL(activated(const QModelIndex &)),
-            this, SLOT(slotOnItemClicked(const QModelIndex &)));
+        connect(m_listView, SIGNAL(activated(QModelIndex)),
+            this, SLOT(slotOnItemClicked(QModelIndex)));
     }
     return m_listView;
 }

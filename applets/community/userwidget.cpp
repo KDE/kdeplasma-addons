@@ -61,7 +61,7 @@ UserWidget::UserWidget(DataEngine* engine, QGraphicsWidget* parent)
     // listen for changes to the stylesheet file
 
     m_css = new StyleSheet(this);
-    connect(m_css, SIGNAL(styleSheetChanged(const QString&)), this, SLOT(setStyleSheet(const QString&)));
+    connect(m_css, SIGNAL(styleSheetChanged(QString)), this, SLOT(setStyleSheet(QString)));
 
     setMinimumHeight(200);
     setMinimumWidth(200);
@@ -151,8 +151,8 @@ void UserWidget::buildDialog()
     connect(m_sendMessage, SIGNAL(clicked()), m_mapper, SLOT(map()));
     connect(m_addFriend, SIGNAL(clicked()), m_mapper, SLOT(map()));
 
-    connect(m_mapper, SIGNAL(mapped(const QString &)),
-            this, SIGNAL(sendMessage(const QString &)));
+    connect(m_mapper, SIGNAL(mapped(QString)),
+            this, SIGNAL(sendMessage(QString)));
 
     updateColors();
 

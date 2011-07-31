@@ -126,8 +126,8 @@ void Devices::Private::addDevice(const Solid::Device & device)
     }
 
     connect (
-        access, SIGNAL(accessibilityChanged(bool, const QString &)),
-        this, SLOT(udiAccessibilityChanged(bool, const QString &))
+        access, SIGNAL(accessibilityChanged(bool,QString)),
+        this, SLOT(udiAccessibilityChanged(bool,QString))
     );
 
     QIcon icon = KIcon(device.icon());
@@ -409,7 +409,7 @@ void Devices::contextActivate(int index, QAction * context)
 void Devices::Private::deviceSetupDone(Solid::ErrorType err, QVariant errorData, const QString & udi)
 {
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
-    access->disconnect(this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
+    access->disconnect(this, SLOT(deviceSetupDone(Solid::ErrorType,QVariant,QString)));
 
     if (err || !access || !access->isAccessible()) {
         error = errorData.toString();
@@ -444,8 +444,8 @@ void Devices::Private::setupDevice(const QString & udi, bool openAfterSetup)
 
     if (access->filePath().isEmpty() || !access->isAccessible()) {
         if (openAfterSetup) {
-            connect(access, SIGNAL(setupDone(Solid::ErrorType, QVariant, const QString &)),
-                this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
+            connect(access, SIGNAL(setupDone(Solid::ErrorType,QVariant,QString)),
+                this, SLOT(deviceSetupDone(Solid::ErrorType,QVariant,QString)));
         }
         access->setup();
         return;

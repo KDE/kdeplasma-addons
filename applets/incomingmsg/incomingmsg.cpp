@@ -238,7 +238,7 @@ void IncomingMsg::initKopeteLayout()
 
             if (!mDBus.connect("org.kde.kopete", "/Kopete", "org.kde.Kopete",
                                "contactChanged",
-                               this, SLOT(slotNewKopeteIM(const QString&))))
+                               this, SLOT(slotNewKopeteIM(QString))))
                 kDebug() << "Could not connect Kopete to slot.";
             else {
                 mKopeteLayout = new QGraphicsLinearLayout(Qt::Horizontal);

@@ -54,7 +54,7 @@ void Paste::init()
     cfg = globalConfig();
 
     m_list = new ListForm;
-    connect(&cfg, SIGNAL(changed(const ConfigData&)), m_list, SLOT(setData(const ConfigData&)));
+    connect(&cfg, SIGNAL(changed(ConfigData)), m_list, SLOT(setData(ConfigData)));
     connect(m_list, SIGNAL(textCopied()), this, SLOT(showOk()));
     m_list->setData(cfg);
 }
@@ -62,12 +62,12 @@ void Paste::init()
 void Paste::createConfigurationInterface(KConfigDialog *parent)
 {
     m_snippetConfig = new SnippetConfig;
-    connect(&cfg, SIGNAL(changed(const ConfigData&)),
-            m_snippetConfig, SLOT(setData(const ConfigData&)));
+    connect(&cfg, SIGNAL(changed(ConfigData)),
+            m_snippetConfig, SLOT(setData(ConfigData)));
     m_snippetConfig->setData(cfg);
     m_autoPasteConfig = new AutoPasteConfig;
-    connect(&cfg, SIGNAL(changed(const ConfigData&)),
-            m_autoPasteConfig, SLOT(setData(const ConfigData&)));
+    connect(&cfg, SIGNAL(changed(ConfigData)),
+            m_autoPasteConfig, SLOT(setData(ConfigData)));
     m_autoPasteConfig->setData(cfg);
 
     parent->addPage(m_snippetConfig, i18n("Texts"), "accessories-text-editor");

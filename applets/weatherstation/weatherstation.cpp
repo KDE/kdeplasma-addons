@@ -56,7 +56,7 @@ void WeatherStation::init()
     m_lcd->setLabel("wind-label", i18n("WIND"));
     m_lcd->setLabel("provider-label", QString());
     if (hasAuthorization("LaunchApp")) {
-        connect(m_lcd, SIGNAL(clicked(const QString&)), this, SLOT(clicked(const QString&)));
+        connect(m_lcd, SIGNAL(clicked(QString)), this, SLOT(clicked(QString)));
     }
 
     m_lcdPanel = new LCD(this);
