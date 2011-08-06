@@ -214,6 +214,7 @@ void QalculateApplet::receivedResult(const QString& result)
 
 void QalculateApplet::configChanged()
 {
+    m_settings->readSettings();
     if (m_settings->resultsInline()) {
         m_output->hide();
         m_layout->removeItem(m_output);
@@ -223,15 +224,13 @@ void QalculateApplet::configChanged()
         m_layout->addItem(m_output);
         m_graphicsWidget->resize(m_graphicsWidget->preferredSize());
     }
-    
+
     if (m_settings->liveEvaluation()) {
-        connect(m_input, SIGNAL(textEdited(QString)), this, SLOT(evalNoHist()));
+        connect(m_input, SIGNAL(textEdited(QString)), this, SLOT(evalNoHist()), Qt::UniqueConnection);
     }
     else {
         disconnect(m_input, SIGNAL(textEdited(QString)), this, SLOT(evalNoHist()));
     }
-
-    Plasma::PopupApplet::configChanged();
 }
 
 void QalculateApplet::clearOutputLabel()
