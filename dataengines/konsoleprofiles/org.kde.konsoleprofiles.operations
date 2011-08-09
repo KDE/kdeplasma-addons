@@ -2,14 +2,9 @@
 <!DOCTYPE kcfg SYSTEM
     "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
 <kcfg>
-  <group name="Lock">
-    <entry name="Lock" type="bool">
-      <label>Whether to lock the key or not.</label>
-    </entry>
-  </group>
-  <group name="Latch">
-    <entry name="Latch" type="bool">
-      <label>Whether to latch the key or not.</label>
+  <group name="open">
+    <entry name="profileName" type="String">
+      <label>Opens the konsole profile which has this name</label>
     </entry>
   </group>
 </kcfg>
