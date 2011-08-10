@@ -8,5 +8,5 @@ target_link_libraries(plasma_engine_konsoleprofiles ${KDE4_PLASMA_LIBS} ${KDE4_K
 
 install(TARGETS plasma_engine_konsoleprofiles DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-dataengine-konsoleprofiles.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install(FILES org.kde.konsoleprofiles.operations DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
+install(FILES org.kde.plasma.dataengine.konsoleprofiles.operations DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
 

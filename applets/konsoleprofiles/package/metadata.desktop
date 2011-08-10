@@ -13,7 +13,7 @@ X-Plasma-DefaultSize=290,340
 
 X-KDE-PluginInfo-Author=Shaun Reich
 X-KDE-PluginInfo-Email=shaun.reich@kdemail.net
-X-KDE-PluginInfo-Name=org.kde.konsoleprofiles
+X-KDE-PluginInfo-Name=org.kde.plasma.applet.konsoleprofiles
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://userbase.kde.org/Plasma
 X-KDE-PluginInfo-Category=Utilities
