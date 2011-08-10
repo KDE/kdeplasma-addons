@@ -4,7 +4,7 @@ set(konsoleprofilesengine_SRCS
 )
 
 kde4_add_plugin(plasma_engine_konsoleprofiles ${konsoleprofilesengine_SRCS})
-target_link_libraries(plasma_engine_konsoleprofiles ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS})
+target_link_libraries(plasma_engine_konsoleprofiles ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS})
 
 install(TARGETS plasma_engine_konsoleprofiles DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-dataengine-konsoleprofiles.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
