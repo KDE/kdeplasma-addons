@@ -27,7 +27,8 @@
 #include <KDebug>
 
 KonsoleProfilesEngine::KonsoleProfilesEngine(QObject *parent, const QVariantList &args)
-    : Plasma::DataEngine(parent, args)
+    : Plasma::DataEngine(parent, args),
+      m_dirWatch(0)
 {
 
 }
@@ -39,8 +40,10 @@ KonsoleProfilesEngine::~KonsoleProfilesEngine()
 void KonsoleProfilesEngine::init()
 {
     kDebug() << "KonsoleProfilesDataEngine init";
+
+    m_dirWatch = new KDirWatch( this );
     loadProfiles();
-    connect(dirwatch, SIGNAL(dirty(QString)), this, SLOT(loadProfiles()));
+    connect(m_dirWatch, SIGNAL(dirty(QString)), this, SLOT(loadProfiles()));
 }
 
 Plasma::Service *KonsoleProfilesEngine::serviceForSource(const QString &source)
@@ -51,11 +54,10 @@ Plasma::Service *KonsoleProfilesEngine::serviceForSource(const QString &source)
 
 void KonsoleProfilesEngine::loadProfiles()
 {
-    KDirWatch *dirwatch = new KDirWatch( this );
     const QStringList lst = KGlobal::dirs()->findDirs( "data", "konsole/" );
     for ( int i = 0; i < lst.count(); i++ )
     {
-        dirwatch->addDir( lst[i] );
+        m_dirWatch->addDir( lst[i] );
     }
 
     const QStringList list = KGlobal::dirs()->findAllResources( "data", "konsole/*.profile", KStandardDirs::NoDuplicates );

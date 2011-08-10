@@ -21,6 +21,8 @@
 
 #include <Plasma/DataEngine>
 
+class KDirWatch;
+
 /**
  * This engine provides the current state of the keyboard modifiers
  * and mouse buttons, primarily useful for accessibility feature support.
@@ -38,6 +40,9 @@ public:
 
 private Q_SLOTS:
     void loadProfiles();
+
+private:
+    KDirWatch *m_dirWatch;
 };
 
 #endif

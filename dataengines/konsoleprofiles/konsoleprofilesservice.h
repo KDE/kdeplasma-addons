@@ -31,14 +31,14 @@ public:
 
 protected:
     Plasma::ServiceJob* createJob(const QString& operation, QMap<QString,QVariant>& parameters);
-}
+};
 
 class ProfileJob : public Plasma::ServiceJob
 {
     Q_OBJECT
 
 public:
-    ProfileJob(KonsoleProfilesService *service, const QMap<QString, QVariant> &parameters);
+    ProfileJob(KonsoleProfilesService *service, const QString& operation, const QMap<QString, QVariant> &parameters);
     void start();
 };
 

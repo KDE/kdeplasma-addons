@@ -41,12 +41,13 @@ void ProfileJob::start()
 {
     //destination is the profile name, operation is e.g. "open"
     QMap<QString, QVariant>jobParameters = parameters();
+    const QString operation = operationName();
 
     if (operation == "open") {
         Q_ASSERT(!jobParameters.isEmpty());
 
         QStringList args;
-        args << "--profile" << jobParameters.value("profileName");
+        args << "--profile" << jobParameters.value("profileName").toString();
         KToolInvocation::kdeinitExec("konsole", args);
 
         setResult(true);
