@@ -105,6 +105,8 @@ Item {
     }
 
 
+    //we use this to compute a fixed height for the items, and also to implement
+    //the said constant below (itemHeight)
     Text {
         id: heightMetric
         visible: false
@@ -127,11 +129,8 @@ Item {
             }
 
             MouseArea {
-                    height: itemHeight
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+                height: itemHeight
+                anchors { left: parent.left; right: parent.right }
 
                 hoverEnabled: true
 
