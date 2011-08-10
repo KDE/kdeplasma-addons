@@ -43,13 +43,20 @@ void KonsoleProfilesEngine::init()
 
     m_dirWatch = new KDirWatch( this );
     loadProfiles();
-    connect(m_dirWatch, SIGNAL(dirty(QString)), this, SLOT(loadProfiles()));
+    connect(m_dirWatch, SIGNAL(dirty(QString)), this, SLOT(profilesChanged()));
 }
 
 Plasma::Service *KonsoleProfilesEngine::serviceForSource(const QString &source)
 {
     //create a new service for this profile's name, so it can be operated on.
     return new KonsoleProfilesService(this, source);
+}
+
+void KonsoleProfilesEngine::profilesChanged()
+{
+    //wipe the data clean, load it again. (there's not a better way of doing this but no big deal)
+    removeAllSources();
+    loadProfiles();
 }
 
 void KonsoleProfilesEngine::loadProfiles()

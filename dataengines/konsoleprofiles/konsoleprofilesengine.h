@@ -39,9 +39,11 @@ public:
     Plasma::Service *serviceForSource(const QString &source);
 
 private Q_SLOTS:
-    void loadProfiles();
+    void profilesChanged();
 
 private:
+    void loadProfiles();
+
     KDirWatch *m_dirWatch;
 };
 
