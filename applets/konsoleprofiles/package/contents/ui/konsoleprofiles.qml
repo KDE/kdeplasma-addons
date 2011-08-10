@@ -103,6 +103,15 @@ Item {
     }
 
     Component {
+        id: profileViewDelegate
+
+        Text {
+            anchors.fill: parent
+            text: model.name
+        }
+    }
+
+    Component {
         id: profileViewHighlighter
 
         PlasmaCore.FrameSvgItem {
