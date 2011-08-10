@@ -104,20 +104,35 @@ Item {
         Component.onCompleted: currentIndex = -1
     }
 
+
+    Text {
+        id: heightMetric
+        visible: false
+        text: "Arbitrary String"
+    }
+
+    property int itemHeight: heightMetric.height * 2
     Component {
         id: profileViewDelegate
 
         Item {
-            height: 20
+            height: itemHeight
             anchors { left: parent.left; right: parent.right }
 
             Text {
-                anchors.fill: parent
+                id: text
+                anchors { left: parent.left; right: parent.right }
+                anchors.centerIn: parent
                 text: model.name
             }
 
             MouseArea {
-                anchors.fill: parent
+                    height: itemHeight
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+
                 hoverEnabled: true
 
                 onEntered: {
