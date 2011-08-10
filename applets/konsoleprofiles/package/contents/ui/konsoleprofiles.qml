@@ -127,14 +127,19 @@ Item {
                 id: text
                 anchors { left: parent.left; right: parent.right }
                 anchors.centerIn: parent
-                text: model.name
+                text: model.prettyName
             }
 
             MouseArea {
                 height: itemHeight
                 anchors { left: parent.left; right: parent.right }
-
                 hoverEnabled: true
+
+                onClicked: {
+                    var service = profilesSource.serviceForSource(model.name)
+                    var operation = service.operationDescription("open")
+                    var job = service.startOperationCall(operation)
+                }
 
                 onEntered: {
                     profileView.currentIndex = index

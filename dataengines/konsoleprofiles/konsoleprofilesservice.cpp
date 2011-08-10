@@ -20,11 +20,13 @@
 
 #include <QtCore/QMap>
 #include <KToolInvocation>
+#include <KDebug>
 
 KonsoleProfilesService::KonsoleProfilesService(QObject* parent, const QString& profileName)
     : Plasma::Service(parent)
 {
-    setName("konsoleprofilessession");
+    setName("org.kde.plasma.dataengine.konsoleprofiles");
+    setDestination(profileName);
 }
 
 Plasma::ServiceJob* KonsoleProfilesService::createJob(const QString& operation, QMap<QString,QVariant>& parameters)
@@ -40,14 +42,15 @@ ProfileJob::ProfileJob(KonsoleProfilesService *service, const QString &operation
 void ProfileJob::start()
 {
     //destination is the profile name, operation is e.g. "open"
-    QMap<QString, QVariant>jobParameters = parameters();
+ //   QMap<QString, QVariant>jobParameters = parameters();
     const QString operation = operationName();
 
+kDebug() << "SERVICE START...operation: " << operation << " dest: " << destination();
     if (operation == "open") {
-        Q_ASSERT(!jobParameters.isEmpty());
+  //      Q_ASSERT(!jobParameters.isEmpty());
 
         QStringList args;
-        args << "--profile" << jobParameters.value("profileName").toString();
+        args << "--profile" << destination();
         KToolInvocation::kdeinitExec("konsole", args);
 
         setResult(true);

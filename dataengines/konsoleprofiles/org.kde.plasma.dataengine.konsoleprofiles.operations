@@ -3,8 +3,5 @@
     "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
 <kcfg>
   <group name="open">
-    <entry name="profileName" type="String">
-      <label>Opens the konsole profile which has this name. This is the unique backend name, not the pretty name as shown by the UI.</label>
-    </entry>
   </group>
 </kcfg>
