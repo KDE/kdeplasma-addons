@@ -17,6 +17,7 @@
 *****************************************************************************/
 
 #include "konsoleprofilesengine.h"
+#include "konsoleprofilesservice.h"
 
 #include <KStandardDirs>
 #include <KDirWatch>
