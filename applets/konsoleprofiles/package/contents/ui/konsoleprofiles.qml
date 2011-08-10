@@ -102,6 +102,7 @@ Item {
         highlight: profileViewHighlighter
         highlightMoveDuration: 250
         highlightMoveSpeed: 1
+        clip: true
 
         Component.onCompleted: currentIndex = -1
     }
