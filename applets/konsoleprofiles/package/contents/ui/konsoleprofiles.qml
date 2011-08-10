@@ -89,6 +89,8 @@ Item {
             top : separator.bottom
             topMargin: 10
             bottom: konsoleProfiles.bottom
+            left: parent.left
+            right: parent.right
         }
 
         model: PlasmaCore.DataModel {
@@ -105,9 +107,28 @@ Item {
     Component {
         id: profileViewDelegate
 
-        Text {
-            anchors.fill: parent
-            text: model.name
+        Item {
+            height: 20
+            anchors { left: parent.left; right: parent.right }
+
+            Text {
+                anchors.fill: parent
+                text: model.name
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onEntered: {
+                    profileView.currentIndex = index
+                    profileView.highlightItem.opacity = 1
+                }
+
+                onExited: {
+                    profileView.highlightItem.opacity = 0
+                }
+            }
         }
     }
 
