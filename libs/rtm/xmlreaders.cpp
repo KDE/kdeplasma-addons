@@ -306,12 +306,18 @@ void RTM::TasksReader::readTask(TempProps *props) {
   // Grab Completed/Deleted
   task->d->completed = parseDateTime(attributes().value("completed").toString());
   task->d->deleted = parseDateTime(attributes().value("deleted").toString());
+  if (!task->d->deleted.isNull())
+    task->setDeleted(true);
 
   // TODO:: Grab Postponed
   // TODO: Parse rest of fields
 
   //kDebug() << "Adding Task: " << task->id() << " to list " << list->id() << "(" << list << ")";
-  list->tasks.insert(task->id(), task);
+  if (!task->isDeleted())
+    list->tasks.insert(task->id(), task);
+  else
+    list->tasks.remove(task->id());
+
   session->d->tasks.insert(task->id(), task);
 
   while (!atEnd()) {
@@ -350,6 +356,8 @@ void RTM::TasksReader::readTaskSeries(RTM::ListId listId) {
         readNotes(&props);
       else if (name().toString() == "task")
         readTask(&props);
+      else if (name().toString() == "tasks") // in case 'deleted' branch
+        readTask(&props);
       else
         readUnknownElement();
     }
@@ -387,6 +395,28 @@ void RTM::TasksReader::readTasksList() {
     if (isStartElement()) {
       if (name() == "taskseries")
         readTaskSeries(currentListId);
+      else if (name() == "deleted")
+        readDeleted(currentListId);
+      else
+        readUnknownElement();
+    }
+  }
+}
+
+void RTM::TasksReader::readDeleted(RTM::ListId listId) {
+  while(!atEnd()) {
+    readNext();
+    if ((isEndElement()) && (name() == "deleted")) {
+      break;
+    }
+    if (isEndElement()) {
+      //Error in readDeleted() with end element: name()
+      break;
+    }
+
+    if (isStartElement()) {
+      if (name() == "taskseries")
+        readTaskSeries(listId);
       else
         readUnknownElement();
     }
