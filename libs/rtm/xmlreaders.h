@@ -55,6 +55,7 @@ private:
 
   void readTasksHeader();
     void readTasksList();
+      void readDeleted(RTM::ListId listId);
       void readTaskSeries(RTM::ListId listId);
         void readTags(TempProps* props);
         void readParticipants(TempProps* props);
