@@ -34,7 +34,7 @@ Item {
     }
 
     Component.onCompleted: {
-        plasmoid.popupIcon = QIcon("device-notifier");
+        plasmoid.popupIcon = QIcon("utilities-terminal");
     }
 
 

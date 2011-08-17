@@ -4,8 +4,7 @@ Comment=List and launch Konsole profiles
 
 Icon=utilities-terminal
 Type=Service
-X-KDE-ServiceTypes=Plasma/Applet
-#,Plasma/PopupApplet
+X-KDE-ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/konsoleprofiles.qml
