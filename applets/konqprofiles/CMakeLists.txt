@@ -1,11 +1,8 @@
-project(konqprofilesapplet)
+project(konqprofiles)
 
+install(DIRECTORY package/
+        DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/org.kde.plasma.applet.konqprofiles)
 
-set(konqprofilesapplet_SRCS
-    konqprofilesapplet.cpp)
+install(FILES plasma-applet-konqprofiles.desktop
+        DESTINATION ${SERVICES_INSTALL_DIR})
 
-kde4_add_plugin(plasma_applet_konqprofiles ${konqprofilesapplet_SRCS})
-target_link_libraries(plasma_applet_konqprofiles ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS})
-
-install(TARGETS plasma_applet_konqprofiles DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-applet-konqprofiles.desktop DESTINATION ${SERVICES_INSTALL_DIR})
