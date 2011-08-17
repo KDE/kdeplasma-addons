@@ -16,8 +16,8 @@
 *   along with this program.  If not, see <http://www.gnu.org/licenses/>.    *
 *****************************************************************************/
 
-#include "konsoleprofilesengine.h"
-#include "konsoleprofilesservice.h"
+#include "konqprofilesengine.h"
+#include "konqprofilesservice.h"
 
 #include <KStandardDirs>
 #include <KDirWatch>
@@ -26,40 +26,40 @@
 #include <KGlobalSettings>
 #include <KDebug>
 
-KonsoleProfilesEngine::KonsoleProfilesEngine(QObject *parent, const QVariantList &args)
+KonqProfilesEngine::KonqProfilesEngine(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args),
       m_dirWatch(0)
 {
 
 }
 
-KonsoleProfilesEngine::~KonsoleProfilesEngine()
+KonqProfilesEngine::~KonqProfilesEngine()
 {
 }
 
-void KonsoleProfilesEngine::init()
+void KonqProfilesEngine::init()
 {
-    kDebug() << "KonsoleProfilesDataEngine init";
+    kDebug() << "KonqProfilesDataEngine init";
 
     m_dirWatch = new KDirWatch( this );
     loadProfiles();
     connect(m_dirWatch, SIGNAL(dirty(QString)), this, SLOT(profilesChanged()));
 }
 
-Plasma::Service *KonsoleProfilesEngine::serviceForSource(const QString &source)
+Plasma::Service *KonqProfilesEngine::serviceForSource(const QString &source)
 {
     //create a new service for this profile's name, so it can be operated on.
-    return new KonsoleProfilesService(this, source);
+    return new KonqProfilesService(this, source);
 }
 
-void KonsoleProfilesEngine::profilesChanged()
+void KonqProfilesEngine::profilesChanged()
 {
     //wipe the data clean, load it again. (there's not a better way of doing this but no big deal)
     removeAllSources();
     loadProfiles();
 }
 
-void KonsoleProfilesEngine::loadProfiles()
+void KonqProfilesEngine::loadProfiles()
 {
     const QStringList lst = KGlobal::dirs()->findDirs( "data", "konsole/" );
     for ( int i = 0; i < lst.count(); i++ )
@@ -91,6 +91,6 @@ void KonsoleProfilesEngine::loadProfiles()
     }
 }
 
-K_EXPORT_PLASMA_DATAENGINE(konsoleprofilesengine, KonsoleProfilesEngine)
+K_EXPORT_PLASMA_DATAENGINE(konqprofilesengine, KonqProfilesEngine)
 
-#include "konsoleprofilesengine.moc"
+#include "konqprofilesengine.moc"

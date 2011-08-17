@@ -16,24 +16,24 @@
 *   along with this program.  If not, see <http://www.gnu.org/licenses/>.    *
 *****************************************************************************/
 
-#ifndef KONSOLEPROFILESENGINE_H
-#define KONSOLEPROFILESENGINE_H
+#ifndef KONQPROFILESENGINE_H
+#define KONQPROFILESENGINE_H
 
 #include <Plasma/DataEngine>
 
 class KDirWatch;
 
 /**
- * This engine provides the current state of the keyboard modifiers
- * and mouse buttons, primarily useful for accessibility feature support.
+ * This engine provides the list of session applets for konqueror, as well
+ * as support to open/launch them.
  */
-class KonsoleProfilesEngine : public Plasma::DataEngine
+class KonqProfilesEngine : public Plasma::DataEngine
 {
     Q_OBJECT
 
 public:
-    KonsoleProfilesEngine(QObject *parent, const QVariantList &args);
-    ~KonsoleProfilesEngine();
+    KonqProfilesEngine(QObject *parent, const QVariantList &args);
+    ~KonqProfilesEngine();
 
     void init();
     Plasma::Service *serviceForSource(const QString &source);

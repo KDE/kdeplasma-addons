@@ -16,18 +16,18 @@
 *   along with this program.  If not, see <http://www.gnu.org/licenses/>.    *
 *****************************************************************************/
 
-#ifndef KONSOLEPROFILESSERVICE_H
-#define KONSOLEPROFILESSERVICE_H
+#ifndef KONQPROFILESSERVICE_H
+#define KONQPROFILESSERVICE_H
 
 #include <Plasma/Service>
 #include <Plasma/ServiceJob>
 
-class KonsoleProfilesService : public Plasma::Service
+class KonqProfilesService : public Plasma::Service
 {
     Q_OBJECT
 
 public:
-    KonsoleProfilesService(QObject* parent, const QString& profileName);
+    KonqProfilesService(QObject* parent, const QString& profileName);
 
 protected:
     Plasma::ServiceJob* createJob(const QString& operation, QMap<QString,QVariant>& parameters);
@@ -38,7 +38,7 @@ class ProfileJob : public Plasma::ServiceJob
     Q_OBJECT
 
 public:
-    ProfileJob(KonsoleProfilesService *service, const QString& operation, const QMap<QString, QVariant> &parameters);
+    ProfileJob(KonqProfilesService *service, const QString& operation, const QMap<QString, QVariant> &parameters);
     void start();
 };
 
