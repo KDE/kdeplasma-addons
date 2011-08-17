@@ -34,41 +34,9 @@ Item {
     }
 
     Component.onCompleted: {
-//        plasmoid.addEventListener ('ConfigChanged', configChanged);
         plasmoid.popupIcon = QIcon("device-notifier");
-        //configChanged();
     }
 
-    function configChanged() {
-//         removableDevices = plasmoid.readConfig("removableDevices");
-//         nonRemovableDevices = plasmoid.readConfig("nonRemovableDevices");
-//         allDevices = plasmoid.readConfig("allDevices");
-//         populateDevices();
-//         notifierDialog.currentIndex = -1;
-//         notifierDialog.currentExpanded = -1;
-    }
-
-    function addDevice(source) {
-//         if (hpSource.connectedSources.indexOf(source)>=0)
-//             return;
-//         print ("===="+source);
-//         sdSource.connectSource (source);
-//         if (removableDevices) { //Removable only
-//             if (!sdSource.data[source]["Removable"]) {
-//                 return;
-//             }
-//         }
-//         else if (nonRemovableDevices) { //Non removable only
-//             if (sdSource.data[source]["Removable"]) {
-//                 return;
-//             }
-//         }
-//         hpSource.connectSource(source);
-//         i = notifierDialog.model.indexOf (source);
-//         notifierDialog.currentExpanded = i;
-//         notifierDialog.currentIndex = i;
-//         notifierDialog.highlightItem.opacity = 1;
-    }
 
     Text {
         id: header
