@@ -22,11 +22,11 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 Item {
     width: 200
     height: 300
-    id: konsoleProfiles
+    id: konqProfiles
 
     PlasmaCore.DataSource {
         id: profilesSource
-        engine: "org.kde.plasma.dataengine.konsoleprofiles"
+        engine: "org.kde.plasma.dataengine.konqprofiles"
         onSourceAdded: connectSource(source)
         onSourceRemoved: disconnectSource(source)
 
@@ -34,13 +34,13 @@ Item {
     }
 
     Component.onCompleted: {
-        plasmoid.popupIcon = QIcon("utilities-terminal");
+        plasmoid.popupIcon = QIcon("konqueror");
     }
 
 
     Text {
         id: header
-        text: "Konsole Profiles"
+        text: "Konqueror Profiles"
         anchors { top: parent.top; left: parent.left; right: parent.right }
         horizontalAlignment: Text.AlignHCenter
     }
@@ -56,7 +56,7 @@ Item {
         anchors {
             top : separator.bottom
             topMargin: 10
-            bottom: konsoleProfiles.bottom
+            bottom: konqProfiles.bottom
             left: parent.left
             right: parent.right
         }
@@ -124,7 +124,7 @@ Item {
         id: profileViewHighlighter
 
         PlasmaCore.FrameSvgItem {
-            width: konsoleProfiles.width
+            width: konqProfiles.width
             imagePath: "widgets/viewitem"
             prefix: "hover"
             opacity: 0
