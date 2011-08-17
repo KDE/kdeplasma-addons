@@ -89,12 +89,11 @@ Item {
 
         Item {
             height: itemHeight
-            anchors { left: parent.left; right: parent.right }
+            anchors { left: parent.left; leftMargin: 10; right: parent.right }
 
             Text {
                 id: text
-                anchors { left: parent.left; right: parent.right }
-                anchors.centerIn: parent
+                anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
                 text: model.prettyName
             }
 
