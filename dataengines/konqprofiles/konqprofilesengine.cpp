@@ -61,30 +61,28 @@ void KonqProfilesEngine::profilesChanged()
 
 void KonqProfilesEngine::loadProfiles()
 {
-    const QStringList lst = KGlobal::dirs()->findDirs( "data", "konsole/" );
+    const QStringList lst = KGlobal::dirs()->findDirs( "data", "konqueror/profiles/" );
     for ( int i = 0; i < lst.count(); i++ )
     {
         m_dirWatch->addDir( lst[i] );
     }
 
-    const QStringList list = KGlobal::dirs()->findAllResources( "data", "konsole/*.profile", KStandardDirs::NoDuplicates );
+    const QStringList list = KGlobal::dirs()->findAllResources( "data", "konqueror/profiles/*", KStandardDirs::NoDuplicates );
     const QStringList::ConstIterator end = list.constEnd();
-    for (QStringList::ConstIterator it = list.constBegin(); it != end; ++it)
+
+   for (QStringList::ConstIterator it = list.constBegin(); it != end; ++it)
     {
-        QFileInfo info( *it );
-        const QString profileName = KIO::decodeFileName( info.baseName() );
-        QString niceName = profileName;
-        KConfig cfg( *it, KConfig::SimpleConfig );
+        QFileInfo info(*it);
+        const QString profileName = KIO::decodeFileName(info.baseName());
+        QString niceName=profileName;
+        KConfig cfg(*it, KConfig::SimpleConfig);
+        if (cfg.hasGroup("Profile")) {
 
-        if ( cfg.hasGroup( "General" ) ) {
-            KConfigGroup grp( &cfg, "General" );
-
-            if ( grp.hasKey( "Name" ) ) {
-                niceName = grp.readEntry( "Name" );
+            KConfigGroup grp(&cfg, "Profile");
+            if (grp.hasKey( "Name" )) {
+                niceName = grp.readEntry("Name");
             }
 
-            QString sourceName = "name:" + profileName;
-            kDebug() << "adding sourcename: " << profileName << " ++" << niceName;
             setData("name:" + profileName, "name", profileName);
             setData("name:" + profileName, "prettyName", niceName);
         }
