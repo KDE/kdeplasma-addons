@@ -20,8 +20,8 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 Item {
-    width: 200
-    height: 300
+    width: 160
+    height: 200
     id: konqProfiles
 
     PlasmaCore.DataSource {

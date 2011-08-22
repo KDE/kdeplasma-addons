@@ -8,7 +8,7 @@ X-KDE-ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/konqprofiles.qml
-X-Plasma-DefaultSize=290,340
+X-Plasma-DefaultSize=200,200
 
 X-KDE-PluginInfo-Author=Shaun Reich
 X-KDE-PluginInfo-Email=shaun.reich@kdemail.net
