@@ -35,6 +35,7 @@ Item {
 
     Component.onCompleted: {
         plasmoid.popupIcon = QIcon("konqueror");
+        plasmoid.aspectRatioMode = IgnoreAspectRatio;
     }
 
 
