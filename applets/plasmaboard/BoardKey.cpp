@@ -22,26 +22,26 @@
 #include <QPainter>
 #include <plasma/theme.h>
 
-BoardKey::BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode) :
-    m_relativePosition(relativePosition), m_relativeSize(relativeSize){
-    m_keycode = keycode;
+BoardKey::BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode)
+    : m_keycode(keycode),
+      m_relativePosition(relativePosition),
+      m_relativeSize(relativeSize)
+{
 }
 
 BoardKey::~BoardKey()
 {
-
 }
 
-bool BoardKey::contains (const QPoint &point) const
+bool BoardKey::contains(const QPoint &point) const
 {
     return m_rect.contains(point);
 }
 
-bool BoardKey::intersects (const QRectF &rect) const
+bool BoardKey::intersects(const QRectF &rect) const
 {
     return m_rect.intersects(rect);
 }
-
 
 unsigned int BoardKey::getKeycode() const
 {
@@ -60,11 +60,7 @@ QString BoardKey::label() const
 
 void BoardKey::paint(QPainter *painter)
 {
-    //painter->eraseRect(m_rect);
-    //painter->fillRect(m_rect, QColor(Qt::transparent));
     painter->drawPixmap(m_rect.topLeft(), *m_pixmap);
-    //painter->drawPixmap(m_rect.toRect(), *m_pixmap);
-    //painter->drawRect(QRect(m_position, QPoint( frames[m_size].width() + m_position.x(), frames[m_size].height() + m_position.y() )));
 }
 
 QPoint BoardKey::position() const
@@ -139,7 +135,7 @@ QSize BoardKey::size() const
 
 void BoardKey::updateDimensions(double factor_x, double factor_y)
 {
-    QPoint position = QPoint(m_relativePosition.x() * factor_x, m_relativePosition.y() * factor_y);
-    QSize size = QSize(m_relativeSize.width() * factor_x, m_relativeSize.height() * factor_y);
+    const QPoint position(m_relativePosition.x() * factor_x, m_relativePosition.y() * factor_y);
+    const QSize size(m_relativeSize.width() * factor_x, m_relativeSize.height() * factor_y);
     m_rect = QRect(position, size);
 }
