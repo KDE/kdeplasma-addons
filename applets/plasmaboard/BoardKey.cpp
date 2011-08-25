@@ -117,7 +117,8 @@ void BoardKey::sendKeyRelease()
      Helpers::fakeKeyRelease(getKeycode());
 }
 
-void BoardKey::setKeycode(unsigned int keycode){
+void BoardKey::setKeycode(unsigned int keycode)
+{
     m_keycode = keycode;
 }
 
@@ -128,7 +129,7 @@ void BoardKey::setPixmap(QPixmap *pixmap)
 
 void BoardKey::setUpPainter(QPainter *painter) const
 {
-    painter->translate(position() + QPoint(size().width()/2, size().height()/2) );    
+    painter->translate(position() + QPoint(size().width()/2, size().height()/2) );
 }
 
 QSize BoardKey::size() const
