@@ -50,7 +50,7 @@
 #include "Helpers.h"
 
 static const int REPEAT_TIMER = 1000;
-static const int STICKY_TIMER = 0;
+static const int STICKY_TIMER = 50;
 static const int TOOLTIP_SHOW_DELAY = 50;
 
 PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
