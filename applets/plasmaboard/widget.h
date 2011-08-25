@@ -162,12 +162,6 @@ private:
     void unpress(BoardKey* key);
 
 public Q_SLOTS:
-
-    /**
-      * Unsets all pressed keys despite of caps
-      */
-    void clear();
-
     void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
 
     /**
