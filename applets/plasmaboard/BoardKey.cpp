@@ -136,11 +136,6 @@ QSize BoardKey::size() const
     return m_rect.size().toSize();
 }
 
-void BoardKey::unpressed()
-{
-
-}
-
 void BoardKey::updateDimensions(double factor_x, double factor_y)
 {
     QPoint position = QPoint(m_relativePosition.x() * factor_x, m_relativePosition.y() * factor_y);

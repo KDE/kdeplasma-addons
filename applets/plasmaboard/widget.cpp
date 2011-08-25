@@ -113,15 +113,6 @@ void PlasmaboardWidget::change(FuncKey *key, bool state)
         unpress(key);
 }
 
-void PlasmaboardWidget::clear()
-{
-    Q_FOREACH(BoardKey* key, m_pressedList){
-        key->unpressed();
-    }
-
-    clearTooltip();
-}
-
 void PlasmaboardWidget::clearTooltip()
 {
     m_tooltip->hide();
@@ -731,7 +722,6 @@ void PlasmaboardWidget::themeChanged()
 void PlasmaboardWidget::unpress(BoardKey *key)
 {    
     clearTooltip();
-    key->unpressed();
     key->setPixmap(getFrame(key->size()));
     update(key->rect());
     m_pressedList.removeAll(key);
