@@ -20,18 +20,14 @@
 
 #include "StickyKey.h"
 
-StickyKey::StickyKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label):
-        FuncKey(relativePosition, relativeSize, keycode, label)
+StickyKey::StickyKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label)
+    : FuncKey(relativePosition, relativeSize, keycode, label),
+      m_toggled(false)
 {
-    m_toggled = false;
-    m_dorelease = false;
-    m_acceptPixmap = true;
 }
 
 void StickyKey::pressed()
 {
-    m_acceptPixmap = true;
-
     if(!m_toggled){
         sendKeyPress(); // if the key has not pressed, send immediately a press to X server
     }
@@ -43,13 +39,11 @@ void StickyKey::released()
         sendKeyRelease();
     }
 
-    m_acceptPixmap = m_dorelease;
     m_toggled = !m_toggled;
 }
 
 void StickyKey::reset()
 {
-    m_acceptPixmap = true;
     if(m_toggled){
         sendKeyRelease();
         m_toggled = false;

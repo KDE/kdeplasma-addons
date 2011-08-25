@@ -35,10 +35,7 @@ public:
 
 private:
     bool m_acceptPixmap;
-    bool m_dorelease;
     bool m_toggled;
-
-
 };
 
 #endif // STICKYKEY_H
