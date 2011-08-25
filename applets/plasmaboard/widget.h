@@ -194,9 +194,9 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
     void stickyKey_Mapper(int id);
+    void showToolTip();
 
 private:
-    Plasma::FrameSvg* m_activeFrame; // svg with active state
     QHash<QSize, QPixmap*> m_activeFrames; // cache of all pixmap sizes with active state
     QList<AlphaNumKey*> m_alphaKeys; // normal keys labeled with symbols like a, b, c
     Plasma::PopupApplet *m_applet;
@@ -207,7 +207,7 @@ private:
     QList<StickyKey*> m_ctlKeys; // List of Control keys on keyboard
     QList<DualKey*> m_dualKeys; // List of dual keys on keyboard
     Plasma::DataEngine* m_engine; // key state data engine
-    Plasma::FrameSvg* m_frame; // svg in normal state
+    Plasma::FrameSvg* m_frameSvg; // svg in normal state
     QHash<QSize, QPixmap*> m_frames; // cace of all pixmap sizes with normal state
     QList<FuncKey*> m_funcKeys; // functional keys like shift, backspace, enter
     bool m_isAlternative; // alternative key level activated
@@ -217,6 +217,7 @@ private:
     QList<BoardKey*> m_keys; // list of all keys displayed
     QList<BoardKey*> m_pressedList; // list all currently pressed keys
     QTimer* m_repeatTimer;
+    QTimer* m_delayedToolTipShow;
     QSignalMapper* m_signalMapper;
     QList<StickyKey*> m_shiftKeys; // list of Shift-Keys on keyboard
     QList<FuncKey*> m_specialKeys; // list of special keys like Backspace, F[1-12], Enter and so on

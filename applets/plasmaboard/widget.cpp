@@ -49,8 +49,9 @@
 
 #include "Helpers.h"
 
-#define REPEAT_TIMER 1000
-#define STICKY_TIMER 500
+static const int REPEAT_TIMER = 1000;
+static const int STICKY_TIMER = 0;
+static const int TOOLTIP_SHOW_DELAY = 50;
 
 PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     : QGraphicsWidget(parent),
@@ -65,17 +66,11 @@ PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     m_isLocked = false;
     m_isRepeating = false;
 
-    m_tooltip = new Tooltip("");
+    m_tooltip = new Tooltip();
 
-    m_frame = new Plasma::FrameSvg();
-    m_frame->setCacheAllRenderedFrames(false);
-    m_frame->setImagePath("widgets/button");
-    m_frame->setElementPrefix("normal");
-
-    m_activeFrame = new Plasma::FrameSvg();
-    m_activeFrame->setCacheAllRenderedFrames(false);
-    m_activeFrame->setImagePath("widgets/button");
-    m_activeFrame->setElementPrefix("pressed");
+    m_frameSvg = new Plasma::FrameSvg();
+    m_frameSvg->setCacheAllRenderedFrames(true);
+    m_frameSvg->setImagePath("widgets/button");
 
     m_engine = m_applet->dataEngine("keystate");
     if(m_engine){
@@ -87,18 +82,23 @@ PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
 
     m_repeatTimer = new QTimer(this);
     connect(m_repeatTimer, SIGNAL(timeout()), this, SLOT(repeatKeys()));
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
-    
+
+    m_delayedToolTipShow = new QTimer(this);
+    m_delayedToolTipShow->setSingleShot(true);
+    m_delayedToolTipShow->setInterval(TOOLTIP_SHOW_DELAY);
+    connect(m_delayedToolTipShow, SIGNAL(timeout()), this, SLOT(showToolTip()));
+
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.connect("org.kde.keyboard", "/Layouts", "org.kde.KeyboardLayouts", "currentLayoutChanged", this, SLOT(relabelKeys()));
+
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
 }
 
 
 PlasmaboardWidget::~PlasmaboardWidget()
 {
     reset();
-    delete m_frame;
-    delete m_activeFrame;
+    delete m_frameSvg;
     delete m_tooltip;
     qDeleteAll(m_keys);
     qDeleteAll(m_frames);
@@ -107,14 +107,12 @@ PlasmaboardWidget::~PlasmaboardWidget()
 
 void PlasmaboardWidget::change(FuncKey *key, bool state)
 {
-    if(state)
-        press(key);
-    else
-        unpress(key);
+    state ? press(key) : unpress(key);
 }
 
 void PlasmaboardWidget::clearTooltip()
 {
+    m_delayedToolTipShow->stop();
     m_tooltip->hide();
 }
 
@@ -333,30 +331,28 @@ void PlasmaboardWidget::deleteKeys()
 
 QPixmap *PlasmaboardWidget::getActiveFrame(const QSize &size)
 {
-    QPixmap *pixmap;
-    if(!m_activeFrames.contains(size)){
-        m_activeFrame->resizeFrame(size);
-        pixmap = new QPixmap(m_activeFrame->framePixmap());
+    QPixmap *pixmap = m_activeFrames.value(size);
+    if(!pixmap) {
+        m_frameSvg->setElementPrefix("pressed");
+        m_frameSvg->resizeFrame(size);
+        pixmap = new QPixmap(m_frameSvg->framePixmap());
         m_activeFrames[size] = pixmap;
     }
-    else{
-        pixmap = m_activeFrames[size];
-    }
-    return pixmap;
 
+    return pixmap;
 }
 
 QPixmap *PlasmaboardWidget::getFrame(const QSize &size)
 {
-    QPixmap *pixmap;
-    if(!m_frames.contains(size)){
-        m_frame->resizeFrame(size);
-        pixmap = new QPixmap(m_frame->framePixmap());
+    QPixmap *pixmap = m_frames.value(size);
+
+    if(!pixmap) {
+        m_frameSvg->setElementPrefix("normal");
+        m_frameSvg->resizeFrame(size);
+        pixmap = new QPixmap(m_frameSvg->framePixmap());
         m_frames[size] = pixmap;
     }
-    else{
-        pixmap = m_frames[size];
-    }
+
     return pixmap;
 }
 
@@ -564,6 +560,7 @@ void PlasmaboardWidget::refreshKeys()
 {
     double factor_x = size().width() / 10048;
     double factor_y = size().height() / 10002;
+    kDebug() << size() << "refreshing keys with factors of" << factor_x << factor_y;
 
     Q_FOREACH(BoardKey* key, m_keys){
         key->updateDimensions(factor_x, factor_y);
@@ -580,7 +577,7 @@ void PlasmaboardWidget::relabelKeys()
 }
 
 void PlasmaboardWidget::release(BoardKey *key)
-{    
+{
     key->released(); // trigger X-unpress event done by key
     m_pressedList.removeAll(key);    
     clearTooltip(); // remove displayed tooltip
@@ -648,25 +645,32 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
 {
     QString label = key->label();
     if(label.size() > 0) {
-        m_tooltip -> setText( key->label() );
-        m_tooltip -> resize( key->size()*2 );
+        m_tooltip->setText( key->label() );
+        m_tooltip->resize( key->size()*2 );
 
         Plasma::Containment *c = m_applet->containment();
         if(c){
             Plasma::Corona *corona = c->corona();
             if(corona){
 		if(m_applet->location() == Plasma::TopEdge) {
-		  m_tooltip -> move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + QPoint(key->position().x() - key->size().width()/2, 0) - QPoint(0, size().height() - key->position().y() - key->size().height()) );
+		  m_tooltip->move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + QPoint(key->position().x() - key->size().width()/2, 0) - QPoint(0, size().height() - key->position().y() - key->size().height()) );
 		}
 		else {
-		  m_tooltip -> move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + key->position() - QPoint(key->size().width()/2, 0) );
+		  m_tooltip->move( corona->popupPosition(this, key->size()*2, Qt::AlignLeft) + key->position() - QPoint(key->size().width()/2, 0) );
 		}
             }
         }
 
-        m_tooltip -> show();
-	m_tooltip -> raise();
+        if (!m_tooltip->isVisible()) {
+            m_delayedToolTipShow->start();
+        }
     }
+}
+
+void PlasmaboardWidget::showToolTip()
+{
+    m_tooltip->show();
+    m_tooltip->raise();
 }
 
 QSizeF PlasmaboardWidget::sizeHint(Qt::SizeHint which, const QSizeF& constraint) const
@@ -720,7 +724,7 @@ void PlasmaboardWidget::themeChanged()
 }
 
 void PlasmaboardWidget::unpress(BoardKey *key)
-{    
+{
     clearTooltip();
     key->setPixmap(getFrame(key->size()));
     update(key->rect());
