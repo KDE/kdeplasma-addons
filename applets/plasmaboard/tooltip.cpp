@@ -26,7 +26,8 @@
 #include <plasma/theme.h>
 
 
-Tooltip::Tooltip(QString text) : QWidget()
+Tooltip::Tooltip(const QString &text)
+    : QWidget()
 {
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_TransparentForMouseEvents);
