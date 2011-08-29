@@ -26,7 +26,7 @@
 
 
 BackspaceKey::BackspaceKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_BackSpace), QString())
+    FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_BackSpace), QString())
 {
 
 }
@@ -39,6 +39,6 @@ void BackspaceKey::paint(QPainter *painter)
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     setUpPainter(painter);
-	paintArrow(painter);
+    paintArrow(painter);
     painter->restore();
 }

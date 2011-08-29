@@ -41,9 +41,10 @@ class QTimer;
 class StickyKey;
 class SwitchKey;
 
-namespace {
-    class DataEngine;
-    class FrameSvg;
+namespace
+{
+class DataEngine;
+class FrameSvg;
 }
 
 /**
@@ -90,10 +91,10 @@ public:
     void switchAlternative(bool alt);
 
 protected:
-    virtual void mouseMoveEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void mousePressEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void resizeEvent ( QGraphicsSceneResizeEvent * event );
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
+    virtual void resizeEvent(QGraphicsSceneResizeEvent * event);
     virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
     //virtual bool event ( QEvent * event );
 
@@ -150,7 +151,7 @@ private:
       * Releases given key. In most cases this actually sends the token to the X-server
       * @param Key to act on
       */
-    void release(BoardKey* key);    
+    void release(BoardKey* key);
 
     /**
       * Unpresses given key. This undoes the press without actually sending anything to the X-Server
@@ -218,11 +219,11 @@ private:
     QSignalMapper* m_signalMapper;
     QList<StickyKey*> m_shiftKeys; // list of Shift-Keys on keyboard
     QList<FuncKey*> m_specialKeys; // list of special keys like Backspace, F[1-12], Enter and so on
-    QMap<int,BoardKey*> m_stickyKeys; // list of keys waiting for being unpressed
+    QMap<int, BoardKey*> m_stickyKeys; // list of keys waiting for being unpressed
     QList<StickyKey*> m_superKeys; // list of all super-keys on keyboard
     QList<SwitchKey*> m_switchKeys; // list of all switch keys on keyboard
     Tooltip* m_tooltip; // pointer to widget which is used as tooltip
-    QXmlStreamReader m_xmlReader; // instance of QXMLStreamReader for parsing layout files    
+    QXmlStreamReader m_xmlReader; // instance of QXMLStreamReader for parsing layout files
 };
 
 inline uint qHash(const QSize &key)

@@ -64,21 +64,21 @@ void PanelIcon::configChanged()
 
     QString old_layout = m_layout;
     QString file = KStandardDirs::locate("data", layout); // lookup whether saved layout exists
-    if (layout.size() > 0 && file.size() > 0){
+    if(layout.size() > 0 && file.size() > 0) {
         m_layout = file;
     } else { // fallback to default layout
         m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
     }
 
-    if (m_plasmaboard && old_layout != m_layout) { // only rebuild the keyboard if the layout has actually changed
+    if(m_plasmaboard && old_layout != m_layout) {  // only rebuild the keyboard if the layout has actually changed
         initKeyboard(m_layout);
     }
 }
 
 void PanelIcon::constraintsEvent(Plasma::Constraints constraints)
 {
-    if (constraints & Plasma::FormFactorConstraint) {
-        if (formFactor() == Plasma::Horizontal || formFactor() == Plasma::Vertical) {
+    if(constraints & Plasma::FormFactorConstraint) {
+        if(formFactor() == Plasma::Horizontal || formFactor() == Plasma::Vertical) {
             Plasma::ToolTipManager::self()->registerWidget(this);
             Plasma::ToolTipContent toolTip;
             toolTip.setImage(KIcon("preferences-desktop-keyboard"));
@@ -95,20 +95,20 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
     qDeleteAll(m_layouts);
     m_layouts.clear();
     QStringList layoutList = KGlobal::dirs()->findAllResources("data", "plasmaboard/*.xml");
-    Q_FOREACH(QString path, layoutList){
+    Q_FOREACH(QString path, layoutList) {
         m_layouts << new Layout(path);
     }
 
     QWidget *widget = new QWidget(parent);
     ui.setupUi(widget);
-    parent->addPage(widget, i18nc("Different keyboard layouts","Layouts"), "plasmaboard");
+    parent->addPage(widget, i18nc("Different keyboard layouts", "Layouts"), "plasmaboard");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    
 
-    Q_FOREACH(Layout* l, m_layouts){
+
+    Q_FOREACH(Layout * l, m_layouts) {
         ui.layoutsComboBox->addItem(l->name(), l->path());
-        if(l->path() == m_layout){
+        if(l->path() == m_layout) {
             ui.descriptionLabel->setText(l->description());
             ui.layoutsComboBox->setCurrentIndex(ui.layoutsComboBox->count() - 1);
         }
@@ -120,13 +120,13 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
 
 QGraphicsWidget *PanelIcon::graphicsWidget()
 {
-    if (!m_plasmaboard) {
+    if(!m_plasmaboard) {
         m_plasmaboard = new PlasmaboardWidget(this);
         initKeyboard(m_layout);
     }
 
     QGraphicsView *window = view();
-    if (window) {
+    if(window) {
         KWindowInfo info = KWindowSystem::windowInfo(window->effectiveWinId(),  NET::WMWindowType);
         m_plasmaboard->setEnabled(info.windowType(NET::AllTypesMask) == NET::Dock);
     }
@@ -138,8 +138,8 @@ void PanelIcon::layoutNameChanged(const QString &name)
 {
     Layout *lay = m_layouts[0];
 
-    Q_FOREACH(Layout* l, m_layouts){
-        if(l->name() == name){
+    Q_FOREACH(Layout * l, m_layouts) {
+        if(l->name() == name) {
             lay = l;
             break;
         }
@@ -175,7 +175,7 @@ void PanelIcon::initKeyboard(const QString &layoutFile)
 
 void PanelIcon::popupEvent(bool show)
 {
-    if (!show) {
+    if(!show) {
         m_plasmaboard->reset();
     }
 }

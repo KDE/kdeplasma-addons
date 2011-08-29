@@ -22,14 +22,15 @@
 
 #include <widget.h>
 
-class BoardKey  {
+class BoardKey
+{
 
 public:
     BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode);
     virtual ~BoardKey();
 
-    bool contains (const QPoint &point) const;
-    bool intersects (const QRectF &rect) const;
+    bool contains(const QPoint &point) const;
+    bool intersects(const QRectF &rect) const;
     unsigned int keycode() const;
     unsigned int keysymbol(int level) const;
     virtual QString label() const;
@@ -64,7 +65,7 @@ public:
     QSize size() const;
     void updateDimensions(double factor_x, double factor_y);
 
-protected:    
+protected:
     void sendKey();
     virtual void sendKeyPress();
     virtual void sendKeyRelease();

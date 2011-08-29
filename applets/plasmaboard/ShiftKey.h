@@ -23,7 +23,8 @@
 
 #include "StickyKey.h"
 
-class ShiftKey: public StickyKey {
+class ShiftKey: public StickyKey
+{
 
 public:
     ShiftKey(QPoint relativePosition, QSize relativeSize);

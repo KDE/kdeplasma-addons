@@ -23,7 +23,8 @@
 
 #include "FuncKey.h"
 
-class ArrowLeftKey: public FuncKey {
+class ArrowLeftKey: public FuncKey
+{
 public:
     ArrowLeftKey(QPoint relativePosition, QSize relativeSize);
 

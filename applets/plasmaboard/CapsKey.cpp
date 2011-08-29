@@ -25,7 +25,7 @@
 #include <Plasma/Theme>
 
 CapsKey::CapsKey(QPoint relativePosition, QSize relativeSize) :
-        StickyKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Caps_Lock), QString())
+    StickyKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Caps_Lock), QString())
 {
 
 }
@@ -41,16 +41,16 @@ void CapsKey::paint(QPainter *painter)
 
     int unit = qMin(size().width(), size().height()) / 8;
 
-	const QPointF points[7] = {
-             QPointF(0, 3*unit),
-             QPointF(-2*unit, 0),
-             QPointF(-1*unit, 0),
-             QPointF(-1*unit, -2*unit),
-             QPointF( 1*unit, -2*unit),
-             QPointF( 1*unit, 0),
-             QPointF( 2*unit, 0)
-	};
+    const QPointF points[7] = {
+        QPointF(0, 3 * unit),
+        QPointF(-2 * unit, 0),
+        QPointF(-1 * unit, 0),
+        QPointF(-1 * unit, -2 * unit),
+        QPointF(1 * unit, -2 * unit),
+        QPointF(1 * unit, 0),
+        QPointF(2 * unit, 0)
+    };
 
-	painter->drawConvexPolygon(points, 7);
+    painter->drawConvexPolygon(points, 7);
     painter->restore();
 }
