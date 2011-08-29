@@ -58,19 +58,20 @@ void PanelIcon::configAccepted()
 
 void PanelIcon::configChanged()
 {
-    KConfigGroup cg = config();
-    QString layout;
-    layout = cg.readEntry("layout", layout);
-
-    QString old_layout = m_layout;
-    QString file = KStandardDirs::locate("data", layout); // lookup whether saved layout exists
-    if (layout.size() > 0 && file.size() > 0) {
-        m_layout = file;
-    } else { // fallback to default layout
-        m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
+    QString layout = config().readEntry("layout", QString());
+    if (layout.isEmpty()) {
+        // fallback to default layout
+        layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
+    } else {
+        // lookup whether saved layout exists
+        const QString file = KStandardDirs::locate("data", layout); 
+        if (!file.isEmpty()) {
+            layout = file;
+        }
     }
 
-    if (m_plasmaboard && old_layout != m_layout) {  // only rebuild the keyboard if the layout has actually changed
+    if (layout != m_layout) {  // only rebuild the keyboard if the layout has actually changed
+        m_layout = layout;
         initKeyboard(m_layout);
     }
 }
@@ -156,6 +157,10 @@ void PanelIcon::init()
 
 void PanelIcon::initKeyboard()
 {
+    if (!m_plasmaboard) {
+        return;
+    }
+
     QString path = ((QAction*)sender())->data().toString();
     m_plasmaboard->deleteKeys();
     m_plasmaboard->initKeyboard(path);
@@ -166,6 +171,10 @@ void PanelIcon::initKeyboard()
 
 void PanelIcon::initKeyboard(const QString &layoutFile)
 {
+    if (!m_plasmaboard) {
+        return;
+    }
+
     m_plasmaboard->deleteKeys();
     m_plasmaboard->initKeyboard(layoutFile);
     m_plasmaboard->refreshKeys();
