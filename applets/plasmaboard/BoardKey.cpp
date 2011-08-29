@@ -24,6 +24,7 @@
 
 BoardKey::BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode)
     : m_keycode(keycode),
+      m_pixmap(0),
       m_relativePosition(relativePosition),
       m_relativeSize(relativeSize)
 {
@@ -60,7 +61,9 @@ QString BoardKey::label() const
 
 void BoardKey::paint(QPainter *painter)
 {
-    painter->drawPixmap(m_rect.topLeft(), *m_pixmap);
+    if (m_pixmap) {
+        painter->drawPixmap(m_rect.topLeft(), *m_pixmap);
+    }
 }
 
 QPoint BoardKey::position() const
@@ -118,9 +121,14 @@ void BoardKey::setKeycode(unsigned int keycode)
     m_keycode = keycode;
 }
 
-void BoardKey::setPixmap(QPixmap *pixmap)
+bool BoardKey::setPixmap(QPixmap *pixmap)
 {
+    if (m_pixmap == pixmap) {
+        return false;
+    }
+
     m_pixmap = pixmap;
+    return true;
 }
 
 void BoardKey::setUpPainter(QPainter *painter) const
