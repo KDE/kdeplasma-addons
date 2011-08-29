@@ -24,8 +24,8 @@
 #include <QPainter>
 #include <plasma/theme.h>
 
-FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label):
-    AlphaNumKey(relativePosition, relativeSize, keycode)
+FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label)
+    : AlphaNumKey(relativePosition, relativeSize, keycode)
 {
     setLabel(label);
 }
