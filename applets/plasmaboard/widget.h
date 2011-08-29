@@ -100,11 +100,12 @@ protected:
 
 private:
     /**
-      * Presses or unpresses key
+      * Presses or unpresses function keys
       * @param FuncKey to act on
       * @param state to change to. True: press, False: unpress
       */
-    void change(FuncKey* key, bool state);
+    template<typename T>
+    void toggleKeys(const QList<T> &keys, bool state);
 
     /**
       * Hides Tooltip
@@ -141,11 +142,6 @@ private:
       * @param key to act on
       */
     void press(BoardKey* key);
-
-    /**
-      * Causes repaint of the key in pressed state, but does not act on the key or trigger tooltip
-      */
-    void press(FuncKey* key);
 
     /**
       * Releases given key. In most cases this actually sends the token to the X-server

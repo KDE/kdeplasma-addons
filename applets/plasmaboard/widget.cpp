@@ -55,16 +55,15 @@ static const int TOOLTIP_SHOW_DELAY = 50;
 
 PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     : QGraphicsWidget(parent),
-      m_applet(parent)
+      m_applet(parent),
+      m_isAlternative(false),
+      m_isLevel2(false),
+      m_isLocked(false),
+      m_isRepeating(false)
 {
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     setFocusPolicy(Qt::NoFocus);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-    m_isLevel2 = false;
-    m_isAlternative = false;
-    m_isLocked = false;
-    m_isRepeating = false;
 
     m_tooltip = new Tooltip();
 
@@ -105,9 +104,12 @@ PlasmaboardWidget::~PlasmaboardWidget()
     qDeleteAll(m_activeFrames);
 }
 
-void PlasmaboardWidget::change(FuncKey *key, bool state)
+template<typename T>
+void PlasmaboardWidget::toggleKeys(const QList<T> &keys, bool state)
 {
-    state ? press(key) : unpress(key);
+    foreach (const T &key, keys) {
+        state ? press(key) : unpress(key);
+    }
 }
 
 void PlasmaboardWidget::clearTooltip()
@@ -118,100 +120,101 @@ void PlasmaboardWidget::clearTooltip()
 
 FuncKey* PlasmaboardWidget::createFunctionKey(const QPoint &point, const QSize &size, const QString &action)
 {
-    if (action == "BACKSPACE")
+    if (action == "BACKSPACE") {
         return new BackspaceKey(point, size);
-    else if (action == "ENTER")
+    } else if (action == "ENTER") {
         return new EnterKey(point, size);
-    else if (action == "SPACE")
+    } else if (action == "SPACE") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString());
-    else if (action == "TAB")
+    } else if (action == "TAB") {
         return new TabKey(point, size);
-    else if (action == "ESCAPE")
+    } else if (action == "ESCAPE") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Escape), QString(i18nc("The escape key on a keyboard", "Esc")));
-    else if (action == "F1")
+    } else if (action == "F1") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F1), QString(i18n("F1")));
-    else if (action == "F2")
+    } else if (action == "F2") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F2), QString(i18n("F2")));
-    else if (action == "F3")
+    } else if (action == "F3") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F3), QString(i18n("F3")));
-    else if (action == "F4")
+    } else if (action == "F4") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F4), QString(i18n("F4")));
-    else if (action == "F5")
+    } else if (action == "F5") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F5), QString(i18n("F5")));
-    else if (action == "F6")
+    } else if (action == "F6") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F6), QString(i18n("F6")));
-    else if (action == "F7")
+    } else if (action == "F7") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F7), QString(i18n("F7")));
-    else if (action == "F8")
+    } else if (action == "F8") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F8), QString(i18n("F8")));
-    else if (action == "F9")
+    } else if (action == "F9") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F9), QString(i18n("F9")));
-    else if (action == "F10")
+    } else if (action == "F10") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F10), QString(i18n("F10")));
-    else if (action == "F11")
+    } else if (action == "F11") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F11), QString(i18n("F11")));
-    else if (action == "F12")
+    } else if (action == "F12") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F12), QString(i18n("F12")));
-    else if (action == "PRINT")
+    } else if (action == "PRINT") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Print), QString(i18nc("The print key on a keyboard", "Print")));
-    else if (action == "NUM")
+    } else if (action == "NUM") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Num_Lock), QString(i18nc("The num key on a keyboard", "Num")));
-    else if (action == "PAUSE")
+    } else if (action == "PAUSE") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Pause), QString(i18nc("The pause key on a keyboard", "Pause")));
-    else if (action == "HOME")
+    } else if (action == "HOME") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Home), QString(i18nc("The home key on a keyboard", "Home")));
-    else if (action == "DEL")
+    } else if (action == "DEL") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Delete), QString(i18nc("The delete key on a keyboard", "Del")));
-    else if (action == "END")
+    } else if (action == "END") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_End), QString(i18nc("The end key on a keyboard", "End")));
-    else if (action == "PAGEUP")
+    } else if (action == "PAGEUP") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Page_Up), QString(i18nc("The page up key on a keyboard", "PgUp")));
-    else if (action == "INSERT")
+    } else if (action == "INSERT") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Insert), QString(i18nc("The insert key on a keyboard", "Ins")));
-    else if (action == "PAGEDOWN")
+    } else if (action == "PAGEDOWN") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Page_Down), QString(i18nc("The page down key on a keyboard", "PgDn")));
-    else if (action == "ARROWUP")
+    } else if (action == "ARROWUP") {
         return new ArrowTopKey(point, size);
-    else if (action == "ARROWDOWN")
+    } else if (action == "ARROWDOWN") {
         return new ArrowBottomKey(point, size);
-    else if (action == "ARROWLEFT")
+    } else if (action == "ARROWLEFT") {
         return new ArrowLeftKey(point, size);
-    else if (action == "ARROWRIGHT")
+    } else if (action == "ARROWRIGHT") {
         return new ArrowRightKey(point, size);
-    else if (action == "KEYPADDIVIDE")
+    } else if (action == "KEYPADDIVIDE") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Divide), QString(i18nc("Divider on the keypad", "/")));
-    else if (action == "KEYPADMULTIPLY")
+    } else if (action == "KEYPADMULTIPLY") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Multiply), QString(i18nc("Multiplier on keypad", "*")));
-    else if (action == "KEYPADADD")
+    } else if (action == "KEYPADADD") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Add), QString(i18nc("Plus sign Divider on the keypad", "+")));
-    else if (action == "KEYPADSUBTRACT")
+    } else if (action == "KEYPADSUBTRACT") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Subtract), QString(i18nc("Minus sign on the keypad", "-")));
-    else if (action == "KEYPADENTER")
+    } else if (action == "KEYPADENTER") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Enter), QString(i18nc("Enter key on the keypad", "Enter")));
-    else if (action == "KEYPADSEPARATOR")
+    } else if (action == "KEYPADSEPARATOR") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Separator), QString(i18nc("Separator key on the keypad", ".")));
-    else if (action == "KEYPAD1")
+    } else if (action == "KEYPAD1") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_1), QString(i18nc("1 key on the keypad", "1")));
-    else if (action == "KEYPAD2")
+    } else if (action == "KEYPAD2") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_2), QString(i18nc("2 key on the keypad", "2")));
-    else if (action == "KEYPAD3")
+    } else if (action == "KEYPAD3") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_3), QString(i18nc("3 key on the keypad", "3")));
-    else if (action == "KEYPAD4")
+    } else if (action == "KEYPAD4") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_4), QString(i18nc("4 key on the keypad", "4")));
-    else if (action == "KEYPAD5")
+    } else if (action == "KEYPAD5") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_5), QString(i18nc("5 key on the keypad", "5")));
-    else if (action == "KEYPAD6")
+    } else if (action == "KEYPAD6") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_6), QString(i18nc("6 key on the keypad", "6")));
-    else if (action == "KEYPAD7")
+    } else if (action == "KEYPAD7") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_7), QString(i18nc("7 key on the keypad", "7")));
-    else if (action == "KEYPAD8")
+    } else if (action == "KEYPAD8") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_8), QString(i18nc("8 key on the keypad", "8")));
-    else if (action == "KEYPAD9")
+    } else if (action == "KEYPAD9") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_9), QString(i18nc("9 key on the keypad", "9")));
-    else if (action == "KEYPAD0")
+    } else if (action == "KEYPAD0") {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_0), QString(i18nc("0 key on the keypad", "0")));
-    else
+    } else {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString(i18n("Unknown")));
+    }
 }
 
 FuncKey* PlasmaboardWidget::createStickyKey(const QPoint &point, const QSize &size, const QString &action)
@@ -248,8 +251,9 @@ FuncKey* PlasmaboardWidget::createStickyKey(const QPoint &point, const QSize &si
         SwitchKey* key = new SwitchKey(point, size, Helpers::keysymToKeycode(XK_VoidSymbol), this);
         m_switchKeys << key;
         return key;
-    } else
+    } else {
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString("Unkown"));
+    }
 }
 
 void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
@@ -257,45 +261,23 @@ void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::Dat
     bool state = data["Pressed"].toBool();
 
     if (sourceName == "Shift") {
-        foreach (FuncKey * key, m_shiftKeys) {
-            change(key, state);
-        }
+        toggleKeys<StickyKey *>(m_shiftKeys, state);
         m_isLevel2 = state;
         relabelKeys();
-    }
-
-    else if (sourceName == "Caps Lock") {
-        foreach (FuncKey * key, m_capsKeys) {
-            change(key, state);
-        }
+    } else if (sourceName == "Caps Lock") {
+        toggleKeys<FuncKey *>(m_capsKeys, state);
         m_isLocked = state;
         relabelKeys();
-    }
-
-    else if (sourceName == "AltGr") {
-        foreach (FuncKey * key, m_altgrKeys) {
-            change(key, state);
-        }
+    } else if (sourceName == "AltGr") {
+        toggleKeys<StickyKey *>(m_altgrKeys, state);
         m_isAlternative = state;
         relabelKeys();
-    }
-
-    else if (sourceName == "Alt") {
-        foreach (FuncKey * key, m_altKeys) {
-            change(key, state);
-        }
-    }
-
-    else if (sourceName == "Super") {
-        foreach (FuncKey * key, m_superKeys) {
-            change(key, state);
-        }
-    }
-
-    else if (sourceName == "Ctrl") {
-        foreach (FuncKey * key, m_ctlKeys) {
-            change(key, state);
-        }
+    } else if (sourceName == "Alt") {
+        toggleKeys<StickyKey *>(m_altgrKeys, state);
+    } else if (sourceName == "Super") {
+        toggleKeys<StickyKey *>(m_superKeys, state);
+    } else if (sourceName == "Ctrl") {
+        toggleKeys<StickyKey *>(m_ctlKeys, state);
     } else if (sourceName == "Menu") {
 
     }
@@ -515,19 +497,20 @@ void PlasmaboardWidget::paint(QPainter *p,
 
 void PlasmaboardWidget::press(BoardKey *key)
 {
-    key->pressed();
-    key->setPixmap(background(ActiveBackground, key->size()));
-    m_pressedList << key;
-    update(key->rect());
-    setTooltip(key);
-    m_repeatTimer->start(REPEAT_TIMER);
-}
+    bool func = dynamic_cast<FuncKey *>(key);
 
-void PlasmaboardWidget::press(FuncKey *key)
-{
+    if (!func) {
+        key->pressed();
+    }
+
     key->setPixmap(background(ActiveBackground, key->size()));
     m_pressedList << key;
     update(key->rect());
+
+    if (!func) {
+        setTooltip(key);
+        m_repeatTimer->start(REPEAT_TIMER);
+    }
 }
 
 void PlasmaboardWidget::refreshKeys()
