@@ -20,6 +20,7 @@
 #include "PanelIcon.h"
 #include "Layout.h"
 #include <QAction>
+#include <QFile>
 #include <QGraphicsView>
 
 #include <KConfigDialog>
@@ -70,7 +71,8 @@ void PanelIcon::configChanged()
         }
     }
 
-    if (layout != m_layout) {  // only rebuild the keyboard if the layout has actually changed
+    // only rebuild the keyboard if the layout has actually changed
+    if (layout != m_layout && QFile::exists(layout)) {
         m_layout = layout;
         initKeyboard(m_layout);
     }
