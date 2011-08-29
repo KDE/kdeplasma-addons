@@ -104,3 +104,6 @@ void Tooltip::paintEvent ( QPaintEvent * event )
     painter.fillRect(rect(), Qt::transparent);
     frame->paintFrame(&painter, event->rect());
 }
+
+#include "tooltip.moc"
+
