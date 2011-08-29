@@ -26,7 +26,6 @@
 AlphaNumKey::AlphaNumKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode):
     BoardKey(relativePosition, relativeSize, keycode)
 {
-
     setLabel(0);
 }
 
@@ -43,8 +42,9 @@ QString AlphaNumKey::label() const
 void AlphaNumKey::paint(QPainter *painter)
 {
     BoardKey::paint(painter);
-    paintLabel(painter);
-
+    if (!m_label.isEmpty()) {
+        paintLabel(painter);
+    }
 }
 
 void AlphaNumKey::paintLabel(QPainter *painter)
