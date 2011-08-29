@@ -60,7 +60,7 @@ class PlasmaboardWidget : public QGraphicsWidget
 {
     Q_OBJECT
 public:
-    enum StateAction { NoActions = 0, Press = 1, Unpress = 2, Reset = 4, Release = 8};
+    enum StateAction { NoActions = 0, Press = 1, Unpress = 2, Reset = 4, Release = 8, ExternalEvent = 16};
     Q_DECLARE_FLAGS(StateActions, StateAction)
 
     PlasmaboardWidget(Plasma::PopupApplet *parent);
@@ -93,12 +93,11 @@ public:
     void switchAlternative(bool alt);
 
 protected:
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
-    virtual void resizeEvent(QGraphicsSceneResizeEvent * event);
-    virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
-    //virtual bool event ( QEvent * event );
+    void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+    void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
+    void resizeEvent(QGraphicsSceneResizeEvent * event);
+    QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
 
 private:
     /**
@@ -143,7 +142,7 @@ private:
       * Presses given key. Calls key->press() sets the needed pixmap and show tooltip
       * @param key to act on
       */
-    void press(BoardKey* key);
+    void press(BoardKey* key, bool externalEvent = false);
 
     /**
       * Releases given key. In most cases this actually sends the token to the X-server

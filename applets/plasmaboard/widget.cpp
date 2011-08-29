@@ -51,7 +51,7 @@
 
 static const int REPEAT_TIMER = 1000;
 static const int STICKY_TIMER = 50;
-static const int TOOLTIP_SHOW_DELAY = 50;
+static const int TOOLTIP_SHOW_DELAY = 100;
 
 PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     : QGraphicsWidget(parent),
@@ -113,11 +113,15 @@ void PlasmaboardWidget::setKeysState(const QList<T> &keys, const StateActions &a
         }
 
         if (actions & Press) {
-            press(key);
+            press(key, actions & ExternalEvent);
         }
 
         if (actions & Reset) {
-            key->reset();
+            StickyKey *skey = dynamic_cast<StickyKey *>(key);
+            if (!skey || (skey->isToggled() && !skey->isPersistent())) {
+                key->reset();
+                unpress(key);
+            }
         }
 
         if (actions & Release) {
@@ -273,7 +277,7 @@ FuncKey* PlasmaboardWidget::createStickyKey(const QPoint &point, const QSize &si
 void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
     const bool state = data["Pressed"].toBool();
-    const StateActions actions = state ? Press : Unpress;
+    const StateActions actions = (state ? Press : Unpress) | ExternalEvent;
 
     if (sourceName == "Shift") {
         setKeysState<StickyKey *>(m_shiftKeys, actions);
@@ -468,25 +472,42 @@ void PlasmaboardWidget::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 
 void PlasmaboardWidget::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
-    QPoint click = event->pos().toPoint();
-    foreach (BoardKey * key, m_keys) {
+    const QPoint click = event->pos().toPoint();
+
+    foreach (BoardKey *key, m_keys) {
         if (key->contains(click)) {
             press(key);
             return;
         }
     }
+
     QGraphicsWidget::mousePressEvent(event);
 }
 
 void PlasmaboardWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
 {
-    QPoint click = event->pos().toPoint();
-    foreach (BoardKey * key, m_pressedList) {
+    const QPoint click = event->pos().toPoint();
+
+    foreach (BoardKey *key, m_pressedList) {
         if (key->contains(click)) {
-            release(key);
+            StickyKey *skey = dynamic_cast<StickyKey *>(key);
+            if (skey) {
+                if (skey->isPersistent()) {
+                    skey->setPersistent(false);
+                } else if (skey->isToggled()) {
+                    skey->setPersistent(true);
+                }
+
+                if (!skey->isPersistent()) {
+                    release(key);
+                }
+            } else {
+                release(key);
+            }
             return;
         }
     }
+
     QGraphicsWidget::mouseReleaseEvent(event);
 }
 
@@ -508,21 +529,23 @@ void PlasmaboardWidget::paint(QPainter *p,
     }
 }
 
-void PlasmaboardWidget::press(BoardKey *key)
+void PlasmaboardWidget::press(BoardKey *key, bool externalEvent)
 {
-    bool func = dynamic_cast<FuncKey *>(key);
-
-    if (!func) {
+    if (!externalEvent) {
         key->pressed();
     }
 
-    key->setPixmap(background(ActiveBackground, key->size()));
-    m_pressedList << key;
-    update(key->rect());
+    if (key->setPixmap(background(ActiveBackground, key->size()))) {
+        update(key->rect());
+    }
 
-    if (!func) {
-        setTooltip(key);
-        m_repeatTimer->start(REPEAT_TIMER);
+    if (!externalEvent) {
+        m_pressedList << key;
+
+        if (!dynamic_cast<FuncKey *>(key)) {
+            setTooltip(key);
+            m_repeatTimer->start(REPEAT_TIMER);
+        }
     }
 }
 
@@ -536,6 +559,8 @@ void PlasmaboardWidget::refreshKeys()
         key->updateDimensions(factor_x, factor_y);
         key->setPixmap(background(NormalBackground, key->size()));
     }
+
+    update();
 }
 
 void PlasmaboardWidget::relabelKeys()
@@ -567,7 +592,7 @@ void PlasmaboardWidget::release(BoardKey *key)
 
 void PlasmaboardWidget::repeatKeys()
 {
-    foreach (BoardKey * key, m_pressedList) {
+    foreach (BoardKey *key, m_pressedList) {
         key->pressRepeated();
     }
     m_isRepeating = true;
@@ -587,7 +612,7 @@ void PlasmaboardWidget::reset()
     setKeysState<StickyKey *>(m_ctlKeys, Reset);
     setKeysState<StickyKey *>(m_shiftKeys, Reset);
     setKeysState<StickyKey *>(m_superKeys, Reset);
-    setKeysState<SwitchKey *>(m_switchKeys, Unpress | Reset);
+    setKeysState<SwitchKey *>(m_switchKeys, Reset);
 }
 
 void PlasmaboardWidget::setTooltip(BoardKey* key)
@@ -643,8 +668,9 @@ QSizeF PlasmaboardWidget::sizeHint(Qt::SizeHint which, const QSizeF& constraint)
 void PlasmaboardWidget::stickyKey_Mapper(int id)
 {
     BoardKey* key = m_stickyKeys[id];
-    key->setPixmap(background(NormalBackground, key->size()));
-    update(key->rect());
+    if (key->setPixmap(background(NormalBackground, key->size()))) {
+        update(key->rect());
+    }
 
     delete(m_signalMapper->mapping(id));  // delete the QTimer
     m_stickyKeys.remove(id);
@@ -652,9 +678,10 @@ void PlasmaboardWidget::stickyKey_Mapper(int id)
 
 void PlasmaboardWidget::switchAlternative(bool alt)
 {
-    foreach (DualKey * key, m_dualKeys) {
+    foreach (DualKey *key, m_dualKeys) {
         key->setAlternative(alt);
     }
+
     relabelKeys();
 }
 
@@ -671,8 +698,9 @@ void PlasmaboardWidget::themeChanged()
 void PlasmaboardWidget::unpress(BoardKey *key)
 {
     clearTooltip();
-    key->setPixmap(background(NormalBackground, key->size()));
-    update(key->rect());
+    if (key->setPixmap(background(NormalBackground, key->size()))) {
+        update(key->rect());
+    }
     m_pressedList.removeAll(key);
     m_repeatTimer->stop();
 }
