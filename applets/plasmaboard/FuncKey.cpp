@@ -24,20 +24,14 @@
 #include <QPainter>
 #include <plasma/theme.h>
 
-FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label)
+FuncKey::FuncKey(const QPoint &relativePosition, const QSize &relativeSize, unsigned int keycode, const QString &label)
     : AlphaNumKey(relativePosition, relativeSize, keycode)
 {
     setLabel(label);
 }
 
-void FuncKey::paint(QPainter *painter)
-{
-    AlphaNumKey::paint(painter);
-}
-
 void FuncKey::paintArrow(QPainter *painter)
 {
-
     int unit = qMin(size().width(), size().height()) / 8;
     painter->drawLine(-1 * unit, 0 , 3 * unit, 0);
 
@@ -57,6 +51,5 @@ void FuncKey::paintLabel(QPainter *painter)
     painter->setFont(QFont(Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize));
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     painter->drawText(rect(), Qt::AlignCenter, label());
-
     painter->restore();
 }
