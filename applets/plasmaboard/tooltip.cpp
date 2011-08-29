@@ -89,7 +89,7 @@ void Tooltip::updateMask()
     const bool translucency = Plasma::Theme::defaultTheme()->windowTranslucencyEnabled();
     Plasma::WindowEffects::enableBlurBehind(winId(), translucency,
                                             translucency ? frame->mask() : QRegion());
-    if(translucency) {
+    if (translucency) {
         clearMask();
     } else {
         setMask(frame->mask());

@@ -73,7 +73,7 @@ PlasmaboardWidget::PlasmaboardWidget(Plasma::PopupApplet *parent)
     m_frameSvg->setImagePath("widgets/button");
 
     m_engine = m_applet->dataEngine("keystate");
-    if(m_engine) {
+    if (m_engine) {
         m_engine->connectAllSources(this);
     }
 
@@ -118,97 +118,97 @@ void PlasmaboardWidget::clearTooltip()
 
 FuncKey* PlasmaboardWidget::createFunctionKey(const QPoint &point, const QSize &size, const QString &action)
 {
-    if(action == "BACKSPACE")
+    if (action == "BACKSPACE")
         return new BackspaceKey(point, size);
-    else if(action == "ENTER")
+    else if (action == "ENTER")
         return new EnterKey(point, size);
-    else if(action == "SPACE")
+    else if (action == "SPACE")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString());
-    else if(action == "TAB")
+    else if (action == "TAB")
         return new TabKey(point, size);
-    else if(action == "ESCAPE")
+    else if (action == "ESCAPE")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Escape), QString(i18nc("The escape key on a keyboard", "Esc")));
-    else if(action == "F1")
+    else if (action == "F1")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F1), QString(i18n("F1")));
-    else if(action == "F2")
+    else if (action == "F2")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F2), QString(i18n("F2")));
-    else if(action == "F3")
+    else if (action == "F3")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F3), QString(i18n("F3")));
-    else if(action == "F4")
+    else if (action == "F4")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F4), QString(i18n("F4")));
-    else if(action == "F5")
+    else if (action == "F5")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F5), QString(i18n("F5")));
-    else if(action == "F6")
+    else if (action == "F6")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F6), QString(i18n("F6")));
-    else if(action == "F7")
+    else if (action == "F7")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F7), QString(i18n("F7")));
-    else if(action == "F8")
+    else if (action == "F8")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F8), QString(i18n("F8")));
-    else if(action == "F9")
+    else if (action == "F9")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F9), QString(i18n("F9")));
-    else if(action == "F10")
+    else if (action == "F10")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F10), QString(i18n("F10")));
-    else if(action == "F11")
+    else if (action == "F11")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F11), QString(i18n("F11")));
-    else if(action == "F12")
+    else if (action == "F12")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F12), QString(i18n("F12")));
-    else if(action == "PRINT")
+    else if (action == "PRINT")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Print), QString(i18nc("The print key on a keyboard", "Print")));
-    else if(action == "NUM")
+    else if (action == "NUM")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Num_Lock), QString(i18nc("The num key on a keyboard", "Num")));
-    else if(action == "PAUSE")
+    else if (action == "PAUSE")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Pause), QString(i18nc("The pause key on a keyboard", "Pause")));
-    else if(action == "HOME")
+    else if (action == "HOME")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Home), QString(i18nc("The home key on a keyboard", "Home")));
-    else if(action == "DEL")
+    else if (action == "DEL")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Delete), QString(i18nc("The delete key on a keyboard", "Del")));
-    else if(action == "END")
+    else if (action == "END")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_End), QString(i18nc("The end key on a keyboard", "End")));
-    else if(action == "PAGEUP")
+    else if (action == "PAGEUP")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Page_Up), QString(i18nc("The page up key on a keyboard", "PgUp")));
-    else if(action == "INSERT")
+    else if (action == "INSERT")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Insert), QString(i18nc("The insert key on a keyboard", "Ins")));
-    else if(action == "PAGEDOWN")
+    else if (action == "PAGEDOWN")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Page_Down), QString(i18nc("The page down key on a keyboard", "PgDn")));
-    else if(action == "ARROWUP")
+    else if (action == "ARROWUP")
         return new ArrowTopKey(point, size);
-    else if(action == "ARROWDOWN")
+    else if (action == "ARROWDOWN")
         return new ArrowBottomKey(point, size);
-    else if(action == "ARROWLEFT")
+    else if (action == "ARROWLEFT")
         return new ArrowLeftKey(point, size);
-    else if(action == "ARROWRIGHT")
+    else if (action == "ARROWRIGHT")
         return new ArrowRightKey(point, size);
-    else if(action == "KEYPADDIVIDE")
+    else if (action == "KEYPADDIVIDE")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Divide), QString(i18nc("Divider on the keypad", "/")));
-    else if(action == "KEYPADMULTIPLY")
+    else if (action == "KEYPADMULTIPLY")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Multiply), QString(i18nc("Multiplier on keypad", "*")));
-    else if(action == "KEYPADADD")
+    else if (action == "KEYPADADD")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Add), QString(i18nc("Plus sign Divider on the keypad", "+")));
-    else if(action == "KEYPADSUBTRACT")
+    else if (action == "KEYPADSUBTRACT")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Subtract), QString(i18nc("Minus sign on the keypad", "-")));
-    else if(action == "KEYPADENTER")
+    else if (action == "KEYPADENTER")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Enter), QString(i18nc("Enter key on the keypad", "Enter")));
-    else if(action == "KEYPADSEPARATOR")
+    else if (action == "KEYPADSEPARATOR")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Separator), QString(i18nc("Separator key on the keypad", ".")));
-    else if(action == "KEYPAD1")
+    else if (action == "KEYPAD1")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_1), QString(i18nc("1 key on the keypad", "1")));
-    else if(action == "KEYPAD2")
+    else if (action == "KEYPAD2")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_2), QString(i18nc("2 key on the keypad", "2")));
-    else if(action == "KEYPAD3")
+    else if (action == "KEYPAD3")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_3), QString(i18nc("3 key on the keypad", "3")));
-    else if(action == "KEYPAD4")
+    else if (action == "KEYPAD4")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_4), QString(i18nc("4 key on the keypad", "4")));
-    else if(action == "KEYPAD5")
+    else if (action == "KEYPAD5")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_5), QString(i18nc("5 key on the keypad", "5")));
-    else if(action == "KEYPAD6")
+    else if (action == "KEYPAD6")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_6), QString(i18nc("6 key on the keypad", "6")));
-    else if(action == "KEYPAD7")
+    else if (action == "KEYPAD7")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_7), QString(i18nc("7 key on the keypad", "7")));
-    else if(action == "KEYPAD8")
+    else if (action == "KEYPAD8")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_8), QString(i18nc("8 key on the keypad", "8")));
-    else if(action == "KEYPAD9")
+    else if (action == "KEYPAD9")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_9), QString(i18nc("9 key on the keypad", "9")));
-    else if(action == "KEYPAD0")
+    else if (action == "KEYPAD0")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_0), QString(i18nc("0 key on the keypad", "0")));
     else
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString(i18n("Unknown")));
@@ -216,35 +216,35 @@ FuncKey* PlasmaboardWidget::createFunctionKey(const QPoint &point, const QSize &
 
 FuncKey* PlasmaboardWidget::createStickyKey(const QPoint &point, const QSize &size, const QString &action)
 {
-    if(action == "ALT") {
+    if (action == "ALT") {
         StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Alt_L), QString(i18n("Alt")));
         m_altKeys << k;
         return k;
-    } else if(action == "ALTGR") {
+    } else if (action == "ALTGR") {
         StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_ISO_Level3_Shift), QString(i18nc("The Alt Gr key on a keyboard", "Alt Gr")));
         m_altgrKeys << k;
         return k;
-    } else if(action == "CAPSLOCK") {
+    } else if (action == "CAPSLOCK") {
         CapsKey *k = new CapsKey(point, size);
         m_capsKeys << k;
         return k;
-    } else if(action == "CONTROLLEFT") {
+    } else if (action == "CONTROLLEFT") {
         StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Control_L), QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
         m_ctlKeys << k;
         return k;
-    } else if(action == "CONTROLRIGHT") {
+    } else if (action == "CONTROLRIGHT") {
         StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Control_R), QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
         m_ctlKeys << k;
         return k;
-    } else if(action == "SHIFT") {
+    } else if (action == "SHIFT") {
         ShiftKey *k = new ShiftKey(point, size);
         m_shiftKeys << k;
         return k;
-    } else if(action == "SUPERLEFT") {
+    } else if (action == "SUPERLEFT") {
         StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Super_L), QString(i18nc("The super (windows) key on a keyboard", "Super")));
         m_superKeys << k;
         return k;
-    } else if(action == "SWITCH") {
+    } else if (action == "SWITCH") {
         SwitchKey* key = new SwitchKey(point, size, Helpers::keysymToKeycode(XK_VoidSymbol), this);
         m_switchKeys << key;
         return key;
@@ -256,47 +256,47 @@ void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::Dat
 {
     bool state = data["Pressed"].toBool();
 
-    if(sourceName == "Shift") {
-        Q_FOREACH(FuncKey * key, m_shiftKeys) {
+    if (sourceName == "Shift") {
+        foreach (FuncKey * key, m_shiftKeys) {
             change(key, state);
         }
         m_isLevel2 = state;
         relabelKeys();
     }
 
-    else if(sourceName == "Caps Lock") {
-        Q_FOREACH(FuncKey * key, m_capsKeys) {
+    else if (sourceName == "Caps Lock") {
+        foreach (FuncKey * key, m_capsKeys) {
             change(key, state);
         }
         m_isLocked = state;
         relabelKeys();
     }
 
-    else if(sourceName == "AltGr") {
-        Q_FOREACH(FuncKey * key, m_altgrKeys) {
+    else if (sourceName == "AltGr") {
+        foreach (FuncKey * key, m_altgrKeys) {
             change(key, state);
         }
         m_isAlternative = state;
         relabelKeys();
     }
 
-    else if(sourceName == "Alt") {
-        Q_FOREACH(FuncKey * key, m_altKeys) {
+    else if (sourceName == "Alt") {
+        foreach (FuncKey * key, m_altKeys) {
             change(key, state);
         }
     }
 
-    else if(sourceName == "Super") {
-        Q_FOREACH(FuncKey * key, m_superKeys) {
+    else if (sourceName == "Super") {
+        foreach (FuncKey * key, m_superKeys) {
             change(key, state);
         }
     }
 
-    else if(sourceName == "Ctrl") {
-        Q_FOREACH(FuncKey * key, m_ctlKeys) {
+    else if (sourceName == "Ctrl") {
+        foreach (FuncKey * key, m_ctlKeys) {
             change(key, state);
         }
-    } else if(sourceName == "Menu") {
+    } else if (sourceName == "Menu") {
 
     }
 }
@@ -324,11 +324,11 @@ QPixmap *PlasmaboardWidget::background(BackgroundState state, const QSize &size)
 {
     const bool normal = state == NormalBackground;
     QPixmap *pixmap = normal ? m_frames.value(size) : m_activeFrames.value(size);
-    if(!pixmap) {
+    if (!pixmap) {
         m_frameSvg->setElementPrefix(normal ? "normal" : "pressed");
         m_frameSvg->resizeFrame(size);
         pixmap = new QPixmap(m_frameSvg->framePixmap());
-        if(normal) {
+        if (normal) {
             m_frames[size] = pixmap;
         } else {
             m_activeFrames[size] = pixmap;
@@ -354,34 +354,33 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
     m_xmlReader.setDevice(fileP);
 
     // reading in header information
-    if(m_xmlReader.readNextStartElement()) {
-        if(m_xmlReader.name() == "keyboard") {
+    if (m_xmlReader.readNextStartElement()) {
+        if (m_xmlReader.name() == "keyboard") {
             spacing = QVariant(m_xmlReader.attributes().value("spacing").toString()).toInt();
-
         } else {
             m_xmlReader.raiseError(i18n("Missing keyboard tag"));
         }
     }
 
     // building up layout
-    while(!m_xmlReader.atEnd()) {
+    while (!m_xmlReader.atEnd()) {
         m_xmlReader.readNextStartElement();
 
-        if(m_xmlReader.name() == "row") {
+        if (m_xmlReader.name() == "row") {
             rowHeight = QVariant(m_xmlReader.attributes().value("height").toString()).toInt();
             rowWidth = QVariant(m_xmlReader.attributes().value("width").toString()).toInt();
 
-            while(m_xmlReader.readNextStartElement()) {
+            while (m_xmlReader.readNextStartElement()) {
 
                 currentPoint += QPoint(spacing, 0);
 
-                if(m_xmlReader.attributes().hasAttribute("width")) {
+                if (m_xmlReader.attributes().hasAttribute("width")) {
                     currentWidth = QVariant(m_xmlReader.attributes().value("width").toString()).toInt();
                 } else {
                     currentWidth = rowWidth;
                 }
 
-                if(m_xmlReader.attributes().hasAttribute("height")) {
+                if (m_xmlReader.attributes().hasAttribute("height")) {
                     currentHeight = QVariant(m_xmlReader.attributes().value("height").toString()).toInt();
                 } else {
                     currentHeight = rowHeight;
@@ -389,10 +388,10 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
 
                 currentSize = QSize(currentWidth, currentHeight);
 
-                if(m_xmlReader.name() == "key") {
-                    if(m_xmlReader.attributes().hasAttribute("alt")) {
+                if (m_xmlReader.name() == "key") {
+                    if (m_xmlReader.attributes().hasAttribute("alt")) {
                         DualKey* key;
-                        if(m_xmlReader.attributes().hasAttribute("altshifted")) {
+                        if (m_xmlReader.attributes().hasAttribute("altshifted")) {
                             key = new DualKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt(), m_xmlReader.attributes().value("alt").toString(), m_xmlReader.attributes().value("altshifted").toString());
                         } else {
                             key = new DualKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt(), m_xmlReader.attributes().value("alt").toString());
@@ -403,9 +402,9 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
                     } else {
                         m_alphaKeys << new AlphaNumKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt());
                     }
-                } else if(m_xmlReader.name() == "fkey") {
+                } else if (m_xmlReader.name() == "fkey") {
                     m_specialKeys << createFunctionKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString());
-                } else if(m_xmlReader.name() == "skey") {
+                } else if (m_xmlReader.name() == "skey") {
                     m_funcKeys << createStickyKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString());
                 }
 
@@ -420,13 +419,13 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
 
     m_keyboardSize = currentSize;
 
-    Q_FOREACH(BoardKey * key, m_alphaKeys) {
+    foreach (BoardKey * key, m_alphaKeys) {
         m_keys << key;
     }
-    Q_FOREACH(BoardKey * key, m_funcKeys) {
+    foreach (BoardKey * key, m_funcKeys) {
         m_keys << key;
     }
-    Q_FOREACH(BoardKey * key, m_specialKeys) {
+    foreach (BoardKey * key, m_specialKeys) {
         m_keys << key;
     }
 
@@ -435,32 +434,32 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
 
 void PlasmaboardWidget::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
-    if(m_pressedList.count() > 0) { // as long no key is pressed, we don't care about mouse moves
+    if (m_pressedList.count() > 0) { // as long no key is pressed, we don't care about mouse moves
         QPoint click = event->pos().toPoint();
 
-        if(!boundingRect().contains(click)) { // if mouse is moved outside the widget...
-            Q_FOREACH(BoardKey * clickedKey, m_pressedList) { // ... we unpress all pressed keys
+        if (!boundingRect().contains(click)) { // if mouse is moved outside the widget...
+            foreach (BoardKey * clickedKey, m_pressedList) { // ... we unpress all pressed keys
                 unpress(clickedKey);
             }
             return;
         }
 
-        Q_FOREACH(BoardKey * key, m_pressedList) {
-            if(key->contains(click)) {
+        foreach (BoardKey * key, m_pressedList) {
+            if (key->contains(click)) {
                 return; // if mouse move is inside an already clicked button, we do nothing
             }
         }
 
-        Q_FOREACH(BoardKey * key, m_keys) {
-            if(m_isRepeating) {
-                Q_FOREACH(BoardKey * clickedKey, m_pressedList) { // release all pressed keys
+        foreach (BoardKey * key, m_keys) {
+            if (m_isRepeating) {
+                foreach (BoardKey * clickedKey, m_pressedList) { // release all pressed keys
                     clickedKey->released();
                 }
                 m_isRepeating = false;
             }
 
-            if(key->contains(click)) {
-                Q_FOREACH(BoardKey * clickedKey, m_pressedList) { // release all pressed keys
+            if (key->contains(click)) {
+                foreach (BoardKey * clickedKey, m_pressedList) { // release all pressed keys
                     unpress(clickedKey);
                 }
                 press(key);
@@ -475,8 +474,8 @@ void PlasmaboardWidget::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 void PlasmaboardWidget::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
     QPoint click = event->pos().toPoint();
-    Q_FOREACH(BoardKey * key, m_keys) {
-        if(key->contains(click)) {
+    foreach (BoardKey * key, m_keys) {
+        if (key->contains(click)) {
             press(key);
             return;
         }
@@ -487,8 +486,8 @@ void PlasmaboardWidget::mousePressEvent(QGraphicsSceneMouseEvent * event)
 void PlasmaboardWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
 {
     QPoint click = event->pos().toPoint();
-    Q_FOREACH(BoardKey * key, m_pressedList) {
-        if(key->contains(click)) {
+    foreach (BoardKey * key, m_pressedList) {
+        if (key->contains(click)) {
             release(key);
             return;
         }
@@ -507,8 +506,8 @@ void PlasmaboardWidget::paint(QPainter *p,
     p->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 
     QRectF rect = option->exposedRect;
-    Q_FOREACH(BoardKey * key, m_keys) {
-        if(key->intersects(rect)) {
+    foreach (BoardKey * key, m_keys) {
+        if (key->intersects(rect)) {
             key->paint(p);
         }
     }
@@ -537,7 +536,7 @@ void PlasmaboardWidget::refreshKeys()
     double factor_y = size().height() / 10002;
     kDebug() << size() << "refreshing keys with factors of" << factor_x << factor_y;
 
-    Q_FOREACH(BoardKey * key, m_keys) {
+    foreach (BoardKey * key, m_keys) {
         key->updateDimensions(factor_x, factor_y);
         key->setPixmap(background(NormalBackground, key->size()));
     }
@@ -545,7 +544,7 @@ void PlasmaboardWidget::refreshKeys()
 
 void PlasmaboardWidget::relabelKeys()
 {
-    foreach(AlphaNumKey * key, m_alphaKeys) {
+    foreach (AlphaNumKey * key, m_alphaKeys) {
         key->switchKey(m_isLevel2, m_isAlternative, m_isLocked);
         update(key->rect());
     }
@@ -556,7 +555,7 @@ void PlasmaboardWidget::release(BoardKey *key)
     key->released(); // trigger X-unpress event done by key
     m_pressedList.removeAll(key);
     clearTooltip(); // remove displayed tooltip
-    if(m_alphaKeys.contains((AlphaNumKey*) key) || m_specialKeys.contains((FuncKey*) key)) {
+    if (m_alphaKeys.contains((AlphaNumKey*) key) || m_specialKeys.contains((FuncKey*) key)) {
         reset();
     }
     m_repeatTimer->stop();
@@ -572,7 +571,7 @@ void PlasmaboardWidget::release(BoardKey *key)
 
 void PlasmaboardWidget::repeatKeys()
 {
-    Q_FOREACH(BoardKey * key, m_pressedList) {
+    foreach (BoardKey * key, m_pressedList) {
         key->pressRepeated();
     }
     m_isRepeating = true;
@@ -587,31 +586,31 @@ void PlasmaboardWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 void PlasmaboardWidget::reset()
 {
 
-    Q_FOREACH(BoardKey * key, m_pressedList) {
+    foreach (BoardKey * key, m_pressedList) {
         unpress(key);
     }
 
-    Q_FOREACH(StickyKey * key, m_altKeys) {
+    foreach (StickyKey * key, m_altKeys) {
         key->reset();
     }
 
-    Q_FOREACH(StickyKey * key, m_altgrKeys) {
+    foreach (StickyKey * key, m_altgrKeys) {
         key->reset();
     }
 
-    Q_FOREACH(StickyKey * key, m_ctlKeys) {
+    foreach (StickyKey * key, m_ctlKeys) {
         key->reset();
     }
 
-    Q_FOREACH(StickyKey * key, m_shiftKeys) {
+    foreach (StickyKey * key, m_shiftKeys) {
         key->reset();
     }
 
-    Q_FOREACH(StickyKey * key, m_superKeys) {
+    foreach (StickyKey * key, m_superKeys) {
         key->reset();
     }
 
-    Q_FOREACH(SwitchKey * key, m_switchKeys) {
+    foreach (SwitchKey * key, m_switchKeys) {
         key->reset();
         unpress(key);
     }
@@ -620,15 +619,15 @@ void PlasmaboardWidget::reset()
 void PlasmaboardWidget::setTooltip(BoardKey* key)
 {
     QString label = key->label();
-    if(label.size() > 0) {
+    if (label.size() > 0) {
         m_tooltip->setText(key->label());
         m_tooltip->resize(key->size() * 2);
 
         Plasma::Containment *c = m_applet->containment();
-        if(c) {
+        if (c) {
             Plasma::Corona *corona = c->corona();
-            if(corona) {
-                if(m_applet->location() == Plasma::TopEdge) {
+            if (corona) {
+                if (m_applet->location() == Plasma::TopEdge) {
                     m_tooltip->move(corona->popupPosition(this, key->size() * 2, Qt::AlignLeft) + QPoint(key->position().x() - key->size().width() / 2, 0) - QPoint(0, size().height() - key->position().y() - key->size().height()));
                 } else {
                     m_tooltip->move(corona->popupPosition(this, key->size() * 2, Qt::AlignLeft) + key->position() - QPoint(key->size().width() / 2, 0));
@@ -636,7 +635,7 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
             }
         }
 
-        if(!m_tooltip->isVisible()) {
+        if (!m_tooltip->isVisible()) {
             m_delayedToolTipShow->start();
         }
     }
@@ -650,15 +649,15 @@ void PlasmaboardWidget::showToolTip()
 
 QSizeF PlasmaboardWidget::sizeHint(Qt::SizeHint which, const QSizeF& constraint) const
 {
-    if(which == Qt::MinimumSize) {
+    if (which == Qt::MinimumSize) {
         return QSizeF(300, 100);
-    } else if(which == Qt::PreferredSize) {
-        if(!m_keyboardSize.isEmpty()) {
+    } else if (which == Qt::PreferredSize) {
+        if (!m_keyboardSize.isEmpty()) {
             return m_keyboardSize;
         } else {
             return QSizeF(800, 230);
         }
-    } else if(which == Qt::MaximumSize) {
+    } else if (which == Qt::MaximumSize) {
         return constraint;
     } else {
         return QGraphicsWidget::sizeHint(which, constraint);
@@ -679,7 +678,7 @@ void PlasmaboardWidget::stickyKey_Mapper(int id)
 
 void PlasmaboardWidget::switchAlternative(bool alt)
 {
-    Q_FOREACH(DualKey * key, m_dualKeys) {
+    foreach (DualKey * key, m_dualKeys) {
         key->setAlternative(alt);
     }
     relabelKeys();
