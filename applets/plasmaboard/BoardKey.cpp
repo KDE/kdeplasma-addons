@@ -43,14 +43,14 @@ bool BoardKey::intersects(const QRectF &rect) const
     return m_rect.intersects(rect);
 }
 
-unsigned int BoardKey::getKeycode() const
+unsigned int BoardKey::keycode() const
 {
     return m_keycode;
 }
 
-unsigned int BoardKey::getKeysymbol(int level) const
+unsigned int BoardKey::keysymbol(int level) const
 {
-    return Helpers::keycodeToKeysym(getKeycode(), level);
+    return Helpers::keycodeToKeysym(keycode(), level);
 }
 
 QString BoardKey::label() const
@@ -75,7 +75,7 @@ void BoardKey::pressed()
 
 void BoardKey::pressRepeated()
 {
-    Helpers::fakeKeyPress(getKeycode());
+    Helpers::fakeKeyPress(keycode());
 }
 
 void BoardKey::released()
@@ -105,12 +105,12 @@ void BoardKey::sendKey()
 
 void BoardKey::sendKeyPress()
 {
-     Helpers::fakeKeyPress(getKeycode());
+     Helpers::fakeKeyPress(keycode());
 }
 
 void BoardKey::sendKeyRelease()
 {
-     Helpers::fakeKeyRelease(getKeycode());
+     Helpers::fakeKeyRelease(keycode());
 }
 
 void BoardKey::setKeycode(unsigned int keycode)
