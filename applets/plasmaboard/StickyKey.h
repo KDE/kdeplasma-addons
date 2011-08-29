@@ -31,11 +31,16 @@ public:
     virtual void pressed();
     virtual void released();
     virtual void reset();
-    virtual void setPixmap(QPixmap *pixmap);
+    virtual bool setPixmap(QPixmap *pixmap);
+
+    bool isToggled() const;
+
+    void setPersistent(bool persistent);
+    bool isPersistent() const;
 
 private:
-    bool m_acceptPixmap;
     bool m_toggled;
+    bool m_persistent;
 };
 
 #endif // STICKYKEY_H
