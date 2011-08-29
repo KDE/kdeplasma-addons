@@ -61,7 +61,7 @@ public:
       */
     virtual void reset();
     void setKeycode(unsigned int keycode);
-    virtual void setPixmap(QPixmap *pixmap);
+    virtual bool setPixmap(QPixmap *pixmap);
     QSize size() const;
     void updateDimensions(double factor_x, double factor_y);
 
