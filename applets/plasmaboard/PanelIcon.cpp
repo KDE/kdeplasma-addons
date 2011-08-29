@@ -190,5 +190,8 @@ void PanelIcon::saveLayout(const QString &path)
     emit configNeedsSaving();
 }
 
+#include "PanelIcon.moc"
+
 // This is the command that links your applet to the .desktop file
 K_EXPORT_PLASMA_APPLET(plasmaboard, PanelIcon)
+
