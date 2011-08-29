@@ -60,6 +60,8 @@ class PlasmaboardWidget : public QGraphicsWidget
 {
     Q_OBJECT
 public:
+    enum StateAction { NoActions = 0, Press = 1, Unpress = 2, Reset = 4, Release = 8};
+    Q_DECLARE_FLAGS(StateActions, StateAction)
 
     PlasmaboardWidget(Plasma::PopupApplet *parent);
     ~PlasmaboardWidget();
@@ -105,7 +107,7 @@ private:
       * @param state to change to. True: press, False: unpress
       */
     template<typename T>
-    void toggleKeys(const QList<T> &keys, bool state);
+    void setKeysState(const QList<T> &keys, const StateActions &actions);
 
     /**
       * Hides Tooltip
@@ -219,8 +221,9 @@ private:
     QList<StickyKey*> m_superKeys; // list of all super-keys on keyboard
     QList<SwitchKey*> m_switchKeys; // list of all switch keys on keyboard
     Tooltip* m_tooltip; // pointer to widget which is used as tooltip
-    QXmlStreamReader m_xmlReader; // instance of QXMLStreamReader for parsing layout files
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(PlasmaboardWidget::StateActions)
 
 inline uint qHash(const QSize &key)
 {

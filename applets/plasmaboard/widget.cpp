@@ -105,10 +105,24 @@ PlasmaboardWidget::~PlasmaboardWidget()
 }
 
 template<typename T>
-void PlasmaboardWidget::toggleKeys(const QList<T> &keys, bool state)
+void PlasmaboardWidget::setKeysState(const QList<T> &keys, const StateActions &actions)
 {
     foreach (const T &key, keys) {
-        state ? press(key) : unpress(key);
+        if (actions & Unpress) {
+            unpress(key);
+        }
+
+        if (actions & Press) {
+            press(key);
+        }
+
+        if (actions & Reset) {
+            key->reset();
+        }
+
+        if (actions & Release) {
+            key->released();
+        }
     }
 }
 
@@ -258,26 +272,27 @@ FuncKey* PlasmaboardWidget::createStickyKey(const QPoint &point, const QSize &si
 
 void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    bool state = data["Pressed"].toBool();
+    const bool state = data["Pressed"].toBool();
+    const StateActions actions = state ? Press : Unpress;
 
     if (sourceName == "Shift") {
-        toggleKeys<StickyKey *>(m_shiftKeys, state);
+        setKeysState<StickyKey *>(m_shiftKeys, actions);
         m_isLevel2 = state;
         relabelKeys();
     } else if (sourceName == "Caps Lock") {
-        toggleKeys<FuncKey *>(m_capsKeys, state);
+        setKeysState<FuncKey *>(m_capsKeys, actions);
         m_isLocked = state;
         relabelKeys();
     } else if (sourceName == "AltGr") {
-        toggleKeys<StickyKey *>(m_altgrKeys, state);
+        setKeysState<StickyKey *>(m_altgrKeys, actions);
         m_isAlternative = state;
         relabelKeys();
     } else if (sourceName == "Alt") {
-        toggleKeys<StickyKey *>(m_altgrKeys, state);
+        setKeysState<StickyKey *>(m_altgrKeys, actions);
     } else if (sourceName == "Super") {
-        toggleKeys<StickyKey *>(m_superKeys, state);
+        setKeysState<StickyKey *>(m_superKeys, actions);
     } else if (sourceName == "Ctrl") {
-        toggleKeys<StickyKey *>(m_ctlKeys, state);
+        setKeysState<StickyKey *>(m_ctlKeys, actions);
     } else if (sourceName == "Menu") {
 
     }
@@ -330,67 +345,68 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
     int currentWidth = 100;
     int currentHeight;
 
-    QFile* fileP = new QFile(file);
-    fileP->open(QIODevice::ReadOnly | QIODevice::Text);
+    QFile fileP(file);
+    fileP.open(QIODevice::ReadOnly | QIODevice::Text);
 
-    m_xmlReader.setDevice(fileP);
+    QXmlStreamReader xmlReader;
+    xmlReader.setDevice(&fileP);
 
     // reading in header information
-    if (m_xmlReader.readNextStartElement()) {
-        if (m_xmlReader.name() == "keyboard") {
-            spacing = QVariant(m_xmlReader.attributes().value("spacing").toString()).toInt();
+    if (xmlReader.readNextStartElement()) {
+        if (xmlReader.name() == "keyboard") {
+            spacing = QVariant(xmlReader.attributes().value("spacing").toString()).toInt();
         } else {
-            m_xmlReader.raiseError(i18n("Missing keyboard tag"));
+            xmlReader.raiseError(i18n("Missing keyboard tag"));
         }
     }
 
     // building up layout
-    while (!m_xmlReader.atEnd()) {
-        m_xmlReader.readNextStartElement();
+    while (!xmlReader.atEnd()) {
+        xmlReader.readNextStartElement();
 
-        if (m_xmlReader.name() == "row") {
-            rowHeight = QVariant(m_xmlReader.attributes().value("height").toString()).toInt();
-            rowWidth = QVariant(m_xmlReader.attributes().value("width").toString()).toInt();
+        if (xmlReader.name() == "row") {
+            rowHeight = QVariant(xmlReader.attributes().value("height").toString()).toInt();
+            rowWidth = QVariant(xmlReader.attributes().value("width").toString()).toInt();
 
-            while (m_xmlReader.readNextStartElement()) {
+            while (xmlReader.readNextStartElement()) {
 
                 currentPoint += QPoint(spacing, 0);
 
-                if (m_xmlReader.attributes().hasAttribute("width")) {
-                    currentWidth = QVariant(m_xmlReader.attributes().value("width").toString()).toInt();
+                if (xmlReader.attributes().hasAttribute("width")) {
+                    currentWidth = QVariant(xmlReader.attributes().value("width").toString()).toInt();
                 } else {
                     currentWidth = rowWidth;
                 }
 
-                if (m_xmlReader.attributes().hasAttribute("height")) {
-                    currentHeight = QVariant(m_xmlReader.attributes().value("height").toString()).toInt();
+                if (xmlReader.attributes().hasAttribute("height")) {
+                    currentHeight = QVariant(xmlReader.attributes().value("height").toString()).toInt();
                 } else {
                     currentHeight = rowHeight;
                 }
 
                 currentSize = QSize(currentWidth, currentHeight);
 
-                if (m_xmlReader.name() == "key") {
-                    if (m_xmlReader.attributes().hasAttribute("alt")) {
+                if (xmlReader.name() == "key") {
+                    if (xmlReader.attributes().hasAttribute("alt")) {
                         DualKey* key;
-                        if (m_xmlReader.attributes().hasAttribute("altshifted")) {
-                            key = new DualKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt(), m_xmlReader.attributes().value("alt").toString(), m_xmlReader.attributes().value("altshifted").toString());
+                        if (xmlReader.attributes().hasAttribute("altshifted")) {
+                            key = new DualKey(currentPoint, currentSize, QVariant(xmlReader.attributes().value("code").toString()).toInt(), xmlReader.attributes().value("alt").toString(), xmlReader.attributes().value("altshifted").toString());
                         } else {
-                            key = new DualKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt(), m_xmlReader.attributes().value("alt").toString());
+                            key = new DualKey(currentPoint, currentSize, QVariant(xmlReader.attributes().value("code").toString()).toInt(), xmlReader.attributes().value("alt").toString());
                         }
 
                         m_alphaKeys << key;
                         m_dualKeys << key;
                     } else {
-                        m_alphaKeys << new AlphaNumKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt());
+                        m_alphaKeys << new AlphaNumKey(currentPoint, currentSize, QVariant(xmlReader.attributes().value("code").toString()).toInt());
                     }
-                } else if (m_xmlReader.name() == "fkey") {
-                    m_specialKeys << createFunctionKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString());
-                } else if (m_xmlReader.name() == "skey") {
-                    m_funcKeys << createStickyKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString());
+                } else if (xmlReader.name() == "fkey") {
+                    m_specialKeys << createFunctionKey(currentPoint, currentSize, xmlReader.attributes().value("action").toString());
+                } else if (xmlReader.name() == "skey") {
+                    m_funcKeys << createStickyKey(currentPoint, currentSize, xmlReader.attributes().value("action").toString());
                 }
 
-                m_xmlReader.skipCurrentElement();
+                xmlReader.skipCurrentElement();
                 currentPoint += QPoint(currentWidth, 0);
 
             }
@@ -404,14 +420,14 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
     foreach (BoardKey * key, m_alphaKeys) {
         m_keys << key;
     }
+
     foreach (BoardKey * key, m_funcKeys) {
         m_keys << key;
     }
+
     foreach (BoardKey * key, m_specialKeys) {
         m_keys << key;
     }
-
-    delete fileP;
 }
 
 void PlasmaboardWidget::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
@@ -420,9 +436,8 @@ void PlasmaboardWidget::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
         QPoint click = event->pos().toPoint();
 
         if (!boundingRect().contains(click)) { // if mouse is moved outside the widget...
-            foreach (BoardKey * clickedKey, m_pressedList) { // ... we unpress all pressed keys
-                unpress(clickedKey);
-            }
+            // ... we unpress all pressed keys
+            setKeysState<BoardKey *>(m_pressedList, Unpress);
             return;
         }
 
@@ -432,18 +447,16 @@ void PlasmaboardWidget::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
             }
         }
 
-        foreach (BoardKey * key, m_keys) {
-            if (m_isRepeating) {
-                foreach (BoardKey * clickedKey, m_pressedList) { // release all pressed keys
-                    clickedKey->released();
-                }
-                m_isRepeating = false;
-            }
+        if (m_isRepeating) {
+            // release all pressed keys
+            setKeysState<BoardKey *>(m_pressedList, Release);
+            m_isRepeating = false;
+        }
 
+        foreach (BoardKey * key, m_keys) {
             if (key->contains(click)) {
-                foreach (BoardKey * clickedKey, m_pressedList) { // release all pressed keys
-                    unpress(clickedKey);
-                }
+                // ... we unpress all pressed keys
+                setKeysState<BoardKey *>(m_pressedList, Unpress);
                 press(key);
                 return;
             }
@@ -568,35 +581,13 @@ void PlasmaboardWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 
 void PlasmaboardWidget::reset()
 {
-
-    foreach (BoardKey * key, m_pressedList) {
-        unpress(key);
-    }
-
-    foreach (StickyKey * key, m_altKeys) {
-        key->reset();
-    }
-
-    foreach (StickyKey * key, m_altgrKeys) {
-        key->reset();
-    }
-
-    foreach (StickyKey * key, m_ctlKeys) {
-        key->reset();
-    }
-
-    foreach (StickyKey * key, m_shiftKeys) {
-        key->reset();
-    }
-
-    foreach (StickyKey * key, m_superKeys) {
-        key->reset();
-    }
-
-    foreach (SwitchKey * key, m_switchKeys) {
-        key->reset();
-        unpress(key);
-    }
+    setKeysState<BoardKey *>(m_pressedList, Unpress);
+    setKeysState<StickyKey *>(m_altKeys, Reset);
+    setKeysState<StickyKey *>(m_altgrKeys, Reset);
+    setKeysState<StickyKey *>(m_ctlKeys, Reset);
+    setKeysState<StickyKey *>(m_shiftKeys, Reset);
+    setKeysState<StickyKey *>(m_superKeys, Reset);
+    setKeysState<SwitchKey *>(m_switchKeys, Unpress | Reset);
 }
 
 void PlasmaboardWidget::setTooltip(BoardKey* key)
