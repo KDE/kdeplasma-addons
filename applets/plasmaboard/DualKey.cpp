@@ -45,7 +45,7 @@ bool DualKey::alternative() const
 
 void DualKey::setAlternative(bool alt)
 {
-    if(alt) {
+    if (alt) {
         m_defaultMapping = Helpers::getKeycodeMapping(keycode());
         Helpers::changeKeycodeMapping(keycode(), m_altKeyString, m_shiftedAltKeyString);
     } else {

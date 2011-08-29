@@ -69,10 +69,10 @@ void AlphaNumKey::setLabel(const QString &label)
 
 void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked)
 {
-    if(isLocked) {
+    if (isLocked) {
         isLevel2 = !isLevel2;
     }
-    if(isLevel2) {
+    if (isLevel2) {
         isAlternative ? setLabel(4) : setLabel(1);
     } else {
         setLabel(0);

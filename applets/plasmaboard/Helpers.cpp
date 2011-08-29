@@ -43,8 +43,10 @@ void changeKeycodeMapping(unsigned int code, QString &sym)
 {
     KeySym keysym = XStringToKeysym(sym.toAscii());
     QVarLengthArray<KeySym> keysyms(keysymsPerKeycode);
-    for(int i = 0; i < keysymsPerKeycode; ++i)
+    for (int i = 0; i < keysymsPerKeycode; ++i) {
         keysyms[i] = keysym;
+    }
+
     XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode,
                            keysyms.data(), 1);
     XSync(QX11Info::display(), False);
@@ -55,8 +57,10 @@ void changeKeycodeMapping(unsigned int code, QString &sym,
 {
     KeySym keysym = XStringToKeysym(sym.toAscii());
     QVarLengthArray<KeySym> keysyms(keysymsPerKeycode);
-    for(int i = 0; i < keysymsPerKeycode; ++i)
+    for (int i = 0; i < keysymsPerKeycode; ++i) {
         keysyms[i] = keysym;
+    }
+
     keysyms[1] = XStringToKeysym(shiftedSym.toAscii());
     XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode,
                            keysyms.data(), 1);
@@ -128,14 +132,14 @@ void fakeKeyRelease(const unsigned int &code)
  */
 QChar mapToUnicode(const unsigned int &keysym)
 {
-    if(keysym < 0x100)
+    if (keysym < 0x100)
         return QChar(keysym);
-    else if(keysym > 0x01000100)
+    else if (keysym > 0x01000100)
         return QChar(keysym - 0x01000000);
     else {
-        if(symbolMap.isEmpty())
+        if (symbolMap.isEmpty())
             initialiseMap(symbolMap);
-        if(symbolMap.contains(keysym))
+        if (symbolMap.contains(keysym))
             return symbolMap[keysym];
     }
     return QChar(0x2204); // Symbol for "There does not exist"
