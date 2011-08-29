@@ -329,28 +329,19 @@ void PlasmaboardWidget::deleteKeys()
     m_superKeys.clear();
 }
 
-QPixmap *PlasmaboardWidget::getActiveFrame(const QSize &size)
+QPixmap *PlasmaboardWidget::background(BackgroundState state, const QSize &size)
 {
-    QPixmap *pixmap = m_activeFrames.value(size);
-    if(!pixmap) {
-        m_frameSvg->setElementPrefix("pressed");
+    const bool normal = state == NormalBackground;
+    QPixmap *pixmap = normal ? m_frames.value(size) : m_activeFrames.value(size);
+    if (!pixmap) {
+        m_frameSvg->setElementPrefix(normal ? "normal" : "pressed");
         m_frameSvg->resizeFrame(size);
         pixmap = new QPixmap(m_frameSvg->framePixmap());
-        m_activeFrames[size] = pixmap;
-    }
-
-    return pixmap;
-}
-
-QPixmap *PlasmaboardWidget::getFrame(const QSize &size)
-{
-    QPixmap *pixmap = m_frames.value(size);
-
-    if(!pixmap) {
-        m_frameSvg->setElementPrefix("normal");
-        m_frameSvg->resizeFrame(size);
-        pixmap = new QPixmap(m_frameSvg->framePixmap());
-        m_frames[size] = pixmap;
+        if (normal) {
+            m_frames[size] = pixmap;
+        } else {
+            m_activeFrames[size] = pixmap;
+        }
     }
 
     return pixmap;
@@ -542,8 +533,8 @@ void PlasmaboardWidget::paint(QPainter *p,
 void PlasmaboardWidget::press(BoardKey *key)
 {
     key->pressed();
-    key->setPixmap(getActiveFrame(key->size()));
-    m_pressedList << key;    
+    key->setPixmap(background(ActiveBackground, key->size()));
+    m_pressedList << key;
     update(key->rect());
     setTooltip(key);
     m_repeatTimer->start(REPEAT_TIMER);
@@ -551,7 +542,7 @@ void PlasmaboardWidget::press(BoardKey *key)
 
 void PlasmaboardWidget::press(FuncKey *key)
 {
-    key->setPixmap(getActiveFrame(key->size()));
+    key->setPixmap(background(ActiveBackground, key->size()));
     m_pressedList << key;
     update(key->rect());
 }
@@ -564,7 +555,7 @@ void PlasmaboardWidget::refreshKeys()
 
     Q_FOREACH(BoardKey* key, m_keys){
         key->updateDimensions(factor_x, factor_y);
-        key->setPixmap(getFrame(key->size()));
+        key->setPixmap(background(NormalBackground, key->size()));
     }
 }
 
@@ -698,7 +689,7 @@ QSizeF PlasmaboardWidget::sizeHint(Qt::SizeHint which, const QSizeF& constraint)
 void PlasmaboardWidget::stickyKey_Mapper(int id)
 {
     BoardKey* key = m_stickyKeys[id];
-    key->setPixmap(getFrame(key->size()));
+    key->setPixmap(background(NormalBackground, key->size()));
     update(key->rect());
 
     delete (m_signalMapper->mapping(id)); // delete the QTimer
@@ -726,9 +717,12 @@ void PlasmaboardWidget::themeChanged()
 void PlasmaboardWidget::unpress(BoardKey *key)
 {
     clearTooltip();
-    key->setPixmap(getFrame(key->size()));
+    key->setPixmap(background(NormalBackground, key->size()));
     update(key->rect());
     m_pressedList.removeAll(key);
     m_repeatTimer->stop();
 }
+
+#include "widget.moc"
+
 

@@ -126,17 +126,14 @@ private:
       */
     FuncKey *createStickyKey(const QPoint &point, const QSize &size, const QString &action);
 
-    /**
-      * @param Size of the pixmap requested
-      * @return QPixmap in pressed state with correct size
-      */
-    QPixmap *getActiveFrame(const QSize &size);
+    enum BackgroundState { ActiveBackground, NormalBackground };
 
     /**
-      * @param Size of the pixmap requested
-      * @return QPixmap in unpressed state with correct size
+      * @param state The state of the background to find and return
+      * @param size Size of the pixmap requested
+      * @return QPixmap in pressed state with correct size
       */
-    QPixmap *getFrame(const QSize &size);
+    QPixmap *background(BackgroundState state, const QSize &size);
 
     /**
       * Presses given key. Calls key->press() sets the needed pixmap and show tooltip
