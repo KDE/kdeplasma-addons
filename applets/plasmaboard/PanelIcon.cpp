@@ -35,7 +35,8 @@
 
 PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
-      m_plasmaboard(0)
+      m_plasmaboard(0),
+      m_tempLayout(false)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("preferences-desktop-keyboard");
@@ -163,11 +164,13 @@ void PanelIcon::initKeyboard()
         return;
     }
 
-    QString path = ((QAction*)sender())->data().toString();
-    m_plasmaboard->deleteKeys();
-    m_plasmaboard->initKeyboard(path);
-    m_plasmaboard->refreshKeys();
-    m_plasmaboard->update();
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (!action) {
+        return;
+    }
+
+    QString path = action->data().toString();
+    setLayout(path);
     saveLayout(path);
 }
 
@@ -177,17 +180,47 @@ void PanelIcon::initKeyboard(const QString &layoutFile)
         return;
     }
 
+    setLayout(layoutFile);
+    saveLayout(layoutFile);
+}
+
+void PanelIcon::resetLayout()
+{
+    if (m_tempLayout) {
+        setLayout(m_layout);
+    }
+}
+
+void PanelIcon::showLayout(const QString &layout)
+{
+    kDebug() << layout;
+    if (layout.isEmpty()) {
+        resetLayout();
+        return;
+    }
+
+    const QString file = KStandardDirs::locate("data", "plasmaboard/" + layout);
+    if (!file.isEmpty()) {
+        setLayout(file);
+    } else if (QFile::exists(layout)) {
+        initKeyboard(layout);
+    }
+}
+
+void PanelIcon::setLayout(const QString &layoutFile)
+{
+    m_tempLayout = layoutFile != m_layout;
     m_plasmaboard->deleteKeys();
     m_plasmaboard->initKeyboard(layoutFile);
     m_plasmaboard->refreshKeys();
     m_plasmaboard->update();
-    saveLayout(layoutFile);
 }
 
 void PanelIcon::popupEvent(bool show)
 {
     if (!show) {
         m_plasmaboard->reset();
+        resetLayout();
     }
 }
 
