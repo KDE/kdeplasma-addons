@@ -28,7 +28,8 @@
 
 class Layout;
 
-class PanelIcon: public Plasma::PopupApplet {
+class PanelIcon: public Plasma::PopupApplet
+{
     Q_OBJECT
 
 public:
