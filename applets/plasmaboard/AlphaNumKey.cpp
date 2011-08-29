@@ -24,7 +24,7 @@
 #include <plasma/theme.h>
 
 AlphaNumKey::AlphaNumKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode):
-        BoardKey(relativePosition, relativeSize, keycode)
+    BoardKey(relativePosition, relativeSize, keycode)
 {
 
     setLabel(0);
@@ -51,7 +51,7 @@ void AlphaNumKey::paintLabel(QPainter *painter)
 {
     painter->save();
     int fontSize = qMin(size().width(), size().height()) / 2;
-    painter->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize ));
+    painter->setFont(QFont(Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize));
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     painter->drawText(rect(), Qt::AlignCenter, m_label);
     painter->restore();
@@ -69,13 +69,12 @@ void AlphaNumKey::setLabel(const QString &label)
 
 void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked)
 {
-    if(isLocked){
+    if(isLocked) {
         isLevel2 = !isLevel2;
     }
-    if(isLevel2){
+    if(isLevel2) {
         isAlternative ? setLabel(4) : setLabel(1);
-    }
-    else{
+    } else {
         setLabel(0);
     }
 }

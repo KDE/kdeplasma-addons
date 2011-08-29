@@ -22,7 +22,8 @@
 
 #include "FuncKey.h"
 
-class EnterKey: public FuncKey {
+class EnterKey: public FuncKey
+{
 public:
     EnterKey(QPoint relativePosition, QSize relativeSize);
 

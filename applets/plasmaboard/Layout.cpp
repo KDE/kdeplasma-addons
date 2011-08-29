@@ -31,8 +31,8 @@ Layout::Layout(QString path)
     QXmlStreamReader* xmlReader = new QXmlStreamReader(file);
 
     // reading in header information
-    if (xmlReader->readNextStartElement()) {
-        if (xmlReader->name() == "keyboard"){
+    if(xmlReader->readNextStartElement()) {
+        if(xmlReader->name() == "keyboard") {
             m_name = i18n(xmlReader->attributes().value("title").toString().toAscii());
             m_description = i18n(xmlReader->attributes().value("description").toString().toAscii());
         }

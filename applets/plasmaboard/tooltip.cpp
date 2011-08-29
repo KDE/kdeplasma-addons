@@ -31,7 +31,7 @@ Tooltip::Tooltip(const QString &text)
 {
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_TransparentForMouseEvents);
-    setWindowFlags( Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint );
+    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
 
     setColors();
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(setColors()));
@@ -51,7 +51,8 @@ Tooltip::Tooltip(const QString &text)
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(updateMask()));
 }
 
-Tooltip::~Tooltip() {
+Tooltip::~Tooltip()
+{
 
 }
 
@@ -68,11 +69,11 @@ void Tooltip::setText(QString text)
     label->setText(text);
 }
 
-void Tooltip::resizeEvent(QResizeEvent *event) 
+void Tooltip::resizeEvent(QResizeEvent *event)
 {
     QSize size = event->size();
     QWidget::resize(size);
-    setFont(QFont ( "Helvetica", qMin(size.height(),size.width()) / 3) );
+    setFont(QFont("Helvetica", qMin(size.height(), size.width()) / 3));
     frame->resizeFrame(size);
     updateMask();
 }
@@ -87,15 +88,15 @@ void Tooltip::updateMask()
 {
     const bool translucency = Plasma::Theme::defaultTheme()->windowTranslucencyEnabled();
     Plasma::WindowEffects::enableBlurBehind(winId(), translucency,
-                                    translucency ? frame->mask() : QRegion());
-    if (translucency) {
+                                            translucency ? frame->mask() : QRegion());
+    if(translucency) {
         clearMask();
     } else {
         setMask(frame->mask());
     }
 }
 
-void Tooltip::paintEvent ( QPaintEvent * event )
+void Tooltip::paintEvent(QPaintEvent * event)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::SmoothPixmapTransform);

@@ -23,7 +23,8 @@
 
 #include "FuncKey.h"
 
-class TabKey: public FuncKey {
+class TabKey: public FuncKey
+{
 public:
     TabKey(QPoint relativePosition, QSize relativeSize);
 

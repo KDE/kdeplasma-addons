@@ -22,13 +22,13 @@
 #include "Helpers.h"
 
 DualKey::DualKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString altKeyString):
-        AlphaNumKey(relativePosition, relativeSize, keycode), m_altKeyString(altKeyString), m_shiftedAltKeyString(altKeyString), m_defaultMapping(0), m_isAlt(false)
+    AlphaNumKey(relativePosition, relativeSize, keycode), m_altKeyString(altKeyString), m_shiftedAltKeyString(altKeyString), m_defaultMapping(0), m_isAlt(false)
 {
 
 }
 
 DualKey::DualKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString altKeyString, QString shiftedAltKeyString):
-        AlphaNumKey(relativePosition, relativeSize, keycode), m_altKeyString(altKeyString), m_shiftedAltKeyString(shiftedAltKeyString), m_defaultMapping(0), m_isAlt(false)
+    AlphaNumKey(relativePosition, relativeSize, keycode), m_altKeyString(altKeyString), m_shiftedAltKeyString(shiftedAltKeyString), m_defaultMapping(0), m_isAlt(false)
 {
 
 }
@@ -45,11 +45,10 @@ bool DualKey::alternative() const
 
 void DualKey::setAlternative(bool alt)
 {
-    if(alt){
+    if(alt) {
         m_defaultMapping = Helpers::getKeycodeMapping(keycode());
         Helpers::changeKeycodeMapping(keycode(), m_altKeyString, m_shiftedAltKeyString);
-    }
-    else {
+    } else {
         Helpers::changeKeycodeMapping(keycode(), (KeySym*) m_defaultMapping);
     }
     m_isAlt = alt;

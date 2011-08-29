@@ -28,14 +28,14 @@ StickyKey::StickyKey(QPoint relativePosition, QSize relativeSize, unsigned int k
 
 void StickyKey::pressed()
 {
-    if(!m_toggled){
+    if(!m_toggled) {
         sendKeyPress(); // if the key has not pressed, send immediately a press to X server
     }
 }
 
 void StickyKey::released()
 {
-    if(m_toggled){
+    if(m_toggled) {
         sendKeyRelease();
     }
 
@@ -44,7 +44,7 @@ void StickyKey::released()
 
 void StickyKey::reset()
 {
-    if(m_toggled){
+    if(m_toggled) {
         sendKeyRelease();
         m_toggled = false;
     }
@@ -53,7 +53,7 @@ void StickyKey::reset()
 void StickyKey::setPixmap(QPixmap *pixmap)
 {
     // if toggled we want to keep the pressed pixmap
-    if(!m_toggled){
+    if(!m_toggled) {
         FuncKey::setPixmap(pixmap);
     }
 }

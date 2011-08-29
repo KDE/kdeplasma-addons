@@ -37,7 +37,7 @@ public:
     void setText(QString text);
 
 protected:
-    void paintEvent ( QPaintEvent * event );
+    void paintEvent(QPaintEvent * event);
     void resizeEvent(QResizeEvent *event);
     void showEvent(QShowEvent * event);
 

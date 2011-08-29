@@ -25,7 +25,7 @@
 #include <Plasma/Theme>
 
 EnterKey::EnterKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Return), QString())
+    FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Return), QString())
 {
 }
 
@@ -41,15 +41,15 @@ void EnterKey::paint(QPainter *painter)
     setUpPainter(painter);
     int unit = qMin(size().width(), size().height()) / 8;
 
-    painter->drawLine(-1*unit, 0, 2*unit, 0);
-    painter->drawLine(2*unit, 0, 2*unit, -1*unit);
+    painter->drawLine(-1 * unit, 0, 2 * unit, 0);
+    painter->drawLine(2 * unit, 0, 2 * unit, -1 * unit);
 
-	const QPointF points[3] = {
-        QPointF(-3*unit, 0),
-        QPointF(-1*unit, 1*unit),
-        QPointF(-1*unit, -1*unit),
+    const QPointF points[3] = {
+        QPointF(-3 * unit, 0),
+        QPointF(-1 * unit, 1 * unit),
+        QPointF(-1 * unit, -1 * unit),
     };
 
-	painter->drawConvexPolygon(points, 3);
+    painter->drawConvexPolygon(points, 3);
     painter->restore();
 }
