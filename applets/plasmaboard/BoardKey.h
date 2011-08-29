@@ -30,8 +30,8 @@ public:
 
     bool contains (const QPoint &point) const;
     bool intersects (const QRectF &rect) const;
-    unsigned int getKeycode() const;
-    unsigned int getKeysymbol(int level) const;
+    unsigned int keycode() const;
+    unsigned int keysymbol(int level) const;
     virtual QString label() const;
     virtual void paint(QPainter *painter);
     QPoint position() const;

@@ -46,11 +46,11 @@ bool DualKey::alternative() const
 void DualKey::setAlternative(bool alt)
 {
     if(alt){
-        m_defaultMapping = Helpers::getKeycodeMapping(getKeycode());
-        Helpers::changeKeycodeMapping(getKeycode(), m_altKeyString, m_shiftedAltKeyString);
+        m_defaultMapping = Helpers::getKeycodeMapping(keycode());
+        Helpers::changeKeycodeMapping(keycode(), m_altKeyString, m_shiftedAltKeyString);
     }
     else {
-        Helpers::changeKeycodeMapping(getKeycode(), (KeySym*) m_defaultMapping);
+        Helpers::changeKeycodeMapping(keycode(), (KeySym*) m_defaultMapping);
     }
     m_isAlt = alt;
 }
