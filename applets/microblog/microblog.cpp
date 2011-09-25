@@ -59,7 +59,10 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
       m_graphicsWidget(0),
+      m_historySize(0),
+      m_historyRefresh(0),
       m_newTweets(0),
+      m_includeFriends(false),
       m_lastMode(0),
       m_service(0),
       m_profileService(0),
@@ -298,6 +301,7 @@ void MicroBlog::configChanged()
         //if the user doesn't set a password, see if it's already in our wallet
         m_walletWait = m_password.isEmpty() ? Read : Write;
         getWallet();
+        reloadRequired = true;
     }
 
     if (m_historyRefresh != historyRefresh) {
