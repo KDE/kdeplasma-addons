@@ -184,7 +184,7 @@ void PatternWallpaper::widgetChanged()
         updateConfigThumbs();
     }
 
-    if (m_ui.m_pattern->count()) {
+    if (m_ui.m_pattern->count() && m_ui.m_pattern->currentRow() >= 0) {
         m_patternName = m_ui.m_pattern->item(m_ui.m_pattern->currentRow())->data(Qt::UserRole).toString();
     }
 
