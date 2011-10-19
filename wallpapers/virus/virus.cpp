@@ -129,6 +129,13 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     m_uiVirus.m_view->setModel(m_model);
     m_uiVirus.m_view->setItemDelegate(new BackgroundDelegate(m_uiVirus.m_view,
                                                                  ratio, m_configWidget));
+    
+    m_uiVirus.m_view->setMinimumWidth((BackgroundDelegate::SCREENSHOT_SIZE + BackgroundDelegate::MARGIN * 2 +
+                                           BackgroundDelegate::BLUR_INCREMENT) * 3 +
+                                           m_uiVirus.m_view->spacing() * 4 +
+                                           QApplication::style()->pixelMetric(QStyle::PM_ScrollBarExtent) +
+                                           QApplication::style()->pixelMetric(QStyle::PM_DefaultFrameWidth) * 2 + 7);
+    
     m_uiVirus.m_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     QModelIndex index = m_model->indexOf(m_wallpaper);
     if (index.isValid()) {
@@ -289,7 +296,7 @@ void Virus::pictureChanged(QModelIndex index)
     }
 
     fillMetaInfo(b);
-    if (b->structure()->contentsPrefix().isEmpty()) {
+    if (b->structure()->contentsPrefixPaths().isEmpty()) {
         // it's not a full package, but a single paper
         m_wallpaper = b->filePath("preferred");
     } else {
@@ -430,6 +437,7 @@ void Virus::updateBackground(const QImage &img)
 
 void Virus::suspendStartup(bool suspend)
 {
+    Q_UNUSED(suspend);
     //TODO: find out how to compile with that ksmserver
     /*if (m_startupResumed) {
         return;
