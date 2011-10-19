@@ -41,7 +41,6 @@ void BackgroundDelegate::paint(QPainter *painter,
     if (pix.isNull()) {
         painter->fillRect(option.rect, option.palette.brush(QPalette::Base));
     } else {
-      
         // blur calculation
         QImage blur(pix.size() + QSize(BLUR_INCREMENT + BLUR_PAD, BLUR_INCREMENT + BLUR_PAD), QImage::Format_ARGB32);
         QRect blurRect = QRect(QPoint((blur.width() - pix.width()) / 2, (blur.height() - pix.height()) / 2), pix.size());
