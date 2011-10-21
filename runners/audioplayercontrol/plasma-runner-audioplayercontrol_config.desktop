@@ -3,7 +3,7 @@ Type=Service
 X-KDE-ServiceTypes=KCModule
 
 X-KDE-Library=kcm_krunner_audioplayercontrol
-X-KDE-ParentComponents=audioplayercontrol
+X-KDE-ParentComponents=Audio Player Control Runner
 X-KDE-PluginKeyword=kcm_krunner_audioplayercontrol
 
 Name=Control audio player
