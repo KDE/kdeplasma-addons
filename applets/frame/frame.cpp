@@ -602,6 +602,8 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
                    parent, SLOT(settingsModified()));
     connect(m_configDialog->imageUi.pictureComboBox, SIGNAL(currentIndexChanged(int)), 
                    parent, SLOT(settingsModified()));
+    connect(m_configDialog->imageUi.picRequester, SIGNAL(textChanged(QString)), 
+                   parent, SLOT(settingsModified()));
     connect(m_configDialog->imageUi.autoUpdateTime, SIGNAL(timeChanged(QTime)), 
                     parent, SLOT(settingsModified()));
     connect(m_configDialog->imageUi.addDirButton, SIGNAL(clicked(bool)), 
@@ -612,6 +614,8 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
                    parent, SLOT(settingsModified()));  
     connect(m_configDialog->imageUi.recursiveCheckBox, SIGNAL(toggled(bool)),
                    parent, SLOT(settingsModified()));  
+    connect(m_configDialog->imageUi.potdComboBox, SIGNAL(currentIndexChanged(int)), 
+                   parent, SLOT(settingsModified()));
     connect(m_configDialog->appearanceUi.roundCheckBox, SIGNAL(toggled(bool)),
                    parent, SLOT(settingsModified()));
     connect(m_configDialog->appearanceUi.shadowCheckBox, SIGNAL(toggled(bool)),
