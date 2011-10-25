@@ -109,8 +109,6 @@ void PotdEngine::finished( PotdProvider *provider )
 
 void PotdEngine::error( PotdProvider *provider )
 {
-    setData( provider->identifier(), QImage() );
-
     provider->deleteLater();
 }
 
