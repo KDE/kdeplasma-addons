@@ -28,8 +28,12 @@
 PotdEngine::PotdEngine( QObject* parent, const QVariantList& args )
     : Plasma::DataEngine( parent, args )
 {
-    setMinimumPollingInterval(1000);
-    setPollingInterval( 2*1000 );// 2 seconds
+    // set polling to every 5 minutes
+    setMinimumPollingInterval(5 * 60 * 1000);
+    // FIXME: this should almost certainly be checked ONCE per day
+    //        howver, it was checking every 2 seconds, so every 5 minutes
+    //        might be good enough though it certainly isn't perfect either
+    setPollingInterval(5 * 60 * 1000);
 }
 
 PotdEngine::~PotdEngine()
