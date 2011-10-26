@@ -30,6 +30,11 @@ FuncKey::FuncKey(const QPoint &relativePosition, const QSize &relativeSize, unsi
     setLabel(label);
 }
 
+bool FuncKey::repeats() const
+{
+    return false;
+}
+
 void FuncKey::paintArrow(QPainter *painter)
 {
     int unit = qMin(size().width(), size().height()) / 8;

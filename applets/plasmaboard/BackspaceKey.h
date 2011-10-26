@@ -27,6 +27,7 @@ class BackspaceKey: public FuncKey
 {
 public:
     BackspaceKey(QPoint relativePosition, QSize relativeSize);
+    virtual bool repeats() const;
 
 protected:
     void paint(QPainter *painter);

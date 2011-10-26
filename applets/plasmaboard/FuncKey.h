@@ -28,6 +28,7 @@ class FuncKey: public AlphaNumKey
 
 public:
     FuncKey(const QPoint &relativePosition, const QSize &relativeSize, unsigned int keycode, const QString &label);
+    virtual bool repeats() const;
 
 private:
     virtual void paintLabel(QPainter *painter);

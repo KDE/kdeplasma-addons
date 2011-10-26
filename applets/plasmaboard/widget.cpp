@@ -540,9 +540,9 @@ void PlasmaboardWidget::press(BoardKey *key, bool externalEvent)
     }
 
     if (!externalEvent) {
-        m_pressedList << key;
+        m_pressedList.append(key);
 
-        if (!dynamic_cast<FuncKey *>(key)) {
+        if (key->repeats()) {
             setTooltip(key);
             m_repeatTimer->start(REPEAT_TIMER);
         }
@@ -595,6 +595,7 @@ void PlasmaboardWidget::repeatKeys()
     foreach (BoardKey *key, m_pressedList) {
         key->pressRepeated();
     }
+
     m_isRepeating = true;
 }
 

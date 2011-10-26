@@ -76,9 +76,16 @@ void BoardKey::pressed()
 
 }
 
+bool BoardKey::repeats() const
+{
+    return true;
+}
+
 void BoardKey::pressRepeated()
 {
-    Helpers::fakeKeyPress(keycode());
+    if (repeats()) {
+        Helpers::fakeKeyPress(keycode());
+    }
 }
 
 void BoardKey::released()

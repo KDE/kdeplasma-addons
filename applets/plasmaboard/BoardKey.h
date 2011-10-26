@@ -43,6 +43,11 @@ public:
     virtual void pressed();
 
     /**
+     * @return true if this key can repeat
+     */
+    virtual bool repeats() const;
+
+    /**
       * This should be called when the key is pressed for a longer time with out releasing or moving the pointer
       */
     virtual void pressRepeated();
