@@ -33,9 +33,12 @@ void changeKeycodeMapping(unsigned int code, QString &sym);
 void changeKeycodeMapping(unsigned int code, QString &sym,
                           QString &shiftedSym);
 
-void changeKeycodeMapping(unsigned int code, KeySym* keysyms);
+//void changeKeycodeMapping(unsigned int code, KeySym* keysyms);
+void flushPendingKeycodeMappingChanges();
 
-KeySym* getKeycodeMapping(unsigned int code);
+//QVector<KeySym> getKeycodeMapping(unsigned int code);
+void saveKeycodeMapping(unsigned int code);
+void restoreKeycodeMapping(unsigned int code);
 
 unsigned int keycodeToKeysym(const unsigned int &code, int level);
 

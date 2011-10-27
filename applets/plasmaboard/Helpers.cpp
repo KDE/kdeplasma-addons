@@ -22,8 +22,9 @@
 #include <QChar>
 #include <QMap>
 #include <QString>
-#include <QVarLengthArray>
+#include <QVector>
 #include <qx11info_x11.h>
+#include <KDebug>
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
 
@@ -35,49 +36,90 @@ namespace Helpers
 int keysymsPerKeycode;
 
 /// Contains the non-predictable keysyms and their corresponding QChar's
-QMap<unsigned int, QChar> symbolMap;
+QHash<unsigned int, QChar> symbolMap;
+QHash<unsigned int, QVector<KeySym> > savedMappings;
+QMap<unsigned int, QVector<KeySym> > pendingKeycodeChanges;
+
 /// Initialises the keysym-QChar map
-void initialiseMap(QMap<unsigned int, QChar>& map);
+void initialiseMap(QHash<unsigned int, QChar>& map);
 
 void changeKeycodeMapping(unsigned int code, QString &sym)
 {
     KeySym keysym = XStringToKeysym(sym.toAscii());
-    QVarLengthArray<KeySym> keysyms(keysymsPerKeycode);
+    QVector<KeySym> keysyms(keysymsPerKeycode);
     for (int i = 0; i < keysymsPerKeycode; ++i) {
         keysyms[i] = keysym;
     }
 
-    XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode,
-                           keysyms.data(), 1);
-    XSync(QX11Info::display(), False);
+    pendingKeycodeChanges.insert(code, keysyms);
 }
 
-void changeKeycodeMapping(unsigned int code, QString &sym,
-                          QString &shiftedSym)
+void changeKeycodeMapping(unsigned int code, QString &sym, QString &shiftedSym)
 {
     KeySym keysym = XStringToKeysym(sym.toAscii());
-    QVarLengthArray<KeySym> keysyms(keysymsPerKeycode);
+    QVector<KeySym> keysyms(keysymsPerKeycode);
     for (int i = 0; i < keysymsPerKeycode; ++i) {
         keysyms[i] = keysym;
     }
 
     keysyms[1] = XStringToKeysym(shiftedSym.toAscii());
-    XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode,
-                           keysyms.data(), 1);
+    pendingKeycodeChanges.insert(code, keysyms);
+}
+
+void flushPendingKeycodeMappingChanges()
+{
+    QVector<KeySym> keysyms;
+
+    QMapIterator<unsigned int, QVector<KeySym> > it(pendingKeycodeChanges);
+    unsigned int startingCode = 0;
+    unsigned int lastCode = 0;
+    int count = 0;
+    while (it.hasNext()) {
+        it.next();
+        if (startingCode == 0) {
+            startingCode = it.key();
+        } else if (lastCode + 1 != it.key()) {
+            XChangeKeyboardMapping(QX11Info::display(), startingCode, keysymsPerKeycode, keysyms.data(), count);
+
+            keysyms.clear();
+            startingCode = it.key();
+            count = 0;
+        }
+
+        lastCode = it.key();
+        keysyms += it.value();
+        ++count;
+    }
+
+    pendingKeycodeChanges.clear();
+    XChangeKeyboardMapping(QX11Info::display(), startingCode, keysymsPerKeycode, keysyms.data(), count);
     XSync(QX11Info::display(), False);
 }
 
+/*
 void changeKeycodeMapping(unsigned int code, KeySym* keysyms)
 {
     XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode,
                            keysyms, 1);
     XSync(QX11Info::display(), False);
 }
-
-KeySym* getKeycodeMapping(unsigned int code)
+*/
+void saveKeycodeMapping(unsigned int code)
 {
-    return XGetKeyboardMapping(QX11Info::display(), code, 1,
-                               &keysymsPerKeycode);
+    KeySym *syms = XGetKeyboardMapping(QX11Info::display(), code, 1, &keysymsPerKeycode);
+    QVector<KeySym> v(keysymsPerKeycode);
+    for (int i = 0; i < keysymsPerKeycode; ++i) {
+        v[i] = syms[i];
+    }
+    XFree(syms);
+    savedMappings.insert(code, v);
+}
+
+void restoreKeycodeMapping(unsigned int code)
+{
+    if (savedMappings.contains(code)) {
+        pendingKeycodeChanges.insert(code, savedMappings[code]);
+    }
 }
 
 unsigned int keycodeToKeysym(const unsigned int &code, int level)
@@ -132,11 +174,11 @@ void fakeKeyRelease(const unsigned int &code)
  */
 QChar mapToUnicode(const unsigned int &keysym)
 {
-    if (keysym < 0x100)
+    if (keysym < 0x100) {
         return QChar(keysym);
-    else if (keysym > 0x01000100)
+    } else if (keysym > 0x01000100) {
         return QChar(keysym - 0x01000000);
-    else {
+    } else {
         if (symbolMap.isEmpty())
             initialiseMap(symbolMap);
         if (symbolMap.contains(keysym))
@@ -169,7 +211,7 @@ QChar mapToUnicode(const unsigned int &keysym)
  *     # Put some order to ease manual lookup
  *    sort
  */
-void initialiseMap(QMap<unsigned int, QChar>& map)
+void initialiseMap(QHash<unsigned int, QChar>& map)
 {
     map[0x01a1] = QChar(0x0104);
     map[0x01a2] = QChar(0x02D8);
