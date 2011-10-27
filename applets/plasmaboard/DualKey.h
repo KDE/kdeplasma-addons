@@ -39,7 +39,6 @@ private:
 private:
     QString m_altKeyString; // String (Xlibs key name) of the alternative key on this
     QString m_shiftedAltKeyString; // shifted alternative key
-    void* m_defaultMapping;
     bool m_isAlt;
 };
 

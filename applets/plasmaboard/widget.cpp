@@ -679,11 +679,16 @@ void PlasmaboardWidget::stickyKey_Mapper(int id)
 
 void PlasmaboardWidget::switchAlternative(bool alt)
 {
+    QTime t;
+    t.start();
     foreach (DualKey *key, m_dualKeys) {
         key->setAlternative(alt);
     }
 
+    Helpers::flushPendingKeycodeMappingChanges();
+    //kDebug() << "====== set alt for" << m_dualKeys.count() << "in" << t.restart();
     relabelKeys();
+    //kDebug() << "======     relabeling took" << t.restart();
 }
 
 void PlasmaboardWidget::themeChanged()
