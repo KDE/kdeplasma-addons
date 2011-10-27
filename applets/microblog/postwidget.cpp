@@ -21,6 +21,7 @@
 
 #include <QGraphicsAnchorLayout>
 #include <QGraphicsLinearLayout>
+#include <QTextDocument>
 #include <QLabel>
 #include <QLocale>
 
@@ -100,7 +101,7 @@ void PostWidget::setData(const Plasma::DataEngine::Data &data)
     dt.setTimeSpec(Qt::UTC);
     m_from->setText(i18nc("%1 is a time string like '1 hour ago' - %2 is the name of a microblogging client","%1 from %2",timeDescription( dt ), data.value( "Source" ).toString()));
 
-    QString status = data["Status"].toString();
+    QString status = Qt::escape(data["Status"].toString());
     status.replace(QRegExp("((http|https)://[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]])"), "<a href='\\1'>\\1</a>");
 
     m_text->setText(QString( "<p><font color='%1'>%2</font></p>" ).arg( m_colorScheme->foreground().color().name()).arg( status ));
