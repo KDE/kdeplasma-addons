@@ -553,7 +553,6 @@ void PlasmaboardWidget::refreshKeys()
 {
     double factor_x = size().width() / 10048;
     double factor_y = size().height() / 10002;
-    kDebug() << size() << "refreshing keys with factors of" << factor_x << factor_y;
 
     foreach (BoardKey * key, m_keys) {
         key->updateDimensions(factor_x, factor_y);
@@ -565,6 +564,7 @@ void PlasmaboardWidget::refreshKeys()
 
 void PlasmaboardWidget::relabelKeys()
 {
+    Helpers::refreshXkbState();
     foreach (AlphaNumKey * key, m_alphaKeys) {
         key->switchKey(m_isLevel2, m_isAlternative, m_isLocked);
         update(key->rect());

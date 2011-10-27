@@ -39,6 +39,7 @@ void flushPendingKeycodeMappingChanges();
 //QVector<KeySym> getKeycodeMapping(unsigned int code);
 void saveKeycodeMapping(unsigned int code);
 void restoreKeycodeMapping(unsigned int code);
+void refreshXkbState();
 
 unsigned int keycodeToKeysym(const unsigned int &code, int level);
 
