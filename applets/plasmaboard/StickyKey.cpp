@@ -29,7 +29,7 @@ StickyKey::StickyKey(QPoint relativePosition, QSize relativeSize, unsigned int k
 
 void StickyKey::pressed()
 {
-    // if the key has not pressed, send a press event immediately
+    // if the key has not been pressed, send a press event immediately
     if (!m_toggled) {
         sendKeyPress();
     }
