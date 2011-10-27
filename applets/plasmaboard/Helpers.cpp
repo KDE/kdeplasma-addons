@@ -20,11 +20,11 @@
 
 
 #include <QChar>
+#include <QHash>
 #include <QMap>
 #include <QString>
 #include <QVector>
 #include <qx11info_x11.h>
-#include <KDebug>
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
 
@@ -39,6 +39,8 @@ int keysymsPerKeycode;
 QHash<unsigned int, QChar> symbolMap;
 QHash<unsigned int, QVector<KeySym> > savedMappings;
 QMap<unsigned int, QVector<KeySym> > pendingKeycodeChanges;
+XkbStateRec xkbState;
+bool xkbStateSetup = false;
 
 /// Initialises the keysym-QChar map
 void initialiseMap(QHash<unsigned int, QChar>& map);
@@ -122,11 +124,19 @@ void restoreKeycodeMapping(unsigned int code)
     }
 }
 
+void refreshXkbState()
+{
+    XkbGetState(QX11Info::display(), XkbUseCoreKbd, &xkbState);
+    xkbStateSetup = true;
+}
+
 unsigned int keycodeToKeysym(const unsigned int &code, int level)
 {
 #ifdef Q_WS_X11
-    XkbStateRec xkbState;
-    XkbGetState(QX11Info::display(), XkbUseCoreKbd, &xkbState);
+    if (!xkbStateSetup) {
+        refreshXkbState();
+    }
+
     int vector = xkbState.group * 2 + level;
     return (unsigned int)XKeycodeToKeysym(QX11Info::display(), code, vector);
 #else
