@@ -98,14 +98,6 @@ void flushPendingKeycodeMappingChanges()
     XSync(QX11Info::display(), False);
 }
 
-/*
-void changeKeycodeMapping(unsigned int code, KeySym* keysyms)
-{
-    XChangeKeyboardMapping(QX11Info::display(), code, keysymsPerKeycode,
-                           keysyms, 1);
-    XSync(QX11Info::display(), False);
-}
-*/
 void saveKeycodeMapping(unsigned int code)
 {
     KeySym *syms = XGetKeyboardMapping(QX11Info::display(), code, 1, &keysymsPerKeycode);
@@ -132,40 +124,29 @@ void refreshXkbState()
 
 unsigned int keycodeToKeysym(const unsigned int &code, int level)
 {
-#ifdef Q_WS_X11
     if (!xkbStateSetup) {
         refreshXkbState();
     }
 
     int vector = xkbState.group * 2 + level;
     return (unsigned int)XKeycodeToKeysym(QX11Info::display(), code, vector);
-#else
-    return 0;
-#endif
 }
 
 unsigned int keysymToKeycode(const unsigned int &keysym)
 {
-#ifdef Q_WS_X11
     return ((unsigned int) XKeysymToKeycode(QX11Info::display(), keysym));
-#else
-    return 0;
-#endif
 }
 
 void fakeKeyPress(const unsigned int &code)
 {
-#ifdef Q_WS_X11
     XTestFakeKeyEvent(QX11Info::display(), code, true, 0);
     XSync(QX11Info::display(), False);
-#endif
 }
+
 void fakeKeyRelease(const unsigned int &code)
 {
-#ifdef Q_WS_X11
     XTestFakeKeyEvent(QX11Info::display(), code, false, 0);
     XSync(QX11Info::display(), False);
-#endif
 }
 
 /**
@@ -189,11 +170,15 @@ QChar mapToUnicode(const unsigned int &keysym)
     } else if (keysym > 0x01000100) {
         return QChar(keysym - 0x01000000);
     } else {
-        if (symbolMap.isEmpty())
+        if (symbolMap.isEmpty()) {
             initialiseMap(symbolMap);
-        if (symbolMap.contains(keysym))
+        }
+
+        if (symbolMap.contains(keysym)) {
             return symbolMap[keysym];
+        }
     }
+
     return QChar(0x2204); // Symbol for "There does not exist"
 }
 
