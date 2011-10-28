@@ -20,7 +20,6 @@
 
 #include "apodprovider.h"
 
-#include <QtCore/QDate>
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 
@@ -43,7 +42,6 @@ class ApodProvider::Private
 
     ApodProvider *mParent;
     QByteArray mPage;
-    QDate mDate;
     QImage mImage;
 };
 
@@ -85,12 +83,6 @@ void ApodProvider::Private::imageRequestFinished( KJob *_job )
 ApodProvider::ApodProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
-    const QString type = args[ 0 ].toString();
-    if ( type == QLatin1String( "Date" ) )
-        d->mDate = args[ 1 ].toDate();
-    else
-        Q_ASSERT( false && "Invalid type passed to potd provider" );
-
     KUrl url( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
@@ -104,11 +96,6 @@ ApodProvider::~ApodProvider()
 QImage ApodProvider::image() const
 {
     return d->mImage;
-}
-
-QString ApodProvider::identifier() const
-{
-    return QString( QLatin1String( "apod:%1" ) ).arg( d->mDate.toString( Qt::ISODate ));
 }
 
 #include "apodprovider.moc"

@@ -22,14 +22,8 @@
 class PotdProvider::Private
 {
 public:
-
-    Private()
-        : isFixedDate(false)
-    {
-    }
-
+    QString name;
     QDate date;
-    bool isFixedDate;
 };
 
 PotdProvider::PotdProvider( QObject *parent, const QVariantList &args )
@@ -37,10 +31,13 @@ PotdProvider::PotdProvider( QObject *parent, const QVariantList &args )
       d(new Private)
 {
     if ( args.count() > 0 ) {
-        if ( args[ 0 ].canConvert( QVariant::Date ) ) {
-            d->date = args[ 0 ].toDate();
-            d->isFixedDate = true;
+        d->name = args[ 0 ].toString();
+
+        if ( args.count() > 1 && args[ 1 ].canConvert( QVariant::Date ) ) {
+            d->date = args[ 1 ].toDate();
         }
+    } else {
+        d->name = "Unknown";
     }
 }
 
@@ -48,14 +45,29 @@ PotdProvider::~PotdProvider()
 {
 }
 
+QString PotdProvider::name() const
+{
+    return d->name;
+}
+
 QDate PotdProvider::date() const
 {
-    return d->isFixedDate ? d->date : QDate::currentDate();
+    return d->date.isNull() ? QDate::currentDate() : d->date;
 }
 
 bool PotdProvider::isFixedDate() const
 {
-    return d->isFixedDate;
+    return !d->date.isNull();
 }
+
+QString PotdProvider::identifier() const
+{
+    if (isFixedDate()) {
+        return QString( QLatin1String( "%1:%2" ) ).arg( d->name, d->date.toString( Qt::ISODate ));
+    }
+
+    return d->name;
+}
+
 
 #include "potdprovider.moc"

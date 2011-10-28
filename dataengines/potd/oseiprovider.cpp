@@ -20,7 +20,6 @@
 
 #include "oseiprovider.h"
 
-#include <QtCore/QDate>
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 
@@ -43,7 +42,6 @@ class OseiProvider::Private
 
     OseiProvider *mParent;
     QByteArray mPage;
-    QDate mDate;
     QImage mImage;
 };
 
@@ -75,12 +73,6 @@ void OseiProvider::Private::imageRequestFinished( KJob *_job )
 OseiProvider::OseiProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
-    const QString type = args[ 0 ].toString();
-    if ( type == QLatin1String( "Date" ) )
-        d->mDate = args[ 1 ].toDate();
-    else
-	Q_ASSERT( false && "Invalid type passed to potd provider" );
-
     KUrl url( QLatin1String( "http://www.osei.noaa.gov/OSEIiod.html" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
@@ -94,11 +86,6 @@ OseiProvider::~OseiProvider()
 QImage OseiProvider::image() const
 {
     return d->mImage;
-}
-
-QString OseiProvider::identifier() const
-{
-    return QString( QLatin1String( "osei:%1" ) ).arg( d->mDate.toString( Qt::ISODate ));
 }
 
 #include "oseiprovider.moc"

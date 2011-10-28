@@ -72,6 +72,7 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
     }
 
     QVariantList args;
+    args << providerName;
     if ( parts.count() > 1 ) {
         const QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
         if ( !date.isValid() ) {

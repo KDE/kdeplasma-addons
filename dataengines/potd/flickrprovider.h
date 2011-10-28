@@ -56,11 +56,6 @@ class FlickrProvider : public PotdProvider
          */
         virtual QImage image() const;
 
-        /**
-         * Returns the identifier of the picture request (name + date).
-         */
-        virtual QString identifier() const;
-
     private:
       class Private;
       Private* const d;

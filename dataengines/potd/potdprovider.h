@@ -64,10 +64,15 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
         /**
          * Returns the identifier of the PoTD request (name + date).
          */
-        virtual QString identifier() const = 0;
+        virtual QString identifier() const;
 
         /**
-         * Returns the date to load for this item, if any
+         * @return the name of this provider (equiv to X-KDE-PlasmaPoTDProvider-Identifier)
+         */
+        QString name() const;
+
+        /**
+         * @reutrn the date to load for this item, if any
          */
         QDate date() const;
 

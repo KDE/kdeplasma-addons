@@ -20,7 +20,6 @@
 
 #include "epodprovider.h"
 
-#include <QtCore/QDate>
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 
@@ -103,11 +102,6 @@ EpodProvider::~EpodProvider()
 QImage EpodProvider::image() const
 {
     return d->mImage;
-}
-
-QString EpodProvider::identifier() const
-{
-    return QString( QLatin1String( "epod:%1" ) ).arg( d->mDate.toString( Qt::ISODate ));
 }
 
 #include "epodprovider.moc"
