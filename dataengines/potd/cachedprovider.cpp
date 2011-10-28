@@ -20,6 +20,7 @@
 #include "cachedprovider.h"
 
 #include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 #include <QtCore/QTimer>
 #include <QtGui/QImage>
 
@@ -65,7 +66,20 @@ void CachedProvider::triggerFinished()
 
 bool CachedProvider::isCached( const QString &identifier )
 {
-    return QFile::exists( identifierToPath( identifier ) );
+    const QString path = identifierToPath( identifier );
+    if (!QFile::exists( path ) ) {
+        return false;
+    }
+
+    if (!identifier.contains( ':' ) ) {
+        // no date in the identifier, so it's a daily; check to see ifthe modification time is today
+        QFileInfo info( path );
+        if ( info.lastModified().date() != QDate::currentDate() ) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool CachedProvider::storeInCache( const QString &identifier, const QImage &potd )
