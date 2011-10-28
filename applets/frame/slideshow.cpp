@@ -207,11 +207,12 @@ void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data 
         return;
     }
 
-    m_image = data[name].value<QImage>();
+    m_image = data["Image"].value<QImage>();
     m_currentUrl = data["Url"].toString();
+    //kDebug() << name << "got data with keys of" << data.keys() << m_image.isNull() << data["Url"];
     //Compatibility with old dataengines
     if (m_image.isNull()) {
-        QPixmap tmpPixmap = data[name].value<QPixmap>();
+        QPixmap tmpPixmap = data["Image"].value<QPixmap>();
         if (!tmpPixmap.isNull()) {
             m_image = tmpPixmap.toImage();
         }

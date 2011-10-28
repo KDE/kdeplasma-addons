@@ -100,7 +100,7 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
 bool PotdEngine::sourceRequestEvent( const QString &identifier )
 {
     if ( updateSourceEvent( identifier ) ) {
-        setData( identifier, QImage() );
+        setData( identifier, "Image", QImage() );
         return true;
     }
 
@@ -109,7 +109,7 @@ bool PotdEngine::sourceRequestEvent( const QString &identifier )
 
 void PotdEngine::finished( PotdProvider *provider )
 {
-    setData( provider->identifier(), provider->image() );
+    setData( provider->identifier(), "Image", provider->image() );
     setData( provider->identifier(), "Url", CachedProvider::identifierToPath( provider->identifier()) );
 
     // store in cache if it's not the response of a CachedProvider
