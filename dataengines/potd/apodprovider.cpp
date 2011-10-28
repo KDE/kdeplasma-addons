@@ -51,22 +51,23 @@ void ApodProvider::Private::pageRequestFinished( KJob *_job )
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if ( job->error() ) {
-	emit mParent->error( mParent );
-	return;
+        emit mParent->error( mParent );
+        return;
     }
 
     const QString data = QString::fromUtf8( job->data() );
 
-    const QString pattern( QLatin1String( "<IMG SRC=\"image/*.jpg" ) );
+    const QString pattern( QLatin1String( "<a href=\"(image/.*)\"" ) );
     QRegExp exp( pattern );
-    exp.setPatternSyntax(QRegExp::Wildcard);
-
-    int pos = exp.indexIn( data ) + pattern.length();
-    const QString sub = data.mid( pos, exp.matchedLength() -21);
-
-    KUrl url( QString( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/image/%1/%2" ) ).arg(QDate::currentDate().toString( QLatin1String( "yyMM" ) ) ).arg( sub ) );
-    KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
-    mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
+    exp.setMinimal( true );
+    if ( exp.indexIn( data ) != -1 ) {
+        const QString sub = exp.cap(1);
+        KUrl url( QString( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/%1" ) ).arg( sub ) );
+        KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+        mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
+    } else {
+        emit mParent->error( mParent );
+    }
 }
 
 void ApodProvider::Private::imageRequestFinished( KJob *_job )
@@ -88,7 +89,7 @@ ApodProvider::ApodProvider( QObject *parent, const QVariantList &args )
     if ( type == QLatin1String( "Date" ) )
         d->mDate = args[ 1 ].toDate();
     else
-	Q_ASSERT( false && "Invalid type passed to potd provider" );
+        Q_ASSERT( false && "Invalid type passed to potd provider" );
 
     KUrl url( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
