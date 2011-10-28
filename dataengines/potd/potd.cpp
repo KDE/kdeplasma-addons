@@ -65,36 +65,35 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
     }
 
     const QStringList parts = identifier.split( QLatin1Char( ':' ), QString::SkipEmptyParts );
-
-    //: are mandatory
-    if ( parts.count() < 2 ) {
-        kDebug() << "less than 2 parts";
-        return false;
-    }
-
-    if ( !mFactories.contains( parts[ 0 ] ) ) {
+    const QString providerName = parts[ 0 ];
+    if ( !mFactories.contains( providerName ) ) {
         kDebug() << "invalid provider: " << parts[ 0 ];
         return false;
     }
 
-    const KService::Ptr service = mFactories[ parts[ 0 ] ];
+    QDate date;
+    if ( parts.count() < 2 ) {
+        date = QDate::currentDate();
+    } else {
+        date = QDate::fromString( parts[ 1 ], Qt::ISODate );
+    }
 
-    const QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
     if ( !date.isValid() ) {
         kDebug() << "invalid date:" << parts[1];
         return false;
     }
 
     QVariantList args;
-    PotdProvider *provider = 0;
-
     args << QLatin1String( "Date" ) << date;
 
-    provider = qobject_cast<PotdProvider*>( service->createInstance<QObject>( this, args ) );
+    PotdProvider *provider = qobject_cast<PotdProvider*>( mFactories[ providerName ]->createInstance<QObject>( this, args ) );
+    if (provider) {
+        connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
+        connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
+        return true;
+    }
 
-    connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
-    connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
-    return true;
+    return false;
 }
 
 bool PotdEngine::sourceRequestEvent( const QString &identifier )
@@ -122,6 +121,7 @@ void PotdEngine::finished( PotdProvider *provider )
 
 void PotdEngine::error( PotdProvider *provider )
 {
+    provider->disconnect(this);
     provider->deleteLater();
 }
 
