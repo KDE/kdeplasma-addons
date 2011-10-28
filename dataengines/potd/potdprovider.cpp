@@ -19,14 +19,43 @@
 
 #include "potdprovider.h"
 
-PotdProvider::PotdProvider( QObject *parent, const QVariantList &args )
-    : QObject( parent )
+class PotdProvider::Private
 {
-    Q_UNUSED(args)
+public:
+
+    Private()
+        : isFixedDate(false)
+    {
+    }
+
+    QDate date;
+    bool isFixedDate;
+};
+
+PotdProvider::PotdProvider( QObject *parent, const QVariantList &args )
+    : QObject( parent ),
+      d(new Private)
+{
+    if ( args.count() > 0 ) {
+        if ( args[ 0 ].canConvert( QVariant::Date ) ) {
+            d->date = args[ 0 ].toDate();
+            d->isFixedDate = true;
+        }
+    }
 }
 
 PotdProvider::~PotdProvider()
 {
+}
+
+QDate PotdProvider::date() const
+{
+    return d->isFixedDate ? d->date : QDate::currentDate();
+}
+
+bool PotdProvider::isFixedDate() const
+{
+    return d->isFixedDate;
 }
 
 #include "potdprovider.moc"
