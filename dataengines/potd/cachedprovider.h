@@ -66,6 +66,11 @@ class CachedProvider : public PotdProvider
          */
         static bool storeInCache( const QString &identifier, const QImage &potd );
 
+        /**
+         * Returns a path for the given identifier
+         */
+        static QString identifierToPath( const QString &identifier );
+
     private Q_SLOTS:
         void triggerFinished();
 

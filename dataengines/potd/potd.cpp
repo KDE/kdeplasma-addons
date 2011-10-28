@@ -24,6 +24,7 @@
 #include <KServiceTypeTrader>
 
 #include "cachedprovider.h"
+#include "kstandarddirs.h"
 
 PotdEngine::PotdEngine( QObject* parent, const QVariantList& args )
     : Plasma::DataEngine( parent, args )
@@ -66,11 +67,15 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
     const QStringList parts = identifier.split( QLatin1Char( ':' ), QString::SkipEmptyParts );
 
     //: are mandatory
-    if ( parts.count() < 2 )
+    if ( parts.count() < 2 ) {
+        kDebug() << "less than 2 parts";
         return false;
+    }
 
-    if ( !mFactories.contains( parts[ 0 ] ) )
+    if ( !mFactories.contains( parts[ 0 ] ) ) {
+        kDebug() << "invalid provider: " << parts[ 0 ];
         return false;
+    }
 
     const KService::Ptr service = mFactories[ parts[ 0 ] ];
 
@@ -94,14 +99,18 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
 
 bool PotdEngine::sourceRequestEvent( const QString &identifier )
 {
-    setData( identifier, QImage() );
+    if ( updateSourceEvent( identifier ) ) {
+        setData( identifier, QImage() );
+        return true;
+    }
 
-    return updateSourceEvent( identifier );
+    return false;
 }
 
 void PotdEngine::finished( PotdProvider *provider )
 {
     setData( provider->identifier(), provider->image() );
+    setData( provider->identifier(), "Url", CachedProvider::identifierToPath( provider->identifier()) );
 
     // store in cache if it's not the response of a CachedProvider
     if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !provider->image().isNull() ) {

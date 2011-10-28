@@ -208,6 +208,7 @@ void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data 
     }
 
     m_image = data[name].value<QImage>();
+    m_currentUrl = data["Url"].toString();
     //Compatibility with old dataengines
     if (m_image.isNull()) {
         QPixmap tmpPixmap = data[name].value<QPixmap>();
