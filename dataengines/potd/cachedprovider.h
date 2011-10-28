@@ -36,7 +36,7 @@ class CachedProvider : public PotdProvider
          * @param identifier The identifier of the cached picture.
          * @param parent The parent object.
          */
-        CachedProvider( const QString &identifier, QObject *parent, const QVariantList &args );
+        CachedProvider( const QString &identifier, QObject *parent );
 
         /**
          * Destroys the cached provider.
