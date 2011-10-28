@@ -697,8 +697,7 @@ void Frame::configAccepted()
 void Frame::stopPotd()
 {
     Plasma::DataEngine *engine = dataEngine("potd");
-    const QString identifier = m_potdProvider + ':' + m_currentDay.toString(Qt::ISODate);
-    engine->disconnectSource(identifier, m_mySlideShow);
+    engine->disconnectSource(m_potdProvider, m_mySlideShow);
     m_autoUpdateTimer->stop();
 }
 
@@ -712,12 +711,8 @@ void Frame::initSlideShow()
         m_mySlideShow->setDirs(m_slideShowPaths, m_recursiveSlideShow);
         m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
     } else if (m_potd) {
-        m_dateChangedTimer = new QTimer( this );//change picture at midnight
-        connect( m_dateChangedTimer, SIGNAL(timeout()), this, SLOT(checkDayChanged()) );
-        m_dateChangedTimer->start( 60 * 60 * 1000 ); // every hour
         Plasma::DataEngine *engine = dataEngine("potd");
-        const QString identifier = m_potdProvider + ':' + m_currentDay.toString(Qt::ISODate);
-        engine->connectSource(identifier, m_mySlideShow);
+        engine->connectSource(m_potdProvider, m_mySlideShow);
     } else { //no slideshow so no random stuff
         m_mySlideShow->setRandom(false);
         m_mySlideShow->setImage(m_currentUrl.url());
@@ -726,7 +721,7 @@ void Frame::initSlideShow()
             m_doAutoUpdate = true;
         }
     }
-    
+
     scalePictureAndUpdate();
 }
 
@@ -850,28 +845,9 @@ void Frame::delayedUpdateSize()
     }
 }
 
-void Frame::checkDayChanged()
-{
-    if ( ( m_currentDay != QDate::currentDate() ) ) {
-        reloadImage();
-        //keep after reloadImage()
-        m_currentDay = QDate::currentDate();
-    }
-}
-
 void Frame::reloadImage()
 {
-    if (m_potd) {
-        Plasma::DataEngine *engine = dataEngine("potd");
-        //disconnect yesterday's source
-        QString identifier = m_potdProvider + ':' + m_currentDay.toString(Qt::ISODate);
-        engine->disconnectSource(identifier, m_mySlideShow);
-        //connect today's source
-        identifier = m_potdProvider + ':' + QDate::currentDate().toString(Qt::ISODate); 
-        engine->connectSource(identifier, m_mySlideShow);
-    } else {
-        m_mySlideShow->updateImage(m_currentUrl.url());
-    }
+    m_mySlideShow->updateImage(m_currentUrl.url());
 }
 
 #include "frame.moc"

@@ -20,6 +20,9 @@
 #include "potd.h"
 
 #include <QtCore/QDate>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtCore/QTimer>
 #include <KDebug>
 #include <KServiceTypeTrader>
 
@@ -31,10 +34,12 @@ PotdEngine::PotdEngine( QObject* parent, const QVariantList& args )
 {
     // set polling to every 5 minutes
     setMinimumPollingInterval(5 * 60 * 1000);
-    // FIXME: this should almost certainly be checked ONCE per day
-    //        howver, it was checking every 2 seconds, so every 5 minutes
-    //        might be good enough though it certainly isn't perfect either
-    setPollingInterval(5 * 60 * 1000);
+    m_checkDatesTimer = new QTimer( this );//change picture after 24 hours
+    connect( m_checkDatesTimer, SIGNAL(timeout()), this, SLOT(checkDayChanged()) );
+    //FIXME: would be nice to stop and start this timer ONLY as needed, e.g. only when there are
+    // time insensitive sources to serve; still, this is better than how i found it, checking
+    // every 2 seconds (!)
+    m_checkDatesTimer->setInterval( 10 * 60 * 1000 ); // check every 10 minutes
 }
 
 PotdEngine::~PotdEngine()
@@ -121,5 +126,31 @@ void PotdEngine::error( PotdProvider *provider )
     provider->disconnect(this);
     provider->deleteLater();
 }
+
+void PotdEngine::checkDayChanged()
+{
+    SourceDict dict = containerDict();
+    QHashIterator<QString, Plasma::DataContainer*> it( dict );
+    while ( it.hasNext() ) {
+        it.next();
+
+        if ( it.key() == "Providers" ) {
+            continue;
+        }
+
+        if ( !it.key().contains(':') ) {
+            const QString path = CachedProvider::identifierToPath( it.key() );
+            if ( !QFile::exists(path) ) {
+                updateSourceEvent( it.key() );
+            } else {
+                QFileInfo info( path );
+                if ( info.lastModified().daysTo( QDateTime::currentDateTime() ) > 1 ) {
+                    updateSourceEvent( it.key() );
+                }
+            }
+        }
+    }
+}
+
 
 #include "potd.moc"

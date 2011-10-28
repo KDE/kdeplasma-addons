@@ -24,6 +24,8 @@
 
 class PotdProvider;
 
+class QTimer;
+
 /**
  * This class provides the Pictures of The Day from various online websites.
  *
@@ -51,9 +53,11 @@ class PotdEngine : public Plasma::DataEngine
     private Q_SLOTS:
         void finished( PotdProvider* );
         void error( PotdProvider* );
+        void checkDayChanged();
 
     private:
         QMap<QString, KService::Ptr> mFactories;
+        QTimer *m_checkDatesTimer;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(potd, PotdEngine)
