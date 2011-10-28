@@ -58,7 +58,7 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
         QVariantList args;
         args << QLatin1String( "String" ) << identifier;
 
-        CachedProvider *provider = new CachedProvider( identifier, this, args );
+        CachedProvider *provider = new CachedProvider( identifier, this );
         connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
         connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
         return true;
@@ -71,20 +71,16 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
         return false;
     }
 
-    QDate date;
-    if ( parts.count() < 2 ) {
-        date = QDate::currentDate();
-    } else {
-        date = QDate::fromString( parts[ 1 ], Qt::ISODate );
-    }
-
-    if ( !date.isValid() ) {
-        kDebug() << "invalid date:" << parts[1];
-        return false;
-    }
-
     QVariantList args;
-    args << QLatin1String( "Date" ) << date;
+    if ( parts.count() > 1 ) {
+        const QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
+        if ( !date.isValid() ) {
+            kDebug() << "invalid date:" << parts[1];
+            return false;
+        }
+
+        args << date;
+    }
 
     PotdProvider *provider = qobject_cast<PotdProvider*>( mFactories[ providerName ]->createInstance<QObject>( this, args ) );
     if (provider) {
