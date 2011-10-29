@@ -30,6 +30,7 @@ PoTD::PoTD(QObject *parent, const QVariantList &args)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(wallpaperRendered(QImage)));
     dataEngine(QLatin1String("potd"))->connectSource(QLatin1String("Providers"), this);
+    setUsingRenderingCache(false);
 }
 
 void PoTD::init(const KConfigGroup &config)
