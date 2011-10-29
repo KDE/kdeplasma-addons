@@ -22,9 +22,24 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QTimer>
+#include <QtCore/QThreadPool>
 #include <QtGui/QImage>
 
+#include <KDebug>
+
 #include <kstandarddirs.h>
+
+LoadImageThread::LoadImageThread(const QString &filePath)
+{
+    m_filePath = filePath;
+}
+
+void LoadImageThread::run()
+{
+    QImage image;
+    image.load(m_filePath, "PNG");
+    emit done(image);
+}
 
 QString CachedProvider::identifierToPath( const QString &identifier )
 {
@@ -36,7 +51,9 @@ QString CachedProvider::identifierToPath( const QString &identifier )
 CachedProvider::CachedProvider( const QString &identifier, QObject *parent )
     : PotdProvider( parent ), mIdentifier( identifier )
 {
-    QTimer::singleShot( 0, this, SLOT(triggerFinished()) );
+    LoadImageThread *thread = new LoadImageThread( identifierToPath( mIdentifier ) );
+    connect(thread, SIGNAL(done(const QImage&)), this, SLOT(triggerFinished(const QImage&)));
+    QThreadPool::globalInstance()->start(thread);
 }
 
 CachedProvider::~CachedProvider()
@@ -45,13 +62,7 @@ CachedProvider::~CachedProvider()
 
 QImage CachedProvider::image() const
 {
-    if ( !QFile::exists( identifierToPath( mIdentifier ) ) )
-        return QImage();
-
-    QImage img;
-    img.load( identifierToPath( mIdentifier ), "PNG" );
-
-    return img;
+    return mImage;
 }
 
 QString CachedProvider::identifier() const
@@ -59,19 +70,20 @@ QString CachedProvider::identifier() const
     return mIdentifier;
 }
 
-void CachedProvider::triggerFinished()
+void CachedProvider::triggerFinished(const QImage &image)
 {
+    mImage = image;
     emit finished( this );
 }
 
-bool CachedProvider::isCached( const QString &identifier )
+bool CachedProvider::isCached( const QString &identifier, bool ignoreAge )
 {
     const QString path = identifierToPath( identifier );
     if (!QFile::exists( path ) ) {
         return false;
     }
 
-    if (!identifier.contains( ':' ) ) {
+    if (!ignoreAge && !identifier.contains( ':' ) ) {
         // no date in the identifier, so it's a daily; check to see ifthe modification time is today
         QFileInfo info( path );
         if ( info.lastModified().daysTo( QDateTime::currentDateTime() ) > 1 ) {

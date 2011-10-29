@@ -20,6 +20,9 @@
 #ifndef CACHEDPROVIDER_H
 #define CACHEDPROVIDER_H
 
+#include <QImage>
+#include <QRunnable>
+
 #include "potdprovider.h"
 
 /**
@@ -59,7 +62,7 @@ class CachedProvider : public PotdProvider
         /**
          * Returns whether a picture with the given @p identifier is cached.
          */
-        static bool isCached( const QString &identifier );
+        static bool isCached( const QString &identifier, bool ignoreAge = false );
 
         /**
          * Stores the given @p potd with the given @p identifier in the cache.
@@ -72,10 +75,26 @@ class CachedProvider : public PotdProvider
         static QString identifierToPath( const QString &identifier );
 
     private Q_SLOTS:
-        void triggerFinished();
+        void triggerFinished(const QImage &image);
 
     private:
         QString mIdentifier;
+        QImage mImage;
+};
+
+class LoadImageThread : public QObject, public QRunnable
+{
+    Q_OBJECT
+
+public:
+    LoadImageThread(const QString &filePath);
+    void run();
+
+Q_SIGNALS:
+    void done(const QImage &pixmap);
+
+private:
+    QString m_filePath;
 };
 
 #endif
