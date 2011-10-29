@@ -65,11 +65,6 @@ class CachedProvider : public PotdProvider
         static bool isCached( const QString &identifier, bool ignoreAge = false );
 
         /**
-         * Stores the given @p potd with the given @p identifier in the cache.
-         */
-        static bool storeInCache( const QString &identifier, const QImage &potd );
-
-        /**
          * Returns a path for the given identifier
          */
         static QString identifierToPath( const QString &identifier );
@@ -95,6 +90,22 @@ Q_SIGNALS:
 
 private:
     QString m_filePath;
+};
+
+class SaveImageThread : public QObject, public QRunnable
+{
+    Q_OBJECT
+
+public:
+    SaveImageThread(const QString &identifier, const QImage &image);
+    void run();
+
+Q_SIGNALS:
+    void done( const QString &source, const QString &path, const QImage &img );
+
+private:
+    QImage m_image;
+    QString m_identifier;
 };
 
 #endif

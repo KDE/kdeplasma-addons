@@ -30,15 +30,28 @@
 #include <kstandarddirs.h>
 
 LoadImageThread::LoadImageThread(const QString &filePath)
+    : m_filePath(filePath)
 {
-    m_filePath = filePath;
 }
 
 void LoadImageThread::run()
 {
     QImage image;
-    image.load(m_filePath, "PNG");
+    image.load(m_filePath );
     emit done(image);
+}
+
+SaveImageThread::SaveImageThread(const QString &identifier, const QImage &image)
+    : m_image(image),
+      m_identifier(identifier)
+{
+}
+
+void SaveImageThread::run()
+{
+    const QString path = CachedProvider::identifierToPath( m_identifier );
+    m_image.save( path );
+    emit done( m_identifier, path, m_image );
 }
 
 QString CachedProvider::identifierToPath( const QString &identifier )
@@ -52,7 +65,7 @@ CachedProvider::CachedProvider( const QString &identifier, QObject *parent )
     : PotdProvider( parent ), mIdentifier( identifier )
 {
     LoadImageThread *thread = new LoadImageThread( identifierToPath( mIdentifier ) );
-    connect(thread, SIGNAL(done(const QImage&)), this, SLOT(triggerFinished(const QImage&)));
+    connect(thread, SIGNAL(done(QImage)), this, SLOT(triggerFinished(QImage)));
     QThreadPool::globalInstance()->start(thread);
 }
 
@@ -92,11 +105,6 @@ bool CachedProvider::isCached( const QString &identifier, bool ignoreAge )
     }
 
     return true;
-}
-
-bool CachedProvider::storeInCache( const QString &identifier, const QImage &potd )
-{
-    return potd.save( identifierToPath( identifier ), "PNG" );
 }
 
 #include "cachedprovider.moc"
