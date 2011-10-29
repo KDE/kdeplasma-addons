@@ -78,7 +78,6 @@ private Q_SLOTS:
     void scalePictureAndUpdate();
     void imageScaled(const QImage &img);
     void reloadImage();
-    void checkDayChanged();
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
