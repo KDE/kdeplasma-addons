@@ -37,7 +37,7 @@ public:
     QWidget *createConfigurationInterface(QWidget* parent);
 
 public Q_SLOTS:
-    void walllpaperRendered(const QImage &image);
+    void wallpaperRendered(const QImage &image);
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 
 Q_SIGNALS:

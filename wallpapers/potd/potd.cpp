@@ -28,7 +28,7 @@ static const QString DEFAULT_PROVIDER("apod");
 PoTD::PoTD(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args)
 {
-    connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(walllpaperRendered(QImage)));
+    connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(wallpaperRendered(QImage)));
     dataEngine(QLatin1String("potd"))->connectSource(QLatin1String("Providers"), this);
 }
 
@@ -49,7 +49,7 @@ void PoTD::init(const KConfigGroup &config)
     }
 }
 
-void PoTD::walllpaperRendered(const QImage &image)
+void PoTD::wallpaperRendered(const QImage &image)
 {
     m_image = image;
     emit update(boundingRect());
