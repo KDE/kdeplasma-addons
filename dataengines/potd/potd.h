@@ -56,6 +56,8 @@ class PotdEngine : public Plasma::DataEngine
         void checkDayChanged();
 
     private:
+        bool updateSource( const QString &identifier, bool loadCachedAlways );
+
         QMap<QString, KService::Ptr> mFactories;
         QTimer *m_checkDatesTimer;
 };

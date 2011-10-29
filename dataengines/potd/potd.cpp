@@ -52,21 +52,29 @@ void PotdEngine::init()
     Q_FOREACH ( const KService::Ptr &service, services ) {
         QString provider = service->property(QLatin1String( "X-KDE-PlasmaPoTDProvider-Identifier" ), QVariant::String).toString();
         mFactories.insert(provider, service);
-        setData(QLatin1String( "Providers" ), service->name(), provider);
+        setData( QLatin1String( "Providers" ), provider, service->name() );
     }
 }
 
 bool PotdEngine::updateSourceEvent( const QString &identifier )
 {
+    return updateSource( identifier, false );
+}
+
+bool PotdEngine::updateSource( const QString &identifier, bool loadCachedAlways )
+{
     // check whether it is cached already...
-    if ( CachedProvider::isCached( identifier ) ) {
+    if ( CachedProvider::isCached( identifier, loadCachedAlways ) ) {
         QVariantList args;
         args << QLatin1String( "String" ) << identifier;
 
         CachedProvider *provider = new CachedProvider( identifier, this );
         connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
         connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
-        return true;
+
+        if (!loadCachedAlways) {
+            return true;
+        }
     }
 
     const QStringList parts = identifier.split( QLatin1Char( ':' ), QString::SkipEmptyParts );
@@ -100,7 +108,7 @@ bool PotdEngine::updateSourceEvent( const QString &identifier )
 
 bool PotdEngine::sourceRequestEvent( const QString &identifier )
 {
-    if ( updateSourceEvent( identifier ) ) {
+    if ( updateSource( identifier, true ) ) {
         setData( identifier, "Image", QImage() );
         return true;
     }
@@ -110,12 +118,13 @@ bool PotdEngine::sourceRequestEvent( const QString &identifier )
 
 void PotdEngine::finished( PotdProvider *provider )
 {
-    setData( provider->identifier(), "Image", provider->image() );
+    QImage img(provider->image());
+    setData( provider->identifier(), "Image", img );
     setData( provider->identifier(), "Url", CachedProvider::identifierToPath( provider->identifier()) );
 
     // store in cache if it's not the response of a CachedProvider
-    if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !provider->image().isNull() ) {
-        CachedProvider::storeInCache( provider->identifier(), provider->image() );
+    if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !img.isNull() ) {
+        CachedProvider::storeInCache( provider->identifier(), img );
     }
 
     provider->deleteLater();
