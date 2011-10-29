@@ -54,12 +54,14 @@ class PotdEngine : public Plasma::DataEngine
         void finished( PotdProvider* );
         void error( PotdProvider* );
         void checkDayChanged();
+        void cachingFinished( const QString &source, const QString &path, const QImage &img );
 
     private:
         bool updateSource( const QString &identifier, bool loadCachedAlways );
 
         QMap<QString, KService::Ptr> mFactories;
         QTimer *m_checkDatesTimer;
+        bool m_canDiscardCache;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(potd, PotdEngine)

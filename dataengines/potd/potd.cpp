@@ -23,8 +23,12 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QTimer>
+#include <QtCore/QThreadPool>
+
 #include <KDebug>
 #include <KServiceTypeTrader>
+
+#include <Plasma/DataContainer>
 
 #include "cachedprovider.h"
 #include "kstandarddirs.h"
@@ -72,6 +76,7 @@ bool PotdEngine::updateSource( const QString &identifier, bool loadCachedAlways 
         connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
         connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
 
+        m_canDiscardCache = loadCachedAlways;
         if (!loadCachedAlways) {
             return true;
         }
@@ -118,16 +123,32 @@ bool PotdEngine::sourceRequestEvent( const QString &identifier )
 
 void PotdEngine::finished( PotdProvider *provider )
 {
-    QImage img(provider->image());
-    setData( provider->identifier(), "Image", img );
-    setData( provider->identifier(), "Url", CachedProvider::identifierToPath( provider->identifier()) );
+    if ( m_canDiscardCache && qobject_cast<CachedProvider *>( provider ) ) {
+        Plasma::DataContainer *source = containerForSource( provider->identifier() );
+        if ( source && !source->data().value( "Image" ).value<QImage>().isNull() ) {
+            provider->deleteLater();
+            return;
+        }
+    }
 
+    QImage img(provider->image());
     // store in cache if it's not the response of a CachedProvider
-    if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !img.isNull() ) {
-        CachedProvider::storeInCache( provider->identifier(), img );
+    if ( qobject_cast<CachedProvider*>( provider ) == 0 && !img.isNull() ) {
+        SaveImageThread *thread = new SaveImageThread( provider->identifier(), img );
+        connect(thread, SIGNAL(done(QString,QString,QImage)), this, SLOT(cachingFinished(QString,QString,QImage)));
+        QThreadPool::globalInstance()->start(thread);
+    } else {
+        setData( provider->identifier(), "Image", img );
+        setData( provider->identifier(), "Url", CachedProvider::identifierToPath( provider->identifier()) );
     }
 
     provider->deleteLater();
+}
+
+void PotdEngine::cachingFinished( const QString &source, const QString &path, const QImage &img )
+{
+    setData( source, "Image", img );
+    setData( source, "Url", path );
 }
 
 void PotdEngine::error( PotdProvider *provider )
