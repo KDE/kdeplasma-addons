@@ -65,7 +65,7 @@ void PoTD::dataUpdated(const QString &source, const Plasma::DataEngine::Data &da
             dataEngine(QLatin1String("potd"))->connectSource(m_provider, this);
         }
     } else if (source == m_provider) {
-        if (!data.value(QLatin1String("Url")).isValid()) {
+        if (data.value(QLatin1String("Url")).isValid()) {
             render(data[QLatin1String("Url")].toString(), boundingRect().size().toSize());
         }
     } else {
