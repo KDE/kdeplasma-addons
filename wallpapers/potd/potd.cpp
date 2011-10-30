@@ -61,15 +61,14 @@ void PoTD::dataUpdated(const QString &source, const Plasma::DataEngine::Data &da
     if (source == QLatin1String("Providers")) {
         m_providers = data;
         if (!m_provider.isEmpty() && !m_providers.contains(m_provider)) {
-            dataEngine(QLatin1String("potd"))->disconnectSource(m_provider, this);
+            Plasma::DataEngine *engine = dataEngine(QLatin1String("potd"));
+            engine->disconnectSource(m_provider, this);
             m_provider = DEFAULT_PROVIDER;
-            dataEngine(QLatin1String("potd"))->connectSource(m_provider, this);
+            engine->connectSource(m_provider, this);
         }
     } else if (source == m_provider) {
-        const QString url = data.value(QLatin1String("Url")).toString();
-        if (!url.isEmpty()) {
-            render(url, boundingRect().size().toSize());
-        }
+        QImage image = data["Image"].value<QImage>();
+        render(image, boundingRect().size().toSize());
     } else {
         dataEngine(QLatin1String("potd"))->disconnectSource(source, this);
     }
@@ -85,6 +84,12 @@ void PoTD::paint(QPainter *painter, const QRectF& exposedRect)
         painter->setPen(Qt::white);
         painter->drawText(textRect.topLeft(), text);
     } else {
+        if (m_image.size() != boundingRect().size().toSize()) {
+            Plasma::DataEngine *engine = dataEngine(QLatin1String("potd"));
+            // refresh the data which will trigger a re-render
+            engine->disconnectSource(m_provider, this);
+            engine->connectSource(m_provider, this);
+        }
         painter->drawImage(exposedRect, m_image, exposedRect);
     }
 }
