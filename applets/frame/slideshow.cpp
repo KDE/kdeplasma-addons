@@ -36,6 +36,7 @@ SlideShow::SlideShow(QObject *parent)
     m_useRandom = false;
 
     m_picture = new Picture(this);
+    m_picture->setAllowNullImages(true);
     connect(m_picture, SIGNAL(pictureLoaded(QImage)), this, SLOT(pictureLoaded(QImage)));
     connect(this, SIGNAL(emptyDirMessage()), m_picture, SLOT(customizeEmptyMessage()));
 
@@ -57,18 +58,12 @@ void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
     QDateTime setDirStart = QDateTime::currentDateTime();
 
     m_image = QImage();
+    m_indexList.clear();
     m_picturePaths.clear();
+
     foreach(const QString &path, slideShowPath) {
         addDir(KUrl(path).path(), recursive);
     }
-
-    KRandomSequence randomSequence;
-    m_indexList.clear();
-
-    for (int j = 0; j < m_picturePaths.count(); j++) {
-        m_indexList.append(j);
-    }
-    randomSequence.randomize(m_indexList);
 
     // select 1st picture
     firstPicture();
@@ -77,6 +72,18 @@ void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
     if( m_picturePaths.isEmpty()) {
         emit emptyDirMessage();
     }
+}
+
+void SlideShow::setupRandomSequence()
+{
+    KRandomSequence randomSequence;
+    m_indexList.clear();
+
+    for (int j = 0; j < m_picturePaths.count(); j++) {
+        m_indexList.append(j);
+    }
+
+    randomSequence.randomize(m_indexList);
 }
 
 void SlideShow::setImage(const QString &imagePath)
@@ -118,31 +125,35 @@ QImage SlideShow::image() const
     return m_image;
 }
 
-void SlideShow::updateImage(QString newUrl)
+void SlideShow::updateImage(const QString &newUrl)
 {
     m_picture->setPicture(newUrl);
 }
 
 KUrl SlideShow::url(int offset)
 {
-    if (!m_picturePaths.isEmpty()) {
-
-        m_slideNumber += offset;
-
-        if (m_slideNumber <= -1) {
-            m_slideNumber = m_picturePaths.count() - 1;
-
-        } else if (m_slideNumber >= m_picturePaths.count()) {
-            m_slideNumber = 0;
-        }
-
-        if (m_useRandom) {
-            return KUrl(m_picturePaths.at(m_indexList.at(m_slideNumber)));
-        } else {
-            return KUrl(m_picturePaths.at(m_slideNumber));
-        }
+    if (m_picturePaths.isEmpty()) {
+        return KUrl();
     }
-    return KUrl();
+
+    m_slideNumber += offset;
+
+    const int count = m_picturePaths.count();
+    if (m_slideNumber < 0) {
+        m_slideNumber = (count - ((-m_slideNumber) % count)) % count;
+    } else if (m_slideNumber >= count) {
+        m_slideNumber = m_slideNumber % count;
+    }
+
+    if (m_useRandom) {
+        if (m_indexList.isEmpty()) {
+            setupRandomSequence();
+        }
+
+        return KUrl(m_picturePaths.at(m_indexList.at(m_slideNumber)));
+    }
+
+    return KUrl(m_picturePaths.at(m_slideNumber));
 }
 
 void SlideShow::firstPicture()
@@ -188,8 +199,17 @@ QString SlideShow::message() const
     return m_picture->message();
 }
 
-void SlideShow::pictureLoaded(QImage image)
+void SlideShow::pictureLoaded(const QImage &image)
 {
+    if (image.isNull()) {
+        // something is not right with this image file .. remove it from our lists.
+        m_picturePaths.removeAt(m_slideNumber);
+        m_indexList.clear();
+        m_currentUrl = url(0);
+        m_picture->setPicture(m_currentUrl);
+        return;
+    }
+
     m_image = image;
     emit pictureUpdated();
 }
@@ -201,6 +221,7 @@ void SlideShow::clearPicture()
 
 void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
+    Q_UNUSED(name);
     if (data.isEmpty()) {
         m_image = QImage();
         m_picture->setMessage(i18n("No Picture from this Provider."));

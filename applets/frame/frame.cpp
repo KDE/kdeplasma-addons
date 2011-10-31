@@ -489,7 +489,7 @@ QRect Frame::preparePainter(QPainter *p, const QRect &rect, const QFont &font, c
         tmpRect = fm.boundingRect(rect, flags, text);
     } while (tmpFont.pointSize() > KGlobalSettings::smallestReadableFont().pointSize() &&
              (tmpRect.width() > rect.width() || tmpRect.height() > rect.height()));
-    
+
     p->setFont(tmpFont);
     return tmpRect;
 }
