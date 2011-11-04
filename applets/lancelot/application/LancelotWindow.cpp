@@ -1076,17 +1076,17 @@ void LancelotWindow::lancelotContext()
 
         connect(
                 menuLancelotContext->addAction(KIcon("configure-shortcuts"),
-                    i18n("Configure &Shortcuts...")), SIGNAL(triggered(bool)),
+                    i18n("Configure Shortcuts...")), SIGNAL(triggered(bool)),
                 this, SLOT(configureShortcuts()));
 
         connect(
                 menuLancelotContext->addAction(KIcon("configure"),
-                    i18n("Configure &Lancelot menu...")), SIGNAL(triggered(bool)),
+                    i18n("Configure Lancelot menu...")), SIGNAL(triggered(bool)),
                 this, SLOT(configureMenu()));
 
         connect(
                 menuLancelotContext->addAction(KIcon("lancelot"),
-                    i18n("&About Lancelot")), SIGNAL(triggered(bool)),
+                    i18n("About Lancelot")), SIGNAL(triggered(bool)),
                 this, SLOT(showAboutDialog()));
     }
 
