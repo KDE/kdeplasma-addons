@@ -1070,7 +1070,7 @@ void LancelotWindow::lancelotContext()
         menuLancelotContext = new Lancelot::PopupMenu();
 
         connect(
-                menuLancelotContext->addAction(KIcon(),
+                menuLancelotContext->addAction(KIcon("kmenuedit"),
                     i18n("Menu Editor")), SIGNAL(triggered(bool)),
                 this, SLOT(showMenuEditor()));
 
