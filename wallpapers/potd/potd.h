@@ -53,6 +53,7 @@ private:
     Ui::Configuration m_ui;
     Plasma::DataEngine::Data m_providers;
     QString m_provider;
+    QString m_configProvider;
     QImage m_image;
 };
 

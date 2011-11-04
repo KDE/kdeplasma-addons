@@ -98,6 +98,7 @@ QWidget* PoTD::createConfigurationInterface(QWidget* parent)
 {
     QWidget *widget = new QWidget(parent);
     m_ui.setupUi(widget);
+    m_configProvider.clear();
 
     Plasma::DataEngine::DataIterator it(m_providers);
     while (it.hasNext()) {
@@ -115,12 +116,17 @@ QWidget* PoTD::createConfigurationInterface(QWidget* parent)
 
 void PoTD::save(KConfigGroup &config)
 {
-    config.writeEntry("provider", m_provider);
+    if (m_configProvider.isEmpty()) {
+        config.writeEntry("provider", m_provider);
+    } else {
+        config.writeEntry("provider", m_configProvider);
+        m_configProvider.clear();
+    }
 }
 
 void PoTD::settingsModified()
 {
-    m_provider = m_ui.providers->itemData(m_ui.providers->currentIndex()).toString();
+    m_configProvider = m_ui.providers->itemData(m_ui.providers->currentIndex()).toString();
     emit settingsChanged(true);
 }
 
