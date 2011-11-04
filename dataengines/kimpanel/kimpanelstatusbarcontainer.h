@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Wang Hoi <zealot.hoi@gmail.com>                 *
+ *   Copyright (C) 2011 by CSSlayer <wengxt@gmail.com>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,52 +17,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef KIM_AGENTTYPE_H
-#define KIM_AGENTTYPE_H
+#ifndef KIMPANEL_STATUSBAR_CONTAINER_H
+#define KIMPANEL_STATUSBAR_CONTAINER_H
 
+#include "kimpanel/kimpanelagenttype.h"
 
-typedef struct TextAttribute_ {
-    enum Type {
-        None,
-        Decorate,
-        Foreground,
-        Background
-    };
-    Type type;
-    int start;
-    int length;
-    int value;
-} TextAttribute;
-//Q_DECLARE_METATYPE(TextAttribute);
+#include <Plasma/DataContainer>
 
-typedef struct Property_ {
-    enum State {
-        None = 0,
-        Active = 1,
-        Visible = (1<<1)
-    };
-    Q_DECLARE_FLAGS(States,State)
+class PanelAgent;
+class KimpanelService;
+class KimpanelStatusBarContainer : public Plasma::DataContainer
+{
+    Q_OBJECT
+public:
+    KimpanelStatusBarContainer(QObject* parent, PanelAgent* panelAgent);
+    Plasma::Service* service(QObject* parent = 0);
 
-    QString key;
-    QString label;
-    QString icon;
-    QString tip;
-    States state;
-} Property;
-Q_DECLARE_OPERATORS_FOR_FLAGS(Property::States)
-//Q_DECLARE_METATYPE(Property);
+protected Q_SLOTS:
+    void updateProperty(const KimpanelProperty& property);
+    void registerProperties(const QList<KimpanelProperty> &props);
 
-typedef struct LookupTable_ {
-    typedef struct Entry_{
-        QString label;
-        QString text;
-        QList<TextAttribute> attr;
-    } Entry;
-    QList<Entry> entries;
-    bool has_prev;
-    bool has_next;
-} LookupTable;
-//Q_DECLARE_METATYPE(LookupTable);
-//Q_DECLARE_METATYPE(LookupTable::Entry);
+    void execDialog(const KimpanelProperty &prop);
+    void execMenu(const QList<KimpanelProperty> &prop_list);
+private:
+    PanelAgent* m_panelAgent;
+    QList< KimpanelProperty > m_props;
+};
 
-#endif // KIM_AGENTTYPE_H
+#endif

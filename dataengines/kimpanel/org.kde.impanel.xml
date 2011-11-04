@@ -15,5 +15,6 @@
                 <signal name="PanelCreated"> </signal> 
                 <signal name="Exit"> </signal> 
                 <signal name="ReloadConfig"> </signal> 
+                <signal name="Configure"> </signal> 
         </interface> 
 </node>

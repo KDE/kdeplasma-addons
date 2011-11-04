@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Wang Hoi <zealot.hoi@gmail.com>                 *
+ *   Copyright (C) 2011 by CSSlayer <wengxt@gmail.com>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,26 +17,35 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <kapplication.h>
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
-#include <kdebug.h>
-#include "paneldialog.h"
+#include "kimpanelservice.h"
+#include "kimpaneljob.h"
+#include "kimpaneldataengine.h"
 
-int main(int argc, char *argv[])
+KimpanelService::KimpanelService(QObject* parent, const QString& name, PanelAgent* panelAgent):
+    Service(parent), m_panelAgent(panelAgent)
 {
-    KAboutData about_data("kimpanel","plasma_applet_kimpanel",
-                          ki18n("Input Method Panel"),
-                          "0.1.0",
-                          ki18n("Generic input method panel"),
-                          KAboutData::License_LGPL_V3,
-                          ki18n("Copyright (C) 2009, Wang Hoi")
-                          );
-    KCmdLineArgs::init(argc,argv,&about_data);
+    setName("kimpanel");
+    setObjectName(name);
+    setDestination(name);
+    enableKimpanelOperations();
+}
 
-    KApplication app;
+void KimpanelService::enableKimpanelOperations()
+{
+    if (destination() == INPUTPANEL_SOURCE_NAME) {
+        setOperationEnabled("LookupTablePageUp", true);
+        setOperationEnabled("LookupTablePageDown", true);
+        setOperationEnabled("MovePreeditCaret", true);
+        setOperationEnabled("SelectCandidate", true);
+    } else if (destination() == STATUSBAR_SOURCE_NAME) {
+        setOperationEnabled("TriggerProperty", true);
+        setOperationEnabled("Exit", true);
+        setOperationEnabled("ReloadConfig", true);
+        setOperationEnabled("Configure", true);
+    }
+}
 
-    KIMPanel panel;
-
-    return app.exec();
+Plasma::ServiceJob* KimpanelService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
+{
+    return new KimpanelJob(m_panelAgent, destination(), operation, parameters, this);
 }

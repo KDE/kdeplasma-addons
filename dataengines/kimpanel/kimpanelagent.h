@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2009 by Wang Hoi <zealot.hoi@gmail.com>                 *
+ *   Copyright (C) 2011 by CSSlayer <wengxt@gmail.com>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -16,18 +17,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-#ifndef PANELAGENT_H
-#define PANELAGENT_H
+#ifndef KIMPANEL_AGENT_H
+#define KIMPANEL_AGENT_H
 
-#include "kimpanelruntime_export.h"
-#include <QtCore/QObject>
+#include "kimpanel/kimpanelagenttype.h"
+
+// Qt
+#include <QObject>
 #include <QStringList>
-template<class T> class QList;
-template<class Key, class Value> class QMap;
 
-#include "kimagenttype.h"
+class ImpanelAdaptor;
 
-class KIMPANELRUNTIME_EXPORT PanelAgent: public QObject
+class PanelAgent: public QObject
 {
     Q_OBJECT
 
@@ -35,6 +36,7 @@ public:
     PanelAgent(QObject *parent);
     virtual ~PanelAgent();
 
+    void configure();
     void created();
     void exit();
     void reloadConfig();
@@ -42,22 +44,25 @@ public:
     void lookupTablePageUp();
     void lookupTablePageDown();
     void movePreeditCaret(int pos);
+    void triggerProperty(const QString& key);
 
 public: // PROPERTIES
 public Q_SLOTS: // METHODS
     void UpdateLookupTable(const QStringList &labels,
-        const QStringList &candis,
-        const QStringList &attrlists,
-        bool has_prev,bool has_next);
-    void UpdatePreeditText(const QString &text,const QString &attr);
-    void UpdateAux(const QString &text,const QString &attr);
+                           const QStringList &candis,
+                           const QStringList &attrlists,
+                           bool has_prev, bool has_next);
+    void UpdatePreeditText(const QString &text, const QString &attr);
+    void UpdateAux(const QString &text, const QString &attr);
     void UpdateScreen(int screen_id);
     void UpdateProperty(const QString &prop);
     void RegisterProperties(const QStringList &props);
     void ExecDialog(const QString &prop);
     void ExecMenu(const QStringList &entries);
 
-Q_SIGNALS: // SIGNALS
+Q_SIGNALS:
+    // signals that from kimpanel
+    void Configure();
     void MovePreeditCaret(int position);
     void SelectCandidate(int index);
     void LookupTablePageUp();
@@ -67,21 +72,20 @@ Q_SIGNALS: // SIGNALS
     void Exit();
     void ReloadConfig();
 
-
     // signals to inform kimpanel
     void enable(bool to_enable);
 
     void updatePreeditCaret(int pos);
-    void updatePreeditText(const QString &text,const QList<TextAttribute> &attr);
-    void updateAux(const QString &text,const QList<TextAttribute> &attr);
-    void updateProperty(const Property &prop);
-    void updateLookupTable(const LookupTable &lookup_table);
-    void updateSpotLocation(int x,int y);
-    
-    void registerProperties(const QList<Property> &props);
-    
-    void execDialog(const Property &prop);
-    void execMenu(const QList<Property> &prop_list);
+    void updatePreeditText(const QString &text, const QList<TextAttribute> &attr);
+    void updateAux(const QString &text, const QList<TextAttribute> &attr);
+    void updateProperty(const KimpanelProperty &prop);
+    void updateLookupTable(const KimpanelLookupTable &lookup_table);
+    void updateSpotLocation(int x, int y);
+
+    void registerProperties(const QList<KimpanelProperty> &props);
+
+    void execDialog(const KimpanelProperty &prop);
+    void execMenu(const QList<KimpanelProperty> &prop_list);
 
     void showPreedit(bool to_show);
     void showAux(bool to_show);
@@ -94,6 +98,8 @@ private:
     int m_spot_x;
     int m_spot_y;
     QStringList cached_props;
+    ImpanelAdaptor* adaptor;
 };
 
-#endif // PANEL_H
+#endif // KIMPANEL_AGENT_H
+

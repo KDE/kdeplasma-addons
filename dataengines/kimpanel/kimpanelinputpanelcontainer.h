@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Wang Hoi <zealot.hoi@gmail.com>                 *
+ *   Copyright (C) 2011 by CSSlayer <wengxt@gmail.com>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -16,45 +16,35 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-#ifndef KIMPANELLAYOUT_H
-#define KIMPANELLAYOUT_H
 
-#include <plasma/applet.h>
-#include <plasma/widgets/iconwidget.h>
-#include <QGraphicsLinearLayout>
-#include <QGraphicsGridLayout>
-#include <QGraphicsLayoutItem>
-#include <QList>
+#ifndef KIMPANEL_INPUTPANEL_CONTAINER_H
+#define KIMPANEL_INPUTPANEL_CONTAINER_H
 
-class KIMPanelLayout : public QGraphicsLayout
+#include "kimpanel/kimpanelagenttype.h"
+
+#include <Plasma/DataContainer>
+
+class PanelAgent;
+class KimpanelService;
+class KimpanelInputPanelContainer : public Plasma::DataContainer
 {
+    Q_OBJECT
+
 public:
-    KIMPanelLayout(QGraphicsLayoutItem *parent);
-    void addItem(Plasma::IconWidget *icon);
-    void addItems(const QList<Plasma::IconWidget *> &icons);
-    void setItems(const QList<Plasma::IconWidget *> &icons);
+    KimpanelInputPanelContainer(QObject* parent, PanelAgent* panelAgent);
+    Plasma::Service* service(QObject* parent = 0);
 
-    Plasma::IconWidget* itemAt(int i) const;
-    void removeAt(int i);
-
-    QSizeF sizeHint(Qt::SizeHint which, const QSizeF & constraint = QSizeF()) const;
-
-    int count() const 
-    {
-        return m_icons.size();
-    }
-
-    void setGeometry(const QRectF &rect);
-//X     void updateGeometry();
-
+protected Q_SLOTS:
+    void updatePreeditText(const QString& text, const QList<TextAttribute>& attrList);
+    void updateAux(const QString& text, const QList<TextAttribute>& attrList);
+    void updatePreeditCaret(int pos);
+    void updateLookupTable(const KimpanelLookupTable& lookupTable);
+    void updateSpotLocation(int x, int y);
+    void showAux(bool visible);
+    void showPreedit(bool visible);
+    void showLookupTable(bool visible);
 private:
-    void smartLayout(const QRectF &rect);
-
-private:
-    QList<Plasma::IconWidget *> m_icons;
-
-    QRectF m_cachedGeometry;
-
+    PanelAgent* m_panelAgent;
 };
 
-#endif // KIMPANELLAYOUT_H
+#endif
