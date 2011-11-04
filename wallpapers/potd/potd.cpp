@@ -68,7 +68,7 @@ void PoTD::dataUpdated(const QString &source, const Plasma::DataEngine::Data &da
         }
     } else if (source == m_provider) {
         QImage image = data["Image"].value<QImage>();
-        render(image, boundingRect().size().toSize());
+        render(image, boundingRect().size().toSize(), MaxpectResize);
     } else {
         dataEngine(QLatin1String("potd"))->disconnectSource(source, this);
     }
