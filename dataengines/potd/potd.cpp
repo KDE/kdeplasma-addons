@@ -44,6 +44,7 @@ PotdEngine::PotdEngine( QObject* parent, const QVariantList& args )
     // time insensitive sources to serve; still, this is better than how i found it, checking
     // every 2 seconds (!)
     m_checkDatesTimer->setInterval( 10 * 60 * 1000 ); // check every 10 minutes
+    m_checkDatesTimer->start();
 }
 
 PotdEngine::~PotdEngine()
