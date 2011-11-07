@@ -508,7 +508,7 @@ static inline void drawSection(QPainter* p, const QColor& color, const QRectF& r
     }
 }
 
-void SystemLoadViewer::paintCPUUsage(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect& contentsRect, const cpuInfo &cpu)
+void SystemLoadViewer::paintCPUUsage(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect& contentsRect, const CpuInfo &cpu)
 {
     Q_UNUSED(option)
 
