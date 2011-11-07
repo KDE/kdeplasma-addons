@@ -38,9 +38,9 @@ class QPoint;
 
 struct cpuInfo
 {
-    double user, sys, nice, idle, disk, clock;
+    double user, sys, nice, disk, clock;
     bool clockValid;
-    cpuInfo(): user(0), sys(0), nice(0), idle(0), disk(0), clock(0), clockValid(false) {}
+    cpuInfo(): user(0), sys(0), nice(0), disk(0), clock(0), clockValid(false) {}
 };
 
 class SystemLoadViewer : public Plasma::Applet
@@ -92,6 +92,7 @@ private:
     bool verticalBars() const;
 
     QVector<cpuInfo> m_cpuInfo;
+    cpuInfo m_systemCpuInfo;
     uint m_numCPUs;
     double m_ramfree;
     double m_ramused;
