@@ -1,0 +1,106 @@
+KDE Plasma Tasks Applet
+=======================
+
+This is a desktop applet for KDE Plasma which provides a view
+of the user's running graphical tasks and allows them to
+switch between these tasks.
+
+It is intended as a replacement for the taskbar found in
+KDE 3.
+
+Goals
+=====
+
+This section describes the main goals of the tasks applet from the user's
+perspective:
+
+- Provide a clear, attractive visual depiction of the user's running graphical tasks
+- Allow the user to navigate between tasks quickly
+- Allow the user to group related tasks so that they can be operated on
+  as one*
+
+
+1.  Task representation
+
+    The information currently available from which a task representation can be
+    constructed:
+
+        - Window title
+        - A (typically small) pixmap
+        - The 'window class' of a window which can in some cases be used
+          to look up an appropriate icon for that application.
+        - Notifications about changes to a window's state (eg. raised,
+          lowered, wants attention)
+
+        This information is fairly limited.  In order to provide more interesting
+        and useful representations in future, additional information will be
+        required.
+
+            - A reliable source for a scalable icon for the task
+            - Information about the documents associated with a task
+            - Information about the people associated with a task
+
+2.  Navigation between tasks
+
+        The tasks applet should try to make it as easy as possible
+        for the user to perform a 'context switch' between the different
+        tasks they are performing.
+
+        On a basic level, this means that:
+
+            - The user must be able to identify the task from a small
+              representation
+            - Easily activate a task's representation which causes the
+              corresponding window to be raised and placed at the top
+              of the screen.
+
+              Note:  One of the flaws of KDE 3's Kicker is that task
+              representations are placed in a 2-task high grid
+              at one edge of the screen.  This means that only half
+              of the task representations touch the screen edge and as a result
+              only half of them benefit from the 'infinite size' of a screen
+              edge with respect to activating it with the mouse.
+
+              In the KDE 3.5.x series there is a bug in Kicker where the
+              colour of the text for a minimized task is grey, against what
+              is usually a grey/silverish panel background.  This makes the
+              text difficult to read.
+
+        Navigation between tasks usually occurs for two reasons:
+
+        A)  The user decides to switch to a different task of their own
+            volition.
+
+        Example:  Greg has been writing a business letter to a client,
+                  he decides he wishes to take a break for twenty minutes
+                  during which he intends to listen to music and read
+                  the latest news online.
+
+                  He therefore wishes to switch away from the word document
+                  and email related to that letter to his music player and
+                  feed reader.
+
+        B)  An external interruption
+
+        Example:  Paul is watching the latest episode of a TV drama online when
+                  he is alerted by his messaging client that a friend he wants
+                  to talk to has come online.  Paul then wishes to switch
+                  away from the TV episode he is watching and start a conversation
+                  with his friend.
+
+3.  Grouping
+
+        This is intended to be the main area of innovation in the KDE Plasma
+        'taskbar' versus that found in KDE 3, Gnome, Windows, and Mac OS X.
+
+        Some of these windows are likely to be related to the same logical
+        activity from the user's point of view.  For example, a paper which
+        the user is writing and the various research material used to
+        write that paper.
+
+        The idea is to allow the user to easily group these related tasks
+        so that he can treat them as one.  That is, bringing all of them
+        to the front, closing all of them or layout out the windows within
+        a group so that they are all visible on screen at the same time
+        and can be worked with together.
+
