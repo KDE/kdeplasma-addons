@@ -35,6 +35,7 @@
 #include <kglobalsettings.h>
 
 #include <plasma/framesvg.h>
+#include <plasma/svg.h>
 #include <plasma/windoweffects.h>
 #include <plasma/paintutils.h>
 
@@ -58,7 +59,14 @@ WindowPreview::WindowPreview(QWidget *parent)
     m_background->setImagePath("widgets/tasks");
     m_background->setElementPrefix("normal");
     setMouseTracking(true);
-    m_closePixmap = KIcon("window-close").pixmap(ToolTipContent::iconSize(), ToolTipContent::iconSize());
+    const QString svgPath("widgets/configuration-icons");
+    if (Plasma::Theme::defaultTheme()->imagePath(svgPath).isEmpty()) {
+        m_closePixmap = KIcon("window-close").pixmap(ToolTipContent::iconSize(), ToolTipContent::iconSize());
+    } else {
+        Plasma::Svg svg(this);
+        svg.setImagePath(svgPath);
+        m_closePixmap = svg.pixmap(QLatin1String("close")).scaled(ToolTipContent::iconSize(), ToolTipContent::iconSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    }
     KIconEffect *effect = KIconLoader::global()->iconEffect();
     if (effect->hasEffect(KIconLoader::Desktop, KIconLoader::ActiveState)) {
         m_hoverClosePixmap = effect->apply(m_closePixmap, KIconLoader::Desktop, KIconLoader::ActiveState);
