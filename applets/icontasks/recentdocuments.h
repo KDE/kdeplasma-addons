@@ -36,6 +36,18 @@ class RecentDocuments : public QObject
 {
     Q_OBJECT
 
+    struct File {
+        enum Type {
+            Xbel,
+            Office
+        };
+
+        File(Type t, const QString &p) : type(t), path(p), dirty(true) { }
+        Type type;
+        QString path;
+        bool dirty;
+    };
+
 public:
     static RecentDocuments * self();
 
@@ -61,21 +73,9 @@ private:
     void load();
     void loadXbel(const QString &path, qulonglong now);
     void loadOffice(const QString &path, qulonglong now);
-    void removeOld(qulonglong now);
+    void removeOld(qulonglong now, File::Type type);
 
 private:
-
-    struct File {
-        enum Type {
-            Xbel,
-            Office
-        };
-
-        File(Type t, const QString &p) : type(t), path(p), dirty(true) { }
-        Type type;
-        QString path;
-        bool dirty;
-    };
 
     struct App {
         App(const QString &n = QString(), const QString &e = QString()) : name(n), exec(e) { }

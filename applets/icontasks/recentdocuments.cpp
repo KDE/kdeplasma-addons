@@ -391,6 +391,7 @@ void RecentDocuments::loadXbel(const QString &path, qulonglong now)
                                                     act->setProperty("timestamp", now);
                                                     act->setProperty("url", url.url());
                                                     act->setProperty("exec", exec);
+                                                    act->setProperty("type", (int)File::Xbel);
                                                     connect(act, SIGNAL(triggered()), SLOT(loadDoc()));
                                                     m_docs[app].append(act);
                                                 }
@@ -407,7 +408,7 @@ void RecentDocuments::loadXbel(const QString &path, qulonglong now)
         }
     }
 
-    removeOld(now);
+    removeOld(now, File::Xbel);
 }
 
 void RecentDocuments::loadOffice(const QString &path, qulonglong now)
@@ -495,6 +496,7 @@ void RecentDocuments::loadOffice(const QString &path, qulonglong now)
                                             act->setProperty("timestamp", now);
                                             act->setProperty("url", url.url());
                                             act->setProperty("exec", exec);
+                                            act->setProperty("type", (int)File::Office);
                                             connect(act, SIGNAL(triggered()), SLOT(loadDoc()));
                                             m_docs[app].append(act);
                                         }
@@ -509,10 +511,10 @@ void RecentDocuments::loadOffice(const QString &path, qulonglong now)
         }
     }
 
-    removeOld(now);
+    removeOld(now, File::Office);
 }
 
-void RecentDocuments::removeOld(qulonglong now)
+void RecentDocuments::removeOld(qulonglong now, File::Type type)
 {
     QMap<QString, QList<QAction *> >::Iterator it(m_docs.begin()),
          end(m_docs.end());
@@ -521,10 +523,11 @@ void RecentDocuments::removeOld(qulonglong now)
 
         foreach (QAction * act, (*it)) {
             qulonglong t = act->property("timestamp").toULongLong();
-            if (t > 0 && t < now) {
+            if (type==act->property("type").toInt() && t > 0 && t < now) {
                 old.append(act);
             }
         }
+
         foreach (QAction * act, old) {
             act->deleteLater();
             (*it).removeAll(act);
