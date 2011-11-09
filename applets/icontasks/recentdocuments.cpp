@@ -154,6 +154,11 @@ QList<QAction *> RecentDocuments::get(const QString &app)
                     m_menu = new TaskManager::ToolTipMenu(0, i18n("Recent Documents"));
                 }
 
+                QList<QAction *> old=m_menu->actions();
+                foreach (QAction * act, old) {
+                    m_menu->removeAction(act);
+                }
+
                 foreach (QAction * act, m_docs[app]) {
                     m_menu->addAction(act);
                 }
