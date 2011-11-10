@@ -395,7 +395,7 @@ QList<QDBusObjectPath> DockManager::GetItemsByPid(int pid)
         if (TaskManager::TaskItemType == it.key()->abstractItem()->itemType()) {
             WindowTaskItem *item = static_cast<WindowTaskItem *>(it.key());
 
-            if (item->windowTask() && item->windowTask() == pid) {
+            if (item->windowTask() && item->windowTask()->pid() == pid) {
                 if (m_items.contains(it.value())) {
                     items.append(QDBusObjectPath(m_items[it.value()]->path()));
                 }
