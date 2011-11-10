@@ -52,10 +52,16 @@ protected slots:
     void settingsModified();
     void saveWallpaperImage();
     void saveWallpaperTo(const KUrl &path);
+    void changeProvider();
+
+private:
+    void updateProvidersMenu();
 
 private:
     Ui::Configuration m_ui;
     Plasma::DataEngine::Data m_providers;
+    QMenu *m_providersMenu;
+    QAction *m_saveAction;
     QString m_provider;
     QString m_configProvider;
     QString m_imagePath;

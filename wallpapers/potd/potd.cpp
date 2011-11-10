@@ -20,6 +20,7 @@
 #include "potd.h"
 
 #include <QDir>
+#include <QMenu>
 #include <QPainter>
 
 #include <KDebug>
@@ -33,8 +34,19 @@ PoTD::PoTD(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(wallpaperRendered(QImage)));
-    dataEngine(QLatin1String("potd"))->connectSource(QLatin1String("Providers"), this);
     setUsingRenderingCache(false);
+
+    m_saveAction = new QAction(this);
+    m_saveAction->setText(i18n("Save wallpaper image..."));
+    m_saveAction->setIcon(KIcon("document-save-as"));
+    m_saveAction->setEnabled(false);
+    connect(m_saveAction, SIGNAL(triggered()), this, SLOT(saveWallpaperImage()));
+
+    m_providersMenu = new QMenu(i18n("Wallpaper source"));
+
+    setContextualActions(QList<QAction *>() << m_saveAction << m_providersMenu->menuAction());
+
+    dataEngine(QLatin1String("potd"))->connectSource(QLatin1String("Providers"), this);
 }
 
 void PoTD::init(const KConfigGroup &config)
@@ -51,15 +63,10 @@ void PoTD::init(const KConfigGroup &config)
 
         m_provider = provider;
         dataEngine(QLatin1String("potd"))->connectSource(m_provider, this);
+        updateProvidersMenu();
     }
 
-
     m_lastSaveDest = config.readEntry("saveDest", m_lastSaveDest);
-    QAction *action = new QAction(this);
-    action->setText(i18n("Save wallpaper image..."));
-    action->setIcon(KIcon("document-save-as"));
-    connect(action, SIGNAL(triggered()), this, SLOT(saveWallpaperImage()));
-    setContextualActions(QList<QAction *>() << action);
 }
 
 void PoTD::saveWallpaperImage()
@@ -96,18 +103,61 @@ void PoTD::dataUpdated(const QString &source, const Plasma::DataEngine::Data &da
 {
     if (source == QLatin1String("Providers")) {
         m_providers = data;
+
+        m_providersMenu->clear();
+        if (!m_providers.isEmpty()) {
+            Plasma::DataEngine::DataIterator it(m_providers);
+            while (it.hasNext()) {
+                it.next();
+                QAction *action = m_providersMenu->addAction(it.value().toString(), this, SLOT(changeProvider()));
+                action->setCheckable(true);
+                action->setData(it.key());
+            }
+        }
+
         if (!m_provider.isEmpty() && !m_providers.contains(m_provider)) {
             Plasma::DataEngine *engine = dataEngine(QLatin1String("potd"));
             engine->disconnectSource(m_provider, this);
             m_provider = DEFAULT_PROVIDER;
             engine->connectSource(m_provider, this);
+            updateProvidersMenu();
         }
     } else if (source == m_provider) {
         m_imagePath = data["Url"].value<QString>();
+        m_saveAction->setEnabled(!m_imagePath.isEmpty());
         QImage image = data["Image"].value<QImage>();
         render(image, boundingRect().size().toSize(), MaxpectResize);
     } else {
         dataEngine(QLatin1String("potd"))->disconnectSource(source, this);
+    }
+}
+
+void PoTD::changeProvider()
+{
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+        const QString provider = action->data().toString();
+        if (m_providers.isEmpty()) {
+            m_provider = provider;
+        } else if (m_providers.contains(provider)) {
+            Plasma::DataEngine *engine = dataEngine(QLatin1String("potd"));
+            engine->disconnectSource(m_provider, this);
+            m_provider = provider;
+            engine->connectSource(m_provider, this);
+        }
+
+        updateProvidersMenu();
+    }
+}
+
+void PoTD::updateProvidersMenu()
+{
+    foreach (QAction *action, m_providersMenu->actions()) {
+        if (action->data().toString() == m_provider) {
+            action->setChecked(true);
+        } else {
+            action->setChecked(false);
+        }
     }
 }
 
