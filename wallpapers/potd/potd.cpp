@@ -24,6 +24,7 @@
 
 #include <KDebug>
 #include <KFileDialog>
+#include <KIO/Job>
 #include <KWindowSystem>
 
 static const QString DEFAULT_PROVIDER("apod");
@@ -80,7 +81,7 @@ void PoTD::saveWallpaperImage()
 void PoTD::saveWallpaperTo(const KUrl &dest)
 {
     m_lastSaveDest = dest;
-    kDebug() << "saving to" << dest;
+    KIO::file_copy(m_imagePath, dest);
 }
 
 void PoTD::wallpaperRendered(const QImage &image)
@@ -100,6 +101,7 @@ void PoTD::dataUpdated(const QString &source, const Plasma::DataEngine::Data &da
             engine->connectSource(m_provider, this);
         }
     } else if (source == m_provider) {
+        m_imagePath = data["Url"].value<QString>();
         QImage image = data["Image"].value<QImage>();
         render(image, boundingRect().size().toSize(), MaxpectResize);
     } else {

@@ -58,6 +58,7 @@ private:
     Plasma::DataEngine::Data m_providers;
     QString m_provider;
     QString m_configProvider;
+    QString m_imagePath;
     KUrl m_lastSaveDest;
     QImage m_image;
     QWeakPointer<KFileDialog> m_saveDialog;
