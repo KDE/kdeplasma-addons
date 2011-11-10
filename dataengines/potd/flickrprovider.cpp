@@ -131,7 +131,7 @@ FlickrProvider::FlickrProvider( QObject *parent, const QVariantList &args )
     KUrl url(QLatin1String(
                 "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date="
                 ) + date().toString( Qt::ISODate ) );
-    KIO::StoredTransferJob *job = KIO::storedGet( url );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
 }
 
