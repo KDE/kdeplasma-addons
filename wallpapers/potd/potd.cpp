@@ -48,6 +48,17 @@ void PoTD::init(const KConfigGroup &config)
         m_provider = provider;
         dataEngine(QLatin1String("potd"))->connectSource(m_provider, this);
     }
+
+    QAction *action = new QAction(this);
+    action->setText(i18n("Save wallpaper image..."));
+    action->setIcon(KIcon("document-save-as"));
+    connect(action, SIGNAL(triggered()), this, SLOT(saveWallpaperImage()));
+    setContextualActions(QList<QAction *>() << action);
+}
+
+void PoTD::saveWallpaperImage() const
+{
+
 }
 
 void PoTD::wallpaperRendered(const QImage &image)

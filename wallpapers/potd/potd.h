@@ -48,6 +48,7 @@ protected:
 
 protected slots:
     void settingsModified();
+    void saveWallpaperImage() const;
 
 private:
     Ui::Configuration m_ui;
