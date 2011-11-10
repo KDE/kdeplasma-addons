@@ -350,8 +350,8 @@ void WindowTaskItem::gotTaskPointer()
 
 void WindowTaskItem::setWindowTask(TaskManager::TaskItem* taskItem)
 {
-    if (m_task) {
-        disconnect(m_task->task().constData(), 0, this, 0);
+    if (m_task && m_task->task()) {
+        disconnect(m_task->task(), 0, this, 0);
     }
     m_task = taskItem;
     m_abstractItem = qobject_cast<TaskManager::AbstractGroupableItem *>(taskItem);
@@ -383,9 +383,9 @@ void WindowTaskItem::setTask(TaskManager::TaskItem* taskItem)
     }
 }
 
-TaskManager::TaskPtr WindowTaskItem::windowTask() const
+TaskManager::Task *WindowTaskItem::windowTask() const
 {
-    return m_task ? m_task->task() : TaskManager::TaskPtr();
+    return m_task ? m_task->task() : 0;
 }
 
 void WindowTaskItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *e)

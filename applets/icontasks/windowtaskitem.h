@@ -47,7 +47,7 @@ public:
     void setTask(TaskManager::TaskItem* taskItem);
 
     /** Returns the window represented by this task. */
-    TaskManager::TaskPtr windowTask() const;
+    TaskManager::Task *windowTask() const;
 
     /** Tells the window manager the minimized task's geometry. */
     void publishIconGeometry() const;
