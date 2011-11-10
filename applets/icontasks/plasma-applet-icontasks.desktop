@@ -1,6 +1,17 @@
 [Desktop Entry]
 Name=Icon-Only Task Manager
+Name[nds]="Bloots-Lüttbild"-Opgavenpleger
+Name[pt]=Gestor de Tarefas com Ícones
+Name[sv]=Aktivitetshanterare med bara ikoner
+Name[uk]=Керування задачами за допомогою піктограм
+Name[x-test]=xxIcon-Only Task Managerxx
 Comment=Switch between running applications
+Comment[de]=Zwischen laufenden Programmen wechseln
+Comment[nds]=Twischen lopen Programmen wesseln
+Comment[pt]=Mudar de aplicações em execução
+Comment[sv]=Byt mellan program som kör
+Comment[uk]=Перемкніть запущені програми
+Comment[x-test]=xxSwitch between running applicationsxx
 Icon=preferences-desktop-icons
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
