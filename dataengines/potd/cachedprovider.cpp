@@ -50,7 +50,7 @@ SaveImageThread::SaveImageThread(const QString &identifier, const QImage &image)
 void SaveImageThread::run()
 {
     const QString path = CachedProvider::identifierToPath( m_identifier );
-    m_image.save( path );
+    m_image.save(path, "PNG");
     emit done( m_identifier, path, m_image );
 }
 
