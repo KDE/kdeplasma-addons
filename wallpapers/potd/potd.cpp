@@ -19,9 +19,12 @@
 
 #include "potd.h"
 
+#include <QDir>
 #include <QPainter>
 
 #include <KDebug>
+#include <KFileDialog>
+#include <KWindowSystem>
 
 static const QString DEFAULT_PROVIDER("apod");
 
@@ -56,9 +59,28 @@ void PoTD::init(const KConfigGroup &config)
     setContextualActions(QList<QAction *>() << action);
 }
 
-void PoTD::saveWallpaperImage() const
+void PoTD::saveWallpaperImage()
 {
+    if (m_saveDialog) {
+        m_saveDialog.data()->show();
+        KWindowSystem::setOnDesktop(m_saveDialog.data()->winId(), KWindowSystem::currentDesktop());
+        m_saveDialog.data()->raise();
+        KWindowSystem::forceActiveWindow(m_saveDialog.data()->winId());
+        return;
+    }
 
+    KFileDialog *dialog = new KFileDialog(m_lastSaveDest, "*.png", 0);
+    dialog->setOperationMode(KFileDialog::Saving);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dialog, SIGNAL(fileSelected(KUrl)), this, SLOT(saveWallpaperTo(KUrl)));
+    m_saveDialog = dialog;
+    dialog->show();
+}
+
+void PoTD::saveWallpaperTo(const KUrl &dest)
+{
+    m_lastSaveDest = dest;
+    kDebug() << "saving to" << dest;
 }
 
 void PoTD::wallpaperRendered(const QImage &image)

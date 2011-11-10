@@ -25,6 +25,8 @@
 
 #include "ui_config.h"
 
+class KFileDialog;
+
 class PoTD : public Plasma::Wallpaper
 {
     Q_OBJECT
@@ -48,14 +50,17 @@ protected:
 
 protected slots:
     void settingsModified();
-    void saveWallpaperImage() const;
+    void saveWallpaperImage();
+    void saveWallpaperTo(const KUrl &path);
 
 private:
     Ui::Configuration m_ui;
     Plasma::DataEngine::Data m_providers;
     QString m_provider;
     QString m_configProvider;
+    KUrl m_lastSaveDest;
     QImage m_image;
+    QWeakPointer<KFileDialog> m_saveDialog;
 };
 
 K_EXPORT_PLASMA_WALLPAPER(color, PoTD)
