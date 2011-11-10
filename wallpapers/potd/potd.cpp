@@ -24,7 +24,7 @@
 
 #include <KDebug>
 #include <KFileDialog>
-#include <KIO/Job>
+#include <KIO/CopyJob>
 #include <KWindowSystem>
 
 static const QString DEFAULT_PROVIDER("apod");
@@ -83,7 +83,7 @@ void PoTD::saveWallpaperImage()
 void PoTD::saveWallpaperTo(const KUrl &dest)
 {
     m_lastSaveDest = dest;
-    KIO::file_copy(m_imagePath, dest);
+    KIO::copy(m_imagePath, dest);
 }
 
 void PoTD::wallpaperRendered(const QImage &image)
