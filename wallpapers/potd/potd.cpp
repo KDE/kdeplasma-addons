@@ -53,6 +53,8 @@ void PoTD::init(const KConfigGroup &config)
         dataEngine(QLatin1String("potd"))->connectSource(m_provider, this);
     }
 
+
+    m_lastSaveDest = config.readEntry("saveDest", m_lastSaveDest);
     QAction *action = new QAction(this);
     action->setText(i18n("Save wallpaper image..."));
     action->setIcon(KIcon("document-save-as"));
@@ -156,6 +158,10 @@ void PoTD::save(KConfigGroup &config)
     } else {
         config.writeEntry("provider", m_configProvider);
         m_configProvider.clear();
+    }
+
+    if (m_lastSaveDest.isValid()) {
+        config.writeEntry("saveDest", m_lastSaveDest);
     }
 }
 
