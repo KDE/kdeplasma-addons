@@ -307,6 +307,72 @@ void RecentDocuments::load()
     }
 }
 
+static QString convertMimeType(const QString &mimeType, const KUrl &url)
+{
+    return mimeType == "text/plain" && url.fileName().endsWith(".csv")
+        ? QLatin1String("text/csv") : mimeType;
+}
+
+RecentDocuments::App RecentDocuments::officeAppForMimeType(const QString &mimeType)
+{
+    if (m_apps.contains(mimeType)) {
+        return m_apps[mimeType];
+    } else {
+        KService::List services = KServiceTypeTrader::self()->query("Application",
+                                    QString("exist Exec and (exist ServiceTypes) and ('libreoffice' ~ Exec) and ('%1' in ServiceTypes)").arg(mimeType));
+
+        if (!services.empty()) {
+            QString desktopFile = services[0]->entryPath();
+            KDesktopFile df(desktopFile);
+            KConfigGroup grp(&df, "Desktop Entry");
+            QString exec = grp.readEntry("Exec", QString());
+
+            if (!exec.isEmpty()) {
+                App app(KUrl::fromPath(desktopFile).fileName().remove(".desktop"), exec);
+                m_apps.insert(mimeType, app);
+                return app;
+            }
+        }
+    }
+
+    return App();
+}
+
+RecentDocuments::App RecentDocuments::appForExec(const QString &execString)
+{
+    qDebug() << "execString" << execString;
+
+    if (m_apps.contains(execString)) {
+        return m_apps[execString];
+    } else {
+        KService::List services = KServiceTypeTrader::self()->query("Application",
+                                    QString("exist Exec and ('%1' =~ Exec)").arg(execString));
+        if (services.empty()) {
+            QString execApp = execString;
+            int space = execApp.indexOf(' ');
+            if (-1 != space) {
+                execApp = execApp.left(space);
+            }
+            services = KServiceTypeTrader::self()->query("Application",
+                        QString("exist TryExec and ('%1' =~ TryExec)").arg(execApp));
+        }
+        if (!services.empty()) {
+            QString desktopFile = services[0]->entryPath();
+            KDesktopFile df(desktopFile);
+            KConfigGroup grp(&df, "Desktop Entry");
+            QString exec = grp.readEntry("Exec", QString());
+
+            if (!exec.isEmpty()) {
+                App app(KUrl::fromPath(desktopFile).fileName().remove(".desktop"), exec);
+                m_apps.insert(execString, app);
+                return app;
+            }
+        }
+    }
+
+    return App();
+}
+
 void RecentDocuments::loadXbel(const QString &path, qulonglong now)
 {
     QDomDocument doc("xbel");
@@ -328,46 +394,29 @@ void RecentDocuments::loadXbel(const QString &path, qulonglong now)
                                 if (!application.isNull() && application.hasAttribute("exec")) {
                                     KUrl url = bookmark.attribute("href");
                                     if (url.isValid() && (!url.isLocalFile() || QFile::exists(url.toLocalFile()))) {
-                                        QString execString = application.attribute("exec");
-                                        QString app;
-                                        QString exec;
-                                        execString.remove('\'');
-
-                                        if (m_apps.contains(execString)) {
-                                            app = m_apps[execString].name;
-                                            exec = m_apps[execString].exec;
-                                        } else {
-                                            KService::List services = KServiceTypeTrader::self()->query("Application",
-                                                                      QString("exist Exec and ('%1' =~ Exec)").arg(execString));
-                                            if (services.empty()) {
-                                                QString execApp = execString;
-                                                int space = execApp.indexOf(' ');
-                                                if (-1 != space) {
-                                                    execApp = execApp.left(space);
-                                                }
-                                                services = KServiceTypeTrader::self()->query("Application",
-                                                           QString("exist TryExec and ('%1' =~ TryExec)").arg(execApp));
-                                            }
-                                            if (!services.empty()) {
-                                                QString desktopFile = services[0]->entryPath();
-                                                KDesktopFile df(desktopFile);
-                                                KConfigGroup grp(&df, "Desktop Entry");
-                                                exec = grp.readEntry("Exec", QString());
-
-                                                if (!exec.isEmpty()) {
-                                                    app = KUrl::fromPath(desktopFile).fileName().remove(".desktop");
-                                                    m_apps.insert(execString, App(app, exec));
-                                                }
-                                            }
+                                        QString exec = application.attribute("exec");
+                                        QDomElement mimeType = metadata.firstChildElement("mime:mime-type");
+                                        QString mType;
+                                        KMimeType::Ptr mime;
+                                        if (!mimeType.isNull() && mimeType.hasAttribute("type")) {
+                                            mType = convertMimeType(mimeType.attribute("type"), url);
+                                            mime = KMimeType::mimeType(mType);
                                         }
-                                        if (!app.isEmpty()) {
+
+                                        exec.remove('\'');
+
+                                        App app = mime && QLatin1String("soffice %u")==exec
+                                                    ? officeAppForMimeType(mType)
+                                                    : appForExec(exec);
+
+                                        if (!app.name.isEmpty()) {
                                             QString name = KUrl(url).fileName();
 
-                                            if (!name.isEmpty() && !app.isEmpty()) {
+                                            if (!name.isEmpty()) {
                                                 bool found = false;
-                                                if (!m_docs[app].isEmpty()) {
-                                                    QList<QAction *>::ConstIterator it = findUrl(m_docs[app], url.url());
-                                                    if (it != m_docs[app].end()) {
+                                                if (!m_docs[app.name].isEmpty()) {
+                                                    QList<QAction *>::ConstIterator it = findUrl(m_docs[app.name], url.url());
+                                                    if (it != m_docs[app.name].end()) {
                                                         found = true;
                                                         if ((*it)->property("timestamp").toULongLong() > 0) {
                                                             (*it)->setProperty("timestamp", now);
@@ -375,25 +424,17 @@ void RecentDocuments::loadXbel(const QString &path, qulonglong now)
                                                     }
                                                 }
                                                 if (!found) {
-                                                    QAction *act = 0;
-                                                    QDomElement mimeType = metadata.firstChildElement("mime:mime-type");
-                                                    if (!mimeType.isNull() && mimeType.hasAttribute("type")) {
-                                                        KMimeType::Ptr mime = KMimeType::mimeType(mimeType.attribute("type"));
+                                                    QAction *act = mime
+                                                                    ? new QAction(KIcon(mime->iconName()), name, this)
+                                                                    : new QAction(name, this);
 
-                                                        if (mime) {
-                                                            act = new QAction(KIcon(mime->iconName()), name, this);
-                                                        }
-                                                    }
-                                                    if (!act) {
-                                                        act = new QAction(name, this);
-                                                    }
                                                     act->setToolTip(KUrl(url).prettyUrl());
                                                     act->setProperty("timestamp", now);
                                                     act->setProperty("url", url.url());
-                                                    act->setProperty("exec", exec);
+                                                    act->setProperty("exec", app.exec);
                                                     act->setProperty("type", (int)File::Xbel);
                                                     connect(act, SIGNAL(triggered()), SLOT(loadDoc()));
-                                                    m_docs[app].append(act);
+                                                    m_docs[app.name].append(act);
                                                 }
                                             }
                                         }
@@ -441,44 +482,17 @@ void RecentDocuments::loadOffice(const QString &path, qulonglong now)
                             KUrl url(uri.text());
 
                             if (url.isValid() && (!url.isLocalFile() || QFile::exists(url.toLocalFile()))) {
-                                QString mType = mimeType.text();
-                                QString app;
-                                QString exec;
+                                QString mType = convertMimeType(mimeType.text(), url);
+                                App app = officeAppForMimeType(mType);
 
-                                if (mType == "text/plain") {
-                                    if (url.fileName().endsWith(".csv")) {
-                                        mType = "text/csv";
-                                    }
-                                }
-
-                                if (m_apps.contains(mType)) {
-                                    app = m_apps[mType].name;
-                                    exec = m_apps[mType].exec;
-                                } else {
-                                    KService::List services = KServiceTypeTrader::self()->query("Application",
-                                                              QString("exist Exec and (exist ServiceTypes) and ('libreoffice' ~ Exec) and ('%1' in ServiceTypes)").arg(mType));
-
-                                    if (!services.empty()) {
-                                        QString desktopFile = services[0]->entryPath();
-                                        KDesktopFile df(desktopFile);
-                                        KConfigGroup grp(&df, "Desktop Entry");
-
-                                        exec = grp.readEntry("Exec", QString());
-                                        if (!exec.isEmpty()) {
-                                            app = KUrl::fromPath(desktopFile).fileName().remove(".desktop");
-                                            m_apps.insert(mType, App(app, exec));
-                                        }
-                                    }
-                                }
-
-                                if (!app.isEmpty() && !exec.isEmpty()) {
+                                if (!app.name.isEmpty() && !app.exec.isEmpty()) {
                                     QString name = KUrl(url).fileName();
 
-                                    if (!name.isEmpty() && !app.isEmpty()) {
+                                    if (!name.isEmpty()) {
                                         bool found = false;
-                                        if (!m_docs[app].isEmpty()) {
-                                            QList<QAction *>::ConstIterator it = findUrl(m_docs[app], url.url());
-                                            if (it != m_docs[app].end()) {
+                                        if (!m_docs[app.name].isEmpty()) {
+                                            QList<QAction *>::ConstIterator it = findUrl(m_docs[app.name], url.url());
+                                            if (it != m_docs[app.name].end()) {
                                                 found = true;
                                                 if ((*it)->property("timestamp").toULongLong() > 0) {
                                                     (*it)->setProperty("timestamp", now);
@@ -495,10 +509,10 @@ void RecentDocuments::loadOffice(const QString &path, qulonglong now)
                                             act->setProperty("local", false);
                                             act->setProperty("timestamp", now);
                                             act->setProperty("url", url.url());
-                                            act->setProperty("exec", exec);
+                                            act->setProperty("exec", app.exec);
                                             act->setProperty("type", (int)File::Office);
                                             connect(act, SIGNAL(triggered()), SLOT(loadDoc()));
-                                            m_docs[app].append(act);
+                                            m_docs[app.name].append(act);
                                         }
                                     }
                                 }

@@ -48,6 +48,12 @@ class RecentDocuments : public QObject
         bool dirty;
     };
 
+    struct App {
+        App(const QString &n = QString(), const QString &e = QString()) : name(n), exec(e) { }
+        QString name;
+        QString exec;
+    };
+
 public:
     static RecentDocuments * self();
 
@@ -71,17 +77,13 @@ private Q_SLOTS:
 private:
     void readCurrentDocs();
     void load();
+    App officeAppForMimeType(const QString &mimeType);
+    App appForExec(const QString &execString);
     void loadXbel(const QString &path, qulonglong now);
     void loadOffice(const QString &path, qulonglong now);
     void removeOld(qulonglong now, File::Type type);
 
 private:
-
-    struct App {
-        App(const QString &n = QString(), const QString &e = QString()) : name(n), exec(e) { }
-        QString name;
-        QString exec;
-    };
 
     bool m_enabled;
     QMap<QString, QList<QAction *> > m_docs;
