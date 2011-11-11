@@ -6,7 +6,7 @@ X-KDE-PlasmaPoTDProvider-SuffixType=Date
 X-KDE-PlasmaPoTDProvider-Identifier=apod
 Icon=
 
-Name=Astronomy Picture of the Day
+Name=NASA Astronomy
 Name[bs]=Astronomska slika dana
 Name[ca]=Imatge astronòmica del dia
 Name[ca@valencia]=Imatge astronòmica del dia
@@ -98,3 +98,4 @@ Comment[uk]=Постачальник даних Apod
 Comment[x-test]=xxApod Providerxx
 Comment[zh_CN]=Apod 提供方
 Comment[zh_TW]=Apod 提供者
+X-KDE-PluginInfo-Website=http://apod.nasa.gov

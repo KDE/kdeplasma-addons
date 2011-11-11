@@ -6,7 +6,7 @@ X-KDE-PlasmaPoTDProvider-SuffixType=Date
 X-KDE-PlasmaPoTDProvider-Identifier=epod
 Icon=
 
-Name=Earth Science Picture of the Day
+Name=USRA Earth Science
 Name[bs]=Geonaučna slika dana
 Name[ca]=Imatge de ciències terràqüies del dia
 Name[ca@valencia]=Imatge de ciències terràqüies del dia
@@ -99,3 +99,4 @@ Comment[uk]=Постачальник даних Epod
 Comment[x-test]=xxEpod Providerxx
 Comment[zh_CN]=Epod 提供方
 Comment[zh_TW]=Epod 提供者
+X-KDE-PluginInfo-Website=http://epod.usra.edu/

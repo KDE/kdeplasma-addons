@@ -6,7 +6,7 @@ X-KDE-PlasmaPoTDProvider-SuffixType=Date
 X-KDE-PlasmaPoTDProvider-Identifier=flickr
 Icon=
 
-Name=Flickr Picture of the Day
+Name=Flickr
 Name[bs]=Flickr slika dana
 Name[ca]=Imatge Flickr del dia
 Name[ca@valencia]=Imatge Flickr del dia
@@ -101,3 +101,4 @@ Comment[wa]=Ahesseu d' Flickr
 Comment[x-test]=xxFlickr Providerxx
 Comment[zh_CN]=Flickr 提供方
 Comment[zh_TW]=Flickr 提供者
+X-KDE-PluginInfo-Website=http://apod.nasa.gov

@@ -6,7 +6,7 @@ X-KDE-PlasmaPoTDProvider-SuffixType=Date
 X-KDE-PlasmaPoTDProvider-Identifier=osei
 Icon=
 
-Name=Operational Significant Event Imagery Picture of the Day
+Name=NOAA Environmental Events
 Name[bs]=Slika dana operacijskog značajnog Događaja
 Name[ca]=Imatge operacional d'esdeveniment rellevant del dia
 Name[ca@valencia]=Imatge operacional d'esdeveniment rellevant del dia
@@ -92,3 +92,4 @@ Comment[uk]=Постачальник даних Osei
 Comment[x-test]=xxOsei Providerxx
 Comment[zh_CN]=Osei 提供方
 Comment[zh_TW]=Osei 提供者
+X-KDE-PluginInfo-Website=http://www.osei.noaa.gov

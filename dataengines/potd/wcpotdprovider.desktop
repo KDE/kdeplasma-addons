@@ -6,7 +6,7 @@ X-KDE-PlasmaPoTDProvider-SuffixType=Date
 X-KDE-PlasmaPoTDProvider-Identifier=wcpotd
 Icon=
 
-Name=Wikimedia Picture of the Day
+Name=Wikipedia
 Name[bs]=Wikimedijina slika dana
 Name[ca]=Imatge Wikimedia del dia
 Name[ca@valencia]=Imatge Wikimedia del dia
@@ -100,3 +100,4 @@ Comment[wa]=Ahesseu Wcpotd
 Comment[x-test]=xxWcpotd Providerxx
 Comment[zh_CN]=Wcpotd 提供方
 Comment[zh_TW]=Wcpotd 提供者
+X-KDE-PluginInfo-Website=http://en.wikipedia.org/wiki/Wikipedia:Picture_of_the_day
