@@ -1,0 +1,34 @@
+[Desktop Entry]
+Name=Icon-Only Task Manager
+Name[nds]="Bloots-Lüttbild"-Opgavenpleger
+Name[nl]=Takenbeheer met alleen pictogrammen
+Name[pt]=Gestor de Tarefas com Ícones
+Name[pt_BR]=Gerenciador de tarefas com ícones
+Name[sv]=Aktivitetshanterare med bara ikoner
+Name[uk]=Керування задачами за допомогою піктограм
+Name[x-test]=xxIcon-Only Task Managerxx
+Comment=Switch between running applications
+Comment[de]=Zwischen laufenden Programmen wechseln
+Comment[nds]=Twischen lopen Programmen wesseln
+Comment[nl]=Schakel tussen draaiende programma's
+Comment[pt]=Mudar de aplicações em execução
+Comment[pt_BR]=Alterna entre os aplicativos em execução
+Comment[sv]=Byt mellan program som kör
+Comment[uk]=Перемкніть запущені програми
+Comment[x-test]=xxSwitch between running applicationsxx
+Icon=preferences-desktop-icons
+Type=Service
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_icontasks
+X-KDE-PluginInfo-Author=Craig Drummond
+X-KDE-PluginInfo-Email=craig@kde.org
+X-KDE-PluginInfo-Name=icontasks
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Category=Windows and Tasks
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL v2+
+X-KDE-PluginInfo-EnabledByDefault=false
+X-Plasma-Requires-FileDialog=Unused
+X-Plasma-Requires-LaunchApp=Unused
+

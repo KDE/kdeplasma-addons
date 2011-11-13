@@ -36,6 +36,9 @@ else (DEPEND_PACKAGE_Marble)
 endif (DEPEND_PACKAGE_Marble)
 macro_log_feature(MARBLE_FOUND "Marble" "Desktop Globe" "http://marble.kde.org" FALSE "" "RECOMMENDED: Marble is used to provide a desktop globe wallpaper for Plasma.")
 
+macro_optional_find_package(DBusMenuQt)
+macro_log_feature(DBUSMENUQT_FOUND "DBusMenuQt" "DBusMenu Qt" "https://launchpad.net/libdbusmenu-qt/" FALSE "" "Needed for Unity support in IconTasks.")
+
 if (NEPOMUK_FOUND)
   include_directories( ${SOPRANO_INCLUDE_DIR} ${NEPOMUK_INCLUDE_DIR} )
 endif (NEPOMUK_FOUND)
