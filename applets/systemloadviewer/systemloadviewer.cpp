@@ -467,15 +467,20 @@ void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngi
             m_swapfree = data["value"].toDouble() / 100;
         }
 
-        m_swaptotal = qMax(1.0, m_swapfree + m_swapused);
-        if (m_swapAvailable && m_swapfree + m_swapused == 0) {
-            m_swapAvailable = false;
-            updateConstraints(Plasma::SizeConstraint);
-        } else if (!m_swapAvailable) {
-            m_swapAvailable = true;
-            updateConstraints(Plasma::SizeConstraint);
+        m_swaptotal = m_swapfree + m_swapused;
+        if(qFuzzyCompare(m_swaptotal+1, 1.0)) {
+            if(m_swapAvailable) {
+                m_swapAvailable = false;
+                updateConstraints(Plasma::SizeConstraint);
+            }
+        }else {
+            if(!m_swapAvailable) {
+                m_swapAvailable = true;
+                updateConstraints(Plasma::SizeConstraint);
+            }
         }
 
+        m_swaptotal = qMax(0.1, m_swaptotal); //Make sure we never have a zero value for swap total, avoiding division by 0 errors.
     } else if (source.startsWith(QLatin1String("mem/physical/"))) {
         if (source.endsWith(QLatin1String("/application"))) {
             m_ramapps = data["value"].toDouble();
