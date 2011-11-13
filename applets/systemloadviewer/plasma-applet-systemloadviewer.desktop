@@ -109,9 +109,9 @@ ServiceTypes=Plasma/Applet
 
 X-KDE-Library=plasma-applet_systemloadviewer
 X-KDE-PluginInfo-Author=Matthew Dawson
-X-KDE-PluginInfo-Email=matthewjd@gmail.com
+X-KDE-PluginInfo-Email=matthew@mjdsystems.ca
 X-KDE-PluginInfo-Name=systemloadviewer
-X-KDE-PluginInfo-Version=0.6
+X-KDE-PluginInfo-Version=0.7
 X-KDE-PluginInfo-Website=
 X-KDE-PluginInfo-Category=System Information
 X-KDE-PluginInfo-Depends=
