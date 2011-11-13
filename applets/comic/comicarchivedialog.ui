@@ -150,14 +150,14 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="KIntSpinBox" name="toNumber">
+        <widget class="QSpinBox" name="toNumber">
          <property name="maximum">
           <number>100000</number>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="KIntSpinBox" name="fromNumber">
+        <widget class="QSpinBox" name="fromNumber">
          <property name="maximum">
           <number>100000</number>
          </property>
@@ -197,11 +197,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
-  </customwidget>
   <customwidget>
    <class>KUrlRequester</class>
    <extends>QFrame</extends>
