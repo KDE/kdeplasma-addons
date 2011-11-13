@@ -158,7 +158,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="KIntNumInput" name="updateIntervall">
+      <widget class="QSpinBox" name="updateIntervall">
        <property name="value">
         <number>0</number>
        </property>
@@ -187,7 +187,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="KIntNumInput" name="updateIntervallComicStrips">
+      <widget class="QSpinBox" name="updateIntervallComicStrips">
        <property name="value">
         <number>0</number>
        </property>
@@ -229,11 +229,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>pushButton_GHNS</tabstop>
