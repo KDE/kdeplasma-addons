@@ -87,39 +87,35 @@ void SystemLoadViewer::reconnectSources()
 
     sys_mon->connectSource("mem/swap/used", this, m_updateInterval);
     sys_mon->connectSource("mem/swap/free", this, m_updateInterval);
+    
+    //Watch this cpu source here, as it doesn't need disconnection when the other cpu ones do.
+    sys_mon->connectSource("system/cores", this, m_updateInterval);
 }
 
 void SystemLoadViewer::reconnectCPUSources()
 {
-    m_numCPUs = sys_mon->query("system/cores")["value"].toUInt();
-    
-    if (!m_showMultiCPU) {
+    sys_mon->connectSource("cpu/system/user", this, m_updateInterval);
+    sys_mon->connectSource("cpu/system/sys", this, m_updateInterval);
+    sys_mon->connectSource("cpu/system/nice", this, m_updateInterval);
+    sys_mon->connectSource("cpu/system/wait", this, m_updateInterval);
+    sys_mon->connectSource("cpu/system/AverageClock", this, m_updateInterval);
 
-        sys_mon->connectSource("cpu/system/user", this, m_updateInterval);
-        sys_mon->connectSource("cpu/system/sys", this, m_updateInterval);
-        sys_mon->connectSource("cpu/system/nice", this, m_updateInterval);
-        sys_mon->connectSource("cpu/system/wait", this, m_updateInterval);
-        sys_mon->connectSource("cpu/system/AverageClock", this, m_updateInterval);
-        
-    } else {
+    if (m_numCPUs == 0) {
+        //If we have zero, either the sources doesn't exist or theres a problem.
+        return ;
+    }
 
-        if (m_numCPUs == 0) {
-            //If we have zero, either the sources doesn't exist or theres a problem.
-            return ;
-        }
+    m_cpuInfo.resize(m_numCPUs);
 
-        m_cpuInfo.resize(m_numCPUs);
+    for (uint i = 0; i < m_numCPUs; ++i) {
 
-        for (uint i = 0; i < m_numCPUs; ++i) {
+        sys_mon->connectSource(QString("cpu/cpu%1/user").arg(i), this, m_updateInterval);
+        sys_mon->connectSource(QString("cpu/cpu%1/sys").arg(i), this, m_updateInterval);
+        sys_mon->connectSource(QString("cpu/cpu%1/nice").arg(i), this, m_updateInterval);
+        sys_mon->connectSource(QString("cpu/cpu%1/wait").arg(i), this, m_updateInterval);
+        sys_mon->connectSource(QString("cpu/cpu%1/clock").arg(i), this, m_updateInterval);
+        m_cpuInfo[i].clockValid = false;
 
-            sys_mon->connectSource(QString("cpu/cpu%1/user").arg(i), this, m_updateInterval);
-            sys_mon->connectSource(QString("cpu/cpu%1/sys").arg(i), this, m_updateInterval);
-            sys_mon->connectSource(QString("cpu/cpu%1/nice").arg(i), this, m_updateInterval);
-            sys_mon->connectSource(QString("cpu/cpu%1/wait").arg(i), this, m_updateInterval);
-            sys_mon->connectSource(QString("cpu/cpu%1/clock").arg(i), this, m_updateInterval);
-            m_cpuInfo[i].clockValid = false;
-
-        }
     }
 }
 
@@ -135,34 +131,41 @@ void SystemLoadViewer::disconnectSources()
 
     sys_mon->disconnectSource("mem/swap/used", this);
     sys_mon->disconnectSource("mem/swap/free", this);
+    
+    for (uint i = 0; i < m_numCPUs; ++i) {
+
+        sys_mon->connectSource(QString("cpu/cpu%1/user").arg(i), this, m_updateInterval);
+        sys_mon->connectSource(QString("cpu/cpu%1/sys").arg(i), this, m_updateInterval);
+        sys_mon->connectSource(QString("cpu/cpu%1/nice").arg(i), this, m_updateInterval);
+        sys_mon->connectSource(QString("cpu/cpu%1/wait").arg(i), this, m_updateInterval);
+        sys_mon->connectSource(QString("cpu/cpu%1/clock").arg(i), this, m_updateInterval);
+        m_cpuInfo[i].clockValid = false;
+
+    }
+    
+    //Loose this cpu source here, as it doesn't need disconnection when the other cpu ones do.
+    sys_mon->connectSource("system/cores", this);
 }
 
 void SystemLoadViewer::disconnectCPUSources()
 {
-#if 0
-    if (!m_showMultiCPU) {
+    sys_mon->disconnectSource("cpu/system/user", this);
+    sys_mon->disconnectSource("cpu/system/sys", this);
+    sys_mon->disconnectSource("cpu/system/nice", this);
+    sys_mon->disconnectSource("cpu/system/wait", this);
+    sys_mon->disconnectSource("cpu/system/AverageClock", this);
+    m_systemCpuInfo.clockValid = false;
 
-        sys_mon->disconnectSource("cpu/system/user", this);
-        sys_mon->disconnectSource("cpu/system/sys", this);
-        sys_mon->disconnectSource("cpu/system/nice", this);
-        sys_mon->disconnectSource("cpu/system/wait", this);
-        sys_mon->disconnectSource("cpu/system/AverageClock", this);
-        m_systemCpuInfo.clockValid = false;
+    for (uint i = 0; i < m_numCPUs; ++i) {
 
-    } else {
+        sys_mon->disconnectSource(QString("cpu/cpu%1/user").arg(i), this);
+        sys_mon->disconnectSource(QString("cpu/cpu%1/sys").arg(i), this);
+        sys_mon->disconnectSource(QString("cpu/cpu%1/nice").arg(i), this);
+        sys_mon->disconnectSource(QString("cpu/cpu%1/wait").arg(i), this);
+        sys_mon->disconnectSource(QString("cpu/cpu%1/clock").arg(i), this);
+        m_cpuInfo[i].clockValid = false;
 
-        for (uint i = 0; i < m_numCPUs; ++i) {
-
-            sys_mon->disconnectSource(QString("cpu/cpu%1/user").arg(i), this);
-            sys_mon->disconnectSource(QString("cpu/cpu%1/sys").arg(i), this);
-            sys_mon->disconnectSource(QString("cpu/cpu%1/nice").arg(i), this);
-            sys_mon->disconnectSource(QString("cpu/cpu%1/wait").arg(i), this);
-            sys_mon->disconnectSource(QString("cpu/cpu%1/clock").arg(i), this);
-            m_cpuInfo[i].clockValid = false;
-
-        }
     }
-#endif
 }
 
 void SystemLoadViewer::sourcesAdded(const QString &source)
@@ -415,8 +418,11 @@ void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngi
 {
     //kDebug() << source << "=" << data["value"].toString();
     if (source == "system/cores") {
-        if (data["value"].toUInt() != m_numCPUs) {
+        uint newNumCPUs = data["value"].toUInt();
+        if (newNumCPUs != m_numCPUs) {
             disconnectCPUSources();
+            m_numCPUs = newNumCPUs; //Make the switch here so that we lose all previous connections, otherwise if
+                                    //we lose cores we will retain unwanted source connections.
             reconnectCPUSources();
             updateConstraints(Plasma::SizeConstraint);
         }
