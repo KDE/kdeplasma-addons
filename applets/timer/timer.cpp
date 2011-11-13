@@ -101,9 +101,9 @@ void Timer::init()
     m_resetAction = new QAction(i18n("Reset"), this);
     m_resetAction->setEnabled(false);
     connect(m_resetAction, SIGNAL(triggered(bool)), this, SLOT(resetTimer()));
-    createMenuAction();
 
     configChanged();
+    createMenuAction();
 }
 
 void Timer::configChanged()
