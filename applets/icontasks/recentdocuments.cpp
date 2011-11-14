@@ -340,8 +340,6 @@ RecentDocuments::App RecentDocuments::officeAppForMimeType(const QString &mimeTy
 
 RecentDocuments::App RecentDocuments::appForExec(const QString &execString)
 {
-    qDebug() << "execString" << execString;
-
     if (m_apps.contains(execString)) {
         return m_apps[execString];
     } else {
