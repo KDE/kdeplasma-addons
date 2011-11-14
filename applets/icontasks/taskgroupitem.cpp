@@ -160,7 +160,11 @@ TaskGroupItem::TaskGroupItem(QGraphicsWidget *parent, Tasks *applet)
 
 TaskGroupItem::~TaskGroupItem()
 {
-    delete m_tasksLayout;
+    if (!m_offscreenLayout && !m_mainLayout) {
+        // only delete this if we have neither an offscreen layout or a mainlayout
+        // if we do, then they will delete the layout for us.
+        delete m_tasksLayout;
+    }
     close(false);
 }
 
