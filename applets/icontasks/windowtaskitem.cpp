@@ -79,7 +79,6 @@ public:
 
 WindowTaskItem::WindowTaskItem(QGraphicsWidget *parent, Tasks *applet)
     : AbstractTaskItem(parent, applet),
-      m_task(0),
       m_busyWidget(0)
 {
 }
@@ -104,25 +103,25 @@ void WindowTaskItem::activate()
     // in a widget such as a line edit which does accept the focus)
     // this needs to be implemented for Plasma's own panels.
     //kDebug();
-    if (m_task && m_task->task()) {
-        m_task->task()->activateRaiseOrIconify();
+    if (m_task && m_task.data()->task()) {
+        m_task.data()->task()->activateRaiseOrIconify();
         // emit windowSelected(this);
     }
 }
 
 QString WindowTaskItem::appName() const
 {
-    return m_task ? m_task->taskName() : QString();
+    return m_task ? m_task.data()->taskName() : QString();
 }
 
 KUrl WindowTaskItem::launcherUrl() const
 {
-    return m_task ? m_task->launcherUrl() : KUrl();
+    return m_task ? m_task.data()->launcherUrl() : KUrl();
 }
 
 QString WindowTaskItem::windowClass() const
 {
-    return m_task && m_task->task() ? m_task->task()->classClass() : QString();
+    return m_task && m_task.data()->task() ? m_task.data()->task()->classClass() : QString();
 }
 
 void WindowTaskItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -156,7 +155,6 @@ void WindowTaskItem::close()
 void WindowTaskItem::close(bool hide)
 {
     //kDebug();
-    m_task = 0;
     delete m_busyWidget;
     m_busyWidget = 0;
     unregisterFromHelpers();
@@ -167,20 +165,20 @@ void WindowTaskItem::close(bool hide)
 
 void WindowTaskItem::publishIconGeometry() const
 {
-    if (!m_task || !m_task->task()) {
+    if (!m_task || !m_task.data()->task()) {
         return;
     }
 
     QRect rect = iconGeometry();
     if (QRect(0, 0, 0, 0) != rect) {
-        m_task->task()->publishIconGeometry(rect);
+        m_task.data()->task()->publishIconGeometry(rect);
     }
 }
 
 void WindowTaskItem::publishIconGeometry(const QRect &rect) const
 {
-    if (m_task && m_task->task() && QRect(0, 0, 0, 0) != rect) {
-        m_task->task()->publishIconGeometry(rect);
+    if (m_task && m_task.data()->task() && QRect(0, 0, 0, 0) != rect) {
+        m_task.data()->task()->publishIconGeometry(rect);
     }
 }
 
@@ -194,20 +192,20 @@ void WindowTaskItem::updateTask(::TaskManager::TaskChanges changes)
     TaskFlags flags = m_flags;
 
     if (changes & TaskManager::StateChanged) {
-        if (m_task->isActive()) {
+        if (m_task.data()->isActive()) {
             flags |= TaskHasFocus;
             if (!(m_flags & TaskHasFocus)) {
                 emit activated(this);
                 // We have focus now, so remove any attention state...
-                if (m_task->demandsAttention()) {
-                    KWindowSystem::demandAttention(m_task->task()->window(), false);
+                if (m_task.data()->demandsAttention()) {
+                    KWindowSystem::demandAttention(m_task.data()->task()->window(), false);
                 }
             }
         } else {
             flags &= ~TaskHasFocus;
         }
 
-        if (m_task->isMinimized()) {
+        if (m_task.data()->isMinimized()) {
             flags |= TaskIsMinimized;
         } else {
             flags &= ~TaskIsMinimized;
@@ -216,7 +214,7 @@ void WindowTaskItem::updateTask(::TaskManager::TaskChanges changes)
     }
 
     if (changes & TaskManager::AttentionChanged) {
-        if (m_task->demandsAttention()) {
+        if (m_task.data()->demandsAttention()) {
             flags |= TaskWantsAttention;
         } else {
             flags &= ~TaskWantsAttention;
@@ -246,14 +244,14 @@ void WindowTaskItem::updateTask(::TaskManager::TaskChanges changes)
 
     if (needsUpdate) {
         //redraw
-        //kDebug() << m_task->name();
+        //kDebug() << m_task.data()->name();
         queueUpdate();
     }
 }
 
 void WindowTaskItem::updateToolTip()
 {
-    if (!m_task || !m_task->task()) {
+    if (!m_task || !m_task.data()->task()) {
         return;
     }
 
@@ -275,14 +273,14 @@ void WindowTaskItem::updateToolTip()
 
     if (showToolTip) {
         IconTasks::ToolTipContent data;
-        data.setMainText(m_task->name());
+        data.setMainText(m_task.data()->name());
         data.setWindowDetailsToPreview(QList<IconTasks::ToolTipContent::Window>()
-                                       << IconTasks::ToolTipContent::Window(m_task->task()->window(),
-                                               m_task->name(),
-                                               icon().pixmap(IconTasks::ToolTipContent::iconSize(), IconTasks::ToolTipContent::iconSize()),
-                                               m_task->task()->demandsAttention(),
-                                               !m_applet->groupManager().showOnlyCurrentDesktop() || !m_task->isOnCurrentDesktop()
-                                               ? m_task->desktop() : 0));
+                                           << IconTasks::ToolTipContent::Window(m_task.data()->task()->window(),
+                                       m_task.data()->name(),
+                                       icon().pixmap(IconTasks::ToolTipContent::iconSize(), IconTasks::ToolTipContent::iconSize()),
+                                       m_task.data()->task()->demandsAttention(),
+                                       !m_applet->groupManager().showOnlyCurrentDesktop() || !m_task.data()->isOnCurrentDesktop()
+                                           ? m_task.data()->desktop() : 0));
         data.setClickable(true);
 #if KDE_IS_VERSION(4, 7, 0)
         data.setInstantPopup(m_applet->instantToolTip());
@@ -350,8 +348,8 @@ void WindowTaskItem::gotTaskPointer()
 
 void WindowTaskItem::setWindowTask(TaskManager::TaskItem* taskItem)
 {
-    if (m_task && m_task->task()) {
-        disconnect(m_task->task(), 0, this, 0);
+    if (m_task && m_task.data()->task()) {
+        disconnect(m_task.data()->task(), 0, this, 0);
     }
     m_task = taskItem;
     m_abstractItem = qobject_cast<TaskManager::AbstractGroupableItem *>(taskItem);
@@ -360,8 +358,10 @@ void WindowTaskItem::setWindowTask(TaskManager::TaskItem* taskItem)
         connect(m_abstractItem, SIGNAL(destroyed(QObject*)), this, SLOT(clearAbstractItem()));
     }
 
-    connect(m_task, SIGNAL(changed(::TaskManager::TaskChanges)),
-            this, SLOT(updateTask(::TaskManager::TaskChanges)));
+    if (m_task) {
+        connect(m_task.data(), SIGNAL(changed(::TaskManager::TaskChanges)),
+                this, SLOT(updateTask(::TaskManager::TaskChanges)));
+    }
 
     updateTask(::TaskManager::EverythingChanged);
     publishIconGeometry();
@@ -385,7 +385,7 @@ void WindowTaskItem::setTask(TaskManager::TaskItem* taskItem)
 
 TaskManager::Task *WindowTaskItem::windowTask() const
 {
-    return m_task ? m_task->task() : 0;
+    return m_task ? m_task.data()->task() : 0;
 }
 
 void WindowTaskItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *e)
@@ -408,7 +408,7 @@ void WindowTaskItem::showContextMenu(const QPoint &pos, bool showAppMenu)
         actionList.append(configAction);
     }
 
-    TaskManager::BasicMenu menu(0, m_task, &m_applet->groupManager(), actionList, showAppMenu ? getAppMenu() : QList <QAction*>());
+    TaskManager::BasicMenu menu(0, m_task.data(), &m_applet->groupManager(), actionList, showAppMenu ? getAppMenu() : QList <QAction*>());
     menu.adjustSize();
 
     if (m_applet->formFactor() != Plasma::Vertical) {
@@ -424,13 +424,13 @@ void WindowTaskItem::showContextMenu(const QPoint &pos, bool showAppMenu)
 
 int WindowTaskItem::pid() const
 {
-    return m_task && m_task->task() ? m_task->task()->pid() : 0;
+    return m_task && m_task.data()->task() ? m_task.data()->task()->pid() : 0;
 }
 
 void WindowTaskItem::toCurrentDesktop()
 {
-    if (m_task && m_task->task()) {
-        m_task->task()->toCurrentDesktop();
+    if (m_task && m_task.data()->task()) {
+        m_task.data()->task()->toCurrentDesktop();
     }
 }
 
@@ -441,18 +441,13 @@ bool WindowTaskItem::isWindowItem() const
 
 bool WindowTaskItem::isActive() const
 {
-    if (!m_task) {
-        //kDebug() << "no task set";
-        return false;
-    }
-
-    return m_task->isActive();
+    return m_task ? m_task.data()->isActive() : false;
 }
 
 void WindowTaskItem::setAdditionalMimeData(QMimeData* mimeData)
 {
     if (m_task) {
-        m_task->addMimeData(mimeData);
+        m_task.data()->addMimeData(mimeData);
     }
 }
 

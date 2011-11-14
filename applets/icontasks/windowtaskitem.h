@@ -94,7 +94,7 @@ private:
     /** Sets the window represented by this task. */
     void setWindowTask(TaskManager::TaskItem* taskItem);
 
-    TaskManager::TaskItem *m_task;
+    QWeakPointer<TaskManager::TaskItem> m_task;
     BusyWidget *m_busyWidget;
 };
 
