@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Icon-Only Task Manager
+Name[hu]=Ikonos feladatkezelő
 Name[nds]="Bloots-Lüttbild"-Opgavenpleger
 Name[nl]=Takenbeheer met alleen pictogrammen
 Name[pt]=Gestor de Tarefas com Ícones
@@ -10,6 +11,7 @@ Name[x-test]=xxIcon-Only Task Managerxx
 Name[zh_TW]=只有圖示的工作管理員
 Comment=Switch between running applications
 Comment[de]=Zwischen laufenden Programmen wechseln
+Comment[hu]=Váltás a futó alkalmazások között
 Comment[nds]=Twischen lopen Programmen wesseln
 Comment[nl]=Schakel tussen draaiende programma's
 Comment[pt]=Mudar de aplicações em execução
