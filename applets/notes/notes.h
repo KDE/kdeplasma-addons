@@ -24,7 +24,7 @@
 
 #include <QTimer>
 
-#include <Plasma/Applet>
+#include <Plasma/PopupApplet>
 #include <Plasma/Svg>
 #include <Plasma/ToolButton>
 
@@ -36,8 +36,9 @@ class QContextMenuEvent;
 class QParallelAnimationGroup;
 
 class PlasmaTextEdit;
+class TopWidget;
 
-class Notes : public Plasma::Applet
+class Notes : public Plasma::PopupApplet
 {
     Q_OBJECT
 
@@ -46,9 +47,6 @@ class Notes : public Plasma::Applet
         ~Notes();
         void init();
         QList<QAction*> contextualActions();
-        void paintInterface(QPainter *painter,
-                            const QStyleOptionGraphicsItem *option,
-                            const QRect& contentsRect);
 
     public Q_SLOTS:
         void configChanged();
@@ -90,12 +88,10 @@ class Notes : public Plasma::Applet
         int m_wheelFontAdjustment;
         QColor m_textColor;
         QColor m_textBackgroundColor;
-        QString m_color;
 
         QMenu *m_colorMenu;
         QMenu *m_formatMenu;
 
-        Plasma::Svg m_notesTheme;
         QGraphicsLinearLayout *m_layout;
         PlasmaTextEdit *m_textEdit;
         Ui::config ui;
@@ -109,6 +105,7 @@ class Notes : public Plasma::Applet
         Plasma::ToolButton *m_buttonStrikeThrough;
         Plasma::ToolButton *m_buttonCenter;
         Plasma::ToolButton *m_buttonFill;
+        TopWidget *m_topWidget;
 
         QParallelAnimationGroup *m_buttonAnimGroup;
         Plasma::Animation *m_buttonAnim[6];

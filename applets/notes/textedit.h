@@ -94,7 +94,7 @@ class PlasmaTextEdit : public Plasma::TextEdit
     Q_OBJECT
 
     public:
-        PlasmaTextEdit(Plasma::Applet *parent);
+        PlasmaTextEdit(Plasma::Applet *applet, QGraphicsWidget *parent);
         ~PlasmaTextEdit();
         NotesTextEdit* native;
 

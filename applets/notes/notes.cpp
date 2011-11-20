@@ -49,8 +49,51 @@
 
 #include "textedit.h"
 
+class TopWidget : public QGraphicsWidget
+{
+public:
+    TopWidget(QGraphicsWidget *parent)
+        : QGraphicsWidget(parent),
+          m_notesTheme(new Plasma::Svg(m_notesTheme)),
+          m_color("yellow-notes")
+    {
+        m_notesTheme->setImagePath("widgets/notes");
+        m_notesTheme->setContainsMultipleImages(false);
+    }
+
+    void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget)
+    {
+        Q_UNUSED(option)
+        Q_UNUSED(widget)
+
+        m_notesTheme->resize(geometry().size());
+        m_notesTheme->paint(p, contentsRect(), m_color);
+    }
+
+    bool hasColor(const QString &color) const
+    {
+        return m_notesTheme->hasElement(color + "-notes");
+    }
+
+    QString color() const
+    {
+        return m_color;
+    }
+
+    void setColor(const QString &color)
+    {
+        if (hasColor(color)) {
+            m_color = color + "-notes";
+        }
+    }
+
+private:
+    Plasma::Svg *m_notesTheme;
+    QString m_color;
+};
+
 Notes::Notes(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
+    : Plasma::PopupApplet(parent, args),
       m_wheelFontAdjustment(0),
       m_layout(0),
       m_textEdit(0)
@@ -65,9 +108,12 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     connect(&m_saveTimer, SIGNAL(timeout()), this, SLOT(saveNote()));
     resize(256, 256);
 
-    m_textEdit = new PlasmaTextEdit(this);
-    m_textEdit->setMinimumSize(QSize(60, 60)); //Ensure a minimum size (height) for the textEdit
+    m_topWidget = new TopWidget(this);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
+    m_topWidget->setLayout(m_layout);
+
+    m_textEdit = new PlasmaTextEdit(this, m_topWidget);
+    m_textEdit->setMinimumSize(QSize(60, 60)); //Ensure a minimum size (height) for the textEdit
     m_layout->setSpacing(2); //We need a bit of spacing between the edit and the buttons
     m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
     m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
@@ -86,7 +132,8 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     }
 
     createTextFormatingWidgets();
-    setLayout(m_layout);
+    setPopupIcon("knotes");
+    setGraphicsWidget(m_topWidget);
 }
 
 Notes::~Notes()
@@ -99,9 +146,6 @@ Notes::~Notes()
 
 void Notes::init()
 {
-    m_notesTheme.setImagePath("widgets/notes");
-    m_notesTheme.setContainsMultipleImages(false);
-
     m_colorMenu = new QMenu(i18n("Notes Color"));
     connect(m_colorMenu, SIGNAL(triggered(QAction*)), this, SLOT(changeColor(QAction*)));
     addColor("white", i18n("White"));
@@ -127,7 +171,7 @@ void Notes::init()
 void Notes::configChanged()
 {
     KConfigGroup cg = config();
-    m_color = cg.readEntry("color", "yellow");
+    m_topWidget->color() = cg.readEntry("color", "yellow");
     // color must be before setPlainText("foo")
     m_useThemeColor = cg.readEntry("useThemeColor", true);
     m_useNoColor = cg.readEntry("useNoColor", true);
@@ -325,7 +369,7 @@ void Notes::themeChanged()
 
 void Notes::addColor(const QString &id, const QString &colorName)
 {
-    if (m_notesTheme.hasElement(id + "-notes")) {
+    if (m_topWidget->hasColor(id)) {
         QAction *tmpAction = m_colorMenu->addAction(colorName);
         tmpAction->setProperty("color", id);
     }
@@ -337,9 +381,9 @@ void Notes::changeColor(QAction *action)
         return;
     }
 
-    m_color = action->property("color").toString();
+    m_topWidget->color() = action->property("color").toString();
     KConfigGroup cg = config();
-    cg.writeEntry("color", m_color);
+    cg.writeEntry("color", m_topWidget->color());
     emit configNeedsSaving();
     update();
 }
@@ -350,20 +394,6 @@ QList<QAction *> Notes::contextualActions()
     actions.append(m_colorMenu->menuAction());
     actions.append(m_formatMenu->menuAction());
     return actions;
-}
-
-void Notes::paintInterface(QPainter *p,
-                           const QStyleOptionGraphicsItem *option,
-                           const QRect &contentsRect)
-{
-    Q_UNUSED(option);
-
-    m_notesTheme.resize(geometry().size());
-    if (m_notesTheme.hasElement(m_color + "-notes")) {
-        m_notesTheme.paint(p, contentsRect, m_color + "-notes");
-    } else {
-        m_notesTheme.paint(p, contentsRect, "yellow-notes");
-    }
 }
 
 void Notes::createConfigurationInterface(KConfigDialog *parent)
@@ -409,7 +439,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
         QString text = colorActions.at(i)->text().remove('&');
         if (!text.isEmpty()){
             ui.notesColorComboBox->insertItem(i, text);
-            if (colorActions.at(i)->property("color").toString() == m_color) {
+            if (colorActions.at(i)->property("color").toString() == m_topWidget->color()) {
                 ui.notesColorComboBox->setCurrentIndex(i);
             }
         }
@@ -552,9 +582,9 @@ void Notes::configAccepted()
     QAction *colorAction = colorActions.value(ui.notesColorComboBox->currentIndex());
     if (colorAction) {
         QString tmpColor = colorAction->property("color").toString();
-        if (tmpColor != m_color){
-            m_color = tmpColor;
-            cg.writeEntry("color", m_color);
+        if (tmpColor != m_topWidget->color()){
+            m_topWidget->color() = tmpColor;
+            cg.writeEntry("color", m_topWidget->color());
             changed = true;
         }
     }
@@ -589,7 +619,7 @@ void Notes::createTextFormatingWidgets()
     connect(actionCenter, SIGNAL(triggered()), this, SLOT(updateOptions()));
     connect(actionFill, SIGNAL(triggered()), this, SLOT(updateOptions()));
 
-    QGraphicsWidget *widget = new QGraphicsWidget(this);
+    QGraphicsWidget *widget = new QGraphicsWidget(m_topWidget);
     widget->setMaximumHeight(25);
 
     QGraphicsLinearLayout *buttonLayout = new QGraphicsLinearLayout(Qt::Horizontal, widget);

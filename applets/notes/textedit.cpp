@@ -192,9 +192,9 @@ void NotesTextEdit::leaveEvent ( QEvent * event )
 /**
  * Use notesTextEdit as native widget instead of KTextEdit
  */
-PlasmaTextEdit::PlasmaTextEdit(Plasma::Applet *parent)
+PlasmaTextEdit::PlasmaTextEdit(Plasma::Applet *applet, QGraphicsWidget *parent)
     : Plasma::TextEdit(parent),
-      m_applet(parent)
+      m_applet(applet)
 {
     KTextEdit *w = nativeWidget();
     native = new NotesTextEdit(m_applet);
