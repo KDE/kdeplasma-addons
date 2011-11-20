@@ -192,9 +192,10 @@ void WeatherApplet::init()
     m_titleFrame->setLayout(m_titlePanel);
     m_layout->addItem(m_titleFrame);
 
-    m_courtesyLabel->nativeWidget()->setWordWrap(false);
-    m_courtesyLabel->nativeWidget()->setAlignment(Qt::AlignRight);
     m_courtesyLabel->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
+    m_courtesyLabel->setWordWrap(false);
+    m_courtesyLabel->setAlignment(Qt::AlignRight);
+    m_courtesyLabel->setTextSelectable(false);
     connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
 
     m_graphicsWidget->setLayout(m_layout);
