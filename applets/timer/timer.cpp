@@ -125,9 +125,11 @@ void Timer::configChanged()
     m_title->setVisible(m_showTitle);
     m_title->setText(m_timerTitle);
 
+    // update the display for the seconds hiding setting
     m_secondsDigit[0]->setVisible(!m_hideSeconds);
     m_secondsDigit[1]->setVisible(!m_hideSeconds);
     m_separator[1]->setVisible(!m_hideSeconds);
+    constraintsEvent(Plasma::SizeConstraint);
 
     // Timers are kept non-localized in the config, to work across language changes.
     QStringList localizedTimers;
@@ -137,6 +139,8 @@ void Timer::configChanged()
     m_predefinedTimers = localizedTimers;
 
     if (isUserConfiguring()) {
+        // immediate update of the display
+        setSeconds(m_seconds);
         return;
     }
 
@@ -165,34 +169,34 @@ void Timer::configChanged()
 
 void Timer::constraintsEvent(Plasma::Constraints constraints)
 {
-    Q_UNUSED(constraints)
+    if (constraints == Plasma::SizeConstraint) {
+        int appletHeight = (int) contentsRect().height();
+        int appletWidth = (int) contentsRect().width();
+        float digits = m_secondsDigit[0]->isVisible() ? 7 : 4.5;
 
-    int appletHeight = (int) contentsRect().height();
-    int appletWidth = (int) contentsRect().width();
-    float digits = m_secondsDigit[0]->isVisible() ? 7 : 4.5;
+        int h = (int) ((appletHeight / 2) * digits < appletWidth ? appletHeight : ((appletWidth - (digits - 1)) / digits) * 2);
+        int w = h / 2;
+        int y = (int) (contentsRect().y() + (appletHeight - h) / 2);
+        int x = (int) (contentsRect().x() + (appletWidth - w * digits) / 2);
 
-    int h = (int) ((appletHeight / 2) * digits < appletWidth ? appletHeight : ((appletWidth - (digits - 1)) / digits) * 2);
-    int w = h / 2;
-    int y = (int) (contentsRect().y() + (appletHeight - h) / 2);
-    int x = (int) (contentsRect().x() + (appletWidth - w * digits) / 2);
+        m_hoursDigit[0]->setGeometry(x, y, w, h);
+        m_hoursDigit[1]->setGeometry(x + w, y, w, h);  
 
-    m_hoursDigit[0]->setGeometry(x, y, w, h);
-    m_hoursDigit[1]->setGeometry(x + w, y, w, h);  
+        m_separator[0]->setGeometry(x + (w * 2), y, w/2, h);
 
-    m_separator[0]->setGeometry(x + (w * 2), y, w/2, h);
+        m_minutesDigit[0]->setGeometry(x + (w * 2) + (w/2), y, w, h);
+        m_minutesDigit[1]->setGeometry(x + (w * 3) + (w/2), y, w, h);
 
-    m_minutesDigit[0]->setGeometry(x + (w * 2) + (w/2), y, w, h);
-    m_minutesDigit[1]->setGeometry(x + (w * 3) + (w/2), y, w, h);
+        m_separator[1]->setGeometry(x + (w * 4) + (w/2), y, w/2, h);
 
-    m_separator[1]->setGeometry(x + (w * 4) + (w/2), y, w/2, h);
+        m_secondsDigit[0]->setGeometry(x + (w * 5), y, w, h);
+        m_secondsDigit[1]->setGeometry(x + (w * 6), y, w, h);
 
-    m_secondsDigit[0]->setGeometry(x + (w * 5), y, w, h);
-    m_secondsDigit[1]->setGeometry(x + (w * 6), y, w, h);
-
-    QFont font = this->font();
-    font.setPixelSize( y - 6 );
-    m_title->nativeWidget()->setFont( font );
-    m_title->setGeometry(QRectF(0, 4, appletWidth, y - 2));
+        QFont font = this->font();
+        font.setPixelSize( y - 6 );
+        m_title->nativeWidget()->setFont( font );
+        m_title->setGeometry(QRectF(0, 4, appletWidth, y - 2));
+    }
 }
 
 void Timer::createMenuAction()
@@ -282,9 +286,6 @@ void Timer::configAccepted()
     cg.writeEntry("showTitle", m_title->isVisible());
 
     bool hideSeconds = ui.hideSecondsCheckBox->isChecked();
-    m_secondsDigit[0]->setVisible(!hideSeconds);
-    m_secondsDigit[1]->setVisible(!hideSeconds);
-    m_separator[1]->setVisible(!hideSeconds);
     cg.writeEntry("hideSeconds", hideSeconds);
 
     m_title->setText(ui.titleLineEdit->text());
@@ -329,33 +330,25 @@ void Timer::setSeconds(int secs)
 {
     m_seconds = secs;
 
+    int seconds = m_seconds % 60;
+    int mins = (m_seconds % (60 * 60)) / 60 + (m_hideSeconds && seconds > 0 ? 1 : 0);
     int hours =  m_seconds / (60 * 60);
-    int mins = (m_seconds % (60 * 60)) / 60;
-    int seconds =  m_seconds % 60;
 
-    QString suffix = (m_seconds < 60 && m_running) ? "_1" : "";
+    const QString suffix = (m_seconds < 60 && m_running) ? "_1" : "";
 
-    if ((m_seconds >= 60) || m_secondsDigit[0]->isVisible()){
-        m_hoursDigit[0]->setElementID(QString::number(hours / 10) + suffix);
-        m_hoursDigit[1]->setElementID(QString::number(hours % 10) + suffix);
+    m_hoursDigit[0]->setElementID(QString::number(hours / 10) + suffix);
+    m_hoursDigit[1]->setElementID(QString::number(hours % 10) + suffix);
 
-        m_separator[0]->setElementID(m_separatorBasename + suffix);
+    m_separator[0]->setElementID(m_separatorBasename + suffix);
 
-        m_minutesDigit[0]->setElementID(QString::number(mins / 10) + suffix);
-        m_minutesDigit[1]->setElementID(QString::number(mins % 10) + suffix);
+    m_minutesDigit[0]->setElementID(QString::number(mins / 10) + suffix);
+    m_minutesDigit[1]->setElementID(QString::number(mins % 10) + suffix);
 
+    if (!m_hideSeconds) {
         m_separator[1]->setElementID(m_separatorBasename + suffix);
 
         m_secondsDigit[0]->setElementID(QString::number(seconds / 10) + suffix);
         m_secondsDigit[1]->setElementID(QString::number(seconds % 10) + suffix);
-    } else {
-        m_hoursDigit[0]->setElementID(QString::number(hours / 10) + suffix);
-        m_hoursDigit[1]->setElementID(QString::number(hours % 10) + suffix);
-
-        m_separator[0]->setElementID(m_separatorBasename + suffix);
-
-        m_minutesDigit[0]->setElementID(QString::number(seconds / 10) + suffix);
-        m_minutesDigit[1]->setElementID(QString::number(seconds % 10) + suffix);
     }
 }
 
