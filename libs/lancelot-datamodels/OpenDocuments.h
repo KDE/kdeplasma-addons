@@ -26,8 +26,6 @@
 #include <taskmanager/taskmanager.h>
 #include <QSet>
 
-using TaskManager::TaskPtr;
-
 namespace Lancelot {
 namespace Models {
 
