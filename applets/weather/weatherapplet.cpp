@@ -72,9 +72,13 @@ public:
         return m_currentWeather;
     }
 
+    void setIconGuide(QGraphicsWidget *widget)
+    {
+        m_guide = widget;
+    }
+
     void setCurrentWeather(const QString &currentWeather = QString())
     {
-        kDebug() << "!!!!!!!!!!!!!!!!!!!!!!!" << currentWeather;
         if (isValidIconName(currentWeather)) {
             m_currentWeather = KIcon(currentWeather);
         } else {
@@ -91,12 +95,13 @@ public:
         }
 
         QSize s(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
-        s.boundedTo(size().toSize());
+        s = s.boundedTo(m_guide ? m_guide.data()->size().toSize() : size().toSize());
         painter->drawPixmap(QPoint(0, 0), m_currentWeather.pixmap(s));
     }
 
 private:
     KIcon m_currentWeather;
+    QWeakPointer<QGraphicsWidget> m_guide;
 };
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
@@ -199,6 +204,7 @@ void WeatherApplet::init()
     connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
 
     m_graphicsWidget->setLayout(m_layout);
+    m_graphicsWidget->setIconGuide(m_titleFrame);
 
     WeatherPopupApplet::init();
 }
