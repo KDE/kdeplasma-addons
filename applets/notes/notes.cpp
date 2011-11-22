@@ -54,7 +54,7 @@ class TopWidget : public QGraphicsWidget
 public:
     TopWidget(QGraphicsWidget *parent)
         : QGraphicsWidget(parent),
-          m_notesTheme(new Plasma::Svg(m_notesTheme)),
+          m_notesTheme(new Plasma::Svg(this)),
           m_color("yellow-notes")
     {
         m_notesTheme->setImagePath("widgets/notes");
