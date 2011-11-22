@@ -54,15 +54,6 @@ namespace TaskManager
 class GroupManager;
 } // namespace TaskManager
 
-using TaskManager::StartupPtr;
-using TaskManager::TaskPtr;
-using TaskManager::StartupPtr;
-using TaskManager::GroupPtr;
-using TaskManager::AbstractGroupableItem;
-using TaskManager::TaskItem;
-using TaskManager::TaskGroup;
-using TaskManager::LauncherItem;
-
 class TaskGroupItem;
 class GroupManager;
 

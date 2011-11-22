@@ -32,9 +32,6 @@ class TaskGroupItem;
 class AbstractTaskItem;
 class LauncherSeparator;
 
-using TaskManager::StartupPtr;
-using TaskManager::TaskPtr;
-
 /**
  * A Layout for the expanded group
  */
