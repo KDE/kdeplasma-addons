@@ -341,10 +341,8 @@ void WindowTaskItem::gotTaskPointer()
         if (addToLayout && (pg = parentGroup()) && pg->isRootGroup() && pg->tasksLayout()) {
             pg->tasksLayout()->addTaskItem(this);
         }
-
     }
 }
-
 
 void WindowTaskItem::setWindowTask(TaskManager::TaskItem* taskItem)
 {
@@ -352,7 +350,7 @@ void WindowTaskItem::setWindowTask(TaskManager::TaskItem* taskItem)
         disconnect(m_task.data()->task(), 0, this, 0);
     }
     m_task = taskItem;
-    m_abstractItem = qobject_cast<TaskManager::AbstractGroupableItem *>(taskItem);
+    m_abstractItem = taskItem;
 
     if (m_abstractItem) {
         connect(m_abstractItem, SIGNAL(destroyed(QObject*)), this, SLOT(clearAbstractItem()));
