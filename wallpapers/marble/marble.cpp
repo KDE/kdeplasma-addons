@@ -137,7 +137,6 @@ QWidget *MarbleWallpaper::createConfigurationInterface(QWidget *parent)
     m_ui.showPlacemarks->setChecked(m_showPlacemarks);
 
     MapThemeManager themeManager;
-    themeManager.updateMapThemeModel();
     // FIXME: Going manually through the model is ugly as hell, but plugging the
     //        model into the view didn't work for me
     for (int i = 0; i < themeManager.mapThemeModel()->rowCount(); i++) {
