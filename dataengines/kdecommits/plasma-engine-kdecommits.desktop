@@ -30,6 +30,7 @@ Name[sv]=KDE-gränssnitt för incheckningar
 Name[tr]=KDE Commit Motoru
 Name[uk]=Рушій внесків до KDE
 Name[x-test]=xxKDE Commits Enginexx
+Name[zh_CN]=KDE 提交引擎
 Name[zh_TW]=KDE 提交引擎
 Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
 Comment[bs]=Pogon podataka za sticanje pročiščenih podataka o KDE SVN upisima
@@ -62,6 +63,7 @@ Comment[sv]=Ett datagränssnitt för att inhämta samlad data om KDE SVN-incheck
 Comment[tr]=KDE SVN Commit bilgilerini çekmeye yarayan veri motoru
 Comment[uk]=Рушій даних для отримання загальних даних щодо внесків до SVN KDE
 Comment[x-test]=xxA Data Engine for acquiring consolidated data about KDE SVN Commitsxx
+Comment[zh_CN]=获取有关 KDE SVN 提交统筹数据的数据引擎
 Comment[zh_TW]=用於提交 KDE SVN 的聯合資料的資料引擎
 Type=Service
 
