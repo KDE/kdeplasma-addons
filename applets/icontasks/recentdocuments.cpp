@@ -414,7 +414,7 @@ void RecentDocuments::loadXbel(const QString &path, qulonglong now)
                                                 bool found = false;
                                                 if (!m_docs[app.name].isEmpty()) {
                                                     QList<QAction *>::ConstIterator it = findUrl(m_docs[app.name], url.url());
-                                                    if (it != m_docs[app.name].end()) {
+                                                    if (it != m_docs[app.name].constEnd()) {
                                                         found = true;
                                                         if ((*it)->property("timestamp").toULongLong() > 0) {
                                                             (*it)->setProperty("timestamp", now);
@@ -490,7 +490,7 @@ void RecentDocuments::loadOffice(const QString &path, qulonglong now)
                                         bool found = false;
                                         if (!m_docs[app.name].isEmpty()) {
                                             QList<QAction *>::ConstIterator it = findUrl(m_docs[app.name], url.url());
-                                            if (it != m_docs[app.name].end()) {
+                                            if (it != m_docs[app.name].constEnd()) {
                                                 found = true;
                                                 if ((*it)->property("timestamp").toULongLong() > 0) {
                                                     (*it)->setProperty("timestamp", now);

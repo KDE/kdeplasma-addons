@@ -183,13 +183,13 @@ static QColor dominantColor(const QIcon &icon)
 
     int mid = count / 2;
     QColor midColor(colors[mid]);
-    QColor *begin = colors.begin() + mid;
+    QColor *begin = colors.data() + mid;
 
     // find similar colors before the mean:
     if (mid != 0) {
         -- begin;
 
-        while (begin != colors.begin()) {
+        while (begin != colors.data()) {
             if (isNear(*(begin - 1), midColor)) {
                 -- begin;
             } else {
@@ -198,10 +198,10 @@ static QColor dominantColor(const QIcon &icon)
         }
     }
 
-    QColor* end = colors.begin() + mid;
+    QColor* end = colors.data() + mid;
 
     // find similar colors after the mean:
-    while (end != colors.end()) {
+    while (end != colors.data() + colors.size()) {
         if (isNear(*end, midColor)) {
             ++ end;
         } else {
