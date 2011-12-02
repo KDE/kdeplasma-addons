@@ -456,247 +456,247 @@ void Clock::calculateTimeString()
 
 void Clock::calculateSize()
 {
-//Minimal sizes.
-// QFont minimalFontTime = m_fontTime;
-// minimalFontTime.setPointsize ( m_fontDate.pointsize() );
-// QFontMetrics fmMinimalTime ( minimalFontTime );
-//
-// minimalTimeStringSize = QSizeF( minimalFontTime.width( m_timeString ) + m_margin*2,minimalFontTime.height() );
+    //Minimal sizes.
+    // QFont minimalFontTime = m_fontTime;
+    // minimalFontTime.setPointsize ( m_fontDate.pointsize() );
+    // QFontMetrics fmMinimalTime ( minimalFontTime );
+    //
+    // minimalTimeStringSize = QSizeF( minimalFontTime.width( m_timeString ) + m_margin*2,minimalFontTime.height() );
 
-//In case adjustToHeight was disabled we have to reset the point-size of fontTime
-m_fontTime.setPointSize ( m_fontDate.pointSize() );
+    //In case adjustToHeight was disabled we have to reset the point-size of fontTime
+    m_fontTime.setPointSize ( m_fontDate.pointSize() );
 
-//Actual size, set in config or init
-QFontMetrics m_fmTime ( m_fontTime );
-m_timeStringSize = QSizeF( m_fmTime.width( m_timeString ) + m_margin*2,m_fmTime.height() );
+    //Actual size, set in config or init
+    QFontMetrics m_fmTime ( m_fontTime );
+    m_timeStringSize = QSizeF( m_fmTime.width( m_timeString ) + m_margin*2,m_fmTime.height() );
 
-QFontMetrics m_fmDate ( m_fontDate );
+    QFontMetrics m_fmDate ( m_fontDate );
 
-//The date+timezone are currently hardcoded to the smallestReadableFont
-m_dateStringSize = QSizeF ( m_fmDate.width( m_dateString ), m_fmDate.height() );
-m_timezoneStringSize = QSizeF( m_fmDate.width( m_timezoneString ), m_fmDate.height() );
+    //The date+timezone are currently hardcoded to the smallestReadableFont
+    m_dateStringSize = QSizeF ( m_fmDate.width( m_dateString ), m_fmDate.height() );
+    m_timezoneStringSize = QSizeF( m_fmDate.width( m_timezoneString ), m_fmDate.height() );
 
-int minimumWantedSize = KGlobalSettings::smallestReadableFont().pointSize();
-if (formFactor() == Plasma::Horizontal) {
-    QFont font(m_fontTime);
-    font.setPixelSize(size().height()/2);
-    QFontInfo fi(font);
-    minimumWantedSize = fi.pointSize();
-}
+    int minimumWantedSize = KGlobalSettings::smallestReadableFont().pointSize();
+    if (formFactor() == Plasma::Horizontal) {
+        QFont font(m_fontTime);
+        font.setPixelSize(size().height()/2);
+        QFontInfo fi(font);
+        minimumWantedSize = fi.pointSize();
+    }
 
 
-if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)) { //plasmoid wider than timestring
-    kDebug() << "Plasmoid wider than the timestring";
-    if( m_showDate == true && m_showTimezone == true ) { //date + timezone enabled
-        kDebug() << "Date + Timezone enabled";
-        if ( contentsRect().size().width() > m_dateStringSize.width() +  m_timezoneStringSize.width() ) { //date + timezone fit -> 2 rows within the plasmoid
+    if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)) { //plasmoid wider than timestring
+        kDebug() << "Plasmoid wider than the timestring";
+        if( m_showDate == true && m_showTimezone == true ) { //date + timezone enabled
+            kDebug() << "Date + Timezone enabled";
+            if ( contentsRect().size().width() > m_dateStringSize.width() +  m_timezoneStringSize.width() ) { //date + timezone fit -> 2 rows within the plasmoid
 
-            kDebug() << "plasmoid wider than date + timezone in 1 row";
-            m_subtitleString = m_dateString + ' ' + m_timezoneString; //Set subtitleString
+                kDebug() << "plasmoid wider than date + timezone in 1 row";
+                m_subtitleString = m_dateString + ' ' + m_timezoneString; //Set subtitleString
+
+                //set subtitleSize
+                m_subtitleStringSize = QSizeF ( m_fmDate.width ( m_dateString + ' ' + m_timezoneString ) , m_dateStringSize.height()*1 );
+            } else { //date + timezone are split into two lines to fit the plasmoid -> 3 rows within the plasmoid
+                kDebug() << "Plasmoid not wide enough for date + timezone in 1 row -> 2 rows";
+                m_subtitleString = m_dateString + '\n' + m_timezoneString; //Set subtitleString
+
+                //set subtitleSize
+                m_subtitleStringSize = QSizeF ( qMax( m_dateStringSize.width(),m_timezoneStringSize.width() ) , m_dateStringSize.height()*2 );
+            }
+        } else if ( m_showDate == true ) {
+            kDebug() << "Only Date enabled";
+            m_subtitleString = m_dateString; //Set subtitleString
 
             //set subtitleSize
-            m_subtitleStringSize = QSizeF ( m_fmDate.width ( m_dateString + ' ' + m_timezoneString ) , m_dateStringSize.height()*1 );
-        } else { //date + timezone are split into two lines to fit the plasmoid -> 3 rows within the plasmoid
-            kDebug() << "Plasmoid not wide enough for date + timezone in 1 row -> 2 rows";
-            m_subtitleString = m_dateString + '\n' + m_timezoneString; //Set subtitleString
+            m_subtitleStringSize = QSizeF ( m_dateStringSize.width() , m_dateStringSize.height() );
+        } else if ( m_showTimezone == true ) {
+            kDebug() << "Only timezone enabled";
+            m_subtitleString = m_timezoneString; //Set subtitleString
 
             //set subtitleSize
-            m_subtitleStringSize = QSizeF ( qMax( m_dateStringSize.width(),m_timezoneStringSize.width() ) , m_dateStringSize.height()*2 );
+            m_subtitleStringSize = QSizeF ( m_timezoneStringSize.width() , m_timezoneStringSize.height() );
+        } else { //no subtitle
+            kDebug() << "Neither date nor timezone enabled";
+            m_subtitleStringSize = QSizeF ( 0,0 );
         }
-    } else if ( m_showDate == true ) {
-        kDebug() << "Only Date enabled";
-        m_subtitleString = m_dateString; //Set subtitleString
 
-        //set subtitleSize
-        m_subtitleStringSize = QSizeF ( m_dateStringSize.width() , m_dateStringSize.height() );
-    } else if ( m_showTimezone == true ) {
-        kDebug() << "Only timezone enabled";
-        m_subtitleString = m_timezoneString; //Set subtitleString
+    //     //If the date/timezone was re-enabled we might have a wide enough, but not high enough plasmoid whose minimumContentSize only fits the timestring. -> increase minimumContentSize
+        if ( m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() > minimumSize().height() ) {
+            kDebug() << "Although the plasmoid is wider than necessary the height is too small -> set new minimum height: " << m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height();
+            setMinimumSize ( QSizeF ( minimumSize().width(),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() ) );
 
-        //set subtitleSize
-        m_subtitleStringSize = QSizeF ( m_timezoneStringSize.width() , m_timezoneStringSize.height() );
-    } else { //no subtitle
-        kDebug() << "Neither date nor timezone enabled";
-        m_subtitleStringSize = QSizeF ( 0,0 );
-    }
-
-//     //If the date/timezone was re-enabled we might have a wide enough, but not high enough plasmoid whose minimumContentSize only fits the timestring. -> increase minimumContentSize
-    if ( m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() > minimumSize().height() ) {
-        kDebug() << "Although the plasmoid is wider than necessary the height is too small -> set new minimum height: " << m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height();
-        setMinimumSize ( QSizeF ( minimumSize().width(),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() ) );
-
-        kDebug() << "New minimumContentSize(): " << minimumSize();
-    }
-
-    //Make the timestring fit the plasmoid since it is bigger than minimumWantedSize
-    m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), minimumWantedSize) );
-
-    m_fmTime = QFontMetrics( m_fontTime );
-
-    while ( ( m_fmTime.width( m_timeString ) > contentsRect().size().width() - 2*m_margin ||
-              m_fmTime.height() > contentsRect().size().height() - m_subtitleStringSize.height() - m_verticalSpacing ) &&
-              m_fontTime.pointSize() > minimumWantedSize) {
-
-        //decrease pointSize
-        m_fontTime.setPointSize(m_fontTime.pointSize() - 1);
-
-        m_fmTime = QFontMetrics( m_fontTime );
-
-        m_timeStringSize = QSizeF ( m_fmTime.width( m_timeString ),  m_fmTime.height() );
-    }
-
-    //Adjust the height to the new horizontal size
-    m_contentSize = QSizeF ( contentsRect().width(),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
-
-    if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
-        kDebug() << "needed height: " << m_contentSize.height() << "fixed height forced on us: " << geometry().size().height();
-        //FIXME: it was resizing to size() itself
-        //resize ( QSizeF ( m_contentSize.width(),geometry().size().height() ) );
-    } else {
-        //add margins
-        resize(m_contentSize + QSizeF(size()-contentsRect().size()));
-        setPreferredSize(m_contentSize + QSizeF(size()-contentsRect().size()));
-        resize(preferredSize());
-        emit sizeHintChanged(Qt::PreferredSize);
-        emit appletTransformedItself();
-    }
-
-} else { //in a panel or timestring wider than plasmoid -> change size to the minimal needed space, i.e. the timestring will not increase in point-size OR plasmoid in Panel.
-
-    kDebug() << "Plasmoid is in a panel or too small for the timestring, we are using minimumWantedSize as pointSize";
-
-    if ( m_showDate == true && m_showTimezone == true ) { //Date + timezone enabled
-        kDebug() << "Date + timezone enabled";
-
-        //If the user has set adjustToHeight to true the timezone and date are put into one line. This is a design decision and not based on anything else but the opinion that a slightly increased point-size is not what adjustToHeight is meant for. The latter is meant to replace the need to be able to set a font-size in the settings. Bigger fonts than this and only slightly bigger ones don't make sense on the panel. The desktop-plasmoid is not imfluenced by this.
-        if( m_timeStringSize.width() > m_dateStringSize.width() +  m_timezoneStringSize.width() || m_adjustToHeight != 0 ) { //Time wider than date + timezone -> 2 rows in plasmoid
-            kDebug() << "timestring is wider than date + timezone in one row -> 1 row.";
-            m_subtitleString = m_dateString + ' ' + m_timezoneString; //Set subtitleString
-
-            //set subtitleSize
-            m_subtitleStringSize = QSizeF ( m_fmDate.width ( m_dateString + ' ' + m_timezoneString ) , m_dateStringSize.height()*1 );
-
-            //set new minimal width to fit the strings
-            m_minimumContentSize = QSizeF ( m_timeStringSize.width(),m_subtitleStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
-        } else { //date and timezone have to be split.
-            kDebug() << "Date + timezone do not fit into one row -> 2 rows.";
-            m_subtitleString = m_dateString + '\n' + m_timezoneString; //Set subtitleString
-
-            //set subtitleSize
-            m_subtitleStringSize = QSizeF ( qMax ( m_dateStringSize.width(),m_timezoneStringSize.width() ), m_dateStringSize.height()*2 );
-
-            kDebug() << "max: " << qMax ( m_timeStringSize.width(),qMax ( m_dateStringSize.width(),m_timezoneStringSize.width() ) ) << " timestring: " << m_timeStringSize.width() << "date: " << m_dateStringSize.width() << "timezone: " << m_timezoneStringSize.width();
-
-            //set new minimal width to fit widest string and adjust the height
-            m_minimumContentSize = QSizeF ( qMax ( m_timeStringSize.width(),qMax ( m_dateStringSize.width(),m_timezoneStringSize.width() ) ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
+            kDebug() << "New minimumContentSize(): " << minimumSize();
         }
-    } else if ( m_showDate == true ) {
-        kDebug() << "Only date is enabled";
-        m_subtitleString = m_dateString; //Set subtitleString
-
-        //set subtitleSize
-        m_subtitleStringSize = QSizeF ( m_dateStringSize.width(), m_dateStringSize.height() );
-
-        //set new minimal width to fit the widest string
-        m_minimumContentSize = QSizeF ( qMax ( m_dateStringSize.width(),m_timeStringSize.width() ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
-    } else if ( m_showTimezone == true ) {
-        kDebug() << "Only timezone is enabled";
-        m_subtitleString = m_timezoneString; //Set subtitleString
-
-        //set subtitleSize
-        m_subtitleStringSize = QSizeF ( m_timezoneStringSize.width(), m_timezoneStringSize.height() );
-
-        //set new size to fit the strings
-        m_minimumContentSize = QSizeF ( qMax ( m_timezoneStringSize.width(),m_timeStringSize.width() ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
-    } else { //no subtitle
-        kDebug() << "Neither timezone nor date are enabled";
-        //set subtitleSize
-        m_subtitleStringSize = QSizeF ( 0,0 );
-
-        m_minimumContentSize = QSizeF ( m_timeStringSize.width(),m_timeStringSize.height() );//set new minimal width
-    }
-
-    float heightToUse = 0;
-
-    //Use x of the available height for the timstring
-    if ( m_adjustToHeight == 1 ) {
-        heightToUse = (float)2/3;
-        kDebug() << "We will use 2/3 of the panel's height for the time: " << heightToUse;
-    } else if ( m_adjustToHeight == 2 ) {
-        kDebug() << "We will use all of the panel's height for the time.";
-        heightToUse = 1;
-    }
-
-    //If the user enabled adjustToHeight we increase the point-size until the height is fully used. 40 as limit to avoid an endless loop.
-    if ( m_adjustToHeight != 0 ) {
-        kDebug() << "We try to find a larger font that fits the size:";
-
-        //FIXME: if the clock is the only applet on a vertical panel and returns 0 via expandingDirections(), it still gets the full height of the panel as recommended height, i.e. on a vertical panel width a height of 800, geometry().size().height() does not return 48 but some huge value. Unless this is fixed in plasma, the while-loop will take a while.
 
         //Make the timestring fit the plasmoid since it is bigger than minimumWantedSize
         m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), minimumWantedSize) );
-    
+
         m_fmTime = QFontMetrics( m_fontTime );
-    
-        kDebug() << "Starting with a point size of: " << m_fontTime.pointSize();
 
-        kDebug() << "We want to have: \nwidth: < " << geometry().size().width() - 2*m_margin << "\nheight < " << (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse;
+        while ( ( m_fmTime.width( m_timeString ) > contentsRect().size().width() - 2*m_margin ||
+                m_fmTime.height() > contentsRect().size().height() - m_subtitleStringSize.height() - m_verticalSpacing ) &&
+                m_fontTime.pointSize() > minimumWantedSize) {
 
-        while ( ( ( m_fmTime.width( m_timeString ) > geometry().size().width() - 2*m_margin && formFactor() != Plasma::Horizontal ) ||
-                 m_fmTime.height() > (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse ) &&
-                 m_fontTime.pointSize() > minimumWantedSize) {
-    
             //decrease pointSize
             m_fontTime.setPointSize(m_fontTime.pointSize() - 1);
 
-            kDebug() << "new point size: " << m_fontTime.pointSize();
-    
             m_fmTime = QFontMetrics( m_fontTime );
-    
+
             m_timeStringSize = QSizeF ( m_fmTime.width( m_timeString ),  m_fmTime.height() );
         }
-    }
 
-    //Adjust the width to the new size, including margins, will be reverted, if the panel is vertical
-    m_minimumContentSize = QSizeF ( m_timeStringSize.width() + m_margin*2,m_minimumContentSize.height() );
+        //Adjust the height to the new horizontal size
+        m_contentSize = QSizeF ( contentsRect().width(),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
 
-    kDebug() << "Set new minimumSize: geometry().size() " << geometry().size() << "\nm_minimumContentSize: " << m_minimumContentSize;
-
-    //if the width given by the panel is too wide, e.g. when switching from panel at the right to panel at the bottom we get some 600 as width
-    //However: If we are in a vertical panel, we should use the width given.
-    if( m_timeStringSize.width() + m_margin*2 < geometry().size().width() && formFactor() != Plasma::Vertical ) {
-            kDebug() << "The width we got was too big, we need less, so lets resize.";
-            setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
+        if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
+            kDebug() << "needed height: " << m_contentSize.height() << "fixed height forced on us: " << geometry().size().height();
+            //FIXME: it was resizing to size() itself
+            //resize ( QSizeF ( m_contentSize.width(),geometry().size().height() ) );
+        } else {
+            //add margins
+            resize(m_contentSize + QSizeF(size()-contentsRect().size()));
+            setPreferredSize(m_contentSize + QSizeF(size()-contentsRect().size()));
+            resize(preferredSize());
+            emit sizeHintChanged(Qt::PreferredSize);
+            emit appletTransformedItself();
         }
 
-    if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
-        kDebug() << "needed height: " << m_minimumContentSize.height() << "[horizontal panel] fixed height forced on us: " << geometry().size().height() << " adding margin-left/-right of: " << m_margin << "width is going to be set resize( " << m_minimumContentSize.width() << "," << geometry().size().height() << ")";
+    } else { //in a panel or timestring wider than plasmoid -> change size to the minimal needed space, i.e. the timestring will not increase in point-size OR plasmoid in Panel.
 
-        setMinimumSize(QSizeF(m_minimumContentSize.width(), 0));
-        //Expand the panel as necessary
-        setPreferredSize(minimumSize());
-        emit sizeHintChanged(Qt::PreferredSize);
-    } else if ( formFactor() == Plasma::Vertical ) {
-        kDebug() << "needed width: " << m_minimumContentSize.width() << "[vertical panel] fixed width forced on us: " << geometry().size().width() << " adding margin left/right of: " << m_margin;
+        kDebug() << "Plasmoid is in a panel or too small for the timestring, we are using minimumWantedSize as pointSize";
 
-        setMinimumSize ( QSizeF(0, m_minimumContentSize.height()) );
-        //Expand the panel as necessary
-        setPreferredSize(minimumSize());
-        emit sizeHintChanged(Qt::PreferredSize);
-    }else { //FIXME: In case this height does not fit the content -> disable timezone (and date)
-        //if the minimal width is larger than the actual size -> force minimal needed width
-        if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
-            setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
+        if ( m_showDate == true && m_showTimezone == true ) { //Date + timezone enabled
+            kDebug() << "Date + timezone enabled";
+
+            //If the user has set adjustToHeight to true the timezone and date are put into one line. This is a design decision and not based on anything else but the opinion that a slightly increased point-size is not what adjustToHeight is meant for. The latter is meant to replace the need to be able to set a font-size in the settings. Bigger fonts than this and only slightly bigger ones don't make sense on the panel. The desktop-plasmoid is not imfluenced by this.
+            if( m_timeStringSize.width() > m_dateStringSize.width() +  m_timezoneStringSize.width() || m_adjustToHeight != 0 ) { //Time wider than date + timezone -> 2 rows in plasmoid
+                kDebug() << "timestring is wider than date + timezone in one row -> 1 row.";
+                m_subtitleString = m_dateString + ' ' + m_timezoneString; //Set subtitleString
+
+                //set subtitleSize
+                m_subtitleStringSize = QSizeF ( m_fmDate.width ( m_dateString + ' ' + m_timezoneString ) , m_dateStringSize.height()*1 );
+
+                //set new minimal width to fit the strings
+                m_minimumContentSize = QSizeF ( m_timeStringSize.width(),m_subtitleStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
+            } else { //date and timezone have to be split.
+                kDebug() << "Date + timezone do not fit into one row -> 2 rows.";
+                m_subtitleString = m_dateString + '\n' + m_timezoneString; //Set subtitleString
+
+                //set subtitleSize
+                m_subtitleStringSize = QSizeF ( qMax ( m_dateStringSize.width(),m_timezoneStringSize.width() ), m_dateStringSize.height()*2 );
+
+                kDebug() << "max: " << qMax ( m_timeStringSize.width(),qMax ( m_dateStringSize.width(),m_timezoneStringSize.width() ) ) << " timestring: " << m_timeStringSize.width() << "date: " << m_dateStringSize.width() << "timezone: " << m_timezoneStringSize.width();
+
+                //set new minimal width to fit widest string and adjust the height
+                m_minimumContentSize = QSizeF ( qMax ( m_timeStringSize.width(),qMax ( m_dateStringSize.width(),m_timezoneStringSize.width() ) ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
+            }
+        } else if ( m_showDate == true ) {
+            kDebug() << "Only date is enabled";
+            m_subtitleString = m_dateString; //Set subtitleString
+
+            //set subtitleSize
+            m_subtitleStringSize = QSizeF ( m_dateStringSize.width(), m_dateStringSize.height() );
+
+            //set new minimal width to fit the widest string
+            m_minimumContentSize = QSizeF ( qMax ( m_dateStringSize.width(),m_timeStringSize.width() ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
+        } else if ( m_showTimezone == true ) {
+            kDebug() << "Only timezone is enabled";
+            m_subtitleString = m_timezoneString; //Set subtitleString
+
+            //set subtitleSize
+            m_subtitleStringSize = QSizeF ( m_timezoneStringSize.width(), m_timezoneStringSize.height() );
+
+            //set new size to fit the strings
+            m_minimumContentSize = QSizeF ( qMax ( m_timezoneStringSize.width(),m_timeStringSize.width() ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
+        } else { //no subtitle
+            kDebug() << "Neither timezone nor date are enabled";
+            //set subtitleSize
+            m_subtitleStringSize = QSizeF ( 0,0 );
+
+            m_minimumContentSize = QSizeF ( m_timeStringSize.width(),m_timeStringSize.height() );//set new minimal width
         }
 
-        //we use the minimal height here, since the user has given us too much height we cannot use for anything useful. minimal width because we are in a panel.
-        kDebug() << "we set the minimum size needed as the size we want";
-        setPreferredSize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) + (size() - contentsRect().size()) );
-        resize(preferredSize());
-        emit sizeHintChanged(Qt::PreferredSize);
-        emit appletTransformedItself();
+        float heightToUse = 0;
+
+        //Use x of the available height for the timstring
+        if ( m_adjustToHeight == 1 ) {
+            heightToUse = (float)2/3;
+            kDebug() << "We will use 2/3 of the panel's height for the time: " << heightToUse;
+        } else if ( m_adjustToHeight == 2 ) {
+            kDebug() << "We will use all of the panel's height for the time.";
+            heightToUse = 1;
+        }
+
+        //If the user enabled adjustToHeight we increase the point-size until the height is fully used. 40 as limit to avoid an endless loop.
+        if ( m_adjustToHeight != 0 ) {
+            kDebug() << "We try to find a larger font that fits the size:";
+
+            //FIXME: if the clock is the only applet on a vertical panel and returns 0 via expandingDirections(), it still gets the full height of the panel as recommended height, i.e. on a vertical panel width a height of 800, geometry().size().height() does not return 48 but some huge value. Unless this is fixed in plasma, the while-loop will take a while.
+
+            //Make the timestring fit the plasmoid since it is bigger than minimumWantedSize
+            m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), minimumWantedSize) );
+        
+            m_fmTime = QFontMetrics( m_fontTime );
+        
+            kDebug() << "Starting with a point size of: " << m_fontTime.pointSize();
+
+            kDebug() << "We want to have: \nwidth: < " << geometry().size().width() - 2*m_margin << "\nheight < " << (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse;
+
+            while ( ( ( m_fmTime.width( m_timeString ) > geometry().size().width() - 2*m_margin && formFactor() != Plasma::Horizontal ) ||
+                    m_fmTime.height() > (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse ) &&
+                    m_fontTime.pointSize() > minimumWantedSize) {
+        
+                //decrease pointSize
+                m_fontTime.setPointSize(m_fontTime.pointSize() - 1);
+
+                kDebug() << "new point size: " << m_fontTime.pointSize();
+        
+                m_fmTime = QFontMetrics( m_fontTime );
+        
+                m_timeStringSize = QSizeF ( m_fmTime.width( m_timeString ),  m_fmTime.height() );
+            }
+        }
+
+        //Adjust the width to the new size, including margins, will be reverted, if the panel is vertical
+        m_minimumContentSize = QSizeF ( m_timeStringSize.width() + m_margin*2,m_minimumContentSize.height() );
+
+        kDebug() << "Set new minimumSize: geometry().size() " << geometry().size() << "\nm_minimumContentSize: " << m_minimumContentSize;
+
+        //if the width given by the panel is too wide, e.g. when switching from panel at the right to panel at the bottom we get some 600 as width
+        //However: If we are in a vertical panel, we should use the width given.
+        if( m_timeStringSize.width() + m_margin*2 < geometry().size().width() && formFactor() != Plasma::Vertical ) {
+                kDebug() << "The width we got was too big, we need less, so lets resize.";
+                setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
+            }
+
+        if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
+            kDebug() << "needed height: " << m_minimumContentSize.height() << "[horizontal panel] fixed height forced on us: " << geometry().size().height() << " adding margin-left/-right of: " << m_margin << "width is going to be set resize( " << m_minimumContentSize.width() << "," << geometry().size().height() << ")";
+
+            setMinimumSize(QSizeF(m_minimumContentSize.width(), 0));
+            //Expand the panel as necessary
+            setPreferredSize(minimumSize());
+            emit sizeHintChanged(Qt::PreferredSize);
+        } else if ( formFactor() == Plasma::Vertical ) {
+            kDebug() << "needed width: " << m_minimumContentSize.width() << "[vertical panel] fixed width forced on us: " << geometry().size().width() << " adding margin left/right of: " << m_margin;
+
+            setMinimumSize ( QSizeF(0, m_minimumContentSize.height()) );
+            //Expand the panel as necessary
+            setPreferredSize(minimumSize());
+            emit sizeHintChanged(Qt::PreferredSize);
+        }else { //FIXME: In case this height does not fit the content -> disable timezone (and date)
+            //if the minimal width is larger than the actual size -> force minimal needed width
+            if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
+                setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
+            }
+
+            //we use the minimal height here, since the user has given us too much height we cannot use for anything useful. minimal width because we are in a panel.
+            kDebug() << "we set the minimum size needed as the size we want";
+            setPreferredSize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) + (size() - contentsRect().size()) );
+            resize(preferredSize());
+            emit sizeHintChanged(Qt::PreferredSize);
+            emit appletTransformedItself();
+        }
     }
-}
 }
 
 void Clock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
