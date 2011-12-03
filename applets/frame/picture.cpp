@@ -89,8 +89,8 @@ void Picture::setPicture(const KUrl &currentUrl)
 
     if (!m_currentUrl.isEmpty() && !m_currentUrl.isLocalFile()) {
         kDebug() << "Not a local file, downloading" << currentUrl;
-        m_job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::HideProgressInfo);
-        connect(m_job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
+        KIO::StoredTransferJob * job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::HideProgressInfo);
+        connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
         emit pictureLoaded(defaultPicture(i18n("Loading image...")));
     } else {
         ImageLoader *loader = 0;
@@ -155,8 +155,8 @@ void Picture::slotFinished( KJob *job )
     if (job->error()) {
         kDebug() << "Error loading image:" << job->errorString();
         image = defaultPicture(i18n("Error loading image: %1", job->errorString()));
-    } else {
-        image.loadFromData(m_job->data());
+    } else if (KIO::StoredTransferJob * transferJob = qobject_cast<KIO::StoredTransferJob *>(job)) {
+        image.loadFromData(transferJob->data());
         kDebug() << "Successfully downloaded, saving image to" << path;
         m_message.clear();
         image.save(path);

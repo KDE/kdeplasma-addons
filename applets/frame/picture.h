@@ -50,7 +50,6 @@ public:
     * Set picture from location @p currentUrl
     **/
     void setPicture(const KUrl &currentUrl);
-    KIO::StoredTransferJob * m_job;
     KUrl url();
     QString message();
     void setMessage(const QString &message);
