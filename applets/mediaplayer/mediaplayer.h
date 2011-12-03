@@ -36,6 +36,7 @@ namespace Phonon
 namespace Plasma
 {
     class VideoWidget;
+    class Label;
 }
 
 
@@ -54,6 +55,7 @@ public:
     void constraintsEvent(Plasma::Constraints constraints);
     void SetControlsVisible(bool visible);
     bool ControlsVisible() const;
+    QString playingMediaTitle();
 
 protected:
     void dropEvent(QGraphicsSceneDragDropEvent *event);
@@ -71,14 +73,17 @@ public Q_SLOTS:
     void SetVolume(int value);
     void ShowOpenFileDialog();
     void OpenUrl(const QString &path);
+    void stateChanged(Phonon::State newState, Phonon::State oldState);
 
 private Q_SLOTS:
     void hideControls();
+    void metaDataChanged();
 
 private:
     QGraphicsLinearLayout *m_layout;
     QString m_currentUrl;
     Plasma::VideoWidget *m_video;
+    Plasma::Label *m_label;
     QTimer *m_hideTimer;
 
     bool m_ticking;

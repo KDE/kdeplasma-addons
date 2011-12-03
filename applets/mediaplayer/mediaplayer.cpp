@@ -38,6 +38,7 @@
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/widgets/slider.h>
 #include <plasma/widgets/videowidget.h>
+#include <plasma/widgets/label.h>
 
 MediaPlayer::MediaPlayer(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
@@ -79,9 +80,14 @@ void MediaPlayer::init()
    m_video = new Plasma::VideoWidget(this);
    m_video->setAcceptDrops(false);
 
+   m_label = new Plasma::Label(this);
+
    m_layout->addItem(m_video);
+   m_layout->addItem(m_label);
 
-
+   m_label->setText(i18n("Idle"));
+   m_label->setAlignment(Qt::AlignCenter);
+   m_label->setScaledContents(true);
 
    connect(m_video->audioOutput(), SIGNAL(volumeChanged(qreal)), SLOT(volumeChanged(qreal)));
 
@@ -91,6 +97,7 @@ void MediaPlayer::init()
 
    connect(media, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(stateChanged(Phonon::State,Phonon::State)));
    connect(media, SIGNAL(seekableChanged(bool)), this, SLOT(seekableChanged(bool)));
+   connect(media, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
 
    media->setTickInterval(200);
 
@@ -259,6 +266,42 @@ void MediaPlayer::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     event->accept();
     ToggleControlsVisibility();
+}
+
+QString MediaPlayer::playingMediaTitle()
+{
+    Phonon::MediaObject *media = m_video->mediaObject();
+    QStringList metadata = media->metaData(Phonon::TitleMetaData);
+    if (metadata.size() > 0) {
+        //use metadata to retrieve title
+        return metadata.at(0);
+    }
+    else {
+        //use filename as title
+        return media->currentSource().fileName();
+    }
+}
+
+void MediaPlayer::metaDataChanged()
+{
+    Phonon::MediaObject *media = m_video->mediaObject();
+
+    if (media->state() == Phonon::PlayingState) {
+        m_label->setText(i18n("Now playing:\n%1").arg(playingMediaTitle()));
+    } else {
+        m_label->setText(i18n("Paused"));
+    }
+}
+
+void MediaPlayer::stateChanged(Phonon::State newState, Phonon::State oldState)
+{
+    Phonon::MediaObject *media = m_video->mediaObject();
+
+    if (media->state() == Phonon::PlayingState) {
+        m_label->setText(i18n("Now playing:\n%1").arg(playingMediaTitle()));
+    } else {
+        m_label->setText(i18n("Paused"));
+    }
 }
 
 K_EXPORT_PLASMA_APPLET(mediaplayer, MediaPlayer)
