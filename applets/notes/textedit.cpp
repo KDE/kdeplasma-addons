@@ -185,8 +185,17 @@ void NotesTextEdit::wheelEvent ( QWheelEvent * event )
  */
 void NotesTextEdit::leaveEvent ( QEvent * event )
 {
-  KTextEdit::leaveEvent(event);
-  emit mouseUnhovered();
+    KTextEdit::leaveEvent(event);
+
+    QTextEdit::ExtraSelection textxtra;
+    textxtra.cursor = textCursor();
+    textxtra.cursor.movePosition(QTextCursor::StartOfLine);
+    textxtra.cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+    textxtra.format.setBackground(Qt::transparent);
+
+    QList<QTextEdit::ExtraSelection> extras;
+    extras << textxtra;
+    setExtraSelections(extras);
 }
 
 #include "textedit.moc"

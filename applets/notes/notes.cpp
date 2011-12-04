@@ -178,7 +178,6 @@ void Notes::init()
     connect(m_noteEditor, SIGNAL(scrolledDown()), this, SLOT(decreaseFontSize()));
     connect(m_noteEditor, SIGNAL(cursorMoved()), this, SIGNAL(delayedSaveNote()));
     connect(m_noteEditor, SIGNAL(cursorMoved()), this, SIGNAL(lineChanged()));
-    connect(m_noteEditor, SIGNAL(mouseUnhovered()), this, SLOT(mouseUnhovered()));
 }
 
 void Notes::configChanged()
@@ -239,25 +238,6 @@ void Notes::configChanged()
 void Notes::showError(const QString &message)
 {
     showMessage(KIcon("dialog-error"), message, Plasma::ButtonOk);
-}
-
-/**
-* remove the background color of the last line edited when leaving
-*/
-void Notes::mouseUnhovered()
-{
-    QTextCursor textCursor = m_noteEditor->textCursor();
-    QTextEdit::ExtraSelection textxtra;
-    textxtra.cursor = m_noteEditor->textCursor();
-    textxtra.cursor.movePosition( QTextCursor::StartOfLine );
-    textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
-    textxtra.format.setBackground( Qt::transparent );
-
-    QList<QTextEdit::ExtraSelection> extras;
-    extras << textxtra;
-    m_noteEditor->setExtraSelections( extras );
-
-    update();
 }
 
 /**

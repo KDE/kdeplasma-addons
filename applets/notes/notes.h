@@ -64,7 +64,6 @@ class Notes : public Plasma::PopupApplet
         void delayedSaveNote();
         void changeColor(QAction*);
         void lineChanged();
-        void mouseUnhovered();
         void increaseFontSize();
         void decreaseFontSize();
         void themeChanged();

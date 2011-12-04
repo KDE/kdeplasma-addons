@@ -62,7 +62,6 @@ class NotesTextEdit : public KRichTextEdit
 
     Q_SIGNALS:
         void cursorMoved();
-        void mouseUnhovered();
         void scrolledUp();
         void scrolledDown();
         void error(const QString &message);
