@@ -26,6 +26,7 @@
 
 #include <Plasma/PopupApplet>
 #include <Plasma/Svg>
+#include <Plasma/TextEdit>
 #include <Plasma/ToolButton>
 
 #include "ui_config.h"
@@ -35,8 +36,8 @@ class QSizeF;
 class QContextMenuEvent;
 class QParallelAnimationGroup;
 
-class PlasmaTextEdit;
 class TopWidget;
+class NotesTextEdit;
 
 class Notes : public Plasma::PopupApplet
 {
@@ -93,7 +94,8 @@ class Notes : public Plasma::PopupApplet
         QMenu *m_formatMenu;
 
         QGraphicsLinearLayout *m_layout;
-        PlasmaTextEdit *m_textEdit;
+        Plasma::TextEdit *m_textEdit;
+        NotesTextEdit *m_noteEditor;
         Ui::config ui;
 
         QSizeF m_size;

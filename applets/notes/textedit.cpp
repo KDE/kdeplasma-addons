@@ -189,46 +189,5 @@ void NotesTextEdit::leaveEvent ( QEvent * event )
   emit mouseUnhovered();
 }
 
-/**
- * Use notesTextEdit as native widget instead of KTextEdit
- */
-PlasmaTextEdit::PlasmaTextEdit(Plasma::Applet *applet, QGraphicsWidget *parent)
-    : Plasma::TextEdit(parent),
-      m_applet(applet)
-{
-    KTextEdit *w = nativeWidget();
-    native = new NotesTextEdit(m_applet);
-    connect(native, SIGNAL(error(QString)), this, SIGNAL(error(QString)));
-    native->setWindowFlags(native->windowFlags() | Qt::BypassGraphicsProxyWidget);
-    //FIXME: we need a way to just add actions without changing the native widget under its feet
-    if (native->verticalScrollBar() && w->verticalScrollBar()) {
-        native->verticalScrollBar()->setStyle(w->verticalScrollBar()->style());
-    }
-    setNativeWidget(native);
-
-    connect(native, SIGNAL(cursorMoved()), this, SIGNAL(textChanged()));
-    connect(native, SIGNAL(mouseUnhovered()), this, SIGNAL(mouseUnhovered()));
-
-    // scrollwheel + ctrl changes font size
-    connect(native, SIGNAL(scrolledUp()), parent, SLOT(increaseFontSize()));
-    connect(native, SIGNAL(scrolledDown()), parent, SLOT(decreaseFontSize()));
-}
-
-PlasmaTextEdit::~PlasmaTextEdit()
-{
-}
-
-void PlasmaTextEdit::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    m_applet->setStatus(Plasma::AcceptingInputStatus);
-    QGraphicsProxyWidget::mousePressEvent(event);
-}
-
-void PlasmaTextEdit::focusOutEvent(QFocusEvent *event)
-{
-    m_applet->setStatus(Plasma::PassiveStatus);
-    QGraphicsProxyWidget::focusOutEvent(event);
-}
-
 #include "textedit.moc"
 
