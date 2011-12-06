@@ -173,40 +173,44 @@ void OpenDesktop::loginFinished()
 
 
 void OpenDesktop::showFriendsWidget()
-{    
+{
+    if (m_friendStack) {
+        return;
+    }
+
     // Messages
     m_messageCounter = new MessageCounter(m_engine, this);
-    
+
     // Friends
     m_friendList = new FriendList(m_engine);
     m_friendStack = new ActionStack(m_engine, m_friendList);
-    
+
     m_messageList = new MessageList(m_engine);
     m_messageList->setFolder("0");
-    
+
     m_tabs->addTab(i18n("Friends"), m_friendStack);
     m_tabs->addTab(i18n("Messages"), m_messageList);
 
     connect(m_friendList, SIGNAL(addFriend(QString)), m_friendStack, SLOT(addFriend(QString)));
     connect(m_friendList, SIGNAL(sendMessage(QString)), m_friendStack, SLOT(sendMessage(QString)));
     connect(m_friendList, SIGNAL(showDetails(QString)), m_friendStack, SLOT(showDetails(QString)));
-    
+
     connect(m_friendStack, SIGNAL(endWork()), SLOT(endWork()));
     connect(m_friendStack, SIGNAL(startWork()), SLOT(startWork()));
-    
+
     connect(this, SIGNAL(usernameChanged(QString)), m_friendList, SLOT(setOwnId(QString)));
     connect(this, SIGNAL(usernameChanged(QString)), m_friendStack, SLOT(setOwnId(QString)));
-    
+
     connect(this, SIGNAL(providerChanged(QString)), m_friendList, SLOT(setProvider(QString)));
     connect(this, SIGNAL(providerChanged(QString)), m_friendStack, SLOT(setProvider(QString)));
     connect(this, SIGNAL(providerChanged(QString)), m_messageList, SLOT(setProvider(QString)));
     connect(this, SIGNAL(providerChanged(QString)), m_messageCounter, SLOT(setProvider(QString)));
-    
+
     m_friendList->setOwnId(m_user);
     m_friendStack->setOwnId(m_user);
     m_friendList->setProvider(m_provider);
     m_friendStack->setProvider(m_provider);
-    
+
     m_messageList->setProvider(m_provider);
     m_messageCounter->setProvider(m_provider);
 }
