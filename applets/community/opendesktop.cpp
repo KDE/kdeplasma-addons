@@ -56,6 +56,7 @@ OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
         m_tabs(0),
         m_loginWidget(0),
         m_friendList(0),
+        m_friendStack(0),
         m_nearList(0),
         m_provider("https://api.opendesktop.org/v1/"),
         m_credentialsSource(QString("Credentials\\provider:%1").arg(m_provider)),
