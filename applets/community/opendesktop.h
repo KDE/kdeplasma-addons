@@ -44,7 +44,15 @@ class KConfigDialog;
 class MessageCounter;
 class MessageList;
 class QGraphicsLinearLayout;
-struct GeoLocation;
+
+struct GeoLocation {
+    QString country;
+    QString city;
+    QString countryCode;
+    int accuracy;
+    qreal latitude;
+    qreal longitude;
+};
 
 class OpenDesktop : public Plasma::PopupApplet
 {
@@ -109,7 +117,7 @@ class OpenDesktop : public Plasma::PopupApplet
 
         // Config values
         QString m_provider;
-        GeoLocation* m_geolocation;
+        GeoLocation m_geolocation;
         void saveGeoLocation();
         void syncGeoLocation();
         MessageCounter* m_messageCounter;
