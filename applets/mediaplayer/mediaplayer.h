@@ -52,7 +52,6 @@ public:
     ~MediaPlayer();
 
     void init();
-    void constraintsEvent(Plasma::Constraints constraints);
     void SetControlsVisible(bool visible);
     bool ControlsVisible() const;
     QString playingMediaTitle();

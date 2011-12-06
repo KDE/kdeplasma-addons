@@ -89,20 +89,13 @@ void MediaPlayer::init()
    m_label->setAlignment(Qt::AlignCenter);
    m_label->setScaledContents(true);
 
-   connect(m_video->audioOutput(), SIGNAL(volumeChanged(qreal)), SLOT(volumeChanged(qreal)));
-
-
    m_video->setUrl(m_currentUrl);
    Phonon::MediaObject *media = m_video->mediaObject();
 
    connect(media, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(stateChanged(Phonon::State,Phonon::State)));
-   connect(media, SIGNAL(seekableChanged(bool)), this, SLOT(seekableChanged(bool)));
    connect(media, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
 
    media->setTickInterval(200);
-
-   connect(media, SIGNAL(tick(qint64)), this, SLOT(tick(qint64)));
-   connect(media, SIGNAL(totalTimeChanged(qint64)), SLOT(totalTimeChanged(qint64)));
 
    media->play();
 
@@ -115,12 +108,6 @@ void MediaPlayer::init()
    new PlayerDBusHandler(this, media, m_video->audioOutput());
    new TrackListDBusHandler(this, media);
    new RootDBusHandler(this);
-}
-
-
-
-void MediaPlayer::constraintsEvent(Plasma::Constraints constraints)
-{
 }
 
 void MediaPlayer::SetControlsVisible(bool visible)
