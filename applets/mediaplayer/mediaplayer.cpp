@@ -92,7 +92,7 @@ void MediaPlayer::init()
     m_video->setUrl(m_currentUrl);
     Phonon::MediaObject *media = m_video->mediaObject();
 
-    connect(media, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(stateChanged(Phonon::State,Phonon::State)));
+    connect(media, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(stateChanged()));
     connect(media, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
 
     media->setTickInterval(200);
@@ -280,7 +280,7 @@ void MediaPlayer::metaDataChanged()
     }
 }
 
-void MediaPlayer::stateChanged(Phonon::State newState, Phonon::State oldState)
+void MediaPlayer::stateChanged()
 {
     Phonon::MediaObject *media = m_video->mediaObject();
 
