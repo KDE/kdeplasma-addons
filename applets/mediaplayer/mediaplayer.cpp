@@ -75,39 +75,39 @@ MediaPlayer::~MediaPlayer()
 
 void MediaPlayer::init()
 {
-   m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
+    m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
 
-   m_video = new Plasma::VideoWidget(this);
-   m_video->setAcceptDrops(false);
+    m_video = new Plasma::VideoWidget(this);
+    m_video->setAcceptDrops(false);
 
-   m_label = new Plasma::Label(this);
+    m_label = new Plasma::Label(this);
 
-   m_layout->addItem(m_video);
-   m_layout->addItem(m_label);
+    m_layout->addItem(m_video);
+    m_layout->addItem(m_label);
 
-   m_label->setText(i18n("Idle"));
-   m_label->setAlignment(Qt::AlignCenter);
-   m_label->setScaledContents(true);
+    m_label->setText(i18n("Idle"));
+    m_label->setAlignment(Qt::AlignCenter);
+    m_label->setScaledContents(true);
 
-   m_video->setUrl(m_currentUrl);
-   Phonon::MediaObject *media = m_video->mediaObject();
+    m_video->setUrl(m_currentUrl);
+    Phonon::MediaObject *media = m_video->mediaObject();
 
-   connect(media, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(stateChanged(Phonon::State,Phonon::State)));
-   connect(media, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
+    connect(media, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(stateChanged(Phonon::State,Phonon::State)));
+    connect(media, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
 
-   media->setTickInterval(200);
+    media->setTickInterval(200);
 
-   media->play();
+    media->play();
 
-   m_video->setUsedControls(Plasma::VideoWidget::DefaultControls);
+    m_video->setUsedControls(Plasma::VideoWidget::DefaultControls);
 
-   m_hideTimer = new QTimer(this);
-   m_hideTimer->setSingleShot(true);
-   connect(m_hideTimer, SIGNAL(timeout()), this, SLOT(hideControls()));
+    m_hideTimer = new QTimer(this);
+    m_hideTimer->setSingleShot(true);
+    connect(m_hideTimer, SIGNAL(timeout()), this, SLOT(hideControls()));
 
-   new PlayerDBusHandler(this, media, m_video->audioOutput());
-   new TrackListDBusHandler(this, media);
-   new RootDBusHandler(this);
+    new PlayerDBusHandler(this, media, m_video->audioOutput());
+    new TrackListDBusHandler(this, media);
+    new RootDBusHandler(this);
 }
 
 void MediaPlayer::SetControlsVisible(bool visible)
@@ -246,7 +246,7 @@ void MediaPlayer::keyPressEvent(QKeyEvent *event)
 
 void MediaPlayer::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-   event->accept();
+    event->accept();
 }
 
 void MediaPlayer::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
