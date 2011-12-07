@@ -373,8 +373,7 @@ void Notes::changeColor(QAction *action)
     if (!action || action->property("color").type() != QVariant::String) {
         return;
     }
-
-    m_topWidget->color() = action->property("color").toString();
+    m_topWidget->setColor(action->property("color").toString());
     KConfigGroup cg = config();
     cg.writeEntry("color", m_topWidget->color());
     emit configNeedsSaving();
