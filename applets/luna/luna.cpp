@@ -40,7 +40,7 @@ Luna::Luna(QObject *parent, const QVariantList &args)
       m_theme(0)
 {
     setHasConfigurationInterface(true);
-    setAspectRatioMode(Plasma::ConstrainedSquare);
+    setAspectRatioMode(Plasma::Square);
     setBackgroundHints(Plasma::Applet::NoBackground);
     resize(QSize(82, 82));
 }
