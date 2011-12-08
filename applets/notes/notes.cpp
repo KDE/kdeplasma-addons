@@ -77,11 +77,12 @@ public:
 
     QString color() const
     {
-        return m_color;
+        return QString(m_color).remove("-notes");
     }
 
-    void setColor(const QString &color)
+    void setColor(QString color)
     {
+        color.remove("-notes");
         if (hasColor(color)) {
             m_color = color + "-notes";
         }
@@ -183,7 +184,7 @@ void Notes::init()
 void Notes::configChanged()
 {
     KConfigGroup cg = config();
-    m_topWidget->color() = cg.readEntry("color", "yellow");
+    m_topWidget->setColor(cg.readEntry("color", "yellow"));
     // color must be before setPlainText("foo")
     m_useThemeColor = cg.readEntry("useThemeColor", true);
     m_useNoColor = cg.readEntry("useNoColor", true);
@@ -373,6 +374,7 @@ void Notes::changeColor(QAction *action)
     if (!action || action->property("color").type() != QVariant::String) {
         return;
     }
+
     m_topWidget->setColor(action->property("color").toString());
     KConfigGroup cg = config();
     cg.writeEntry("color", m_topWidget->color());
@@ -427,16 +429,17 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     ui.checkSpelling->setChecked(m_checkSpelling);
 
     QList<QAction *> colorActions = m_colorMenu->actions();
+    const QString currentColor = m_topWidget->color();
     for (int i = 0; i < colorActions.size(); i++){
         QString text = colorActions.at(i)->text().remove('&');
         if (!text.isEmpty()){
             ui.notesColorComboBox->insertItem(i, text);
-            if (colorActions.at(i)->property("color").toString() == m_topWidget->color()) {
+            if (colorActions.at(i)->property("color").toString() == currentColor) {
                 ui.notesColorComboBox->setCurrentIndex(i);
             }
         }
     }
-    
+
     connect(ui.fontStyleComboBox, SIGNAL(currentFontChanged(QFont)), parent, SLOT(settingsModified()));
     connect(ui.fontBoldCheckBox, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     connect(ui.fontItalicCheckBox, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
@@ -523,7 +526,7 @@ void Notes::configAccepted()
         m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
         connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
     } else {
-        QColor newColor = ui.textColorButton->color();
+        const QColor newColor = ui.textColorButton->color();
         if (m_textColor != newColor) {
             changed = true;
             textColorChanged = true;
@@ -555,7 +558,7 @@ void Notes::configAccepted()
         m_noteEditor->setExtraSelections( extras );
     }
 
-    QColor newBackgroundColor = ui.textBackgroundColorButton->color();
+    const QColor newBackgroundColor = ui.textBackgroundColorButton->color();
     if (m_textBackgroundColor != newBackgroundColor) {
         changed = true;
         m_textBackgroundColor = newBackgroundColor;
@@ -573,9 +576,9 @@ void Notes::configAccepted()
     QList<QAction *> colorActions = m_colorMenu->actions();
     QAction *colorAction = colorActions.value(ui.notesColorComboBox->currentIndex());
     if (colorAction) {
-        QString tmpColor = colorAction->property("color").toString();
+        const QString tmpColor = colorAction->property("color").toString();
         if (tmpColor != m_topWidget->color()){
-            m_topWidget->color() = tmpColor;
+            m_topWidget->setColor(tmpColor);
             cg.writeEntry("color", m_topWidget->color());
             changed = true;
         }
