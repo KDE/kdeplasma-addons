@@ -174,11 +174,11 @@ void Notes::init()
 
     configChanged();
 
-    connect(m_noteEditor, SIGNAL(error(QString)), this, SIGNAL(showError(QString)));
+    connect(m_noteEditor, SIGNAL(error(QString)), this, SLOT(showError(QString)));
     connect(m_noteEditor, SIGNAL(scrolledUp()), this, SLOT(increaseFontSize()));
     connect(m_noteEditor, SIGNAL(scrolledDown()), this, SLOT(decreaseFontSize()));
-    connect(m_noteEditor, SIGNAL(cursorMoved()), this, SIGNAL(delayedSaveNote()));
-    connect(m_noteEditor, SIGNAL(cursorMoved()), this, SIGNAL(lineChanged()));
+    connect(m_noteEditor, SIGNAL(cursorMoved()), this, SLOT(delayedSaveNote()));
+    connect(m_noteEditor, SIGNAL(cursorMoved()), this, SLOT(lineChanged()));
 }
 
 void Notes::configChanged()
