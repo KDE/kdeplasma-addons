@@ -137,7 +137,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 
         if (f.open(QIODevice::ReadOnly)) {
             QTextStream t(&f);
-            m_noteEditor->setHtml(t.readAll());
+            m_noteEditor->setTextOrHtml(t.readAll());
             QTimer::singleShot(1000, this, SLOT(saveNote()));
             f.close();
         }
@@ -233,6 +233,7 @@ void Notes::configChanged()
     updateTextGeometry();
 
     // make sure changes to the background colour take effect immediately
+        kDebug() << "########## ";
     update();
 }
 
