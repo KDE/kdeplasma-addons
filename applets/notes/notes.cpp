@@ -233,7 +233,6 @@ void Notes::configChanged()
     updateTextGeometry();
 
     // make sure changes to the background colour take effect immediately
-        kDebug() << "########## ";
     update();
 }
 
