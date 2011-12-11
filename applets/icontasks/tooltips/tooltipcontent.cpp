@@ -189,12 +189,12 @@ void ToolTipContent::setWindowsToPreview(const QList<WId> & ids)
 
 QList<WId> ToolTipContent::windowsToPreview() const
 {
-    QList<WId> w;
+    QList<WId> windows;
 
-    foreach (Window d, d->windowsToPreview) {
-        w.append(d.id);
+    foreach (Window w, d->windowsToPreview) {
+        windows.append(w.id);
     }
-    return w;
+    return windows;
 }
 
 void ToolTipContent::setPlayState(const QString &ps)
