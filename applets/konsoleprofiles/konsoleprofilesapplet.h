@@ -43,6 +43,7 @@ public:
 protected slots:
     void slotOnItemClicked(const QModelIndex &index);
     void slotUpdateSessionMenu();
+    void slotLaunch();
 
 protected:
     void initSessionFiles();
@@ -50,6 +51,7 @@ protected:
 private:
     QTreeView *m_listView;
     QStandardItemModel *m_konsoleModel;
+    QString m_toLaunch;
 };
 
 K_EXPORT_PLASMA_APPLET(konsoleprofilesapplet, KonsoleProfilesApplet )
