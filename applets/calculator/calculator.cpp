@@ -31,7 +31,6 @@
 #include <QSizePolicy>
 
 #include <KAction>
-#include <KPushButton>
 #include <KGlobal>
 #include <KLocale>
 #include <KStandardAction>
@@ -327,17 +326,15 @@ void CalculatorApplet::slotDigitClicked()
         waitingForDigit = false;
     }
 
-    inputText += QString::number(newDigit);
-
     if (!inputText.contains(KGlobal::locale()->decimalSymbol())) {
-      //If there is no decimal, then we need to reformat the number
-      double currentValue = KGlobal::locale()->readNumber(inputText);
-      QString localizedString = KGlobal::locale()->formatNumber(currentValue, 0);
-      mOutputDisplay->setText(localizedString);
+        //If there is no decimal, then we need to reformat the number
+        inputText = KGlobal::locale()->formatNumber(KGlobal::locale()->readNumber(inputText) * 10 + newDigit, 0);
     } else {
-      //Once we have a decimal, then all we have to do is append the number
-      mOutputDisplay->setText(mOutputDisplay->text()+QString::number(newDigit));
+        //Once we have a decimal, then all we have to do is append the number
+        inputText.append(QString::number(newDigit));
     }
+
+    mOutputDisplay->setText(inputText);
 }
 
 /*
