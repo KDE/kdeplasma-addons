@@ -18,17 +18,19 @@
  ***************************************************************************/
 
 #include "konqprofilesapplet.h"
-#include <QTreeView>
-#include <KStandardDirs>
-#include <plasma/widgets/iconwidget.h>
+
+#include <QFileInfo>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
 #include <QStandardItemModel>
-#include <KToolInvocation>
+#include <QTimer>
+#include <QTreeView>
+
 #include <KDirWatch>
 #include <KGlobalSettings>
-#include <QFileInfo>
-#include <kio/global.h>
+#include <KIO/Job>
+#include <KStandardDirs>
+#include <KToolInvocation>
 
 KonqProfilesApplet::KonqProfilesApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args), m_listView( 0 )
@@ -106,9 +108,20 @@ void KonqProfilesApplet::initSessionFiles()
 void KonqProfilesApplet::slotOnItemClicked(const QModelIndex &index)
 {
     hidePopup();
+    m_toLaunch = index.data(ProfilesName).toString();
+    QTimer::singleShot(0, this, SLOT(slotLaunch()));
+}
+
+void KonqProfilesApplet::slotLaunch()
+{
+    if (m_toLaunch.isEmpty()) {
+        return;
+    }
+
     QStringList args;
-    args<<"--profile"<<index.data(ProfilesName).toString();
+    args << "--profile" << m_toLaunch;
     KToolInvocation::kdeinitExec("konqueror", args);
+    m_toLaunch.clear();
 }
 
 #include "konqprofilesapplet.moc"

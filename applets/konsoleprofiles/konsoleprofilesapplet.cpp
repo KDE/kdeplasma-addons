@@ -18,18 +18,20 @@
  ***************************************************************************/
 
 #include "konsoleprofilesapplet.h"
-#include <QTreeView>
-#include <KStandardDirs>
-#include <plasma/widgets/iconwidget.h>
+
+#include <QFileInfo>
+#include <QGraphicsLinearLayout>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsGridLayout>
 #include <QStandardItemModel>
-#include <KToolInvocation>
+#include <QTimer>
+#include <QTreeView>
+
 #include <KDirWatch>
-#include <QFileInfo>
-#include <kio/global.h>
-#include <QGraphicsLinearLayout>
+#include <KIO/Job>
 #include <KGlobalSettings>
+#include <KStandardDirs>
+#include <KToolInvocation>
 
 KonsoleProfilesApplet::KonsoleProfilesApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args), m_listView( 0 )
@@ -111,9 +113,20 @@ void KonsoleProfilesApplet::initSessionFiles()
 void KonsoleProfilesApplet::slotOnItemClicked(const QModelIndex &index)
 {
     hidePopup();
+    m_toLaunch = index.data(ProfilesName).toString();
+    QTimer::singleShot(0, this, SLOT(slotLaunch()));
+}
+
+void KonsoleProfilesApplet::slotLaunch()
+{
+    if (m_toLaunch.isEmpty()) {
+        return;
+    }
+
     QStringList args;
-    args<<"--profile"<<index.data(ProfilesName).toString();
+    args << "--profile" << m_toLaunch;
     KToolInvocation::kdeinitExec("konsole", args);
+    m_toLaunch.clear();
 }
 
 #include "konsoleprofilesapplet.moc"

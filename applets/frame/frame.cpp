@@ -152,23 +152,24 @@ void Frame::setImageAsWallpaper()
     if (containment()->wallpaper() && containment()->wallpaper()->supportsMimetype(KMimeType::findByUrl(url).data()->name())) {
        containment()->wallpaper()->setUrls(url);
     } else {
-      KPluginInfo::List wallpaperList = containment()->wallpaper()->listWallpaperInfoForMimetype(KMimeType::findByUrl(url).data()->name());
-      KPluginInfo wallpaper;
-      bool image = false;
-      foreach(wallpaper,wallpaperList) {
-        if (wallpaper.pluginName() == "image") {
-           image = true;
-           break;
-         }
-      }
-      if (image) {
-        containment()->setWallpaper("image");
-      } else {
-        containment()->setWallpaper(wallpaperList.at(0).name());
-      }
-      if (containment()->wallpaper()) {
-        containment()->wallpaper()->setUrls(url);
-      }
+        KPluginInfo::List wallpaperList = containment()->wallpaper()->listWallpaperInfoForMimetype(KMimeType::findByUrl(url).data()->name());
+        bool image = false;
+        foreach (const KPluginInfo &wallpaper, wallpaperList) {
+            if (wallpaper.pluginName() == "image") {
+                image = true;
+                break;
+            }
+        }
+
+        if (image) {
+            containment()->setWallpaper("image");
+        } else if (!wallpaperList.isEmpty()) {
+            containment()->setWallpaper(wallpaperList.at(0).name());
+        }
+
+        if (containment()->wallpaper()) {
+            containment()->wallpaper()->setUrls(url);
+        }
     }
 }
 

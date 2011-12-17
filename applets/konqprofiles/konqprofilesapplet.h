@@ -44,6 +44,7 @@ public:
 protected slots:
     void slotOnItemClicked(const QModelIndex &index);
     void slotUpdateKonqProfiles();
+    void slotLaunch();
 
 protected:
     void initSessionFiles();
@@ -51,6 +52,7 @@ protected:
 private:
     QTreeView *m_listView;
     QStandardItemModel *m_konqModel;
+    QString m_toLaunch;
 };
 
 K_EXPORT_PLASMA_APPLET(konqprofilesapplet, KonqProfilesApplet )
