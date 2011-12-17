@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string comment="KDE::DoNotExtract">Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="margin">
@@ -89,7 +89,7 @@
    <item row="4" column="0">
     <widget class="QLabel" name="launcherIcons_label">
      <property name="text">
-      <string>Alway use launcher icons:</string>
+      <string>Always use launcher icons:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -102,7 +102,7 @@
    <item row="4" column="1">
     <widget class="QCheckBox" name="launcherIcons">
      <property name="toolTip">
-      <string>&lt;p&gt;Enabling this item forces the icon for a running application to be the same as that used for the launcher. This resoves some oddities where the launhcer icon is different to the applicaiton icon - as happens with LibreOffice.&lt;/p&gt;</string>
+      <string>&lt;p&gt;Enabling this item forces the icon for a running application to be the same as that used for the launcher. This resolves some oddities where the launcher icon is different from the application icon - as happens with LibreOffice.&lt;/p&gt;</string>
      </property>
      <property name="text">
       <string/>
@@ -122,7 +122,7 @@
    <item row="5" column="1">
     <widget class="KIntSpinBox" name="iconScale">
      <property name="toolTip">
-      <string>&lt;p&gt;Controls the scaling of the taskbar icon. When set to &amp;quot;Automatic&amp;quot;, the taskbar will attempt to determine the optimum size.&lt;/p&gt;</string>
+      <string>&lt;p&gt;Controls the scaling of the taskbar icon. When set to &amp;quot;Automatic&amp;quot;, the taskbar will attempt to determine the optimal size.&lt;/p&gt;</string>
      </property>
      <property name="suffix">
       <string>%</string>
@@ -220,7 +220,7 @@
    <item row="9" column="1">
     <widget class="QComboBox" name="showSeparator">
      <property name="toolTip">
-      <string>&lt;p&gt;When enabled, and there is ony 1 row/column, then a separator will be drawn between the launchers/tasks-with-launchers and non-launcher tasks.&lt;/p&gt;</string>
+      <string>&lt;p&gt;When enabled, and there is only 1 row/column, then a separator will be drawn between the launchers/tasks-with-launchers and non-launcher tasks.&lt;/p&gt;</string>
      </property>
     </widget>
    </item>
