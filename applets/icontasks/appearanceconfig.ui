@@ -10,9 +10,6 @@
     <height>283</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string comment="KDE::DoNotExtract">Form</string>
-  </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="margin">
     <number>0</number>
