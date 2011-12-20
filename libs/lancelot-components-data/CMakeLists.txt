@@ -7,6 +7,7 @@ set(lancelotcomponentsdata_SRCS
     BaseModel.cpp
     FavoriteApplications.cpp
     FolderModel.cpp
+    DirModel.cpp
     )
 
 INCLUDE_DIRECTORIES(

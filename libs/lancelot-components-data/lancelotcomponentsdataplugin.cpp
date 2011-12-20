@@ -25,6 +25,7 @@
 
 #include "FavoriteApplications.h"
 #include "FolderModel.h"
+#include "DirModel.h"
 
 #define QML_REGISTER_TYPE(Type) qmlRegisterType < Type > (uri, 0, 1, #Type)
 
@@ -34,6 +35,7 @@ void LancelotComponentsDataPlugin::registerTypes(const char * uri)
 
     QML_REGISTER_TYPE(FavoriteApplications);
     QML_REGISTER_TYPE(FolderModel);
+    QML_REGISTER_TYPE(DirModel);
 }
 
 

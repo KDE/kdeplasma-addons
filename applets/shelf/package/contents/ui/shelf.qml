@@ -61,14 +61,19 @@ Item {
         // }
 
         // model: LancelotData.FavoriteApplications { }
-        model: LancelotData.FolderModel {
-            folder: "/home/ivan"
+
+        // model: LancelotData.FolderModel {
+        //     folder: "/home/ivan"
+        // }
+
+        model: LancelotData.DirModel {
+            dir: "/home/ivan"
         }
 
         delegate: ExtenderButton {
-            title:       model.name
+            title:       model.display
             description: model.description
-            icon:        model.icon
+            icon:        model.decoration
         }
 
         anchors {

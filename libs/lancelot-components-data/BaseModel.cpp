@@ -52,9 +52,9 @@ BaseModel::BaseModel(const QString & title, const QIcon & icon)
     d->icon  = icon;
 
     QHash <int, QByteArray> roleNames;
-    roleNames[Qt::DisplayRole] = "name";
-    roleNames[Qt::StatusTipRole] = "description";
-    roleNames[Qt::DecorationRole] = "icon";
+    roleNames[Qt::DisplayRole]    = "display";
+    roleNames[Qt::StatusTipRole]  = "description";
+    roleNames[Qt::DecorationRole] = "decoration";
     setRoleNames(roleNames);
 }
 
