@@ -24,11 +24,6 @@ import org.kde.qtextracomponents 0.1
 Item {
     id: main
 
-    property int itemSize: 32
-
-    width: parent.width
-    height: itemSize + 16
-
     /* property declarations --------------------------{{{ */
     property alias title: textTitle.text
     property alias description: textDescription.text
@@ -36,71 +31,71 @@ Item {
     /* }}} */
 
     /* signal declarations ----------------------------{{{ */
+    signal clicked
     /* }}} */
 
     /* JavaScript functions ---------------------------{{{ */
     /* }}} */
 
     /* object properties ------------------------------{{{ */
+    property int itemSize: 32
+    width: parent.width
+    height: itemSize + 16
     /* }}} */
 
     /* child objects ----------------------------------{{{ */
+    QIconItem {
+        id: imageIcon
+        anchors.verticalCenter: parent.verticalCenter
+        x:      8
+        width:  main.itemSize
+        height: main.itemSize
+    }
 
-        QIconItem {
-            id: imageIcon
-            anchors.verticalCenter: parent.verticalCenter
-            x:      8
-            width:  main.itemSize
-            height: main.itemSize
-            // icon: QIcon(main.icon)
+    Text {
+        id: textTitle
+
+        anchors {
+            left:   imageIcon.right
+            top:    parent.top
+            bottom: (textDescription.text == "") ? parent.bottom : parent.verticalCenter
+            right:  parent.right
+
+            leftMargin: 8
         }
 
-        Text {
-            id: textTitle
+        verticalAlignment: (textDescription.text == "") ? Text.AlignVCenter : Text.AlignBottom
+        elide: Text.ElideRight
+    }
 
-            anchors {
-                left:   imageIcon.right
-                top:    parent.top
-                bottom: (textDescription.text == "") ? parent.bottom : parent.verticalCenter
-                right:  parent.right
+    Text {
+        id: textDescription
 
-                leftMargin: 8
-            }
+        anchors {
+            left:   imageIcon.right
+            top:    parent.verticalCenter
+            bottom: parent.bottom
+            right:  parent.right
 
-            verticalAlignment: (textDescription.text == "") ? Text.AlignVCenter : Text.AlignBottom
-            elide: Text.ElideRight
+            leftMargin: 8
         }
 
-        Text {
-            id: textDescription
+        opacity: .6
+        elide: Text.ElideRight
+        visible: (text != "")
+    }
 
-            anchors {
-                left:   imageIcon.right
-                top:    parent.verticalCenter
-                bottom: parent.bottom
-                right:  parent.right
+    MouseArea {
+        anchors.fill: parent
 
-                leftMargin: 8
-            }
-
-            opacity: .6
-            elide: Text.ElideRight
-            visible: (text != "")
+        onClicked: {
+            print("{ clicked: " + index)
+            main.clicked()
+            print("clicked: " + index + " }")
         }
 
-        MouseArea {
-            anchors.fill: parent
-
-            onClicked: {
-                print("clicked")
-                var service = recommendationsModel.serviceForSource(DataEngineSource)
-                var operation = service.operationDescription("executeAction")
-                operation.Action = ""
-                service.startOperationCall(operation)
-            }
-
-            preventStealing: true
-        }
+        /*preventStealing: true*/
+    }
     /* }}} */
 
     /* states -----------------------------------------{{{ */

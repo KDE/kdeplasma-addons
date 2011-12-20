@@ -19,28 +19,13 @@
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-// import org.kde.plasma.shelf 0.1 as Shelf
 import org.kde.qtextracomponents 0.1
 import org.kde.lancelot.components.data 0.1 as LancelotData
 
 Item {
     id: root
-    property int minimumWidth: 290
+    property int minimumWidth:  290
     property int minimumHeight: 340
-
-    // PlasmaCore.DataSource {
-    //     id: recommendationsModel
-    //     engine: "org.kde.recommendations"
-    //     interval: 0
-
-    //     onSourceAdded: {
-    //         connectSource(source)
-    //     }
-
-    //     Component.onCompleted: {
-    //         connectedSources = sources
-    //     }
-    // }
 
     PlasmaComponents.TextField {
         id: textSearch
@@ -56,24 +41,23 @@ Item {
         id: list
         clip: true
 
-        // model: PlasmaCore.DataModel {
-        //     dataSource: recommendationsModel
+        // LancelotData.FavoriteApplications {
+        //     id: modelObject
         // }
 
-        // model: LancelotData.FavoriteApplications { }
-
-        // model: LancelotData.FolderModel {
-        //     folder: "/home/ivan"
-        // }
-
-        model: LancelotData.DirModel {
+        LancelotData.DirModel {
+            id: modelObject
             dir: "/home/ivan"
         }
+
+        model: modelObject
 
         delegate: ExtenderButton {
             title:       model.display
             description: model.description
             icon:        model.decoration
+
+            onClicked: modelObject.activate(index)
         }
 
         anchors {

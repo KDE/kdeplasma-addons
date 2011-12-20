@@ -62,20 +62,18 @@ BaseModel::~BaseModel()
     delete d;
 }
 
-// void BaseModel::activate(int index)
-// {
-//     QString data = itemAt(index).data.toString();
-//
-//     int result = -1;
-//
-//     kDebug() << "starting:" << data;
-//
-//     if (result != 0) {
-//         new KRun(KUrl(data), 0);
-//     }
-//
-//     hideApplicationWindow();
-// }
+void BaseModel::activate(int index)
+{
+    QString data = itemAt(index).data.toString();
+
+    int result = -1;
+
+    kDebug() << "starting:" << data;
+
+    if (result != 0) {
+        new KRun(KUrl(data), 0);
+    }
+}
 
 int BaseModel::rowCount(const QModelIndex & parent) const
 {

@@ -91,6 +91,14 @@ public:
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
 
+public Q_SLOTS:
+    /**
+     * Activates the specified item
+     * @param index index of the item to activate
+     */
+    virtual void activate(int index);
+
+
 Q_SIGNALS:
     /**
      * Emitted when the number of items in the model is changed

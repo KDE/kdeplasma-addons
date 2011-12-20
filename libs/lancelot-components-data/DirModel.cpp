@@ -24,6 +24,7 @@
 #include <KConfigGroup>
 #include <KDirLister>
 #include <KDebug>
+#include <KRun>
 
 #include <QFileInfo>
 
@@ -73,15 +74,12 @@ void DirModel::setDir(const QString & dir)
     d->model->dirLister()->openUrl(KUrl(dir), KDirLister::Keep);
 }
 
-// QVariant DirModel::data(const QModelIndex & index, int role) const
-// {
-//     if (role == Qt::StatusTipRole) {
-//         return data(
-//                 index.sibling(index.row(), KDirModel::Type), Qt::DisplayRole
-//             );
-//     }
-//
-//     return KDirSortFilterProxyModel::data(index, role);
-// }
+void DirModel::activate(int what)
+{
+    KUrl url = d->model->dirLister()->url().url();
+    url.addPath(data(index(what, 0)).toString());
+    kDebug() << url;
+    new KRun(url, 0);
+}
 
 #include "DirModel.moc"

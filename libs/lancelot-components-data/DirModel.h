@@ -44,8 +44,18 @@ public:
 
     // QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
+
+public Q_SLOTS:
+    /**
+     * Activates the specified item
+     * @param index index of the item to activate
+     */
+    virtual void activate(int index);
+
+
 protected:
     void load();
+
 
 private:
     friend class DirModelPrivate;

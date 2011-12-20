@@ -33,6 +33,7 @@ public:
 
     bool addFavorite(QString url);
 
+
 protected:
     void load();
     void save();
