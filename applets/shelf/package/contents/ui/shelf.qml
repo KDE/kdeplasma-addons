@@ -60,7 +60,10 @@ Item {
         //     dataSource: recommendationsModel
         // }
 
-        model: LancelotData.FavoriteApplications { }
+        // model: LancelotData.FavoriteApplications { }
+        model: LancelotData.FolderModel {
+            folder: "/home/ivan"
+        }
 
         delegate: ExtenderButton {
             title:       model.name
