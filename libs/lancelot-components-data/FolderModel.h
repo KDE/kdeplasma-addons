@@ -34,7 +34,7 @@ class FolderModelPrivate;
 class FolderModel : public BaseModel {
     Q_OBJECT
 
-    Q_PROPERTY(QString folder READ folder WRITE setFolder)
+    Q_PROPERTY(QString path READ path WRITE setPath)
 
 public:
     explicit FolderModel();
@@ -43,8 +43,8 @@ public:
     // L_Override bool dataDropAvailable(int where, const QMimeData * mimeData);
     // L_Override void dataDropped(int where, const QMimeData * mimeData);
 
-    QString folder() const;
-    void setFolder(const QString & folder);
+    QString path() const;
+    void setPath(const QString & path);
 
 protected:
     void load();

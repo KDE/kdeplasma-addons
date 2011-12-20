@@ -17,49 +17,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_DATA_DIRMODEL_H
-#define LANCELOT_DATA_DIRMODEL_H
+#ifndef LANCELOT_DATA_RECENTDOCUMENTS_H
+#define LANCELOT_DATA_RECENTDOCUMENTS_H
 
 #include <lancelot/lancelot_export.h>
 
-#include "BaseModel.h"
-#include <KDirModel>
-#include <KDirSortFilterProxyModel>
+#include "FolderModel.h"
+#include <KDirWatch>
 
-class DirModelPrivate;
-
-// TODO: Kill this model
-
-class DirModel : public KDirSortFilterProxyModel {
+/**
+ * Model containing the recently opened documents
+ */
+class LANCELOT_EXPORT RecentDocuments : public FolderModel {
     Q_OBJECT
-
-    Q_PROPERTY(QString path READ path WRITE setPath)
-
 public:
-    explicit DirModel();
-    virtual ~DirModel();
-
-    QString path() const;
-    void setPath(const QString & path);
-
-    // QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-
-
-public Q_SLOTS:
-    /**
-     * Activates the specified item
-     * @param index index of the item to activate
-     */
-    virtual void activate(int index);
-
-
-protected:
-    void load();
-
-
-private:
-    friend class DirModelPrivate;
-    class DirModelPrivate * const d;
+    RecentDocuments();
+    virtual ~RecentDocuments();
 };
 
-#endif /* LANCELOT_DATA_DIRMODEL_H */
+#endif /* LANCELOT_DATA_RECENTDOCUMENTS_H */

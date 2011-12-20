@@ -64,14 +64,14 @@ DirModel::~DirModel()
     delete d;
 }
 
-QString DirModel::dir() const
+QString DirModel::path() const
 {
     return d->model->dirLister()->url().url();
 }
 
-void DirModel::setDir(const QString & dir)
+void DirModel::setPath(const QString & path)
 {
-    d->model->dirLister()->openUrl(KUrl(dir), KDirLister::Keep);
+    d->model->dirLister()->openUrl(KUrl(path), KDirLister::Keep);
 }
 
 void DirModel::activate(int what)

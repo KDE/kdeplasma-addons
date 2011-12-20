@@ -58,7 +58,7 @@ public:
     /**
      * Creates a new BaseModel
      */
-    BaseModel(const QString & title, const QIcon & icon);
+    BaseModel(const QString & title = QString(), const QIcon & icon = QIcon());
 
     /**
      * Destroys this BaseModel

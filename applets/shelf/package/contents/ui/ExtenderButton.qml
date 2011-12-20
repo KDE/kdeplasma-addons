@@ -80,7 +80,7 @@ Item {
             leftMargin: 8
         }
 
-        opacity: .6
+        opacity: .5
         elide: Text.ElideRight
         visible: (text != "")
     }

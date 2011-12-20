@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
+ *   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -17,49 +17,47 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_DATA_DIRMODEL_H
-#define LANCELOT_DATA_DIRMODEL_H
+#ifndef LANCELOT_DATA_DEVICES_H
+#define LANCELOT_DATA_DEVICES_H
 
 #include <lancelot/lancelot_export.h>
 
 #include "BaseModel.h"
-#include <KDirModel>
-#include <KDirSortFilterProxyModel>
+#include <solid/device.h>
+#include <solid/storageaccess.h>
+#include <QXmlStreamReader>
 
-class DirModelPrivate;
-
-// TODO: Kill this model
-
-class DirModel : public KDirSortFilterProxyModel {
+class LANCELOT_EXPORT Devices : public BaseModel {
     Q_OBJECT
 
-    Q_PROPERTY(QString path READ path WRITE setPath)
+    Q_PROPERTY(Type filter READ filter WRITE setFilter)
+    Q_ENUMS(Type)
 
 public:
-    explicit DirModel();
-    virtual ~DirModel();
+    enum Type {
+        Fixed = 1,
+        Removable = 2,
+        All = 0
+    };
 
-    QString path() const;
-    void setPath(const QString & path);
+    Devices(Type filter = All);
+    virtual ~Devices();
 
-    // QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+    void setFilter(Type type);
+    Type filter() const;
 
-
-public Q_SLOTS:
-    /**
-     * Activates the specified item
-     * @param index index of the item to activate
-     */
-    virtual void activate(int index);
-
+    // bool hasContextActions(int index) const;
+    // void setContextActions(int index, Lancelot::PopupMenu * menu);
+    // void contextActivate(int index, QAction * context);
+    // QMimeData * mimeData(int index) const;
 
 protected:
+    void activate(int index);
     void load();
 
-
 private:
-    friend class DirModelPrivate;
-    class DirModelPrivate * const d;
+    class Private;
+    Private * const d;
 };
 
-#endif /* LANCELOT_DATA_DIRMODEL_H */
+#endif /* LANCELOT_DATA_DEVICES_H */

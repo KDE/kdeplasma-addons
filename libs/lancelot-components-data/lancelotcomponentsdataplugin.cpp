@@ -24,6 +24,11 @@
 #include "FavoriteApplications.h"
 #include "FolderModel.h"
 #include "DirModel.h"
+#include "SystemServices.h"
+#include "NewDocuments.h"
+#include "RecentDocuments.h"
+#include "Devices.h"
+#include "ContactsKopete.h"
 
 #define QML_REGISTER_TYPE(Type) qmlRegisterType < Type > (uri, 0, 1, #Type)
 
@@ -32,8 +37,13 @@ void LancelotComponentsDataPlugin::registerTypes(const char * uri)
     Q_ASSERT(uri == QLatin1String("org.kde.lancelot.components.data"));
 
     QML_REGISTER_TYPE(FavoriteApplications);
-    QML_REGISTER_TYPE(FolderModel);
+    // QML_REGISTER_TYPE(FolderModel);
     QML_REGISTER_TYPE(DirModel);
+    QML_REGISTER_TYPE(SystemServices);
+    QML_REGISTER_TYPE(NewDocuments);
+    QML_REGISTER_TYPE(RecentDocuments);
+    QML_REGISTER_TYPE(Devices);
+    QML_REGISTER_TYPE(ContactsKopete);
 }
 
 

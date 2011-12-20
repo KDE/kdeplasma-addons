@@ -1,0 +1,6 @@
+This directory contains:
+
+d-bus interfaces for programs supported by Lancelot so that there is no need
+for them to be installed during compilation:
+  - kopete
+  - kmail

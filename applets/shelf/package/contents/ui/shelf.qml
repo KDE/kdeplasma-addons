@@ -41,13 +41,16 @@ Item {
         id: list
         clip: true
 
+        // LancelotData.DirModel {
         // LancelotData.FavoriteApplications {
-        //     id: modelObject
-        // }
-
-        LancelotData.DirModel {
+        // LancelotData.NewDocuments {
+        // LancelotData.RecentDocuments {
+        // LancelotData.SystemServices {
+        // LancelotData.Devices {
+        LancelotData.ContactsKopete {
             id: modelObject
-            dir: "/home/ivan"
+        //    path: "/home/ivan"
+        //    filter: LancelotData.Devices.Removable
         }
 
         model: modelObject

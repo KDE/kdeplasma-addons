@@ -8,6 +8,11 @@ set(lancelotcomponentsdata_SRCS
     FavoriteApplications.cpp
     FolderModel.cpp
     DirModel.cpp
+    SystemServices.cpp
+    NewDocuments.cpp
+    RecentDocuments.cpp
+    Devices.cpp
+    ContactsKopete.cpp
     )
 
 INCLUDE_DIRECTORIES(
@@ -18,6 +23,18 @@ INCLUDE_DIRECTORIES(
 
 qt4_automoc(${lancelotcomponentsdata_SRCS})
 
+#################################################
+
+# Kopete
+
+set(kopete_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.Kopete.xml)
+if (NOT EXISTS ${kopete_xml})
+   set(kopete_xml external/org.kde.Kopete.xml)
+endif (NOT EXISTS ${kopete_xml})
+qt4_add_dbus_interface(lancelotcomponentsdata_SRCS ${kopete_xml} kopete_interface)
+
+
+#################################################
 
 add_library(
     lancelotcomponentsdataplugin

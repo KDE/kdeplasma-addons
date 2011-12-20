@@ -1,0 +1,119 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.Kopete">
+    <method name="connectAll">
+    </method>
+    <method name="disconnectAll">
+    </method>
+    <method name="isConnected">
+      <arg type="b" direction="out"/>
+      <arg name="protocolName" type="s" direction="in"/>
+      <arg name="accountId" type="s" direction="in"/>
+    </method>
+    <method name="connect">
+      <arg name="protocolName" type="s" direction="in"/>
+      <arg name="accountId" type="s" direction="in"/>
+    </method>
+    <method name="disconnect">
+      <arg name="protocolName" type="s" direction="in"/>
+      <arg name="accountId" type="s" direction="in"/>
+    </method>
+    <method name="protocols">
+      <arg type="as" direction="out"/>
+    </method>
+    <method name="identities">
+      <arg type="as" direction="out"/>
+    </method>
+    <method name="accounts">
+      <arg type="as" direction="out"/>
+    </method>
+    <method name="contacts">
+      <arg type="as" direction="out"/>
+    </method>
+    <method name="labelForIdentity">
+      <arg name="identity" type="s" direction="in"/>
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="contactsByFilter">
+      <arg type="as" direction="out"/>
+      <arg name="filter" type="s" direction="in"/>
+    </method>
+    <method name="setIdentityNickName">
+      <arg name="nickName" type="s" direction="in"/>
+      <arg name="identityId" type="s" direction="in"/>
+    </method>
+    <method name="setIdentityNickName">
+      <arg name="nickName" type="s" direction="in"/>
+    </method>
+    <method name="setIdentityAvatar">
+      <arg name="avatarUrl" type="s" direction="in"/>
+      <arg name="identityId" type="s" direction="in"/>
+    </method>
+    <method name="setIdentityAvatar">
+      <arg name="avatarUrl" type="s" direction="in"/>
+    </method>
+    <method name="setIdentityOnlineStatus">
+      <arg name="status" type="s" direction="in"/>
+      <arg name="message" type="s" direction="in"/>
+      <arg name="identityId" type="s" direction="in"/>
+    </method>
+    <method name="setIdentityOnlineStatus">
+      <arg name="status" type="s" direction="in"/>
+      <arg name="message" type="s" direction="in"/>
+    </method>
+    <method name="setOnlineStatus">
+      <arg name="status" type="s" direction="in"/>
+      <arg name="message" type="s" direction="in"/>
+    </method>
+    <method name="setOnlineStatus">
+      <arg name="status" type="s" direction="in"/>
+    </method>
+    <method name="setStatusMessage">
+      <arg name="message" type="s" direction="in"/>
+    </method>
+    <method name="sendMessage">
+      <arg name="contactId" type="s" direction="in"/>
+      <arg name="message" type="s" direction="in"/>
+    </method>
+    <method name="addContact">
+      <arg type="b" direction="out"/>
+      <arg name="protocolName" type="s" direction="in"/>
+      <arg name="accountId" type="s" direction="in"/>
+      <arg name="contactId" type="s" direction="in"/>
+      <arg name="displayName" type="s" direction="in"/>
+      <arg name="groupName" type="s" direction="in"/>
+    </method>
+    <method name="addContact">
+      <arg type="b" direction="out"/>
+      <arg name="protocolName" type="s" direction="in"/>
+      <arg name="accountId" type="s" direction="in"/>
+      <arg name="contactId" type="s" direction="in"/>
+      <arg name="displayName" type="s" direction="in"/>
+    </method>
+    <method name="sendFile">
+      <arg name="contactId" type="s" direction="in"/>
+      <arg name="fileUrl" type="s" direction="in"/>
+    </method>
+    <method name="getDisplayName">
+      <arg name="contactId" type="s" direction="in"/>
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="isContactOnline">
+      <arg name="contactId" type="s" direction="in"/>
+      <arg type="b" direction="out"/>
+    </method>
+	<method name="openChat">
+      <arg name="contactID" type="s" direction="in"/>
+    </method>
+    <!-- contactProperties is an experimental method that might be removed before KDE 4.2 --> 
+    <method name="contactProperties">
+      <arg type="a{sv}" direction="out"/>
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
+      <arg name="contactId" type="s" direction="in"/>
+    </method>
+    <!-- contactChanged is an experimental signal that might be removed before KDE 4.2 --> 
+	<signal name="contactChanged">
+      <arg name="contactID" type="s"/>
+    </signal>    
+  </interface>
+</node>

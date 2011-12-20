@@ -40,7 +40,7 @@ public:
     int compare(const QString & item1, const QString & item2);
 
     KDirLister * dirLister;
-    QString dirPath;
+    QString path;
     QDir::SortFlags sort;
 
     class ItemInfo {
@@ -82,7 +82,7 @@ void FolderModel::load()
     KConfig cfg(KStandardDirs::locate("config", "lancelotrc"));
     KConfigGroup config = cfg.group("FolderModel");
 
-    QStringList items = config.readEntry(d->dirPath, QStringList());
+    QStringList items = config.readEntry(d->path, QStringList());
     foreach (const QString &item, items) {
         if (QFile::exists(item)) {
             d->addItem(KUrl(item));
@@ -197,23 +197,23 @@ void FolderModel::save()
     KConfig cfg(KStandardDirs::locate("config", "lancelotrc"));
     KConfigGroup config = cfg.group("FolderModel");
 
-    config.writeEntry(d->dirPath, items);
+    config.writeEntry(d->path, items);
     config.sync();
 }
 
-QString FolderModel::folder() const
+QString FolderModel::path() const
 {
-    return d->dirPath;
+    return d->path;
 }
 
-void FolderModel::setFolder(const QString & folder)
+void FolderModel::setPath(const QString & path)
 {
-    d->dirPath = folder;
+    d->path = path;
 
-    if (!d->dirPath.endsWith(QDir::separator())) {
-        d->dirPath += QDir::separator();
+    if (!d->path.endsWith(QDir::separator())) {
+        d->path += QDir::separator();
     }
-    d->dirPath = d->dirPath.replace("//", "/");
+    d->path = d->path.replace("//", "/");
 
     load();
 
@@ -227,14 +227,14 @@ void FolderModel::setFolder(const QString & folder)
     connect(d->dirLister, SIGNAL(newItems(KFileItemList)),
               this, SLOT(newItems(KFileItemList)));
 
-    setSelfTitle(i18nc("Folder: path/to/folder", "Folder: %1", d->dirPath));
+    setSelfTitle(i18nc("Folder: path/to/folder", "Folder: %1", d->path));
 
-    d->dirLister->openUrl(KUrl(d->dirPath), KDirLister::Keep);
+    d->dirLister->openUrl(KUrl(d->path), KDirLister::Keep);
 }
 
 void FolderModel::update()
 {
-    d->dirLister->updateDirectory(KUrl(d->dirPath));
+    d->dirLister->updateDirectory(KUrl(d->path));
 }
 
 #include "FolderModel.moc"
