@@ -5,14 +5,17 @@ include(KDE4Defaults)
 set(lancelotcomponentsdata_SRCS
     lancelotcomponentsdataplugin.cpp
     BaseModel.cpp
+
+    ContactsKopete.cpp
+    Devices.cpp
+    DirModel.cpp
     FavoriteApplications.cpp
     FolderModel.cpp
-    DirModel.cpp
-    SystemServices.cpp
+    MessagesAkonadi.cpp
     NewDocuments.cpp
     RecentDocuments.cpp
-    Devices.cpp
-    ContactsKopete.cpp
+    Runner.cpp
+    SystemServices.cpp
     )
 
 INCLUDE_DIRECTORIES(
@@ -25,6 +28,8 @@ qt4_automoc(${lancelotcomponentsdata_SRCS})
 
 #################################################
 
+set (ADDITIONAL_LINK_LIBRARIES)
+
 # Kopete
 
 set(kopete_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.Kopete.xml)
@@ -33,8 +38,38 @@ if (NOT EXISTS ${kopete_xml})
 endif (NOT EXISTS ${kopete_xml})
 qt4_add_dbus_interface(lancelotcomponentsdata_SRCS ${kopete_xml} kopete_interface)
 
+# KDE PIM
+
+# find_package(KdepimLibs)
+
+if (KDEPIMLIBS_FOUND)
+   set( LANCELOT_DATA_HAS_PIMLIBS 1 )
+
+   include_directories(
+      ${AKONADI_INCLUDE_DIR}
+      ${KDEPIMLIBS_INCLUDE_DIRS}
+   )
+
+   set (ADDITIONAL_LINK_LIBRARIES
+        ${ADDITIONAL_LINK_LIBRARIES}
+        ${KDEPIMLIBS_AKONADI_LIBS}
+   )
+endif(KDEPIMLIBS_FOUND)
+
+macro_log_feature(LANCELOT_DATA_HAS_PIMLIBS
+   "Akonadi and KDE PIM Libs"
+   "Support for unread messages model"
+   "http://www.kde.org/"
+   FALSE
+   ""
+   "STRONGLY_RECOMMENDED: Akonadi and KDE PIM libraries are required for messages datamodel and kmail support"
+)
+
 
 #################################################
+
+configure_file(config-lancelot-components-data.h.cmake
+   ${CMAKE_CURRENT_BINARY_DIR}/config-lancelot-components-data.h )
 
 add_library(
     lancelotcomponentsdataplugin
@@ -52,6 +87,7 @@ target_link_libraries(
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_SOLID_LIBS}
+    ${ADDITIONAL_LINK_LIBRARIES}
     )
 
 install(

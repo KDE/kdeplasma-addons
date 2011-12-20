@@ -27,30 +27,23 @@ Item {
     property int minimumWidth:  290
     property int minimumHeight: 340
 
-    PlasmaComponents.TextField {
-        id: textSearch
-
-        anchors {
-            top:   parent.top
-            left:  parent.left
-            right: parent.right
-        }
-    }
-
     ListView {
         id: list
         clip: true
 
-        // LancelotData.DirModel {
-        // LancelotData.FavoriteApplications {
-        // LancelotData.NewDocuments {
-        // LancelotData.RecentDocuments {
-        // LancelotData.SystemServices {
-        // LancelotData.Devices {
-        LancelotData.ContactsKopete {
+        /*LancelotData.DirModel {*/
+        /*LancelotData.FavoriteApplications {*/
+        /*LancelotData.NewDocuments {*/
+        /*LancelotData.RecentDocuments {*/
+        /*LancelotData.SystemServices {*/
+        /*LancelotData.Devices {*/
+        /*LancelotData.ContactsKopete {*/
+        /*LancelotData.Runner {*/
+        LancelotData.MessagesAkonadi {
             id: modelObject
-        //    path: "/home/ivan"
-        //    filter: LancelotData.Devices.Removable
+        /*    searchString: textSearch.text*/
+        /*    path: "/home/ivan"*/
+        /*    filter: LancelotData.Devices.Removable*/
         }
 
         model: modelObject
@@ -68,6 +61,16 @@ Item {
             left:   parent.left
             bottom: parent.bottom
             right:  parent.right
+        }
+    }
+
+    PlasmaComponents.TextField {
+        id: textSearch
+
+        anchors {
+            top:   parent.top
+            left:  parent.left
+            right: parent.right
         }
     }
 

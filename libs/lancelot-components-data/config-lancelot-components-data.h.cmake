@@ -1,0 +1,1 @@
+#cmakedefine LANCELOT_DATA_HAS_PIMLIBS 1
