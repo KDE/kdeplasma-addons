@@ -7,3 +7,4 @@ if(NOT WIN32 AND KDE4WORKSPACE_FOUND)
    add_subdirectory(lancelot-datamodels)
 endif(NOT WIN32 AND KDE4WORKSPACE_FOUND)
 
+add_subdirectory(lancelot-components-data)

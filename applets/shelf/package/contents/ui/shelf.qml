@@ -21,25 +21,26 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 // import org.kde.plasma.shelf 0.1 as Shelf
 import org.kde.qtextracomponents 0.1
+import org.kde.lancelot.components.data 0.1 as LancelotData
 
 Item {
     id: root
     property int minimumWidth: 290
     property int minimumHeight: 340
 
-    PlasmaCore.DataSource {
-        id: recommendationsModel
-        engine: "org.kde.recommendations"
-        interval: 0
+    // PlasmaCore.DataSource {
+    //     id: recommendationsModel
+    //     engine: "org.kde.recommendations"
+    //     interval: 0
 
-        onSourceAdded: {
-            connectSource(source)
-        }
+    //     onSourceAdded: {
+    //         connectSource(source)
+    //     }
 
-        Component.onCompleted: {
-            connectedSources = sources
-        }
-    }
+    //     Component.onCompleted: {
+    //         connectedSources = sources
+    //     }
+    // }
 
     PlasmaComponents.TextField {
         id: textSearch
@@ -55,9 +56,11 @@ Item {
         id: list
         clip: true
 
-        model: PlasmaCore.DataModel {
-            dataSource: recommendationsModel
-        }
+        // model: PlasmaCore.DataModel {
+        //     dataSource: recommendationsModel
+        // }
+
+        model: LancelotData.FavoriteApplications { }
 
         delegate: ExtenderButton {
             title:       model.name
@@ -78,9 +81,9 @@ Item {
         flickableItem: list
 
         anchors {
-            right:  scrollBar.right
-            top:    scrollBar.top
-            bottom: scrollBar.bottom
+            right:  list.right
+            top:    list.top
+            bottom: list.bottom
         }
     }
 

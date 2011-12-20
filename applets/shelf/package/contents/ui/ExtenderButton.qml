@@ -32,7 +32,7 @@ Item {
     /* property declarations --------------------------{{{ */
     property alias title: textTitle.text
     property alias description: textDescription.text
-    property string icon
+    property alias icon: imageIcon.icon
     /* }}} */
 
     /* signal declarations ----------------------------{{{ */
@@ -52,7 +52,7 @@ Item {
             x:      8
             width:  main.itemSize
             height: main.itemSize
-            icon: QIcon(main.icon)
+            // icon: QIcon(main.icon)
         }
 
         Text {
