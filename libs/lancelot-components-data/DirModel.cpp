@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
+ *   Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -23,6 +23,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDirLister>
+#include <KDebug>
 
 #include <QFileInfo>
 
@@ -30,41 +31,31 @@ class DirModelPrivate {
 public:
     DirModelPrivate(DirModel * parent);
 
-    void addItem(const KUrl & url);
-    void addItem(const KFileItem & item);
-
-    void add(const KUrl & url);
-
-    void deleteItem(const KFileItem & fileItem);
-    void newItems(const KFileItemList & fileItems);
-
-    int compare(const QString & item1, const QString & item2);
-
-    KDirLister * dirLister;
-    QString dirPath;
-    // QDir::SortFlags sort;
-
-    class ItemInfo {
-    public:
-        /* url we already have QString url */
-        uint time;
-        bool isDir : 1;
-
-    };
-
-    QHash < QString, ItemInfo > items;
-
     class DirModel * const q;
+    KDirModel * model;
 };
 
 DirModelPrivate::DirModelPrivate(DirModel * parent)
-    : dirLister(NULL), q(parent)
+    : q(parent)
 {
 }
 
 DirModel::DirModel()
     : d(new DirModelPrivate(this))
 {
+    d->model = new KDirModel(this);
+    setSourceModel(d->model);
+    setSortFoldersFirst(true);
+
+    QHash <int, QByteArray> roleNames;
+    roleNames[Qt::DisplayRole]    = "display";
+    roleNames[Qt::StatusTipRole]  = "description";
+    roleNames[Qt::DecorationRole] = "decoration";
+    setRoleNames(roleNames);
+
+    for (int i = 0; i < d->model->columnCount(); i++) {
+        kDebug() << "Header" << d->model->headerData(i, Qt::Horizontal);
+    }
 }
 
 DirModel::~DirModel()
@@ -74,12 +65,23 @@ DirModel::~DirModel()
 
 QString DirModel::dir() const
 {
-    return dirLister()->url().url();
+    return d->model->dirLister()->url().url();
 }
 
 void DirModel::setDir(const QString & dir)
 {
-    dirLister()->openUrl(KUrl(dir), KDirLister::Keep);
+    d->model->dirLister()->openUrl(KUrl(dir), KDirLister::Keep);
 }
+
+// QVariant DirModel::data(const QModelIndex & index, int role) const
+// {
+//     if (role == Qt::StatusTipRole) {
+//         return data(
+//                 index.sibling(index.row(), KDirModel::Type), Qt::DisplayRole
+//             );
+//     }
+//
+//     return KDirSortFilterProxyModel::data(index, role);
+// }
 
 #include "DirModel.moc"

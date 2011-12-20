@@ -61,13 +61,13 @@ Item {
             anchors {
                 left:   imageIcon.right
                 top:    parent.top
-                bottom: parent.verticalCenter
+                bottom: (textDescription.text == "") ? parent.bottom : parent.verticalCenter
                 right:  parent.right
 
                 leftMargin: 8
             }
 
-            verticalAlignment: Text.AlignBottom
+            verticalAlignment: (textDescription.text == "") ? Text.AlignVCenter : Text.AlignBottom
             elide: Text.ElideRight
         }
 
@@ -85,6 +85,7 @@ Item {
 
             opacity: .6
             elide: Text.ElideRight
+            visible: (text != "")
         }
 
         MouseArea {

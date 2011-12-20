@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
+ *   Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -24,12 +24,13 @@
 
 #include "BaseModel.h"
 #include <KDirModel>
+#include <KDirSortFilterProxyModel>
 
 class DirModelPrivate;
 
 // TODO: Kill this model
 
-class DirModel : public KDirModel {
+class DirModel : public KDirSortFilterProxyModel {
     Q_OBJECT
 
     Q_PROPERTY(QString dir READ dir WRITE setDir)
@@ -40,6 +41,8 @@ public:
 
     QString dir() const;
     void setDir(const QString & dir);
+
+    // QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
 protected:
     void load();

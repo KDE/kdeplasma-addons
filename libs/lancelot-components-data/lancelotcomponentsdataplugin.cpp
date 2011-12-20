@@ -1,8 +1,6 @@
 /*
- *   Copyright 2009 by Alan Alpert <alan.alpert@nokia.com>
- *   Copyright 2010 by Ménard Alexis <menard@kde.org>
- *   Copyright 2010 by Marco Martin <mart@kde.org>
-
+ *   Copyright (C) 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
+ *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
  *   published by the Free Software Foundation; either version 2, or
