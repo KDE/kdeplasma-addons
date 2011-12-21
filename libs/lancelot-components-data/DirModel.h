@@ -21,8 +21,10 @@
 #define LANCELOT_DATA_DIRMODEL_H
 
 #include "BaseModel.h"
+
 #include <KDirModel>
 #include <KDirSortFilterProxyModel>
+#include <KUrl>
 
 class DirModelPrivate;
 
@@ -40,9 +42,6 @@ public:
     QString path() const;
     void setPath(const QString & path);
 
-    // QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-
-
 public Q_SLOTS:
     /**
      * Activates the specified item
@@ -50,10 +49,8 @@ public Q_SLOTS:
      */
     virtual void activate(int index);
 
-
 protected:
     void load();
-
 
 private:
     friend class DirModelPrivate;

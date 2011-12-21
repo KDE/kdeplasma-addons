@@ -25,6 +25,8 @@
 #include <KDirLister>
 #include <KDebug>
 #include <KRun>
+#include <KFileItem>
+#include <KProtocolManager>
 
 #include <QFileInfo>
 
@@ -76,10 +78,8 @@ void DirModel::setPath(const QString & path)
 
 void DirModel::activate(int what)
 {
-    KUrl url = d->model->dirLister()->url().url();
-    url.addPath(data(index(what, 0)).toString());
-    kDebug() << url;
-    new KRun(url, 0);
+    KFileItem fileItem(data(index(what, 0), KDirModel::FileItemRole).value < KFileItem > ());
+    fileItem.run();
 }
 
 #include "DirModel.moc"
