@@ -13,9 +13,13 @@ set(lancelotcomponentsdata_SRCS
     FolderModel.cpp
     MessagesAkonadi.cpp
     NewDocuments.cpp
+    OpenDocuments.cpp
+    Places.cpp
     RecentDocuments.cpp
     Runner.cpp
+    # SystemActions.cpp
     SystemServices.cpp
+    XbelModel.cpp
     )
 
 INCLUDE_DIRECTORIES(
@@ -88,6 +92,7 @@ target_link_libraries(
     ${KDE4_PLASMA_LIBS}
     ${KDE4_SOLID_LIBS}
     ${ADDITIONAL_LINK_LIBRARIES}
+    ${KDE4WORKSPACE_TASKMANAGER_LIBRARY}
     )
 
 install(

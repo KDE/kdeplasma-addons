@@ -20,8 +20,6 @@
 #ifndef LANCELOT_DATA_CONTACTSKOPETE_H
 #define LANCELOT_DATA_CONTACTSKOPETE_H
 
-#include <lancelot/lancelot_export.h>
-
 #include "BaseModel.h"
 
 /**
@@ -41,7 +39,7 @@ public:
      */
     ~ContactsKopete();
 
-    L_Override QString selfShortTitle() const;
+    QString selfShortTitle() const;
 
 protected:
     /**

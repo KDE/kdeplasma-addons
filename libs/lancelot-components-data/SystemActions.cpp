@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
+ *   Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *   Copyright (C) 2006 Aaron Seigo <aseigo@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -50,9 +50,6 @@
 #define ID_POWEROFF     "leave-poweroff"
 #define ID_SUSPEND_DISK "suspend-disk"
 #define ID_SUSPEND_RAM  "suspend-ram"
-
-namespace Lancelot {
-namespace Models {
 
 SystemActions * SystemActions::Private::instance = NULL;
 
@@ -447,5 +444,3 @@ void Sessions::activate(int index)
     hideApplicationWindow();
 }
 
-} // namespace Models
-} // namespace Lancelot

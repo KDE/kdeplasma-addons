@@ -20,14 +20,12 @@
 #ifndef LANCELOT_DATA_NEWDOCUMENTS_H
 #define LANCELOT_DATA_NEWDOCUMENTS_H
 
-#include <lancelot/lancelot_export.h>
-
 #include "FolderModel.h"
 
 /**
  * Model contains links to office applications
  */
-class LANCELOT_EXPORT NewDocuments : public FolderModel {
+class NewDocuments: public FolderModel {
     Q_OBJECT
 public:
     NewDocuments();

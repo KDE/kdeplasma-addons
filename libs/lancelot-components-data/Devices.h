@@ -20,14 +20,12 @@
 #ifndef LANCELOT_DATA_DEVICES_H
 #define LANCELOT_DATA_DEVICES_H
 
-#include <lancelot/lancelot_export.h>
-
 #include "BaseModel.h"
 #include <solid/device.h>
 #include <solid/storageaccess.h>
 #include <QXmlStreamReader>
 
-class LANCELOT_EXPORT Devices : public BaseModel {
+class Devices: public BaseModel {
     Q_OBJECT
 
     Q_PROPERTY(Type filter READ filter WRITE setFilter)

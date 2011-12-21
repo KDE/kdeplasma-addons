@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
+ *   Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -17,13 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_SYSTEM_ACTIONS_H
-#define LANCELOTAPP_MODELS_SYSTEM_ACTIONS_H
+#ifndef LANCELOT_DATA_SYSTEM_ACTIONS_H
+#define LANCELOT_DATA_SYSTEM_ACTIONS_H
 
 #include <Plasma/RunnerManager>
 #include <Plasma/QueryMatch>
 
-#include <lancelot/lancelot_export.h>
 #include <lancelot/models/StandardActionTreeModel.h>
 #include <lancelot/models/ActionTreeModelProxy.h>
 
@@ -32,10 +31,7 @@
 
 #include <kworkspace/kdisplaymanager.h>
 
-namespace Lancelot {
-namespace Models {
-
-class LANCELOT_EXPORT SystemActions: public Lancelot::StandardActionTreeModel {
+class SystemActions: public Lancelot::StandardActionTreeModel {
     Q_OBJECT
 public:
     static SystemActions * self();
@@ -74,7 +70,7 @@ private:
 
 };
 
-class LANCELOT_EXPORT Sessions: public BaseModel {
+class Sessions: public BaseModel {
     Q_OBJECT
 public:
     Sessions();
@@ -88,7 +84,4 @@ private:
     Private * const d;
 };
 
-} // namespace Models
-} // namespace Lancelot
-
-#endif /* LANCELOTAPP_MODELS_SYSTEM_ACTIONS_H */
+#endif /* LANCELOT_DATA_SYSTEM_ACTIONS_H */

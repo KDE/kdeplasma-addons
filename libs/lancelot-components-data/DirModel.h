@@ -20,8 +20,6 @@
 #ifndef LANCELOT_DATA_DIRMODEL_H
 #define LANCELOT_DATA_DIRMODEL_H
 
-#include <lancelot/lancelot_export.h>
-
 #include "BaseModel.h"
 #include <KDirModel>
 #include <KDirSortFilterProxyModel>

@@ -20,8 +20,6 @@
 #ifndef LANCELOT_DATA_FAVORITE_APPLICATIONS_H
 #define LANCELOT_DATA_FAVORITE_APPLICATIONS_H
 
-#include <lancelot/lancelot_export.h>
-
 #include "BaseModel.h"
 
 class FavoriteApplications : public BaseModel {

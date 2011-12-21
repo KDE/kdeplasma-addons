@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
+ *   Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -21,9 +21,6 @@
 #include <KIcon>
 #include <QFile>
 
-namespace Lancelot {
-namespace Models {
-
 class XbelModel::Private {
 public:
     Private(XbelModel * parent)
@@ -42,7 +39,7 @@ public:
 };
 
 XbelModel::XbelModel(QString filePath)
-    : BaseModel(true), d(new Private(this))
+    : BaseModel(), d(new Private(this))
 {
     d->filePath = filePath;
     load();
@@ -156,8 +153,5 @@ void XbelModel::Private::readBookmark()
         q->add(bookmarkItem);
     }
 }
-
-} // namespace Models
-} // namespace Lancelot
 
 #include "XbelModel.moc"

@@ -20,15 +20,13 @@
 #ifndef LANCELOT_DATA_SYSTEMSERVICES_H
 #define LANCELOT_DATA_SYSTEMSERVICES_H
 
-#include <lancelot/lancelot_export.h>
-
 #include "FolderModel.h"
 
 /**
  * Contains links to useful applications from the
  * system category
  */
-class LANCELOT_EXPORT SystemServices : public FolderModel {
+class SystemServices: public FolderModel {
     Q_OBJECT
 public:
     SystemServices();

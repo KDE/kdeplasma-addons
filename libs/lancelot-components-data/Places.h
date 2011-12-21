@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
+ *   Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -17,27 +17,19 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_PLACES_H
-#define LANCELOTAPP_MODELS_PLACES_H
-
-#include <lancelot/lancelot_export.h>
+#ifndef LANCELOT_DATA_PLACES_H
+#define LANCELOT_DATA_PLACES_H
 
 #include "XbelModel.h"
-
-namespace Lancelot {
-namespace Models {
 
 /**
  * Dolphin's places
  */
-class LANCELOT_EXPORT Places : public XbelModel {
+class Places: public XbelModel {
     Q_OBJECT
 public:
     Places();
     virtual ~Places();
 };
 
-} // namespace Models
-} // namespace Lancelot
-
-#endif /* LANCELOTAPP_MODELS_PLACES_H */
+#endif /* LANCELOT_DATA_PLACES_H */

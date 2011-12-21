@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
+ *   Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -23,9 +23,6 @@
 #include <KIcon>
 #include <KStandardDirs>
 
-namespace Lancelot {
-namespace Models {
-
 Places::Places()
     : XbelModel(
             KStandardDirs::locateLocal("data", "kfileplaces/bookmarks.xml")
@@ -39,5 +36,4 @@ Places::~Places()
 {
 }
 
-} // namespace Models
-} // namespace Lancelot
+#include "Places.moc"

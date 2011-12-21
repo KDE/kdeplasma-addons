@@ -1,6 +1,5 @@
 /*
- *   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
- *   Copyright (C) 2007 Robert Knight <robertknight@gmail.com>
+ *   Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -22,9 +21,6 @@
 #include "OpenDocuments_p.h"
 #include <KIcon>
 #include <KDebug>
-
-namespace Lancelot {
-namespace Models {
 
 SupportedTask::SupportedTask(const QString & classPattern,
         const QString & documentNameExtractor)
@@ -137,7 +133,7 @@ bool OpenDocuments::Private::setDataForTask(::TaskManager::Task *task)
 
     int index = indexOf(task->window());
     if (index == -1) {
-        index = q->size();
+        index = q->count();
         q->add (
             "", "", QIcon(), uint(task->window())
         );
@@ -160,7 +156,7 @@ bool OpenDocuments::Private::setDataForTask(::TaskManager::Task *task)
 
 int OpenDocuments::Private::indexOf(WId wid)
 {
-    for (int i = q->size() - 1; i >= 0; i--) {
+    for (int i = q->count() - 1; i >= 0; i--) {
         const Item * item = & q->itemAt(i);
         if (item->data.toUInt() == wid) {
             return i;
@@ -177,11 +173,8 @@ void OpenDocuments::activate(int index)
     if (valid && d->tasks.contains(wid)) {
         d->tasks[wid]->activate();
     }
-    hideApplicationWindow();
+    // TODO: hideApplicationWindow();
 }
-
-} // namespace Models
-} // namespace Lancelot
 
 #include "OpenDocuments.moc"
 #include "OpenDocuments_p.moc"

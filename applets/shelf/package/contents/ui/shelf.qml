@@ -39,7 +39,9 @@ Item {
         /*LancelotData.Devices {*/
         /*LancelotData.ContactsKopete {*/
         /*LancelotData.Runner {*/
-        LancelotData.MessagesAkonadi {
+        /*LancelotData.MessagesAkonadi {*/
+        /*LancelotData.OpenDocuments {*/
+        LancelotData.Places {
             id: modelObject
         /*    searchString: textSearch.text*/
         /*    path: "/home/ivan"*/

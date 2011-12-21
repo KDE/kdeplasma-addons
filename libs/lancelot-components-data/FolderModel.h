@@ -20,8 +20,6 @@
 #ifndef LANCELOT_DATA_FOLDERMODEL_H
 #define LANCELOT_DATA_FOLDERMODEL_H
 
-#include <lancelot/lancelot_export.h>
-
 #include "BaseModel.h"
 #include <QDir>
 #include <KDirLister>

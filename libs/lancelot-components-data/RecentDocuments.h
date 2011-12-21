@@ -20,15 +20,13 @@
 #ifndef LANCELOT_DATA_RECENTDOCUMENTS_H
 #define LANCELOT_DATA_RECENTDOCUMENTS_H
 
-#include <lancelot/lancelot_export.h>
-
 #include "FolderModel.h"
 #include <KDirWatch>
 
 /**
  * Model containing the recently opened documents
  */
-class LANCELOT_EXPORT RecentDocuments : public FolderModel {
+class RecentDocuments: public FolderModel {
     Q_OBJECT
 public:
     RecentDocuments();
