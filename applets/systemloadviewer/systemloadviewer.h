@@ -36,16 +36,11 @@ class QPainter;
 class QStyleOptionGraphicsItem;
 class QPoint;
 
-struct cpuInfo
-{
-    double user, sys, nice, idle, disk, clock;
-    bool clockValid;
-    cpuInfo(): user(0), sys(0), nice(0), idle(0), disk(0), clock(0), clockValid(false) {}
-};
-
 class SystemLoadViewer : public Plasma::Applet
 {
     Q_OBJECT
+    
+    struct CpuInfo;
 
 public:
     SystemLoadViewer(QObject *parent, const QVariantList &args);
@@ -71,7 +66,7 @@ protected slots:
     void toolTipAboutToShow();
 
 private:
-    void paintCPUUsage(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect& contentsRect, const cpuInfo &cpu);
+    void paintCPUUsage(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect& contentsRect, const CpuInfo &cpu);
     void paintSwapUsage(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect& contentsRect);
     void paintRAMUsage(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect& contentsRect);
 
@@ -91,7 +86,15 @@ private:
     void setVerticalBars(bool verticalOrientation);
     bool verticalBars() const;
 
-    QVector<cpuInfo> m_cpuInfo;
+    struct CpuInfo
+    {
+        double user, sys, nice, disk, clock;
+        bool clockValid;
+        CpuInfo(): user(0), sys(0), nice(0), disk(0), clock(0), clockValid(false) {}
+    };
+
+    QVector<CpuInfo> m_cpuInfo;
+    CpuInfo m_systemCpuInfo;
     uint m_numCPUs;
     double m_ramfree;
     double m_ramused;

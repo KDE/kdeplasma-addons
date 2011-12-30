@@ -161,8 +161,7 @@ void BookmarksPlasmoid::applyConfigChanges()
 
     if (mBookmarkFolderAddress != bookmarkFolderAddress) {
         KConfigGroup configGroup = config();
-        configGroup.writeEntry(bookmarkFolderAddressConfigKey, mBookmarkFolderAddress);
-
+        configGroup.writeEntry(bookmarkFolderAddressConfigKey, bookmarkFolderAddress);
         emit configNeedsSaving();
     }
 }

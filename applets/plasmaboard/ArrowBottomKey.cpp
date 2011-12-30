@@ -25,7 +25,7 @@
 #include <Plasma/Theme>
 
 ArrowBottomKey::ArrowBottomKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Down), QString())
+    FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Down), QString())
 {
 
 }
@@ -38,7 +38,7 @@ void ArrowBottomKey::paint(QPainter *painter)
     setUpPainter(painter);
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
-	painter->rotate(-90);
-	paintArrow(painter);
+    painter->rotate(-90);
+    paintArrow(painter);
     painter->restore();
 }

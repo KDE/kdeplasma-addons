@@ -20,6 +20,7 @@
 #include "PanelIcon.h"
 #include "Layout.h"
 #include <QAction>
+#include <QFile>
 #include <QGraphicsView>
 
 #include <KConfigDialog>
@@ -34,7 +35,8 @@
 
 PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
-      m_plasmaboard(0)
+      m_plasmaboard(0),
+      m_tempLayout(false)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("preferences-desktop-keyboard");
@@ -58,19 +60,21 @@ void PanelIcon::configAccepted()
 
 void PanelIcon::configChanged()
 {
-    KConfigGroup cg = config();
-    QString layout;
-    layout = cg.readEntry("layout", layout);
-
-    QString old_layout = m_layout;
-    QString file = KStandardDirs::locate("data", layout); // lookup whether saved layout exists
-    if (layout.size() > 0 && file.size() > 0){
-        m_layout = file;
-    } else { // fallback to default layout
-        m_layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
+    QString layout = config().readEntry("layout", QString());
+    if (layout.isEmpty()) {
+        // fallback to default layout
+        layout = KStandardDirs::locate("data", "plasmaboard/full.xml");
+    } else {
+        // lookup whether saved layout exists
+        const QString file = KStandardDirs::locate("data", layout); 
+        if (!file.isEmpty()) {
+            layout = file;
+        }
     }
 
-    if (m_plasmaboard && old_layout != m_layout) { // only rebuild the keyboard if the layout has actually changed
+    // only rebuild the keyboard if the layout has actually changed
+    if (layout != m_layout && QFile::exists(layout)) {
+        m_layout = layout;
         initKeyboard(m_layout);
     }
 }
@@ -95,20 +99,20 @@ void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
     qDeleteAll(m_layouts);
     m_layouts.clear();
     QStringList layoutList = KGlobal::dirs()->findAllResources("data", "plasmaboard/*.xml");
-    Q_FOREACH(QString path, layoutList){
+    foreach (QString path, layoutList) {
         m_layouts << new Layout(path);
     }
 
     QWidget *widget = new QWidget(parent);
     ui.setupUi(widget);
-    parent->addPage(widget, i18nc("Different keyboard layouts","Layouts"), "plasmaboard");
+    parent->addPage(widget, i18nc("Different keyboard layouts", "Layouts"), "plasmaboard");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    
 
-    Q_FOREACH(Layout* l, m_layouts){
+
+    foreach (Layout * l, m_layouts) {
         ui.layoutsComboBox->addItem(l->name(), l->path());
-        if(l->path() == m_layout){
+        if (l->path() == m_layout) {
             ui.descriptionLabel->setText(l->description());
             ui.layoutsComboBox->setCurrentIndex(ui.layoutsComboBox->count() - 1);
         }
@@ -138,8 +142,8 @@ void PanelIcon::layoutNameChanged(const QString &name)
 {
     Layout *lay = m_layouts[0];
 
-    Q_FOREACH(Layout* l, m_layouts){
-        if(l->name() == name){
+    foreach (Layout * l, m_layouts) {
+        if (l->name() == name) {
             lay = l;
             break;
         }
@@ -156,27 +160,67 @@ void PanelIcon::init()
 
 void PanelIcon::initKeyboard()
 {
-    QString path = ((QAction*)sender())->data().toString();
-    m_plasmaboard->deleteKeys();
-    m_plasmaboard->initKeyboard(path);
-    m_plasmaboard->refreshKeys();
-    m_plasmaboard->update();
+    if (!m_plasmaboard) {
+        return;
+    }
+
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (!action) {
+        return;
+    }
+
+    QString path = action->data().toString();
+    setLayout(path);
     saveLayout(path);
 }
 
 void PanelIcon::initKeyboard(const QString &layoutFile)
 {
+    if (!m_plasmaboard) {
+        return;
+    }
+
+    setLayout(layoutFile);
+    saveLayout(layoutFile);
+}
+
+void PanelIcon::resetLayout()
+{
+    if (m_tempLayout) {
+        setLayout(m_layout);
+    }
+}
+
+void PanelIcon::showLayout(const QString &layout)
+{
+    kDebug() << layout;
+    if (layout.isEmpty()) {
+        resetLayout();
+        return;
+    }
+
+    const QString file = KStandardDirs::locate("data", "plasmaboard/" + layout);
+    if (!file.isEmpty()) {
+        setLayout(file);
+    } else if (QFile::exists(layout)) {
+        initKeyboard(layout);
+    }
+}
+
+void PanelIcon::setLayout(const QString &layoutFile)
+{
+    m_tempLayout = layoutFile != m_layout;
     m_plasmaboard->deleteKeys();
     m_plasmaboard->initKeyboard(layoutFile);
     m_plasmaboard->refreshKeys();
     m_plasmaboard->update();
-    saveLayout(layoutFile);
 }
 
 void PanelIcon::popupEvent(bool show)
 {
     if (!show) {
         m_plasmaboard->reset();
+        resetLayout();
     }
 }
 
@@ -190,5 +234,8 @@ void PanelIcon::saveLayout(const QString &path)
     emit configNeedsSaving();
 }
 
+#include "PanelIcon.moc"
+
 // This is the command that links your applet to the .desktop file
 K_EXPORT_PLASMA_APPLET(plasmaboard, PanelIcon)
+

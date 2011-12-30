@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>587</width>
-    <height>435</height>
+    <width>437</width>
+    <height>417</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
@@ -65,7 +65,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>78</width>
+         <width>40</width>
          <height>17</height>
         </size>
        </property>
@@ -421,7 +421,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>401</width>
+       <width>40</width>
        <height>9</height>
       </size>
      </property>
@@ -516,14 +516,14 @@
    <header>kfontcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KColorButton</class>
    <extends>QPushButton</extends>
    <header>kcolorbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

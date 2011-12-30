@@ -17,7 +17,13 @@ set(plasmaboard_SRCS widget.cpp BoardKey.cpp PanelIcon.cpp AlphaNumKey.cpp
     DualKey.cpp FuncKey.cpp EnterKey.cpp BackspaceKey.cpp TabKey.cpp
     ShiftKey.cpp CapsKey.cpp ArrowTopKey.cpp ArrowBottomKey.cpp
     ArrowLeftKey.cpp ArrowRightKey.cpp tooltip.cpp StickyKey.cpp
-    SwitchKey.cpp Layout.cpp Helpers.cpp)
+    SwitchKey.cpp Layout.cpp)
+
+if (Q_WS_X11)
+    set(plasmaboard_SRCS ${plasmaboard_SRCS} Helpers_x11.cpp)
+elseif (Q_WS_X11)
+    set(plasmaboard_SRCS ${plasmaboard_SRCS} Helpers_fake.cpp)
+endif (Q_WS_X11)
 
 kde4_add_ui_files(plasmaboard_SRCS config.ui)
 	 

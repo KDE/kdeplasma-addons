@@ -92,9 +92,9 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     m_weatherMap[QLatin1String( "weather-showers-scattered" )] = config.readEntry("showersScatteredPaper", QString(m_dir + QLatin1String( "There_is_Rain_on_the_Table/" )));
     m_weatherMap[QLatin1String( "weather-rain" )] = config.readEntry("rainPaper", QString(m_dir + QLatin1String( "There_is_Rain_on_the_Table/" )));
     m_weatherMap[QLatin1String( "weather-mist" )] = config.readEntry("mistPaper", QString(m_dir + QLatin1String( "Fresh_Morning/" )));
-    m_weatherMap[QLatin1String( "weather-storm" )] = config.readEntry("stormPaper", QString(m_dir + QLatin1String( "Lightning/" )));
+    m_weatherMap[QLatin1String( "weather-storm" )] = config.readEntry("stormPaper", QString(m_dir + QLatin1String( "Storm/" )));
     m_weatherMap[QLatin1String( "weather-scattered-storms" )] = m_weatherMap[QLatin1String( "weather-storm" )];
-    m_weatherMap[QLatin1String( "weather-hail" )] = config.readEntry("hailPaper", QString(m_dir + QLatin1String( "Lightning/" )));
+    m_weatherMap[QLatin1String( "weather-hail" )] = config.readEntry("hailPaper", QString(m_dir + QLatin1String( "Storm/" )));
     m_weatherMap[QLatin1String( "weather-snow" )] = config.readEntry("snowPaper", QString(m_dir + QLatin1String( "Winter_Track/" )));
     m_weatherMap[QLatin1String( "weather-snow-scattered" )] = config.readEntry("snowScatteredPaper", QString(m_dir + QLatin1String( "Winter_Track/" )));
     m_weatherMap[QLatin1String( "weather-few-clouds-night" )] = config.readEntry("partlyCloudyNightPaper", QString(m_dir + QLatin1String( "JK_Bridge_at_Night/" )));

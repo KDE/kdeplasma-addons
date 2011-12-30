@@ -20,7 +20,6 @@
 
 #include "wcpotdprovider.h"
 
-#include <QtCore/QDate>
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 
@@ -43,7 +42,6 @@ class WcpotdProvider::Private
 
     WcpotdProvider *mParent;
     QByteArray mPage;
-    QDate mDate;
     QImage mImage;
 };
 
@@ -74,12 +72,6 @@ void WcpotdProvider::Private::imageRequestFinished( KJob *_job )
 WcpotdProvider::WcpotdProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
-    const QString type = args[ 0 ].toString();
-    if ( type == QLatin1String( "Date" ) )
-        d->mDate = args[ 1 ].toDate();
-    else
-	Q_ASSERT( false && "Invalid type passed to potd provider" );
-
     KUrl url( QLatin1String( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" ));
 
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
@@ -94,11 +86,6 @@ WcpotdProvider::~WcpotdProvider()
 QImage WcpotdProvider::image() const
 {
     return d->mImage;
-}
-
-QString WcpotdProvider::identifier() const
-{
-    return QString( QLatin1String( "wcpotd:%1" ) ).arg( d->mDate.toString( Qt::ISODate ));
 }
 
 #include "wcpotdprovider.moc"

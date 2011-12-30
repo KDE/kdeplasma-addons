@@ -238,7 +238,6 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     connect(filtersUi.showOnlyMatchesCheckBox,SIGNAL(toggled(bool)),parent, SLOT(settingsModified()));
     connect(filtersUi.useExactMatchRadioButton,SIGNAL(toggled(bool)),parent, SLOT(settingsModified()));
     connect(filtersUi.useRegularExpressionsRadioButton,SIGNAL(toggled(bool)),parent, SLOT(settingsModified()));
-
 }
 
 void FileWatcher::configAccepted()

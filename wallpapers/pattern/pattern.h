@@ -1,5 +1,6 @@
 /*
 Copyright 2008 Will Stephenson <wstephenson@kde.org>
+Copyright 2011 Reza Fatahilah Shah <rshah0385@kireihana.com>
 
 Inspired by kdesktop (C) 1999 Geert Jansen <g.t.jansen@stud.tue.nl>
 
@@ -24,10 +25,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PATTERN_H
 
 #include <Plasma/Wallpaper>
+#include <Plasma/Package>
 
 #include "ui_config.h"
 
 class KStandardDirs;
+
+class BackgroundListModel;
 
 class PatternWallpaper : public Plasma::Wallpaper
 {
@@ -39,7 +43,8 @@ public:
     QWidget * createConfigurationInterface(QWidget * parent);
     void save(KConfigGroup & config);
     void paint(QPainter * painter, const QRectF & exposedRect);
-
+    void updateScreenshot(QPersistentModelIndex index);
+    QPixmap generatePattern(QImage &image) const;
     signals:
         void settingsChanged(bool);
 
@@ -49,7 +54,10 @@ protected:
 private:
     QPixmap generatePattern(const QString &patternFile, const QColor &fg, const QColor &bg) const;
     void loadPattern();
-    void updateConfigThumbs();
+
+protected slots:
+    void pictureChanged(const QModelIndex &index);
+    void setConfigurationInterfaceModel();
 
 private slots:
     void widgetChanged();
@@ -61,8 +69,7 @@ private:
     QString m_patternName;
     QPixmap m_pattern;
     KStandardDirs * m_dirs;
+    BackgroundListModel *m_model;
 };
-
-K_EXPORT_PLASMA_WALLPAPER(pattern, PatternWallpaper)
 
 #endif //PLASMA_PLUGIN_WALLPAPER_PATTERN_H

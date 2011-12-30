@@ -41,9 +41,10 @@ class QTimer;
 class StickyKey;
 class SwitchKey;
 
-namespace {
-    class DataEngine;
-    class FrameSvg;
+namespace
+{
+class DataEngine;
+class FrameSvg;
 }
 
 /**
@@ -59,6 +60,8 @@ class PlasmaboardWidget : public QGraphicsWidget
 {
     Q_OBJECT
 public:
+    enum StateAction { NoActions = 0, Press = 1, Unpress = 2, Reset = 4, Release = 8, ExternalEvent = 16};
+    Q_DECLARE_FLAGS(StateActions, StateAction)
 
     PlasmaboardWidget(Plasma::PopupApplet *parent);
     ~PlasmaboardWidget();
@@ -90,20 +93,20 @@ public:
     void switchAlternative(bool alt);
 
 protected:
-    virtual void mouseMoveEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void mousePressEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void resizeEvent ( QGraphicsSceneResizeEvent * event );
-    virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
-    //virtual bool event ( QEvent * event );
+    void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+    void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
+    void resizeEvent(QGraphicsSceneResizeEvent * event);
+    QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
 
 private:
     /**
-      * Presses or unpresses key
+      * Presses or unpresses function keys
       * @param FuncKey to act on
       * @param state to change to. True: press, False: unpress
       */
-    void change(FuncKey* key, bool state);
+    template<typename T>
+    void setKeysState(const QList<T> &keys, const StateActions &actions);
 
     /**
       * Hides Tooltip
@@ -126,34 +129,26 @@ private:
       */
     FuncKey *createStickyKey(const QPoint &point, const QSize &size, const QString &action);
 
-    /**
-      * @param Size of the pixmap requested
-      * @return QPixmap in pressed state with correct size
-      */
-    QPixmap *getActiveFrame(const QSize &size);
+    enum BackgroundState { ActiveBackground, NormalBackground };
 
     /**
-      * @param Size of the pixmap requested
-      * @return QPixmap in unpressed state with correct size
+      * @param state The state of the background to find and return
+      * @param size Size of the pixmap requested
+      * @return QPixmap in pressed state with correct size
       */
-    QPixmap *getFrame(const QSize &size);
+    QPixmap *background(BackgroundState state, const QSize &size);
 
     /**
       * Presses given key. Calls key->press() sets the needed pixmap and show tooltip
       * @param key to act on
       */
-    void press(BoardKey* key);
-
-    /**
-      * Causes repaint of the key in pressed state, but does not act on the key or trigger tooltip
-      */
-    void press(FuncKey* key);
+    void press(BoardKey* key, bool externalEvent = false);
 
     /**
       * Releases given key. In most cases this actually sends the token to the X-server
       * @param Key to act on
       */
-    void release(BoardKey* key);    
+    void release(BoardKey* key);
 
     /**
       * Unpresses given key. This undoes the press without actually sending anything to the X-Server
@@ -162,12 +157,6 @@ private:
     void unpress(BoardKey* key);
 
 public Q_SLOTS:
-
-    /**
-      * Unsets all pressed keys despite of caps
-      */
-    void clear();
-
     void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
 
     /**
@@ -200,9 +189,9 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
     void stickyKey_Mapper(int id);
+    void showToolTip();
 
 private:
-    Plasma::FrameSvg* m_activeFrame; // svg with active state
     QHash<QSize, QPixmap*> m_activeFrames; // cache of all pixmap sizes with active state
     QList<AlphaNumKey*> m_alphaKeys; // normal keys labeled with symbols like a, b, c
     Plasma::PopupApplet *m_applet;
@@ -213,7 +202,7 @@ private:
     QList<StickyKey*> m_ctlKeys; // List of Control keys on keyboard
     QList<DualKey*> m_dualKeys; // List of dual keys on keyboard
     Plasma::DataEngine* m_engine; // key state data engine
-    Plasma::FrameSvg* m_frame; // svg in normal state
+    Plasma::FrameSvg* m_frameSvg; // svg in normal state
     QHash<QSize, QPixmap*> m_frames; // cace of all pixmap sizes with normal state
     QList<FuncKey*> m_funcKeys; // functional keys like shift, backspace, enter
     bool m_isAlternative; // alternative key level activated
@@ -223,15 +212,17 @@ private:
     QList<BoardKey*> m_keys; // list of all keys displayed
     QList<BoardKey*> m_pressedList; // list all currently pressed keys
     QTimer* m_repeatTimer;
+    QTimer* m_delayedToolTipShow;
     QSignalMapper* m_signalMapper;
     QList<StickyKey*> m_shiftKeys; // list of Shift-Keys on keyboard
     QList<FuncKey*> m_specialKeys; // list of special keys like Backspace, F[1-12], Enter and so on
-    QMap<int,BoardKey*> m_stickyKeys; // list of keys waiting for being unpressed
+    QMap<int, BoardKey*> m_stickyKeys; // list of keys waiting for being unpressed
     QList<StickyKey*> m_superKeys; // list of all super-keys on keyboard
     QList<SwitchKey*> m_switchKeys; // list of all switch keys on keyboard
     Tooltip* m_tooltip; // pointer to widget which is used as tooltip
-    QXmlStreamReader m_xmlReader; // instance of QXMLStreamReader for parsing layout files    
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(PlasmaboardWidget::StateActions)
 
 inline uint qHash(const QSize &key)
 {

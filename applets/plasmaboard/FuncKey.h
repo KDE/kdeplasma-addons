@@ -23,17 +23,18 @@
 
 #include "AlphaNumKey.h"
 
-class FuncKey: public AlphaNumKey {
+class FuncKey: public AlphaNumKey
+{
 
 public:
-    FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label);
-    virtual void paint(QPainter *painter);
+    FuncKey(const QPoint &relativePosition, const QSize &relativeSize, unsigned int keycode, const QString &label);
+    virtual bool repeats() const;
 
 private:
     virtual void paintLabel(QPainter *painter);
 
 protected:
-	void paintArrow(QPainter *painter);
+    void paintArrow(QPainter *painter);
 };
 
 #endif /* FUNCKEY_H */

@@ -26,25 +26,30 @@
 class QChar;
 class QString;
 
-namespace Helpers {
-    void changeKeycodeMapping(unsigned int code, QString &sym);
+namespace Helpers
+{
+void changeKeycodeMapping(unsigned int code, QString &sym);
 
-    void changeKeycodeMapping(unsigned int code, QString &sym,
-                              QString &shiftedSym);
+void changeKeycodeMapping(unsigned int code, QString &sym,
+                          QString &shiftedSym);
 
-    void changeKeycodeMapping(unsigned int code, KeySym* keysyms);
+//void changeKeycodeMapping(unsigned int code, KeySym* keysyms);
+void flushPendingKeycodeMappingChanges();
 
-    KeySym* getKeycodeMapping(unsigned int code);
+//QVector<KeySym> getKeycodeMapping(unsigned int code);
+void saveKeycodeMapping(unsigned int code);
+void restoreKeycodeMapping(unsigned int code);
+void refreshXkbState();
 
-    unsigned int keycodeToKeysym(const unsigned int &code, int level);
+unsigned int keycodeToKeysym(const unsigned int &code, int level);
 
-    unsigned int keysymToKeycode(const unsigned int &keysym);
+unsigned int keysymToKeycode(const unsigned int &keysym);
 
-    void fakeKeyPress(const unsigned int &code);
+void fakeKeyPress(const unsigned int &code);
 
-    void fakeKeyRelease(const unsigned int &code);
+void fakeKeyRelease(const unsigned int &code);
 
-    QChar mapToUnicode(const unsigned int &keysym);
+QChar mapToUnicode(const unsigned int &keysym);
 
 }
 

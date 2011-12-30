@@ -21,7 +21,6 @@
 
 #include "flickrprovider.h"
 
-#include <QtCore/QDate>
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 #include <QXmlStreamReader>
@@ -46,7 +45,6 @@ class FlickrProvider::Private
 
     FlickrProvider *mParent;
     QByteArray mPage;
-    QDate mDate;
     QDate mActualDate;
     QImage mImage;
 
@@ -129,16 +127,11 @@ void FlickrProvider::Private::imageRequestFinished( KJob *_job )
 FlickrProvider::FlickrProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
-    const QString type = args[ 0 ].toString();
-    if ( type == QLatin1String( "Date" ) ) {
-        d->mDate = args[ 1 ].toDate();
-        d->mActualDate = d->mDate;
-    } else {
-        Q_ASSERT( false && "Invalid type passed to potd provider" );
-    }
-
-    KUrl url(QLatin1String( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" ) + d->mDate.toString( Qt::ISODate ) );
-    KIO::StoredTransferJob *job = KIO::storedGet( url );
+    d->mActualDate = date();
+    KUrl url(QLatin1String(
+                "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date="
+                ) + date().toString( Qt::ISODate ) );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
 }
 
@@ -150,11 +143,6 @@ FlickrProvider::~FlickrProvider()
 QImage FlickrProvider::image() const
 {
     return d->mImage;
-}
-
-QString FlickrProvider::identifier() const
-{
-    return QString( QLatin1String( "flickr:%1" ) ).arg( d->mDate.toString( Qt::ISODate ));
 }
 
 #include "flickrprovider.moc"

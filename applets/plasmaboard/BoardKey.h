@@ -22,16 +22,17 @@
 
 #include <widget.h>
 
-class BoardKey  {
+class BoardKey
+{
 
 public:
     BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode);
     virtual ~BoardKey();
 
-    bool contains (const QPoint &point) const;
-    bool intersects (const QRectF &rect) const;
-    unsigned int getKeycode() const;
-    unsigned int getKeysymbol(int level) const;
+    bool contains(const QPoint &point) const;
+    bool intersects(const QRectF &rect) const;
+    unsigned int keycode() const;
+    unsigned int keysymbol(int level) const;
     virtual QString label() const;
     virtual void paint(QPainter *painter);
     QPoint position() const;
@@ -40,6 +41,11 @@ public:
       * called when button is pressed
       */
     virtual void pressed();
+
+    /**
+     * @return true if this key can repeat
+     */
+    virtual bool repeats() const;
 
     /**
       * This should be called when the key is pressed for a longer time with out releasing or moving the pointer
@@ -60,16 +66,11 @@ public:
       */
     virtual void reset();
     void setKeycode(unsigned int keycode);
-    virtual void setPixmap(QPixmap *pixmap);
+    virtual bool setPixmap(QPixmap *pixmap);
     QSize size() const;
-    /**
-      * Called to unpress the button. This will undo a key press and is usually used when the pointer slides away from the key
-      * No X-event is emitted, the button is just brought back into its default state
-      */
-    virtual void unpressed();
     void updateDimensions(double factor_x, double factor_y);
 
-protected:    
+protected:
     void sendKey();
     virtual void sendKeyPress();
     virtual void sendKeyRelease();

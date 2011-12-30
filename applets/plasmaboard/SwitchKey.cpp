@@ -20,19 +20,19 @@
 
 #include "SwitchKey.h"
 
-SwitchKey::SwitchKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, PlasmaboardWidget* widget):
-        StickyKey(relativePosition, relativeSize, keycode, QString(i18nc("String to indicate that this button shifts layout to special tokens", "?123+"))),
-        m_keyboard(widget)
+SwitchKey::SwitchKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, PlasmaboardWidget* widget)
+    : StickyKey(relativePosition, relativeSize, keycode, QString(i18nc("String to indicate that this button shifts layout to special tokens", "?123+"))),
+      m_keyboard(widget)
 {
 
 }
 
 void SwitchKey::sendKeyPress()
 {
-     m_keyboard->switchAlternative(true);
+    m_keyboard->switchAlternative(true);
 }
 
 void SwitchKey::sendKeyRelease()
 {
-     m_keyboard->switchAlternative(false);
+    m_keyboard->switchAlternative(false);
 }

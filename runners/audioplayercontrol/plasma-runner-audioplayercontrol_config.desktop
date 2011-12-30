@@ -3,13 +3,14 @@ Type=Service
 X-KDE-ServiceTypes=KCModule
 
 X-KDE-Library=kcm_krunner_audioplayercontrol
-X-KDE-ParentComponents=audioplayercontrol
+X-KDE-ParentComponents=Audio Player Control Runner
 X-KDE-PluginKeyword=kcm_krunner_audioplayercontrol
 
 Name=Control audio player
 Name[bs]=Kontroliranje audio plejera
 Name[ca]=Controlador del reproductor d'àudio
 Name[ca@valencia]=Controlador del reproductor d'àudio
+Name[cs]=Ovládat zvukový přehrávač
 Name[da]=Betjening af lydafspiller
 Name[de]=Medienwiedergabe steuern
 Name[el]=Έλεγχος του αναπαραγωγέα ήχου

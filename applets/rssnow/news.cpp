@@ -307,7 +307,6 @@ void News::updateScrollers()
         m_layout->addItem(scroller);
     }
 
-    adjustSize();
     m_timer->start();
     connectToEngine();
 }

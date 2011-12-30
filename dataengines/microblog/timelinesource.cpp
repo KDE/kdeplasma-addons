@@ -39,7 +39,7 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
       m_parameters(parameters),
       m_source(source)
 {
-    if (operation == "stauses/retweet" ||
+    if (operation == "statuses/retweet" ||
         operation == "favorites/create" ||
         operation == "favorites/destroy") {
         m_url.setPath(m_url.path()+QString("%1/%2.xml").arg(operation).arg(parameters.value("id").toString()));

@@ -51,21 +51,12 @@ K_EXPORT_PLASMA_APPLET(opendesktop, OpenDesktop)
 
 using namespace Plasma;
 
-struct GeoLocation {
-    QString country;
-    QString city;
-    QString countryCode;
-    int accuracy;
-    qreal latitude;
-    qreal longitude;
-};
-
-
 OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
         m_tabs(0),
         m_loginWidget(0),
         m_friendList(0),
+        m_friendStack(0),
         m_nearList(0),
         m_provider("https://api.opendesktop.org/v1/"),
         m_credentialsSource(QString("Credentials\\provider:%1").arg(m_provider)),
@@ -78,13 +69,10 @@ OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
     setPassivePopup(true);
 
     setPopupIcon("system-users");
-
-    m_geolocation = new GeoLocation;
 }
 
 OpenDesktop::~OpenDesktop()
 {
-    delete m_geolocation;
 }
 
 void OpenDesktop::init()
@@ -173,40 +161,44 @@ void OpenDesktop::loginFinished()
 
 
 void OpenDesktop::showFriendsWidget()
-{    
+{
+    if (m_friendStack) {
+        return;
+    }
+
     // Messages
     m_messageCounter = new MessageCounter(m_engine, this);
-    
+
     // Friends
     m_friendList = new FriendList(m_engine);
     m_friendStack = new ActionStack(m_engine, m_friendList);
-    
+
     m_messageList = new MessageList(m_engine);
     m_messageList->setFolder("0");
-    
+
     m_tabs->addTab(i18n("Friends"), m_friendStack);
     m_tabs->addTab(i18n("Messages"), m_messageList);
 
     connect(m_friendList, SIGNAL(addFriend(QString)), m_friendStack, SLOT(addFriend(QString)));
     connect(m_friendList, SIGNAL(sendMessage(QString)), m_friendStack, SLOT(sendMessage(QString)));
     connect(m_friendList, SIGNAL(showDetails(QString)), m_friendStack, SLOT(showDetails(QString)));
-    
+
     connect(m_friendStack, SIGNAL(endWork()), SLOT(endWork()));
     connect(m_friendStack, SIGNAL(startWork()), SLOT(startWork()));
-    
+
     connect(this, SIGNAL(usernameChanged(QString)), m_friendList, SLOT(setOwnId(QString)));
     connect(this, SIGNAL(usernameChanged(QString)), m_friendStack, SLOT(setOwnId(QString)));
-    
+
     connect(this, SIGNAL(providerChanged(QString)), m_friendList, SLOT(setProvider(QString)));
     connect(this, SIGNAL(providerChanged(QString)), m_friendStack, SLOT(setProvider(QString)));
     connect(this, SIGNAL(providerChanged(QString)), m_messageList, SLOT(setProvider(QString)));
     connect(this, SIGNAL(providerChanged(QString)), m_messageCounter, SLOT(setProvider(QString)));
-    
+
     m_friendList->setOwnId(m_user);
     m_friendStack->setOwnId(m_user);
     m_friendList->setProvider(m_provider);
     m_friendStack->setProvider(m_provider);
-    
+
     m_messageList->setProvider(m_provider);
     m_messageCounter->setProvider(m_provider);
 }
@@ -246,15 +238,15 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
 
     if (source == "location") {
         // The location from the geolocation engine arrived!
-        m_geolocation->city = data["city"].toString();
-        m_geolocation->country = data["country"].toString();
-        m_geolocation->countryCode = data["country code"].toString();
-        m_geolocation->accuracy = data["accuracy"].toInt();
-        m_geolocation->latitude = data["latitude"].toDouble();
-        m_geolocation->longitude = data["longitude"].toDouble();
-        kDebug() << "geolocation:" << m_geolocation->city << m_geolocation->country <<
-                m_geolocation->countryCode << m_geolocation->latitude << m_geolocation->longitude;
-        connectNearby(m_geolocation->latitude, m_geolocation->longitude);
+        m_geolocation.city = data["city"].toString();
+        m_geolocation.country = data["country"].toString();
+        m_geolocation.countryCode = data["country code"].toString();
+        m_geolocation.accuracy = data["accuracy"].toInt();
+        m_geolocation.latitude = data["latitude"].toDouble();
+        m_geolocation.longitude = data["longitude"].toDouble();
+        kDebug() << "geolocation:" << m_geolocation.city << m_geolocation.country <<
+                m_geolocation.countryCode << m_geolocation.latitude << m_geolocation.longitude;
+        connectNearby(m_geolocation.latitude, m_geolocation.longitude);
         saveGeoLocation();
     } else if (source == m_credentialsSource) {
         m_user = data["UserName"].toString();
@@ -310,20 +302,20 @@ void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
     connect(ui.registerButton, SIGNAL(clicked()), this, SLOT(registerAccount()));
     connect(locationUi.publishLocation, SIGNAL(clicked()), this, SLOT(publishGeoLocation()));
 
-    locationUi.city->setText(m_geolocation->city);
-    locationUi.latitude->setText(QString::number(m_geolocation->latitude));
-    locationUi.longitude->setText(QString::number(m_geolocation->longitude));
+    locationUi.city->setText(m_geolocation.city);
+    locationUi.latitude->setText(QString::number(m_geolocation.latitude));
+    locationUi.longitude->setText(QString::number(m_geolocation.longitude));
 
     locationUi.countryCombo->setInsertPolicy(QComboBox::InsertAlphabetically);
     foreach ( const QString &cc, KGlobal::locale()->allCountriesList() ) {
         locationUi.countryCombo->addItem(KGlobal::locale()->countryCodeToName(cc), cc);
     }
-    locationUi.countryCombo->setCurrentIndex(locationUi.countryCombo->findText(KGlobal::locale()->countryCodeToName(m_geolocation->countryCode)));
+    locationUi.countryCombo->setCurrentIndex(locationUi.countryCombo->findText(KGlobal::locale()->countryCodeToName(m_geolocation.countryCode)));
 
     // actually, 0,0 is a valid location, but here we're using it to see if we
     // actually have a location, a bit dirty but far less complex, especially given
     // that this point is located in the middle of the ocean off the coast of Ghana
-    if (m_geolocation->latitude == 0 && m_geolocation->longitude == 0) {
+    if (m_geolocation.latitude == 0 && m_geolocation.longitude == 0) {
         locationUi.publishLocation->setEnabled(false);
         
     connect(ui.provider , SIGNAL(currentIndexChanged(int)), parent , SLOT(settingsModified()));
@@ -362,11 +354,11 @@ void OpenDesktop::configAccepted()
 void OpenDesktop::configChanged()
 {
     KConfigGroup cg = config();
-    m_geolocation->city = cg.readEntry("geoCity", QString());
-    m_geolocation->country = cg.readEntry("geoCountry", QString());
-    m_geolocation->countryCode = cg.readEntry("geoCountryCode", QString());
-    m_geolocation->latitude = cg.readEntry("geoLatitude", 0.0);
-    m_geolocation->longitude = cg.readEntry("geoLongitude", 0.0);
+    m_geolocation.city = cg.readEntry("geoCity", QString());
+    m_geolocation.country = cg.readEntry("geoCountry", QString());
+    m_geolocation.countryCode = cg.readEntry("geoCountryCode", QString());
+    m_geolocation.latitude = cg.readEntry("geoLatitude", 0.0);
+    m_geolocation.longitude = cg.readEntry("geoLongitude", 0.0);
     
     QString provider = cg.readEntry("provider", QString("https://api.opendesktop.org/v1/"));
     if (provider != m_provider) {
@@ -399,13 +391,13 @@ void OpenDesktop::kcm_finished()
 void OpenDesktop::syncGeoLocation()
 {
     // Location tab
-    m_geolocation->city = locationUi.city->text();
-    m_geolocation->countryCode = locationUi.countryCombo->itemData(locationUi.countryCombo->currentIndex()).toString();
-    m_geolocation->country = locationUi.countryCombo->currentText();
-    m_geolocation->latitude = locationUi.latitude->text().toDouble();
-    m_geolocation->longitude = locationUi.longitude->text().toDouble();
+    m_geolocation.city = locationUi.city->text();
+    m_geolocation.countryCode = locationUi.countryCombo->itemData(locationUi.countryCombo->currentIndex()).toString();
+    m_geolocation.country = locationUi.countryCombo->currentText();
+    m_geolocation.latitude = locationUi.latitude->text().toDouble();
+    m_geolocation.longitude = locationUi.longitude->text().toDouble();
 
-    kDebug() << "New location:" << m_geolocation->city << m_geolocation->country << m_geolocation->countryCode << m_geolocation->latitude << m_geolocation->longitude;
+    kDebug() << "New location:" << m_geolocation.city << m_geolocation.country << m_geolocation.countryCode << m_geolocation.latitude << m_geolocation.longitude;
 
     saveGeoLocation();
 }
@@ -415,10 +407,10 @@ void OpenDesktop::publishGeoLocation()
     syncGeoLocation();
     // FIXME: Use service
     QString source = QString("PostLocation-%1:%2:%3:%4").arg(
-                                    QString("%1").arg(m_geolocation->latitude),
-                                    QString("%1").arg(m_geolocation->longitude),
-                                    m_geolocation->countryCode,
-                                    m_geolocation->city);
+                                    QString("%1").arg(m_geolocation.latitude),
+                                    QString("%1").arg(m_geolocation.longitude),
+                                    m_geolocation.countryCode,
+                                    m_geolocation.city);
     kDebug() << "updating location:" << source;
     m_engine->connectSource(source, this);
 }
@@ -426,11 +418,11 @@ void OpenDesktop::publishGeoLocation()
 void OpenDesktop::saveGeoLocation()
 {
     KConfigGroup cg = config();
-    cg.writeEntry("geoCity", m_geolocation->city);
-    cg.writeEntry("geoCountry", m_geolocation->country);
-    cg.writeEntry("geoCountryCode", m_geolocation->countryCode);
-    cg.writeEntry("geoLatitude", m_geolocation->latitude);
-    cg.writeEntry("geoLongitude", m_geolocation->longitude);
+    cg.writeEntry("geoCity", m_geolocation.city);
+    cg.writeEntry("geoCountry", m_geolocation.country);
+    cg.writeEntry("geoCountryCode", m_geolocation.countryCode);
+    cg.writeEntry("geoLatitude", m_geolocation.latitude);
+    cg.writeEntry("geoLongitude", m_geolocation.longitude);
 
     emit configNeedsSaving();
 }

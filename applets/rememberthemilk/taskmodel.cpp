@@ -233,6 +233,7 @@ ListItem* TaskModel::listFromId(qulonglong id) {
 
   ListItem *item = new ListItem();
   m_listItems.insert(id, item);
+  listUpdate(id);
   return item;
 }
 
@@ -241,9 +242,10 @@ void TaskModel::listUpdate(qulonglong listId)
   if (!m_listItems.contains(listId)) {
     engine->connectSource("List:" + QString::number(listId), this);
   }
-
-  foreach(const qulonglong &taskid, m_listItems.value(listId)->tasks) {
-    engine->connectSource("Task:" + QString::number(taskid), this);
+  else {
+    foreach(const qulonglong &taskid, m_listItems.value(listId)->tasks) {
+      engine->connectSource("Task:" + QString::number(taskid), this);
+    }
   }
 }
 

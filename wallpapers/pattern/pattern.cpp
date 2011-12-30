@@ -1,5 +1,6 @@
 /*
 Copyright 2008 Will Stephenson <wstephenson@kde.org>
+Copyright 2011 Reza Fatahilah Shah <rshah0385@kireihana.com>
 
 Inspired by kdesktop (C) 1999 Geert Jansen <g.t.jansen@stud.tue.nl>
 
@@ -26,10 +27,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QFileInfo>
 #include <QPainter>
+#include <QTimer>
 
 #include <KDebug>
 #include <KStandardDirs>
-
+#include "backgroundlistmodel.h"
+#include "backgrounddelegate.h"
 
 #define FOREGROUND_COLOR_CONFIG_KEY "ForegroundColor"
 #define BACKGROUND_COLOR_CONFIG_KEY "BackgroundColor"
@@ -39,7 +42,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PATTERN_CONFIG_GROUP "KDE Desktop Pattern"
 #define PATTERN_RESOURCE_TYPE "dtop_pattern"
 
-PatternWallpaper::PatternWallpaper(QObject * parent, const QVariantList & args ) : Plasma::Wallpaper(parent, args), m_dirs(KGlobal::dirs())
+K_EXPORT_PLASMA_WALLPAPER(pattern, PatternWallpaper)
+
+PatternWallpaper::PatternWallpaper(QObject * parent, const QVariantList & args )
+    : Plasma::Wallpaper(parent, args),
+      m_dirs(KGlobal::dirs()),
+      m_model(0)
 {
     m_dirs->addResourceType(PATTERN_RESOURCE_TYPE, "data" , "plasma_wallpaper_pattern/patterns");
 }
@@ -71,58 +79,29 @@ QWidget * PatternWallpaper::createConfigurationInterface(QWidget * parent)
     m_ui.setupUi(configWidget);
     m_ui.m_fgColor->setColor(m_fgColor);
     m_ui.m_bgColor->setColor(m_bgColor);
+    m_model = new BackgroundListModel(this, configWidget);
+    m_model->reload();
 
-    // populate the combo box
-    QStringList patterns = m_dirs->findAllResources(PATTERN_RESOURCE_TYPE, QLatin1String("*.desktop"), KStandardDirs::NoDuplicates);
-    qSort(patterns);
+    QTimer::singleShot(0, this, SLOT(setConfigurationInterfaceModel()));
+    m_ui.m_pattern->setItemDelegate(new BackgroundDelegate(m_ui.m_pattern));
 
-    int configuredPatternIndex = -1;
-    int i = 0;
-    foreach (const QString& pattern, patterns) {
-        KConfig cfg(pattern);
-        KConfigGroup patternConfig(&cfg, PATTERN_CONFIG_GROUP);
-        QString patternComment;
-        QString patternFile;
-
-        if (patternConfig.hasKey(FILE_CONFIG_KEY)) {
-            patternFile = patternConfig.readEntry(FILE_CONFIG_KEY, QString());
-            if (patternFile.isEmpty()) {
-                continue;
-            }
-        } else {
-            continue;
-        }
-
-        if (patternFile == m_patternName) {
-            configuredPatternIndex = i;
-        }
-
-        if (patternConfig.hasKey(COMMENT_CONFIG_KEY)) {
-            patternComment = patternConfig.readEntry(COMMENT_CONFIG_KEY);
-        } else {
-            QFileInfo fi(pattern);
-            patternComment = fi.baseName();
-        }
-
-        QListWidgetItem *item = new QListWidgetItem(patternComment, m_ui.m_pattern);
-        item->setData(Qt::UserRole, patternFile);
-
-        m_ui.m_pattern->addItem(item);
-        ++i;
-    }
-
-    updateConfigThumbs();
-
-    if (configuredPatternIndex != -1) {
-        m_ui.m_pattern->setCurrentRow(configuredPatternIndex);
-    }
-
+    m_ui.m_pattern->setMinimumWidth((BackgroundDelegate::SCREENSHOT_SIZE + BackgroundDelegate::MARGIN * 2 +
+                                        BackgroundDelegate::BLUR_INCREMENT) * 3 +
+                                        m_ui.m_pattern->spacing() * 4 +
+                                        QApplication::style()->pixelMetric(QStyle::PM_ScrollBarExtent) +
+                                        QApplication::style()->pixelMetric(QStyle::PM_DefaultFrameWidth) * 2 + 7);
+    m_ui.m_pattern->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+        
     connect(m_ui.m_fgColor, SIGNAL(changed(QColor)), SLOT(widgetChanged()));
     connect(m_ui.m_bgColor, SIGNAL(changed(QColor)), SLOT(widgetChanged()));
-    connect(m_ui.m_pattern, SIGNAL(currentRowChanged(int)), SLOT(widgetChanged()));
-
+    
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     return configWidget;
+}
+
+QPixmap PatternWallpaper::generatePattern(QImage &image) const
+{
+    return QPixmap::fromImage(Blitz::flatten(image, m_fgColor, m_bgColor));
 }
 
 QPixmap PatternWallpaper::generatePattern(const QString &patternFile, const QColor &fg, const QColor &bg) const
@@ -152,25 +131,6 @@ void PatternWallpaper::paint(QPainter * painter, const QRectF & exposedRect)
     }
 }
 
-void PatternWallpaper::updateConfigThumbs()
-{
-    for (int i = 0; i < m_ui.m_pattern->count(); ++i) {
-        QListWidgetItem *item = m_ui.m_pattern->item(i);
-        if (!item) {
-            continue;
-        }
-
-        const QString patternFile = item->data(Qt::UserRole).toString();
-
-        QPixmap pix(80, 80);
-        QPainter p(&pix);
-        p.drawTiledPixmap(pix.rect(), generatePattern(patternFile, m_fgColor, m_bgColor), QPoint(0,0));
-        p.end();
-
-        item->setIcon(QIcon(pix));
-    }
-}
-
 void PatternWallpaper::widgetChanged()
 {
     const QColor newFgColor = m_ui.m_fgColor->color();
@@ -181,16 +141,47 @@ void PatternWallpaper::widgetChanged()
     m_bgColor = newBgColor;
 
     if (updateThumbs) {
-        updateConfigThumbs();
-    }
-
-    if (m_ui.m_pattern->count()) {
-        m_patternName = m_ui.m_pattern->item(m_ui.m_pattern->currentRow())->data(Qt::UserRole).toString();
+        m_model->reload();
     }
 
     loadPattern();
     emit settingsChanged(true);
     emit update(boundingRect());
+}
+
+void PatternWallpaper::pictureChanged(const QModelIndex &index)
+{
+    if (index.row() == -1 || !m_model) {
+        return;
+    }
+
+    KConfig *config = m_model->kconfig(index.row());
+    if (!config) {
+        return;
+    }
+
+    KConfigGroup patternConfig(config, PATTERN_CONFIG_GROUP);
+        
+    m_patternName = patternConfig.readEntry("File", QString());
+    kDebug() << "Pattern changed to =" << m_patternName;
+    emit settingsChanged(true);
+    emit update(boundingRect());
+}
+
+void PatternWallpaper::setConfigurationInterfaceModel()
+{
+    m_ui.m_pattern->setModel(m_model);
+    connect(m_ui.m_pattern->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(pictureChanged(QModelIndex)));
+
+    QModelIndex index = m_model->indexOf(m_patternName);
+    if (index.isValid()) {
+        m_ui.m_pattern->setCurrentIndex(index);
+    }
+}
+
+void PatternWallpaper::updateScreenshot(QPersistentModelIndex index)
+{
+    m_ui.m_pattern->update(index);
 }
 
 #include "pattern.moc"

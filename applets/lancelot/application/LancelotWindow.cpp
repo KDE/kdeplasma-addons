@@ -1070,23 +1070,23 @@ void LancelotWindow::lancelotContext()
         menuLancelotContext = new Lancelot::PopupMenu();
 
         connect(
-                menuLancelotContext->addAction(KIcon(),
+                menuLancelotContext->addAction(KIcon("kmenuedit"),
                     i18n("Menu Editor")), SIGNAL(triggered(bool)),
                 this, SLOT(showMenuEditor()));
 
         connect(
                 menuLancelotContext->addAction(KIcon("configure-shortcuts"),
-                    i18n("Configure &Shortcuts...")), SIGNAL(triggered(bool)),
+                    i18n("Configure Shortcuts...")), SIGNAL(triggered(bool)),
                 this, SLOT(configureShortcuts()));
 
         connect(
                 menuLancelotContext->addAction(KIcon("configure"),
-                    i18n("Configure &Lancelot menu...")), SIGNAL(triggered(bool)),
+                    i18n("Configure Lancelot menu...")), SIGNAL(triggered(bool)),
                 this, SLOT(configureMenu()));
 
         connect(
                 menuLancelotContext->addAction(KIcon("lancelot"),
-                    i18n("&About Lancelot")), SIGNAL(triggered(bool)),
+                    i18n("About Lancelot")), SIGNAL(triggered(bool)),
                 this, SLOT(showAboutDialog()));
     }
 

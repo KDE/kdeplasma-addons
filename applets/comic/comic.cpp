@@ -673,6 +673,7 @@ void ComicApplet::updateUsedComics()
     mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
 
     delete mCheckNewStrips;
+    mCheckNewStrips = 0;
     if ( mCheckNewComicStripsIntervall ) {
         mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsIntervall, this );
         connect( mCheckNewStrips, SIGNAL(lastStrip(int,QString,QString)), this, SLOT(slotFoundLastStrip(int,QString,QString)) );

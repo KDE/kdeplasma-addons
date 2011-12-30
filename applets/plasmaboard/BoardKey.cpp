@@ -22,35 +22,36 @@
 #include <QPainter>
 #include <plasma/theme.h>
 
-BoardKey::BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode) :
-    m_relativePosition(relativePosition), m_relativeSize(relativeSize){
-    m_keycode = keycode;
+BoardKey::BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode)
+    : m_keycode(keycode),
+      m_pixmap(0),
+      m_relativePosition(relativePosition),
+      m_relativeSize(relativeSize)
+{
 }
 
 BoardKey::~BoardKey()
 {
-
 }
 
-bool BoardKey::contains (const QPoint &point) const
+bool BoardKey::contains(const QPoint &point) const
 {
     return m_rect.contains(point);
 }
 
-bool BoardKey::intersects (const QRectF &rect) const
+bool BoardKey::intersects(const QRectF &rect) const
 {
     return m_rect.intersects(rect);
 }
 
-
-unsigned int BoardKey::getKeycode() const
+unsigned int BoardKey::keycode() const
 {
     return m_keycode;
 }
 
-unsigned int BoardKey::getKeysymbol(int level) const
+unsigned int BoardKey::keysymbol(int level) const
 {
-    return Helpers::keycodeToKeysym(getKeycode(), level);
+    return Helpers::keycodeToKeysym(keycode(), level);
 }
 
 QString BoardKey::label() const
@@ -60,11 +61,9 @@ QString BoardKey::label() const
 
 void BoardKey::paint(QPainter *painter)
 {
-    //painter->eraseRect(m_rect);
-    //painter->fillRect(m_rect, QColor(Qt::transparent));
-    painter->drawPixmap(m_rect.topLeft(), *m_pixmap);
-    //painter->drawPixmap(m_rect.toRect(), *m_pixmap);
-    //painter->drawRect(QRect(m_position, QPoint( frames[m_size].width() + m_position.x(), frames[m_size].height() + m_position.y() )));
+    if (m_pixmap) {
+        painter->drawPixmap(m_rect.topLeft(), *m_pixmap);
+    }
 }
 
 QPoint BoardKey::position() const
@@ -77,13 +76,20 @@ void BoardKey::pressed()
 
 }
 
+bool BoardKey::repeats() const
+{
+    return true;
+}
+
 void BoardKey::pressRepeated()
 {
-    Helpers::fakeKeyPress(getKeycode());
+    if (repeats()) {
+        Helpers::fakeKeyPress(keycode());
+    }
 }
 
 void BoardKey::released()
-{	
+{
     sendKey();
 }
 
@@ -109,26 +115,32 @@ void BoardKey::sendKey()
 
 void BoardKey::sendKeyPress()
 {
-     Helpers::fakeKeyPress(getKeycode());
+    Helpers::fakeKeyPress(keycode());
 }
 
 void BoardKey::sendKeyRelease()
 {
-     Helpers::fakeKeyRelease(getKeycode());
+    Helpers::fakeKeyRelease(keycode());
 }
 
-void BoardKey::setKeycode(unsigned int keycode){
+void BoardKey::setKeycode(unsigned int keycode)
+{
     m_keycode = keycode;
 }
 
-void BoardKey::setPixmap(QPixmap *pixmap)
+bool BoardKey::setPixmap(QPixmap *pixmap)
 {
+    if (m_pixmap == pixmap) {
+        return false;
+    }
+
     m_pixmap = pixmap;
+    return true;
 }
 
 void BoardKey::setUpPainter(QPainter *painter) const
 {
-    painter->translate(position() + QPoint(size().width()/2, size().height()/2) );    
+    painter->translate(position() + QPoint(size().width() / 2, size().height() / 2));
 }
 
 QSize BoardKey::size() const
@@ -136,14 +148,9 @@ QSize BoardKey::size() const
     return m_rect.size().toSize();
 }
 
-void BoardKey::unpressed()
-{
-
-}
-
 void BoardKey::updateDimensions(double factor_x, double factor_y)
 {
-    QPoint position = QPoint(m_relativePosition.x() * factor_x, m_relativePosition.y() * factor_y);
-    QSize size = QSize(m_relativeSize.width() * factor_x, m_relativeSize.height() * factor_y);
+    const QPoint position(m_relativePosition.x() * factor_x, m_relativePosition.y() * factor_y);
+    const QSize size(m_relativeSize.width() * factor_x, m_relativeSize.height() * factor_y);
     m_rect = QRect(position, size);
 }

@@ -185,49 +185,17 @@ void NotesTextEdit::wheelEvent ( QWheelEvent * event )
  */
 void NotesTextEdit::leaveEvent ( QEvent * event )
 {
-  KTextEdit::leaveEvent(event);
-  emit mouseUnhovered();
-}
+    KTextEdit::leaveEvent(event);
 
-/**
- * Use notesTextEdit as native widget instead of KTextEdit
- */
-PlasmaTextEdit::PlasmaTextEdit(Plasma::Applet *parent)
-    : Plasma::TextEdit(parent),
-      m_applet(parent)
-{
-    KTextEdit *w = nativeWidget();
-    native = new NotesTextEdit(m_applet);
-    connect(native, SIGNAL(error(QString)), this, SIGNAL(error(QString)));
-    native->setWindowFlags(native->windowFlags() | Qt::BypassGraphicsProxyWidget);
-    //FIXME: we need a way to just add actions without changing the native widget under its feet
-    if (native->verticalScrollBar() && w->verticalScrollBar()) {
-        native->verticalScrollBar()->setStyle(w->verticalScrollBar()->style());
-    }
-    setNativeWidget(native);
+    QTextEdit::ExtraSelection textxtra;
+    textxtra.cursor = textCursor();
+    textxtra.cursor.movePosition(QTextCursor::StartOfLine);
+    textxtra.cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+    textxtra.format.setBackground(Qt::transparent);
 
-    connect(native, SIGNAL(cursorMoved()), this, SIGNAL(textChanged()));
-    connect(native, SIGNAL(mouseUnhovered()), this, SIGNAL(mouseUnhovered()));
-
-    // scrollwheel + ctrl changes font size
-    connect(native, SIGNAL(scrolledUp()), parent, SLOT(increaseFontSize()));
-    connect(native, SIGNAL(scrolledDown()), parent, SLOT(decreaseFontSize()));
-}
-
-PlasmaTextEdit::~PlasmaTextEdit()
-{
-}
-
-void PlasmaTextEdit::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    m_applet->setStatus(Plasma::AcceptingInputStatus);
-    QGraphicsProxyWidget::mousePressEvent(event);
-}
-
-void PlasmaTextEdit::focusOutEvent(QFocusEvent *event)
-{
-    m_applet->setStatus(Plasma::PassiveStatus);
-    QGraphicsProxyWidget::focusOutEvent(event);
+    QList<QTextEdit::ExtraSelection> extras;
+    extras << textxtra;
+    setExtraSelections(extras);
 }
 
 #include "textedit.moc"

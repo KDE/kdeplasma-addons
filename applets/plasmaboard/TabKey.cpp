@@ -25,7 +25,7 @@
 #include <Plasma/Theme>
 
 TabKey::TabKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Tab), QString())
+    FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Tab), QString())
 {
 }
 
@@ -39,23 +39,23 @@ void TabKey::paint(QPainter *painter)
     setUpPainter(painter);
     int unit = qMin(size().width(), size().height()) / 8;
 
-    painter->drawLine(-1*unit, -2*unit , 3*unit, -2*unit);
-	QPointF points[3] = {
-         QPointF(-3*unit, -2*unit),
-         QPointF(-1*unit, -1*unit),
-         QPointF(-1*unit, -3*unit),
-	 };
-	painter->drawConvexPolygon(points, 3);
-    painter->drawLine(-3*unit, -1*unit , -3*unit, -3*unit);
+    painter->drawLine(-1 * unit, -2 * unit , 3 * unit, -2 * unit);
+    QPointF points[3] = {
+        QPointF(-3 * unit, -2 * unit),
+        QPointF(-1 * unit, -1 * unit),
+        QPointF(-1 * unit, -3 * unit),
+    };
+    painter->drawConvexPolygon(points, 3);
+    painter->drawLine(-3 * unit, -1 * unit , -3 * unit, -3 * unit);
 
-    painter->drawLine(-3*unit, 0 , 1*unit, 0);
-	QPointF points2[3] = {
-         QPointF(1*unit, -1*unit),
-         QPointF(3*unit, 0),
-         QPointF(1*unit, 1*unit),
-	 };
-	painter->drawConvexPolygon(points2, 3);
-    painter->drawLine(3*unit, 1*unit , 3*unit, -1*unit);
+    painter->drawLine(-3 * unit, 0 , 1 * unit, 0);
+    QPointF points2[3] = {
+        QPointF(1 * unit, -1 * unit),
+        QPointF(3 * unit, 0),
+        QPointF(1 * unit, 1 * unit),
+    };
+    painter->drawConvexPolygon(points2, 3);
+    painter->drawLine(3 * unit, 1 * unit , 3 * unit, -1 * unit);
 
     painter->restore();
 }

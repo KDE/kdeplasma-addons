@@ -63,6 +63,16 @@ void Picture::setMessage(const QString &message)
     m_message = message;
 }
 
+void Picture::setAllowNullImages(bool allowNull)
+{
+    m_allowNullImages = allowNull;
+}
+
+bool Picture::allowNullImages() const
+{
+    return m_allowNullImages;
+}
+
 QImage Picture::defaultPicture(const QString &message)
 {
     // Create a QImage with same axpect ratio of default svg and current pixelSize
@@ -79,8 +89,8 @@ void Picture::setPicture(const KUrl &currentUrl)
 
     if (!m_currentUrl.isEmpty() && !m_currentUrl.isLocalFile()) {
         kDebug() << "Not a local file, downloading" << currentUrl;
-        m_job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::HideProgressInfo);
-        connect(m_job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
+        KIO::StoredTransferJob * job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::HideProgressInfo);
+        connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
         emit pictureLoaded(defaultPicture(i18n("Loading image...")));
     } else {
         ImageLoader *loader = 0;
@@ -125,6 +135,7 @@ void Picture::setPath(const QString &path)
 void Picture::reload()
 {
     kDebug() << "Picture reload";
+    setMessage(QString());
     ImageLoader *loader = new ImageLoader(m_path);
     connect(loader, SIGNAL(loaded(QImage)), this, SLOT(checkImageLoaded(QImage)));
     QThreadPool::globalInstance()->start(loader);
@@ -140,25 +151,25 @@ void Picture::slotFinished( KJob *job )
     QString filename = m_currentUrl.fileName();
     QString path = KStandardDirs::locateLocal("cache", "plasma-frame/" +  m_currentUrl.fileName());
     QImage image;
-    
+
     if (job->error()) {
         kDebug() << "Error loading image:" << job->errorString();
         image = defaultPicture(i18n("Error loading image: %1", job->errorString()));
-    } else {
-        image.loadFromData(m_job->data());
+    } else if (KIO::StoredTransferJob * transferJob = qobject_cast<KIO::StoredTransferJob *>(job)) {
+        image.loadFromData(transferJob->data());
         kDebug() << "Successfully downloaded, saving image to" << path;
         m_message.clear();
         image.save(path);
         kDebug() << "Saved to" << path;
         setPath(path);
     }
-    
+
     emit checkImageLoaded(ImageLoader::correctRotation(image, path));
 }
 
-void Picture::checkImageLoaded(QImage newImage)
+void Picture::checkImageLoaded(const QImage &newImage)
 {
-    if ( newImage.isNull()) {
+    if (!m_allowNullImages && newImage.isNull()) {
         emit pictureLoaded(defaultPicture(i18n("Error loading image. Image was probably deleted.")));
     } else {
         emit pictureLoaded(newImage);

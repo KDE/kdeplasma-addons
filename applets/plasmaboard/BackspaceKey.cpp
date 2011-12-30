@@ -1,5 +1,5 @@
-/*/***************************************************************************
- *   Copyright (C) 2009 by Björn Ruberg <bjoern@ruberg-wegener.de>    *
+/***************************************************************************
+ *   Copyright (C) 2009 by Björn Ruberg <bjoern@ruberg-wegener.de>         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,14 +19,15 @@
 
 
 #include "BackspaceKey.h"
-#include "Helpers.h"
+
 #include <QPainter>
 
 #include <Plasma/Theme>
 
+#include "Helpers.h"
 
 BackspaceKey::BackspaceKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_BackSpace), QString())
+    FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_BackSpace), QString())
 {
 
 }
@@ -39,6 +40,12 @@ void BackspaceKey::paint(QPainter *painter)
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     setUpPainter(painter);
-	paintArrow(painter);
+    paintArrow(painter);
     painter->restore();
 }
+
+bool BackspaceKey::repeats() const
+{
+    return true;
+}
+

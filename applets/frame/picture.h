@@ -50,10 +50,11 @@ public:
     * Set picture from location @p currentUrl
     **/
     void setPicture(const KUrl &currentUrl);
-    KIO::StoredTransferJob * m_job;
     KUrl url();
     QString message();
     void setMessage(const QString &message);
+    void setAllowNullImages(bool allowNull);
+    bool allowNullImages() const;
 
 Q_SIGNALS:
     void pictureLoaded(QImage image);
@@ -61,7 +62,7 @@ Q_SIGNALS:
 private Q_SLOTS:
     void slotFinished(KJob *job);
     void reload();
-    void checkImageLoaded(QImage newImage);
+    void checkImageLoaded(const QImage &newImage);
     void customizeEmptyMessage();
 
 private:
@@ -72,6 +73,7 @@ private:
     QString m_message;
     QString m_defaultImage;
     bool m_checkDir;
+    bool m_allowNullImages;
 };
 
 

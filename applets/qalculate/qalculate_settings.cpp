@@ -34,7 +34,6 @@
 
 QalculateSettings::QalculateSettings(QalculateApplet* applet): QObject(0), m_applet(applet)
 {
-    readSettings();
 }
 
 void QalculateSettings::readSettings()
@@ -134,7 +133,7 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     m_baseDisplaySpin->setValue(m_baseDisplay);
     m_baseDisplaySpin->setMinimum(2);
     m_baseDisplaySpin->setMaximum(32);
-    connect(m_baseDisplaySpin, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
+    connect(m_baseDisplaySpin, SIGNAL(valueChanged(int)), parent, SLOT(settingsModified()));
 
     m_structuringCombo = new KComboBox(page);
     m_structuringCombo->addItem(i18n("None"));

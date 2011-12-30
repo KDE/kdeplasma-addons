@@ -23,7 +23,8 @@
 
 #include "StickyKey.h"
 
-class CapsKey: public StickyKey {
+class CapsKey: public StickyKey
+{
 public:
     CapsKey(QPoint relativePosition, QSize relativeSize);
 

@@ -1,0 +1,6 @@
+[General]
+Ignore=kmix,k3b,ghb,xbmc,flashplayer,audex,kmediafactory,kdenlive,avidemux-qt4,mkvinfo,mkvmergegui,guvcview,pavucontrol,avidemux-qt,devede,kid3
+[Aliases]
+amarok=amarok_containers
+mpd=qmpdclient,sonata,quimup,qtmpc
+dragonplayer=Dragon

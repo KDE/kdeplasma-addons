@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>behaviourconfig</class>
+ <widget class="QWidget" name="behaviourconfig">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>341</width>
+    <height>274</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>General</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="showProgress_label">
+        <property name="text">
+         <string>Show job progress on task icon:</string>
+        </property>
+        <property name="buddy">
+         <cstring>showProgress</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="showProgress">
+        <property name="toolTip">
+         <string>&lt;p&gt;When enabled, a progressbar will be drawn over the applications icons to represent its overall job progress.&lt;/p&gt;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="mediaButtons_label">
+        <property name="text">
+         <string>Show control buttons on media player tooltips:</string>
+        </property>
+        <property name="buddy">
+         <cstring>mediaButtons</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="mediaButtons">
+        <property name="toolTip">
+         <string>&lt;p&gt;When enabled - previous, play/pause, and next buttons will be shown in the tooltips for media players.&lt;/p&gt;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="unity_label">
+        <property name="text">
+         <string>Enable support for Unity features:</string>
+        </property>
+        <property name="buddy">
+         <cstring>unity</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="unity">
+        <property name="toolTip">
+         <string>&lt;p&gt;Toggles support for the Unity D-Bus API.&lt;/p&gt;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="recentDocuments_label">
+        <property name="text">
+         <string>Show recent documents:</string>
+        </property>
+        <property name="buddy">
+         <cstring>recentDocuments</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="recentDocuments">
+        <property name="toolTip">
+         <string>&lt;p&gt;Toggles support for listing an application's recent documents in its popup menu.&lt;/p&gt;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="groupClick_label">
+        <property name="text">
+         <string>Group click action:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="buddy">
+         <cstring>groupClick</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QComboBox" name="groupClick">
+        <property name="toolTip">
+         <string>&lt;p&gt;Configures what should occur when a task group is clicked.&lt;/p&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="middleClick_label">
+        <property name="text">
+         <string>Middle-click action:</string>
+        </property>
+        <property name="buddy">
+         <cstring>middleClick</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QComboBox" name="middleClick"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Filters</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::ExpandingFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="showOnlyCurrentScreen_label">
+        <property name="text">
+         <string>Only show tasks from the current screen:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="buddy">
+         <cstring>showOnlyCurrentScreen</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="showOnlyCurrentScreen">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="showOnlyCurrentDesktop_label">
+        <property name="text">
+         <string>Only show tasks from the current desktop:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="buddy">
+         <cstring>showOnlyCurrentDesktop</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="showOnlyCurrentDesktop">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="showOnlyCurrentActivity_label">
+        <property name="text">
+         <string>Only show tasks from the current activity:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="buddy">
+         <cstring>showOnlyCurrentActivity</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="showOnlyCurrentActivity">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>2</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

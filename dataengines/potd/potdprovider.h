@@ -21,6 +21,7 @@
 #define POTDPROVIDER_H
 
 #include <QtCore/QObject>
+#include <QtCore/QDate>
 
 #include <kpluginfactory.h>
 
@@ -45,7 +46,7 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
          *
          * @param parent The parent object.
          */
-        PotdProvider( QObject *parent, const QVariantList &args );
+        PotdProvider( QObject *parent, const QVariantList &args = QVariantList() );
 
         /**
          * Destroys the PoTD provider.
@@ -63,7 +64,22 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
         /**
          * Returns the identifier of the PoTD request (name + date).
          */
-        virtual QString identifier() const = 0;
+        virtual QString identifier() const;
+
+        /**
+         * @return the name of this provider (equiv to X-KDE-PlasmaPoTDProvider-Identifier)
+         */
+        QString name() const;
+
+        /**
+         * @reutrn the date to load for this item, if any
+         */
+        QDate date() const;
+
+        /**
+         * @return if the date is fixed, or if it should always be "today"
+         */
+        bool isFixedDate() const;
 
     Q_SIGNALS:
         /**
@@ -80,6 +96,10 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
          * @param provider The provider which emitted the signal.
          */
         void error( PotdProvider *provider );
+
+    private:
+        class Private;
+        Private * const d;
 };
 
 #endif

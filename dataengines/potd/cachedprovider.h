@@ -20,6 +20,9 @@
 #ifndef CACHEDPROVIDER_H
 #define CACHEDPROVIDER_H
 
+#include <QImage>
+#include <QRunnable>
+
 #include "potdprovider.h"
 
 /**
@@ -36,7 +39,7 @@ class CachedProvider : public PotdProvider
          * @param identifier The identifier of the cached picture.
          * @param parent The parent object.
          */
-        CachedProvider( const QString &identifier, QObject *parent, const QVariantList &args );
+        CachedProvider( const QString &identifier, QObject *parent );
 
         /**
          * Destroys the cached provider.
@@ -59,18 +62,50 @@ class CachedProvider : public PotdProvider
         /**
          * Returns whether a picture with the given @p identifier is cached.
          */
-        static bool isCached( const QString &identifier );
+        static bool isCached( const QString &identifier, bool ignoreAge = false );
 
         /**
-         * Stores the given @p potd with the given @p identifier in the cache.
+         * Returns a path for the given identifier
          */
-        static bool storeInCache( const QString &identifier, const QImage &potd );
+        static QString identifierToPath( const QString &identifier );
 
     private Q_SLOTS:
-        void triggerFinished();
+        void triggerFinished(const QImage &image);
 
     private:
         QString mIdentifier;
+        QImage mImage;
+};
+
+class LoadImageThread : public QObject, public QRunnable
+{
+    Q_OBJECT
+
+public:
+    LoadImageThread(const QString &filePath);
+    void run();
+
+Q_SIGNALS:
+    void done(const QImage &pixmap);
+
+private:
+    QString m_filePath;
+};
+
+class SaveImageThread : public QObject, public QRunnable
+{
+    Q_OBJECT
+
+public:
+    SaveImageThread(const QString &identifier, const QImage &image);
+    void run();
+
+Q_SIGNALS:
+    void done( const QString &source, const QString &path, const QImage &img );
+
+private:
+    QImage m_image;
+    QString m_identifier;
 };
 
 #endif

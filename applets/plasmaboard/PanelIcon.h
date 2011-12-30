@@ -28,7 +28,8 @@
 
 class Layout;
 
-class PanelIcon: public Plasma::PopupApplet {
+class PanelIcon: public Plasma::PopupApplet
+{
     Q_OBJECT
 
 public:
@@ -46,7 +47,8 @@ public Q_SLOTS:
       */
     void initKeyboard();
     void layoutNameChanged(const QString &name);
-
+    void resetLayout();
+    void showLayout(const QString &layout);
 
 protected:
     void createConfigurationInterface(KConfigDialog *parent);
@@ -60,11 +62,13 @@ private:
     void init();
     void initKeyboard(const QString &layoutFile);
     void saveLayout(const QString &path);
+    void setLayout(const QString &layoutFile);
 
 private:
     QString m_layout;
     QList<Layout*> m_layouts;
     PlasmaboardWidget *m_plasmaboard;
+    bool m_tempLayout;
     const QVariantList args;
 
     Ui::config ui;

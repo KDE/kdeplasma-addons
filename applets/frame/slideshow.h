@@ -46,7 +46,7 @@ public:
     QImage image() const;
     KUrl currentUrl() const;
     QString message() const;
-    void updateImage(QString);
+    void updateImage(const QString &url);
     void setUpdateInterval(int msec);
 
 public Q_SLOTS:
@@ -61,12 +61,13 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void clearPicture();
-    void pictureLoaded(QImage image);
+    void pictureLoaded(const QImage &image);
 
 private:
     void addImage(const QString &imagePath);
     void addDir(const QString &path, bool recursive);
     KUrl url(int offset = 1);
+    void setupRandomSequence();
 
     QStringList m_picturePaths;
     QStringList m_filters;

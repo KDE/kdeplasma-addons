@@ -49,10 +49,10 @@ void RTM::Request::addArgument(const QString &name, const QString &value) {
 
 void RTM::Request::sendRequest()
 {
-  static QDateTime lastRequest;
-  static unsigned int queueSize;
+  static QDateTime lastRequest = QDateTime::fromMSecsSinceEpoch(QDateTime::currentMSecsSinceEpoch() - 1050);
+  static unsigned int queueSize = 0;
 
-  int margin = lastRequest.msecsTo(QDateTime::currentDateTime());
+  qint64 margin = lastRequest.msecsTo(QDateTime::currentDateTime());
 
   // Follow RTM's TOS and only do 1 request per second.
   if (margin <= 1000) {

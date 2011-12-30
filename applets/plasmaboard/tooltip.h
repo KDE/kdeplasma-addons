@@ -32,12 +32,12 @@ class Tooltip : public QWidget
 {
     Q_OBJECT
 public:
-    Tooltip(QString text);
+    Tooltip(const QString &text = QString());
     ~Tooltip();
     void setText(QString text);
 
 protected:
-    void paintEvent ( QPaintEvent * event );
+    void paintEvent(QPaintEvent * event);
     void resizeEvent(QResizeEvent *event);
     void showEvent(QShowEvent * event);
 

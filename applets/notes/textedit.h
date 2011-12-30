@@ -24,8 +24,6 @@
 
 #include <KRichTextEdit>
 
-#include <Plasma/TextEdit>
-
 #include "ui_config.h"
 
 class QContextMenuEvent;
@@ -64,7 +62,6 @@ class NotesTextEdit : public KRichTextEdit
 
     Q_SIGNALS:
         void cursorMoved();
-        void mouseUnhovered();
         void scrolledUp();
         void scrolledDown();
         void error(const QString &message);
@@ -79,35 +76,6 @@ class NotesTextEdit : public KRichTextEdit
     private:
         Plasma::Applet *m_applet;
         QMenu *m_formatMenu;
-};
-
-/**
- * @short Notes Version von KTextEdit
- *
- * This is a Plasma::TextEdit which uses NotesTextEdit as native widget
- *
- * @see QTextEdit
- * @author Björn Ruberg <bjoern@ruberg-wegener.de>
- */
-class PlasmaTextEdit : public Plasma::TextEdit
-{
-    Q_OBJECT
-
-    public:
-        PlasmaTextEdit(Plasma::Applet *parent);
-        ~PlasmaTextEdit();
-        NotesTextEdit* native;
-
-    Q_SIGNALS:
-        void mouseUnhovered();
-        void error(const QString &message);
-
-    protected:
-        void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        void focusOutEvent(QFocusEvent *event);
-
-    private:
-        Plasma::Applet *m_applet;
 };
 
 #endif

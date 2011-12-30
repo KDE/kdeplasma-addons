@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2009 by Wang Hoi <zealot.hoi@gmail.com>                 *
+ *   Copyright (C) 2011 by CSSlayer <wengxt@gmail.com>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,28 +21,24 @@
 #ifndef PAINTUTILS_H
 #define PAINTUTILS_H
 
-#include "kimpanelruntime_export.h"
-#include <plasma/theme.h>
+#include "kimpanelsettings.h"
 
+// Qt
 #include <QApplication>
 #include <QPainter>
 #include <QPainterPath>
 #include <QPixmap>
 
-namespace KIM
-{
-    enum RenderType {
-        Statusbar,
-        Auxiliary,
-        Preedit,
-        TableLabel,
-        TableEntry
-    };
+enum RenderType {
+    Statusbar,
+    Auxiliary,
+    Preedit,
+    TableLabel,
+    TableEntry
+};
 
-    KIMPANELRUNTIME_EXPORT QPixmap renderText(QString text, RenderType type = Statusbar);
-    KIMPANELRUNTIME_EXPORT QPixmap renderText(QString text, 
-            QColor textColor, QColor bgColor,
-            const QFont &ft = qApp->font());
-} // namespace KIM
+QPixmap renderText(QString text, RenderType type = Statusbar, bool drawCursor = false, int cursorPos = 0, const QFont& font = KimpanelSettings::self()->font());
+QPixmap renderText(QString text, QColor textColor, QColor bgColor, bool drawCursor, int cursorPos, const QFont &ft);
 
 #endif // PAINTUTILS_H
+

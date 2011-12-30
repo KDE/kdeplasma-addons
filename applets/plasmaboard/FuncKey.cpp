@@ -24,39 +24,37 @@
 #include <QPainter>
 #include <plasma/theme.h>
 
-FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label):
-        AlphaNumKey(relativePosition, relativeSize, keycode)
+FuncKey::FuncKey(const QPoint &relativePosition, const QSize &relativeSize, unsigned int keycode, const QString &label)
+    : AlphaNumKey(relativePosition, relativeSize, keycode)
 {
     setLabel(label);
 }
 
-void FuncKey::paint(QPainter *painter)
+bool FuncKey::repeats() const
 {
-    AlphaNumKey::paint(painter);
+    return false;
 }
 
 void FuncKey::paintArrow(QPainter *painter)
 {
-
     int unit = qMin(size().width(), size().height()) / 8;
-    painter->drawLine(-1*unit, 0 , 3*unit, 0);
+    painter->drawLine(-1 * unit, 0 , 3 * unit, 0);
 
-	const QPointF points[3] = {
-         QPointF(-3*unit, 0),
-         QPointF(-1*unit, 1*unit),
-         QPointF(-1*unit, -1*unit),
-	 };
+    const QPointF points[3] = {
+        QPointF(-3 * unit, 0),
+        QPointF(-1 * unit, 1 * unit),
+        QPointF(-1 * unit, -1 * unit),
+    };
 
-	painter->drawConvexPolygon(points, 3);
+    painter->drawConvexPolygon(points, 3);
 }
 
 void FuncKey::paintLabel(QPainter *painter)
 {
     painter->save();
-    int fontSize = qMin(size().width(), size().height()) / 5 - (label().size()/6 + 1);
-    painter->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize ));
+    int fontSize = qMin(size().width(), size().height()) / 5 - (label().size() / 6 + 1);
+    painter->setFont(QFont(Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize));
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     painter->drawText(rect(), Qt::AlignCenter, label());
-    
     painter->restore();
 }

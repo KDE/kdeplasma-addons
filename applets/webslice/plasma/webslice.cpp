@@ -160,6 +160,9 @@ void WebSlice::createConfigurationInterface(KConfigDialog *parent)
     connect(ui.loadUrl, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     connect(ui.elementCombo, SIGNAL(editTextChanged(QString)), parent, SLOT(settingsModified()));
     connect(ui.geometryEdit, SIGNAL(userTextChanged(QString)), parent, SLOT(settingsModified()));
+    connect(ui.elementCombo, SIGNAL(editTextChanged(QString)), this, SLOT(handleGeometryEdit()));
+    connect(parent, SIGNAL(currentPageChanged(KPageWidgetItem*,KPageWidgetItem*)), this,
+            SLOT(handleGeometryEdit()));
 }
 
 void WebSlice::updateElements()
@@ -276,6 +279,15 @@ void WebSlice::updateColors()
 {
     m_slice->setPreviewMaskColor(
         Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+}
+
+void WebSlice::handleGeometryEdit()
+{
+    if (ui.elementCombo->currentText().isEmpty()) {
+        ui.geometryEdit->setEnabled(true);
+    } else {
+        ui.geometryEdit->setEnabled(false);
+    }
 }
 
 #include "webslice.moc"
