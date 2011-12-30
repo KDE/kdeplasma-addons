@@ -35,7 +35,8 @@ Item {
     }
 
     Component.onCompleted: {
-        plasmoid.popupIcon = QIcon("utilities-terminal");
+        plasmoid.popupIcon = "utilities-terminal";
+        plasmoid.aspectRatioMode = IgnoreAspectRatio;
     }
 
 
