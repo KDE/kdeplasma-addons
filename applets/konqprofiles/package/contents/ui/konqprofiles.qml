@@ -24,6 +24,8 @@ Item {
     height: 200
     id: konqProfiles
 
+
+
     PlasmaCore.DataSource {
         id: profilesSource
         engine: "org.kde.plasma.dataengine.konqprofiles"
@@ -34,7 +36,7 @@ Item {
     }
 
     Component.onCompleted: {
-        plasmoid.popupIcon = QIcon("konqueror");
+        plasmoid.popupIcon = "konqueror";
         plasmoid.aspectRatioMode = IgnoreAspectRatio;
     }
 
