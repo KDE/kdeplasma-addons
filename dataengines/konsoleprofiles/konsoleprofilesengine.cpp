@@ -85,8 +85,7 @@ void KonsoleProfilesEngine::loadProfiles()
 
             QString sourceName = "name:" + profileName;
             kDebug() << "adding sourcename: " << profileName << " ++" << niceName;
-            setData("name:" + profileName, "name", profileName);
-            setData("name:" + profileName, "prettyName", niceName);
+            setData(profileName, "prettyName", niceName);
         }
     }
 }
