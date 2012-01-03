@@ -1,5 +1,5 @@
 /*****************************************************************************
-*   Copyright (C) 2011 by Shaun Reich <shaun.reich@kdemail.net>              *
+*   Copyright (C) 2011, 2012 by Shaun Reich <shaun.reich@kdemail.net>        *
 *                                                                            *
 *   This program is free software; you can redistribute it and/or            *
 *   modify it under the terms of the GNU General Public License as           *
@@ -15,16 +15,15 @@
 *   along with this program.  If not, see <http://www.gnu.org/licenses/>.    *
 *****************************************************************************/
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 Item {
-    width: 160
-    height: 200
     id: konqProfiles
 
-
+    property int minimumWidth: 200
+    property int minimumHeight: 300
 
     PlasmaCore.DataSource {
         id: profilesSource
@@ -43,7 +42,7 @@ Item {
 
     Text {
         id: header
-        text: "Konqueror Profiles"
+        text: i18n("Konqueror Profiles")
         anchors { top: parent.top; left: parent.left; right: parent.right }
         horizontalAlignment: Text.AlignHCenter
     }
