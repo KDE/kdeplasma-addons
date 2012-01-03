@@ -40,7 +40,6 @@ Item {
         plasmoid.aspectRatioMode = IgnoreAspectRatio;
     }
 
-
     PlasmaComponents.Label {
         id: header
         text: i18n("Konsole Profiles")
@@ -48,10 +47,20 @@ Item {
         horizontalAlignment: Text.AlignHCenter
     }
 
-    PlasmaWidgets.Separator {
+   PlasmaCore.Svg {
+       id: lineSvg
+       imagePath: "widgets/line"
+    }
+
+    PlasmaCore.SvgItem {
         id: separator
+
         anchors { top: header.bottom; left: parent.left; right: parent.right }
         anchors { topMargin: 3 }
+
+        svg: lineSvg
+        elementId: "horizontal-line"
+        height: lineSvg.elementSize("horizontal-line").height
     }
 
     ListView {
