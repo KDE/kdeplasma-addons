@@ -42,7 +42,7 @@ Item {
 
     Text {
         id: header
-        text: "Konsole Profiles"
+        text: i18n("Konsole Profiles")
         anchors { top: parent.top; left: parent.left; right: parent.right }
         horizontalAlignment: Text.AlignHCenter
     }
