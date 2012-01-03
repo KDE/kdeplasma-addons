@@ -27,7 +27,7 @@ Item {
 
     PlasmaCore.DataSource {
         id: profilesSource
-        engine: "org.kde.plasma.dataengine.konqprofiles"
+        engine: "org.kde.konqprofiles"
         onSourceAdded: connectSource(source)
         onSourceRemoved: disconnectSource(source)
 
