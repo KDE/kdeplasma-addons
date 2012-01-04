@@ -78,9 +78,26 @@ Item {
         }
 
         delegate: profileViewDelegate
+
         highlight: profileViewHighlighter
         highlightMoveDuration: 250
         highlightMoveSpeed: 1
+
+        PlasmaComponents.ScrollBar {
+            id: scrollBar
+
+            anchors {
+                top: parent.top
+                right: parent.right
+                bottom: parent.bottom
+            }
+
+            orientation: Qt.Vertical
+            flickableItem: profileView
+            stepSize: 40
+            scrollButtonInterval: 50
+        }
+
         clip: true
 
         Component.onCompleted: currentIndex = -1
