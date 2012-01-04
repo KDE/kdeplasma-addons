@@ -66,11 +66,11 @@ Item {
     ListView {
         id: profileView
         anchors {
-            top : separator.bottom
+            top : scrollBar.top
             topMargin: 10
             bottom: konsoleProfiles.bottom
             left: parent.left
-            right: parent.right
+            right: scrollBar.left
         }
 
         model: PlasmaCore.DataModel {
@@ -83,24 +83,24 @@ Item {
         highlightMoveDuration: 250
         highlightMoveSpeed: 1
 
-        PlasmaComponents.ScrollBar {
-            id: scrollBar
-
-            anchors {
-                top: parent.top
-                right: parent.right
-                bottom: parent.bottom
-            }
-
-            orientation: Qt.Vertical
-            flickableItem: profileView
-            stepSize: 40
-            scrollButtonInterval: 50
-        }
-
         clip: true
 
         Component.onCompleted: currentIndex = -1
+    }
+
+    PlasmaComponents.ScrollBar {
+        id: scrollBar
+
+        anchors {
+            top: separator.bottom
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        orientation: Qt.Vertical
+        flickableItem: profileView
+        stepSize: 40
+        scrollButtonInterval: 50
     }
 
     //we use this to compute a fixed height for the items, and also to implement
@@ -152,7 +152,6 @@ Item {
         id: profileViewHighlighter
 
         PlasmaCore.FrameSvgItem {
-            width: konsoleProfiles.width
             imagePath: "widgets/viewitem"
             prefix: "hover"
             opacity: 0
