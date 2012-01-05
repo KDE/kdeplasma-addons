@@ -80,6 +80,8 @@ Item {
 
         delegate: profileViewDelegate
 
+        //NOTE: if this is fixed, fix kate, konq and kdevelop session applets
+        //if applicable.
         // FIXME: after a few experiments..is broken
         // the highlight item's sizing is always cut off.
         // yet I have no problems with my own svg, but without anchors or
@@ -174,6 +176,4 @@ Item {
             }
         }
     }
-
-
 }
