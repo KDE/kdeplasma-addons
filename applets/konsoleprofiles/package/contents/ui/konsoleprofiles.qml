@@ -18,7 +18,6 @@
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 Item {
    id: konsoleProfiles
@@ -87,9 +86,9 @@ Item {
         // anything on the component, it bugs out on sizing...
 
        highlight: PlasmaComponents.Highlight {
-            anchors { left: profileView.left; right: profileView.right }
-            width: view.width
-            height: view.height
+//            anchors { left: profileView.left; right: profileView.right }
+ //           width: view.width
+  //          height: view.height
             //TODO: animation. Ideally the Highlight component itself needs to do it.
             //the question is...how much should that api handle, and how much do I need to..
 //            Behavior on opacity { NumberAnimation { duration: 250 } }
