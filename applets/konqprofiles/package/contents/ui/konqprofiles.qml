@@ -155,7 +155,6 @@ Item {
         id: profileViewHighlighter
 
         PlasmaCore.FrameSvgItem {
-            width: konqProfiles.width
             imagePath: "widgets/viewitem"
             prefix: "hover"
             opacity: 0
