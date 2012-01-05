@@ -40,18 +40,29 @@ Item {
     }
 
 
-    Text {
+    PlasmaComponents.Label {
         id: header
         text: i18n("Konqueror Profiles")
         anchors { top: parent.top; left: parent.left; right: parent.right }
         horizontalAlignment: Text.AlignHCenter
     }
 
-    PlasmaWidgets.Separator {
+    PlasmaCore.Svg {
+        id: lineSvg
+        imagePath: "widgets/line"
+    }
+
+    PlasmaCore.SvgItem {
         id: separator
+
         anchors { top: header.bottom; left: parent.left; right: parent.right }
         anchors { topMargin: 3 }
+
+        svg: lineSvg
+        elementId: "horizontal-line"
+        height: lineSvg.elementSize("horizontal-line").height
     }
+
 
     ListView {
         id: profileView
