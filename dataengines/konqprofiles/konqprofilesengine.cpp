@@ -83,8 +83,9 @@ void KonqProfilesEngine::loadProfiles()
                 niceName = grp.readEntry("Name");
             }
 
-            setData("name:" + profileName, "name", profileName);
-            setData("name:" + profileName, "prettyName", niceName);
+            QString sourceName = "name:" + profileName;
+            kDebug() << "adding sourcename: " << profileName << " ++" << niceName;
+            setData(profileName, "prettyName", niceName);
         }
     }
 }

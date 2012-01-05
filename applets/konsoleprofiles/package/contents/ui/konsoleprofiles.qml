@@ -128,6 +128,8 @@ Item {
 
         orientation: Qt.Vertical
         flickableItem: profileView
+        // TODO: set to something "constant", like 2 list item heights, or something.
+        // that way we don't get these pixel steppings
         stepSize: 40
         scrollButtonInterval: 50
     }

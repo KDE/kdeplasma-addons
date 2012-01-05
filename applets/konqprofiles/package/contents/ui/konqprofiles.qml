@@ -79,7 +79,6 @@ Item {
 
         model: PlasmaCore.DataModel {
             dataSource: profilesSource
-            sourceFilter: "name:.*"
         }
 
         delegate: profileViewDelegate
@@ -134,7 +133,7 @@ Item {
                 hoverEnabled: true
 
                 onClicked: {
-                    var service = profilesSource.serviceForSource(model.name)
+                    var service = profilesSource.serviceForSource(model["DataEngineSource"])
                     var operation = service.operationDescription("open")
                     var job = service.startOperationCall(operation)
                 }
