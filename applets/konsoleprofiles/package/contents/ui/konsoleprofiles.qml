@@ -70,7 +70,9 @@ Item {
             topMargin: 10
             bottom: konsoleProfiles.bottom
             left: parent.left
+            leftMargin: 10
             right: scrollBar.left
+            rightMargin: 10
         }
 
         model: PlasmaCore.DataModel {
@@ -78,8 +80,34 @@ Item {
         }
 
         delegate: profileViewDelegate
-
         highlight: profileViewHighlighter
+
+        // FIXME: after a few experiments..is broken
+        // the highlight item's sizing is always cut off.
+        // yet I have no problems with my own svg, but without anchors or
+        // anything on the component, it bugs out on sizing...
+
+       highlight: PlasmaComponents.Highlight {
+            anchors { left: profileView.left; right: profileView.right }
+            width: view.width
+            height: view.height
+            //TODO: animation. Ideally the Highlight component itself needs to do it.
+            //the question is...how much should that api handle, and how much do I need to..
+//            Behavior on opacity { NumberAnimation { duration: 250 } }
+            hover: true;
+        }
+
+// old, working good way. I think the plasma component is busted, or my use of it is.
+//    Component {
+//        id: profileViewHighlighter
+//
+//        PlasmaCore.FrameSvgItem {
+//            imagePath: "widgets/viewitem"
+//            prefix: "hover"
+//            opacity: 0
+//        }
+//    }
+
         highlightMoveDuration: 250
         highlightMoveSpeed: 1
 
@@ -117,7 +145,7 @@ Item {
 
         Item {
             height: itemHeight
-            anchors { left: parent.left; leftMargin: 10; right: parent.right }
+            anchors { left: parent.left; leftMargin: 10; right: parent.right; rightMargin: 10 }
 
             Text {
                 id: text
@@ -148,14 +176,5 @@ Item {
         }
     }
 
-    Component {
-        id: profileViewHighlighter
 
-        PlasmaCore.FrameSvgItem {
-            imagePath: "widgets/viewitem"
-            prefix: "hover"
-            opacity: 0
-            Behavior on opacity { NumberAnimation { duration: 250 } }
-        }
-    }
 }
