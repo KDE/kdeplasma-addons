@@ -80,7 +80,6 @@ Item {
         }
 
         delegate: profileViewDelegate
-        highlight: profileViewHighlighter
 
         // FIXME: after a few experiments..is broken
         // the highlight item's sizing is always cut off.
@@ -97,6 +96,7 @@ Item {
             hover: true;
         }
 
+        //highlight: profileViewHighlighter
 // old, working good way. I think the plasma component is busted, or my use of it is.
 //    Component {
 //        id: profileViewHighlighter
