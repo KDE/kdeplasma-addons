@@ -280,22 +280,22 @@ void DockConfig::fileSelected()
 
                         if (QFile::exists(destDir + "/metadata/" + meta->name()) && !QFile::remove(destDir + "/metadata/" + meta->name())) {
                             KMessageBox::error(this, i18n("<p>Sorry, failed to remove previous plugin metadata file!</p>"
-                                                          "<p></i>%1</i></p>", destDir + "/metadata/" + meta->name()));
+                                                          "<p><i>%1</i></p>", destDir + "/metadata/" + meta->name()));
                             abortInstall = true;
                         }
                         if (!abortInstall && QFile::exists(destDir + "/scripts/" + script->name()) && !QFile::remove(destDir + "/scripts/" + script->name())) {
                             KMessageBox::error(this, i18n("<p>Sorry, failed to remove previous plugin metadata file!</p>"
-                                                          "<p></i>%1</i></p>", destDir + "/scripts/" + script->name()));
+                                                          "<p><i>%1</i></p>", destDir + "/scripts/" + script->name()));
                             abortInstall = true;
                         }
                         if (!abortInstall && (!(QDir(destDir + "/scripts/").exists() || KStandardDirs::makeDir(destDir + "/scripts/")))) {
                             KMessageBox::error(this, i18n("<p>Sorry, failed to create scripts folder!</p>"
-                                                          "<p></i>%1</i></p>", destDir + "/scripts/"));
+                                                          "<p><i>%1</i></p>", destDir + "/scripts/"));
                             abortInstall = true;
                         }
                         if (!abortInstall && (!(QDir(destDir + "/metadata/").exists() || KStandardDirs::makeDir(destDir + "/metadata/")))) {
                             KMessageBox::error(this, i18n("<p>Sorry, failed to create metadata folder!</p>"
-                                                          "<p></i>%1</i></p>", destDir + "/metadata/"));
+                                                          "<p><i>%1</i></p>", destDir + "/metadata/"));
                             abortInstall = true;
                         }
                         if (!abortInstall) {
