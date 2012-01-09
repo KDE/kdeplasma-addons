@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=DataEngine for Kimpanel
 Name[ca]=Motor de dades pel Kimpanel
+Name[ca@valencia]=Motor de dades pel Kimpanel
 Name[cs]=Datový nástroj pro Kimpanel
 Name[da]=Datamotor for Kimpanel
 Name[de]=Datenmodul für Kimpanel
@@ -25,6 +26,7 @@ Name[zh_CN]=Kimpanel 的数据引擎
 Name[zh_TW]=Kimpanel 資料引擎
 Comment=DataEngine for Kimpanel
 Comment[ca]=Motor de dades pel Kimpanel
+Comment[ca@valencia]=Motor de dades pel Kimpanel
 Comment[cs]=Datový nástroj pro Kimpanel
 Comment[da]=Datamotor for Kimpanel
 Comment[de]=Datenmodul für Kimpanel

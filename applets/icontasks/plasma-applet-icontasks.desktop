@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Icon-Only Task Manager
 Name[ca]=Gestor de tasques de només icones
+Name[ca@valencia]=Gestor de tasques de només icones
 Name[da]=Opgavelinje kun med ikoner
 Name[de]=Symbol-Fensterleiste
 Name[es]=Gestor de tareas de sólo iconos
@@ -24,6 +25,7 @@ Name[zh_CN]=图标任务管理器
 Name[zh_TW]=只有圖示的工作管理員
 Comment=Switch between running applications
 Comment[ca]=Commuta entre aplicacions en execució
+Comment[ca@valencia]=Commuta entre aplicacions en execució
 Comment[da]=Skift mellem kørende programmer
 Comment[de]=Zwischen laufenden Programmen wechseln
 Comment[es]=Cambiar entre las aplicaciones en ejecución
