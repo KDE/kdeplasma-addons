@@ -81,6 +81,7 @@ Comment[x-test]=xxA Data Engine for acquiring consolidated data about KDE projec
 Comment[zh_CN]=获取有关 KDE 项目统筹数据的数据引擎
 Comment[zh_TW]=用於取得 KDE 專案的聯合資料的資料引擎
 Type=Service
+Icon=kdeobservatory
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 X-KDE-Library=plasma_engine_kdeobservatory
