@@ -96,6 +96,7 @@ Comment[x-test]=xxAn engine to work with Remember the Milk.xx
 Comment[zh_CN]=一个与 Remember The Milk 工作的引擎。
 Comment[zh_TW]=用 Remember the Milk 工作的引擎
 Type=Service
+Icon=korg-todo
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 X-KDE-Library=plasma_engine_rtm
