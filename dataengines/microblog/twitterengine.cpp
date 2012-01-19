@@ -40,7 +40,7 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
     //setMinimumPollingInterval(2 * 60 * 1000); // 2 minutes minimum
-    setData("Defaults", "UserImage", KIcon("camera-photo").pixmap(256, 256).toImage());
+    setData("Defaults", "UserImage", KIcon ("user-identity").pixmap(48, 48).toImage());
 }
 
 TwitterEngine::~TwitterEngine()
@@ -51,7 +51,7 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
     if (name.startsWith("UserImages:")) {
         // these are updated by the engine itself, not consumers
-        kDebug() << " user image req'ed, doing nothing: " << name;
+        //kDebug() << " user image req'ed, doing nothing: " << name;
         return true;
     }
 
@@ -61,8 +61,8 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return false;
     }
 
-    kDebug() << "loading: " << name;
-    kDebug() << sources();
+    //kDebug() << "loading: " << name;
+    //kDebug() << sources();
     //KIcon("meeting-chair").pixmap(256, 256).toImage().save("/tmp/userimage.png");
     scheduleSourcesUpdated();
     //kDebug() << "image added" << sources();
@@ -141,6 +141,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
         imageSource->setObjectName("UserImages:"+m_serviceBaseUrl);
         addSource(imageSource);
+        //imageSource->loadImage(account.at(0), account.at(1));
     }
 
 
@@ -152,7 +153,9 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             source->setObjectName(name);
             //source->setImageSource(imageSource);
             source->setStorageEnabled(true);
-
+            if (imageSource) {
+                imageSource->loadImage(account.at(0), m_serviceBaseUrl);
+            }
             addSource(source);
         }
         //source->update();
