@@ -26,30 +26,18 @@
 
 UserSource::UserSource(const QString &who, const QString &serviceBaseUrl, QObject* parent)
     : Plasma::DataContainer(parent),
-      //m_runningJobs(0),
       m_user(who),
       m_serviceBaseUrl(serviceBaseUrl)
 {
     setObjectName(QLatin1String("User"));
 
     const QString u = QString("%1/users/show/%2.xml").arg(serviceBaseUrl, who);
-    kDebug() << "Yo Yo Yo ... " << u << who << serviceBaseUrl;
+    kDebug() << "Requesting user info from: " << u;
     loadUserInfo(who, u);
 }
 
 UserSource::~UserSource()
 {
-}
-
-void UserSource::loadStarted()
-{
-    m_cachedData = data();
-    removeAllData();
-}
-
-void UserSource::loadFinished()
-{
-    m_cachedData.clear();
 }
 
 void UserSource::loadUserInfo(const QString &who, const KUrl &url)
@@ -70,16 +58,11 @@ void UserSource::loadUserInfo(const QString &who, const KUrl &url)
 
 void UserSource::recv(KIO::Job* job, const QByteArray& data)
 {
-    //m_jobData[job] += data;
-    kDebug() << "   XML: " << data;
     m_xml += data;
-
-    //kDebug() << m_data;
 }
 
 void UserSource::result(KJob *job)
 {
-    kDebug() << "JOB RETURNING.";
     if (!m_jobs.contains(job)) {
         return;
     }
@@ -87,18 +70,10 @@ void UserSource::result(KJob *job)
     if (job->error()) {
         // TODO: error handling
     } else {
-//         //kDebug() << "done!" << m_jobData;
-//         QImage img;
-//         img.loadFromData(m_jobData.value(job));
-//         kDebug() << "User:" << m_jobs.value(job);
-//         setData(m_jobs.value(job), img);
-//         emit dataChanged();
-        kDebug() << "parsing through .." << m_xml;
         QXmlStreamReader reader(m_xml);
         parse(reader);
         checkForUpdate();
         m_xml.clear();
-        kDebug() << "cleared";
     }
 
     m_jobs.remove(job);
@@ -130,8 +105,6 @@ void UserSource::parse(QXmlStreamReader &xml)
         kWarning() << "Fatal error on line" << xml.lineNumber()
                    << ", column" << xml.columnNumber() << ":"
                    << xml.errorString();
-        m_cachedData.clear();
-        //m_id.clear();
     }
 }
 
@@ -151,8 +124,8 @@ void UserSource::readUser(QXmlStreamReader &xml)
     tagKeys.insert("notifications", "Notifications");
     tagKeys.insert("statusnet:blocking", "Blocking");
     tagKeys.insert("created_at", "Created");
-    
-    kDebug() << "- BEGIN USER -" << endl;
+
+    //kDebug() << "- BEGIN USER -" << endl;
     const QString tagName("user");
 
     while (!xml.atEnd()) {
@@ -178,14 +151,8 @@ void UserSource::readUser(QXmlStreamReader &xml)
         }
     }
 
-    kDebug() << "- END USER -" << endl;
+    //kDebug() << "- END USER -" << endl;
 }
-
-Plasma::DataEngine::Data UserSource::data()
-{
-    return m_cachedData;
-}
-
 
 #include <usersource.moc>
 
