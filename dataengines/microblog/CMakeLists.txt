@@ -3,6 +3,7 @@ ${QT_QTNETWORK_INCLUDES} ${QT_QTXML_INCLUDES} ${QCA2_INCLUDE_DIR})
 
 set(twitter_engine_SRCS
     imagesource.cpp
+    usersource.cpp
     oauth.cpp
     timelinesource.cpp
     twitterengine.cpp

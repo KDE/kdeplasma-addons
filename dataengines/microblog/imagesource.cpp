@@ -91,7 +91,7 @@ void ImageSource::result(KJob *job)
         //kDebug() << "done!" << m_jobData;
         QImage img;
         img.loadFromData(m_jobData.value(job));
-        kDebug() << "UserImage:" << m_jobs.value(job);
+        //kDebug() << "UserImage:" << m_jobs.value(job);
         setData(m_jobs.value(job), img);
         emit dataChanged();
     }
