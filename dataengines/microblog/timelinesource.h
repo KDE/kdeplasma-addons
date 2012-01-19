@@ -87,7 +87,8 @@ public:
         TimelineWithFriends,
         Replies,
         DirectMessages,
-        Profile
+        Profile,
+        User
     };
 
     TimelineSource(const QString &who, RequestType requestType, QObject* parent);

@@ -27,19 +27,20 @@
 
 #include "timelinesource.h"
 #include "imagesource.h"
+#include "usersource.h"
 
 const QString TwitterEngine::timelinePrefix("Timeline:");
 const QString TwitterEngine::timelineWithFriendsPrefix("TimelineWithFriends:");
 const QString TwitterEngine::profilePrefix("Profile:");
 const QString TwitterEngine::repliesPrefix("Replies:");
 const QString TwitterEngine::messagesPrefix("Messages:");
+const QString TwitterEngine::userPrefix("User:");
 
 TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
-    setMinimumPollingInterval(2 * 60 * 1000); // 2 minutes minimum
+    //setMinimumPollingInterval(2 * 60 * 1000); // 2 minutes minimum
     setData("Defaults", "UserImage", KIcon("camera-photo").pixmap(256, 256).toImage());
-
 }
 
 TwitterEngine::~TwitterEngine()
@@ -56,11 +57,11 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
 
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
-        && !name.startsWith(messagesPrefix)) {
+        && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)) {
         return false;
     }
 
-    //kDebug() << "loading: " << name;
+    kDebug() << "loading: " << name;
     kDebug() << sources();
     //KIcon("meeting-chair").pixmap(256, 256).toImage().save("/tmp/userimage.png");
     scheduleSourcesUpdated();
@@ -95,7 +96,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     //right now it only makes sense to do an update on timelines
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
-        && !name.startsWith(messagesPrefix)) {
+        && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)) {
         return false;
     }
 
@@ -114,6 +115,9 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     } else if (name.startsWith(messagesPrefix)) {
         requestType = TimelineSource::DirectMessages;
         who.remove(messagesPrefix);
+    } else if (name.startsWith(userPrefix)) {
+        requestType = TimelineSource::User;
+        who.remove(userPrefix);
     } else {
         requestType = TimelineSource::Timeline;
         who.remove(timelinePrefix);
@@ -140,20 +144,34 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     }
 
 
-    TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
+    if (requestType == TimelineSource::User) {
+        UserSource *source = dynamic_cast<UserSource*>(containerForSource(name));
 
-    if (!source) {
-        source = new TimelineSource(who, requestType, this);
-        source->setObjectName(name);
-        source->setImageSource(imageSource);
-        source->setStorageEnabled(true);
+        if (!source) {
+            source = new UserSource(account.at(0), m_serviceBaseUrl, this);
+            source->setObjectName(name);
+            //source->setImageSource(imageSource);
+            source->setStorageEnabled(true);
 
-        addSource(source);
+            addSource(source);
+        }
+        //source->update();
+
+    } else {
+        TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
+
+        if (!source) {
+            source = new TimelineSource(who, requestType, this);
+            source->setObjectName(name);
+            source->setImageSource(imageSource);
+            source->setStorageEnabled(true);
+
+            addSource(source);
+        }
+        source->update();
     }
-
     //setData(name, Plasma::DataEngine::Data());
 
-    source->update();
     return false;
 }
 

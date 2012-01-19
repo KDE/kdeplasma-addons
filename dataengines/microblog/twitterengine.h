@@ -25,6 +25,7 @@
 
 
 class ImageSource;
+class UserSource;
 
 /**
  * Twitter Data Engine
@@ -72,6 +73,7 @@ class TwitterEngine : public Plasma::DataEngine
         static const QString profilePrefix;
         static const QString repliesPrefix;
         static const QString messagesPrefix;
+        static const QString userPrefix;
         ImageSource *m_imageSource;
         QString m_serviceBaseUrl;
 };
