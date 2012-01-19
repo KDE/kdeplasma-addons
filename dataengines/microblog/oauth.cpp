@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <QtCrypto>
+#include <QtCrypto/qca.h>
 
 #include <KDebug>
 #include <KIO/Job>
@@ -76,7 +76,7 @@ QByteArray paramsToString(const ParamMap &parameters, ParsingMode mode)
 
     // prepend with the suitable string (or none)
     parametersString.prepend(prependString);
-
+    kDebug() << "paramterString: " << parametersString;
     return parametersString;
 }
 
@@ -135,6 +135,7 @@ QByteArray createSignature(const QString &requestUrl, HttpMethod method, const Q
 
     // percent-encode the digest
     QByteArray signature = digest.toPercentEncoding();
+    kDebug() << "Signature: " << signature;
     return signature;
 }
 
@@ -155,6 +156,7 @@ void signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod method, co
     QByteArray authorizationHeader = paramsToString(parameters, ParseForHeaderArguments);
 
     job->addMetaData("customHTTPHeader", QByteArray("Authorization: " + authorizationHeader));
+    kDebug() << "job thign....";
 }
 
 } // namespace OAuth

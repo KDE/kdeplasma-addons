@@ -63,6 +63,9 @@ class TwitterEngine : public Plasma::DataEngine
     protected slots:
         bool updateSourceEvent(const QString &name);
 
+    private Q_SLOTS:
+        void imageDataChanged();
+
     private:
         static const QString timelinePrefix;
         static const QString timelineWithFriendsPrefix;
@@ -70,7 +73,7 @@ class TwitterEngine : public Plasma::DataEngine
         static const QString repliesPrefix;
         static const QString messagesPrefix;
         ImageSource *m_imageSource;
-
+        QString m_serviceBaseUrl;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(twitter, TwitterEngine)
