@@ -46,9 +46,6 @@ public:
     ~UserSource();
 
     void loadUserInfo(const QString &who, const KUrl &url);
-    void loadStarted();
-    void loadFinished();
-    Plasma::DataEngine::Data data();
 
 Q_SIGNALS:
     void dataChanged();
