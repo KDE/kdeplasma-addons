@@ -46,7 +46,7 @@ public:
     void loadImage(const QString &who, const KUrl &url);
     void loadStarted();
     void loadFinished();
-    Plasma::DataEngine::Data data();
+    //Plasma::DataEngine::Data data();
 
 Q_SIGNALS:
     void dataChanged();
@@ -60,6 +60,7 @@ private:
     QHash<KJob *, QByteArray> m_jobData;
     int m_runningJobs;
     QList<QPair<QString, KUrl> > m_queuedJobs;
+    QStringList m_loadedPersons;
     Plasma::DataEngine::Data m_cachedData;
 };
 

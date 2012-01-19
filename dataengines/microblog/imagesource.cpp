@@ -33,27 +33,16 @@ ImageSource::~ImageSource()
 {
 }
 
-void ImageSource::loadStarted()
-{
-    m_cachedData = data();
-    removeAllData();
-}
-
-void ImageSource::loadFinished()
-{
-    m_cachedData.clear();
-}
-
 void ImageSource::loadImage(const QString &who, const KUrl &url)
 {
     //FIXME: since kio_http bombs the system with too many request put a temporary arbitrary limit here
     // revert as soon as BUG 192625 is fixed
-    if (m_runningJobs < 5) {
-        if (m_cachedData.contains(who)) {
-            kDebug() << "UserImage:" << who;
-            setData(who, m_cachedData.value(who));
-        }
-
+    if (m_loadedPersons.contains(who)) {
+        return;
+    }
+    m_loadedPersons << who;
+    if (m_runningJobs < 500) {
+        //if (who == "sebas") kDebug() << " 222 starting job" << who;
         m_runningJobs++;
         KIO::Job *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
         job->setAutoDelete(true);
@@ -69,7 +58,6 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
 void ImageSource::recv(KIO::Job* job, const QByteArray& data)
 {
     m_jobData[job] += data;
-    //kDebug() << m_data;
 }
 
 void ImageSource::result(KJob *job)
@@ -88,22 +76,19 @@ void ImageSource::result(KJob *job)
     if (job->error()) {
         // TODO: error handling
     } else {
-        //kDebug() << "done!" << m_jobData;
         QImage img;
         img.loadFromData(m_jobData.value(job));
-        //kDebug() << "UserImage:" << m_jobs.value(job);
-        setData(m_jobs.value(job), img);
+        const QString who = m_jobs.value(job);
+        setData(who, img);
+        if (m_jobs.value(job) == "sebas") {
+            kDebug() << " === SEBAS SET ===";
+        }
         emit dataChanged();
     }
 
     m_jobs.remove(job);
     m_jobData.remove(job);
     checkForUpdate();
-}
-
-Plasma::DataEngine::Data ImageSource::data()
-{
-    return m_cachedData;
 }
 
 
