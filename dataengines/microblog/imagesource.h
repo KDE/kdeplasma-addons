@@ -46,8 +46,12 @@ public:
     void loadImage(const QString &who, const KUrl &url);
     void loadStarted();
     void loadFinished();
+    Plasma::DataEngine::Data data();
 
-private slots:
+Q_SIGNALS:
+    void dataChanged();
+
+private Q_SLOTS:
     void recv(KIO::Job*, const QByteArray& data);
     void result(KJob*);
 
