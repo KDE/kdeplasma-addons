@@ -29,6 +29,7 @@
 
 // forward declarations
 class KJob;
+class KImageCache;
 
 namespace KIO
 {
@@ -61,7 +62,8 @@ private:
     int m_runningJobs;
     QList<QPair<QString, KUrl> > m_queuedJobs;
     QStringList m_loadedPersons;
-    Plasma::DataEngine::Data m_cachedData;
+    //Plasma::DataEngine::Data m_cachedData;
+    KImageCache* m_imageCache;
 };
 
 #endif
