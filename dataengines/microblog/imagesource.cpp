@@ -21,10 +21,11 @@
 
 
 #include <KIO/Job>
+#include <KImageCache>
 
 ImageSource::ImageSource(QObject* parent)
     : Plasma::DataContainer(parent),
-      m_runningJobs(0)
+      m_imageCache(0)
 {
     setObjectName(QLatin1String("UserImages"));
 }
@@ -35,11 +36,28 @@ ImageSource::~ImageSource()
 
 void ImageSource::loadImage(const QString &who, const KUrl &url)
 {
+    if (!m_imageCache) {
+        m_imageCache = new KImageCache("plasma_engine_preview", 10485760); // Re-use previewengine's cache
+    }
     //FIXME: since kio_http bombs the system with too many request put a temporary arbitrary limit here
     // revert as soon as BUG 192625 is fixed
     if (m_loadedPersons.contains(who)) {
         return;
     }
+    const QString cacheKey = who + "@" + url.pathOrUrl();
+    kDebug() << " LOAD IMAGE: " << who << url << cacheKey;
+    // Check if the image is in the cache, if so return it
+    QImage preview = QImage(QSize(48, 48), QImage::Format_ARGB32_Premultiplied);
+    if (m_imageCache->findImage(cacheKey, &preview)) {
+        // cache hit
+        kDebug() << "Cache hit: " << cacheKey;
+        setData(who, preview);
+        emit dataChanged();
+        checkForUpdate();
+        return;
+    }
+    kDebug() << "Cache miss: " << cacheKey;
+
     m_loadedPersons << who;
     if (m_runningJobs < 500) {
         //if (who == "sebas") kDebug() << " 222 starting job" << who;
@@ -84,6 +102,12 @@ void ImageSource::result(KJob *job)
             kDebug() << " === SEBAS SET ===";
         }
         emit dataChanged();
+        KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
+        const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
+        kDebug() << "Cache insert: " << cacheKey;
+
+        m_imageCache->insertImage(cacheKey, img);
+
     }
 
     m_jobs.remove(job);
