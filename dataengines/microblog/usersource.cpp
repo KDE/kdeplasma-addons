@@ -22,6 +22,7 @@
 
 
 #include <KIO/Job>
+
 #include <QXmlStreamReader>
 
 UserSource::UserSource(const QString &who, const QString &serviceBaseUrl, QObject* parent)
