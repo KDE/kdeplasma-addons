@@ -153,11 +153,14 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             source->setObjectName(name);
             //source->setImageSource(imageSource);
             source->setStorageEnabled(true);
+            connect(source, SIGNAL(loadImage(const QString&, const KUrl&)),
+                    imageSource, SLOT(loadImage(const QString&, const KUrl&)));
             if (imageSource) {
                 imageSource->loadImage(account.at(0), m_serviceBaseUrl);
             }
             addSource(source);
         }
+        source->loadUserInfo(account.at(0), m_serviceBaseUrl);
         //source->update();
 
     } else {
