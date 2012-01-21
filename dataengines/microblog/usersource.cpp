@@ -31,25 +31,27 @@ UserSource::UserSource(const QString &who, const QString &serviceBaseUrl, QObjec
       m_serviceBaseUrl(serviceBaseUrl)
 {
     setObjectName(QLatin1String("User"));
-
-    const QString u = QString("%1/users/show/%2.xml").arg(serviceBaseUrl, who);
-    kDebug() << "Requesting user info from: " << u;
-    loadUserInfo(who, u);
+    loadUserInfo(who, m_serviceBaseUrl);
 }
 
 UserSource::~UserSource()
 {
 }
 
-void UserSource::loadUserInfo(const QString &who, const KUrl &url)
+void UserSource::loadUserInfo(const QString &who, const KUrl &serviceBaseUrl)
 {
-    if (m_cachedData.contains(who)) {
-        kDebug() << "UserInfo:" << who;
-        setData(who, m_cachedData.value(who));
+    if (who.isEmpty() || serviceBaseUrl.isEmpty()) {
+        return;
     }
+//     if (m_cachedData.contains(who)) {
+//         kDebug() << "UserInfo:" << who;
+//         setData(who, m_cachedData.value(who));
+//     }
+    const QString u = QString("%1/users/show/%2.xml").arg(serviceBaseUrl.pathOrUrl(), who);
+    kDebug() << "Requesting user info from: " << u;
     //return;
     //m_runningJobs++;
-    KIO::Job *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
+    KIO::Job *job = KIO::get(u, KIO::NoReload, KIO::HideProgressInfo);
     job->setAutoDelete(true);
     m_jobs[job] = who;
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)),
@@ -112,21 +114,26 @@ void UserSource::parse(QXmlStreamReader &xml)
 void UserSource::readUser(QXmlStreamReader &xml)
 {
     QHash<QString, QString> tagKeys;
-    tagKeys.insert("screen_name", "User");
-    tagKeys.insert("name", "Name");
-    tagKeys.insert("location", "Location");
-    tagKeys.insert("description", "Description");
-    tagKeys.insert("protected", "Description");
-    tagKeys.insert("followers_count", "Followers");
-    tagKeys.insert("friends_count", "Friends");
-    tagKeys.insert("statuses_count", "Tweets");
-    tagKeys.insert("time_zone", "Timezone");
-    tagKeys.insert("following", "Following");
-    tagKeys.insert("notifications", "Notifications");
-    tagKeys.insert("statusnet:blocking", "Blocking");
-    tagKeys.insert("created_at", "Created");
+    tagKeys.insert("id", "userid");
+    tagKeys.insert("screen_name", "username");
+    tagKeys.insert("name", "realname");
+    tagKeys.insert("location", "location");
+    tagKeys.insert("description", "description");
+    tagKeys.insert("protected", "protected");
+    tagKeys.insert("followers_count", "followers");
+    tagKeys.insert("friends_count", "friends");
+    tagKeys.insert("statuses_count", "tweets");
+    tagKeys.insert("time_zone", "timezone");
+    tagKeys.insert("utc_offset", "utcoffset");
+    tagKeys.insert("profile_image_url", "profileimageurl");
+    tagKeys.insert("statusnet:profile_url", "profileurl");
+    tagKeys.insert("url", "url");
+    tagKeys.insert("following", "following");
+    tagKeys.insert("notifications", "notifications");
+    tagKeys.insert("statusnet:blocking", "blocking");
+    tagKeys.insert("created_at", "created");
 
-    //kDebug() << "- BEGIN USER -" << endl;
+    kDebug() << "- BEGIN USER -" << endl;
     const QString tagName("user");
 
     while (!xml.atEnd()) {
@@ -151,6 +158,11 @@ void UserSource::readUser(QXmlStreamReader &xml)
             }
         }
     }
+
+    // Make sure our avatar is loaded
+    kDebug() << "requesting profile pic" << data()["username"] << data()["profileimageurl"];
+    //const QString who = 
+    emit loadImage(data()["username"].toString(), data()["profileimageurl"].toUrl());
 
     //kDebug() << "- END USER -" << endl;
 }
