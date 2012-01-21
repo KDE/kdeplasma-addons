@@ -1,5 +1,6 @@
 /*
  *   Copyright 2008 Aaron Seigo <aseigo@kde.org>
+ *   Copyright 2012 Sebastian Kügler <sebas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -19,6 +20,8 @@
 
 #include "imagesource.h"
 
+#include <QPainter>
+#include <QPainterPath>
 
 #include <KIO/Job>
 #include <KImageCache>
@@ -45,18 +48,19 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
         return;
     }
     const QString cacheKey = who + "@" + url.pathOrUrl();
-    kDebug() << " LOAD IMAGE: " << who << url << cacheKey;
+    //kDebug() << " LOAD IMAGE: " << who << url << cacheKey;
     // Check if the image is in the cache, if so return it
     QImage preview = QImage(QSize(48, 48), QImage::Format_ARGB32_Premultiplied);
     if (m_imageCache->findImage(cacheKey, &preview)) {
         // cache hit
-        kDebug() << "Cache hit: " << cacheKey;
-        setData(who, preview);
+        //kDebug() << "Cache hit: " << cacheKey;
+        //polishImage(preview);
+        setData(who, polishImage(preview));
         emit dataChanged();
         checkForUpdate();
         return;
     }
-    kDebug() << "Cache miss: " << cacheKey;
+    //kDebug() << "Cache miss: " << cacheKey;
 
     m_loadedPersons << who;
     if (m_runningJobs < 500) {
@@ -97,14 +101,16 @@ void ImageSource::result(KJob *job)
         QImage img;
         img.loadFromData(m_jobData.value(job));
         const QString who = m_jobs.value(job);
-        setData(who, img);
-        if (m_jobs.value(job) == "sebas") {
-            kDebug() << " === SEBAS SET ===";
-        }
+
+        setData(who, polishImage(img));
         emit dataChanged();
         KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
         const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
-        kDebug() << "Cache insert: " << cacheKey;
+        if (m_jobs.value(job) == "sebas") {
+            kDebug() << " === SEBAS SET ===" << who;
+            kDebug() << "Cache insert: " << cacheKey;
+            polishImage(img).save("/tmp/userimage.png");
+        }
 
         m_imageCache->insertImage(cacheKey, img);
 
@@ -115,6 +121,20 @@ void ImageSource::result(KJob *job)
     checkForUpdate();
 }
 
+QImage ImageSource::polishImage(const QImage &img)
+{
+    QImage roundedImage = QImage(QSize(48*4, 48*4), QImage::Format_ARGB32_Premultiplied);
+    roundedImage.fill(Qt::transparent);
+    QPainter p;
+    p.begin(&roundedImage);
+    QPainterPath clippingPath;
+    QRectF imgRect = QRectF(QPoint(0,0), roundedImage.size());
+    clippingPath.addRoundedRect(imgRect, 24, 24);
+    p.setClipPath(clippingPath);
+    p.setClipping(true);
+    p.drawImage(QRectF(QPointF(0, 0), roundedImage.size()), img);
+    return roundedImage;
+}
 
 #include <imagesource.moc>
 
