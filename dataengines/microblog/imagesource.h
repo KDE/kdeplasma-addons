@@ -44,10 +44,11 @@ public:
     ImageSource(QObject* parent);
     ~ImageSource();
 
-    void loadImage(const QString &who, const KUrl &url);
     void loadStarted();
     void loadFinished();
-    //Plasma::DataEngine::Data data();
+
+public Q_SLOTS:
+    void loadImage(const QString &who, const KUrl &url);
 
 Q_SIGNALS:
     void dataChanged();
@@ -57,6 +58,7 @@ private Q_SLOTS:
     void result(KJob*);
 
 private:
+    QImage polishImage(const QImage &img);
     QHash<KJob *, QString> m_jobs;
     QHash<KJob *, QByteArray> m_jobData;
     int m_runningJobs;

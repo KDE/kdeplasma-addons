@@ -46,10 +46,11 @@ public:
     UserSource(const QString &who,  const QString &serviceBaseUrl, QObject* parent);
     ~UserSource();
 
-    void loadUserInfo(const QString &who, const KUrl &url);
+    void loadUserInfo(const QString &who, const KUrl &serviceBaseUrl);
 
 Q_SIGNALS:
     void dataChanged();
+    void loadImage(const QString &who, const KUrl &url);
 
 private Q_SLOTS:
     void recv(KIO::Job*, const QByteArray& data);
