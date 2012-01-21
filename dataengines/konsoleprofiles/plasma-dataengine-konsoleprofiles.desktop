@@ -3,7 +3,7 @@ Name=Konsole Profiles
 Comment=List and launch Konsole profiles
 
 Type=Service
-Icon=utiltities-terminal
+Icon=utilities-terminal
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 X-KDE-Library=plasma_engine_konsoleprofiles

@@ -101,7 +101,7 @@ Comment[zh_CN]=identi.ca 和 twitter 微播客吐槽服务
 Comment[zh_TW]=identi.ca 與 twitter 微部落格服務
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
-Icon=im
+Icon=twitter_microblog
 X-KDE-Library=plasma_engine_microblog
 
 X-KDE-PluginInfo-Author=
