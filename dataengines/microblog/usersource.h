@@ -46,7 +46,7 @@ public:
     UserSource(const QString &who,  const QString &serviceBaseUrl, QObject* parent);
     ~UserSource();
 
-    void loadUserInfo(const QString &who, const KUrl &serviceBaseUrl);
+    void loadUserInfo(const QString &who, const QString &serviceBaseUrl);
 
 Q_SIGNALS:
     void dataChanged();
@@ -67,6 +67,7 @@ private:
     int m_runningJobs;
     QList<QPair<QString, KUrl> > m_queuedJobs;
     Plasma::DataEngine::Data m_cachedData;
+    QString m_currentUrl;
 };
 
 #endif
