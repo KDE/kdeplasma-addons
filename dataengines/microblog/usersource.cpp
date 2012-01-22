@@ -38,17 +38,22 @@ UserSource::~UserSource()
 {
 }
 
-void UserSource::loadUserInfo(const QString &who, const KUrl &serviceBaseUrl)
+void UserSource::loadUserInfo(const QString &who, const QString &serviceBaseUrl)
 {
     if (who.isEmpty() || serviceBaseUrl.isEmpty()) {
         return;
     }
-//     if (m_cachedData.contains(who)) {
-//         kDebug() << "UserInfo:" << who;
-//         setData(who, m_cachedData.value(who));
-//     }
-    const QString u = QString("%1/users/show/%2.xml").arg(serviceBaseUrl.pathOrUrl(), who);
-    kDebug() << "Requesting user info from: " << u;
+
+    QString _s = serviceBaseUrl;
+    if (!_s.endsWith('/')) {
+        _s.append('/');
+    }
+    const QString u = _s + "users/show/" + who + ".xml";
+    if (m_currentUrl == u) {
+        return;
+    }
+    m_currentUrl = u;
+    kDebug() << "Requesting user info for " << who << " from ... " << u;
     //return;
     //m_runningJobs++;
     KIO::Job *job = KIO::get(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -61,7 +66,13 @@ void UserSource::loadUserInfo(const QString &who, const KUrl &serviceBaseUrl)
 
 void UserSource::recv(KIO::Job* job, const QByteArray& data)
 {
-    m_xml += data;
+    KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
+    if (kiojob->url().pathOrUrl() == m_currentUrl) {
+        // Only consider the last job started, discard others.
+        m_xml += data;
+    } else {
+        kDebug() << "Discarding data of job" << kiojob->url().pathOrUrl();
+    }
 }
 
 void UserSource::result(KJob *job)
@@ -69,16 +80,21 @@ void UserSource::result(KJob *job)
     if (!m_jobs.contains(job)) {
         return;
     }
-
-    if (job->error()) {
-        // TODO: error handling
+    KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
+    //const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
+    if (kiojob->url().pathOrUrl() == m_currentUrl) {
+        // Only consider the last job started, discard others.
+        if (job->error()) {
+            // TODO: error handling
+        } else {
+            QXmlStreamReader reader(m_xml);
+            parse(reader);
+            checkForUpdate();
+            m_xml.clear();
+        }
     } else {
-        QXmlStreamReader reader(m_xml);
-        parse(reader);
-        checkForUpdate();
-        m_xml.clear();
+        kDebug() << "Discarding results of job" << kiojob->url().pathOrUrl() << m_currentUrl;
     }
-
     m_jobs.remove(job);
     m_jobData.remove(job);
     checkForUpdate();
@@ -133,7 +149,7 @@ void UserSource::readUser(QXmlStreamReader &xml)
     tagKeys.insert("statusnet:blocking", "blocking");
     tagKeys.insert("created_at", "created");
 
-    kDebug() << "- BEGIN USER -" << endl;
+    //kDebug() << "- BEGIN USER -" << endl;
     const QString tagName("user");
 
     while (!xml.atEnd()) {
@@ -163,7 +179,7 @@ void UserSource::readUser(QXmlStreamReader &xml)
     kDebug() << "requesting profile pic" << data()["username"] << data()["profileimageurl"];
     //const QString who = 
     emit loadImage(data()["username"].toString(), data()["profileimageurl"].toUrl());
-
+    kDebug() << " read user: " << data()["username"].toString();
     //kDebug() << "- END USER -" << endl;
 }
 
