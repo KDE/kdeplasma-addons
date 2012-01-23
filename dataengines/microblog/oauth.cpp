@@ -27,8 +27,13 @@
 
 namespace OAuth{
 
+// For twitter
 const QByteArray ConsumerKey = "22kfJkztvOqb8WfihEjdg";
 const QByteArray ConsumerSecret = "RpGc0q0aGl0jMkeqMIawUpGyDkJ3DNBczFUyIQMR698";
+
+// identi.ca
+//const QByteArray ConsumerKey = "47a4650a6bd4026b1c4d55d641acdb64";
+//const QByteArray ConsumerSecret = "49208b0a87832f4279f9d3742c623910";
 
 QByteArray paramsToString(const ParamMap &parameters, ParsingMode mode)
 {
@@ -76,13 +81,14 @@ QByteArray paramsToString(const ParamMap &parameters, ParsingMode mode)
 
     // prepend with the suitable string (or none)
     parametersString.prepend(prependString);
-    kDebug() << "paramterString: " << parametersString;
+    //kDebug() << "paramterString: " << parametersString;
     return parametersString;
 }
 
 QByteArray createSignature(const QString &requestUrl, HttpMethod method, const QByteArray &token,
                            const QByteArray &tokenSecret, ParamMap *params)
 {
+    kDebug() << "creating signature";
     // create nonce
     QCA::InitializationVector iv(16);
     QByteArray nonce = iv.toByteArray().toHex();
@@ -97,6 +103,7 @@ QByteArray createSignature(const QString &requestUrl, HttpMethod method, const Q
     QByteArray percentRequestUrl = requestUrl.toAscii().toPercentEncoding();
     // prepare percent-encoded parameters string
     params->insert("oauth_consumer_key", ConsumerKey);
+    //params->insert("oauth_callback", "oob");
     params->insert("oauth_nonce", nonce);
     params->insert("oauth_signature_method", "HMAC-SHA1");
     params->insert("oauth_timestamp", timestamp);
@@ -135,7 +142,7 @@ QByteArray createSignature(const QString &requestUrl, HttpMethod method, const Q
 
     // percent-encode the digest
     QByteArray signature = digest.toPercentEncoding();
-    kDebug() << "Signature: " << signature;
+    kDebug() << "Signature: " << key << " // " << signature;
     return signature;
 }
 
@@ -156,7 +163,7 @@ void signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod method, co
     QByteArray authorizationHeader = paramsToString(parameters, ParseForHeaderArguments);
 
     job->addMetaData("customHTTPHeader", QByteArray("Authorization: " + authorizationHeader));
-    kDebug() << "job thign....";
+    //kDebug() << "job thign....";
 }
 
 } // namespace OAuth
