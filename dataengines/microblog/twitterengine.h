@@ -60,6 +60,9 @@ class TwitterEngine : public Plasma::DataEngine
 
         Plasma::Service* serviceForSource(const QString &name);
 
+    Q_SIGNALS:
+        void appAuthSucceeded(const QString &authorizeUrl);
+
     protected:
         //from DataEngine
         bool sourceRequestEvent(const QString &name);
@@ -80,9 +83,10 @@ class TwitterEngine : public Plasma::DataEngine
         static const QString messagesPrefix;
         static const QString userPrefix;
         ImageSource *m_imageSource;
-        QString m_serviceBaseUrl;
+        //QString m_serviceBaseUrl;
         QHash<QString, QOAuthHelper*> m_authHelper;
         QHash<QString, KWebView*> m_webView;
+        QHash<QString, QString> m_serviceBaseUrl;
         QStringList m_authorizeUrls;
 };
 
