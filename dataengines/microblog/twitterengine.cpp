@@ -44,6 +44,7 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
 {
     //setMinimumPollingInterval(2 * 60 * 1000); // 2 minutes minimum
     setData("Defaults", "UserImage", KIcon ("user-identity").pixmap(48, 48).toImage());
+    setData("Status:https://twitter.com", "Autorization", "Not Started");
 }
 
 TwitterEngine::~TwitterEngine()
@@ -150,12 +151,15 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
     QOAuthHelper *authHelper = 0;
     if (!m_authHelper.contains(serviceBaseUrl)) {
+        setData("Status:" + serviceBaseUrl, "Authorization", "Waiting");
+        scheduleSourcesUpdated();
         kDebug() << "Creating new authhelper";
         authHelper = new QOAuthHelper(serviceBaseUrl, this);
         //authHelper->setServiceBaseUrl(serviceBaseUrl);
         m_authHelper[serviceBaseUrl] = authHelper;
         connect(authHelper, SIGNAL(authorizeApp(const QString&, const QString&, const QString&)),
                 this, SLOT(authorizeApp(const QString&, const QString&, const QString&)));
+        connect(this, SIGNAL(appAuthSucceeded(const QString&)), authHelper, SLOT(appAuthorized(const QString&)));
         // Run start() here to move to another thread.
         // as we can't share pixmap, this won't work
         // using an invisible webkit
@@ -203,8 +207,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
 void TwitterEngine::authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl)
 {
+    kDebug() << "SBU: " << serviceBaseUrl;
+    setData("Status:" + serviceBaseUrl, "Authorization", "Authorizing App");
+    scheduleSourcesUpdated();
     m_webView[serviceBaseUrl] = new KWebView(0);
-    m_authorizeUrls << authorizeUrl;
+    m_serviceBaseUrl[authorizeUrl] = serviceBaseUrl;
     connect(m_webView[serviceBaseUrl]->page(), SIGNAL(loadFinished(bool)), SLOT(appAuthorized()));
 
     m_webView[serviceBaseUrl]->page()->mainFrame()->load(pageUrl);
@@ -219,14 +226,24 @@ void TwitterEngine::appAuthorized()
         return;
     }
     kDebug() << "Page URL:" << page->mainFrame()->url();
+    kDebug() << m_serviceBaseUrl;
     QString u = page->mainFrame()->url().toString();
     kDebug() << u << " == " << m_authorizeUrls;
-    if (m_authorizeUrls.contains(u)) {
-        kDebug() << "We're done!";
+    QString serviceBaseUrl = m_serviceBaseUrl[u.split("?").at(0)];
+    if (m_serviceBaseUrl.contains(u)) {
+        QString s = m_serviceBaseUrl[u];
+        setData("Status:" + s, "Authorization", "App authorized");
+        scheduleSourcesUpdated();
+        kDebug() << "We're done!" << s << u;
+        emit appAuthSucceeded(u);
 //         if (d->dialog) {
 //             d->dialog->close();
 //         }
     } else {
+        kDebug() << "SBU::::" << serviceBaseUrl;
+        setData("Status:" + serviceBaseUrl, "Authorization", "Loading App Auth");
+        scheduleSourcesUpdated();
+
         QString script = "var ackButton = document.getElementById(\"allow\"); ackButton.click();";
         kDebug() << "Script run." << script;
         page->mainFrame()->evaluateJavaScript(script);

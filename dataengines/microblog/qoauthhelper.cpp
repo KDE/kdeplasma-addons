@@ -51,7 +51,7 @@ public:
         webView = 0;
         dialog = 0;
         interface = new QOAuth::Interface();
-        kDebug() << "Boooyah" << consumerKey;
+        //kDebug() << "Boooyah" << consumerKey;
     }
 
     QOAuth::Interface* interface;
@@ -137,8 +137,9 @@ void QOAuthHelper::requestTokenFromService()
     }
 }
 
-void QOAuthHelper::appAuthorized()
+void QOAuthHelper::appAuthorized(const QString &authorizeUrl)
 {
+    kDebug() << "App auth went well, now requesting accessToken";
 //     QWebPage *page = dynamic_cast<QWebPage*>(sender());
 //     if (!page) {
 //         kDebug() << "Invalid ..";
@@ -214,8 +215,9 @@ void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
     if (d->serviceBaseUrl == serviceBaseUrl) {
         return;
     }
+    d->serviceBaseUrl = serviceBaseUrl;
     const QUrl u(serviceBaseUrl);
-    kDebug() << "set service " << u;
+    kDebug() << "set service " << u << u.host();
 
     if (u.host() == "twitter.com") {
         kDebug() << "Using twitter...";
