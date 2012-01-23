@@ -159,8 +159,8 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         // Run start() here to move to another thread.
         // as we can't share pixmap, this won't work
         // using an invisible webkit
-        //authHelper->start();
-        authHelper->run();
+        authHelper->start();
+        //authHelper->run();
     } else {
         authHelper = m_authHelper[serviceBaseUrl];
     }
