@@ -20,6 +20,8 @@
 
 #include "twitterengine.h"
 
+#include <KWebView>
+#include <QWebFrame>
 
 #include <KDebug>
 #include <KIcon>
@@ -149,10 +151,16 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     QOAuthHelper *authHelper = 0;
     if (!m_authHelper.contains(serviceBaseUrl)) {
         kDebug() << "Creating new authhelper";
-        authHelper = new QOAuthHelper(this);
-        authHelper->setServiceBaseUrl(serviceBaseUrl);
-        m_authHelper[serviceBaseUrl] = new QOAuthHelper(this);
-        authHelper->authorize();
+        authHelper = new QOAuthHelper(serviceBaseUrl, this);
+        //authHelper->setServiceBaseUrl(serviceBaseUrl);
+        m_authHelper[serviceBaseUrl] = authHelper;
+        connect(authHelper, SIGNAL(authorizeApp(const QString&, const QString&, const QString&)),
+                this, SLOT(authorizeApp(const QString&, const QString&, const QString&)));
+        // Run start() here to move to another thread.
+        // as we can't share pixmap, this won't work
+        // using an invisible webkit
+        //authHelper->start();
+        authHelper->run();
     } else {
         authHelper = m_authHelper[serviceBaseUrl];
     }
@@ -192,6 +200,40 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
     return false;
 }
+
+void TwitterEngine::authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl)
+{
+    m_webView[serviceBaseUrl] = new KWebView(0);
+    m_authorizeUrls << authorizeUrl;
+    connect(m_webView[serviceBaseUrl]->page(), SIGNAL(loadFinished(bool)), SLOT(appAuthorized()));
+
+    m_webView[serviceBaseUrl]->page()->mainFrame()->load(pageUrl);
+
+}
+
+void TwitterEngine::appAuthorized()
+{
+    QWebPage *page = dynamic_cast<QWebPage*>(sender());
+    if (!page) {
+        kDebug() << "Invalid ..";
+        return;
+    }
+    kDebug() << "Page URL:" << page->mainFrame()->url();
+    QString u = page->mainFrame()->url().toString();
+    kDebug() << u << " == " << m_authorizeUrls;
+    if (m_authorizeUrls.contains(u)) {
+        kDebug() << "We're done!";
+//         if (d->dialog) {
+//             d->dialog->close();
+//         }
+    } else {
+        QString script = "var ackButton = document.getElementById(\"allow\"); ackButton.click();";
+        kDebug() << "Script run." << script;
+        page->mainFrame()->evaluateJavaScript(script);
+    }
+    //https://api.twitter.com/oauth/authorize
+}
+
 
 void TwitterEngine::imageDataChanged()
 {

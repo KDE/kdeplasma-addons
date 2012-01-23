@@ -76,12 +76,19 @@ public:
 };
 
 
-QOAuthHelper::QOAuthHelper(QObject* parent)
-    : QObject(parent),
-      d(0)
+QOAuthHelper::QOAuthHelper(const QString &serviceBaseUrl, QObject* parent)
+    : QThread(parent),
+      d(0),
+      m_serviceBaseUrl(serviceBaseUrl)
 {
     setObjectName(QLatin1String("QOAuthHelper"));
+}
+
+void QOAuthHelper::run()
+{
     d = new QOAuthHelperPrivate;
+    setServiceBaseUrl(m_serviceBaseUrl);
+    authorize();
 }
 
 void QOAuthHelper::authorize()
@@ -106,14 +113,15 @@ void QOAuthHelper::requestTokenFromService()
         d->requestToken = reply.value(QOAuth::tokenParameterName());
         d->requestTokenSecret = reply.value(QOAuth::tokenSecretParameterName());
 
-        KUrl auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
+        QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
         kDebug() << "Requesting Token OK!" << d->requestToken << d->requestTokenSecret;
         kDebug() << "Surf to: " << auth_url;
+        emit authorizeApp(d->serviceBaseUrl, d->authorizeUrl, auth_url);
         //new KRun(auth_url, 0);
 
-        d->webView = new KWebView(d->dialog);
-        d->webView->page()->mainFrame()->load(auth_url);
-        connect(d->webView->page(), SIGNAL(loadFinished(bool)), SLOT(appAuthorized()));
+//         d->webView = new KWebView(d->dialog);
+//         d->webView->page()->mainFrame()->load(auth_url);
+//         connect(d->webView->page(), SIGNAL(loadFinished(bool)), SLOT(appAuthorized()));
 
 //         d->dialog = new KDialog();
 //         d->dialog->setMainWidget(d->webView);
@@ -131,24 +139,24 @@ void QOAuthHelper::requestTokenFromService()
 
 void QOAuthHelper::appAuthorized()
 {
-    QWebPage *page = dynamic_cast<QWebPage*>(sender());
-    if (!page) {
-        kDebug() << "Invalid ..";
-        return;
-    }
-    kDebug() << "Page URL:" << page->mainFrame()->url();
-    QString u = page->mainFrame()->url().toString();
-    kDebug() << u << " == " << d->authorizeUrl;
-    if (u == d->authorizeUrl) {
-        kDebug() << "We're done!";
-        if (d->dialog) {
-            d->dialog->close();
-        }
-    } else {
-        QString script = "var ackButton = document.getElementById(\"allow\"); ackButton.click();";
-        kDebug() << "Script run." << script;
-        page->mainFrame()->evaluateJavaScript(script);
-    }
+//     QWebPage *page = dynamic_cast<QWebPage*>(sender());
+//     if (!page) {
+//         kDebug() << "Invalid ..";
+//         return;
+//     }
+//     kDebug() << "Page URL:" << page->mainFrame()->url();
+//     QString u = page->mainFrame()->url().toString();
+//     kDebug() << u << " == " << d->authorizeUrl;
+//     if (u == d->authorizeUrl) {
+//         kDebug() << "We're done!";
+//         if (d->dialog) {
+//             d->dialog->close();
+//         }
+//     } else {
+//         QString script = "var ackButton = document.getElementById(\"allow\"); ackButton.click();";
+//         kDebug() << "Script run." << script;
+//         page->mainFrame()->evaluateJavaScript(script);
+//     }
     //https://api.twitter.com/oauth/authorize    
 }
 
@@ -200,6 +208,7 @@ QString QOAuthHelper::errorMessage(int e) {
 void QOAuthHelper::accessTokenFromService()
 {
 }
+
 void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
 {
     if (d->serviceBaseUrl == serviceBaseUrl) {
