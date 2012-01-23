@@ -47,7 +47,7 @@ Q_SIGNALS:
     void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
 
 public Q_SLOTS:
-    void appAuthorized();
+    void appAuthorized(const QString &authorizeUrl);
 
 private:
     void requestTokenFromService();
