@@ -27,6 +27,8 @@
 class ImageSource;
 class UserSource;
 class QOAuthHelper;
+class KWebView;
+
 
 /**
  * Twitter Data Engine
@@ -62,11 +64,13 @@ class TwitterEngine : public Plasma::DataEngine
         //from DataEngine
         bool sourceRequestEvent(const QString &name);
 
-    protected slots:
+    protected Q_SLOTS:
         bool updateSourceEvent(const QString &name);
 
     private Q_SLOTS:
         void imageDataChanged();
+        void appAuthorized();
+        void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
 
     private:
         static const QString timelinePrefix;
@@ -78,6 +82,8 @@ class TwitterEngine : public Plasma::DataEngine
         ImageSource *m_imageSource;
         QString m_serviceBaseUrl;
         QHash<QString, QOAuthHelper*> m_authHelper;
+        QHash<QString, KWebView*> m_webView;
+        QStringList m_authorizeUrls;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(twitter, TwitterEngine)

@@ -21,26 +21,32 @@
 #define QOAUTHHELPER_H
 
 #include <QObject>
+#include <QThread>
+
 #include <QtOAuth/QtOAuth>
 
 #include <KUrl>
 
 class QOAuthHelperPrivate;
 
-class QOAuthHelper : public QObject
+class QOAuthHelper : public QThread
 {
 Q_OBJECT
 
 public:
-    QOAuthHelper(QObject* parent = 0);
+    QOAuthHelper(const QString &serviceBaseUrl, QObject* parent = 0);
     ~QOAuthHelper();
 
+    void run();
     void authorize();
 
     void setServiceBaseUrl(const QString &url);
     QByteArray authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params);
 
-private Q_SLOTS:
+Q_SIGNALS:
+    void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
+
+public Q_SLOTS:
     void appAuthorized();
 
 private:
@@ -49,6 +55,7 @@ private:
     QString errorMessage(int e);
 
     QOAuthHelperPrivate* d;
+    QString m_serviceBaseUrl;
 };
 
 #endif
