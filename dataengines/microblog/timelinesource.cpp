@@ -28,10 +28,13 @@
 
 #include "imagesource.h"
 #include "oauth.h"
+#include "qoauthhelper.h"
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
 const QString TimelineSource::AccessTokenUrl = "https://api.twitter.com/oauth/access_token";
+//const QString TimelineSource::AccessTokenUrl = "https://identi.ca/api/oauth/access_token";
+//const QString TimelineSource::AppName = "Plasma";
 
 TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<QString, QVariant> &parameters, QObject *parent)
     : Plasma::ServiceJob(source->account(), operation, parameters, parent),
@@ -152,7 +155,8 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObj
         m_serviceBaseUrl = KUrl("https://twitter.com/");
     }
 
-    m_useOAuth = (m_serviceBaseUrl == KUrl("https://twitter.com/")) ? true : false;
+    //m_useOAuth = (m_serviceBaseUrl == KUrl("https://twitter.com/")) ? true : false;
+    m_useOAuth = true;
 
         //just create it to correctly initialize QCA and clean up when createSignature() returns
     m_qcaInitializer = new QCA::Initializer();
@@ -199,23 +203,26 @@ void TimelineSource::setPassword(const QString &password)
 {
     bool force;
     if (m_useOAuth){
-        OAuth::ParamMap xauthArgs;
-        xauthArgs.insert("x_auth_mode", "client_auth");
-        xauthArgs.insert(QByteArray("x_auth_password"), password.toUtf8().toPercentEncoding());
-        xauthArgs.insert(QByteArray("x_auth_username"), m_user.toUtf8().toPercentEncoding());
 
-        // If user hasn't been granted token yet request one
-        if (!m_oauthToken.size()) {
-            QByteArray data = OAuth::paramsToString(xauthArgs, OAuth::ParseForRequestContent);
-            m_authJob = KIO::http_post(AccessTokenUrl, data, KIO::HideProgressInfo);
-            OAuth::signRequest(m_authJob, AccessTokenUrl, OAuth::POST, QByteArray(), QByteArray(), xauthArgs);
-            m_authJob->addMetaData("content-type", "Content-Type: application/x-www-form-urlencoded");
-
-            connect(m_authJob, SIGNAL(data(KIO::Job*,QByteArray)),
-                    this, SLOT(auth(KIO::Job*,QByteArray)));
-            connect(m_authJob, SIGNAL(result(KJob*)), this, SLOT(authFinished(KJob*)));
-            force = true;
-        }
+//         OAuth::ParamMap xauthArgs;
+//         xauthArgs.insert("x_auth_mode", "client_auth");
+//         xauthArgs.insert(QByteArray("x_auth_password"), password.toUtf8().toPercentEncoding());
+//         xauthArgs.insert(QByteArray("x_auth_username"), m_user.toUtf8().toPercentEncoding());
+// 
+//         // If user hasn't been granted token yet request one
+//         if (!m_oauthToken.size()) {
+//             kDebug() << "request access token";
+//             QByteArray data = OAuth::paramsToString(xauthArgs, OAuth::ParseForRequestContent);
+//             kDebug() << "URL: " << AccessTokenUrl << QString(data);
+//             m_authJob = KIO::http_post(AccessTokenUrl, data, KIO::HideProgressInfo);
+//             OAuth::signRequest(m_authJob, AccessTokenUrl, OAuth::POST, QByteArray(), QByteArray(), xauthArgs);
+//             m_authJob->addMetaData("content-type", "Content-Type: application/x-www-form-urlencoded");
+// 
+//             connect(m_authJob, SIGNAL(data(KIO::Job*,QByteArray)),
+//                     this, SLOT(auth(KIO::Job*,QByteArray)));
+//             connect(m_authJob, SIGNAL(result(KJob*)), this, SLOT(authFinished(KJob*)));
+//             force = true;
+//         }
     } else {
         force = !m_url.password().isEmpty();
         m_url.setPass(password);
@@ -286,6 +293,10 @@ void TimelineSource::recv(KIO::Job*, const QByteArray& data)
 
 void TimelineSource::result(KJob *job)
 {
+    KIO::TransferJob *tj = dynamic_cast<KIO::TransferJob*>(job);
+    if (job) {
+        kDebug() << "EEEEEEEEEEEEEEEEE job returned: " << tj->url();
+    }
     if (job != m_job) {
         //kDebug() << "fail! job is not our job!";
         return;
@@ -311,6 +322,7 @@ void TimelineSource::result(KJob *job)
 
 void TimelineSource::auth(KIO::Job*, const QByteArray& data)
 {
+    kDebug() << data;
     m_oauthTemp += data;
 }
 
@@ -338,6 +350,7 @@ void TimelineSource::authFinished(KJob *job)
     }
     m_oauthTemp.clear();
     m_authJob = 0;
+    kDebug() << "Authentication succeeded, Token: " << QString(m_oauthToken);
 }
 
 void TimelineSource::parse(QXmlStreamReader &xml)

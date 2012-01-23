@@ -26,6 +26,7 @@
 
 class ImageSource;
 class UserSource;
+class QOAuthHelper;
 
 /**
  * Twitter Data Engine
@@ -76,6 +77,7 @@ class TwitterEngine : public Plasma::DataEngine
         static const QString userPrefix;
         ImageSource *m_imageSource;
         QString m_serviceBaseUrl;
+        QHash<QString, QOAuthHelper*> m_authHelper;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(twitter, TwitterEngine)

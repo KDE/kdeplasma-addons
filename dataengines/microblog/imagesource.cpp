@@ -109,7 +109,7 @@ void ImageSource::result(KJob *job)
         if (m_jobs.value(job) == "sebas") {
             kDebug() << " === SEBAS SET ===" << who;
             kDebug() << "Cache insert: " << cacheKey;
-            polishImage(img).save("/tmp/userimage.png");
+            //polishImage(img).save("/tmp/userimage.png");
         }
 
         m_imageCache->insertImage(cacheKey, img);

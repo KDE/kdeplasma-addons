@@ -27,6 +27,7 @@
 
 #include "timelinesource.h"
 #include "imagesource.h"
+#include "qoauthhelper.h"
 #include "usersource.h"
 
 const QString TwitterEngine::timelinePrefix("Timeline:");
@@ -92,7 +93,7 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 //always returns false because everything is async
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
-    //kDebug() << name;
+    //kDebug() << "Updating: " << name;
     //right now it only makes sense to do an update on timelines
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
@@ -124,43 +125,54 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     }
 
     //we want just the service url to index the UserImages source
-    //QString m_serviceBaseUrl;
+    QString serviceBaseUrl;
     QStringList account = who.split('@');
     if (account.count() == 2) {
-        m_serviceBaseUrl = account.at(1);
+        serviceBaseUrl = account.at(1);
     } else {
-        m_serviceBaseUrl = "http://twitter.com/";
+        serviceBaseUrl = "http://twitter.com/";
     }
 
-    ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+m_serviceBaseUrl));
-    connect(imageSource, SIGNAL(dataChanged()), SLOT(imageDataChanged()));
+    ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 
     if (!imageSource) {
         imageSource = new ImageSource(this);
+        connect(imageSource, SIGNAL(dataChanged()), SLOT(imageDataChanged()));
         imageSource->setStorageEnabled(true);
 
-        imageSource->setObjectName("UserImages:"+m_serviceBaseUrl);
+        imageSource->setObjectName("UserImages:"+serviceBaseUrl);
         addSource(imageSource);
         //imageSource->loadImage(account.at(0), account.at(1));
     }
 
 
+    QOAuthHelper *authHelper = 0;
+    if (!m_authHelper.contains(serviceBaseUrl)) {
+        kDebug() << "Creating new authhelper";
+        authHelper = new QOAuthHelper(this);
+        authHelper->setServiceBaseUrl(serviceBaseUrl);
+        m_authHelper[serviceBaseUrl] = new QOAuthHelper(this);
+        authHelper->authorize();
+    } else {
+        authHelper = m_authHelper[serviceBaseUrl];
+    }
+
     if (requestType == TimelineSource::User) {
         UserSource *source = dynamic_cast<UserSource*>(containerForSource(name));
 
         if (!source) {
-            source = new UserSource(account.at(0), m_serviceBaseUrl, this);
+            source = new UserSource(account.at(0), serviceBaseUrl, this);
             source->setObjectName(name);
             //source->setImageSource(imageSource);
             source->setStorageEnabled(true);
             connect(source, SIGNAL(loadImage(const QString&, const KUrl&)),
                     imageSource, SLOT(loadImage(const QString&, const KUrl&)));
             if (imageSource) {
-                imageSource->loadImage(account.at(0), m_serviceBaseUrl);
+                imageSource->loadImage(account.at(0), serviceBaseUrl);
             }
             addSource(source);
         }
-        source->loadUserInfo(account.at(0), m_serviceBaseUrl);
+        source->loadUserInfo(account.at(0), serviceBaseUrl);
         //source->update();
 
     } else {
@@ -184,7 +196,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 void TwitterEngine::imageDataChanged()
 {
     scheduleSourcesUpdated();
-    //const QString s = QString("UserImage:%1").arg(m_serviceBaseUrl);
+    //const QString s = QString("UserImage:%1").arg(serviceBaseUrl);
     //emit DataEngine::dataUpdated(s, ImageSource.data());
 }
 
