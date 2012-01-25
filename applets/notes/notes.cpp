@@ -248,7 +248,8 @@ void Notes::showError(const QString &message)
 void Notes::lineChanged()
 {
     //Re-set the formatting if previous text was deleted
-    if (m_noteEditor->document()->characterCount() == 1) {
+    QTextCursor textCursor = m_noteEditor->textCursor();
+    if (textCursor.atStart()) {
         QTextCharFormat fmt;
         fmt.setForeground(QBrush(m_textColor));
         fmt.setFont(m_font);
@@ -259,7 +260,6 @@ void Notes::lineChanged()
         return;
     }
 
-    QTextCursor textCursor = m_noteEditor->textCursor();
     QTextEdit::ExtraSelection textxtra;
     textxtra.cursor = m_noteEditor->textCursor();
     textxtra.cursor.movePosition(QTextCursor::StartOfLine);
