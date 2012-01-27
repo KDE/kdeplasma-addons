@@ -44,7 +44,7 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
 {
     //setMinimumPollingInterval(2 * 60 * 1000); // 2 minutes minimum
     setData("Defaults", "UserImage", KIcon ("user-identity").pixmap(48, 48).toImage());
-    setData("Status:https://twitter.com", "Autorization", "Not Started");
+    setData("Status:https://twitter.com", "Authorization", "Not Started");
 }
 
 TwitterEngine::~TwitterEngine()
@@ -135,7 +135,9 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     } else {
         serviceBaseUrl = "http://twitter.com/";
     }
-
+    if (!serviceBaseUrl.endsWith('/')) {
+        serviceBaseUrl += '/';
+    }
     ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 
     if (!imageSource) {
@@ -147,7 +149,6 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         addSource(imageSource);
         //imageSource->loadImage(account.at(0), account.at(1));
     }
-
 
     QOAuthHelper *authHelper = 0;
     if (!m_authHelper.contains(serviceBaseUrl)) {
