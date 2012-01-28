@@ -51,10 +51,16 @@ public:
         webView = 0;
         dialog = 0;
         interface = new QOAuth::Interface();
+        busy = false;
         //kDebug() << "Boooyah" << consumerKey;
     }
 
     QOAuth::Interface* interface;
+
+    QString user;
+    QString password;
+
+    bool busy;
 
     QString serviceBaseUrl;
     QString requestTokenUrl;
@@ -86,15 +92,38 @@ QOAuthHelper::QOAuthHelper(const QString &serviceBaseUrl, QObject* parent)
     setObjectName(QLatin1String("QOAuthHelper"));
 }
 
-void QOAuthHelper::run()
+QString QOAuthHelper::user() const
 {
-    d = new QOAuthHelperPrivate;
-    setServiceBaseUrl(m_serviceBaseUrl);
-    authorize();
+    return d->user;
 }
 
-void QOAuthHelper::authorize()
+QString QOAuthHelper::password() const
 {
+    return d->password;
+}
+
+void QOAuthHelper::run()
+{
+    if (!d) {
+        d = new QOAuthHelperPrivate;
+    }
+    setServiceBaseUrl(m_serviceBaseUrl);
+    //authorize();
+}
+
+void QOAuthHelper::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
+{
+    if (!d) {
+        d = new QOAuthHelperPrivate;
+    }
+    if (d->busy) {
+        return;
+    }
+    d->user = user;
+    d->password = password;
+    m_serviceBaseUrl = serviceBaseUrl;
+    //run();
+    d->busy = true;
     requestTokenFromService();
 }
 
@@ -105,10 +134,10 @@ void QOAuthHelper::requestTokenFromService()
 
     d->interface->setRequestTimeout( 10000 );
 
-    kDebug() << "start ...";
+//     kDebug() << "start ...";
     QOAuth::ParamMap reply = d->interface->requestToken(d->requestTokenUrl,
                                                         QOAuth::GET, QOAuth::HMAC_SHA1 );
-    kDebug() << "end ......" << reply;
+//     kDebug() << "end ......" << reply;
 
     QString e;
     if ( d->interface->error() == QOAuth::NoError ) {
@@ -116,8 +145,8 @@ void QOAuthHelper::requestTokenFromService()
         d->requestTokenSecret = reply.value(QOAuth::tokenSecretParameterName());
 
         QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
-        kDebug() << "Requesting Token OK!" << d->requestToken << d->requestTokenSecret;
-        kDebug() << "Surf to: " << auth_url;
+//         kDebug() << "Requesting Token OK!" << d->requestToken << d->requestTokenSecret;
+//         kDebug() << "Surf to: " << auth_url;
         emit statusMessageUpdated(d->serviceBaseUrl, "Request token received.");
         emit statusUpdated(d->serviceBaseUrl, "Busy");
         emit authorizeApp(d->serviceBaseUrl, d->authorizeUrl, auth_url);
@@ -135,18 +164,19 @@ void QOAuthHelper::requestTokenFromService()
 
     } else {
         //d->interface->error() == QOAuth::NoError
-        kDebug() << d->interface->error() << reply;
+//         kDebug() << d->interface->error() << reply;
         e += errorMessage(d->interface->error());
         kDebug() << "Request Not working" << e;
         emit statusMessageUpdated(d->serviceBaseUrl, "<strong>requesToken Error: " + e + "</strong>");
         emit statusUpdated(d->serviceBaseUrl, "Error");
+        d->busy = false;
 
     }
 }
 
 void QOAuthHelper::appAuthorized(const QString &authorizeUrl, const QString &verifier)
 {
-    kDebug() << "App auth went well, now requesting accessToken";
+//     kDebug() << "App auth went well, now requesting accessToken";
     accessTokenFromService();
 //     QWebPage *page = dynamic_cast<QWebPage*>(sender());
 //     if (!page) {
@@ -216,24 +246,25 @@ QString QOAuthHelper::errorMessage(int e) {
 
 void QOAuthHelper::accessTokenFromService()
 {
-    kDebug() << "start ... accessToken. TODO insert verifier" << d->verifier;
+//     kDebug() << "start ... accessToken. TODO insert verifier" << d->verifier;
     QOAuth::ParamMap params = QOAuth::ParamMap();
     QOAuth::ParamMap reply = d->interface->accessToken(d->accessTokenUrl, QOAuth::GET,
                                                        d->requestToken, d->requestTokenSecret,
                                                        QOAuth::HMAC_SHA1, params);
-    kDebug() << "end ...... accessToken";
-    kDebug() << " MAP: " << params;
+//     kDebug() << "end ...... accessToken";
+//     kDebug() << " MAP: " << params;
     QString e;
     if ( d->interface->error() == QOAuth::NoError ) {
         d->accessToken = reply.value(QOAuth::tokenParameterName());
         d->accessTokenSecret = reply.value(QOAuth::tokenSecretParameterName());
 
         //QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
-        kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
+//         kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
         //kDebug() << "Surf to: " << auth_url;
         //emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
         emit statusMessageUpdated(d->serviceBaseUrl, "User authorized :)");
         emit statusUpdated(d->serviceBaseUrl, "Ok");
+        d->busy = false;
         emit authorized();
         //new KRun(auth_url, 0);
 
@@ -254,6 +285,7 @@ void QOAuthHelper::accessTokenFromService()
         kDebug() << "Request Not working" << e;
         emit statusMessageUpdated(d->serviceBaseUrl, "<strong>accessToken Error: " + e + "</strong>");
         emit statusUpdated(d->serviceBaseUrl, "Error");
+        d->busy = false;
 
     }
 }
@@ -265,10 +297,10 @@ void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
     }
     d->serviceBaseUrl = serviceBaseUrl;
     const QUrl u(serviceBaseUrl);
-    kDebug() << "set service " << u << u.host();
+//     kDebug() << "set service " << u << u.host();
 
     if (u.host() == "twitter.com") {
-        kDebug() << "Using twitter...";
+//         kDebug() << "Using twitter...";
         d->requestTokenUrl = "https://api.twitter.com/oauth/request_token";
         d->accessTokenUrl = "https://api.twitter.com/oauth/access_token";
         d->authorizeUrl = "https://api.twitter.com/oauth/authorize";
@@ -276,7 +308,7 @@ void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
         d->consumerSecret = "RpGc0q0aGl0jMkeqMIawUpGyDkJ3DNBczFUyIQMR698";
 
     } else {
-        kDebug() << "Using identi.ca...";
+//         kDebug() << "Using identi.ca...";
         d->requestTokenUrl = "https://identi.ca/api/oauth/request_token";
         d->accessTokenUrl = "https://identi.ca/api/oauth/access_token";
         d->authorizeUrl = "https://identi.ca/api/oauth/authorize";
@@ -298,7 +330,7 @@ QOAuthHelper::~QOAuthHelper()
 
 bool QOAuthHelper::isAuthorized()
 {
-    return !d->accessToken.isEmpty();
+    return !d->accessToken.isEmpty() && !d->busy;
 }
 
 

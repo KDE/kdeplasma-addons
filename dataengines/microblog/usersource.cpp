@@ -53,7 +53,7 @@ void UserSource::loadUserInfo(const QString &who, const QString &serviceBaseUrl)
         return;
     }
     m_currentUrl = u;
-    kDebug() << "Requesting user info for " << who << " from ... " << u;
+//     kDebug() << "Requesting user info for " << who << " from ... " << u;
     //return;
     //m_runningJobs++;
     KIO::Job *job = KIO::get(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -112,7 +112,7 @@ void UserSource::parse(QXmlStreamReader &xml)
             if (tag == "status") {
                 //readStatus(xml);
             } else if (tag == "user") {
-                kDebug() << "Found user.";
+//                 kDebug() << "Found user.";
                 readUser(xml);
             } else if (tag == "direct_message") {
                 //readDirectMessage(xml);
@@ -176,10 +176,10 @@ void UserSource::readUser(QXmlStreamReader &xml)
     }
 
     // Make sure our avatar is loaded
-    kDebug() << "requesting profile pic" << data()["username"] << data()["profileimageurl"];
+//     kDebug() << "requesting profile pic" << data()["username"] << data()["profileimageurl"];
     //const QString who = 
     emit loadImage(data()["username"].toString(), data()["profileimageurl"].toUrl());
-    kDebug() << " read user: " << data()["username"].toString();
+//     kDebug() << " read user: " << data()["username"].toString();
     //kDebug() << "- END USER -" << endl;
 }
 
