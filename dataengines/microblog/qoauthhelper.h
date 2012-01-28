@@ -38,7 +38,8 @@ public:
     ~QOAuthHelper();
 
     void run();
-    void authorize();
+    QString user() const;
+    QString password() const;
 
     bool isAuthorized();
 
@@ -54,6 +55,7 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     void appAuthorized(const QString &authorizeUrl, const QString &verifier);
+    void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
 
 private:
     void requestTokenFromService();

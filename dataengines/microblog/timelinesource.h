@@ -70,6 +70,9 @@ class TimelineService : public Plasma::Service
 public:
     TimelineService(TimelineSource *parent);
 
+//Q_SIGNALS:
+    //authorize(const QString &password);
+
 protected:
     Plasma::ServiceJob* createJob(const QString &operation, QMap<QString, QVariant> &parameters);
 
@@ -105,9 +108,13 @@ public:
     QByteArray oauthTokenSecret() const;
 
     Plasma::Service* createService();
+    void startAuthorization(const QString &password);
 
     ImageSource* imageSource() const;
     void setImageSource(ImageSource *);
+
+Q_SIGNALS:
+    void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
 
 private slots:
     void recv(KIO::Job*, const QByteArray& data);
