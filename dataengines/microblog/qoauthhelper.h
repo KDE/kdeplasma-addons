@@ -40,14 +40,20 @@ public:
     void run();
     void authorize();
 
+    bool isAuthorized();
+
     void setServiceBaseUrl(const QString &url);
     QByteArray authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params);
 
 Q_SIGNALS:
     void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
+    void accessTokenReceived(const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret);
+    void authorized(); // We're ready
+    void statusMessageUpdated(const QString &serviceBaseUrl, const QString);
+    void statusUpdated(const QString &serviceBaseUrl, const QString);
 
 public Q_SLOTS:
-    void appAuthorized(const QString &authorizeUrl);
+    void appAuthorized(const QString &authorizeUrl, const QString &verifier);
 
 private:
     void requestTokenFromService();
