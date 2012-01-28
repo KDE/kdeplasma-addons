@@ -65,8 +65,8 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
             }
         }
 
-        m_url.setUser(source->account());
-        m_url.setPass(source->password());
+        //m_url.setUser(source->account());
+        //m_url.setPass(source->password());
     }
 }
 
