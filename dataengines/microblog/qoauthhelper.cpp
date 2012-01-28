@@ -70,6 +70,8 @@ public:
     QByteArray accessToken;
     QByteArray accessTokenSecret;
 
+    QString verifier;
+
     KWebView *webView;
     KDialog *dialog;
 
@@ -106,7 +108,7 @@ void QOAuthHelper::requestTokenFromService()
     kDebug() << "start ...";
     QOAuth::ParamMap reply = d->interface->requestToken(d->requestTokenUrl,
                                                         QOAuth::GET, QOAuth::HMAC_SHA1 );
-    kDebug() << "end ......";
+    kDebug() << "end ......" << reply;
 
     QString e;
     if ( d->interface->error() == QOAuth::NoError ) {
@@ -116,6 +118,8 @@ void QOAuthHelper::requestTokenFromService()
         QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
         kDebug() << "Requesting Token OK!" << d->requestToken << d->requestTokenSecret;
         kDebug() << "Surf to: " << auth_url;
+        emit statusMessageUpdated(d->serviceBaseUrl, "Request token received.");
+        emit statusUpdated(d->serviceBaseUrl, "Busy");
         emit authorizeApp(d->serviceBaseUrl, d->authorizeUrl, auth_url);
         //new KRun(auth_url, 0);
 
@@ -134,12 +138,16 @@ void QOAuthHelper::requestTokenFromService()
         kDebug() << d->interface->error() << reply;
         e += errorMessage(d->interface->error());
         kDebug() << "Request Not working" << e;
+        emit statusMessageUpdated(d->serviceBaseUrl, "<strong>requesToken Error: " + e + "</strong>");
+        emit statusUpdated(d->serviceBaseUrl, "Error");
+
     }
 }
 
-void QOAuthHelper::appAuthorized(const QString &authorizeUrl)
+void QOAuthHelper::appAuthorized(const QString &authorizeUrl, const QString &verifier)
 {
     kDebug() << "App auth went well, now requesting accessToken";
+    accessTokenFromService();
 //     QWebPage *page = dynamic_cast<QWebPage*>(sender());
 //     if (!page) {
 //         kDebug() << "Invalid ..";
@@ -208,6 +216,46 @@ QString QOAuthHelper::errorMessage(int e) {
 
 void QOAuthHelper::accessTokenFromService()
 {
+    kDebug() << "start ... accessToken. TODO insert verifier" << d->verifier;
+    QOAuth::ParamMap params = QOAuth::ParamMap();
+    QOAuth::ParamMap reply = d->interface->accessToken(d->accessTokenUrl, QOAuth::GET,
+                                                       d->requestToken, d->requestTokenSecret,
+                                                       QOAuth::HMAC_SHA1, params);
+    kDebug() << "end ...... accessToken";
+    kDebug() << " MAP: " << params;
+    QString e;
+    if ( d->interface->error() == QOAuth::NoError ) {
+        d->accessToken = reply.value(QOAuth::tokenParameterName());
+        d->accessTokenSecret = reply.value(QOAuth::tokenSecretParameterName());
+
+        //QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
+        kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
+        //kDebug() << "Surf to: " << auth_url;
+        //emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
+        emit statusMessageUpdated(d->serviceBaseUrl, "User authorized :)");
+        emit statusUpdated(d->serviceBaseUrl, "Ok");
+        emit authorized();
+        //new KRun(auth_url, 0);
+
+//         d->webView = new KWebView(d->dialog);
+//         d->webView->page()->mainFrame()->load(auth_url);
+//         connect(d->webView->page(), SIGNAL(loadFinished(bool)), SLOT(appAuthorized()));
+
+//         d->dialog = new KDialog();
+//         d->dialog->setMainWidget(d->webView);
+//         d->dialog->setCaption( "Authorize application" );
+//         d->dialog->setButtons( KDialog::Ok | KDialog::Cancel);
+//         d->dialog->show();
+
+    } else {
+        //d->interface->error() == QOAuth::NoError
+        kDebug() << d->interface->error() << reply;
+        e += errorMessage(d->interface->error());
+        kDebug() << "Request Not working" << e;
+        emit statusMessageUpdated(d->serviceBaseUrl, "<strong>accessToken Error: " + e + "</strong>");
+        emit statusUpdated(d->serviceBaseUrl, "Error");
+
+    }
 }
 
 void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
@@ -247,6 +295,12 @@ QOAuthHelper::~QOAuthHelper()
 {
     delete d;
 }
+
+bool QOAuthHelper::isAuthorized()
+{
+    return !d->accessToken.isEmpty();
+}
+
 
 QByteArray QOAuthHelper::authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params)
 {
