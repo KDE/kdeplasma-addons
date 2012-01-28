@@ -289,7 +289,7 @@ void Tasks::configChanged()
     if (recentDocuments != RecentDocuments::self()->isEnabled()) {
         changed = true;
     }
-    RecentDocuments::self()->setEnabled(unity);
+    RecentDocuments::self()->setEnabled(recentDocuments);
 
     const SeparatorType showSeparator = TaskManager::GroupManager::ManualSorting == m_groupManager->sortingStrategy()
                                         ? static_cast<SeparatorType>(cg.readEntry("showSeparator", static_cast<int>(m_showSeparator)))
@@ -667,6 +667,7 @@ void Tasks::configAccepted()
     cg.writeEntry("showProgress", m_behaviourUi.showProgress->checkState() == Qt::Checked);
     cg.writeEntry("mediaButtons", m_behaviourUi.mediaButtons->checkState() == Qt::Checked);
     cg.writeEntry("unity", m_behaviourUi.unity->checkState() == Qt::Checked);
+    cg.writeEntry("recentDocuments", m_behaviourUi.recentDocuments->checkState() == Qt::Checked);
     cg.writeEntry("spacing", m_appUi.spacing->value());
     cg.writeEntry("previewSize", m_appUi.previewSize->value());
     cg.writeEntry("iconScale", m_appUi.iconScale->value());
