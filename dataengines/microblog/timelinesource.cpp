@@ -135,6 +135,29 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
         m_source->update(true);
     } else if (operation == "auth") {
         m_source->setPassword(parameters.value("password").toString());
+        const QString password = parameters.value("password").toString();
+        /*
+        QString user;
+        QString serviceBaseUrl;
+
+        QObject *p = parent();
+        while (p) {
+            TimelineSource* timeline = dynamic_cast<TimelineSource*>(p);
+            if (timeline) {
+    //             user = timeline->account();
+    //             serviceBaseUrl = timeline->serviceBaseUrl().toString();
+                kDebug() << "Starting oauth jobs:" << user << ":"  << password << serviceBaseUrl;
+                timeline->startAuthorization(password);
+                break;
+            } else {
+                kDebug() << "No timeline found :( journey ends here.";
+            }
+            p = p->parent();
+        }
+        */
+//         kDebug() << "emitting" << password;
+        m_source->startAuthorization(password);
+        //emit authorize(password);
     }
 
     return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
@@ -198,6 +221,12 @@ Plasma::Service* TimelineSource::createService()
 {
     return new TimelineService(this);
 }
+
+void TimelineSource::startAuthorization(const QString& password)
+{
+    emit authorize(m_serviceBaseUrl.pathOrUrl(), m_user, password);
+}
+
 
 void TimelineSource::setPassword(const QString &password)
 {
@@ -295,7 +324,7 @@ void TimelineSource::result(KJob *job)
 {
     KIO::TransferJob *tj = dynamic_cast<KIO::TransferJob*>(job);
     if (job) {
-        kDebug() << "EEEEEEEEEEEEEEEEE job returned: " << tj->url();
+//         kDebug() << "EEEEEEEEEEEEEEEEE job returned: " << tj->url();
     }
     if (job != m_job) {
         //kDebug() << "fail! job is not our job!";
@@ -322,7 +351,7 @@ void TimelineSource::result(KJob *job)
 
 void TimelineSource::auth(KIO::Job*, const QByteArray& data)
 {
-    kDebug() << data;
+//     kDebug() << data;
     m_oauthTemp += data;
 }
 
