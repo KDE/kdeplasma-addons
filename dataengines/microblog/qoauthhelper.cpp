@@ -35,6 +35,7 @@
 #include <KDialog>
 
 #include <KWebView>
+#include <KIO/AccessManager>
 #include <QWebFrame>
 
 #include "qoauthhelper.h"
@@ -106,6 +107,10 @@ void QOAuthHelper::run()
 {
     if (!d) {
         d = new QOAuthHelperPrivate;
+#ifndef NO_KIO
+        KIO::AccessManager *access = new KIO::AccessManager(this);
+        d->interface->setNetworkAccessManager(access);
+#endif
     }
     setServiceBaseUrl(m_serviceBaseUrl);
     //authorize();
@@ -116,6 +121,11 @@ void QOAuthHelper::authorize(const QString &serviceBaseUrl, const QString &user,
     if (!d) {
         kDebug() << "new private..";
         d = new QOAuthHelperPrivate;
+#ifndef NO_KIO
+        KIO::AccessManager *access = new KIO::AccessManager(this);
+        d->interface->setNetworkAccessManager(access);
+#endif
+
     }
     if (d->busy) {
         return;
@@ -219,8 +229,9 @@ void QOAuthHelper::accessTokenFromService()
     kDebug() << "start ... accessToken. TODO insert verifier" << d->verifier;
     QOAuth::ParamMap params = QOAuth::ParamMap();
     params.insert("oauth_callback", "oob");
-    params.insert("oauth_verifier", d->verifier.toLocal8Bit());
-
+    if (d->serviceBaseUrl.toLower().contains("identi.ca")) {
+        params.insert("oauth_verifier", d->verifier.toLocal8Bit());
+    }
     QOAuth::ParamMap reply = d->interface->accessToken(d->accessTokenUrl, QOAuth::GET,
                                                        d->requestToken, d->requestTokenSecret,
                                                        QOAuth::HMAC_SHA1, params);
