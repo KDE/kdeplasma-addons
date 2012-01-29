@@ -39,6 +39,7 @@
 #include <QWebFrame>
 
 #include "qoauthhelper.h"
+#include "qoauthwebhelper.h"
 #include <KDebug>
 #include <QtOAuth/QtOAuth>
 
@@ -47,13 +48,8 @@ class QOAuthHelperPrivate {
 public:
     QOAuthHelperPrivate()
     {
-        //consumerKey = "22kfJkztvOqb8WfihEjdg";
-        //consumerSecret = "RpGc0q0aGl0jMkeqMIawUpGyDkJ3DNBczFUyIQMR698";
-        webView = 0;
-        dialog = 0;
         interface = new QOAuth::Interface();
         busy = false;
-        //kDebug() << "Boooyah" << consumerKey;
     }
 
     QOAuth::Interface* interface;
@@ -79,18 +75,17 @@ public:
 
     QString verifier;
 
-    KWebView *webView;
-    KDialog *dialog;
-
+    QOAuthWebHelper *w;
 };
 
 
-QOAuthHelper::QOAuthHelper(const QString &serviceBaseUrl, QObject* parent)
+QOAuthHelper::QOAuthHelper(QObject* parent)
     : QThread(parent),
-      d(0),
-      m_serviceBaseUrl(serviceBaseUrl)
+      d(0)
 {
+
     setObjectName(QLatin1String("QOAuthHelper"));
+    init();
 }
 
 QString QOAuthHelper::user() const
@@ -103,7 +98,7 @@ QString QOAuthHelper::password() const
     return d->password;
 }
 
-void QOAuthHelper::run()
+void QOAuthHelper::init()
 {
     if (!d) {
         d = new QOAuthHelperPrivate;
@@ -111,28 +106,34 @@ void QOAuthHelper::run()
         KIO::AccessManager *access = new KIO::AccessManager(this);
         d->interface->setNetworkAccessManager(access);
 #endif
+        d->w = new QOAuthWebHelper();
+        connect(this, SIGNAL(authorizeApp(const QString&, const QString&, const QString&)),
+                d->w, SLOT(authorizeApp(const QString&, const QString&, const QString&)));
+        connect(d->w, SIGNAL(appAuthSucceeded(const QString&, const QString&)),
+                this, SLOT(appAuthorized(const QString&, const QString&)));
+        connect(d->w, SIGNAL(statusUpdated(const QString&, const QString&, const QString&)),
+                SIGNAL(statusUpdated(const QString&, const QString&, const QString&)));
+
     }
-    setServiceBaseUrl(m_serviceBaseUrl);
+
+}
+
+void QOAuthHelper::run()
+{
     //authorize();
 }
 
 void QOAuthHelper::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
 {
-    if (!d) {
-        kDebug() << "new private..";
-        d = new QOAuthHelperPrivate;
-#ifndef NO_KIO
-        KIO::AccessManager *access = new KIO::AccessManager(this);
-        d->interface->setNetworkAccessManager(access);
-#endif
-
-    }
     if (d->busy) {
         return;
     }
     d->user = user;
+    d->w->setUser(user);
+    d->w->setServiceBaseUrl(serviceBaseUrl);
+    d->w->setPassword(password);
     d->password = password;
-    m_serviceBaseUrl = serviceBaseUrl;
+    d->serviceBaseUrl = serviceBaseUrl;
     //run();
     d->busy = true;
     requestTokenFromService();
@@ -159,15 +160,13 @@ void QOAuthHelper::requestTokenFromService()
 
         QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
 
-        emit statusMessageUpdated(d->serviceBaseUrl, "Request token received.");
-        emit statusUpdated(d->serviceBaseUrl, "Busy");
+        emit statusUpdated(d->serviceBaseUrl, "Busy", "Request token received.");
         emit authorizeApp(d->serviceBaseUrl, d->authorizeUrl, auth_url);
 
     } else {
         e += errorMessage(d->interface->error());
         kDebug() << "Request Token returned error:" << e;
-        emit statusMessageUpdated(d->serviceBaseUrl, "<strong>requesToken Error: " + e + "</strong>");
-        emit statusUpdated(d->serviceBaseUrl, "Error");
+        emit statusUpdated(d->serviceBaseUrl, "Error", "Request Token Error: " + e);
         d->busy = false;
 
     }
@@ -245,32 +244,15 @@ void QOAuthHelper::accessTokenFromService()
         //QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
         kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
         //kDebug() << "Surf to: " << auth_url;
-        //emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
-        emit statusMessageUpdated(d->serviceBaseUrl, "User authorized :)");
-        emit statusUpdated(d->serviceBaseUrl, "Ok");
+        emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
         d->busy = true;
         emit authorized();
-        //new KRun(auth_url, 0);
-
-//         d->webView = new KWebView(d->dialog);
-//         d->webView->page()->mainFrame()->load(auth_url);
-//         connect(d->webView->page(), SIGNAL(loadFinished(bool)), SLOT(appAuthorized()));
-
-//         d->dialog = new KDialog();
-//         d->dialog->setMainWidget(d->webView);
-//         d->dialog->setCaption( "Authorize application" );
-//         d->dialog->setButtons( KDialog::Ok | KDialog::Cancel);
-//         d->dialog->show();
-
     } else {
-        //d->interface->error() == QOAuth::NoError
         kDebug() << d->interface->error() << reply;
         e += errorMessage(d->interface->error());
         kDebug() << "Request Not working" << e;
-        emit statusMessageUpdated(d->serviceBaseUrl, "<strong>accessToken Error: " + e + "</strong>");
-        emit statusUpdated(d->serviceBaseUrl, "Error");
+        emit statusUpdated(d->serviceBaseUrl, "Error", "Access Token Error:" + e);
         d->busy = false;
-
     }
 }
 
