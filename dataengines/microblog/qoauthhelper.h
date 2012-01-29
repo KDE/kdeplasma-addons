@@ -34,7 +34,7 @@ class QOAuthHelper : public QThread
 Q_OBJECT
 
 public:
-    QOAuthHelper(const QString &serviceBaseUrl, QObject* parent = 0);
+    QOAuthHelper(QObject* parent = 0);
     ~QOAuthHelper();
 
     void run();
@@ -50,20 +50,20 @@ Q_SIGNALS:
     void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
     void accessTokenReceived(const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret);
     void authorized(); // We're ready
-    void statusMessageUpdated(const QString &serviceBaseUrl, const QString);
-    void statusUpdated(const QString &serviceBaseUrl, const QString);
+    void statusUpdated(const QString &serviceBaseUrl, const QString &status, const QString &message = QString());
 
 public Q_SLOTS:
     void appAuthorized(const QString &authorizeUrl, const QString &verifier);
     void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
 
 private:
+    void init();
     void requestTokenFromService();
     void accessTokenFromService();
     QString errorMessage(int e);
 
     QOAuthHelperPrivate* d;
-    QString m_serviceBaseUrl;
+    //QString m_serviceBaseUrl;
 };
 
 #endif
