@@ -88,7 +88,7 @@ QByteArray paramsToString(const ParamMap &parameters, ParsingMode mode)
 QByteArray createSignature(const QString &requestUrl, HttpMethod method, const QByteArray &token,
                            const QByteArray &tokenSecret, ParamMap *params)
 {
-    kDebug() << "creating signature";
+    //kDebug() << "creating signature";
     // create nonce
     QCA::InitializationVector iv(16);
     QByteArray nonce = iv.toByteArray().toHex();
@@ -142,7 +142,7 @@ QByteArray createSignature(const QString &requestUrl, HttpMethod method, const Q
 
     // percent-encode the digest
     QByteArray signature = digest.toPercentEncoding();
-    kDebug() << "Signature: " << key << " // " << signature;
+    //kDebug() << "Signature: " << key << " // " << signature;
     return signature;
 }
 

@@ -218,25 +218,18 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
 void TwitterEngine::authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl)
 {
-//     kDebug() << "SBU: " << serviceBaseUrl;
+    if (serviceBaseUrl == "/") return;
+    kDebug() << "SBU: " << serviceBaseUrl;
     authorizationStatusMessageUpdated("Status:" + serviceBaseUrl, "Authorizing App");
     authorizationStatusUpdated("Status:" + serviceBaseUrl, "Busy");
-    //scheduleSourcesUpdated();
     if (!m_webView.contains(serviceBaseUrl)) {
-//         kDebug() << "NEW KWEbvIEW";
+        kDebug() << "NEW KWEbvIEW";
         m_webView[serviceBaseUrl] = new KWebView(0);
     }
     m_serviceBaseUrl[authorizeUrl] = serviceBaseUrl;
     connect(m_webView[serviceBaseUrl]->page(), SIGNAL(loadFinished(bool)), SLOT(appAuthorized()));
+    kDebug() << " appAuthorized URL " << pageUrl;
     m_webView[serviceBaseUrl]->page()->mainFrame()->load(pageUrl);
-    if (!m_dialog) {
-        m_dialog = new KDialog();
-        m_dialog->setMainWidget(m_webView[serviceBaseUrl]);
-        m_dialog->setCaption( "authorize application" );
-        m_dialog->setButtons( KDialog::Ok | KDialog::Cancel);
-        m_dialog->show();
-    }
-
 }
 
 void TwitterEngine::accessTokenReceived(const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret)
@@ -251,17 +244,17 @@ void TwitterEngine::appAuthorized()
 {
     QWebPage *page = dynamic_cast<QWebPage*>(sender());
     if (!page) {
-        kDebug() << "Invalid ..";
         return;
     }
 
     QWebFrame* mf = page->mainFrame();
-//     kDebug() << "Page URL:" << page->mainFrame()->url();
+    kDebug() << "Page URL:" << page->mainFrame()->url();
 //     kDebug() << m_serviceBaseUrl;
     QString u = page->mainFrame()->url().toString();
 //     kDebug() << u << " == " << m_authorizeUrls;
     QString serviceBaseUrl = m_serviceBaseUrl[u.split("?").at(0)];
     if (m_serviceBaseUrl.contains(u)) {
+        kDebug() << "App Authorized. Yay.";
         QString s = m_serviceBaseUrl[u];
         authorizationStatusMessageUpdated(serviceBaseUrl, "App authorized");
         authorizationStatusUpdated(serviceBaseUrl, "Busy");
@@ -270,8 +263,13 @@ void TwitterEngine::appAuthorized()
             pin = code.toPlainText();
 //             kDebug() << "tag:" << code.tagName() << "PIN:" << pin;
         };
+
+        foreach (const QWebElement &code, mf->findAllElements("#oauth_pin")) {
+            pin = code.toPlainText();
+//             kDebug() << "tag:" << code.tagName() << "PIN:" << pin;
+        };
         if (!pin.isEmpty()) {
-//             kDebug() << "We're done!" << s << u << pin;
+            kDebug() << "We're done!" << s << u << pin;
             emit appAuthSucceeded(u, pin);
             if (m_dialog) {
                 m_dialog->close();
@@ -279,25 +277,54 @@ void TwitterEngine::appAuthorized()
             return;
         }
     } else {
-//         kDebug() << "SBU::::" << serviceBaseUrl;
+        // The remote service challenges app authorization, this means that the
+        // user has to log in to the remote site to retrieve a PIN back, which
+        // in turn will produce the accessToken and accessTokenSecret pair in
+        // the next, final authorization step.
         authorizationStatusMessageUpdated(serviceBaseUrl, "Loading App auth");
         authorizationStatusUpdated(serviceBaseUrl, "Busy");
-//         setData("Status:" + serviceBaseUrl, "Authorization", "Loading App Auth");
-//         scheduleSourcesUpdated();
+        bool showDialog = false; // be bold, do not do any user interaction.
 
         const QString u = m_authHelper[serviceBaseUrl]->user();
         const QString p = m_authHelper[serviceBaseUrl]->password();
-        // we have to log in ...
-        QString script = "var userName = document.getElementById(\"username_or_email\"); userName.value = \"" + u + "\";\n";
-        script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + p + "\";\n");
-        mf->evaluateJavaScript(script);
-//         kDebug() << "Script 1 run." << script;
-        script = "";
-        script.append("var ackButton = document.getElementById(\"allow\"); ackButton.click();");
-        mf->evaluateJavaScript(script);
-//         kDebug() << "Script 2 run." << script;
-        //kDebug() << "Script run." << script;
-        //page->mainFrame()->evaluateJavaScript(script);
+        // we have to log in, let's see if we can do that automatically...
+
+        // For Twitter, there are two cases:
+        // - the user is already logged in, we just have to click the accept button
+        // - the user is not logged in, in that case the user/password have to be
+        //   be filled in. We happen to know that, as it's the argument to the "auth"
+        //   operation in the dataengine.
+        if (serviceBaseUrl.toLower().contains("twitter.com")) {
+            // Try to fill in user/pass into the form
+            QString script = "var userName = document.getElementById(\"username_or_email\"); userName.value = \"" + u + "\";\n";
+            script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + p + "\";\n");
+            mf->evaluateJavaScript(script);
+            // Evaluate the button click separately, as the above script might abort,
+            // and not all lines are actually executed.
+            script = "";
+            script.append("var ackButton = document.getElementById(\"allow\"); ackButton.click();");
+            mf->evaluateJavaScript(script);
+    //         kDebug() << "Script 2 run." << script;
+            //kDebug() << "Script run." << script;
+            //page->mainFrame()->evaluateJavaScript(script);
+        } else if (serviceBaseUrl.toLower().contains("identi.ca")) {
+            kDebug() << "Identi.ca hacks not implemented, show dialog";
+            QString script = "var userName = document.getElementById(\"nickname\"); userName.value = \"" + u + "\";\n";
+            script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + p + "\";\n");
+            mf->evaluateJavaScript(script);
+            // Evaluate the button click separately, as the above script might abort,
+            // and not all lines are actually executed.
+            script = "";
+            script.append("var ackButton = document.getElementById(\"allow_submit\"); ackButton.click();");
+            mf->evaluateJavaScript(script);
+        }
+        if (showDialog && !m_dialog) { // FIXME: unsafe
+            m_dialog = new KDialog();
+            m_dialog->setMainWidget(m_webView[serviceBaseUrl]);
+            m_dialog->setCaption( "authorize application" );
+            m_dialog->setButtons( KDialog::Ok | KDialog::Cancel);
+            m_dialog->show();
+        }
     }
     //https://api.twitter.com/oauth/authorize
 }
