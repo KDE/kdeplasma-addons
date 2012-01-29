@@ -32,6 +32,7 @@
 #include <Plasma/PopupApplet>
 
 class ArrowWidget;
+class ButtonBar;
 class CheckNewStrips;
 class ComicLabel;
 class ComicModel;
@@ -43,14 +44,8 @@ class KAction;
 class KJob;
 class QAction;
 class QGraphicsLayout;
-class QPropertyAnimation;
 class QSortFilterProxyModel;
 class QTimer;
-
-namespace Plasma {
-class Frame;
-class PushButton;
-}
 
 class ComicApplet : public Plasma::PopupApplet
 {
@@ -173,14 +168,9 @@ class ComicApplet : public Plasma::PopupApplet
         QSizeF mLastSize;
         QSizeF mIdealSize;
         Plasma::DataEngine *mEngine;
-        Plasma::Frame *mFrame;
-        QPropertyAnimation *mFrameAnim;
         ComicLabel *mLabelId;
         ComicLabel *mLabelTop;
         ComicLabel *mLabelUrl;
-        Plasma::PushButton *mPrevButton;
-        Plasma::PushButton *mNextButton;
-        Plasma::PushButton *mZoomButton;
 
         ImageWidget *mImageWidget;
         ArrowWidget *mLeftArrow;
@@ -196,6 +186,7 @@ class ComicApplet : public Plasma::PopupApplet
             ShowIcon = 0x2
         };
         int mTabView;
+        ButtonBar *mButtonBar;
 };
 
 K_EXPORT_PLASMA_APPLET( comic, ComicApplet )

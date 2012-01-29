@@ -24,8 +24,8 @@
 #include "comicarchivejob.h"
 #include "checknewstrips.h"
 #include "comicwidgets.h"
+#include "buttonbar.h"
 
-#include <QtCore/QPropertyAnimation>
 #include <QtCore/QTimer>
 #include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QGraphicsScene>
@@ -45,7 +45,6 @@
 #include <KNotification>
 #include <kuiserverjobtracker.h>
 #include <knuminput.h>
-#include <KPushButton>
 #include <KRun>
 #include <KStandardShortcut>
 #include <KTemporaryFile>
@@ -65,8 +64,6 @@ using namespace Nepomuk::Vocabulary;
 #endif
 
 #include <Plasma/Containment>
-#include <Plasma/Frame>
-#include <Plasma/PushButton>
 #include <Plasma/Theme>
 #include <plasma/tooltipmanager.h>
 
@@ -142,12 +139,8 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mFullViewWidget( 0 ),
       mActionShop( 0 ),
       mEngine( 0 ),
-      mFrame( 0 ),
-      mFrameAnim( 0 ),
-      mPrevButton( 0 ),
-      mNextButton( 0 ),
-      mZoomButton( 0 ),
-      mTabAdded( false )
+      mTabAdded( false ),
+      mButtonBar(0)
 {
     setHasConfigurationInterface( true );
     resize( 600, 250 );
@@ -1001,9 +994,9 @@ void ComicApplet::updateButtons()
     mLeftArrow->setVisible( !mArrowsOnHover && mShowPreviousButton );
     mRightArrow->setVisible( !mArrowsOnHover && mShowNextButton );
 
-    if ( mNextButton && mPrevButton ) {
-        mNextButton->setEnabled( mShowNextButton );
-        mPrevButton->setEnabled( mShowPreviousButton );
+    if (mButtonBar) {
+        mButtonBar->setNextEnabled(mShowNextButton);
+        mButtonBar->setPrevEnabled(mShowPreviousButton);
     }
 }
 
@@ -1116,16 +1109,14 @@ bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
 
     switch (event->type()) {
         case QEvent::GraphicsSceneHoverLeave:
-            if ( mArrowsOnHover && mFrameAnim ) {
-                mFrameAnim->setDirection( QAbstractAnimation::Backward );
-                mFrameAnim->start();
+            if (mArrowsOnHover && mButtonBar) {
+                mButtonBar->hide();
             }
 
             break;
         case QEvent::GraphicsSceneHoverEnter:
-            if ( !configurationRequired() && mArrowsOnHover && mFrameAnim ) {
-                mFrameAnim->setDirection( QAbstractAnimation::Forward );
-                mFrameAnim->start();
+            if (!configurationRequired() && mArrowsOnHover && mButtonBar) {
+                mButtonBar->show();
             }
 
             break;
@@ -1155,10 +1146,10 @@ bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
             }
             break;
         case QEvent::GraphicsSceneResize:
-            if ( mFrame ) {
-                QPointF buttons( ( mMainWidget->size().width() - mFrame->size().width() ) / 2,
-                                mMainWidget->contentsRect().bottom() - mFrame->size().height() - 5 );
-                mFrame->setPos( buttons );
+            if (mButtonBar) {
+                QPointF buttons((mMainWidget->size().width() - mButtonBar->size().width()) / 2,
+                                mMainWidget->contentsRect().bottom() - mButtonBar->size().height() - 5);
+                mButtonBar->setPos(buttons);
             }
 
             break;
@@ -1182,52 +1173,19 @@ void ComicApplet::slotScaleToContent()
 
 void ComicApplet::buttonBar()
 {
-    if ( mArrowsOnHover ) {
-        if ( !mFrame ) {
-            mFrame = new Plasma::Frame( mMainWidget );
-            mFrame->setZValue( 10 );
-            QGraphicsLinearLayout *l = new QGraphicsLinearLayout();
-            mPrevButton = new Plasma::PushButton( mFrame );
-            mPrevButton->nativeWidget()->setIcon( KIcon( "arrow-left" ) );
-            mPrevButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-            mPrevButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
-            connect( mPrevButton, SIGNAL(clicked()), this , SLOT(slotPreviousDay()) );
-            l->addItem( mPrevButton );
-
-            mZoomButton = new Plasma::PushButton( mFrame );
-            mZoomButton->nativeWidget()->setIcon( KIcon( "zoom-original" ) );
-            mZoomButton->nativeWidget()->setToolTip( i18n( "Show at actual size in a different view.  Alternatively, click with the middle mouse button on the comic." ) );
-            mZoomButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-            mZoomButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
-            connect( mZoomButton, SIGNAL(clicked()), this, SLOT(fullView()) );
-            l->addItem( mZoomButton );
-
-            mNextButton = new Plasma::PushButton( mFrame );
-            mNextButton->nativeWidget()->setIcon( KIcon( "arrow-right" ) );
-            mNextButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-            mNextButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
-            connect( mNextButton, SIGNAL(clicked()), this , SLOT(slotNextDay()) );
-            l->addItem( mNextButton );
-            mFrame->setLayout( l );
-            mFrame->setFrameShadow( Plasma::Frame::Raised );
-            // To get correct frame size in constraintsEvent
-            l->activate();
-            mFrame->setOpacity( 0.0 );
-
-            mFrameAnim = new QPropertyAnimation( mFrame, "opacity", mFrame );
-            mFrameAnim->setDuration( 100 );
-            mFrameAnim->setStartValue( 0.0 );
-            mFrameAnim->setEndValue( 1.0 );
+    if (mArrowsOnHover) {
+        if (!mButtonBar) {
+            mButtonBar = new ButtonBar(this);
+            connect(mButtonBar, SIGNAL(prevClicked()), this, SLOT(slotPreviousDay()));
+            connect(mButtonBar, SIGNAL(nextClicked()), this, SLOT(slotNextDay()));
+            connect(mButtonBar, SIGNAL(zoomClicked()), this, SLOT(fullView()));
 
             // Set frame position
             constraintsEvent( Plasma::SizeConstraint );
         }
     } else {
-        delete mFrame;
-        mFrame = 0;
-        mFrameAnim = 0;
-        mPrevButton = 0;
-        mNextButton = 0;
+        delete mButtonBar;
+        mButtonBar = 0;
     }
 }
 
