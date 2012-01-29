@@ -29,13 +29,13 @@
 
 #include <KUrl>
 #include <Plasma/DataEngine>
-#include <Plasma/Label>
 #include <Plasma/PopupApplet>
-#include <Plasma/TabBar>
 
 class ArrowWidget;
 class CheckNewStrips;
+class ComicLabel;
 class ComicModel;
+class ComicTabBar;
 class ConfigWidget;
 class FullViewWidget;
 class ImageWidget;
@@ -51,98 +51,6 @@ namespace Plasma {
 class Frame;
 class PushButton;
 }
-
-//Helper class, sets the sizeHint to 0 if the TabBar is hidden
-class ComicTabBar : public Plasma::TabBar
-{
-    public:
-        ComicTabBar( QGraphicsWidget *parent = 0 ) : TabBar( parent ) {}
-        ~ComicTabBar() {}
-
-        void removeAllTabs()
-        {
-            while ( this->count() ) {
-                this->removeTab( 0 );
-            }
-        }
-
-        bool hasHighlightedTabs() const
-        {
-            for ( int i = 0; i < count(); ++i ) {
-                if ( isTabHighlighted( i ) ) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        int nextHighlightedTab( int index ) const
-        {
-            int firstHighlighted = -1;
-            for ( int i = 0; i < count(); ++i ) {
-                if ( isTabHighlighted( i ) ) {
-                    if ( i > index ) {
-                        return i;
-                    } else if ( firstHighlighted == -1 ) {
-                        firstHighlighted = i;
-                    }
-                }
-            }
-
-            return ( firstHighlighted != -1 ? firstHighlighted : index );
-        }
-
-    protected:
-        QSizeF sizeHint( Qt::SizeHint which, const QSizeF &constraint = QSizeF() ) const
-        {
-            if ( !isVisible() ) {
-                return QSizeF( 0, 0 );
-            }
-            return QGraphicsWidget::sizeHint( which, constraint );
-        }
-
-        void hideEvent( QHideEvent *event )
-        {
-            updateGeometry();
-            QGraphicsWidget::hideEvent( event );
-        }
-
-        void showEvent( QShowEvent *event )
-        {
-            updateGeometry();
-            QGraphicsWidget::showEvent( event );
-        }
-};
-
-//Helper class, sets the sizeHint to 0 if the Label is hidden
-class ComicLabel : public Plasma::Label
-{
-    public:
-        ComicLabel( QGraphicsWidget *parent = 0 ) : Plasma::Label( parent ) {}
-        ~ComicLabel() {}
-
-    protected:
-        QSizeF sizeHint( Qt::SizeHint which, const QSizeF &constraint = QSizeF() ) const
-        {
-            if ( !isVisible() ) {
-                return QSizeF( 0, 0 );
-            }
-            return QGraphicsProxyWidget::sizeHint( which, constraint );
-        }
-
-        void hideEvent( QHideEvent *event )
-        {
-            updateGeometry();
-            QGraphicsProxyWidget::hideEvent( event );
-        }
-
-        void showEvent( QShowEvent *event )
-        {
-            updateGeometry();
-            QGraphicsProxyWidget::showEvent( event );
-        }
-};
 
 class ComicApplet : public Plasma::PopupApplet
 {

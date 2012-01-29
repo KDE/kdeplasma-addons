@@ -23,6 +23,7 @@
 #include "comicarchivedialog.h"
 #include "comicarchivejob.h"
 #include "checknewstrips.h"
+#include "comicwidgets.h"
 
 #include <QtCore/QPropertyAnimation>
 #include <QtCore/QTimer>
