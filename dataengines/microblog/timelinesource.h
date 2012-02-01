@@ -30,6 +30,7 @@
 
 // forward declarations
 class QXmlStreamReader;
+class QOAuthHelper;
 
 class KJob;
 
@@ -106,6 +107,7 @@ public:
     bool useOAuth() const;
     QByteArray oauthToken() const;
     QByteArray oauthTokenSecret() const;
+    void setOAuthHelper(QOAuthHelper *authHelper);
 
     Plasma::Service* createService();
     void startAuthorization(const QString &password);
@@ -142,6 +144,7 @@ private:
     QString m_id;
 
     bool m_useOAuth;
+    QOAuthHelper *m_authHelper;
     QString m_user;
     QByteArray m_oauthTemp;
     KIO::Job *m_authJob;
