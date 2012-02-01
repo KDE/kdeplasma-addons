@@ -148,10 +148,10 @@ void QOAuthHelper::requestTokenFromService()
 
     QOAuth::ParamMap params;
     params.insert("oauth_callback", "oob");
-    kDebug() << "starting token request ...";
+//     kDebug() << "starting token request ...";
     QOAuth::ParamMap reply = d->interface->requestToken(d->requestTokenUrl,
                                                         QOAuth::GET, QOAuth::HMAC_SHA1, params);
-    kDebug() << "token request done......" << reply;
+//     kDebug() << "token request done......" << reply;
 
     QString e;
     if ( d->interface->error() == QOAuth::NoError ) {
@@ -225,7 +225,7 @@ QString QOAuthHelper::errorMessage(int e) {
 
 void QOAuthHelper::accessTokenFromService()
 {
-    kDebug() << "start ... accessToken. TODO insert verifier" << d->verifier;
+//     kDebug() << "start ... accessToken. TODO insert verifier" << d->verifier;
     QOAuth::ParamMap params = QOAuth::ParamMap();
     params.insert("oauth_callback", "oob");
     if (d->serviceBaseUrl.toLower().contains("identi.ca")) {
@@ -234,7 +234,7 @@ void QOAuthHelper::accessTokenFromService()
     QOAuth::ParamMap reply = d->interface->accessToken(d->accessTokenUrl, QOAuth::GET,
                                                        d->requestToken, d->requestTokenSecret,
                                                        QOAuth::HMAC_SHA1, params);
-     kDebug() << "end ...... accessToken";
+//      kDebug() << "end ...... accessToken";
 //     kDebug() << " MAP: " << params;
     QString e;
     if ( d->interface->error() == QOAuth::NoError ) {
@@ -242,7 +242,7 @@ void QOAuthHelper::accessTokenFromService()
         d->accessTokenSecret = reply.value(QOAuth::tokenSecretParameterName());
 
         //QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
-        kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
+//         kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
         //kDebug() << "Surf to: " << auth_url;
         emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
         d->busy = true;

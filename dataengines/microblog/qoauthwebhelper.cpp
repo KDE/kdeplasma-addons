@@ -107,11 +107,11 @@ void QOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString 
     Q_UNUSED(serviceBaseUrl);
     Q_UNUSED(authorizeUrl);
     if (d->serviceBaseUrl == "/" || d->serviceBaseUrl.isEmpty()) return;
-    kDebug() << "SBU: " << d->serviceBaseUrl;
+//     kDebug() << "SBU: " << d->serviceBaseUrl;
 //     authorizationStatusMessageUpdated("Status:" + d->serviceBaseUrl, "Authorizing App");
 //     authorizationStatusUpdated("Status:" + d->serviceBaseUrl, "Busy");
     if (!d->webView) {
-        kDebug() << "NEW KWEbvIEW";
+//         kDebug() << "NEW KWEbvIEW";
         d->dialog = new KDialog();
         d->dialog->setCaption( "authorize application" );
         d->dialog->setButtons( KDialog::Ok | KDialog::Cancel);
@@ -122,7 +122,7 @@ void QOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString 
         connect(d->webView->page(), SIGNAL(loadFinished(bool)), SLOT(loadFinished()));
     }
     d->authorizeUrls[authorizeUrl] = d->serviceBaseUrl;
-    kDebug() << " appAuthorized URL " << pageUrl;
+//     kDebug() << " appAuthorized URL " << pageUrl;
     d->webView->page()->mainFrame()->load(pageUrl);
 }
 
@@ -139,7 +139,7 @@ void QOAuthWebHelper::loadFinished()
     }
 
     QWebFrame* mf = page->mainFrame();
-    kDebug() << "Page URL:" << page->mainFrame()->url();
+//     kDebug() << "Page URL:" << page->mainFrame()->url();
     QString u = page->mainFrame()->url().toString();
     if (d->authorizeUrls.contains(u)) {
         QString pin;
@@ -153,7 +153,7 @@ void QOAuthWebHelper::loadFinished()
 //             kDebug() << "tag:" << code.tagName() << "PIN:" << pin;
         };
         if (!isIdentica() || !pin.isEmpty()) {
-            kDebug() << "We're done!" << u << pin;
+//             kDebug() << "We're done!" << u << pin;
             d->timer->stop(); // No need to show the dialog. :)
             emit statusUpdated(d->serviceBaseUrl, "Busy", "Application authorized");
             emit appAuthSucceeded(u, pin);
@@ -179,6 +179,7 @@ void QOAuthWebHelper::loadFinished()
         //   operation in the dataengine.
         if (!isIdentica()) {
             // Try to fill in user/pass into the form
+            //kDebug() << "twitter.com hacks JavaScript hacks";
             QString script = "var userName = document.getElementById(\"username_or_email\"); userName.value = \"" + d->user + "\";\n";
             script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + d->password + "\";\n");
             mf->evaluateJavaScript(script);
@@ -188,18 +189,18 @@ void QOAuthWebHelper::loadFinished()
             script.append("var ackButton = document.getElementById(\"allow\"); ackButton.click();");
             mf->evaluateJavaScript(script);
         } else if (d->serviceBaseUrl.toLower().contains("identi.ca")) {
-            kDebug() << "Identi.ca hacks not implemented, show dialog";
+            //kDebug() << "Identi.ca hacks JavaScript hacks";
             QVariant r;
             QString script = "var userName = document.getElementById(\"nickname\"); userName.value = \"" + d->user + "\";\n";
             script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + d->password + "\";\n");
             r = mf->evaluateJavaScript(script);
-            kDebug() << "Ran script 1" << r;
+            //kDebug() << "Ran script 1" << script << r;
             // Evaluate the button click separately, as the above script might abort,
             // and not all lines are actually executed.
             script = "";
             script.append("var ackButton = document.getElementById(\"allow_submit\"); ackButton.click();");
             r = mf->evaluateJavaScript(script);
-            kDebug() << "Ran script 2" << r;
+            //kDebug() << "Ran script 2" << script << r;
         }
         d->timer->start();
     }
