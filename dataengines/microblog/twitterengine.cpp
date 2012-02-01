@@ -79,10 +79,11 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
 
 Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 {
+    kDebug() << " finding source..." << name;
     TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
-//     kDebug() << "Service name: " << name;
+    kDebug() << "Service name: " << name;
     if (!source) {
-        kDebug() << "source not there.";
+        kDebug() << "source not there." << name << sources();
         return Plasma::DataEngine::serviceForSource(name);
     }
 
@@ -173,6 +174,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         authHelper = m_authHelper[serviceBaseUrl];
     }
 
+    const QString user = account.at(0);
     if (requestType == TimelineSource::User) {
         UserSource *source = dynamic_cast<UserSource*>(containerForSource(name));
 
@@ -195,7 +197,13 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
 
         if (!source) {
+            if (user.isEmpty()) {
+                return false;
+            }
+            kDebug() << "New TimelineSource" << name;
+
             source = new TimelineSource(who, requestType, this);
+            source->setOAuthHelper(authHelper);
             connect(source, SIGNAL(authorize(const QString&, const QString&, const QString&)),
                     authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
             source->setObjectName(name);
@@ -213,6 +221,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
 void TwitterEngine::authorizationStatusUpdated(const QString& serviceBaseUrl, const QString& status, const QString &message)
 {
+    kDebug() << "Status updated ..." << serviceBaseUrl << status << message;
     setData("Status:" + serviceBaseUrl, "AuthorizationMessage", status);
     setData("Status:" + serviceBaseUrl, "Authorization", status);
     scheduleSourcesUpdated();

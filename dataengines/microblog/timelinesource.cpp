@@ -19,6 +19,7 @@
  */
 
 #include "timelinesource.h"
+#include "qoauthhelper.h"
 
 #include <QXmlStreamReader>
 #include <QtCrypto/QtCrypto>
@@ -49,6 +50,7 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
 
     } else if (operation == "update") {
         m_url.setPath(m_url.path()+QString("statuses/%1.xml").arg(operation));
+        kDebug() << "Updating status" << m_url;
 
     } else {
         m_url.setPath(m_url.path()+operation+".xml");
@@ -67,6 +69,8 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
 
         //m_url.setUser(source->account());
         //m_url.setPass(source->password());
+    } else {
+        kDebug() << "posting update ..." << source->serviceBaseUrl() << m_url;
     }
 }
 
@@ -88,7 +92,7 @@ void TweetJob::start()
             }
         }
     }
-
+    kDebug() << "posting to " << m_url;
     KIO::Job *job = KIO::http_post(m_url, data, KIO::HideProgressInfo);
 
     if (m_source->useOAuth()) {
@@ -106,7 +110,7 @@ void TweetJob::start()
                 }
             }
         }
-
+        // FIXME: use full oauth here... and in other places
         OAuth::signRequest(job, m_url.pathOrUrl(), OAuth::POST, m_source->oauthToken(),
                            m_source->oauthTokenSecret(), params);
     }
@@ -166,6 +170,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
 TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObject* parent)
     : Plasma::DataContainer(parent),
       m_job(0),
+      m_authHelper(0),
       m_authJob(0),
       m_qcaInitializer(0)
 {
@@ -207,7 +212,7 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObj
     if (!m_useOAuth) {
         m_url.setUser(account.at(0));
     }
-
+    kDebug() << "    CTOR ::: serviceBaseUrl" << this << serviceBaseUrl() << m_url;
     // .. and now actually get the data
     update();
 }
@@ -225,6 +230,11 @@ Plasma::Service* TimelineSource::createService()
 void TimelineSource::startAuthorization(const QString& password)
 {
     emit authorize(m_serviceBaseUrl.pathOrUrl(), m_user, password);
+}
+
+void TimelineSource::setOAuthHelper(QOAuthHelper* authHelper)
+{
+    m_authHelper = authHelper;
 }
 
 
