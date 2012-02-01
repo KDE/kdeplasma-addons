@@ -1159,13 +1159,13 @@ void ComicApplet::buttonBar()
 {
     if (mArrowsOnHover) {
         if (!mButtonBar) {
-            mButtonBar = new ButtonBar(this);
+            mButtonBar = new ButtonBar(mMainWidget);
             connect(mButtonBar, SIGNAL(prevClicked()), this, SLOT(slotPreviousDay()));
             connect(mButtonBar, SIGNAL(nextClicked()), this, SLOT(slotNextDay()));
             connect(mButtonBar, SIGNAL(zoomClicked()), this, SLOT(fullView()));
 
             // Set frame position
-            constraintsEvent( Plasma::SizeConstraint );
+            constraintsEvent(Plasma::SizeConstraint);
         }
     } else {
         delete mButtonBar;

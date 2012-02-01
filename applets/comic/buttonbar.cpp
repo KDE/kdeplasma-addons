@@ -29,10 +29,10 @@
 #include <QtGui/QGraphicsLinearLayout>
 #include <QtCore/QPropertyAnimation>
 
-ButtonBar::ButtonBar(QObject *parent)
+ButtonBar::ButtonBar(QGraphicsWidget *parent)
   : QObject(parent)
 {
-    mFrame = new Plasma::Frame();
+    mFrame = new Plasma::Frame(parent);
     mFrame->setZValue(10);
     QGraphicsLinearLayout *l = new QGraphicsLinearLayout();
     mPrev = new Plasma::PushButton(mFrame);
@@ -70,7 +70,6 @@ ButtonBar::ButtonBar(QObject *parent)
 
 ButtonBar::~ButtonBar()
 {
-    delete mFrame;
 }
 
 QSizeF ButtonBar::size() const

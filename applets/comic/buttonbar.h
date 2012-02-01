@@ -25,6 +25,7 @@
 
 class QPointF;
 class QPropertyAnimation;
+class QGraphicsWidget;
 
 namespace Plasma {
     class Frame;
@@ -46,7 +47,7 @@ class ButtonBar : public QObject
          * @note the button bar is hidden by default and has no
          * position associated with it
          */
-        explicit ButtonBar(QObject *parent);
+        explicit ButtonBar(QGraphicsWidget *parent);
         ~ButtonBar();
 
         QSizeF size() const;
@@ -58,14 +59,12 @@ class ButtonBar : public QObject
         void setPos(const QPointF &pos);
 
         /**
-         * Will fade in the button bar if it was hidden
-         * TODO the hidden part
+         * Will fade in the button bar
          */
         void show();
 
         /**
-         * Will fade out the button bar if it was visible
-         * TODO the visible part
+         * Will fade out the button bar
          */
         void hide();
 
