@@ -39,7 +39,6 @@
 #include <KDatePicker>
 #include <KDebug>
 #include <KFileDialog>
-#include <KGlobalSettings>
 #include <KInputDialog>
 #include <KIO/NetAccess>
 #include <KNotification>
@@ -140,7 +139,8 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mActionShop( 0 ),
       mEngine( 0 ),
       mTabAdded( false ),
-      mButtonBar(0)
+      mButtonBar(0),
+      mSavingDir(0)
 {
     setHasConfigurationInterface( true );
     resize( 600, 250 );
@@ -158,6 +158,8 @@ void ComicApplet::init()
     Plasma::ToolTipManager::self()->registerWidget( this );
 
     globalComicUpdater->init( globalConfig() );
+    mSavingDir = new SavingDir(config());
+
     configChanged();
     
     buttonBar();
@@ -246,6 +248,7 @@ void ComicApplet::init()
 ComicApplet::~ComicApplet()
 {
     delete mFullViewWidget;
+    delete mSavingDir;
 }
 
 QGraphicsWidget *ComicApplet::graphicsWidget()
@@ -716,7 +719,6 @@ void ComicApplet::configChanged()
     mLastSize = mMaxSize;
 
     mTabView = cg.readEntry( "tabView", ShowText | ShowIcon );
-    mSavingDir = cg.readEntry( "savingDir", QString() );
 
     globalComicUpdater->load();
 }
@@ -734,7 +736,6 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
     cg.writeEntry( "tabView", mTabView );
-    cg.writeEntry( "savingDir", mSavingDir );
     cg.writeEntry( "checkNewComicStripsIntervall", mCheckNewComicStripsIntervall );
 
     globalComicUpdater->save();
@@ -903,16 +904,16 @@ void ComicApplet::updateSize()
 
 void ComicApplet::createComicBook()
 {
-    ComicArchiveDialog *dialog = new ComicArchiveDialog( mComicIdentifier, mComicTitle, mComicType, mCurrentIdentifierSuffix, mFirstIdentifierSuffix, getSavingDir() );
-    dialog->setAttribute( Qt::WA_DeleteOnClose );//to have destroyed emitted upon closing
+    ComicArchiveDialog *dialog = new ComicArchiveDialog(mComicIdentifier, mComicTitle, mComicType,
+                                                        mCurrentIdentifierSuffix, mSavingDir->getDir());
+    dialog->setAttribute(Qt::WA_DeleteOnClose);//to have destroyed emitted upon closing
     connect( dialog, SIGNAL(archive(int,KUrl,QString,QString)), this, SLOT(slotArchive(int,KUrl,QString,QString)) );
     dialog->show();
 }
 
 void ComicApplet::slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier )
 {
-    mSavingDir = dest.directory();
-    saveConfig();
+    mSavingDir->setDir(dest.directory());
 
     kDebug() << "Archiving:" << mComicIdentifier <<  archiveType << dest << fromIdentifier << toIdentifier;
     ComicArchiveJob *job = new ComicArchiveJob( dest, mEngine, static_cast< ComicArchiveJob::ArchiveType >( archiveType ), mComicType,  mComicIdentifier, this );
@@ -1010,22 +1011,6 @@ void ComicApplet::updateContextMenu()
     }
 }
 
-QString ComicApplet::getSavingDir() const
-{
-    QString dir = mSavingDir;
-    if ( dir.isEmpty() ) {
-        dir = KGlobalSettings::picturesPath();
-    }
-    if ( dir.isEmpty() ) {
-        dir = KGlobalSettings::downloadPath();
-    }
-    if ( dir.isEmpty() ) {
-        dir = QDir::homePath();
-    }
-
-    return dir;
-}
-
 void ComicApplet::slotSaveComicAs()
 {
     KTemporaryFile tempFile;
@@ -1039,7 +1024,7 @@ void ComicApplet::slotSaveComicAs()
 
     KUrl srcUrl( tempFile.fileName() );
 
-    QString dir = getSavingDir();
+    QString dir = mSavingDir->getDir();
     const QString name = mComicTitle + " - " + mCurrentIdentifierSuffix + ".png";
     KUrl destUrl = KUrl( dir );
     destUrl.addPath( name );
@@ -1049,8 +1034,7 @@ void ComicApplet::slotSaveComicAs()
         return;
     }
 
-    mSavingDir = destUrl.directory();
-    saveConfig();
+    mSavingDir->setDir(destUrl.directory());
 
 #ifdef HAVE_NEPOMUK
     bool worked = KIO::NetAccess::file_copy( srcUrl, destUrl );

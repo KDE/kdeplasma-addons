@@ -46,6 +46,7 @@ class QAction;
 class QGraphicsLayout;
 class QSortFilterProxyModel;
 class QTimer;
+class SavingDir;
 
 class ComicApplet : public Plasma::PopupApplet
 {
@@ -107,7 +108,6 @@ class ComicApplet : public Plasma::PopupApplet
         void saveConfig();
         bool isInPanel() const;
         void setTabBarVisible( bool isVisible );//HACK what was in 4.4 does not seem to work anymore, so this was added
-        QString getSavingDir() const;
 
     private:
         static const int CACHE_LIMIT;
@@ -133,7 +133,6 @@ class ComicApplet : public Plasma::PopupApplet
         QString mCurrentIdentifierSuffix;
         QString mStoredIdentifierSuffix;
         QString mIdentifierError;
-        QString mSavingDir;
         QString mOldSource;
         ConfigWidget *mConfigWidget;
         bool mDifferentComic;
@@ -187,6 +186,7 @@ class ComicApplet : public Plasma::PopupApplet
         };
         int mTabView;
         ButtonBar *mButtonBar;
+        SavingDir *mSavingDir;
 };
 
 K_EXPORT_PLASMA_APPLET( comic, ComicApplet )
