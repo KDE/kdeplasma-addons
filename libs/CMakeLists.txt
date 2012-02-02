@@ -1,7 +1,10 @@
 
 add_subdirectory(plasmaweather)
 add_subdirectory(rtm)
-add_subdirectory(lancelot)
+
+if(${KDE_PLATFORM_PROFILE} STREQUAL "Desktop")
+    add_subdirectory(lancelot)
+endif(${KDE_PLATFORM_PROFILE} STREQUAL "Desktop")
 
 if(NOT WIN32 AND KDE4WORKSPACE_FOUND)
    add_subdirectory(lancelot-datamodels)
