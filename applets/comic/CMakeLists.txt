@@ -15,6 +15,7 @@ set(comic_SRCS
     comicarchivejob.cpp
     comicarchivedialog.cpp
     checknewstrips.cpp
+    comicdata.cpp
     buttonbar.cpp
     comicinfo.cpp
 )

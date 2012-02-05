@@ -22,10 +22,9 @@
 #ifndef COMIC_H
 #define COMIC_H
 
-#include "comicinfo.h"
+#include "comicdata.h"
 
 #include <QtCore/QDate>
-#include <QtGui/QImage>
 
 #include <KUrl>
 #include <Plasma/DataEngine>
@@ -114,29 +113,12 @@ class ComicApplet : public Plasma::PopupApplet
         ComicModel *mModel;
         QSortFilterProxyModel *mProxy;
 
-        QImage mImage;
         QDate mCurrentDay;
-        KUrl mWebsiteUrl;
-        KUrl mImageUrl;
-        KUrl mShopUrl;
-        QString mComicIdentifier;
-        QString mNextIdentifierSuffix;
-        QString mPreviousIdentifierSuffix;
-        QString mFirstIdentifierSuffix;
-        QString mLastIdentifierSuffix;
-        QString mComicAuthor;
-        QString mComicTitle;
-        QString mStripTitle;
-        QString mAdditionalText;
-        IdentifierType mComicType;
-        QString mShownIdentifierSuffix;
-        QString mCurrentIdentifierSuffix;
-        QString mStoredIdentifierSuffix;
+
         QString mIdentifierError;
         QString mOldSource;
         ConfigWidget *mConfigWidget;
         bool mDifferentComic;
-        bool mScaleComic;
         bool mShowPreviousButton;
         bool mShowNextButton;
         bool mShowComicUrl;
@@ -161,8 +143,6 @@ class ComicApplet : public Plasma::PopupApplet
         QAction *mActionShop;
         QAction *mActionStorePosition;
         KAction *mActionNextNewStripTab;
-        QMap< QString, int > mFirstStripNum;
-        QMap< QString, int > mMaxStripNum;
         QSizeF mMaxSize;
         QSizeF mLastSize;
         QSizeF mIdealSize;
@@ -185,6 +165,8 @@ class ComicApplet : public Plasma::PopupApplet
             ShowIcon = 0x2
         };
         int mTabView;
+
+        ComicData mCurrent;
         ButtonBar *mButtonBar;
         SavingDir *mSavingDir;
 };
