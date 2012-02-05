@@ -23,6 +23,7 @@
 #include "comicarchivedialog.h"
 #include "comicarchivejob.h"
 #include "checknewstrips.h"
+#include "stripselector.h"
 #include "comicwidgets.h"
 #include "buttonbar.h"
 #include "comicsaver.h"
@@ -37,17 +38,13 @@
 
 #include <KAction>
 #include <KConfigDialog>
-#include <KDatePicker>
 #include <KDebug>
-#include <KInputDialog>
 #include <KNotification>
 #include <kuiserverjobtracker.h>
-#include <knuminput.h>
 #include <KRun>
 #include <KStandardShortcut>
 
 #include <Plasma/Containment>
-#include <Plasma/Theme>
 #include <plasma/tooltipmanager.h>
 
 #include "arrowwidget.h"
@@ -59,49 +56,6 @@
 K_GLOBAL_STATIC( ComicUpdater, globalComicUpdater )
 
 const int ComicApplet::CACHE_LIMIT = 20;
-
-//NOTE based on GotoPageDialog KDE/kdegraphics/okular/part.cpp
-//BEGIN choose a strip dialog
-class ChooseStripNumDialog : public KDialog
-{
-    public:
-        ChooseStripNumDialog( QWidget *parent, int current, int min, int max )
-            : KDialog( parent )
-        {
-            setCaption( i18n( "Go to Strip" ) );
-            setButtons( Ok | Cancel );
-            setDefaultButton( Ok );
-
-            QWidget *widget = new QWidget( this );
-            setMainWidget( widget );
-
-            QVBoxLayout *topLayout = new QVBoxLayout( widget );
-            topLayout->setMargin( 0 );
-            topLayout->setSpacing( spacingHint() );
-            numInput = new KIntNumInput( current, widget );
-            numInput->setRange( min, max );
-            numInput->setEditFocus( true );
-            numInput->setSliderEnabled( true );
-
-            QLabel *label = new QLabel( i18n( "&Strip Number:" ), widget );
-            label->setBuddy( numInput );
-            topLayout->addWidget( label );
-            topLayout->addWidget( numInput ) ;
-            // A little bit extra space
-            topLayout->addSpacing( spacingHint() );
-            topLayout->addStretch( 10 );
-            numInput->setFocus();
-        }
-
-        int getStripNumber() const
-        {
-            return numInput->value();
-        }
-
-    protected:
-        KIntNumInput *numInput;
-};
-//END choose a strip dialog
 
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::PopupApplet( parent, args ),
@@ -646,21 +600,6 @@ void ComicApplet::saveConfig()
     globalComicUpdater->save();
 }
 
-void ComicApplet::slotChosenDay( const QDate &date )
-{
-    if (mCurrent.type() == Date) {
-        if (date <= mCurrentDay) {
-            QDate temp = QDate::fromString(mCurrent.first(), "yyyy-MM-dd");
-            if (temp.isValid() && date >= temp) {
-                updateComic(date.toString("yyyy-MM-dd"));
-                // even update if there is not first day identifierSuffix
-            } else if (!temp.isValid()) {
-                updateComic(date.toString("yyyy-MM-dd"));
-            }
-        }
-    }
-}
-
 void ComicApplet::slotNextDay()
 {
     updateComic(mCurrent.next());
@@ -707,29 +646,10 @@ void ComicApplet::slotReload()
 
 void ComicApplet::slotGoJump()
 {
-    const IdentifierType type = mCurrent.type();
-    if (type == Number) {
-        QPointer<ChooseStripNumDialog> pageDialog = new ChooseStripNumDialog(0, mCurrent.current().toInt(), mCurrent.firstStripNum(), mCurrent.maxStripNum());
-        if ( pageDialog->exec() == QDialog::Accepted ) {
-            updateComic( QString::number( pageDialog->getStripNumber() ) );
-        }
-        delete pageDialog;
-    } else if (type == Date) {
-        KDatePicker *calendar = new KDatePicker;
-        calendar->setAttribute(Qt::WA_DeleteOnClose);//to have destroyed emitted upon closing
-        calendar->setMinimumSize( calendar->sizeHint() );
-        calendar->setDate( QDate::fromString(mCurrent.current(), "yyyy-MM-dd"));
+    StripSelector *selector = StripSelectorFactory::create(mCurrent.type());
+    connect(selector, SIGNAL(stripChosen(QString)), this, SLOT(updateComic(QString)));
 
-        connect( calendar, SIGNAL(dateSelected(QDate)), this, SLOT(slotChosenDay(QDate)) );
-        connect( calendar, SIGNAL(dateEntered(QDate)), this, SLOT(slotChosenDay(QDate)) );
-        calendar->show();
-    } else if (type == String) {
-        bool ok;
-        const QString suffix = KInputDialog::getText(i18n("Go to Strip"), i18n("Strip identifier:"), mCurrent.current(), &ok);
-        if ( ok ) {
-            updateComic( suffix );
-        }
-    }
+    selector->select(mCurrent);
 }
 
 void ComicApplet::slotNextNewStrip()

@@ -19,6 +19,7 @@ set(comic_SRCS
     buttonbar.cpp
     comicinfo.cpp
     comicsaver.cpp
+    stripselector.cpp
 )
 
 kde4_add_ui_files(comic_SRCS

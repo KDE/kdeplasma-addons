@@ -66,7 +66,6 @@ class ComicApplet : public Plasma::PopupApplet
 
     private Q_SLOTS:
         void slotTabChanged( int newIndex );
-        void slotChosenDay( const QDate &date );
         void slotNextDay();
         void slotPreviousDay();
         void slotFirstDay();
@@ -92,6 +91,7 @@ class ComicApplet : public Plasma::PopupApplet
 
     public slots:
         void configChanged();
+        void updateComic(const QString &identifierSuffix = QString());
 
     protected:
         QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
@@ -99,7 +99,6 @@ class ComicApplet : public Plasma::PopupApplet
 
     private:
         void changeComic( bool differentComic );
-        void updateComic( const QString &identifierSuffix = QString() );
         void updateUsedComics();
         void updateButtons();
         void updateContextMenu();
