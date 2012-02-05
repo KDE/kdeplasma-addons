@@ -25,6 +25,7 @@
 #include "checknewstrips.h"
 #include "comicwidgets.h"
 #include "buttonbar.h"
+#include "comicsaver.h"
 
 #include <QtCore/QTimer>
 #include <QtGui/QGraphicsLinearLayout>
@@ -38,29 +39,12 @@
 #include <KConfigDialog>
 #include <KDatePicker>
 #include <KDebug>
-#include <KFileDialog>
 #include <KInputDialog>
-#include <KIO/NetAccess>
 #include <KNotification>
 #include <kuiserverjobtracker.h>
 #include <knuminput.h>
 #include <KRun>
 #include <KStandardShortcut>
-#include <KTemporaryFile>
-
-#ifdef HAVE_NEPOMUK
-#include <Nepomuk/Resource>
-#include <Nepomuk/ResourceManager>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <Nepomuk/Vocabulary/NCO>
-#include <Nepomuk/Vocabulary/NIE>
-#include <Nepomuk/Vocabulary/NFO>
-#include <Nepomuk/Vocabulary/PIMO>
-#include <nepomuk/utils.h>
-
-using namespace Nepomuk::Vocabulary;
-#endif
 
 #include <Plasma/Containment>
 #include <Plasma/Theme>
@@ -329,11 +313,6 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         layout->addItem( mRightArrow );
 
         mMainWidget->setLayout( layout );
-
-    #ifdef HAVE_NEPOMUK
-//         for manually saving the comics
-        Nepomuk::ResourceManager::instance()->init();
-    #endif
     }
 
     return mMainWidget;
@@ -940,76 +919,8 @@ void ComicApplet::updateContextMenu()
 
 void ComicApplet::slotSaveComicAs()
 {
-    KTemporaryFile tempFile;
-
-    if ( !tempFile.open() ) {
-        return;
-    }
-
-    // save image to temporary file
-    mCurrent.image().save(tempFile.fileName(), "PNG");
-
-    KUrl srcUrl( tempFile.fileName() );
-
-    QString dir = mSavingDir->getDir();
-    const QString name = mCurrent.title() + " - " + mCurrent.current() + ".png";
-    KUrl destUrl = KUrl( dir );
-    destUrl.addPath( name );
-
-    destUrl = KFileDialog::getSaveUrl( destUrl, "*.png" );
-    if ( !destUrl.isValid() ) {
-        return;
-    }
-
-    mSavingDir->setDir(destUrl.directory());
-
-#ifdef HAVE_NEPOMUK
-    bool worked = KIO::NetAccess::file_copy( srcUrl, destUrl );
-    //store additional data using Nepomuk
-    if (worked) {
-        Nepomuk::Resource res(destUrl, NFO::FileDataObject());
-
-        Nepomuk::Resource comicTopic("Comic", PIMO::Topic());
-        comicTopic.setLabel(i18n("Comic"));
-
-        if (!mCurrent.additionalText().isEmpty() ) {
-            res.setProperty(NIE::description(), mCurrent.additionalText());
-        }
-        if ((mCurrent.type() == Date) && !mCurrent.currentReadable().isEmpty() ) {
-            res.setProperty(NIE::contentCreated(), QDateTime::fromString(mCurrent.currentReadable(), Qt::ISODate));
-        }
-        if (!mCurrent.title().isEmpty()) {
-            Nepomuk::Resource topic(mCurrent.title(), PIMO::Topic());
-            topic.setLabel(mCurrent.title());
-            topic.setProperty(PIMO::superTopic(), comicTopic);
-            res.addTag(topic);
-        } else {
-//             res.addTag(comicTopic);//TODO activate this, see below
-            ;
-        }
-
-        //FIXME also set the comic topic as tag, this is redundant, as topic has this as super topic
-        //though at this point the gui does not manage to show the correct tags
-        res.addTag(comicTopic);
-
-        if (!mCurrent.stripTitle().isEmpty()) {
-            res.setProperty(NIE::title(), mCurrent.stripTitle());
-        }
-        if (!mCurrent.websiteUrl().isEmpty()) {
-            Nepomuk::Resource copyEvent = Nepomuk::Utils::createCopyEvent(mCurrent.imageUrl(), destUrl, QDateTime(), mCurrent.websiteUrl());
-        }
-
-        const QStringList authors = mCurrent.author().split(',', QString::SkipEmptyParts);
-        foreach (QString author, authors) {
-            author = author.trimmed();
-            Nepomuk::Resource authorRes(author, NCO::PersonContact());
-            authorRes.setProperty(NCO::fullname(), author);
-            res.addProperty(NCO::creator(), authorRes);
-        }
-    }
-#else
-    KIO::NetAccess::file_copy( srcUrl, destUrl );
-#endif
+    ComicSaver saver(mSavingDir);
+    saver.save(mCurrent);
 }
 
 bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
