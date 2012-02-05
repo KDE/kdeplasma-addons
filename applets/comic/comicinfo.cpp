@@ -33,11 +33,11 @@ class SavingDir::SavingDirPrivate
 
         QString getDir() const;
         void setDir(const QString &dir);
-        SavingDir *instance();
 
     private:
         void load();
         void save();
+        bool isValid();
 
     private:
         KConfigGroup mCfg;
@@ -71,13 +71,13 @@ void SavingDir::SavingDirPrivate::setDir(const QString &dir)
 void SavingDir::SavingDirPrivate::load()
 {
     mDir = mCfg.readEntry("savingDir", QString());
-    if (mDir.isEmpty()) {
+    if (!isValid()) {
         mDir = KGlobalSettings::picturesPath();
     }
-    if (mDir.isEmpty()) {
+    if (!isValid()) {
         mDir = KGlobalSettings::downloadPath();
     }
-    if (mDir.isEmpty()) {
+    if (!isValid()) {
         mDir = QDir::homePath();
     }
 }
@@ -85,6 +85,12 @@ void SavingDir::SavingDirPrivate::load()
 void SavingDir::SavingDirPrivate::save()
 {
      mCfg.writeEntry("savingDir", mDir);
+}
+
+bool SavingDir::SavingDirPrivate::isValid()
+{
+    QDir dir;
+    return (!mDir.isEmpty() && dir.exists(mDir));
 }
 
 SavingDir::SavingDir(const KConfigGroup &cfg)
@@ -95,6 +101,7 @@ SavingDir::SavingDir(const KConfigGroup &cfg)
 
 SavingDir::~SavingDir()
 {
+    delete d;
 }
 
 QString SavingDir::getDir() const
