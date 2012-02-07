@@ -16,6 +16,8 @@
 *****************************************************************************/
 
 import QtQuick 1.1
+import org.kde.qtextracomponents 0.1
+
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
@@ -55,13 +57,24 @@ Item {
         width: parent.width
         height: parent.height
 
-  //      Row {
-   //         id: searchRow
+        Row {
+            id: searchRow
 
-    //        width: parent.width
+            width: parent.width
 
-//        }
+            QIconItem {
+                icon: QIcon("utilities-terminal")
+                width: 32
+                height: 32
+            }
 
+            PlasmaComponents.Label {
+                id: header
+                text: i18n("Konsole Profiles")
+                anchors { top: parent.top; left: parent.left; right: parent.right }
+                horizontalAlignment: Text.AlignHCenter
+            }
+        }
 
             PlasmaCore.SvgItem {
                 id: separator
@@ -74,24 +87,6 @@ Item {
                 height: lineSvg.elementSize("horizontal-line").height
             }
 
-        //Row {
-        //    id: searchRow
-        //
-        //    width: parent.width
-        //
-        //    PlasmaComponents.TextField {
-        //        id: searchBox
-        //
-        //        clearButtonShown: true
-        //        placeholderText: i18n("Type a word...")
-        //        width: parent.width // - icon.width - parent.spacing
-        //
-        //        onTextChanged: {
-        //            timer.running = true
-        //            mainWindow.listdictionaries = false
-        //        }
-        //    }
-        //}
 
         //we use this to compute a fixed height for the items, and also to implement
         //the said constant below (itemHeight)
