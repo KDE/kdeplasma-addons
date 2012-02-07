@@ -51,7 +51,7 @@ kDebug() << "SERVICE START...operation: " << operation << " dest: " << destinati
 
         QStringList args;
         args << "--profile" << destination();
-        KToolInvocation::kdeinitExec("konsole", args);
+        KToolInvocation::kdeinitExec("konqueror", args);
 
         setResult(true);
     }
