@@ -124,7 +124,7 @@ Item {
                         id: text
                         anchors.fill: parent
                         //anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
-                       text: "TEST" //model.name + " - " + model.description
+                       text: model.prettyName
                     }
 
                     MouseArea {
