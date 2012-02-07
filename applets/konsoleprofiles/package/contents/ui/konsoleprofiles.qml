@@ -101,30 +101,31 @@ Item {
         Flickable {
             id: flickable
 
-            width: parent.width
+            width: parent.width - scrollBar.width
             height: parent.height
-            //FIXME:            contentHeight: mainWindow.listdictionaries ? 0 : textBrowser.paintedHeight
+ //FIXME: wtf? work scrollbar, work damn you
+ //contentHeight: 2000
             clip: true
 
             ListView {
                 id: view
 
                 anchors.fill: parent
-                anchors.topMargin: 20
+                anchors.topMargin: 10
 
                 model: profilesModel
                 spacing: 15
 
                 delegate: Item {
                     id: listdelegate
-                    height: textMetric.paintedHeight
+                    height: textMetric.paintedHeight * 2
                     anchors { left: parent.left; leftMargin: 10; right: parent.right; rightMargin: 10 }
 
                     Text {
-                        id: text
+                        id: profileText
                         anchors.fill: parent
                         //anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
-                       text: model.prettyName
+                        text: model.prettyName
                     }
 
                     MouseArea {
@@ -133,7 +134,9 @@ Item {
                         hoverEnabled: true
 
                         onClicked: {
-                            console.log("CLICKED: " + model.name)
+                            var service = profilesSource.serviceForSource(model["DataEngineSource"])
+                            var operation = service.operationDescription("open")
+                            var job = service.startOperationCall(operation)
                         }
 
                         onEntered: {
@@ -161,11 +164,11 @@ Item {
         PlasmaComponents.ScrollBar {
             id: scrollBar
 
-            anchors { bottom: parent.bottom }
+            anchors { right: parent.right }
 
             orientation: Qt.Vertical
-            stepSize: 40 // textBrowser.lineCount / 4
-            scrollButtonInterval: 40 //textBrowser.lineCount / 4
+            stepSize: 10 // textBrowser.lineCount / 4
+            scrollButtonInterval: 10 //textBrowser.lineCount / 4
 
             flickableItem: flickable
         }
