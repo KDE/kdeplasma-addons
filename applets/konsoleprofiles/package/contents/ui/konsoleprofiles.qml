@@ -34,148 +34,147 @@ Item {
         Component.onCompleted: connectedSources = sources
     }
 
+    PlasmaCore.DataModel {
+        id: profilesModel
+        dataSource: profilesSource
+    }
+
     Component.onCompleted: {
         plasmoid.popupIcon = "utilities-terminal";
         plasmoid.aspectRatioMode = IgnoreAspectRatio;
     }
 
-    PlasmaComponents.Label {
-        id: header
-        text: i18n("Konsole Profiles")
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        horizontalAlignment: Text.AlignHCenter
-    }
 
    PlasmaCore.Svg {
        id: lineSvg
        imagePath: "widgets/line"
     }
 
-    PlasmaCore.SvgItem {
-        id: separator
 
-        anchors { top: header.bottom; left: parent.left; right: parent.right }
-        anchors { topMargin: 3 }
+    Column {
+        width: parent.width
+        height: parent.height
 
-        svg: lineSvg
-        elementId: "horizontal-line"
-        height: lineSvg.elementSize("horizontal-line").height
-    }
+  //      Row {
+   //         id: searchRow
 
-    ListView {
-        id: profileView
-        anchors {
-            top : scrollBar.top
-            topMargin: 10
-            bottom: konsoleProfiles.bottom
-            left: parent.left
-            leftMargin: 10
-            right: scrollBar.left
-            rightMargin: 10
-        }
+    //        width: parent.width
 
-        model: PlasmaCore.DataModel {
-            dataSource: profilesSource
-        }
-
-        delegate: profileViewDelegate
-
-        //NOTE: if this is fixed, fix kate, konq and kdevelop session applets
-        //if applicable.
-        // FIXME: after a few experiments..is broken
-        // the highlight item's sizing is always cut off.
-        // yet I have no problems with my own svg, but without anchors or
-        // anything on the component, it bugs out on sizing...
-
-       highlight: PlasmaComponents.Highlight {
-//            anchors { left: profileView.left; right: profileView.right }
- //           width: view.width
-  //          height: view.height
-            //TODO: animation. Ideally the Highlight component itself needs to do it.
-            //the question is...how much should that api handle, and how much do I need to..
-//            Behavior on opacity { NumberAnimation { duration: 250 } }
-            hover: true;
-        }
-
-        //highlight: profileViewHighlighter
-// old, working good way. I think the plasma component is busted, or my use of it is.
-//    Component {
-//        id: profileViewHighlighter
-//
-//        PlasmaCore.FrameSvgItem {
-//            imagePath: "widgets/viewitem"
-//            prefix: "hover"
-//            opacity: 0
 //        }
-//    }
 
-        highlightMoveDuration: 250
-        highlightMoveSpeed: 1
 
-        clip: true
+            PlasmaCore.SvgItem {
+                id: separator
 
-        Component.onCompleted: currentIndex = -1
-    }
+                anchors { left: parent.left; right: parent.right } //top: header.bottom;  }
+//                anchors { topMargin: 3 }
 
-    PlasmaComponents.ScrollBar {
-        id: scrollBar
-
-        anchors {
-            top: separator.bottom
-            right: parent.right
-            bottom: parent.bottom
-        }
-
-        orientation: Qt.Vertical
-        flickableItem: profileView
-        // TODO: set to something "constant", like 2 list item heights, or something.
-        // that way we don't get these pixel steppings
-        stepSize: 40
-        scrollButtonInterval: 50
-    }
-
-    //we use this to compute a fixed height for the items, and also to implement
-    //the said constant below (itemHeight)
-    Text {
-        id: heightMetric
-        visible: false
-        text: "Arbitrary String"
-    }
-
-    property int itemHeight: heightMetric.height * 2
-    Component {
-        id: profileViewDelegate
-
-        Item {
-            height: itemHeight
-            anchors { left: parent.left; leftMargin: 10; right: parent.right; rightMargin: 10 }
-
-            Text {
-                id: text
-                anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
-                text: model.prettyName
+                svg: lineSvg
+                elementId: "horizontal-line"
+                height: lineSvg.elementSize("horizontal-line").height
             }
 
-            MouseArea {
-                height: itemHeight
-                anchors { left: parent.left; right: parent.right }
-                hoverEnabled: true
+        //Row {
+        //    id: searchRow
+        //
+        //    width: parent.width
+        //
+        //    PlasmaComponents.TextField {
+        //        id: searchBox
+        //
+        //        clearButtonShown: true
+        //        placeholderText: i18n("Type a word...")
+        //        width: parent.width // - icon.width - parent.spacing
+        //
+        //        onTextChanged: {
+        //            timer.running = true
+        //            mainWindow.listdictionaries = false
+        //        }
+        //    }
+        //}
 
-                onClicked: {
-                    var service = profilesSource.serviceForSource(model["DataEngineSource"])
-                    var operation = service.operationDescription("open")
-                    var job = service.startOperationCall(operation)
+        //we use this to compute a fixed height for the items, and also to implement
+        //the said constant below (itemHeight)
+        Text {
+            id: textMetric
+            visible: false
+            // i think this should indeed technically be translated, even though we won't ever use it, just
+            // its height/width
+            text: i18n("Arbitrary String Which Says The Dictionary Type")
+        }
+
+        Flickable {
+            id: flickable
+
+            width: parent.width
+            height: parent.height
+            //FIXME:            contentHeight: mainWindow.listdictionaries ? 0 : textBrowser.paintedHeight
+            clip: true
+
+            ListView {
+                id: view
+
+                anchors.fill: parent
+                anchors.topMargin: 20
+
+                model: profilesModel
+                spacing: 15
+
+                delegate: Item {
+                    id: listdelegate
+                    height: textMetric.paintedHeight
+                    anchors { left: parent.left; leftMargin: 10; right: parent.right; rightMargin: 10 }
+
+                    Text {
+                        id: text
+                        anchors.fill: parent
+                        //anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
+                       text: "TEST" //model.name + " - " + model.description
+                    }
+
+                    MouseArea {
+                        height: parent.height + 15
+                        anchors { left: parent.left; right: parent.right;}
+                        hoverEnabled: true
+
+                        onClicked: {
+                            console.log("CLICKED: " + model.name)
+                        }
+
+                        onEntered: {
+                            view.currentIndex = index
+                            view.highlightItem.opacity = 1
+                        }
+
+                        onExited: {
+                            view.highlightItem.opacity = 0
+                        }
+                    }
                 }
 
-                onEntered: {
-                    profileView.currentIndex = index
-                    profileView.highlightItem.opacity = 1
+                highlight: PlasmaComponents.Highlight {
+                    anchors { left: parent.left; right: parent.right; leftMargin: 10; rightMargin: 10 }
+                    height: textMetric.paintedHeight
+                    hover: true;
                 }
 
-                onExited: {
-                    profileView.highlightItem.opacity = 0
-                }
+                highlightMoveDuration: 250
+                highlightMoveSpeed: 1
             }
         }
+
+        PlasmaComponents.ScrollBar {
+            id: scrollBar
+
+            anchors { bottom: parent.bottom }
+
+            orientation: Qt.Vertical
+            stepSize: 40 // textBrowser.lineCount / 4
+            scrollButtonInterval: 40 //textBrowser.lineCount / 4
+
+            flickableItem: flickable
+        }
     }
+
+//    property int itemHeight: heightMetric.height * 2
 }
