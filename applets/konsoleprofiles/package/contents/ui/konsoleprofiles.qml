@@ -91,19 +91,20 @@ Item {
     ListView {
         id: view
 
-        anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: separator.bottom; topMargin: 10}
+        anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: separator.bottom; topMargin: 5}
 
         model: profilesModel
-        spacing: 15
+//        spacing: 15
         clip: true
 
         delegate: Item {
             id: listdelegate
-            height: textMetric.paintedHeight * 2
+       height: 50 //     height: textMetric.paintedHeight * 2
             anchors { left: parent.left; leftMargin: 10; right: parent.right; rightMargin: 10 }
 
             Text {
                 id: profileText
+                verticalAlignment: Text.AlignVCenter
                 anchors.fill: parent
                 text: model.prettyName
             }
@@ -130,9 +131,20 @@ Item {
             }
         }
 
-        highlight: PlasmaComponents.Highlight {
-            anchors { left: parent.left; right: parent.right; leftMargin: 10; rightMargin: 10 }
-            hover: true;
+        highlight: Component {
+            id: deviceHighlighter
+
+            PlasmaCore.FrameSvgItem {
+                imagePath: "widgets/viewitem"
+                prefix: "hover"
+                opacity: 0
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.OutQuad
+                    }
+                }
+            }
         }
 
         highlightMoveDuration: 250
