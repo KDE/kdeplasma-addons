@@ -78,13 +78,10 @@ Item {
         height: lineSvg.elementSize("horizontal-line").height
     }
 
-    //we use this to compute a fixed height for the items, and also to implement
-    //the said constant below (itemHeight)
     Text {
         id: textMetric
         visible: false
-        // i think this should indeed technically be translated, even though we won't ever use it, just
-        // its height/width
+        // translated but not used, we just need length/height
         text: i18n("Arbitrary String Which Says The Dictionary Type")
     }
 
@@ -94,7 +91,6 @@ Item {
         anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: separator.bottom; topMargin: 5}
 
         model: profilesModel
-//        spacing: 15
         clip: true
 
         delegate: Item {
