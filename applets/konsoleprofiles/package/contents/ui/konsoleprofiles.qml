@@ -100,7 +100,7 @@ Item {
         delegate: Item {
             id: listdelegate
        height: 50 //     height: textMetric.paintedHeight * 2
-            anchors { left: parent.left; leftMargin: 10; right: parent.right; rightMargin: 10 }
+            anchors { left: parent.left; leftMargin: 10; right: parent.right;  }
 
             PlasmaComponents.Label {
                 id: profileText
@@ -130,20 +130,8 @@ Item {
             }
         }
 
-        highlight: Component {
-            id: deviceHighlighter
-
-            PlasmaCore.FrameSvgItem {
-                imagePath: "widgets/viewitem"
-                prefix: "hover"
-                opacity: 0
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.OutQuad
-                    }
-                }
-            }
+        highlight: PlasmaComponents.Highlight {
+            hover: true
         }
 
         highlightMoveDuration: 250
