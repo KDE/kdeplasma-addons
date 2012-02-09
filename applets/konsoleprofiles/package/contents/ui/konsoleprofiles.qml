@@ -99,7 +99,7 @@ Item {
 
         delegate: Item {
             id: listdelegate
-       height: 50 //     height: textMetric.paintedHeight * 2
+       height: textMetric.paintedHeight * 2
             anchors { left: parent.left; leftMargin: 10; right: parent.right;  }
 
             PlasmaComponents.Label {
