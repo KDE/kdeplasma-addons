@@ -115,6 +115,7 @@ anchors { left: headerRow.left; right: headerRow.right; top: headerRow.bottom }
 
                 model: profilesModel
                 spacing: 15
+                clip: true
 
                 delegate: Item {
                     id: listdelegate
