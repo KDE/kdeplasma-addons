@@ -53,14 +53,13 @@ Item {
     }
 
 
-    Column {
-        width: parent.width
-        height: parent.height
 
         Row {
-            id: searchRow
+            id: headerRow
+            anchors { left: parent.left; right: parent.right}
 
-            width: parent.width
+//            height: parent.height
+ //           width: parent.width
 
             QIconItem {
                 icon: QIcon("utilities-terminal")
@@ -71,7 +70,7 @@ Item {
             PlasmaComponents.Label {
                 id: header
                 text: i18n("Konsole Profiles")
-                anchors { top: parent.top; left: parent.left; right: parent.right }
+                anchors { top: parent.top;}// left: parent.left; right: parent.right }
                 horizontalAlignment: Text.AlignHCenter
             }
         }
@@ -79,8 +78,9 @@ Item {
             PlasmaCore.SvgItem {
                 id: separator
 
-                anchors { left: parent.left; right: parent.right } //top: header.bottom;  }
+//                anchors { left: parent.left; right: parent.right } //top: header.bottom;  }
 //                anchors { topMargin: 3 }
+anchors { left: headerRow.left; right: headerRow.right; top: headerRow.bottom }
 
                 svg: lineSvg
                 elementId: "horizontal-line"
@@ -98,19 +98,19 @@ Item {
             text: i18n("Arbitrary String Which Says The Dictionary Type")
         }
 
-        Flickable {
-            id: flickable
-
-            width: parent.width - scrollBar.width
-            height: parent.height
- //FIXME: wtf? work scrollbar, work damn you
- //contentHeight: 2000
-            clip: true
-
+//            anchors { top: parent.top; bottom: parent.bottom }
+//            width: parent.width //- scrollBar.width
+//            height: parent.height
+// //FIXME: wtf? work scrollbar, work damn you
+// contentHeight: 20 * view.count
+//            clip: true
+//
             ListView {
                 id: view
 
-                anchors.fill: parent
+//                anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: parent.top }
+                anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: parent.top }
+//anchors.fill: parent
                 anchors.topMargin: 10
 
                 model: profilesModel
@@ -158,21 +158,26 @@ Item {
 
                 highlightMoveDuration: 250
                 highlightMoveSpeed: 1
-            }
-        }
 
+
+            }
+             
         PlasmaComponents.ScrollBar {
             id: scrollBar
 
-            anchors { right: parent.right }
+          //  anchors { right: parent.right }
+//          anchors { bottom:parent.bottom; top: parent.top; right: parent.right}
+anchors { bottom: parent.bottom; top: parent.top; right: parent.right }
 
             orientation: Qt.Vertical
-            stepSize: 10 // textBrowser.lineCount / 4
-            scrollButtonInterval: 10 //textBrowser.lineCount / 4
+       //     stepSize: 30 // textBrowser.lineCount / 4
+        //    scrollButtonInterval: 30 //textBrowser.lineCount / 4
 
-            flickableItem: flickable
+            flickableItem: view
         }
-    }
+
+
+
 
 //    property int itemHeight: heightMetric.height * 2
 }
