@@ -109,7 +109,7 @@ anchors { left: headerRow.left; right: headerRow.right; top: headerRow.bottom }
                 id: view
 
 //                anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: parent.top }
-                anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: parent.top }
+                anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: separator.bottom }
 //anchors.fill: parent
                 anchors.topMargin: 10
 
@@ -167,7 +167,7 @@ anchors { left: headerRow.left; right: headerRow.right; top: headerRow.bottom }
 
           //  anchors { right: parent.right }
 //          anchors { bottom:parent.bottom; top: parent.top; right: parent.right}
-anchors { bottom: parent.bottom; top: parent.top; right: parent.right }
+anchors { bottom: parent.bottom; top: separator.top; right: parent.right }
 
             orientation: Qt.Vertical
        //     stepSize: 30 // textBrowser.lineCount / 4
