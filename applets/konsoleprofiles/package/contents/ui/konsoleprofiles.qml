@@ -102,9 +102,8 @@ Item {
        height: 50 //     height: textMetric.paintedHeight * 2
             anchors { left: parent.left; leftMargin: 10; right: parent.right; rightMargin: 10 }
 
-            Text {
+            PlasmaComponents.Label {
                 id: profileText
-                verticalAlignment: Text.AlignVCenter
                 anchors.fill: parent
                 text: model.prettyName
             }
