@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2008 by Montel Laurent <montel@kde.org>                 *
+ *   Copyright (C) 2012 Matthias Fuchs <mat69@gmx.net>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -14,44 +14,49 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA          *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef KONSOLEPROFILESAPPLET_H
-#define KONSOLEPROFILESAPPLET_H
+#ifndef STRIP_SELECTOR_P_H
+#define STRIP_SELECTOR_P_H
 
-#include <Plasma/PopupApplet>
+#include "stripselector.h"
 
-class QTreeView;
-class QGraphicsProxyWidget;
-class QStandardItemModel;
-class QModelIndex;
-class QGraphicsLinearLayout;
+#include <QtCore/QString>
 
-class KonsoleProfilesApplet : public Plasma::PopupApplet
+class StringStripSelector : public StripSelector
 {
-    Q_OBJECT
-public:
-    KonsoleProfilesApplet(QObject *parent, const QVariantList &args);
-    ~KonsoleProfilesApplet();
+    public:
+        explicit StringStripSelector(QObject *parent = 0);
+        virtual ~StringStripSelector();
 
-    QWidget *widget();
-    enum SpecificRoles {
-        ProfilesName = Qt::UserRole+1
-    };
-
-protected slots:
-    void slotOnItemClicked(const QModelIndex &index);
-    void slotUpdateSessionMenu();
-
-protected:
-    void initSessionFiles();
-    void init();
-private:
-    QTreeView *m_listView;
-    QStandardItemModel *m_konsoleModel;
+        virtual void select(const ComicData &currentStrip);
 };
 
-K_EXPORT_PLASMA_APPLET(konsoleprofilesapplet, KonsoleProfilesApplet )
+class NumberStripSelector : public StripSelector
+{
+    public:
+        explicit NumberStripSelector(QObject *parent = 0);
+        virtual ~NumberStripSelector();
+
+        virtual void select(const ComicData &currentStrip);
+};
+
+class DateStripSelector : public StripSelector
+{
+    Q_OBJECT
+
+    public:
+        explicit DateStripSelector(QObject *parent = 0);
+        virtual ~DateStripSelector();
+
+        virtual void select(const ComicData &currentStrip);
+
+    private slots:
+        void slotChosenDay(const QDate &date);
+
+    private:
+        QString mFirstIdentifierSuffix;
+};
 
 #endif

@@ -272,7 +272,7 @@ void DockConfig::fileSelected()
                         KMessageBox::detailedError(this, i18n("Invalid DockManager plugin!"), error);
                     } else if ((!QFile::exists(destDir + "/metadata/" + meta->name()) &&
                                 !QFile::exists(destDir + "/scripts/" + script->name())) ||
-                               KMessageBox::Yes == KMessageBox::warningYesNo(this, i18n("<p>A Plugin named <b>%i</b> already exists!</p>"
+                               KMessageBox::Yes == KMessageBox::warningYesNo(this, i18n("<p>A Plugin named <b>%1</b> already exists!</p>"
                                        "<p>Overwrite?</p>",
                                        script->name()),
                                        i18n("Overwrite?"))) {
@@ -280,22 +280,22 @@ void DockConfig::fileSelected()
 
                         if (QFile::exists(destDir + "/metadata/" + meta->name()) && !QFile::remove(destDir + "/metadata/" + meta->name())) {
                             KMessageBox::error(this, i18n("<p>Sorry, failed to remove previous plugin metadata file!</p>"
-                                                          "<p></i>%1</i></p>", destDir + "/metadata/" + meta->name()));
+                                                          "<p><i>%1</i></p>", destDir + "/metadata/" + meta->name()));
                             abortInstall = true;
                         }
                         if (!abortInstall && QFile::exists(destDir + "/scripts/" + script->name()) && !QFile::remove(destDir + "/scripts/" + script->name())) {
                             KMessageBox::error(this, i18n("<p>Sorry, failed to remove previous plugin metadata file!</p>"
-                                                          "<p></i>%1</i></p>", destDir + "/scripts/" + script->name()));
+                                                          "<p><i>%1</i></p>", destDir + "/scripts/" + script->name()));
                             abortInstall = true;
                         }
                         if (!abortInstall && (!(QDir(destDir + "/scripts/").exists() || KStandardDirs::makeDir(destDir + "/scripts/")))) {
                             KMessageBox::error(this, i18n("<p>Sorry, failed to create scripts folder!</p>"
-                                                          "<p></i>%1</i></p>", destDir + "/scripts/"));
+                                                          "<p><i>%1</i></p>", destDir + "/scripts/"));
                             abortInstall = true;
                         }
                         if (!abortInstall && (!(QDir(destDir + "/metadata/").exists() || KStandardDirs::makeDir(destDir + "/metadata/")))) {
                             KMessageBox::error(this, i18n("<p>Sorry, failed to create metadata folder!</p>"
-                                                          "<p></i>%1</i></p>", destDir + "/metadata/"));
+                                                          "<p><i>%1</i></p>", destDir + "/metadata/"));
                             abortInstall = true;
                         }
                         if (!abortInstall) {
@@ -586,7 +586,7 @@ void DockConfigItemDelegate::aboutClicked()
                              i18n("<tr><td align=\"right\">Script File:</td><td>%1</td></tr>", model->data(index, RoleScript).toString()) +
                              i18n("<tr><td align=\"right\">Location:</td><td>%1</td></tr>", model->data(index, RoleDir).toString()) +
                              (appName.isEmpty() ? QString() : i18n("<tr><td align=\"right\">Application:</td><td>%1</td></tr>", appName)) +
-                             (dbusName.isEmpty() ? QString() : i18n("<tr><td align=\"right\">DBus:</td><td>%1</td></tr>", dbusName)) +
+                             (dbusName.isEmpty() ? QString() : i18n("<tr><td align=\"right\">D-Bus:</td><td>%1</td></tr>", dbusName)) +
                              QString("</table>"),
                              model->data(index, Qt::DisplayRole).toString()
 #if KDE_IS_VERSION(4, 7, 0)

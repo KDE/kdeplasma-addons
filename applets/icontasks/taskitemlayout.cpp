@@ -369,7 +369,7 @@ void TaskItemLayout::layoutItems()
     }
 
     QRectF groupRect(m_groupItem->boundingRect());
-    qreal cellSize(qMin(m_applet->launcherIcons() || !m_applet->autoIconScaling() ? 272.0 : 80, qMin(groupRect.width(), groupRect.height())));
+    qreal cellSize(qMin(m_applet->launcherIcons() || !m_applet->autoIconScaling() ? qreal(272) : qreal(80), qMin(groupRect.width(), groupRect.height())));
     QSizeF maximumCellSize(cellSize, cellSize);
 
     setHorizontalSpacing(m_applet->spacing());

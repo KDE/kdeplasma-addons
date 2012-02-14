@@ -15,8 +15,7 @@ install(TARGETS plasma_applet_rssnow DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-rssnow.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 install(FILES feeds DESTINATION ${DATA_INSTALL_DIR}/rssnow)
 install(FILES
-left.svgz
-right.svgz
+arrows.svgz
 rssnow.svgz
 background.svgz
 DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/rssnow/)

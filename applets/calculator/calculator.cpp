@@ -31,7 +31,6 @@
 #include <QSizePolicy>
 
 #include <KAction>
-#include <KPushButton>
 #include <KGlobal>
 #include <KLocale>
 #include <KStandardAction>
@@ -204,105 +203,105 @@ void CalculatorApplet::keyPressEvent ( QKeyEvent * event )
     case Qt::Key_Return:
     case Qt::Key_Enter:
     {
-        mButtonEquals->nativeWidget()->animateClick();
+        mButtonEquals->click();
         event->accept();
         break;
     }
     case Qt::Key_Plus:
     {
-        mButtonAdd->nativeWidget()->animateClick();
+        mButtonAdd->click();
         event->accept();
         break;
     }
     case Qt::Key_Minus:
     {
-        mButtonSubtract->nativeWidget()->animateClick();
+        mButtonSubtract->click();
         event->accept();
         break;
     }
     case Qt::Key_Asterisk:
     case Qt::Key_multiply:
     {
-        mButtonMultiply->nativeWidget()->animateClick();
+        mButtonMultiply->click();
         event->accept();
         break;
     }
     case Qt::Key_Slash:
     {
-        mButtonDivide->nativeWidget()->animateClick();
+        mButtonDivide->click();
         event->accept();
         break;
     }
     case Qt::Key_1:
     {
-        mButtonDigit[1]->nativeWidget()->animateClick();
+        mButtonDigit[1]->click();
         event->accept();
         break;
     }
     case Qt::Key_2:
     {
-        mButtonDigit[2]->nativeWidget()->animateClick();
+        mButtonDigit[2]->click();
         event->accept();
         break;
     }
     case Qt::Key_3:
     {
-        mButtonDigit[3]->nativeWidget()->animateClick();
+        mButtonDigit[3]->click();
         event->accept();
         break;
     }
     case Qt::Key_4:
     {
-        mButtonDigit[4]->nativeWidget()->animateClick();
+        mButtonDigit[4]->click();
         event->accept();
         break;
     }
     case Qt::Key_5:
     {
-        mButtonDigit[5]->nativeWidget()->animateClick();
+        mButtonDigit[5]->click();
         event->accept();
         break;
     }
     case Qt::Key_6:
     {
-        mButtonDigit[6]->nativeWidget()->animateClick();
+        mButtonDigit[6]->click();
         event->accept();
         break;
     }
     case Qt::Key_7:
     {
-        mButtonDigit[7]->nativeWidget()->animateClick();
+        mButtonDigit[7]->click();
         event->accept();
         break;
     }
     case Qt::Key_8:
     {
-        mButtonDigit[8]->nativeWidget()->animateClick();
+        mButtonDigit[8]->click();
         event->accept();
         break;
     }
     case Qt::Key_9:
     {
-        mButtonDigit[9]->nativeWidget()->animateClick();
+        mButtonDigit[9]->click();
         event->accept();
         break;
     }
     case Qt::Key_0:
     {
-        mButtonDigit[0]->nativeWidget()->animateClick();
+        mButtonDigit[0]->click();
         event->accept();
         break;
     }
     case Qt::Key_Comma:
     case Qt::Key_Period:
     {
-        mButtonDecimal->nativeWidget()->animateClick();
+        mButtonDecimal->click();
         event->accept();
         break;
     }
     case Qt::Key_Escape:
     {
-        mButtonClear->nativeWidget()->animateClick();
+        mButtonClear->click();
         event->accept();
         break;
     }
@@ -327,17 +326,15 @@ void CalculatorApplet::slotDigitClicked()
         waitingForDigit = false;
     }
 
-    inputText += QString::number(newDigit);
-
     if (!inputText.contains(KGlobal::locale()->decimalSymbol())) {
-      //If there is no decimal, then we need to reformat the number
-      double currentValue = KGlobal::locale()->readNumber(inputText);
-      QString localizedString = KGlobal::locale()->formatNumber(currentValue, 0);
-      mOutputDisplay->setText(localizedString);
+        //If there is no decimal, then we need to reformat the number
+        inputText = KGlobal::locale()->formatNumber(KGlobal::locale()->readNumber(inputText) * 10 + newDigit, 0);
     } else {
-      //Once we have a decimal, then all we have to do is append the number
-      mOutputDisplay->setText(mOutputDisplay->text()+QString::number(newDigit));
+        //Once we have a decimal, then all we have to do is append the number
+        inputText.append(QString::number(newDigit));
     }
+
+    mOutputDisplay->setText(inputText);
 }
 
 /*

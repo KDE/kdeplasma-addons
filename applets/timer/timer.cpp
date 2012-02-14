@@ -355,11 +355,13 @@ void Timer::setSeconds(int secs)
 void Timer::slotCountDone()
 {
     if (m_showMessage){
-        if (m_title->isVisible()) {
-            KNotification::event(KNotification::Notification, m_title->text() + " - " + m_message);
-        } else {
-            KNotification::event(KNotification::Notification, m_message);
-        }
+        QPixmap icon = KIconLoader::global()->loadIcon("chronometer", KIconLoader::Dialog);
+
+        KNotification *notification = KNotification::event(KNotification::Notification);
+        notification->setPixmap(icon);
+        notification->setTitle(i18n("Plasma Timer Applet"));
+        notification->setText(m_title->isVisible() ? m_title->text() + " - " + m_message : m_message);
+        notification->sendEvent();
     }
 
     if (m_runCommand && !m_command.isEmpty() && KAuthorized::authorizeKAction("run_command") && KAuthorized::authorizeKAction("shell_access")){

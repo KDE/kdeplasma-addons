@@ -22,20 +22,20 @@
 #ifndef COMIC_H
 #define COMIC_H
 
-#include "comicinfo.h"
+#include "comicdata.h"
 
 #include <QtCore/QDate>
-#include <QtGui/QImage>
 
 #include <KUrl>
 #include <Plasma/DataEngine>
-#include <Plasma/Label>
 #include <Plasma/PopupApplet>
-#include <Plasma/TabBar>
 
 class ArrowWidget;
+class ButtonBar;
 class CheckNewStrips;
+class ComicLabel;
 class ComicModel;
+class ComicTabBar;
 class ConfigWidget;
 class FullViewWidget;
 class ImageWidget;
@@ -43,106 +43,9 @@ class KAction;
 class KJob;
 class QAction;
 class QGraphicsLayout;
-class QPropertyAnimation;
 class QSortFilterProxyModel;
 class QTimer;
-
-namespace Plasma {
-class Frame;
-class PushButton;
-}
-
-//Helper class, sets the sizeHint to 0 if the TabBar is hidden
-class ComicTabBar : public Plasma::TabBar
-{
-    public:
-        ComicTabBar( QGraphicsWidget *parent = 0 ) : TabBar( parent ) {}
-        ~ComicTabBar() {}
-
-        void removeAllTabs()
-        {
-            while ( this->count() ) {
-                this->removeTab( 0 );
-            }
-        }
-
-        bool hasHighlightedTabs() const
-        {
-            for ( int i = 0; i < count(); ++i ) {
-                if ( isTabHighlighted( i ) ) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        int nextHighlightedTab( int index ) const
-        {
-            int firstHighlighted = -1;
-            for ( int i = 0; i < count(); ++i ) {
-                if ( isTabHighlighted( i ) ) {
-                    if ( i > index ) {
-                        return i;
-                    } else if ( firstHighlighted == -1 ) {
-                        firstHighlighted = i;
-                    }
-                }
-            }
-
-            return ( firstHighlighted != -1 ? firstHighlighted : index );
-        }
-
-    protected:
-        QSizeF sizeHint( Qt::SizeHint which, const QSizeF &constraint = QSizeF() ) const
-        {
-            if ( !isVisible() ) {
-                return QSizeF( 0, 0 );
-            }
-            return QGraphicsWidget::sizeHint( which, constraint );
-        }
-
-        void hideEvent( QHideEvent *event )
-        {
-            updateGeometry();
-            QGraphicsWidget::hideEvent( event );
-        }
-
-        void showEvent( QShowEvent *event )
-        {
-            updateGeometry();
-            QGraphicsWidget::showEvent( event );
-        }
-};
-
-//Helper class, sets the sizeHint to 0 if the Label is hidden
-class ComicLabel : public Plasma::Label
-{
-    public:
-        ComicLabel( QGraphicsWidget *parent = 0 ) : Plasma::Label( parent ) {}
-        ~ComicLabel() {}
-
-    protected:
-        QSizeF sizeHint( Qt::SizeHint which, const QSizeF &constraint = QSizeF() ) const
-        {
-            if ( !isVisible() ) {
-                return QSizeF( 0, 0 );
-            }
-            return QGraphicsProxyWidget::sizeHint( which, constraint );
-        }
-
-        void hideEvent( QHideEvent *event )
-        {
-            updateGeometry();
-            QGraphicsProxyWidget::hideEvent( event );
-        }
-
-        void showEvent( QShowEvent *event )
-        {
-            updateGeometry();
-            QGraphicsProxyWidget::showEvent( event );
-        }
-};
+class SavingDir;
 
 class ComicApplet : public Plasma::PopupApplet
 {
@@ -163,7 +66,6 @@ class ComicApplet : public Plasma::PopupApplet
 
     private Q_SLOTS:
         void slotTabChanged( int newIndex );
-        void slotChosenDay( const QDate &date );
         void slotNextDay();
         void slotPreviousDay();
         void slotFirstDay();
@@ -189,6 +91,7 @@ class ComicApplet : public Plasma::PopupApplet
 
     public slots:
         void configChanged();
+        void updateComic(const QString &identifierSuffix = QString());
 
     protected:
         QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
@@ -196,7 +99,6 @@ class ComicApplet : public Plasma::PopupApplet
 
     private:
         void changeComic( bool differentComic );
-        void updateComic( const QString &identifierSuffix = QString() );
         void updateUsedComics();
         void updateButtons();
         void updateContextMenu();
@@ -204,37 +106,18 @@ class ComicApplet : public Plasma::PopupApplet
         void saveConfig();
         bool isInPanel() const;
         void setTabBarVisible( bool isVisible );//HACK what was in 4.4 does not seem to work anymore, so this was added
-        QString getSavingDir() const;
 
     private:
         static const int CACHE_LIMIT;
         ComicModel *mModel;
         QSortFilterProxyModel *mProxy;
 
-        QImage mImage;
         QDate mCurrentDay;
-        KUrl mWebsiteUrl;
-        KUrl mImageUrl;
-        KUrl mShopUrl;
-        QString mComicIdentifier;
-        QString mNextIdentifierSuffix;
-        QString mPreviousIdentifierSuffix;
-        QString mFirstIdentifierSuffix;
-        QString mLastIdentifierSuffix;
-        QString mComicAuthor;
-        QString mComicTitle;
-        QString mStripTitle;
-        QString mAdditionalText;
-        IdentifierType mComicType;
-        QString mShownIdentifierSuffix;
-        QString mCurrentIdentifierSuffix;
-        QString mStoredIdentifierSuffix;
+
         QString mIdentifierError;
-        QString mSavingDir;
         QString mOldSource;
         ConfigWidget *mConfigWidget;
         bool mDifferentComic;
-        bool mScaleComic;
         bool mShowPreviousButton;
         bool mShowNextButton;
         bool mShowComicUrl;
@@ -259,20 +142,13 @@ class ComicApplet : public Plasma::PopupApplet
         QAction *mActionShop;
         QAction *mActionStorePosition;
         KAction *mActionNextNewStripTab;
-        QMap< QString, int > mFirstStripNum;
-        QMap< QString, int > mMaxStripNum;
         QSizeF mMaxSize;
         QSizeF mLastSize;
         QSizeF mIdealSize;
         Plasma::DataEngine *mEngine;
-        Plasma::Frame *mFrame;
-        QPropertyAnimation *mFrameAnim;
         ComicLabel *mLabelId;
         ComicLabel *mLabelTop;
         ComicLabel *mLabelUrl;
-        Plasma::PushButton *mPrevButton;
-        Plasma::PushButton *mNextButton;
-        Plasma::PushButton *mZoomButton;
 
         ImageWidget *mImageWidget;
         ArrowWidget *mLeftArrow;
@@ -288,6 +164,10 @@ class ComicApplet : public Plasma::PopupApplet
             ShowIcon = 0x2
         };
         int mTabView;
+
+        ComicData mCurrent;
+        ButtonBar *mButtonBar;
+        SavingDir *mSavingDir;
 };
 
 K_EXPORT_PLASMA_APPLET( comic, ComicApplet )
