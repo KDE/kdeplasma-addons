@@ -20,6 +20,7 @@
 
 import QtQuick 1.1
 import org.kde.qtextracomponents 0.1
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: main
@@ -44,6 +45,8 @@ Item {
     /* }}} */
 
     /* child objects ----------------------------------{{{ */
+    PlasmaCore.Theme {id: theme}
+
     QIconItem {
         id: imageIcon
         anchors.verticalCenter: parent.verticalCenter
@@ -54,6 +57,7 @@ Item {
 
     Text {
         id: textTitle
+        color: theme.textColor
 
         anchors {
             left:   imageIcon.right
@@ -70,6 +74,7 @@ Item {
 
     Text {
         id: textDescription
+        color: theme.textColor
 
         anchors {
             left:   imageIcon.right

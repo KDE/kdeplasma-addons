@@ -27,11 +27,13 @@ Item {
     property int minimumWidth:  290
     property int minimumHeight: 340
 
+    PlasmaCore.Theme {id: theme}
+
     ListView {
         id: list
         clip: true
 
-        /*LancelotData.DirModel {*/
+        LancelotData.DirModel {
         /*LancelotData.FavoriteApplications {*/
         /*LancelotData.NewDocuments {*/
         /*LancelotData.RecentDocuments {*/
@@ -41,21 +43,27 @@ Item {
         /*LancelotData.Runner {*/
         /*LancelotData.MessagesAkonadi {*/
         /*LancelotData.OpenDocuments {*/
-        LancelotData.Places {
+        /*LancelotData.Places {*/
             id: modelObject
         /*    searchString: textSearch.text*/
-        /*    path: "/home/ivan"*/
+            path: "applications:/"
         /*    filter: LancelotData.Devices.Removable*/
         }
 
-        model: modelObject
+        LancelotData.Runner {
+            id: modelSearch
+            searchString: textSearch.text
+        }
+
+        /*model: modelObject*/
+        model: (textSearch.text == "") ? modelObject : modelSearch
 
         delegate: ExtenderButton {
             title:       model.display
             description: model.description
             icon:        model.decoration
 
-            onClicked: modelObject.activate(index)
+            onClicked: list.model.activate(index)
         }
 
         anchors {
