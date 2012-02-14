@@ -68,6 +68,8 @@ public:
     {}
 
     bool autohideEnabled;
+
+    bool applicationNameFirst;
 };
 
 ApplicationConnector * ApplicationConnector::m_instance = NULL;
@@ -90,6 +92,11 @@ bool ApplicationConnector::autohideEnabled() const
     return d->autohideEnabled;
 }
 
+bool ApplicationConnector::applicationNameFirst() const
+{
+    return d->applicationNameFirst;
+}
+
 void ApplicationConnector::search(const QString & search)
 {
     emit doSearch(search);
@@ -105,7 +112,10 @@ void ApplicationConnector::hide(bool immediate)
 ApplicationConnector::ApplicationConnector()
     : d(new Private())
 {
+    KConfig cfg("lancelotrc");
+    KConfigGroup cfgGroup = cfg.group("Main");
 
+    d->applicationNameFirst = cfgGroup.readEntry("applicationNameFirst", true);
 }
 
 ApplicationConnector::~ApplicationConnector()
@@ -201,12 +211,21 @@ bool BaseModel::addService(const KService::Ptr & service)
     QString genericName = service->genericName();
     QString appName = service->name();
 
-    add(
-        genericName.isEmpty() ? appName : genericName,
-        genericName.isEmpty() ? "" : appName,
-        KIcon(service->icon()),
-        service->entryPath()
-    );
+    if (ApplicationConnector::self()->applicationNameFirst()) {
+        add(
+            appName.isEmpty() ? genericName : appName,
+            appName.isEmpty() ? "" : genericName,
+            KIcon(service->icon()),
+            service->entryPath()
+        );
+    } else {
+        add(
+            genericName.isEmpty() ? appName : genericName,
+            genericName.isEmpty() ? "" : appName,
+            KIcon(service->icon()),
+            service->entryPath()
+        );
+    }
     return true;
 }
 

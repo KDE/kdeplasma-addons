@@ -64,6 +64,12 @@ public:
      */
     bool autohideEnabled() const;
 
+    /**
+     * @returns whether the application name should be in the first line,
+     * and the description in the second
+     */
+    bool applicationNameFirst() const;
+
 Q_SIGNALS:
     /**
      * This signal is emitted when searching is requested

@@ -45,10 +45,19 @@ public:
     QList < Applications * > submodels;
     QList < ApplicationData > items;
 
+    enum Data {
+        Title, Description
+    };
+
+    QString data(int index, Data what);
+
     QString root;
     QString title;
     QIcon icon;
     bool flat;
+
+    QString lastTitle, lastDescription;
+    int lastIndex;
 
 public Q_SLOTS:
     void sycocaUpdated(const QStringList & resources);

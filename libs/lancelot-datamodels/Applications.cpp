@@ -41,6 +41,7 @@ namespace Models {
 Applications::Private::Private(Applications * parent)
     : q(parent)
 {
+    lastIndex = -1;
 }
 
 Applications::Private::~Private()
@@ -157,20 +158,44 @@ Applications::~Applications()
     delete d;
 }
 
+QString Applications::Private::data(int index, Applications::Private::Data what)
+{
+    if (index >= items.size() + submodels.size()) return "";
+
+    if (index != lastIndex) {
+        lastTitle = (index < submodels.size()) ?
+                    submodels.at(index)->selfTitle() :
+                    items.at(index - submodels.size()).name;
+        lastDescription =
+                    (index < submodels.size()) ? QString() :
+                    items.at(index - submodels.size()).description;
+
+        if (!ApplicationConnector::self()->applicationNameFirst()) {
+            QString tmp = lastTitle;
+            lastTitle = lastDescription;
+            lastDescription = tmp;
+        }
+
+        if (lastTitle.isEmpty()) {
+            lastTitle = lastDescription;
+        }
+
+        if (lastTitle == lastDescription) {
+            lastDescription.clear();
+        }
+    }
+
+    return (what == Applications::Private::Title) ? lastTitle : lastDescription;
+}
+
 QString Applications::title(int index) const
 {
-    if (index >= size()) return "";
-    return
-        (index < d->submodels.size()) ?
-            d->submodels.at(index)->selfTitle() :
-            d->items.at(index - d->submodels.size()).name;
+    return d->data(index, Applications::Private::Title);
 }
 
 QString Applications::description(int index) const
 {
-    if (index >= size()) return "";
-    if (index < d->submodels.size()) return "";
-    return d->items.at(index - d->submodels.size()).description;
+    return d->data(index, Applications::Private::Description);
 }
 
 QIcon Applications::icon(int index) const

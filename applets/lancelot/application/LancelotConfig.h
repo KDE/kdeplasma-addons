@@ -62,6 +62,9 @@ public:
     bool enableUsageStatistics() const;
     void setEnableUsageStatistics(bool value);
 
+    bool appNameFirst() const;
+    void setAppNameFirst(bool value);
+
     QStringList searchHistory() const;
     void setSearchHistory(const QStringList & history);
 

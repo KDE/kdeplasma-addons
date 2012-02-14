@@ -136,6 +136,7 @@ void LancelotConfig::loadConfig()
 
     checkKeepOpen->setChecked(m_mainConfig.readEntry("enableKeepOpen", false));
     setEnableUsageStatistics(m_mainConfig.readEntry("enableUsageStatistics", true));
+    setAppNameFirst(m_mainConfig.readEntry("applicationNameFirst", true));
 
     m_searchPlugins->load();
 }
@@ -153,6 +154,7 @@ void LancelotConfig::saveConfig()
 
     m_mainConfig.writeEntry("enableUsageStatistics", enableUsageStatistics());
     m_mainConfig.writeEntry("enableKeepOpen", checkKeepOpen->isChecked());
+    m_mainConfig.writeEntry("applicationNameFirst", appNameFirst());
 
     m_searchPlugins->save();
 
@@ -219,6 +221,16 @@ void LancelotConfig::setAppbrowserPopupSubmenus(bool value)
     if (value) {
         radioAppBrowserCascade->click();
     }
+}
+
+bool LancelotConfig::appNameFirst() const
+{
+    return checkAppNameFirst->isChecked();
+}
+
+void LancelotConfig::setAppNameFirst(bool value)
+{
+    checkAppNameFirst->setChecked(value);
 }
 
 bool LancelotConfig::enableUsageStatistics() const
