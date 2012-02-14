@@ -32,13 +32,15 @@
 
 #include "config-lancelot-datamodels.h"
 
-#ifndef LANCELOT_DATAMODELS_HAS_PIMLIBS
-
+#ifdef LANCELOT_THE_COMPILER_DOESNT_NEED_TO_PROCESS_THIS
 // just in case messages:
 I18N_NOOP("Unread messages");
 I18N_NOOP("Unable to find Kontact");
 I18N_NOOP("Start Akonadi server");
 I18N_NOOP("Akonadi server is not running");
+#endif
+
+#ifndef LANCELOT_DATAMODELS_HAS_PIMLIBS
 
 #warning "Pimlibs are not present"
 
@@ -53,6 +55,24 @@ I18N_NOOP("Akonadi server is not running");
         }
 
     #include "DummyModel_p.cpp"
+
+    namespace Lancelot {
+    namespace Models {
+        void MessagesKmail::updateLater()
+        {
+        }
+
+        void MessagesKmail::update()
+        {
+        }
+
+        QString MessagesKmail::selfShortTitle() const
+        {
+            return QString();
+        }
+
+    }
+    }
 
     #undef DummyModelClassName
     #undef DummyModelInit

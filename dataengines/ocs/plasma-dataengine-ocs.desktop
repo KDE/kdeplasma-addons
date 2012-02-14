@@ -52,6 +52,8 @@ Name[zh_TW]=開放協同服務
 
 ServiceTypes=Plasma/DataEngine
 Type=Service
+# FIXME: find a better icon...
+Icon=ocs_microblog
 X-KDE-Library=plasma_engine_ocs
 X-Plasma-EngineName=ocs
 

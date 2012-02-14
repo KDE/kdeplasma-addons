@@ -1,2 +1,4 @@
 #! /usr/bin/env bash
-$XGETTEXT *.cpp -o $podir/plasma_applet_konqprofilesapplet.pot
+$XGETTEXT `find . -name \*.qml` -L Java -o $podir/konqprofiles.pot
+rm -f rc.cpp
+

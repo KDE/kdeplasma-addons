@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2008 by Montel Laurent <montel@kde.org>                 *
+ *   Copyright (C) 2008-2012 Matthias Fuchs <mat69@gmx.net>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -14,45 +14,36 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA          *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef KONQPROFILESAPPLET_H
-#define KONQPROFILESAPPLET_H
+#ifndef COMIC_SAVER_H
+#define COMIC_SAVER_H
 
+class ComicData;
+class SavingDir;
 
-#include <Plasma/PopupApplet>
-
-class QTreeView;
-class QGraphicsProxyWidget;
-class QStandardItemModel;
-class QModelIndex;
-class QGraphicsLinearLayout;
-
-class KonqProfilesApplet : public Plasma::PopupApplet
+/**
+ * ComicSaver takes care of saving a comic strip to a user chosen
+ * destination.
+ * Further if available Nepomuk is used to store the title, author
+ * etc.
+ */
+class ComicSaver
 {
-    Q_OBJECT
-public:
-    KonqProfilesApplet(QObject *parent, const QVariantList &args);
-    virtual ~KonqProfilesApplet();
+    public:
+        ComicSaver(SavingDir *savingDir);
 
-    QWidget *widget();
-    enum SpecificRoles {
-        ProfilesName = Qt::UserRole+1
-    };
+        /**
+         * Asks the user for a destination to save the specified
+         * comic to. If possible writes it to that destination.
+         * @param comic the comic to save
+         * @return true if saving worked, false if there was a problem
+         */
+        bool save(const ComicData &comic);
 
-protected slots:
-    void slotOnItemClicked(const QModelIndex &index);
-    void slotUpdateKonqProfiles();
-
-protected:
-    void initSessionFiles();
-
-private:
-    QTreeView *m_listView;
-    QStandardItemModel *m_konqModel;
+    private:
+        SavingDir *mSavingDir;
 };
-
-K_EXPORT_PLASMA_APPLET(konqprofilesapplet, KonqProfilesApplet )
 
 #endif

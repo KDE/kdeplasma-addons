@@ -107,19 +107,19 @@ Comment[wa]=Fé l' djivêye des profils di Konsole eyet ls enonder
 Comment[x-test]=xxList and launch Konsole profilesxx
 Comment[zh_CN]=罗列和启动 Konsole 配置集
 Comment[zh_TW]=列出並啟動 Konsole 設定檔
+
 Type=Service
 Icon=utilities-terminal
-X-KDE-ServiceTypes=Plasma/Applet
 
-X-KDE-Library=plasma_applet_konsoleprofiles
-X-KDE-PluginInfo-Author=Montel Laurent
-X-KDE-PluginInfo-Email=montel@kde.org
-X-KDE-PluginInfo-Name=konsoleprofiles
+X-KDE-ServiceTypes=Plasma/DataEngine
+X-KDE-Library=plasma_engine_konsoleprofiles
+
+X-KDE-PluginInfo-Author=Shaun Reich
+X-KDE-PluginInfo-Email=shaun.reich@kdemail.net
+X-KDE-PluginInfo-Name=org.kde.konsoleprofiles
 X-KDE-PluginInfo-Version=1.0
-X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Utiltities
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
-
-X-Plasma-Requires-FileDialog=Unused
-X-Plasma-Requires-LaunchApp=Required
