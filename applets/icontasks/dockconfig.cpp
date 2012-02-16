@@ -269,46 +269,46 @@ void DockConfig::fileSelected()
                     }
 
                     if (!error.isEmpty()) {
-                        KMessageBox::detailedError(this, i18n("Invalid DockManager plugin!"), error);
+                        KMessageBox::detailedError(this, i18n("Invalid DockManager plugin."), error);
                     } else if ((!QFile::exists(destDir + "/metadata/" + meta->name()) &&
                                 !QFile::exists(destDir + "/scripts/" + script->name())) ||
-                               KMessageBox::Yes == KMessageBox::warningYesNo(this, i18n("<p>A Plugin named <b>%1</b> already exists!</p>"
+                               KMessageBox::Yes == KMessageBox::warningYesNo(this, i18n("<p>A Plugin named <b>%1</b> already exists.</p>"
                                        "<p>Overwrite?</p>",
                                        script->name()),
                                        i18n("Overwrite?"))) {
                         bool abortInstall = false;
 
                         if (QFile::exists(destDir + "/metadata/" + meta->name()) && !QFile::remove(destDir + "/metadata/" + meta->name())) {
-                            KMessageBox::error(this, i18n("<p>Sorry, failed to remove previous plugin metadata file!</p>"
+                            KMessageBox::error(this, i18n("<p>Sorry, failed to remove previous plugin metadata file.</p>"
                                                           "<p><i>%1</i></p>", destDir + "/metadata/" + meta->name()));
                             abortInstall = true;
                         }
                         if (!abortInstall && QFile::exists(destDir + "/scripts/" + script->name()) && !QFile::remove(destDir + "/scripts/" + script->name())) {
-                            KMessageBox::error(this, i18n("<p>Sorry, failed to remove previous plugin metadata file!</p>"
+                            KMessageBox::error(this, i18n("<p>Sorry, failed to remove previous plugin metadata file.</p>"
                                                           "<p><i>%1</i></p>", destDir + "/scripts/" + script->name()));
                             abortInstall = true;
                         }
                         if (!abortInstall && (!(QDir(destDir + "/scripts/").exists() || KStandardDirs::makeDir(destDir + "/scripts/")))) {
-                            KMessageBox::error(this, i18n("<p>Sorry, failed to create scripts folder!</p>"
+                            KMessageBox::error(this, i18n("<p>Sorry, failed to create scripts folder.</p>"
                                                           "<p><i>%1</i></p>", destDir + "/scripts/"));
                             abortInstall = true;
                         }
                         if (!abortInstall && (!(QDir(destDir + "/metadata/").exists() || KStandardDirs::makeDir(destDir + "/metadata/")))) {
-                            KMessageBox::error(this, i18n("<p>Sorry, failed to create metadata folder!</p>"
+                            KMessageBox::error(this, i18n("<p>Sorry, failed to create metadata folder.</p>"
                                                           "<p><i>%1</i></p>", destDir + "/metadata/"));
                             abortInstall = true;
                         }
                         if (!abortInstall) {
                             ((KArchiveFile *)script)->copyTo(destDir + "/scripts/");
                             if (!QFile::exists(destDir + "/scripts/" + script->name())) {
-                                KMessageBox::error(this, i18n("Sorry, failed to install script file!"));
+                                KMessageBox::error(this, i18n("Sorry, failed to install script file."));
                                 abortInstall = true;
                             }
                         }
                         if (!abortInstall) {
                             ((KArchiveFile *)meta)->copyTo(destDir + "/metadata/");
                             if (!QFile::exists(destDir + "/metadata/" + meta->name())) {
-                                KMessageBox::error(this, i18n("Sorry, failed to install metadata file!"));
+                                KMessageBox::error(this, i18n("Sorry, failed to install metadata file."));
                                 abortInstall = true;
                             }
                         }
@@ -338,7 +338,7 @@ void DockConfig::fileSelected()
                         error += i18n("<li>Metadata file is missing.</li>");
                     }
                     error += QLatin1String("</ul></p>");
-                    KMessageBox::detailedError(this, i18n("Invalid DockManager plugin!"), error);
+                    KMessageBox::detailedError(this, i18n("Invalid DockManager plugin."), error);
                 }
             }
         }
