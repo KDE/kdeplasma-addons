@@ -1,16 +1,16 @@
 [Desktop Entry]
-Name=YouTube
+Name=DuckDuckGo
 
-Comment=Matches YouTube queries
+Comment=Matches DuckDuckGo queries
 
 Icon=
 
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
-X-KDE-Library=krunner_youtube
+X-KDE-Library=krunner_duckduckgo
 X-KDE-PluginInfo-Author=Shaun M. Reich
 X-KDE-PluginInfo-Email=sreich@kde.org
-X-KDE-PluginInfo-Name=youtube
+X-KDE-PluginInfo-Name=duckduckgo
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=true

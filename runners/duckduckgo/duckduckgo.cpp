@@ -16,7 +16,7 @@
  *  If not, see <http://www.gnu.org/licenses/>.                               *
  *****************************************************************************/
 
-#include "youtube.h"
+#include "duckduckgo.h"
 
 #include <KDebug>
 #include <KToolInvocation>
@@ -28,35 +28,39 @@
 
 //TODO: I'd really *love* to be able to embed a video *inside* krunner. you know how sexy that'd be? answer: very much.
 //but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
-YouTube::YouTube(QObject *parent, const QVariantList& args)
+DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
     , m_context(0)
 {
     Q_UNUSED(args);
-    setObjectName(QLatin1String("YouTube"));
+    setObjectName(QLatin1String("DuckDuckGo"));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds YouTube video matching :q:."));
-    s.addExampleQuery(QLatin1String("youtube :q:"));
+    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds DuckDuckGo search matching :q:."));
+    s.addExampleQuery(QLatin1String("duckduckgo :q:"));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "youtube" ), i18n("Lists the videos matching the query, using YouTube search")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "duckduckgo" ), i18n("Lists the search entries matching the query, using DuckDuckGo search")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
 
     qRegisterMetaType<Plasma::RunnerContext*>();
+
+    KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"), KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
+    job->start();
 }
 
-YouTube::~YouTube()
+DuckDuckGo::~DuckDuckGo()
 {
 }
 
-void YouTube::match(Plasma::RunnerContext &context)
+void DuckDuckGo::match(Plasma::RunnerContext &context)
 {
-    m_context = &context;
+  //  m_context = &context;
     kDebug() << "MATCH MADE, emitting matchmade";
-    connect(this, SIGNAL(matchMade(Plasma::RunnerContext*)), this, SLOT(startYouTubeJob(Plasma::RunnerContext*)));
-    emit matchMade(&context);
+//    connect(this, SIGNAL(matchMade(Plasma::RunnerContext*)), this, SLOT(startDuckDuckGoJob(Plasma::RunnerContext*)));
+ //   emit matchMade(&context);
 
     const QString term = context.query();
     if (term.length() < 3) {
@@ -68,7 +72,7 @@ void YouTube::match(Plasma::RunnerContext &context)
     }
 }
 
-void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void DuckDuckGo::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
 //    Q_UNUSED(context)
 //    const QString session = match.data().toString();
@@ -83,40 +87,37 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 //    }
 }
 
-void YouTube::startYouTubeJob(Plasma::RunnerContext *context)
+void DuckDuckGo::startDuckDuckGoJob(Plasma::RunnerContext *context)
 {
 
-    kDebug() << "%%%%%% YOUTUBE RUNNING JOB!";
-    TubeJob *job = new TubeJob(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"), KIO::NoReload, KIO::HideProgressInfo, context);
-    connect(job, SIGNAL(dataReceived(KIO::Job*,QByteArray,Plasma::RunnerContext*)), this, SLOT(dataArrived(KIO::Job*,QByteArray,Plasma::RunnerContext*)));
-    job->start();
+    kDebug() << "%%%%%% DUCKDUCKGO RUNNING JOB!";
 }
 
-void YouTube::dataArrived(KIO::Job* job, const QByteArray& data, Plasma::RunnerContext* context)
+void DuckDuckGo::dataArrived(KIO::Job* job, const QByteArray& data)
 {
     kDebug()  << "DATA:" << data;
     if (!data.isEmpty()) {
         parseXML(data);
     }
-    const QString term = context->query();
-    Plasma::QueryMatch match(this);
-    match.setType(Plasma::QueryMatch::PossibleMatch);
-
-    //  match.setRelevance(1.0);
-    //  match.setIcon(m_icon);
-//    match.setData("TEST");
-    match.setText(QLatin1String( "YouTube: " ));
-
-    context->addMatch(term, match);
+//    const QString term = context->query();
+//    Plasma::QueryMatch match(this);
+//    match.setType(Plasma::QueryMatch::PossibleMatch);
+//
+//    //  match.setRelevance(1.0);
+//    //  match.setIcon(m_icon);
+////    match.setData("TEST");
+//    match.setText(QLatin1String( "DuckDuckGo: " ));
+//
+//    context->addMatch(term, match);
 
 }
 
-void YouTube::parseXML(QByteArray data)
+void DuckDuckGo::parseXML(QByteArray data)
 {
     QXmlStreamReader xml(data);
 
     if (xml.hasError()) {
-        kError() << "YouTube Runner xml parse failure";
+        kError() << "DuckDuckGo Runner xml parse failure";
         return;
     }
 
@@ -135,7 +136,7 @@ void YouTube::parseXML(QByteArray data)
     }
 }
 
-void YouTube::parseVideo(QXmlStreamReader& xml)
+void DuckDuckGo::parseVideo(QXmlStreamReader& xml)
 {
     QStringRef name = xml.name();
     QString currentElement;
@@ -187,24 +188,4 @@ void YouTube::parseVideo(QXmlStreamReader& xml)
     }
 }
 
-TubeJob::TubeJob(const KUrl& url, KIO::LoadType type, KIO::JobFlag flags, Plasma::RunnerContext *context)
-  : QObject()
-  , m_context(context)
-  , m_job(0)
-{
-    m_job = KIO::get(url, type, flags);
-    connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(onData(KIO::Job*,QByteArray)));
-}
-
-void TubeJob::onData(KIO::Job* job, QByteArray data)
-{
-    emit dataReceived(job, data, m_context);
-}
-
-void TubeJob::start()
-{
-    m_job->start();
-}
-
-
-#include "youtube.moc"
+#include "duckduckgo.moc"

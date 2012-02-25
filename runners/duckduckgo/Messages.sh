@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-$XGETTEXT *.cpp -o $podir/plasma_runner_youtube.pot
+$XGETTEXT *.cpp -o $podir/plasma_runner_duckduckgo.pot

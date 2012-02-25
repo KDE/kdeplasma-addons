@@ -16,8 +16,8 @@
  *  If not, see <http://www.gnu.org/licenses/>.                               *
  *****************************************************************************/
 
-#ifndef YOUTUBE_H
-#define YOUTUBE_H
+#ifndef DUCKDUCKGO_H
+#define DUCKDUCKGO_H
 
 #include <Plasma/AbstractRunner>
 
@@ -27,15 +27,14 @@
 
 #include <KUrl>
 
-
 class QXmlStreamReader;
 
-class YouTube : public Plasma::AbstractRunner {
+class DuckDuckGo : public Plasma::AbstractRunner {
     Q_OBJECT
 
 public:
-    YouTube(QObject *parent, const QVariantList& args);
-    ~YouTube();
+    DuckDuckGo(QObject *parent, const QVariantList& args);
+    ~DuckDuckGo();
 
     void match(Plasma::RunnerContext &context);
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
@@ -44,8 +43,8 @@ Q_SIGNALS:
     void matchMade(Plasma::RunnerContext *context);
 
 private slots:
-    void dataArrived(KIO::Job* job, const QByteArray& data, Plasma::RunnerContext* context);
-    void startYouTubeJob(Plasma::RunnerContext *context);
+    void dataArrived(KIO::Job* job, const QByteArray& data);
+    void startDuckDuckGoJob(Plasma::RunnerContext *context);
 
 private:
     void parseXML(QByteArray);
@@ -56,29 +55,8 @@ private:
     Plasma::RunnerContext *m_context;
 };
 
-class TubeJob : public QObject
-{
-    Q_OBJECT
-
-public:
-    TubeJob(const KUrl& url, KIO::LoadType type, KIO::JobFlag flags, Plasma::RunnerContext *context);
-
-    void start();
-
-Q_SIGNALS:
-    void dataReceived(KIO::Job* job, QByteArray data, Plasma::RunnerContext *context);
-
-private Q_SLOTS:
-    void onData(KIO::Job* job, QByteArray data);
-
-private:
-    Plasma::RunnerContext *m_context;
-
-    KIO::TransferJob *m_job;
-};
-
 Q_DECLARE_METATYPE(Plasma::RunnerContext*);
 
-K_EXPORT_PLASMA_RUNNER(youtube, YouTube)
+K_EXPORT_PLASMA_RUNNER(duckduckgo, DuckDuckGo)
 
 #endif
