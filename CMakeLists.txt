@@ -28,6 +28,10 @@ macro_optional_find_package(Nepomuk)
 macro_log_feature(NEPOMUK_FOUND "Nepomuk" "Handles all kinds of metadata on the KDE desktop to provide a semantic desktop" "http://nepomuk.kde.org/" FALSE "" "STRONGLY_RECOMMENDED: Nepomuk is used to provide metadata on objects like files, emails etc. to provide a semantic desktop.")
 macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 
+
+macro_optional_find_package(QJSON)
+macro_log_feature(QJSON_FOUND "QJSon" "Used for DuckDuckGo KRunner plugin" "INSERT URL HERE" FALSE "" "")
+
 macro_optional_depend_package(Marble "Marble")
 if (DEPEND_PACKAGE_Marble)
   macro_optional_find_package(Marble)
@@ -42,6 +46,11 @@ macro_log_feature(DBUSMENUQT_FOUND "DBusMenuQt" "DBusMenu Qt" "https://launchpad
 if (NEPOMUK_FOUND)
   include_directories( ${SOPRANO_INCLUDE_DIR} ${NEPOMUK_INCLUDE_DIR} )
 endif (NEPOMUK_FOUND)
+
+# FIXME: a better solution, since only duckduckgo runner uses it
+if (QJSON_FOUND)
+    add_subdirectory(runners)
+endif (QJSON_FOUND)
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
