@@ -107,7 +107,7 @@ void YouTube::startYouTubeJob()
 {
    // Q_ASSERT(0);
     kDebug() << "%%%%%% YOUTUBE RUNNING JORB!";
-    KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"));
+    KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"), KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
     job->start();
 }
