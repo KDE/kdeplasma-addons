@@ -51,7 +51,6 @@ DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
     //"http://api.duckduckgo.com/?q=simpsons+characters&format=json&pretty=1";
 
     m_job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-    connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(jobFinished(KJob*)));
     m_job->start();
 }
@@ -129,27 +128,16 @@ void DuckDuckGo::parseJson(const QByteArray& data)
     const QVariantMap resultsMap = parser.parse(data).toMap();
 //    QVariantList resultList;
     kDebug() << resultsMap.keys();
-//    kDebug() << resultsMap.values();
 
+    const QString& match = "define";
 
-//    if (xml.hasError()) {
-//        kError() << "DuckDuckGo Runner xml parse failure";
-//        return;
-//    }
-//
-//    while (!xml.atEnd()) {
-//        QXmlStreamReader::TokenType token = xml.readNext();
-//
-//        if (token == QXmlStreamReader::StartDocument) {
-//            continue;
-//        }
-//
-//        if (token == QXmlStreamReader::StartElement) {
-//            if (xml.name() == "group") {
-//                parseVideo(xml);
-//            }
-//        }
-//    }
+    if (match == "define") {
+        //dictionary mode
+        kDebug() << "HEADING:" << resultsMap.value("Heading");
+        kDebug() << "AbstractSource:" << resultsMap.value("AbstractSource");
+        kDebug() << "Abstract:" << resultsMap.value("Abstract");
+        kDebug() << "AbstractURL:" << resultsMap.value("AbstractURL");
+    }
 }
 
 
