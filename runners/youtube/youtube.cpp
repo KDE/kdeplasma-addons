@@ -117,7 +117,10 @@ void YouTube::parseXML(QByteArray data)
             } else if (name == "link") {
                 if (xml.attributes().value("rel").toString() == "alternate") {
                     kDebug() << "ATTRIBUTES: " << xml.attributes().value("href");
-                    videoLinks.append(xml.attributes().value("href").toString());
+                    const QString& link = xml.attributes().value("href").toString();
+                    if (link != "http://www.youtube.com") {
+                        videoLinks.append(link);
+                    }
                 }
             }
 
