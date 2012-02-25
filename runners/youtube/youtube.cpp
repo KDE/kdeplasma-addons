@@ -61,10 +61,10 @@ void YouTube::match(Plasma::RunnerContext &context)
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
+    kDebug() << "%%%%%% YOUTUBE RUNNING JORB!";
     KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"));
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
     job->start();
-
 
 //    Q_UNUSED(context)
 //    const QString session = match.data().toString();
@@ -84,10 +84,11 @@ void YouTube::dataArrived(KIO::Job* job, const QByteArray& data)
     parseXML(data);
 }
 
-
 void YouTube::parseXML(QByteArray data)
 {
     QXmlStreamReader xml(data);
+
+    QStringList videoTitles;
 
     if (xml.hasError()) {
         kDebug() << "ERRRRORRRR";
@@ -101,9 +102,27 @@ void YouTube::parseXML(QByteArray data)
         }
 
         if (token == QXmlStreamReader::StartElement) {
-            kDebug() << "XML NAME: START ELEMENT: " << xml.name();
+
+            QStringRef name = xml.name();
+
+            kDebug() << "NAME: " << name;
+            if (name == "title") {
+                kDebug() << "GOT TITLE: " << name;
+                videoTitles.append(xml.readElementText());
+            } else if (name == "link") {
+                kDebug() << "ATTRIBUTES: " << xml.attributes().at(0).name();
+                QString element = xml.readElementText();
+                kDebug() << "ELEMENT" << element;
+            }
+
+            while (xml.tokenType() != QXmlStreamReader::EndElement) {
+                kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
+                xml.readNext();
+            }
         }
     }
+
+    kDebug() << "TITLE WAS: " << videoTitles;
 }
 
 #include "youtube.moc"
