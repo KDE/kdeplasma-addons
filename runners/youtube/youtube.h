@@ -63,12 +63,13 @@ class TubeJob : public QObject
 public:
     TubeJob(const KUrl& url, KIO::LoadType type, KIO::JobFlag flags, Plasma::RunnerContext *context);
 
+    void start();
+
 Q_SIGNALS:
     void dataReceived(KIO::Job* job, QByteArray data, Plasma::RunnerContext *context);
 
 private Q_SLOTS:
     void onData(KIO::Job* job, QByteArray data);
-    void start();
 
 private:
     Plasma::RunnerContext *m_context;

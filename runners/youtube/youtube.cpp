@@ -86,10 +86,10 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 void YouTube::startYouTubeJob(Plasma::RunnerContext *context)
 {
 
-    kDebug() << "%%%%%% YOUTUBE RUNNING JORB!";
+    kDebug() << "%%%%%% YOUTUBE RUNNING JOB!";
     TubeJob *job = new TubeJob(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"), KIO::NoReload, KIO::HideProgressInfo, context);
     connect(job, SIGNAL(dataReceived(KIO::Job*,QByteArray,Plasma::RunnerContext*)), this, SLOT(dataArrived(KIO::Job*,QByteArray,Plasma::RunnerContext*)));
- //   job->start();
+    job->start();
 }
 
 void YouTube::dataArrived(KIO::Job* job, const QByteArray& data, Plasma::RunnerContext* context)
