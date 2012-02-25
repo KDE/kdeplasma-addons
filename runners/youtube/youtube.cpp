@@ -118,25 +118,30 @@ void YouTube::parseVideo(QXmlStreamReader& xml)
 
     kDebug() << "NAME: " << name;
 
-    if (name == "title") {
-        kDebug() << "GOT TITLE: " << name;
-        videoTitles.append(xml.readElementText());
+    if (name == "group") {
+        while (!xml.atEnd() && xml.tokenType() != QXmlStreamReader::EndDocument) {
+            kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
 
-    } else if (name == "link") {
-
-        if (xml.attributes().value("rel").toString() == "alternate") {
-            kDebug() << "ATTRIBUTES: " << xml.attributes().value("href");
-            const QString& link = xml.attributes().value("href").toString();
-            if (link != "http://www.youtube.com") {
-                videoLinks.append(link);
-            }
+//            if (name == "title") {
+//                kDebug() << "GOT TITLE: " << name;
+//                videoTitles.append(xml.readElementText());
+//
+//            } else if (name == "link") {
+//
+//                if (xml.attributes().value("rel").toString() == "alternate") {
+//                    kDebug() << "ATTRIBUTES: " << xml.attributes().value("href");
+//                    const QString& link = xml.attributes().value("href").toString();
+//                    if (link != "http://www.youtube.com") {
+//                        videoLinks.append(link);
+//                    }
+//                }
+//            }
+            xml.readNext();
+            xml.readElementText();
         }
     }
 
-    while (xml.tokenType() != QXmlStreamReader::EndElement) {
-        kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
-        xml.readNext();
-    }
+
 
     if (!videoTitles.isEmpty() && !videoLinks.isEmpty()) {
         kDebug() << "TITLE WAS: " << videoTitles;
