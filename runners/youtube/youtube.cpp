@@ -36,6 +36,7 @@ YouTube::YouTube(QObject *parent, const QVariantList& args)
     addSyntax(s);
 
     addSyntax(Plasma::RunnerSyntax(QLatin1String( "youtube" ), i18n("Lists the videos matching the query, using YouTube search")));
+    setSpeed(SlowSpeed);
 }
 
 YouTube::~YouTube()
@@ -89,9 +90,11 @@ void YouTube::parseXML(QByteArray data)
     QXmlStreamReader xml(data);
 
     QStringList videoTitles;
+    QStringList videoLinks;
 
     if (xml.hasError()) {
-        kDebug() << "ERRRRORRRR";
+        kError() << "YouTube Runner xml parse failure";
+        return;
     }
 
     while (!xml.atEnd()) {
@@ -110,9 +113,10 @@ void YouTube::parseXML(QByteArray data)
                 kDebug() << "GOT TITLE: " << name;
                 videoTitles.append(xml.readElementText());
             } else if (name == "link") {
-                kDebug() << "ATTRIBUTES: " << xml.attributes().at(0).name();
-                QString element = xml.readElementText();
-                kDebug() << "ELEMENT" << element;
+                if (xml.attributes().value("rel").toString() == "alternate") {
+                    kDebug() << "ATTRIBUTES: " << xml.attributes().value("href");
+                    videoLinks.append(xml.attributes().value("href").toString());
+                }
             }
 
             while (xml.tokenType() != QXmlStreamReader::EndElement) {
@@ -123,6 +127,7 @@ void YouTube::parseXML(QByteArray data)
     }
 
     kDebug() << "TITLE WAS: " << videoTitles;
+    kDebug() << "LINK WAS: " << videoLinks;
 }
 
 #include "youtube.moc"
