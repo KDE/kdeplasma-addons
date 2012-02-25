@@ -47,8 +47,8 @@ DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
 
     qRegisterMetaType<Plasma::RunnerContext*>();
 
-    KUrl url = KUrl("http://api.duckduckgo.com/?q=define+ostensibly&format=json&pretty=1");
-    //"http://api.duckduckgo.com/?q=simpsons+characters&format=json&pretty=1";
+    KUrl url = KUrl("http://api.duckduckgo.com/?q=futurama+characters&format=json&pretty=1");
+       // "http://api.duckduckgo.com/?q=define+ostensibly&format=json&pretty=1");
 
     m_job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(jobFinished(KJob*)));
@@ -126,17 +126,28 @@ void DuckDuckGo::parseJson(const QByteArray& data)
     kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
-//    QVariantList resultList;
-    kDebug() << resultsMap.keys();
 
-    const QString& match = "define";
+    const QString& match = "duckduckgo";
 
     if (match == "define") {
         //dictionary mode
-        kDebug() << "HEADING:" << resultsMap.value("Heading");
+        kDebug() << "Heading:" << resultsMap.value("Heading");
         kDebug() << "AbstractSource:" << resultsMap.value("AbstractSource");
         kDebug() << "Abstract:" << resultsMap.value("Abstract");
         kDebug() << "AbstractURL:" << resultsMap.value("AbstractURL");
+    } else if (match == "wolfram") {
+        //wolfram mode (simple redirection, because web search providers are assholes)
+        kDebug() << "Redirect:" << resultsMap.value("Redirect");
+    } else if (match == "duckduckgo") {
+        QList<QVariant> related = resultsMap.value("RelatedTopics").toList();
+
+        foreach (const QVariant& variant, related) {
+            QVariantMap submap = variant.toMap();
+
+            kDebug() << "FirstURL:" << submap.value("FirstURL");
+            kDebug() << "Text:" << submap.value("Text");
+            kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
+        }
     }
 }
 
