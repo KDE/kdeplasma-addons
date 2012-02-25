@@ -124,6 +124,7 @@ void DuckDuckGo::parseJson(const QByteArray& data)
     const QVariantMap resultsMap = parser.parse(data).toMap();
 //    QVariantList resultList;
     kDebug() << resultsMap.keys();
+//    kDebug() << resultsMap.values();
 
 
 //    if (xml.hasError()) {
