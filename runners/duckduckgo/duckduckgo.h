@@ -26,8 +26,9 @@
 #include <KIO/Job>
 
 #include <KUrl>
+#include <QDataStream>
 
-class QXmlStreamReader;
+
 
 class DuckDuckGo : public Plasma::AbstractRunner {
     Q_OBJECT
@@ -45,14 +46,12 @@ Q_SIGNALS:
 private slots:
     void dataArrived(KIO::Job* job, const QByteArray& data);
     void startDuckDuckGoJob(Plasma::RunnerContext *context);
+    void jobFinished(KJob* job);
 
 private:
-    void parseXML(QByteArray);
-    void parseVideo(QXmlStreamReader& xml);
+    void parseJson(const QDataStream& buffer);
 
-    QByteArray buffer;
-
-    Plasma::RunnerContext *m_context;
+    QDataStream buffer;
 };
 
 Q_DECLARE_METATYPE(Plasma::RunnerContext*);

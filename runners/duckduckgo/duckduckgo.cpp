@@ -23,14 +23,13 @@
 
 #include <QtCore/QTimer>
 #include <QtCore/QWaitCondition>
-#include <QtXml/QXmlStreamReader>
 #include <QtCore/QEventLoop>
+#include <qjson/parser.h>
 
 //TODO: I'd really *love* to be able to embed a video *inside* krunner. you know how sexy that'd be? answer: very much.
 //but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
 DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
-    , m_context(0)
 {
     Q_UNUSED(args);
     setObjectName(QLatin1String("DuckDuckGo"));
@@ -46,8 +45,9 @@ DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
 
     qRegisterMetaType<Plasma::RunnerContext*>();
 
-    KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"), KIO::NoReload, KIO::HideProgressInfo);
+    KIO::TransferJob *job = KIO::get(KUrl("http://api.duckduckgo.com/?q=simpsons+characters&format=json&pretty=1"), KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(jobFinished(KJob*)));
     job->start();
 }
 
@@ -57,7 +57,6 @@ DuckDuckGo::~DuckDuckGo()
 
 void DuckDuckGo::match(Plasma::RunnerContext &context)
 {
-  //  m_context = &context;
     kDebug() << "MATCH MADE, emitting matchmade";
 //    connect(this, SIGNAL(matchMade(Plasma::RunnerContext*)), this, SLOT(startDuckDuckGoJob(Plasma::RunnerContext*)));
  //   emit matchMade(&context);
@@ -95,9 +94,10 @@ void DuckDuckGo::startDuckDuckGoJob(Plasma::RunnerContext *context)
 
 void DuckDuckGo::dataArrived(KIO::Job* job, const QByteArray& data)
 {
-    kDebug()  << "DATA:" << data;
+//    kDebug()  << "DATA:" << data;
     if (!data.isEmpty()) {
-        parseXML(data);
+        buffer << data;
+//        parseJson(data);
     }
 //    const QString term = context->query();
 //    Plasma::QueryMatch match(this);
@@ -112,80 +112,39 @@ void DuckDuckGo::dataArrived(KIO::Job* job, const QByteArray& data)
 
 }
 
-void DuckDuckGo::parseXML(QByteArray data)
+void DuckDuckGo::jobFinished(KJob *job)
 {
-    QXmlStreamReader xml(data);
-
-    if (xml.hasError()) {
-        kError() << "DuckDuckGo Runner xml parse failure";
-        return;
-    }
-
-    while (!xml.atEnd()) {
-        QXmlStreamReader::TokenType token = xml.readNext();
-
-        if (token == QXmlStreamReader::StartDocument) {
-            continue;
-        }
-
-        if (token == QXmlStreamReader::StartElement) {
-            if (xml.name() == "group") {
-                parseVideo(xml);
-            }
-        }
-    }
+    parseJson(buffer);
 }
 
-void DuckDuckGo::parseVideo(QXmlStreamReader& xml)
+void DuckDuckGo::parseJson(const QDataStream& data)
 {
-    QStringRef name = xml.name();
-    QString currentElement;
-
-    QStringList videoTitles;
-    QStringList videoLinks;
-
-    kDebug() << "NAME: " << name;
-
-    QXmlStreamAttributes attributes = xml.attributes();
-    while (!xml.atEnd() && xml.tokenType() != QXmlStreamReader::EndDocument) {
-        kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
+    kDebug() << "JSON PARSER ONLINE";
+    QJson::Parser parser;
+    const QVariantMap resultsMap = parser.parse(data.device()).toMap();
+//    QVariantList resultList;
+    kDebug() << resultsMap.keys();
 
 
-        kDebug() << "CURRENTELEMENT: " << currentElement;
-
-        if (xml.name() == "title") {
-            kDebug() << attributes.value("plain").toString();
-        }
-
-        if (xml.name() == "thumbnail") {
-            QStringRef attribute = attributes.value("url");
-            kDebug() << "ATTRIBUTE: " << attribute;
-        }
-//            if (name == "title") {
-//                kDebug() << "GOT TITLE: " << name;
-//                videoTitles.append(xml.readElementText());
+//    if (xml.hasError()) {
+//        kError() << "DuckDuckGo Runner xml parse failure";
+//        return;
+//    }
 //
-//            } else if (name == "link") {
+//    while (!xml.atEnd()) {
+//        QXmlStreamReader::TokenType token = xml.readNext();
 //
-//                if (xml.attributes().value("rel").toString() == "alternate") {
-//                    kDebug() << "ATTRIBUTES: " << xml.attributes().value("href");
-//                    const QString& link = xml.attributes().value("href").toString();
-//                    if (link != "http://www.youtube.com") {
-//                        videoLinks.append(link);
-//                    }
-//                }
+//        if (token == QXmlStreamReader::StartDocument) {
+//            continue;
+//        }
+//
+//        if (token == QXmlStreamReader::StartElement) {
+//            if (xml.name() == "group") {
+//                parseVideo(xml);
 //            }
-
-        xml.readNext();
-        attributes = xml.attributes();
-        currentElement = xml.readElementText();
-        kDebug() << currentElement;
-    }
-
-    if (!videoTitles.isEmpty() && !videoLinks.isEmpty()) {
-        kDebug() << "TITLE WAS: " << videoTitles;
-        kDebug() << "LINK WAS: " << videoLinks;
-    }
+//        }
+//    }
 }
+
 
 #include "duckduckgo.moc"
