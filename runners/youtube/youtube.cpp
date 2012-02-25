@@ -104,7 +104,9 @@ void YouTube::parseXML(QByteArray data)
         }
 
         if (token == QXmlStreamReader::StartElement) {
-            parseVideo(xml);
+            if (xml.name() == "group") {
+                parseVideo(xml);
+            }
         }
     }
 }
@@ -119,15 +121,21 @@ void YouTube::parseVideo(QXmlStreamReader& xml)
 
     kDebug() << "NAME: " << name;
 
-    if (name == "group") {
-        while (!xml.atEnd() && xml.tokenType() != QXmlStreamReader::EndDocument) {
-            kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
+    QXmlStreamAttributes attributes = xml.attributes();
+    while (!xml.atEnd() && xml.tokenType() != QXmlStreamReader::EndDocument) {
+        kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
 
-            QXmlStreamAttributes attributes = xml.attributes();
 
-            if (currentElement == "title") {
-                kDebug() << attributes.value("plain").toString();
-            }
+        kDebug() << "CURRENTELEMENT: " << currentElement;
+
+        if (xml.name() == "title") {
+            kDebug() << attributes.value("plain").toString();
+        }
+
+        if (xml.name() == "thumbnail") {
+            QStringRef attribute = attributes.value("url");
+            kDebug() << "ATTRIBUTE: " << attribute;
+        }
 //            if (name == "title") {
 //                kDebug() << "GOT TITLE: " << name;
 //                videoTitles.append(xml.readElementText());
@@ -143,10 +151,10 @@ void YouTube::parseVideo(QXmlStreamReader& xml)
 //                }
 //            }
 
-            xml.readNext();
-            currentElement = xml.readElementText();
-            kDebug() << currentElement;
-        }
+        xml.readNext();
+        attributes = xml.attributes();
+        currentElement = xml.readElementText();
+        kDebug() << currentElement;
     }
 
 
