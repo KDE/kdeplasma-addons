@@ -112,6 +112,7 @@ void YouTube::parseXML(QByteArray data)
 void YouTube::parseVideo(QXmlStreamReader& xml)
 {
     QStringRef name = xml.name();
+    QString currentElement;
 
     QStringList videoTitles;
     QStringList videoLinks;
@@ -122,6 +123,11 @@ void YouTube::parseVideo(QXmlStreamReader& xml)
         while (!xml.atEnd() && xml.tokenType() != QXmlStreamReader::EndDocument) {
             kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
 
+            QXmlStreamAttributes attributes = xml.attributes();
+
+            if (currentElement == "title") {
+                kDebug() << attributes.value("plain").toString();
+            }
 //            if (name == "title") {
 //                kDebug() << "GOT TITLE: " << name;
 //                videoTitles.append(xml.readElementText());
@@ -136,8 +142,10 @@ void YouTube::parseVideo(QXmlStreamReader& xml)
 //                    }
 //                }
 //            }
+
             xml.readNext();
-            xml.readElementText();
+            currentElement = xml.readElementText();
+            kDebug() << currentElement;
         }
     }
 
