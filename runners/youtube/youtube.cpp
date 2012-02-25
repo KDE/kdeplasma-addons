@@ -33,106 +33,35 @@ YouTube::YouTube(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args);
-    setObjectName(QLatin1String( "Konsole Sessions" ));
-    m_icon = KIcon(QLatin1String( "utilities-terminal" ));
-    setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
-    loadSessions();
+    setObjectName(QLatin1String("YouTube"));
+    setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
 
-    KDirWatch *historyWatch = new KDirWatch(this);
-    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String( "konsole/" ));
-    foreach (const QString &dir, sessiondirs) {
-        historyWatch->addDir(dir);
-    }
-
-    connect(historyWatch, SIGNAL(dirty(QString)), this,SLOT(loadSessions()));
-    connect(historyWatch, SIGNAL(created(QString)), this,SLOT(loadSessions()));
-    connect(historyWatch, SIGNAL(deleted(QString)), this,SLOT(loadSessions()));
-
-    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds Konsole sessions matching :q:."));
-    s.addExampleQuery(QLatin1String( "konsole :q:" ));
+    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds YouTube video matching :q:."));
+    s.addExampleQuery(QLatin1String("youtube :q:"));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "konsole" ), i18n("Lists all the Konsole sessions in your account.")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "youtube" ), i18n("Lists the videos matching the query, using YouTube search")));
 }
 
 YouTube::~YouTube()
 {
 }
 
-void YouTube::loadSessions()
-{
-    const QStringList list = KGlobal::dirs()->findAllResources("data", QLatin1String( "konsole/*.profile" ), KStandardDirs::NoDuplicates);
-    QStringList::ConstIterator end = list.constEnd();
-    for (QStringList::ConstIterator it = list.constBegin(); it != end; ++it) {
-        QFileInfo info(*it);
-        const QString profileName = KIO::decodeFileName(info.baseName());
-
-        QString niceName=profileName;
-        //kDebug()<<" loadSessions :";
-        KConfig _config(*it, KConfig::SimpleConfig);
-        if (_config.hasGroup("General"))
-        {
-            KConfigGroup cfg(&_config, "General");
-            if (cfg.hasKey("Name")) {
-                niceName = cfg.readEntry("Name");
-            }
-
-            m_sessions.insert(profileName, niceName);
-            //kDebug()<<" profileName :"<<profileName<<" niceName :"<<niceName;
-        }
-    }
-}
-
 void YouTube::match(Plasma::RunnerContext &context)
 {
-    if (m_sessions.isEmpty()) {
-        return;
-    }
-
     const QString term = context.query();
     if (term.length() < 3) {
         return;
     }
 
-    if (term.compare(QLatin1String( "konsole" ), Qt::CaseInsensitive) == 0) {
-        QHashIterator<QString, QString> i(m_sessions);
-        while (i.hasNext()) {
-            i.next();
-            Plasma::QueryMatch match(this);
-            match.setType(Plasma::QueryMatch::PossibleMatch);
-            match.setRelevance(1.0);
-            match.setIcon(m_icon);
-            match.setData(i.key());
-            match.setText(QLatin1String( "Konsole: " ) + i.value());
-            context.addMatch(term, match);
-        }
-    } else {
-        // we could just return here, but the kate hackers might have a session kate,
-        // so everybody else will suffer. And rightfully so! ;-)
-        QHashIterator<QString, QString> i(m_sessions);
-        while (i.hasNext()) {
-            if (!context.isValid()) {
-                return;
-            }
+    Plasma::QueryMatch match(this);
+    match.setType(Plasma::QueryMatch::PossibleMatch);
+    //  match.setRelevance(1.0);
+    //  match.setIcon(m_icon);
+    //  match.setData(i.key());
+    match.setText(QLatin1String( "YouTube: " ));
 
-            i.next();
-            if (i.value().contains(term, Qt::CaseInsensitive)) {
-                Plasma::QueryMatch match(this);
-                match.setType(Plasma::QueryMatch::PossibleMatch);
-                match.setIcon(m_icon);
-                match.setData(i.key());
-                match.setText(QLatin1String( "Konsole: " ) + i.value());
-
-                if (i.value().compare(term, Qt::CaseInsensitive) == 0) {
-                    match.setRelevance(1.0);
-                } else {
-                    match.setRelevance(0.6);
-                }
-
-                context.addMatch(term, match);
-            }
-        }
-    }
+    context.addMatch(term, match);
 }
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)

@@ -21,8 +21,6 @@
 
 #include <Plasma/AbstractRunner>
 
-#include <KIcon>
-
 class YouTube : public Plasma::AbstractRunner {
     Q_OBJECT
 
@@ -33,12 +31,7 @@ public:
     void match(Plasma::RunnerContext &context);
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
 
-protected slots:
-    void loadSessions();
 private:
-    KIcon m_icon;
-    QHash<QString, QString> m_sessions;
-    QTime m_time;
 };
 
 K_EXPORT_PLASMA_RUNNER(youtube, YouTube)
