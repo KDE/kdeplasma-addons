@@ -21,6 +21,8 @@
 
 #include <Plasma/AbstractRunner>
 
+#include <Plasma/RunnerContext>
+
 #include <KIO/Job>
 
 class QXmlStreamReader;
@@ -35,9 +37,12 @@ public:
     void match(Plasma::RunnerContext &context);
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
 
+Q_SIGNALS:
+    void matchMade();//Plasma::RunnerContext &context);
+
 private slots:
     void dataArrived(KIO::Job* job, const QByteArray& data);
-    void startYouTubeJob();
+    void startYouTubeJob(); //(Plasma::RunnerContext &context);
 
 private:
     void parseXML(QByteArray);

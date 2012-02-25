@@ -24,6 +24,7 @@
 #include <QtCore/QTimer>
 #include <QtCore/QWaitCondition>
 #include <QtXml/QXmlStreamReader>
+#include <QtCore/QEventLoop>
 
 //TODO: I'd really *love* to be able to embed a video *inside* krunner. you know how sexy that'd be? answer: very much.
 //but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
@@ -41,6 +42,8 @@ YouTube::YouTube(QObject *parent, const QVariantList& args)
     addSyntax(Plasma::RunnerSyntax(QLatin1String( "youtube" ), i18n("Lists the videos matching the query, using YouTube search")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
+
+//    qRegisterMetaType<Plasma::RunnerContext>();
 }
 
 YouTube::~YouTube()
@@ -49,22 +52,40 @@ YouTube::~YouTube()
 
 void YouTube::match(Plasma::RunnerContext &context)
 {
+    kDebug() << "MATCH MADE, emitting matchmade";
+//    Q_ASSERT(connect(this, SIGNAL(matchMade(Plasma::RunnerContext&)), this, SLOT(startYouTubeJob(Plasma::RunnerContext&))));
+    Q_ASSERT(connect(this, SIGNAL(matchMade()), this, SLOT(startYouTubeJob())));
+   emit matchMade();
+//    QMetaObject::invokeMethod(this, SLOT(matchMade(Plasma::RunnerContext));
     const QString term = context.query();
     if (term.length() < 3) {
         return;
     }
 
+    if (!context.isValid()) {
+        return;
+    }
+
+//    QEventLoop loop;
+//    // Wait a second, we don't want to  query on every keypress
+//    QMutex mutex;
+//    QWaitCondition waiter;
+//    mutex.lock();
+//    waiter.wait(&mutex, 1000);
+//    mutex.unlock();
+
+//    startYouTubeJob();
+
     Plasma::QueryMatch match(this);
     match.setType(Plasma::QueryMatch::PossibleMatch);
-    // Wait a second, we don't want to  query on every keypress
 
-    startYouTubeJob();
     //  match.setRelevance(1.0);
     //  match.setIcon(m_icon);
     //  match.setData(i.key());
     match.setText(QLatin1String( "YouTube: " ));
 
     context.addMatch(term, match);
+
 }
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
@@ -84,6 +105,7 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 
 void YouTube::startYouTubeJob()
 {
+   // Q_ASSERT(0);
     kDebug() << "%%%%%% YOUTUBE RUNNING JORB!";
     KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"));
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
@@ -92,6 +114,7 @@ void YouTube::startYouTubeJob()
 
 void YouTube::dataArrived(KIO::Job* job, const QByteArray& data)
 {
+    kDebug()  << "DATA:" << data;
     if (!data.isEmpty()) {
         parseXML(data);
     }
