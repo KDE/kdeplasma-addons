@@ -49,9 +49,10 @@ private slots:
     void jobFinished(KJob* job);
 
 private:
-    void parseJson(const QDataStream& buffer);
+    void parseJson(const QByteArray& buffer);
 
     QDataStream buffer;
+    KIO::StoredTransferJob *m_job;
 };
 
 Q_DECLARE_METATYPE(Plasma::RunnerContext*);

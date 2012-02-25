@@ -45,10 +45,10 @@ DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
 
     qRegisterMetaType<Plasma::RunnerContext*>();
 
-    KIO::TransferJob *job = KIO::get(KUrl("http://api.duckduckgo.com/?q=simpsons+characters&format=json&pretty=1"), KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(jobFinished(KJob*)));
-    job->start();
+    m_job = KIO::storedGet(KUrl("http://api.duckduckgo.com/?q=simpsons+characters&format=json&pretty=1"), KIO::NoReload, KIO::HideProgressInfo);
+    connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
+    connect(m_job, SIGNAL(result(KJob*)), this, SLOT(jobFinished(KJob*)));
+    m_job->start();
 }
 
 DuckDuckGo::~DuckDuckGo()
@@ -114,14 +114,14 @@ void DuckDuckGo::dataArrived(KIO::Job* job, const QByteArray& data)
 
 void DuckDuckGo::jobFinished(KJob *job)
 {
-    parseJson(buffer);
+    parseJson(m_job->data());
 }
 
-void DuckDuckGo::parseJson(const QDataStream& data)
+void DuckDuckGo::parseJson(const QByteArray& data)
 {
     kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
-    const QVariantMap resultsMap = parser.parse(data.device()).toMap();
+    const QVariantMap resultsMap = parser.parse(data).toMap();
 //    QVariantList resultList;
     kDebug() << resultsMap.keys();
 
