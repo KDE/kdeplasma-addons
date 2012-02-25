@@ -21,9 +21,12 @@
 #include <KDebug>
 #include <KToolInvocation>
 
-#include <QXmlStreamReader>
+#include <QtCore/QTimer>
+#include <QtCore/QWaitCondition>
+#include <QtXml/QXmlStreamReader>
 
-
+//TODO: I'd really *love* to be able to embed a video *inside* krunner. you know how sexy that'd be? answer: very much.
+//but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
 YouTube::YouTube(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
@@ -37,6 +40,7 @@ YouTube::YouTube(QObject *parent, const QVariantList& args)
 
     addSyntax(Plasma::RunnerSyntax(QLatin1String( "youtube" ), i18n("Lists the videos matching the query, using YouTube search")));
     setSpeed(SlowSpeed);
+    setPriority(LowPriority);
 }
 
 YouTube::~YouTube()
@@ -52,6 +56,9 @@ void YouTube::match(Plasma::RunnerContext &context)
 
     Plasma::QueryMatch match(this);
     match.setType(Plasma::QueryMatch::PossibleMatch);
+    // Wait a second, we don't want to  query on every keypress
+
+    startYouTubeJob();
     //  match.setRelevance(1.0);
     //  match.setIcon(m_icon);
     //  match.setData(i.key());
@@ -62,11 +69,6 @@ void YouTube::match(Plasma::RunnerContext &context)
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
-    kDebug() << "%%%%%% YOUTUBE RUNNING JORB!";
-    KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"));
-    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
-    job->start();
-
 //    Q_UNUSED(context)
 //    const QString session = match.data().toString();
 //    kDebug() << "Open Konsole Session " << session;
@@ -78,6 +80,14 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 //        kDebug() << "=== START: konsole" << args;
 //        KToolInvocation::kdeinitExec(QLatin1String( "konsole" ), args);
 //    }
+}
+
+void YouTube::startYouTubeJob()
+{
+    kDebug() << "%%%%%% YOUTUBE RUNNING JORB!";
+    KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"));
+    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
+    job->start();
 }
 
 void YouTube::dataArrived(KIO::Job* job, const QByteArray& data)

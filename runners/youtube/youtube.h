@@ -37,6 +37,7 @@ public:
 
 private slots:
     void dataArrived(KIO::Job* job, const QByteArray& data);
+    void startYouTubeJob();
 
 private:
     void parseXML(QByteArray);
