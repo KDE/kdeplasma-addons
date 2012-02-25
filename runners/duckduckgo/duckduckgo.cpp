@@ -47,7 +47,10 @@ DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
 
     qRegisterMetaType<Plasma::RunnerContext*>();
 
-    m_job = KIO::storedGet(KUrl("http://api.duckduckgo.com/?q=simpsons+characters&format=json&pretty=1"), KIO::NoReload, KIO::HideProgressInfo);
+    KUrl url = KUrl("http://api.duckduckgo.com/?q=define+ostensibly&format=json&pretty=1");
+    //"http://api.duckduckgo.com/?q=simpsons+characters&format=json&pretty=1";
+
+    m_job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(jobFinished(KJob*)));
     m_job->start();
