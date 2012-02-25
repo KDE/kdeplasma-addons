@@ -23,6 +23,8 @@
 
 #include <KIO/Job>
 
+class QXmlStreamReader;
+
 class YouTube : public Plasma::AbstractRunner {
     Q_OBJECT
 
@@ -38,6 +40,7 @@ private slots:
 
 private:
     void parseXML(QByteArray);
+    void parseVideo(QXmlStreamReader& xml);
 
     QByteArray buffer;
 };

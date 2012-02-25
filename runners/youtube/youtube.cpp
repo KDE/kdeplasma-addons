@@ -91,9 +91,6 @@ void YouTube::parseXML(QByteArray data)
 {
     QXmlStreamReader xml(data);
 
-    QStringList videoTitles;
-    QStringList videoLinks;
-
     if (xml.hasError()) {
         kError() << "YouTube Runner xml parse failure";
         return;
@@ -107,32 +104,44 @@ void YouTube::parseXML(QByteArray data)
         }
 
         if (token == QXmlStreamReader::StartElement) {
+            parseVideo(xml);
+        }
+    }
+}
 
-            QStringRef name = xml.name();
+void YouTube::parseVideo(QXmlStreamReader& xml)
+{
+    QStringRef name = xml.name();
 
-            kDebug() << "NAME: " << name;
-            if (name == "title") {
-                kDebug() << "GOT TITLE: " << name;
-                videoTitles.append(xml.readElementText());
-            } else if (name == "link") {
-                if (xml.attributes().value("rel").toString() == "alternate") {
-                    kDebug() << "ATTRIBUTES: " << xml.attributes().value("href");
-                    const QString& link = xml.attributes().value("href").toString();
-                    if (link != "http://www.youtube.com") {
-                        videoLinks.append(link);
-                    }
-                }
-            }
+    QStringList videoTitles;
+    QStringList videoLinks;
 
-            while (xml.tokenType() != QXmlStreamReader::EndElement) {
-                kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
-                xml.readNext();
+    kDebug() << "NAME: " << name;
+
+    if (name == "title") {
+        kDebug() << "GOT TITLE: " << name;
+        videoTitles.append(xml.readElementText());
+
+    } else if (name == "link") {
+
+        if (xml.attributes().value("rel").toString() == "alternate") {
+            kDebug() << "ATTRIBUTES: " << xml.attributes().value("href");
+            const QString& link = xml.attributes().value("href").toString();
+            if (link != "http://www.youtube.com") {
+                videoLinks.append(link);
             }
         }
     }
 
-    kDebug() << "TITLE WAS: " << videoTitles;
-    kDebug() << "LINK WAS: " << videoLinks;
+    while (xml.tokenType() != QXmlStreamReader::EndElement) {
+        kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
+        xml.readNext();
+    }
+
+    if (!videoTitles.isEmpty() && !videoLinks.isEmpty()) {
+        kDebug() << "TITLE WAS: " << videoTitles;
+        kDebug() << "LINK WAS: " << videoLinks;
+    }
 }
 
 #include "youtube.moc"
