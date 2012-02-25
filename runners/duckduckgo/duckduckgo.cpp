@@ -40,6 +40,8 @@ DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
     addSyntax(s);
 
     addSyntax(Plasma::RunnerSyntax(QLatin1String( "duckduckgo" ), i18n("Lists the search entries matching the query, using DuckDuckGo search")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "wolfram" ), i18n("Searches using Wolfram Alpha, powered by DuckDuckGo")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "define" ), i18n("Defines words using dictionaries, powered by DuckDuckGo")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
 
