@@ -82,7 +82,9 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 
 void YouTube::dataArrived(KIO::Job* job, const QByteArray& data)
 {
-    parseXML(data);
+    if (!data.isEmpty()) {
+        parseXML(data);
+    }
 }
 
 void YouTube::parseXML(QByteArray data)
