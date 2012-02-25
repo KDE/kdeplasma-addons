@@ -21,6 +21,8 @@
 
 #include <Plasma/AbstractRunner>
 
+#include <KIO/Job>
+
 class YouTube : public Plasma::AbstractRunner {
     Q_OBJECT
 
@@ -31,7 +33,13 @@ public:
     void match(Plasma::RunnerContext &context);
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
 
+private slots:
+    void dataArrived(KIO::Job* job, const QByteArray& data);
+
 private:
+    void parseXML(QByteArray);
+
+    QByteArray buffer;
 };
 
 K_EXPORT_PLASMA_RUNNER(youtube, YouTube)

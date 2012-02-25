@@ -18,15 +18,10 @@
 
 #include "youtube.h"
 
-#include <QFileInfo>
-#include <KDirWatch>
 #include <KDebug>
-#include <KStandardDirs>
 #include <KToolInvocation>
-#include <KIcon>
-#include <KConfig>
-#include <KConfigGroup>
-#include <kio/global.h>
+
+#include <QXmlStreamReader>
 
 
 YouTube::YouTube(QObject *parent, const QVariantList& args)
@@ -66,17 +61,49 @@ void YouTube::match(Plasma::RunnerContext &context)
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
-    Q_UNUSED(context)
-    const QString session = match.data().toString();
-    kDebug() << "Open Konsole Session " << session;
+    KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"));
+    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
+    job->start();
 
-    if (!session.isEmpty()) {
-        QStringList args;
-        args << QLatin1String( "--profile" );
-        args << session;
-        kDebug() << "=== START: konsole" << args;
-        KToolInvocation::kdeinitExec(QLatin1String( "konsole" ), args);
+
+//    Q_UNUSED(context)
+//    const QString session = match.data().toString();
+//    kDebug() << "Open Konsole Session " << session;
+//
+//    if (!session.isEmpty()) {
+//        QStringList args;
+//        args << QLatin1String( "--profile" );
+//        args << session;
+//        kDebug() << "=== START: konsole" << args;
+//        KToolInvocation::kdeinitExec(QLatin1String( "konsole" ), args);
+//    }
+}
+
+void YouTube::dataArrived(KIO::Job* job, const QByteArray& data)
+{
+    parseXML(data);
+}
+
+
+void YouTube::parseXML(QByteArray data)
+{
+    QXmlStreamReader xml(data);
+
+    if (xml.hasError()) {
+        kDebug() << "ERRRRORRRR";
+    }
+
+    while (!xml.atEnd()) {
+        QXmlStreamReader::TokenType token = xml.readNext();
+
+        if (token == QXmlStreamReader::StartDocument) {
+            continue;
+        }
+
+        if (token == QXmlStreamReader::StartElement) {
+            kDebug() << "XML NAME: START ELEMENT: " << xml.name();
+        }
     }
 }
 
-#include "konsolesessions.moc"
+#include "youtube.moc"
