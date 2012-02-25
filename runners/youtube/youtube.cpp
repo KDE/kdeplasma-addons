@@ -30,6 +30,7 @@
 //but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
 YouTube::YouTube(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
+    , m_context(0)
 {
     Q_UNUSED(args);
     setObjectName(QLatin1String("YouTube"));
@@ -43,7 +44,7 @@ YouTube::YouTube(QObject *parent, const QVariantList& args)
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
 
-//    qRegisterMetaType<Plasma::RunnerContext>();
+    qRegisterMetaType<Plasma::RunnerContext*>();
 }
 
 YouTube::~YouTube()
@@ -52,11 +53,11 @@ YouTube::~YouTube()
 
 void YouTube::match(Plasma::RunnerContext &context)
 {
+    m_context = &context;
     kDebug() << "MATCH MADE, emitting matchmade";
-//    Q_ASSERT(connect(this, SIGNAL(matchMade(Plasma::RunnerContext&)), this, SLOT(startYouTubeJob(Plasma::RunnerContext&))));
-    Q_ASSERT(connect(this, SIGNAL(matchMade()), this, SLOT(startYouTubeJob())));
-   emit matchMade();
-//    QMetaObject::invokeMethod(this, SLOT(matchMade(Plasma::RunnerContext));
+    connect(this, SIGNAL(matchMade(Plasma::RunnerContext*)), this, SLOT(startYouTubeJob(Plasma::RunnerContext*)));
+    emit matchMade(&context);
+
     const QString term = context.query();
     if (term.length() < 3) {
         return;
@@ -65,27 +66,6 @@ void YouTube::match(Plasma::RunnerContext &context)
     if (!context.isValid()) {
         return;
     }
-
-//    QEventLoop loop;
-//    // Wait a second, we don't want to  query on every keypress
-//    QMutex mutex;
-//    QWaitCondition waiter;
-//    mutex.lock();
-//    waiter.wait(&mutex, 1000);
-//    mutex.unlock();
-
-//    startYouTubeJob();
-
-    Plasma::QueryMatch match(this);
-    match.setType(Plasma::QueryMatch::PossibleMatch);
-
-    //  match.setRelevance(1.0);
-    //  match.setIcon(m_icon);
-    //  match.setData(i.key());
-    match.setText(QLatin1String( "YouTube: " ));
-
-    context.addMatch(term, match);
-
 }
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
@@ -103,21 +83,32 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 //    }
 }
 
-void YouTube::startYouTubeJob()
+void YouTube::startYouTubeJob(Plasma::RunnerContext *context)
 {
-   // Q_ASSERT(0);
+
     kDebug() << "%%%%%% YOUTUBE RUNNING JORB!";
-    KIO::TransferJob *job = KIO::get(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"), KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(dataArrived(KIO::Job*,QByteArray)));
-    job->start();
+    TubeJob *job = new TubeJob(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"), KIO::NoReload, KIO::HideProgressInfo, context);
+    connect(job, SIGNAL(dataReceived(KIO::Job*,QByteArray,Plasma::RunnerContext*)), this, SLOT(dataArrived(KIO::Job*,QByteArray,Plasma::RunnerContext*)));
+ //   job->start();
 }
 
-void YouTube::dataArrived(KIO::Job* job, const QByteArray& data)
+void YouTube::dataArrived(KIO::Job* job, const QByteArray& data, Plasma::RunnerContext* context)
 {
     kDebug()  << "DATA:" << data;
     if (!data.isEmpty()) {
         parseXML(data);
     }
+    const QString term = context->query();
+    Plasma::QueryMatch match(this);
+    match.setType(Plasma::QueryMatch::PossibleMatch);
+
+    //  match.setRelevance(1.0);
+    //  match.setIcon(m_icon);
+//    match.setData("TEST");
+    match.setText(QLatin1String( "YouTube: " ));
+
+    context->addMatch(term, match);
+
 }
 
 void YouTube::parseXML(QByteArray data)
@@ -190,12 +181,30 @@ void YouTube::parseVideo(QXmlStreamReader& xml)
         kDebug() << currentElement;
     }
 
-
-
     if (!videoTitles.isEmpty() && !videoLinks.isEmpty()) {
         kDebug() << "TITLE WAS: " << videoTitles;
         kDebug() << "LINK WAS: " << videoLinks;
     }
 }
+
+TubeJob::TubeJob(const KUrl& url, KIO::LoadType type, KIO::JobFlag flags, Plasma::RunnerContext *context)
+  : QObject()
+  , m_context(context)
+  , m_job(0)
+{
+    m_job = KIO::get(url, type, flags);
+    connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(onData(KIO::Job*,QByteArray)));
+}
+
+void TubeJob::onData(KIO::Job* job, QByteArray data)
+{
+    emit dataReceived(job, data, m_context);
+}
+
+void TubeJob::start()
+{
+    m_job->start();
+}
+
 
 #include "youtube.moc"
