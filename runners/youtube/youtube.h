@@ -27,8 +27,8 @@
 
 #include <KUrl>
 
-
-class QXmlStreamReader;
+class QNetworkAccessManager;
+class QNetworkReply;
 
 class YouTube : public Plasma::AbstractRunner {
     Q_OBJECT
@@ -45,6 +45,8 @@ Q_SIGNALS:
 
 private:
     void parseJson(const QByteArray& data, Plasma::RunnerContext &context);
+
+    QNetworkAccessManager *m_thumbnailDownloader;
 };
 
 K_EXPORT_PLASMA_RUNNER(youtube, YouTube)

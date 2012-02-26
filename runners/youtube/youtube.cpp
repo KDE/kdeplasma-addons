@@ -22,9 +22,13 @@
 #include <KDebug>
 #include <KToolInvocation>
 
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
 #include <QtCore/QTimer>
 #include <QtCore/QWaitCondition>
 #include <QtCore/QEventLoop>
+#include <QtGui/QIcon>
 #include <qjson/parser.h>
 #include <kde4/KDE/KRun>
 
@@ -32,6 +36,7 @@
 //but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
 YouTube::YouTube(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
+    , m_thumbnailDownloader(0)
 {
     Q_UNUSED(args);
     setObjectName(QLatin1String("YouTube"));
@@ -117,10 +122,25 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
         const QString& thumbnail = thumbnailList.at(0).toMap().value("url").toString();
         kDebug() << "THUMBNAIL URL: " << thumbnail;
 
+        QEventLoop loop;
+        m_thumbnailDownloader = new QNetworkAccessManager();
+        connect(m_thumbnailDownloader, SIGNAL(finished(QNetworkReply*)), &loop, SLOT(quit()));
+
+        QNetworkRequest request = QNetworkRequest(url);
+        QNetworkReply *reply= m_thumbnailDownloader->get(request);
+        loop.exec();
+
+//        QPixmap pixmap;
+ //       pixmap.loadFromData(reply->readAll());
+        QImage image;
+        image.fromData(reply->readAll());
+
+//        QIcon icon = QIcon(pixmap);
 
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::PossibleMatch);
 
+//        match.setIcon(image);
         //  match.setRelevance(1.0);
         //  match.setIcon(m_icon);
         match.setData(url);
