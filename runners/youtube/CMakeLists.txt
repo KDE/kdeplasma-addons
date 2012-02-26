@@ -1,5 +1,6 @@
 set(krunner_youtube_SRCS
     youtube.cpp
+    tubejob.cpp
 )
 
 kde4_add_plugin(krunner_youtube ${krunner_youtube_SRCS})

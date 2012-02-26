@@ -43,41 +43,10 @@ public:
 Q_SIGNALS:
     void matchMade(Plasma::RunnerContext *context);
 
-private slots:
-    void dataArrived(KIO::Job* job, const QByteArray& data, Plasma::RunnerContext* context);
-    void startYouTubeJob(Plasma::RunnerContext *context);
-
 private:
     void parseXML(QByteArray);
     void parseVideo(QXmlStreamReader& xml);
-
-    QByteArray buffer;
-
-    Plasma::RunnerContext *m_context;
 };
-
-class TubeJob : public QObject
-{
-    Q_OBJECT
-
-public:
-    TubeJob(const KUrl& url, KIO::LoadType type, KIO::JobFlag flags, Plasma::RunnerContext *context);
-
-    void start();
-
-Q_SIGNALS:
-    void dataReceived(KIO::Job* job, QByteArray data, Plasma::RunnerContext *context);
-
-private Q_SLOTS:
-    void onData(KIO::Job* job, QByteArray data);
-
-private:
-    Plasma::RunnerContext *m_context;
-
-    KIO::TransferJob *m_job;
-};
-
-Q_DECLARE_METATYPE(Plasma::RunnerContext*);
 
 K_EXPORT_PLASMA_RUNNER(youtube, YouTube)
 

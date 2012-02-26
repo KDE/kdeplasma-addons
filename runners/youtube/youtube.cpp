@@ -17,6 +17,7 @@
  *****************************************************************************/
 
 #include "youtube.h"
+#include "tubejob.h"
 
 #include <KDebug>
 #include <KToolInvocation>
@@ -30,21 +31,18 @@
 //but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
 YouTube::YouTube(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
-    , m_context(0)
 {
     Q_UNUSED(args);
     setObjectName(QLatin1String("YouTube"));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds YouTube video matching :q:."));
+    Plasma::RunnerSyntax s(QLatin1String(":q:"), i18n("Finds YouTube video matching :q:."));
     s.addExampleQuery(QLatin1String("youtube :q:"));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "youtube" ), i18n("Lists the videos matching the query, using YouTube search")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String("youtube"), i18n("Lists the videos matching the query, using YouTube search")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
-
-    qRegisterMetaType<Plasma::RunnerContext*>();
 }
 
 YouTube::~YouTube()
@@ -53,10 +51,7 @@ YouTube::~YouTube()
 
 void YouTube::match(Plasma::RunnerContext &context)
 {
-    m_context = &context;
     kDebug() << "MATCH MADE, emitting matchmade";
-    connect(this, SIGNAL(matchMade(Plasma::RunnerContext*)), this, SLOT(startYouTubeJob(Plasma::RunnerContext*)));
-    emit matchMade(&context);
 
     const QString term = context.query();
     if (term.length() < 3) {
@@ -66,6 +61,18 @@ void YouTube::match(Plasma::RunnerContext &context)
     if (!context.isValid()) {
         return;
     }
+
+    QEventLoop loop;
+    // Wait a second, we don't want to  query on every keypress
+    QMutex mutex;
+    QWaitCondition waiter;
+    mutex.lock();
+    waiter.wait(&mutex, 1000);
+    mutex.unlock();
+
+    TubeJob tubeJob(term);
+    connect(&tubeJob, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
 }
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
@@ -81,34 +88,6 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 //        kDebug() << "=== START: konsole" << args;
 //        KToolInvocation::kdeinitExec(QLatin1String( "konsole" ), args);
 //    }
-}
-
-void YouTube::startYouTubeJob(Plasma::RunnerContext *context)
-{
-
-    kDebug() << "%%%%%% YOUTUBE RUNNING JOB!";
-    TubeJob *job = new TubeJob(KUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=taylor swift"), KIO::NoReload, KIO::HideProgressInfo, context);
-    connect(job, SIGNAL(dataReceived(KIO::Job*,QByteArray,Plasma::RunnerContext*)), this, SLOT(dataArrived(KIO::Job*,QByteArray,Plasma::RunnerContext*)));
-    job->start();
-}
-
-void YouTube::dataArrived(KIO::Job* job, const QByteArray& data, Plasma::RunnerContext* context)
-{
-    kDebug()  << "DATA:" << data;
-    if (!data.isEmpty()) {
-        parseXML(data);
-    }
-    const QString term = context->query();
-    Plasma::QueryMatch match(this);
-    match.setType(Plasma::QueryMatch::PossibleMatch);
-
-    //  match.setRelevance(1.0);
-    //  match.setIcon(m_icon);
-//    match.setData("TEST");
-    match.setText(QLatin1String( "YouTube: " ));
-
-    context->addMatch(term, match);
-
 }
 
 void YouTube::parseXML(QByteArray data)
@@ -186,25 +165,5 @@ void YouTube::parseVideo(QXmlStreamReader& xml)
         kDebug() << "LINK WAS: " << videoLinks;
     }
 }
-
-TubeJob::TubeJob(const KUrl& url, KIO::LoadType type, KIO::JobFlag flags, Plasma::RunnerContext *context)
-  : QObject()
-  , m_context(context)
-  , m_job(0)
-{
-    m_job = KIO::get(url, type, flags);
-    connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(onData(KIO::Job*,QByteArray)));
-}
-
-void TubeJob::onData(KIO::Job* job, QByteArray data)
-{
-    emit dataReceived(job, data, m_context);
-}
-
-void TubeJob::start()
-{
-    m_job->start();
-}
-
 
 #include "youtube.moc"
