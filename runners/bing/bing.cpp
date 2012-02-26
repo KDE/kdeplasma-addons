@@ -134,8 +134,14 @@ void Bing::parseJson(const QByteArray& data)
 
     QVariantMap subMap = relatedMap.value("Image").toMap();
  //   kDebug() << subMap.values();
-    kDebug() << subMap.values();
-    kDebug() << relatedMap.value("Image").typeName();
+//    kDebug() << subMap.values();
+//    kDebug() << subMap.value("Results").toList();
+    QVariantList mapList = subMap.value("Results").toList();
+
+    foreach (const QVariant& variant, mapList) {
+        QVariantMap subSubMap = variant.toMap();
+        kDebug() << subSubMap.value("Title");
+    }
 
 
 
