@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Copyright (C) 2012 by Shaun Reich <sreich@kde.org>                        *
+ *  Copyright (C) 2012 by Shaun Reich <sreich@kde.org                         *
  *                                                                            *
  *  This library is free software; you can redistribute it and/or modify      *
  *  it under the terms of the GNU Lesser General Public License as published  *
@@ -16,35 +16,43 @@
  *  If not, see <http://www.gnu.org/licenses/>.                               *
  *****************************************************************************/
 
-#ifndef BING_H
-#define BING_H
+#include "bingjob.h"
 
+#include <KDebug>
+#include <KToolInvocation>
+
+#include <QtCore/qurl.h>
 #include <QNetworkAccessManager>
-#include <Plasma/AbstractRunner>
-#include <Plasma/RunnerContext>
+#include <QNetworkReply>
 
-#include <KUrl>
-#include <QByteArray>
+BingJob::BingJob(const QString& term)
+  : QObject()
+  , m_manager(0)
+{
+    kDebug() << "%%%%%% TubeJob ctor hit! QUERY TERM: " + term;
 
-class Bing : public Plasma::AbstractRunner {
-    Q_OBJECT
+    m_manager = new QNetworkAccessManager(this);
 
-public:
-    Bing(QObject *parent, const QVariantList& args);
-    ~Bing();
+    QUrl url = QUrl("http://api.bing.net/json.aspx?AppId=340D9148BE10A564ABFC17937FFB623836112FBB&Query=" + term + "&Sources=Image&Version=2.0&Image.Count=10&Image.Offset=0");
+    QNetworkRequest request = QNetworkRequest(url);
 
-    void match(Plasma::RunnerContext &context);
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+    m_manager->get(request);
 
-Q_SIGNALS:
-    void matchMade(Plasma::RunnerContext *context);
+    connect(m_manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(jobCompleted(QNetworkReply*)));
+}
 
-private:
-    void parseJson(const QByteArray& data, Plasma::RunnerContext &context);
+void BingJob::jobCompleted(QNetworkReply* reply)
+{
+    m_data = reply->readAll();
+    kDebug() << "JOBCOMPLETED";
 
-    QNetworkAccessManager *m_thumbnailDownloader;
-};
+    emit finished();
+}
 
-K_EXPORT_PLASMA_RUNNER(bing, Bing)
+QByteArray BingJob::data()
+{
+    return m_data;
+}
 
-#endif
+
+#include "bingjob.moc"

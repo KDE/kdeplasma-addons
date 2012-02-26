@@ -1,4 +1,6 @@
 set(krunner_bing_SRCS
+    imageiconengine.cpp
+    bingjob.cpp
     bing.cpp
 )
 

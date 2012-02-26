@@ -17,10 +17,15 @@
  *****************************************************************************/
 
 #include "bing.h"
+#include "bingjob.h"
+#include "imageiconengine.h"
 
 #include <KDebug>
 #include <KToolInvocation>
+#include <KRun>
 
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
 #include <QtCore/QTimer>
 #include <QtCore/QWaitCondition>
 #include <QtCore/QEventLoop>
@@ -39,20 +44,8 @@ Bing::Bing(QObject *parent, const QVariantList& args)
     addSyntax(s);
 
     addSyntax(Plasma::RunnerSyntax(QLatin1String( "bing" ), i18n("Lists the search entries matching the query, using Bing search")));
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "wolfram" ), i18n("Searches using Wolfram Alpha, powered by Bing")));
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "define" ), i18n("Defines words using dictionaries, powered by Bing")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
-
-    qRegisterMetaType<Plasma::RunnerContext*>();
-
-    KUrl url;
-    url = "http://api.bing.net/json.aspx?AppId=340D9148BE10A564ABFC17937FFB623836112FBB&Query=waterfalls&Sources=Image&Version=2.0&Image.Count=10&Image.Offset=0";
-    // "http://api.bing.com/?q=define+ostensibly&format=json&pretty=1");
-
-    m_job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-    connect(m_job, SIGNAL(result(KJob*)), this, SLOT(jobFinished(KJob*)));
-    m_job->start();
 }
 
 Bing::~Bing()
@@ -61,11 +54,10 @@ Bing::~Bing()
 
 void Bing::match(Plasma::RunnerContext &context)
 {
-    kDebug() << "MATCH MADE, emitting matchmade";
-//    connect(this, SIGNAL(matchMade(Plasma::RunnerContext*)), this, SLOT(startBingJob(Plasma::RunnerContext*)));
- //   emit matchMade(&context);
+    kDebug() << "Bing Runner, MATCH MADE";
 
     const QString term = context.query();
+
     if (term.length() < 3) {
         return;
     }
@@ -73,78 +65,81 @@ void Bing::match(Plasma::RunnerContext &context)
     if (!context.isValid()) {
         return;
     }
+
+    QEventLoop loop;
+
+    BingJob bingJob(term);
+    connect(&bingJob, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+
+    parseJson(bingJob.data(), context);
 }
 
 void Bing::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
-//    Q_UNUSED(context)
-//    const QString session = match.data().toString();
-//    kDebug() << "Open Konsole Session " << session;
-//
-//    if (!session.isEmpty()) {
-//        QStringList args;
-//        args << QLatin1String( "--profile" );
-//        args << session;
-//        kDebug() << "=== START: konsole" << args;
-//        KToolInvocation::kdeinitExec(QLatin1String( "konsole" ), args);
-//    }
+    KRun *opener = new KRun(match.data().toString(), 0);
+    opener->setRunExecutables(false);
 }
 
-void Bing::startBingJob(Plasma::RunnerContext *context)
-{
-
-    kDebug() << "%%%%%% RUNNING JOB!";
-}
-
-void Bing::dataArrived(KIO::Job* job, const QByteArray& data)
-{
-//    kDebug()  << "DATA:" << data;
-    if (!data.isEmpty()) {
-        buffer << data;
-//        parseJson(data);
-    }
-//    const QString term = context->query();
-//    Plasma::QueryMatch match(this);
-//    match.setType(Plasma::QueryMatch::PossibleMatch);
-//
-//    //  match.setRelevance(1.0);
-//    //  match.setIcon(m_icon);
-////    match.setData("TEST");
-//    match.setText(QLatin1String( "Bing: " ));
-//
-//    context->addMatch(term, match);
-
-}
-
-void Bing::jobFinished(KJob *job)
-{
-    parseJson(m_job->data());
-}
-
-void Bing::parseJson(const QByteArray& data)
+void Bing::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
 {
     kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
 
-    QVariantMap relatedMap = resultsMap.value("SearchResponse").toMap();
-//kDebug() << relatedMap.values();
+    QVariantMap related = resultsMap.value("SearchResponse").toMap();
+    kDebug() << "RELATED:" << related;
+        kDebug() << related.value("Results").typeName();
 
-    QVariantMap subMap = relatedMap.value("Image").toMap();
- //   kDebug() << subMap.values();
-//    kDebug() << subMap.values();
-//    kDebug() << subMap.value("Results").toList();
-    QVariantList mapList = subMap.value("Results").toList();
+    QVariantList subList = related.value("Results").toList();
 
-    foreach (const QVariant& variant, mapList) {
-        QVariantMap subSubMap = variant.toMap();
+    const QString term = context.query();
 
-        kDebug() << subSubMap.value("Title");
-        kDebug() << subSubMap.value("Url");
+    foreach (const QVariant& variant, subList) {
+        QVariantMap subMap = variant.toMap();
 
-        QVariantMap thumbnailMap = subSubMap.value("Thumbnail").toMap();
+        QVariantList linkList = subMap.value("link").toList();
+        //FIXME: hardcoded..
+        const QString& url = linkList.at(0).toMap().value("href").toString();
 
-        kDebug() << thumbnailMap.value("Url");
+        QVariantMap titleMap = subMap.value("title").toMap();
+        const QString& title = titleMap.value("$t").toString();
+
+        QVariantMap subSubMap = subMap.value("media$group").toMap();
+
+        QVariantList thumbnailList = subSubMap.value("media$thumbnail").toList();
+
+        QString thumbnail;
+        thumbnail = thumbnailList.at(2).toMap().value("url").toString();
+
+        QEventLoop loop;
+        m_thumbnailDownloader = new QNetworkAccessManager();
+        connect(m_thumbnailDownloader, SIGNAL(finished(QNetworkReply*)), &loop, SLOT(quit()));
+
+        QNetworkRequest request = QNetworkRequest(QUrl(thumbnail));
+
+        QNetworkReply *reply= m_thumbnailDownloader->get(request);
+        loop.exec();
+
+        Plasma::QueryMatch match(this);
+        match.setType(Plasma::QueryMatch::PossibleMatch);
+
+        if (reply->error() != 0) {
+            kDebug() << "KRunner::YouTube runner, Json parser error. please report. error code: " << reply->error();
+        }
+
+        QByteArray data = reply->readAll();
+
+        QImage image;
+        image.loadFromData(data);
+
+        QIcon icon(new ImageIconEngine(image));
+        match.setIcon(icon);
+
+        match.setData(url);
+        match.setText(QString(title + " on YouTube"));
+
+        context.addMatch(term, match);
     }
 }
 

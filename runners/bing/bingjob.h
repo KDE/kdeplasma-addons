@@ -15,36 +15,36 @@
  *  along with this library; see the file COPYING.LIB.                        *
  *  If not, see <http://www.gnu.org/licenses/>.                               *
  *****************************************************************************/
+#ifndef BINGJOB_H
+#define BINGJOB_H
 
-#ifndef BING_H
-#define BING_H
-
-#include <QNetworkAccessManager>
-#include <Plasma/AbstractRunner>
-#include <Plasma/RunnerContext>
+#include <QObject>
+#include <KIO/Job>
 
 #include <KUrl>
-#include <QByteArray>
 
-class Bing : public Plasma::AbstractRunner {
+class QNetworkReply;
+class QNetworkAccessManager;
+
+class BingJob : public QObject
+{
     Q_OBJECT
 
 public:
-    Bing(QObject *parent, const QVariantList& args);
-    ~Bing();
+    BingJob(const QString& term);
 
-    void match(Plasma::RunnerContext &context);
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+    void start();
+    QByteArray data();
+
+private Q_SLOTS:
+    void jobCompleted(QNetworkReply *reply);
 
 Q_SIGNALS:
-    void matchMade(Plasma::RunnerContext *context);
+    void finished();
 
 private:
-    void parseJson(const QByteArray& data, Plasma::RunnerContext &context);
-
-    QNetworkAccessManager *m_thumbnailDownloader;
+    QNetworkAccessManager *m_manager;
+    QByteArray m_data;
 };
-
-K_EXPORT_PLASMA_RUNNER(bing, Bing)
 
 #endif
