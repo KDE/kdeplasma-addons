@@ -44,11 +44,11 @@ YouTube::YouTube(QObject *parent, const QVariantList& args)
     setObjectName(QLatin1String("YouTube"));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QLatin1String(":q:"), i18n("Finds YouTube video matching :q:."));
+    Plasma::RunnerSyntax s(QLatin1String("youtube :q:"), i18n("Finds YouTube video matching :q:."));
     s.addExampleQuery(QLatin1String("youtube :q:"));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax(QLatin1String("youtube"), i18n("Lists the videos matching the query, using YouTube search")));
+//    addSyntax(Plasma::RunnerSyntax(QLatin1String("youtube"), i18n("Lists the videos matching the query, using YouTube search")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
 }
@@ -70,8 +70,6 @@ void YouTube::match(Plasma::RunnerContext &context)
     if (!context.isValid()) {
         return;
     }
-
-    kDebug() << "YouTube Runner, Sleeping for 1 seconds";
 
     QEventLoop loop;
 
@@ -115,12 +113,7 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
         QVariantList thumbnailList = subSubMap.value("media$thumbnail").toList();
 
         QString thumbnail;
-        foreach (const QVariant& variant, thumbnailList) {
-            //FIXME: is this even reliable?
-            kDebug() << variant.toMap().keys();
-                thumbnail = thumbnailList.at(2).toMap().value("url").toString();
-            kDebug() << "DOWNLOADING URL:" << thumbnail;
-        }
+        thumbnail = thumbnailList.at(2).toMap().value("url").toString();
 
         QEventLoop loop;
         m_thumbnailDownloader = new QNetworkAccessManager();
