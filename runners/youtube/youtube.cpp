@@ -114,10 +114,16 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
 
         QVariantList thumbnailList = subSubMap.value("media$thumbnail").toList();
 
-        //FIXME: horrible horrible assumption
-        const QString& thumbnail = thumbnailList.at(0).toMap().value("url").toString();
-//        const QString& thumbnail = "http://upload.wikimedia.org/wikipedia/commons/b/b2/WhiteCat.jpg";
-        kDebug() << "THUMBNAIL URL: " << thumbnail;
+        QString thumbnail;
+        foreach (const QVariant& variant, thumbnailList) {
+            kDebug() << variant.toMap().keys();
+            QVariantMap variantMap = variant.toMap();
+            const int height = variantMap.value("height").toInt();
+
+            if (height <= 100) {
+                thumbnail = variantMap.value("url").toString();
+            }
+        }
 
         QEventLoop loop;
         m_thumbnailDownloader = new QNetworkAccessManager();
@@ -131,19 +137,13 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::PossibleMatch);
 
-        kDebug() << "ERROR!!" << reply->error();
+        if (reply->error() != 0) {
+            kDebug() << "KRunner YouTube, this is a Json parser failure. please report this bug, error num:" << reply->error();
+        }
 
         QByteArray data = reply->readAll();
-        kDebug() << "DATAAAA:" << data;
-
-        QFile file("SREICHTESTFIL");
-        file.open(QIODevice::ReadWrite | QIODevice::Text);
-        file.write(data);
-        file.close();
 
         QImage image;
-//        Q_ASSERT(image.load("SREICHTESTFIL"));
-        Q_ASSERT(image.loadFromData(data));
 
         QIcon icon(new ImageIconEngine(image));
         match.setIcon(icon);
