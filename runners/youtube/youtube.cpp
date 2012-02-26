@@ -101,27 +101,17 @@ void YouTube::parseJson(const QByteArray& data)
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
 
-    const QString& match = "duckduckgo";
+//const QString& match = "duckduckgo";
 
-    if (match == "define") {
-        //dictionary mode
-        kDebug() << "Heading:" << resultsMap.value("Heading");
-        kDebug() << "AbstractSource:" << resultsMap.value("AbstractSource");
-        kDebug() << "Abstract:" << resultsMap.value("Abstract");
-        kDebug() << "AbstractURL:" << resultsMap.value("AbstractURL");
-    } else if (match == "wolfram") {
-        //wolfram mode (simple redirection, because web search providers are assholes)
-        kDebug() << "Redirect:" << resultsMap.value("Redirect");
-    } else if (match == "duckduckgo") {
-        QList<QVariant> related = resultsMap.value("RelatedTopics").toList();
+    QList<QVariant> related = resultsMap.value("feeds").toList();
+    kDebug() << related;
 
-        foreach (const QVariant& variant, related) {
-            QVariantMap submap = variant.toMap();
+    foreach (const QVariant& variant, related) {
+        QVariantMap submap = variant.toMap();
 
-            kDebug() << "FirstURL:" << submap.value("FirstURL");
-            kDebug() << "Text:" << submap.value("Text");
-            kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
-        }
+        kDebug() << "FirstURL:" << submap.value("FirstURL");
+        kDebug() << "Text:" << submap.value("Text");
+        kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
     }
 }
 

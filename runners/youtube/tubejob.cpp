@@ -41,7 +41,7 @@ TubeJob::TubeJob(const QString& term)
 void TubeJob::jobCompleted(QNetworkReply* reply)
 {
     m_data = reply->readAll();
-    kDebug() << "JOBCOMPLETED, BYTE ARRAY: " << m_data;
+    kDebug() << "JOBCOMPLETED";
 
     emit finished();
 }
