@@ -109,9 +109,20 @@ void YouTube::parseJson(const QByteArray& data)
     foreach (const QVariant& variant, subList) {
         QVariantMap subMap = variant.toMap();
 
-        QVariantList list = subMap.value("link").toList();
+        QVariantList linkList = subMap.value("link").toList();
         //FIXME: hardcoded..
-        kDebug() << list.at(0).toMap().value("href");
+        kDebug() << "URL/LINK: " << linkList.at(0).toMap().value("href").toString();
+
+        QVariantMap titleMap = subMap.value("title").toMap();
+        kDebug() << titleMap.value("$t");
+
+//        kDebug() << subMap.keys();
+        QVariantMap subSubMap = subMap.value("media$group").toMap();
+//        kDebug() << subSubMap.keys();
+
+        QVariantList thumbnailList = subSubMap.value("media$thumbnail").toList();
+        //FIXME: horrible horrible assumption
+        kDebug() << "THUMBNAIL URL: " << thumbnailList.at(0).toMap().value("url").toString();
     }
 
 //    foreach (const QVariant& variant, related) {
