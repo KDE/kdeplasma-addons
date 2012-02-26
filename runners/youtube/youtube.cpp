@@ -72,12 +72,6 @@ void YouTube::match(Plasma::RunnerContext &context)
     kDebug() << "YouTube Runner, Sleeping for 1 seconds";
 
     QEventLoop loop;
-    // Wait a second, we don't want to  query on every keypress
-    QMutex mutex;
-    QWaitCondition waiter;
-    mutex.lock();
-    waiter.wait(&mutex, 1000);
-    mutex.unlock();
 
     TubeJob tubeJob(term);
     connect(&tubeJob, SIGNAL(finished()), &loop, SLOT(quit()));
