@@ -1,4 +1,5 @@
 set(krunner_youtube_SRCS
+    imageiconengine.cpp
     youtube.cpp
     tubejob.cpp
 )

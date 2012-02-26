@@ -18,6 +18,7 @@
 
 #include "youtube.h"
 #include "tubejob.h"
+#include "imageiconengine.h"
 
 #include <KDebug>
 #include <KToolInvocation>
@@ -28,6 +29,7 @@
 #include <QtCore/QTimer>
 #include <QtCore/QWaitCondition>
 #include <QtCore/QEventLoop>
+#include <qfile.h>
 #include <QtGui/QIcon>
 #include <qjson/parser.h>
 #include <kde4/KDE/KRun>
@@ -114,42 +116,43 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
 
         //FIXME: horrible horrible assumption
         const QString& thumbnail = thumbnailList.at(0).toMap().value("url").toString();
+//        const QString& thumbnail = "http://upload.wikimedia.org/wikipedia/commons/b/b2/WhiteCat.jpg";
         kDebug() << "THUMBNAIL URL: " << thumbnail;
 
         QEventLoop loop;
         m_thumbnailDownloader = new QNetworkAccessManager();
         connect(m_thumbnailDownloader, SIGNAL(finished(QNetworkReply*)), &loop, SLOT(quit()));
 
-        QNetworkRequest request = QNetworkRequest(url);
+        QNetworkRequest request = QNetworkRequest(QUrl(thumbnail));
+
         QNetworkReply *reply= m_thumbnailDownloader->get(request);
         loop.exec();
-
-//        QPixmap pixmap;
- //       pixmap.loadFromData(reply->readAll());
-        QImage image;
-        image.fromData(reply->readAll());
-
-//        QIcon icon = QIcon(pixmap);
 
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::PossibleMatch);
 
-//        match.setIcon(image);
-        //  match.setRelevance(1.0);
-        //  match.setIcon(m_icon);
+        kDebug() << "ERROR!!" << reply->error();
+
+        QByteArray data = reply->readAll();
+        kDebug() << "DATAAAA:" << data;
+
+        QFile file("SREICHTESTFIL");
+        file.open(QIODevice::ReadWrite | QIODevice::Text);
+        file.write(data);
+        file.close();
+
+        QImage image;
+//        Q_ASSERT(image.load("SREICHTESTFIL"));
+        Q_ASSERT(image.loadFromData(data));
+
+        QIcon icon(new ImageIconEngine(image));
+        match.setIcon(icon);
+
         match.setData(url);
         match.setText(QString(title + " on YouTube"));
 
         context.addMatch(term, match);
     }
-
-//    foreach (const QVariant& variant, related) {
-//        QVariantMap submap = variant.toMap();
-//
-//        kDebug() << "FirstURL:" << submap.value("FirstURL");
-//        kDebug() << "Text:" << submap.value("Text");
-//        kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
-//    }
 }
 
 #include "youtube.moc"
