@@ -51,9 +51,10 @@ YouTube::~YouTube()
 
 void YouTube::match(Plasma::RunnerContext &context)
 {
-    kDebug() << "MATCH MADE, emitting matchmade";
+    kDebug() << "YouTube Runner, MATCH MADE";
 
     const QString term = context.query();
+
     if (term.length() < 3) {
         return;
     }
@@ -61,6 +62,8 @@ void YouTube::match(Plasma::RunnerContext &context)
     if (!context.isValid()) {
         return;
     }
+
+    kDebug() << "YouTube Runner, Sleeping for 1 seconds";
 
     QEventLoop loop;
     // Wait a second, we don't want to  query on every keypress
