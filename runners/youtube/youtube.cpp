@@ -116,13 +116,10 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
 
         QString thumbnail;
         foreach (const QVariant& variant, thumbnailList) {
+            //FIXME: is this even reliable?
             kDebug() << variant.toMap().keys();
-            QVariantMap variantMap = variant.toMap();
-            const int height = variantMap.value("height").toInt();
-
-            if (height <= 100) {
-                thumbnail = variantMap.value("url").toString();
-            }
+                thumbnail = thumbnailList.at(2).toMap().value("url").toString();
+            kDebug() << "DOWNLOADING URL:" << thumbnail;
         }
 
         QEventLoop loop;
@@ -138,12 +135,13 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
         match.setType(Plasma::QueryMatch::PossibleMatch);
 
         if (reply->error() != 0) {
-            kDebug() << "KRunner YouTube, this is a Json parser failure. please report this bug, error num:" << reply->error();
+            kDebug() << "KRunner::YouTube runner, Json parser error. please report. error code: " << reply->error();
         }
 
         QByteArray data = reply->readAll();
 
         QImage image;
+        image.loadFromData(data);
 
         QIcon icon(new ImageIconEngine(image));
         match.setIcon(icon);
