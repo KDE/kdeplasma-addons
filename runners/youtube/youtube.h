@@ -44,7 +44,7 @@ Q_SIGNALS:
     void matchMade(Plasma::RunnerContext *context);
 
 private:
-    void parseJson(const QByteArray& data);
+    void parseJson(const QByteArray& data, Plasma::RunnerContext &context);
 };
 
 K_EXPORT_PLASMA_RUNNER(youtube, YouTube)

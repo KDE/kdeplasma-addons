@@ -77,7 +77,7 @@ void YouTube::match(Plasma::RunnerContext &context)
     connect(&tubeJob, SIGNAL(finished()), &loop, SLOT(quit()));
     loop.exec();
 
-    parseJson(tubeJob.data());
+    parseJson(tubeJob.data(), context);
 }
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
@@ -95,7 +95,7 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 //    }
 }
 
-void YouTube::parseJson(const QByteArray& data)
+void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
 {
     kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
@@ -106,23 +106,39 @@ void YouTube::parseJson(const QByteArray& data)
 
     QVariantList subList = related.value("entry").toList();
 
+
+
+        const QString term = context.query();
+
+
     foreach (const QVariant& variant, subList) {
         QVariantMap subMap = variant.toMap();
 
         QVariantList linkList = subMap.value("link").toList();
         //FIXME: hardcoded..
-        kDebug() << "URL/LINK: " << linkList.at(0).toMap().value("href").toString();
+        const QString& url = linkList.at(0).toMap().value("href").toString();
 
         QVariantMap titleMap = subMap.value("title").toMap();
-        kDebug() << titleMap.value("$t");
+        const QString& title = titleMap.value("$t").toString();
 
-//        kDebug() << subMap.keys();
         QVariantMap subSubMap = subMap.value("media$group").toMap();
-//        kDebug() << subSubMap.keys();
 
         QVariantList thumbnailList = subSubMap.value("media$thumbnail").toList();
+
         //FIXME: horrible horrible assumption
-        kDebug() << "THUMBNAIL URL: " << thumbnailList.at(0).toMap().value("url").toString();
+        const QString& thumbnail = thumbnailList.at(0).toMap().value("url").toString();
+        kDebug() << "THUMBNAIL URL: " << thumbnail;
+
+
+        Plasma::QueryMatch match(this);
+        match.setType(Plasma::QueryMatch::PossibleMatch);
+
+        //  match.setRelevance(1.0);
+        //  match.setIcon(m_icon);
+        match.setData(url);
+        match.setText(QString(title + " on YouTube"));
+
+        context.addMatch(term, match);
     }
 
 //    foreach (const QVariant& variant, related) {
