@@ -101,18 +101,26 @@ void YouTube::parseJson(const QByteArray& data)
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
 
-//const QString& match = "duckduckgo";
+    QVariantMap related = resultsMap.value("feed").toMap();
+//    kDebug() << related.value("entry").typeName();
 
-    QList<QVariant> related = resultsMap.value("feeds").toList();
-    kDebug() << related;
+    QVariantList subList = related.value("entry").toList();
 
-    foreach (const QVariant& variant, related) {
-        QVariantMap submap = variant.toMap();
+    foreach (const QVariant& variant, subList) {
+        QVariantMap subMap = variant.toMap();
 
-        kDebug() << "FirstURL:" << submap.value("FirstURL");
-        kDebug() << "Text:" << submap.value("Text");
-        kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
+        QVariantList list = subMap.value("link").toList();
+        //FIXME: hardcoded..
+        kDebug() << list.at(0).toMap().value("href");
     }
+
+//    foreach (const QVariant& variant, related) {
+//        QVariantMap submap = variant.toMap();
+//
+//        kDebug() << "FirstURL:" << submap.value("FirstURL");
+//        kDebug() << "Text:" << submap.value("Text");
+//        kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
+//    }
 }
 
 #include "youtube.moc"
