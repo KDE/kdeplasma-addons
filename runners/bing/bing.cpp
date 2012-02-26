@@ -46,8 +46,7 @@ Bing::Bing(QObject *parent, const QVariantList& args)
     qRegisterMetaType<Plasma::RunnerContext*>();
 
     KUrl url;
-    const QString& appId = "";
-    url = "http://api.bing.net/json.aspx?"  + "AppId=" + appId + "&Query=xbox" + "&Sources=Image" + "&Version=2.0" + "&Image.Count=10" + "&Image.Offset=0";
+    url = "http://api.bing.net/json.aspx?AppId=340D9148BE10A564ABFC17937FFB623836112FBB&Query=waterfalls&Sources=Image&Version=2.0&Image.Count=10&Image.Offset=0";
     // "http://api.bing.com/?q=define+ostensibly&format=json&pretty=1");
 
     m_job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
@@ -126,6 +125,7 @@ void Bing::parseJson(const QByteArray& data)
     kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
+    kDebug() << resultsMap;
 
     const QString& match = "bing";
 
