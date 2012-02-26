@@ -35,6 +35,7 @@ public:
     TubeJob(const QString& term);
 
     void start();
+    QByteArray data();
 
 private Q_SLOTS:
     void jobCompleted(QNetworkReply *reply);
@@ -44,6 +45,7 @@ Q_SIGNALS:
 
 private:
     QNetworkAccessManager *m_manager;
+    QByteArray m_data;
 };
 
 #endif

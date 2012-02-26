@@ -24,8 +24,8 @@
 
 #include <QtCore/QTimer>
 #include <QtCore/QWaitCondition>
-#include <QtXml/QXmlStreamReader>
 #include <QtCore/QEventLoop>
+#include <qjson/parser.h>
 
 //TODO: I'd really *love* to be able to embed a video *inside* krunner. you know how sexy that'd be? answer: very much.
 //but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
@@ -76,6 +76,8 @@ void YouTube::match(Plasma::RunnerContext &context)
     TubeJob tubeJob(term);
     connect(&tubeJob, SIGNAL(finished()), &loop, SLOT(quit()));
     loop.exec();
+
+    parseJson(tubeJob.data());
 }
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
@@ -93,79 +95,33 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 //    }
 }
 
-void YouTube::parseXML(QByteArray data)
+void YouTube::parseJson(const QByteArray& data)
 {
-    QXmlStreamReader xml(data);
+    kDebug() << "JSON PARSER ONLINE";
+    QJson::Parser parser;
+    const QVariantMap resultsMap = parser.parse(data).toMap();
 
-    if (xml.hasError()) {
-        kError() << "YouTube Runner xml parse failure";
-        return;
-    }
+    const QString& match = "duckduckgo";
 
-    while (!xml.atEnd()) {
-        QXmlStreamReader::TokenType token = xml.readNext();
+    if (match == "define") {
+        //dictionary mode
+        kDebug() << "Heading:" << resultsMap.value("Heading");
+        kDebug() << "AbstractSource:" << resultsMap.value("AbstractSource");
+        kDebug() << "Abstract:" << resultsMap.value("Abstract");
+        kDebug() << "AbstractURL:" << resultsMap.value("AbstractURL");
+    } else if (match == "wolfram") {
+        //wolfram mode (simple redirection, because web search providers are assholes)
+        kDebug() << "Redirect:" << resultsMap.value("Redirect");
+    } else if (match == "duckduckgo") {
+        QList<QVariant> related = resultsMap.value("RelatedTopics").toList();
 
-        if (token == QXmlStreamReader::StartDocument) {
-            continue;
+        foreach (const QVariant& variant, related) {
+            QVariantMap submap = variant.toMap();
+
+            kDebug() << "FirstURL:" << submap.value("FirstURL");
+            kDebug() << "Text:" << submap.value("Text");
+            kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
         }
-
-        if (token == QXmlStreamReader::StartElement) {
-            if (xml.name() == "group") {
-                parseVideo(xml);
-            }
-        }
-    }
-}
-
-void YouTube::parseVideo(QXmlStreamReader& xml)
-{
-    QStringRef name = xml.name();
-    QString currentElement;
-
-    QStringList videoTitles;
-    QStringList videoLinks;
-
-    kDebug() << "NAME: " << name;
-
-    QXmlStreamAttributes attributes = xml.attributes();
-    while (!xml.atEnd() && xml.tokenType() != QXmlStreamReader::EndDocument) {
-        kDebug() << "WHILE LOOP(((((((((((((((((()))))))))))))))))), name: " << xml.name();
-
-
-        kDebug() << "CURRENTELEMENT: " << currentElement;
-
-        if (xml.name() == "title") {
-            kDebug() << attributes.value("plain").toString();
-        }
-
-        if (xml.name() == "thumbnail") {
-            QStringRef attribute = attributes.value("url");
-            kDebug() << "ATTRIBUTE: " << attribute;
-        }
-//            if (name == "title") {
-//                kDebug() << "GOT TITLE: " << name;
-//                videoTitles.append(xml.readElementText());
-//
-//            } else if (name == "link") {
-//
-//                if (xml.attributes().value("rel").toString() == "alternate") {
-//                    kDebug() << "ATTRIBUTES: " << xml.attributes().value("href");
-//                    const QString& link = xml.attributes().value("href").toString();
-//                    if (link != "http://www.youtube.com") {
-//                        videoLinks.append(link);
-//                    }
-//                }
-//            }
-
-        xml.readNext();
-        attributes = xml.attributes();
-        currentElement = xml.readElementText();
-        kDebug() << currentElement;
-    }
-
-    if (!videoTitles.isEmpty() && !videoLinks.isEmpty()) {
-        kDebug() << "TITLE WAS: " << videoTitles;
-        kDebug() << "LINK WAS: " << videoLinks;
     }
 }
 
