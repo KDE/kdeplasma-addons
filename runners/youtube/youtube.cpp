@@ -26,6 +26,7 @@
 #include <QtCore/QWaitCondition>
 #include <QtCore/QEventLoop>
 #include <qjson/parser.h>
+#include <kde4/KDE/KRun>
 
 //TODO: I'd really *love* to be able to embed a video *inside* krunner. you know how sexy that'd be? answer: very much.
 //but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
@@ -82,17 +83,7 @@ void YouTube::match(Plasma::RunnerContext &context)
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
-//    Q_UNUSED(context)
-//    const QString session = match.data().toString();
-//    kDebug() << "Open Konsole Session " << session;
-//
-//    if (!session.isEmpty()) {
-//        QStringList args;
-//        args << QLatin1String( "--profile" );
-//        args << session;
-//        kDebug() << "=== START: konsole" << args;
-//        KToolInvocation::kdeinitExec(QLatin1String( "konsole" ), args);
-//    }
+    KRun::runUrl(match.data().toString(), "text/html", 0);
 }
 
 void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
@@ -106,10 +97,7 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
 
     QVariantList subList = related.value("entry").toList();
 
-
-
-        const QString term = context.query();
-
+    const QString term = context.query();
 
     foreach (const QVariant& variant, subList) {
         QVariantMap subMap = variant.toMap();
