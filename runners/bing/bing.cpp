@@ -24,6 +24,7 @@
 #include <QtCore/QTimer>
 #include <QtCore/QWaitCondition>
 #include <QtCore/QEventLoop>
+#include <QtCore/QMap>
 #include <qjson/parser.h>
 
 Bing::Bing(QObject *parent, const QVariantList& args)
@@ -125,30 +126,56 @@ void Bing::parseJson(const QByteArray& data)
     kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
-    kDebug() << resultsMap;
 
     const QString& match = "bing";
 
-    if (match == "define") {
-        //dictionary mode
-        kDebug() << "Heading:" << resultsMap.value("Heading");
-        kDebug() << "AbstractSource:" << resultsMap.value("AbstractSource");
-        kDebug() << "Abstract:" << resultsMap.value("Abstract");
-        kDebug() << "AbstractURL:" << resultsMap.value("AbstractURL");
-    } else if (match == "wolfram") {
-        //wolfram mode (simple redirection, because web search providers are assholes)
-        kDebug() << "Redirect:" << resultsMap.value("Redirect");
-    } else if (match == "bing") {
-        QList<QVariant> related = resultsMap.value("RelatedTopics").toList();
+    QVariantMap relatedMap = resultsMap.value("SearchResponse").toMap();
+//kDebug() << relatedMap.values();
 
-        foreach (const QVariant& variant, related) {
-            QVariantMap submap = variant.toMap();
+    QVariantMap subMap = relatedMap.value("Image").toMap();
+ //   kDebug() << subMap.values();
+    kDebug() << subMap.values();
+    kDebug() << relatedMap.value("Image").typeName();
 
-            kDebug() << "FirstURL:" << submap.value("FirstURL");
-            kDebug() << "Text:" << submap.value("Text");
-            kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//    foreach (const QVariant& variant, related) {
+//        QVariantMap submap = variant.toMap();
+//kDebug() << submap;
+////        kDebug() << "Image:" << submap.value("FirstURL");
+////        kDebug() << "Text:" << submap.value("Text");
+////        kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
+//    }
+//    if (match == "define") {
+//        //dictionary mode
+//        kDebug() << "Heading:" << resultsMap.value("Heading");
+//        kDebug() << "AbstractSource:" << resultsMap.value("AbstractSource");
+//        kDebug() << "Abstract:" << resultsMap.value("Abstract");
+//        kDebug() << "AbstractURL:" << resultsMap.value("AbstractURL");
+//    } else if (match == "wolfram") {
+//        //wolfram mode (simple redirection, because web search providers are assholes)
+//        kDebug() << "Redirect:" << resultsMap.value("Redirect");
+//    } else if (match == "bing") {
+//
+//        foreach (const QVariant& variant, related) {
+//            QVariantMap submap = variant.toMap();
+//
+//            kDebug() << "FirstURL:" << submap.value("FirstURL");
+//            kDebug() << "Text:" << submap.value("Text");
+//            kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
+//        }
+//    }
 }
 
 
