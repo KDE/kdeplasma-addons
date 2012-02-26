@@ -39,11 +39,11 @@ Bing::Bing(QObject *parent, const QVariantList& args)
     setObjectName(QLatin1String("Bing"));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds Bing search matching :q:."));
-    s.addExampleQuery(QLatin1String("bing :q:"));
+    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds Bing images search matching :q:."));
+    s.addExampleQuery(QLatin1String("image :q:"));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "bing" ), i18n("Lists the search entries matching the query, using Bing search")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "image" ), i18n("Lists the search entries matching the query, using Bing search")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
 }
@@ -88,29 +88,22 @@ void Bing::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
     const QVariantMap resultsMap = parser.parse(data).toMap();
 
     QVariantMap related = resultsMap.value("SearchResponse").toMap();
-    kDebug() << "RELATED:" << related;
-        kDebug() << related.value("Results").typeName();
 
-    QVariantList subList = related.value("Results").toList();
+    QVariantMap subMap = related.value("Image").toMap();
 
-    const QString term = context.query();
+    QVariantList resultsList = subMap.value("Results").toList();
 
-    foreach (const QVariant& variant, subList) {
+    foreach (const QVariant& variant, resultsList) {
+
         QVariantMap subMap = variant.toMap();
+        kDebug() << subMap.keys();
 
-        QVariantList linkList = subMap.value("link").toList();
-        //FIXME: hardcoded..
-        const QString& url = linkList.at(0).toMap().value("href").toString();
+        const QString& url = subMap.value("Url").toString();
+        const QString& title = subMap.value("Title").toString();
 
-        QVariantMap titleMap = subMap.value("title").toMap();
-        const QString& title = titleMap.value("$t").toString();
+        QVariantMap thumbnailMap = subMap.value("Thumbnail").toMap();
 
-        QVariantMap subSubMap = subMap.value("media$group").toMap();
-
-        QVariantList thumbnailList = subSubMap.value("media$thumbnail").toList();
-
-        QString thumbnail;
-        thumbnail = thumbnailList.at(2).toMap().value("url").toString();
+        const QString& thumbnail = thumbnailMap.value("Url").toString();
 
         QEventLoop loop;
         m_thumbnailDownloader = new QNetworkAccessManager();
@@ -125,7 +118,7 @@ void Bing::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
         match.setType(Plasma::QueryMatch::PossibleMatch);
 
         if (reply->error() != 0) {
-            kDebug() << "KRunner::YouTube runner, Json parser error. please report. error code: " << reply->error();
+            kDebug() << "KRunner::Bing runner, Json parser error. please report. error code: " << reply->error();
         }
 
         QByteArray data = reply->readAll();
@@ -137,9 +130,9 @@ void Bing::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
         match.setIcon(icon);
 
         match.setData(url);
-        match.setText(QString(title + " on YouTube"));
+        match.setText(QString(title + " on Bing"));
 
-        context.addMatch(term, match);
+        context.addMatch(context.query(), match);
     }
 }
 
