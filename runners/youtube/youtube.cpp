@@ -31,6 +31,7 @@
 #include <QtCore/QEventLoop>
 #include <qfile.h>
 #include <QtGui/QIcon>
+#include <qpushbutton.h>
 #include <qjson/parser.h>
 #include <kde4/KDE/KRun>
 
@@ -48,7 +49,7 @@ YouTube::YouTube(QObject *parent, const QVariantList& args)
     s.addExampleQuery(QLatin1String("youtube :q:"));
     addSyntax(s);
 
-//    addSyntax(Plasma::RunnerSyntax(QLatin1String("youtube"), i18n("Lists the videos matching the query, using YouTube search")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String("youtube"), i18n("Lists the videos matching the query, using YouTube search")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
 }
@@ -82,7 +83,8 @@ void YouTube::match(Plasma::RunnerContext &context)
 
 void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
-    KRun::runUrl(match.data().toString(), "text/html", 0);
+    KRun *opener = new KRun(match.data().toString(), 0);
+    opener->setRunExecutables(false);
 }
 
 void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
