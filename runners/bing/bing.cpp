@@ -127,8 +127,6 @@ void Bing::parseJson(const QByteArray& data)
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
 
-    const QString& match = "bing";
-
     QVariantMap relatedMap = resultsMap.value("SearchResponse").toMap();
 //kDebug() << relatedMap.values();
 
@@ -140,49 +138,14 @@ void Bing::parseJson(const QByteArray& data)
 
     foreach (const QVariant& variant, mapList) {
         QVariantMap subSubMap = variant.toMap();
+
         kDebug() << subSubMap.value("Title");
+        kDebug() << subSubMap.value("Url");
+
+        QVariantMap thumbnailMap = subSubMap.value("Thumbnail").toMap();
+
+        kDebug() << thumbnailMap.value("Url");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//    foreach (const QVariant& variant, related) {
-//        QVariantMap submap = variant.toMap();
-//kDebug() << submap;
-////        kDebug() << "Image:" << submap.value("FirstURL");
-////        kDebug() << "Text:" << submap.value("Text");
-////        kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
-//    }
-//    if (match == "define") {
-//        //dictionary mode
-//        kDebug() << "Heading:" << resultsMap.value("Heading");
-//        kDebug() << "AbstractSource:" << resultsMap.value("AbstractSource");
-//        kDebug() << "Abstract:" << resultsMap.value("Abstract");
-//        kDebug() << "AbstractURL:" << resultsMap.value("AbstractURL");
-//    } else if (match == "wolfram") {
-//        //wolfram mode (simple redirection, because web search providers are assholes)
-//        kDebug() << "Redirect:" << resultsMap.value("Redirect");
-//    } else if (match == "bing") {
-//
-//        foreach (const QVariant& variant, related) {
-//            QVariantMap submap = variant.toMap();
-//
-//            kDebug() << "FirstURL:" << submap.value("FirstURL");
-//            kDebug() << "Text:" << submap.value("Text");
-//            kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
-//        }
-//    }
 }
-
 
 #include "bing.moc"
