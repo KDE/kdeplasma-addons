@@ -32,7 +32,7 @@ TubeJob::TubeJob(const QString& term)
 
     m_manager = new QNetworkAccessManager(this);
 
-    QNetworkRequest request = QNetworkRequest(QUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=" + term));
+    QNetworkRequest request = QNetworkRequest(QUrl("http://gdata.youtube.com/feeds/api/videos?max-results=1&q=" + term + "&alt=json"));
     m_manager->get(request);
 
     connect(m_manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(jobCompleted(QNetworkReply*)));
