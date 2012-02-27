@@ -130,7 +130,7 @@ void Bing::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
         match.setIcon(icon);
 
         match.setData(url);
-        match.setText(QString(title + " on Bing"));
+        match.setText(QString("Image search:" + title + " on Bing"));
 
         context.addMatch(context.query(), match);
     }
