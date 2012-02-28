@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Copyright (C) 2012 by Shaun Reich <sreich@kde.org                         *
+ *  Copyright (C) 2012 by Shaun Reich <shaun.reich@blue-systems.com           *
  *                                                                            *
  *  This library is free software; you can redistribute it and/or modify      *
  *  it under the terms of the GNU Lesser General Public License as published  *
@@ -60,7 +60,6 @@ YouTube::~YouTube()
 
 void YouTube::match(Plasma::RunnerContext &context)
 {
-    kDebug() << "YouTube Runner, MATCH MADE";
 
     const QString term = context.query();
 
@@ -89,12 +88,10 @@ void YouTube::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch
 
 void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
 {
-    kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
 
     QVariantMap related = resultsMap.value("feed").toMap();
-//    kDebug() << related.value("entry").typeName();
 
     QVariantList subList = related.value("entry").toList();
 
@@ -142,7 +139,7 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
         match.setIcon(icon);
 
         match.setData(url);
-        match.setText(QString(title + " on YouTube"));
+        match.setText(i18n(title + " on YouTube"));
 
         context.addMatch(term, match);
     }

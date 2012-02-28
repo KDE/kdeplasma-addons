@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Copyright (C) 2012 by Shaun Reich <sreich@kde.org                         *
+ *  Copyright (C) 2012 by Shaun Reich <shaun.reich@blue-systems.com           *
  *                                                                            *
  *  This library is free software; you can redistribute it and/or modify      *
  *  it under the terms of the GNU Lesser General Public License as published  *
@@ -28,8 +28,6 @@ TubeJob::TubeJob(const QString& term)
   : QObject()
   , m_manager(0)
 {
-    kDebug() << "%%%%%% TubeJob ctor hit! QUERY TERM: " + term;
-
     m_manager = new QNetworkAccessManager(this);
 
     QNetworkRequest request = QNetworkRequest(QUrl("http://gdata.youtube.com/feeds/api/videos?max-results=10&alt=json&q=" + term));
@@ -41,7 +39,6 @@ TubeJob::TubeJob(const QString& term)
 void TubeJob::jobCompleted(QNetworkReply* reply)
 {
     m_data = reply->readAll();
-    kDebug() << "JOBCOMPLETED";
 
     emit finished();
 }
