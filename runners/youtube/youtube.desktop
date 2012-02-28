@@ -3,7 +3,7 @@ Name=YouTube
 
 Comment=Matches YouTube queries
 
-Icon=
+Icon=youtube
 
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
