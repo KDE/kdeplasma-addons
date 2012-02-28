@@ -54,7 +54,6 @@ Bing::~Bing()
 
 void Bing::match(Plasma::RunnerContext &context)
 {
-    kDebug() << "Bing Runner, MATCH MADE";
 
     const QString term = context.query();
 
@@ -83,7 +82,6 @@ void Bing::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &m
 
 void Bing::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
 {
-    kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
 

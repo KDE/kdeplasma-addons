@@ -29,8 +29,6 @@ BingJob::BingJob(const QString& term)
   : QObject()
   , m_manager(0)
 {
-    kDebug() << "%%%%%% TubeJob ctor hit! QUERY TERM: " + term;
-
     m_manager = new QNetworkAccessManager(this);
 
     QUrl url = QUrl("http://api.bing.net/json.aspx?AppId=340D9148BE10A564ABFC17937FFB623836112FBB&Query=" + term + "&Sources=Image&Version=2.0&Image.Count=10&Image.Offset=0");
@@ -44,7 +42,6 @@ BingJob::BingJob(const QString& term)
 void BingJob::jobCompleted(QNetworkReply* reply)
 {
     m_data = reply->readAll();
-    kDebug() << "JOBCOMPLETED";
 
     emit finished();
 }
