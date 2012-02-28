@@ -3,7 +3,7 @@ Name=Bing
 
 Comment=Matches Bing queries
 
-Icon=
+Icon=bing
 
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service

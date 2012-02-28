@@ -11,5 +11,5 @@ target_link_libraries(krunner_bing ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${QJSON_
 
 install(TARGETS krunner_bing DESTINATION ${PLUGIN_INSTALL_DIR} )
 
-install(FILES bing.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES plasma-runner-bing.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
