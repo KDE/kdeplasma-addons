@@ -1,10 +1,10 @@
+add_subdirectory(icons)
+
 set(krunner_bing_SRCS
     imageiconengine.cpp
     bingjob.cpp
     bing.cpp
 )
-
-add_subdirectory(icons)
 
 kde4_add_plugin(krunner_bing ${krunner_bing_SRCS})
 target_link_libraries(krunner_bing ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${QJSON_LIBRARIES})
