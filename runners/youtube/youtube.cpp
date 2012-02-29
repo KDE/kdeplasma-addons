@@ -139,7 +139,7 @@ void YouTube::parseJson(const QByteArray& data, Plasma::RunnerContext &context)
         match.setIcon(icon);
 
         match.setData(url);
-        match.setText(i18n(title + " on YouTube"));
+        match.setText(i18n("%1 on YouTube", title));
 
         context.addMatch(term, match);
     }
