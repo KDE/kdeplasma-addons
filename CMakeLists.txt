@@ -47,11 +47,6 @@ if (NEPOMUK_FOUND)
   include_directories( ${SOPRANO_INCLUDE_DIR} ${NEPOMUK_INCLUDE_DIR} )
 endif (NEPOMUK_FOUND)
 
-# FIXME: a better solution, since only duckduckgo runner uses it
-if (QJSON_FOUND)
-    add_subdirectory(runners)
-endif (QJSON_FOUND)
-
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 include_directories (${KDE4_INCLUDES}
