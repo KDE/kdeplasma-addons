@@ -1,7 +1,19 @@
 [Desktop Entry]
 Name=Bing
+Name[nl]=Bing
+Name[pt]=Bing
+Name[pt_BR]=Bing
+Name[sv]=Bing
+Name[uk]=Bing
+Name[x-test]=xxBingxx
 
 Comment=Matches Bing queries
+Comment[nl]=Komt overeen met Bing-queries
+Comment[pt]=Corresponde às pesquisas no Bing
+Comment[pt_BR]=Corresponde às pesquisas no Bing
+Comment[sv]=Matchar sökningar på Bing
+Comment[uk]=Відповідники запиту за даними Bing
+Comment[x-test]=xxMatches Bing queriesxx
 
 Icon=bing
 
