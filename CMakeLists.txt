@@ -30,7 +30,7 @@ macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 
 
 macro_optional_find_package(QJSON)
-macro_log_feature(QJSON_FOUND "QJSon" "Used for DuckDuckGo KRunner plugin" "INSERT URL HERE" FALSE "" "")
+macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses" "" FALSE "" "")
 
 macro_optional_depend_package(Marble "Marble")
 if (DEPEND_PACKAGE_Marble)
@@ -57,7 +57,11 @@ include_directories (${KDE4_INCLUDES}
 add_subdirectory(libs)
 add_subdirectory(applets)
 add_subdirectory(dataengines)
-add_subdirectory(runners)
+
+if (QJSON_FOUND)
+    add_subdirectory(runners)
+endif (QJSON_FOUND)
+
 add_subdirectory(scriptengines)
 add_subdirectory(wallpapers)
 add_subdirectory(containments)
