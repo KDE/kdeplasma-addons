@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=DuckDuckGo
+Name[el]=DuckDuckGo
 Name[nl]=DuckDuckGo
 Name[pt]=DuckDuckGo
 Name[pt_BR]=DuckDuckGo
@@ -8,6 +9,7 @@ Name[uk]=DuckDuckGo
 Name[x-test]=xxDuckDuckGoxx
 
 Comment=Matches DuckDuckGo queries
+Comment[el]=Εύρεση αναζητήσεων με το DuckDuckGo
 Comment[nl]=Komt overeen met DuckDuckGo-queries
 Comment[pt]=Corresponde às pesquisas do DuckDuckGo
 Comment[pt_BR]=Corresponde às pesquisas no DuckDuckGo
