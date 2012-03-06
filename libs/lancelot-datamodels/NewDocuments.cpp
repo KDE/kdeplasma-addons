@@ -47,9 +47,9 @@ NewDocuments::NewDocuments()
 
         QStringList applications;
         applications
-            << "kword|openoffice.org-writer.desktop|ooo-writer|writer"
-            << "kpresenter|openoffice.org-impress.desktop|ooo-impress|impress"
-            << "kspread|openoffice.org-calc.desktop|ooo-calc|calc"
+            << "kword|libreoffice-writer.desktop|openoffice.org-writer.desktop|ooo-writer|writer"
+            << "kpresenter|libreoffice-impress.desktop|openoffice.org-impress.desktop|ooo-impress|impress"
+            << "kspread|libreoffice-calc.desktop|openoffice.org-calc.desktop|ooo-calc|calc"
             << "karbon|inkscape"
             << "krita|gimp";
 
