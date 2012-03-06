@@ -23,10 +23,6 @@
 
 class KDirWatch;
 
-/**
- * This engine provides the current state of the keyboard modifiers
- * and mouse buttons, primarily useful for accessibility feature support.
- */
 class KonsoleProfilesEngine : public Plasma::DataEngine
 {
     Q_OBJECT

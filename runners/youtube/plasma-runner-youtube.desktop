@@ -1,0 +1,30 @@
+[Desktop Entry]
+Name=YouTube
+Name[el]=YouTube
+Name[nl]=YouTube
+Name[pt]=YouTube
+Name[pt_BR]=YouTube
+Name[sv]=YouTube
+Name[uk]=YouTube
+Name[x-test]=xxYouTubexx
+
+Comment=Matches YouTube queries
+Comment[el]=Εύρεση αναζητήσεων στο YouTube
+Comment[nl]=Komt overeen met YouTube-queries
+Comment[pt]=Corresponde às pesquisas do YouTube
+Comment[pt_BR]=Corresponde às pesquisas no YouTube
+Comment[sv]=Matchar sökningar på YouTube
+Comment[uk]=Відповідники запиту за даними YouTube
+Comment[x-test]=xxMatches YouTube queriesxx
+
+Icon=youtube
+
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+X-KDE-Library=krunner_youtube
+X-KDE-PluginInfo-Author=Shaun M. Reich
+X-KDE-PluginInfo-Email=sreich@kde.org
+X-KDE-PluginInfo-Name=youtube
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true

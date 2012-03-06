@@ -1,0 +1,30 @@
+[Desktop Entry]
+Name=Bing
+Name[el]=Bing
+Name[nl]=Bing
+Name[pt]=Bing
+Name[pt_BR]=Bing
+Name[sv]=Bing
+Name[uk]=Bing
+Name[x-test]=xxBingxx
+
+Comment=Matches Bing queries
+Comment[el]=Εύρεση αναζητήσεων με το Bing
+Comment[nl]=Komt overeen met Bing-queries
+Comment[pt]=Corresponde às pesquisas no Bing
+Comment[pt_BR]=Corresponde às pesquisas no Bing
+Comment[sv]=Matchar sökningar på Bing
+Comment[uk]=Відповідники запиту за даними Bing
+Comment[x-test]=xxMatches Bing queriesxx
+
+Icon=bing
+
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+X-KDE-Library=krunner_bing
+X-KDE-PluginInfo-Author=Shaun M. Reich
+X-KDE-PluginInfo-Email=sreich@kde.org
+X-KDE-PluginInfo-Name=bing
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true

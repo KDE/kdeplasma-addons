@@ -47,8 +47,8 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
     //kDebug() << name;
     if (name.startsWith("UserImages:")) {
-        // these are updated by the engine itself, not consumers
-        return true;
+        // these are created by the engine itself, not consumers
+        return false;
     }
 
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
@@ -114,7 +114,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     QStringList account = who.split('@');
     if (account.count() == 2){
         serviceBaseUrl = account.at(1);
-    }else{
+    } else {
         serviceBaseUrl = "http://twitter.com/";
     }
 

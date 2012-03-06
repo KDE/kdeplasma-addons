@@ -5,6 +5,7 @@ set(module_install_dir ${DATA_INSTALL_DIR}/cmake/modules )
 set(cmakeFiles
                FindLancelot.cmake
                FindLancelot-Datamodels.cmake
+               FindQJSON.cmake
                )
 
 install(FILES ${cmakeFiles}

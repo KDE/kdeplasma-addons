@@ -1,0 +1,30 @@
+[Desktop Entry]
+Name=DuckDuckGo
+Name[el]=DuckDuckGo
+Name[nl]=DuckDuckGo
+Name[pt]=DuckDuckGo
+Name[pt_BR]=DuckDuckGo
+Name[sv]=DuckDuckGo
+Name[uk]=DuckDuckGo
+Name[x-test]=xxDuckDuckGoxx
+
+Comment=Matches DuckDuckGo queries
+Comment[el]=Εύρεση αναζητήσεων με το DuckDuckGo
+Comment[nl]=Komt overeen met DuckDuckGo-queries
+Comment[pt]=Corresponde às pesquisas do DuckDuckGo
+Comment[pt_BR]=Corresponde às pesquisas no DuckDuckGo
+Comment[sv]=Matchar sökningar på DuckDuckGo
+Comment[uk]=Відповідники запиту за даними DuckDuckGo
+Comment[x-test]=xxMatches DuckDuckGo queriesxx
+
+Icon=
+
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+X-KDE-Library=krunner_duckduckgo
+X-KDE-PluginInfo-Author=Shaun M. Reich
+X-KDE-PluginInfo-Email=sreich@kde.org
+X-KDE-PluginInfo-Name=duckduckgo
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true

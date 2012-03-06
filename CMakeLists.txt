@@ -28,6 +28,10 @@ macro_optional_find_package(Nepomuk)
 macro_log_feature(NEPOMUK_FOUND "Nepomuk" "Handles all kinds of metadata on the KDE desktop to provide a semantic desktop" "http://nepomuk.kde.org/" FALSE "" "STRONGLY_RECOMMENDED: Nepomuk is used to provide metadata on objects like files, emails etc. to provide a semantic desktop.")
 macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 
+
+macro_optional_find_package(QJSON)
+macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses" "" FALSE "" "")
+
 macro_optional_depend_package(Marble "Marble")
 if (DEPEND_PACKAGE_Marble)
   macro_optional_find_package(Marble)
@@ -53,7 +57,11 @@ include_directories (${KDE4_INCLUDES}
 add_subdirectory(libs)
 add_subdirectory(applets)
 add_subdirectory(dataengines)
-add_subdirectory(runners)
+
+if (QJSON_FOUND)
+    add_subdirectory(runners)
+endif (QJSON_FOUND)
+
 add_subdirectory(scriptengines)
 add_subdirectory(wallpapers)
 add_subdirectory(containments)
