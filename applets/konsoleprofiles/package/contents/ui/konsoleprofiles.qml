@@ -64,7 +64,10 @@ Item {
         PlasmaComponents.Label {
             id: header
             text: i18n("Konsole Profiles")
-            anchors { horizontalCenter: parent.horizontalCenter }
+            anchors { 
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
             horizontalAlignment: Text.AlignHCenter
         }
     }
