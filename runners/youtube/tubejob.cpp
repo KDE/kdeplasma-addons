@@ -24,13 +24,21 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
-TubeJob::TubeJob(const QString& term)
+TubeJob::TubeJob(const QString& term, bool singleRunnerMode)
   : QObject()
   , m_manager(0)
 {
     m_manager = new QNetworkAccessManager(this);
 
-    QNetworkRequest request = QNetworkRequest(QUrl("http://gdata.youtube.com/feeds/api/videos?max-results=10&alt=json&q=" + term));
+    QUrl url;
+
+    if (singleRunnerMode) {
+        url = ("http://gdata.youtube.com/feeds/api/videos?max-results=30&alt=json&q=" + term);
+    } else {
+        url = ("http://gdata.youtube.com/feeds/api/videos?max-results=10&alt=json&q=" + term);
+    }
+
+    QNetworkRequest request = QNetworkRequest(url);
     m_manager->get(request);
 
     connect(m_manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(jobCompleted(QNetworkReply*)));

@@ -32,7 +32,7 @@ class TubeJob : public QObject
     Q_OBJECT
 
 public:
-    TubeJob(const QString& term);
+    TubeJob(const QString& term,  bool singleRunnerMode);
 
     void start();
     QByteArray data();

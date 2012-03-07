@@ -72,8 +72,7 @@ void YouTube::match(Plasma::RunnerContext &context)
     }
 
     QEventLoop loop;
-
-    TubeJob tubeJob(term);
+    TubeJob tubeJob(term, context.singleRunnerQueryMode());
     connect(&tubeJob, SIGNAL(finished()), &loop, SLOT(quit()));
     loop.exec();
 
