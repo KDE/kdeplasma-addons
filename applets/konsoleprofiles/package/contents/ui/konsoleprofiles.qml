@@ -53,9 +53,10 @@ Item {
 
     Row {
         id: headerRow
-        anchors { left: parent.left; right: parent.right}
+        anchors { left: parent.left; right: parent.right }
 
         QIconItem {
+            id: appIcon
             icon: QIcon("utilities-terminal")
             width: 32
             height: 32
@@ -64,11 +65,9 @@ Item {
         PlasmaComponents.Label {
             id: header
             text: i18n("Konsole Profiles")
-            anchors { 
-                horizontalCenter: parent.horizontalCenter
-                verticalCenter: parent.verticalCenter
-            }
-            horizontalAlignment: Text.AlignHCenter
+            horizontalAlignment: Text.AlignHCenter | Text.AlignVCenter
+            width: parent.width - appIcon.width * 2
+            height: parent.height
         }
     }
 
@@ -91,7 +90,7 @@ Item {
     ListView {
         id: view
 
-        anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: separator.bottom; topMargin: 5}
+        anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: separator.bottom; topMargin: 5 }
 
         model: profilesModel
         clip: true
@@ -100,15 +99,20 @@ Item {
             id: listdelegate
             height: textMetric.paintedHeight * 2
 
-            anchors { left: parent.left; leftMargin: 10; right: parent.right; }
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
 
             PlasmaComponents.Label {
                 id: profileText
+
                 anchors {
                     verticalCenter: parent.verticalCenter
                     left: parent.left
                     right: parent.right
-                    rightMargin: 20
+                    leftMargin: 10
+                    rightMargin: 10
                 }
 
                 verticalAlignment: Text.AlignVCenter
