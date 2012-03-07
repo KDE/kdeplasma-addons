@@ -82,7 +82,7 @@ Item {
         id: textMetric
         visible: false
         // translated but not used, we just need length/height
-        text: i18n("Arbitrary String Which Says The Dictionary Type")
+        text: i18n("Arbitrary String Which Says Something")
     }
 
     ListView {
@@ -95,13 +95,22 @@ Item {
 
         delegate: Item {
             id: listdelegate
-       height: textMetric.paintedHeight * 2
-            anchors { left: parent.left; leftMargin: 10; right: parent.right;  }
+            height: textMetric.paintedHeight * 2
+
+            anchors { left: parent.left; leftMargin: 10; right: parent.right; }
 
             PlasmaComponents.Label {
                 id: profileText
-                anchors.fill: parent
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    right: parent.right
+                    rightMargin: 20
+                }
+
+                verticalAlignment: Text.AlignVCenter
                 text: model.prettyName
+                elide: Text.ElideRight
             }
 
             MouseArea {
