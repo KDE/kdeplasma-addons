@@ -735,8 +735,21 @@ void TaskGroupItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     if (event->button() == Qt::LeftButton) {
         if (Tasks::GC_MinMax != m_applet->groupClick() || event->modifiers() & Qt::ControlModifier) {
-            if ((event->modifiers()&Qt::ControlModifier || Tasks::GC_PresentWindows == m_applet->groupClick()) &&
-                    KWindowSystem::compositingActive() && Plasma::WindowEffects::isEffectAvailable(Plasma::WindowEffects::PresentWindowsGroup)) {
+            bool usePresentWindows=(event->modifiers()&Qt::ControlModifier || Tasks::GC_PresentWindows == m_applet->groupClick()) &&
+                    KWindowSystem::compositingActive() && Plasma::WindowEffects::isEffectAvailable(Plasma::WindowEffects::PresentWindowsGroup);
+
+            if (usePresentWindows) {
+                // Check all tasks are from this activity!
+                foreach (AbstractGroupableItem * groupable, m_group.data()->members()) {
+                    TaskItem * item = dynamic_cast<TaskItem*>(groupable);
+                    if (item && item->task() && !item->task()->isOnCurrentActivity()) {
+                        usePresentWindows=false;
+                        break;
+                    }
+                }
+            }
+
+            if (usePresentWindows) {
                 QList<WId> ids;
                 foreach (AbstractGroupableItem * groupable, m_group.data()->members()) {
                     if (groupable->itemType() == TaskManager::GroupItemType) {
