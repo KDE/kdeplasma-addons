@@ -39,11 +39,7 @@ Bing::Bing(QObject *parent, const QVariantList& args)
     setObjectName(QLatin1String("Bing"));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds Bing images search matching :q:."));
-    s.addExampleQuery(QLatin1String("image :q:"));
-    addSyntax(s);
-
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "image" ), i18n("Lists the search entries matching the query, using Bing search")));
+    addSyntax(Plasma::RunnerSyntax("images :q:", i18n("Lists the images matching the query, using Bing image search")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
 }
