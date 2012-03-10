@@ -26,8 +26,6 @@
 #include <QtCore/QEventLoop>
 #include <qjson/parser.h>
 
-//TODO: I'd really *love* to be able to embed a video *inside* krunner. you know how sexy that'd be? answer: very much.
-//but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
 DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
@@ -35,13 +33,9 @@ DuckDuckGo::DuckDuckGo(QObject *parent, const QVariantList& args)
     setObjectName(QLatin1String("DuckDuckGo"));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds DuckDuckGo search matching :q:."));
-    s.addExampleQuery(QLatin1String("duckduckgo :q:"));
-    addSyntax(s);
-
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "duckduckgo" ), i18n("Lists the search entries matching the query, using DuckDuckGo search")));
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "wolfram" ), i18n("Searches using Wolfram Alpha, powered by DuckDuckGo")));
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "define" ), i18n("Defines words using dictionaries, powered by DuckDuckGo")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "duckduckgo :q:" ), i18n("Lists the search entries matching the query, using DuckDuckGo search")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "wolfram :q:" ), i18n("Searches using Wolfram Alpha, powered by DuckDuckGo")));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String( "define :q:" ), i18n("Defines words using dictionaries, powered by DuckDuckGo")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
 
