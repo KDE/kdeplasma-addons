@@ -56,8 +56,13 @@ YouTube::~YouTube()
 
 void YouTube::match(Plasma::RunnerContext &context)
 {
+    QString term = context.query();
 
-    const QString term = context.query();
+    if (!term.startsWith("videos ")) {
+        return;
+    } else {
+        term = term.remove("videos ");
+    }
 
     if (term.length() < 3) {
         return;

@@ -59,7 +59,27 @@ void DuckDuckGo::match(Plasma::RunnerContext &context)
 //    connect(this, SIGNAL(matchMade(Plasma::RunnerContext*)), this, SLOT(startDuckDuckGoJob(Plasma::RunnerContext*)));
  //   emit matchMade(&context);
 
-    const QString term = context.query();
+    QString term = context.query();
+
+    if (!term.startsWith("duckduckgo ")) {
+        return;
+    } else {
+        term = term.remove("duckduckgo ");
+    }
+
+    if (!term.startsWith("wolfram ")) {
+        return;
+    } else {
+        term = term.remove("wolfram ");
+    }
+
+    if (!term.startsWith("define ")) {
+        return;
+    } else {
+        term = term.remove("define ");
+    }
+
+
     if (term.length() < 3) {
         return;
     }

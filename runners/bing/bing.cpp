@@ -50,8 +50,13 @@ Bing::~Bing()
 
 void Bing::match(Plasma::RunnerContext &context)
 {
+    QString term = context.query();
 
-    const QString term = context.query();
+    if (!term.startsWith("images ")) {
+            return;
+    } else {
+        term = term.remove("images ");
+    }
 
     if (term.length() < 3) {
         return;
