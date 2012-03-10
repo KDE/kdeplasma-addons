@@ -45,11 +45,7 @@ YouTube::YouTube(QObject *parent, const QVariantList& args)
     setObjectName(QLatin1String("YouTube"));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QLatin1String("youtube :q:"), i18n("Finds YouTube video matching :q:."));
-    s.addExampleQuery(QLatin1String("youtube :q:"));
-    addSyntax(s);
-
-    addSyntax(Plasma::RunnerSyntax(QLatin1String("youtube"), i18n("Lists the videos matching the query, using YouTube search")));
+    addSyntax(Plasma::RunnerSyntax("videos :q:", i18n("Lists the videos matching the query, using YouTube search")));
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
 }
