@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Bing
+Name[cs]=Bing
 Name[el]=Bing
 Name[nl]=Bing
 Name[pt]=Bing
@@ -9,6 +10,7 @@ Name[uk]=Bing
 Name[x-test]=xxBingxx
 
 Comment=Matches Bing queries
+Comment[cs]=Vyhledávání dotazů Bing
 Comment[el]=Εύρεση αναζητήσεων με το Bing
 Comment[nl]=Komt overeen met Bing-queries
 Comment[pt]=Corresponde às pesquisas no Bing

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=YouTube
+Name[cs]=YouTube
 Name[el]=YouTube
 Name[nl]=YouTube
 Name[pt]=YouTube
@@ -9,6 +10,7 @@ Name[uk]=YouTube
 Name[x-test]=xxYouTubexx
 
 Comment=Matches YouTube queries
+Comment[cs]=Vyhledávání dotazů YouTube
 Comment[el]=Εύρεση αναζητήσεων στο YouTube
 Comment[nl]=Komt overeen met YouTube-queries
 Comment[pt]=Corresponde às pesquisas do YouTube
