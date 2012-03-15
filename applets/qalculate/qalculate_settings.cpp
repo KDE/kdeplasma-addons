@@ -63,6 +63,7 @@ void QalculateSettings::readSettings()
     m_showOctal = cfg.readEntry("showOctal", false);
     m_showDecimal = cfg.readEntry("showDecimal", false);
     m_showHexadecimal = cfg.readEntry("showHexadecimal", false);
+    m_historyItems = cfg.readEntry("historyItems", QStringList());
 }
 
 void QalculateSettings::writeSettings()
@@ -148,8 +149,8 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     m_angleUnitCombo->addItem(i18n("Degrees"));
     m_angleUnitCombo->addItem(i18n("Gradians"));
     m_angleUnitCombo->setCurrentIndex(m_angleUnit);
-    connect(m_angleUnitCombo, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));   
-    
+    connect(m_angleUnitCombo, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
+
     layout->addRow(m_unitsCheck);
     layout->addRow(m_copyToClipboardCheck);
     layout->addRow(m_resultsInlineCheck);
@@ -161,7 +162,7 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     layout->addRow(i18n("Result base:"), m_baseDisplaySpin);
 
     m_configDialog->addPage(page, i18nc("Evaluation", "Evaluation Settings"), m_applet->icon());
-    
+
     QWidget *printPage = new QWidget();
 
     QFormLayout *printLayout = new QFormLayout(printPage);
@@ -173,7 +174,7 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     m_fractionCombo->addItem(i18n("Combined"));
     m_fractionCombo->setCurrentIndex(m_fractionDisplay);
     connect(m_fractionCombo, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
-    
+
     m_minExpCombo = new KComboBox(printPage);
     m_minExpCombo->addItem(i18n("None"));
     m_minExpCombo->addItem(i18n("Pure"));
@@ -195,7 +196,7 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     m_negativeExponentsCheck = new QCheckBox(i18n("Negative exponents"), printPage);
     m_negativeExponentsCheck->setCheckState(m_negativeExponents ? Qt::Checked : Qt::Unchecked);
     connect(m_negativeExponentsCheck, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
-    
+
     QGroupBox *showBasesBox = new QGroupBox(i18n("Show integers also in base:"), printPage);
     QGridLayout *layoutBases = new QGridLayout(showBasesBox);
 
@@ -255,6 +256,14 @@ void QalculateSettings::checkValidity()
         m_resultsInlineCheck->setEnabled(true);
         m_resultsInlineCheck->setCheckState(m_resultsInline ? Qt::Checked : Qt::Unchecked);
     }
+}
+
+void QalculateSettings::setHistoryItems(QStringList items)
+{
+    m_historyItems = items;
+    KConfigGroup cfg = m_applet->config();
+    cfg.writeEntry("historyItems", m_historyItems);
+    cfg.sync();
 }
 
 

@@ -69,8 +69,8 @@ public:
     //! Live evaluation
     bool liveEvaluation() const {
         return m_liveEvaluation;
-    }    
-    
+    }
+
     //! Structuring of the resultsInline
     //! @return 0, None
     //! @return 1, Simplify
@@ -126,6 +126,10 @@ public:
     int minExp() const {
         return m_minExp;
     }
+    //! History items
+    QStringList historyItems() const {
+        return m_historyItems;
+    }
 
     bool showBinary() const {
       return m_showBinary;
@@ -142,6 +146,8 @@ public:
     bool showOtherBases() const {
       return m_showBinary || m_showOctal || m_showDecimal || m_showHexadecimal;
     }
+
+    void setHistoryItems(QStringList items);
 
 public slots:
     void readSettings();
@@ -174,6 +180,7 @@ private:
     int m_base, m_baseDisplay;
     int m_minExp;
     int m_readPrecisionMode;
+    QStringList m_historyItems;
 
     QCheckBox *m_unitsCheck, *m_infiniteSeriesCheck, *m_allPrefixesCheck, *m_denominatorPrefixCheck, *m_negativeExponentsCheck, *m_rpnCheck;
     QCheckBox *m_exchangeRatesCheck;

@@ -31,13 +31,16 @@ void QalculateHistory::addItem(const QString& expression)
     m_history.push_back(expression);
     m_backup = "";
     m_currentItem = m_history.size() - 1;
+    if (m_history.size() > 10) {
+        m_history.removeFirst();
+    }
 }
 
 QString QalculateHistory::currentItem()
 {
     qDebug() << "Current item: " << m_currentItem;
     qDebug() << "History size: " << m_history.size();
-    
+
     if (m_history.isEmpty()) {
         return QString();
     }
@@ -57,7 +60,7 @@ QString QalculateHistory::currentItem()
 
     qDebug() << "Final current item: " << m_currentItem;
     qDebug() << "---";
-    
+
     return m_history.at(m_currentItem);
 }
 
@@ -96,3 +99,15 @@ bool QalculateHistory::isAtEnd() const
 {
     return m_currentItem >= 0 && m_history.size() - 1;
 }
+
+QStringList QalculateHistory::historyItems() const
+{
+    return m_history;
+}
+
+void QalculateHistory::setHistoryItems ( QStringList items )
+{
+    m_history = items;
+}
+
+

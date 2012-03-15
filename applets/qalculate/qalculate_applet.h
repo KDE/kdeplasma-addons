@@ -42,6 +42,7 @@
 namespace Plasma
 {
 class LineEdit;
+class PushButton;
 }
 class OutputLabel;
 
@@ -75,12 +76,12 @@ public:
 public slots:
     //! The configuration has changed -> the plasmoid must react accordingly
     void configChanged();
-   
+
     //! Navigate to the next history item
     void nextHistory();
     //! Navigate to the previous history item
     void previousHistory();
-   
+
 protected:
     void createConfigurationInterface(KConfigDialog *p_parent);
 
@@ -95,6 +96,10 @@ protected slots:
     void receivedResult(const QString&);
     //! Give focus to the input line
     void giveFocus();
+    //! Show the history
+    void showHistory();
+    //! Hide the history
+    void hideHistory();
 
 private:
     //! The graphics widget
@@ -112,6 +117,10 @@ private:
     Plasma::LineEdit *m_input;
     //! The output label where the result is shown
     OutputLabel *m_output;
+    //! Button which activates the menu
+    Plasma::PushButton *m_historyButton;
+
+    QGraphicsLinearLayout *m_historyList;
 
     //! The size of the result
     static int resultSize();

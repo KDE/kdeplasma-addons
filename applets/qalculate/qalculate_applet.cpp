@@ -27,11 +27,13 @@
 
 #include <KLocale>
 #include <KLineEdit>
+#include <KPushButton>
 #include <KIcon>
 #include <KAction>
 #include <KConfigDialog>
 
 #include <Plasma/LineEdit>
+#include <Plasma/PushButton>
 #include <Plasma/Label>
 #include <Plasma/Theme>
 #include <Plasma/Containment>
@@ -42,6 +44,7 @@
 #include <QGraphicsLinearLayout>
 #include <QLabel>
 #include <QGraphicsSceneMouseEvent>
+
 
 K_EXPORT_PLASMA_APPLET(qalculate, QalculateApplet)
 
@@ -62,7 +65,7 @@ QalculateApplet::QalculateApplet(QObject *parent, const QVariantList &args)
     connect(m_engine, SIGNAL(resultReady(QString)), this, SLOT(createTooltip()));
     connect(m_engine, SIGNAL(resultReady(QString)), this, SLOT(receivedResult(QString)));
     connect(m_settings, SIGNAL(accepted()), this, SLOT(evalNoHist()));
-  
+
     setHasConfigurationInterface(true);
 }
 
@@ -82,7 +85,9 @@ void QalculateApplet::init()
     if (m_settings->updateExchangeRatesAtStartup()) {
         m_engine->updateExchangeRates();
     }
-    
+    m_settings->readSettings();
+    m_history->setHistoryItems(m_settings->historyItems());
+
     graphicsWidget();
     setupActions();
     setPopupIcon(KIcon("qalculate-applet"));
@@ -111,8 +116,7 @@ QGraphicsWidget* QalculateApplet::graphicsWidget()
 {
     if (!m_graphicsWidget) {
         m_graphicsWidget = new QalculateGraphicsWidget(this);
-        m_graphicsWidget->setMinimumSize(200, 150);
-        m_graphicsWidget->setPreferredSize(300, 200);
+        m_graphicsWidget->setMinimumWidth(200);
 
         m_input = new Plasma::LineEdit;
         m_input->nativeWidget()->setClickMessage(i18n("Enter an expression..."));
@@ -123,9 +127,10 @@ QGraphicsWidget* QalculateApplet::graphicsWidget()
         connect(m_input->nativeWidget(), SIGNAL(editingFinished()), this, SLOT(evalNoHist()));
         m_input->setAcceptedMouseButtons(Qt::LeftButton);
         m_input->setFocusPolicy(Qt::StrongFocus);
-           
+
         m_output = new OutputLabel;
         m_output->nativeWidget()->setAlignment(Qt::AlignCenter);
+        m_output->nativeWidget()->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         QFont f = m_output->nativeWidget()->font();
         f.setBold(true);
         f.setPointSize(resultSize() / 2);
@@ -133,24 +138,34 @@ QGraphicsWidget* QalculateApplet::graphicsWidget()
         m_output->setFocusPolicy(Qt::NoFocus);
         connect(m_output, SIGNAL(clicked()), this, SLOT(giveFocus()));
 
+        m_historyButton = new Plasma::PushButton;
+        m_historyButton->setText(i18n("Show History"));
+        m_historyButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        connect(m_historyButton->nativeWidget(), SIGNAL(clicked()), this, SLOT(showHistory()));
+
+        m_historyList = new QGraphicsLinearLayout(Qt::Vertical);
+
         QPalette palette = m_output->palette();
         palette.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
         m_output->nativeWidget()->setPalette(palette);
 
         m_layout = new QGraphicsLinearLayout(Qt::Vertical);
-        m_layout->addItem(m_input);
-        m_layout->addItem(m_output);
+        m_layout->insertItem(0, m_input);
+        m_layout->insertItem(1, m_output);
+        if (!m_history->historyItems().isEmpty()) {
+            m_layout->insertItem(2, m_historyButton);
+        }
 
         m_graphicsWidget->setLayout(m_layout);
         m_graphicsWidget->setFocusPolicy(Qt::StrongFocus);
 
         configChanged();
         clearOutputLabel();
-        
+
         connect(m_graphicsWidget, SIGNAL(giveFocus()), this, SLOT(giveFocus()));
         connect(m_graphicsWidget, SIGNAL(nextHistory()), this, SLOT(nextHistory()));
         connect(m_graphicsWidget, SIGNAL(previousHistory()), this, SLOT(previousHistory()));
-	//connect(this, SIGNAL(activated()), this, SLOT(giveFocus()));
+        //connect(this, SIGNAL(activated()), this, SLOT(giveFocus()));
     }
 
     return m_graphicsWidget;
@@ -167,7 +182,7 @@ void QalculateApplet::createTooltip()
         Plasma::ToolTipManager::self()->hide(this);
         return;
     }
-    
+
     Plasma::ToolTipContent data;
     data.setMainText(i18n("Qalculate!"));
     data.setSubText(m_engine->lastResult());
@@ -184,6 +199,11 @@ void QalculateApplet::evaluate()
 {
     evalNoHist();
     m_history->addItem(m_input->text());
+    m_settings->setHistoryItems(m_history->historyItems());
+    if (!m_history->historyItems().isEmpty() && m_layout->itemAt(2) != m_historyButton) {
+        m_layout->insertItem(2, m_historyButton);
+    }
+    hideHistory();
 }
 
 void QalculateApplet::evalNoHist()
@@ -192,7 +212,7 @@ void QalculateApplet::evalNoHist()
         clearOutputLabel();
         return;
     }
-    
+
     m_engine->evaluate(m_input->text().replace(KGlobal::locale()->decimalSymbol(), "."));
 }
 
@@ -221,7 +241,7 @@ void QalculateApplet::configChanged()
         m_graphicsWidget->resize(m_input->size());
     } else {
         m_output->show();
-        m_layout->addItem(m_output);
+        m_layout->insertItem(1, m_output);
         m_graphicsWidget->resize(m_graphicsWidget->preferredSize());
     }
 
@@ -252,7 +272,7 @@ void QalculateApplet::nextHistory()
     if (m_history->backup().isEmpty() && m_history->isAtEnd()) {
         m_history->setBackup(m_input->text());
     }
-    
+
     m_input->setText(m_history->nextItem());
 }
 
@@ -261,8 +281,53 @@ void QalculateApplet::previousHistory()
     if (m_history->backup().isEmpty() && m_history->isAtEnd()) {
         m_history->setBackup(m_input->text());
     }
-    
+
     m_input->setText(m_history->previousItem());
+}
+
+void QalculateApplet::showHistory()
+{
+    if (m_history->backup().isEmpty() && m_history->isAtEnd()) {
+        m_history->setBackup(m_input->text());
+    }
+
+    if (m_historyButton->text() == i18n("Show History")) {
+        QStringList itemList = m_history->historyItems();
+        int i = itemList.size() - 1;
+
+        //populate list
+        for( ; i >= 0; i-- )
+        {
+            if (!itemList.at(i).isEmpty()) {
+                OutputLabel *item = new OutputLabel;
+                item->setText(itemList.at(i));
+                m_historyList->addItem(item);
+            }
+        }
+
+        m_historyButton->setText(i18n("Hide History"));
+        m_layout->addItem(m_historyList);
+    }
+    else {
+        hideHistory();
+    }
+}
+
+void QalculateApplet::hideHistory()
+{
+    if (m_historyButton->text() == i18n("Hide History")) {
+        //clear historyList
+        while (m_historyList->count() != 0) {
+            QGraphicsLayoutItem *item;
+            item = m_historyList->itemAt(0);
+            m_historyList->removeItem(item);
+            delete item;
+        }
+    }
+
+    m_layout->removeItem(m_historyList);
+    m_historyButton->setText(i18n("Show History"));
+    m_graphicsWidget->resize(m_graphicsWidget->preferredSize());
 }
 
 #include "qalculate_applet.moc"

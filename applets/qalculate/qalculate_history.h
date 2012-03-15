@@ -37,7 +37,9 @@ public:
 
     void setBackup(const QString&);
     QString backup() const;
-    
+    void setHistoryItems(QStringList items);
+    QStringList historyItems() const;
+
     bool isAtEnd() const;
 
 private:
