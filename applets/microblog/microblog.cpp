@@ -911,7 +911,9 @@ void MicroBlog::downloadHistory()
     if (m_service) {
         KConfigGroup cg = m_service->operationDescription("auth");
         cg.writeEntry("password", m_password);
-        m_service->startOperationCall(cg);
+        
+        bool ok = m_service->startOperationCall(cg);
+        kDebug() << "operation OK";
     }
 
     //get the profile to retrieve the user icon
@@ -981,6 +983,7 @@ void MicroBlog::serviceFinished(Plasma::ServiceJob *job)
 {
     if (job->error()) {
         m_flash->flash(job->errorString(), 2000);
+        kDebug() << "Job failed.";
 
         // reset the service objects to give it a chance
         // to re-authenticate
@@ -993,6 +996,9 @@ void MicroBlog::serviceFinished(Plasma::ServiceJob *job)
             m_profileService->deleteLater();
             m_profileService = 0;
         }
+    } else {
+        kDebug() << "Job succeeded.";
+
     }
 }
 
