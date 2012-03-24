@@ -50,6 +50,7 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
     // revert as soon as BUG 192625 is fixed
     if (m_runningJobs < 5) {
         if (m_cachedData.contains(who)) {
+            kDebug() << "UserImage:" << who;
             setData(who, m_cachedData.value(who));
         }
 
@@ -90,13 +91,21 @@ void ImageSource::result(KJob *job)
         //kDebug() << "done!" << m_jobData;
         QImage img;
         img.loadFromData(m_jobData.value(job));
+        kDebug() << "UserImage:" << m_jobs.value(job);
         setData(m_jobs.value(job), img);
+        emit dataChanged();
     }
 
     m_jobs.remove(job);
     m_jobData.remove(job);
     checkForUpdate();
 }
+
+Plasma::DataEngine::Data ImageSource::data()
+{
+    return m_cachedData;
+}
+
 
 #include <imagesource.moc>
 

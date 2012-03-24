@@ -22,6 +22,7 @@
 
 
 #include <KDebug>
+#include <KIcon>
 #include <ksocketfactory.h>
 
 #include "timelinesource.h"
@@ -37,6 +38,8 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
     setMinimumPollingInterval(2 * 60 * 1000); // 2 minutes minimum
+    setData("Defaults", "UserImage", KIcon("camera-photo").pixmap(256, 256).toImage());
+
 }
 
 TwitterEngine::~TwitterEngine()
@@ -45,10 +48,10 @@ TwitterEngine::~TwitterEngine()
 
 bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
-    //kDebug() << name;
     if (name.startsWith("UserImages:")) {
-        // these are created by the engine itself, not consumers
-        return false;
+        // these are updated by the engine itself, not consumers
+        kDebug() << " user image req'ed, doing nothing: " << name;
+        return true;
     }
 
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
@@ -57,6 +60,12 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return false;
     }
 
+    //kDebug() << "loading: " << name;
+    kDebug() << sources();
+    //KIcon("meeting-chair").pixmap(256, 256).toImage().save("/tmp/userimage.png");
+    scheduleSourcesUpdated();
+    //kDebug() << "image added" << sources();
+
     updateSourceEvent(name); //start a download
     return true;
 }
@@ -64,8 +73,9 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
 Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 {
     TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
-
+    kDebug() << "Service name: " << name;
     if (!source) {
+        kDebug() << "source not there.";
         return Plasma::DataEngine::serviceForSource(name);
     }
 
@@ -110,21 +120,22 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     }
 
     //we want just the service url to index the UserImages source
-    QString serviceBaseUrl;
+    //QString m_serviceBaseUrl;
     QStringList account = who.split('@');
-    if (account.count() == 2){
-        serviceBaseUrl = account.at(1);
+    if (account.count() == 2) {
+        m_serviceBaseUrl = account.at(1);
     } else {
-        serviceBaseUrl = "http://twitter.com/";
+        m_serviceBaseUrl = "http://twitter.com/";
     }
 
-    ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
+    ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+m_serviceBaseUrl));
+    connect(imageSource, SIGNAL(dataChanged()), SLOT(imageDataChanged()));
 
     if (!imageSource) {
         imageSource = new ImageSource(this);
         imageSource->setStorageEnabled(true);
 
-        imageSource->setObjectName("UserImages:"+serviceBaseUrl);
+        imageSource->setObjectName("UserImages:"+m_serviceBaseUrl);
         addSource(imageSource);
     }
 
@@ -140,9 +151,18 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         addSource(source);
     }
 
+    //setData(name, Plasma::DataEngine::Data());
 
     source->update();
     return false;
 }
+
+void TwitterEngine::imageDataChanged()
+{
+    scheduleSourcesUpdated();
+    //const QString s = QString("UserImage:%1").arg(m_serviceBaseUrl);
+    //emit DataEngine::dataUpdated(s, ImageSource.data());
+}
+
 
 #include "twitterengine.moc"

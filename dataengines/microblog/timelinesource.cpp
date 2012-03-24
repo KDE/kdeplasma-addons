@@ -21,7 +21,7 @@
 #include "timelinesource.h"
 
 #include <QXmlStreamReader>
-#include <QtCrypto>
+#include <QtCrypto/QtCrypto>
 
 #include <KDebug>
 #include <KIO/Job>
@@ -279,6 +279,7 @@ void TimelineSource::update(bool forcedUpdate)
 
 void TimelineSource::recv(KIO::Job*, const QByteArray& data)
 {
+    //kDebug() << "   XML: " << data;
     m_xml += data;
     //kDebug() << m_data;
 }
@@ -503,7 +504,7 @@ void TimelineSource::readDirectMessage(QXmlStreamReader &xml)
     if (!m_id.isEmpty()) {
         QVariant v;
         v.setValue(m_tempData);
-        //kDebug() << "setting data" << m_id << v;
+        kDebug() << "setting data" << m_id << v;
         setData(m_id, v);
         m_id.clear();
     }
