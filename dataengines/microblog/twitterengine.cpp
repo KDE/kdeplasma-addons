@@ -79,11 +79,11 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
 
 Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 {
-    kDebug() << " finding source..." << name;
+//     kDebug() << " finding source..." << name;
     TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
-    kDebug() << "Service name: " << name;
+//     kDebug() << "Service name: " << name;
     if (!source) {
-        kDebug() << "source not there." << name << sources();
+        kWarning() << "service for non existing source requested." << name << sources();
         return Plasma::DataEngine::serviceForSource(name);
     }
 
@@ -99,7 +99,7 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 //always returns false because everything is async
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
-    kDebug() << "Updating: " << name;
+//     kDebug() << "Updating: " << name;
     //right now it only makes sense to do an update on timelines
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
@@ -156,7 +156,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     QOAuthHelper *authHelper = 0;
     if (!m_authHelper.contains(serviceBaseUrl)) {
         authorizationStatusUpdated(serviceBaseUrl, "Idle");
-        kDebug() << "Creating new authhelper";
+        //kDebug() << "Creating new authhelper";
         authHelper = new QOAuthHelper(this);
         authHelper->setServiceBaseUrl(serviceBaseUrl);
         m_authHelper[serviceBaseUrl] = authHelper;
@@ -200,7 +200,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             if (user.isEmpty()) {
                 return false;
             }
-            kDebug() << "New TimelineSource" << name;
+            //kDebug() << "New TimelineSource" << name;
 
             source = new TimelineSource(who, requestType, authHelper,this);
             //source->setOAuthHelper(authHelper);
@@ -235,9 +235,10 @@ void TwitterEngine::accessTokenReceived(const QString& serviceBaseUrl, const QSt
 
 void TwitterEngine::imageDataChanged()
 {
-    scheduleSourcesUpdated();
-    //const QString s = QString("UserImage:%1").arg(serviceBaseUrl);
+    //const QString s = QString("UserImage:%1").arg(m_serviceBaseUrl);
+    //kDebug() << "im datra chnged: ";
     //emit DataEngine::dataUpdated(s, ImageSource.data());
+    scheduleSourcesUpdated();
 }
 
 

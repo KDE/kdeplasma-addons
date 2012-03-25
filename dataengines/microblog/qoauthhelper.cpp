@@ -132,6 +132,9 @@ void QOAuthHelper::init()
 
 void QOAuthHelper::run()
 {
+    if (isAuthorized()) {
+        emit statusUpdated(d->serviceBaseUrl, "Ok", "User authorized");
+    }
     //authorize();
 }
 
@@ -308,7 +311,7 @@ void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
     KConfigGroup config = KConfigGroup(ptr, serviceBaseUrl);
     d->accessToken = config.readEntry("accessToken", QByteArray());
     d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
-    kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret; 
+//  kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret;
     //d->accessToken = QByteArray();
     //d->accessTokenSecret = QByteArray();
 }
@@ -320,8 +323,8 @@ QOAuthHelper::~QOAuthHelper()
 
 bool QOAuthHelper::isAuthorized()
 {
-    kDebug() << " hmm? " << d->accessToken << d->accessTokenSecret;
-    kDebug() << d->accessToken.isEmpty() << !d->accessTokenSecret.isEmpty() << " -> " << (!d->accessToken.isEmpty() && !d->accessTokenSecret.isEmpty());
+//     kDebug() << " hmm? " << d->accessToken << d->accessTokenSecret;
+//     kDebug() << d->accessToken.isEmpty() << !d->accessTokenSecret.isEmpty() << " -> " << (!d->accessToken.isEmpty() && !d->accessTokenSecret.isEmpty());
     return !d->accessToken.isEmpty() && !d->accessTokenSecret.isEmpty();
 }
 

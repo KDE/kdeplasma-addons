@@ -28,6 +28,7 @@
 
 ImageSource::ImageSource(QObject* parent)
     : Plasma::DataContainer(parent),
+      m_runningJobs(0),
       m_imageCache(0)
 {
     setObjectName(QLatin1String("UserImages"));
@@ -45,33 +46,38 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
     //FIXME: since kio_http bombs the system with too many request put a temporary arbitrary limit here
     // revert as soon as BUG 192625 is fixed
     if (m_loadedPersons.contains(who)) {
+        //kDebug() << "contains." << who;
         return;
     }
+    //kDebug() << "load image" << who << url;
     const QString cacheKey = who + "@" + url.pathOrUrl();
     //kDebug() << " LOAD IMAGE: " << who << url << cacheKey;
     // Check if the image is in the cache, if so return it
     QImage preview = QImage(QSize(48, 48), QImage::Format_ARGB32_Premultiplied);
     if (m_imageCache->findImage(cacheKey, &preview)) {
         // cache hit
-        //kDebug() << "Cache hit: " << cacheKey;
+        //kDebug() << "source added: " << who;
         //polishImage(preview);
         setData(who, polishImage(preview));
+        //kDebug() << "Image for " << who << "was cached";
         emit dataChanged();
         checkForUpdate();
         return;
     }
-    //kDebug() << "Cache miss: " << cacheKey;
+    //kDebug() << "Cache miss: " << cacheKey << m_runningJobs;
 
     m_loadedPersons << who;
     if (m_runningJobs < 500) {
         //if (who == "sebas") kDebug() << " 222 starting job" << who;
         m_runningJobs++;
+        kDebug() << "starting imagejob: " << url;
         KIO::Job *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
         job->setAutoDelete(true);
         m_jobs[job] = who;
         connect(job, SIGNAL(data(KIO::Job*,QByteArray)),
                 this, SLOT(recv(KIO::Job*,QByteArray)));
         connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+        job->start();
     } else {
         m_queuedJobs.append(QPair<QString, KUrl>(who, url));
     }
@@ -97,6 +103,8 @@ void ImageSource::result(KJob *job)
 
     if (job->error()) {
         // TODO: error handling
+        KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
+        kError() << "Image job returned error: " << kiojob->errorString();
     } else {
         QImage img;
         img.loadFromData(m_jobData.value(job));
@@ -106,13 +114,15 @@ void ImageSource::result(KJob *job)
         emit dataChanged();
         KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
         const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
+        polishImage(img).save("/tmp/twitter/avatar-"+who+".png");
         if (m_jobs.value(job) == "sebas") {
             kDebug() << " === SEBAS SET ===" << who;
             kDebug() << "Cache insert: " << cacheKey;
             //polishImage(img).save("/tmp/userimage.png");
         }
 
-        m_imageCache->insertImage(cacheKey, img);
+        m_imageCache->insertImage(cacheKey, img); // FIXME: enable
+        kDebug() << "===>> image for " << who << " loaded";
 
     }
 

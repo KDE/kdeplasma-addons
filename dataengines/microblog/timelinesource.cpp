@@ -137,7 +137,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
     if (operation == "update" || operation == "statuses/retweet" || operation == "favorites/create" || operation == "favorites/destroy") {
         return new TweetJob(m_source, operation, parameters);
     } else if (operation == "refresh") {
-        kDebug() << "rfresh";
+//         kDebug() << "rfresh";
         m_source->update(true);
     } else if (operation == "auth") {
         m_source->setPassword(parameters.value("password").toString());
@@ -161,7 +161,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
             p = p->parent();
         }
         */
-        kDebug() << "startAuthorization: " << password;
+//         kDebug() << "startAuthorization: " << password;
         m_source->startAuthorization(password);
         //emit authorize(password);
     }
@@ -214,10 +214,10 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QOAu
     if (!m_useOAuth) {
         m_url.setUser(account.at(0));
     }
-    kDebug() << "    CTOR ::: serviceBaseUrl" << this << serviceBaseUrl() << m_url;
+//     kDebug() << "    CTOR ::: serviceBaseUrl" << this << serviceBaseUrl() << m_url;
     // .. and now actually get the data
     if (m_authHelper->isAuthorized()) {
-        kDebug() << "authorized ... update now";
+//         kDebug() << "authorized ... update now";
         update();
     }
     connect(m_authHelper, SIGNAL(authorized()), SLOT(update()));
@@ -279,7 +279,7 @@ void TimelineSource::setPassword(const QString &password)
         m_url.setPass(password);
         update(force);
     }
-    kDebug() << "forceing";
+//     kDebug() << "forceing";
 }
 
 QString TimelineSource::password() const
@@ -315,24 +315,24 @@ QByteArray TimelineSource::oauthTokenSecret() const
 void TimelineSource::update(bool forcedUpdate)
 {
     if (!m_authHelper->isAuthorized()) {
-        kDebug() << "not authorized. Skips.";
+//         kDebug() << "not authorized. Skips.";
         return;
     }
     //kDebug() << "Starting the job";
     //if (m_job || (!account().isEmpty() && password().isEmpty() && !m_oauthToken.size())) {
     if (m_job) {
         // We are already performing a fetch, let's not bother starting over
-        kDebug() << "already updating....." << m_job << account().isEmpty() << password().isEmpty();
+//         kDebug() << "already updating....." << m_job << account().isEmpty() << password().isEmpty();
         return;
     }
 
-    kDebug() << "starting an update";
+//     kDebug() << "starting an update";
     // Create a KIO job to get the data from the web service
     m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
     if (m_useOAuth) {
 //         m_oauthToken = m_authHelper->accessToken();
 //         m_oauthTokenSecret = authHelper->accessTokenSecret();
-        kDebug() << "signing " << m_oauthToken << m_oauthTokenSecret;
+//         kDebug() << "signing " << m_oauthToken << m_oauthTokenSecret;
         m_authHelper->sign(m_job, m_url.pathOrUrl());
 //         OAuth::signRequest(m_job, m_url.pathOrUrl(), OAuth::GET, m_authHelper->accessToken(), m_authHelper->accessTokenSecret(), OAuth::ParamMap());
     }
@@ -358,7 +358,7 @@ void TimelineSource::result(KJob *job)
 {
     KIO::TransferJob *tj = dynamic_cast<KIO::TransferJob*>(job);
     if (job) {
-         kDebug() << "EEEEEEEEEEEEEEEEE job returned: " << tj->url();
+         kDebug() << "Timeline job returned: " << tj->url();
     }
     if (job != m_job) {
         kDebug() << "fail! job is not our job!";
