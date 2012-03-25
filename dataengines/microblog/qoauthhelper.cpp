@@ -245,7 +245,7 @@ void QOAuthHelper::accessTokenFromService()
 //         kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
         //kDebug() << "Surf to: " << auth_url;
         emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
-        d->busy = true;
+        d->busy = false;
         emit authorized();
     } else {
         kDebug() << d->interface->error() << reply;

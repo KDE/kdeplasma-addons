@@ -95,10 +95,9 @@ public:
         User
     };
 
-    TimelineSource(const QString &who, RequestType requestType, QObject* parent);
+    TimelineSource(const QString &who, RequestType requestType, QOAuthHelper *oauthHelper, QObject* parent);
     ~TimelineSource();
 
-    void update(bool forcedUpdate = false);
     void setPassword(const QString &password);
     QString account() const;
     QString password() const;
@@ -114,6 +113,9 @@ public:
 
     ImageSource* imageSource() const;
     void setImageSource(ImageSource *);
+
+public Q_SLOTS:
+    void update(bool forcedUpdate = false);
 
 Q_SIGNALS:
     void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);

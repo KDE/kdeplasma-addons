@@ -99,7 +99,7 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 //always returns false because everything is async
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
-    //kDebug() << "Updating: " << name;
+    kDebug() << "Updating: " << name;
     //right now it only makes sense to do an update on timelines
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
@@ -202,10 +202,10 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             }
             kDebug() << "New TimelineSource" << name;
 
-            source = new TimelineSource(who, requestType, this);
-            source->setOAuthHelper(authHelper);
-            connect(source, SIGNAL(authorize(const QString&, const QString&, const QString&)),
-                    authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
+            source = new TimelineSource(who, requestType, authHelper,this);
+            //source->setOAuthHelper(authHelper);
+            //connect(source, SIGNAL(authorize(const QString&, const QString&, const QString&)),
+            //        authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
             source->setObjectName(name);
             source->setImageSource(imageSource);
             source->setStorageEnabled(true);
