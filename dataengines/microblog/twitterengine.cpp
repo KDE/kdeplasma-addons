@@ -133,6 +133,8 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     //we want just the service url to index the UserImages source
     QString serviceBaseUrl;
     QStringList account = who.split('@');
+    const QString user = account.at(0);
+
     if (account.count() == 2) {
         serviceBaseUrl = account.at(1);
     } else {
@@ -158,6 +160,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         authorizationStatusUpdated(serviceBaseUrl, "Idle");
         //kDebug() << "Creating new authhelper";
         authHelper = new QOAuthHelper(this);
+        authHelper->setUser(user);
         authHelper->setServiceBaseUrl(serviceBaseUrl);
         m_authHelper[serviceBaseUrl] = authHelper;
 
@@ -172,25 +175,33 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         authHelper->run();
     } else {
         authHelper = m_authHelper[serviceBaseUrl];
+        if (!user.isEmpty()) {
+            authHelper->setUser(user);
+        }
+        authHelper->setServiceBaseUrl(serviceBaseUrl);
+    }
+    if (authHelper->isAuthorized()) {
+        authorizationStatusUpdated(serviceBaseUrl, "Ok");
     }
 
-    const QString user = account.at(0);
     if (requestType == TimelineSource::User) {
         UserSource *source = dynamic_cast<UserSource*>(containerForSource(name));
 
-        if (!source) {
-            source = new UserSource(account.at(0), serviceBaseUrl, this);
+        if (!source && !user.isEmpty()) {
+            source = new UserSource(user, serviceBaseUrl, this);
             source->setObjectName(name);
             //source->setImageSource(imageSource);
             source->setStorageEnabled(true);
             connect(source, SIGNAL(loadImage(const QString&, const KUrl&)),
                     imageSource, SLOT(loadImage(const QString&, const KUrl&)));
             if (imageSource) {
-                imageSource->loadImage(account.at(0), serviceBaseUrl);
+                imageSource->loadImage(user, serviceBaseUrl);
             }
             addSource(source);
         }
-        source->loadUserInfo(account.at(0), serviceBaseUrl);
+        if (!user.isEmpty()) {
+            source->loadUserInfo(user, serviceBaseUrl);
+        }
         //source->update();
 
     } else {

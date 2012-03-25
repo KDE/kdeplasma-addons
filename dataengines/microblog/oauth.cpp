@@ -153,7 +153,7 @@ void signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod method, co
 
     // create signature
     QByteArray signature = createSignature(requestUrl, method, token, tokenSecret, &parameters);
-    kDebug() << "signature: " << signature;
+    //kDebug() << "signature: " << signature;
 
     // add signature to parameters
     parameters.insert("oauth_signature", signature);
@@ -164,7 +164,7 @@ void signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod method, co
     QByteArray authorizationHeader = paramsToString(parameters, ParseForHeaderArguments);
 
     job->addMetaData("customHTTPHeader", QByteArray("Authorization: " + authorizationHeader));
-    kDebug() << "job thign...." << authorizationHeader;
+    //kDebug() << "job thign...." << authorizationHeader;
 }
 
 } // namespace OAuth
