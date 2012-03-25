@@ -1,3 +1,5 @@
+include_directories(${QJSON_INCLUDE_DIR})
+
 set(krunner_youtube_SRCS
     imageiconengine.cpp
     youtube.cpp

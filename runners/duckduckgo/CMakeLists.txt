@@ -1,3 +1,5 @@
+include_directories(${QJSON_INCLUDE_DIR})
+
 set(krunner_duckduckgo_SRCS
     duckduckgo.cpp
 )
