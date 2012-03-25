@@ -27,6 +27,8 @@
 
 #include <KUrl>
 
+#include "oauth.h"
+
 class QOAuthHelperPrivate;
 
 class QOAuthHelper : public QThread
@@ -37,7 +39,7 @@ public:
     QOAuthHelper(QObject* parent = 0);
     ~QOAuthHelper();
 
-    void sign(KIO::Job *job, const QString &url);
+    void sign(KIO::Job *job, const QString &url, OAuth::ParamMap params = OAuth::ParamMap(), OAuth::HttpMethod httpMethod = OAuth::GET);
     void run();
     QString user() const;
     QString password() const;
