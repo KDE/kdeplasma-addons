@@ -42,6 +42,8 @@ public:
     void sign(KIO::Job *job, const QString &url, OAuth::ParamMap params = OAuth::ParamMap(), OAuth::HttpMethod httpMethod = OAuth::GET);
     void run();
     QString user() const;
+    void setUser(const QString &user);
+
     QString password() const;
 
     QByteArray accessToken() const;
@@ -63,6 +65,7 @@ public Q_SLOTS:
 
 private:
     void init();
+    void updateState();
     void requestTokenFromService();
     void accessTokenFromService();
     QString errorMessage(int e);

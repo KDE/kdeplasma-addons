@@ -105,6 +105,16 @@ QString QOAuthHelper::user() const
     return d->user;
 }
 
+void QOAuthHelper::setUser(const QString& user)
+{
+    if (user == d->user) {
+        return;
+    }
+    kDebug() << "user set to : " << user;
+    d->user = user;
+    updateState();
+}
+
 QString QOAuthHelper::password() const
 {
     return d->password;
@@ -134,8 +144,9 @@ void QOAuthHelper::run()
 {
     if (isAuthorized()) {
         emit statusUpdated(d->serviceBaseUrl, "Ok", "User authorized");
+    } else {
+        //authorize(d->serviceBaseUrl, d->user, d->password);
     }
-    //authorize();
 }
 
 void QOAuthHelper::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
@@ -149,9 +160,12 @@ void QOAuthHelper::authorize(const QString &serviceBaseUrl, const QString &user,
     d->w->setPassword(password);
     d->password = password;
     d->serviceBaseUrl = serviceBaseUrl;
+    
     //run();
-    d->busy = true;
-    requestTokenFromService();
+    if (!isAuthorized()) {
+        d->busy = true;
+        requestTokenFromService();
+    }
 }
 
 void QOAuthHelper::requestTokenFromService()
@@ -189,6 +203,7 @@ void QOAuthHelper::requestTokenFromService()
 
 void QOAuthHelper::appAuthorized(const QString &authorizeUrl, const QString &verifier)
 {
+    Q_UNUSED(authorizeUrl);
     d->verifier = verifier;
     accessTokenFromService();
 }
@@ -262,7 +277,7 @@ void QOAuthHelper::accessTokenFromService()
         emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
         d->busy = false;
         KSharedConfigPtr ptr = KSharedConfig::openConfig("oauthrc");
-        KConfigGroup config = KConfigGroup(ptr, d->serviceBaseUrl);
+        KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
         config.writeEntry("accessToken", d->accessToken);
         config.writeEntry("accessTokenSecret", d->accessTokenSecret);
         config.sync();
@@ -283,9 +298,13 @@ void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
         return;
     }
     d->serviceBaseUrl = serviceBaseUrl;
-    const QUrl u(serviceBaseUrl);
-//     kDebug() << "set service " << u << u.host();
+    updateState();
+}
 
+void QOAuthHelper::updateState()
+{
+    const QUrl u(d->serviceBaseUrl);
+//     kDebug() << "set service " << u << u.host();
     if (u.host() == "twitter.com") {
 //         kDebug() << "Using twitter...";
         d->requestTokenUrl = "https://api.twitter.com/oauth/request_token";
@@ -304,16 +323,23 @@ void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
     }
 
     // Reset other data, we need to re-retrieve it
-    d->requestToken = QByteArray();
-    d->requestTokenSecret = QByteArray();
+    //d->requestToken = QByteArray();
+    //d->requestTokenSecret = QByteArray();
 
-    KSharedConfigPtr ptr = KSharedConfig::openConfig("oauthrc");
-    KConfigGroup config = KConfigGroup(ptr, serviceBaseUrl);
-    d->accessToken = config.readEntry("accessToken", QByteArray());
-    d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
-//  kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret;
-    //d->accessToken = QByteArray();
-    //d->accessTokenSecret = QByteArray();
+    if (!d->user.isEmpty() && !d->serviceBaseUrl.isEmpty()) {
+        KSharedConfigPtr ptr = KSharedConfig::openConfig("oauthrc");
+        kDebug() << "::: oauth reads from Config: " << d->user+"@"+d->serviceBaseUrl;
+        KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
+        d->accessToken = config.readEntry("accessToken", QByteArray());
+        d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
+        //d->accessToken = QByteArray();
+        //d->accessTokenSecret = QByteArray();
+        if (isAuthorized()) {
+            emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
+            d->busy = false;
+        }
+    }
+    kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret;
 }
 
 QOAuthHelper::~QOAuthHelper()
