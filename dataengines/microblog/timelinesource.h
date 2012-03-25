@@ -107,6 +107,7 @@ public:
     QByteArray oauthToken() const;
     QByteArray oauthTokenSecret() const;
     void setOAuthHelper(QOAuthHelper *authHelper);
+    QOAuthHelper* oAuthHelper();
 
     Plasma::Service* createService();
     void startAuthorization(const QString &password);

@@ -36,6 +36,7 @@
 
 #include <KWebView>
 #include <KIO/AccessManager>
+#include <KSharedConfig>
 #include <QWebFrame>
 
 #include "oauth.h"
@@ -136,7 +137,7 @@ void QOAuthHelper::run()
 
 void QOAuthHelper::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
 {
-    if (d->busy) {
+    if (d->busy || isAuthorized()) {
         return;
     }
     d->user = user;
@@ -257,6 +258,12 @@ void QOAuthHelper::accessTokenFromService()
         //kDebug() << "Surf to: " << auth_url;
         emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
         d->busy = false;
+        KSharedConfigPtr ptr = KSharedConfig::openConfig("oauthrc");
+        KConfigGroup config = KConfigGroup(ptr, d->serviceBaseUrl);
+        config.writeEntry("accessToken", d->accessToken);
+        config.writeEntry("accessTokenSecret", d->accessTokenSecret);
+        config.sync();
+
         emit authorized();
     } else {
         kDebug() << d->interface->error() << reply;
@@ -296,8 +303,14 @@ void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
     // Reset other data, we need to re-retrieve it
     d->requestToken = QByteArray();
     d->requestTokenSecret = QByteArray();
-    d->accessToken = QByteArray();
-    d->accessTokenSecret = QByteArray();
+
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("oauthrc");
+    KConfigGroup config = KConfigGroup(ptr, serviceBaseUrl);
+    d->accessToken = config.readEntry("accessToken", QByteArray());
+    d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
+    kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret; 
+    //d->accessToken = QByteArray();
+    //d->accessTokenSecret = QByteArray();
 }
 
 QOAuthHelper::~QOAuthHelper()
@@ -307,7 +320,9 @@ QOAuthHelper::~QOAuthHelper()
 
 bool QOAuthHelper::isAuthorized()
 {
-    return !d->accessToken.isEmpty() && !d->busy;
+    kDebug() << " hmm? " << d->accessToken << d->accessTokenSecret;
+    kDebug() << d->accessToken.isEmpty() << !d->accessTokenSecret.isEmpty() << " -> " << (!d->accessToken.isEmpty() && !d->accessTokenSecret.isEmpty());
+    return !d->accessToken.isEmpty() && !d->accessTokenSecret.isEmpty();
 }
 
 
@@ -321,9 +336,9 @@ QByteArray QOAuthHelper::authorizationHeader(const KUrl &requestUrl, QOAuth::Htt
     return auth;
 }
 
-void QOAuthHelper::sign(KIO::Job *job, const QString &url)
+void QOAuthHelper::sign(KIO::Job *job, const QString &url, OAuth::ParamMap params, OAuth::HttpMethod httpMethod)
 {
-    OAuth::signRequest(job, url, OAuth::GET, accessToken(), accessTokenSecret(), OAuth::ParamMap());
+    OAuth::signRequest(job, url, httpMethod, accessToken(), accessTokenSecret(), params);
 }
 
 #include "qoauthhelper.moc"

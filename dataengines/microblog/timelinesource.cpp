@@ -113,6 +113,7 @@ void TweetJob::start()
         // FIXME: use full oauth here... and in other places
         OAuth::signRequest(job, m_url.pathOrUrl(), OAuth::POST, m_source->oauthToken(),
                            m_source->oauthTokenSecret(), params);
+        m_source->oAuthHelper()->sign(job, m_url.pathOrUrl(), params, OAuth::POST);
     }
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
@@ -240,6 +241,11 @@ void TimelineSource::startAuthorization(const QString& password)
 void TimelineSource::setOAuthHelper(QOAuthHelper* authHelper)
 {
     m_authHelper = authHelper;
+}
+
+QOAuthHelper* TimelineSource::oAuthHelper()
+{
+    return m_authHelper;
 }
 
 

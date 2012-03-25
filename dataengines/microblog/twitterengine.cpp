@@ -156,7 +156,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     QOAuthHelper *authHelper = 0;
     if (!m_authHelper.contains(serviceBaseUrl)) {
         authorizationStatusUpdated(serviceBaseUrl, "Idle");
-        // kDebug() << "Creating new authhelper";
+        kDebug() << "Creating new authhelper";
         authHelper = new QOAuthHelper(this);
         authHelper->setServiceBaseUrl(serviceBaseUrl);
         m_authHelper[serviceBaseUrl] = authHelper;
