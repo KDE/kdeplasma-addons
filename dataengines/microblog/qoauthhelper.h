@@ -37,10 +37,13 @@ public:
     QOAuthHelper(QObject* parent = 0);
     ~QOAuthHelper();
 
+    void sign(KIO::Job *job, const QString &url);
     void run();
     QString user() const;
     QString password() const;
 
+    QByteArray accessToken() const;
+    QByteArray accessTokenSecret() const;
     bool isAuthorized();
 
     void setServiceBaseUrl(const QString &url);

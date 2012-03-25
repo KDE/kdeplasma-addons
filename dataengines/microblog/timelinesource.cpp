@@ -324,7 +324,11 @@ void TimelineSource::update(bool forcedUpdate)
     // Create a KIO job to get the data from the web service
     m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
     if (m_useOAuth) {
-        OAuth::signRequest(m_job, m_url.pathOrUrl(), OAuth::GET, m_oauthToken, m_oauthTokenSecret, OAuth::ParamMap());
+//         m_oauthToken = m_authHelper->accessToken();
+//         m_oauthTokenSecret = authHelper->accessTokenSecret();
+        kDebug() << "signing " << m_oauthToken << m_oauthTokenSecret;
+        m_authHelper->sign(m_job, m_url.pathOrUrl());
+//         OAuth::signRequest(m_job, m_url.pathOrUrl(), OAuth::GET, m_authHelper->accessToken(), m_authHelper->accessTokenSecret(), OAuth::ParamMap());
     }
     connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)),
             this, SLOT(recv(KIO::Job*,QByteArray)));
@@ -364,7 +368,7 @@ void TimelineSource::result(KJob *job)
         //kDebug() << "done!" << data().count() << m_xml;
         QXmlStreamReader reader(m_xml);
         parse(reader);
-        kDebug() << "parsing through .." << data().count() << m_xml;
+        kDebug() << "parsing through .." << data().count();// << m_xml;
     }
     //m_imageSource->loadFinished();
 
