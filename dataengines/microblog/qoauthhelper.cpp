@@ -38,6 +38,7 @@
 #include <KIO/AccessManager>
 #include <QWebFrame>
 
+#include "oauth.h"
 #include "qoauthhelper.h"
 #include "qoauthwebhelper.h"
 #include <KDebug>
@@ -86,6 +87,16 @@ QOAuthHelper::QOAuthHelper(QObject* parent)
 
     setObjectName(QLatin1String("QOAuthHelper"));
     init();
+}
+
+QByteArray QOAuthHelper::accessToken() const
+{
+    return d->accessToken;
+}
+
+QByteArray QOAuthHelper::accessTokenSecret() const
+{
+    return d->accessTokenSecret;
 }
 
 QString QOAuthHelper::user() const
@@ -308,6 +319,11 @@ QByteArray QOAuthHelper::authorizationHeader(const KUrl &requestUrl, QOAuth::Htt
                                                 QOAuth::HMAC_SHA1, params,
                                                 QOAuth::ParseForHeaderArguments);
     return auth;
+}
+
+void QOAuthHelper::sign(KIO::Job *job, const QString &url)
+{
+    OAuth::signRequest(job, url, OAuth::GET, accessToken(), accessTokenSecret(), OAuth::ParamMap());
 }
 
 #include "qoauthhelper.moc"
