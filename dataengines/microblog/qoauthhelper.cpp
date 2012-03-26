@@ -334,12 +334,12 @@ void QOAuthHelper::updateState()
         d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
         //d->accessToken = QByteArray();
         //d->accessTokenSecret = QByteArray();
+        kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret;
         if (isAuthorized()) {
             emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
             d->busy = false;
         }
     }
-    kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret;
 }
 
 QOAuthHelper::~QOAuthHelper()
