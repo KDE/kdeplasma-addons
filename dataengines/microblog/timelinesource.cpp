@@ -141,6 +141,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
         m_source->update(true);
     } else if (operation == "auth") {
         m_source->setPassword(parameters.value("password").toString());
+        const QString user = parameters.value("user").toString();
         const QString password = parameters.value("password").toString();
         /*
         QString user;
@@ -162,7 +163,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
         }
         */
 //         kDebug() << "startAuthorization: " << password;
-        m_source->startAuthorization(password);
+        m_source->startAuthorization(user, password);
         //emit authorize(password);
     }
 
@@ -233,9 +234,9 @@ Plasma::Service* TimelineSource::createService()
     return new TimelineService(this);
 }
 
-void TimelineSource::startAuthorization(const QString& password)
+void TimelineSource::startAuthorization(const QString& user, const QString& password)
 {
-    emit authorize(m_serviceBaseUrl.pathOrUrl(), m_user, password);
+    emit authorize(m_serviceBaseUrl.pathOrUrl(), user, password);
 }
 
 void TimelineSource::setOAuthHelper(QOAuthHelper* authHelper)

@@ -110,7 +110,7 @@ public:
     QOAuthHelper* oAuthHelper();
 
     Plasma::Service* createService();
-    void startAuthorization(const QString &password);
+    void startAuthorization(const QString &user, const QString &password);
 
     ImageSource* imageSource() const;
     void setImageSource(ImageSource *);

@@ -7,8 +7,11 @@
     </group>
 
     <group name="auth">
+        <entry name="user" type="String">
+            <label>The user name of the account.</label>
+        </entry>
         <entry name="password" type="String">
-            <label>The log in password for the account.</label>
+            <label>The login password for the account.</label>
         </entry>
     </group>
 
