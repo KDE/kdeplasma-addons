@@ -46,7 +46,6 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
 {
     //setMinimumPollingInterval(2 * 60 * 1000); // 2 minutes minimum
     setData("Defaults", "UserImage", KIcon ("user-identity").pixmap(48, 48).toImage());
-    //setData("Status:https://twitter.com/", "Authorization", "Not Started");
 }
 
 TwitterEngine::~TwitterEngine()
@@ -57,7 +56,6 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
     if (name.startsWith("UserImages:")) {
         // these are updated by the engine itself, not consumers
-        //kDebug() << " user image req'ed, doing nothing: " << name;
         return true;
     }
 
@@ -67,40 +65,28 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return false;
     }
 
-    //kDebug() << "loading: " << name;
-    //kDebug() << sources();
-    //KIcon("meeting-chair").pixmap(256, 256).toImage().save("/tmp/userimage.png");
     scheduleSourcesUpdated();
-    //kDebug() << "image added" << sources();
-
     updateSourceEvent(name); //start a download
     return true;
 }
 
 Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 {
-//     kDebug() << " finding source..." << name;
     TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
-//     kDebug() << "Service name: " << name;
     if (!source) {
-        kWarning() << "service for non existing source requested." << name << sources();
+        kWarning() << "service for non-timeline source requested." << name << sources();
         return Plasma::DataEngine::serviceForSource(name);
     }
-
 
     Plasma::Service *service = source->createService();
     service->setParent(this);
     return service;
 }
 
-//called when it's time to update a source
-//also called by twitter from sourceRequested
-//and when it thinks an update would be useful
-//always returns false because everything is async
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
-    kDebug() << "Updating: " << name;
     //right now it only makes sense to do an update on timelines
+    // FIXME: needed?
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
         && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)) {
@@ -138,11 +124,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     if (account.count() == 2) {
         serviceBaseUrl = account.at(1);
     } else {
+        kWarning() << "service not found. Please request a source such as \"TimelineWithFriends:UserName@ServiceUrl\"";
         serviceBaseUrl = "https://twitter.com/";
+        kWarning() << "  Using " << serviceBaseUrl << " instead.";
     }
-//     if (!serviceBaseUrl.endsWith('/')) {
-//         serviceBaseUrl += '/';
-//     }
+
     ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 
     if (!imageSource) {
@@ -158,9 +144,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     QOAuthHelper *authHelper = 0;
     if (!m_authHelper.contains(serviceBaseUrl)) {
         authorizationStatusUpdated(serviceBaseUrl, "Idle");
-        //kDebug() << "Creating new authhelper";
         authHelper = new QOAuthHelper(this);
-        kDebug() << "Creating authHelper for user: " << user;
         authHelper->setUser(user);
         authHelper->setServiceBaseUrl(serviceBaseUrl);
         m_authHelper[serviceBaseUrl] = authHelper;
@@ -176,10 +160,12 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         authHelper->run();
     } else {
         authHelper = m_authHelper[serviceBaseUrl];
+
+        // FIXME: why oh why is this necessary? It seems authHelper lost the user name here
+        // timelines won't be loaded without this, anyway.
         if (!user.isEmpty() && requestType != TimelineSource::User) {
-             authHelper->setUser(user);
+            authHelper->setUser(user);
             authHelper->setServiceBaseUrl(serviceBaseUrl);
-            kDebug() << "aUthHelper says: " << authHelper->user() << " at " << authHelper->serviceBaseUrl();
             if (authHelper->isAuthorized()) {
                 authorizationStatusUpdated(serviceBaseUrl, "Ok");
             }
@@ -192,7 +178,6 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         if (!source && !user.isEmpty()) {
             source = new UserSource(user, serviceBaseUrl, this);
             source->setObjectName(name);
-            //source->setImageSource(imageSource);
             source->setStorageEnabled(true);
             connect(source, SIGNAL(loadImage(const QString&, const KUrl&)),
                     imageSource, SLOT(loadImage(const QString&, const KUrl&)));
@@ -204,8 +189,6 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         if (!user.isEmpty()) {
             source->loadUserInfo(user, serviceBaseUrl);
         }
-        //source->update();
-
     } else {
         TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
 
@@ -213,10 +196,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             if (user.isEmpty()) {
                 return false;
             }
-            //kDebug() << "New TimelineSource" << name;
-
             source = new TimelineSource(who, requestType, authHelper,this);
-            //source->setOAuthHelper(authHelper);
             connect(source, SIGNAL(authorize(const QString&, const QString&, const QString&)),
                    authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
             source->setObjectName(name);
@@ -227,23 +207,23 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         }
         source->update();
     }
-    //setData(name, Plasma::DataEngine::Data());
-
     return false;
 }
 
 void TwitterEngine::authorizationStatusUpdated(const QString& serviceBaseUrl, const QString& status, const QString &message)
 {
-    kDebug() << "Status updated ..." << serviceBaseUrl << status << message;
-    setData("Status:" + serviceBaseUrl, "AuthorizationMessage", status);
+//     kDebug() << "Status updated ..." << serviceBaseUrl << status << message;
+    setData("Status:" + serviceBaseUrl, "AuthorizationMessage", message);
     setData("Status:" + serviceBaseUrl, "Authorization", status);
     scheduleSourcesUpdated();
 }
 
 void TwitterEngine::accessTokenReceived(const QString& serviceBaseUrl, const QString& accessToken, const QString& accessTokenSecret)
 {
+    Q_UNUSED(accessToken);
+    Q_UNUSED(accessTokenSecret);
     authorizationStatusUpdated(serviceBaseUrl, "Ok");
-    kDebug() << "Do something useful with these accessTokens" << accessToken << accessTokenSecret;
+//     kDebug() << "Do something useful with these accessTokens" << accessToken << accessTokenSecret;
 }
 
 void TwitterEngine::imageDataChanged()

@@ -43,30 +43,27 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
     if (!m_imageCache) {
         m_imageCache = new KImageCache("plasma_engine_preview", 10485760); // Re-use previewengine's cache
     }
-    //FIXME: since kio_http bombs the system with too many request put a temporary arbitrary limit here
-    // revert as soon as BUG 192625 is fixed
+
+    // Make sure we only start one job per user
     if (m_loadedPersons.contains(who)) {
-        //kDebug() << "contains." << who;
         return;
     }
-    //kDebug() << "load image" << who << url;
+
     const QString cacheKey = who + "@" + url.pathOrUrl();
-    //kDebug() << " LOAD IMAGE: " << who << url << cacheKey;
+
     // Check if the image is in the cache, if so return it
     QImage preview = QImage(QSize(48, 48), QImage::Format_ARGB32_Premultiplied);
     if (m_imageCache->findImage(cacheKey, &preview)) {
         // cache hit
-        //kDebug() << "source added: " << who;
-        //polishImage(preview);
         setData(who, polishImage(preview));
-        //kDebug() << "Image for " << who << "was cached";
         emit dataChanged();
         checkForUpdate();
         return;
     }
-    //kDebug() << "Cache miss: " << cacheKey << m_runningJobs;
 
     m_loadedPersons << who;
+    //FIXME: since kio_http bombs the system with too many request put a temporary
+    // arbitrary limit here, revert as soon as BUG 192625 is fixed
     if (m_runningJobs < 500) {
         //if (who == "sebas") kDebug() << " 222 starting job" << who;
         m_runningJobs++;
@@ -114,16 +111,7 @@ void ImageSource::result(KJob *job)
         emit dataChanged();
         KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
         const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
-        polishImage(img).save("/tmp/twitter/avatar-"+who+".png");
-        if (m_jobs.value(job) == "sebas") {
-            kDebug() << " === SEBAS SET ===" << who;
-            kDebug() << "Cache insert: " << cacheKey;
-            //polishImage(img).save("/tmp/userimage.png");
-        }
-
         m_imageCache->insertImage(cacheKey, img); // FIXME: enable
-        kDebug() << "===>> image for " << who << " loaded";
-
     }
 
     m_jobs.remove(job);
