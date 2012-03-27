@@ -2,7 +2,8 @@
  *   Copyright (C) 2007 Trever Fischer <wm161@wm161.net>
  *   Copyright (C) 2007 André Duffeck <duffeck@kde.org>
  *   Copyright (C) 2007 Chani Armitage <chanika@gmail.com>
- *
+ *   Copyright 2012 Sebastian Kügler <sebas@kde.org>
+ * 
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
  *   published by the Free Software Foundation
@@ -138,7 +139,6 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
         imageSource->setObjectName("UserImages:"+serviceBaseUrl);
         addSource(imageSource);
-        //imageSource->loadImage(account.at(0), account.at(1));
     }
 
     QOAuthHelper *authHelper = 0;
@@ -212,7 +212,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
 void TwitterEngine::authorizationStatusUpdated(const QString& serviceBaseUrl, const QString& status, const QString &message)
 {
-//     kDebug() << "Status updated ..." << serviceBaseUrl << status << message;
+    kDebug() << "Status updated ..." << serviceBaseUrl << status << message;
     setData("Status:" + serviceBaseUrl, "AuthorizationMessage", message);
     setData("Status:" + serviceBaseUrl, "Authorization", status);
     scheduleSourcesUpdated();
@@ -223,7 +223,6 @@ void TwitterEngine::accessTokenReceived(const QString& serviceBaseUrl, const QSt
     Q_UNUSED(accessToken);
     Q_UNUSED(accessTokenSecret);
     authorizationStatusUpdated(serviceBaseUrl, "Ok");
-//     kDebug() << "Do something useful with these accessTokens" << accessToken << accessTokenSecret;
 }
 
 void TwitterEngine::imageDataChanged()
