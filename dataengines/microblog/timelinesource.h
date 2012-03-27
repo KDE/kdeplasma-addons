@@ -103,7 +103,6 @@ public:
     QString password() const;
     KUrl serviceBaseUrl() const;
 
-    bool useOAuth() const;
     QByteArray oauthToken() const;
     QByteArray oauthTokenSecret() const;
     void setOAuthHelper(QOAuthHelper *authHelper);
@@ -146,7 +145,6 @@ private:
     KIO::Job * m_job;
     QString m_id;
 
-    bool m_useOAuth;
     QOAuthHelper *m_authHelper;
     QString m_user;
     QByteArray m_oauthTemp;

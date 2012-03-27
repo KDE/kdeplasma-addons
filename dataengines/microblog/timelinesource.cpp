@@ -48,7 +48,7 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
         operation == "favorites/create" ||
         operation == "favorites/destroy") {
         m_url.setPath(m_url.path()+QString("%1/%2.xml").arg(operation).arg(parameters.value("id").toString()));
-
+        kDebug() << "Operation" << operation << m_url;
     } else if (operation == "update") {
         m_url.setPath(m_url.path()+QString("statuses/%1.xml").arg(operation));
         kDebug() << "Updating status" << m_url;
@@ -56,26 +56,14 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
     } else {
         m_url.setPath(m_url.path()+operation+".xml");
     }
-
-    if (!source->useOAuth()) {
-        m_url.addQueryItem("source", "kdemicroblog");
-
-        QMapIterator<QString, QVariant> i(parameters);
-        while (i.hasNext()) {
-            i.next();
-            if (!i.value().toString().isEmpty()) {
-                m_url.addQueryItem(i.key(), i.value().toString().toLatin1());
-            }
-        }
-    }
 }
 
 void TweetJob::start()
 {
     QByteArray data;
 
-    if (m_source->useOAuth()) {
-        data = "source=kdemicroblog";
+    data = "source=kdemicroblog";
+    {
         QMapIterator<QString, QVariant> i(m_parameters);
         while (i.hasNext()) {
             i.next();
@@ -90,26 +78,25 @@ void TweetJob::start()
     }
     KIO::Job *job = KIO::http_post(m_url, data, KIO::HideProgressInfo);
 
-    if (m_source->useOAuth()) {
-        OAuth::ParamMap params;
-        params.insert("source", "kdemicroblog");
+    OAuth::ParamMap params;
+    params.insert("source", "kdemicroblog");
 
+    {
         QMapIterator<QString, QVariant> i(m_parameters);
         while (i.hasNext()) {
             i.next();
             if (!i.value().toString().isEmpty()) {
                 if (i.key() == "status") {
                     params.insert("status", i.value().toString().toUtf8().toPercentEncoding());
+                    data = data.append("&status=" + i.value().toString().toUtf8().toPercentEncoding());
                 } else {
                     params.insert(i.key().toLatin1(), i.value().toString().toLatin1());
+                    data = data.append(QString("&"+i.key()+"="+i.value().toString()).toLatin1());
                 }
             }
         }
-        // FIXME: use full oauth here... and in other places
-        //OAuth::signRequest(job, m_url.pathOrUrl(), OAuth::POST, m_source->oauthToken(),
-        //                   m_source->oauthTokenSecret(), params);
-        m_source->oAuthHelper()->sign(job, m_url.pathOrUrl(), params, OAuth::POST);
     }
+    m_source->oAuthHelper()->sign(job, m_url.pathOrUrl(), params, OAuth::POST);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
@@ -160,8 +147,6 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QOAu
         m_serviceBaseUrl = KUrl("https://twitter.com/");
     }
 
-    m_useOAuth = true;
-
     //just create it to correctly initialize QCA and clean up when createSignature() returns
     m_qcaInitializer = new QCA::Initializer(); // FIXME: move into qoautohelper?
 
@@ -185,9 +170,6 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QOAu
         break;
     }
 
-    if (!m_useOAuth) {
-        m_url.setUser(account.at(0));
-    }
     if (m_authHelper->isAuthorized()) {
         update();
     }
@@ -222,13 +204,7 @@ QOAuthHelper* TimelineSource::oAuthHelper()
 void TimelineSource::setPassword(const QString &password)
 {
     bool force;
-    if (m_useOAuth){
-        m_authHelper->authorize(m_serviceBaseUrl.pathOrUrl() ,m_user, password);
-    } else {
-        force = !m_url.password().isEmpty();
-        m_url.setPass(password);
-        update(force);
-    }
+    m_authHelper->authorize(m_serviceBaseUrl.pathOrUrl() ,m_user, password);
 }
 
 QString TimelineSource::password() const
@@ -244,11 +220,6 @@ QString TimelineSource::account() const
 KUrl TimelineSource::serviceBaseUrl() const
 {
     return m_serviceBaseUrl;
-}
-
-bool TimelineSource::useOAuth() const
-{
-    return m_useOAuth;
 }
 
 QByteArray TimelineSource::oauthToken() const
@@ -273,9 +244,8 @@ void TimelineSource::update(bool forcedUpdate)
 
     // Create a KIO job to get the data from the web service
     m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
-    if (m_useOAuth) {
-        m_authHelper->sign(m_job, m_url.pathOrUrl());
-    }
+    m_authHelper->sign(m_job, m_url.pathOrUrl());
+
     connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)),
             this, SLOT(recv(KIO::Job*,QByteArray)));
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
