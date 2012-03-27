@@ -99,7 +99,7 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 //always returns false because everything is async
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
-//     kDebug() << "Updating: " << name;
+    kDebug() << "Updating: " << name;
     //right now it only makes sense to do an update on timelines
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
@@ -138,11 +138,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     if (account.count() == 2) {
         serviceBaseUrl = account.at(1);
     } else {
-        serviceBaseUrl = "http://twitter.com/";
+        serviceBaseUrl = "https://twitter.com/";
     }
-    if (!serviceBaseUrl.endsWith('/')) {
-        serviceBaseUrl += '/';
-    }
+//     if (!serviceBaseUrl.endsWith('/')) {
+//         serviceBaseUrl += '/';
+//     }
     ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 
     if (!imageSource) {
@@ -160,6 +160,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         authorizationStatusUpdated(serviceBaseUrl, "Idle");
         //kDebug() << "Creating new authhelper";
         authHelper = new QOAuthHelper(this);
+        kDebug() << "Creating authHelper for user: " << user;
         authHelper->setUser(user);
         authHelper->setServiceBaseUrl(serviceBaseUrl);
         m_authHelper[serviceBaseUrl] = authHelper;
@@ -175,10 +176,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         authHelper->run();
     } else {
         authHelper = m_authHelper[serviceBaseUrl];
-        if (!user.isEmpty()) {
-            authHelper->setUser(user);
+        if (!user.isEmpty() && requestType != TimelineSource::User) {
+             authHelper->setUser(user);
+            authHelper->setServiceBaseUrl(serviceBaseUrl);
+            kDebug() << "aUthHelper says: " << authHelper->user() << " at " << authHelper->serviceBaseUrl();
         }
-        authHelper->setServiceBaseUrl(serviceBaseUrl);
     }
     if (authHelper->isAuthorized()) {
         authorizationStatusUpdated(serviceBaseUrl, "Ok");

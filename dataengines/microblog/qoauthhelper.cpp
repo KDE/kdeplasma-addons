@@ -105,6 +105,11 @@ QString QOAuthHelper::user() const
     return d->user;
 }
 
+QString QOAuthHelper::serviceBaseUrl() const
+{
+    return d->serviceBaseUrl;
+}
+
 void QOAuthHelper::setUser(const QString& user)
 {
     if (user == d->user) {
@@ -160,7 +165,7 @@ void QOAuthHelper::authorize(const QString &serviceBaseUrl, const QString &user,
     d->w->setPassword(password);
     d->password = password;
     d->serviceBaseUrl = serviceBaseUrl;
-    
+
     //run();
     if (!isAuthorized()) {
         d->busy = true;
