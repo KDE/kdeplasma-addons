@@ -41,8 +41,12 @@ public:
 
     void sign(KIO::Job *job, const QString &url, OAuth::ParamMap params = OAuth::ParamMap(), OAuth::HttpMethod httpMethod = OAuth::GET);
     void run();
+
     QString user() const;
     void setUser(const QString &user);
+
+    QString serviceBaseUrl() const;
+    void setServiceBaseUrl(const QString &url);
 
     QString password() const;
 
@@ -50,7 +54,6 @@ public:
     QByteArray accessTokenSecret() const;
     bool isAuthorized();
 
-    void setServiceBaseUrl(const QString &url);
     QByteArray authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params);
 
 Q_SIGNALS:
