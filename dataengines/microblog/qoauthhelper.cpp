@@ -115,7 +115,6 @@ void QOAuthHelper::setUser(const QString& user)
     if (user == d->user) {
         return;
     }
-    kDebug() << "user set to : " << user;
     d->user = user;
     updateState();
 }
@@ -333,13 +332,13 @@ void QOAuthHelper::updateState()
 
     if (!d->user.isEmpty() && !d->serviceBaseUrl.isEmpty()) {
         KSharedConfigPtr ptr = KSharedConfig::openConfig("oauthrc");
-        kDebug() << "::: oauth reads from Config: " << d->user+"@"+d->serviceBaseUrl;
+//         kDebug() << "::: oauth reads from Config: " << d->user+"@"+d->serviceBaseUrl;
         KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
         d->accessToken = config.readEntry("accessToken", QByteArray());
         d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
         //d->accessToken = QByteArray();
         //d->accessTokenSecret = QByteArray();
-        kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret;
+//         kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret;
         if (isAuthorized()) {
             emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
             d->busy = false;

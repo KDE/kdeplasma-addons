@@ -359,7 +359,7 @@ void TimelineSource::result(KJob *job)
 {
     KIO::TransferJob *tj = dynamic_cast<KIO::TransferJob*>(job);
     if (job) {
-         kDebug() << "Timeline job returned: " << tj->url();
+         //kDebug() << "Timeline job returned: " << tj->url();
     }
     if (job != m_job) {
         kDebug() << "fail! job is not our job!";
@@ -375,7 +375,7 @@ void TimelineSource::result(KJob *job)
         //kDebug() << "done!" << data().count() << m_xml;
         QXmlStreamReader reader(m_xml);
         parse(reader);
-        kDebug() << "parsing through .." << data().count();// << m_xml;
+        kDebug() << "Timeline job returned: " << tj->url() << data().count();// << m_xml;
     }
     //m_imageSource->loadFinished();
 
