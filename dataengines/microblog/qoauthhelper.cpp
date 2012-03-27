@@ -308,9 +308,9 @@ void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
 void QOAuthHelper::updateState()
 {
     const QUrl u(d->serviceBaseUrl);
-//     kDebug() << "set service " << u << u.host();
+
     if (u.host() == "twitter.com") {
-//         kDebug() << "Using twitter...";
+        //kDebug() << "Using twitter...";
         d->requestTokenUrl = "https://api.twitter.com/oauth/request_token";
         d->accessTokenUrl = "https://api.twitter.com/oauth/access_token";
         d->authorizeUrl = "https://api.twitter.com/oauth/authorize";
@@ -318,7 +318,7 @@ void QOAuthHelper::updateState()
         d->consumerSecret = "RpGc0q0aGl0jMkeqMIawUpGyDkJ3DNBczFUyIQMR698";
 
     } else {
-//         kDebug() << "Using identi.ca...";
+        //kDebug() << "Using identi.ca...";
         d->requestTokenUrl = "https://identi.ca/api/oauth/request_token";
         d->accessTokenUrl = "https://identi.ca/api/oauth/access_token";
         d->authorizeUrl = "https://identi.ca/api/oauth/authorize";
@@ -326,19 +326,13 @@ void QOAuthHelper::updateState()
         d->consumerSecret = "49208b0a87832f4279f9d3742c623910";
     }
 
-    // Reset other data, we need to re-retrieve it
-    //d->requestToken = QByteArray();
-    //d->requestTokenSecret = QByteArray();
 
     if (!d->user.isEmpty() && !d->serviceBaseUrl.isEmpty()) {
         KSharedConfigPtr ptr = KSharedConfig::openConfig("oauthrc");
-//         kDebug() << "::: oauth reads from Config: " << d->user+"@"+d->serviceBaseUrl;
         KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
         d->accessToken = config.readEntry("accessToken", QByteArray());
         d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
-        //d->accessToken = QByteArray();
-        //d->accessTokenSecret = QByteArray();
-//         kDebug() << " CONFIG " << d->accessToken << d->accessTokenSecret;
+        //kDebug() << "oauthrc config for " << d->user+"@"+d->serviceBaseUrl << d->accessToken << d->accessTokenSecret;
         if (isAuthorized()) {
             emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
             d->busy = false;
@@ -353,8 +347,6 @@ QOAuthHelper::~QOAuthHelper()
 
 bool QOAuthHelper::isAuthorized()
 {
-//     kDebug() << " hmm? " << d->accessToken << d->accessTokenSecret;
-//     kDebug() << d->accessToken.isEmpty() << !d->accessTokenSecret.isEmpty() << " -> " << (!d->accessToken.isEmpty() && !d->accessTokenSecret.isEmpty());
     return !d->accessToken.isEmpty() && !d->accessTokenSecret.isEmpty();
 }
 
