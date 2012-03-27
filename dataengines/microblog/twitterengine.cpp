@@ -180,10 +180,10 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
              authHelper->setUser(user);
             authHelper->setServiceBaseUrl(serviceBaseUrl);
             kDebug() << "aUthHelper says: " << authHelper->user() << " at " << authHelper->serviceBaseUrl();
+            if (authHelper->isAuthorized()) {
+                authorizationStatusUpdated(serviceBaseUrl, "Ok");
+            }
         }
-    }
-    if (authHelper->isAuthorized()) {
-        authorizationStatusUpdated(serviceBaseUrl, "Ok");
     }
 
     if (requestType == TimelineSource::User) {
@@ -217,8 +217,8 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
             source = new TimelineSource(who, requestType, authHelper,this);
             //source->setOAuthHelper(authHelper);
-            //connect(source, SIGNAL(authorize(const QString&, const QString&, const QString&)),
-            //        authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
+            connect(source, SIGNAL(authorize(const QString&, const QString&, const QString&)),
+                   authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
             source->setObjectName(name);
             source->setImageSource(imageSource);
             source->setStorageEnabled(true);
