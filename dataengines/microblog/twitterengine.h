@@ -80,6 +80,7 @@ class TwitterEngine : public Plasma::DataEngine
     private:
         static const QString timelinePrefix;
         static const QString timelineWithFriendsPrefix;
+        static const QString customTimelinePrefix;
         static const QString profilePrefix;
         static const QString repliesPrefix;
         static const QString messagesPrefix;

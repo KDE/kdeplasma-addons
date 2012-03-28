@@ -21,6 +21,7 @@
 #ifndef TIMELINESOURCE_H
 #define TIMELINESOURCE_H
 
+#include "oauth.h"
 
 #include <KUrl>
 
@@ -91,6 +92,7 @@ public:
         TimelineWithFriends,
         Replies,
         DirectMessages,
+        CustomTimeline,
         Profile,
         User
     };
@@ -144,6 +146,7 @@ private:
     Plasma::DataEngine::Data m_tempData;
     KIO::Job * m_job;
     QString m_id;
+    OAuth::ParamMap m_params;
 
     QOAuthHelper *m_authHelper;
     QString m_user;
