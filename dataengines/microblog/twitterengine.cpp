@@ -37,6 +37,7 @@
 
 const QString TwitterEngine::timelinePrefix("Timeline:");
 const QString TwitterEngine::timelineWithFriendsPrefix("TimelineWithFriends:");
+const QString TwitterEngine::customTimelinePrefix("CustomTimeline:");
 const QString TwitterEngine::profilePrefix("Profile:");
 const QString TwitterEngine::repliesPrefix("Replies:");
 const QString TwitterEngine::messagesPrefix("Messages:");
@@ -61,6 +62,7 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
     }
 
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
+        && !name.startsWith(customTimelinePrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
         && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)) {
         return false;
@@ -89,6 +91,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     //right now it only makes sense to do an update on timelines
     // FIXME: needed?
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
+        && !name.startsWith(customTimelinePrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
         && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)) {
         return false;
@@ -112,6 +115,9 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     } else if (name.startsWith(userPrefix)) {
         requestType = TimelineSource::User;
         who.remove(userPrefix);
+    } else if (name.startsWith(customTimelinePrefix)) {
+        requestType = TimelineSource::CustomTimeline;
+        who.remove(customTimelinePrefix);
     } else {
         requestType = TimelineSource::Timeline;
         who.remove(timelinePrefix);
@@ -212,7 +218,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 
 void TwitterEngine::authorizationStatusUpdated(const QString& serviceBaseUrl, const QString& status, const QString &message)
 {
-    kDebug() << "Status updated ..." << serviceBaseUrl << status << message;
+    //kDebug() << "Status updated ..." << serviceBaseUrl << status << message;
     setData("Status:" + serviceBaseUrl, "AuthorizationMessage", message);
     setData("Status:" + serviceBaseUrl, "Authorization", status);
     scheduleSourcesUpdated();

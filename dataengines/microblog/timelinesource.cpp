@@ -152,6 +152,12 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QOAu
 
     // set up the url
     switch (requestType) {
+    case CustomTimeline:
+        m_params.clear();
+        m_params.insert("q", "manicure");
+        m_url = KUrl("http://search.twitter.com/search.xml");
+        kDebug() << "Custom Url: " << m_url;
+        break;
     case Profile:
         m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.xml").arg(account.at(0)));
         break;
@@ -203,7 +209,6 @@ QOAuthHelper* TimelineSource::oAuthHelper()
 
 void TimelineSource::setPassword(const QString &password)
 {
-    bool force;
     m_authHelper->authorize(m_serviceBaseUrl.pathOrUrl() ,m_user, password);
 }
 
@@ -244,7 +249,8 @@ void TimelineSource::update(bool forcedUpdate)
 
     // Create a KIO job to get the data from the web service
     m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
-    m_authHelper->sign(m_job, m_url.pathOrUrl());
+    m_authHelper->sign(m_job, m_url.pathOrUrl(), m_params);
+    kDebug() << "signed" << m_url.pathOrUrl();
 
     connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)),
             this, SLOT(recv(KIO::Job*,QByteArray)));
@@ -272,7 +278,7 @@ void TimelineSource::result(KJob *job)
     removeAllData();
     //m_imageSource->loadStarted();
     if (job->error()) {
-        kDebug() << "job error! : " << job->errorString();
+        kDebug() << "job error! : " << job->errorString() << tj->url();
         // TODO: error handling
     } else {
         QXmlStreamReader reader(m_xml);
