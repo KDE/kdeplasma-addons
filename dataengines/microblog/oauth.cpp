@@ -90,6 +90,11 @@ QByteArray createSignature(const QString &requestUrl, HttpMethod method, const Q
 {
     //kDebug() << "creating signature";
     // create nonce
+
+    if (!QCA::isSupported("hmac(sha1)")) {
+        kError() << "Your QCA2 does not support the HMAC-SHA1 algorithm. Signing requests using OAuth does not work";
+        return QByteArray();
+    }
     QCA::InitializationVector iv(16);
     QByteArray nonce = iv.toByteArray().toHex();
 

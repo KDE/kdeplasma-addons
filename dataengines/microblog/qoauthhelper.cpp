@@ -178,6 +178,10 @@ void QOAuthHelper::requestTokenFromService()
     d->interface->setConsumerSecret(d->consumerSecret);
 
     d->interface->setRequestTimeout( 10000 );
+    if (!QCA::isSupported("hmac(sha1)")) {
+        kError() << "Hashing algo not supported, update your QCA";
+        return;
+    }
 
     QOAuth::ParamMap params;
     params.insert("oauth_callback", "oob");
