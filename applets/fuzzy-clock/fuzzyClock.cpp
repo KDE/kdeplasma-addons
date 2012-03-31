@@ -28,6 +28,7 @@
 #include <KColorScheme>
 #include <KConfigDialog>
 #include <KDebug>
+#include <KCalendarSystem>
 
 #include <Plasma/Theme>
 
@@ -296,13 +297,9 @@ void Clock::calculateDateString()
             return;
         }
 
-    KLocale tmpLocale(*KGlobal::locale());
-    tmpLocale.setDateFormat("%e"); // day number of the month
-    QString day = tmpLocale.formatDate(m_date);
-    tmpLocale.setDateFormat("%b"); // short form of the month
-    QString month = tmpLocale.formatDate(m_date);
-    tmpLocale.setDateFormat("%Y"); // the year with four digits
-    QString year = tmpLocale.formatDate(m_date);
+    QString day = KGlobal::locale()->calendar()->formatDate(m_date, KLocale::Day, KLocale::ShortNumber);
+    QString month = KGlobal::locale()->calendar()->formatDate(m_date, KLocale::Month, KLocale::ShortName);
+    QString year = KGlobal::locale()->calendar()->formatDate(m_date, KLocale::Year, KLocale::LongNumber);
 
     //Copied from the digital-clock
     if (m_showDate) {
@@ -317,8 +314,7 @@ void Clock::calculateDateString()
                                 "%1 %2", day, month);
         }
         if (m_showDay) {
-            tmpLocale.setDateFormat("%a"); // short weekday
-            QString weekday = tmpLocale.formatDate(m_date);
+            QString weekday = KGlobal::locale()->calendar()->formatDate(m_date, KLocale::DayOfWeek, KLocale::ShortName);
             m_dateString = i18nc("@label Day of the week with date: "
                                 "%1 short day name, %2 short date",
                                 "%1, %2", weekday, m_dateString);
