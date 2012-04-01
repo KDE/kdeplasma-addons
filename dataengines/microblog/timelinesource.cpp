@@ -130,36 +130,46 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
     return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
 }
 
-TimelineSource::TimelineSource(const QString &who, RequestType requestType, QOAuthHelper *oauthHelper, QObject* parent)
+TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, QOAuthHelper *oauthHelper, const QStringList &parameters, QObject* parent)
     : Plasma::DataContainer(parent),
+      m_serviceBaseUrl(serviceUrl),
+      m_requestType(requestType),
       m_job(0),
       m_authHelper(oauthHelper),
+      m_parameters(parameters),
       m_authJob(0),
       m_qcaInitializer(0)
 {
-    //who should be something like user@http://twitter.com, if there isn't any @, http://twitter.com will be the default
-    QStringList account = who.split('@');
-    if (account.count() == 2) {
-        m_user = account.at(0);
-        m_serviceBaseUrl = KUrl(account.at(1));
-    } else {
-        kWarning() << "serviceBaseUrl unclear. forcing twitter.com";
-        m_serviceBaseUrl = KUrl("https://twitter.com/");
-    }
+//     //who should be something like user@http://twitter.com, if there isn't any @, http://twitter.com will be the default
+//     QStringList account = who.split('@');
+//     if (account.count() == 2) {
+//         m_user = account.at(0);
+//         m_serviceBaseUrl = KUrl(account.at(1));
+//     } else {
+//         kWarning() << "serviceBaseUrl unclear. forcing twitter.com";
+//         m_serviceBaseUrl = KUrl("https://twitter.com/");
+//     }
 
     //just create it to correctly initialize QCA and clean up when createSignature() returns
     m_qcaInitializer = new QCA::Initializer(); // FIXME: move into qoautohelper?
 
+    kDebug() << "authorized." << m_authHelper->serviceBaseUrl()<< m_authHelper->isAuthorized() << m_authHelper->accessToken();
     // set up the url
-    switch (requestType) {
+    QString query;
+    switch (m_requestType) {
     case CustomTimeline:
+    case SearchTimeline:
         m_params.clear();
-        m_params.insert("q", "manicure");
-        m_url = KUrl("http://search.twitter.com/search.xml");
-        kDebug() << "Custom Url: " << m_url;
+        if (m_parameters.count()) {
+            m_params.insert("q", m_parameters[0].toLocal8Bit());
+        }
+        //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
+        query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
+        m_url = KUrl("http://search.twitter.com/search.atom?rpp=5&include_entities=true&show_user=true&result_type=mixed&q=" + query);
+        kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
-    case Profile:
-        m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.xml").arg(account.at(0)));
+   case Profile:
+        m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.xml").arg(parameters.at(0)));
         break;
     case DirectMessages:
         m_url = KUrl(m_serviceBaseUrl, "direct_messages.xml");
@@ -176,6 +186,7 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QOAu
         break;
     }
 
+    kDebug() << "authorized." << m_authHelper->isAuthorized();
     if (m_authHelper->isAuthorized()) {
         update();
     }
@@ -246,6 +257,7 @@ void TimelineSource::update(bool forcedUpdate)
         // We are already performing a fetch, let's not bother starting over
         return;
     }
+    kDebug() << "Creating job..." << m_url;
 
     // Create a KIO job to get the data from the web service
     m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
@@ -264,6 +276,7 @@ void TimelineSource::update(bool forcedUpdate)
 
 void TimelineSource::recv(KIO::Job*, const QByteArray& data)
 {
+    //kDebug() << data;
     m_xml += data;
 }
 
@@ -282,8 +295,12 @@ void TimelineSource::result(KJob *job)
         // TODO: error handling
     } else {
         QXmlStreamReader reader(m_xml);
-        parse(reader);
-        kDebug() << "Timeline job returned: " << tj->url() << data().count();// << m_xml;
+        if (m_requestType == TimelineSource::SearchTimeline) {
+            kDebug() << "SearchTimeline job returned: " << tj->url() << data().count();// << m_xml;
+            parseSearchResult(reader);
+        } else {
+            parse(reader);
+        }
     }
 
     checkForUpdate();
@@ -371,7 +388,8 @@ void TimelineSource::readStatus(QXmlStreamReader &xml)
             if (tag == "user") {
                 readUser(xml);
             } else {
-                cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements).trimmed();
+                cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements);
+                //cdata = xml.text();
             }
 
             if (tag == "created_at") {
@@ -395,6 +413,89 @@ void TimelineSource::readStatus(QXmlStreamReader &xml)
         QVariant v;
         v.setValue(m_tempData);
         //kDebug() << "setting data" << m_id << v;
+        setData(m_id, v);
+        m_id.clear();
+    }
+
+    m_tempData.clear();
+}
+void TimelineSource::parseSearchResult(QXmlStreamReader &xml)
+{
+    while (!xml.atEnd()) {
+        xml.readNext();
+
+        if (xml.isStartElement()) {
+            QString tag = xml.name().toString().toLower();
+            if (tag == "entry") {
+                kDebug() << " -----------" << tag;
+                readSearchStatus(xml);
+            }
+        }
+    }
+
+    if (xml.hasError()) {
+        kWarning() << "Fatal error on line" << xml.lineNumber()
+                   << ", column" << xml.columnNumber() << ":"
+                   << xml.errorString();
+        m_tempData.clear();
+        m_id.clear();
+    }
+}
+
+void TimelineSource::readSearchStatus(QXmlStreamReader &xml)
+{
+    m_tempData.clear();
+
+    kDebug() << "- BEGIN SEARCH STATUS -" << endl << xml.text();
+
+    while (!xml.atEnd()) {
+        xml.readNext();
+
+        QString tag = xml.name().toString().toLower();
+
+        if (xml.isEndElement() && tag == "entry") {
+            break;
+        }
+
+        if (xml.isStartElement()) {
+            QString cdata;
+
+//             if (tag == "user") {
+//                 readUser(xml);
+//             } else {
+//                 cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements).trimmed();
+//             }
+            cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements).trimmed();
+            kDebug() << "Tag >.. " << tag << cdata;
+
+            if (tag == "published") {
+                m_tempData["Date"] = cdata;
+            } else if (tag == "id") {
+                m_id = cdata.split(':').at(2);
+                m_tempData["Id"] = m_id;
+            } else if (tag == "content") {
+                m_tempData["Status"] = cdata;
+            } else if (tag == "source") {
+                m_tempData["Source"] = cdata;
+            } else if (tag == "author") {
+                QString u = cdata.split(' ').at(0);
+                m_tempData["User"] = u;
+                
+            }
+
+            // not supported in search
+            m_tempData["IsFavorite"] = false;
+        }
+    }
+
+    kDebug() << "- END SEARCH STATUS -" << m_id << endl;
+
+    if (!m_id.isEmpty()) {
+        QVariant v;
+        v.setValue(m_tempData);
+        foreach (const QString &k, m_tempData.keys()) {
+            //kDebug() << "setting data" << m_id << k << m_tempData[k];
+        }
         setData(m_id, v);
         m_id.clear();
     }

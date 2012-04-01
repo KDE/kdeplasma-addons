@@ -93,11 +93,12 @@ public:
         Replies,
         DirectMessages,
         CustomTimeline,
+        SearchTimeline,
         Profile,
         User
     };
 
-    TimelineSource(const QString &who, RequestType requestType, QOAuthHelper *oauthHelper, QObject* parent);
+    TimelineSource(const QString &serviceUrl, RequestType requestType, QOAuthHelper *oauthHelper, const QStringList &parameters, QObject* parent);
     ~TimelineSource();
 
     void setPassword(const QString &password);
@@ -134,6 +135,8 @@ private:
     void readStatus(QXmlStreamReader &xml);
     void readUser(QXmlStreamReader &xml, const QString &tagName = "user");
     void readDirectMessage(QXmlStreamReader &xml);
+    void parseSearchResult(QXmlStreamReader &xml);
+    void readSearchStatus(QXmlStreamReader &xml);
     void skipTag(QXmlStreamReader &xml, const QString &tagName);
 
     // OAuth constants
@@ -141,6 +144,7 @@ private:
 
     KUrl m_url;
     KUrl m_serviceBaseUrl;
+    RequestType m_requestType;
     ImageSource *m_imageSource;
     QByteArray m_xml;
     Plasma::DataEngine::Data m_tempData;
@@ -149,6 +153,7 @@ private:
     OAuth::ParamMap m_params;
 
     QOAuthHelper *m_authHelper;
+    QStringList m_parameters;
     QString m_user;
     QByteArray m_oauthTemp;
     KIO::Job *m_authJob;

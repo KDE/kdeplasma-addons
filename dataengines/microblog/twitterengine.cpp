@@ -37,6 +37,7 @@
 
 const QString TwitterEngine::timelinePrefix("Timeline:");
 const QString TwitterEngine::timelineWithFriendsPrefix("TimelineWithFriends:");
+const QString TwitterEngine::searchTimelinePrefix("SearchTimeline:");
 const QString TwitterEngine::customTimelinePrefix("CustomTimeline:");
 const QString TwitterEngine::profilePrefix("Profile:");
 const QString TwitterEngine::repliesPrefix("Replies:");
@@ -56,13 +57,14 @@ TwitterEngine::~TwitterEngine()
 
 bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
+    kDebug() << name;
     if (name.startsWith("UserImages:")) {
         // these are updated by the engine itself, not consumers
         return true;
     }
 
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
-        && !name.startsWith(customTimelinePrefix)
+        && !name.startsWith(customTimelinePrefix) && !name.startsWith(searchTimelinePrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
         && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)) {
         return false;
@@ -88,10 +90,11 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
+    kDebug() << name;
     //right now it only makes sense to do an update on timelines
     // FIXME: needed?
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
-        && !name.startsWith(customTimelinePrefix)
+        && !name.startsWith(customTimelinePrefix) && !name.startsWith(searchTimelinePrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
         && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)) {
         return false;
@@ -118,6 +121,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     } else if (name.startsWith(customTimelinePrefix)) {
         requestType = TimelineSource::CustomTimeline;
         who.remove(customTimelinePrefix);
+    } else if (name.startsWith(searchTimelinePrefix)) {
+        requestType = TimelineSource::SearchTimeline;
+        who.remove(searchTimelinePrefix);
+        kDebug() << "Search Timeline requested: " << who;
+        //return false;
     } else {
         requestType = TimelineSource::Timeline;
         who.remove(timelinePrefix);
@@ -127,15 +135,21 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     QString serviceBaseUrl;
     QStringList account = who.split('@');
     const QString user = account.at(0);
-
+    QString parameter;
     if (account.count() == 2) {
-        serviceBaseUrl = account.at(1);
+        QStringList sbu = account.at(1).split(':');
+        if (sbu.count() >= 2) {
+            serviceBaseUrl = sbu.at(0) + ':' + sbu.at(1);
+            if (sbu.count() > 2) {
+                parameter = sbu.at(2);
+            }
+        }
     } else {
         kWarning() << "service not found. Please request a source such as \"TimelineWithFriends:UserName@ServiceUrl\"";
         serviceBaseUrl = "https://twitter.com/";
         kWarning() << "  Using " << serviceBaseUrl << " instead.";
     }
-
+    kDebug() << "Sbu: " << serviceBaseUrl << " PARAMETER: " << parameter;
     ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 
     if (!imageSource) {
@@ -148,6 +162,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     }
 
     QOAuthHelper *authHelper = 0;
+
     if (!m_authHelper.contains(serviceBaseUrl)) {
         authorizationStatusUpdated(serviceBaseUrl, "Idle");
         authHelper = new QOAuthHelper(this);
@@ -164,6 +179,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         // using an invisible webkit
         //authHelper->start();
         authHelper->run();
+        kDebug() << "ran" << user;
     } else {
         authHelper = m_authHelper[serviceBaseUrl];
 
@@ -176,6 +192,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
                 authorizationStatusUpdated(serviceBaseUrl, "Ok");
             }
         }
+        kDebug() << "recycled" << authHelper->serviceBaseUrl() << authHelper->user();
     }
 
     if (requestType == TimelineSource::User) {
@@ -202,7 +219,8 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             if (user.isEmpty()) {
                 return false;
             }
-            source = new TimelineSource(who, requestType, authHelper,this);
+            kDebug() << authHelper->isAuthorized();
+            source = new TimelineSource(serviceBaseUrl, requestType, authHelper, QStringList() << parameter, this);
             connect(source, SIGNAL(authorize(const QString&, const QString&, const QString&)),
                    authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
             source->setObjectName(name);
