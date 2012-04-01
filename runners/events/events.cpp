@@ -213,19 +213,19 @@ void EventsRunner::describeSyntaxes() {
     syntaxes.append(todoSyntax);
 
     RunnerSyntax completeSyntax( QString("%1 :q: [; <percent>]").arg( completeKeyword ), i18n("Selects todo from calendar by its summary in :q: and marks it as completed.") );
-    completeSyntax.setSearchTermDescription( i18n( "complete todo description" ) );
+    completeSyntax.setSearchTermDescription( i18nc( "The command syntax description for complete", "complete todo description" ) );
     syntaxes.append(completeSyntax);
 
     RunnerSyntax commentSyntax( QString("%1 :q: <comment>").arg( commentKeyword ), i18n("Selects event from calendar by its summary in :q: and append <comment> to its body.") );
-    commentSyntax.setSearchTermDescription( i18n( "comment todo description" ) );
+    commentSyntax.setSearchTermDescription( i18nc( "The command syntax description for comment", "comment todo description" ) );
     syntaxes.append(commentSyntax);
 
     RunnerSyntax eventsSyntax( QString("%1 :q:").arg( eventsKeyword ), i18n("Shows events from calendar by its date in :q:.") );
-    eventsSyntax.setSearchTermDescription( i18n( "event date/time" ) );
+    eventsSyntax.setSearchTermDescription( i18nc( "The command syntax description for event", "event date/time" ) );
     syntaxes.append(eventsSyntax);
 
     RunnerSyntax todosSyntax( QString("%1 :q:").arg( eventsKeyword ), i18n("Shows todos from calendar by its date in :q:.") );
-    todosSyntax.setSearchTermDescription( i18n( "todo date/time" ) );
+    todosSyntax.setSearchTermDescription( i18nc( "The command syntax description for todo", "todo date/time" ) );
     syntaxes.append(todosSyntax);
 
     setSyntaxes(syntaxes);
@@ -266,16 +266,16 @@ QueryMatch EventsRunner::createQueryMatch( const QString & definition, MatchType
 
     if ( type == CreateEvent ) {
         if ( range.isPoint() )
-            match.setText( i18n( "Create event \"%1\" at %2", data["summary"].toString(), dateTimeToString( range.start ) ) );
+            match.setText( i18nc( "%1 is the summary of event, %2 is the start time of event", "Create event \"%1\" at %2", data["summary"].toString(), dateTimeToString( range.start ) ) );
         else
-            match.setText( i18n( "Create event \"%1\" from %2 to %3", data["summary"].toString(), dateTimeToString( range.start ), dateTimeToString( range.finish ) ) );
+            match.setText( i18nc( "%1 is the summary of event, %2 is the start time of event, %3 is the end time of event", "Create event \"%1\" from %2 to %3", data["summary"].toString(), dateTimeToString( range.start ), dateTimeToString( range.finish ) ) );
 
         match.setId( eventKeyword + '|' + definition );
     } else if ( type == CreateTodo ) {
         if ( range.isPoint() )
-            match.setText( i18n( "Create todo \"%1\" due to %2", data["summary"].toString(), dateTimeToString( range.finish ) ) );
+            match.setText( i18nc( "%1 is the summary of todo, %2 is the start time of todo", "Create todo \"%1\" due to %2", data["summary"].toString(), dateTimeToString( range.finish ) ) );
         else
-            match.setText( i18n( "Create todo \"%1\" due to %3 starting at %2", data["summary"].toString(), dateTimeToString( range.start ), dateTimeToString( range.finish ) ) );
+            match.setText( i18nc( "%1 is the summary of todo, %2 is the start time of todo, %3 is the due time of todo", "Create todo \"%1\" due to %3 starting at %2", data["summary"].toString(), dateTimeToString( range.start ), dateTimeToString( range.finish ) ) );
 
         match.setId( todoKeyword + '|' + definition );
     } else {
@@ -310,7 +310,7 @@ Plasma::QueryMatch EventsRunner::createUpdateMatch( const Item & item, MatchType
     if ( type == CompleteTodo ) {
         KCalCore::Todo::Ptr todo = item.payload<KCalCore::Todo::Ptr>();
 
-        match.setText( i18n( "Complete todo \"%1\"", todo->summary() ) );
+        match.setText( i18nc( "The todo is complete", "Complete todo \"%1\"", todo->summary() ) );
         match.setSubtext( i18n( "Date: %1", dateTimeToString( todo->dtDue() ) ) );
 
         data["item"] = qVariantFromValue( item );
