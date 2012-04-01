@@ -11,7 +11,7 @@ set(twitter_engine_SRCS
     oauth.cpp
     timelinesource.cpp
     twitterengine.cpp
-    qoauthhelper.cpp
+    koauth.cpp
     qoauthwebhelper.cpp
 )
 

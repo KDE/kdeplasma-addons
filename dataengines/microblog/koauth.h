@@ -29,15 +29,15 @@
 
 #include "oauth.h"
 
-class QOAuthHelperPrivate;
+class KOAuthPrivate;
 
-class QOAuthHelper : public QThread
+class KOAuth : public QThread
 {
 Q_OBJECT
 
 public:
-    QOAuthHelper(QObject* parent = 0);
-    ~QOAuthHelper();
+    KOAuth(QObject* parent = 0);
+    ~KOAuth();
 
     void sign(KIO::Job *job, const QString &url, OAuth::ParamMap params = OAuth::ParamMap(), OAuth::HttpMethod httpMethod = OAuth::GET);
     void run();
@@ -73,7 +73,7 @@ private:
     void accessTokenFromService();
     QString errorMessage(int e);
 
-    QOAuthHelperPrivate* d;
+    KOAuthPrivate* d;
     //QString m_serviceBaseUrl;
 };
 

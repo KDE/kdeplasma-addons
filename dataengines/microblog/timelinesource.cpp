@@ -20,7 +20,6 @@
  */
 
 #include "timelinesource.h"
-#include "qoauthhelper.h"
 
 #include <QXmlStreamReader>
 #include <QtCrypto/QtCrypto>
@@ -32,7 +31,7 @@
 
 #include "imagesource.h"
 #include "oauth.h"
-#include "qoauthhelper.h"
+#include "koauth.h"
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
@@ -132,7 +131,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
     return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
 }
 
-TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, QOAuthHelper *oauthHelper, const QStringList &parameters, QObject* parent)
+TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, KOAuth *oauthHelper, const QStringList &parameters, QObject* parent)
     : Plasma::DataContainer(parent),
       m_serviceBaseUrl(serviceUrl),
       m_requestType(requestType),
@@ -210,12 +209,12 @@ void TimelineSource::startAuthorization(const QString& user, const QString& pass
     emit authorize(m_serviceBaseUrl.pathOrUrl(), user, password);
 }
 
-void TimelineSource::setOAuthHelper(QOAuthHelper* authHelper)
+void TimelineSource::setOAuthHelper(KOAuth* authHelper)
 {
     m_authHelper = authHelper;
 }
 
-QOAuthHelper* TimelineSource::oAuthHelper()
+KOAuth* TimelineSource::oAuthHelper()
 {
     return m_authHelper;
 }
