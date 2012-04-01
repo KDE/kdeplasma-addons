@@ -40,15 +40,15 @@
 #include <QWebFrame>
 
 #include "oauth.h"
-#include "qoauthhelper.h"
+#include "koauth.h"
 #include "qoauthwebhelper.h"
 #include <KDebug>
 #include <QtOAuth/QtOAuth>
 
-class QOAuthHelperPrivate {
+class KOAuthPrivate {
 
 public:
-    QOAuthHelperPrivate()
+    KOAuthPrivate()
     {
         interface = new QOAuth::Interface();
         busy = false;
@@ -81,36 +81,36 @@ public:
 };
 
 
-QOAuthHelper::QOAuthHelper(QObject* parent)
+KOAuth::KOAuth(QObject* parent)
     : QThread(parent),
       d(0)
 {
 
-    setObjectName(QLatin1String("QOAuthHelper"));
+    setObjectName(QLatin1String("KOAuth"));
     init();
 }
 
-QByteArray QOAuthHelper::accessToken() const
+QByteArray KOAuth::accessToken() const
 {
     return d->accessToken;
 }
 
-QByteArray QOAuthHelper::accessTokenSecret() const
+QByteArray KOAuth::accessTokenSecret() const
 {
     return d->accessTokenSecret;
 }
 
-QString QOAuthHelper::user() const
+QString KOAuth::user() const
 {
     return d->user;
 }
 
-QString QOAuthHelper::serviceBaseUrl() const
+QString KOAuth::serviceBaseUrl() const
 {
     return d->serviceBaseUrl;
 }
 
-void QOAuthHelper::setUser(const QString& user)
+void KOAuth::setUser(const QString& user)
 {
     if (user == d->user) {
         return;
@@ -119,15 +119,15 @@ void QOAuthHelper::setUser(const QString& user)
     updateState();
 }
 
-QString QOAuthHelper::password() const
+QString KOAuth::password() const
 {
     return d->password;
 }
 
-void QOAuthHelper::init()
+void KOAuth::init()
 {
     if (!d) {
-        d = new QOAuthHelperPrivate;
+        d = new KOAuthPrivate;
 #ifndef NO_KIO
         KIO::AccessManager *access = new KIO::AccessManager(this);
         d->interface->setNetworkAccessManager(access);
@@ -144,7 +144,7 @@ void QOAuthHelper::init()
 
 }
 
-void QOAuthHelper::run()
+void KOAuth::run()
 {
     if (isAuthorized()) {
         emit statusUpdated(d->serviceBaseUrl, "Ok", "User authorized");
@@ -153,7 +153,7 @@ void QOAuthHelper::run()
     }
 }
 
-void QOAuthHelper::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
+void KOAuth::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
 {
     if (d->busy || isAuthorized()) {
         return;
@@ -172,7 +172,7 @@ void QOAuthHelper::authorize(const QString &serviceBaseUrl, const QString &user,
     }
 }
 
-void QOAuthHelper::requestTokenFromService()
+void KOAuth::requestTokenFromService()
 {
     d->interface->setConsumerKey(d->consumerKey);
     d->interface->setConsumerSecret(d->consumerSecret);
@@ -209,14 +209,14 @@ void QOAuthHelper::requestTokenFromService()
     }
 }
 
-void QOAuthHelper::appAuthorized(const QString &authorizeUrl, const QString &verifier)
+void KOAuth::appAuthorized(const QString &authorizeUrl, const QString &verifier)
 {
     Q_UNUSED(authorizeUrl);
     d->verifier = verifier;
     accessTokenFromService();
 }
 
-QString QOAuthHelper::errorMessage(int e) {
+QString KOAuth::errorMessage(int e) {
     //     enum ErrorCode {
     //         NoError = 200,              //!< No error occured (so far :-) )
     //         BadRequest = 400,           //!< Represents HTTP status code \c 400 (Bad Request)
@@ -261,7 +261,7 @@ QString QOAuthHelper::errorMessage(int e) {
     return out;
 }
 
-void QOAuthHelper::accessTokenFromService()
+void KOAuth::accessTokenFromService()
 {
 //     kDebug() << "start ... accessToken. TODO insert verifier" << d->verifier;
     QOAuth::ParamMap params = QOAuth::ParamMap();
@@ -300,7 +300,7 @@ void QOAuthHelper::accessTokenFromService()
     }
 }
 
-void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
+void KOAuth::setServiceBaseUrl(const QString &serviceBaseUrl)
 {
     if (d->serviceBaseUrl == serviceBaseUrl) {
         return;
@@ -309,7 +309,7 @@ void QOAuthHelper::setServiceBaseUrl(const QString &serviceBaseUrl)
     updateState();
 }
 
-void QOAuthHelper::updateState()
+void KOAuth::updateState()
 {
     const QUrl u(d->serviceBaseUrl);
 
@@ -344,18 +344,18 @@ void QOAuthHelper::updateState()
     }
 }
 
-QOAuthHelper::~QOAuthHelper()
+KOAuth::~KOAuth()
 {
     delete d;
 }
 
-bool QOAuthHelper::isAuthorized()
+bool KOAuth::isAuthorized()
 {
     return !d->accessToken.isEmpty() && !d->accessTokenSecret.isEmpty();
 }
 
 
-QByteArray QOAuthHelper::authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params)
+QByteArray KOAuth::authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params)
 {
     QByteArray auth;
     auth = d->interface->createParametersString(requestUrl.url(), method,
@@ -365,9 +365,9 @@ QByteArray QOAuthHelper::authorizationHeader(const KUrl &requestUrl, QOAuth::Htt
     return auth;
 }
 
-void QOAuthHelper::sign(KIO::Job *job, const QString &url, OAuth::ParamMap params, OAuth::HttpMethod httpMethod)
+void KOAuth::sign(KIO::Job *job, const QString &url, OAuth::ParamMap params, OAuth::HttpMethod httpMethod)
 {
     OAuth::signRequest(job, url, httpMethod, accessToken(), accessTokenSecret(), params);
 }
 
-#include "qoauthhelper.moc"
+#include "koauth.moc"

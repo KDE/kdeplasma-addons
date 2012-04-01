@@ -31,7 +31,7 @@
 
 // forward declarations
 class QXmlStreamReader;
-class QOAuthHelper;
+class KOAuth;
 
 class KJob;
 
@@ -98,7 +98,7 @@ public:
         User
     };
 
-    TimelineSource(const QString &serviceUrl, RequestType requestType, QOAuthHelper *oauthHelper, const QStringList &parameters, QObject* parent);
+    TimelineSource(const QString &serviceUrl, RequestType requestType, KOAuth *oauthHelper, const QStringList &parameters, QObject* parent);
     ~TimelineSource();
 
     void setPassword(const QString &password);
@@ -108,8 +108,8 @@ public:
 
     QByteArray oauthToken() const;
     QByteArray oauthTokenSecret() const;
-    void setOAuthHelper(QOAuthHelper *authHelper);
-    QOAuthHelper* oAuthHelper();
+    void setOAuthHelper(KOAuth *authHelper);
+    KOAuth* oAuthHelper();
 
     Plasma::Service* createService();
     void startAuthorization(const QString &user, const QString &password);
@@ -153,7 +153,7 @@ private:
     QString m_id;
     OAuth::ParamMap m_params;
 
-    QOAuthHelper *m_authHelper;
+    KOAuth *m_authHelper;
     QStringList m_parameters;
     QString m_user;
     QByteArray m_oauthTemp;

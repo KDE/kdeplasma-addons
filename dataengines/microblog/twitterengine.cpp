@@ -32,7 +32,7 @@
 
 #include "timelinesource.h"
 #include "imagesource.h"
-#include "qoauthhelper.h"
+#include "koauth.h"
 #include "usersource.h"
 
 const QString TwitterEngine::timelinePrefix("Timeline:");
@@ -161,11 +161,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         addSource(imageSource);
     }
 
-    QOAuthHelper *authHelper = 0;
+    KOAuth *authHelper = 0;
 
     if (!m_authHelper.contains(serviceBaseUrl)) {
         authorizationStatusUpdated(serviceBaseUrl, "Idle");
-        authHelper = new QOAuthHelper(this);
+        authHelper = new KOAuth(this);
         authHelper->setUser(user);
         authHelper->setServiceBaseUrl(serviceBaseUrl);
         m_authHelper[serviceBaseUrl] = authHelper;
