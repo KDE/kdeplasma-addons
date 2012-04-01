@@ -33,17 +33,27 @@
 #include <QUrl>
 #include <KRun>
 #include <KDialog>
+#include <KIO/Job>
 
 #include <KWebView>
 #include <KIO/AccessManager>
 #include <KSharedConfig>
 #include <QWebFrame>
 
-#include "oauth.h"
 #include "koauth.h"
 #include "qoauthwebhelper.h"
 #include <KDebug>
 #include <QtOAuth/QtOAuth>
+
+namespace OAuth {
+
+// For twitter
+const QByteArray ConsumerKey = "22kfJkztvOqb8WfihEjdg";
+const QByteArray ConsumerSecret = "RpGc0q0aGl0jMkeqMIawUpGyDkJ3DNBczFUyIQMR698";
+
+// identi.ca
+//const QByteArray ConsumerKey = "47a4650a6bd4026b1c4d55d641acdb64";
+//const QByteArray ConsumerSecret = "49208b0a87832f4279f9d3742c623910";
 
 class KOAuthPrivate {
 
@@ -183,15 +193,15 @@ void KOAuth::requestTokenFromService()
         return;
     }
 
-    QOAuth::ParamMap params;
+    ParamMap params;
     params.insert("oauth_callback", "oob");
 //     kDebug() << "starting token request ...";
-    QOAuth::ParamMap reply = d->interface->requestToken(d->requestTokenUrl,
+    ParamMap reply = d->interface->requestToken(d->requestTokenUrl,
                                                         QOAuth::GET, QOAuth::HMAC_SHA1, params);
 //     kDebug() << "token request done......" << reply;
 
     QString e;
-    if ( d->interface->error() == QOAuth::NoError ) {
+    if (d->interface->error() == QOAuth::NoError) {
         d->requestToken = reply.value(QOAuth::tokenParameterName());
         d->requestTokenSecret = reply.value(QOAuth::tokenSecretParameterName());
 
@@ -367,7 +377,147 @@ QByteArray KOAuth::authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMetho
 
 void KOAuth::sign(KIO::Job *job, const QString &url, OAuth::ParamMap params, OAuth::HttpMethod httpMethod)
 {
-    OAuth::signRequest(job, url, httpMethod, accessToken(), accessTokenSecret(), params);
+    signRequest(job, url, httpMethod, accessToken(), accessTokenSecret(), params);
 }
+
+QByteArray KOAuth::paramsToString(const OAuth::ParamMap &parameters, OAuth::ParsingMode mode)
+{
+    QByteArray middleString;
+    QByteArray endString;
+    QByteArray prependString;
+
+    switch (mode) {
+    case ParseForInlineQuery:
+        prependString = "?";
+    case ParseForRequestContent:
+    case ParseForSignatureBaseString:
+        middleString = "=";
+        endString = "&";
+        break;
+    case ParseForHeaderArguments:
+        prependString = "OAuth ";
+        middleString = "=\"";
+        endString = "\",";
+        break;
+    default:
+        qWarning() << __FUNCTION__ << "- Unrecognized mode";
+        return QByteArray();
+    }
+
+    QByteArray parameter;
+    QByteArray parametersString;
+
+    Q_FOREACH (parameter, parameters.uniqueKeys()) {
+        QList<QByteArray> values = parameters.values(parameter);
+        if (values.size() > 1) {
+            qSort(values.begin(), values.end());
+        }
+        QByteArray value;
+        Q_FOREACH (value, values) {
+            parametersString.append(parameter);
+            parametersString.append(middleString);
+            parametersString.append(value);
+            parametersString.append(endString);
+        }
+    }
+
+    // remove the trailing end character (comma or ampersand)
+    parametersString.chop(1);
+
+    // prepend with the suitable string (or none)
+    parametersString.prepend(prependString);
+    //kDebug() << "paramterString: " << parametersString;
+    return parametersString;
+}
+
+QByteArray KOAuth::createSignature(const QString &requestUrl, OAuth::HttpMethod method, const QByteArray &token,
+                           const QByteArray &tokenSecret, OAuth::ParamMap *params)
+{
+    //kDebug() << "creating signature";
+    // create nonce
+
+    if (!QCA::isSupported("hmac(sha1)")) {
+        kError() << "Your QCA2 does not support the HMAC-SHA1 algorithm. Signing requests using OAuth does not work";
+        return QByteArray();
+    }
+    QCA::InitializationVector iv(16);
+    QByteArray nonce = iv.toByteArray().toHex();
+
+    // create timestamp
+    uint time = QDateTime::currentDateTime().toTime_t();
+    QByteArray timestamp = QByteArray::number(time);
+
+    QByteArray httpMethodString = (method == POST) ? "POST" : "GET";
+    // create signature base string
+    // prepare percent-encoded request URL
+    QByteArray percentRequestUrl = requestUrl.toAscii().toPercentEncoding();
+    // prepare percent-encoded parameters string
+    params->insert("oauth_consumer_key", ConsumerKey);
+    //params->insert("oauth_callback", "oob");
+    params->insert("oauth_nonce", nonce);
+    params->insert("oauth_signature_method", "HMAC-SHA1");
+    params->insert("oauth_timestamp", timestamp);
+    params->insert("oauth_version", "1.0");
+    // append token only if it is defined (requestToken() doesn't use a token at all)
+    if (!token.isEmpty()) {
+        params->insert("oauth_token", token);
+    }
+
+    QByteArray parametersString = paramsToString(*params, ParseForSignatureBaseString);
+    QByteArray percentParametersString = parametersString.toPercentEncoding();
+
+    QByteArray digest;
+
+    // create signature base string
+    QByteArray signatureBaseString;
+    signatureBaseString.append(httpMethodString + "&");
+    signatureBaseString.append(percentRequestUrl + "&");
+    signatureBaseString.append(percentParametersString);
+
+//     kDebug() << "SIG BASE STRING: " << signatureBaseString;
+
+    if (!QCA::isSupported("hmac(sha1)")) {
+        kError() << "Hashing algo not supported, update your QCA";
+        return QByteArray();
+    }
+    // create key for HMAC-SHA1 hashing
+    QByteArray key(ConsumerSecret + "&" + tokenSecret);
+
+    // create HMAC-SHA1 digest in Base64
+    QCA::MessageAuthenticationCode hmac("hmac(sha1)", QCA::SymmetricKey(key));
+    QCA::SecureArray array(signatureBaseString);
+    hmac.update(array);
+    QCA::SecureArray resultArray = hmac.final();
+    digest = resultArray.toByteArray().toBase64();
+
+    // percent-encode the digest
+    QByteArray signature = digest.toPercentEncoding();
+    //kDebug() << "Signature: " << key << " // " << signature;
+    return signature;
+}
+
+void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, OAuth::HttpMethod method, const QByteArray &token,
+                 const QByteArray &tokenSecret, const OAuth::ParamMap &params)
+{
+    QOAuth::ParamMap parameters = params;
+
+    // create signature
+    QByteArray signature = createSignature(requestUrl, method, token, tokenSecret, &parameters);
+    //kDebug() << "signature: " << signature;
+
+    // add signature to parameters
+    parameters.insert("oauth_signature", signature);
+    foreach (QByteArray key, params.keys()) {
+        parameters.remove(key);
+    }
+
+    QByteArray authorizationHeader = paramsToString(parameters, ParseForHeaderArguments);
+
+    job->addMetaData("customHTTPHeader", QByteArray("Authorization: " + authorizationHeader));
+    //kDebug() << "job thign...." << authorizationHeader;
+}
+
+
+} // namespace
 
 #include "koauth.moc"

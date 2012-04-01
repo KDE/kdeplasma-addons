@@ -161,11 +161,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         addSource(imageSource);
     }
 
-    KOAuth *authHelper = 0;
+    OAuth::KOAuth *authHelper = 0;
 
     if (!m_authHelper.contains(serviceBaseUrl)) {
         authorizationStatusUpdated(serviceBaseUrl, "Idle");
-        authHelper = new KOAuth(this);
+        authHelper = new OAuth::KOAuth(this);
         authHelper->setUser(user);
         authHelper->setServiceBaseUrl(serviceBaseUrl);
         m_authHelper[serviceBaseUrl] = authHelper;

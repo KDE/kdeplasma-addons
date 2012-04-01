@@ -8,7 +8,6 @@ find_package(QtOAuth REQUIRED)
 set(twitter_engine_SRCS
     imagesource.cpp
     usersource.cpp
-    oauth.cpp
     timelinesource.cpp
     twitterengine.cpp
     koauth.cpp

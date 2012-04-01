@@ -30,7 +30,6 @@
 #include <KIO/Job>
 
 #include "imagesource.h"
-#include "oauth.h"
 #include "koauth.h"
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
@@ -131,7 +130,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
     return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
 }
 
-TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, KOAuth *oauthHelper, const QStringList &parameters, QObject* parent)
+TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, OAuth::KOAuth *oauthHelper, const QStringList &parameters, QObject* parent)
     : Plasma::DataContainer(parent),
       m_serviceBaseUrl(serviceUrl),
       m_requestType(requestType),
@@ -209,12 +208,12 @@ void TimelineSource::startAuthorization(const QString& user, const QString& pass
     emit authorize(m_serviceBaseUrl.pathOrUrl(), user, password);
 }
 
-void TimelineSource::setOAuthHelper(KOAuth* authHelper)
+void TimelineSource::setOAuthHelper(OAuth::KOAuth* authHelper)
 {
     m_authHelper = authHelper;
 }
 
-KOAuth* TimelineSource::oAuthHelper()
+OAuth::KOAuth* TimelineSource::oAuthHelper()
 {
     return m_authHelper;
 }
@@ -455,11 +454,11 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                     m_imageSource->loadImage(m_tempData["User"].toString(), url);
                 }
 
-                foreach (const QVariant &x, w.toMap().keys()) {
-                    //kDebug() << "           prop: " << x;
-//                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
-
-                }
+//                 foreach (const QVariant &x, w.toMap().keys()) {
+//                     //kDebug() << "           prop: " << x;
+// //                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
+// 
+//                 }
 
                 if (!m_id.isEmpty()) {
                     QVariant v;
