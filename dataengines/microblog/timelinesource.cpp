@@ -25,6 +25,8 @@
 #include <QXmlStreamReader>
 #include <QtCrypto/QtCrypto>
 
+#include <qjson/parser.h>
+
 #include <KDebug>
 #include <KIO/Job>
 
@@ -165,7 +167,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         }
         //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
         query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
-        m_url = KUrl("http://search.twitter.com/search.atom?rpp=5&include_entities=true&show_user=true&result_type=mixed&q=" + query);
+        m_url = KUrl("http://search.twitter.com/search.json?rpp=5&include_entities=true&show_user=true&result_type=mixed&q=" + query);
         kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
    case Profile:
@@ -297,7 +299,11 @@ void TimelineSource::result(KJob *job)
         QXmlStreamReader reader(m_xml);
         if (m_requestType == TimelineSource::SearchTimeline) {
             kDebug() << "SearchTimeline job returned: " << tj->url() << data().count();// << m_xml;
-            parseSearchResult(reader);
+            if (tj->url().pathOrUrl().contains("atom")) {
+                parseSearchResult(reader);
+            } else {
+                parseJsonSearchResult(m_xml);
+            }
         } else {
             parse(reader);
         }
@@ -419,6 +425,87 @@ void TimelineSource::readStatus(QXmlStreamReader &xml)
 
     m_tempData.clear();
 }
+
+void TimelineSource::parseJsonSearchResult(const QByteArray &data)
+{
+    //kDebug() << "JSON: " << data;
+    kDebug() << "JSON PARSER ONLINE";
+    QJson::Parser parser;
+    const QVariantMap resultsMap = parser.parse(data).toMap();
+    //QVariantMap res = resultsMap["results"].toMap();
+    foreach (QVariant v, resultsMap.keys()) {
+        //kDebug() << "QVariantMap" << v.toString() << resultsMap[v.toString()];
+        if (v.toString() == "results") {
+            kDebug() << " ################################# " << endl;
+                //["results"].toMap()
+            foreach (const QVariant &w, resultsMap[v.toString()].toList()) {
+                kDebug() << "---------" << w;
+                QVariantMap r = w.toMap();
+                m_tempData["Date"] = r["created_at"];
+                m_id = r["id"].toString();
+                m_tempData["Id"] = m_id;
+                m_tempData["Status"] = r["text"];
+                m_tempData["Source"] = r["source"];
+                //QString u = cdata.split(' ').at(0);
+                m_tempData["User"] = r["from_user"];
+
+                // not supported in search
+                m_tempData["IsFavorite"] = false;
+                m_tempData["ImageUrl"] = r["profile_image_url"];
+                if (m_tempData.contains("User")) {
+                    KUrl url(r["profile_image_url"].toString());
+                    m_imageSource->loadImage(m_tempData["User"].toString(), url);
+                }
+
+                
+                foreach (const QVariant &x, w.toMap().keys()) {
+                    //kDebug() << "           prop: " << x;
+                    kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
+
+                }
+
+                if (!m_id.isEmpty()) {
+                    QVariant v;
+                    v.setValue(m_tempData);
+                    foreach (const QString &k, m_tempData.keys()) {
+                        //kDebug() << "setting data" << m_id << k << m_tempData[k];
+                    }
+                    setData(m_id, v);
+                    m_id.clear();
+                }
+//
+            }
+        }
+
+    }
+
+//     const QString& match = "duckduckgo";
+// 
+//     if (match == "define") {
+//         //dictionary mode
+//         kDebug() << "Heading:" << resultsMap.value("Heading");
+//         kDebug() << "AbstractSource:" << resultsMap.value("AbstractSource");
+//         kDebug() << "Abstract:" << resultsMap.value("Abstract");
+//         kDebug() << "AbstractURL:" << resultsMap.value("AbstractURL");
+//     } else if (match == "wolfram") {
+//         //wolfram mode (simple redirection, because web search providers are assholes)
+//         kDebug() << "Redirect:" << resultsMap.value("Redirect");
+//     } else if (match == "duckduckgo") {
+//         QList<QVariant> related = resultsMap.value("RelatedTopics").toList();
+// 
+//         foreach (const QVariant& variant, related) {
+//             QVariantMap submap = variant.toMap();
+// 
+//             kDebug() << "FirstURL:" << submap.value("FirstURL");
+//             kDebug() << "Text:" << submap.value("Text");
+//             kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
+//         }
+//     }
+
+}
+
+
+
 void TimelineSource::parseSearchResult(QXmlStreamReader &xml)
 {
     while (!xml.atEnd()) {
