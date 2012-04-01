@@ -155,7 +155,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     //just create it to correctly initialize QCA and clean up when createSignature() returns
     m_qcaInitializer = new QCA::Initializer(); // FIXME: move into qoautohelper?
 
-    kDebug() << "authorized." << m_authHelper->serviceBaseUrl()<< m_authHelper->isAuthorized() << m_authHelper->accessToken();
+//     kDebug() << "authorized." << m_authHelper->serviceBaseUrl()<< m_authHelper->isAuthorized() << m_authHelper->accessToken();
     // set up the url
     QString query;
     switch (m_requestType) {
@@ -168,7 +168,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
         query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
         m_url = KUrl("http://search.twitter.com/search.json?rpp=5&include_entities=true&show_user=true&result_type=mixed&q=" + query);
-        kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
+        //kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
    case Profile:
         m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.xml").arg(parameters.at(0)));
@@ -188,7 +188,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         break;
     }
 
-    kDebug() << "authorized." << m_authHelper->isAuthorized();
+//     kDebug() << "authorized." << m_authHelper->isAuthorized();
     if (m_authHelper->isAuthorized()) {
         update();
     }
@@ -259,12 +259,12 @@ void TimelineSource::update(bool forcedUpdate)
         // We are already performing a fetch, let's not bother starting over
         return;
     }
-    kDebug() << "Creating job..." << m_url;
+    //kDebug() << "Creating job..." << m_url;
 
     // Create a KIO job to get the data from the web service
     m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
     m_authHelper->sign(m_job, m_url.pathOrUrl(), m_params);
-    kDebug() << "signed" << m_url.pathOrUrl();
+//     kDebug() << "signed" << m_url.pathOrUrl();
 
     connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)),
             this, SLOT(recv(KIO::Job*,QByteArray)));
@@ -298,7 +298,7 @@ void TimelineSource::result(KJob *job)
     } else {
         QXmlStreamReader reader(m_xml);
         if (m_requestType == TimelineSource::SearchTimeline) {
-            kDebug() << "SearchTimeline job returned: " << tj->url() << data().count();// << m_xml;
+            //kDebug() << "SearchTimeline job returned: " << tj->url() << data().count();// << m_xml;
             if (tj->url().pathOrUrl().contains("atom")) {
                 parseSearchResult(reader);
             } else {
@@ -338,12 +338,11 @@ void TimelineSource::authFinished(KJob *job)
                 m_oauthTokenSecret = data.at(1);
             }
         }
-        kDebug() << "AUTH FINISHED. .. should not execute!";
         update(true);
     }
     m_oauthTemp.clear();
     m_authJob = 0;
-    kDebug() << "Authentication succeeded, Token: " << QString(m_oauthToken);
+    //kDebug() << "Authentication succeeded, Token: " << QString(m_oauthToken);
 }
 
 void TimelineSource::parse(QXmlStreamReader &xml)
@@ -429,17 +428,17 @@ void TimelineSource::readStatus(QXmlStreamReader &xml)
 void TimelineSource::parseJsonSearchResult(const QByteArray &data)
 {
     //kDebug() << "JSON: " << data;
-    kDebug() << "JSON PARSER ONLINE";
+//     kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
     //QVariantMap res = resultsMap["results"].toMap();
     foreach (QVariant v, resultsMap.keys()) {
         //kDebug() << "QVariantMap" << v.toString() << resultsMap[v.toString()];
         if (v.toString() == "results") {
-            kDebug() << " ################################# " << endl;
+            //kDebug() << " ################################# " << endl;
                 //["results"].toMap()
             foreach (const QVariant &w, resultsMap[v.toString()].toList()) {
-                kDebug() << "---------" << w;
+                //kDebug() << "---------" << w;
                 QVariantMap r = w.toMap();
                 m_tempData["Date"] = r["created_at"];
                 m_id = r["id"].toString();
@@ -457,19 +456,18 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                     m_imageSource->loadImage(m_tempData["User"].toString(), url);
                 }
 
-                
                 foreach (const QVariant &x, w.toMap().keys()) {
                     //kDebug() << "           prop: " << x;
-                    kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
+//                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
 
                 }
 
                 if (!m_id.isEmpty()) {
                     QVariant v;
                     v.setValue(m_tempData);
-                    foreach (const QString &k, m_tempData.keys()) {
+                    //foreach (const QString &k, m_tempData.keys()) {
                         //kDebug() << "setting data" << m_id << k << m_tempData[k];
-                    }
+                    //}
                     setData(m_id, v);
                     m_id.clear();
                 }
@@ -514,7 +512,7 @@ void TimelineSource::parseSearchResult(QXmlStreamReader &xml)
         if (xml.isStartElement()) {
             QString tag = xml.name().toString().toLower();
             if (tag == "entry") {
-                kDebug() << " -----------" << tag;
+                //kDebug() << " -----------" << tag;
                 readSearchStatus(xml);
             }
         }
@@ -533,7 +531,7 @@ void TimelineSource::readSearchStatus(QXmlStreamReader &xml)
 {
     m_tempData.clear();
 
-    kDebug() << "- BEGIN SEARCH STATUS -" << endl << xml.text();
+    //kDebug() << "- BEGIN SEARCH STATUS -" << endl << xml.text();
 
     while (!xml.atEnd()) {
         xml.readNext();
@@ -553,7 +551,7 @@ void TimelineSource::readSearchStatus(QXmlStreamReader &xml)
 //                 cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements).trimmed();
 //             }
             cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements).trimmed();
-            kDebug() << "Tag >.. " << tag << cdata;
+//             kDebug() << "Tag >.. " << tag << cdata;
 
             if (tag == "published") {
                 m_tempData["Date"] = cdata;
@@ -567,7 +565,6 @@ void TimelineSource::readSearchStatus(QXmlStreamReader &xml)
             } else if (tag == "author") {
                 QString u = cdata.split(' ').at(0);
                 m_tempData["User"] = u;
-                
             }
 
             // not supported in search
@@ -575,14 +572,14 @@ void TimelineSource::readSearchStatus(QXmlStreamReader &xml)
         }
     }
 
-    kDebug() << "- END SEARCH STATUS -" << m_id << endl;
+//     kDebug() << "- END SEARCH STATUS -" << m_id << endl;
 
     if (!m_id.isEmpty()) {
         QVariant v;
         v.setValue(m_tempData);
-        foreach (const QString &k, m_tempData.keys()) {
+//         foreach (const QString &k, m_tempData.keys()) {
             //kDebug() << "setting data" << m_id << k << m_tempData[k];
-        }
+//         }
         setData(m_id, v);
         m_id.clear();
     }
