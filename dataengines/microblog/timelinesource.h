@@ -21,7 +21,7 @@
 #ifndef TIMELINESOURCE_H
 #define TIMELINESOURCE_H
 
-#include "oauth.h"
+#include "koauth.h"
 
 #include <KUrl>
 
@@ -31,7 +31,6 @@
 
 // forward declarations
 class QXmlStreamReader;
-class KOAuth;
 
 class KJob;
 
@@ -98,7 +97,7 @@ public:
         User
     };
 
-    TimelineSource(const QString &serviceUrl, RequestType requestType, KOAuth *oauthHelper, const QStringList &parameters, QObject* parent);
+    TimelineSource(const QString &serviceUrl, RequestType requestType, OAuth::KOAuth *oauthHelper, const QStringList &parameters, QObject* parent);
     ~TimelineSource();
 
     void setPassword(const QString &password);
@@ -108,8 +107,8 @@ public:
 
     QByteArray oauthToken() const;
     QByteArray oauthTokenSecret() const;
-    void setOAuthHelper(KOAuth *authHelper);
-    KOAuth* oAuthHelper();
+    void setOAuthHelper(OAuth::KOAuth *authHelper);
+    OAuth::KOAuth* oAuthHelper();
 
     Plasma::Service* createService();
     void startAuthorization(const QString &user, const QString &password);
@@ -153,7 +152,7 @@ private:
     QString m_id;
     OAuth::ParamMap m_params;
 
-    KOAuth *m_authHelper;
+    OAuth::KOAuth *m_authHelper;
     QStringList m_parameters;
     QString m_user;
     QByteArray m_oauthTemp;

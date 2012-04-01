@@ -27,7 +27,23 @@
 
 #include <KUrl>
 
-#include "oauth.h"
+namespace KIO {
+    class Job;
+}
+
+
+namespace OAuth {
+    // OAuth methods
+enum HttpMethod { POST, GET };
+enum ParsingMode {
+    ParseForRequestContent,     //!< Inline query format (<tt>foo=bar&bar=baz&baz=foo ...</tt>), suitable for POST requests
+    ParseForInlineQuery,        /*!< Same as ParseForRequestContent, but prepends the string with a question mark -
+                                    suitable for GET requests (appending parameters to the request URL) */
+    ParseForHeaderArguments,    //!< HTTP request header format (parameters to be put inside a request header)
+    ParseForSignatureBaseString //!< <a href=http://oauth.net/core/1.0/#anchor14>Signature Base String</a> format, meant for internal use.
+};
+
+typedef QMultiMap<QByteArray,QByteArray> ParamMap;
 
 class KOAuthPrivate;
 
@@ -36,10 +52,11 @@ class KOAuth : public QThread
 Q_OBJECT
 
 public:
+
     KOAuth(QObject* parent = 0);
     ~KOAuth();
 
-    void sign(KIO::Job *job, const QString &url, OAuth::ParamMap params = OAuth::ParamMap(), OAuth::HttpMethod httpMethod = OAuth::GET);
+    void sign(KIO::Job *job, const QString &url, ParamMap params = ParamMap(), HttpMethod httpMethod = GET);
     void run();
 
     QString user() const;
@@ -73,9 +90,17 @@ private:
     void accessTokenFromService();
     QString errorMessage(int e);
 
+    QByteArray paramsToString(const QOAuth::ParamMap &parameters, OAuth::ParsingMode mode);
+    QByteArray createSignature(const QString &requestUrl, OAuth::HttpMethod method, const QByteArray &token,
+                               const QByteArray &tokenSecret, QOAuth::ParamMap *params);
+    void signRequest(KIO::Job *job, const QString &requestUrl, OAuth::HttpMethod method, const QByteArray &token,
+                         const QByteArray &tokenSecret, const QOAuth::ParamMap &params);
+
     KOAuthPrivate* d;
     //QString m_serviceBaseUrl;
 };
+
+} // namespace KOAuth
 
 #endif
 
