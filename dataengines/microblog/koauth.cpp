@@ -41,7 +41,7 @@
 #include <QWebFrame>
 
 #include "koauth.h"
-#include "qoauthwebhelper.h"
+#include "koauthwebhelper.h"
 #include <KDebug>
 #include <QtOAuth/QtOAuth>
 
@@ -87,7 +87,7 @@ public:
 
     QString verifier;
 
-    QOAuthWebHelper *w;
+    KOAuthWebHelper *w;
 };
 
 
@@ -142,7 +142,7 @@ void KOAuth::init()
         KIO::AccessManager *access = new KIO::AccessManager(this);
         d->interface->setNetworkAccessManager(access);
 #endif
-        d->w = new QOAuthWebHelper();
+        d->w = new KOAuthWebHelper();
         connect(this, SIGNAL(authorizeApp(const QString&, const QString&, const QString&)),
                 d->w, SLOT(authorizeApp(const QString&, const QString&, const QString&)));
         connect(d->w, SIGNAL(appAuthSucceeded(const QString&, const QString&)),

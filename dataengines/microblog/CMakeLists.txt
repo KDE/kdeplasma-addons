@@ -11,7 +11,7 @@ set(twitter_engine_SRCS
     timelinesource.cpp
     twitterengine.cpp
     koauth.cpp
-    qoauthwebhelper.cpp
+    koauthwebhelper.cpp
 )
 
 kde4_add_plugin(plasma_engine_microblog ${twitter_engine_SRCS})

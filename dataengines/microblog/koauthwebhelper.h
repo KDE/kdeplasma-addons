@@ -17,25 +17,23 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef QOAUTHWEBHELPER_H
-#define QOAUTHWEBHELPER_H
+#ifndef KOAUTHWEBHELPER_H
+#define KOAUTHWEBHELPER_H
 
 #include <QObject>
 
-//#include <QtOAuth/QtOAuth>
-
 #include <KUrl>
-//#include <KDialog>
 
-class QOAuthWebHelperPrivate;
+namespace OAuth {
+class KOAuthWebHelperPrivate;
 
-class QOAuthWebHelper : public QObject
+class KOAuthWebHelper : public QObject
 {
 Q_OBJECT
 
 public:
-    QOAuthWebHelper(QObject* parent = 0);
-    ~QOAuthWebHelper();
+    KOAuthWebHelper(QObject* parent = 0);
+    ~KOAuthWebHelper();
 
     void setUser(const QString &user);
     void setPassword(const QString &password);
@@ -50,11 +48,13 @@ private Q_SLOTS:
     void loadFinished();
     void showDialog();
     void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
-//    void accessTokenReceived(const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret);
 
 private:
-    QOAuthWebHelperPrivate* d;
+    KOAuthWebHelperPrivate* d;
 };
+
+
+} // namespace
 
 #endif
 

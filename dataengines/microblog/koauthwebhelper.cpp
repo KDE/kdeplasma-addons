@@ -39,14 +39,15 @@
 #include <QWebFrame>
 #include <QWebPage>
 
-#include "qoauthwebhelper.h"
+#include "koauthwebhelper.h"
 #include <KDebug>
-//#include <QtOAuth/QtOAuth>
 
-class QOAuthWebHelperPrivate {
+namespace OAuth {
+
+class KOAuthWebHelperPrivate {
 
 public:
-    QOAuthWebHelperPrivate()
+    KOAuthWebHelperPrivate()
     {
         webView = 0;
         dialog = 0;
@@ -64,9 +65,9 @@ public:
 };
 
 
-QOAuthWebHelper::QOAuthWebHelper(QObject* parent)
+KOAuthWebHelper::KOAuthWebHelper(QObject* parent)
     : QObject(parent),
-      d(new QOAuthWebHelperPrivate)
+      d(new KOAuthWebHelperPrivate)
 {
     setObjectName(QLatin1String("QOAuthWebHelper"));
     d->timer = new QTimer();
@@ -75,43 +76,39 @@ QOAuthWebHelper::QOAuthWebHelper(QObject* parent)
     connect(d->timer, SIGNAL(timeout()), SLOT(showDialog()));
 }
 
-QOAuthWebHelper::~QOAuthWebHelper()
+KOAuthWebHelper::~KOAuthWebHelper()
 {
     delete d;
 }
 
-void QOAuthWebHelper::setUser(const QString& user)
+void KOAuthWebHelper::setUser(const QString& user)
 {
     d->user = user;
 }
 
-void QOAuthWebHelper::setPassword(const QString& password)
+void KOAuthWebHelper::setPassword(const QString& password)
 {
     d->password = password;
 }
 
-void QOAuthWebHelper::setServiceBaseUrl(const QString &url)
+void KOAuthWebHelper::setServiceBaseUrl(const QString &url)
 {
     d->serviceBaseUrl = url;
 }
 
-void QOAuthWebHelper::showDialog()
+void KOAuthWebHelper::showDialog()
 {
     if (d->dialog) {
         d->dialog->show();
     }
 }
 
-void QOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl)
+void KOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl)
 {
     Q_UNUSED(serviceBaseUrl);
     Q_UNUSED(authorizeUrl);
     if (d->serviceBaseUrl == "/" || d->serviceBaseUrl.isEmpty()) return;
-//     kDebug() << "SBU: " << d->serviceBaseUrl;
-//     authorizationStatusMessageUpdated("Status:" + d->serviceBaseUrl, "Authorizing App");
-//     authorizationStatusUpdated("Status:" + d->serviceBaseUrl, "Busy");
     if (!d->webView) {
-//         kDebug() << "NEW KWEbvIEW";
         d->dialog = new KDialog();
         d->dialog->setCaption( "authorize application" );
         d->dialog->setButtons( KDialog::Ok | KDialog::Cancel);
@@ -126,12 +123,12 @@ void QOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString 
     d->webView->page()->mainFrame()->load(pageUrl);
 }
 
-bool QOAuthWebHelper::isIdentica()
+bool KOAuthWebHelper::isIdentica()
 {
     return d->serviceBaseUrl.toLower().contains("identi.ca");
 }
 
-void QOAuthWebHelper::loadFinished()
+void KOAuthWebHelper::loadFinished()
 {
     QWebPage *page = dynamic_cast<QWebPage*>(sender());
     if (!page) {
@@ -206,5 +203,5 @@ void QOAuthWebHelper::loadFinished()
     }
 }
 
-
-#include "qoauthwebhelper.moc"
+}
+#include "koauthwebhelper.moc"
