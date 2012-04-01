@@ -215,6 +215,7 @@ private slots:
 
 private:
     TT_Type m_toolTips;
+    bool m_highlightWindows;
     bool m_launcherIcons;
     GroupClick m_groupClick;
     bool m_rotate;

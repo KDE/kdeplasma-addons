@@ -83,7 +83,7 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0">
+   <item row="5" column="0">
     <widget class="QLabel" name="launcherIcons_label">
      <property name="text">
       <string>Always use launcher icons:</string>
@@ -96,7 +96,7 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
+   <item row="5" column="1">
     <widget class="QCheckBox" name="launcherIcons">
      <property name="toolTip">
       <string>&lt;p&gt;Enabling this item forces the icon for a running application to be the same as that used for the launcher. This resolves some oddities where the launcher icon is different from the application icon - as happens with LibreOffice.&lt;/p&gt;</string>
@@ -106,7 +106,7 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0">
+   <item row="6" column="0">
     <widget class="QLabel" name="iconScale_label">
      <property name="text">
       <string>Scale icons to:</string>
@@ -116,7 +116,7 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
+   <item row="6" column="1">
     <widget class="KIntSpinBox" name="iconScale">
      <property name="toolTip">
       <string>&lt;p&gt;Controls the scaling of the taskbar icon. When set to &amp;quot;Automatic&amp;quot;, the taskbar will attempt to determine the optimal size.&lt;/p&gt;</string>
@@ -129,7 +129,7 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
+   <item row="7" column="0">
     <widget class="QLabel" name="spacing_label">
      <property name="text">
       <string>Spacing:</string>
@@ -139,7 +139,7 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
+   <item row="7" column="1">
     <widget class="KIntSpinBox" name="spacing">
      <property name="toolTip">
       <string>&lt;p&gt;Set the amount of extra spacing between items.&lt;/p&gt;</string>
@@ -155,7 +155,7 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="0">
+   <item row="8" column="0">
     <widget class="QLabel" name="maxRows_label">
      <property name="text">
       <string>Maximum rows:</string>
@@ -168,7 +168,7 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="1">
+   <item row="8" column="1">
     <widget class="KIntSpinBox" name="maxRows">
      <property name="toolTip">
       <string>&lt;p&gt;Controls the maximum number of rows (for a horizontal taskbar), or columns (for a vertical taskbar), that will be used.&lt;/p&gt;</string>
@@ -181,7 +181,7 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="0">
+   <item row="9" column="0">
     <widget class="QLabel" name="sortingStrategy_label">
      <property name="text">
       <string>Sorting:</string>
@@ -194,7 +194,7 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="1">
+   <item row="9" column="1">
     <widget class="QComboBox" name="sortingStrategy">
      <property name="minimumSize">
       <size>
@@ -204,7 +204,7 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="0">
+   <item row="10" column="0">
     <widget class="QLabel" name="showSeparator_label">
      <property name="text">
       <string>Separator:</string>
@@ -214,10 +214,24 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="1">
+   <item row="10" column="1">
     <widget class="QComboBox" name="showSeparator">
      <property name="toolTip">
       <string>&lt;p&gt;When enabled, and there is only 1 row/column, then a separator will be drawn between the launchers/tasks-with-launchers and non-launcher tasks.&lt;/p&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="highlightWindows_label">
+     <property name="text">
+      <string>Highlight windows:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QCheckBox" name="highlightWindows">
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>
