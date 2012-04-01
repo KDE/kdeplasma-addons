@@ -67,7 +67,7 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
     if (m_runningJobs < 500) {
         //if (who == "sebas") kDebug() << " 222 starting job" << who;
         m_runningJobs++;
-        kDebug() << "starting imagejob: " << url;
+//         kDebug() << "starting imagejob: " << url;
         KIO::Job *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
         job->setAutoDelete(true);
         m_jobs[job] = who;

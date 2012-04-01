@@ -90,7 +90,7 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
-    kDebug() << name;
+//     kDebug() << name;
     //right now it only makes sense to do an update on timelines
     // FIXME: needed?
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
@@ -124,7 +124,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     } else if (name.startsWith(searchTimelinePrefix)) {
         requestType = TimelineSource::SearchTimeline;
         who.remove(searchTimelinePrefix);
-        kDebug() << "Search Timeline requested: " << who;
+//         kDebug() << "Search Timeline requested: " << who;
         //return false;
     } else {
         requestType = TimelineSource::Timeline;
@@ -149,7 +149,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         serviceBaseUrl = "https://twitter.com/";
         kWarning() << "  Using " << serviceBaseUrl << " instead.";
     }
-    kDebug() << "Sbu: " << serviceBaseUrl << " PARAMETER: " << parameter;
+//     kDebug() << "Sbu: " << serviceBaseUrl << " PARAMETER: " << parameter;
     ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 
     if (!imageSource) {
@@ -179,7 +179,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         // using an invisible webkit
         //authHelper->start();
         authHelper->run();
-        kDebug() << "ran" << user;
+//         kDebug() << "ran" << user;
     } else {
         authHelper = m_authHelper[serviceBaseUrl];
 
@@ -192,7 +192,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
                 authorizationStatusUpdated(serviceBaseUrl, "Ok");
             }
         }
-        kDebug() << "recycled" << authHelper->serviceBaseUrl() << authHelper->user();
+//         kDebug() << "recycled" << authHelper->serviceBaseUrl() << authHelper->user();
     }
 
     if (requestType == TimelineSource::User) {
@@ -219,7 +219,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             if (user.isEmpty()) {
                 return false;
             }
-            kDebug() << authHelper->isAuthorized();
+//             kDebug() << authHelper->isAuthorized();
             source = new TimelineSource(serviceBaseUrl, requestType, authHelper, QStringList() << parameter, this);
             connect(source, SIGNAL(authorize(const QString&, const QString&, const QString&)),
                    authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
