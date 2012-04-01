@@ -23,7 +23,7 @@ target_link_libraries(plasma_engine_microblog
     ${QT_QTXML_LIBS}
     ${QT_QTNETWORK_LIBS}
     ${QCA2_LIBRARIES}
-
+    ${QJSON_LIBRARIES}
     ${QT_QTWEBKIT_LIBRARY}
     #${KDE4_KDEUI_LIBS}
     ${KDE4_KDEWEBKIT_LIBRARY}

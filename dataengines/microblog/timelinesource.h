@@ -135,6 +135,7 @@ private:
     void readStatus(QXmlStreamReader &xml);
     void readUser(QXmlStreamReader &xml, const QString &tagName = "user");
     void readDirectMessage(QXmlStreamReader &xml);
+    void parseJsonSearchResult(const QByteArray &data);
     void parseSearchResult(QXmlStreamReader &xml);
     void readSearchStatus(QXmlStreamReader &xml);
     void skipTag(QXmlStreamReader &xml, const QString &tagName);
