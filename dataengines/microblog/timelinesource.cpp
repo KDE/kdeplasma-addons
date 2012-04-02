@@ -150,8 +150,8 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
 //         m_serviceBaseUrl = KUrl("https://twitter.com/");
 //     }
 
-    //just create it to correctly initialize QCA and clean up when createSignature() returns
-    m_qcaInitializer = new QCA::Initializer(); // FIXME: move into qoautohelper?
+//     //just create it to correctly initialize QCA and clean up when createSignature() returns
+//     m_qcaInitializer = new QCA::Initializer(); // FIXME: move into qoautohelper?
 
 //     kDebug() << "authorized." << m_authHelper->serviceBaseUrl()<< m_authHelper->isAuthorized() << m_authHelper->accessToken();
     // set up the url
