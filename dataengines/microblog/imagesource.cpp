@@ -64,6 +64,7 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
     m_loadedPersons << who;
     //FIXME: since kio_http bombs the system with too many request put a temporary
     // arbitrary limit here, revert as soon as BUG 192625 is fixed
+    // Note: seems fixed.
     if (m_runningJobs < 500) {
         //if (who == "sebas") kDebug() << " 222 starting job" << who;
         m_runningJobs++;
@@ -111,7 +112,7 @@ void ImageSource::result(KJob *job)
         emit dataChanged();
         KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
         const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
-        m_imageCache->insertImage(cacheKey, img); // FIXME: enable
+        m_imageCache->insertImage(cacheKey, img);
     }
 
     m_jobs.remove(job);
