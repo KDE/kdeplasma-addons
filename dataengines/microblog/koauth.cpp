@@ -45,7 +45,7 @@
 #include <KDebug>
 #include <QtOAuth/QtOAuth>
 
-namespace OAuth {
+namespace KOAuth {
 
 // For twitter
 const QByteArray ConsumerKey = "22kfJkztvOqb8WfihEjdg";
@@ -375,12 +375,12 @@ QByteArray KOAuth::authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMetho
     return auth;
 }
 
-void KOAuth::sign(KIO::Job *job, const QString &url, OAuth::ParamMap params, OAuth::HttpMethod httpMethod)
+void KOAuth::sign(KIO::Job *job, const QString &url, ParamMap params, HttpMethod httpMethod)
 {
     signRequest(job, url, httpMethod, accessToken(), accessTokenSecret(), params);
 }
 
-QByteArray KOAuth::paramsToString(const OAuth::ParamMap &parameters, OAuth::ParsingMode mode)
+QByteArray KOAuth::paramsToString(const ParamMap &parameters, ParsingMode mode)
 {
     QByteArray middleString;
     QByteArray endString;
@@ -430,8 +430,8 @@ QByteArray KOAuth::paramsToString(const OAuth::ParamMap &parameters, OAuth::Pars
     return parametersString;
 }
 
-QByteArray KOAuth::createSignature(const QString &requestUrl, OAuth::HttpMethod method, const QByteArray &token,
-                           const QByteArray &tokenSecret, OAuth::ParamMap *params)
+QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method, const QByteArray &token,
+                           const QByteArray &tokenSecret, ParamMap *params)
 {
     //kDebug() << "creating signature";
     // create nonce
@@ -496,8 +496,8 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, OAuth::HttpMethod 
     return signature;
 }
 
-void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, OAuth::HttpMethod method, const QByteArray &token,
-                 const QByteArray &tokenSecret, const OAuth::ParamMap &params)
+void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod method, const QByteArray &token,
+                 const QByteArray &tokenSecret, const ParamMap &params)
 {
     QOAuth::ParamMap parameters = params;
 

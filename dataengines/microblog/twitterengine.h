@@ -26,7 +26,7 @@
 
 class ImageSource;
 class UserSource;
-namespace OAuth { class KOAuth; }
+namespace KOAuth { class KOAuth; }
 class KWebView;
 class KDialog;
 
@@ -88,7 +88,7 @@ class TwitterEngine : public Plasma::DataEngine
         static const QString userPrefix;
         ImageSource *m_imageSource;
 
-        QHash<QString, OAuth::KOAuth*> m_authHelper;
+        QHash<QString, KOAuth::KOAuth*> m_authHelper;
         QHash<QString, QString> m_serviceBaseUrl;
         //QStringList m_authorizeUrls;
 };

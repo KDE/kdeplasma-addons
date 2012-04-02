@@ -97,7 +97,7 @@ public:
         User
     };
 
-    TimelineSource(const QString &serviceUrl, RequestType requestType, OAuth::KOAuth *oauthHelper, const QStringList &parameters, QObject* parent);
+    TimelineSource(const QString &serviceUrl, RequestType requestType, KOAuth::KOAuth *oauthHelper, const QStringList &parameters, QObject* parent);
     ~TimelineSource();
 
     void setPassword(const QString &password);
@@ -107,8 +107,8 @@ public:
 
     QByteArray oauthToken() const;
     QByteArray oauthTokenSecret() const;
-    void setOAuthHelper(OAuth::KOAuth *authHelper);
-    OAuth::KOAuth* oAuthHelper();
+    void setOAuthHelper(KOAuth::KOAuth *authHelper);
+    KOAuth::KOAuth* oAuthHelper();
 
     Plasma::Service* createService();
     void startAuthorization(const QString &user, const QString &password);
@@ -150,9 +150,9 @@ private:
     Plasma::DataEngine::Data m_tempData;
     KIO::Job * m_job;
     QString m_id;
-    OAuth::ParamMap m_params;
+    KOAuth::ParamMap m_params;
 
-    OAuth::KOAuth *m_authHelper;
+    KOAuth::KOAuth *m_authHelper;
     QStringList m_parameters;
     QString m_user;
     QByteArray m_oauthTemp;

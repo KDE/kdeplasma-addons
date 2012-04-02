@@ -78,7 +78,7 @@ void TweetJob::start()
     }
     KIO::Job *job = KIO::http_post(m_url, data, KIO::HideProgressInfo);
 
-    OAuth::ParamMap params;
+    KOAuth::ParamMap params;
     params.insert("source", "kdemicroblog");
 
     {
@@ -96,7 +96,7 @@ void TweetJob::start()
             }
         }
     }
-    m_source->oAuthHelper()->sign(job, m_url.pathOrUrl(), params, OAuth::POST);
+    m_source->oAuthHelper()->sign(job, m_url.pathOrUrl(), params, KOAuth::POST);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
@@ -130,7 +130,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
     return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
 }
 
-TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, OAuth::KOAuth *oauthHelper, const QStringList &parameters, QObject* parent)
+TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, KOAuth::KOAuth *oauthHelper, const QStringList &parameters, QObject* parent)
     : Plasma::DataContainer(parent),
       m_serviceBaseUrl(serviceUrl),
       m_requestType(requestType),
@@ -208,12 +208,12 @@ void TimelineSource::startAuthorization(const QString& user, const QString& pass
     emit authorize(m_serviceBaseUrl.pathOrUrl(), user, password);
 }
 
-void TimelineSource::setOAuthHelper(OAuth::KOAuth* authHelper)
+void TimelineSource::setOAuthHelper(KOAuth::KOAuth* authHelper)
 {
     m_authHelper = authHelper;
 }
 
-OAuth::KOAuth* TimelineSource::oAuthHelper()
+KOAuth::KOAuth* TimelineSource::oAuthHelper()
 {
     return m_authHelper;
 }

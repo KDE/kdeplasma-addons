@@ -24,7 +24,7 @@
 
 #include <KUrl>
 
-namespace OAuth {
+namespace KOAuth {
 class KOAuthWebHelperPrivate;
 
 class KOAuthWebHelper : public QObject
