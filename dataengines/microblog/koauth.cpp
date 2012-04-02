@@ -42,18 +42,11 @@
 
 #include "koauth.h"
 #include "koauthwebhelper.h"
+
 #include <KDebug>
 #include <QtOAuth/QtOAuth>
 
 namespace KOAuth {
-
-// For twitter
-const QByteArray ConsumerKey = "22kfJkztvOqb8WfihEjdg";
-const QByteArray ConsumerSecret = "RpGc0q0aGl0jMkeqMIawUpGyDkJ3DNBczFUyIQMR698";
-
-// identi.ca
-//const QByteArray ConsumerKey = "47a4650a6bd4026b1c4d55d641acdb64";
-//const QByteArray ConsumerSecret = "49208b0a87832f4279f9d3742c623910";
 
 class KOAuthPrivate {
 
@@ -165,6 +158,7 @@ void KOAuth::run()
 
 void KOAuth::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
 {
+//     kDebug() << serviceBaseUrl << user << password;
     if (d->busy || isAuthorized()) {
         return;
     }
@@ -273,7 +267,6 @@ QString KOAuth::errorMessage(int e) {
 
 void KOAuth::accessTokenFromService()
 {
-//     kDebug() << "start ... accessToken. TODO insert verifier" << d->verifier;
     QOAuth::ParamMap params = QOAuth::ParamMap();
     params.insert("oauth_callback", "oob");
     if (d->serviceBaseUrl.toLower().contains("identi.ca")) {
@@ -282,19 +275,16 @@ void KOAuth::accessTokenFromService()
     QOAuth::ParamMap reply = d->interface->accessToken(d->accessTokenUrl, QOAuth::GET,
                                                        d->requestToken, d->requestTokenSecret,
                                                        QOAuth::HMAC_SHA1, params);
-//      kDebug() << "end ...... accessToken";
-//     kDebug() << " MAP: " << params;
+
     QString e;
-    if ( d->interface->error() == QOAuth::NoError ) {
+    if (d->interface->error() == QOAuth::NoError) {
         d->accessToken = reply.value(QOAuth::tokenParameterName());
         d->accessTokenSecret = reply.value(QOAuth::tokenSecretParameterName());
 
-        //QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
-//         kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
-        //kDebug() << "Surf to: " << auth_url;
+        //kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
         emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
         d->busy = false;
-        KSharedConfigPtr ptr = KSharedConfig::openConfig("oauthrc");
+        KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc");
         KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
         config.writeEntry("accessToken", d->accessToken);
         config.writeEntry("accessTokenSecret", d->accessTokenSecret);
@@ -342,7 +332,7 @@ void KOAuth::updateState()
 
 
     if (!d->user.isEmpty() && !d->serviceBaseUrl.isEmpty()) {
-        KSharedConfigPtr ptr = KSharedConfig::openConfig("oauthrc");
+        KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc");
         KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
         d->accessToken = config.readEntry("accessToken", QByteArray());
         d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
@@ -452,7 +442,7 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
     // prepare percent-encoded request URL
     QByteArray percentRequestUrl = requestUrl.toAscii().toPercentEncoding();
     // prepare percent-encoded parameters string
-    params->insert("oauth_consumer_key", ConsumerKey);
+    params->insert("oauth_consumer_key", d->consumerKey);
     //params->insert("oauth_callback", "oob");
     params->insert("oauth_nonce", nonce);
     params->insert("oauth_signature_method", "HMAC-SHA1");
@@ -481,7 +471,7 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
         return QByteArray();
     }
     // create key for HMAC-SHA1 hashing
-    QByteArray key(ConsumerSecret + "&" + tokenSecret);
+    QByteArray key(d->consumerSecret + "&" + tokenSecret);
 
     // create HMAC-SHA1 digest in Base64
     QCA::MessageAuthenticationCode hmac("hmac(sha1)", QCA::SymmetricKey(key));
