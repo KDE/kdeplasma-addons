@@ -32,7 +32,7 @@ namespace KIO {
 }
 
 
-namespace OAuth {
+namespace KOAuth {
     // OAuth methods
 enum HttpMethod { POST, GET };
 enum ParsingMode {
@@ -90,10 +90,10 @@ private:
     void accessTokenFromService();
     QString errorMessage(int e);
 
-    QByteArray paramsToString(const QOAuth::ParamMap &parameters, OAuth::ParsingMode mode);
-    QByteArray createSignature(const QString &requestUrl, OAuth::HttpMethod method, const QByteArray &token,
+    QByteArray paramsToString(const QOAuth::ParamMap &parameters, ParsingMode mode);
+    QByteArray createSignature(const QString &requestUrl, HttpMethod method, const QByteArray &token,
                                const QByteArray &tokenSecret, QOAuth::ParamMap *params);
-    void signRequest(KIO::Job *job, const QString &requestUrl, OAuth::HttpMethod method, const QByteArray &token,
+    void signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod method, const QByteArray &token,
                          const QByteArray &tokenSecret, const QOAuth::ParamMap &params);
 
     KOAuthPrivate* d;

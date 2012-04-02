@@ -42,7 +42,7 @@
 #include "koauthwebhelper.h"
 #include <KDebug>
 
-namespace OAuth {
+namespace KOAuth {
 
 class KOAuthWebHelperPrivate {
 
@@ -165,7 +165,6 @@ void KOAuthWebHelper::loadFinished()
         // in turn will produce the accessToken and accessTokenSecret pair in
         // the next, final authorization step.
         emit statusUpdated(d->serviceBaseUrl, "Waiting", "App Authorization needed");
-        bool showDialog = false; // be bold, do not do any user interaction.
 
         // we have to log in, let's see if we can do that automatically...
 
