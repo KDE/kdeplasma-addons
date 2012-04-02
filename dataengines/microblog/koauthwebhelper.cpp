@@ -115,7 +115,7 @@ void KOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString 
 
         d->webView = new KWebView(d->dialog);
         d->dialog->setMainWidget(d->webView);
-        //d->dialog->show();
+//         d->dialog->show(); // remove
         connect(d->webView->page(), SIGNAL(loadFinished(bool)), SLOT(loadFinished()));
     }
     d->authorizeUrls[authorizeUrl] = d->serviceBaseUrl;
@@ -173,6 +173,7 @@ void KOAuthWebHelper::loadFinished()
         // - the user is not logged in, in that case the user/password have to be
         //   be filled in. We happen to know that, as it's the argument to the "auth"
         //   operation in the dataengine.
+//         kDebug() << "logging in " << d->user << d->password;
         if (!isIdentica()) {
             // Try to fill in user/pass into the form
             //kDebug() << "twitter.com hacks JavaScript hacks";

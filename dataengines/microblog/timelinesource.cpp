@@ -121,7 +121,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
     } else if (operation == "refresh") {
         m_source->update(true);
     } else if (operation == "auth") {
-        m_source->setPassword(parameters.value("password").toString());
+        //m_source->setPassword(parameters.value("password").toString());
         const QString user = parameters.value("user").toString();
         const QString password = parameters.value("password").toString();
         m_source->startAuthorization(user, password);
