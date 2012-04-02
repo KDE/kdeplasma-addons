@@ -80,6 +80,8 @@ public:
 
     QString verifier;
 
+    QCA::Initializer *qcaInitializer;
+
     KOAuthWebHelper *w;
 };
 
@@ -129,8 +131,11 @@ QString KOAuth::password() const
 
 void KOAuth::init()
 {
+    //just create it to correctly initialize QCA and clean up when createSignature() returns
+
     if (!d) {
         d = new KOAuthPrivate;
+        d->qcaInitializer = new QCA::Initializer(); // FIXME: move into qoautohelper?
 #ifndef NO_KIO
         KIO::AccessManager *access = new KIO::AccessManager(this);
         d->interface->setNetworkAccessManager(access);
@@ -346,6 +351,8 @@ void KOAuth::updateState()
 
 KOAuth::~KOAuth()
 {
+    delete d->w;
+    delete d->qcaInitializer;
     delete d;
 }
 
@@ -464,8 +471,6 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
     signatureBaseString.append(percentRequestUrl + "&");
     signatureBaseString.append(percentParametersString);
 
-//     kDebug() << "SIG BASE STRING: " << signatureBaseString;
-
     if (!QCA::isSupported("hmac(sha1)")) {
         kError() << "Hashing algo not supported, update your QCA";
         return QByteArray();
@@ -502,9 +507,7 @@ void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod me
     }
 
     QByteArray authorizationHeader = paramsToString(parameters, ParseForHeaderArguments);
-
     job->addMetaData("customHTTPHeader", QByteArray("Authorization: " + authorizationHeader));
-    //kDebug() << "job thign...." << authorizationHeader;
 }
 
 
