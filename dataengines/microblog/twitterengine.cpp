@@ -149,7 +149,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         serviceBaseUrl = "https://twitter.com/";
         kWarning() << "  Using " << serviceBaseUrl << " instead.";
     }
-    kDebug() << "user / Sbu: " << user << serviceBaseUrl << " PARAMETER: " << parameter;
+//     kDebug() << "user / Sbu: " << user << serviceBaseUrl << " PARAMETER: " << parameter;
     ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 
     if (!imageSource) {
@@ -179,7 +179,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         // using an invisible webkit
         //authHelper->start();
         authHelper->run();
-        kDebug() << "ran" << user;
+//         kDebug() << "ran" << user;
     } else {
         authHelper = m_authHelper[serviceBaseUrl];
 
@@ -192,7 +192,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
                 authorizationStatusUpdated(serviceBaseUrl, "Ok");
             }
         }
-        kDebug() << "recycled" << authHelper->serviceBaseUrl() << authHelper->user();
+//         kDebug() << "recycled" << authHelper->serviceBaseUrl() << authHelper->user();
     }
 
     if (requestType == TimelineSource::User) {
