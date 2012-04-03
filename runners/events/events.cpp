@@ -273,7 +273,7 @@ QueryMatch EventsRunner::createQueryMatch( const QString & definition, MatchType
         match.setId( eventKeyword + '|' + definition );
     } else if ( type == CreateTodo ) {
         if ( range.isPoint() )
-            match.setText( i18nc( "%1 is the summary of todo, %2 is the start time of todo", "Create todo \"%1\" due to %2", data["summary"].toString(), dateTimeToString( range.finish ) ) );
+            match.setText( i18nc( "%1 is the summary of todo, %2 is the due time of todo", "Create todo \"%1\" due to %2", data["summary"].toString(), dateTimeToString( range.finish ) ) );
         else
             match.setText( i18nc( "%1 is the summary of todo, %2 is the start time of todo, %3 is the due time of todo", "Create todo \"%1\" due to %3 starting at %2", data["summary"].toString(), dateTimeToString( range.start ), dateTimeToString( range.finish ) ) );
 
