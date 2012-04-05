@@ -213,9 +213,7 @@ void LeaveNote::slotSend()
         else
         {
             // TODO fine grain for errors after start of KNotes
-            QProcess knotes(this);
-            knotes.startDetached("knotes", QStringList() << "--skip-note");
-            knotes.waitForStarted();
+            QProcess::startDetached("knotes", QStringList() << "--skip-note");
 
             /* wait for the dbus interface to settle */
             mTimer->singleShot(10000, this, SLOT(slotWaitForKNotes()));
