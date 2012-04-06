@@ -346,14 +346,9 @@ void TimelineSource::parseJson(const QByteArray &data)
     const QVariantList resultsList = parser.parse(data).toList();
 
     kDebug() << "resultsList.count() :: " << resultsList.count();
-    //QVariantMap res = resultsMap["results"].toMap();
     foreach (const QVariant &v, resultsList) {
         const QVariantMap &tweet = v.toMap();
-        //kDebug() << "QVariantMap" << v.toMap();
         kDebug() << " ################################# " << endl;
-        //["results"].toMap()
-        //kDebug() << "---------" << w;
-        //QVariantMap r = w.toMap();
         foreach (const QVariant &k, tweet.keys()) {
             const QString _u = k.toString();
             kDebug() << " tweet k : " << _u;
@@ -367,12 +362,11 @@ void TimelineSource::parseJson(const QByteArray &data)
         m_tempData["Id"] = m_id;
         m_tempData["Status"] = tweet["text"];
         m_tempData["Source"] = tweet["source"];
+        m_tempData["IsFavorite"] = tweet["favorited"];
 
         parseJsonUser(tweet["user"]);
 
-        // not supported in search
-        m_tempData["IsFavorite"] = false;
-        m_tempData["ImageUrl"] = tweet["profile_image_url"];
+        //m_tempData["ImageUrl"] = tweet["profile_image_url"];
         if (m_tempData.contains("User")) {
             KUrl url(tweet["profile_image_url"].toString());
             m_imageSource->loadImage(m_tempData["User"].toString(), url);
