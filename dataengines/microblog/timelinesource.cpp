@@ -63,7 +63,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
             m_url = KUrl("http://search.twitter.com/search.json?rpp=5&include_entities=true&show_user=true&result_type=mixed&q=" + query);
         } else {
             //http://identi.ca/api/search.json?callback=foo&q=identica
-            m_url = KUrl("http://identi.ca/api/search.json?q=" + query);
+            m_url = KUrl("http://identi.ca/api/search.json?rpp=1&include_entities=true&show_user=true&result_type=mixed&q=" + query);
         }
         m_needsAuthorization = false;
         kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
@@ -73,17 +73,17 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         m_needsAuthorization = false;
         break;
     case DirectMessages:
-        m_url = KUrl(m_serviceBaseUrl, "direct_messages.xml");
+        m_url = KUrl(m_serviceBaseUrl, "direct_messages.json");
         break;
     case Replies:
-        m_url = KUrl(m_serviceBaseUrl, "statuses/replies.xml");
+        m_url = KUrl(m_serviceBaseUrl, "statuses/replies.json");
         break;
     case TimelineWithFriends:
-        m_url = KUrl(m_serviceBaseUrl, "statuses/friends_timeline.xml");
+        m_url = KUrl(m_serviceBaseUrl, "statuses/friends_timeline.json");
         break;
     case Timeline:
     default:
-        m_url = KUrl(m_serviceBaseUrl, "statuses/user_timeline.xml");
+        m_url = KUrl(m_serviceBaseUrl, "statuses/user_timeline.json");
         break;
     }
     //m_params.insert("count", QString("100").toLocal8Bit());
@@ -213,7 +213,8 @@ void TimelineSource::result(KJob *job)
                 parseJsonSearchResult(m_xml);
             }
         } else {
-            parse(reader);
+            //parse(reader);
+            parseJson(m_xml);
         }
     }
 
@@ -333,20 +334,112 @@ void TimelineSource::readStatus(QXmlStreamReader &xml)
     m_tempData.clear();
 }
 
+
+// foreach (QVariant plugin, result["plug-ins"].toList()) {
+//   qDebug() << "\t-" << plugin.toString();
+// }
+void TimelineSource::parseJson(const QByteArray &data)
+{
+    //kDebug() << "JSON: " << data;
+    kDebug() << "JSON TIMELINE PARSER ONLINE";
+    QJson::Parser parser;
+    const QVariantList resultsList = parser.parse(data).toList();
+
+    kDebug() << "resultsList.count() :: " << resultsList.count();
+    //QVariantMap res = resultsMap["results"].toMap();
+    foreach (const QVariant &v, resultsList) {
+        const QVariantMap tweet = v.toMap();
+        kDebug() << "QVariantMap" << v.toMap();
+        kDebug() << " ################################# " << endl;
+        //["results"].toMap()
+        //kDebug() << "---------" << w;
+        //QVariantMap r = w.toMap();
+        m_tempData["Date"] = tweet["created_at"];
+        m_id = tweet["id"].toString();
+        m_tempData["Id"] = m_id;
+        m_tempData["Status"] = tweet["text"];
+        m_tempData["Source"] = tweet["source"];
+
+        parseJsonUser(tweet["user"]);
+
+        // not supported in search
+        m_tempData["IsFavorite"] = false;
+        m_tempData["ImageUrl"] = tweet["profile_image_url"];
+        if (m_tempData.contains("User")) {
+            KUrl url(tweet["profile_image_url"].toString());
+            m_imageSource->loadImage(m_tempData["User"].toString(), url);
+        }
+
+//                 foreach (const QVariant &x, w.toMap().keys()) {
+//                     //kDebug() << "           prop: " << x;
+// //                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
+//
+//                 }
+
+        if (!m_id.isEmpty()) {
+            QVariant v;
+            v.setValue(m_tempData);
+            //foreach (const QString &k, m_tempData.keys()) {
+                //kDebug() << "setting data" << m_id << k << m_tempData[k];
+            //}
+            setData(m_id, v);
+            m_id.clear();
+        }
+    }
+
+}
+
+void TimelineSource::parseJsonUser(const QVariant& data)
+{
+    QVariantMap user = data.toMap();
+    foreach (QVariant k, user.keys()) {
+        kDebug() << "   user k : " << k; 
+    }
+
+    // compatibility with old API
+    m_tempData["User"] = user["screen_name"];
+    m_tempData["ImageUrl"] = user["profile_image_url"].toString();
+    kDebug() << " imageUrl: " << m_tempData["ImageUrl"];
+    if (m_tempData.contains("ImageUrl")) {
+        KUrl url(m_tempData["ImageUrl"].toString());
+        m_imageSource->loadImage(m_tempData["User"].toString(), url);
+    }
+    m_tempData["Url"] = user["url"];
+//             if (tag == "screen_name") {
+//                 m_tempData["User"] = cdata;
+//                 if (m_tempData.contains("ImageUrl")) {
+//                     KUrl url(m_tempData["ImageUrl"].toString());
+//                     m_imageSource->loadImage(cdata, url);
+//                 }
+//             } else if (tag == "profile_image_url") {
+//                 m_tempData["ImageUrl"] = cdata;
+//                 if (m_tempData.contains("User")) {
+//                     KUrl url(cdata);
+//                     m_imageSource->loadImage(m_tempData["User"].toString(), url);
+//                 }
+//             } else if (tag ==  "url") {
+//                 m_tempData["Url"] = cdata;
+//             }
+    
+    kDebug() << "User done";
+}
+
+
 void TimelineSource::parseJsonSearchResult(const QByteArray &data)
 {
     //kDebug() << "JSON: " << data;
-//     kDebug() << "JSON PARSER ONLINE";
+    kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
+    kDebug() << "resultsMap.keys() :: " << resultsMap.count();
     //QVariantMap res = resultsMap["results"].toMap();
     foreach (QVariant v, resultsMap.keys()) {
-        //kDebug() << "QVariantMap" << v.toString() << resultsMap[v.toString()];
+        kDebug() << "QVariantMap" << v.toString() << resultsMap[v.toString()];
         if (v.toString() == "results") {
-            //kDebug() << " ################################# " << endl;
+            kDebug() << " ################################# " << endl;
                 //["results"].toMap()
             foreach (const QVariant &w, resultsMap[v.toString()].toList()) {
-                //kDebug() << "---------" << w;
+                kDebug() << "---------" << w;
                 QVariantMap r = w.toMap();
                 m_tempData["Date"] = r["created_at"];
                 m_id = r["id"].toString();
@@ -367,7 +460,7 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
 //                 foreach (const QVariant &x, w.toMap().keys()) {
 //                     //kDebug() << "           prop: " << x;
 // //                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
-// 
+//
 //                 }
 
                 if (!m_id.isEmpty()) {
@@ -386,7 +479,7 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
     }
 
 //     const QString& match = "duckduckgo";
-// 
+//
 //     if (match == "define") {
 //         //dictionary mode
 //         kDebug() << "Heading:" << resultsMap.value("Heading");
@@ -398,10 +491,10 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
 //         kDebug() << "Redirect:" << resultsMap.value("Redirect");
 //     } else if (match == "duckduckgo") {
 //         QList<QVariant> related = resultsMap.value("RelatedTopics").toList();
-// 
+//
 //         foreach (const QVariant& variant, related) {
 //             QVariantMap submap = variant.toMap();
-// 
+//
 //             kDebug() << "FirstURL:" << submap.value("FirstURL");
 //             kDebug() << "Text:" << submap.value("Text");
 //             kDebug() << "Icon:" << submap.value("Icon").toMap().value("URL");
