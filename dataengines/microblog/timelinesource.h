@@ -1,6 +1,7 @@
 /*
  *   Copyright 2008 Aaron Seigo <aseigo@kde.org>
  *   Copyright (C) 2009 Ryan P. Bitanga <ryan.bitanga@gmail.com>
+ *   Copyright 2012 Sebastian Kügler <sebas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -46,40 +47,6 @@ namespace QCA
 
 class TimelineSource;
 class ImageSource;
-
-class TweetJob : public Plasma::ServiceJob
-{
-    Q_OBJECT
-
-public:
-    TweetJob(TimelineSource *source, const QString &operation, const QMap<QString, QVariant> &parameters, QObject *parent = 0);
-    void start();
-
-private slots:
-    void result(KJob *job);
-
-private:
-    KUrl m_url;
-    QMap<QString, QVariant> m_parameters;
-    TimelineSource *m_source;
-};
-
-class TimelineService : public Plasma::Service
-{
-    Q_OBJECT
-
-public:
-    TimelineService(TimelineSource *parent);
-
-//Q_SIGNALS:
-    //authorize(const QString &password);
-
-protected:
-    Plasma::ServiceJob* createJob(const QString &operation, QMap<QString, QVariant> &parameters);
-
-private:
-    TimelineSource *m_source;
-};
 
 class TimelineSource : public Plasma::DataContainer
 {
