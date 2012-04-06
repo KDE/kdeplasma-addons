@@ -129,6 +129,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
 TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, KOAuth::KOAuth *oauthHelper, const QStringList &parameters, QObject* parent)
     : Plasma::DataContainer(parent),
       m_serviceBaseUrl(serviceUrl),
+      m_needsAuthorization(true),
       m_requestType(requestType),
       m_job(0),
       m_authHelper(oauthHelper),
@@ -136,20 +137,6 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
       m_authJob(0),
       m_qcaInitializer(0)
 {
-//     //who should be something like user@http://twitter.com, if there isn't any @, http://twitter.com will be the default
-//     QStringList account = who.split('@');
-//     if (account.count() == 2) {
-//         m_user = account.at(0);
-//         m_serviceBaseUrl = KUrl(account.at(1));
-//     } else {
-//         kWarning() << "serviceBaseUrl unclear. forcing twitter.com";
-//         m_serviceBaseUrl = KUrl("https://twitter.com/");
-//     }
-
-//     //just create it to correctly initialize QCA and clean up when createSignature() returns
-//     m_qcaInitializer = new QCA::Initializer(); // FIXME: move into qoautohelper?
-
-//     kDebug() << "authorized." << m_authHelper->serviceBaseUrl()<< m_authHelper->isAuthorized() << m_authHelper->accessToken();
     // set up the url
     QString query;
     switch (m_requestType) {
@@ -162,11 +149,18 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
         query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
         // FIXME: handle service-specific search urls
-        m_url = KUrl("http://search.twitter.com/search.json?rpp=5&include_entities=true&show_user=true&result_type=mixed&q=" + query);
-        //kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
+        if (m_serviceBaseUrl.host().contains("twitter.com")) {
+            m_url = KUrl("http://search.twitter.com/search.json?rpp=5&include_entities=true&show_user=true&result_type=mixed&q=" + query);
+        } else {
+            //http://identi.ca/api/search.json?callback=foo&q=identica
+            m_url = KUrl("http://identi.ca/api/search.json?q=" + query);
+        }
+        m_needsAuthorization = false;
+        kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
    case Profile:
         m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.xml").arg(parameters.at(0)));
+        m_needsAuthorization = false;
         break;
     case DirectMessages:
         m_url = KUrl(m_serviceBaseUrl, "direct_messages.xml");
@@ -185,15 +179,21 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     //m_params.insert("count", QString("100").toLocal8Bit());
 
 //     kDebug() << "authorized." << m_authHelper->isAuthorized();
-    if (m_authHelper->isAuthorized()) {
+    if (!m_needsAuthorization || m_authHelper->isAuthorized()) {
         update();
     }
-    connect(m_authHelper, SIGNAL(authorized()), SLOT(update()));
+    if (m_needsAuthorization) {
+        connect(m_authHelper, SIGNAL(authorized()), SLOT(update()));
+    }
 }
 
 TimelineSource::~TimelineSource()
 {
-    delete m_qcaInitializer;
+}
+
+bool TimelineSource::needsAuthorization() const
+{
+    return m_needsAuthorization;
 }
 
 Plasma::Service* TimelineSource::createService()
@@ -259,7 +259,9 @@ void TimelineSource::update(bool forcedUpdate)
 
     // Create a KIO job to get the data from the web service
     m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
-    m_authHelper->sign(m_job, m_url.pathOrUrl(), m_params);
+    if (m_needsAuthorization) {
+        m_authHelper->sign(m_job, m_url.pathOrUrl(), m_params);
+    }
 //     kDebug() << "signed" << m_url.pathOrUrl();
 
     connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)),
@@ -293,7 +295,7 @@ void TimelineSource::result(KJob *job)
         // TODO: error handling
     } else {
         QXmlStreamReader reader(m_xml);
-        kDebug() << "Timeline job returned: " << tj->url() << data().count();// << m_xml;
+        kDebug() << "Timeline job returned: " << tj->url() << m_xml.count() << m_xml; 
         if (m_requestType == TimelineSource::SearchTimeline) {
             if (tj->url().pathOrUrl().contains("atom")) {
                 parseSearchResult(reader);

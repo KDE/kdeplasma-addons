@@ -104,6 +104,7 @@ public:
     QString account() const;
     QString password() const;
     KUrl serviceBaseUrl() const;
+    bool needsAuthorization() const;
 
     QByteArray oauthToken() const;
     QByteArray oauthTokenSecret() const;
@@ -144,6 +145,7 @@ private:
 
     KUrl m_url;
     KUrl m_serviceBaseUrl;
+    bool m_needsAuthorization;
     RequestType m_requestType;
     ImageSource *m_imageSource;
     QByteArray m_xml;
