@@ -348,20 +348,20 @@ void TimelineSource::parseJson(const QByteArray &data)
     kDebug() << "resultsList.count() :: " << resultsList.count();
     //QVariantMap res = resultsMap["results"].toMap();
     foreach (const QVariant &v, resultsList) {
-        const QVariantMap tweet = v.toMap();
-        kDebug() << "QVariantMap" << v.toMap();
+        const QVariantMap &tweet = v.toMap();
+        //kDebug() << "QVariantMap" << v.toMap();
         kDebug() << " ################################# " << endl;
         //["results"].toMap()
         //kDebug() << "---------" << w;
         //QVariantMap r = w.toMap();
-        foreach (QVariant k, tweet.keys()) {
-            kDebug() << " tweet k : " << k;
-            if (k.toString() != "user") {
-                m_tempData[k.toString()] = tweet[k.toString()];
+        foreach (const QVariant &k, tweet.keys()) {
+            const QString _u = k.toString();
+            kDebug() << " tweet k : " << _u;
+            if (_u != "user") {
+                m_tempData[_u] = tweet[_u];
             }
         }
 
-        
         m_tempData["Date"] = tweet["created_at"];
         m_id = tweet["id"].toString();
         m_tempData["Id"] = m_id;
@@ -399,8 +399,8 @@ void TimelineSource::parseJson(const QByteArray &data)
 
 void TimelineSource::parseJsonUser(const QVariant& data)
 {
-    QVariantMap user = data.toMap();
-    foreach (QVariant k, user.keys()) {
+    const QVariantMap &user = data.toMap();
+    foreach (const QVariant &k, user.keys()) {
         kDebug() << "   user k : " << k;
         //m_tempData[k.toString()] = user[k.toString()];
     }
