@@ -9,6 +9,8 @@ set(twitter_engine_SRCS
     imagesource.cpp
     usersource.cpp
     timelinesource.cpp
+    timelineservice.cpp
+    tweetjob.cpp
     twitterengine.cpp
     koauth.cpp
     koauthwebhelper.cpp

@@ -20,6 +20,8 @@
  */
 
 #include "timelinesource.h"
+#include "timelineservice.h"
+#include "tweetjob.h"
 
 #include <QXmlStreamReader>
 
@@ -33,98 +35,6 @@
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
-
-TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<QString, QVariant> &parameters, QObject *parent)
-    : Plasma::ServiceJob(source->account(), operation, parameters, parent),
-      m_url(source->serviceBaseUrl()),
-      m_parameters(parameters),
-      m_source(source)
-{
-    if (operation == "statuses/retweet" ||
-        operation == "favorites/create" ||
-        operation == "favorites/destroy") {
-        m_url.setPath(m_url.path()+QString("%1/%2.xml").arg(operation).arg(parameters.value("id").toString()));
-        kDebug() << "Operation" << operation << m_url;
-    } else if (operation == "update") {
-        m_url.setPath(m_url.path()+QString("statuses/%1.xml").arg(operation));
-        kDebug() << "Updating status" << m_url;
-
-    } else {
-        m_url.setPath(m_url.path()+operation+".xml");
-    }
-}
-
-void TweetJob::start()
-{
-    QByteArray data;
-
-    data = "source=kdemicroblog";
-    {
-        QMapIterator<QString, QVariant> i(m_parameters);
-        while (i.hasNext()) {
-            i.next();
-            if (!i.value().toString().isEmpty()) {
-                if (i.key() == "status") {
-                    data = data.append("&status=" + i.value().toString().toUtf8().toPercentEncoding());
-                } else {
-                    data = data.append(QString("&"+i.key()+"="+i.value().toString()).toLatin1());
-                }
-            }
-        }
-    }
-    KIO::Job *job = KIO::http_post(m_url, data, KIO::HideProgressInfo);
-
-    KOAuth::ParamMap params;
-    params.insert("source", "kdemicroblog");
-
-    {
-        QMapIterator<QString, QVariant> i(m_parameters);
-        while (i.hasNext()) {
-            i.next();
-            if (!i.value().toString().isEmpty()) {
-                if (i.key() == "status") {
-                    params.insert("status", i.value().toString().toUtf8().toPercentEncoding());
-                    data = data.append("&status=" + i.value().toString().toUtf8().toPercentEncoding());
-                } else {
-                    params.insert(i.key().toLatin1(), i.value().toString().toLatin1());
-                    data = data.append(QString("&"+i.key()+"="+i.value().toString()).toLatin1());
-                }
-            }
-        }
-    }
-    m_source->oAuthHelper()->sign(job, m_url.pathOrUrl(), params, KOAuth::POST);
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
-}
-
-void TweetJob::result(KJob *job)
-{
-    setError(job->error());
-    setErrorText(job->errorText());
-    setResult(!job->error());
-}
-
-TimelineService::TimelineService(TimelineSource *parent)
-    : Plasma::Service(parent),
-      m_source(parent)
-{
-    setName("tweet");
-}
-
-Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
-{
-    if (operation == "update" || operation == "statuses/retweet" || operation == "favorites/create" || operation == "favorites/destroy") {
-        return new TweetJob(m_source, operation, parameters);
-    } else if (operation == "refresh") {
-        m_source->update(true);
-    } else if (operation == "auth") {
-        //m_source->setPassword(parameters.value("password").toString());
-        const QString user = parameters.value("user").toString();
-        const QString password = parameters.value("password").toString();
-        m_source->startAuthorization(user, password);
-    }
-
-    return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
-}
 
 TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, KOAuth::KOAuth *oauthHelper, const QStringList &parameters, QObject* parent)
     : Plasma::DataContainer(parent),
@@ -295,7 +205,7 @@ void TimelineSource::result(KJob *job)
         // TODO: error handling
     } else {
         QXmlStreamReader reader(m_xml);
-        kDebug() << "Timeline job returned: " << tj->url() << m_xml.count() << m_xml; 
+        //kDebug() << "Timeline job returned: " << tj->url() << m_xml.count() << m_xml; 
         if (m_requestType == TimelineSource::SearchTimeline) {
             if (tj->url().pathOrUrl().contains("atom")) {
                 parseSearchResult(reader);
