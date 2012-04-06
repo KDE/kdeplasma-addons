@@ -354,6 +354,14 @@ void TimelineSource::parseJson(const QByteArray &data)
         //["results"].toMap()
         //kDebug() << "---------" << w;
         //QVariantMap r = w.toMap();
+        foreach (QVariant k, tweet.keys()) {
+            kDebug() << " tweet k : " << k;
+            if (k.toString() != "user") {
+                m_tempData[k.toString()] = tweet[k.toString()];
+            }
+        }
+
+        
         m_tempData["Date"] = tweet["created_at"];
         m_id = tweet["id"].toString();
         m_tempData["Id"] = m_id;
@@ -393,7 +401,8 @@ void TimelineSource::parseJsonUser(const QVariant& data)
 {
     QVariantMap user = data.toMap();
     foreach (QVariant k, user.keys()) {
-        kDebug() << "   user k : " << k; 
+        kDebug() << "   user k : " << k;
+        //m_tempData[k.toString()] = user[k.toString()];
     }
 
     // compatibility with old API
@@ -405,22 +414,7 @@ void TimelineSource::parseJsonUser(const QVariant& data)
         m_imageSource->loadImage(m_tempData["User"].toString(), url);
     }
     m_tempData["Url"] = user["url"];
-//             if (tag == "screen_name") {
-//                 m_tempData["User"] = cdata;
-//                 if (m_tempData.contains("ImageUrl")) {
-//                     KUrl url(m_tempData["ImageUrl"].toString());
-//                     m_imageSource->loadImage(cdata, url);
-//                 }
-//             } else if (tag == "profile_image_url") {
-//                 m_tempData["ImageUrl"] = cdata;
-//                 if (m_tempData.contains("User")) {
-//                     KUrl url(cdata);
-//                     m_imageSource->loadImage(m_tempData["User"].toString(), url);
-//                 }
-//             } else if (tag ==  "url") {
-//                 m_tempData["Url"] = cdata;
-//             }
-    
+
     kDebug() << "User done";
 }
 
