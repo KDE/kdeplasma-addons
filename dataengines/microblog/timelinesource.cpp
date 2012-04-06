@@ -22,7 +22,6 @@
 #include "timelinesource.h"
 
 #include <QXmlStreamReader>
-#include <QtCrypto/QtCrypto>
 
 #include <qjson/parser.h>
 
@@ -34,9 +33,6 @@
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
-//const QString TimelineSource::AccessTokenUrl = "https://api.twitter.com/oauth/access_token";
-const QString TimelineSource::AccessTokenUrl = "https://identi.ca/api/oauth/access_token";
-//const QString TimelineSource::AppName = "Plasma";
 
 TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<QString, QVariant> &parameters, QObject *parent)
     : Plasma::ServiceJob(source->account(), operation, parameters, parent),
@@ -165,6 +161,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         }
         //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
         query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
+        // FIXME: handle service-specific search urls
         m_url = KUrl("http://search.twitter.com/search.json?rpp=5&include_entities=true&show_user=true&result_type=mixed&q=" + query);
         //kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
@@ -185,6 +182,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         m_url = KUrl(m_serviceBaseUrl, "statuses/user_timeline.xml");
         break;
     }
+    //m_params.insert("count", QString("100").toLocal8Bit());
 
 //     kDebug() << "authorized." << m_authHelper->isAuthorized();
     if (m_authHelper->isAuthorized()) {
@@ -295,8 +293,8 @@ void TimelineSource::result(KJob *job)
         // TODO: error handling
     } else {
         QXmlStreamReader reader(m_xml);
+        kDebug() << "Timeline job returned: " << tj->url() << data().count();// << m_xml;
         if (m_requestType == TimelineSource::SearchTimeline) {
-            //kDebug() << "SearchTimeline job returned: " << tj->url() << data().count();// << m_xml;
             if (tj->url().pathOrUrl().contains("atom")) {
                 parseSearchResult(reader);
             } else {
