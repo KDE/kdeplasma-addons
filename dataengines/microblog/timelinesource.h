@@ -31,7 +31,7 @@
 #include <Plasma/ServiceJob>
 
 // forward declarations
-class QXmlStreamReader;
+//class QXmlStreamReader;
 
 class KJob;
 
@@ -99,16 +99,16 @@ private slots:
     void authFinished(KJob*);
 
 private:
-    void parse(QXmlStreamReader &xml);
-    void readStatus(QXmlStreamReader &xml);
-    void readUser(QXmlStreamReader &xml, const QString &tagName = "user");
-    void readDirectMessage(QXmlStreamReader &xml);
+//     void parse(QXmlStreamReader &xml);
+//     void readStatus(QXmlStreamReader &xml);
+//     void readUser(QXmlStreamReader &xml, const QString &tagName = "user");
+//     void readDirectMessage(QXmlStreamReader &xml);
     void parseJson(const QByteArray &data);
     void parseJsonUser(const QVariant &data);
     void parseJsonSearchResult(const QByteArray &data);
-    void parseSearchResult(QXmlStreamReader &xml);
-    void readSearchStatus(QXmlStreamReader &xml);
-    void skipTag(QXmlStreamReader &xml, const QString &tagName);
+//     void parseSearchResult(QXmlStreamReader &xml);
+//     void readSearchStatus(QXmlStreamReader &xml);
+//     void skipTag(QXmlStreamReader &xml, const QString &tagName);
 
     // OAuth constants
     static const QString AccessTokenUrl;
