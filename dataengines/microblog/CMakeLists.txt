@@ -21,7 +21,7 @@ target_link_libraries(plasma_engine_microblog
     qoauth
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
-    ${QT_QTXML_LIBS}
+    #${QT_QTXML_LIBS}
     ${QT_QTNETWORK_LIBS}
     ${QCA2_LIBRARIES}
     ${QJSON_LIBRARIES}
