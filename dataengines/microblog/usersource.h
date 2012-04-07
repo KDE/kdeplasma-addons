@@ -47,6 +47,7 @@ public:
     ~UserSource();
 
     void loadUserInfo(const QString &who, const QString &serviceBaseUrl);
+    void parseJson(const QVariant &data);
 
 Q_SIGNALS:
     void dataChanged();
@@ -57,7 +58,9 @@ private Q_SLOTS:
     void result(KJob*);
 
 private:
+    void parseJsonStatus(const QVariant &data);
     void parse(QXmlStreamReader &reader);
+    void parse(QByteArray &jsonData);
     void readUser(QXmlStreamReader &reader);
     QString m_user;
     QString m_serviceBaseUrl;

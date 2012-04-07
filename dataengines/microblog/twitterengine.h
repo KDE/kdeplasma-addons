@@ -74,6 +74,7 @@ class TwitterEngine : public Plasma::DataEngine
         void imageDataChanged();
 //         void appAuthorized();
 //         void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
+        void addUserSource(const QVariant &userData, const QString &serviceBaseUrl);
         void accessTokenReceived(const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret);
         void authorizationStatusUpdated(const QString &serviceBaseUrl, const QString &status, const QString &message = QString());
 

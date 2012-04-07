@@ -89,6 +89,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
+    void userFound(const QVariant &userData, const QString &serviceBaseUrl);
 
 private slots:
     void recv(KIO::Job*, const QByteArray& data);
