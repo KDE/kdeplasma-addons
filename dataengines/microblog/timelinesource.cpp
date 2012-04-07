@@ -60,10 +60,10 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
         // FIXME: handle service-specific search urls
         if (m_serviceBaseUrl.host().contains("twitter.com")) {
-            m_url = KUrl("http://search.twitter.com/search.json?rpp=5&include_entities=true&show_user=true&result_type=mixed&q=" + query);
+            m_url = KUrl("http://search.twitter.com/search.json?rpp=50&include_entities=true&show_user=true&result_type=mixed&q=" + query);
         } else {
             //http://identi.ca/api/search.json?callback=foo&q=identica
-            m_url = KUrl("http://identi.ca/api/search.json?rpp=1&include_entities=true&show_user=true&result_type=mixed&q=" + query);
+            m_url = KUrl("http://identi.ca/api/search.json?rpp=50&include_entities=true&show_user=true&result_type=mixed&q=" + query);
         }
         m_needsAuthorization = false;
         kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
@@ -341,17 +341,17 @@ void TimelineSource::readStatus(QXmlStreamReader &xml)
 void TimelineSource::parseJson(const QByteArray &data)
 {
     //kDebug() << "JSON: " << data;
-    kDebug() << "JSON TIMELINE PARSER ONLINE";
+//     kDebug() << "JSON TIMELINE PARSER ONLINE";
     QJson::Parser parser;
     const QVariantList resultsList = parser.parse(data).toList();
 
-    kDebug() << "resultsList.count() :: " << resultsList.count();
+//     kDebug() << "resultsList.count() :: " << resultsList.count();
     foreach (const QVariant &v, resultsList) {
         const QVariantMap &tweet = v.toMap();
-        kDebug() << " ################################# " << endl;
+//         kDebug() << " ################################# " << endl;
         foreach (const QVariant &k, tweet.keys()) {
             const QString _u = k.toString();
-            kDebug() << " tweet k : " << _u;
+//             kDebug() << " tweet k : " << _u;
             if (_u != "user") {
                 m_tempData[_u] = tweet[_u];
             }
@@ -371,7 +371,7 @@ void TimelineSource::parseJson(const QByteArray &data)
             KUrl url(tweet["profile_image_url"].toString());
             m_imageSource->loadImage(m_tempData["User"].toString(), url);
         }
-
+        emit userFound(tweet["user"], m_serviceBaseUrl.pathOrUrl());
 //                 foreach (const QVariant &x, w.toMap().keys()) {
 //                     //kDebug() << "           prop: " << x;
 // //                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
@@ -394,40 +394,40 @@ void TimelineSource::parseJson(const QByteArray &data)
 void TimelineSource::parseJsonUser(const QVariant& data)
 {
     const QVariantMap &user = data.toMap();
-    foreach (const QVariant &k, user.keys()) {
-        kDebug() << "   user k : " << k;
-        //m_tempData[k.toString()] = user[k.toString()];
-    }
+//     foreach (const QVariant &k, user.keys()) {
+//         //kDebug() << "   user k : " << k;
+//         //m_tempData[k.toString()] = user[k.toString()];
+//     }
 
     // compatibility with old API
     m_tempData["User"] = user["screen_name"];
     m_tempData["ImageUrl"] = user["profile_image_url"].toString();
-    kDebug() << " imageUrl: " << m_tempData["ImageUrl"];
+    //kDebug() << " imageUrl: " << m_tempData["ImageUrl"];
     if (m_tempData.contains("ImageUrl")) {
         KUrl url(m_tempData["ImageUrl"].toString());
         m_imageSource->loadImage(m_tempData["User"].toString(), url);
     }
     m_tempData["Url"] = user["url"];
 
-    kDebug() << "User done";
+    //kDebug() << "User done";
 }
 
 
 void TimelineSource::parseJsonSearchResult(const QByteArray &data)
 {
     //kDebug() << "JSON: " << data;
-    kDebug() << "JSON PARSER ONLINE";
+//     kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
-    kDebug() << "resultsMap.keys() :: " << resultsMap.count();
+//     kDebug() << "resultsMap.keys() :: " << resultsMap.count();
     //QVariantMap res = resultsMap["results"].toMap();
     foreach (QVariant v, resultsMap.keys()) {
-        kDebug() << "QVariantMap" << v.toString() << resultsMap[v.toString()];
+//         kDebug() << "QVariantMap" << v.toString() << resultsMap[v.toString()];
         if (v.toString() == "results") {
-            kDebug() << " ################################# " << endl;
+//             kDebug() << " ################################# " << endl;
                 //["results"].toMap()
             foreach (const QVariant &w, resultsMap[v.toString()].toList()) {
-                kDebug() << "---------" << w;
+//                 kDebug() << "---------" << w;
                 QVariantMap r = w.toMap();
                 m_tempData["Date"] = r["created_at"];
                 m_id = r["id"].toString();

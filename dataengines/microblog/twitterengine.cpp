@@ -202,6 +202,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             source = new UserSource(user, serviceBaseUrl, this);
             source->setObjectName(name);
             source->setStorageEnabled(true);
+            source->loadUserInfo(user, serviceBaseUrl);
             connect(source, SIGNAL(loadImage(const QString&, const KUrl&)),
                     imageSource, SLOT(loadImage(const QString&, const KUrl&)));
             if (imageSource) {
@@ -210,7 +211,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             addSource(source);
         }
         if (!user.isEmpty()) {
-            source->loadUserInfo(user, serviceBaseUrl);
+//             source->loadUserInfo(user, serviceBaseUrl);
         }
     } else {
         TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
@@ -223,6 +224,8 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             source = new TimelineSource(serviceBaseUrl, requestType, authHelper, QStringList() << parameter, this);
             connect(source, SIGNAL(authorize(const QString&, const QString&, const QString&)),
                    authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
+            connect(source, SIGNAL(userFound(const QVariant&, const QString&)),
+                   this, SLOT(addUserSource(const QVariant&, const QString&)));
             source->setObjectName(name);
             source->setImageSource(imageSource);
             source->setStorageEnabled(true);
@@ -232,6 +235,35 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         source->update();
     }
     return false;
+}
+
+void TwitterEngine::addUserSource(const QVariant& userData, const QString &serviceBaseUrl)
+{
+    const QVariantMap m = userData.toMap();
+    const QString screen_name = m["screen_name"].toString();
+    const QString _s = "User:" + screen_name + "@" + serviceBaseUrl;
+    //kDebug() << "src " << _s << sources();
+    if (sources().contains(_s)) {
+        return;
+    }
+    kDebug() << "new user: " << screen_name;
+
+    UserSource *source = new UserSource(screen_name, serviceBaseUrl, this);
+    source->setObjectName(_s);
+    source->setStorageEnabled(true);
+//     kDebug() << "Adding from Timeline";
+    source->parseJson(userData);
+//             connect(source, SIGNAL(loadImage(const QString&, const KUrl&)),
+//                     imageSource, SLOT(loadImage(const QString&, const KUrl&)));
+//             if (imageSource) {
+//                 imageSource->loadImage(user, serviceBaseUrl);
+//             }
+    addSource(source);
+//         }
+//         if (!user.isEmpty()) {
+//             source->loadUserInfo(user, serviceBaseUrl);
+//         }
+    
 }
 
 void TwitterEngine::authorizationStatusUpdated(const QString& serviceBaseUrl, const QString& status, const QString &message)
