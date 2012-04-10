@@ -20,6 +20,7 @@
 
 #include "imagesource.h"
 
+#include <KIcon>
 #include <QPainter>
 #include <QPainterPath>
 
@@ -40,6 +41,9 @@ ImageSource::~ImageSource()
 
 void ImageSource::loadImage(const QString &who, const KUrl &url)
 {
+    if (who.isEmpty()) {
+        return;
+    }
     if (!m_imageCache) {
         m_imageCache = new KImageCache("plasma_engine_preview", 10485760); // Re-use previewengine's cache
     }
@@ -53,14 +57,18 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
 
     // Check if the image is in the cache, if so return it
     QImage preview = QImage(QSize(48, 48), QImage::Format_ARGB32_Premultiplied);
+    preview.fill(Qt::transparent);
     if (m_imageCache->findImage(cacheKey, &preview)) {
         // cache hit
+        //kDebug() << "cache hit: " << cacheKey;
         setData(who, polishImage(preview));
         emit dataChanged();
         checkForUpdate();
         return;
     }
-
+    if (!url.isValid()) {
+        return;
+    }
     m_loadedPersons << who;
     //FIXME: since kio_http bombs the system with too many request put a temporary
     // arbitrary limit here, revert as soon as BUG 192625 is fixed
@@ -112,6 +120,8 @@ void ImageSource::result(KJob *job)
         emit dataChanged();
         KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
         const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
+        kDebug() << "Set data from image job." << who << cacheKey;
+
         m_imageCache->insertImage(cacheKey, img);
     }
 

@@ -51,7 +51,7 @@ public:
 
 Q_SIGNALS:
     void dataChanged();
-    void loadImage(const QString &who, const KUrl &url);
+    void loadImage(const QString &who, const KUrl&);
 
 private Q_SLOTS:
     void recv(KIO::Job*, const QByteArray& data);
