@@ -48,7 +48,7 @@ public:
     void loadFinished();
 
 public Q_SLOTS:
-    void loadImage(const QString &who, const KUrl &url);
+    void loadImage(const QString &who, const KUrl &url = KUrl());
 
 Q_SIGNALS:
     void dataChanged();

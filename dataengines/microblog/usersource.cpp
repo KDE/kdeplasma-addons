@@ -32,7 +32,7 @@ UserSource::UserSource(const QString &who, const QString &serviceBaseUrl, QObjec
       m_serviceBaseUrl(serviceBaseUrl)
 {
     setObjectName(QLatin1String("User"));
-    //loadUserInfo(who, m_serviceBaseUrl);
+    //emit loadImage(who, KUrl());
 }
 
 UserSource::~UserSource()

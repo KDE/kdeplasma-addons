@@ -156,7 +156,6 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         imageSource = new ImageSource(this);
         connect(imageSource, SIGNAL(dataChanged()), SLOT(imageDataChanged()));
         imageSource->setStorageEnabled(true);
-
         imageSource->setObjectName("UserImages:"+serviceBaseUrl);
         addSource(imageSource);
     }
@@ -202,11 +201,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             source = new UserSource(user, serviceBaseUrl, this);
             source->setObjectName(name);
             source->setStorageEnabled(true);
-            source->loadUserInfo(user, serviceBaseUrl);
             connect(source, SIGNAL(loadImage(const QString&, const KUrl&)),
                     imageSource, SLOT(loadImage(const QString&, const KUrl&)));
+            source->loadUserInfo(user, serviceBaseUrl);
             if (imageSource) {
-                imageSource->loadImage(user, serviceBaseUrl);
+                imageSource->loadImage(user);
             }
             addSource(source);
         }
