@@ -2,6 +2,7 @@
 Name=YouTube
 Name[cs]=YouTube
 Name[el]=YouTube
+Name[nb]=YouTube
 Name[nl]=YouTube
 Name[nn]=YouTube
 Name[pl]=YouTube
@@ -14,6 +15,7 @@ Name[x-test]=xxYouTubexx
 Comment=Matches YouTube queries
 Comment[cs]=Vyhledávání dotazů YouTube
 Comment[el]=Εύρεση αναζητήσεων στο YouTube
+Comment[nb]=Treffer YoutTube-søk
 Comment[nl]=Komt overeen met YouTube-queries
 Comment[pl]=Dopasowanie zapytań YouTube
 Comment[pt]=Corresponde às pesquisas do YouTube

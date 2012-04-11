@@ -2,6 +2,7 @@
 Name=Bing
 Name[cs]=Bing
 Name[el]=Bing
+Name[nb]=Bing
 Name[nl]=Bing
 Name[nn]=Bing
 Name[pl]=Bing
@@ -14,6 +15,7 @@ Name[x-test]=xxBingxx
 Comment=Matches Bing queries
 Comment[cs]=Vyhledávání dotazů Bing
 Comment[el]=Εύρεση αναζητήσεων με το Bing
+Comment[nb]=Treffer Bing-søk
 Comment[nl]=Komt overeen met Bing-queries
 Comment[pl]=Dopasowanie zapytań Binga
 Comment[pt]=Corresponde às pesquisas no Bing
