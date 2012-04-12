@@ -47,6 +47,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
       m_authJob(0),
       m_qcaInitializer(0)
 {
+    setObjectName(QLatin1String("Timeline"));
     // set up the url
     QString query;
     switch (m_requestType) {
@@ -427,18 +428,28 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
 //             kDebug() << " ################################# " << endl;
                 //["results"].toMap()
             foreach (const QVariant &w, resultsMap[v.toString()].toList()) {
-//                 kDebug() << "---------" << w;
                 QVariantMap r = w.toMap();
+
+                foreach (const QVariant &k, r.keys()) {
+                    const QString _u = k.toString();
+        //             kDebug() << " tweet k : " << _u;
+                    if (_u != "user") {
+                        m_tempData[_u] = r[_u];
+                    }
+                }
+
                 m_tempData["Date"] = r["created_at"];
                 m_id = r["id"].toString();
                 m_tempData["Id"] = m_id;
                 m_tempData["Status"] = r["text"];
                 m_tempData["Source"] = r["source"];
+                m_tempData["source"] = r["source"];
                 //QString u = cdata.split(' ').at(0);
                 m_tempData["User"] = r["from_user"];
 
                 // not supported in search
-                m_tempData["IsFavorite"] = false;
+                m_tempData["IsFavorite"] = "false";
+                m_tempData["favorited"] = "false";
                 m_tempData["ImageUrl"] = r["profile_image_url"];
                 if (m_tempData.contains("User")) {
                     KUrl url(r["profile_image_url"].toString());
