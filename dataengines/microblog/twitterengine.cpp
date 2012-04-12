@@ -57,7 +57,7 @@ TwitterEngine::~TwitterEngine()
 
 bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
-//     kDebug() << name;
+    kDebug() << name;
     if (name.startsWith("UserImages:")) {
         // these are updated by the engine itself, not consumers
         return true;
@@ -70,7 +70,7 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return false;
     }
 
-    scheduleSourcesUpdated();
+    //scheduleSourcesUpdated();
     updateSourceEvent(name); //start a download
     return true;
 }
@@ -245,7 +245,7 @@ void TwitterEngine::addUserSource(const QVariant& userData, const QString &servi
     if (sources().contains(_s)) {
         return;
     }
-    kDebug() << "new user: " << screen_name;
+//     kDebug() << "new user: " << screen_name;
 
     UserSource *source = new UserSource(screen_name, serviceBaseUrl, this);
     source->setObjectName(_s);

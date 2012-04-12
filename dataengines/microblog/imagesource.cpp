@@ -120,7 +120,7 @@ void ImageSource::result(KJob *job)
         emit dataChanged();
         KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
         const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
-        kDebug() << "Set data from image job." << who << cacheKey;
+        //kDebug() << "Set data from image job." << who << cacheKey;
 
         m_imageCache->insertImage(cacheKey, img);
     }
