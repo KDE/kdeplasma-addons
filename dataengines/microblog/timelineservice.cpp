@@ -41,10 +41,16 @@ TimelineService::TimelineService(TimelineSource *parent)
 
 Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
-    if (operation == "update" || operation == "statuses/retweet" || operation == "favorites/create" || operation == "favorites/destroy") {
+    if (operation == "update" || operation == "statuses/retweet" ||
+            operation == "favorites/create" || operation == "favorites/destroy") {
         return new TweetJob(m_source, operation, parameters);
     } else if (operation == "refresh") {
-        m_source->update(true);
+        Plasma::ServiceJob *sjob = new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
+        KIO::Job *getJob = m_source->update(true);
+        if (getJob) {
+            connect(getJob, SIGNAL(result(KJob*)), sjob, SIGNAL(finished(KJob*)));
+        }
+        return sjob;
     } else if (operation == "auth") {
         //m_source->setPassword(parameters.value("password").toString());
         const QString user = parameters.value("user").toString();
