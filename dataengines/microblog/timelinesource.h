@@ -85,7 +85,7 @@ public:
     void setImageSource(ImageSource *);
 
 public Q_SLOTS:
-    void update(bool forcedUpdate = false);
+    KIO::Job* update(bool forcedUpdate = false);
 
 Q_SIGNALS:
     void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
@@ -120,7 +120,7 @@ private:
     ImageSource *m_imageSource;
     QByteArray m_xml;
     Plasma::DataEngine::Data m_tempData;
-    KIO::Job * m_job;
+    KIO::Job *m_job;
     QString m_id;
     KOAuth::ParamMap m_params;
 

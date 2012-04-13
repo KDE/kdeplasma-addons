@@ -85,7 +85,14 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 
     Plasma::Service *service = source->createService();
     service->setParent(this);
+    connect(service, SIGNAL(finished(Plasma::ServiceJob *)), this, SLOT(serviceJobFinished(Plasma::ServiceJob *)));
+
     return service;
+}
+
+void TwitterEngine::serviceJobFinished(Plasma::ServiceJob* job)
+{
+    kDebug() << "Service Job Done." << job->operationName() << job->result();
 }
 
 bool TwitterEngine::updateSourceEvent(const QString &name)

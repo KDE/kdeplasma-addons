@@ -96,6 +96,7 @@ void TweetJob::start()
 
 void TweetJob::result(KJob *job)
 {
+    kDebug() << "Job returned... e:" << job->errorText();
     setError(job->error());
     setErrorText(job->errorText());
     setResult(!job->error());

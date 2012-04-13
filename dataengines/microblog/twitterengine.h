@@ -77,6 +77,7 @@ class TwitterEngine : public Plasma::DataEngine
         void addUserSource(const QVariant &userData, const QString &serviceBaseUrl);
         void accessTokenReceived(const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret);
         void authorizationStatusUpdated(const QString &serviceBaseUrl, const QString &status, const QString &message = QString());
+        void serviceJobFinished(Plasma::ServiceJob *job);
 
     private:
         static const QString timelinePrefix;
