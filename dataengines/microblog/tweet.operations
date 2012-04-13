@@ -6,6 +6,12 @@
     <group name="refresh">
     </group>
 
+    <group name="loadMore">
+        <entry name="before_id" type="String">
+            <label>Load tweets before this id.</label>
+        </entry>
+    </group>
+
     <group name="auth">
         <entry name="user" type="String">
             <label>The user name of the account.</label>
