@@ -28,7 +28,6 @@
 #include <QtGui/QAction>
 #include <QtGui/QMenu>
 #include <KDE/KDesktopFile>
-#include <KDE/KConfigGroup>
 #include <KDE/KRun>
 #include <KDE/KIcon>
 #include <dbusmenuimporter.h>
@@ -215,23 +214,34 @@ void UnityItem::readStaticMenu()
 
             KDesktopFile df(m_desktopFile);
             KConfigGroup de(&df, "Desktop Entry");
-            QStringList  shortCuts = de.readEntry("X-Ayatana-Desktop-Shortcuts", QString()).split(';');
 
-            foreach (QString shortcut, shortCuts) {
-                KConfigGroup grp(&df, shortcut + " Shortcut Group");
-                QString name = grp.readEntry("Name", QString());
-                QString exec = grp.readEntry("Exec", QString());
+            QStringList shortCutsFdo = de.readEntry("Actions", QString()).split(';');
 
-                if (!name.isEmpty() && !exec.isEmpty()) {
-                    QString icon = grp.readEntry("Icon", QString()); // ???
-                    QAction *action = icon.isEmpty() ? new QAction(name, this) : new QAction(KIcon(icon), name, this);
-                    action->setData(exec);
-                    m_staticMenu.append(action);
-                    connect(action, SIGNAL(triggered()), this, SLOT(menuActivated()));
-                }
+            foreach (QString shortcut, shortCutsFdo) {
+                parseDesktopAction(KConfigGroup(&df, "Desktop Action " + shortcut));
+            }
+
+            QStringList shortCutsAyatana = de.readEntry("X-Ayatana-Desktop-Shortcuts", QString()).split(';');
+
+            foreach (QString shortcut, shortCutsAyatana) {
+                parseDesktopAction(KConfigGroup(&df, shortcut + " Shortcut Group"));
             }
         }
         m_staticDirty = false;
+    }
+}
+
+void UnityItem::parseDesktopAction(const KConfigGroup& grp)
+{
+    QString name = grp.readEntry("Name", QString());
+    QString exec = grp.readEntry("Exec", QString());
+
+    if (!name.isEmpty() && !exec.isEmpty()) {
+        QString icon = grp.readEntry("Icon", QString()); // ???
+        QAction *action = icon.isEmpty() ? new QAction(name, this) : new QAction(KIcon(icon), name, this);
+        action->setData(exec);
+        m_staticMenu.append(action);
+        connect(action, SIGNAL(triggered()), this, SLOT(menuActivated()));
     }
 }
 
