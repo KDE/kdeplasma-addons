@@ -3,6 +3,7 @@ Name=YouTube
 Name[cs]=YouTube
 Name[de]=YouTube
 Name[el]=YouTube
+Name[lt]=YouTube
 Name[nb]=YouTube
 Name[nl]=YouTube
 Name[nn]=YouTube
@@ -12,6 +13,7 @@ Name[pt_BR]=YouTube
 Name[sv]=YouTube
 Name[uk]=YouTube
 Name[x-test]=xxYouTubexx
+Name[zh_TW]=YouTube
 
 Comment=Matches YouTube queries
 Comment[cs]=Vyhledávání dotazů YouTube
@@ -24,6 +26,7 @@ Comment[pt_BR]=Corresponde às pesquisas no YouTube
 Comment[sv]=Matchar sökningar på YouTube
 Comment[uk]=Відповідники запиту за даними YouTube
 Comment[x-test]=xxMatches YouTube queriesxx
+Comment[zh_TW]=符合 YouTube 查詢
 
 Icon=youtube
 
