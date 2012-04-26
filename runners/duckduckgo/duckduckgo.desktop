@@ -1,23 +1,31 @@
 [Desktop Entry]
 Name=DuckDuckGo
 Name[cs]=DuckDuckGo
+Name[de]=DuckDuckGo
 Name[el]=DuckDuckGo
+Name[lt]=DuckDuckGo
+Name[nb]=DuckDuckGo
 Name[nl]=DuckDuckGo
+Name[pl]=DuckDuckGo
 Name[pt]=DuckDuckGo
 Name[pt_BR]=DuckDuckGo
 Name[sv]=DuckDuckGo
 Name[uk]=DuckDuckGo
 Name[x-test]=xxDuckDuckGoxx
+Name[zh_TW]=DuckDuckGo
 
 Comment=Matches DuckDuckGo queries
 Comment[cs]=Vyhledávání dotazů DuckDuckGo
 Comment[el]=Εύρεση αναζητήσεων με το DuckDuckGo
+Comment[nb]=Treffer DuckDuckGo-søk
 Comment[nl]=Komt overeen met DuckDuckGo-queries
+Comment[pl]=Dopasowanie zapytań DuckDuckGo
 Comment[pt]=Corresponde às pesquisas do DuckDuckGo
 Comment[pt_BR]=Corresponde às pesquisas no DuckDuckGo
 Comment[sv]=Matchar sökningar på DuckDuckGo
 Comment[uk]=Відповідники запиту за даними DuckDuckGo
 Comment[x-test]=xxMatches DuckDuckGo queriesxx
+Comment[zh_TW]=符合 DuckDuckGo 查詢
 
 Icon=
 

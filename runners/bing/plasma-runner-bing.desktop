@@ -1,23 +1,32 @@
 [Desktop Entry]
 Name=Bing
 Name[cs]=Bing
+Name[de]=Bing
 Name[el]=Bing
+Name[lt]=Bing
+Name[nb]=Bing
 Name[nl]=Bing
+Name[nn]=Bing
+Name[pl]=Bing
 Name[pt]=Bing
 Name[pt_BR]=Bing
 Name[sv]=Bing
 Name[uk]=Bing
 Name[x-test]=xxBingxx
+Name[zh_TW]=Bing
 
 Comment=Matches Bing queries
 Comment[cs]=Vyhledávání dotazů Bing
 Comment[el]=Εύρεση αναζητήσεων με το Bing
+Comment[nb]=Treffer Bing-søk
 Comment[nl]=Komt overeen met Bing-queries
+Comment[pl]=Dopasowanie zapytań Binga
 Comment[pt]=Corresponde às pesquisas no Bing
 Comment[pt_BR]=Corresponde às pesquisas no Bing
 Comment[sv]=Matchar sökningar på Bing
 Comment[uk]=Відповідники запиту за даними Bing
 Comment[x-test]=xxMatches Bing queriesxx
+Comment[zh_TW]=符合 Bing 查詢
 
 Icon=bing
 

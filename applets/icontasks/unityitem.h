@@ -31,6 +31,8 @@
 #include <QtCore/QVariant>
 #include <QtCore/QString>
 
+#include <KDE/KConfigGroup>
+
 class AbstractTaskItem;
 class QTimer;
 class QAction;
@@ -72,6 +74,7 @@ public Q_SLOTS:
 
 private:
     void readStaticMenu();
+    void parseDesktopAction(const KConfigGroup& grp);
 
 private:
     QString m_id;

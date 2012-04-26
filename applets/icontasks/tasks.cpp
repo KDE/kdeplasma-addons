@@ -114,6 +114,7 @@ static const int constMaxIconScale = 100;
 Tasks::Tasks(QObject* parent, const QVariantList &arguments)
     : Plasma::Applet(parent, arguments),
       m_toolTips(TT_Instant),
+      m_highlightWindows(true),
       m_launcherIcons(false),
       m_groupClick(GC_PresentWindows),
       m_rotate(false),
@@ -325,6 +326,12 @@ void Tasks::configChanged()
     const int toolTips = cg.readEntry("toolTips", (int)m_toolTips);
     if (toolTips != (int)m_toolTips && toolTips >= TT_None && toolTips <= TT_Delayed) {
         m_toolTips = (TT_Type)toolTips;
+        changed = true;
+    }
+
+    const bool highlightWindows = cg.readEntry("highlightWindows", true);
+    if (highlightWindows != m_highlightWindows) {
+        m_highlightWindows = highlightWindows;
         changed = true;
     }
 
@@ -562,6 +569,7 @@ void Tasks::createConfigurationInterface(KConfigDialog *parent)
     connect(m_appUi.toolTips, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
     connect(m_appUi.toolTips, SIGNAL(currentIndexChanged(int)), this, SLOT(toolTipsModified()));
     setCurrentIndex(m_appUi.toolTips, (int)m_toolTips);
+    m_appUi.highlightWindows->setChecked(m_highlightWindows);
     m_appUi.launcherIcons->setChecked(m_launcherIcons);
     m_behaviourUi.groupClick->addItem(i18n("Minimize/Restore"), QVariant(GC_MinMax));
     m_behaviourUi.groupClick->addItem(i18n("Present Windows Effect"), QVariant(GC_PresentWindows));
@@ -606,6 +614,7 @@ void Tasks::createConfigurationInterface(KConfigDialog *parent)
     m_appUi.maxRows->setValue(m_rootGroupItem->maxRows());
 
     connect(m_appUi.toolTips, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
+    connect(m_appUi.highlightWindows, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     connect(m_appUi.launcherIcons, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     connect(m_behaviourUi.groupClick, SIGNAL(currentIndexChanged(int)), parent, SLOT(settingsModified()));
     connect(m_appUi.rotate, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
@@ -672,6 +681,7 @@ void Tasks::configAccepted()
     cg.writeEntry("previewSize", m_appUi.previewSize->value());
     cg.writeEntry("iconScale", m_appUi.iconScale->value());
     cg.writeEntry("toolTips", m_appUi.toolTips->itemData(m_appUi.toolTips->currentIndex()).toInt());
+    cg.writeEntry("highlightWindows", m_appUi.highlightWindows->checkState() == Qt::Checked);
     DockManager::self()->writeConfig(cg);
 
     emit configNeedsSaving();
@@ -694,7 +704,7 @@ bool Tasks::autoIconScaling() const
 
 bool Tasks::highlightWindows() const
 {
-    return Plasma::WindowEffects::isEffectAvailable(Plasma::WindowEffects::HighlightWindows);
+    return m_highlightWindows;
 }
 
 QList<QAction*> Tasks::contextualActions()

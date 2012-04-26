@@ -39,8 +39,8 @@ public:
     KimpanelInputPanel(QWidget* parent = 0);
     virtual ~KimpanelInputPanel();
 
-    void setSpotLocation(int x, int y);
-    void setSpotLocation(const QPoint& point);
+    void setSpotLocation(const QRect& rect);
+    void updateLocation();
     void setShowPreedit(bool show);
     void setShowAux(bool show);
     void setShowLookupTable(bool show);
@@ -61,6 +61,7 @@ Q_SIGNALS:
     void lookupTablePageDown();
     void selectCandidate(int index);
 protected:
+    virtual void showEvent(QShowEvent* event);
     virtual void resizeEvent(QResizeEvent* event);
     virtual void paintEvent(QPaintEvent* event);
 private Q_SLOTS:
@@ -76,6 +77,7 @@ private:
     Plasma::FrameSvg* m_backgroundSvg;
     QPoint m_pointPos;
     bool m_moving;
+    QRect m_spotRect;
 };
 
 #endif // KIMPANEL_INPUTPANEL_H

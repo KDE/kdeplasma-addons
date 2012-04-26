@@ -1,5 +1,7 @@
 add_subdirectory(icons)
 
+include_directories(${QJSON_INCLUDE_DIR})
+
 set(krunner_bing_SRCS
     imageiconengine.cpp
     bingjob.cpp
