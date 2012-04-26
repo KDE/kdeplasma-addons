@@ -41,6 +41,7 @@ ImageSource::~ImageSource()
 
 void ImageSource::loadImage(const QString &who, const KUrl &url)
 {
+//     kDebug() << " @@@ " << who << url;
     if (who.isEmpty()) {
         return;
     }
@@ -146,4 +147,3 @@ QImage ImageSource::polishImage(const QImage &img)
 }
 
 #include <imagesource.moc>
-

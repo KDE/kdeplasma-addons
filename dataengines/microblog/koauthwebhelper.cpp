@@ -152,7 +152,7 @@ void KOAuthWebHelper::loadFinished()
         if (!isIdentica() || !pin.isEmpty()) {
 //             kDebug() << "We're done!" << u << pin;
             d->timer->stop(); // No need to show the dialog. :)
-            emit statusUpdated(d->serviceBaseUrl, "Busy", "Application authorized");
+            emit statusUpdated(d->user, d->serviceBaseUrl, "Busy", "Application authorized");
             emit appAuthSucceeded(u, pin);
             if (d->dialog) {
                 d->dialog->close();
@@ -164,7 +164,7 @@ void KOAuthWebHelper::loadFinished()
         // user has to log in to the remote site to retrieve a PIN back, which
         // in turn will produce the accessToken and accessTokenSecret pair in
         // the next, final authorization step.
-        emit statusUpdated(d->serviceBaseUrl, "Waiting", "App Authorization needed");
+        emit statusUpdated(d->user, d->serviceBaseUrl, "Waiting", "App Authorization needed");
 
         // we have to log in, let's see if we can do that automatically...
 

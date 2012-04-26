@@ -75,9 +75,11 @@ class TwitterEngine : public Plasma::DataEngine
 //         void appAuthorized();
 //         void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
         void addUserSource(const QVariant &userData, const QString &serviceBaseUrl);
-        void accessTokenReceived(const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret);
-        void authorizationStatusUpdated(const QString &serviceBaseUrl, const QString &status, const QString &message = QString());
+        void accessTokenReceived(const QString &user, const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret);
+        void authorizationStatusUpdated(const QString &user, const QString &serviceBaseUrl, const QString &status, const QString &message = QString());
         void serviceJobFinished(Plasma::ServiceJob *job);
+        KOAuth::KOAuth* addAuthHelper(const QString &userName, const QString &serviceBaseUrl);
+        UserSource* newUserSource(const QString userName, const QString serviceBaseUrl);
 
     private:
         static const QString timelinePrefix;

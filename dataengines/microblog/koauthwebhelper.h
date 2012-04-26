@@ -42,7 +42,7 @@ public:
 
 Q_SIGNALS:
     void appAuthSucceeded(const QString &authorizeUrl, const QString &verifier);
-    void statusUpdated(const QString &serviceBaseUrl, const QString &status, const QString &message = QString());
+    void statusUpdated(const QString &userName, const QString &serviceBaseUrl, const QString &status, const QString &message = QString());
 
 private Q_SLOTS:
     void loadFinished();
