@@ -83,6 +83,7 @@ void UserSource::result(KJob *job)
     if (!m_jobs.contains(job)) {
         return;
     }
+    kDebug() << "job returned" << m_currentUrl;
     KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
     //const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
     if (kiojob->url().pathOrUrl() == m_currentUrl) {
@@ -140,14 +141,17 @@ void UserSource::parseJson(const QVariant &data)
         setData("realName", user["name"]);
 
     }
-    setData("ImageUrl", user["profile_image_url"].toString());
+    const QString imgUrl = user["profile_image_url"].toString();
+    const QString userName = user["screen_name"].toString();
+    setData("ImageUrl", imgUrl);
 //     setData("tweets", user["screen_name"]);
 //     setData("friends", user["screen_name"]);
 //     setData("followers", user["screen_name"]);
-    if (!user["profile_image_url"].toString().isEmpty()) {
-//         kDebug() << "Got image url for: " << user["screen_name"].toString();
+    if (!imgUrl.isEmpty()) {
+//         kDebug() << "Got image url for: " << userName << imgUrl;
+        emit loadImage(userName, KUrl(imgUrl));
     } else {
-        kDebug() << " imageUrl: " <<  user["profile_image_url"].toString();
+        kDebug() << " imageUrl: " <<  userName;
     }
     //if (data().contains("ImageUrl")) {
         //KUrl url(user["profile_image_url"].toString());

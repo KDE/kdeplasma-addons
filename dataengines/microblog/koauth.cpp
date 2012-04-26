@@ -92,7 +92,6 @@ KOAuth::KOAuth(QObject* parent)
 {
 
     setObjectName(QLatin1String("KOAuth"));
-    init();
 }
 
 QByteArray KOAuth::accessToken() const
@@ -145,9 +144,8 @@ void KOAuth::init()
                 d->w, SLOT(authorizeApp(const QString&, const QString&, const QString&)));
         connect(d->w, SIGNAL(appAuthSucceeded(const QString&, const QString&)),
                 this, SLOT(appAuthorized(const QString&, const QString&)));
-        connect(d->w, SIGNAL(statusUpdated(const QString&, const QString&, const QString&)),
-                SIGNAL(statusUpdated(const QString&, const QString&, const QString&)));
-
+        connect(d->w, SIGNAL(statusUpdated(const QString&, const QString&, const QString&, const QString&)),
+                SIGNAL(statusUpdated(const QString&, const QString&, const QString&, const QString&)));
     }
 
 }
@@ -155,7 +153,7 @@ void KOAuth::init()
 void KOAuth::run()
 {
     if (isAuthorized()) {
-        emit statusUpdated(d->serviceBaseUrl, "Ok", "User authorized");
+        emit statusUpdated(d->user, d->serviceBaseUrl, "Ok", "User authorized");
     } else {
         //authorize(d->serviceBaseUrl, d->user, d->password);
     }
@@ -206,13 +204,13 @@ void KOAuth::requestTokenFromService()
 
         QString auth_url = QString("%1?oauth_token=%2").arg(d->authorizeUrl, QString(d->requestToken));
 
-        emit statusUpdated(d->serviceBaseUrl, "Busy", "Request token received.");
+        emit statusUpdated(d->user, d->serviceBaseUrl, "Busy", "Request token received.");
         emit authorizeApp(d->serviceBaseUrl, d->authorizeUrl, auth_url);
 
     } else {
         e += errorMessage(d->interface->error());
         kDebug() << "Request Token returned error:" << e;
-        emit statusUpdated(d->serviceBaseUrl, "Error", "Request Token Error: " + e);
+        emit statusUpdated(d->user, d->serviceBaseUrl, "Error", "Request Token Error: " + e);
         d->busy = false;
 
     }
@@ -287,7 +285,7 @@ void KOAuth::accessTokenFromService()
         d->accessTokenSecret = reply.value(QOAuth::tokenSecretParameterName());
 
         //kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
-        emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
+        emit accessTokenReceived(d->user, d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
         d->busy = false;
         KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc");
         KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
@@ -300,10 +298,20 @@ void KOAuth::accessTokenFromService()
         kDebug() << d->interface->error() << reply;
         e += errorMessage(d->interface->error());
         kDebug() << "Request Not working" << e;
-        emit statusUpdated(d->serviceBaseUrl, "Error", "Access Token Error:" + e);
+        emit statusUpdated(d->user, d->serviceBaseUrl, "Error", "Access Token Error:" + e);
         d->busy = false;
     }
 }
+
+QStringList KOAuth::authorizedAccounts() const
+{
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc", KConfig::SimpleConfig);
+    //KConfigGroup config = KConfigGroup(ptr);
+
+    kDebug() << "Available groups: " << ptr->groupList();
+    return ptr->groupList();
+}
+
 
 void KOAuth::setServiceBaseUrl(const QString &serviceBaseUrl)
 {
@@ -343,7 +351,7 @@ void KOAuth::updateState()
         d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
         //kDebug() << "oauthrc config for " << d->user+"@"+d->serviceBaseUrl << d->accessToken << d->accessTokenSecret;
         if (isAuthorized()) {
-            emit accessTokenReceived(d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
+            emit accessTokenReceived(d->user, d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
             d->busy = false;
         }
     }
@@ -351,6 +359,7 @@ void KOAuth::updateState()
 
 KOAuth::~KOAuth()
 {
+    if (!d) return;
     delete d->w;
     delete d->qcaInitializer;
     delete d;

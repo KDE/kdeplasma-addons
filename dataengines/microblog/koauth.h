@@ -56,8 +56,10 @@ public:
     KOAuth(QObject* parent = 0);
     ~KOAuth();
 
-    void sign(KIO::Job *job, const QString &url, ParamMap params = ParamMap(), HttpMethod httpMethod = GET);
+    void init();
     void run();
+
+    QStringList authorizedAccounts() const;
 
     QString user() const;
     void setUser(const QString &user);
@@ -71,20 +73,20 @@ public:
     QByteArray accessTokenSecret() const;
     bool isAuthorized();
 
+    void sign(KIO::Job *job, const QString &url, ParamMap params = ParamMap(), HttpMethod httpMethod = GET);
     QByteArray authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params);
 
 Q_SIGNALS:
     void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
-    void accessTokenReceived(const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret);
+    void accessTokenReceived(const QString &userName, const QString &serviceBaseUrl, const QString &accessToken, const QString &accessTokenSecret);
     void authorized(); // We're ready
-    void statusUpdated(const QString &serviceBaseUrl, const QString &status, const QString &message = QString());
+    void statusUpdated(const QString &userName, const QString &serviceBaseUrl, const QString &status, const QString &message = QString());
 
 public Q_SLOTS:
     void appAuthorized(const QString &authorizeUrl, const QString &verifier);
     void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
 
 private:
-    void init();
     void updateState();
     void requestTokenFromService();
     void accessTokenFromService();
