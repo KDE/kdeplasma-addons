@@ -18,7 +18,7 @@ set(twitter_engine_SRCS
 
 kde4_add_plugin(plasma_engine_microblog ${twitter_engine_SRCS})
 target_link_libraries(plasma_engine_microblog
-    qoauth
+    ${QTOAUTH_LIBRARY}
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
     #${QT_QTXML_LIBS}
