@@ -88,6 +88,7 @@ class TwitterEngine : public Plasma::DataEngine
         static const QString searchTimelinePrefix;
         static const QString profilePrefix;
         static const QString repliesPrefix;
+        static const QString statusPrefix;
         static const QString messagesPrefix;
         static const QString userPrefix;
         ImageSource *m_imageSource;

@@ -41,6 +41,7 @@ const QString TwitterEngine::searchTimelinePrefix("SearchTimeline:");
 const QString TwitterEngine::customTimelinePrefix("CustomTimeline:");
 const QString TwitterEngine::profilePrefix("Profile:");
 const QString TwitterEngine::repliesPrefix("Replies:");
+const QString TwitterEngine::statusPrefix("Replies:");
 const QString TwitterEngine::messagesPrefix("Messages:");
 const QString TwitterEngine::userPrefix("User:");
 
@@ -61,6 +62,12 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
     kDebug() << name;
     if (name.startsWith("UserImages:")) {
         // these are updated by the engine itself, not consumers
+        return true;
+    }
+    if (name.startsWith(statusPrefix)) {
+        setData(statusPrefix, "Authorization", "Idle");
+        setData(statusPrefix, "AuthorizationMessage", QString());
+        scheduleSourcesUpdated();
         return true;
     }
     if (name == "Accounts") {
@@ -98,7 +105,8 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(customTimelinePrefix) && !name.startsWith(searchTimelinePrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
-        && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)) {
+        && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)
+        && !name.startsWith(statusPrefix)) {
         return false;
     }
 
@@ -135,10 +143,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(customTimelinePrefix) && !name.startsWith(searchTimelinePrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
-        && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)) {
+        && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)
+        && !name.startsWith(statusPrefix)) {
         return false;
     }
-    kDebug() << " !!!" << name;
+//     kDebug() << " !!!" << name;
 
     TimelineSource::RequestType requestType;
 
@@ -189,7 +198,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         serviceBaseUrl = "https://twitter.com/";
         kWarning() << "  Using " << serviceBaseUrl << " instead.";
     }
-    kDebug() << "user / Sbu: " << user << serviceBaseUrl << " PARAMETER: " << parameter;
+//     kDebug() << "user / Sbu: " << user << serviceBaseUrl << " PARAMETER: " << parameter;
     ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 
     if (!imageSource) {
@@ -321,7 +330,7 @@ KOAuth::KOAuth* TwitterEngine::addAuthHelper(const QString& userName, const QStr
         // using an invisible webkit
         //authHelper->start();
         authHelper->run();
-        kDebug() << "ran" << userName;
+//         kDebug() << "ran" << userName;
         updateSourceEvent(userPrefix + userName + "@" + serviceBaseUrl);
     } else {
         authHelper = m_authHelper[serviceBaseUrl];
