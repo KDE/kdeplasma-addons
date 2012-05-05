@@ -2,9 +2,6 @@
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
 ${QT_QTNETWORK_INCLUDES} ${QT_QTXML_INCLUDES} ${QCA2_INCLUDE_DIR})
 
-find_package(QCA2 REQUIRED)
-find_package(QtOAuth REQUIRED)
-
 set(twitter_engine_SRCS
     imagesource.cpp
     usersource.cpp

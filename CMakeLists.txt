@@ -32,6 +32,9 @@ macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 macro_optional_find_package(QJSON)
 macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses" "" FALSE "" "")
 
+macro_optional_find_package(QtOAuth)
+macro_log_feature(QTOAUTH_FOUND "QtOAuth" "QtOAuth Library - required to build the Plasma Microblog DataEngine" "https://github.com/ayoy/qoauth" FALSE "" "Needed for building Plasma Microblog DataEngine")
+
 macro_optional_depend_package(Marble "Marble")
 if (DEPEND_PACKAGE_Marble)
   macro_optional_find_package(Marble)
