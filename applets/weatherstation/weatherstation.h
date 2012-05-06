@@ -1,5 +1,6 @@
 /*
  * Copyright 2008-2009  Petri Damstén <damu@iki.fi>
+ * Copyright 2012  Luís Gabriel Lima <lampih@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,15 +19,23 @@
 #ifndef WEATHERSTATION_HEADER
 #define WEATHERSTATION_HEADER
 
+#include <KUnitConversion/Value>
+
 #include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
-#include <KUnitConversion/Value>
+
 #include <plasmaweather/weatherpopupapplet.h>
+
 #include "ui_appearanceconfig.h"
 
-class LCD;
-class QGraphicsLinearLayout;
-namespace Conversion { class Value; }
+namespace Plasma {
+    class DeclarativeWidget;
+    class Package;
+}
+
+namespace Conversion {
+    class Value;
+}
 
 class WeatherStation : public WeatherPopupApplet
 {
@@ -37,7 +46,6 @@ class WeatherStation : public WeatherPopupApplet
 
         virtual void init();
         virtual void createConfigurationInterface(KConfigDialog *parent);
-        virtual QGraphicsWidget *graphicsWidget();
 
     public slots:
         virtual void configAccepted();
@@ -60,8 +68,9 @@ class WeatherStation : public WeatherPopupApplet
         KUnitConversion::Value value(const QString& value, int unit);
 
     private:
-        LCD *m_lcd;
-        LCD *m_lcdPanel;
+        Plasma::Package *m_package;
+        Plasma::DeclarativeWidget *m_declarativeWidget;
+
         Ui::AppearanceConfig m_appearanceConfig;
         bool m_useBackground;
         bool m_showToolTip;

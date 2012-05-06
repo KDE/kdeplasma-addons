@@ -1,5 +1,6 @@
 /*
  * Copyright 2008-2009  Petri Damstén <damu@iki.fi>
+ * Copyright 2012  Luís Gabriel Lima <lampih@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,22 +17,32 @@
  */
 
 #include "weatherstation.h"
+
+#include <math.h>
+
 #include <QGraphicsLinearLayout>
+//#include <QtDeclarative>
+//#include <QtDeclarative/qdeclarative.h>
+
 #include <KConfigDialog>
 #include <KConfigGroup>
 #include <KToolInvocation>
+#include <KUnitConversion/Converter>
+
 #include <Plasma/Containment>
 #include <Plasma/Theme>
 #include <Plasma/ToolTipManager>
-#include <KUnitConversion/Converter>
+#include <Plasma/DeclarativeWidget>
+#include <Plasma/Package>
+
 #include <plasmaweather/weatherconfig.h>
-#include <math.h>
+
 #include "lcd.h"
 
 using namespace KUnitConversion;
 
 WeatherStation::WeatherStation(QObject *parent, const QVariantList &args)
-    : WeatherPopupApplet(parent, args), m_lcd(0), m_lcdPanel(0)
+    : WeatherPopupApplet(parent, args)
 {
     resize(250, 350);
 }
@@ -42,49 +53,18 @@ WeatherStation::~WeatherStation()
 
 void WeatherStation::init()
 {
-    m_lcd = new LCD(this);
-    m_lcd->setSvg("weatherstation/lcd");
-    // i18n: This and other all-caps messages are pieces of text shown on
-    // an LCD-like image mimicking a electronic weather station display.
-    // If weather station displays in your country are always in English,
-    // you may want to consider leaving these strings in English too,
-    // to achieve a more realistic feeling.
-    m_lcd->setLabel("pressure-label", i18n("PRESSURE"));
-    m_lcd->setLabel("weather-label", i18n("CURRENT WEATHER"));
-    m_lcd->setLabel("temperature-label", i18n("OUTDOOR TEMP"));
-    m_lcd->setLabel("humidity-label", i18n("HUMIDITY"));
-    m_lcd->setLabel("wind-label", i18n("WIND"));
-    m_lcd->setLabel("provider-label", QString());
-    if (hasAuthorization("LaunchApp")) {
-        connect(m_lcd, SIGNAL(clicked(QString)), this, SLOT(clicked(QString)));
-    }
+//    qmlRegisterType<QObject>("org.kde.lcdweather", 1, 0, "LCD");
 
-    m_lcdPanel = new LCD(this);
-    m_lcdPanel->setSvg("weatherstation/lcd_panel");
-    m_lcdPanel->setLabel("temperature-label", i18n("OUTDOOR TEMP"));
-    m_lcdPanel->hide();
+    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
+    m_declarativeWidget = new Plasma::DeclarativeWidget(this);
+    layout->addItem(m_declarativeWidget);
 
-    //m_lcd->setItemOn("under_construction");
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    m_package = new Plasma::Package(QString(), "org.kde.lcdweather", structure);
+    m_declarativeWidget->setQmlPath(m_package->filePath("mainscript"));
+    //m_declarativeWidget->engine()->rootContext()->setContextProperty("", );
+
     WeatherPopupApplet::init();
-}
-
-QGraphicsWidget* WeatherStation::graphicsWidget()
-{
-    return m_lcd;
-}
-
-void WeatherStation::setBackground()
-{
-    m_lcd->clear();
-    if (m_useBackground) {
-        m_lcd->setItemOn("lcd_background");
-    }
-    m_lcd->setItemOn("background");
-    m_lcdPanel->clear();
-    if (m_useBackground) {
-        m_lcdPanel->setItemOn("lcd_background");
-    }
-    m_lcdPanel->setItemOn("background");
 }
 
 void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
@@ -120,20 +100,12 @@ void WeatherStation::configChanged()
     m_showToolTip = cfg.readEntry("tooltip", true);
 
     if (!m_showToolTip) {
-        m_lcd->setLabel("weather-label", i18n("CURRENT WEATHER"));
+        //m_lcd->setLabel("weather-label", i18n("CURRENT WEATHER"));
         Plasma::ToolTipManager::self()->clearContent(this);
     }
-    setBackground();
-    setLCDIcon();
+//    setBackground();
+//    setLCDIcon();
     WeatherPopupApplet::configChanged();
-}
-
-void WeatherStation::setLCDIcon()
-{
-    if (m_lcdPanel->size().toSize() != size().toSize()) {
-        m_lcdPanel->resize(size());
-    }
-    setPopupIcon(QIcon(m_lcdPanel->toPixmap()));
 }
 
 Value WeatherStation::value(const QString& value, int unit)
@@ -152,19 +124,19 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
     if (data.contains("Place")) {
         QString v = data["Temperature"].toString();
         Value temp = value(v, data["Temperature Unit"].toInt());
-        setTemperature(temp, (v.indexOf('.') > -1));
-        setPressure(conditionIcon(),
-                    value(data["Pressure"].toString(), data["Pressure Unit"].toInt()),
-                    data["Pressure Tendency"].toString());
-        setHumidity(data["Humidity"].toString());
-        setWind(value(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt()),
-                data["Wind Direction"].toString());
-        m_lcd->setLabel("provider-label", data["Credit"].toString());
+//        setTemperature(temp, (v.indexOf('.') > -1));
+//        setPressure(conditionIcon(),
+//                    value(data["Pressure"].toString(), data["Pressure Unit"].toInt()),
+//                    data["Pressure Tendency"].toString());
+//        setHumidity(data["Humidity"].toString());
+//        setWind(value(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt()),
+//                data["Wind Direction"].toString());
+//        m_lcd->setLabel("provider-label", data["Credit"].toString());
         m_url = data["Credit Url"].toString();
-        m_lcd->setItemClickable("provider-click", !m_url.isEmpty());
+//        m_lcd->setItemClickable("provider-click", !m_url.isEmpty());
 
         if (m_showToolTip) {
-            m_lcd->setLabel("weather-label", data["Place"].toString().toUpper());
+//           m_lcd->setLabel("weather-label", data["Place"].toString().toUpper());
             Plasma::ToolTipContent ttc(data["Place"].toString(),
                     i18n("Last updated: %1", KGlobal::locale()->formatDateTime(QDateTime::currentDateTime(), KLocale::FancyLongDate)));
             Plasma::ToolTipManager::self()->setContent(this, ttc);
@@ -239,12 +211,12 @@ void WeatherStation::setPressure(const QString& condition, const Value& pressure
 {
     QStringList current;
     current = fromCondition(condition);
-    m_lcd->setGroup("weather", current);
+//    m_lcd->setGroup("weather", current);
 
     Value value = pressure.convertTo(pressureUnit());
     QString s = fitValue(value, 5);
-    m_lcd->setNumber("pressure", s);
-    m_lcd->setLabel("pressure-unit-label", value.unit()->symbol());
+//    m_lcd->setNumber("pressure", s);
+//    m_lcd->setLabel("pressure-unit-label", value.unit()->symbol());
 
     qreal t;
     if (tendencyString.toLower() == "rising") {
@@ -255,13 +227,13 @@ void WeatherStation::setPressure(const QString& condition, const Value& pressure
         t = tendencyString.toDouble();
     }
 
-    if (t > 0.0) {
-        m_lcd->setGroup("pressure_direction", QStringList() << "up");
-    } else if (t < 0.0) {
-        m_lcd->setGroup("pressure_direction", QStringList() << "down");
-    } else {
-        m_lcd->setGroup("pressure_direction", QStringList());
-    }
+//    if (t > 0.0) {
+//        m_lcd->setGroup("pressure_direction", QStringList() << "up");
+//    } else if (t < 0.0) {
+//        m_lcd->setGroup("pressure_direction", QStringList() << "down");
+//    } else {
+//        m_lcd->setGroup("pressure_direction", QStringList());
+//    }
 }
 
 void WeatherStation::setTemperature(const Value& temperature, bool hasDigit)
@@ -269,13 +241,13 @@ void WeatherStation::setTemperature(const Value& temperature, bool hasDigit)
     hasDigit = hasDigit || (temperatureUnit() != temperature.unit());
     Value v = temperature.convertTo(temperatureUnit());
     qDebug() << v.isValid();
-    m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
-    m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
+//    m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
+//    m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
     QString tmp = hasDigit ? fitValue(v , 4) : QString::number(v.number());
-    m_lcd->setNumber("temperature", tmp);
+//    m_lcd->setNumber("temperature", tmp);
     tmp = hasDigit ? fitValue(v , 3) : QString::number(v.number());
-    m_lcdPanel->setNumber("temperature", tmp);
-    setLCDIcon();
+//    m_lcdPanel->setNumber("temperature", tmp);
+//    setLCDIcon();
 }
 
 void WeatherStation::setHumidity(QString humidity)
@@ -285,7 +257,7 @@ void WeatherStation::setHumidity(QString humidity)
     } else {
         humidity.remove('%');
     }
-    m_lcd->setNumber("humidity", humidity);
+//    m_lcd->setNumber("humidity", humidity);
 }
 
 void WeatherStation::setWind(const Value& speed, const QString& dir)
@@ -294,13 +266,13 @@ void WeatherStation::setWind(const Value& speed, const QString& dir)
     Value value = speed.convertTo(speedUnit());
     QString s = fitValue(value, 3);
 
-    if (dir == "N/A") {
-        m_lcd->setGroup("wind", QStringList());
-    } else {
-        m_lcd->setGroup("wind", QStringList() << dir);
-    }
-    m_lcd->setNumber("wind_speed", s);
-    m_lcd->setLabel("wind-unit-label", value.unit()->symbol());
+//    if (dir == "N/A") {
+//        m_lcd->setGroup("wind", QStringList());
+//    } else {
+//        m_lcd->setGroup("wind", QStringList() << dir);
+//    }
+//    m_lcd->setNumber("wind_speed", s);
+//    m_lcd->setLabel("wind-unit-label", value.unit()->symbol());
 }
 
 void WeatherStation::clicked(const QString &name)
