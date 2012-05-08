@@ -582,33 +582,37 @@ QString KOAuth::identifier() const
     return QString("%1@%2").arg(d->user, d->serviceBaseUrl);
 }
 
-QVariantHash KOAuth::retrieveCredentials() const
+bool KOAuth::retrieveCredentials() const
 {
     KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
                                            0, KWallet::Wallet::Synchronous);
     if (wallet && wallet->isOpen() && wallet->setFolder("Plasma-MicroBlog")) {
 
+//         QMap<QString, QMap<QString, QString> > mapMap;
         QMap<QString, QMap<QString, QString> > mapMap;
-        d->authorizedAccounts = mapMap.keys();
-        QMap<QString, QString> map;
         if (wallet->readMapList("*", mapMap) == 0) {
-            kDebug() << "see my maps: " << mapMap;
-        }
-
-        if (wallet->readMap(identifier(), map) == 0) {
-            QVariantHash hash;
-            d->accessToken = map["accessToken"].toLocal8Bit();
-            d->accessTokenSecret = map["accessTokenSecret"].toLocal8Bit();
-            kDebug() << "WWW read accesstoken from wallet: " << d->accessToken << d->accessTokenSecret;
-            return hash;
+            d->authorizedAccounts = mapMap.keys();
+            if (d->authorizedAccounts.contains(identifier())) {
+                d->accessToken = mapMap[identifier()]["accessToken"].toAscii();
+                d->accessTokenSecret = mapMap[identifier()]["accessTokenSecret"].toAscii();
+                //kDebug() << "read accesstoken from wallet: " << d->accessToken << d->accessTokenSecret;
+                return true;
+            } else {
+                //return false;
+            }
+            //if (wallet->readMap(identifier(), map) == 0) {
+//             d->accessToken = mapMap[identifier()]["accessToken"].toLocal8Bit();
+//             d->accessTokenSecret = mapMap[identifier()]["accessTokenSecret"].toLocal8Bit();
+            //kDebug() << "read accesstoken from wallet: " << d->accessToken << d->accessTokenSecret;
+            return true;
         } else {
-            kWarning() << "Unable to write credentials to wallet";
+            kWarning() << "Unable to read credentials from wallet";
         }
     } else {
         kWarning() << "Unable to open wallet";
     }
 
-    return QVariantHash();
+    return false;
 }
 void KOAuth::forgetCredentials() const
 {
@@ -621,18 +625,14 @@ void KOAuth::forgetCredentials() const
 void KOAuth::configToWallet()
 {
     KSharedConfigPtr gptr = KSharedConfig::openConfig("koauthrc", KConfig::SimpleConfig);
-    //KConfigGroup config = KConfigGroup(ptr);
-
-//     kDebug() << "Available groups: " << ptr->groupList();
     KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc");
     foreach (const QString g, gptr->groupList()) {
         KConfigGroup config = KConfigGroup(ptr, g);
-        kDebug() << "GRP" << g.split('@')[1];
         d->user = g.split('@')[0];
         d->serviceBaseUrl = g.split('@')[1];
         d->accessToken = config.readEntry("accessToken", QByteArray());
         d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
-        kDebug() << " **** Saving creds: " << d->user << d->serviceBaseUrl << d->accessToken << d->accessTokenSecret;
+        //kDebug() << " **** Saving creds: " << d->user << d->serviceBaseUrl << d->accessToken << d->accessTokenSecret;
         saveCredentials();
     }
 }
