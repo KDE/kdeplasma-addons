@@ -34,6 +34,7 @@
 #include <KRun>
 #include <KDialog>
 #include <KIO/Job>
+#include <KWallet/Wallet>
 
 #include <KWebView>
 #include <KIO/AccessManager>
@@ -55,12 +56,14 @@ public:
     {
         interface = new QOAuth::Interface();
         busy = false;
+        useWallet = true;
     }
 
     QOAuth::Interface* interface;
 
     QString user;
     QString password;
+    bool useWallet;
 
     bool busy;
 
@@ -78,6 +81,8 @@ public:
     QByteArray accessToken;
     QByteArray accessTokenSecret;
 
+    QStringList authorizedAccounts;
+
     QString verifier;
 
     QCA::Initializer *qcaInitializer;
@@ -92,6 +97,8 @@ KOAuth::KOAuth(QObject* parent)
 {
 
     setObjectName(QLatin1String("KOAuth"));
+//     d = new KOAuthPrivate;
+
 }
 
 QByteArray KOAuth::accessToken() const
@@ -146,6 +153,9 @@ void KOAuth::init()
                 this, SLOT(appAuthorized(const QString&, const QString&)));
         connect(d->w, SIGNAL(statusUpdated(const QString&, const QString&, const QString&, const QString&)),
                 SIGNAL(statusUpdated(const QString&, const QString&, const QString&, const QString&)));
+
+//         configToWallet(); // FIXME: run only once. remove later.
+
     }
 
 }
@@ -287,12 +297,16 @@ void KOAuth::accessTokenFromService()
         //kDebug() << "Received Access Token OK!" << d->accessToken << d->accessTokenSecret;
         emit accessTokenReceived(d->user, d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
         d->busy = false;
-        KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc");
-        KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
-        config.writeEntry("accessToken", d->accessToken);
-        config.writeEntry("accessTokenSecret", d->accessTokenSecret);
-        config.sync();
 
+        if (d->useWallet) {
+            saveCredentials();
+        } else {
+            KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc");
+            KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
+            config.writeEntry("accessToken", d->accessToken);
+            config.writeEntry("accessTokenSecret", d->accessTokenSecret);
+            config.sync();
+        }
         emit authorized();
     } else {
         kError() << d->interface->error() << reply;
@@ -303,13 +317,28 @@ void KOAuth::accessTokenFromService()
     }
 }
 
-QStringList KOAuth::authorizedAccounts() const
+QStringList KOAuth::authorizedAccounts()
 {
-    KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc", KConfig::SimpleConfig);
+//     KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc", KConfig::SimpleConfig);
     //KConfigGroup config = KConfigGroup(ptr);
+    KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
+                                           0, KWallet::Wallet::Synchronous);
+    QStringList aac;
+    if (wallet && wallet->isOpen() && wallet->setFolder("Plasma-MicroBlog")) {
 
-//     kDebug() << "Available groups: " << ptr->groupList();
-    return ptr->groupList();
+        QMap<QString, QMap<QString, QString> > mapMap;
+        if (wallet->readMapList("*", mapMap) == 0) {
+//             kDebug() << "see my maps: " << mapMap;
+            aac = mapMap.keys();
+            kDebug() << "!!! read accounts: " << aac;
+        } else {
+            kWarning() << "Unable to read grouplist from wallet";
+        }
+    } else {
+        kWarning() << "Unable to open wallet";
+    }
+
+    return aac;
 }
 
 
@@ -345,10 +374,14 @@ void KOAuth::updateState()
 
 
     if (!d->user.isEmpty() && !d->serviceBaseUrl.isEmpty()) {
-        KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc");
-        KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
-        d->accessToken = config.readEntry("accessToken", QByteArray());
-        d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
+        if (d->useWallet) {
+            retrieveCredentials();
+        } else {
+            KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc");
+            KConfigGroup config = KConfigGroup(ptr, d->user+"@"+d->serviceBaseUrl);
+            d->accessToken = config.readEntry("accessToken", QByteArray());
+            d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
+        }
         //kDebug() << "oauthrc config for " << d->user+"@"+d->serviceBaseUrl << d->accessToken << d->accessTokenSecret;
         if (isAuthorized()) {
             emit accessTokenReceived(d->user, d->serviceBaseUrl, d->accessToken, d->accessTokenSecret);
@@ -518,6 +551,92 @@ void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod me
     QByteArray authorizationHeader = paramsToString(parameters, ParseForHeaderArguments);
     job->addMetaData("customHTTPHeader", QByteArray("Authorization: " + authorizationHeader));
 }
+
+void KOAuth::saveCredentials() const
+{
+    KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
+                                           0, KWallet::Wallet::Synchronous);
+    const QString folder("Plasma-MicroBlog");
+    if (wallet->isOpen() &&
+        (wallet->hasFolder(folder) ||
+         wallet->createFolder(folder)) &&
+         wallet->setFolder(folder)) {
+
+        //QStringList accounts =
+        QMap<QString, QString> map;
+        map["accessToken"] = QString(d->accessToken);
+        map["accessTokenSecret"] = QString(d->accessTokenSecret);
+
+        if (wallet->writeMap(identifier(), map) != 0) {
+            kWarning() << "Unable to write accessToken & Secret to wallet";
+        } else {
+            kDebug() << "Wrote credentials to your wallet" << map;
+        }
+    } else {
+        kWarning() << "Unable to open Plasma-MicroBlog wallet";
+    }
+}
+
+QString KOAuth::identifier() const
+{
+    return QString("%1@%2").arg(d->user, d->serviceBaseUrl);
+}
+
+QVariantHash KOAuth::retrieveCredentials() const
+{
+    KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
+                                           0, KWallet::Wallet::Synchronous);
+    if (wallet && wallet->isOpen() && wallet->setFolder("Plasma-MicroBlog")) {
+
+        QMap<QString, QMap<QString, QString> > mapMap;
+        d->authorizedAccounts = mapMap.keys();
+        QMap<QString, QString> map;
+        if (wallet->readMapList("*", mapMap) == 0) {
+            kDebug() << "see my maps: " << mapMap;
+        }
+
+        if (wallet->readMap(identifier(), map) == 0) {
+            QVariantHash hash;
+            d->accessToken = map["accessToken"].toLocal8Bit();
+            d->accessTokenSecret = map["accessTokenSecret"].toLocal8Bit();
+            kDebug() << "WWW read accesstoken from wallet: " << d->accessToken << d->accessTokenSecret;
+            return hash;
+        } else {
+            kWarning() << "Unable to write credentials to wallet";
+        }
+    } else {
+        kWarning() << "Unable to open wallet";
+    }
+
+    return QVariantHash();
+}
+void KOAuth::forgetCredentials() const
+{
+    d->user = QByteArray();
+    d->serviceBaseUrl = QByteArray();
+    d->password = QString();
+    saveCredentials();
+}
+
+void KOAuth::configToWallet()
+{
+    KSharedConfigPtr gptr = KSharedConfig::openConfig("koauthrc", KConfig::SimpleConfig);
+    //KConfigGroup config = KConfigGroup(ptr);
+
+//     kDebug() << "Available groups: " << ptr->groupList();
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc");
+    foreach (const QString g, gptr->groupList()) {
+        KConfigGroup config = KConfigGroup(ptr, g);
+        kDebug() << "GRP" << g.split('@')[1];
+        d->user = g.split('@')[0];
+        d->serviceBaseUrl = g.split('@')[1];
+        d->accessToken = config.readEntry("accessToken", QByteArray());
+        d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
+        kDebug() << " **** Saving creds: " << d->user << d->serviceBaseUrl << d->accessToken << d->accessTokenSecret;
+        saveCredentials();
+    }
+}
+
 
 
 } // namespace

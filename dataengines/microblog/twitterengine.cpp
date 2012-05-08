@@ -71,13 +71,15 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return true;
     }
     if (name == "Accounts") {
-        KOAuth::KOAuth *authHelper = 0;
-        authHelper = new KOAuth::KOAuth(this);
+//         KOAuth::KOAuth *authHelper = 0;
+//         authHelper = new KOAuth::KOAuth(this);
+        //auth
 //         setData("Accounts", "Groups", authHelper->authorizedAccounts());
-        foreach (const QString &grp, authHelper->authorizedAccounts()) {
+        foreach (const QString &grp, KOAuth::KOAuth::authorizedAccounts()) {
             QVariantMap vm;
-            
             QStringList l = grp.split('@');
+            if (l.count() < 2) continue;
+            kDebug() << " LL " << l;
             const QString user = l[0];
             const QString serviceBaseUrl = l[1];
             vm["accountUser"] = user;
@@ -98,7 +100,7 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
             //setData("Accounts", grp, true);
 //             setData("Accounts", "authorized", true);
         }
-        delete authHelper;
+//         delete authHelper;
         scheduleSourcesUpdated();
         return true;
     }

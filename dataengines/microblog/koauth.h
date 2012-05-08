@@ -59,10 +59,12 @@ public:
     void init();
     void run();
 
-    QStringList authorizedAccounts() const;
+    static QStringList authorizedAccounts();
 
     QString user() const;
     void setUser(const QString &user);
+
+    QString identifier() const;
 
     QString serviceBaseUrl() const;
     void setServiceBaseUrl(const QString &url);
@@ -75,6 +77,10 @@ public:
 
     void sign(KIO::Job *job, const QString &url, ParamMap params = ParamMap(), HttpMethod httpMethod = GET);
     QByteArray authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params);
+
+    Q_INVOKABLE void saveCredentials() const;
+    Q_INVOKABLE void forgetCredentials() const;
+    Q_INVOKABLE QVariantHash retrieveCredentials() const;
 
 Q_SIGNALS:
     void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
@@ -91,6 +97,8 @@ private:
     void requestTokenFromService();
     void accessTokenFromService();
     QString errorMessage(int e);
+
+    void configToWallet();
 
     QByteArray paramsToString(const QOAuth::ParamMap &parameters, ParsingMode mode);
     QByteArray createSignature(const QString &requestUrl, HttpMethod method, const QByteArray &token,

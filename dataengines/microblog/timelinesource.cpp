@@ -210,11 +210,7 @@ void TimelineSource::result(KJob *job)
         //QXmlStreamReader reader(m_xml);
 //         kDebug() << "Timeline job returned: " << tj->url() << m_xml.count();// << m_xml;
         if (m_requestType == TimelineSource::SearchTimeline) {
-            if (tj->url().pathOrUrl().contains("atom")) {
-                //parseSearchResult(reader);
-            } else {
-                parseJsonSearchResult(m_xml);
-            }
+            parseJsonSearchResult(m_xml);
         } else {
             //parse(reader);
             parseJson(m_xml);
