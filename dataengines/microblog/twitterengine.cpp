@@ -59,7 +59,7 @@ TwitterEngine::~TwitterEngine()
 
 bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
-    kDebug() << name;
+//     kDebug() << name;
     if (name.startsWith("UserImages:")) {
         // these are updated by the engine itself, not consumers
         return true;
@@ -83,7 +83,7 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
             vm["accountUser"] = user;
             vm["accountService"] = serviceBaseUrl;
             vm["accountIdentifier"] = grp;
-            kDebug() << " == Setting AUTH data for grp:" << grp;
+//             kDebug() << " == Setting AUTH data for grp:" << grp;
 //             setData("Accounts", "identifier", grp);
             setData("Accounts", grp, vm);
             setData("Status:" + grp, "Authorization", "Ok");
@@ -117,7 +117,7 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
 
 Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 {
-    kDebug() << name;
+//     kDebug() << name;
     TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
     if (!source) {
         kWarning() << "service for non-timeline source requested." << name << sources();
@@ -207,7 +207,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         imageSource->setStorageEnabled(true);
         imageSource->setObjectName("UserImages:"+serviceBaseUrl);
         addSource(imageSource);
-        kDebug() << "+++++ ImageSource created...." << "UserImages:"+serviceBaseUrl;
+//         kDebug() << "+++++ ImageSource created...." << "UserImages:"+serviceBaseUrl;
     }
 
     KOAuth::KOAuth *authHelper = addAuthHelper(user, serviceBaseUrl);
@@ -247,11 +247,11 @@ UserSource* TwitterEngine::newUserSource(const QString userName, const QString s
     UserSource *source = dynamic_cast<UserSource*>(containerForSource(name));
 
     if (!source) {
-        kDebug() << "SOURCE 0";
+//         kDebug() << "SOURCE 0";
     }
 
     if (!source && !userName.isEmpty()) {
-        kDebug() << "New UserSource" << userName << serviceBaseUrl;
+//         kDebug() << "New UserSource" << userName << serviceBaseUrl;
         source = new UserSource(userName, serviceBaseUrl, this);
         source->setObjectName(name);
         source->setStorageEnabled(true);
@@ -263,7 +263,7 @@ UserSource* TwitterEngine::newUserSource(const QString userName, const QString s
             imageSource->setStorageEnabled(true);
             imageSource->setObjectName("UserImages:"+serviceBaseUrl);
             addSource(imageSource);
-            kDebug() << "+++++ new ImageSource..." << "UserImages:"+serviceBaseUrl;
+//             kDebug() << "+++++ new ImageSource..." << "UserImages:"+serviceBaseUrl;
         }
 
         connect(source, SIGNAL(loadImage(const QString&, const KUrl&)),
@@ -358,7 +358,7 @@ void TwitterEngine::authorizationStatusUpdated(const QString &user, const QStrin
     const QString src = "Status:" + user + "@" + serviceBaseUrl;
     setData(src, "AuthorizationMessage", message);
     setData(src, "Authorization", status);
-    kDebug() << "Set status to " << status << "for" << src;
+//     kDebug() << "Set status to " << status << "for" << src;
     scheduleSourcesUpdated();
 }
 

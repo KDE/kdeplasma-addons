@@ -67,7 +67,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
             m_url = KUrl("http://identi.ca/api/search.json?rpp=50&include_entities=true&show_user=true&result_type=mixed&q=" + query);
         }
         m_needsAuthorization = false;
-        kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
+//         kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
    case Profile:
         m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.json").arg(parameters.at(0)));

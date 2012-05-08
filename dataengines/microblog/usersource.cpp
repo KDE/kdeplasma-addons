@@ -55,10 +55,10 @@ void UserSource::loadUserInfo(const QString &who, const QString &serviceBaseUrl)
         return;
     }
     m_currentUrl = u;
-    kDebug() << "Requesting user info for " << who << " from ... " << u;
+//     kDebug() << "Requesting user info for " << who << " from ... " << u;
     //return;
     //m_runningJobs++;
-    kDebug() << "NEW JOB." << who << u;
+//     kDebug() << "NEW JOB." << who << u;
     KIO::Job *job = KIO::get(u, KIO::NoReload, KIO::HideProgressInfo);
     job->setAutoDelete(true);
     m_jobs[job] = who;
@@ -83,7 +83,7 @@ void UserSource::result(KJob *job)
     if (!m_jobs.contains(job)) {
         return;
     }
-    kDebug() << "job returned" << m_currentUrl;
+//     kDebug() << "job returned" << m_currentUrl;
     KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
     //const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
     if (kiojob->url().pathOrUrl() == m_currentUrl) {
@@ -151,7 +151,7 @@ void UserSource::parseJson(const QVariant &data)
 //         kDebug() << "Got image url for: " << userName << imgUrl;
         emit loadImage(userName, KUrl(imgUrl));
     } else {
-        kDebug() << " imageUrl: " <<  userName;
+//         kDebug() << " imageUrl: " <<  userName;
     }
     //if (data().contains("ImageUrl")) {
         //KUrl url(user["profile_image_url"].toString());

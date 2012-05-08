@@ -295,9 +295,9 @@ void KOAuth::accessTokenFromService()
 
         emit authorized();
     } else {
-        kDebug() << d->interface->error() << reply;
+        kError() << d->interface->error() << reply;
         e += errorMessage(d->interface->error());
-        kDebug() << "Request Not working" << e;
+        kError() << "Request Not working" << e;
         emit statusUpdated(d->user, d->serviceBaseUrl, "Error", "Access Token Error:" + e);
         d->busy = false;
     }
@@ -308,7 +308,7 @@ QStringList KOAuth::authorizedAccounts() const
     KSharedConfigPtr ptr = KSharedConfig::openConfig("koauthrc", KConfig::SimpleConfig);
     //KConfigGroup config = KConfigGroup(ptr);
 
-    kDebug() << "Available groups: " << ptr->groupList();
+//     kDebug() << "Available groups: " << ptr->groupList();
     return ptr->groupList();
 }
 
