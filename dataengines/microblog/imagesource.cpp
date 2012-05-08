@@ -41,7 +41,6 @@ ImageSource::~ImageSource()
 
 void ImageSource::loadImage(const QString &who, const KUrl &url)
 {
-//     kDebug() << " @@@ " << who << url;
     if (who.isEmpty()) {
         return;
     }
@@ -75,9 +74,7 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
     // arbitrary limit here, revert as soon as BUG 192625 is fixed
     // Note: seems fixed.
     if (m_runningJobs < 500) {
-        //if (who == "sebas") kDebug() << " 222 starting job" << who;
         m_runningJobs++;
-//         kDebug() << "starting imagejob: " << url;
         KIO::Job *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
         job->setAutoDelete(true);
         m_jobs[job] = who;
@@ -121,7 +118,6 @@ void ImageSource::result(KJob *job)
         emit dataChanged();
         KIO::TransferJob* kiojob = dynamic_cast<KIO::TransferJob*>(job);
         const QString cacheKey = who + "@" + kiojob->url().pathOrUrl();
-        //kDebug() << "Set data from image job." << who << cacheKey;
 
         m_imageCache->insertImage(cacheKey, img);
     }
