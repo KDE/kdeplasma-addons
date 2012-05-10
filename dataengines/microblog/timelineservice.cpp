@@ -55,6 +55,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
         //m_source->setPassword(parameters.value("password").toString());
         const QString user = parameters.value("user").toString();
         const QString password = parameters.value("password").toString();
+        kDebug() << "Start authorization for " << user << password;
         m_source->startAuthorization(user, password);
     }
 

@@ -171,20 +171,27 @@ void KOAuth::run()
 
 void KOAuth::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
 {
-//     kDebug() << serviceBaseUrl << user << password;
-    if (d->busy || isAuthorized()) {
-        return;
-    }
-    d->user = user;
+    kDebug() << "XXXX" << serviceBaseUrl << user << password;
+    kDebug() << "DDDD" << d->serviceBaseUrl << d->user << d->password;
+    //if (d->user != user || d->serviceBaseUrl != serviceBaseUrl) {
+        d->user = user;
+        d->password = password;
+        d->serviceBaseUrl = serviceBaseUrl;
+        d->accessToken = QByteArray();
+        d->accessTokenSecret = QByteArray();
+//     } else if (d->busy) {
+//         kDebug() << "EXIT: " << d->busy << isAuthorized();
+//         return;
+//     }
+    kDebug() << serviceBaseUrl << user << password;
     d->w->setUser(user);
     d->w->setServiceBaseUrl(serviceBaseUrl);
     d->w->setPassword(password);
-    d->password = password;
-    d->serviceBaseUrl = serviceBaseUrl;
 
     //run();
     if (!isAuthorized()) {
         d->busy = true;
+        kDebug() << "request token";
         requestTokenFromService();
     }
 }
