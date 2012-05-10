@@ -167,7 +167,7 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
         // We are already performing a fetch, let's not bother starting over
         return 0;
     }
-//     kDebug() << "Creating job..." << m_url;
+     kDebug() << "Creating job..." << m_url;
 
     // Create a KIO job to get the data from the web service
     m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
@@ -208,7 +208,7 @@ void TimelineSource::result(KJob *job)
         // TODO: error handling
     } else {
         //QXmlStreamReader reader(m_xml);
-//         kDebug() << "Timeline job returned: " << tj->url() << m_xml.count();// << m_xml;
+//         kDebug() << "Timeline job returned: " << tj->url() << m_xml.count() << m_xml;
         if (m_requestType == TimelineSource::SearchTimeline) {
             parseJsonSearchResult(m_xml);
         } else {

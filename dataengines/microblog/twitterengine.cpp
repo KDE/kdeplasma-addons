@@ -184,7 +184,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         }
     } else {
         kWarning() << "service not found. Please request a source such as \"TimelineWithFriends:UserName@ServiceUrl\"";
-        serviceBaseUrl = "https://twitter.com/";
+        serviceBaseUrl = "https://api.twitter.com/1/";
         kWarning() << "  Using " << serviceBaseUrl << " instead.";
     }
     ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));

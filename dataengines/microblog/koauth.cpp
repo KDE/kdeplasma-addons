@@ -355,7 +355,7 @@ void KOAuth::updateState()
 {
     const QUrl u(d->serviceBaseUrl);
 
-    if (u.host() == "twitter.com") {
+    if (u.host().endsWith("twitter.com")) {
         //kDebug() << "Using twitter...";
         d->requestTokenUrl = "https://api.twitter.com/oauth/request_token";
         d->accessTokenUrl = "https://api.twitter.com/oauth/access_token";
