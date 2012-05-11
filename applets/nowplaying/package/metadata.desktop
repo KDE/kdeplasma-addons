@@ -116,11 +116,14 @@ Icon=applications-multimedia
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 
-X-KDE-Library=plasma_applet_nowplaying
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/nowplaying.qml
+X-Plasma-DefaultSize=256,128
+
 X-KDE-PluginInfo-Author=Alex Merry
 X-KDE-PluginInfo-Email=alex.merry@kdemail.net
 X-KDE-PluginInfo-Name=nowplaying
-X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Version=2.0
 X-KDE-PluginInfo-Website=
 X-KDE-PluginInfo-Category=Multimedia
 X-KDE-PluginInfo-Depends=

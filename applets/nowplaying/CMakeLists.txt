@@ -1,17 +1,9 @@
-project(plasma-applet-nowplaying)
+project(nowplaying)
 
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
+install(DIRECTORY package/
+        DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/nowplaying)
 
-set(nowplaying_SRCS
-    nowplaying.cpp
-    controls.cpp
-    albumart.cpp
-    infopanel.cpp)
+install(FILES package/metadata.desktop
+        DESTINATION ${SERVICES_INSTALL_DIR}
+        RENAME plasma-applet-nowplaying.desktop)
 
-kde4_add_plugin(plasma_applet_nowplaying ${nowplaying_SRCS})
-target_link_libraries(plasma_applet_nowplaying  ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
-
-install(FILES nocover.svgz DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/nowplaying/)
-install(TARGETS plasma_applet_nowplaying DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-applet-nowplaying.desktop DESTINATION ${SERVICES_INSTALL_DIR})

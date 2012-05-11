@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-$XGETTEXT *.cpp -o $podir/plasma_applet_nowplaying.pot
+$XGETTEXT `find . -name \*.qml` -o $podir/plasma_applet_nowplaying.pot
