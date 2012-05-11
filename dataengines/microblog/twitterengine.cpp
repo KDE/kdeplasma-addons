@@ -163,7 +163,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     } else if (name.startsWith(searchTimelinePrefix)) {
         requestType = TimelineSource::SearchTimeline;
         who.remove(searchTimelinePrefix);
-        //kDebug() << "Search Timeline requested: " << who;
+        kDebug() << "Search Timeline requested: " << who;
     } else {
         requestType = TimelineSource::Timeline;
         who.remove(timelinePrefix);
@@ -177,9 +177,10 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     if (account.count() == 2) {
         QStringList sbu = account.at(1).split(':');
         if (sbu.count() >= 2) {
-            serviceBaseUrl = sbu.at(0) + ':' + sbu.at(1);
+            serviceBaseUrl = sbu.at(0) + ':' + sbu.at(1); // http + urlpart
             if (sbu.count() > 2) {
                 parameter = sbu.at(2);
+                kDebug() << "reassembled serviceBaseUrl: " << serviceBaseUrl << parameter;
             }
         }
     } else {

@@ -50,24 +50,46 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     setObjectName(QLatin1String("Timeline"));
     // set up the url
     QString query;
+
+    m_params.clear();
+//     if (m_parameters.count()) {
+//         m_params.insert("q", m_parameters[0].toLocal8Bit());
+//     }
+
+    // parse URL
+    const QString &pa = m_parameters[0].toLocal8Bit();
+    const QStringList &tokens = pa.split(QLatin1Char('&'));
+    foreach (const QString &t, tokens) {
+        const QStringList &pair = t.split(QLatin1Char('='));
+        if (pair.count() == 2) {
+            const QByteArray &n = QUrl::toPercentEncoding(pair.at(0).toLocal8Bit());
+            const QByteArray &v = QUrl::toPercentEncoding(pair.at(1).toLocal8Bit());
+            kDebug() << "       inserted: " << n << v;
+            query.append(QString("%1=%2&").arg(QString(n),  QString(v)));
+            m_params.insert(n, v);
+            //inserted =
+        } else {
+            kWarning() << "Parsing problem expected 2 values, got: " << pair;
+        }
+    }
+
+    
     switch (m_requestType) {
     case CustomTimeline:
     case SearchTimeline:
-        m_params.clear();
-        if (m_parameters.count()) {
-            m_params.insert("q", m_parameters[0].toLocal8Bit());
-        }
+        
+        
         //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
-        query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
+        //query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
         // FIXME: handle service-specific search urls
-        if (m_serviceBaseUrl.host().contains("twitter.com")) {
-            m_url = KUrl("http://search.twitter.com/search.json?rpp=50&include_entities=true&show_user=true&result_type=mixed&q=" + query);
+        if (m_serviceBaseUrl.host().endsWith("twitter.com")) {
+            m_url = KUrl("http://search.twitter.com/search.json?rpp=50&include_entities=true&show_user=true&result_type=mixed&" + query);
         } else {
             //http://identi.ca/api/search.json?callback=foo&q=identica
-            m_url = KUrl("http://identi.ca/api/search.json?rpp=50&include_entities=true&show_user=true&result_type=mixed&q=" + query);
+            m_url = KUrl("http://identi.ca/api/search.json?rpp=50&include_entities=true&show_user=true&result_type=mixed&" + query);
         }
         m_needsAuthorization = false;
-//         kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
+        kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
    case Profile:
         m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.json").arg(parameters.at(0)));
