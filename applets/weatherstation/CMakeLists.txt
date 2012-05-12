@@ -2,7 +2,6 @@ project(plasma-weatherstation)
 
 set(weatherstation_SRCS
     weatherstation.cpp
-    lcd.cpp
 )
 
 kde4_add_ui_files(weatherstation_SRCS

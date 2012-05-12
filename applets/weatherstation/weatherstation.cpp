@@ -21,8 +21,6 @@
 #include <math.h>
 
 #include <QGraphicsLinearLayout>
-//#include <QtDeclarative>
-//#include <QtDeclarative/qdeclarative.h>
 
 #include <KConfigDialog>
 #include <KConfigGroup>
@@ -36,8 +34,6 @@
 #include <Plasma/Package>
 
 #include <plasmaweather/weatherconfig.h>
-
-#include "lcd.h"
 
 using namespace KUnitConversion;
 
@@ -53,8 +49,6 @@ WeatherStation::~WeatherStation()
 
 void WeatherStation::init()
 {
-//    qmlRegisterType<QObject>("org.kde.lcdweather", 1, 0, "LCD");
-
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
     m_declarativeWidget = new Plasma::DeclarativeWidget(this);
     layout->addItem(m_declarativeWidget);
