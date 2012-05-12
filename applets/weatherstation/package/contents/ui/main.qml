@@ -16,7 +16,7 @@
  */
 
 import QtQuick 1.1
-//import org.kde.lcdweather 1.0 as LCDWeather
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: root
@@ -24,10 +24,20 @@ Item {
     property int minimumWidth
     property int minimumHeight
 
-    //LCDWeather.LCD {
-    //    id: lcd1
-    //    svg: "weatherstation/lcd"
-    //}
+    PlasmaCore.Svg {
+        id: lcdSvg
+        imagePath: "weatherstation/lcd"
+    }
 
-    Component.onCompleted: console.log("ok");
+    PlasmaCore.SvgItem {
+        anchors.fill: parent
+        svg: lcdSvg
+        elementId: "lcd_background"
+    }
+
+    PlasmaCore.SvgItem {
+        anchors.fill: parent
+        svg: lcdSvg
+        elementId: "background"
+    }
 }
