@@ -207,10 +207,10 @@ void KOAuth::requestTokenFromService()
         return;
     }
 
-    ParamMap params;
+    QOAuth::ParamMap params;
     params.insert("oauth_callback", "oob");
 //     kDebug() << "starting token request ...";
-    ParamMap reply = d->interface->requestToken(d->requestTokenUrl,
+    QOAuth::ParamMap reply = d->interface->requestToken(d->requestTokenUrl,
                                                         QOAuth::GET, QOAuth::HMAC_SHA1, params);
 //     kDebug() << "token request done......" << reply;
 
@@ -421,12 +421,12 @@ QByteArray KOAuth::authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMetho
     return auth;
 }
 
-void KOAuth::sign(KIO::Job *job, const QString &url, ParamMap params, HttpMethod httpMethod)
+void KOAuth::sign(KIO::Job *job, const QString &url, QOAuth::ParamMap params, HttpMethod httpMethod)
 {
     signRequest(job, url, httpMethod, accessToken(), accessTokenSecret(), params);
 }
 
-QByteArray KOAuth::paramsToString(const ParamMap &parameters, ParsingMode mode)
+QByteArray KOAuth::paramsToString(const QOAuth::ParamMap &parameters, ParsingMode mode)
 {
     QByteArray middleString;
     QByteArray endString;
@@ -477,7 +477,7 @@ QByteArray KOAuth::paramsToString(const ParamMap &parameters, ParsingMode mode)
 }
 
 QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method, const QByteArray &token,
-                           const QByteArray &tokenSecret, ParamMap *params)
+                           const QByteArray &tokenSecret, QOAuth::ParamMap *params)
 {
     //kDebug() << "creating signature";
     // create nonce
@@ -509,7 +509,7 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
         params->insert("oauth_token", token);
     }
 
-    QByteArray parametersString = paramsToString(*params, ParseForSignatureBaseString);
+    QByteArray parametersString = paramsToString(*params, ParseForSignatureBaseString); // TODO use createSignature()
     QByteArray percentParametersString = parametersString.toPercentEncoding();
 
     QByteArray digest;
@@ -541,9 +541,9 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
 }
 
 void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod method, const QByteArray &token,
-                 const QByteArray &tokenSecret, const ParamMap &params)
+                 const QByteArray &tokenSecret, const QOAuth::ParamMap &params)
 {
-    QOAuth::ParamMap parameters = params;
+   QOAuth::ParamMap parameters;
 
     // create signature
     QByteArray signature = createSignature(requestUrl, method, token, tokenSecret, &parameters);

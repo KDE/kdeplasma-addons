@@ -73,12 +73,9 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         }
     }
 
-    
     switch (m_requestType) {
     case CustomTimeline:
     case SearchTimeline:
-        
-        
         //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
         //query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
         // FIXME: handle service-specific search urls
@@ -226,7 +223,7 @@ void TimelineSource::result(KJob *job)
     removeAllData();
     //m_imageSource->loadStarted();
     if (job->error()) {
-        kDebug() << "job error! : " << job->errorString() << tj->url();
+        kDebug() << "job error! : " << job->errorString() << tj->url() << m_xml;
         // TODO: error handling
     } else {
         //QXmlStreamReader reader(m_xml);
@@ -505,7 +502,7 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
             const QVariantMap &map = parser.parse(data).toMap();
             const QString &e = map["error"].toString();
             const QString &r = map["request"].toString();
-        kDebug() << "Error? : " << m_xml;
+            //kDebug() << "Error? : " << m_xml;
             kDebug() << "  E: " << e << " " << r;
             m_tempData["Status"] = QVariant(e + " (" + r + ")");
             QVariant v;

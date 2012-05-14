@@ -31,6 +31,9 @@ namespace KIO {
     class Job;
 }
 
+namespace QOAuth {
+    typedef QMultiMap<QByteArray,QByteArray> ParamMap;
+}
 
 namespace KOAuth {
     // OAuth methods
@@ -42,8 +45,6 @@ enum ParsingMode {
     ParseForHeaderArguments,    //!< HTTP request header format (parameters to be put inside a request header)
     ParseForSignatureBaseString //!< <a href=http://oauth.net/core/1.0/#anchor14>Signature Base String</a> format, meant for internal use.
 };
-
-typedef QMultiMap<QByteArray,QByteArray> ParamMap;
 
 class KOAuthPrivate;
 
@@ -75,7 +76,7 @@ public:
     QByteArray accessTokenSecret() const;
     bool isAuthorized();
 
-    void sign(KIO::Job *job, const QString &url, ParamMap params = ParamMap(), HttpMethod httpMethod = GET);
+    void sign(KIO::Job *job, const QString &url, QOAuth::ParamMap params = QOAuth::ParamMap(), HttpMethod httpMethod = GET);
     QByteArray authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params);
 
 Q_SIGNALS:

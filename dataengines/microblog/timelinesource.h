@@ -122,7 +122,7 @@ private:
     Plasma::DataEngine::Data m_tempData;
     KIO::Job *m_job;
     QString m_id;
-    KOAuth::ParamMap m_params;
+    QOAuth::ParamMap m_params;
 
     KOAuth::KOAuth *m_authHelper;
     QStringList m_parameters;
