@@ -58,21 +58,22 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
 
     // parse URL
     const QString &pa = m_parameters[0].toLocal8Bit();
-    const QStringList &tokens = pa.split(QLatin1Char('&'));
-    foreach (const QString &t, tokens) {
-        const QStringList &pair = t.split(QLatin1Char('='));
-        if (pair.count() == 2) {
-            const QByteArray &n = QUrl::toPercentEncoding(pair.at(0).toLocal8Bit());
-            const QByteArray &v = QUrl::toPercentEncoding(pair.at(1).toLocal8Bit());
-            kDebug() << "       inserted: " << n << v;
-            query.append(QString("%1=%2&").arg(QString(n),  QString(v)));
-            m_params.insert(n, v);
-            //inserted =
-        } else {
-            kWarning() << "Parsing problem expected 2 values, got: " << pair;
+    if (!pa.isEmpty()) {
+        const QStringList &tokens = pa.split(QLatin1Char('&'));
+        foreach (const QString &t, tokens) {
+            const QStringList &pair = t.split(QLatin1Char('='));
+            if (pair.count() == 2) {
+                const QByteArray &n = QUrl::toPercentEncoding(pair.at(0).toLocal8Bit());
+                const QByteArray &v = QUrl::toPercentEncoding(pair.at(1).toLocal8Bit());
+                kDebug() << "       inserted: " << n << v;
+                query.append(QString("%1=%2&").arg(QString(n),  QString(v)));
+                m_params.insert(n, v);
+                //inserted =
+            } else {
+                kWarning() << "Parsing problem expected 2 values, got: " << pa << pair;
+            }
         }
     }
-
     switch (m_requestType) {
     case CustomTimeline:
     case SearchTimeline:
@@ -186,14 +187,24 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
         // We are already performing a fetch, let's not bother starting over
         return 0;
     }
-     kDebug() << "Creating job..." << m_url;
+
+    QOAuth::ParamMap userParameters;
+//     userParameters.insert("count", "99");
 
     // Create a KIO job to get the data from the web service
-    m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
+    QByteArray ps;
+//     QByteArray ps = m_authHelper->userParameters(userParameters);
+//     if (ps == '?') {
+//         ps.clear();
+//     }
+    KUrl u = KUrl(m_url.pathOrUrl() + ps);
+    kDebug() << "Creating job..." << u << " P: " << ps;
+    m_job = KIO::get(u, KIO::Reload, KIO::HideProgressInfo);
+    // clear()??
     if (m_needsAuthorization) {
-        m_authHelper->sign(m_job, m_url.pathOrUrl(), m_params);
+        m_authHelper->sign(m_job, u.pathOrUrl(), m_params);
     }
-//     kDebug() << "signed" << m_url.pathOrUrl();
+    kDebug() << "signed" << u.pathOrUrl();
 
     connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)),
             this, SLOT(recv(KIO::Job*,QByteArray)));

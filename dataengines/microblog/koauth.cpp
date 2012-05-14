@@ -559,6 +559,14 @@ void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod me
     job->addMetaData("customHTTPHeader", QByteArray("Authorization: " + authorizationHeader));
 }
 
+QByteArray KOAuth::userParameters(const QOAuth::ParamMap& parameters)
+{
+    //url.append( qoauth->inlineParameters( map, QOAuth::ParseForInlineQuery ) );
+    QByteArray b = d->interface->inlineParameters(parameters, QOAuth::ParseForInlineQuery);
+    return b;
+}
+
+
 void KOAuth::saveCredentials() const
 {
     KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),

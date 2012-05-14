@@ -77,6 +77,7 @@ public:
     bool isAuthorized();
 
     void sign(KIO::Job *job, const QString &url, QOAuth::ParamMap params = QOAuth::ParamMap(), HttpMethod httpMethod = GET);
+    QByteArray userParameters(const QOAuth::ParamMap &parameters);
     QByteArray authorizationHeader(const KUrl &requestUrl, QOAuth::HttpMethod method, QOAuth::ParamMap params);
 
 Q_SIGNALS:
