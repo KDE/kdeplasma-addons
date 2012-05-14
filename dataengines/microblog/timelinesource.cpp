@@ -442,12 +442,14 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
     const QVariantMap resultsMap = parser.parse(data).toMap();
 //     kDebug() << "resultsMap.keys() :: " << resultsMap.count();
     //QVariantMap res = resultsMap["results"].toMap();
+    bool hasResult = false;
     foreach (QVariant v, resultsMap.keys()) {
 //         kDebug() << "QVariantMap" << v.toString() << resultsMap[v.toString()];
         if (v.toString() == "results") {
 //             kDebug() << " ################################# " << endl;
                 //["results"].toMap()
             foreach (const QVariant &w, resultsMap[v.toString()].toList()) {
+                hasResult = true;
                 QVariantMap r = w.toMap();
 
                 foreach (const QVariant &k, r.keys()) {
@@ -496,7 +498,22 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
         }
 
     }
+    if (!hasResult) {
+        const QVariantList resultsList = parser.parse(data).toList();
+        kDebug() << "Found " << resultsList.count() << " tweets";
+        if (!resultsList.count()) {
+            const QVariantMap &map = parser.parse(data).toMap();
+            const QString &e = map["error"].toString();
+            const QString &r = map["request"].toString();
+        kDebug() << "Error? : " << m_xml;
+            kDebug() << "  E: " << e << " " << r;
+            m_tempData["Status"] = QVariant(e + " (" + r + ")");
+            QVariant v;
+            v.setValue(m_tempData);
+            setData("1234", v);
 
+        }
+    }
 //     const QString& match = "duckduckgo";
 //
 //     if (match == "define") {
