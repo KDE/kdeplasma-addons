@@ -193,7 +193,7 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
 
     // Create a KIO job to get the data from the web service
     QByteArray ps;
-//     QByteArray ps = m_authHelper->userParameters(userParameters);
+    ps = m_authHelper->userParameters(userParameters);
 //     if (ps == '?') {
 //         ps.clear();
 //     }
