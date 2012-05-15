@@ -57,7 +57,13 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
 //         m_params.insert("q", m_parameters[0].toLocal8Bit());
 //     }
 
-    // parse URL
+    // default arguments
+    m_params.insert("include_entities", "true");
+    m_params.insert("include_rts", "true");
+    m_params.insert("count", "3");
+    m_params.insert("trim_user", "false");
+
+    // parse URL from QML runtime, possibly overwrite defaults
     const QString &pa = m_parameters[0].toLocal8Bit();
     if (!pa.isEmpty()) {
         const QStringList &tokens = pa.split(QLatin1Char('&'));
@@ -78,8 +84,8 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     switch (m_requestType) {
     case CustomTimeline:
     case SearchTimeline:
-        query.chop(1);
-        query.replace(0, 1);
+        //query.chop(1);
+        //query.replace(0, 1);
         //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
         //query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
         // FIXME: handle service-specific search urls
@@ -90,9 +96,9 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
             m_url = KUrl("http://identi.ca/api/search.json");
 
         }
-        m_params.insert("show_user", "true");
-        m_params.insert("rpp", "50");
-        m_params.insert("result_type", "mixed");
+        //m_params.insert("show_user", "true");
+        m_params.insert("rpp", "8");
+        //m_params.insert("result_type", "mixed");
         m_needsAuthorization = false;
         kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
@@ -195,10 +201,6 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
         return 0;
     }
 
-    m_params.insert("include_entities", "true");
-    m_params.insert("include_rts", "true");
-    m_params.insert("count", "99");
-    //userParameters.insert("trim_user", "true");
 
     // Create a KIO job to get the data from the web service
     QByteArray ps;
@@ -422,16 +424,20 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                         m_tempData[_u] = r[_u];
                     }
                 }
+                //     property string messageId: model["Id"]
+                //     property string user: model["User"]
+                //     property string source: model["source"]
+                //     property string dateTime: model["created_at"]
+                //     property bool isFavorite: model["favorited"]
+                //     property string message: model["Status"]
 
                 m_tempData["Date"] = r["created_at"];
                 m_id = r["id"].toString();
                 m_tempData["Id"] = m_id;
                 m_tempData["Status"] = r["text"];
                 m_tempData["Source"] = r["source"];
-                m_tempData["source"] = r["source"];
                 //QString u = cdata.split(' ').at(0);
                 m_tempData["User"] = r["from_user"];
-
                 // not supported in search
                 m_tempData["IsFavorite"] = "false";
                 m_tempData["favorited"] = "false";
@@ -439,13 +445,19 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                 if (m_tempData.contains("User")) {
                     KUrl url(r["profile_image_url"].toString());
                     m_imageSource->loadImage(m_tempData["User"].toString(), url);
+//                     emit userFound(m_tempData["User"], m_serviceBaseUrl.pathOrUrl());
                 }
+                kDebug() << "User: " << r["from_user"] << r["profile_image_url"];
+                kDebug() << " D USer: " << m_tempData["User"] << m_tempData["ImageUrl"];
 
-//                 foreach (const QVariant &x, w.toMap().keys()) {
-//                     //kDebug() << "           prop: " << x;
-// //                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
-//
-//                 }
+                //foreach (const QVariant &x, w.toMap().keys()) {
+                kDebug() << " -------------------- ";
+                foreach (const QVariant &x, m_tempData.keys()) {
+                    //kDebug() << "           prop: " << x;
+                    //m_tempData[x.toString(), 
+                    kDebug() << "  PP " << x.toString() << " : " << m_tempData[x.toString()].toString();
+
+                }
 
                 if (!m_id.isEmpty()) {
                     QVariant v;

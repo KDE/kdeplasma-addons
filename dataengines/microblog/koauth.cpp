@@ -521,6 +521,12 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
     }
     kDebug() << " ===> args after: \n" << plist.join("\t\n") << " after signing";
 
+    foreach (const QByteArray &_b, params->keys()) {
+        if (params->count(_b) > 1) {
+            kWarning() << "Request argument " << _b << "multiple times. This might break.";
+        }
+    }
+
     QByteArray parametersString = paramsToString(*params, ParseForSignatureBaseString); // TODO use createSignature()
     QByteArray percentParametersString = parametersString.toPercentEncoding();
 
