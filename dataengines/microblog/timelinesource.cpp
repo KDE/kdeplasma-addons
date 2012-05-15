@@ -23,6 +23,7 @@
 #include "timelineservice.h"
 #include "tweetjob.h"
 
+#include <QFile>
 #include <QXmlStreamReader>
 
 #include <qjson/parser.h>
@@ -77,15 +78,21 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     switch (m_requestType) {
     case CustomTimeline:
     case SearchTimeline:
+        query.chop(1);
+        query.replace(0, 1);
         //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
         //query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
         // FIXME: handle service-specific search urls
         if (m_serviceBaseUrl.host().endsWith("twitter.com")) {
-            m_url = KUrl("http://search.twitter.com/search.json?rpp=50&include_entities=true&show_user=true&result_type=mixed&" + query);
+            m_url = KUrl("http://search.twitter.com/search.json");
         } else {
             //http://identi.ca/api/search.json?callback=foo&q=identica
-            m_url = KUrl("http://identi.ca/api/search.json?rpp=50&include_entities=true&show_user=true&result_type=mixed&" + query);
+            m_url = KUrl("http://identi.ca/api/search.json");
+
         }
+        m_params.insert("show_user", "true");
+        m_params.insert("rpp", "50");
+        m_params.insert("result_type", "mixed");
         m_needsAuthorization = false;
         kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
@@ -100,7 +107,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         m_url = KUrl(m_serviceBaseUrl, "statuses/replies.json");
         break;
     case TimelineWithFriends:
-        m_url = KUrl(m_serviceBaseUrl, "statuses/friends_timeline.json");
+        m_url = KUrl(m_serviceBaseUrl, "statuses/home_timeline.json");
         break;
     case Timeline:
     default:
@@ -188,12 +195,14 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
         return 0;
     }
 
-    QOAuth::ParamMap userParameters;
-    userParameters.insert("count", "99");
+    m_params.insert("include_entities", "true");
+    m_params.insert("include_rts", "true");
+    m_params.insert("count", "99");
+    //userParameters.insert("trim_user", "true");
 
     // Create a KIO job to get the data from the web service
     QByteArray ps;
-    ps = m_authHelper->userParameters(userParameters);
+    ps = m_authHelper->userParameters(m_params);
 
     KUrl u = KUrl(m_url.pathOrUrl() + ps);
     kDebug() << "Creating job..." << u << " P: " << ps;
@@ -201,7 +210,7 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
     // clear()??
     if (m_needsAuthorization) {
         //QOAuth::ParamMap map;
-        m_authHelper->sign(m_job, m_url.pathOrUrl(), userParameters);
+        m_authHelper->sign(m_job, m_url.pathOrUrl(), m_params);
     }
     kDebug() << "signed" << u.pathOrUrl();
 
@@ -233,7 +242,7 @@ void TimelineSource::result(KJob *job)
     removeAllData();
     //m_imageSource->loadStarted();
     if (job->error()) {
-        kDebug() << "job error! : " << job->errorString() << tj->url() << m_xml;
+        kDebug() << "job error! : " << job->errorString() << tj->url();// << m_xml;
         // TODO: error handling
     } else {
         //QXmlStreamReader reader(m_xml);
@@ -245,6 +254,15 @@ void TimelineSource::result(KJob *job)
             parseJson(m_xml);
         }
     }
+
+     QFile file("/home/sebas/kdesvn/src/declarative-plasmoids/microblog/tmp/output.json");
+     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+         return;
+
+     QTextStream out(&file);
+     out << m_xml;
+     file.flush();
+     file.close();
 
     checkForUpdate();
     m_xml.clear();
@@ -394,7 +412,7 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                 //["results"].toMap()
             foreach (const QVariant &w, resultsMap[v.toString()].toList()) {
                 hasResult = true;
-                kDebug() << "TRUE" << resultsMap << resultsMap[v.toString()].toList();
+                //kDebug() << "TRUE" << resultsMap << resultsMap[v.toString()].toList();
                 QVariantMap r = w.toMap();
 
                 foreach (const QVariant &k, r.keys()) {

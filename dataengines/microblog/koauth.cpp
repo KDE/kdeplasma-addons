@@ -480,7 +480,11 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
                            const QByteArray &tokenSecret, QOAuth::ParamMap *params)
 {
     // create nonce
-
+    QStringList plist;
+    foreach (const QByteArray &ba, params->keys()) {
+        plist << ba;
+    }
+    kDebug() << "args before: \n" << plist.join("\t\n") << " before signing";
     if (!QCA::isSupported("hmac(sha1)")) {
         kError() << "Your QCA2 does not support the HMAC-SHA1 algorithm. Signing requests using OAuth does not work";
         return QByteArray();
@@ -511,6 +515,12 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
     }
 
     kDebug() << "!! creating signature for " << params->keys();
+    plist.clear();
+    foreach (const QByteArray ba, params->keys()) {
+        plist << ba;
+    }
+    kDebug() << " ===> args after: \n" << plist.join("\t\n") << " after signing";
+
     QByteArray parametersString = paramsToString(*params, ParseForSignatureBaseString); // TODO use createSignature()
     QByteArray percentParametersString = parametersString.toPercentEncoding();
 
