@@ -561,9 +561,10 @@ void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod me
 
 QByteArray KOAuth::userParameters(const QOAuth::ParamMap& parameters)
 {
-    //url.append( qoauth->inlineParameters( map, QOAuth::ParseForInlineQuery ) );
-    QByteArray b = d->interface->inlineParameters(parameters, QOAuth::ParseForInlineQuery);
-    return b;
+    if (!parameters.count()) {
+        return QByteArray();
+    }
+    return d->interface->inlineParameters(parameters, QOAuth::ParseForInlineQuery);
 }
 
 

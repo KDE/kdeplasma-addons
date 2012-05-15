@@ -189,14 +189,12 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
     }
 
     QOAuth::ParamMap userParameters;
-//     userParameters.insert("count", "99");
+    userParameters.insert("count", "99");
 
     // Create a KIO job to get the data from the web service
     QByteArray ps;
     ps = m_authHelper->userParameters(userParameters);
-//     if (ps == '?') {
-//         ps.clear();
-//     }
+
     KUrl u = KUrl(m_url.pathOrUrl() + ps);
     kDebug() << "Creating job..." << u << " P: " << ps;
     m_job = KIO::get(u, KIO::Reload, KIO::HideProgressInfo);
@@ -238,7 +236,7 @@ void TimelineSource::result(KJob *job)
         // TODO: error handling
     } else {
         //QXmlStreamReader reader(m_xml);
-//         kDebug() << "Timeline job returned: " << tj->url() << m_xml.count() << m_xml;
+        kDebug() << "Timeline job returned: " << tj->url() << m_xml.count() << m_xml;
         if (m_requestType == TimelineSource::SearchTimeline) {
             parseJsonSearchResult(m_xml);
         } else {
@@ -375,10 +373,12 @@ void TimelineSource::parseJson(const QByteArray &data)
     const QVariantList resultsList = parser.parse(data).toList();
 
 //     kDebug() << "resultsList.count() :: " << resultsList.count();
+    bool hasResult = false;
     foreach (const QVariant &v, resultsList) {
         const QVariantMap &tweet = v.toMap();
 //         kDebug() << " ################################# " << endl;
         foreach (const QVariant &k, tweet.keys()) {
+            hasResult = true;
             const QString _u = k.toString();
 //             kDebug() << " tweet k : " << _u;
             if (_u != "user") {
@@ -415,6 +415,23 @@ void TimelineSource::parseJson(const QByteArray &data)
             //}
             setData(m_id, v);
             m_id.clear();
+        }
+    }
+    if (!hasResult) {
+        const QVariantList resultsList = parser.parse(data).toList();
+        kDebug() << "Found " << resultsList.count() << " tweets";
+        if (!resultsList.count()) {
+            const QVariantMap &map = parser.parse(data).toMap();
+            const QString &e = map["error"].toString();
+            const QString &r = map["request"].toString();
+            //kDebug() << "Error? : " << m_xml;
+            kDebug() << "  E: " << e << " " << r;
+            m_tempData["Status"] = QVariant(e + " (" + r + ")");
+            m_tempData["User"] = QVariant(i18n("Error"));
+            QVariant v;
+            v.setValue(m_tempData);
+            setData("1234", v);
+
         }
     }
 
@@ -458,6 +475,7 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                 //["results"].toMap()
             foreach (const QVariant &w, resultsMap[v.toString()].toList()) {
                 hasResult = true;
+                kDebug() << "TRUE" << resultsMap << resultsMap[v.toString()].toList();
                 QVariantMap r = w.toMap();
 
                 foreach (const QVariant &k, r.keys()) {
@@ -506,6 +524,7 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
         }
 
     }
+    kDebug() << "HAS RESULT:" << hasResult;
     if (!hasResult) {
         const QVariantList resultsList = parser.parse(data).toList();
         kDebug() << "Found " << resultsList.count() << " tweets";
