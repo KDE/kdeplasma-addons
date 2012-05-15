@@ -89,6 +89,7 @@ Q_SIGNALS:
 public Q_SLOTS:
     void appAuthorized(const QString &authorizeUrl, const QString &verifier);
     void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
+    void forgetAccount(const QString &user, const QString &serviceUrl);
 
 private:
     void updateState();

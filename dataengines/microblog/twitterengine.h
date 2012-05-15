@@ -72,6 +72,7 @@ class TwitterEngine : public Plasma::DataEngine
 
     private Q_SLOTS:
         void imageDataChanged();
+        bool updateAccounts(const QString &removed = QString());
 //         void appAuthorized();
 //         void authorizeApp(const QString &serviceBaseUrl, const QString &authorizeUrl, const QString &pageUrl);
         void addUserSource(const QVariant &userData, const QString &serviceBaseUrl);

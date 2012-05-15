@@ -586,6 +586,15 @@ QByteArray KOAuth::userParameters(const QOAuth::ParamMap& parameters)
     return d->interface->inlineParameters(parameters, QOAuth::ParseForInlineQuery);
 }
 
+void KOAuth::forgetAccount(const QString& user, const QString& serviceUrl)
+{
+    const QString &_id = user + "@" + serviceUrl;
+    KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
+                                           0, KWallet::Wallet::Synchronous);
+    wallet->writeMap(_id, QMap<QString, QString>());
+}
+
+
 
 void KOAuth::saveCredentials() const
 {

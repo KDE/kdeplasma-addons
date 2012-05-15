@@ -98,19 +98,12 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     switch (m_requestType) {
     case CustomTimeline:
     case SearchTimeline:
-        //query.chop(1);
-        //query.replace(0, 1);
-        //m_url = KUrl("http://search.twitter.com/search.atom?q=" + parameters.at(0));
-        //query = QString(QUrl::toPercentEncoding(parameters.at(0).toUtf8()));
-        // FIXME: handle service-specific search urls
         if (m_serviceBaseUrl.host().endsWith("twitter.com")) {
             m_url = KUrl("http://search.twitter.com/search.json");
         } else {
-            //http://identi.ca/api/search.json?callback=foo&q=identica
             m_url = KUrl("http://identi.ca/api/search.json");
-
         }
-        //m_params.insert("show_user", "true");
+        m_params.insert("show_user", "true");
         m_params.insert("rpp", "8");
         //m_params.insert("result_type", "mixed");
         m_needsAuthorization = false;
@@ -163,6 +156,12 @@ void TimelineSource::startAuthorization(const QString& user, const QString& pass
 {
     emit authorize(m_serviceBaseUrl.pathOrUrl(), user, password);
 }
+
+void TimelineSource::forgetAccount(const QString& user, const QString& serviceUrl)
+{
+
+}
+
 
 void TimelineSource::setOAuthHelper(KOAuth::KOAuth* authHelper)
 {
@@ -329,7 +328,7 @@ void TimelineSource::parseJson(const QByteArray &data)
     QJson::Parser parser;
     const QVariantList resultsList = parser.parse(data).toList();
     const QVariantMap resultsMap = parser.parse(data).toMap();
-    kDebug() << "Timeline Keys: " << resultsMap.keys();
+//     kDebug() << "Timeline Keys: " << resultsMap.keys();
     
 
 //     kDebug() << "resultsList.count() :: " << resultsList.count();
@@ -348,10 +347,23 @@ void TimelineSource::parseJson(const QByteArray &data)
             }
         }
 
+        QString st = tweet["text"].toString();
+        if (tweet.keys().contains("entities")) {
+            const QVariantMap &entities = tweet["entities"].toMap();
+            if (entities.keys().contains("urls")) {
+                const QVariantList &urls = entities["urls"].toList();
+                foreach (const QVariant &_u, urls) {
+                    const QVariantMap u = _u.toMap();
+                    const QString &shortUrl = u["url"].toString();
+                    const QString &expandedUrl = u["expanded_url"].toString();
+                    st.replace(shortUrl, expandedUrl);
+                }
+            }
+        }
         m_tempData["Date"] = tweet["created_at"];
         m_id = tweet["id"].toString();
         m_tempData["Id"] = m_id;
-        m_tempData["Status"] = tweet["text"];
+        m_tempData["Status"] = st;
         m_tempData["Source"] = tweet["source"];
         m_tempData["IsFavorite"] = tweet["favorited"];
 
@@ -368,6 +380,8 @@ void TimelineSource::parseJson(const QByteArray &data)
 // //                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
 //
 //                 }
+                        // Entities magic
+
         qulonglong i = m_id.toULongLong();
         //qulonglong o = 0;
         //qulonglong n = 0;
@@ -377,14 +391,14 @@ void TimelineSource::parseJson(const QByteArray &data)
         if (!d->newestId || d->newestId < i) {
             d->newestId = i;
         }
-        kDebug() << "m_id, id, oldest, newest: " << m_id << i << d->oldestId << d->newestId;
+        //kDebug() << "m_id, id, oldest, newest: " << m_id << i << d->oldestId << d->newestId;
 
         if (!m_id.isEmpty()) {
             QVariant v;
             v.setValue(m_tempData);
-            foreach (const QString &k, m_tempData.keys()) {
-                kDebug() << "setting data" << m_id << k << m_tempData[k];
-            }
+//             foreach (const QString &k, m_tempData.keys()) {
+//                 kDebug() << "setting data" << m_id << k << m_tempData[k];
+//             }
             setData(m_id, v);
             m_id.clear();
         }
@@ -489,9 +503,10 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                 foreach (const QVariant &x, m_tempData.keys()) {
                     //kDebug() << "           prop: " << x;
                     //m_tempData[x.toString(), 
-                    kDebug() << "  PP " << x.toString() << " : " << m_tempData[x.toString()].toString();
+//                     kDebug() << "  PP " << x.toString() << " : " << m_tempData[x.toString()].toString();
 
                 }
+
 
                 if (!m_id.isEmpty()) {
                     QVariant v;

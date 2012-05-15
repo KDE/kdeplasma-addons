@@ -71,29 +71,7 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return true;
     }
     if (name == "Accounts") {
-        foreach (const QString &grp, KOAuth::KOAuth::authorizedAccounts()) {
-            QVariantMap vm;
-            QStringList l = grp.split('@');
-            if (l.count() < 2) {
-                continue;
-            }
-            kDebug() << " LL " << l;
-            const QString user = l[0];
-            const QString serviceBaseUrl = l[1];
-            vm["accountUser"] = user;
-            vm["accountService"] = serviceBaseUrl;
-            vm["accountIdentifier"] = grp;
-            setData("Accounts", grp, vm);
-            setData("Status:" + grp, "Authorization", "Ok");
-            setData("Status:" + grp, "AuthorizationMessage", "User authorized");
-            QVariantMap m;
-            m["screen_name"] = user;
-
-            addAuthHelper(user, serviceBaseUrl);
-            newUserSource(user, serviceBaseUrl);
-        }
-        scheduleSourcesUpdated();
-        return true;
+        return updateAccounts();
     }
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(customTimelinePrefix) && !name.startsWith(searchTimelinePrefix)
@@ -214,6 +192,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
                    authHelper, SLOT(authorize(const QString&, const QString&, const QString&)));
             connect(source, SIGNAL(userFound(const QVariant&, const QString&)),
                    this, SLOT(addUserSource(const QVariant&, const QString&)));
+            connect(source, SIGNAL(accountRemoved(const QString&)), SLOT(updateAccounts(const QString&)));
             source->setObjectName(name);
             source->setImageSource(imageSource);
             source->setStorageEnabled(true);
@@ -224,6 +203,40 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     }
     return false;
 }
+
+bool TwitterEngine::updateAccounts(const QString &removed)
+{
+    if (sources().contains("Status:" + removed)) {
+        setData("Status:" + removed, "Authorization", "Idle");
+        setData("Status:" + removed, "AuthorizationMessage", i18n("Account forgotten"));
+    }
+    if (!sources().contains("Accounts")) {
+        //return true;
+    }
+
+    foreach (const QString &grp, KOAuth::KOAuth::authorizedAccounts()) {
+        QVariantMap vm;
+        QStringList l = grp.split('@');
+        if (l.count() < 2) {
+            continue;
+        }
+        kDebug() << " LL " << l;
+        const QString user = l[0];
+        const QString serviceBaseUrl = l[1];
+        vm["accountUser"] = user;
+        vm["accountService"] = serviceBaseUrl;
+        vm["accountIdentifier"] = grp;
+        setData("Accounts", grp, vm);
+        QVariantMap m;
+        m["screen_name"] = user;
+
+        addAuthHelper(user, serviceBaseUrl);
+        newUserSource(user, serviceBaseUrl);
+    }
+    scheduleSourcesUpdated();
+    return true;
+}
+
 
 UserSource* TwitterEngine::newUserSource(const QString userName, const QString serviceBaseUrl)
 {

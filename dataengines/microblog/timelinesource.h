@@ -80,6 +80,7 @@ public:
 
     Plasma::Service* createService();
     void startAuthorization(const QString &user, const QString &password);
+    void forgetAccount(const QString &user, const QString &serviceUrl);
 
     ImageSource* imageSource() const;
     void setImageSource(ImageSource *);
@@ -91,6 +92,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
     void userFound(const QVariant &userData, const QString &serviceBaseUrl);
+    void accountRemoved(const QString &account);
 
 private slots:
     void recv(KIO::Job*, const QByteArray& data);
