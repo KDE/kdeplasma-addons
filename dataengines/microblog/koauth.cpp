@@ -479,7 +479,6 @@ QByteArray KOAuth::paramsToString(const QOAuth::ParamMap &parameters, ParsingMod
 QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method, const QByteArray &token,
                            const QByteArray &tokenSecret, QOAuth::ParamMap *params)
 {
-    //kDebug() << "creating signature";
     // create nonce
 
     if (!QCA::isSupported("hmac(sha1)")) {
@@ -497,7 +496,9 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
     // create signature base string
     // prepare percent-encoded request URL
     QByteArray percentRequestUrl = requestUrl.toAscii().toPercentEncoding();
+    kDebug() << "Request URL passed in header: " << requestUrl;
     // prepare percent-encoded parameters string
+//     params->insert("count", "99");
     params->insert("oauth_consumer_key", d->consumerKey);
     //params->insert("oauth_callback", "oob");
     params->insert("oauth_nonce", nonce);
@@ -509,6 +510,7 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
         params->insert("oauth_token", token);
     }
 
+    kDebug() << "!! creating signature for " << params->keys();
     QByteArray parametersString = paramsToString(*params, ParseForSignatureBaseString); // TODO use createSignature()
     QByteArray percentParametersString = parametersString.toPercentEncoding();
 
@@ -543,7 +545,7 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
 void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod method, const QByteArray &token,
                  const QByteArray &tokenSecret, const QOAuth::ParamMap &params)
 {
-   QOAuth::ParamMap parameters;
+   QOAuth::ParamMap parameters = params;
 
     // create signature
     QByteArray signature = createSignature(requestUrl, method, token, tokenSecret, &parameters);
@@ -554,6 +556,7 @@ void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod me
     foreach (QByteArray key, params.keys()) {
         parameters.remove(key);
     }
+    kDebug() << parameters;
 
     QByteArray authorizationHeader = paramsToString(parameters, ParseForHeaderArguments);
     job->addMetaData("customHTTPHeader", QByteArray("Authorization: " + authorizationHeader));
