@@ -57,6 +57,14 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
         const QString password = parameters.value("password").toString();
         kDebug() << "Start authorization for " << user << password;
         m_source->startAuthorization(user, password);
+    } else if (operation == "loadMore") {
+        Plasma::ServiceJob *sjob = new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
+        kDebug() << "load more ";
+        KIO::Job *getJob = m_source->loadMore();
+        if (getJob) {
+            connect(getJob, SIGNAL(result(KJob*)), sjob, SIGNAL(finished(KJob*)));
+        }
+        return sjob;
     }
 
     return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);

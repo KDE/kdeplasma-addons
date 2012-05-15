@@ -45,7 +45,7 @@ namespace QCA
     class Initializer;
 }
 
-class TimelineSource;
+class TimelineSourcePrivate;
 class ImageSource;
 
 class TimelineSource : public Plasma::DataContainer
@@ -86,6 +86,7 @@ public:
 
 public Q_SLOTS:
     KIO::Job* update(bool forcedUpdate = false);
+    KIO::Job* loadMore();
 
 Q_SIGNALS:
     void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
@@ -112,6 +113,8 @@ private:
 
     // OAuth constants
     static const QString AccessTokenUrl;
+
+    TimelineSourcePrivate* d;
 
     KUrl m_url;
     KUrl m_serviceBaseUrl;

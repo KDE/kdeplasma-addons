@@ -38,6 +38,8 @@ namespace KIO
     class Job;
 } // namespace KIO
 
+class UserSourcePrivate;
+
 class UserSource : public Plasma::DataContainer
 {
 Q_OBJECT
@@ -62,6 +64,9 @@ private:
     void parse(QXmlStreamReader &reader);
     void parse(QByteArray &jsonData);
     void readUser(QXmlStreamReader &reader);
+
+    UserSourcePrivate* d;
+
     QString m_user;
     QString m_serviceBaseUrl;
     QByteArray m_xml;

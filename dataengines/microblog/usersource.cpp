@@ -26,11 +26,25 @@
 #include <qjson/parser.h>
 #include <QXmlStreamReader>
 
+class UserSourcePrivate {
+
+public:
+    UserSourcePrivate()
+    {
+    }
+
+    QString user;
+    QString serviceBaseUrl;
+};
+
 UserSource::UserSource(const QString &who, const QString &serviceBaseUrl, QObject* parent)
     : Plasma::DataContainer(parent),
       m_user(who),
       m_serviceBaseUrl(serviceBaseUrl)
 {
+    d = new UserSourcePrivate();
+    d->user = who;
+    d->serviceBaseUrl = serviceBaseUrl;
     setObjectName(QLatin1String("User"));
     //emit loadImage(who, KUrl());
 }

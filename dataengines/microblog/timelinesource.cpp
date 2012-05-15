@@ -36,6 +36,19 @@
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
+class TimelineSourcePrivate {
+
+public:
+    TimelineSourcePrivate()
+    {
+        newestId = 0;
+        oldestId = 0;
+    }
+    qulonglong newestId;
+    qulonglong oldestId;
+    QString loadMoreUrl;
+    QString refreshUrl;
+};
 
 TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestType, KOAuth::KOAuth *oauthHelper, const QStringList &parameters, QObject* parent)
     : Plasma::DataContainer(parent),
@@ -48,6 +61,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
       m_authJob(0),
       m_qcaInitializer(0)
 {
+    d = new TimelineSourcePrivate;
     setObjectName(QLatin1String("Timeline"));
     // set up the url
     QString query;
@@ -60,7 +74,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     // default arguments
     m_params.insert("include_entities", "true");
     m_params.insert("include_rts", "true");
-    m_params.insert("count", "3");
+    m_params.insert("count", "20");
     m_params.insert("trim_user", "false");
 
     // parse URL from QML runtime, possibly overwrite defaults
@@ -162,7 +176,7 @@ KOAuth::KOAuth* TimelineSource::oAuthHelper()
 
 void TimelineSource::setPassword(const QString &password)
 {
-    m_authHelper->authorize(m_serviceBaseUrl.pathOrUrl() ,m_user, password);
+    m_authHelper->authorize(m_serviceBaseUrl.pathOrUrl(), m_user, password);
 }
 
 QString TimelineSource::password() const
@@ -188,6 +202,13 @@ QByteArray TimelineSource::oauthToken() const
 QByteArray TimelineSource::oauthTokenSecret() const
 {
     return m_oauthTokenSecret;
+}
+
+KIO::Job* TimelineSource::loadMore()
+{
+    m_params.replace("max_id", QString::number(d->oldestId).toLocal8Bit());
+    kDebug() << "Loading tweets before " << QString::number(d->oldestId);
+    return update(true);
 }
 
 KIO::Job* TimelineSource::update(bool forcedUpdate)
@@ -241,7 +262,7 @@ void TimelineSource::result(KJob *job)
         return;
     }
 
-    removeAllData();
+    //removeAllData();
     //m_imageSource->loadStarted();
     if (job->error()) {
         kDebug() << "job error! : " << job->errorString() << tj->url();// << m_xml;
@@ -258,13 +279,12 @@ void TimelineSource::result(KJob *job)
     }
 
      QFile file("/home/sebas/kdesvn/src/declarative-plasmoids/microblog/tmp/output.json");
-     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-         return;
-
-     QTextStream out(&file);
-     out << m_xml;
-     file.flush();
-     file.close();
+     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&file);
+        out << m_xml;
+        file.flush();
+        file.close();
+    }
 
     checkForUpdate();
     m_xml.clear();
@@ -308,6 +328,9 @@ void TimelineSource::parseJson(const QByteArray &data)
 //     kDebug() << "JSON TIMELINE PARSER ONLINE";
     QJson::Parser parser;
     const QVariantList resultsList = parser.parse(data).toList();
+    const QVariantMap resultsMap = parser.parse(data).toMap();
+    kDebug() << "Timeline Keys: " << resultsMap.keys();
+    
 
 //     kDebug() << "resultsList.count() :: " << resultsList.count();
     bool hasResult = false;
@@ -345,13 +368,23 @@ void TimelineSource::parseJson(const QByteArray &data)
 // //                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
 //
 //                 }
+        qulonglong i = m_id.toULongLong();
+        //qulonglong o = 0;
+        //qulonglong n = 0;
+        if (!d->oldestId || d->oldestId > i) {
+            d->oldestId = i;
+        }
+        if (!d->newestId || d->newestId < i) {
+            d->newestId = i;
+        }
+        kDebug() << "m_id, id, oldest, newest: " << m_id << i << d->oldestId << d->newestId;
 
         if (!m_id.isEmpty()) {
             QVariant v;
             v.setValue(m_tempData);
-            //foreach (const QString &k, m_tempData.keys()) {
-                //kDebug() << "setting data" << m_id << k << m_tempData[k];
-            //}
+            foreach (const QString &k, m_tempData.keys()) {
+                kDebug() << "setting data" << m_id << k << m_tempData[k];
+            }
             setData(m_id, v);
             m_id.clear();
         }
@@ -373,6 +406,7 @@ void TimelineSource::parseJson(const QByteArray &data)
 
         }
     }
+    checkForUpdate();
 
 }
 
@@ -468,6 +502,16 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                     setData(m_id, v);
                     m_id.clear();
                 }
+                qulonglong i = m_id.toULongLong();
+                //qulonglong o = 0;
+                //qulonglong n = 0;
+                if (!d->oldestId || d->oldestId > i) {
+                    d->oldestId = i;
+                }
+                if (!d->newestId || d->newestId < i) {
+                    d->newestId = i;
+                }
+                kDebug() << "m_id, id, oldest, newest: " << m_id << i << d->oldestId << d->newestId;
 //
             }
         }

@@ -38,6 +38,7 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
       m_parameters(parameters),
       m_source(source)
 {
+
     if (operation == "statuses/retweet" ||
         operation == "favorites/create" ||
         operation == "favorites/destroy") {
@@ -46,6 +47,11 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
     } else if (operation == "update") {
         m_url.setPath(m_url.path()+QString("statuses/%1.xml").arg(operation));
         kDebug() << "Updating status" << m_url;
+    } else if (operation == "loadMore") {
+        //m_url.setPath(m_url.path()+QString("statuses/%1.xml").arg(operation));
+        kDebug() << "load more " << m_url;
+        source->loadMore();
+        
 
     } else {
         m_url.setPath(m_url.path()+operation+".xml");
