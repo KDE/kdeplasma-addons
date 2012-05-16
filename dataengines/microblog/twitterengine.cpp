@@ -215,6 +215,9 @@ bool TwitterEngine::updateAccounts(const QString &removed)
     }
 
     foreach (const QString &grp, KOAuth::KOAuth::authorizedAccounts()) {
+        if (grp == removed) {
+            continue;
+        }
         QVariantMap vm;
         QStringList l = grp.split('@');
         if (l.count() < 2) {

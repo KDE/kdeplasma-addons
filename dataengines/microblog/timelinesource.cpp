@@ -78,6 +78,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     m_params.insert("trim_user", "false");
 
     // parse URL from QML runtime, possibly overwrite defaults
+    bool hasQuery = false;
     const QString &pa = m_parameters[0].toLocal8Bit();
     if (!pa.isEmpty()) {
         const QStringList &tokens = pa.split(QLatin1Char('&'));
@@ -89,6 +90,9 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
                 kDebug() << "       inserted: " << n << v;
                 query.append(QString("%1=%2&").arg(QString(n),  QString(v)));
                 m_params.insert(n, v);
+                if (n == QByteArray("q") && !v.isEmpty()) {
+                    hasQuery = true;
+                }
                 //inserted =
             } else {
                 kWarning() << "Parsing problem expected 2 values, got: " << pa << pair;
@@ -98,10 +102,15 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     switch (m_requestType) {
     case CustomTimeline:
     case SearchTimeline:
+        if (!hasQuery) {
+            return;
+        }
         if (m_serviceBaseUrl.host().endsWith("twitter.com")) {
             m_url = KUrl("http://search.twitter.com/search.json");
-        } else {
+        } else if (m_serviceBaseUrl.host().endsWith("identi.ca")) {
             m_url = KUrl("http://identi.ca/api/search.json");
+        } else {
+
         }
         m_params.insert("show_user", "true");
         m_params.insert("rpp", "8");
@@ -159,7 +168,8 @@ void TimelineSource::startAuthorization(const QString& user, const QString& pass
 
 void TimelineSource::forgetAccount(const QString& user, const QString& serviceUrl)
 {
-
+    m_authHelper->forgetAccount(user, serviceUrl);
+    emit accountRemoved(user + "@" + serviceUrl);
 }
 
 
@@ -495,44 +505,23 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                     m_imageSource->loadImage(m_tempData["User"].toString(), url);
 //                     emit userFound(m_tempData["User"], m_serviceBaseUrl.pathOrUrl());
                 }
-                kDebug() << "User: " << r["from_user"] << r["profile_image_url"];
-                kDebug() << " D USer: " << m_tempData["User"] << m_tempData["ImageUrl"];
-
-                //foreach (const QVariant &x, w.toMap().keys()) {
-                kDebug() << " -------------------- ";
-                foreach (const QVariant &x, m_tempData.keys()) {
-                    //kDebug() << "           prop: " << x;
-                    //m_tempData[x.toString(), 
-//                     kDebug() << "  PP " << x.toString() << " : " << m_tempData[x.toString()].toString();
-
-                }
-
-
                 if (!m_id.isEmpty()) {
                     QVariant v;
                     v.setValue(m_tempData);
-                    //foreach (const QString &k, m_tempData.keys()) {
-                        //kDebug() << "setting data" << m_id << k << m_tempData[k];
-                    //}
                     setData(m_id, v);
                     m_id.clear();
                 }
                 qulonglong i = m_id.toULongLong();
-                //qulonglong o = 0;
-                //qulonglong n = 0;
                 if (!d->oldestId || d->oldestId > i) {
                     d->oldestId = i;
                 }
                 if (!d->newestId || d->newestId < i) {
                     d->newestId = i;
                 }
-                kDebug() << "m_id, id, oldest, newest: " << m_id << i << d->oldestId << d->newestId;
-//
             }
         }
 
     }
-    kDebug() << "HAS RESULT:" << hasResult;
     if (!hasResult) {
         const QVariantList resultsList = parser.parse(data).toList();
         kDebug() << "Found " << resultsList.count() << " tweets";

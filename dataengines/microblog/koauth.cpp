@@ -591,7 +591,17 @@ void KOAuth::forgetAccount(const QString& user, const QString& serviceUrl)
     const QString &_id = user + "@" + serviceUrl;
     KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
                                            0, KWallet::Wallet::Synchronous);
-    wallet->writeMap(_id, QMap<QString, QString>());
+    wallet->setFolder("Plasma-MicroBlog");
+    if (wallet->removeEntry(_id)) {
+        kDebug() << "Entry removed: " << _id;
+    } else kDebug() << "Error removing : " << _id;
+
+//     if (wallet->writeMap(_id, QMap<QString, QString>())) {
+//         kDebug() << "emty map: " << _id;
+//     } else kDebug() << "Error empty map: " << _id;
+//     kDebug() << "Wallet emptied for " << user + "@" + serviceUrl;
+
+    wallet->sync();
 }
 
 
