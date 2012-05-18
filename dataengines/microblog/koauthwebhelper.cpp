@@ -38,6 +38,8 @@
 #include <QWebElement>
 #include <QWebFrame>
 #include <QWebPage>
+#include <QNetworkAccessManager>
+#include <QNetworkCookieJar>
 
 #include "koauthwebhelper.h"
 #include <KDebug>
@@ -58,7 +60,7 @@ public:
     QString serviceBaseUrl;
     QHash<QString, QString> authorizeUrls;
 
-    KWebView *webView;
+    QWebView *webView;
     KDialog *dialog;
     bool busy;
     QTimer *timer;
@@ -78,6 +80,7 @@ KOAuthWebHelper::KOAuthWebHelper(QObject* parent)
 
 KOAuthWebHelper::~KOAuthWebHelper()
 {
+    kDebug();
     delete d;
 }
 
@@ -113,13 +116,18 @@ void KOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString 
         d->dialog->setCaption( "authorize application" );
         d->dialog->setButtons( KDialog::Ok | KDialog::Cancel);
 
-        d->webView = new KWebView(d->dialog);
+        d->webView = new QWebView(d->dialog);
         d->dialog->setMainWidget(d->webView);
-        d->dialog->show(); // remove
+//         d->dialog->show(); // remove
         connect(d->webView->page(), SIGNAL(loadFinished(bool)), SLOT(loadFinished()));
     }
+
+    // Set an empty cookiejar, we don't want to recycle already logged in users
+    QNetworkAccessManager *qnam = d->webView->page()->networkAccessManager();
+    delete qnam->cookieJar();
+    QNetworkCookieJar *jar = new QNetworkCookieJar(this);
+    qnam->setCookieJar(jar);
     d->authorizeUrls[authorizeUrl] = d->serviceBaseUrl;
-//     kDebug() << " appAuthorized URL " << pageUrl;
     d->webView->page()->mainFrame()->load(pageUrl);
 }
 
@@ -136,7 +144,6 @@ void KOAuthWebHelper::loadFinished()
     }
 
     QWebFrame* mf = page->mainFrame();
-//     kDebug() << "Page URL:" << page->mainFrame()->url();
     QString u = page->mainFrame()->url().toString();
     if (d->authorizeUrls.contains(u)) {
         QString pin;
@@ -176,30 +183,30 @@ void KOAuthWebHelper::loadFinished()
 //         kDebug() << "logging in " << d->user << d->password;
         if (!isIdentica()) {
             // Try to fill in user/pass into the form
-            //kDebug() << "twitter.com hacks JavaScript hacks";
+            //kDebug() << "twitter.com hacks JavaScript hacks: " << u;
             QString script = "var userName = document.getElementById(\"username_or_email\"); userName.value = \"" + d->user + "\";\n";
             script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + d->password + "\";\n");
             mf->evaluateJavaScript(script);
-            kDebug() << "ran script 1: " << script;
+            //kDebug() << "ran script 1: " << script;
             // Evaluate the button click separately, as the above script might abort,
             // and not all lines are actually executed.
             script = QString();
             script.append("var ackButton = document.getElementById(\"allow\"); ackButton.click();");
-            //mf->evaluateJavaScript(script);
-            kDebug() << "ran script 2: " << script;
+            mf->evaluateJavaScript(script);
+            //kDebug() << "ran script 2: " << script;
         } else if (d->serviceBaseUrl.toLower().contains("identi.ca")) {
             //kDebug() << "Identi.ca hacks JavaScript hacks";
             QVariant r;
             QString script = "var userName = document.getElementById(\"nickname\"); userName.value = \"" + d->user + "\";\n";
             script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + d->password + "\";\n");
             r = mf->evaluateJavaScript(script);
-            kDebug() << "Ran script 1" << script << r;
+            //kDebug() << "Ran script 1" << script << r;
             // Evaluate the button click separately, as the above script might abort,
             // and not all lines are actually executed.
             script = "";
             script.append("var ackButton = document.getElementById(\"allow_submit\"); ackButton.click();");
-            //r = mf->evaluateJavaScript(script);
-            kDebug() << "Ran script 2" << script << r;
+            r = mf->evaluateJavaScript(script);
+            //kDebug() << "Ran script 2" << script << r;
         }
         d->timer->start();
     }
