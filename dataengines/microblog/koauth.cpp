@@ -123,7 +123,6 @@ QString KOAuth::serviceBaseUrl() const
 
 void KOAuth::setUser(const QString& user)
 {
-    kDebug() << "User changed from " << d->user << " to " << user;
     if (user == d->user) {
         return;
     }
@@ -172,19 +171,12 @@ void KOAuth::run()
 
 void KOAuth::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
 {
-    kDebug() << "XXXX" << serviceBaseUrl << user << password;
-    kDebug() << "DDDD" << d->serviceBaseUrl << d->user << d->password;
-    //if (d->user != user || d->serviceBaseUrl != serviceBaseUrl) {
-        d->user = user;
-        d->password = password;
-        d->serviceBaseUrl = serviceBaseUrl;
-        d->accessToken = QByteArray();
-        d->accessTokenSecret = QByteArray();
-//     } else if (d->busy) {
-//         kDebug() << "EXIT: " << d->busy << isAuthorized();
-//         return;
-//     }
-    kDebug() << serviceBaseUrl << user << password;
+    d->user = user;
+    d->password = password;
+    d->serviceBaseUrl = serviceBaseUrl;
+    d->accessToken = QByteArray();
+    d->accessTokenSecret = QByteArray();
+
     d->w->setUser(user);
     d->w->setServiceBaseUrl(serviceBaseUrl);
     d->w->setPassword(password);
@@ -485,8 +477,7 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
     foreach (const QByteArray &ba, params->keys()) {
         plist << ba;
     }
-    kDebug() << "d->user: " << d->user << d->accessToken;
-    kDebug() << "args before: \n" << plist.join("\t\n") << " before signing";
+
     if (!QCA::isSupported("hmac(sha1)")) {
         kError() << "Your QCA2 does not support the HMAC-SHA1 algorithm. Signing requests using OAuth does not work";
         return QByteArray();
@@ -502,9 +493,7 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
     // create signature base string
     // prepare percent-encoded request URL
     QByteArray percentRequestUrl = requestUrl.toAscii().toPercentEncoding();
-    kDebug() << "Request URL passed in header: " << requestUrl;
     // prepare percent-encoded parameters string
-//     params->insert("count", "99");
     params->insert("oauth_consumer_key", d->consumerKey);
     //params->insert("oauth_callback", "oob");
     params->insert("oauth_nonce", nonce);
@@ -516,12 +505,10 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
         params->insert("oauth_token", token);
     }
 
-    kDebug() << "!! creating signature for " << params->keys();
     plist.clear();
     foreach (const QByteArray ba, params->keys()) {
         plist << ba;
     }
-    kDebug() << " ===> args after: \n" << plist.join("\t\n") << " after signing";
 
     foreach (const QByteArray &_b, params->keys()) {
         if (params->count(_b) > 1) {
@@ -556,7 +543,6 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
 
     // percent-encode the digest
     QByteArray signature = digest.toPercentEncoding();
-    //kDebug() << "Signature: " << key << " // " << signature;
     return signature;
 }
 
@@ -567,7 +553,6 @@ void KOAuth::signRequest(KIO::Job *job, const QString &requestUrl, HttpMethod me
 
     // create signature
     QByteArray signature = createSignature(requestUrl, method, token, tokenSecret, &parameters);
-    //kDebug() << "signature: " << signature;
 
     // add signature to parameters
     parameters.insert("oauth_signature", signature);
@@ -594,14 +579,9 @@ void KOAuth::forgetAccount(const QString& user, const QString& serviceUrl)
     KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
                                            0, KWallet::Wallet::Synchronous);
     wallet->setFolder("Plasma-MicroBlog");
-    if (wallet->removeEntry(_id)) {
-        kDebug() << "Entry removed: " << _id;
-    } else kDebug() << "Error removing : " << _id;
-
-//     if (wallet->writeMap(_id, QMap<QString, QString>())) {
-//         kDebug() << "emty map: " << _id;
-//     } else kDebug() << "Error empty map: " << _id;
-//     kDebug() << "Wallet emptied for " << user + "@" + serviceUrl;
+    if (!wallet->removeEntry(_id)) {
+        kError() << "Error removing : " << _id;
+    }
 
     wallet->sync();
 }
@@ -625,8 +605,6 @@ void KOAuth::saveCredentials() const
 
         if (wallet->writeMap(identifier(), map) != 0) {
             kWarning() << "Unable to write accessToken & Secret to wallet";
-        } else {
-            kDebug() << "Wrote credentials to your wallet" << identifier() << map;
         }
     } else {
         kWarning() << "Unable to open Plasma-MicroBlog wallet";
@@ -651,18 +629,11 @@ bool KOAuth::retrieveCredentials() const
             if (d->authorizedAccounts.contains(identifier())) {
                 d->accessToken = mapMap[identifier()]["accessToken"].toAscii();
                 d->accessTokenSecret = mapMap[identifier()]["accessTokenSecret"].toAscii();
-                //kDebug() << "read accesstoken from wallet: " << d->accessToken << d->accessTokenSecret;
                 return true;
-            } else {
-                //return false;
             }
-            //if (wallet->readMap(identifier(), map) == 0) {
-//             d->accessToken = mapMap[identifier()]["accessToken"].toLocal8Bit();
-//             d->accessTokenSecret = mapMap[identifier()]["accessTokenSecret"].toLocal8Bit();
-            //kDebug() << "read accesstoken from wallet: " << d->accessToken << d->accessTokenSecret;
-            return true;
+            return false;
         } else {
-            kWarning() << "Unable to read credentials from wallet";
+            //kWarning() << "Unable to read credentials from wallet";
         }
     } else {
         kWarning() << "Unable to open wallet";
@@ -688,7 +659,6 @@ void KOAuth::configToWallet()
         d->serviceBaseUrl = g.split('@')[1];
         d->accessToken = config.readEntry("accessToken", QByteArray());
         d->accessTokenSecret = config.readEntry("accessTokenSecret", QByteArray());
-        //kDebug() << " **** Saving creds: " << d->user << d->serviceBaseUrl << d->accessToken << d->accessTokenSecret;
         saveCredentials();
     }
 }

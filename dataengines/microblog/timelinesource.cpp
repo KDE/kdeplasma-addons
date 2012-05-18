@@ -126,7 +126,8 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         m_url = KUrl(m_serviceBaseUrl, "direct_messages.json");
         break;
     case Replies:
-        m_url = KUrl(m_serviceBaseUrl, "statuses/replies.json");
+        m_url = KUrl(m_serviceBaseUrl, "statuses/mentions.json");
+        kDebug() << "XXXX " << m_url;
         break;
     case TimelineWithFriends:
         m_url = KUrl(m_serviceBaseUrl, "statuses/home_timeline.json");
@@ -240,12 +241,9 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
     KUrl u = KUrl(m_url.pathOrUrl() + ps);
     kDebug() << "Creating job..." << u << " P: " << ps << " User: " << m_authHelper->user();
     m_job = KIO::get(u, KIO::Reload, KIO::HideProgressInfo);
-    // clear()??
     if (m_needsAuthorization) {
-        //QOAuth::ParamMap map;
         m_authHelper->sign(m_job, m_url.pathOrUrl(), m_params);
     }
-    kDebug() << "signed" << u.pathOrUrl();
 
     connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)),
             this, SLOT(recv(KIO::Job*,QByteArray)));
@@ -260,7 +258,6 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
 
 void TimelineSource::recv(KIO::Job*, const QByteArray& data)
 {
-    //kDebug() << data;
     m_xml += data;
 }
 
@@ -288,13 +285,13 @@ void TimelineSource::result(KJob *job)
         }
     }
 
-     QFile file("/home/sebas/kdesvn/src/declarative-plasmoids/microblog/tmp/output.json");
-     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream out(&file);
-        out << m_xml;
-        file.flush();
-        file.close();
-    }
+//      QFile file("/home/sebas/kdesvn/src/declarative-plasmoids/microblog/tmp/output.json");
+//      if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+//         QTextStream out(&file);
+//         out << m_xml;
+//         file.flush();
+//         file.close();
+//     }
 
     checkForUpdate();
     m_xml.clear();
@@ -339,20 +336,14 @@ void TimelineSource::parseJson(const QByteArray &data)
     QJson::Parser parser;
     const QVariantList resultsList = parser.parse(data).toList();
     const QVariantMap resultsMap = parser.parse(data).toMap();
-//     kDebug() << "Timeline Keys: " << resultsMap.keys();
-    
-
-//     kDebug() << "resultsList.count() :: " << resultsList.count();
     bool hasResult = false;
     int i = 0;
     foreach (const QVariant &v, resultsList) {
         const QVariantMap &tweet = v.toMap();
-//         kDebug() << " ################################# " << endl;
         i++;
         hasResult = true;
         foreach (const QVariant &k, tweet.keys()) {
             const QString _u = k.toString();
-//             kDebug() << " tweet k : " << _u;
             if (_u != "user") {
                 m_tempData[_u] = tweet[_u];
             }
@@ -386,12 +377,6 @@ void TimelineSource::parseJson(const QByteArray &data)
             m_imageSource->loadImage(m_tempData["User"].toString(), url);
         }
         emit userFound(tweet["user"], m_serviceBaseUrl.pathOrUrl());
-//                 foreach (const QVariant &x, w.toMap().keys()) {
-//                     //kDebug() << "           prop: " << x;
-// //                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
-//
-//                 }
-                        // Entities magic
 
         qulonglong i = m_id.toULongLong();
         //qulonglong o = 0;

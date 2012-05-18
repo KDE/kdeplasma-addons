@@ -114,6 +114,7 @@ void TweetJob::result(KJob *job)
     kDebug() << "Job returned... e:" << job->errorText();
     //kDebug() << "Job returned data:" << m_data;
     if (m_operation.startsWith("friendships")) {
+        kDebug() << "emitting userdata";
         emit userData(m_data);
     }
     setError(job->error());

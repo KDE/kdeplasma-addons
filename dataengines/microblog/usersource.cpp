@@ -134,11 +134,8 @@ void UserSource::parse(const QByteArray& jsonData)
 void UserSource::parseJson(const QVariant &data)
 {
     const QVariantMap &user = data.toMap();
-    kDebug() << "JSON: " << data;
-//     kDebug() << "JSON USER PARSER ONLINE";
     foreach (const QVariant &k, user.keys()) {
         const QString _k = k.toString();
-//         kDebug() << "   user k : " << _k;
         // Exclude last status update for now, would be a QVariantMap though
         if (_k != "status") {
             setData(k.toString(), user[_k]);
@@ -158,171 +155,17 @@ void UserSource::parseJson(const QVariant &data)
     const QString imgUrl = user["profile_image_url"].toString();
     const QString userName = user["screen_name"].toString();
     setData("ImageUrl", imgUrl);
-//     setData("tweets", user["screen_name"]);
-//     setData("friends", user["screen_name"]);
-//     setData("followers", user["screen_name"]);
     if (!imgUrl.isEmpty()) {
 //         kDebug() << "Got image url for: " << userName << imgUrl;
         emit loadImage(userName, KUrl(imgUrl));
-    } else {
-//         kDebug() << " imageUrl: " <<  userName;
     }
-    //if (data().contains("ImageUrl")) {
-        //KUrl url(user["profile_image_url"].toString());
-        //m_imageSource->loadImage(user["screen_name"].toString(), url);
-
-    //}
-    //m_tempData["Url"] = user["url"];
-
-// //     kDebug() << "resultsList.count() :: " << resultsList.count();
-//     foreach (const QVariant &v, resultsList) {
-//         const QVariantMap &tweet = v.toMap();
-// //         kDebug() << " ################################# " << endl;
-//         foreach (const QVariant &k, tweet.keys()) {
-//             const QString _u = k.toString();
-// //             kDebug() << " tweet k : " << _u;
-//             if (_u != "user") {
-//                 m_tempData[_u] = tweet[_u];
-//             }
-//         }
-// 
-//         m_tempData["Date"] = tweet["created_at"];
-//         m_id = tweet["id"].toString();
-//         m_tempData["Id"] = m_id;
-//         m_tempData["Status"] = tweet["text"];
-//         m_tempData["Source"] = tweet["source"];
-//         m_tempData["IsFavorite"] = tweet["favorited"];
-// 
-//         parseJsonUser(tweet["user"]);
-// 
-//         //m_tempData["ImageUrl"] = tweet["profile_image_url"];
-//         if (m_tempData.contains("User")) {
-//             KUrl url(tweet["profile_image_url"].toString());
-//             m_imageSource->loadImage(m_tempData["User"].toString(), url);
-//         }
-// 
-// //                 foreach (const QVariant &x, w.toMap().keys()) {
-// //                     //kDebug() << "           prop: " << x;
-// // //                     kDebug() << "  PP " << x.toString() << " : " << w.toMap()[x.toString()].toString();
-// //
-// //                 }
-// 
-//         if (!m_id.isEmpty()) {
-//             QVariant v;
-//             v.setValue(m_tempData);
-//             //foreach (const QString &k, m_tempData.keys()) {
-//                 //kDebug() << "setting data" << m_id << k << m_tempData[k];
-//             //}
-//             setData(m_id, v);
-//             m_id.clear();
-//         }
-//     }
-// 
 }
 
 void UserSource::parseJsonStatus(const QVariant& data)
 {
     Q_UNUSED(data);
-//     const QVariantMap &user = data.toMap();
-//     foreach (const QVariant &k, user.keys()) {
-//         //kDebug() << "   user k : " << k;
-//         //m_tempData[k.toString()] = user[k.toString()];
-//     }
-// 
-//     // compatibility with old API
-//     m_tempData["User"] = user["screen_name"];
-//     m_tempData["ImageUrl"] = user["profile_image_url"].toString();
-//     //kDebug() << " imageUrl: " << m_tempData["ImageUrl"];
-//     if (m_tempData.contains("ImageUrl")) {
-//         KUrl url(m_tempData["ImageUrl"].toString());
-//         m_imageSource->loadImage(m_tempData["User"].toString(), url);
-//     }
-//     m_tempData["Url"] = user["url"];
-// 
-    //kDebug() << "User done";
 }
 
-// void UserSource::parse(QXmlStreamReader &xml)
-// {
-//     while (!xml.atEnd()) {
-//         xml.readNext();
-// 
-//         if (xml.isStartElement()) {
-//             QString tag = xml.name().toString().toLower();
-// 
-//             if (tag == "status") {
-//                 //readStatus(xml);
-//             } else if (tag == "user") {
-// //                 kDebug() << "Found user.";
-//                 readUser(xml);
-//             } else if (tag == "direct_message") {
-//                 //readDirectMessage(xml);
-//             }
-//         }
-//     }
-// 
-//     if (xml.hasError()) {
-//         kWarning() << "Fatal error on line" << xml.lineNumber()
-//                    << ", column" << xml.columnNumber() << ":"
-//                    << xml.errorString();
-//     }
-// }
-// 
-// void UserSource::readUser(QXmlStreamReader &xml)
-// {
-//     QHash<QString, QString> tagKeys;
-//     tagKeys.insert("id", "userid");
-//     tagKeys.insert("screen_name", "username");
-//     tagKeys.insert("name", "realname");
-//     tagKeys.insert("location", "location");
-//     tagKeys.insert("description", "description");
-//     tagKeys.insert("protected", "protected");
-//     tagKeys.insert("followers_count", "followers");
-//     tagKeys.insert("friends_count", "friends");
-//     tagKeys.insert("statuses_count", "tweets");
-//     tagKeys.insert("time_zone", "timezone");
-//     tagKeys.insert("utc_offset", "utcoffset");
-//     tagKeys.insert("profile_image_url", "profileimageurl");
-//     tagKeys.insert("statusnet:profile_url", "profileurl");
-//     tagKeys.insert("url", "url");
-//     tagKeys.insert("following", "following");
-//     tagKeys.insert("notifications", "notifications");
-//     tagKeys.insert("statusnet:blocking", "blocking");
-//     tagKeys.insert("created_at", "created");
-// 
-//     //kDebug() << "- BEGIN USER -" << endl;
-//     const QString tagName("user");
-// 
-//     while (!xml.atEnd()) {
-//         xml.readNext();
-//         //kDebug() << "next el";
-//         QString tag = xml.name().toString().toLower();
-// 
-//         if (xml.isEndElement() && tag == tagName) {
-//             break;
-//         }
-// 
-//         if (xml.isStartElement()) {
-//             QString cdata;
-// 
-//             if (tag == "status") {
-//                 //readStatus(xml);
-//             } else {
-//                 cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements).trimmed();
-//                 if (tagKeys.keys().contains(tag)) {
-//                     setData(tagKeys[tag], cdata);
-//                 }
-//             }
-//         }
-//     }
-// 
-//     // Make sure our avatar is loaded
-// //     kDebug() << "requesting profile pic" << data()["username"] << data()["profileimageurl"];
-//     //const QString who = 
-//     emit loadImage(data()["username"].toString(), data()["profileimageurl"].toUrl());
-// //     kDebug() << " read user: " << data()["username"].toString();
-//     //kDebug() << "- END USER -" << endl;
-// }
 
 #include <usersource.moc>
 
