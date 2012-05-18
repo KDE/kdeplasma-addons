@@ -141,7 +141,7 @@ void KOAuth::init()
 
     if (!d) {
         d = new KOAuthPrivate;
-        d->qcaInitializer = new QCA::Initializer(); // FIXME: move into qoautohelper?
+        d->qcaInitializer = new QCA::Initializer();
 #ifndef NO_KIO
         KIO::AccessManager *access = new KIO::AccessManager(this);
         d->interface->setNetworkAccessManager(access);
@@ -153,9 +153,6 @@ void KOAuth::init()
                 this, SLOT(appAuthorized(const QString&, const QString&)));
         connect(d->w, SIGNAL(statusUpdated(const QString&, const QString&, const QString&, const QString&)),
                 SIGNAL(statusUpdated(const QString&, const QString&, const QString&, const QString&)));
-
-//         configToWallet(); // FIXME: run only once. remove later.
-
     }
 
 }

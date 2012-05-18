@@ -407,7 +407,7 @@ void TimelineSource::parseJson(const QByteArray &data)
             const QString &e = map["error"].toString();
             const QString &r = map["request"].toString();
             //kDebug() << "Error? : " << m_xml;
-            kDebug() << "  E: " << e << " " << r;
+//             kDebug() << "  E: " << e << " " << r;
             m_tempData["Status"] = QVariant(e + " (" + r + ")");
             m_tempData["User"] = QVariant(i18n("Error"));
             QVariant v;
@@ -510,13 +510,13 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
     }
     if (!hasResult) {
         const QVariantList resultsList = parser.parse(data).toList();
-        kDebug() << "Found " << resultsList.count() << " tweets";
+        kDebug() << "Found " << resultsList.count() << " search result tweets";
         if (!resultsList.count()) {
             const QVariantMap &map = parser.parse(data).toMap();
             const QString &e = map["error"].toString();
             const QString &r = map["request"].toString();
             //kDebug() << "Error? : " << m_xml;
-            kDebug() << "  E: " << e << " " << r;
+            //kDebug() << "  E: " << e << " " << r;
             m_tempData["Status"] = QVariant(e + " (" + r + ")");
             QVariant v;
             v.setValue(m_tempData);

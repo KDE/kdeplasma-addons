@@ -59,33 +59,28 @@ TwitterEngine::~TwitterEngine()
 
 bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
-    kDebug() << name;
+//     kDebug() << name;
     if (name.startsWith("UserImages:")) {
         // these are updated by the engine itself, not consumers
-        kDebug() << "end ..";
         return true;
     }
     if (name.startsWith(statusPrefix)) {
         setData(statusPrefix, "Authorization", "Idle");
         setData(statusPrefix, "AuthorizationMessage", QString());
         scheduleSourcesUpdated();
-        kDebug() << " auth end .." << name;
         return true;
     }
     if (name == "Accounts") {
         return updateAccounts();
-        kDebug() << "acc  ..";
     }
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
         && !name.startsWith(customTimelinePrefix) && !name.startsWith(searchTimelinePrefix)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
         && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)
         && !name.startsWith(statusPrefix)) {
-        kDebug() << "Chiecking out: " << name;
         return false;
     }
 
-    kDebug() << "update src" << name;
     updateSourceEvent(name); //start a download
     return true;
 }
@@ -98,7 +93,6 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
         return Plasma::DataEngine::serviceForSource(name);
     }
 
-    kDebug() << "createService and stuff" << name;
     Plasma::Service *service = source->createService();
     service->setParent(this);
     connect(service, SIGNAL(finished(Plasma::ServiceJob *)), this, SLOT(serviceJobFinished(Plasma::ServiceJob *)));
@@ -113,7 +107,6 @@ void TwitterEngine::serviceJobFinished(Plasma::ServiceJob* job)
 
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
-    kDebug() << " ...";
     //right now it only makes sense to do an update on timelines
     // FIXME: needed?
     if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
@@ -121,7 +114,6 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
         && !name.startsWith(messagesPrefix) && !name.startsWith(userPrefix)
         && !name.startsWith(statusPrefix)) {
-        kDebug() << "Chiecking out" << name;
         return false;
     }
 
@@ -149,12 +141,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     } else if (name.startsWith(searchTimelinePrefix)) {
         requestType = TimelineSource::SearchTimeline;
         who.remove(searchTimelinePrefix);
-        kDebug() << "Search Timeline requested: " << who;
+        //kDebug() << "Search Timeline requested: " << who;
     } else {
         requestType = TimelineSource::Timeline;
         who.remove(timelinePrefix);
     }
-    kDebug() << "who " << who;
     //we want just the service url to index the UserImages source
     QString serviceBaseUrl;
     QStringList account = who.split('@');
@@ -166,7 +157,6 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             serviceBaseUrl = sbu.at(0) + ':' + sbu.at(1); // http + urlpart
             if (sbu.count() > 2) {
                 parameter = sbu.at(2);
-                kDebug() << "reassembled serviceBaseUrl: " << serviceBaseUrl << parameter;
             }
         }
     } else {
@@ -189,7 +179,6 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     if (requestType == TimelineSource::User) {
         newUserSource(user, serviceBaseUrl);
     } else {
-        kDebug() << "timelinesource" << name;
         TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
 
         if (!source) {
@@ -233,7 +222,7 @@ bool TwitterEngine::updateAccounts(const QString &removed)
         if (l.count() < 2) {
             continue;
         }
-        kDebug() << " LL " << l;
+
         const QString user = l[0];
         const QString serviceBaseUrl = l[1];
         vm["accountUser"] = user;
