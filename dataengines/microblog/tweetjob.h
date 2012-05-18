@@ -55,6 +55,9 @@ public:
     TweetJob(TimelineSource *source, const QString &operation, const QMap<QString, QVariant> &parameters, QObject *parent = 0);
     void start();
 
+Q_SIGNALS:
+    void userData(const QByteArray &data);
+
 private slots:
     void result(KJob *job);
     void recv(KIO::Job*, const QByteArray& data);
@@ -64,6 +67,7 @@ private:
     QByteArray m_data;
     QMap<QString, QVariant> m_parameters;
     TimelineSource *m_source;
+    QString m_operation;
 };
 
 #endif

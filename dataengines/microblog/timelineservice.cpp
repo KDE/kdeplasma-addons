@@ -23,7 +23,6 @@
 #include "timelineservice.h"
 #include "timelinesource.h"
 
-
 #include <KDebug>
 #include <KIO/Job>
 
@@ -46,7 +45,13 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
     if (operation == "update" || operation == "statuses/retweet" ||
             operation == "favorites/create" || operation == "favorites/destroy" ||
             operation == "friendships/create" || operation == "friendships/destroy") {
-        return new TweetJob(m_source, operation, parameters);
+        TweetJob *tj = new TweetJob(m_source, operation, parameters);
+        TimelineSource *src = qobject_cast<TimelineSource*>(parent());
+        if (src) {
+            kDebug() << "Source found" << src;
+            connect(tj, SIGNAL(userData(const QByteArray&)), src, SIGNAL(userData(const QByteArray&)));
+        }
+        return tj;
     } else if (operation == "refresh") {
         Plasma::ServiceJob *sjob = new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
         KIO::Job *getJob = m_source->update(true);
@@ -74,6 +79,7 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
         }
         return sjob;
     }
+
 
     return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
 }

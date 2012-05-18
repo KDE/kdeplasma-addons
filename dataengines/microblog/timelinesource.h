@@ -93,6 +93,7 @@ Q_SIGNALS:
     void authorize(const QString &serviceBaseUrl, const QString &user, const QString &password);
     void userFound(const QVariant &userData, const QString &serviceBaseUrl);
     void accountRemoved(const QString &account);
+    void userData(const QByteArray &data);
 
 private slots:
     void recv(KIO::Job*, const QByteArray& data);

@@ -62,6 +62,7 @@ class TwitterEngine : public Plasma::DataEngine
 
     Q_SIGNALS:
         void appAuthSucceeded(const QString &authorizeUrl, const QString &verifier);
+        void userData(const QByteArray&);
 
     protected:
         //from DataEngine

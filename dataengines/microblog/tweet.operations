@@ -8,25 +8,25 @@
 
     <group name="loadMore">
         <entry name="before_id" type="String">
-            <label>Load tweets before this id.</label>
+            <label>Load tweets before this id</label>
         </entry>
     </group>
 
     <group name="auth">
         <entry name="user" type="String">
-            <label>The user name of the account.</label>
+            <label>The user name of the account</label>
         </entry>
         <entry name="password" type="String">
-            <label>The login password for the account.</label>
+            <label>The login password for the account</label>
         </entry>
     </group>
 
     <group name="forget">
         <entry name="user" type="String">
-            <label>The user name of the account to be forgotten.</label>
+            <label>The user name of the account to be forgotten</label>
         </entry>
         <entry name="serviceUrl" type="String">
-            <label>Service API URL of the account to be forgotten.</label>
+            <label>Service API URL of the account to be forgotten</label>
         </entry>
     </group>
 
@@ -35,13 +35,13 @@
             <label>The tweet text</label>
         </entry>
         <entry name="in_reply_to_status_id" type="String">
-            <label>The Id we're replying to</label>
+            <label>The Id we're of the message we reply to</label>
         </entry>
     </group>
 
     <group name="statuses/retweet">
         <entry name="id" type="String">
-            <label>The Id we're retweeting</label>
+            <label>The Id of the message we're retweeting</label>
         </entry>
     </group>
 

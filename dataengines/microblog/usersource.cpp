@@ -123,7 +123,7 @@ void UserSource::result(KJob *job)
     checkForUpdate();
 }
 
-void UserSource::parse(QByteArray& jsonData)
+void UserSource::parse(const QByteArray& jsonData)
 {
     QJson::Parser parser;
     //const QVariantList resultsList = parser.parse(data).toList();
@@ -134,7 +134,7 @@ void UserSource::parse(QByteArray& jsonData)
 void UserSource::parseJson(const QVariant &data)
 {
     const QVariantMap &user = data.toMap();
-    //kDebug() << "JSON: " << data;
+    kDebug() << "JSON: " << data;
 //     kDebug() << "JSON USER PARSER ONLINE";
     foreach (const QVariant &k, user.keys()) {
         const QString _k = k.toString();

@@ -194,6 +194,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
             connect(source, SIGNAL(userFound(const QVariant&, const QString&)),
                    this, SLOT(addUserSource(const QVariant&, const QString&)));
             connect(source, SIGNAL(accountRemoved(const QString&)), SLOT(updateAccounts(const QString&)));
+            connect(source, SIGNAL(userData(const QByteArray&)), this, SIGNAL(userData(const QByteArray&)));
             source->setObjectName(name);
             source->setImageSource(imageSource);
             source->setStorageEnabled(true);
@@ -251,6 +252,7 @@ UserSource* TwitterEngine::newUserSource(const QString userName, const QString s
         source = new UserSource(userName, serviceBaseUrl, this);
         source->setObjectName(name);
         source->setStorageEnabled(true);
+        connect(this, SIGNAL(userData(const QByteArray&)), source, SLOT(parse(const QByteArray&)));
         ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 
         if (!imageSource) {

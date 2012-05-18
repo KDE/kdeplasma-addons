@@ -51,6 +51,9 @@ public:
     void loadUserInfo(const QString &who, const QString &serviceBaseUrl);
     void parseJson(const QVariant &data);
 
+public Q_SLOTS:
+    void parse(const QByteArray &jsonData);
+
 Q_SIGNALS:
     void dataChanged();
     void loadImage(const QString &who, const KUrl&);
@@ -62,7 +65,6 @@ private Q_SLOTS:
 private:
     void parseJsonStatus(const QVariant &data);
     void parse(QXmlStreamReader &reader);
-    void parse(QByteArray &jsonData);
     void readUser(QXmlStreamReader &reader);
 
     UserSourcePrivate* d;

@@ -36,7 +36,8 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
     : Plasma::ServiceJob(source->account(), operation, parameters, parent),
       m_url(source->serviceBaseUrl()),
       m_parameters(parameters),
-      m_source(source)
+      m_source(source),
+      m_operation(operation)
 {
 
     if (operation == "statuses/retweet" ||
@@ -111,7 +112,10 @@ void TweetJob::result(KJob *job)
 {
     kDebug() << "job returned " << m_url;
     kDebug() << "Job returned... e:" << job->errorText();
-    kDebug() << "Job returned data:" << m_data;
+    //kDebug() << "Job returned data:" << m_data;
+    if (m_operation.startsWith("friendships")) {
+        emit userData(m_data);
+    }
     setError(job->error());
     setErrorText(job->errorText());
     setResult(!job->error());
