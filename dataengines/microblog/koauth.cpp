@@ -123,6 +123,7 @@ QString KOAuth::serviceBaseUrl() const
 
 void KOAuth::setUser(const QString& user)
 {
+    kDebug() << "User changed from " << d->user << " to " << user;
     if (user == d->user) {
         return;
     }
@@ -484,6 +485,7 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
     foreach (const QByteArray &ba, params->keys()) {
         plist << ba;
     }
+    kDebug() << "d->user: " << d->user << d->accessToken;
     kDebug() << "args before: \n" << plist.join("\t\n") << " before signing";
     if (!QCA::isSupported("hmac(sha1)")) {
         kError() << "Your QCA2 does not support the HMAC-SHA1 algorithm. Signing requests using OAuth does not work";
@@ -624,7 +626,7 @@ void KOAuth::saveCredentials() const
         if (wallet->writeMap(identifier(), map) != 0) {
             kWarning() << "Unable to write accessToken & Secret to wallet";
         } else {
-            kDebug() << "Wrote credentials to your wallet" << map;
+            kDebug() << "Wrote credentials to your wallet" << identifier() << map;
         }
     } else {
         kWarning() << "Unable to open Plasma-MicroBlog wallet";

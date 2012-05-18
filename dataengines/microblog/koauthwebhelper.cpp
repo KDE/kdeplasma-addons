@@ -115,7 +115,7 @@ void KOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString 
 
         d->webView = new KWebView(d->dialog);
         d->dialog->setMainWidget(d->webView);
-//         d->dialog->show(); // remove
+        d->dialog->show(); // remove
         connect(d->webView->page(), SIGNAL(loadFinished(bool)), SLOT(loadFinished()));
     }
     d->authorizeUrls[authorizeUrl] = d->serviceBaseUrl;
@@ -180,24 +180,26 @@ void KOAuthWebHelper::loadFinished()
             QString script = "var userName = document.getElementById(\"username_or_email\"); userName.value = \"" + d->user + "\";\n";
             script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + d->password + "\";\n");
             mf->evaluateJavaScript(script);
+            kDebug() << "ran script 1: " << script;
             // Evaluate the button click separately, as the above script might abort,
             // and not all lines are actually executed.
             script = QString();
             script.append("var ackButton = document.getElementById(\"allow\"); ackButton.click();");
-            mf->evaluateJavaScript(script);
+            //mf->evaluateJavaScript(script);
+            kDebug() << "ran script 2: " << script;
         } else if (d->serviceBaseUrl.toLower().contains("identi.ca")) {
             //kDebug() << "Identi.ca hacks JavaScript hacks";
             QVariant r;
             QString script = "var userName = document.getElementById(\"nickname\"); userName.value = \"" + d->user + "\";\n";
             script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + d->password + "\";\n");
             r = mf->evaluateJavaScript(script);
-            //kDebug() << "Ran script 1" << script << r;
+            kDebug() << "Ran script 1" << script << r;
             // Evaluate the button click separately, as the above script might abort,
             // and not all lines are actually executed.
             script = "";
             script.append("var ackButton = document.getElementById(\"allow_submit\"); ackButton.click();");
-            r = mf->evaluateJavaScript(script);
-            //kDebug() << "Ran script 2" << script << r;
+            //r = mf->evaluateJavaScript(script);
+            kDebug() << "Ran script 2" << script << r;
         }
         d->timer->start();
     }

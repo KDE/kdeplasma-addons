@@ -44,6 +44,10 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
         operation == "favorites/destroy") {
         m_url.setPath(m_url.path()+QString("%1/%2.xml").arg(operation).arg(parameters.value("id").toString()));
         kDebug() << "Operation" << operation << m_url;
+    
+    } else if (operation == "friendships/create" || operation == "friendships/destroy") {
+        m_url.setPath(m_url.path()+operation+".json");
+        kDebug() << "follow/unfollow: " << m_url;
     } else if (operation == "update") {
         m_url.setPath(m_url.path()+QString("statuses/%1.xml").arg(operation));
         kDebug() << "Updating status" << m_url;
@@ -54,6 +58,7 @@ TweetJob::TweetJob(TimelineSource *source, const QString &operation, const QMap<
 
 void TweetJob::start()
 {
+    kDebug() << "starting job" << m_url;
     QByteArray data;
 
     data = "source=kdemicroblog";
@@ -91,15 +96,26 @@ void TweetJob::start()
         }
     }
     m_source->oAuthHelper()->sign(job, m_url.pathOrUrl(), params, KOAuth::POST);
+    connect(job, SIGNAL(data(KIO::Job*,QByteArray)),
+            this, SLOT(recv(KIO::Job*,QByteArray)));
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+}
+
+void TweetJob::recv(KIO::Job* , const QByteArray& data)
+{
+    kDebug() << "data " << m_url;
+    m_data.append(data);
 }
 
 void TweetJob::result(KJob *job)
 {
+    kDebug() << "job returned " << m_url;
     kDebug() << "Job returned... e:" << job->errorText();
+    kDebug() << "Job returned data:" << m_data;
     setError(job->error());
     setErrorText(job->errorText());
     setResult(!job->error());
+    m_data.clear();
 }
 
 

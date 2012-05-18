@@ -37,12 +37,15 @@ TimelineService::TimelineService(TimelineSource *parent)
       m_source(parent)
 {
     setName("tweet");
+    kDebug();
 }
 
 Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
+    kDebug() << "Create Job: " << operation;
     if (operation == "update" || operation == "statuses/retweet" ||
-            operation == "favorites/create" || operation == "favorites/destroy") {
+            operation == "favorites/create" || operation == "favorites/destroy" ||
+            operation == "friendships/create" || operation == "friendships/destroy") {
         return new TweetJob(m_source, operation, parameters);
     } else if (operation == "refresh") {
         Plasma::ServiceJob *sjob = new Plasma::ServiceJob(m_source->account(), operation, parameters, this);

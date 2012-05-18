@@ -59,7 +59,7 @@ TwitterEngine::~TwitterEngine()
 
 bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
-//     kDebug() << name;
+    kDebug() << name;
     if (name.startsWith("UserImages:")) {
         // these are updated by the engine itself, not consumers
         return true;
@@ -93,6 +93,7 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
         return Plasma::DataEngine::serviceForSource(name);
     }
 
+    kDebug() << "createService and stuff" << name;
     Plasma::Service *service = source->createService();
     service->setParent(this);
     connect(service, SIGNAL(finished(Plasma::ServiceJob *)), this, SLOT(serviceJobFinished(Plasma::ServiceJob *)));

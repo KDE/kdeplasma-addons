@@ -113,7 +113,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
 
         }
         m_params.insert("show_user", "true");
-        m_params.insert("rpp", "8");
+        m_params.insert("rpp", "88");
         //m_params.insert("result_type", "mixed");
         m_needsAuthorization = false;
         kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
@@ -158,6 +158,7 @@ bool TimelineSource::needsAuthorization() const
 
 Plasma::Service* TimelineSource::createService()
 {
+    kDebug() << "new TimelineService";
     return new TimelineService(this);
 }
 
@@ -237,7 +238,7 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
     ps = m_authHelper->userParameters(m_params);
 
     KUrl u = KUrl(m_url.pathOrUrl() + ps);
-    kDebug() << "Creating job..." << u << " P: " << ps;
+    kDebug() << "Creating job..." << u << " P: " << ps << " User: " << m_authHelper->user();
     m_job = KIO::get(u, KIO::Reload, KIO::HideProgressInfo);
     // clear()??
     if (m_needsAuthorization) {

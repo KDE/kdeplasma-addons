@@ -39,10 +39,21 @@
         </entry>
     </group>
 
-
     <group name="statuses/retweet">
         <entry name="id" type="String">
             <label>The Id we're retweeting</label>
+        </entry>
+    </group>
+
+    <group name="friendships/create">
+        <entry name="screen_name" type="String">
+            <label>The screen name of the user to follow</label>
+        </entry>
+    </group>
+
+    <group name="friendships/destroy">
+        <entry name="screen_name" type="String">
+            <label>The screen name of the user to unfollow</label>
         </entry>
     </group>
 

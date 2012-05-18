@@ -57,9 +57,11 @@ public:
 
 private slots:
     void result(KJob *job);
+    void recv(KIO::Job*, const QByteArray& data);
 
 private:
     KUrl m_url;
+    QByteArray m_data;
     QMap<QString, QVariant> m_parameters;
     TimelineSource *m_source;
 };
