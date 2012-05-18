@@ -46,11 +46,11 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
             operation == "favorites/create" || operation == "favorites/destroy" ||
             operation == "friendships/create" || operation == "friendships/destroy") {
         TweetJob *tj = new TweetJob(m_source, operation, parameters);
-        TimelineSource *src = qobject_cast<TimelineSource*>(parent());
-        if (src) {
-            kDebug() << "Source found" << src;
-            connect(tj, SIGNAL(userData(const QByteArray&)), src, SIGNAL(userData(const QByteArray&)));
-        }
+//         TimelineSource *src = qobject_cast<TimelineSource*>(parent());
+//         if (src) {
+            kDebug() << "Source found" << m_source;
+            connect(tj, SIGNAL(userData(const QByteArray&)), m_source, SIGNAL(userData(const QByteArray&)));
+//         }
         return tj;
     } else if (operation == "refresh") {
         Plasma::ServiceJob *sjob = new Plasma::ServiceJob(m_source->account(), operation, parameters, this);

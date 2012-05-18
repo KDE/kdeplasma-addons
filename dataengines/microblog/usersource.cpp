@@ -125,6 +125,7 @@ void UserSource::result(KJob *job)
 
 void UserSource::parse(const QByteArray& jsonData)
 {
+    kDebug() << "User parse()" << jsonData;
     QJson::Parser parser;
     //const QVariantList resultsList = parser.parse(data).toList();
     const QVariant &user = parser.parse(jsonData);
@@ -150,6 +151,7 @@ void UserSource::parseJson(const QVariant &data)
 
     } else {
         setData("realName", user["name"]);
+        kDebug() << " user: " << user["name"].toString();
 
     }
     const QString imgUrl = user["profile_image_url"].toString();
@@ -159,6 +161,7 @@ void UserSource::parseJson(const QVariant &data)
 //         kDebug() << "Got image url for: " << userName << imgUrl;
         emit loadImage(userName, KUrl(imgUrl));
     }
+    checkForUpdate();
 }
 
 void UserSource::parseJsonStatus(const QVariant& data)
