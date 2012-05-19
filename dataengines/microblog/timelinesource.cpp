@@ -423,15 +423,16 @@ void TimelineSource::parseJson(const QByteArray &data)
 void TimelineSource::parseJsonUser(const QVariant& data)
 {
     const QVariantMap &user = data.toMap();
-//     foreach (const QVariant &k, user.keys()) {
-//         //kDebug() << "   user k : " << k;
-//         //m_tempData[k.toString()] = user[k.toString()];
-//     }
+    foreach (const QVariant &k, user.keys()) {
+        kDebug() << "   user k : " << k << " :: " << user[k.toString()].toString();
+        //m_tempData[k.toString()] = user[k.toString()];
+    }
 
     // compatibility with old API
     m_tempData["User"] = user["screen_name"];
     m_tempData["ImageUrl"] = user["profile_image_url"].toString();
     //kDebug() << " imageUrl: " << m_tempData["ImageUrl"];
+    m_tempData["name"] = user["name"];
     if (m_tempData.contains("ImageUrl")) {
         KUrl url(m_tempData["ImageUrl"].toString());
         m_imageSource->loadImage(m_tempData["User"].toString(), url);
@@ -475,6 +476,7 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                 //     property bool isFavorite: model["favorited"]
                 //     property string message: model["Status"]
 
+                m_tempData["name"] = r["from_user_name"];
                 m_tempData["Date"] = r["created_at"];
                 m_id = r["id"].toString();
                 m_tempData["Id"] = m_id;
@@ -484,6 +486,7 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                 m_tempData["User"] = r["from_user"];
                 // not supported in search
                 m_tempData["IsFavorite"] = "false";
+                m_tempData["retweet_count"] = "0";
                 m_tempData["favorited"] = "false";
                 m_tempData["ImageUrl"] = r["profile_image_url"];
                 if (m_tempData.contains("User")) {
