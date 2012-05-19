@@ -102,6 +102,7 @@ void KOAuthWebHelper::setServiceBaseUrl(const QString &url)
 void KOAuthWebHelper::showDialog()
 {
     if (d->dialog) {
+        kDebug() << "Showing dialog for URL: " << d->webView->page()->mainFrame()->toHtml();
         d->dialog->show();
     }
 }
@@ -200,13 +201,13 @@ void KOAuthWebHelper::loadFinished()
             QString script = "var userName = document.getElementById(\"nickname\"); userName.value = \"" + d->user + "\";\n";
             script.append("var passWord = document.getElementById(\"password\"); passWord.value = \"" + d->password + "\";\n");
             r = mf->evaluateJavaScript(script);
-            //kDebug() << "Ran script 1" << script << r;
+            kDebug() << "Ran script 1" << script << r;
             // Evaluate the button click separately, as the above script might abort,
             // and not all lines are actually executed.
             script = "";
             script.append("var ackButton = document.getElementById(\"allow_submit\"); ackButton.click();");
             r = mf->evaluateJavaScript(script);
-            //kDebug() << "Ran script 2" << script << r;
+            kDebug() << "Ran script 2" << script << r;
         }
         d->timer->start();
     }

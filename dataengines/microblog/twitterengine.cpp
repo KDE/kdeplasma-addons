@@ -65,8 +65,9 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return true;
     }
     if (name.startsWith(statusPrefix)) {
-        setData(statusPrefix, "Authorization", "Idle");
-        setData(statusPrefix, "AuthorizationMessage", QString());
+        kDebug() << "!!!!! Status source : " << name;
+        setData(name, "Authorization", "Idle");
+        setData(name, "AuthorizationMessage", QString());
         scheduleSourcesUpdated();
         return true;
     }
@@ -163,6 +164,11 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         kWarning() << "service not found. Please request a source such as \"TimelineWithFriends:UserName@ServiceUrl\"";
         serviceBaseUrl = "https://api.twitter.com/1/";
         kWarning() << "  Using " << serviceBaseUrl << " instead.";
+    }
+    if (name.startsWith(statusPrefix)) {
+        authorizationStatusUpdated(user, serviceBaseUrl, "Idle");
+        return true;
+
     }
     ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
 

@@ -239,7 +239,7 @@ KIO::Job* TimelineSource::update(bool forcedUpdate)
     ps = m_authHelper->userParameters(m_params);
 
     KUrl u = KUrl(m_url.pathOrUrl() + ps);
-    kDebug() << "Creating job..." << u << " P: " << ps << " User: " << m_authHelper->user();
+//     kDebug() << "Creating job..." << u << " P: " << ps << " User: " << m_authHelper->user();
     m_job = KIO::get(u, KIO::Reload, KIO::HideProgressInfo);
     if (m_needsAuthorization) {
         m_authHelper->sign(m_job, m_url.pathOrUrl(), m_params);
