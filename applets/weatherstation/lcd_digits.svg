@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24.445192"
+   height="30.000008"
+   id="svg3229"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="New document 1">
+   <defs>
+    <g
+      id="A">
+      <path
+        inkscape:connector-curvature="0"
+        d="m 183.40685,164.99985 c 0.20927,0.006 0.40099,0.0672 0.57577,0.18629 0,0 -0.17478,-0.11913 0,0 -1.42533,1.33219 -2.85065,2.66439 -4.27598,3.99659 -0.17332,-0.11474 -0.36674,-0.18214 -0.57578,-0.17782 -3.00588,0 -6.01177,0 -9.01766,0 -0.18877,-0.006 -0.36562,0.0504 -0.52498,0.14395 -1.24751,-1.3322 -2.49502,-2.6644 -3.74254,-3.9966 0,0 1.24752,1.3322 0,0 0.15636,-0.10532 0.33985,-0.14377 0.52497,-0.15241 0,0 -0.18512,0.009 0,0 5.67873,0 11.35747,0 17.0362,0 z"
+        id="segment:A"
+        inkscape:label="#path15"
+        sodipodi:nodetypes="cccccccccccc"
+        style="fill:#404040;fill-opacity:1;stroke:none" />
+    </g>
+    <g
+      id="B">
+      <path
+        inkscape:connector-curvature="0"
+        d="m 184.25358,165.48249 c 0.10994,0.1619 0.16503,0.38377 0.14394,0.58425 0,0 0.0211,-0.20048 0,0 -0.28224,4.25626 -0.56449,8.51252 -0.84673,12.76877 -0.007,0.15901 -0.10079,0.29982 -0.22861,0.3895 -0.18911,0.11854 -0.37821,0.23709 -0.56731,0.35563 -0.15927,0.11189 -0.39182,0.10301 -0.55038,-0.008 -0.86366,-0.60118 -1.72733,-1.20236 -2.59099,-1.80354 0.17217,-2.56561 0.34434,-5.13122 0.5165,-7.69683 0.002,-0.20837 -0.0347,-0.42058 -0.15241,-0.59272 1.42533,-1.33219 2.85066,-2.66439 4.27599,-3.99659 z"
+        id="segment:B"
+        inkscape:label="#path27"
+        sodipodi:nodetypes="ccccccccccc"
+        style="fill:#404040;fill-opacity:1;stroke:none" />
+    </g>
+    <g
+      id="C">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 182.18756,180.41891 c 0.16401,-0.11027 0.38536,-0.0967 0.55037,0.008 0.14677,0.10443 0.29353,0.20886 0.4403,0.31329 0.14505,0.0915 0.23325,0.27511 0.21168,0.4403 -0.28506,4.29577 -0.57013,8.59155 -0.85519,12.88732 -0.0147,0.17797 -0.07,0.36782 -0.18629,0.50804 -1.24469,-1.3322 -2.48938,-2.6644 -3.73407,-3.99659 0.10299,-0.15787 0.16875,-0.32978 0.17781,-0.51651 0.17499,-2.60513 0.34998,-5.21025 0.52497,-7.81537 0.95681,-0.60965 1.91361,-1.2193 2.87042,-1.82895 z"
+         id="segment:C"
+         inkscape:label="#path31"
+         sodipodi:nodetypes="cccccccccc"
+         style="fill:#404040;fill-opacity:1;stroke:none" />
+    </g>
+    <g
+      id="D">
+      <path
+        inkscape:connector-curvature="0"
+        d="m 168.19959,190.81682 c 0.1731,0.12096 0.3694,0.18129 0.57577,0.18628 3.00589,0 6.01178,0 9.01767,0 0.18527,-0.009 0.36833,-0.047 0.52497,-0.15241 1.24752,1.33502 2.49503,2.67004 3.74255,4.00506 -0.16144,0.0899 -0.33595,0.14752 -0.52497,0.14395 -5.67874,0 0,0 0,0 -5.67874,0 -11.35747,0 -17.0362,0 -0.20456,-0.006 -0.40876,-0.0593 -0.57578,-0.18629 1.42533,-1.33219 2.85066,-2.66439 4.27599,-3.99659 z"
+        id="segment:D"
+        inkscape:label="#path19"
+        sodipodi:nodetypes="cccccccccc"
+        style="fill:#404040;fill-opacity:1;stroke:none" />
+    </g>
+    <g
+      id="E">
+      <path
+        inkscape:connector-curvature="0"
+        d="m 164.35544,181.16404 c 0.007,-0.15346 0.0984,-0.30604 0.22861,-0.38103 0.18911,-0.12137 0.37821,-0.24274 0.56731,-0.3641 0.16423,-0.11035 0.38711,-0.0968 0.55038,0.008 0.86366,0.60118 1.72733,1.20236 2.59099,1.80354 0,0 -0.86366,-0.60118 0,0 -0.17217,2.56843 -0.34434,5.13687 -0.51651,7.7053 0,0 0.17217,-2.56843 0,0 -0.012,0.21081 0.0413,0.4042 0.14395,0.58425 -1.42251,1.33502 -2.84501,2.67003 -4.26752,4.00505 -0.11605,-0.17706 -0.15762,-0.38158 -0.15241,-0.59271 0.28507,-4.25626 0,0 0,0 0.28507,-4.25626 0.57013,-8.51252 0.8552,-12.76877 z"
+        id="segment:E"
+        inkscape:label="#path51"
+        sodipodi:nodetypes="ccccccccccccc"
+        style="fill:#404040;fill-opacity:1;stroke:none" />
+    </g>
+    <g
+      id="F">
+      <path
+        inkscape:connector-curvature="0"
+        d="m 164.50785,178.81858 c -0.009,0.17414 0.0752,0.34929 0.22015,0.44877 0.14676,0.10161 0.29353,0.20322 0.4403,0.30482 0.15504,0.11282 0.38876,0.11922 0.55037,0.008 0.95681,-0.60965 1.91361,-1.2193 2.87041,-1.82895 0.175,-2.60512 0.34999,-5.21025 0.52498,-7.81537 0.007,-0.18818 0.0766,-0.35617 0.17781,-0.5165 -1.24752,-1.3322 -2.49503,-2.6644 -3.74254,-3.9966 -0.10381,0.15723 -0.16828,0.33012 -0.17782,0.51651 -0.28789,4.29295 -0.57577,8.5859 -0.86366,12.87885 z"
+        id="segment:F"
+        inkscape:label="#path23"
+        sodipodi:nodetypes="cccccccccc"
+        style="fill:#404040;fill-opacity:1;stroke:none" />
+    </g>
+    <g
+      id="G">
+      <path
+        inkscape:connector-curvature="0"
+        d="m 179.24941,177.99725 c 0.86931,0.60964 1.73861,1.2193 2.60792,1.82894 0,0 -0.86931,-0.60964 0,0 0.10296,0.0911 0.11203,0.25374 -0.008,0.3387 0,0 0.12049,-0.085 0,0 -0.96245,0.61247 -1.9249,1.22494 -2.88735,1.83742 0,0 0.96245,-0.61248 0,0 -3.4349,0 -6.8698,0 -10.3047,0 0,0 3.4349,0 0,0 -0.86931,-0.60965 -1.73862,-1.2193 -2.60792,-1.82895 -0.11455,-0.0801 -0.10676,-0.26043 0.008,-0.33023 0.96245,-0.6153 1.9249,-1.23059 2.88735,-1.84588 3.4349,0 6.8698,0 10.3047,0 z"
+        id="segment:G"
+        inkscape:label="#path71"
+        sodipodi:nodetypes="ccccccccccccc"
+        style="fill:#404040;fill-opacity:1;stroke:none" />
+    </g>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.16"
+     inkscape:cx="184.36545"
+     inkscape:cy="6.4285743"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1028"
+     inkscape:window-height="876"
+     inkscape:window-x="504"
+     inkscape:window-y="177"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3234">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-190.63455,-508.79075)">
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="dot">
+      <path
+         d="m 653.14378,610.14532 c 0,21.83314 -17.69926,39.53239 -39.53239,39.53239 -21.83314,0 -39.53239,-17.69925 -39.53239,-39.53239 0,-21.83313 17.69925,-39.53238 39.53239,-39.53238 21.83313,0 39.53239,17.69925 39.53239,39.53238 z"
+         id="dot:DP"
+         inkscape:label="#path3435"
+         sodipodi:cx="613.61139"
+         sodipodi:cy="610.14532"
+         sodipodi:rx="39.532387"
+         sodipodi:ry="39.532387"
+         sodipodi:type="arc"
+         style="fill:#404040;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         transform="matrix(0.05290615,0,0,0.05290654,153.38968,160.62765)" />
+     </g>
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="zero">
+       <use xlink:href="#F" />
+       <use xlink:href="#E" />
+       <use xlink:href="#D" />
+       <use xlink:href="#C" />
+       <use xlink:href="#B" />
+       <use xlink:href="#A" />
+     </g>
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="one">
+       <use xlink:href="#C" />
+       <use xlink:href="#B" />
+     </g>
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="two">
+       <use xlink:href="#G" />
+       <use xlink:href="#E" />
+       <use xlink:href="#D" />
+       <use xlink:href="#B" />
+       <use xlink:href="#A" />
+     </g>
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="three">
+       <use xlink:href="#G" />
+       <use xlink:href="#D" />
+       <use xlink:href="#C" />
+       <use xlink:href="#B" />
+       <use xlink:href="#A" />
+     </g>
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="four">
+       <use xlink:href="#G" />
+       <use xlink:href="#F" />
+       <use xlink:href="#C" />
+       <use xlink:href="#B" />
+     </g>-
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="five">
+       <use xlink:href="#G" />
+       <use xlink:href="#F" />
+       <use xlink:href="#D" />
+       <use xlink:href="#C" />
+       <use xlink:href="#A" />
+     </g>
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="six">
+       <use xlink:href="#G" />
+       <use xlink:href="#F" />
+       <use xlink:href="#E" />
+       <use xlink:href="#D" />
+       <use xlink:href="#C" />
+       <use xlink:href="#A" />
+     </g>
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="seven">
+       <use xlink:href="#C" />
+       <use xlink:href="#B" />
+       <use xlink:href="#A" />
+     </g>
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="eight">
+       <use xlink:href="#G" />
+       <use xlink:href="#F" />
+       <use xlink:href="#E" />
+       <use xlink:href="#D" />
+       <use xlink:href="#C" />
+       <use xlink:href="#B" />
+       <use xlink:href="#A" />
+     </g>
+     <g
+       transform="translate(27.134737,343.7909)"
+       inkscape:label="#g2650"
+       id="nine">
+       <use xlink:href="#G" />
+       <use xlink:href="#F" />
+       <use xlink:href="#D" />
+       <use xlink:href="#C" />
+       <use xlink:href="#B" />
+       <use xlink:href="#A" />
+     </g>
+  </g>
+</svg>
