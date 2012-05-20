@@ -329,9 +329,11 @@ MediaButtons::Interface * MediaButtons::getV2Interface(const QString &name)
     QDBusReply<bool> reply = QDBusConnection::sessionBus().interface()->isServiceRegistered(constV2Prefix + name);
 
     if (reply.isValid() && reply.value()) {
-        m_watcher->addWatchedService(constV2Prefix + name);
         serviceOwnerChanged(constV2Prefix + name, QString(), QLatin1String("X"));
-        return m_interfaces[name];
+        if (m_interfaces.contains(name)) {
+            m_watcher->addWatchedService(constV2Prefix + name);
+            return m_interfaces[name];
+        }
     }
 
     return 0;
@@ -342,9 +344,11 @@ MediaButtons::Interface * MediaButtons::getV1Interface(const QString &name)
     QDBusReply<bool> reply = QDBusConnection::sessionBus().interface()->isServiceRegistered(constV1Prefix + name);
 
     if (reply.isValid() && reply.value()) {
-        m_watcher->addWatchedService(constV1Prefix + name);
         serviceOwnerChanged(constV1Prefix + name, QString(), QLatin1String("X"));
-        return m_interfaces[name];
+        if (m_interfaces.contains(name)) {
+            m_watcher->addWatchedService(constV1Prefix + name);
+            return m_interfaces[name];
+        }
     }
 
     return 0;
