@@ -21,12 +21,23 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
     id: root
 
-    property int minimumWidth
-    property int minimumHeight
+    property int minimumWidth: bg.naturalSize.width
+    property int minimumHeight: bg.naturalSize.height
+
+    QtObject {
+        id: resizeOpts
+        property real widthRate: root.width / root.minimumWidth
+        property real heightRate: root.height / root.minimumHeight
+    }
 
     PlasmaCore.Svg {
         id: lcdSvg
         imagePath: "weatherstation/lcd"
+    }
+
+    PlasmaCore.Svg {
+        id: iconsSvg
+        imagePath: "weatherstation/weather_icons"
     }
 
     PlasmaCore.SvgItem {
@@ -36,8 +47,87 @@ Item {
     }
 
     PlasmaCore.SvgItem {
+        id: bg
         anchors.fill: parent
         svg: lcdSvg
         elementId: "background"
+    }
+
+    // XXX: enable resizing
+    // XXX: fix "moon", "sun" and "clouds" size
+    PlasmaCore.SvgItem {
+        anchors {
+            top: parent.top
+            topMargin: 20 // XXX: fix positioning
+            horizontalCenter: parent.horizontalCenter
+        }
+        height: iconsSvg.size.height
+        width: iconsSvg.size.width
+        svg: iconsSvg
+        elementId: "weather:snow_rain"
+    }
+
+    // XXX: enable resizing
+    LCDDisplay {
+        id: pressureDisplay
+        anchors {
+            right: parent.right
+            bottom: humidityDisplay.top
+            rightMargin: 24 // XXX: fix positioning
+            bottomMargin: 30 // XXX: fix positioning
+        }
+        height: 24 // XXX: fix initial size
+        number: "29.8"
+    }
+
+    // XXX: enable resizing
+    LCDDisplay {
+        id: humidityDisplay
+        anchors {
+            right: parent.right
+            bottom: windWidget.top
+            rightMargin: 12 // XXX: fix positioning
+            bottomMargin: 16 // XXX: fix positioning
+        }
+        number: "79"
+    }
+
+    // XXX: enable resizing
+    LCDDisplay {
+        id: temperatureDisplay
+        anchors {
+            right: parent.right
+            bottom: windWidget.top
+            rightMargin: 101 // XXX: fix positioning
+            bottomMargin: 16 // XXX: fix positioning
+        }
+        number: "12"
+    }
+
+    Wind {
+        id: windWidget
+        anchors {
+            bottom: parent.bottom
+            bottomMargin: 10 * resizeOpts.heightRate
+            horizontalCenter: parent.horizontalCenter
+        }
+        width: implicitWidth * resizeOpts.widthRate
+        height: implicitHeight * resizeOpts.heightRate
+        direction: "NE"
+        speed: "12.3"
+        unit: "m/s"
+    }
+
+    Text {
+        anchors {
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
+        }
+        font {
+            family: "DejaVu Sans"
+            pixelSize: 7 // XXX: resize
+        }
+        color: "#202020"
+        text: "PROVIDER"
     }
 }

@@ -27,6 +27,7 @@ install(FILES
     lcd_panel.svgz
     lcd_digits.svg
     wind_arrows.svg
+    weather_icons.svg
     DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/weatherstation/)
 
 install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.lcdweather)
