@@ -40,41 +40,41 @@ namespace Conversion {
 class WeatherStation : public WeatherPopupApplet
 {
     Q_OBJECT
-    public:
-        WeatherStation(QObject *parent, const QVariantList &args);
-        ~WeatherStation();
+public:
+    WeatherStation(QObject *parent, const QVariantList &args);
+    ~WeatherStation();
 
-        virtual void init();
-        virtual void createConfigurationInterface(KConfigDialog *parent);
+    virtual void init();
+    virtual void createConfigurationInterface(KConfigDialog *parent);
 
-    public slots:
-        virtual void configAccepted();
-        virtual void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-        void clicked(const QString &name);
-        void configChanged();
+public slots:
+    virtual void configAccepted();
+    virtual void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+    void clicked(const QString &name);
+    void configChanged();
 
-    protected:
-        void setLCDIcon();
-        void setBackground();
+protected:
+    void setLCDIcon();
+    void setBackground();
 
-        void setWind(const KUnitConversion::Value& speed, const QString& direction);
-        void setPressure(const QString& condition, const KUnitConversion::Value& pressure,
-                         const QString& tendency);
-        void setTemperature(const KUnitConversion::Value& temperature, bool hasDigit);
-        void setHumidity(QString humidity);
+    void setWind(const KUnitConversion::Value& speed, const QString& direction);
+    void setPressure(const QString& condition, const KUnitConversion::Value& pressure,
+                     const QString& tendency);
+    void setTemperature(const KUnitConversion::Value& temperature, bool hasDigit);
+    void setHumidity(QString humidity);
 
-        QString fitValue(const KUnitConversion::Value& value, int digits);
-        QStringList fromCondition(const QString& condition);
-        KUnitConversion::Value value(const QString& value, int unit);
+    QString fitValue(const KUnitConversion::Value& value, int digits);
+    QStringList fromCondition(const QString& condition);
+    KUnitConversion::Value value(const QString& value, int unit);
 
-    private:
-        Plasma::Package *m_package;
-        Plasma::DeclarativeWidget *m_declarativeWidget;
+private:
+    Plasma::Package *m_package;
+    Plasma::DeclarativeWidget *m_declarativeWidget;
 
-        Ui::AppearanceConfig m_appearanceConfig;
-        bool m_useBackground;
-        bool m_showToolTip;
-        QString m_url;
+    Ui::AppearanceConfig m_appearanceConfig;
+    bool m_useBackground;
+    bool m_showToolTip;
+    QString m_url;
 };
 
 K_EXPORT_PLASMA_APPLET(weatherstation, WeatherStation)
