@@ -77,7 +77,15 @@ Item {
             id: ppButton
             visible: source.canControl && mouseArea.containsMouse
             width: height
-            anchors.fill: albumArt
+            anchors {
+                // using anchors.fill causes spurious
+                // "Possible anchor loop detected on fill"
+                // warnings
+                top: albumArt.top
+                bottom: albumArt.bottom
+                left: albumArt.left
+                right: albumArt.right
+            }
             source: source
         }
     }
