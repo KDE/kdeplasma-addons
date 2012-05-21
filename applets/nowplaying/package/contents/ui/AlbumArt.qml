@@ -36,7 +36,7 @@ Item {
     }
     PlasmaCore.Svg {
         id: noArtSvg
-        imagePath: "widgets/nowplaying/nocover"
+        imagePath: plasmoid.file("images", "nocover.svgz")
     }
     // TODO: figure out how to centre this vertically
     // TODO: use the media player logo, if available (from the desktop file)
