@@ -423,10 +423,10 @@ void TimelineSource::parseJson(const QByteArray &data)
 void TimelineSource::parseJsonUser(const QVariant& data)
 {
     const QVariantMap &user = data.toMap();
-    foreach (const QVariant &k, user.keys()) {
-        kDebug() << "   user k : " << k << " :: " << user[k.toString()].toString();
-        //m_tempData[k.toString()] = user[k.toString()];
-    }
+//     foreach (const QVariant &k, user.keys()) {
+//         kDebug() << "   user k : " << k << " :: " << user[k.toString()].toString();
+//         //m_tempData[k.toString()] = user[k.toString()];
+//     }
 
     // compatibility with old API
     m_tempData["User"] = user["screen_name"];
