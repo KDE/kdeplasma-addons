@@ -35,6 +35,7 @@
 #include <KDialog>
 
 #include <KWebView>
+#include <KWebPage>
 #include <QWebElement>
 #include <QWebFrame>
 #include <QWebPage>
@@ -60,7 +61,7 @@ public:
     QString serviceBaseUrl;
     QHash<QString, QString> authorizeUrls;
 
-    QWebView *webView;
+    KWebView *webView;
     KDialog *dialog;
     bool busy;
     QTimer *timer;
@@ -117,7 +118,7 @@ void KOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString 
         d->dialog->setCaption( "authorize application" );
         d->dialog->setButtons( KDialog::Ok | KDialog::Cancel);
 
-        d->webView = new QWebView(d->dialog);
+        d->webView = new KWebView(d->dialog, KWebPage::KIOIntegration);
         d->dialog->setMainWidget(d->webView);
 //         d->dialog->show(); // remove
         connect(d->webView->page(), SIGNAL(loadFinished(bool)), SLOT(loadFinished()));
