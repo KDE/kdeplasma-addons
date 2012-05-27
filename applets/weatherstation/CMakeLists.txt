@@ -16,7 +16,7 @@ target_link_libraries(plasma_applet_weatherstation
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4WORKSPACE_WEATHERION_LIBRARY}
-    ${QT_DECLARATIVE_LIBRARY})
+    ${QT_QTDECLARATIVE_LIBRARY})
 
 install(TARGETS plasma_applet_weatherstation DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-weatherstation.desktop
