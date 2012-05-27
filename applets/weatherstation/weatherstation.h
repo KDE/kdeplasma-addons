@@ -40,6 +40,8 @@ namespace Conversion {
 class WeatherStation : public WeatherPopupApplet
 {
     Q_OBJECT
+    Q_PROPERTY(bool useBackground READ useBackground WRITE setUseBackground NOTIFY useBackgroundChanged)
+
 public:
     WeatherStation(QObject *parent, const QVariantList &args);
     ~WeatherStation();
@@ -47,24 +49,35 @@ public:
     virtual void init();
     virtual void createConfigurationInterface(KConfigDialog *parent);
 
+    bool useBackground() const;
+    void setUseBackground(bool use);
+
 public slots:
     virtual void configAccepted();
     virtual void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-    void clicked(const QString &name);
+    void clicked();
     void configChanged();
 
-protected:
-    void setLCDIcon();
-    void setBackground();
+signals:
+    void useBackgroundChanged();
+    void temperatureChanged(QString temperature, QString unit);
+    void humidityChanged(QString humidity);
+    void providerLabelChanged(QString label);
+    void weatherLabelChanged(QString label);
+    void conditionChanged();
+    void pressureChanged(QString conditionId, QString pressure, QString unit, QString direction);
+    void windChanged(QString direction, QString speed, QString unit);
 
+protected:
     void setWind(const KUnitConversion::Value& speed, const QString& direction);
     void setPressure(const QString& condition, const KUnitConversion::Value& pressure,
                      const QString& tendency);
     void setTemperature(const KUnitConversion::Value& temperature, bool hasDigit);
     void setHumidity(QString humidity);
+    void setToolTip(const QString& place);
 
     QString fitValue(const KUnitConversion::Value& value, int digits);
-    QStringList fromCondition(const QString& condition);
+    QString fromCondition(const QString& condition);
     KUnitConversion::Value value(const QString& value, int unit);
 
 private:

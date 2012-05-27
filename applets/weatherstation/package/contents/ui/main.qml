@@ -30,6 +30,33 @@ Item {
         property real heightRate: root.height / root.minimumHeight
     }
 
+    Connections {
+        target: backend
+
+        onTemperatureChanged: {
+            temperatureDisplay.number = (temperature != "-" ? temperature : "");
+            console.log("temperatureUnitChanged: " + unit); // XXX: TODO
+        }
+
+        onHumidityChanged: humidityDisplay.number = (humidity != "N/A" ? humidity : "");
+
+        onProviderLabelChanged: providerLabel.text = label;
+        onWeatherLabelChanged: console.log("weatherLabelChanged: " + label); // XXX: TODO
+
+        onPressureChanged: {
+            condition.elementId = conditionId;
+            pressureDisplay.number = pressure;
+            console.log("pressureUnitChanged: " + unit); // XXX: TODO
+            console.log("pressureDirectionChanged: " + direction); // XXX: TODO
+        }
+
+        onWindChanged: {
+            windWidget.direction = direction;
+            windWidget.speed = speed;
+            windWidget.unit = unit;
+        }
+    }
+
     PlasmaCore.Svg {
         id: lcdSvg
         imagePath: "weatherstation/lcd"
@@ -51,11 +78,13 @@ Item {
         anchors.fill: parent
         svg: lcdSvg
         elementId: "background"
+        visible: backend.useBackground
     }
 
     // XXX: enable resizing
     // XXX: fix "moon", "sun" and "clouds" size
     PlasmaCore.SvgItem {
+        id: condition
         anchors {
             top: parent.top
             topMargin: 20 // XXX: fix positioning
@@ -63,8 +92,8 @@ Item {
         }
         height: iconsSvg.size.height
         width: iconsSvg.size.width
+        visible: elementId != ""
         svg: iconsSvg
-        elementId: "weather:snow_rain"
     }
 
     // XXX: enable resizing
@@ -77,7 +106,6 @@ Item {
             bottomMargin: 30 // XXX: fix positioning
         }
         height: 24 // XXX: fix initial size
-        number: "29.8"
     }
 
     // XXX: enable resizing
@@ -89,7 +117,6 @@ Item {
             rightMargin: 12 // XXX: fix positioning
             bottomMargin: 16 // XXX: fix positioning
         }
-        number: "79"
     }
 
     // XXX: enable resizing
@@ -101,7 +128,6 @@ Item {
             rightMargin: 101 // XXX: fix positioning
             bottomMargin: 16 // XXX: fix positioning
         }
-        number: "12"
     }
 
     Wind {
@@ -113,12 +139,10 @@ Item {
         }
         width: implicitWidth * resizeOpts.widthRate
         height: implicitHeight * resizeOpts.heightRate
-        direction: "NE"
-        speed: "12.3"
-        unit: "m/s"
     }
 
     Text {
+        id: providerLabel
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
@@ -128,6 +152,10 @@ Item {
             pixelSize: 7 // XXX: resize
         }
         color: "#202020"
-        text: "PROVIDER"
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: backend.clicked();
+        }
     }
 }
