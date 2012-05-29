@@ -665,7 +665,28 @@ void AbstractTaskItem::windowPreviewActivated(WId id, Qt::MouseButtons buttons, 
             }
         }
     } else if (buttons & Qt::MidButton) {
-        middleClick();
+        switch (m_applet->middleClick()) {
+        case Tasks::MC_Close: {
+            if (parentGroup()) {
+                AbstractTaskItem *item = parentGroup()->taskItemForWId(id);
+                if (item) {
+                    item->m_abstractItem->close();
+                }
+            }
+            break;
+        }
+        case Tasks::MC_MoveToCurrentDesktop: {
+            if (parentGroup()) {
+                AbstractTaskItem *item = parentGroup()->taskItemForWId(id);
+                if (item) {
+                    item->toCurrentDesktop();
+                }
+            }
+            break;
+        }
+        default:
+            break;
+        }
     }
 }
 
