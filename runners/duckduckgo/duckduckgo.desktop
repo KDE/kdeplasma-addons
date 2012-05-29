@@ -13,6 +13,7 @@ Name[pt_BR]=DuckDuckGo
 Name[sv]=DuckDuckGo
 Name[uk]=DuckDuckGo
 Name[x-test]=xxDuckDuckGoxx
+Name[zh_CN]=DuckDuckGo
 Name[zh_TW]=DuckDuckGo
 
 Comment=Matches DuckDuckGo queries
@@ -27,6 +28,7 @@ Comment[pt_BR]=Corresponde às pesquisas no DuckDuckGo
 Comment[sv]=Matchar sökningar på DuckDuckGo
 Comment[uk]=Відповідники запиту за даними DuckDuckGo
 Comment[x-test]=xxMatches DuckDuckGo queriesxx
+Comment[zh_CN]=匹配 DuckDuckGo 查询
 Comment[zh_TW]=符合 DuckDuckGo 查詢
 
 Icon=

@@ -15,6 +15,7 @@ Name[pt_BR]=Bing
 Name[sv]=Bing
 Name[uk]=Bing
 Name[x-test]=xxBingxx
+Name[zh_CN]=Bing
 Name[zh_TW]=Bing
 
 Comment=Matches Bing queries
@@ -29,6 +30,7 @@ Comment[pt_BR]=Corresponde às pesquisas no Bing
 Comment[sv]=Matchar sökningar på Bing
 Comment[uk]=Відповідники запиту за даними Bing
 Comment[x-test]=xxMatches Bing queriesxx
+Comment[zh_CN]=匹配 Bing 查询
 Comment[zh_TW]=符合 Bing 查詢
 
 Icon=bing
