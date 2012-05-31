@@ -211,7 +211,7 @@ void MarbleWallpaper::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
     if (m_movement == Interactive) {
         event->accept();
-        m_zoom = qMax(qreal(0), m_zoom + (event->delta() > 0 ? 10 : -10));
+        m_zoom = qMax(qreal(0), m_zoom + (event->delta() > 0 ? 40 : -40));
         qreal radius = pow(M_E, (m_zoom / 200.0));
         m_map->setRadius(radius);
 
@@ -234,21 +234,9 @@ void MarbleWallpaper::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             return;
         }
 
-        qreal direction = 1;
-        // Choose spin direction by taking into account whether we
-        // drag above or below the visible pole.
-        if (m_projection == Spherical) {
-            qreal northPoleX, northPoleY;
-            m_map->screenCoordinates(0.0, +90.0, northPoleX, northPoleY);
-            if (polarity > 0) {
-                if (event->screenPos().y() < (- northPoleY + m_map->height() / 2))
-                    direction = -1;
-            }
-            else {
-                if (event->screenPos().y() > (+ northPoleY + m_map->height() / 2))
-                    direction = -1;
-            }
-        }
+        // Reverse spin direction if globe is turned upside down
+        qreal const direction = polarity < 0 ? -1 : 1;
+
         m_positionLon = RAD2DEG * (qreal)(m_leftPressedTranslationX)
                         - 90.0 * direction * deltaX / radius;
         m_positionLat = RAD2DEG * (qreal)(m_leftPressedTranslationY)
