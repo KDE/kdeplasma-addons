@@ -183,9 +183,9 @@ void NotesTextEdit::wheelEvent ( QWheelEvent * event )
  * Add to the Note a signal to prevent from leaving the note and remove line background color
  * when there is no focus on the plasmoid
  */
-void NotesTextEdit::leaveEvent ( QEvent * event )
+void NotesTextEdit::focusOutEvent ( QFocusEvent * event )
 {
-    KTextEdit::leaveEvent(event);
+    KTextEdit::focusOutEvent(event);
 
     QTextEdit::ExtraSelection textxtra;
     textxtra.cursor = textCursor();

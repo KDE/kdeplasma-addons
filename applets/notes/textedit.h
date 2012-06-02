@@ -70,7 +70,7 @@ class NotesTextEdit : public KRichTextEdit
         virtual void contextMenuEvent(QContextMenuEvent *e);
         void mousePressEvent(QMouseEvent *event);
         void keyPressEvent(QKeyEvent *event);
-        void leaveEvent(QEvent *event);
+        void focusOutEvent(QFocusEvent *event);
         void wheelEvent(QWheelEvent *event);
 
     private:
