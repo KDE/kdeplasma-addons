@@ -210,7 +210,7 @@
           style="fill:#404040;fill-opacity:1;fill-rule:evenodd;stroke:none"
           sodipodi:nodetypes="cccc"
           inkscape:label="#path4219"
-          id="wind:W"
+          id="wind:W:arrow"
           d="m 136.00293,250.06411 -7,-4.00001 0,8 7,-3.99999 z" />
       </g>
     </g>
@@ -379,7 +379,7 @@
           d="m 86.26675,283.33527 6.37431,-4.93643 -7.39104,-3.06147 1.01673,7.9979 z" />
        </g>
     </g>
-    
+
     <g
       id="wind:default">
       <use xlink:href="#static_arrows" />

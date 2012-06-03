@@ -28,6 +28,11 @@ Item {
     implicitHeight: windArrows.naturalSize.height
     implicitWidth: windArrows.naturalSize.width
 
+    QtObject {
+        id: resizeOpts
+        property real rate: root.height / root.implicitHeight
+    }
+
     PlasmaCore.Svg {
         id: windSvg
         imagePath: "weatherstation/wind_arrows"
@@ -40,25 +45,23 @@ Item {
         elementId: "wind:" + root.direction
     }
 
-    // XXX: enable resizing
     LCDDisplay {
         id: speedDisplay
         anchors.centerIn: parent
-        height: 24 // XXX: fix initial size
+        height: Math.round(0.8 * implicitHeight * resizeOpts.rate)
     }
 
     Text {
         id: unitLabel
         anchors{
             top: speedDisplay.bottom
-            topMargin: 3
+            topMargin: Math.round(3 * resizeOpts.rate)
             horizontalCenter: parent.horizontalCenter
         }
         font {
             family: "Bitstream Vera Sans"
-            pixelSize: 9 // XXX: resize
+            pixelSize: 9 * resizeOpts.rate
         }
         color: "#202020"
-        text: "m/s"
     }
 }
