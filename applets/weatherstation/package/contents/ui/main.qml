@@ -35,18 +35,18 @@ Item {
 
         onTemperatureChanged: {
             temperatureDisplay.number = (temperature != "-" ? temperature : "");
-            console.log("temperatureUnitChanged: " + unit); // XXX: TODO
+            temperatureDisplay.superscript = unit;
         }
 
         onHumidityChanged: humidityDisplay.number = (humidity != "N/A" ? humidity : "");
 
         onProviderLabelChanged: providerLabel.text = label;
-        onWeatherLabelChanged: console.log("weatherLabelChanged: " + label); // XXX: TODO
+        onWeatherLabelChanged: weatherLabel.text = label;
 
         onPressureChanged: {
             condition.elementId = conditionId;
             pressureDisplay.number = pressure;
-            console.log("pressureUnitChanged: " + unit); // XXX: TODO
+            pressureDisplay.superscript = unit;
             console.log("pressureDirectionChanged: " + direction); // XXX: TODO
         }
 
@@ -81,53 +81,121 @@ Item {
         visible: backend.useBackground
     }
 
-    // XXX: enable resizing
-    // XXX: fix "moon", "sun" and "clouds" size
+    Text {
+        id: weatherLabel
+        anchors {
+            top: parent.top
+            left: parent.left
+            topMargin: 12 * resizeOpts.heightRate
+            leftMargin: 5 * resizeOpts.widthRate
+        }
+        font {
+            family: "DejaVu Sans"
+            pixelSize: Math.round(8 * resizeOpts.widthRate)
+        }
+        color: "#202020"
+        smooth: true
+        text: i18n("CURRENT WEATHER")
+    }
+
     PlasmaCore.SvgItem {
         id: condition
         anchors {
             top: parent.top
-            topMargin: 20 // XXX: fix positioning
+            topMargin: 30 * resizeOpts.heightRate
             horizontalCenter: parent.horizontalCenter
         }
-        height: iconsSvg.size.height
-        width: iconsSvg.size.width
+        height: naturalSize.height * resizeOpts.heightRate
+        width: naturalSize.width * resizeOpts.widthRate
         visible: elementId != ""
         svg: iconsSvg
     }
 
-    // XXX: enable resizing
+    Text {
+        id: pressureLabel
+        anchors {
+            top: parent.top
+            left: weatherLabel.left
+            topMargin: 127 * resizeOpts.heightRate
+        }
+        font: weatherLabel.font
+        color: weatherLabel.color
+        smooth: true
+        text: i18n("PRESSURE")
+    }
+
     LCDDisplay {
         id: pressureDisplay
         anchors {
             right: parent.right
-            bottom: humidityDisplay.top
-            rightMargin: 24 // XXX: fix positioning
-            bottomMargin: 30 // XXX: fix positioning
+            bottom: pressureLabel.bottom
+            rightMargin: 24 * resizeOpts.widthRate
         }
-        height: 24 // XXX: fix initial size
+        height: 23 * resizeOpts.heightRate
+        superscriptFont: weatherLabel.font
     }
 
-    // XXX: enable resizing
-    LCDDisplay {
-        id: humidityDisplay
+    Text {
+        id: temperatureLabel
         anchors {
-            right: parent.right
-            bottom: windWidget.top
-            rightMargin: 12 // XXX: fix positioning
-            bottomMargin: 16 // XXX: fix positioning
+            top: parent.top
+            left: weatherLabel.left
+            topMargin: 152 * resizeOpts.heightRate
         }
+        font: weatherLabel.font
+        color: weatherLabel.color
+        smooth: true
+        text: i18n("OUTDOOR TEMP")
     }
 
-    // XXX: enable resizing
     LCDDisplay {
         id: temperatureDisplay
         anchors {
             right: parent.right
             bottom: windWidget.top
-            rightMargin: 101 // XXX: fix positioning
-            bottomMargin: 16 // XXX: fix positioning
+            rightMargin: 97 * resizeOpts.widthRate
+            bottomMargin: 16 * resizeOpts.heightRate
         }
+        height: implicitHeight * resizeOpts.heightRate
+        superscriptFont: weatherLabel.font
+    }
+
+    Text {
+        id: humidityLabel
+        anchors {
+            top: temperatureLabel.top
+            right: parent.right
+            rightMargin: 5 * resizeOpts.widthRate
+        }
+        font: weatherLabel.font
+        color: weatherLabel.color
+        smooth: true
+        text: i18n("HUMIDITY")
+    }
+
+    LCDDisplay {
+        id: humidityDisplay
+        anchors {
+            top: temperatureDisplay.top
+            right: parent.right
+            rightMargin: 12 * resizeOpts.widthRate
+        }
+        height: temperatureDisplay.height
+        superscript: "%"
+        superscriptFont: weatherLabel.font
+    }
+
+    Text {
+        id: windLabel
+        anchors {
+            top: temperatureLabel.top
+            left: weatherLabel.left
+            topMargin: 60 * resizeOpts.heightRate
+        }
+        font: weatherLabel.font
+        color: weatherLabel.color
+        smooth: true
+        text: i18n("WIND")
     }
 
     Wind {
@@ -149,9 +217,10 @@ Item {
         }
         font {
             family: "DejaVu Sans"
-            pixelSize: 7 // XXX: resize
+            pixelSize: 7 * resizeOpts.heightRate
         }
-        color: "#202020"
+        color: weatherLabel.color
+        smooth: true
 
         MouseArea {
             anchors.fill: parent
