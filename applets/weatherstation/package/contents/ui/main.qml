@@ -47,7 +47,7 @@ Item {
             condition.elementId = conditionId;
             pressureDisplay.number = pressure;
             pressureDisplay.superscript = unit;
-            console.log("pressureDirectionChanged: " + direction); // XXX: TODO
+            pressureDirection.elementId = direction;
         }
 
         onWindChanged: {
@@ -122,6 +122,19 @@ Item {
         color: weatherLabel.color
         smooth: true
         text: i18n("PRESSURE")
+    }
+
+    PlasmaCore.SvgItem {
+        id: pressureDirection
+        anchors {
+            left: parent.left
+            leftMargin: 84 * resizeOpts.widthRate
+            verticalCenter: pressureDisplay.verticalCenter
+        }
+        height: naturalSize.height * resizeOpts.heightRate
+        width: naturalSize.width * resizeOpts.widthRate
+        visible: elementId != ""
+        svg: lcdSvg
     }
 
     LCDDisplay {

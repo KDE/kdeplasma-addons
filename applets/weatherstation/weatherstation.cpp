@@ -132,6 +132,7 @@ Value WeatherStation::value(const QString& value, int unit)
 
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
+    qDebug() << data;
     WeatherPopupApplet::dataUpdated(source, data);
 
     if (!data.contains("Place"))
@@ -279,7 +280,7 @@ void WeatherStation::setWind(const Value& speed, const QString& dir)
     QString direction = dir;
 
     if (dir == "N/A")
-        direction = "default";
+        direction = "";
 
     emit windChanged(direction, s, value.unit()->symbol());
 }

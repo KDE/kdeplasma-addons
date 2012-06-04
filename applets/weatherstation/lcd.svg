@@ -160,18 +160,22 @@
       </g>
     </g>
     <g
-       id="pressure_direction"
+       id="pressure_direction:up"
        transform="translate(10e-2,0)">
       <path
          style="fill:#404040;fill-opacity:1;fill-rule:evenodd;stroke:#404040;stroke-width:0.99999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          d="M 85,120 L 82,123.44 L 83.9,123.44 L 83.9,128.6 L 86.1,128.6 L 86.1,123.44 L 88,123.47568 L 85,120 z"
-         id="pressure_direction:up"
+         id="up"
          sodipodi:nodetypes="cccccccc"
          inkscape:label="#path2620" />
+    </g>
+    <g
+       id="pressure_direction:down"
+       transform="translate(10e-2,0)">
       <path
          style="fill:#404040;fill-opacity:1;fill-rule:evenodd;stroke:#404040;stroke-width:0.99999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          d="M 85.1,128.6 L 88.1,125.16 L 86.2,125.16 L 86.2,120 L 84,120 L 84,125.16 L 82.1,125.12432 L 85.1,128.6 z"
-         id="pressure_direction:down"
+         id="down"
          sodipodi:nodetypes="cccccccc"
          inkscape:label="#path2620" />
     </g>
