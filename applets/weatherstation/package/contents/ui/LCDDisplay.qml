@@ -32,7 +32,7 @@ Item {
         id: internal
 
         property bool decimal: display.number.indexOf(".") > 0
-        property bool dotIndex: display.number.length - display.number.indexOf(".")
+        property int dotIndex: display.number.length - 3
         property real resizeRate: display.height / dummy.implicitHeight
 
         function numberToDigits(numberStr) {
