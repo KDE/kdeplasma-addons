@@ -22,6 +22,8 @@ Item {
     id: display
 
     property string number
+    property alias superscript: unitLabel.text
+    property alias superscriptFont: unitLabel.font
 
     implicitWidth: row.width
     implicitHeight: dummy.implicitHeight
@@ -61,5 +63,16 @@ Item {
                 dotVisible: internal.decimal && (index == internal.dotIndex)
             }
         }
+    }
+
+    Text {
+        id: unitLabel
+        anchors {
+            top: parent.top
+            left: parent.right
+        }
+        color: "#202020"
+        smooth: true
+        visible: number != ""
     }
 }
