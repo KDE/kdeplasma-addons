@@ -74,7 +74,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
     // default arguments
     m_params.insert("include_entities", "true");
     m_params.insert("include_rts", "true");
-    m_params.insert("count", "20");
+    m_params.insert("count", "50");
     m_params.insert("trim_user", "false");
 
     // parse URL from QML runtime, possibly overwrite defaults
