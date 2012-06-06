@@ -87,7 +87,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
             if (pair.count() == 2) {
                 const QByteArray &n = QUrl::toPercentEncoding(pair.at(0).toLocal8Bit());
                 const QByteArray &v = QUrl::toPercentEncoding(pair.at(1).toLocal8Bit());
-                kDebug() << "       inserted: " << n << v;
+//                 kDebug() << "       inserted: " << n << v;
                 query.append(QString("%1=%2&").arg(QString(n),  QString(v)));
                 m_params.insert(n, v);
                 if (n == QByteArray("q") && !v.isEmpty()) {
@@ -116,7 +116,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         m_params.insert("rpp", "88");
         //m_params.insert("result_type", "mixed");
         m_needsAuthorization = false;
-        kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
+//         kDebug() << "Search or Custom Url: " << m_url << m_serviceBaseUrl;
         break;
    case Profile:
         m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.json").arg(parameters.at(0)));
@@ -127,7 +127,7 @@ TimelineSource::TimelineSource(const QString &serviceUrl, RequestType requestTyp
         break;
     case Replies:
         m_url = KUrl(m_serviceBaseUrl, "statuses/mentions.json");
-        kDebug() << "XXXX " << m_url;
+//         kDebug() << "XXXX " << m_url;
         break;
     case TimelineWithFriends:
         m_url = KUrl(m_serviceBaseUrl, "statuses/home_timeline.json");
@@ -159,7 +159,6 @@ bool TimelineSource::needsAuthorization() const
 
 Plasma::Service* TimelineSource::createService()
 {
-    kDebug() << "new TimelineService";
     return new TimelineService(this);
 }
 
@@ -445,30 +444,22 @@ void TimelineSource::parseJsonUser(const QVariant& data)
 
 void TimelineSource::parseJsonSearchResult(const QByteArray &data)
 {
-    //kDebug() << "JSON: " << data;
-//     kDebug() << "JSON PARSER ONLINE";
     QJson::Parser parser;
     const QVariantMap resultsMap = parser.parse(data).toMap();
-//     kDebug() << "resultsMap.keys() :: " << resultsMap.count();
-    //QVariantMap res = resultsMap["results"].toMap();
     bool hasResult = false;
     foreach (QVariant v, resultsMap.keys()) {
-//         kDebug() << "QVariantMap" << v.toString() << resultsMap[v.toString()];
         if (v.toString() == "results") {
-//             kDebug() << " ################################# " << endl;
-                //["results"].toMap()
             foreach (const QVariant &w, resultsMap[v.toString()].toList()) {
                 hasResult = true;
-                //kDebug() << "TRUE" << resultsMap << resultsMap[v.toString()].toList();
                 QVariantMap r = w.toMap();
 
                 foreach (const QVariant &k, r.keys()) {
                     const QString _u = k.toString();
-        //             kDebug() << " tweet k : " << _u;
                     if (_u != "user") {
                         m_tempData[_u] = r[_u];
                     }
                 }
+                // QML Model
                 //     property string messageId: model["Id"]
                 //     property string user: model["User"]
                 //     property string source: model["source"]
@@ -482,7 +473,6 @@ void TimelineSource::parseJsonSearchResult(const QByteArray &data)
                 m_tempData["Id"] = m_id;
                 m_tempData["Status"] = r["text"];
                 m_tempData["Source"] = r["source"];
-                //QString u = cdata.split(' ').at(0);
                 m_tempData["User"] = r["from_user"];
                 // not supported in search
                 m_tempData["IsFavorite"] = "false";
