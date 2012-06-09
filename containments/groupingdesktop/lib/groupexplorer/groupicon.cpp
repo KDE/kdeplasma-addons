@@ -100,18 +100,20 @@ void GroupIcon::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         (event->pos() - event->buttonDownPos(Qt::LeftButton)).toPoint().manhattanLength() > QApplication::startDragDistance()) {
         event->accept();
         QMimeData *data = new QMimeData();
-        data->setData(AbstractGroup::mimeType(), m_id.toAscii());
-        if (data && !data->formats().isEmpty()) {
-            QDrag *drag = new QDrag(event->widget());
-            QPixmap p = m_icon.pixmap(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
-            drag->setPixmap(p);
+        if (data) {
+            data->setData(AbstractGroup::mimeType(), m_id.toAscii());
+            if (!data->formats().isEmpty()) {
+                QDrag *drag = new QDrag(event->widget());
+                QPixmap p = m_icon.pixmap(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
+                drag->setPixmap(p);
 
-            drag->setMimeData(data);
-            drag->exec();   // krazy:exclude=crashy
+                drag->setMimeData(data);
+                drag->exec();   // krazy:exclude=crashy
 
-            setCursor(Qt::OpenHandCursor);
-        } else {
-            delete data;
+                setCursor(Qt::OpenHandCursor);
+            } else {
+                delete data;
+            }
         }
     }
 }
