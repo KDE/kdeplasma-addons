@@ -24,7 +24,7 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Item {
     id: root
 
-    property int minimumWidth: metadataPane.implicitHeight + 100
+    property int minimumWidth: albumArt.width + controls.anchors.leftMargin + controls.implicitWidth + 5
     property int minimumHeight: metadataPane.implicitHeight + progressBar.height + metadataPane.anchors.bottomMargin
 
     Mpris2 {
