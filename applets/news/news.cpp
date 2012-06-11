@@ -122,7 +122,7 @@ QGraphicsWidget *News::graphicsWidget()
     m_graphicsWidget->setLayout(m_layout);
     m_graphicsWidget->setPreferredSize(370,440);
     //a tiny minimum size, a panel 48px high is enough to display the whole applet
-    m_graphicsWidget->setMinimumSize(150, 48);
+    m_graphicsWidget->setMinimumSize(300,300);
     QPalette palette = m_graphicsWidget->palette();
     palette.setBrush(QPalette::Base, Qt::transparent);
     m_graphicsWidget->setPalette(palette);
