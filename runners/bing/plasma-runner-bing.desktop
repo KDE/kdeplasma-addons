@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Bing
 Name[cs]=Bing
+Name[da]=Bing
 Name[de]=Bing
 Name[el]=Bing
 Name[et]=Bing
@@ -23,6 +24,7 @@ Name[zh_TW]=Bing
 
 Comment=Matches Bing queries
 Comment[cs]=Vyhledávání dotazů Bing
+Comment[da]=Matcher Bing-forespørgsler
 Comment[de]=Entspricht Bing-Abfragen
 Comment[el]=Εύρεση αναζητήσεων με το Bing
 Comment[et]=Bingi päringud

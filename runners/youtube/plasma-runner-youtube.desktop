@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=YouTube
 Name[cs]=YouTube
+Name[da]=YouTube
 Name[de]=YouTube
 Name[el]=YouTube
 Name[et]=YouTube
@@ -23,6 +24,7 @@ Name[zh_TW]=YouTube
 
 Comment=Matches YouTube queries
 Comment[cs]=Vyhledávání dotazů YouTube
+Comment[da]=Matcher YouTube-forespørgsler
 Comment[de]=Entspricht YouTube-Abfragen
 Comment[el]=Εύρεση αναζητήσεων στο YouTube
 Comment[et]=YouTube'i päringud

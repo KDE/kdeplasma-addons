@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=DuckDuckGo
 Name[cs]=DuckDuckGo
+Name[da]=DuckDuckGo
 Name[de]=DuckDuckGo
 Name[el]=DuckDuckGo
 Name[et]=DuckDuckGo
@@ -21,6 +22,7 @@ Name[zh_TW]=DuckDuckGo
 
 Comment=Matches DuckDuckGo queries
 Comment[cs]=Vyhledávání dotazů DuckDuckGo
+Comment[da]=Matcher DuckDuckGo-forespørgsler
 Comment[de]=Entspricht Duckduckgo-Abfragen
 Comment[el]=Εύρεση αναζητήσεων με το DuckDuckGo
 Comment[et]=DuckDuckGo päringud
