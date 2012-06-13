@@ -45,7 +45,6 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
 {
   setAspectRatioMode(Plasma::IgnoreAspectRatio);
   setHasConfigurationInterface(true);
-  setMinimumSize(200, 100);
   resize(400, 200);
 }
 
@@ -111,6 +110,11 @@ void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
         textItem->setSize((int) contentsRect().width(), (int) contentsRect().height());
         textItem->setPos(contentsRect().topLeft());
         updateRows();
+    }
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (formFactor() == Plasma::Planar) {
+            setMinimumSize(200, 100);
+        }
     }
 }
 
