@@ -239,7 +239,7 @@ void RTM::Task::setDue(const QString& date) {
 void RTM::Task::setEstimate(const QString& estimate) {
   if (d->estimate == estimate)
     return;
-  d->estimate == estimate;
+  d->estimate = estimate;
 
   kDebug() << "Setting Estimate to: " << estimate;
 
