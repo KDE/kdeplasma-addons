@@ -102,9 +102,12 @@ void CommitHistoryView::updateViews(const Plasma::DataEngine::Data &data)
         }
 
         QGraphicsWidget *container = containerForView(QString("Commit History - ") + project);
-        if (!container)
+        if (!container) {
+            delete []x;
+            delete []y;
             return;
-        
+        }
+
         QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(container);
         proxy->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
 

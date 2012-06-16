@@ -53,7 +53,7 @@ RootDBusHandler::RootDBusHandler(QObject *parent)
 
 QString RootDBusHandler::Identity()
 {
-    return QString( "%1 %2" ).arg( "PlasmaMediaPlayer", 0.1 );
+    return QString( "%1 %2" ).arg( "PlasmaMediaPlayer" ).arg( 1.0 );
 }
 
 void RootDBusHandler::Quit()

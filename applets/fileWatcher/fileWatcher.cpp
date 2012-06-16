@@ -111,6 +111,11 @@ void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
         textItem->setPos(contentsRect().topLeft());
         updateRows();
     }
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (formFactor() == Plasma::Planar) {
+            setMinimumSize(200, 100);
+        }
+    }
 }
 
 void FileWatcher::fileDeleted(const QString &path)
