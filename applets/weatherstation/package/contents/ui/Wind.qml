@@ -30,7 +30,7 @@ Item {
 
     QtObject {
         id: resizeOpts
-        property real rate: root.height / root.implicitHeight
+        property real hScaleFactor: root.height / root.implicitHeight
     }
 
     PlasmaCore.Svg {
@@ -48,19 +48,19 @@ Item {
     LCDDisplay {
         id: speedDisplay
         anchors.centerIn: parent
-        height: Math.round(0.8 * implicitHeight * resizeOpts.rate)
+        height: Math.round(0.8 * implicitHeight * resizeOpts.hScaleFactor)
     }
 
     Text {
         id: unitLabel
         anchors{
             top: speedDisplay.bottom
-            topMargin: Math.round(3 * resizeOpts.rate)
+            topMargin: Math.round(3 * resizeOpts.hScaleFactor)
             horizontalCenter: parent.horizontalCenter
         }
         font {
             family: "Bitstream Vera Sans"
-            pixelSize: 9 * resizeOpts.rate
+            pixelSize: 9 * resizeOpts.hScaleFactor
         }
         color: "#202020"
     }

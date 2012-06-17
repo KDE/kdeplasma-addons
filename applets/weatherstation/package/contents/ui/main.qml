@@ -26,8 +26,8 @@ Item {
 
     QtObject {
         id: resizeOpts
-        property real widthRate: root.width / root.minimumWidth
-        property real heightRate: root.height / root.minimumHeight
+        property real wScaleFactor: root.width / root.minimumWidth
+        property real hScaleFactor: root.height / root.minimumHeight
     }
 
     Connections {
@@ -86,12 +86,12 @@ Item {
         anchors {
             top: parent.top
             left: parent.left
-            topMargin: 12 * resizeOpts.heightRate
-            leftMargin: 5 * resizeOpts.widthRate
+            topMargin: 12 * resizeOpts.hScaleFactor
+            leftMargin: 5 * resizeOpts.wScaleFactor
         }
         font {
             family: "DejaVu Sans"
-            pixelSize: Math.round(8 * resizeOpts.widthRate)
+            pixelSize: Math.round(8 * resizeOpts.wScaleFactor)
         }
         color: "#202020"
         smooth: true
@@ -102,11 +102,11 @@ Item {
         id: condition
         anchors {
             top: parent.top
-            topMargin: 26 * resizeOpts.heightRate
+            topMargin: 26 * resizeOpts.hScaleFactor
             horizontalCenter: parent.horizontalCenter
         }
-        height: naturalSize.height * resizeOpts.heightRate
-        width: naturalSize.width * resizeOpts.widthRate
+        height: naturalSize.height * resizeOpts.hScaleFactor
+        width: naturalSize.width * resizeOpts.wScaleFactor
         visible: elementId != ""
         svg: iconsSvg
     }
@@ -116,7 +116,7 @@ Item {
         anchors {
             top: parent.top
             left: weatherLabel.left
-            topMargin: 127 * resizeOpts.heightRate
+            topMargin: 127 * resizeOpts.hScaleFactor
         }
         font: weatherLabel.font
         color: weatherLabel.color
@@ -128,11 +128,11 @@ Item {
         id: pressureDirection
         anchors {
             left: parent.left
-            leftMargin: 84 * resizeOpts.widthRate
+            leftMargin: 84 * resizeOpts.wScaleFactor
             verticalCenter: pressureDisplay.verticalCenter
         }
-        height: naturalSize.height * resizeOpts.heightRate
-        width: naturalSize.width * resizeOpts.widthRate
+        height: naturalSize.height * resizeOpts.hScaleFactor
+        width: naturalSize.width * resizeOpts.wScaleFactor
         visible: elementId != ""
         svg: lcdSvg
     }
@@ -142,9 +142,9 @@ Item {
         anchors {
             right: parent.right
             bottom: pressureLabel.bottom
-            rightMargin: 24 * resizeOpts.widthRate
+            rightMargin: 24 * resizeOpts.wScaleFactor
         }
-        height: 23 * resizeOpts.heightRate
+        height: 23 * resizeOpts.hScaleFactor
         superscriptFont: weatherLabel.font
     }
 
@@ -153,7 +153,7 @@ Item {
         anchors {
             top: parent.top
             left: weatherLabel.left
-            topMargin: 152 * resizeOpts.heightRate
+            topMargin: 152 * resizeOpts.hScaleFactor
         }
         font: weatherLabel.font
         color: weatherLabel.color
@@ -166,10 +166,10 @@ Item {
         anchors {
             right: parent.right
             bottom: windWidget.top
-            rightMargin: 97 * resizeOpts.widthRate
-            bottomMargin: 16 * resizeOpts.heightRate
+            rightMargin: 97 * resizeOpts.wScaleFactor
+            bottomMargin: 16 * resizeOpts.hScaleFactor
         }
-        height: implicitHeight * resizeOpts.heightRate
+        height: implicitHeight * resizeOpts.hScaleFactor
         superscriptFont: weatherLabel.font
     }
 
@@ -178,7 +178,7 @@ Item {
         anchors {
             top: temperatureLabel.top
             right: parent.right
-            rightMargin: 5 * resizeOpts.widthRate
+            rightMargin: 5 * resizeOpts.wScaleFactor
         }
         font: weatherLabel.font
         color: weatherLabel.color
@@ -191,7 +191,7 @@ Item {
         anchors {
             top: temperatureDisplay.top
             right: parent.right
-            rightMargin: 12 * resizeOpts.widthRate
+            rightMargin: 12 * resizeOpts.wScaleFactor
         }
         height: temperatureDisplay.height
         superscript: "%"
@@ -203,7 +203,7 @@ Item {
         anchors {
             top: temperatureLabel.top
             left: weatherLabel.left
-            topMargin: 60 * resizeOpts.heightRate
+            topMargin: 60 * resizeOpts.hScaleFactor
         }
         font: weatherLabel.font
         color: weatherLabel.color
@@ -215,11 +215,11 @@ Item {
         id: windWidget
         anchors {
             bottom: parent.bottom
-            bottomMargin: 10 * resizeOpts.heightRate
+            bottomMargin: 10 * resizeOpts.hScaleFactor
             horizontalCenter: parent.horizontalCenter
         }
-        width: implicitWidth * resizeOpts.widthRate
-        height: implicitHeight * resizeOpts.heightRate
+        width: implicitWidth * resizeOpts.wScaleFactor
+        height: implicitHeight * resizeOpts.hScaleFactor
     }
 
     Text {
@@ -230,7 +230,7 @@ Item {
         }
         font {
             family: "DejaVu Sans"
-            pixelSize: 7 * resizeOpts.heightRate
+            pixelSize: 7 * resizeOpts.hScaleFactor
         }
         color: weatherLabel.color
         smooth: true

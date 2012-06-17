@@ -24,14 +24,14 @@ Item {
     property int value: 0
     property alias dotVisible: dot.visible
 
-    implicitWidth: all.naturalSize.width
-    implicitHeight: all.naturalSize.height
+    implicitWidth: dummy.naturalSize.width
+    implicitHeight: dummy.naturalSize.height
 
     QtObject {
         id: internal
-        property real dotWidthRate: dot.naturalSize.width / all.naturalSize.width
+        property real dotWidthRate: dot.naturalSize.width / dummy.naturalSize.width
         property real digitWidthRate: digit.naturalSize.width /
-                                      (all.naturalSize.width - dot.naturalSize.width)
+                                      (dummy.naturalSize.width - dot.naturalSize.width)
         property variant values: ["zero", "one", "two", "three", "four",
                                   "five", "six", "seven", "eight", "nine"]
     }
@@ -42,11 +42,7 @@ Item {
     }
 
     // Used just to get the size hints of digit + dot
-    PlasmaCore.SvgItem {
-        id: all
-        svg: digitSvg
-        visible: false
-    }
+    PlasmaCore.SvgItem { id: dummy; svg: digitSvg; visible: false }
 
     Item {
         id: item

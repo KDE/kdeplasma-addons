@@ -33,7 +33,7 @@ Item {
 
         property bool decimal: display.number.indexOf(".") > 0
         property int dotIndex: display.number.length - 3
-        property real resizeRate: display.height / dummy.implicitHeight
+        property real hScaleFactor: display.height / dummy.implicitHeight
 
         function numberToDigits(numberStr) {
             digits = [];
@@ -51,14 +51,14 @@ Item {
     Row {
         id: row
         anchors.centerIn: parent
-        spacing: 2 * internal.resizeRate
+        spacing: 2 * internal.hScaleFactor
 
         Repeater {
             model: internal.numberToDigits(display.number);
 
             LCDDigit {
-                height: implicitHeight * internal.resizeRate
-                width: implicitWidth * internal.resizeRate
+                height: implicitHeight * internal.hScaleFactor
+                width: implicitWidth * internal.hScaleFactor
                 value: modelData
                 dotVisible: internal.decimal && (index == internal.dotIndex)
             }
