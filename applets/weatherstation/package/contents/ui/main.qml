@@ -86,9 +86,13 @@ Item {
         anchors {
             top: parent.top
             left: parent.left
+            right: parent.right
             topMargin: 12 * resizeOpts.hScaleFactor
             leftMargin: 5 * resizeOpts.wScaleFactor
+            rightMargin: 5 * resizeOpts.wScaleFactor
         }
+        horizontalAlignment: Text.AlignLeft
+        elide: Text.ElideRight
         font {
             family: "DejaVu Sans"
             pixelSize: Math.round(8 * resizeOpts.wScaleFactor)
@@ -225,12 +229,17 @@ Item {
     Text {
         id: providerLabel
         anchors {
+            left: parent.left
+            right: parent.right
             bottom: parent.bottom
-            horizontalCenter: parent.horizontalCenter
+            leftMargin: 5 * resizeOpts.wScaleFactor
+            rightMargin: 5 * resizeOpts.wScaleFactor
         }
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideRight
         font {
             family: "DejaVu Sans"
-            pixelSize: 7 * resizeOpts.hScaleFactor
+            pixelSize: Math.round(7 * resizeOpts.hScaleFactor)
         }
         color: weatherLabel.color
         smooth: true
