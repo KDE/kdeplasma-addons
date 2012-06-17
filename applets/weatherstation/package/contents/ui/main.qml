@@ -71,6 +71,7 @@ Item {
         anchors.fill: parent
         svg: lcdSvg
         elementId: "lcd_background"
+        visible: backend.useBackground
     }
 
     PlasmaCore.SvgItem {
@@ -78,7 +79,6 @@ Item {
         anchors.fill: parent
         svg: lcdSvg
         elementId: "background"
-        visible: backend.useBackground
     }
 
     Text {
@@ -102,7 +102,7 @@ Item {
         id: condition
         anchors {
             top: parent.top
-            topMargin: 30 * resizeOpts.heightRate
+            topMargin: 26 * resizeOpts.heightRate
             horizontalCenter: parent.horizontalCenter
         }
         height: naturalSize.height * resizeOpts.heightRate
