@@ -159,7 +159,7 @@ class MicroBlog : public Plasma::PopupApplet
         int m_lastMode;
 
         Plasma::DataEngine *m_engine;
-        Plasma::Service *m_service;
+        QWeakPointer<Plasma::Service> m_service;
         Plasma::Service *m_profileService;
         QSet<Plasma::ServiceJob *> m_updateJobs;
         QSet<Plasma::ServiceJob *> m_retweetJobs;

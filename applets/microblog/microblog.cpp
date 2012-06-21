@@ -64,7 +64,6 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
       m_newTweets(0),
       m_includeFriends(false),
       m_lastMode(0),
-      m_service(0),
       m_profileService(0),
       m_lastTweet(0),
       m_wallet(0),
@@ -354,8 +353,7 @@ void MicroBlog::configChanged()
 
     if (changed) {
         if (m_service) {
-            m_service->deleteLater();
-            m_service = 0;
+            m_service.data()->deleteLater();
         }
 
         if (m_profileService) {
@@ -392,12 +390,18 @@ void MicroBlog::reply(const QString &replyToId, const QString &to)
 
 void MicroBlog::forward(const QString &messageId)
 {
-    KConfigGroup cg = m_service->operationDescription("statuses/retweet");
+    createTimelineService();
+
+    if (!m_service) {
+        return;
+    }
+
+    KConfigGroup cg = m_service.data()->operationDescription("statuses/retweet");
     cg.writeEntry("id", messageId);
 
-    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(retweetCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
+    connect(m_service.data(), SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(retweetCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
 
-    m_retweetJobs.insert(m_service->startOperationCall(cg));
+    m_retweetJobs.insert(m_service.data()->startOperationCall(cg));
     setBusy(true);
 }
 
@@ -410,12 +414,12 @@ void MicroBlog::favorite(const QString &messageId, const bool isFavorite)
         operation = "favorites/destroy";
     }
 
-    KConfigGroup cg = m_service->operationDescription(operation);
+    KConfigGroup cg = m_service.data()->operationDescription(operation);
     cg.writeEntry("id", messageId);
 
-    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(favoriteCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
+    connect(m_service.data(), SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(favoriteCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
 
-    m_favoriteJobs.insert(m_service->startOperationCall(cg));
+    m_favoriteJobs.insert(m_service.data()->startOperationCall(cg));
     setBusy(true);
 }
 
@@ -751,8 +755,7 @@ void MicroBlog::configAccepted()
         m_password = password;
 
         if (m_service) {
-            m_service->deleteLater();
-            m_service = 0;
+            m_service.data()->deleteLater();
         }
 
         if (m_profileService) {
@@ -767,7 +770,7 @@ void MicroBlog::configAccepted()
 MicroBlog::~MicroBlog()
 {
     delete m_colorScheme;
-    delete m_service;
+    delete m_service.data();
     delete m_profileService;
 }
 
@@ -818,15 +821,15 @@ void MicroBlog::updateStatus()
 
     QString status = m_statusEdit->nativeWidget()->toPlainText();
 
-    KConfigGroup cg = m_service->operationDescription("update");
+    KConfigGroup cg = m_service.data()->operationDescription("update");
     cg.writeEntry("status", status);
     if (!m_replyToId.isEmpty()) {
         cg.writeEntry("in_reply_to_status_id", m_replyToId);
     }
 
-    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
+    connect(m_service.data(), SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)), Qt::UniqueConnection);
 
-    m_updateJobs.insert(m_service->startOperationCall(cg));
+    m_updateJobs.insert(m_service.data()->startOperationCall(cg));
     m_statusEdit->nativeWidget()->setPlainText("");
     setBusy(true);
 }
@@ -839,7 +842,7 @@ void MicroBlog::updateCompleted(Plasma::ServiceJob *job)
 
     m_updateJobs.remove(job);
     if (m_updateJobs.isEmpty()) {
-        disconnect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)));
+        disconnect(m_service.data(), SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)));
     }
 
     if (!job->error()) {
@@ -859,7 +862,7 @@ void MicroBlog::retweetCompleted(Plasma::ServiceJob *job)
 
     m_retweetJobs.remove(job);
     if (m_retweetJobs.isEmpty()) {
-        disconnect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(retweetCompleted(Plasma::ServiceJob*)));
+        disconnect(m_service.data(), SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(retweetCompleted(Plasma::ServiceJob*)));
     }
 
     if (!job->error()) {
@@ -881,7 +884,7 @@ void MicroBlog::favoriteCompleted(Plasma::ServiceJob *job)
 
     m_favoriteJobs.remove(job);
     if (m_favoriteJobs.isEmpty()) {
-        disconnect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(favoriteCompleted(Plasma::ServiceJob*)));
+        disconnect(m_service.data(), SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(favoriteCompleted(Plasma::ServiceJob*)));
     }
 
     if (!job->error()) {
@@ -909,11 +912,11 @@ void MicroBlog::downloadHistory()
 
     createTimelineService();
     if (m_service) {
-        KConfigGroup cg = m_service->operationDescription("auth");
+        KConfigGroup cg = m_service.data()->operationDescription("auth");
         cg.writeEntry("password", m_password);
         
-        bool ok = m_service->startOperationCall(cg);
-        kDebug() << "operation OK";
+        bool ok = m_service.data()->startOperationCall(cg);
+        kDebug() << "operation OK" << ok;
     }
 
     //get the profile to retrieve the user icon
@@ -939,8 +942,7 @@ void MicroBlog::createTimelineService()
         return;
     }
 
-    delete m_service;
-    m_service = 0;
+    delete m_service.data();
     m_lastMode = m_tabBar->currentIndex();
 
     QString query;
@@ -976,7 +978,7 @@ void MicroBlog::createTimelineService()
     m_engine->connectSource(query, this, m_historyRefresh * 60 * 1000);
     m_engine->connectSource("Error:" + query, this);
     m_service = m_engine->serviceForSource(m_curTimeline);
-    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
+    connect(m_service.data(), SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
 }
 
 void MicroBlog::serviceFinished(Plasma::ServiceJob *job)
@@ -988,8 +990,7 @@ void MicroBlog::serviceFinished(Plasma::ServiceJob *job)
         // reset the service objects to give it a chance
         // to re-authenticate
         if (m_service) {
-            m_service->deleteLater();
-            m_service = 0;
+            m_service.data()->deleteLater();
         }
 
         if (m_profileService) {
