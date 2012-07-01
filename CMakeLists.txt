@@ -60,10 +60,7 @@ include_directories (${KDE4_INCLUDES}
 add_subdirectory(libs)
 add_subdirectory(applets)
 add_subdirectory(dataengines)
-
-if (QJSON_FOUND)
-    add_subdirectory(runners)
-endif (QJSON_FOUND)
+add_subdirectory(runners)
 
 add_subdirectory(scriptengines)
 add_subdirectory(wallpapers)
