@@ -46,9 +46,8 @@ add_subdirectory(calculator)
 # add_subdirectory(spellcheck)
 # add_subdirectory(showdashboard)
 add_subdirectory(timer)
-# 
-# add_subdirectory(eyes)
-# 
+add_subdirectory(eyes)
+
 # add_subdirectory(unitconverter)
 # add_subdirectory(weatherstation)
 # 
