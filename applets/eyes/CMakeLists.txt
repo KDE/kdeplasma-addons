@@ -1,19 +1,13 @@
 project(eyes)
 
- 
-set(eyes_SRCS eyes.cpp)
+install(DIRECTORY package/
+        DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/eyes)
 
-kde4_add_plugin(plasma_applet_eyes ${eyes_SRCS})
-target_link_libraries(plasma_applet_eyes
-                      ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
- 
-install(TARGETS plasma_applet_eyes
-        DESTINATION ${PLUGIN_INSTALL_DIR})
- 
-install(FILES plasma-applet-eyes.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES package/metadata.desktop
+        DESTINATION ${SERVICES_INSTALL_DIR}
+        RENAME plasma-applet-eyes.desktop)
 
 install(FILES eyes.svg
-	DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
+        DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
 
 kde4_install_icons(${ICON_INSTALL_DIR})
