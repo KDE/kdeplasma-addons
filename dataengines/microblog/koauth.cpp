@@ -168,13 +168,15 @@ void KOAuth::run()
 
 void KOAuth::authorize(const QString &serviceBaseUrl, const QString &user, const QString &password)
 {
-    d->user = user;
+    if (!user.isEmpty()) {
+        d->user = user;
+    }
     d->password = password;
     d->serviceBaseUrl = serviceBaseUrl;
     d->accessToken = QByteArray();
     d->accessTokenSecret = QByteArray();
 
-    d->w->setUser(user);
+    d->w->setUser(d->user);
     d->w->setServiceBaseUrl(serviceBaseUrl);
     d->w->setPassword(password);
 
