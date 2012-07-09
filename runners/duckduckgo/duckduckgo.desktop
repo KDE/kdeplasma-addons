@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=DuckDuckGo
+Name[ca]=DuckDuckGo
 Name[cs]=DuckDuckGo
 Name[da]=DuckDuckGo
 Name[de]=DuckDuckGo
@@ -14,6 +15,10 @@ Name[nl]=DuckDuckGo
 Name[pl]=DuckDuckGo
 Name[pt]=DuckDuckGo
 Name[pt_BR]=DuckDuckGo
+Name[sr]=Дак дак го
+Name[sr@ijekavian]=Дак дак го
+Name[sr@ijekavianlatin]=Duck Duck Go
+Name[sr@latin]=Duck Duck Go
 Name[sv]=DuckDuckGo
 Name[tr]=DuckDuckGo
 Name[uk]=DuckDuckGo
@@ -22,6 +27,7 @@ Name[zh_CN]=DuckDuckGo
 Name[zh_TW]=DuckDuckGo
 
 Comment=Matches DuckDuckGo queries
+Comment[ca]=Correspon amb consultes a DuckDuckGo
 Comment[cs]=Vyhledávání dotazů DuckDuckGo
 Comment[da]=Matcher DuckDuckGo-forespørgsler
 Comment[de]=Entspricht Duckduckgo-Abfragen
@@ -35,6 +41,10 @@ Comment[nl]=Komt overeen met DuckDuckGo-queries
 Comment[pl]=Dopasowanie zapytań DuckDuckGo
 Comment[pt]=Corresponde às pesquisas do DuckDuckGo
 Comment[pt_BR]=Corresponde às pesquisas no DuckDuckGo
+Comment[sr]=Поклапа упите Дак дак гоу
+Comment[sr@ijekavian]=Поклапа упите Дак дак гоу
+Comment[sr@ijekavianlatin]=Poklapa upite Duck Duck Gou
+Comment[sr@latin]=Poklapa upite Duck Duck Gou
 Comment[sv]=Matchar sökningar på DuckDuckGo
 Comment[tr]=DuckDuckGo sorgularını eşleştirir
 Comment[uk]=Відповідники запиту за даними DuckDuckGo

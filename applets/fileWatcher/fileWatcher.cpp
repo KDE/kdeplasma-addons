@@ -112,8 +112,11 @@ void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
         updateRows();
     }
     if (constraints & Plasma::FormFactorConstraint) {
-        if (formFactor() == Plasma::Planar) {
+        const Plasma::FormFactor f = formFactor();
+        if (f == Plasma::Planar || f == Plasma::MediaCenter) {
             setMinimumSize(200, 100);
+        } else {
+            setMinimumSize(-1, -1);
         }
     }
 }
