@@ -21,7 +21,5 @@ if(NOT WIN32)
 endif(NOT WIN32)
 
 if(QJSON_FOUND)
- add_subdirectory(bing)
- add_subdirectory(duckduckgo)
  add_subdirectory(youtube)
 endif(QJSON_FOUND)
