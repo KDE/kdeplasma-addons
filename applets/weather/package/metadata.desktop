@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Weather Forecast (QML)
+Type=Service
+ServiceTypes=Plasma/Applet,Plasma/PopupApplet
+Icon=weather-clear
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-DefaultSize=250,350
+X-KDE-PluginInfo-Author=Luís Gabriel Lima
+X-KDE-PluginInfo-Email=lampih@gmail.com
+X-KDE-PluginInfo-Name=org.kde.weather
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPLv2+
+X-KDE-PluginInfo-EnabledByDefault=true

@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007-2009 by Shawn Starr <shawn.starr@rogers.com>       *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
+ *   Copyright (C) 2012 by Luís Gabriel Lima <lampih@gmail.com>            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,9 +21,6 @@
 
 #include "weatherapplet.h"
 
-#include <QLabel>
-#include <QTreeView>
-#include <QHeaderView>
 #include <QApplication>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsGridLayout>
@@ -43,8 +41,9 @@
 #include <Plasma/TabBar>
 #include <Plasma/Theme>
 #include <Plasma/ToolTipManager>
+#include <Plasma/DeclarativeWidget>
+#include <Plasma/Package>
 
-#include <weatherview.h>
 #include <cmath>
 
 template <typename T> T clampValue(T value, int decimals)
@@ -59,80 +58,23 @@ bool isValidIconName(const QString &icon)
                                             KIconLoader::DefaultState, QStringList(), 0, true).isNull();
 }
 
-class BackgroundWidget : public QGraphicsWidget
-{
-public:
-    BackgroundWidget(QGraphicsWidget *parent)
-        : QGraphicsWidget(parent)
-    {
-    }
-
-    KIcon currentWeather() const
-    {
-        return m_currentWeather;
-    }
-
-    void setIconGuide(QGraphicsWidget *widget)
-    {
-        m_guide = widget;
-    }
-
-    void setCurrentWeather(const QString &currentWeather = QString())
-    {
-        if (isValidIconName(currentWeather)) {
-            m_currentWeather = KIcon(currentWeather);
-        } else {
-            m_currentWeather = KIcon();
-        }
-
-        update();
-    }
-
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
-    {
-        if (m_currentWeather.isNull()) {
-            return;
-        }
-
-        QSize s(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
-        s = s.boundedTo(m_guide ? m_guide.data()->size().toSize() : size().toSize());
-        painter->drawPixmap(QPoint(0, 0), m_currentWeather.pixmap(s));
-    }
-
-private:
-    KIcon m_currentWeather;
-    QWeakPointer<QGraphicsWidget> m_guide;
-};
-
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         : WeatherPopupApplet(parent, args),
-        m_locationLabel(new Plasma::Label),
-        m_forecastTemps(new Plasma::Label),
-        m_conditionsLabel(new Plasma::Label),
-        m_tempLabel(new Plasma::Label),
-        m_courtesyLabel(new Plasma::Label),
-        m_tabBar(new Plasma::TabBar),
         m_fiveDaysModel(0),
         m_detailsModel(0),
-        m_fiveDaysView(0),
-        m_detailsView(0),
-        m_setupLayout(0),
-        m_graphicsWidget(0),
-        m_titleFrame(new Plasma::Frame)
+        m_setupLayout(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("weather-none-available");
 }
 
-QGraphicsWidget *WeatherApplet::graphicsWidget()
-{
-    return m_graphicsWidget;
-}
+//QGraphicsWidget *WeatherApplet::graphicsWidget()
+//{
+//    return m_graphicsWidget;
+//}
 
 void WeatherApplet::init()
 {
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
-    m_graphicsWidget = new BackgroundWidget(this);
     connect(this, SIGNAL(newWeatherSource()), this, SLOT(clearCurrentWeatherIcon()));
 
     switch (formFactor()) {
@@ -145,66 +87,13 @@ void WeatherApplet::init()
         break;
     }
 
-    //FIXME: hardcoded quantities, could be better?
-    m_titlePanel = new QGraphicsGridLayout;
-    //m_titlePanel->setColumnMinimumWidth(0, KIconLoader::SizeHuge);
-    //m_titlePanel->setColumnMaximumWidth(0, KIconLoader::SizeHuge * 1.4);
+    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
+    m_declarativeWidget = new Plasma::DeclarativeWidget(this);
+    layout->addItem(m_declarativeWidget);
 
-    //these minimum widths seems to give different "weights" when resizing the applet
-    //m_titlePanel->setColumnMinimumWidth(1, 10);
-    //m_titlePanel->setColumnMinimumWidth(2, 12);
-    //m_titlePanel->setColumnMinimumWidth(3, 5);
-
-    m_titlePanel->setHorizontalSpacing(0);
-    m_titlePanel->setVerticalSpacing(0);
-
-    m_locationLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
-    m_titleFont = QApplication::font();
-    m_titleFont.setPointSize(m_titleFont.pointSize() * 1.4);
-    m_titleFont.setBold(true);
-    m_locationLabel->nativeWidget()->setFont(m_titleFont);
-    m_locationLabel->nativeWidget()->setWordWrap(false);
-    m_locationLabel->setMinimumWidth(85);
-
-    m_conditionsLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
-    m_conditionsLabel->nativeWidget()->setWordWrap(false);
-    m_conditionsLabel->setMinimumWidth(55);
-
-    m_tempLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
-    m_tempLabel->nativeWidget()->setFont(m_titleFont);
-
-    // This one if a bit crude, ideally we set the horizontal SizePolicy to Preferred, but that doesn't seem
-    // to actually respect the minimum size needed to display the temperature. (Bug in Label or QGL?)
-    m_tempLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-
-    m_forecastTemps->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
-    m_forecastTemps->nativeWidget()->setWordWrap(false);
-    m_forecastTemps->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
-    m_forecastTemps->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-
-    m_titlePanel->setColumnMinimumWidth(0, KIconLoader::SizeHuge);
-    m_titlePanel->addItem(m_locationLabel, 0, 1);
-    m_titlePanel->addItem(m_tempLabel, 0, 4);
-    m_titlePanel->addItem(m_conditionsLabel, 1, 1);
-    m_titlePanel->addItem(m_forecastTemps, 1, 4);
-
-    m_titlePanel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-
-    m_layout = new QGraphicsLinearLayout(Qt::Vertical);
-    m_layout->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
-    m_layout->setPreferredSize(400,300);
-
-    m_titleFrame->setLayout(m_titlePanel);
-    m_layout->addItem(m_titleFrame);
-
-    m_courtesyLabel->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
-    m_courtesyLabel->setWordWrap(false);
-    m_courtesyLabel->setAlignment(Qt::AlignRight);
-    m_courtesyLabel->setTextSelectable(false);
-    connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
-
-    m_graphicsWidget->setLayout(m_layout);
-    m_graphicsWidget->setIconGuide(m_titleFrame);
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    Plasma::Package package(QString(), "org.kde.weather", structure);
+    m_declarativeWidget->setQmlPath(package.filePath("mainscript"));
 
     WeatherPopupApplet::init();
 }
@@ -221,68 +110,17 @@ void WeatherApplet::toolTipAboutToShow()
     }
 
     Plasma::ToolTipContent data(i18nc("Shown when you have not set a weather provider", "Please Configure"), "", popupIcon().pixmap(IconSize(KIconLoader::Desktop)));
-    if (!m_locationLabel->text().isEmpty()) {
-         data.setMainText(m_locationLabel->text());
-         data.setSubText(i18nc("%1 is the weather condition, %2 is the temperature, both come from the weather provider", "%1 %2", m_conditionsLabel->text(), m_tempLabel->text()));
+    QString location, conditions, temp; // XXX
+    if (!location.isEmpty()) {
+         data.setMainText(location);
+         data.setSubText(i18nc("%1 is the weather condition, %2 is the temperature, both come from the weather provider", "%1 %2", conditions, temp));
     }
     Plasma::ToolTipManager::self()->setContent(this, data);
 }
 
 void WeatherApplet::clearCurrentWeatherIcon()
 {
-    m_graphicsWidget->setCurrentWeather(QString());
-}
-
-void WeatherApplet::resizeView()
-{
-    if (m_fiveDaysView) {
-        int totalColumns = m_fiveDaysView->nativeWidget()->header()->count();
-        QString maxString, curString;
-        int longestString = 0;
-
-        kDebug() << "Total Columns: " << totalColumns;
-        // Figure out maximum text length in model this will give us width sizing we want with setWidthSize
-        for (int i = 0; i < totalColumns; i++) {
-             curString  = m_fiveDaysView->model()->index(0, i).data(Qt::DisplayRole).toString();
-             if (m_fiveDaysView->nativeWidget()->fontMetrics().width(curString) > m_fiveDaysView->nativeWidget()->fontMetrics().width(maxString)) {
-                 maxString = curString;
-                 longestString = m_fiveDaysView->nativeWidget()->fontMetrics().width("XX"+maxString);
-             }
-        }
-        kDebug() << "Maximum string is: " << maxString;
-        kDebug() << "Longest Size: " << longestString;
-        kDebug() << "m_fiveDaysView width is: " << m_fiveDaysView->size().width();
-
-        int maxColumns = m_fiveDaysView->size().width() / longestString;
-        int shownColumns = 0;
-        for (int i = 0; i < totalColumns; i++) {
-             if (!m_fiveDaysView->nativeWidget()->isColumnHidden(i)) {
-                 shownColumns++;
-                 kDebug() << "Column " << i << " is NOT hidden";
-             }
-        }
-        int difference = 0;
-        kDebug() << "Maximum Column Width: " << maxColumns;
-        kDebug() << "shown Columns: " << shownColumns;
-        if (maxColumns < shownColumns) {
-            difference = qAbs(maxColumns-shownColumns);
-            kDebug() << "A: Difference is:" << difference;
-            for (int i = maxColumns; i < shownColumns; ++i) {
-                 kDebug() << "HIDE: i = " << i;
-                 m_fiveDaysView->nativeWidget()->setColumnHidden(i, true);
-            }
-        } else {
-            difference = qAbs(shownColumns-maxColumns);
-            if (difference > totalColumns) {
-                kDebug() << "Difference is bigger than totalColumns!";
-            }
-            kDebug() << "B: Difference is: " << difference;
-            for (int i = difference; i < maxColumns; ++i) {
-                 kDebug() << "UNHIDE: i = " << i;
-                 m_fiveDaysView->nativeWidget()->setColumnHidden(i, false);
-            }
-        }
-    }
+    // XXX
 }
 
 void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
@@ -298,7 +136,6 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
             break;
         }
     } else if (constraints & Plasma::SizeConstraint) {
-        resizeView();
         update();
     }
 }
@@ -306,28 +143,6 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
 void WeatherApplet::invokeBrowser(const QString& url) const
 {
     KToolInvocation::invokeBrowser(url);
-}
-
-void WeatherApplet::setVisible(bool visible, QGraphicsLayout *layout)
-{
-    for (int i = 0; i < layout->count(); i++) {
-        QGraphicsWidget *item = dynamic_cast<QGraphicsWidget *>(layout->itemAt(i));
-        if (item){
-            item->setVisible(visible);
-        }
-    }
-}
-
-void WeatherApplet::setVisibleLayout(bool val)
-{
-    if (m_titleFrame) {
-        m_titleFrame->setVisible(val);
-    }
-
-    setVisible(val, m_titlePanel);
-    m_tabBar->setVisible(val);
-
-    m_courtesyLabel->setVisible(val);
 }
 
 QString WeatherApplet::convertTemperature(KUnitConversion::UnitPtr format, QString value,
@@ -360,41 +175,41 @@ bool WeatherApplet::isValidData(const QVariant &data) const
 
 void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 {
-    m_locationLabel->setText(data["Place"].toString());
+    //m_locationLabel->setText(data["Place"].toString());
     QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split('|'); // Get current time period of day
 
     if (fiveDayTokens.count() > 1) {
         // fiveDayTokens[3] = High Temperature
         // fiveDayTokens[4] = Low Temperature
         if (fiveDayTokens[4] != "N/A" && fiveDayTokens[3] == "N/A") {  // Low temperature
-            m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
-            m_tempLabel->show(); //m_tempLabel might be hidden if temperature was not available
-            m_forecastTemps->setText(i18nc("Low temperature", "Low: %1", convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt(), true)));
+            //m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
+            //m_tempLabel->show(); //m_tempLabel might be hidden if temperature was not available
+            //m_forecastTemps->setText(i18nc("Low temperature", "Low: %1", convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt(), true)));
         } else if (fiveDayTokens[3] != "N/A" && fiveDayTokens[4] == "N/A") { // High temperature
-            m_forecastTemps->setText(i18nc("High temperature", "High: %1", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true)));
+            //m_forecastTemps->setText(i18nc("High temperature", "High: %1", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true)));
         } else { // Both high and low
-            m_forecastTemps->setText(i18nc("High & Low temperature", "H: %1 L: %2", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true), convertTemperature(temperatureUnit(),  fiveDayTokens[4], data["Temperature Unit"].toInt(), true)));
+            //m_forecastTemps->setText(i18nc("High & Low temperature", "H: %1 L: %2", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true), convertTemperature(temperatureUnit(),  fiveDayTokens[4], data["Temperature Unit"].toInt(), true)));
         }
     }
     else {
-        m_forecastTemps->setText(QString());
+        //m_forecastTemps->setText(QString());
     }
 
-    m_conditionsLabel->setText(data["Current Conditions"].toString().trimmed());
+    //m_conditionsLabel->setText(data["Current Conditions"].toString().trimmed());
 
     if (isValidData(data["Temperature"])) {
-        m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
-        m_tempLabel->show(); //m_tempLabel might be hidden if temperature was not available
+        //m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
+        //m_tempLabel->show(); //m_tempLabel might be hidden if temperature was not available
     } else {
-        m_tempLabel->hide(); //temperature is not available (probability the engine doesn't support it)
+        //m_tempLabel->hide(); //temperature is not available (probability the engine doesn't support it)
     }
 
-    m_courtesyLabel->setText(data["Credit"].toString());
+    //m_courtesyLabel->setText(data["Credit"].toString());
 
     if (!data["Credit Url"].toString().isEmpty()) {
         QString creditUrl = QString("<A HREF=\"%1\" ><FONT size=\"-0.5\" color=\"%2\">%3</FONT></A>").arg(data["Credit Url"].toString()).arg(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).rgb()).arg(data["Credit"].toString());
-        m_courtesyLabel->nativeWidget()->setTextInteractionFlags(Qt::TextBrowserInteraction);
-        m_courtesyLabel->setText(creditUrl);
+        //m_courtesyLabel->nativeWidget()->setTextInteractionFlags(Qt::TextBrowserInteraction);
+        //m_courtesyLabel->setText(creditUrl);
     }
 
     if (!isValidData(data["Condition Icon"]) ||
@@ -404,16 +219,16 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
         if (fiveDayTokens.count() > 2) {
             // if there is no specific icon, show the current weather
-            m_graphicsWidget->setCurrentWeather(fiveDayTokens[1]);
+            //m_graphicsWidget->setCurrentWeather(fiveDayTokens[1]);
             setPopupIcon(KIcon(fiveDayTokens[1]));
         } else {
             // if we are inside here, we could not find any proper icon
             // then just hide it
-            m_graphicsWidget->setCurrentWeather();
+            //m_graphicsWidget->setCurrentWeather();
             setPopupIcon(KIcon("weather-none-available"));
         }
     } else {
-        m_graphicsWidget->setCurrentWeather(data["Condition Icon"].toString());
+        //m_graphicsWidget->setCurrentWeather(data["Condition Icon"].toString());
         const QString condition(data["Condition Icon"].toString());
         if (isValidIconName(condition)) {
             setPopupIcon(condition);
@@ -422,19 +237,19 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         }
     }
 
-    m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    //m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     // If we have items in tab clean it up first
-    while (m_tabBar->count()) {
-        m_tabBar->takeTab(0);
-    }
+    //while (m_tabBar->count()) {
+    //    m_tabBar->takeTab(0);
+    //}
 
     // If we have a 5 day forecast, display it
     if (data["Total Weather Days"].toInt() > 0) {
-        if (!m_fiveDaysView) {
-            kDebug() << "Create 5 Days Plasma::WeatherView";
-            m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
-        }
+        //if (!m_fiveDaysView) {
+        //    kDebug() << "Create 5 Days Plasma::WeatherView";
+        //    m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
+        //}
 
         if (!m_fiveDaysModel) {
             kDebug() << "Create 5 Days QStandardItemModel";
@@ -543,26 +358,26 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         }
 
         if (m_fiveDaysModel->rowCount() != 0) {
-            if (!m_fiveDaysView->model()) {
-                m_fiveDaysView->setModel(m_fiveDaysModel);
-            }
+            //if (!m_fiveDaysView->model()) {
+            //    m_fiveDaysView->setModel(m_fiveDaysModel);
+            //}
             // If we have any items, display 5 Day tab, otherwise only details
             QString totalDays = i18ncp("Forecast period timeframe", "1 Day", "%1 Days", data["Total Weather Days"].toInt());
-            m_tabBar->addTab(totalDays, m_fiveDaysView);
+            //m_tabBar->addTab(totalDays, m_fiveDaysView);
         } else {
-            delete m_fiveDaysView;
-            m_fiveDaysView = 0;
+            //delete m_fiveDaysView;
+            //m_fiveDaysView = 0;
         }
     } else {
-        delete m_fiveDaysView;
-        m_fiveDaysView = 0;
+        //delete m_fiveDaysView;
+        //m_fiveDaysView = 0;
     }
 
     // Details data
-    if (!m_detailsView) {
-        kDebug() << "Create Details Plasma::WeatherView";
-        m_detailsView = new Plasma::WeatherView(m_tabBar);
-    }
+    //if (!m_detailsView) {
+    //    kDebug() << "Create Details Plasma::WeatherView";
+    //    m_detailsView = new Plasma::WeatherView(m_tabBar);
+    //}
 
     if (!m_detailsModel) {
         kDebug() << "Create Details QStandardItemModel";
@@ -662,101 +477,100 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (m_detailsModel->rowCount() > 0) {
-        if (!m_detailsView->model()) {
-            m_detailsView->setModel(m_detailsModel);
-        }
-        m_tabBar->addTab(i18nc("current weather information", "Details"), m_detailsView);
+        //if (!m_detailsView->model()) {
+        //    m_detailsView->setModel(m_detailsModel);
+        //}
+        //m_tabBar->addTab(i18nc("current weather information", "Details"), m_detailsView);
     }
 
-    int rowCount = 0;
-    if (data["Total Watches Issued"].toInt() > 0 || data["Total Warnings Issued"].toInt() > 0) {
-        QGraphicsLinearLayout *noticeLayout = new QGraphicsLinearLayout(Qt::Vertical);
-        QPalette pal;
+    //int rowCount = 0;
+    //if (data["Total Watches Issued"].toInt() > 0 || data["Total Warnings Issued"].toInt() > 0) {
+    //    QGraphicsLinearLayout *noticeLayout = new QGraphicsLinearLayout(Qt::Vertical);
+    //    QPalette pal;
 
-        QFont noticeTitleFont = QApplication::font();
-        noticeTitleFont.setBold(true);
+    //    QFont noticeTitleFont = QApplication::font();
+    //    noticeTitleFont.setBold(true);
 
-        // If we have watches or warnings display them in a tab for now
-        if (data["Total Warnings Issued"].toInt() > 0) {
-            QGraphicsGridLayout *warningLayout = new QGraphicsGridLayout();
-            Plasma::Label *warningTitle = new Plasma::Label();
-            warningTitle->setText(i18nc("weather warnings", "Warnings Issued:"));
-            warningTitle->nativeWidget()->setFont(noticeTitleFont);
-            noticeLayout->addItem(warningTitle);
-            for (int k = 0; k < data["Total Warnings Issued"].toInt(); k++) {
-                Plasma::Label *warnNotice = new Plasma::Label();
-                connect(warnNotice, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
-                pal = warnNotice->nativeWidget()->palette();
-                pal.setColor(warnNotice->nativeWidget()->foregroundRole(), Qt::red);
-                // If there is a Url to go along with the watch/warning turn label into clickable link
-                if (!data[QString("Warning Info %1").arg(k)].toString().isEmpty()) {
-                    QString warnLink = QString("<A HREF=\"%1\">%2</A>").arg(data[QString("Warning Info %1").arg(k)].toString())
-                                                                       .arg(data[QString("Warning Description %1").arg(k)].toString());
-                    warnNotice->setText(warnLink);
-                } else {
-                    warnNotice->setText(data[QString("Warning Description %1").arg(k)].toString());
-                }
-                warnNotice->nativeWidget()->setPalette(pal);
-                warningLayout->setRowSpacing(rowCount, 0);
-                warningLayout->setRowStretchFactor(rowCount, 0);
-                warningLayout->setRowMinimumHeight(rowCount, 0);
-                warningLayout->setRowPreferredHeight(rowCount, 0);
-                warningLayout->addItem(warnNotice, rowCount, 0);
-                rowCount++;
-            }
+    //    // If we have watches or warnings display them in a tab for now
+    //    if (data["Total Warnings Issued"].toInt() > 0) {
+    //        QGraphicsGridLayout *warningLayout = new QGraphicsGridLayout();
+    //        Plasma::Label *warningTitle = new Plasma::Label();
+    //        warningTitle->setText(i18nc("weather warnings", "Warnings Issued:"));
+    //        warningTitle->nativeWidget()->setFont(noticeTitleFont);
+    //        noticeLayout->addItem(warningTitle);
+    //        for (int k = 0; k < data["Total Warnings Issued"].toInt(); k++) {
+    //            Plasma::Label *warnNotice = new Plasma::Label();
+    //            connect(warnNotice, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
+    //            pal = warnNotice->nativeWidget()->palette();
+    //            pal.setColor(warnNotice->nativeWidget()->foregroundRole(), Qt::red);
+    //            // If there is a Url to go along with the watch/warning turn label into clickable link
+    //            if (!data[QString("Warning Info %1").arg(k)].toString().isEmpty()) {
+    //                QString warnLink = QString("<A HREF=\"%1\">%2</A>").arg(data[QString("Warning Info %1").arg(k)].toString())
+    //                                                                   .arg(data[QString("Warning Description %1").arg(k)].toString());
+    //                warnNotice->setText(warnLink);
+    //            } else {
+    //                warnNotice->setText(data[QString("Warning Description %1").arg(k)].toString());
+    //            }
+    //            warnNotice->nativeWidget()->setPalette(pal);
+    //            warningLayout->setRowSpacing(rowCount, 0);
+    //            warningLayout->setRowStretchFactor(rowCount, 0);
+    //            warningLayout->setRowMinimumHeight(rowCount, 0);
+    //            warningLayout->setRowPreferredHeight(rowCount, 0);
+    //            warningLayout->addItem(warnNotice, rowCount, 0);
+    //            rowCount++;
+    //        }
 
-            noticeLayout->addItem(warningLayout);
-        }
+    //        noticeLayout->addItem(warningLayout);
+    //    }
 
-        QGraphicsWidget *spacer = new QGraphicsWidget(this);
-        spacer->setMinimumHeight(15);
-        spacer->setMaximumHeight(15);
-        noticeLayout->addItem(spacer);
+    //    QGraphicsWidget *spacer = new QGraphicsWidget(this);
+    //    spacer->setMinimumHeight(15);
+    //    spacer->setMaximumHeight(15);
+    //    noticeLayout->addItem(spacer);
 
-        rowCount = 0;
-        // If we have watches or warnings display them in a tab for now
-        if (data["Total Watches Issued"].toInt() > 0) {
-            QGraphicsGridLayout *watchLayout = new QGraphicsGridLayout();
-            Plasma::Label *watchTitle = new Plasma::Label();
-            watchTitle->setText(i18nc("weather watches" ,"Watches Issued:"));
-            watchTitle->nativeWidget()->setFont(noticeTitleFont);
-            noticeLayout->addItem(watchTitle);
-            for (int j = 0; j < data["Total Watches Issued"].toInt(); j++) {
-                Plasma::Label *watchNotice = new Plasma::Label();
-                connect(watchNotice, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
-                pal = watchNotice->nativeWidget()->palette();
-                pal.setColor(watchNotice->nativeWidget()->foregroundRole(), Qt::yellow);
-                if (!data[QString("Watch Info %1").arg(j)].toString().isEmpty()) {
-                    QString watchLink = QString("<A HREF=\"%1\">%2</A>").arg(data[QString("Watch Info %1").arg(j)].toString())
-                                                                       .arg(data[QString("Watch Description %1").arg(j)].toString());
-                    watchNotice->setText(watchLink);
-                } else {
-                    watchNotice->setText(data[QString("Watch Description %1").arg(j)].toString());
-                }
-                watchNotice->nativeWidget()->setPalette(pal);
-                watchLayout->setRowSpacing(rowCount, 0);
-                watchLayout->setRowStretchFactor(rowCount, 0);
-                watchLayout->setRowMinimumHeight(rowCount, 0);
-                watchLayout->setRowPreferredHeight(rowCount, 0);
-                watchLayout->addItem(watchNotice, rowCount, 0);
-                rowCount++;
-            }
-            noticeLayout->addItem(watchLayout);
-        }
+    //    rowCount = 0;
+    //    // If we have watches or warnings display them in a tab for now
+    //    if (data["Total Watches Issued"].toInt() > 0) {
+    //        QGraphicsGridLayout *watchLayout = new QGraphicsGridLayout();
+    //        Plasma::Label *watchTitle = new Plasma::Label();
+    //        watchTitle->setText(i18nc("weather watches" ,"Watches Issued:"));
+    //        watchTitle->nativeWidget()->setFont(noticeTitleFont);
+    //        noticeLayout->addItem(watchTitle);
+    //        for (int j = 0; j < data["Total Watches Issued"].toInt(); j++) {
+    //            Plasma::Label *watchNotice = new Plasma::Label();
+    //            connect(watchNotice, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
+    //            pal = watchNotice->nativeWidget()->palette();
+    //            pal.setColor(watchNotice->nativeWidget()->foregroundRole(), Qt::yellow);
+    //            if (!data[QString("Watch Info %1").arg(j)].toString().isEmpty()) {
+    //                QString watchLink = QString("<A HREF=\"%1\">%2</A>").arg(data[QString("Watch Info %1").arg(j)].toString())
+    //                                                                   .arg(data[QString("Watch Description %1").arg(j)].toString());
+    //                watchNotice->setText(watchLink);
+    //            } else {
+    //                watchNotice->setText(data[QString("Watch Description %1").arg(j)].toString());
+    //            }
+    //            watchNotice->nativeWidget()->setPalette(pal);
+    //            watchLayout->setRowSpacing(rowCount, 0);
+    //            watchLayout->setRowStretchFactor(rowCount, 0);
+    //            watchLayout->setRowMinimumHeight(rowCount, 0);
+    //            watchLayout->setRowPreferredHeight(rowCount, 0);
+    //            watchLayout->addItem(watchNotice, rowCount, 0);
+    //            rowCount++;
+    //        }
+    //        noticeLayout->addItem(watchLayout);
+    //    }
 
-        m_tabBar->addTab(i18nc("weather notices", "Notices"), noticeLayout);
-    }
+    //    m_tabBar->addTab(i18nc("weather notices", "Notices"), noticeLayout);
+    //}
 
     // Hide the tab bar if there is only one tab to show
-    m_tabBar->setTabBarShown(m_tabBar->count() > 1);
-    
+    //m_tabBar->setTabBarShown(m_tabBar->count() > 1);
+
     if (!m_setupLayout) {
-        m_layout->addItem(m_tabBar);
-        m_layout->addItem(m_courtesyLabel);
+        //m_layout->addItem(m_tabBar);
+        //m_layout->addItem(m_courtesyLabel);
         m_setupLayout = 1;
     }
 
-    setVisibleLayout(true);
     update();
 }
 
@@ -767,7 +581,7 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     }
 
     m_currentData = data;
-    setVisibleLayout(false);
+    //setVisibleLayout(false);
     weatherContent(data);
     WeatherPopupApplet::dataUpdated(source, data);
     update();
@@ -775,14 +589,8 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
 
 void WeatherApplet::configAccepted()
 {
-    setVisibleLayout(false);
+    //setVisibleLayout(false);
     WeatherPopupApplet::configAccepted();
-}
-
-void WeatherApplet::reloadTheme()
-{
-    m_locationLabel->nativeWidget()->setFont(m_titleFont);
-    m_tempLabel->nativeWidget()->setFont(m_titleFont);
 }
 
 #include "weatherapplet.moc"

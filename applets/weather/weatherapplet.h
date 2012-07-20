@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007-2009 by Shawn Starr <shawn.starr@rogers.com>       *
+ *   Copyright (C) 2012 by Luís Gabriel Lima <lampih@gmail.com>            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -33,14 +34,9 @@ class KDialog;
 
 namespace Plasma
 {
-    class Frame;
     class IconWidget;
-    class Label;
-    class TabBar;
-    class WeatherView;
+    class DeclarativeWidget;
 }
-
-class BackgroundWidget;
 
 class WeatherApplet : public WeatherPopupApplet
 {
@@ -50,11 +46,10 @@ public:
     ~WeatherApplet();
 
     void init();
-    QGraphicsWidget *graphicsWidget();
+    //QGraphicsWidget *graphicsWidget();
 
 public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
-    void reloadTheme(void);
 
 protected Q_SLOTS:
     void configAccepted();
@@ -63,40 +58,25 @@ protected Q_SLOTS:
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
-    void resizeView(void);
 
 private Q_SLOTS:
     void invokeBrowser(const QString& url) const;
 
 private:
-    Plasma::DataEngine::Data m_currentData; // Current data returned from ion
+    Plasma::DeclarativeWidget *m_declarativeWidget;
 
-    Plasma::Label *m_locationLabel;
-    Plasma::Label *m_forecastTemps;
-    Plasma::Label *m_conditionsLabel;
-    Plasma::Label *m_tempLabel;
-    Plasma::Label *m_courtesyLabel;
-    Plasma::TabBar *m_tabBar;
+    Plasma::DataEngine::Data m_currentData; // Current data returned from ion
 
     QStandardItemModel *m_fiveDaysModel;
     QStandardItemModel *m_detailsModel;
 
-    Plasma::WeatherView *m_fiveDaysView;
-    Plasma::WeatherView *m_detailsView;
-
     // Layout
     int m_setupLayout;
-    QGraphicsLinearLayout *m_layout;
-    QGraphicsGridLayout *m_titlePanel;
-    BackgroundWidget *m_graphicsWidget;
 
-    Plasma::Frame *m_titleFrame;
     QFont m_titleFont;
 
     bool isValidData(const QVariant &data) const;
     void weatherContent(const Plasma::DataEngine::Data &data);
-    void setVisible(bool visible, QGraphicsLayout *layout);
-    void setVisibleLayout(bool val);
     QString convertTemperature(KUnitConversion::UnitPtr format, QString value,
                                int type, bool rounded, bool degreesOnly);
 };
