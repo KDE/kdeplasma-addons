@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="predefinedTimers" type="StringList" />
+
+    <entry name="startedAt" type="DateTime" />
+
+    <entry name="showTitle" type="Bool">
+      <default>false</default>
+    </entry>
+
+    <entry name="title" type="String">
+      <default>Timer</default>
+    </entry>
+
+    <entry name="hideSeconds" type="Bool">
+      <default>false</default>
+    </entry>
+
+    <entry name="showMessage" type="Bool">
+      <default>true</default>
+    </entry>
+
+    <entry name="message" type="String">
+      <default>Timer Timeout</default>
+    </entry>
+
+    <entry name="runCommand" type="Bool">
+      <default>false</default>
+    </entry>
+
+    <entry name="command" type="String">
+      <default></default>
+    </entry>
+  </group>
+</kcfg>
+

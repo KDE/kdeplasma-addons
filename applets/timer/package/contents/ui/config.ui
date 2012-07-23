@@ -41,17 +41,17 @@
     </spacer>
    </item>
    <item row="1" column="1">
-    <widget class="QCheckBox" name="showTitleCheckBox">
+    <widget class="QCheckBox" name="kcfg_showTitle">
      <property name="text">
       <string>Show title:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="3">
-    <widget class="KLineEdit" name="titleLineEdit"/>
+    <widget class="KLineEdit" name="kcfg_title"/>
    </item>
    <item row="2" column="1">
-    <widget class="QCheckBox" name="hideSecondsCheckBox">
+    <widget class="QCheckBox" name="kcfg_hideSeconds">
      <property name="text">
       <string>Hide seconds</string>
      </property>
@@ -71,10 +71,10 @@
     </widget>
    </item>
    <item row="6" column="3">
-    <widget class="KLineEdit" name="messageLineEdit"/>
+    <widget class="KLineEdit" name="kcfg_message"/>
    </item>
    <item row="7" column="3">
-    <widget class="KLineEdit" name="commandLineEdit"/>
+    <widget class="KLineEdit" name="kcfg_command"/>
    </item>
    <item row="8" column="2">
     <spacer name="verticalSpacer">
@@ -90,14 +90,14 @@
     </spacer>
    </item>
    <item row="6" column="1">
-    <widget class="QCheckBox" name="showMessageCheckBox">
+    <widget class="QCheckBox" name="kcfg_showMessage">
      <property name="text">
       <string>Show a message:</string>
      </property>
     </widget>
    </item>
    <item row="7" column="1">
-    <widget class="QCheckBox" name="runCommandCheckBox">
+    <widget class="QCheckBox" name="kcfg_runCommand">
      <property name="text">
       <string>Run a command:</string>
      </property>
@@ -131,9 +131,9 @@
  <resources/>
  <connections>
   <connection>
-   <sender>showMessageCheckBox</sender>
+   <sender>kcfg_showMessage</sender>
    <signal>toggled(bool)</signal>
-   <receiver>messageLineEdit</receiver>
+   <receiver>kcfg_message</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -147,9 +147,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>runCommandCheckBox</sender>
+   <sender>kcfg_runCommand</sender>
    <signal>toggled(bool)</signal>
-   <receiver>commandLineEdit</receiver>
+   <receiver>kcfg_command</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -163,9 +163,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>showTitleCheckBox</sender>
+   <sender>kcfg_showTitle</sender>
    <signal>toggled(bool)</signal>
-   <receiver>titleLineEdit</receiver>
+   <receiver>kcfg_title</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
