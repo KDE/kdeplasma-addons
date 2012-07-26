@@ -21,6 +21,7 @@
 #define RTM_NOTE_H
 
 // Qt Includes
+#include <QHash>
 #include <QString>
 
 // Local Includes

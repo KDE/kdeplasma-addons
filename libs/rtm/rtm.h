@@ -22,10 +22,7 @@
 
 #include "rtm_export.h"
 
-#include <QHash>
 #include <QString>
-
-class QString;
 
 namespace RTM {
   enum State { Mutable, Hashed, RequestSent, RequestReceived };

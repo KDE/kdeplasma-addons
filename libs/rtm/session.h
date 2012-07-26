@@ -20,20 +20,12 @@
 #ifndef RTM_SESSION_H
 #define RTM_SESSION_H
 
+#include <QHash>
 #include <QObject>
-#include <QDateTime>
 
 #include "rtm.h"
-#include "task.h"
 
 #include <Solid/Networking>
-
-namespace RTM {
-  class Request;
-  class SessionPrivate;
-  class TasksReader;
-}
-
 
 /** @file
  * This file is part of librtm. It defines
@@ -47,6 +39,11 @@ namespace RTM {
  * Provides a set of classes for interacting with the Remember The Milk online todo management service
  */
 namespace RTM {
+
+class Request;
+class SessionPrivate;
+class Task;
+class TasksReader;
 
 /**
  * @brief The Session class provides a high level interface to a Remember The Milk session
