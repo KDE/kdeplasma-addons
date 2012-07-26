@@ -30,21 +30,71 @@
 #include <QTimer>
 
 
-const int RTM::Request::MAX_RETRIES = 10;
-
-RTM::Request::Request(const QString &method, const QString &apiKey, const QString &sharedSecret)
-  : m_readOnly(true),
-    currentJob(0)
+class RTM::RequestPrivate
 {
-  arguments.insert("method", method);
-  this->sharedSecret = sharedSecret;
-  arguments.insert("api_key", apiKey);
-  m_state = RTM::Mutable;
-  retries = 0;
+public:
+    RequestPrivate()
+    : m_readOnly(true),
+      currentJob(0)
+    {
+    }
+	
+    QMap<QString,QString> arguments;
+    QString m_response;
+
+    QString baseUrl;
+    int retries;
+    static const int MAX_RETRIES;
+    bool m_readOnly;
+	
+    RTM::State m_state;
+    QString apiKey;
+    QString sharedSecret;
+    KIO::TransferJob* currentJob;
+};
+
+const int RTM::RequestPrivate::MAX_RETRIES = 10;
+
+RTM::Request::Request()
+: d(new RTM::RequestPrivate())
+{
+}
+
+RTM::Request::Request(const QString &method, const QString &apiKey, const QString &sharedSecret, const QString&baseUrl)
+: d(new RTM::RequestPrivate())
+{
+  if (!method.isEmpty())
+    d->arguments.insert("method", method);
+  d->baseUrl = baseUrl;
+  d->apiKey = apiKey;
+  d->sharedSecret = sharedSecret;
+  d->arguments.insert("api_key", apiKey);
+  d->m_state = RTM::Mutable;
+  d->retries = 0;
+}
+
+QString RTM::Request::response() const 
+{ 
+	return d->m_response; 
+}
+
+RTM::State RTM::Request::state() const 
+{ 
+	return d->m_state; 
+}
+
+void RTM::Request::setReadOnly(bool readOnly) 
+{ 
+	d->m_readOnly = readOnly; 
+}
+
+bool RTM::Request::readOnly() const 
+{ 
+	return d->m_readOnly; 
 }
 
 void RTM::Request::addArgument(const QString &name, const QString &value) {
-  arguments.insert(name, value);
+  d->arguments.insert(name, value);
 }
 
 void RTM::Request::sendRequest()
@@ -65,15 +115,15 @@ void RTM::Request::sendRequest()
   queueSize = 0;
   QString url = requestUrl();
   kDebug() << "Request ready. Url is: " << url;
-  currentJob = KIO::get(KUrl(url.toUtf8()), KIO::NoReload, KIO::HideProgressInfo);
-  connect(currentJob, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(dataIncrement(KIO::Job*,QByteArray)));
-  connect(currentJob, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
+  d->currentJob = KIO::get(KUrl(url.toUtf8()), KIO::NoReload, KIO::HideProgressInfo);
+  connect(d->currentJob, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(dataIncrement(KIO::Job*,QByteArray)));
+  connect(d->currentJob, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
 
   lastRequest = QDateTime::currentDateTime();
 }
 
 QString RTM::Request::method() const {
-  return arguments.value("method");
+  return d->arguments.value("method");
 }
 
 void RTM::Request::dataIncrement(KIO::Job* job, QByteArray data) {
@@ -85,17 +135,17 @@ void RTM::Request::dataIncrement(KIO::Job* job, QByteArray data) {
 void RTM::Request::finished(KJob* job) {
   if (job->error()) {
     kDebug() << "Network Job Error: " << job->errorString();
-    if (retries >= MAX_RETRIES) {
-      kDebug() << "ABORT: Maximum Retries reached for " << currentJob->url();
-      currentJob = 0;
+    if (d->retries >= RTM::RequestPrivate::MAX_RETRIES) {
+      kDebug() << "ABORT: Maximum Retries reached for " << d->currentJob->url();
+      d->currentJob = 0;
       return;
     }
     switch (job->error()) {
       case KIO::ERR_CONNECTION_BROKEN: // If the connection is broken, resend the request
         kDebug() << "Connection Error, retrying connection";
-        disconnect(currentJob);
-        retries++;
-        currentJob = 0;
+        disconnect(d->currentJob);
+        d->retries++;
+        d->currentJob = 0;
         sendRequest(); 
         return;
       case KIO::ERR_UNKNOWN_HOST: // Guess that we're offline
@@ -111,8 +161,8 @@ void RTM::Request::finished(KJob* job) {
 
 
 void RTM::Request::sign() {
-  QString unistring = sharedSecret;
-  QMapIterator<QString, QString> i(arguments);
+  QString unistring = d->sharedSecret;
+  QMapIterator<QString, QString> i(d->arguments);
   while (i.hasNext()) {
       i.next();
       unistring.append(i.key());
@@ -120,17 +170,17 @@ void RTM::Request::sign() {
  }
 
   QString hash = QCryptographicHash::hash(unistring.toUtf8(), QCryptographicHash::Md5).toHex();
-  arguments.insert("api_sig", hash);
-  m_state = RTM::Hashed;
+  d->arguments.insert("api_sig", hash);
+  d->m_state = RTM::Hashed;
 }
 
 void RTM::Request::unsign() {
-  arguments.remove("api_sig");
+  d->arguments.remove("api_sig");
 }
 
 QString RTM::Request::requestUrl()
 {
-  switch(m_state) {
+  switch(d->m_state) {
     case RTM::Mutable:
       sign();
     case RTM::Hashed:
@@ -143,10 +193,20 @@ QString RTM::Request::requestUrl()
       break;
    }
     //kDebug() << "Creating url";
-    QString url = RTM::baseMethodUrl;
-    foreach(const QString &key, arguments.keys()) 
-      url.append('&' + key + '=' + arguments.value(key).toUtf8().toPercentEncoding());
+    QString url = d->baseUrl;
+    foreach(const QString &key, d->arguments.keys()) 
+      url.append('&' + key + '=' + d->arguments.value(key).toUtf8().toPercentEncoding());
     return url;
+}
+
+QString RTM::Request::apiKey() const
+{
+    return d->apiKey;
+}
+
+QString RTM::Request::sharedSecret() const
+{
+    return d->sharedSecret;
 }
 
 RTM::Request::~Request() {

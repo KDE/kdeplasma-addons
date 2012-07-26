@@ -20,22 +20,13 @@
 #ifndef RTM_AUTH_H
 #define RTM_AUTH_H
 
-#include <QString>
-#include <QObject>
-#include <QHash>
-#include <QBuffer>
-#include <QNetworkReply>
-
-#include <KParts/BrowserExtension>
-
 #include "request.h"
-
-class QWebView;
-
 
 namespace RTM {
 
-class RTM_EXPORT Auth : public Request
+class AuthPrivate;
+
+class Auth : public Request
 {
 Q_OBJECT
   public:
@@ -47,11 +38,6 @@ Q_OBJECT
     ~Auth();
   protected:
     QString getTextPermissions(RTM::Permissions permissions);
-    QString requestUrl();
-    QString frob;
-    QString apiKey;
-    Request *frobRequest;
-    Request *tokenRequest;
 
   signals:
     void authUrlReady(QString authUrl);
@@ -62,6 +48,8 @@ Q_OBJECT
     void showLoginWindowInternal(RTM::Request* rawReply);
 public slots:
     void tokenResponse(RTM::Request*);
+  private:
+    AuthPrivate * const d;
 };
 
 } // Namespace RTM
