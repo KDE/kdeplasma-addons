@@ -88,8 +88,8 @@ void BinaryClock::constraintsEvent(Plasma::Constraints constraints)
             setMinimumWidth(getWidthFromHeight((int) contentsRect().height()) + borderWidth);
             setMinimumHeight(0);
         } else {
-            setMinimumWidth(getWidthFromHeight(30));
-            setMinimumHeight(30);
+            setMinimumWidth(getWidthFromHeight(40));
+            setMinimumHeight(40);
         }
     }
 }
