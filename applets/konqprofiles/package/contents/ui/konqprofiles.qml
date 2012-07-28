@@ -27,6 +27,11 @@ Item {
     property int minimumWidth: 200
     property int minimumHeight: 300
 
+    function popupEventSlot(shown) {
+        if(shown)
+            view.forceActiveFocus();
+    }
+
     PlasmaCore.DataSource {
         id: profilesSource
         engine: "org.kde.konqprofiles"
@@ -44,6 +49,7 @@ Item {
     Component.onCompleted: {
         plasmoid.popupIcon = "konqueror";
         plasmoid.aspectRatioMode = IgnoreAspectRatio;
+        plasmoid.popupEvent.connect('popupEvent', popupEventSlot);
     }
 
     PlasmaCore.Svg {
@@ -92,11 +98,18 @@ Item {
 
         model: profilesModel
         clip: true
+        focus: true
 
         delegate: Item {
             id: listdelegate
             height: textMetric.paintedHeight * 2
             anchors { left: parent.left; leftMargin: 10; right: parent.right;  }
+
+            function openProfile() {
+                var service = profilesSource.serviceForSource(model["DataEngineSource"])
+                var operation = service.operationDescription("open")
+                var job = service.startOperationCall(operation)
+            }
 
             PlasmaComponents.Label {
                 id: profileText
@@ -110,9 +123,7 @@ Item {
                 hoverEnabled: true
 
                 onClicked: {
-                    var service = profilesSource.serviceForSource(model["DataEngineSource"])
-                    var operation = service.operationDescription("open")
-                    var job = service.startOperationCall(operation)
+                    openProfile();
                 }
 
                 onEntered: {
@@ -123,6 +134,11 @@ Item {
                 onExited: {
                     view.highlightItem.opacity = 0
                 }
+            }
+
+            Keys.onPressed: {
+                if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return)
+                    openProfile();
             }
         }
 

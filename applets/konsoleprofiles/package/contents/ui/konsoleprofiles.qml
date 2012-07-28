@@ -28,7 +28,8 @@ Item {
     property int minimumHeight: 300
 
     function popupEventSlot(shown) {
-        view.forceActiveFocus();
+        if(shown)
+            view.forceActiveFocus();
     }
 
     PlasmaCore.DataSource {
