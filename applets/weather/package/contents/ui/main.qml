@@ -21,90 +21,36 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 Item {
-   id: root
+    id: root
 
-   property int minimumWidth: 364
-   property int minimumHeight: 265
+    property int minimumWidth: 364
+    property int minimumHeight: 265
 
-   anchors.fill: parent
+    anchors.fill: parent
 
-   PlasmaCore.FrameSvgItem {
-       id: panel
-       anchors {
-           top: parent.top
-           left: parent.left
-           right: parent.right
-       }
-       height: 56 // XXX
-       imagePath: "widgets/frame"
-       prefix: "plain"
+    TopPanel {
+        id: panel
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+    }
 
-       QtExtraComponents.QIconItem {
-           icon: "weather-many-clouds" // XXX
-           height: parent.height // XXX
-           width: height
-       }
+    PlasmaComponents.TabBar {
+        anchors {
+            top: panel.bottom
+            topMargin: 5
+            horizontalCenter: parent.horizontalCenter
+        }
+        width: 160 // XXX
+        height: 30 // XXX
 
-       Text {
-           id: locationLabel
-           anchors {
-               top: parent.top
-               left: parent.left
-               topMargin: 5
-               leftMargin: 76
-           }
-           font.bold: true
-           text: "Porto Alegre, Brazil"
-
-           Component.onCompleted: font.pointSize = Math.floor(font.pointSize * 1.4);
-       }
-
-       Text {
-           id: conditionLabel
-           anchors {
-               top: locationLabel.bottom
-               left: locationLabel.left
-               topMargin: 5
-           }
-           text: "grey cloud"
-       }
-
-       Text {
-           id: tempLabel
-           anchors {
-               right: parent.right
-               top: locationLabel.top
-               rightMargin: 5
-           }
-           font: locationLabel.font
-           text: "22°C"
-       }
-
-       Text {
-           id: forecastTempsLabel
-           anchors {
-               right: tempLabel.right
-               top: conditionLabel.top
-           }
-           font.pointSize: 8 // XXX
-           text: "H: 27°C L: 21°C"
-       }
-   }
-
-   PlasmaComponents.TabBar {
-       anchors {
-           top: panel.bottom
-           topMargin: 5
-           horizontalCenter: parent.horizontalCenter
-       }
-       width: 160 // XXX
-       height: 30 // XXX
-
-       PlasmaComponents.TabButton {
-           text: i18n("%1 Days").arg(3)
-       }
-       PlasmaComponents.TabButton {
-           text: i18n("Details")
-       }
-   }
+        PlasmaComponents.TabButton {
+            text: i18n("%1 Days").arg(3)
+        }
+        PlasmaComponents.TabButton {
+            text: i18n("Details")
+        }
+    }
 }
