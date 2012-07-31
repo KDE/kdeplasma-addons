@@ -23,7 +23,8 @@ set( rtm_LIB_SRCS
 
 kde4_add_library(rtm SHARED ${rtm_LIB_SRCS})
 set_target_properties(rtm PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
-target_link_libraries(rtm ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBS} ${KDE4_KDEWEBKIT_LIBS} ${QT_QTWEBKIT_LIBRARY})
+target_link_libraries(rtm ${KDE4_KIO_LIBS} 
+                          ${KDE4_SOLID_LIBS})
 
 
 #### FOR 4.3 we are not including the library as a stable platform, hence no exporting of headers
@@ -40,4 +41,4 @@ install(TARGETS rtm ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 #install(FILES FindRTM.cmake DESTINATION ${DATA_INSTALL_DIR}/cmake/modules)
 
-add_subdirectory(tests)
+#add_subdirectory(tests)

@@ -1,5 +1,6 @@
 /*
  *   Copyright 2009 Andrew Stromme <astromme@chatonka.com>
+ *   Copyright 2012 Jeremy Whiting <jpwhiting@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -87,7 +88,6 @@ Q_OBJECT
     RTM::List* newBlankList(RTM::ListId id) const;
 
   public Q_SLOTS:
-    void showLoginWindow();
     void setToken(const QString &token);
     void handleResponse();
     void continueAuthForToken();

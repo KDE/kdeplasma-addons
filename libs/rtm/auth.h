@@ -31,7 +31,6 @@ class Auth : public Request
 Q_OBJECT
   public:
     Auth(RTM::Permissions permissions, const QString &apiKey, const QString &sharedSecret);
-    void showLoginWebpage();
     QString getAuthUrl();
     void continueAuthForToken();
 
@@ -44,8 +43,7 @@ Q_OBJECT
     void tokenReceived(QString token);
 
   protected slots:
-    void pageClosed();
-    void showLoginWindowInternal(RTM::Request* rawReply);
+    void onFrobRequestFinished(RTM::Request* reply);
 public slots:
     void tokenResponse(RTM::Request*);
   private:
