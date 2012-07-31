@@ -21,6 +21,7 @@ target_link_libraries(plasma_applet_rtm
                       ${KDE4_PLASMA_LIBS}
                       ${KDE4_SOLID_LIBS}
                       ${KDE4_KDEUI_LIBS}
+                      ${KDE4_KDEWEBKIT_LIBS}
                      )
  
 install(TARGETS plasma_applet_rtm

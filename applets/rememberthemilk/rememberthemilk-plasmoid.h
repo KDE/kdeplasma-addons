@@ -1,5 +1,6 @@
 /*
  *   Copyright 2009 Andrew Stromme <astromme@chatonka.com>
+ *   Copyright 2012 Jeremy Whiting <jpwhiting@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -29,6 +30,8 @@
 #include "taskeditor.h"
 #include "taskitemdelegate.h"
 #include "tasksortfilter.h"
+
+class KJob;
 
 namespace Plasma {
   class TabBar;
@@ -70,7 +73,13 @@ class RememberTheMilkPlasmoid : public Plasma::PopupApplet
     void configAccepted();
     void configFinished();
     void configChanged();
+    
+    // Start the authentication process.
     void startAuth();
+    // Got a url, so let the user do their part.
+    void authJobFinished(KJob* job);
+    // Continue authentication process.
+    void continueAuth();
     
     void setSortBy(SortBy sortBy);
     

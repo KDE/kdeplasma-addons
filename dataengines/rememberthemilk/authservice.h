@@ -49,6 +49,9 @@ public:
 public slots:
     void start();
 
+signals:
+    void authUrlReady(QString url);
+
 private slots:
     void tokenReply(bool tokenValid);
     

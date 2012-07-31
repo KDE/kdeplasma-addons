@@ -1,5 +1,6 @@
 /*
  *   Copyright 2009 Andrew Stromme <astromme@chatonka.com>
+ *   Copyright 2012 Jeremy Whiting <jpwhiting@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -62,6 +63,7 @@ RememberTheMilkPlasmoid::RememberTheMilkPlasmoid(QObject* parent, const QVariant
     setPopupIcon("view-pim-journal");  // TODO: Create/Find better item
     m_authWidget = new QWidget();
     m_authWidgetUi->setupUi(m_authWidget);
+    m_authWidgetUi->webView->hide();
     m_generalOptions = new QWidget();
     connect(m_authWidgetUi->signupLabel, SIGNAL(leftClickedUrl(QString)), KToolInvocation::self(), SLOT(invokeBrowser(QString)));
     m_generalOptionsUi->setupUi(m_generalOptions);
@@ -104,8 +106,31 @@ void RememberTheMilkPlasmoid::init() {
 
 void RememberTheMilkPlasmoid::startAuth()
 {
+  disconnect(m_authWidgetUi->authenticateButton, SIGNAL(clicked(bool)), this, SLOT(startAuth()));
+  connect(m_authWidgetUi->authenticateButton, SIGNAL(clicked(bool)), this, SLOT(continueAuth()));
+  m_authWidgetUi->authenticateButton->setText(i18n("Click to finish authentication"));
+
+  KConfigGroup cg = m_authService->operationDescription("StartLogin");
+  Plasma::ServiceJob* authJob = m_authService->startOperationCall(cg);
+  connect(authJob, SIGNAL(finished(KJob*)), SLOT(authJobFinished(KJob*)));
+  busyUntil(authJob);
+  busyUntil(0); // Sets busy until we manually call jobFinished(0). Busy until first tasks refresh
+  m_authenticated = false;
+}
+
+void RememberTheMilkPlasmoid::authJobFinished(KJob* job)
+{
+  Plasma::ServiceJob *authJob = qobject_cast<Plasma::ServiceJob*>(job);
+  QString url = authJob->result().toString();
+  m_authWidgetUi->webView->setUrl(QUrl(url));
+  m_authWidgetUi->webView->show();
+}
+
+void RememberTheMilkPlasmoid::continueAuth()
+{
   KConfigGroup cg = m_authService->operationDescription("Login");
-  busyUntil(m_authService->startOperationCall(cg));
+  Plasma::ServiceJob* authJob = m_authService->startOperationCall(cg);
+  busyUntil(authJob);
   busyUntil(0); // Sets busy until we manually call jobFinished(0). Busy until first tasks refresh
   m_authenticated = false;
 }
@@ -131,7 +156,7 @@ void RememberTheMilkPlasmoid::createConfigurationInterface(KConfigDialog* parent
   connect(parent, SIGNAL(finished()), this, SLOT(configFinished()));
   connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
   connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-  connect(m_authWidgetUi->authenticate, SIGNAL(clicked(bool)), this, SLOT(startAuth()));
+  connect(m_authWidgetUi->authenticateButton, SIGNAL(clicked(bool)), this, SLOT(startAuth()));
   
   m_generalOptionsUi->sortType->setCurrentIndex(m_sortBy);
   
@@ -170,6 +195,7 @@ void RememberTheMilkPlasmoid::dataUpdated(const QString& name, const Plasma::Dat
     m_authenticated = data.value("ValidToken").toBool();
     kDebug() << "Auth: " << m_authenticated;
     
+    m_authWidgetUi->webView->hide();
     if (m_authenticated) {
       m_authWidgetUi->authStatus->setText(i18n("Authenticated"));
       m_authWidgetUi->kled->setState(KLed::On);
