@@ -26,6 +26,8 @@ Item {
     property int minimumHeight: 265
 
     anchors.fill: parent
+    clip: true
+    state: "fiveDays"
 
     PlasmaCore.Theme {
         id: theme
@@ -52,9 +54,11 @@ Item {
 
         PlasmaComponents.TabButton {
             text: i18n("%1 Days").arg(3)
+            onClicked: root.state = "fiveDays";
         }
         PlasmaComponents.TabButton {
             text: i18n("Details")
+            onClicked: root.state = "details";
         }
     }
 
@@ -63,10 +67,19 @@ Item {
         anchors {
             top: tabBar.bottom
             bottom: courtesyLabel.top
-            left: parent.left
-            right: parent.right
             topMargin: 14
         }
+        width: parent.width
+    }
+
+    DetailsView {
+        id: detailsView
+        anchors {
+            top: tabBar.bottom
+            bottom: courtesyLabel.top
+            topMargin: 14
+        }
+        width: parent.width
     }
 
     Text {
@@ -80,5 +93,26 @@ Item {
             underline: true
         }
         text: "Supported by backstage.bbc.co.uk"
+    }
+
+    states: [
+        State {
+            name: "fiveDays"
+            PropertyChanges { target: fiveDaysView; x: 0 }
+            PropertyChanges { target: detailsView; x: root.width + 10 }
+        },
+        State {
+            name: "details"
+            PropertyChanges { target: fiveDaysView; x: -root.width - 10 }
+            PropertyChanges { target: detailsView; x: 0 }
+        }
+    ]
+
+    transitions: Transition {
+        from: "fiveDays"
+        to: "details"
+        reversible: true
+        PropertyAnimation { target: fiveDaysView; property: "x"; easing.type: Easing.InQuad; duration: 250 }
+        PropertyAnimation { target: detailsView; property: "x"; easing.type: Easing.InQuad; duration: 250 }
     }
 }

@@ -23,6 +23,7 @@ Column {
 
     property alias rows: repeater.model
     property Component delegate
+    property bool roundedRows: true
 
     Repeater {
         id: repeater
@@ -32,7 +33,7 @@ Column {
             anchors.left: parent.left
             anchors.right: parent.right
             height: 18
-            radius: 5
+            radius: root.roundedRows ? 5 : 0
             color: Utils.setAlphaF(theme.textColor, ((index+1)/repeater.count)*0.3);
 
             Loader {
