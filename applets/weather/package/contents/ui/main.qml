@@ -18,7 +18,6 @@
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 Item {
     id: root
@@ -27,6 +26,10 @@ Item {
     property int minimumHeight: 265
 
     anchors.fill: parent
+
+    PlasmaCore.Theme {
+        id: theme
+    }
 
     TopPanel {
         id: panel
@@ -38,6 +41,7 @@ Item {
     }
 
     PlasmaComponents.TabBar {
+        id: tabBar
         anchors {
             top: panel.bottom
             topMargin: 5
@@ -52,5 +56,29 @@ Item {
         PlasmaComponents.TabButton {
             text: i18n("Details")
         }
+    }
+
+    FiveDaysView {
+        id: fiveDaysView
+        anchors {
+            top: tabBar.bottom
+            bottom: courtesyLabel.top
+            left: parent.left
+            right: parent.right
+            topMargin: 14
+        }
+    }
+
+    Text {
+        id: courtesyLabel
+        anchors {
+            bottom: parent.bottom
+            right: parent.right
+        }
+        font {
+            pointSize: theme.smallestFont.pointSize
+            underline: true
+        }
+        text: "Supported by backstage.bbc.co.uk"
     }
 }
