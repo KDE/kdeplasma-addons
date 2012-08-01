@@ -25,6 +25,8 @@
 #include <QGraphicsLinearLayout>
 #include <QPainter>
 #include <QStandardItemModel>
+#include <QtDeclarative/QDeclarativeEngine>
+#include <QtDeclarative/QDeclarativeContext>
 
 #include <KDebug>
 #include <KGlobalSettings>
@@ -80,9 +82,13 @@ void WeatherApplet::init()
         break;
     }
 
+    resetPanelModel();
+
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
     m_declarativeWidget = new Plasma::DeclarativeWidget(this);
     layout->addItem(m_declarativeWidget);
+
+    m_declarativeWidget->engine()->rootContext()->setContextProperty("weatherApplet", this);
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     Plasma::Package package(QString(), "org.kde.weather", structure);
@@ -170,76 +176,8 @@ bool WeatherApplet::isValidData(const QVariant &data) const
 
 void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 {
-    //m_locationLabel->setText(data["Place"].toString());
-
     // Get current time period of day
     QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split('|');
-
-    if (fiveDayTokens.count() > 1) {
-        // fiveDayTokens[3] = High Temperature
-        // fiveDayTokens[4] = Low Temperature
-        if (fiveDayTokens[4] != "N/A" && fiveDayTokens[3] == "N/A") {  // Low temperature
-            //m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
-            //m_tempLabel->show(); //m_tempLabel might be hidden if temperature was not available
-            //m_forecastTemps->setText(i18nc("Low temperature", "Low: %1", convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt(), true)));
-        } else if (fiveDayTokens[3] != "N/A" && fiveDayTokens[4] == "N/A") { // High temperature
-            //m_forecastTemps->setText(i18nc("High temperature", "High: %1", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true)));
-        } else { // Both high and low
-            //m_forecastTemps->setText(i18nc("High & Low temperature", "H: %1 L: %2", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true), convertTemperature(temperatureUnit(),  fiveDayTokens[4], data["Temperature Unit"].toInt(), true)));
-        }
-    }
-    else {
-        //m_forecastTemps->setText(QString());
-    }
-
-    //m_conditionsLabel->setText(data["Current Conditions"].toString().trimmed());
-
-    if (isValidData(data["Temperature"])) {
-        //m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
-        //m_tempLabel->show(); //m_tempLabel might be hidden if temperature was not available
-    } else {
-        //m_tempLabel->hide(); //temperature is not available (probability the engine doesn't support it)
-    }
-
-    //m_courtesyLabel->setText(data["Credit"].toString());
-
-    if (!data["Credit Url"].toString().isEmpty()) {
-        QString creditUrl = QString("<A HREF=\"%1\" ><FONT size=\"-0.5\" color=\"%2\">%3</FONT></A>").arg(data["Credit Url"].toString()).arg(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).rgb()).arg(data["Credit"].toString());
-        //m_courtesyLabel->nativeWidget()->setTextInteractionFlags(Qt::TextBrowserInteraction);
-        //m_courtesyLabel->setText(creditUrl);
-    }
-
-    if (!isValidData(data["Condition Icon"]) ||
-        data["Condition Icon"].toString() == "N/U" ||
-        data["Condition Icon"].toString() == "N/A" ||
-        data["Condition Icon"].toString() == "weather-none-available") {
-
-        if (fiveDayTokens.count() > 2) {
-            // if there is no specific icon, show the current weather
-            //m_graphicsWidget->setCurrentWeather(fiveDayTokens[1]);
-            setPopupIcon(KIcon(fiveDayTokens[1]));
-        } else {
-            // if we are inside here, we could not find any proper icon
-            // then just hide it
-            //m_graphicsWidget->setCurrentWeather();
-            setPopupIcon(KIcon("weather-none-available"));
-        }
-    } else {
-        //m_graphicsWidget->setCurrentWeather(data["Condition Icon"].toString());
-        const QString condition(data["Condition Icon"].toString());
-        if (isValidIconName(condition)) {
-            setPopupIcon(condition);
-        } else {
-            setPopupIcon("weather-not-available");
-        }
-    }
-
-    //m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-
-    // If we have items in tab clean it up first
-    //while (m_tabBar->count()) {
-    //    m_tabBar->takeTab(0);
-    //}
 
     // If we have a 5 day forecast, display it
     if (data["Total Weather Days"].toInt() > 0) {
@@ -565,6 +503,82 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     update();
 }
 
+void WeatherApplet::resetPanelModel()
+{
+    m_panelModel.clear();
+    m_panelModel["location"] = "";
+    m_panelModel["forecastTemps"] = "";
+    m_panelModel["conditions"] = "";
+    m_panelModel["temp"] = "";
+    m_panelModel["courtesy"] = "";
+    m_panelModel["conditionIcon"] = "";
+}
+
+void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
+{
+    resetPanelModel();
+    m_panelModel["location"] = data["Place"].toString();
+
+    int unit = data["Temperature Unit"].toInt();
+    // Get current time period of day
+    QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split('|');
+
+    if (fiveDayTokens.count() > 1) {
+        // fiveDayTokens[3] => High Temperature
+        // fiveDayTokens[4] => Low Temperature
+        QString high, low;
+
+        if (fiveDayTokens[4] != "N/A") {
+            low = convertTemperature(temperatureUnit(), fiveDayTokens[4], unit, true);
+        }
+
+        if (fiveDayTokens[3] != "N/A") {
+            high = convertTemperature(temperatureUnit(), fiveDayTokens[3], unit, true);
+        }
+
+        if (!low.isEmpty() && !high.isEmpty()) {
+            m_panelModel["forecastTemps"] = i18nc("High & Low temperature", "H: %1 L: %2", high, low);
+        } else if (!low.isEmpty()) {
+            m_panelModel["forecastTemps"] = i18nc("Low temperature", "Low: %1", low);
+        } else {
+            m_panelModel["forecastTemps"] = i18nc("High temperature", "High: %1", high);
+        }
+    }
+
+    m_panelModel["conditions"] = data["Current Conditions"].toString().trimmed();
+
+    if (isValidData(data["Temperature"])) {
+        m_panelModel["temp"] = convertTemperature(temperatureUnit(), data["Temperature"].toString(), unit);
+    }
+
+    m_panelModel["courtesy"] = data["Credit"].toString();
+    m_creditUrl = data["Credit Url"].toString();
+
+    const QString conditionIcon = data["Condition Icon"].toString();
+    if (!isValidData(data["Condition Icon"])
+        || conditionIcon == "weather-none-available"
+        || conditionIcon == "N/U"
+        || conditionIcon == "N/A") {
+
+        if (fiveDayTokens.count() > 2) {
+            // if there is no specific icon, show the current weather
+            m_panelModel["conditionIcon"] = fiveDayTokens[1];
+            setPopupIcon(KIcon(fiveDayTokens[1]));
+        } else {
+            // if we could not find any proper icon then just hide it
+            m_panelModel["conditionIcon"] = "";
+            setPopupIcon(KIcon("weather-none-available"));
+        }
+    } else {
+        m_panelModel["conditionIcon"] = conditionIcon;
+        if (isValidIconName(conditionIcon)) {
+            setPopupIcon(conditionIcon);
+        } else {
+            setPopupIcon("weather-not-available");
+        }
+    }
+}
+
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     if (data.isEmpty()) {
@@ -572,7 +586,10 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     }
 
     weatherContent(data);
+    updatePanelModel(data);
     WeatherPopupApplet::dataUpdated(source, data);
+
+    emit dataUpdated();
     update();
 }
 

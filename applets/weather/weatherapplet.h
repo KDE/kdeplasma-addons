@@ -33,11 +33,16 @@ namespace Plasma
 class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
+    Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY dataUpdated)
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
 
     void init();
+    QVariantMap panelModel() const { return m_panelModel; }
+
+signals:
+    void dataUpdated();
 
 public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
@@ -56,11 +61,16 @@ private Q_SLOTS:
 private:
     bool isValidData(const QVariant &data) const;
     void weatherContent(const Plasma::DataEngine::Data &data);
+    void resetPanelModel();
+    void updatePanelModel(const Plasma::DataEngine::Data &data);
     QString convertTemperature(KUnitConversion::UnitPtr format, QString value,
                                int type, bool rounded = false, bool degreesOnly = false);
 
     Plasma::DeclarativeWidget *m_declarativeWidget;
 
+    QString m_creditUrl;
+
+    QVariantMap m_panelModel;
     QStandardItemModel *m_fiveDaysModel;
     QStandardItemModel *m_detailsModel;
 };

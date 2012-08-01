@@ -40,6 +40,7 @@ Item {
             left: parent.left
             right: parent.right
         }
+        model: weatherApplet.panelModel
     }
 
     PlasmaComponents.TabBar {
@@ -92,7 +93,8 @@ Item {
             pointSize: theme.smallestFont.pointSize
             underline: true
         }
-        text: "Supported by backstage.bbc.co.uk"
+        color: theme.textColor
+        text: weatherApplet.panelModel.courtesy
     }
 
     states: [

@@ -20,12 +20,14 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 PlasmaCore.FrameSvgItem {
+    property variant model
+
     height: 56 // XXX
     imagePath: "widgets/frame"
     prefix: "plain"
 
     QtExtraComponents.QIconItem {
-        icon: "weather-many-clouds" // XXX
+        icon: model.conditionIcon
         height: parent.height // XXX
         width: height
     }
@@ -39,7 +41,7 @@ PlasmaCore.FrameSvgItem {
             leftMargin: 76
         }
         font.bold: true
-        text: "Porto Alegre, Brazil"
+        text: model.location
 
         Component.onCompleted: font.pointSize = Math.floor(font.pointSize * 1.4);
     }
@@ -51,7 +53,7 @@ PlasmaCore.FrameSvgItem {
             left: locationLabel.left
             topMargin: 5
         }
-        text: "grey cloud"
+        text: model.conditions
     }
 
     Text {
@@ -62,7 +64,7 @@ PlasmaCore.FrameSvgItem {
             rightMargin: 5
         }
         font: locationLabel.font
-        text: "22°C"
+        text: model.temp
     }
 
     Text{
@@ -71,7 +73,7 @@ PlasmaCore.FrameSvgItem {
             right: tempLabel.right
             top: conditionLabel.top
         }
-        font.pointSize: 8 // XXX
-        text: "H: 27°C L: 21°C"
+        font.pointSize: theme.smallestFont.pointSize
+        text: model.forecastTemps
     }
 }
