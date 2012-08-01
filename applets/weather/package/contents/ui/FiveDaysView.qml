@@ -17,27 +17,20 @@
 
 import QtQuick 1.1
 import org.kde.qtextracomponents 0.1 as QtExtraComponents
+import "Utils.js" as Utils
 
 WeatherListView {
     id: root
 
     spacing: 18
-    rows: 4
-
-    property variant model: [["Fri", "Sat", "Sun"],
-            ["weather-many-clouds", "weather-clouds", "weather-clear"],
-            ["27°C", "30°C", "30°C"],
-            ["21°C", "20°C", "21°C"]]
 
     delegate: Row {
-        property int rowIndex
-
         anchors.fill: parent
 
         Repeater {
             id: rowRepeater
 
-            model: root.model[rowIndex]
+            model: rowData
 
             Loader {
                 height: rowIndex == 1 ? parent.height + 15 : parent.height
@@ -63,6 +56,15 @@ WeatherListView {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+            color: {
+                if (!font.bold)
+                    return theme.textColor
+
+                if (text.indexOf("nt") != -1 || text.indexOf("nite") != -1)
+                    return Utils.setAlphaF(theme.textColor, 0.5);
+                else
+                    return theme.textColor
+            }
         }
     }
 

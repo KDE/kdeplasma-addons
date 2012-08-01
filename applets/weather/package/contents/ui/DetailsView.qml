@@ -23,18 +23,9 @@ WeatherListView {
     id: root
 
     spacing: 12
-    rows: 5
     roundedRows: false
 
-    property variant model: [ {icon: "", text: "Pressure: 30.06 inHg"},
-                              {icon: "", text: "Pressure Tendency: no change"},
-                              {icon: "", text: "Visibility: GO"},
-                              {icon: "", text: "Humidty: 70%"},
-                              {icon: "N", text: "Calm"} ]
-
     delegate: Item {
-        property int rowIndex
-
         anchors.fill: parent
 
         Item {
@@ -44,10 +35,10 @@ WeatherListView {
 
             QtExtraComponents.QPixmapItem {
                 id: icon
-                pixmap: svg.pixmap(model[rowIndex].icon)
+                pixmap: svg.pixmap(rowData.icon)
                 height: nativeHeight
                 width: nativeWidth
-                visible: model[rowIndex].icon.length > 0
+                visible: rowData.icon.length > 0
             }
 
             Text {
@@ -56,7 +47,7 @@ WeatherListView {
                     leftMargin: 2
                     verticalCenter: parent.verticalCenter
                 }
-                text: model[rowIndex].text
+                text: rowData.text
             }
         }
     }

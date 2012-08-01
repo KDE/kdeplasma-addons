@@ -21,7 +21,7 @@ import "Utils.js" as Utils
 Column {
     id: root
 
-    property alias rows: repeater.model
+    property alias model: repeater.model
     property Component delegate
     property bool roundedRows: true
 
@@ -37,9 +37,10 @@ Column {
             color: Utils.setAlphaF(theme.textColor, ((index+1)/repeater.count)*0.3);
 
             Loader {
+                property int rowIndex: index
+                property variant rowData: modelData
                 anchors.fill: parent
                 sourceComponent: root.delegate
-                onLoaded: item.rowIndex = index;
             }
         }
     }

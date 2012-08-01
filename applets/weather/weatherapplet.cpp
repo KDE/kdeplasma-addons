@@ -61,7 +61,6 @@ bool isValidIconName(const QString &icon)
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         : WeatherPopupApplet(parent, args),
-        m_fiveDaysModel(0),
         m_detailsModel(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
@@ -178,135 +177,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 {
     // Get current time period of day
     QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split('|');
-
-    // If we have a 5 day forecast, display it
-    if (data["Total Weather Days"].toInt() > 0) {
-        //if (!m_fiveDaysView) {
-        //    kDebug() << "Create 5 Days Plasma::WeatherView";
-        //    m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
-        //}
-
-        if (!m_fiveDaysModel) {
-            kDebug() << "Create 5 Days QStandardItemModel";
-            m_fiveDaysModel = new QStandardItemModel(this);
-        } else {
-            m_fiveDaysModel->clear();
-        }
-
-        QList<QStandardItem *>dayItems;
-        QList<QStandardItem *>conditionItems; // Icon
-        QList<QStandardItem *>hiItems;
-        QList<QStandardItem *>lowItems;
-
-        QFont titleFont = QApplication::font();
-
-        QColor darkColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-        darkColor.setAlphaF(0.5);
-
-        for (int i = 0; i < data["Total Weather Days"].toInt(); i++) {
-            QStringList fiveDayTokens = data[QString("Short Forecast Day %1").arg(i)].toString().split('|');
-
-            if (fiveDayTokens.count() != 6) {
-                // We don't have the right number of tokens, abort trying
-                break;
-            }
-
-            QStandardItem *dayName = new QStandardItem();
-
-            if (fiveDayTokens[0].contains("nt")) {
-                fiveDayTokens[0].remove("nt");
-                dayName->setForeground(darkColor);
-            } else if (fiveDayTokens[0].contains("nite")) {
-                dayName->setForeground(darkColor);
-            } else {
-                dayName->setForeground(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-            }
-
-            titleFont.setBold(true);
-            dayName->setFont(titleFont);
-            dayName->setText(fiveDayTokens[0].trimmed());
-            dayItems.append(dayName);
-
-            // If we see N/U (Not Used) we skip the item
-            if (fiveDayTokens[1] != "N/U") {
-                Plasma::IconWidget *fiveDayIcon = new Plasma::IconWidget(this);
-                if (isValidIconName(fiveDayTokens[1])) {
-                    fiveDayIcon->setIcon(KIcon(fiveDayTokens[1]));
-                } else {
-                    fiveDayIcon->setIcon(KIcon("weather-not-available"));
-                }
-                fiveDayIcon->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-                fiveDayIcon->setDrawBackground(false);
-                fiveDayIcon->hide();
-                QStandardItem *iconItem = new QStandardItem(fiveDayIcon->icon(), NULL);
-
-                if (fiveDayTokens[5] != "N/U") {
-                    if (fiveDayTokens[5] != "N/A") {
-                        iconItem->setToolTip(i18nc("certain weather condition, probability percentage", "%1 (%2%)", fiveDayTokens[2], fiveDayTokens[5]));
-                    } else {
-                        iconItem->setToolTip(fiveDayTokens[2]);
-                    }
-                } else {
-                    iconItem->setToolTip(fiveDayTokens[2]);
-                }
-                conditionItems.append(iconItem);
-            }
-
-            if (fiveDayTokens[3] != "N/U") {
-                QStandardItem *highItem = new QStandardItem();
-                titleFont.setBold(false);
-                highItem->setFont(titleFont);
-                if (fiveDayTokens[3] == "N/A") {
-                    highItem->setText(i18nc("Short for no data available","-"));
-                    hiItems.append(highItem);
-                } else {
-                    highItem->setText(convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true));
-                    hiItems.append(highItem);
-                }
-            }
-
-            if (fiveDayTokens[4] != "N/U") {
-                QStandardItem *lowItem = new QStandardItem();
-                titleFont.setBold(false);
-                lowItem->setFont(titleFont);
-                if (fiveDayTokens[4] == "N/A") {
-                    lowItem->setText(i18nc("Short for no data available","-"));
-                    lowItems.append(lowItem);
-                } else {
-                    lowItem->setText(convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt(), true));
-                    lowItems.append(lowItem);
-                }
-            }
-        }
-
-        if (dayItems.count() > 0) {
-            m_fiveDaysModel->appendRow(dayItems);
-        }
-        if (conditionItems.count() > 0) {
-            m_fiveDaysModel->appendRow(conditionItems);
-        }
-        if (hiItems.count() > 0)  {
-            m_fiveDaysModel->appendRow(hiItems);
-        }
-        if (lowItems.count() > 0) {
-            m_fiveDaysModel->appendRow(lowItems);
-        }
-
-        if (m_fiveDaysModel->rowCount() != 0) {
-            //if (!m_fiveDaysView->model()) {
-            //    m_fiveDaysView->setModel(m_fiveDaysModel);
-            //}
-            // If we have any items, display 5 Day tab, otherwise only details
-            QString totalDays = i18ncp("Forecast period timeframe", "1 Day", "%1 Days", data["Total Weather Days"].toInt());
-            //m_tabBar->addTab(totalDays, m_fiveDaysView);
-        } else {
-            //delete m_fiveDaysView;
-            //m_fiveDaysView = 0;
-        }
-    } else {
-        //delete m_fiveDaysView;
-        //m_fiveDaysView = 0;
-    }
 
     // Details data
     //if (!m_detailsView) {
@@ -579,6 +449,79 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
     }
 }
 
+void WeatherApplet::updateFiveDaysModel(const Plasma::DataEngine::Data &data)
+{
+    if (data["Total Weather Days"].toInt() <= 0) {
+        return;
+    }
+
+    m_fiveDaysModel.clear();
+
+    QStringList dayItems;
+    QStringList conditionItems; // Icon
+    QStringList hiItems;
+    QStringList lowItems;
+
+    for (int i = 0; i < data["Total Weather Days"].toInt(); i++) {
+        QString current = QString("Short Forecast Day %1").arg(i);
+        QStringList fiveDayTokens = data[current].toString().split('|');
+
+        if (fiveDayTokens.count() != 6) {
+            // We don't have the right number of tokens, abort trying
+            break;
+        }
+
+        if (fiveDayTokens[0].contains("nt")) {
+            fiveDayTokens[0].remove("nt");
+        }
+        dayItems << fiveDayTokens[0].trimmed();
+
+        // If we see N/U (Not Used) we skip the item
+        if (fiveDayTokens[1] != "N/U") {
+            if (isValidIconName(fiveDayTokens[1])) {
+                conditionItems << fiveDayTokens[1];
+            } else {
+                conditionItems << "weather-not-available";
+            }
+        }
+
+        if (fiveDayTokens[3] != "N/U") {
+            if (fiveDayTokens[3] == "N/A") {
+                hiItems << i18nc("Short for no data available", "-");
+            } else {
+                hiItems << convertTemperature(temperatureUnit(),
+                                              fiveDayTokens[3],
+                                              data["Temperature Unit"].toInt(),
+                                              true);
+            }
+        }
+
+        if (fiveDayTokens[4] != "N/U") {
+            if (fiveDayTokens[4] == "N/A") {
+                lowItems << i18nc("Short for no data available", "-");
+            } else {
+                lowItems << convertTemperature(temperatureUnit(),
+                                               fiveDayTokens[4],
+                                               data["Temperature Unit"].toInt(),
+                                               true);
+            }
+        }
+    }
+
+    if (dayItems.count() > 0) {
+        m_fiveDaysModel << dayItems;
+    }
+    if (conditionItems.count() > 0) {
+        m_fiveDaysModel << conditionItems;
+    }
+    if (hiItems.count() > 0)  {
+        m_fiveDaysModel << hiItems;
+    }
+    if (lowItems.count() > 0) {
+        m_fiveDaysModel << lowItems;
+    }
+}
+
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     if (data.isEmpty()) {
@@ -587,6 +530,7 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
 
     weatherContent(data);
     updatePanelModel(data);
+    updateFiveDaysModel(data);
     WeatherPopupApplet::dataUpdated(source, data);
 
     emit dataUpdated();

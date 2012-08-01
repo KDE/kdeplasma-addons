@@ -34,12 +34,14 @@ class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY dataUpdated)
+    Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY dataUpdated)
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
 
     void init();
     QVariantMap panelModel() const { return m_panelModel; }
+    QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
 
 signals:
     void dataUpdated();
@@ -63,6 +65,7 @@ private:
     void weatherContent(const Plasma::DataEngine::Data &data);
     void resetPanelModel();
     void updatePanelModel(const Plasma::DataEngine::Data &data);
+    void updateFiveDaysModel(const Plasma::DataEngine::Data &data);
     QString convertTemperature(KUnitConversion::UnitPtr format, QString value,
                                int type, bool rounded = false, bool degreesOnly = false);
 
@@ -71,7 +74,7 @@ private:
     QString m_creditUrl;
 
     QVariantMap m_panelModel;
-    QStandardItemModel *m_fiveDaysModel;
+    QVariantList m_fiveDaysModel;
     QStandardItemModel *m_detailsModel;
 };
 
