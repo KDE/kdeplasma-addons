@@ -25,7 +25,7 @@
 #include <QNetworkRequest>
 #include <QCoreApplication>
 
-#include <KDebug>
+#include <QtDebug>
 #include <KIO/NetAccess>
 #include <QVBoxLayout>
 #include <KLocale>
@@ -102,7 +102,7 @@ QString RTM::Auth::getTextPermissions(RTM::Permissions permissions)
       textPermissions = "delete";
       break;
     default:
-      kDebug() << "ERROR: No Permissions";
+      qDebug() << "ERROR: No Permissions";
       break;
   }
   return textPermissions;
@@ -110,7 +110,7 @@ QString RTM::Auth::getTextPermissions(RTM::Permissions permissions)
 
 void RTM::Auth::continueAuthForToken()
 {
-  kDebug() << "Token Time";
+  qDebug() << "Token Time";
   if (d->tokenRequest)
     d->tokenRequest->deleteLater();
   
@@ -124,10 +124,10 @@ void RTM::Auth::continueAuthForToken()
 void RTM::Auth::tokenResponse(RTM::Request* response)
 {
   QString reply = response->data();
-  kDebug() << "Reply: " << reply;
+  qDebug() << "Reply: " << reply;
   QString token = reply.remove(0, reply.indexOf("<token>")+7);
   token.truncate(token.indexOf("</token>"));
-  kDebug() << "Token: " << token;
+  qDebug() << "Token: " << token;
   emit tokenReceived(token);
 }
 

@@ -41,7 +41,7 @@
 
 #include <KSystemTimeZones>
 #include <KTimeZone>
-#include <KDebug>
+#include <QtDebug>
 #include <Solid/Networking>
 #include <QTimer>
 
@@ -56,7 +56,7 @@ class RTM::SessionPrivate {
       QObject::connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)), q, SLOT(networkStatusChanged(Solid::Networking::Status)));
       if (Solid::Networking::status() == Solid::Networking::Unconnected) {
         online = false;
-        kDebug() << "We are NOT Online :(";
+        qDebug() << "We are NOT Online :(";
       }
   }
   ~SessionPrivate() {
@@ -88,13 +88,13 @@ class RTM::SessionPrivate {
   
   void offlineError() {
     online = false;
-    kDebug() << "retesting offline status in 60 seconds";
+    qDebug() << "retesting offline status in 60 seconds";
     QTimer::singleShot(60*1000, q, SLOT(retestOfflineStatus()));
   }
   
   void retestOfflineStatus() {
     online = true;
-    kDebug() << "retesting offline status";
+    qDebug() << "retesting offline status";
     q->checkToken();
   }
   
@@ -107,7 +107,7 @@ class RTM::SessionPrivate {
     if (!online)
       return;
 
-    kDebug() << "Populating Smart List: " << list->name();
+    qDebug() << "Populating Smart List: " << list->name();
     // We do this next bit manually so it doesn't get auto-connected to taskUpdate()
     RTM::Request *smartListRequest = new RTM::Request("rtm.tasks.getList", q->apiKey(), q->sharedSecret());
     smartListRequest->addArgument("auth_token", q->token());
@@ -207,7 +207,7 @@ class RTM::SessionPrivate {
       if (part.contains("list_id"))
         id = part.split("=").last().toLongLong();
       
-    kDebug() << id;
+    qDebug() << id;
     TasksReader reader(reply, q);
     reader.read();
     RTM::List* list = lists.value(id);
@@ -236,7 +236,7 @@ class RTM::SessionPrivate {
     defaultlist.truncate(defaultlist.indexOf("</defaultlist>"));
     
     this->timezone = KSystemTimeZones::zone(timezone);
-    kDebug() << "Timezone Set To: " << timezone << " i.e. " << this->timezone.name();
+    qDebug() << "Timezone Set To: " << timezone << " i.e. " << this->timezone.name();
     
     request->deleteLater();
     emit q->settingsUpdated();

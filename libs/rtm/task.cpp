@@ -20,7 +20,7 @@
 #include "task.h"
 #include "task_p.h"
 
-#include <KDebug>
+#include <QtDebug>
 
 #include "request.h"
 #include "session.h"
@@ -126,7 +126,7 @@ void RTM::Task::setDeleted(bool deleted) {
     request = d->standardRequest("rtm.tasks.delete");
   }
   else {
-    kDebug() << "ERROR: RTM Does not allow undeleting tasks!";
+    qDebug() << "ERROR: RTM Does not allow undeleting tasks!";
     d->deleted = QDateTime();
     request = d->standardRequest("rtm.tasks.undelete");
   }
@@ -181,7 +181,7 @@ void RTM::Task::setTags(const QStringList &tags) {
 }
 void RTM::Task::setNotes(const Notes& notes) {
   Q_UNUSED(notes)
-  kError() << "NOT IMPLEMENTED"; //FIXME Implement
+  qDebug() << "NOT IMPLEMENTED"; //FIXME Implement
 }
 void RTM::Task::addNote(const QString& title, const QString& text) {
   //notes.insert(note.getId(), note);
@@ -241,7 +241,7 @@ void RTM::Task::setEstimate(const QString& estimate) {
     return;
   d->estimate = estimate;
 
-  kDebug() << "Setting Estimate to: " << estimate;
+  qDebug() << "Setting Estimate to: " << estimate;
 
   RTM::Request *request = d->standardRequest("rtm.tasks.setEstimate");
   request->addArgument("estimate", estimate);

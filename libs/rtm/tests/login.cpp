@@ -3,7 +3,7 @@
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
-#include <KDebug>
+#include <QtDebug>
 
 int main(int argc, char* argv[]) { 
   KAboutData about("login", 0, ki18n("RTM Login Test"), "1.0", ki18n("A Simple RTM Login Test"),

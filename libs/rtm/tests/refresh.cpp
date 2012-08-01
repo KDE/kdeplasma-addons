@@ -7,7 +7,7 @@
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
-#include <KDebug>
+#include <QtDebug>
 
 #include <KIO/Job>
 #include <KIO/NetAccess>
@@ -30,7 +30,7 @@ class Refresher : public QObject
     
   public slots:
     void refresh() {
-      kDebug() << "Refreshing";
+      qDebug() << "Refreshing";
       session->refreshListsFromServer();
       session->refreshTasksFromServer();
     }

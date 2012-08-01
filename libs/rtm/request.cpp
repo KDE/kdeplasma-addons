@@ -25,7 +25,7 @@
 #include <QCryptographicHash>
 #include <QCoreApplication>
 
-#include <KDebug>
+#include <QtDebug>
 #include <KIO/NetAccess>
 #include <QTimer>
 
@@ -108,13 +108,13 @@ void RTM::Request::sendRequest()
   if (margin <= 1000) {
     const int timeout = 1000 * (queueSize + 1) - margin + queueSize * 2 + 1;
     QTimer::singleShot(timeout, this, SLOT(sendRequest())); 
-    //kDebug() << "Postponing Job for"<<timeout<<"ms";
+    //qDebug() << "Postponing Job for"<<timeout<<"ms";
     ++queueSize;
     return;
   }
   queueSize = 0;
   QString url = requestUrl();
-  kDebug() << "Request ready. Url is: " << url;
+  qDebug() << "Request ready. Url is: " << url;
   d->currentJob = KIO::get(KUrl(url.toUtf8()), KIO::NoReload, KIO::HideProgressInfo);
   connect(d->currentJob, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(dataIncrement(KIO::Job*,QByteArray)));
   connect(d->currentJob, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
@@ -128,28 +128,28 @@ QString RTM::Request::method() const {
 
 void RTM::Request::dataIncrement(KIO::Job* job, QByteArray data) {
   Q_UNUSED(job)
-  //kDebug() << data;
+  //qDebug() << data;
   buffer().append(data);
 }
 
 void RTM::Request::finished(KJob* job) {
   if (job->error()) {
-    kDebug() << "Network Job Error: " << job->errorString();
+    qDebug() << "Network Job Error: " << job->errorString();
     if (d->retries >= RTM::RequestPrivate::MAX_RETRIES) {
-      kDebug() << "ABORT: Maximum Retries reached for " << d->currentJob->url();
+      qDebug() << "ABORT: Maximum Retries reached for " << d->currentJob->url();
       d->currentJob = 0;
       return;
     }
     switch (job->error()) {
       case KIO::ERR_CONNECTION_BROKEN: // If the connection is broken, resend the request
-        kDebug() << "Connection Error, retrying connection";
+        qDebug() << "Connection Error, retrying connection";
         disconnect(d->currentJob);
         d->retries++;
         d->currentJob = 0;
         sendRequest(); 
         return;
       case KIO::ERR_UNKNOWN_HOST: // Guess that we're offline
-        kDebug() << "Unknown host, we're probably offline";
+        qDebug() << "Unknown host, we're probably offline";
         emit offlineError();
         this->deleteLater();
         return;
@@ -192,7 +192,7 @@ QString RTM::Request::requestUrl()
     case RTM::RequestReceived:
       break;
    }
-    //kDebug() << "Creating url";
+    //qDebug() << "Creating url";
     QString url = d->baseUrl;
     foreach(const QString &key, d->arguments.keys()) 
       url.append('&' + key + '=' + d->arguments.value(key).toUtf8().toPercentEncoding());
