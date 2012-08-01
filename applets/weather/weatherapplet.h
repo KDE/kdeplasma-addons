@@ -21,20 +21,12 @@
 #ifndef WEATHERAPPLET_H
 #define WEATHERAPPLET_H
 
-#include <Plasma/PopupApplet>
-#include <Plasma/DataEngine>
 #include <plasmaweather/weatherpopupapplet.h>
 
-class QGraphicsGridLayout;
-class QGraphicsLinearLayout;
-class QStandardItem;
 class QStandardItemModel;
-
-class KDialog;
 
 namespace Plasma
 {
-    class IconWidget;
     class DeclarativeWidget;
 }
 
@@ -46,7 +38,6 @@ public:
     ~WeatherApplet();
 
     void init();
-    //QGraphicsWidget *graphicsWidget();
 
 public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
@@ -63,22 +54,15 @@ private Q_SLOTS:
     void invokeBrowser(const QString& url) const;
 
 private:
-    Plasma::DeclarativeWidget *m_declarativeWidget;
-
-    Plasma::DataEngine::Data m_currentData; // Current data returned from ion
-
-    QStandardItemModel *m_fiveDaysModel;
-    QStandardItemModel *m_detailsModel;
-
-    // Layout
-    int m_setupLayout;
-
-    QFont m_titleFont;
-
     bool isValidData(const QVariant &data) const;
     void weatherContent(const Plasma::DataEngine::Data &data);
     QString convertTemperature(KUnitConversion::UnitPtr format, QString value,
-                               int type, bool rounded, bool degreesOnly);
+                               int type, bool rounded = false, bool degreesOnly = false);
+
+    Plasma::DeclarativeWidget *m_declarativeWidget;
+
+    QStandardItemModel *m_fiveDaysModel;
+    QStandardItemModel *m_detailsModel;
 };
 
 K_EXPORT_PLASMA_APPLET(weather, WeatherApplet)

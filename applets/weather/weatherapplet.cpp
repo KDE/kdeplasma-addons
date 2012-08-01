@@ -23,22 +23,18 @@
 
 #include <QApplication>
 #include <QGraphicsLinearLayout>
-#include <QGraphicsGridLayout>
 #include <QPainter>
 #include <QStandardItemModel>
 
 #include <KDebug>
 #include <KGlobalSettings>
 #include <KLocale>
-#include <KMessageBox>
+#include <KIcon>
+#include <KIconLoader>
 #include <KToolInvocation>
 #include <KUnitConversion/Value>
 
-#include <Plasma/Frame>
 #include <Plasma/IconWidget>
-#include <Plasma/Label>
-#include <Plasma/Svg>
-#include <Plasma/TabBar>
 #include <Plasma/Theme>
 #include <Plasma/ToolTipManager>
 #include <Plasma/DeclarativeWidget>
@@ -46,9 +42,11 @@
 
 #include <cmath>
 
-template <typename T> T clampValue(T value, int decimals)
+template <typename T>
+T clampValue(T value, int decimals)
 {
-        const T mul = std::pow(static_cast<T>(10), decimals); return int(value * mul) / mul;
+    const T mul = std::pow(static_cast<T>(10), decimals);
+    return int(value * mul) / mul;
 }
 
 bool isValidIconName(const QString &icon)
@@ -58,20 +56,15 @@ bool isValidIconName(const QString &icon)
                                             KIconLoader::DefaultState, QStringList(), 0, true).isNull();
 }
 
+
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         : WeatherPopupApplet(parent, args),
         m_fiveDaysModel(0),
-        m_detailsModel(0),
-        m_setupLayout(0)
+        m_detailsModel(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("weather-none-available");
 }
-
-//QGraphicsWidget *WeatherApplet::graphicsWidget()
-//{
-//    return m_graphicsWidget;
-//}
 
 void WeatherApplet::init()
 {
@@ -109,11 +102,13 @@ void WeatherApplet::toolTipAboutToShow()
         return;
     }
 
-    Plasma::ToolTipContent data(i18nc("Shown when you have not set a weather provider", "Please Configure"), "", popupIcon().pixmap(IconSize(KIconLoader::Desktop)));
+    QString config = i18nc("Shown when you have not set a weather provider", "Please Configure");
+    Plasma::ToolTipContent data(config, "", popupIcon().pixmap(IconSize(KIconLoader::Desktop)));
     QString location, conditions, temp; // XXX
     if (!location.isEmpty()) {
          data.setMainText(location);
-         data.setSubText(i18nc("%1 is the weather condition, %2 is the temperature, both come from the weather provider", "%1 %2", conditions, temp));
+         data.setSubText(i18nc("%1 is the weather condition, %2 is the temperature,"
+                               " both come from the weather provider", "%1 %2", conditions, temp));
     }
     Plasma::ToolTipManager::self()->setContent(this, data);
 }
@@ -146,7 +141,7 @@ void WeatherApplet::invokeBrowser(const QString& url) const
 }
 
 QString WeatherApplet::convertTemperature(KUnitConversion::UnitPtr format, QString value,
-                                          int type, bool rounded = false, bool degreesOnly = false)
+                                          int type, bool rounded, bool degreesOnly)
 {
     KUnitConversion::Value v(value.toDouble(), type);
     v = v.convertTo(format);
@@ -176,7 +171,9 @@ bool WeatherApplet::isValidData(const QVariant &data) const
 void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 {
     //m_locationLabel->setText(data["Place"].toString());
-    QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split('|'); // Get current time period of day
+
+    // Get current time period of day
+    QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split('|');
 
     if (fiveDayTokens.count() > 1) {
         // fiveDayTokens[3] = High Temperature
@@ -565,12 +562,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     // Hide the tab bar if there is only one tab to show
     //m_tabBar->setTabBarShown(m_tabBar->count() > 1);
 
-    if (!m_setupLayout) {
-        //m_layout->addItem(m_tabBar);
-        //m_layout->addItem(m_courtesyLabel);
-        m_setupLayout = 1;
-    }
-
     update();
 }
 
@@ -580,8 +571,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
         return;
     }
 
-    m_currentData = data;
-    //setVisibleLayout(false);
     weatherContent(data);
     WeatherPopupApplet::dataUpdated(source, data);
     update();
@@ -589,7 +578,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
 
 void WeatherApplet::configAccepted()
 {
-    //setVisibleLayout(false);
     WeatherPopupApplet::configAccepted();
 }
 
