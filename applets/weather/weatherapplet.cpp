@@ -24,7 +24,6 @@
 #include <QApplication>
 #include <QGraphicsLinearLayout>
 #include <QPainter>
-#include <QStandardItemModel>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
 
@@ -60,8 +59,7 @@ bool isValidIconName(const QString &icon)
 
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
-        : WeatherPopupApplet(parent, args),
-        m_detailsModel(0)
+        : WeatherPopupApplet(parent, args)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("weather-none-available");
@@ -175,119 +173,6 @@ bool WeatherApplet::isValidData(const QVariant &data) const
 
 void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 {
-    // Get current time period of day
-    QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split('|');
-
-    // Details data
-    //if (!m_detailsView) {
-    //    kDebug() << "Create Details Plasma::WeatherView";
-    //    m_detailsView = new Plasma::WeatherView(m_tabBar);
-    //}
-
-    if (!m_detailsModel) {
-        kDebug() << "Create Details QStandardItemModel";
-        m_detailsModel = new QStandardItemModel(this);
-    } else {
-        m_detailsModel->clear();
-    }
-
-    if (isValidData(data["Windchill"])) {
-       QStandardItem *dataWindchill = new QStandardItem();
-
-       // Use temperature unit to convert windchill temperature we only show degrees symbol not actual temperature unit
-       dataWindchill->setText(i18nc("windchill, unit", "Windchill: %1", convertTemperature(temperatureUnit(), data["Windchill"].toString(), data["Temperature Unit"].toInt(), false, true)));
-       m_detailsModel->appendRow(dataWindchill);
-    }
-
-    if (isValidData(data["Humidex"])) {
-        QStandardItem *dataHumidex = new QStandardItem();
-
-        // Use temperature unit to convert humidex temperature we only show degrees symbol not actual temperature unit
-        dataHumidex->setText(i18nc("humidex, unit","Humidex: %1", convertTemperature(temperatureUnit(), data["Humidex"].toString(), data["Temperature Unit"].toInt(), false, true)));
-
-        m_detailsModel->appendRow(dataHumidex);
-    }
-
-    if (isValidData(data["Dewpoint"])) {
-        QStandardItem *dataDewpoint = new QStandardItem();
-        dataDewpoint->setText(i18nc("ground temperature, unit", "Dewpoint: %1", convertTemperature(temperatureUnit(), data["Dewpoint"].toString(), data["Temperature Unit"].toInt(), false)));
-        m_detailsModel->appendRow(dataDewpoint);
-    }
-
-    if (isValidData(data["Pressure"])) {
-        QStandardItem *dataPressure = new QStandardItem();
-        KUnitConversion::Value v(data["Pressure"].toDouble(), data["Pressure Unit"].toInt());
-        v = v.convertTo(pressureUnit());
-        dataPressure->setText(i18nc("pressure, unit","Pressure: %1 %2", clampValue(v.number(), 2), v.unit()->symbol()));
-        m_detailsModel->appendRow(dataPressure);
-    }
-
-    if (isValidData(data["Pressure Tendency"])) {
-        QStandardItem *dataPressureTend = new QStandardItem();
-        dataPressureTend->setText(i18nc("pressure tendency, rising/falling/steady", "Pressure Tendency: %1", data["Pressure Tendency"].toString()));
-        m_detailsModel->appendRow(dataPressureTend);
-    }
-
-    if (isValidData(data["Visibility"])) {
-        QStandardItem *dataVisibility = new QStandardItem();
-        bool isNumeric;
-        data["Visibility"].toDouble(&isNumeric);
-        if (isNumeric) {
-            KUnitConversion::Value v(data["Visibility"].toDouble(), data["Visibility Unit"].toInt());
-            v = v.convertTo(visibilityUnit());
-            dataVisibility->setText(i18nc("distance, unit","Visibility: %1 %2", clampValue(v.number(), 1), v.unit()->symbol()));
-        } else {
-            dataVisibility->setText(i18nc("visibility from distance", "Visibility: %1", data["Visibility"].toString()));
-        }
-
-        m_detailsModel->appendRow(dataVisibility);
-    }
-
-    if (isValidData(data["Humidity"])) {
-        QStandardItem *dataHumidity = new QStandardItem();
-        dataHumidity->setText(i18nc("content of water in air", "Humidity: %1%2", data["Humidity"].toString(), i18nc("Precent, measure unit", "%")));
-        m_detailsModel->appendRow(dataHumidity);
-    }
-
-    if (isValidData(data["Wind Speed"])) {
-        Plasma::Svg svgWindIcon;
-        svgWindIcon.setImagePath("weather/wind-arrows");
-        QIcon windIcon = svgWindIcon.pixmap(data["Wind Direction"].toString());
-
-        QString text;
-        if (data["Wind Speed"] != "N/A" && data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
-            KUnitConversion::Value v(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt());
-            v = v.convertTo(speedUnit());
-            text = i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
-                        clampValue(v.number(), 1), v.unit()->symbol());
-        } else if (data["Wind Speed"] == "N/A") {
-                text = i18nc("Not available","N/A");
-        } else if (data["Wind Speed"].toInt() == 0 || data["Wind Speed"] == "Calm") {
-                    text = i18nc("Wind condition","Calm");
-        }
-
-        QStandardItem *windInfo = new QStandardItem(windIcon, NULL);
-        windInfo->setTextAlignment(Qt::AlignRight);
-        windInfo->setText(text);
-        m_detailsModel->appendRow(windInfo);
-    }
-
-    if (isValidData(data["Wind Gust"])) {
-        // Convert the wind format for nonstandard types
-        QStandardItem *dataGust = new QStandardItem();
-        KUnitConversion::Value v(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt());
-        v = v.convertTo(speedUnit());
-        dataGust->setText(i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2", clampValue(v.number(), 1), v.unit()->symbol()));
-        m_detailsModel->appendRow(dataGust);
-    }
-
-    if (m_detailsModel->rowCount() > 0) {
-        //if (!m_detailsView->model()) {
-        //    m_detailsView->setModel(m_detailsModel);
-        //}
-        //m_tabBar->addTab(i18nc("current weather information", "Details"), m_detailsView);
-    }
-
     //int rowCount = 0;
     //if (data["Total Watches Issued"].toInt() > 0 || data["Total Warnings Issued"].toInt() > 0) {
     //    QGraphicsLinearLayout *noticeLayout = new QGraphicsLinearLayout(Qt::Vertical);
@@ -522,6 +407,102 @@ void WeatherApplet::updateFiveDaysModel(const Plasma::DataEngine::Data &data)
     }
 }
 
+void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
+{
+    m_detailsModel.clear();
+
+    QVariantMap row;
+    row["icon"] = "";
+    row["text"] = "";
+
+    int unit = data["Temperature Unit"].toInt();
+    QString temp;
+
+    if (isValidData(data["Windchill"])) {
+        // Use temperature unit to convert windchill temperature
+        // we only show degrees symbol not actual temperature unit
+        temp = convertTemperature(temperatureUnit(), data["Windchill"].toString(), unit, false, true);
+        row["text"] = i18nc("windchill, unit", "Windchill: %1", temp);
+        m_detailsModel << row;
+    }
+
+    if (isValidData(data["Humidex"])) {
+        // Use temperature unit to convert humidex temperature
+        // we only show degrees symbol not actual temperature unit
+        temp = convertTemperature(temperatureUnit(), data["Humidex"].toString(), unit, false, true);
+        row["text"] = i18nc("humidex, unit","Humidex: %1", temp);
+        m_detailsModel << row;
+    }
+
+    if (isValidData(data["Dewpoint"])) {
+        temp = convertTemperature(temperatureUnit(), data["Dewpoint"].toString(), unit);
+        row["text"] = i18nc("ground temperature, unit", "Dewpoint: %1", temp);
+        m_detailsModel << row;
+    }
+
+    if (isValidData(data["Pressure"])) {
+        KUnitConversion::Value v(data["Pressure"].toDouble(), data["Pressure Unit"].toInt());
+        v = v.convertTo(pressureUnit());
+        row["text"] = i18nc("pressure, unit","Pressure: %1 %2",
+                            clampValue(v.number(), 2), v.unit()->symbol());
+        m_detailsModel << row;
+    }
+
+    if (isValidData(data["Pressure Tendency"])) {
+        row["text"] = i18nc("pressure tendency, rising/falling/steady",
+                            "Pressure Tendency: %1", data["Pressure Tendency"].toString());
+        m_detailsModel << row;
+    }
+
+    if (isValidData(data["Visibility"])) {
+        bool isNumeric;
+        data["Visibility"].toDouble(&isNumeric);
+        if (isNumeric) {
+            KUnitConversion::Value v(data["Visibility"].toDouble(), data["Visibility Unit"].toInt());
+            v = v.convertTo(visibilityUnit());
+            row["text"] = i18nc("distance, unit","Visibility: %1 %2",
+                                clampValue(v.number(), 1), v.unit()->symbol());
+        } else {
+            row["text"] = i18nc("visibility from distance", "Visibility: %1", data["Visibility"].toString());
+        }
+
+        m_detailsModel << row;
+    }
+
+    if (isValidData(data["Humidity"])) {
+        row["text"] = i18nc("content of water in air", "Humidity: %1%2",
+                            data["Humidity"].toString(), i18nc("Precent, measure unit", "%"));
+        m_detailsModel << row;
+    }
+
+    if (isValidData(data["Wind Speed"])) {
+        row["icon"] = data["Wind Direction"].toString();
+
+        if (data["Wind Speed"] == "N/A") {
+            row["text"] = i18nc("Not available","N/A");
+        } else if (data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
+            KUnitConversion::Value v(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt());
+            v = v.convertTo(speedUnit());
+            row["text"] = i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
+                                clampValue(v.number(), 1), v.unit()->symbol());
+        } else {
+            row["text"] = i18nc("Wind condition","Calm");
+        }
+
+        m_detailsModel << row;
+        row["icon"] = "";
+    }
+
+    if (isValidData(data["Wind Gust"])) {
+        // Convert the wind format for nonstandard types
+        KUnitConversion::Value v(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt());
+        v = v.convertTo(speedUnit());
+        row["text"] = i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2",
+                            clampValue(v.number(), 1), v.unit()->symbol());
+        m_detailsModel << row;
+    }
+}
+
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     if (data.isEmpty()) {
@@ -531,6 +512,7 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     weatherContent(data);
     updatePanelModel(data);
     updateFiveDaysModel(data);
+    updateDetailsModel(data);
     WeatherPopupApplet::dataUpdated(source, data);
 
     emit dataUpdated();

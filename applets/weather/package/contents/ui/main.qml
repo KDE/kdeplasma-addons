@@ -82,11 +82,7 @@ Item {
             topMargin: 14
         }
         width: parent.width
-        model: [ {icon: "", text: "Pressure: 30.06 inHg"},
-                 {icon: "", text: "Pressure Tendency: no change"},
-                 {icon: "", text: "Visibility: GO"},
-                 {icon: "", text: "Humidty: 70%"},
-                 {icon: "N", text: "Calm"} ]
+        model: weatherApplet.detailsModel
     }
 
     Text {

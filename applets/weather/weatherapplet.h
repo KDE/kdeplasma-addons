@@ -23,8 +23,6 @@
 
 #include <plasmaweather/weatherpopupapplet.h>
 
-class QStandardItemModel;
-
 namespace Plasma
 {
     class DeclarativeWidget;
@@ -35,6 +33,7 @@ class WeatherApplet : public WeatherPopupApplet
     Q_OBJECT
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY dataUpdated)
     Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY dataUpdated)
+    Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY dataUpdated)
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
@@ -42,6 +41,7 @@ public:
     void init();
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
+    QVariantList detailsModel() const { return m_detailsModel; }
 
 signals:
     void dataUpdated();
@@ -66,6 +66,7 @@ private:
     void resetPanelModel();
     void updatePanelModel(const Plasma::DataEngine::Data &data);
     void updateFiveDaysModel(const Plasma::DataEngine::Data &data);
+    void updateDetailsModel(const Plasma::DataEngine::Data &data);
     QString convertTemperature(KUnitConversion::UnitPtr format, QString value,
                                int type, bool rounded = false, bool degreesOnly = false);
 
@@ -75,7 +76,7 @@ private:
 
     QVariantMap m_panelModel;
     QVariantList m_fiveDaysModel;
-    QStandardItemModel *m_detailsModel;
+    QVariantList m_detailsModel;
 };
 
 K_EXPORT_PLASMA_APPLET(weather, WeatherApplet)
