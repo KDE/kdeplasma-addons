@@ -22,7 +22,6 @@ import org.kde.qtextracomponents 0.1 as QtExtraComponents
 WeatherListView {
     id: root
 
-    spacing: 12
     roundedRows: false
 
     delegate: Item {

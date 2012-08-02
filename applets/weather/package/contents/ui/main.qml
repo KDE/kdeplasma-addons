@@ -50,8 +50,8 @@ Item {
             topMargin: 5
             horizontalCenter: parent.horizontalCenter
         }
-        width: 160 // XXX
-        height: 30 // XXX
+        width: 160
+        height: 30
         visible: detailsView.model.length > 0
 
         PlasmaComponents.TabButton {
@@ -67,9 +67,10 @@ Item {
     FiveDaysView {
         id: fiveDaysView
         anchors {
-            top: tabBar.bottom
+            top: tabBar.visible ? tabBar.bottom : tabBar.top
             bottom: courtesyLabel.top
             topMargin: 14
+            bottomMargin: 14
         }
         width: parent.width
         model: weatherApplet.fiveDaysModel
@@ -78,9 +79,8 @@ Item {
     DetailsView {
         id: detailsView
         anchors {
-            top: tabBar.bottom
-            bottom: courtesyLabel.top
-            topMargin: 14
+            top: fiveDaysView.top
+            bottom: fiveDaysView.bottom
         }
         width: parent.width
         model: weatherApplet.detailsModel

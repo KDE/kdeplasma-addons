@@ -24,6 +24,9 @@ Column {
     property alias model: repeater.model
     property Component delegate
     property bool roundedRows: true
+    property int rowHeight: 18
+
+    spacing: (root.height - (repeater.count*rowHeight)) / (repeater.count-1)
 
     Repeater {
         id: repeater
@@ -32,7 +35,7 @@ Column {
             id: rect
             anchors.left: parent.left
             anchors.right: parent.right
-            height: 18
+            height: root.rowHeight
             radius: root.roundedRows ? 5 : 0
             color: Utils.setAlphaF(theme.textColor, ((index+1)/repeater.count)*0.3);
 

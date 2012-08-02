@@ -22,8 +22,6 @@ import "Utils.js" as Utils
 WeatherListView {
     id: root
 
-    spacing: 18
-
     delegate: Row {
         anchors.fill: parent
 
