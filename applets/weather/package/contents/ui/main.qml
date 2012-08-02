@@ -94,10 +94,17 @@ Item {
         }
         font {
             pointSize: theme.smallestFont.pointSize
-            underline: true
+            underline: mouseArea.enabled
         }
         color: theme.textColor
         text: weatherApplet.panelModel.courtesy
+
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            enabled: weatherApplet.panelModel.enableLink
+            onClicked: weatherApplet.invokeBrowser();
+        }
     }
 
     states: [

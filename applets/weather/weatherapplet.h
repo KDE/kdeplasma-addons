@@ -48,6 +48,7 @@ signals:
 
 public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+    void invokeBrowser() const;
 
 protected Q_SLOTS:
     void configAccepted();
@@ -57,8 +58,6 @@ protected Q_SLOTS:
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
 
-private Q_SLOTS:
-    void invokeBrowser(const QString& url) const;
 
 private:
     bool isValidData(const QVariant &data) const;

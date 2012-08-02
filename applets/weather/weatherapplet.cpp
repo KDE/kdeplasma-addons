@@ -138,9 +138,9 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void WeatherApplet::invokeBrowser(const QString& url) const
+void WeatherApplet::invokeBrowser() const
 {
-    KToolInvocation::invokeBrowser(url);
+    KToolInvocation::invokeBrowser(m_creditUrl);
 }
 
 QString WeatherApplet::convertTemperature(KUnitConversion::UnitPtr format, QString value,
@@ -268,6 +268,7 @@ void WeatherApplet::resetPanelModel()
     m_panelModel["courtesy"] = "";
     m_panelModel["conditionIcon"] = "";
     m_panelModel["totalDays"] = "";
+    m_panelModel["enableLink"] = false;
 }
 
 void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
@@ -309,6 +310,7 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
 
     m_panelModel["courtesy"] = data["Credit"].toString();
     m_creditUrl = data["Credit Url"].toString();
+    m_panelModel["enableLink"] = !m_creditUrl.isEmpty();
 
     const QString conditionIcon = data["Condition Icon"].toString();
     if (!isValidData(data["Condition Icon"])
