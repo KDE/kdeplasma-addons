@@ -33,9 +33,8 @@ Column {
 
         Rectangle {
             id: rect
-            anchors.left: parent.left
-            anchors.right: parent.right
             height: root.rowHeight
+            width: root.width
             radius: root.roundedRows ? 5 : 0
             color: Utils.setAlphaF(theme.textColor, ((index+1)/repeater.count)*0.3);
 
