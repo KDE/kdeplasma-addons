@@ -25,6 +25,7 @@ PlasmaCore.FrameSvgItem {
     height: 56 // XXX
     imagePath: "widgets/frame"
     prefix: "plain"
+    visible: model.location.length > 0
 
     QtExtraComponents.QIconItem {
         icon: model.conditionIcon

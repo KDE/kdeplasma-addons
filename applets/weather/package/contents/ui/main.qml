@@ -52,6 +52,7 @@ Item {
         }
         width: 160 // XXX
         height: 30 // XXX
+        visible: detailsView.model.length > 0
 
         PlasmaComponents.TabButton {
             text: i18n("%1 Days").arg(3)

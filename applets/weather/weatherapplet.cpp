@@ -521,6 +521,11 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
 
 void WeatherApplet::configAccepted()
 {
+    resetPanelModel();
+    m_fiveDaysModel.clear();
+    m_detailsModel.clear();
+    emit dataUpdated();
+
     WeatherPopupApplet::configAccepted();
 }
 
