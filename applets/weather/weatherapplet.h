@@ -61,7 +61,6 @@ protected:
 
 private:
     bool isValidData(const QVariant &data) const;
-    void weatherContent(const Plasma::DataEngine::Data &data);
     void resetPanelModel();
     void updatePanelModel(const Plasma::DataEngine::Data &data);
     void updateFiveDaysModel(const Plasma::DataEngine::Data &data);

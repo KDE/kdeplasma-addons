@@ -21,22 +21,15 @@
 
 #include "weatherapplet.h"
 
-#include <QApplication>
-#include <QGraphicsLinearLayout>
-#include <QPainter>
+#include <QtGui/QGraphicsLinearLayout>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
 
-#include <KDebug>
-#include <KGlobalSettings>
-#include <KLocale>
 #include <KIcon>
 #include <KIconLoader>
 #include <KToolInvocation>
 #include <KUnitConversion/Value>
 
-#include <Plasma/IconWidget>
-#include <Plasma/Theme>
 #include <Plasma/ToolTipManager>
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Package>
@@ -169,93 +162,6 @@ QString WeatherApplet::convertTemperature(KUnitConversion::UnitPtr format, QStri
 bool WeatherApplet::isValidData(const QVariant &data) const
 {
     return ((data != "N/A") && (!data.toString().isEmpty()));
-}
-
-void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
-{
-    //int rowCount = 0;
-    //if (data["Total Watches Issued"].toInt() > 0 || data["Total Warnings Issued"].toInt() > 0) {
-    //    QGraphicsLinearLayout *noticeLayout = new QGraphicsLinearLayout(Qt::Vertical);
-    //    QPalette pal;
-
-    //    QFont noticeTitleFont = QApplication::font();
-    //    noticeTitleFont.setBold(true);
-
-    //    // If we have watches or warnings display them in a tab for now
-    //    if (data["Total Warnings Issued"].toInt() > 0) {
-    //        QGraphicsGridLayout *warningLayout = new QGraphicsGridLayout();
-    //        Plasma::Label *warningTitle = new Plasma::Label();
-    //        warningTitle->setText(i18nc("weather warnings", "Warnings Issued:"));
-    //        warningTitle->nativeWidget()->setFont(noticeTitleFont);
-    //        noticeLayout->addItem(warningTitle);
-    //        for (int k = 0; k < data["Total Warnings Issued"].toInt(); k++) {
-    //            Plasma::Label *warnNotice = new Plasma::Label();
-    //            connect(warnNotice, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
-    //            pal = warnNotice->nativeWidget()->palette();
-    //            pal.setColor(warnNotice->nativeWidget()->foregroundRole(), Qt::red);
-    //            // If there is a Url to go along with the watch/warning turn label into clickable link
-    //            if (!data[QString("Warning Info %1").arg(k)].toString().isEmpty()) {
-    //                QString warnLink = QString("<A HREF=\"%1\">%2</A>").arg(data[QString("Warning Info %1").arg(k)].toString())
-    //                                                                   .arg(data[QString("Warning Description %1").arg(k)].toString());
-    //                warnNotice->setText(warnLink);
-    //            } else {
-    //                warnNotice->setText(data[QString("Warning Description %1").arg(k)].toString());
-    //            }
-    //            warnNotice->nativeWidget()->setPalette(pal);
-    //            warningLayout->setRowSpacing(rowCount, 0);
-    //            warningLayout->setRowStretchFactor(rowCount, 0);
-    //            warningLayout->setRowMinimumHeight(rowCount, 0);
-    //            warningLayout->setRowPreferredHeight(rowCount, 0);
-    //            warningLayout->addItem(warnNotice, rowCount, 0);
-    //            rowCount++;
-    //        }
-
-    //        noticeLayout->addItem(warningLayout);
-    //    }
-
-    //    QGraphicsWidget *spacer = new QGraphicsWidget(this);
-    //    spacer->setMinimumHeight(15);
-    //    spacer->setMaximumHeight(15);
-    //    noticeLayout->addItem(spacer);
-
-    //    rowCount = 0;
-    //    // If we have watches or warnings display them in a tab for now
-    //    if (data["Total Watches Issued"].toInt() > 0) {
-    //        QGraphicsGridLayout *watchLayout = new QGraphicsGridLayout();
-    //        Plasma::Label *watchTitle = new Plasma::Label();
-    //        watchTitle->setText(i18nc("weather watches" ,"Watches Issued:"));
-    //        watchTitle->nativeWidget()->setFont(noticeTitleFont);
-    //        noticeLayout->addItem(watchTitle);
-    //        for (int j = 0; j < data["Total Watches Issued"].toInt(); j++) {
-    //            Plasma::Label *watchNotice = new Plasma::Label();
-    //            connect(watchNotice, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
-    //            pal = watchNotice->nativeWidget()->palette();
-    //            pal.setColor(watchNotice->nativeWidget()->foregroundRole(), Qt::yellow);
-    //            if (!data[QString("Watch Info %1").arg(j)].toString().isEmpty()) {
-    //                QString watchLink = QString("<A HREF=\"%1\">%2</A>").arg(data[QString("Watch Info %1").arg(j)].toString())
-    //                                                                   .arg(data[QString("Watch Description %1").arg(j)].toString());
-    //                watchNotice->setText(watchLink);
-    //            } else {
-    //                watchNotice->setText(data[QString("Watch Description %1").arg(j)].toString());
-    //            }
-    //            watchNotice->nativeWidget()->setPalette(pal);
-    //            watchLayout->setRowSpacing(rowCount, 0);
-    //            watchLayout->setRowStretchFactor(rowCount, 0);
-    //            watchLayout->setRowMinimumHeight(rowCount, 0);
-    //            watchLayout->setRowPreferredHeight(rowCount, 0);
-    //            watchLayout->addItem(watchNotice, rowCount, 0);
-    //            rowCount++;
-    //        }
-    //        noticeLayout->addItem(watchLayout);
-    //    }
-
-    //    m_tabBar->addTab(i18nc("weather notices", "Notices"), noticeLayout);
-    //}
-
-    // Hide the tab bar if there is only one tab to show
-    //m_tabBar->setTabBarShown(m_tabBar->count() > 1);
-
-    update();
 }
 
 void WeatherApplet::resetPanelModel()
@@ -512,7 +418,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
         return;
     }
 
-    weatherContent(data);
     updatePanelModel(data);
     updateFiveDaysModel(data);
     updateDetailsModel(data);
