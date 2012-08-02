@@ -267,6 +267,7 @@ void WeatherApplet::resetPanelModel()
     m_panelModel["temp"] = "";
     m_panelModel["courtesy"] = "";
     m_panelModel["conditionIcon"] = "";
+    m_panelModel["totalDays"] = "";
 }
 
 void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
@@ -405,6 +406,9 @@ void WeatherApplet::updateFiveDaysModel(const Plasma::DataEngine::Data &data)
     if (lowItems.count() > 0) {
         m_fiveDaysModel << lowItems;
     }
+
+    m_panelModel["totalDays"] = i18ncp("Forecast period timeframe", "1 Day",
+                                       "%1 Days", data["Total Weather Days"].toInt());
 }
 
 void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)

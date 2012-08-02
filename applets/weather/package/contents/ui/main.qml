@@ -55,7 +55,7 @@ Item {
         visible: detailsView.model.length > 0
 
         PlasmaComponents.TabButton {
-            text: i18n("%1 Days").arg(3)
+            text: weatherApplet.panelModel.totalDays
             onClicked: root.state = "fiveDays";
         }
         PlasmaComponents.TabButton {
