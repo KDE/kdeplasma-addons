@@ -58,10 +58,15 @@ WeatherListView {
                 if (!font.bold)
                     return theme.textColor
 
-                if (text.indexOf("nt") != -1 || text.indexOf("nite") != -1)
+                var ntIndex = text.indexOf("nt");
+                if (ntIndex != -1 || text.indexOf("nite") != -1) {
+                    if (ntIndex != -1)
+                        text = text.replace(" nt", "");
+
                     return Utils.setAlphaF(theme.textColor, 0.5);
-                else
+                } else {
                     return theme.textColor
+                }
             }
         }
     }

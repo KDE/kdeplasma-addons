@@ -359,10 +359,7 @@ void WeatherApplet::updateFiveDaysModel(const Plasma::DataEngine::Data &data)
             break;
         }
 
-        if (fiveDayTokens[0].contains("nt")) {
-            fiveDayTokens[0].remove("nt");
-        }
-        dayItems << fiveDayTokens[0].trimmed();
+        dayItems << fiveDayTokens[0];
 
         // If we see N/U (Not Used) we skip the item
         if (fiveDayTokens[1] != "N/U") {
