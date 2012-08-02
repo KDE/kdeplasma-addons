@@ -38,11 +38,13 @@ PlasmaCore.FrameSvgItem {
         anchors {
             top: parent.top
             left: parent.left
+            right: tempLabel.visible ? forecastTempsLabel.left : parent.right
             topMargin: 5
             leftMargin: 76
         }
         font.bold: true
         text: model.location
+        elide: Text.ElideRight
 
         Component.onCompleted: font.pointSize = Math.floor(font.pointSize * 1.4);
     }
