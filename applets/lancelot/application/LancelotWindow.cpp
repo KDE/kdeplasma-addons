@@ -253,6 +253,13 @@ void LancelotWindow::lancelotShow(int x, int y)
     showWindow(x, y);
 }
 
+void LancelotWindow::lancelotToggleCentered()
+{
+    if (isVisible()) {
+        hide();
+    } else lancelotShowCentered();
+}
+
 void LancelotWindow::lancelotShowCentered()
 {
     m_showingFull = true;
@@ -891,7 +898,7 @@ void LancelotWindow::setupActions()
         a->setIcon(KIcon("lancelot"));
         connect(
                 a, SIGNAL(triggered(bool)),
-                this, SLOT(lancelotShowCentered())
+                this, SLOT(lancelotToggleCentered())
                 );
     }
 

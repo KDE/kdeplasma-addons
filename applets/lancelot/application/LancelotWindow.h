@@ -64,6 +64,11 @@ public Q_SLOTS:
     void lancelotShowCentered();
 
     /**
+     * Shows full window centered on the screen.
+     */
+    void lancelotToggleCentered();
+
+    /**
      * Shows full window.
      * @param x x coordinate of the mouse
      * @param y y coordinate of the mouse
