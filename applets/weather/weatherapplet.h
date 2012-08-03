@@ -39,6 +39,7 @@ public:
     ~WeatherApplet();
 
     void init();
+    QGraphicsWidget *graphicsWidget();
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
     QVariantList detailsModel() const { return m_detailsModel; }

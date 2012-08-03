@@ -52,7 +52,8 @@ bool isValidIconName(const QString &icon)
 
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
-        : WeatherPopupApplet(parent, args)
+        : WeatherPopupApplet(parent, args),
+          m_declarativeWidget(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("weather-none-available");
@@ -74,21 +75,25 @@ void WeatherApplet::init()
 
     resetPanelModel();
 
-    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
-    m_declarativeWidget = new Plasma::DeclarativeWidget(this);
-    layout->addItem(m_declarativeWidget);
-
-    m_declarativeWidget->engine()->rootContext()->setContextProperty("weatherApplet", this);
-
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    Plasma::Package package(QString(), "org.kde.weather", structure);
-    m_declarativeWidget->setQmlPath(package.filePath("mainscript"));
-
     WeatherPopupApplet::init();
 }
 
 WeatherApplet::~WeatherApplet()
 {
+}
+
+QGraphicsWidget *WeatherApplet::graphicsWidget()
+{
+    if (!m_declarativeWidget) {
+        m_declarativeWidget = new Plasma::DeclarativeWidget(this);
+
+        m_declarativeWidget->engine()->rootContext()->setContextProperty("weatherApplet", this);
+
+        Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+        Plasma::Package package(QString(), "org.kde.weather", structure);
+        m_declarativeWidget->setQmlPath(package.filePath("mainscript"));
+    }
+    return m_declarativeWidget;
 }
 
 void WeatherApplet::toolTipAboutToShow()
@@ -126,8 +131,6 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
             Plasma::ToolTipManager::self()->unregisterWidget(this);
             break;
         }
-    } else if (constraints & Plasma::SizeConstraint) {
-        update();
     }
 }
 
