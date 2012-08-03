@@ -34,6 +34,7 @@ class WeatherApplet : public WeatherPopupApplet
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY dataUpdated)
     Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY dataUpdated)
     Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY dataUpdated)
+    Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY dataUpdated)
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
@@ -43,13 +44,14 @@ public:
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
     QVariantList detailsModel() const { return m_detailsModel; }
+    QVariantList noticesModel() const { return m_noticesModel; }
 
 signals:
     void dataUpdated();
 
 public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
-    void invokeBrowser() const;
+    void invokeBrowser(const QString &url = QString()) const;
 
 protected Q_SLOTS:
     void configAccepted();
@@ -59,13 +61,13 @@ protected Q_SLOTS:
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
 
-
 private:
     bool isValidData(const QVariant &data) const;
     void resetPanelModel();
     void updatePanelModel(const Plasma::DataEngine::Data &data);
     void updateFiveDaysModel(const Plasma::DataEngine::Data &data);
     void updateDetailsModel(const Plasma::DataEngine::Data &data);
+    void updateNoticesModel(const Plasma::DataEngine::Data &data);
     QString convertTemperature(KUnitConversion::UnitPtr format, QString value,
                                int type, bool rounded = false, bool degreesOnly = false);
 
@@ -76,6 +78,7 @@ private:
     QVariantMap m_panelModel;
     QVariantList m_fiveDaysModel;
     QVariantList m_detailsModel;
+    QVariantList m_noticesModel;
 };
 
 K_EXPORT_PLASMA_APPLET(weather, WeatherApplet)

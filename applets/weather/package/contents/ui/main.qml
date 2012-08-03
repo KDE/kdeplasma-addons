@@ -50,7 +50,7 @@ Item {
             topMargin: 5
             horizontalCenter: parent.horizontalCenter
         }
-        width: 160
+        width: noticesView.visible ? 240 : 160
         height: 30
         visible: detailsView.model.length > 0
 
@@ -61,6 +61,11 @@ Item {
         PlasmaComponents.TabButton {
             text: i18n("Details")
             onClicked: root.state = "details";
+        }
+        PlasmaComponents.TabButton {
+            text: i18n("Notices")
+            visible: noticesView.visible
+            onClicked: root.state = "notices";
         }
     }
 
@@ -84,6 +89,16 @@ Item {
         }
         width: parent.width
         model: weatherApplet.detailsModel
+    }
+
+    NoticesView {
+        id: noticesView
+        anchors {
+            top: fiveDaysView.top
+            bottom: fiveDaysView.bottom
+        }
+        width: parent.width
+        model: weatherApplet.noticesModel
     }
 
     Text {
@@ -112,19 +127,26 @@ Item {
             name: "fiveDays"
             PropertyChanges { target: fiveDaysView; x: 0 }
             PropertyChanges { target: detailsView; x: root.width + 10 }
+            PropertyChanges { target: noticesView; x: 2*root.width + 10 }
         },
         State {
             name: "details"
             PropertyChanges { target: fiveDaysView; x: -root.width - 10 }
             PropertyChanges { target: detailsView; x: 0 }
+            PropertyChanges { target: noticesView; x: root.width + 10 }
+        },
+        State {
+            name: "notices"
+            PropertyChanges { target: fiveDaysView; x: -2*root.width - 10 }
+            PropertyChanges { target: detailsView; x: -root.width - 10 }
+            PropertyChanges { target: noticesView; x: 0 }
         }
     ]
 
     transitions: Transition {
-        from: "fiveDays"
-        to: "details"
-        reversible: true
+        to: "*"
         PropertyAnimation { target: fiveDaysView; property: "x"; easing.type: Easing.InQuad; duration: 250 }
         PropertyAnimation { target: detailsView; property: "x"; easing.type: Easing.InQuad; duration: 250 }
+        PropertyAnimation { target: noticesView; property: "x"; easing.type: Easing.InQuad; duration: 250 }
     }
 }

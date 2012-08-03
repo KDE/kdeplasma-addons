@@ -134,9 +134,12 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void WeatherApplet::invokeBrowser() const
+void WeatherApplet::invokeBrowser(const QString &url) const
 {
-    KToolInvocation::invokeBrowser(m_creditUrl);
+    if (url.isEmpty())
+        KToolInvocation::invokeBrowser(m_creditUrl);
+    else
+        KToolInvocation::invokeBrowser(url);
 }
 
 QString WeatherApplet::convertTemperature(KUnitConversion::UnitPtr format, QString value,
@@ -415,6 +418,29 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
     }
 }
 
+void WeatherApplet::updateNoticesModel(const Plasma::DataEngine::Data &data)
+{
+    m_noticesModel.clear();
+
+    QVariantList warnings;
+    for (int i = 0; i < data["Total Warnings Issued"].toInt(); i++) {
+        QVariantMap warning;
+        warning["description"] = data[QString("Warning Description %1").arg(i)];
+        warning["info"] = data[QString("Warning Info %1").arg(i)];
+        warnings << warning;
+    }
+    m_noticesModel << QVariant(warnings);
+
+    QVariantList watches;
+    for (int i = 0; i < data["Total Watches Issued"].toInt(); i++) {
+        QVariantMap watch;
+        watch["description"] = data[QString("Watch Description %1").arg(i)];
+        watch["info"] = data[QString("Watch Info %1").arg(i)];
+        watches << watch;
+    }
+    m_noticesModel << QVariant(watches);
+}
+
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     if (data.isEmpty()) {
@@ -424,6 +450,7 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     updatePanelModel(data);
     updateFiveDaysModel(data);
     updateDetailsModel(data);
+    updateNoticesModel(data);
     WeatherPopupApplet::dataUpdated(source, data);
 
     emit dataUpdated();
