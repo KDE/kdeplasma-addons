@@ -40,6 +40,7 @@ Item {
             left: parent.left
             right: parent.right
         }
+        height: parent.height * 0.21
         model: weatherApplet.panelModel
     }
 

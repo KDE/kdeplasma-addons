@@ -22,14 +22,13 @@ import org.kde.qtextracomponents 0.1 as QtExtraComponents
 PlasmaCore.FrameSvgItem {
     property variant model
 
-    height: 56 // XXX
     imagePath: "widgets/frame"
     prefix: "plain"
     visible: model.location.length > 0
 
     QtExtraComponents.QIconItem {
         icon: model.conditionIcon
-        height: parent.height // XXX
+        height: parent.height
         width: height
     }
 
@@ -40,7 +39,7 @@ PlasmaCore.FrameSvgItem {
             left: parent.left
             right: tempLabel.visible ? forecastTempsLabel.left : parent.right
             topMargin: 5
-            leftMargin: 76
+            leftMargin: parent.width * 0.21
         }
         font.bold: true
         text: model.location
@@ -52,9 +51,9 @@ PlasmaCore.FrameSvgItem {
     Text {
         id: conditionLabel
         anchors {
-            top: locationLabel.bottom
+            top: parent.top
             left: locationLabel.left
-            topMargin: 5
+            topMargin: parent.height * 0.6
         }
         text: model.conditions
     }

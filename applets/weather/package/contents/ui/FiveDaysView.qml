@@ -31,7 +31,7 @@ WeatherListView {
             model: rowData
 
             Loader {
-                height: rowIndex == 1 ? parent.height + 15 : parent.height
+                height: rowIndex == 1 ? parent.height + root.spacing : parent.height
                 width: parent.width / rowRepeater.count
                 sourceComponent: rowIndex == 1 ? iconDelegate : textDelegate
                 onLoaded: {
@@ -76,7 +76,7 @@ WeatherListView {
 
         QtExtraComponents.QIconItem {
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: -8
+            anchors.verticalCenterOffset: -root.spacing/2
         }
     }
 }
