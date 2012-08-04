@@ -295,7 +295,7 @@ void LancelotApplet::init()
     );
     connect(
         this, SIGNAL(activate()),
-        this, SLOT(showLancelot())
+        this, SLOT(toggleLancelot())
     );
     KGlobal::locale()->insertCatalog("lancelot");
 
