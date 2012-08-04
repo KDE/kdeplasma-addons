@@ -40,6 +40,7 @@ Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
 Comment[bs]=Pogon podataka za sticanje pročiščenih podataka o KDE SVN upisima
 Comment[ca]=Un motor de dades de captura de dades consolidades quant als «commits» en el SVN del KDE
 Comment[ca@valencia]=Un motor de dades de captura de dades consolidades quant als «commits» en el SVN del KDE
+Comment[cs]=Datový nástroj pro získávání sloučených údajů o SVN příspěvcích v KDE
 Comment[da]=En datamotor til at hente samlede data om KDE SVN-commits
 Comment[de]=Ein Datenmodul zum Holen von zusammengefassten Daten über KDE-SVN-Commits.
 Comment[el]=Μία μηχανή δεδομένων για την απόκτηση συγκεντρωτικών στοιχείων για τις καταχωρήσεις SVN του KDE
