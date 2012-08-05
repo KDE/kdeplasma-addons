@@ -26,10 +26,19 @@ Item {
 
     property Mpris2 source
     property int contentLeftOffset: Math.max(byLabel.width, onLabel.width) + 3
+    property bool showArtist: true
+    property bool showAlbum: true
 
     implicitHeight: childrenRect.height
     implicitWidth: contentLeftOffset + Math.max(Math.max(titleLabel.implicitWidth, artistLabel.implicitWidth), albumLabel.implicitWidth)
     height: childrenRect.height
+
+    Component.onCompleted: {
+        plasmoid.addEventListener('ConfigChanged', function(){
+            showArtist = plasmoid.readConfig("displayArtist");
+            showAlbum = plasmoid.readConfig("displayAlbum");
+        });
+    }
 
     Label {
         id: titleLabel
@@ -49,7 +58,7 @@ Item {
             leftMargin: contentLeftOffset
             right: parent.right
         }
-        visible: text != ''
+        visible: showArtist && text != ''
         text: source.artist
     }
     Label {
@@ -60,7 +69,7 @@ Item {
             leftMargin: contentLeftOffset
             right: parent.right
         }
-        visible: text != ''
+        visible: showAlbum && text != ''
         text: source.album
     }
     Label {
@@ -70,7 +79,7 @@ Item {
             rightMargin: 3
             baseline: artistLabel.baseline
         }
-        visible: artistLabel.text != ''
+        visible: artistLabel.visible
         text: i18nc("What artist is this track by", "by")
         font.weight: Font.Light
     }
@@ -81,7 +90,7 @@ Item {
             rightMargin: 3
             baseline: albumLabel.baseline
         }
-        visible: albumLabel.text != ''
+        visible: albumLabel.visible
         text: i18nc("What album is this track on", "on")
         font.weight: Font.Light
     }

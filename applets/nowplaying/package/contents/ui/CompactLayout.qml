@@ -27,6 +27,12 @@ Item {
     property int minimumWidth: minimumHeight + 120
     property int minimumHeight: metadataLine.implicitHeight + progressBar.height + metadataLine.anchors.bottomMargin
 
+    Component.onCompleted: {
+        plasmoid.addEventListener('ConfigChanged', function(){
+            albumArt.visible = plasmoid.readConfig("displayCover");
+        });
+    }
+
     Mpris2 {
         id: source
     }
@@ -44,7 +50,7 @@ Item {
                 left: parent.left
                 bottom: parent.bottom
             }
-            width: height
+            width: (visible ? height : 0)
         }
 
         MetadataLine {
@@ -75,7 +81,7 @@ Item {
 
         PlayPauseButton {
             id: ppButton
-            visible: source.canControl && mouseArea.containsMouse
+            visible: albumArt.visible && source.canControl && mouseArea.containsMouse
             width: height
             anchors {
                 // using anchors.fill causes spurious

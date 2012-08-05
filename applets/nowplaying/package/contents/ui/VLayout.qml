@@ -31,6 +31,12 @@ Item {
         id: source
     }
 
+    Component.onCompleted: {
+        plasmoid.addEventListener('ConfigChanged', function(){
+            albumArt.visible = plasmoid.readConfig("displayCover");
+        });
+    }
+
     MouseArea {
         id: mouseArea
         hoverEnabled: true
@@ -44,7 +50,7 @@ Item {
 
         PlayPauseButton {
             id: ppButton
-            visible: source.canControl && mouseArea.containsMouse
+            visible: (!albumArt.visible) || (source.canControl && mouseArea.containsMouse)
             anchors {
                 verticalCenter: parent.verticalCenter
                 horizontalCenter: parent.horizontalCenter

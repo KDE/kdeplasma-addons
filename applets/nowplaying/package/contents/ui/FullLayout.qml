@@ -27,6 +27,12 @@ Item {
     property int minimumWidth: albumArt.width + controls.anchors.leftMargin + controls.implicitWidth + 5
     property int minimumHeight: metadataPane.implicitHeight + progressBar.height + metadataPane.anchors.bottomMargin
 
+    Component.onCompleted: {
+        plasmoid.addEventListener('ConfigChanged', function(){
+            albumArt.visible = plasmoid.readConfig("displayCover");
+        });
+    }
+
     Mpris2 {
         id: source
     }
@@ -45,7 +51,7 @@ Item {
                 bottom: progressBar.top
                 bottomMargin: 5
             }
-            width: height
+            width: (visible ? height : 0)
         }
 
         MetadataPanel {

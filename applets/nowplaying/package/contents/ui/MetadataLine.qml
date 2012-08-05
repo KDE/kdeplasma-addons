@@ -26,9 +26,18 @@ Item {
 
     property alias interval: timer.interval
     property Mpris2 source
+    property bool showArtist: true
+    property bool showAlbum: true
 
     implicitWidth: metadataLine.implicitWidth
     implicitHeight: metadataLine.implicitHeight
+
+    Component.onCompleted: {
+        plasmoid.addEventListener('ConfigChanged', function(){
+            showArtist = plasmoid.readConfig("displayArtist");
+            showAlbum = plasmoid.readConfig("displayAlbum");
+        });
+    }
 
     onSourceChanged: {
         if (source) {
@@ -61,14 +70,14 @@ Item {
         text: source.title
         function updateText() {
             if (metadataLine.step == 1) {
-                if (source.artist != '') {
+                if (showArtist && source.artist != '') {
                     text = i18nc("What artist is this track by", "by %1", source.artist);
                 } else {
                     metadataLine.step = 2;
                 }
             }
             if (metadataLine.step == 2) {
-                if (source.album != '') {
+                if (showAlbum && source.album != '') {
                     text = i18nc("What album is this track on", "on %1", source.album);
                 } else {
                     metadataLine.step = 0;
