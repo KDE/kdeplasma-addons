@@ -18,50 +18,25 @@
  */
 
 #include "request.h"
+#include "request_p.h"
 
 #include <QTime>
 #include <QMapIterator>
 #include <QDateTime>
 #include <QCryptographicHash>
 #include <QCoreApplication>
+#include <QStringList>
 
 #include <QtDebug>
-#include <KIO/NetAccess>
 #include <QTimer>
 
-
-class RTM::RequestPrivate
-{
-public:
-    RequestPrivate()
-    : m_readOnly(true),
-      currentJob(0)
-    {
-    }
-	
-    QMap<QString,QString> arguments;
-    QString m_response;
-
-    QString baseUrl;
-    int retries;
-    static const int MAX_RETRIES;
-    bool m_readOnly;
-	
-    RTM::State m_state;
-    QString apiKey;
-    QString sharedSecret;
-    KIO::TransferJob* currentJob;
-};
-
-const int RTM::RequestPrivate::MAX_RETRIES = 10;
-
 RTM::Request::Request()
-: d(new RTM::RequestPrivate())
+: d(new RTM::RequestPrivate(this))
 {
 }
 
 RTM::Request::Request(const QString &method, const QString &apiKey, const QString &sharedSecret, const QString&baseUrl)
-: d(new RTM::RequestPrivate())
+: d(new RTM::RequestPrivate(this))
 {
   if (!method.isEmpty())
     d->arguments.insert("method", method);
@@ -126,48 +101,16 @@ QString RTM::Request::method() const {
   return d->arguments.value("method");
 }
 
-void RTM::Request::dataIncrement(KIO::Job* job, QByteArray data) {
-  Q_UNUSED(job)
-  //qDebug() << data;
-  buffer().append(data);
-}
-
-void RTM::Request::finished(KJob* job) {
-  if (job->error()) {
-    qDebug() << "Network Job Error: " << job->errorString();
-    if (d->retries >= RTM::RequestPrivate::MAX_RETRIES) {
-      qDebug() << "ABORT: Maximum Retries reached for " << d->currentJob->url();
-      d->currentJob = 0;
-      return;
-    }
-    switch (job->error()) {
-      case KIO::ERR_CONNECTION_BROKEN: // If the connection is broken, resend the request
-        qDebug() << "Connection Error, retrying connection";
-        disconnect(d->currentJob);
-        d->retries++;
-        d->currentJob = 0;
-        sendRequest(); 
-        return;
-      case KIO::ERR_UNKNOWN_HOST: // Guess that we're offline
-        qDebug() << "Unknown host, we're probably offline";
-        emit offlineError();
-        this->deleteLater();
-        return;
-      //TODO: Handle other error cases.
-    }
-  }
-  emit (replyReceived(this));
-}
-
-
 void RTM::Request::sign() {
   QString unistring = d->sharedSecret;
-  QMapIterator<QString, QString> i(d->arguments);
-  while (i.hasNext()) {
-      i.next();
-      unistring.append(i.key());
-      unistring.append(i.value());
- }
+  QStringList keys = d->arguments.keys();
+  qSort(keys);
+  
+  Q_FOREACH (const QString key, keys) {
+      unistring.append(key);
+      unistring.append(d->arguments.value(key));
+  }
+  qDebug() << "unified string is " << unistring;
 
   QString hash = QCryptographicHash::hash(unistring.toUtf8(), QCryptographicHash::Md5).toHex();
   d->arguments.insert("api_sig", hash);
@@ -211,3 +154,6 @@ QString RTM::Request::sharedSecret() const
 
 RTM::Request::~Request() {
 }
+
+#include "request.moc"
+

@@ -30,7 +30,7 @@ namespace RTM {
 
 class RequestPrivate;
   
-class Request : public QBuffer
+class RTM_EXPORT Request : public QBuffer
 {
 Q_OBJECT
   public:
@@ -57,10 +57,6 @@ Q_OBJECT
 
   public slots:
     void sendRequest();
-    
-  private slots:
-    void dataIncrement(KIO::Job* job, QByteArray data);
-    void finished(KJob *job);
 
   protected:
     Request();
@@ -70,7 +66,11 @@ Q_OBJECT
     QString sharedSecret() const;
 
   private:
+    friend class RequestPrivate;
     RequestPrivate * const d;
+    
+    Q_PRIVATE_SLOT(d, void dataIncrement(KIO::Job*, QByteArray data));
+    Q_PRIVATE_SLOT(d, void finished(KJob*));
 };
 
 } // namespace RTM
