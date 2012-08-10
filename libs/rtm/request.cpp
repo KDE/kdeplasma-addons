@@ -90,9 +90,7 @@ void RTM::Request::sendRequest()
   queueSize = 0;
   QString url = requestUrl();
   qDebug() << "Request ready. Url is: " << url;
-  d->currentJob = KIO::get(KUrl(url.toUtf8()), KIO::NoReload, KIO::HideProgressInfo);
-  connect(d->currentJob, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(dataIncrement(KIO::Job*,QByteArray)));
-  connect(d->currentJob, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
+  d->accessManager->get(QNetworkRequest(url));
 
   lastRequest = QDateTime::currentDateTime();
 }
@@ -138,7 +136,7 @@ QString RTM::Request::requestUrl()
     //qDebug() << "Creating url";
     QString url = d->baseUrl;
     foreach(const QString &key, d->arguments.keys()) 
-      url.append('&' + key + '=' + d->arguments.value(key).toUtf8().toPercentEncoding());
+      url.append('&' + key + '=' + d->arguments.value(key).toUtf8());
     return url;
 }
 

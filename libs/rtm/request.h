@@ -22,9 +22,9 @@
 
 #include <QBuffer>
 
-#include <KIO/Job>
-
 #include "rtm.h"
+
+class QNetworkReply;
 
 namespace RTM {
 
@@ -69,8 +69,7 @@ Q_OBJECT
     friend class RequestPrivate;
     RequestPrivate * const d;
     
-    Q_PRIVATE_SLOT(d, void dataIncrement(KIO::Job*, QByteArray data));
-    Q_PRIVATE_SLOT(d, void finished(KJob*));
+    Q_PRIVATE_SLOT(d, void finished(QNetworkReply*));
 };
 
 } // namespace RTM

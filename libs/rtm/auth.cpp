@@ -26,9 +26,7 @@
 #include <QCoreApplication>
 
 #include <QtDebug>
-#include <KIO/NetAccess>
 #include <QVBoxLayout>
-#include <KLocale>
 
 #include "request.h"
 

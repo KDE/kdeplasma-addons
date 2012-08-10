@@ -2,12 +2,11 @@
 #define RTM_REQUEST_P_H
 
 #include "request.h"
- 
+
+#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QMap>
 #include <QtDebug>
-
-#include <KIO/NetAccess>
 
 class RTM::RequestPrivate
 {
@@ -15,33 +14,29 @@ public:
     RequestPrivate(Request *parent)
     : q(parent),
       m_readOnly(true),
-      currentJob(0)
+      accessManager(new QNetworkAccessManager(q))
     {
+        QObject::connect(accessManager, SIGNAL(finished(QNetworkReply*)),
+                         q, SLOT(finished(QNetworkReply*)));
     }
 
-    void dataIncrement(KIO::Job* job, QByteArray data)
+    void finished(QNetworkReply* reply)
     {
-      Q_UNUSED(job)
-      q->buffer().append(data);
-    }
-    
-    void finished(KJob* job)
-    {
-      if (job->error()) {
-        qDebug() << "Network Job Error: " << job->errorString();
+      if (reply->error()) {
+        qDebug() << "Network Error: " << reply->error();
         if (retries >= RTM::RequestPrivate::MAX_RETRIES) {
-          qDebug() << "ABORT: Maximum Retries reached for " << currentJob->url();
-          currentJob = 0;
+          qDebug() << "ABORT: Maximum Retries reached for " << reply->url();
           return;
         }
-        switch (job->error()) {
-          case KIO::ERR_CONNECTION_BROKEN: // If the connection is broken, resend the request
+        switch (reply->error()) {
+          case QNetworkReply::TimeoutError:
+          default:
+          // If the connection is broken, resend the request
             qDebug() << "Connection Error, retrying connection";
             retries++;
-            currentJob = 0;
             q->sendRequest(); 
             return;
-          case KIO::ERR_UNKNOWN_HOST: // Guess that we're offline
+          case QNetworkReply::HostNotFoundError: // Guess that we're offline
             qDebug() << "Unknown host, we're probably offline";
             emit q->offlineError();
             q->deleteLater();
@@ -49,6 +44,7 @@ public:
           //TODO: Handle other error cases.
         }
       }
+      q->buffer().append(reply->readAll());
       emit q->replyReceived(q);
     }
 
@@ -65,7 +61,6 @@ public:
     QString apiKey;
     QString sharedSecret;
     QNetworkAccessManager *accessManager;
-    KIO::TransferJob *currentJob;
 };
 
 const int RTM::RequestPrivate::MAX_RETRIES = 10;
