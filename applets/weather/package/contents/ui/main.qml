@@ -22,8 +22,8 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Item {
     id: root
 
-    property int minimumWidth: 364
-    property int minimumHeight: 265
+    property int minimumWidth: 373
+    property int minimumHeight: 272
 
     anchors.fill: parent
     clip: true
@@ -39,6 +39,7 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
+            margins: 5
         }
         height: parent.height * 0.21
         model: weatherApplet.panelModel
@@ -75,10 +76,10 @@ Item {
         anchors {
             top: tabBar.visible ? tabBar.bottom : tabBar.top
             bottom: courtesyLabel.top
-            topMargin: 14
-            bottomMargin: 14
+            topMargin: 12
+            bottomMargin: 15
         }
-        width: parent.width
+        width: panel.width
         model: weatherApplet.fiveDaysModel
     }
 
@@ -88,7 +89,7 @@ Item {
             top: fiveDaysView.top
             bottom: fiveDaysView.bottom
         }
-        width: parent.width
+        width: panel.width
         model: weatherApplet.detailsModel
     }
 
@@ -98,7 +99,7 @@ Item {
             top: fiveDaysView.top
             bottom: fiveDaysView.bottom
         }
-        width: parent.width
+        width: panel.width
         model: weatherApplet.noticesModel
     }
 
@@ -107,6 +108,7 @@ Item {
         anchors {
             bottom: parent.bottom
             right: parent.right
+            bottomMargin: 7
         }
         font {
             pointSize: theme.smallestFont.pointSize
@@ -126,21 +128,21 @@ Item {
     states: [
         State {
             name: "fiveDays"
-            PropertyChanges { target: fiveDaysView; x: 0 }
+            PropertyChanges { target: fiveDaysView; x: panel.anchors.margins }
             PropertyChanges { target: detailsView; x: root.width + 10 }
             PropertyChanges { target: noticesView; x: 2*root.width + 10 }
         },
         State {
             name: "details"
             PropertyChanges { target: fiveDaysView; x: -root.width - 10 }
-            PropertyChanges { target: detailsView; x: 0 }
+            PropertyChanges { target: detailsView; x: panel.anchors.margins }
             PropertyChanges { target: noticesView; x: root.width + 10 }
         },
         State {
             name: "notices"
             PropertyChanges { target: fiveDaysView; x: -2*root.width - 10 }
             PropertyChanges { target: detailsView; x: -root.width - 10 }
-            PropertyChanges { target: noticesView; x: 0 }
+            PropertyChanges { target: noticesView; x: panel.anchors.margins }
         }
     ]
 
