@@ -16,6 +16,7 @@
  */
 
 import QtQuick 1.1
+import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1 as QtExtraComponents
 import "Utils.js" as Utils
 
@@ -35,10 +36,13 @@ WeatherListView {
                 width: parent.width / rowRepeater.count
                 sourceComponent: rowIndex == 1 ? iconDelegate : textDelegate
                 onLoaded: {
-                    if (rowIndex == 1)
-                        item.icon = modelData;
-                    else
+                    if (rowIndex == 1) {
+                        var values = modelData.split("|");
+                        item.icon = values[0];
+                        item.toolTip = values[1];
+                    } else {
                         item.text = modelData;
+                    }
 
                     if (rowIndex == 0)
                         item.font.bold = true;
@@ -75,8 +79,14 @@ WeatherListView {
         id: iconDelegate
 
         QtExtraComponents.QIconItem {
+            property alias toolTip: iconToolTip.mainText
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -root.spacing/2
+
+            PlasmaCore.ToolTip {
+                id: iconToolTip
+                target: parent
+            }
         }
     }
 }

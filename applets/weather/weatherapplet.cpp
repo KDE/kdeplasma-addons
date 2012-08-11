@@ -275,11 +275,21 @@ void WeatherApplet::updateFiveDaysModel(const Plasma::DataEngine::Data &data)
 
         // If we see N/U (Not Used) we skip the item
         if (fiveDayTokens[1] != "N/U") {
+            QString iconAndToolTip;
             if (isValidIconName(fiveDayTokens[1])) {
-                conditionItems << fiveDayTokens[1];
+                iconAndToolTip = fiveDayTokens[1];
             } else {
-                conditionItems << "weather-not-available";
+                iconAndToolTip = "weather-not-available";
             }
+            iconAndToolTip += "|";
+
+            if (fiveDayTokens[5] != "N/U" && fiveDayTokens[5] != "N/A") {
+                iconAndToolTip += i18nc("certain weather condition, probability percentage",
+                                        "%1 (%2%)", fiveDayTokens[2], fiveDayTokens[5]);
+            } else {
+                iconAndToolTip += fiveDayTokens[2];
+            }
+            conditionItems << iconAndToolTip;
         }
 
         if (fiveDayTokens[3] != "N/U") {
