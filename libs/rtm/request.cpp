@@ -153,5 +153,5 @@ QString RTM::Request::sharedSecret() const
 RTM::Request::~Request() {
 }
 
-#include "request.moc"
+#include "moc_request.cpp"
 

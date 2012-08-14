@@ -85,4 +85,4 @@ void List::setFilter(const QString& filter) {
 }
 
 }
-#include "list.moc"
+#include "moc_list.cpp"

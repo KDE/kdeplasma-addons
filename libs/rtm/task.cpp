@@ -296,4 +296,4 @@ RTM::Task* RTM::Task::uninitializedTask(RTM::Session* session) {
   return new Task(session);
 }
 
-#include "task.moc"
+#include "moc_task.cpp"

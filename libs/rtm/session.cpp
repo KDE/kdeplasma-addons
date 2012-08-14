@@ -270,4 +270,4 @@ void RTM::Session::addTask(const QString& task, RTM::ListId listId)
   newTask->sendRequest();
 }
 
-#include "session.moc"
+#include "moc_session.cpp"
