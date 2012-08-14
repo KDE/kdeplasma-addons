@@ -188,19 +188,19 @@ void FileWatcher::newData()
     }
 
     QStringList tmpList = data.split('\n', QString::SkipEmptyParts);
-
-    if (m_showOnlyMatches){
-            for (int i = tmpList.size() - 1; i >= 0; --i){
-                for (int j = 0; j < m_filters.size(); ++j){
-                    if (tmpList.at(i).contains(QRegExp(m_filters.at(j), Qt::CaseSensitive, m_useRegularExpressions ? QRegExp::RegExp : QRegExp::FixedString))){
-                        list.insert(0, tmpList.at(i));
-                    }
+    //Add lines from the back into the file
+    for (int i = tmpList.size() - 1; i >= 0; --i){
+        if (m_showOnlyMatches){
+            for (int j = 0; j < m_filters.size(); ++j)
+                if (tmpList.at(i).contains(QRegExp(m_filters.at(j), Qt::CaseSensitive, m_useRegularExpressions ? QRegExp::RegExp : QRegExp::FixedString))){
+                    list.insert(0, tmpList.at(i));
+                    break;
                 }
+        }
+        else
+            list.insert(0, tmpList.at(i));
 
-                if (list.size() == textDocument->maximumBlockCount()) break;
-             }
-    } else {
-        list = tmpList;
+        if (list.size() == textDocument->maximumBlockCount()) break;
     }
   }
 
