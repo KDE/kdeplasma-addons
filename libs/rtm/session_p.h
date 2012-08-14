@@ -38,12 +38,14 @@
 #include <QDomNode>
 #include <QDomElement>
 #include <QDomNodeList>
+#include <QtDebug>
+#include <QTimer>
 
+#ifndef QTONLY
 #include <KSystemTimeZones>
 #include <KTimeZone>
-#include <QtDebug>
 #include <Solid/Networking>
-#include <QTimer>
+#endif
 
 class RTM::SessionPrivate {
   SessionPrivate(Session *parent)
@@ -53,17 +55,20 @@ class RTM::SessionPrivate {
       tasksChanged(false),
       listsChanged(false)
   {
+#ifndef QTONLY
       QObject::connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)), q, SLOT(networkStatusChanged(Solid::Networking::Status)));
       if (Solid::Networking::status() == Solid::Networking::Unconnected) {
         online = false;
         qDebug() << "We are NOT Online :(";
       }
+#endif
   }
   ~SessionPrivate() {
     if (auth)
       auth->deleteLater();
   }
 
+#ifndef QTONLY
   void networkStatusChanged(Solid::Networking::Status status) {
     switch (status) {
     case Solid::Networking::Connected:
@@ -85,6 +90,7 @@ class RTM::SessionPrivate {
         break;
     }
   }
+#endif
   
   void offlineError() {
     online = false;
@@ -222,6 +228,7 @@ class RTM::SessionPrivate {
 
     reply->deleteLater();
   }
+  
   void settingsReply(RTM::Request* request) {
     QString reply = request->data(); // Get the full data of the reply, readAll() doesn't guarentee that.
     
@@ -235,8 +242,10 @@ class RTM::SessionPrivate {
     QString defaultlist = reply.remove(0, reply.indexOf("<defaultlist>"+13));
     defaultlist.truncate(defaultlist.indexOf("</defaultlist>"));
     
+#ifndef QTONLY
     this->timezone = KSystemTimeZones::zone(timezone);
     qDebug() << "Timezone Set To: " << timezone << " i.e. " << this->timezone.name();
+#endif
     
     request->deleteLater();
     emit q->settingsUpdated();
@@ -265,7 +274,9 @@ class RTM::SessionPrivate {
   QDateTime lastRefresh;
   bool online;
   RTM::Permissions permissions;
+#ifndef QTONLY
   KTimeZone timezone;
+#endif
 
   RTM::Timeline timeline;
 

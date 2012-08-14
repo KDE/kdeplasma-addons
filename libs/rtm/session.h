@@ -26,7 +26,9 @@
 
 #include "rtm.h"
 
+#ifndef QTONLY
 #include <Solid/Networking>
+#endif
 
 /** @file
  * This file is part of librtm. It defines
@@ -119,7 +121,9 @@ Q_OBJECT
     Q_PRIVATE_SLOT(d, void listUpdate(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void smartListReply(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void settingsReply(RTM::Request* reply))
+#if !defined(Q_MOC_RUN) && !defined(QTONLY)
     Q_PRIVATE_SLOT(d, void networkStatusChanged(Solid::Networking::Status))
+#endif
     Q_PRIVATE_SLOT(d, void offlineError())
     Q_PRIVATE_SLOT(d, void retestOfflineStatus())
 };

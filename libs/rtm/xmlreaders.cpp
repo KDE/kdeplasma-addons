@@ -64,10 +64,14 @@ QDateTime RTM::TasksReader::parseDateTime(const QString& datetime)
 QDateTime RTM::TasksReader::localizedTime(const QDateTime& datetime)
 {
   QDateTime dt = QDateTime(datetime.date(), datetime.time(), Qt::LocalTime);
+#ifndef QTONLY
   KTimeZone utc = KSystemTimeZones::zone("UTC");
   KTimeZone rtm = session->d->timezone;
   //qDebug() << datetime << dt << utc.convert(rtm, dt);
   return utc.convert(rtm, dt);
+#else
+  return datetime;
+#endif
 }
 
 bool RTM::TasksReader::read() {
