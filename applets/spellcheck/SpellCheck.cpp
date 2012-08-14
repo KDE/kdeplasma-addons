@@ -33,6 +33,7 @@
 #include <KAction>
 #include <KLocale>
 #include <KIconLoader>
+#include <KWindowSystem>
 
 #include <Plasma/IconWidget>
 #include <Plasma/ToolTipManager>
@@ -50,7 +51,7 @@ SpellCheck::SpellCheck(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::ConstrainedSquare);
     setAcceptDrops(true);
 
-    const int iconSize = (IconSize(KIconLoader::Desktop) * 2);
+    const int iconSize = KIconLoader::SizeSmallMedium;
     resize(iconSize, iconSize);
 }
 
@@ -184,7 +185,8 @@ void SpellCheck::configChanged()
 void SpellCheck::toggleDialog(bool pasteText, bool preferSelection)
 {
     if (!m_spellingDialog) {
-        m_spellingDialog = new Plasma::Dialog(NULL, Qt::Tool);
+        m_spellingDialog = new Plasma::Dialog();
+        KWindowSystem::setState(m_spellingDialog->effectiveWinId(), NET::SkipTaskbar|NET::SkipPager);
         m_spellingDialog->setFocusPolicy(Qt::NoFocus);
         m_spellingDialog->setWindowTitle(i18n("Spell checking"));
         m_spellingDialog->setWindowIcon(KIcon("tools-check-spelling"));
