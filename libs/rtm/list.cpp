@@ -40,6 +40,7 @@ class ListPrivate {
   bool locked;
   bool archived;
   int position;
+  List::SortOrder sortOrder;
 };
 
 List::List(Session* session) 
@@ -68,6 +69,16 @@ QString List::filter() const {
   return d->filter; 
 }
 
+List::SortOrder List::sortOrder() const
+{
+    return d->sortOrder;
+}
+
+int List::position() const
+{
+    return d->position;
+}
+
 void List::setName(const QString& name) { 
   d->name = name; 
 }
@@ -84,5 +95,12 @@ void List::setFilter(const QString& filter) {
   d->filter = filter; 
 }
 
+void List::setSortOrder(List::SortOrder order) {
+    d->sortOrder = order;
+}
+
+void List::setPosition(int position) {
+    d->position = position;
+}
 }
 #include "moc_list.cpp"

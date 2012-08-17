@@ -177,6 +177,8 @@ void RTM::TasksReader::readList() {
   list->setId(attributes().value("id").toString().toULong());
   list->setName(attributes().value("name").toString());
   list->setSmart(attributes().value("smart").toString() == "1" ? true : false);
+  list->setSortOrder(RTM::List::SortOrder(attributes().value("sort_order").toString().toUInt()));
+  list->setPosition(attributes().value("position").toString().toULong());
   
   if (!session->d->changedLists.contains(list)) {
     session->d->changedLists.append(list);
