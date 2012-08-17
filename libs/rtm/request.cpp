@@ -108,7 +108,6 @@ void RTM::Request::sign() {
       unistring.append(key);
       unistring.append(d->arguments.value(key));
   }
-  qDebug() << "unified string is " << unistring;
 
   QString hash = QCryptographicHash::hash(unistring.toUtf8(), QCryptographicHash::Md5).toHex();
   d->arguments.insert("api_sig", hash);
