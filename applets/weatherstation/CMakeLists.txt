@@ -24,11 +24,11 @@ install(FILES plasma-applet-weatherstation.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES
-    lcd2.svg
+    lcd2.svgz
     lcd_panel.svgz
-    lcd_digits.svg
-    wind_arrows.svg
-    weather_icons.svg
+    lcd_digits.svgz
+    wind_arrows.svgz
+    weather_icons.svgz
     DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/weatherstation/)
 
 install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.lcdweather)
