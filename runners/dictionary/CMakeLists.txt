@@ -1,12 +1,3 @@
-project(dictionaryrunner)
-
-set(KDE_MIN_VERSION "4.3.60")
-find_package(KDE4 4.3.60 REQUIRED)
-include (KDE4Defaults)
-
-add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-include_directories(${KDE4_INCLUDES})
-
 set(dictionaryrunner_SRCS dictionaryrunner.cpp dictionarymatchengine.cpp)
 set(kcm_dictionaryrunner_SRCS dictionaryrunner_config.cpp)
 
