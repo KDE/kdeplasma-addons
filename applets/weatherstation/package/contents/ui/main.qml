@@ -59,7 +59,7 @@ Item {
 
     PlasmaCore.Svg {
         id: lcdSvg
-        imagePath: "weatherstation/lcd"
+        imagePath: "weatherstation/lcd2"
     }
 
     PlasmaCore.Svg {

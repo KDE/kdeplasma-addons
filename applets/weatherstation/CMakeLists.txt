@@ -23,7 +23,7 @@ install(FILES plasma-applet-weatherstation.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES
-    lcd.svg
+    lcd2.svg
     lcd_panel.svgz
     lcd_digits.svg
     wind_arrows.svg
