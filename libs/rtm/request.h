@@ -20,34 +20,35 @@
 #ifndef RTM_REQUEST_H
 #define RTM_REQUEST_H
 
-#include <QString>
-#include <QObject>
-#include <QMap>
 #include <QBuffer>
-
-#include <KIO/TransferJob>
-#include <KIO/Job>
 
 #include "rtm.h"
 
+class QNetworkReply;
+
 namespace RTM {
 
+class RequestPrivate;
+  
 class RTM_EXPORT Request : public QBuffer
 {
 Q_OBJECT
   public:
-    Request(const QString &method, const QString &apiKey, const QString &sharedSecret);
+    Request(const QString &method, 
+            const QString &apiKey, 
+            const QString &sharedSecret, 
+            const QString &baseUrl = RTM::baseMethodUrl);
     ~Request();
     
     void addArgument(const QString &name, const QString &value);
 
-    QString response() const { return m_response; }
-    RTM::State state() const { return m_state; }
+    QString response() const;
+    RTM::State state() const;
 
-    void setReadOnly(bool readOnly) { m_readOnly = readOnly; }
-    bool readOnly() const { return m_readOnly; }
+    void setReadOnly(bool readOnly);
+    bool readOnly() const;
 
-    virtual QString requestUrl(); // Conveniance
+    virtual QString requestUrl(); // Convenience
     QString method() const;
 
   signals:
@@ -56,26 +57,19 @@ Q_OBJECT
 
   public slots:
     void sendRequest();
-    
-  private slots:
-    void dataIncrement(KIO::Job* job, QByteArray data);
-    void finished(KJob *job);
 
   protected:
-    Request() {}
+    Request();
     void sign();
     void unsign();
+    QString apiKey() const;
+    QString sharedSecret() const;
 
-    QMap<QString,QString> arguments;
-    QString m_response;
-    int retries;
-    static const int MAX_RETRIES;
-    bool m_readOnly;
-
-    RTM::State m_state;
-    QString sharedSecret;
-    KIO::TransferJob* currentJob;
-
+  private:
+    friend class RequestPrivate;
+    RequestPrivate * const d;
+    
+    Q_PRIVATE_SLOT(d, void finished(QNetworkReply*));
 };
 
 } // namespace RTM

@@ -22,6 +22,7 @@
 
 #include <KDebug>
 #include <rtm/session.h>
+#include <rtm/task.h>
 
 TaskService::TaskService(RTM::Session* session, RTM::Task* task, TaskSource* parent)
   : Plasma::Service(parent)

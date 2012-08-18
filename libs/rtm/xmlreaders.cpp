@@ -29,7 +29,7 @@
 #include "task_p.h"
 
 #include <QCoreApplication>
-#include <KDebug>
+#include <QtDebug>
 #include <QNetworkReply>
 
 
@@ -64,10 +64,14 @@ QDateTime RTM::TasksReader::parseDateTime(const QString& datetime)
 QDateTime RTM::TasksReader::localizedTime(const QDateTime& datetime)
 {
   QDateTime dt = QDateTime(datetime.date(), datetime.time(), Qt::LocalTime);
+#ifndef QTONLY
   KTimeZone utc = KSystemTimeZones::zone("UTC");
   KTimeZone rtm = session->d->timezone;
-  //kDebug() << datetime << dt << utc.convert(rtm, dt);
+  //qDebug() << datetime << dt << utc.convert(rtm, dt);
   return utc.convert(rtm, dt);
+#else
+  return datetime;
+#endif
 }
 
 bool RTM::TasksReader::read() {
@@ -111,11 +115,11 @@ bool RTM::TasksReader::readResponse() {
         readUnknownElement();
     }
   }
-  kDebug() << "Reached the end of readResponse() where we shouldn't have" << name().toString() << text().toString();
-  kDebug() << "Attributes:";
+  qDebug() << "Reached the end of readResponse() where we shouldn't have" << name().toString() << text().toString();
+  qDebug() << "Attributes:";
   
   for(int i=0; i < attributes().count(); i++)
-    { kDebug() << attributes().at(i).name().toString() << attributes().at(i).value().toString(); }
+    { qDebug() << attributes().at(i).name().toString() << attributes().at(i).value().toString(); }
   return false;
 }
 
@@ -130,18 +134,18 @@ void RTM::TasksReader::readTransaction() {
   else if (splitMethod.at(splitMethod.count() - 2) == "lists")
     readListsHeader();
   else {
-    kDebug() << "Unknown Method: " << splitMethod.join(".");
+    qDebug() << "Unknown Method: " << splitMethod.join(".");
     readUnknownElement();
   }
 }
 
 
 void RTM::TasksReader::readUnknownElement() {
-  kDebug() << "Unknown Element: " << tokenString() << name().toString() << text().toString();
-  kDebug() << "Attributes:";
+  qDebug() << "Unknown Element: " << tokenString() << name().toString() << text().toString();
+  qDebug() << "Attributes:";
   
   for(int i=0; i < attributes().count(); i++)
-    { kDebug() << attributes().at(i).name().toString() << attributes().at(i).value().toString(); }
+    { qDebug() << attributes().at(i).name().toString() << attributes().at(i).value().toString(); }
   
   while(!atEnd()) {
     readNext();
@@ -156,7 +160,7 @@ void RTM::TasksReader::readUnknownElement() {
 
 void RTM::TasksReader::readFilter(RTM::List* list) {
   list->setFilter(readElementText());
-  kDebug() << "Filter for list: " << list->name() << " is " << list->filter();
+  qDebug() << "Filter for list: " << list->name() << " is " << list->filter();
 //   while (!atEnd()) {
 //     readNext();
 //     if (isEndElement())
@@ -173,6 +177,8 @@ void RTM::TasksReader::readList() {
   list->setId(attributes().value("id").toString().toULong());
   list->setName(attributes().value("name").toString());
   list->setSmart(attributes().value("smart").toString() == "1" ? true : false);
+  list->setSortOrder(RTM::List::SortOrder(attributes().value("sort_order").toString().toUInt()));
+  list->setPosition(attributes().value("position").toString().toULong());
   
   if (!session->d->changedLists.contains(list)) {
     session->d->changedLists.append(list);
@@ -211,7 +217,7 @@ void RTM::TasksReader::readListsHeader() {
 
 
 void RTM::TasksReader::readNotes(TempProps* props) {
-  //kDebug() << "Notes not supported yet";
+  //qDebug() << "Notes not supported yet";
   if (isEndElement())
     return;
 
@@ -234,7 +240,7 @@ void RTM::TasksReader::readNotes(TempProps* props) {
 
 void RTM::TasksReader::readParticipants(TempProps* props) {
   Q_UNUSED(props);
-  //kDebug() << "Participants not supported yet";
+  //qDebug() << "Participants not supported yet";
   if (isEndElement())
     return;
 
@@ -312,7 +318,7 @@ void RTM::TasksReader::readTask(TempProps *props) {
   // TODO:: Grab Postponed
   // TODO: Parse rest of fields
 
-  //kDebug() << "Adding Task: " << task->id() << " to list " << list->id() << "(" << list << ")";
+  //qDebug() << "Adding Task: " << task->id() << " to list " << list->id() << "(" << list << ")";
   if (!task->isDeleted())
     list->tasks.insert(task->id(), task);
   else
@@ -325,7 +331,7 @@ void RTM::TasksReader::readTask(TempProps *props) {
     if (isEndElement())
       break;
     if (isStartElement()) 
-      { kDebug() << "readTask().readNext(): " << name().toString(); }
+      { qDebug() << "readTask().readNext(): " << name().toString(); }
     }
 }
 
@@ -343,7 +349,7 @@ void RTM::TasksReader::readTaskSeries(RTM::ListId listId) {
       break;
     }
     if (isEndElement()) {
-      kDebug() << "Error in readTaskSeries() with end element: " << name().toString();
+      qDebug() << "Error in readTaskSeries() with end element: " << name().toString();
       break;
     }
     

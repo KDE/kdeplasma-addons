@@ -38,12 +38,14 @@
 #include <QDomNode>
 #include <QDomElement>
 #include <QDomNodeList>
+#include <QtDebug>
+#include <QTimer>
 
+#ifndef QTONLY
 #include <KSystemTimeZones>
 #include <KTimeZone>
-#include <KDebug>
 #include <Solid/Networking>
-#include <QTimer>
+#endif
 
 class RTM::SessionPrivate {
   SessionPrivate(Session *parent)
@@ -53,17 +55,20 @@ class RTM::SessionPrivate {
       tasksChanged(false),
       listsChanged(false)
   {
+#ifndef QTONLY
       QObject::connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)), q, SLOT(networkStatusChanged(Solid::Networking::Status)));
       if (Solid::Networking::status() == Solid::Networking::Unconnected) {
         online = false;
-        kDebug() << "We are NOT Online :(";
+        qDebug() << "We are NOT Online :(";
       }
+#endif
   }
   ~SessionPrivate() {
     if (auth)
       auth->deleteLater();
   }
 
+#ifndef QTONLY
   void networkStatusChanged(Solid::Networking::Status status) {
     switch (status) {
     case Solid::Networking::Connected:
@@ -85,16 +90,17 @@ class RTM::SessionPrivate {
         break;
     }
   }
+#endif
   
   void offlineError() {
     online = false;
-    kDebug() << "retesting offline status in 60 seconds";
+    qDebug() << "retesting offline status in 60 seconds";
     QTimer::singleShot(60*1000, q, SLOT(retestOfflineStatus()));
   }
   
   void retestOfflineStatus() {
     online = true;
-    kDebug() << "retesting offline status";
+    qDebug() << "retesting offline status";
     q->checkToken();
   }
   
@@ -107,7 +113,7 @@ class RTM::SessionPrivate {
     if (!online)
       return;
 
-    kDebug() << "Populating Smart List: " << list->name();
+    qDebug() << "Populating Smart List: " << list->name();
     // We do this next bit manually so it doesn't get auto-connected to taskUpdate()
     RTM::Request *smartListRequest = new RTM::Request("rtm.tasks.getList", q->apiKey(), q->sharedSecret());
     smartListRequest->addArgument("auth_token", q->token());
@@ -207,7 +213,7 @@ class RTM::SessionPrivate {
       if (part.contains("list_id"))
         id = part.split("=").last().toLongLong();
       
-    kDebug() << id;
+    qDebug() << id;
     TasksReader reader(reply, q);
     reader.read();
     RTM::List* list = lists.value(id);
@@ -222,6 +228,7 @@ class RTM::SessionPrivate {
 
     reply->deleteLater();
   }
+  
   void settingsReply(RTM::Request* request) {
     QString reply = request->data(); // Get the full data of the reply, readAll() doesn't guarentee that.
     
@@ -235,8 +242,10 @@ class RTM::SessionPrivate {
     QString defaultlist = reply.remove(0, reply.indexOf("<defaultlist>"+13));
     defaultlist.truncate(defaultlist.indexOf("</defaultlist>"));
     
+#ifndef QTONLY
     this->timezone = KSystemTimeZones::zone(timezone);
-    kDebug() << "Timezone Set To: " << timezone << " i.e. " << this->timezone.name();
+    qDebug() << "Timezone Set To: " << timezone << " i.e. " << this->timezone.name();
+#endif
     
     request->deleteLater();
     emit q->settingsUpdated();
@@ -265,7 +274,9 @@ class RTM::SessionPrivate {
   QDateTime lastRefresh;
   bool online;
   RTM::Permissions permissions;
+#ifndef QTONLY
   KTimeZone timezone;
+#endif
 
   RTM::Timeline timeline;
 

@@ -21,7 +21,13 @@
 #define RTM_EXPORT_H
 
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
+#ifdef QTONLY
+#define KDE_EXPORT
+#define KDE_IMPORT
+#define KDE_DEPRECATED
+#else
 #include <kdemacros.h>
+#endif
 
 #ifndef RTM_EXPORT
 # if defined(MAKE_RTM_LIB)

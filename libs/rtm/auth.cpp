@@ -24,82 +24,61 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QCoreApplication>
-#include <KWebView>
-#include <QPushButton>
 
-#include <KDebug>
-#include <KIO/NetAccess>
+#include <QtDebug>
 #include <QVBoxLayout>
-#include <KLocale>
+
+#include "request.h"
+
+class RTM::AuthPrivate {
+public:
+  AuthPrivate()
+    : frobRequest(0),
+      tokenRequest(0)
+  {
+  }
+  
+  ~AuthPrivate()
+  {
+    if (frobRequest)
+      frobRequest->deleteLater();
+    if (tokenRequest)
+      tokenRequest->deleteLater();
+  }
+  
+  QString frob;
+  Request *frobRequest;
+  Request *tokenRequest;
+
+};
 
 RTM::Auth::Auth(RTM::Permissions permissions, const QString& apiKey, const QString& sharedSecret)
-  : frobRequest(0),
-  tokenRequest(0)
+: Request(QString(), apiKey, sharedSecret, RTM::baseAuthUrl), 
+  d(new RTM::AuthPrivate()) 
 {
-  arguments.insert("perms", getTextPermissions(permissions));
-  this->apiKey = apiKey;
-  this->sharedSecret = sharedSecret;
-  arguments.insert("api_key", apiKey);
-  m_state = RTM::Mutable;
+  d->frobRequest = new RTM::Request("rtm.auth.getFrob", Request::apiKey(), Request::sharedSecret());
+  connect(d->frobRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(onFrobRequestFinished(RTM::Request*)));
+  d->frobRequest->sendRequest();
+
+  addArgument("perms", getTextPermissions(permissions));
 }
 
 RTM::Auth::~Auth() {
-  frobRequest->deleteLater();
-  tokenRequest->deleteLater();
 }
 
-
-void RTM::Auth::showLoginWebpage()
+void RTM::Auth::onFrobRequestFinished(RTM::Request *reply)
 {
-  if (frobRequest)
-    frobRequest->deleteLater();
-  
-  frobRequest = new RTM::Request("rtm.auth.getFrob", apiKey, sharedSecret);
-  connect(frobRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(showLoginWindowInternal(RTM::Request*)));
-  frobRequest->sendRequest();
-}
-
-
-void RTM::Auth::showLoginWindowInternal(RTM::Request *rawReply)
-{
-  QString reply = rawReply->data(); // Get the full data of the reply, readAll() doesn't guarentee that.
-  frob = reply.remove(0, reply.indexOf("<frob>")+6);
-  frob.truncate(frob.indexOf("</frob>"));
-  kDebug() << "Frob: " << frob;
-  arguments.insert("frob", frob);
-  
-  
-  QWidget *authWidget = new QWidget();
-  QVBoxLayout *layout = new QVBoxLayout(authWidget);
-  QPushButton *button = new QPushButton(authWidget);
-  KWebView *authPage  = new KWebView(authWidget);
-  
-  button->setText(i18n("Click here after you have logged in and authorized the applet"));
-
-  authPage->setUrl(getAuthUrl());
-  
-  authPage->resize(800, 600);
-  authPage->scroll(0, 200);
-  
-  layout->addWidget(authPage);
-  layout->addWidget(button);
-  
- 
-  connect(button, SIGNAL(clicked(bool)), authWidget, SLOT(hide()));
-  connect(button, SIGNAL(clicked(bool)), authWidget, SLOT(deleteLater()));
-  connect(button, SIGNAL(clicked(bool)), SLOT(pageClosed())); // Last because it takes more time.
-  
-  authWidget->show();
-}
-
-
-void RTM::Auth::pageClosed() {
-  continueAuthForToken();
+  QString data = reply->data();
+  d->frob = data.remove(0, data.indexOf("<frob>")+6);
+  d->frob.truncate(d->frob.indexOf("</frob>"));
+  addArgument("frob", d->frob);
+  emit authUrlReady(getAuthUrl());
 }
 
 QString RTM::Auth::getAuthUrl() {
-  if (frob.isEmpty())
-    kWarning() << "Warning, Frob is EMPTY";
+  // TODO: don't return until we get a frob?
+  while (d->frob.isEmpty())
+    QCoreApplication::processEvents();
   return requestUrl();
 }
 
@@ -121,53 +100,32 @@ QString RTM::Auth::getTextPermissions(RTM::Permissions permissions)
       textPermissions = "delete";
       break;
     default:
-      kDebug() << "ERROR: No Permissions";
+      qDebug() << "ERROR: No Permissions";
       break;
   }
   return textPermissions;
 }
 
-QString RTM::Auth::requestUrl() {
-  kDebug() << "RTM::Auth::getRequestUrl()" << m_state << RTM::Mutable;
-  switch(m_state) {
-    case RTM::Mutable:
-      sign();
-      break;
-    case RTM::Hashed:
-      unsign();
-      sign();
-      break;
-    case RTM::RequestSent:
-      break;
-    case RTM::RequestReceived:
-      break;
-   }
-    QString url = RTM::baseAuthUrl;
-    foreach(const QString &key, arguments.keys()) 
-      url.append('&' + key + '=' + arguments.value(key));
-    return url;
-}
-
 void RTM::Auth::continueAuthForToken()
 {
-  kDebug() << "Token Time";
-  if (tokenRequest)
-    tokenRequest->deleteLater();
+  qDebug() << "Token Time";
+  if (d->tokenRequest)
+    d->tokenRequest->deleteLater();
   
-  tokenRequest = new RTM::Request("rtm.auth.getToken", apiKey, sharedSecret);
-  tokenRequest->addArgument("frob", arguments.value("frob"));
-  connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(tokenResponse(RTM::Request*)));
-  tokenRequest->sendRequest();
+  d->tokenRequest = new RTM::Request("rtm.auth.getToken", Request::apiKey(), Request::sharedSecret());
+  d->tokenRequest->addArgument("frob", d->frob);
+  connect(d->tokenRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(tokenResponse(RTM::Request*)));
+  d->tokenRequest->sendRequest();
 }
 
 
 void RTM::Auth::tokenResponse(RTM::Request* response)
 {
   QString reply = response->data();
-  kDebug() << "Reply: " << reply;
+  qDebug() << "Reply: " << reply;
   QString token = reply.remove(0, reply.indexOf("<token>")+7);
   token.truncate(token.indexOf("</token>"));
-  kDebug() << "Token: " << token;
+  qDebug() << "Token: " << token;
   emit tokenReceived(token);
 }
 

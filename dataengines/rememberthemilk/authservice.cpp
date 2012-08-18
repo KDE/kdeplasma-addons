@@ -48,8 +48,12 @@ AuthJob::AuthJob(RTM::Session* session, const QString& operation, QMap< QString,
 
 void AuthJob::start() {
   //FIXME: error handling?
-  if (operationName() == "Login") {
-    m_session->showLoginWindow();
+  if (operationName() == "StartLogin") {
+    setResult(m_session->getAuthUrl());
+    this->deleteLater();
+  }
+  else if (operationName() == "Login") {
+    m_session->continueAuthForToken();
   } 
   else if (operationName() == "AuthWithToken") {
     m_session->setToken(parameters().value("token").toString());

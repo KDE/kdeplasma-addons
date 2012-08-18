@@ -40,6 +40,12 @@ class RTM_EXPORT List : public QObject{
   Q_PROPERTY(QString filter READ filter WRITE setFilter)
   
 public:
+  enum SortOrder {
+      ByPriority,
+      ByDueDate,
+      ByName
+  };
+
   static List* uninitializedList(RTM::Session* session) { return new List(session); }
   ~List();
   
@@ -47,11 +53,15 @@ public:
   RTM::ListId id() const;
   bool isSmart() const;
   QString filter() const;
+  SortOrder sortOrder() const;
+  int position() const;
   
   void setName(const QString &name);
   void setId(qulonglong id);
   void setSmart(bool smart);
   void setFilter(const QString &filter);
+  void setSortOrder(SortOrder order);
+  void setPosition(int position);
 
   QHash<RTM::TaskId, RTM::Task*> tasks;
 

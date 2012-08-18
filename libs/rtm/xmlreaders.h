@@ -20,12 +20,7 @@
 #ifndef XMLREADERS_H
 #define XMLREADERS_H
 
-namespace RTM {
-  class Request;
-  class Session;
-  class Task;
-}
-
+#include <QDateTime>
 #include <QXmlStreamReader>
 
 #include "rtm.h"
@@ -35,7 +30,11 @@ class TempProps;
 
 namespace RTM {
 
-class RTM_EXPORT TasksReader : public QXmlStreamReader
+class Request;
+class Session;
+class Task;
+
+class TasksReader : public QXmlStreamReader
 {
 public:
   TasksReader(RTM::Request *request, RTM::Session *session);

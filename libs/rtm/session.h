@@ -1,5 +1,6 @@
 /*
  *   Copyright 2009 Andrew Stromme <astromme@chatonka.com>
+ *   Copyright 2012 Jeremy Whiting <jpwhiting@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -20,20 +21,14 @@
 #ifndef RTM_SESSION_H
 #define RTM_SESSION_H
 
+#include <QHash>
 #include <QObject>
-#include <QDateTime>
 
 #include "rtm.h"
-#include "task.h"
 
+#ifndef QTONLY
 #include <Solid/Networking>
-
-namespace RTM {
-  class Request;
-  class SessionPrivate;
-  class TasksReader;
-}
-
+#endif
 
 /** @file
  * This file is part of librtm. It defines
@@ -47,6 +42,11 @@ namespace RTM {
  * Provides a set of classes for interacting with the Remember The Milk online todo management service
  */
 namespace RTM {
+
+class Request;
+class SessionPrivate;
+class Task;
+class TasksReader;
 
 /**
  * @brief The Session class provides a high level interface to a Remember The Milk session
@@ -90,7 +90,6 @@ Q_OBJECT
     RTM::List* newBlankList(RTM::ListId id) const;
 
   public Q_SLOTS:
-    void showLoginWindow();
     void setToken(const QString &token);
     void handleResponse();
     void continueAuthForToken();
@@ -122,7 +121,9 @@ Q_OBJECT
     Q_PRIVATE_SLOT(d, void listUpdate(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void smartListReply(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void settingsReply(RTM::Request* reply))
+#if !defined(Q_MOC_RUN) && !defined(QTONLY)
     Q_PRIVATE_SLOT(d, void networkStatusChanged(Solid::Networking::Status))
+#endif
     Q_PRIVATE_SLOT(d, void offlineError())
     Q_PRIVATE_SLOT(d, void retestOfflineStatus())
 };

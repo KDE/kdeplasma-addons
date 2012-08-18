@@ -37,7 +37,7 @@
 #include <QDomElement>
 #include <QDomNodeList>
 
-#include <KDebug>
+#include <QtDebug>
 
 RTM::Session::Session(QString apiKey, QString sharedSecret, RTM::Permissions permissions, QString token, QObject* parent)
   : QObject(parent),
@@ -61,18 +61,6 @@ RTM::Session::~Session()
 bool RTM::Session::currentlyOnline() const {
   return d->online;
 }
-
-void RTM::Session::showLoginWindow()
-{
-  //FIXME: What happens when auth wasn't created?
-  if (!d->auth) {
-    kWarning() << "Auth should have already been created, creating anyway";
-    d->auth = new RTM::Auth(d->permissions, d->apiKey, d->sharedSecret);
-  }
-  d->auth->showLoginWebpage();
-}
-
-
 
 QString RTM::Session::getAuthUrl() const {
   return d->authUrl;
@@ -167,10 +155,10 @@ void RTM::Session::tokenCheckReply(RTM::Request* response)
   QString reply = response->data();
   
   if (!reply.contains(d->token)) {
-    kDebug() << "Failed Token Check: " << reply;
+    qDebug() << "Failed Token Check: " << reply;
     emit tokenCheck(false);
   } else {
-    kDebug() << "Successful Token Check: " << reply;
+    qDebug() << "Successful Token Check: " << reply;
     emit tokenCheck(true);
   }
 }
@@ -189,7 +177,7 @@ void RTM::Session::timelineReply(RTM::Request* response)
   QString reply = response->data();
   QString timeline = reply.remove(0, reply.indexOf("<timeline>")+10);
   timeline.truncate(timeline.indexOf("</timeline>"));
-  kDebug() << "Timeline: " << timeline;
+  qDebug() << "Timeline: " << timeline;
   d->timeline = timeline.toLong();
   d->lastRefresh = QDateTime();
   emit timelineCreated(getTimeline());
@@ -270,7 +258,7 @@ void RTM::Session::addTask(const QString& task, RTM::ListId listId)
   
   RTM::List* list = listFromId(listId);
 
-  kDebug() << "Adding Task: " << task << "to list with id: " << listId;
+  qDebug() << "Adding Task: " << task << "to list with id: " << listId;
   RTM::Request *newTask = request("rtm.tasks.add"); // auth token is done for us
   newTask->addArgument("name", task);
   newTask->addArgument("parse", "1");
@@ -282,4 +270,4 @@ void RTM::Session::addTask(const QString& task, RTM::ListId listId)
   newTask->sendRequest();
 }
 
-#include "session.moc"
+#include "moc_session.cpp"
