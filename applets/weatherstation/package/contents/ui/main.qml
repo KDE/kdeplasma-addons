@@ -31,7 +31,7 @@ Item {
     }
 
     Connections {
-        target: backend
+        target: weatherStation
 
         onTemperatureChanged: {
             temperatureDisplay.number = (temperature != "-" ? temperature : "");
@@ -71,7 +71,7 @@ Item {
         anchors.fill: parent
         svg: lcdSvg
         elementId: "lcd_background"
-        visible: backend.useBackground
+        visible: weatherStation.useBackground
     }
 
     PlasmaCore.SvgItem {
@@ -246,7 +246,7 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: backend.clicked();
+            onClicked: weatherStation.clicked();
         }
     }
 }

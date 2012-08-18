@@ -32,7 +32,6 @@ class LCD;
 
 namespace Plasma {
     class DeclarativeWidget;
-    class Package;
 }
 
 namespace Conversion {
@@ -86,7 +85,6 @@ protected:
 private:
     void setLCDIcon();
 
-    Plasma::Package *m_package;
     Plasma::DeclarativeWidget *m_declarativeWidget;
     LCD *m_lcdPanel;
 

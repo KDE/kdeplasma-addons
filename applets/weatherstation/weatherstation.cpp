@@ -59,11 +59,11 @@ void WeatherStation::init()
     m_declarativeWidget = new Plasma::DeclarativeWidget(this);
     layout->addItem(m_declarativeWidget);
 
-    m_declarativeWidget->engine()->rootContext()->setContextProperty("backend", this);
+    m_declarativeWidget->engine()->rootContext()->setContextProperty("weatherStation", this);
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    m_package = new Plasma::Package(QString(), "org.kde.lcdweather", structure);
-    m_declarativeWidget->setQmlPath(m_package->filePath("mainscript"));
+    Plasma::Package package(QString(), "org.kde.lcdweather", structure);
+    m_declarativeWidget->setQmlPath(package.filePath("mainscript"));
 
 
     m_lcdPanel = new LCD(this);
@@ -161,7 +161,6 @@ Value WeatherStation::value(const QString& value, int unit)
 
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    qDebug() << data;
     WeatherPopupApplet::dataUpdated(source, data);
 
     if (!data.contains("Place"))
