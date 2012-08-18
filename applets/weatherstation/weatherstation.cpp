@@ -43,6 +43,8 @@ using namespace KUnitConversion;
 
 WeatherStation::WeatherStation(QObject *parent, const QVariantList &args)
     : WeatherPopupApplet(parent, args)
+    , m_declarativeWidget(0)
+    , m_lcdPanel(0)
 {
     resize(250, 350);
 }
@@ -63,7 +65,18 @@ void WeatherStation::init()
     m_package = new Plasma::Package(QString(), "org.kde.lcdweather", structure);
     m_declarativeWidget->setQmlPath(m_package->filePath("mainscript"));
 
+
+    m_lcdPanel = new LCD(this);
+    m_lcdPanel->setSvg("weatherstation/lcd_panel");
+    m_lcdPanel->setLabel("temperature-label", i18n("OUTDOOR TEMP"));
+    m_lcdPanel->hide();
+
     WeatherPopupApplet::init();
+}
+
+QGraphicsWidget* WeatherStation::graphicsWidget()
+{
+    return m_declarativeWidget;
 }
 
 void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
@@ -93,7 +106,22 @@ void WeatherStation::setUseBackground(bool use)
         return;
 
     m_useBackground = use;
+
+    m_lcdPanel->clear();
+    if (m_useBackground) {
+        m_lcdPanel->setItemOn("lcd_background");
+    }
+    m_lcdPanel->setItemOn("background");
+
     emit useBackgroundChanged();
+}
+
+void WeatherStation::setLCDIcon()
+{
+    if (m_lcdPanel->size().toSize() != size().toSize()) {
+        m_lcdPanel->resize(size());
+    }
+    setPopupIcon(QIcon(m_lcdPanel->toPixmap()));
 }
 
 void WeatherStation::configAccepted()
@@ -119,8 +147,7 @@ void WeatherStation::configChanged()
         Plasma::ToolTipManager::self()->clearContent(this);
     }
 
-//    setLCDIcon();
-
+    setLCDIcon();
     WeatherPopupApplet::configChanged();
 }
 
@@ -253,6 +280,10 @@ void WeatherStation::setTemperature(const Value& temperature, bool hasDigit)
     hasDigit = hasDigit || (temperatureUnit() != temperature.unit());
     Value v = temperature.convertTo(temperatureUnit());
     QString temp = hasDigit ? fitValue(v, 3) : QString::number(v.number());
+
+    m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
+    m_lcdPanel->setNumber("temperature", temp);
+    setLCDIcon();
 
     emit temperatureChanged(temp, v.unit()->symbol());
 }

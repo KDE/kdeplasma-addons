@@ -28,6 +28,8 @@
 
 #include "ui_appearanceconfig.h"
 
+class LCD;
+
 namespace Plasma {
     class DeclarativeWidget;
     class Package;
@@ -47,6 +49,7 @@ public:
     ~WeatherStation();
 
     virtual void init();
+    QGraphicsWidget* graphicsWidget();
     virtual void createConfigurationInterface(KConfigDialog *parent);
 
     bool useBackground() const;
@@ -81,8 +84,11 @@ protected:
     KUnitConversion::Value value(const QString& value, int unit);
 
 private:
+    void setLCDIcon();
+
     Plasma::Package *m_package;
     Plasma::DeclarativeWidget *m_declarativeWidget;
+    LCD *m_lcdPanel;
 
     Ui::AppearanceConfig m_appearanceConfig;
     bool m_useBackground;
