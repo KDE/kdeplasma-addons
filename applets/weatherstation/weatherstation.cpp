@@ -37,6 +37,8 @@
 
 #include <plasmaweather/weatherconfig.h>
 
+#include "lcd.h"
+
 using namespace KUnitConversion;
 
 WeatherStation::WeatherStation(QObject *parent, const QVariantList &args)
