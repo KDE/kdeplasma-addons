@@ -26,8 +26,8 @@ Item {
 
     QtObject {
         id: resizeOpts
-        property real wScaleFactor: root.width / root.minimumWidth
-        property real hScaleFactor: root.height / root.minimumHeight
+        property real wScaleFactor: Math.max(root.width / root.minimumWidth, 0.1)
+        property real hScaleFactor: Math.max(root.height / root.minimumHeight, 0.1)
     }
 
     Connections {
@@ -87,17 +87,17 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
-            topMargin: 12 * resizeOpts.hScaleFactor
+            topMargin: 13 * resizeOpts.hScaleFactor
             leftMargin: 5 * resizeOpts.wScaleFactor
             rightMargin: 5 * resizeOpts.wScaleFactor
         }
         horizontalAlignment: Text.AlignLeft
         elide: Text.ElideRight
         font {
-            family: "DejaVu Sans"
-            pixelSize: Math.round(8 * resizeOpts.wScaleFactor)
+            family: "Sans"
+            pointSize: 6 * resizeOpts.wScaleFactor
         }
-        color: "#202020"
+        color: "#3d3d3d"
         smooth: true
         text: i18n("CURRENT WEATHER")
     }
@@ -120,7 +120,7 @@ Item {
         anchors {
             top: parent.top
             left: weatherLabel.left
-            topMargin: 127 * resizeOpts.hScaleFactor
+            topMargin: 128 * resizeOpts.hScaleFactor
         }
         font: weatherLabel.font
         color: weatherLabel.color
@@ -147,8 +147,9 @@ Item {
             right: parent.right
             bottom: pressureLabel.bottom
             rightMargin: 24 * resizeOpts.wScaleFactor
+            bottomMargin: 2 * resizeOpts.hScaleFactor
         }
-        height: 23 * resizeOpts.hScaleFactor
+        height: 20 * resizeOpts.hScaleFactor
         superscriptFont: weatherLabel.font
     }
 
@@ -157,7 +158,7 @@ Item {
         anchors {
             top: parent.top
             left: weatherLabel.left
-            topMargin: 152 * resizeOpts.hScaleFactor
+            topMargin: 153 * resizeOpts.hScaleFactor
         }
         font: weatherLabel.font
         color: weatherLabel.color
@@ -169,9 +170,9 @@ Item {
         id: temperatureDisplay
         anchors {
             right: parent.right
-            bottom: windWidget.top
+            top: temperatureLabel.bottom
             rightMargin: 97 * resizeOpts.wScaleFactor
-            bottomMargin: 16 * resizeOpts.hScaleFactor
+            topMargin: 3 * resizeOpts.hScaleFactor
         }
         height: implicitHeight * resizeOpts.hScaleFactor
         superscriptFont: weatherLabel.font
@@ -218,8 +219,8 @@ Item {
     Wind {
         id: windWidget
         anchors {
-            bottom: parent.bottom
-            bottomMargin: 10 * resizeOpts.hScaleFactor
+            top: windLabel.top
+            topMargin: -3 * resizeOpts.hScaleFactor
             horizontalCenter: parent.horizontalCenter
         }
         width: implicitWidth * resizeOpts.wScaleFactor
@@ -235,12 +236,11 @@ Item {
             leftMargin: 5 * resizeOpts.wScaleFactor
             rightMargin: 5 * resizeOpts.wScaleFactor
         }
-        horizontalAlignment: Text.AlignHCenter
-        elide: Text.ElideRight
         font {
-            family: "DejaVu Sans"
-            pixelSize: Math.round(7 * resizeOpts.hScaleFactor)
+            family: "Sans"
+            pointSize: 4.5 * resizeOpts.hScaleFactor
         }
+        horizontalAlignment: Text.AlignHCenter
         color: weatherLabel.color
         smooth: true
 

@@ -51,7 +51,7 @@ Item {
     Row {
         id: row
         anchors.centerIn: parent
-        spacing: 2 * internal.hScaleFactor
+        spacing: Math.max(2 * internal.hScaleFactor, 3)
 
         Repeater {
             model: internal.numberToDigits(display.number);

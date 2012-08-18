@@ -48,20 +48,20 @@ Item {
     LCDDisplay {
         id: speedDisplay
         anchors.centerIn: parent
-        height: Math.round(0.8 * implicitHeight * resizeOpts.hScaleFactor)
+        height: 0.65 * implicitHeight * resizeOpts.hScaleFactor
     }
 
     Text {
         id: unitLabel
         anchors{
             top: speedDisplay.bottom
-            topMargin: Math.round(3 * resizeOpts.hScaleFactor)
+            topMargin: 3 * resizeOpts.hScaleFactor
             horizontalCenter: parent.horizontalCenter
         }
         font {
-            family: "Bitstream Vera Sans"
+            family: "Sans"
             pixelSize: 9 * resizeOpts.hScaleFactor
         }
-        color: "#202020"
+        color: "#3d3d3d"
     }
 }
