@@ -104,7 +104,7 @@ void RTM::Request::sign() {
   QStringList keys = d->arguments.keys();
   qSort(keys);
   
-  Q_FOREACH (const QString key, keys) {
+  Q_FOREACH (const QString& key, keys) {
       unistring.append(key);
       unistring.append(d->arguments.value(key));
   }
@@ -134,7 +134,8 @@ QString RTM::Request::requestUrl()
    }
     //qDebug() << "Creating url";
     QString url = d->baseUrl;
-    foreach(const QString &key, d->arguments.keys()) 
+    QStringList keys = d->arguments.keys();
+    foreach (const QString &key, keys) 
       url.append('&' + key + '=' + d->arguments.value(key).toUtf8());
     return url;
 }
