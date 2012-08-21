@@ -68,6 +68,15 @@ Item {
         }
         property int step: 0;
         text: source.title
+        //fade-out and -in on text change
+        Behavior on text {
+            SequentialAnimation {
+                NumberAnimation { target: metadataLine; property: "opacity"; to: 0 }
+                //needs to be here, otherwise the text changes first and fades to itself
+                PropertyAction {}
+                NumberAnimation { target: metadataLine; property: "opacity"; to: 1 }
+            }
+        }
         function updateText() {
             if (metadataLine.step == 1) {
                 if (showArtist && source.artist != '') {
