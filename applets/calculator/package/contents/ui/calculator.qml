@@ -294,16 +294,22 @@ Item
                 display.text = locale.formatNumber(factor / locale.readNumber(display.text), 0);
                 break;
         }
+
+        waitingForDigit = true;
     }
 
     function clearClicked()
     {
         display.text = "0";
+        waitingForDigit = ture;
     }
 
     function allClearClicked()
     {
         display.text = "0";
+        sum = 0;
+        factor = 0;
+        waitingForDigit = true;
     }
 }
 
