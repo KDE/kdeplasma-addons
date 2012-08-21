@@ -21,6 +21,7 @@
 
 import QtQuick 1.0;
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.locale 0.1 as Locale
 
 Item
 {
@@ -31,6 +32,12 @@ Item
     property real sum;
     property bool waitingForDigit;
     property string prevOperator;
+
+    property int maxInputLength: 19;
+
+    Locale.Locale {
+        id: locale;
+    }
 
     Column {
         spacing: 4;
@@ -178,7 +185,7 @@ Item
         }
 
         PlasmaComponents.Button {
-            text: ".";
+            text: locale.decimalSymbol;
             height: buttonHeight;
             width: buttonWidth;
             onClicked: decimalClicked();
@@ -214,48 +221,60 @@ Item
 
     function digitClicked(digit)
     {
-        if (waitingForDigit){
+        if (display.text.length >= maxInputLength) {
+            return;
+        }
+
+        if (waitingForDigit) {
             waitingForDigit = false;
             display.text = digit;
 
-        } else if (display.text.indexOf(".") > 0){
+        } else if (display.text.indexOf(locale.decimalSymbol) > 0) {
             display.text += digit;
 
         }else{
-            display.text = display.text * 10 + digit;
+            display.text = locale.formatNumber(locale.readNumber(display.text) * 10 + digit, 0);
         }
     }
 
     function decimalClicked()
     {
-        display.text += ".";
+        if (waitingForDigit) {
+            display.text = "0";
+        }
+
+        if (display.text.indexOf(locale.decimalSymbol) == -1) {
+            display.text += locale.decimalSymbol;
+        }
+
+        waitingForDigit = false;
     }
 
     function addClicked()
     {
         waitingForDigit = true;
-        sum = display.text;
+        sum = locale.readNumber(display.text);
         prevOperator = "+";
     }
 
     function subtractClicked()
     {
         waitingForDigit = true;
-        sum = display.text;
+        sum = locale.readNumber(display.text);
         prevOperator = "-";
     }
 
     function multiplayClicked()
     {
         waitingForDigit = true;
-        factor = display.text;
+        factor = locale.readNumber(display.text);
         prevOperator = "*";
     }
 
     function divideClicked()
     {
         waitingForDigit = true;
-        factor = display.text;
+        factor = locale.readNumber(display.text);
         prevOperator = "/";
     }
 
@@ -263,16 +282,16 @@ Item
     {
         switch (prevOperator){
             case "+":
-                display.text = sum + (display.text * 1);
+                display.text = locale.formatNumber(sum + locale.readNumber(display.text), 0);
                 break;
             case "-":
-                display.text = sum - (display.text * 1);
+                display.text = locale.fortmatNumber(sum - locale.readNumber(display.text), 0);
                 break;
             case "*":
-                display.text = factor * (display.text * 1);
+                display.text = locale.formatNumber(factor * locale.readNumber(display.text), 0);
                 break;
             case "/":
-                display.text = factor / (display.text * 1);
+                display.text = locale.formatNumber(factor / locale.readNumber(display.text), 0);
                 break;
         }
     }
