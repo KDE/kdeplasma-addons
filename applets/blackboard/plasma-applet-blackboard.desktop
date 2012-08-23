@@ -49,6 +49,7 @@ Name[wa]=Noer Platea
 Name[x-test]=xxBlack Boardxx
 Name[zh_CN]=黑板
 Name[zh_TW]=黑板
+Comment=Draw a quick note or a colorful image
 Type=Service
 Icon=applications-education
 ServiceTypes=Plasma/Applet
