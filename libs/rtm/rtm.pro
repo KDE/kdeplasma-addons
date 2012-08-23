@@ -8,6 +8,9 @@ DEPENDPATH += . tests
 INCLUDEPATH += .
 DEFINES += QTONLY MAKE_RTM_LIB
 QT += network xml
+isEmpty(PREFIX) {
+  PREFIX=/usr/local
+}
 
 # Input
 HEADERS += auth.h \
@@ -30,19 +33,7 @@ SOURCES += auth.cpp \
            xmlreaders.cpp \
 
 contains(MEEGO_EDITION,harmattan) {
+    target.path = $$PREFIX/lib
     INSTALLS += target
 }
 
-contains(MEEGO_EDITION,harmattan) {
-    INSTALLS += target
-}
-
-contains(MEEGO_EDITION,harmattan) {
-    target.path =
-    INSTALLS += target
-}
-
-contains(MEEGO_EDITION,harmattan) {
-    target.path = $QMAKE_LIB_DIR
-    INSTALLS += target
-}
