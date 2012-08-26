@@ -1,7 +1,7 @@
 
 find_package(LibAttica REQUIRED)
 
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ${LIBATTICA_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/lib )
+include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ${LIBATTICA_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/lib )
 link_directories(${LIBATTICA_LIBRARY_DIRS})
 
 set(ocs_engine_SRCS
