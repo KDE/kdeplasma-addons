@@ -52,8 +52,8 @@ bool isValidIconName(const QString &icon)
 
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
-        : WeatherPopupApplet(parent, args),
-          m_declarativeWidget(0)
+        : WeatherPopupApplet(parent, args)
+        , m_declarativeWidget(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("weather-none-available");
@@ -103,7 +103,10 @@ void WeatherApplet::toolTipAboutToShow()
 
     QString config = i18nc("Shown when you have not set a weather provider", "Please Configure");
     Plasma::ToolTipContent data(config, "", popupIcon().pixmap(IconSize(KIconLoader::Desktop)));
-    QString location, conditions, temp; // XXX
+
+    QString location = m_panelModel["location"].toString();
+    QString conditions = m_panelModel["conditions"].toString();
+    QString temp = m_panelModel["temp"].toString();
     if (!location.isEmpty()) {
          data.setMainText(location);
          data.setSubText(i18nc("%1 is the weather condition, %2 is the temperature,"
@@ -127,7 +130,7 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void WeatherApplet::invokeBrowser(const QString &url) const
+void WeatherApplet::invokeBrowser(const QString& url) const
 {
     if (url.isEmpty())
         KToolInvocation::invokeBrowser(m_creditUrl);
