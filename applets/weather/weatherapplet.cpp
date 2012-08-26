@@ -61,8 +61,6 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
 
 void WeatherApplet::init()
 {
-    connect(this, SIGNAL(newWeatherSource()), this, SLOT(clearCurrentWeatherIcon()));
-
     switch (formFactor()) {
     case Plasma::Horizontal:
     case Plasma::Vertical:
@@ -112,11 +110,6 @@ void WeatherApplet::toolTipAboutToShow()
                                " both come from the weather provider", "%1 %2", conditions, temp));
     }
     Plasma::ToolTipManager::self()->setContent(this, data);
-}
-
-void WeatherApplet::clearCurrentWeatherIcon()
-{
-    // XXX
 }
 
 void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
