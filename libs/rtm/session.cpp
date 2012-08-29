@@ -270,4 +270,20 @@ void RTM::Session::addTask(const QString& task, RTM::ListId listId)
   newTask->sendRequest();
 }
 
+void RTM::Session::addList(const QString &list, const QString &filter)
+{
+    if (!currentlyOnline())
+        return;
+
+    qDebug() << "Adding List: " << list << " to lists";
+    RTM::Request *newList = request("rtm.lists.add");
+    newList->addArgument("name", list);
+    newList->addArgument("timeline", QString::number(getTimeline()));
+    if (!filter.isEmpty())
+        newList->addArgument("filter", filter);
+    newList->setReadOnly(false);
+
+    newList->sendRequest();
+}
+
 #include "moc_session.cpp"

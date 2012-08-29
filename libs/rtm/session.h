@@ -94,6 +94,7 @@ Q_OBJECT
     void handleResponse();
     void continueAuthForToken();
     void addTask(const QString &task, RTM::ListId listId);
+    void addList(const QString &list, const QString &filter = QString());
     void tokenCheckReply(RTM::Request*);
     void handleValidToken(bool);
     void timelineReply(RTM::Request*);
