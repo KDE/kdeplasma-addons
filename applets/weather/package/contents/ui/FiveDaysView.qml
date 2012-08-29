@@ -41,7 +41,11 @@ WeatherListView {
                         item.icon = values[0];
                         item.toolTip = values[1];
                     } else {
-                        item.text = modelData;
+                        var txt = modelData;
+                        if (txt.indexOf("nt") != -1)
+                            txt = txt.replace(" nt", "");
+
+                        item.text = txt;
                     }
 
                     if (rowIndex == 0)
@@ -55,23 +59,15 @@ WeatherListView {
         id: textDelegate
 
         Text {
+            function checkTitle(txt) {
+                return txt.indexOf("ight") != -1 || txt.indexOf("nite") != -1;
+            }
+
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            color: {
-                if (!font.bold)
-                    return theme.textColor
-
-                var ntIndex = text.indexOf("nt");
-                if (ntIndex != -1 || text.indexOf("nite") != -1) {
-                    if (ntIndex != -1)
-                        text = text.replace(" nt", "");
-
-                    return Utils.setAlphaF(theme.textColor, 0.5);
-                } else {
-                    return theme.textColor
-                }
-            }
+            color: theme.textColor
+            opacity: font.bold && checkTitle(text) ? 0.5 : 1
         }
     }
 

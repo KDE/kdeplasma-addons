@@ -31,10 +31,10 @@ namespace Plasma
 class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
-    Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY dataUpdated)
-    Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY dataUpdated)
-    Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY dataUpdated)
-    Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY dataUpdated)
+    Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated)
+    Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY modelUpdated)
+    Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY modelUpdated)
+    Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY modelUpdated)
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
@@ -47,7 +47,7 @@ public:
     QVariantList noticesModel() const { return m_noticesModel; }
 
 signals:
-    void dataUpdated();
+    void modelUpdated();
 
 public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);

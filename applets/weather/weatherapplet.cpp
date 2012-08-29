@@ -459,7 +459,7 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     updateNoticesModel(data);
     WeatherPopupApplet::dataUpdated(source, data);
 
-    emit dataUpdated();
+    emit modelUpdated();
     update();
 }
 
@@ -468,7 +468,7 @@ void WeatherApplet::configAccepted()
     resetPanelModel();
     m_fiveDaysModel.clear();
     m_detailsModel.clear();
-    emit dataUpdated();
+    emit modelUpdated();
 
     WeatherPopupApplet::configAccepted();
 }

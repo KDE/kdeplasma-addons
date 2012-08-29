@@ -10,7 +10,6 @@ target_link_libraries(plasma_applet_weather
     ${KDE4_KDEUI_LIBS}
     plasmaweather
     ${KDE4WORKSPACE_WEATHERION_LIBRARY}
-    ${QT_QTWEBKIT_LIBRARY}
     ${QT_QTDECLARATIVE_LIBRARY}
     ${KDE4_KUNITCONVERSION_LIBS})
 
