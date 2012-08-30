@@ -1,5 +1,6 @@
 /*
  * Copyright 2008-2009  Petri Damstén <damu@iki.fi>
+ * Copyright 2012  Luís Gabriel Lima <lampih@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,22 +17,34 @@
  */
 
 #include "weatherstation.h"
-#include <QGraphicsLinearLayout>
+
+#include <math.h>
+
+#include <QtGui/QGraphicsLinearLayout>
+#include <QtDeclarative/QDeclarativeEngine>
+#include <QtDeclarative/QDeclarativeContext>
+
 #include <KConfigDialog>
 #include <KConfigGroup>
 #include <KToolInvocation>
+#include <KUnitConversion/Converter>
+
 #include <Plasma/Containment>
 #include <Plasma/Theme>
 #include <Plasma/ToolTipManager>
-#include <KUnitConversion/Converter>
+#include <Plasma/DeclarativeWidget>
+#include <Plasma/Package>
+
 #include <plasmaweather/weatherconfig.h>
-#include <math.h>
+
 #include "lcd.h"
 
 using namespace KUnitConversion;
 
 WeatherStation::WeatherStation(QObject *parent, const QVariantList &args)
-    : WeatherPopupApplet(parent, args), m_lcd(0), m_lcdPanel(0)
+    : WeatherPopupApplet(parent, args)
+    , m_declarativeWidget(0)
+    , m_lcdPanel(0)
 {
     resize(250, 350);
 }
@@ -42,49 +55,28 @@ WeatherStation::~WeatherStation()
 
 void WeatherStation::init()
 {
-    m_lcd = new LCD(this);
-    m_lcd->setSvg("weatherstation/lcd");
-    // i18n: This and other all-caps messages are pieces of text shown on
-    // an LCD-like image mimicking a electronic weather station display.
-    // If weather station displays in your country are always in English,
-    // you may want to consider leaving these strings in English too,
-    // to achieve a more realistic feeling.
-    m_lcd->setLabel("pressure-label", i18n("PRESSURE"));
-    m_lcd->setLabel("weather-label", i18n("CURRENT WEATHER"));
-    m_lcd->setLabel("temperature-label", i18n("OUTDOOR TEMP"));
-    m_lcd->setLabel("humidity-label", i18n("HUMIDITY"));
-    m_lcd->setLabel("wind-label", i18n("WIND"));
-    m_lcd->setLabel("provider-label", QString());
-    if (hasAuthorization("LaunchApp")) {
-        connect(m_lcd, SIGNAL(clicked(QString)), this, SLOT(clicked(QString)));
-    }
+    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
+    m_declarativeWidget = new Plasma::DeclarativeWidget(this);
+    layout->addItem(m_declarativeWidget);
+
+    m_declarativeWidget->engine()->rootContext()->setContextProperty("weatherStation", this);
+
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    Plasma::Package package(QString(), "org.kde.lcdweather", structure);
+    m_declarativeWidget->setQmlPath(package.filePath("mainscript"));
+
 
     m_lcdPanel = new LCD(this);
     m_lcdPanel->setSvg("weatherstation/lcd_panel");
     m_lcdPanel->setLabel("temperature-label", i18n("OUTDOOR TEMP"));
     m_lcdPanel->hide();
 
-    //m_lcd->setItemOn("under_construction");
     WeatherPopupApplet::init();
 }
 
 QGraphicsWidget* WeatherStation::graphicsWidget()
 {
-    return m_lcd;
-}
-
-void WeatherStation::setBackground()
-{
-    m_lcd->clear();
-    if (m_useBackground) {
-        m_lcd->setItemOn("lcd_background");
-    }
-    m_lcd->setItemOn("background");
-    m_lcdPanel->clear();
-    if (m_useBackground) {
-        m_lcdPanel->setItemOn("lcd_background");
-    }
-    m_lcdPanel->setItemOn("background");
+    return m_declarativeWidget;
 }
 
 void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
@@ -99,33 +91,29 @@ void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
     m_appearanceConfig.backgroundCheckBox->setChecked(m_useBackground);
     m_appearanceConfig.tooltipCheckBox->setChecked(m_showToolTip);
     parent->addPage(w, i18n("Appearance"), icon());
-    connect(m_appearanceConfig.backgroundCheckBox, SIGNAL(clicked(bool)) , parent, SLOT(settingsModified()));
-    connect(m_appearanceConfig.tooltipCheckBox, SIGNAL(clicked(bool)) , parent, SLOT(settingsModified()));
+    connect(m_appearanceConfig.backgroundCheckBox, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
+    connect(m_appearanceConfig.tooltipCheckBox, SIGNAL(clicked(bool)), parent, SLOT(settingsModified()));
 }
 
-void WeatherStation::configAccepted()
+bool WeatherStation::useBackground() const
 {
-    KConfigGroup cfg = config();
-    cfg.writeEntry("background", m_useBackground =
-            m_appearanceConfig.backgroundCheckBox->isChecked());
-    cfg.writeEntry("tooltip", m_showToolTip =
-            m_appearanceConfig.tooltipCheckBox->isChecked());
-    WeatherPopupApplet::configAccepted();
+    return m_useBackground;
 }
 
-void WeatherStation::configChanged()
+void WeatherStation::setUseBackground(bool use)
 {
-    KConfigGroup cfg = config();
-    m_useBackground = cfg.readEntry("background", true);
-    m_showToolTip = cfg.readEntry("tooltip", true);
+    if (use == m_useBackground)
+        return;
 
-    if (!m_showToolTip) {
-        m_lcd->setLabel("weather-label", i18n("CURRENT WEATHER"));
-        Plasma::ToolTipManager::self()->clearContent(this);
+    m_useBackground = use;
+
+    m_lcdPanel->clear();
+    if (m_useBackground) {
+        m_lcdPanel->setItemOn("lcd_background");
     }
-    setBackground();
-    setLCDIcon();
-    WeatherPopupApplet::configChanged();
+    m_lcdPanel->setItemOn("background");
+
+    emit useBackgroundChanged();
 }
 
 void WeatherStation::setLCDIcon()
@@ -134,6 +122,33 @@ void WeatherStation::setLCDIcon()
         m_lcdPanel->resize(size());
     }
     setPopupIcon(QIcon(m_lcdPanel->toPixmap()));
+}
+
+void WeatherStation::configAccepted()
+{
+    setUseBackground(m_appearanceConfig.backgroundCheckBox->isChecked());
+    m_showToolTip = m_appearanceConfig.tooltipCheckBox->isChecked();
+
+    KConfigGroup cfg = config();
+    cfg.writeEntry("background", m_useBackground);
+    cfg.writeEntry("tooltip", m_showToolTip);
+
+    WeatherPopupApplet::configAccepted();
+}
+
+void WeatherStation::configChanged()
+{
+    KConfigGroup cfg = config();
+    setUseBackground(cfg.readEntry("background", true));
+    m_showToolTip = cfg.readEntry("tooltip", true);
+
+    if (!m_showToolTip) {
+        emit weatherLabelChanged(i18n("CURRENT WEATHER"));
+        Plasma::ToolTipManager::self()->clearContent(this);
+    }
+
+    setLCDIcon();
+    WeatherPopupApplet::configChanged();
 }
 
 Value WeatherStation::value(const QString& value, int unit)
@@ -146,30 +161,30 @@ Value WeatherStation::value(const QString& value, int unit)
 
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    //kDebug() << data;
     WeatherPopupApplet::dataUpdated(source, data);
 
-    if (data.contains("Place")) {
-        QString v = data["Temperature"].toString();
-        Value temp = value(v, data["Temperature Unit"].toInt());
-        setTemperature(temp, (v.indexOf('.') > -1));
-        setPressure(conditionIcon(),
-                    value(data["Pressure"].toString(), data["Pressure Unit"].toInt()),
-                    data["Pressure Tendency"].toString());
-        setHumidity(data["Humidity"].toString());
-        setWind(value(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt()),
-                data["Wind Direction"].toString());
-        m_lcd->setLabel("provider-label", data["Credit"].toString());
-        m_url = data["Credit Url"].toString();
-        m_lcd->setItemClickable("provider-click", !m_url.isEmpty());
+    if (!data.contains("Place"))
+        return;
 
-        if (m_showToolTip) {
-            m_lcd->setLabel("weather-label", data["Place"].toString().toUpper());
-            Plasma::ToolTipContent ttc(data["Place"].toString(),
-                    i18n("Last updated: %1", KGlobal::locale()->formatDateTime(QDateTime::currentDateTime(), KLocale::FancyLongDate)));
-            Plasma::ToolTipManager::self()->setContent(this, ttc);
-        }
-    }
+    QString v = data["Temperature"].toString();
+    Value temp = value(v, data["Temperature Unit"].toInt());
+    setTemperature(temp, (v.indexOf('.') > -1));
+
+    setPressure(conditionIcon(), value(data["Pressure"].toString(),
+                data["Pressure Unit"].toInt()),
+                data["Pressure Tendency"].toString());
+
+    setHumidity(data["Humidity"].toString());
+
+    setWind(value(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt()),
+            data["Wind Direction"].toString());
+
+    emit providerLabelChanged(data["Credit"].toString());
+
+    m_url = data["Credit Url"].toString();
+
+    if (m_showToolTip)
+        setToolTip(data["Place"].toString());
 }
 
 QString WeatherStation::fitValue(const Value& value, int digits)
@@ -188,63 +203,57 @@ QString WeatherStation::fitValue(const Value& value, int digits)
     return QString::number(v, 'f', precision);
 }
 
-QStringList WeatherStation::fromCondition(const QString& condition)
+QString WeatherStation::fromCondition(const QString& rawCondition)
 {
-    QStringList result;
+    QString::SplitBehavior skip = QString::SkipEmptyParts;
+    const QString& condition = rawCondition.split("weather-", skip).first();
+    QString id;
 
-    if (condition == "weather-clear-night") {
-        result << "moon";
-    } else if (condition == "weather-clear") {
-        result << "sun";
-    } else if (condition == "weather-clouds-night" ||
-               condition == "weather-few-clouds-night") {
-        result << "half_moon" << "lower_cloud";
-    } else if (condition == "weather-clouds" ||
-               condition == "weather-few-clouds") {
-        result << "half_sun" << "lower_cloud";
-    } else if (condition == "weather-hail") {
-        result << "cloud" << "cloud_flash_hole" << "hail";
-    } else if (condition == "weather-many-clouds") {
-        result << "cloud" << "cloud_flash_hole";
-    } else if (condition == "weather-mist") {
-        result << "cloud" << "cloud_flash_hole";
-    } else if (condition == "weather-showers-day" ||
-               condition == "weather-showers-night") {
-        result << "cloud" << "cloud_flash_hole" << "water_drop";
-    } else if (condition == "weather-showers") {
-        result << "cloud" << "cloud_flash_hole" << "water_drop" << "water_drops";
-    } else if (condition == "weather-showers-scattered-day" ||
-               condition == "weather-showers-scattered-night" ||
-               condition == "weather-showers-scattered") {
-        result << "cloud" << "cloud_flash_hole" << "water_drops";
-    } else if (condition == "weather-snow") {
-        result << "cloud" << "cloud_flash_hole" << "snow_flake" << "snow_flakes";
-    } else if (condition == "weather-snow-rain") {
-        result << "cloud" << "cloud_flash_hole" << "snow_flake" << "water_drops";
-    } else if (condition == "weather-snow-scattered-day" ||
-               condition == "weather-snow-scattered-night" ||
-               condition == "weather-snow-scattered") {
-        result << "cloud" << "cloud_flash_hole" << "snow_flakes";
-    } else if (condition == "weather-storm-day") {
-    } else if (condition == "weather-storm-night") {
-    } else if (condition == "weather-storm") {
-        result << "cloud" << "flash" << "water_drops";
+    if (condition == "clear-night") {
+        id = "moon";
+    } else if (condition == "clear") {
+        id = "sun";
+    } else if (condition == "few-clouds-night"
+               || condition == "clouds-night") {
+        id = "cloud_nights";
+    } else if (condition == "few-clouds"
+               || condition == "clouds") {
+        id = "cloud_days";
+    } else if (condition == "hail") {
+        id = "hail";
+    } else if (condition == "many-clouds"
+               || condition == "mist") {
+        id = "clouds_mist";
+    } else if (condition == "showers-night"
+               || condition == "showers-day") {
+        id = "half_showers";
+    } else if (condition == "showers") {
+        id = "showers";
+    } else if (condition == "showers-scattered-night"
+               || condition == "showers-scattered-day"
+               || condition == "showers-scattered") {
+        id = "showers_scattered";
+    } else if (condition == "snow") {
+        id = "snow";
+    } else if (condition == "snow-rain") {
+        id = "snow_rain";
+    } else if (condition == "snow-scattered-night"
+               || condition == "snow-scattered-day"
+               || condition == "snow-scattered") {
+        id = "snow_scattered";
+    } else if (condition == "storm") {
+        id = "snow_storm";
     }
-    //kDebug() << condition << result;
-    return result;
+
+    return id;
 }
 
 void WeatherStation::setPressure(const QString& condition, const Value& pressure,
                                  const QString& tendencyString)
 {
-    QStringList current;
-    current = fromCondition(condition);
-    m_lcd->setGroup("weather", current);
-
+    QString currentCondition = "weather:" + fromCondition(condition);
     Value value = pressure.convertTo(pressureUnit());
     QString s = fitValue(value, 5);
-    m_lcd->setNumber("pressure", s);
-    m_lcd->setLabel("pressure-unit-label", value.unit()->symbol());
 
     qreal t;
     if (tendencyString.toLower() == "rising") {
@@ -255,58 +264,63 @@ void WeatherStation::setPressure(const QString& condition, const Value& pressure
         t = tendencyString.toDouble();
     }
 
+    QString direction;
     if (t > 0.0) {
-        m_lcd->setGroup("pressure_direction", QStringList() << "up");
+        direction = "up";
     } else if (t < 0.0) {
-        m_lcd->setGroup("pressure_direction", QStringList() << "down");
-    } else {
-        m_lcd->setGroup("pressure_direction", QStringList());
+        direction = "down";
     }
+
+    emit pressureChanged(currentCondition, s, value.unit()->symbol(), direction);
 }
 
 void WeatherStation::setTemperature(const Value& temperature, bool hasDigit)
 {
     hasDigit = hasDigit || (temperatureUnit() != temperature.unit());
     Value v = temperature.convertTo(temperatureUnit());
-    qDebug() << v.isValid();
-    m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
+    QString temp = hasDigit ? fitValue(v, 3) : QString::number(v.number());
+
     m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
-    QString tmp = hasDigit ? fitValue(v , 4) : QString::number(v.number());
-    m_lcd->setNumber("temperature", tmp);
-    tmp = hasDigit ? fitValue(v , 3) : QString::number(v.number());
-    m_lcdPanel->setNumber("temperature", tmp);
+    m_lcdPanel->setNumber("temperature", temp);
     setLCDIcon();
+
+    emit temperatureChanged(temp, v.unit()->symbol());
 }
 
 void WeatherStation::setHumidity(QString humidity)
 {
-    if (humidity == "N/A") {
-        humidity = '-';
-    } else {
+    if (humidity != "N/A")
         humidity.remove('%');
-    }
-    m_lcd->setNumber("humidity", humidity);
+
+    emit humidityChanged(humidity);
+}
+
+void WeatherStation::setToolTip(const QString& place)
+{
+    emit weatherLabelChanged(place.toUpper());
+
+    QString t = KGlobal::locale()->formatDateTime(QDateTime::currentDateTime(),
+                                                  KLocale::FancyLongDate);
+    Plasma::ToolTipContent ttc(place, i18n("Last updated: %1", t));
+    Plasma::ToolTipManager::self()->setContent(this, ttc);
 }
 
 void WeatherStation::setWind(const Value& speed, const QString& dir)
 {
-    //kDebug() << speed.number() << speed.unit()->symbol() << dir;
     Value value = speed.convertTo(speedUnit());
     QString s = fitValue(value, 3);
+    QString direction = dir;
 
-    if (dir == "N/A") {
-        m_lcd->setGroup("wind", QStringList());
-    } else {
-        m_lcd->setGroup("wind", QStringList() << dir);
-    }
-    m_lcd->setNumber("wind_speed", s);
-    m_lcd->setLabel("wind-unit-label", value.unit()->symbol());
+    if (dir == "N/A")
+        direction = "";
+
+    emit windChanged(direction, s, value.unit()->symbol());
 }
 
-void WeatherStation::clicked(const QString &name)
+void WeatherStation::clicked()
 {
-    Q_UNUSED(name)
-    KToolInvocation::invokeBrowser(m_url);
+    if(!m_url.isEmpty())
+        KToolInvocation::invokeBrowser(m_url);
 }
 
 #include "weatherstation.moc"

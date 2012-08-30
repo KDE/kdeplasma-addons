@@ -1,5 +1,6 @@
 /*
  * Copyright 2008-2009  Petri Damstén <damu@iki.fi>
+ * Copyright 2012  Luís Gabriel Lima <lampih@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,54 +19,79 @@
 #ifndef WEATHERSTATION_HEADER
 #define WEATHERSTATION_HEADER
 
+#include <KUnitConversion/Value>
+
 #include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
-#include <KUnitConversion/Value>
+
 #include <plasmaweather/weatherpopupapplet.h>
+
 #include "ui_appearanceconfig.h"
 
 class LCD;
-class QGraphicsLinearLayout;
-namespace Conversion { class Value; }
+
+namespace Plasma {
+    class DeclarativeWidget;
+}
+
+namespace Conversion {
+    class Value;
+}
 
 class WeatherStation : public WeatherPopupApplet
 {
     Q_OBJECT
-    public:
-        WeatherStation(QObject *parent, const QVariantList &args);
-        ~WeatherStation();
+    Q_PROPERTY(bool useBackground READ useBackground WRITE setUseBackground NOTIFY useBackgroundChanged)
 
-        virtual void init();
-        virtual void createConfigurationInterface(KConfigDialog *parent);
-        virtual QGraphicsWidget *graphicsWidget();
+public:
+    WeatherStation(QObject *parent, const QVariantList &args);
+    ~WeatherStation();
 
-    public slots:
-        virtual void configAccepted();
-        virtual void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-        void clicked(const QString &name);
-        void configChanged();
+    virtual void init();
+    QGraphicsWidget* graphicsWidget();
+    virtual void createConfigurationInterface(KConfigDialog *parent);
 
-    protected:
-        void setLCDIcon();
-        void setBackground();
+    bool useBackground() const;
+    void setUseBackground(bool use);
 
-        void setWind(const KUnitConversion::Value& speed, const QString& direction);
-        void setPressure(const QString& condition, const KUnitConversion::Value& pressure,
-                         const QString& tendency);
-        void setTemperature(const KUnitConversion::Value& temperature, bool hasDigit);
-        void setHumidity(QString humidity);
+public slots:
+    virtual void configAccepted();
+    virtual void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+    void clicked();
+    void configChanged();
 
-        QString fitValue(const KUnitConversion::Value& value, int digits);
-        QStringList fromCondition(const QString& condition);
-        KUnitConversion::Value value(const QString& value, int unit);
+signals:
+    void useBackgroundChanged();
+    void temperatureChanged(QString temperature, QString unit);
+    void humidityChanged(QString humidity);
+    void providerLabelChanged(QString label);
+    void weatherLabelChanged(QString label);
+    void conditionChanged();
+    void pressureChanged(QString conditionId, QString pressure, QString unit, QString direction);
+    void windChanged(QString direction, QString speed, QString unit);
 
-    private:
-        LCD *m_lcd;
-        LCD *m_lcdPanel;
-        Ui::AppearanceConfig m_appearanceConfig;
-        bool m_useBackground;
-        bool m_showToolTip;
-        QString m_url;
+protected:
+    void setWind(const KUnitConversion::Value& speed, const QString& direction);
+    void setPressure(const QString& condition, const KUnitConversion::Value& pressure,
+                     const QString& tendency);
+    void setTemperature(const KUnitConversion::Value& temperature, bool hasDigit);
+    void setHumidity(QString humidity);
+    void setToolTip(const QString& place);
+
+    QString fitValue(const KUnitConversion::Value& value, int digits);
+    QString fromCondition(const QString& condition);
+    KUnitConversion::Value value(const QString& value, int unit);
+
+private:
+    void setLCDIcon();
+
+    Plasma::DeclarativeWidget *m_declarativeWidget;
+    LCD *m_lcdPanel;
+
+    Ui::AppearanceConfig m_appearanceConfig;
+    bool m_useBackground;
+    bool m_showToolTip;
+    QString m_url;
 };
 
 K_EXPORT_PLASMA_APPLET(weatherstation, WeatherStation)
