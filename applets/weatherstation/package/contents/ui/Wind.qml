@@ -62,6 +62,6 @@ Item {
             family: "Sans"
             pixelSize: 9 * resizeOpts.hScaleFactor
         }
-        color: "#3d3d3d"
+        color: weatherStation.useBackground ? theme.textColor : "#3d3d3d"
     }
 }

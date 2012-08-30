@@ -57,6 +57,10 @@ Item {
         }
     }
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     PlasmaCore.Svg {
         id: lcdSvg
         imagePath: "weatherstation/lcd2"
@@ -97,7 +101,7 @@ Item {
             family: "Sans"
             pointSize: 6 * resizeOpts.wScaleFactor
         }
-        color: "#3d3d3d"
+        color: weatherStation.useBackground ? theme.textColor : "#3d3d3d"
         smooth: true
         text: i18n("CURRENT WEATHER")
     }

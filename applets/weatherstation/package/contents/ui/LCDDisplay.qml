@@ -71,7 +71,7 @@ Item {
             top: parent.top
             left: parent.right
         }
-        color: "#202020"
+        color: weatherStation.useBackground ? theme.textColor : "#3d3d3d"
         smooth: true
         visible: number != ""
     }
