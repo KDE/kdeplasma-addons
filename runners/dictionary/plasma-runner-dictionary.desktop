@@ -69,6 +69,7 @@ Comment[sk]=Definovať slová
 Comment[sv]=Definiera ord
 Comment[uk]=Визначення термінів
 Comment[x-test]=xxDefine wordsxx
+Comment[zh_CN]=定义单词
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=accessories-dictionary

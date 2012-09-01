@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=LCD Weather Station (QML)
 Name[cs]=LCD meteostanice (QML)
+Name[hu]=LCD időjárásjelző állomás (QML)
 Name[nl]=LCD weerstation (QML)
 Name[pt]=Estação Meteorológica LCD (QML)
 Name[pt_BR]=Estação meteorológica LCD (QML)
@@ -9,6 +10,7 @@ Name[sk]=LCD meteorologická stanica (QML)
 Name[sv]=LCD-väderstation (QML)
 Name[uk]=Метеорологічна станція на дисплеї (QML)
 Name[x-test]=xxLCD Weather Station (QML)xx
+Name[zh_CN]=液晶气象站 (QML)
 Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 Icon=accessories-dictionary
