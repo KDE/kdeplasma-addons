@@ -226,6 +226,7 @@ void RTM::Task::setDue(const QDateTime& due) {
   RTM::Request *request = d->standardRequest("rtm.tasks.setDueDate");
   if (due.isValid()) {
     request->addArgument("due", d->due.toString(Qt::ISODate));
+    request->addArgument("parse", "1");
     if (due.time().isValid())
       request->addArgument("has_due_time", "1");
   }
@@ -237,6 +238,13 @@ void RTM::Task::setDue(const QString& date) {
   request->addArgument("parse", "1");
   request->sendRequest();
 }
+
+void RTM::Task::removeDue()
+{
+  RTM::Request *request = d->standardRequest("rtm.tasks.setDueDate");
+  request->sendRequest();
+}
+
 void RTM::Task::setEstimate(const QString& estimate) {
   if (d->estimate == estimate)
     return;

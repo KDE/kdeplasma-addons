@@ -97,6 +97,7 @@ class RTM_EXPORT Task : public QObject
     void addTag(const Tag& tag);
     bool removeTag(const Tag& tag);
     void removeAllTags();
+    Q_INVOKABLE void removeDue();
 
     void addNote(const QString& title, const QString& text);
     bool editNote(RTM::NoteId noteid, const QString& newTitle, const QString& newText);
