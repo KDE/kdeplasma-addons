@@ -122,7 +122,7 @@ Q_OBJECT
     Q_PRIVATE_SLOT(d, void listUpdate(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void smartListReply(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void settingsReply(RTM::Request* reply))
-#if !defined(Q_MOC_RUN) && !defined(QTONLY)
+#ifndef QTONLY
     Q_PRIVATE_SLOT(d, void networkStatusChanged(Solid::Networking::Status))
 #endif
     Q_PRIVATE_SLOT(d, void offlineError())
