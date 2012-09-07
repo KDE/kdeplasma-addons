@@ -60,7 +60,7 @@ Q_OBJECT
     Session(QString apiKey, QString sharedSecret, RTM::Permissions permissions, QString token = QString(), QObject *parent = 0);
     virtual ~Session();
 
-    QString getAuthUrl() const;
+    Q_INVOKABLE QString getAuthUrl() const;
     bool authenticated() const;
 
     RTM::Request* request(const QString& method);
