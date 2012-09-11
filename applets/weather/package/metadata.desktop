@@ -1,6 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Weather Forecast (QML)
+Name[nl]=Weersvoorspelling (QML)
+Name[pt]=Boletim Meteorológico (QML)
+Name[pt_BR]=Previsão meteorológica (QML)
+Name[sk]=Predpoveď počasia (QML)
+Name[sv]=Väderprognos (QML)
+Name[uk]=Прогноз погоди (QML)
+Name[x-test]=xxWeather Forecast (QML)xx
 Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 Icon=weather-clear
