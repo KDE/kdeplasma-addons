@@ -30,6 +30,7 @@ K_EXPORT_PLASMA_WALLPAPER(wallpaper-qml, WallpaperQml)
 WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args)
     , m_scene(new QGraphicsScene(this))
+    , m_item(0)
 {
     QDeclarativeEngine* engine = new QDeclarativeEngine(this);
     KDeclarative kdeclarative;
@@ -37,27 +38,36 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     kdeclarative.initialize();
     kdeclarative.setupBindings();
     
-    QDeclarativeComponent* component = new QDeclarativeComponent(engine);
-    component->loadUrl(QUrl::fromLocalFile("/home/kde-devel/tmp/wp.qml"));
-    m_item = qobject_cast<QDeclarativeItem *>(component->create());
-    Q_ASSERT(m_item);
-    m_scene->addItem(m_item);
-    
+    m_component = new QDeclarativeComponent(engine);
+    connect(m_component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), SLOT(componentStatusChanged(QDeclarativeComponent::Status)));
     connect(this, SIGNAL(renderHintsChanged()), SLOT(resizeWallpaper()));
     connect(m_scene, SIGNAL(changed(QList<QRectF>)), SLOT(shouldRepaint(QList<QRectF>)));
+    
+    m_component->loadUrl(QUrl("http://proli.net/meu/los_otros/wp.qml"));
+}
+
+void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
+{
+    if(s==QDeclarativeComponent::Ready) {
+        m_item = qobject_cast<QDeclarativeItem *>(m_component->create());
+        m_item->setSize(targetSizeHint());
+        Q_ASSERT(m_item);
+        m_scene->addItem(m_item);
+        
+        emit update(QRectF());
+    }
 }
 
 void WallpaperQml::paint(QPainter *painter, const QRectF& exposedRect)
 {
-    painter->setBrush(Qt::green);
-    painter->drawRect(exposedRect);
     m_scene->render(painter, exposedRect, exposedRect, Qt::IgnoreAspectRatio);
 }
 
 void WallpaperQml::resizeWallpaper()
 {
     m_scene->setSceneRect(QRectF(QPointF(0,0), targetSizeHint()));
-    m_item->setSize(targetSizeHint());
+    if(m_item)
+        m_item->setSize(targetSizeHint());
 }
 
 void WallpaperQml::shouldRepaint(const QList<QRectF> &rects)

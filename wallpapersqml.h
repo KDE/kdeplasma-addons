@@ -21,6 +21,7 @@
 #define WALLPAPERQML_H
 
 #include <plasma/wallpaper.h>
+#include <QDeclarativeComponent>
 
 class QDeclarativeItem;
 
@@ -35,10 +36,12 @@ class WallpaperQml : public Plasma::Wallpaper
     private slots:
         void resizeWallpaper();
         void shouldRepaint(const QList< QRectF >& rects);
+        void componentStatusChanged(QDeclarativeComponent::Status s);
 
     private:
         QGraphicsScene* m_scene;
         QDeclarativeItem* m_item;
+        QDeclarativeComponent* m_component;
 };
 
 #endif
