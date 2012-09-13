@@ -91,23 +91,23 @@ class RTM::SessionPrivate {
     }
   }
 #endif
-  
+
   void offlineError() {
     online = false;
     qDebug() << "retesting offline status in 60 seconds";
     QTimer::singleShot(60*1000, q, SLOT(retestOfflineStatus()));
   }
-  
+
   void retestOfflineStatus() {
     online = true;
     qDebug() << "retesting offline status";
     q->checkToken();
   }
-  
+
   void connectOfflineSignal(RTM::Request *request) {
     QObject::connect(request, SIGNAL(offlineError()), q, SLOT(offlineError()));
   }
-  
+
   void populateSmartList(List * list)
   {
     if (!online)
@@ -119,7 +119,7 @@ class RTM::SessionPrivate {
     smartListRequest->addArgument("auth_token", q->token());
     smartListRequest->addArgument("list_id", QString::number(list->id()));
     smartListRequest->addArgument("filter", list->filter());
-    
+
     QObject::connect(smartListRequest, SIGNAL(replyReceived(RTM::Request*)), q, SLOT(smartListReply(RTM::Request*)));
 
     smartListRequest->sendRequest();
@@ -161,6 +161,7 @@ class RTM::SessionPrivate {
 
   void applyTaskChanges() {
     foreach(RTM::Task* task, changedTasks) {
+      tags.unite(task->tags().toSet());
       emit q->taskChanged(task);
     }
 
@@ -169,6 +170,7 @@ class RTM::SessionPrivate {
     }
 
     changedTasks.clear();
+    qDebug() << "taskchanges complete, tags contains " << tags;
   }
 
   void completeTaskChanges() {
@@ -212,7 +214,7 @@ class RTM::SessionPrivate {
     foreach(const QString &part, parts)
       if (part.contains("list_id"))
         id = part.split("=").last().toLongLong();
-      
+
     qDebug() << id;
     TasksReader reader(reply, q);
     reader.read();
@@ -228,10 +230,10 @@ class RTM::SessionPrivate {
 
     reply->deleteLater();
   }
-  
+
   void settingsReply(RTM::Request* request) {
     QString reply = request->data(); // Get the full data of the reply, readAll() doesn't guarentee that.
-    
+
     // We're basically assuming no error here.... FIXME
     QString timezone = reply.remove(0, reply.indexOf("<timezone>")+10);
     timezone.truncate(timezone.indexOf("</timezone>"));
@@ -241,12 +243,12 @@ class RTM::SessionPrivate {
     timeformat.truncate(timeformat.indexOf("</timeformat>"));
     QString defaultlist = reply.remove(0, reply.indexOf("<defaultlist>"+13));
     defaultlist.truncate(defaultlist.indexOf("</defaultlist>"));
-    
+
 #ifndef QTONLY
     this->timezone = KSystemTimeZones::zone(timezone);
     qDebug() << "Timezone Set To: " << timezone << " i.e. " << this->timezone.name();
 #endif
-    
+
     request->deleteLater();
     emit q->settingsUpdated();
   }
@@ -256,7 +258,7 @@ class RTM::SessionPrivate {
 
     RTM::Request *settingsRequest = new RTM::Request("rtm.settings.getList", q->apiKey(), q->sharedSecret());
     settingsRequest->addArgument("auth_token", q->token());
-    
+
     QObject::connect(settingsRequest, SIGNAL(replyReceived(RTM::Request*)), q, SLOT(settingsReply(RTM::Request*)));
     settingsRequest->sendRequest();
   }
@@ -282,6 +284,7 @@ class RTM::SessionPrivate {
 
   QHash<RTM::TaskId,RTM::Task*> tasks;
   QHash<RTM::ListId,RTM::List*> lists;
+  QSet<QString> tags;
 
   QList<RTM::Task*> changedTasks;
   QList<RTM::List*> changedLists;

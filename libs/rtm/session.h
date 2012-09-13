@@ -38,7 +38,7 @@
  * @author Andrew Stromme <astromme@chatonka.com>
  */
 
-/** 
+/**
  * Provides a set of classes for interacting with the Remember The Milk online todo management service
  */
 namespace RTM {
@@ -82,10 +82,14 @@ Q_OBJECT
     void refreshListsFromServer();
     QHash<RTM::TaskId,RTM::Task*> cachedTasks() const;
     QHash<RTM::ListId,RTM::List*> cachedLists() const;
+    /**
+     * Get all known tags.
+     */
+    QStringList allTags() const;
 
     RTM::Task* taskFromId(RTM::TaskId id) const;
     RTM::Task* newBlankTask(RTM::TaskId id) const;
-    
+
     RTM::List* listFromId(RTM::ListId id) const;
     RTM::List* newBlankList(RTM::ListId id) const;
 
@@ -103,13 +107,13 @@ Q_OBJECT
   Q_SIGNALS:
     void tokenReceived(const QString& token);
     void tokenCheck(bool success);
-    
+
     void settingsUpdated();
     void timelineCreated(RTM::Timeline timeline);
 
     void taskChanged(RTM::Task* task);
     void listChanged(RTM::List* list);
-  
+
     void tasksChanged();
     void listsChanged();
 

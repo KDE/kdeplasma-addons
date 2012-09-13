@@ -46,10 +46,10 @@ RTM::Session::Session(QString apiKey, QString sharedSecret, RTM::Permissions per
   d->apiKey = apiKey;
   d->sharedSecret = sharedSecret;
   d->permissions = permissions;
-  
+
   connect(this, SIGNAL(tokenCheck(bool)), SLOT(handleValidToken(bool)));
   connect(this, SIGNAL(settingsUpdated()), SLOT(createTimeline()));
-  
+
   setToken(token);
 }
 
@@ -82,6 +82,10 @@ QHash< RTM::TaskId, RTM::Task* > RTM::Session::cachedTasks() const {
   return d->tasks;
 }
 
+QStringList RTM::Session::allTags() const {
+  return d->tags.toList();
+}
+
 RTM::Permissions RTM::Session::permissions() const {
   return d->permissions;
 }
@@ -93,7 +97,7 @@ QString RTM::Session::sharedSecret() const {
 RTM::Timeline RTM::Session::getTimeline() const {
   return d->timeline;
 }
-  
+
 QString RTM::Session::token() const {
   return d->token;
 }
@@ -103,7 +107,7 @@ void RTM::Session::setToken(const QString& token)
   d->token = token;
   d->tasks.clear(); //FIXME: Leak? Tasks/Lists are pointers.
   d->lists.clear();
-  
+
   checkToken();
 }
 
@@ -153,7 +157,7 @@ void RTM::Session::checkToken() {
 void RTM::Session::tokenCheckReply(RTM::Request* response)
 {
   QString reply = response->data();
-  
+
   if (!reply.contains(d->token)) {
     qDebug() << "Failed Token Check: " << reply;
     emit tokenCheck(false);
@@ -255,7 +259,7 @@ void RTM::Session::addTask(const QString& task, RTM::ListId listId)
 {
   if (!currentlyOnline())
     return;
-  
+
   RTM::List* list = listFromId(listId);
 
   qDebug() << "Adding Task: " << task << "to list with id: " << listId;
