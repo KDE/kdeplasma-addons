@@ -18,6 +18,7 @@
  */
 
 #include "wallpapersqml.h"
+#include <kdeclarative.h>
 #include <QGraphicsScene>
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
@@ -28,9 +29,14 @@ K_EXPORT_PLASMA_WALLPAPER(wallpaper-qml, WallpaperQml)
 
 WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args)
+    , m_scene(new QGraphicsScene(this))
 {
-    m_scene = new QGraphicsScene(this);
     QDeclarativeEngine* engine = new QDeclarativeEngine(this);
+    KDeclarative kdeclarative;
+    kdeclarative.setDeclarativeEngine(engine);
+    kdeclarative.initialize();
+    kdeclarative.setupBindings();
+    
     QDeclarativeComponent* component = new QDeclarativeComponent(engine);
     component->loadUrl(QUrl::fromLocalFile("/home/kde-devel/tmp/wp.qml"));
     m_item = qobject_cast<QDeclarativeItem *>(component->create());
