@@ -19,51 +19,59 @@ import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
-Rectangle {
+Item {
     id: root
 
     signal prevClicked
     signal nextClicked
     signal zoomClicked
 
-    width: prevButton.width*3 +10
-    height: prevButton.height+10
-    color: "#bb000000"
+    width: prevButton.width*3 +10 + 12
+    height: prevButton.height + 20
+    /*color: "#bb000000"
     border {
         color: "black"
         width: 2
     }
-    radius: 3
+    radius: 3*/
     anchors {
         horizontalCenter: parent.horizontalCenter
         bottom: parent.bottom
         bottomMargin:10
     }
-
+    
     Component.onCompleted: {
         prevButton.clicked.connect(root.prevClicked);
         nextButton.clicked.connect(root.nextClicked);
         zoomButton.clicked.connect(root.zoomClicked);
     }
 
+    PlasmaCore.FrameSvgItem {
+        id: myFrameSvgItem
+        anchors.fill: parent
+        imagePath: "widgets/viewitem"
+        prefix: "hover"
+    }
+    
     Row {
+        spacing: 4
         anchors.centerIn: parent
-
-        PlasmaComponents.ToolButton {
+        //ToolButton or Button in C++ use PushButton?
+        PlasmaComponents.Button {
             id: prevButton
             iconSource: "arrow-left"
-            enabled: comicData.hasPrev()
+            enabled: (comicData.prev != undefined && comicData.prev.length > 0)
         }
 
-        PlasmaComponents.ToolButton {
+        PlasmaComponents.Button {
             id: zoomButton
             iconSource: "zoom-original"
         }
 
-        PlasmaComponents.ToolButton {
+        PlasmaComponents.Button {
             id: nextButton
             iconSource: "arrow-right"
-            enabled: comicData.hasNext()
+            enabled: (comicData.next != undefined && comicData.next.length > 0)
         }
     }
 }

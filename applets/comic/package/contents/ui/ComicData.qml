@@ -60,22 +60,52 @@ Item {
             comicData.additionalText = data["Additional text"];
         }
 
-        comicData.author = data["Comic Author"];
-        comicData.first = data["First strip identifier suffix"];
-
-        comicData.title = data["Title"];
-        comicData.stripTitle = data["Strip title"];
-        comicData.suffixType = data["SuffixType"];
-        comicData.current = data["Identifier"].replace(comicData.id + ":","");
-
         comicData.websiteUrl = data["Website Url"].toString;
         comicData.imageUrl = data["Image Url"].toString;
         comicData.shopUrl = data["Shop Url"].toString;
 
+        comicData.first = data["First strip identifier suffix"];
+        comicData.stripTitle = data["Strip title"];
+        comicData.author = data["Comic Author"];
+        comicData.title = data["Title"];
+        
+        comicData.suffixType = data["SuffixType"];
+        /* TODO deal with this
+         * if ( suffixType == "Date" ) {
+        mType = Date;
+    } else if ( suffixType == "Number" ) {
+        mType = Number;
+    } else {
+        mType = String;
+    }*/
+        comicData.current = data["Identifier"].replace(comicData.id + ":","");
+        //found a new last identifier
+        if (!hasNext()) {
+            comicData.last = comicData.current;
+        }
+        
+        comicData.currentReadable = "";
+        /* TODO
+         * if ( mType == Number ) {
+            mCurrentReadable = i18nc("an abbreviation for Number", "# %1", mCurrent);
+            int tempNum = mCurrent.toInt();
+            if ( mMaxStripNum < tempNum ) {
+                mMaxStripNum = tempNum;
+            }
+
+            temp = mFirst.remove(mId + ':');
+            mFirstStripNum = temp.toInt();
+        } else if ( mType == Date && QDate::fromString( temp, "yyyy-MM-dd" ).isValid() ) {
+            comicData.currentReadable = comicData.current;
+        } else if ( mType == String ) {
+            comicData.currentReadable = comicData.current;
+        }
+         */
         comicData.isLeftToRight = data["isLeftToRight"];
         comicData.isTopToBottom = data["isTopToBottom"];
 
         console.log("identifier = " + data["Identifier"].replace(comicData.id + ":",""));
+        //TODO ComicData::save()
     }
 
     function hasNext() {

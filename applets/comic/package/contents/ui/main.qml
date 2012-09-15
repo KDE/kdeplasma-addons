@@ -27,53 +27,36 @@ Item {
 
     property string currentComicId
 
+    property bool showComicUrl: comicApplet.showComicUrl
+    property bool showComicAuthor: comicApplet.showComicAuthor
+    property bool showComicTitle: comicApplet.showComicTitle
+    property bool showComicIdentifier: comicApplet.showComicIdentifier
     property bool showErrorPicture: comicApplet.showErrorPicture
     property bool middleClick: comicApplet.middleClick
     property int checkNewComicStripsIntervall:30
     property int tabBarButtonStyle: comicApplet.tabBarButtonStyle
     property bool showTabBarIcon: (tabBarButtonStyle & 0x1)
     property bool showTabBarText: (tabBarButtonStyle & 0x2)
-
-    ComicData {
-        id: comicData
-    }
+    property variant comicData: comicApplet.comicData
+    property variant comicsModel: comicApplet.comicsModel
 
     width: 500; height: 300;
-
-    PlasmaCore.DataSource {
-        property string oldSource
-        id: providerSource
-        engine: "comic"
-        interval: 0
-        onSourceAdded: {
-            console.log("onSourceAdded = " + source);
-            oldSource = source;
-            connectSource(source);
-        }
-
-        onSourceRemoved: {
-            console.log("onSourceRemoved = " + source);
-            disconnectSource(source);
-        }
-
-        //connectedSources:sources
-        onDataChanged: {
-            console.log("onDataChanged = " + oldSource);
-
-            if (!oldSource) {
-
-            }
-            else {
-                console.log("processing comicData=" + oldSource);
-                createComicData();
-            }
-        }
-    }
 
     PlasmaCore.Theme {
         id: theme
     }
 
+    onComicDataChanged: {
+        //console.log("Comic data changed currentReadable:" + comicData.currentReadable);
+        //console.log("Comic data changed host:" + comicData.websiteHost.length);
+        busyIndicator.visible = false;
+    }
+    
+    PlasmaCore.Svg {
+        id: arrowsSvg
+        imagePath: "widgets/arrows"
+    }
+    
     ComicTabBar {
         id:comicTabbar
         tabModel: comicApplet.comicsModel
@@ -84,26 +67,43 @@ Item {
             currentComicId = key;
 
             //initial request will always fetch the last strips
-            updateComic("");
+            comicApplet.updateComic("");
         }
-        visible: (comicApplet.comicsModel.count > 0) ? true : false
+        visible: (comicsModel.count > 0) ? true : false
     }
 
-    Text {
+    PlasmaComponents.Label {
         id: topInfo
-        visible: (comicApplet.showComicAuthor || comicApplet.showComicTitle)
+        visible: (topInfo.text.length > 0)
         anchors {
             top: comicTabbar.bottom
             left: parent.left
             right: parent.right
         }
         horizontalAlignment: Text.AlignHCenter
-        text: ""
+        text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
+    }
+    
+    function getTopInfo() {
+        var tempTop = "";
+
+        if ( showComicTitle ) {
+            tempTop = comicData.title;
+            tempTop += ( ( (comicData.stripTitle.length > 0) && (comicData.title.length > 0) ) ? " - " : "" ) + comicData.stripTitle;
+        }
+        
+        if ( showComicAuthor && 
+            (comicData.author != undefined || comicData.author.length > 0) ) {
+            tempTop = ( tempTop.length > 0 ? comicData.author + ": " + tempTop : comicData.author );
+        }
+        
+        return tempTop;
     }
 
-    QImageItem {
-        id: comicImage
+    Row {
+        id: centerLayout
         width: parent.width
+        spacing: 2
         height: {
             var topInfoHeight = comicTabbar.height + ((topInfo.visible) ? topInfo.height : 0);
             var bottomInfoHeight = (bottomInfo.visible) ? bottomInfo.height : 0;
@@ -112,10 +112,103 @@ Item {
         }
         anchors { 
             top: (topInfo.visible) ? topInfo.bottom : comicTabbar.bottom
-            topMargin: 3
+            //topMargin: 3
         }
-        smooth: true
-        opacity: busyIndicator.visible ? 0.3 : 1.0
+
+        ActionButton {
+            id: arrowLeft
+            svg: arrowsSvg
+            elementId: "left-arrow"
+            width: 40
+            height: 40
+            anchors {
+                left: parent.left
+                rightMargin: 2
+                verticalCenter: parent.verticalCenter
+            }
+            visible: (!comicApplet.arrowsOnHover && (comicData.prev.length > 0))
+            onClicked: {
+                busyIndicator.visible = true;
+                comicApplet.updateComic(comicData.prev);
+            }
+        }
+
+        QImageItem {
+            id: comicImage
+            height: parent.height
+            anchors { 
+                left: arrowLeft.visible ? arrowLeft.right : parent.left
+                right: arrowRight.visible ? arrowRight.left : parent.right
+            }
+            smooth: true
+            opacity: busyIndicator.visible ? 0.3 : 1.0
+            image: comicData.image
+        }
+
+        ActionButton {
+            id: arrowRight
+            svg: arrowsSvg
+            elementId: "right-arrow"
+            width: 40
+            height: 40
+            anchors {
+                right: parent.right
+                leftMargin: 2
+                verticalCenter: parent.verticalCenter
+            }
+            visible: (!comicApplet.arrowsOnHover && (comicData.next.length > 0))
+            onClicked: {
+                busyIndicator.visible = true;
+                comicApplet.updateComic(comicData.prev);
+            }
+        }
+        
+        MouseArea {
+            id: mouseArea
+            hoverEnabled: true
+            anchors.fill: comicImage
+
+            PlasmaCore.ToolTip {
+                id: tooltip
+                target: mouseArea
+                mainText: comicData.additionalText
+            }
+                    
+            ButtonBar {
+                id: buttonBar
+                visible: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
+                opacity: 0
+                states: State {
+                    name: "show"; when: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
+                    PropertyChanges { target: buttonBar; opacity: 1; }
+                }
+
+                transitions: Transition {
+                    from: ""; to: "show"; reversible: true
+                    NumberAnimation { properties: "opacity"; duration: 250; easing.type: Easing.InOutQuad }
+                }
+
+                onPrevClicked: {
+                    console.log("Previous clicked");
+                    busyIndicator.visible = true;
+                    comicApplet.updateComic(comicData.prev);
+                }
+                onNextClicked: {
+                    console.log("Next clicked");
+                    busyIndicator.visible = true;
+                    comicApplet.updateComic(comicData.next);
+                }
+                onZoomClicked: {
+                    console.log("Zoom clicked width = " + comicData.image.nativeWidth);
+                    //comicApplet.showFullView();
+                    //TODO try using qml
+                    /*fullSizeDialog.fullImage.image = comicData.image.image;
+                    //fullSizeDialog.fullImage.imageWidth = 100;//comicData.image.nativeWidth;
+                    //fullSizeDialog.fullImage.imageHeight = comicData.image.nativeHeight;
+                    fullSizeDialog.visible = true;*/
+                }
+            }
+        }
     }
 
     PlasmaComponents.BusyIndicator {
@@ -128,104 +221,69 @@ Item {
     Row {
         id:bottomInfo
         anchors {
-            top: comicImage.bottom
+            top: centerLayout.bottom
             left: parent.left
             right: parent.right
+            topMargin: (comicIdentifier.visible || comicUrl.visible) ? 2 : 0
         }
 
-        Text {
+        PlasmaComponents.Label {
             id: comicIdentifier
-            visible: comicApplet.showComicIdentifier
+            color: theme.textColor
+            visible: (showComicIdentifier && comicIdentifier.text.length > 0)
             anchors {
                 left: parent.left
+                right: comicUrl.left
+            }
+            text: (showComicIdentifier && comicData.currentReadable != undefined) ? comicData.currentReadable : ""
+            MouseArea {
+                id: idLabelArea
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: {
+                    parent.color = "blue"
+                }
+                onExited: {
+                    parent.color = theme.textColor
+                }
+                onClicked: {
+                    console.log("Jump to Strip ...");
+                    comicApplet.goJump();
+                }
+                PlasmaCore.ToolTip {
+                    target: idLabelArea
+                    mainText: i18n( "Jump to Strip ..." )
+                }
             }
         }
 
-        Text {
+        PlasmaComponents.Label {
             id:comicUrl
-            visible: comicApplet.showComicUrl
+            color: theme.textColor
+            visible: (showComicUrl && comicUrl.text.length > 0)
             anchors {
                 right: parent.right
             }
-        }
-    }
-
-    MouseArea {
-        id: mouseArea
-        hoverEnabled: true
-        anchors.fill: comicImage
-
-        ButtonBar {
-            id: buttonBar
-            visible: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
-            onPrevClicked: {
-                console.log("Previous clicked");
-                busyIndicator.visible = true;
-                updateComic(comicData.prev);
-            }
-            onNextClicked: {
-                console.log("Next clicked");
-                busyIndicator.visible = true;
-                updateComic(comicData.next);
-            }
-            onZoomClicked: {
-                console.log("Zoom clicked width = " + comicData.image.nativeWidth);
-                
-                fullSizeDialog.fullImage.image = comicData.image.image;
-                //fullSizeDialog.fullImage.imageWidth = 100;//comicData.image.nativeWidth;
-                //fullSizeDialog.fullImage.imageHeight = comicData.image.nativeHeight;
-                fullSizeDialog.visible = true;
+            text: (showComicUrl && comicData.websiteHost.length > 0) ? comicData.websiteHost : ""
+            MouseArea {
+                id: idUrlLabelArea
+                anchors.fill: parent
+                hoverEnabled: true
+                visible: comicApplet.checkAuthorization("LaunchApp")
+                onEntered: {
+                    parent.color = "blue"
+                }
+                onExited: {
+                    parent.color = theme.textColor
+                }
+                onClicked: {
+                    comicApplet.shop();
+                }
+                PlasmaCore.ToolTip {
+                    target: idUrlLabelArea
+                    mainText: i18n( "Visit the comic website" )
+                }
             }
         }
-    }
-    
-    function createComicData() {
-        var data = providerSource.data[providerSource.oldSource];
-        
-        if (typeof data === "undefined") {
-            console.log("comicData is undefined");
-            return;
-        }
-
-        comicData.setData(data);
-
-        comicData.id = currentComicId;
-        console.log("Comic Id = " + comicData.id);
-
-        comicImage.image = comicData.image.image;
-        busyIndicator.visible = false;
-
-        updateComicInfoView();
-    }
-
-    function updateComicInfoView() {
-        //update comic info
-        topInfo.text = "";
-        if (comicApplet.showComicAuthor && comicData.author != undefined) {
-            topInfo.text = comicData.author;
-        }
-
-        if (comicApplet.showComicTitle && comicData.title != undefined) {
-            if (topInfo.text != "") {
-                topInfo.text += ": ";
-            }
-            topInfo.text += comicData.title;
-        }
-
-        if (comicApplet.showComicUrl && comicData.websiteUrl != undefined) {
-            comicUrl.text = comicData.websiteUrl;
-
-            var regExp = /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/;
-            var r = regExp.exec(comicData.websiteUrl)
-
-            comicUrl.text = r[6];
-        }
-    }
-
-    function updateComic(identifierSuffix) {
-        var comic = currentComicId + ":" + identifierSuffix;
-        console.log("retrieve data for " + comic);
-        providerSource.disconnectSource(providerSource.oldSource);
-        providerSource.connectSource(comic);
     }
 }

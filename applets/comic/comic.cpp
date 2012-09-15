@@ -2,6 +2,7 @@
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
  *   Copyright (C) 2008-2011 Matthias Fuchs <mat69@gmx.net>                *
+ *   Copyright (C) 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -25,7 +26,6 @@
 #include "checknewstrips.h"
 #include "stripselector.h"
 #include "comicwidgets.h"
-#include "buttonbar.h"
 #include "comicsaver.h"
 
 #include <QtCore/QTimer>
@@ -35,6 +35,8 @@
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QGraphicsSceneWheelEvent>
 #include <QtGui/QSortFilterProxyModel>
+#include <QtDeclarative/QDeclarativeEngine>
+#include <QtDeclarative/QDeclarativeContext>
 
 #include <KAction>
 #include <KConfigDialog>
@@ -45,9 +47,9 @@
 #include <KStandardShortcut>
 
 #include <Plasma/Containment>
-#include <plasma/tooltipmanager.h>
+#include <Plasma/DeclarativeWidget>
+#include <Plasma/Package>
 
-#include "arrowwidget.h"
 #include "comicmodel.h"
 #include "configwidget.h"
 #include "fullviewwidget.h"
@@ -60,8 +62,6 @@ const int ComicApplet::CACHE_LIMIT = 20;
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::PopupApplet( parent, args ),
       mDifferentComic( true ),
-      mShowPreviousButton( false ),
-      mShowNextButton( false ),
       mShowComicUrl( false ),
       mShowComicAuthor( false ),
       mShowComicTitle( false ),
@@ -71,36 +71,40 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mMiddleClick( true ),
       mCheckNewStrips( 0 ),
       mMainWidget( 0 ),
-      mCentralLayout( 0 ),
-      mBottomLayout( 0 ),
+      mDeclarativeWidget( 0 ),
       mFullViewWidget( 0 ),
       mActionShop( 0 ),
       mEngine( 0 ),
       mTabAdded( false ),
-      mButtonBar(0),
-      mSavingDir(0)
+      mSavingDir(0),
+      mActiveComicModel(parent)
 {
     setHasConfigurationInterface( true );
     resize( 600, 250 );
     setAspectRatioMode( Plasma::IgnoreAspectRatio );
 
     setPopupIcon( "face-smile-big" );
-
-    graphicsWidget();
 }
 
 void ComicApplet::init()
 {
     connect(this, SIGNAL(appletTransformedByUser()), this, SLOT(slotSizeChanged()));
 
-    Plasma::ToolTipManager::self()->registerWidget( this );
-
     globalComicUpdater->init( globalConfig() );
     mSavingDir = new SavingDir(config());
 
     configChanged();
+    //QML    
+    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
+    mDeclarativeWidget = new Plasma::DeclarativeWidget(this);
+    layout->addItem(mDeclarativeWidget);
     
-    buttonBar();
+    mDeclarativeWidget->engine()->rootContext()->setContextProperty("comicApplet", this);
+
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    Plasma::Package package(QString(), "org.kde.comic", structure);
+    mDeclarativeWidget->setQmlPath(package.filePath("mainscript"));
+    //End of QML
     
     mEngine = dataEngine( "comic" );
     mModel = new ComicModel( mEngine->query( "providers" ), mTabIdentifier, this );
@@ -191,101 +195,7 @@ ComicApplet::~ComicApplet()
 
 QGraphicsWidget *ComicApplet::graphicsWidget()
 {
-    if ( !mMainWidget ) {
-        mMainWidget = new QGraphicsWidget( this );
-        mMainWidget->setMinimumSize( 150, 60 );
-        mMainWidget->setAcceptHoverEvents( true );
-        mMainWidget->installEventFilter( this );
-
-        QGraphicsLinearLayout *layout = new QGraphicsLinearLayout;
-        layout->setContentsMargins( 0, 0, 0, 0 );
-        layout->setSpacing( 0 );
-
-        mCentralLayout = new QGraphicsLinearLayout;
-        mCentralLayout->setOrientation( Qt::Vertical );
-        mCentralLayout->setContentsMargins( 0, 0, 0, 0 );
-        mCentralLayout->setSpacing( 0 );
-
-        mBottomLayout = new QGraphicsLinearLayout;
-        mBottomLayout->setContentsMargins( 0, 2, 0, 0 );
-        mBottomLayout->setSpacing( 0 );
-
-        mTabBar = new ComicTabBar( mMainWidget );
-        mTabBar->nativeWidget()->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
-        mTabBar->hide();
-        connect( mTabBar, SIGNAL(currentChanged(int)), this, SLOT(slotTabChanged(int)) );
-
-        mLabelTop = new ComicLabel( mMainWidget );
-        mLabelTop->setMinimumWidth( 0 );
-        mLabelTop->nativeWidget()->setWordWrap( false );
-        mLabelTop->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
-        mLabelTop->setAlignment( Qt::AlignCenter );
-        mLabelTop->hide();
-        mCentralLayout->addItem( mLabelTop );
-
-        mImageWidget = new ImageWidget( mMainWidget );
-        mImageWidget->setZValue( 0 );
-        mImageWidget->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding ) );
-        mCentralLayout->addItem( mImageWidget );
-
-        mLabelId = new ComicLabel( mMainWidget );
-        mLabelId->setMinimumWidth( 0 );
-        mLabelId->nativeWidget()->setWordWrap( false );
-        mLabelId->nativeWidget()->setCursor( Qt::PointingHandCursor );
-        mLabelId->nativeWidget()->setToolTip( i18n( "Jump to Strip ..." ) );
-        mLabelId->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
-        mLabelId->hide();
-        mBottomLayout->addItem( mLabelId );
-        mBottomLayout->addStretch( 1 );
-
-        mLabelUrl = new ComicLabel( mMainWidget );
-        mLabelUrl->setMinimumWidth( 0 );
-        mLabelUrl->nativeWidget()->setWordWrap( false );
-        if ( hasAuthorization( "LaunchApp" ) ) {
-            mLabelUrl->nativeWidget()->setCursor( Qt::PointingHandCursor );
-            mLabelUrl->nativeWidget()->setToolTip( i18n( "Visit the comic website" ) );
-        }
-        mLabelUrl->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
-        mLabelUrl->hide();
-        mBottomLayout->addItem( mLabelUrl );
-        mCentralLayout->addItem( mBottomLayout );
-
-        mLeftArrow = new ArrowWidget( mMainWidget );
-        mLeftArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
-        mLeftArrow->setCursor( Qt::PointingHandCursor );
-        mLeftArrow->hide();
-        connect( mLeftArrow, SIGNAL(clicked()), this, SLOT(slotPreviousDay()) );
-        layout->addItem( mLeftArrow );
-        layout->addItem( mCentralLayout );
-
-        mRightArrow = new ArrowWidget( mMainWidget );
-        mRightArrow->setDirection( Plasma::Right );
-        mRightArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
-        mRightArrow->setCursor( Qt::PointingHandCursor );
-        mRightArrow->hide();
-        connect( mRightArrow, SIGNAL(clicked()), this, SLOT(slotNextDay()) );
-        layout->addItem( mRightArrow );
-
-        mMainWidget->setLayout( layout );
-    }
-
-    return mMainWidget;
-}
-
-void ComicApplet::setTabBarVisible( bool isVisible )
-{
-    if ( !mCentralLayout ) {
-        return;
-    }
-
-    mTabBar->setVisible( isVisible );
-    if ( !mTabAdded && isVisible ) {
-        mCentralLayout->insertItem( 0, mTabBar );
-        mTabAdded = true;
-    } else if ( mTabAdded && !isVisible ) {
-        mCentralLayout->removeItem( mTabBar );
-        mTabAdded = false;
-    }
+    return mDeclarativeWidget;
 }
 
 void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
@@ -296,7 +206,6 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
         return;
     }
 
-    setBusy( false );
     setConfigurationRequired( false );
 
     //there was an error, display information as image
@@ -315,35 +224,22 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
     setAssociatedApplicationUrls(mCurrent.websiteUrl());
 
-    // get the text at top
-    QString tempTop;
-    if ( mShowComicTitle ) {
-        tempTop = mCurrent.title();
-        tempTop += ( ( !mCurrent.stripTitle().isEmpty() && !mCurrent.title().isEmpty() ) ? " - " : "" ) + mCurrent.stripTitle();
-    }
-    
-    if ( mShowComicAuthor && !mCurrent.author().isEmpty() ) {
-        tempTop = ( !tempTop.isEmpty() ? mCurrent.author() + ": " + tempTop : mCurrent.author() );
-    }
-
     //looking at the last index, thus not mark it as new
     KConfigGroup cg = config();
     if (!mCurrent.hasNext() && mCheckNewComicStripsIntervall) {
-        const int index = mTabBar->currentIndex();
+        /*const int index = mTabBar->currentIndex();
         mTabBar->setTabHighlighted( index, false );
-        mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
+        mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );*/
     }
 
     //call the slot to check if the position needs to be saved
     slotStorePosition();
 
-    mLabelTop->setText( tempTop );
-    mImageWidget->setImage(mCurrent.image());
-    mImageWidget->setIsLeftToRight( data[ "isLeftToRight" ].toBool() );
-    mImageWidget->setIsTopToBottom( data[ "isTopToBottom" ].toBool() );
-    mLabelId->setText( mCurrent.currentReadable() );
-    mLabelUrl->setText( mCurrent.websiteUrl().host() );
-    mImageWidget->setScaled( !mCurrent.scaleComic() );
+    
+//     mImageWidget->setImage(mCurrent.image());
+//     mImageWidget->setIsLeftToRight( data[ "isLeftToRight" ].toBool() );
+//     mImageWidget->setIsTopToBottom( data[ "isTopToBottom" ].toBool() );
+//     mImageWidget->setScaled( !mCurrent.scaleComic() );//REZA
 
     //disconnect if there is either no error, or an error that can not be fixed automatically 
     if ( !errorAutoFixable ) {
@@ -363,33 +259,13 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     }
 
     updateView();
+    
+    refreshComicData();
 }
 
 void ComicApplet::updateView()
-{
-    const bool tabsVisible = (mTabIdentifier.count() > 1);
-    setTabBarVisible( tabsVisible );
-    mLabelTop->setVisible( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() );
-    mLabelId->setVisible( mShowComicIdentifier && !mLabelId->text().isEmpty() );
-    mLabelUrl->setVisible( mShowComicUrl && !mLabelUrl->text().isEmpty() );
-    const int spacing = ( mLabelTop->isVisible() ? 2 : 0 );
-    const int id = ( tabsVisible ? 1 : 0 );
-    mCentralLayout->setItemSpacing( id, spacing );
-    if ( mLabelId->isVisible() || mLabelUrl->isVisible() ) {
-        mBottomLayout->setContentsMargins( 0, 2, 0, 0 );
-    } else {
-        mBottomLayout->setContentsMargins( 0, 0, 0, 0 );
-    }
-
-    updateButtons();
+{   
     updateContextMenu();
-
-    Plasma::ToolTipContent toolTipData;
-    if ( !mCurrent.additionalText().isEmpty() ) {
-        toolTipData = Plasma::ToolTipContent( mCurrent.additionalText(), QString() );
-        toolTipData.setAutohide( false );
-    }
-    Plasma::ToolTipManager::self()->setContent( mMainWidget, toolTipData );
 
     if (mCurrent.hasImage()) {
         QTimer::singleShot( 1, this, SLOT(updateSize()) );//HACK
@@ -429,14 +305,14 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 
 void ComicApplet::applyConfig()
 {
-    mShowComicUrl = mConfigWidget->showComicUrl();
-    mShowComicAuthor = mConfigWidget->showComicAuthor();
-    mShowComicTitle = mConfigWidget->showComicTitle();
-    mShowComicIdentifier = mConfigWidget->showComicIdentifier();
-    mShowErrorPicture = mConfigWidget->showErrorPicture();
-    mArrowsOnHover = mConfigWidget->arrowsOnHover();
-    mMiddleClick = mConfigWidget->middleClick();
-    mTabView = mConfigWidget->tabView() + 1;//+1 because counting starts at 0, yet we use flags that start at 1
+    setShowComicUrl(mConfigWidget->showComicUrl());
+    setShowComicAuthor(mConfigWidget->showComicAuthor());
+    setShowComicTitle(mConfigWidget->showComicTitle());
+    setShowComicIdentifier(mConfigWidget->showComicIdentifier());
+    setShowErrorPicture(mConfigWidget->showErrorPicture());
+    setArrowsOnHover(mConfigWidget->arrowsOnHover());
+    setMiddleClick(mConfigWidget->middleClick());
+    setTabBarButtonStyle(mConfigWidget->tabView() + 1);//+1 because counting starts at 0, yet we use flags that start at 1
     mCheckNewComicStripsIntervall = mConfigWidget->checkNewComicStripsIntervall();
 
     //not storing this value, since other applets might have changed it inbetween
@@ -453,12 +329,28 @@ void ComicApplet::applyConfig()
 
     updateUsedComics();
     saveConfig();
-    buttonBar();
 
     //make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
     updateView();
 
     changeComic( mDifferentComic );
+    
+    //QML
+    QModelIndex data;
+    mActiveComicModel.clear();
+    for ( int i = 0; i < mProxy->rowCount(); ++i ) {
+        data = mProxy->index( i, 1 );
+
+        QString name;
+        name = data.data().toString();
+        if ( mProxy->index( i, 0 ).data( Qt::CheckStateRole) == Qt::Checked ) {
+            kDebug() << "Checked:" << name;
+            const QString identifier = data.data( Qt::UserRole ).toString();
+            const QString iconPath = data.data( Qt::DecorationRole ).value<QIcon>().name();
+            mActiveComicModel.addComic(identifier, name, iconPath);
+        }
+    }
+    //End QML
 }
 
 void ComicApplet::changeComic( bool differentComic )
@@ -480,7 +372,7 @@ void ComicApplet::changeComic( bool differentComic )
 void ComicApplet::updateUsedComics()
 {
     const QString oldIdentifier = mCurrent.id();
-    mTabBar->removeAllTabs();
+    //mTabBar->removeAllTabs();
     mTabIdentifier.clear();
     mCurrent = ComicData();
 
@@ -511,11 +403,9 @@ void ComicApplet::updateUsedComics()
                 icon = data.data( Qt::DecorationRole ).value<QIcon>();
             }
 
-            mTabBar->addTab( icon, name );
-
             //found a newer strip last time, which was not visited
             if ( mCheckNewComicStripsIntervall && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
-                mTabBar->setTabHighlighted( tab, true );
+                //mTabBar->setTabHighlighted( tab, true );
             }
 
             mTabIdentifier << identifier;
@@ -524,7 +414,7 @@ void ComicApplet::updateUsedComics()
     }
 
     mActionNextNewStripTab->setVisible( mCheckNewComicStripsIntervall );
-    mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
+    //mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
 
     delete mCheckNewStrips;
     mCheckNewStrips = 0;
@@ -625,23 +515,23 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
     KConfigGroup cg = config();
     if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
         kDebug() << identifier << "has a newer strip.";
-        mTabBar->setTabHighlighted( index, true );
+        //mTabBar->setTabHighlighted( index, true );
         cg.writeEntry( "lastStripVisited_" + identifier, false );
     }
 
-    mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
+    //mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
 }
 
 void ComicApplet::slotReload()
 {
-    int index = mTabBar->currentIndex();
+    /*int index = mTabBar->currentIndex();
     int newIndex = ( index + 1 ) % mTabBar->count();
 
     if ( index == newIndex ) {
         changeComic( false );
     } else {
         mTabBar->setCurrentIndex( newIndex );
-    }
+    }*/
 }
 
 void ComicApplet::slotGoJump()
@@ -654,8 +544,8 @@ void ComicApplet::slotGoJump()
 
 void ComicApplet::slotNextNewStrip()
 {
-    const int index = mTabBar->currentIndex();
-    mTabBar->setCurrentIndex( mTabBar->nextHighlightedTab( index ) );
+    /*const int index = mTabBar->currentIndex();
+    mTabBar->setCurrentIndex( mTabBar->nextHighlightedTab( index ) );*/
 }
 
 void ComicApplet::slotStorePosition()
@@ -705,7 +595,7 @@ void ComicApplet::updateSize()
         return;
     }
 
-    QSizeF notAvailableSize;
+    /*QSizeF notAvailableSize;
     if ( isInPanel() ) {
         notAvailableSize =  mMainWidget->geometry().size() - mImageWidget->size();
     } else {
@@ -723,7 +613,7 @@ void ComicApplet::updateSize()
         emit sizeHintChanged( Qt::PreferredSize );
         emit appletTransformedItself();
     }
-    mImageWidget->update();
+    mImageWidget->update();*/
 }
 
 void ComicApplet::createComicBook()
@@ -787,7 +677,6 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     setConfigurationRequired( id.isEmpty() );
     if ( !id.isEmpty() && mEngine && mEngine->isValid() ) {
 
-        setBusy( true );
         const QString identifier = id + ':' + identifierSuffix;
 
         //disconnecting of the oldSource is needed, otherwise you could get data for comics you are not looking at if you use tabs
@@ -813,20 +702,6 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     }
 }
 
-void ComicApplet::updateButtons()
-{
-    mShowNextButton = mCurrent.hasNext();
-    mShowPreviousButton = mCurrent.hasPrev();
-
-    mLeftArrow->setVisible(!mArrowsOnHover && mShowPreviousButton);
-    mRightArrow->setVisible(!mArrowsOnHover && mShowNextButton);
-
-    if (mButtonBar) {
-        mButtonBar->setNextEnabled(mShowNextButton);
-        mButtonBar->setPrevEnabled(mShowPreviousButton);
-    }
-}
-
 void ComicApplet::updateContextMenu()
 {
     mActionGoFirst->setVisible(mCurrent.hasFirst());
@@ -843,89 +718,12 @@ void ComicApplet::slotSaveComicAs()
     saver.save(mCurrent);
 }
 
-bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
-{
-    if ( receiver != mMainWidget ) {
-        return Plasma::PopupApplet::eventFilter( receiver, event );
-    }
-
-    switch (event->type()) {
-        case QEvent::GraphicsSceneHoverLeave:
-            if (mArrowsOnHover && mButtonBar) {
-                mButtonBar->hide();
-            }
-
-            break;
-        case QEvent::GraphicsSceneHoverEnter:
-            if (!configurationRequired() && mArrowsOnHover && mButtonBar) {
-                mButtonBar->show();
-            }
-
-            break;
-        case QEvent::GraphicsSceneMousePress:
-            {
-                QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent *>( event );
-                if ( e->button() == Qt::LeftButton ) {
-                    if ( mLabelUrl->isUnderMouse() ) {
-                        if ( hasAuthorization( "LaunchApp" ) ) {
-                            // link clicked
-                            KRun::runUrl( mCurrent.websiteUrl(), "text/html", 0 );
-                            return true;
-                        }
-                    } else if ( mLabelId->isUnderMouse() ) {
-                        // identifierSuffix clicked clicked
-                        slotGoJump();
-                        return true;
-                    } else if ( mImageWidget->isUnderMouse() && ( mMainWidget->geometry().size() != mLastSize ) ) {
-                        // only update the size by clicking on the image-rect if the user manual resized the applet
-                        updateSize();
-                        return true;
-                    }
-                } else if ( ( e->button() == Qt::MidButton ) && mMiddleClick ) { // handle full view
-                    fullView();
-                    return true;
-                }
-            }
-            break;
-        case QEvent::GraphicsSceneResize:
-            if (mButtonBar) {
-                QPointF buttons((mMainWidget->size().width() - mButtonBar->size().width()) / 2,
-                                mMainWidget->contentsRect().bottom() - mButtonBar->size().height() - 5);
-                mButtonBar->setPos(buttons);
-            }
-
-            break;
-        default:
-            break;
-    }
-
-    return false;
-}
-
 void ComicApplet::slotScaleToContent()
 {
     mCurrent.setScaleComic(mActionScaleContent->isChecked());
     mImageWidget->setScaled(!mCurrent.scaleComic());
 
     updateSize();
-}
-
-void ComicApplet::buttonBar()
-{
-    if (mArrowsOnHover) {
-        if (!mButtonBar) {
-            mButtonBar = new ButtonBar(mMainWidget);
-            connect(mButtonBar, SIGNAL(prevClicked()), this, SLOT(slotPreviousDay()));
-            connect(mButtonBar, SIGNAL(nextClicked()), this, SLOT(slotNextDay()));
-            connect(mButtonBar, SIGNAL(zoomClicked()), this, SLOT(fullView()));
-
-            // Set frame position
-            constraintsEvent(Plasma::SizeConstraint);
-        }
-    } else {
-        delete mButtonBar;
-        mButtonBar = 0;
-    }
 }
 
 void ComicApplet::fullView()
@@ -941,4 +739,166 @@ void ComicApplet::fullView()
     }
 }
 
+
+//QML
+QObject *ComicApplet::comicsModel() 
+{
+    return &mActiveComicModel;
+}
+
+bool ComicApplet::showComicUrl() const
+{
+    return mShowComicUrl;
+}
+
+void ComicApplet::setShowComicUrl(bool show)
+{
+    if (show == mShowComicUrl)
+        return;
+    
+    mShowComicUrl = show;
+    
+    emit showComicUrlChanged();
+}
+
+bool ComicApplet::showComicAuthor() const
+{
+    return mShowComicAuthor;
+}
+
+void ComicApplet::setShowComicAuthor(bool show)
+{
+    if (show == mShowComicAuthor)
+        return;
+    
+    mShowComicAuthor = show;
+    
+    emit showComicAuthorChanged();
+}
+
+bool ComicApplet::showComicTitle() const
+{
+    return mShowComicTitle;
+}
+
+void ComicApplet::setShowComicTitle(bool show)
+{
+    if (show == mShowComicTitle)
+        return;
+    
+    mShowComicTitle = show;
+    
+    emit showComicTitleChanged();
+}
+
+bool ComicApplet::showComicIdentifier() const
+{
+    return mShowComicIdentifier;
+}
+
+void ComicApplet::setShowComicIdentifier(bool show)
+{
+    if (show == mShowComicIdentifier)
+        return;
+    
+    mShowComicIdentifier = show;
+    
+    emit showComicIdentifierChanged();
+}
+
+bool ComicApplet::showErrorPicture() const
+{
+    return mShowErrorPicture;
+}
+
+void ComicApplet::setShowErrorPicture(bool show)
+{
+    if (show == mShowErrorPicture)
+        return;
+    
+    mShowErrorPicture = show;
+    
+    emit showErrorPictureChanged();
+}
+
+bool ComicApplet::arrowsOnHover() const
+{
+    return mArrowsOnHover;
+}
+
+void ComicApplet::setArrowsOnHover(bool show)
+{
+    if (show == mArrowsOnHover)
+        return;
+    
+    mArrowsOnHover = show;
+    
+    emit arrowsOnHoverChanged();
+}
+
+bool ComicApplet::middleClick() const
+{
+    return mMiddleClick;
+}
+
+void ComicApplet::setMiddleClick(bool show)
+{
+    if (show == mMiddleClick)
+        return;
+    
+    mMiddleClick = show;
+    
+    emit middleClickChanged();
+}
+
+int ComicApplet::tabBarButtonStyle() const
+{
+    return mTabView;
+}
+
+void ComicApplet::setTabBarButtonStyle(int style)
+{
+    if (style == mTabView)
+        return;
+    
+    mTabView = style;
+    
+    emit tabBarButtonStyleChanged();
+}
+
+QVariantHash ComicApplet::comicData()
+{
+    return mComicData;
+}
+
+void ComicApplet::refreshComicData()
+{
+    //QVariantHash comicData;    
+    
+    mComicData["image"] = mCurrent.image();
+    mComicData["prev"] = mCurrent.prev();
+    mComicData["next"] = mCurrent.next();
+    mComicData["additionalText"] = mCurrent.additionalText();
+        
+    mComicData["websiteUrl"] = mCurrent.websiteUrl().prettyUrl();
+    mComicData["websiteHost"] = mCurrent.websiteUrl().host();
+    mComicData["imageUrl"] = mCurrent.websiteUrl().prettyUrl();
+    mComicData["shopUrl"] = mCurrent.websiteUrl().prettyUrl();
+    mComicData["first"] = mCurrent.first();
+    mComicData["stripTitle"] = mCurrent.stripTitle();
+    mComicData["author"] = mCurrent.author();
+    mComicData["title"] = mCurrent.title();
+
+    mComicData["suffixType"] = "Date";
+    mComicData["current"] = mCurrent.current();
+    //mComicData["last"] = mCurrent.last();
+    mComicData["currentReadable"] = mCurrent.currentReadable();
+    mComicData["firstStripNum"] = mCurrent.firstStripNum();
+    mComicData["maxStripNum"] = mCurrent.maxStripNum();
+    mComicData["isLeftToRight"] = mCurrent.isLeftToRight();
+    mComicData["isTopToBottom"] = mCurrent.isTopToBottom();
+    
+    emit comicDataChanged();
+}
+//Endof QML
 #include "comic.moc"
