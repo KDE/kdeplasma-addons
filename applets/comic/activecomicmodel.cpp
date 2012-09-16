@@ -24,6 +24,7 @@ ActiveComicModel::ActiveComicModel(QObject *parent)
     newRoleNames[ComicKeyRole] = "key";
     newRoleNames[ComicTitleRole] = "title";
     newRoleNames[ComicIconRole] = "icon";
+    newRoleNames[ComicHighlightRole] = "highlight";
     
     setRoleNames(newRoleNames);
     connect(this, SIGNAL(modelReset()),
@@ -42,6 +43,7 @@ void ActiveComicModel::addComic(const QString &key, const QString &title, const 
     item->setData(key, ComicKeyRole);
     item->setData(title, ComicTitleRole);
     item->setData(iconPath, ComicIconRole);
+    item->setData(false, ComicHighlightRole);
 
     newRow << item;
     appendRow(newRow);

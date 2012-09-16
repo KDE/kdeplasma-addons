@@ -117,7 +117,8 @@ Q_SIGNALS:
     void middleClickChanged();
     void tabBarButtonStyleChanged();
     void comicDataChanged();
-    void tabHighlightRequest(int index);
+    void tabHighlightRequest(int index, bool highlight);
+    void showNextNewStrip();
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
@@ -131,7 +132,6 @@ Q_SIGNALS:
         void slotCurrentDay();
         void slotFoundLastStrip( int index, const QString &identifier, const QString &suffix );
         void slotGoJump();
-        void slotNextNewStrip();
         void slotReload();
         void slotSaveComicAs();
         void slotScaleToContent();
@@ -165,6 +165,9 @@ Q_SIGNALS:
         void saveConfig();
         bool isInPanel() const;
         void refreshComicData();
+        void setTabHighlighted(int index, bool highlight);
+        bool hasHighlightedTabs();
+        bool isTabHighlighted(int index) const;
 
     private:
         static const int CACHE_LIMIT;

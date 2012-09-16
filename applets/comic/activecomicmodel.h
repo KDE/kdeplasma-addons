@@ -30,7 +30,8 @@ public:
     enum Roles {
         ComicKeyRole = Qt::UserRole+1,
         ComicTitleRole = Qt::UserRole+2,
-        ComicIconRole = Qt::UserRole+3
+        ComicIconRole = Qt::UserRole+3,
+        ComicHighlightRole = Qt::UserRole+4
     };
     
     ActiveComicModel(QObject *parent = 0);

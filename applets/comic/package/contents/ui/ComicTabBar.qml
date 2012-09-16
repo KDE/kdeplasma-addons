@@ -47,6 +47,7 @@ Row {
             model: tabModel
             delegate:  PlasmaComponents.TabButton {
                 property string key: model.key
+                property bool highlighted: false
 
                 id: tabButton
                 text: showText ? model.title : ""
@@ -86,6 +87,39 @@ Row {
         }
     }
 
+    function setTabHighlighted(index, highlight) {
+        if (index == -1) {
+            index = currentButtonIndex();
+        }
+        if (index < 0 || index > tabbar.layout.children.length-1)
+            return;
+
+        tabbar.layout.children[index].highlighted = highlight;
+    }
+    
+    function isTabHighlighted(index) {
+        if (index < 0 || index > tabbar.layout.children.length-1)
+            return false;
+
+        return tabbar.layout.children[index].highlighted;
+    }
+
+    function nextHighlightedTab(index) {
+        var firstHighlighted = -1;
+        
+        for (var i = 0; i < tabbar.layout.children.length; ++i) {
+            if (isTabHighlighted(i)) {
+                if (i > index) {
+                    return i;
+                } else if (firstHighlighted == -1) {
+                    firstHighlighted = i;
+                }
+            }
+        }
+        
+        return (firstHighlighted != -1 ? firstHighlighted : index);
+    }
+    
     function setCurrentButtonIndex(index) {
         if (index < 0 || index > tabbar.layout.children.length-1)
             return;

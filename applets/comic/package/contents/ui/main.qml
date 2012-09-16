@@ -48,7 +48,13 @@ Item {
         target: comicApplet
         onTabHighlightRequest: {
             console.log("onTabHighlightRequest:" + index);
-            comicTabbar.setCurrentButtonIndex(index);
+            comicTabbar.setTabHighlighted(index, highlight);
+        }
+        
+        onShowNextNewStrip: {
+            console.log("onshowNextNewStrip");
+            var index = comicTabbar.currentButtonIndex();
+            comicTabbar.setCurrentButtonIndex(comicTabbar.nextHighlightedTab(index));
         }
     }
     onComicsModelCountChanged: {
@@ -248,7 +254,7 @@ Item {
                 anchors.fill: parent
                 hoverEnabled: true
                 onEntered: {
-                    parent.color = "blue"
+                    parent.color = theme.highlightColor
                 }
                 onExited: {
                     parent.color = theme.textColor
@@ -278,7 +284,7 @@ Item {
                 hoverEnabled: true
                 visible: comicApplet.checkAuthorization("LaunchApp")
                 onEntered: {
-                    parent.color = "blue"
+                    parent.color = theme.highlightColor
                 }
                 onExited: {
                     parent.color = theme.textColor

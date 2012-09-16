@@ -75,7 +75,6 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mFullViewWidget( 0 ),
       mActionShop( 0 ),
       mEngine( 0 ),
-      mTabAdded( false ),
       mSavingDir(0),
       mActiveComicModel(parent)
 {
@@ -135,7 +134,7 @@ void ComicApplet::init()
     mActionNextNewStripTab->setShortcut( KStandardShortcut::openNew() );
     addAction( "next new strip" , mActionNextNewStripTab );
     mActions.append( mActionNextNewStripTab );
-    connect( mActionNextNewStripTab, SIGNAL(triggered(bool)), this, SLOT(slotNextNewStrip()) );
+    connect( mActionNextNewStripTab, SIGNAL(triggered(bool)), this, SIGNAL(showNextNewStrip()) );
 
     mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "Jump to &first Strip" ), this );
     mActions.append( mActionGoFirst );
@@ -228,9 +227,9 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     //looking at the last index, thus not mark it as new
     KConfigGroup cg = config();
     if (!mCurrent.hasNext() && mCheckNewComicStripsIntervall) {
-        /*const int index = mTabBar->currentIndex();
-        mTabBar->setTabHighlighted( index, false );
-        mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );*/
+        setTabHighlighted( -1, false );
+        emit tabHighlightRequest(-1, false);
+        mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
     }
 
     //call the slot to check if the position needs to be saved
@@ -385,7 +384,8 @@ void ComicApplet::updateUsedComics()
             
             //found a newer strip last time, which was not visited
             if ( mCheckNewComicStripsIntervall && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
-                emit tabHighlightRequest(tab);
+                setTabHighlighted( tab, true );
+                emit tabHighlightRequest(tab, true);
             }
 
             mTabIdentifier << identifier;
@@ -394,7 +394,7 @@ void ComicApplet::updateUsedComics()
     }
 
     mActionNextNewStripTab->setVisible( mCheckNewComicStripsIntervall );
-    mActionNextNewStripTab->setEnabled( (tab > 0) );
+    mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
 
     delete mCheckNewStrips;
     mCheckNewStrips = 0;
@@ -495,11 +495,12 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
     KConfigGroup cg = config();
     if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
         kDebug() << identifier << "has a newer strip.";
-        emit tabHighlightRequest(index);
+        setTabHighlighted( index, true );
+        emit tabHighlightRequest(index, true);
         cg.writeEntry( "lastStripVisited_" + identifier, false );
     }
 
-    mActionNextNewStripTab->setEnabled( true );
+    mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
 }
 
 void ComicApplet::slotReload()
@@ -520,12 +521,6 @@ void ComicApplet::slotGoJump()
     connect(selector, SIGNAL(stripChosen(QString)), this, SLOT(updateComic(QString)));
 
     selector->select(mCurrent);
-}
-
-void ComicApplet::slotNextNewStrip()
-{
-    /*const int index = mTabBar->currentIndex();
-    mTabBar->setCurrentIndex( mTabBar->nextHighlightedTab( index ) );*/
 }
 
 void ComicApplet::slotStorePosition()
@@ -882,4 +877,38 @@ void ComicApplet::refreshComicData()
     emit comicDataChanged();
 }
 //Endof QML
+
+void ComicApplet::setTabHighlighted(int index, bool highlight)
+{
+    if (index < 0 || index >= mActiveComicModel.rowCount()) {
+        return;
+    }
+    
+    QStandardItem * item = mActiveComicModel.item(index);
+    if (highlight != item->data(ActiveComicModel::ComicHighlightRole).toBool()) {
+        item->setData(highlight, ActiveComicModel::ComicHighlightRole);
+    }   
+}
+
+bool ComicApplet::hasHighlightedTabs()
+{
+    for (int i = 0; i < mActiveComicModel.rowCount(); ++i) {
+        if (isTabHighlighted(i)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool ComicApplet::isTabHighlighted(int index) const
+{
+    if (index < 0 || index >= mActiveComicModel.rowCount()) {
+        return false;
+    }
+
+    QStandardItem * item = mActiveComicModel.item(index);
+    
+    return item->data(ActiveComicModel::ComicHighlightRole).toBool();
+}
 #include "comic.moc"
