@@ -43,7 +43,14 @@ Item {
     PlasmaCore.Theme {
         id: theme
     }
-
+    
+    Connections {
+        target: comicApplet
+        onTabHighlightRequest: {
+            console.log("onTabHighlightRequest:" + index);
+            comicTabbar.setCurrentButtonIndex(index);
+        }
+    }
     onComicsModelCountChanged: {
         console.log("Providers count:" + comicsModel.count);
         console.log("Providers count:" + comicsModelCount);

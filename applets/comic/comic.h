@@ -117,7 +117,8 @@ Q_SIGNALS:
     void middleClickChanged();
     void tabBarButtonStyleChanged();
     void comicDataChanged();
-    
+    void tabHighlightRequest(int index);
+
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
         void createConfigurationInterface( KConfigDialog *parent );

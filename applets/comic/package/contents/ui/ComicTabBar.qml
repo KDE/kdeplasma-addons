@@ -86,6 +86,13 @@ Row {
         }
     }
 
+    function setCurrentButtonIndex(index) {
+        if (index < 0 || index > tabbar.layout.children.length-1)
+            return;
+
+        tabbar.currentTab = tabbar.layout.children[index];
+    }
+    
     function changeButtonIndex(forward){
         var oldIndex = currentButtonIndex();
         if (forward) {

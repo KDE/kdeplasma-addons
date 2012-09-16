@@ -385,7 +385,7 @@ void ComicApplet::updateUsedComics()
             
             //found a newer strip last time, which was not visited
             if ( mCheckNewComicStripsIntervall && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
-                //mTabBar->setTabHighlighted( tab, true );
+                emit tabHighlightRequest(tab);
             }
 
             mTabIdentifier << identifier;
@@ -394,7 +394,7 @@ void ComicApplet::updateUsedComics()
     }
 
     mActionNextNewStripTab->setVisible( mCheckNewComicStripsIntervall );
-    //mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
+    mActionNextNewStripTab->setEnabled( (tab > 0) );
 
     delete mCheckNewStrips;
     mCheckNewStrips = 0;
@@ -495,11 +495,11 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
     KConfigGroup cg = config();
     if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
         kDebug() << identifier << "has a newer strip.";
-        //mTabBar->setTabHighlighted( index, true );
+        emit tabHighlightRequest(index);
         cg.writeEntry( "lastStripVisited_" + identifier, false );
     }
 
-    //mActionNextNewStripTab->setEnabled( mTabBar->hasHighlightedTabs() );
+    mActionNextNewStripTab->setEnabled( true );
 }
 
 void ComicApplet::slotReload()
