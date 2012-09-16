@@ -206,6 +206,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
         return;
     }
 
+    setBusy( false );
     setConfigurationRequired( false );
 
     //there was an error, display information as image
@@ -355,7 +356,7 @@ void ComicApplet::changeComic( bool differentComic )
 void ComicApplet::updateUsedComics()
 {
     const QString oldIdentifier = mCurrent.id();
-    //mTabBar->removeAllTabs();
+
     mActiveComicModel.clear();
     mTabIdentifier.clear();
     mCurrent = ComicData();
@@ -656,6 +657,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     setConfigurationRequired( id.isEmpty() );
     if ( !id.isEmpty() && mEngine && mEngine->isValid() ) {
 
+        setBusy( true );
         const QString identifier = id + ':' + identifierSuffix;
 
         //disconnecting of the oldSource is needed, otherwise you could get data for comics you are not looking at if you use tabs

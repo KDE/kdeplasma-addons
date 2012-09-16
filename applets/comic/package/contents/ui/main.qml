@@ -66,7 +66,7 @@ Item {
         showIcon: showTabBarIcon
         showText: showTabBarText
         onCurrentTabChanged: {
-            busyIndicator.visible = true;
+            //busyIndicator.visible = true;
             comicApplet.tabChanged(newIndex);
         }
         visible: (comicsModel.count > 1)
