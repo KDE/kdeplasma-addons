@@ -70,7 +70,6 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mArrowsOnHover( true ),
       mMiddleClick( true ),
       mCheckNewStrips( 0 ),
-      mMainWidget( 0 ),
       mDeclarativeWidget( 0 ),
       mFullViewWidget( 0 ),
       mActionShop( 0 ),
@@ -532,8 +531,8 @@ void ComicApplet::slotSizeChanged()
 {
     // if the applet was resized manually by the user
     if ( isInPanel() ) {
-        if ( mMainWidget->size() != mLastSize ) {
-            mMaxSize = mMainWidget->size();
+        if ( mDeclarativeWidget->size() != mLastSize ) {
+            mMaxSize = mDeclarativeWidget->size();
             updateSize();
 
             KConfigGroup cg = config();
@@ -572,7 +571,7 @@ void ComicApplet::updateSize()
 
     /*QSizeF notAvailableSize;
     if ( isInPanel() ) {
-        notAvailableSize =  mMainWidget->geometry().size() - mImageWidget->size();
+        notAvailableSize =  mDeclarativeWidget->geometry().size() - mImageWidget->size();
     } else {
         notAvailableSize =  this->geometry().size() - mImageWidget->size();
     }
@@ -581,7 +580,7 @@ void ComicApplet::updateSize()
     mLastSize = mImageWidget->preferredSize() + notAvailableSize;
 
     if ( isInPanel() ) {
-        mMainWidget->resize( mLastSize );
+        mDeclarativeWidget->resize( mLastSize );
     } else {
         resize( mLastSize );
         mLastSize = this->size();//NOTE the applet won't be smaller than the minimum size of the MainWidget, thus the result of the resize might not correspond with mLastSize

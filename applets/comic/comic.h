@@ -193,7 +193,6 @@ Q_SIGNALS:
         CheckNewStrips *mCheckNewStrips;
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
-        QGraphicsWidget *mMainWidget;
         Plasma::DeclarativeWidget *mDeclarativeWidget;
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
