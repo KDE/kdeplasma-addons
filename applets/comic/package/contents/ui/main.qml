@@ -213,7 +213,7 @@ Item {
                 }
                 onZoomClicked: {
                     console.log("Zoom clicked width = " + comicData.image.nativeWidth);
-                    //comicApplet.showFullView();
+                    comicApplet.showFullView();
                     //TODO try using qml
                     /*fullSizeDialog.fullImage.image = comicData.image.image;
                     //fullSizeDialog.fullImage.imageWidth = 100;//comicData.image.nativeWidth;

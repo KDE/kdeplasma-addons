@@ -710,7 +710,7 @@ void ComicApplet::fullView()
 
     if (!mFullViewWidget->isVisible()) {
         mFullViewWidget->setImage(mCurrent.image());
-        mFullViewWidget->adaptPosition(mMainWidget->mapToScene( mMainWidget->pos()).toPoint(), containment()->screen());
+        mFullViewWidget->adaptPosition(mDeclarativeWidget->mapToScene( mDeclarativeWidget->pos()).toPoint(), containment()->screen());
         mFullViewWidget->show();
     }
 }
