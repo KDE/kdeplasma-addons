@@ -27,14 +27,14 @@ Row {
 
     anchors { left: parent.left; right: parent.right; top: parent.top}
 
-    signal currentTabChanged(string key)
+    signal currentTabChanged(int newIndex)
     
     PlasmaComponents.TabBar{
         id: tabbar
 
         onCurrentTabChanged: {
             console.log("OnCurrentChanged triggered");
-            root.currentTabChanged(tabbar.currentTab.key);
+            root.currentTabChanged(currentButtonIndex());
             console.log("Current Index: " + currentButtonIndex());
         }
 

@@ -334,23 +334,6 @@ void ComicApplet::applyConfig()
     updateView();
 
     changeComic( mDifferentComic );
-    
-    //QML
-    QModelIndex data;
-    mActiveComicModel.clear();
-    for ( int i = 0; i < mProxy->rowCount(); ++i ) {
-        data = mProxy->index( i, 1 );
-
-        QString name;
-        name = data.data().toString();
-        if ( mProxy->index( i, 0 ).data( Qt::CheckStateRole) == Qt::Checked ) {
-            kDebug() << "Checked:" << name;
-            const QString identifier = data.data( Qt::UserRole ).toString();
-            const QString iconPath = data.data( Qt::DecorationRole ).value<QIcon>().name();
-            mActiveComicModel.addComic(identifier, name, iconPath);
-        }
-    }
-    //End QML
 }
 
 void ComicApplet::changeComic( bool differentComic )
@@ -373,6 +356,7 @@ void ComicApplet::updateUsedComics()
 {
     const QString oldIdentifier = mCurrent.id();
     //mTabBar->removeAllTabs();
+    mActiveComicModel.clear();
     mTabIdentifier.clear();
     mCurrent = ComicData();
 
@@ -393,16 +377,11 @@ void ComicApplet::updateUsedComics()
                 mCurrent.setTitle(title);
             }
 
-            QIcon icon;
-            QString name;
+            const QString name = data.data().toString();
             const QString identifier = data.data( Qt::UserRole ).toString();
-            if ( mTabView & ShowText ) {
-                name = data.data().toString();
-            }
-            if ( mTabView & ShowIcon ) {
-                icon = data.data( Qt::DecorationRole ).value<QIcon>();
-            }
-
+            const QString iconPath = data.data( Qt::DecorationRole ).value<QIcon>().name();
+            mActiveComicModel.addComic(identifier, name, iconPath);
+            
             //found a newer strip last time, which was not visited
             if ( mCheckNewComicStripsIntervall && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
                 //mTabBar->setTabHighlighted( tab, true );

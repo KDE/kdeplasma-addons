@@ -26,14 +26,9 @@ Item {
     signal nextClicked
     signal zoomClicked
 
-    width: prevButton.width*3 +10 + 12
+    width: prevButton.width*3 +10 + 14
     height: prevButton.height + 20
-    /*color: "#bb000000"
-    border {
-        color: "black"
-        width: 2
-    }
-    radius: 3*/
+
     anchors {
         horizontalCenter: parent.horizontalCenter
         bottom: parent.bottom

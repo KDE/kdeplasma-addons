@@ -151,6 +151,7 @@ Q_SIGNALS:
         Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
         Q_INVOKABLE void goJump() { slotGoJump();}
         Q_INVOKABLE void shop() { slotShop();}
+        Q_INVOKABLE void tabChanged(int newIndex) { slotTabChanged(newIndex);}
 
     protected:
         QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;

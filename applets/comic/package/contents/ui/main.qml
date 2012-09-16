@@ -25,20 +25,18 @@ Item {
     property int minimumWidth: 150
     property int minimumHeight: 60
 
-    property string currentComicId
-
     property bool showComicUrl: comicApplet.showComicUrl
     property bool showComicAuthor: comicApplet.showComicAuthor
     property bool showComicTitle: comicApplet.showComicTitle
     property bool showComicIdentifier: comicApplet.showComicIdentifier
     property bool showErrorPicture: comicApplet.showErrorPicture
     property bool middleClick: comicApplet.middleClick
-    property int checkNewComicStripsIntervall:30
     property int tabBarButtonStyle: comicApplet.tabBarButtonStyle
     property bool showTabBarIcon: (tabBarButtonStyle & 0x1)
     property bool showTabBarText: (tabBarButtonStyle & 0x2)
     property variant comicData: comicApplet.comicData
     property variant comicsModel: comicApplet.comicsModel
+    property int comicsModelCount: comicsModel.count
 
     width: 500; height: 300;
 
@@ -46,6 +44,11 @@ Item {
         id: theme
     }
 
+    onComicsModelCountChanged: {
+        console.log("Providers count:" + comicsModel.count);
+        console.log("Providers count:" + comicsModelCount);
+    }
+    
     onComicDataChanged: {
         //console.log("Comic data changed currentReadable:" + comicData.currentReadable);
         //console.log("Comic data changed host:" + comicData.websiteHost.length);
@@ -59,24 +62,21 @@ Item {
     
     ComicTabBar {
         id:comicTabbar
-        tabModel: comicApplet.comicsModel
+        tabModel: comicsModel
         showIcon: showTabBarIcon
         showText: showTabBarText
         onCurrentTabChanged: {
             busyIndicator.visible = true;
-            currentComicId = key;
-
-            //initial request will always fetch the last strips
-            comicApplet.updateComic("");
+            comicApplet.tabChanged(newIndex);
         }
-        visible: (comicsModel.count > 0) ? true : false
+        visible: (comicsModel.count > 1)
     }
 
     PlasmaComponents.Label {
         id: topInfo
         visible: (topInfo.text.length > 0)
         anchors {
-            top: comicTabbar.bottom
+            top: comicTabbar.visible ? comicTabbar.bottom : parent.top
             left: parent.left
             right: parent.right
         }
@@ -105,14 +105,14 @@ Item {
         width: parent.width
         spacing: 2
         height: {
-            var topInfoHeight = comicTabbar.height + ((topInfo.visible) ? topInfo.height : 0);
+            var topInfoHeight = ((comicTabbar.visible) ? comicTabbar.height : 0) + ((topInfo.visible) ? topInfo.height : 0);
             var bottomInfoHeight = (bottomInfo.visible) ? bottomInfo.height : 0;
             
-            parent.height - topInfoHeight - bottomInfoHeight;
+            parent.height - topInfoHeight - bottomInfoHeight - anchors.topMargin;
         }
         anchors { 
-            top: (topInfo.visible) ? topInfo.bottom : comicTabbar.bottom
-            //topMargin: 3
+            top: (topInfo.visible) ? topInfo.bottom : (comicTabbar.visible ? comicTabbar.bottom : parent.top)
+            topMargin: 3
         }
 
         ActionButton {
