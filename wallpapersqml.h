@@ -37,11 +37,14 @@ class WallpaperQml : public Plasma::Wallpaper
         void resizeWallpaper();
         void shouldRepaint(const QList< QRectF >& rects);
         void componentStatusChanged(QDeclarativeComponent::Status s);
+        void setPackageName(const QString& name);
 
     private:
         QGraphicsScene* m_scene;
         QDeclarativeItem* m_item;
         QDeclarativeComponent* m_component;
+        Plasma::Package* m_package;
+        Plasma::PackageStructure::Ptr m_structure;
 };
 
 #endif

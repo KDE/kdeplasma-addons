@@ -18,12 +18,14 @@
  */
 
 #include "wallpapersqml.h"
+#include <plasma/package.h>
 #include <kdeclarative.h>
 #include <QGraphicsScene>
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
 #include <QDeclarativeComponent>
 #include <QPainter>
+#include <qdir.h>
 
 K_EXPORT_PLASMA_WALLPAPER(wallpaper-qml, WallpaperQml)
 
@@ -31,6 +33,7 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args)
     , m_scene(new QGraphicsScene(this))
     , m_item(0)
+    , m_package(0)
 {
     QDeclarativeEngine* engine = new QDeclarativeEngine(this);
     KDeclarative kdeclarative;
@@ -43,12 +46,33 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     connect(this, SIGNAL(renderHintsChanged()), SLOT(resizeWallpaper()));
     connect(m_scene, SIGNAL(changed(QList<QRectF>)), SLOT(shouldRepaint(QList<QRectF>)));
     
-    m_component->loadUrl(QUrl("http://proli.net/meu/los_otros/wp.qml"));
+    m_structure = Plasma::PackageStructure::load("Plasma/Generic");
+    Q_ASSERT(m_structure);
+    setPackageName("org.kde.ugly-qml");
+}
+
+void WallpaperQml::setPackageName(const QString& packageName)
+{
+    if(m_package)
+        delete m_package;
+    
+    m_package = new Plasma::Package(QString("/home/kde-devel/kde/share/apps/plasma/packages/"), packageName, m_structure);
+    Q_ASSERT(m_package->isValid());
+    QUrl scriptUrl(m_package->filePath("mainscript"));
+    if(scriptUrl.isValid())
+        m_component->loadUrl(scriptUrl);
+    else
+        m_component->setData("import QtQuick 1.1\n Text { text: 'wrong wallpaper'}", QDir::tempPath());
 }
 
 void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
 {
     if(s==QDeclarativeComponent::Ready) {
+        if(m_item) {
+            m_scene->removeItem(m_item);
+            delete m_item;
+        }
+        
         m_item = qobject_cast<QDeclarativeItem *>(m_component->create());
         m_item->setSize(targetSizeHint());
         Q_ASSERT(m_item);
