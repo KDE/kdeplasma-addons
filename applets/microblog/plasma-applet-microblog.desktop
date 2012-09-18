@@ -120,6 +120,7 @@ Keywords[sv]=identi.ca;twitter;
 Keywords[uk]=identi.ca;twitter;
 Keywords[x-test]=xxidenti.ca;twitter;xx
 Keywords[zh_CN]=identi.ca;twitter;
+Keywords[zh_TW]=identi.ca;twitter;
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=view-pim-journal

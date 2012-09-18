@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Weather Forecast (QML)
 Name[cs]=Předpověď počasí (QML)
+Name[fi]=Sääennuste (QML)
 Name[nl]=Weersvoorspelling (QML)
 Name[pt]=Boletim Meteorológico (QML)
 Name[pt_BR]=Previsão meteorológica (QML)
@@ -13,6 +14,7 @@ Name[sr@latin]=vremenska prognoza (QML)
 Name[sv]=Väderprognos (QML)
 Name[uk]=Прогноз погоди (QML)
 Name[x-test]=xxWeather Forecast (QML)xx
+Name[zh_TW]=氣象預報 (QML)
 Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 Icon=weather-clear

@@ -17,6 +17,7 @@ Name[sv]=LCD-väderstation (QML)
 Name[uk]=Метеорологічна станція на дисплеї (QML)
 Name[x-test]=xxLCD Weather Station (QML)xx
 Name[zh_CN]=液晶气象站 (QML)
+Name[zh_TW]=LCD 氣象站 (QML)
 Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 Icon=accessories-dictionary
