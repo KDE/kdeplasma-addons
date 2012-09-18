@@ -56,7 +56,7 @@ void WallpaperQml::setPackageName(const QString& packageName)
     if(m_package)
         delete m_package;
     
-    m_package = new Plasma::Package(QString("/home/kde-devel/kde/share/apps/plasma/packages/"), packageName, m_structure);
+    m_package = new Plasma::Package(QString(), packageName, m_structure);
     Q_ASSERT(m_package->isValid());
     QUrl scriptUrl(m_package->filePath("mainscript"));
     if(scriptUrl.isValid())
