@@ -23,6 +23,7 @@
 #include <plasma/wallpaper.h>
 #include <QDeclarativeComponent>
 
+class QModelIndex;
 class QDeclarativeItem;
 
 class WallpaperQml : public Plasma::Wallpaper
@@ -32,12 +33,14 @@ class WallpaperQml : public Plasma::Wallpaper
         WallpaperQml(QObject* parent, const QVariantList& args);
 
         virtual void paint(QPainter* painter, const QRectF& exposedRect);
+        virtual QWidget* createConfigurationInterface(QWidget* parent);
 
     private slots:
         void resizeWallpaper();
         void shouldRepaint(const QList< QRectF >& rects);
         void componentStatusChanged(QDeclarativeComponent::Status s);
         void setPackageName(const QString& name);
+        void changeWallpaper(const QModelIndex& idx);
 
     private:
         QGraphicsScene* m_scene;

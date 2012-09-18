@@ -18,6 +18,7 @@
  */
 
 #include "wallpapersqml.h"
+#include "wallpapersmodel.h"
 #include <plasma/package.h>
 #include <kdeclarative.h>
 #include <QGraphicsScene>
@@ -25,6 +26,7 @@
 #include <QDeclarativeItem>
 #include <QDeclarativeComponent>
 #include <QPainter>
+#include <QListView>
 #include <qdir.h>
 
 K_EXPORT_PLASMA_WALLPAPER(wallpaper-qml, WallpaperQml)
@@ -45,10 +47,7 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     connect(m_component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), SLOT(componentStatusChanged(QDeclarativeComponent::Status)));
     connect(this, SIGNAL(renderHintsChanged()), SLOT(resizeWallpaper()));
     connect(m_scene, SIGNAL(changed(QList<QRectF>)), SLOT(shouldRepaint(QList<QRectF>)));
-    
-    m_structure = Plasma::PackageStructure::load("Plasma/Generic");
-    Q_ASSERT(m_structure);
-    setPackageName("org.kde.ugly-qml");
+    setPackageName("org.kde.animals");
 }
 
 void WallpaperQml::setPackageName(const QString& packageName)
@@ -56,6 +55,8 @@ void WallpaperQml::setPackageName(const QString& packageName)
     if(m_package)
         delete m_package;
     
+    kDebug() << "loading package..." << packageName;
+    m_structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), packageName, m_structure);
     Q_ASSERT(m_package->isValid());
     QUrl scriptUrl(m_package->filePath("mainscript"));
@@ -80,6 +81,8 @@ void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
         
         emit update(QRectF());
     }
+    if(!m_component->errors().isEmpty())
+        kDebug() << "wallpaper errors:" << m_component->errors();
 }
 
 void WallpaperQml::paint(QPainter *painter, const QRectF& exposedRect)
@@ -102,4 +105,20 @@ void WallpaperQml::shouldRepaint(const QList<QRectF> &rects)
     
     if(!repaintRect.isEmpty())
         emit update(repaintRect);
+}
+
+QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
+{
+    QListView* view = new QListView(parent);
+    WallpapersModel* m = new WallpapersModel(view);
+    
+    view->setModel(m);
+    view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
+    connect(view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
+    return view;
+}
+
+void WallpaperQml::changeWallpaper(const QModelIndex& idx)
+{
+    setPackageName(idx.data(WallpapersModel::PackageNameRole).toString());
 }
