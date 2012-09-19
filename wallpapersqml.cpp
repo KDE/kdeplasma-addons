@@ -121,4 +121,5 @@ QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
 void WallpaperQml::changeWallpaper(const QModelIndex& idx)
 {
     setPackageName(idx.data(WallpapersModel::PackageNameRole).toString());
+//     emit configNeedsSaving();
 }
