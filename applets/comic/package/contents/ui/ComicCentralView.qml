@@ -78,6 +78,7 @@ Rectangle {
         id: mouseArea
         hoverEnabled: true
         anchors.fill: comicImage
+        preventStealing:true
 
         PlasmaCore.ToolTip {
             id: tooltip

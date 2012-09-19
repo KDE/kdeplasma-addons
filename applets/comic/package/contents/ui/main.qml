@@ -30,7 +30,7 @@ Item {
 
     property bool showErrorPicture: comicApplet.showErrorPicture
     property bool middleClick: comicApplet.middleClick
-    property int comicsModelCount: comicsModel.count
+    property int comicsModelCount: comicApplet.comicsModel.count
 
     width: 500; height: 300;
 
@@ -51,12 +51,12 @@ Item {
             comicTabbar.setCurrentButtonIndex(comicTabbar.nextHighlightedTab(index));
         }
     }
-    /*onComicsModelCountChanged: {
-        console.log("Providers count:" + comicsModel.count);
-        console.log("Providers count:" + comicsModelCount);
+
+    onComicsModelCountChanged: {
+        console.log("Providers count:" + comicApplet.comicsModel.count);
+        comicTabbar.setCurrentButtonIndex(0);
     }
-    */
-    
+
     states: [
         State {
             name: "topInfoInvisible"

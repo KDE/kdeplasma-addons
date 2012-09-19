@@ -51,7 +51,7 @@ Row {
 
                 id: tabButton
                 text: showText ? model.title : ""
-                iconSource: showIcon ? model.icon : ""
+                iconSource: showIcon ? model.icon : null
             }
         }
     }
