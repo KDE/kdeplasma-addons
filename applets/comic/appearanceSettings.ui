@@ -37,12 +37,12 @@
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
        <property name="buddy">
-        <cstring>checkBox_arrows</cstring>
+        <cstring>kcfg_ArrowsOnHover</cstring>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QCheckBox" name="checkBox_arrows">
+      <widget class="QCheckBox" name="kcfg_ArrowsOnHover">
        <property name="text">
         <string/>
        </property>
@@ -135,12 +135,12 @@
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
        <property name="buddy">
-        <cstring>checkBox_title</cstring>
+        <cstring>kcfg_ShowComicTitle</cstring>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QCheckBox" name="checkBox_title">
+      <widget class="QCheckBox" name="kcfg_ShowComicTitle">
        <property name="text">
         <string/>
        </property>
@@ -158,12 +158,12 @@
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
        <property name="buddy">
-        <cstring>checkBox_identifier</cstring>
+        <cstring>kcfg_ShowComicIdentifier</cstring>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QCheckBox" name="checkBox_identifier">
+      <widget class="QCheckBox" name="kcfg_ShowComicIdentifier">
        <property name="text">
         <string/>
        </property>
@@ -181,12 +181,12 @@
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
        <property name="buddy">
-        <cstring>checkBox_author</cstring>
+        <cstring>kcfg_ShowComicAuthor</cstring>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QCheckBox" name="checkBox_author">
+      <widget class="QCheckBox" name="kcfg_ShowComicAuthor">
        <property name="text">
         <string/>
        </property>
@@ -204,12 +204,12 @@
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
        <property name="buddy">
-        <cstring>checkBox_url</cstring>
+        <cstring>kcfg_ShowComicUrl</cstring>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QCheckBox" name="checkBox_url">
+      <widget class="QCheckBox" name="kcfg_ShowComicUrl">
        <property name="text">
         <string/>
        </property>
@@ -263,7 +263,7 @@
     </spacer>
    </item>
    <item row="6" column="1">
-    <widget class="KButtonGroup" name="kbuttongroup">
+    <widget class="KButtonGroup" name="kcfg_TabView">
      <property name="title">
       <string/>
      </property>
@@ -312,12 +312,12 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>checkBox_arrows</tabstop>
+  <tabstop>kcfg_ArrowsOnHover</tabstop>
   <tabstop>pushButton_Size</tabstop>
-  <tabstop>checkBox_title</tabstop>
-  <tabstop>checkBox_identifier</tabstop>
-  <tabstop>checkBox_author</tabstop>
-  <tabstop>checkBox_url</tabstop>
+  <tabstop>kcfg_ShowComicTitle</tabstop>
+  <tabstop>kcfg_ShowComicIdentifier</tabstop>
+  <tabstop>kcfg_ShowComicAuthor</tabstop>
+  <tabstop>kcfg_ShowComicUrl</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -27,6 +27,7 @@
 #include <KConfigDialog>
 #include <KNS3/DownloadDialog>
 #include <knewstuff3/downloadmanager.h>
+#include "comicconfig.h"
 
 ComicUpdater::ComicUpdater( QObject *parent )
   : QObject( parent ),
@@ -119,17 +120,17 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSort
 
     // "Apply" button connections
     connect(comicUi.pushButton_GHNS , SIGNAL(clicked(bool)), this , SIGNAL(enableApply()));
-    connect(comicUi.checkBox_middle , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
-    connect(comicUi.updateIntervall, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
-    connect(comicUi.updateIntervallComicStrips, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
-    connect(appearanceUi.checkBox_arrows, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
-    connect(appearanceUi.checkBox_title, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
-    connect(appearanceUi.checkBox_identifier, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
-    connect(appearanceUi.checkBox_author, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
-    connect(appearanceUi.checkBox_url, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
-    connect(appearanceUi.kbuttongroup, SIGNAL(changed(int)), this , SIGNAL(enableApply()));
-    connect(advancedUi.maxComicLimit, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
-    connect(advancedUi.errorPicture, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(comicUi.kcfg_MiddleClick , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(comicUi.kcfg_UpdateIntervall, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
+    connect(comicUi.kcfg_UpdateIntervallComicStrips, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
+    connect(appearanceUi.kcfg_ArrowsOnHover, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.kcfg_ShowComicTitle, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.kcfg_ShowComicIdentifier, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.kcfg_ShowComicAuthor, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.kcfg_ShowComicUrl, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
+    connect(appearanceUi.kcfg_TabView, SIGNAL(changed(int)), this , SIGNAL(enableApply()));
+    connect(advancedUi.kcfg_MaxComicLimit, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
+    connect(advancedUi.kcfg_ShowErrorPicture, SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
 
     mEngine->connectSource( QLatin1String( "providers" ), this );
 }
@@ -156,113 +157,113 @@ void ConfigWidget::dataUpdated(const QString &name, const Plasma::DataEngine::Da
 
 void ConfigWidget::setShowComicUrl( bool show )
 {
-    appearanceUi.checkBox_url->setChecked( show );
+    appearanceUi.kcfg_ShowComicUrl->setChecked( show );
 }
 
 bool ConfigWidget::showComicUrl() const
 {
-    return appearanceUi.checkBox_url->isChecked();
+    return appearanceUi.kcfg_ShowComicUrl->isChecked();
 }
 
 void ConfigWidget::setShowComicAuthor( bool show )
 {
-    appearanceUi.checkBox_author->setChecked( show );
+    appearanceUi.kcfg_ShowComicAuthor->setChecked( show );
 }
 
 bool ConfigWidget::showComicAuthor() const
 {
-    return appearanceUi.checkBox_author->isChecked();
+    return appearanceUi.kcfg_ShowComicAuthor->isChecked();
 }
 
 void ConfigWidget::setShowComicTitle( bool show )
 {
-    appearanceUi.checkBox_title->setChecked( show );
+    appearanceUi.kcfg_ShowComicTitle->setChecked( show );
 }
 
 bool ConfigWidget::showComicTitle() const
 {
-    return appearanceUi.checkBox_title->isChecked();
+    return appearanceUi.kcfg_ShowComicTitle->isChecked();
 }
 
 void ConfigWidget::setShowComicIdentifier( bool show )
 {
-    appearanceUi.checkBox_identifier->setChecked( show );
+    appearanceUi.kcfg_ShowComicIdentifier->setChecked( show );
 }
 
 bool ConfigWidget::showComicIdentifier() const
 {
-    return appearanceUi.checkBox_identifier->isChecked();
+    return appearanceUi.kcfg_ShowComicIdentifier->isChecked();
 }
 
 void ConfigWidget::setShowErrorPicture( bool show )
 {
-    advancedUi.errorPicture->setChecked( show );
+    advancedUi.kcfg_ShowErrorPicture->setChecked( show );
 }
 
 bool ConfigWidget::showErrorPicture() const
 {
-    return advancedUi.errorPicture->isChecked();
+    return advancedUi.kcfg_ShowErrorPicture->isChecked();
 }
 
 
 void ConfigWidget::setArrowsOnHover( bool arrows )
 {
-    return appearanceUi.checkBox_arrows->setChecked( arrows );
+    return appearanceUi.kcfg_ArrowsOnHover->setChecked( arrows );
 }
 
 bool ConfigWidget::arrowsOnHover() const
 {
-    return appearanceUi.checkBox_arrows->isChecked();
+    return appearanceUi.kcfg_ArrowsOnHover->isChecked();
 }
 
 void ConfigWidget::setMiddleClick( bool checked )
 {
-    comicUi.checkBox_middle->setChecked( checked );
+    comicUi.kcfg_MiddleClick->setChecked( checked );
 }
 
 bool ConfigWidget::middleClick() const
 {
-    return comicUi.checkBox_middle->isChecked();
+    return comicUi.kcfg_MiddleClick->isChecked();
 }
 
 void ConfigWidget::setTabView(int tabView)
 {
-    appearanceUi.kbuttongroup->setSelected( tabView );
+    appearanceUi.kcfg_TabView->setSelected( tabView );
 }
 
 int ConfigWidget::tabView() const
 {
-    return appearanceUi.kbuttongroup->selected();
+    return appearanceUi.kcfg_TabView->selected();
 }
 
 int ConfigWidget::maxComicLimit() const
 {
-    return advancedUi.maxComicLimit->value();
+    return advancedUi.kcfg_MaxComicLimit->value();
 }
 
 void ConfigWidget::setMaxComicLimit( int limit )
 {
-    advancedUi.maxComicLimit->setValue( limit );
+    advancedUi.kcfg_MaxComicLimit->setValue( limit );
 }
 
 void ConfigWidget::setUpdateIntervall( int days )
 {
-    comicUi.updateIntervall->setValue( days );
+    comicUi.kcfg_UpdateIntervall->setValue( days );
 }
 
 int ConfigWidget::updateIntervall() const
 {
-    return comicUi.updateIntervall->value();
+    return comicUi.kcfg_UpdateIntervall->value();
 }
 
 void ConfigWidget::setCheckNewComicStripsIntervall( int minutes )
 {
-    comicUi.updateIntervallComicStrips->setValue( minutes );
+    comicUi.kcfg_UpdateIntervallComicStrips->setValue( minutes );
 }
 
 int ConfigWidget::checkNewComicStripsIntervall() const
 {
-    return comicUi.updateIntervallComicStrips->value();
+    return comicUi.kcfg_UpdateIntervallComicStrips->value();
 }
 
 #include "configwidget.moc"
