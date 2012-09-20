@@ -40,7 +40,8 @@ Row {
 
         anchors {
             left: parent.left
-            right: (tabNavigation.visible) ? tabNavigation.left : parent.right
+            right: parent.right
+            //right: (tabNavigation.visible) ? tabNavigation.left : parent.right
         }
 
         Repeater {
@@ -56,7 +57,7 @@ Row {
         }
     }
 
-    Rectangle {
+    /*Rectangle {
         id: tabNavigation
         color: "transparent"
         anchors.right: parent.right
@@ -85,7 +86,7 @@ Row {
                 enabled: !(currentButtonIndex() == tabModel.count - 1)
             }
         }
-    }
+    }*/
 
     function setTabHighlighted(index, highlight) {
         if (index == -1) {
