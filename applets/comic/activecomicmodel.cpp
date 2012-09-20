@@ -35,7 +35,7 @@ ActiveComicModel::ActiveComicModel(QObject *parent)
             this, SIGNAL(countChanged()));
 }
 
-void ActiveComicModel::addComic(const QString &key, const QString &title, const QString &iconPath)
+void ActiveComicModel::addComic(const QString &key, const QString &title, const QString &iconPath, bool highlight)
 {
     QList<QStandardItem *> newRow;
     QStandardItem *item = new QStandardItem(title);
@@ -43,7 +43,7 @@ void ActiveComicModel::addComic(const QString &key, const QString &title, const 
     item->setData(key, ComicKeyRole);
     item->setData(title, ComicTitleRole);
     item->setData(iconPath, ComicIconRole);
-    item->setData(false, ComicHighlightRole);
+    item->setData(highlight, ComicHighlightRole);
 
     newRow << item;
     appendRow(newRow);

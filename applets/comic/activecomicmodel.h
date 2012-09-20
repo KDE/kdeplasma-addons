@@ -36,7 +36,7 @@ public:
     
     ActiveComicModel(QObject *parent = 0);
     
-    void addComic(const QString &key, const QString &title, const QString &iconPath);
+    void addComic(const QString &key, const QString &title, const QString &iconPath, bool highlight = true);
     
     int count() { return rowCount(QModelIndex()); }
     
