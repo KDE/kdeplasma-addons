@@ -59,48 +59,39 @@ Item {
 
     states: [
         State {
-            name: "topInfoInvisible"
-            when: !topInfo.visible
-            AnchorChanges {
-                target: centerLayout
-                anchors.top: (comicTabbar.visible ? comicTabbar.bottom : mainWindow.top)
-            }
-        },
-
-        State {
             name: "topInfoVisible"
-            when: topInfo.visible
+            when: topInfo.visible && !bottomInfo.visible
             AnchorChanges {
                 target: centerLayout
                 anchors.top: topInfo.bottom
             }
-        }/*,
-
-        State {
-            name: "bottomInfoInvisible"
-            when: !bottomInfo.visible
-            AnchorChanges {
-                target: centerLayout
-                anchors.bottom: mainWindow.bottom
-            }
         },
-
         State {
             name: "bottomInfoVisible"
-            when: bottomInfo.visible
+            when: bottomInfo.visible && !topInfo.visible
             AnchorChanges {
                 target: centerLayout
                 anchors.bottom: bottomInfo.top
             }
-        }*/
+        },
+        State {
+            name: "topBottomInfoVisible"
+            when: bottomInfo.visible && topInfo.visible
+            AnchorChanges {
+                target: centerLayout
+                anchors.top: topInfo.bottom
+                anchors.bottom: bottomInfo.top
+            }
+        }
     ]
 
-    transitions: Transition {
-        AnchorAnimation {
-            duration: 500
-            easing.type: Easing.InOutQuad
+    transitions:
+        Transition {
+            AnchorAnimation {
+                duration: 500
+                easing.type: Easing.InOutQuad
+            }
         }
-    }
 
     PlasmaCore.Svg {
         id: arrowsSvg
