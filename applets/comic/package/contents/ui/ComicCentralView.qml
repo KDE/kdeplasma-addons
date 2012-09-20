@@ -54,6 +54,7 @@ Rectangle {
         smooth: true
         //opacity: busyIndicator.visible ? 0.3 : 1.0
         image: comicData.image
+        fillMode: QImageItem.PreserveAspectFit
     }
     
     ActionButton {
