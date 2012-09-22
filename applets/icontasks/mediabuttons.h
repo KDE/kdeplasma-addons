@@ -94,6 +94,7 @@ private:
     QMap<QString, QString> m_aliases;
     QSet<QString> m_ignore;
     QSet<QString> m_mediaApps;
+    QSet<QString> m_customMediaApps;
     bool m_enabled;
 };
 
