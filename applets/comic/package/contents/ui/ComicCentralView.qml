@@ -27,6 +27,7 @@ Rectangle {
     width: 10
     height: 10
     color: "transparent"
+
     ActionButton {
         id: arrowLeft
         svg: arrowsSvg
@@ -43,20 +44,20 @@ Rectangle {
             comicApplet.updateComic(comicData.prev);
         }
     }
-    QImageItem {
+
+    ImageWidget {
         id: comicImage
+        image: comicApplet.comicData.image
+        tooltipText: comicApplet.comicData.additionalText
+        fullView: true
         anchors { 
             left: arrowLeft.visible ? arrowLeft.right : root.left
             right: arrowRight.visible ? arrowRight.left : root.right
             top: root.top
             bottom: root.bottom
         }
-        smooth: true
-        //opacity: busyIndicator.visible ? 0.3 : 1.0
-        image: comicData.image
-        fillMode: QImageItem.PreserveAspectFit
     }
-    
+
     ActionButton {
         id: arrowRight
         svg: arrowsSvg
@@ -74,52 +75,13 @@ Rectangle {
         }
     }
 
-        
-    MouseArea {
-        id: mouseArea
-        hoverEnabled: true
-        anchors.fill: comicImage
-        preventStealing:true
-
-        PlasmaCore.ToolTip {
-            id: tooltip
-            target: mouseArea
-            mainText: comicData.additionalText
-        }
-                
-        ButtonBar {
-            id: buttonBar
-            visible: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
-            opacity: 0
-            states: State {
-                name: "show"; when: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
-                PropertyChanges { target: buttonBar; opacity: 1; }
+    PlasmaComponents.Dialog {
+        id: fullDialog
+        content:
+            Rectangle{
+                width: 100
+                height: 100
+                color: "green"
             }
-
-            transitions: Transition {
-                from: ""; to: "show"; reversible: true
-                NumberAnimation { properties: "opacity"; duration: 250; easing.type: Easing.InOutQuad }
-            }
-
-            onPrevClicked: {
-                console.log("Previous clicked");
-                //busyIndicator.visible = true;
-                comicApplet.updateComic(comicData.prev);
-            }
-            onNextClicked: {
-                console.log("Next clicked");
-                //busyIndicator.visible = true;
-                comicApplet.updateComic(comicData.next);
-            }
-            onZoomClicked: {
-                console.log("Zoom clicked width = " + comicData.image.nativeWidth);
-                comicApplet.showFullView();
-                //TODO try using qml
-                /*fullSizeDialog.fullImage.image = comicData.image.image;
-                //fullSizeDialog.fullImage.imageWidth = 100;//comicData.image.nativeWidth;
-                //fullSizeDialog.fullImage.imageHeight = comicData.image.nativeHeight;
-                fullSizeDialog.visible = true;*/
-            }
-        }
     }
 }
