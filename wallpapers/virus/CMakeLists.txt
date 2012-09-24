@@ -6,6 +6,7 @@ set(virus_SRCS
     backgrounddelegate.cpp
     backgroundlistmodel.cpp
     alife.cpp
+    itemsview.cpp
 )
 kde4_add_ui_files(virus_SRCS virusconfig.ui)
 
