@@ -34,6 +34,8 @@ class WallpaperQml : public Plasma::Wallpaper
 
         virtual void paint(QPainter* painter, const QRectF& exposedRect);
         virtual QWidget* createConfigurationInterface(QWidget* parent);
+        virtual void save(KConfigGroup& config);
+        virtual void init(const KConfigGroup& config);
 
     private slots:
         void resizeWallpaper();
@@ -41,6 +43,9 @@ class WallpaperQml : public Plasma::Wallpaper
         void componentStatusChanged(QDeclarativeComponent::Status s);
         void setPackageName(const QString& name);
         void changeWallpaper(const QModelIndex& idx);
+
+    signals:
+        void changed(bool);
 
     private:
         QGraphicsScene* m_scene;

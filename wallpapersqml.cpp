@@ -47,7 +47,6 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     connect(m_component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), SLOT(componentStatusChanged(QDeclarativeComponent::Status)));
     connect(this, SIGNAL(renderHintsChanged()), SLOT(resizeWallpaper()));
     connect(m_scene, SIGNAL(changed(QList<QRectF>)), SLOT(shouldRepaint(QList<QRectF>)));
-    setPackageName("org.kde.animals");
 }
 
 void WallpaperQml::setPackageName(const QString& packageName)
@@ -100,11 +99,13 @@ void WallpaperQml::resizeWallpaper()
 void WallpaperQml::shouldRepaint(const QList<QRectF> &rects)
 {
     QRectF repaintRect(0,0,0,0);
-    foreach(const QRectF& rect, rects)
+    foreach(const QRectF& rect, rects) {
         repaintRect = repaintRect.united(rect);
+    }
     
-    if(!repaintRect.isEmpty())
+    if(!repaintRect.isEmpty()) {
         emit update(repaintRect);
+    }
 }
 
 QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
@@ -113,13 +114,27 @@ QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
     WallpapersModel* m = new WallpapersModel(view);
     
     view->setModel(m);
-    view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
+    if(m_package) {
+        view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
+    }
     connect(view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
+    connect(this, SIGNAL(changed(bool)), parent, SLOT(settingsChanged(bool)));
     return view;
 }
 
 void WallpaperQml::changeWallpaper(const QModelIndex& idx)
 {
-    setPackageName(idx.data(WallpapersModel::PackageNameRole).toString());
-//     emit configNeedsSaving();
+    QString name = idx.data(WallpapersModel::PackageNameRole).toString();
+    emit changed(true);
+    setPackageName(name);
+}
+
+void WallpaperQml::init(const KConfigGroup& config)
+{
+    setPackageName(config.readEntry("packageName", "org.kde.animals"));
+}
+
+void WallpaperQml::save(KConfigGroup& config)
+{
+    config.writeEntry("packageName", KUrl(m_package->path()).fileName(KUrl::IgnoreTrailingSlash));
 }
