@@ -117,14 +117,8 @@ Rectangle {
                 comicApplet.updateComic(comicData.next);
             }
             onZoomClicked: {
-                console.log("Zoom clicked width = " + comicApplet.comicData.image.nativeWidth);
-                comicApplet.showFullView();
-                //fullDialog.open();
-                //TODO try using qml
-                //fullSizeDialog.fullImage.image = comicData.image.image;
-                //fullSizeDialog.fullImage.imageWidth = 100;//comicData.image.nativeWidth;
-                //fullSizeDialog.fullImage.imageHeight = comicData.image.nativeHeight;
-                //fullSizeDialog.visible = true;
+                //comicApplet.showFullView();
+                fullDialog.open();
             }
         }
     }
