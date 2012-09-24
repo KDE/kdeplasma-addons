@@ -2,11 +2,13 @@ import QtQuick 1.1
 
 Text {
     id: textItem
+    width: paintedWidth
+    height: paintedHeight
     function fetchAnimal() {
         var doc = new XMLHttpRequest();
         doc.onreadystatechange = function() {
             if (doc.readyState === XMLHttpRequest.DONE) {
-                textItem.text = doc.responseText
+                text = doc.responseText
             }
         }
         doc.open("GET", "http://animals.ivolo.me/")
