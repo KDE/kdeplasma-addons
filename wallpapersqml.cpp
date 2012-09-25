@@ -132,9 +132,11 @@ void WallpaperQml::changeWallpaper(const QModelIndex& idx)
 void WallpaperQml::init(const KConfigGroup& config)
 {
     setPackageName(config.readEntry("packageName", "org.kde.animals"));
+	emit changed(false);
 }
 
 void WallpaperQml::save(KConfigGroup& config)
 {
     config.writeEntry("packageName", KUrl(m_package->path()).fileName(KUrl::IgnoreTrailingSlash));
+	emit changed(false);
 }

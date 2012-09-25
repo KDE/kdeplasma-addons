@@ -4,9 +4,9 @@ Name=Ascii Animals
 Comment=Unsure if cute or just nerdy
 
 Type=Service
-ServiceTypes=Plasma/Generic
+ServiceTypes=Plasma/WallpaperQML
 Icon=applications-toys
-X-Plasma-API=declarativeappletscript
+X-Plasma-API=declarativewallpaper
 X-Plasma-MainScript=qml/animals.qml
 X-KDE-PluginInfo-Author=Aleix Pol Gonzalez
 X-KDE-PluginInfo-Email=aleixpol@kde.org
