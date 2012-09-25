@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Alive Wallpapers
+Type=Service
+Icon=kalgebra
+ServiceTypes=Plasma/Wallpaper
+
+X-KDE-Library=plasma_wallpaper_qml
+X-KDE-PluginInfo-Author=Aleix Pol Gonzalez
+X-KDE-PluginInfo-Email=aleixpol@kde.org
+X-KDE-PluginInfo-Name=wallpapers-qml
+X-KDE-PluginInfo-Version=0.00000001
+X-KDE-PluginInfo-Website=http://kde.org/
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
