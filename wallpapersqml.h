@@ -56,4 +56,3 @@ class WallpaperQml : public Plasma::Wallpaper
 };
 
 #endif
-

@@ -65,9 +65,10 @@ int WallpapersModel::rowCount(const QModelIndex& parent) const
 
 QModelIndex WallpapersModel::indexForPackagePath(const QString& path)
 {
-    for(int i = 0; i<rowCount(); i++) {
-        if(m_packages[i]->path()==path)
+    for (int i = 0; i<rowCount(); i++) {
+        if (m_packages[i]->path()==path) {
             return index(i,0);
+        }
     }
     return QModelIndex();
 }

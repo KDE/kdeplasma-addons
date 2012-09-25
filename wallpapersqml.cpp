@@ -51,7 +51,7 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
 
 void WallpaperQml::setPackageName(const QString& packageName)
 {
-    if(m_package)
+    if (m_package)
         delete m_package;
     
     kDebug() << "loading package..." << packageName;
@@ -59,16 +59,17 @@ void WallpaperQml::setPackageName(const QString& packageName)
     m_package = new Plasma::Package(QString(), packageName, m_structure);
     Q_ASSERT(m_package->isValid());
     QUrl scriptUrl(m_package->filePath("mainscript"));
-    if(scriptUrl.isValid())
+    if (scriptUrl.isValid()) {
         m_component->loadUrl(scriptUrl);
-    else
+    } else {
         m_component->setData("import QtQuick 1.1\n Text { text: 'wrong wallpaper'}", QDir::tempPath());
+    }
 }
 
 void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
 {
-    if(s==QDeclarativeComponent::Ready) {
-        if(m_item) {
+    if (s==QDeclarativeComponent::Ready) {
+        if (m_item) {
             m_scene->removeItem(m_item);
             delete m_item;
         }
@@ -80,7 +81,7 @@ void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
         
         emit update(QRectF());
     }
-    if(!m_component->errors().isEmpty())
+    if (!m_component->errors().isEmpty())
         kDebug() << "wallpaper errors:" << m_component->errors();
 }
 
@@ -92,18 +93,19 @@ void WallpaperQml::paint(QPainter *painter, const QRectF& exposedRect)
 void WallpaperQml::resizeWallpaper()
 {
     m_scene->setSceneRect(QRectF(QPointF(0,0), targetSizeHint()));
-    if(m_item)
+    if (m_item) {
         m_item->setSize(targetSizeHint());
+    }
 }
 
 void WallpaperQml::shouldRepaint(const QList<QRectF> &rects)
 {
     QRectF repaintRect(0,0,0,0);
-    foreach(const QRectF& rect, rects) {
+    foreach (const QRectF& rect, rects) {
         repaintRect = repaintRect.united(rect);
     }
     
-    if(!repaintRect.isEmpty()) {
+    if (!repaintRect.isEmpty()) {
         emit update(repaintRect);
     }
 }
@@ -114,7 +116,7 @@ QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
     WallpapersModel* m = new WallpapersModel(view);
     
     view->setModel(m);
-    if(m_package) {
+    if (m_package) {
         view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
     }
     connect(view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
