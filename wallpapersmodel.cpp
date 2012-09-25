@@ -37,10 +37,11 @@ void WallpapersModel::addPackage(const QString& packageName)
     beginInsertRows(QModelIndex(), m_packages.count(), m_packages.count());
     Plasma::PackageStructure::Ptr str = Plasma::PackageStructure::load("Plasma/Generic");
     Plasma::Package* p = new Plasma::Package(QString(), packageName, str);
-    if(p->isValid() && p->metadata().implementationApi()=="declarativewallpaper")
+    if (p->isValid() && p->metadata().serviceType()=="Plasma/DeclarativeWallpaper") {
         m_packages += p;
-    else
+    } else {
         delete p;
+    }
     endInsertRows();
 }
 
