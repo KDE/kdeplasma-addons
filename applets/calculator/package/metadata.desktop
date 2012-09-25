@@ -115,6 +115,10 @@ Icon=accessories-calculator
 Type=Service
 ServiceTypes=Plasma/Applet
 
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=main.qml
+X-Plasma-DefaultSize=256,128
+
 X-KDE-Library=plasma_applet_calculator
 X-KDE-PluginInfo-Author=Henry Stanaland
 X-KDE-PluginInfo-Email=stanaland@gmail.com
