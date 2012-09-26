@@ -51,8 +51,7 @@ Item {
             topMargin: 5
             horizontalCenter: parent.horizontalCenter
         }
-        width: Math.min(implicitWidth, parent.width/1.5)
-        height: 30
+
         visible: detailsView.model.length > 0
 
         PlasmaComponents.TabButton {
