@@ -51,7 +51,7 @@ Item {
             topMargin: 5
             horizontalCenter: parent.horizontalCenter
         }
-        width: noticesView.visible ? 240 : 160
+        width: Math.min(implicitWidth, parent.width/1.5)
         height: 30
         visible: detailsView.model.length > 0
 
