@@ -267,7 +267,7 @@ Item
         prevOperator = "-";
     }
 
-    function multiplayClicked()
+    function multiplyClicked()
     {
         waitingForDigit = true;
         factor = locale.readNumber(display.text);
@@ -304,7 +304,7 @@ Item
     function clearClicked()
     {
         display.text = "0";
-        waitingForDigit = ture;
+        waitingForDigit = true;
     }
 
     function allClearClicked()
