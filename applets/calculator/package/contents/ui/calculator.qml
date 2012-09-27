@@ -25,6 +25,9 @@ import org.kde.locale 0.1 as Locale
 
 Item
 {
+    property int minimumWidth: 200;
+    property int minimumHeight: 250;
+
     property int buttonHeight: (height / 6) - buttonsGrid.spacing;
     property int buttonWidth: (width / 4) - buttonsGrid.spacing;
 

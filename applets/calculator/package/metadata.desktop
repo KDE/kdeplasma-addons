@@ -113,7 +113,7 @@ Comment[zh_CN]=计算简单的求和
 Comment[zh_TW]=計算簡單的算式
 Icon=accessories-calculator
 Type=Service
-ServiceTypes=Plasma/Applet
+ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=main.qml
