@@ -55,152 +55,152 @@ Item
         }
 
 
-    Grid {
-        focus: true
-        id: buttonsGrid;
-        columns: 4;
-        rows: 5;
-        spacing: 4;
+        Grid {
+            focus: true;
+            id: buttonsGrid;
+            columns: 4;
+            rows: 5;
+            spacing: 4;
 
-        PlasmaComponents.Button {
-            text: "C";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: clearClicked();
+            PlasmaComponents.Button {
+                text: "C";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: clearClicked();
+            }
+
+            PlasmaComponents.Button {
+                text: "÷";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: divideClicked();
+            }
+
+            PlasmaComponents.Button {
+                text: "×";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: multiplyClicked();
+            }
+
+            PlasmaComponents.Button {
+                text: "AC";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: allClearClicked();
+            }
+
+
+            PlasmaComponents.Button {
+                text: "7";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: digitClicked(7);
+            }
+
+            PlasmaComponents.Button {
+                text: "8";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: digitClicked(8);
+            }
+
+            PlasmaComponents.Button {
+                text: "9";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: digitClicked(9);
+            }
+
+            PlasmaComponents.Button {
+                text: "-";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: subtractClicked();
+            }
+
+
+            PlasmaComponents.Button {
+                height: buttonHeight;
+                width: buttonWidth;
+                text: "4";
+                onClicked: digitClicked(4);
+            }
+
+            PlasmaComponents.Button {
+                text: "5";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: digitClicked(5);
+            }
+
+            PlasmaComponents.Button {
+                text: "6";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: digitClicked(6);
+            }
+
+            PlasmaComponents.Button {
+                text: "+";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: addClicked();
+            }
+
+
+            PlasmaComponents.Button {
+                text: "1";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: digitClicked(1);
+            }
+
+            PlasmaComponents.Button {
+                text: "2";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: digitClicked(2);
+            }
+
+            PlasmaComponents.Button {
+                text: "3";
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: digitClicked(3);
+            }
+
+            Item {
+                id: ansPlaceHolder;
+                height: buttonHeight;
+                width: buttonWidth;
+            }
+
+            Item {
+                id: zeroPlaceHolder;
+                height: buttonHeight;
+                width: buttonWidth;
+            }
+
+            Item {
+                id: zeroPlaceHolder2;
+                height: buttonHeight;
+                width: buttonWidth;
+            }
+
+            PlasmaComponents.Button {
+                text: locale.decimalSymbol;
+                height: buttonHeight;
+                width: buttonWidth;
+                onClicked: decimalClicked();
+            }
+
+            Item {
+                id: ansPlaceHolder2;
+                height: buttonHeight;
+                width: buttonWidth;
+            }
         }
-
-        PlasmaComponents.Button {
-            text: "÷";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: divideClicked();
-        }
-
-        PlasmaComponents.Button {
-            text: "×";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: multiplyClicked();
-        }
-
-        PlasmaComponents.Button {
-            text: "AC";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: allClearClicked();
-        }
-
-
-        PlasmaComponents.Button {
-            text: "7";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: digitClicked(7);
-        }
-
-        PlasmaComponents.Button {
-            text: "8";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: digitClicked(8);
-        }
-
-        PlasmaComponents.Button {
-            text: "9";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: digitClicked(9);
-        }
-
-        PlasmaComponents.Button {
-            text: "-";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: subtractClicked();
-        }
-
-
-        PlasmaComponents.Button {
-            height: buttonHeight;
-            width: buttonWidth;
-            text: "4";
-            onClicked: digitClicked(4);
-        }
-
-        PlasmaComponents.Button {
-            text: "5";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: digitClicked(5);
-        }
-
-        PlasmaComponents.Button {
-            text: "6";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: digitClicked(6);
-        }
-
-        PlasmaComponents.Button {
-            text: "+";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: addClicked();
-        }
-
-
-        PlasmaComponents.Button {
-            text: "1";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: digitClicked(1);
-        }
-
-        PlasmaComponents.Button {
-            text: "2";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: digitClicked(2);
-        }
-
-        PlasmaComponents.Button {
-            text: "3";
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: digitClicked(3);
-        }
-
-        Item {
-            id: ansPlaceHolder;
-            height: buttonHeight;
-            width: buttonWidth;
-        }
-
-        Item {
-            id: zeroPlaceHolder;
-            height: buttonHeight;
-            width: buttonWidth;
-        }
-
-        Item {
-            id: zeroPlaceHolder2;
-            height: buttonHeight;
-            width: buttonWidth;
-        }
-
-        PlasmaComponents.Button {
-            text: locale.decimalSymbol;
-            height: buttonHeight;
-            width: buttonWidth;
-            onClicked: decimalClicked();
-        }
-
-        Item {
-            id: ansPlaceHolder2;
-            height: buttonHeight;
-            width: buttonWidth;
-        }
-    }
     }
 
     PlasmaComponents.Button {
@@ -209,7 +209,7 @@ Item
         text: "0";
         onClicked: digitClicked(0);
         height: buttonHeight;
-        width: buttonWidth*2 + buttonsGrid.spacing;
+        width: buttonWidth * 2 + buttonsGrid.spacing;
     }
 
     PlasmaComponents.Button {
@@ -217,7 +217,7 @@ Item
         x: ansPlaceHolder.x + buttonsGrid.x;
         y: ansPlaceHolder.y + buttonsGrid.y;
         text: "=";
-        height: buttonHeight*2 + buttonsGrid.spacing;
+        height: buttonHeight * 2 + buttonsGrid.spacing;
         width: buttonWidth;
         onClicked: equalsClicked();
     }
@@ -271,11 +271,9 @@ Item
         if (waitingForDigit) {
             waitingForDigit = false;
             display.text = digit;
-
         } else if (display.text.indexOf(locale.decimalSymbol) > 0) {
             display.text += digit;
-
-        }else{
+        } else {
             display.text = locale.formatNumber(locale.readNumber(display.text) * 10 + digit, 0);
         }
     }
