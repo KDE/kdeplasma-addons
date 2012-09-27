@@ -56,6 +56,7 @@ Item
 
 
     Grid {
+        focus: true
         id: buttonsGrid;
         columns: 4;
         rows: 5;
@@ -219,6 +220,45 @@ Item
         height: buttonHeight*2 + buttonsGrid.spacing;
         width: buttonWidth;
         onClicked: equalsClicked();
+    }
+
+    Keys.onDigit0Pressed: { digitClicked(0); }
+    Keys.onDigit1Pressed: { digitClicked(1); }
+    Keys.onDigit2Pressed: { digitClicked(2); }
+    Keys.onDigit3Pressed: { digitClicked(3); }
+    Keys.onDigit4Pressed: { digitClicked(4); }
+    Keys.onDigit5Pressed: { digitClicked(5); }
+    Keys.onDigit6Pressed: { digitClicked(6); }
+    Keys.onDigit7Pressed: { digitClicked(7); }
+    Keys.onDigit8Pressed: { digitClicked(8); }
+    Keys.onDigit9Pressed: { digitClicked(9); }
+    Keys.onEscapePressed: { allClearClicked(); }
+    Keys.onDeletePressed: { clearClicked(); }
+    Keys.onPressed: {
+        switch (event.key) {
+        case Qt.Key_Plus:
+            addClicked();
+            break;
+        case Qt.Key_Minus:
+            subtractClicked();
+            break;
+        case Qt.Key_Asterisk:
+            multiplyClicked();
+            break;
+        case Qt.Key_Slash:
+            divideClicked();
+            break;
+        case Qt.Key_Period:
+            decimalClicked();
+            break;
+        case Qt.Key_Equal:
+        case Qt.Key_Return:
+        case Qt.Key_Enter:
+            equalsClicked();
+            break;
+        default:
+            break;
+        }
     }
 
 
