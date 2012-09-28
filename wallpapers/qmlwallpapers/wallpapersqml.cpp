@@ -30,7 +30,7 @@
 #include <QListView>
 #include <qdir.h>
 
-K_EXPORT_PLASMA_WALLPAPER(wallpaper-qml, WallpaperQml)
+K_EXPORT_PLASMA_WALLPAPER(org.kde.wallpaper-qml, WallpaperQml)
 
 WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args)
