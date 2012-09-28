@@ -40,7 +40,7 @@ class WallpapersModel : public QAbstractListModel
         QModelIndex indexForPackagePath(const QString& path);
 
     private:
-        void addPackage(const QString& absoluteFilePath);
+        void addPackage(const QString& root, const QString& name);
         
         QList<Plasma::Package*> m_packages;
 };

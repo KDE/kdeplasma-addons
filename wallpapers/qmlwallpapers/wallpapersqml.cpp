@@ -20,6 +20,7 @@
 #include "wallpapersqml.h"
 #include "wallpapersmodel.h"
 #include <plasma/package.h>
+#include <KStandardDirs>
 #include <kdeclarative.h>
 #include <QGraphicsScene>
 #include <QDeclarativeEngine>
@@ -56,7 +57,14 @@ void WallpaperQml::setPackageName(const QString& packageName)
     
     kDebug() << "loading package..." << packageName;
     m_structure = Plasma::PackageStructure::load("Plasma/Generic");
-    m_package = new Plasma::Package(QString(), packageName, m_structure);
+    QStringList dirs(KGlobal::dirs()->findDirs("data", "plasma/wallpapers"));
+    foreach (const QString &dir, dirs) {
+        m_package = new Plasma::Package(dir, packageName, m_structure);
+        if (m_package->isValid() && !m_package->filePath("mainscript").isEmpty()) {
+            break;
+        }
+    }
+
     Q_ASSERT(m_package->isValid());
     QUrl scriptUrl(m_package->filePath("mainscript"));
     if (scriptUrl.isValid()) {
