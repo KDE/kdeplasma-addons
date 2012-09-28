@@ -18,6 +18,7 @@
  */
 
 #include "wallpapersmodel.h"
+#include <KIcon>
 #include <plasma/package.h>
 #include <qdir.h>
 
@@ -55,6 +56,8 @@ QVariant WallpapersModel::data(const QModelIndex& index, int role) const
             return p->metadata().name();
         case Qt::ToolTipRole:
             return p->metadata().description();
+        case Qt::DecorationRole:
+            return KIcon(p->metadata().icon());
     }
     return QVariant();
 }

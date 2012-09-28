@@ -28,6 +28,8 @@
 #include <QPainter>
 #include <QListView>
 #include <qdir.h>
+#include "ui_viewconfig.h"
+#include <QtGui/QGraphicsScene>
 
 K_EXPORT_PLASMA_WALLPAPER(wallpaper-qml, WallpaperQml)
 
@@ -112,16 +114,19 @@ void WallpaperQml::shouldRepaint(const QList<QRectF> &rects)
 
 QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
 {
-    QListView* view = new QListView(parent);
-    WallpapersModel* m = new WallpapersModel(view);
+    QWidget* w = new QWidget;
+    Ui::ViewConfig v;
+    v.setupUi(w);
     
-    view->setModel(m);
+    WallpapersModel* m = new WallpapersModel(w);
+    v.m_view->setModel(m);
     if (m_package) {
-        view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
+        v.m_view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
     }
-    connect(view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
+    connect(v.m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
+    connect(v.m_color, SIGNAL(changed(QColor)), this, SLOT(setBackgroundColor(QColor)));
     connect(this, SIGNAL(changed(bool)), parent, SLOT(settingsChanged(bool)));
-    return view;
+    return w;
 }
 
 void WallpaperQml::changeWallpaper(const QModelIndex& idx)
@@ -134,11 +139,18 @@ void WallpaperQml::changeWallpaper(const QModelIndex& idx)
 void WallpaperQml::init(const KConfigGroup& config)
 {
     setPackageName(config.readEntry("packageName", "org.kde.animals"));
-	emit changed(false);
+    setBackgroundColor(config.readEntry("color", QColor(Qt::transparent)));
+    emit changed(false);
 }
 
 void WallpaperQml::save(KConfigGroup& config)
 {
     config.writeEntry("packageName", KUrl(m_package->path()).fileName(KUrl::IgnoreTrailingSlash));
-	emit changed(false);
+    config.writeEntry("color", m_scene->backgroundBrush().color());
+    emit changed(false);
+}
+
+void WallpaperQml::setBackgroundColor(const QColor& color)
+{
+    m_scene->setBackgroundBrush(color);
 }

@@ -36,6 +36,7 @@ class WallpaperQml : public Plasma::Wallpaper
         virtual QWidget* createConfigurationInterface(QWidget* parent);
         virtual void save(KConfigGroup& config);
         virtual void init(const KConfigGroup& config);
+        void setBackgroundColor(const QColor& color);
 
     private slots:
         void resizeWallpaper();
