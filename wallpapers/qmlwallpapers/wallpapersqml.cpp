@@ -43,7 +43,7 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     kdeclarative.setDeclarativeEngine(engine);
     kdeclarative.initialize();
     kdeclarative.setupBindings();
-    
+
     m_component = new QDeclarativeComponent(engine);
     connect(m_component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), SLOT(componentStatusChanged(QDeclarativeComponent::Status)));
     connect(this, SIGNAL(renderHintsChanged()), SLOT(resizeWallpaper()));
@@ -52,9 +52,10 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
 
 void WallpaperQml::setPackageName(const QString& packageName)
 {
-    if (m_package)
+    if (m_package) {
         delete m_package;
-    
+    }
+
     kDebug() << "loading package..." << packageName;
     m_structure = Plasma::PackageStructure::load("Plasma/Generic");
     QStringList dirs(KGlobal::dirs()->findDirs("data", "plasma/wallpapers"));
@@ -81,12 +82,12 @@ void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
             m_scene->removeItem(m_item);
             delete m_item;
         }
-        
+
         m_item = qobject_cast<QDeclarativeItem *>(m_component->create());
         m_item->setSize(targetSizeHint());
         Q_ASSERT(m_item);
         m_scene->addItem(m_item);
-        
+
         emit update(QRectF());
     }
     if (!m_component->errors().isEmpty())
@@ -112,7 +113,7 @@ void WallpaperQml::shouldRepaint(const QList<QRectF> &rects)
     foreach (const QRectF& rect, rects) {
         repaintRect = repaintRect.united(rect);
     }
-    
+
     if (!repaintRect.isEmpty()) {
         emit update(repaintRect);
     }
@@ -122,7 +123,7 @@ QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
 {
     QListView* view = new QListView(parent);
     WallpapersModel* m = new WallpapersModel(view);
-    
+
     view->setModel(m);
     if (m_package) {
         view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
@@ -142,11 +143,11 @@ void WallpaperQml::changeWallpaper(const QModelIndex& idx)
 void WallpaperQml::init(const KConfigGroup& config)
 {
     setPackageName(config.readEntry("packageName", "org.kde.animals"));
-	emit changed(false);
+    emit changed(false);
 }
 
 void WallpaperQml::save(KConfigGroup& config)
 {
     config.writeEntry("packageName", KUrl(m_package->path()).fileName(KUrl::IgnoreTrailingSlash));
-	emit changed(false);
+    emit changed(false);
 }
