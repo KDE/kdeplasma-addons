@@ -19,25 +19,26 @@
 
 #include "wallpapersmodel.h"
 #include <KIcon>
+#include <KStandardDirs>
 #include <plasma/package.h>
 #include <qdir.h>
 
 WallpapersModel::WallpapersModel(QObject* parent)
     : QAbstractListModel(parent)
 {
-    Plasma::PackageStructure::Ptr str = Plasma::PackageStructure::load("Plasma/Generic");
-    QDir d(str->defaultPackageRoot());
-    QStringList entries = d.entryList(QDir::Dirs|QDir::NoDotAndDotDot);
-    foreach(const QString& dir, entries) {
-        addPackage(dir);
+    QStringList dirs(KGlobal::dirs()->findDirs("data", "plasma/wallpapers"));
+    foreach (const QString &dir, dirs) {
+        foreach (const QString &package, Plasma::Package::listInstalled(dir)) {
+            addPackage(dir, package);
+        }
     }
 }
 
-void WallpapersModel::addPackage(const QString& packageName)
+void WallpapersModel::addPackage(const QString& packageRoot, const QString& packageName)
 {
     beginInsertRows(QModelIndex(), m_packages.count(), m_packages.count());
     Plasma::PackageStructure::Ptr str = Plasma::PackageStructure::load("Plasma/Generic");
-    Plasma::Package* p = new Plasma::Package(QString(), packageName, str);
+    Plasma::Package* p = new Plasma::Package(packageRoot, packageName, str);
     if (p->isValid() && p->metadata().serviceType()=="Plasma/DeclarativeWallpaper") {
         m_packages += p;
     } else {

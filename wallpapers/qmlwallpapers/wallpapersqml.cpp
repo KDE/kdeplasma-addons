@@ -20,6 +20,7 @@
 #include "wallpapersqml.h"
 #include "wallpapersmodel.h"
 #include <plasma/package.h>
+#include <KStandardDirs>
 #include <kdeclarative.h>
 #include <QGraphicsScene>
 #include <QDeclarativeEngine>
@@ -31,7 +32,7 @@
 #include "ui_viewconfig.h"
 #include <QtGui/QGraphicsScene>
 
-K_EXPORT_PLASMA_WALLPAPER(wallpaper-qml, WallpaperQml)
+K_EXPORT_PLASMA_WALLPAPER(org.kde.wallpaper-qml, WallpaperQml)
 
 WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args)
@@ -44,7 +45,7 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     kdeclarative.setDeclarativeEngine(engine);
     kdeclarative.initialize();
     kdeclarative.setupBindings();
-    
+
     m_component = new QDeclarativeComponent(engine);
     connect(m_component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), SLOT(componentStatusChanged(QDeclarativeComponent::Status)));
     connect(this, SIGNAL(renderHintsChanged()), SLOT(resizeWallpaper()));
@@ -53,12 +54,20 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
 
 void WallpaperQml::setPackageName(const QString& packageName)
 {
-    if (m_package)
+    if (m_package) {
         delete m_package;
-    
+    }
+
     kDebug() << "loading package..." << packageName;
     m_structure = Plasma::PackageStructure::load("Plasma/Generic");
-    m_package = new Plasma::Package(QString(), packageName, m_structure);
+    QStringList dirs(KGlobal::dirs()->findDirs("data", "plasma/wallpapers"));
+    foreach (const QString &dir, dirs) {
+        m_package = new Plasma::Package(dir, packageName, m_structure);
+        if (m_package->isValid() && !m_package->filePath("mainscript").isEmpty()) {
+            break;
+        }
+    }
+
     Q_ASSERT(m_package->isValid());
     QUrl scriptUrl(m_package->filePath("mainscript"));
     if (scriptUrl.isValid()) {
@@ -75,12 +84,12 @@ void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
             m_scene->removeItem(m_item);
             delete m_item;
         }
-        
+
         m_item = qobject_cast<QDeclarativeItem *>(m_component->create());
         m_item->setSize(targetSizeHint());
         Q_ASSERT(m_item);
         m_scene->addItem(m_item);
-        
+
         emit update(QRectF());
     }
     if (!m_component->errors().isEmpty())
@@ -106,7 +115,7 @@ void WallpaperQml::shouldRepaint(const QList<QRectF> &rects)
     foreach (const QRectF& rect, rects) {
         repaintRect = repaintRect.united(rect);
     }
-    
+
     if (!repaintRect.isEmpty()) {
         emit update(repaintRect);
     }
@@ -153,4 +162,5 @@ void WallpaperQml::save(KConfigGroup& config)
 void WallpaperQml::setBackgroundColor(const QColor& color)
 {
     m_scene->setBackgroundBrush(color);
+    emit changed(false);
 }

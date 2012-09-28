@@ -32,7 +32,7 @@ class WallpapersModel : public QAbstractListModel
         enum Roles {
             PackageNameRole = Qt::UserRole+1
         };
-        
+
         explicit WallpapersModel(QObject* parent = 0);
 
         virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
@@ -40,8 +40,8 @@ class WallpapersModel : public QAbstractListModel
         QModelIndex indexForPackagePath(const QString& path);
 
     private:
-        void addPackage(const QString& absoluteFilePath);
-        
+        void addPackage(const QString& root, const QString& name);
+
         QList<Plasma::Package*> m_packages;
 };
 
