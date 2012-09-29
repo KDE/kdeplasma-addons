@@ -1,0 +1,16 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Haenau
+
+
+Type=Service
+ServiceTypes=Plasma/DeclarativeWallpaper
+Icon=preferences-desktop-wallpaper
+X-Plasma-MainScript=ui/main.qml
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-Name=org.kde.haenau
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://kde.org/
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true
