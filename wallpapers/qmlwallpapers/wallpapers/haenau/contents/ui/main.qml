@@ -48,11 +48,7 @@ PlasmaCore.SvgItem {
     BackgroundElement {
         id: leftLayer1
         elementId: "left-layer1"
-        onSlideTriggered: {
-            leftLayer2.slide()
-            leftLayer3.slide()
-            leftLayer4.slide()
-        }
+
         BackgroundElement {
             id: leftLayer2
             elementId: "left-layer2"
@@ -70,10 +66,7 @@ PlasmaCore.SvgItem {
     BottomBackgroundElement {
         id: bottomLayer0
         elementId: "bottom-layer0"
-        onSlideTriggered: {
-            bottomLayer1.slide()
-            bottomLayer2.slide()
-        }
+
         BottomBackgroundElement {
             id: bottomLayer1
             elementId: "bottom-layer1"
@@ -92,11 +85,7 @@ PlasmaCore.SvgItem {
     RightBackgroundElement {
         id: rightLayer1
         elementId: "right-layer1"
-        onSlideTriggered: {
-            rightLayer2.slide()
-            rightLayer3.slide()
-            rightLayer4.slide()
-        }
+
         RightBackgroundElement {
             id: rightLayer2
             elementId: "right-layer2"
@@ -118,7 +107,7 @@ PlasmaCore.SvgItem {
         repeat: true
         interval: 30000
         onTriggered: {
-            layers[lastLayer].slide()
+            layers[lastLayer].change()
             lastLayer = (lastLayer + 1) % 7
         }
     }

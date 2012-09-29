@@ -27,16 +27,16 @@ PlasmaCore.SvgItem {
     y: parent.height - height
     svg: wallpaperSvg
 
-    signal slideTriggered
+    signal changeTriggered
 
-    function slide() {slideAnimation.running = true}
+    function change() {changeAnimation.running = true}
 
     SequentialAnimation {
-        id: slideAnimation
+        id: changeAnimation
         NumberAnimation {
             targets: root
-            properties: "y"
-            to: root.parent.height
+            properties: "opacity"
+            to: 0
             duration: 1000
             easing.type: Easing.InOutCubic
         }
@@ -45,8 +45,8 @@ PlasmaCore.SvgItem {
 
         NumberAnimation {
             targets: root
-            properties: "y"
-            to: root.parent.height - height
+            properties: "opacity"
+            to: Math.random()
             duration: 1000
             easing.type: Easing.InOutCubic
         }

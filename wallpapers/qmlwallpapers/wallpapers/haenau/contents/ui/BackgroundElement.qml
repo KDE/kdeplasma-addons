@@ -26,24 +26,24 @@ PlasmaCore.SvgItem {
     height: parent.height
     svg: wallpaperSvg
 
-    signal slideTriggered
+    signal changeTriggered
 
-    function slide() {slideAnimation.running = true}
+    function change() {changeAnimation.running = true}
 
     SequentialAnimation {
-        id: slideAnimation
+        id: changeAnimation
         NumberAnimation {
             targets: root
-            properties: "x"
-            to: -root.width
+            properties: "opacity"
+            to: 0
             duration: 1000
             easing.type: Easing.InOutCubic
         }
         ScriptAction { script: root.z = Math.floor(Math.random()*7) }
         NumberAnimation {
             targets: root
-            properties: "x"
-            to: 0
+            properties: "opacity"
+            to: Math.random()
             duration: 1000
             easing.type: Easing.InOutCubic
         }
