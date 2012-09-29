@@ -90,6 +90,11 @@ void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
         Q_ASSERT(m_item);
         m_scene->addItem(m_item);
 
+        m_pixmap = QPixmap(targetSizeHint().toSize());
+        m_pixmap.fill(Qt::transparent);
+        QPainter p(&m_pixmap);
+        m_scene->render(&p, QRectF(), QRectF(), Qt::IgnoreAspectRatio);
+        p.end();
         emit update(QRectF());
     }
     if (!m_component->errors().isEmpty())
@@ -98,7 +103,7 @@ void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
 
 void WallpaperQml::paint(QPainter *painter, const QRectF& exposedRect)
 {
-    m_scene->render(painter, exposedRect, exposedRect, Qt::IgnoreAspectRatio);
+    painter->drawPixmap(exposedRect, m_pixmap, exposedRect.translated(-boundingRect().topLeft()));
 }
 
 void WallpaperQml::resizeWallpaper()
@@ -107,6 +112,12 @@ void WallpaperQml::resizeWallpaper()
     if (m_item) {
         m_item->setSize(targetSizeHint());
     }
+    m_pixmap = QPixmap(targetSizeHint().toSize());
+    m_pixmap.fill(Qt::transparent);
+    QPainter p(&m_pixmap);
+    m_scene->render(&p, QRectF(), QRectF(), Qt::IgnoreAspectRatio);
+    p.end();
+    emit update(QRectF());
 }
 
 void WallpaperQml::shouldRepaint(const QList<QRectF> &rects)
@@ -117,6 +128,9 @@ void WallpaperQml::shouldRepaint(const QList<QRectF> &rects)
     }
 
     if (!repaintRect.isEmpty()) {
+        QPainter p(&m_pixmap);
+        m_scene->render(&p, repaintRect, repaintRect, Qt::IgnoreAspectRatio);
+        p.end();
         emit update(repaintRect);
     }
 }

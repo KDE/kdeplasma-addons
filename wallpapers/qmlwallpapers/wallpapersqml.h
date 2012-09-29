@@ -54,6 +54,7 @@ class WallpaperQml : public Plasma::Wallpaper
         QDeclarativeComponent* m_component;
         Plasma::Package* m_package;
         Plasma::PackageStructure::Ptr m_structure;
+        QPixmap m_pixmap;
 };
 
 #endif
