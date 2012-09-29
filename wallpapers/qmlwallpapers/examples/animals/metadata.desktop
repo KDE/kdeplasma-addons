@@ -1,7 +1,21 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Ascii Animals
+Name[nl]=Ascii dieren
+Name[pt]=Animais em ASCII
+Name[pt_BR]=Animais em ASCII
+Name[sk]=Ascii zvieratá
+Name[sv]=ASCII-djur
+Name[uk]=ASCII-тварини
+Name[x-test]=xxAscii Animalsxx
 Comment=Unsure if cute or just nerdy
+Comment[nl]=Onzeker of het leuk is of gewoon nerdachtig
+Comment[pt]=Não sabemos se é bonito ou apenas 'cromo'
+Comment[pt_BR]=Não sabemos se é bonito ou apenas nerd
+Comment[sk]=Neviem, či milý, alebo len hlúpy
+Comment[sv]=Osäker om gulliga eller bara nördiga
+Comment[uk]=Не знаємо, чи це мило, чи просто дивакувато
+Comment[x-test]=xxUnsure if cute or just nerdyxx
 
 Type=Service
 ServiceTypes=Plasma/DeclarativeWallpaper
