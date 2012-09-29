@@ -48,13 +48,21 @@ PlasmaCore.SvgItem {
     BackgroundElement {
         id: leftLayer1
         elementId: "left-layer1"
+        onSlideTriggered: {
+            leftLayer2.slide()
+            leftLayer3.slide()
+            leftLayer4.slide()
+        }
         BackgroundElement {
+            id: leftLayer2
             elementId: "left-layer2"
         }
         BackgroundElement {
+            id: leftLayer3
             elementId: "left-layer3"
         }
         BackgroundElement {
+            id: leftLayer4
             elementId: "left-layer4"
         }
     }
@@ -62,10 +70,16 @@ PlasmaCore.SvgItem {
     BottomBackgroundElement {
         id: bottomLayer0
         elementId: "bottom-layer0"
+        onSlideTriggered: {
+            bottomLayer1.slide()
+            bottomLayer2.slide()
+        }
         BottomBackgroundElement {
+            id: bottomLayer1
             elementId: "bottom-layer1"
         }
         BottomBackgroundElement {
+            id: bottomLayer2
             elementId: "bottom-layer2"
         }
     }
@@ -78,13 +92,21 @@ PlasmaCore.SvgItem {
     RightBackgroundElement {
         id: rightLayer1
         elementId: "right-layer1"
+        onSlideTriggered: {
+            rightLayer2.slide()
+            rightLayer3.slide()
+            rightLayer4.slide()
+        }
         RightBackgroundElement {
+            id: rightLayer2
             elementId: "right-layer2"
         }
         RightBackgroundElement {
+            id: rightLayer3
             elementId: "right-layer3"
         }
         RightBackgroundElement {
+            id: rightLayer4
             elementId: "right-layer4"
         }
     }
@@ -94,7 +116,7 @@ PlasmaCore.SvgItem {
         property variant layers: [centerLayer0, centerLayer1, leftLayer0, leftLayer1, bottomLayer0, rightLayer0, rightLayer1]
         running: true
         repeat: true
-        interval: 3000
+        interval: 30000
         onTriggered: {
             layers[lastLayer].slide()
             lastLayer = (lastLayer + 1) % 7
