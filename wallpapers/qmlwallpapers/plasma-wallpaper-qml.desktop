@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Animated Wallpapers
+Name[pt]=Papéis de Parede Animados
+Name[pt_BR]=Papéis de parede animados
+Name[sk]=Animované tapety
+Name[uk]=Анімовані шпалери
+Name[x-test]=xxAnimated Wallpapersxx
 Type=Service
 Icon=preferences-desktop-wallpaper
 ServiceTypes=Plasma/Wallpaper
