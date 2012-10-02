@@ -49,6 +49,11 @@ class WallpaperQml : public Plasma::Wallpaper
         void changed(bool);
 
     private:
+        virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
+        virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+        virtual void wheelEvent(QGraphicsSceneWheelEvent* event);
+        
         QGraphicsScene* m_scene;
         QDeclarativeItem* m_item;
         QDeclarativeComponent* m_component;

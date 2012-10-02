@@ -27,10 +27,11 @@
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
 #include <QDeclarativeComponent>
+#include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 #include <QPainter>
 #include <QListView>
-#include <qdir.h>
+#include <QDir>
 #include "ui_viewconfig.h"
 
 K_EXPORT_PLASMA_WALLPAPER(org.kde.wallpaper-qml, WallpaperQml)
@@ -180,4 +181,24 @@ void WallpaperQml::setBackgroundColor(const QColor& color)
 {
     m_scene->setBackgroundBrush(color);
     emit changed(false);
+}
+
+void WallpaperQml::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
+{
+    QApplication::sendEvent(m_scene, event);
+}
+
+void WallpaperQml::mousePressEvent(QGraphicsSceneMouseEvent* event)
+{
+    QApplication::sendEvent(m_scene, event);
+}
+
+void WallpaperQml::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
+{
+    QApplication::sendEvent(m_scene, event);
+}
+
+void WallpaperQml::wheelEvent(QGraphicsSceneWheelEvent* event)
+{
+    QApplication::sendEvent(m_scene, event);
 }
