@@ -19,6 +19,7 @@
 
 #include "wallpapersqml.h"
 #include "wallpapersmodel.h"
+#include "backgrounddelegate.h"
 #include <plasma/package.h>
 #include <KStandardDirs>
 #include <kdeclarative.h>
@@ -26,11 +27,11 @@
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
 #include <QDeclarativeComponent>
+#include <QGraphicsScene>
 #include <QPainter>
 #include <QListView>
 #include <qdir.h>
 #include "ui_viewconfig.h"
-#include <QtGui/QGraphicsScene>
 
 K_EXPORT_PLASMA_WALLPAPER(org.kde.wallpaper-qml, WallpaperQml)
 
@@ -142,9 +143,11 @@ QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
     
     WallpapersModel* m = new WallpapersModel(w);
     v.m_view->setModel(m);
+    v.m_view->setItemDelegate(new BackgroundDelegate(v.m_view));
     if (m_package) {
         v.m_view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
     }
+    
     connect(v.m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
     connect(v.m_color, SIGNAL(changed(QColor)), this, SLOT(setBackgroundColor(QColor)));
     connect(this, SIGNAL(changed(bool)), parent, SLOT(settingsChanged(bool)));

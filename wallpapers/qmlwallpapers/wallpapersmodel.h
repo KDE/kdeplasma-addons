@@ -20,8 +20,11 @@
 #ifndef WALLPAPERSMODEL_H
 #define WALLPAPERSMODEL_H
 
-#include <qabstractitemmodel.h>
+#include <QAbstractItemModel>
+#include <QDeclarativeComponent>
+#include <QDeclarativeItem>
 #include <plasma/packagestructure.h>
+#include "backgrounddelegate.h"
 
 namespace Plasma { class Package; }
 
@@ -30,19 +33,24 @@ class WallpapersModel : public QAbstractListModel
     Q_OBJECT
     public:
         enum Roles {
-            PackageNameRole = Qt::UserRole+1
+            PackageNameRole = BackgroundDelegate::ResolutionRole+1
         };
 
         explicit WallpapersModel(QObject* parent = 0);
+        ~WallpapersModel();
 
         virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
         virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
         QModelIndex indexForPackagePath(const QString& path);
+        void clearCache();
 
     private:
         void addPackage(const QString& root, const QString& name);
 
         QList<Plasma::Package*> m_packages;
+        QMap<Plasma::Package*, QDeclarativeItem*> m_packagesItems;
+        QDeclarativeEngine* m_engine;
+        QGraphicsScene* m_scene;
 };
 
 #endif // WALLPAPERSMODEL_H
