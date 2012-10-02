@@ -40,13 +40,13 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
     , m_item(0)
     , m_package(0)
 {
-    QDeclarativeEngine* engine = new QDeclarativeEngine(this);
+    m_engine = new QDeclarativeEngine(this);
     KDeclarative kdeclarative;
-    kdeclarative.setDeclarativeEngine(engine);
+    kdeclarative.setDeclarativeEngine(m_engine);
     kdeclarative.initialize();
     kdeclarative.setupBindings();
 
-    m_component = new QDeclarativeComponent(engine);
+    m_component = new QDeclarativeComponent(m_engine);
     connect(m_component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), SLOT(componentStatusChanged(QDeclarativeComponent::Status)));
     connect(this, SIGNAL(renderHintsChanged()), SLOT(resizeWallpaper()));
     connect(m_scene, SIGNAL(changed(QList<QRectF>)), SLOT(shouldRepaint(QList<QRectF>)));
@@ -90,12 +90,11 @@ void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
         Q_ASSERT(m_item);
         m_scene->addItem(m_item);
 
-        m_pixmap = QPixmap(targetSizeHint().toSize());
-        m_pixmap.fill(Qt::transparent);
-        QPainter p(&m_pixmap);
-        m_scene->render(&p, QRectF(), QRectF(), Qt::IgnoreAspectRatio);
-        p.end();
-        emit update(QRectF());
+        resizeWallpaper();
+    } else if (s==QDeclarativeComponent::Error) {
+        delete m_component;
+        m_component = new QDeclarativeComponent(m_engine);
+        connect(m_component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), SLOT(componentStatusChanged(QDeclarativeComponent::Status)));
     }
     if (!m_component->errors().isEmpty())
         kDebug() << "wallpaper errors:" << m_component->errors();
@@ -113,7 +112,7 @@ void WallpaperQml::resizeWallpaper()
         m_item->setSize(targetSizeHint());
     }
     m_pixmap = QPixmap(targetSizeHint().toSize());
-    m_pixmap.fill(Qt::transparent);
+    m_pixmap.fill(m_scene->backgroundBrush().color());
     QPainter p(&m_pixmap);
     m_scene->render(&p, QRectF(), QRectF(), Qt::IgnoreAspectRatio);
     p.end();

@@ -21,7 +21,7 @@
 #define WALLPAPERQML_H
 
 #include <plasma/wallpaper.h>
-#include <QDeclarativeComponent>
+#include <QtDeclarative/QDeclarativeComponent>
 
 class QModelIndex;
 class QDeclarativeItem;
@@ -55,6 +55,7 @@ class WallpaperQml : public Plasma::Wallpaper
         Plasma::Package* m_package;
         Plasma::PackageStructure::Ptr m_structure;
         QPixmap m_pixmap;
+        QDeclarativeEngine* m_engine;
 };
 
 #endif
