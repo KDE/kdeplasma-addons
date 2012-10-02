@@ -24,7 +24,7 @@ Rectangle
     Timer {
         running: true
         repeat: true
-        interval: 1000/**1800 *///30 minutes
+        interval: 1000*600 //10 minutes
         onTriggered: randomAction()
     }
     
