@@ -34,5 +34,10 @@ Rectangle
         randomColor()
     }
     
+    MouseArea {
+        anchors.fill: parent
+        onClicked: randomAction()
+    }
+
     Behavior on color { ColorAnimation { duration: 1000; easing.type: Easing.InQuad } }
 }
