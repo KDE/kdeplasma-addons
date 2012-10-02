@@ -172,6 +172,7 @@ void WallpaperQml::save(KConfigGroup& config)
 {
     config.writeEntry("packageName", KUrl(m_package->path()).fileName(KUrl::IgnoreTrailingSlash));
     config.writeEntry("color", m_scene->backgroundBrush().color());
+    config.sync();
     emit changed(false);
 }
 
