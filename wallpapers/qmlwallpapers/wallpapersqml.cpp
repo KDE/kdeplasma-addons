@@ -149,17 +149,10 @@ QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
         v.m_view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
     }
     
-    connect(v.m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
+    connect(v.m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SIGNAL(changed()));
     connect(v.m_color, SIGNAL(changed(QColor)), this, SLOT(setBackgroundColor(QColor)));
     connect(this, SIGNAL(changed(bool)), parent, SLOT(settingsChanged(bool)));
     return w;
-}
-
-void WallpaperQml::changeWallpaper(const QModelIndex& idx)
-{
-    QString name = idx.data(WallpapersModel::PackageNameRole).toString();
-    emit changed(true);
-    setPackageName(name);
 }
 
 void WallpaperQml::init(const KConfigGroup& config)

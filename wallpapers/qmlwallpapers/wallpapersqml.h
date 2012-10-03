@@ -42,11 +42,10 @@ class WallpaperQml : public Plasma::Wallpaper
         void shouldRepaint(const QList< QRectF >& rects);
         void componentStatusChanged(QDeclarativeComponent::Status s);
         void setPackageName(const QString& name);
-        void changeWallpaper(const QModelIndex& idx);
         void setBackgroundColor(const QColor& color);
 
     signals:
-        void changed(bool);
+        void changed(bool hasChanged=true);
 
     private:
         virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
