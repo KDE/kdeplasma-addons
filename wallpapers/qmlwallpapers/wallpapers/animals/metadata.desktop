@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Ascii Animals
 Name[fi]=ASCII-eläimet
+Name[hu]=Ascii állatok
 Name[nl]=Ascii dieren
 Name[pt]=Animais em ASCII
 Name[pt_BR]=Animais em ASCII
@@ -10,6 +11,7 @@ Name[sv]=ASCII-djur
 Name[uk]=ASCII-тварини
 Name[x-test]=xxAscii Animalsxx
 Comment=Unsure if cute or just nerdy
+Comment[hu]=Bizonytalan, ha csinos vagy csak stréber
 Comment[nl]=Onzeker of het leuk is of gewoon nerdachtig
 Comment[pt]=Não sabemos se é bonito ou apenas 'cromo'
 Comment[pt_BR]=Não sabemos se é bonito ou apenas nerd
