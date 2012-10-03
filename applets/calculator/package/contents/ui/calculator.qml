@@ -45,10 +45,12 @@ Item
     Column {
         spacing: 4;
 
-        PlasmaComponents.TextField {
+        PlasmaComponents.TextArea {
             id: display;
             text: "0";
             font.pointSize: 16;
+            font.bold: true;
+            horizontalAlignment: TextEdit.AlignRight;
             height: buttonHeight;
             width: buttonsGrid.width;
             readOnly: true;
