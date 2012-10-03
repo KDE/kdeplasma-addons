@@ -30,9 +30,14 @@ Rectangle {
     }
 
     Component.onCompleted: randomColor()
+    MouseArea {
+        anchors.fill: parent
+        onClicked: randomColor()
+    }
 
     PlasmaCore.SvgItem {
         anchors.fill: parent
+        smooth: true
         svg: PlasmaCore.Svg {
             id: wallpaperSvg
             //FIXME: Svg doesn't support relative paths

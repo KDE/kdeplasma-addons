@@ -42,6 +42,7 @@ class WallpaperQml : public Plasma::Wallpaper
         void shouldRepaint(const QList< QRectF >& rects);
         void componentStatusChanged(QDeclarativeComponent::Status s);
         void setPackageName(const QString& name);
+        void changeWallpaper(const QModelIndex& idx);
         void setBackgroundColor(const QColor& color);
 
     signals:
@@ -60,6 +61,7 @@ class WallpaperQml : public Plasma::Wallpaper
         Plasma::PackageStructure::Ptr m_structure;
         QPixmap m_pixmap;
         QDeclarativeEngine* m_engine;
+        QString m_packageName;
 };
 
 #endif

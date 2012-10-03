@@ -147,12 +147,19 @@ QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
     v.m_view->setItemDelegate(new BackgroundDelegate(v.m_view));
     if (m_package) {
         v.m_view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
+        m_packageName = KUrl(m_package->path()).fileName(KUrl::IgnoreTrailingSlash);
     }
     
-    connect(v.m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SIGNAL(changed()));
+    connect(v.m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
     connect(v.m_color, SIGNAL(changed(QColor)), this, SLOT(setBackgroundColor(QColor)));
     connect(this, SIGNAL(changed(bool)), parent, SLOT(settingsChanged(bool)));
     return w;
+}
+
+void WallpaperQml::changeWallpaper(const QModelIndex& idx)
+{
+    m_packageName = idx.data(WallpapersModel::PackageNameRole).toString();
+    emit changed(true);
 }
 
 void WallpaperQml::init(const KConfigGroup& config)
@@ -164,7 +171,7 @@ void WallpaperQml::init(const KConfigGroup& config)
 
 void WallpaperQml::save(KConfigGroup& config)
 {
-    config.writeEntry("packageName", KUrl(m_package->path()).fileName(KUrl::IgnoreTrailingSlash));
+    config.writeEntry("packageName", m_packageName);
     config.writeEntry("color", m_scene->backgroundBrush().color());
     config.sync();
     emit changed(false);
