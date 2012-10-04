@@ -38,6 +38,8 @@ Item
 
     property int maxInputLength: 19;
 
+    focus: true;
+
     Locale.Locale {
         id: locale;
     }
