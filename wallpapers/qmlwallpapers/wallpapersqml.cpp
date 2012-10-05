@@ -69,14 +69,15 @@ void WallpaperQml::setPackageName(const QString& packageName)
             break;
         }
     }
-
-    Q_ASSERT(m_package->isValid());
-    QUrl scriptUrl(m_package->filePath("mainscript"));
-    if (scriptUrl.isValid()) {
-        m_component->loadUrl(scriptUrl);
-    } else {
-        m_component->setData("import QtQuick 1.1\n Text { text: 'wrong wallpaper'}", QDir::tempPath());
-    }
+    if(m_package->isValid()) {
+        QUrl scriptUrl(m_package->filePath("mainscript"));
+        if (scriptUrl.isValid()) {
+            m_component->loadUrl(scriptUrl);
+        } else {
+            m_component->setData("import QtQuick 1.1\n Text { text: 'wrong wallpaper'}", QDir::tempPath());
+        }
+    } else
+        kWarning() << "couldn't load the package named" << packageName;
 }
 
 void WallpaperQml::componentStatusChanged(QDeclarativeComponent::Status s)
