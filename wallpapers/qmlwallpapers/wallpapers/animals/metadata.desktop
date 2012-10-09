@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Ascii Animals
+Name[es]=Animales Ascii
 Name[fi]=ASCII-eläimet
 Name[hu]=Ascii állatok
 Name[nl]=Ascii dieren
@@ -15,6 +16,7 @@ Name[sv]=ASCII-djur
 Name[uk]=ASCII-тварини
 Name[x-test]=xxAscii Animalsxx
 Comment=Unsure if cute or just nerdy
+Comment[es]=No es seguro si lindo o solo friki
 Comment[hu]=Bizonytalan, ha csinos vagy csak stréber
 Comment[nl]=Onzeker of het leuk is of gewoon nerdachtig
 Comment[pt]=Não sabemos se é bonito ou apenas 'cromo'
