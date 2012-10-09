@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFileInfo>
 #include <QPainter>
 #include <QTimer>
+#include <QDesktopWidget>
 
 #include <KDebug>
 #include <KStandardDirs>
@@ -75,11 +76,16 @@ void PatternWallpaper::loadPattern()
 
 QWidget * PatternWallpaper::createConfigurationInterface(QWidget * parent)
 {
+    QDesktopWidget *desktop = QApplication::desktop();
+    int activeScreen = desktop->screenNumber(parent);
+    QRect geom = desktop->screenGeometry(activeScreen);
+
     QWidget * configWidget = new QWidget(parent);
     m_ui.setupUi(configWidget);
     m_ui.m_fgColor->setColor(m_fgColor);
     m_ui.m_bgColor->setColor(m_bgColor);
     m_model = new BackgroundListModel(this, configWidget);
+    m_model->setWallpaperSize(geom.size());
     m_model->reload();
 
     QTimer::singleShot(0, this, SLOT(setConfigurationInterfaceModel()));
