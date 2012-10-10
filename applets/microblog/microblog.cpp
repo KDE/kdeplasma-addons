@@ -39,6 +39,7 @@
 #include <KWallet/Wallet>
 #include <KToolInvocation>
 
+#include <Plasma/Label>
 #include <Plasma/Svg>
 #include <Plasma/Theme>
 #include <Plasma/DataEngine>
@@ -48,6 +49,7 @@
 #include <Plasma/SvgWidget>
 #include <Plasma/TabBar>
 #include <Plasma/TextBrowser>
+#include <Plasma/ToolTipManager>
 #include <Plasma/ScrollWidget>
 #include <Plasma/TextEdit>
 #include <Plasma/Frame>
@@ -165,11 +167,6 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_colorScheme = new KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
 
-    if (!m_engine->isValid()) {
-        setFailedToLaunch(true, i18n("Failed to load twitter DataEngine"));
-        return m_graphicsWidget;
-    }
-
     //ui setup
     m_layout = new QGraphicsLinearLayout( Qt::Vertical, m_graphicsWidget );
     m_layout->setSpacing( 3 );
@@ -219,7 +216,6 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_statusEdit->setPreferredHeight(fm.height() * 4);
     m_statusEdit->setEnabled(!configurationRequired());
 
-    connect(m_statusEdit, SIGNAL(textChanged()), this, SLOT(editTextChanged()));
     statusEditLayout->addItem(m_statusEdit);
 
     //FIXME: m_statusEdit->setTextColor( m_colorScheme->foreground().color() );
@@ -239,8 +235,6 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_tabBar->addTab(i18n("Replies"));
     m_tabBar->addTab(i18n("Messages"));
     m_layout->addItem(m_tabBar);
-    connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(modeChanged(int)));
-    m_tabBar->nativeWidget()->installEventFilter(this);
 
     m_scrollWidget = new Plasma::ScrollWidget(this);
     m_tweetsWidget = new QGraphicsWidget(m_scrollWidget);
@@ -252,8 +246,35 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
 
     m_graphicsWidget->setPreferredSize(300, 400);
 
-    if (!m_imageQuery.isEmpty()) {
-        m_engine->connectSource(m_imageQuery, this);
+    if(m_engine->isValid()) {
+        connect(m_statusEdit, SIGNAL(textChanged()), this, SLOT(editTextChanged()));
+        connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(modeChanged(int)));
+
+        m_tabBar->nativeWidget()->installEventFilter(this);
+
+        if (!m_imageQuery.isEmpty()) {
+            m_engine->connectSource(m_imageQuery, this);
+        }
+    }
+    else {
+        const QString failureMessage = i18n("Failed to load twitter DataEngine");
+        QGraphicsWidget *failureWidget = new QGraphicsWidget(this);
+        QGraphicsLinearLayout *failureLayout = new QGraphicsLinearLayout(failureWidget);
+        Plasma::IconWidget *failureIcon = new Plasma::IconWidget(this);
+        Plasma::Label *failureLabel = new Plasma::Label(this);
+
+        failureLayout->setContentsMargins(0, 0, 0, 0);
+        failureIcon->setIcon(KIcon("dialog-error"));
+        failureLayout->addItem(failureIcon);
+        failureLabel->setText(failureMessage);
+        failureLabel->nativeWidget()->setWordWrap(true);
+        failureLayout->addItem(failureLabel);
+
+        Plasma::ToolTipManager::self()->registerWidget(failureIcon);
+        Plasma::ToolTipContent data(i18n("Unable to load the widget"), failureMessage, KIcon("dialog-error"));
+        Plasma::ToolTipManager::self()->setContent(failureIcon, data);
+
+        m_tweetsLayout->addItem(failureWidget);
     }
 
     return m_graphicsWidget;
