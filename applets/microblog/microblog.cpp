@@ -240,6 +240,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_tweetsWidget = new QGraphicsWidget(m_scrollWidget);
     m_scrollWidget->setWidget(m_tweetsWidget);
     m_tweetsLayout = new QGraphicsLinearLayout(Qt::Vertical, m_tweetsWidget);
+    m_tweetsLayout->setSpacing(0);
     m_tweetsLayout->addItem(m_headerFrame);
 
     m_layout->addItem(m_scrollWidget);
