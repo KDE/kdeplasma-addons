@@ -81,13 +81,13 @@ void BackgroundListModel::reload(const QStringList &selected)
     }
 
     const QStringList dirs = KGlobal::dirs()->findAllResources(PATTERN_RESOURCE_TYPE, QLatin1String("*.desktop"), KStandardDirs::NoDuplicates);
-    
+
     kDebug() << "going looking in" << dirs;
     processPaths(dirs);
 }
 
 void BackgroundListModel::processPaths(const QStringList &paths)
-{    
+{
     QList<KConfig *> newKConfigs;
     foreach (const QString &file, paths) {
         if (!contains(file) && QFile::exists(file)) {
@@ -100,14 +100,14 @@ void BackgroundListModel::processPaths(const QStringList &paths)
             m_dirwatch.addFile(config->name());
         }
     }
-    
+
     if (!newKConfigs.isEmpty()) {
         const int start = rowCount();
         beginInsertRows(QModelIndex(), start, start + newKConfigs.size());
         m_kconfigs.append(newKConfigs);
         endInsertRows();
     }
-    
+
     //kDebug() << t.elapsed();
 }
 
@@ -155,9 +155,9 @@ QVariant BackgroundListModel::data(const QModelIndex &index, int role) const
     if (!config) {
         return QVariant();
     }
-    
+
     KConfigGroup patternConfig(config, PATTERN_CONFIG_GROUP);
-    
+
     switch (role) {
     case Qt::DisplayRole: {
         QString title = patternConfig.readEntry(COMMENT_CONFIG_KEY, QString());
@@ -176,7 +176,7 @@ QVariant BackgroundListModel::data(const QModelIndex &index, int role) const
 
         KUrl file(KGlobal::dirs()->findResource(PATTERN_RESOURCE_TYPE, 
                                                 patternConfig.readEntry(FILE_CONFIG_KEY, QString())));
-        
+
         if (!m_previewJobs.contains(file) && file.isValid()) {
             KFileItemList list;
             list.append(KFileItem(file, QString(), 0));
@@ -217,12 +217,16 @@ void BackgroundListModel::showPreview(const KFileItem &item, const QPixmap &prev
         return;
     }
     
-    QPixmap pix(120, 80);
+    if (m_structureParent.isNull()) {
+        return;
+    }
+
+    QPixmap pix(m_size);
     QPainter p(&pix);
     QImage image = preview.toImage();
     p.drawTiledPixmap(pix.rect(), m_structureParent.data()->generatePattern(image), QPoint(0,0));
     p.end();
-        
+
     m_previews.insert(config, pix);
     //kDebug() << "preview size:" << preview.size();
     m_structureParent.data()->updateScreenshot(index);
@@ -238,6 +242,14 @@ KConfig* BackgroundListModel::kconfig(int index) const
     return m_kconfigs.at(index);
 }
 
+void BackgroundListModel::setWallpaperSize(const QSize& size)
+{
+    float newHeight = ((float)size.height() / (float)size.width()) * BackgroundDelegate::SCREENSHOT_SIZE;
+
+    m_size = QSize(BackgroundDelegate::SCREENSHOT_SIZE, newHeight);
+
+    m_size.scale(BackgroundDelegate::SCREENSHOT_SIZE, BackgroundDelegate::SCREENSHOT_SIZE/1.6, Qt::KeepAspectRatio);    
+}
 #include "backgroundlistmodel.moc"
 
 

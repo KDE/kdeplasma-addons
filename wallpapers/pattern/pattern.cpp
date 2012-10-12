@@ -80,6 +80,7 @@ QWidget * PatternWallpaper::createConfigurationInterface(QWidget * parent)
     m_ui.m_fgColor->setColor(m_fgColor);
     m_ui.m_bgColor->setColor(m_bgColor);
     m_model = new BackgroundListModel(this, configWidget);
+    m_model->setWallpaperSize(targetSizeHint().toSize());
     m_model->reload();
 
     QTimer::singleShot(0, this, SLOT(setConfigurationInterfaceModel()));
@@ -91,10 +92,10 @@ QWidget * PatternWallpaper::createConfigurationInterface(QWidget * parent)
                                         QApplication::style()->pixelMetric(QStyle::PM_ScrollBarExtent) +
                                         QApplication::style()->pixelMetric(QStyle::PM_DefaultFrameWidth) * 2 + 7);
     m_ui.m_pattern->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
-        
+
     connect(m_ui.m_fgColor, SIGNAL(changed(QColor)), SLOT(widgetChanged()));
     connect(m_ui.m_bgColor, SIGNAL(changed(QColor)), SLOT(widgetChanged()));
-    
+
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     return configWidget;
 }
@@ -161,7 +162,7 @@ void PatternWallpaper::pictureChanged(const QModelIndex &index)
     }
 
     KConfigGroup patternConfig(config, PATTERN_CONFIG_GROUP);
-        
+
     m_patternName = patternConfig.readEntry("File", QString());
     kDebug() << "Pattern changed to =" << m_patternName;
     emit settingsChanged(true);

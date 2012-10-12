@@ -48,7 +48,7 @@ public:
     QModelIndex indexOf(const QString &path) const;
     virtual bool contains(const QString &bg) const;
 
-    //void setWallpaperSize(const QSize& size);
+    void setWallpaperSize(const QSize& size);
     void setResizeMethod(Plasma::Wallpaper::ResizeMethod resizeMethod);
 
 protected Q_SLOTS:
@@ -57,18 +57,19 @@ protected Q_SLOTS:
     void previewFailed(const KFileItem &item);
     void processPaths(const QStringList &paths);
 
-private:  
+private:
     QWeakPointer<PatternWallpaper> m_structureParent;
-    
+
     QList<KConfig *> m_kconfigs;
     QHash<KConfig *, QPixmap> m_previews;
-    
-    
+
+
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
     KDirWatch m_dirwatch;
 
     QString m_findToken;
     QPixmap m_previewUnavailablePix;
+    QSize m_size;
 };
 
 #endif // BACKGROUNDLISTMODEL_H
