@@ -28,7 +28,7 @@ Item
     property int minimumWidth: 200;
     property int minimumHeight: 250;
 
-    property int buttonHeight: (height / 6) - buttonsGrid.spacing;
+    property int buttonHeight: (height - display.height - 6 * buttonsGrid.spacing) / 5;
     property int buttonWidth: (width / 4) - buttonsGrid.spacing;
 
     property real factor;
@@ -54,7 +54,7 @@ Item
             font.weight: Font.Bold;
             horizontalAlignment: TextEdit.AlignRight;
             verticalAlignment: TextEdit.AlignVCenter;
-            height: buttonHeight;
+            height: 2 * font.pixelSize;
             width: buttonsGrid.width;
             readOnly: true;
         }
