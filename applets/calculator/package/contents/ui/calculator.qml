@@ -51,8 +51,9 @@ Item
             id: display;
             text: "0";
             font.pointSize: 16;
-            font.bold: true;
+            font.weight: Font.Bold;
             horizontalAlignment: TextEdit.AlignRight;
+            verticalAlignment: TextEdit.AlignVCenter;
             height: buttonHeight;
             width: buttonsGrid.width;
             readOnly: true;
