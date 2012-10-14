@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 import QtQuick 1.0;
+import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.locale 0.1 as Locale
 
@@ -50,16 +51,23 @@ Item
     Column {
         spacing: 4;
 
-        PlasmaComponents.TextArea {
-            id: display;
-            text: "0";
-            font.pointSize: 16;
-            font.weight: Font.Bold;
-            horizontalAlignment: TextEdit.AlignRight;
-            verticalAlignment: TextEdit.AlignVCenter;
-            height: 2 * font.pixelSize;
+        PlasmaCore.FrameSvgItem {
+            id: displayFrame;
+            height: 2 * display.font.pixelSize;
             width: buttonsGrid.width;
-            readOnly: true;
+            imagePath: "widgets/background";
+
+            TextEdit {
+                id: display;
+                text: "0";
+                anchors.fill: parent;
+                anchors.margins: 2.2 * buttonsGrid.spacing;
+                font.pointSize: 16;
+                font.weight: Font.Bold;
+                horizontalAlignment: TextEdit.AlignRight;
+                verticalAlignment: TextEdit.AlignVCenter;
+                readOnly: true;
+            }
         }
 
 
