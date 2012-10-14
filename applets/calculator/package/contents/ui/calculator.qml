@@ -31,12 +31,14 @@ Item
     property int buttonHeight: (height - display.height - 6 * buttonsGrid.spacing) / 5;
     property int buttonWidth: (width / 4) - buttonsGrid.spacing;
 
-    property real factor;
-    property real sum;
-    property bool waitingForDigit;
-    property string prevOperator;
+    property real result: 0;
+    property bool hasResult: false;
+    property string operator: undefined;
+    property real operand: 0;
+    property bool commaPressed: false;
+    property int decimals: 0;
 
-    property int maxInputLength: 19;
+    property int maxInputLength: 16;
 
     focus: true;
 
@@ -78,14 +80,14 @@ Item
                 text: "÷";
                 height: buttonHeight;
                 width: buttonWidth;
-                onClicked: divideClicked();
+                onClicked: setOperator("/");
             }
 
             PlasmaComponents.Button {
                 text: "×";
                 height: buttonHeight;
                 width: buttonWidth;
-                onClicked: multiplyClicked();
+                onClicked: setOperator("*");
             }
 
             PlasmaComponents.Button {
@@ -121,7 +123,7 @@ Item
                 text: "-";
                 height: buttonHeight;
                 width: buttonWidth;
-                onClicked: subtractClicked();
+                onClicked: setOperator("-");
             }
 
 
@@ -150,7 +152,7 @@ Item
                 text: "+";
                 height: buttonHeight;
                 width: buttonWidth;
-                onClicked: addClicked();
+                onClicked: setOperator("+");
             }
 
 
@@ -242,16 +244,16 @@ Item
     Keys.onPressed: {
         switch (event.key) {
         case Qt.Key_Plus:
-            addClicked();
+            setOperator("+");
             break;
         case Qt.Key_Minus:
-            subtractClicked();
+            setOperator("-");
             break;
         case Qt.Key_Asterisk:
-            multiplyClicked();
+            setOperator("*");
             break;
         case Qt.Key_Slash:
-            divideClicked();
+            setOperator("/");
             break;
         case Qt.Key_Period:
             decimalClicked();
@@ -266,96 +268,85 @@ Item
         }
     }
 
-
     function digitClicked(digit)
     {
         if (display.text.length >= maxInputLength) {
             return;
         }
 
-        if (waitingForDigit) {
-            waitingForDigit = false;
-            display.text = digit;
-        } else if (display.text.indexOf(locale.decimalSymbol) > 0) {
-            display.text += digit;
+        if (commaPressed) {
+            ++decimals;
+            tenToTheDecimals = Math.pow(10, decimals);
+            operand = (operand * tenToTheDecimals + digit) / tenToTheDecimals;
         } else {
-            display.text = locale.formatNumber(locale.readNumber(display.text) * 10 + digit, 0);
+            operand = operand * 10 + digit;
         }
+        display.text = operand;
     }
 
     function decimalClicked()
     {
-        if (waitingForDigit) {
-            display.text = "0";
+        commaPressed = true;
+    }
+
+    function doOperation()
+    {
+        switch (operator) {
+        case "+":
+            result += operand;
+            break;
+        case "-":
+            result -= operand;
+            break;
+        case "*":
+            result *= operand;
+            break;
+        case "/":
+            result /= operand;
+            break;
+        default:
+            return;
         }
 
-        if (display.text.indexOf(locale.decimalSymbol) == -1) {
-            display.text += locale.decimalSymbol;
+        display.text = result;
+    }
+
+    function clearOperand()
+    {
+        operand = 0;
+        commaPressed = false;
+        decimals = 0;
+    }
+
+    function setOperator(op)
+    {
+        if (!hasResult) {
+            result = operand;
+            hasResult = true;
+        } else {
+            doOperation();
         }
-
-        waitingForDigit = false;
-    }
-
-    function addClicked()
-    {
-        waitingForDigit = true;
-        sum = locale.readNumber(display.text);
-        prevOperator = "+";
-    }
-
-    function subtractClicked()
-    {
-        waitingForDigit = true;
-        sum = locale.readNumber(display.text);
-        prevOperator = "-";
-    }
-
-    function multiplyClicked()
-    {
-        waitingForDigit = true;
-        factor = locale.readNumber(display.text);
-        prevOperator = "*";
-    }
-
-    function divideClicked()
-    {
-        waitingForDigit = true;
-        factor = locale.readNumber(display.text);
-        prevOperator = "/";
+        clearOperand();
+        operator = op;
     }
 
     function equalsClicked()
     {
-        switch (prevOperator){
-            case "+":
-                display.text = locale.formatNumber(sum + locale.readNumber(display.text), 0);
-                break;
-            case "-":
-                display.text = locale.fortmatNumber(sum - locale.readNumber(display.text), 0);
-                break;
-            case "*":
-                display.text = locale.formatNumber(factor * locale.readNumber(display.text), 0);
-                break;
-            case "/":
-                display.text = locale.formatNumber(factor / locale.readNumber(display.text), 0);
-                break;
-        }
-
-        waitingForDigit = true;
+        doOperation();
     }
 
     function clearClicked()
     {
-        display.text = "0";
-        waitingForDigit = true;
+        clearOperand();
+        operator = "";
+        display.text = operand;
     }
 
     function allClearClicked()
     {
-        display.text = "0";
-        sum = 0;
-        factor = 0;
-        waitingForDigit = true;
+        clearClicked();
+        result = 0;
+        hasResult = false;
     }
 }
 
