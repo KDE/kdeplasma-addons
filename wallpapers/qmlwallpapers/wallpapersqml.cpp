@@ -142,15 +142,17 @@ QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
     QWidget* w = new QWidget;
     Ui::ViewConfig v;
     v.setupUi(w);
-    
+
     WallpapersModel* m = new WallpapersModel(w);
+    m->setWallpaperSize(targetSizeHint().toSize());
+
     v.m_view->setModel(m);
     v.m_view->setItemDelegate(new BackgroundDelegate(v.m_view));
     if (m_package) {
         v.m_view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
         m_packageName = KUrl(m_package->path()).fileName(KUrl::IgnoreTrailingSlash);
     }
-    
+
     connect(v.m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
     connect(v.m_color, SIGNAL(changed(QColor)), this, SLOT(setBackgroundColor(QColor)));
     connect(this, SIGNAL(changed(bool)), parent, SLOT(settingsChanged(bool)));

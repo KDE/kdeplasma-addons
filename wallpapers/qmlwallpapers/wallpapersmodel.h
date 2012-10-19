@@ -43,6 +43,8 @@ class WallpapersModel : public QAbstractListModel
         virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
         QModelIndex indexForPackagePath(const QString& path);
         void clearCache();
+        void reload();
+        void setWallpaperSize(const QSize& size);
 
     private:
         void addPackage(const QString& root, const QString& name);
@@ -51,6 +53,7 @@ class WallpapersModel : public QAbstractListModel
         QMap<Plasma::Package*, QDeclarativeItem*> m_packagesItems;
         QDeclarativeEngine* m_engine;
         QGraphicsScene* m_scene;
+        QSize m_size;
 };
 
 #endif // WALLPAPERSMODEL_H

@@ -35,19 +35,11 @@ WallpapersModel::WallpapersModel(QObject* parent)
     : QAbstractListModel(parent)
 {
     m_scene = new QGraphicsScene(this);
-    m_scene->setSceneRect(0,0, 100,80);
     m_engine = new QDeclarativeEngine(this);
     KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(m_engine);
     kdeclarative.initialize();
     kdeclarative.setupBindings();
-
-    QStringList dirs(KGlobal::dirs()->findDirs("data", "plasma/wallpapers"));
-    foreach (const QString &dir, dirs) {
-        foreach (const QString &package, Plasma::Package::listInstalled(dir)) {
-            addPackage(dir, package);
-        }
-    }
 }
 
 WallpapersModel::~WallpapersModel()
@@ -129,4 +121,25 @@ QModelIndex WallpapersModel::indexForPackagePath(const QString& path)
         }
     }
     return QModelIndex();
+}
+
+void WallpapersModel::setWallpaperSize(const QSize& size)
+{
+    float newHeight = ((float)size.height() / (float)size.width()) * BackgroundDelegate::SCREENSHOT_SIZE;
+
+    m_size = QSize(BackgroundDelegate::SCREENSHOT_SIZE, newHeight);
+
+    m_size.scale(BackgroundDelegate::SCREENSHOT_SIZE, BackgroundDelegate::SCREENSHOT_SIZE/1.6, Qt::KeepAspectRatio);
+
+    reload();
+}
+
+void WallpapersModel::reload(){
+    m_scene->setSceneRect(0,0, m_size.width(), m_size.height());
+    QStringList dirs(KGlobal::dirs()->findDirs("data", "plasma/wallpapers"));
+    foreach (const QString &dir, dirs) {
+        foreach (const QString &package, Plasma::Package::listInstalled(dir)) {
+            addPackage(dir, package);
+        }
+    }
 }
