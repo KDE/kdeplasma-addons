@@ -22,6 +22,7 @@
 #include <sonnet/speller.h>
 
 #include <plasma/abstractrunner.h>
+#include <QSharedPointer>
 
 /**
  * This checks the spelling of query
@@ -41,12 +42,17 @@ public:
 
 protected slots:
     void init();
+    void loaddata();
+    void destroydata();
 
 private:
+    QString findlang(const QStringList &terms);
+
     QString m_triggerWord;
-    QHash<QString, QString> m_languages;//key=language name, value=language code
+    QMap<QString, QString> m_languages;//key=language name, value=language code
     bool m_requireTriggerWord;
-    Sonnet::Speller m_speller;
+    QMap<QString, QSharedPointer<Sonnet::Speller> > m_spellers; //spellers
+    QMutex m_spellLock; //Lock held when constructing a new speller
 };
 
 K_EXPORT_PLASMA_RUNNER(spellcheckrunner, SpellCheckRunner)
