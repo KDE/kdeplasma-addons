@@ -17,6 +17,7 @@ Name[sr@latin]=ASCII životinje
 Name[sv]=ASCII-djur
 Name[uk]=ASCII-тварини
 Name[x-test]=xxAscii Animalsxx
+Name[zh_TW]=Ascii 動物
 Comment=Unsure if cute or just nerdy
 Comment[es]=No es seguro si lindo o solo friki
 Comment[et]=Pole kindel, kas see on armas või lihtsalt nohiklik
@@ -33,6 +34,7 @@ Comment[sr@latin]=Ljupko, ili prosto štreberski?
 Comment[sv]=Osäker om gulliga eller bara nördiga
 Comment[uk]=Не знаємо, чи це мило, чи просто дивакувато
 Comment[x-test]=xxUnsure if cute or just nerdyxx
+Comment[zh_TW]=其實我也不知道這算可愛還是討厭
 
 Type=Service
 ServiceTypes=Plasma/DeclarativeWallpaper
