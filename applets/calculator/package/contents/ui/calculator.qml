@@ -30,7 +30,7 @@ Item
     property int minimumWidth: 200;
     property int minimumHeight: 250;
 
-    property int buttonHeight: (height - display.height - 6 * buttonsGrid.spacing) / 5;
+    property int buttonHeight: (height - displayFrame.height - 6 * buttonsGrid.spacing) / 5;
     property int buttonWidth: (width / 4) - buttonsGrid.spacing;
 
     property real result: 0;
@@ -48,6 +48,10 @@ Item
         id: locale;
     }
 
+    PlasmaCore.Theme {
+        id: plasmaTheme;
+    }
+
     Column {
         spacing: 4;
 
@@ -61,9 +65,10 @@ Item
                 id: display;
                 text: "0";
                 anchors.fill: parent;
-                anchors.margins: 2.2 * buttonsGrid.spacing;
+                anchors.margins: parent.margins.right;
                 font.pointSize: 16;
                 font.weight: Font.Bold;
+                color: plasmaTheme.viewTextColor;
                 horizontalAlignment: TextEdit.AlignRight;
                 verticalAlignment: TextEdit.AlignVCenter;
                 readOnly: true;
