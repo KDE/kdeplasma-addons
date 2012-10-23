@@ -59,7 +59,8 @@ Item
             id: displayFrame;
             height: 2 * display.font.pixelSize;
             width: buttonsGrid.width;
-            imagePath: "widgets/background";
+            imagePath: "widgets/frame";
+            prefix: "sunken";
 
             TextEdit {
                 id: display;
