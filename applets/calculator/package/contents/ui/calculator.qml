@@ -40,8 +40,10 @@ Item
     property real operand: 0;
     property bool commaPressed: false;
     property int decimals: 0;
+    property int inputSize: 0;
 
-    property int maxInputLength: 16;
+    property int maxInputLength: 15; // More than that and the number notation turns scientific
+                                     // (i.e.: 1.32324e+12)
 
     focus: true;
 
@@ -286,7 +288,7 @@ Item
 
     function digitClicked(digit)
     {
-        if (display.text.length >= maxInputLength) {
+        if (inputSize >= maxInputLength) {
             return;
         }
 
@@ -300,6 +302,7 @@ Item
         display.text = operand;
         showingInput = true;
         display.focus = true;
+        ++inputSize;
     }
 
     function decimalClicked()
@@ -328,7 +331,8 @@ Item
             return;
         }
 
-        display.text = result;
+        display.text = algarismCount(result * Math.pow(10, decimals)) > maxInputLength?
+            "E" : result;
         showingInput = false;
     }
 
@@ -337,6 +341,7 @@ Item
         operand = 0;
         commaPressed = false;
         decimals = 0;
+        inputSize = 0;
     }
 
     function setOperator(op)
@@ -374,6 +379,12 @@ Item
         hasResult = false;
         showingInput = true;
         display.focus = true;
+    }
+
+    function algarismCount(number)
+    {
+        return number == 0? 1 :
+                            Math.floor(Math.log(Math.abs(number))/Math.log(10)) + 1;
     }
 }
 
