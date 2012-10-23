@@ -35,6 +35,7 @@ Item
 
     property real result: 0;
     property bool hasResult: false;
+    property bool showingInput: true;
     property string operator: undefined;
     property real operand: 0;
     property bool commaPressed: false;
@@ -297,12 +298,14 @@ Item
             operand = operand * 10 + digit;
         }
         display.text = operand;
+        showingInput = true;
         display.focus = true;
     }
 
     function decimalClicked()
     {
         commaPressed = true;
+        showingInput = true;
         display.focus = true;
     }
 
@@ -326,6 +329,7 @@ Item
         }
 
         display.text = result;
+        showingInput = false;
     }
 
     function clearOperand()
@@ -340,7 +344,7 @@ Item
         if (!hasResult) {
             result = operand;
             hasResult = true;
-        } else {
+        } else if (showingInput) {
             doOperation();
         }
         clearOperand();
@@ -359,6 +363,7 @@ Item
         clearOperand();
         operator = "";
         display.text = operand;
+        showingInput = true;
         display.focus = true;
     }
 
@@ -367,6 +372,7 @@ Item
         clearClicked();
         result = 0;
         hasResult = false;
+        showingInput = true;
         display.focus = true;
     }
 }
