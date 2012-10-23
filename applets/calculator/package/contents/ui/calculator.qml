@@ -297,11 +297,13 @@ Item
             operand = operand * 10 + digit;
         }
         display.text = operand;
+        display.focus = true;
     }
 
     function decimalClicked()
     {
         commaPressed = true;
+        display.focus = true;
     }
 
     function doOperation()
@@ -343,11 +345,13 @@ Item
         }
         clearOperand();
         operator = op;
+        display.focus = true;
     }
 
     function equalsClicked()
     {
         doOperation();
+        display.focus = true;
     }
 
     function clearClicked()
@@ -355,6 +359,7 @@ Item
         clearOperand();
         operator = "";
         display.text = operand;
+        display.focus = true;
     }
 
     function allClearClicked()
@@ -362,6 +367,7 @@ Item
         clearClicked();
         result = 0;
         hasResult = false;
+        display.focus = true;
     }
 }
 
