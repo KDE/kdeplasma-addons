@@ -54,7 +54,6 @@
 #include "configwidget.h"
 #include "fullviewwidget.h"
 #include "imagewidget.h"
-#include "comicconfig.h"
 
 K_GLOBAL_STATIC( ComicUpdater, globalComicUpdater )
 
@@ -275,15 +274,14 @@ void ComicApplet::updateView()
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 {
     mConfigWidget = new ConfigWidget( dataEngine( "comic" ), mModel, mProxy, parent );
-    mConfigWidget->setShowComicUrl( ComicConfig::self()->showComicUrl() );
-    mConfigWidget->setShowComicAuthor( ComicConfig::self()->showComicAuthor() );
-    mConfigWidget->setShowComicTitle( ComicConfig::self()->showComicTitle() );
-    mConfigWidget->setShowComicIdentifier( ComicConfig::self()->showComicIdentifier() );
-    mConfigWidget->setShowErrorPicture( ComicConfig::self()->showErrorPicture() );
-    mConfigWidget->setArrowsOnHover( ComicConfig::self()->arrowsOnHover() );
-    mConfigWidget->setMiddleClick( ComicConfig::self()->middleClick() );
-    mConfigWidget->setTabView( ComicConfig::self()->tabView() );
-    //mConfigWidget->setTabView( mTabView - 1);//-1 because counting starts at 0, yet we use flags that start at 1
+    mConfigWidget->setShowComicUrl( mShowComicUrl );
+    mConfigWidget->setShowComicAuthor( mShowComicAuthor );
+    mConfigWidget->setShowComicTitle( mShowComicTitle );
+    mConfigWidget->setShowComicIdentifier( mShowComicIdentifier );
+    mConfigWidget->setShowErrorPicture( mShowErrorPicture );
+    mConfigWidget->setArrowsOnHover( mArrowsOnHover );
+    mConfigWidget->setMiddleClick( mMiddleClick );
+    mConfigWidget->setTabView( mTabView - 1);//-1 because counting starts at 0, yet we use flags that start at 1
     mConfigWidget->setCheckNewComicStripsIntervall( mCheckNewComicStripsIntervall );
 
     //not storing this value, since other applets might have changed it inbetween
@@ -426,50 +424,47 @@ void ComicApplet::checkDayChanged()
 
 void ComicApplet::configChanged()
 {
-    ComicConfig::self()->readConfig();
-    
-    mTabIdentifier = ComicConfig::self()->tabIdentifier();
+    KConfigGroup cg = config();
+    mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList( QString() ) );
 
     const QString id = mTabIdentifier.count() ? mTabIdentifier.at( 0 ) : QString();
     mCurrent = ComicData();
-    KConfigGroup cg = config();
     mCurrent.init(id, cg);
-    
-    mShowComicUrl = ComicConfig::self()->showComicUrl();
-    mShowComicAuthor = ComicConfig::self()->showComicAuthor();
-    mShowComicTitle = ComicConfig::self()->showComicTitle();;
-    mShowComicIdentifier = ComicConfig::self()->showComicIdentifier();;
-    mShowErrorPicture = ComicConfig::self()->showErrorPicture();
-    mArrowsOnHover = ComicConfig::self()->arrowsOnHover();
-    mMiddleClick = ComicConfig::self()->middleClick();
-    mCheckNewComicStripsIntervall = ComicConfig::self()->updateIntervallComicStrips();
+
+    mShowComicUrl = cg.readEntry( "showComicUrl", false );
+    mShowComicAuthor = cg.readEntry( "showComicAuthor", false );
+    mShowComicTitle = cg.readEntry( "showComicTitle", false );
+    mShowComicIdentifier = cg.readEntry( "showComicIdentifier", false );
+    mShowErrorPicture = cg.readEntry( "showErrorPicture", true );
+    mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
+    mMiddleClick = cg.readEntry( "middleClick", true );
+    mCheckNewComicStripsIntervall = cg.readEntry( "checkNewComicStripsIntervall", 30 );
+
     //use a decent default size
     const QSizeF tempMaxSize = isInPanel() ? QSizeF( 600, 250 ) : this->size();
-    mMaxSize = ComicConfig::self()->maxSize();//cg.readEntry( "maxSize", tempMaxSize );
+    mMaxSize = cg.readEntry( "maxSize", tempMaxSize );
     mLastSize = mMaxSize;
-    
-    mTabView = ComicConfig::self()->tabView() + 1;
+
+    mTabView = cg.readEntry( "tabView", ShowText | ShowIcon );
+
     globalComicUpdater->load();
 }
 
 void ComicApplet::saveConfig()
 {
-    ComicConfig *config = ComicConfig::self();
-    
-    config->setComic(mCurrent.id());
-    config->setShowComicUrl(mConfigWidget->showComicUrl());
-    config->setShowComicAuthor(mConfigWidget->showComicAuthor());
-    config->setShowComicTitle(mConfigWidget->showComicTitle());
-    config->setShowComicIdentifier(mConfigWidget->showComicIdentifier());
-    config->setShowErrorPicture(mConfigWidget->showErrorPicture());
-    config->setArrowsOnHover(mConfigWidget->arrowsOnHover());
-    config->setMiddleClick(mConfigWidget->middleClick());
-    config->setTabIdentifier(mTabIdentifier);
-    config->setTabView(mConfigWidget->tabView());
-    config->setUpdateIntervallComicStrips(mConfigWidget->checkNewComicStripsIntervall());
-    
-    config->writeConfig();
-    
+    KConfigGroup cg = config();
+    cg.writeEntry( "comic", mCurrent.id() );
+    cg.writeEntry( "showComicUrl", mShowComicUrl );
+    cg.writeEntry( "showComicAuthor", mShowComicAuthor );
+    cg.writeEntry( "showComicTitle", mShowComicTitle );
+    cg.writeEntry( "showComicIdentifier", mShowComicIdentifier );
+    cg.writeEntry( "showErrorPicture", mShowErrorPicture );
+    cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
+    cg.writeEntry( "middleClick", mMiddleClick );
+    cg.writeEntry( "tabIdentifier", mTabIdentifier );
+    cg.writeEntry( "tabView", mTabView );
+    cg.writeEntry( "checkNewComicStripsIntervall", mCheckNewComicStripsIntervall );
+
     globalComicUpdater->save();
 }
 

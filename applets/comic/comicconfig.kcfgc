@@ -1,6 +1,0 @@
-File=comic.kcfg
-ClassName=ComicConfig
-Singleton=true
-Mutators=true
-GlobalEnums=true
-IncludeFiles=KGlobalSettings
