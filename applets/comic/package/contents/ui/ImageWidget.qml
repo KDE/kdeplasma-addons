@@ -61,6 +61,7 @@ Rectangle {
         anchors {
             bottom: imageWidget.bottom
             left: imageWidget.left
+            right: verticalScrollBar.left
         }
         flickableItem: viewContainer
     }
@@ -71,6 +72,7 @@ Rectangle {
         anchors {
             top: imageWidget.top
             right: imageWidget.right
+            bottom: horizontalScrollBar.top
         }
         flickableItem: viewContainer
     }
