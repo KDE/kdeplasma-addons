@@ -22,8 +22,8 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     id: mainWindow
-    property int minimumWidth: 150
-    property int minimumHeight: 60
+    property int minimumWidth: 500
+    property int minimumHeight: 300
 
     property bool showComicAuthor: comicApplet.showComicAuthor
     property bool showComicTitle: comicApplet.showComicTitle
