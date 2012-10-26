@@ -97,17 +97,33 @@ Item {
         id: arrowsSvg
         imagePath: "widgets/arrows"
     }
-    
-    ComicTabBar {
-        id:comicTabbar
-        tabModel: comicApplet.comicsModel
-        showText: (comicApplet.tabBarButtonStyle & 0x1)
-        showIcon: (comicApplet.tabBarButtonStyle & 0x2)
-        onCurrentTabChanged: {
-            //busyIndicator.visible = true;
-            comicApplet.tabChanged(newIndex);
-        }
+
+    PlasmaComponents.TabBar{
+        id: comicTabbar
         visible: (comicsModel.count > 1)
+
+        onCurrentTabChanged: {
+            console.log("OnCurrentChanged triggered");
+            comicApplet.tabChanged(comicTabbar.currentTab.key);
+            console.log("Current Index: " + comicTabbar.currentTab.key);
+        }
+
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+
+        Repeater {
+            model: comicApplet.comicsModel
+            delegate:  PlasmaComponents.TabButton {
+                property string key: model.key
+                property bool highlighted: false
+
+                id: tabButton
+                text: (comicApplet.tabBarButtonStyle & 0x1) ? model.title : ""
+                iconSource: (comicApplet.tabBarButtonStyle & 0x2) ? model.icon : null
+            }
+        }
     }
 
     PlasmaComponents.Label {

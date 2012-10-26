@@ -125,7 +125,7 @@ Q_SIGNALS:
         void createConfigurationInterface( KConfigDialog *parent );
 
     private Q_SLOTS:
-        void slotTabChanged( int newIndex );
+        void slotTabChanged( const QString &newIdentifier );
         void slotNextDay();
         void slotPreviousDay();
         void slotFirstDay();
@@ -152,7 +152,7 @@ Q_SIGNALS:
         Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
         Q_INVOKABLE void goJump() { slotGoJump();}
         Q_INVOKABLE void shop() { slotShop();}
-        Q_INVOKABLE void tabChanged(int newIndex) { slotTabChanged(newIndex);}
+        Q_INVOKABLE void tabChanged(const QString &newIdentifier) { slotTabChanged(newIdentifier);}
 
     protected:
         QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;

@@ -402,15 +402,11 @@ void ComicApplet::updateUsedComics()
     }
 }
 
-void ComicApplet::slotTabChanged( int newIndex )
+void ComicApplet::slotTabChanged(const QString &identifier)
 {
-    if ( newIndex >= mTabIdentifier.count() ) {
-        return;
-    }
-
-    bool differentComic = (mCurrent.id() != mTabIdentifier.at(newIndex));
+    bool differentComic = (mCurrent.id() != identifier);
     mCurrent = ComicData();
-    mCurrent.init(mTabIdentifier.at(newIndex), config());
+    mCurrent.init(identifier, config());
     changeComic( differentComic );
 }
 
