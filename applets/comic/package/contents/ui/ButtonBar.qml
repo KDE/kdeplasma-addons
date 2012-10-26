@@ -26,14 +26,8 @@ Item {
     signal nextClicked
     signal zoomClicked
 
-    width: prevButton.width*3 +10 + 14
+    width: prevButton.width*3 + 10 + 14
     height: prevButton.height + 20
-
-    anchors {
-        horizontalCenter: parent.horizontalCenter
-        bottom: parent.bottom
-        bottomMargin:10
-    }
     
     Component.onCompleted: {
         prevButton.clicked.connect(root.prevClicked);

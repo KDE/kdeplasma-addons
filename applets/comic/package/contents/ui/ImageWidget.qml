@@ -18,111 +18,85 @@
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.qtextracomponents 0.1
 
-Rectangle {
+PlasmaExtras.ScrollArea {
     id: imageWidget
     property alias image: comicPicture.image
     property bool fullView: false
     property alias tooltipText: tooltip.mainText
-    color: "transparent"
+
+    width: comicPicture.nativeWidth
+    height: comicPicture.nativeHeight
 
     Flickable {
         id: viewContainer
-        anchors {
-            top: imageWidget.top
-            left: imageWidget.left
-            right: verticalScrollBar.left
-            bottom: horizontalScrollBar.top
-            bottomMargin: 4
-            leftMargin: 4
-        }
+        anchors.fill:parent
+
         contentWidth: fullView ? comicPicture.nativeWidth : viewContainer.width
         contentHeight: fullView ? comicPicture.nativeHeight : viewContainer.height
         clip: true
         
         QImageItem {
             id: comicPicture
-            anchors { 
-                left: parent.left
-                right: parent.right
-                top: parent.top
-                bottom: parent.bottom
-            }
+            anchors.fill: parent
             smooth: true
-            //opacity: busyIndicator.visible ? 0.3 : 1.0
             fillMode: QImageItem.PreserveAspectFit
-        }
-    }
 
-    PlasmaComponents.ScrollBar {
-        id: horizontalScrollBar
-        orientation: Qt.Horizontal
-        anchors {
-            bottom: imageWidget.bottom
-            left: imageWidget.left
-            right: verticalScrollBar.left
-        }
-        flickableItem: viewContainer
-    }
+            MouseArea {
+                id:mouseArea
+                anchors.fill: comicPicture
+                hoverEnabled: true
+                preventStealing: false
+                acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
-    PlasmaComponents.ScrollBar {
-        id: verticalScrollBar
-        orientation: Qt.Vertical
-        anchors {
-            top: imageWidget.top
-            right: imageWidget.right
-            bottom: horizontalScrollBar.top
-        }
-        flickableItem: viewContainer
-    }
+                PlasmaCore.ToolTip {
+                    id: tooltip
+                    target: mouseArea
+                }
 
-    MouseArea {
-        id:mouseArea
-        anchors.fill: viewContainer
-        hoverEnabled: true
-        preventStealing: false
-        acceptedButtons: Qt.LeftButton | Qt.MiddleButton
+                onClicked: {
+                    if (mouse.button == Qt.MiddleButton) {
+                        fullView = !fullView;
+                    }
+                }
 
-        PlasmaCore.ToolTip {
-            id: tooltip
-            target: mouseArea
-        }
-        onClicked: {
-            if (mouse.button == Qt.MiddleButton) {
-                fullView = !fullView;
-            }
-        }
+                ButtonBar {
+                    id: buttonBar
+                    visible: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
+                    opacity: 0
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        //bottom: imageWidget.bottom
+                        //bottomMargin:10
+                    }
+                    states: State {
+                        name: "show"; when: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
+                        PropertyChanges { target: buttonBar; opacity: 1; }
+                    }
 
-        ButtonBar {
-            id: buttonBar
-            visible: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
-            opacity: 0
-            states: State {
-                name: "show"; when: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
-                PropertyChanges { target: buttonBar; opacity: 1; }
-            }
+                    transitions: Transition {
+                        from: ""; to: "show"; reversible: true
+                        NumberAnimation { properties: "opacity"; duration: 250; easing.type: Easing.InOutQuad }
+                    }
 
-            transitions: Transition {
-                from: ""; to: "show"; reversible: true
-                NumberAnimation { properties: "opacity"; duration: 250; easing.type: Easing.InOutQuad }
-            }
-
-            onPrevClicked: {
-                console.log("Previous clicked");
-                //busyIndicator.visible = true;
-                comicApplet.updateComic(comicData.prev);
-            }
-            onNextClicked: {
-                console.log("Next clicked");
-                //busyIndicator.visible = true;
-                comicApplet.updateComic(comicData.next);
-            }
-            onZoomClicked: {
-                //comicApplet.showFullView();
-                fullDialog.open();
+                    onPrevClicked: {
+                        console.log("Previous clicked");
+                        //busyIndicator.visible = true;
+                        comicApplet.updateComic(comicData.prev);
+                    }
+                    onNextClicked: {
+                        console.log("Next clicked");
+                        //busyIndicator.visible = true;
+                        comicApplet.updateComic(comicData.next);
+                    }
+                    onZoomClicked: {
+                        //comicApplet.showFullView();
+                        fullDialog.open();
+                    }
+                }
             }
         }
     }
-    
 }
