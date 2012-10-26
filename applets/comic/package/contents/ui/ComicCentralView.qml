@@ -75,44 +75,8 @@ Rectangle {
         }
     }
 
-    PlasmaCore.Dialog {
+    FullViewWidget {
         id: fullDialog
-        windowFlags: Qt.Popup
-        visible: false
-        mainItem: Item {
-            width: comicPicture.width
-            height: comicPicture.height
-            clip: true
-            QImageItem {
-                id: comicPicture
-                width: comicPicture.nativeWidth
-                height: comicPicture.nativeHeight
-                image: comicApplet.comicData.image
-                smooth: true
-                fillMode: QImageItem.PreserveAspectFit
-                MouseArea {
-                    id: dialogMouseArea
-                    anchors.fill: comicPicture
-                    onClicked: {
-                        fullDialog.close();
-                    }
-                }
-            }
-        }
-        
-        function open()
-        {
-            var pos = fullDialog.popupPosition(null, Qt.AlignCenter)
-            fullDialog.x = pos.x
-            fullDialog.y = pos.y
-
-            fullDialog.visible = true
-            fullDialog.activateWindow()
-        }
-        
-        function close() {
-            fullDialog.visible = false
-        }
+        image: comicApplet.comicData.image
     }
-    
 }
