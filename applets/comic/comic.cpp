@@ -691,7 +691,7 @@ void ComicApplet::slotSaveComicAs()
 void ComicApplet::slotScaleToContent()
 {
     mCurrent.setScaleComic(mActionScaleContent->isChecked());
-    mImageWidget->setScaled(!mCurrent.scaleComic());
+    //mImageWidget->setScaled(!mCurrent.scaleComic());
 
     updateSize();
 }
