@@ -57,7 +57,7 @@ class SavingDir;
 class ComicApplet : public Plasma::PopupApplet
 {
     Q_OBJECT
-    Q_PROPERTY(QObject * comicsModel READ comicsModel)
+    Q_PROPERTY(QObject * comicsModel READ comicsModel NOTIFY comicModelChanged)
     Q_PROPERTY(bool showComicUrl READ showComicUrl WRITE setShowComicUrl NOTIFY showComicUrlChanged)
     Q_PROPERTY(bool showComicAuthor READ showComicAuthor WRITE setShowComicAuthor NOTIFY showComicAuthorChanged)
     Q_PROPERTY(bool showComicTitle READ showComicTitle WRITE setShowComicTitle NOTIFY showComicTitleChanged)
@@ -108,6 +108,7 @@ class ComicApplet : public Plasma::PopupApplet
         Q_INVOKABLE void showFullView() { fullView(); }
         //End for QML
 Q_SIGNALS:
+    void comicModelChanged();
     void showComicUrlChanged();
     void showComicAuthorChanged();
     void showComicTitleChanged();

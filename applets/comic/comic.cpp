@@ -400,6 +400,8 @@ void ComicApplet::updateUsedComics()
         mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsIntervall, this );
         connect( mCheckNewStrips, SIGNAL(lastStrip(int,QString,QString)), this, SLOT(slotFoundLastStrip(int,QString,QString)) );
     }
+
+    emit comicModelChanged();
 }
 
 void ComicApplet::slotTabChanged(const QString &identifier)
