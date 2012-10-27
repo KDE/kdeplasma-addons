@@ -49,7 +49,7 @@ Rectangle {
         id: comicImage
         image: comicApplet.comicData.image
         tooltipText: comicApplet.comicData.additionalText
-        fullView: comicApplet.showActualSize
+        actualSize: comicApplet.showActualSize
         anchors { 
             left: arrowLeft.visible ? arrowLeft.right : root.left
             right: arrowRight.visible ? arrowRight.left : root.right

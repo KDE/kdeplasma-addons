@@ -24,7 +24,7 @@ import org.kde.qtextracomponents 0.1
 PlasmaExtras.ScrollArea {
     id: imageWidget
     property alias image: comicPicture.image
-    property bool fullView: false
+    property bool actualSize: false
     property alias tooltipText: tooltip.mainText
 
     width: comicPicture.nativeWidth
@@ -34,13 +34,15 @@ PlasmaExtras.ScrollArea {
         id: viewContainer
         anchors.fill:parent
 
-        contentWidth: fullView ? comicPicture.nativeWidth : viewContainer.width
-        contentHeight: fullView ? comicPicture.nativeHeight : viewContainer.height
+        contentWidth: calculateContentWidth()
+        contentHeight: calculateContentHeight()
         clip: true
-        
+
         QImageItem {
             id: comicPicture
-            anchors.fill: parent
+            width: actualSize ? comicPicture.nativeWidth : viewContainer.width
+            height: actualSize ? comicPicture.nativeHeight : viewContainer.height
+            anchors.centerIn: parent
             smooth: true
             fillMode: QImageItem.PreserveAspectFit
 
@@ -97,5 +99,13 @@ PlasmaExtras.ScrollArea {
                 }
             }
         }
+    }
+
+    function calculateContentWidth() {
+        return actualSize ? (comicPicture.nativeWidth > viewContainer.width ? comicPicture.nativeWidth : viewContainer.width) : viewContainer.width
+    }
+
+    function calculateContentHeight() {
+        return actualSize ? (comicPicture.nativeHeight > viewContainer.height ? comicPicture.nativeHeight : viewContainer.height) : viewContainer.height
     }
 }
