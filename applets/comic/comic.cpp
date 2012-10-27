@@ -234,11 +234,8 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     //call the slot to check if the position needs to be saved
     slotStorePosition();
 
-    
-//     mImageWidget->setImage(mCurrent.image());
 //     mImageWidget->setIsLeftToRight( data[ "isLeftToRight" ].toBool() );
 //     mImageWidget->setIsTopToBottom( data[ "isTopToBottom" ].toBool() );
-//     mImageWidget->setScaled( !mCurrent.scaleComic() );//REZA
 
     //disconnect if there is either no error, or an error that can not be fixed automatically 
     if ( !errorAutoFixable ) {
@@ -692,8 +689,7 @@ void ComicApplet::slotSaveComicAs()
 
 void ComicApplet::slotScaleToContent()
 {
-    mCurrent.setScaleComic(mActionScaleContent->isChecked());
-    //mImageWidget->setScaled(!mCurrent.scaleComic());
+    setShowActualSize(mActionScaleContent->isChecked());
 
     updateSize();
 }
@@ -871,6 +867,21 @@ void ComicApplet::refreshComicData()
     mComicData["isTopToBottom"] = mCurrent.isTopToBottom();
     
     emit comicDataChanged();
+}
+
+bool ComicApplet::showActualSize() const
+{
+    return mCurrent.scaleComic();
+}
+
+void ComicApplet::setShowActualSize(bool show)
+{
+    if (show == mCurrent.scaleComic())
+        return;
+
+    mCurrent.setScaleComic(show);
+
+    emit showActualSizeChanged();
 }
 //Endof QML
 

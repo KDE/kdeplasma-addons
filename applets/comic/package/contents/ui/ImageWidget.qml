@@ -57,8 +57,8 @@ PlasmaExtras.ScrollArea {
                 }
 
                 onClicked: {
-                    if (mouse.button == Qt.MiddleButton) {
-                        fullView = !fullView;
+                    if (mouse.button == Qt.MiddleButton && comicApplet.middleClick) {
+                        fullDialog.open();
                     }
                 }
 
@@ -92,7 +92,6 @@ PlasmaExtras.ScrollArea {
                         comicApplet.updateComic(comicData.next);
                     }
                     onZoomClicked: {
-                        //comicApplet.showFullView();
                         fullDialog.open();
                     }
                 }

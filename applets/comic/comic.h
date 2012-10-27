@@ -67,6 +67,7 @@ class ComicApplet : public Plasma::PopupApplet
     Q_PROPERTY(bool middleClick READ middleClick WRITE setMiddleClick NOTIFY middleClickChanged)
     Q_PROPERTY(int tabBarButtonStyle READ tabBarButtonStyle WRITE setTabBarButtonStyle NOTIFY tabBarButtonStyleChanged)
     Q_PROPERTY(QVariantHash comicData READ comicData NOTIFY comicDataChanged)
+    Q_PROPERTY(bool showActualSize READ showActualSize WRITE setShowActualSize NOTIFY showActualSizeChanged)
 
     public:
         ComicApplet( QObject *parent, const QVariantList &args );
@@ -102,10 +103,12 @@ class ComicApplet : public Plasma::PopupApplet
         bool middleClick() const;
         void setMiddleClick(bool show);
         
+        bool showActualSize() const;
+        void setShowActualSize(bool show);
+
         int tabBarButtonStyle() const;
         void setTabBarButtonStyle(int style);
         Q_INVOKABLE bool checkAuthorization(const QString &permissionName) { return hasAuthorization(permissionName); }
-        Q_INVOKABLE void showFullView() { fullView(); }
         //End for QML
 Q_SIGNALS:
     void comicModelChanged();
@@ -120,6 +123,7 @@ Q_SIGNALS:
     void comicDataChanged();
     void tabHighlightRequest(int index, bool highlight);
     void showNextNewStrip();
+    void showActualSizeChanged();
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
