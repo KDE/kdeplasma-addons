@@ -28,19 +28,16 @@ Rectangle {
     height: 10
     color: "transparent"
 
-    ActionButton {
+    PlasmaComponents.ToolButton {
         id: arrowLeft
-        svg: arrowsSvg
-        elementId: "left-arrow"
-        width: 48
-        height: 48
+        iconSource: "go-previous"
         anchors {
             left: root.left
             verticalCenter: root.verticalCenter
         }
-        visible: (!comicApplet.arrowsOnHover && (comicData.prev.length > 0))
+        visible: (!comicApplet.arrowsOnHover && (comicData.prev !== undefined))
         onClicked: {
-            //busyIndicator.visible = true;
+            console.log(comicData.prev);
             comicApplet.updateComic(comicData.prev);
         }
     }
@@ -53,24 +50,22 @@ Rectangle {
         anchors { 
             left: arrowLeft.visible ? arrowLeft.right : root.left
             right: arrowRight.visible ? arrowRight.left : root.right
+            leftMargin: arrowLeft.visible ? 4 : 0
+            rightMargin: arrowRight.visible ? 4 : 0
             top: root.top
             bottom: root.bottom
         }
     }
 
-    ActionButton {
+    PlasmaComponents.ToolButton {
         id: arrowRight
-        svg: arrowsSvg
-        elementId: "right-arrow"
-        width: 48
-        height: 48
+        iconSource: "go-next"
         anchors {
             right: root.right
             verticalCenter: root.verticalCenter
         }
-        visible: (!comicApplet.arrowsOnHover && (comicData.next.length > 0))
+        visible: (!comicApplet.arrowsOnHover && (comicData.next !== undefined))
         onClicked: {
-            //busyIndicator.visible = true;
             comicApplet.updateComic(comicData.next);
         }
     }
