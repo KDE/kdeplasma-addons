@@ -34,28 +34,35 @@ PlasmaExtras.ScrollArea {
         id: viewContainer
         anchors.fill:parent
 
-        contentWidth: calculateContentWidth()
-        contentHeight: calculateContentHeight()
+        contentWidth: dummy.width
+        contentHeight: dummy.height
         clip: true
 
-        QImageItem {
-            id: comicPicture
-            width: actualSize ? comicPicture.nativeWidth : viewContainer.width
-            height: actualSize ? comicPicture.nativeHeight : viewContainer.height
-            anchors.centerIn: parent
-            smooth: true
-            fillMode: QImageItem.PreserveAspectFit
+        Rectangle {
+            id: dummy
+            color:"transparent"
+            width: Math.max(comicPicture.width, viewContainer.width);
+            height: Math.max(comicPicture.height, viewContainer.height);
+
+            QImageItem {
+                id: comicPicture
+                width: actualSize ? comicPicture.nativeWidth : viewContainer.width
+                height: actualSize ? comicPicture.nativeHeight : viewContainer.height
+                anchors.centerIn: parent
+                smooth: true
+                fillMode: QImageItem.PreserveAspectFit
+            }
 
             MouseArea {
                 id:mouseArea
-                anchors.fill: comicPicture
+                anchors.fill: parent
                 hoverEnabled: true
                 preventStealing: false
                 acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
                 PlasmaCore.ToolTip {
                     id: tooltip
-                    target: mouseArea
+                    //target: imageWidget
                 }
 
                 onClicked: {
@@ -66,12 +73,12 @@ PlasmaExtras.ScrollArea {
 
                 ButtonBar {
                     id: buttonBar
-                    visible: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
+                    visible: (comicApplet.arrowsOnHover && (mouseArea.containsMouse || (mouseArea.containsMouse && buttonBar.visible)) )
                     opacity: 0
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        //bottom: imageWidget.bottom
-                        //bottomMargin:10
+
+                    pos {
+                        y: viewContainer.height - buttonBar.height + viewContainer.contentY
+                        x: (viewContainer.width - buttonBar.width)/2 + viewContainer.contentX
                     }
                     states: State {
                         name: "show"; when: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
