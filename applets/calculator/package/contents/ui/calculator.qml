@@ -45,7 +45,7 @@ Item
     property int maxInputLength: 15; // More than that and the number notation turns scientific
                                      // (i.e.: 1.32324e+12)
 
-    focus: true;
+    id: main;
 
     Locale.Locale {
         id: locale;
@@ -53,6 +53,13 @@ Item
 
     PlasmaCore.Theme {
         id: plasmaTheme;
+    }
+
+    Connections {
+        target: plasmoid;
+        onPopupEvent: {
+            main.focus = true;
+        }
     }
 
     Column {
@@ -301,7 +308,6 @@ Item
         }
         display.text = operand;
         showingInput = true;
-        display.focus = true;
         ++inputSize;
     }
 
@@ -309,7 +315,6 @@ Item
     {
         commaPressed = true;
         showingInput = true;
-        display.focus = true;
     }
 
     function doOperation()
@@ -354,13 +359,11 @@ Item
         }
         clearOperand();
         operator = op;
-        display.focus = true;
     }
 
     function equalsClicked()
     {
         doOperation();
-        display.focus = true;
     }
 
     function clearClicked()
@@ -369,7 +372,6 @@ Item
         operator = "";
         display.text = operand;
         showingInput = true;
-        display.focus = true;
     }
 
     function allClearClicked()
@@ -378,7 +380,6 @@ Item
         result = 0;
         hasResult = false;
         showingInput = true;
-        display.focus = true;
     }
 
     function algarismCount(number)
