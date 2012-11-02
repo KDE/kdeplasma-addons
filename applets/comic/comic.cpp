@@ -25,7 +25,6 @@
 #include "comicarchivejob.h"
 #include "checknewstrips.h"
 #include "stripselector.h"
-#include "comicwidgets.h"
 #include "comicsaver.h"
 
 #include <QtCore/QTimer>

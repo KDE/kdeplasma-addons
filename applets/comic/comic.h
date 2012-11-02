@@ -39,9 +39,7 @@ namespace Plasma {
 
 class ButtonBar;
 class CheckNewStrips;
-class ComicLabel;
 class ComicModel;
-class ComicTabBar;
 class ConfigWidget;
 class KAction;
 class KJob;
@@ -202,13 +200,9 @@ Q_SIGNALS:
         QSizeF mLastSize;
         QSizeF mIdealSize;
         Plasma::DataEngine *mEngine;
-        ComicLabel *mLabelId;
-        ComicLabel *mLabelTop;
-        ComicLabel *mLabelUrl;
 
         //Tabs
         bool mTabAdded;
-        ComicTabBar *mTabBar;
         QStringList mTabIdentifier;
 
         ComicData mCurrent;
