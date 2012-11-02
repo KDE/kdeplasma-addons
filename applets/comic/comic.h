@@ -44,7 +44,6 @@ class ComicLabel;
 class ComicModel;
 class ComicTabBar;
 class ConfigWidget;
-class FullViewWidget;
 class ImageWidget;
 class KAction;
 class KJob;
@@ -146,7 +145,6 @@ Q_SIGNALS:
         void slotShowMaxSize();
         void applyConfig();
         void checkDayChanged();
-        void fullView();
         void updateSize();
         void createComicBook();
         void slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
@@ -199,7 +197,6 @@ Q_SIGNALS:
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
         Plasma::DeclarativeWidget *mDeclarativeWidget;
-        FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
         QAction *mActionGoJump;

@@ -52,7 +52,6 @@
 
 #include "comicmodel.h"
 #include "configwidget.h"
-#include "fullviewwidget.h"
 #include "imagewidget.h"
 
 K_GLOBAL_STATIC( ComicUpdater, globalComicUpdater )
@@ -71,7 +70,6 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mMiddleClick( true ),
       mCheckNewStrips( 0 ),
       mDeclarativeWidget( 0 ),
-      mFullViewWidget( 0 ),
       mActionShop( 0 ),
       mEngine( 0 ),
       mSavingDir(0),
@@ -187,7 +185,6 @@ void ComicApplet::init()
 
 ComicApplet::~ComicApplet()
 {
-    delete mFullViewWidget;
     delete mSavingDir;
 }
 
@@ -693,20 +690,6 @@ void ComicApplet::slotScaleToContent()
 
     updateSize();
 }
-
-void ComicApplet::fullView()
-{
-    if (!mFullViewWidget) {
-        mFullViewWidget = new FullViewWidget;
-    }
-
-    if (!mFullViewWidget->isVisible()) {
-        mFullViewWidget->setImage(mCurrent.image());
-        mFullViewWidget->adaptPosition(mDeclarativeWidget->mapToScene( mDeclarativeWidget->pos()).toPoint(), containment()->screen());
-        mFullViewWidget->show();
-    }
-}
-
 
 //QML
 QObject *ComicApplet::comicsModel() 
