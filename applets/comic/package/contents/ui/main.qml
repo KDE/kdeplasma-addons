@@ -100,7 +100,7 @@ Item {
 
     PlasmaComponents.TabBar{
         id: comicTabbar
-        visible: (comicsModel.count > 1)
+        visible: (comicApplet.comicsModel.count > 1)
 
         onCurrentTabChanged: {
             console.log("OnCurrentChanged triggered");
@@ -116,12 +116,25 @@ Item {
         Repeater {
             model: comicApplet.comicsModel
             delegate:  PlasmaComponents.TabButton {
-                property string key: model.key
-                property bool highlighted: false
-
                 id: tabButton
+
+                property string key: model.key
+                property bool highlighted: model.highlight
+
                 text: (comicApplet.tabBarButtonStyle & 0x1) ? model.title : ""
                 iconSource: (comicApplet.tabBarButtonStyle & 0x2) ? model.icon : null
+
+                Rectangle {
+                    id: highlightMask
+                    color: "white"
+                    width: Math.max(theme.smallIconSize, tabButton.height)
+                    height: Math.max(theme.smallIconSize, tabButton.height)
+                    opacity: model.highlight ? 0 : 0.5
+                    anchors {
+                        bottom: parent.bottom
+                        left: parent.left
+                    }
+                }
             }
         }
     }
