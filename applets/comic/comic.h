@@ -37,14 +37,12 @@ namespace Plasma {
     class DeclarativeWidget;
 }
 
-class ArrowWidget;
 class ButtonBar;
 class CheckNewStrips;
 class ComicLabel;
 class ComicModel;
 class ComicTabBar;
 class ConfigWidget;
-class ImageWidget;
 class KAction;
 class KJob;
 class QAction;
@@ -64,7 +62,6 @@ class ComicApplet : public Plasma::PopupApplet
     Q_PROPERTY(bool showErrorPicture READ showErrorPicture WRITE setShowErrorPicture NOTIFY showErrorPictureChanged)
     Q_PROPERTY(bool arrowsOnHover READ arrowsOnHover WRITE setArrowsOnHover NOTIFY arrowsOnHoverChanged)
     Q_PROPERTY(bool middleClick READ middleClick WRITE setMiddleClick NOTIFY middleClickChanged)
-    Q_PROPERTY(int tabBarButtonStyle READ tabBarButtonStyle WRITE setTabBarButtonStyle NOTIFY tabBarButtonStyleChanged)
     Q_PROPERTY(QVariantHash comicData READ comicData NOTIFY comicDataChanged)
     Q_PROPERTY(bool showActualSize READ showActualSize WRITE setShowActualSize NOTIFY showActualSizeChanged)
 
@@ -105,8 +102,6 @@ class ComicApplet : public Plasma::PopupApplet
         bool showActualSize() const;
         void setShowActualSize(bool show);
 
-        int tabBarButtonStyle() const;
-        void setTabBarButtonStyle(int style);
         Q_INVOKABLE bool checkAuthorization(const QString &permissionName) { return hasAuthorization(permissionName); }
         //End for QML
 Q_SIGNALS:
@@ -118,7 +113,6 @@ Q_SIGNALS:
     void showErrorPictureChanged();
     void arrowsOnHoverChanged();
     void middleClickChanged();
-    void tabBarButtonStyleChanged();
     void comicDataChanged();
     void tabHighlightRequest(int index, bool highlight);
     void showNextNewStrip();
@@ -212,20 +206,10 @@ Q_SIGNALS:
         ComicLabel *mLabelTop;
         ComicLabel *mLabelUrl;
 
-        ImageWidget *mImageWidget;
-        ArrowWidget *mLeftArrow;
-        ArrowWidget *mRightArrow;
-
         //Tabs
         bool mTabAdded;
         ComicTabBar *mTabBar;
         QStringList mTabIdentifier;
-
-        enum TabView {
-            ShowText = 0x1,
-            ShowIcon = 0x2
-        };
-        int mTabView;
 
         ComicData mCurrent;
         SavingDir *mSavingDir;

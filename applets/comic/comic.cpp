@@ -52,7 +52,6 @@
 
 #include "comicmodel.h"
 #include "configwidget.h"
-#include "imagewidget.h"
 
 K_GLOBAL_STATIC( ComicUpdater, globalComicUpdater )
 
@@ -231,9 +230,6 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     //call the slot to check if the position needs to be saved
     slotStorePosition();
 
-//     mImageWidget->setIsLeftToRight( data[ "isLeftToRight" ].toBool() );
-//     mImageWidget->setIsTopToBottom( data[ "isTopToBottom" ].toBool() );
-
     //disconnect if there is either no error, or an error that can not be fixed automatically 
     if ( !errorAutoFixable ) {
         mEngine->disconnectSource( source, this );
@@ -275,7 +271,6 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setShowErrorPicture( mShowErrorPicture );
     mConfigWidget->setArrowsOnHover( mArrowsOnHover );
     mConfigWidget->setMiddleClick( mMiddleClick );
-    mConfigWidget->setTabView( mTabView - 1);//-1 because counting starts at 0, yet we use flags that start at 1
     mConfigWidget->setCheckNewComicStripsIntervall( mCheckNewComicStripsIntervall );
 
     //not storing this value, since other applets might have changed it inbetween
@@ -305,7 +300,6 @@ void ComicApplet::applyConfig()
     setShowErrorPicture(mConfigWidget->showErrorPicture());
     setArrowsOnHover(mConfigWidget->arrowsOnHover());
     setMiddleClick(mConfigWidget->middleClick());
-    setTabBarButtonStyle(mConfigWidget->tabView() + 1);//+1 because counting starts at 0, yet we use flags that start at 1
     mCheckNewComicStripsIntervall = mConfigWidget->checkNewComicStripsIntervall();
 
     //not storing this value, since other applets might have changed it inbetween
@@ -437,8 +431,6 @@ void ComicApplet::configChanged()
     mMaxSize = cg.readEntry( "maxSize", tempMaxSize );
     mLastSize = mMaxSize;
 
-    mTabView = cg.readEntry( "tabView", ShowText | ShowIcon );
-
     globalComicUpdater->load();
 }
 
@@ -454,7 +446,6 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
-    cg.writeEntry( "tabView", mTabView );
     cg.writeEntry( "checkNewComicStripsIntervall", mCheckNewComicStripsIntervall );
 
     globalComicUpdater->save();
@@ -800,21 +791,6 @@ void ComicApplet::setMiddleClick(bool show)
     mMiddleClick = show;
     
     emit middleClickChanged();
-}
-
-int ComicApplet::tabBarButtonStyle() const
-{
-    return mTabView;
-}
-
-void ComicApplet::setTabBarButtonStyle(int style)
-{
-    if (style == mTabView)
-        return;
-    
-    mTabView = style;
-    
-    emit tabBarButtonStyleChanged();
 }
 
 QVariantHash ComicApplet::comicData()

@@ -121,8 +121,8 @@ Item {
                 property string key: model.key
                 property bool highlighted: model.highlight
 
-                text: (comicApplet.tabBarButtonStyle & 0x1) ? model.title : ""
-                iconSource: (comicApplet.tabBarButtonStyle & 0x2) ? model.icon : null
+                text: model.title
+                iconSource: model.icon
 
                 Rectangle {
                     id: highlightMask

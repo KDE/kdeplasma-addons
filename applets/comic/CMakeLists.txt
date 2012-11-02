@@ -9,7 +9,6 @@ set(comic_SRCS
     comic.cpp
     comicmodel.cpp
     configwidget.cpp
-    imagewidget.cpp
     comicarchivejob.cpp
     comicarchivedialog.cpp
     checknewstrips.cpp
