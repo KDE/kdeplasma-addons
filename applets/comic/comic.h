@@ -37,7 +37,6 @@ namespace Plasma {
     class DeclarativeWidget;
 }
 
-class ButtonBar;
 class CheckNewStrips;
 class ComicModel;
 class ConfigWidget;
@@ -133,7 +132,6 @@ Q_SIGNALS:
         void slotScaleToContent();
         void slotShop();
         void slotStorePosition();
-        void slotShowMaxSize();
         void applyConfig();
         void checkDayChanged();
         void createComicBook();

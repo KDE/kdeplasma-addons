@@ -277,7 +277,6 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     parent->addPage( mConfigWidget->appearanceSettings, i18n( "Appearance" ), "image" );
     parent->addPage( mConfigWidget->advancedSettings, i18n( "Advanced" ), "system-run" );
 
-    connect( mConfigWidget, SIGNAL(maxSizeClicked()), this, SLOT(slotShowMaxSize()) );
     connect( parent, SIGNAL(applyClicked()), this, SLOT(applyConfig()) );
     connect( parent, SIGNAL(okClicked()), this, SLOT(applyConfig()) );
     connect(mConfigWidget, SIGNAL(enableApply()), parent, SLOT(settingsModified()));
@@ -498,12 +497,6 @@ void ComicApplet::slotGoJump()
 void ComicApplet::slotStorePosition()
 {
     mCurrent.storePosition(mActionStorePosition->isChecked());
-}
-
-void ComicApplet::slotShowMaxSize()
-{
-    resize( mMaxSize );
-    emit appletTransformedItself();
 }
 
 void ComicApplet::slotShop()

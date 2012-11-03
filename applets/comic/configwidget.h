@@ -36,7 +36,6 @@ class KConfigDialog;
 class QCheckBox;
 class QComboBox;
 class QSortFilterProxyModel;
-class QPushButton;
 
 namespace KNS3 {
     class DownloadDialog;
