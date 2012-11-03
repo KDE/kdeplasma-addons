@@ -127,7 +127,6 @@ Q_SIGNALS:
         void slotCurrentDay();
         void slotFoundLastStrip( int index, const QString &identifier, const QString &suffix );
         void slotGoJump();
-        void slotReload();
         void slotSaveComicAs();
         void slotScaleToContent();
         void slotShop();

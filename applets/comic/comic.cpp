@@ -474,18 +474,6 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
     mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
 }
 
-void ComicApplet::slotReload()
-{
-    /*int index = mTabBar->currentIndex();
-    int newIndex = ( index + 1 ) % mTabBar->count();
-
-    if ( index == newIndex ) {
-        changeComic( false );
-    } else {
-        mTabBar->setCurrentIndex( newIndex );
-    }*/
-}
-
 void ComicApplet::slotGoJump()
 {
     StripSelector *selector = StripSelectorFactory::create(mCurrent.type());
@@ -735,8 +723,6 @@ QVariantHash ComicApplet::comicData()
 
 void ComicApplet::refreshComicData()
 {
-    //QVariantHash comicData;    
-    
     mComicData["image"] = mCurrent.image();
     mComicData["prev"] = mCurrent.prev();
     mComicData["next"] = mCurrent.next();
