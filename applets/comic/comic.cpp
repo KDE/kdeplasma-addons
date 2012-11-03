@@ -221,8 +221,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     //looking at the last index, thus not mark it as new
     KConfigGroup cg = config();
     if (!mCurrent.hasNext() && mCheckNewComicStripsIntervall) {
-        setTabHighlighted( -1, false );
-        emit tabHighlightRequest(-1, false);
+        setTabHighlighted( mCurrent.id(), false );
         mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
     }
 
@@ -475,8 +474,7 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
     KConfigGroup cg = config();
     if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
         kDebug() << identifier << "has a newer strip.";
-        setTabHighlighted( index, true );
-        emit tabHighlightRequest(index, true);
+        setTabHighlighted( identifier, true );
         cg.writeEntry( "lastStripVisited_" + identifier, false );
     }
 
@@ -842,17 +840,20 @@ void ComicApplet::setShowActualSize(bool show)
     emit showActualSizeChanged();
 }
 //Endof QML
-
-void ComicApplet::setTabHighlighted(int index, bool highlight)
+void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
 {
-    if (index < 0 || index >= mActiveComicModel.rowCount()) {
-        return;
+    //Search for matching id
+    for (int index = 0; index < mActiveComicModel.rowCount(); ++index) {
+        QStandardItem * item = mActiveComicModel.item(index);
+
+        QString currentId = item->data(ActiveComicModel::ComicKeyRole).toString();
+        if (id == currentId){
+            if (highlight != item->data(ActiveComicModel::ComicHighlightRole).toBool()) {
+                item->setData(highlight, ActiveComicModel::ComicHighlightRole);
+                emit tabHighlightRequest(id, highlight);
+            }
+        }
     }
-    
-    QStandardItem * item = mActiveComicModel.item(index);
-    if (highlight != item->data(ActiveComicModel::ComicHighlightRole).toBool()) {
-        item->setData(highlight, ActiveComicModel::ComicHighlightRole);
-    }   
 }
 
 bool ComicApplet::hasHighlightedTabs()

@@ -112,7 +112,7 @@ Q_SIGNALS:
     void arrowsOnHoverChanged();
     void middleClickChanged();
     void comicDataChanged();
-    void tabHighlightRequest(int index, bool highlight);
+    void tabHighlightRequest(const QString &id, bool highlight);
     void showNextNewStrip();
     void showActualSizeChanged();
 
@@ -160,7 +160,7 @@ Q_SIGNALS:
         void saveConfig();
         bool isInPanel() const;
         void refreshComicData();
-        void setTabHighlighted(int index, bool highlight);
+        void setTabHighlighted(const QString &id, bool highlight);
         bool hasHighlightedTabs();
         bool isTabHighlighted(int index) const;
 

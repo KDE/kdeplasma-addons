@@ -41,14 +41,36 @@ Item {
     Connections {
         target: comicApplet
         onTabHighlightRequest: {
-            console.log("onTabHighlightRequest:" + index);
-            comicTabbar.setTabHighlighted(index, highlight);
+            for (var i = 0; i < comicTabbar.layout.children.length; ++i) {
+                var button = comicTabbar.layout.children[i];
+                if (button.key !== undefined && button.key == id) {
+                    //console.log("KEY:" + button.key + ",highlighted:" + highlight);
+                    button.highlighted = highlight;
+                }
+            }
         }
-        
+
         onShowNextNewStrip: {
-            console.log("onshowNextNewStrip");
-            var index = comicTabbar.currentButtonIndex();
-            comicTabbar.setCurrentButtonIndex(comicTabbar.nextHighlightedTab(index));
+            var firstButton = undefined;
+
+            for (var i = 0; i < comicTabbar.layout.children.length; ++i) {
+                var button = comicTabbar.layout.children[i];
+                if (button.key !== undefined && button.highlighted == true) {
+                    //key is ordered
+                    if (button.key > comicTabbar.currentTab.key) {
+                        console.log("compare > " + button.key + ", " + comicTabbar.currentTab.key);
+                        comicTabbar.currentTab = button;
+                        return;
+                    } else if (firstButton === undefined){
+                        console.log("mark firstButton");
+                        firstButton = button;
+                    }
+                }
+            }
+
+            if (firstButton !== undefined) {
+                comicTabbar.currentTab = firstButton;
+            }
         }
     }
 
