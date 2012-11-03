@@ -82,8 +82,6 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 
 void ComicApplet::init()
 {
-    connect(this, SIGNAL(appletTransformedByUser()), this, SLOT(slotSizeChanged()));
-
     globalComicUpdater->init( globalConfig() );
     mSavingDir = new SavingDir(config());
 
@@ -253,10 +251,6 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 void ComicApplet::updateView()
 {   
     updateContextMenu();
-
-    if (mCurrent.hasImage()) {
-        QTimer::singleShot( 1, this, SLOT(updateSize()) );//HACK
-    }
 }
 
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
@@ -506,26 +500,6 @@ void ComicApplet::slotStorePosition()
     mCurrent.storePosition(mActionStorePosition->isChecked());
 }
 
-void ComicApplet::slotSizeChanged()
-{
-    // if the applet was resized manually by the user
-    if ( isInPanel() ) {
-        if ( mDeclarativeWidget->size() != mLastSize ) {
-            mMaxSize = mDeclarativeWidget->size();
-            updateSize();
-
-            KConfigGroup cg = config();
-            cg.writeEntry( "maxSize", mMaxSize );
-        }
-    } else if ( this->geometry().size() != mLastSize ) {
-        mMaxSize = this->geometry().size();
-        updateSize();
-
-        KConfigGroup cg = config();
-        cg.writeEntry( "maxSize", mMaxSize );
-    }
-}
-
 void ComicApplet::slotShowMaxSize()
 {
     resize( mMaxSize );
@@ -540,33 +514,6 @@ void ComicApplet::slotShop()
 bool ComicApplet::isInPanel() const
 {
     return ( this->geometry().width() < 70 ) || ( this->geometry().height() < 50 );
-}
-
-void ComicApplet::updateSize()
-{
-    if ( configurationRequired() ) {
-        return;
-    }
-
-    /*QSizeF notAvailableSize;
-    if ( isInPanel() ) {
-        notAvailableSize =  mDeclarativeWidget->geometry().size() - mImageWidget->size();
-    } else {
-        notAvailableSize =  this->geometry().size() - mImageWidget->size();
-    }
-    QSizeF availableSize = mMaxSize - notAvailableSize;
-    mImageWidget->setAvailableSize( availableSize );
-    mLastSize = mImageWidget->preferredSize() + notAvailableSize;
-
-    if ( isInPanel() ) {
-        mDeclarativeWidget->resize( mLastSize );
-    } else {
-        resize( mLastSize );
-        mLastSize = this->size();//NOTE the applet won't be smaller than the minimum size of the MainWidget, thus the result of the resize might not correspond with mLastSize
-        emit sizeHintChanged( Qt::PreferredSize );
-        emit appletTransformedItself();
-    }
-    mImageWidget->update();*/
 }
 
 void ComicApplet::createComicBook()
@@ -675,8 +622,6 @@ void ComicApplet::slotSaveComicAs()
 void ComicApplet::slotScaleToContent()
 {
     setShowActualSize(mActionScaleContent->isChecked());
-
-    updateSize();
 }
 
 //QML

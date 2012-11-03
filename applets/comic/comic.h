@@ -133,11 +133,9 @@ Q_SIGNALS:
         void slotScaleToContent();
         void slotShop();
         void slotStorePosition();
-        void slotSizeChanged();
         void slotShowMaxSize();
         void applyConfig();
         void checkDayChanged();
-        void updateSize();
         void createComicBook();
         void slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
         void slotArchiveFinished( KJob *job );
