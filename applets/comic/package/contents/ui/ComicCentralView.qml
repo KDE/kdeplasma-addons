@@ -20,33 +20,33 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
-Rectangle {
-    property variant comicData
-
+Item {
     id: root
+
     width: 10
     height: 10
-    color: "transparent"
+
+    property variant comicData
 
     PlasmaComponents.ToolButton {
         id: arrowLeft
-        iconSource: "go-previous"
+
         anchors {
             left: root.left
             verticalCenter: root.verticalCenter
         }
+
+        iconSource: "go-previous"
         visible: (!comicApplet.arrowsOnHover && (comicData.prev !== undefined))
+
         onClicked: {
-            console.log(comicData.prev);
             comicApplet.updateComic(comicData.prev);
         }
     }
 
     ImageWidget {
         id: comicImage
-        image: comicApplet.comicData.image
-        tooltipText: comicApplet.comicData.additionalText
-        actualSize: comicApplet.showActualSize
+
         anchors { 
             left: arrowLeft.visible ? arrowLeft.right : root.left
             right: arrowRight.visible ? arrowRight.left : root.right
@@ -55,16 +55,23 @@ Rectangle {
             top: root.top
             bottom: root.bottom
         }
+
+        image: comicApplet.comicData.image
+        tooltipText: comicApplet.comicData.additionalText
+        actualSize: comicApplet.showActualSize
     }
 
     PlasmaComponents.ToolButton {
         id: arrowRight
-        iconSource: "go-next"
+
         anchors {
             right: root.right
             verticalCenter: root.verticalCenter
         }
+
+        iconSource: "go-next"
         visible: (!comicApplet.arrowsOnHover && (comicData.next !== undefined))
+
         onClicked: {
             comicApplet.updateComic(comicData.next);
         }
@@ -72,6 +79,7 @@ Rectangle {
 
     FullViewWidget {
         id: fullDialog
+
         image: comicApplet.comicData.image
     }
 }

@@ -22,16 +22,26 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.qtextracomponents 0.1
 
 PlasmaExtras.ScrollArea {
-    id: imageWidget
-    property alias image: comicPicture.image
-    property bool actualSize: false
-    property alias tooltipText: tooltip.mainText
+    id: root
 
     width: comicPicture.nativeWidth
     height: comicPicture.nativeHeight
 
+    property alias image: comicPicture.image
+    property bool actualSize: false
+    property alias tooltipText: tooltip.mainText
+
+    function calculateContentWidth() {
+        return actualSize ? (comicPicture.nativeWidth > viewContainer.width ? comicPicture.nativeWidth : viewContainer.width) : viewContainer.width;
+    }
+
+    function calculateContentHeight() {
+        return actualSize ? (comicPicture.nativeHeight > viewContainer.height ? comicPicture.nativeHeight : viewContainer.height) : viewContainer.height;
+    }
+
     Flickable {
         id: viewContainer
+
         anchors.fill:parent
 
         contentWidth: comicPictureHolder.width
@@ -40,29 +50,30 @@ PlasmaExtras.ScrollArea {
 
         Item {
             id: comicPictureHolder
+
             width: Math.max(comicPicture.width, viewContainer.width);
             height: Math.max(comicPicture.height, viewContainer.height);
 
             QImageItem {
                 id: comicPicture
+
+                anchors.centerIn: parent
+
                 width: actualSize ? comicPicture.nativeWidth : viewContainer.width
                 height: actualSize ? comicPicture.nativeHeight : viewContainer.height
-                anchors.centerIn: parent
+
                 smooth: true
                 fillMode: QImageItem.PreserveAspectFit
             }
 
             MouseArea {
                 id:mouseArea
+
                 anchors.fill: parent
+
                 hoverEnabled: true
                 preventStealing: false
                 acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-
-                PlasmaCore.ToolTip {
-                    id: tooltip
-                    //target: imageWidget
-                }
 
                 onClicked: {
                     if (mouse.button == Qt.MiddleButton && comicApplet.middleClick) {
@@ -70,15 +81,38 @@ PlasmaExtras.ScrollArea {
                     }
                 }
 
+                PlasmaCore.ToolTip {
+                    id: tooltip
+                    //target: root
+                }
+
                 ButtonBar {
                     id: buttonBar
-                    visible: (comicApplet.arrowsOnHover && (mouseArea.containsMouse || (mouseArea.containsMouse && buttonBar.visible)) )
-                    opacity: 0
 
                     pos {
                         y: viewContainer.height - buttonBar.height + viewContainer.contentY
                         x: (viewContainer.width - buttonBar.width)/2 + viewContainer.contentX
                     }
+
+                    visible: (comicApplet.arrowsOnHover && (mouseArea.containsMouse || (mouseArea.containsMouse && buttonBar.visible)) )
+                    opacity: 0
+
+                    onPrevClicked: {
+                        console.log("Previous clicked");
+                        //busyIndicator.visible = true;
+                        comicApplet.updateComic(comicData.prev);
+                    }
+
+                    onNextClicked: {
+                        console.log("Next clicked");
+                        //busyIndicator.visible = true;
+                        comicApplet.updateComic(comicData.next);
+                    }
+
+                    onZoomClicked: {
+                        fullDialog.open();
+                    }
+
                     states: State {
                         name: "show"; when: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
                         PropertyChanges { target: buttonBar; opacity: 1; }
@@ -88,30 +122,8 @@ PlasmaExtras.ScrollArea {
                         from: ""; to: "show"; reversible: true
                         NumberAnimation { properties: "opacity"; duration: 250; easing.type: Easing.InOutQuad }
                     }
-
-                    onPrevClicked: {
-                        console.log("Previous clicked");
-                        //busyIndicator.visible = true;
-                        comicApplet.updateComic(comicData.prev);
-                    }
-                    onNextClicked: {
-                        console.log("Next clicked");
-                        //busyIndicator.visible = true;
-                        comicApplet.updateComic(comicData.next);
-                    }
-                    onZoomClicked: {
-                        fullDialog.open();
-                    }
                 }
             }
         }
-    }
-
-    function calculateContentWidth() {
-        return actualSize ? (comicPicture.nativeWidth > viewContainer.width ? comicPicture.nativeWidth : viewContainer.width) : viewContainer.width
-    }
-
-    function calculateContentHeight() {
-        return actualSize ? (comicPicture.nativeHeight > viewContainer.height ? comicPicture.nativeHeight : viewContainer.height) : viewContainer.height
     }
 }

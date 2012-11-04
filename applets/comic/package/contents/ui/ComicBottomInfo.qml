@@ -20,21 +20,21 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
-Rectangle {
+Item {
+    id: root
+
+    implicitWidth: 10
+    implicitHeight: comicIdentifier.height
+
     property bool showUrl: false
     property bool showIdentifier: false
     property variant comicData
 
-    id: root
-    width: 10
-    height: comicIdentifier.height
     visible: (comicIdentifier.text.length > 0 || comicUrl.text.length > 0)
-    color: "transparent"
 
     PlasmaComponents.Label {
         id: comicIdentifier
-        color: theme.textColor
-        visible: (showIdentifier && comicIdentifier.text.length > 0)
+
         anchors {
             left: root.left
             top: root.top
@@ -42,21 +42,30 @@ Rectangle {
             right: comicUrl.left
             leftMargin: 2
         }
+
+        color: theme.textColor
+        visible: (showIdentifier && comicIdentifier.text.length > 0)
         text: (showIdentifier && comicData.currentReadable != undefined) ? comicData.currentReadable : ""
+
         MouseArea {
             id: idLabelArea
+
             anchors.fill: parent
+
             hoverEnabled: true
+
             onEntered: {
-                parent.color = theme.highlightColor
+                parent.color = theme.highlightColor;
             }
+
             onExited: {
-                parent.color = theme.textColor
+                parent.color = theme.textColor;
             }
+
             onClicked: {
-                console.log("Jump to Strip ...");
                 comicApplet.goJump();
             }
+
             PlasmaCore.ToolTip {
                 target: idLabelArea
                 mainText: i18n( "Jump to Strip ..." )
@@ -66,29 +75,38 @@ Rectangle {
     
     PlasmaComponents.Label {
         id:comicUrl
-        color: theme.textColor
-        visible: (showUrl && comicUrl.text.length > 0)
+
         anchors {
             top: root.top
             bottom: root.bottom
             right: root.right
             rightMargin: 2
         }
+
+        color: theme.textColor
+        visible: (showUrl && comicUrl.text.length > 0)
         text: (showUrl && comicData.websiteHost.length > 0) ? comicData.websiteHost : ""
+
         MouseArea {
             id: idUrlLabelArea
+
             anchors.fill: parent
+
             hoverEnabled: true
             visible: comicApplet.checkAuthorization("LaunchApp")
+
             onEntered: {
-                parent.color = theme.highlightColor
+                parent.color = theme.highlightColor;
             }
+
             onExited: {
-                parent.color = theme.textColor
+                parent.color = theme.textColor;
             }
+
             onClicked: {
                 comicApplet.shop();
             }
+
             PlasmaCore.ToolTip {
                 target: idUrlLabelArea
                 mainText: i18n( "Visit the comic website" )

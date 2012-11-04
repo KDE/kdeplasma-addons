@@ -22,19 +22,39 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.qtextracomponents 0.1
 
 PlasmaCore.Dialog {
+    id: root
+
     property alias image: comicPicture.image
-    
-    id: fullDialog
+
     windowFlags: Qt.Popup
     visible: false
+
+    function open()
+    {
+        var pos = root.popupPosition(null, Qt.AlignCenter);
+
+        root.x = pos.x;
+        root.y = pos.y;
+
+        root.visible = true;
+        root.activateWindow();
+    }
+
+    function close() {
+        root.visible = false;
+    }
+
     mainItem: PlasmaExtras.ScrollArea {
         id: mainScrollArea
+
+        anchors.fill: parent
+
         width: comicPicture.nativeWidth
         height: comicPicture.nativeHeight
-        anchors.fill: parent
 
         Flickable {
             id: viewContainer
+
             anchors.fill:parent
 
             contentWidth: comicPicture.nativeWidth
@@ -42,37 +62,27 @@ PlasmaCore.Dialog {
 
             QImageItem {
                 id: comicPicture
+
                 anchors { 
                     left: parent.left
                     right: parent.right
                     top: parent.top
                     bottom: parent.bottom
                 }
+
                 smooth: true
                 fillMode: QImageItem.PreserveAspectFit
  
                 MouseArea {
                     id: dialogMouseArea
+
                     anchors.fill: comicPicture
+
                     onClicked: {
-                        fullDialog.close();
+                        root.close();
                     }
                 }
             }
         }
-    }
-        
-    function open()
-    {
-        var pos = fullDialog.popupPosition(null, Qt.AlignCenter)
-        fullDialog.x = pos.x
-        fullDialog.y = pos.y
-
-        fullDialog.visible = true
-        fullDialog.activateWindow()
-    }
-    
-    function close() {
-        fullDialog.visible = false
     }
 }

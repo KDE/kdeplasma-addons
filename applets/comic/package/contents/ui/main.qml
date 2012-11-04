@@ -22,29 +22,30 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     id: mainWindow
+
+    width: 500
+    height: 300
+
     property int minimumWidth: 500
     property int minimumHeight: 300
-
     property bool showComicAuthor: comicApplet.showComicAuthor
     property bool showComicTitle: comicApplet.showComicTitle
-
     property bool showErrorPicture: comicApplet.showErrorPicture
     property bool middleClick: comicApplet.middleClick
     property int comicsModelCount: comicApplet.comicsModel.count
 
-    width: 500; height: 300;
-
-    PlasmaCore.Theme {
-        id: theme
+    onComicsModelCountChanged: {
+        comicTabbar.setCurrentButtonIndex(0);
     }
-    
+
     Connections {
         target: comicApplet
+
         onTabHighlightRequest: {
             for (var i = 0; i < comicTabbar.layout.children.length; ++i) {
                 var button = comicTabbar.layout.children[i];
+
                 if (button.key !== undefined && button.key == id) {
-                    //console.log("KEY:" + button.key + ",highlighted:" + highlight);
                     button.highlighted = highlight;
                 }
             }
@@ -58,11 +59,9 @@ Item {
                 if (button.key !== undefined && button.highlighted == true) {
                     //key is ordered
                     if (button.key > comicTabbar.currentTab.key) {
-                        console.log("compare > " + button.key + ", " + comicTabbar.currentTab.key);
                         comicTabbar.currentTab = button;
                         return;
                     } else if (firstButton === undefined){
-                        console.log("mark firstButton");
                         firstButton = button;
                     }
                 }
@@ -74,9 +73,121 @@ Item {
         }
     }
 
-    onComicsModelCountChanged: {
-        console.log("Providers count:" + comicApplet.comicsModel.count);
-        comicTabbar.setCurrentButtonIndex(0);
+    PlasmaCore.Theme {
+        id: theme
+    }
+
+    PlasmaCore.Svg {
+        id: arrowsSvg
+        imagePath: "widgets/arrows"
+    }
+
+    PlasmaComponents.TabBar{
+        id: comicTabbar
+
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+
+        visible: (comicApplet.comicsModel.count > 1)
+
+        onCurrentTabChanged: {
+            comicApplet.tabChanged(comicTabbar.currentTab.key);
+        }
+
+        Repeater {
+            model: comicApplet.comicsModel
+            delegate:  PlasmaComponents.TabButton {
+                id: tabButton
+
+                property string key: model.key
+                property bool highlighted: model.highlight
+
+                text: model.title
+                iconSource: model.icon
+
+                Rectangle {
+                    id: highlightMask
+
+                    anchors {
+                        bottom: parent.bottom
+                        left: parent.left
+                    }
+
+                    width: Math.max(theme.smallIconSize, tabButton.height)
+                    height: Math.max(theme.smallIconSize, tabButton.height)
+
+                    color: "white"
+                    opacity: model.highlight ? 0 : 0.5
+                }
+            }
+        }
+    }
+
+    PlasmaComponents.Label {
+        id: topInfo
+
+        anchors {
+            top: comicTabbar.visible ? comicTabbar.bottom : mainWindow.top
+            left: mainWindow.left
+            right: mainWindow.right
+        }
+
+        visible: (topInfo.text.length > 0)
+        horizontalAlignment: Text.AlignHCenter
+        text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
+
+        function getTopInfo() {
+            var tempTop = "";
+
+            if ( showComicTitle ) {
+                tempTop = comicApplet.comicData.title;
+                tempTop += ( ( (comicApplet.comicData.stripTitle.length > 0) && (comicApplet.comicData.title.length > 0) ) ? " - " : "" ) + comicApplet.comicData.stripTitle;
+            }
+
+            if ( showComicAuthor && 
+                (comicApplet.comicData.author != undefined || comicApplet.comicData.author.length > 0) ) {
+                tempTop = ( tempTop.length > 0 ? comicApplet.comicData.author + ": " + tempTop : comicApplet.comicData.author );
+            }
+
+            return tempTop;
+        }
+    }
+
+    ComicCentralView {
+        id: centerLayout
+
+        anchors {
+            left: mainWindow.left
+            right: mainWindow.right
+            bottom: (bottomInfo.visible) ? bottomInfo.top : mainWindow.bottom
+            top: (topInfo.visible) ? topInfo.bottom : (comicTabbar.visible ? comicTabbar.bottom : mainWindow.top)
+            topMargin: (comicTabbar.visible) ? 3 : 0
+        }
+
+        comicData: comicApplet.comicData
+    }
+
+    ComicBottomInfo {
+        id:bottomInfo
+
+        anchors {
+            left: mainWindow.left
+            right: mainWindow.right
+            bottom: mainWindow.bottom
+        }
+
+        comicData: comicApplet.comicData
+        showUrl: comicApplet.showComicUrl
+        showIdentifier: comicApplet.showComicIdentifier
+    }
+
+    PlasmaComponents.BusyIndicator {
+        id: busyIndicator
+        anchors.centerIn: parent
+        running: visible
+        visible: false
     }
 
     states: [
@@ -114,110 +225,4 @@ Item {
                 easing.type: Easing.InOutQuad
             }
         }
-
-    PlasmaCore.Svg {
-        id: arrowsSvg
-        imagePath: "widgets/arrows"
-    }
-
-    PlasmaComponents.TabBar{
-        id: comicTabbar
-        visible: (comicApplet.comicsModel.count > 1)
-
-        onCurrentTabChanged: {
-            console.log("OnCurrentChanged triggered");
-            comicApplet.tabChanged(comicTabbar.currentTab.key);
-            console.log("Current Index: " + comicTabbar.currentTab.key);
-        }
-
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-
-        Repeater {
-            model: comicApplet.comicsModel
-            delegate:  PlasmaComponents.TabButton {
-                id: tabButton
-
-                property string key: model.key
-                property bool highlighted: model.highlight
-
-                text: model.title
-                iconSource: model.icon
-
-                Rectangle {
-                    id: highlightMask
-                    color: "white"
-                    width: Math.max(theme.smallIconSize, tabButton.height)
-                    height: Math.max(theme.smallIconSize, tabButton.height)
-                    opacity: model.highlight ? 0 : 0.5
-                    anchors {
-                        bottom: parent.bottom
-                        left: parent.left
-                    }
-                }
-            }
-        }
-    }
-
-    PlasmaComponents.Label {
-        id: topInfo
-        visible: (topInfo.text.length > 0)
-        anchors {
-            top: comicTabbar.visible ? comicTabbar.bottom : mainWindow.top
-            left: mainWindow.left
-            right: mainWindow.right
-        }
-        horizontalAlignment: Text.AlignHCenter
-        text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
-
-        function getTopInfo() {
-            var tempTop = "";
-
-            if ( showComicTitle ) {
-                tempTop = comicApplet.comicData.title;
-                tempTop += ( ( (comicApplet.comicData.stripTitle.length > 0) && (comicApplet.comicData.title.length > 0) ) ? " - " : "" ) + comicApplet.comicData.stripTitle;
-            }
-
-            if ( showComicAuthor && 
-                (comicApplet.comicData.author != undefined || comicApplet.comicData.author.length > 0) ) {
-                tempTop = ( tempTop.length > 0 ? comicApplet.comicData.author + ": " + tempTop : comicApplet.comicData.author );
-            }
-
-            return tempTop;
-        }
-    }
-
-    ComicCentralView {
-        id: centerLayout
-        comicData: comicApplet.comicData
-        anchors {
-            left: mainWindow.left
-            right: mainWindow.right
-            bottom: (bottomInfo.visible) ? bottomInfo.top : mainWindow.bottom
-            top: (topInfo.visible) ? topInfo.bottom : (comicTabbar.visible ? comicTabbar.bottom : mainWindow.top)
-            topMargin: (comicTabbar.visible) ? 3 : 0
-        }
-    }
-
-    ComicBottomInfo {
-        id:bottomInfo
-        comicData: comicApplet.comicData
-        showUrl: comicApplet.showComicUrl
-        showIdentifier: comicApplet.showComicIdentifier
-
-        anchors {
-            left: mainWindow.left
-            right: mainWindow.right
-            bottom: mainWindow.bottom
-        }
-    }
-
-    PlasmaComponents.BusyIndicator {
-        id: busyIndicator
-        anchors.centerIn: parent
-        running: visible
-        visible: false
-    }
 }
