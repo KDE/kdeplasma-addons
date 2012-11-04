@@ -33,13 +33,13 @@ public:
         ComicIconRole = Qt::UserRole+3,
         ComicHighlightRole = Qt::UserRole+4
     };
-    
+
     ActiveComicModel(QObject *parent = 0);
-    
+
     void addComic(const QString &key, const QString &title, const QString &iconPath, bool highlight = true);
-    
+
     int count() { return rowCount(QModelIndex()); }
-    
+
     Q_INVOKABLE QVariantHash get(int i) const;
 
 Q_SIGNALS:
