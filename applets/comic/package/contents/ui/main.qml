@@ -32,11 +32,6 @@ Item {
     property bool showComicTitle: comicApplet.showComicTitle
     property bool showErrorPicture: comicApplet.showErrorPicture
     property bool middleClick: comicApplet.middleClick
-    property int comicsModelCount: comicApplet.comicsModel.count
-
-    onComicsModelCountChanged: {
-        comicTabbar.setCurrentButtonIndex(0);
-    }
 
     Connections {
         target: comicApplet
