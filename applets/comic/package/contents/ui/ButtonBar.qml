@@ -22,45 +22,53 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Item {
     id: root
 
+    implicitWidth: rowButton.width + 20
+    implicitHeight: rowButton.height + 20
+
     signal prevClicked
     signal nextClicked
     signal zoomClicked
 
-    width: prevButton.width*3 + 10 + 14
-    height: prevButton.height + 20
-    
-    Component.onCompleted: {
-        prevButton.clicked.connect(root.prevClicked);
-        nextButton.clicked.connect(root.nextClicked);
-        zoomButton.clicked.connect(root.zoomClicked);
-    }
-
     PlasmaCore.FrameSvgItem {
-        id: myFrameSvgItem
+        id: background
+
         anchors.fill: parent
+
         imagePath: "widgets/viewitem"
         prefix: "hover"
     }
-    
+
     Row {
-        spacing: 4
+        id: rowButton
+
         anchors.centerIn: parent
+
+        spacing: 4
         //ToolButton or Button in C++ use PushButton?
         PlasmaComponents.Button {
             id: prevButton
+
             iconSource: "arrow-left"
             enabled: (comicData.prev != undefined && comicData.prev.length > 0)
         }
 
         PlasmaComponents.Button {
             id: zoomButton
+
             iconSource: "zoom-original"
         }
 
         PlasmaComponents.Button {
             id: nextButton
+
             iconSource: "arrow-right"
             enabled: (comicData.next != undefined && comicData.next.length > 0)
         }
+    }
+
+    Component.onCompleted: {
+        prevButton.clicked.connect(root.prevClicked);
+        nextButton.clicked.connect(root.nextClicked);
+        zoomButton.clicked.connect(root.zoomClicked);
     }
 }
