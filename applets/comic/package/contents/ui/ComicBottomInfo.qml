@@ -72,7 +72,7 @@ Item {
             }
         }
     }
-    
+
     PlasmaComponents.Label {
         id:comicUrl
 

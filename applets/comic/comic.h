@@ -74,28 +74,28 @@ class ComicApplet : public Plasma::PopupApplet
         //For QML
         QObject *comicsModel();
         QVariantHash comicData();
-        
+
         bool showComicUrl() const;
         void setShowComicUrl(bool show);
-        
+
         bool showComicAuthor() const;
         void setShowComicAuthor(bool show);
-        
+
         bool showComicTitle() const;
         void setShowComicTitle(bool show);
-        
+
         bool showComicIdentifier() const;
         void setShowComicIdentifier(bool show);
 
         bool showErrorPicture() const;
         void setShowErrorPicture(bool show);
-        
+
         bool arrowsOnHover() const;
         void setArrowsOnHover(bool show);
-        
+
         bool middleClick() const;
         void setMiddleClick(bool show);
-        
+
         bool showActualSize() const;
         void setShowActualSize(bool show);
 

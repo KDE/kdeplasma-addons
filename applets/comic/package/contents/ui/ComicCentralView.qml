@@ -47,7 +47,7 @@ Item {
     ImageWidget {
         id: comicImage
 
-        anchors { 
+        anchors {
             left: arrowLeft.visible ? arrowLeft.right : root.left
             right: arrowRight.visible ? arrowRight.left : root.right
             leftMargin: arrowLeft.visible ? 4 : 0
@@ -59,6 +59,8 @@ Item {
         image: comicApplet.comicData.image
         tooltipText: comicApplet.comicData.additionalText
         actualSize: comicApplet.showActualSize
+        isLeftToRight: false//comicApplet.comicData.isLeftToRight
+        isTopToBottom: false//comicApplet.comicData.isTopToBottom
     }
 
     PlasmaComponents.ToolButton {

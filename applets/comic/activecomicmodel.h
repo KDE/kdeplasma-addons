@@ -25,7 +25,7 @@ class ActiveComicModel : public QStandardItemModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    
+
 public:
     enum Roles {
         ComicKeyRole = Qt::UserRole+1,

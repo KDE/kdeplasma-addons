@@ -86,7 +86,7 @@ void ComicApplet::init()
     mSavingDir = new SavingDir(config());
 
     configChanged();
-    //QML    
+    //QML
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
     mDeclarativeWidget = new Plasma::DeclarativeWidget(this);
     layout->addItem(mDeclarativeWidget);
@@ -244,12 +244,12 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     }
 
     updateView();
-    
+
     refreshComicData();
 }
 
 void ComicApplet::updateView()
-{   
+{
     updateContextMenu();
 }
 
@@ -620,9 +620,9 @@ void ComicApplet::setShowComicUrl(bool show)
 {
     if (show == mShowComicUrl)
         return;
-    
+
     mShowComicUrl = show;
-    
+
     emit showComicUrlChanged();
 }
 
@@ -635,9 +635,9 @@ void ComicApplet::setShowComicAuthor(bool show)
 {
     if (show == mShowComicAuthor)
         return;
-    
+
     mShowComicAuthor = show;
-    
+
     emit showComicAuthorChanged();
 }
 
@@ -650,9 +650,9 @@ void ComicApplet::setShowComicTitle(bool show)
 {
     if (show == mShowComicTitle)
         return;
-    
+
     mShowComicTitle = show;
-    
+
     emit showComicTitleChanged();
 }
 
@@ -665,9 +665,9 @@ void ComicApplet::setShowComicIdentifier(bool show)
 {
     if (show == mShowComicIdentifier)
         return;
-    
+
     mShowComicIdentifier = show;
-    
+
     emit showComicIdentifierChanged();
 }
 
@@ -680,9 +680,9 @@ void ComicApplet::setShowErrorPicture(bool show)
 {
     if (show == mShowErrorPicture)
         return;
-    
+
     mShowErrorPicture = show;
-    
+
     emit showErrorPictureChanged();
 }
 
@@ -695,9 +695,9 @@ void ComicApplet::setArrowsOnHover(bool show)
 {
     if (show == mArrowsOnHover)
         return;
-    
+
     mArrowsOnHover = show;
-    
+
     emit arrowsOnHoverChanged();
 }
 
@@ -710,9 +710,9 @@ void ComicApplet::setMiddleClick(bool show)
 {
     if (show == mMiddleClick)
         return;
-    
+
     mMiddleClick = show;
-    
+
     emit middleClickChanged();
 }
 
@@ -727,7 +727,7 @@ void ComicApplet::refreshComicData()
     mComicData["prev"] = mCurrent.prev();
     mComicData["next"] = mCurrent.next();
     mComicData["additionalText"] = mCurrent.additionalText();
-        
+
     mComicData["websiteUrl"] = mCurrent.websiteUrl().prettyUrl();
     mComicData["websiteHost"] = mCurrent.websiteUrl().host();
     mComicData["imageUrl"] = mCurrent.websiteUrl().prettyUrl();
@@ -745,7 +745,7 @@ void ComicApplet::refreshComicData()
     mComicData["maxStripNum"] = mCurrent.maxStripNum();
     mComicData["isLeftToRight"] = mCurrent.isLeftToRight();
     mComicData["isTopToBottom"] = mCurrent.isTopToBottom();
-    
+
     emit comicDataChanged();
 }
 
@@ -798,7 +798,7 @@ bool ComicApplet::isTabHighlighted(int index) const
     }
 
     QStandardItem * item = mActiveComicModel.item(index);
-    
+
     return item->data(ActiveComicModel::ComicHighlightRole).toBool();
 }
 #include "comic.moc"

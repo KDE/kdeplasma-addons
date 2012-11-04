@@ -63,7 +63,7 @@ PlasmaCore.Dialog {
             QImageItem {
                 id: comicPicture
 
-                anchors { 
+                anchors {
                     left: parent.left
                     right: parent.right
                     top: parent.top
@@ -72,7 +72,7 @@ PlasmaCore.Dialog {
 
                 smooth: true
                 fillMode: QImageItem.PreserveAspectFit
- 
+
                 MouseArea {
                     id: dialogMouseArea
 
