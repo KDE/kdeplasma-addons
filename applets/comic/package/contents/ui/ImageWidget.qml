@@ -34,13 +34,12 @@ PlasmaExtras.ScrollArea {
         id: viewContainer
         anchors.fill:parent
 
-        contentWidth: dummy.width
-        contentHeight: dummy.height
+        contentWidth: comicPictureHolder.width
+        contentHeight: comicPictureHolder.height
         clip: true
 
-        Rectangle {
-            id: dummy
-            color:"transparent"
+        Item {
+            id: comicPictureHolder
             width: Math.max(comicPicture.width, viewContainer.width);
             height: Math.max(comicPicture.height, viewContainer.height);
 
