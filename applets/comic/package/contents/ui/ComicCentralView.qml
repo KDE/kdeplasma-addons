@@ -59,8 +59,8 @@ Item {
         image: comicApplet.comicData.image
         tooltipText: comicApplet.comicData.additionalText
         actualSize: comicApplet.showActualSize
-        isLeftToRight: false//comicApplet.comicData.isLeftToRight
-        isTopToBottom: false//comicApplet.comicData.isTopToBottom
+        isLeftToRight: comicApplet.comicData.isLeftToRight
+        isTopToBottom: comicApplet.comicData.isTopToBottom
     }
 
     PlasmaComponents.ToolButton {

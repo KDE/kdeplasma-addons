@@ -27,8 +27,11 @@ PlasmaExtras.ScrollArea {
     width: comicPicture.nativeWidth
     height: comicPicture.nativeHeight
 
-    property alias image: comicPicture.image
     property bool actualSize: false
+    property bool isLeftToRight: true
+    property bool isTopToBottom: true
+
+    property alias image: comicPicture.image
     property alias tooltipText: tooltip.mainText
 
     function calculateContentWidth() {
@@ -46,6 +49,7 @@ PlasmaExtras.ScrollArea {
 
         contentWidth: comicPictureHolder.width
         contentHeight: comicPictureHolder.height
+
         clip: true
 
         Item {
@@ -61,6 +65,11 @@ PlasmaExtras.ScrollArea {
 
                 width: actualSize ? comicPicture.nativeWidth : viewContainer.width
                 height: actualSize ? comicPicture.nativeHeight : viewContainer.height
+
+                onImageChanged: {
+                    viewContainer.contentX = (root.isLeftToRight) ? 0 : ( viewContainer.contentWidth - viewContainer.width);
+                    viewContainer.contentY = (root.isTopToBottom) ? 0 : ( viewContainer.contentHeight - viewContainer.height);
+                }
 
                 smooth: true
                 fillMode: QImageItem.PreserveAspectFit
@@ -98,13 +107,11 @@ PlasmaExtras.ScrollArea {
                     opacity: 0
 
                     onPrevClicked: {
-                        console.log("Previous clicked");
                         //busyIndicator.visible = true;
                         comicApplet.updateComic(comicData.prev);
                     }
 
                     onNextClicked: {
-                        console.log("Next clicked");
                         //busyIndicator.visible = true;
                         comicApplet.updateComic(comicData.next);
                     }
