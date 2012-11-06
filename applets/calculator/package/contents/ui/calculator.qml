@@ -227,28 +227,28 @@ Item {
             PlasmaComponents.Button {
                 width: buttonWidth;
                 height: buttonHeight;
-                text: "C";
+                text: i18nc("Text of the clear button", "C");
                 onClicked: clearClicked();
             }
 
             PlasmaComponents.Button {
                 width: buttonWidth;
                 height: buttonHeight;
-                text: "÷";
+                text: i18nc("Text of the division button", "÷");
                 onClicked: setOperator("/");
             }
 
             PlasmaComponents.Button {
                 width: buttonWidth;
                 height: buttonHeight;
-                text: "×";
+                text: i18nc("Text of the multiplication button", "×");
                 onClicked: setOperator("*");
             }
 
             PlasmaComponents.Button {
                 width: buttonWidth;
                 height: buttonHeight;
-                text: "AC";
+                text: i18nc("Text of the all clear button", "AC");
                 onClicked: allClearClicked();
             }
 
@@ -277,7 +277,7 @@ Item {
             PlasmaComponents.Button {
                 width: buttonWidth;
                 height: buttonHeight;
-                text: "-";
+                text: i18nc("Text of the minus button", "-");
                 onClicked: setOperator("-");
             }
 
@@ -306,7 +306,7 @@ Item {
             PlasmaComponents.Button {
                 width: buttonWidth;
                 height: buttonHeight;
-                text: "+";
+                text: i18nc("Text of the plus button", "+");
                 onClicked: setOperator("+");
             }
 
@@ -380,7 +380,7 @@ Item {
         height: buttonHeight * 2 + buttonsGrid.spacing;
         x: ansPlaceHolder.x + buttonsGrid.x;
         y: ansPlaceHolder.y + buttonsGrid.y;
-        text: "=";
+        text: i18nc("Text of the equals button", "=");
         onClicked: equalsClicked();
     }
 }
