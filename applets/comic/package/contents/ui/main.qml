@@ -36,6 +36,10 @@ Item {
     Connections {
         target: comicApplet
 
+        onComicsModelChanged: {
+            comicTabbar.currentTab = comicTabbar.layout.children[1];
+        }
+
         onTabHighlightRequest: {
             for (var i = 0; i < comicTabbar.layout.children.length; ++i) {
                 var button = comicTabbar.layout.children[i];
@@ -88,6 +92,7 @@ Item {
         visible: (comicApplet.comicsModel.count > 1)
 
         onCurrentTabChanged: {
+            console.log("onCurrentTabChanged:" + comicTabbar.currentTab.key);
             comicApplet.tabChanged(comicTabbar.currentTab.key);
         }
 
