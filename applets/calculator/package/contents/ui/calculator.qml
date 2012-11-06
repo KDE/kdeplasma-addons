@@ -91,6 +91,10 @@ Item
             return;
         }
 
+        if (!showingInput && hasResult) {
+            allClearClicked();
+        }
+
         if (commaPressed) {
             ++decimals;
             tenToTheDecimals = Math.pow(10, decimals);
