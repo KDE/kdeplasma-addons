@@ -76,10 +76,13 @@ void PatternWallpaper::loadPattern()
 QWidget * PatternWallpaper::createConfigurationInterface(QWidget * parent)
 {
     QWidget * configWidget = new QWidget(parent);
+
     m_ui.setupUi(configWidget);
     m_ui.m_fgColor->setColor(m_fgColor);
     m_ui.m_bgColor->setColor(m_bgColor);
+
     m_model = new BackgroundListModel(this, configWidget);
+    m_model->setWallpaperSize(targetSizeHint().toSize());
     m_model->reload();
 
     QTimer::singleShot(0, this, SLOT(setConfigurationInterfaceModel()));

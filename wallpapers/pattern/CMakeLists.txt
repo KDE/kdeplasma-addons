@@ -8,6 +8,7 @@ set(pattern_SRCS
     pattern.cpp
     backgrounddelegate.cpp
     backgroundlistmodel.cpp
+    itemsview.cpp
 )
 
 kde4_add_ui_files(pattern_SRCS config.ui)

@@ -1,0 +1,35 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Hunyango
+Name[cs]=Hunyango
+Name[es]=Hunyango
+Name[et]=Hunyango
+Name[hu]=Hunyango
+Name[nb]=Hunyango
+Name[nl]=Hunyango
+Name[pt]=Hunyango
+Name[pt_BR]=Hunyango
+Name[ru]=Hunyango
+Name[sk]=Hunyango
+Name[sr]=Хунјанго
+Name[sr@ijekavian]=Хунјанго
+Name[sr@ijekavianlatin]=Hunjango
+Name[sr@latin]=Hunjango
+Name[sv]=Hunyango
+Name[uk]=Уньянго
+Name[wa]=Hunyango
+Name[x-test]=xxHunyangoxx
+Name[zh_TW]=Hunyango
+
+
+Type=Service
+ServiceTypes=Plasma/DeclarativeWallpaper
+Icon=preferences-desktop-wallpaper
+X-Plasma-MainScript=ui/main.qml
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-Name=org.kde.hunyango
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://kde.org/
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true

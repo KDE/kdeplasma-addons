@@ -216,8 +216,12 @@ void BackgroundListModel::showPreview(const KFileItem &item, const QPixmap &prev
     if (!config) {
         return;
     }
-    
-    QPixmap pix(120, 80);
+
+    if (m_structureParent.isNull()) {
+        return;
+    }
+
+    QPixmap pix(m_size);
     QPainter p(&pix);
     QImage image = preview.toImage();
     p.drawTiledPixmap(pix.rect(), m_structureParent.data()->generatePattern(image), QPoint(0,0));
@@ -238,6 +242,14 @@ KConfig* BackgroundListModel::kconfig(int index) const
     return m_kconfigs.at(index);
 }
 
+void BackgroundListModel::setWallpaperSize(const QSize& size)
+{
+    float newHeight = ((float)size.height() / (float)size.width()) * BackgroundDelegate::SCREENSHOT_SIZE;
+
+    m_size = QSize(BackgroundDelegate::SCREENSHOT_SIZE, newHeight);
+
+    m_size.scale(BackgroundDelegate::SCREENSHOT_SIZE, BackgroundDelegate::SCREENSHOT_SIZE/1.6, Qt::KeepAspectRatio);
+}
 #include "backgroundlistmodel.moc"
 
 

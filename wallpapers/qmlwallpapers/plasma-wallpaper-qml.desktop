@@ -1,0 +1,34 @@
+[Desktop Entry]
+Name=Animated Wallpapers
+Name[es]=Fondos de pantalla animados
+Name[et]=Animeeritud taustapildid
+Name[fi]=Animoidut taustakuvat
+Name[hu]=Animált háttérképek
+Name[nb]=Animerte tapeter
+Name[nl]=Geanimeerde bureaubladachtergronden
+Name[pt]=Papéis de Parede Animados
+Name[pt_BR]=Papéis de parede animados
+Name[ru]=Анимированные фоновые изображения
+Name[sk]=Animované tapety
+Name[sr]=Анимирани тапети
+Name[sr@ijekavian]=Анимирани тапети
+Name[sr@ijekavianlatin]=Animirani tapeti
+Name[sr@latin]=Animirani tapeti
+Name[sv]=Levande skrivbordsunderlägg
+Name[uk]=Анімовані шпалери
+Name[wa]=Candjantès tapisreyes
+Name[x-test]=xxAnimated Wallpapersxx
+Name[zh_TW]=動畫桌布
+Type=Service
+Icon=preferences-desktop-wallpaper
+ServiceTypes=Plasma/Wallpaper
+
+X-KDE-Library=plasma_wallpaper_qml
+X-KDE-PluginInfo-Author=Aleix Pol Gonzalez
+X-KDE-PluginInfo-Email=aleixpol@kde.org
+X-KDE-PluginInfo-Name=org.kde.wallpaper-qml
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://kde.org/
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+

@@ -27,7 +27,6 @@ Item {
 
     anchors.fill: parent
     clip: true
-    state: "fiveDays"
 
     PlasmaCore.Theme {
         id: theme
@@ -52,27 +51,26 @@ Item {
             topMargin: 5
             horizontalCenter: parent.horizontalCenter
         }
-        width: noticesView.visible ? 240 : 160
-        height: 30
+
         visible: detailsView.model.length > 0
 
         PlasmaComponents.TabButton {
             text: weatherApplet.panelModel.totalDays
-            onClicked: root.state = "fiveDays";
+            tab: fiveDaysView
         }
         PlasmaComponents.TabButton {
             text: i18n("Details")
-            onClicked: root.state = "details";
+            tab: detailsView
         }
         PlasmaComponents.TabButton {
             text: i18n("Notices")
             visible: noticesView.visible
-            onClicked: root.state = "notices";
+            onClicked: noticesView
         }
     }
 
-    FiveDaysView {
-        id: fiveDaysView
+    PlasmaComponents.TabGroup {
+        id: mainTabGroup
         anchors {
             top: tabBar.visible ? tabBar.bottom : tabBar.top
             bottom: courtesyLabel.top
@@ -80,27 +78,23 @@ Item {
             bottomMargin: 15
         }
         width: panel.width
-        model: weatherApplet.fiveDaysModel
-    }
-
-    DetailsView {
-        id: detailsView
-        anchors {
-            top: fiveDaysView.top
-            bottom: fiveDaysView.bottom
+        FiveDaysView {
+            id: fiveDaysView
+            anchors.fill: parent
+            model: weatherApplet.fiveDaysModel
         }
-        width: panel.width
-        model: weatherApplet.detailsModel
-    }
 
-    NoticesView {
-        id: noticesView
-        anchors {
-            top: fiveDaysView.top
-            bottom: fiveDaysView.bottom
+        DetailsView {
+            id: detailsView
+            anchors.fill: parent
+            model: weatherApplet.detailsModel
         }
-        width: panel.width
-        model: weatherApplet.noticesModel
+
+        NoticesView {
+            id: noticesView
+            anchors.fill: parent
+            model: weatherApplet.noticesModel
+        }
     }
 
     Text {
@@ -123,33 +117,5 @@ Item {
             enabled: weatherApplet.panelModel.enableLink
             onClicked: weatherApplet.invokeBrowser();
         }
-    }
-
-    states: [
-        State {
-            name: "fiveDays"
-            PropertyChanges { target: fiveDaysView; x: panel.anchors.margins }
-            PropertyChanges { target: detailsView; x: root.width + 10 }
-            PropertyChanges { target: noticesView; x: 2*root.width + 10 }
-        },
-        State {
-            name: "details"
-            PropertyChanges { target: fiveDaysView; x: -root.width - 10 }
-            PropertyChanges { target: detailsView; x: panel.anchors.margins }
-            PropertyChanges { target: noticesView; x: root.width + 10 }
-        },
-        State {
-            name: "notices"
-            PropertyChanges { target: fiveDaysView; x: -2*root.width - 10 }
-            PropertyChanges { target: detailsView; x: -root.width - 10 }
-            PropertyChanges { target: noticesView; x: panel.anchors.margins }
-        }
-    ]
-
-    transitions: Transition {
-        to: "*"
-        PropertyAnimation { target: fiveDaysView; property: "x"; easing.type: Easing.InQuad; duration: 250 }
-        PropertyAnimation { target: detailsView; property: "x"; easing.type: Easing.InQuad; duration: 250 }
-        PropertyAnimation { target: noticesView; property: "x"; easing.type: Easing.InQuad; duration: 250 }
     }
 }

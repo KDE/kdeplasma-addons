@@ -48,7 +48,7 @@ public:
     QModelIndex indexOf(const QString &path) const;
     virtual bool contains(const QString &bg) const;
 
-    //void setWallpaperSize(const QSize& size);
+    void setWallpaperSize(const QSize& size);
     void setResizeMethod(Plasma::Wallpaper::ResizeMethod resizeMethod);
 
 protected Q_SLOTS:
@@ -69,6 +69,7 @@ private:
 
     QString m_findToken;
     QPixmap m_previewUnavailablePix;
+    QSize m_size;
 };
 
 #endif // BACKGROUNDLISTMODEL_H

@@ -18,6 +18,9 @@
  */
 
 #include "session.h"
+
+#include "loginwidget.cpp"
+
 #include <QString>
 #include <KApplication>
 #include <KAboutData>
@@ -33,7 +36,9 @@ int main(int argc, char* argv[]) {
   
   RTM::Session *session = new RTM::Session("myapikey", "mysharedsecret", RTM::Delete, QString(), &app);
   
-  session->showLoginWindow();
+  LoginWidget *login = new LoginWidget();
+  login->setWebUrl(session->getAuthUrl());
+  login->show();
   
   return app.exec();
 }

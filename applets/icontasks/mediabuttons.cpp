@@ -245,7 +245,7 @@ void MediaButtons::readConfig()
     m_aliases.clear();
     m_ignore.clear();
 
-    QStringList files(KGlobal::dirs()->findAllResources("data", "plasma-icontasks/mediabuttonsrc"));
+    QStringList files(KGlobal::dirs()->findAllResources("data", "kdeplasma-addons/mediabuttonsrc"));
 
     foreach (QString file, files) {
         KConfig cfg(file);
@@ -253,6 +253,7 @@ void MediaButtons::readConfig()
         KConfigGroup gen(&cfg, "General");
 
         m_ignore += gen.readEntry("Ignore", QStringList()).toSet();
+        m_customMediaApps = gen.readEntry("CustomMediaApps", QStringList()).toSet();
         foreach (const QString & key, ag.keyList()) {
             foreach (const QString & alias, ag.readEntry(key, QStringList())) {
                 m_aliases[alias.toLower()] = key.toLower();
@@ -289,6 +290,7 @@ void MediaButtons::updateApps()
 
         m_mediaApps.insert(name.toLower());
     }
+    m_mediaApps += m_customMediaApps;
 }
 
 MediaButtons::Interface * MediaButtons::getInterface(const QString &name, int pid)

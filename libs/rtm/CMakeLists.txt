@@ -43,4 +43,4 @@ install(TARGETS rtm ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 #install(FILES FindRTM.cmake DESTINATION ${DATA_INSTALL_DIR}/cmake/modules)
 
-#add_subdirectory(tests)
+add_subdirectory(tests)
