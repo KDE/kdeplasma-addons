@@ -60,15 +60,12 @@ PlasmaCore.Dialog {
             contentWidth: comicPicture.nativeWidth
             contentHeight: comicPicture.nativeHeight
 
+            //clip: true
+
             QImageItem {
                 id: comicPicture
 
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    top: parent.top
-                    bottom: parent.bottom
-                }
+                anchors.fill: parent
 
                 smooth: true
                 fillMode: QImageItem.PreserveAspectFit
