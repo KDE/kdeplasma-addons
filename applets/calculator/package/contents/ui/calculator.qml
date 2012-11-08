@@ -217,7 +217,6 @@ Item {
             }
         }
 
-
         Grid {
             id: buttonsGrid;
             columns: 4;
