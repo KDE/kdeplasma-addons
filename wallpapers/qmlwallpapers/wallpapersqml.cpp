@@ -74,6 +74,7 @@ void WallpaperQml::setPackageName(const QString& packageName)
         QUrl scriptUrl(m_package->filePath("mainscript"));
         if (scriptUrl.isValid()) {
             m_component->loadUrl(scriptUrl);
+            m_packageName = packageName;
         } else {
             m_component->setData("import QtQuick 1.1\n Text { text: 'wrong wallpaper'}", QDir::tempPath());
         }
