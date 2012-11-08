@@ -65,9 +65,12 @@ void WallpaperQml::setPackageName(const QString& packageName)
         m_package = new Plasma::Package(dir, packageName, m_structure);
         if (m_package->isValid() && !m_package->filePath("mainscript").isEmpty()) {
             break;
+        } else {
+            delete m_package;
+            m_package = 0;
         }
     }
-    if(m_package->isValid()) {
+    if(m_package) {
         QUrl scriptUrl(m_package->filePath("mainscript"));
         if (scriptUrl.isValid()) {
             m_component->loadUrl(scriptUrl);
