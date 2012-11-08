@@ -113,7 +113,11 @@ Comment[zh_CN]=计算简单的求和
 Comment[zh_TW]=計算簡單的算式
 Icon=accessories-calculator
 Type=Service
-ServiceTypes=Plasma/Applet
+ServiceTypes=Plasma/Applet,Plasma/PopupApplet
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=main.qml
+X-Plasma-DefaultSize=200,250
 
 X-KDE-Library=plasma_applet_calculator
 X-KDE-PluginInfo-Author=Henry Stanaland
@@ -126,5 +130,7 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/calculator.qml
 X-Plasma-Requires-FileDialog=Unused
 X-Plasma-Requires-LaunchApp=Unused
