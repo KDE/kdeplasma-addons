@@ -56,9 +56,7 @@ WallpaperQml::WallpaperQml(QObject *parent, const QVariantList &args)
 
 void WallpaperQml::setPackageName(const QString& packageName)
 {
-    if (m_package) {
-        delete m_package;
-    }
+    delete m_package;
 
     kDebug() << "loading package..." << packageName;
     m_structure = Plasma::PackageStructure::load("Plasma/Generic");
