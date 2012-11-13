@@ -90,7 +90,7 @@ void ComicApplet::init()
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
     mDeclarativeWidget = new Plasma::DeclarativeWidget(this);
     layout->addItem(mDeclarativeWidget);
-    
+
     mDeclarativeWidget->engine()->rootContext()->setContextProperty("comicApplet", this);
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
@@ -226,7 +226,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     //call the slot to check if the position needs to be saved
     slotStorePosition();
 
-    //disconnect if there is either no error, or an error that can not be fixed automatically 
+    //disconnect if there is either no error, or an error that can not be fixed automatically
     if ( !errorAutoFixable ) {
         mEngine->disconnectSource( source, this );
     }

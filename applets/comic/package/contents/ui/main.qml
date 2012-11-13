@@ -146,7 +146,7 @@ Item {
                 tempTop += ( ( (comicApplet.comicData.stripTitle.length > 0) && (comicApplet.comicData.title.length > 0) ) ? " - " : "" ) + comicApplet.comicData.stripTitle;
             }
 
-            if ( showComicAuthor && 
+            if ( showComicAuthor &&
                 (comicApplet.comicData.author != undefined || comicApplet.comicData.author.length > 0) ) {
                 tempTop = ( tempTop.length > 0 ? comicApplet.comicData.author + ": " + tempTop : comicApplet.comicData.author );
             }
