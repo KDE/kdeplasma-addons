@@ -2,6 +2,7 @@
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
  *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
+ *   Copyright (C) 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -30,15 +31,15 @@
 #include <Plasma/DataEngine>
 #include <Plasma/PopupApplet>
 
-class ArrowWidget;
-class ButtonBar;
+#include "activecomicmodel.h"
+
+namespace Plasma {
+    class DeclarativeWidget;
+}
+
 class CheckNewStrips;
-class ComicLabel;
 class ComicModel;
-class ComicTabBar;
 class ConfigWidget;
-class FullViewWidget;
-class ImageWidget;
 class KAction;
 class KJob;
 class QAction;
@@ -50,6 +51,16 @@ class SavingDir;
 class ComicApplet : public Plasma::PopupApplet
 {
     Q_OBJECT
+    Q_PROPERTY(QObject * comicsModel READ comicsModel NOTIFY comicModelChanged)
+    Q_PROPERTY(bool showComicUrl READ showComicUrl WRITE setShowComicUrl NOTIFY showComicUrlChanged)
+    Q_PROPERTY(bool showComicAuthor READ showComicAuthor WRITE setShowComicAuthor NOTIFY showComicAuthorChanged)
+    Q_PROPERTY(bool showComicTitle READ showComicTitle WRITE setShowComicTitle NOTIFY showComicTitleChanged)
+    Q_PROPERTY(bool showComicIdentifier READ showComicIdentifier WRITE setShowComicIdentifier NOTIFY showComicIdentifierChanged)
+    Q_PROPERTY(bool showErrorPicture READ showErrorPicture WRITE setShowErrorPicture NOTIFY showErrorPictureChanged)
+    Q_PROPERTY(bool arrowsOnHover READ arrowsOnHover WRITE setArrowsOnHover NOTIFY arrowsOnHoverChanged)
+    Q_PROPERTY(bool middleClick READ middleClick WRITE setMiddleClick NOTIFY middleClickChanged)
+    Q_PROPERTY(QVariantHash comicData READ comicData NOTIFY comicDataChanged)
+    Q_PROPERTY(bool showActualSize READ showActualSize WRITE setShowActualSize NOTIFY showActualSizeChanged)
 
     public:
         ComicApplet( QObject *parent, const QVariantList &args );
@@ -60,57 +71,100 @@ class ComicApplet : public Plasma::PopupApplet
 
         QGraphicsWidget *graphicsWidget();
 
+        //For QML
+        QObject *comicsModel();
+        QVariantHash comicData();
+
+        bool showComicUrl() const;
+        void setShowComicUrl(bool show);
+
+        bool showComicAuthor() const;
+        void setShowComicAuthor(bool show);
+
+        bool showComicTitle() const;
+        void setShowComicTitle(bool show);
+
+        bool showComicIdentifier() const;
+        void setShowComicIdentifier(bool show);
+
+        bool showErrorPicture() const;
+        void setShowErrorPicture(bool show);
+
+        bool arrowsOnHover() const;
+        void setArrowsOnHover(bool show);
+
+        bool middleClick() const;
+        void setMiddleClick(bool show);
+
+        bool showActualSize() const;
+        void setShowActualSize(bool show);
+
+        Q_INVOKABLE bool checkAuthorization(const QString &permissionName) { return hasAuthorization(permissionName); }
+        //End for QML
+Q_SIGNALS:
+    void comicModelChanged();
+    void showComicUrlChanged();
+    void showComicAuthorChanged();
+    void showComicTitleChanged();
+    void showComicIdentifierChanged();
+    void showErrorPictureChanged();
+    void arrowsOnHoverChanged();
+    void middleClickChanged();
+    void comicDataChanged();
+    void tabHighlightRequest(const QString &id, bool highlight);
+    void showNextNewStrip();
+    void showActualSizeChanged();
+
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
         void createConfigurationInterface( KConfigDialog *parent );
 
     private Q_SLOTS:
-        void slotTabChanged( int newIndex );
+        void slotTabChanged( const QString &newIdentifier );
         void slotNextDay();
         void slotPreviousDay();
         void slotFirstDay();
         void slotCurrentDay();
         void slotFoundLastStrip( int index, const QString &identifier, const QString &suffix );
         void slotGoJump();
-        void slotNextNewStrip();
-        void slotReload();
         void slotSaveComicAs();
         void slotScaleToContent();
         void slotShop();
         void slotStorePosition();
-        void slotSizeChanged();
-        void slotShowMaxSize();
         void applyConfig();
         void checkDayChanged();
-        void buttonBar();
-        void fullView();
-        void updateSize();
         void createComicBook();
         void slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
         void slotArchiveFinished( KJob *job );
 
     public slots:
         void configChanged();
-        void updateComic(const QString &identifierSuffix = QString());
+        Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
+        Q_INVOKABLE void goJump() { slotGoJump();}
+        Q_INVOKABLE void shop() { slotShop();}
+        Q_INVOKABLE void tabChanged(const QString &newIdentifier) { slotTabChanged(newIdentifier);}
 
     protected:
         QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
-        bool eventFilter( QObject *receiver, QEvent *event );
 
     private:
         void changeComic( bool differentComic );
         void updateUsedComics();
-        void updateButtons();
         void updateContextMenu();
         void updateView();
         void saveConfig();
         bool isInPanel() const;
-        void setTabBarVisible( bool isVisible );//HACK what was in 4.4 does not seem to work anymore, so this was added
+        void refreshComicData();
+        void setTabHighlighted(const QString &id, bool highlight);
+        bool hasHighlightedTabs();
+        bool isTabHighlighted(int index) const;
 
     private:
         static const int CACHE_LIMIT;
         ComicModel *mModel;
         QSortFilterProxyModel *mProxy;
+        ActiveComicModel mActiveComicModel;
+        QVariantHash mComicData;
 
         QDate mCurrentDay;
 
@@ -118,8 +172,6 @@ class ComicApplet : public Plasma::PopupApplet
         QString mOldSource;
         ConfigWidget *mConfigWidget;
         bool mDifferentComic;
-        bool mShowPreviousButton;
-        bool mShowNextButton;
         bool mShowComicUrl;
         bool mShowComicAuthor;
         bool mShowComicTitle;
@@ -131,10 +183,7 @@ class ComicApplet : public Plasma::PopupApplet
         CheckNewStrips *mCheckNewStrips;
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
-        QGraphicsWidget *mMainWidget;
-        QGraphicsLinearLayout *mCentralLayout;
-        QGraphicsLinearLayout *mBottomLayout;
-        FullViewWidget *mFullViewWidget;
+        Plasma::DeclarativeWidget *mDeclarativeWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
         QAction *mActionGoJump;
@@ -146,27 +195,12 @@ class ComicApplet : public Plasma::PopupApplet
         QSizeF mLastSize;
         QSizeF mIdealSize;
         Plasma::DataEngine *mEngine;
-        ComicLabel *mLabelId;
-        ComicLabel *mLabelTop;
-        ComicLabel *mLabelUrl;
-
-        ImageWidget *mImageWidget;
-        ArrowWidget *mLeftArrow;
-        ArrowWidget *mRightArrow;
 
         //Tabs
         bool mTabAdded;
-        ComicTabBar *mTabBar;
         QStringList mTabIdentifier;
 
-        enum TabView {
-            ShowText = 0x1,
-            ShowIcon = 0x2
-        };
-        int mTabView;
-
         ComicData mCurrent;
-        ButtonBar *mButtonBar;
         SavingDir *mSavingDir;
 };
 
