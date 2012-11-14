@@ -210,9 +210,7 @@ void WeatherPopupApplet::init()
 void WeatherPopupApplet::connectToEngine()
 {
     emit newWeatherSource();
-    d->busyTimer->start();
     const bool missingLocation = d->source.isEmpty();
-    setBusy(!missingLocation);
 
     if (missingLocation) {
         if (!d->location) {
@@ -222,10 +220,13 @@ void WeatherPopupApplet::connectToEngine()
 
         d->location->setDataEngines(dataEngine(QLatin1String( "geolocation" )), d->weatherEngine);
         d->location->getDefault();
+        setBusy(false);
     } else {
         delete d->location;
         d->location = 0;
         d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
+        setBusy(true);
+        d->busyTimer->start();
     }
 }
 
