@@ -41,12 +41,11 @@ public:
         , weatherEngine(0)
         , timeEngine(0)
         , updateInterval(0)
+        , location(0)
     {
-        QObject::connect(&location, SIGNAL(finished(QString)),
-                         q, SLOT(locationReady(QString)));
         busyTimer = new QTimer(q);
-        busyTimer->setSingleShot(true);
         busyTimer->setInterval(2*60*1000);
+        busyTimer->setSingleShot(true);
         QObject::connect(busyTimer, SIGNAL(timeout()), q, SLOT(giveUpBeingBusy()));
     }
 
@@ -61,7 +60,7 @@ public:
     UnitPtr visibilityUnit;
     int updateInterval;
     QString source;
-    WeatherLocation location;
+    WeatherLocation *location;
 
     QString conditionIcon;
     QString tend;
@@ -86,6 +85,9 @@ public:
             q->setBusy(false);
             q->setConfigurationRequired(true);
         }
+
+        location->deleteLater();
+        location = 0;
     }
 
     void giveUpBeingBusy()
@@ -209,12 +211,20 @@ void WeatherPopupApplet::connectToEngine()
 {
     emit newWeatherSource();
     d->busyTimer->start();
-    if (d->source.isEmpty()) {
-        setBusy(false);
-        d->location.setDataEngines(dataEngine(QLatin1String( "geolocation" )), d->weatherEngine);
-        d->location.getDefault();
+    const bool missingLocation = d->source.isEmpty();
+    setBusy(!missingLocation);
+
+    if (missingLocation) {
+        if (!d->location) {
+            d->location = new WeatherLocation(this);
+            connect(d->location, SIGNAL(finished(QString)), this, SLOT(locationReady(QString)));
+        }
+
+        d->location->setDataEngines(dataEngine(QLatin1String( "geolocation" )), d->weatherEngine);
+        d->location->getDefault();
     } else {
-        setBusy(true);
+        delete d->location;
+        d->location = 0;
         d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
     }
 }
@@ -277,7 +287,6 @@ void WeatherPopupApplet::configChanged()
     d->updateInterval = cfg.readEntry("updateInterval", 30);
     d->source = cfg.readEntry("source", "");
     setConfigurationRequired(d->source.isEmpty());
-
     d->weatherEngine = dataEngine(QLatin1String( "weather" ));
     d->timeEngine = dataEngine(QLatin1String( "time" ));
 
