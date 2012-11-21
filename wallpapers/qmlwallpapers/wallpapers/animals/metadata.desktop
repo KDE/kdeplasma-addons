@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Ascii Animals
 Name[da]=Ascii-dyr
+Name[el]=Ascii ζώα
 Name[es]=Animales Ascii
 Name[et]=ASCII loomad
 Name[fi]=ASCII-eläimet
@@ -24,6 +25,7 @@ Name[x-test]=xxAscii Animalsxx
 Name[zh_TW]=Ascii 動物
 Comment=Unsure if cute or just nerdy
 Comment[da]=Er det sødt eller bare nørdet?
+Comment[el]=Χαριτωμένο ή απλά βαρετό;
 Comment[es]=No es seguro si lindo o solo friki
 Comment[et]=Pole kindel, kas see on armas või lihtsalt nohiklik
 Comment[hu]=Bizonytalan, ha csinos vagy csak stréber
