@@ -58,6 +58,7 @@ const int ComicApplet::CACHE_LIMIT = 20;
 
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::PopupApplet( parent, args ),
+      mActiveComicModel(parent),
       mDifferentComic( true ),
       mShowComicUrl( false ),
       mShowComicAuthor( false ),
@@ -70,8 +71,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mDeclarativeWidget( 0 ),
       mActionShop( 0 ),
       mEngine( 0 ),
-      mSavingDir(0),
-      mActiveComicModel(parent)
+      mSavingDir(0)
 {
     setHasConfigurationInterface( true );
     resize( 600, 250 );
