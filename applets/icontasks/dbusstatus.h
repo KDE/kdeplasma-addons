@@ -40,7 +40,7 @@ struct DBusStatus {      // From Amarok.
     };
 };
 
-Q_DECLARE_METATYPE(DBusStatus);
+Q_DECLARE_METATYPE(DBusStatus)
 QDBusArgument& operator <<(QDBusArgument& arg, const DBusStatus& status);
 const QDBusArgument& operator >>(const QDBusArgument& arg, DBusStatus& status);
 
