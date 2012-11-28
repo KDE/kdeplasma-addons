@@ -22,8 +22,8 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Item {
     id: root
 
-    implicitWidth: rowButton.width + 20
-    implicitHeight: rowButton.height + 20
+    implicitWidth: rowButton.width + background.margins.left + background.margins.right
+    implicitHeight: rowButton.height + background.margins.top + background.margins.bottom
 
     signal prevClicked
     signal nextClicked
@@ -34,14 +34,15 @@ Item {
 
         anchors.fill: parent
 
-        imagePath: "widgets/viewitem"
-        prefix: "hover"
+        imagePath: "widgets/toolbar"
+        prefix: "raised"
     }
 
     Row {
         id: rowButton
 
-        anchors.centerIn: parent
+        x: background.margins.left
+        y: background.margins.top
 
         spacing: 4
         //ToolButton or Button in C++ use PushButton?

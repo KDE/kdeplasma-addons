@@ -103,7 +103,6 @@ PlasmaExtras.ScrollArea {
                         x: (viewContainer.width - buttonBar.width)/2 + viewContainer.contentX
                     }
 
-                    visible: (comicApplet.arrowsOnHover && (mouseArea.containsMouse || (mouseArea.containsMouse && buttonBar.visible)) )
                     opacity: 0
 
                     onPrevClicked: {
