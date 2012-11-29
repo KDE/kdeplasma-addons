@@ -501,11 +501,11 @@ void Pastebin::configChanged()
     QStringList history = cg.readEntry("History", "").split('|', QString::SkipEmptyParts);
 
     m_actionHistory.clear();
+    setHistorySize(historySize);
     const int numberOfItems = history.size();
     for (int i = 0; i < numberOfItems; ++i) {
         addToHistory(history.at(i));
     }
-    setHistorySize(historySize);
 }
 
 void Pastebin::showResults(const QString &url)
