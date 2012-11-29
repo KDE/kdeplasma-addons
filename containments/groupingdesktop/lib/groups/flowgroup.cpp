@@ -98,6 +98,9 @@ void FlowGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup
     if (m_mainLayout->orientation() == Qt::Horizontal) {
         rect = QRectF(QPointF(group.readEntry("Position", 0), 0),
                       QSizeF(group.readEntry("Size", 0), m_container->size().height()));
+    } else {
+        rect = QRectF(QPointF(0, group.readEntry("Position", 0)),
+                      QSizeF(m_container->size().width(), group.readEntry("Size", 0)));
     }
     child->setParentItem(m_container);
     child->setGeometry(rect);
@@ -110,6 +113,9 @@ void FlowGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) c
     if (m_mainLayout->orientation() == Qt::Horizontal) {
         group.writeEntry("Position", child->pos().x());
         group.writeEntry("Size", child->size().width());
+    } else {
+        group.writeEntry("Position", child->pos().y());
+        group.writeEntry("Size", child->size().height());
     }
 }
 
