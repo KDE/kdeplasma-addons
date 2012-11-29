@@ -57,13 +57,13 @@ protected Q_SLOTS:
     void previewFailed(const KFileItem &item);
     void processPaths(const QStringList &paths);
 
-private:  
+private:
     QWeakPointer<PatternWallpaper> m_structureParent;
-    
+
     QList<KConfig *> m_kconfigs;
     QHash<KConfig *, QPixmap> m_previews;
-    
-    
+
+
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
     KDirWatch m_dirwatch;
 
