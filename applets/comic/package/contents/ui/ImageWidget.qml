@@ -32,7 +32,6 @@ PlasmaExtras.ScrollArea {
     property bool isTopToBottom: true
 
     property alias image: comicPicture.image
-    property alias tooltipText: tooltip.mainText
 
     function calculateContentWidth() {
         return actualSize ? (comicPicture.nativeWidth > viewContainer.width ? comicPicture.nativeWidth : viewContainer.width) : viewContainer.width;
@@ -73,62 +72,6 @@ PlasmaExtras.ScrollArea {
 
                 smooth: true
                 fillMode: QImageItem.PreserveAspectFit
-            }
-
-            MouseArea {
-                id:mouseArea
-
-                anchors.fill: parent
-
-                hoverEnabled: true
-                preventStealing: false
-                acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-
-                onClicked: {
-                    if (mouse.button == Qt.MiddleButton && comicApplet.middleClick) {
-                        fullDialog.open();
-                    }
-                }
-
-                PlasmaCore.ToolTip {
-                    id: tooltip
-                    //target: root
-                }
-
-                ButtonBar {
-                    id: buttonBar
-
-                    pos {
-                        y: viewContainer.height - buttonBar.height + viewContainer.contentY
-                        x: (viewContainer.width - buttonBar.width)/2 + viewContainer.contentX
-                    }
-
-                    opacity: 0
-
-                    onPrevClicked: {
-                        //busyIndicator.visible = true;
-                        comicApplet.updateComic(comicData.prev);
-                    }
-
-                    onNextClicked: {
-                        //busyIndicator.visible = true;
-                        comicApplet.updateComic(comicData.next);
-                    }
-
-                    onZoomClicked: {
-                        fullDialog.open();
-                    }
-
-                    states: State {
-                        name: "show"; when: (comicApplet.arrowsOnHover && mouseArea.containsMouse)
-                        PropertyChanges { target: buttonBar; opacity: 1; }
-                    }
-
-                    transitions: Transition {
-                        from: ""; to: "show"; reversible: true
-                        NumberAnimation { properties: "opacity"; duration: 250; easing.type: Easing.InOutQuad }
-                    }
-                }
             }
         }
     }

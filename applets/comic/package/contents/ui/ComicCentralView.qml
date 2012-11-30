@@ -44,8 +44,8 @@ Item {
         }
     }
 
-    ImageWidget {
-        id: comicImage
+    MouseArea {
+        id: comicImageArea
 
         anchors {
             left: arrowLeft.visible ? arrowLeft.right : root.left
@@ -56,11 +56,67 @@ Item {
             bottom: root.bottom
         }
 
-        image: comicApplet.comicData.image
-        tooltipText: comicApplet.comicData.additionalText
-        actualSize: comicApplet.showActualSize
-        isLeftToRight: comicApplet.comicData.isLeftToRight
-        isTopToBottom: comicApplet.comicData.isTopToBottom
+        hoverEnabled: true
+        preventStealing: false
+        acceptedButtons: Qt.LeftButton | Qt.MiddleButton
+
+        onClicked: {
+            if (mouse.button == Qt.MiddleButton && comicApplet.middleClick) {
+                fullDialog.open();
+            }
+        }
+
+        PlasmaCore.ToolTip {
+            id: tooltip
+            target: comicImageArea
+            mainText: comicApplet.comicData.additionalText
+        }
+
+        ImageWidget {
+            id: comicImage
+
+            anchors.fill: parent
+
+            image: comicApplet.comicData.image
+            actualSize: comicApplet.showActualSize
+            isLeftToRight: comicApplet.comicData.isLeftToRight
+            isTopToBottom: comicApplet.comicData.isTopToBottom
+        }
+
+        ButtonBar {
+            id: buttonBar
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                bottom: parent.bottom
+                bottomMargin: 10
+            }
+
+            visible: comicApplet.arrowsOnHover && comicImageArea.containsMouse//(comicApplet.arrowsOnHover && (comicImageArea.containsMouse || (comicImageArea.containsMouse && buttonBar.visible)) )
+            opacity: 0
+
+            onPrevClicked: {
+                comicApplet.updateComic(comicData.prev);
+            }
+
+            onNextClicked: {
+                comicApplet.updateComic(comicData.next);
+            }
+
+            onZoomClicked: {
+                fullDialog.open();
+            }
+
+            states: State {
+                name: "show"; when: (comicApplet.arrowsOnHover && comicImageArea.containsMouse)
+                PropertyChanges { target: buttonBar; opacity: 1; }
+            }
+
+            transitions: Transition {
+                from: ""; to: "show"; reversible: true
+                NumberAnimation { properties: "opacity"; duration: 250; easing.type: Easing.InOutQuad }
+            }
+        }
     }
 
     PlasmaComponents.ToolButton {
