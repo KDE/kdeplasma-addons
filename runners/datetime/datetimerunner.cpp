@@ -89,13 +89,14 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
     QMapIterator<QString, KTimeZone> it(zones);
     while (it.hasNext()) {
         it.next();
-        if (it.key().compare(tz, Qt::CaseInsensitive) == 0) {
+        if (it.key().compare(tz, Qt::CaseInsensitive) == 0 ||
+            it.value().name().compare(tz, Qt::CaseInsensitive) == 0) {
             tzName = it.value().name();
             dt = KDateTime::currentDateTime(it.value()).dateTime();
             break;
         } else if (!dt.isValid()) {
-            if (it.key().startsWith(tz, Qt::CaseInsensitive) ||
-                it.key().contains(tz, Qt::CaseInsensitive)) {
+            if (it.key().contains(tz, Qt::CaseInsensitive) ||
+                it.value().name().contains(tz, Qt::CaseInsensitive)) {
                 tzName = it.value().name();
                 dt = KDateTime::currentDateTime(it.value()).dateTime();
             } else {
