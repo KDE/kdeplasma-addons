@@ -10,26 +10,23 @@
     <height>379</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <layout class="QFormLayout" name="formLayout">
-     <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::ExpandingFieldsGrow</enum>
+  <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0">
+   <item row="0" column="0">
+    <widget class="QLabel" name="m_colorLabel">
+     <property name="text">
+      <string>&amp;Color:</string>
      </property>
-     <item row="0" column="0">
-      <widget class="QLabel" name="m_colorLabel">
-       <property name="text">
-        <string>&amp;Color:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-       <property name="buddy">
-        <cstring>m_color</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>m_color</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
       <widget class="KColorButton" name="m_color">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -59,9 +56,22 @@
        </property>
       </widget>
      </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
    </item>
-   <item>
+   <item row="2" column="0" colspan="2">
     <widget class="QListView" name="m_view">
      <property name="minimumSize">
       <size>

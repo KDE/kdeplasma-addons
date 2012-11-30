@@ -154,6 +154,7 @@ QWidget* WallpaperQml::createConfigurationInterface(QWidget* parent)
         v.m_view->setCurrentIndex(m->indexForPackagePath(m_package->path()));
         m_packageName = KUrl(m_package->path()).fileName(KUrl::IgnoreTrailingSlash);
     }
+    v.m_color->setColor(m_scene->backgroundBrush().color());
 
     connect(v.m_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(changeWallpaper(QModelIndex)));
     connect(v.m_color, SIGNAL(changed(QColor)), this, SLOT(setBackgroundColor(QColor)));
