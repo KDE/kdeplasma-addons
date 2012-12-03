@@ -741,7 +741,7 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
     configUi.setupUi(configWidget);
 
     configUi.serviceUrlCombo->addItem("https://identi.ca/api/");
-    configUi.serviceUrlCombo->addItem("https://twitter.com/");
+    configUi.serviceUrlCombo->addItem("https://api.twitter.com/1/");
     configUi.serviceUrlCombo->setEditText(m_serviceUrl);
     configUi.usernameEdit->setText(m_username);
     configUi.passwordEdit->setText(m_password);
