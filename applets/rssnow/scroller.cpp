@@ -57,12 +57,12 @@ Scroller::Scroller(QGraphicsItem *parent) :
 
     m_hovered = false;
 
-    m_left->setSvg("rssnow/left");
+    m_left->setSvg("rssnow/arrows", "left");
     m_left->setZValue(1000);
     m_left->resize(m_left->sizeFromIconSize(10));
     m_left->hide();
 
-    m_right->setSvg("rssnow/right");
+    m_right->setSvg("rssnow/arrows", "right");
     m_right->setZValue(1000);
     m_right->resize(m_right->sizeFromIconSize(10));
     m_right->hide();
