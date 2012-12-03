@@ -726,6 +726,7 @@ void Pastebin::postContent(QString text, const QImage& imageData)
     const QString txtProvider = cg.readEntry("TextProvider", m_txtServers.keys().at(0));
     const QString imgProvider = cg.readEntry("ImageProvider", m_imgServers.keys().at(0));
 
+    bool isTemporary = false;
     if (validPath) {
         KMimeType::Ptr type = KMimeType::findByPath(testPath.path());
 
@@ -750,6 +751,8 @@ void Pastebin::postContent(QString text, const QImage& imageData)
             tempFile.close();
 
             text = tempFile.fileName();
+
+            isTemporary = true;
         } else {
             setActionState(IdleError);
             return;
@@ -770,6 +773,8 @@ void Pastebin::postContent(QString text, const QImage& imageData)
     ops.writeEntry("content", text);
 
     Plasma::ServiceJob *job = m_postingService->startOperationCall(ops);
+    if (isTemporary) // Store tempfile-job mapping for cleanup when finished.
+        m_pendingTempFileJobs[job] = text;
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(postingFinished(KJob*)));
 
     setActionState(Sending);
@@ -784,6 +789,11 @@ void Pastebin::postingFinished(KJob *job)
     } else {
         showResults(sjob->result().toString());
     }
+
+    // Cleanup of temp file...
+    QString tempUrl = m_pendingTempFileJobs.take(job);
+    if (!tempUrl.isEmpty())
+        KIO::file_delete(KUrl(tempUrl), KIO::HideProgressInfo);
 }
 
 

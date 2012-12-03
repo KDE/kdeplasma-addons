@@ -163,6 +163,7 @@ private:
     // New version - below here vars after refactor
     int m_historySize;
 
+    QHash<KJob *, QString> m_pendingTempFileJobs;
     QHash<QString, QString> m_txtServers;
     QHash<QString, QString> m_imgServers;
     Plasma::DataEngine *m_engine;
