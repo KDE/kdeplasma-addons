@@ -117,6 +117,7 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSort
     comicUi.listView_comic->resizeColumnToContents( 0 );
 
     // "Apply" button connections
+    connect(comicUi.listView_comic , SIGNAL(clicked(QModelIndex)), this , SIGNAL(enableApply()));
     connect(comicUi.pushButton_GHNS , SIGNAL(clicked(bool)), this , SIGNAL(enableApply()));
     connect(comicUi.checkBox_middle , SIGNAL(toggled(bool)), this , SIGNAL(enableApply()));
     connect(comicUi.updateIntervall, SIGNAL(valueChanged(int)), this, SIGNAL(enableApply()));
