@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Ascii Animals
+Name[ca]=Animals ASCII
 Name[da]=Ascii-dyr
 Name[el]=Ascii ζώα
 Name[es]=Animales Ascii
@@ -25,6 +26,7 @@ Name[wa]=Biesses ascii
 Name[x-test]=xxAscii Animalsxx
 Name[zh_TW]=Ascii 動物
 Comment=Unsure if cute or just nerdy
+Comment[ca]=No se sap si és bonic o només setciències
 Comment[da]=Er det sødt eller bare nørdet?
 Comment[el]=Χαριτωμένο ή απλά βαρετό;
 Comment[es]=No es seguro si lindo o solo friki
