@@ -170,7 +170,7 @@ void WallpaperQml::changeWallpaper(const QModelIndex& idx)
 
 void WallpaperQml::init(const KConfigGroup& config)
 {
-    setPackageName(config.readEntry("packageName", "org.kde.animals"));
+    setPackageName(config.readEntry("packageName", "org.kde.haenau"));
     setBackgroundColor(config.readEntry("color", QColor(Qt::transparent)));
     emit changed(false);
 }
