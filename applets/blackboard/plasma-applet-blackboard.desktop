@@ -72,6 +72,7 @@ Comment[sr@latin]=Nažvrljajte brzu belešku ili šarenu sliku
 Comment[sv]=Skriv en snabb anmärkning eller rita en färgrik bild
 Comment[uk]=Малювання нотатки або кольорового зображення
 Comment[x-test]=xxDraw a quick note or a colorful imagexx
+Comment[zh_CN]=绘制便笺或者画图
 Comment[zh_TW]=繪製一份快速備忘或彩色影像
 Type=Service
 Icon=applications-education
