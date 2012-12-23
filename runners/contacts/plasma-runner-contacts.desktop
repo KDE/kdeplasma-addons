@@ -2,7 +2,6 @@
 Name=Contacts
 Name[ar]=جهات الاتصال
 Name[ast]=Contautos
-Name[bs]=Kontakti
 Name[ca]=Contactes
 Name[ca@valencia]=Contactes
 Name[cs]=Kontakty
@@ -60,7 +59,6 @@ Name[zh_TW]=聯絡人
 Comment=Finds entries in your address book
 Comment[ar]=تبحث عن مدخلات في دفتر العناوين
 Comment[ast]=Gueta entraes na so llibreta de señes
-Comment[bs]=Pronalazi unose u vašem adresaru
 Comment[ca]=Cerca entrades a la llibreta d'adreces
 Comment[ca@valencia]=Cerca entrades a la llibreta d'adreces
 Comment[cs]=Vyhledávání položek v adresáři

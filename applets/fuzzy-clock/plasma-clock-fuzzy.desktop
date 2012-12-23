@@ -2,7 +2,6 @@
 Name=Fuzzy Clock
 Name[ar]=ساعة تقريبية
 Name[ast]=Reló imprecisu
-Name[bs]=Neprecizni sat
 Name[ca]=Rellotge aproximat
 Name[ca@valencia]=Rellotge aproximat
 Name[cs]=Nejasné hodiny
@@ -59,7 +58,6 @@ Name[zh_TW]=模糊時鐘
 Comment=Time displayed in a less precise format
 Comment[ar]=الوقت يظهر بتنسيق أقل دقة
 Comment[ast]=Amuesa la hora nún formatu menos precisu
-Comment[bs]=Vrijeme prikazano na manje precizan način
 Comment[ca]=L'hora mostrada en un format aproximat
 Comment[ca@valencia]=L'hora mostrada en un format aproximat
 Comment[cs]=Zobrazení času v nejasném formátu

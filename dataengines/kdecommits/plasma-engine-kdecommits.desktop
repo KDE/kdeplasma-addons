@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=KDE Commits Engine
-Name[bs]=KDE Commits Engine
 Name[ca]=Motor de «commits» del KDE
 Name[ca@valencia]=Motor de «commits» del KDE
 Name[da]=Motor til KDE Commits
@@ -38,7 +37,6 @@ Name[x-test]=xxKDE Commits Enginexx
 Name[zh_CN]=KDE 提交引擎
 Name[zh_TW]=KDE 提交引擎
 Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
-Comment[bs]=Pogon podataka za sticanje pročiščenih podataka o KDE SVN upisima
 Comment[ca]=Un motor de dades de captura de dades consolidades quant als «commits» en el SVN del KDE
 Comment[ca@valencia]=Un motor de dades de captura de dades consolidades quant als «commits» en el SVN del KDE
 Comment[cs]=Datový nástroj pro získávání sloučených údajů o SVN příspěvcích v KDE

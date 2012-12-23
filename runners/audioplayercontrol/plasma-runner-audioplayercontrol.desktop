@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=Control Audio Player
-Name[bs]=Upravljanje audio plejerom
 Name[ca]=Control del reproductor d'àudio
 Name[ca@valencia]=Control del reproductor d'àudio
 Name[cs]=Ovládat zvukový přehrávač
@@ -46,7 +45,6 @@ Name[x-test]=xxControl Audio Playerxx
 Name[zh_CN]=控制音乐播放器
 Name[zh_TW]=控制音效播放器
 Comment=Allows to control MPRIS audio players (it is able to search through Amarok's collection, too)
-Comment[bs]=Dopušta kontroliranje MPRIS audio plejera (može da traži u Amarokovoj kolekciji, također)
 Comment[ca]=Permet controlar reproductors d'àudio MPRIS (també permet cercar a la col·lecció de l'Amarok)
 Comment[ca@valencia]=Permet controlar reproductors d'àudio MPRIS (també permet cercar a la col·lecció de l'Amarok)
 Comment[cs]=Dovoluje ovládání audio přehrávačů MPRIS (je také možné vyhledávat v kolekci Amarok)

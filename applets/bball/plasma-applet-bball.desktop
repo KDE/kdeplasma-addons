@@ -1,7 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Bouncy Ball
-Name[bs]=Bouncy Ball
 Name[ca]=Una pilota que bota
 Name[ca@valencia]=Una pilota que bota
 Name[cs]=Poskakující míč
@@ -52,7 +51,6 @@ Name[zh_TW]=彈跳球
 Comment=A bouncy ball for plasma
 Comment[ar]=كرة النطاطة للبلازما
 Comment[ast]=Una pelota que rebota pa plasma
-Comment[bs]=Odskačuća lopta za Plazmu
 Comment[ca]=Una pilota que bota per al plasma
 Comment[ca@valencia]=Una pilota que bota per al plasma
 Comment[cs]=Poskakující míč pro Plasmu

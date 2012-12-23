@@ -2,7 +2,6 @@
 Name=Incoming Message
 Name[ar]=رسالة قادمة
 Name[ast]=Mensax entrante
-Name[bs]=dolazeća poruka
 Name[ca]=Missatge entrant
 Name[ca@valencia]=Missatge entrant
 Name[cs]=Příchozí zpráva
@@ -59,7 +58,6 @@ Icon=mail-message-new
 Comment=Notification of new messages
 Comment[ar]=إخطار الرسائل الجديدة
 Comment[ast]=Notificación de mensaxes nuevos
-Comment[bs]=Obavještenje o novim porukama
 Comment[ca]=Notificació de missatges nous
 Comment[ca@valencia]=Notificació de missatges nous
 Comment[cs]=Upozornění na nové zprávy

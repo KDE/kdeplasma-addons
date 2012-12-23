@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=YouTube
-Name[bs]=YouTube
 Name[ca]=YouTube
 Name[cs]=YouTube
 Name[da]=YouTube
@@ -39,7 +38,6 @@ Name[zh_CN]=YouTube
 Name[zh_TW]=YouTube
 
 Comment=Matches YouTube queries
-Comment[bs]=Odgovara YouTube upitima
 Comment[ca]=Correspon amb consultes a YouTube
 Comment[cs]=Vyhledávání dotazů YouTube
 Comment[da]=Matcher YouTube-forespørgsler

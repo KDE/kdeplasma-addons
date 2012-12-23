@@ -2,7 +2,6 @@
 Name=Magnifique
 Name[ar]=المكبر
 Name[ast]=Magnifique
-Name[bs]=Magnifique
 Name[ca]=Magnifique
 Name[ca@valencia]=Magnifique
 Name[cs]=Magnifique
@@ -51,7 +50,6 @@ Name[x-test]=xxMagnifiquexx
 Name[zh_CN]=放大镜
 Name[zh_TW]=Magnifique
 Comment=A magnification glass for the Plasma desktop
-Comment[bs]=Lupa za plazma površ
 Comment[ca]=Una lent d'augment per l'escriptori Plasma
 Comment[ca@valencia]=Una lent d'augment per l'escriptori Plasma
 Comment[cs]=Zvětšovací sklo pro Plasma desktop

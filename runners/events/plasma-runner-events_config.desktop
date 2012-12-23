@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=Calendar Events
-Name[bs]=Kalendarski događaji
 Name[ca]=Esdeveniments del calendari
 Name[ca@valencia]=Esdeveniments del calendari
 Name[cs]=Události kalendáře
@@ -42,7 +41,6 @@ Name[x-test]=xxCalendar Eventsxx
 Name[zh_CN]=日历事件
 Name[zh_TW]=行事曆事件
 Comment=Calendar Events runner
-Comment[bs]=Izvršilac kalendarskih događaja
 Comment[ca]=Executor d'esdeveniments de calendari
 Comment[ca@valencia]=Executor d'esdeveniments de calendari
 Comment[cs]=Události kalendáře
