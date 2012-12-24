@@ -18,6 +18,7 @@
  */
 
 #include "list.h"
+#include "task.h"
 
 namespace RTM {
 
@@ -33,6 +34,8 @@ class ListPrivate {
   RTM::ListId listId;
   bool smart;
   QString filter;
+  QHash<RTM::TaskId, RTM::Task*> tasks;
+  QHash<int, int> incompleteTally;
 
   // none of the following are used yet. However, they exsist in the
   //  list example and so I thought that they should be included.
@@ -46,7 +49,12 @@ class ListPrivate {
 List::List(Session* session) 
   : QObject(session),
   d(new ListPrivate(this))
-{ }
+{
+    for (int i = 0; i <= 4; ++i)
+    {
+        d->incompleteTally.insert(i, 0);
+    }
+}
 
 List::~List()
 {
@@ -79,6 +87,31 @@ int List::position() const
     return d->position;
 }
 
+int List::incompleteTasks(int priority) const
+{
+    if (priority >= 0 && priority < d->incompleteTally.size())
+        return d->incompleteTally.value(priority);
+    else
+        return 0;
+}
+
+int List::taskCount() const
+{
+    return d->tasks.size();
+}
+
+RTM::Task *List::task(int row)
+{
+    RTM::Task *retval = 0;
+    if (row >= 0 && row < d->tasks.size())
+    {
+        QHash<RTM::TaskId, Task*>::iterator i = d->tasks.begin();
+        i += row;
+        retval = i.value();
+    }
+    return retval;
+}
+
 void List::setName(const QString& name) { 
   d->name = name; 
 }
@@ -101,6 +134,45 @@ void List::setSortOrder(List::SortOrder order) {
 
 void List::setPosition(int position) {
     d->position = position;
+}
+
+void List::setTasks(QList<Task *> &tasks)
+{
+    // Reset the list and tallies.
+    d->tasks.clear();
+    for (int i = 0; i <= 4; ++i)
+    {
+        d->incompleteTally.insert(i, 0);
+    }
+
+    foreach(RTM::Task* task, tasks)
+    {
+        addTask(task);
+    }
+}
+
+void List::addTask(Task *task)
+{
+    if (!d->tasks.contains(task->id()))
+    {
+        d->tasks.insert(task->id(), task);
+        if (!task->isCompleted() && !task->isDeleted())
+        {
+            d->incompleteTally[task->priority()]++;
+        }
+    }
+}
+
+void List::removeTask(Task *task)
+{
+    d->tasks.remove(task->id());
+    int priority = task->priority();
+    if (d->incompleteTally.value(priority) > 0 &&
+            !task->isCompleted() &&
+            !task->isDeleted())
+    {
+        d->incompleteTally[priority]--;
+    }
 }
 }
 #include "moc_list.cpp"

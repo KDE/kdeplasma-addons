@@ -55,7 +55,30 @@ public:
   QString filter() const;
   SortOrder sortOrder() const;
   int position() const;
-  
+
+  /**
+   * Get the number of incomplete tasks of a given priority.
+   *
+   * @param priority the priority to get the count for.
+   * @returns the number of incomplete tasks.
+   */
+  int incompleteTasks(int priority) const;
+
+  /**
+   * Get the total number of tasks for this list.
+   *
+   * @returns the number of tasks in this list.
+   */
+  int taskCount() const;
+
+  /**
+   * Get a task for a given row.
+   *
+   * @param row the index of the task in the list.
+   * @returns the task at the given row.
+   */
+  RTM::Task* task(int row);
+
   void setName(const QString &name);
   void setId(qulonglong id);
   void setSmart(bool smart);
@@ -63,7 +86,26 @@ public:
   void setSortOrder(SortOrder order);
   void setPosition(int position);
 
-  QHash<RTM::TaskId, RTM::Task*> tasks;
+  /**
+   * Set the tasks for this list.
+   *
+   * @param tasks the tasks for this list.
+   */
+  void setTasks(QList<RTM::Task*>& tasks);
+
+  /**
+   * Add a task to this list.
+   *
+   * @param task the task to add to the list.
+   */
+  void addTask(RTM::Task* task);
+
+  /**
+   * Remove a task from the list.
+   *
+   * @param task the task to remove.
+   */
+  void removeTask(RTM::Task* task);
 
 protected:
   List(RTM::Session* session);

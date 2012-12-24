@@ -113,7 +113,7 @@ class RTM::SessionPrivate {
     if (!online)
       return;
 
-    qDebug() << "Populating Smart List: " << list->name();
+    qDebug() << "Populating Smart List: " << list->name() << " with id " << list->id();
     // We do this next bit manually so it doesn't get auto-connected to taskUpdate()
     RTM::Request *smartListRequest = new RTM::Request("rtm.tasks.getList", q->apiKey(), q->sharedSecret());
     smartListRequest->addArgument("auth_token", q->token());
@@ -220,11 +220,8 @@ class RTM::SessionPrivate {
     reader.read();
     RTM::List* list = lists.value(id);
     if (list) {
-      list->tasks.clear();
-      foreach(RTM::Task* task, changedTasks) {
-        list->tasks.insert(task->id(), task);
-      }
-      changedLists.push_back(list);
+        list->setTasks(changedTasks);
+        changedLists.push_back(list);
     }
     applyChanges();
 

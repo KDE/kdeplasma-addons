@@ -320,9 +320,9 @@ void RTM::TasksReader::readTask(TempProps *props) {
 
   //qDebug() << "Adding Task: " << task->id() << " to list " << list->id() << "(" << list << ")";
   if (!task->isDeleted())
-    list->tasks.insert(task->id(), task);
+    list->addTask(task);
   else
-    list->tasks.remove(task->id());
+    list->removeTask(task);
 
   session->d->tasks.insert(task->id(), task);
 
