@@ -2,6 +2,7 @@
 Name=Calculator
 Name[ar]=آلة حاسبة
 Name[ast]=Calculadora
+Name[bs]=kalkulator
 Name[ca]=Calculadora
 Name[ca@valencia]=Calculadora
 Name[cs]=Kalkulačka
@@ -59,6 +60,7 @@ Name[zh_TW]=計算機
 Comment=Calculate simple sums
 Comment[ar]=احسب عمليات جمع بسيطة
 Comment[ast]=Calcular sumes simples
+Comment[bs]=Izračunajte jednostavne izraze
 Comment[ca]=Calcula sumes senzilles
 Comment[ca@valencia]=Calcula sumes senzilles
 Comment[cs]=Jednoduché sčítání

@@ -2,6 +2,7 @@
 Name=Microblogging
 Name[ar]=التدوين المصغر
 Name[ast]=Microblogging
+Name[bs]=Microblogging
 Name[ca]=Microblocs
 Name[ca@valencia]=Microblocs
 Name[cs]=Mikroblogování
@@ -53,6 +54,7 @@ Name[zh_TW]=Microblogging
 Comment=Update and view your microblog status.
 Comment[ar]=حدث و شاهد حالة تدويناتك.
 Comment[ast]=Anovar y ver l'estáu del to microblog.
+Comment[bs]=Ažurirajte i prikažite stanje svog mikrobloga.
 Comment[ca]=Actualitza i mostra l'estat del vostre microbloc.
 Comment[ca@valencia]=Actualitza i mostra l'estat del vostre microbloc.
 Comment[cs]=Aktualizujte a prohlížejte stav svého mikroblogování.

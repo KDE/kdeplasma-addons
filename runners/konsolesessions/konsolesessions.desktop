@@ -2,6 +2,7 @@
 Name=Konsole Sessions
 Name[ar]=جلسات كونسول
 Name[ast]=Sesiones de Konsole
+Name[bs]=Konzolne sesije
 Name[ca]=Sessions del Konsole
 Name[ca@valencia]=Sessions del Konsole
 Name[cs]=Sezení Konsole
@@ -55,6 +56,7 @@ Name[zh_TW]=Konsole 工作階段
 Comment=Matches Konsole Sessions
 Comment[ar]=تطابق جلسات كونسول
 Comment[ast]=Gueta sesiones de Konsole que concasen
+Comment[bs]=Odgovarajuće konzolne sesije
 Comment[ca]=Correspon amb sessions del Konsole
 Comment[ca@valencia]=Coincideix amb les sessions del Konsole
 Comment[cs]=Vyhledávání v sezeních Konsole

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Special Characters
+Name[bs]=Posebni znakovi
 Name[ca]=Caràcters especials
 Name[ca@valencia]=Caràcters especials
 Name[cs]=Zvláštní znaky
@@ -46,6 +47,7 @@ Name[zh_CN]=特殊字符
 Name[zh_TW]=特殊字元
 Icon=accessories-character-map
 Comment=Creates special characters from their hexadecimal codes
+Comment[bs]=Stvara posebne znakove iz heksadecimalnih kodova
 Comment[ca]=Crea caràcters especials a partir dels seus codis hexadecimals
 Comment[ca@valencia]=Crea caràcters especials a partir dels seus codis hexadecimals
 Comment[cs]=Vytváří speciální znaky z jejich hexadecimálních kódů

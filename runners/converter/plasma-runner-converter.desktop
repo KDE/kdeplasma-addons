@@ -2,6 +2,7 @@
 Name=Unit Converter
 Name[ar]=محول الوحدات
 Name[ast]=Conversor d'unidaes
+Name[bs]=Pretvarač mjernih jedinica
 Name[ca]=Convertidor d'unitats
 Name[ca@valencia]=Convertidor d'unitats
 Name[cs]=Převod jednotek
@@ -57,6 +58,7 @@ Name[zh_TW]=單位轉換器
 Comment=Convert values to different units
 Comment[ar]=حول قيمة الى وحدات مختلفة
 Comment[ast]=Convierte valores a distintes unidaes
+Comment[bs]=Pretvara vrijednosti u druge mjerne jedinice
 Comment[ca]=Converteix valors a diferents unitats
 Comment[ca@valencia]=Converteix valors a diferents unitats
 Comment[cs]=Převod jednotek

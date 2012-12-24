@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Qalculate!
 Name[ast]=Qalculate!
+Name[bs]=Qalculate!
 Name[ca]=Qalculate!
 Name[ca@valencia]=Qalculate!
 Name[cs]=Qalculate!
@@ -48,6 +49,7 @@ Name[x-test]=xxQalculate!xx
 Name[zh_CN]=计算器
 Name[zh_TW]=Qalculate!
 Comment=A powerful mathematical equation solver
+Comment[bs]=Moćni rijesavač matematičkih jednačina
 Comment[ca]=Una calculadora potent d'equacions matemàtiques
 Comment[ca@valencia]=Una calculadora potent d'equacions matemàtiques
 Comment[cs]=Mocný nástroj pro řešení matematických rovnic

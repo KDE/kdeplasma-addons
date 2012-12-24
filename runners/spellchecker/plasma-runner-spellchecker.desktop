@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Spell Checker
+Name[bs]=Provjera pravopisa
 Name[ca]=Corrector ortogràfic
 Name[ca@valencia]=Corrector ortogràfic
 Name[cs]=Kontrola pravopisu
@@ -45,6 +46,7 @@ Name[zh_TW]=拼字檢查器
 Comment=Check the spelling of a word
 Comment[ar]=تحقق من هجاء الكلمات
 Comment[ast]=Comprobar la ortografía d'una pallabra
+Comment[bs]=Provjeri pravopis riječi
 Comment[ca]=Comprova l'ortografia d'una paraula
 Comment[ca@valencia]=Comprova l'ortografia d'una paraula
 Comment[cs]=Kontrola pravopisu

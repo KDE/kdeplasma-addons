@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=KnowledgeBase
+Name[bs]=baza znanja
 Name[ca]=KnowledgeBase
 Name[ca@valencia]=KnowledgeBase
 Name[cs]=Databáze vědomostí
@@ -46,6 +47,7 @@ Name[x-test]=xxKnowledgeBasexx
 Name[zh_CN]=知识库
 Name[zh_TW]=知識庫
 Comment=Opendesktop Knowledgebase
+Comment[bs]=Baza znanja za Opendesktop
 Comment[ca]=Knowledgebase Opendesktop
 Comment[ca@valencia]=Knowledgebase Opendesktop
 Comment[cs]=Databáze vědomostí Opendesktop

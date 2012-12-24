@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Kopete Contacts
+Name[bs]=Kopete kontakti
 Name[ca]=Contactes del Kopete
 Name[ca@valencia]=Contactes del Kopete
 Name[cs]=Kontakty Kopete
@@ -41,6 +42,7 @@ Name[x-test]=xxKopete Contactsxx
 Name[zh_CN]=Kopete 联系人
 Name[zh_TW]=Kopete 聯絡人
 Comment=Search contacts from Kopete
+Comment[bs]=Traži kontakte iz Kopete
 Comment[ca]=Cerca contactes del Kopete
 Comment[ca@valencia]=Cerca contactes del Kopete
 Comment[cs]=Hledání kontaktů z Kopete

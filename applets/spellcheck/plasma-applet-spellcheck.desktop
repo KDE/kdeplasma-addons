@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Spell Check
+Name[bs]=Provjera pravopisa
 Name[ca]=Verificació ortogràfica
 Name[ca@valencia]=Verificació ortogràfica
 Name[cs]=Kontrola pravopisu
@@ -48,6 +49,7 @@ Name[zh_CN]=拼写检查
 Name[zh_TW]=拼字檢查
 
 Comment=Fast spell checking
+Comment[bs]=Brza provjera pravopisa
 Comment[ca]=Verificador ortogràfic ràpid
 Comment[ca@valencia]=Verificador ortogràfic ràpid
 Comment[cs]=Rychlá kontrola pravopisu
