@@ -56,7 +56,7 @@ void ListSource::update() {
   setData("smart", list->isSmart());
   setData("filter", list->filter());
   
-  foreach(RTM::Task *task, list->tasks)
+  foreach(RTM::Task *task, list->tasks())
     setData(QString::number(task->id()), task->name());
     
   checkForUpdate();

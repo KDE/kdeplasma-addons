@@ -79,6 +79,13 @@ public:
    */
   RTM::Task* task(int row);
 
+  /**
+   * Get all the tasks
+   *
+   * @returns the tasks as a list
+   */
+  QList<RTM::Task*> tasks() const;
+
   void setName(const QString &name);
   void setId(qulonglong id);
   void setSmart(bool smart);

@@ -112,6 +112,11 @@ RTM::Task *List::task(int row)
     return retval;
 }
 
+QList<Task *> List::tasks() const
+{
+    return d->tasks.values();
+}
+
 void List::setName(const QString& name) { 
   d->name = name; 
 }
