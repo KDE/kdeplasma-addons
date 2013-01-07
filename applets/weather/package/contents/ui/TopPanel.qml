@@ -42,6 +42,7 @@ PlasmaCore.FrameSvgItem {
             leftMargin: parent.width * 0.21
         }
         font.bold: true
+        color: theme.textColor
         text: model.location
         elide: Text.ElideRight
 
@@ -55,6 +56,7 @@ PlasmaCore.FrameSvgItem {
             left: locationLabel.left
             topMargin: parent.height * 0.6
         }
+        color: theme.textColor
         text: model.conditions
     }
 
@@ -66,6 +68,7 @@ PlasmaCore.FrameSvgItem {
             rightMargin: 5
         }
         font: locationLabel.font
+        color: theme.textColor
         text: model.temp
     }
 
@@ -76,6 +79,7 @@ PlasmaCore.FrameSvgItem {
             top: conditionLabel.top
         }
         font.pointSize: theme.smallestFont.pointSize
+        color: theme.textColor
         text: model.forecastTemps
     }
 }

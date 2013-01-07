@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=YouTube
+Name[bs]=YouTube
 Name[ca]=YouTube
 Name[cs]=YouTube
 Name[da]=YouTube
@@ -10,6 +11,7 @@ Name[et]=YouTube
 Name[fi]=YouTube
 Name[fr]=YouTube
 Name[ga]=YouTube
+Name[gl]=YouTube
 Name[hu]=YouTube
 Name[it]=YouTube
 Name[kk]=YouTube
@@ -38,6 +40,7 @@ Name[zh_CN]=YouTube
 Name[zh_TW]=YouTube
 
 Comment=Matches YouTube queries
+Comment[bs]=Odgovara YouTube upitima
 Comment[ca]=Correspon amb consultes a YouTube
 Comment[cs]=Vyhledávání dotazů YouTube
 Comment[da]=Matcher YouTube-forespørgsler
@@ -47,6 +50,7 @@ Comment[es]=Busca consultas de YouTube que coincidan
 Comment[et]=YouTube'i päringud
 Comment[fi]=Täsmää YouTube-hakuihin
 Comment[fr]=Correspond aux requêtes Youtube
+Comment[gl]=Realiza consultar en YouTube.
 Comment[hu]=YouTube keresés
 Comment[it]=Verifica le interrogazioni di YouTube
 Comment[kk]=YouTube сұраныстарды салыстыру
