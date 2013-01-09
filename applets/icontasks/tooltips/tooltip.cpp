@@ -85,19 +85,6 @@ public:
         }
         m_document->adjustSize();
 
-        m_haloRects.clear();
-        QTextLayout *layout = m_document->begin().layout();
-        //layout->setPosition(QPointF(textRect.x(), textBoundingRect->y()));
-        QTextLine line;
-        for (int i = 0; i < layout->lineCount(); ++i) {
-            line = layout->lineAt(i);
-
-            // Add halo rect only when a non empty line is found
-            if (line.naturalTextWidth()) {
-                m_haloRects.append(line.naturalTextRect().translated(layout->position().toPoint()).toRect().translated(m_margin, m_margin));
-            }
-        }
-
         update();
     }
 
@@ -111,14 +98,6 @@ public:
 
     void paintEvent(QPaintEvent *event) {
         QPainter p(this);
-
-        if (Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).value() < 128) {
-            foreach (const QRectF & rect, m_haloRects) {
-                Plasma::PaintUtils::drawHalo(&p, rect);
-            }
-
-            p.translate(m_margin, m_margin);
-        }
         m_document->drawContents(&p, event->rect());
     }
 
@@ -146,7 +125,6 @@ private:
     ToolTip *m_toolTip;
     QTextDocument *m_document;
     QString m_anchor;
-    QList<QRectF> m_haloRects;
     static const int m_margin = 6;
 };
 
