@@ -48,6 +48,7 @@
 #include "plasma/theme.h"
 #include "plasma/view.h"
 #include "tooltip_p.h"
+#include "dialogshadows_p.h"
 
 using namespace Plasma;
 
@@ -61,6 +62,7 @@ class ToolTipManagerPrivate
 public :
     ToolTipManagerPrivate(ToolTipManager *manager)
         : q(manager),
+          shadow(new DialogShadows(q, "widgets/tooltip")),
           currentWidget(0),
           showTimer(new QTimer(manager)),
           hideTimer(new QTimer(manager)),
@@ -74,8 +76,10 @@ public :
           previewHeight(ToolTipManager::DEF_PREVIEW_SIZE*PREVIEW_SCALE) {
     }
 
-    ~ToolTipManagerPrivate() {
+    ~ToolTipManagerPrivate()
+    {
         if (!QCoreApplication::closingDown()) {
+            shadow->removeWindow(tipWidget);
             delete tipWidget;
         }
     }
@@ -95,6 +99,7 @@ public :
     void hideTipWidget();
 
     ToolTipManager *q;
+    DialogShadows *shadow;
     QGraphicsWidget *currentWidget;
     QTimer *showTimer;
     QTimer *hideTimer;
@@ -112,8 +117,9 @@ public :
 //TOOLTIP IMPLEMENTATION
 class ToolTipManagerSingleton
 {
-public:
-    ToolTipManagerSingleton() {
+    public:
+    ToolTipManagerSingleton()
+    {
     }
     ToolTipManager self;
 };
@@ -281,10 +287,16 @@ void ToolTipManager::setContent(QGraphicsWidget *widget, const ToolTipContent &d
             d->tipWidget->setContent(widget, data);
             d->tipWidget->prepareShowing();
 
-            if (m_corona) {
-                //look if the data prefers aother graphicswidget, otherwise use the one used as event catcher
-                QGraphicsWidget *referenceWidget = data.graphicsWidget() ? data.graphicsWidget() : widget;
-                d->tipWidget->moveTo(m_corona->popupPosition(referenceWidget, d->tipWidget->size(), Qt::AlignCenter));
+            //look if the data prefers aother graphicswidget, otherwise use the one used as event catcher
+            QGraphicsWidget *referenceWidget = data.graphicsWidget() ? data.graphicsWidget() : widget;
+            Corona *corona = qobject_cast<Corona *>(referenceWidget->scene());
+            if (!corona) {
+                // fallback to the corona we were given
+                corona = m_corona;
+            }
+
+            if (corona) {
+                d->tipWidget->moveTo(corona->popupPosition(referenceWidget, d->tipWidget->size(), Qt::AlignCenter));
             }
         }
     }
@@ -300,14 +312,14 @@ void ToolTipManager::setState(ToolTipManager::State state)
     d->state = state;
 
     switch (state) {
-    case Activated:
-        break;
-    case Deactivated:
-        d->clearTips();
-        //fallthrough
-    case Inhibited:
-        d->resetShownState();
-        break;
+        case Activated:
+            break;
+        case Deactivated:
+            d->clearTips();
+            //fallthrough
+        case Inhibited:
+            d->resetShownState();
+            break;
     }
 }
 
@@ -341,6 +353,8 @@ void ToolTipManagerPrivate::createTipWidget()
     }
 
     tipWidget = new ToolTip(0);
+    shadow->addWindow(tipWidget);
+
     QObject::connect(tipWidget, SIGNAL(activateWindowByWId(WId, Qt::MouseButtons, Qt::KeyboardModifiers, QPoint)),
                      q, SIGNAL(windowPreviewActivated(WId, Qt::MouseButtons, Qt::KeyboardModifiers, QPoint)));
     QObject::connect(tipWidget, SIGNAL(closeWindowByWId(WId, Qt::MouseButtons, Qt::KeyboardModifiers, QPoint)),
@@ -355,6 +369,7 @@ void ToolTipManagerPrivate::hideTipWidget()
 {
     if (tipWidget) {
         tipWidget->hide();
+        shadow->removeWindow(tipWidget);
         tipWidget->deleteLater();
         tipWidget = 0;
     }
@@ -461,9 +476,15 @@ void ToolTipManagerPrivate::showToolTip()
     clickable = tooltip.value().isClickable();
     tipWidget->setContent(currentWidget, tooltip.value());
     tipWidget->prepareShowing();
-    if (q->m_corona) {
-        QGraphicsWidget *referenceWidget = tooltip.value().graphicsWidget() ? tooltip.value().graphicsWidget() : currentWidget;
-        tipWidget->moveTo(q->m_corona->popupPosition(referenceWidget, tipWidget->size(), Qt::AlignCenter));
+    QGraphicsWidget *referenceWidget = tooltip.value().graphicsWidget() ? tooltip.value().graphicsWidget() : currentWidget;
+    Corona *corona = qobject_cast<Corona *>(referenceWidget->scene());
+    if (!corona) {
+        // fallback to the corona we were given
+        corona = q->m_corona;
+    }
+
+    if (corona) {
+        tipWidget->moveTo(corona->popupPosition(referenceWidget, tipWidget->size(), Qt::AlignCenter));
     }
     tipWidget->show();
     isShown = true;  //ToolTip is visible
