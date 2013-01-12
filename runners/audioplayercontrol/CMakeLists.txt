@@ -1,4 +1,5 @@
 set(krunner_audioplayercontrol_SRCS
+    imageiconengine.cpp
     audioplayercontrolrunner.cpp
 )
 
@@ -11,7 +12,7 @@ kde4_add_plugin(kcm_krunner_audioplayercontrol ${kcm_krunner_audioplayercontrol_
 target_link_libraries(kcm_krunner_audioplayercontrol
     ${KDE4_KDECORE_LIBS}
     ${KDE4_KDEUI_LIBS}
-    ${KDE4_KCMUTILS_LIBS} 
+    ${KDE4_KCMUTILS_LIBS}
     ${QT_QTCORE_LIBRARY}
     ${QT_QTGUI_LIBRARY}
     )

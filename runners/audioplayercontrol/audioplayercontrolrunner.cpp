@@ -19,6 +19,7 @@
  */
 
 #include "audioplayercontrolrunner.h"
+#include "imageiconengine.h"
 
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusMetaType>
@@ -507,13 +508,22 @@ QList<Plasma::QueryMatch> AudioPlayerControlRunner::searchCollectionFor(const QS
         QString artist = map[QLatin1String( "artist" )].toString();
         QString title = map[QLatin1String( "title" )].toString();
         QString url = map[QLatin1String( "location" )].toString();
+        QUrl arturl = map[QLatin1String( "arturl" )].toUrl();
         double relevance = map[QLatin1String( "rating" )].toInt()*0.2;
         //QString album = map["xesam:album"].toString();
 
         data << url << actionNames;
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::PossibleMatch);
-        match.setIcon(KIcon( QLatin1String( "audio-x-generic" )));
+
+        if (arturl.isValid() && arturl.isLocalFile()) {
+            const QImage image = QImage(arturl.toLocalFile());
+            QIcon icon(new ImageIconEngine(image));
+            match.setIcon(icon);
+        } else {
+            match.setIcon(KIcon( QLatin1String( "audio-x-generic" )));
+        }
+
         match.setText(QString::fromLatin1( "%1 - %2").arg(artist).arg(title));
         match.setData(data);
         match.setRelevance(relevance);
