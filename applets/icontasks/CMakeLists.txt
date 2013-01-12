@@ -2,7 +2,9 @@ set(tasks_SRCS
     windowtaskitem.cpp tasks.cpp taskitemlayout.cpp abstracttaskitem.cpp taskgroupitem.cpp applauncheritem.cpp
     jobmanager.cpp dockmanager.cpp dockitem.cpp dockhelper.cpp dockconfig.cpp mediabuttons.cpp unity.cpp unityitem.cpp 
     dbusstatus.cpp recentdocuments.cpp
-    tooltips/tooltipcontent.cpp tooltips/tooltip.cpp tooltips/tooltipmanager.cpp tooltips/windowpreview.cpp)
+    tooltips/tooltipcontent.cpp tooltips/tooltip.cpp tooltips/tooltipmanager.cpp tooltips/windowpreview.cpp
+    tooltips/dialogshadows.cpp tooltips/dialogshadows_p.h
+    )
 
 # Generate DBUS XML files, would like to use
 # qt4_generate_dbus_interface(${CMAKE_CURRENT_SOURCE_DIR}/dockmanager.h net.launchpad.DockManager.xml)

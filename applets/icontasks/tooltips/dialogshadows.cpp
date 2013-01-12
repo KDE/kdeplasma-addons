@@ -123,23 +123,6 @@ void DialogShadows::removeWindow(const QWidget *window)
     }
 }
 
-void DialogShadows::getMargins(int& top, int& left, int& right, int& bottom, Plasma::FrameSvg::EnabledBorders enabledBorders)
-{
-    if (!d->data.contains(enabledBorders))
-        d->setupData(enabledBorders);
-    
-    int s = d->data[enabledBorders].size();
-    if (d->data[enabledBorders].size() > 4) {
-        top = d->data[enabledBorders][s - 4];
-        left = d->data[enabledBorders][s - 3];
-        right = d->data[enabledBorders][s - 2];
-        bottom = d->data[enabledBorders][s - 1];
-    }
-    else {
-        top = left = right = bottom = 1;
-    }
-}
-
 void DialogShadows::Private::windowDestroyed(QObject *deletedObject)
 {
     m_windows.remove(static_cast<QWidget *>(deletedObject));
@@ -178,10 +161,14 @@ void DialogShadows::Private::initPixmap(const QString &element)
 
 QPixmap DialogShadows::Private::initEmptyPixmap(const QSize &size)
 {
+#ifdef Q_WS_X11
     Pixmap emptyXPix = XCreatePixmap(QX11Info::display(), QX11Info::appRootWindow(), size.width(), size.height(), 32);
     QPixmap tempEmptyPix = QPixmap::fromX11Pixmap(emptyXPix, QPixmap::ExplicitlyShared);
     tempEmptyPix.fill(Qt::transparent);
     return tempEmptyPix;
+#else
+    return QPixmap();
+#endif
 }
 
 void DialogShadows::Private::setupPixmaps()
@@ -395,5 +382,4 @@ bool DialogShadows::enabled() const
 }
 
 #include "dialogshadows_p.moc"
-
 

@@ -356,7 +356,6 @@ void WindowPreview::paintEvent(QPaintEvent *e)
     const QSize delta(left + right, top + bottom);
     const QPoint topLeft(left, top);
     bool havePreviews = WindowEffects::isEffectAvailable(WindowEffects::WindowPreview);
-    bool drawHalo = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).value() < 128;
     int i = 0;
 
     QFont f(font());
@@ -389,17 +388,6 @@ void WindowPreview::paintEvent(QPaintEvent *e)
                   : i18nc("Which virtual desktop a window is currently on", "(On %1)", KWindowSystem::desktopName(m_windows[i].desktop));
         }
 
-        if (drawHalo) {
-            bool rtl = QApplication::layoutDirection() == Qt::RightToLeft;
-            int haloWidth = qMin(rects.text.width(), fm.width(s));
-            Plasma::PaintUtils::drawHalo(&painter, QRectF(rtl ? rects.text.right() - (0.5 + haloWidth) : rects.text.x() + 0.5,
-                                         rects.text.y() + 0.5, haloWidth - 1, rects.text.height() - 1));
-            if (!sub.isEmpty()) {
-                haloWidth = qMin(rects.sub.width(), smallFm.width(sub));
-                Plasma::PaintUtils::drawHalo(&painter, QRectF(rtl ? rects.sub.right() - (0.5 + haloWidth) : rects.sub.x() + 0.5,
-                                             rects.sub.y() + 0.5, haloWidth - 1, rects.sub.height() - 1));
-            }
-        }
         painter.drawText(rects.text, s, QTextOption(Qt::AlignVCenter));
         if (m_windows[i].attention) {
             painter.drawText(rects.text.adjusted(1, 0, 1, 0), s, QTextOption(Qt::AlignVCenter));
@@ -420,12 +408,6 @@ void WindowPreview::paintEvent(QPaintEvent *e)
         QString s(i18n("Plus %1 more...", m_moreWindows));
         f.setItalic(true);
         painter.setFont(f);
-        if (drawHalo) {
-            bool rtl = QApplication::layoutDirection() == Qt::RightToLeft;
-            int haloWidth = qMin(textRect.width(), fm.width(s));
-            Plasma::PaintUtils::drawHalo(&painter, QRectF(rtl ? textRect.right() - (0.5 + haloWidth) : textRect.x() + 0.5,
-                                         textRect.y() + 0.5, haloWidth - 1, textRect.height() - 1));
-        }
         painter.drawText(textRect, s, QTextOption(Qt::AlignVCenter));
     }
 }

@@ -36,7 +36,6 @@ public:
 
     void addWindow(const QWidget *window, Plasma::FrameSvg::EnabledBorders enabledBorders = Plasma::FrameSvg::AllBorders);
     void removeWindow(const QWidget *window);
-    void getMargins(int& top, int& left, int& right, int& bottom, Plasma::FrameSvg::EnabledBorders enabledBorders = Plasma::FrameSvg::AllBorders);
 
     bool enabled() const;
 
@@ -49,5 +48,4 @@ private:
 };
 
 #endif
-
 
