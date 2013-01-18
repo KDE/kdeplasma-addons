@@ -78,22 +78,24 @@ Item {
             }
         }
         function updateText() {
+            var newText = source.title;
             if (metadataLine.step == 1) {
                 if (showArtist && source.artist != '') {
-                    text = i18nc("What artist is this track by", "by %1", source.artist);
+                    newText = i18nc("What artist is this track by", "by %1", source.artist);
                 } else {
                     metadataLine.step = 2;
                 }
             }
             if (metadataLine.step == 2) {
                 if (showAlbum && source.album != '') {
-                    text = i18nc("What album is this track on", "on %1", source.album);
+                    newText = i18nc("What album is this track on", "on %1", source.album);
                 } else {
                     metadataLine.step = 0;
                 }
             }
-            if (metadataLine.step == 0) {
-                text = source.title;
+            // prevent fading the text if it hasn't changed
+            if (text != newText) {
+                text = newText;
             }
         }
         Timer {
