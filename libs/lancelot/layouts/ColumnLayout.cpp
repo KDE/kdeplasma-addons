@@ -113,6 +113,10 @@ public:
         animate = !Global::self()->config("Animation", "disableAnimations", false)
                 && Global::self()->config("Animation", "columnLayoutAnimaiton", true);
     }
+    ~Private()
+    {
+        delete sizer;
+    }
 
     QPropertyAnimation * animator(QGraphicsWidget * item, const QByteArray & property)
     {
