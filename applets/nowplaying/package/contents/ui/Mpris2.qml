@@ -33,6 +33,12 @@ PlasmaCore.DataSource {
     property string playbackStatus: getHasData() ? data["@multiplex"]["PlaybackStatus"] : 'unknown'
     property bool canControl: getHasData() && data["@multiplex"]["CanControl"]
     property int trackLength: getMetadata("mpris:length", 0) / 1000
+    property string logo: getHasIcon() ? data["@multiplex"]["Desktop Icon Name"] : ''
+
+    function getHasIcon() {
+        return data["@multiplex"] != undefined
+            && data["@multiplex"]["Desktop Icon Name"] != undefined;
+    }
 
     function getHasData() {
         return data["@multiplex"] != undefined

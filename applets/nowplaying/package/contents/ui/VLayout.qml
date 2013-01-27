@@ -44,7 +44,7 @@ Item {
 
         AlbumArt {
             id: albumArt
-            artUrl: source.artUrl
+            source: source
             anchors.fill: parent
         }
 

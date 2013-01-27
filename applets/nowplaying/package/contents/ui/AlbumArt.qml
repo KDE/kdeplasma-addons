@@ -23,28 +23,51 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 
 Item {
     id: root
-    property alias artUrl: realArt.source
+    property Mpris2 source;
 
-    implicitWidth: realArt.visible ? realArt.implicitWidth : noArtItem.implicitWidth
-    implicitHeight: realArt.visible ? realArt.implicitHeight : noArtItem.implicitHeight
-
-    Image {
-        id: realArt
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        visible: (status == Image.Ready)
+    implicitWidth: {
+        if (realArt.visible) {
+            realArt.implicitWidth;
+        } else if (logoArtItem.visible) {
+            logoArtItem.implicitWidth
+        } else {
+            noArtItem.implicitWidth
+        }
     }
+    implicitHeight: {
+        if (realArt.visible) {
+            realArt.implicitHeight;
+        } else if (logoArtItem.visible) {
+            logoArtItem.implicitHeight
+        } else {
+            noArtItem.implicitHeight
+        }
+    }
+
+
     PlasmaCore.Svg {
         id: noArtSvg
         imagePath: plasmoid.file("images", "nocover.svgz")
     }
     // TODO: figure out how to centre this vertically
-    // TODO: use the media player logo, if available (from the desktop file)
     PlasmaCore.SvgItem {
         id: noArtItem
         anchors.fill: parent
         svg: noArtSvg
-        visible: !realArt.visible
+        visible: !realArt.visible && !logoArtItem.visible
+    }
+    PlasmaCore.IconItem {
+        id: logoArtItem
+        anchors.fill: parent
+        visible: !realArt.visible && root.source.logo != ''
+        source: root.source.logo
+    }
+    Image {
+        id: realArt
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectFit
+        visible: (status == Image.Ready)
+        source: root.source.artUrl
     }
 }
 
