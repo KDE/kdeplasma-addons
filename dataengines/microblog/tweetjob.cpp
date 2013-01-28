@@ -61,17 +61,24 @@ void TweetJob::start()
 {
     kDebug() << "starting job" << m_url;
     QByteArray data;
+    QOAuth::ParamMap params;
 
     data = "source=kdemicroblog";
+    params.insert("source", "kdemicroblog");
     {
         QMapIterator<QString, QVariant> i(m_parameters);
         while (i.hasNext()) {
             i.next();
             if (!i.value().toString().isEmpty()) {
                 if (i.key() == "status") {
-                    data = data.append("&status=" + i.value().toString().toUtf8().toPercentEncoding());
+                    const QByteArray status = i.value().toString().toUtf8().toPercentEncoding();
+                    params.insert("status", status);
+                    data = data.append("&status=" + status);
                 } else {
-                    data = data.append(QString("&"+i.key()+"="+i.value().toString()).toLatin1());
+                    const QByteArray key = i.key().toLatin1();
+                    const QByteArray value = i.value().toString().toLatin1();
+                    params.insert(key, value);
+                    data = data.append("&"+key+"="+value);
                 }
             }
         }
@@ -79,24 +86,6 @@ void TweetJob::start()
     KIO::Job *job = KIO::http_post(m_url, data, KIO::HideProgressInfo);
     job->addMetaData("content-type", "Content-Type: application/x-www-form-urlencoded");
 
-    QOAuth::ParamMap params;
-    params.insert("source", "kdemicroblog");
-
-    {
-        QMapIterator<QString, QVariant> i(m_parameters);
-        while (i.hasNext()) {
-            i.next();
-            if (!i.value().toString().isEmpty()) {
-                if (i.key() == "status") {
-                    params.insert("status", i.value().toString().toUtf8().toPercentEncoding());
-                    data = data.append("&status=" + i.value().toString().toUtf8().toPercentEncoding());
-                } else {
-                    params.insert(i.key().toLatin1(), i.value().toString().toLatin1());
-                    data = data.append(QString("&"+i.key()+"="+i.value().toString()).toLatin1());
-                }
-            }
-        }
-    }
     m_source->oAuthHelper()->sign(job, m_url.pathOrUrl(), params, KOAuth::POST);
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)),
             this, SLOT(recv(KIO::Job*,QByteArray)));
