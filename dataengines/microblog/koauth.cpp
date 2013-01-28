@@ -589,10 +589,10 @@ void KOAuth::forgetAccount(const QString& user, const QString& serviceUrl)
 
 void KOAuth::saveCredentials() const
 {
-    KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
-                                           0, KWallet::Wallet::Synchronous);
+    QSharedPointer<KWallet::Wallet> wallet(KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
+                                           0, KWallet::Wallet::Synchronous));
     const QString folder("Plasma-MicroBlog");
-    if (wallet->isOpen() &&
+    if (wallet && wallet->isOpen() &&
         (wallet->hasFolder(folder) ||
          wallet->createFolder(folder)) &&
          wallet->setFolder(folder)) {
