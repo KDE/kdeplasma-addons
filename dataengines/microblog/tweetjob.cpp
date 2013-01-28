@@ -77,6 +77,7 @@ void TweetJob::start()
         }
     }
     KIO::Job *job = KIO::http_post(m_url, data, KIO::HideProgressInfo);
+    job->addMetaData("content-type", "Content-Type: application/x-www-form-urlencoded");
 
     QOAuth::ParamMap params;
     params.insert("source", "kdemicroblog");
