@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Ascii Animals
 Name[ca]=Animals ASCII
+Name[ca@valencia]=Animals ASCII
 Name[cs]=Zvířata v ASCII
 Name[da]=Ascii-dyr
 Name[de]=Ascii-Tiere
@@ -34,6 +35,7 @@ Name[zh_CN]=字符画动物
 Name[zh_TW]=Ascii 動物
 Comment=Unsure if cute or just nerdy
 Comment[ca]=No se sap si és bonic o només setciències
+Comment[ca@valencia]=No se sap si és bonic o només setciències
 Comment[da]=Er det sødt eller bare nørdet?
 Comment[de]=Nett oder nur seltsam
 Comment[el]=Χαριτωμένο ή απλά βαρετό;
