@@ -123,6 +123,7 @@ QString RTM::Request::requestUrl()
   switch(d->m_state) {
     case RTM::Mutable:
       sign();
+      break;
     case RTM::Hashed:
       unsign();
       sign();

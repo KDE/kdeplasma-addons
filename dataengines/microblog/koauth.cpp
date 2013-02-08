@@ -471,16 +471,12 @@ QByteArray KOAuth::paramsToString(const QOAuth::ParamMap &parameters, ParsingMod
 QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method, const QByteArray &token,
                            const QByteArray &tokenSecret, QOAuth::ParamMap *params)
 {
-    // create nonce
-    QStringList plist;
-    foreach (const QByteArray &ba, params->keys()) {
-        plist << ba;
-    }
-
     if (!QCA::isSupported("hmac(sha1)")) {
         kError() << "Your QCA2 does not support the HMAC-SHA1 algorithm. Signing requests using OAuth does not work";
         return QByteArray();
     }
+
+    // create nonce
     QCA::InitializationVector iv(16);
     QByteArray nonce = iv.toByteArray().toHex();
 
@@ -502,11 +498,6 @@ QByteArray KOAuth::createSignature(const QString &requestUrl, HttpMethod method,
     // append token only if it is defined (requestToken() doesn't use a token at all)
     if (!token.isEmpty()) {
         params->insert("oauth_token", token);
-    }
-
-    plist.clear();
-    foreach (const QByteArray ba, params->keys()) {
-        plist << ba;
     }
 
     foreach (const QByteArray &_b, params->keys()) {
@@ -589,10 +580,10 @@ void KOAuth::forgetAccount(const QString& user, const QString& serviceUrl)
 
 void KOAuth::saveCredentials() const
 {
-    KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
-                                           0, KWallet::Wallet::Synchronous);
+    QSharedPointer<KWallet::Wallet> wallet(KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
+                                           0, KWallet::Wallet::Synchronous));
     const QString folder("Plasma-MicroBlog");
-    if (wallet->isOpen() &&
+    if (wallet && wallet->isOpen() &&
         (wallet->hasFolder(folder) ||
          wallet->createFolder(folder)) &&
          wallet->setFolder(folder)) {

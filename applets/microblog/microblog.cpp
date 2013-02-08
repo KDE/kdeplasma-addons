@@ -614,7 +614,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
             QPixmap pm = data[user].value<QPixmap>();
 
             if (!pm.isNull()) {
-                if (user == m_username) {
+                if (!user.compare(m_username, Qt::CaseInsensitive)) {
                     QAction *profile = new QAction(QIcon(pm), m_username, this);
                     profile->setData(m_username);
 
