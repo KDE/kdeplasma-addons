@@ -137,7 +137,7 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
     QString description = i18n("Converts the value of :q: when :q: is made up of "
                                "\"value unit [>, to, as, in] unit\". You can use the "
                                "Unit converter applet to find all available units.");
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "=:q:" ), description));
+    addSyntax(Plasma::RunnerSyntax(QLatin1String(":q:"), description));
 }
 
 ConverterRunner::~ConverterRunner()
