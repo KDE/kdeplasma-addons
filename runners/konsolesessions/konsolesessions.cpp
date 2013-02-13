@@ -91,7 +91,7 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
         return;
     }
 
-    const QString term = context.query();
+    QString term = context.query();
     if (term.length() < 3) {
         return;
     }
@@ -109,8 +109,9 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
             context.addMatch(term, match);
         }
     } else {
-        // we could just return here, but the kate hackers might have a session kate,
-        // so everybody else will suffer. And rightfully so! ;-)
+        if (term.startsWith(QLatin1String("konsole "), Qt::CaseInsensitive)) {
+            term.remove(0, 8);
+        }
         QHashIterator<QString, QString> i(m_sessions);
         while (i.hasNext()) {
             if (!context.isValid()) {
@@ -118,6 +119,7 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
             }
 
             i.next();
+            kDebug() << "checking" << term << i.value();
             if (i.value().contains(term, Qt::CaseInsensitive)) {
                 Plasma::QueryMatch match(this);
                 match.setType(Plasma::QueryMatch::PossibleMatch);
