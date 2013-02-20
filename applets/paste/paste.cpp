@@ -35,7 +35,7 @@
 #include <Plasma/Theme>
 
 Paste::Paste(QObject *parent, const QVariantList &args)
-    : Plasma::PopupApplet(parent, args), m_snippetConfig(0)
+    : Plasma::PopupApplet(parent, args), m_list(0), m_snippetConfig(0)
 {
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);

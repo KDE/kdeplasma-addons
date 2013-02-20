@@ -46,7 +46,7 @@ KateSessions::KateSessions(QObject *parent, const QVariantList& args)
     s.addExampleQuery(QLatin1String("kate :q:"));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax(QLatin1String("kate"), i18n("Lists all the Kate editor sessions in your account.")));
+    setDefaultSyntax(Plasma::RunnerSyntax(QLatin1String("kate"), i18n("Lists all the Kate editor sessions in your account.")));
 
     connect(this, SIGNAL(prepare()), SLOT(slotPrepare()));
     connect(this, SIGNAL(teardown()), SLOT(slotTeardown()));
