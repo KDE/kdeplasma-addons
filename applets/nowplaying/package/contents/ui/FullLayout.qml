@@ -24,8 +24,8 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Item {
     id: root
 
-    property int minimumWidth: albumArt.width + controls.anchors.leftMargin + controls.implicitWidth + 5
-    property int minimumHeight: metadataPane.implicitHeight + progressBar.height + metadataPane.anchors.bottomMargin
+    property int minimumWidth: albumArt.width + controls.anchors.leftMargin + controls.implicitWidth + 25
+    property int minimumHeight: metadataPane.implicitHeight + progressBar.height + metadataPane.anchors.bottomMargin + 75
 
     Component.onCompleted: {
         plasmoid.addEventListener('ConfigChanged', function(){
@@ -49,7 +49,7 @@ Item {
                 top: parent.top
                 left: parent.left
                 bottom: progressBar.top
-                bottomMargin: 5
+                margins: 10
             }
             width: (visible ? height : 0)
         }
@@ -59,7 +59,7 @@ Item {
             anchors {
                 top: parent.top
                 left: albumArt.right
-                leftMargin: 5
+                leftMargin: 10
                 right: parent.right
                 bottom: progressBar.top
                 bottomMargin: 5
@@ -73,8 +73,9 @@ Item {
                 bottom: parent.bottom
                 left: parent.left
                 right: parent.right
+                margins: 10
             }
-            height: 10
+            height: 15
             source: source
         }
 

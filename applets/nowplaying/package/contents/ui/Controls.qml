@@ -24,10 +24,29 @@ import "../code/service.js" as Control
 
 Row {
     id: root
-
+    
+    property int controlSize: theme.largeIconSize;
+    
     property Mpris2 source;
-
+    
+       PlasmaCore.Theme {
+        id: theme
+    }
     PlasmaComponents.ToolButton {
+        width: controlSize
+        height: controlSize
+        id: prevButton
+        iconSource: "media-skip-backward"
+        onClicked: {
+            Control.callCommand('Previous');
+        }
+        Component.onCompleted: {
+            Control.associateItem(prevButton, 'Previous');
+        }
+    }
+    PlasmaComponents.ToolButton {
+        width: controlSize
+        height: controlSize
         id: playPauseButton
         property string operation: (source.playbackStatus == 'Playing' ? 'Pause' : 'Play')
         iconSource: (source.playbackStatus == 'Playing' ? "media-playback-pause" : "media-playback-start")
@@ -42,6 +61,8 @@ Row {
         }
     }
     PlasmaComponents.ToolButton {
+        width: controlSize
+        height: controlSize
         id: stopButton
         iconSource: "media-playback-stop"
         onClicked: {
@@ -52,16 +73,8 @@ Row {
         }
     }
     PlasmaComponents.ToolButton {
-        id: prevButton
-        iconSource: "media-skip-backward"
-        onClicked: {
-            Control.callCommand('Previous');
-        }
-        Component.onCompleted: {
-            Control.associateItem(prevButton, 'Previous');
-        }
-    }
-    PlasmaComponents.ToolButton {
+        width: controlSize
+        height: controlSize
         id: nextButton
         iconSource: "media-skip-forward"
         onClicked: {
