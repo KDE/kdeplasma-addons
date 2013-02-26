@@ -330,8 +330,8 @@ void SystemLoadViewer::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configUpdated()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configUpdated()));
 
-    parent->addPage(widGeneral, "General", icon(), QString(), false);
-    parent->addPage(widColours, "Colours", icon(), QString(), false);
+    parent->addPage(widGeneral, i18nc("@title:group General options", "General"), icon(), QString(), false);
+    parent->addPage(widColours, i18nc("@title:group", "Colors"), icon(), QString(), false);
 
     connect(uiGeneral.chkIsVertical, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
     connect(uiGeneral.chkShowAllProcessors, SIGNAL(toggled(bool)), parent, SLOT(settingsModified()));
