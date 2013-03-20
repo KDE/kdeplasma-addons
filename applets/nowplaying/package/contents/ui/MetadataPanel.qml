@@ -25,7 +25,7 @@ Item {
     id: root
 
     property Mpris2 source
-    property int contentLeftOffset: Math.max(byLabel.width, onLabel.width) + 3
+    property int contentLeftOffset: 3
     property bool showArtist: true
     property bool showAlbum: true
 
