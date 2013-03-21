@@ -46,6 +46,7 @@ WeatherListView {
                     leftMargin: 2
                     verticalCenter: parent.verticalCenter
                 }
+                color: theme.textColor
                 text: rowData.text
             }
         }
