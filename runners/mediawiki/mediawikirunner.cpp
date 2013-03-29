@@ -135,9 +135,7 @@ void MediaWikiRunner::run(const Plasma::RunnerContext &context, const Plasma::Qu
     kDebug() << "Open MediaWiki page " << wikiurl;
 
     if (!wikiurl.isEmpty()) {
-        QStringList args;
-        args << "openURL" << wikiurl;
-        KToolInvocation::kdeinitExec("kfmclient", args);
+        KToolInvocation::invokeBrowser(wikiurl, "");
     }
 }
 
