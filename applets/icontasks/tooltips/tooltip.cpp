@@ -288,7 +288,6 @@ ToolTip::ToolTip(QWidget *parent)
     mainLayout->addLayout(mediaHBoxLayout);
 
     setLayout(mainLayout);
-    setProperty("_KDE_NET_WM_SKIP_SHADOW", true); // Prevent oxygen shadows - we're not really a Plasma::ToolTip so need to do this :-(
 }
 
 ToolTip::~ToolTip()
