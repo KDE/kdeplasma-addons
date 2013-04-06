@@ -458,6 +458,16 @@ void Pastebin::refreshConfigDialog()
     uiConfig.imageServer->addItems(m_imgServers.keys());
 }
 
+QString Pastebin::getDefaultTextServer()
+{
+    QString defaultServer = "paste.kde.org";
+    if ( m_txtServers.contains(defaultServer) ) {
+	return defaultServer;
+    } else {
+	return m_txtServers.keys().at(0);
+    }
+}
+
 void Pastebin::createConfigurationInterface(KConfigDialog *parent)
 {
     KConfigGroup cg = config();
@@ -472,7 +482,7 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     connect(uiConfig.ghnsButton, SIGNAL(clicked()), this, SLOT(getNewStuff()));
 
     refreshConfigDialog();
-    uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", m_txtServers.keys().at(0)));
+    uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", getDefaultTextServer()));
     uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", m_imgServers.keys().at(0)));
     uiConfig.historySize->setValue(m_historySize);
     
@@ -723,7 +733,7 @@ void Pastebin::postContent(QString text, const QImage& imageData)
 
     KConfigGroup cg = config();
     // This is needed to provide smooth transition between old config and new one
-    const QString txtProvider = cg.readEntry("TextProvider", m_txtServers.keys().at(0));
+    const QString txtProvider = cg.readEntry("TextProvider", getDefaultTextServer());
     const QString imgProvider = cg.readEntry("ImageProvider", m_imgServers.keys().at(0));
 
     bool isTemporary = false;

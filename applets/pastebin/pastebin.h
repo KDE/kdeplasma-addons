@@ -133,6 +133,7 @@ private:
 
     void setInteractionState(InteractionState state);
     void setActionState(ActionState state);
+    QString getDefaultTextServer();
 
     ActionState m_actionState;
     InteractionState m_interactionState;
