@@ -9,7 +9,12 @@ set(krunner_youtube_SRCS
 add_subdirectory(icons)
 
 kde4_add_plugin(krunner_youtube ${krunner_youtube_SRCS})
-target_link_libraries(krunner_youtube ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${QJSON_LIBRARIES})
+target_link_libraries(krunner_youtube
+    ${KDE4_PLASMA_LIBS}
+    ${KDE4_KIO_LIBS}
+    ${QJSON_LIBRARIES}
+    ${qjson_LIBRARIES}
+    ${KDE4_SOLID_LIBS})
 
 install(TARGETS krunner_youtube DESTINATION ${PLUGIN_INSTALL_DIR} )
 
