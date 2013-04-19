@@ -117,7 +117,6 @@ target_link_libraries(
    ${KDE4WORKSPACE_TASKMANAGER_LIBRARY}
    ${LANCELOT_LIBS}
    ${ADDITIONAL_LINK_LIBRARIES}
-   solidcontrol
    kworkspace
 )
 
