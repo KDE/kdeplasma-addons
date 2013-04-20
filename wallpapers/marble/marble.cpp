@@ -199,7 +199,7 @@ void MarbleWallpaper::paint(QPainter *painter, const QRectF &exposedRect)
     }
     m_map->setSize(m_pixmap.size());
     m_pixmap.fill(QColor(0x00, 0x00, 0x00, 0xFF));
-    GeoPainter gp(&m_pixmap, m_map->viewport(), m_quality, true);
+    GeoPainter gp(&m_pixmap, m_map->viewport(), m_quality);
     QRect mapRect(0, 0, m_map->width(), m_map->height());
     m_map->paint(gp, mapRect);
 
