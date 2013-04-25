@@ -29,6 +29,7 @@
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
 #include <KToolInvocation>
+#include <solid/networking.h>
 
 MediaWikiRunner::MediaWikiRunner(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
@@ -67,7 +68,10 @@ MediaWikiRunner::~MediaWikiRunner()
 
 void MediaWikiRunner::match(Plasma::RunnerContext &context)
 {
-    // TODO: check for networkconnection
+    // Check for networkconnection
+    if(Solid::Networking::status() == Solid::Networking::Unconnected) {
+        return;
+    }
 
     QString term = context.query();
     if (!context.singleRunnerQueryMode()) {
@@ -135,9 +139,7 @@ void MediaWikiRunner::run(const Plasma::RunnerContext &context, const Plasma::Qu
     kDebug() << "Open MediaWiki page " << wikiurl;
 
     if (!wikiurl.isEmpty()) {
-        QStringList args;
-        args << "openURL" << wikiurl;
-        KToolInvocation::kdeinitExec("kfmclient", args);
+        KToolInvocation::invokeBrowser(wikiurl, "");
     }
 }
 

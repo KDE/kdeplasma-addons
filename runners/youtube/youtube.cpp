@@ -34,6 +34,7 @@
 #include <QtGui/QIcon>
 #include <qpushbutton.h>
 #include <qjson/parser.h>
+#include <solid/networking.h>
 
 //TODO: I'd really *love* to be able to embed a video *inside* krunner. you know how sexy that'd be? answer: very much.
 //but seeing as youtube doesn't fully support html5 (only for non-ad'ed videos), i guess i'll have to hold off on it?
@@ -56,6 +57,11 @@ YouTube::~YouTube()
 
 void YouTube::match(Plasma::RunnerContext &context)
 {
+    // Check for networkconnection
+    if(Solid::Networking::status() == Solid::Networking::Unconnected) {
+        return;
+    }
+
     QString term = context.query();
 
     if (!term.startsWith("videos ")) {

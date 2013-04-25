@@ -45,15 +45,10 @@ Item {
     }
 
 
-    PlasmaCore.Svg {
-        id: noArtSvg
-        imagePath: plasmoid.file("images", "nocover.svgz")
-    }
-    // TODO: figure out how to centre this vertically
     PlasmaCore.SvgItem {
         id: noArtItem
         anchors.fill: parent
-        svg: noArtSvg
+        svg: Svg("nowplaying/nocover")
         visible: !realArt.visible && !logoArtItem.visible
     }
     PlasmaCore.IconItem {

@@ -196,9 +196,14 @@ void KGraphicsWebSlice::setPreviewMode(bool on)
 void KGraphicsWebSlice::showSlice(const QString &selector)
 {
     QRectF r = sliceGeometry(selector);
+    // qDebug() << "area=" << d->documentGeometry << ", viewportSize=" << page()->viewportSize() << ", contentsRect=" << contentsRect().size();
     if (!selector.isEmpty() && r.isValid()) {
         zoom(r);
-    } else {
+    } else if (d->documentGeometry.width() != contentsRect().size().width()) {
+        // Change zoom level only if the current one isn't appropriate
+        // but reset to 1.0 first
+        setZoomFactor(1.0);
+        updateElementCache();
         zoom(d->documentGeometry);
     }
 }
