@@ -1,3 +1,3 @@
-install(DIRECTORY animals/ DESTINATION ${DATA_INSTALL_DIR}/plasma/wallpapers/org.kde.animals)
-install(DIRECTORY haenau/ DESTINATION ${DATA_INSTALL_DIR}/plasma/wallpapers/org.kde.haenau)
-install(DIRECTORY hunyango/ DESTINATION ${DATA_INSTALL_DIR}/plasma/wallpapers/org.kde.hunyango)
+installPackage(animals org.kde.animals plasma/wallpapers wallpaper)
+installPackage(haenau org.kde.haenau plasma/wallpapers wallpaper)
+installPackage(hunyango org.kde.hunyango plasma/wallpapers wallpaper)
