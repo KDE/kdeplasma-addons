@@ -78,7 +78,10 @@ void PoTD::paint(QPainter *painter, const QRectF& exposedRect)
 {
     if (m_image.isNull()) {
         painter->fillRect(exposedRect, QBrush(Qt::black));
-        const QString text = i18n("Loading the picture of the day...");
+        const QString provider = m_providers.isEmpty() || m_provider.isEmpty() ? QString()
+                                                                               : m_providers.value(m_provider).toString();
+        const QString text = provider.isEmpty() ? i18n("Loading the picture of the day...")
+                                                : i18n("Loading the picture of the day from %1...", provider);
         QRect textRect = painter->fontMetrics().boundingRect(text);
         textRect.moveCenter(boundingRect().center().toPoint());
         painter->setPen(Qt::white);
