@@ -41,7 +41,6 @@ class ApodProvider::Private
     void parsePage();
 
     ApodProvider *mParent;
-    QByteArray mPage;
     QImage mImage;
 };
 

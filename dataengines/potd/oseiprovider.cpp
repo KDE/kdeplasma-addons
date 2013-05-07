@@ -41,7 +41,6 @@ class OseiProvider::Private
     void parsePage();
 
     OseiProvider *mParent;
-    QByteArray mPage;
     QImage mImage;
 };
 

@@ -41,7 +41,6 @@ class EpodProvider::Private
     void parsePage();
 
     EpodProvider *mParent;
-    QByteArray mPage;
     QImage mImage;
 };
 

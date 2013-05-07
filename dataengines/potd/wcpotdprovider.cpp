@@ -41,7 +41,6 @@ class WcpotdProvider::Private
     void parsePage();
 
     WcpotdProvider *mParent;
-    QByteArray mPage;
     QImage mImage;
 };
 
