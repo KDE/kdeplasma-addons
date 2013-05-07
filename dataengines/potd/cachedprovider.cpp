@@ -56,7 +56,7 @@ void SaveImageThread::run()
 
 QString CachedProvider::identifierToPath( const QString &identifier )
 {
-    const QString dataDir = KStandardDirs::locateLocal( "data", QLatin1String("plasma_engine_podt/") );
+    const QString dataDir = KStandardDirs::locateLocal( "cache", QLatin1String("plasma_engine_podt/") );
     return QString( dataDir + identifier );
 }
 
