@@ -6,9 +6,6 @@ Add your provider in the Potd class, updateSource( const QString &identifier ) m
 - in the applet, you get a QImage and you can call the provider with
 
     Plasma::DataEngine *engine = dataEngine( "potd" );
-    if ( !engine ) {
-        return;
-    }
     QDate mCurrentDate = QDate::currentDate();
     const QString identifier = QString("apod") + ":" + mCurrentDate.toString( Qt::ISODate );
 
