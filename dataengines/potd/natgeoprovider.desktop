@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=PlasmaPoTD/Plugin
+X-KDE-Library=plasma_potd_natgeoprovider
+X-KDE-PlasmaPoTDProvider-Identifier=natgeo
+Icon=
+
+Name=National Geographic
