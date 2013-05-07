@@ -20,10 +20,29 @@
 #ifndef COLOR_HEADER
 #define COLOR_HEADER
 
+#include <QRunnable>
+#include <QWeakPointer>
+
 #include <Plasma/Wallpaper>
 #include <Plasma/DataEngine>
 
 #include "ui_config.h"
+
+class SaveRunnable : public QObject, QRunnable
+{
+    Q_OBJECT
+public:
+    SaveRunnable(Plasma::DataEngine *dataEngine, const QString &provider, const QString &path);
+    void run();
+
+public Q_SLOTS:
+    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+
+private:
+    QWeakPointer<Plasma::DataEngine> m_dataEngine;
+    QImage m_image;
+    QString m_path;
+};
 
 class PoTD : public Plasma::Wallpaper
 {
@@ -48,6 +67,8 @@ protected:
 
 protected slots:
     void settingsModified();
+    void getSaveFileLocation();
+    void saveFile();
 
 private:
     Ui::Configuration m_ui;
