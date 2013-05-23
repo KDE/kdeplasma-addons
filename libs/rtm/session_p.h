@@ -236,8 +236,10 @@ class RTM::SessionPrivate {
     timezone.truncate(timezone.indexOf("</timezone>"));
     QString dateformat = reply.remove(0, reply.indexOf("<dateformat>"+12));
     dateformat.truncate(dateformat.indexOf("</dateformat>"));
+    this->dateFormat = (dateformat.toInt() == 0 ? "dd/MM/yy" : "MM/dd/yy");
     QString timeformat = reply.remove(0, reply.indexOf("<timeformat>"+12));
     timeformat.truncate(timeformat.indexOf("</timeformat>"));
+    this->timeFormat = (timeformat.toInt() == 0 ? "hh:mm ap" : "hh:mm");
     QString defaultlist = reply.remove(0, reply.indexOf("<defaultlist>"+13));
     defaultlist.truncate(defaultlist.indexOf("</defaultlist>"));
 
@@ -276,6 +278,8 @@ class RTM::SessionPrivate {
 #ifndef QTONLY
   KTimeZone timezone;
 #endif
+  QString dateFormat; // user's dateformat choice: 0 - DD/MM/YY ,1 - MM/DD/YY
+  QString timeFormat; // user's timeformat choice: 0 - hh:mm ap ,1 - hh:mm
 
   RTM::Timeline timeline;
 
