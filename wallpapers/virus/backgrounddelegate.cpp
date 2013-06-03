@@ -1,5 +1,6 @@
 /*
   Copyright (c) 2007 Paolo Capriotti <p.capriotti@gmail.com>
+  Copyright (c) 2010 Dario Andres Rodriguez  <andresbajotierra@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -9,18 +10,21 @@
 
 #include "backgrounddelegate.h"
 
-#include <QPen>
 #include <QApplication>
 #include <QPainter>
 #include <QTextDocument>
+#include <QTime>
+
+#include <KDebug>
 #include <KGlobalSettings>
 #include <KLocalizedString>
+
 #include <Plasma/PaintUtils>
 
-BackgroundDelegate::BackgroundDelegate(QObject *listener, float ratio, QObject *parent)
-    : QAbstractItemDelegate(parent),
-      m_listener(listener),
-      m_ratio(ratio)
+static const int BLUR_PAD = 6;
+
+BackgroundDelegate::BackgroundDelegate(QObject *parent)
+    : QAbstractItemDelegate(parent)
 {
     m_maxHeight = SCREENSHOT_SIZE/1.6 + BLUR_INCREMENT;
     m_maxWidth = SCREENSHOT_SIZE + BLUR_INCREMENT;
@@ -41,7 +45,7 @@ void BackgroundDelegate::paint(QPainter *painter,
     QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
-    // draw pixmap
+    // Draw wallpaper thumbnail
     if (pix.isNull()) {
         painter->fillRect(option.rect, option.palette.brush(QPalette::Base));
     } else {
@@ -63,30 +67,39 @@ void BackgroundDelegate::paint(QPainter *painter,
         const int bx = (option.rect.width() - blur.width()) / 2;
         const int by = MARGIN + qMax(0, m_maxHeight - blur.height());
         QRect shadowRect = QRect(option.rect.topLeft(), blur.size()).translated(bx, by);
-	
+        // draw the blur
         painter->drawImage(shadowRect.topLeft(), blur);
+        // draw the actual thumbnail
         painter->drawPixmap(QRect(shadowRect.topLeft() + QPoint((shadowRect.width() - pix.width()) / 2, (shadowRect.height() - pix.height()) / 2),
                                   pix.size()), pix);
     }
-    
 
     //Use a QTextDocument to layout the text
+
+    // Borrowed from Dolphin for consistency and beauty.
+    // For the color of the additional info the inactive text color
+    // is not used as this might lead to unreadable text for some color schemes. Instead
+    // the text color is slightly mixed with the background color.
+    const QColor textColor = option.palette.text().color();
+    const QColor baseColor = option.palette.base().color();
+    const int p1 = 70;
+    const int p2 = 100 - p1;
+    const QColor detailsColor = QColor((textColor.red() * p1 + baseColor.red() * p2) / 100,
+                                       (textColor.green() * p1 + baseColor.green() * p2) / 100,
+                                       (textColor.blue() * p1 + baseColor.blue() * p2) /  100);
     QTextDocument document;
-    QString html = QString("<strong>%1</strong>").arg(title);
-
-    if (!author.isEmpty()) {
-        QString authorCaption = i18nc("Caption to wallpaper preview, %1 author name",
-                              "by %1", author);
-
-        html += QString("<br /><span style=\"font-size: %1pt;\">%2</span>")
-                .arg(KGlobalSettings::smallestReadableFont().pointSize())
-                .arg(authorCaption);
-    }
+    QString html = title;
 
     if (!resolution.isEmpty()) {
-        html += QString("<br /><span style=\"font-size: %1pt;\">%2</span>")
-                .arg(KGlobalSettings::smallestReadableFont().pointSize())
+        html += QString("<br /><span style=\"color: %1;\">%2</span>")
+                .arg(detailsColor.name())
                 .arg(resolution);
+    }
+
+    if (!author.isEmpty()) {
+        html += QString("<br /><span style=\"color: %1;\">%2</span>")
+                .arg(detailsColor.name())
+                .arg(author);
     }
 
     //Set the text color according to the item state
@@ -121,7 +134,6 @@ void BackgroundDelegate::paint(QPainter *painter,
     painter->save();
     painter->translate(x, y);
     document.drawContents(painter, QRect(QPoint(0, 0), option.rect.size() - QSize(0, m_maxHeight + MARGIN * 2)));
-
     painter->restore();
 }
 
@@ -131,15 +143,14 @@ QSize BackgroundDelegate::sizeHint(const QStyleOptionViewItem &option,
     Q_UNUSED(option)
     const QString title = index.model()->data(index, Qt::DisplayRole).toString();
     const QString author = index.model()->data(index, AuthorRole).toString();
-    const int fontSize = KGlobalSettings::smallestReadableFont().pointSize();
 
     //Generate a sample complete entry (with the real title) to calculate sizes
     QTextDocument document;
-    QString html = QString("<strong>%1</strong><br />").arg(title);
+    QString html = title + "<br />";
     if (!author.isEmpty()) {
-        html += QString("<span style=\"font-size: %1pt;\">by %2</span><br />").arg(fontSize).arg(author);
+        html += author + "<br />";
     }
-    html += QString("<span style=\"font-size: %1pt;\">1600x1200</span>").arg(fontSize);
+    html += QString("1600x1200");
 
     document.setHtml(html);
     document.setTextWidth(m_maxWidth);
