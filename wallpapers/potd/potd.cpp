@@ -87,7 +87,10 @@ void PoTD::init(const KConfigGroup &config)
         }
 
         m_provider = provider;
-        dataEngine(QLatin1String("potd"))->connectSource(m_provider, this);
+
+        if (!isPreviewing()) {
+            dataEngine(QLatin1String("potd"))->connectSource(m_provider, this);
+        }
     }
 }
 
