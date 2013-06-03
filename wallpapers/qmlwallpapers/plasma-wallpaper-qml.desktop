@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Animated Wallpapers
+Name=Animations
 Name[ca]=Fons d'escriptori animats
 Name[ca@valencia]=Fons d'escriptori animats
 Name[cs]=Animované tapety
@@ -35,6 +35,7 @@ Name[wa]=Candjantès tapisreyes
 Name[x-test]=xxAnimated Wallpapersxx
 Name[zh_CN]=动画壁纸
 Name[zh_TW]=動畫桌布
+Comment=Interactive, animated wallpapers
 Type=Service
 Icon=preferences-desktop-wallpaper
 ServiceTypes=Plasma/Wallpaper

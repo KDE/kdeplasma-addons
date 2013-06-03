@@ -53,6 +53,7 @@ Name[wa]=Bole
 Name[x-test]=xxGlobexx
 Name[zh_CN]=地球仪
 Name[zh_TW]=球體
+Comment=An interactive map of the world
 Type=Service
 Icon=marble
 ServiceTypes=Plasma/Wallpaper

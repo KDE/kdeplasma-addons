@@ -52,6 +52,7 @@ Name[wa]=Waerbea
 Name[x-test]=xxVirusxx
 Name[zh_CN]=病毒
 Name[zh_TW]=病毒
+Comment=A simulated life form eats your wallpaper
 Icon=image-jpeg
 ServiceTypes=Plasma/Wallpaper
 
