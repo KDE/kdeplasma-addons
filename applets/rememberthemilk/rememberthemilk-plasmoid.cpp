@@ -376,7 +376,7 @@ QGraphicsWidget* RememberTheMilkPlasmoid::graphicsWidget() {
   m_addTaskLine = new Plasma::LineEdit(this); // must wait for plasma theming (4.3?) to get a themed lineedit
 
   m_addTaskLine->nativeWidget()->setClearButtonShown(true);
-  m_addTaskLine->nativeWidget()->setClickMessage("Create New Task...");
+  m_addTaskLine->nativeWidget()->setClickMessage(i18n("Create New Task..."));
 
   connect(m_addTaskLine->nativeWidget(), SIGNAL(returnPressed(QString)), m_addTaskLine->nativeWidget(), SLOT(clear()));
   connect(m_addTaskLine->nativeWidget(), SIGNAL(returnPressed(QString)), this, SLOT(createTask(QString)));
