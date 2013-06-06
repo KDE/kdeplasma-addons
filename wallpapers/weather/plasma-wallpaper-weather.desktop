@@ -56,6 +56,10 @@ Name[x-test]=xxWeatherxx
 Name[zh_CN]=天气
 Name[zh_TW]=天氣
 Comment=Images that reflect the weather outside
+Comment[pt]=Imagens que reflectem o tempo exterior
+Comment[ru]=Изображения, показывающие погоду за окном
+Comment[uk]=Зображення, що відповідають погоді надворі
+Comment[x-test]=xxImages that reflect the weather outsidexx
 Icon=weather-clear
 ServiceTypes=Plasma/Wallpaper
 

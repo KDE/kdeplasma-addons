@@ -53,6 +53,10 @@ Name[x-test]=xxVirusxx
 Name[zh_CN]=病毒
 Name[zh_TW]=病毒
 Comment=A simulated life form eats your wallpaper
+Comment[pt]=Um forma de vida simulada come o seu papel de parede
+Comment[ru]=Своеобразная форма жизни съедает изображение фона
+Comment[uk]=Уявна форма життя їсть ваші шпалери
+Comment[x-test]=xxA simulated life form eats your wallpaperxx
 Icon=image-jpeg
 ServiceTypes=Plasma/Wallpaper
 

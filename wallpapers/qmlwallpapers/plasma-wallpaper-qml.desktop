@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Animations
+Name[cs]=Animace
+Name[pt]=Animações
+Name[ru]=Анимации
+Name[uk]=Анімації
+Name[x-test]=xxAnimationsxx
 Comment=Interactive, animated wallpapers
+Comment[cs]=Interaktivní animované tapety
+Comment[pt]=Papéis de parede animados e interactivos
+Comment[ru]=Интерактивные анимированные фоны
+Comment[uk]=Інтерактивні анімовані шпалери
+Comment[x-test]=xxInteractive, animated wallpapersxx
 Type=Service
 Icon=preferences-desktop-wallpaper
 ServiceTypes=Plasma/Wallpaper
