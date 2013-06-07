@@ -31,7 +31,7 @@ IF( QT4_FOUND )
 	# Find Qwt version
 	IF( Qwt5_INCLUDE_DIR )
 		FILE( READ ${Qwt5_INCLUDE_DIR}/qwt_global.h QWT_GLOBAL_H )
-		STRING( REGEX MATCH "#define *QWT_VERSION *(0x05*)" QWT_IS_VERSION_5 ${QWT_GLOBAL_H})
+		STRING( REGEX MATCH "#define *QWT_VERSION *(0x05)" QWT_IS_VERSION_5 ${QWT_GLOBAL_H})
 		
 		IF( QWT_IS_VERSION_5 )
 		STRING(REGEX REPLACE ".*#define[\\t\\ ]+QWT_VERSION_STR[\\t\\ ]+\"([0-9]+\\.[0-9]+\\.[0-9]+)\".*" "\\1" Qwt_VERSION "${QWT_GLOBAL_H}")
