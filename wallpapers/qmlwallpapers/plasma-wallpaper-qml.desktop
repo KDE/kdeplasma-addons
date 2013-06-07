@@ -1,14 +1,23 @@
 [Desktop Entry]
 Name=Animations
 Name[cs]=Animace
+Name[de]=Animationen
+Name[gl]=Animacións
+Name[it]=Animazioni
 Name[pt]=Animações
 Name[ru]=Анимации
+Name[sk]=Animácie
+Name[sv]=Animeringar
 Name[uk]=Анімації
 Name[x-test]=xxAnimationsxx
 Comment=Interactive, animated wallpapers
 Comment[cs]=Interaktivní animované tapety
+Comment[gl]=Fondos de escritorio animados e interactivos.
+Comment[it]=Sfondi animati, interattivi
 Comment[pt]=Papéis de parede animados e interactivos
 Comment[ru]=Интерактивные анимированные фоны
+Comment[sk]=Interaktívne, animované tapety
+Comment[sv]=Interaktiva, animerade skrivbordsunderlägg
 Comment[uk]=Інтерактивні анімовані шпалери
 Comment[x-test]=xxInteractive, animated wallpapersxx
 Type=Service
