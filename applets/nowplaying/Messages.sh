@@ -1,2 +1,3 @@
 #! /usr/bin/env bash
-$XGETTEXT `find . -name \*.qml` -o $podir/plasma_applet_nowplaying.pot
+$EXTRACTRC `find . -name \*.ui` >> rc.cpp || exit 11
+$XGETTEXT *.cpp -o `find . -name \*.qml` -o $podir/plasma_applet_nowplaying.pot
