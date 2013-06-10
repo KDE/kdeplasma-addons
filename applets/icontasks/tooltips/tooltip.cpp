@@ -89,7 +89,8 @@ public:
     }
 
     QSize minimumSizeHint() const {
-        return m_document->size().toSize() + QSize(m_margin, m_margin) * 2;
+        const int margin = 6;
+        return m_document->size().toSize() + QSize(margin, margin)*2;
     }
 
     QSize maximumSizeHint() const {
@@ -125,7 +126,6 @@ private:
     ToolTip *m_toolTip;
     QTextDocument *m_document;
     QString m_anchor;
-    static const int m_margin = 6;
 };
 
 class MediaButton : public QWidget
@@ -288,6 +288,7 @@ ToolTip::ToolTip(QWidget *parent)
     mainLayout->addLayout(mediaHBoxLayout);
 
     setLayout(mainLayout);
+    setProperty("_KDE_NET_WM_SKIP_SHADOW", true); // Prevent oxygen shadows - we're not really a Plasma::ToolTip so need to do this :-(
 }
 
 ToolTip::~ToolTip()
@@ -525,12 +526,10 @@ void ToolTip::buttonPressed(MediaButton *btn)
 
 void ToolTip::updateTheme()
 {
-    static const qreal constMaxMargin = 4.0;
-
-    const int topHeight = qMin(d->background->marginSize(Plasma::TopMargin), constMaxMargin);
-    const int leftWidth = qMin(d->background->marginSize(Plasma::LeftMargin), constMaxMargin);
-    const int rightWidth = qMin(d->background->marginSize(Plasma::RightMargin), constMaxMargin);
-    const int bottomHeight = qMin(d->background->marginSize(Plasma::BottomMargin), constMaxMargin);
+    const int topHeight = d->background->marginSize(Plasma::TopMargin);
+    const int leftWidth = d->background->marginSize(Plasma::LeftMargin);
+    const int rightWidth = d->background->marginSize(Plasma::RightMargin);
+    const int bottomHeight = d->background->marginSize(Plasma::BottomMargin);
     setContentsMargins(leftWidth, topHeight, rightWidth, bottomHeight);
 
     // Make the tooltip use Plasma's colorscheme
