@@ -56,6 +56,7 @@ Name[x-test]=xxWeatherxx
 Name[zh_CN]=天气
 Name[zh_TW]=天氣
 Comment=Images that reflect the weather outside
+Comment[cs]=Obrázky odrážející počasí venku
 Comment[es]=Imágenes que reflejan el clima exterior
 Comment[fi]=Säänmukaiset kuvat
 Comment[gl]=Imaxes que reflicten o tempo que vai fóra.
