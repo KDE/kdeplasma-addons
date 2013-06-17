@@ -54,6 +54,7 @@ Name[x-test]=xxGlobexx
 Name[zh_CN]=地球仪
 Name[zh_TW]=地球
 Comment=An interactive map of the world
+Comment[ca]=Un mapa interactiu del món
 Comment[cs]=Interaktivní mapa světa
 Comment[es]=Un mapa interactivo del mundo
 Comment[fi]=Interaktiivinen maailmankartta

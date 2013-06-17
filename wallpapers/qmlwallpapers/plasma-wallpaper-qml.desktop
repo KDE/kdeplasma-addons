@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Animations
+Name[ca]=Animacions
 Name[cs]=Animace
 Name[de]=Animationen
 Name[es]=Animaciones
@@ -22,6 +23,7 @@ Name[uk]=Анімації
 Name[x-test]=xxAnimationsxx
 Name[zh_TW]=動畫
 Comment=Interactive, animated wallpapers
+Comment[ca]=Fons d'escriptori interactius, animats
 Comment[cs]=Interaktivní animované tapety
 Comment[es]=Fondos de pantalla interactivos animados
 Comment[fi]=Interaktiiviset, animoidut taustat
