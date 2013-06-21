@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Translator
-Comment=Translates into any lanugage using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment=Translates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=applications-education-language
