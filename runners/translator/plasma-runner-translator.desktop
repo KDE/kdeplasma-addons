@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=Translator
+Name[ca]=Traductor
+Name[cs]=Překladatel
+Name[pt]=Tradutor
+Name[pt_BR]=Tradutor
+Name[sr]=преводилац
+Name[sr@ijekavian]=преводилац
+Name[sr@ijekavianlatin]=prevodilac
+Name[sr@latin]=prevodilac
+Name[uk]=Перекладач
+Name[x-test]=xxTranslatorxx
 Comment=Translates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[pt]=Traduz para qualquer língua com o serviço Google Translate. Para uma lista das línguas suportadas, vá a https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[pt_BR]=Traduz para qualquer idioma usando o serviço Google Tradutor. Para ver uma lista com os idiomas suportados, acesse https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[uk]=Виконує переклад за допомогою служби Перекладач Google. Зі списком підтримуваних мов можна ознайомитися тут: https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[x-test]=xxTranslates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-paramsxx
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=applications-education-language
