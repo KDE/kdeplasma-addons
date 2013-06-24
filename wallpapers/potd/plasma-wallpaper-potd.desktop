@@ -72,6 +72,7 @@ Comment[sv]=En ny bild från Internet varje dag
 Comment[tr]=Her gün İnternet'ten yeni bir resim göster
 Comment[uk]=Нове зображення з інтернету щодня
 Comment[x-test]=xxA new picture from the Internet each dayxx
+Comment[zh_CN]=每天从互联网获取新图片
 Comment[zh_TW]=網際網路上的每日新圖片
 Type=Service
 Icon=office-calendar

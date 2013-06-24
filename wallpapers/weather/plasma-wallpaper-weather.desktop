@@ -77,6 +77,7 @@ Comment[sv]=Bilder som återger vädret utomhus
 Comment[tr]=Dışarıdaki hava durumunu yansıtan resimler
 Comment[uk]=Зображення, що відповідають погоді надворі
 Comment[x-test]=xxImages that reflect the weather outsidexx
+Comment[zh_CN]=体现外面天气的图片
 Comment[zh_TW]=反應外面天氣的影像
 Icon=weather-clear
 ServiceTypes=Plasma/Wallpaper

@@ -74,6 +74,7 @@ Comment[sv]=Utforska en klassisk fraktal
 Comment[tr]=Klasik bir fraktal tasarım keşfedin
 Comment[uk]=Вивчення структури класичного фрактала
 Comment[x-test]=xxExplore a classic fractal designxx
+Comment[zh_CN]=探索经典分形设计
 Comment[zh_TW]=探索傳統的拼布設計
 Type=Service
 Icon=preferences-desktop-mandelbrot

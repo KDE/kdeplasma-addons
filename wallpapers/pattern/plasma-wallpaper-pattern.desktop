@@ -74,6 +74,7 @@ Comment[sv]=Utläggningsbara mönster
 Comment[tr]=Döşenebilir dokular
 Comment[uk]=Візерунки з плиток
 Comment[x-test]=xxTilable patternsxx
+Comment[zh_CN]=平铺模式
 Comment[zh_TW]=可排列樣式
 Type=Service
 Icon=preferences-desktop-pattern

@@ -75,6 +75,7 @@ Comment[sv]=En interaktiv världskarta
 Comment[tr]=Dünyanın etkileşimli bir haritası
 Comment[uk]=Інтерактивна карта світу
 Comment[x-test]=xxAn interactive map of the worldxx
+Comment[zh_CN]=交互世界地图
 Comment[zh_TW]=互動世界地圖
 Type=Service
 Icon=marble
