@@ -49,13 +49,19 @@
 
 #include "textedit.h"
 
+QString defaultBackgroundColor()
+{
+    // returns a suitable background color according to the plasma theme's TextColor
+    return Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).lightness() > 100 ? "black" : "yellow";
+}
+
 class TopWidget : public QGraphicsWidget
 {
 public:
     TopWidget(QGraphicsWidget *parent)
         : QGraphicsWidget(parent),
           m_notesTheme(new Plasma::Svg(this)),
-          m_color("yellow-notes")
+          m_color(defaultBackgroundColor() + "-notes")
     {
         m_notesTheme->setImagePath("widgets/notes");
         m_notesTheme->setContainsMultipleImages(false);
@@ -184,7 +190,7 @@ void Notes::init()
 void Notes::configChanged()
 {
     KConfigGroup cg = config();
-    m_topWidget->setColor(cg.readEntry("color", "yellow"));
+    m_topWidget->setColor(cg.readEntry("color", defaultBackgroundColor()));
     // color must be before setPlainText("foo")
     m_useThemeColor = cg.readEntry("useThemeColor", true);
     m_useNoColor = cg.readEntry("useNoColor", true);
@@ -362,6 +368,9 @@ void Notes::themeChanged()
         m_noteEditor->setTextColor(m_textColor);
         m_noteEditor->setTextCursor(oldCursor);
     }
+    KConfigGroup cg = config();
+    m_topWidget->setColor(cg.readEntry("color", defaultBackgroundColor()));
+    update();
 }
 
 void Notes::addColor(const QString &id, const QString &colorName)
