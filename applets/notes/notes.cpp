@@ -189,7 +189,7 @@ void Notes::configChanged()
     m_useThemeColor = cg.readEntry("useThemeColor", true);
     m_useNoColor = cg.readEntry("useNoColor", true);
     if (m_useThemeColor) {
-        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor);
+        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
         connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
     } else {
         m_textColor = cg.readEntry("textColor", m_textColor);
@@ -356,8 +356,11 @@ void Notes::saveState(KConfigGroup &cg) const
 void Notes::themeChanged()
 {
     if (m_useThemeColor) {
-        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor);
-        update();
+        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+        QTextCursor oldCursor = m_noteEditor->textCursor();
+        m_noteEditor->selectAll();
+        m_noteEditor->setTextColor(m_textColor);
+        m_noteEditor->setTextCursor(oldCursor);
     }
 }
 
