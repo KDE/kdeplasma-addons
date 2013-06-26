@@ -4,9 +4,11 @@ Name[ca]=Traductor
 Name[cs]=Překladatel
 Name[es]=Traductor
 Name[fi]=Käännin
+Name[it]=Traduttore
 Name[nl]=Vertaler
 Name[pt]=Tradutor
 Name[pt_BR]=Tradutor
+Name[sk]=Prekladateľ
 Name[sr]=преводилац
 Name[sr@ijekavian]=преводилац
 Name[sr@ijekavianlatin]=prevodilac
@@ -18,6 +20,7 @@ Name[zh_CN]=翻译
 Comment=Translates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[es]=Traduce a cualquier idioma usando Google Translate. Para una lista de los idiomas admitidos visite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[fi]=Kääntää mille tahansa kielelle käyttäen Google-kääntäjää. Katso tuettujen kielten luettelo osoitteesta https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[it]=Traduce in qualsiasi lingua utilizzando Google Translate. Per un elenco delle lingue supportate, visita https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[nl]=Vertaalt naar elke taal met Google Translate. Voor een lijst met ondersteunde talen bezoek https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[pt]=Traduz para qualquer língua com o serviço Google Translate. Para uma lista das línguas suportadas, vá a https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[pt_BR]=Traduz para qualquer idioma usando o serviço Google Tradutor. Para ver uma lista com os idiomas suportados, acesse https://developers.google.com/translate/v2/using_rest?hl=de#language-params
