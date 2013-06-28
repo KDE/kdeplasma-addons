@@ -492,7 +492,7 @@ void MicroBlog::writeWallet(bool success)
     //kDebug() << success;
     if (success &&
         enterWalletFolder(QString::fromLatin1("Plasma-MicroBlog")) &&
-        (m_wallet->writePassword(m_username, m_password) == 0)) {
+        (m_wallet->writePassword(identifier(), m_password) == 0)) {
         //kDebug() << "successfully put password in wallet, removing from config file";
         config().deleteEntry("password");
         emit configNeedsSaving();
@@ -511,7 +511,7 @@ void MicroBlog::readWallet(bool success)
     QString pwd;
     if (success &&
         enterWalletFolder(QString::fromLatin1("Plasma-MicroBlog")) &&
-        (m_wallet->readPassword(m_username, pwd) == 0)) {
+        (m_wallet->readPassword(identifier(), pwd) == 0)) {
         //kDebug() << "successfully retrieved password from wallet";
         m_password = pwd;
         downloadHistory();
@@ -775,6 +775,8 @@ void MicroBlog::configAccepted()
     QString password = configUi.passwordEdit->text();
     if (m_password != password) {
         m_password = password;
+        m_walletWait = Write;
+        getWallet();
 
         if (m_service) {
             m_service.data()->deleteLater();

@@ -132,6 +132,11 @@ class MicroBlog : public Plasma::PopupApplet
          * Sets up the timeline service object (m_service)
          */
         void createTimelineService();
+        
+        /**
+         * Returns a unique identifier for a username in a service URL
+         */
+        inline QString identifier() const { return QString("%1@%2").arg(m_username, m_serviceUrl); }
 
         Plasma::Svg *m_theme;
         Plasma::TextEdit *m_statusEdit;
