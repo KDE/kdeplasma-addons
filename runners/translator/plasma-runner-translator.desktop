@@ -2,6 +2,7 @@
 Name=Translator
 Name[ca]=Traductor
 Name[cs]=Překladatel
+Name[de]=Übersetzer
 Name[es]=Traductor
 Name[fi]=Käännin
 Name[it]=Traduttore
@@ -14,6 +15,7 @@ Name[sr@ijekavian]=преводилац
 Name[sr@ijekavianlatin]=prevodilac
 Name[sr@latin]=prevodilac
 Name[sv]=Översättning
+Name[tr]=Çevirmen
 Name[uk]=Перекладач
 Name[x-test]=xxTranslatorxx
 Name[zh_CN]=翻译
@@ -25,6 +27,7 @@ Comment[nl]=Vertaalt naar elke taal met Google Translate. Voor een lijst met ond
 Comment[pt]=Traduz para qualquer língua com o serviço Google Translate. Para uma lista das línguas suportadas, vá a https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[pt_BR]=Traduz para qualquer idioma usando o serviço Google Tradutor. Para ver uma lista com os idiomas suportados, acesse https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[sv]=Översätter till godtyckligt språk med Google Translate. Besök https://developers.google.com/translate/v2/using_rest#language-params för en lista med språk som stöds.
+Comment[tr]=Google Translate kullanarak herhangi bir dile çevirin. Desteklenen dillerin listesi için https://developers.google.com/translate/v2/using_rest?hl=de#language-params adresini ziyaret edin.
 Comment[uk]=Виконує переклад за допомогою служби Перекладач Google. Зі списком підтримуваних мов можна ознайомитися тут: https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[x-test]=xxTranslates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-paramsxx
 Comment[zh_CN]=用谷歌翻译翻译成他国语言支持的语言请参阅https://developers.google.com/translate/v2/using_rest?hl=de#language-params
