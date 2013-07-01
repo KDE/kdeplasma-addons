@@ -6,7 +6,10 @@ Name[de]=Übersetzer
 Name[es]=Traductor
 Name[fi]=Käännin
 Name[it]=Traduttore
+Name[kk]=Аудару
+Name[nb]=Oversetter
 Name[nl]=Vertaler
+Name[nn]=Omsetjar
 Name[pt]=Tradutor
 Name[pt_BR]=Tradutor
 Name[sk]=Prekladateľ
@@ -23,10 +26,15 @@ Comment=Translates into any language using Google Translate. For list of support
 Comment[es]=Traduce a cualquier idioma usando Google Translate. Para una lista de los idiomas admitidos visite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[fi]=Kääntää mille tahansa kielelle käyttäen Google-kääntäjää. Katso tuettujen kielten luettelo osoitteesta https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[it]=Traduce in qualsiasi lingua utilizzando Google Translate. Per un elenco delle lingue supportate, visita https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[kk]=Google Аудару көмегімен тілден-тілге аудару. Қай тілдер қолдауы барын https://developers.google.com/translate/v2/using_rest?hl=de#language-params дегеннен қараңыз
 Comment[nl]=Vertaalt naar elke taal met Google Translate. Voor een lijst met ondersteunde talen bezoek https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[pt]=Traduz para qualquer língua com o serviço Google Translate. Para uma lista das línguas suportadas, vá a https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[pt_BR]=Traduz para qualquer idioma usando o serviço Google Tradutor. Para ver uma lista com os idiomas suportados, acesse https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[sk]=Preloží do jazyka pomocou Google Translate. Pre zoznam podporovaných jazykov navštívte https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[sr]=Преводи на разне језике помоћу Гугловог преводиоца. За списак подржаних језика посетите https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[sr@ijekavian]=Преводи на разне језике помоћу Гугловог преводиоца. За списак подржаних језика посетите https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[sr@ijekavianlatin]=Prevodi na razne jezike pomoću Googleovog prevodioca. Za spisak podržanih jezika posetite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[sr@latin]=Prevodi na razne jezike pomoću Googleovog prevodioca. Za spisak podržanih jezika posetite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[sv]=Översätter till godtyckligt språk med Google Translate. Besök https://developers.google.com/translate/v2/using_rest#language-params för en lista med språk som stöds.
 Comment[tr]=Google Translate kullanarak herhangi bir dile çevirin. Desteklenen dillerin listesi için https://developers.google.com/translate/v2/using_rest?hl=de#language-params adresini ziyaret edin.
 Comment[uk]=Виконує переклад за допомогою служби Перекладач Google. Зі списком підтримуваних мов можна ознайомитися тут: https://developers.google.com/translate/v2/using_rest?hl=de#language-params
