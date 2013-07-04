@@ -2,9 +2,11 @@
 Name=Translator
 Name[ca]=Traductor
 Name[cs]=Překladatel
+Name[da]=Oversætter
 Name[de]=Übersetzer
 Name[es]=Traductor
 Name[fi]=Käännin
+Name[hu]=Fordító
 Name[it]=Traduttore
 Name[kk]=Аудару
 Name[nb]=Oversetter
@@ -24,6 +26,7 @@ Name[x-test]=xxTranslatorxx
 Name[zh_CN]=翻译
 Name[zh_TW]=翻譯器
 Comment=Translates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[da]=Oversætter til alle sprog med Google Translate. Besøg https://developers.google.com/translate/v2/using_rest?hl=de#language-params for en liste over understøttede sprog
 Comment[es]=Traduce a cualquier idioma usando Google Translate. Para una lista de los idiomas admitidos visite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[fi]=Kääntää mille tahansa kielelle käyttäen Google-kääntäjää. Katso tuettujen kielten luettelo osoitteesta https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[it]=Traduce in qualsiasi lingua utilizzando Google Translate. Per un elenco delle lingue supportate, visita https://developers.google.com/translate/v2/using_rest?hl=de#language-params
