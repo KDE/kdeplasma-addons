@@ -127,7 +127,6 @@ void KOAuthWebHelper::authorizeApp(const QString &serviceBaseUrl, const QString 
 
     // Set an empty cookiejar, we don't want to recycle already logged in users
     QNetworkAccessManager *qnam = d->webView->page()->networkAccessManager();
-    delete qnam->cookieJar();
     QNetworkCookieJar *jar = new QNetworkCookieJar(this);
     qnam->setCookieJar(jar);
     d->authorizeUrls[authorizeUrl] = d->serviceBaseUrl;
