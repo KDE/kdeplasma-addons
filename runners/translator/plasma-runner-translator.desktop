@@ -27,10 +27,12 @@ Name[x-test]=xxTranslatorxx
 Name[zh_CN]=翻译
 Name[zh_TW]=翻譯器
 Comment=Translates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[ca]=Tradueix a qualsevol idioma usant el Google Translate. Per la llista d'idiomes acceptats visiteu https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[da]=Oversætter til alle sprog med Google Translate. Besøg https://developers.google.com/translate/v2/using_rest?hl=de#language-params for en liste over understøttede sprog
 Comment[es]=Traduce a cualquier idioma usando Google Translate. Para una lista de los idiomas admitidos visite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[fi]=Kääntää mille tahansa kielelle käyttäen Google-kääntäjää. Katso tuettujen kielten luettelo osoitteesta https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[fr]=Traduit dans n'importe quelle langue en utilisant « Google Translate ». Pour obtenir une liste des langues prises en charge, veuillez consulter « https://developers.google.com/translate/v2/using_rest?hl=de#language-params »
+Comment[hu]=Lefordítja bármilyen nyelvre a Google Fordító használatával. A támogatott nyelvek listájáért látogassa meg a https://developers.google.com/translate/v2/using_rest?hl=de#language-params oldalt
 Comment[it]=Traduce in qualsiasi lingua utilizzando Google Translate. Per un elenco delle lingue supportate, visita https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[kk]=Google Аудару көмегімен тілден-тілге аудару. Қай тілдер қолдауы барын https://developers.google.com/translate/v2/using_rest?hl=de#language-params дегеннен қараңыз
 Comment[nl]=Vertaalt naar elke taal met Google Translate. Voor een lijst met ondersteunde talen bezoek https://developers.google.com/translate/v2/using_rest?hl=de#language-params
