@@ -112,6 +112,7 @@ X-KDE-PluginInfo-Name=opendesktop
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 Keywords=Utilities;
+Keywords[bs]=Alatke;
 Keywords[ca]=Utilitats;
 Keywords[cs]=Nástroje;
 Keywords[da]=Værktøjer;
