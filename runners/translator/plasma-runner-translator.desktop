@@ -15,6 +15,7 @@ Name[nl]=Vertaler
 Name[nn]=Omsetjar
 Name[pt]=Tradutor
 Name[pt_BR]=Tradutor
+Name[ru]=Переводчик
 Name[sk]=Prekladateľ
 Name[sr]=преводилац
 Name[sr@ijekavian]=преводилац
@@ -38,6 +39,7 @@ Comment[kk]=Google Аудару көмегімен тілден-тілге ау�
 Comment[nl]=Vertaalt naar elke taal met Google Translate. Voor een lijst met ondersteunde talen bezoek https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[pt]=Traduz para qualquer língua com o serviço Google Translate. Para uma lista das línguas suportadas, vá a https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[pt_BR]=Traduz para qualquer idioma usando o serviço Google Tradutor. Para ver uma lista com os idiomas suportados, acesse https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[ru]=Перевод на разные языки с помощью Google Translate. Список поддерживаемых языков https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[sk]=Preloží do jazyka pomocou Google Translate. Pre zoznam podporovaných jazykov navštívte https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[sr]=Преводи на разне језике помоћу Гугловог преводиоца. За списак подржаних језика посетите https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[sr@ijekavian]=Преводи на разне језике помоћу Гугловог преводиоца. За списак подржаних језика посетите https://developers.google.com/translate/v2/using_rest?hl=de#language-params
