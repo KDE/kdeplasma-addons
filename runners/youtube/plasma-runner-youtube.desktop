@@ -79,7 +79,7 @@ Comment[x-test]=xxMatches YouTube queriesxx
 Comment[zh_CN]=匹配 YouTube 查询
 Comment[zh_TW]=符合 YouTube 查詢
 
-Icon=youtube
+Icon=krunner_youtube
 
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
