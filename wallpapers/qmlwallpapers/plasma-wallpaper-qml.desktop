@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Animations
+Name[bs]=Animacije
 Name[ca]=Animacions
 Name[cs]=Animace
 Name[da]=Animationer
@@ -27,6 +28,7 @@ Name[x-test]=xxAnimationsxx
 Name[zh_CN]=动画
 Name[zh_TW]=動畫
 Comment=Interactive, animated wallpapers
+Comment[bs]=Interaktivne, animirane pozadinske slike
 Comment[ca]=Fons d'escriptori interactius, animats
 Comment[cs]=Interaktivní animované tapety
 Comment[da]=Interaktive, animerede baggrundsbilleder
