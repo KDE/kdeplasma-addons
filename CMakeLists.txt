@@ -47,21 +47,19 @@ set (QT_MIN_VERSION "5.0.0")
 
 find_package(kdeqt5staging REQUIRED NO_MODULE)
 
-# Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
-                                            KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
-                                            KConfig KAuth kjs)
-#find_package(KF5Transitional REQUIRED)
+    KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
+    KConfig KAuth KJS KWallet KDBusAddons Sonnet
+    KI18n KGuiAddons KService KWidgets ItemViews KNotifications KIconThemes KCompletion KJobWidgets KConfigWidgets KTextWidgets XmlGui KCrash)
 
-# those are not "done" yet:
-find_package(ki18n REQUIRED NO_MODULE)
-find_package(kio REQUIRED NO_MODULE)
-find_package(kguiaddons REQUIRED NO_MODULE)
+find_package(KIO REQUIRED NO_MODULE)
 
-find_package(KDELibs4 REQUIRED NO_MODULE)
-
+find_package(Plasma REQUIRED NO_MODULE)
 find_package(kdeclarative REQUIRED NO_MODULE)
 
+# needed for set_package_properties macro
+find_package(KDELibs4 REQUIRED NO_MODULE)
+find_package(KDE4Support REQUIRED NO_MODULE)
 
 #optional features
 find_package(X11 MODULE)
