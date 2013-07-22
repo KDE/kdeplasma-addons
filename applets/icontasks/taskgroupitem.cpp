@@ -366,13 +366,26 @@ void TaskGroupItem::updateToolTip()
 
     QMap<int, IconTasks::ToolTipContent::Window> map;
 
+    if (m_applet->launcherIcons() && m_icon.isNull()) {
+        KUrl launcherUrl(m_abstractItem->launcherUrl());
+        if (launcherUrl.isLocalFile() && KDesktopFile::isDesktopFile(launcherUrl.toLocalFile())) {
+            KDesktopFile f(launcherUrl.toLocalFile());
+            if (f.tryExec()) {
+                m_icon = KIcon(f.readIcon());
+            }
+        }
+    }
+
     foreach (AbstractGroupableItem * item, m_group.data()->members()) {
         TaskManager::TaskItem *taskItem = qobject_cast<TaskManager::TaskItem *>(item);
         if (taskItem && taskItem->task()) {
+            if (m_icon.isNull()) {
+                m_icon = item->icon();
+            }
             map.insertMulti(taskItem->id(),
                             IconTasks::ToolTipContent::Window(taskItem->task()->window(),
                                     item->name(),
-                                    item->icon().pixmap(IconTasks::ToolTipContent::iconSize(), IconTasks::ToolTipContent::iconSize()),
+                                    m_icon.pixmap(IconTasks::ToolTipContent::iconSize(), IconTasks::ToolTipContent::iconSize()),
                                     taskItem->task()->demandsAttention(),
                                     !m_applet->groupManager().showOnlyCurrentDesktop() || !taskItem->isOnCurrentDesktop()
                                     ? taskItem->task()->desktop() : 0));
