@@ -27,7 +27,7 @@ find_package(Qt5Core REQUIRED NO_MODULE)
 find_package(Qt5Transitional MODULE)
 find_package(Qt5Quick REQUIRED NO_MODULE)
 find_package(Qt5X11Extras REQUIRED NO_MODULE)
-find_package(kde4support REQUIRED NO_MODULE)
+#find_package(KDE4Support REQUIRED NO_MODULE)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
@@ -49,8 +49,9 @@ find_package(kdeqt5staging REQUIRED NO_MODULE)
 
 find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
-    KConfig KAuth KJS KWallet KDBusAddons Sonnet
-    KI18n KGuiAddons KService KWidgets ItemViews KNotifications KIconThemes KCompletion KJobWidgets KConfigWidgets KTextWidgets XmlGui KCrash)
+    KConfig KAuth KJS KWallet KDBusAddons
+    KI18n KGuiAddons KService KWidgets ItemViews KNotifications KIconThemes KCompletion KJobWidgets KConfigWidgets Sonnet KTextWidgets XmlGui KCrash
+    KIO KUnitConversion KDE4Attic)
 
 find_package(KIO REQUIRED NO_MODULE)
 
