@@ -11,6 +11,7 @@ Name[fr]=Outil de traduction
 Name[hu]=Fordító
 Name[it]=Traduttore
 Name[kk]=Аудару
+Name[ko]=번역기
 Name[nb]=Oversetter
 Name[nl]=Vertaler
 Name[nn]=Omsetjar
@@ -38,6 +39,7 @@ Comment[fr]=Traduit dans n'importe quelle langue en utilisant « Google Transla
 Comment[hu]=Lefordítja bármilyen nyelvre a Google Fordító használatával. A támogatott nyelvek listájáért látogassa meg a https://developers.google.com/translate/v2/using_rest?hl=de#language-params oldalt
 Comment[it]=Traduce in qualsiasi lingua utilizzando Google Translate. Per un elenco delle lingue supportate, visita https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[kk]=Google Аудару көмегімен тілден-тілге аудару. Қай тілдер қолдауы барын https://developers.google.com/translate/v2/using_rest?hl=de#language-params дегеннен қараңыз
+Comment[ko]=Google 번역을 사용하여 임의의 언어로 번역합니다. 지원하는 언어 목록은 https://developers.google.com/translate/v2/using_rest?hl=ko#language-params 페이지를 참고하십시오
 Comment[nl]=Vertaalt naar elke taal met Google Translate. Voor een lijst met ondersteunde talen bezoek https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[pt]=Traduz para qualquer língua com o serviço Google Translate. Para uma lista das línguas suportadas, vá a https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[pt_BR]=Traduz para qualquer idioma usando o serviço Google Tradutor. Para ver uma lista com os idiomas suportados, acesse https://developers.google.com/translate/v2/using_rest?hl=de#language-params
