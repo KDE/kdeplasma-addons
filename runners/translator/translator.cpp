@@ -56,7 +56,7 @@ Translator::Translator(QObject* parent, const QVariantList& args)
                                     i18n("Translates the word(s) :q: into target language"));
     syntaxes.append(autoSyntax);
 
-    Plasma::RunnerSyntax syntax(QString("%1:q:").arg(i18n("<source language>-<target languagce>")),
+    Plasma::RunnerSyntax syntax(QString("%1:q:").arg(i18n("<source language>-<target language>")),
                                 i18n("Translates the word(s) :q: from the source into target language"));
     syntaxes.append(syntax);
     setSyntaxes(syntaxes);
