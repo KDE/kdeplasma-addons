@@ -43,7 +43,7 @@ void TranslatorJob::jobCompleted(QNetworkReply* reply)
 	emit finished();
 }
 
-QString TranslatorJob::result()
+QString TranslatorJob::result() const
 {
 	return m_result;
 }

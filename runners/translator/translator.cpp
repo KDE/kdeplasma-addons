@@ -44,7 +44,7 @@ Translator::Translator(QObject* parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args)
-    setObjectName("Translator");
+    setObjectName(QLatin1String("Translator"));
     setHasRunOptions(false);
     setIgnoredTypes(Plasma::RunnerContext::Directory |
                     Plasma::RunnerContext::File |
@@ -52,11 +52,11 @@ Translator::Translator(QObject* parent, const QVariantList& args)
     setSpeed(AbstractRunner::SlowSpeed);
 
     QList<Plasma::RunnerSyntax> syntaxes;
-    Plasma::RunnerSyntax autoSyntax(QString("%1:q:").arg(i18n("<language code>")),
+    Plasma::RunnerSyntax autoSyntax(QString::fromLatin1("%1:q:").arg(i18n("<language code>")),
                                     i18n("Translates the word(s) :q: into target language"));
     syntaxes.append(autoSyntax);
 
-    Plasma::RunnerSyntax syntax(QString("%1:q:").arg(i18n("<source language>-<target language>")),
+    Plasma::RunnerSyntax syntax(QString::fromLatin1("%1:q:").arg(i18n("<source language>-<target language>")),
                                 i18n("Translates the word(s) :q: from the source into target language"));
     syntaxes.append(syntax);
     setSyntaxes(syntaxes);
@@ -111,13 +111,13 @@ bool Translator::parseTerm(const QString& term, QString& text, QPair<QString, QS
 
         return supportedLanguages.contains(language.first) && supportedLanguages.contains(language.second);
     } else {
-        language.first = "";
+        language.first.clear();
         language.second = languageTerm;
         return supportedLanguages.contains(language.second);
     }
 }
 
-void Translator::parseResult(const QString result, Plasma::RunnerContext& context, QString& text)
+void Translator::parseResult(const QString &result, Plasma::RunnerContext& context, const QString &text)
 {
     QString jsonData = result;
 //  jsonData contains arrays like this: ["foo",,"bar"]
@@ -198,7 +198,6 @@ void Translator::parseResult(const QString result, Plasma::RunnerContext& contex
     }
 
     if (!sentences.isEmpty()) {
-        QList<QPair<QString, double> > combined;
         QPair<QString, double> pair;
         QMapIterator<int, QPair<QString, double> > it(sentences);
         int currentKey = -1;
@@ -210,23 +209,21 @@ void Translator::parseResult(const QString result, Plasma::RunnerContext& contex
 
             // we're on to another key, process previous results, if any
             if (currentKey != it.key()) {
-                if (!combined.isEmpty() && currentRel > 0.001) {
-                    Plasma::QueryMatch match(this);
-                    match.setType(Plasma::QueryMatch::InformationalMatch);
-                    match.setIcon(KIcon("applications-education-language"));
-                    match.setText(currentString);
-                    match.setRelevance(currentRel);
-                    matches.append(match);
-                    combined.clear();
-                }
 
                 currentKey = it.key();
                 currentRel = 1;
-                currentString.clear();
+                currentString.append(' ').append(pair.first);
+                currentRel *= pair.second;
             }
+        }
+        if (!currentString.isEmpty()) {
+            Plasma::QueryMatch match(this);
+            match.setType(Plasma::QueryMatch::InformationalMatch);
+            match.setIcon(KIcon("applications-education-language"));
+            match.setText(currentString);
+            match.setRelevance(currentRel);
+            matches.append(match);
 
-            currentString.append(' ').append(pair.first);
-            currentRel *= pair.second;
         }
     }
 

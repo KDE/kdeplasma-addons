@@ -41,7 +41,7 @@ Q_SIGNALS:
 
 private:
     bool parseTerm(const QString &, QString &, QPair<QString, QString> &);
-    void parseResult(const QString, Plasma::RunnerContext &, QString &);
+    void parseResult(const QString &, Plasma::RunnerContext &, const QString &);
 	static const QSet<QString> supportedLanguages;
 };
 
