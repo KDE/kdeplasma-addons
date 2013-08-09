@@ -29,7 +29,7 @@ class TranslatorJob :  public QObject
     Q_OBJECT
 public:
 	TranslatorJob(const QString &, const QPair<QString, QString> &);
-	QString result();
+    QString result() const;
 	void start();
 
 private Q_SLOTS:
