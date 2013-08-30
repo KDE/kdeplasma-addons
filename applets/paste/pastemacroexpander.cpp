@@ -140,7 +140,7 @@ QString PasteMacroExpander::password(const QString& args)
     static QStringList characterSets = QStringList()
             << "abcdefghijklmnopqrstuvwxyz"
             << "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            << "01234567890"
+            << "0123456789"
             << "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
     int charCount = 8;
