@@ -45,7 +45,6 @@ endif()
 
 set (QT_MIN_VERSION "5.0.0")
 
-find_package(kdeqt5staging REQUIRED NO_MODULE)
 
 find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
