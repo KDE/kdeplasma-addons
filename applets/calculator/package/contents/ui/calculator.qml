@@ -37,6 +37,7 @@ Item {
     property real result: 0;
     property bool hasResult: false;
     property bool showingInput: true;
+    property bool showingResult: false;
     property string operator: undefined;
     property real operand: 0;
     property bool commaPressed: false;
@@ -90,7 +91,7 @@ Item {
             return;
         }
 
-        if (!showingInput && hasResult) {
+        if (showingResult) {
             allClearClicked();
         }
 
@@ -107,6 +108,10 @@ Item {
     }
 
     function decimalClicked() {
+        if (showingResult) {
+            allClearClicked();
+        }
+
         commaPressed = true;
         showingInput = true;
     }
@@ -148,11 +153,14 @@ Item {
         } else if (showingInput) {
             doOperation();
         }
+
         clearOperand();
         operator = op;
+        showingResult = false;
     }
 
     function equalsClicked() {
+        showingResult = true;
         doOperation();
     }
 
@@ -161,13 +169,13 @@ Item {
         operator = "";
         display.text = operand;
         showingInput = true;
+        showingResult = false;
     }
 
     function allClearClicked() {
         clearClicked();
         result = 0;
         hasResult = false;
-        showingInput = true;
     }
 
     function algarismCount(number) {
