@@ -121,21 +121,19 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
 
     m_uiVirus.setupUi(m_configWidget);
 
-    qreal ratio = m_size.isEmpty() ? 1.0 : m_size.width() / qreal(m_size.height());
     m_model = new BackgroundListModel(this, m_configWidget);
     m_model->setResizeMethod(m_resizeMethod);
     m_model->setWallpaperSize(m_size);
     m_model->reload(m_usersWallpapers);
     m_uiVirus.m_view->setModel(m_model);
-    m_uiVirus.m_view->setItemDelegate(new BackgroundDelegate(m_uiVirus.m_view,
-                                                                 ratio, m_configWidget));
-    
+    m_uiVirus.m_view->setItemDelegate(new BackgroundDelegate(m_uiVirus.m_view));
+
     m_uiVirus.m_view->setMinimumWidth((BackgroundDelegate::SCREENSHOT_SIZE + BackgroundDelegate::MARGIN * 2 +
                                            BackgroundDelegate::BLUR_INCREMENT) * 3 +
                                            m_uiVirus.m_view->spacing() * 4 +
                                            QApplication::style()->pixelMetric(QStyle::PM_ScrollBarExtent) +
                                            QApplication::style()->pixelMetric(QStyle::PM_DefaultFrameWidth) * 2 + 7);
-    
+
     m_uiVirus.m_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     QModelIndex index = m_model->indexOf(m_wallpaper);
     if (index.isValid()) {

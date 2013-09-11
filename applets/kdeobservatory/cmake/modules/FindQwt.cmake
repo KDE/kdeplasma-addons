@@ -26,12 +26,12 @@ FIND_PACKAGE( Qt4 REQUIRED QUIET )
 
 IF( QT4_FOUND )
 	# Is Qwt5 installed? Look for header files
-	FIND_PATH( Qwt5_INCLUDE_DIR qwt.h PATHS ${QT_INCLUDE_DIR} PATH_SUFFIXES qwt qwt5 qwt-qt4 qwt5-qt4 qwt-qt3 qwt5-qt3 include qwt/include qwt5/include qwt-qt4/include qwt5-qt4/include qwt-qt3/include qwt5-qt3/include ENV PATH)
+	FIND_PATH( Qwt5_INCLUDE_DIR qwt_event_pattern.h PATHS ${QT_INCLUDE_DIR} PATH_SUFFIXES qwt qwt5 qwt-qt4 qwt5-qt4 qwt-qt3 qwt5-qt3 include qwt/include qwt5/include qwt-qt4/include qwt5-qt4/include qwt-qt3/include qwt5-qt3/include ENV PATH)
 	
 	# Find Qwt version
 	IF( Qwt5_INCLUDE_DIR )
 		FILE( READ ${Qwt5_INCLUDE_DIR}/qwt_global.h QWT_GLOBAL_H )
-		STRING( REGEX MATCH "#define *QWT_VERSION *(0x05*)" QWT_IS_VERSION_5 ${QWT_GLOBAL_H})
+		STRING( REGEX MATCH "#define *QWT_VERSION *(0x05)" QWT_IS_VERSION_5 ${QWT_GLOBAL_H})
 		
 		IF( QWT_IS_VERSION_5 )
 		STRING(REGEX REPLACE ".*#define[\\t\\ ]+QWT_VERSION_STR[\\t\\ ]+\"([0-9]+\\.[0-9]+\\.[0-9]+)\".*" "\\1" Qwt_VERSION "${QWT_GLOBAL_H}")

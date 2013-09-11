@@ -44,7 +44,6 @@ class FlickrProvider::Private
     void parsePage();
 
     FlickrProvider *mParent;
-    QByteArray mPage;
     QDate mActualDate;
     QImage mImage;
 

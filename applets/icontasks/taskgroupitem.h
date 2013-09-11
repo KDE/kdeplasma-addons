@@ -179,6 +179,8 @@ private:
     void layoutTaskItem(AbstractTaskItem* item, const QPointF &pos);
     void setSplitIndex(int position);
 
+    QIcon m_icon;
+
     int totalSubTasks();
     bool focusSubTask(bool next, bool activate);
     AbstractTaskItem * selectSubTask(int index);

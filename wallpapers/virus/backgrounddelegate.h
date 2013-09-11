@@ -20,16 +20,8 @@ public:
         ScreenshotRole,
         ResolutionRole
     };
-    
-    enum {
-      SCREENSHOT_SIZE = 128,
-      BLUR_INCREMENT = 9,
-      MARGIN = 6,
-      BLUR_PAD = 6
-    };
 
-    BackgroundDelegate(QObject *listener,
-                       float ratio, QObject *parent = 0);
+    BackgroundDelegate(QObject *parent = 0);
 
     virtual void paint(QPainter *painter,
                        const QStyleOptionViewItem &option,
@@ -37,12 +29,14 @@ public:
     virtual QSize sizeHint(const QStyleOptionViewItem &option,
                            const QModelIndex &index) const;
 
-			       void resetMaxHeight() { m_maxHeight = 0; }
+    static const int SCREENSHOT_SIZE = 128;
+    static const int BLUR_INCREMENT = 9;
+    static const int MARGIN = 6;
+
+    void resetMaxHeight() { m_maxHeight = 0; }
     int m_maxHeight;
 private:
     int m_maxWidth;
-    QObject *m_listener;
-    float m_ratio;
 };
 
 #endif // BACKGROUNDDELEGATEL_H

@@ -27,6 +27,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KMessageBox>
+#include <KRandom>
 
 class PasteMacroExpanderSingleton
 {
@@ -139,38 +140,48 @@ QString PasteMacroExpander::password(const QString& args)
     static QStringList characterSets = QStringList()
             << "abcdefghijklmnopqrstuvwxyz"
             << "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            << "01234567890"
+            << "0123456789"
             << "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
-    int charCount;
+    int charCount = 8;
     QString chars;
     QString result;
 
     if (a.count() > 0) {
-        charCount = qMax(a[0].trimmed().toInt(), 1);
-    } else {
-        charCount = 8;
+        charCount = qMax(a[0].trimmed().toInt(), 8);
     }
+
     if (a.count() < 2) {
         chars = characterSets.join("");
     }
+
     if (a.count() > 1) {
         chars += (a[1].trimmed() == "true") ? characterSets[0] : "";
     }
+
     if (a.count() > 2) {
         chars += (a[2].trimmed() == "true") ? characterSets[1] : "";
     }
+
     if (a.count() > 3) {
         chars += (a[3].trimmed() == "true") ? characterSets[2] : "";
     }
+
     if (a.count() > 4) {
         chars += (a[4].trimmed() == "true") ? characterSets[3] : "";
     }
 
-    QDateTime now = QDateTime::currentDateTime();
-    qsrand(now.toTime_t() / now.time().msec());
+    const int setSize = chars.count();
+    const int top = (RAND_MAX / setSize) * setSize;
     for (int i = 0; i < charCount; ++i) {
-        result += chars[qrand() % chars.count()];
+        // to prevent modulo bias, discard random numbers at the
+        // 'top end' of INT_MAX
+        int rand = -1;
+        do {
+            rand = KRandom::random();
+        } while (rand >= top);
+
+        result += chars[rand % setSize];
     }
     //kDebug() << result;
     return result;

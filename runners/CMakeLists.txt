@@ -23,4 +23,5 @@ endif(NOT WIN32)
 
 if(QJSON_FOUND)
  add_subdirectory(youtube)
+ add_subdirectory(translator)
 endif(QJSON_FOUND)

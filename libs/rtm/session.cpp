@@ -90,6 +90,14 @@ RTM::Permissions RTM::Session::permissions() const {
   return d->permissions;
 }
 
+QString RTM::Session::dateFormat() const {
+  return d->dateFormat;
+}
+
+QString RTM::Session::timeFormat() const {
+  return d->timeFormat;
+}
+
 QString RTM::Session::sharedSecret() const {
   return d->sharedSecret;
 }

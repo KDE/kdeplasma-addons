@@ -100,17 +100,18 @@ void AppLauncherItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *e)
         actionList.append(configAction);
     }
 
-    TaskManager::BasicMenu menu(0, m_launcher, &m_applet->groupManager(), actionList, getAppMenu());
-    menu.adjustSize();
+    TaskManager::BasicMenu *menu = new TaskManager::BasicMenu(0, m_launcher, &m_applet->groupManager(), actionList, getAppMenu());
+    menu->adjustSize();
 
     if (m_applet->formFactor() != Plasma::Vertical) {
-        menu.setMinimumWidth(size().width());
+        menu->setMinimumWidth(size().width());
     }
 
     Q_ASSERT(m_applet->containment());
     Q_ASSERT(m_applet->containment()->corona());
     stopWindowHoverEffect();
-    menu.exec(m_applet->containment()->corona()->popupPosition(this, menu.size()));
+    menu->exec(m_applet->containment()->corona()->popupPosition(this, menu->size()));
+    menu->deleteLater();
 }
 
 

@@ -78,6 +78,9 @@ Q_OBJECT
     QString token() const;
     RTM::Permissions permissions() const;
 
+    Q_INVOKABLE QString dateFormat() const;
+    Q_INVOKABLE QString timeFormat() const;
+
     void refreshTasksFromServer();
     void refreshListsFromServer();
     QHash<RTM::TaskId,RTM::Task*> cachedTasks() const;

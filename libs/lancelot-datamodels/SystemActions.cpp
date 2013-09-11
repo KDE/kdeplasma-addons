@@ -279,20 +279,11 @@ void SystemActions::Private::delayedActivate()
     QString cmd = q->root()->children.at(delayedActivateItemIndex)->data.toString();
 
     if (cmd == ID_SUSPEND_DISK || cmd == ID_SUSPEND_RAM) {
-        QDBusMessage call;
 
         if (cmd == ID_SUSPEND_DISK) {
-            call = QDBusMessage::createMethodCall("org.kde.Solid.PowerManagement",
-                                                  "/org/kde/Solid/PowerManagement",
-                                                  "org.kde.Solid.PowerManagement",
-                                                  "suspendToDisk");
-            QDBusConnection::sessionBus().asyncCall(call);
+            Solid::PowerManagement::requestSleep(Solid::PowerManagement::HibernateState, 0, 0);
         } else {
-            call = QDBusMessage::createMethodCall("org.kde.Solid.PowerManagement",
-                                                  "/org/kde/Solid/PowerManagement",
-                                                  "org.kde.Solid.PowerManagement",
-                                                  "suspendToRam");
-             QDBusConnection::sessionBus().asyncCall(call);
+            Solid::PowerManagement::requestSleep(Solid::PowerManagement::SuspendState, 0, 0);
         }
 
         ApplicationConnector::self()->hide(true);

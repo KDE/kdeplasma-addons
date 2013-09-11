@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Weather Forecast (QML)
+Name[bs]=Vremenska prognoza (QML)
 Name[ca]=Previsió meteorològica (QML)
 Name[ca@valencia]=Previsió meteorològica (QML)
 Name[cs]=Předpověď počasí (QML)
@@ -16,6 +17,7 @@ Name[gl]=Prognóstico meteorolóxico (QML)
 Name[hu]=Időjárás-előrejelzés (QML)
 Name[it]=Previsioni meteo (QML)
 Name[kk]=Ауа райын болжау (QML)
+Name[ko]=일기 예보 (QML)
 Name[lt]=Orų prognozė (QML)
 Name[mr]=हवामान पूर्वानुमान (QML)
 Name[nb]=Værmelding (QML)

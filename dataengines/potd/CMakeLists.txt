@@ -45,6 +45,15 @@ target_link_libraries( plasma_potd_apodprovider plasmapotdprovidercore ${KDE4_KI
 install( TARGETS plasma_potd_apodprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES apodprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
+set( potd_natgeo_provider_SRCS
+	natgeoprovider.cpp
+)
+
+kde4_add_plugin( plasma_potd_natgeoprovider ${potd_natgeo_provider_SRCS} )
+target_link_libraries( plasma_potd_natgeoprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEWEBKIT_LIBRARY})
+install( TARGETS plasma_potd_natgeoprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES natgeoprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+
 
 set( potd_epod_provider_SRCS
 	epodprovider.cpp

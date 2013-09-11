@@ -20,10 +20,46 @@
 #include "potd.h"
 
 #include <QPainter>
+#include <QThreadPool>
 
 #include <KDebug>
+#include <KAction>
+#include <KFileDialog>
+#include <KStandardAction>
 
 static const QString DEFAULT_PROVIDER("apod");
+
+SaveRunnable::SaveRunnable(Plasma::DataEngine *dataEngine, const QString &provider, const QString &path)
+    : m_dataEngine(dataEngine),
+      m_path(path)
+{
+    dataEngine->connectSource(provider, this);
+    kDebug() << "saving to" << m_path;
+    setAutoDelete(true);
+}
+
+void SaveRunnable::run()
+{
+    kDebug() << "saving?";
+    if (m_image.isNull() || m_path.isEmpty()) {
+        return;
+    }
+
+    kDebug() << "saving!";
+    m_image.save(m_path);
+}
+
+void SaveRunnable::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
+{
+    if (!m_dataEngine) {
+        deleteLater();
+        return;
+    }
+
+    m_image = data["Image"].value<QImage>();
+    m_dataEngine.data()->disconnectSource(source, this);
+    QThreadPool::globalInstance()->start(this);
+}
 
 PoTD::PoTD(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args)
@@ -31,6 +67,11 @@ PoTD::PoTD(QObject *parent, const QVariantList &args)
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(wallpaperRendered(QImage)));
     dataEngine(QLatin1String("potd"))->connectSource(QLatin1String("Providers"), this);
     setUsingRenderingCache(false);
+
+    QAction *saveFile = KStandardAction::save(this, SLOT(getSaveFileLocation()), this);
+    saveFile->setText(i18n("Save wallpaper image..."));
+    saveFile->setShortcut(QKeySequence());
+    setContextualActions(QList<QAction *>() << saveFile);
 }
 
 void PoTD::init(const KConfigGroup &config)
@@ -46,7 +87,10 @@ void PoTD::init(const KConfigGroup &config)
         }
 
         m_provider = provider;
-        dataEngine(QLatin1String("potd"))->connectSource(m_provider, this);
+
+        if (!isPreviewing()) {
+            dataEngine(QLatin1String("potd"))->connectSource(m_provider, this);
+        }
     }
 }
 
@@ -74,11 +118,39 @@ void PoTD::dataUpdated(const QString &source, const Plasma::DataEngine::Data &da
     }
 }
 
+void PoTD::getSaveFileLocation()
+{
+    if (m_provider.isNull()) {
+        return;
+    }
+
+    KFileDialog *fd = new KFileDialog(KUrl("kfiledialog:///frameplasmoid"), QString(), 0);
+    fd->setOperationMode(KFileDialog::Saving);
+    fd->setMode(KFile::LocalOnly);
+    fd->setAttribute(Qt::WA_DeleteOnClose, true);
+    connect(fd, SIGNAL(okClicked()), this, SLOT(saveFile()));
+    fd->show();
+}
+
+void PoTD::saveFile()
+{
+    KFileDialog *fd = qobject_cast<KFileDialog *>(sender());
+    const QString &path = fd->selectedFile();
+    if (path.isEmpty() || m_provider.isEmpty()) {
+        return;
+    }
+
+    new SaveRunnable(dataEngine(QLatin1String("potd")), m_provider, path);
+}
+
 void PoTD::paint(QPainter *painter, const QRectF& exposedRect)
 {
     if (m_image.isNull()) {
         painter->fillRect(exposedRect, QBrush(Qt::black));
-        const QString text = i18n("Loading the picture of the day...");
+        const QString provider = m_providers.isEmpty() || m_provider.isEmpty() ? QString()
+                                                                               : m_providers.value(m_provider).toString();
+        const QString text = provider.isEmpty() ? i18n("Loading the picture of the day...")
+                                                : i18n("Loading the picture of the day from %1...", provider);
         QRect textRect = painter->fontMetrics().boundingRect(text);
         textRect.moveCenter(boundingRect().center().toPoint());
         painter->setPen(Qt::white);

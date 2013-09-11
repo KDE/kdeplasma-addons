@@ -406,17 +406,18 @@ void WindowTaskItem::showContextMenu(const QPoint &pos, bool showAppMenu)
         actionList.append(configAction);
     }
 
-    TaskManager::BasicMenu menu(0, m_task.data(), &m_applet->groupManager(), actionList, showAppMenu ? getAppMenu() : QList <QAction*>());
-    menu.adjustSize();
+    TaskManager::BasicMenu * menu = new TaskManager::BasicMenu(0, m_task.data(), &m_applet->groupManager(), actionList, showAppMenu ? getAppMenu() : QList <QAction*>());
+    menu->adjustSize();
 
     if (m_applet->formFactor() != Plasma::Vertical) {
-        menu.setMinimumWidth(size().width());
+        menu->setMinimumWidth(size().width());
     }
 
     Q_ASSERT(m_applet->containment());
     Q_ASSERT(m_applet->containment()->corona());
     stopWindowHoverEffect();
-    menu.exec(pos.isNull() ? m_applet->containment()->corona()->popupPosition(this, menu.size()) : pos);
+    menu->exec(pos.isNull() ? m_applet->containment()->corona()->popupPosition(this, menu->size()) : pos);
+    menu->deleteLater();
     delete a;
 }
 

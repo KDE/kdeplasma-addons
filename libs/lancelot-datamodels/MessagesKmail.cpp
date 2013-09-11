@@ -58,6 +58,14 @@ I18N_NOOP("Akonadi server is not running");
 
     namespace Lancelot {
     namespace Models {
+
+        class MessagesKmail::Private {
+            void fetchEmailCollectionsDone(KJob * job)
+            {
+                Q_UNUSED(job);
+            }
+        };
+
         void MessagesKmail::updateLater()
         {
         }
@@ -70,7 +78,6 @@ I18N_NOOP("Akonadi server is not running");
         {
             return QString();
         }
-
     }
     }
 

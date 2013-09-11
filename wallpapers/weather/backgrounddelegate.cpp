@@ -43,7 +43,6 @@ void BackgroundDelegate::paint(QPainter *painter,
     int maxheight = SCREENSHOT_SIZE;
     int maxwidth = int(maxheight * m_ratio);
     if (!pix.isNull()) {
-        QSize sz = pix.size();
         int x = MARGIN + (maxwidth - pix.width()) / 2;
         int y = MARGIN + (maxheight - pix.height()) / 2;
         QRect imgRect = QRect(option.rect.topLeft(), pix.size()).translated(x, y);
@@ -52,45 +51,46 @@ void BackgroundDelegate::paint(QPainter *painter,
 
     // draw text
     painter->save();
-    QFont font = painter->font();
-    font.setWeight(QFont::Bold);
-    painter->setFont(font);
     int x = option.rect.left() + MARGIN * 2 + maxwidth;
 
     QRect textRect(x,
                    option.rect.top() + MARGIN,
                    option.rect.width() - x - MARGIN,
                    maxheight);
-    QString text = title;
-    QString authorCaption;
-    if (!author.isEmpty()) {
-        authorCaption = i18nc("Caption to wallpaper preview, %1 author name",
-                              "by %1", author);
-        text += QLatin1Char( '\n' ) + authorCaption;
-    }
 
-    QRect boundingRect = painter->boundingRect(
-        textRect, Qt::AlignVCenter | Qt::TextWordWrap, text) & option.rect;
+    const QRect boundingRect = painter->boundingRect(textRect, Qt::TextWordWrap, title) & option.rect;
     painter->drawText(boundingRect, Qt::TextWordWrap, title);
     QRect titleRect = painter->boundingRect(boundingRect, Qt::TextWordWrap, title);
     QPoint lastText(titleRect.bottomLeft());
+
+    // Borrowed from Dolphin for consistency and beauty.
+    // For the color of the additional info the inactive text color
+    // is not used as this might lead to unreadable text for some color schemes. Instead
+    // the text color is slightly mixed with the background color.
+    const QColor textColor = option.palette.text().color();
+    const QColor baseColor = option.palette.base().color();
+    const int p1 = 70;
+    const int p2 = 100 - p1;
+    const QColor detailsColor = QColor((textColor.red() * p1 + baseColor.red() * p2) / 100,
+                                       (textColor.green() * p1 + baseColor.green() * p2) / 100,
+                                       (textColor.blue() * p1 + baseColor.blue() * p2) /  100);
+    if (!resolution.isEmpty()) {
+        QRect resolutionRect = QRect(lastText, textRect.size()) & option.rect;
+
+        if (!resolutionRect.isEmpty()) {
+            painter->setPen(detailsColor);
+            painter->drawText(resolutionRect, Qt::TextWordWrap, resolution);
+            lastText = painter->boundingRect(resolutionRect, Qt::TextWordWrap, resolution).bottomLeft();
+        }
+    }
 
     if (!author.isEmpty()) {
         QRect authorRect = QRect(lastText, textRect.size()) & option.rect;
 
         if (!authorRect.isEmpty()) {
-            painter->setFont(KGlobalSettings::smallestReadableFont());
-            painter->drawText(authorRect, Qt::TextWordWrap, authorCaption);
-            lastText = painter->boundingRect(authorRect, Qt::TextWordWrap, authorCaption).bottomLeft();
-        }
-    }
-
-    if (!resolution.isEmpty()) {
-        QRect resolutionRect = QRect(lastText, textRect.size()) & option.rect;
-
-        if (!resolutionRect.isEmpty()) {
-            painter->setFont(KGlobalSettings::smallestReadableFont());
-            painter->drawText(resolutionRect, Qt::TextWordWrap, resolution);
+            painter->setPen(detailsColor);
+            painter->drawText(authorRect, Qt::TextWordWrap, author);
+            lastText = painter->boundingRect(authorRect, Qt::TextWordWrap, author).bottomLeft();
         }
     }
 
@@ -102,9 +102,7 @@ QSize BackgroundDelegate::sizeHint(const QStyleOptionViewItem &option,
 {
     const QString title = index.model()->data(index, Qt::DisplayRole).toString();
     const int maxwidth = int(SCREENSHOT_SIZE * m_ratio);
-    QFont font = option.font;
-    font.setWeight(QFont::Bold);
-    QFontMetrics fm(font);
+    QFontMetrics fm(option.font);
     //kDebug() << QSize(maxwidth + qBound(100, fm.width(title), 500), Background::SCREENSHOT_SIZE + MARGIN * 2);
     return QSize(maxwidth + qBound(100, fm.width(title), 500), SCREENSHOT_SIZE + MARGIN * 2);
 }
