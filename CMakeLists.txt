@@ -50,7 +50,7 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
     KConfig KAuth KJS KWallet KDBusAddons
     KI18n KGuiAddons KService ItemViews KNotifications KConfigWidgets KIconThemes KCompletion KJobWidgets Sonnet KTextWidgets XmlGui KCrash
-    KIO KUnitConversion KDE4Attic)
+    KIO KUnitConversion KDE4Attic KBookmarks)
 
 find_package(KIO REQUIRED NO_MODULE)
 
