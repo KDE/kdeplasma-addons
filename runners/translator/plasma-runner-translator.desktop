@@ -2,6 +2,7 @@
 Name=Translator
 Name[bs]=Prevodilac
 Name[ca]=Traductor
+Name[ca@valencia]=Traductor
 Name[cs]=Překladatel
 Name[da]=Oversætter
 Name[de]=Übersetzer
@@ -33,6 +34,7 @@ Name[zh_TW]=翻譯器
 Comment=Translates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[bs]=Prevodi u bilo koji jezik koristeći Google Translate. Za listu podržanih jezika posjetite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[ca]=Tradueix a qualsevol idioma usant el Google Translate. Per la llista d'idiomes acceptats visiteu https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[ca@valencia]=Tradueix a qualsevol idioma usant el Google Translate. Per la llista d'idiomes acceptats visiteu https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[da]=Oversætter til alle sprog med Google Translate. Besøg https://developers.google.com/translate/v2/using_rest?hl=de#language-params for en liste over understøttede sprog
 Comment[de]=Übersetzt mit „Google Übersetzer“ in beliebige Sprachen. Eine Liste der unterstützten Sprachen finden Sie unter https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[es]=Traduce a cualquier idioma usando Google Translate. Para una lista de los idiomas admitidos visite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
