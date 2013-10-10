@@ -220,6 +220,9 @@ void LeaveNote::slotSend()
         }
 
     } else {
+        if (mUseKNotes) {
+            msg = mTextEdit->nativeWidget()->toPlainText();
+        }
         createNote(title, msg);
     }
 
