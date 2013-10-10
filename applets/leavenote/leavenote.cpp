@@ -199,7 +199,7 @@ void LeaveNote::slotSend()
     if (mUseKNotes && !checkKNotesDBusInterface()) {
         QHash<QString, QVariant> hash;
         hash["title"] = title;
-        hash["msg"] = msg;
+        hash["msg"] = mTextEdit->nativeWidget()->toPlainText();
         mMsgCache << hash;
 
         /* check if we are loading KNotes already then cache the msg*/
