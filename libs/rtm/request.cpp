@@ -137,7 +137,7 @@ QString RTM::Request::requestUrl()
     QString url = d->baseUrl;
     QStringList keys = d->arguments.keys();
     foreach (const QString &key, keys) 
-      url.append('&' + key + '=' + d->arguments.value(key).toUtf8());
+      url.append('&' + key + '=' + d->arguments.value(key));
     return url;
 }
 
