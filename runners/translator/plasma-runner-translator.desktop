@@ -9,6 +9,7 @@ Name[de]=Übersetzer
 Name[es]=Traductor
 Name[fi]=Käännin
 Name[fr]=Outil de traduction
+Name[gl]=Tradutor
 Name[hu]=Fordító
 Name[it]=Traduttore
 Name[kk]=Аудару
@@ -42,6 +43,7 @@ Comment[de]=Übersetzt mit „Google Übersetzer“ in beliebige Sprachen. Eine 
 Comment[es]=Traduce a cualquier idioma usando Google Translate. Para una lista de los idiomas admitidos visite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[fi]=Kääntää mille tahansa kielelle käyttäen Google-kääntäjää. Katso tuettujen kielten luettelo osoitteesta https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[fr]=Traduit dans n'importe quelle langue en utilisant « Google Translate ». Pour obtenir une liste des langues prises en charge, veuillez consulter « https://developers.google.com/translate/v2/using_rest?hl=de#language-params »
+Comment[gl]=Traduce a calquera lingua mediante o Google Translate. Para coñecer a lista de linguas admitidas consulte https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[hu]=Lefordítja bármilyen nyelvre a Google Fordító használatával. A támogatott nyelvek listájáért látogassa meg a https://developers.google.com/translate/v2/using_rest?hl=de#language-params oldalt
 Comment[it]=Traduce in qualsiasi lingua utilizzando Google Translate. Per un elenco delle lingue supportate, visita https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[kk]=Google Аудару көмегімен тілден-тілге аудару. Қай тілдер қолдауы барын https://developers.google.com/translate/v2/using_rest?hl=de#language-params дегеннен қараңыз
