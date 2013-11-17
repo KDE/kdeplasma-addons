@@ -23,6 +23,7 @@ Name[pt_BR]=Tradutor
 Name[ro]=Traducător
 Name[ru]=Переводчик
 Name[sk]=Prekladateľ
+Name[sl]=Prevajalnik
 Name[sr]=преводилац
 Name[sr@ijekavian]=преводилац
 Name[sr@ijekavianlatin]=prevodilac
@@ -54,6 +55,7 @@ Comment[pt]=Traduz para qualquer língua com o serviço Google Translate. Para u
 Comment[pt_BR]=Traduz para qualquer idioma usando o serviço Google Tradutor. Para ver uma lista com os idiomas suportados, acesse https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[ru]=Перевод на разные языки с помощью Google Translate. Список поддерживаемых языков https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[sk]=Preloží do jazyka pomocou Google Translate. Pre zoznam podporovaných jazykov navštívte https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[sl]=Prevede v katerikoli jezik s pomočjo Google Translate. Za seznam podprtih jezikov obiščite https://developers.google.com/translate/v2/using_rest?hl=sl#language-params
 Comment[sr]=Преводи на разне језике помоћу Гугловог преводиоца. За списак подржаних језика посетите https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[sr@ijekavian]=Преводи на разне језике помоћу Гугловог преводиоца. За списак подржаних језика посетите https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[sr@ijekavianlatin]=Prevodi na razne jezike pomoću Googleovog prevodioca. Za spisak podržanih jezika posetite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
