@@ -77,12 +77,16 @@ void MediaPlayer::init()
    m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
 
    m_video = new Plasma::VideoWidget(this);
+
    m_video->setAcceptDrops(false);
 
    m_layout->addItem(m_video);
 
    m_video->setUrl(m_currentUrl);
+
    Phonon::MediaObject *media = m_video->mediaObject();
+   connect(media, SIGNAL(currentSourceChanged(Phonon::MediaSource)), this, SLOT(captureCurrentUrl(Phonon::MediaSource)));
+   connect(media, SIGNAL(finished()), this, SLOT(resetPlaylist()));
 
    media->setTickInterval(200);
 
@@ -198,6 +202,17 @@ void MediaPlayer::OpenUrl(const QString &url)
 void MediaPlayer::hideControls()
 {
     SetControlsVisible(false);
+}
+
+void MediaPlayer::captureCurrentUrl(const Phonon::MediaSource &newSource)
+{
+    m_currentUrl = newSource.url().toString();
+    setAssociatedApplicationUrls(KUrl(m_currentUrl));
+}
+
+void MediaPlayer::resetPlaylist()
+{
+    m_video->setUrl(m_currentUrl);
 }
 
 void MediaPlayer::keyPressEvent(QKeyEvent *event)
