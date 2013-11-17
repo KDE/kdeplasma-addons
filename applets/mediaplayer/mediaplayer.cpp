@@ -81,21 +81,10 @@ void MediaPlayer::init()
 
    m_layout->addItem(m_video);
 
-
-
-   connect(m_video->audioOutput(), SIGNAL(volumeChanged(qreal)), SLOT(volumeChanged(qreal)));
-
-
    m_video->setUrl(m_currentUrl);
    Phonon::MediaObject *media = m_video->mediaObject();
 
-   connect(media, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(stateChanged(Phonon::State,Phonon::State)));
-   connect(media, SIGNAL(seekableChanged(bool)), this, SLOT(seekableChanged(bool)));
-
    media->setTickInterval(200);
-
-   connect(media, SIGNAL(tick(qint64)), this, SLOT(tick(qint64)));
-   connect(media, SIGNAL(totalTimeChanged(qint64)), SLOT(totalTimeChanged(qint64)));
 
    media->play();
 
