@@ -74,6 +74,8 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void hideControls();
+    void captureCurrentUrl(const Phonon::MediaSource &newSource);
+    void resetPlaylist();
 
 private:
     QGraphicsLinearLayout *m_layout;
