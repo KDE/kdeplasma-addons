@@ -20,14 +20,15 @@ include(FeatureSummary)
 find_package(ECM 0.0.8 REQUIRED NO_MODULE)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
 
 find_package(Qt5Core REQUIRED NO_MODULE)
-
-find_package(Qt5Transitional MODULE)
 find_package(Qt5Quick REQUIRED NO_MODULE)
 find_package(Qt5X11Extras REQUIRED NO_MODULE)
-#find_package(KDE4Support REQUIRED NO_MODULE)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
@@ -46,20 +47,15 @@ endif()
 set (QT_MIN_VERSION "5.0.0")
 
 
-find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
-    KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
-    KConfig KAuth KJS KWallet KDBusAddons
-    KI18n KGuiAddons KService ItemViews KNotifications KConfigWidgets KIconThemes KCompletion KJobWidgets Sonnet KTextWidgets XmlGui KCrash
-    KUnitConversion KDE4Attic KBookmarks KIO)
+find_package(KF5 CONFIG REQUIRED
+    IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
+    Config Auth JS Wallet DBusAddons
+    I18n GuiAddons Service ItemViews Notifications ConfigWidgets IconThemes Completion JobWidgets Sonnet TextWidgets XmlGui Crash
+    UnitConversion Bookmarks KIO)
 
-find_package(KIO REQUIRED NO_MODULE)
-
-find_package(Plasma REQUIRED NO_MODULE)
+find_package(KF5Plasma REQUIRED NO_MODULE)
 find_package(KDeclarative REQUIRED NO_MODULE)
-
-# needed for set_package_properties macro
-find_package(KDELibs4 REQUIRED NO_MODULE)
-find_package(KDE4Support REQUIRED NO_MODULE)
+find_package(KF5KDE4Support REQUIRED NO_MODULE)
 
 #optional features
 find_package(X11 MODULE)
@@ -135,85 +131,12 @@ if(QCA2_FOUND)
 endif()
 
 
-macro(plasma_install_package dir component)
-   set(root ${ARGV2})
-   set(type ${ARGV3})
-   if(NOT root)
-      set(root plasma/plasmoids)
-   endif()
-   if(NOT type)
-      set(type applet)
-   endif()
-   install(DIRECTORY ${dir}/ DESTINATION ${DATA_INSTALL_DIR}/${root}/${component} PATTERN .svn EXCLUDE PATTERN CMakeLists.txt EXCLUDE PATTERN Messages.sh EXCLUDE)
-   install(FILES ${dir}/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-${type}-${component}.desktop)
-endmacro()
-
 ################# list the subdirectories #################
 #add_subdirectory(src)
 #add_subdirectory( desktoptheme )
 
 feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
-
-# project(kdeplasma-addons)
-#
-# set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
-#
-# find_package(KDE4 REQUIRED)
-# include (KDE4Defaults)
-# include(MacroLibrary)
-# include(MacroOptionalDependPackage)
-#
-# macro_optional_find_package(KDE4Workspace)
-# macro_log_feature(KDE4WORKSPACE_FOUND "kdebase workspace" "KDE base workspace libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
-#
-# macro_optional_find_package(QCA2)
-# macro_log_feature(QCA2_FOUND "QCA2" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" FALSE "2.0.0" "Needed for building microblog dataengine")
-#
-# macro_optional_find_package(KdepimLibs)
-# macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "KDE PIM libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
-# find_package(Boost)
-#
-# set(LIBATTICA_MIN_VERSION "0.1.1")
-# macro_optional_find_package(LibAttica)
-# macro_log_feature(LIBATTICA_FOUND "libattica" "Attica Library" "http://websvn.kde.org/trunk/kdesupport/attica/" FALSE "" "Needed for building the Open Collaboration Services plasma dataengine and applets")
-#
-# macro_optional_find_package(OpenGL)
-# macro_log_feature(OPENGL_FOUND "OpenGL" "API for developing portable, interactive 2D and 3D graphics applications" "http://mesa3d.sourceforge.net" FALSE "" "STRONGLY RECOMMENDED: The 3D hardware acceleration available through the OpenGL API is used in applications ranging from graphics and modellers to screensavers and video players.")
-#
-# macro_optional_find_package(Nepomuk)
-# macro_log_feature(NEPOMUK_FOUND "Nepomuk" "Handles all kinds of metadata on the KDE desktop to provide a semantic desktop" "http://nepomuk.kde.org/" FALSE "" "STRONGLY_RECOMMENDED: Nepomuk is used to provide metadata on objects like files, emails etc. to provide a semantic desktop.")
-# macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
-#
-#
-# macro_optional_find_package(QJSON)
-# macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses, and the microblog dataengine" "" FALSE "" "")
-#
-# macro_optional_find_package(QtOAuth)
-# macro_log_feature(QTOAUTH_FOUND "QtOAuth" "QtOAuth Library - required to build the Plasma Microblog DataEngine" "https://github.com/ayoy/qoauth" FALSE "" "Needed for building Plasma Microblog DataEngine")
-#
-# macro_optional_depend_package(Marble "Marble")
-# if (DEPEND_PACKAGE_Marble)
-#   macro_optional_find_package(Marble)
-# else (DEPEND_PACKAGE_Marble)
-#   set (MARBLE_FOUND FALSE)
-# endif (DEPEND_PACKAGE_Marble)
-# macro_log_feature(MARBLE_FOUND "Marble" "Desktop Globe" "http://marble.kde.org" FALSE "" "RECOMMENDED: Marble is used to provide a desktop globe wallpaper for Plasma.")
-#
-# macro_optional_find_package(DBusMenuQt)
-# macro_log_feature(DBUSMENUQT_FOUND "DBusMenuQt" "DBusMenu Qt" "https://launchpad.net/libdbusmenu-qt/" FALSE "" "Needed for Unity support in IconTasks.")
-#
-# if (NEPOMUK_FOUND)
-#   include_directories( ${SOPRANO_INCLUDE_DIR} ${NEPOMUK_INCLUDE_DIR} )
-# endif (NEPOMUK_FOUND)
-#
-# add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-# add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-# include_directories (${KDE4_INCLUDES}
-#                      ${KDE4WORKSPACE_INCLUDE_DIR}
-#                      ${KDEPIMLIBS_INCLUDE_DIR}
-#                      ${CMAKE_CURRENT_SOURCE_DIR}/libs)
-#
 # add_subdirectory(libs)
 # add_subdirectory(applets)
 # add_subdirectory(dataengines)
