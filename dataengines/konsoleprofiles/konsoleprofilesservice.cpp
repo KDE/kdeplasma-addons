@@ -20,7 +20,7 @@
 
 #include <QtCore/QMap>
 #include <KToolInvocation>
-#include <KDebug>
+#include <QDebug>
 
 KonsoleProfilesService::KonsoleProfilesService(QObject* parent, const QString& profileName)
     : Plasma::Service(parent)
@@ -45,7 +45,7 @@ void ProfileJob::start()
  //   QMap<QString, QVariant>jobParameters = parameters();
     const QString operation = operationName();
 
-kDebug() << "SERVICE START...operation: " << operation << " dest: " << destination();
+qDebug() << "SERVICE START...operation: " << operation << " dest: " << destination();
     if (operation == "open") {
   //      Q_ASSERT(!jobParameters.isEmpty());
 
