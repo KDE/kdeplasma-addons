@@ -136,7 +136,7 @@ endif()
 feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 # add_subdirectory(libs)
-# add_subdirectory(applets)
+add_subdirectory(applets)
 # add_subdirectory(dataengines)
 # add_subdirectory(runners)
 #

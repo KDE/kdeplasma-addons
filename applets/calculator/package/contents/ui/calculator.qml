@@ -20,10 +20,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .          *
  *****************************************************************************/
 
-import QtQuick 1.0;
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.locale 0.1 as Locale
+import QtQuick 2.0;
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     id: main;
@@ -183,14 +182,6 @@ Item {
                             Math.floor(Math.log(Math.abs(number))/Math.log(10)) + 1;
     }
 
-    Locale.Locale {
-        id: locale;
-    }
-
-    PlasmaCore.Theme {
-        id: plasmaTheme;
-    }
-
     Connections {
         target: plasmoid;
         onPopupEvent: {
@@ -218,7 +209,7 @@ Item {
                 text: "0";
                 font.pointSize: 16;
                 font.weight: Font.Bold;
-                color: plasmaTheme.viewTextColor;
+                color: theme.viewTextColor;
                 horizontalAlignment: TextEdit.AlignRight;
                 verticalAlignment: TextEdit.AlignVCenter;
                 readOnly: true;
@@ -360,7 +351,8 @@ Item {
             PlasmaComponents.Button {
                 width: buttonWidth;
                 height: buttonHeight;
-                text: locale.decimalSymbol;
+                //TODO: Remove hack: locale.decimalSymbol
+		text: ".";
                 onClicked: decimalClicked();
             }
 
