@@ -54,7 +54,7 @@ find_package(KF5 CONFIG REQUIRED
     UnitConversion Bookmarks KIO)
 
 find_package(KF5Plasma REQUIRED NO_MODULE)
-find_package(KDeclarative REQUIRED NO_MODULE)
+find_package(KF5Declarative REQUIRED NO_MODULE)
 find_package(KF5KDE4Support REQUIRED NO_MODULE)
 
 #optional features
