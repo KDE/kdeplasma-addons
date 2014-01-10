@@ -18,7 +18,6 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-<<<<<<< HEAD
 find_package(Qt5Core REQUIRED NO_MODULE)
 find_package(Qt5Quick REQUIRED NO_MODULE)
 find_package(Qt5X11Extras REQUIRED NO_MODULE)
@@ -46,8 +45,6 @@ find_package(KF5 CONFIG REQUIRED
     I18n GuiAddons Service ItemViews Notifications ConfigWidgets IconThemes Completion JobWidgets Sonnet TextWidgets XmlGui Crash
     UnitConversion Bookmarks KIO)
 
-=======
->>>>>>> More cleanups
 find_package(KF5Plasma REQUIRED NO_MODULE)
 find_package(KF5Declarative REQUIRED NO_MODULE)
 find_package(KF5KDE4Support REQUIRED NO_MODULE)
