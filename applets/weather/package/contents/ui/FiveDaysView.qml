@@ -79,9 +79,9 @@ WeatherListView {
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -root.spacing/2
 
-            PlasmaCore.ToolTip {
+            PlasmaCore.ToolTipArea {
                 id: iconToolTip
-                target: parent
+                anchors.fill: parent
             }
         }
     }
