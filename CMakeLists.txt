@@ -1,21 +1,13 @@
+project(kdeplasma-addons)
 
 cmake_minimum_required(VERSION 2.8.10.1)
 
-project(kdeplasma-addons)
-
 ################# Disallow in-source build #################
-
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
    message(FATAL_ERROR "plasma requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma [options]' there.")
 endif()
 
-
-# Make CPack available to easy generate binary packages
-include(CPack)
-
 include(FeatureSummary)
-
-################# set KDE specific information #################
 
 find_package(ECM 0.0.8 REQUIRED NO_MODULE)
 
@@ -66,9 +58,7 @@ if(X11_FOUND)
   add_feature_info("X Screensaver Extension (libXss)" X11_Xscreensaver_FOUND "Support for KIdleTime (fallback mode)")
   add_feature_info("X Sync Extension (libXext)" X11_XSync_FOUND "Efficient operation of KIdleTime. STRONGLY RECOMMENDED")
 
-  if(NOT X11_XSync_FOUND AND NOT X11_Xscreensaver_FOUND)
-    message(FATAL_ERROR "\nNeither the XSync (libXext) nor XScreensaver (libXss) development package was found.\nPlease install one of them (XSync is recommended)\n")
-  endif()
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
   #X11 Session Management (SM) is required
   #X11_SM_FOUND is set in FindX11, which is required by KDE4Internal
@@ -142,7 +132,4 @@ add_subdirectory(dataengines)
 #
 # add_subdirectory(scriptengines)
 add_subdirectory(wallpapers)
-# add_subdirectory(containments)
-# add_subdirectory(cmake)
-#
-# macro_display_feature_log()
+
