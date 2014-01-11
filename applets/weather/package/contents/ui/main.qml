@@ -22,6 +22,9 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Item {
     id: root
 
+    property int implicitWidth: 250
+    property int implicitHeight: 350
+
     property int minimumWidth: 373
     property int minimumHeight: 272
 

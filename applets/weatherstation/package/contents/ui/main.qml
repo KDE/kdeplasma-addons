@@ -21,6 +21,9 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
     id: root
 
+    property int implicitWidth: 250
+    property int implicitHeight: 350
+
     property int minimumWidth: bg.naturalSize.width
     property int minimumHeight: bg.naturalSize.height
 

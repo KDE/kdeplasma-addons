@@ -23,6 +23,9 @@ import org.kde.qtextracomponents 0.1
 Item {
     id: mainWindow
 
+    property int implicitWidth: 600
+    property int implicitHeight: 250
+
     width: minimumWidth
     height: minimumHeight
 

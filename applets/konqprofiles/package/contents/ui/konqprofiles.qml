@@ -24,6 +24,9 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Item {
     id: konqProfiles
 
+    property int implicitWidth: 200
+    property int implicitHeight: 200
+
     property int minimumWidth: 200
     property int minimumHeight: 300
 
