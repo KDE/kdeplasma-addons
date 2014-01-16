@@ -1,9 +1,5 @@
 project(liblancelot)
 
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-
 ########### define variables ##########
 
 set(LANCELOT_INCLUDE_DIR

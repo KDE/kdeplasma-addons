@@ -18,16 +18,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-find_package(Qt5Core REQUIRED NO_MODULE)
-find_package(Qt5Quick REQUIRED NO_MODULE)
-find_package(Qt5X11Extras REQUIRED NO_MODULE)
-
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
-
-if(KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
-   set(KDE_NO_DEPRECATED TRUE)
-   set(CMAKE_AUTOMOC_MOC_OPTIONS "-DKDE_NO_DEPRECATED")
-endif()
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick X11Extras)
 
 ############### Load the CTest options ###############
 # CTestCustom.cmake has to be in the CTEST_BINARY_DIR.
@@ -43,22 +34,17 @@ find_package(KF5 CONFIG REQUIRED
     IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
     Config Auth JS Wallet DBusAddons
     I18n GuiAddons Service ItemViews Notifications ConfigWidgets IconThemes Completion JobWidgets Sonnet TextWidgets XmlGui Crash
-    UnitConversion Bookmarks KIO)
+    UnitConversion Bookmarks KIO Plasma Declarative NewStuff KDE4Support)
 
-find_package(KF5Plasma REQUIRED NO_MODULE)
-find_package(KF5Declarative REQUIRED NO_MODULE)
-find_package(KF5KDE4Support REQUIRED NO_MODULE)
+find_package(Phonon4Qt5 REQUIRED NO_MODULE)
 
 #optional features
 find_package(X11 MODULE)
 if(X11_FOUND)
-  set(HAVE_X11 X11_FOUND)
   #X11_Xrender discovery is done by FindX11
   add_feature_info("X Rendering Extension (libXrender)" X11_Xrender_FOUND "Support for compositing, rendering operations, and alpha-blending. STRONGLY RECOMMENDED")
   add_feature_info("X Screensaver Extension (libXss)" X11_Xscreensaver_FOUND "Support for KIdleTime (fallback mode)")
   add_feature_info("X Sync Extension (libXext)" X11_XSync_FOUND "Efficient operation of KIdleTime. STRONGLY RECOMMENDED")
-
-feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
   #X11 Session Management (SM) is required
   #X11_SM_FOUND is set in FindX11, which is required by KDE4Internal
@@ -67,6 +53,13 @@ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
   endif()
 endif()
 
+find_package(Freetype)
+set_package_properties(Freetype PROPERTIES DESCRIPTION "A font rendering engine"
+                       URL "http://www.freetype.org"
+                       TYPE OPTIONAL
+                       PURPOSE "Needed to build kfontinst, a simple font installer."
+                      )
+
 find_package(OpenSSL MODULE)
 set_package_properties(OpenSSL PROPERTIES DESCRIPTION "Support for secure network communications (SSL and TLS)"
                        URL "http://openssl.org"
@@ -74,7 +67,7 @@ set_package_properties(OpenSSL PROPERTIES DESCRIPTION "Support for secure networ
                        PURPOSE "KDE uses OpenSSL for the bulk of secure communications, including secure web browsing via HTTPS"
                       )
 
-find_package(Libintl MODULE)
+# find_package(Libintl MODULE)
 set_package_properties(Libintl PROPERTIES DESCRIPTION "Support for multiple languages"
                        URL "http://www.gnu.org/software/gettext"
                        TYPE RECOMMENDED
@@ -82,7 +75,7 @@ set_package_properties(Libintl PROPERTIES DESCRIPTION "Support for multiple lang
                       )
 
 #FIXME: when we have a qca for qt5, reenable
-find_package(QCA2 2.0.0 MODULE)
+# find_package(QCA2 2.0.0 MODULE)
 set_package_properties(QCA2 PROPERTIES DESCRIPTION "Support for remote plasma widgets"
                        URL "http://delta.affinix.com/qca"
                        TYPE OPTIONAL
@@ -96,40 +89,17 @@ set_package_properties(QCA2 PROPERTIES DESCRIPTION "Support for remote plasma wi
 
 #########################################################################
 
-add_definitions(${KDE4_DEFINITIONS})
-add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
-
-remove_definitions(-DQT3_SUPPORT_WARNINGS -DQT3_SUPPORT)
-remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
-
-
-################# setup the include directories #################
-include_directories( ${KDE4_INCLUDES}
-                     ${KF5_INCLUDE_DIRS}  # since e-c-m 0.0.7
-                   )
-
-# for including config.h and for includes like <kparts/foo.h>
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/src ${CMAKE_SOURCE_DIR}/interfaces ${CMAKE_SOURCE_DIR}/src/plasma/includes)
-
-if(QCA2_FOUND)
-    include_directories(
-        ${QCA2_INCLUDE_DIR}
-    )
-endif()
-
-
 ################# list the subdirectories #################
 #add_subdirectory(src)
 #add_subdirectory( desktoptheme )
-
-feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 # add_subdirectory(libs)
 add_subdirectory(applets)
 add_subdirectory(dataengines)
 # add_subdirectory(runners)
-#
-# add_subdirectory(scriptengines)
+
+add_subdirectory(scriptengines)
 add_subdirectory(wallpapers)
 
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
