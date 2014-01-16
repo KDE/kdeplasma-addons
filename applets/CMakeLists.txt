@@ -40,7 +40,6 @@ add_subdirectory(calculator)
 #   add_subdirectory(community)
 #   add_subdirectory(social-news)
 # endif(LIBATTICA_FOUND)
-# add_subdirectory(pastebin)
 # add_subdirectory(previewer)
 # add_subdirectory(rememberthemilk)
 # add_subdirectory(rssnow)
@@ -97,3 +96,5 @@ add_subdirectory(calculator)
 # endif (Q_WS_X11)
 # 
 # add_subdirectory(webslice)
+
+plasma_install_package(quickshare org.kde.plasma.quickshare)
