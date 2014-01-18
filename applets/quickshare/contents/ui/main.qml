@@ -38,13 +38,18 @@ DropArea {
         return false;
     }
 
-    function preferredSourceForDrop(mime) {
-        var category = mime.substr(0, mime.indexOf("/"));
-        var ret = plasmoid.configuration[category];
-        if (ret == "") {
-            console.log("Couldn't find a backend for", mime);
+    function preferredSourceForMimetype(mimes) {
+        console.log("all mimes", mimes );
+        for(var mime in mimes) {
+            var mimeName = mimes[mime];
+            var category = mimeName.substr(0, mimeName.indexOf("/"));
+            var ret = plasmoid.configuration[category];
+            console.log("cacacaa", ret, mimeName, category );
+            if (ret != null) {
+                return {"mime": mimeName, "source": ret};
+            }
         }
-        return ret;
+        return {"mime": "", "source": ""};
     }
 
     onEntered: {
@@ -63,8 +68,8 @@ DropArea {
         PasteMenuItem {}
     }
 
-    function sendData(format, data) {
-        var service = shareDataSource.serviceForSource(preferredSourceForDrop(format));
+    function sendData(source, data) {
+        var service = shareDataSource.serviceForSource(source);
         var operation = service.operationDescription("share");
         operation.content = data;
         root.lastJob = service.startOperationCall(operation);
@@ -86,7 +91,8 @@ DropArea {
     }
 
     onDropped: {
-        sendData(drop.formats[0], drop.getDataAsString(drop.formats[0]))
+        var pref = preferredSourceForMimetype(drop.formats);
+        sendData(pref.source, drop.getDataAsString(pref.mime))
         drop.accept();
     }
 
@@ -101,7 +107,8 @@ DropArea {
             icon: "edit-paste"
 
             onClicked: {
-                sendData(clipboard.formats[0], clipboard.content);
+                var pref = preferredSourceForMimetype(clipboard.formats);
+                sendData(pref.source, clipboard.contentFormat(pref.mime));
             }
         }
 
