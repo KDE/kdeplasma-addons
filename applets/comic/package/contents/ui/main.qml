@@ -118,8 +118,8 @@ Item {
                         left: parent.left
                     }
 
-                    width: Math.max(theme.smallIconSize, tabButton.height)
-                    height: Math.max(theme.smallIconSize, tabButton.height)
+                    width: Math.max(units.iconSizes.small, tabButton.height)
+                    height: Math.max(units.iconSizes.small, tabButton.height)
 
                     color: "white"
                     opacity: model.highlight ? 0 : 0.5
