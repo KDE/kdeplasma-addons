@@ -29,38 +29,36 @@ DropArea {
     property bool properlySent: true
     property QtObject lastJob: null
 
-    function isImage(drop) {
-        for(var x in drop.formats) {
-            if(x.indexOf("image/")==0) {
-                return true;
-            }
-        }
-        return false;
+    function findMimeType(mimeName, data) {
+        if (mimeName == "text/uri-list")
+            return mimeDb.mimeTypeForUrl(data[0]);
+        else
+            return mimeDb.mimeTypeForName(mimeName);
     }
 
-    function preferredSourceForMimetype(mimes) {
-        console.log("all mimes", mimes );
-        for(var mime in mimes) {
-            var mimeName = mimes[mime];
-            var category = mimeName.substr(0, mimeName.indexOf("/"));
-            var ret = plasmoid.configuration[category];
-            console.log("cacacaa", ret, mimeName, category );
-            if (ret != null) {
-                return {"mime": mimeName, "source": ret};
-            }
+    function preferredSourceForMimetypes(mimeNames, data) {
+        for(var i in mimeNames) {
+            var mime = findMimeType(mimeNames[i], data);
+            var category = mime.name.substr(0, mime.name.indexOf("/"));
+
+            return { "mime": mime, "format": mimeNames[i], "source": plasmoid.configuration[category] };
         }
-        return {"mime": "", "source": ""};
+        return {}
     }
 
     onEntered: {
-        if(drag.hasText)
-            icon.source = "text-plain"
-        else if(isImage(drag))
-            icon.source = "application-vnd.oasis.opendocument.image"
+        var source = preferredSourceForMimetypes(drag.formats, [drag.getDataAsString("text/uri-list")]);
+
+        icon.source = source.mime.iconName;
+        drag.accept();
     }
 
     QtExtra.Clipboard {
         id: clipboard
+    }
+
+    QtExtra.MimeDatabase {
+        id: mimeDb
     }
 
     Component {
@@ -91,8 +89,8 @@ DropArea {
     }
 
     onDropped: {
-        var pref = preferredSourceForMimetype(drop.formats);
-        sendData(pref.source, drop.getDataAsString(pref.mime))
+        var pref = preferredSourceForMimetypes(drop.formats);
+        sendData(pref.source, drop.getDataAsString(pref.format))
         drop.accept();
     }
 
@@ -107,8 +105,9 @@ DropArea {
             icon: "edit-paste"
 
             onClicked: {
-                var pref = preferredSourceForMimetype(clipboard.formats);
-                sendData(pref.source, clipboard.contentFormat(pref.mime));
+                var pref = preferredSourceForMimetypes(clipboard.formats, clipboard.contentFormat("text/uri-list"));
+
+                sendData(pref.source, clipboard.contentFormat(pref.format));
             }
         }
 
