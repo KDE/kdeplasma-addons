@@ -41,9 +41,13 @@ Item {
         Component.onCompleted: connectedSources = sources
     }
 
-    PlasmaCore.DataModel {
+    PlasmaCore.SortFilterModel {
         id: profilesModel
-        dataSource: profilesSource
+        sortRole: "prettyName"
+        sortOrder: "AscendingOrder"
+        sourceModel: PlasmaCore.DataModel {
+            dataSource: profilesSource
+        }
     }
 
     Component.onCompleted: {
