@@ -105,7 +105,7 @@ Item {
         } else {
             operand = operand * 10 + digit;
         }
-        display.text = operand;
+        displayNumber(operand);
         showingInput = true;
         ++inputSize;
     }
@@ -137,8 +137,8 @@ Item {
             return;
         }
 
-        display.text = algarismCount(result * Math.pow(10, decimals)) > maxInputLength?
-            "E" : result;
+        displayNumber(algarismCount(result * Math.pow(10, decimals)) > maxInputLength?
+            "E" : result);
         showingInput = false;
     }
 
@@ -170,7 +170,7 @@ Item {
     function clearClicked() {
         clearOperand();
         operator = "";
-        display.text = operand;
+        displayNumber(operand);
         showingInput = true;
         showingResult = false;
     }
@@ -184,6 +184,10 @@ Item {
     function algarismCount(number) {
         return number == 0? 1 :
                             Math.floor(Math.log(Math.abs(number))/Math.log(10)) + 1;
+    }
+
+    function displayNumber(number){
+        display.text = number.toString().replace(".", Qt.locale().decimalPoint);
     }
 
     Connections {
@@ -355,8 +359,7 @@ Item {
             PlasmaComponents.Button {
                 width: buttonWidth;
                 height: buttonHeight;
-                //TODO: Remove hack: locale.decimalSymbol
-		text: ".";
+		text: Qt.locale().decimalPoint;
                 onClicked: decimalClicked();
             }
 
