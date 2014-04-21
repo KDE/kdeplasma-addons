@@ -49,7 +49,12 @@ Item
     Timer {
         id: t;
         interval: 1000;
-        onTriggered: seconds--;
+        onTriggered:{
+            seconds--;
+            if (seconds == 0){
+                parent.running = false;
+            }
+        }
         repeat: true;
         running: parent.running;
     }

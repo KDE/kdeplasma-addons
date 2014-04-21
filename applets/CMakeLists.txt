@@ -45,7 +45,7 @@ add_subdirectory(calculator)
 # add_subdirectory(rssnow)
 # add_subdirectory(spellcheck)
 # add_subdirectory(showdashboard)
-# add_subdirectory(timer)
+add_subdirectory(timer)
 # 
 # add_subdirectory(eyes)
 # 
@@ -98,4 +98,3 @@ add_subdirectory(calculator)
 # add_subdirectory(webslice)
 
 plasma_install_package(quickshare org.kde.plasma.quickshare)
-plasma_install_package(timer org.kde.plasma.timer)
