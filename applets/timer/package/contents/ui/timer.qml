@@ -40,6 +40,7 @@ Item
     property real digits: (hideSeconds) ? 4.5 : 7;
     property int digitH: ((height / 2) * digits < width ? height : ((width - (digits - 1)) / digits) * 2);
     property int digitW: digitH / 2;
+    property bool suspended: false;
 
     PlasmaCore.Svg {
         id: timerSvg
@@ -50,7 +51,9 @@ Item
         id: t;
         interval: 1000;
         onTriggered:{
-            seconds--;
+            if (seconds != 0){
+                seconds--;
+            }
             if (seconds == 0){
                 parent.running = false;
             }
@@ -69,6 +72,30 @@ Item
             font.pixelSize: parent.parent.height - digitH;
         }
         Row {
+            id: timerDigits;
+            SequentialAnimation on opacity {
+                running: root.suspended;
+                loops: Animation.Infinite;
+                NumberAnimation {
+                    duration: 800;
+                    from: 1.0;
+                    to: 0.2;
+                    easing: Easing.InOutQuad;
+                }
+                PauseAnimation {
+                    duration: 400;
+                }
+                NumberAnimation {
+                    duration: 800;
+                    from: 0.2;
+                    to: 1.0;
+                    easing: Easing.InOutQuad;
+                }
+                PauseAnimation {
+                    duration: 400;
+                }
+            }
+
             TimerDigit {
                 meaning: 60*60*10;
                 num: ~~((seconds / (60*60)) / 10);
@@ -122,17 +149,56 @@ Item
     MouseArea {
         anchors.fill: parent;
         onClicked:{
-            parent.running = !parent.running;
+            if (parent.running){
+                 stopTimer();
+            }else{
+                 startTimer();
+            }
         }
     }
 
-    //PlasmaComponents.ContextMenu {
-    //    model: predefinedTimers;
-    //}
-
-    //Component.onCompleted: {
+    Component.onCompleted: {
     //    plasmoid.addEventListener ('ConfigChanged', configChanged);
-    //}
+        plasmoid.setAction("timerStart", i18n("&Start"));
+        plasmoid.setAction("timerStop", i18n("S&top"));
+        plasmoid.setAction("timerReset", i18n("&Reset"));
+    }
+
+    function startTimer()
+    {
+        running = true;
+        suspended = false;
+        timerDigits.opacity = 1.0;
+    }
+
+    function stopTimer()
+    {
+        running = false;
+        suspended = true;
+    }
+
+    function resetTimer()
+    {
+        running = false;
+        suspended = false;
+        seconds = 0;
+        timerDigits.opacity = 1.0;
+    }
+
+    function action_timerStart()
+    {
+        startTimer();
+    }
+
+    function action_timerStop()
+    {
+        stopTimer();
+    }
+
+    function action_timerReset()
+    {
+        resetTimer();
+    }
 
     function configChanged() {
         predefinedTimers = plasmoid.readConfig("predefinedTimers", ["00:00:30", "00:01:00", "00:02:00", "00:05:00", "00:07:30",
