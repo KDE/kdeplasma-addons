@@ -32,5 +32,20 @@ PlasmaCore.SvgItem
         height: digitH;
         svg: timerSvg
         elementId: num + suffix;
-}
 
+        MouseArea {
+            anchors.fill: parent;
+            onWheel: {
+                if (!root.running) {
+                    if (wheel.angleDelta.y > 0){
+                        root.seconds += meaning;
+
+                    }else if (wheel.angleDelta.y < 0){
+                        if (root.seconds - meaning >= 0){
+                            root.seconds -= meaning;
+                        }
+                    }
+                }
+            }
+        }
+}

@@ -24,8 +24,10 @@ import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
 Item
 {
-    property int seconds : 95;
-    property bool running: true;
+    id: root;
+
+    property int seconds : 0;
+    property bool running: false;
     property variant predefinedTimers;
     property date startedAt;
     property bool showTitle: false;
@@ -49,6 +51,7 @@ Item
         interval: 1000;
         onTriggered: seconds--;
         repeat: true;
+        running: parent.running;
     }
 
     Column {
@@ -113,7 +116,9 @@ Item
 
     MouseArea {
         anchors.fill: parent;
-        onClicked: t.start();
+        onClicked:{
+            parent.running = !parent.running;
+        }
     }
 
     //PlasmaComponents.ContextMenu {
