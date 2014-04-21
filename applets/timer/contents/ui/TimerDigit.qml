@@ -38,7 +38,9 @@ PlasmaCore.SvgItem
             onWheel: {
                 if (!root.running) {
                     if (wheel.angleDelta.y > 0){
-                        root.seconds += meaning;
+                        if (root.seconds + meaning < 360000){
+                            root.seconds += meaning;
+                        }
 
                     }else if (wheel.angleDelta.y < 0){
                         if (root.seconds - meaning >= 0){
