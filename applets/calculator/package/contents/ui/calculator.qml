@@ -1,5 +1,5 @@
 /*****************************************************************************
- *   Copyright (C) 2012 by Davide Bettio <davide.bettio@kdemail.net>         *
+ *   Copyright (C) 2012, 2014 by Davide Bettio <davide.bettio@kdemail.net>   *
  *   Copyright (C) 2012 by Luiz Romário Santana Rios <luizromario@gmail.com> *
  *   Copyright (C) 2007 by Henry Stanaland <stanaland@gmail.com>             *
  *   Copyright (C) 2008 by Laurent Montel  <montel@kde.org>                  *
@@ -20,9 +20,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .          *
  *****************************************************************************/
 
-import QtQuick 2.0;
+import QtQuick 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
 Item {
     id: main;

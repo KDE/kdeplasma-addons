@@ -1,1 +1,1 @@
-plasma_install_package(package calcuator)
+plasma_install_package(package org.kde.plasma.calculator)
