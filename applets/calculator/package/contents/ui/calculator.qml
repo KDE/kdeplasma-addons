@@ -100,7 +100,7 @@ Item {
 
         if (commaPressed) {
             ++decimals;
-            tenToTheDecimals = Math.pow(10, decimals);
+            var tenToTheDecimals = Math.pow(10, decimals);
             operand = (operand * tenToTheDecimals + digit) / tenToTheDecimals;
         } else {
             operand = operand * 10 + digit;
