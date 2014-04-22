@@ -6,7 +6,9 @@
   <kcfgfile name=""/>
 
   <group name="General">
-    <entry name="predefinedTimers" type="StringList" />
+    <entry name="predefinedTimers" type="StringList">
+        <default>30,60,120,300,450,600,900,1200,1500,1800,2700,3600</default>
+    </entry>
 
     <entry name="running" type="int">
         <default>0</default>

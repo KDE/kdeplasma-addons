@@ -110,7 +110,7 @@ Item
             }
             TimerDigit {
                 meaning: 60*60;
-                num: (seconds / (60*60)) % 10;
+                num: ~~(~~(seconds / (60*60))) % 10;
                 suffix: (running && seconds < 60) ? "_1" : "";
             }
 
@@ -169,6 +169,23 @@ Item
         plasmoid.setAction("timerStop", i18n("S&top"));
         plasmoid.setAction("timerReset", i18n("&Reset"));
         plasmoid.setActionSeparator("separator0");
+
+        for (var predefinedTimer in plasmoid.configuration.predefinedTimers){
+            plasmoid.setAction("predefined_timer_" + plasmoid.configuration.predefinedTimers[predefinedTimer],
+                               secondsToDisplayableString(plasmoid.configuration.predefinedTimers[predefinedTimer]));
+        }
+        plasmoid.setActionSeparator("separator1");
+    }
+
+    function secondsToDisplayableString(sec)
+    {
+
+                return ~~((sec / (60*60)) / 10) + "" +
+                (~~(~~(sec / (60*60))) % 10) + ":" +
+                ~~(~~((sec % (60*60)) / 60) / 10) + "" +
+                ~~((sec % (60*60)) / 60) % 10 + ":" +
+                ~~((sec % 60) / 10) + "" +
+                (sec % 60) % 10;
     }
 
     function startTimer()
@@ -220,6 +237,14 @@ Item
     {
         delayedSaveTimer.stop();
         delayedSaveTimer.start();
+    }
+
+    function actionTriggered(actionName)
+    {
+        if (actionName.indexOf("predefined_timer_") == 0){
+            seconds = actionName.replace("predefined_timer_", "");
+            startTimer();
+        }
     }
 
     function action_timerStart()
