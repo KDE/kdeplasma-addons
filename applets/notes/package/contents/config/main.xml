@@ -6,6 +6,11 @@
   <kcfgfile name=""/>
 
   <group name="General">
+
+    <entry name="color" type="String">
+      <default>yellow</default>
+    </entry>
+
     <entry name="noteText" type="String">
       <default></default>
     </entry>

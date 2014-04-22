@@ -28,9 +28,10 @@ Item
 {
     id: root;
 
+    property string color: plasmoid.configuration.color;
     property string noteText: plasmoid.configuration.noteText;
 
-    Plasmoid.backgroundHints: "NoBackground";
+    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     PlasmaCore.Svg {
         id: notesSvg;
@@ -40,13 +41,13 @@ Item
     PlasmaCore.SvgItem {
         anchors.fill: parent;
         svg: notesSvg;
-        elementId: "yellow-notes";
+        elementId: color + "-notes";
     }
 
     Timer {
-        id: saveTimer;
+        id: delayedSaveTimer;
         onTriggered: saveNote();
-        interval: 5000;
+        interval: 2000;
     }
 
     PlasmaComponents.TextArea {
@@ -64,7 +65,23 @@ Item
         text: noteText;
         textFormat: TextEdit.RichText;
 
-        onTextChanged: saveTimer.start();
+        onTextChanged:{
+            delayedSaveTimer.stop();
+            delayedSaveTimer.start();
+        }
+    }
+
+    Component.onCompleted: {
+        plasmoid.setAction("change_note_color_white", i18n("White"));
+        plasmoid.setAction("change_note_color_black", i18n("Black"));
+        plasmoid.setAction("change_note_color_red", i18n("Red"));
+        plasmoid.setAction("change_note_color_orange", i18n("Orange"));
+        plasmoid.setAction("change_note_color_yellow", i18n("Yellow"));
+        plasmoid.setAction("change_note_color_green", i18n("Green"));
+        plasmoid.setAction("change_note_color_blue", i18n("Blue"));
+        plasmoid.setAction("change_note_color_pink", i18n("Pink"));
+        plasmoid.setAction("change_note_color_translucent", i18n("Translucent"));
+        plasmoid.setActionSeparator("separator0");
     }
 
     function saveNote()
@@ -72,6 +89,13 @@ Item
        if (plasmoid.configuration.noteText != textEdit.text){
            plasmoid.configuration.noteText = textEdit.text;
        }
+    }
+
+    function actionTriggered(actionName)
+    {
+        if (actionName.indexOf("change_note_color_") == 0){
+            plasmoid.configuration.color = actionName.replace("change_note_color_", "");
+        }
     }
 }
 
