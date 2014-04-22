@@ -26,10 +26,10 @@ Item
 {
     id: root;
 
-    property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.startedAt, plasmoid.configuration.seconds);
+    property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);
     property bool running: (plasmoid.configuration.running > 0) ? true : false;
     property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
-    property date startedAt: plasmoid.configuration.startedAt;
+    property date savedAt: plasmoid.configuration.savedAt;
     property bool showTitle: plasmoid.configuration.showTitle;
     property string title: plasmoid.configuration.title;
     property bool hideSeconds: plasmoid.configuration.hideSeconds;
@@ -168,6 +168,7 @@ Item
         plasmoid.setAction("timerStart", i18n("&Start"));
         plasmoid.setAction("timerStop", i18n("S&top"));
         plasmoid.setAction("timerReset", i18n("&Reset"));
+        plasmoid.setActionSeparator("separator0");
     }
 
     function startTimer()
@@ -197,14 +198,14 @@ Item
     function saveTimer()
     {
         plasmoid.configuration.running = running ? seconds : 0;
-        plasmoid.configuration.startedAt = new Date();
+        plasmoid.configuration.savedAt = new Date();
         plasmoid.configuration.seconds = seconds
     }
 
-    function restoreToSeconds(cRunning, cStartedAt, cSeconds)
+    function restoreToSeconds(cRunning, cSavedAt, cSeconds)
     {
         if (cRunning > 0){
-            var elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cStartedAt.getTime()) / 1000));
+            var elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cSavedAt.getTime()) / 1000));
             if (elapsedSeconds >= 0){
                 return elapsedSeconds;
             }else{

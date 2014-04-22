@@ -14,7 +14,7 @@
     <entry name="seconds" type="int">
         <default>0</default>
     </entry>
-    <entry name="startedAt" type="DateTime" />
+    <entry name="savedAt" type="DateTime" />
 
     <entry name="showTitle" type="Bool">
       <default>false</default>
