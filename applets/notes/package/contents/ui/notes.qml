@@ -49,7 +49,7 @@ Item
         interval: 5000;
     }
 
-    TextEdit {
+    PlasmaComponents.TextArea {
         id: textEdit;
 
         anchors {
@@ -60,7 +60,7 @@ Item
             bottomMargin: parent.height / 15;
         }
 
-        clip: true;
+        backgroundVisible: false;
         text: noteText;
         textFormat: TextEdit.RichText;
 
