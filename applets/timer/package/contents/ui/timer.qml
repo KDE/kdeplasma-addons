@@ -26,17 +26,17 @@ Item
 {
     id: root;
 
-    property int seconds : 0;
-    property bool running: false;
-    property variant predefinedTimers;
-    property date startedAt;
-    property bool showTitle: false;
-    property string title;
-    property bool hideSeconds: false;
-    property bool showMessage: true;
-    property string message;
-    property bool runCommand: false;
-    property string command;
+    property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.startedAt, plasmoid.configuration.seconds);
+    property bool running: (plasmoid.configuration.running > 0) ? true : false;
+    property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
+    property date startedAt: plasmoid.configuration.startedAt;
+    property bool showTitle: plasmoid.configuration.showTitle;
+    property string title: plasmoid.configuration.title;
+    property bool hideSeconds: plasmoid.configuration.hideSeconds;
+    property bool showMessage: plasmoid.configuration.showMessage;
+    property string message: plasmoid.configuration.message;
+    property bool runCommand: plasmoid.configuration.runCommand;
+    property string command: plasmoid.configuration.command;
     property real digits: (hideSeconds) ? 4.5 : 7;
     property int digitH: ((height / 2) * digits < width ? height : ((width - (digits - 1)) / digits) * 2);
     property int digitW: digitH / 2;
@@ -56,10 +56,17 @@ Item
             }
             if (seconds == 0){
                 parent.running = false;
+                saveTimer();
             }
         }
         repeat: true;
         running: parent.running;
+    }
+
+    Timer {
+        id: delayedSaveTimer;
+        interval: 3000;
+        onTriggered: saveTimer();
     }
 
     Column {
@@ -158,7 +165,6 @@ Item
     }
 
     Component.onCompleted: {
-    //    plasmoid.addEventListener ('ConfigChanged', configChanged);
         plasmoid.setAction("timerStart", i18n("&Start"));
         plasmoid.setAction("timerStop", i18n("S&top"));
         plasmoid.setAction("timerReset", i18n("&Reset"));
@@ -169,12 +175,14 @@ Item
         running = true;
         suspended = false;
         timerDigits.opacity = 1.0;
+        saveTimer();
     }
 
     function stopTimer()
     {
         running = false;
         suspended = true;
+        saveTimer();
     }
 
     function resetTimer()
@@ -183,6 +191,34 @@ Item
         suspended = false;
         seconds = 0;
         timerDigits.opacity = 1.0;
+        saveTimer();
+    }
+
+    function saveTimer()
+    {
+        plasmoid.configuration.running = running ? seconds : 0;
+        plasmoid.configuration.startedAt = new Date();
+        plasmoid.configuration.seconds = seconds
+    }
+
+    function restoreToSeconds(cRunning, cStartedAt, cSeconds)
+    {
+        if (cRunning > 0){
+            var elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cStartedAt.getTime()) / 1000));
+            if (elapsedSeconds >= 0){
+                return elapsedSeconds;
+            }else{
+                return 0;
+            }
+        }else{
+            return cSeconds;
+        }
+    }
+
+    function digitChanged()
+    {
+        delayedSaveTimer.stop();
+        delayedSaveTimer.start();
     }
 
     function action_timerStart()
@@ -198,20 +234,6 @@ Item
     function action_timerReset()
     {
         resetTimer();
-    }
-
-    function configChanged() {
-        predefinedTimers = plasmoid.readConfig("predefinedTimers", ["00:00:30", "00:01:00", "00:02:00", "00:05:00", "00:07:30",
-                                                                    "00:10:00", "00:15:00", "00:20:00", "00:25:00", "00:30:00",
-                                                                    "00:45:00", "01:00:00" ]); 
-        startedAt = plasmoid.readConfig("startedAt", new Date());
-        showTitle = plasmoid.readConfig("showTitle", false);
-        title = plasmoid.readConfig("title", i18n("Timer"));
-        hideSeconds = plasmoid.readConfig("hideSeconds", false);
-        showMessage = plasmoid.readConfig("showMessage", true);
-        message = plasmoid.readConfig("message", i18n("Timer Timeout"));
-        runCommand = plasmoid.readConfig("runCommand", false);
-        command = plasmoid.readConfig("command", "");
     }
 }
 

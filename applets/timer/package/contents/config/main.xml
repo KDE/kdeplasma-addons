@@ -8,6 +8,12 @@
   <group name="General">
     <entry name="predefinedTimers" type="StringList" />
 
+    <entry name="running" type="int">
+        <default>0</default>
+    </entry>
+    <entry name="seconds" type="int">
+        <default>0</default>
+    </entry>
     <entry name="startedAt" type="DateTime" />
 
     <entry name="showTitle" type="Bool">

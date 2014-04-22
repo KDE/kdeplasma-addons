@@ -41,11 +41,13 @@ PlasmaCore.SvgItem
                         if (root.seconds + meaning < 360000){
                             root.seconds += meaning;
                         }
+                        root.digitChanged();
 
                     }else if (wheel.angleDelta.y < 0){
                         if (root.seconds - meaning >= 0){
                             root.seconds -= meaning;
                         }
+                        root.digitChanged();
                     }
                 }
             }
