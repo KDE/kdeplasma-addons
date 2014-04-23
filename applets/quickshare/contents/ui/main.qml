@@ -40,8 +40,10 @@ DropArea {
         for(var i in mimeNames) {
             var mime = findMimeType(mimeNames[i], data);
             var category = mime.name.substr(0, mime.name.indexOf("/"));
+            var source = plasmoid.configuration[category]
 
-            return { "mime": mime, "format": mimeNames[i], "source": plasmoid.configuration[category] };
+            if (source)
+                return { "mime": mime, "format": mimeNames[i], "source": source };
         }
         return {}
     }
