@@ -63,9 +63,10 @@ DropArea {
         id: mimeDb
     }
 
-    Component {
-        id: menuItemComponent
-        PasteMenuItem {}
+    function resetActions() {
+        for(var v in root.pasteUrls) {
+            plasmoid.setAction("showpaste"+(v+1), root.pasteUrls[v], "");
+        }
     }
 
     function sendData(source, data) {
@@ -80,10 +81,12 @@ DropArea {
                 root.url = resultUrl;
                 clipboard.content = resultUrl;
 
-                menuItemComponent.createObject(menu, {"text": root.url});
-                if(menu.content.length >= 2+plasmoid.configuration.historySize) {
-                    menu.at(2).deleteLater()
+                root.pasteUrls.push(resultUrl);
+                if (plasmoid.configuration.historySize <= root.pasteUrls.length) {
+                    root.pasteUrls.shift();
                 }
+
+                resetActions();
             }
             root.state = root.lastJob.error==0 ? "success" : "failure";
         });
@@ -98,22 +101,25 @@ DropArea {
 
     onExited: icon.source = "edit-paste"
 
-    PlasmaComponents.ContextMenu {
-        id: menu
-        visualParent: parent
+    property var pasteUrls: []
+    property int nextPaste: 0
 
-        PlasmaComponents.MenuItem {
-            text: i18n("Paste")
-            icon: "edit-paste"
+    Component.onCompleted: {
+        plasmoid.setAction("paste", i18n("Paste"), "edit-paste");
+        plasmoid.setActionSeparator("pastes");
+    }
 
-            onClicked: {
-                var pref = preferredSourceForMimetypes(clipboard.formats, clipboard.contentFormat("text/uri-list"));
+    //FIXME somehow we should get these to be generic, now the history doesn't go further than 5 :D
+    function action_showpaste1() { Qt.openUrlExternally(pasteUrls[0]); }
+    function action_showpaste2() { Qt.openUrlExternally(pasteUrls[1]); }
+    function action_showpaste3() { Qt.openUrlExternally(pasteUrls[2]); }
+    function action_showpaste4() { Qt.openUrlExternally(pasteUrls[3]); }
+    function action_showpaste5() { Qt.openUrlExternally(pasteUrls[4]); }
 
-                sendData(pref.source, clipboard.contentFormat(pref.format));
-            }
-        }
+    function action_paste() {
+        var pref = preferredSourceForMimetypes(clipboard.formats, clipboard.contentFormat("text/uri-list"));
 
-        PlasmaComponents.MenuItem { separator: true }
+        sendData(pref.source, clipboard.contentFormat(pref.format));
     }
 
     PlasmaCore.Dialog {
@@ -181,10 +187,6 @@ DropArea {
         anchors.fill: parent
         hoverEnabled: true
         acceptedButtons: Qt.RightButton
-
-        onClicked: {
-            menu.open()
-        }
     }
 
     PlasmaCore.DataSource {
