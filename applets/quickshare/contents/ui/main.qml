@@ -72,18 +72,18 @@ DropArea {
         operation.content = data;
         root.lastJob = service.startOperationCall(operation);
         root.lastJob.finished.connect(function(){
-            root.state = root.lastJob.error==0 ? "success" : "failure";
             var resultUrl = root.lastJob.result;
 
             if (root.lastJob.error==0) {
                 root.url = resultUrl;
-                clipboard.content = root.url;
+                clipboard.content = resultUrl;
 
                 menuItemComponent.createObject(menu, {"text": root.url});
                 if(menu.content.length >= 2+plasmoid.configuration.historySize) {
                     menu.at(2).deleteLater()
                 }
             }
+            root.state = root.lastJob.error==0 ? "success" : "failure";
         });
         root.state = "sending";
     }
