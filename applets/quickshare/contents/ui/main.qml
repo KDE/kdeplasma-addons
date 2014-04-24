@@ -18,13 +18,20 @@
  ***************************************************************************/
 
 import QtQuick 2.2
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
+import QtQuick.Layouts 1.1
 
 DropArea {
     id: root
 
+    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    Layout.fillWidth: true
+    Layout.fillHeight:true
+    Layout.minimumWidth: 0
+    Layout.minimumHeight: 0
     property string url: ""
     property bool properlySent: true
     property QtObject lastJob: null
