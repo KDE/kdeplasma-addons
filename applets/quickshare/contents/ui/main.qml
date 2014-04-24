@@ -32,6 +32,7 @@ DropArea {
     Layout.fillHeight:true
     Layout.minimumWidth: 0
     Layout.minimumHeight: 0
+
     property string url: ""
     property bool properlySent: true
     property QtObject lastJob: null
@@ -59,7 +60,7 @@ DropArea {
         var source = preferredSourceForMimetypes(drag.formats, [drag.getDataAsString("text/uri-list")]);
 
         icon.source = source.mime.iconName;
-        drag.accept();
+        drag.accepted = true
     }
 
     QtExtra.Clipboard {
@@ -103,7 +104,7 @@ DropArea {
     onDropped: {
         var pref = preferredSourceForMimetypes(drop.formats);
         sendData(pref.source, drop.getDataAsString(pref.format))
-        drop.accept();
+        drop.accepted = true;
     }
 
     onExited: icon.source = "edit-paste"
@@ -129,40 +130,13 @@ DropArea {
         sendData(pref.source, clipboard.contentFormat(pref.format));
     }
 
-    PlasmaCore.Dialog {
-        id: tooltipDialog
-        visualParent: parent
-
-        mainItem: Item {
-            width: 300
-            height: 100
-
-            PlasmaCore.IconItem {
-                id: tooltipIcon
-                width: parent.width*.25
-                anchors {
-                    left: parent.left
-                    top: parent.top
-                    bottom: parent.bottom
-                }
-                source: "edit-paste"
-            }
-
-            PlasmaComponents.Label {
-                id: tooltipText
-                wrapMode: Text.WordWrap
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-
-                onLinkActivated: Qt.openUrlExternally(link)
-                anchors {
-                    left: tooltipIcon.right
-                    right: parent.right
-                    bottom: parent.bottom
-                    top: parent.top
-                }
-            }
-        }
+    PlasmaCore.ToolTipArea {
+        id: tooltipArea
+        anchors.fill: parent
+        location: plasmoid.location
+        active: true
+        mainText: i18n("Share")
+        subText: i18n("Drop text or an image onto me to upload it to an online service.")
     }
 
     PlasmaCore.IconItem {
@@ -182,18 +156,11 @@ DropArea {
             width: root.containsDrag ? 5 : 1
         }
         color: theme.backgroundColor
-        radius: 35
+        radius: Math.max(parent.width, parent.height)/10
         anchors.fill: parent
-        opacity: root.containsDrag || mouseArea.containsMouse ? .3 : 0
+        opacity: root.containsDrag || tooltipArea.containsMouse ? .3 : 0
 
         Behavior on opacity { NumberAnimation { duration: 100 } }
-    }
-
-    MouseArea {
-        id: mouseArea
-        anchors.fill: parent
-        hoverEnabled: true
-        acceptedButtons: Qt.RightButton
     }
 
     PlasmaCore.DataSource {
@@ -202,13 +169,19 @@ DropArea {
         connectedSources: sources
     }
 
+    Timer {
+        id: idleTimer
+        running: false
+        interval: 5000
+        onTriggered: root.state = "idle"
+    }
+
     state: "idle"
     states: [
         State {
             name: "idle"
             PropertyChanges { target: icon; source: "edit-paste" }
-            PropertyChanges { target: tooltipIcon; source: "edit-paste" }
-            PropertyChanges { target: tooltipText; text: i18n("Drop text or an image onto me to upload it to an online service.") }
+            PropertyChanges { target: tooltipArea; icon: "edit-paste" }
         },
         State {
             name: "sending"
@@ -216,25 +189,27 @@ DropArea {
             PropertyChanges { target: busy; visible: true }
             PropertyChanges { target: busy; running: true }
 
-            PropertyChanges { target: tooltipIcon; source: "view-history" }
-            PropertyChanges { target: tooltipText; text: i18n("Sending...") }
-            PropertyChanges { target: tooltipDialog; visible: true }
+            PropertyChanges { target: tooltipArea; icon: "view-history" }
+            PropertyChanges { target: tooltipArea; mainText: i18n("Sending...") }
+            PropertyChanges { target: tooltipArea; subText: i18n("Please wait") }
         },
         State {
             name: "success"
             PropertyChanges { target: icon; source: "dialog-ok" }
 
-            PropertyChanges { target: tooltipIcon; source: "dialog-ok" }
-            PropertyChanges { target: tooltipText; text: i18n("Successfully uploaded to <a href='%1'>%1</a>.", root.url) }
-            PropertyChanges { target: tooltipDialog; visible: true }
+            PropertyChanges { target: idleTimer; running: true }
+            PropertyChanges { target: tooltipArea; icon: "dialog-ok" }
+            PropertyChanges { target: tooltipArea; mainText: i18n("Successfully uploaded") }
+            PropertyChanges { target: tooltipArea; subText: i18n("<a href='%1'>%1</a>", root.url) }
         },
         State {
             name: "failure"
             PropertyChanges { target: icon; source: "dialog-cancel" }
 
-            PropertyChanges { target: tooltipIcon; source: icon.source }
-            PropertyChanges { target: tooltipText; text: i18n("Error during upload. Try again.") }
-            PropertyChanges { target: tooltipDialog; visible: true }
+            PropertyChanges { target: idleTimer; running: true }
+            PropertyChanges { target: tooltipArea; icon: icon.source }
+            PropertyChanges { target: tooltipArea; mainText: i18n("Error during upload. Try again.") }
+            PropertyChanges { target: tooltipArea; subText: i18n("Please, try again.") }
         }
     ]
 }
