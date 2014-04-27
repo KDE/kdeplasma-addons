@@ -40,4 +40,4 @@ install(FILES plasma_applet_plasmaboard.desktop
 add_subdirectory(layouts)
         
 #install(FILES plasmaboard_key.svg
-#	DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
+#	DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)

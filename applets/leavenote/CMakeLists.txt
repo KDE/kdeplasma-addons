@@ -23,4 +23,4 @@ install(FILES plasma-applet-leavenote.desktop
 # notes.svgz (leavenote.svgz) otherwise anyway.
 #install(
 #    FILES notes.svgz
-#    DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
+#    DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)

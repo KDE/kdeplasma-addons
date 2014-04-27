@@ -18,4 +18,4 @@ install(FILES
 arrows.svgz
 rssnow.svgz
 background.svgz
-DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/rssnow/)
+DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/rssnow/)

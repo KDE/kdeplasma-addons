@@ -13,4 +13,4 @@ target_link_libraries(plasma_applet_news ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${
 
 install(TARGETS plasma_applet_news DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-news.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES news.css DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/stylesheets/)
+install(FILES news.css DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/stylesheets/)

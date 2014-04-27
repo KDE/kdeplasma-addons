@@ -60,5 +60,5 @@ include_directories(${CMAKE_BINARY_DIR} ${DBUSMENUQT_INCLUDE_DIR})
 
 install(TARGETS plasma_applet_icontasks DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-icontasks.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES badge.svgz launcherseparator.svgz progress.svgz indicators.svgz dropindicators.svgz DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/icontasks/)
+install(FILES badge.svgz launcherseparator.svgz progress.svgz indicators.svgz dropindicators.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/icontasks/)
 install(FILES mediabuttonsrc DESTINATION ${DATA_INSTALL_DIR}/${CMAKE_PROJECT_NAME})

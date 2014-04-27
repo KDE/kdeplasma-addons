@@ -29,6 +29,6 @@ endif(HAVE_KEXIV2)
 
 install(TARGETS plasma_applet_frame DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-frame-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-#install(FILES picture-frame-default.jpg DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
+#install(FILES picture-frame-default.jpg DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
 
 install(FILES picture-frame-default.jpg DESTINATION ${DATA_INSTALL_DIR}/plasma-applet-frame/)

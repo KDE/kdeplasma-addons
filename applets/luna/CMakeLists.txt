@@ -14,6 +14,6 @@ install(FILES plasma-applet-luna.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES luna.svgz
-	DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
+	DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
 
 kde4_install_icons(${ICON_INSTALL_DIR})
