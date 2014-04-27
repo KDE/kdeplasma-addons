@@ -30,7 +30,7 @@ find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick X11Extras)
 set (QT_MIN_VERSION "5.0.0")
 
 
-find_package(KF5 CONFIG REQUIRED
+find_package(KF5 REQUIRED COMPONENTS
     IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
     Config Auth JS Wallet DBusAddons
     I18n GuiAddons Service ItemViews Notifications ConfigWidgets IconThemes Completion JobWidgets Sonnet TextWidgets XmlGui Crash
