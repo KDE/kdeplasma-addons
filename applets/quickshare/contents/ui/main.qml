@@ -28,8 +28,8 @@ DropArea {
     id: root
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
-    Layout.fillWidth: true
-    Layout.fillHeight:true
+    Layout.fillWidth: false
+    Layout.fillHeight:false
     Layout.minimumWidth: 0
     Layout.minimumHeight: 0
 
