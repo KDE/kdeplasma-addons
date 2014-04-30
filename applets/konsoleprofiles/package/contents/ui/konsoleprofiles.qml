@@ -30,8 +30,6 @@ Item {
     function popupEventSlot(shown) {
         if (shown) {
             view.forceActiveFocus();
-        } else {
-            view.currentIndex = -1;
         }
     }
 
@@ -110,12 +108,6 @@ Item {
         focus: true
         keyNavigationWraps: true
 
-        onCurrentIndexChanged: {
-            if (currentIndex != -1) {
-                highlightItem.opacity = 1.0;
-            }
-        }
-
         delegate: Item {
             id: listdelegate
             height: textMetric.paintedHeight * 2
@@ -158,11 +150,6 @@ Item {
 
                 onEntered: {
                     view.currentIndex = index;
-                    view.highlightItem.opacity = 1.0;
-                }
-
-                onExited: {
-                    view.highlightItem.opacity = 0;
                 }
             }
 
