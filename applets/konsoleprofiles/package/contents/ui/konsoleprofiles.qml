@@ -31,8 +31,11 @@ Item {
     property int minimumHeight: 300
 
     function popupEventSlot(shown) {
-        if(shown)
+        if (shown) {
             view.forceActiveFocus();
+        } else {
+            view.currentIndex = -1;
+        }
     }
 
     PlasmaCore.DataSource {
@@ -44,9 +47,13 @@ Item {
         Component.onCompleted: connectedSources = sources
     }
 
-    PlasmaCore.DataModel {
+    PlasmaCore.SortFilterModel {
         id: profilesModel
-        dataSource: profilesSource
+        sortRole: "prettyName"
+        sortOrder: "AscendingOrder"
+        sourceModel: PlasmaCore.DataModel {
+            dataSource: profilesSource
+        }
     }
 
     Component.onCompleted: {
@@ -104,6 +111,13 @@ Item {
         model: profilesModel
         clip: true
         focus: true
+        keyNavigationWraps: true
+
+        onCurrentIndexChanged: {
+            if (currentIndex != -1) {
+                highlightItem.opacity = 1.0;
+            }
+        }
 
         delegate: Item {
             id: listdelegate
@@ -146,12 +160,12 @@ Item {
                 }
 
                 onEntered: {
-                    view.currentIndex = index
-                    view.highlightItem.opacity = 1
+                    view.currentIndex = index;
+                    view.highlightItem.opacity = 1.0;
                 }
 
                 onExited: {
-                    view.highlightItem.opacity = 0
+                    view.highlightItem.opacity = 0;
                 }
             }
 

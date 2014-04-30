@@ -143,8 +143,8 @@ QWidget *MarbleWallpaper::createConfigurationInterface(QWidget *parent)
         QModelIndex index = themeManager.mapThemeModel()->index(i, 0, QModelIndex());
         QString theme = themeManager.mapThemeModel()->data(index, Qt::DisplayRole).toString();
         QIcon icon = qvariant_cast<QIcon>(themeManager.mapThemeModel()->data(index, Qt::DecorationRole));
-        QModelIndex fileIndex = themeManager.mapThemeModel()->index(i, 1, QModelIndex());
-        QString themeFile = themeManager.mapThemeModel()->data(fileIndex, Qt::DisplayRole).toString();
+        QModelIndex fileIndex = themeManager.mapThemeModel()->index(i, 0, QModelIndex());
+        QString themeFile = themeManager.mapThemeModel()->data(fileIndex, Qt::UserRole + 1).toString();
         m_ui.themeList->addItem(icon, theme, themeFile);
         if (m_mapTheme == themeFile) {
             m_ui.themeList->setCurrentIndex(i);

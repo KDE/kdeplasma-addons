@@ -206,7 +206,7 @@ QString WeatherStation::fitValue(const Value& value, int digits)
 QString WeatherStation::fromCondition(const QString& rawCondition)
 {
     QString::SplitBehavior skip = QString::SkipEmptyParts;
-    const QString& condition = rawCondition.split("weather-", skip).first();
+    const QString condition = rawCondition.split("weather-", skip).first();
     QString id;
 
     if (condition == "clear-night") {

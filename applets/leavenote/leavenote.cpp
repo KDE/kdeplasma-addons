@@ -199,7 +199,7 @@ void LeaveNote::slotSend()
     if (mUseKNotes && !checkKNotesDBusInterface()) {
         QHash<QString, QVariant> hash;
         hash["title"] = title;
-        hash["msg"] = msg;
+        hash["msg"] = mTextEdit->nativeWidget()->toPlainText();
         mMsgCache << hash;
 
         /* check if we are loading KNotes already then cache the msg*/
@@ -216,10 +216,13 @@ void LeaveNote::slotSend()
             QProcess::startDetached("knotes", QStringList() << "--skip-note");
 
             /* wait for the dbus interface to settle */
-            mTimer->singleShot(10000, this, SLOT(slotWaitForKNotes()));
+            mTimer->singleShot(5000, this, SLOT(slotWaitForKNotes()));
         }
 
     } else {
+        if (mUseKNotes) {
+            msg = mTextEdit->nativeWidget()->toPlainText();
+        }
         createNote(title, msg);
     }
 
