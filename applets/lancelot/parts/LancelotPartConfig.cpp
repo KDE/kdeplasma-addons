@@ -134,7 +134,7 @@ void LancelotPartConfig::setIcon(const QIcon & icon)
 
 void LancelotPartConfig::setPartData(const QString & data)
 {
-    listModels->addItem("Add...");
+    listModels->addItem(i18n("Add..."));
     QListWidgetItem * itemAdd = listModels->item(listModels->count() - 1);
     itemAdd->setData(Qt::DecorationRole, KIcon("list-add"));
     itemAdd->setData(Qt::SizeHintRole, QSize(0, 32));
