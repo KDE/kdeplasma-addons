@@ -18,7 +18,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick X11Extras)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick X11Extras DBus)
 
 ############### Load the CTest options ###############
 # CTestCustom.cmake has to be in the CTEST_BINARY_DIR.
