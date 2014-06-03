@@ -8,6 +8,7 @@ Name[da]=Oversætter
 Name[de]=Übersetzer
 Name[el]=Μεταφραστής
 Name[es]=Traductor
+Name[et]=Tõlketeenus
 Name[fi]=Käännin
 Name[fr]=Outil de traduction
 Name[gl]=Tradutor
@@ -45,6 +46,7 @@ Comment[da]=Oversætter til alle sprog med Google Translate. Besøg https://deve
 Comment[de]=Übersetzt mit „Google Übersetzer“ in beliebige Sprachen. Eine Liste der unterstützten Sprachen finden Sie unter https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[el]=Μετάφραση σε οποιαδήποτε γλώσσα με το Google Translate. Για τη λίστα με τις υποστηριζόμενες γλώσσες ανατρέξτε στο https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[es]=Traduce a cualquier idioma usando Google Translate. Para una lista de los idiomas admitidos visite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[et]=Tõlgib mis tahes keelde Google Translate'i abil. Toetatud keelte loendi leiab aadressil https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[fi]=Kääntää mille tahansa kielelle käyttäen Google-kääntäjää. Katso tuettujen kielten luettelo osoitteesta https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[fr]=Traduit dans n'importe quelle langue en utilisant « Google Translate ». Pour obtenir une liste des langues prises en charge, veuillez consulter « https://developers.google.com/translate/v2/using_rest?hl=de#language-params »
 Comment[gl]=Traduce a calquera lingua mediante o Google Translate. Para coñecer a lista de linguas admitidas consulte https://developers.google.com/translate/v2/using_rest?hl=de#language-params
