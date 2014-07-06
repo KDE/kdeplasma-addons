@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Wikipedia
+Name[ar]=ويكيبيديا
 Name[ast]=Wikipedia
 Name[bs]=Wikipedia
 Name[ca]=Viquipèdia
@@ -51,6 +52,7 @@ Name[x-test]=xxWikipediaxx
 Name[zh_CN]=维基百科
 Name[zh_TW]=維基百科
 Comment=Search on Wikipedia
+Comment[ar]=ابحث في ويكيبيديا
 Comment[ast]=Guetar en Wikipedia
 Comment[bs]=Pretraži na Wikipediji
 Comment[ca]=Cerca en la Viquipèdia

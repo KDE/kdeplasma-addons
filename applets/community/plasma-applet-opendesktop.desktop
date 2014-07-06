@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Community
+Name[ar]=المجتمع
 Name[ast]=Comunidá
 Name[bs]=zajednica
 Name[ca]=Comunitat
@@ -112,6 +113,7 @@ X-KDE-PluginInfo-Name=opendesktop
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 Keywords=Utilities;
+Keywords[ar]=أدوات؛
 Keywords[bs]=Alatke;
 Keywords[ca]=Utilitats;
 Keywords[ca@valencia]=Utilitats;

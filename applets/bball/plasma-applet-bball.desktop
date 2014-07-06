@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Bouncy Ball
+Name[ar]=كرة نطّاطة
 Name[bs]=Bouncy Ball
 Name[ca]=Una pilota que bota
 Name[ca@valencia]=Una pilota que bota
@@ -51,7 +52,7 @@ Name[x-test]=xxBouncy Ballxx
 Name[zh_CN]=弹球
 Name[zh_TW]=彈跳球
 Comment=A bouncy ball for plasma
-Comment[ar]=كرة النطاطة للبلازما
+Comment[ar]=كرة نطاطة للبلازما
 Comment[ast]=Una pelota que rebota pa plasma
 Comment[bs]=Odskačuća lopta za Plazmu
 Comment[ca]=Una pilota que bota per al plasma

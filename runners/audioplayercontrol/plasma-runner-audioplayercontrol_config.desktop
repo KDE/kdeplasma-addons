@@ -7,6 +7,7 @@ X-KDE-ParentComponents=Audio Player Control Runner
 X-KDE-PluginKeyword=kcm_krunner_audioplayercontrol
 
 Name=Control audio player
+Name[ar]=التحكم بمشغل الصوتيات
 Name[bs]=Kontroliranje audio plejera
 Name[ca]=Controlador del reproductor d'àudio
 Name[ca@valencia]=Controlador del reproductor d'àudio
