@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=YouTube
+Name[ar]=يوتيوب
 Name[bs]=YouTube
 Name[ca]=YouTube
 Name[ca@valencia]=YouTube
@@ -46,6 +47,7 @@ Name[zh_CN]=YouTube
 Name[zh_TW]=YouTube
 
 Comment=Matches YouTube queries
+Comment[ar]=يُطابِق استعلامات يوتيوب
 Comment[bs]=Odgovara YouTube upitima
 Comment[ca]=Correspon amb consultes a YouTube
 Comment[ca@valencia]=Correspon amb consultes a YouTube

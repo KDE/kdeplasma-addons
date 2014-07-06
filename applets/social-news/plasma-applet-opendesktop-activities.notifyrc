@@ -1,6 +1,7 @@
 [Global]
 IconName=system-users
 Comment=OpenDesktop Activities Widget
+Comment[ar]=ودجة أنشطة سطح المكتب
 Comment[bs]=Kontrola za praćenje aktivnost sa OtvorenomPovrši
 Comment[ca]=Estri d'activitats OpenDesktop
 Comment[ca@valencia]=Estri d'activitats OpenDesktop
@@ -49,6 +50,7 @@ Comment[zh_TW]=openDesktop 活動元件
 
 [Event/activity]
 Name=New Activity
+Name[ar]=نشاط جديد
 Name[bs]=Nova aktivnost
 Name[ca]=Activitat nova
 Name[ca@valencia]=Activitat nova
@@ -98,6 +100,7 @@ Name[x-test]=xxNew Activityxx
 Name[zh_CN]=新活动
 Name[zh_TW]=新活動
 Comment=Something interesting has happened in your friends network
+Comment[ar]=حدث شيء ملفت للانتباه في شبكة أصدقائك
 Comment[bs]=Nešto interesantno se desilo u vašoj mreži prijatelja
 Comment[ca]=Ha succeït alguna cosa interessant en la xarxa dels vostres amics
 Comment[ca@valencia]=Ha succeït alguna cosa interessant en la xarxa dels vostres amics

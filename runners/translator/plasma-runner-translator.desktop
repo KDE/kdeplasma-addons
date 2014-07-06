@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Translator
+Name[ar]=المترجِم
 Name[bs]=Prevodilac
 Name[ca]=Traductor
 Name[ca@valencia]=Traductor
@@ -40,6 +41,7 @@ Name[x-test]=xxTranslatorxx
 Name[zh_CN]=翻译
 Name[zh_TW]=翻譯器
 Comment=Translates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[ar]=ترجم إلى أيّ لغة باستخدام ترجمات جوجل. للحصول على لاحة باللغات المدعومة زُر https://developers.google.com/translate/v2/using_rest?hl=ar#language-params
 Comment[bs]=Prevodi u bilo koji jezik koristeći Google Translate. Za listu podržanih jezika posjetite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[ca]=Tradueix a qualsevol idioma usant el Google Translate. Per la llista d'idiomes acceptats visiteu https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[ca@valencia]=Tradueix a qualsevol idioma usant el Google Translate. Per la llista d'idiomes acceptats visiteu https://developers.google.com/translate/v2/using_rest?hl=de#language-params

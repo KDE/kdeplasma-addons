@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Keyboard
+Name[ar]=لوحة المفاتيح
 Name[ast]=Tecláu
 Name[bs]=Tastatura
 Name[ca]=Teclat
@@ -52,6 +53,7 @@ Name[x-test]=xxKeyboardxx
 Name[zh_CN]=键盘
 Name[zh_TW]=鍵盤
 Comment=A virtual, on-screen keyboard
+Comment[ar]=لوحة مفاتيح وهمية على الشاشة
 Comment[bs]=Virtualna, ekranska tastatura
 Comment[ca]=Un teclat virtual de pantalla
 Comment[ca@valencia]=Un teclat virtual de pantalla

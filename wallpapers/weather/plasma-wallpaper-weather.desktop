@@ -56,6 +56,7 @@ Name[x-test]=xxWeatherxx
 Name[zh_CN]=天气
 Name[zh_TW]=天氣
 Comment=Images that reflect the weather outside
+Comment[ar]=صور تعكس حالة القطس في الخارج
 Comment[bs]=Slike koje s vana reflektuju vrijeme
 Comment[ca]=Imatges que reflecteixen el temps de fora
 Comment[ca@valencia]=Imatges que reflecteixen el temps de fora
