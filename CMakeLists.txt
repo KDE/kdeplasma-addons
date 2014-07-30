@@ -32,7 +32,7 @@ set (QT_MIN_VERSION "5.0.0")
 
 find_package(KF5 REQUIRED COMPONENTS
     IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
-    Config Auth JS Wallet DBusAddons
+    Config Auth JS Wallet DBusAddons Runner
     I18n GuiAddons Service ItemViews Notifications ConfigWidgets IconThemes Completion JobWidgets Sonnet TextWidgets XmlGui Crash
     UnitConversion Bookmarks KIO Plasma Declarative NewStuff KDE4Support)
 
@@ -96,7 +96,7 @@ set_package_properties(QCA2 PROPERTIES DESCRIPTION "Support for remote plasma wi
 # add_subdirectory(libs)
 add_subdirectory(applets)
 add_subdirectory(dataengines)
-# add_subdirectory(runners)
+add_subdirectory(runners)
 
 add_subdirectory(scriptengines)
 add_subdirectory(wallpapers)

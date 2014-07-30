@@ -16,11 +16,11 @@
  */
 
 #include "converterrunner.h"
-#include <QApplication>
+#include <QGuiApplication>
 #include <QClipboard>
 #include <QSet>
-#include <KIcon>
-#include <KDebug>
+#include <QDebug>
+#include <KLocalizedString>
 #include <KToolInvocation>
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/UnitCategory>
@@ -28,6 +28,8 @@
 #define CONVERSION_CHAR QLatin1Char( '>' )
 
 using namespace KUnitConversion;
+
+K_EXPORT_PLASMA_RUNNER(converterrunner, ConverterRunner)
 
 class StringParser
 {
@@ -179,11 +181,11 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     unit2 = cmd.rest();
 
     Converter converter;
-    UnitCategory* category = converter.categoryForUnit(unit1);
+    UnitCategory category = converter.categoryForUnit(unit1);
     bool found = false;
-    if (category->id() == InvalidCategory) {
+    if (category.id() == InvalidCategory) {
         foreach (category, converter.categories()) {
-            foreach (const QString& s, category->allUnits()) {
+            foreach (const QString& s, category.allUnits()) {
                 if (s.compare(unit1, Qt::CaseInsensitive) == 0) {
                     found = true;
                     break;
@@ -198,55 +200,46 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
     }
 
-    QList<UnitPtr> units;
+    QList<Unit> units;
 
     if (!unit2.isEmpty()) {
-        UnitPtr u = category->unit(unit2);
-        if (!u.isNull() && u->isValid()) {
+        Unit u = category.unit(unit2);
+        if (!u.isNull() && u.isValid()) {
             units.append(u);
-            config().writeEntry(category->name(), u->symbol());
+            config().writeEntry(category.name(), u.symbol());
         } else {
-            const QStringList unitStrings = category->allUnits();
-            QSet<UnitPtr> matchingUnits;
+            const QStringList unitStrings = category.allUnits();
+            QList<Unit> matchingUnits;
             foreach (const QString& s, unitStrings) {
                 if (s.startsWith(unit2, Qt::CaseInsensitive)) {
-                    matchingUnits << category->unit(s);
+                    matchingUnits << category.unit(s);
                 }
             }
-            units = matchingUnits.toList();
+            units = matchingUnits;
             if (units.count() == 1) {
-                config().writeEntry(category->name(), units[0]->symbol());
+                config().writeEntry(category.name(), units[0].symbol());
             }
         }
     } else {
-        units = category->mostCommonUnits();
-        UnitPtr u = category->unit(config().readEntry(category->name()));
+        units = category.mostCommonUnits();
+        Unit u = category.unit(config().readEntry(category.name()));
         if (!u.isNull() && units.indexOf(u) < 0) {
             units << u;
         }
     }
 
-    UnitPtr u1 = category->unit(unit1);
-    foreach (const UnitPtr& u, units) {
+    Unit u1 = category.unit(unit1);
+    foreach (const Unit& u, units) {
         if (u1 == u) {
             continue;
         }
-        Value v = category->convert(Value(value.toDouble(), u1), u);
+        Value v = category.convert(Value(value.toDouble(), u1), u);
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
-        match.setIcon(KIcon(QLatin1String( "edit-copy" )));
-        match.setText(QString(QLatin1String( "%1 (%2)" )).arg(v.toString()).arg(u->symbol()));
+        match.setIcon(QIcon::fromTheme(QLatin1String( "edit-copy" )));
+        match.setText(QString(QLatin1String( "%1 (%2)" )).arg(v.toString()).arg(u.symbol()));
         match.setData(v.number());
-        context.addMatch(term, match);
-    }
-
-    if (units.count() > 0 && !category->description().isEmpty()) {
-        Plasma::QueryMatch match(this);
-        match.setType(Plasma::QueryMatch::PossibleMatch);
-        match.setIcon(KIcon(QLatin1String( "document-open-remote" )));
-        match.setText(category->description());
-        match.setData(category->url().prettyUrl());
-        context.addMatch(term, match);
+        context.addMatch(match);
     }
 }
 
@@ -257,7 +250,7 @@ void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::Qu
     if (data.startsWith(QLatin1String("http://"))) {
         KToolInvocation::invokeBrowser(data);
     } else {
-        QApplication::clipboard()->setText(data);
+        QGuiApplication::clipboard()->setText(data);
     }
 }
 
