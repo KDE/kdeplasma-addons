@@ -8,7 +8,7 @@ add_subdirectory(converter)
 # add_subdirectory(mediawiki)
 # add_subdirectory(spellchecker)
 # add_subdirectory(characters)
-# add_subdirectory(dictionary)
+add_subdirectory(dictionary)
 # 
 # if(KDEPIMLIBS_FOUND)
 #  if (NOT KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)

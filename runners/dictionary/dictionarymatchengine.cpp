@@ -3,9 +3,10 @@
  */
 
 #include "dictionarymatchengine.h"
-#include <Plasma/AbstractRunner>
+#include <KRunner/AbstractRunner>
 #include <QThread>
 #include <QMetaMethod>
+#include <QDebug>
 
 DictionaryMatchEngine::DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngine, QObject *parent)
 	: QObject(parent),
@@ -21,11 +22,11 @@ DictionaryMatchEngine::DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngin
 QString DictionaryMatchEngine::lookupWord(const QString &word)
 {
 	if (!m_dictionaryEngine) {
-		kDebug() << "Could not find dictionary data engine.";
+		qDebug() << "Could not find dictionary data engine.";
 		return QString();
 	}
 	if (thread() == QThread::currentThread()) {
-		kDebug() << "DictionaryMatchEngine::lookupWord is only meant to be called from non-primary threads.";
+		qDebug() << "DictionaryMatchEngine::lookupWord is only meant to be called from non-primary threads.";
 		return QString();
 	}
 
@@ -40,7 +41,7 @@ QString DictionaryMatchEngine::lookupWord(const QString &word)
 	data.mutex.lock();
 	QMetaObject::invokeMethod(this, "sourceAdded", Qt::QueuedConnection, Q_ARG(const QString&, QLatin1Char(':') + word));
 	if (!data.mutex.tryLock(30 * 1000))
-		kDebug() << "The dictionary data engine timed out.";
+		qDebug() << "The dictionary data engine timed out.";
 
 	m_wordLock.lockForWrite();
 	m_lockers.remove(word, &data);
