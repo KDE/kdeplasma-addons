@@ -119,7 +119,7 @@ Icon=knotes
 Type=Service
 
 X-Plasma-API=declarativeappletscript
-X-Plasma-MainScript=ui/notes.qml
+X-Plasma-MainScript=ui/main.qml
 X-Plasma-DropMimeTypes=text/plain,text/richtext
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-PluginInfo-Author=Davide Bettio, Lukas Kropatschek
