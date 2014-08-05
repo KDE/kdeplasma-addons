@@ -87,12 +87,9 @@ add_subdirectory(eyes)
 #   add_subdirectory(systemloadviewer)
 # endif(NOT WIN32)
 # 
-# if (Q_WS_X11)
-#    if (X11_Xrender_FOUND)
-#       set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/kimpanel/cmake)
-#       add_subdirectory(kimpanel)
-#    endif (X11_Xrender_FOUND)
-# endif (Q_WS_X11)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/kimpanel/cmake)
+add_subdirectory(kimpanel)
 # 
 # add_subdirectory(webslice)
 

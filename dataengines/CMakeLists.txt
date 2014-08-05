@@ -11,6 +11,6 @@
 # add_subdirectory(potd)
 # add_subdirectory(rememberthemilk)
 # add_subdirectory(kdeobservatory)
-# add_subdirectory(kimpanel)
+add_subdirectory(kimpanel)
 add_subdirectory(konsoleprofiles)
 # add_subdirectory(konqprofiles)
