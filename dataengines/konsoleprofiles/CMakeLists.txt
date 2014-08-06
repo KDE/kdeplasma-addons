@@ -5,15 +5,15 @@ set(konsoleprofilesengine_SRCS
     konsoleprofilesservice.cpp
 )
 
-kservice_desktop_to_json(plasma-dataengine-konsoleprofiles.desktop)
-
-add_library(plasma_engine_konsoleprofiles ${konsoleprofilesengine_SRCS})
+add_library(plasma_engine_konsoleprofiles MODULE ${konsoleprofilesengine_SRCS})
 target_link_libraries(plasma_engine_konsoleprofiles
     KF5::Plasma
     KF5::Service
     KF5::KIOCore
     KF5::KDELibs4Support
 )
+
+kservice_desktop_to_json(plasma_engine_konsoleprofiles plasma-dataengine-konsoleprofiles.desktop)
 
 install(TARGETS plasma_engine_konsoleprofiles DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/dataengine)
 install(FILES plasma-dataengine-konsoleprofiles.desktop DESTINATION ${SERVICES_INSTALL_DIR} )

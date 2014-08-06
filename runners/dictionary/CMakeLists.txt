@@ -1,7 +1,7 @@
 set(dictionaryrunner_SRCS dictionaryrunner.cpp dictionarymatchengine.cpp)
 set(kcm_dictionaryrunner_SRCS dictionaryrunner_config.cpp)
 
-add_library(krunner_dictionary ${dictionaryrunner_SRCS})
+add_library(krunner_dictionary MODULE ${dictionaryrunner_SRCS})
 add_library(kcm_krunner_dictionary MODULE ${kcm_dictionaryrunner_SRCS})
 
 target_link_libraries(krunner_dictionary KF5::Runner KF5::I18n KF5::KCMUtils)
