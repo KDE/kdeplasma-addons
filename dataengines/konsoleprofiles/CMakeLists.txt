@@ -12,7 +12,7 @@ target_link_libraries(plasma_engine_konsoleprofiles
     KF5::Plasma
     KF5::Service
     KF5::KIOCore
-    KF5::KDE4Support
+    KF5::KDELibs4Support
 )
 
 install(TARGETS plasma_engine_konsoleprofiles DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/dataengine)
