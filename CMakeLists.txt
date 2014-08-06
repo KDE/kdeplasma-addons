@@ -34,7 +34,7 @@ find_package(KF5 REQUIRED COMPONENTS
     IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
     Config Auth JS Wallet DBusAddons Runner
     I18n GuiAddons Service ItemViews Notifications ConfigWidgets IconThemes Completion JobWidgets Sonnet TextWidgets XmlGui Crash
-    UnitConversion Bookmarks KCMUtils KIO Plasma Declarative NewStuff KDE4Support)
+    UnitConversion Bookmarks KCMUtils KIO Plasma Declarative NewStuff KDELibs4Support)
 
 find_package(Phonon4Qt5 REQUIRED NO_MODULE)
 
