@@ -1,3 +1,3 @@
 #! /usr/bin/env bash
 $EXTRACTRC *.ui >> rc.cpp
-$XGETTEXT *.cpp -o $podir/plasma_applet_timer.pot
+$XGETTEXT *.cpp -o $podir/plasma_applet_org.kde.plasma.timer.pot

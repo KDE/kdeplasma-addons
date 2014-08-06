@@ -1,3 +1,5 @@
+add_definitions(-DTRANSLATION_DOMAIN="plasma_engine_konsoleprofiles")
+
 set(konsoleprofilesengine_SRCS
     konsoleprofilesengine.cpp
     konsoleprofilesservice.cpp
