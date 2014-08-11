@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2014 David Edmundson <davidedmundson@kde.org>
+    Copyright (C) 2014 Kai Uwe Broulik <kde@privat.broulik.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +21,7 @@ import QtQuick 2.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
 
 import org.kde.plasma.private.notes 0.1 as Notes
@@ -35,8 +37,8 @@ PlasmaCore.SvgItem
 
     //deliberately not PlasmaComponents.textEdit
     //as we have custom font selection
-    TextEdit {
-        id: mainTextArea
+    PlasmaExtras.ScrollArea {
+        id: mainScrollArea
         anchors {
             top: parent.top
             left: parent.left
@@ -44,10 +46,32 @@ PlasmaCore.SvgItem
             bottom: fontButtons.top
             margins: units.largeSpacing
         }
-        text: documentHandler.text
-        focus: true
-        textFormat: Qt.RichText
-        wrapMode: TextEdit.Wrap
+
+        Flickable {
+            id: flickable
+            contentWidth: mainScrollArea.width
+            contentHeight: mainTextArea.height
+
+            // TextEdit doesn't handle scrolling while typing itself
+            function ensureVisible(rect) {
+                if (contentY >= rect.y) {
+                    contentY = rect.y
+                } else if (contentY + height < rect.y + rect.height) {
+                    contentY = rect.y + rect.height - height
+                }
+            }
+
+            TextEdit {
+                id: mainTextArea
+                width: parent.width
+                height: Math.max(mainScrollArea.height, paintedHeight)
+                text: documentHandler.text
+                onCursorRectangleChanged: flickable.ensureVisible(cursorRectangle)
+                focus: true
+                textFormat: Qt.RichText
+                wrapMode: TextEdit.Wrap
+            }
+        }
     }
 
     Notes.DocumentHandler {
