@@ -23,4 +23,4 @@ install(TARGETS notesplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/privat
 
 install(
     FILES notes.svgz
-    DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
+    DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
