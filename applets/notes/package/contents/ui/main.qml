@@ -71,6 +71,7 @@ PlasmaCore.SvgItem
                 focus: true
                 textFormat: Qt.RichText
                 wrapMode: TextEdit.Wrap
+                renderType: Qt.NativeRendering
             }
         }
     }
