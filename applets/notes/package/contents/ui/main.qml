@@ -43,8 +43,9 @@ PlasmaCore.SvgItem
             top: parent.top
             left: parent.left
             right: parent.right
-            bottom: fontButtons.top
             margins: units.largeSpacing
+            bottom: fontButtons.top
+            bottomMargin: Math.round(units.largeSpacing / 2)
         }
 
         Flickable {
