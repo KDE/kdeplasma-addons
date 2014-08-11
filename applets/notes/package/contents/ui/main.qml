@@ -73,6 +73,19 @@ PlasmaCore.SvgItem
                 wrapMode: TextEdit.Wrap
                 renderType: Qt.NativeRendering
                 selectByMouse: true // TODO Use proper theme selection colors
+
+                color: theme.textColor
+                selectedTextColor: theme.viewBackgroundColor
+                selectionColor: theme.viewFocusColor
+                font.capitalization: theme.defaultFont.capitalization
+                font.family: theme.defaultFont.family
+                font.italic: theme.defaultFont.italic
+                font.letterSpacing: theme.defaultFont.letterSpacing
+                font.pointSize: theme.defaultFont.pointSize
+                font.strikeout: theme.defaultFont.strikeout
+                font.underline: theme.defaultFont.underline
+                font.weight: theme.defaultFont.weight
+                font.wordSpacing: theme.defaultFont.wordSpacing
             }
         }
     }
