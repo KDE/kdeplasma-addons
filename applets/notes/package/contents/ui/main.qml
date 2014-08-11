@@ -42,7 +42,7 @@ PlasmaCore.SvgItem
             left: parent.left
             right: parent.right
             bottom: fontButtons.top
-            margins: 30
+            margins: units.largeSpacing
         }
         text: documentHandler.text
         focus: true
@@ -69,12 +69,12 @@ PlasmaCore.SvgItem
 
     Row {
         id: fontButtons
-        spacing: 4
+        spacing: units.smallSpacing
         anchors {
             bottom: parent.bottom
             left: parent.left
             right: parent.right
-            margins: 30
+            margins: units.largeSpacing
         }
         PlasmaComponents.ToolButton {
             id: toggleFormatBarButton
