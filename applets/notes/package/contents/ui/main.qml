@@ -72,6 +72,7 @@ PlasmaCore.SvgItem
                 textFormat: Qt.RichText
                 wrapMode: TextEdit.Wrap
                 renderType: Qt.NativeRendering
+                selectByMouse: true // TODO Use proper theme selection colors
             }
         }
     }
