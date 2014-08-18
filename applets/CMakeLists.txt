@@ -9,9 +9,9 @@
 # endif(KDE4_PLASMA_OPENGL_FOUND)
 # 
 # add_subdirectory(bball)
+add_subdirectory(fuzzy-clock)
 # if(KDE4WORKSPACE_FOUND)
 #   add_subdirectory(binary-clock)
-#   add_subdirectory(fuzzy-clock)
 #   add_subdirectory(weather)
 #   if(NOT WIN32 AND DBUSMENUQT_FOUND)
 #     add_subdirectory(icontasks)
