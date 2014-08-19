@@ -1,12 +1,21 @@
+add_definitions(-DTRANSLATION_DOMAIN="plasma_engine_konsoleprofiles")
+
 set(konsoleprofilesengine_SRCS
     konsoleprofilesengine.cpp
     konsoleprofilesservice.cpp
 )
 
-kde4_add_plugin(plasma_engine_konsoleprofiles ${konsoleprofilesengine_SRCS})
-target_link_libraries(plasma_engine_konsoleprofiles ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS})
+add_library(plasma_engine_konsoleprofiles MODULE ${konsoleprofilesengine_SRCS})
+target_link_libraries(plasma_engine_konsoleprofiles
+    KF5::Plasma
+    KF5::Service
+    KF5::KIOCore
+    KF5::KDELibs4Support
+)
 
-install(TARGETS plasma_engine_konsoleprofiles DESTINATION ${PLUGIN_INSTALL_DIR})
+kservice_desktop_to_json(plasma_engine_konsoleprofiles plasma-dataengine-konsoleprofiles.desktop)
+
+install(TARGETS plasma_engine_konsoleprofiles DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/dataengine)
 install(FILES plasma-dataengine-konsoleprofiles.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install(FILES org.kde.plasma.dataengine.konsoleprofiles.operations DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
+install(FILES org.kde.plasma.dataengine.konsoleprofiles.operations DESTINATION ${PLASMA_DATA_INSTALL_DIR}/services)
 

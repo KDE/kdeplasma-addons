@@ -47,7 +47,6 @@ Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 Icon=weather-clear
 X-Plasma-MainScript=ui/main.qml
-X-Plasma-DefaultSize=250,350
 X-Plasma-NotificationArea=true
 X-KDE-PluginInfo-Author=Luís Gabriel Lima
 X-KDE-PluginInfo-Email=lampih@gmail.com

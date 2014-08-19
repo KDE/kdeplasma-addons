@@ -1,0 +1,22 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Fuzzy Clock
+Comment=Time displayed in a less precise format
+
+Icon=preferences-system-time
+Type=Service
+
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Kai Uwe Broulik
+X-KDE-PluginInfo-Email=kde@privat.broulik.de
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.plasma.fuzzyclock
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=plasma.kde.org
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-KDE-PluginInfo-Category=Date and Time
+X-Plasma-Provides=org.kde.plasma.time,org.kde.plasma.date
+
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-RemoteLocation=

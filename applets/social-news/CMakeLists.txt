@@ -18,4 +18,4 @@ target_link_libraries(
 install(TARGETS plasma_applet_opendesktop_activities DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-opendesktop-activities.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
-install(FILES plasma-applet-opendesktop-activities.notifyrc DESTINATION ${DATA_INSTALL_DIR}/plasma-applet-opendesktop-activities/)
+install(FILES plasma-applet-opendesktop-activities.notifyrc DESTINATION ${PLASMA_DATA_INSTALL_DIR}/plasma-applet-opendesktop-activities/)

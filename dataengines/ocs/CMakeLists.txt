@@ -16,4 +16,4 @@ target_link_libraries(plasma_engine_ocs ${LIBATTICA_LIBRARIES} ${KDE4_KDECORE_LI
 
 install(TARGETS plasma_engine_ocs DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-dataengine-ocs.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install(FILES ocsPerson.operations DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
+install(FILES ocsPerson.operations DESTINATION ${PLASMA_DATA_INSTALL_DIR}/services)

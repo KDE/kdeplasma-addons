@@ -30,7 +30,7 @@ install(FILES preview.desktop DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
 install(FILES
         previewer-16.svgz
         previewer-22.svgz
-        DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
+        DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
 
 kde4_install_icons(${ICON_INSTALL_DIR})
 

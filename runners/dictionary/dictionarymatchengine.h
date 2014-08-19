@@ -17,24 +17,24 @@ class RunnerContext;
 }
 class DictionaryMatchEngine : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngine, QObject *parent = 0);
-	QString lookupWord(const QString &word);
+    DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngine, QObject *parent = 0);
+    QString lookupWord(const QString &word);
 
 private:
-	struct ThreadData {
-		QMutex mutex;
-		QString definition;
-	};
-	QMultiMap <QString, ThreadData*> m_lockers;
-	QReadWriteLock m_wordLock;
-	Plasma::DataEngine *m_dictionaryEngine;
+    struct ThreadData {
+        QMutex mutex;
+        QString definition;
+    };
+    QMultiMap <QString, ThreadData*> m_lockers;
+    QReadWriteLock m_wordLock;
+    Plasma::DataEngine *m_dictionaryEngine;
 
 private slots:
-	void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-	void sourceAdded(const QString &source);
+    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+    void sourceAdded(const QString &source);
 
 };
 

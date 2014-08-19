@@ -24,6 +24,9 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Item {
    id: konsoleProfiles
 
+    property int implicitWidth: 290
+    property int implicitHeight: 340
+
     property int minimumWidth: 200
     property int minimumHeight: 300
 

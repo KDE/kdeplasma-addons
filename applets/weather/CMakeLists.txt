@@ -15,5 +15,5 @@ target_link_libraries(plasma_applet_weather
 
 install(TARGETS plasma_applet_weather DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-weather.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES wind-arrows.svgz DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/weather/)
-install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.weather)
+install(FILES wind-arrows.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/weather/)
+install(DIRECTORY package/ DESTINATION ${PLASMA_DATA_INSTALL_DIR}/packages/org.kde.weather)

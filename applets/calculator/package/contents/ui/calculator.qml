@@ -1,5 +1,5 @@
 /*****************************************************************************
- *   Copyright (C) 2012 by Davide Bettio <davide.bettio@kdemail.net>         *
+ *   Copyright (C) 2012, 2014 by Davide Bettio <davide.bettio@kdemail.net>   *
  *   Copyright (C) 2012 by Luiz Romário Santana Rios <luizromario@gmail.com> *
  *   Copyright (C) 2007 by Henry Stanaland <stanaland@gmail.com>             *
  *   Copyright (C) 2008 by Laurent Montel  <montel@kde.org>                  *
@@ -20,13 +20,16 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .          *
  *****************************************************************************/
 
-import QtQuick 1.0;
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.locale 0.1 as Locale
+import QtQuick 2.2
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
 Item {
     id: main;
+
+    property int implicitWidth: 200
+    property int implicitHeight: 250
 
     property int minimumWidth: 200;
     property int minimumHeight: 250;
@@ -97,12 +100,12 @@ Item {
 
         if (commaPressed) {
             ++decimals;
-            tenToTheDecimals = Math.pow(10, decimals);
+            var tenToTheDecimals = Math.pow(10, decimals);
             operand = (operand * tenToTheDecimals + digit) / tenToTheDecimals;
         } else {
             operand = operand * 10 + digit;
         }
-        display.text = operand;
+        displayNumber(operand);
         showingInput = true;
         ++inputSize;
     }
@@ -134,8 +137,8 @@ Item {
             return;
         }
 
-        display.text = algarismCount(result * Math.pow(10, decimals)) > maxInputLength?
-            "E" : result;
+        displayNumber(algarismCount(result * Math.pow(10, decimals)) > maxInputLength?
+            "E" : result);
         showingInput = false;
     }
 
@@ -167,7 +170,7 @@ Item {
     function clearClicked() {
         clearOperand();
         operator = "";
-        display.text = operand;
+        displayNumber(operand);
         showingInput = true;
         showingResult = false;
     }
@@ -183,12 +186,8 @@ Item {
                             Math.floor(Math.log(Math.abs(number))/Math.log(10)) + 1;
     }
 
-    Locale.Locale {
-        id: locale;
-    }
-
-    PlasmaCore.Theme {
-        id: plasmaTheme;
+    function displayNumber(number){
+        display.text = number.toString().replace(".", Qt.locale().decimalPoint);
     }
 
     Connections {
@@ -218,7 +217,7 @@ Item {
                 text: "0";
                 font.pointSize: 16;
                 font.weight: Font.Bold;
-                color: plasmaTheme.viewTextColor;
+                color: theme.viewTextColor;
                 horizontalAlignment: TextEdit.AlignRight;
                 verticalAlignment: TextEdit.AlignVCenter;
                 readOnly: true;
@@ -360,7 +359,7 @@ Item {
             PlasmaComponents.Button {
                 width: buttonWidth;
                 height: buttonHeight;
-                text: locale.decimalSymbol;
+		text: Qt.locale().decimalPoint;
                 onClicked: decimalClicked();
             }
 

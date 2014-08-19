@@ -81,7 +81,7 @@ Comment[zh_CN]=该说可爱好呢还是太书呆子呢
 Comment[zh_TW]=其實我也不知道這算可愛還是討厭
 
 Type=Service
-ServiceTypes=Plasma/DeclarativeWallpaper
+X-KDE-ServiceTypes=Plasma/Wallpaper
 Icon=applications-toys
 X-Plasma-MainScript=ui/animals.qml
 X-KDE-PluginInfo-Author=Aleix Pol Gonzalez

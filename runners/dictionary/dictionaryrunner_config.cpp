@@ -3,14 +3,17 @@
  */
 
 #include "dictionaryrunner_config.h"
-#include <Plasma/AbstractRunner>
+#include <KRunner/AbstractRunner>
 #include <QFormLayout>
 #include <QLineEdit>
+#include <KSharedConfig>
+#include <klocalizedstring.h>
+#include <KPluginFactory>
 
-K_EXPORT_RUNNER_CONFIG(dictionary, DictionaryRunnerConfig)
+K_PLUGIN_FACTORY(DictionaryRunnerConfigFactory, registerPlugin<DictionaryRunnerConfig>("kcm_krunner_dictionary");)
 
 DictionaryRunnerConfig::DictionaryRunnerConfig(QWidget* parent, const QVariantList& args) :
-	KCModule(ConfigFactory::componentData(), parent, args)
+	KCModule(parent, args)
 {
 	QFormLayout *layout = new QFormLayout;
 	m_triggerWord = new QLineEdit;

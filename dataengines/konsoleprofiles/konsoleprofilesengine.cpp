@@ -19,18 +19,20 @@
 #include "konsoleprofilesengine.h"
 #include "konsoleprofilesservice.h"
 
+#include <QDebug>
+
 #include <KStandardDirs>
 #include <KDirWatch>
 #include <QFileInfo>
 #include <kio/global.h>
+#include <KGlobal>
 #include <KGlobalSettings>
-#include <KDebug>
 
 KonsoleProfilesEngine::KonsoleProfilesEngine(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args),
       m_dirWatch(0)
 {
-
+    init();
 }
 
 KonsoleProfilesEngine::~KonsoleProfilesEngine()
@@ -39,7 +41,7 @@ KonsoleProfilesEngine::~KonsoleProfilesEngine()
 
 void KonsoleProfilesEngine::init()
 {
-    kDebug() << "KonsoleProfilesDataEngine init";
+    qDebug() << "KonsoleProfilesDataEngine init";
 
     m_dirWatch = new KDirWatch( this );
     loadProfiles();
@@ -84,12 +86,12 @@ void KonsoleProfilesEngine::loadProfiles()
             }
 
             QString sourceName = "name:" + profileName;
-            kDebug() << "adding sourcename: " << profileName << " ++" << niceName;
+            qDebug() << "adding sourcename: " << profileName << " ++" << niceName;
             setData(profileName, "prettyName", niceName);
         }
     }
 }
 
-K_EXPORT_PLASMA_DATAENGINE(konsoleprofilesengine, KonsoleProfilesEngine)
+K_EXPORT_PLASMA_DATAENGINE_WITH_JSON(konsoleprofilesengine, KonsoleProfilesEngine, "plasma-dataengine-konsoleprofiles.json")
 
 #include "konsoleprofilesengine.moc"

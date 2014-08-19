@@ -66,9 +66,9 @@ Item {
             }
         }
 
-        PlasmaCore.ToolTip {
+        PlasmaCore.ToolTipArea {
             id: tooltip
-            target: comicImageArea
+            anchors.fill: comicImageArea
             mainText: comicApplet.comicData.additionalText
         }
 

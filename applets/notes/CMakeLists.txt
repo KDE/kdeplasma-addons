@@ -1,29 +1,26 @@
-project(plasma-notes)
 
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-include_directories(
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_BINARY_DIR}
-    ${KDE4_INCLUDES}
-    )
+#######################################################################################
+# Package
+plasma_install_package(package org.kde.plasma.notes)
 
-set(notes_SRCS notes.cpp textedit.cpp)
-kde4_add_ui_files(notes_SRCS config.ui)
 
-kde4_add_plugin(plasma_applet_notes ${notes_SRCS})
-target_link_libraries(plasma_applet_notes
-            ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS}
-            )
-install(
-    TARGETS plasma_applet_notes
-    DESTINATION ${PLUGIN_INSTALL_DIR}
-    )
+#######################################################################################
+# Notes Library
+add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.notes")
 
-install(
-    FILES plasma-notes-default.desktop
-    DESTINATION ${SERVICES_INSTALL_DIR}
-    )
+set(notes_SRCS
+    plugin/documenthandler.cpp
+    plugin/notesplugin.cpp
+)
+
+install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/notes)
+add_library(notesplugin SHARED ${notes_SRCS})
+
+target_link_libraries(notesplugin
+                        Qt5::Quick)
+
+install(TARGETS notesplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/notes)
 
 install(
     FILES notes.svgz
-    DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
+    DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)

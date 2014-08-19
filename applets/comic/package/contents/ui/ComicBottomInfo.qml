@@ -66,8 +66,8 @@ Item {
                 comicApplet.goJump();
             }
 
-            PlasmaCore.ToolTip {
-                target: idLabelArea
+            PlasmaCore.ToolTipArea {
+                anchors.fill: idLabelArea
                 mainText: i18n( "Jump to Strip ..." )
             }
         }
@@ -107,8 +107,8 @@ Item {
                 comicApplet.shop();
             }
 
-            PlasmaCore.ToolTip {
-                target: idUrlLabelArea
+            PlasmaCore.ToolTipArea {
+                anchors.fill: idUrlLabelArea
                 mainText: i18n( "Visit the comic website" )
             }
         }

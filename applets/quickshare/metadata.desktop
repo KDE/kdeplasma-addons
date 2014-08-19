@@ -1,0 +1,26 @@
+[Desktop Entry]
+Name=Quick Share
+Comment=Paste text/images to a remote server
+Encoding=UTF-8
+
+Icon=edit-paste
+Type=Service
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-Plasma-API=declarativeappletscript
+
+X-Plasma-MainScript=ui/main.qml
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-PluginInfo-Author=The Plasma Team
+X-KDE-PluginInfo-Email=plasma-devel@kde.org
+X-KDE-PluginInfo-Name=org.kde.plasma.quickshare
+X-KDE-PluginInfo-Version=2.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Online Services
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
+X-Plasma-Requires-FileDialog=Unused
+X-Plasma-Requires-LaunchApp=Required

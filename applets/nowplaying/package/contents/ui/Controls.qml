@@ -25,7 +25,7 @@ import "../code/service.js" as Control
 Row {
     id: root
     
-    property int controlSize: theme.largeIconSize;
+    property int controlSize: units.iconSizes.large;
     
     property Mpris2 source;
     

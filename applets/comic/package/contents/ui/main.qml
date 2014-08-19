@@ -23,6 +23,9 @@ import org.kde.qtextracomponents 0.1
 Item {
     id: mainWindow
 
+    property int implicitWidth: 600
+    property int implicitHeight: 250
+
     width: minimumWidth
     height: minimumHeight
 
@@ -115,8 +118,8 @@ Item {
                         left: parent.left
                     }
 
-                    width: Math.max(theme.smallIconSize, tabButton.height)
-                    height: Math.max(theme.smallIconSize, tabButton.height)
+                    width: Math.max(units.iconSizes.small, tabButton.height)
+                    height: Math.max(units.iconSizes.small, tabButton.height)
 
                     color: "white"
                     opacity: model.highlight ? 0 : 0.5

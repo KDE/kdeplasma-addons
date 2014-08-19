@@ -18,7 +18,7 @@
 #ifndef CONVERTERRUNNER_H
 #define CONVERTERRUNNER_H
 
-#include <plasma/abstractrunner.h>
+#include <krunner/abstractrunner.h>
 
 /**
  * This class converts values to different units.
@@ -37,7 +37,5 @@ public:
 private:
     QStringList m_separators;
 };
-
-K_EXPORT_PLASMA_RUNNER(converterrunner, ConverterRunner)
 
 #endif
