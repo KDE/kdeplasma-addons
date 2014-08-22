@@ -50,7 +50,6 @@ PlasmaCore.SvgItem
 
         Flickable {
             id: flickable
-            contentWidth: mainScrollArea.width
             contentHeight: mainTextArea.height
 
             // TextEdit doesn't handle scrolling while typing itself
