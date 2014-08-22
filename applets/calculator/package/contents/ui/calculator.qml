@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
@@ -33,9 +34,6 @@ Item {
 
     property int minimumWidth: 200;
     property int minimumHeight: 250;
-
-    property int buttonHeight: (height - displayFrame.height - 6 * buttonsGrid.spacing) / 5;
-    property int buttonWidth: (width / 4) - buttonsGrid.spacing;
 
     property real result: 0;
     property bool hasResult: false;
@@ -197,14 +195,17 @@ Item {
         }
     }
 
-    Column {
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 4
+
         focus: true;
         spacing: 4;
 
         PlasmaCore.FrameSvgItem {
             id: displayFrame;
-            width: buttonsGrid.width;
-            height: 2 * display.font.pixelSize;
+            Layout.fillWidth: true
+            Layout.minimumHeight: 2 * display.font.pixelSize;
             imagePath: "widgets/frame";
             prefix: "sunken";
 
@@ -224,170 +225,148 @@ Item {
             }
         }
 
-        Grid {
+        GridLayout {
             id: buttonsGrid;
             columns: 4;
             rows: 5;
-            spacing: 4;
+            columnSpacing: 4
+            rowSpacing: 4
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: i18nc("Text of the clear button", "C");
                 onClicked: clearClicked();
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: i18nc("Text of the division button", "÷");
                 onClicked: setOperator("/");
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: i18nc("Text of the multiplication button", "×");
                 onClicked: setOperator("*");
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: i18nc("Text of the all clear button", "AC");
                 onClicked: allClearClicked();
             }
 
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: "7";
                 onClicked: digitClicked(7);
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: "8";
                 onClicked: digitClicked(8);
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: "9";
                 onClicked: digitClicked(9);
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: i18nc("Text of the minus button", "-");
                 onClicked: setOperator("-");
             }
 
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: "4";
                 onClicked: digitClicked(4);
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: "5";
                 onClicked: digitClicked(5);
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: "6";
                 onClicked: digitClicked(6);
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: i18nc("Text of the plus button", "+");
                 onClicked: setOperator("+");
             }
 
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: "1";
                 onClicked: digitClicked(1);
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: "2";
                 onClicked: digitClicked(2);
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 text: "3";
                 onClicked: digitClicked(3);
             }
 
-            Item {
-                id: ansPlaceHolder;
-                width: buttonWidth;
-                height: buttonHeight;
-            }
-
-            Item {
-                id: zeroPlaceHolder;
-                width: buttonWidth;
-                height: buttonHeight;
-            }
-
-            Item {
-                id: zeroPlaceHolder2;
-                width: buttonWidth;
-                height: buttonHeight;
+            PlasmaComponents.Button {
+                id: ansButton;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.rowSpan: 2
+                text: i18nc("Text of the equals button", "=");
+                onClicked: equalsClicked();
             }
 
             PlasmaComponents.Button {
-                width: buttonWidth;
-                height: buttonHeight;
-		text: Qt.locale().decimalPoint;
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.columnSpan: 2
+                text: "0";
+                onClicked: digitClicked(0);
+            }
+
+            PlasmaComponents.Button {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                text: Qt.locale().decimalPoint;
                 onClicked: decimalClicked();
             }
-
-            Item {
-                id: ansPlaceHolder2;
-                width: buttonWidth;
-                height: buttonHeight;
-            }
         }
-    }
-
-    PlasmaComponents.Button {
-        width: buttonWidth * 2 + buttonsGrid.spacing;
-        height: buttonHeight;
-        x: zeroPlaceHolder.x + buttonsGrid.x;
-        y: zeroPlaceHolder.y + buttonsGrid.y;
-        text: "0";
-        onClicked: digitClicked(0);
-    }
-
-    PlasmaComponents.Button {
-        id: ansButton;
-        width: buttonWidth;
-        height: buttonHeight * 2 + buttonsGrid.spacing;
-        x: ansPlaceHolder.x + buttonsGrid.x;
-        y: ansPlaceHolder.y + buttonsGrid.y;
-        text: i18nc("Text of the equals button", "=");
-        onClicked: equalsClicked();
     }
 }
 
