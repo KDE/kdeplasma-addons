@@ -87,10 +87,8 @@ Item {
     ]
 
     function timeString() {
-        var upcaseFirst = i18nc("Whether to uppercase the first letter of " +
-                                 "completed fuzzy time strings above: " +
-                                 "translate as 1 if yes, 0 if no.",
-                                 "1") != "0"
+        var upcaseFirst = i18nc("Whether to uppercase the first letter of completed fuzzy time strings above: translate as 1 if yes, 0 if no.",
+                                "1") != "0"
 
         var d = new Date(dataSource.data["Local"]["DateTime"])
         var hours = d.getHours()
