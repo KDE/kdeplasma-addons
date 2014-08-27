@@ -1,3 +1,2 @@
 #! /usr/bin/env bash
-$EXTRACTRC *.ui >> rc.cpp
-$XGETTEXT *.cpp -o $podir/plasma_applet_systemloadviewer.pot
+$XGETTEXT `find . -name \*.qml` -o $podir/plasma_applet_org.kde.plasma.systemloadviewer.pot

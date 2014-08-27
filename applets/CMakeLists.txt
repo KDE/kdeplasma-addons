@@ -84,7 +84,7 @@ add_subdirectory(eyes)
 #   add_subdirectory(showdesktop)
 #   add_subdirectory(paste)
 #   add_subdirectory(plasmaboard)
-#   add_subdirectory(systemloadviewer)
+   add_subdirectory(systemloadviewer)
 # endif(NOT WIN32)
 # 
 
