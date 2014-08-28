@@ -76,7 +76,6 @@ class DocumentHandler : public QObject
 
     Q_PROPERTY(QStringList defaultFontSizes READ defaultFontSizes NOTIFY defaultFontSizesChanged)
 
-    Q_PROPERTY(QUrl fileUrl READ fileUrl WRITE setFileUrl NOTIFY fileUrlChanged)
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
     Q_PROPERTY(QString documentTitle READ documentTitle WRITE setDocumentTitle NOTIFY documentTitleChanged)
 
@@ -109,7 +108,6 @@ public:
     int fontSize() const;
 
     QStringList defaultFontSizes() const;
-    QUrl fileUrl() const;
     QString text() const;
 
     QString documentTitle() const;
@@ -123,7 +121,6 @@ public Q_SLOTS:
     void setTextColor(const QColor &arg);
     void setFontFamily(const QString &arg);
 
-    void setFileUrl(const QUrl &arg);
     void setText(const QString &arg);
 
     void setDocumentTitle(QString arg);
@@ -165,7 +162,6 @@ private:
 
     QFont m_font;
     int m_fontSize;
-    QUrl m_fileUrl;
     QString m_text;
     QString m_documentTitle;
 };
