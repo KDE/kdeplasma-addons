@@ -34,8 +34,8 @@ Item {
         active: visible
         anchors.fill: parent
         source: switch (plasmoid.configuration.monitorType) {
-            default: case 0: loader.source = "BarMonitor.qml"; break;
-            case 1: loader.source = "CircularMonitor.qml"; break;
+            default: case 0: "BarMonitor.qml"; break;
+            case 1: "CircularMonitor.qml"; break;
         }
         onLoaded: {
             loader.item.colors = Qt.binding(function() { return colors })
