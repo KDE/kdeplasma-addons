@@ -146,18 +146,18 @@ Item {
         var cpuLoad = dataSource.data[dataSource.totalLoad].value
         var averageClock = dataSource.data[dataSource.averageClock].value
         var clock = dataSource.data[dataSource.averageClock].value
-        var cpuLoadPart = i18n("CPU: ") + Math.round(cpuLoad) + "%"
-        var cpuClockPart = i18n("Average clock: ") + Math.round(averageClock) + " MHz"
+        var cpuLoadPart = i18n("CPU: %1%", Math.round(cpuLoad))
+        var cpuClockPart = i18n("Average clock: %1 MHz", Math.round(averageClock))
 
         var memFree = parseFloat(dataSource.data[dataSource.memFree].value) / 1024
         var memUsed = parseFloat(dataSource.data[dataSource.memUsed].value) / 1024
         var memTotal = memFree + memUsed
-        var memoryPart = i18n("Memory: ") + Math.round(memUsed) + "/" + Math.round(memTotal) + " Mib"
+        var memoryPart = i18n("Memory: %1/%2 MiB", Math.round(memUsed), Math.round(memTotal))
 
         var swapFree = parseFloat(dataSource.data[dataSource.swapFree].value) / 1024
         var swapUsed = parseFloat(dataSource.data[dataSource.swapUsed].value) / 1024
         var swapTotal = swapFree + swapUsed
-        var swapPart = i18n("Swap: ") + Math.round(swapUsed) + "/" + Math.round(swapTotal) + " Mib"
+        var swapPart = i18n("Swap: %1/%2 MiB", Math.round(swapUsed), Math.round(swapTotal))
 
         return [cpuLoadPart, cpuClockPart, memoryPart, swapPart].join("\n")
     }
