@@ -19,11 +19,16 @@
 #include "notesplugin.h"
 #include "documenthandler.h"
 
+#include "notemanager.h"
+#include "note.h"
 
 #include <QtQml>
 
 void NotesPlugin::registerTypes (const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.notes"));
+
     qmlRegisterType<DocumentHandler>(uri, 0, 1, "DocumentHandler");
+    qmlRegisterType<NoteManager>(uri, 0, 1, "NoteManager");
+    qmlRegisterUncreatableType<Note>(uri, 0, 1, "Note", "Note not creatable, load via NoteManager");
 }
