@@ -40,6 +40,7 @@ Item {
         radius: width / 2
         height: 20
         width: height
+        opacity: enabled ? 1 : 0.5
         border {
             width: mouseArea.containsMouse ? 3 : 1
             color: Qt.darker(colorDialog.color, 1.5)

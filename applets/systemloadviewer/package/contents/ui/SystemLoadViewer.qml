@@ -34,24 +34,26 @@ Item {
     readonly property int borderRounding: 3
     readonly property int headingLevel: 2
 
-    property var cpuColors: plasmoid.configuration.useThemeColors ? [theme.buttonFocusColor,
-                                                                     theme.highlightColor,
-                                                                     theme.visitedLinkColor,
-                                                                     theme.linkColor]
-                                                                  : [plasmoid.configuration.cpuSysColor,
-                                                                     plasmoid.configuration.cpuUserColor,
-                                                                     plasmoid.configuration.cpuNiceColor,
-                                                                     plasmoid.configuration.cpuIOWaitColor]
+    property bool setColorsManually: plasmoid.configuration.setColorsManually
 
-    property var memoryColors: plasmoid.configuration.useThemeColors ? [theme.buttonFocusColor,
-                                                                        theme.visitedLinkColor,
-                                                                        theme.highlightColor]
-                                                                     : [plasmoid.configuration.memApplicationColor,
-                                                                        plasmoid.configuration.memBuffersColor,
-                                                                        plasmoid.configuration.memCachedColor]
+    property var cpuColors: setColorsManually ? [plasmoid.configuration.cpuSysColor,
+                                                 plasmoid.configuration.cpuUserColor,
+                                                 plasmoid.configuration.cpuNiceColor,
+                                                 plasmoid.configuration.cpuIOWaitColor]
+                                              : [theme.buttonFocusColor,
+                                                 theme.highlightColor,
+                                                 theme.visitedLinkColor,
+                                                 theme.linkColor]
 
-    property var swapColors: plasmoid.configuration.useThemeColors ? [theme.hightlightColor]
-                                                                   : [plasmoid.configuration.swapUsedColor]
+    property var memoryColors: setColorsManually ? [plasmoid.configuration.memApplicationColor,
+                                                    plasmoid.configuration.memBuffersColor,
+                                                    plasmoid.configuration.memCachedColor]
+                                                 : [theme.buttonFocusColor,
+                                                    theme.visitedLinkColor,
+                                                    theme.highlightColor]
+
+    property var swapColors: setColorsManually ? [plasmoid.configuration.swapUsedColor]
+                                               : [theme.hightlightColor]
 
     // Make labels visible first time so that the
     // user knows which monitor is which.

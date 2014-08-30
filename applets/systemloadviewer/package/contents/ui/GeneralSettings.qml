@@ -25,20 +25,11 @@ import QtQuick.Layouts 1.0
 Item {
     id: generalSettings
 
-    property alias cfg_memApplicationColor: memApplicationColorPicker.chosenColor
-    property alias cfg_memBuffersColor: memBuffersColorPicker.chosenColor
-    property alias cfg_memCachedColor: memCachedColorPicker.chosenColor
-    property alias cfg_cpuUserColor: cpuUserColorPicker.chosenColor
-    property alias cfg_cpuIOWaitColor: cpuIOWaitColorPicker.chosenColor
-    property alias cfg_cpuSysColor: cpuSysColorPicker.chosenColor
-    property alias cfg_cpuNiceColor: cpuNiceColorPicker.chosenColor
-    property alias cfg_swapUsedColor: swapUsedColorPicker.chosenColor
     property alias cfg_cpuActivated: cpuActivatedCheckBox.checked
     property alias cfg_memoryActivated: memoryActivatedCheckBox.checked
     property alias cfg_swapActivated: swapActivatedCheckBox.checked
-    property alias cfg_useThemeColors: useThemeColorsCheckBox.checked
     property alias cfg_updateInterval: updateIntervalSpinBox.value
-    property int cfg_monitorType
+    property int cfg_monitorType: plasmoid.configuration.monitorType
 
     height: layout.implicitHeight
     width: layout.implicitWidth
@@ -60,30 +51,32 @@ Item {
         columns: 2
 
         Label {
-            text: i18n("Update interval (seconds):")
+            text: i18n("Show:")
             Layout.alignment: Qt.AlignRight
-        }
-
-        SpinBox {
-            id: updateIntervalSpinBox
-            decimals: 1
-            stepSize: 0.1
-            minimumValue: 0.1
-        }
-
-        Label {
-            text: i18n("Use theme colors:")
-            Layout.alignment: Qt.AlignRight
+            Layout.rowSpan: 3
+            anchors.verticalCenter: cpuActivatedCheckBox.verticalCenter
         }
 
         CheckBox {
-            id: useThemeColorsCheckBox
-            text: i18n("Enabled")
+            id: cpuActivatedCheckBox
+            text: i18n("CPU monitor")
+        }
+
+        CheckBox {
+            id: memoryActivatedCheckBox
+            text: i18n("Memory monitor")
+        }
+
+        CheckBox {
+            id: swapActivatedCheckBox
+            text: i18n("Swap monitor")
         }
 
         Label {
             text: i18n("Monitor type:")
-            Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
+            Layout.alignment: Qt.AlignRight
+            Layout.rowSpan: 2
+            anchors.verticalCenter: barMonitorRadio.verticalCenter
         }
 
         RadioButton {
@@ -93,12 +86,6 @@ Item {
             onCheckedChanged: if (checked) cfg_monitorType = 0;
         }
 
-        Item {
-            width: 2
-            height: 2
-            Layout.rowSpan: 1
-        }
-
         RadioButton {
             id: circularMonitorRadio
             exclusiveGroup: monitorTypeGroup
@@ -106,110 +93,17 @@ Item {
             onCheckedChanged: if (checked) cfg_monitorType = 1;
         }
 
-        CheckBox {
-            id: cpuActivatedCheckBox
-            text: i18n("CPU monitor")
-            Layout.columnSpan: 2
-        }
-
         Label {
-            text: i18n("User:")
+            text: i18n("Update interval:")
             Layout.alignment: Qt.AlignRight
-            visible: cfg_cpuActivated && !cfg_useThemeColors
         }
 
-        ColorPicker {
-            id: cpuUserColorPicker
-            visible: cfg_cpuActivated && !cfg_useThemeColors
-        }
-
-        Label {
-            text: i18n("IOWait:")
-            Layout.alignment: Qt.AlignRight
-            visible: cfg_cpuActivated && !cfg_useThemeColors
-        }
-
-        ColorPicker {
-            id: cpuIOWaitColorPicker
-            visible: cfg_cpuActivated && !cfg_useThemeColors
-        }
-
-        Label {
-            text: i18n("Sys:")
-            Layout.alignment: Qt.AlignRight
-            visible: cfg_cpuActivated && !cfg_useThemeColors
-        }
-
-        ColorPicker {
-            id: cpuSysColorPicker
-            visible: cfg_cpuActivated && !cfg_useThemeColors
-        }
-
-        Label {
-            text: i18n("Nice:")
-            Layout.alignment: Qt.AlignRight
-            visible: cfg_cpuActivated && !cfg_useThemeColors
-        }
-
-        ColorPicker {
-            id: cpuNiceColorPicker
-            visible: cfg_cpuActivated && !cfg_useThemeColors
-        }
-
-        CheckBox {
-            id: memoryActivatedCheckBox
-            text: i18n("Memory monitor")
-            Layout.columnSpan: 2
-        }
-
-        Label {
-            text: i18n("Application:")
-            Layout.alignment: Qt.AlignRight
-            visible: cfg_memoryActivated && !cfg_useThemeColors
-        }
-
-        ColorPicker {
-            id: memApplicationColorPicker
-            visible: cfg_memoryActivated && !cfg_useThemeColors
-        }
-
-        Label {
-            text: i18n("Buffers:")
-            Layout.alignment: Qt.AlignRight
-            visible: cfg_memoryActivated && !cfg_useThemeColors
-        }
-
-        ColorPicker {
-            id: memBuffersColorPicker
-            visible: cfg_memoryActivated && !cfg_useThemeColors
-        }
-
-        Label {
-            text: i18n("Cached:")
-            Layout.alignment: Qt.AlignRight
-            visible: cfg_memoryActivated && !cfg_useThemeColors
-        }
-
-        ColorPicker {
-            id: memCachedColorPicker
-            visible: cfg_memoryActivated && !cfg_useThemeColors
-        }
-
-        CheckBox {
-            id: swapActivatedCheckBox
-            text: i18n("Swap monitor")
-            Layout.columnSpan: 2
-        }
-
-        Label {
-            text: i18n("Used swap:")
-            Layout.alignment: Qt.AlignRight
-            visible: cfg_swapActivated && !cfg_useThemeColors
-        }
-
-        ColorPicker {
-            id: swapUsedColorPicker
-            visible: cfg_swapActivated && !cfg_useThemeColors
+        SpinBox {
+            id: updateIntervalSpinBox
+            decimals: 1
+            stepSize: 0.1
+            minimumValue: 0.1
+            suffix: i18nc("Abbreviation for seconds", "s")
         }
     }
 

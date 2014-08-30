@@ -28,4 +28,9 @@ ConfigModel {
          icon: "view-statistics"
          source: "GeneralSettings.qml"
     }
+    ConfigCategory {
+         name: i18n("Colors")
+         icon: "preferences-desktop-color"
+         source: "ColorSettings.qml"
+    }
 }
