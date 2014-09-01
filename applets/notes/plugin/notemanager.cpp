@@ -22,24 +22,22 @@
 
 #include <QMutex>
 #include <QDebug>
+#include <QQmlEngine>
 
 #include "filesystemnotemanager.h"
+#include "note.h"
 
-NoteManager::NoteManager(QObject* parent): QObject(parent)
+NoteManager::NoteManager(QObject* parent):
+    QObject(parent)
 {
     m_backend = loadBackend();
-    m_activeNoteId = "test";
 }
 
-Note* NoteManager::note()
+Note* NoteManager::loadNote(const QString &id)
 {
-
-    return m_backend->loadNote(m_activeNoteId);
-//     if (m_activeNote.isNull()) {
-//         m_activeNote = m_backend->loadNote(m_activeNoteId);
-        //TODO set ownership to QML
-//     }
-//     return m_activeNote.data();
+    Note *note = m_backend->loadNote(id);
+    QQmlEngine::setObjectOwnership(note, QQmlEngine::JavaScriptOwnership);
+    return note;
 }
 
 void NoteManager::deleteNoteResources(const QString &id)

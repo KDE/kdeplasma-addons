@@ -25,19 +25,19 @@
 #include <QUuid>
 #include <QDebug>
 
+#include <KDirWatch>
+
 class FileNote : public Note
 {
 Q_OBJECT
 public:
     FileNote(const QString &path, const QString &id);
-    virtual const QString noteText() const;
-    virtual void setNoteText(const QString &text);
-
     void load();
-    void save();
+    void save(const QString &text);
 private:
+    void fileSystemChanged(const QString &path);
     QString m_path;
-    QString m_text;
+//     QFileSystemWatcher *m_watcher;
 };
 
 FileSystemNoteManager::FileSystemNoteManager()
@@ -61,7 +61,7 @@ Note* FileSystemNoteManager::loadNote(const QString &id)
 {
     QString idToUse = id;
     if (id.isEmpty()) {
-        QUuid::createUuid();
+        idToUse = QUuid::createUuid().toString();
     }
 
     FileNote* note = new FileNote(m_notesDir.absoluteFilePath(idToUse), idToUse);
@@ -72,36 +72,46 @@ FileNote::FileNote(const QString& path, const QString& id):
     Note(id),
     m_path(path)
 {
+    //FIXME Aleix said this was bad... not sure why, I'm checking the path..
+
+    //OPTIMISATION right now every time we save a note, we're going to read it back in again
+    //not a huge problem as we don't save that often
+    //blocking signals isn't enough as KDirWatch is a bit slow and we finish saving before it says we changed a file
+    KDirWatch::self()->addFile(path);
+
+    connect(KDirWatch::self(), &KDirWatch::created, this, &FileNote::fileSystemChanged);
+    connect(KDirWatch::self(), &KDirWatch::dirty, this, &FileNote::fileSystemChanged);
+
     load();
-}
-
-const QString FileNote::noteText() const
-{
-    return m_text;
-}
-
-void FileNote::setNoteText(const QString &text)
-{
-    m_text = text;
-    save();
-    emit textChanged();
 }
 
 void FileNote::load()
 {
     QFile file(m_path);
     if (file.open(QIODevice::QIODevice::ReadOnly | QIODevice::Text)) {
-        m_text = file.readAll();
+        setNoteText(file.readAll());
     }
 }
 
-void FileNote::save()
+void FileNote::save(const QString &text)
 {
+    if (text == noteText()) {
+        return;
+    }
+
     QFile file(m_path);
     if (file.open(QIODevice::QIODevice::WriteOnly | QIODevice::Text)) {
-        file.write(m_text.toLatin1());
+        file.write(text.toLatin1());
     } else {
         qWarning() << "could not write notes to file " << m_path;
+    }
+    setNoteText(text);
+}
+
+void FileNote::fileSystemChanged(const QString &path)
+{
+    if (path == m_path) {
+        load();
     }
 }
 

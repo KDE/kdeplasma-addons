@@ -24,7 +24,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
 
-import org.kde.plasma.private.notes 0.1 as Notes
+import org.kde.plasma.private.notes 0.1
 
 PlasmaCore.SvgItem
 {
@@ -35,8 +35,13 @@ PlasmaCore.SvgItem
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    //deliberately not PlasmaComponents.textEdit
-    //as we have custom font selection
+    //note is of type Note
+    property QtObject note: noteManager.loadNote(plasmoid.configuration.noteId);
+
+    NoteManager {
+        id: noteManager
+    }
+
     PlasmaExtras.ScrollArea {
         id: mainScrollArea
         anchors {
@@ -61,16 +66,24 @@ PlasmaCore.SvgItem
                 }
             }
 
+            //update the note if the source changes, but only if the user isn't editing it currently
+            Binding {
+                target: mainTextArea
+                property: "text"
+                value: note.noteText
+                when: !mainTextArea.activeFocus
+            }
+
+            //deliberately not PlasmaComponents.textEdit
+            //as we have custom font selection
             TextEdit {
                 id: mainTextArea
                 width: parent.width
                 height: Math.max(mainScrollArea.height, paintedHeight)
-                text: documentHandler.text
                 onCursorRectangleChanged: flickable.ensureVisible(cursorRectangle)
                 focus: true
                 textFormat: Qt.RichText
                 wrapMode: TextEdit.Wrap
-                renderType: Qt.NativeRendering
                 selectByMouse: true
 
                 //this is deliberately _NOT_ the theme colour as we are over a known bright background
@@ -78,34 +91,32 @@ PlasmaCore.SvgItem
                 color: "#202020"
                 selectedTextColor: theme.viewBackgroundColor
                 selectionColor: theme.viewFocusColor
+
                 font.capitalization: theme.defaultFont.capitalization
                 font.family: theme.defaultFont.family
-                font.italic: theme.defaultFont.italic
+                font.italic: documentHandler.italic
                 font.letterSpacing: theme.defaultFont.letterSpacing
                 font.pointSize: theme.defaultFont.pointSize
                 font.strikeout: theme.defaultFont.strikeout
                 font.underline: theme.defaultFont.underline
                 font.weight: theme.defaultFont.weight
                 font.wordSpacing: theme.defaultFont.wordSpacing
+
+                onActiveFocusChanged: {
+                    if(!activeFocus) {
+                        note.save(mainTextArea.text);
+                    }
+                }
             }
         }
     }
 
-    Notes.DocumentHandler {
+     DocumentHandler {
         id: documentHandler
         target: mainTextArea
         cursorPosition: mainTextArea.cursorPosition
         selectionStart: mainTextArea.selectionStart
         selectionEnd: mainTextArea.selectionEnd
-
-        text: plasmoid.configuration.noteText
-    }
-    //plasma has it's own internal timers to not trash the config file when things change
-    //may as well let it do it
-    Binding {
-        target: plasmoid.configuration
-        property: "noteText"
-        value: mainTextArea.text
     }
 
     Row {
@@ -177,6 +188,16 @@ PlasmaCore.SvgItem
         plasmoid.setAction("change_note_color_pink", i18n("Pink"));
         plasmoid.setAction("change_note_color_translucent", i18n("Translucent"));
         plasmoid.setActionSeparator("separator0");
+
+        //plasmoid configuration doesn't check before emitting change signal
+        //explicit check is needed (at time of writing)
+        if (note.id != plasmoid.configuration.noteId) {
+            plasmoid.configuration.noteId = note.id;
+        }
+    }
+
+    Component.onDestruction: {
+        note.save(mainTextArea.text);
     }
 
     function actionTriggered(actionName) {

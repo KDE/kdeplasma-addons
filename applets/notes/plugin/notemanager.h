@@ -30,17 +30,15 @@ class Note;
 class NoteManager : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(Note* activeNote READ note NOTIFY idChanged);
-//     Q_PROPERTY(QString noteId READ noteId WRITE noteId NOTIFY idChanged);
+
 public:
     explicit NoteManager(QObject* parent = 0);
 
     /**
-     * Load a note with the given ID
-     * A blank ID will create a new note
-     * Ownership is transferred to the QML engine
+     * Loads the note for the ID given
+     * Ownership is passed to the QML context
      */
-    Note* note();
+    Q_INVOKABLE Note* loadNote(const QString &id);
 
     /**
      * Remove any resources associated with the note ID
@@ -49,16 +47,12 @@ public:
 
     //LATER QAbstractListModel* notesModel(); //list of all notes
 
-Q_SIGNALS:
-    void idChanged();
-
 private:
     //ref count backends so that we only have for all notes
     static QSharedPointer<AbstractNoteManager> loadBackend();
 
     QSharedPointer<AbstractNoteManager> m_backend;
-    QString m_activeNoteId;
-    QPointer<Note> m_activeNote;
+    QWeakPointer<Note> m_lastNote;
 };
 
 

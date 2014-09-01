@@ -24,7 +24,6 @@
 #include <QString>
 class Note;
 
-//rename AbstractNoteManagerBackend?
 class AbstractNoteManager
 {
 public:

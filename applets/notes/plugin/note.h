@@ -27,30 +27,28 @@ class Note : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString id READ id CONSTANT)
-    Q_PROPERTY(QString text READ noteText WRITE setNoteText NOTIFY textChanged)
-    Q_PROPERTY(QString storedText READ storedText NOTIFY storedTextChanged)
+    Q_PROPERTY(QString noteText READ noteText NOTIFY noteTextChanged)
 
 public:
     explicit Note(const QString &id);
     QString id() const;
 
-    const QString noteText() const ;
+    //what's in the plasmoid
+    //backends save this and write into storedText
+    QString noteText() const ;
     void setNoteText(const QString &text);
 
-    QString storedText() const;
-protected:
-    setStoredText(const QString &text);
+public Q_SLOTS:
+    virtual void save(const QString &text);
 
     //FUTURE
 //     status  None, Ready, Loading, Error
 
 Q_SIGNALS:
-    void textChanged();
-    void storedTextChanged();
+    void noteTextChanged();
 private:
     const QString m_id;
-    QString m_text;
-    QString m_storedText;
+    QString m_noteText;
 };
 
 #endif // NOTE_H

@@ -24,7 +24,6 @@ Note::Note(const QString &id):
     QObject(),
     m_id(id)
 {
-
 }
 
 QString Note::id() const
@@ -32,6 +31,23 @@ QString Note::id() const
     return m_id;
 }
 
+void Note::setNoteText(const QString &text)
+{
+    if (text == m_noteText) {
+        return;
+    }
+    m_noteText = text;
+    Q_EMIT noteTextChanged();
+}
 
+QString Note::noteText() const
+{
+    return m_noteText;
+}
+
+void Note::save(const QString &text)
+{
+    Q_UNUSED(text);
+}
 
 #include "note.moc"

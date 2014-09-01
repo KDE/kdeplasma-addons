@@ -11,7 +11,7 @@
       <default>yellow</default>
     </entry>
 
-    <entry name="noteText" type="String">
+    <entry name="noteId" type="String">
       <default></default>
     </entry>
   </group>
