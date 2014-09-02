@@ -24,7 +24,7 @@
 #include <QSharedPointer>
 #include <QPointer>
 
-#include "abstractnotemanager.h"
+#include "abstractnoteloader.h"
 class Note;
 
 class NoteManager : public QObject
@@ -49,9 +49,9 @@ public:
 
 private:
     //ref count backends so that we only have for all notes
-    static QSharedPointer<AbstractNoteManager> loadBackend();
+    static QSharedPointer<AbstractNoteLoader> loadBackend();
 
-    QSharedPointer<AbstractNoteManager> m_backend;
+    QSharedPointer<AbstractNoteLoader> m_backend;
     QWeakPointer<Note> m_lastNote;
 };
 

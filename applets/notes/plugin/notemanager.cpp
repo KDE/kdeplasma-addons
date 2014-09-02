@@ -24,7 +24,7 @@
 #include <QDebug>
 #include <QQmlEngine>
 
-#include "filesystemnotemanager.h"
+#include "filesystemnoteloader.h"
 #include "note.h"
 
 NoteManager::NoteManager(QObject* parent):
@@ -45,15 +45,15 @@ void NoteManager::deleteNoteResources(const QString &id)
     m_backend->deleteNoteResources(id);
 }
 
-QSharedPointer< AbstractNoteManager > NoteManager::loadBackend()
+QSharedPointer< AbstractNoteLoader > NoteManager::loadBackend()
 {
     static QMutex mutex;
-    static QWeakPointer<AbstractNoteManager> s_backend;
+    static QWeakPointer<AbstractNoteLoader> s_backend;
 
     mutex.lock();
-    QSharedPointer<AbstractNoteManager> manager = s_backend.toStrongRef();
+    QSharedPointer<AbstractNoteLoader> manager = s_backend.toStrongRef();
     if (manager.isNull()) {
-        manager.reset(new FileSystemNoteManager);
+        manager.reset(new FileSystemNoteLoader);
         s_backend = manager;
     }
     mutex.unlock();

@@ -1,5 +1,4 @@
 /*
- * <one line to give the library's name and an idea of what it does.>
  * Copyright (C) 2014  David Edmundson <david@davidedmundson.co.uk>
  *
  * This library is free software; you can redistribute it and/or
@@ -18,14 +17,23 @@
  *
  */
 
-#include "abstractnotemanager.h"
+#ifndef ABSTRACTNOTELOADER_H
+#define ABSTRACTNOTELOADER_H
 
-AbstractNoteManager::AbstractNoteManager()
+#include <QString>
+class Note;
+
+class AbstractNoteLoader
 {
+public:
+    explicit AbstractNoteLoader();
+    virtual ~AbstractNoteLoader();
 
-}
+    virtual QStringList allNoteIds() = 0;
+    virtual Note* loadNote(const QString &id) = 0;
+    virtual void  deleteNoteResources(const QString &id) = 0;
+private:
+};
 
-AbstractNoteManager::~AbstractNoteManager()
-{
 
-}
+#endif // ABSTRACTNOTEMANAGER_H

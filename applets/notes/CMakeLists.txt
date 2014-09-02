@@ -9,9 +9,9 @@ plasma_install_package(package org.kde.plasma.notes)
 add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.notes")
 
 set(notes_SRCS
-    plugin/abstractnotemanager.cpp
+    plugin/abstractnoteloader.cpp
     plugin/documenthandler.cpp
-    plugin/filesystemnotemanager.cpp
+    plugin/filesystemnoteloader.cpp
     plugin/note.cpp
     plugin/notemanager.cpp
     plugin/notesplugin.cpp

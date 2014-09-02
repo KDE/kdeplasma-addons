@@ -1,5 +1,4 @@
 /*
- * <one line to give the library's name and an idea of what it does.>
  * Copyright (C) 2014  David Edmundson <david@davidedmundson.co.uk>
  *
  * This library is free software; you can redistribute it and/or
@@ -18,7 +17,7 @@
  *
  */
 
-#include "filesystemnotemanager.h"
+#include "filesystemnoteloader.h"
 
 #include "note.h"
 
@@ -40,28 +39,28 @@ private:
 //     QFileSystemWatcher *m_watcher;
 };
 
-FileSystemNoteManager::FileSystemNoteManager()
+FileSystemNoteLoader::FileSystemNoteLoader()
 {
 //     n_notesDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "";
     m_notesDir = "/home/david/notes";
 }
 
 
-QStringList FileSystemNoteManager::allNoteIds()
+QStringList FileSystemNoteLoader::allNoteIds()
 {
     return m_notesDir.entryList(QStringList() << "*.txt");
 }
 
-void FileSystemNoteManager::deleteNoteResources(const QString &id)
+void FileSystemNoteLoader::deleteNoteResources(const QString &id)
 {
     m_notesDir.remove(id);
 }
 
-Note* FileSystemNoteManager::loadNote(const QString &id)
+Note* FileSystemNoteLoader::loadNote(const QString &id)
 {
     QString idToUse = id;
     if (id.isEmpty()) {
-        idToUse = QUuid::createUuid().toString();
+        idToUse = QUuid::createUuid().toString().mid(1, 34);//UUID adds random braces I don't want them on my file system
     }
 
     FileNote* note = new FileNote(m_notesDir.absoluteFilePath(idToUse), idToUse);
@@ -117,4 +116,4 @@ void FileNote::fileSystemChanged(const QString &path)
 
 
 
-#include "filesystemnotemanager.moc"
+#include "filesystemnoteloader.moc"

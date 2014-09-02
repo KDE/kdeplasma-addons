@@ -1,5 +1,4 @@
 /*
- * <one line to give the library's name and an idea of what it does.>
  * Copyright (C) 2014  David Edmundson <david@davidedmundson.co.uk>
  *
  * This library is free software; you can redistribute it and/or
@@ -18,23 +17,25 @@
  *
  */
 
-#ifndef ABSTRACTNOTEMANAGER_H
-#define ABSTRACTNOTEMANAGER_H
+#ifndef FILESYSTEMNOTELOADER_H
+#define FILESYSTEMNOTELOADER_H
 
-#include <QString>
-class Note;
+#include "abstractnoteloader.h"
 
-class AbstractNoteManager
+#include <QObject>
+#include <QStandardPaths>
+#include <QDir>
+
+class FileSystemNoteLoader : public AbstractNoteLoader
 {
 public:
-    explicit AbstractNoteManager();
-    virtual ~AbstractNoteManager();
+    explicit FileSystemNoteLoader();
+    virtual QStringList allNoteIds();
+    virtual Note* loadNote(const QString& id);
+    virtual void deleteNoteResources(const QString& id);
 
-    virtual QStringList allNoteIds() = 0;
-    virtual Note* loadNote(const QString &id) = 0;
-    virtual void  deleteNoteResources(const QString &id) = 0;
 private:
+    QDir m_notesDir;
 };
 
-
-#endif // ABSTRACTNOTEMANAGER_H
+#endif // FILESYSTEMNOTEMANAGER_H
