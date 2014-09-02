@@ -1,4 +1,5 @@
 /*****************************************************************************
+ *   Copyright (C) 2014 by Martin Yrjölä <martin.yrjola@gmail.com>           *
  *   Copyright (C) 2012, 2014 by Davide Bettio <davide.bettio@kdemail.net>   *
  *   Copyright (C) 2012, 2014 by David Edmundson <davidedmundson@kde.org >   *
  *   Copyright (C) 2012 by Luiz Romário Santana Rios <luizromario@gmail.com> *
@@ -49,8 +50,10 @@ Item {
     property int decimals: 0;
     property int inputSize: 0;
 
-    property int maxInputLength: 15; // More than that and the number notation turns scientific
-                                     // (i.e.: 1.32324e+12)
+    property int maxInputLength: 18; // More than that and the number notation
+                                     // turns scientific (i.e.: 1.32324e+12).
+                                     // When calculating 1/3 the answer is
+                                     // 18 characters long.
 
     Keys.onDigit0Pressed: { digitClicked(0); }
     Keys.onDigit1Pressed: { digitClicked(1); }
@@ -92,10 +95,6 @@ Item {
     }
 
     function digitClicked(digit) {
-        if (inputSize >= maxInputLength) {
-            return;
-        }
-
         if (showingResult) {
             allClearClicked();
         }
@@ -139,8 +138,7 @@ Item {
             return;
         }
 
-        displayNumber(algarismCount(result * Math.pow(10, decimals)) > maxInputLength?
-            "E" : result);
+        displayNumber(result);
         showingInput = false;
     }
 
@@ -188,8 +186,30 @@ Item {
                             Math.floor(Math.log(Math.abs(number))/Math.log(10)) + 1;
     }
 
-    function displayNumber(number){
-        display.text = number.toString().replace(".", Qt.locale().decimalPoint);
+    function localizeNumber(number) {
+        return number.toString().replace(".", Qt.locale().decimalPoint);
+    }
+
+    function displayNumber(number) {
+        display.text = localizeNumber(number);
+
+        if (display.length > maxInputLength) {
+            display.text = localizeNumber(convertToScientific(number, 14));
+        }
+
+        var decimalsToShow = 9;
+        // Decrease precision until the text fits to the display.
+        while (display.contentWidth > display.width && decimalsToShow > 0) {
+            display.text = localizeNumber(convertToScientific(number, decimalsToShow--));
+        }
+    }
+
+    function convertToScientific(number, decimalsToShow){
+        var exponent = algarismCount(number) - 1;
+        var roundedNumber = +(number / Math.pow(10, exponent)).toFixed(decimalsToShow);
+        var scientificFormat = roundedNumber.toString() +
+            "e" + exponent;
+        return scientificFormat;
     }
 
     Connections {
