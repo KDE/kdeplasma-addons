@@ -36,15 +36,15 @@ public:
 private:
     void fileSystemChanged(const QString &path);
     QString m_path;
-//     QFileSystemWatcher *m_watcher;
+    KDirWatch *m_watcher;
 };
 
 FileSystemNoteLoader::FileSystemNoteLoader()
 {
     const QString genericDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-    const QString suffix = "/plasma_notes";
+    const QString suffix = "plasma_notes";
     QDir(genericDataLocation).mkdir(suffix);
-    m_notesDir = genericDataLocation + suffix;
+    m_notesDir = genericDataLocation + '/' + suffix;
 }
 
 
@@ -71,17 +71,13 @@ Note* FileSystemNoteLoader::loadNote(const QString &id)
 
 FileNote::FileNote(const QString& path, const QString& id):
     Note(id),
-    m_path(path)
+    m_path(path),
+    m_watcher(new KDirWatch(this))
 {
-    //FIXME Aleix said this was bad... not sure why, I'm checking the path..
+    m_watcher->addFile(path);
 
-    //OPTIMISATION right now every time we save a note, we're going to read it back in again
-    //not a huge problem as we don't save that often
-    //blocking signals isn't enough as KDirWatch is a bit slow and we finish saving before it says we changed a file
-    KDirWatch::self()->addFile(path);
-
-    connect(KDirWatch::self(), &KDirWatch::created, this, &FileNote::fileSystemChanged);
-    connect(KDirWatch::self(), &KDirWatch::dirty, this, &FileNote::fileSystemChanged);
+    connect(m_watcher, &KDirWatch::created, this, &FileNote::fileSystemChanged);
+    connect(m_watcher, &KDirWatch::dirty, this, &FileNote::fileSystemChanged);
 
     load();
 }
@@ -100,13 +96,17 @@ void FileNote::save(const QString &text)
         return;
     }
 
+    m_watcher->removeFile(m_path);
+
     QFile file(m_path);
     if (file.open(QIODevice::QIODevice::WriteOnly | QIODevice::Text)) {
         file.write(text.toLatin1());
     } else {
-        qWarning() << "could not write notes to file " << m_path;
+        qWarning() << "Could not write notes to file " << m_path;
     }
     setNoteText(text);
+
+    m_watcher->addFile(m_path);
 }
 
 void FileNote::fileSystemChanged(const QString &path)
