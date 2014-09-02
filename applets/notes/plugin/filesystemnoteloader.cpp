@@ -41,8 +41,10 @@ private:
 
 FileSystemNoteLoader::FileSystemNoteLoader()
 {
-//     n_notesDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "";
-    m_notesDir = "/home/david/notes";
+    const QString genericDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    const QString suffix = "/plasma_notes";
+    QDir(genericDataLocation).mkdir(suffix);
+    m_notesDir = genericDataLocation + suffix;
 }
 
 
