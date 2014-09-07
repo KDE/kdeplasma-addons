@@ -1,5 +1,4 @@
 /*
- * <one line to give the library's name and an idea of what it does.>
  * Copyright (C) 2014  David Edmundson <david@davidedmundson.co.uk>
  *
  * This library is free software; you can redistribute it and/or
@@ -43,11 +42,6 @@ void Note::setNoteText(const QString &text)
 QString Note::noteText() const
 {
     return m_noteText;
-}
-
-void Note::save(const QString &text)
-{
-    Q_UNUSED(text);
 }
 
 #include "note.moc"

@@ -23,6 +23,7 @@
 
 #include <QUuid>
 #include <QDebug>
+#include <QStandardPaths>
 
 #include <KDirWatch>
 
@@ -44,13 +45,13 @@ FileSystemNoteLoader::FileSystemNoteLoader()
     const QString genericDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     const QString suffix = "plasma_notes";
     QDir(genericDataLocation).mkdir(suffix);
-    m_notesDir = genericDataLocation + '/' + suffix;
+    m_notesDir = genericDataLocation + QDir::separator() + suffix;
 }
 
 
 QStringList FileSystemNoteLoader::allNoteIds()
 {
-    return m_notesDir.entryList(QStringList() << "*.txt");
+    return m_notesDir.entryList(QStringList {"*.txt"});
 }
 
 void FileSystemNoteLoader::deleteNoteResources(const QString &id)
@@ -85,7 +86,7 @@ FileNote::FileNote(const QString& path, const QString& id):
 void FileNote::load()
 {
     QFile file(m_path);
-    if (file.open(QIODevice::QIODevice::ReadOnly | QIODevice::Text)) {
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         setNoteText(file.readAll());
     }
 }
@@ -99,10 +100,10 @@ void FileNote::save(const QString &text)
     m_watcher->removeFile(m_path);
 
     QFile file(m_path);
-    if (file.open(QIODevice::QIODevice::WriteOnly | QIODevice::Text)) {
-        file.write(text.toLatin1());
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        file.write(text.toUtf8());
     } else {
-        qWarning() << "Could not write notes to file " << m_path;
+        qWarning() << "Could not write notes to file" << m_path;
     }
     setNoteText(text);
 

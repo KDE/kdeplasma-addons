@@ -19,6 +19,8 @@
 
 #include "abstractnoteloader.h"
 
+#include <QString>
+
 AbstractNoteLoader::AbstractNoteLoader()
 {
 

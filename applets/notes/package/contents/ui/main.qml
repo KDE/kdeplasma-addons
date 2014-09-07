@@ -35,6 +35,10 @@ PlasmaCore.SvgItem
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
+    //this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
+    property real horizontalMargins: width * 0.07
+    property real verticalMargins: height * 0.07
+
     //note is of type Note
     property QtObject note: noteManager.loadNote(plasmoid.configuration.noteId);
 
@@ -48,7 +52,11 @@ PlasmaCore.SvgItem
             top: parent.top
             left: parent.left
             right: parent.right
-            margins: units.largeSpacing
+
+            leftMargin: horizontalMargins
+            rightMargin: horizontalMargins
+            topMargin: verticalMargins
+
             bottom: fontButtons.top
             bottomMargin: Math.round(units.largeSpacing / 2)
         }
@@ -85,6 +93,7 @@ PlasmaCore.SvgItem
                 textFormat: Qt.RichText
                 wrapMode: TextEdit.Wrap
                 selectByMouse: true
+                renderType: Text.NativeRendering
 
                 //this is deliberately _NOT_ the theme colour as we are over a known bright background
                 //an unknown colour over a known colour is a bad move as you end up with white on yellow
@@ -103,7 +112,7 @@ PlasmaCore.SvgItem
                 font.wordSpacing: theme.defaultFont.wordSpacing
 
                 onActiveFocusChanged: {
-                    if(!activeFocus) {
+                    if (!activeFocus) {
                         note.save(mainTextArea.text);
                     }
                 }
@@ -126,7 +135,10 @@ PlasmaCore.SvgItem
             bottom: parent.bottom
             left: parent.left
             right: parent.right
-            margins: units.largeSpacing
+
+            leftMargin: horizontalMargins
+            rightMargin: horizontalMargins
+            bottomMargin: verticalMargins
         }
         PlasmaComponents.ToolButton {
             id: toggleFormatBarButton

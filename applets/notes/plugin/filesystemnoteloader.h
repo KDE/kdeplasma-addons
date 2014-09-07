@@ -23,16 +23,15 @@
 #include "abstractnoteloader.h"
 
 #include <QObject>
-#include <QStandardPaths>
 #include <QDir>
 
 class FileSystemNoteLoader : public AbstractNoteLoader
 {
 public:
     explicit FileSystemNoteLoader();
-    virtual QStringList allNoteIds();
-    virtual Note* loadNote(const QString& id);
-    virtual void deleteNoteResources(const QString& id);
+    virtual QStringList allNoteIds() Q_DECL_OVERRIDE;
+    virtual Note* loadNote(const QString &id) Q_DECL_OVERRIDE;
+    virtual void deleteNoteResources(const QString &id) Q_DECL_OVERRIDE;
 
 private:
     QDir m_notesDir;

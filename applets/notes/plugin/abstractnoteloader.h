@@ -20,7 +20,8 @@
 #ifndef ABSTRACTNOTELOADER_H
 #define ABSTRACTNOTELOADER_H
 
-#include <QString>
+class QStringList;
+class QString;
 class Note;
 
 class AbstractNoteLoader
