@@ -45,37 +45,151 @@ Item {
     property int fuzzyness: plasmoid.configuration.fuzzyness
 
     readonly property var hourNames: [
-        i18nc("hour in the messages below","one"),
-        i18nc("hour in the messages below","two"),
-        i18nc("hour in the messages below","three"),
-        i18nc("hour in the messages below","four"),
-        i18nc("hour in the messages below","five"),
-        i18nc("hour in the messages below","six"),
-        i18nc("hour in the messages below","seven"),
-        i18nc("hour in the messages below","eight"),
-        i18nc("hour in the messages below","nine"),
-        i18nc("hour in the messages below","ten"),
-        i18nc("hour in the messages below","eleven"),
-        i18nc("hour in the messages below","twelve")
+        [ i18n("One o’clock"),
+          i18n("Five past one"),
+          i18n("Ten past one"),
+          i18n("Quarter past one"),
+          i18n("Twenty past one"),
+          i18n("Twenty five past one"),
+          i18n("Half past one"),
+          i18n("Twenty five to one"),
+          i18n("Twenty to one"),
+          i18n("Quarter to one"),
+          i18n("Ten to one"),
+          i18n("Five to one") ],
+        [ i18n("Two o’clock"),
+          i18n("Five past two"),
+          i18n("Ten past two"),
+          i18n("Quarter past two"),
+          i18n("Twenty past two"),
+          i18n("Twenty five past two"),
+          i18n("Half past two"),
+          i18n("Twenty five to two"),
+          i18n("Twenty to two"),
+          i18n("Quarter to two"),
+          i18n("Ten to two"),
+          i18n("Five to two") ],
+        [ i18n("Three o’clock"),
+          i18n("Five past three"),
+          i18n("Ten past three"),
+          i18n("Quarter past three"),
+          i18n("Twenty past three"),
+          i18n("Twenty five past three"),
+          i18n("Half past three"),
+          i18n("Twenty five to three"),
+          i18n("Twenty to three"),
+          i18n("Quarter to three"),
+          i18n("Ten to three"),
+          i18n("Five to three") ],
+        [ i18n("Four o’clock"),
+          i18n("Five past four"),
+          i18n("Ten past four"),
+          i18n("Quarter past four"),
+          i18n("Twenty past four"),
+          i18n("Twenty five past four"),
+          i18n("Half past four"),
+          i18n("Twenty five to four"),
+          i18n("Twenty to four"),
+          i18n("Quarter to four"),
+          i18n("Ten to four"),
+          i18n("Five to four") ],
+        [ i18n("Five o’clock"),
+          i18n("Five past five"),
+          i18n("Ten past five"),
+          i18n("Quarter past five"),
+          i18n("Twenty past five"),
+          i18n("Twenty five past five"),
+          i18n("Half past five"),
+          i18n("Twenty five to five"),
+          i18n("Twenty to five"),
+          i18n("Quarter to five"),
+          i18n("Ten to five"),
+          i18n("Five to five") ],
+        [ i18n("Six o’clock"),
+          i18n("Five past six"),
+          i18n("Ten past six"),
+          i18n("Quarter past six"),
+          i18n("Twenty past six"),
+          i18n("Twenty five past six"),
+          i18n("Half past six"),
+          i18n("Twenty five to six"),
+          i18n("Twenty to six"),
+          i18n("Quarter to six"),
+          i18n("Ten to six"),
+          i18n("Five to six") ],
+        [ i18n("Seven o’clock"),
+          i18n("Five past seven"),
+          i18n("Ten past seven"),
+          i18n("Quarter past seven"),
+          i18n("Twenty past seven"),
+          i18n("Twenty five past seven"),
+          i18n("Half past seven"),
+          i18n("Twenty five to seven"),
+          i18n("Twenty to seven"),
+          i18n("Quarter to seven"),
+          i18n("Ten to seven"),
+          i18n("Five to seven") ],
+        [ i18n("Eight o’clock"),
+          i18n("Five past eight"),
+          i18n("Ten past eight"),
+          i18n("Quarter past eight"),
+          i18n("Twenty past eight"),
+          i18n("Twenty five past eight"),
+          i18n("Half past eight"),
+          i18n("Twenty five to eight"),
+          i18n("Twenty to eight"),
+          i18n("Quarter to eight"),
+          i18n("Ten to eight"),
+          i18n("Five to eight") ],
+        [ i18n("Nine o’clock"),
+          i18n("Five past nine"),
+          i18n("Ten past nine"),
+          i18n("Quarter past nine"),
+          i18n("Twenty past nine"),
+          i18n("Twenty five past nine"),
+          i18n("Half past nine"),
+          i18n("Twenty five to nine"),
+          i18n("Twenty to nine"),
+          i18n("Quarter to nine"),
+          i18n("Ten to nine"),
+          i18n("Five to nine") ],
+        [ i18n("Ten o’clock"),
+          i18n("Five past ten"),
+          i18n("Ten past ten"),
+          i18n("Quarter past ten"),
+          i18n("Twenty past ten"),
+          i18n("Twenty five past ten"),
+          i18n("Half past ten"),
+          i18n("Twenty five to ten"),
+          i18n("Twenty to ten"),
+          i18n("Quarter to ten"),
+          i18n("Ten to ten"),
+          i18n("Five to ten") ],
+        [ i18n("Eleven o’clock"),
+          i18n("Five past eleven"),
+          i18n("Ten past eleven"),
+          i18n("Quarter past eleven"),
+          i18n("Twenty past eleven"),
+          i18n("Twenty five past eleven"),
+          i18n("Half past eleven"),
+          i18n("Twenty five to eleven"),
+          i18n("Twenty to eleven"),
+          i18n("Quarter to eleven"),
+          i18n("Ten to eleven"),
+          i18n("Five to eleven") ],
+        [ i18n("Twelve o’clock"),
+          i18n("Five past twelve"),
+          i18n("Ten past twelve"),
+          i18n("Quarter past twelve"),
+          i18n("Twenty past twelve"),
+          i18n("Twenty five past twelve"),
+          i18n("Half past twelve"),
+          i18n("Twenty five to twelve"),
+          i18n("Twenty to twelve"),
+          i18n("Quarter to twelve"),
+          i18n("Ten to twelve"),
+          i18n("Five to twelve") ]
     ]
-
-    function normalFuzzy(fuzzy, hour) {
-        switch(fuzzy) {
-        case 0: return i18nc("%1 the hour translated above", "%1 o'clock", hour);
-        case 1: return i18nc("%1 the hour translated above", "five past %1", hour);
-        case 2: return i18nc("%1 the hour translated above", "ten past %1", hour);
-        case 3: return i18nc("%1 the hour translated above", "quarter past %1", hour);
-        case 4: return i18nc("%1 the hour translated above", "twenty past %1", hour);
-        case 5: return i18nc("%1 the hour translated above", "twenty five past %1", hour);
-        case 6: return i18nc("%1 the hour translated above", "half past %1", hour);
-        case 7: return i18nc("%1 the hour translated above", "twenty five to %1", hour);
-        case 8: return i18nc("%1 the hour translated above", "twenty to %1", hour);
-        case 9: return i18nc("%1 the hour translated above", "quarter to %1", hour);
-        case 10: return i18nc("%1 the hour translated above", "ten to %1", hour);
-        case 11: return i18nc("%1 the hour translated above", "five to %1", hour);
-        case 12: return i18nc("%1 the hour translated above", "%1 o'clock", hour);
-        }
-    }
 
     readonly property var dayTime: [
         i18n("Night"), i18n("Early morning"), i18n("Morning"), i18n("Almost noon"),
@@ -87,9 +201,6 @@ Item {
     ]
 
     function timeString() {
-        var upcaseFirst = i18nc("Whether to uppercase the first letter of completed fuzzy time strings above: translate as 1 if yes, 0 if no.",
-                                "1") != "0"
-
         var d = new Date(dataSource.data["Local"]["DateTime"])
         var hours = d.getHours()
         var minutes = d.getMinutes()
@@ -115,11 +226,12 @@ Item {
                 realHour = 12 - ((hours + deltaHour) % 12 + 1)
             }
 
-            var timeString = normalFuzzy(Math.floor(sector), hourNames[Math.floor(realHour)])
-            if (upcaseFirst) {
-                timeString = timeString[0].toUpperCase() + timeString.substr(1)
+            sector = Math.floor(sector);
+            if (sector == 12) {
+                sector = 0
             }
-            return timeString
+
+            return hourNames[Math.floor(realHour)][sector]
         } else if (main.fuzzyness == 3) {
             return dayTime[Math.floor(hours / 3)]
         } else {
