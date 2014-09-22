@@ -35,11 +35,6 @@ Item {
     Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     Layout.preferredHeight: vertical ? Layout.minimumHeight : theme.mSize(theme.defaultFont).height * 2
 
-    property int formFactor: plasmoid.formFactor
-    property int timePixelSize: theme.defaultFont.pixelSize
-
-    property bool constrained: formFactor == PlasmaCore.Types.Vertical || formFactor == PlasmaCore.Types.Horizontal
-
     property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical
 
     property int fuzzyness: plasmoid.configuration.fuzzyness
