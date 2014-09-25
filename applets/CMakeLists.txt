@@ -46,7 +46,9 @@ add_subdirectory(notes)
 # add_subdirectory(spellcheck)
 # add_subdirectory(showdashboard)
 add_subdirectory(timer)
-add_subdirectory(eyes)
+
+#This applet is disabled because although ported it does not work
+# add_subdirectory(eyes)
 
 # add_subdirectory(unitconverter)
 # add_subdirectory(weatherstation)
@@ -93,4 +95,6 @@ add_subdirectory(kimpanel)
 # 
 # add_subdirectory(webslice)
 
-plasma_install_package(quickshare org.kde.plasma.quickshare)
+# This plasmoid is disabled because although ported it does not actually work on Qt5.3
+# Re-enable in Plasma 5.2 AFTER testing drag & drop
+# plasma_install_package(quickshare org.kde.plasma.quickshare)
