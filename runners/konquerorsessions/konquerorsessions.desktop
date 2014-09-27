@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Konqueror Sessions
+Name[ca]=Sessions del Konqueror
+Name[fr]=Sessions Konqueror
+Name[hu]=Konqueror munkamenetek
+Name[nl]=Konquerorsessies
+Name[pl]=Sesje Konquerora
+Name[sv]=Konquerorsessioner
+Name[uk]=Сеанси Konqueror
+Name[x-test]=xxKonqueror Sessionsxx
+Name[zh_TW]=Konqueror 工作階段
 Comment=Matches Konqueror Sessions
+Comment[ca]=Correspon amb sessions del Konqueror
+Comment[fr]=Retrouve des sessions Konqueror
+Comment[hu]=Konqueror munkamenetek
+Comment[nl]=Zoekt Konquerorsessies
+Comment[pl]=Dopasowanie sesji Konquerora
+Comment[sv]=Matchar Konquerorsessioner
+Comment[uk]=Порівнює сеанси Konqueror
+Comment[x-test]=xxMatches Konqueror Sessionsxx
+Comment[zh_TW]=比對 Konqueror 工作階段
 Icon=konqueror
 
 X-KDE-ServiceTypes=Plasma/Runner

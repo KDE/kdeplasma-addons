@@ -1,7 +1,25 @@
 [Desktop Entry]
 Name=YouTube
+Name[ca]=YouTube
+Name[fr]=YouTube
+Name[hu]=YouTube
+Name[nl]=YouTube
+Name[pl]=YouTube
+Name[sv]=YouTube
+Name[uk]=YouTube
+Name[x-test]=xxYouTubexx
+Name[zh_TW]=YouTube
 
 Comment=Matches YouTube queries
+Comment[ca]=Correspon amb consultes a YouTube
+Comment[fr]=Correspond aux requêtes Youtube
+Comment[hu]=YouTube keresés
+Comment[nl]=Komt overeen met YouTube-queries
+Comment[pl]=Dopasowanie zapytań YouTube
+Comment[sv]=Matchar sökningar på YouTube
+Comment[uk]=Відповідники запиту за даними YouTube
+Comment[x-test]=xxMatches YouTube queriesxx
+Comment[zh_TW]=比對 YouTube 查詢
 
 Icon=krunner_youtube
 

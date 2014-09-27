@@ -1,7 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Weather Forecast
+Name[ca]=Previsió meteorològica
+Name[fr]=Bulletin météorologique
+Name[hu]=Időjárás-előrejelzés (QML
+Name[nl]=Weersvoorspelling
+Name[pl]=Prognoza pogody
+Name[sv]=Väderprognos
+Name[uk]=Прогноз погоди
+Name[x-test]=xxWeather Forecastxx
+Name[zh_TW]=氣象預報
 Comment=Displays Weather information
+Comment[ca]=Mostra informació meteorològica
+Comment[fr]=Affiche des informations météorologiques
+Comment[hu]=Időjárás-információk megjelenítése
+Comment[nl]=Toont weerinformatie
+Comment[pl]=Wyświetla informacje o pogodzie
+Comment[sv]=Visar väderinformation
+Comment[uk]=Показує відомості про погоду
+Comment[x-test]=xxDisplays Weather informationxx
+Comment[zh_TW]=顯示氣象資訊
 Icon=weather-clear
 Type=Service
 ServiceTypes=Plasma/Applet

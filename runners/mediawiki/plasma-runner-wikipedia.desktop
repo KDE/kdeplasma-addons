@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Wikipedia
+Name[ca]=Viquipèdia
+Name[fr]=Wikipédia
+Name[hu]=Wikipédia
+Name[nl]=Wikipedia
+Name[pl]=Wikipedia
+Name[sv]=Wikipedia
+Name[uk]=Вікіпедія
+Name[x-test]=xxWikipediaxx
+Name[zh_TW]=維基百科
 Comment=Search on Wikipedia
+Comment[ca]=Cerca en la Viquipèdia
+Comment[fr]=Chercher dans Wikipédia
+Comment[hu]=Keresés a Wikipédián
+Comment[nl]=In Wikipedia zoeken
+Comment[pl]=Wyszukiwanie w Wikipedii
+Comment[sv]=Sök på Wikipedia
+Comment[uk]=Пошук у Вікіпедії
+Comment[x-test]=xxSearch on Wikipediaxx
+Comment[zh_TW]=搜尋維基百科
 Icon=applications-internet
 
 X-KDE-ServiceTypes=Plasma/Runner

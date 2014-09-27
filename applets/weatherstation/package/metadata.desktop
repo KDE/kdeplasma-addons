@@ -1,6 +1,15 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=LCD Weather Station (QML)
+Name[ca]=Estació meteorològica LCD (QML)
+Name[fr]=Station météo LCD (QML)
+Name[hu]=LCD időjárásjelző állomás (QML)
+Name[nl]=LCD weerstation (QML)
+Name[pl]=Stacja pogodowa LCD (QML)
+Name[sv]=LCD-väderstation (QML)
+Name[uk]=Метеорологічна станція на дисплеї (QML)
+Name[x-test]=xxLCD Weather Station (QML)xx
+Name[zh_TW]=LCD 氣象站 (QML)
 Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 Icon=accessories-dictionary

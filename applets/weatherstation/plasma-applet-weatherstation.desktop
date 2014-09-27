@@ -1,7 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=LCD Weather Station
+Name[ca]=Estació meteorològica LCD
+Name[fr]=Station météo LCD
+Name[hu]=LCD időjárásjelző állomás (QML
+Name[nl]=LCD weerstation
+Name[pl]=Stacja pogodowa LCD
+Name[sv]=LCD-väderstation
+Name[uk]=Метеорологічна станція на дисплеї
+Name[x-test]=xxLCD Weather Stationxx
+Name[zh_TW]=LCD 氣象站
 Comment=Weather reports with an LCD display style
+Comment[ca]=Informes meteorològics en una pantalla d'estil LCD
+Comment[fr]=Bulletins météo avec un style d'affichage LCD
+Comment[hu]=Időjárás-jelentések egy LCD-kijelző stílusában
+Comment[nl]=Weerberichten met een LCD-achtig display
+Comment[pl]=Informacje pogodowe na wyświetlaczu LCD
+Comment[sv]=Väderrapport visad med LCD-stil
+Comment[uk]=Прогнози погоди на маленькому дисплеї
+Comment[x-test]=xxWeather reports with an LCD display stylexx
+Comment[zh_TW]=以 LCD 風格顯示氣象報告
 Type=Service
 Icon=weather-clouds
 ServiceTypes=Plasma/Applet

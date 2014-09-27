@@ -1,6 +1,25 @@
 [Desktop Entry]
 Name=Comic Strip
+Name[ca]=Tira còmica
+Name[es]=Tira cómica
+Name[fr]=Bande dessinée
+Name[hu]=Képregény
+Name[nl]=Stripboek
+Name[pl]=Komiks
+Name[sv]=Tecknad serie
+Name[uk]=Комічна стрічка
+Name[x-test]=xxComic Stripxx
+Name[zh_TW]=漫畫
 Comment=View comic strips from the Internet
+Comment[ca]=Mostra una tira còmica des d'Internet
+Comment[fr]=Affiche une bande dessinée provenant d'Internet
+Comment[hu]=Képregények megjelenítése az internetről
+Comment[nl]=Toont stripboeken van het internet
+Comment[pl]=Przeglądanie komiksów z Internetu
+Comment[sv]=Visa tecknade serier från Internet
+Comment[uk]=Показує стрічку з жартами з Інтернету
+Comment[x-test]=xxView comic strips from the Internetxx
+Comment[zh_TW]=從網路上顯示漫畫
 Icon=face-smile-big
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet

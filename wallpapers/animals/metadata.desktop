@@ -1,7 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Ascii Animals
+Name[ca]=Animals ASCII
+Name[fr]=Animaux « Ascii »
+Name[hu]=Ascii állatok
+Name[nl]=Ascii dieren
+Name[pl]=Zwierzęta Ascii
+Name[sv]=ASCII-djur
+Name[uk]=ASCII-тварини
+Name[x-test]=xxAscii Animalsxx
+Name[zh_TW]=Ascii 動物
 Comment=Unsure if cute or just nerdy
+Comment[ca]=No se sap si és bonic o només setciències
+Comment[fr]=Hésitant entre mignon ou tout simplement ringard
+Comment[hu]=Bizonytalan, ha csinos vagy csak stréber
+Comment[nl]=Onzeker of het leuk is of gewoon nerdachtig
+Comment[pl]=Niepewny czy słodki czy tylko dziwny
+Comment[sv]=Osäker om gulliga eller bara nördiga
+Comment[uk]=Не знаємо, чи це мило, чи просто дивакувато
+Comment[x-test]=xxUnsure if cute or just nerdyxx
+Comment[zh_TW]=其實我也不知道這算可愛還是討厭
 
 Type=Service
 X-KDE-ServiceTypes=Plasma/Wallpaper

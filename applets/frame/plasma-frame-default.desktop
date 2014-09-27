@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Picture Frame
+Name[ca]=Marc de fotografies
+Name[es]=Marco de retrato
+Name[fr]=Cadre de photos
+Name[hu]=Képkeret
+Name[nl]=Fotolijst
+Name[pl]=Ramka na zdjęcia
+Name[sv]=Bildram
+Name[uk]=Картинна рамка
+Name[x-test]=xxPicture Framexx
+Name[zh_TW]=圖片框架
 Comment=Display your favorite pictures
+Comment[ca]=Mostra les fotografies preferides
+Comment[es]=Mostrar sus imágenes favoritas
+Comment[fr]=Affiche vos images préférées
+Comment[hu]=Megjeleníti kedvenc képeit
+Comment[nl]=Toon uw favoriete afbeeldingen
+Comment[pl]=Wyświetlacz ulubionych zdjęć
+Comment[sv]=Visa dina favoritbilder
+Comment[uk]=Відображає ваші улюблені картинки
+Comment[x-test]=xxDisplay your favorite picturesxx
+Comment[zh_TW]=顯示您最愛的圖片
 Icon=view-preview
 Type=Service
 X-Plasma-DropMimeTypes=image/jpeg,image/png

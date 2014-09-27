@@ -1,7 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Timer
+Name[ca]=Temporitzador
+Name[fr]=Décompte
+Name[hu]=Időzítő indítása
+Name[nl]=Timer
+Name[pl]=Czasomierz
+Name[sv]=Tidtagning
+Name[uk]=Таймер
+Name[x-test]=xxTimerxx
+Name[zh_TW]=計時器
 Comment=Countdown over a specified time period
+Comment[ca]=Compte enrere durant un període de temps especificat
+Comment[fr]=Décompte le temps pendant une durée spécifiée
+Comment[hu]=Visszaszámlálás egy adott időtartamról
+Comment[nl]=Aftellen over een bepaalde periode
+Comment[pl]=Odliczanie danego czasu
+Comment[sv]=Nerräkning under ett angivet tidsintervall
+Comment[uk]=Зворотній відлік визначеного часу
+Comment[x-test]=xxCountdown over a specified time periodxx
+Comment[zh_TW]=倒數計時
 Type=Service
 Icon=chronometer
 ServiceTypes=Plasma/Applet

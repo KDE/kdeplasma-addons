@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Microblogging
+Name[ca]=Microblogs
+Name[fr]=Microblogging
+Name[hu]=Mikroblogolás
+Name[nl]=Microblogging
+Name[pl]=Mikroblog
+Name[sv]=Mikroblogg
+Name[uk]=Міні-журнал
+Name[x-test]=xxMicrobloggingxx
+Name[zh_TW]=Microblogging
 Comment=identi.ca and twitter micro-blogging services
+Comment[ca]=Serveis de microblogs identi.ca i twitter
+Comment[fr]=Services de mini-blogue pour « identi.ca » et « twitter »
+Comment[hu]=identi.ca és twitter mikroblogszolgáltatások
+Comment[nl]=identi.ca en twitter micro-blogging-services
+Comment[pl]=Usługi mikrobloga identi.ca i twitter
+Comment[sv]=Mikrobloggtjänsterna identi.ca och twitter
+Comment[uk]=Служби мікроблогів identi.ca і twitter
+Comment[x-test]=xxidenti.ca and twitter micro-blogging servicesxx
+Comment[zh_TW]=identi.ca 與 twitter 微部落格服務
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=twitter_microblog

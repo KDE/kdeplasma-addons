@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Qalculate!
+Name[ca]=Qalculate!
+Name[fr]=Calcule !
+Name[hu]=Qalculate!
+Name[nl]=Qalculate!
+Name[pl]=Qalculate!
+Name[sv]=Beräkna!
+Name[uk]=Qalculate!
+Name[x-test]=xxQalculate!xx
+Name[zh_TW]=Qalculate!
 Comment=A powerful mathematical equation solver
+Comment[ca]=Una calculadora potent d'equacions matemàtiques
+Comment[fr]=Un puissant résolveur d'équations mathématiques
+Comment[hu]=Hatékony matematikai egyenletmegoldó
+Comment[nl]=Een krachtige oplosser van mathematische vergelijkingen
+Comment[pl]=Zaawansowane narzędzie do rozwiązywania równań matematycznych
+Comment[sv]=Ett kraftfullt verktyg för lösning av matematiska ekvationer
+Comment[uk]=Потужний інструмент розв’язання рівнянь
+Comment[x-test]=xxA powerful mathematical equation solverxx
+Comment[zh_TW]=強大的數學方程式解題器
 Icon=qalculate-applet
 Type=Service
 

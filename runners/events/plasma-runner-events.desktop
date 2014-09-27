@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Calendar Events
+Name[ca]=Esdeveniments del calendari
+Name[fr]=Évènements du calendrier
+Name[hu]=Naptári események
+Name[nl]=Activiteiten in agenda
+Name[pl]=Wydarzenia z kalendarza
+Name[sv]=Kalenderhändelser
+Name[uk]=Події календаря
+Name[x-test]=xxCalendar Eventsxx
+Name[zh_TW]=行事曆事件
 Comment=Calendar Events runner
+Comment[ca]=Executor d'esdeveniments de calendari
+Comment[fr]=Lanceur d'évènements du calendrier
+Comment[hu]=Naptári események
+Comment[nl]=Uitvoeren van activiteiten in agenda
+Comment[pl]=Program uruchamiający wydarzenia z kalendarza
+Comment[sv]=Visa kalenderhändelser
+Comment[uk]=Інструмент роботи з подіями календаря
+Comment[x-test]=xxCalendar Events runnerxx
+Comment[zh_TW]=行事曆事件執行器
 Icon=korganizer
 Type=Service
 

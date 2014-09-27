@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Notes
+Name[ca]=Notes
+Name[es]=Notas
+Name[fr]=Notes
+Name[hu]=A jegyzetek nyomtathatók
+Name[nl]=Notities
+Name[pl]=Notatki
+Name[sv]=Anteckningar
+Name[uk]=Нотатки
+Name[x-test]=xxNotesxx
+Name[zh_TW]=Notes
 Comment=Desktop sticky notes
+Comment[ca]=Notes adhesives d'escriptori
+Comment[es]=Notas adhesivas del escritorio
+Comment[fr]=Un note collée sur le bureau
+Comment[hu]=Ragadós asztali feljegyzések
+Comment[nl]=Sticky's op het bureaublad
+Comment[pl]=Żółte karteczki na pulpicie
+Comment[sv]=Klisterlappar med meddelanden för skrivbordet
+Comment[uk]=Стільничні липкі нотатки
+Comment[x-test]=xxDesktop sticky notesxx
+Comment[zh_TW]=桌面便利貼
 Icon=knotes
 Type=Service
 

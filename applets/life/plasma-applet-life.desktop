@@ -1,7 +1,27 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Life
+Name[ca]=Vida
+Name[es]=Vida
+Name[fr]=Jeu de la vie
+Name[hu]=Életjáték
+Name[nl]=Life
+Name[pl]=Życie
+Name[sv]=Life
+Name[uk]=Життя
+Name[x-test]=xxLifexx
+Name[zh_TW]=生命
 Comment=Conway's Game of Life applet
+Comment[ca]=Miniaplicació del joc de la vida de Conway
+Comment[es]=Miniaplicación del juego de la vida de Conway
+Comment[fr]=Composant graphique du jeu de la vie de Conway
+Comment[hu]=A Conway-féle életjáték
+Comment[nl]=Applet voor Conway's Game of Life
+Comment[pl]=Aplet "Gra w życie" Johna Conwaya
+Comment[sv]=Miniprogram med Conways Game of Life
+Comment[uk]=Аплет гри «Life» (Життя), вигаданої Конвеєм
+Comment[x-test]=xxConway's Game of Life appletxx
+Comment[zh_TW]=Conway 的生命遊戲小程式
 Icon=lifegame
 Type=Service
 

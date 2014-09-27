@@ -1,7 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Black Board
+Name[ca]=Pissarra
+Name[fr]=Tableau noir
+Name[hu]=Fekete tábla
+Name[nl]=Black Board
+Name[pl]=Czarna tablica
+Name[sv]=Svarta tavlan
+Name[uk]=Дошка
+Name[x-test]=xxBlack Boardxx
+Name[zh_TW]=黑板
 Comment=Draw a quick note or a colorful image
+Comment[ca]=Per dibuixar una nota ràpida o una imatge a tot color
+Comment[fr]=Réaliser une note rapide ou une image colorée
+Comment[hu]=Gyors jegyzet vagy színes kép rajzolása
+Comment[nl]=Teken een snelle notitie of een kleurrijke afbeelding
+Comment[pl]=Rysowanie szybkich notatek lub kolorowych obrazów
+Comment[sv]=Skriv en snabb anmärkning eller rita en färgrik bild
+Comment[uk]=Малювання нотатки або кольорового зображення
+Comment[x-test]=xxDraw a quick note or a colorful imagexx
+Comment[zh_TW]=繪製一份快速備忘或彩色影像
 Type=Service
 Icon=applications-education
 ServiceTypes=Plasma/Applet

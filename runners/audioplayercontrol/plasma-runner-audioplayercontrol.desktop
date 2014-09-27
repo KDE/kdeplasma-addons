@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Control Audio Player
+Name[ca]=Control del reproductor d'àudio
+Name[fr]=Contrôle du lecteur audio
+Name[hu]=Zenelejátszó-vezérlő
+Name[nl]=Audiospeler besturen
+Name[pl]=Sterowanie odtwarzaczem muzyki
+Name[sv]=Styr ljudspelare
+Name[uk]=Керування аудіопрогравачем
+Name[x-test]=xxControl Audio Playerxx
+Name[zh_TW]=控制音效播放器
 Comment=Allows to control MPRIS audio players (it is able to search through Amarok's collection, too)
+Comment[ca]=Permet controlar reproductors d'àudio MPRIS (també permet cercar a la col·lecció de l'Amarok)
+Comment[fr]=Permet de contrôler les lecteurs audio « MPRIS » (également capable de chercher dans les collections d'AmaroK)
+Comment[hu]=Lehetővé teszi az MPRIS zenelejátszók vezérlését, valamint képes keresni az Amarok gyűjteményében is
+Comment[nl]=Staat toe om MPRIS audiospelers te besturen (kan ook in de verzameling van Amarok zoeken)
+Comment[pl]=Pozwala sterować odtwarzaczami muzyki MPRIS (możliwe jest również wyszukiwanie w zbiorze Amaroka)
+Comment[sv]=Gör det möjligt att styra MPRIS-ljudspelare (kan också söka igenom Amaroks samling)
+Comment[uk]=Надає змогу керувати аудіопрогравачами стандарту MPRIS (крім того, може здійснювати пошук у збірці Amarok)
+Comment[x-test]=xxAllows to control MPRIS audio players (it is able to search through Amarok's collection, too)xx
+Comment[zh_TW]=允許控制 MPRIS 音效播放器（也可以透過 Amarok 的收藏搜尋）
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=applications-multimedia

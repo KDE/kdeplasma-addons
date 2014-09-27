@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Contacts
+Name[ca]=Contactes
+Name[fr]=Contacts
+Name[hu]=Névjegyek
+Name[nl]=Contactpersonen
+Name[pl]=Kontakty
+Name[sv]=Kontakter
+Name[uk]=Контакти
+Name[x-test]=xxContactsxx
+Name[zh_TW]=聯絡人
 Comment=Finds entries in your address book
+Comment[ca]=Cerca entrades a la llibreta d'adreces
+Comment[fr]=Trouve des entrées dans votre carnet d'adresses
+Comment[hu]=Bejegyzések keresése a címjegyzékben
+Comment[nl]=Doorzoekt ingangen in uw adresboek
+Comment[pl]=Znajdywanie wpisów w książce adresowej
+Comment[sv]=Hittar poster i din adressbok
+Comment[uk]=Знайти записи у вашій адресній книзі
+Comment[x-test]=xxFinds entries in your address bookxx
+Comment[zh_TW]=找到通訊錄中的聯絡人
 ServiceTypes=Plasma/Runner
 Type=Service
 Icon=internet-mail

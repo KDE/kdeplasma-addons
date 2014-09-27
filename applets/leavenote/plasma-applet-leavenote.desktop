@@ -1,7 +1,27 @@
 [Desktop Entry]
 Name=Leave A Note
+Name[ca]=Deixa una nota
+Name[es]=Dejar una nota
+Name[fr]=Laisser un mot
+Name[hu]=Üzenetrögzítő
+Name[nl]=Notitie achterlaten
+Name[pl]=Zostaw notatkę
+Name[sv]=Lämna ett meddelande
+Name[uk]=Залиш запис
+Name[x-test]=xxLeave A Notexx
+Name[zh_TW]=留下字條
 Icon=knotes
 Comment=Leave notes for users while they are away
+Comment[ca]=Deixa notes pels usuaris que no hi són
+Comment[es]=Dejar notas a los usuarios cuando están ausentes
+Comment[fr]=Laisser des notes aux utilisateurs quand ils sont absents
+Comment[hu]=Jegyzet írása távol lévő felhasználóknak
+Comment[nl]=Notities achterlaten voor gebruikers wanneer ze weg zijn
+Comment[pl]=Zostawia notatki dla użytkowników, kiedy ich nie ma
+Comment[sv]=Lämna meddelanden till användare medan de är borta
+Comment[uk]=Залиште повідомлення користувачам, які зараз недоступні
+Comment[x-test]=xxLeave notes for users while they are awayxx
+Comment[zh_TW]=在使用者離開時留字條給他
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet

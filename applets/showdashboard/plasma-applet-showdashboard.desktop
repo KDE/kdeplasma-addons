@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Show Widget Dashboard
+Name[ca]=Mostra el tauler d'estris
+Name[fr]=Afficher le tableau de bord des composants graphiques
+Name[hu]=Widgetáttekintő nézet megjelenítése
+Name[nl]=Toon widget-dashboard
+Name[pl]=Pokaż tablicę
+Name[sv]=Visa instrumentpanel
+Name[uk]=Показати панель приладів віджета
+Name[x-test]=xxShow Widget Dashboardxx
+Name[zh_TW]=顯示元件資訊看板
 Comment=Show the Plasma widget dashboard above other windows
+Comment[ca]=Mostra el tauler d'estris del Plasma per sobre de les altres finestres
+Comment[fr]=Affiche le tableau de bord des composants graphiques au dessus des autres fenêtres
+Comment[hu]=Megjeleníti a plazmawidget-áttekintő nézetet az ablakok előtt
+Comment[nl]=Toont het Plasma widgetdashboard boven alle andere vensters
+Comment[pl]=Pokazywanie tablicy Plazmy ponad innymi oknami
+Comment[sv]=Visa den grafiska instrumentpanelkomponenten i Plasma ovanför andra fönster
+Comment[uk]=Показує панель приладів Плазми над іншими вікнами після клацання
+Comment[x-test]=xxShow the Plasma widget dashboard above other windowsxx
+Comment[zh_TW]=在其它的視窗上方顯示元件資訊看板
 Icon=dashboard-show
 Type=Service
 ServiceTypes=Plasma/Applet

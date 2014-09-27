@@ -1,6 +1,25 @@
 [Desktop Entry]
 Name=Bookmarks
+Name[ca]=Adreces d'interès
+Name[es]=Marcadores
+Name[fr]=Signets
+Name[hu]=Könyvjelzők
+Name[nl]=Bladwijzers
+Name[pl]=Zakładki
+Name[sv]=Bokmärken
+Name[uk]=Закладки
+Name[x-test]=xxBookmarksxx
+Name[zh_TW]=書籤
 Comment=Quick Access to the Bookmarks
+Comment[ca]=Accés ràpid a les adreces d'interès
+Comment[fr]=Accès rapide aux signets
+Comment[hu]=Gyors hozzáférés a könyvjelzőkhöz
+Comment[nl]=Snelle toegang tot de bladwijzers
+Comment[pl]=Szybki dostęp do zakładek
+Comment[sv]=Snabbåtkomst till bokmärken
+Comment[uk]=Швидкий доступ до закладок
+Comment[x-test]=xxQuick Access to the Bookmarksxx
+Comment[zh_TW]=快速存取書籤
 Type=Service
 Icon=bookmarks
 ServiceTypes=Plasma/Applet

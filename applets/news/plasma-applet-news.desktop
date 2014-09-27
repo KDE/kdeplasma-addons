@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=News
+Name[ca]=Notícies
+Name[es]=Noticias
+Name[fr]=Nouvelles
+Name[hu]=Qwant hírek
+Name[nl]=Nieuws
+Name[pl]=Nowości
+Name[sv]=Nyheter
+Name[uk]=Новини
+Name[x-test]=xxNewsxx
+Name[zh_TW]=News
 Comment=Show news from various sources
+Comment[ca]=Mostra les notícies de diverses fonts
+Comment[es]=Mostrar noticias de diversas fuentes
+Comment[fr]=Affiche des nouvelles depuis diverses sources
+Comment[hu]=Különböző forrásból származó hírek megjelenítése
+Comment[nl]=Toont nieuws van verschillende bronnen
+Comment[pl]=Wyświetlanie nowości z różnych źródeł
+Comment[sv]=Visa nyheter från olika källor
+Comment[uk]=Показати новини від різноманітних джерел
+Comment[x-test]=xxShow news from various sourcesxx
+Comment[zh_TW]=顯示不同的來源的新聞
 Type=Service
 Icon=application-rss+xml
 ServiceTypes=Plasma/Applet

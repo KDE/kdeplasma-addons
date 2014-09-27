@@ -1,7 +1,26 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Eyes
+Name[ca]=Ulls
+Name[es]=Ojos
+Name[fr]=Yeux
+Name[hu]=Szemek
+Name[nl]=Ogen
+Name[pl]=Oczy
+Name[sv]=Ögon
+Name[uk]=Очі
+Name[x-test]=xxEyesxx
+Name[zh_TW]=Eyes
 Comment=XEyes clone
+Comment[ca]=Clon de l'XEyes
+Comment[fr]=Clone de XEyes
+Comment[hu]=XEyes-klón
+Comment[nl]=Kloon van XEyes
+Comment[pl]=Klon XEyes
+Comment[sv]=Klon av Xeyes
+Comment[uk]=Клон XEyes
+Comment[x-test]=xxXEyes clonexx
+Comment[zh_TW]=XEyes 的複製品
 Icon=eyes
 Type=Service
 ServiceTypes=Plasma/Applet

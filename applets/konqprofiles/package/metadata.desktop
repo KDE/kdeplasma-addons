@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Konqueror Profiles
+Name[ca]=Perfils del Konqueror
+Name[es]=Perfiles de Konqueror
+Name[fr]=Profils de Konqueror
+Name[hu]=Konqueror profilok
+Name[nl]=Konqueror-profielen
+Name[pl]=Profile Konquerora
+Name[sv]=Konquerorprofiler
+Name[uk]=Профілі Konqueror
+Name[x-test]=xxKonqueror Profilesxx
+Name[zh_TW]=Konqueror 設定檔
 Comment=List and launch Konqueror profiles
+Comment[ca]=Llista i executa els perfils del Konqueror
+Comment[es]=Listar y lanzar perfiles de Konqueror
+Comment[fr]=Permet d'afficher et de lancer des profils de Konqueror
+Comment[hu]=Konqueror profilok listázása és indítása
+Comment[nl]=Toon en start Konqueror-profielen
+Comment[pl]=Wypisywanie i uruchamianie profili Konquerora
+Comment[sv]=Lista och starta Konquerorprofiler
+Comment[uk]=Перегляньте список і запустіть профілі Konqueror
+Comment[x-test]=xxList and launch Konqueror profilesxx
+Comment[zh_TW]=列出並啟動 Konqueror 設定檔
 
 Icon=konqueror
 Type=Service

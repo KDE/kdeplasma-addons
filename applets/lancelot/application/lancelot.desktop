@@ -7,6 +7,26 @@ X-KDE-StartupNotify=false
 Exec=lancelot
 
 Name=Lancelot Launcher
+Name[ca]=Llançador Lancelot
+Name[es]=Lanzador Lancelot
+Name[fr]=Lanceur Lancelot
+Name[hu]=Lancelot indító
+Name[nl]=Lancelot-starter
+Name[pl]=Lancelot (program uruchamiający)
+Name[sv]=Lancelot-startprogram
+Name[uk]=Засіб для запуску Lancelot
+Name[x-test]=xxLancelot Launcherxx
+Name[zh_TW]=Lancelot 應用程式啟動器
 
 Comment=Launcher to start applications
+Comment[ca]=Llançador per a iniciar aplicacions
+Comment[es]=Lanzador para iniciar aplicaciones
+Comment[fr]=Lanceur permettant de démarrer des applications
+Comment[hu]=Alkalmazásindító
+Comment[nl]=Applet voor het starten van programma's
+Comment[pl]=Program uruchamiający aplikacje
+Comment[sv]=Startprogram för att köra program
+Comment[uk]=Програма для запуску програм
+Comment[x-test]=xxLauncher to start applicationsxx
+Comment[zh_TW]=應用程式啟動器
 

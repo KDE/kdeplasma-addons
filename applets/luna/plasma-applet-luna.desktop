@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Luna
+Name[ca]=Lluna
+Name[es]=Luna
+Name[fr]=Lune
+Name[hu]=Luna
+Name[nl]=Luna
+Name[pl]=Luna
+Name[sv]=Luna
+Name[uk]=Луна
+Name[x-test]=xxLunaxx
+Name[zh_TW]=Luna
 Comment=Display moon phases for your location
+Comment[ca]=Mostra les fases de la lluna per a la vostra ubicació
+Comment[es]=Mostrar las fases de la Luna en su ubicación
+Comment[fr]=Affiche les phases de la lune, visibles à votre position
+Comment[hu]=Holdfázisok megjelenítése
+Comment[nl]=Toont maanfasen voor uw locatie
+Comment[pl]=Wyświetlanie faz Księżyca w twojej okolicy
+Comment[sv]=Visa månfaser där du befinner dig
+Comment[uk]=Показує фазу Місяця у місце, де ви знаходитеся
+Comment[x-test]=xxDisplay moon phases for your locationxx
+Comment[zh_TW]=顯示您所在位置的月相
 Type=Service
 Icon=luna
 ServiceTypes=Plasma/Applet

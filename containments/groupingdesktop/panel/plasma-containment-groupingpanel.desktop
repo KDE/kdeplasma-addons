@@ -1,5 +1,14 @@
 [Desktop Entry]
 Name=Grouping Panel
+Name[ca]=Plafó agrupat
+Name[fr]=Regroupement de panneaux
+Name[hu]=Panelcsoportosítás
+Name[nl]=Paneelgroepering
+Name[pl]=Panel grupujący
+Name[sv]=Grupperingspanel
+Name[uk]=Впорядкована панель
+Name[x-test]=xxGrouping Panelxx
+Name[zh_TW]=群組面板
 Icon=
 Type=Service
 X-KDE-ServiceTypes=Plasma/Containment

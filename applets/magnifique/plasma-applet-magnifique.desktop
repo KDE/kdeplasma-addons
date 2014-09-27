@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Magnifique
+Name[ca]=Magnifique
+Name[es]=Lupa
+Name[fr]=Loupe
+Name[hu]=Nagyító
+Name[nl]=Magnifique
+Name[pl]=Powiększanie
+Name[sv]=Magnifik
+Name[uk]=Magnifique
+Name[x-test]=xxMagnifiquexx
+Name[zh_TW]=Magnifique
 Comment=A magnification glass for the Plasma desktop
+Comment[ca]=Una lent d'augment per l'escriptori Plasma
+Comment[es]=Una lupa de aumento para el escritorio Plasma
+Comment[fr]=Une loupe pour le bureau Plasma
+Comment[hu]=Nagyító a Plazma munkaasztalhoz
+Comment[nl]=Een vergrootglas voor het Plasma bureaublad
+Comment[pl]=Szkło powiększające dla pulpitu Plasma
+Comment[sv]=Ett förstoringsglas för Plasmaskrivbordet
+Comment[uk]=Збільшувальне скло для стільниці Плазми
+Comment[x-test]=xxA magnification glass for the Plasma desktopxx
+Comment[zh_TW]=Plasma 桌面上的放大鏡
 Type=Service
 Icon=zoom-in
 

@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Previewer
+Name[ca]=Previsualitzador
+Name[fr]=Afficheur d'aperçus
+Name[hu]=Előnézet
+Name[nl]=Voorvertoning
+Name[pl]=Podgląd
+Name[sv]=Förhandsgranskning
+Name[uk]=Переглядач
+Name[x-test]=xxPreviewerxx
+Name[zh_TW]=預覽器
 Comment=Quickly preview a variety of files
+Comment[ca]=Vista prèvia ràpida d'una varietat de fitxers
+Comment[fr]=Aperçu rapide de divers fichiers
+Comment[hu]=Gyors előnézete különféle fájloknak
+Comment[nl]=Snel verschillende bestanden voorvertonen
+Comment[pl]=Szybki podgląd różnych plików
+Comment[sv]=Snabb förhandsgranskning av en mängd olika filer
+Comment[uk]=Засіб для швидкого перегляду низки файлів
+Comment[x-test]=xxQuickly preview a variety of filesxx
+Comment[zh_TW]=快速預覽各種檔案
 Type=Service
 Icon=previewer
 X-Plasma-DropMimeTypes=application/pdf,image/png

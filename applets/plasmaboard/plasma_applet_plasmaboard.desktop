@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Keyboard
+Name[ca]=Teclat
+Name[es]=Teclado
+Name[fr]=Clavier
+Name[hu]=Billentyűzet
+Name[nl]=Toetsenbord
+Name[pl]=Klawiatura
+Name[sv]=Tangentbord
+Name[uk]=Клавіатура
+Name[x-test]=xxKeyboardxx
+Name[zh_TW]=鍵盤
 Comment=A virtual, on-screen keyboard
+Comment[ca]=Un teclat virtual de pantalla
+Comment[es]=Un teclado virtual para la pantalla
+Comment[fr]=Un clavier virtuel à l'écran
+Comment[hu]=Virtuális képernyőbillentyűzet
+Comment[nl]=Een virtueel toetsenbord op het scherm
+Comment[pl]=Wirtualna klawiatura ekranowa
+Comment[sv]=Ett virtuellt tangentbord på skärmen
+Comment[uk]=Віртуальна екранна клавіатура
+Comment[x-test]=xxA virtual, on-screen keyboardxx
+Comment[zh_TW]=螢幕上的虛擬鍵盤
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=input-keyboard

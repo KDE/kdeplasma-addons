@@ -1,6 +1,25 @@
 [Desktop Entry]
 Name=Calculator
+Name[ca]=Calculadora
+Name[es]=Calculadora
+Name[fr]=Calculatrice
+Name[hu]=Grafikus számológép
+Name[nl]=Rekenmachine
+Name[pl]=Kalkulator
+Name[sv]=Miniräknare
+Name[uk]=Калькулятор
+Name[x-test]=xxCalculatorxx
+Name[zh_TW]=計算機
 Comment=Calculate simple sums
+Comment[ca]=Calcula sumes senzilles
+Comment[fr]=Calcule des sommes simples
+Comment[hu]=Egyszerű számológép
+Comment[nl]=Eenvoudige berekeningen
+Comment[pl]=Obliczanie prostych sum
+Comment[sv]=Beräkna enkla summor
+Comment[uk]=Обчисліть прості суми
+Comment[x-test]=xxCalculate simple sumsxx
+Comment[zh_TW]=計算簡單的算式
 Icon=accessories-calculator
 Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet

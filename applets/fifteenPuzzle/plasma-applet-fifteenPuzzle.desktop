@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Fifteen Puzzle
+Name[ca]=Trencaclosques quinze
+Name[es]=Puzzle Quince
+Name[fr]=Taquin
+Name[hu]=15-ös kirakó
+Name[nl]=Vijftien-puzzel
+Name[pl]=Piętnaście kawałków
+Name[sv]=Femtonspel
+Name[uk]=Гра у п’ятнашки
+Name[x-test]=xxFifteen Puzzlexx
+Name[zh_TW]=Fifteen 解謎遊戲
 Comment=Put the pieces in order
+Comment[ca]=Poseu les peces en ordre
+Comment[es]=Ponga las piezas en orden
+Comment[fr]=Remettez les pièces dans l'ordre
+Comment[hu]=Rakja sorba a darabokat
+Comment[nl]=Zet de stukken in de juiste volgorde
+Comment[pl]=Układanie kawałków w porządku
+Comment[sv]=Placera brickorna i ordning
+Comment[uk]=Спробуйте впорядкувати плитки
+Comment[x-test]=xxPut the pieces in orderxx
+Comment[zh_TW]=將數字依順序排好
 Icon=fifteenpuzzle
 Type=Service
 ServiceTypes=Plasma/Applet

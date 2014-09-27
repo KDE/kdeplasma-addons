@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Konsole Sessions
+Name[ca]=Sessions del Konsole
+Name[fr]=Sessions Konsole
+Name[hu]=Konsole munkamenetek
+Name[nl]=Konsolesessies
+Name[pl]=Sesje konsoli
+Name[sv]=Terminalsessioner
+Name[uk]=Сеанси Konsole
+Name[x-test]=xxKonsole Sessionsxx
+Name[zh_TW]=Konsole 工作階段
 Comment=Matches Konsole Sessions
+Comment[ca]=Correspon amb sessions del Konsole
+Comment[fr]=Retrouve des sessions Konsole
+Comment[hu]=Konsole munkamenetek listázása
+Comment[nl]=Zoekt Konsolesessies
+Comment[pl]=Dopasowanie sesji konsoli
+Comment[sv]=Matchar terminalsessioner
+Comment[uk]=Порівнює сеанси Konsole
+Comment[x-test]=xxMatches Konsole Sessionsxx
+Comment[zh_TW]=比對 Konsole 工作階段
 Icon=utilities-terminal
 
 X-KDE-ServiceTypes=Plasma/Runner

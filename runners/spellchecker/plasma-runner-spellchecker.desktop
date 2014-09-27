@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Spell Checker
+Name[ca]=Corrector ortogràfic
+Name[fr]=Correcteur orthographique
+Name[hu]=Helyesírás-ellenőrző indító
+Name[nl]=Spellingcontrole
+Name[pl]=Sprawdzanie pisowni 
+Name[sv]=Stavningskontroll
+Name[uk]=Перевірка правопису
+Name[x-test]=xxSpell Checkerxx
+Name[zh_TW]=拼字檢查
 Comment=Check the spelling of a word
+Comment[ca]=Comprova l'ortografia d'una paraula
+Comment[fr]=Vérifie l'orthographe d'un mot
+Comment[hu]=Egy szó helyesírás-ellenőrzése
+Comment[nl]=Controleer de spelling van een woord
+Comment[pl]=Szukanie pisowni słów
+Comment[sv]=Kontrollera stavning av ett ord
+Comment[uk]=Перевірте правопис слова
+Comment[x-test]=xxCheck the spelling of a wordxx
+Comment[zh_TW]=檢查拼字
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=tools-check-spelling

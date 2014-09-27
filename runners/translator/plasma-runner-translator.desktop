@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Translator
+Name[ca]=Traductor
+Name[fr]=Outil de traduction
+Name[hu]=Fordító
+Name[nl]=Vertaler
+Name[pl]=Tłumacz
+Name[sv]=Översättning
+Name[uk]=Перекладач
+Name[x-test]=xxTranslatorxx
+Name[zh_TW]=翻譯器
 Comment=Translates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[ca]=Tradueix a qualsevol idioma usant el Google Translate. Per la llista d'idiomes acceptats visiteu https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[fr]=Traduit dans n'importe quelle langue en utilisant « Google Translate ». Pour obtenir une liste des langues prises en charge, veuillez consulter « https://developers.google.com/translate/v2/using_rest?hl=de#language-params »
+Comment[hu]=Lefordítja bármilyen nyelvre a Google Fordító használatával. A támogatott nyelvek listájáért látogassa meg a https://developers.google.com/translate/v2/using_rest?hl=de#language-params oldalt
+Comment[nl]=Vertaalt naar elke taal met Google Translate. Voor een lijst met ondersteunde talen bezoek https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[pl]=Tłumaczy na każdy język przy użyciu Tłumacza Google. Po wykaz obsługiwanych języków odwiedź https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[sv]=Översätter till godtyckligt språk med Google Translate. Besök https://developers.google.com/translate/v2/using_rest#language-params för en lista med språk som stöds.
+Comment[uk]=Виконує переклад за допомогою служби Перекладач Google. Зі списком підтримуваних мов можна ознайомитися тут: https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[x-test]=xxTranslates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-paramsxx
+Comment[zh_TW]=使用 Google 翻譯來翻譯成任何語言。支援的語言清單請參考 https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=applications-education-language

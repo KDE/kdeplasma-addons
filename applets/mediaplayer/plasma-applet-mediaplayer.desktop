@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Media Player
+Name[ca]=Reproductor multimèdia
+Name[es]=Reproductor multimedia
+Name[fr]=Lecteur de média
+Name[hu]=Médialejátszó
+Name[nl]=Mediaspeler
+Name[pl]=Odtwarzacz multimedialny
+Name[sv]=Mediaspelare
+Name[uk]=Медіапрогравач
+Name[x-test]=xxMedia Playerxx
+Name[zh_TW]=媒體播放器
 Comment=Widget that can play video and sound
+Comment[ca]=Estri que permet reproduir vídeos i so.
+Comment[es]=Elemento gráfico que puede reproducir vídeo y sonido
+Comment[fr]=Composant graphique permettant de lire des vidéos et du son
+Comment[hu]=Kisalkalmazás videók és hangok lejátszására
+Comment[nl]=Widget die video en geluid kan afspelen
+Comment[pl]=Element interfejsu, który potrafi odtwarzać filmy i muzykę
+Comment[sv]=Grafisk komponent som kan spela video och ljud
+Comment[uk]=Віджет, призначений для відтворення відео і звуку
+Comment[x-test]=xxWidget that can play video and soundxx
+Comment[zh_TW]=可播放影像與音效的元件
 
 
 Type=Service

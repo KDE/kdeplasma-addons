@@ -1,5 +1,14 @@
 [Desktop Entry]
 Name=special Characters
+Name[ca]=Caràcters especials
+Name[fr]=Caractères spéciaux
+Name[hu]=Speciális karakterek
+Name[nl]=speciale tekens
+Name[pl]=Znaki specjalne
+Name[sv]=specialtecken
+Name[uk]=Спеціальні символи
+Name[x-test]=xxspecial Charactersxx
+Name[zh_TW]=特殊字元
 Type=Service
 X-KDE-ServiceTypes=KCModule
 

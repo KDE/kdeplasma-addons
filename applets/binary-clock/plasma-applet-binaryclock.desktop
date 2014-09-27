@@ -1,6 +1,25 @@
 [Desktop Entry]
 Name=Binary Clock
+Name[ca]=Rellotge binari
+Name[es]=Reloj binario
+Name[fr]=Horloge binaire
+Name[hu]=Bináris óra
+Name[nl]=Binaire klok
+Name[pl]=Zegar dwójkowy
+Name[sv]=Binärklocka
+Name[uk]=Двійковий годинник
+Name[x-test]=xxBinary Clockxx
+Name[zh_TW]=二進制時鐘
 Comment=Time displayed in binary format
+Comment[ca]=L'hora mostrada en format binari
+Comment[fr]=Heure affichée au format numérique
+Comment[hu]=Bináris óra
+Comment[nl]=De tijd in binair formaat
+Comment[pl]=Czas wyświetlany w formacie dwójkowym
+Comment[sv]=Tid visad med binärformat
+Comment[uk]=Час, показаний у двійковому форматі
+Comment[x-test]=xxTime displayed in binary formatxx
+Comment[zh_TW]=以二進位格式顯示時間
 Icon=clock
 Type=Service
 ServiceTypes=Plasma/Applet

@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Konsole Profiles
+Name[ca]=Perfils del Konsole
+Name[es]=Perfiles de Konsole
+Name[fr]=Profils de Konsole
+Name[hu]=Konsole profilok
+Name[nl]=Konsole-profielen
+Name[pl]=Profile Konsoli
+Name[sv]=Terminalprofiler
+Name[uk]=Профілі Konsole
+Name[x-test]=xxKonsole Profilesxx
+Name[zh_TW]=Konsole 設定檔
 Comment=List and launch Konsole profiles
+Comment[ca]=Llista i executa els perfils del Konsole
+Comment[es]=Listar y lanzar perfiles de Konsole
+Comment[fr]=Permet d'afficher et de lancer des profils de Konsole
+Comment[hu]=Konsole profilok listázása és indítása
+Comment[nl]=Toon en start Konsole-profielen
+Comment[pl]=Wypisywanie i uruchamianie profili Konsoli
+Comment[sv]=Lista och starta terminalprofiler
+Comment[uk]=Перегляньте і запустіть профілі Konsole
+Comment[x-test]=xxList and launch Konsole profilesxx
+Comment[zh_TW]=列出並啟動 Konsole 設定檔
 
 Icon=utilities-terminal
 Type=Service

@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Unit Converter
+Name[ca]=Convertidor d'unitats
+Name[fr]=Convertisseur d'unité
+Name[hu]=Mértékegységváltó
+Name[nl]=Eenheden converteren
+Name[pl]=Przelicznik jednostek
+Name[sv]=Enhetskonvertering
+Name[uk]=Перетворювач одиниць
+Name[x-test]=xxUnit Converterxx
+Name[zh_TW]=單位轉換器
 Comment=Convert values to different units
+Comment[ca]=Converteix valors a diferents unitats
+Comment[fr]=Convertit des valeurs dans diverses unités
+Comment[hu]=Értékek konvertálása más egységekre
+Comment[nl]=Converteert waarden naar verschillende eenheden
+Comment[pl]=Przeliczanie wartości na inne jednostki
+Comment[sv]=Konverterar värden till andra enheter
+Comment[uk]=Перетворення значень у різних одиницях
+Comment[x-test]=xxConvert values to different unitsxx
+Comment[zh_TW]=將數值轉換不同的單位
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=accessories-calculator

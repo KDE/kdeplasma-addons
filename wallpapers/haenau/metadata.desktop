@@ -1,6 +1,15 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Haenau
+Name[ca]=Haenau
+Name[fr]=Haenau
+Name[hu]=Haenau
+Name[nl]=Haenau
+Name[pl]=Haenau
+Name[sv]=Haenau
+Name[uk]=Ганау
+Name[x-test]=xxHaenauxx
+Name[zh_TW]= 
 
 
 Type=Service

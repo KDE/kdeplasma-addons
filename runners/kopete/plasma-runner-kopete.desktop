@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Kopete Contacts
+Name[ca]=Contactes del Kopete
+Name[fr]=Contacts Kopete
+Name[hu]=Kopete névjegyek
+Name[nl]=Contactpersonen van Kopete
+Name[pl]=Kontakty Kopete 
+Name[sv]=Kopete kontakter
+Name[uk]=Контакти Kopete
+Name[x-test]=xxKopete Contactsxx
+Name[zh_TW]=Kopete 聯絡人
 Comment=Search contacts from Kopete
+Comment[ca]=Cerca contactes del Kopete
+Comment[fr]=Chercher des contacts depuis Kopete
+Comment[hu]=Névjegyek keresése a Kopetében
+Comment[nl]=In contactpersonen van Kopete zoeken
+Comment[pl]=Wyszukiwarka kontaktów Kopete
+Comment[sv]=Sök bland kontakter från Kopete
+Comment[uk]=Пошук записів контактів у даних Kopete
+Comment[x-test]=xxSearch contacts from Kopetexx
+Comment[zh_TW]=搜尋 Kopete 裡的聯絡人
 Icon=kopete
 
 X-KDE-ServiceTypes=Plasma/Runner

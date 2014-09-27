@@ -1,7 +1,25 @@
 [Desktop Entry]
 Name=Spell Check
+Name[ca]=Verificació de l'ortografia
+Name[fr]=Vérificateur orthographique
+Name[hu]=Helyesírás-ellenőrzés
+Name[nl]=Spellingcontrole
+Name[pl]=Sprawdzanie pisowni
+Name[sv]=Stavningskontroll
+Name[uk]=Перевірка правопису
+Name[x-test]=xxSpell Checkxx
+Name[zh_TW]=拼字檢查
 
 Comment=Fast spell checking
+Comment[ca]=Verificador ortogràfic ràpid
+Comment[fr]=Vérificateur orthographique rapide
+Comment[hu]=Helyesírás-ellenőrzés
+Comment[nl]=Snelle spellingcontrole
+Comment[pl]=Szybkie sprawdzanie pisowni
+Comment[sv]=Snabb stavningskontroll
+Comment[uk]=Швидка перевірка правопису
+Comment[x-test]=xxFast spell checkingxx
+Comment[zh_TW]=快速拼字檢查
 
 Icon=tools-check-spelling
 Type=Service

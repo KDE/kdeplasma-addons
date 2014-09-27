@@ -1,7 +1,25 @@
 [Desktop Entry]
 Name=Special Characters
+Name[ca]=Caràcters especials
+Name[fr]=Caractères spéciaux
+Name[hu]=Speciális karakterek
+Name[nl]=Speciale tekens
+Name[pl]=Znaki specjalne
+Name[sv]=Specialtecken
+Name[uk]=Спеціальні символи
+Name[x-test]=xxSpecial Charactersxx
+Name[zh_TW]=特殊字元
 Icon=accessories-character-map
 Comment=Creates special characters from their hexadecimal codes
+Comment[ca]=Crea caràcters especials a partir dels seus codis hexadecimals
+Comment[fr]=Crée des caractères spéciaux à partir de leurs codes hexadécimaux
+Comment[hu]=Speciális karakterek létrehozása hexadecimális kód alapján
+Comment[nl]=Maakt speciale tekens aan uit hun hexadecimale codes
+Comment[pl]=Tworzy znaki specjalne z ich kodów szesnastkowych
+Comment[sv]=Skapar specialtecken från deras hexadecimala koder
+Comment[uk]=Створення спеціальних символів за їхнім шістнадцятковим кодом
+Comment[x-test]=xxCreates special characters from their hexadecimal codesxx
+Comment[zh_TW]=從它們的十六進位碼建立特殊字元
 Type=Service
 X-KDE-ServiceTypes=Plasma/Runner
 

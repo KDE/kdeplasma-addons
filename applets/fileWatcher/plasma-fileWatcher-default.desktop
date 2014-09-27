@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=File Watcher
+Name[ca]=Vigilant de fitxers
+Name[es]=Vigilante de archivos
+Name[fr]=Observateur de fichiers
+Name[hu]=Fájlfigyelő
+Name[nl]=Bestandenvolger
+Name[pl]=Monitorowanie plików
+Name[sv]=Filövervakning
+Name[uk]=Переглядач файлів
+Name[x-test]=xxFile Watcherxx
+Name[zh_TW]=檔案監看器
 Comment=Watch for changes in specified files
+Comment[ca]=Vigila de canvis en els fitxers especificats
+Comment[es]=Vigilar los cambios en los archivos indicados
+Comment[fr]=Observe les modifications des fichiers spécifiés
+Comment[hu]=Kijelölt fájlok változásainak figyelése
+Comment[nl]=Volg bepaalde bestanden en hun wijzigingen
+Comment[pl]=Monitorowanie zmian w danych plikach
+Comment[sv]=Övervaka ändringar i angivna filer
+Comment[uk]=Спостерігайте за змінами у вказаних файлах
+Comment[x-test]=xxWatch for changes in specified filesxx
+Comment[zh_TW]=監看指定檔案的變化
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 Icon=application-octet-stream

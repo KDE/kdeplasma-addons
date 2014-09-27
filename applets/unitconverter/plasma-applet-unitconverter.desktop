@@ -1,7 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Unit Converter
+Name[ca]=Convertidor d'unitats
+Name[fr]=Convertisseur d'unité
+Name[hu]=Mértékegységváltó
+Name[nl]=Eenheden converteren
+Name[pl]=Przelicznik jednostek
+Name[sv]=Enhetskonvertering
+Name[uk]=Перетворювач одиниць
+Name[x-test]=xxUnit Converterxx
+Name[zh_TW]=單位轉換器
 Comment=Plasmoid for converting units
+Comment[ca]=Plasmoide per convertir unitats
+Comment[fr]=Composant graphique permettant de réaliser des conversions d'unités
+Comment[hu]=Plazmoid mértékegységek konvertálására
+Comment[nl]=Plasmoid voor eenheden converteren
+Comment[pl]=Plazmoid do przeliczania jednostek
+Comment[sv]=Plasmoid för att konvertera enheter
+Comment[uk]=Плазмоїд для перетворення одиниць виміру
+Comment[x-test]=xxPlasmoid for converting unitsxx
+Comment[zh_TW]=轉換單位的 Plasma 小程式
 Type=Service
 Icon=accessories-calculator
 ServiceTypes=Plasma/Applet

@@ -1,5 +1,14 @@
 [Desktop Entry]
 Name=Grouping Desktop
+Name[ca]=Escriptori agrupat
+Name[fr]=Regroupement de bureaux
+Name[hu]=Munkaasztal-csoportosítás
+Name[nl]=Bureaublad groeperen
+Name[pl]=Pulpit grupujący
+Name[sv]=Skrivbord med gruppering
+Name[uk]=Впорядкована стільниця
+Name[x-test]=xxGrouping Desktopxx
+Name[zh_TW]=群組桌面
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Containment

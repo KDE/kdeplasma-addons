@@ -1,6 +1,25 @@
 [Desktop Entry]
 Name=Dictionary
+Name[ca]=Diccionari
+Name[es]=Diccionario
+Name[fr]=Dictionnaire
+Name[hu]=Hunspell szótárfájl
+Name[nl]=Woordenboek
+Name[pl]=Słownik
+Name[sv]=Ordlista
+Name[uk]=Словник
+Name[x-test]=xxDictionaryxx
+Name[zh_TW]=字典
 Comment=Look up the meaning of words and their translation into different languages
+Comment[ca]=Cerca el significat de paraules i la seva traducció en diferents idiomes
+Comment[fr]=Cherche la définition de mots et leur traduction dans différentes langues
+Comment[hu]=Szavak és jelentésük keresése különböző nyelveken
+Comment[nl]=Zoek de betekenis van woorden en hun vertaling in verschillende talen op
+Comment[pl]=Wyszukiwarka znaczeń wyrazów i ich tłumaczeń na inne języki
+Comment[sv]=Slå upp betydelsen hos ord och deras översättning till olika språk
+Comment[uk]=Погляньте на значення слів та на їхній переклад іншими мовами
+Comment[x-test]=xxLook up the meaning of words and their translation into different languagesxx
+Comment[zh_TW]=查看單字的意義與不同語言的翻譯
 Type=Service
 Icon=accessories-dictionary
 

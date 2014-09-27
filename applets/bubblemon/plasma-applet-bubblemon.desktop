@@ -1,7 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Bubblemon
+Name[ca]=Monitor bombolla
+Name[fr]=Bubblemon
+Name[hu]=Bubblemon
+Name[nl]=Bubblemon
+Name[pl]=Monitor bąbelkowy
+Name[sv]=Bubblemon
+Name[uk]=Bubblemon
+Name[x-test]=xxBubblemonxx
+Name[zh_TW]=泡泡監視器
 Comment=A pretty bubble that monitors your system
+Comment[ca]=Una bombolla graciosa que vigila el sistema
+Comment[fr]=Une jolie bulle supervisant votre système.
+Comment[hu]=Rendszerfigyelő buborék
+Comment[nl]=Een prachtige bubbel die uw systeem monitort
+Comment[pl]=Uroczy bąbelek, który monitoruje twój system
+Comment[sv]=En snygg bubbla som övervakar systemet
+Comment[uk]=Гарненька бульбашка, яка спостерігає за вашою системою
+Comment[x-test]=xxA pretty bubble that monitors your systemxx
+Comment[zh_TW]=漂亮的泡泡，監視您的系統
 ServiceTypes=Plasma/Applet
 Type=Service
 Icon=utilities-system-monitor

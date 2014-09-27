@@ -1,7 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Character Selector
+Name[ca]=Selector de caràcters
+Name[fr]=Sélecteur de caractères
+Name[hu]=Karakterválasztó
+Name[nl]=Speciale tekens
+Name[pl]=Wybór znaków
+Name[sv]=Teckenväljare
+Name[uk]=Таблиця символів
+Name[x-test]=xxCharacter Selectorxx
+Name[zh_TW]=字元選擇器
 Comment=View, select, and copy characters from a font collection
+Comment[ca]=Mostra, selecciona i copia caràcters d'una col·lecció de tipus de lletra
+Comment[fr]=Permet d'afficher, de sélectionner et de copier des caractères
+Comment[hu]=Karakterek megjelenítése, kiválasztása és másolása a betűkészlet-gyűjteményből
+Comment[nl]=Toon, selecteer en kopieer tekens van een lettertypecollectie
+Comment[pl]=Przeglądanie, wybieranie i kopiowanie znaków ze zbioru czcionek
+Comment[sv]=Visa, markera och kopiera tecken från en samling teckensnitt
+Comment[uk]=Перегляньте, оберіть і скопіюйте символи зі збірки шрифтів
+Comment[x-test]=xxView, select, and copy characters from a font collectionxx
+Comment[zh_TW]=從字型中檢視、選擇與複製字元
 Type=Service
 Icon=accessories-character-map
 ServiceTypes=Plasma/Applet

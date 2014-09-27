@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=KnowledgeBase
+Name[ca]=KnowledgeBase
+Name[es]=Base de conocimientos
+Name[fr]=Base de connaissances
+Name[hu]=Tudásbázis
+Name[nl]=KnowledgeBase
+Name[pl]=Baza wiedzy
+Name[sv]=Kunskapsbas
+Name[uk]=База знань
+Name[x-test]=xxKnowledgeBasexx
+Name[zh_TW]=知識庫
 Comment=Opendesktop Knowledgebase
+Comment[ca]=Knowledgebase Opendesktop
+Comment[es]=Base de conocimientos de Opendesktop
+Comment[fr]=Base de connaissances du projet « OpenDesktop »
+Comment[hu]=Opendesktop tudásbázis
+Comment[nl]=Opendesktop Knowledgebase
+Comment[pl]=Baza wiedzy Opendesktop
+Comment[sv]=Opendesktop kunskapsbas
+Comment[uk]=База знань Opendesktop
+Comment[x-test]=xxOpendesktop Knowledgebasexx
+Comment[zh_TW]=Opendesktop 知識庫
 Type=Service
 Icon=help-contents
 

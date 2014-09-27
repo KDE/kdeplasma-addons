@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Kate Sessions
+Name[ca]=Sessions del Kate
+Name[fr]=Sessions Kate
+Name[hu]=Kate munkamenetek
+Name[nl]=Katesessies
+Name[pl]=Sesje Kate
+Name[sv]=Kate-sessioner
+Name[uk]=Сеанси Kate
+Name[x-test]=xxKate Sessionsxx
+Name[zh_TW]=Kate 作業階段
 Comment=Matches Kate Sessions
+Comment[ca]=Correspon amb sessions del Kate
+Comment[fr]=Retrouve des sessions Kate
+Comment[hu]=Kate munkamenetek listázása
+Comment[nl]=Zoekt Katesessies
+Comment[pl]=Dopasowanie sesji Kate
+Comment[sv]=Matchar Kate-sessioner
+Comment[uk]=Порівнює сеанси Kate
+Comment[x-test]=xxMatches Kate Sessionsxx
+Comment[zh_TW]=比對 Kate 工作階段
 Icon=kate
 
 X-KDE-ServiceTypes=Plasma/Runner

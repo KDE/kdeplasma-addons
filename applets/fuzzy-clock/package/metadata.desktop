@@ -1,7 +1,27 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Fuzzy Clock
+Name[ca]=Rellotge aproximat
+Name[es]=Reloj difuso
+Name[fr]=Horloge floue
+Name[hu]=Fuzzy óra
+Name[nl]=Vage klok
+Name[pl]=Rozmyty zegar
+Name[sv]=Inexakt klocka
+Name[uk]=Нечіткий годинник
+Name[x-test]=xxFuzzy Clockxx
+Name[zh_TW]=模糊時鐘
 Comment=Time displayed in a less precise format
+Comment[ca]=L'hora mostrada en un format aproximat
+Comment[es]=Mostrar la hora en un formato menos preciso
+Comment[fr]=Heure affichée avec un format peu précis
+Comment[hu]=Kevésbé precíz formátumban megjelenített idő
+Comment[nl]=De tijd in iets minder nauwkeurig formaat
+Comment[pl]=Czas wyświetlany w mniej precyzyjnym formacie
+Comment[sv]=Tidvisning med ett mindre exakt format
+Comment[uk]=Час, показаний у менш точному форматі
+Comment[x-test]=xxTime displayed in a less precise formatxx
+Comment[zh_TW]=以較不精確的方式顯示時間
 
 Icon=preferences-system-time
 Type=Service

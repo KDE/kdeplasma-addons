@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Quick Share
+Name[ca]=Comparteix ràpid
+Name[fr]=Partage rapide
+Name[hu]=Gyors megosztás
+Name[nl]=Snel Share maken
+Name[pl]=Szybkie współdzielenie
+Name[sv]=Snabbdelning
+Name[uk]=Швидке оприлюднення
+Name[x-test]=xxQuick Sharexx
+Name[zh_TW]=快速分享
 Comment=Paste text/images to a remote server
+Comment[ca]=Enganxa text/imatges en un servidor remot
+Comment[fr]=Colle du texte ou des images vers un serveur distant
+Comment[hu]=Szöveg vagy kép beillesztése távoli kiszolgálóra
+Comment[nl]=Tekst/afbeeldingen plakken op een externe server
+Comment[pl]=Wklejanie tekstu/obrazów na zdalny serwer
+Comment[sv]=Klistra in text eller bilder på en fjärrserver
+Comment[uk]=Викласти текст/зображення на віддалений сервер
+Comment[x-test]=xxPaste text/images to a remote serverxx
+Comment[zh_TW]=將文字/影像貼到遠端伺服器
 Encoding=UTF-8
 
 Icon=edit-paste

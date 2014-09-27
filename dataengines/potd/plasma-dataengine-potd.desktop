@@ -1,7 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Picture of the Day
+Name[ca]=Imatge del dia
+Name[fr]=Image du jour
+Name[hu]=A nap képe a Flickr-ön
+Name[nl]=Afbeelding van de dag
+Name[pl]=Obraz dnia
+Name[sv]=Dagens bild
+Name[uk]=Картинка дня
+Name[x-test]=xxPicture of the Dayxx
+Name[zh_TW]=本日圖片
 Comment=Data Engine for getting various online Pictures of The Day.
+Comment[ca]=Motor de dades per accedir a diverses «imatges del dia» en línia.
+Comment[fr]=Moteur de données permettant l'accès à divers sites d'images du jour.
+Comment[hu]=Adatmotor különböző online „A nap képe” szolgáltatásokhoz.
+Comment[nl]=Gegevensengine voor het verkrijgen van online afbeeldingen-van-de-dag.
+Comment[pl]=Silnik danych do pobierania różnych "obrazów dnia".
+Comment[sv]=Datagränssnitt för att hämta diverse dagens bilder från nätet.
+Comment[uk]=Рушій даних для отримання різноманітних мережевих «Зображень дня»
+Comment[x-test]=xxData Engine for getting various online Pictures of The Day.xx
+Comment[zh_TW]=取得多種線上本日圖片的資料引擎
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=image-jpeg2000

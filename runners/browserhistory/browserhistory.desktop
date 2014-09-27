@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Web Browser History
+Name[ca]=Historial del navegador web
+Name[fr]=Historique du navigateur Web
+Name[hu]=Előzmények
+Name[nl]=Webbrowser-geschiedenis
+Name[pl]=Historia przeglądarki sieciowej
+Name[sv]=Webbläsningshistorik
+Name[uk]=Історія переглядача Тенет
+Name[x-test]=xxWeb Browser Historyxx
+Name[zh_TW]=網頁瀏覽器歷史紀錄
 Comment=Searches in Konqueror's history
+Comment[ca]=Cerques a l'historial del Konqueror
+Comment[fr]=Cherche dans l'historique de Konqueror
+Comment[hu]=Keresés a Konqueror előzményeiben
+Comment[nl]=Zoekt in Konquerors geschiedenis
+Comment[pl]=Wyszukiwanie w historii Konquerora
+Comment[sv]=Söker i Konquerors historik
+Comment[uk]=Пошук у історії перегляду у Konqueror
+Comment[x-test]=xxSearches in Konqueror's historyxx
+Comment[zh_TW]=搜尋 Konqueror 的歷史紀錄
 
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service

@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=KDE Documentation
+Name[ca]=Documentació del KDE
+Name[fr]=Documentation de KDE
+Name[hu]=A KDE dokumentációja
+Name[nl]=KDE-documentatie
+Name[pl]=Dokumentacja KDE
+Name[sv]=KDE-dokumentation
+Name[uk]=Документація KDE
+Name[x-test]=xxKDE Documentationxx
+Name[zh_TW]=KDE 文件
 Comment=Search on KDE's Userbase
+Comment[ca]=Cerca en la Userbase del KDE
+Comment[fr]=Chercher dans le site « User-Base » de KDE
+Comment[hu]=Keresés a KDE UserBase-en
+Comment[nl]=In de gebruikersbase van KDE zoeken
+Comment[pl]=Wyszukiwanie w bazie użytkowników KDE
+Comment[sv]=Sök på KDE:s användarbas
+Comment[uk]=Пошук у Userbase KDE
+Comment[x-test]=xxSearch on KDE's Userbasexx
+Comment[zh_TW]=搜尋 KDE 的 Userbase
 Icon=kde
 
 X-KDE-ServiceTypes=Plasma/Runner
