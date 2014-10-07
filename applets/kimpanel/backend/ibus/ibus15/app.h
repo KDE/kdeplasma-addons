@@ -24,6 +24,8 @@
 
 #include <QApplication>
 #include <QPair>
+#include <QMap>
+#include <QByteArray>
 #include "panel.h"
 
 class App : public QApplication {
@@ -40,6 +42,7 @@ public:
     void init();
     void nameAcquired();
     void nameLost();
+    QByteArray normalizeIconName(const QByteArray& icon) const;
 private Q_SLOTS:
     void clean();
     void grabKey();
@@ -56,6 +59,7 @@ private:
     QList< QPair< uint, uint > > m_triggersList;
     bool m_keyboardGrabbed;
     bool m_doGrab;
+    QMap<QByteArray, QByteArray> m_iconMap;
 };
 
 #endif // APP_H
