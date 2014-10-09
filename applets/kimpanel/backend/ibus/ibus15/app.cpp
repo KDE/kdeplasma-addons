@@ -211,12 +211,14 @@ bool App::x11EventFilter(XEvent* event)
         if (event->type == KeyPress) {
             KeySym sym = XKeycodeToKeysym(QX11Info::display(), event->xkey.keycode, 0);
             uint state = event->xkey.state & USED_MASK;
-            if (m_triggersList.contains(qMakePair<uint, uint>(sym, state))) {
+            bool forward;
+            if ((forward = m_triggersList.contains(qMakePair<uint, uint>(sym, state)))
+             || m_triggersList.contains(qMakePair<uint, uint>(sym, state & (~ShiftMask)))) {
                 if (m_keyboardGrabbed) {
-                    ibus_panel_impanel_navigate(m_impanel, false);
+                    ibus_panel_impanel_navigate(m_impanel, false, forward);
                 } else {
                     if (grabXKeyboard()) {
-                        ibus_panel_impanel_navigate(m_impanel, true);
+                        ibus_panel_impanel_navigate(m_impanel, true, forward);
                     } else {
                         ibus_panel_impanel_move_next(m_impanel);
                     }
@@ -360,6 +362,9 @@ void App::grabKey()
             g_warning ("Can not convert keyval=%lu to keycode!", sym);
         }
         XGrabKey(QX11Info::display(), keycode, modifiers, QX11Info::appRootWindow(), True, GrabModeAsync, GrabModeAsync);
+        if ((modifiers & ShiftMask) == 0) {
+            XGrabKey(QX11Info::display(), keycode, modifiers | ShiftMask, QX11Info::appRootWindow(), True, GrabModeAsync, GrabModeAsync);
+        }
     }
 }
 
@@ -374,6 +379,9 @@ void App::ungrabKey()
             g_warning ("Can not convert keyval=%lu to keycode!", sym);
         }
         XUngrabKey(QX11Info::display(), keycode, modifiers, QX11Info::appRootWindow());
+        if ((modifiers & ShiftMask) == 0) {
+            XUngrabKey(QX11Info::display(), keycode, modifiers | ShiftMask, QX11Info::appRootWindow());
+        }
     }
 }
 
