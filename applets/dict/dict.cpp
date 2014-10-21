@@ -134,6 +134,7 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_horLayout = new QGraphicsLinearLayout(Qt::Horizontal);
     m_horLayout->addItem(m_icon);
     m_horLayout->addItem(m_wordEdit);
+    m_horLayout->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
     m_layout->addItem(m_horLayout);
     m_layout->addItem(m_defBrowser);
