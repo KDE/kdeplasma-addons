@@ -110,20 +110,19 @@ Comment[wa]=Metoz les pices en ôre
 Comment[x-test]=xxPut the pieces in orderxx
 Comment[zh_CN]=按顺序摆放拼图块
 Comment[zh_TW]=將數字依順序排好
+
 Icon=fifteenpuzzle
 Type=Service
-ServiceTypes=Plasma/Applet
 
-X-KDE-Library=plasma_applet_fifteenPuzzle
+X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Jesper Thomschutz
 X-KDE-PluginInfo-Email=jesperht@yahoo.com
-X-KDE-PluginInfo-Name=fifteenPuzzle
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.plasma.fifteenpuzzle
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
 X-KDE-PluginInfo-Category=Fun and Games
-X-KDE-PluginInfo-Depends=
-X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=true
 
-X-Plasma-Requires-FileDialog=Unused
-X-Plasma-Requires-LaunchApp=Unused
+X-Plasma-MainScript=ui/main.qml
