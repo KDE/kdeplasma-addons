@@ -214,7 +214,7 @@ Item {
                 }
             }
 
-            var deltaHour = (sector <= 6 ? 0 : 1)
+            var deltaHour = (sector < 7 ? 0 : 1)
             if ((hours + deltaHour) % 12 > 0) {
                 realHour = (hours + deltaHour) % 12 - 1
             } else {
