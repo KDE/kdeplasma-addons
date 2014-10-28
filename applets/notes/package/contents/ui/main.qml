@@ -97,7 +97,7 @@ PlasmaCore.SvgItem
 
                 //this is deliberately _NOT_ the theme colour as we are over a known bright background
                 //an unknown colour over a known colour is a bad move as you end up with white on yellow
-                color: "#202020"
+                color: plasmoid.configuration.color === "black" ? "#dfdfdf" : "#202020"
                 selectedTextColor: theme.viewBackgroundColor
                 selectionColor: theme.viewFocusColor
 
