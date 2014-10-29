@@ -36,5 +36,6 @@ add_subdirectory(runners)
 
 add_subdirectory(wallpapers)
 
+add_subdirectory(windowswitchers)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
