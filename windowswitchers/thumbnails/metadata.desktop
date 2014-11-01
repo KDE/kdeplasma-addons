@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=Thumbnails
+Name[en_GB]=Thumbnails
+Name[es]=Miniaturas
+Name[nl]=Miniaturen
+Name[pt]=Miniaturas
+Name[sk]=Miniatúry
+Name[uk]=Мініатюри
+Name[x-test]=xxThumbnailsxx
 Comment=A window switcher layout using live thumbnails
+Comment[en_GB]=A window switcher layout using live thumbnails
+Comment[es]=Un esquema de selector de ventanas que usa miniaturas en vivo
+Comment[nl]=Een indeling van de vensterwisselaar met levende miniaturen
+Comment[pt]=Uma disposição de selecção de janelas que usa miniaturas em constante actualização
+Comment[sk]=Rozloženie prepínača okien používajúce živé miniatúry
+Comment[uk]=Компонування засобу перемикання вікон з мініатюрами поточного стану вікон
+Comment[x-test]=xxA window switcher layout using live thumbnailsxx
 Icon=preferences-system-windows-switcher-thumbnails
 
 X-Plasma-API=declarativeappletscript

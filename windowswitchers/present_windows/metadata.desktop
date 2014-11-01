@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=Grid
+Name[en_GB]=Grid
+Name[es]=Cuadrícula
+Name[nl]=Raster
+Name[pt]=Grelha
+Name[sk]=Mriežka
+Name[uk]=Ґратка
+Name[x-test]=xxGridxx
 Comment=A Window Switcher layout showing all windows as thumbnails in a grid
+Comment[en_GB]=A Window Switcher layout showing all windows as thumbnails in a grid
+Comment[es]=Un esquema de selector de ventanas que muestra todas las ventanas como miniaturas en una rejilla
+Comment[nl]=Een indeling van de vensterwisselaar met alle vensters als miniaturen in een raster
+Comment[pt]=Uma disposição de selecção de janelas que mostra todas as janelas como miniaturas numa grelha
+Comment[sk]=Rozloženie prepínača okien zobrazujúce všetky okná ako miniatúry v mriežke
+Comment[uk]=Компонування засобу перемикання вікон з мініатюрами всіх вікон у форматі ґратки
+Comment[x-test]=xxA Window Switcher layout showing all windows as thumbnails in a gridxx
 Icon=preferences-system-windows-switcher-present-windows
 
 X-Plasma-API=declarativeappletscript

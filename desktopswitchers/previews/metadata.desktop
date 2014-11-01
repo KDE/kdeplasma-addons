@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=Previews
+Name[en_GB]=Previews
+Name[es]=Vistas previas
+Name[nl]=Voorvertoningen
+Name[pt]=Antevisões
+Name[sk]=Náhľady
+Name[uk]=Ескізи
+Name[x-test]=xxPreviewsxx
 Comment=A desktop switcher layout with previews of the desktops
+Comment[en_GB]=A desktop switcher layout with previews of the desktops
+Comment[es]=Un esquema de selector de ventanas con vistas previas de los escritorios
+Comment[nl]=Een indeling van bureaubladwisselaar met voorbeelden op de bureaubladen
+Comment[pt]=Uma disposição de selecção de ecrãs com antevisões dos mesmos
+Comment[sk]=Rozloženie prepínača plôch s náhľadmi týchto plôch
+Comment[uk]=Компонування перемикача стільниць з ескізами стільниць
+Comment[x-test]=xxA desktop switcher layout with previews of the desktopsxx
 Icon=preferences-system-desktop-switcher-previews
 
 X-Plasma-API=declarativeappletscript
