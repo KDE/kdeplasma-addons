@@ -35,8 +35,8 @@ Item {
     property alias cfg_numberColor: numberColorPicker.chosenColor
     property alias cfg_showNumerals: showNumeralsCheckBox.checked
 
-    //property alias cfg_usePlainPieces: usePlainPiecesRadioButton.checked
-    //property alias cfg_imagePath: imagePathTextField.text
+    property alias cfg_useImage: useImageCheckBox.checked
+    property alias cfg_imagePath: imagePathTextField.text
 
     QtLayouts.ColumnLayout {
         QtControls.GroupBox {
@@ -79,24 +79,16 @@ Item {
                     id: numberColorPicker
                 }
 
-                //QtControls.RadioButton {
-                //    id: usePlainPiecesRadioButton
-                //    text: i18n("Use plain pieces")
-                //    exclusiveGroup: plainPiecesGroup
-                //    QtLayouts.Layout.columnSpan: 2
-                //}
+                QtControls.CheckBox {
+                    id: useImageCheckBox
+                    text: i18n("Use custom image")
+                    QtLayouts.Layout.alignment: Qt.AlignRight
+                }
 
-                //QtControls.RadioButton {
-                //    id: useImageRadioButton
-                //    text: i18n("Use custom image")
-                //    exclusiveGroup: plainPiecesGroup
-                //    QtLayouts.Layout.alignment: Qt.AlignRight
-                //}
-
-                //QtControls.TextField {
-                //    id: imagePathTextField
-                //    placeholderText: i18n("Path to custom image")
-                //}
+                QtControls.TextField {
+                    id: imagePathTextField
+                    placeholderText: i18n("Path to custom image")
+                }
 
                 QtControls.CheckBox {
                     id: showNumeralsCheckBox

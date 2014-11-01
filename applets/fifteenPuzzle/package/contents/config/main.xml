@@ -9,8 +9,8 @@
     <entry name="imagePath" type="String">
       <default></default>
     </entry>
-    <entry name="usePlainPieces" type="Bool">
-        <default>true</default>
+    <entry name="useImage" type="Bool">
+        <default>false</default>
     </entry>
     <entry name="showNumerals" type="Bool">
         <default>true</default>

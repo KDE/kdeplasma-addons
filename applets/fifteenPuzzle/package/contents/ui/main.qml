@@ -21,17 +21,19 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.private.fifteenpuzzle 0.1
 
 Item {
     id: root
 
-    Plasmoid.switchWidth: Layout.minimumWidth
-    Plasmoid.switchHeight: Layout.minimumHeight
+    Plasmoid.switchWidth: Layout.minimumWidth - 20
+    Plasmoid.switchHeight: Layout.minimumHeight - 20
+
     Layout.minimumWidth: width
     Layout.minimumHeight: height
 
-    width: units.gridUnit * 10
-    height: units.gridUnit * 12
+    width: units.gridUnit * 16
+    height: units.gridUnit * 16
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 

@@ -57,6 +57,17 @@ Rectangle {
         text: piece.number
         color: plasmoid.configuration.numberColor
         visible: plasmoid.configuration.showNumerals
+        z: 1
+    }
+
+    Image {
+        id: pieceImage
+        width: parent.width
+        height: parent.height
+        visible: plasmoid.configuration.useImage
+        source: "image://fifteenpuzzle/" + boardSize + "-" + number + "-" + pieceWidth + "-" + pieceHeight + "-" + plasmoid.configuration.imagePath;
+        cache: false
+        z: 0
     }
 
     MouseArea {

@@ -206,12 +206,28 @@ Item {
         visible: false
         anchors.fill: mainGrid
         color: theme.backgroundColor
+        z: 0
+
+        Image {
+            id: solvedImage
+            anchors.fill: parent
+            z: 1
+            source: "image://fifteenpuzzle/" + boardSize + "-all-0-0-" + plasmoid.configuration.imagePath;
+            visible: plasmoid.configuration.useImage;
+            cache: false
+            function update() {
+                var tmp = source;
+                source = "";
+                source = tmp;
+            }
+        }
 
         Components.Label {
             id: solvedLabel
             anchors.centerIn: parent
             color: theme.textColor
             text: i18n("Solved! Try again.")
+            z: 2
         }
     }
 
@@ -225,9 +241,22 @@ Item {
 
     Connections {
         target: plasmoid.configuration
-
-        onBoardSizeChanged: fillBoard()
+        onBoardSizeChanged: {
+            main.fillBoard();
+            solvedImage.update();
+        }
     }
 
-    Component.onCompleted: main.fillBoard();
+    Connections {
+        target: plasmoid.configuration
+        onImagePathChanged: {
+            main.fillBoard();
+            solvedImage.update();
+        }
+    }
+
+    Component.onCompleted: {
+        main.fillBoard();
+        solvedImage.update();
+    }
 }
