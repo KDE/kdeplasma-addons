@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=Previews
+Name[de]=Vorschauen
+Name[el]=Προεπισκοπήσεις
 Name[en_GB]=Previews
 Name[es]=Vistas previas
 Name[nl]=Voorvertoningen
@@ -10,6 +12,7 @@ Name[sk]=Náhľady
 Name[uk]=Ескізи
 Name[x-test]=xxPreviewsxx
 Comment=A desktop switcher layout with previews of the desktops
+Comment[el]=Μια διάταξη εναλλαγής επιφάνειας εργασίας με προεπισκοπήσεις των επιφανειών
 Comment[en_GB]=A desktop switcher layout with previews of the desktops
 Comment[es]=Un esquema de selector de ventanas con vistas previas de los escritorios
 Comment[nl]=Een indeling van bureaubladwisselaar met voorbeelden op de bureaubladen

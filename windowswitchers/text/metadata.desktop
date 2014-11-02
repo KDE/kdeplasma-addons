@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Text Only
+Name[el]=Μόνο κείμενο
 Name[en_GB]=Text Only
 Name[es]=Solo texto
 Name[nl]=Alleen tekst
@@ -10,6 +11,7 @@ Name[sk]=Iba text
 Name[uk]=Лише текст
 Name[x-test]=xxText Onlyxx
 Comment=A window switcher layout only showing window captions
+Comment[el]=Μια διάταξη εναλλαγής παραθύρων που εμφανίζει μόνο τίτλους παραθύρων
 Comment[en_GB]=A window switcher layout only showing window captions
 Comment[es]=Un esquema de selector de ventanas que solo muestra los títulos de las ventanas
 Comment[nl]=Een indeling van de vensterwisselaar die alleen bijschriften van vensters toont
