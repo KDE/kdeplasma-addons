@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Compact
+Name[de]=Kompakt
 Name[el]=Συμπαγής
 Name[en_GB]=Compact
 Name[es]=Compacto
@@ -8,9 +9,11 @@ Name[pl]=Kompaktowy
 Name[pt]=Compacto
 Name[pt_BR]=Compacto
 Name[sk]=Kompaktný
+Name[sl]=Strnjeno
 Name[uk]=Компактний
 Name[x-test]=xxCompactxx
 Comment=A compact window switcher layout
+Comment[de]=Ein kompaktes Fensterwechsler-Layout
 Comment[el]=Μια συμπαγής διάταξη εναλλαγής παραθύρων
 Comment[en_GB]=A compact window switcher layout
 Comment[es]=Un esquema de selector de ventanas compacto
@@ -19,6 +22,7 @@ Comment[pl]=Kompaktowy układ przełączania okien
 Comment[pt]=Uma disposição de selecção de janelas compacta
 Comment[pt_BR]=Uma leiaute compacto do seletor de janelas
 Comment[sk]=Kompaktné rozloženie prepínača okien
+Comment[sl]=Strnjen razpored preklapljanja med okni
 Comment[uk]=Компактне компонування засобу перемикання вікон
 Comment[x-test]=xxA compact window switcher layoutxx
 Icon=preferences-system-windows-switcher-compact
