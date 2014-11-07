@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Compact
+Name[cs]=Kompaktní
 Name[de]=Kompakt
 Name[el]=Συμπαγής
 Name[en_GB]=Compact
@@ -14,6 +15,7 @@ Name[sl]=Strnjeno
 Name[uk]=Компактний
 Name[x-test]=xxCompactxx
 Comment=A compact window switcher layout
+Comment[cs]=Kompaktní rozvržení přepínače oken
 Comment[de]=Ein kompaktes Fensterwechsler-Layout
 Comment[el]=Μια συμπαγής διάταξη εναλλαγής παραθύρων
 Comment[en_GB]=A compact window switcher layout

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Grid
+Name[cs]=Mřížka
 Name[de]=Raster
 Name[el]=Κάνναβος
 Name[en_GB]=Grid
@@ -14,6 +15,7 @@ Name[sl]=Mreža
 Name[uk]=Ґратка
 Name[x-test]=xxGridxx
 Comment=A Window Switcher layout showing all windows as thumbnails in a grid
+Comment[cs]=Rozvržení přepínače oken zobrazující všechna okna jako miniatury v mřížce
 Comment[de]=Ein Fensterwechsler-Layout, das Vorschauen aller Fenster in einem Raster anzeigt
 Comment[el]=Μια διάταξη εναλλαγής παραθύρων με όλα τα παράθυρα ως εικόνες επισκόπησης σε κάνναβο
 Comment[en_GB]=A Window Switcher layout showing all windows as thumbnails in a grid

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Large Icons
+Name[cs]=Velké ikony
 Name[de]=Große Symbole
 Name[el]=Μεγάλα εικονίδια
 Name[en_GB]=Large Icons
@@ -14,6 +15,7 @@ Name[sl]=Velike ikone
 Name[uk]=Великі піктограми
 Name[x-test]=xxLarge Iconsxx
 Comment=A window switcher layout using large icons to represent the window
+Comment[cs]=Rozvržení přepínače oken používající velké ikony
 Comment[de]=Ein Fensterwechsler-Layout, das große Symbole zur Darstellung der Fenster verwendet
 Comment[el]=Μια διάταξη εναλλαγής παραθύρων που χρησιμοποιεί μεγάλα εικονίδια για να αναπαραστήσει το παράθυρο
 Comment[en_GB]=A window switcher layout using large icons to represent the window

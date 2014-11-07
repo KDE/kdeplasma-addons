@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Small Icons
+Name[cs]=Malé ikony
 Name[de]=Kleine Symbole
 Name[el]=Μικρά εικονίδια
 Name[en_GB]=Small Icons
@@ -14,6 +15,7 @@ Name[sl]=Majhne ikone
 Name[uk]=Малі піктограми
 Name[x-test]=xxSmall Iconsxx
 Comment=A window switcher layout using small icons to represent the window
+Comment[cs]=Rozvržení přepínače oken používající malé ikony
 Comment[de]=Ein Fensterwechsler-Layout, das kleine Symbole zur Darstellung der Fenster verwendet
 Comment[el]=Μια διάταξη εναλλαγής παραθύρων με χρήση μικρών εικονιδίων που αναπαριστούν το παράθυρο
 Comment[en_GB]=A window switcher layout using small icons to represent the window

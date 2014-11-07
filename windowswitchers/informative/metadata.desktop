@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Informative
+Name[cs]=Informativní
 Name[de]=Informativ
 Name[el]=Ενημερωτικό
 Name[en_GB]=Informative
@@ -14,6 +15,7 @@ Name[sl]=Podrobno
 Name[uk]=Інформативне
 Name[x-test]=xxInformativexx
 Comment=An informative window switcher layout including desktop name
+Comment[cs]=Informativní rozvržení přepínače oken obsahující název plochy
 Comment[de]=Ein informatives Fensterwechsler-Layout, zeigt den Namen der Arbeitsfläche an
 Comment[el]=Μια ενημερωτική διάταξη εναλλαγής παραθύρων που περιλαμβάνει το όνομα της επιφάνειας εργασίας
 Comment[en_GB]=An informative window switcher layout including desktop name
