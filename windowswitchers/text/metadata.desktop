@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Text Only
+Name[ca]=Només text
 Name[cs]=Pouze text
 Name[de]=Nur Text
 Name[el]=Μόνο κείμενο
@@ -21,6 +22,7 @@ Name[tr]=Sadece Metin
 Name[uk]=Лише текст
 Name[x-test]=xxText Onlyxx
 Comment=A window switcher layout only showing window captions
+Comment[ca]=Una disposició del commutador de finestres que només mostra els títols de finestra
 Comment[cs]=Rozvržení přepínače oken zobrazující pouze titulek okna
 Comment[de]=Ein Fensterwechsler-Layout, das nur die Titel der Fenster anzeigt
 Comment[el]=Μια διάταξη εναλλαγής παραθύρων που εμφανίζει μόνο τίτλους παραθύρων

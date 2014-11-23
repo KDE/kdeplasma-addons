@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Thumbnails
+Name[ca]=Miniatures
 Name[cs]=Miniatury
 Name[de]=Vorschaubilder
 Name[el]=Εικόνες επισκόπησης
@@ -21,6 +22,7 @@ Name[tr]=Küçük Resimler
 Name[uk]=Мініатюри
 Name[x-test]=xxThumbnailsxx
 Comment=A window switcher layout using live thumbnails
+Comment[ca]=Una disposició del commutador de finestres que utilitza miniatures animades
 Comment[cs]=Přepínač oken s živými náhledy
 Comment[de]=Ein Fensterwechsler-Layout, das Live-Vorschauen verwendet
 Comment[el]=Μια διάταξη εναλλαγής παραθύρων που χρησιμοποιεί ζωντανές εικόνες επισκόπησης

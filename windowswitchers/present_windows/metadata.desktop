@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Grid
+Name[ca]=Graella
 Name[cs]=Mřížka
 Name[de]=Raster
 Name[el]=Κάνναβος
@@ -21,6 +22,7 @@ Name[tr]=Izgara
 Name[uk]=Ґратка
 Name[x-test]=xxGridxx
 Comment=A Window Switcher layout showing all windows as thumbnails in a grid
+Comment[ca]=Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una graella
 Comment[cs]=Rozvržení přepínače oken zobrazující všechna okna jako miniatury v mřížce
 Comment[de]=Ein Fensterwechsler-Layout, das Vorschauen aller Fenster in einem Raster anzeigt
 Comment[el]=Μια διάταξη εναλλαγής παραθύρων με όλα τα παράθυρα ως εικόνες επισκόπησης σε κάνναβο
