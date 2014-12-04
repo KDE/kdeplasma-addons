@@ -21,6 +21,7 @@ Name[sr@latin]=Informativno
 Name[tr]=Bilgilendirici
 Name[uk]=Інформативне
 Name[x-test]=xxInformativexx
+Name[zh_CN]=信息
 Comment=An informative window switcher layout including desktop name
 Comment[ca]=Una disposició del commutador de finestres informativa que inclou el nom d'escriptori
 Comment[cs]=Informativní rozvržení přepínače oken obsahující název plochy
@@ -43,6 +44,7 @@ Comment[sr@latin]=Informativni raspored menjača prozora koji uključuje ime pov
 Comment[tr]=Masaüstü adını içeren, bilgilendirici bir pencere değiştirme düzeni
 Comment[uk]=Інформативне компонування засобу перемикання вікон з назвами стільниць
 Comment[x-test]=xxAn informative window switcher layout including desktop namexx
+Comment[zh_CN]=一个包含有用信息例如桌面名称的窗口切换器布局
 Icon=preferences-system-windows-switcher-informative
 
 X-Plasma-API=declarativeappletscript

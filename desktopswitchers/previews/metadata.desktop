@@ -21,6 +21,7 @@ Name[sr@latin]=Pregledi
 Name[tr]=Önizlemeler
 Name[uk]=Ескізи
 Name[x-test]=xxPreviewsxx
+Name[zh_CN]=预览
 Comment=A desktop switcher layout with previews of the desktops
 Comment[ca]=Una disposició del commutador d'escriptori amb vistes prèvies dels escriptoris
 Comment[cs]=Přepínač oken s náhledy ploch
@@ -43,6 +44,7 @@ Comment[sr@latin]=Raspored menjača površi sa pregledima površi
 Comment[tr]=Masaüstlerinin önizlemeleri ile bir masaüstü değiştirici yerleşimi
 Comment[uk]=Компонування перемикача стільниць з ескізами стільниць
 Comment[x-test]=xxA desktop switcher layout with previews of the desktopsxx
+Comment[zh_CN]=带桌面预览的切换布局
 Icon=preferences-system-desktop-switcher-previews
 
 X-Plasma-API=declarativeappletscript

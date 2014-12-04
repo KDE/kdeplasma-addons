@@ -21,6 +21,7 @@ Name[sr@latin]=Male ikone
 Name[tr]=Küçük Simgeler
 Name[uk]=Малі піктограми
 Name[x-test]=xxSmall Iconsxx
+Name[zh_CN]=小图标
 Comment=A window switcher layout using small icons to represent the window
 Comment[ca]=Una disposició del commutador de finestres que utilitza icones petites per representar la finestra
 Comment[cs]=Rozvržení přepínače oken používající malé ikony
@@ -43,6 +44,7 @@ Comment[sr@latin]=Raspored menjača prozora u kojem su prozori predstavljeni mal
 Comment[tr]=Pencereleri gösteren küçük simgeleri kullanan bir pencere değiştirme yerleşimi
 Comment[uk]=Компонування засобу перемикання вікон з малими піктограмами вікон
 Comment[x-test]=xxA window switcher layout using small icons to represent the windowxx
+Comment[zh_CN]=一个用小图标表示窗口的窗口切换器布局
 Icon=preferences-system-windows-switcher-small-icons
 
 X-Plasma-API=declarativeappletscript

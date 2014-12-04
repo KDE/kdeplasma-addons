@@ -21,6 +21,7 @@ Name[sr@latin]=Velike ikone
 Name[tr]=Büyük Simgeler
 Name[uk]=Великі піктограми
 Name[x-test]=xxLarge Iconsxx
+Name[zh_CN]=大图标
 Comment=A window switcher layout using large icons to represent the window
 Comment[ca]=Una disposició del commutador de finestres que utilitza icones grans per representar la finestra
 Comment[cs]=Rozvržení přepínače oken používající velké ikony
@@ -43,6 +44,7 @@ Comment[sr@latin]=Raspored menjača prozora u kojem su prozori predstavljeni vel
 Comment[tr]=Pencereleri gösteren büyük simgeleri kullanan bir pencere değiştirme yerleşimi
 Comment[uk]=Компонування засобу перемикання вікон з великими піктограмами вікон
 Comment[x-test]=xxA window switcher layout using large icons to represent the windowxx
+Comment[zh_CN]=一个用大图标表示窗口的窗口切换器布局
 Icon=preferences-system-windows-switcher-big-icons
 
 X-Plasma-API=declarativeappletscript
