@@ -222,6 +222,10 @@ Item {
 
             sector = Math.floor(sector);
             if (sector == 12) {
+                realHour += 1
+                if (Math.floor(realHour) >= hourNames.length) {
+                    realHour = 0
+                }
                 sector = 0
             }
 
