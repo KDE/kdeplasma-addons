@@ -42,6 +42,13 @@ PlasmaCore.SvgItem
     //note is of type Note
     property QtObject note: noteManager.loadNote(plasmoid.configuration.noteId);
 
+    Connections {
+        target: plasmoid
+        onExternalData: {
+            mainTextArea.text = data
+        }
+    }
+
     NoteManager {
         id: noteManager
     }
