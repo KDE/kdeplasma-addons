@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Web browser
+Comment=Add a webpage on your desktop.
+Type=Service
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Mikhail Ivchenko
+X-KDE-PluginInfo-Email=ematirov@gmail.com
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.plasma.webbrowser
+X-KDE-PluginInfo-Version=0.0.1
+X-KDE-PluginInfo-Website=plasma.kde.org
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-RemoteLocation=
+X-KDE-PluginInfo-Category=Online Services
