@@ -1,7 +1,18 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Web browser
+Name[cs]=Webový prohlížeč
+Name[nl]=Webbrowser
+Name[pt]=Navegador Web
+Name[sk]=Webový prehliadač
+Name[uk]=Перегляд інтернету
+Name[x-test]=xxWeb browserxx
 Comment=Add a webpage on your desktop.
+Comment[nl]=Een webpagina toevoegen aan uw bureaublad.
+Comment[pt]=Adiciona uma página Web ao seu ecrã.
+Comment[sk]=Pridať webovú stránku na vašu plochu.
+Comment[uk]=Додати сторінку інтернету на вашу стільницю.
+Comment[x-test]=xxAdd a webpage on your desktop.xx
 Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Mikhail Ivchenko
