@@ -20,12 +20,12 @@
 #include "audioplayercontrolrunner_config.h"
 
 //KDE-Includes
-#include <Plasma/AbstractRunner>
+#include <KRunner/AbstractRunner>
 #include <KDebug>
+#include <KSharedConfig>
+#include <KPluginFactory>
 
 #include "audioplayercontrolconfigkeys.h"
-
-K_EXPORT_RUNNER_CONFIG(audioplayercontrol, AudioPlayerControlRunnerConfig)
 
 AudioPlayerControlRunnerConfigForm::AudioPlayerControlRunnerConfigForm(QWidget* parent) : QWidget(parent)
 {
@@ -33,7 +33,7 @@ AudioPlayerControlRunnerConfigForm::AudioPlayerControlRunnerConfigForm(QWidget* 
 }
 
 AudioPlayerControlRunnerConfig::AudioPlayerControlRunnerConfig(QWidget* parent, const QVariantList& args) :
-        KCModule(ConfigFactory::componentData(), parent, args)
+        KCModule(parent, args)
 {
     m_ui = new AudioPlayerControlRunnerConfigForm(this);
 
@@ -187,3 +187,8 @@ void AudioPlayerControlRunnerConfig::onPlayerChanged(QString player)
 {
     onPlayerChanged(m_ui->player_combo->findText(player));
 }
+
+K_PLUGIN_FACTORY(AudioPlayerControlRunnerConfigFactory,
+                 registerPlugin<AudioPlayerControlRunnerConfig>("kcm_krunner_audioplayercontrol");)
+
+#include "audioplayercontrolrunner_config.moc"

@@ -20,9 +20,12 @@
 #ifndef AUDIOPLAYERCONTROLRUNNER_H
 #define AUDIOPLAYERCONTROLRUNNER_H
 
-#include <plasma/abstractrunner.h>
+#include <KRunner/AbstractRunner>
+#include <KRunner/QueryMatch>
 
 #include <KIcon>
+#include <KUrl>
+#include <KLocalizedString>
 
 class QDBusPendingCallWatcher;
 
@@ -160,7 +163,5 @@ private:
     /** @c true if a previous song is available */
     bool m_prevSongAvailable : 1;
 };
-
-K_EXPORT_PLASMA_RUNNER(audioplayercontrol, AudioPlayerControlRunner)
 
 #endif

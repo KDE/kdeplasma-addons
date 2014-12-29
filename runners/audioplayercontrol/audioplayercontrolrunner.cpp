@@ -27,11 +27,11 @@
 #include <QtDBus/QDBusPendingCallWatcher>
 #include <QtDBus/QDBusMessage>
 
-#include <KDE/KMessageBox>
-#include <KDE/KDebug>
-#include <KDE/KIcon>
-#include <KDE/KRun>
-#include <KDE/KUrl>
+#include <KMessageBox>
+#include <KDebug>
+#include <KIcon>
+#include <KRun>
+#include <KUrl>
 
 #include "audioplayercontrolconfigkeys.h"
 
@@ -122,7 +122,7 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         if (!context.isValid() || !m_running) {
             //The interface of the player is not availalbe, so the rest of the commands
             //is not needed
-            context.addMatches(term,matches);
+            context.addMatches(matches);
             return;
         }
 
@@ -248,7 +248,7 @@ void AudioPlayerControlRunner::match(Plasma::RunnerContext &context)
         //Adds matches for all song matches for term
     }
 
-    context.addMatches(term, matches);
+    context.addMatches(matches);
 }
 
 void AudioPlayerControlRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
@@ -542,4 +542,7 @@ int AudioPlayerControlRunner::currentSong()
     current.waitForFinished();
     return current;
 }
+
+K_EXPORT_PLASMA_RUNNER(krunner_audioplayercontrol, AudioPlayerControlRunner)
+
 #include "audioplayercontrolrunner.moc"

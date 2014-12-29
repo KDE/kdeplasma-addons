@@ -7,19 +7,26 @@ set(kcm_krunner_audioplayercontrol_SRCS
     audioplayercontrolrunner_config.cpp
 )
 
-kde4_add_ui_files(kcm_krunner_audioplayercontrol_SRCS audioplayercontrolrunner_config.ui)
-kde4_add_plugin(kcm_krunner_audioplayercontrol ${kcm_krunner_audioplayercontrol_SRCS})
+ki18n_wrap_ui(kcm_krunner_audioplayercontrol_SRCS audioplayercontrolrunner_config.ui)
+add_library(kcm_krunner_audioplayercontrol MODULE ${kcm_krunner_audioplayercontrol_SRCS})
 target_link_libraries(kcm_krunner_audioplayercontrol
-    ${KDE4_KDECORE_LIBS}
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_KCMUTILS_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    )
+    Qt5::Gui
+    KF5::Runner
+    KF5::KCMUtils
+    KF5::KDELibs4Support
+    KF5::I18n
+)
 
-kde4_add_plugin(krunner_audioplayercontrol ${krunner_audioplayercontrol_SRCS})
-target_link_libraries(krunner_audioplayercontrol ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS})
+add_library(krunner_audioplayercontrol MODULE ${krunner_audioplayercontrol_SRCS})
+target_link_libraries(krunner_audioplayercontrol
+    KF5::Runner
+    KF5::KIOWidgets
+    KF5::I18n
+    KF5::KDELibs4Support
+)
 
 
-install(TARGETS krunner_audioplayercontrol kcm_krunner_audioplayercontrol DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-runner-audioplayercontrol.desktop plasma-runner-audioplayercontrol_config.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(TARGETS krunner_audioplayercontrol kcm_krunner_audioplayercontrol
+        DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES plasma-runner-audioplayercontrol.desktop plasma-runner-audioplayercontrol_config.desktop
+        DESTINATION ${SERVICES_INSTALL_DIR})

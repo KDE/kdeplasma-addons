@@ -18,10 +18,10 @@
 
 #include "imageiconengine.h"
 
-#include <QtGui/QApplication>
-#include <QtGui/QPainter>
-#include <QtGui/QStyle>
-#include <QtGui/QStyleOption>
+#include <QApplication>
+#include <QPainter>
+#include <QStyle>
+#include <QStyleOption>
 
 ImageIconEngine::ImageIconEngine(const QImage &image)
     : m_image(image)

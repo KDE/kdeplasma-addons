@@ -32,6 +32,9 @@ class ImageIconEngine : public QIconEngineV2
         void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state);
         QPixmap pixmap(const QSize &size, QIcon::Mode mode, QIcon::State state);
 
+        QIconEngine *clone() const {
+            return new ImageIconEngine(m_image);
+        }
     private:
         QImage m_image;
 };
