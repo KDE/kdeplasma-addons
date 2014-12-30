@@ -18,10 +18,10 @@
 #include "converterrunner.h"
 #include <QGuiApplication>
 #include <QClipboard>
+#include <QDesktopServices>
 #include <QSet>
 #include <QDebug>
 #include <KLocalizedString>
-#include <KToolInvocation>
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/UnitCategory>
 
@@ -246,7 +246,7 @@ void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::Qu
     Q_UNUSED(context)
     const QString data = match.data().toString();
     if (data.startsWith(QLatin1String("http://"))) {
-        KToolInvocation::invokeBrowser(data);
+        QDesktopServices::openUrl(data);
     } else {
         QGuiApplication::clipboard()->setText(data);
     }
