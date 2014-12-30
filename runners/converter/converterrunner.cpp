@@ -27,8 +27,6 @@
 
 #define CONVERSION_CHAR QLatin1Char( '>' )
 
-using namespace KUnitConversion;
-
 K_EXPORT_PLASMA_RUNNER(converterrunner, ConverterRunner)
 
 class StringParser
@@ -180,10 +178,10 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     }
     unit2 = cmd.rest();
 
-    Converter converter;
-    UnitCategory category = converter.categoryForUnit(unit1);
+    KUnitConversion::Converter converter;
+    KUnitConversion::UnitCategory category = converter.categoryForUnit(unit1);
     bool found = false;
-    if (category.id() == InvalidCategory) {
+    if (category.id() == KUnitConversion::InvalidCategory) {
         foreach (category, converter.categories()) {
             foreach (const QString& s, category.allUnits()) {
                 if (s.compare(unit1, Qt::CaseInsensitive) == 0) {
@@ -200,16 +198,16 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
     }
 
-    QList<Unit> units;
+    QList<KUnitConversion::Unit> units;
 
     if (!unit2.isEmpty()) {
-        Unit u = category.unit(unit2);
+        KUnitConversion::Unit u = category.unit(unit2);
         if (!u.isNull() && u.isValid()) {
             units.append(u);
             config().writeEntry(category.name(), u.symbol());
         } else {
             const QStringList unitStrings = category.allUnits();
-            QList<Unit> matchingUnits;
+            QList<KUnitConversion::Unit> matchingUnits;
             foreach (const QString& s, unitStrings) {
                 if (s.startsWith(unit2, Qt::CaseInsensitive)) {
                     matchingUnits << category.unit(s);
@@ -222,18 +220,18 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
     } else {
         units = category.mostCommonUnits();
-        Unit u = category.unit(config().readEntry(category.name()));
+        KUnitConversion::Unit u = category.unit(config().readEntry(category.name()));
         if (!u.isNull() && units.indexOf(u) < 0) {
             units << u;
         }
     }
 
-    Unit u1 = category.unit(unit1);
-    foreach (const Unit& u, units) {
+    KUnitConversion::Unit u1 = category.unit(unit1);
+    foreach (const KUnitConversion::Unit& u, units) {
         if (u1 == u) {
             continue;
         }
-        Value v = category.convert(Value(value.toDouble(), u1), u);
+        KUnitConversion::Value v = category.convert(KUnitConversion::Value(value.toDouble(), u1), u);
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIcon(QIcon::fromTheme(QLatin1String( "edit-copy" )));
