@@ -18,13 +18,12 @@
 
 #include "comicproviderkross.h"
 #include "comic_package.h"
+#include <KPluginFactory>
 
-COMICPROVIDER_EXPORT_PLUGIN( ComicProviderKross, "ComicProviderKross", "" )
+Plasma::PackageStructure *ComicProviderKross::m_packageStructure(0);
 
-Plasma::PackageStructure::Ptr ComicProviderKross::m_packageStructure( 0 );
-
-ComicProviderKross::ComicProviderKross( QObject *parent, const QVariantList &args )
-    : ComicProvider( parent, args ), m_wrapper( this )
+ComicProviderKross::ComicProviderKross(QObject *parent, const QVariantList &args)
+    : ComicProvider(parent, args), m_wrapper(this)
 {
 }
 
@@ -47,12 +46,12 @@ ComicProvider::IdentifierType ComicProviderKross::identifierType() const
     return m_wrapper.identifierType();
 }
 
-KUrl ComicProviderKross::websiteUrl() const
+QUrl ComicProviderKross::websiteUrl() const
 {
     return m_wrapper.websiteUrl();
 }
 
-KUrl ComicProviderKross::shopUrl() const
+QUrl ComicProviderKross::shopUrl() const
 {
     return m_wrapper.shopUrl();
 }
@@ -62,13 +61,13 @@ QImage ComicProviderKross::image() const
     return m_wrapper.comicImage();
 }
 
-QString ComicProviderKross::identifierToString( const QVariant &identifier ) const
+QString ComicProviderKross::identifierToString(const QVariant &identifier) const
 {
     QString result;
 
-    if ( !identifier.isNull() && identifier.type() != QVariant::Bool ) {
-        if ( identifierType() == ComicProvider::DateIdentifier ) {
-            result = identifier.toDate().toString( Qt::ISODate );
+    if (!identifier.isNull() && identifier.type() != QVariant::Bool) {
+        if (identifierType() == ComicProvider::DateIdentifier) {
+            result = identifier.toDate().toString(Qt::ISODate);
         } else {
             result = identifier.toString();
         }
@@ -78,22 +77,22 @@ QString ComicProviderKross::identifierToString( const QVariant &identifier ) con
 
 QString ComicProviderKross::identifier() const
 {
-    return pluginName() + QLatin1Char( ':' ) + identifierToString( m_wrapper.identifierVariant() );
+    return pluginName() + QLatin1Char(':') + identifierToString(m_wrapper.identifierVariant());
 }
 
 QString ComicProviderKross::nextIdentifier() const
 {
-    return identifierToString( m_wrapper.nextIdentifierVariant() );
+    return identifierToString(m_wrapper.nextIdentifierVariant());
 }
 
 QString ComicProviderKross::previousIdentifier() const
 {
-    return  identifierToString( m_wrapper.previousIdentifierVariant() );
+    return  identifierToString(m_wrapper.previousIdentifierVariant());
 }
 
 QString ComicProviderKross::firstStripIdentifier() const
 {
-    return identifierToString( m_wrapper.firstIdentifierVariant() );
+    return identifierToString(m_wrapper.firstIdentifierVariant());
 }
 
 QString ComicProviderKross::stripTitle() const
@@ -106,27 +105,29 @@ QString ComicProviderKross::additionalText() const
     return m_wrapper.additionalText();
 }
 
-void ComicProviderKross::pageRetrieved( int id, const QByteArray &data )
+void ComicProviderKross::pageRetrieved(int id, const QByteArray &data)
 {
-    m_wrapper.pageRetrieved( id, data );
+    m_wrapper.pageRetrieved(id, data);
 }
 
-void ComicProviderKross::pageError( int id, const QString &message )
+void ComicProviderKross::pageError(int id, const QString &message)
 {
-    m_wrapper.pageError( id, message );
+    m_wrapper.pageError(id, message);
 }
 
-void ComicProviderKross::redirected( int id, const KUrl &newUrl )
+void ComicProviderKross::redirected(int id, const QUrl &newUrl)
 {
-    m_wrapper.redirected( id, newUrl );
+    m_wrapper.redirected(id, newUrl);
 }
 
-Plasma::PackageStructure::Ptr ComicProviderKross::packageStructure()
+Plasma::PackageStructure *ComicProviderKross::packageStructure()
 {
-    if ( !m_packageStructure ) {
+    if (!m_packageStructure) {
         m_packageStructure = new ComicPackage();
     }
     return m_packageStructure;
 }
+
+K_PLUGIN_FACTORY_WITH_JSON(ComicProviderKrossFactory, "plasma-packagestructure-comic.json", registerPlugin<ComicProviderKross>();)
 
 #include "comicproviderkross.moc"

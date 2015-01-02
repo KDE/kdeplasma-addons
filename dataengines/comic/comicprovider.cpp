@@ -20,66 +20,66 @@
 
 #include <QtCore/QTimer>
 
-#include <KDebug>
+#include <QDebug>
 #include <KIO/Job>
 #include <KIO/StoredTransferJob>
-#include <KUrl>
+#include <QUrl>
 
 class ComicProvider::Private
 {
     public:
-        Private( KService::Ptr service, ComicProvider *parent )
-            : mParent( parent ),
-              mIsCurrent( false ),
-              mFirstStripNumber( 1 ),
-              mComicDescription( service )
+        Private(KService::Ptr service, ComicProvider *parent)
+            : mParent(parent),
+              mIsCurrent(false),
+              mFirstStripNumber(1),
+              mComicDescription(service)
         {
-            mTimer = new QTimer( parent );
-            mTimer->setSingleShot( true );
-            mTimer->setInterval( 15000 );//timeout after 15 seconds
-            connect( mTimer, SIGNAL(timeout()), mParent, SLOT(slotTimeout()) );
+            mTimer = new QTimer(parent);
+            mTimer->setSingleShot(true);
+            mTimer->setInterval(15000);//timeout after 15 seconds
+            connect(mTimer, SIGNAL(timeout()), mParent, SLOT(slotTimeout()));
         }
 
-        void jobDone( KJob *job )
+        void jobDone(KJob *job)
         {
-            if ( job->error() ) {
-                mParent->pageError( job->property( "uid" ).toInt(), job->errorText() );
+            if (job->error()) {
+                mParent->pageError(job->property("uid").toInt(), job->errorText());
             } else {
-                KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>( job );
-                mParent->pageRetrieved( job->property( "uid" ).toInt(), storedJob->data() );
+                KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>(job);
+                mParent->pageRetrieved(job->property("uid").toInt(), storedJob->data());
             }
         }
 
-        void slotRedirection( KIO::Job *job, KUrl newUrl )
+        void slotRedirection(KIO::Job *job, QUrl newUrl)
         {
-            slotRedirection( job, KUrl(), newUrl );
+            slotRedirection(job, QUrl(), newUrl);
         }
 
-        void slotRedirection( KIO::Job *job, KUrl oldUrl, KUrl newUrl )
+        void slotRedirection(KIO::Job *job, QUrl oldUrl, QUrl newUrl)
         {
             Q_UNUSED(oldUrl)
 
-            mParent->redirected( job->property( "uid" ).toInt(), newUrl );
-            mRedirections.remove( job );
+            mParent->redirected(job->property("uid").toInt(), newUrl);
+            mRedirections.remove(job);
         }
 
-        void slotRedirectionDone( KJob *job )
+        void slotRedirectionDone(KJob *job)
         {
-            if ( job->error() ) {
-                kDebug() << "Redirection job with id" << job->property( "uid" ).toInt() <<  "finished with an error.";
+            if (job->error()) {
+                qDebug() << "Redirection job with id" << job->property("uid").toInt() <<  "finished with an error.";
             }
 
-            if ( mRedirections.contains( job ) ) {
+            if (mRedirections.contains(job)) {
                 //no redirection took place, return the original url
-                mParent->redirected( job->property( "uid" ).toInt(), mRedirections[ job ] );
-                mRedirections.remove( job );
+                mParent->redirected(job->property("uid").toInt(), mRedirections[job]);
+                mRedirections.remove(job);
             }
         }
 
         void slotTimeout()
         {
             //operation took too long, abort it
-            mParent->error( mParent );
+            mParent->error(mParent);
         }
 
         void slotFinished()
@@ -92,7 +92,7 @@ class ComicProvider::Private
         QString mRequestedId;
         QString mRequestedComicName;
         QString mComicAuthor;
-        KUrl mImageUrl;
+        QUrl mImageUrl;
         bool mIsCurrent;
         bool mIsLeftToRight;
         bool mIsTopToBottom;
@@ -102,32 +102,32 @@ class ComicProvider::Private
         int mFirstStripNumber;
         KPluginInfo mComicDescription;
         QTimer *mTimer;
-        QHash< KJob*, KUrl > mRedirections;
+        QHash< KJob*, QUrl > mRedirections;
 };
 
-ComicProvider::ComicProvider( QObject *parent, const QVariantList &args )
-    : QObject( parent ), d( new Private(
-      KService::serviceByStorageId( args.count() > 2 ? args[2].toString() : QString() ), this ) )
+ComicProvider::ComicProvider(QObject *parent, const QVariantList &args)
+    : QObject(parent), d(new Private(
+      KService::serviceByStorageId(args.count() > 2 ? args[2].toString() : QString()), this))
 {
-    Q_ASSERT( args.count() >= 2 );
-    const QString type = args[ 0 ].toString();
+    Q_ASSERT(args.count() >= 2);
+    const QString type = args[0].toString();
 
-    if ( type == QLatin1String( "Date" ) )
-        d->mRequestedDate = args[ 1 ].toDate();
-    else if ( type == QLatin1String( "Number" ) )
-        d->mRequestedNumber = args[ 1 ].toInt();
-    else if ( type == QLatin1String( "String" ) ) {
-        d->mRequestedId = args[ 1 ].toString();
+    if (type == QLatin1String("Date"))
+        d->mRequestedDate = args[1].toDate();
+    else if (type == QLatin1String("Number"))
+        d->mRequestedNumber = args[1].toInt();
+    else if (type == QLatin1String("String")) {
+        d->mRequestedId = args[1].toString();
 
-        int index = d->mRequestedId.indexOf( QLatin1Char( ':' ) );
-        d->mRequestedComicName = d->mRequestedId.mid( 0, index );
+        int index = d->mRequestedId.indexOf(QLatin1Char(':'));
+        d->mRequestedComicName = d->mRequestedId.mid(0, index);
     }
     else {
-        Q_ASSERT( false && "Invalid type passed to comic provider" );
+        Q_ASSERT(false && "Invalid type passed to comic provider");
     }
 
     d->mTimer->start();
-    connect( this, SIGNAL(finished(ComicProvider*)), this, SLOT(slotFinished()) );
+    connect(this, SIGNAL(finished(ComicProvider*)), this, SLOT(slotFinished()));
 }
 
 ComicProvider::~ComicProvider()
@@ -137,16 +137,16 @@ ComicProvider::~ComicProvider()
 
 QString ComicProvider::nextIdentifier() const
 {
-    if ( identifierType() == DateIdentifier && d->mRequestedDate != QDate::currentDate() )
-        return d->mRequestedDate.addDays( 1 ).toString( Qt::ISODate );
+    if (identifierType() == DateIdentifier && d->mRequestedDate != QDate::currentDate())
+        return d->mRequestedDate.addDays(1).toString(Qt::ISODate);
 
     return QString();
 }
 
 QString ComicProvider::previousIdentifier() const
 {
-    if ( ( identifierType() == DateIdentifier ) && ( !firstStripDate().isValid() || d->mRequestedDate > firstStripDate() ) )
-        return d->mRequestedDate.addDays( -1 ).toString( Qt::ISODate );
+    if ((identifierType() == DateIdentifier) && (!firstStripDate().isValid() || d->mRequestedDate > firstStripDate()))
+        return d->mRequestedDate.addDays(-1).toString(Qt::ISODate);
 
     return QString();
 }
@@ -161,7 +161,7 @@ QString ComicProvider::additionalText() const
     return QString();
 }
 
-void ComicProvider::setIsCurrent( bool value )
+void ComicProvider::setIsCurrent(bool value)
 {
     d->mIsCurrent = value;
 }
@@ -186,12 +186,12 @@ QString ComicProvider::comicAuthor() const
     return d->mComicAuthor;
 }
 
-void ComicProvider::setComicAuthor( const QString &author )
+void ComicProvider::setComicAuthor(const QString &author)
 {
     d->mComicAuthor = author;
 }
 
-void ComicProvider::setFirstStripDate( const QDate &date )
+void ComicProvider::setFirstStripDate(const QDate &date)
 {
     d->mFirstStripDate = date;
 }
@@ -201,17 +201,17 @@ int ComicProvider::firstStripNumber() const
     return d->mFirstStripNumber;
 }
 
-void ComicProvider::setFirstStripNumber( int number )
+void ComicProvider::setFirstStripNumber(int number)
 {
     d->mFirstStripNumber = number;
 }
 
 QString ComicProvider::firstStripIdentifier() const
 {
-    if ( ( identifierType() == DateIdentifier ) && d->mFirstStripDate.isValid() ) {
-        return d->mFirstStripDate.toString( Qt::ISODate );
-    } else if ( identifierType() == NumberIdentifier ) {
-        return QString::number( d->mFirstStripNumber );
+    if ((identifierType() == DateIdentifier) && d->mFirstStripDate.isValid()) {
+        return d->mFirstStripDate.toString(Qt::ISODate);
+    } else if (identifierType() == NumberIdentifier) {
+        return QString::number(d->mFirstStripNumber);
     }
 
     return QString();
@@ -232,7 +232,7 @@ QString ComicProvider::requestedComicName() const
     return d->mRequestedComicName;
 }
 
-void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos )
+void ComicProvider::requestPage(const QUrl &url, int id, const MetaInfos &infos)
 {
     //each request restarts the timer
     d->mTimer->start();
@@ -242,58 +242,58 @@ void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos
     }
 
     KIO::StoredTransferJob *job;
-    if ( id == Image ) {
+    if (id == Image) {
         //use cached information for the image if available
-        job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+        job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     } else {
         //for webpages we always reload, making sure, that changes are recognised
-        job = KIO::storedGet( url, KIO::Reload, KIO::HideProgressInfo );
+        job = KIO::storedGet(url, KIO::Reload, KIO::HideProgressInfo);
     }
-    job->setProperty( "uid", id );
-    connect( job, SIGNAL(result(KJob*)), this, SLOT(jobDone(KJob*)) );
+    job->setProperty("uid", id);
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(jobDone(KJob*)));
 
-    if ( !infos.isEmpty() ) {
-        QMapIterator<QString, QString> it( infos );
-        while ( it.hasNext() ) {
+    if (!infos.isEmpty()) {
+        QMapIterator<QString, QString> it(infos);
+        while (it.hasNext()) {
             it.next();
-            job->addMetaData( it.key(), it.value() );
+            job->addMetaData(it.key(), it.value());
         }
     }
 }
 
-void ComicProvider::requestRedirectedUrl( const KUrl &url, int id, const MetaInfos &infos )
+void ComicProvider::requestRedirectedUrl(const QUrl &url, int id, const MetaInfos &infos)
 {
-    KIO::MimetypeJob *job = KIO::mimetype( url, KIO::HideProgressInfo );
-    job->setProperty( "uid", id );
+    KIO::MimetypeJob *job = KIO::mimetype(url, KIO::HideProgressInfo);
+    job->setProperty("uid", id);
     d->mRedirections[job] = url;
-    connect(job, SIGNAL(redirection(KIO::Job*,KUrl)), this, SLOT(slotRedirection(KIO::Job*,KUrl)) );
-    connect(job, SIGNAL(permanentRedirection(KIO::Job*,KUrl,KUrl)), this, SLOT(slotRedirection(KIO::Job*,KUrl,KUrl)) );
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(slotRedirectionDone(KJob*)) );
+    connect(job, SIGNAL(redirection(KIO::Job*,QUrl)), this, SLOT(slotRedirection(KIO::Job*,QUrl)));
+    connect(job, SIGNAL(permanentRedirection(KIO::Job*,QUrl,QUrl)), this, SLOT(slotRedirection(KIO::Job*,QUrl,QUrl)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(slotRedirectionDone(KJob*)));
 
-    if ( !infos.isEmpty() ) {
-        QMapIterator<QString, QString> it( infos );
-        while ( it.hasNext() ) {
+    if (!infos.isEmpty()) {
+        QMapIterator<QString, QString> it(infos);
+        while (it.hasNext()) {
             it.next();
-            job->addMetaData( it.key(), it.value() );
+            job->addMetaData(it.key(), it.value());
         }
     }
 }
 
-void ComicProvider::pageRetrieved( int, const QByteArray& )
+void ComicProvider::pageRetrieved(int, const QByteArray&)
 {
 }
 
-void ComicProvider::pageError( int, const QString& )
+void ComicProvider::pageError(int, const QString&)
 {
 }
 
-void ComicProvider::redirected( int, const KUrl& )
+void ComicProvider::redirected(int, const QUrl&)
 {
 }
 
 QString ComicProvider::pluginName() const
 {
-    if ( !d->mComicDescription.isValid() ) {
+    if (!d->mComicDescription.isValid()) {
         return QString();
     }
     return d->mComicDescription.pluginName();
@@ -301,7 +301,7 @@ QString ComicProvider::pluginName() const
 
 QString ComicProvider::name() const
 {
-    if ( !d->mComicDescription.isValid() ) {
+    if (!d->mComicDescription.isValid()) {
         return QString();
     }
     return d->mComicDescription.name();
@@ -309,10 +309,10 @@ QString ComicProvider::name() const
 
 QString ComicProvider::suffixType() const
 {
-    if ( !d->mComicDescription.isValid() ) {
+    if (!d->mComicDescription.isValid()) {
         return QString();
     }
-    return d->mComicDescription.property( QLatin1String( "X-KDE-PlasmaComicProvider-SuffixType" ) ).toString();
+    return d->mComicDescription.property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType")).toString();
 }
 
 KPluginInfo ComicProvider::description() const
@@ -320,12 +320,12 @@ KPluginInfo ComicProvider::description() const
     return d->mComicDescription;
 }
 
-KUrl ComicProvider::shopUrl() const
+QUrl ComicProvider::shopUrl() const
 {
-    return KUrl();
+    return QUrl();
 }
 
-KUrl ComicProvider::imageUrl() const
+QUrl ComicProvider::imageUrl() const
 {
     return d->mImageUrl;
 }
@@ -340,4 +340,4 @@ bool ComicProvider::isTopToBottom() const
     return true;
 }
 
-#include "comicprovider.moc"
+#include "moc_comicprovider.cpp"

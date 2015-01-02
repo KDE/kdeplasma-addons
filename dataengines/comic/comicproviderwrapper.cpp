@@ -25,20 +25,22 @@
 #include <QBuffer>
 #include <QPainter>
 #include <QTextCodec>
-#include <KUrl>
-#include <KDebug>
-#include <KStandardDirs>
+#include <QUrl>
+#include <QDebug>
+#include <QStandardPaths>
 #include <Plasma/Package>
-#include <kross/core/action.h>
-#include <kross/core/interpreter.h>
-#include <kross/core/manager.h>
+#include <Kross/Action>
+#include <Kross/Interpreter>
+#include <Kross/Manager>
+
+#include <Plasma/PluginLoader>
 
 QStringList ComicProviderWrapper::mExtensions;
 
-ImageWrapper::ImageWrapper( QObject *parent, const QByteArray &data )
-  : QObject( parent ),
-    mImage( QImage::fromData( data ) ),
-    mRawData( data )
+ImageWrapper::ImageWrapper(QObject *parent, const QByteArray &data)
+  : QObject(parent),
+    mImage(QImage::fromData(data)),
+    mRawData(data)
 {
     resetImageReader();
 }
@@ -48,7 +50,7 @@ QImage ImageWrapper::image() const
     return mImage;
 }
 
-void ImageWrapper::setImage( const QImage &image )
+void ImageWrapper::setImage(const QImage &image)
 {
     mImage = image;
     mRawData.clear();
@@ -58,31 +60,31 @@ void ImageWrapper::setImage( const QImage &image )
 
 QByteArray ImageWrapper::rawData() const
 {
-    if ( mRawData.isNull() ) {
-        QBuffer buffer( &mRawData );
-        mImage.save( &buffer );
+    if (mRawData.isNull()) {
+        QBuffer buffer(&mRawData);
+        mImage.save(&buffer);
     }
 
     return mRawData;
 }
 
-void ImageWrapper::setRawData( const QByteArray &rawData )
+void ImageWrapper::setRawData(const QByteArray &rawData)
 {
     mRawData = rawData;
-    mImage = QImage::fromData( mRawData );
+    mImage = QImage::fromData(mRawData);
 
     resetImageReader();
 }
 
 void ImageWrapper::resetImageReader()
 {
-    if ( mBuffer.isOpen() ) {
+    if (mBuffer.isOpen()) {
         mBuffer.close();
     }
     rawData(); //to update the rawData if needed
-    mBuffer.setBuffer( &mRawData );
-    mBuffer.open( QIODevice::ReadOnly );
-    mImageReader.setDevice( &mBuffer );
+    mBuffer.setBuffer(&mRawData);
+    mBuffer.open(QIODevice::ReadOnly);
+    mImageReader.setDevice(&mBuffer);
 }
 
 int ImageWrapper::imageCount() const
@@ -96,9 +98,9 @@ QImage ImageWrapper::read()
 }
 
 
-DateWrapper::DateWrapper( QObject *parent, const QDate &date )
-: QObject( parent )
-, mDate( date )
+DateWrapper::DateWrapper(QObject *parent, const QDate &date)
+: QObject(parent)
+, mDate(date)
 {
 }
 
@@ -107,39 +109,39 @@ QDate DateWrapper::date() const
     return mDate;
 }
 
-void DateWrapper::setDate( const QDate &date )
+void DateWrapper::setDate(const QDate &date)
 {
     mDate = date;
 }
 
-QDate DateWrapper::fromVariant( const QVariant &variant )
+QDate DateWrapper::fromVariant(const QVariant &variant)
 {
-    if ( variant.type() == QVariant::Date || variant.type() == QVariant::DateTime ) {
+    if (variant.type() == QVariant::Date || variant.type() == QVariant::DateTime) {
         return variant.toDate();
-    } else if ( variant.type() == QVariant::String ) {
-        return QDate::fromString( variant.toString(), Qt::ISODate );
+    } else if (variant.type() == QVariant::String) {
+        return QDate::fromString(variant.toString(), Qt::ISODate);
     } else {
-        DateWrapper* dw = qobject_cast<DateWrapper*>( variant.value<QObject*>() );
-        if ( dw ) {
+        DateWrapper* dw = qobject_cast<DateWrapper*>(variant.value<QObject*>());
+        if (dw) {
             return dw->date();
         }
     }
     return QDate();
 }
 
-QObject* DateWrapper::addDays( int ndays )
+QObject* DateWrapper::addDays(int ndays)
 {
-    return new DateWrapper( this, mDate.addDays( ndays ) );
+    return new DateWrapper(this, mDate.addDays(ndays));
 }
 
-QObject* DateWrapper::addMonths( int nmonths )
+QObject* DateWrapper::addMonths(int nmonths)
 {
-    return new DateWrapper( this, mDate.addMonths( nmonths ) );
+    return new DateWrapper(this, mDate.addMonths(nmonths));
 }
 
-QObject* DateWrapper::addYears( int nyears )
+QObject* DateWrapper::addYears(int nyears)
 {
-    return new DateWrapper( this, mDate.addYears( nyears ) );
+    return new DateWrapper(this, mDate.addYears(nyears));
 }
 
 int DateWrapper::day() const
@@ -167,9 +169,9 @@ int DateWrapper::daysInYear() const
     return mDate.daysInYear();
 }
 
-int DateWrapper::daysTo( const QVariant d ) const
+int DateWrapper::daysTo(const QVariant d) const
 {
-    return mDate.daysTo( fromVariant( d ) );
+    return mDate.daysTo(fromVariant(d));
 }
 
 bool DateWrapper::isNull() const
@@ -187,9 +189,9 @@ int DateWrapper::month() const
     return mDate.month();
 }
 
-bool DateWrapper::setDate( int year, int month, int day )
+bool DateWrapper::setDate(int year, int month, int day)
 {
-    return mDate.setDate( year, month, day );
+    return mDate.setDate(year, month, day);
 }
 
 int DateWrapper::toJulianDay() const
@@ -197,14 +199,14 @@ int DateWrapper::toJulianDay() const
     return mDate.toJulianDay();
 }
 
-QString DateWrapper::toString( const QString &format ) const
+QString DateWrapper::toString(const QString &format) const
 {
-    return mDate.toString( format );
+    return mDate.toString(format);
 }
 
-QString DateWrapper::toString( int format ) const
+QString DateWrapper::toString(int format) const
 {
-    return mDate.toString( ( Qt::DateFormat )format );
+    return mDate.toString((Qt::DateFormat)format);
 }
 
 int DateWrapper::weekNumber() const
@@ -217,73 +219,73 @@ int DateWrapper::year() const
     return mDate.year();
 }
 
-StaticDateWrapper::StaticDateWrapper( QObject *parent )
-: QObject( parent )
+StaticDateWrapper::StaticDateWrapper(QObject *parent)
+: QObject(parent)
 {
 }
 
 QObject* StaticDateWrapper::currentDate()
 {
-    return new DateWrapper( this, QDate::currentDate() );
+    return new DateWrapper(this, QDate::currentDate());
 }
 
-QObject* StaticDateWrapper::fromJulianDay( int jd )
+QObject* StaticDateWrapper::fromJulianDay(int jd)
 {
-    return new DateWrapper( this, QDate::fromJulianDay( jd ) );
+    return new DateWrapper(this, QDate::fromJulianDay(jd));
 }
 
-QObject* StaticDateWrapper::fromString( const QString &string, int format )
+QObject* StaticDateWrapper::fromString(const QString &string, int format)
 {
-    return new DateWrapper( this, QDate::fromString( string, ( Qt::DateFormat )format ) );
+    return new DateWrapper(this, QDate::fromString(string, (Qt::DateFormat)format));
 }
 
-QObject* StaticDateWrapper::fromString( const QString &string, const QString &format )
+QObject* StaticDateWrapper::fromString(const QString &string, const QString &format)
 {
-    return new DateWrapper( this, QDate::fromString( string, format ) );
+    return new DateWrapper(this, QDate::fromString(string, format));
 }
 
-bool StaticDateWrapper::isLeapYear ( int year )
+bool StaticDateWrapper::isLeapYear (int year)
 {
-    return QDate::isLeapYear( year );
+    return QDate::isLeapYear(year);
 }
 
-bool StaticDateWrapper::isValid ( int year, int month, int day )
+bool StaticDateWrapper::isValid (int year, int month, int day)
 {
-    return QDate::isValid( year, month, day );
+    return QDate::isValid(year, month, day);
 }
 
-QString StaticDateWrapper::longDayName ( int weekday )
+QString StaticDateWrapper::longDayName (int weekday)
 {
-    return QDate::longDayName( weekday );
+    return QDate::longDayName(weekday);
 }
 
-QString StaticDateWrapper::longMonthName ( int month )
+QString StaticDateWrapper::longMonthName (int month)
 {
-    return QDate::longMonthName( month );
+    return QDate::longMonthName(month);
 }
 
-QString StaticDateWrapper::shortDayName ( int weekday )
+QString StaticDateWrapper::shortDayName (int weekday)
 {
-    return QDate::shortDayName( weekday );
+    return QDate::shortDayName(weekday);
 }
 
-QString StaticDateWrapper::shortMonthName ( int month )
+QString StaticDateWrapper::shortMonthName (int month)
 {
-    return QDate::shortMonthName( month );
+    return QDate::shortMonthName(month);
 }
 
-ComicProviderWrapper::ComicProviderWrapper( ComicProviderKross *parent )
-    : QObject( parent ),
-      mAction( 0 ),
-      mProvider( parent ),
-      mKrossImage( 0 ),
-      mPackage( 0 ),
-      mRequests( 0 ),
-      mIdentifierSpecified( false ),
-      mIsLeftToRight( true ),
-      mIsTopToBottom( true )
+ComicProviderWrapper::ComicProviderWrapper(ComicProviderKross *parent)
+    : QObject(parent),
+      mAction(0),
+      mProvider(parent),
+      mKrossImage(0),
+      mPackage(0),
+      mRequests(0),
+      mIdentifierSpecified(false),
+      mIsLeftToRight(true),
+      mIsTopToBottom(true)
 {
-    QTimer::singleShot( 0, this, SLOT(init()) );
+    QTimer::singleShot(0, this, SLOT(init()));
 }
 
 ComicProviderWrapper::~ComicProviderWrapper()
@@ -293,32 +295,40 @@ ComicProviderWrapper::~ComicProviderWrapper()
 
 void ComicProviderWrapper::init()
 {
-    const QString path = KStandardDirs::locate( "data", QLatin1String( "plasma/comics/" ) + mProvider->pluginName() + QLatin1Char( '/' ) );
-    if ( !path.isEmpty() ) {
-        mPackage = new Plasma::Package( path, ComicProviderKross::packageStructure() );
+    const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/comics/") + mProvider->pluginName() + QLatin1Char('/'),QStandardPaths::LocateDirectory);
+    qDebug() << "ComicProviderWrapper::init() package is" << mProvider->pluginName() << " at " <<  path;
 
-        if ( mPackage->isValid() ) {
-            // package->filePath( "mainscript" ) returns empty if it does not exist
-            // We want to test extensions supported by kross with mainscript
-            const QString mainscript = mPackage->path() + mPackage->structure()->contentsPrefix() +
-                                       mPackage->structure()->path( "mainscript" );
+    if (!path.isEmpty()) {
+        mPackage = new Plasma::Package(ComicProviderKross::packageStructure());
+        mPackage->setPath(path);
 
-            QFileInfo info( mainscript );
-            for ( int i = 0; i < extensions().count() && !info.exists(); ++i ) {
-                info.setFile( mainscript + extensions().value( i ) );
+        if (mPackage->isValid()) {
+            // QString mainscript = mPackage->filePath("mainscript")
+            // doesn't work because the mainscript file can be a different Kross script type ending with main.es or main.kjs etc.
+            // Maybe this should be added to Plasma::Package or maybe directly change the packagestructure mainscript definition as "main.es" and avoid all this.
+            // https://techbase.kde.org/Development/Tutorials/Plasma4/ComicPlugin#Package_Structure has main.es defined as mainscript.
+            // Also Package::isValid() fails because the mainscript search fails to find the "main" file from mainscript.
+
+            QString mainscript = mPackage->filePath("scripts") + "/" + "main";
+            QFileInfo info(mainscript);
+            for (int i = 0; i < extensions().count() && !info.exists(); ++i) {
+                    info.setFile(mainscript + extensions().value(i));
+                    mainscript = info.filePath();
+                    qDebug() << "ComicProviderWrapper::init() mainscript found as" << info.filePath();
             }
-            if ( info.exists() ) {
-                mAction = new Kross::Action( parent(), mProvider->pluginName() );
-                if ( mAction ) {
-                    mAction->addObject( this, QLatin1String( "comic" ) );
-                    mAction->addObject( new StaticDateWrapper( this ), QLatin1String( "date" ) );
-                    mAction->setFile( info.filePath() );
+
+            if (info.exists()) {
+                mAction = new Kross::Action(parent(), mProvider->pluginName());
+                if (mAction) {
+                    mAction->addObject(this, QLatin1String("comic"));
+                    mAction->addObject(new StaticDateWrapper(this), QLatin1String("date"));
+                    mAction->setFile(info.filePath());
                     mAction->trigger();
                     mFunctions = mAction->functionNames();
 
                     mIdentifierSpecified = !mProvider->isCurrent();
                     setIdentifierToDefault();
-                    callFunction( QLatin1String( "init" ) );
+                    callFunction(QLatin1String("init"));
                 }
             }
         }
@@ -327,16 +337,16 @@ void ComicProviderWrapper::init()
 
 const QStringList& ComicProviderWrapper::extensions() const
 {
-    if ( mExtensions.isEmpty() ) {
+    if (mExtensions.isEmpty()) {
         Kross::InterpreterInfo* info;
         QStringList list;
         QString wildcards;
 
-        foreach( const QString &interpretername, Kross::Manager::self().interpreters() ) {
-            info = Kross::Manager::self().interpreterInfo( interpretername );
+        foreach(const QString &interpretername, Kross::Manager::self().interpreters()) {
+            info = Kross::Manager::self().interpreterInfo(interpretername);
             wildcards = info->wildcard();
-            wildcards.remove( QLatin1Char( '*' ) );
-            mExtensions << wildcards.split( QLatin1Char( ' ' ) );
+            wildcards.remove(QLatin1Char('*'));
+            mExtensions << wildcards.split(QLatin1Char(' '));
         }
     }
     return mExtensions;
@@ -345,12 +355,12 @@ const QStringList& ComicProviderWrapper::extensions() const
 ComicProvider::IdentifierType ComicProviderWrapper::identifierType() const
 {
     ComicProvider::IdentifierType result = ComicProvider::StringIdentifier;
-    const QString type = mProvider->description().property( QLatin1String( "X-KDE-PlasmaComicProvider-SuffixType" ) ).toString();
-    if ( type == QLatin1String( "Date" ) ) {
+    const QString type = mProvider->description().property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType")).toString();
+    if (type == QLatin1String("Date")) {
         result = ComicProvider::DateIdentifier;
-    } else if ( type == QLatin1String( "Number" ) ) {
+    } else if (type == QLatin1String("Number")) {
         result = ComicProvider::NumberIdentifier;
-    } else if ( type == QLatin1String( "String" ) ) {
+    } else if (type == QLatin1String("String")) {
         result = ComicProvider::StringIdentifier;
     }
     return result;
@@ -358,31 +368,31 @@ ComicProvider::IdentifierType ComicProviderWrapper::identifierType() const
 
 QImage ComicProviderWrapper::comicImage()
 {
-    ImageWrapper* img = qobject_cast<ImageWrapper*>( callFunction( QLatin1String( "image" ) ).value<QObject*>() );
-    if ( functionCalled() && img ) {
+    ImageWrapper* img = qobject_cast<ImageWrapper*>(callFunction(QLatin1String("image")).value<QObject*>());
+    if (functionCalled() && img) {
         return img->image();
     }
-    if ( mKrossImage ) {
+    if (mKrossImage) {
         return mKrossImage->image();
     }
     return QImage();
 }
 
-QVariant ComicProviderWrapper::identifierToScript( const QVariant &identifier )
+QVariant ComicProviderWrapper::identifierToScript(const QVariant &identifier)
 {
-    if ( identifierType() == ComicProvider::DateIdentifier && identifier.type() != QVariant::Bool ) {
-        return QVariant::fromValue( qobject_cast<QObject*>( new DateWrapper( this, identifier.toDate() ) ) );
+    if (identifierType() == ComicProvider::DateIdentifier && identifier.type() != QVariant::Bool) {
+        return QVariant::fromValue(qobject_cast<QObject*>(new DateWrapper(this, identifier.toDate())));
     }
     return identifier;
 }
 
-QVariant ComicProviderWrapper::identifierFromScript( const QVariant &identifier ) const
+QVariant ComicProviderWrapper::identifierFromScript(const QVariant &identifier) const
 {
     QVariant result = identifier;
-    if ( identifier.type() != QVariant::Bool ) {
-        switch ( identifierType() ) {
+    if (identifier.type() != QVariant::Bool) {
+        switch (identifierType()) {
         case DateIdentifier:
-            result = DateWrapper::fromVariant( identifier );
+            result = DateWrapper::fromVariant(identifier);
             break;
         case NumberIdentifier:
             result = identifier.toInt();
@@ -395,32 +405,32 @@ QVariant ComicProviderWrapper::identifierFromScript( const QVariant &identifier 
     return result;
 }
 
-void ComicProviderWrapper::checkIdentifier( QVariant *identifier )
+void ComicProviderWrapper::checkIdentifier(QVariant *identifier)
 {
-    switch ( identifierType() ) {
+    switch (identifierType()) {
     case DateIdentifier:
-        if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
-             ( !mIdentifierSpecified || identifier->toDate() > mLastIdentifier.toDate() ) ) {
+        if (!mLastIdentifier.isNull() && !identifier->isNull() &&
+             (!mIdentifierSpecified || identifier->toDate() > mLastIdentifier.toDate())) {
             *identifier = mLastIdentifier;
         }
-        if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
-             identifier->toDate() < mFirstIdentifier.toDate() ) {
+        if (!mFirstIdentifier.isNull() && !identifier->isNull() &&
+             identifier->toDate() < mFirstIdentifier.toDate()) {
             *identifier = mFirstIdentifier;
         }
         break;
     case NumberIdentifier:
-        if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
-           ( !mIdentifierSpecified || identifier->toInt() > mLastIdentifier.toInt() ) ) {
+        if (!mLastIdentifier.isNull() && !identifier->isNull() &&
+           (!mIdentifierSpecified || identifier->toInt() > mLastIdentifier.toInt())) {
             *identifier = mLastIdentifier;
         }
-        if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
-             identifier->toInt() < mFirstIdentifier.toInt() ) {
+        if (!mFirstIdentifier.isNull() && !identifier->isNull() &&
+             identifier->toInt() < mFirstIdentifier.toInt()) {
             *identifier = mFirstIdentifier;
         }
         break;
     case StringIdentifier:
-        if ( !mLastIdentifier.isNull() && !mLastIdentifier.toString().isEmpty() &&
-             !mIdentifierSpecified ) {
+        if (!mLastIdentifier.isNull() && !mLastIdentifier.toString().isEmpty() &&
+             !mIdentifierSpecified) {
             *identifier = mLastIdentifier;
         }
         break;
@@ -429,7 +439,7 @@ void ComicProviderWrapper::checkIdentifier( QVariant *identifier )
 
 void ComicProviderWrapper::setIdentifierToDefault()
 {
-    switch ( identifierType() ) {
+    switch (identifierType()) {
     case DateIdentifier:
         mIdentifier = mProvider->requestedDate();
         mLastIdentifier = QDate::currentDate();
@@ -454,7 +464,7 @@ bool ComicProviderWrapper::isLeftToRight() const
     return mIsLeftToRight;
 }
 
-void ComicProviderWrapper::setLeftToRight( bool ltr )
+void ComicProviderWrapper::setLeftToRight(bool ltr)
 {
     mIsLeftToRight = ltr;
 }
@@ -464,17 +474,17 @@ bool ComicProviderWrapper::isTopToBottom() const
     return mIsTopToBottom;
 }
 
-void ComicProviderWrapper::setTopToBottom( bool ttb )
+void ComicProviderWrapper::setTopToBottom(bool ttb)
 {
     mIsTopToBottom = ttb;
 }
 
 QString ComicProviderWrapper::textCodec() const
 {
-    return QString::fromAscii( mTextCodec );
+    return QString::fromAscii(mTextCodec);
 }
 
-void ComicProviderWrapper::setTextCodec( const QString &textCodec )
+void ComicProviderWrapper::setTextCodec(const QString &textCodec)
 {
     mTextCodec = textCodec.toAscii();
 }
@@ -484,9 +494,9 @@ QString ComicProviderWrapper::comicAuthor() const
     return mProvider->comicAuthor();
 }
 
-void ComicProviderWrapper::setComicAuthor( const QString &author )
+void ComicProviderWrapper::setComicAuthor(const QString &author)
 {
-    mProvider->setComicAuthor( author );
+    mProvider->setComicAuthor(author);
 }
 
 QString ComicProviderWrapper::websiteUrl() const
@@ -494,7 +504,7 @@ QString ComicProviderWrapper::websiteUrl() const
     return mWebsiteUrl;
 }
 
-void ComicProviderWrapper::setWebsiteUrl( const QString &websiteUrl )
+void ComicProviderWrapper::setWebsiteUrl(const QString &websiteUrl)
 {
     mWebsiteUrl = websiteUrl;
 }
@@ -504,7 +514,7 @@ QString ComicProviderWrapper::shopUrl() const
     return mShopUrl;
 }
 
-void ComicProviderWrapper::setShopUrl( const QString &shopUrl )
+void ComicProviderWrapper::setShopUrl(const QString &shopUrl)
 {
     mShopUrl = shopUrl;
 }
@@ -514,7 +524,7 @@ QString ComicProviderWrapper::title() const
     return mTitle;
 }
 
-void ComicProviderWrapper::setTitle( const QString &title )
+void ComicProviderWrapper::setTitle(const QString &title)
 {
     mTitle = title;
 }
@@ -524,80 +534,80 @@ QString ComicProviderWrapper::additionalText() const
     return mAdditionalText;
 }
 
-void ComicProviderWrapper::setAdditionalText( const QString &additionalText )
+void ComicProviderWrapper::setAdditionalText(const QString &additionalText)
 {
     mAdditionalText = additionalText;
 }
 
 QVariant ComicProviderWrapper::identifier()
 {
-    return identifierToScript( mIdentifier );
+    return identifierToScript(mIdentifier);
 }
 
-void ComicProviderWrapper::setIdentifier( const QVariant &identifier )
+void ComicProviderWrapper::setIdentifier(const QVariant &identifier)
 {
-    mIdentifier = identifierFromScript( identifier );
-    checkIdentifier( &mIdentifier );
+    mIdentifier = identifierFromScript(identifier);
+    checkIdentifier(&mIdentifier);
 }
 
 QVariant ComicProviderWrapper::nextIdentifier()
 {
-    return identifierToScript( mNextIdentifier );
+    return identifierToScript(mNextIdentifier);
 }
 
-void ComicProviderWrapper::setNextIdentifier( const QVariant &nextIdentifier )
+void ComicProviderWrapper::setNextIdentifier(const QVariant &nextIdentifier)
 {
-    mNextIdentifier = identifierFromScript( nextIdentifier );
-    if ( mNextIdentifier == mIdentifier ) {
+    mNextIdentifier = identifierFromScript(nextIdentifier);
+    if (mNextIdentifier == mIdentifier) {
         mNextIdentifier.clear();
-        kWarning() << "Next identifier is the same as the current one, clearing next identifier.";
+        qWarning() << "Next identifier is the same as the current one, clearing next identifier.";
     }
 }
 
 QVariant ComicProviderWrapper::previousIdentifier()
 {
-    return identifierToScript( mPreviousIdentifier );
+    return identifierToScript(mPreviousIdentifier);
 }
 
-void ComicProviderWrapper::setPreviousIdentifier( const QVariant &previousIdentifier )
+void ComicProviderWrapper::setPreviousIdentifier(const QVariant &previousIdentifier)
 {
-    mPreviousIdentifier = identifierFromScript( previousIdentifier );
-    if ( mPreviousIdentifier == mIdentifier ) {
+    mPreviousIdentifier = identifierFromScript(previousIdentifier);
+    if (mPreviousIdentifier == mIdentifier) {
         mPreviousIdentifier.clear();
-        kWarning() << "Previous identifier is the same as the current one, clearing previous identifier.";
+        qWarning() << "Previous identifier is the same as the current one, clearing previous identifier.";
     }
 }
 
 QVariant ComicProviderWrapper::firstIdentifier()
 {
-    return identifierToScript( mFirstIdentifier );
+    return identifierToScript(mFirstIdentifier);
 }
 
-void ComicProviderWrapper::setFirstIdentifier( const QVariant &firstIdentifier )
+void ComicProviderWrapper::setFirstIdentifier(const QVariant &firstIdentifier)
 {
-    switch ( identifierType() ) {
+    switch (identifierType()) {
     case DateIdentifier:
-        mProvider->setFirstStripDate( DateWrapper::fromVariant( firstIdentifier ) );
+        mProvider->setFirstStripDate(DateWrapper::fromVariant(firstIdentifier));
         break;
     case NumberIdentifier:
-        mProvider->setFirstStripNumber( firstIdentifier.toInt() );
+        mProvider->setFirstStripNumber(firstIdentifier.toInt());
         break;
     case StringIdentifier:
         break;
     }
-    mFirstIdentifier = identifierFromScript( firstIdentifier );
-    checkIdentifier( &mIdentifier );
+    mFirstIdentifier = identifierFromScript(firstIdentifier);
+    checkIdentifier(&mIdentifier);
 }
 
 QVariant ComicProviderWrapper::lastIdentifier()
 {
-    return identifierToScript( mLastIdentifier );
+    return identifierToScript(mLastIdentifier);
 }
 
-void ComicProviderWrapper::setLastIdentifier( const QVariant &lastIdentifier )
+void ComicProviderWrapper::setLastIdentifier(const QVariant &lastIdentifier)
 {
-    mLastIdentifier = identifierFromScript( lastIdentifier );
-    checkIdentifier( &mIdentifier );
+    mLastIdentifier = identifierFromScript(lastIdentifier);
+    checkIdentifier(&mIdentifier);
 }
 
 QVariant ComicProviderWrapper::identifierVariant() const
@@ -618,17 +628,17 @@ QVariant ComicProviderWrapper::lastIdentifierVariant() const
 QVariant ComicProviderWrapper::nextIdentifierVariant() const
 {
     //either handle both previousIdentifier and nextIdentifier or handle none
-    if ( mPreviousIdentifier.isNull() && mNextIdentifier.isNull() ) {
-        switch ( identifierType() ) {
+    if (mPreviousIdentifier.isNull() && mNextIdentifier.isNull()) {
+        switch (identifierType()) {
         case DateIdentifier:
-            if ( ( mLastIdentifier.isNull() && mIdentifier.toDate() < QDate::currentDate() ) ||
-                 ( !mLastIdentifier.isNull() && mIdentifier.toDate() < mLastIdentifier.toDate() ) ) {
-                return mIdentifier.toDate().addDays( 1 );
+            if ((mLastIdentifier.isNull() && mIdentifier.toDate() < QDate::currentDate()) ||
+                 (!mLastIdentifier.isNull() && mIdentifier.toDate() < mLastIdentifier.toDate())) {
+                return mIdentifier.toDate().addDays(1);
             } else {
                 return false;
             }
         case NumberIdentifier:
-            if ( mLastIdentifier.isNull() || mIdentifier.toInt() < mLastIdentifier.toInt() ) {
+            if (mLastIdentifier.isNull() || mIdentifier.toInt() < mLastIdentifier.toInt()) {
                 return mIdentifier.toInt() + 1;
             } else {
                 return false;
@@ -637,23 +647,23 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
             break;
         }
     //check if the nextIdentifier is correct
-    } else if ( !mNextIdentifier.isNull() ) {
+    } else if (!mNextIdentifier.isNull()) {
         //no nextIdentifier if mIdentifier == mLastIdentifier or if no identifier has been specified
-        switch ( identifierType() ) {
+        switch (identifierType()) {
         case DateIdentifier:
-            if ( ( !mLastIdentifier.isNull() && ( mIdentifier.toDate() == mLastIdentifier.toDate() ) ) ||
-                 !mIdentifierSpecified ) {
+            if ((!mLastIdentifier.isNull() && (mIdentifier.toDate() == mLastIdentifier.toDate())) ||
+                 !mIdentifierSpecified) {
                 return false;
             }
             break;
         case NumberIdentifier:
-            if ( ( !mLastIdentifier.isNull() && ( mIdentifier.toInt() == mLastIdentifier.toInt() ) ) ||
-                 !mIdentifierSpecified ) {
+            if ((!mLastIdentifier.isNull() && (mIdentifier.toInt() == mLastIdentifier.toInt())) ||
+                 !mIdentifierSpecified) {
                 return false;
             }
             break;
         case StringIdentifier:
-            if ( !mIdentifierSpecified ) {
+            if (!mIdentifierSpecified) {
                 return false;
             }
             break;
@@ -665,17 +675,17 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
 QVariant ComicProviderWrapper::previousIdentifierVariant() const
 {
     //either handle both previousIdentifier and nextIdentifier or handle none
-    if ( mPreviousIdentifier.isNull() && mNextIdentifier.isNull() ) {
-        switch ( identifierType() ) {
+    if (mPreviousIdentifier.isNull() && mNextIdentifier.isNull()) {
+        switch (identifierType()) {
         case DateIdentifier:
-            if ( mFirstIdentifier.isNull() || mIdentifier.toDate() > mFirstIdentifier.toDate() ) {
-                return mIdentifier.toDate().addDays( -1 );
+            if (mFirstIdentifier.isNull() || mIdentifier.toDate() > mFirstIdentifier.toDate()) {
+                return mIdentifier.toDate().addDays(-1);
             } else {
                 return false;
             }
         case NumberIdentifier:
-            if ( ( mFirstIdentifier.isNull() && mIdentifier.toInt() > 1 ) ||
-                 ( !mFirstIdentifier.isNull() && mIdentifier.toInt() > mFirstIdentifier.toInt() ) ) {
+            if ((mFirstIdentifier.isNull() && mIdentifier.toInt() > 1) ||
+                 (!mFirstIdentifier.isNull() && mIdentifier.toInt() > mFirstIdentifier.toInt())) {
                 return mIdentifier.toInt() - 1;
             } else {
                 return false;
@@ -683,16 +693,16 @@ QVariant ComicProviderWrapper::previousIdentifierVariant() const
         case StringIdentifier:
             break;
         }
-    } else if ( !mPreviousIdentifier.isNull() ) {
+    } else if (!mPreviousIdentifier.isNull()) {
         //no previousIdentifier if mIdentifier == mFirstIdentifier
-        switch ( identifierType() ) {
+        switch (identifierType()) {
         case DateIdentifier:
-            if ( !mFirstIdentifier.isNull() && ( mIdentifier.toDate() == mFirstIdentifier.toDate() ) ) {
+            if (!mFirstIdentifier.isNull() && (mIdentifier.toDate() == mFirstIdentifier.toDate())) {
                 return false;
             }
             break;
         case NumberIdentifier:
-            if ( !mFirstIdentifier.isNull() && ( mIdentifier.toInt() == mFirstIdentifier.toInt() ) ) {
+            if (!mFirstIdentifier.isNull() && (mIdentifier.toInt() == mFirstIdentifier.toInt())) {
                 return false;
             }
             break;
@@ -703,87 +713,87 @@ QVariant ComicProviderWrapper::previousIdentifierVariant() const
     return mPreviousIdentifier;
 }
 
-void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
+void ComicProviderWrapper::pageRetrieved(int id, const QByteArray &data)
 {
     --mRequests;
-    if ( id == Image ) {
-        mKrossImage = new ImageWrapper( this, data );
-        callFunction( QLatin1String( "pageRetrieved" ), QVariantList() << id <<
-                      qVariantFromValue( qobject_cast<QObject*>( mKrossImage ) ) );
-        if ( mRequests < 1 ) { // Don't finish if we still have pageRequests
+    if (id == Image) {
+        mKrossImage = new ImageWrapper(this, data);
+        callFunction(QLatin1String("pageRetrieved"), QVariantList() << id <<
+                      qVariantFromValue(qobject_cast<QObject*>(mKrossImage)));
+        if (mRequests < 1) { // Don't finish if we still have pageRequests
             finished();
         }
     } else {
         QTextCodec *codec = 0;
-        if ( !mTextCodec.isEmpty() ) {
-            codec = QTextCodec::codecForName( mTextCodec );
+        if (!mTextCodec.isEmpty()) {
+            codec = QTextCodec::codecForName(mTextCodec);
         }
-        if ( !codec ) {
-            codec = QTextCodec::codecForHtml( data );
+        if (!codec) {
+            codec = QTextCodec::codecForHtml(data);
         }
-        QString html = codec->toUnicode( data );
+        QString html = codec->toUnicode(data);
 
-        callFunction( QLatin1String( "pageRetrieved" ), QVariantList() << id << html );
+        callFunction(QLatin1String("pageRetrieved"), QVariantList() << id << html);
     }
 }
 
-void ComicProviderWrapper::pageError( int id, const QString &message )
+void ComicProviderWrapper::pageError(int id, const QString &message)
 {
     --mRequests;
-    callFunction( QLatin1String( "pageError" ), QVariantList() << id << message );
-    if ( !functionCalled() ) {
-        emit mProvider->error( mProvider );
+    callFunction(QLatin1String("pageError"), QVariantList() << id << message);
+    if (!functionCalled()) {
+        emit mProvider->error(mProvider);
     }
 }
 
-void ComicProviderWrapper::redirected(int id, const KUrl &newUrl)
+void ComicProviderWrapper::redirected(int id, const QUrl &newUrl)
 {
     --mRequests;
-    callFunction( QLatin1String( "redirected" ), QVariantList() << id << newUrl );
-    if ( mRequests < 1 ) { //Don't finish while there are still requests
+    callFunction(QLatin1String("redirected"), QVariantList() << id << newUrl);
+    if (mRequests < 1) { //Don't finish while there are still requests
         finished();
     }
 }
 
 void ComicProviderWrapper::finished() const
 {
-    kDebug() << QString( QLatin1String( "Author" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << comicAuthor();
-    kDebug() << QString( QLatin1String( "Website URL" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mWebsiteUrl;
-    kDebug() << QString( QLatin1String( "Shop URL" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mShopUrl;
-    kDebug() << QString( QLatin1String( "Title" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mTitle;
-    kDebug() << QString( QLatin1String( "Additional Text" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mAdditionalText;
-    kDebug() << QString( QLatin1String( "Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mIdentifier;
-    kDebug() << QString( QLatin1String( "First Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mFirstIdentifier;
-    kDebug() << QString( QLatin1String( "Last Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mLastIdentifier;
-    kDebug() << QString( QLatin1String( "Next Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mNextIdentifier;
-    kDebug() << QString( QLatin1String( "Previous Identifier" ) ).leftJustified( 22, QLatin1Char( '.' ) ) << mPreviousIdentifier;
-    emit mProvider->finished( mProvider );
+    qDebug() << QString(QLatin1String("Author")).leftJustified(22, QLatin1Char('.')) << comicAuthor();
+    qDebug() << QString(QLatin1String("Website URL")).leftJustified(22, QLatin1Char('.')) << mWebsiteUrl;
+    qDebug() << QString(QLatin1String("Shop URL")).leftJustified(22, QLatin1Char('.')) << mShopUrl;
+    qDebug() << QString(QLatin1String("Title")).leftJustified(22, QLatin1Char('.')) << mTitle;
+    qDebug() << QString(QLatin1String("Additional Text")).leftJustified(22, QLatin1Char('.')) << mAdditionalText;
+    qDebug() << QString(QLatin1String("Identifier")).leftJustified(22, QLatin1Char('.')) << mIdentifier;
+    qDebug() << QString(QLatin1String("First Identifier")).leftJustified(22, QLatin1Char('.')) << mFirstIdentifier;
+    qDebug() << QString(QLatin1String("Last Identifier")).leftJustified(22, QLatin1Char('.')) << mLastIdentifier;
+    qDebug() << QString(QLatin1String("Next Identifier")).leftJustified(22, QLatin1Char('.')) << mNextIdentifier;
+    qDebug() << QString(QLatin1String("Previous Identifier")).leftJustified(22, QLatin1Char('.')) << mPreviousIdentifier;
+    emit mProvider->finished(mProvider);
 }
 
 void ComicProviderWrapper::error() const
 {
-    emit mProvider->error( mProvider );
+    emit mProvider->error(mProvider);
 }
 
-void ComicProviderWrapper::requestPage( const QString &url, int id, const QVariantMap &infos )
+void ComicProviderWrapper::requestPage(const QString &url, int id, const QVariantMap &infos)
 {
     QMap<QString, QString> map;
 
-    foreach ( const QString& key, infos.keys() ) {
+    foreach (const QString& key, infos.keys()) {
         map[key] = infos[key].toString();
     }
-    mProvider->requestPage( KUrl( url ), id, map );
+    mProvider->requestPage(QUrl(url), id, map);
     ++mRequests;
 }
 
-void ComicProviderWrapper::requestRedirectedUrl( const QString &url, int id, const QVariantMap &infos )
+void ComicProviderWrapper::requestRedirectedUrl(const QString &url, int id, const QVariantMap &infos)
 {
     QMap<QString, QString> map;
 
-    foreach ( const QString& key, infos.keys() ) {
+    foreach (const QString& key, infos.keys()) {
         map[key] = infos[key].toString();
     }
-    mProvider->requestRedirectedUrl( KUrl( url ), id, map );
+    mProvider->requestRedirectedUrl(QUrl(url), id, map);
     ++mRequests;
 }
 
@@ -793,34 +803,34 @@ bool ComicProviderWrapper::functionCalled() const
     return mFuncFound;
 }
 
-QVariant ComicProviderWrapper::callFunction( const QString &name, const QVariantList &args )
+QVariant ComicProviderWrapper::callFunction(const QString &name, const QVariantList &args)
 {
-    if ( mAction ) {
-        mFuncFound = mFunctions.contains( name );
-        if ( mFuncFound ) {
-            return mAction->callFunction( name, args );
+    if (mAction) {
+        mFuncFound = mFunctions.contains(name);
+        if (mFuncFound) {
+            return mAction->callFunction(name, args);
         }
     }
     return QVariant();
 }
 
-void ComicProviderWrapper::combine( const QVariant &image, PositionType position )
+void ComicProviderWrapper::combine(const QVariant &image, PositionType position)
 {
     if (!mKrossImage) {
         return;
     }
 
     QImage header;
-    if ( image.type() == QVariant::String ) {
-        const QString path( mPackage->filePath( "images", image.toString() ) );
-        if ( QFile::exists( path ) ) {
-            header = QImage( path );
+    if (image.type() == QVariant::String) {
+        const QString path(mPackage->filePath("images", image.toString()));
+        if (QFile::exists(path)) {
+            header = QImage(path);
         } else {
             return;
         }
     } else {
-        ImageWrapper* img = qobject_cast<ImageWrapper*>( image.value<QObject*>() );
-        if ( img ) {
+        ImageWrapper* img = qobject_cast<ImageWrapper*>(image.value<QObject*>());
+        if (img) {
             header = img->image();
         } else {
             return;
@@ -830,54 +840,54 @@ void ComicProviderWrapper::combine( const QVariant &image, PositionType position
     int height = 0;
     int width = 0;
 
-    switch ( position ) {
+    switch (position) {
         case Top:
         case Bottom:
             height = header.height() + comic.height();
-            width = ( header.width() >= comic.width() ) ? header.width() : comic.width();
+            width = (header.width() >= comic.width()) ? header.width() : comic.width();
             break;
         case Left:
         case Right:
-            height = ( header.height() >= comic.height() ) ? header.height() : comic.height();
+            height = (header.height() >= comic.height()) ? header.height() : comic.height();
             width = header.width() + comic.width();
             break;
     }
 
-    QImage img = QImage( QSize( width, height ), QImage::Format_RGB32 );
-    img.fill( header.pixel( QPoint( 0, 0 ) ) );
+    QImage img = QImage(QSize(width, height), QImage::Format_RGB32);
+    img.fill(header.pixel(QPoint(0, 0)));
 
-    QPainter painter( &img );
+    QPainter painter(&img);
 
     // center and draw the Images
     QPoint headerPos;
     QPoint comicPos;
 
-    switch ( position ) {
+    switch (position) {
         case Top:
-            headerPos = QPoint( ( ( width - header.width() ) / 2 ), 0 );
-            comicPos = QPoint( ( ( width - comic.width() ) / 2 ), header.height() );
+            headerPos = QPoint(((width - header.width()) / 2), 0);
+            comicPos = QPoint(((width - comic.width()) / 2), header.height());
             break;
         case Bottom:
-            headerPos = QPoint( ( ( width - header.width() ) / 2 ), comic.height() );
-            comicPos = QPoint( ( ( width - comic.width() ) / 2 ), 0 );
+            headerPos = QPoint(((width - header.width()) / 2), comic.height());
+            comicPos = QPoint(((width - comic.width()) / 2), 0);
             break;
         case Left:
-            headerPos = QPoint( 0, ( ( height - header.height() ) / 2 ) );
-            comicPos = QPoint( header.width(), ( ( height - comic.height() ) / 2 ) );
+            headerPos = QPoint(0, ((height - header.height()) / 2));
+            comicPos = QPoint(header.width(), ((height - comic.height()) / 2));
             break;
         case Right:
-            headerPos = QPoint( comic.width(), ( ( height - header.height() ) / 2 ) );
-            comicPos = QPoint( 0, ( ( height - comic.height() ) / 2 ) );
+            headerPos = QPoint(comic.width(), ((height - header.height()) / 2));
+            comicPos = QPoint(0, ((height - comic.height()) / 2));
             break;
     }
-    painter.drawImage( headerPos, header );
-    painter.drawImage( comicPos, comic );
-    mKrossImage->setImage( img );
+    painter.drawImage(headerPos, header);
+    painter.drawImage(comicPos, comic);
+    mKrossImage->setImage(img);
 }
 
 QObject* ComicProviderWrapper::image()
 {
-    return qobject_cast<QObject*>( mKrossImage );
+    return qobject_cast<QObject*>(mKrossImage);
 }
 
 #include "comicproviderwrapper.moc"

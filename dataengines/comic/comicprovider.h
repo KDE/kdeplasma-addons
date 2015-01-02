@@ -27,11 +27,7 @@
 #include "plasma_comic_export.h"
 
 class QImage;
-class KUrl;
-
-#define COMICPROVIDER_EXPORT_PLUGIN( classname, componentName, catalogName ) \
-    K_PLUGIN_FACTORY( classname ## Factory, registerPlugin< classname >(); ) \
-    K_EXPORT_PLUGIN( classname ## Factory( componentName, catalogName ) )
+class QUrl;
 
 /**
  * This class is an interface for comic providers.
@@ -63,7 +59,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * @param parent The parent object.
          * @param args Arguments passed by the plugin loader.
          */
-        ComicProvider( QObject *parent, const QVariantList &args );
+        ComicProvider(QObject *parent, const QVariantList &args);
 
         /**
          * Destroys the comic provider.
@@ -85,7 +81,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         /**
          * Returns the url of the website where the comic of that particular date resides.
          */
-        virtual KUrl websiteUrl() const = 0;
+        virtual QUrl websiteUrl() const = 0;
 
         /**
          * Returns the direct url to the comic, if the comic strip is a combination of multiple
@@ -93,12 +89,12 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * @note the image url is automatically set by requestPage with the ComicProvider::Image id
          * @see requestPage
          */
-        virtual KUrl imageUrl() const;
+        virtual QUrl imageUrl() const;
 
         /**
          * Returns the url of the website where the comic has a shop.
          */
-        virtual KUrl shopUrl() const;
+        virtual QUrl shopUrl() const;
 
         /**
          * Returns the requested image.
@@ -172,7 +168,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         /**
          * Set whether this request is for the current comic (only used internally).
          */
-        void setIsCurrent( bool value );
+        void setIsCurrent(bool value);
 
         /**
          * Returns whether this request is for the current comic (only used internally).
@@ -186,14 +182,14 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          *
          * @param provider The provider which emitted the signal.
          */
-        void finished( ComicProvider *provider );
+        void finished(ComicProvider *provider);
 
         /**
          * This signal is emitted whenever an error has occurred.
          *
          * @param provider The provider which emitted the signal.
          */
-        void error( ComicProvider *provider );
+        void error(ComicProvider *provider);
 
     protected:
         /**
@@ -226,22 +222,22 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         /**
          * Sets the date of the first available comic strip.
          */
-        void setFirstStripDate( const QDate &date );
+        void setFirstStripDate(const QDate &date);
 
         /**
-         * Returns the number of the first available comic strip (default: 1 ).
+         * Returns the number of the first available comic strip (default: 1).
          */
         int firstStripNumber() const;
 
         /**
          * Sets the number of the first available comic strip.
          */
-        void setFirstStripNumber( int number );
+        void setFirstStripNumber(int number);
 
         /**
          * Sets the name of the comic author.
          */
-        void setComicAuthor( const QString &author );
+        void setComicAuthor(const QString &author);
 
         typedef QMap<QString, QString> MetaInfos;
 
@@ -254,7 +250,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * @param id A unique id that identifies this request.
          * @param infos A list of meta information passed to http.
          */
-        void requestPage( const KUrl &url, int id, const MetaInfos &infos = MetaInfos() );
+        void requestPage(const QUrl &url, int id, const MetaInfos &infos = MetaInfos());
 
         /**
          * This method can be used to find the place url points to, when finished
@@ -263,7 +259,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * @param id A unique id that identifies this request.
          * @param infos A list of meta information passed to KIO.
          */
-        void requestRedirectedUrl( const KUrl &url, int id, const MetaInfos &infos = MetaInfos() );
+        void requestRedirectedUrl(const QUrl &url, int id, const MetaInfos &infos = MetaInfos());
 
         /**
          * This method is called whenever a request done by requestPage() was successful.
@@ -271,7 +267,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * @param id The unique identifier of that request.
          * @param data The data of the fetched object.
          */
-        virtual void pageRetrieved( int id, const QByteArray &data );
+        virtual void pageRetrieved(int id, const QByteArray &data);
 
         /**
          * This method is called whenever a request done by requestPage() has failed.
@@ -279,25 +275,25 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * @param id The unique identifier of that request.
          * @param message The error message.
          */
-        virtual void pageError( int id, const QString &message );
+        virtual void pageError(int id, const QString &message);
 
         /**
          * This method is called whenever a request by requestRedirectedUrl() was done
          * @param id The unique identifier of that request.
          * @param newUrl The redirected Url
          */
-        virtual void redirected( int id, const KUrl &newUrl );
+        virtual void redirected(int id, const QUrl &newUrl);
 
     private:
         class Private;
         Private* const d;
 
-        Q_PRIVATE_SLOT( d, void jobDone( KJob* ) )
-        Q_PRIVATE_SLOT( d, void slotRedirection( KIO::Job*, KUrl ) )
-        Q_PRIVATE_SLOT( d, void slotRedirection( KIO::Job*, KUrl, KUrl ) )
-        Q_PRIVATE_SLOT( d, void slotRedirectionDone( KJob* ) )
-        Q_PRIVATE_SLOT( d, void slotTimeout() )
-        Q_PRIVATE_SLOT( d, void slotFinished() )
+        Q_PRIVATE_SLOT(d, void jobDone(KJob*))
+        Q_PRIVATE_SLOT(d, void slotRedirection(KIO::Job*, QUrl))
+        Q_PRIVATE_SLOT(d, void slotRedirection(KIO::Job*, QUrl, QUrl))
+        Q_PRIVATE_SLOT(d, void slotRedirectionDone(KJob*))
+        Q_PRIVATE_SLOT(d, void slotTimeout())
+        Q_PRIVATE_SLOT(d, void slotFinished())
 };
 
 #endif

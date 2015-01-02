@@ -18,25 +18,32 @@
 
 #include "comic_package.h"
 
-#include "plasma/applet.h"
-#include "plasma/package.h"
+#include <Plasma/Applet>
+#include <Plasma/Package>
+#include <KLocalizedString>
+#include <QDebug>
 
-ComicPackage::ComicPackage( QObject *parent, const QVariantList& args )
-    : Plasma::PackageStructure( parent, QLatin1String( "Plasma/Comic" ) )
+ComicPackage::ComicPackage(QObject *parent, const QVariantList& args)
+    : Plasma::PackageStructure(parent, args)
 {
-    Q_UNUSED( args )
-    addDirectoryDefinition( "images", QLatin1String( "images" ), i18n( "Images" ) );
-    QStringList mimetypes;
-    mimetypes << QLatin1String( "image/svg+xml" ) << QLatin1String( "image/png" ) << QLatin1String( "image/jpeg" );
-    setMimetypes( "images", mimetypes );
-
-    addDirectoryDefinition( "scripts", QLatin1String( "code" ), i18n( "Executable Scripts" ) );
-    mimetypes.clear();
-    mimetypes << QLatin1String( "text/*" );
-    setMimetypes( "scripts", mimetypes );
-
-    addFileDefinition( "mainscript", QLatin1String( "code/main" ), i18n( "Main Script File" ) );
-
-    setDefaultPackageRoot( QLatin1String( "plasma/comics/" ) );
-    setServicePrefix( QLatin1String( "plasma-comic-" ) );
 }
+
+void ComicPackage::initPackage(Plasma::Package *package)
+{
+    QStringList mimetypes;
+    package->addDirectoryDefinition("images", QLatin1String("images"), i18n("Images"));
+    mimetypes << QLatin1String("image/svg+xml") << QLatin1String("image/png") << QLatin1String("image/jpeg");
+    package->setMimeTypes("images", mimetypes);
+
+    mimetypes.clear();
+    package->addDirectoryDefinition("scripts", QLatin1String("code"), i18n("Executable Scripts"));
+    mimetypes << QLatin1String("text/*");
+    package->setMimeTypes("scripts", mimetypes);
+
+    package->addFileDefinition("mainscript", QLatin1String("code/main"), i18n("Main Script File"));
+    //package->setRequired("mainscript", true); Package::isValid() fails with this because of Kross and different file extensions
+    package->setDefaultPackageRoot("plasma/comics/");
+    package->setServicePrefix(QLatin1String("plasma-comic-"));
+}
+
+#include "comic_package.moc"

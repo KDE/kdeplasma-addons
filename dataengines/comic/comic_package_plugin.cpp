@@ -18,4 +18,6 @@
 
 #include "comic_package.h"
 
-K_EXPORT_PLASMA_PACKAGESTRUCTURE(comic, ComicPackage)
+K_EXPORT_PLASMA_PACKAGE_WITH_JSON(ComicPackage, "plasma-packagestructure-comic.json")
+
+#include "comic_package_plugin.moc"

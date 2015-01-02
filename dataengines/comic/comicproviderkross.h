@@ -23,8 +23,8 @@
 #include "comicproviderwrapper.h"
 
 #include <QtGui/QImage>
-#include <KUrl>
-#include "Plasma/PackageStructure"
+#include <QUrl>
+#include <Plasma/PackageStructure>
 
 class ComicProviderKross : public ComicProvider
 {
@@ -32,16 +32,16 @@ class ComicProviderKross : public ComicProvider
         Q_OBJECT
 
     public:
-        ComicProviderKross( QObject *parent, const QVariantList &args );
+        ComicProviderKross(QObject *parent, const QVariantList &args);
         virtual ~ComicProviderKross();
 
-        static Plasma::PackageStructure::Ptr packageStructure();
+        static Plasma::PackageStructure *packageStructure();
 
         virtual bool isLeftToRight() const;
         virtual bool isTopToBottom() const;
         virtual IdentifierType identifierType() const;
-        virtual KUrl websiteUrl() const;
-        virtual KUrl shopUrl() const;
+        virtual QUrl websiteUrl() const;
+        virtual QUrl shopUrl() const;
         virtual QImage image() const;
         virtual QString identifier() const;
         virtual QString nextIdentifier() const;
@@ -51,14 +51,14 @@ class ComicProviderKross : public ComicProvider
         virtual QString additionalText() const;
 
     protected:
-        virtual void pageRetrieved( int id, const QByteArray &data );
-        virtual void pageError( int id, const QString &message );
-        virtual void redirected( int id, const KUrl &newUrl );
-        QString identifierToString( const QVariant &identifier ) const;
+        virtual void pageRetrieved(int id, const QByteArray &data);
+        virtual void pageError(int id, const QString &message);
+        virtual void redirected(int id, const QUrl &newUrl);
+        QString identifierToString(const QVariant &identifier) const;
 
     private:
         mutable ComicProviderWrapper m_wrapper;
-        static Plasma::PackageStructure::Ptr m_packageStructure;
+        static Plasma::PackageStructure *m_packageStructure;
 };
 
 #endif

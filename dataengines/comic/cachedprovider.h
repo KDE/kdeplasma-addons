@@ -37,7 +37,7 @@ class CachedProvider : public ComicProvider
          * @param identifier The identifier of the cached comic.
          * @param parent The parent object.
          */
-        explicit CachedProvider( QObject *parent, const QVariantList &args = QVariantList() );
+        explicit CachedProvider(QObject *parent, const QVariantList &args = QVariantList());
 
         /**
          * Destroys the cached provider.
@@ -123,7 +123,7 @@ class CachedProvider : public ComicProvider
         /**
          * Returns whether a comic with the given @p identifier is cached.
          */
-        static bool isCached( const QString &identifier );
+        static bool isCached(const QString &identifier);
 
         /**
          * Map of keys and values to store in the config file for an individual identifier
@@ -133,19 +133,19 @@ class CachedProvider : public ComicProvider
         /**
          * Stores the given @p comic with the given @p identifier in the cache.
          */
-        static bool storeInCache( const QString &identifier, const QImage &comic, const Settings &info = Settings() );
+        static bool storeInCache(const QString &identifier, const QImage &comic, const Settings &info = Settings());
 
         /**
          * Returns the website of the comic.
          */
-        virtual KUrl websiteUrl() const;
+        virtual QUrl websiteUrl() const;
 
-        virtual KUrl imageUrl() const;
+        virtual QUrl imageUrl() const;
 
         /**
          * Returns the shop website of the comic.
          */
-        virtual KUrl shopUrl() const;
+        virtual QUrl shopUrl() const;
 
         /**
           * Returns the maximum number of cached strips per comic, -1 means that there is no limit
@@ -156,7 +156,7 @@ class CachedProvider : public ComicProvider
         /**
           * Sets the maximum number of cached strips per comic, -1 means that there is no limit
           */
-        static void setMaxComicLimit( int limit );
+        static void setMaxComicLimit(int limit);
 
     private Q_SLOTS:
         void triggerFinished();

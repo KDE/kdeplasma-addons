@@ -19,8 +19,8 @@
 #ifndef COMIC_DATAENGINE_H
 #define COMIC_DATAENGINE_H
 
-#include "plasma/dataengine.h"
-#include <solid/networking.h>
+#include <Plasma/DataEngine>
+#include <Solid/Networking>
 
 class ComicProvider;
 
@@ -42,32 +42,30 @@ class ComicEngine : public Plasma::DataEngine
     Q_OBJECT
 
     public:
-        ComicEngine( QObject* parent, const QVariantList& args );
+        ComicEngine(QObject* parent, const QVariantList& args);
         ~ComicEngine();
 
     protected:
         void init();
-        bool sourceRequestEvent( const QString &identifier );
+        bool sourceRequestEvent(const QString &identifier);
         void updateFactories();
 
     protected Q_SLOTS:
-        bool updateSourceEvent( const QString &identifier );
+        bool updateSourceEvent(const QString &identifier);
 
     private Q_SLOTS:
-        void finished( ComicProvider* );
-        void error( ComicProvider* );
-        void networkStatusChanged( Solid::Networking::Status );
-        void sycocaUpdated( const QStringList &changedResources );
+        void finished(ComicProvider*);
+        void error(ComicProvider*);
+        void networkStatusChanged(Solid::Networking::Status);
+        void sycocaUpdated(const QStringList &changedResources);
 
     private:
         bool mEmptySuffix;
-        void setComicData( ComicProvider *provider );
-        QString lastCachedIdentifier( const QString &identifier ) const;
+        void setComicData(ComicProvider *provider);
+        QString lastCachedIdentifier(const QString &identifier) const;
         QString mIdentifierError;
         QMap<QString, KService::Ptr> mFactories;
         QHash<QString, ComicProvider*> m_jobs;
 };
-
-K_EXPORT_PLASMA_DATAENGINE( comic, ComicEngine )
 
 #endif
