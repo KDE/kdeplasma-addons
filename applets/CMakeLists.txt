@@ -9,6 +9,7 @@ if(NOT WIN32)
 endif(NOT WIN32)
 
 add_subdirectory(kimpanel)
+add_subdirectory(showdesktop)
 
 plasma_install_package(webbrowser org.kde.plasma.webbrowser)
 

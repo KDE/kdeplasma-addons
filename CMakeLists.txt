@@ -25,6 +25,10 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Quick Qml Widg
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Config ConfigWidgets CoreAddons I18n KIO KCMUtils Plasma Runner Service UnitConversion KDELibs4Support)
 
+find_package(X11)
+find_package(Qt5X11Extras ${REQUIRED_QT_VERSION} CONFIG)
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 #########################################################################
 
 ################# list the subdirectories #################
@@ -40,5 +44,7 @@ add_subdirectory(wallpapers)
 
 add_subdirectory(windowswitchers)
 add_subdirectory(desktopswitchers)
+
+configure_file(config-kdeplasma-addons.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdeplasma-addons.h)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

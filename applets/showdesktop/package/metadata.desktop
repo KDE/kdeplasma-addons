@@ -111,17 +111,26 @@ Comment[wa]=Mostrer l' sicribanne Plasma
 Comment[x-test]=xxShow the Plasma desktopxx
 Comment[zh_CN]=显示 Plasma 桌面
 Comment[zh_TW]=顯示 Plasma 桌面
+
+
 Type=Service
 Icon=user-desktop
 ServiceTypes=Plasma/Applet
 
-X-KDE-Library=plasma_applet_showdesktop
 X-KDE-PluginInfo-Author=Petri Damstén
 X-KDE-PluginInfo-Email=damu@iki.fi
-X-KDE-PluginInfo-Name=showdesktop
+X-KDE-PluginInfo-Name=org.kde.plasma.showdesktop
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Windows and Tasks
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-API=declarativeappletscript
+
+
+X-Plasma-DropMimeTypes=text/plain,text/richtext
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-Requires-FileDialog=Unused
+X-Plasma-Requires-LaunchApp=Unused

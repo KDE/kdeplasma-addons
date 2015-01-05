@@ -1,14 +1,26 @@
-project(plasma-showdesktop)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} )
+plasma_install_package(package org.kde.plasma.showdesktop)
+
+add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.showdesktop")
 
 set(showdesktop_SRCS
-    showdesktop.cpp
+    plugin/showdesktop.cpp
+    plugin/showdesktopplugin.cpp
 )
 
-kde4_add_plugin(plasma_applet_showdesktop ${showdesktop_SRCS})
-target_link_libraries(plasma_applet_showdesktop
-     ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS} )
+install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/showdesktop)
+add_library(showdesktopplugin SHARED ${showdesktop_SRCS})
 
-install(TARGETS plasma_applet_showdesktop DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-applet-showdesktop.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
+target_link_libraries(showdesktopplugin
+     Qt5::Core
+     Qt5::Qml
+     Qt5::Quick
+     KF5::KDELibs4Support
+    )
+
+if (Qt5X11Extras_FOUND)
+    target_link_libraries(showdesktopplugin
+         Qt5::X11Extras
+        )
+endif()
+
+install(TARGETS showdesktopplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/showdesktop)
