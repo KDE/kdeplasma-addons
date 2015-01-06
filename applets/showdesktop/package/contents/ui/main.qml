@@ -41,24 +41,24 @@ Item {
     PlasmaCore.IconItem {
         id:icon
         source: plasmoid.configuration.icon
-        active: root.containsMouse
+        active: mouseArea.containsMouse
         anchors.fill: parent
     }
     ShowDesktop {
         id: showdesktop
     }
 
-    MouseArea {
-        id: mouseArea
+    PlasmaCore.ToolTipArea {
         anchors.fill: parent
-        hoverEnabled: true
-        onClicked: showdesktop.showDesktop();
+        mainText : i18n("Show Desktop")
+        subText : i18n("Show the Plasma desktop")
+        icon : plasmoid.configuration.icon
 
-        PlasmaCore.ToolTipArea {
+        MouseArea {
+            id: mouseArea
             anchors.fill: parent
-            mainText : i18n("Show Desktop")
-            subText : i18n("Show the Plasma desktop")
-            icon : plasmoid.configuration.icon
+            hoverEnabled: true
+            onClicked: showdesktop.showDesktop();
         }
     }
 }
