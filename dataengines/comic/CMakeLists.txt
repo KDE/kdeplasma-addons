@@ -17,7 +17,7 @@ target_link_libraries(plasma_engine_comic plasmacomicprovidercore
     KF5::I18n
 )
 
-kservice_desktop_to_json(plasma_engine_comic plasma-dataengine-comic.desktop)
+kcoreaddons_desktop_to_json(plasma_engine_comic plasma-dataengine-comic.desktop)
 
 install(TARGETS plasma_engine_comic DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/dataengine)
 
@@ -37,7 +37,7 @@ target_link_libraries( plasma_packagestructure_comic
     KF5::KrossUi
     KF5::I18n
 )
-kservice_desktop_to_json(plasma_packagestructure_comic plasma-packagestructure-comic.desktop)
+kcoreaddons_desktop_to_json(plasma_packagestructure_comic plasma-packagestructure-comic.desktop)
 install(TARGETS plasma_packagestructure_comic DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/packagestructure)
 
 ########### plugin core library ############
@@ -61,7 +61,7 @@ target_link_libraries(plasmacomicprovidercore
 #)
 set_target_properties(plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1)
 
-kservice_desktop_to_json(plasmacomicprovidercore plasma_comicprovider.desktop)
+kcoreaddons_desktop_to_json(plasmacomicprovidercore plasma_comicprovider.desktop)
 
 install( TARGETS plasmacomicprovidercore ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
@@ -86,6 +86,6 @@ target_link_libraries(plasma_comic_krossprovider plasmacomicprovidercore
     KF5::I18n
 )
 
-kservice_desktop_to_json(plasma_comic_krossprovider plasma-packagestructure-comic.desktop)
+kcoreaddons_desktop_to_json(plasma_comic_krossprovider plasma-packagestructure-comic.desktop)
 
 install( TARGETS plasma_comic_krossprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
