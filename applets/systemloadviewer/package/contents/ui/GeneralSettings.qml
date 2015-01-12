@@ -38,6 +38,7 @@ Item {
         switch (cfg_monitorType) {
             default: case 0: monitorTypeGroup.current = barMonitorRadio; break;
             case 1: monitorTypeGroup.current = circularMonitorRadio; break;
+            case 2: monitorTypeGroup.current = compactBarMonitorRadio; break;
         }
     }
 
@@ -75,7 +76,7 @@ Item {
         Label {
             text: i18n("Monitor type:")
             Layout.alignment: Qt.AlignRight
-            Layout.rowSpan: 2
+            Layout.rowSpan: 3
             anchors.verticalCenter: barMonitorRadio.verticalCenter
         }
 
@@ -91,6 +92,13 @@ Item {
             exclusiveGroup: monitorTypeGroup
             text: i18n("Circular")
             onCheckedChanged: if (checked) cfg_monitorType = 1;
+        }
+
+        RadioButton {
+            id: compactBarMonitorRadio
+            exclusiveGroup: monitorTypeGroup
+            text: i18n("Compact Bar")
+            onCheckedChanged: if (checked) cfg_monitorType = 2;
         }
 
         Label {

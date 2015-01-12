@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Martin Yrjölä <martin.yrjola@gmail.com>
+ * Copyright (C) 2015 Joshua Worth <joshua@worth.id.au>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -61,13 +62,17 @@ Item {
     implicitHeight: implicitWidth / 2
 
     property bool circularMonitorsInUse: plasmoid.configuration.monitorType == 1
+    property bool compactBarMonitorsInUse: plasmoid.configuration.monitorType == 2
+
+    property double barWidth: compactBarMonitorsInUse ? parent.height * 0.35 * columnCount()
+                                                      : parent.height * 0.5 * columnCount()
 
     // Don't show icon in panel.
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 
     // Correct the size when in panel
     Layout.preferredWidth: circularMonitorsInUse ? parent.height * 1.2 * columnCount()
-                                                 : parent.height / 2 * columnCount() + (rowLayout.spacing * (columnCount() - 1))
+                                                 : barWidth + (compactBarMonitorsInUse ? 0 : rowLayout.spacing * (columnCount() - 1))
 
     property bool labelsVisible
 
@@ -191,9 +196,13 @@ Item {
         return columns
     }
 
-    function columnWidth() {
-        var columns = columnCount()
-        return rowLayout.width / columns - rowLayout.spacing * (columns - 1)
+    function columnWidth(compact) {
+        var columns = columnCount();
+        var width = rowLayout.width / columns;
+        if (!compact) {
+            width -= rowLayout.spacing * (columns - 1);
+        }
+        return width;
     }
 
     function widestLabelWidth() {
@@ -238,9 +247,12 @@ Item {
             fill: main
         }
 
+        spacing: main.compactBarMonitorsInUse ? 0 : 5
+
+        property double columnPreferredWidth: main.circularMonitorsInUse ? parent.height : columnWidth(main.compactBarMonitorsInUse);
+
         ColumnLayout {
             visible: plasmoid.configuration.cpuActivated
-            Layout.preferredWidth: main.useCircularMonitors ? parent.height : columnWidth()
 
             PlasmaExtras.Heading {
                 id: cpuLabel
@@ -257,7 +269,6 @@ Item {
 
         ColumnLayout {
             visible: plasmoid.configuration.memoryActivated
-            Layout.preferredWidth: main.useCircularMonitors ? parent.height : columnWidth()
 
             PlasmaExtras.Heading {
                 id: memoryLabel
@@ -274,7 +285,6 @@ Item {
 
         ColumnLayout {
             visible: plasmoid.configuration.swapActivated
-            Layout.preferredWidth: main.useCircularMonitors ? parent.height : columnWidth()
 
             PlasmaExtras.Heading {
                 id: swapLabel

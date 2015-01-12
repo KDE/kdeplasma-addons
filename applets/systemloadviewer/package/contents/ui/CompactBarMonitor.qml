@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Martin Yrjölä <martin.yrjola@gmail.com>
+ * Copyright (C) 2015 Joshua Worth <joshua@worth.id.au>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,27 +21,43 @@
 
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import QtGraphicalEffects 1.0
 
 Item {
+    id: barMonitor
+
     property var colors
     property var proportions
 
-    Layout.fillWidth: true
     Layout.fillHeight: true
+    Layout.fillWidth: true
 
-    Loader {
-        id: loader
-        active: visible
+    Rectangle {
+        id: barBorder
         anchors.fill: parent
-        source: switch (plasmoid.configuration.monitorType) {
-            default: case 0: "BarMonitor.qml"; break;
-            case 1: "CircularMonitor.qml"; break;
-            case 2: "CompactBarMonitor.qml"; break;
-        }
-        onLoaded: {
-            loader.item.colors = Qt.binding(function() { return colors })
-            loader.item.proportions = Qt.binding(function() { return proportions })
+        opacity: 0
+    }
+
+    Repeater {
+        id: barRepeater
+        model: proportions.length
+        Rectangle {
+            color: barMonitor.colors[index]
+            height: barBorder.height * barMonitor.proportions[index]
+            width: barBorder.width
+            anchors {
+                bottom: index == 0 ? barBorder.bottom : barRepeater.itemAt(index-1).top
+                bottomMargin: index == 0 ? barBorder.border.width : 0
+            }
+
+            LinearGradient {
+                anchors.fill: parent
+                end: Qt.point(width, 0)
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: "#60ffffff" }
+                    GradientStop { position: 1.0; color: "transparent" }
+                }
+            }
         }
     }
 }
