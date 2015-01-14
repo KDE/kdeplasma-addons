@@ -1,6 +1,11 @@
 [Desktop Entry]
 Name=Previews
+Name[de]=Vorschauen
+Name[nl]=Voorbeelden
 Name[pt_BR]=Visualizações
+Name[sk]=Náhľady
+Name[sv]=Förhandsgranskningar
+Name[x-test]=xxPreviewsxx
 Comment=A desktop switcher layout with previews of the desktops
 Comment[ca]=Una disposició del commutador d'escriptori amb vistes prèvies dels escriptoris
 Comment[cs]=Přepínač oken s náhledy ploch
