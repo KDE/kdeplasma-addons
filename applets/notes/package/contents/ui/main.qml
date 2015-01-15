@@ -18,7 +18,7 @@
 */
 
 import QtQuick 2.1
-
+import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -32,6 +32,13 @@ PlasmaCore.SvgItem
         imagePath: "widgets/notes"
     }
     elementId: plasmoid.configuration.color + "-notes"
+
+    width: units.gridUnit * 14
+    height: units.gridUnit * 14
+    Layout.minimumWidth: units.gridUnit * 10
+    Layout.minimumHeight: units.gridUnit * 10
+    Plasmoid.switchWidth: units.gridUnit * 11
+    Plasmoid.switchHeight: units.gridUnit * 11
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 

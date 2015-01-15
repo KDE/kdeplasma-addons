@@ -1,26 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Web browser
-Name[ca]=Navegador web
-Name[cs]=Webový prohlížeč
 Name[de]=Webbrowser
-Name[en_GB]=Web browser
 Name[es]=Navegador web
-Name[fi]=Verkkoselain
-Name[ko]=웹 브라우저
-Name[nb]=Nettleser
 Name[nl]=Webbrowser
-Name[pl]=Przeglądarka sieciowa
-Name[pt]=Navegador Web
 Name[pt_BR]=Navegador Web
 Name[sk]=Webový prehliadač
-Name[sl]=Spletni brskalnik
-Name[sr]=веб прегледач
-Name[sr@ijekavian]=веб прегледач
-Name[sr@ijekavianlatin]=veb pregledač
-Name[sr@latin]=veb pregledač
 Name[sv]=Webbläsare
-Name[tr]=Web tarayıcı
 Name[uk]=Перегляд інтернету
 Name[x-test]=xxWeb browserxx
 Name[zh_CN]=网页浏览器
