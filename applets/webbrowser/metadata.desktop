@@ -2,11 +2,14 @@
 Encoding=UTF-8
 Name=Web browser
 Name[de]=Webbrowser
+Name[es]=Navegador web
 Name[nl]=Webbrowser
 Name[pt_BR]=Navegador Web
 Name[sk]=Webový prehliadač
 Name[sv]=Webbläsare
+Name[uk]=Перегляд інтернету
 Name[x-test]=xxWeb browserxx
+Name[zh_CN]=网页浏览器
 Comment=Add a webpage on your desktop.
 Comment[ca]=Afegeix una pàgina web a l'escriptori.
 Comment[de]=Fügt eine Webseite zu Ihrer Arbeitsfläche hinzu.
