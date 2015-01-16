@@ -20,12 +20,11 @@
 #include "datetimerunner.h"
 
 #include <QLocale>
-#include <KIcon>
+#include <QIcon>
 
-#include <KDateTime>
-#include <KDebug>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KSystemTimeZones>
+#include <KDateTime>
 #include <KTimeZone>
 
 static const QString dateWord = i18nc("Note this is a KRunner keyword", "date");
@@ -79,7 +78,7 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
 
     if (tz.compare(QLatin1String( "UTC" ), Qt::CaseInsensitive) == 0) {
         tzName = QLatin1String( "UTC" );
-        dt = KDateTime::currentDateTime(KTimeZone::utc()).dateTime();
+        dt = QDateTime::currentDateTimeUtc();
         return dt;
     }
 
@@ -117,7 +116,7 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
     match.setText(text);
     match.setData(clipboardText);
     match.setType(Plasma::QueryMatch::InformationalMatch);
-    match.setIcon(KIcon(QLatin1String( "clock" )));
+    match.setIcon(QIcon::fromTheme(QLatin1String( "clock" )));
 
     QList<Plasma::QueryMatch> matches;
     matches << match;
