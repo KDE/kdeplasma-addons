@@ -19,11 +19,11 @@
 
 #include "datetimerunner.h"
 
+#include <QLocale>
 #include <KIcon>
 
 #include <KDateTime>
 #include <KDebug>
-#include <KGlobal>
 #include <KLocale>
 #include <KSystemTimeZones>
 #include <KTimeZone>
@@ -50,23 +50,23 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
 {
     const QString term = context.query();
     if (term.compare(dateWord, Qt::CaseInsensitive) == 0) {
-        const QString date = KGlobal::locale()->formatDate(QDate::currentDate());
+        const QString date = QLocale().toString(QDate::currentDate());
         addMatch(i18n("Today's date is %1", date), date, context);
     } else if (term.startsWith(dateWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
         QDateTime dt = datetime(term, true, tzName);
         if (dt.isValid()) {
-            const QString date = KGlobal::locale()->formatDate(dt.date());
+            const QString date = QLocale().toString(dt.date());
             addMatch(i18n("The date in %1 is %2", tzName, date), date, context);
         }
     } else if (term.compare(timeWord, Qt::CaseInsensitive) == 0) {
-        const QString time = KGlobal::locale()->formatTime(QTime::currentTime());
+        const QString time = QLocale().toString(QTime::currentTime());
         addMatch(i18n("The current time is %1", time), time, context);
     } else if (term.startsWith(timeWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
         QDateTime dt = datetime(term, true, tzName);
         if (dt.isValid()) {
-            const QString time = KGlobal::locale()->formatTime(dt.time());
+            const QString time = QLocale().toString(dt.time());
             addMatch(i18n("The current time in %1 is %2", tzName, time), time, context);
         }
     }
