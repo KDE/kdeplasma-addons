@@ -28,8 +28,6 @@
 #include <KSystemTimeZones>
 #include <KTimeZone>
 
-#include <Plasma/Applet>
-
 static const QString dateWord = i18nc("Note this is a KRunner keyword", "date");
 static const QString timeWord = i18nc("Note this is a KRunner keyword", "time");
 
@@ -123,10 +121,10 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
 
     QList<Plasma::QueryMatch> matches;
     matches << match;
-    context.addMatches(context.query(), matches);
+    context.addMatches(matches);
 }
 
-K_EXPORT_PLASMA_RUNNER(datetime, DateTimeRunner)
+K_EXPORT_PLASMA_RUNNER(krunner_datetime, DateTimeRunner)
 
 #include "datetimerunner.moc"
 

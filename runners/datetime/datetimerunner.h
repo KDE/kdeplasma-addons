@@ -21,7 +21,8 @@
 
 #include <QDateTime>
 
-#include <Plasma/AbstractRunner>
+#include <KRunner/AbstractRunner>
+#include <KRunner/QueryMatch>
 
 /**
  * This class looks for matches in the set of .desktop files installed by
