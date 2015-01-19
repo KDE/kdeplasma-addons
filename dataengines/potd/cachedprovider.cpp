@@ -107,5 +107,4 @@ bool CachedProvider::isCached( const QString &identifier, bool ignoreAge )
     return true;
 }
 
-#include "cachedprovider.moc"
 

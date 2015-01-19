@@ -241,4 +241,3 @@ const QSet<QString> Translator::supportedLanguages = QSet<QString>() << "af" << 
         << "sr" << "sk" << "sl" << "es" << "sw" << "sv" << "ta" << "te" << "th"
         << "tr" << "uk" << "ur" << "vi" << "cy" << "yi";
 
-#include "translator.moc"

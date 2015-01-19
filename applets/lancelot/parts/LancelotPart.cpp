@@ -696,4 +696,3 @@ void LancelotPart::fixFocus()
     }
 }
 
-#include "LancelotPart.moc"

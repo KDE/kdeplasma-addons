@@ -428,4 +428,3 @@ QSizeF LCD::sizeHint(Qt::SizeHint which, const QSizeF& constraint) const
     return s;
 }
 
-#include "lcd.moc"

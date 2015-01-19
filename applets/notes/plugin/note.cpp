@@ -44,4 +44,3 @@ QString Note::noteText() const
     return m_noteText;
 }
 
-#include "note.moc"

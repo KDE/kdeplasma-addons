@@ -217,4 +217,3 @@ QPointF Magnifique::scenePosFromScreenPos(const QPoint &pos) const
     return found->mapToScene(found->mapFromGlobal(pos));
 }
 
-#include "magnifique.moc"

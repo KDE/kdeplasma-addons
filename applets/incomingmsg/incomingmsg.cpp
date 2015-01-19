@@ -556,4 +556,3 @@ void IncomingMsg::slotNewPidginIM()
     mPidginLabel->setText(i18n("You have new Pidgin messages."));
 }
 
-#include "incomingmsg.moc"

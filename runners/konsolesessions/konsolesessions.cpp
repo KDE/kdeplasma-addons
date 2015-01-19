@@ -154,4 +154,3 @@ void KonsoleSessions::run(const Plasma::RunnerContext &context, const Plasma::Qu
     }
 }
 
-#include "konsolesessions.moc"

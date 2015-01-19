@@ -184,4 +184,3 @@ void ContactsRunner::run(const Plasma::RunnerContext &context, const Plasma::Que
     }
 }
 
-#include "contactsrunner.moc"

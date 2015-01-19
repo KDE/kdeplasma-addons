@@ -707,6 +707,5 @@ void PlasmaboardWidget::unpress(BoardKey *key)
     m_repeatTimer->stop();
 }
 
-#include "widget.moc"
 
 

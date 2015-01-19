@@ -177,5 +177,4 @@ void Handle::setHoverPos(const QPointF &hoverPos)
     }
 }
 
-#include "handle.moc"
 

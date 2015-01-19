@@ -58,6 +58,5 @@ void Header::paint(QPainter *p,
     m_icon->paint( p, 0, 0, "RSSNOW" );
 }
 
-#include "header.moc"
 #endif // HEADER.CPP
 

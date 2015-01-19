@@ -175,4 +175,3 @@ void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::Query
     }
 }
 
-#include "katesessions.moc"

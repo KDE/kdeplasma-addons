@@ -94,4 +94,3 @@ void ImageLoader::run()
     emit loaded(img);
 }
 
-#include "imageloader.moc"

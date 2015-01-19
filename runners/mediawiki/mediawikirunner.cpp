@@ -143,4 +143,3 @@ void MediaWikiRunner::run(const Plasma::RunnerContext &context, const Plasma::Qu
     }
 }
 
-#include "mediawikirunner.moc"

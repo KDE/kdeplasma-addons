@@ -353,4 +353,3 @@ WeatherConfig* WeatherPopupApplet::weatherConfig()
     return d->weatherConfig;
 }
 
-#include "weatherpopupapplet.moc"

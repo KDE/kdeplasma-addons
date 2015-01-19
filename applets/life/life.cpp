@@ -276,4 +276,3 @@ void Life::resetGame()
     m_gensCounter = 0;
 }
 
-#include "life.moc"

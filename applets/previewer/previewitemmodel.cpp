@@ -67,4 +67,3 @@ void PreviewItemModel::addUrl(const QUrl &url)
 }
 
 
-#include "previewitemmodel.moc"

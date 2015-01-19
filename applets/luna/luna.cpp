@@ -286,4 +286,3 @@ void Luna::calcStatus(time_t time)
     update();
 }
 
-#include "luna.moc"

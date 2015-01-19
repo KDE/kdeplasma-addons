@@ -411,4 +411,3 @@ void Kolourpicker::saveData(KConfigGroup &cg)
     emit configNeedsSaving();
 }
 
-#include "kolourpicker.moc"

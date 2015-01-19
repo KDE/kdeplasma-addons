@@ -153,4 +153,3 @@ void GroupExplorer::immutabilityChanged(Plasma::ImmutabilityType type)
     }
 }
 
-#include "groupexplorer.moc"

@@ -540,6 +540,5 @@ void Scroller::setMaxAge(int maxAge)
 }
 
 
-#include "scroller.moc"
 #endif // SCROLLER_CPP
 

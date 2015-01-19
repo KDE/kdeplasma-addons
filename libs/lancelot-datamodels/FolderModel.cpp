@@ -264,4 +264,3 @@ void FolderModel::update()
 } // namespace Models
 } // namespace Lancelot
 
-#include "FolderModel.moc"

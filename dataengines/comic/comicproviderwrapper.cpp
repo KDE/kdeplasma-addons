@@ -890,4 +890,3 @@ QObject* ComicProviderWrapper::image()
     return qobject_cast<QObject*>(mKrossImage);
 }
 
-#include "comicproviderwrapper.moc"

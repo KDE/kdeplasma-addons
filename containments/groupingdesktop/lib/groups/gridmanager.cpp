@@ -212,4 +212,3 @@ void GridManager::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
     painter->fillPath(p, c);
 }
 
-#include "gridmanager.moc"

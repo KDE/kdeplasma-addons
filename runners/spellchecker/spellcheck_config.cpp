@@ -111,4 +111,3 @@ void SpellCheckConfig::defaults()
 }
 
 
-#include "spellcheck_config.moc"

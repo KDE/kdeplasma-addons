@@ -265,4 +265,3 @@ int ConfigWidget::checkNewComicStripsIntervall() const
     return comicUi.updateIntervallComicStrips->value();
 }
 
-#include "configwidget.moc"

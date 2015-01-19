@@ -419,4 +419,3 @@ QMap<QString, QString> News::akregatorFeeds()
     return result;
 }
 
-#include "news.moc"

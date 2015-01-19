@@ -243,4 +243,3 @@ void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data 
     emit pictureUpdated();
 }
 
-#include "slideshow.moc"

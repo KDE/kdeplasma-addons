@@ -94,4 +94,3 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
     emit finished(QString());
 }
 
-#include "weatherlocation.moc"

@@ -473,4 +473,3 @@ void WeatherApplet::configAccepted()
     WeatherPopupApplet::configAccepted();
 }
 
-#include "weatherapplet.moc"

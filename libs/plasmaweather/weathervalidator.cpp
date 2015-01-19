@@ -139,4 +139,3 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
     emit finished(locations);
 }
 
-#include "weathervalidator.moc"

@@ -46,4 +46,3 @@ void ComicPackage::initPackage(Plasma::Package *package)
     package->setServicePrefix(QLatin1String("plasma-comic-"));
 }
 
-#include "comic_package.moc"

@@ -172,4 +172,3 @@ void GroupIcon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     painter->drawText(textRect, flags, m_name);
 }
 
-#include "groupicon.moc"

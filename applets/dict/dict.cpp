@@ -399,4 +399,3 @@ void DictApplet::focusEditor()
     m_wordEdit->nativeWidget()->setFocus();
 }
 
-#include "dict.moc"

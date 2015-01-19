@@ -433,4 +433,3 @@ void News::linkActivated(const QUrl& link)
    KRun::runUrl(KUrl(link), "text/html", 0);
 }
 
-#include "news.moc"

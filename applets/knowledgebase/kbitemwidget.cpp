@@ -187,4 +187,3 @@ void KBItemWidget::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     updateActions();
 }
 
-#include "kbitemwidget.moc"

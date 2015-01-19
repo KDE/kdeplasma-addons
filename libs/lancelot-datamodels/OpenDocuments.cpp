@@ -183,5 +183,4 @@ void OpenDocuments::activate(int index)
 } // namespace Models
 } // namespace Lancelot
 
-#include "OpenDocuments.moc"
 #include "OpenDocuments_p.moc"

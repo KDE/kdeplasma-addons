@@ -57,4 +57,3 @@ qDebug() << "SERVICE START...operation: " << operation << " dest: " << destinati
     }
 }
 
-#include "konsoleprofilesservice.moc"

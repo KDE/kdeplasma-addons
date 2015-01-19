@@ -87,4 +87,3 @@ bool RecentDocuments::dataDropAvailable(int where, const QMimeData * mimeData)
 } // namespace Models
 } // namespace Lancelot
 
-#include "RecentDocuments.moc"

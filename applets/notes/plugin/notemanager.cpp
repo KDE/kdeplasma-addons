@@ -59,4 +59,3 @@ QSharedPointer< AbstractNoteLoader > NoteManager::loadBackend()
     return manager;
 }
 
-#include "notemanager.moc"

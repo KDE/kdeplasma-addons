@@ -353,4 +353,3 @@ void TwitterEngine::imageDataChanged()
 }
 
 
-#include "twitterengine.moc"

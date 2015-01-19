@@ -851,4 +851,3 @@ void Frame::reloadImage()
     m_mySlideShow->updateImage(m_currentUrl.url());
 }
 
-#include "frame.moc"

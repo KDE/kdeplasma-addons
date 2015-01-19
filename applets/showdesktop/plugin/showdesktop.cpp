@@ -61,4 +61,3 @@ void ShowDesktop::showDesktop()
 #endif
 }
 
-#include "showdesktop.moc"

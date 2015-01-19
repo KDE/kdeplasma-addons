@@ -109,4 +109,3 @@ void BrowserHistoryRunner::run(const Plasma::RunnerContext &context, const Plasm
     }
 }
 
-#include "browserhistory.moc"

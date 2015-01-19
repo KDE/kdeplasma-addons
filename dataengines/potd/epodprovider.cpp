@@ -97,4 +97,3 @@ QImage EpodProvider::image() const
     return d->mImage;
 }
 
-#include "epodprovider.moc"

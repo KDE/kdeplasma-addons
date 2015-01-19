@@ -144,4 +144,3 @@ QImage FlickrProvider::image() const
     return d->mImage;
 }
 
-#include "flickrprovider.moc"

@@ -148,4 +148,3 @@ void KonquerorSessions::run(const Plasma::RunnerContext &context, const Plasma::
     }
 }
 
-#include "konquerorsessions.moc"

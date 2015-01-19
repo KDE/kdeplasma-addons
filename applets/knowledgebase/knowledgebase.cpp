@@ -308,4 +308,3 @@ void KnowledgeBase::registerAccount()
     KToolInvocation::invokeBrowser("http://www.opendesktop.org/usermanager/new.php");
 }
 
-#include "knowledgebase.moc"

@@ -72,4 +72,3 @@ void DictionaryMatchEngine::dataUpdated(const QString &source, const Plasma::Dat
     m_wordLock.unlock();
 }
 
-#include "dictionarymatchengine.moc"

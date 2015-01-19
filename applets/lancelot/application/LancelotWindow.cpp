@@ -1180,5 +1180,4 @@ void LancelotWindow::resizeEvent(QResizeEvent * event)
     }
 }
 
-#include "LancelotWindow.moc"
 
