@@ -187,6 +187,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         foreach (category, converter.categories()) {
             foreach (const QString& s, category.allUnits()) {
                 if (s.compare(unit1, Qt::CaseInsensitive) == 0) {
+                    unit1 = s;
                     found = true;
                     break;
                 }
