@@ -6,7 +6,7 @@ add_subdirectory(datetime)
 # add_subdirectory(konquerorsessions)
 # add_subdirectory(kopete)
 # add_subdirectory(mediawiki)
-# add_subdirectory(spellchecker)
+add_subdirectory(spellchecker)
 # add_subdirectory(characters)
 add_subdirectory(dictionary)
 # 

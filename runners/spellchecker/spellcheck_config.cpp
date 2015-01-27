@@ -24,11 +24,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KDebug>
 #include <KPluginFactory>
 #include <KPluginLoader>
+#include <KSharedConfig>
 
 //For the macro
-#include <plasma/abstractrunner.h>
-
-K_EXPORT_RUNNER_CONFIG(spellcheck, SpellCheckConfig)
+#include <KRunner/AbstractRunner>
 
 SpellCheckConfigForm::SpellCheckConfigForm(QWidget* parent) : QWidget(parent)
 {
@@ -36,7 +35,7 @@ SpellCheckConfigForm::SpellCheckConfigForm(QWidget* parent) : QWidget(parent)
 }
 
 SpellCheckConfig::SpellCheckConfig(QWidget* parent, const QVariantList& args) :
-        KCModule(ConfigFactory::componentData(), parent, args)
+        KCModule(parent, args)
 {
     m_ui = new SpellCheckConfigForm(this);
 
@@ -110,4 +109,7 @@ void SpellCheckConfig::defaults()
     emit changed(true);
 }
 
+K_PLUGIN_FACTORY(SpellCheckConfigFactory,
+                 registerPlugin<SpellCheckConfig>("kcm_krunner_spellcheck");)
 
+#include "spellcheck_config.moc"

@@ -6,19 +6,27 @@ set(kcm_krunner_spellcheck_SRCS
     spellcheck_config.cpp
 )
 
-kde4_add_ui_files(kcm_krunner_spellcheck_SRCS spellcheck_config.ui)
-kde4_add_plugin(kcm_krunner_spellcheck ${kcm_krunner_spellcheck_SRCS})
+ki18n_wrap_ui(kcm_krunner_spellcheck_SRCS spellcheck_config.ui)
+add_library(kcm_krunner_spellcheck MODULE ${kcm_krunner_spellcheck_SRCS})
 target_link_libraries(kcm_krunner_spellcheck 
-    ${KDE4_KDECORE_LIBS}
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_KCMUTILS_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    )
+    Qt5::Gui
+    KF5::Runner
+    KF5::KCMUtils
+    KF5::KDELibs4Support
+    KF5::I18n
+)
 
-kde4_add_plugin(krunner_spellcheckrunner ${krunner_spellcheckrunner_SRCS})
-target_link_libraries(krunner_spellcheckrunner ${KDE4_KCMUTILS_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS})
+add_library(krunner_spellcheck MODULE ${krunner_spellcheckrunner_SRCS})
+target_link_libraries(krunner_spellcheck
+    KF5::Runner
+    KF5::KIOWidgets
+    KF5::I18n
+    KF5::SonnetCore
+    KF5::KDELibs4Support
+)
 
-install(TARGETS krunner_spellcheckrunner kcm_krunner_spellcheck DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-runner-spellchecker.desktop plasma-runner-spellchecker_config.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(TARGETS krunner_spellcheck kcm_krunner_spellcheck
+        DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES plasma-runner-spellchecker.desktop plasma-runner-spellchecker_config.desktop
+        DESTINATION ${SERVICES_INSTALL_DIR})
 

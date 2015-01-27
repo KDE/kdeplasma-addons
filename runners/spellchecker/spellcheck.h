@@ -21,7 +21,7 @@
 
 #include <sonnet/speller.h>
 
-#include <plasma/abstractrunner.h>
+#include <KRunner/AbstractRunner>
 #include <QSharedPointer>
 
 /**
@@ -54,7 +54,5 @@ private:
     QMap<QString, QSharedPointer<Sonnet::Speller> > m_spellers; //spellers
     QMutex m_spellLock; //Lock held when constructing a new speller
 };
-
-K_EXPORT_PLASMA_RUNNER(spellcheckrunner, SpellCheckRunner)
 
 #endif

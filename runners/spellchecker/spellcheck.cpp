@@ -30,7 +30,7 @@ SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args)
-    KGlobal::locale()->insertCatalog(QLatin1String( "krunner_spellcheckrunner" ));
+    KGlobal::locale()->insertCatalog(QLatin1String( "krunner_spellcheck" ));
     setObjectName(QLatin1String( "Spell Checker" ));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     setSpeed(AbstractRunner::SlowSpeed);
@@ -231,7 +231,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         match.setText(i18n("Could not find a dictionary."));
     }
 
-    context.addMatch(term, match);
+    context.addMatch(match);
 }
 
 void SpellCheckRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
@@ -241,3 +241,6 @@ void SpellCheckRunner::run(const Plasma::RunnerContext &context, const Plasma::Q
     kapp->clipboard()->setText(match.data().toString());
 }
 
+K_EXPORT_PLASMA_RUNNER(krunner_spellcheck, SpellCheckRunner)
+
+#include "spellcheck.moc"
