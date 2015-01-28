@@ -92,16 +92,14 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
         const QString zoneName = QString::fromUtf8(zoneId);
         if (zoneName.startsWith(tz, Qt::CaseInsensitive)) {
             tzName = zoneName;
-            dt = QDateTime::currentDateTimeUtc();
-            dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
+            dt = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
             return dt;
         }
 
         const QString country = QLocale::countryToString(timeZone.country());
         if (country.startsWith(tz, Qt::CaseInsensitive)) {
             tzName = country;
-            dt = QDateTime::currentDateTimeUtc();
-            dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
+            dt = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
             return dt;
         }
 
@@ -111,8 +109,7 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
         const QString abbr = timeZone.abbreviation(QDateTime::currentDateTime());
         if (abbr.startsWith(tz, Qt::CaseInsensitive)) {
             tzName = abbr;
-            dt = QDateTime::currentDateTimeUtc();
-            dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
+            dt = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
             return dt;
         }
     }
@@ -123,8 +120,7 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
         const QString zoneName = QString::fromUtf8(zoneId);
         if (zoneName.contains(tz, Qt::CaseInsensitive)) {
             tzName = zoneName;
-            dt = QDateTime::currentDateTimeUtc();
-            dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
+            dt = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
             return dt;
         }
     }
