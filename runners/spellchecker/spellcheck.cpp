@@ -19,16 +19,16 @@
 #include "spellcheck.h"
 
 #include <QClipboard>
-
-#include <KApplication>
-#include <KGlobal>
+#include <QDebug>
+#include <QLocale>
 #include <QSet>
+
+#include <KLocalizedString>
 
 SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args)
-    KGlobal::locale()->insertCatalog(QLatin1String( "krunner_spellcheck" ));
     setObjectName(QLatin1String( "Spell Checker" ));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     setSpeed(AbstractRunner::SlowSpeed);
@@ -56,7 +56,6 @@ void SpellCheckRunner::loaddata()
     }
     //store all language names, makes it possible to type "spell german TERM" if english locale is set
     //Need to construct a map between natual language names and names the spell-check recognises.
-    KLocale *locale = KGlobal::locale();
     const QStringList avail = m_spellers[""]->availableLanguages();
     //We need to filter the available languages so that we associate the natural language
     //name (eg. 'german') with one sub-code.
@@ -87,7 +86,8 @@ void SpellCheckRunner::loaddata()
             code = family.first();
         }
         //Finally, add code to the map.
-        const QString name = locale->languageCodeToName(fcode);
+        // FIXME: We need someway to map languageCodeToName
+        const QString name;// = locale->languageCodeToName(fcode);
         if (!name.isEmpty()) {
             m_languages[name.toLower()] = code;
         }
@@ -236,7 +236,8 @@ void SpellCheckRunner::run(const Plasma::RunnerContext &context, const Plasma::Q
 {
     Q_UNUSED(context)
     //Copy words to clipboard
-    kapp->clipboard()->setText(match.data().toString());
+    // FIXME:
+    // kapp->clipboard()->setText(match.data().toString());
 }
 
 K_EXPORT_PLASMA_RUNNER(krunner_spellcheck, SpellCheckRunner)

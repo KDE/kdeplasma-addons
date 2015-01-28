@@ -22,7 +22,6 @@ target_link_libraries(krunner_spellcheck
     KF5::KIOWidgets
     KF5::I18n
     KF5::SonnetCore
-    KF5::KDELibs4Support
 )
 
 install(TARGETS krunner_spellcheck kcm_krunner_spellcheck
