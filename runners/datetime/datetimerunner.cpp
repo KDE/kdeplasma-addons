@@ -21,12 +21,9 @@
 
 #include <QLocale>
 #include <QIcon>
+#include <QTimeZone>
 
 #include <KLocalizedString>
-#include <KSystemTimeZones>
-#include <KDateTime>
-#include <KTimeZone>
-#include <QTimeZone>
 
 static const QString dateWord = i18nc("Note this is a KRunner keyword", "date");
 static const QString timeWord = i18nc("Note this is a KRunner keyword", "time");
@@ -83,33 +80,6 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
         return dt;
     }
 
-    KTimeZones::ZoneMap zones = KSystemTimeZones::zones();
-    QMapIterator<QString, KTimeZone> it(zones);
-    while (it.hasNext()) {
-        it.next();
-        if (it.key().compare(tz, Qt::CaseInsensitive) == 0 ||
-            it.value().name().compare(tz, Qt::CaseInsensitive) == 0) {
-            tzName = it.value().name();
-            dt = KDateTime::currentDateTime(it.value()).dateTime();
-            break;
-        } else if (!dt.isValid()) {
-            if (it.key().contains(tz, Qt::CaseInsensitive) ||
-                it.value().name().contains(tz, Qt::CaseInsensitive)) {
-                tzName = it.value().name();
-                dt = KDateTime::currentDateTime(it.value()).dateTime();
-                break;
-            } else {
-                foreach (const QByteArray &abbrev, it.value().abbreviations()) {
-                    if (QString( abbrev ).contains(tz, Qt::CaseInsensitive)) {
-                        tzName = abbrev;
-                        dt = KDateTime::currentDateTime(it.value()).dateTime();
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
     //
     // KTimeZone gives us the actual timezone names such as "Asia/Kolkatta" and does
     // not give us country info. QTimeZone does not give us the actual timezone name
@@ -119,20 +89,43 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
     for (const QByteArray& zoneId : timeZoneIds) {
         QTimeZone timeZone(zoneId);
 
+        const QString zoneName = QString::fromUtf8(zoneId);
+        if (zoneName.startsWith(tz, Qt::CaseInsensitive)) {
+            tzName = zoneName;
+            dt = QDateTime::currentDateTimeUtc();
+            dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
+            return dt;
+        }
+
         const QString country = QLocale::countryToString(timeZone.country());
         if (country.startsWith(tz, Qt::CaseInsensitive)) {
             tzName = country;
             dt = QDateTime::currentDateTimeUtc();
             dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
-            break;
+            return dt;
         }
 
+        // FIXME: This only includes the current abbreviation and not old abbreviation or
+        // other possible names.
+        // Eg - depending on the current date, only CET or CEST will work
         const QString abbr = timeZone.abbreviation(QDateTime::currentDateTime());
         if (abbr.startsWith(tz, Qt::CaseInsensitive)) {
             tzName = abbr;
             dt = QDateTime::currentDateTimeUtc();
             dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
-            break;
+            return dt;
+        }
+    }
+
+    for (const QByteArray& zoneId : timeZoneIds) {
+        QTimeZone timeZone(zoneId);
+
+        const QString zoneName = QString::fromUtf8(zoneId);
+        if (zoneName.contains(tz, Qt::CaseInsensitive)) {
+            tzName = zoneName;
+            dt = QDateTime::currentDateTimeUtc();
+            dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
+            return dt;
         }
     }
 
