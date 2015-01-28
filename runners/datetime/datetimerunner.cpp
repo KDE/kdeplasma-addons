@@ -26,6 +26,7 @@
 #include <KSystemTimeZones>
 #include <KDateTime>
 #include <KTimeZone>
+#include <QTimeZone>
 
 static const QString dateWord = i18nc("Note this is a KRunner keyword", "date");
 static const QString timeWord = i18nc("Note this is a KRunner keyword", "time");
@@ -96,14 +97,42 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
                 it.value().name().contains(tz, Qt::CaseInsensitive)) {
                 tzName = it.value().name();
                 dt = KDateTime::currentDateTime(it.value()).dateTime();
+                break;
             } else {
                 foreach (const QByteArray &abbrev, it.value().abbreviations()) {
                     if (QString( abbrev ).contains(tz, Qt::CaseInsensitive)) {
                         tzName = abbrev;
                         dt = KDateTime::currentDateTime(it.value()).dateTime();
+                        break;
                     }
                 }
             }
+        }
+    }
+
+    //
+    // KTimeZone gives us the actual timezone names such as "Asia/Kolkatta" and does
+    // not give us country info. QTimeZone does not give us the actual timezone name
+    // This is why we are using both for now.
+    //
+    QList<QByteArray> timeZoneIds = QTimeZone::availableTimeZoneIds();
+    for (const QByteArray& zoneId : timeZoneIds) {
+        QTimeZone timeZone(zoneId);
+
+        const QString country = QLocale::countryToString(timeZone.country());
+        if (country.startsWith(tz, Qt::CaseInsensitive)) {
+            tzName = country;
+            dt = QDateTime::currentDateTimeUtc();
+            dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
+            break;
+        }
+
+        const QString abbr = timeZone.abbreviation(QDateTime::currentDateTime());
+        if (abbr.startsWith(tz, Qt::CaseInsensitive)) {
+            tzName = abbr;
+            dt = QDateTime::currentDateTimeUtc();
+            dt.setTime_t(dt.toTime_t() + timeZone.offsetFromUtc(dt));
+            break;
         }
     }
 
