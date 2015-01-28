@@ -54,17 +54,17 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
         QDateTime dt = datetime(term, true, tzName);
         if (dt.isValid()) {
             const QString date = QLocale().toString(dt.date());
-            addMatch(i18n("The date in %1 is %2", tzName, date), date, context);
+            addMatch(QString("%1 - %2").arg(tzName, date), date, context);
         }
     } else if (term.compare(timeWord, Qt::CaseInsensitive) == 0) {
         const QString time = QLocale().toString(QTime::currentTime());
-        addMatch(i18n("The current time is %1", time), time, context);
+        addMatch(i18n("Current time is %1", time), time, context);
     } else if (term.startsWith(timeWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
         QDateTime dt = datetime(term, true, tzName);
         if (dt.isValid()) {
             const QString time = QLocale().toString(dt.time());
-            addMatch(i18n("The current time in %1 is %2", tzName, time), time, context);
+            addMatch(QString("%1 - %2").arg(tzName, time), time, context);
         }
     }
 }
