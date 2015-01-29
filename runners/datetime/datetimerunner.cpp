@@ -1,6 +1,7 @@
 /*
  *   Copyright (C) 2006 Aaron Seigo <aseigo@kde.org>
  *   Copyright (C) 2010 Marco MArtin <notmart@gmail.com>
+ *   Copyright (C) 2015 Vishesh Handa <vhanda@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -73,8 +74,6 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
 
 QDateTime DateTimeRunner::datetime(const QString &tz, QString &tzName)
 {
-    QDateTime dt;
-
     //
     // KTimeZone gives us the actual timezone names such as "Asia/Kolkatta" and does
     // not give us country info. QTimeZone does not give us the actual timezone name
@@ -87,15 +86,13 @@ QDateTime DateTimeRunner::datetime(const QString &tz, QString &tzName)
         const QString zoneName = QString::fromUtf8(zoneId);
         if (zoneName.startsWith(tz, Qt::CaseInsensitive)) {
             tzName = zoneName;
-            dt = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
-            return dt;
+            return QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
         }
 
         const QString country = QLocale::countryToString(timeZone.country());
         if (country.startsWith(tz, Qt::CaseInsensitive)) {
             tzName = country;
-            dt = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
-            return dt;
+            return QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
         }
 
         // FIXME: This only includes the current abbreviation and not old abbreviation or
@@ -104,8 +101,7 @@ QDateTime DateTimeRunner::datetime(const QString &tz, QString &tzName)
         const QString abbr = timeZone.abbreviation(QDateTime::currentDateTime());
         if (abbr.startsWith(tz, Qt::CaseInsensitive)) {
             tzName = abbr;
-            dt = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
-            return dt;
+            return QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
         }
     }
 
@@ -115,12 +111,11 @@ QDateTime DateTimeRunner::datetime(const QString &tz, QString &tzName)
         const QString zoneName = QString::fromUtf8(zoneId);
         if (zoneName.contains(tz, Qt::CaseInsensitive)) {
             tzName = zoneName;
-            dt = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
-            return dt;
+            return QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
         }
     }
 
-    return dt;
+    return QDateTime();
 }
 
 void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText, Plasma::RunnerContext &context)
@@ -129,11 +124,9 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
     match.setText(text);
     match.setData(clipboardText);
     match.setType(Plasma::QueryMatch::InformationalMatch);
-    match.setIcon(QIcon::fromTheme(QLatin1String( "clock" )));
+    match.setIcon(QIcon::fromTheme(QLatin1String("clock")));
 
-    QList<Plasma::QueryMatch> matches;
-    matches << match;
-    context.addMatches(matches);
+    context.addMatch(match);
 }
 
 K_EXPORT_PLASMA_RUNNER(krunner_datetime, DateTimeRunner)
