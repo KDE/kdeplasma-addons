@@ -37,6 +37,7 @@ Item {
     Layout.minimumHeight: Layout.maximumHeight
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    Plasmoid.onActivated: showdesktop.showDesktop();
 
     PlasmaCore.IconItem {
         id:icon
