@@ -75,12 +75,6 @@ QDateTime DateTimeRunner::datetime(const QString &tz, QString &tzName)
 {
     QDateTime dt;
 
-    if (tz.compare(QLatin1String( "UTC" ), Qt::CaseInsensitive) == 0) {
-        tzName = QLatin1String( "UTC" );
-        dt = QDateTime::currentDateTimeUtc();
-        return dt;
-    }
-
     //
     // KTimeZone gives us the actual timezone names such as "Asia/Kolkatta" and does
     // not give us country info. QTimeZone does not give us the actual timezone name
