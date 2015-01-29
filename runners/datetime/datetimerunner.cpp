@@ -51,7 +51,8 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
         addMatch(i18n("Today's date is %1", date), date, context);
     } else if (term.startsWith(dateWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
-        QDateTime dt = datetime(term, true, tzName);
+        QString tz = term.right(term.length() - dateWord.length());
+        QDateTime dt = datetime(tz, tzName);
         if (dt.isValid()) {
             const QString date = QLocale().toString(dt.date());
             addMatch(QString("%1 - %2").arg(tzName, date), date, context);
@@ -61,7 +62,8 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
         addMatch(i18n("Current time is %1", time), time, context);
     } else if (term.startsWith(timeWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
-        QDateTime dt = datetime(term, true, tzName);
+        QString tz = term.right(term.length() - timeWord.length());
+        QDateTime dt = datetime(tz, tzName);
         if (dt.isValid()) {
             const QString time = QLocale().toString(dt.time());
             addMatch(QString("%1 - %2").arg(tzName, time), time, context);
@@ -69,10 +71,9 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
     }
 }
 
-QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzName)
+QDateTime DateTimeRunner::datetime(const QString &tz, QString &tzName)
 {
     QDateTime dt;
-    const QString tz = term.right(term.length() - (date ? dateWord.length() : timeWord.length()) - 1);
 
     if (tz.compare(QLatin1String( "UTC" ), Qt::CaseInsensitive) == 0) {
         tzName = QLatin1String( "UTC" );

@@ -42,7 +42,7 @@ public:
     void match(Plasma::RunnerContext &context);
 
 private:
-    QDateTime datetime(const QString &term, bool date, QString &tzName);
+    QDateTime datetime(const QString &tz, QString &tzName);
     void addMatch(const QString &text, const QString &clipboardText, Plasma::RunnerContext &context);
 };
 
