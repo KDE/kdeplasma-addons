@@ -49,25 +49,25 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
     const QString term = context.query();
     if (term.compare(dateWord, Qt::CaseInsensitive) == 0) {
         const QString date = QLocale().toString(QDate::currentDate());
-        addMatch(i18n("Today's date is %1", date), date, context);
+        addMatch(i18n("Today's date is %1", date), date, context, QStringLiteral("view-calendar-day"));
     } else if (term.startsWith(dateWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
         QString tz = term.right(term.length() - dateWord.length());
         QDateTime dt = datetime(tz, tzName);
         if (dt.isValid()) {
             const QString date = QLocale().toString(dt.date());
-            addMatch(QString("%1 - %2").arg(tzName, date), date, context);
+            addMatch(QString("%1 - %2").arg(tzName, date), date, context, QStringLiteral("view-calendar-day"));
         }
     } else if (term.compare(timeWord, Qt::CaseInsensitive) == 0) {
         const QString time = QLocale().toString(QTime::currentTime());
-        addMatch(i18n("Current time is %1", time), time, context);
+        addMatch(i18n("Current time is %1", time), time, context, QStringLiteral("clock"));
     } else if (term.startsWith(timeWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
         QString tz = term.right(term.length() - timeWord.length());
         QDateTime dt = datetime(tz, tzName);
         if (dt.isValid()) {
             const QString time = QLocale().toString(dt.time());
-            addMatch(QString("%1 - %2").arg(tzName, time), time, context);
+            addMatch(QString("%1 - %2").arg(tzName, time), time, context, QStringLiteral("clock"));
         }
     }
 }
@@ -118,13 +118,14 @@ QDateTime DateTimeRunner::datetime(const QString &tz, QString &tzName)
     return QDateTime();
 }
 
-void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText, Plasma::RunnerContext &context)
+void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
+                              Plasma::RunnerContext &context, const QString& iconName)
 {
     Plasma::QueryMatch match(this);
     match.setText(text);
     match.setData(clipboardText);
     match.setType(Plasma::QueryMatch::InformationalMatch);
-    match.setIcon(QIcon::fromTheme(QLatin1String("clock")));
+    match.setIcon(QIcon::fromTheme(iconName));
 
     context.addMatch(match);
 }
