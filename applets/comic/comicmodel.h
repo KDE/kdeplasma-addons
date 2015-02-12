@@ -28,11 +28,14 @@
 
 class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
 {
+    Q_OBJECT
+
     public:
         ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent = 0 );
 
-        void dataUpdated( const QString &source, const Plasma::DataEngine::Data &data );
         void setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics );
+
+        QHash<int, QByteArray> roleNames() const;
 
         int rowCount( const QModelIndex &index = QModelIndex() ) const;
         int columnCount( const QModelIndex &index = QModelIndex() ) const;
@@ -42,6 +45,9 @@ class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
 
         int numSelected() const;
         QStringList selected() const;
+
+    public Q_SLOTS:
+        void dataUpdated( const QString &source, const Plasma::DataEngine::Data &data );
 
     private:
         Plasma::DataEngine::Data mComics;

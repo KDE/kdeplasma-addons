@@ -21,17 +21,26 @@
 #include "comicmodel.h"
 
 #include <QIcon>
+#include <QDebug>
 
 ComicModel::ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent )
   : QAbstractTableModel( parent ), mNumSelected( 0 ), mUsedComics(usedComics)
 {
-
     engine->connectSource( source, this );
 }
 
 void ComicModel::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
 {
     setComics( data, mUsedComics );
+}
+
+QHash<int, QByteArray> ComicModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[Qt::DisplayRole] = "display";
+    roles[Qt::DecorationRole] = "decoration";
+    roles[Qt::UserRole] = "plugin";
+    return roles;
 }
 
 void ComicModel::setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics )
@@ -76,20 +85,16 @@ QVariant ComicModel::data( const QModelIndex &index, int role ) const
     }
 
     const QString data = mComics.keys()[ index.row() ];
-    if ( index.column() == 0 ) {
-        if ( role == Qt::CheckStateRole ) {
-            return mState[ data ];
-        }
-    } else if ( index.column() == 1 ) {
-        switch( role ) {
-            case Qt::DisplayRole:
-                return mComics[ data ].toStringList()[ 0 ];
-            case Qt::DecorationRole:
-                return QIcon::fromTheme( mComics[ data ].toStringList()[ 1 ] );
-            case Qt::UserRole:
-                return data;
-        }
+
+    switch( role ) {
+        case Qt::DisplayRole:
+            return mComics[ data ].toStringList()[ 0 ];
+        case Qt::DecorationRole:
+            return QIcon::fromTheme( mComics[ data ].toStringList()[ 1 ] );
+        case Qt::UserRole:
+            return data;
     }
+
 
     return QVariant();
 }

@@ -42,9 +42,9 @@ Item {
 
             Layouts.ColumnLayout {
                 Repeater {
-                    model: 2
+                    model: plasmoid.nativeInterface.availableComicsModel
                     delegate: Controls.CheckBox {
-                        text: "pluginname"
+                        text: model.display
                     }
                 }
                 Item {

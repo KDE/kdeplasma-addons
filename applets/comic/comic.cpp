@@ -574,6 +574,11 @@ QObject *ComicApplet::comicsModel()
     return &mActiveComicModel;
 }
 
+QObject *ComicApplet::availableComicsModel()
+{
+    return mProxy;
+}
+
 bool ComicApplet::showComicUrl() const
 {
     return mShowComicUrl;

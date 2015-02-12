@@ -49,6 +49,7 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
     Q_PROPERTY(QObject * comicsModel READ comicsModel NOTIFY comicModelChanged)
+    Q_PROPERTY(QObject * availableComicsModel READ availableComicsModel CONSTANT)
     Q_PROPERTY(bool showComicUrl READ showComicUrl WRITE setShowComicUrl NOTIFY showComicUrlChanged)
     Q_PROPERTY(bool showComicAuthor READ showComicAuthor WRITE setShowComicAuthor NOTIFY showComicAuthorChanged)
     Q_PROPERTY(bool showComicTitle READ showComicTitle WRITE setShowComicTitle NOTIFY showComicTitleChanged)
@@ -68,6 +69,7 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 
         //For QML
         QObject *comicsModel();
+        QObject *availableComicsModel();
         QVariantMap comicData();
 
         bool showComicUrl() const;
