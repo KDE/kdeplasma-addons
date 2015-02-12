@@ -31,13 +31,13 @@ Item {
 
     property int minimumWidth: theme.mSize(theme.defaultFont).width * 35
     property int minimumHeight: theme.mSize(theme.defaultFont).height * 12
-    property bool showComicAuthor: comicApplet.showComicAuthor
-    property bool showComicTitle: comicApplet.showComicTitle
-    property bool showErrorPicture: comicApplet.showErrorPicture
-    property bool middleClick: comicApplet.middleClick
+    property bool showComicAuthor: plasmoid.nativeInterface.showComicAuthor
+    property bool showComicTitle: plasmoid.nativeInterface.showComicTitle
+    property bool showErrorPicture: plasmoid.nativeInterface.showErrorPicture
+    property bool middleClick: plasmoid.nativeInterface.middleClick
 
     Connections {
-        target: comicApplet
+        target: plasmoid.nativeInterface
 
         onComicsModelChanged: {
             comicTabbar.currentTab = comicTabbar.layout.children[1];
@@ -88,15 +88,15 @@ Item {
             right: parent.right
         }
 
-        visible: (comicApplet.comicsModel.count > 1)
+        visible: (plasmoid.nativeInterface.comicsModel.count > 1)
 
         onCurrentTabChanged: {
             console.log("onCurrentTabChanged:" + comicTabbar.currentTab.key);
-            comicApplet.tabChanged(comicTabbar.currentTab.key);
+            plasmoid.nativeInterface.tabChanged(comicTabbar.currentTab.key);
         }
 
         Repeater {
-            model: comicApplet.comicsModel
+            model: plasmoid.nativeInterface.comicsModel
             delegate:  PlasmaComponents.TabButton {
                 id: tabButton
 
@@ -141,13 +141,13 @@ Item {
             var tempTop = "";
 
             if ( showComicTitle ) {
-                tempTop = comicApplet.comicData.title;
-                tempTop += ( ( (comicApplet.comicData.stripTitle.length > 0) && (comicApplet.comicData.title.length > 0) ) ? " - " : "" ) + comicApplet.comicData.stripTitle;
+                tempTop = plasmoid.nativeInterface.comicData.title;
+                tempTop += ( ( (plasmoid.nativeInterface.comicData.stripTitle.length > 0) && (plasmoid.nativeInterface.comicData.title.length > 0) ) ? " - " : "" ) + plasmoid.nativeInterface.comicData.stripTitle;
             }
 
             if ( showComicAuthor &&
-                (comicApplet.comicData.author != undefined || comicApplet.comicData.author.length > 0) ) {
-                tempTop = ( tempTop.length > 0 ? comicApplet.comicData.author + ": " + tempTop : comicApplet.comicData.author );
+                (plasmoid.nativeInterface.comicData.author != undefined || plasmoid.nativeInterface.comicData.author.length > 0) ) {
+                tempTop = ( tempTop.length > 0 ? plasmoid.nativeInterface.comicData.author + ": " + tempTop : plasmoid.nativeInterface.comicData.author );
             }
 
             return tempTop;
@@ -165,7 +165,7 @@ Item {
             topMargin: (comicTabbar.visible) ? 3 : 0
         }
 
-        comicData: comicApplet.comicData
+        comicData: plasmoid.nativeInterface.comicData
     }
 
     ComicBottomInfo {
@@ -177,9 +177,9 @@ Item {
             bottom: mainWindow.bottom
         }
 
-        comicData: comicApplet.comicData
-        showUrl: comicApplet.showComicUrl
-        showIdentifier: comicApplet.showComicIdentifier
+        comicData: plasmoid.nativeInterface.comicData
+        showUrl: plasmoid.nativeInterface.showComicUrl
+        showIdentifier: plasmoid.nativeInterface.showComicIdentifier
     }
 
     PlasmaComponents.BusyIndicator {

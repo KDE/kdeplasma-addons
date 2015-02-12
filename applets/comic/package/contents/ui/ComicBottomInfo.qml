@@ -63,7 +63,7 @@ Item {
             }
 
             onClicked: {
-                comicApplet.goJump();
+                plasmoid.nativeInterface.goJump();
             }
 
             PlasmaCore.ToolTipArea {
@@ -93,7 +93,7 @@ Item {
             anchors.fill: parent
 
             hoverEnabled: true
-            visible: comicApplet.checkAuthorization("LaunchApp")
+            visible: plasmoid.nativeInterface.checkAuthorization("LaunchApp")
 
             onEntered: {
                 parent.color = theme.highlightColor;
@@ -104,7 +104,7 @@ Item {
             }
 
             onClicked: {
-                comicApplet.shop();
+                plasmoid.nativeInterface.shop();
             }
 
             PlasmaCore.ToolTipArea {
