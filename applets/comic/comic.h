@@ -29,6 +29,7 @@
 
 #include <QUrl>
 #include <Plasma/DataEngine>
+#include <Plasma/DataEngineConsumer>
 #include <Plasma/Applet>
 
 #include "activecomicmodel.h"
@@ -44,7 +45,7 @@ class QSortFilterProxyModel;
 class QTimer;
 class SavingDir;
 
-class ComicApplet : public Plasma::Applet
+class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
     Q_PROPERTY(QObject * comicsModel READ comicsModel NOTIFY comicModelChanged)
@@ -55,7 +56,7 @@ class ComicApplet : public Plasma::Applet
     Q_PROPERTY(bool showErrorPicture READ showErrorPicture WRITE setShowErrorPicture NOTIFY showErrorPictureChanged)
     Q_PROPERTY(bool arrowsOnHover READ arrowsOnHover WRITE setArrowsOnHover NOTIFY arrowsOnHoverChanged)
     Q_PROPERTY(bool middleClick READ middleClick WRITE setMiddleClick NOTIFY middleClickChanged)
-    Q_PROPERTY(QVariantHash comicData READ comicData NOTIFY comicDataChanged)
+    Q_PROPERTY(QVariantMap comicData READ comicData NOTIFY comicDataChanged)
     Q_PROPERTY(bool showActualSize READ showActualSize WRITE setShowActualSize NOTIFY showActualSizeChanged)
 
     public:
@@ -67,7 +68,7 @@ class ComicApplet : public Plasma::Applet
 
         //For QML
         QObject *comicsModel();
-        QVariantHash comicData();
+        QVariantMap comicData();
 
         bool showComicUrl() const;
         void setShowComicUrl(bool show);
@@ -155,7 +156,7 @@ Q_SIGNALS:
         ComicModel *mModel;
         QSortFilterProxyModel *mProxy;
         ActiveComicModel mActiveComicModel;
-        QVariantHash mComicData;
+        QVariantMap mComicData;
 
         QDate mCurrentDay;
 

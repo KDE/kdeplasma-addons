@@ -69,7 +69,7 @@ Item {
         PlasmaCore.ToolTipArea {
             id: tooltip
             anchors.fill: comicImageArea
-            mainText: plasmoid.nativeInterface.comicData.additionalText
+            subText: plasmoid.nativeInterface.comicData.additionalText
         }
 
         ImageWidget {

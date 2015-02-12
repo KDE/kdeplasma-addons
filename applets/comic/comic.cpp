@@ -514,6 +514,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     mEngine = Plasma::PluginLoader::self()->loadDataEngine( "comic" );
     const QString id = mCurrent.id();
     setConfigurationRequired( id.isEmpty() );
+
     if ( !id.isEmpty() && mEngine && mEngine->isValid() ) {
 
         QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
@@ -534,7 +535,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         mOldSource = identifier;
         mEngine->disconnectSource( identifier, this );
         mEngine->connectSource( identifier, this );
-        
+
         /*TODO const Plasma::DataEngine::Data data = mEngine->query( identifier );
 
         if ( data[ "Error" ].toBool() ) {
@@ -678,7 +679,7 @@ void ComicApplet::setMiddleClick(bool show)
     emit middleClickChanged();
 }
 
-QVariantHash ComicApplet::comicData()
+QVariantMap ComicApplet::comicData()
 {
     return mComicData;
 }
