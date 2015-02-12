@@ -689,6 +689,21 @@ QVariantMap ComicApplet::comicData()
     return mComicData;
 }
 
+QStringList ComicApplet::tabIdentifiers() const
+{
+    return mTabIdentifier;
+}
+
+void ComicApplet::setTabIdentifiers(const QStringList &tabs)
+{
+    if (mTabIdentifier == tabs) {
+        return;
+    }
+
+    mTabIdentifier = tabs;
+    emit tabIdentifiersChanged();
+}
+
 void ComicApplet::refreshComicData()
 {
     mComicData["image"] = mCurrent.image();

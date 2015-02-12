@@ -59,6 +59,7 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
     Q_PROPERTY(bool middleClick READ middleClick WRITE setMiddleClick NOTIFY middleClickChanged)
     Q_PROPERTY(QVariantMap comicData READ comicData NOTIFY comicDataChanged)
     Q_PROPERTY(bool showActualSize READ showActualSize WRITE setShowActualSize NOTIFY showActualSizeChanged)
+    Q_PROPERTY(QStringList tabIdentifiers READ tabIdentifiers WRITE setTabIdentifiers NOTIFY tabIdentifiersChanged)
 
     public:
         ComicApplet( QObject *parent, const QVariantList &args );
@@ -71,6 +72,9 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
         QObject *comicsModel();
         QObject *availableComicsModel();
         QVariantMap comicData();
+
+        QStringList tabIdentifiers() const;
+        void setTabIdentifiers(const QStringList &tabs);
 
         bool showComicUrl() const;
         void setShowComicUrl(bool show);
@@ -112,6 +116,7 @@ Q_SIGNALS:
     void tabHighlightRequest(const QString &id, bool highlight);
     void showNextNewStrip();
     void showActualSizeChanged();
+    void tabIdentifiersChanged();
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
