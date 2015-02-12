@@ -19,14 +19,15 @@ import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.qtextracomponents 2.0
+import org.kde.kquickcontrolsaddons 2.0
+
 
 PlasmaCore.Dialog {
     id: root
 
     property alias image: comicPicture.image
 
-    windowFlags: Qt.Popup
+    flags: Qt.Popup
     visible: false
 
     function open()
