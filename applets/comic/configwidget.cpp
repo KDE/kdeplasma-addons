@@ -103,7 +103,7 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSort
 {
     comicSettings = new QWidget( this );
     comicUi.setupUi( comicSettings );
-    comicUi.pushButton_GHNS->setIcon( KIcon( "get-hot-new-stuff" ) );
+    comicUi.pushButton_GHNS->setIcon( QIcon::fromTheme( "get-hot-new-stuff" ) );
 
     appearanceSettings = new QWidget();
     appearanceUi.setupUi( appearanceSettings );

@@ -15,10 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.qtextracomponents 2.0
 
 Item {
     id: mainWindow
@@ -29,8 +29,8 @@ Item {
     width: minimumWidth
     height: minimumHeight
 
-    property int minimumWidth: theme.defaultFont.mSize.width * 35
-    property int minimumHeight: theme.defaultFont.mSize.height * 12
+    property int minimumWidth: theme.mSize(theme.defaultFont).width * 35
+    property int minimumHeight: theme.mSize(theme.defaultFont).height * 12
     property bool showComicAuthor: comicApplet.showComicAuthor
     property bool showComicTitle: comicApplet.showComicTitle
     property bool showErrorPicture: comicApplet.showErrorPicture

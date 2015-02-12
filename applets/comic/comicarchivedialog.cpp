@@ -80,7 +80,7 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
     archiveTypeChanged( ComicArchiveJob::ArchiveAll );
 
     //TODO suggest file name!
-    ui.dest->fileDialog()->setOperationMode( KFileDialog::Saving );
+    ui.dest->fileDialog()->setAcceptMode( QFileDialog::AcceptSave );
     if ( !savingDir.isEmpty() ) {
         ui.dest->setStartDir( savingDir );
     }

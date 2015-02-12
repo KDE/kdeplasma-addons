@@ -35,7 +35,7 @@ class ComicArchiveDialog : public KDialog
         ComicArchiveDialog( const QString &pluginName, const QString &comicName, IdentifierType identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, const QString &savingDir = QString(), QWidget *parent = 0 );
 
     signals:
-        void archive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
+        void archive( int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
 
     private slots:
         void archiveTypeChanged( int newType );

@@ -20,7 +20,7 @@
 #include "comicdata.h"
 
 #include <Plasma/Theme>
-
+#include <KLocalizedString>
 #include <QtGui/QPainter>
 
 ComicData::ComicData()
@@ -82,9 +82,9 @@ void ComicData::setData(const Plasma::DataEngine::Data &data)
         mAdditionalText = data["Additional text"].toString();
     }
 
-    mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
-    mImageUrl = data["Image Url"].value<KUrl>();
-    mShopUrl = data[ "Shop Url" ].value<KUrl>();
+    mWebsiteUrl = data[ "Website Url" ].value<QUrl>();
+    mImageUrl = data["Image Url"].value<QUrl>();
+    mShopUrl = data[ "Shop Url" ].value<QUrl>();
     mFirst = data[ "First strip identifier suffix" ].toString();
     mStripTitle = data[ "Strip title" ].toString();
     mAuthor = data[ "Comic Author" ].toString();
@@ -134,7 +134,7 @@ void ComicData::createErrorPicture(const Plasma::DataEngine::Data &data)
     QPixmap errorPic( 500, 400 );
     errorPic.fill();
     QPainter p( &errorPic );
-    QFont font = Plasma::Theme::defaultTheme()->font( Plasma::Theme::DefaultFont );
+    QFont font = QGuiApplication::font();
     font.setPointSize( 24 );
     p.setPen( QColor( 0, 0, 0 ) );
     p.setFont( font );

@@ -27,20 +27,16 @@
 
 #include <QtCore/QDate>
 
-#include <KUrl>
+#include <QUrl>
 #include <Plasma/DataEngine>
-#include <Plasma/PopupApplet>
+#include <Plasma/Applet>
 
 #include "activecomicmodel.h"
-
-namespace Plasma {
-    class DeclarativeWidget;
-}
 
 class CheckNewStrips;
 class ComicModel;
 class ConfigWidget;
-class KAction;
+class QAction;
 class KJob;
 class QAction;
 class QGraphicsLayout;
@@ -48,7 +44,7 @@ class QSortFilterProxyModel;
 class QTimer;
 class SavingDir;
 
-class ComicApplet : public Plasma::PopupApplet
+class ComicApplet : public Plasma::Applet
 {
     Q_OBJECT
     Q_PROPERTY(QObject * comicsModel READ comicsModel NOTIFY comicModelChanged)
@@ -68,8 +64,6 @@ class ComicApplet : public Plasma::PopupApplet
 
         void init();
         virtual QList<QAction*> contextualActions();
-
-        QGraphicsWidget *graphicsWidget();
 
         //For QML
         QObject *comicsModel();
@@ -99,7 +93,8 @@ class ComicApplet : public Plasma::PopupApplet
         bool showActualSize() const;
         void setShowActualSize(bool show);
 
-        Q_INVOKABLE bool checkAuthorization(const QString &permissionName) { return hasAuthorization(permissionName); }
+        //TODO?
+       // Q_INVOKABLE bool checkAuthorization(const QString &permissionName) { return hasAuthorization(permissionName); }
         //End for QML
 Q_SIGNALS:
     void comicModelChanged();
@@ -117,7 +112,7 @@ Q_SIGNALS:
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
-        void createConfigurationInterface( KConfigDialog *parent );
+        //void createConfigurationInterface( KConfigDialog *parent );
 
     private Q_SLOTS:
         void slotTabChanged( const QString &newIdentifier );
@@ -131,10 +126,10 @@ Q_SIGNALS:
         void slotScaleToContent();
         void slotShop();
         void slotStorePosition();
-        void applyConfig();
+        //void applyConfig();
         void checkDayChanged();
         void createComicBook();
-        void slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
+        void slotArchive( int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
         void slotArchiveFinished( KJob *job );
 
     public slots:
@@ -144,16 +139,12 @@ Q_SIGNALS:
         Q_INVOKABLE void shop() { slotShop();}
         Q_INVOKABLE void tabChanged(const QString &newIdentifier) { slotTabChanged(newIdentifier);}
 
-    protected:
-        QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
-
     private:
         void changeComic( bool differentComic );
         void updateUsedComics();
         void updateContextMenu();
         void updateView();
         void saveConfig();
-        bool isInPanel() const;
         void refreshComicData();
         void setTabHighlighted(const QString &id, bool highlight);
         bool hasHighlightedTabs();
@@ -183,14 +174,13 @@ Q_SIGNALS:
         CheckNewStrips *mCheckNewStrips;
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
-        Plasma::DeclarativeWidget *mDeclarativeWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
         QAction *mActionGoJump;
         QAction *mActionScaleContent;
         QAction *mActionShop;
         QAction *mActionStorePosition;
-        KAction *mActionNextNewStripTab;
+        QAction *mActionNextNewStripTab;
         QSizeF mMaxSize;
         QSizeF mLastSize;
         QSizeF mIdealSize;
@@ -203,7 +193,5 @@ Q_SIGNALS:
         ComicData mCurrent;
         SavingDir *mSavingDir;
 };
-
-K_EXPORT_PLASMA_APPLET( comic, ComicApplet )
 
 #endif

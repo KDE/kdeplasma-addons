@@ -24,18 +24,9 @@
 #include <KTemporaryFile>
 #include <KZip>
 
-#ifdef HAVE_NEPOMUK
-#include <Nepomuk/Resource>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <Nepomuk/Vocabulary/NCO>
-#include <Nepomuk/Vocabulary/NFO>
-#include <Nepomuk/Vocabulary/PIMO>
+#include <QImage>
 
-using namespace Nepomuk::Vocabulary;
-#endif
-
-ComicArchiveJob::ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, ComicArchiveJob::ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent )
+ComicArchiveJob::ComicArchiveJob( const QUrl &dest, Plasma::DataEngine *engine, ComicArchiveJob::ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent )
   : KJob( parent ),
     mType( archiveType ),
     mDirection( Undefined ),
@@ -345,10 +336,10 @@ void ComicArchiveJob::requestComic( QString identifier ) //krazy:exclude=passbyv
 
     emit description( this, i18n( "Creating Comic Book Archive" ),
                       qMakePair( QString( "source" ), identifier ),
-                      qMakePair( QString( "destination" ), mDest.prettyUrl() ) );
+                      qMakePair( QString( "destination" ), mDest.toString() ) );
 
     mEngine->connectSource( identifier, this );
-    mEngine->query( identifier );
+//    mEngine->query( identifier );
 }
 
 bool ComicArchiveJob::addFileToZip( const QString &path )
@@ -384,8 +375,8 @@ void ComicArchiveJob::createBackwardZip()
 void ComicArchiveJob::copyZipFileToDestination()
 {
     mZip->close();
-    const bool worked = KIO::NetAccess::file_copy( KUrl( mZipFile->fileName() ), mDest );
-    //store additional data using Nepomuk
+    const bool worked = KIO::NetAccess::file_copy( QUrl( mZipFile->fileName() ), mDest );
+
     if (!worked) {
         kWarning() << "Could not copy the zip file to the specified destination:" << mDest;
         setErrorText( i18n( "Could not create the archive at the specified location." ) );
@@ -393,35 +384,6 @@ void ComicArchiveJob::copyZipFileToDestination()
         emitResultIfNeeded();
         return;
     }
-
-#ifdef HAVE_NEPOMUK
-    //store additional data using Nepomuk
-    Nepomuk::Resource res( mDest, NFO::FileDataObject() );
-
-    Nepomuk::Resource comicTopic( "Comic", PIMO::Topic() );
-    comicTopic.setLabel( i18n( "Comic" ) );
-
-    if ( !mComicTitle.isEmpty() ) {
-        Nepomuk::Resource topic( mComicTitle, PIMO::Topic() );
-        topic.setLabel( mComicTitle );
-        topic.setProperty( PIMO::superTopic(), comicTopic );
-        res.addTag( topic );
-    } else {
-//             res.addTag( comicTopic );//TODO activate this, see below
-        ;
-    }
-
-    //FIXME also set the comic topic as tag, this is redundant, as topic has this as super topic
-    //though at this point the gui (Dolphin) does not manage to show the correct tags
-    res.addTag( comicTopic );
-
-    foreach ( QString author, mAuthors ) {
-        author = author.trimmed();
-        Nepomuk::Resource authorRes( author, NCO::PersonContact() );
-        authorRes.setProperty( NCO::fullname(), author );
-        res.addProperty( NCO::creator(), authorRes );
-    }
-#endif
 
     emitResultIfNeeded();
 }

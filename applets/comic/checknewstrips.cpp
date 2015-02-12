@@ -58,7 +58,7 @@ void CheckNewStrips::dataUpdated( const QString &source, const Plasma::DataEngin
     if ( mIndex < mIdentifiers.count() ) {
         const QString newSource = mIdentifiers[mIndex] + ':';
         mEngine->connectSource( newSource, this );
-        mEngine->query( newSource );
+//        mEngine->query( newSource );
     } else {
         mIndex = 0;
     }
@@ -74,6 +74,6 @@ void CheckNewStrips::start()
     if ( mIndex < mIdentifiers.count() ) {
         const QString newSource = mIdentifiers[mIndex] + ':';
         mEngine->connectSource( newSource, this );
-        mEngine->query( newSource );
+//        mEngine->query( newSource );
     }
 }

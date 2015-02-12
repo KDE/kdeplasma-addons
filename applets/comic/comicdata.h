@@ -22,7 +22,8 @@
 
 #include "comicinfo.h"
 
-#include <KUrl>
+#include <QUrl>
+#include <QImage>
 #include <Plasma/DataEngine>
 
 #include <QtCore/QString>
@@ -90,11 +91,11 @@ class ComicData
 
         QString stripTitle() const { return mStripTitle; }
 
-        KUrl websiteUrl() const { return mWebsiteUrl; }
+        QUrl websiteUrl() const { return mWebsiteUrl; }
 
-        KUrl imageUrl() const { return mImageUrl; }
+        QUrl imageUrl() const { return mImageUrl; }
 
-        KUrl shopUrl() const { return mShopUrl; }
+        QUrl shopUrl() const { return mShopUrl; }
 
         QString author() const { return mAuthor; }
 
@@ -137,9 +138,9 @@ class ComicData
         QString mTitle;
         QString mStripTitle;
         QString mAdditionalText;
-        KUrl mWebsiteUrl;
-        KUrl mImageUrl;
-        KUrl mShopUrl;
+        QUrl mWebsiteUrl;
+        QUrl mImageUrl;
+        QUrl mShopUrl;
 
         QImage mImage;
 

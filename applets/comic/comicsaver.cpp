@@ -63,20 +63,20 @@ bool ComicSaver::save(const ComicData &comic)
     // save image to temporary file
     comic.image().save(tempFile.fileName(), "PNG");
 
-    KUrl srcUrl( tempFile.fileName() );
+    QUrl srcUrl( tempFile.fileName() );
 
     const QString title = comic.title();
 
     const QString name = title + " - " + comic.current() + ".png";
-    KUrl destUrl = KUrl(mSavingDir->getDir());
-    destUrl.addPath( name );
+    QUrl destUrl = QUrl(mSavingDir->getDir());
+    destUrl.setPath( destUrl.path() + name );
 
     destUrl = KFileDialog::getSaveUrl( destUrl, "*.png" );
     if ( !destUrl.isValid() ) {
         return false;
     }
 
-   mSavingDir->setDir(destUrl.directory());
+   mSavingDir->setDir(destUrl.path());
 
 #ifdef HAVE_NEPOMUK
     bool worked = KIO::NetAccess::file_copy(srcUrl, destUrl);

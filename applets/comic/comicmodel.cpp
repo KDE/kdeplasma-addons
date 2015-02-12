@@ -20,12 +20,18 @@
 
 #include "comicmodel.h"
 
-#include <KIcon>
+#include <QIcon>
 
-ComicModel::ComicModel( const Plasma::DataEngine::Data &comics, const QStringList &usedComics, QObject *parent )
-  : QAbstractTableModel( parent ), mNumSelected( 0 )
+ComicModel::ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent )
+  : QAbstractTableModel( parent ), mNumSelected( 0 ), mUsedComics(usedComics)
 {
-    setComics( comics, usedComics );
+
+    engine->connectSource( source, this );
+}
+
+void ComicModel::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
+{
+    setComics( data, mUsedComics );
 }
 
 void ComicModel::setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics )
@@ -79,7 +85,7 @@ QVariant ComicModel::data( const QModelIndex &index, int role ) const
             case Qt::DisplayRole:
                 return mComics[ data ].toStringList()[ 0 ];
             case Qt::DecorationRole:
-                return KIcon( mComics[ data ].toStringList()[ 1 ] );
+                return QIcon::fromTheme( mComics[ data ].toStringList()[ 1 ] );
             case Qt::UserRole:
                 return data;
         }

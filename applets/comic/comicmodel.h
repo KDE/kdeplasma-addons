@@ -24,12 +24,14 @@
 #include <QtCore/QAbstractTableModel>
 
 #include <Plasma/DataEngine>
+#include <Plasma/DataEngineConsumer>
 
-class ComicModel : public QAbstractTableModel
+class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
 {
     public:
-        ComicModel( const Plasma::DataEngine::Data &comics, const QStringList &usedComics, QObject *parent = 0 );
+        ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent = 0 );
 
+        void dataUpdated( const QString &source, const Plasma::DataEngine::Data &data );
         void setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics );
 
         int rowCount( const QModelIndex &index = QModelIndex() ) const;
@@ -45,6 +47,7 @@ class ComicModel : public QAbstractTableModel
         Plasma::DataEngine::Data mComics;
         QHash<QString, Qt::CheckState> mState;
         int mNumSelected;
+        QStringList mUsedComics;
 };
 
 #endif
