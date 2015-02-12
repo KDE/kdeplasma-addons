@@ -25,7 +25,7 @@ ki18n_wrap_ui(comic_SRCS
 
 add_library(plasma_applet_comic MODULE ${comic_SRCS})
 
-kcoreaddons_desktop_to_json(plasma_applet_comic plasma-comic-default.desktop)
+kcoreaddons_desktop_to_json(plasma_applet_comic package/metadata.desktop)
 
 target_link_libraries(plasma_applet_comic
                       KF5::Plasma
@@ -37,7 +37,8 @@ target_link_libraries(plasma_applet_comic
 
 
 install(TARGETS plasma_applet_comic DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-comic-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+#install(FILES plasma-comic-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES comic.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 plasma_install_package(package org.kde.plasma.comic)
+

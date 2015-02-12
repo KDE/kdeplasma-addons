@@ -114,9 +114,10 @@ X-KDE-ServiceTypes=Plasma/Applet
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
+X-KDE-Library=plasma_applet_comic
 X-KDE-PluginInfo-Author=Reza Fatahilah Shah
 X-KDE-PluginInfo-Email=rshah0385@kireihana.com
-X-KDE-PluginInfo-Name=comic
+X-KDE-PluginInfo-Name=org.kde.plasma.comic
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Graphics
