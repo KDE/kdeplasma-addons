@@ -28,8 +28,15 @@ Item {
     width: childrenRect.width
     height: childrenRect.height
 
-    property var cfg_sources: []
-
+    function saveConfig() {
+        var newTabs = [];
+        for (var i in providerColumn.children) {
+            if (providerColumn.children[i].checked) {
+                newTabs.push(providerColumn.children[i].plugin)
+            }
+        }
+        plasmoid.nativeInterface.tabIdentifiers = newTabs;
+    }
 
     Layouts.ColumnLayout {
         id: mainColumn
@@ -41,10 +48,18 @@ Item {
             flat: true
 
             Layouts.ColumnLayout {
-                Repeater {
-                    model: plasmoid.nativeInterface.availableComicsModel
-                    delegate: Controls.CheckBox {
-                        text: model.display
+                Layouts.ColumnLayout {
+                    id: providerColumn
+                    Repeater {
+                        model: plasmoid.nativeInterface.availableComicsModel
+                        delegate: Controls.CheckBox {
+                            id: checkbox
+                            text: model.display
+                            property string plugin: model.plugin
+                            Component.onCompleted: {
+                                checkbox.checked = plasmoid.nativeInterface.tabIdentifiers.indexOf(model.plugin) !== -1
+                            }
+                        }
                     }
                 }
                 Item {

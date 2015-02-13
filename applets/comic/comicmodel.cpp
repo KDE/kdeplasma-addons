@@ -93,6 +93,8 @@ QVariant ComicModel::data( const QModelIndex &index, int role ) const
             return QIcon::fromTheme( mComics[ data ].toStringList()[ 1 ] );
         case Qt::UserRole:
             return data;
+        case Qt::CheckStateRole:
+            return mState[ data ];
     }
 
 

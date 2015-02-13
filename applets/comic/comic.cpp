@@ -702,6 +702,9 @@ void ComicApplet::setTabIdentifiers(const QStringList &tabs)
 
     mTabIdentifier = tabs;
     emit tabIdentifiersChanged();
+    saveConfig();
+    configChanged();
+    changeComic( mDifferentComic );
 }
 
 void ComicApplet::refreshComicData()
