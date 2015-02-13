@@ -20,6 +20,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
+import QtQuick.Layouts 1.1
 
 
 PlasmaCore.Dialog {
@@ -32,11 +33,6 @@ PlasmaCore.Dialog {
 
     function open()
     {
-        var pos = root.popupPosition(null, Qt.AlignCenter);
-
-        root.x = pos.x;
-        root.y = pos.y;
-
         root.visible = true;
         root.activateWindow();
     }
@@ -50,8 +46,10 @@ PlasmaCore.Dialog {
 
         anchors.fill: parent
 
-        width: comicPicture.nativeWidth
-        height: comicPicture.nativeHeight
+        Layout.minimumWidth: comicPicture.nativeWidth
+        Layout.maximumWidth: Layout.minimumWidth
+        Layout.minimumHeight: comicPicture.nativeHeight
+        Layout.maximumHeight: Layout.minimumHeight
 
         Flickable {
             id: viewContainer
