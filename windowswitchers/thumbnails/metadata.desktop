@@ -24,6 +24,7 @@ Name[tr]=Küçük Resimler
 Name[uk]=Мініатюри
 Name[x-test]=xxThumbnailsxx
 Name[zh_CN]=缩略图
+Name[zh_TW]=縮圖
 Comment=A window switcher layout using live thumbnails
 Comment[ca]=Una disposició del commutador de finestres que utilitza miniatures animades
 Comment[cs]=Přepínač oken s živými náhledy
@@ -49,6 +50,7 @@ Comment[tr]=Canlı küçük resimleri gösteren bir pencere değiştirme düzeni
 Comment[uk]=Компонування засобу перемикання вікон з мініатюрами поточного стану вікон
 Comment[x-test]=xxA window switcher layout using live thumbnailsxx
 Comment[zh_CN]=一个显示实时窗口预览的窗口切换器布局
+Comment[zh_TW]=使用即時縮圖的視窗切換器佈局
 Icon=preferences-system-windows-switcher-thumbnails
 
 X-Plasma-API=declarativeappletscript
