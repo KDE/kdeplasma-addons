@@ -680,6 +680,7 @@ void ComicApplet::setMiddleClick(bool show)
     mMiddleClick = show;
 
     emit middleClickChanged();
+    saveConfig();
 }
 
 QVariantMap ComicApplet::comicData()
@@ -747,6 +748,22 @@ void ComicApplet::setShowActualSize(bool show)
 
     emit showActualSizeChanged();
 }
+
+int ComicApplet::checkNewComicStripsInterval() const
+{
+    return mCheckNewComicStripsIntervall;
+}
+
+void ComicApplet::setCheckNewComicStripsInterval(int interval)
+{
+    if (mCheckNewComicStripsIntervall == interval) {
+        return;
+    }
+
+    mCheckNewComicStripsIntervall = interval;
+    emit checkNewComicStripsIntervalChanged();
+}
+
 //Endof QML
 void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
 {

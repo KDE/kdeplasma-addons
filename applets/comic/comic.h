@@ -60,6 +60,7 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
     Q_PROPERTY(QVariantMap comicData READ comicData NOTIFY comicDataChanged)
     Q_PROPERTY(bool showActualSize READ showActualSize WRITE setShowActualSize NOTIFY showActualSizeChanged)
     Q_PROPERTY(QStringList tabIdentifiers READ tabIdentifiers WRITE setTabIdentifiers NOTIFY tabIdentifiersChanged)
+    Q_PROPERTY(int checkNewComicStripsInterval READ checkNewComicStripsInterval WRITE setCheckNewComicStripsInterval NOTIFY checkNewComicStripsIntervalChanged)
 
     public:
         ComicApplet( QObject *parent, const QVariantList &args );
@@ -100,6 +101,8 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
         bool showActualSize() const;
         void setShowActualSize(bool show);
 
+        int checkNewComicStripsInterval() const;
+        void setCheckNewComicStripsInterval(int interval);
         //TODO?
        // Q_INVOKABLE bool checkAuthorization(const QString &permissionName) { return hasAuthorization(permissionName); }
         //End for QML
@@ -117,6 +120,7 @@ Q_SIGNALS:
     void showNextNewStrip();
     void showActualSizeChanged();
     void tabIdentifiersChanged();
+    void checkNewComicStripsIntervalChanged();
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );

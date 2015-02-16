@@ -36,6 +36,12 @@ Item {
             }
         }
         plasmoid.nativeInterface.tabIdentifiers = newTabs;
+
+        plasmoid.nativeInterface.middleClick = middleClickCheckBox.checked;
+
+        plasmoid.nativeInterface.checkNewComicStripsInterval = checkNewComicStripsInterval.value;
+
+        plasmoid.nativeInterface.configChanged();
     }
 
     Layouts.ColumnLayout {
@@ -71,6 +77,7 @@ Item {
                     text: i18n("Get New Comics...")
                 }
                 Controls.CheckBox {
+                    id: middleClickCheckBox
                     text: i18n("Middle-click on the comic to show it at its original size")
                 }
             }
@@ -99,6 +106,7 @@ Item {
                         text: i18n("Check for new comic strips:")
                     }
                     Controls.SpinBox {
+                        id: checkNewComicStripsInterval
                         Layouts.Layout.minimumWidth: units.gridUnit * 8
                         suffix: " "+i18n("minutes")
                         stepSize: 1
