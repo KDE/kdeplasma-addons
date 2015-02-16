@@ -156,50 +156,75 @@ PlasmaCore.SvgItem
         }
         PlasmaComponents.ToolButton {
             id: toggleFormatBarButton
+            tooltip: i18n("Toggle text format options")
             iconSource: "draw-text"
             checkable: true
+            Accessible.name: tooltip
         }
 
         PlasmaComponents.ToolButton {
-            id: formatBoldButton
+            tooltip: i18n("Bold")
             iconSource: "format-text-bold"
             visible: toggleFormatBarButton.checked
-            checkable: true
             checked: documentHandler.bold
             onClicked: documentHandler.bold = !documentHandler.bold
-
+            Accessible.name: tooltip
         }
         PlasmaComponents.ToolButton {
+            tooltip: i18n("Italic")
             iconSource: "format-text-italic"
             visible: toggleFormatBarButton.checked
-            checkable: true
             checked: documentHandler.italic
             onClicked: documentHandler.italic = !documentHandler.italic
+            Accessible.name: tooltip
         }
         PlasmaComponents.ToolButton {
+            tooltip: i18n("Underline")
             iconSource: "format-text-underline"
             visible: toggleFormatBarButton.checked
-            checkable: true
             checked: documentHandler.underline
             onClicked: documentHandler.underline = !documentHandler.underline
+            Accessible.name: tooltip
         }
         PlasmaComponents.ToolButton {
+            tooltip: i18n("Strikethrough")
             iconSource: "format-text-strikethrough"
             visible: toggleFormatBarButton.checked
-            checkable: true
             checked: documentHandler.strikeOut
             onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
+            Accessible.name: tooltip
         }
         PlasmaComponents.ToolButton {
+            tooltip: i18n("Align left")
+            iconSource: "format-justify-left"
+            visible: toggleFormatBarButton.checked
+            checked: documentHandler.alignment === Qt.AlignLeft
+            onClicked: documentHandler.alignment = Qt.AlignLeft
+            Accessible.name: tooltip
+        }
+        PlasmaComponents.ToolButton {
+            tooltip: i18n("Align center")
             iconSource: "format-justify-center"
             visible: toggleFormatBarButton.checked
-            checkable: true
-
+            checked: documentHandler.alignment === Qt.AlignCenter
+            onClicked: documentHandler.alignment = Qt.AlignCenter
+            Accessible.name: tooltip
         }
         PlasmaComponents.ToolButton {
+            tooltip: i18n("Align right")
+            iconSource: "format-justify-right"
+            visible: toggleFormatBarButton.checked
+            checked: documentHandler.alignment === Qt.AlignRight
+            onClicked: documentHandler.alignment = Qt.AlignRight
+            Accessible.name: tooltip
+        }
+        PlasmaComponents.ToolButton {
+            tooltip: i18n("Justified")
             iconSource: "format-justify-fill"
             visible: toggleFormatBarButton.checked
-            checkable: true
+            checked: documentHandler.alignment === Qt.AlignJustify
+            onClicked: documentHandler.alignment = Qt.AlignJustify
+            Accessible.name: tooltip
         }
     }
 
