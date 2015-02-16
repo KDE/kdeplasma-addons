@@ -75,6 +75,7 @@ Item {
                 }
                 Controls.Button {
                     text: i18n("Get New Comics...")
+                    onClicked: plasmoid.nativeInterface.getNewComics();
                 }
                 Controls.CheckBox {
                     id: middleClickCheckBox

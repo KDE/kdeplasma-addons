@@ -3,6 +3,6 @@ ProvidersUrl=http://download.kde.org/ocs/providers.xml
 Categories=Plasma Comic
 TargetDir=plasma/comics
 Uncompress=never
-InstallationCommand=plasmapkg -t comic -i %f
-UninstallCommand=plasmapkg -t comic -r %f
+InstallationCommand=plasmapkg2 -t comic -i %f
+UninstallCommand=plasmapkg2 -t comic -r %f
 

@@ -41,6 +41,7 @@
 #include <KDebug>
 #include <KNotification>
 #include <kuiserverjobtracker.h>
+#include <KNewStuff3/KNS3/DownloadDialog>
 #include <KRun>
 #include <KStandardShortcut>
 #include <KIconLoader>
@@ -228,6 +229,17 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 void ComicApplet::updateView()
 {
     updateContextMenu();
+}
+
+void ComicApplet::getNewComics()
+{
+    if (!m_newStuffDialog) {
+        m_newStuffDialog = new KNS3::DownloadDialog( QString::fromLatin1("comic.knsrc") );
+        KNS3::DownloadDialog *strong = m_newStuffDialog.data();
+        strong->setTitle(i18n("Download Comics"));
+        connect(m_newStuffDialog.data(), SIGNAL(accepted()), SLOT(newStuffFinished()));
+    }
+    m_newStuffDialog.data()->show();
 }
 
 /*TODO: worst part to port
