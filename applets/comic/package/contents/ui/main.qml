@@ -182,13 +182,6 @@ Item {
         showIdentifier: plasmoid.nativeInterface.showComicIdentifier
     }
 
-    PlasmaComponents.BusyIndicator {
-        id: busyIndicator
-        anchors.centerIn: parent
-        running: visible
-        visible: false
-    }
-
     states: [
         State {
             name: "topInfoVisible"
