@@ -26,6 +26,7 @@ ki18n_wrap_ui(comic_SRCS
 add_library(plasma_applet_comic MODULE ${comic_SRCS})
 
 kcoreaddons_desktop_to_json(plasma_applet_comic package/metadata.desktop)
+file(RENAME ${CMAKE_CURRENT_BINARY_DIR}/metadata.json ${CMAKE_CURRENT_BINARY_DIR}/plasma-comic-default.json)
 
 target_link_libraries(plasma_applet_comic
                       KF5::Plasma

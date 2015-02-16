@@ -34,8 +34,6 @@
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QGraphicsSceneWheelEvent>
 #include <QtGui/QSortFilterProxyModel>
-#include <QtDeclarative/QDeclarativeEngine>
-#include <QtDeclarative/QDeclarativeContext>
 
 #include <QAction>
 #include <KActionCollection>
