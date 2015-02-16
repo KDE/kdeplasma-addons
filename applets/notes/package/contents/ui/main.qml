@@ -35,10 +35,10 @@ PlasmaCore.SvgItem
 
     width: units.gridUnit * 14
     height: units.gridUnit * 14
-    Layout.minimumWidth: units.gridUnit * 10
-    Layout.minimumHeight: units.gridUnit * 10
-    Plasmoid.switchWidth: units.gridUnit * 11
-    Plasmoid.switchHeight: units.gridUnit * 11
+    Layout.minimumWidth: units.gridUnit * 4
+    Layout.minimumHeight: units.gridUnit * 4
+    Plasmoid.switchWidth: units.gridUnit * 8
+    Plasmoid.switchHeight: units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
