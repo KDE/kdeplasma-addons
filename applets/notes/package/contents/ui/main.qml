@@ -26,8 +26,9 @@ import org.kde.plasma.plasmoid 2.0
 
 import org.kde.plasma.private.notes 0.1
 
-PlasmaCore.SvgItem
-{
+PlasmaCore.SvgItem {
+    id: root
+
     svg: PlasmaCore.Svg {
         imagePath: "widgets/notes"
     }
@@ -37,7 +38,7 @@ PlasmaCore.SvgItem
     height: units.gridUnit * 14
     Layout.minimumWidth: units.gridUnit * 4
     Layout.minimumHeight: units.gridUnit * 4
-    Plasmoid.switchWidth: units.gridUnit * 8
+    Plasmoid.switchWidth: units.gridUnit * 10
     Plasmoid.switchHeight: units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
@@ -149,11 +150,11 @@ PlasmaCore.SvgItem
             bottom: parent.bottom
             left: parent.left
             right: parent.right
-
             leftMargin: horizontalMargins
             rightMargin: horizontalMargins
             bottomMargin: verticalMargins
         }
+
         PlasmaComponents.ToolButton {
             id: toggleFormatBarButton
             tooltip: i18n("Toggle text format options")
@@ -165,7 +166,10 @@ PlasmaCore.SvgItem
         PlasmaComponents.ToolButton {
             tooltip: i18n("Bold")
             iconSource: "format-text-bold"
-            visible: toggleFormatBarButton.checked
+            opacity: toggleFormatBarButton.checked ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            enabled: opacity > 0
+
             checked: documentHandler.bold
             onClicked: documentHandler.bold = !documentHandler.bold
             Accessible.name: tooltip
@@ -173,7 +177,10 @@ PlasmaCore.SvgItem
         PlasmaComponents.ToolButton {
             tooltip: i18n("Italic")
             iconSource: "format-text-italic"
-            visible: toggleFormatBarButton.checked
+            opacity: toggleFormatBarButton.checked ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            enabled: opacity > 0
+
             checked: documentHandler.italic
             onClicked: documentHandler.italic = !documentHandler.italic
             Accessible.name: tooltip
@@ -181,7 +188,10 @@ PlasmaCore.SvgItem
         PlasmaComponents.ToolButton {
             tooltip: i18n("Underline")
             iconSource: "format-text-underline"
-            visible: toggleFormatBarButton.checked
+            opacity: toggleFormatBarButton.checked ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            enabled: opacity > 0
+
             checked: documentHandler.underline
             onClicked: documentHandler.underline = !documentHandler.underline
             Accessible.name: tooltip
@@ -189,7 +199,10 @@ PlasmaCore.SvgItem
         PlasmaComponents.ToolButton {
             tooltip: i18n("Strikethrough")
             iconSource: "format-text-strikethrough"
-            visible: toggleFormatBarButton.checked
+            opacity: toggleFormatBarButton.checked ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            enabled: opacity > 0
+
             checked: documentHandler.strikeOut
             onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
             Accessible.name: tooltip
@@ -197,7 +210,10 @@ PlasmaCore.SvgItem
         PlasmaComponents.ToolButton {
             tooltip: i18n("Align left")
             iconSource: "format-justify-left"
-            visible: toggleFormatBarButton.checked
+            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + 2 * horizontalMargins ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            enabled: opacity > 0
+
             checked: documentHandler.alignment === Qt.AlignLeft
             onClicked: documentHandler.alignment = Qt.AlignLeft
             Accessible.name: tooltip
@@ -205,7 +221,10 @@ PlasmaCore.SvgItem
         PlasmaComponents.ToolButton {
             tooltip: i18n("Align center")
             iconSource: "format-justify-center"
-            visible: toggleFormatBarButton.checked
+            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + horizontalMargins ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            enabled: opacity > 0
+
             checked: documentHandler.alignment === Qt.AlignCenter
             onClicked: documentHandler.alignment = Qt.AlignCenter
             Accessible.name: tooltip
@@ -213,7 +232,10 @@ PlasmaCore.SvgItem
         PlasmaComponents.ToolButton {
             tooltip: i18n("Align right")
             iconSource: "format-justify-right"
-            visible: toggleFormatBarButton.checked
+            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + horizontalMargins ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            enabled: opacity > 0
+
             checked: documentHandler.alignment === Qt.AlignRight
             onClicked: documentHandler.alignment = Qt.AlignRight
             Accessible.name: tooltip
@@ -221,7 +243,10 @@ PlasmaCore.SvgItem
         PlasmaComponents.ToolButton {
             tooltip: i18n("Justified")
             iconSource: "format-justify-fill"
-            visible: toggleFormatBarButton.checked
+            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + horizontalMargins ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            enabled: opacity > 0
+
             checked: documentHandler.alignment === Qt.AlignJustify
             onClicked: documentHandler.alignment = Qt.AlignJustify
             Accessible.name: tooltip
