@@ -88,7 +88,7 @@ Item {
             right: parent.right
         }
 
-        visible: (plasmoid.nativeInterface.comicsModel.count > 1)
+        visible: plasmoid.nativeInterface.tabIdentifiers.length > 1
 
         onCurrentTabChanged: {
             console.log("onCurrentTabChanged:" + comicTabbar.currentTab.key);
@@ -180,6 +180,13 @@ Item {
         comicData: plasmoid.nativeInterface.comicData
         showUrl: plasmoid.nativeInterface.showComicUrl
         showIdentifier: plasmoid.nativeInterface.showComicIdentifier
+    }
+
+    PlasmaComponents.Button {
+        anchors.centerIn: parent
+        text: i18n("Configure...")
+        visible: plasmoid.nativeInterface.tabIdentifiers.length == 0
+        onClicked: plasmoid.action("configure").trigger();
     }
 
     states: [

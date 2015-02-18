@@ -46,6 +46,8 @@ class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
         int numSelected() const;
         QStringList selected() const;
 
+        Q_INVOKABLE void setChecked(const QString &comic, bool checked);
+
     public Q_SLOTS:
         void dataUpdated( const QString &source, const Plasma::DataEngine::Data &data );
 

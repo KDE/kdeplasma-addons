@@ -59,6 +59,7 @@ const int ComicApplet::CACHE_LIMIT = 20;
 
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
+      mProxy(0),
       mActiveComicModel(parent),
       mDifferentComic( true ),
       mShowComicUrl( false ),
@@ -335,7 +336,7 @@ void ComicApplet::updateUsedComics()
     KConfigGroup cg = config();
     int tab = 0;
     for ( int i = 0; i < mProxy->rowCount(); ++i ) {
-        if ( mProxy->index( i, 0 ).data( Qt::CheckStateRole) == Qt::Checked ) {
+        if (mProxy->index( i, 0 ).data( Qt::CheckStateRole) == Qt::Checked ) {
             data = mProxy->index( i, 1 );
 
             if ( isFirst ) {
@@ -351,6 +352,7 @@ void ComicApplet::updateUsedComics()
             const QString identifier = data.data( Qt::UserRole ).toString();
             const QString iconPath = data.data( Qt::DecorationRole ).value<QIcon>().name();
             //found a newer strip last time, which was not visited
+
             if ( mCheckNewComicStripsIntervall && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
                 mActiveComicModel.addComic(identifier, name, iconPath, true);
             } else {
@@ -393,6 +395,9 @@ void ComicApplet::checkDayChanged()
 
 void ComicApplet::configChanged()
 {
+    if (mProxy) {
+        updateUsedComics();
+    }
     KConfigGroup cg = config();
     mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList( QString() ) );
 
@@ -586,6 +591,7 @@ QObject *ComicApplet::comicsModel()
 
 QObject *ComicApplet::availableComicsModel()
 {
+    return mModel;
     return mProxy;
 }
 

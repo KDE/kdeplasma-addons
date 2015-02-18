@@ -61,9 +61,13 @@ Item {
                         delegate: Controls.CheckBox {
                             id: checkbox
                             text: model.display
+                            checked: model.checked
                             property string plugin: model.plugin
                             Component.onCompleted: {
                                 checkbox.checked = plasmoid.nativeInterface.tabIdentifiers.indexOf(model.plugin) !== -1
+                            }
+                            onCheckedChanged: {
+                                plasmoid.nativeInterface.availableComicsModel.setChecked(model.plugin, checkbox.checked)
                             }
                         }
                     }

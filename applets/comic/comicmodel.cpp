@@ -40,6 +40,7 @@ QHash<int, QByteArray> ComicModel::roleNames() const
     roles[Qt::DisplayRole] = "display";
     roles[Qt::DecorationRole] = "decoration";
     roles[Qt::UserRole] = "plugin";
+    roles[Qt::CheckStateRole] = "checked";
     return roles;
 }
 
@@ -147,4 +148,17 @@ QStringList ComicModel::selected() const
     }
 
     return list;
+}
+
+void ComicModel::setChecked(const QString &comic, bool checked)
+{
+    const Qt::CheckState checkedState = ( checked ? Qt::Checked : Qt::Unchecked );
+    const int row = mComics.keys().indexOf(comic);
+    if (!mState.contains(comic) || mState.value(comic) == checkedState) {
+        return;
+    }
+
+    mState[comic] = checkedState;
+    QModelIndex idx = index(row, 0);
+    emit dataChanged( idx, idx );
 }
