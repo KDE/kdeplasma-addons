@@ -66,9 +66,6 @@ Item {
                             Component.onCompleted: {
                                 checkbox.checked = plasmoid.nativeInterface.tabIdentifiers.indexOf(model.plugin) !== -1
                             }
-                            onCheckedChanged: {
-                                plasmoid.nativeInterface.availableComicsModel.setChecked(model.plugin, checkbox.checked)
-                            }
                         }
                     }
                 }

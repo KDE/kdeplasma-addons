@@ -264,7 +264,6 @@ void ComicApplet::updateUsedComics()
     const QString oldIdentifier = mCurrent.id();
 
     mActiveComicModel.clear();
-    mTabIdentifier.clear();
     mCurrent = ComicData();
 
     bool isFirst = true;
@@ -272,7 +271,7 @@ void ComicApplet::updateUsedComics()
     KConfigGroup cg = config();
     int tab = 0;
     for ( int i = 0; i < mProxy->rowCount(); ++i ) {
-        if (mProxy->index( i, 0 ).data( Qt::CheckStateRole) == Qt::Checked ) {
+        if (mTabIdentifier.contains(mProxy->index( i, 0 ).data( Qt::UserRole).toString())) {
             data = mProxy->index( i, 1 );
 
             if ( isFirst ) {
@@ -295,7 +294,7 @@ void ComicApplet::updateUsedComics()
                 mActiveComicModel.addComic(identifier, name, iconPath);
             }
 
-            mTabIdentifier << identifier;
+           // mTabIdentifier << identifier;
             ++tab;
         }
     }
@@ -331,11 +330,12 @@ void ComicApplet::checkDayChanged()
 
 void ComicApplet::configChanged()
 {
+    KConfigGroup cg = config();
+    mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList( QString() ) );
+
     if (mProxy) {
         updateUsedComics();
     }
-    KConfigGroup cg = config();
-    mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList( QString() ) );
 
     const QString id = mTabIdentifier.count() ? mTabIdentifier.at( 0 ) : QString();
     mCurrent = ComicData();
@@ -527,7 +527,6 @@ QObject *ComicApplet::comicsModel()
 
 QObject *ComicApplet::availableComicsModel()
 {
-    return mModel;
     return mProxy;
 }
 
@@ -656,7 +655,6 @@ void ComicApplet::setTabIdentifiers(const QStringList &tabs)
     mTabIdentifier = tabs;
     emit tabIdentifiersChanged();
     saveConfig();
-    configChanged();
     changeComic( mDifferentComic );
 }
 

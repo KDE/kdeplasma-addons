@@ -24,7 +24,7 @@
 #include <QDebug>
 
 ComicModel::ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent )
-  : QAbstractTableModel( parent ), mNumSelected( 0 ), mUsedComics(usedComics)
+  : QAbstractTableModel( parent ), mUsedComics(usedComics)
 {
     engine->connectSource( source, this );
 }
@@ -48,18 +48,7 @@ void ComicModel::setComics( const Plasma::DataEngine::Data &comics, const QStrin
 {
     beginResetModel();
 
-    mNumSelected = 0;
     mComics = comics;
-    mState.clear();
-    Plasma::DataEngine::Data::const_iterator it;
-    Plasma::DataEngine::Data::const_iterator itEnd = mComics.constEnd();
-    for ( it = mComics.constBegin(); it != itEnd; ++it ) {
-        const bool isChecked = usedComics.contains( it.key() );
-        mState[ it.key() ] = ( isChecked ? Qt::Checked : Qt::Unchecked );
-        if ( isChecked ) {
-            ++mNumSelected;
-        }
-    }
 
     endResetModel();
 }
@@ -94,8 +83,6 @@ QVariant ComicModel::data( const QModelIndex &index, int role ) const
             return QIcon::fromTheme( mComics[ data ].toStringList()[ 1 ] );
         case Qt::UserRole:
             return data;
-        case Qt::CheckStateRole:
-            return mState[ data ];
     }
 
 
@@ -111,54 +98,4 @@ Qt::ItemFlags ComicModel::flags( const QModelIndex &index ) const
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
-bool ComicModel::setData( const QModelIndex &index, const QVariant &value, int role )
-{
-    if ( index.isValid() && ( role == Qt::CheckStateRole ) ) {
-        Qt::CheckState oldState = mState[ mComics.keys()[ index.row() ] ];
-        Qt::CheckState newState = static_cast< Qt::CheckState >( value.toInt() );
-        mState[ mComics.keys()[ index.row() ] ] = newState;
-        if ( newState != oldState ) {
-            if ( newState == Qt::Checked ) {
-                ++mNumSelected;
-            } else if ( newState == Qt::Unchecked ) {
-                --mNumSelected;
-            }
-        }
-        emit dataChanged( index, index );
-        return true;
-    }
 
-    return false;
-}
-
-int ComicModel::numSelected() const
-{
-    return mNumSelected;
-}
-
-QStringList ComicModel::selected() const
-{
-    QStringList list;
-    QHash< QString, Qt::CheckState >::const_iterator it;
-    QHash< QString, Qt::CheckState >::const_iterator itEnd = mState.constEnd();
-    for ( it = mState.constBegin(); it != itEnd; ++it ) {
-        if ( it.value() == Qt::Checked ) {
-            list << it.key();
-        }
-    }
-
-    return list;
-}
-
-void ComicModel::setChecked(const QString &comic, bool checked)
-{
-    const Qt::CheckState checkedState = ( checked ? Qt::Checked : Qt::Unchecked );
-    const int row = mComics.keys().indexOf(comic);
-    if (!mState.contains(comic) || mState.value(comic) == checkedState) {
-        return;
-    }
-
-    mState[comic] = checkedState;
-    QModelIndex idx = index(row, 0);
-    emit dataChanged( idx, idx );
-}

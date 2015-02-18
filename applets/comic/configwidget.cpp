@@ -150,7 +150,6 @@ void ConfigWidget::getNewStuff()
 void ConfigWidget::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(name);
-    mModel->setComics( data, mModel->selected() );
     comicUi.listView_comic->resizeColumnToContents( 0 );
 }
 

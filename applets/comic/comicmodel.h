@@ -41,20 +41,13 @@ class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
         int columnCount( const QModelIndex &index = QModelIndex() ) const;
         QVariant data( const QModelIndex &index, int role = Qt::CheckStateRole ) const;
         Qt::ItemFlags flags( const QModelIndex &index ) const;
-        bool setData( const QModelIndex &index, const QVariant &value, int role = Qt::EditRole );
 
-        int numSelected() const;
-        QStringList selected() const;
-
-        Q_INVOKABLE void setChecked(const QString &comic, bool checked);
 
     public Q_SLOTS:
         void dataUpdated( const QString &source, const Plasma::DataEngine::Data &data );
 
     private:
         Plasma::DataEngine::Data mComics;
-        QHash<QString, Qt::CheckState> mState;
-        int mNumSelected;
         QStringList mUsedComics;
 };
 
