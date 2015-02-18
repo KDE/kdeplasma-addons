@@ -19,15 +19,15 @@
 #ifndef COMIC_PACKAGE_H
 #define COMIC_PACKAGE_H
 
-#include <Plasma/PackageStructure>
+#include <KPackage/PackageStructure>
 
-class ComicPackage : public Plasma::PackageStructure
+class ComicPackage : public KPackage::PackageStructure
 {
     Q_OBJECT
 
 public:
         explicit ComicPackage(QObject *parent = 0, const QVariantList& args = QVariantList());
-        void initPackage(Plasma::Package *package);
+        void initPackage(KPackage::Package *package);
 };
 
 #endif

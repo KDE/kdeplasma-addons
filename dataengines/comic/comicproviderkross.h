@@ -24,7 +24,7 @@
 
 #include <QtGui/QImage>
 #include <QUrl>
-#include <Plasma/PackageStructure>
+#include <KPackage/PackageStructure>
 
 class ComicProviderKross : public ComicProvider
 {
@@ -35,7 +35,7 @@ class ComicProviderKross : public ComicProvider
         ComicProviderKross(QObject *parent, const QVariantList &args);
         virtual ~ComicProviderKross();
 
-        static Plasma::PackageStructure *packageStructure();
+        static KPackage::PackageStructure *packageStructure();
 
         virtual bool isLeftToRight() const;
         virtual bool isTopToBottom() const;
@@ -58,7 +58,7 @@ class ComicProviderKross : public ComicProvider
 
     private:
         mutable ComicProviderWrapper m_wrapper;
-        static Plasma::PackageStructure *m_packageStructure;
+        static KPackage::PackageStructure *m_packageStructure;
 };
 
 #endif

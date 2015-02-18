@@ -28,10 +28,13 @@
 
 #include <KServiceTypeTrader>
 #include <KSycoca>
+#include <KPluginInfo>
 
 #include <Plasma/DataContainer>
+#include <KPackage/PackageLoader>
 
 #include "cachedprovider.h"
+#include "comicproviderkross.h"
 
 ComicEngine::ComicEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args), mEmptySuffix(false)
@@ -68,25 +71,23 @@ void ComicEngine::sycocaUpdated(const QStringList &changedResources)
 
 void ComicEngine::updateFactories()
 {
-    mFactories.clear();
+    mProviders.clear();
     removeAllData(QLatin1String("providers"));
-    KService::List services = KServiceTypeTrader::self()->query(QLatin1String("Plasma/Comic"));
-    Q_FOREACH (const KService::Ptr &service, services) {
-        mFactories.insert(service->property(QLatin1String("X-KDE-PluginInfo-Name"), QVariant::String).toString(),
-                           service);
-        if (service->isDeleted()) {
-            continue;
-        }
-        qDebug() << "ComicEngine::updateFactories()  service name=" << service->name();
+    auto comics = KPackage::PackageLoader::self()->listPackages("Plasma/Comic");
+    for (auto comic : comics) {
+        //mFactories.insert(comic.value(QLatin1String("X-KDE-PluginInfo-Name")), service);
+        mProviders << comic.pluginId();
+
+        qDebug() << "ComicEngine::updateFactories()  service name=" << comic.name();
         QStringList data;
-        data << service->name();
-        QFileInfo file(service->icon());
+        data << comic.name();
+        QFileInfo file(comic.iconName());
         if (file.isRelative()) {
-            data << QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(QLatin1String("plasma-comic/%1.png")).arg(service->icon()));
+            data << QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(QLatin1String("plasma-comic/%1.png")).arg(comic.iconName()));
         } else {
-            data << service->icon();
+            data << comic.iconName();
         }
-        setData(QLatin1String("providers"), service->property(QLatin1String("X-KDE-PluginInfo-Name"), QVariant::String).toString(), data);
+        setData(QLatin1String("providers"), comic.pluginId(), data);
     }
 }
 
@@ -128,10 +129,10 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             qCritical() << "Less than two arguments specified.";
             return false;
         }
-        if (!mFactories.contains(parts[0])) {
+        if (!mProviders.contains(parts[0])) {
             // User might have installed more from GHNS
             updateFactories();
-            if (!mFactories.contains(parts[0])) {
+            if (!mProviders.contains(parts[0])) {
                 setData(identifier, QLatin1String("Error"), true);
                 qCritical() << identifier << "comic plugin does not seem to be installed.";
                 return false;
@@ -150,14 +151,15 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             return true;
         }
 
-        const KService::Ptr service = mFactories[parts[0]];
+        KPackage::Package pkg = KPackage::PackageLoader::self()->loadPackage("Plasma/Comic", parts[0]);
 
         bool isCurrentComic = parts[1].isEmpty();
 
         QVariantList args;
         ComicProvider *provider = 0;
 
-        const QString type = service->property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"), QVariant::String).toString();
+        //const QString type = service->property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"), QVariant::String).toString();
+        const QString type = pkg.metadata().value("X-KDE-PlasmaComicProvider-SuffixType");
         if (type == QLatin1String("Date")) {
             QDate date = QDate::fromString(parts[1], Qt::ISODate);
             if (!date.isValid())
@@ -169,9 +171,10 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         } else if (type == QLatin1String("String")) {
             args << QLatin1String("String") << parts[1];
         }
-        args << service->storageId();
+        args << QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/comics/") + parts[0] + QLatin1String("/metadata.desktop"));
 
-        provider = service->createInstance<ComicProvider>(this, args);
+        //provider = service->createInstance<ComicProvider>(this, args);
+        provider = new ComicProviderKross(this, args);
         if (!provider) {
             setData(identifier, QLatin1String("Error"), true);
             qWarning() << identifier << "plugin could be created.";

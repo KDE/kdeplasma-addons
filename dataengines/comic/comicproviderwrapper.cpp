@@ -299,7 +299,7 @@ void ComicProviderWrapper::init()
     qDebug() << "ComicProviderWrapper::init() package is" << mProvider->pluginName() << " at " <<  path;
 
     if (!path.isEmpty()) {
-        mPackage = new Plasma::Package(ComicProviderKross::packageStructure());
+        mPackage = new KPackage::Package(ComicProviderKross::packageStructure());
         mPackage->setPath(path);
 
         if (mPackage->isValid()) {
@@ -355,7 +355,7 @@ const QStringList& ComicProviderWrapper::extensions() const
 ComicProvider::IdentifierType ComicProviderWrapper::identifierType() const
 {
     ComicProvider::IdentifierType result = ComicProvider::StringIdentifier;
-    const QString type = mProvider->description().property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType")).toString();
+    const QString type = mProvider->description().value(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"));
     if (type == QLatin1String("Date")) {
         result = ComicProvider::DateIdentifier;
     } else if (type == QLatin1String("Number")) {
