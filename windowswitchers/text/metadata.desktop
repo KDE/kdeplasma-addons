@@ -2,6 +2,7 @@
 Name=Text Only
 Name[ca]=Només text
 Name[cs]=Pouze text
+Name[da]=Kun tekst
 Name[de]=Nur Text
 Name[el]=Μόνο κείμενο
 Name[en_GB]=Text Only
@@ -27,6 +28,7 @@ Name[zh_CN]=只有文字
 Comment=A window switcher layout only showing window captions
 Comment[ca]=Una disposició del commutador de finestres que només mostra els títols de finestra
 Comment[cs]=Rozvržení přepínače oken zobrazující pouze titulek okna
+Comment[da]=Et vinduesskifter-layout som kun viser vinduestitler
 Comment[de]=Ein Fensterwechsler-Layout, das nur die Titel der Fenster anzeigt
 Comment[el]=Μια διάταξη εναλλαγής παραθύρων που εμφανίζει μόνο τίτλους παραθύρων
 Comment[en_GB]=A window switcher layout only showing window captions

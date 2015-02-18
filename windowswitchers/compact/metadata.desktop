@@ -2,6 +2,7 @@
 Name=Compact
 Name[ca]=Compacte
 Name[cs]=Kompaktní
+Name[da]=Kompakt
 Name[de]=Kompakt
 Name[el]=Συμπαγής
 Name[en_GB]=Compact
@@ -27,6 +28,7 @@ Name[zh_CN]=紧凑
 Comment=A compact window switcher layout
 Comment[ca]=Una disposició del commutador de finestres compacta
 Comment[cs]=Kompaktní rozvržení přepínače oken
+Comment[da]=Et kompakt layout til vinduesskifter
 Comment[de]=Ein kompaktes Fensterwechsler-Layout
 Comment[el]=Μια συμπαγής διάταξη εναλλαγής παραθύρων
 Comment[en_GB]=A compact window switcher layout
