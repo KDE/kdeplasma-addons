@@ -40,7 +40,9 @@ Item {
         plasmoid.nativeInterface.middleClick = middleClickCheckBox.checked;
 
         plasmoid.nativeInterface.checkNewComicStripsInterval = checkNewComicStripsInterval.value;
+        plasmoid.nativeInterface.providerUpdateInterval = providerUpdateInterval.value;
 
+        plasmoid.nativeInterface.saveConfig();
         plasmoid.nativeInterface.configChanged();
     }
 
@@ -97,6 +99,7 @@ Item {
                         text: i18n("Automatically update comic plugins:")
                     }
                     Controls.SpinBox {
+                        id: providerUpdateInterval
                         Layouts.Layout.minimumWidth: units.gridUnit * 8
                         suffix: " "+i18n("days")
                         stepSize: 1

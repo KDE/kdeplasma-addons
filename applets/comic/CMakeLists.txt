@@ -4,7 +4,7 @@ project(plasma-comic)
 set(comic_SRCS
     comic.cpp
     comicmodel.cpp
-    configwidget.cpp
+    comicupdater.cpp
     comicarchivejob.cpp
     comicarchivedialog.cpp
     checknewstrips.cpp

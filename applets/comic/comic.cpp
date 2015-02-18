@@ -51,7 +51,7 @@
 #include <Plasma/PluginLoader>
 
 #include "comicmodel.h"
-#include "configwidget.h"
+#include "comicupdater.h"
 
 Q_GLOBAL_STATIC( ComicUpdater, globalComicUpdater )
 
@@ -714,6 +714,21 @@ void ComicApplet::setCheckNewComicStripsInterval(int interval)
 
     mCheckNewComicStripsIntervall = interval;
     emit checkNewComicStripsIntervalChanged();
+}
+
+int ComicApplet::providerUpdateInterval() const
+{
+    return globalComicUpdater->interval();
+}
+
+void ComicApplet::setProviderUpdateInterval(int interval)
+{
+    if (globalComicUpdater->interval() == interval) {
+        return;
+    }
+
+    globalComicUpdater->setInterval(interval);
+    emit providerUpdateIntervalChanged();
 }
 
 //Endof QML
