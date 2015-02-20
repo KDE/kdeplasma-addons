@@ -30,6 +30,7 @@ Item {
 
     function saveConfig() {
         plasmoid.nativeInterface.showErrorPicture = showErrorPicture.checked;
+        plasmoid.nativeInterface.maxComicLimit = maxComicLimit.value;
 
         plasmoid.nativeInterface.saveConfig();
         plasmoid.nativeInterface.configChanged();
@@ -37,6 +38,7 @@ Item {
 
     Component.onCompleted: {
         showErrorPicture.checked = plasmoid.nativeInterface.showErrorPicture;
+        maxComicLimit.value = plasmoid.nativeInterface.maxComicLimit;
     }
 
 
@@ -55,6 +57,7 @@ Item {
                     text: i18n("Comic cache:")
                 }
                 Controls.SpinBox {
+                    id: maxComicLimit
                     Layouts.Layout.minimumWidth: units.gridUnit * 8
                     suffix: " "+i18n("strips per comic")
                     stepSize: 1

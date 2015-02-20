@@ -69,6 +69,8 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mShowErrorPicture( true ),
       mArrowsOnHover( true ),
       mMiddleClick( true ),
+      mCheckNewComicStripsIntervall(0),
+      mMaxComicLimit( CACHE_LIMIT ),
       mCheckNewStrips( 0 ),
       mActionShop( 0 ),
       mEngine( 0 ),
@@ -93,17 +95,8 @@ void ComicApplet::init()
 
     //set maximum number of cached strips per comic, -1 means that there is no limit
     KConfigGroup global = globalConfig();
-    //convert old values
-    if ( global.hasKey( "useMaxComicLimit" ) ) {
-        const bool use = global.readEntry( "useMaxComicLimit", false );
-        if ( !use ) {
-            global.writeEntry( "maxComicLimit", 0 );
-        }
-        global.deleteEntry( "useMaxComicLimit" );
-    }
     const int maxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
-    //TODO?
-    //    mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ) );
+    mEngine->connectSource( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ), this );
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
@@ -349,6 +342,8 @@ void ComicApplet::configChanged()
     mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
     mMiddleClick = cg.readEntry( "middleClick", true );
     mCheckNewComicStripsIntervall = cg.readEntry( "checkNewComicStripsIntervall", 30 );
+    KConfigGroup global = globalConfig();
+    mMaxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
 
     globalComicUpdater->load();
 }
@@ -366,6 +361,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
     cg.writeEntry( "checkNewComicStripsIntervall", mCheckNewComicStripsIntervall );
+    cg.writeEntry( "maxComicLimit", mMaxComicLimit);
 
     globalComicUpdater->save();
 }
@@ -729,6 +725,21 @@ void ComicApplet::setProviderUpdateInterval(int interval)
 
     globalComicUpdater->setInterval(interval);
     emit providerUpdateIntervalChanged();
+}
+
+void ComicApplet::setMaxComicLimit(int limit)
+{
+    if (mMaxComicLimit == limit) {
+        return;
+    }
+
+    mMaxComicLimit = limit;
+    emit maxComicLimitChanged();
+}
+
+int ComicApplet::maxComicLimit() const
+{
+    return mMaxComicLimit;
 }
 
 //Endof QML

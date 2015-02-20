@@ -66,6 +66,7 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
     Q_PROPERTY(QStringList tabIdentifiers READ tabIdentifiers WRITE setTabIdentifiers NOTIFY tabIdentifiersChanged)
     Q_PROPERTY(int checkNewComicStripsInterval READ checkNewComicStripsInterval WRITE setCheckNewComicStripsInterval NOTIFY checkNewComicStripsIntervalChanged)
     Q_PROPERTY(int providerUpdateInterval READ providerUpdateInterval WRITE setProviderUpdateInterval NOTIFY providerUpdateIntervalChanged)
+    Q_PROPERTY(int maxComicLimit READ maxComicLimit WRITE setMaxComicLimit NOTIFY maxComicLimitChanged);
 
     public:
         ComicApplet( QObject *parent, const QVariantList &args );
@@ -111,9 +112,11 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 
         int providerUpdateInterval() const;
         void setProviderUpdateInterval(int interval);
-        //TODO?
-       // Q_INVOKABLE bool checkAuthorization(const QString &permissionName) { return hasAuthorization(permissionName); }
+
+        void setMaxComicLimit(int limit);
+        int maxComicLimit() const;
         //End for QML
+
 Q_SIGNALS:
     void comicModelChanged();
     void showComicUrlChanged();
@@ -130,6 +133,7 @@ Q_SIGNALS:
     void tabIdentifiersChanged();
     void checkNewComicStripsIntervalChanged();
     void providerUpdateIntervalChanged();
+    void maxComicLimitChanged();
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
@@ -193,6 +197,7 @@ Q_SIGNALS:
         bool mArrowsOnHover;
         bool mMiddleClick;
         int mCheckNewComicStripsIntervall;
+        int mMaxComicLimit;
         CheckNewStrips *mCheckNewStrips;
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
