@@ -28,7 +28,16 @@ Item {
     width: childrenRect.width
     height: childrenRect.height
 
-    property var cfg_sources: []
+    function saveConfig() {
+        plasmoid.nativeInterface.showErrorPicture = showErrorPicture.checked;
+
+        plasmoid.nativeInterface.saveConfig();
+        plasmoid.nativeInterface.configChanged();
+    }
+
+    Component.onCompleted: {
+        showErrorPicture.checked = plasmoid.nativeInterface.showErrorPicture;
+    }
 
 
     Layouts.ColumnLayout {
@@ -60,6 +69,7 @@ Item {
 
             Layouts.ColumnLayout {
                 Controls.CheckBox {
+                    id: showErrorPicture
                     text: i18n("Display error when getting comic field")
                 }
             }

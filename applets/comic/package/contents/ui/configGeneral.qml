@@ -46,6 +46,12 @@ Item {
         plasmoid.nativeInterface.configChanged();
     }
 
+    Component.onCompleted: {
+        middleClickCheckBox.checked = plasmoid.nativeInterface.middleClick;
+        checkNewComicStripsInterval.value = plasmoid.nativeInterface.checkNewComicStripsInterval;
+        providerUpdateInterval.value = plasmoid.nativeInterface.providerUpdateInterval
+    }
+
     Layouts.ColumnLayout {
         id: mainColumn
 

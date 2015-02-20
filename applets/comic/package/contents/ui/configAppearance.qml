@@ -28,8 +28,25 @@ Item {
     width: childrenRect.width
     height: childrenRect.height
 
-    property var cfg_sources: []
 
+    function saveConfig() {
+        plasmoid.nativeInterface.arrowsOnHover = showArrowsOnOver.checked;
+        plasmoid.nativeInterface.showComicTitle = showComicTitle.checked;
+        plasmoid.nativeInterface.showComicIdentifier = showIdentifier.checked;
+        plasmoid.nativeInterface.showComicAuthor = showAuthor.checked;
+        plasmoid.nativeInterface.showComicUrl = showUrl.checked;
+
+        plasmoid.nativeInterface.saveConfig();
+        plasmoid.nativeInterface.configChanged();
+    }
+
+    Component.onCompleted: {
+        showArrowsOnOver.checked = plasmoid.nativeInterface.arrowsOnHover;
+        showComicTitle.checked = plasmoid.nativeInterface.showComicTitle;
+        showIdentifier.checked = plasmoid.nativeInterface.showComicIdentifier;
+        showAuthor.checked = plasmoid.nativeInterface.showComicAuthor;
+        showUrl.checked = plasmoid.nativeInterface.showComicUrl;
+    }
 
     Layouts.ColumnLayout {
         id: mainColumn
@@ -42,6 +59,7 @@ Item {
 
             Layouts.ColumnLayout {
                 Controls.CheckBox {
+                    id: showArrowsOnOver
                     text: i18n("Show arrows only on over")
                 }
             }
@@ -54,15 +72,19 @@ Item {
 
             Layouts.ColumnLayout {
                 Controls.CheckBox {
+                    id: showComicTitle
                     text: i18n("Show comic title")
                 }
                 Controls.CheckBox {
+                    id: showIdentifier
                     text: i18n("Show comic identifier")
                 }
                 Controls.CheckBox {
+                    id: showAuthor
                     text: i18n("Show comic author")
                 }
                 Controls.CheckBox {
+                    id: showUrl
                     text: i18n("Show comic URL")
                 }
             }

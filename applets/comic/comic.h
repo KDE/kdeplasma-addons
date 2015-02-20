@@ -155,6 +155,7 @@ Q_SIGNALS:
 
     public slots:
         void configChanged();
+        void saveConfig();
         Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
         Q_INVOKABLE void goJump() { slotGoJump();}
         Q_INVOKABLE void shop() { slotShop();}
@@ -166,7 +167,6 @@ Q_SIGNALS:
         void updateUsedComics();
         void updateContextMenu();
         void updateView();
-        void saveConfig();
         void refreshComicData();
         void setTabHighlighted(const QString &id, bool highlight);
         bool hasHighlightedTabs();
