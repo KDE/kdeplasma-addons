@@ -36,22 +36,36 @@ DragDrop.DropArea {
     Layout.minimumHeight: 0
 
     property string url: ""
-    property bool properlySent: true
-    property QtObject lastJob: null
 
-    function findMimeType(mimename, data) {
-        if (mimename == "text/uri-list")
-            return mimeDb.mimeTypeForUrl(data[0]);
-        else {
-            return mimeDb.mimeTypeForName(mimename);
+    function firstMimeType(formats) {
+        for (var v in formats) {
+            var curr = formats[v];
+
+            if (curr == "text/uri-list") {
+                return { name: "text/uri-list" };
+            } else {
+                var mime = mimeDb.mimeTypeForName(curr);
+                if (mime.hasOwnProperty("iconName")) {
+                    return mime;
+                }
+            }
         }
+        return {};
+    }
+
+    function urlsMimetype(urls)
+    {
+        return mimeDb.mimeTypeForUrl(urls[0]);
     }
 
     onDragEnter: {
-        var mimetype = firstMimeType(event.mimeData.formats);
-        var source = findMimeType(mimetype, [event.mimeData.getDataAsByteArray("text/uri-list")]);
-
-        icon.source = source.iconName;
+        var mimetype;
+        if (event.mimeData.hasUrls) {
+            mimetype = urlsMimetype(event.mimeData.urls);
+        } else {
+            mimetype = firstMimeType(event.mimeData.formats);
+        }
+        icon.source = mimetype.iconName;
         event.accepted = true
     }
     onDragLeave: icon.source = "edit-paste"
@@ -99,22 +113,29 @@ DragDrop.DropArea {
         }
     }
 
-    function sendData(base64data, mimetype) {
+    function sendBase64Data(base64data, mimetype) {
 //      Awesome KIO magic <3
         var url = "data:"+mimetype+";base64,"+base64data;
+        sendData([url], mimetype);
+    }
 
+    function sendData(urls, mimetype) {
         shareDialog.inputData = {
-            "urls": [url],
+            "urls": urls,
             "mimeType": mimetype
         }
         shareDialog.visible = true;
     }
 
     onDrop: {
-        var mimetype = firstMimeType(event.mimeData.formats);
-        var data = event.mimeData.getDataAsByteArray(mimetype);
-        console.log("tosend", data)
-        sendData(PurposeHelper.variantToBase64(data), mimetype);
+        var mimeData = event.mimeData;
+        var mimetype = firstMimeType(mimeData.formats).name;
+        if (mimeData.hasUrls) {
+            sendData(mimeData.urls, urlsMimetype(mimeData.urls).name);
+        } else {
+            var data = mimeData.getDataAsByteArray(mimetype);
+            sendBase64Data(PurposeHelper.variantToBase64(data), mimetype);
+        }
         event.accepted = true;
     }
 
@@ -132,18 +153,13 @@ DragDrop.DropArea {
             Qt.openUrlExternally(pasteUrls[actionName]);
     }
 
-    function firstMimeType(formats) {
-        for (var v in formats) {
-            var curr = formats[v];
-            console.log("trying...", curr, mimeDb.mimeTypeForName(curr) === {}, JSON.stringify(mimeDb.mimeTypeForName(curr)))
-            if (mimeDb.mimeTypeForName(curr).hasOwnProperty("iconName"))
-                return curr;
-        }
-        return "";
-    }
     function action_paste() {
-        var mimetype = firstMimeType(clipboard.formats);
-        sendData(PurposeHelper.variantToBase64(clipboard.contentFormat(mimetype)), mimetype);
+        if (clipboard.formats.indexOf("text/uri-list")>=0) {
+            sendData(clipboard.contentFormat("text/uri-list"));
+        } else {
+            var mimetype = firstMimeType(clipboard.formats).name;
+            sendBase64Data(PurposeHelper.variantToBase64(clipboard.contentFormat(mimetype)), mimetype);
+        }
     }
 
     PlasmaCore.ToolTipArea {
