@@ -387,6 +387,8 @@ void ComicApplet::slotCurrentDay()
 
 void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, const QString &suffix )
 {
+    Q_UNUSED(index)
+
     KConfigGroup cg = config();
     if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
         kDebug() << identifier << "has a newer strip.";

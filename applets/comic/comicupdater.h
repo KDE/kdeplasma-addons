@@ -21,10 +21,6 @@
 #ifndef CONFIGWIDGET_H
 #define CONFIGWIDGET_H
 
-#include "ui_appearanceSettings.h"
-#include "ui_advancedsettings.h"
-#include "ui_comicSettings.h"
-
 #include <QtGui/QWidget>
 #include <QTime>
 
@@ -32,10 +28,7 @@
 #include <Plasma/DataEngine>
 
 class ComicModel;
-class KConfigDialog;
-class QCheckBox;
-class QComboBox;
-class QSortFilterProxyModel;
+
 
 namespace KNS3 {
     class DownloadDialog;
