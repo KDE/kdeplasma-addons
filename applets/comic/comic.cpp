@@ -287,7 +287,6 @@ void ComicApplet::updateUsedComics()
                 mActiveComicModel.addComic(identifier, name, iconPath);
             }
 
-           // mTabIdentifier << identifier;
             ++tab;
         }
     }
@@ -324,7 +323,7 @@ void ComicApplet::checkDayChanged()
 void ComicApplet::configChanged()
 {
     KConfigGroup cg = config();
-    mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList( QString() ) );
+    mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList() );
 
     if (mProxy) {
         updateUsedComics();

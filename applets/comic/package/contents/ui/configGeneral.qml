@@ -83,6 +83,7 @@ Item {
                     Layouts.Layout.minimumHeight: units.gridUnit * 2
                 }
                 Controls.Button {
+                    iconName: "get-hot-new-stuff"
                     text: i18n("Get New Comics...")
                     onClicked: plasmoid.nativeInterface.getNewComics();
                 }
