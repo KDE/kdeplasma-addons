@@ -47,13 +47,14 @@ DragDrop.DropArea {
         }
     }
 
-    onEntered: {
-        var mimetype = firstMimeType(drag.formats);
-        var source = findMimeType(mimetype, [drag.getDataAsString("text/uri-list")]);
+    onDragEnter: {
+        var mimetype = firstMimeType(event.mimeData.formats);
+        var source = findMimeType(mimetype, [event.mimeData.getDataAsByteArray("text/uri-list")]);
 
         icon.source = source.iconName;
-        drag.accepted = true
+        event.accepted = true
     }
+    onDragLeave: icon.source = "edit-paste"
 
     QtExtra.Clipboard {
         id: clipboard
@@ -109,15 +110,13 @@ DragDrop.DropArea {
         shareDialog.visible = true;
     }
 
-    onDropped: {
-        var mimetype = firstMimeType(drop.formats);
-        var data = drop.getDataAsByteArray(mimetype);
+    onDrop: {
+        var mimetype = firstMimeType(event.mimeData.formats);
+        var data = event.mimeData.getDataAsByteArray(mimetype);
         console.log("tosend", data)
         sendData(PurposeHelper.variantToBase64(data), mimetype);
-        drop.accepted = true;
+        event.accepted = true;
     }
-
-    onExited: icon.source = "edit-paste"
 
     property var pasteUrls: []
     property int nextPaste: 0
