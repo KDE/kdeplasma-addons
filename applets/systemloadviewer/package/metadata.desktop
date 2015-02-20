@@ -109,7 +109,6 @@ Icon=view-statistics
 Type=Service
 ServiceTypes=Plasma/Applet
 
-X-KDE-Library=plasma-applet_systemloadviewer
 X-KDE-PluginInfo-Author=Martin Yrjölä, Matthew Dawson
 X-KDE-PluginInfo-Email=martin.yrjola@gmail.com, matthew@mjdsystems.ca
 X-KDE-PluginInfo-Name=org.kde.plasma.systemloadviewer
