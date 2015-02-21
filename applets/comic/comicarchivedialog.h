@@ -24,10 +24,10 @@
 
 #include "ui_comicarchivedialog.h"
 
-#include <KDialog>
+#include <QDialog>
 
 
-class ComicArchiveDialog : public KDialog
+class ComicArchiveDialog : public QDialog
 {
     Q_OBJECT
 

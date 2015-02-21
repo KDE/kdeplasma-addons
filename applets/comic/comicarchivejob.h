@@ -25,7 +25,7 @@
 #include <KIO/Job>
 #include <Plasma/DataEngine>
 
-class KTemporaryFile;
+class QTemporaryFile;
 class KZip;
 
 class ComicArchiveJob : public KJob
@@ -127,7 +127,7 @@ class ComicArchiveJob : public KJob
         int mProcessedFiles;
         int mTotalFiles;
         Plasma::DataEngine *mEngine;
-        KTemporaryFile *mZipFile;
+        QTemporaryFile *mZipFile;
         KZip *mZip;
         QString mPluginName;
         QString mToIdentifier;
@@ -138,7 +138,7 @@ class ComicArchiveJob : public KJob
         QString mRequest;
         const QUrl mDest;
         QStringList mAuthors;
-        QList< KTemporaryFile* > mBackwardFiles;
+        QList< QTemporaryFile* > mBackwardFiles;
 };
 
 #endif

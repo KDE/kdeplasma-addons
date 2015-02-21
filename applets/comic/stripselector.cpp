@@ -22,7 +22,7 @@
 #include "comicdata.h"
 
 #include <KDatePicker>
-#include <KDialog>
+#include <QDialog>
 #include <KInputDialog>
 #include <KNumInput>
 #include <KLocalizedString>
@@ -34,11 +34,11 @@
 
 //NOTE based on GotoPageDialog KDE/kdegraphics/okular/part.cpp
 //BEGIN choose a strip dialog
-class ChooseStripNumDialog : public KDialog
+class ChooseStripNumDialog : public QDialog
 {
     public:
         ChooseStripNumDialog(QWidget *parent, int current, int min, int max)
-            : KDialog( parent )
+            : QDialog( parent )
         {
             setCaption(i18n("Go to Strip"));
             setButtons(Ok | Cancel);
@@ -111,7 +111,8 @@ StringStripSelector::~StringStripSelector()
 void StringStripSelector::select(const ComicData &currentStrip)
 {
     bool ok;
-    const QString strip = KInputDialog::getText(i18n("Go to Strip"), i18n("Strip identifier:"),
+    //TODO
+    //const QString strip = KInputDialog::getText(i18n("Go to Strip"), i18n("Strip identifier:"),
                                                  currentStrip.current(), &ok);
     if (ok) {
         emit stripChosen(strip);

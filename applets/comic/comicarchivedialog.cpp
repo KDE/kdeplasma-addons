@@ -20,17 +20,17 @@
 #include "comicarchivedialog.h"
 #include "comicarchivejob.h"
 
-#include <KFileDialog>
 
 ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString &comicName, IdentifierType identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, const QString &savingDir, QWidget *parent )
-  : KDialog( parent ),
+  : QDialog( parent ),
     mIdentifierType( identifierType ),
     mPluginName( pluginName )
 {
     QWidget *widget = new QWidget(this);
     ui.setupUi(widget);
-    setCaption( i18n( "Create %1 Comic Book Archive", comicName ) );
-    setMainWidget( widget );
+    setWindowTitle( i18n( "Create %1 Comic Book Archive", comicName ) );
+    //setMainWidget( widget );
+    widget->setParent(this);
 
     switch ( mIdentifierType ) {
         case Date: {
@@ -145,7 +145,7 @@ void ComicArchiveDialog::updateOkButton()
     }
 
     okEnabled = ( okEnabled && !ui.dest->url().isEmpty() );
-    enableButtonOk( okEnabled );
+    //enableButtonOk( okEnabled );
 }
 
 void ComicArchiveDialog::slotOkClicked()
