@@ -59,6 +59,7 @@ DragDrop.DropArea {
     }
 
     onDragEnter: {
+        root.state = "idle";
         var mimetype;
         if (event.mimeData.hasUrls) {
             mimetype = urlsMimetype(event.mimeData.urls);
@@ -124,7 +125,7 @@ DragDrop.DropArea {
             "urls": urls,
             "mimeType": mimetype
         }
-        shareDialog.visible = true;
+        root.state = "configuration"
     }
 
     onDrop: {
@@ -208,6 +209,12 @@ DragDrop.DropArea {
             name: "idle"
             PropertyChanges { target: icon; source: "edit-paste" }
             PropertyChanges { target: tooltipArea; icon: "edit-paste" }
+        },
+        State {
+            name: "configuration"
+            PropertyChanges { target: icon; source: "edit-paste" }
+            PropertyChanges { target: tooltipArea; icon: "edit-paste" }
+            PropertyChanges { target: shareDialog; visible: true }
         },
         State {
             name: "sending"
