@@ -59,6 +59,7 @@ PlasmaCore.Dialog
                     }
                     PlasmaComponents.Button {
                         id: button
+                        anchors.verticalCenter: parent.verticalCenter
                         iconSource: "arrow-right"
                         onClicked: view.createJob(index)
                     }
