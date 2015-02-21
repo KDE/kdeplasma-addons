@@ -64,6 +64,11 @@ PlasmaCore.Dialog
                     }
                 }
             }
+            onVisibleChanged: {
+                if (visible) {
+                    view.reset();
+                }
+            }
 
             onRunningChanged: window.running = running
             onFinished: {
