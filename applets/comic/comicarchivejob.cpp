@@ -19,7 +19,7 @@
 
 #include "comicarchivejob.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <KIO/NetAccess>
 #include <KTemporaryFile>
 #include <KZip>

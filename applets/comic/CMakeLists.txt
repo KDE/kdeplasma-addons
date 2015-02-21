@@ -24,10 +24,10 @@ kcoreaddons_desktop_to_json(plasma_applet_comic package/metadata.desktop)
 target_link_libraries(plasma_applet_comic
                       KF5::Plasma
                       KF5::Solid
+                      KF5::KIOCore
                       KF5::KIOWidgets
                       KF5::NewStuff
-                      KF5::Archive
-                      KF5::KDELibs4Support)
+                      KF5::Archive)
 
 
 install(TARGETS plasma_applet_comic DESTINATION ${PLUGIN_INSTALL_DIR})

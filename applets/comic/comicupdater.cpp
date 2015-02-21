@@ -26,7 +26,7 @@
 
 #include <KConfigDialog>
 #include <KNS3/DownloadDialog>
-#include <knewstuff3/downloadmanager.h>
+#include <KNS3/DownloadManager>
 
 ComicUpdater::ComicUpdater( QObject *parent )
   : QObject( parent ),

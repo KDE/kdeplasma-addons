@@ -36,9 +36,9 @@
 #include <QtGui/QSortFilterProxyModel>
 
 #include <QAction>
+#include <QDebug>
 #include <KActionCollection>
 #include <KConfigDialog>
-#include <KDebug>
 #include <KNotification>
 #include <kuiserverjobtracker.h>
 #include <KNewStuff3/KNS3/DownloadDialog>
@@ -391,7 +391,7 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
 
     KConfigGroup cg = config();
     if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
-        kDebug() << identifier << "has a newer strip.";
+        qDebug() << identifier << "has a newer strip.";
         setTabHighlighted( identifier, true );
         cg.writeEntry( "lastStripVisited_" + identifier, false );
     }
@@ -431,7 +431,7 @@ void ComicApplet::slotArchive( int archiveType, const QUrl &dest, const QString 
     mSavingDir->setDir(dest.path());
 
     const QString id = mCurrent.id();
-    kDebug() << "Archiving:" << id <<  archiveType << dest << fromIdentifier << toIdentifier;
+    qDebug() << "Archiving:" << id <<  archiveType << dest << fromIdentifier << toIdentifier;
     ComicArchiveJob *job = new ComicArchiveJob(dest, mEngine, static_cast< ComicArchiveJob::ArchiveType >( archiveType ), mCurrent.type(),  id, this);
     job->setFromIdentifier(id + ':' + fromIdentifier);
     job->setToIdentifier(id + ':' + toIdentifier);
@@ -440,7 +440,7 @@ void ComicApplet::slotArchive( int archiveType, const QUrl &dest, const QString 
         KIO::getJobTracker()->registerJob(job);
         job->start();
     } else {
-        kWarning() << "Archiving job is not valid.";
+        qWarning() << "Archiving job is not valid.";
         delete job;
     }
 }
@@ -484,13 +484,8 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         mEngine->disconnectSource( identifier, this );
         mEngine->connectSource( identifier, this );
 
-        /*TODO const Plasma::DataEngine::Data data = mEngine->query( identifier );
-
-        if ( data[ "Error" ].toBool() ) {
-            dataUpdated( QString(), data );
-        }*/
     } else {
-        kError() << "Either no identifier was specified or the engine could not be created:" << "id" << id << "engine valid:" << ( mEngine && mEngine->isValid() );
+        qWarning() << "Either no identifier was specified or the engine could not be created:" << "id" << id << "engine valid:" << ( mEngine && mEngine->isValid() );
         setConfigurationRequired( true );
     }
 }
