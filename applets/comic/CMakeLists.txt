@@ -15,11 +15,7 @@ set(comic_SRCS
     activecomicmodel.cpp
 )
 
-ki18n_wrap_ui(comic_SRCS
-                  #comicSettings.ui
-                  #appearanceSettings.ui
-                  #advancedsettings.ui
-                  comicarchivedialog.ui
+ki18n_wrap_ui(comic_SRCS comicarchivedialog.ui
 )
 
 
