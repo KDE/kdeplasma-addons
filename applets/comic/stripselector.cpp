@@ -23,7 +23,8 @@
 
 #include <KDatePicker>
 #include <QDialog>
-#include <KInputDialog>
+#include <QDialogButtonBox>
+#include <QInputDialog>
 #include <KNumInput>
 #include <KLocalizedString>
 
@@ -40,28 +41,28 @@ class ChooseStripNumDialog : public QDialog
         ChooseStripNumDialog(QWidget *parent, int current, int min, int max)
             : QDialog( parent )
         {
-            setCaption(i18n("Go to Strip"));
-            setButtons(Ok | Cancel);
-            setDefaultButton(Ok);
+            setWindowTitle(i18n("Go to Strip"));
 
-            QWidget *widget = new QWidget(this);
-            setMainWidget(widget);
-
-            QVBoxLayout *topLayout = new QVBoxLayout(widget);
+            QVBoxLayout *topLayout = new QVBoxLayout(this);
             topLayout->setMargin(0);
-            topLayout->setSpacing(spacingHint());
-            numInput = new KIntNumInput(current, widget);
+            numInput = new KIntNumInput(current, this);
             numInput->setRange(min, max);
             numInput->setEditFocus(true);
             numInput->setSliderEnabled(true);
 
-            QLabel *label = new QLabel(i18n("&Strip Number:"), widget);
+            QLabel *label = new QLabel(i18n("&Strip Number:"), this);
             label->setBuddy(numInput);
             topLayout->addWidget(label);
             topLayout->addWidget(numInput) ;
             // A little bit extra space
-            topLayout->addSpacing(spacingHint());
             topLayout->addStretch(10);
+            
+            QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+            buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+            connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
+            connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
+            topLayout->addWidget(buttonBox);
+            
             numInput->setFocus();
         }
 
@@ -111,8 +112,7 @@ StringStripSelector::~StringStripSelector()
 void StringStripSelector::select(const ComicData &currentStrip)
 {
     bool ok;
-    //TODO
-    //const QString strip = KInputDialog::getText(i18n("Go to Strip"), i18n("Strip identifier:"),
+    const QString strip = QInputDialog::getText(0, i18n("Go to Strip"), i18n("Strip identifier:"), QLineEdit::Normal,
                                                  currentStrip.current(), &ok);
     if (ok) {
         emit stripChosen(strip);
