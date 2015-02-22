@@ -375,7 +375,7 @@ void ComicArchiveJob::createBackwardZip()
 void ComicArchiveJob::copyZipFileToDestination()
 {
     mZip->close();
-    const bool worked = KIO::file_copy( QUrl( mZipFile->fileName() ), mDest );
+    const bool worked = KIO::file_copy( QUrl::fromLocalFile( mZipFile->fileName() ), mDest );
 
     if (!worked) {
         qWarning() << "Could not copy the zip file to the specified destination:" << mDest;
