@@ -2,7 +2,10 @@
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
  *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
- *   Copyright (C) 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>      *
+ *   Copyright (C) 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>      
+ *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>      
+ *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *

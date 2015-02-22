@@ -78,7 +78,7 @@ Item {
             anchors.fill: parent
 
             image: plasmoid.nativeInterface.comicData.image
-            actualSize: !plasmoid.nativeInterface.showActualSize
+            actualSize: plasmoid.nativeInterface.showActualSize
             isLeftToRight: plasmoid.nativeInterface.comicData.isLeftToRight
             isTopToBottom: plasmoid.nativeInterface.comicData.isTopToBottom
         }
