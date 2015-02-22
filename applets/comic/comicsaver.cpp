@@ -42,7 +42,7 @@ bool ComicSaver::save(const ComicData &comic)
     // save image to temporary file
     comic.image().save(tempFile.fileName(), "PNG");
 
-    QUrl srcUrl( tempFile.fileName() );
+    QUrl srcUrl = QUrl::fromLocalFile( tempFile.fileName() );
 
     const QString title = comic.title();
 
