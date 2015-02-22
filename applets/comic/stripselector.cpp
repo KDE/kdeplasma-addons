@@ -25,7 +25,7 @@
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QInputDialog>
-#include <KNumInput>
+#include <QSpinBox>
 #include <KLocalizedString>
 
 #include <QtCore/QScopedPointer>
@@ -45,10 +45,9 @@ class ChooseStripNumDialog : public QDialog
 
             QVBoxLayout *topLayout = new QVBoxLayout(this);
             topLayout->setMargin(0);
-            numInput = new KIntNumInput(current, this);
+            numInput = new QSpinBox(this);
             numInput->setRange(min, max);
-            numInput->setEditFocus(true);
-            numInput->setSliderEnabled(true);
+            numInput->setValue(current);
 
             QLabel *label = new QLabel(i18n("&Strip Number:"), this);
             label->setBuddy(numInput);
@@ -72,7 +71,7 @@ class ChooseStripNumDialog : public QDialog
         }
 
     protected:
-        KIntNumInput *numInput;
+        QSpinBox *numInput;
 };
 //END choose a strip dialog
 

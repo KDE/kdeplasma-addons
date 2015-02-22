@@ -16,9 +16,9 @@ set(comic_SRCS
 )
 
 ki18n_wrap_ui(comic_SRCS
-                  comicSettings.ui
-                  appearanceSettings.ui
-                  advancedsettings.ui
+                  #comicSettings.ui
+                  #appearanceSettings.ui
+                  #advancedsettings.ui
                   comicarchivedialog.ui
 )
 
@@ -37,8 +37,7 @@ target_link_libraries(plasma_applet_comic
                       KF5::NewStuff
                       KF5::Notifications
                       KF5::IconThemes
-                      KF5::Archive
-                      KF5::KDELibs4Support)
+                      KF5::Archive)
 
 
 install(TARGETS plasma_applet_comic DESTINATION ${PLUGIN_INSTALL_DIR})

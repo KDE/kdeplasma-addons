@@ -376,7 +376,7 @@ void ComicArchiveJob::copyZipFileToDestination()
 {
     mZip->close();
     const bool worked = KIO::file_copy( QUrl::fromLocalFile( mZipFile->fileName() ), mDest );
-qWarning()<<"AAAA"<<worked<< QUrl::fromLocalFile( mZipFile->fileName() )<< mDest;
+
     if (!worked) {
         qWarning() << "Could not copy the zip file to the specified destination:" << mDest;
         setErrorText( i18n( "Could not create the archive at the specified location." ) );
