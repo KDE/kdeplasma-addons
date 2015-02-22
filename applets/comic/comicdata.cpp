@@ -48,7 +48,7 @@ void ComicData::load()
 }
 
 void ComicData::save()
-{return;
+{
     mCfg.writeEntry("scaleToContent_" + mId,  mScaleComic);
     mCfg.writeEntry("maxStripNum_" + mId, mMaxStripNum);
     mCfg.writeEntry("storedPosition_" + id(), mStored);
