@@ -25,6 +25,7 @@ Name[tr]=Sadece Metin
 Name[uk]=Лише текст
 Name[x-test]=xxText Onlyxx
 Name[zh_CN]=只有文字
+Name[zh_TW]=只有文字
 Comment=A window switcher layout only showing window captions
 Comment[ca]=Una disposició del commutador de finestres que només mostra els títols de finestra
 Comment[cs]=Rozvržení přepínače oken zobrazující pouze titulek okna
@@ -51,6 +52,7 @@ Comment[tr]=Sadece pencere başlıklarını gösteren bir pencere değiştirme d
 Comment[uk]=Компонування засобу перемикання вікон з показом лише підписів вікон
 Comment[x-test]=xxA window switcher layout only showing window captionsxx
 Comment[zh_CN]=一个只显示窗口标题的窗口切换器布局
+Comment[zh_TW]=只顯示視窗標題的視窗切換器佈局
 Icon=preferences-system-windows-switcher-text
 
 X-Plasma-API=declarativeappletscript

@@ -27,6 +27,7 @@ Name[tr]=Izgara
 Name[uk]=Ґратка
 Name[x-test]=xxGridxx
 Name[zh_CN]=网格
+Name[zh_TW]=網格模式
 Comment=A Window Switcher layout showing all windows as thumbnails in a grid
 Comment[ca]=Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una graella
 Comment[cs]=Rozvržení přepínače oken zobrazující všechna okna jako miniatury v mřížce
@@ -53,6 +54,7 @@ Comment[tr]=Tüm pencereleri ızgara içerisinde küçük resimler halinde göst
 Comment[uk]=Компонування засобу перемикання вікон з мініатюрами всіх вікон у форматі ґратки
 Comment[x-test]=xxA Window Switcher layout showing all windows as thumbnails in a gridxx
 Comment[zh_CN]=一个用表格布局显示窗口预览的窗口切换器布局
+Comment[zh_TW]=將所有視窗的縮圖顯示在網格內的視窗切換器佈局
 Icon=preferences-system-windows-switcher-present-windows
 
 X-Plasma-API=declarativeappletscript
