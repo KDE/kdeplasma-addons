@@ -18,7 +18,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-set(REQUIRED_QT_VERSION 5.3.0)
+set(REQUIRED_QT_VERSION 5.4.0)
 set(KF5_MIN_VERSION 5.0.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Quick Qml Widgets)
 

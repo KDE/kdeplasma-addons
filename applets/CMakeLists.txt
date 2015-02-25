@@ -10,6 +10,7 @@ endif(NOT WIN32)
 
 add_subdirectory(kimpanel)
 add_subdirectory(showdesktop)
+add_subdirectory(frameng)
 
 plasma_install_package(webbrowser org.kde.plasma.webbrowser)
 
