@@ -155,8 +155,6 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
         mComicTitle = data[ "Title" ].toString();
     }
 
-    mEngine->disconnectSource( source, this );
-
     if ( hasError ) {
         qWarning() << "An error occured at" << source << "stopping.";
         setErrorText( i18n( "An error happened for identifier %1.", source ) );
@@ -236,6 +234,8 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
         setError( KilledJobError );
         emitResultIfNeeded();
     }
+
+    mEngine->disconnectSource( source, this );
 }
 
 bool ComicArchiveJob::doKill()
@@ -375,7 +375,10 @@ void ComicArchiveJob::createBackwardZip()
 void ComicArchiveJob::copyZipFileToDestination()
 {
     mZip->close();
-    const bool worked = KIO::file_copy( QUrl::fromLocalFile( mZipFile->fileName() ), mDest );
+
+    KIO::FileCopyJob *job = KIO::file_copy( QUrl::fromLocalFile( mZipFile->fileName() ), mDest );
+
+    const bool worked = job->exec();
 
     if (!worked) {
         qWarning() << "Could not copy the zip file to the specified destination:" << mDest;

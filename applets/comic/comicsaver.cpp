@@ -23,6 +23,7 @@
 
 #include <QFileDialog>
 #include <QTemporaryFile>
+#include <QDebug>
 
 #include <KIO/Job>
 
@@ -57,7 +58,8 @@ bool ComicSaver::save(const ComicData &comic)
 
    mSavingDir->setDir(destUrl.path());
 
-   KIO::file_copy( srcUrl, destUrl );
+   KIO::FileCopyJob *job = KIO::file_copy( srcUrl, destUrl );
+   job->start();
 
    return true;
 }
