@@ -36,6 +36,7 @@ DragDrop.DropArea {
     Layout.minimumHeight: 0
 
     property string url: ""
+    property string errorMessage: ""
 
     function firstMimeType(formats) {
         for (var v in formats) {
@@ -111,6 +112,7 @@ DragDrop.DropArea {
             }
             shareDialog.visible = false;
             root.state = error===0 ? "success" : "failure";
+            root.errorMessage = message;
         }
     }
 
@@ -241,8 +243,8 @@ DragDrop.DropArea {
 
             PropertyChanges { target: idleTimer; running: true }
             PropertyChanges { target: tooltipArea; icon: icon.source }
-            PropertyChanges { target: tooltipArea; mainText: i18n("Error during upload. Try again.") }
-            PropertyChanges { target: tooltipArea; subText: i18n("Please, try again.") }
+            PropertyChanges { target: tooltipArea; mainText: i18n("Error during upload.") }
+            PropertyChanges { target: tooltipArea; subText: (root.errorMessage=="" ? i18n("Please, try again.") : root.errorMessage) }
         }
     ]
 }
