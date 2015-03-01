@@ -1,3 +1,5 @@
+add_definitions(-DTRANSLATION_DOMAIN="plasma_runner_audioplayercontrol")
+
 set(krunner_audioplayercontrol_SRCS
     imageiconengine.cpp
     audioplayercontrolrunner.cpp

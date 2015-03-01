@@ -1,3 +1,4 @@
+add_definitions(-DTRANSLATION_DOMAIN="libplasma_groupingcontainment")
 
 set(groupingcontainment_SRCS
         abstractgroup.cpp

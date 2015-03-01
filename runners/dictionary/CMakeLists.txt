@@ -1,3 +1,5 @@
+add_definitions(-DTRANSLATION_DOMAIN="plasma_runner_krunner_dictionary")
+
 set(dictionaryrunner_SRCS dictionaryrunner.cpp dictionarymatchengine.cpp)
 set(kcm_dictionaryrunner_SRCS dictionaryrunner_config.cpp)
 
