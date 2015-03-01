@@ -1,3 +1,5 @@
+add_definitions(-DTRANSLATION_DOMAIN="plasma_runner_datetime")
+
 set(krunner_datetime_SRCS
     datetimerunner.cpp
 )

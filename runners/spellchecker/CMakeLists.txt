@@ -1,3 +1,5 @@
+add_definitions(-DTRANSLATION_DOMAIN="plasma_runner_spellcheckrunner")
+
 set(krunner_spellcheckrunner_SRCS
     spellcheck.cpp
 )
@@ -28,4 +30,3 @@ install(TARGETS krunner_spellcheck kcm_krunner_spellcheck
         DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-runner-spellchecker.desktop plasma-runner-spellchecker_config.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
-
