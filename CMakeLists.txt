@@ -18,12 +18,12 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-set(REQUIRED_QT_VERSION 5.4.0)
+set(REQUIRED_QT_VERSION 5.3.0)
 set(KF5_MIN_VERSION 5.0.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Quick Qml Widgets)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-    Config ConfigWidgets CoreAddons I18n KIO KCMUtils Plasma Runner Service Sonnet UnitConversion KDELibs4Support)
+    Config ConfigWidgets CoreAddons I18n KIO KCMUtils Plasma Runner Service UnitConversion KDELibs4Support NewStuff)
 
 find_package(X11)
 find_package(Qt5X11Extras ${REQUIRED_QT_VERSION} CONFIG)

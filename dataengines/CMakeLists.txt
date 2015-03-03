@@ -1,4 +1,4 @@
-# add_subdirectory(comic)
+ add_subdirectory(comic)
 #
 # if (QCA2_FOUND AND QJSON_FOUND AND QTOAUTH_FOUND)
 #       add_subdirectory(microblog)

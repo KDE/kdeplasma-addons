@@ -15,10 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kquickcontrolsaddons 2.0
 
 Item {
     id: root
@@ -63,7 +63,7 @@ Item {
             }
 
             onClicked: {
-                comicApplet.goJump();
+                plasmoid.nativeInterface.goJump();
             }
 
             PlasmaCore.ToolTipArea {
@@ -93,7 +93,7 @@ Item {
             anchors.fill: parent
 
             hoverEnabled: true
-            visible: comicApplet.checkAuthorization("LaunchApp")
+            visible: plasmoid.nativeInterface.checkAuthorization("LaunchApp")
 
             onEntered: {
                 parent.color = theme.highlightColor;
@@ -104,7 +104,7 @@ Item {
             }
 
             onClicked: {
-                comicApplet.shop();
+                plasmoid.nativeInterface.shop();
             }
 
             PlasmaCore.ToolTipArea {

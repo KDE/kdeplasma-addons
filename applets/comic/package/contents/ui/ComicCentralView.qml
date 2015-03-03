@@ -15,16 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kquickcontrolsaddons 2.0
 
 Item {
     id: root
 
-    width: 10
-    height: 10
+    width: units.gridUnit
+    height: units.gridUnit
 
     property variant comicData
 
@@ -37,10 +37,10 @@ Item {
         }
 
         iconSource: "go-previous"
-        visible: (!comicApplet.arrowsOnHover && (comicData.prev !== undefined))
+        visible: (!plasmoid.nativeInterface.arrowsOnHover && (comicData.prev !== undefined))
 
         onClicked: {
-            comicApplet.updateComic(comicData.prev);
+            plasmoid.nativeInterface.updateComic(comicData.prev);
         }
     }
 
@@ -61,7 +61,7 @@ Item {
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
         onClicked: {
-            if (mouse.button == Qt.MiddleButton && comicApplet.middleClick) {
+            if (mouse.button == Qt.MiddleButton && plasmoid.nativeInterface.middleClick) {
                 fullDialog.open();
             }
         }
@@ -69,7 +69,7 @@ Item {
         PlasmaCore.ToolTipArea {
             id: tooltip
             anchors.fill: comicImageArea
-            mainText: comicApplet.comicData.additionalText
+            subText: plasmoid.nativeInterface.comicData.additionalText
         }
 
         ImageWidget {
@@ -77,10 +77,10 @@ Item {
 
             anchors.fill: parent
 
-            image: comicApplet.comicData.image
-            actualSize: comicApplet.showActualSize
-            isLeftToRight: comicApplet.comicData.isLeftToRight
-            isTopToBottom: comicApplet.comicData.isTopToBottom
+            image: plasmoid.nativeInterface.comicData.image
+            actualSize: plasmoid.nativeInterface.showActualSize
+            isLeftToRight: plasmoid.nativeInterface.comicData.isLeftToRight
+            isTopToBottom: plasmoid.nativeInterface.comicData.isTopToBottom
         }
 
         ButtonBar {
@@ -92,15 +92,15 @@ Item {
                 bottomMargin: 10
             }
 
-            visible: comicApplet.arrowsOnHover && comicImageArea.containsMouse//(comicApplet.arrowsOnHover && (comicImageArea.containsMouse || (comicImageArea.containsMouse && buttonBar.visible)) )
+            visible: plasmoid.nativeInterface.arrowsOnHover && comicImageArea.containsMouse
             opacity: 0
 
             onPrevClicked: {
-                comicApplet.updateComic(comicData.prev);
+                plasmoid.nativeInterface.updateComic(comicData.prev);
             }
 
             onNextClicked: {
-                comicApplet.updateComic(comicData.next);
+                plasmoid.nativeInterface.updateComic(comicData.next);
             }
 
             onZoomClicked: {
@@ -108,7 +108,7 @@ Item {
             }
 
             states: State {
-                name: "show"; when: (comicApplet.arrowsOnHover && comicImageArea.containsMouse)
+                name: "show"; when: (plasmoid.nativeInterface.arrowsOnHover && comicImageArea.containsMouse)
                 PropertyChanges { target: buttonBar; opacity: 1; }
             }
 
@@ -128,16 +128,17 @@ Item {
         }
 
         iconSource: "go-next"
-        visible: (!comicApplet.arrowsOnHover && (comicData.next !== undefined))
+        visible: (!plasmoid.nativeInterface.arrowsOnHover && (comicData.next !== undefined))
 
         onClicked: {
-            comicApplet.updateComic(comicData.next);
+            plasmoid.nativeInterface.updateComic(comicData.next);
         }
     }
 
     FullViewWidget {
         id: fullDialog
 
-        image: comicApplet.comicData.image
+        image: plasmoid.nativeInterface.comicData.image
+        visualParent: root
     }
 }

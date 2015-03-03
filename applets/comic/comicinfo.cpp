@@ -20,7 +20,7 @@
 #include "comicinfo.h"
 
 #include <KConfigGroup>
-#include <KGlobalSettings>
+#include <QStandardPaths>
 
 #include <QtCore/QDir>
 
@@ -72,10 +72,10 @@ void SavingDir::SavingDirPrivate::load()
 {
     mDir = mCfg.readEntry("savingDir", QString());
     if (!isValid()) {
-        mDir = KGlobalSettings::picturesPath();
+        mDir = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
     if (!isValid()) {
-        mDir = KGlobalSettings::downloadPath();
+        mDir = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
     }
     if (!isValid()) {
         mDir = QDir::homePath();

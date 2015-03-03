@@ -19,8 +19,9 @@
 #include "comicproviderkross.h"
 #include "comic_package.h"
 #include <KPluginFactory>
+#include <KPackage/PackageLoader>
 
-Plasma::PackageStructure *ComicProviderKross::m_packageStructure(0);
+KPackage::PackageStructure *ComicProviderKross::m_packageStructure(0);
 
 ComicProviderKross::ComicProviderKross(QObject *parent, const QVariantList &args)
     : ComicProvider(parent, args), m_wrapper(this)
@@ -120,14 +121,14 @@ void ComicProviderKross::redirected(int id, const QUrl &newUrl)
     m_wrapper.redirected(id, newUrl);
 }
 
-Plasma::PackageStructure *ComicProviderKross::packageStructure()
+KPackage::PackageStructure *ComicProviderKross::packageStructure()
 {
     if (!m_packageStructure) {
-        m_packageStructure = new ComicPackage();
+        m_packageStructure = KPackage::PackageLoader::self()->loadPackageStructure("Plasma/Comic");
     }
     return m_packageStructure;
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(ComicProviderKrossFactory, "plasma-packagestructure-comic.json", registerPlugin<ComicProviderKross>();)
+//K_PLUGIN_FACTORY_WITH_JSON(ComicProviderKrossFactory, "plasma-packagestructure-comic.json", registerPlugin<ComicProviderKross>();)
 
 #include "comicproviderkross.moc"

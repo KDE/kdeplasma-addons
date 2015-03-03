@@ -2,6 +2,8 @@ project(plasma_comic_dataengine)
 set(comic_engine_SRCS
     cachedprovider.cpp
     comic.cpp
+    comicproviderkross.cpp
+    comicproviderwrapper.cpp
 )
 find_package(KF5Kross)
 
@@ -38,7 +40,7 @@ target_link_libraries( plasma_packagestructure_comic
     KF5::I18n
 )
 kcoreaddons_desktop_to_json(plasma_packagestructure_comic plasma-packagestructure-comic.desktop)
-install(TARGETS plasma_packagestructure_comic DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/packagestructure)
+install(TARGETS plasma_packagestructure_comic DESTINATION ${PLUGIN_INSTALL_DIR}/kpackage/packagestructure)
 
 ########### plugin core library ############
 

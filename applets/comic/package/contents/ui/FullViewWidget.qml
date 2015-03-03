@@ -15,27 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kquickcontrolsaddons 2.0
+import QtQuick.Layouts 1.1
+
 
 PlasmaCore.Dialog {
     id: root
 
     property alias image: comicPicture.image
 
-    windowFlags: Qt.Popup
+    flags: Qt.Popup
     visible: false
 
     function open()
     {
-        var pos = root.popupPosition(null, Qt.AlignCenter);
-
-        root.x = pos.x;
-        root.y = pos.y;
-
         root.visible = true;
         root.activateWindow();
     }
@@ -49,8 +46,10 @@ PlasmaCore.Dialog {
 
         anchors.fill: parent
 
-        width: comicPicture.nativeWidth
-        height: comicPicture.nativeHeight
+        Layout.minimumWidth: comicPicture.nativeWidth
+        Layout.maximumWidth: Layout.minimumWidth
+        Layout.minimumHeight: comicPicture.nativeHeight
+        Layout.maximumHeight: Layout.minimumHeight
 
         Flickable {
             id: viewContainer

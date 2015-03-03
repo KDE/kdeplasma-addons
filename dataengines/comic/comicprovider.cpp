@@ -24,15 +24,16 @@
 #include <KIO/Job>
 #include <KIO/StoredTransferJob>
 #include <QUrl>
+#include <KPluginMetaData>
 
 class ComicProvider::Private
 {
     public:
-        Private(KService::Ptr service, ComicProvider *parent)
+        Private(const KPluginMetaData &data, ComicProvider *parent)
             : mParent(parent),
               mIsCurrent(false),
               mFirstStripNumber(1),
-              mComicDescription(service)
+              mComicDescription(data)
         {
             mTimer = new QTimer(parent);
             mTimer->setSingleShot(true);
@@ -100,14 +101,14 @@ class ComicProvider::Private
         QDate mFirstStripDate;
         int mRequestedNumber;
         int mFirstStripNumber;
-        KPluginInfo mComicDescription;
+        KPluginMetaData mComicDescription;
         QTimer *mTimer;
         QHash< KJob*, QUrl > mRedirections;
 };
 
 ComicProvider::ComicProvider(QObject *parent, const QVariantList &args)
     : QObject(parent), d(new Private(
-      KService::serviceByStorageId(args.count() > 2 ? args[2].toString() : QString()), this))
+      KPluginMetaData(args.count() > 2 ? args[2].toString() : QString()), this))
 {
     Q_ASSERT(args.count() >= 2);
     const QString type = args[0].toString();
@@ -296,7 +297,7 @@ QString ComicProvider::pluginName() const
     if (!d->mComicDescription.isValid()) {
         return QString();
     }
-    return d->mComicDescription.pluginName();
+    return d->mComicDescription.pluginId();
 }
 
 QString ComicProvider::name() const
@@ -312,10 +313,10 @@ QString ComicProvider::suffixType() const
     if (!d->mComicDescription.isValid()) {
         return QString();
     }
-    return d->mComicDescription.property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType")).toString();
+    return d->mComicDescription.value(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"));
 }
 
-KPluginInfo ComicProvider::description() const
+KPluginMetaData ComicProvider::description() const
 {
     return d->mComicDescription;
 }

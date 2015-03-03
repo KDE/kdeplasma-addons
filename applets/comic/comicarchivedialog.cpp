@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2011 Matthias Fuchs <mat69@gmx.net>                     *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,17 +21,22 @@
 #include "comicarchivedialog.h"
 #include "comicarchivejob.h"
 
-#include <KFileDialog>
+#include <QDialogButtonBox>
+
 
 ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString &comicName, IdentifierType identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, const QString &savingDir, QWidget *parent )
-  : KDialog( parent ),
+  : QDialog( parent ),
     mIdentifierType( identifierType ),
     mPluginName( pluginName )
 {
-    QWidget *widget = new QWidget(this);
-    ui.setupUi(widget);
-    setCaption( i18n( "Create %1 Comic Book Archive", comicName ) );
-    setMainWidget( widget );
+    ui.setupUi(this);
+    setWindowTitle( i18n( "Create %1 Comic Book Archive", comicName ) );
+
+    mButtonBox = new QDialogButtonBox(this);
+    mButtonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    connect(mButtonBox, SIGNAL(accepted()), SLOT(slotOkClicked()));
+    connect(mButtonBox, SIGNAL(rejected()), SLOT(reject()));
+    layout()->addWidget(mButtonBox);
 
     switch ( mIdentifierType ) {
         case Date: {
@@ -80,7 +86,7 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
     archiveTypeChanged( ComicArchiveJob::ArchiveAll );
 
     //TODO suggest file name!
-    ui.dest->fileDialog()->setOperationMode( KFileDialog::Saving );
+    ui.dest->fileDialog()->setAcceptMode( QFileDialog::AcceptSave );
     if ( !savingDir.isEmpty() ) {
         ui.dest->setStartDir( savingDir );
     }
@@ -145,7 +151,7 @@ void ComicArchiveDialog::updateOkButton()
     }
 
     okEnabled = ( okEnabled && !ui.dest->url().isEmpty() );
-    enableButtonOk( okEnabled );
+    mButtonBox->button(QDialogButtonBox::Ok)->setEnabled(okEnabled);
 }
 
 void ComicArchiveDialog::slotOkClicked()
@@ -177,6 +183,7 @@ void ComicArchiveDialog::slotOkClicked()
     }
 
     emit archive( archiveType, ui.dest->url(), fromIdentifier, toIdentifier );
+    accept();
 }
 
 void ComicArchiveDialog::setFromVisible( bool visible )

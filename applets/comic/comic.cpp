@@ -3,6 +3,7 @@
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
  *   Copyright (C) 2008-2011 Matthias Fuchs <mat69@gmx.net>                *
  *   Copyright (C) 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>      *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -34,31 +35,33 @@
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QGraphicsSceneWheelEvent>
 #include <QtGui/QSortFilterProxyModel>
-#include <QtDeclarative/QDeclarativeEngine>
-#include <QtDeclarative/QDeclarativeContext>
 
-#include <KAction>
+#include <QAction>
+#include <QDebug>
+#include <KActionCollection>
 #include <KConfigDialog>
-#include <KDebug>
 #include <KNotification>
 #include <kuiserverjobtracker.h>
+#include <KNewStuff3/KNS3/DownloadDialog>
 #include <KRun>
 #include <KStandardShortcut>
+#include <KIconLoader>
 
 #include <Plasma/Containment>
-#include <Plasma/DeclarativeWidget>
 #include <Plasma/Package>
+#include <Plasma/PluginLoader>
 
 #include "comicmodel.h"
-#include "configwidget.h"
+#include "comicupdater.h"
 
-K_GLOBAL_STATIC( ComicUpdater, globalComicUpdater )
+Q_GLOBAL_STATIC( ComicUpdater, globalComicUpdater )
 
 const int ComicApplet::CACHE_LIMIT = 20;
 
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
-    : Plasma::PopupApplet( parent, args ),
-      mActiveComicModel(parent),
+    : Plasma::Applet( parent, args ),
+      mProxy(0),
+      mActiveComicModel(new ActiveComicModel(parent)),
       mDifferentComic( true ),
       mShowComicUrl( false ),
       mShowComicAuthor( false ),
@@ -67,17 +70,14 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mShowErrorPicture( true ),
       mArrowsOnHover( true ),
       mMiddleClick( true ),
+      mCheckNewComicStripsInterval(0),
+      mMaxComicLimit( CACHE_LIMIT ),
       mCheckNewStrips( 0 ),
-      mDeclarativeWidget( 0 ),
       mActionShop( 0 ),
       mEngine( 0 ),
       mSavingDir(0)
 {
     setHasConfigurationInterface( true );
-    resize( 600, 250 );
-    setAspectRatioMode( Plasma::IgnoreAspectRatio );
-
-    setPopupIcon( "face-smile-big" );
 }
 
 void ComicApplet::init()
@@ -86,20 +86,9 @@ void ComicApplet::init()
     mSavingDir = new SavingDir(config());
 
     configChanged();
-    //QML
-    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
-    mDeclarativeWidget = new Plasma::DeclarativeWidget(this);
-    layout->addItem(mDeclarativeWidget);
 
-    mDeclarativeWidget->engine()->rootContext()->setContextProperty("comicApplet", this);
-
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    Plasma::Package package(QString(), "org.kde.comic", structure);
-    mDeclarativeWidget->setQmlPath(package.filePath("mainscript"));
-    //End of QML
-    
-    mEngine = dataEngine( "comic" );
-    mModel = new ComicModel( mEngine->query( "providers" ), mTabIdentifier, this );
+    mEngine = Plasma::PluginLoader::self()->loadDataEngine( "comic" );
+    mModel = new ComicModel( mEngine, "providers", mTabIdentifier, this );
     mProxy = new QSortFilterProxyModel( this );
     mProxy->setSourceModel( mModel );
     mProxy->setSortCaseSensitivity( Qt::CaseInsensitive );
@@ -107,70 +96,56 @@ void ComicApplet::init()
 
     //set maximum number of cached strips per comic, -1 means that there is no limit
     KConfigGroup global = globalConfig();
-    //convert old values
-    if ( global.hasKey( "useMaxComicLimit" ) ) {
-        const bool use = global.readEntry( "useMaxComicLimit", false );
-        if ( !use ) {
-            global.writeEntry( "maxComicLimit", 0 );
-        }
-        global.deleteEntry( "useMaxComicLimit" );
-    }
     const int maxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
-    mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ) );
+    mEngine->connectSource( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ), this );
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
-    connect( mDateChangedTimer, SIGNAL(timeout()), this, SLOT(checkDayChanged()) );
+    connect( mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
-    mActionNextNewStripTab = new KAction( KIcon( "go-next-view" ), i18nc( "here strip means comic strip", "&Next Tab with a new Strip" ), this );
-    mActionNextNewStripTab->setShortcut( KStandardShortcut::openNew() );
-    addAction( "next new strip" , mActionNextNewStripTab );
+    mActionNextNewStripTab = new QAction( QIcon::fromTheme( "go-next-view" ), i18nc( "here strip means comic strip", "&Next Tab with a new Strip" ), this );
+    mActionNextNewStripTab->setShortcuts( KStandardShortcut::openNew() );
+    actions()->addAction( "next new strip" , mActionNextNewStripTab );
     mActions.append( mActionNextNewStripTab );
-    connect( mActionNextNewStripTab, SIGNAL(triggered(bool)), this, SIGNAL(showNextNewStrip()) );
+    connect( mActionNextNewStripTab, &QAction::triggered, this, &ComicApplet::showNextNewStrip );
 
-    mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "Jump to &first Strip" ), this );
+    mActionGoFirst = new QAction( QIcon::fromTheme( "go-first" ), i18n( "Jump to &first Strip" ), this );
     mActions.append( mActionGoFirst );
-    connect( mActionGoFirst, SIGNAL(triggered(bool)), this, SLOT(slotFirstDay()) );
+    connect( mActionGoFirst, &QAction::triggered, this, &ComicApplet::slotFirstDay );
 
-    mActionGoLast = new QAction( KIcon( "go-last" ), i18n( "Jump to &current Strip" ), this );
+    mActionGoLast = new QAction( QIcon::fromTheme( "go-last" ), i18n( "Jump to &current Strip" ), this );
     mActions.append( mActionGoLast );
-    connect( mActionGoLast, SIGNAL(triggered(bool)), this, SLOT(slotCurrentDay()) );
+    connect( mActionGoLast, &QAction::triggered, this, &ComicApplet::slotCurrentDay );
 
-    mActionGoJump = new QAction( KIcon( "go-jump" ), i18n( "Jump to Strip ..." ), this );
+    mActionGoJump = new QAction( QIcon::fromTheme( "go-jump" ), i18n( "Jump to Strip ..." ), this );
     mActions.append( mActionGoJump );
-    connect( mActionGoJump, SIGNAL(triggered(bool)), this, SLOT(slotGoJump()) );
+    connect( mActionGoJump, &QAction::triggered, this, &ComicApplet::slotGoJump );
 
-    if ( hasAuthorization( "LaunchApp" ) ) {
-        mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
-        mActionShop->setEnabled( false );
-        mActions.append( mActionShop );
-        connect( mActionShop, SIGNAL(triggered(bool)), this, SLOT(slotShop()) );
-    }
+    mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
+    mActionShop->setEnabled( false );
+    mActions.append( mActionShop );
+    connect( mActionShop, &QAction::triggered, this, &ComicApplet::slotShop );
 
-    if ( hasAuthorization( "FileDialog" ) ) {
-        QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
-        mActions.append( action );
-        connect( action, SIGNAL(triggered(bool)), this , SLOT(slotSaveComicAs()) );
-    }
+    QAction *action = new QAction( QIcon::fromTheme( "document-save-as" ), i18n( "&Save Comic As..." ), this );
+    mActions.append( action );
+    connect( action, &QAction::triggered, this, &ComicApplet::slotSaveComicAs );
 
-    if ( hasAuthorization( "FileDialog" ) ) {
-        QAction *action = new QAction( KIcon( "application-epub+zip" ), i18n( "&Create Comic Book Archive..." ), this );
-        mActions.append( action );
-        connect( action, SIGNAL(triggered(bool)), this, SLOT(createComicBook()) );
-    }
+    action = new QAction( QIcon::fromTheme( "application-epub+zip" ), i18n( "&Create Comic Book Archive..." ), this );
+    mActions.append( action );
+    connect( action, &QAction::triggered, this, &ComicApplet::createComicBook );
 
-    mActionScaleContent = new QAction( KIcon( "zoom-original" ), i18nc( "@option:check Context menu of comic image", "&Actual Size" ), this );
+    mActionScaleContent = new QAction( QIcon::fromTheme( "zoom-original" ), i18nc( "@option:check Context menu of comic image", "&Actual Size" ), this );
     mActionScaleContent->setCheckable( true );
     mActionScaleContent->setChecked( mCurrent.scaleComic() );
     mActions.append( mActionScaleContent );
-    connect( mActionScaleContent, SIGNAL(triggered(bool)), this , SLOT(slotScaleToContent()) );
+    connect( mActionScaleContent, &QAction::triggered, this, &ComicApplet::slotScaleToContent );
 
-    mActionStorePosition = new QAction( KIcon( "go-home" ), i18nc( "@option:check Context menu of comic image", "Store current &Position" ), this);
+    mActionStorePosition = new QAction( QIcon::fromTheme( "go-home" ), i18nc( "@option:check Context menu of comic image", "Store current &Position" ), this);
     mActionStorePosition->setCheckable( true );
     mActionStorePosition->setChecked(mCurrent.hasStored());
     mActions.append( mActionStorePosition );
-    connect( mActionStorePosition, SIGNAL(triggered(bool)), this, SLOT(slotStorePosition()) );
+    connect( mActionStorePosition, &QAction::triggered, this, &ComicApplet::slotStorePosition );
 
     //make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
     updateView();
@@ -184,11 +159,6 @@ ComicApplet::~ComicApplet()
     delete mSavingDir;
 }
 
-QGraphicsWidget *ComicApplet::graphicsWidget()
-{
-    return mDeclarativeWidget;
-}
-
 void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
 {
     //disconnect prefetched comic strips
@@ -197,7 +167,10 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
         return;
     }
 
-    setBusy( false );
+    QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
+    if (graphicObject) {
+        graphicObject->setProperty("busy", false);
+    }
     setConfigurationRequired( false );
 
     //there was an error, display information as image
@@ -214,11 +187,11 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
     mCurrent.setData(data);
 
-    setAssociatedApplicationUrls(mCurrent.websiteUrl());
+    setAssociatedApplicationUrls(QList<QUrl>() << mCurrent.websiteUrl());
 
     //looking at the last index, thus not mark it as new
     KConfigGroup cg = config();
-    if (!mCurrent.hasNext() && mCheckNewComicStripsIntervall) {
+    if (!mCurrent.hasNext() && mCheckNewComicStripsInterval) {
         setTabHighlighted( mCurrent.id(), false );
         mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
     }
@@ -235,12 +208,10 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     if (mCurrent.hasNext()) {
         const QString prefetch = mCurrent.id() + ':' + mCurrent.next();
         mEngine->connectSource( prefetch, this );
-        mEngine->query( prefetch );
     }
     if ( mCurrent.hasPrev()) {
         const QString prefetch = mCurrent.id() + ':' + mCurrent.prev();
         mEngine->connectSource( prefetch, this );
-        mEngine->query( prefetch );
     }
 
     updateView();
@@ -253,65 +224,15 @@ void ComicApplet::updateView()
     updateContextMenu();
 }
 
-void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
+void ComicApplet::getNewComics()
 {
-    mConfigWidget = new ConfigWidget( dataEngine( "comic" ), mModel, mProxy, parent );
-    mConfigWidget->setShowComicUrl( mShowComicUrl );
-    mConfigWidget->setShowComicAuthor( mShowComicAuthor );
-    mConfigWidget->setShowComicTitle( mShowComicTitle );
-    mConfigWidget->setShowComicIdentifier( mShowComicIdentifier );
-    mConfigWidget->setShowErrorPicture( mShowErrorPicture );
-    mConfigWidget->setArrowsOnHover( mArrowsOnHover );
-    mConfigWidget->setMiddleClick( mMiddleClick );
-    mConfigWidget->setCheckNewComicStripsIntervall( mCheckNewComicStripsIntervall );
-
-    //not storing this value, since other applets might have changed it inbetween
-    KConfigGroup global = globalConfig();
-    const int maxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
-    mConfigWidget->setMaxComicLimit( maxComicLimit );
-    const int updateIntervall = global.readEntry( "updateIntervall", 3 );
-    mConfigWidget->setUpdateIntervall( updateIntervall );
-
-    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-    parent->addPage( mConfigWidget->comicSettings, i18n( "General" ), icon() );
-    parent->addPage( mConfigWidget->appearanceSettings, i18n( "Appearance" ), "image" );
-    parent->addPage( mConfigWidget->advancedSettings, i18n( "Advanced" ), "system-run" );
-
-    connect( parent, SIGNAL(applyClicked()), this, SLOT(applyConfig()) );
-    connect( parent, SIGNAL(okClicked()), this, SLOT(applyConfig()) );
-    connect(mConfigWidget, SIGNAL(enableApply()), parent, SLOT(settingsModified()));
-}
-
-void ComicApplet::applyConfig()
-{
-    setShowComicUrl(mConfigWidget->showComicUrl());
-    setShowComicAuthor(mConfigWidget->showComicAuthor());
-    setShowComicTitle(mConfigWidget->showComicTitle());
-    setShowComicIdentifier(mConfigWidget->showComicIdentifier());
-    setShowErrorPicture(mConfigWidget->showErrorPicture());
-    setArrowsOnHover(mConfigWidget->arrowsOnHover());
-    setMiddleClick(mConfigWidget->middleClick());
-    mCheckNewComicStripsIntervall = mConfigWidget->checkNewComicStripsIntervall();
-
-    //not storing this value, since other applets might have changed it inbetween
-    KConfigGroup global = globalConfig();
-    const int oldMaxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
-    const int maxComicLimit = mConfigWidget->maxComicLimit();
-    if ( oldMaxComicLimit != maxComicLimit ) {
-        global.writeEntry( "maxComicLimit", maxComicLimit );
-        mEngine->query( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ) );
+    if (!m_newStuffDialog) {
+        m_newStuffDialog = new KNS3::DownloadDialog( QString::fromLatin1("comic.knsrc") );
+        KNS3::DownloadDialog *strong = m_newStuffDialog.data();
+        strong->setTitle(i18n("Download Comics"));
+        connect(m_newStuffDialog.data(), SIGNAL(finished(int)), mEngine, SLOT(loadProviders()));
     }
-
-
-    globalComicUpdater->applyConfig( mConfigWidget );
-
-    updateUsedComics();
-    saveConfig();
-
-    //make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
-    updateView();
-
-    changeComic( mDifferentComic );
+    m_newStuffDialog.data()->show();
 }
 
 void ComicApplet::changeComic( bool differentComic )
@@ -334,8 +255,7 @@ void ComicApplet::updateUsedComics()
 {
     const QString oldIdentifier = mCurrent.id();
 
-    mActiveComicModel.clear();
-    mTabIdentifier.clear();
+    mActiveComicModel->clear();
     mCurrent = ComicData();
 
     bool isFirst = true;
@@ -343,7 +263,7 @@ void ComicApplet::updateUsedComics()
     KConfigGroup cg = config();
     int tab = 0;
     for ( int i = 0; i < mProxy->rowCount(); ++i ) {
-        if ( mProxy->index( i, 0 ).data( Qt::CheckStateRole) == Qt::Checked ) {
+        if (mTabIdentifier.contains(mProxy->index( i, 0 ).data( Qt::UserRole).toString())) {
             data = mProxy->index( i, 1 );
 
             if ( isFirst ) {
@@ -359,25 +279,25 @@ void ComicApplet::updateUsedComics()
             const QString identifier = data.data( Qt::UserRole ).toString();
             const QString iconPath = data.data( Qt::DecorationRole ).value<QIcon>().name();
             //found a newer strip last time, which was not visited
-            if ( mCheckNewComicStripsIntervall && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
-                mActiveComicModel.addComic(identifier, name, iconPath, true);
+
+            if ( mCheckNewComicStripsInterval && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
+                mActiveComicModel->addComic(identifier, name, iconPath, true);
             } else {
-                mActiveComicModel.addComic(identifier, name, iconPath);
+                mActiveComicModel->addComic(identifier, name, iconPath);
             }
 
-            mTabIdentifier << identifier;
             ++tab;
         }
     }
 
-    mActionNextNewStripTab->setVisible( mCheckNewComicStripsIntervall );
+    mActionNextNewStripTab->setVisible( mCheckNewComicStripsInterval );
     mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
 
     delete mCheckNewStrips;
     mCheckNewStrips = 0;
-    if ( mCheckNewComicStripsIntervall ) {
-        mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsIntervall, this );
-        connect( mCheckNewStrips, SIGNAL(lastStrip(int,QString,QString)), this, SLOT(slotFoundLastStrip(int,QString,QString)) );
+    if ( mCheckNewComicStripsInterval ) {
+        mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsInterval, this );
+        connect( mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip );
     }
 
     emit comicModelChanged();
@@ -402,7 +322,11 @@ void ComicApplet::checkDayChanged()
 void ComicApplet::configChanged()
 {
     KConfigGroup cg = config();
-    mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList( QString() ) );
+    mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList() );
+
+    if (mProxy) {
+        updateUsedComics();
+    }
 
     const QString id = mTabIdentifier.count() ? mTabIdentifier.at( 0 ) : QString();
     mCurrent = ComicData();
@@ -415,12 +339,9 @@ void ComicApplet::configChanged()
     mShowErrorPicture = cg.readEntry( "showErrorPicture", true );
     mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
     mMiddleClick = cg.readEntry( "middleClick", true );
-    mCheckNewComicStripsIntervall = cg.readEntry( "checkNewComicStripsIntervall", 30 );
-
-    //use a decent default size
-    const QSizeF tempMaxSize = isInPanel() ? QSizeF( 600, 250 ) : this->size();
-    mMaxSize = cg.readEntry( "maxSize", tempMaxSize );
-    mLastSize = mMaxSize;
+    mCheckNewComicStripsInterval = cg.readEntry( "checkNewComicStripsIntervall", 30 );
+    KConfigGroup global = globalConfig();
+    mMaxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
 
     globalComicUpdater->load();
 }
@@ -437,7 +358,8 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
-    cg.writeEntry( "checkNewComicStripsIntervall", mCheckNewComicStripsIntervall );
+    cg.writeEntry( "checkNewComicStripsIntervall", mCheckNewComicStripsInterval );
+    cg.writeEntry( "maxComicLimit", mMaxComicLimit);
 
     globalComicUpdater->save();
 }
@@ -464,9 +386,11 @@ void ComicApplet::slotCurrentDay()
 
 void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, const QString &suffix )
 {
+    Q_UNUSED(index)
+
     KConfigGroup cg = config();
     if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
-        kDebug() << identifier << "has a newer strip.";
+        qDebug() << identifier << "has a newer strip.";
         setTabHighlighted( identifier, true );
         cg.writeEntry( "lastStripVisited_" + identifier, false );
     }
@@ -477,7 +401,7 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
 void ComicApplet::slotGoJump()
 {
     StripSelector *selector = StripSelectorFactory::create(mCurrent.type());
-    connect(selector, SIGNAL(stripChosen(QString)), this, SLOT(updateComic(QString)));
+    connect(selector, &StripSelector::stripChosen, this, &ComicApplet::updateComic);
 
     selector->select(mCurrent);
 }
@@ -492,35 +416,30 @@ void ComicApplet::slotShop()
     KRun::runUrl(mCurrent.shopUrl(), "text/html", 0);
 }
 
-bool ComicApplet::isInPanel() const
-{
-    return ( this->geometry().width() < 70 ) || ( this->geometry().height() < 50 );
-}
-
 void ComicApplet::createComicBook()
 {
     ComicArchiveDialog *dialog = new ComicArchiveDialog(mCurrent.id(), mCurrent.title(), mCurrent.type(), mCurrent.current(),
                                                         mCurrent.first(), mSavingDir->getDir());
     dialog->setAttribute(Qt::WA_DeleteOnClose);//to have destroyed emitted upon closing
-    connect( dialog, SIGNAL(archive(int,KUrl,QString,QString)), this, SLOT(slotArchive(int,KUrl,QString,QString)) );
+    connect( dialog, &ComicArchiveDialog::archive, this, &ComicApplet::slotArchive );
     dialog->show();
 }
 
-void ComicApplet::slotArchive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier )
+void ComicApplet::slotArchive( int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier )
 {
-    mSavingDir->setDir(dest.directory());
+    mSavingDir->setDir(dest.path());
 
     const QString id = mCurrent.id();
-    kDebug() << "Archiving:" << id <<  archiveType << dest << fromIdentifier << toIdentifier;
+    qDebug() << "Archiving:" << id <<  archiveType << dest << fromIdentifier << toIdentifier;
     ComicArchiveJob *job = new ComicArchiveJob(dest, mEngine, static_cast< ComicArchiveJob::ArchiveType >( archiveType ), mCurrent.type(),  id, this);
     job->setFromIdentifier(id + ':' + fromIdentifier);
     job->setToIdentifier(id + ':' + toIdentifier);
     if (job->isValid()) {
-        connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotArchiveFinished(KJob*)));
+        connect(job, &ComicArchiveJob::finished, this, &ComicApplet::slotArchiveFinished);
         KIO::getJobTracker()->registerJob(job);
         job->start();
     } else {
-        kWarning() << "Archiving job is not valid.";
+        qWarning() << "Archiving job is not valid.";
         delete job;
     }
 }
@@ -528,7 +447,7 @@ void ComicApplet::slotArchive( int archiveType, const KUrl &dest, const QString 
 void ComicApplet::slotArchiveFinished (KJob *job )
 {
     if ( job->error() ) {
-        KNotification::event( KNotification::Warning, i18n( "Archiving comic failed" ), job->errorText(), KIcon( "dialog-warning" ).pixmap( KIconLoader::SizeMedium ) );
+        KNotification::event( KNotification::Warning, i18n( "Archiving comic failed" ), job->errorText(), QIcon::fromTheme( "dialog-warning" ).pixmap( KIconLoader::SizeMedium ) );
     }
 }
 
@@ -537,28 +456,17 @@ QList<QAction*> ComicApplet::contextualActions()
     return mActions;
 }
 
-QSizeF ComicApplet::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
-{
-    if (which != Qt::PreferredSize) {
-        return Applet::sizeHint(which, constraint);
-    } else {
-        QSize imageSize = mCurrent.image().size();
-        if (!imageSize.isEmpty()) {
-            return imageSize;
-        } else {
-            return Applet::sizeHint(which, constraint);
-        }
-    }
-}
-
 void ComicApplet::updateComic( const QString &identifierSuffix )
 {
-    mEngine = dataEngine( "comic" );
     const QString id = mCurrent.id();
     setConfigurationRequired( id.isEmpty() );
+
     if ( !id.isEmpty() && mEngine && mEngine->isValid() ) {
 
-        setBusy( true );
+        QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
+        if (graphicObject) {
+            graphicObject->setProperty("busy", true);
+        }
         const QString identifier = id + ':' + identifierSuffix;
 
         //disconnecting of the oldSource is needed, otherwise you could get data for comics you are not looking at if you use tabs
@@ -573,13 +481,9 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         mOldSource = identifier;
         mEngine->disconnectSource( identifier, this );
         mEngine->connectSource( identifier, this );
-        const Plasma::DataEngine::Data data = mEngine->query( identifier );
 
-        if ( data[ "Error" ].toBool() ) {
-            dataUpdated( QString(), data );
-        }
     } else {
-        kError() << "Either no identifier was specified or the engine could not be created:" << "id" << id << "engine valid:" << ( mEngine && mEngine->isValid() );
+        qWarning() << "Either no identifier was specified or the engine could not be created:" << "id" << id << "engine valid:" << ( mEngine && mEngine->isValid() );
         setConfigurationRequired( true );
     }
 }
@@ -606,9 +510,14 @@ void ComicApplet::slotScaleToContent()
 }
 
 //QML
-QObject *ComicApplet::comicsModel() 
+QObject *ComicApplet::comicsModel() const
 {
-    return &mActiveComicModel;
+    return mActiveComicModel;
+}
+
+QObject *ComicApplet::availableComicsModel() const
+{
+    return mProxy;
 }
 
 bool ComicApplet::showComicUrl() const
@@ -714,11 +623,29 @@ void ComicApplet::setMiddleClick(bool show)
     mMiddleClick = show;
 
     emit middleClickChanged();
+    saveConfig();
 }
 
-QVariantHash ComicApplet::comicData()
+QVariantMap ComicApplet::comicData() const
 {
     return mComicData;
+}
+
+QStringList ComicApplet::tabIdentifiers() const
+{
+    return mTabIdentifier;
+}
+
+void ComicApplet::setTabIdentifiers(const QStringList &tabs)
+{
+    if (mTabIdentifier == tabs) {
+        return;
+    }
+
+    mTabIdentifier = tabs;
+    emit tabIdentifiersChanged();
+    saveConfig();
+    changeComic( mDifferentComic );
 }
 
 void ComicApplet::refreshComicData()
@@ -728,10 +655,10 @@ void ComicApplet::refreshComicData()
     mComicData["next"] = mCurrent.next();
     mComicData["additionalText"] = mCurrent.additionalText();
 
-    mComicData["websiteUrl"] = mCurrent.websiteUrl().prettyUrl();
+    mComicData["websiteUrl"] = mCurrent.websiteUrl().toString();
     mComicData["websiteHost"] = mCurrent.websiteUrl().host();
-    mComicData["imageUrl"] = mCurrent.websiteUrl().prettyUrl();
-    mComicData["shopUrl"] = mCurrent.websiteUrl().prettyUrl();
+    mComicData["imageUrl"] = mCurrent.websiteUrl().toString();
+    mComicData["shopUrl"] = mCurrent.websiteUrl().toString();
     mComicData["first"] = mCurrent.first();
     mComicData["stripTitle"] = mCurrent.stripTitle();
     mComicData["author"] = mCurrent.author();
@@ -763,12 +690,58 @@ void ComicApplet::setShowActualSize(bool show)
 
     emit showActualSizeChanged();
 }
+
+int ComicApplet::checkNewComicStripsInterval() const
+{
+    return mCheckNewComicStripsInterval;
+}
+
+void ComicApplet::setCheckNewComicStripsInterval(int interval)
+{
+    if (mCheckNewComicStripsInterval == interval) {
+        return;
+    }
+
+    mCheckNewComicStripsInterval = interval;
+    emit checkNewComicStripsIntervalChanged();
+}
+
+int ComicApplet::providerUpdateInterval() const
+{
+    return globalComicUpdater->interval();
+}
+
+void ComicApplet::setProviderUpdateInterval(int interval)
+{
+    if (globalComicUpdater->interval() == interval) {
+        return;
+    }
+
+    globalComicUpdater->setInterval(interval);
+    emit providerUpdateIntervalChanged();
+}
+
+void ComicApplet::setMaxComicLimit(int limit)
+{
+    if (mMaxComicLimit == limit) {
+        return;
+    }
+
+    mMaxComicLimit = limit;
+    emit maxComicLimitChanged();
+}
+
+int ComicApplet::maxComicLimit() const
+{
+    return mMaxComicLimit;
+}
+
 //Endof QML
 void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
 {
     //Search for matching id
-    for (int index = 0; index < mActiveComicModel.rowCount(); ++index) {
-        QStandardItem * item = mActiveComicModel.item(index);
+    for (int index = 0; index < mActiveComicModel->rowCount(); ++index) {
+        QStandardItem * item = mActiveComicModel->item(index);
 
         QString currentId = item->data(ActiveComicModel::ComicKeyRole).toString();
         if (id == currentId){
@@ -782,7 +755,7 @@ void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
 
 bool ComicApplet::hasHighlightedTabs()
 {
-    for (int i = 0; i < mActiveComicModel.rowCount(); ++i) {
+    for (int i = 0; i < mActiveComicModel->rowCount(); ++i) {
         if (isTabHighlighted(i)) {
             return true;
         }
@@ -793,11 +766,15 @@ bool ComicApplet::hasHighlightedTabs()
 
 bool ComicApplet::isTabHighlighted(int index) const
 {
-    if (index < 0 || index >= mActiveComicModel.rowCount()) {
+    if (index < 0 || index >= mActiveComicModel->rowCount()) {
         return false;
     }
 
-    QStandardItem * item = mActiveComicModel.item(index);
+    QStandardItem * item = mActiveComicModel->item(index);
 
     return item->data(ActiveComicModel::ComicHighlightRole).toBool();
 }
+
+K_EXPORT_PLASMA_APPLET_WITH_JSON(comic, ComicApplet, "plasma-comic-default.json")
+
+#include "comic.moc"

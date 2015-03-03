@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,30 +21,34 @@
 
 #include "comicmodel.h"
 
-#include <KIcon>
+#include <QIcon>
+#include <QDebug>
 
-ComicModel::ComicModel( const Plasma::DataEngine::Data &comics, const QStringList &usedComics, QObject *parent )
-  : QAbstractTableModel( parent ), mNumSelected( 0 )
+ComicModel::ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent )
+  : QAbstractTableModel( parent ), mUsedComics(usedComics)
 {
-    setComics( comics, usedComics );
+    engine->connectSource( source, this );
+}
+
+void ComicModel::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
+{
+    setComics( data, mUsedComics );
+}
+
+QHash<int, QByteArray> ComicModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[Qt::DisplayRole] = "display";
+    roles[Qt::DecorationRole] = "decoration";
+    roles[Qt::UserRole] = "plugin";
+    return roles;
 }
 
 void ComicModel::setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics )
 {
     beginResetModel();
 
-    mNumSelected = 0;
     mComics = comics;
-    mState.clear();
-    Plasma::DataEngine::Data::const_iterator it;
-    Plasma::DataEngine::Data::const_iterator itEnd = mComics.constEnd();
-    for ( it = mComics.constBegin(); it != itEnd; ++it ) {
-        const bool isChecked = usedComics.contains( it.key() );
-        mState[ it.key() ] = ( isChecked ? Qt::Checked : Qt::Unchecked );
-        if ( isChecked ) {
-            ++mNumSelected;
-        }
-    }
 
     endResetModel();
 }
@@ -70,20 +75,16 @@ QVariant ComicModel::data( const QModelIndex &index, int role ) const
     }
 
     const QString data = mComics.keys()[ index.row() ];
-    if ( index.column() == 0 ) {
-        if ( role == Qt::CheckStateRole ) {
-            return mState[ data ];
-        }
-    } else if ( index.column() == 1 ) {
-        switch( role ) {
-            case Qt::DisplayRole:
-                return mComics[ data ].toStringList()[ 0 ];
-            case Qt::DecorationRole:
-                return KIcon( mComics[ data ].toStringList()[ 1 ] );
-            case Qt::UserRole:
-                return data;
-        }
+
+    switch( role ) {
+        case Qt::DisplayRole:
+            return mComics[ data ].toStringList()[ 0 ];
+        case Qt::DecorationRole:
+            return QIcon::fromTheme( mComics[ data ].toStringList()[ 1 ] );
+        case Qt::UserRole:
+            return data;
     }
+
 
     return QVariant();
 }
@@ -97,41 +98,4 @@ Qt::ItemFlags ComicModel::flags( const QModelIndex &index ) const
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
-bool ComicModel::setData( const QModelIndex &index, const QVariant &value, int role )
-{
-    if ( index.isValid() && ( role == Qt::CheckStateRole ) ) {
-        Qt::CheckState oldState = mState[ mComics.keys()[ index.row() ] ];
-        Qt::CheckState newState = static_cast< Qt::CheckState >( value.toInt() );
-        mState[ mComics.keys()[ index.row() ] ] = newState;
-        if ( newState != oldState ) {
-            if ( newState == Qt::Checked ) {
-                ++mNumSelected;
-            } else if ( newState == Qt::Unchecked ) {
-                --mNumSelected;
-            }
-        }
-        emit dataChanged( index, index );
-        return true;
-    }
 
-    return false;
-}
-
-int ComicModel::numSelected() const
-{
-    return mNumSelected;
-}
-
-QStringList ComicModel::selected() const
-{
-    QStringList list;
-    QHash< QString, Qt::CheckState >::const_iterator it;
-    QHash< QString, Qt::CheckState >::const_iterator itEnd = mState.constEnd();
-    for ( it = mState.constBegin(); it != itEnd; ++it ) {
-        if ( it.value() == Qt::Checked ) {
-            list << it.key();
-        }
-    }
-
-    return list;
-}

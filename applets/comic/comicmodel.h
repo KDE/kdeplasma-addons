@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -24,27 +25,31 @@
 #include <QtCore/QAbstractTableModel>
 
 #include <Plasma/DataEngine>
+#include <Plasma/DataEngineConsumer>
 
-class ComicModel : public QAbstractTableModel
+class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
 {
+    Q_OBJECT
+
     public:
-        ComicModel( const Plasma::DataEngine::Data &comics, const QStringList &usedComics, QObject *parent = 0 );
+        ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent = 0 );
 
         void setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics );
+
+        QHash<int, QByteArray> roleNames() const;
 
         int rowCount( const QModelIndex &index = QModelIndex() ) const;
         int columnCount( const QModelIndex &index = QModelIndex() ) const;
         QVariant data( const QModelIndex &index, int role = Qt::CheckStateRole ) const;
         Qt::ItemFlags flags( const QModelIndex &index ) const;
-        bool setData( const QModelIndex &index, const QVariant &value, int role = Qt::EditRole );
 
-        int numSelected() const;
-        QStringList selected() const;
+
+    public Q_SLOTS:
+        void dataUpdated( const QString &source, const Plasma::DataEngine::Data &data );
 
     private:
         Plasma::DataEngine::Data mComics;
-        QHash<QString, Qt::CheckState> mState;
-        int mNumSelected;
+        QStringList mUsedComics;
 };
 
 #endif

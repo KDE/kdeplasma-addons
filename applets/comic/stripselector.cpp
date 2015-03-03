@@ -22,9 +22,11 @@
 #include "comicdata.h"
 
 #include <KDatePicker>
-#include <KDialog>
-#include <KInputDialog>
-#include <KNumInput>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QInputDialog>
+#include <QSpinBox>
+#include <KLocalizedString>
 
 #include <QtCore/QScopedPointer>
 #include <QtCore/QTimer>
@@ -33,34 +35,33 @@
 
 //NOTE based on GotoPageDialog KDE/kdegraphics/okular/part.cpp
 //BEGIN choose a strip dialog
-class ChooseStripNumDialog : public KDialog
+class ChooseStripNumDialog : public QDialog
 {
     public:
         ChooseStripNumDialog(QWidget *parent, int current, int min, int max)
-            : KDialog( parent )
+            : QDialog( parent )
         {
-            setCaption(i18n("Go to Strip"));
-            setButtons(Ok | Cancel);
-            setDefaultButton(Ok);
+            setWindowTitle(i18n("Go to Strip"));
 
-            QWidget *widget = new QWidget(this);
-            setMainWidget(widget);
-
-            QVBoxLayout *topLayout = new QVBoxLayout(widget);
+            QVBoxLayout *topLayout = new QVBoxLayout(this);
             topLayout->setMargin(0);
-            topLayout->setSpacing(spacingHint());
-            numInput = new KIntNumInput(current, widget);
+            numInput = new QSpinBox(this);
             numInput->setRange(min, max);
-            numInput->setEditFocus(true);
-            numInput->setSliderEnabled(true);
+            numInput->setValue(current);
 
-            QLabel *label = new QLabel(i18n("&Strip Number:"), widget);
+            QLabel *label = new QLabel(i18n("&Strip Number:"), this);
             label->setBuddy(numInput);
             topLayout->addWidget(label);
             topLayout->addWidget(numInput) ;
             // A little bit extra space
-            topLayout->addSpacing(spacingHint());
             topLayout->addStretch(10);
+
+            QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+            buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+            connect(buttonBox, &QDialogButtonBox::accepted, this, &ChooseStripNumDialog::accept);
+            connect(buttonBox, &QDialogButtonBox::rejected, this, &ChooseStripNumDialog::reject);
+            topLayout->addWidget(buttonBox);
+
             numInput->setFocus();
         }
 
@@ -70,7 +71,7 @@ class ChooseStripNumDialog : public KDialog
         }
 
     protected:
-        KIntNumInput *numInput;
+        QSpinBox *numInput;
 };
 //END choose a strip dialog
 
@@ -110,7 +111,7 @@ StringStripSelector::~StringStripSelector()
 void StringStripSelector::select(const ComicData &currentStrip)
 {
     bool ok;
-    const QString strip = KInputDialog::getText(i18n("Go to Strip"), i18n("Strip identifier:"),
+    const QString strip = QInputDialog::getText(0, i18n("Go to Strip"), i18n("Strip identifier:"), QLineEdit::Normal,
                                                  currentStrip.current(), &ok);
     if (ok) {
         emit stripChosen(strip);
@@ -155,11 +156,11 @@ void DateStripSelector::select(const ComicData &currentStrip)
     calendar->setMinimumSize(calendar->sizeHint());
     calendar->setDate(QDate::fromString(currentStrip.current(), "yyyy-MM-dd"));
 
-    connect(calendar, SIGNAL(dateSelected(QDate)), this, SLOT(slotChosenDay(QDate)));
-    connect(calendar, SIGNAL(dateEntered(QDate)), this, SLOT(slotChosenDay(QDate)));
+    connect(calendar, &KDatePicker::dateSelected, this, &DateStripSelector::slotChosenDay);
+    connect(calendar, &KDatePicker::dateEntered, this, &DateStripSelector::slotChosenDay);
 
     // only delete this if the dialog got closed
-    connect(calendar, SIGNAL(destroyed(QObject*)), this, SLOT(deleteLater()));
+    connect(calendar, &KDatePicker::destroyed, this, &DateStripSelector::deleteLater);
     calendar->show();
 }
 
@@ -175,4 +176,5 @@ void DateStripSelector::slotChosenDay(const QDate &date)
     }
 }
 
-#include "stripselector_p.moc"
+#include "moc_stripselector.cpp"
+#include "moc_stripselector_p.cpp"

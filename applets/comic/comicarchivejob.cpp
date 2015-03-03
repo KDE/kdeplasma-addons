@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2011 Matthias Fuchs <mat69@gmx.net>                     *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,23 +20,14 @@
 
 #include "comicarchivejob.h"
 
-#include <KDebug>
-#include <KIO/NetAccess>
-#include <KTemporaryFile>
+#include <QDebug>
+#include <QTemporaryFile>
 #include <KZip>
+#include <klocalizedstring.h>
 
-#ifdef HAVE_NEPOMUK
-#include <Nepomuk/Resource>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <Nepomuk/Vocabulary/NCO>
-#include <Nepomuk/Vocabulary/NFO>
-#include <Nepomuk/Vocabulary/PIMO>
+#include <QImage>
 
-using namespace Nepomuk::Vocabulary;
-#endif
-
-ComicArchiveJob::ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, ComicArchiveJob::ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent )
+ComicArchiveJob::ComicArchiveJob( const QUrl &dest, Plasma::DataEngine *engine, ComicArchiveJob::ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent )
   : KJob( parent ),
     mType( archiveType ),
     mDirection( Undefined ),
@@ -48,7 +40,7 @@ ComicArchiveJob::ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, 
     mProcessedFiles( 0 ),
     mTotalFiles( -1 ),
     mEngine( engine ),
-    mZipFile( new KTemporaryFile ),
+    mZipFile( new QTemporaryFile ),
     mZip( 0 ),
     mPluginName( pluginName ),
     mDest( dest )
@@ -59,7 +51,7 @@ ComicArchiveJob::ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, 
         mZip->setCompression( KZip::NoCompression );
         setCapabilities( Killable | Suspendable );
     } else {
-        kError() << "Could not create a temporary file for the zip file.";
+        qWarning() << "Could not create a temporary file for the zip file.";
     }
 }
 
@@ -74,21 +66,21 @@ ComicArchiveJob::~ComicArchiveJob()
 bool ComicArchiveJob::isValid() const
 {
     if ( mPluginName.isEmpty() ) {
-        kWarning() << "No plugin name specified.";
+        qWarning() << "No plugin name specified.";
         return false;
     }
 
     switch ( mType ) {
         case ArchiveFromTo:
             if ( mToIdentifier.isEmpty() || mFromIdentifier.isEmpty() ) {
-                kWarning() << "Not enought data provided to archive a range.";
+                qWarning() << "Not enought data provided to archive a range.";
                 return false;
             }
             break;
         case ArchiveStartTo:
         case ArchiveEndTo:
             if ( mToIdentifier.isEmpty() ) {
-                kWarning() << "Not enough data provied to archive StartTo/EndTo.";
+                qWarning() << "Not enough data provied to archive StartTo/EndTo.";
                 return false;
             }
             break;
@@ -140,7 +132,7 @@ void ComicArchiveJob::start()
 void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
 {
     if ( !mZip ) {
-        kWarning() << "No zip file, aborting.";
+        qWarning() << "No zip file, aborting.";
         setErrorText( i18n( "No zip file is existing, aborting." ) );
         setError( KilledJobError );
         emitResultIfNeeded();
@@ -164,10 +156,8 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
         mComicTitle = data[ "Title" ].toString();
     }
 
-    mEngine->disconnectSource( source, this );
-
     if ( hasError ) {
-        kWarning() << "An error occured at" << source << "stopping.";
+        qWarning() << "An error occured at" << source << "stopping.";
         setErrorText( i18n( "An error happened for identifier %1.", source ) );
         setError( KilledJobError );
         copyZipFileToDestination();
@@ -202,7 +192,7 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
     bool worked = false;
     ++mProcessedFiles;
     if ( mDirection == Foward ) {
-        KTemporaryFile tempFile;
+        QTemporaryFile tempFile;
         worked = tempFile.open();
         worked = worked && tempFile.flush();
         worked = ( worked ? image.save( tempFile.fileName(), "PNG" ) : worked );
@@ -210,14 +200,14 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
 
         if ( worked ) {
             if ( ( currentIdentifier == mToIdentifier ) || ( currentIdentifierSuffix == nextIdentifierSuffix) || nextIdentifierSuffix.isEmpty() ) {
-                kDebug() << "Done downloading at:" << source;
+                qDebug() << "Done downloading at:" << source;
                 copyZipFileToDestination();
             } else {
                 requestComic( suffixToIdentifier( nextIdentifierSuffix ) );
             }
         }
     } else if ( mDirection == Backward ) {
-        KTemporaryFile *tempFile = new KTemporaryFile;
+        QTemporaryFile *tempFile = new QTemporaryFile;
         mBackwardFiles << tempFile;
         worked = tempFile->open();
         worked = worked && tempFile->flush();
@@ -225,7 +215,7 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
 
         if ( worked ) {
             if ( ( currentIdentifier == mToIdentifier ) || ( currentIdentifierSuffix == previousIdentifierSuffix ) || previousIdentifierSuffix.isEmpty() ) {
-                kDebug() << "Done downloading at:" << source;
+                qDebug() << "Done downloading at:" << source;
                 createBackwardZip();
             } else {
                 requestComic( suffixToIdentifier( previousIdentifierSuffix) );
@@ -240,11 +230,13 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
     }
 
     if ( !worked ) {
-        kError() << "Could not write the file, identifier:" << source;
+        qWarning() << "Could not write the file, identifier:" << source;
         setErrorText( i18n( "Failed creating the file with identifier %1.", source ) );
         setError( KilledJobError );
         emitResultIfNeeded();
     }
+
+    mEngine->disconnectSource( source, this );
 }
 
 bool ComicArchiveJob::doKill()
@@ -272,7 +264,7 @@ void ComicArchiveJob::defineTotalNumber( const QString &currentSuffix )
 {
     findTotalNumberFromTo();
     if ( mTotalFiles == -1 ) {
-        kDebug() << "Unable to find the total number for" << mPluginName;
+        qDebug() << "Unable to find the total number for" << mPluginName;
         return;
     }
 
@@ -345,10 +337,10 @@ void ComicArchiveJob::requestComic( QString identifier ) //krazy:exclude=passbyv
 
     emit description( this, i18n( "Creating Comic Book Archive" ),
                       qMakePair( QString( "source" ), identifier ),
-                      qMakePair( QString( "destination" ), mDest.prettyUrl() ) );
+                      qMakePair( QString( "destination" ), mDest.toString() ) );
 
     mEngine->connectSource( identifier, this );
-    mEngine->query( identifier );
+//    mEngine->query( identifier );
 }
 
 bool ComicArchiveJob::addFileToZip( const QString &path )
@@ -370,7 +362,7 @@ void ComicArchiveJob::createBackwardZip()
 {
     for ( int i = mBackwardFiles.count() - 1; i >= 0; --i ) {
         if ( !addFileToZip( mBackwardFiles[i]->fileName() ) ) {
-            kWarning() << "Failed adding a file to the archive.";
+            qWarning() << "Failed adding a file to the archive.";
             setErrorText( i18n( "Failed adding a file to the archive." ) );
             setError( KilledJobError );
             emitResultIfNeeded();
@@ -384,44 +376,18 @@ void ComicArchiveJob::createBackwardZip()
 void ComicArchiveJob::copyZipFileToDestination()
 {
     mZip->close();
-    const bool worked = KIO::NetAccess::file_copy( KUrl( mZipFile->fileName() ), mDest );
-    //store additional data using Nepomuk
+
+    KIO::FileCopyJob *job = KIO::file_copy( QUrl::fromLocalFile( mZipFile->fileName() ), mDest );
+
+    const bool worked = job->exec();
+
     if (!worked) {
-        kWarning() << "Could not copy the zip file to the specified destination:" << mDest;
+        qWarning() << "Could not copy the zip file to the specified destination:" << mDest;
         setErrorText( i18n( "Could not create the archive at the specified location." ) );
         setError( KilledJobError );
         emitResultIfNeeded();
         return;
     }
-
-#ifdef HAVE_NEPOMUK
-    //store additional data using Nepomuk
-    Nepomuk::Resource res( mDest, NFO::FileDataObject() );
-
-    Nepomuk::Resource comicTopic( "Comic", PIMO::Topic() );
-    comicTopic.setLabel( i18n( "Comic" ) );
-
-    if ( !mComicTitle.isEmpty() ) {
-        Nepomuk::Resource topic( mComicTitle, PIMO::Topic() );
-        topic.setLabel( mComicTitle );
-        topic.setProperty( PIMO::superTopic(), comicTopic );
-        res.addTag( topic );
-    } else {
-//             res.addTag( comicTopic );//TODO activate this, see below
-        ;
-    }
-
-    //FIXME also set the comic topic as tag, this is redundant, as topic has this as super topic
-    //though at this point the gui (Dolphin) does not manage to show the correct tags
-    res.addTag( comicTopic );
-
-    foreach ( QString author, mAuthors ) {
-        author = author.trimmed();
-        Nepomuk::Resource authorRes( author, NCO::PersonContact() );
-        authorRes.setProperty( NCO::fullname(), author );
-        res.addProperty( NCO::creator(), authorRes );
-    }
-#endif
 
     emitResultIfNeeded();
 }

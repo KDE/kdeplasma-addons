@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2011 Matthias Fuchs <mat69@gmx.net>                     *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -24,10 +25,11 @@
 
 #include "ui_comicarchivedialog.h"
 
-#include <KDialog>
+#include <QDialog>
 
+class QDialogButtonBox;
 
-class ComicArchiveDialog : public KDialog
+class ComicArchiveDialog : public QDialog
 {
     Q_OBJECT
 
@@ -35,7 +37,7 @@ class ComicArchiveDialog : public KDialog
         ComicArchiveDialog( const QString &pluginName, const QString &comicName, IdentifierType identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, const QString &savingDir = QString(), QWidget *parent = 0 );
 
     signals:
-        void archive( int archiveType, const KUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
+        void archive( int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
 
     private slots:
         void archiveTypeChanged( int newType );
@@ -51,6 +53,7 @@ class ComicArchiveDialog : public KDialog
     private:
         Ui::ComicArchiveDialog ui;
         IdentifierType mIdentifierType;
+        QDialogButtonBox *mButtonBox;
         QString mPluginName;
 };
 

@@ -18,17 +18,16 @@
 
 #include "comic_package.h"
 
-#include <Plasma/Applet>
-#include <Plasma/Package>
+#include <KPackage/Package>
 #include <KLocalizedString>
 #include <QDebug>
 
 ComicPackage::ComicPackage(QObject *parent, const QVariantList& args)
-    : Plasma::PackageStructure(parent, args)
+    : KPackage::PackageStructure(parent, args)
 {
 }
 
-void ComicPackage::initPackage(Plasma::Package *package)
+void ComicPackage::initPackage(KPackage::Package *package)
 {
     QStringList mimetypes;
     package->addDirectoryDefinition("images", QLatin1String("images"), i18n("Images"));
@@ -43,6 +42,8 @@ void ComicPackage::initPackage(Plasma::Package *package)
     package->addFileDefinition("mainscript", QLatin1String("code/main"), i18n("Main Script File"));
     //package->setRequired("mainscript", true); Package::isValid() fails with this because of Kross and different file extensions
     package->setDefaultPackageRoot("plasma/comics/");
-    package->setServicePrefix(QLatin1String("plasma-comic-"));
 }
 
+K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(ComicPackage, "plasma-packagestructure-comic.json")
+
+#include "comic_package.moc"

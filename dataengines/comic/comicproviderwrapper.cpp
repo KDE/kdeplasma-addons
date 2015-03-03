@@ -296,10 +296,10 @@ ComicProviderWrapper::~ComicProviderWrapper()
 void ComicProviderWrapper::init()
 {
     const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/comics/") + mProvider->pluginName() + QLatin1Char('/'),QStandardPaths::LocateDirectory);
-    qDebug() << "ComicProviderWrapper::init() package is" << mProvider->pluginName() << " at " <<  path;
+    //qDebug() << "ComicProviderWrapper::init() package is" << mProvider->pluginName() << " at " <<  path;
 
     if (!path.isEmpty()) {
-        mPackage = new Plasma::Package(ComicProviderKross::packageStructure());
+        mPackage = new KPackage::Package(ComicProviderKross::packageStructure());
         mPackage->setPath(path);
 
         if (mPackage->isValid()) {
@@ -314,7 +314,7 @@ void ComicProviderWrapper::init()
             for (int i = 0; i < extensions().count() && !info.exists(); ++i) {
                     info.setFile(mainscript + extensions().value(i));
                     mainscript = info.filePath();
-                    qDebug() << "ComicProviderWrapper::init() mainscript found as" << info.filePath();
+                    //qDebug() << "ComicProviderWrapper::init() mainscript found as" << info.filePath();
             }
 
             if (info.exists()) {
@@ -355,7 +355,7 @@ const QStringList& ComicProviderWrapper::extensions() const
 ComicProvider::IdentifierType ComicProviderWrapper::identifierType() const
 {
     ComicProvider::IdentifierType result = ComicProvider::StringIdentifier;
-    const QString type = mProvider->description().property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType")).toString();
+    const QString type = mProvider->description().value(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"));
     if (type == QLatin1String("Date")) {
         result = ComicProvider::DateIdentifier;
     } else if (type == QLatin1String("Number")) {

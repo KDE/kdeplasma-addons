@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2011 Matthias Fuchs <mat69@gmx.net>                     *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -25,7 +26,7 @@
 #include <KIO/Job>
 #include <Plasma/DataEngine>
 
-class KTemporaryFile;
+class QTemporaryFile;
 class KZip;
 
 class ComicArchiveJob : public KJob
@@ -50,7 +51,7 @@ class ComicArchiveJob : public KJob
          * "garfield:2010-03-04", here "garfield" is the plugin name
          * @see setToIdentifier, setFromIdentifier
          */
-        ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent = 0 );
+        ComicArchiveJob( const QUrl &dest, Plasma::DataEngine *engine, ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent = 0 );
         ~ComicArchiveJob();
 
         /**
@@ -127,7 +128,7 @@ class ComicArchiveJob : public KJob
         int mProcessedFiles;
         int mTotalFiles;
         Plasma::DataEngine *mEngine;
-        KTemporaryFile *mZipFile;
+        QTemporaryFile *mZipFile;
         KZip *mZip;
         QString mPluginName;
         QString mToIdentifier;
@@ -136,9 +137,9 @@ class ComicArchiveJob : public KJob
         QString mFromIdentifierSuffix;
         QString mComicTitle;
         QString mRequest;
-        const KUrl mDest;
+        const QUrl mDest;
         QStringList mAuthors;
-        QList< KTemporaryFile* > mBackwardFiles;
+        QList< QTemporaryFile* > mBackwardFiles;
 };
 
 #endif

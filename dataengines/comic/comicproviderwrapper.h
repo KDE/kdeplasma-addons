@@ -30,7 +30,7 @@
 namespace Kross {
     class Action;
 }
-namespace Plasma {
+namespace KPackage {
     class Package;
 }
 class ComicProviderKross;
@@ -267,7 +267,7 @@ class ComicProviderWrapper : public QObject
         bool mFuncFound;
         ImageWrapper *mKrossImage;
         static QStringList mExtensions;
-        Plasma::Package *mPackage;
+        KPackage::Package *mPackage;
 
         QByteArray mTextCodec;
         QString mWebsiteUrl;

@@ -15,29 +15,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.1
+import QtQuick.Layouts 1.1
+
+import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kquickcontrolsaddons 2.0
 
 Item {
     id: mainWindow
 
-    property int implicitWidth: 600
-    property int implicitHeight: 250
+    property int implicitWidth: units.gridUnit * 30
+    property int implicitHeight: units.gridUnit * 20
+    Plasmoid.switchWidth: units.gridUnit * 5
+    Plasmoid.switchHeight: units.gridUnit * 5
 
     width: minimumWidth
     height: minimumHeight
 
-    property int minimumWidth: theme.defaultFont.mSize.width * 35
-    property int minimumHeight: theme.defaultFont.mSize.height * 12
-    property bool showComicAuthor: comicApplet.showComicAuthor
-    property bool showComicTitle: comicApplet.showComicTitle
-    property bool showErrorPicture: comicApplet.showErrorPicture
-    property bool middleClick: comicApplet.middleClick
+    property int minimumWidth: theme.mSize(theme.defaultFont).width * 35
+    property int minimumHeight: theme.mSize(theme.defaultFont).height * 12
+    property bool showComicAuthor: plasmoid.nativeInterface.showComicAuthor
+    property bool showComicTitle: plasmoid.nativeInterface.showComicTitle
+    property bool showErrorPicture: plasmoid.nativeInterface.showErrorPicture
+    property bool middleClick: plasmoid.nativeInterface.middleClick
 
     Connections {
-        target: comicApplet
+        target: plasmoid.nativeInterface
 
         onComicsModelChanged: {
             comicTabbar.currentTab = comicTabbar.layout.children[1];
@@ -75,10 +80,6 @@ Item {
         }
     }
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     PlasmaCore.Svg {
         id: arrowsSvg
         imagePath: "widgets/arrows"
@@ -92,15 +93,15 @@ Item {
             right: parent.right
         }
 
-        visible: (comicApplet.comicsModel.count > 1)
+        visible: plasmoid.nativeInterface.tabIdentifiers.length > 1
 
         onCurrentTabChanged: {
             console.log("onCurrentTabChanged:" + comicTabbar.currentTab.key);
-            comicApplet.tabChanged(comicTabbar.currentTab.key);
+            plasmoid.nativeInterface.tabChanged(comicTabbar.currentTab.key);
         }
 
         Repeater {
-            model: comicApplet.comicsModel
+            model: plasmoid.nativeInterface.comicsModel
             delegate:  PlasmaComponents.TabButton {
                 id: tabButton
 
@@ -145,13 +146,13 @@ Item {
             var tempTop = "";
 
             if ( showComicTitle ) {
-                tempTop = comicApplet.comicData.title;
-                tempTop += ( ( (comicApplet.comicData.stripTitle.length > 0) && (comicApplet.comicData.title.length > 0) ) ? " - " : "" ) + comicApplet.comicData.stripTitle;
+                tempTop = plasmoid.nativeInterface.comicData.title;
+                tempTop += ( ( (plasmoid.nativeInterface.comicData.stripTitle.length > 0) && (plasmoid.nativeInterface.comicData.title.length > 0) ) ? " - " : "" ) + plasmoid.nativeInterface.comicData.stripTitle;
             }
 
             if ( showComicAuthor &&
-                (comicApplet.comicData.author != undefined || comicApplet.comicData.author.length > 0) ) {
-                tempTop = ( tempTop.length > 0 ? comicApplet.comicData.author + ": " + tempTop : comicApplet.comicData.author );
+                (plasmoid.nativeInterface.comicData.author != undefined || plasmoid.nativeInterface.comicData.author.length > 0) ) {
+                tempTop = ( tempTop.length > 0 ? plasmoid.nativeInterface.comicData.author + ": " + tempTop : plasmoid.nativeInterface.comicData.author );
             }
 
             return tempTop;
@@ -169,7 +170,7 @@ Item {
             topMargin: (comicTabbar.visible) ? 3 : 0
         }
 
-        comicData: comicApplet.comicData
+        comicData: plasmoid.nativeInterface.comicData
     }
 
     ComicBottomInfo {
@@ -181,16 +182,16 @@ Item {
             bottom: mainWindow.bottom
         }
 
-        comicData: comicApplet.comicData
-        showUrl: comicApplet.showComicUrl
-        showIdentifier: comicApplet.showComicIdentifier
+        comicData: plasmoid.nativeInterface.comicData
+        showUrl: plasmoid.nativeInterface.showComicUrl
+        showIdentifier: plasmoid.nativeInterface.showComicIdentifier
     }
 
-    PlasmaComponents.BusyIndicator {
-        id: busyIndicator
+    PlasmaComponents.Button {
         anchors.centerIn: parent
-        running: visible
-        visible: false
+        text: i18n("Configure...")
+        visible: plasmoid.nativeInterface.tabIdentifiers.length == 0
+        onClicked: plasmoid.action("configure").trigger();
     }
 
     states: [

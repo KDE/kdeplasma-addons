@@ -21,10 +21,6 @@
 #ifndef CONFIGWIDGET_H
 #define CONFIGWIDGET_H
 
-#include "ui_appearanceSettings.h"
-#include "ui_advancedsettings.h"
-#include "ui_comicSettings.h"
-
 #include <QtGui/QWidget>
 #include <QTime>
 
@@ -32,10 +28,7 @@
 #include <Plasma/DataEngine>
 
 class ComicModel;
-class KConfigDialog;
-class QCheckBox;
-class QComboBox;
-class QSortFilterProxyModel;
+
 
 namespace KNS3 {
     class DownloadDialog;
@@ -60,7 +53,8 @@ class ComicUpdater : public QObject
 
         void load();
         void save();
-        void applyConfig( ConfigWidget *widget );
+        void setInterval( int interval );
+        int interval() const;
 
     private slots:
          /**
@@ -82,58 +76,5 @@ class ComicUpdater : public QObject
 
 };
 
-class ConfigWidget : public QWidget
-{
-        Q_OBJECT
-    public:
-        ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSortFilterProxyModel *proxy, KConfigDialog *parent );
-        ~ConfigWidget();
-
-        void setShowComicUrl( bool show );
-        bool showComicUrl() const;
-        void setShowComicAuthor( bool show );
-        bool showComicAuthor() const;
-        void setShowComicTitle( bool show );
-        bool showComicTitle() const;
-        void setShowComicIdentifier( bool show );
-        bool showComicIdentifier() const;
-        void setShowErrorPicture( bool show );
-        bool showErrorPicture() const;
-        void setArrowsOnHover( bool arrows );
-        bool arrowsOnHover() const;
-        void setMiddleClick( bool checked );
-        bool middleClick() const;
-        void setTabView( int tabView );
-        int tabView() const;
-        int maxComicLimit() const;
-        void setMaxComicLimit( int limit );
-        void setUpdateIntervall( int days );
-        int updateIntervall() const;
-        void setCheckNewComicStripsIntervall( int minutes );
-        int checkNewComicStripsIntervall() const;
-
-        QWidget *comicSettings;
-        QWidget *appearanceSettings;
-        QWidget *advancedSettings;
-
-    Q_SIGNALS:
-        void maxSizeClicked();
-        void enableApply();
-
-    public slots:
-         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
-
-    protected slots:
-        void getNewStuff();
-
-    private:
-        Ui::ComicSettings comicUi;
-        Ui::AppearanceSettings appearanceUi;
-        Ui::AdvancedSettings advancedUi;
-        Plasma::DataEngine *mEngine;
-        ComicModel *mModel;
-        QSortFilterProxyModel *mProxyModel;
-        KNS3::DownloadDialog* mNewStuffDialog;
-};
 
 #endif

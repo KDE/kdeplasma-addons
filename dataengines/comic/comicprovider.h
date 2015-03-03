@@ -163,7 +163,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         /**
          * Returns the plugin info for the comic
          */
-        KPluginInfo description() const;
+        KPluginMetaData description() const;
 
         /**
          * Set whether this request is for the current comic (only used internally).
