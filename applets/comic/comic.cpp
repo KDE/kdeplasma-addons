@@ -29,11 +29,6 @@
 #include "comicsaver.h"
 
 #include <QtCore/QTimer>
-#include <QtGui/QGraphicsLinearLayout>
-#include <QtGui/QGraphicsScene>
-#include <QtGui/QGraphicsView>
-#include <QtGui/QGraphicsSceneMouseEvent>
-#include <QtGui/QGraphicsSceneWheelEvent>
 #include <QtGui/QSortFilterProxyModel>
 
 #include <QAction>
