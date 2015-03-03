@@ -45,10 +45,12 @@ class ComicEngine : public Plasma::DataEngine
         ComicEngine(QObject* parent, const QVariantList& args);
         ~ComicEngine();
 
+    public Q_SLOTS:
+        void loadProviders();
+
     protected:
         void init();
         bool sourceRequestEvent(const QString &identifier);
-        void updateFactories();
 
     protected Q_SLOTS:
         bool updateSourceEvent(const QString &identifier);
@@ -57,7 +59,6 @@ class ComicEngine : public Plasma::DataEngine
         void finished(ComicProvider*);
         void error(ComicProvider*);
         void networkStatusChanged(Solid::Networking::Status);
-        void sycocaUpdated(const QStringList &changedResources);
 
     private:
         bool mEmptySuffix;

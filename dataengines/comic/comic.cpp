@@ -27,7 +27,6 @@
 #include <QStandardPaths>
 
 #include <KServiceTypeTrader>
-#include <KSycoca>
 #include <KPluginInfo>
 
 #include <Plasma/DataContainer>
@@ -40,7 +39,7 @@ ComicEngine::ComicEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args), mEmptySuffix(false)
 {
     setPollingInterval(0);
-    updateFactories();
+    loadProviders();
 }
 
 ComicEngine::~ComicEngine()
@@ -51,7 +50,6 @@ void ComicEngine::init()
 {
     connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
              this, SLOT(networkStatusChanged(Solid::Networking::Status)));
-    connect(KSycoca::self(), SIGNAL(databaseChanged(QStringList)), this, SLOT(sycocaUpdated(QStringList)));
 }
 
 void ComicEngine::networkStatusChanged(Solid::Networking::Status status)
@@ -62,14 +60,7 @@ void ComicEngine::networkStatusChanged(Solid::Networking::Status status)
     }
 }
 
-void ComicEngine::sycocaUpdated(const QStringList &changedResources)
-{
-    if (changedResources.contains(QLatin1String("services"))) {
-        updateFactories();
-    }
-}
-
-void ComicEngine::updateFactories()
+void ComicEngine::loadProviders()
 {
     mProviders.clear();
     removeAllData(QLatin1String("providers"));
@@ -77,7 +68,7 @@ void ComicEngine::updateFactories()
     for (auto comic : comics) {
         mProviders << comic.pluginId();
 
-        //qDebug() << "ComicEngine::updateFactories()  service name=" << comic.name();
+        //qDebug() << "ComicEngine::loadProviders()  service name=" << comic.name();
         QStringList data;
         data << comic.name();
         QFileInfo file(comic.iconName());
@@ -88,12 +79,13 @@ void ComicEngine::updateFactories()
         }
         setData(QLatin1String("providers"), comic.pluginId(), data);
     }
+    forceImmediateUpdateOfAllVisualizations();
 }
 
 bool ComicEngine::updateSourceEvent(const QString &identifier)
 {
     if (identifier == QLatin1String("providers")) {
-        updateFactories();
+        loadProviders();
         return true;
     } else if (identifier.startsWith(QLatin1String("setting_maxComicLimit:"))) {
         bool worked;
@@ -130,7 +122,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         }
         if (!mProviders.contains(parts[0])) {
             // User might have installed more from GHNS
-            updateFactories();
+            loadProviders();
             if (!mProviders.contains(parts[0])) {
                 setData(identifier, QLatin1String("Error"), true);
                 qWarning() << identifier << "comic plugin does not seem to be installed.";

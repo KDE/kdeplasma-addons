@@ -230,7 +230,7 @@ void ComicApplet::getNewComics()
         m_newStuffDialog = new KNS3::DownloadDialog( QString::fromLatin1("comic.knsrc") );
         KNS3::DownloadDialog *strong = m_newStuffDialog.data();
         strong->setTitle(i18n("Download Comics"));
-        //connect(m_newStuffDialog.data(), &KNS3::DownloadDialog::accepted, this, &ComicApplet::newStuffFinished);
+        connect(m_newStuffDialog.data(), SIGNAL(finished(int)), mEngine, SLOT(loadProviders()));
     }
     m_newStuffDialog.data()->show();
 }
@@ -458,7 +458,6 @@ QList<QAction*> ComicApplet::contextualActions()
 
 void ComicApplet::updateComic( const QString &identifierSuffix )
 {
-    mEngine = Plasma::PluginLoader::self()->loadDataEngine( "comic" );
     const QString id = mCurrent.id();
     setConfigurationRequired( id.isEmpty() );
 
