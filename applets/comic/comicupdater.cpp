@@ -75,7 +75,7 @@ void ComicUpdater::checkForUpdate()
     //start a timer to check each hour, if KNS3 should look for updates
     if ( !m_updateTimer ) {
         m_updateTimer = new QTimer(this);
-        connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
+        connect(m_updateTimer, &QTimer::timeout, this, &ComicUpdater::checkForUpdate);
         m_updateTimer->start( 1 * 60 * 60 * 1000 );
     }
 
@@ -96,7 +96,7 @@ KNS3::DownloadManager *ComicUpdater::downloadManager()
 {
     if ( !mDownloadManager ) {
         mDownloadManager = new KNS3::DownloadManager( "comic.knsrc", this );
-        connect(mDownloadManager, SIGNAL(searchResult(KNS3::Entry::List)), this, SLOT(slotUpdatesFound(KNS3::Entry::List)));
+        connect(mDownloadManager, &KNS3::DownloadManager::searchResult, this, &ComicUpdater::slotUpdatesFound);
     }
 
     return mDownloadManager;
