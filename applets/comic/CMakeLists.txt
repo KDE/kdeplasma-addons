@@ -24,6 +24,7 @@ add_library(plasma_applet_comic MODULE ${comic_SRCS})
 kcoreaddons_desktop_to_json(plasma_applet_comic package/metadata.desktop)
 
 target_link_libraries(plasma_applet_comic
+                      Qt5::Widgets
                       KF5::Plasma
                       KF5::Solid
                       KF5::I18n
