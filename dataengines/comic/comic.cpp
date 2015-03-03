@@ -75,10 +75,9 @@ void ComicEngine::updateFactories()
     removeAllData(QLatin1String("providers"));
     auto comics = KPackage::PackageLoader::self()->listPackages("Plasma/Comic");
     for (auto comic : comics) {
-        //mFactories.insert(comic.value(QLatin1String("X-KDE-PluginInfo-Name")), service);
         mProviders << comic.pluginId();
 
-        qDebug() << "ComicEngine::updateFactories()  service name=" << comic.name();
+        //qDebug() << "ComicEngine::updateFactories()  service name=" << comic.name();
         QStringList data;
         data << comic.name();
         QFileInfo file(comic.iconName());
@@ -126,7 +125,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         //: are mandatory
         if (parts.count() < 2) {
             setData(identifier, QLatin1String("Error"), true);
-            qCritical() << "Less than two arguments specified.";
+            qWarning() << "Less than two arguments specified.";
             return false;
         }
         if (!mProviders.contains(parts[0])) {
@@ -134,7 +133,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             updateFactories();
             if (!mProviders.contains(parts[0])) {
                 setData(identifier, QLatin1String("Error"), true);
-                qCritical() << identifier << "comic plugin does not seem to be installed.";
+                qWarning() << identifier << "comic plugin does not seem to be installed.";
                 return false;
             }
         }
@@ -147,7 +146,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             setData(identifier, QLatin1String("Error automatically fixable"), true);
             setData(identifier, QLatin1String("Identifier"), identifier);
             setData(identifier, QLatin1String("Previous identifier suffix"), lastCachedIdentifier(identifier));
-            qWarning() << "No connection.";
+            qDebug() << "No connection.";
             return true;
         }
 
@@ -177,7 +176,6 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         provider = new ComicProviderKross(this, args);
         if (!provider) {
             setData(identifier, QLatin1String("Error"), true);
-            qWarning() << identifier << "plugin could be created.";
             return false;
         }
         provider->setIsCurrent(isCurrentComic);

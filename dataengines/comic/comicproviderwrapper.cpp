@@ -296,7 +296,7 @@ ComicProviderWrapper::~ComicProviderWrapper()
 void ComicProviderWrapper::init()
 {
     const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/comics/") + mProvider->pluginName() + QLatin1Char('/'),QStandardPaths::LocateDirectory);
-    qDebug() << "ComicProviderWrapper::init() package is" << mProvider->pluginName() << " at " <<  path;
+    //qDebug() << "ComicProviderWrapper::init() package is" << mProvider->pluginName() << " at " <<  path;
 
     if (!path.isEmpty()) {
         mPackage = new KPackage::Package(ComicProviderKross::packageStructure());
@@ -314,7 +314,7 @@ void ComicProviderWrapper::init()
             for (int i = 0; i < extensions().count() && !info.exists(); ++i) {
                     info.setFile(mainscript + extensions().value(i));
                     mainscript = info.filePath();
-                    qDebug() << "ComicProviderWrapper::init() mainscript found as" << info.filePath();
+                    //qDebug() << "ComicProviderWrapper::init() mainscript found as" << info.filePath();
             }
 
             if (info.exists()) {
