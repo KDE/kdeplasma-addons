@@ -101,51 +101,51 @@ void ComicApplet::init()
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
-    connect( mDateChangedTimer, SIGNAL(timeout()), this, SLOT(checkDayChanged()) );
+    connect( mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
     mActionNextNewStripTab = new QAction( QIcon::fromTheme( "go-next-view" ), i18nc( "here strip means comic strip", "&Next Tab with a new Strip" ), this );
     mActionNextNewStripTab->setShortcuts( KStandardShortcut::openNew() );
     actions()->addAction( "next new strip" , mActionNextNewStripTab );
     mActions.append( mActionNextNewStripTab );
-    connect( mActionNextNewStripTab, SIGNAL(triggered(bool)), this, SIGNAL(showNextNewStrip()) );
+    connect( mActionNextNewStripTab, &QAction::triggered, this, &ComicApplet::showNextNewStrip );
 
     mActionGoFirst = new QAction( QIcon::fromTheme( "go-first" ), i18n( "Jump to &first Strip" ), this );
     mActions.append( mActionGoFirst );
-    connect( mActionGoFirst, SIGNAL(triggered(bool)), this, SLOT(slotFirstDay()) );
+    connect( mActionGoFirst, &QAction::triggered, this, &ComicApplet::slotFirstDay );
 
     mActionGoLast = new QAction( QIcon::fromTheme( "go-last" ), i18n( "Jump to &current Strip" ), this );
     mActions.append( mActionGoLast );
-    connect( mActionGoLast, SIGNAL(triggered(bool)), this, SLOT(slotCurrentDay()) );
+    connect( mActionGoLast, &QAction::triggered, this, &ComicApplet::slotCurrentDay );
 
     mActionGoJump = new QAction( QIcon::fromTheme( "go-jump" ), i18n( "Jump to Strip ..." ), this );
     mActions.append( mActionGoJump );
-    connect( mActionGoJump, SIGNAL(triggered(bool)), this, SLOT(slotGoJump()) );
+    connect( mActionGoJump, &QAction::triggered, this, &ComicApplet::slotGoJump );
 
     mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
     mActionShop->setEnabled( false );
     mActions.append( mActionShop );
-    connect( mActionShop, SIGNAL(triggered(bool)), this, SLOT(slotShop()) );
+    connect( mActionShop, &QAction::triggered, this, &ComicApplet::slotShop );
 
     QAction *action = new QAction( QIcon::fromTheme( "document-save-as" ), i18n( "&Save Comic As..." ), this );
     mActions.append( action );
-    connect( action, SIGNAL(triggered(bool)), this , SLOT(slotSaveComicAs()) );
+    connect( action, &QAction::triggered, this, &ComicApplet::slotSaveComicAs );
 
     action = new QAction( QIcon::fromTheme( "application-epub+zip" ), i18n( "&Create Comic Book Archive..." ), this );
     mActions.append( action );
-    connect( action, SIGNAL(triggered(bool)), this, SLOT(createComicBook()) );
+    connect( action, &QAction::triggered, this, &ComicApplet::createComicBook );
 
     mActionScaleContent = new QAction( QIcon::fromTheme( "zoom-original" ), i18nc( "@option:check Context menu of comic image", "&Actual Size" ), this );
     mActionScaleContent->setCheckable( true );
     mActionScaleContent->setChecked( mCurrent.scaleComic() );
     mActions.append( mActionScaleContent );
-    connect( mActionScaleContent, SIGNAL(triggered(bool)), this , SLOT(slotScaleToContent()) );
+    connect( mActionScaleContent, &QAction::triggered, this, &ComicApplet::slotScaleToContent );
 
     mActionStorePosition = new QAction( QIcon::fromTheme( "go-home" ), i18nc( "@option:check Context menu of comic image", "Store current &Position" ), this);
     mActionStorePosition->setCheckable( true );
     mActionStorePosition->setChecked(mCurrent.hasStored());
     mActions.append( mActionStorePosition );
-    connect( mActionStorePosition, SIGNAL(triggered(bool)), this, SLOT(slotStorePosition()) );
+    connect( mActionStorePosition, &QAction::triggered, this, &ComicApplet::slotStorePosition );
 
     //make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
     updateView();
@@ -230,7 +230,7 @@ void ComicApplet::getNewComics()
         m_newStuffDialog = new KNS3::DownloadDialog( QString::fromLatin1("comic.knsrc") );
         KNS3::DownloadDialog *strong = m_newStuffDialog.data();
         strong->setTitle(i18n("Download Comics"));
-        connect(m_newStuffDialog.data(), SIGNAL(accepted()), SLOT(newStuffFinished()));
+        //connect(m_newStuffDialog.data(), &KNS3::DownloadDialog::accepted, this, &ComicApplet::newStuffFinished);
     }
     m_newStuffDialog.data()->show();
 }
@@ -297,7 +297,7 @@ void ComicApplet::updateUsedComics()
     mCheckNewStrips = 0;
     if ( mCheckNewComicStripsInterval ) {
         mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsInterval, this );
-        connect( mCheckNewStrips, SIGNAL(lastStrip(int,QString,QString)), this, SLOT(slotFoundLastStrip(int,QString,QString)) );
+        connect( mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip );
     }
 
     emit comicModelChanged();
@@ -401,7 +401,7 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
 void ComicApplet::slotGoJump()
 {
     StripSelector *selector = StripSelectorFactory::create(mCurrent.type());
-    connect(selector, SIGNAL(stripChosen(QString)), this, SLOT(updateComic(QString)));
+    connect(selector, &StripSelector::stripChosen, this, &ComicApplet::updateComic);
 
     selector->select(mCurrent);
 }
@@ -421,7 +421,7 @@ void ComicApplet::createComicBook()
     ComicArchiveDialog *dialog = new ComicArchiveDialog(mCurrent.id(), mCurrent.title(), mCurrent.type(), mCurrent.current(),
                                                         mCurrent.first(), mSavingDir->getDir());
     dialog->setAttribute(Qt::WA_DeleteOnClose);//to have destroyed emitted upon closing
-    connect( dialog, SIGNAL(archive(int,QUrl,QString,QString)), this, SLOT(slotArchive(int,QUrl,QString,QString)) );
+    connect( dialog, &ComicArchiveDialog::archive, this, &ComicApplet::slotArchive );
     dialog->show();
 }
 
@@ -435,7 +435,7 @@ void ComicApplet::slotArchive( int archiveType, const QUrl &dest, const QString 
     job->setFromIdentifier(id + ':' + fromIdentifier);
     job->setToIdentifier(id + ':' + toIdentifier);
     if (job->isValid()) {
-        connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotArchiveFinished(KJob*)));
+        connect(job, &ComicArchiveJob::finished, this, &ComicApplet::slotArchiveFinished);
         KIO::getJobTracker()->registerJob(job);
         job->start();
     } else {
