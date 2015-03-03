@@ -28,8 +28,8 @@
 #include "stripselector.h"
 #include "comicsaver.h"
 
-#include <QtCore/QTimer>
-#include <QtGui/QSortFilterProxyModel>
+#include <QTimer>
+#include <QSortFilterProxyModel>
 
 #include <QAction>
 #include <QDebug>

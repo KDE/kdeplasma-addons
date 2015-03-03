@@ -21,8 +21,8 @@
 #include "comicupdater.h"
 #include "comicmodel.h"
 
-#include <QtCore/QTimer>
-#include <QtGui/QSortFilterProxyModel>
+#include <QTimer>
+#include <QSortFilterProxyModel>
 
 #include <KConfigDialog>
 #include <KNS3/DownloadDialog>

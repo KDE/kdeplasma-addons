@@ -28,10 +28,10 @@
 #include <QSpinBox>
 #include <KLocalizedString>
 
-#include <QtCore/QScopedPointer>
-#include <QtCore/QTimer>
-#include <QtGui/QLabel>
-#include <QtGui/QVBoxLayout>
+#include <QScopedPointer>
+#include <QTimer>
+#include <QLabel>
+#include <QVBoxLayout>
 
 //NOTE based on GotoPageDialog KDE/kdegraphics/okular/part.cpp
 //BEGIN choose a strip dialog

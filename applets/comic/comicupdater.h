@@ -21,7 +21,7 @@
 #ifndef CONFIGWIDGET_H
 #define CONFIGWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QTime>
 
 #include <KNS3/Entry>
