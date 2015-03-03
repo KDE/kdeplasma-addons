@@ -775,6 +775,6 @@ bool ComicApplet::isTabHighlighted(int index) const
     return item->data(ActiveComicModel::ComicHighlightRole).toBool();
 }
 
-K_EXPORT_PLASMA_APPLET_WITH_JSON(comic, ComicApplet, "plasma-comic-default.json")
+K_EXPORT_PLASMA_APPLET_WITH_JSON(comic, ComicApplet, "metadata.json")
 
 #include "comic.moc"
