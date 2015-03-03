@@ -28,6 +28,8 @@ Item {
     width: childrenRect.width
     height: childrenRect.height
 
+    signal configurationChanged
+
     function saveConfig() {
         var newTabs = [];
         for (var i in providerColumn.children) {
@@ -74,6 +76,7 @@ Item {
                             Component.onCompleted: {
                                 checkbox.checked = plasmoid.nativeInterface.tabIdentifiers.indexOf(model.plugin) !== -1
                             }
+                            onCheckedChanged: root.configurationChanged();
                         }
                     }
                 }
@@ -90,6 +93,7 @@ Item {
                 Controls.CheckBox {
                     id: middleClickCheckBox
                     text: i18n("Middle-click on the comic to show it at its original size")
+                    onCheckedChanged: root.configurationChanged();
                 }
             }
         }
@@ -110,6 +114,7 @@ Item {
                         Layouts.Layout.minimumWidth: units.gridUnit * 8
                         suffix: " "+i18n("days")
                         stepSize: 1
+                        onValueChanged: root.configurationChanged();
                     }
                 }
                 Layouts.RowLayout {
@@ -122,6 +127,7 @@ Item {
                         Layouts.Layout.minimumWidth: units.gridUnit * 8
                         suffix: " "+i18n("minutes")
                         stepSize: 1
+                        onValueChanged: root.configurationChanged();
                     }
                 }
             }

@@ -28,6 +28,8 @@ Item {
     width: childrenRect.width
     height: childrenRect.height
 
+    signal configurationChanged
+
     function saveConfig() {
         plasmoid.nativeInterface.showErrorPicture = showErrorPicture.checked;
         plasmoid.nativeInterface.maxComicLimit = maxComicLimit.value;
@@ -61,6 +63,7 @@ Item {
                     Layouts.Layout.minimumWidth: units.gridUnit * 8
                     suffix: " "+i18n("strips per comic")
                     stepSize: 1
+                    onValueChanged: root.configurationChanged();
                 }
             }
         }
@@ -74,6 +77,7 @@ Item {
                 Controls.CheckBox {
                     id: showErrorPicture
                     text: i18n("Display error when getting comic field")
+                    onCheckedChanged: root.configurationChanged();
                 }
             }
         }

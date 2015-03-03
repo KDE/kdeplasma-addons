@@ -28,6 +28,7 @@ Item {
     width: childrenRect.width
     height: childrenRect.height
 
+    signal configurationChanged
 
     function saveConfig() {
         plasmoid.nativeInterface.arrowsOnHover = showArrowsOnOver.checked;
@@ -61,6 +62,7 @@ Item {
                 Controls.CheckBox {
                     id: showArrowsOnOver
                     text: i18n("Show arrows only on mouse over")
+                    onCheckedChanged: root.configurationChanged();
                 }
             }
         }
@@ -74,18 +76,22 @@ Item {
                 Controls.CheckBox {
                     id: showComicTitle
                     text: i18n("Show comic title")
+                    onCheckedChanged: root.configurationChanged();
                 }
                 Controls.CheckBox {
                     id: showIdentifier
                     text: i18n("Show comic identifier")
+                    onCheckedChanged: root.configurationChanged();
                 }
                 Controls.CheckBox {
                     id: showAuthor
                     text: i18n("Show comic author")
+                    onCheckedChanged: root.configurationChanged();
                 }
                 Controls.CheckBox {
                     id: showUrl
                     text: i18n("Show comic URL")
+                    onCheckedChanged: root.configurationChanged();
                 }
             }
         }
