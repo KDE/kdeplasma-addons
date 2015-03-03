@@ -55,13 +55,13 @@ class ChooseStripNumDialog : public QDialog
             topLayout->addWidget(numInput) ;
             // A little bit extra space
             topLayout->addStretch(10);
-            
+
             QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
             buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-            connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
-            connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
+            connect(buttonBox, &QDialogButtonBox::accepted, this, &ChooseStripNumDialog::accept);
+            connect(buttonBox, &QDialogButtonBox::rejected, this, &ChooseStripNumDialog::reject);
             topLayout->addWidget(buttonBox);
-            
+
             numInput->setFocus();
         }
 
@@ -156,11 +156,11 @@ void DateStripSelector::select(const ComicData &currentStrip)
     calendar->setMinimumSize(calendar->sizeHint());
     calendar->setDate(QDate::fromString(currentStrip.current(), "yyyy-MM-dd"));
 
-    connect(calendar, SIGNAL(dateSelected(QDate)), this, SLOT(slotChosenDay(QDate)));
-    connect(calendar, SIGNAL(dateEntered(QDate)), this, SLOT(slotChosenDay(QDate)));
+    connect(calendar, &KDatePicker::dateSelected, this, &DateStripSelector::slotChosenDay);
+    connect(calendar, &KDatePicker::dateEntered, this, &DateStripSelector::slotChosenDay);
 
     // only delete this if the dialog got closed
-    connect(calendar, SIGNAL(destroyed(QObject*)), this, SLOT(deleteLater()));
+    connect(calendar, &KDatePicker::destroyed, this, &DateStripSelector::deleteLater);
     calendar->show();
 }
 
