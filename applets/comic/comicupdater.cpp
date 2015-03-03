@@ -48,7 +48,7 @@ void ComicUpdater::init(const KConfigGroup &group)
 void ComicUpdater::load()
 {
     //check when the last update happened and update if necessary
-    mUpdateIntervall = mGroup.readEntry( "updateIntervall", 3 );
+    mUpdateIntervall = mGroup.readEntry( "updateInterval", 3 );
     if ( mUpdateIntervall ) {
         mLastUpdate = mGroup.readEntry( "lastUpdate", QDateTime() );
         checkForUpdate();
@@ -57,7 +57,7 @@ void ComicUpdater::load()
 
 void ComicUpdater::save()
 {
-    mGroup.writeEntry( "updateIntervall", mUpdateIntervall );
+    mGroup.writeEntry( "updateInterval", mUpdateIntervall );
 }
 
 void ComicUpdater::setInterval( int interval )
