@@ -27,12 +27,12 @@ ActiveComicModel::ActiveComicModel(QObject *parent)
     newRoleNames[ComicHighlightRole] = "highlight";
 
     setRoleNames(newRoleNames);
-    connect(this, SIGNAL(modelReset()),
-            this, SIGNAL(countChanged()));
-    connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)),
-            this, SIGNAL(countChanged()));
-    connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)),
-            this, SIGNAL(countChanged()));
+    connect(this, &ActiveComicModel::modelReset,
+            this, &ActiveComicModel::countChanged);
+    connect(this, &ActiveComicModel::rowsInserted,
+            this, &ActiveComicModel::countChanged);
+    connect(this, &ActiveComicModel::rowsRemoved,
+            this, &ActiveComicModel::countChanged);
 }
 
 void ActiveComicModel::addComic(const QString &key, const QString &title, const QString &iconPath, bool highlight)
