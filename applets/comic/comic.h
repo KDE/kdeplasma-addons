@@ -42,7 +42,6 @@ class ConfigWidget;
 class QAction;
 class KJob;
 class QAction;
-class QGraphicsLayout;
 class QSortFilterProxyModel;
 class QTimer;
 class SavingDir;
