@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -40,7 +41,6 @@ QHash<int, QByteArray> ComicModel::roleNames() const
     roles[Qt::DisplayRole] = "display";
     roles[Qt::DecorationRole] = "decoration";
     roles[Qt::UserRole] = "plugin";
-    roles[Qt::CheckStateRole] = "checked";
     return roles;
 }
 

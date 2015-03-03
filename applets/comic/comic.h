@@ -2,9 +2,8 @@
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
  *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
- *   Copyright (C) 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>      
- *
- *   Copyright (C) 2015 Marco Martin <mart@kde.org>      
+ *   Copyright (C) 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>      *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -140,7 +139,6 @@ Q_SIGNALS:
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
-        //void createConfigurationInterface( KConfigDialog *parent );
 
     private Q_SLOTS:
         void slotTabChanged( const QString &newIdentifier );
@@ -154,7 +152,6 @@ Q_SIGNALS:
         void slotScaleToContent();
         void slotShop();
         void slotStorePosition();
-        //void applyConfig();
         void checkDayChanged();
         void createComicBook();
         void slotArchive( int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
@@ -199,7 +196,7 @@ Q_SIGNALS:
         bool mShowErrorPicture;
         bool mArrowsOnHover;
         bool mMiddleClick;
-        int mCheckNewComicStripsIntervall;
+        int mCheckNewComicStripsInterval;
         int mMaxComicLimit;
         CheckNewStrips *mCheckNewStrips;
         QTimer *mDateChangedTimer;

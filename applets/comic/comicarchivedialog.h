@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2011 Matthias Fuchs <mat69@gmx.net>                     *
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *

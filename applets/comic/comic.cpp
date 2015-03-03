@@ -3,7 +3,7 @@
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
  *   Copyright (C) 2008-2011 Matthias Fuchs <mat69@gmx.net>                *
  *   Copyright (C) 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>      *
- *   Copyright (C) 2015 Marco Martin <mart@kde.org>  
+ *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -70,7 +70,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mShowErrorPicture( true ),
       mArrowsOnHover( true ),
       mMiddleClick( true ),
-      mCheckNewComicStripsIntervall(0),
+      mCheckNewComicStripsInterval(0),
       mMaxComicLimit( CACHE_LIMIT ),
       mCheckNewStrips( 0 ),
       mActionShop( 0 ),
@@ -191,7 +191,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
     //looking at the last index, thus not mark it as new
     KConfigGroup cg = config();
-    if (!mCurrent.hasNext() && mCheckNewComicStripsIntervall) {
+    if (!mCurrent.hasNext() && mCheckNewComicStripsInterval) {
         setTabHighlighted( mCurrent.id(), false );
         mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
     }
@@ -208,12 +208,10 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     if (mCurrent.hasNext()) {
         const QString prefetch = mCurrent.id() + ':' + mCurrent.next();
         mEngine->connectSource( prefetch, this );
-        //mEngine->query( prefetch );
     }
     if ( mCurrent.hasPrev()) {
         const QString prefetch = mCurrent.id() + ':' + mCurrent.prev();
         mEngine->connectSource( prefetch, this );
-       // mEngine->query( prefetch );
     }
 
     updateView();
@@ -282,7 +280,7 @@ void ComicApplet::updateUsedComics()
             const QString iconPath = data.data( Qt::DecorationRole ).value<QIcon>().name();
             //found a newer strip last time, which was not visited
 
-            if ( mCheckNewComicStripsIntervall && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
+            if ( mCheckNewComicStripsInterval && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
                 mActiveComicModel.addComic(identifier, name, iconPath, true);
             } else {
                 mActiveComicModel.addComic(identifier, name, iconPath);
@@ -292,13 +290,13 @@ void ComicApplet::updateUsedComics()
         }
     }
 
-    mActionNextNewStripTab->setVisible( mCheckNewComicStripsIntervall );
+    mActionNextNewStripTab->setVisible( mCheckNewComicStripsInterval );
     mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
 
     delete mCheckNewStrips;
     mCheckNewStrips = 0;
-    if ( mCheckNewComicStripsIntervall ) {
-        mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsIntervall, this );
+    if ( mCheckNewComicStripsInterval ) {
+        mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsInterval, this );
         connect( mCheckNewStrips, SIGNAL(lastStrip(int,QString,QString)), this, SLOT(slotFoundLastStrip(int,QString,QString)) );
     }
 
@@ -341,7 +339,7 @@ void ComicApplet::configChanged()
     mShowErrorPicture = cg.readEntry( "showErrorPicture", true );
     mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
     mMiddleClick = cg.readEntry( "middleClick", true );
-    mCheckNewComicStripsIntervall = cg.readEntry( "checkNewComicStripsIntervall", 30 );
+    mCheckNewComicStripsInterval = cg.readEntry( "checkNewComicStripsIntervall", 30 );
     KConfigGroup global = globalConfig();
     mMaxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
 
@@ -360,7 +358,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
-    cg.writeEntry( "checkNewComicStripsIntervall", mCheckNewComicStripsIntervall );
+    cg.writeEntry( "checkNewComicStripsIntervall", mCheckNewComicStripsInterval );
     cg.writeEntry( "maxComicLimit", mMaxComicLimit);
 
     globalComicUpdater->save();
@@ -513,7 +511,7 @@ void ComicApplet::slotScaleToContent()
 }
 
 //QML
-QObject *ComicApplet::comicsModel() 
+QObject *ComicApplet::comicsModel()
 {
     return &mActiveComicModel;
 }
@@ -696,16 +694,16 @@ void ComicApplet::setShowActualSize(bool show)
 
 int ComicApplet::checkNewComicStripsInterval() const
 {
-    return mCheckNewComicStripsIntervall;
+    return mCheckNewComicStripsInterval;
 }
 
 void ComicApplet::setCheckNewComicStripsInterval(int interval)
 {
-    if (mCheckNewComicStripsIntervall == interval) {
+    if (mCheckNewComicStripsInterval == interval) {
         return;
     }
 
-    mCheckNewComicStripsIntervall = interval;
+    mCheckNewComicStripsInterval = interval;
     emit checkNewComicStripsIntervalChanged();
 }
 
