@@ -23,8 +23,8 @@ import org.kde.kquickcontrolsaddons 2.0
 Item {
     id: root
 
-    width: 10
-    height: 10
+    width: units.gridUnit
+    height: units.gridUnit
 
     property variant comicData
 
@@ -92,7 +92,7 @@ Item {
                 bottomMargin: 10
             }
 
-            visible: plasmoid.nativeInterface.arrowsOnHover && comicImageArea.containsMouse//(plasmoid.nativeInterface.arrowsOnHover && (comicImageArea.containsMouse || (comicImageArea.containsMouse && buttonBar.visible)) )
+            visible: plasmoid.nativeInterface.arrowsOnHover && comicImageArea.containsMouse
             opacity: 0
 
             onPrevClicked: {

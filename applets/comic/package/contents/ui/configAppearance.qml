@@ -60,7 +60,7 @@ Item {
             Layouts.ColumnLayout {
                 Controls.CheckBox {
                     id: showArrowsOnOver
-                    text: i18n("Show arrows only on over")
+                    text: i18n("Show arrows only on mouse over")
                 }
             }
         }
