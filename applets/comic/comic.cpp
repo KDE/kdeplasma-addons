@@ -61,7 +61,7 @@ const int ComicApplet::CACHE_LIMIT = 20;
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
       mProxy(0),
-      mActiveComicModel(parent),
+      mActiveComicModel(new ActiveComicModel(parent)),
       mDifferentComic( true ),
       mShowComicUrl( false ),
       mShowComicAuthor( false ),
@@ -255,7 +255,7 @@ void ComicApplet::updateUsedComics()
 {
     const QString oldIdentifier = mCurrent.id();
 
-    mActiveComicModel.clear();
+    mActiveComicModel->clear();
     mCurrent = ComicData();
 
     bool isFirst = true;
@@ -281,9 +281,9 @@ void ComicApplet::updateUsedComics()
             //found a newer strip last time, which was not visited
 
             if ( mCheckNewComicStripsInterval && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
-                mActiveComicModel.addComic(identifier, name, iconPath, true);
+                mActiveComicModel->addComic(identifier, name, iconPath, true);
             } else {
-                mActiveComicModel.addComic(identifier, name, iconPath);
+                mActiveComicModel->addComic(identifier, name, iconPath);
             }
 
             ++tab;
@@ -511,12 +511,12 @@ void ComicApplet::slotScaleToContent()
 }
 
 //QML
-QObject *ComicApplet::comicsModel()
+QObject *ComicApplet::comicsModel() const
 {
-    return &mActiveComicModel;
+    return mActiveComicModel;
 }
 
-QObject *ComicApplet::availableComicsModel()
+QObject *ComicApplet::availableComicsModel() const
 {
     return mProxy;
 }
@@ -627,7 +627,7 @@ void ComicApplet::setMiddleClick(bool show)
     saveConfig();
 }
 
-QVariantMap ComicApplet::comicData()
+QVariantMap ComicApplet::comicData() const
 {
     return mComicData;
 }
@@ -741,8 +741,8 @@ int ComicApplet::maxComicLimit() const
 void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
 {
     //Search for matching id
-    for (int index = 0; index < mActiveComicModel.rowCount(); ++index) {
-        QStandardItem * item = mActiveComicModel.item(index);
+    for (int index = 0; index < mActiveComicModel->rowCount(); ++index) {
+        QStandardItem * item = mActiveComicModel->item(index);
 
         QString currentId = item->data(ActiveComicModel::ComicKeyRole).toString();
         if (id == currentId){
@@ -756,7 +756,7 @@ void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
 
 bool ComicApplet::hasHighlightedTabs()
 {
-    for (int i = 0; i < mActiveComicModel.rowCount(); ++i) {
+    for (int i = 0; i < mActiveComicModel->rowCount(); ++i) {
         if (isTabHighlighted(i)) {
             return true;
         }
@@ -767,11 +767,11 @@ bool ComicApplet::hasHighlightedTabs()
 
 bool ComicApplet::isTabHighlighted(int index) const
 {
-    if (index < 0 || index >= mActiveComicModel.rowCount()) {
+    if (index < 0 || index >= mActiveComicModel->rowCount()) {
         return false;
     }
 
-    QStandardItem * item = mActiveComicModel.item(index);
+    QStandardItem * item = mActiveComicModel->item(index);
 
     return item->data(ActiveComicModel::ComicHighlightRole).toBool();
 }
