@@ -16,6 +16,9 @@
  */
 
 import QtQuick 2.1
+import QtQuick.Layouts 1.1
+
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
@@ -23,8 +26,10 @@ import org.kde.kquickcontrolsaddons 2.0
 Item {
     id: mainWindow
 
-    property int implicitWidth: 600
-    property int implicitHeight: 250
+    property int implicitWidth: units.gridUnit * 30
+    property int implicitHeight: units.gridUnit * 20
+    Plasmoid.switchWidth: units.gridUnit * 5
+    Plasmoid.switchHeight: units.gridUnit * 5
 
     width: minimumWidth
     height: minimumHeight
