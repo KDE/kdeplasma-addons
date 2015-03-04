@@ -3,7 +3,16 @@ add_subdirectory(fuzzy-clock)
 add_subdirectory(calculator)
 add_subdirectory(notes)
 add_subdirectory(timer)
-add_subdirectory(quickshare)
+
+find_package(KF5Purpose)
+set_package_properties(KF5Purpose PROPERTIES DESCRIPTION "EXPERIMENTAL. Support for QuickShare sharing"
+                       URL "https://projects.kde.org/projects/playground/libs/purpose"
+                       TYPE RUNTIME
+                      )
+
+if (KF5Purpose_FOUND)
+    add_subdirectory(quickshare)
+endif()
 
 if(NOT WIN32)
    add_subdirectory(systemloadviewer)
