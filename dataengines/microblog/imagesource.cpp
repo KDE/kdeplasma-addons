@@ -62,7 +62,7 @@ void ImageSource::loadImage(const QString &who, const KUrl &url)
         // cache hit
         //kDebug() << "cache hit: " << cacheKey;
         setData(who, polishImage(preview));
-        emit dataChanged();
+        Q_EMIT dataChanged();
         checkForUpdate();
         return;
     }

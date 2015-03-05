@@ -23,8 +23,10 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 import QtQuick.Layouts 1.1
+import org.kde.plasma.private.purpose 1.0
+import org.kde.draganddrop 2.0 as DragDrop
 
-DropArea {
+DragDrop.DropArea {
     id: root
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
@@ -34,34 +36,41 @@ DropArea {
     Layout.minimumHeight: 0
 
     property string url: ""
-    property bool properlySent: true
-    property QtObject lastJob: null
+    property string errorMessage: ""
 
-    function findMimeType(mimeName, data) {
-        if (mimeName == "text/uri-list")
-            return mimeDb.mimeTypeForUrl(data[0]);
-        else
-            return mimeDb.mimeTypeForName(mimeName);
-    }
+    function firstMimeType(formats) {
+        for (var v in formats) {
+            var curr = formats[v];
 
-    function preferredSourceForMimetypes(mimeNames, data) {
-        for(var i in mimeNames) {
-            var mime = findMimeType(mimeNames[i], data);
-            var category = mime.name.substr(0, mime.name.indexOf("/"));
-            var source = plasmoid.configuration[category]
-
-            if (source)
-                return { "mime": mime, "format": mimeNames[i], "source": source };
+            if (curr == "text/uri-list") {
+                return { name: "text/uri-list" };
+            } else {
+                var mime = mimeDb.mimeTypeForName(curr);
+                if (mime.hasOwnProperty("iconName")) {
+                    return mime;
+                }
+            }
         }
-        return {}
+        return {};
     }
 
-    onEntered: {
-        var source = preferredSourceForMimetypes(drag.formats, [drag.getDataAsString("text/uri-list")]);
-
-        icon.source = source.mime.iconName;
-        drag.accepted = true
+    function urlsMimetype(urls)
+    {
+        return mimeDb.mimeTypeForUrl(urls[0]);
     }
+
+    onDragEnter: {
+        root.state = "idle";
+        var mimetype;
+        if (event.mimeData.hasUrls) {
+            mimetype = urlsMimetype(event.mimeData.urls);
+        } else {
+            mimetype = firstMimeType(event.mimeData.formats);
+        }
+        icon.source = mimetype.iconName;
+        event.accepted = true
+    }
+    onDragLeave: icon.source = "edit-paste"
 
     QtExtra.Clipboard {
         id: clipboard
@@ -73,41 +82,65 @@ DropArea {
 
     function resetActions() {
         for(var v in root.pasteUrls) {
-            plasmoid.setAction("showpaste"+(v+1), root.pasteUrls[v], "");
+            plasmoid.setAction(v, root.pasteUrls[v], "");
         }
     }
 
-    function sendData(source, data) {
-        var service = shareDataSource.serviceForSource(source);
-        var operation = service.operationDescription("share");
-        operation.content = data;
-        root.lastJob = service.startOperationCall(operation);
-        root.lastJob.finished.connect(function(){
-            var resultUrl = root.lastJob.result;
-
-            if (root.lastJob.error==0) {
+    ShareDialog {
+        id: shareDialog
+        location: plasmoid.location
+        inputData: { urls: [] }
+        visualParent: parent
+        onRunningChanged: {
+            if (running) {
+                root.state = "sending"
+            }
+        }
+        onFinished: {
+            if (error==0) {
+                var resultUrl = output.url;
+                console.log("Received", resultUrl, output.url)
                 root.url = resultUrl;
                 clipboard.content = resultUrl;
 
                 root.pasteUrls.push(resultUrl);
-                if (plasmoid.configuration.historySize <= root.pasteUrls.length) {
+                while (plasmoid.configuration.historySize <= root.pasteUrls.length && root.pasteUrls.length !== 0) {
                     root.pasteUrls.shift();
                 }
 
                 resetActions();
             }
-            root.state = root.lastJob.error==0 ? "success" : "failure";
-        });
-        root.state = "sending";
+            shareDialog.visible = false;
+            root.state = error===0 ? "success" : "failure";
+            root.errorMessage = message;
+        }
     }
 
-    onDropped: {
-        var pref = preferredSourceForMimetypes(drop.formats);
-        sendData(pref.source, drop.getDataAsString(pref.format))
-        drop.accepted = true;
+    function sendBase64Data(base64data, mimetype) {
+//      Awesome KIO magic <3
+        var url = "data:"+mimetype+";base64,"+base64data;
+        sendData([url], mimetype);
     }
 
-    onExited: icon.source = "edit-paste"
+    function sendData(urls, mimetype) {
+        shareDialog.inputData = {
+            "urls": urls,
+            "mimeType": mimetype
+        }
+        root.state = "configuration"
+    }
+
+    onDrop: {
+        var mimeData = event.mimeData;
+        var mimetype = firstMimeType(mimeData.formats).name;
+        if (mimeData.hasUrls) {
+            sendData(mimeData.urls, urlsMimetype(mimeData.urls).name);
+        } else {
+            var data = mimeData.getDataAsByteArray(mimetype);
+            sendBase64Data(PurposeHelper.variantToBase64(data), mimetype);
+        }
+        event.accepted = true;
+    }
 
     property var pasteUrls: []
     property int nextPaste: 0
@@ -117,17 +150,19 @@ DropArea {
         plasmoid.setActionSeparator("pastes");
     }
 
-    //FIXME somehow we should get these to be generic, now the history doesn't go further than 5 :D
-    function action_showpaste1() { Qt.openUrlExternally(pasteUrls[0]); }
-    function action_showpaste2() { Qt.openUrlExternally(pasteUrls[1]); }
-    function action_showpaste3() { Qt.openUrlExternally(pasteUrls[2]); }
-    function action_showpaste4() { Qt.openUrlExternally(pasteUrls[3]); }
-    function action_showpaste5() { Qt.openUrlExternally(pasteUrls[4]); }
+    function actionTriggered(actionName) {
+        var index = parseInt(actionName);
+        if (index)
+            Qt.openUrlExternally(pasteUrls[actionName]);
+    }
 
     function action_paste() {
-        var pref = preferredSourceForMimetypes(clipboard.formats, clipboard.contentFormat("text/uri-list"));
-
-        sendData(pref.source, clipboard.contentFormat(pref.format));
+        if (clipboard.formats.indexOf("text/uri-list")>=0) {
+            sendData(clipboard.contentFormat("text/uri-list"));
+        } else {
+            var mimetype = firstMimeType(clipboard.formats).name;
+            sendBase64Data(PurposeHelper.variantToBase64(clipboard.contentFormat(mimetype)), mimetype);
+        }
     }
 
     PlasmaCore.ToolTipArea {
@@ -163,12 +198,6 @@ DropArea {
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
 
-    PlasmaCore.DataSource {
-        id: shareDataSource
-        engine: "org.kde.plasma.dataengine.share"
-        connectedSources: sources
-    }
-
     Timer {
         id: idleTimer
         running: false
@@ -182,6 +211,12 @@ DropArea {
             name: "idle"
             PropertyChanges { target: icon; source: "edit-paste" }
             PropertyChanges { target: tooltipArea; icon: "edit-paste" }
+        },
+        State {
+            name: "configuration"
+            PropertyChanges { target: icon; source: "edit-paste" }
+            PropertyChanges { target: tooltipArea; icon: "edit-paste" }
+            PropertyChanges { target: shareDialog; visible: true }
         },
         State {
             name: "sending"
@@ -208,8 +243,8 @@ DropArea {
 
             PropertyChanges { target: idleTimer; running: true }
             PropertyChanges { target: tooltipArea; icon: icon.source }
-            PropertyChanges { target: tooltipArea; mainText: i18n("Error during upload. Try again.") }
-            PropertyChanges { target: tooltipArea; subText: i18n("Please, try again.") }
+            PropertyChanges { target: tooltipArea; mainText: i18n("Error during upload.") }
+            PropertyChanges { target: tooltipArea; subText: (root.errorMessage=="" ? i18n("Please, try again.") : root.errorMessage) }
         }
     ]
 }
