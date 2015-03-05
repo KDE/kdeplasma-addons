@@ -76,7 +76,7 @@ Item {
             Layouts.ColumnLayout {
                 Controls.CheckBox {
                     id: showErrorPicture
-                    text: i18n("Display error when getting comic field")
+                    text: i18n("Display error when getting comic failed")
                     onCheckedChanged: root.configurationChanged();
                 }
             }
