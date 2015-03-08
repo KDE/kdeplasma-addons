@@ -97,6 +97,12 @@ PlasmaCore.SvgItem {
                 when: !mainTextArea.activeFocus
             }
 
+            MouseArea { // just for the cursor shape...
+                anchors.fill: mainTextArea
+                cursorShape: Qt.IBeamCursor
+                acceptedButtons: Qt.NoButton
+            }
+
             //deliberately not PlasmaComponents.textEdit
             //as we have custom font selection
             TextEdit {
