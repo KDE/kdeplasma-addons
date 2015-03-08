@@ -60,7 +60,8 @@ KWin.Switcher {
                 property int thumbnailWidth: 300
                 height: thumbnailWidth * (1.0/dialogMainItem.screenFactor) + hoverItem.margins.bottom + hoverItem.margins.top
                 spacing: 5
-                highlightMoveDuration: 250
+                highlightMoveDuration: 0
+                highlightResizeDuration: 0
                 width: Math.min(parent.width - (anchors.leftMargin + anchors.rightMargin) - (hoverItem.margins.left + hoverItem.margins.right), thumbnailWidth * count + 5 * (count - 1))
                 anchors {
                     top: parent.top

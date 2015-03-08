@@ -95,7 +95,8 @@ Item {
             width: iconSize + margins.left + margins.right
             height: iconSize + margins.top + margins.bottom
         }
-        highlightMoveDuration: 250
+        highlightMoveDuration: 0
+        highlightResizeDuration: 0
         boundsBehavior: Flickable.StopAtBounds
     }
 }

@@ -179,7 +179,8 @@ KWin.Switcher {
                     prefix: "hover"
                     width: listView.width
                 }
-                highlightMoveDuration: 250
+                highlightMoveDuration: 0
+                highlightResizeDuration: 0
                 boundsBehavior: Flickable.StopAtBounds
                 Connections {
                     target: tabBox

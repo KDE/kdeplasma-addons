@@ -129,6 +129,7 @@ KWin.Switcher {
                     width: thumbnailListView.cellWidth
                     height: thumbnailListView.cellHeight
                 }
+                highlightMoveDuration: 0
                 boundsBehavior: Flickable.StopAtBounds
                 Connections {
                     target: tabBox
