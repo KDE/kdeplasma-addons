@@ -1,7 +1,3 @@
-
-# Project needs a name of course
-project(blackboard)
-
 # Find the required Libaries
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)

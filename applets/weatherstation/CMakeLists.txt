@@ -1,5 +1,3 @@
-project(plasma-weatherstation)
-
 set(weatherstation_SRCS
     weatherstation.cpp
     lcd.cpp

@@ -1,5 +1,3 @@
-project(plasma-applet-bubblemon)
-
 add_subdirectory(src)
 add_subdirectory(images)
 

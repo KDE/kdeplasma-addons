@@ -1,5 +1,3 @@
-project(charselect)
-
 set(charselect_SRCS charselect.cpp)
 
 kde4_add_plugin(plasma_applet_charselect ${charselect_SRCS})

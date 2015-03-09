@@ -1,6 +1,3 @@
-# Project Needs a name ofcourse
-project(plasma-magnifique)
- 
 # We add our source code here
 set(magnifique_SRCS magnifique.cpp)
  

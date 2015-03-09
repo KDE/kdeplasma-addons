@@ -1,5 +1,3 @@
-project(binaryclock)
-
 set(binaryclock_SRCS binaryclock.cpp)
 
 kde4_add_ui_files(binaryclock_SRCS clockConfig.ui)

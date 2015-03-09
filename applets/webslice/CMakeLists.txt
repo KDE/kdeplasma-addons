@@ -1,5 +1,3 @@
-project(webslice)
-
 include_directories( ${QT_INCLUDES} )
 
 

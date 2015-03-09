@@ -1,5 +1,3 @@
-project(luna)
-
 set(luna_SRCS luna.cpp)
 
 kde4_add_ui_files(luna_SRCS lunaConfig.ui)

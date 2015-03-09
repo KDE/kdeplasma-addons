@@ -1,5 +1,3 @@
-project(weatherapplet)
-
 set(weatherapplet_SRCS
     weatherapplet.cpp)
 

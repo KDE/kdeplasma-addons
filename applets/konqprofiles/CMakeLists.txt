@@ -1,5 +1,3 @@
-project(konqprofiles)
-
 install(DIRECTORY package/
         DESTINATION ${PLASMA_DATA_INSTALL_DIR}/plasmoids/konqprofiles)
 

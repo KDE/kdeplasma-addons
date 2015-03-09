@@ -1,5 +1,3 @@
-project(liblancelot)
-
 ########### define variables ##########
 
 set(LANCELOT_INCLUDE_DIR

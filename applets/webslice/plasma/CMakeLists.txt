@@ -1,5 +1,3 @@
-project(plasma-webslice)
-
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 set(plasma-webslice_SRCS

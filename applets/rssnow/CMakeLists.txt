@@ -1,4 +1,3 @@
-project(plasma-rssnow)
 set(news_SRCS
     news.cpp
     header.cpp

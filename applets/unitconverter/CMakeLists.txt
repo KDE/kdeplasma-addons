@@ -1,6 +1,3 @@
-# Project Needs a name ofcourse
-project(UnitConverter)
-
 include_directories(
    ${CMAKE_SOURCE_DIR}
    ${CMAKE_BINARY_DIR}

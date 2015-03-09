@@ -1,5 +1,3 @@
-project(plasma-events)
-
 find_package(KdepimLibs REQUIRED)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${Boost_INCLUDE_DIR} ${KDEPIMLIBS_INCLUDE_DIRS} ${KDE4_INCLUDES})

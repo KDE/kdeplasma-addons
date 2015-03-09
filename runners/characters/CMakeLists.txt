@@ -1,5 +1,3 @@
-project(CharacterRunner)
-
 # We add our source code here
 set(krunner_charrunner_SRCS charrunner.cpp)
 set(kcm_krunner_charrunner_SRCS charrunner_config.cpp)

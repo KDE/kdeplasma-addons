@@ -1,6 +1,3 @@
-# Project Needs a name ofcourse
-project(previewer)
- 
 # We add our source code here
 set(previewer_SRCS plasma-previewer.cpp
                    previewitemmodel.cpp

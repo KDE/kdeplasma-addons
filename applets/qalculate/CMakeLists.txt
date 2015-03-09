@@ -1,5 +1,3 @@
-project(plasma-qalculate)
-
 set(CMAKE_CXX_FLAGS "${KDE4_ENABLE_EXCEPTIONS} -Wno-deprecated")	
  
 # We add our source code here

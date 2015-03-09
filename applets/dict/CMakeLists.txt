@@ -1,5 +1,3 @@
-project(plasma-dict)
-
 INCLUDE_DIRECTORIES(
 	${QT_QTWEBKIT_INCLUDE_DIR})
 

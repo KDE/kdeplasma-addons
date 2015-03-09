@@ -1,5 +1,3 @@
-project(plasma-kolourpicker)
-
 set(KOLOURPICKER_X11_LIB FALSE)
 if(X11_FOUND AND X11_Xutil_FOUND)
    set(KOLOURPICKER_X11_LIB TRUE)

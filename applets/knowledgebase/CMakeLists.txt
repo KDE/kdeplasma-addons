@@ -1,7 +1,3 @@
-# Project Needs a name ofcourse
-project(plasma-knowledgebase)
- 
- 
 # We add our source code here
 set(knowledgebase_SRCS kbitemwidget.cpp knowledgebase.cpp kbitemtitle.cpp)
 

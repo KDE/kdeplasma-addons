@@ -1,6 +1,3 @@
-# Project Needs a name ofcourse
-project(plasma-incomingmsg)
-
 # We add our source code here
 set(incomingmsg_SRCS incomingmsg.cpp)
 

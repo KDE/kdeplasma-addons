@@ -1,5 +1,3 @@
-project(life)
-
 set(life_SRCS life.cpp)
 
 kde4_add_ui_files(life_SRCS lifeConfig.ui)

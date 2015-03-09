@@ -1,4 +1,3 @@
-project(plasma-fileWatcher)
 include_directories( ${KDE4_INCLUDES} )
 
 set(fileWatcher_SRCS fileWatcher.cpp fileWatcherTextItem.cpp)

@@ -1,5 +1,3 @@
-project(plasma-mediaplayer)
-
 # We add our source code here
 set(mediaplayer_SRCS
     mediaplayer.cpp
