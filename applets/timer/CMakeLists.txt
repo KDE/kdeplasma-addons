@@ -1,5 +1,3 @@
-project(timer)
-
 install(FILES timer.svgz
 	DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
 

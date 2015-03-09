@@ -1,4 +1,3 @@
-project(plasma_comic_dataengine)
 set(comic_engine_SRCS
     cachedprovider.cpp
     comic.cpp

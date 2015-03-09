@@ -1,6 +1,3 @@
-project(plasma-comic)
-
-
 set(comic_SRCS
     comic.cpp
     comicmodel.cpp

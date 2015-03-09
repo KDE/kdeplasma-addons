@@ -1,5 +1,3 @@
-project(plasmaconverter)
-
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_runner_converterrunner\")
 
 set(krunner_converter_SRCS
