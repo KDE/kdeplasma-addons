@@ -19,7 +19,7 @@ include(KDECMakeSettings)
 include(KDECompilerSettings)
 
 set(REQUIRED_QT_VERSION 5.3.0)
-set(KF5_MIN_VERSION 5.0.0)
+set(KF5_MIN_VERSION 5.8.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui DBus Quick Qml Widgets)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
