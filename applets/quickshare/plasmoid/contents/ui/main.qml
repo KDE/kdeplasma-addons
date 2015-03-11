@@ -114,6 +114,9 @@ DragDrop.DropArea {
             root.state = error===0 ? "success" : "failure";
             root.errorMessage = message;
         }
+        onWindowDeactivated: {
+            root.state = "idle";
+        }
     }
 
     function sendBase64Data(base64data, mimetype) {
@@ -214,7 +217,7 @@ DragDrop.DropArea {
         },
         State {
             name: "configuration"
-            PropertyChanges { target: icon; source: "edit-paste" }
+            PropertyChanges { target: icon; source: "configure" }
             PropertyChanges { target: tooltipArea; icon: "edit-paste" }
             PropertyChanges { target: shareDialog; visible: true }
         },
