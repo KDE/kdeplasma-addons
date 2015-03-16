@@ -53,7 +53,7 @@ PlasmaCore.SvgItem {
     Connections {
         target: plasmoid
         onExternalData: {
-            mainTextArea.text = data
+            mainTextArea.text = data.replace(/\n/g, "<br>")
         }
     }
 
