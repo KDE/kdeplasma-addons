@@ -139,6 +139,5 @@ Item {
         id: fullDialog
 
         image: plasmoid.nativeInterface.comicData.image
-        visualParent: root
     }
 }

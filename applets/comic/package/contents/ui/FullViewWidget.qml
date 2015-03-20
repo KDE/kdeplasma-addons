@@ -30,10 +30,11 @@ PlasmaCore.Dialog {
 
     flags: Qt.Popup
     visible: false
-
+    
     function open()
     {
         root.visible = true;
+        plasmoid.nativeInterface.positionFullView(root);
         root.activateWindow();
     }
 

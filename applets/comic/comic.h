@@ -164,6 +164,7 @@ Q_SIGNALS:
         Q_INVOKABLE void shop() { slotShop();}
         Q_INVOKABLE void tabChanged(const QString &newIdentifier) { slotTabChanged(newIdentifier);}
         Q_INVOKABLE void getNewComics();
+        Q_INVOKABLE void positionFullView(QWindow *window);
 
     private:
         void changeComic( bool differentComic );

@@ -230,6 +230,15 @@ void ComicApplet::getNewComics()
     m_newStuffDialog.data()->show();
 }
 
+void ComicApplet::positionFullView(QWindow *window)
+{
+    if (!window || !window->screen()) {
+        return;
+    }
+
+    window->setPosition(window->screen()->availableGeometry().center() - QPoint(window->size().width()/2, window->size().height()/2));
+}
+
 void ComicApplet::changeComic( bool differentComic )
 {
     if ( differentComic ) {
