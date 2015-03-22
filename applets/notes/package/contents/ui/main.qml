@@ -195,7 +195,7 @@ PlasmaCore.SvgItem {
         PlasmaComponents.ToolButton {
             tooltip: i18n("Align center")
             iconSource: "format-justify-center"
-            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + horizontalMargins ? 1 : 0
+            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + 2 * horizontalMargins ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: units.longDuration } }
             enabled: opacity > 0
 
@@ -206,7 +206,7 @@ PlasmaCore.SvgItem {
         PlasmaComponents.ToolButton {
             tooltip: i18n("Align right")
             iconSource: "format-justify-right"
-            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + horizontalMargins ? 1 : 0
+            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + 2 * horizontalMargins ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: units.longDuration } }
             enabled: opacity > 0
 
@@ -217,7 +217,7 @@ PlasmaCore.SvgItem {
         PlasmaComponents.ToolButton {
             tooltip: i18n("Justified")
             iconSource: "format-justify-fill"
-            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + horizontalMargins ? 1 : 0
+            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + 2 * horizontalMargins ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: units.longDuration } }
             enabled: opacity > 0
 
