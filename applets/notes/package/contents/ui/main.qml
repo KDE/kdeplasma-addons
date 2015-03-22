@@ -18,7 +18,10 @@
 */
 
 import QtQuick 2.1
+import QtQuick.Controls 1.1 as QtControls
 import QtQuick.Layouts 1.1
+import QtQuick.Controls.Styles 1.1 as QtStyles
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -61,8 +64,8 @@ PlasmaCore.SvgItem {
         id: noteManager
     }
 
-    PlasmaExtras.ScrollArea {
-        id: mainScrollArea
+    PlasmaComponents.TextArea {
+        id: mainTextArea
         anchors {
             top: parent.top
             left: parent.left
@@ -76,67 +79,32 @@ PlasmaCore.SvgItem {
             bottomMargin: Math.round(units.largeSpacing / 2)
         }
 
-        Flickable {
-            id: flickable
-            contentHeight: mainTextArea.height
+        backgroundVisible: false
+        frameVisible: false
+        textFormat: TextEdit.RichText
 
-            // TextEdit doesn't handle scrolling while typing itself
-            function ensureVisible(rect) {
-                if (contentY >= rect.y) {
-                    contentY = rect.y
-                } else if (contentY + height < rect.y + rect.height) {
-                    contentY = rect.y + rect.height - height
-                }
-            }
+        style: QtStyles.TextAreaStyle {
+            font: theme.defaultFont
+            renderType: Text.NativeRendering
 
-            //update the note if the source changes, but only if the user isn't editing it currently
-            Binding {
-                target: mainTextArea
-                property: "text"
-                value: note.noteText
-                when: !mainTextArea.activeFocus
-            }
+            //this is deliberately _NOT_ the theme color as we are over a known bright background
+            //an unknown colour over a known colour is a bad move as you end up with white on yellow
+            textColor: plasmoid.configuration.color === "black" ? "#dfdfdf" : "#202020"
+            selectedTextColor: theme.viewBackgroundColor
+            selectionColor: theme.viewFocusColor
+        }
 
-            MouseArea { // just for the cursor shape...
-                anchors.fill: mainTextArea
-                cursorShape: Qt.IBeamCursor
-                acceptedButtons: Qt.NoButton
-            }
+        //update the note if the source changes, but only if the user isn't editing it currently
+        Binding {
+            target: mainTextArea
+            property: "text"
+            value: note.noteText
+            when: !mainTextArea.activeFocus
+        }
 
-            //deliberately not PlasmaComponents.textEdit
-            //as we have custom font selection
-            TextEdit {
-                id: mainTextArea
-                width: parent.width
-                height: Math.max(mainScrollArea.height, paintedHeight)
-                onCursorRectangleChanged: flickable.ensureVisible(cursorRectangle)
-                focus: true
-                textFormat: Qt.RichText
-                wrapMode: TextEdit.Wrap
-                selectByMouse: true
-                renderType: Text.NativeRendering
-
-                //this is deliberately _NOT_ the theme colour as we are over a known bright background
-                //an unknown colour over a known colour is a bad move as you end up with white on yellow
-                color: plasmoid.configuration.color === "black" ? "#dfdfdf" : "#202020"
-                selectedTextColor: theme.viewBackgroundColor
-                selectionColor: theme.viewFocusColor
-
-                font.capitalization: theme.defaultFont.capitalization
-                font.family: theme.defaultFont.family
-                font.italic: documentHandler.italic
-                font.letterSpacing: theme.defaultFont.letterSpacing
-                font.pointSize: theme.defaultFont.pointSize
-                font.strikeout: theme.defaultFont.strikeout
-                font.underline: theme.defaultFont.underline
-                font.weight: theme.defaultFont.weight
-                font.wordSpacing: theme.defaultFont.wordSpacing
-
-                onActiveFocusChanged: {
-                    if (!activeFocus) {
-                        note.save(mainTextArea.text);
-                    }
-                }
+        onActiveFocusChanged: {
+            if (!activeFocus) {
+                note.save(mainTextArea.text);
             }
         }
     }
