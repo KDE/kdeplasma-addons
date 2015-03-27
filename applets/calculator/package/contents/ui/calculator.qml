@@ -81,6 +81,7 @@ Item {
         case Qt.Key_Slash:
             setOperator("/");
             break;
+        case Qt.Key_Comma:
         case Qt.Key_Period:
             decimalClicked();
             break;
