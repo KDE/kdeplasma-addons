@@ -22,8 +22,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
-PlasmaCore.SvgItem
-{
+PlasmaCore.SvgItem {
         property int meaning;
         property int num;
         property string suffix;
@@ -37,14 +36,14 @@ PlasmaCore.SvgItem
             anchors.fill: parent;
             onWheel: {
                 if (!root.running) {
-                    if (wheel.angleDelta.y > 0){
-                        if (root.seconds + meaning < 360000){
+                    if (wheel.angleDelta.y > 0) {
+                        if (root.seconds + meaning < 360000) {
                             root.seconds += meaning;
                         }
                         root.digitChanged();
 
-                    }else if (wheel.angleDelta.y < 0){
-                        if (root.seconds - meaning >= 0){
+                    }else if (wheel.angleDelta.y < 0) {
+                        if (root.seconds - meaning >= 0) {
                             root.seconds -= meaning;
                         }
                         root.digitChanged();

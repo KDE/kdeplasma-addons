@@ -22,8 +22,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
-Item
-{
+Item {
     id: root;
 
     property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);
@@ -50,11 +49,11 @@ Item
     Timer {
         id: t;
         interval: 1000;
-        onTriggered:{
-            if (seconds != 0){
+        onTriggered: {
+            if (seconds != 0) {
                 seconds--;
             }
-            if (seconds == 0){
+            if (seconds == 0) {
                 parent.running = false;
                 saveTimer();
             }
@@ -155,10 +154,10 @@ Item
 
     MouseArea {
         anchors.fill: parent;
-        onClicked:{
-            if (parent.running){
+        onClicked: {
+            if (parent.running) {
                  stopTimer();
-            }else{
+            }else {
                  startTimer();
             }
         }
@@ -170,17 +169,15 @@ Item
         plasmoid.setAction("timerReset", i18n("&Reset"));
         plasmoid.setActionSeparator("separator0");
 
-        for (var predefinedTimer in plasmoid.configuration.predefinedTimers){
+        for (var predefinedTimer in plasmoid.configuration.predefinedTimers) {
             plasmoid.setAction("predefined_timer_" + plasmoid.configuration.predefinedTimers[predefinedTimer],
                                secondsToDisplayableString(plasmoid.configuration.predefinedTimers[predefinedTimer]));
         }
         plasmoid.setActionSeparator("separator1");
     }
 
-    function secondsToDisplayableString(sec)
-    {
-
-                return ~~((sec / (60*60)) / 10) + "" +
+    function secondsToDisplayableString(sec) {
+        return ~~((sec / (60*60)) / 10) + "" +
                 (~~(~~(sec / (60*60))) % 10) + ":" +
                 ~~(~~((sec % (60*60)) / 60) / 10) + "" +
                 ~~((sec % (60*60)) / 60) % 10 + ":" +
@@ -188,23 +185,20 @@ Item
                 (sec % 60) % 10;
     }
 
-    function startTimer()
-    {
+    function startTimer() {
         running = true;
         suspended = false;
         timerDigits.opacity = 1.0;
         saveTimer();
     }
 
-    function stopTimer()
-    {
+    function stopTimer() {
         running = false;
         suspended = true;
         saveTimer();
     }
 
-    function resetTimer()
-    {
+    function resetTimer() {
         running = false;
         suspended = false;
         seconds = 0;
@@ -212,53 +206,46 @@ Item
         saveTimer();
     }
 
-    function saveTimer()
-    {
+    function saveTimer() {
         plasmoid.configuration.running = running ? seconds : 0;
         plasmoid.configuration.savedAt = new Date();
         plasmoid.configuration.seconds = seconds
     }
 
-    function restoreToSeconds(cRunning, cSavedAt, cSeconds)
-    {
-        if (cRunning > 0){
+    function restoreToSeconds(cRunning, cSavedAt, cSeconds) {
+        if (cRunning > 0) {
             var elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cSavedAt.getTime()) / 1000));
-            if (elapsedSeconds >= 0){
+            if (elapsedSeconds >= 0) {
                 return elapsedSeconds;
-            }else{
+            } else {
                 return 0;
             }
-        }else{
+        } else {
             return cSeconds;
         }
     }
 
-    function digitChanged()
-    {
+    function digitChanged() {
         delayedSaveTimer.stop();
         delayedSaveTimer.start();
     }
 
-    function actionTriggered(actionName)
-    {
-        if (actionName.indexOf("predefined_timer_") == 0){
+    function actionTriggered(actionName) {
+        if (actionName.indexOf("predefined_timer_") == 0) {
             seconds = actionName.replace("predefined_timer_", "");
             startTimer();
         }
     }
 
-    function action_timerStart()
-    {
+    function action_timerStart() {
         startTimer();
     }
 
-    function action_timerStop()
-    {
+    function action_timerStop() {
         stopTimer();
     }
 
-    function action_timerReset()
-    {
+    function action_timerReset() {
         resetTimer();
     }
 }
