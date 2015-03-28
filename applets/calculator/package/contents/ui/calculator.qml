@@ -1,4 +1,5 @@
 /*****************************************************************************
+ *   Copyright (C) 2015 by Bernhard Friedreich <friesoft@gmail.com>          *
  *   Copyright (C) 2014 by Martin Yrjölä <martin.yrjola@gmail.com>           *
  *   Copyright (C) 2012, 2014 by Davide Bettio <davide.bettio@kdemail.net>   *
  *   Copyright (C) 2012, 2014 by David Edmundson <davidedmundson@kde.org >   *
@@ -91,6 +92,11 @@ Item {
             equalsClicked();
             break;
         default:
+            if (event.matches(StandardKey.Copy)) {
+                copyToClipboard();
+            } else if (event.matches(StandardKey.Paste)) {
+                pasteFromClipboard();
+            }
             break;
         }
     }
@@ -189,6 +195,45 @@ Item {
 
     function localizeNumber(number) {
         return number.toString().replace(".", Qt.locale().decimalPoint);
+    }
+
+    // use the clipboard datasource for being able to inspect the clipboard content before pasting it
+    PlasmaCore.DataSource {
+        id: clipboardSource
+        property bool editing: false;
+        engine: "org.kde.plasma.clipboard"
+        connectedSources: "clipboard"
+    }
+
+    function copyToClipboard() {
+        display.selectAll();
+        display.copy();
+        display.deselect();
+    }
+
+    function pasteFromClipboard() {
+        var content = clipboardSource.data["clipboard"]["current"];
+        if (content != "") {
+            content = content.trim();
+        }
+
+        // check if the clipboard content as a whole is a valid number (without sign, no operators, ...)
+        if (isValidClipboardInput(content)) {
+            var digitRegex = new RegExp('^[0-9]$');
+            var decimalRegex = new RegExp('^[\.,]$');
+
+            for (var i = 0; i < content.length; i++) {
+                if (digitRegex.test(content[i])) {
+                    digitClicked(parseInt(content[i]));
+                } else if (decimalRegex.test(content[i])) {
+                    decimalClicked();
+                }
+            }
+        }
+    }
+
+    function isValidClipboardInput(input) {
+        return new RegExp('^[0-9]*[\.,]?[0-9]+$').test(input);
     }
 
     function displayNumber(number) {
