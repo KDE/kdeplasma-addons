@@ -86,7 +86,7 @@ Item {
                     duration: 800;
                     from: 1.0;
                     to: 0.2;
-                    easing: Easing.InOutQuad;
+                    easing.type: Easing.InOutQuad;
                 }
                 PauseAnimation {
                     duration: 400;
@@ -95,7 +95,7 @@ Item {
                     duration: 800;
                     from: 0.2;
                     to: 1.0;
-                    easing: Easing.InOutQuad;
+                    easing.type: Easing.InOutQuad;
                 }
                 PauseAnimation {
                     duration: 400;
