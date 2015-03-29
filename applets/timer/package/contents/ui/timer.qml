@@ -55,6 +55,8 @@ Item {
             }
             if (seconds == 0) {
                 parent.running = false;
+
+                showNotification();
                 saveTimer();
             }
         }
@@ -174,6 +176,26 @@ Item {
                                secondsToDisplayableString(plasmoid.configuration.predefinedTimers[predefinedTimer]));
         }
         plasmoid.setActionSeparator("separator1");
+    }
+
+    PlasmaCore.DataSource {
+        id: notificationSource
+        engine: "notifications"
+        connectedSources: "org.freedesktop.Notifications"
+    }
+
+    function showNotification() {
+        var service = notificationSource.serviceForSource("notification");
+        var operation = service.operationDescription("createNotification");
+        operation["appName"] = "Timer";
+        operation["appIcon"] = "chronometer";
+        operation["summary"] = "Timer finished";
+        operation["body"] = "";
+        operation["timeout"] = 2000;
+
+        service.startOperationCall(operation);
+
+        console.log("Timer finished");
     }
 
     function secondsToDisplayableString(sec) {
