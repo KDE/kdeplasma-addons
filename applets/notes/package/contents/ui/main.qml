@@ -20,12 +20,14 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.1 as QtControls
 import QtQuick.Layouts 1.1
-import QtQuick.Controls.Styles 1.1 as QtStyles
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
+
+// so we can override the textColor...
+import QtQuick.Controls.Styles.Plasma 2.0 as PlasmaStyle
 
 import org.kde.plasma.private.notes 0.1
 
@@ -83,15 +85,10 @@ PlasmaCore.SvgItem {
         frameVisible: false
         textFormat: TextEdit.RichText
 
-        style: QtStyles.TextAreaStyle {
-            font: theme.defaultFont
-            renderType: Text.NativeRendering
-
+        style: PlasmaStyle.TextAreaStyle {
             //this is deliberately _NOT_ the theme color as we are over a known bright background
             //an unknown colour over a known colour is a bad move as you end up with white on yellow
             textColor: plasmoid.configuration.color === "black" ? "#dfdfdf" : "#202020"
-            selectedTextColor: theme.viewBackgroundColor
-            selectionColor: theme.viewFocusColor
         }
 
         //update the note if the source changes, but only if the user isn't editing it currently
