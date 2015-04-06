@@ -26,8 +26,8 @@
       <default>Timer</default>
     </entry>
 
-    <entry name="hideSeconds" type="Bool">
-      <default>false</default>
+    <entry name="showSeconds" type="Bool">
+      <default>true</default>
     </entry>
 
     <entry name="showMessage" type="Bool">

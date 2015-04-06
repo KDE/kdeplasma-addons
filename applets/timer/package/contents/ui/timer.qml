@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2008,2014 by Davide Bettio <davide.bettio@kdemail.net>      *
+ *   Copyright 2015 by Bernhard Friedreich <friesoft@gmail.com>            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -21,6 +22,7 @@ import QtQuick 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
+import org.kde.plasma.private.timer 0.1 as TimerPlasmoid
 
 Item {
     id: root;
@@ -31,12 +33,12 @@ Item {
     property date savedAt: plasmoid.configuration.savedAt;
     property bool showTitle: plasmoid.configuration.showTitle;
     property string title: plasmoid.configuration.title;
-    property bool hideSeconds: plasmoid.configuration.hideSeconds;
+    property bool showSeconds: plasmoid.configuration.showSeconds;
     property bool showMessage: plasmoid.configuration.showMessage;
     property string message: plasmoid.configuration.message;
     property bool runCommand: plasmoid.configuration.runCommand;
     property string command: plasmoid.configuration.command;
-    property real digits: (hideSeconds) ? 4.5 : 7;
+    property real digits: (showSeconds) ? 7 : 4.5;
     property int digitH: ((height / 2) * digits < width ? height : ((width - (digits - 1)) / digits) * 2);
     property int digitW: digitH / 2;
     property bool suspended: false;
@@ -57,6 +59,9 @@ Item {
                 parent.running = false;
 
                 showNotification();
+                if (runCommand) {
+                    TimerPlasmoid.Timer.runCommand(command);
+                }
                 saveTimer();
             }
         }
@@ -137,19 +142,19 @@ Item {
                 width: digitW / 2;
                 height: digitH;
                 elementId: "separator" + ((running && seconds < 60) ? "_1" : "");
-                visible: !hideSeconds;
+                visible: showSeconds;
             }
             TimerDigit {
                 meaning: 10;
                 num: ~~((seconds % 60) / 10);
                 suffix: (running && seconds < 60) ? "_1" : "";
-                visible: !hideSeconds;
+                visible: showSeconds;
             }
             TimerDigit {
                 meaning: 1;
                 num: (seconds % 60) % 10;
                 suffix: (running && seconds < 60) ? "_1" : "";
-                visible: !hideSeconds;
+                visible: showSeconds;
             }
         }
     }
