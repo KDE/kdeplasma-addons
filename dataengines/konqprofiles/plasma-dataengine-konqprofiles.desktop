@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Konqueror Profiles
 Name[ar]=تشكيلة كنيكر
-Name[ast]=Perfiles de Konqueror
 Name[bs]=Konqueror profili
 Name[ca]=Perfils del Konqueror
 Name[ca@valencia]=Perfils del Konqueror
@@ -56,7 +55,6 @@ Name[zh_CN]=Konqueror 配置集
 Name[zh_TW]=Konqueror 設定檔
 Comment=List and launch Konqueror profiles
 Comment[ar]=تعرض و تطلق تشكيلات كنكير
-Comment[ast]=Amuesa y anicia perfiles de Konqueror
 Comment[bs]=Nabraja i pokreće profile Konquerora
 Comment[ca]=Llista i llança els perfils del Konqueror
 Comment[ca@valencia]=Llista i executa els perfils del Konqueror

@@ -2,7 +2,6 @@
 Encoding=UTF-8
 Name=Character Selector
 Name[ar]=مختار الأحرف
-Name[ast]=Seleutor de caráuter
 Name[bs]=Birač znakova
 Name[ca]=Selector de caràcters
 Name[ca@valencia]=Selector de caràcters
@@ -60,7 +59,6 @@ Name[zh_CN]=字符选择器
 Name[zh_TW]=字元選擇器
 Comment=View, select, and copy characters from a font collection
 Comment[ar]=أظهر، واختر، و انسخ محارف من مجموعة الخط
-Comment[ast]=Ver, esbillar y copiar carauteres d'una colección de fontes de lletra
 Comment[bs]=Gledajte, birajte i kopirajte znakove iz zbirke fontova
 Comment[ca]=Mostra, selecciona i copia caràcters d'una col·lecció de tipus de lletra
 Comment[ca@valencia]=Mostra, selecciona i copia caràcters d'una col·lecció de tipus de lletra

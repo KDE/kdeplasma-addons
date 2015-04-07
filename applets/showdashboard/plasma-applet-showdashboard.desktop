@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Show Widget Dashboard
 Name[ar]=أظهر لوحة الودجات
-Name[ast]=Amosar el tableru de mandos
 Name[bs]=Prikaz kontrole poput table sa instrumentima
 Name[ca]=Mostra el tauler d'estris
 Name[ca@valencia]=Mostra el tauler d'estris
@@ -55,7 +54,6 @@ Name[zh_CN]=显示部件板
 Name[zh_TW]=顯示元件資訊看板
 Comment=Show the Plasma widget dashboard above other windows
 Comment[ar]=اظهر لوحة ودجات البلازما فوق النوافذ
-Comment[ast]=Amosar el tableru de mandos de Plasma sobre les demás ventanes
 Comment[bs]=Prikaz plazma kontrole poput table sa instrumentima iznad ostalih prozora
 Comment[ca]=Mostra el tauler d'estris del Plasma per sobre de les altres finestres
 Comment[ca@valencia]=Mostra el tauler d'estris del Plasma per sobre de les altres finestres

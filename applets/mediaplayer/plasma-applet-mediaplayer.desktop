@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Media Player
 Name[ar]=مشغل وسائط
-Name[ast]=Reproductor de medios
 Name[bs]=Izvođač multimedijalnih datoteka
 Name[ca]=Reproductor multimèdia
 Name[ca@valencia]=Reproductor Multimèdia
@@ -55,7 +54,6 @@ Name[zh_CN]=媒体播放器
 Name[zh_TW]=媒體播放器
 Comment=Widget that can play video and sound
 Comment[ar]=ودجة تستطيع أن تشغل الصوت و الفيديو
-Comment[ast]=Miniaplicación que puede reproducir videu y soníu
 Comment[bs]=Kontrola za pokretanje filmova i muzike
 Comment[ca]=Estri que permet reproduir vídeos i so.
 Comment[ca@valencia]=Estri que permet reproduir vídeos i so.

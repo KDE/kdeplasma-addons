@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Konsole Profiles
 Name[ar]=تشكيلات كونسول
-Name[ast]=Perfiles de Konsole
 Name[bs]=Konzolini profili
 Name[ca]=Perfils del Konsole
 Name[ca@valencia]=Perfils del Konsole
@@ -56,7 +55,6 @@ Name[zh_CN]=Konsole 配置集
 Name[zh_TW]=Konsole 設定檔
 Comment=List and launch Konsole profiles
 Comment[ar]=تعرض و تطلق تشكيلات كونسول
-Comment[ast]=Amuesa y anicia perfiles de Konsole
 Comment[bs]=Nabraja i pokreće profile Konzole
 Comment[ca]=Llista i llança els perfils del Konsole
 Comment[ca@valencia]=Llista i executa els perfils del Konsole

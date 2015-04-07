@@ -1,7 +1,6 @@
 [Global]
 Name=Lancelot
 Name[ar]=لانسلوت
-Name[ast]=Lancelot
 Name[bs]=Lancelot
 Name[ca]=Lancelot
 Name[ca@valencia]=Lancelot
@@ -57,7 +56,6 @@ Name[zh_TW]=Lancelot
 IconName=lancelot
 Comment=Lancelot Menu
 Comment[ar]=قائمة لانسلوت
-Comment[ast]=Menú de Lancelot
 Comment[bs]=Lancelot meni
 Comment[ca]=Menú del Lancelot
 Comment[ca@valencia]=Menú del Lancelot
@@ -114,7 +112,6 @@ Version=1
 [Event/UsageLoggingOn]
 Name=Usage logging is activated
 Name[ar]=تستجيل الاستخدام نشط
-Name[ast]=El rexistru d'usu ta activáu
 Name[bs]=Bilježenje upotrebe aktivirano
 Name[ca]=El registre d'ús està activat
 Name[ca@valencia]=El registre d'ús està activat
@@ -162,7 +159,6 @@ Name[zh_CN]=已激活使用率记录
 Name[zh_TW]=使用紀錄已啟動
 Comment=Shown only on first launch. Notifies that the usage logging is turned 'on'.
 Comment[ar]=تظهر فقط عند الإطلاق الأول ، لتخبر بأن تسجيل الاستخدام 'يعمل'.
-Comment[ast]=Amuésase namái nel primer llanzamientu. Notifica que'l rexistru del usu ta activáu.
 Comment[bs]=Prikazuje se samo na prvom pokretanju. Obavještava da je bilježenje upotrebe uključeno.
 Comment[ca]=Només es mostra en el primer llançament. Notifica que el registre d'ús està «activat».
 Comment[ca@valencia]=Només es mostra en la primera execució. Notifica que el registre d'ús està «activat».
@@ -212,7 +208,6 @@ Action=Popup
 [Event/ErrorOpeningLog]
 Name=Error opening the log
 Name[ar]=خطأ أثناء فتح السجل
-Name[ast]=Fallu al abrir el rexistru
 Name[bs]=Greška pri otvaranju dnevnika
 Name[ca]=Hi ha hagut un error en obrir el registre
 Name[ca@valencia]=Hi ha hagut un error en obrir el registre
@@ -262,7 +257,6 @@ Name[zh_CN]=打开日志出错
 Name[zh_TW]=開啟紀錄時發生錯誤
 Comment=Failed to open the log file.
 Comment[ar]=فشل في فتح السجل.
-Comment[ast]=Fallu al abrir el ficheru de rexistru.
 Comment[bs]=Neuspjelo otvaranje dnevničke datoteke.
 Comment[ca]=No s'ha pogut obrir el fitxer de registre.
 Comment[ca@valencia]=No s'ha pogut obrir el fitxer de registre.

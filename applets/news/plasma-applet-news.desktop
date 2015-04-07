@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=News
 Name[ar]=أخبار
-Name[ast]=Noticies
 Name[bs]=Novosti
 Name[ca]=Notícies
 Name[ca@valencia]=Notícies
@@ -58,7 +57,6 @@ Name[zh_CN]=新闻
 Name[zh_TW]=News
 Comment=Show news from various sources
 Comment[ar]=أظهر الأخبار من مصادر متعددة
-Comment[ast]=Amuesa noticies de delles fontes
 Comment[bs]=Prikazuje vijesti iz različitih izvora
 Comment[ca]=Mostra les notícies de diverses fonts
 Comment[ca@valencia]=Mostra les notícies de diverses fonts
