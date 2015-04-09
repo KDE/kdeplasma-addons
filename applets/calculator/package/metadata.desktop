@@ -123,6 +123,7 @@ X-KDE-PluginInfo-Category=Utilities
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-StandAloneApp=true
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/calculator.qml

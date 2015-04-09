@@ -120,3 +120,5 @@ X-Plasma-Requires-FileDialog=Unused
 X-Plasma-Requires-LaunchApp=Optional
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/SystemLoadViewer.qml
+X-Plasma-StandAloneApp=true
+

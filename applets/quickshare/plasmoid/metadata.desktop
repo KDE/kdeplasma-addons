@@ -111,3 +111,4 @@ X-KDE-PluginInfo-EnabledByDefault=true
 X-Plasma-Requires-FileDialog=Unused
 X-Plasma-Requires-LaunchApp=Required
 X-Plasma-RequiredExtensions=ExternalScripts
+X-Plasma-StandAloneApp=true

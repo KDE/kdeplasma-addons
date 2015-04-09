@@ -127,3 +127,4 @@ X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/timer.qml
 X-Plasma-Requires-FileDialog=Unused
 X-Plasma-Requires-LaunchApp=Unused
+X-Plasma-StandAloneApp=true

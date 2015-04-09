@@ -122,5 +122,6 @@ X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
 X-KDE-PluginInfo-Category=Fun and Games
+X-Plasma-StandAloneApp=true
 
 X-Plasma-MainScript=ui/main.qml

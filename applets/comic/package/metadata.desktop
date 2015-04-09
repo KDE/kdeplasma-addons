@@ -124,3 +124,4 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-Plasma-Requires-FileDialog=Optional
 X-Plasma-Requires-LaunchApp=Optional
+X-Plasma-StandAloneApp=true
