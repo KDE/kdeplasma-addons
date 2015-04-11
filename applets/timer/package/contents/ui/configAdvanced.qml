@@ -31,11 +31,12 @@ QtLayouts.ColumnLayout {
         title: i18n("Run command")
 
         QtLayouts.Layout.fillWidth: true
-        QtLayouts.Layout.fillHeight: true
+        QtLayouts.Layout.alignment: Qt.AlignTop
         flat: true
 
         QtLayouts.ColumnLayout {
-            QtLayouts.Layout.fillWidth: true
+            QtLayouts.Layout.alignment: Qt.AlignTop
+            anchors.fill: parent
 
             QtControls.CheckBox {
                 id: runCommand
@@ -48,7 +49,7 @@ QtLayouts.ColumnLayout {
                 }
                 QtControls.TextField {
                     id: command
-                    width: runCommandGroup.width * 0.8
+                    QtLayouts.Layout.fillWidth: true
                     enabled: runCommand.checked
                 }
             }

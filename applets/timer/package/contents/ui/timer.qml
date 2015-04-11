@@ -31,13 +31,22 @@ Item {
     property bool running: (plasmoid.configuration.running > 0) ? true : false;
     property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
     property date savedAt: plasmoid.configuration.savedAt;
+
+    // show title (can be customized in the settings dialog, default: disabled)
     property bool showTitle: plasmoid.configuration.showTitle;
     property string title: plasmoid.configuration.title;
+
+    // display seconds in addition to hours and minutes (default: enabled)
     property bool showSeconds: plasmoid.configuration.showSeconds;
-    property bool showMessage: plasmoid.configuration.showMessage;
-    property string message: plasmoid.configuration.message;
+
+    // show notification on timer completion (default: enabled)
+    property bool showNotification: plasmoid.configuration.showNotification;
+    property string notificationText: plasmoid.configuration.notificationText;
+
+    // run custom command on timer completion (default: disabled)
     property bool runCommand: plasmoid.configuration.runCommand;
     property string command: plasmoid.configuration.command;
+
     property real digits: (showSeconds) ? 7 : 4.5;
     property int digitH: ((height / 2) * digits < width ? height : ((width - (digits - 1)) / digits) * 2);
     property int digitW: digitH / 2;
@@ -58,7 +67,9 @@ Item {
             if (seconds == 0) {
                 parent.running = false;
 
-                showNotification();
+                if (showNotification) {
+                    createNotification();
+                }
                 if (runCommand) {
                     TimerPlasmoid.Timer.runCommand(command);
                 }
@@ -189,18 +200,25 @@ Item {
         connectedSources: "org.freedesktop.Notifications"
     }
 
-    function showNotification() {
+    function createNotification() {
         var service = notificationSource.serviceForSource("notification");
         var operation = service.operationDescription("createNotification");
-        operation["appName"] = "Timer";
+
+        if (title != "") {
+            operation["appName"] = title;
+        } else {
+            operation["appName"] = i18n("Timer");
+        }
         operation["appIcon"] = "chronometer";
-        operation["summary"] = "Timer finished";
+        if (notificationText != "") {
+            operation["summary"] = notificationText;
+        } else {
+            operation["summary"] = "Timer finished";
+        }
         operation["body"] = "";
         operation["timeout"] = 2000;
 
         service.startOperationCall(operation);
-
-        console.log("Timer finished");
     }
 
     function secondsToDisplayableString(sec) {

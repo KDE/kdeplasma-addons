@@ -24,18 +24,71 @@ QtLayouts.ColumnLayout {
     id: appearancePage
 
     property alias cfg_showTitle: showTitle.checked
+    property alias cfg_title: title.text
+
     property alias cfg_showSeconds: showSeconds.checked
 
-    QtLayouts.ColumnLayout {
-        QtLayouts.Layout.alignment: Qt.AlignTop
+    property alias cfg_showNotification: showNotification.checked
+    property alias cfg_notificationText: notificationText.text
 
-        QtControls.CheckBox {
-            id: showTitle
-            text: i18n("Show title");
+    QtControls.GroupBox {
+        id: displayGroup
+        title: i18n("Display")
+
+        QtLayouts.Layout.fillWidth: true
+        QtLayouts.Layout.alignment: Qt.AlignTop
+        flat: true
+
+        QtLayouts.ColumnLayout {
+            anchors.fill: parent
+
+            QtControls.CheckBox {
+                id: showTitle
+                text: i18n("Show title");
+            }
+            QtLayouts.RowLayout {
+                QtControls.Label {
+                    text: i18n("Title:")
+                }
+                QtControls.TextField {
+                    id: title
+                    QtLayouts.Layout.fillWidth: true
+                    enabled: showTitle.checked
+                }
+            }
+
+            QtControls.CheckBox {
+                id: showSeconds
+                text: i18n("Show seconds");
+            }
         }
-        QtControls.CheckBox {
-            id: showSeconds
-            text: i18n("Show seconds");
+    }
+
+    QtControls.GroupBox {
+        id: notificationGroup
+        title: i18n("Notifications")
+
+        QtLayouts.Layout.fillWidth: true
+        anchors.top: displayGroup.bottom
+        flat: true
+
+        QtLayouts.ColumnLayout {
+            anchors.fill: parent
+
+            QtControls.CheckBox {
+                id: showNotification
+                text: i18n("Show notification");
+            }
+            QtLayouts.RowLayout {
+                QtControls.Label {
+                    text: i18n("Text:")
+                }
+                QtControls.TextField {
+                    id: notificationText
+                    QtLayouts.Layout.fillWidth: true
+                    enabled: showNotification.checked
+                }
+            }
         }
     }
 }

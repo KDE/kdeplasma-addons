@@ -30,12 +30,12 @@
       <default>true</default>
     </entry>
 
-    <entry name="showMessage" type="Bool">
+    <entry name="showNotification" type="Bool">
       <default>true</default>
     </entry>
 
-    <entry name="message" type="String">
-      <default>Timer Timeout</default>
+    <entry name="notificationText" type="String">
+      <default>Timer finished</default>
     </entry>
 
     <entry name="runCommand" type="Bool">
