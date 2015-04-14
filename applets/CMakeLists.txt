@@ -4,13 +4,13 @@ add_subdirectory(calculator)
 add_subdirectory(notes)
 add_subdirectory(timer)
 
-find_package(KF5Purpose QUIET)
-set_package_properties(KF5Purpose PROPERTIES DESCRIPTION "EXPERIMENTAL. Support for QuickShare sharing"
+find_package(KDEExperimentalPurpose QUIET)
+set_package_properties(KDEExperimentalPurpose PROPERTIES DESCRIPTION "EXPERIMENTAL. Support for QuickShare sharing"
                        URL "https://projects.kde.org/projects/playground/libs/purpose"
                        TYPE RUNTIME
                       )
 
-if (KF5Purpose_FOUND)
+if (KDEExperimentalPurpose_FOUND)
     add_subdirectory(quickshare)
 endif()
 
