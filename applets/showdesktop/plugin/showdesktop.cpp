@@ -26,17 +26,7 @@
 #endif
 
 ShowDesktop::ShowDesktop()
-    : m_wm2ShowingDesktop(false)
-#ifndef MINIMIZE_ONLY
-     ,m_down(false)
-#endif
 {
-#if HAVE_X11
-    if (QX11Info::isPlatformX11()) {
-        NETRootInfo info(QX11Info::connection(), NET::Supported);
-        m_wm2ShowingDesktop = info.isSupported(NET::WM2ShowingDesktop);
-    }
-#endif
 }
 
 ShowDesktop::~ShowDesktop()
@@ -45,19 +35,7 @@ ShowDesktop::~ShowDesktop()
 
 void ShowDesktop::showDesktop()
 {
-#if HAVE_X11
-    if (QX11Info::isPlatformX11()) {
-        if (m_wm2ShowingDesktop) {
-            NETRootInfo info(QX11Info::connection(), 0);
-#ifndef MINIMIZE_ONLY
-            m_down = !m_down;
-            info.setShowingDesktop(m_down);
-            //TODO: Use setShowingDesktop() of KWindowSystem
-#else
-            info.setShowingDesktop(true);
-#endif
-        }
-    }
-#endif
+
+    KWindowSystem::setShowingDesktop(!KWindowSystem::showingDesktop());
 }
 
