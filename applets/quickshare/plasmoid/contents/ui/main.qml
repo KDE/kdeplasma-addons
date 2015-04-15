@@ -86,6 +86,17 @@ DragDrop.DropArea {
         }
     }
 
+    ContentTracker {
+        id: contentTracker
+    }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            if (contentTracker.uri) {
+                sendData([contentTracker.uri], mimeDb.mimeTypeForUrl(contentTracker.uri).name);
+            }
+        }
+    }
     ShareDialog {
         id: shareDialog
         location: plasmoid.location
@@ -212,8 +223,8 @@ DragDrop.DropArea {
     states: [
         State {
             name: "idle"
-            PropertyChanges { target: icon; source: "edit-paste" }
-            PropertyChanges { target: tooltipArea; icon: "edit-paste" }
+            PropertyChanges { target: icon; source: contentTracker.uri ? "document-share" : "edit-paste" }
+            PropertyChanges { target: tooltipArea; icon: contentTracker.uri ? "document-share" : "edit-paste" }
         },
         State {
             name: "configuration"
