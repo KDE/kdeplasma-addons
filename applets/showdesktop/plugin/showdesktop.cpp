@@ -20,10 +20,6 @@
 #include <KGlobalSettings>
 #include <KWindowSystem>
 
-#if HAVE_X11
-#include <NETWM>
-#include <QtX11Extras/QX11Info>
-#endif
 
 ShowDesktop::ShowDesktop()
 {

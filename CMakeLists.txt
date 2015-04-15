@@ -25,9 +25,6 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui DBus Quick Qml 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Config ConfigWidgets CoreAddons I18n KIO KCMUtils Plasma Runner Service UnitConversion KDELibs4Support NewStuff Kross)
 
-find_package(X11)
-find_package(Qt5X11Extras ${REQUIRED_QT_VERSION} CONFIG)
-
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 #########################################################################
 
