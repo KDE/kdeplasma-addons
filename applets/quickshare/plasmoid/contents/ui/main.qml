@@ -92,7 +92,9 @@ DragDrop.DropArea {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            if (contentTracker.uri) {
+            if (root.state == "configuration") {
+                root.state = "idle";
+            } else if (contentTracker.uri) {
                 sendData([contentTracker.uri], mimeDb.mimeTypeForUrl(contentTracker.uri).name);
             }
         }

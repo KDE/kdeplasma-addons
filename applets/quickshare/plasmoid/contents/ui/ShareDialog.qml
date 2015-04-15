@@ -26,6 +26,7 @@ import org.kde.purpose 1.0 as Purpose
 PlasmaCore.Dialog
 {
     id: window
+    flags: Qt.WindowStaysOnTopHint
     property var inputData
     property bool running: false
     signal finished(var output, int error, string message)
