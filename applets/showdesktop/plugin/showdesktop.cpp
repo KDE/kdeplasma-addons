@@ -20,7 +20,7 @@
 #include <KGlobalSettings>
 #include <KWindowSystem>
 
-#ifdef HAVE_X11
+#if HAVE_X11
 #include <NETWM>
 #include <QtX11Extras/QX11Info>
 #endif
@@ -31,7 +31,7 @@ ShowDesktop::ShowDesktop()
      ,m_down(false)
 #endif
 {
-#ifdef HAVE_X11
+#if HAVE_X11
     if (QX11Info::isPlatformX11()) {
         NETRootInfo info(QX11Info::connection(), NET::Supported);
         m_wm2ShowingDesktop = info.isSupported(NET::WM2ShowingDesktop);
@@ -45,7 +45,7 @@ ShowDesktop::~ShowDesktop()
 
 void ShowDesktop::showDesktop()
 {
-#ifdef HAVE_X11
+#if HAVE_X11
     if (QX11Info::isPlatformX11()) {
         if (m_wm2ShowingDesktop) {
             NETRootInfo info(QX11Info::connection(), 0);
