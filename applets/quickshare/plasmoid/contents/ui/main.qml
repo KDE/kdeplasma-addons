@@ -61,11 +61,7 @@ DragDrop.DropArea {
 
     function filenameFromUrl(url) {
         var parts = url.split("/");
-        if (parts.length > 0) {
-            return parts[parts.length - 1];
-        } else {
-            return url;
-        }
+        return parts[parts.length - 1];
     }
 
     onDragEnter: {
