@@ -6,7 +6,7 @@ set(purposeplugin_SRCS
 )
 
 set(activitymanagerslc_xml org.kde.ActivityManager.SLC.xml)
-QT5_ADD_DBUS_INTERFACE(purposeplugin_SRCS ${activitymanagerslc_xml} activitymanagerslc_interface)
+qt5_add_dbus_interface(purposeplugin_SRCS ${activitymanagerslc_xml} activitymanagerslc_interface)
 
 add_library(purposeplugin SHARED ${purposeplugin_SRCS})
 

@@ -21,6 +21,7 @@
 #define CONTENTTRACKER_H
 
 #include <QObject>
+#include <QPointer>
 
 class QDBusPendingCallWatcher;
 class OrgKdeActivityManagerSLCInterface;
@@ -34,6 +35,7 @@ class ContentTracker : public QObject
 
 public:
     ContentTracker(QObject *parent = 0);
+    ~ContentTracker();
 
     QString uri() const;
     QString mimeType() const;
@@ -47,11 +49,10 @@ protected:
 
 private Q_SLOTS:
     void focusChanged(const QString &uri, const QString &mimetype, const QString &title);
-    void focusedResourceUriCallback(const QString &result);
     void serviceChange(const QString& name, const QString& oldOwner, const QString& newOwner);
 
 private:
-    OrgKdeActivityManagerSLCInterface *activityManagerIface;
+    QPointer<OrgKdeActivityManagerSLCInterface> m_activityManagerIface;
     QString m_uri;
     QString m_mimetype;
     QString m_title;

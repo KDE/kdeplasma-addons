@@ -39,9 +39,9 @@ ContentTracker::ContentTracker(QObject *parent)
             this, SLOT(serviceChange(QString,QString,QString)));
 }
 
-void ContentTracker::focusedResourceUriCallback(const QString &result)
+ContentTracker::~ContentTracker()
 {
-    qWarning()<<result;
+    delete m_activityManagerIface.data();
 }
 
 QString ContentTracker::uri() const
@@ -76,15 +76,16 @@ void ContentTracker::focusChanged(const QString &uri, const QString &mimetype, c
 
 void ContentTracker::connectToActivityManager()
 {
-    activityManagerIface = new OrgKdeActivityManagerSLCInterface("org.kde.ActivityManager", "/SLC",
+    delete m_activityManagerIface.data();
+    m_activityManagerIface = new OrgKdeActivityManagerSLCInterface("org.kde.ActivityManager", "/SLC",
                                     QDBusConnection::sessionBus());
-    if (activityManagerIface->isValid()) {
-        activityManagerIface->callWithCallback("focussedResourceURI", QList<QVariant>(), this, SLOT(focusedResourceUriCallback(const QString &)));
+    if (m_activityManagerIface->isValid()) {
 
-        connect(activityManagerIface, SIGNAL(focusChanged(const QString &, const QString &, const QString &)), this, SLOT(focusChanged(const QString &, const QString &, const QString &)));
+        connect(m_activityManagerIface.data(), &OrgKdeActivityManagerSLCInterface::focusChanged,
+                this, &ContentTracker::focusChanged);
     } else {
-        delete activityManagerIface;
-        activityManagerIface = 0;
+        delete m_activityManagerIface;
+        m_activityManagerIface = 0;
         qWarning() << "activityManager not reachable";
     }
 }
@@ -97,8 +98,7 @@ void ContentTracker::serviceChange(const QString& name, const QString& oldOwner,
 
     if (newOwner.isEmpty()) {
         //unregistered
-        delete activityManagerIface;
-        activityManagerIface = 0;
+        delete m_activityManagerIface.data();
     } else if (oldOwner.isEmpty()) {
         //registered
         connectToActivityManager();
