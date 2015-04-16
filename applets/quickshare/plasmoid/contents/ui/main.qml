@@ -95,7 +95,11 @@ DragDrop.DropArea {
             if (root.state == "configuration") {
                 root.state = "idle";
             } else if (contentTracker.uri) {
-                sendData([contentTracker.uri], mimeDb.mimeTypeForUrl(contentTracker.uri).name);
+                var mime = contentTracker.mimeType;
+                if (!mime) {
+                    mime = mimeDb.mimeTypeForUrl(contentTracker.uri).name;
+                }
+                sendData([contentTracker.uri], mime);
             }
         }
     }
