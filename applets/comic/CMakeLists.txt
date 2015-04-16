@@ -1,3 +1,5 @@
+add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.comic\")
+
 set(comic_SRCS
     comic.cpp
     comicmodel.cpp
