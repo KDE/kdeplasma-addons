@@ -90,7 +90,7 @@ Comment[zh_CN]=向远程服务器粘贴文本/图像
 Comment[zh_TW]=將文字/影像貼到遠端伺服器
 Encoding=UTF-8
 
-Icon=edit-paste
+Icon=document-share
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 

@@ -59,6 +59,15 @@ DragDrop.DropArea {
         return mimeDb.mimeTypeForUrl(urls[0]);
     }
 
+    function filenameFromUrl(url) {
+        var parts = url.split("/");
+        if (parts.length > 0) {
+            return parts[parts.length - 1];
+        } else {
+            return url;
+        }
+    }
+
     onDragEnter: {
         root.state = "idle";
         var mimetype;
@@ -229,8 +238,10 @@ DragDrop.DropArea {
     states: [
         State {
             name: "idle"
-            PropertyChanges { target: icon; source: contentTracker.uri ? "document-share" : "edit-paste" }
-            PropertyChanges { target: tooltipArea; icon: contentTracker.uri ? "document-share" : "edit-paste" }
+            PropertyChanges { target: icon; source: "document-share" }
+            PropertyChanges { target: tooltipArea; icon: "document-share" }
+            PropertyChanges { target: tooltipArea; mainText: i18n("Share") }
+            PropertyChanges { target: tooltipArea; subText: contentTracker.uri ? i18n("Upload %1 to an online service", contentTracker.title ? contentTracker.title : filenameFromUrl(contentTracker.uri)) :  i18n("Drop text or an image onto me to upload it to an online service.") }
         },
         State {
             name: "configuration"
