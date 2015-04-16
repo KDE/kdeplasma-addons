@@ -23,6 +23,7 @@
 #include <QPixmap>
 #include <QBuffer>
 #include <qqml.h>
+#include "contenttracker.h"
 
 class PurposeHelper : public QObject
 {
@@ -65,6 +66,7 @@ public:
     virtual void registerTypes(const char *uri) Q_DECL_OVERRIDE
     {
         qmlRegisterSingletonType<PurposeHelper>("org.kde.plasma.private.purpose", 1, 0, "PurposeHelper", [](QQmlEngine*, QJSEngine*) -> QObject* { return new PurposeHelper; });
+        qmlRegisterType<ContentTracker>("org.kde.plasma.private.purpose", 1, 0, "ContentTracker");
     }
 };
 

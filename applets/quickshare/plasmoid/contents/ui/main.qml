@@ -59,6 +59,11 @@ DragDrop.DropArea {
         return mimeDb.mimeTypeForUrl(urls[0]);
     }
 
+    function filenameFromUrl(url) {
+        var parts = url.split("/");
+        return parts[parts.length - 1];
+    }
+
     onDragEnter: {
         root.state = "idle";
         var mimetype;
@@ -86,6 +91,23 @@ DragDrop.DropArea {
         }
     }
 
+    ContentTracker {
+        id: contentTracker
+    }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            if (root.state == "configuration") {
+                root.state = "idle";
+            } else if (contentTracker.uri) {
+                var mime = contentTracker.mimeType;
+                if (!mime) {
+                    mime = mimeDb.mimeTypeForUrl(contentTracker.uri).name;
+                }
+                sendData([contentTracker.uri], mime);
+            }
+        }
+    }
     ShareDialog {
         id: shareDialog
         location: plasmoid.location
@@ -212,8 +234,10 @@ DragDrop.DropArea {
     states: [
         State {
             name: "idle"
-            PropertyChanges { target: icon; source: "edit-paste" }
-            PropertyChanges { target: tooltipArea; icon: "edit-paste" }
+            PropertyChanges { target: icon; source: "document-share" }
+            PropertyChanges { target: tooltipArea; icon: "document-share" }
+            PropertyChanges { target: tooltipArea; mainText: i18n("Share") }
+            PropertyChanges { target: tooltipArea; subText: contentTracker.uri ? i18n("Upload %1 to an online service", contentTracker.title ? contentTracker.title : filenameFromUrl(contentTracker.uri)) :  i18n("Drop text or an image onto me to upload it to an online service.") }
         },
         State {
             name: "configuration"
