@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 import QtQuick 2.2
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
@@ -51,6 +52,24 @@ Item {
     property int digitH: ((height / 2) * digits < width ? height : ((width - (digits - 1)) / digits) * 2);
     property int digitW: digitH / 2;
     property bool suspended: false;
+
+    Plasmoid.toolTipMainText: {
+        var timerName = "";
+        if (showTitle && title != "") {
+            timerName = title;
+        } else {
+            timerName = i18n("Timer");
+        }
+
+        var toolTipText = "";
+        if (running) {
+            toolTipText = i18n("%1 is running", timerName);
+        } else {
+            toolTipText = i18n("%1 not running", timerName);
+        }
+        return toolTipText;
+    }
+    Plasmoid.toolTipSubText:  i18np("Remaining time left: %1 second", "Remaining time left: %1 seconds", seconds);
 
     PlasmaCore.Svg {
         id: timerSvg
@@ -175,9 +194,13 @@ Item {
         onClicked: {
             if (parent.running) {
                  stopTimer();
-            }else {
+            } else {
                  startTimer();
             }
+        }
+        PlasmaCore.ToolTipArea {
+            anchors.fill: parent
+            subText: running ? i18n("Timer is running") : i18n("Use mouse wheel to change digits or choose from predefined timers in the context menu");
         }
     }
 
@@ -204,17 +227,9 @@ Item {
         var service = notificationSource.serviceForSource("notification");
         var operation = service.operationDescription("createNotification");
 
-        if (title != "") {
-            operation["appName"] = title;
-        } else {
-            operation["appName"] = i18n("Timer");
-        }
+        operation.appName = title || i18n("Timer");
         operation["appIcon"] = "chronometer";
-        if (notificationText != "") {
-            operation["summary"] = notificationText;
-        } else {
-            operation["summary"] = "Timer finished";
-        }
+        operation.summary = notificationText || i18n("Timer finished")
         operation["body"] = "";
         operation["timeout"] = 2000;
 
