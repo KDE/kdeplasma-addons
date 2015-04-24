@@ -108,6 +108,25 @@ DragDrop.DropArea {
             }
         }
     }
+
+    ShowUrlDialog {
+        id: showUrl
+        location: plasmoid.location
+        visualParent: parent
+        onCopyUrl: {
+            clipboard.content = showUrl.url;
+        }
+    }
+
+    function copyUrl(url) {
+        if (plasmoid.configuration.copyAutomatically)
+            clipboard.content = url;
+        else {
+            showUrl.url = url
+            showUrl.visible = true
+        }
+    }
+
     ShareDialog {
         id: shareDialog
         location: plasmoid.location
@@ -119,11 +138,11 @@ DragDrop.DropArea {
             }
         }
         onFinished: {
-            if (error==0) {
+            if (error==0 && output.url !== "") {
                 var resultUrl = output.url;
-                console.log("Received", resultUrl, output.url)
+                console.log("Received", resultUrl)
                 root.url = resultUrl;
-                clipboard.content = resultUrl;
+                copyUrl(resultUrl)
 
                 root.pasteUrls.push(resultUrl);
                 while (plasmoid.configuration.historySize <= root.pasteUrls.length && root.pasteUrls.length !== 0) {

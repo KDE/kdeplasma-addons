@@ -25,12 +25,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 Item
 {
     id: configRoot
-    property string cfg_text
-    property string cfg_image
     property alias cfg_historySize: historySpin.value
-
-    onCfg_textChanged: textServicesCombo.currentIndex = textServicesCombo.find(configRoot.cfg_text);
-    onCfg_imageChanged: imageServicesCombo.currentIndex = imageServicesCombo.find(configRoot.cfg_image);
+    property alias cfg_copyAutomatically: copyAutomatically.checked
 
     QtLayouts.GridLayout {
         anchors {
@@ -40,32 +36,15 @@ Item
         }
         columns: 2
 
-        PlasmaCore.DataSource {
-            id: shareDataSource
-            engine: "org.kde.plasma.dataengine.share"
-            connectedSources: ["Mimetypes"]
-        }
-
-        QtControls.Label { text: i18n("Text Service:") }
-        QtControls.ComboBox {
-            id: textServicesCombo
-            enabled: shareDataSource.data["Mimetypes"] != null
-            model: shareDataSource.data["Mimetypes"]["text/*"]
-            onCurrentTextChanged: configRoot.cfg_text = currentText
-        }
-
-        QtControls.Label { text: i18n("Image Service:") }
-        QtControls.ComboBox {
-            id: imageServicesCombo
-            enabled: shareDataSource.data["Mimetypes"] != null
-            model: shareDataSource.data["Mimetypes"]["image/*"]
-            onCurrentTextChanged: configRoot.cfg_image = currentText
-        }
-
         QtControls.Label { text: i18n("History Size:") }
         QtControls.SpinBox {
             id: historySpin
             value: 3
+        }
+
+        QtControls.Label { text: i18n("Copy Automatically:") }
+        QtControls.CheckBox {
+            id: copyAutomatically
         }
     }
 }

@@ -6,10 +6,8 @@
   <kcfgfile name=""/>
 
   <group name="Appearance">
-      <entry name="text" type="String"> <default>kde</default> </entry>
-      <entry name="image" type="String"> <default>wstaw</default> </entry>
-
-      <entry name="historySize" type="int"> <default>3</default> </entry>
+      <entry name="copyAutomatically" type="bool"><default>false</default></entry>
+      <entry name="historySize" type="int"><default>3</default></entry>
   </group>
 
 </kcfg>
