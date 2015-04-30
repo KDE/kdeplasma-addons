@@ -107,7 +107,7 @@ Comment[x-test]=xxComic Package Structurexx
 Comment[zh_CN]=连环画包结构
 Comment[zh_TW]=漫畫套件結構
 Type=Service
-X-KDE-ServiceTypes=Plasma/PackageStructure
+X-KDE-ServiceTypes=KPackage/PackageStructure
 
 X-KDE-Library=plasma_packagestructure_comic
 X-KDE-PluginInfo-Author=Petri Damstén
