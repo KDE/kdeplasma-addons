@@ -52,7 +52,7 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
         addMatch(i18n("Today's date is %1", date), date, context, QStringLiteral("view-calendar-day"));
     } else if (term.startsWith(dateWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
-        QString tz = term.right(term.length() - dateWord.length());
+        QString tz = term.right(term.length() - dateWord.length() - 1);
         QDateTime dt = datetime(tz, tzName);
         if (dt.isValid()) {
             const QString date = QLocale().toString(dt.date());
@@ -63,7 +63,7 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
         addMatch(i18n("Current time is %1", time), time, context, QStringLiteral("clock"));
     } else if (term.startsWith(timeWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
         QString tzName;
-        QString tz = term.right(term.length() - timeWord.length());
+        QString tz = term.right(term.length() - timeWord.length() - 1);
         QDateTime dt = datetime(tz, tzName);
         if (dt.isValid()) {
             const QString time = QLocale().toString(dt.time());
