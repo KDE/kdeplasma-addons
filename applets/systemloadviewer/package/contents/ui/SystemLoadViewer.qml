@@ -82,7 +82,7 @@ Item {
     PlasmaCore.DataSource {
         id: apps
         engine: "apps"
-        connectedSources: ["ksysguard.desktop"]
+        connectedSources: ["org.kde.ksysguard.desktop"]
     }
 
     PlasmaCore.DataSource {
@@ -235,7 +235,7 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                kRun.openUrl(apps.data["ksysguard.desktop"].entryPath)
+                kRun.openUrl(apps.data["org.kde.ksysguard.desktop"].entryPath)
             }
         }
     }
