@@ -16,18 +16,19 @@
 *****************************************************************************/
 
 import QtQuick 2.0
-
+import QtQuick.Layouts 1.1
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
    id: konsoleProfiles
 
-    property int implicitWidth: 290
-    property int implicitHeight: 340
+    Plasmoid.switchWidth: units.gridUnit * 13
+    Plasmoid.switchHeight: units.gridUnit * 16
 
-    property int minimumWidth: 200
-    property int minimumHeight: 300
+    Layout.minimumWidth: units.gridUnit * 12
+    Layout.minimumHeight: units.gridUnit * 15
 
     function popupEventSlot(shown) {
         if (shown) {

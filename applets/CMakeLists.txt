@@ -24,6 +24,7 @@ add_subdirectory(showdesktop)
 plasma_install_package(webbrowser org.kde.plasma.webbrowser)
 
 add_subdirectory(comic)
+add_subdirectory(konsoleprofiles)
 
 #This applet is disabled because although ported it does not work
 # add_subdirectory(eyes)
