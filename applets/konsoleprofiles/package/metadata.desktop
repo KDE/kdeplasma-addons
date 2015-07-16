@@ -117,7 +117,7 @@ X-Plasma-MainScript=ui/konsoleprofiles.qml
 
 X-KDE-PluginInfo-Author=Shaun Reich
 X-KDE-PluginInfo-Email=shaun.reich@kdemail.net
-X-KDE-PluginInfo-Name=konsoleprofiles
+X-KDE-PluginInfo-Name=org.kde.plasma.konsoleprofiles
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://userbase.kde.org/Plasma
 X-KDE-PluginInfo-Category=Utilities
