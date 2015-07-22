@@ -35,6 +35,8 @@ DragDrop.DropArea {
     Layout.minimumWidth: 0
     Layout.minimumHeight: 0
 
+    preventStealing: true
+
     property string url: ""
     property string errorMessage: ""
 
