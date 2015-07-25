@@ -20,10 +20,8 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.3 as QtControls
-import QtQuick.Dialogs 1.1 as QtDialogs
 import QtQuick.Layouts 1.1 as QtLayouts
 
-import org.kde.kquickcontrols 2.0 as KQC
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
