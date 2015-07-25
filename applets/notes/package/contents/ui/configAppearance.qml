@@ -94,7 +94,6 @@ QtLayouts.ColumnLayout {
                         }
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
-                        font.pointSize: fontSizeSpinner.value
                         wrapMode: Text.WordWrap
                         elide: Text.ElideRight
                         text: {
