@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Application Desktop
+Name=Application Dashboard
 Comment=A fullscreen application launcher
 Type=Service
-Icon=preferences-system-windows
+Icon=start-here-kde
 X-KDE-ServiceTypes=Plasma/Applet
 
 X-Plasma-API=declarativeappletscript
