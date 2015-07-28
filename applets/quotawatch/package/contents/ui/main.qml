@@ -29,11 +29,21 @@ import org.kde.kio 1.0 as Kio
 import org.kde.plasma.private.quotawatch 0.1
 
 Item {
+
+    Layout.minimumWidth: units.gridUnit * 4
+    Layout.minimumHeight: units.gridUnit * 4
+
+    Plasmoid.switchWidth: units.gridUnit * 10
+    Plasmoid.switchHeight: units.gridUnit * 10
+
     QuotaWatch {
         id: quotaMonitor
     }
 
-    QtControls.Label {
+    Plasmoid.compactRepresentation: QtControls.Label {
+        QtControls.Label { text: ":o" }
+    }
+    Plasmoid.fullRepresentation: QtControls.Label {
         id: root
 
         text: quotaMonitor.status
@@ -41,10 +51,6 @@ Item {
         width: units.gridUnit * 14
         height: units.gridUnit * 14
 
-//         Layout.minimumWidth: units.gridUnit * 4
-//         Layout.minimumHeight: units.gridUnit * 4
-//         Plasmoid.switchWidth: units.gridUnit * 10
-//         Plasmoid.switchHeight: units.gridUnit * 5
 
 //         Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
