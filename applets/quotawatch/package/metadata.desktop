@@ -1,0 +1,23 @@
+[Desktop Entry]
+Name=Quota Watch
+Comment=Quota Watch
+Icon=knotes
+Type=Service
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-NotificationArea=true
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-PluginInfo-Author=Dominik Haumann
+X-KDE-PluginInfo-Email=dhaumann@kde.org
+X-KDE-PluginInfo-Name=org.kde.plasma.quotawatch
+X-KDE-PluginInfo-Version=2.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-Requires-FileDialog=Unused
+X-Plasma-Requires-LaunchApp=Unused
+X-Plasma-StandAloneApp=true
