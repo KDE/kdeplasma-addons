@@ -19,8 +19,11 @@
 #define PLASMA_QUOTA_WATCH_H
 
 #include <QObject>
+#include <QList>
+#include <QQmlListProperty>
 
 class QTimer;
+class QuotaItem;
 
 class QuotaWatch : public QObject
 {
@@ -30,13 +33,19 @@ class QuotaWatch : public QObject
     Q_PROPERTY(QString status READ status WRITE setQuota NOTIFY statusChanged)
     Q_PROPERTY(QString toolTip READ toolTip WRITE setToolTip NOTIFY toolTipChanged)
 
+    Q_PROPERTY(QQmlListProperty<QuotaItem> quotaItems READ quotaItems)
+
 public:
-    QuotaWatch();
+    QuotaWatch(QObject * parent = nullptr);
 
     bool quotaInstalled();
 
     QString status() const;
     QString toolTip() const;
+
+    QQmlListProperty<QuotaItem> quotaItems();
+    int quotaItemCount() const;
+    QuotaItem * quotaItem(int index) const;
 
 public Q_SLOTS:
     void setToolTip(const QString & toolTip);
@@ -51,6 +60,7 @@ private:
     QTimer * m_timer;
     QString m_status;
     QString m_toolTip;
+    QList<QuotaItem *> m_items;
 };
 
 #endif // PLASMA_QUOTA_WATCH_H

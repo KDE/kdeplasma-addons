@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include "quotawatch.h"
+#include "quotaitem.h"
 
 #include <KLocalizedString>
 #include <KFormat>
@@ -26,13 +27,32 @@
 #include <QStandardPaths>
 #include <QDebug>
 
-QuotaWatch::QuotaWatch()
-    : QObject()
+QuotaWatch::QuotaWatch(QObject * parent)
+    : QObject(parent)
     , m_timer(new QTimer(this))
 {
     connect(m_timer, &QTimer::timeout, this, &QuotaWatch::checkQuota);
     m_timer->start(5 * 1000);
     checkQuota();
+}
+
+QQmlListProperty<QuotaItem> QuotaWatch::quotaItems()
+{
+    return QQmlListProperty<QuotaItem>(this, m_items);
+}
+
+int QuotaWatch::quotaItemCount() const
+{
+    return m_items.count();
+}
+
+QuotaItem * QuotaWatch::quotaItem(int index) const
+{
+    if (index < 0 || index >= m_items.count()) {
+        return nullptr;
+    }
+
+    return m_items.at(index);
 }
 
 bool QuotaWatch::quotaInstalled()
