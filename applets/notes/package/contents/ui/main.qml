@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2014 David Edmundson <davidedmundson@kde.org>
-    Copyright (C) 2014 Kai Uwe Broulik <kde@privat.broulik.de>
+    Copyright (C) 2014, 2015 Kai Uwe Broulik <kde@privat.broulik.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,8 +18,10 @@
 */
 
 import QtQuick 2.1
-import QtQuick.Controls 1.1 as QtControls
+import QtQuick.Controls 1.3 as QtControls
 import QtQuick.Layouts 1.1
+
+import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -43,7 +45,7 @@ PlasmaCore.SvgItem {
     height: units.gridUnit * 14
     Layout.minimumWidth: units.gridUnit * 4
     Layout.minimumHeight: units.gridUnit * 4
-    Plasmoid.switchWidth: units.gridUnit * 10
+    Plasmoid.switchWidth: units.gridUnit * 12 // make sure the formatting buttons never leak outside
     Plasmoid.switchHeight: units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
@@ -55,8 +57,23 @@ PlasmaCore.SvgItem {
     //note is of type Note
     property QtObject note: noteManager.loadNote(plasmoid.configuration.noteId);
 
+    Timer {
+        id: forceFocusTimer
+        interval: 1
+        onTriggered: mainTextArea.forceActiveFocus()
+    }
+
     Connections {
         target: plasmoid
+        onExpandedChanged: {
+            if (expanded) {
+                mainTextArea.forceActiveFocus()
+            }
+        }
+        onActivated: {
+            // FIXME doing forceActiveFocus here directly doesn't work
+            forceFocusTimer.restart()
+        }
         onExternalData: {
             mainTextArea.text = data.replace(/\n/g, "<br>")
         }
@@ -64,6 +81,31 @@ PlasmaCore.SvgItem {
 
     NoteManager {
         id: noteManager
+    }
+
+    Plasmoid.compactRepresentation: DragDrop.DropArea {
+        id: compactDropArea
+        onDragEnter: activationTimer.restart()
+        onDragLeave: activationTimer.stop()
+
+        Timer {
+            id: activationTimer
+            interval: 250 // matches taskmanager delay
+            onTriggered: plasmoid.expanded = true
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: plasmoid.expanded = !plasmoid.expanded
+
+            PlasmaCore.IconItem {
+                anchors.fill: parent
+                source: "knotes"
+                colorGroup: PlasmaCore.ColorScope.colorGroup
+                active: parent.containsMouse
+            }
+        }
     }
 
     PlasmaComponents.TextArea {
@@ -84,6 +126,8 @@ PlasmaCore.SvgItem {
         backgroundVisible: false
         frameVisible: false
         textFormat: TextEdit.RichText
+
+        Keys.onEscapePressed: plasmoid.expanded = false
 
         style: PlasmaStyle.TextAreaStyle {
             //this is deliberately _NOT_ the theme color as we are over a known bright background
@@ -106,7 +150,29 @@ PlasmaCore.SvgItem {
         }
     }
 
-     DocumentHandler {
+    DragDrop.DropArea {
+        id: dropArea
+        anchors.fill: mainTextArea
+
+        function positionOfDrop(event) {
+            return mainTextArea.positionAt(event.x, event.y + mainTextArea.flickableItem.contentY)
+        }
+
+        onDrop: {
+            var text = event.mimeData.text
+            mainTextArea.insert(positionOfDrop(event), text)
+            event.accept(Qt.CopyAction)
+        }
+        onDragMove: {
+            // there doesn't seem to be a "just move the cursor", so we move
+            // the selection and then unselect so the cursor follows the mouse
+            mainTextArea.moveCursorSelection(positionOfDrop(event))
+            mainTextArea.deselect()
+        }
+        onDragEnter: mainTextArea.forceActiveFocus()
+    }
+
+    DocumentHandler {
         id: documentHandler
         target: mainTextArea
         cursorPosition: mainTextArea.cursorPosition
@@ -114,7 +180,7 @@ PlasmaCore.SvgItem {
         selectionEnd: mainTextArea.selectionEnd
     }
 
-    Row {
+    RowLayout {
         id: fontButtons
         spacing: units.smallSpacing
         anchors {
@@ -178,48 +244,16 @@ PlasmaCore.SvgItem {
             onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
             Accessible.name: tooltip
         }
-        PlasmaComponents.ToolButton {
-            tooltip: i18n("Align left")
-            iconSource: "format-justify-left"
-            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + 2 * horizontalMargins ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
-            enabled: opacity > 0
 
-            checked: documentHandler.alignment === Qt.AlignLeft
-            onClicked: documentHandler.alignment = Qt.AlignLeft
-            Accessible.name: tooltip
+        Item { // spacer
+            Layout.fillWidth: true
+            Layout.fillHeight: true
         }
-        PlasmaComponents.ToolButton {
-            tooltip: i18n("Align center")
-            iconSource: "format-justify-center"
-            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + 2 * horizontalMargins ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
-            enabled: opacity > 0
 
-            checked: documentHandler.alignment === Qt.AlignCenter
-            onClicked: documentHandler.alignment = Qt.AlignCenter
-            Accessible.name: tooltip
-        }
         PlasmaComponents.ToolButton {
-            tooltip: i18n("Align right")
-            iconSource: "format-justify-right"
-            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + 2 * horizontalMargins ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
-            enabled: opacity > 0
-
-            checked: documentHandler.alignment === Qt.AlignRight
-            onClicked: documentHandler.alignment = Qt.AlignRight
-            Accessible.name: tooltip
-        }
-        PlasmaComponents.ToolButton {
-            tooltip: i18n("Justified")
-            iconSource: "format-justify-fill"
-            opacity: toggleFormatBarButton.checked && root.width >= fontButtons.implicitWidth + 2 * horizontalMargins ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
-            enabled: opacity > 0
-
-            checked: documentHandler.alignment === Qt.AlignJustify
-            onClicked: documentHandler.alignment = Qt.AlignJustify
+            tooltip: i18n("Notes Settings...")
+            iconSource: "configure"
+            onClicked: plasmoid.action("configure").trigger()
             Accessible.name: tooltip
         }
     }
