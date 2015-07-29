@@ -31,9 +31,9 @@ QuotaWatch::QuotaWatch(QObject * parent)
     : QObject(parent)
     , m_timer(new QTimer(this))
 {
-    connect(m_timer, &QTimer::timeout, this, &QuotaWatch::checkQuota);
+    connect(m_timer, &QTimer::timeout, this, &QuotaWatch::updateQuota);
     m_timer->start(5 * 1000);
-    checkQuota();
+    updateQuota();
 }
 
 QQmlListProperty<QuotaItem> QuotaWatch::quotaItems()
@@ -97,14 +97,9 @@ static bool isQuotaLine(const QString & line)
     return false;
 }
 
-void QuotaWatch::checkQuota()
+static bool runQuotaApp(QString & stdout)
 {
-    if (!quotaInstalled()) {
-        setQuota(i18n("Quota missing"));
-        return;
-    }
-
-    // Try to run 'rc --is-indexing'
+    // Try to run 'quota'
     const QStringList args = QStringList()
         << QStringLiteral("--show-mntpoint")      // second entry is e.g. '/home'
         << QStringLiteral("--hide-device")        // hide e.g. /dev/sda3
@@ -112,19 +107,46 @@ void QuotaWatch::checkQuota()
         << QStringLiteral("--all-nfs")            // show all mount points
         << QStringLiteral("--no-wrap")            // do not wrap long lines
         << QStringLiteral("--quiet-refuse");      // no not print error message when NFS server does not respond
+
     QProcess proc;
     proc.start(QStringLiteral("quota"), args);
 
     const bool success = proc.waitForStarted() && proc.waitForFinished();
     if (!success) {
-        setQuota(i18n("Running quota failed"));
-        return;
+        return false;
     }
 
     // get stdout
     proc.closeWriteChannel();
-    const QString rawData = QString::fromLocal8Bit(proc.readAllStandardOutput());
-    const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
+    stdout = QString::fromLocal8Bit(proc.readAllStandardOutput());
+
+    return true;
+}
+
+void QuotaWatch::updateQuota()
+{
+    for (auto item : m_items) {
+        item->deleteLater();
+    }
+    m_items.clear();
+    emit quotaItemsChaged();
+
+    if (!quotaInstalled()) {
+        setQuota(i18n("Quota missing"));
+        return;
+    }
+
+    // get quota output
+    QString rawData;
+    const bool success = runQuotaApp(rawData);
+    if (!success) {
+        setQuota(i18n("Running quota failed"));
+        return;
+    }
+
+    QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
+    lines += lines;
+    lines += lines;
 
     // Example output: `quota`
     // Disk quotas for user dh (uid 1000):
@@ -153,19 +175,30 @@ void QuotaWatch::checkQuota()
 
         // 'quota' uses kilo bytes -> factor 1024
         // NOTE: int is not large enough, hence qint64
-        const qint64 usage = parts[1].toLongLong() * 1024;
+        const qint64 used = parts[1].toLongLong() * 1024;
         const qint64 softLimit = parts[2].toLongLong() * 1024;
+        const qreal percent = used * 100.0 / softLimit;
 
         KFormat fmt;
         QString quotaLine = i18n("%1: %2% (%3 out of %4 used)",
                                  parts[0],
-                                 qRound(usage * 100.0 / softLimit),
-                                 fmt.formatByteSize(usage),
+                                 qRound(percent),
+                                 fmt.formatByteSize(used),
                                  fmt.formatByteSize(softLimit));
         quotas.append(quotaLine);
+
+        auto item = new QuotaItem();
+        item->setIconName(QStringLiteral("network-server-database"));
+        item->setMountPoint(parts[0]);
+        item->setUsage(percent);
+        item->setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\%'", "%1: %2%", parts[0], qRound(percent)));
+        item->setDetailString(i18nc("e.g.: 12 GiB of 20 GiB used", "%1 of %2 used", fmt.formatByteSize(used), fmt.formatByteSize(softLimit)));
+
+        m_items.append(item);
+        emit quotaItemsChaged();
     }
 
-    qDebug() << "QUOTAS:" << quotas;
+//     qDebug() << "QUOTAS:" << quotas;
     if (!quotas.isEmpty()) {
         setQuota(i18n("Quota OK"));
         setToolTip(quotas.join(QLatin1Char('\n')));

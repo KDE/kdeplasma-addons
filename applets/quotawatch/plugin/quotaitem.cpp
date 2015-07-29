@@ -26,8 +26,13 @@
 #include <QStandardPaths>
 #include <QDebug>
 
-QuotaItem::QuotaItem()
-    : QObject()
+QuotaItem::QuotaItem(QObject * parent)
+    : QObject(parent)
+    , m_iconName()
+    , m_mountPoint()
+    , m_usage(0.0)
+    , m_mountString()
+    , m_detailString()
 {
 }
 
@@ -57,16 +62,16 @@ void QuotaItem::setUsage(qreal usage)
     }
 }
 
-QString QuotaItem::icon() const
+QString QuotaItem::iconName() const
 {
-    return m_icon;
+    return m_iconName;
 }
 
-void QuotaItem::setIcon(const QString & icon)
+void QuotaItem::setIconName(const QString & name)
 {
-    if (m_icon != icon) {
-        m_icon = icon;
-        emit iconChanged();
+    if (m_iconName != name) {
+        m_iconName = name;
+        emit iconNameChanged();
     }
 }
 
@@ -83,15 +88,15 @@ void QuotaItem::setMountString(const QString & mountString)
     }
 }
 
-QString QuotaItem::usageString() const
+QString QuotaItem::detailString() const
 {
-    return m_usageString;
+    return m_detailString;
 }
 
-void QuotaItem::setUsageString(const QString & usageString)
+void QuotaItem::setDetailString(const QString & detailString)
 {
-    if (m_usageString != usageString) {
-        m_usageString = usageString;
-        emit usageStringChanged();
+    if (m_detailString != detailString) {
+        m_detailString = detailString;
+        emit detailStringChanged();
     }
 }

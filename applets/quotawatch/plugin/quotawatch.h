@@ -33,7 +33,7 @@ class QuotaWatch : public QObject
     Q_PROPERTY(QString status READ status WRITE setQuota NOTIFY statusChanged)
     Q_PROPERTY(QString toolTip READ toolTip WRITE setToolTip NOTIFY toolTipChanged)
 
-    Q_PROPERTY(QQmlListProperty<QuotaItem> quotaItems READ quotaItems)
+    Q_PROPERTY(QQmlListProperty<QuotaItem> quotaItems READ quotaItems NOTIFY quotaItemsChaged)
 
 public:
     QuotaWatch(QObject * parent = nullptr);
@@ -44,17 +44,18 @@ public:
     QString toolTip() const;
 
     QQmlListProperty<QuotaItem> quotaItems();
-    int quotaItemCount() const;
+    Q_INVOKABLE int quotaItemCount() const;
     QuotaItem * quotaItem(int index) const;
 
 public Q_SLOTS:
     void setToolTip(const QString & toolTip);
     void setQuota(const QString & quotaString);
-    void checkQuota();
+    void updateQuota();
 
 Q_SIGNALS:
     void statusChanged();
     void toolTipChanged();
+    void quotaItemsChaged();
 
 private:
     QTimer * m_timer;

@@ -26,15 +26,15 @@ class QuotaItem : public QObject
     Q_OBJECT
 
     // needed in QML
-    Q_PROPERTY(QString icon READ icon WRITE setIcon NOTIFY iconChanged)
+    Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
     Q_PROPERTY(QString mountString READ mountString WRITE setMountString NOTIFY mountStringChanged)
-    Q_PROPERTY(QString usageString READ usageString WRITE setUsageString NOTIFY usageStringChanged)
+    Q_PROPERTY(QString detailString READ detailString WRITE setDetailString NOTIFY detailStringChanged)
 
     Q_PROPERTY(QString mountPoint READ mountPoint WRITE setMountPoint NOTIFY mountPointChanged)
     Q_PROPERTY(qreal usage READ usage WRITE setUsage NOTIFY usageChanged)
 
 public:
-    QuotaItem();
+    explicit QuotaItem(QObject * parent = nullptr);
 
 public Q_SLOTS:
     QString mountPoint() const;
@@ -44,28 +44,28 @@ public Q_SLOTS:
     void setUsage(qreal usage);
 
 public Q_SLOTS:
-    QString icon() const;
-    void setIcon(const QString & icon);
+    QString iconName() const;
+    void setIconName(const QString & name);
 
     QString mountString() const;
     void setMountString(const QString & mountString);
 
-    QString usageString() const;
-    void setUsageString(const QString & usageString);
+    QString detailString() const;
+    void setDetailString(const QString & detailString);
 
 Q_SIGNALS:
     void mountPointChanged();
     void usageChanged();
-    void iconChanged();
+    void iconNameChanged();
     void mountStringChanged();
-    void usageStringChanged();
+    void detailStringChanged();
 
 private:
-    QString m_icon;
+    QString m_iconName;
     QString m_mountPoint;
     qreal m_usage;
     QString m_mountString;
-    QString m_usageString;
+    QString m_detailString;
 };
 
 #endif // PLASMA_QUOTA_ITEM_H

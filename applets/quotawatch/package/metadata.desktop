@@ -1,12 +1,13 @@
 [Desktop Entry]
-Name=Quota Watch
-Comment=Quota Watch
+Name=File System Quota
+Comment=Shows file system quota
 Icon=knotes
 Type=Service
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
 X-Plasma-NotificationArea=true
+X-Plasma-NotificationAreaCategory=SystemServices
 
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-PluginInfo-Author=Dominik Haumann
