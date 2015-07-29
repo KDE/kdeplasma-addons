@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=Application Dashboard
+Comment=A fullscreen application launcher
+Type=Service
+Icon=start-here-kde
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-Provides=org.kde.plasma.launchermenu
+X-Plasma-RootPath=org.kde.plasma.kicker
+
+X-KDE-PluginInfo-Author=Eike Hein
+X-KDE-PluginInfo-Email=hein@kde.org
+X-KDE-PluginInfo-Name=org.kde.plasma.kickerdash
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Category=Application Launchers
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL v2+
+X-KDE-PluginInfo-EnabledByDefault=true
