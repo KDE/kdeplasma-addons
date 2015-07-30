@@ -160,7 +160,7 @@ PlasmaCore.SvgItem {
 
         onDrop: {
             var text = event.mimeData.text
-            mainTextArea.insert(positionOfDrop(event), text)
+            mainTextArea.insert(positionOfDrop(event), text.replace(/\n/g, "<br>"))
             event.accept(Qt.CopyAction)
         }
         onDragMove: {
