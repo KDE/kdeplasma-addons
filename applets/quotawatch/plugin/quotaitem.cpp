@@ -17,49 +17,15 @@
  */
 #include "quotaitem.h"
 
-#include <KLocalizedString>
-#include <KFormat>
-
-#include <QTimer>
-#include <QProcess>
-#include <QRegularExpression>
-#include <QStandardPaths>
 #include <QDebug>
 
-QuotaItem::QuotaItem(QObject * parent)
-    : QObject(parent)
-    , m_iconName()
+QuotaItem::QuotaItem()
+    : m_iconName()
     , m_mountPoint()
     , m_usage(0)
     , m_mountString()
     , m_usedString()
 {
-}
-
-QString QuotaItem::mountPoint() const
-{
-    return m_mountPoint;
-}
-
-void QuotaItem::setMountPoint(const QString & mountPoint)
-{
-    if (m_mountPoint != mountPoint) {
-        m_mountPoint = mountPoint;
-        emit mountPointChanged();
-    }
-}
-
-int QuotaItem::usage() const
-{
-    return m_usage;
-}
-
-void QuotaItem::setUsage(int usage)
-{
-    if (m_usage != usage) {
-        m_usage = usage;
-        emit usageChanged();
-    }
 }
 
 QString QuotaItem::iconName() const
@@ -69,10 +35,27 @@ QString QuotaItem::iconName() const
 
 void QuotaItem::setIconName(const QString & name)
 {
-    if (m_iconName != name) {
-        m_iconName = name;
-        emit iconNameChanged();
-    }
+    m_iconName = name;
+}
+
+QString QuotaItem::mountPoint() const
+{
+    return m_mountPoint;
+}
+
+void QuotaItem::setMountPoint(const QString & mountPoint)
+{
+    m_mountPoint = mountPoint;
+}
+
+int QuotaItem::usage() const
+{
+    return m_usage;
+}
+
+void QuotaItem::setUsage(int usage)
+{
+    m_usage = usage;
 }
 
 QString QuotaItem::mountString() const
@@ -82,10 +65,7 @@ QString QuotaItem::mountString() const
 
 void QuotaItem::setMountString(const QString & mountString)
 {
-    if (m_mountString != mountString) {
-        m_mountString = mountString;
-        emit mountStringChanged();
-    }
+    m_mountString = mountString;
 }
 
 QString QuotaItem::usedString() const
@@ -95,10 +75,7 @@ QString QuotaItem::usedString() const
 
 void QuotaItem::setUsedString(const QString & usedString)
 {
-    if (m_usedString != usedString) {
-        m_usedString = usedString;
-        emit usedStringChanged();
-    }
+    m_usedString = usedString;
 }
 
 QString QuotaItem::freeString() const
@@ -108,16 +85,13 @@ QString QuotaItem::freeString() const
 
 void QuotaItem::setFreeString(const QString & freeString)
 {
-    if (m_freeString != freeString) {
-        m_freeString = freeString;
-        emit freeStringChanged();
-    }
+    m_freeString = freeString;
 }
 
 bool QuotaItem::operator==(const QuotaItem & other) const
 {
-    return m_iconName == other.m_iconName
-        && m_mountPoint == other.m_mountPoint
+    return m_mountPoint == other.m_mountPoint
+        && m_iconName == other.m_iconName
         && m_usage == other.m_usage
         && m_mountString == other.m_mountString
         && m_usedString == other.m_usedString

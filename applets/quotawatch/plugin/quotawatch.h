@@ -19,11 +19,9 @@
 #define PLASMA_QUOTA_WATCH_H
 
 #include <QObject>
-#include <QList>
-#include <QQmlListProperty>
 
 class QTimer;
-class QuotaItem;
+class QuotaListModel;
 
 /**
  * Class monitoring the file system quota.
@@ -38,8 +36,6 @@ class QuotaWatch : public QObject
     Q_PROPERTY(QString status READ status WRITE setStatus NOTIFY statusChanged)
     Q_PROPERTY(QString toolTip READ toolTip WRITE setToolTip NOTIFY toolTipChanged)
     Q_PROPERTY(QString subToolTip READ subToolTip WRITE setSubToolTip NOTIFY subToolTipChanged)
-
-    Q_PROPERTY(QQmlListProperty<QuotaItem> quotaItems READ quotaItems NOTIFY quotaItemsChaged)
 
 public:
     QuotaWatch(QObject * parent = nullptr);
@@ -62,25 +58,20 @@ public:
     QString toolTip() const;
     QString subToolTip() const;
 
-    QQmlListProperty<QuotaItem> quotaItems();
-    Q_INVOKABLE int quotaItemCount() const;
-    QuotaItem * quotaItem(int index) const;
-    void clearQuotaItems();
 
 public Q_SLOTS:
     void setQuotaInstalled(bool installed);
-    void setQuotaItems(QList<QuotaItem *> & items);
     void setStatus(const QString & status);
     void setToolTip(const QString & toolTip);
     void setSubToolTip(const QString & subToolTip);
     void updateQuota();
+    QuotaListModel * model() const;
 
 Q_SIGNALS:
     void quotaInstalledChanged();
     void statusChanged();
     void toolTipChanged();
     void subToolTipChanged();
-    void quotaItemsChaged();
 
 private:
     QTimer * m_timer;
@@ -88,7 +79,7 @@ private:
     QString m_status;
     QString m_toolTip;
     QString m_subToolTip;
-    QList<QuotaItem *> m_items;
+    QuotaListModel * m_model;
 };
 
 #endif // PLASMA_QUOTA_WATCH_H

@@ -17,7 +17,7 @@
  */
 #include "plugin.h"
 #include "quotawatch.h"
-#include "quotaitem.h"
+#include "QuotaListModel.h"
 
 #include <QtQml>
 
@@ -25,5 +25,5 @@ void QuotaWatchPlugin::registerTypes (const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.quotawatch"));
     qmlRegisterType<QuotaWatch>(uri, 0, 1, "QuotaWatch");
-    qmlRegisterType<QuotaItem>(uri, 1, 0, "QuotaItem");
+    qmlRegisterType<QuotaListModel>(uri, 1, 0, "QuotaListModel");
 }

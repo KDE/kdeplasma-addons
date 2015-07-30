@@ -18,33 +18,20 @@
 #ifndef PLASMA_QUOTA_ITEM_H
 #define PLASMA_QUOTA_ITEM_H
 
-#include <QObject>
 #include <QString>
+#include <QMetaType>
 
-class QuotaItem : public QObject
+class QuotaItem
 {
-    Q_OBJECT
-
-    // needed in QML
-    Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
-    Q_PROPERTY(QString mountString READ mountString WRITE setMountString NOTIFY mountStringChanged)
-    Q_PROPERTY(QString usedString READ usedString WRITE setUsedString NOTIFY usedStringChanged)
-    Q_PROPERTY(QString freeString READ freeString WRITE setFreeString NOTIFY freeStringChanged)
-
-    Q_PROPERTY(QString mountPoint READ mountPoint WRITE setMountPoint NOTIFY mountPointChanged)
-    Q_PROPERTY(int usage READ usage WRITE setUsage NOTIFY usageChanged)
-
 public:
-    explicit QuotaItem(QObject * parent = nullptr);
+    QuotaItem();
 
-public Q_SLOTS:
     QString mountPoint() const;
     void setMountPoint(const QString & mountPoint);
 
     int usage() const;
     void setUsage(int usage);
 
-public Q_SLOTS:
     QString iconName() const;
     void setIconName(const QString & name);
 
@@ -57,15 +44,6 @@ public Q_SLOTS:
     QString freeString() const;
     void setFreeString(const QString & freeString);
 
-Q_SIGNALS:
-    void mountPointChanged();
-    void usageChanged();
-    void iconNameChanged();
-    void mountStringChanged();
-    void usedStringChanged();
-    void freeStringChanged();
-
-public:
     bool operator==(const QuotaItem & other) const;
     bool operator!=(const QuotaItem & other) const;
 
@@ -77,5 +55,7 @@ private:
     QString m_usedString;
     QString m_freeString;
 };
+
+Q_DECLARE_METATYPE(QuotaItem)
 
 #endif // PLASMA_QUOTA_ITEM_H

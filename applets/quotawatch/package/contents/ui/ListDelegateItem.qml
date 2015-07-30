@@ -26,6 +26,7 @@ import org.kde.plasma.private.quotawatch 0.1
 
 Components.ListItem {
     property string mountPoint
+    property string iconName
     property string usedString
     property string freeString
     property int usage

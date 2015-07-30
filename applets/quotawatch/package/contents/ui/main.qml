@@ -79,7 +79,7 @@ Item {
                 anchors.fill: parent
                 ListView {
                     id: listView
-                    model: quotaMonitor.quotaItems
+                    model: quotaMonitor.model()
                     boundsBehavior: Flickable.StopAtBounds
                     highlight: Components.Highlight { }
                     highlightMoveDuration: 0
@@ -87,9 +87,10 @@ Item {
                     currentIndex: -1
                     delegate: ListDelegateItem {
                         width: listView.width
-                        mountPoint: model.mountString
-                        usedString: model.usedString
-                        freeString: model.freeString
+                        mountPoint: model.details
+                        iconName: model.icon
+                        usedString: model.used
+                        freeString: model.free
                         usage: model.usage
                     }
                 }
