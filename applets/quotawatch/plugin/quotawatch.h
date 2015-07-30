@@ -65,9 +65,11 @@ public:
     QQmlListProperty<QuotaItem> quotaItems();
     Q_INVOKABLE int quotaItemCount() const;
     QuotaItem * quotaItem(int index) const;
+    void clearQuotaItems();
 
 public Q_SLOTS:
     void setQuotaInstalled(bool installed);
+    void setQuotaItems(QList<QuotaItem *> & items);
     void setStatus(const QString & status);
     void setToolTip(const QString & toolTip);
     void setSubToolTip(const QString & subToolTip);

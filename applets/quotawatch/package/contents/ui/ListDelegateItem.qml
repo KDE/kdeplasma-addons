@@ -33,7 +33,9 @@ Components.ListItem {
     enabled: true
     onContainsMouseChanged: {
         if (containsMouse) {
-            ListView.view.currentIndex = index;
+            ListView.view.currentIndex = index
+        } else {
+            ListView.view.currentIndex = -1
         }
     }
     

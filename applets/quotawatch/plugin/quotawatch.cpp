@@ -38,6 +38,64 @@ QuotaWatch::QuotaWatch(QObject * parent)
     updateQuota();
 }
 
+void QuotaWatch::clearQuotaItems()
+{
+    // changed, so delete current items...
+    for (auto item : m_items) {
+        item->deleteLater();
+    }
+    m_items.clear();
+    emit quotaItemsChaged();
+}
+
+void QuotaWatch::setQuotaItems(QList<QuotaItem *> & items)
+{
+    // try to be smart: check, whether items changed at all
+    bool changed = m_items.size() != items.size();
+    if (!changed) {
+        for (int i = 0; i < m_items.size(); ++i) {
+            if (*m_items[i] != *items[i]) {
+                changed = true;
+            }
+        }
+    }
+
+    if (!changed) {
+        qDeleteAll(items);
+        items.clear();
+        return;
+    }
+
+    // changed, so delete current items...
+    for (auto item : m_items) {
+        item->deleteLater();
+    }
+    m_items = items;
+    emit quotaItemsChaged();
+
+    int maxQuota = 0;
+    for (auto item : m_items) {
+        maxQuota = qMax(0, item->usage());
+    }
+    maxQuota = qMin(1000, maxQuota);
+
+    // update status
+    setStatus(maxQuota < 50 ? QStringLiteral("status-ok")
+            : maxQuota < 75 ? QStringLiteral("status-75")
+            : maxQuota < 90 ? QStringLiteral("status-90")
+            : QStringLiteral("status-critical"));
+
+//     qDebug() << "QUOTAS:" << quotas;
+    if (!m_items.isEmpty()) {
+        setToolTip(i18nc("example: Quota: 83% used",
+                         "Quota: %1% used", static_cast<int>(maxQuota)));
+        setSubToolTip(QString());
+    } else {
+        setToolTip(i18n("Disk Quota"));
+        setSubToolTip(i18n("No quota restrictions found."));
+    }
+}
+
 QQmlListProperty<QuotaItem> QuotaWatch::quotaItems()
 {
     return QQmlListProperty<QuotaItem>(this, m_items);
@@ -68,6 +126,8 @@ void QuotaWatch::setQuotaInstalled(bool installed)
         m_quotaInstalled = installed;
 
         if (! installed) {
+            QList<QuotaItem*> empty;
+            setQuotaItems(empty);
             setStatus(QStringLiteral("status-not-installed"));
             setToolTip(i18n("Disk Quota"));
             setSubToolTip(i18n("Please install 'quota'"));
@@ -155,12 +215,6 @@ static bool runQuotaApp(QString & stdout)
 
 void QuotaWatch::updateQuota()
 {
-    for (auto item : m_items) {
-        item->deleteLater();
-    }
-    m_items.clear();
-    emit quotaItemsChaged();
-
     const bool quotaFound = ! QStandardPaths::findExecutable(QStringLiteral("quota")).isEmpty();
     setQuotaInstalled(quotaFound);
     if (!quotaFound) {
@@ -171,18 +225,22 @@ void QuotaWatch::updateQuota()
     QString rawData;
     const bool success = runQuotaApp(rawData);
     if (!success) {
+        QList<QuotaItem*> empty;
+        setQuotaItems(empty);
         setToolTip(i18n("Disk Quota"));
         setSubToolTip(i18n("Running quota failed"));
         return;
     }
 
-    QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
-    lines += lines;
-    lines += lines;
+    const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
+//     const QStringList lines = QStringList()
+//         << QStringLiteral("/home/peterpan 4471196*  5000000 7000000           57602 0       0")
+//         << QStringLiteral("/home/archive 2263536  5000000 5100000            3932 0       0")
+//         << QStringLiteral("/home/shared 3171196*  5000000 7000000           57602 0       0");
 
     // format class needed for GiB/MiB/KiB formatting
     KFormat fmt;
-    qreal maxQuota = 0.0;
+    QList<QuotaItem*> items;
 
     // assumption: Filesystem starts with slash
     for (const QString & line : lines) {
@@ -191,14 +249,16 @@ void QuotaWatch::updateQuota()
             continue;
         }
 
-        const QStringList parts = line.split(QLatin1Char(' '), QString::SkipEmptyParts);
+        QStringList parts = line.split(QLatin1Char(' '), QString::SkipEmptyParts);
         // valid lines range from 7 to 9 parts (grace not always there):
         // Disk quotas for user dh (uid 1000):
         //      Filesystem   blocks  quota    limit     grace   files    quota   limit   grace
         //       /home     16296500  50000000 60000000          389155       0       0
-        //       /home     16296500  50000000 60000000      6   389155       0       0
-        //       /home     16296500  50000000 60000000      4   389155       0       0       5
-        //       ^.......we want these......^
+        //       /home     16296500* 50000000 60000000      6   389155       0       0
+        //       /home     16296500* 50000000 60000000      4   389155       0       0       5
+        //       ^...........we want these...........^
+        // NOTE: In case of a soft limit violation, a '*' is added in the used blocks.
+        //       Hence, the star is removed below, if applicable
 
         if (parts.size() < 4) {
             continue;
@@ -206,38 +266,25 @@ void QuotaWatch::updateQuota()
 
         // 'quota' uses kilo bytes -> factor 1024
         // NOTE: int is not large enough, hence qint64
-        const qint64 used = parts[1].toLongLong() * 1024;
-        const qint64 softLimit = parts[2].toLongLong() * 1024;
+        const qint64 used = parts[1].remove(QLatin1Char('*')).toLongLong() * 1024;
+        qint64 softLimit = parts[2].toLongLong() * 1024;
+        const qint64 hardLimit = parts[3].toLongLong() * 1024;
+        if (softLimit == 0) { // softLimit might be unused (0)
+            softLimit = hardLimit;
+        }
         const qint64 freeSize = softLimit - used;
-        const qreal percent = used * 100.0 / softLimit;
+        const int percent = qMin(100, qMax(0, qRound(used * 100.0 / softLimit)));
 
-        auto item = new QuotaItem();
+        auto item = new QuotaItem(this);
         item->setIconName(QStringLiteral("network-server-database"));
         item->setMountPoint(parts[0]);
         item->setUsage(percent);
-        item->setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", parts[0], qRound(percent)));
+        item->setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", parts[0], percent));
         item->setUsedString(i18nc("e.g.: 12 GiB of 20 GiB used", "%1 of %2 used", fmt.formatByteSize(used), fmt.formatByteSize(softLimit)));
         item->setFreeString(i18nc("e.g.: 8 GiB free", "%1 free", fmt.formatByteSize(qMax(qint64(0), freeSize))));
 
-        m_items.append(item);
-        emit quotaItemsChaged();
-
-        maxQuota = qMax(maxQuota, percent);
+        items.append(item);
     }
 
-    // update status
-    setStatus(maxQuota < 50 ? QStringLiteral("status-ok")
-            : maxQuota < 75 ? QStringLiteral("status-75")
-            : maxQuota < 90 ? QStringLiteral("status-90")
-            : QStringLiteral("status-critical"));
-
-//     qDebug() << "QUOTAS:" << quotas;
-    if (!m_items.isEmpty()) {
-        setToolTip(i18nc("example: Quota: 83% used",
-                         "Quota: %1% used", static_cast<int>(maxQuota)));
-        setSubToolTip(QString());
-    } else {
-        setToolTip(i18n("Disk Quota"));
-        setSubToolTip(i18n("No quota restrictions found."));
-    }
+    setQuotaItems(items);
 }

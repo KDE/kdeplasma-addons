@@ -30,7 +30,7 @@ QuotaItem::QuotaItem(QObject * parent)
     : QObject(parent)
     , m_iconName()
     , m_mountPoint()
-    , m_usage(0.0)
+    , m_usage(0)
     , m_mountString()
     , m_usedString()
 {
@@ -49,12 +49,12 @@ void QuotaItem::setMountPoint(const QString & mountPoint)
     }
 }
 
-qreal QuotaItem::usage() const
+int QuotaItem::usage() const
 {
     return m_usage;
 }
 
-void QuotaItem::setUsage(qreal usage)
+void QuotaItem::setUsage(int usage)
 {
     if (m_usage != usage) {
         m_usage = usage;
@@ -112,4 +112,19 @@ void QuotaItem::setFreeString(const QString & freeString)
         m_freeString = freeString;
         emit freeStringChanged();
     }
+}
+
+bool QuotaItem::operator==(const QuotaItem & other) const
+{
+    return m_iconName == other.m_iconName
+        && m_mountPoint == other.m_mountPoint
+        && m_usage == other.m_usage
+        && m_mountString == other.m_mountString
+        && m_usedString == other.m_usedString
+        && m_freeString == other.m_freeString;
+}
+
+bool QuotaItem::operator!=(const QuotaItem & other) const
+{
+    return ! (*this == other);
 }

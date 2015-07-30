@@ -32,7 +32,7 @@ class QuotaItem : public QObject
     Q_PROPERTY(QString freeString READ freeString WRITE setFreeString NOTIFY freeStringChanged)
 
     Q_PROPERTY(QString mountPoint READ mountPoint WRITE setMountPoint NOTIFY mountPointChanged)
-    Q_PROPERTY(qreal usage READ usage WRITE setUsage NOTIFY usageChanged)
+    Q_PROPERTY(int usage READ usage WRITE setUsage NOTIFY usageChanged)
 
 public:
     explicit QuotaItem(QObject * parent = nullptr);
@@ -41,8 +41,8 @@ public Q_SLOTS:
     QString mountPoint() const;
     void setMountPoint(const QString & mountPoint);
 
-    qreal usage() const;
-    void setUsage(qreal usage);
+    int usage() const;
+    void setUsage(int usage);
 
 public Q_SLOTS:
     QString iconName() const;
@@ -65,10 +65,14 @@ Q_SIGNALS:
     void usedStringChanged();
     void freeStringChanged();
 
+public:
+    bool operator==(const QuotaItem & other) const;
+    bool operator!=(const QuotaItem & other) const;
+
 private:
     QString m_iconName;
     QString m_mountPoint;
-    qreal m_usage;
+    int m_usage;
     QString m_mountString;
     QString m_usedString;
     QString m_freeString;
