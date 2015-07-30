@@ -127,6 +127,8 @@ PlasmaCore.SvgItem {
         frameVisible: false
         textFormat: TextEdit.RichText
 
+        onLinkActivated: Qt.openUrlExternally(link)
+
         Keys.onEscapePressed: plasmoid.expanded = false
 
         style: PlasmaStyle.TextAreaStyle {
@@ -159,8 +161,19 @@ PlasmaCore.SvgItem {
         }
 
         onDrop: {
-            var text = event.mimeData.text
-            mainTextArea.insert(positionOfDrop(event), text.replace(/\n/g, "<br>"))
+            var mimeData = event.mimeData
+            var text = ""
+            if (mimeData.hasUrls) {
+                var urls = mimeData.urls
+                for (var i = 0, j = urls.length; i < j; ++i) {
+                    var url = urls[i]
+                    text += "<a href=\"" + url + "\">" + url + "</a><br>"
+                }
+            } else {
+                text = mimeData.text.replace(/\n/g, "<br>")
+            }
+
+            mainTextArea.insert(positionOfDrop(event), text)
             event.accept(Qt.CopyAction)
         }
         onDragMove: {
