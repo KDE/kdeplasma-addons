@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=File System Quota
-Comment=Shows file system quota
-Icon=knotes
+Name=Disk Quota
+Comment=Shows details about disk quota usage
+Icon=network-server-database
 Type=Service
 
 X-Plasma-API=declarativeappletscript

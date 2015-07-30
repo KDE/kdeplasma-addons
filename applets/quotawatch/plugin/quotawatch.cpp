@@ -30,6 +30,8 @@
 QuotaWatch::QuotaWatch(QObject * parent)
     : QObject(parent)
     , m_timer(new QTimer(this))
+    , m_quotaInstalled(true)
+    , m_status(QStringLiteral("quota-ok"))
 {
     connect(m_timer, &QTimer::timeout, this, &QuotaWatch::updateQuota);
     m_timer->start(5 * 1000);
@@ -55,14 +57,37 @@ QuotaItem * QuotaWatch::quotaItem(int index) const
     return m_items.at(index);
 }
 
-bool QuotaWatch::quotaInstalled()
+bool QuotaWatch::quotaInstalled() const
 {
-    return ! QStandardPaths::findExecutable(QStringLiteral("quota")).isEmpty();
+    return m_quotaInstalled;
+}
+
+void QuotaWatch::setQuotaInstalled(bool installed)
+{
+    if (m_quotaInstalled != installed) {
+        m_quotaInstalled = installed;
+
+        if (! installed) {
+            setStatus(QStringLiteral("status-not-installed"));
+            setToolTip(i18n("Disk Quota"));
+            setSubToolTip(i18n("Please install 'quota'"));
+        }
+
+        emit quotaInstalledChanged();
+    }
 }
 
 QString QuotaWatch::status() const
 {
     return m_status;
+}
+
+void QuotaWatch::setStatus(const QString & status)
+{
+    if (m_status != status) {
+        m_status = status;
+        emit statusChanged();
+    }
 }
 
 QString QuotaWatch::toolTip() const
@@ -75,14 +100,19 @@ void QuotaWatch::setToolTip(const QString & toolTip)
     if (m_toolTip != toolTip) {
         m_toolTip = toolTip;
         emit toolTipChanged();
-    }    
+    }
 }
 
-void QuotaWatch::setQuota(const QString & quotaString)
+QString QuotaWatch::subToolTip() const
 {
-    if (m_status != quotaString) {
-        m_status = quotaString;
-        emit statusChanged();
+    return m_subToolTip;
+}
+
+void QuotaWatch::setSubToolTip(const QString & subToolTip)
+{
+    if (m_subToolTip != subToolTip) {
+        m_subToolTip = subToolTip;
+        emit subToolTipChanged();
     }
 }
 
@@ -131,8 +161,9 @@ void QuotaWatch::updateQuota()
     m_items.clear();
     emit quotaItemsChaged();
 
-    if (!quotaInstalled()) {
-        setQuota(i18n("Quota missing"));
+    const bool quotaFound = ! QStandardPaths::findExecutable(QStringLiteral("quota")).isEmpty();
+    setQuotaInstalled(quotaFound);
+    if (!quotaFound) {
         return;
     }
 
@@ -140,7 +171,8 @@ void QuotaWatch::updateQuota()
     QString rawData;
     const bool success = runQuotaApp(rawData);
     if (!success) {
-        setQuota(i18n("Running quota failed"));
+        setToolTip(i18n("Disk Quota"));
+        setSubToolTip(i18n("Running quota failed"));
         return;
     }
 
@@ -148,13 +180,10 @@ void QuotaWatch::updateQuota()
     lines += lines;
     lines += lines;
 
-    // Example output: `quota`
-    // Disk quotas for user dh (uid 1000):
-    //      Filesystem   blocks  quota    limit     grace   files    quota   limit   grace
-    //       /home     16296500  50000000 60000000          389155       0       0
-    // 123456          ^......we want these......^
+    // format class needed for GiB/MiB/KiB formatting
+    KFormat fmt;
+    qreal maxQuota = 0.0;
 
-    QStringList quotas;
     // assumption: Filesystem starts with slash
     for (const QString & line : lines) {
         qDebug() << line << isQuotaLine(line);
@@ -164,10 +193,12 @@ void QuotaWatch::updateQuota()
 
         const QStringList parts = line.split(QLatin1Char(' '), QString::SkipEmptyParts);
         // valid lines range from 7 to 9 parts (grace not always there):
+        // Disk quotas for user dh (uid 1000):
         //      Filesystem   blocks  quota    limit     grace   files    quota   limit   grace
         //       /home     16296500  50000000 60000000          389155       0       0
         //       /home     16296500  50000000 60000000      6   389155       0       0
         //       /home     16296500  50000000 60000000      4   389155       0       0       5
+        //       ^.......we want these......^
 
         if (parts.size() < 4) {
             continue;
@@ -179,14 +210,6 @@ void QuotaWatch::updateQuota()
         const qint64 softLimit = parts[2].toLongLong() * 1024;
         const qreal percent = used * 100.0 / softLimit;
 
-        KFormat fmt;
-        QString quotaLine = i18n("%1: %2% (%3 out of %4 used)",
-                                 parts[0],
-                                 qRound(percent),
-                                 fmt.formatByteSize(used),
-                                 fmt.formatByteSize(softLimit));
-        quotas.append(quotaLine);
-
         auto item = new QuotaItem();
         item->setIconName(QStringLiteral("network-server-database"));
         item->setMountPoint(parts[0]);
@@ -196,14 +219,23 @@ void QuotaWatch::updateQuota()
 
         m_items.append(item);
         emit quotaItemsChaged();
+        
+        maxQuota = qMax(maxQuota, percent);
     }
 
+    // update status
+    setStatus(maxQuota < 80 ? QStringLiteral("status-ok")
+            : maxQuota < 90 ? QStringLiteral("status-80")
+            : maxQuota < 98 ? QStringLiteral("status-90")
+            : QStringLiteral("status-98"));
+
 //     qDebug() << "QUOTAS:" << quotas;
-    if (!quotas.isEmpty()) {
-        setQuota(i18n("Quota OK"));
-        setToolTip(quotas.join(QLatin1Char('\n')));
+    if (!m_items.isEmpty()) {
+        setToolTip(i18nc("example: Quota Usage: 83%",
+                         "Quota Usage: %1%", static_cast<int>(maxQuota)));
+        setSubToolTip(QString());
     } else {
-        setQuota(i18n("Quota OK"));
-        setToolTip(i18n("No quota restrictions found."));
+        setToolTip(i18n("Disk Quota"));
+        setSubToolTip(i18n("No quota restrictions found."));
     }
 }

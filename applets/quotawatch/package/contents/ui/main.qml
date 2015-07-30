@@ -33,8 +33,8 @@ Item {
 //    Plasmoid.status: PlasmaCore.Types.PassiveStatus
    Plasmoid.status: PlasmaCore.Types.NeedsAttentionStatus
 
-    Layout.minimumWidth: units.gridUnit * 14
-    Layout.minimumHeight: units.gridUnit * 4
+    Layout.minimumWidth: units.gridUnit * 2
+    Layout.minimumHeight: units.gridUnit * 2
 
     Plasmoid.switchWidth: units.gridUnit * 10
     Plasmoid.switchHeight: units.gridUnit * 10
@@ -44,9 +44,14 @@ Item {
     }
 
     Plasmoid.compactRepresentation: MouseArea {
-        Components.Label {
-            text: quotaMonitor.status
+//         Components.Label {
+//             text: quotaMonitor.status
+//         }
+        PlasmaCore.IconItem {
+            source: "network-server-database"
+            anchors.fill: parent
         }
+
         onClicked: plasmoid.expanded = !plasmoid.expanded
     }
 
@@ -56,20 +61,30 @@ Item {
         width: units.gridUnit * 14
         height: units.gridUnit * 14
 
-        ListView {
-            id: listView
+        ColumnLayout {
             anchors.fill: root
-            model: quotaMonitor.quotaItems
-            boundsBehavior: Flickable.StopAtBounds
-            highlight: Components.Highlight { }
-            highlightMoveDuration: 0
-            highlightResizeDuration: 0
-            currentIndex: -1
-            delegate: ListDelegateItem {
-                width: listView.width
-                mountPoint: model.mountString
-                details: model.detailString
-                usage: model.usage
+            Components.Label {
+                visible: ! quotaMonitor.quotaInstalled
+                anchors.fill: parent
+                text: i18n("Quota tool not found. Please install 'quota'.")
+                horizontalAlignment: Text.AlignLeft
+            }
+
+            ListView {
+                id: listView
+                anchors.fill: parent
+                model: quotaMonitor.quotaItems
+                boundsBehavior: Flickable.StopAtBounds
+                highlight: Components.Highlight { }
+                highlightMoveDuration: 0
+                highlightResizeDuration: 0
+                currentIndex: -1
+                delegate: ListDelegateItem {
+                    width: listView.width
+                    mountPoint: model.mountString
+                    details: model.detailString
+                    usage: model.usage
+                }
             }
         }
     }
@@ -78,6 +93,6 @@ Item {
         id: kRun
     }
 
-    Plasmoid.toolTipMainText: i18n("File System Quota")
-    Plasmoid.toolTipSubText: quotaMonitor.toolTip
+    Plasmoid.toolTipMainText: quotaMonitor.toolTip
+    Plasmoid.toolTipSubText: quotaMonitor.subToolTip
 }
