@@ -32,7 +32,7 @@ QuotaItem::QuotaItem(QObject * parent)
     , m_mountPoint()
     , m_usage(0.0)
     , m_mountString()
-    , m_detailString()
+    , m_usedString()
 {
 }
 
@@ -88,15 +88,28 @@ void QuotaItem::setMountString(const QString & mountString)
     }
 }
 
-QString QuotaItem::detailString() const
+QString QuotaItem::usedString() const
 {
-    return m_detailString;
+    return m_usedString;
 }
 
-void QuotaItem::setDetailString(const QString & detailString)
+void QuotaItem::setUsedString(const QString & usedString)
 {
-    if (m_detailString != detailString) {
-        m_detailString = detailString;
-        emit detailStringChanged();
+    if (m_usedString != usedString) {
+        m_usedString = usedString;
+        emit usedStringChanged();
+    }
+}
+
+QString QuotaItem::freeString() const
+{
+    return m_freeString;
+}
+
+void QuotaItem::setFreeString(const QString & freeString)
+{
+    if (m_freeString != freeString) {
+        m_freeString = freeString;
+        emit freeStringChanged();
     }
 }

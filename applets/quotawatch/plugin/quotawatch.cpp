@@ -208,14 +208,16 @@ void QuotaWatch::updateQuota()
         // NOTE: int is not large enough, hence qint64
         const qint64 used = parts[1].toLongLong() * 1024;
         const qint64 softLimit = parts[2].toLongLong() * 1024;
+        const qint64 freeSize = softLimit - used;
         const qreal percent = used * 100.0 / softLimit;
 
         auto item = new QuotaItem();
         item->setIconName(QStringLiteral("network-server-database"));
         item->setMountPoint(parts[0]);
         item->setUsage(percent);
-        item->setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\%'", "%1: %2%", parts[0], qRound(percent)));
-        item->setDetailString(i18nc("e.g.: 12 GiB of 20 GiB used", "%1 of %2 used", fmt.formatByteSize(used), fmt.formatByteSize(softLimit)));
+        item->setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", parts[0], qRound(percent)));
+        item->setUsedString(i18nc("e.g.: 12 GiB of 20 GiB used", "%1 of %2 used", fmt.formatByteSize(used), fmt.formatByteSize(softLimit)));
+        item->setFreeString(i18nc("e.g.: 8 GiB free", "%1 free", fmt.formatByteSize(qMax(qint64(0), freeSize))));
 
         m_items.append(item);
         emit quotaItemsChaged();
@@ -224,15 +226,15 @@ void QuotaWatch::updateQuota()
     }
 
     // update status
-    setStatus(maxQuota < 80 ? QStringLiteral("status-ok")
-            : maxQuota < 90 ? QStringLiteral("status-80")
-            : maxQuota < 98 ? QStringLiteral("status-90")
-            : QStringLiteral("status-98"));
+    setStatus(maxQuota < 50 ? QStringLiteral("status-ok")
+            : maxQuota < 75 ? QStringLiteral("status-75")
+            : maxQuota < 90 ? QStringLiteral("status-90")
+            : QStringLiteral("status-critical"));
 
 //     qDebug() << "QUOTAS:" << quotas;
     if (!m_items.isEmpty()) {
-        setToolTip(i18nc("example: Quota Usage: 83%",
-                         "Quota Usage: %1%", static_cast<int>(maxQuota)));
+        setToolTip(i18nc("example: Quota: 83% used",
+                         "Quota: %1% used", static_cast<int>(maxQuota)));
         setSubToolTip(QString());
     } else {
         setToolTip(i18n("Disk Quota"));

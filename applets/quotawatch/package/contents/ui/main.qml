@@ -29,9 +29,7 @@ import org.kde.plasma.private.quotawatch 0.1
 Item {
     Component.onCompleted: plasmoid.removeAction("configure")
 //     Plasmoid.status: quotaMonitor.critical ? PlasmaCore.Types.NeedsAttentionStatus :
-//    Plasmoid.status: PlasmaCore.Types.ActiveStatus
-//    Plasmoid.status: PlasmaCore.Types.PassiveStatus
-   Plasmoid.status: PlasmaCore.Types.NeedsAttentionStatus
+    Plasmoid.status: (quotaMonitor.status == "status-critical") ? PlasmaCore.Types.NeedsAttentionStatus : (quotaMonitor.status == "status-ok") ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.ActiveStatus
 
     Layout.minimumWidth: units.gridUnit * 2
     Layout.minimumHeight: units.gridUnit * 2
@@ -58,14 +56,15 @@ Item {
     Plasmoid.fullRepresentation: Item {
         id: root
 
-        width: units.gridUnit * 14
+        width: units.gridUnit * 20
         height: units.gridUnit * 14
 
         ColumnLayout {
             anchors.fill: root
             Components.Label {
                 visible: ! quotaMonitor.quotaInstalled
-                anchors.fill: parent
+                anchors.left: parent.left
+                anchors.right: parent.right
                 text: i18n("Quota tool not found. Please install 'quota'.")
                 horizontalAlignment: Text.AlignLeft
             }
@@ -82,7 +81,8 @@ Item {
                 delegate: ListDelegateItem {
                     width: listView.width
                     mountPoint: model.mountString
-                    details: model.detailString
+                    usedString: model.usedString
+                    freeString: model.freeString
                     usage: model.usage
                 }
             }

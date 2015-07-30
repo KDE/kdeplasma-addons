@@ -54,9 +54,9 @@ public:
      * are, with increasing priority:
      * - "status-not-installed": quota is not installed
      * - "status-ok": quota is still ok (enough spaces free)
-     * - "status-80": geting closer to quota limit (>= 80% used)
+     * - "status-75": geting closer to quota limit (>= 75% used)
      * - "status-90": geting closer to quota limit (>= 90% used)
-     * - "status-98": clost to critical limit (>= 98% used)
+     * - "status-critical": close to critical limit (>= 98% used)
      */
     QString status() const;
     QString toolTip() const;

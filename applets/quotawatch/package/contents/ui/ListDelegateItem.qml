@@ -26,7 +26,8 @@ import org.kde.plasma.private.quotawatch 0.1
 
 Components.ListItem {
     property string mountPoint
-    property string details
+    property string usedString
+    property string freeString
     property int usage
 
     height: contents.height
@@ -37,10 +38,8 @@ Components.ListItem {
     
     RowLayout {
         id: contents
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
+        anchors.left: parent.left
+        anchors.right: parent.right
         spacing: units.gridUnit
 
         PlasmaCore.IconItem {
@@ -56,8 +55,6 @@ Components.ListItem {
 
             RowLayout {
                 width: parent.width
-//                         spacing: units.smallSpacing
-
                 Components.Label {
                     anchors.left: parent.left
                     text: mountPoint
@@ -66,7 +63,7 @@ Components.ListItem {
                 Components.Label {
                     anchors.right: parent.right
                     horizontalAlignment: Text.AlignRight
-                    text: details
+                    text: freeString
                     opacity: 0.6
                 }
             }
@@ -75,6 +72,12 @@ Components.ListItem {
                 value: usage
                 minimumValue: 0
                 maximumValue: 100
+            }
+            Components.Label {
+                anchors.left: parent.left
+                text: usedString
+                horizontalAlignment: Text.AlignLeft
+                opacity: 0.6
             }
         }
     }
