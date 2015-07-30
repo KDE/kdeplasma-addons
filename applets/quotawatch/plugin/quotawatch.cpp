@@ -221,7 +221,7 @@ void QuotaWatch::updateQuota()
 
         m_items.append(item);
         emit quotaItemsChaged();
-        
+
         maxQuota = qMax(maxQuota, percent);
     }
 

@@ -21,7 +21,7 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 2.0 as Components
-// import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kio 1.0 as Kio
 
 import org.kde.plasma.private.quotawatch 0.1
@@ -31,7 +31,7 @@ Item {
 //     Plasmoid.status: quotaMonitor.critical ? PlasmaCore.Types.NeedsAttentionStatus :
     Plasmoid.status: (quotaMonitor.status == "status-critical") ? PlasmaCore.Types.NeedsAttentionStatus : (quotaMonitor.status == "status-ok") ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.ActiveStatus
 
-    Layout.minimumWidth: units.gridUnit * 2
+    Layout.minimumWidth: units.gridUnit * 10
     Layout.minimumHeight: units.gridUnit * 2
 
     Plasmoid.switchWidth: units.gridUnit * 10
@@ -39,6 +39,12 @@ Item {
 
     QuotaWatch {
         id: quotaMonitor
+    }
+    
+    PlasmaCore.DataSource {
+        id: apps
+        engine: "apps"
+        connectedSources: ["org.kde.filelight.desktop"]
     }
 
     Plasmoid.compactRepresentation: MouseArea {
@@ -69,21 +75,23 @@ Item {
                 horizontalAlignment: Text.AlignLeft
             }
 
-            ListView {
-                id: listView
+            PlasmaExtras.ScrollArea {
                 anchors.fill: parent
-                model: quotaMonitor.quotaItems
-                boundsBehavior: Flickable.StopAtBounds
-                highlight: Components.Highlight { }
-                highlightMoveDuration: 0
-                highlightResizeDuration: 0
-                currentIndex: -1
-                delegate: ListDelegateItem {
-                    width: listView.width
-                    mountPoint: model.mountString
-                    usedString: model.usedString
-                    freeString: model.freeString
-                    usage: model.usage
+                ListView {
+                    id: listView
+                    model: quotaMonitor.quotaItems
+                    boundsBehavior: Flickable.StopAtBounds
+                    highlight: Components.Highlight { }
+                    highlightMoveDuration: 0
+                    highlightResizeDuration: 0
+                    currentIndex: -1
+                    delegate: ListDelegateItem {
+                        width: listView.width
+                        mountPoint: model.mountString
+                        usedString: model.usedString
+                        freeString: model.freeString
+                        usage: model.usage
+                    }
                 }
             }
         }

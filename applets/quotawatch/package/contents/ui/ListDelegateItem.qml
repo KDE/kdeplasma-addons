@@ -30,10 +30,15 @@ Components.ListItem {
     property string freeString
     property int usage
 
-    height: contents.height
+    enabled: true
+    onContainsMouseChanged: {
+        if (containsMouse) {
+            ListView.view.currentIndex = index;
+        }
+    }
     
     onClicked: {
-        kRun.openUrl(apps.data["org.kde.filelight.desktop"].entryPath)
+        kRun.openUrl(apps.data[apps.connectedSources[0]].entryPath)
     }
     
     RowLayout {
@@ -56,12 +61,13 @@ Components.ListItem {
             RowLayout {
                 width: parent.width
                 Components.Label {
-                    anchors.left: parent.left
+                    Layout.fillWidth: true
+                    height: paintedHeight
                     text: mountPoint
-                    horizontalAlignment: Text.AlignLeft
                 }
                 Components.Label {
-                    anchors.right: parent.right
+                    Layout.fillWidth: true
+                    height: paintedHeight
                     horizontalAlignment: Text.AlignRight
                     text: freeString
                     opacity: 0.6
@@ -74,6 +80,7 @@ Components.ListItem {
                 maximumValue: 100
             }
             Components.Label {
+                height: paintedHeight
                 anchors.left: parent.left
                 text: usedString
                 horizontalAlignment: Text.AlignLeft
