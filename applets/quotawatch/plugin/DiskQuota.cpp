@@ -15,8 +15,8 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#include "quotawatch.h"
-#include "quotaitem.h"
+#include "DiskQuota.h"
+#include "QuotaItem.h"
 #include "QuotaListModel.h"
 
 #include <KLocalizedString>
@@ -28,24 +28,24 @@
 #include <QStandardPaths>
 #include <QDebug>
 
-QuotaWatch::QuotaWatch(QObject * parent)
+DiskQuota::DiskQuota(QObject * parent)
     : QObject(parent)
     , m_timer(new QTimer(this))
     , m_quotaInstalled(true)
     , m_status(QStringLiteral("quota-ok"))
     , m_model(new QuotaListModel(this))
 {
-    connect(m_timer, &QTimer::timeout, this, &QuotaWatch::updateQuota);
+    connect(m_timer, &QTimer::timeout, this, &DiskQuota::updateQuota);
     m_timer->start(5 * 1000);
     updateQuota();
 }
 
-bool QuotaWatch::quotaInstalled() const
+bool DiskQuota::quotaInstalled() const
 {
     return m_quotaInstalled;
 }
 
-void QuotaWatch::setQuotaInstalled(bool installed)
+void DiskQuota::setQuotaInstalled(bool installed)
 {
     if (m_quotaInstalled != installed) {
         m_quotaInstalled = installed;
@@ -61,12 +61,12 @@ void QuotaWatch::setQuotaInstalled(bool installed)
     }
 }
 
-QString QuotaWatch::status() const
+QString DiskQuota::status() const
 {
     return m_status;
 }
 
-void QuotaWatch::setStatus(const QString & status)
+void DiskQuota::setStatus(const QString & status)
 {
     if (m_status != status) {
         m_status = status;
@@ -74,12 +74,12 @@ void QuotaWatch::setStatus(const QString & status)
     }
 }
 
-QString QuotaWatch::toolTip() const
+QString DiskQuota::toolTip() const
 {
     return m_toolTip;
 }
 
-void QuotaWatch::setToolTip(const QString & toolTip)
+void DiskQuota::setToolTip(const QString & toolTip)
 {
     if (m_toolTip != toolTip) {
         m_toolTip = toolTip;
@@ -87,12 +87,12 @@ void QuotaWatch::setToolTip(const QString & toolTip)
     }
 }
 
-QString QuotaWatch::subToolTip() const
+QString DiskQuota::subToolTip() const
 {
     return m_subToolTip;
 }
 
-void QuotaWatch::setSubToolTip(const QString & subToolTip)
+void DiskQuota::setSubToolTip(const QString & subToolTip)
 {
     if (m_subToolTip != subToolTip) {
         m_subToolTip = subToolTip;
@@ -137,7 +137,7 @@ static bool runQuotaApp(QString & stdout)
     return true;
 }
 
-void QuotaWatch::updateQuota()
+void DiskQuota::updateQuota()
 {
     const bool quotaFound = ! QStandardPaths::findExecutable(QStringLiteral("quota")).isEmpty();
     setQuotaInstalled(quotaFound);
@@ -238,7 +238,7 @@ void QuotaWatch::updateQuota()
     }
 }
 
-QuotaListModel * QuotaWatch::model() const
+QuotaListModel * DiskQuota::model() const
 {
     return m_model;
 }

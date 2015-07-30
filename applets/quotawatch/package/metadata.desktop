@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Disk Quota
-Comment=Shows details about disk quota usage
+Comment=Shows details about disk quota
 Icon=network-server-database
 Type=Service
 
@@ -12,7 +12,7 @@ X-Plasma-NotificationAreaCategory=SystemServices
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-PluginInfo-Author=Dominik Haumann
 X-KDE-PluginInfo-Email=dhaumann@kde.org
-X-KDE-PluginInfo-Name=org.kde.plasma.quotawatch
+X-KDE-PluginInfo-Name=org.kde.plasma.diskquota
 X-KDE-PluginInfo-Version=2.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Utilities

@@ -21,7 +21,7 @@
 #include <QAbstractListModel>
 #include <QVector>
 
-#include "quotaitem.h"
+#include "QuotaItem.h"
 
 /**
  * Class monitoring the file system quota.

@@ -24,12 +24,11 @@ import org.kde.plasma.components 2.0 as Components
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kio 1.0 as Kio
 
-import org.kde.plasma.private.quotawatch 0.1
+import org.kde.plasma.private.diskquota 1.0
 
 Item {
     Component.onCompleted: plasmoid.removeAction("configure")
-//     Plasmoid.status: quotaMonitor.critical ? PlasmaCore.Types.NeedsAttentionStatus :
-    Plasmoid.status: (quotaMonitor.status == "status-critical") ? PlasmaCore.Types.NeedsAttentionStatus : (quotaMonitor.status == "status-ok") ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.ActiveStatus
+    Plasmoid.status: (diskQuota.status == "status-critical") ? PlasmaCore.Types.NeedsAttentionStatus : (diskQuota.status == "status-ok") ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.ActiveStatus
 
     Layout.minimumWidth: units.gridUnit * 10
     Layout.minimumHeight: units.gridUnit * 2
@@ -37,8 +36,8 @@ Item {
     Plasmoid.switchWidth: units.gridUnit * 10
     Plasmoid.switchHeight: units.gridUnit * 10
 
-    QuotaWatch {
-        id: quotaMonitor
+    DiskQuota {
+        id: diskQuota
     }
     
     PlasmaCore.DataSource {
@@ -48,9 +47,6 @@ Item {
     }
 
     Plasmoid.compactRepresentation: MouseArea {
-//         Components.Label {
-//             text: quotaMonitor.status
-//         }
         PlasmaCore.IconItem {
             source: "network-server-database"
             anchors.fill: parent
@@ -68,7 +64,7 @@ Item {
         ColumnLayout {
             anchors.fill: root
             Components.Label {
-                visible: ! quotaMonitor.quotaInstalled
+                visible: ! diskQuota.quotaInstalled
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: i18n("Quota tool not found. Please install 'quota'.")
@@ -79,7 +75,7 @@ Item {
                 anchors.fill: parent
                 ListView {
                     id: listView
-                    model: quotaMonitor.model()
+                    model: diskQuota.model()
                     boundsBehavior: Flickable.StopAtBounds
                     highlight: Components.Highlight { }
                     highlightMoveDuration: 0
@@ -102,6 +98,6 @@ Item {
         id: kRun
     }
 
-    Plasmoid.toolTipMainText: quotaMonitor.toolTip
-    Plasmoid.toolTipSubText: quotaMonitor.subToolTip
+    Plasmoid.toolTipMainText: diskQuota.toolTip
+    Plasmoid.toolTipSubText: diskQuota.subToolTip
 }

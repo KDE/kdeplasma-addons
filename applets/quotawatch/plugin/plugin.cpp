@@ -16,14 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include "plugin.h"
-#include "quotawatch.h"
+#include "DiskQuota.h"
 #include "QuotaListModel.h"
 
 #include <QtQml>
 
-void QuotaWatchPlugin::registerTypes (const char *uri)
+void DiskQuotaPlugin::registerTypes (const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.quotawatch"));
-    qmlRegisterType<QuotaWatch>(uri, 0, 1, "QuotaWatch");
+    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.diskquota"));
+    qmlRegisterType<DiskQuota>(uri, 1, 0, "DiskQuota");
     qmlRegisterType<QuotaListModel>(uri, 1, 0, "QuotaListModel");
 }

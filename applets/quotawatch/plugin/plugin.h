@@ -21,7 +21,7 @@
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
 
-class QuotaWatchPlugin : public QQmlExtensionPlugin
+class DiskQuotaPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")

@@ -16,10 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include "QuotaListModel.h"
-#include "quotaitem.h"
 
 #include <QDebug>
-#include <KLocalizedString>
 
 QuotaListModel::QuotaListModel(QObject * parent)
     : QAbstractListModel(parent)

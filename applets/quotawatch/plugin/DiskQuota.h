@@ -28,7 +28,7 @@ class QuotaListModel;
  * The monitoring is performed through a timer, running the 'quota'
  * command line tool.
  */
-class QuotaWatch : public QObject
+class DiskQuota : public QObject
 {
     Q_OBJECT
 
@@ -38,7 +38,7 @@ class QuotaWatch : public QObject
     Q_PROPERTY(QString subToolTip READ subToolTip WRITE setSubToolTip NOTIFY subToolTipChanged)
 
 public:
-    QuotaWatch(QObject * parent = nullptr);
+    DiskQuota(QObject * parent = nullptr);
 
     /**
      * Checks whether 'quota' is installed or not.

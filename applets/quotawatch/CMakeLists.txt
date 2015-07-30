@@ -1,26 +1,26 @@
 
 #######################################################################################
 # Package
-plasma_install_package(package org.kde.plasma.quotawatch)
+plasma_install_package(package org.kde.plasma.diskquota)
 
 
 #######################################################################################
 # Notes Library
-add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.quotawatch")
+add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.diskquota")
 
-set(notes_SRCS
+set(diskquota_SRCS
     plugin/plugin.cpp
-    plugin/quotawatch.cpp
+    plugin/DiskQuota.cpp
     plugin/QuotaListModel.cpp
-    plugin/quotaitem.cpp
+    plugin/QuotaItem.cpp
 )
 
-add_library(quotawatchplugin SHARED ${notes_SRCS})
+add_library(diskquotaplugin SHARED ${diskquota_SRCS})
 
-target_link_libraries(quotawatchplugin
+target_link_libraries(diskquotaplugin
                       Qt5::Quick
                       KF5::CoreAddons
                       KF5::I18n)
 
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/quotawatch)
-install(TARGETS quotawatchplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/quotawatch)
+install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/diskquota)
+install(TARGETS diskquotaplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/diskquota)
