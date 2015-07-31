@@ -33,6 +33,7 @@ DiskQuota::DiskQuota(QObject * parent)
     , m_timer(new QTimer(this))
     , m_quotaInstalled(true)
     , m_status(QStringLiteral("quota-ok"))
+    , m_iconName(QStringLiteral("quota"))
     , m_model(new QuotaListModel(this))
 {
     connect(m_timer, &QTimer::timeout, this, &DiskQuota::updateQuota);
@@ -74,6 +75,19 @@ void DiskQuota::setStatus(const QString & status)
     }
 }
 
+QString DiskQuota::iconName() const
+{
+    return m_iconName;
+}
+
+void DiskQuota::setIconName(const QString & name)
+{
+    if (m_iconName != name) {
+        m_iconName = name;
+        emit iconNameChanged();
+    }
+}
+
 QString DiskQuota::toolTip() const
 {
     return m_toolTip;
@@ -98,6 +112,20 @@ void DiskQuota::setSubToolTip(const QString & subToolTip)
         m_subToolTip = subToolTip;
         emit subToolTipChanged();
     }
+}
+
+static QString iconNameForQuota(int quota)
+{
+    if (quota < 50) {
+        return QStringLiteral("quota");
+    } else if (quota < 75) {
+        return QStringLiteral("quota-low");
+    } else if (quota < 90) {
+        return QStringLiteral("quota-high");
+    }
+
+    // quota >= 90%
+    return QStringLiteral("quota-critical");
 }
 
 static bool isQuotaLine(const QString & line)
@@ -204,7 +232,7 @@ void DiskQuota::updateQuota()
         const int percent = qMin(100, qMax(0, qRound(used * 100.0 / softLimit)));
 
         QuotaItem item;
-        item.setIconName(QStringLiteral("network-server-database"));
+        item.setIconName(iconNameForQuota(percent));
         item.setMountPoint(parts[0]);
         item.setUsage(percent);
         item.setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", parts[0], percent));
@@ -216,11 +244,14 @@ void DiskQuota::updateQuota()
         maxQuota = qMax(0, percent);
     }
 
-    m_model->updateItems(items);
-
 //     qDebug() << "QUOTAS:" << quotas;
 
+    // make sure max quota is 100. Could be more, due to the
+    // hard limit > soft limit, and we take soft limit as 100%
     maxQuota = qMin(100, maxQuota);
+
+    // update icon in panel
+    setIconName(iconNameForQuota(maxQuota));
 
     // update status
     setStatus(maxQuota < 50 ? QStringLiteral("status-ok")
@@ -236,6 +267,9 @@ void DiskQuota::updateQuota()
         setToolTip(i18n("Disk Quota"));
         setSubToolTip(i18n("No quota restrictions found."));
     }
+
+    // update all items
+    m_model->updateItems(items);
 }
 
 QuotaListModel * DiskQuota::model() const

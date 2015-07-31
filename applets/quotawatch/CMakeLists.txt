@@ -24,3 +24,6 @@ target_link_libraries(diskquotaplugin
 
 install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/diskquota)
 install(TARGETS diskquotaplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/diskquota)
+
+install(FILES "icons/quota.svg"
+        DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/icons/)

@@ -39,7 +39,7 @@ Item {
     DiskQuota {
         id: diskQuota
     }
-    
+
     PlasmaCore.DataSource {
         id: apps
         engine: "apps"
@@ -48,7 +48,7 @@ Item {
 
     Plasmoid.compactRepresentation: MouseArea {
         PlasmaCore.IconItem {
-            source: "network-server-database"
+            source: diskQuota.iconName
             anchors.fill: parent
         }
 

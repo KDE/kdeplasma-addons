@@ -36,6 +36,7 @@ class DiskQuota : public QObject
     Q_PROPERTY(QString status READ status WRITE setStatus NOTIFY statusChanged)
     Q_PROPERTY(QString toolTip READ toolTip WRITE setToolTip NOTIFY toolTipChanged)
     Q_PROPERTY(QString subToolTip READ subToolTip WRITE setSubToolTip NOTIFY subToolTipChanged)
+    Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
 
 public:
     DiskQuota(QObject * parent = nullptr);
@@ -57,13 +58,15 @@ public:
     QString status() const;
     QString toolTip() const;
     QString subToolTip() const;
-
+    QString iconName() const;
 
 public Q_SLOTS:
     void setQuotaInstalled(bool installed);
     void setStatus(const QString & status);
     void setToolTip(const QString & toolTip);
     void setSubToolTip(const QString & subToolTip);
+    void setIconName(const QString & name);
+
     void updateQuota();
     QuotaListModel * model() const;
 
@@ -72,11 +75,13 @@ Q_SIGNALS:
     void statusChanged();
     void toolTipChanged();
     void subToolTipChanged();
+    void iconNameChanged();
 
 private:
     QTimer * m_timer;
     bool m_quotaInstalled;
     QString m_status;
+    QString m_iconName;
     QString m_toolTip;
     QString m_subToolTip;
     QuotaListModel * m_model;
