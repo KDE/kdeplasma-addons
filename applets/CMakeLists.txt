@@ -2,7 +2,6 @@ add_subdirectory(fifteenPuzzle)
 add_subdirectory(fuzzy-clock)
 add_subdirectory(calculator)
 add_subdirectory(notes)
-add_subdirectory(quotawatch)
 add_subdirectory(timer)
 
 find_package(KDEExperimentalPurpose QUIET)
@@ -16,7 +15,10 @@ if (KDEExperimentalPurpose_FOUND)
 endif()
 
 if(NOT WIN32)
-   add_subdirectory(systemloadviewer)
+    # uses the command line tool 'quota', does not make sense on Windows
+    add_subdirectory(diskquota)
+
+    add_subdirectory(systemloadviewer)
 endif(NOT WIN32)
 
 add_subdirectory(kimpanel)
