@@ -15,8 +15,8 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#ifndef PLASMA_QUOTA_WATCH_H
-#define PLASMA_QUOTA_WATCH_H
+#ifndef PLASMA_DISK_QUOTA_H
+#define PLASMA_DISK_QUOTA_H
 
 #include <QObject>
 
@@ -33,45 +33,62 @@ class DiskQuota : public QObject
     Q_OBJECT
 
     Q_PROPERTY(bool quotaInstalled READ quotaInstalled WRITE setQuotaInstalled NOTIFY quotaInstalledChanged)
-    Q_PROPERTY(QString status READ status WRITE setStatus NOTIFY statusChanged)
+    Q_PROPERTY(bool cleanUpToolInstalled READ cleanUpToolInstalled WRITE setCleanUpToolInstalled NOTIFY cleanUpToolInstalledChanged)
+
+    Q_PROPERTY(TrayStatus status READ status WRITE setStatus NOTIFY statusChanged)
     Q_PROPERTY(QString toolTip READ toolTip WRITE setToolTip NOTIFY toolTipChanged)
     Q_PROPERTY(QString subToolTip READ subToolTip WRITE setSubToolTip NOTIFY subToolTipChanged)
     Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
 
+    Q_ENUMS(TrayStatus)
+
 public:
     DiskQuota(QObject * parent = nullptr);
 
-    /**
-     * Checks whether 'quota' is installed or not.
-     */
-    bool quotaInstalled() const;
-
-    /**
-     * Returns the current status of the notification. Valid notifications
-     * are, with increasing priority:
-     * - "status-not-installed": quota is not installed
-     * - "status-ok": quota is still ok (enough spaces free)
-     * - "status-75": geting closer to quota limit (>= 75% used)
-     * - "status-90": geting closer to quota limit (>= 90% used)
-     * - "status-critical": close to critical limit (>= 98% used)
-     */
-    QString status() const;
-    QString toolTip() const;
-    QString subToolTip() const;
-    QString iconName() const;
+public:
+    enum TrayStatus {
+        ActiveStatus = 0,
+        PassiveStatus,
+        NeedsAttentionStatus
+    };
 
 public Q_SLOTS:
+    bool quotaInstalled() const;
     void setQuotaInstalled(bool installed);
-    void setStatus(const QString & status);
+
+    bool cleanUpToolInstalled() const;
+    void setCleanUpToolInstalled(bool installed);
+
+    TrayStatus status() const;
+    void setStatus(TrayStatus status);
+
+    QString toolTip() const;
     void setToolTip(const QString & toolTip);
+
+    QString subToolTip() const;
     void setSubToolTip(const QString & subToolTip);
+
+    QString iconName() const;
     void setIconName(const QString & name);
 
+    /**
+     * Called every timer timeout to update the data model.
+     */
     void updateQuota();
+
+    /**
+     * Getter function for the model that is used in QML.
+     */
     QuotaListModel * model() const;
+
+    /**
+     * Opens the cleanup tool (filelight) at the folder @p mountPoint.
+     */
+    void openCleanUpTool(const QString & mountPoint);
 
 Q_SIGNALS:
     void quotaInstalledChanged();
+    void cleanUpToolInstalledChanged();
     void statusChanged();
     void toolTipChanged();
     void subToolTipChanged();
@@ -80,11 +97,12 @@ Q_SIGNALS:
 private:
     QTimer * m_timer;
     bool m_quotaInstalled;
-    QString m_status;
+    bool m_cleanUpToolInstalled;
+    TrayStatus m_status;
     QString m_iconName;
     QString m_toolTip;
     QString m_subToolTip;
     QuotaListModel * m_model;
 };
 
-#endif // PLASMA_QUOTA_WATCH_H
+#endif // PLASMA_DISK_QUOTA_H

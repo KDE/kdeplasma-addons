@@ -25,13 +25,14 @@ import org.kde.plasma.components 2.0 as Components
 import org.kde.plasma.private.diskquota 1.0
 
 Components.ListItem {
+    id: quotaItem
     property string mountPoint
+    property string details
     property string iconName
     property string usedString
     property string freeString
     property int usage
 
-    enabled: true
     onContainsMouseChanged: {
         if (containsMouse) {
             ListView.view.currentIndex = index
@@ -39,11 +40,11 @@ Components.ListItem {
             ListView.view.currentIndex = -1
         }
     }
-    
+
     onClicked: {
-        kRun.openUrl(apps.data[apps.connectedSources[0]].entryPath)
+        diskQuota.openCleanUpTool(mountPoint);
     }
-    
+
     RowLayout {
         id: contents
         anchors.left: parent.left
@@ -66,7 +67,7 @@ Components.ListItem {
                 Components.Label {
                     Layout.fillWidth: true
                     height: paintedHeight
-                    text: mountPoint
+                    text: details
                 }
                 Components.Label {
                     Layout.fillWidth: true
@@ -81,6 +82,13 @@ Components.ListItem {
                 value: usage
                 minimumValue: 0
                 maximumValue: 100
+                // HACK to make progressbar clickable
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        quotaItem.clicked()
+                    }
+                }
             }
             Components.Label {
                 height: paintedHeight

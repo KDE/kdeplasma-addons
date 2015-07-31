@@ -22,13 +22,13 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 2.0 as Components
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.kio 1.0 as Kio
 
 import org.kde.plasma.private.diskquota 1.0
 
 Item {
+    id: quotaApplet
     Component.onCompleted: plasmoid.removeAction("configure")
-    Plasmoid.status: (diskQuota.status == "status-critical") ? PlasmaCore.Types.NeedsAttentionStatus : (diskQuota.status == "status-ok") ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.ActiveStatus
+    Plasmoid.status: (diskQuota.status === DiskQuota.ActiveStatus) ? PlasmaCore.Types.ActiveStatus : ((diskQuota.status === DiskQuota.PassiveStatus) ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.NeedsAttentionStatus)
 
     Layout.minimumWidth: units.gridUnit * 10
     Layout.minimumHeight: units.gridUnit * 2
@@ -40,26 +40,24 @@ Item {
         id: diskQuota
     }
 
-    PlasmaCore.DataSource {
-        id: apps
-        engine: "apps"
-        connectedSources: ["org.kde.filelight.desktop"]
-    }
-
-    Plasmoid.compactRepresentation: MouseArea {
-        PlasmaCore.IconItem {
-            source: diskQuota.iconName
-            anchors.fill: parent
-        }
-
-        onClicked: plasmoid.expanded = !plasmoid.expanded
-    }
+    Plasmoid.icon: diskQuota.iconName
 
     Plasmoid.fullRepresentation: Item {
         id: root
 
         width: units.gridUnit * 20
         height: units.gridUnit * 14
+
+        // HACK: connection to reset currentIndex to -1. Without this, when
+        // uninstalling filelight, the selection highlight remains fixed (which is wrong)
+        Connections {
+            target: diskQuota
+            onCleanUpToolInstalledChanged: {
+                if (!diskQuota.cleanUpToolInstalled) {
+                    listView.currentIndex = -1
+                }
+            }
+        }
 
         ColumnLayout {
             anchors.fill: root
@@ -82,8 +80,10 @@ Item {
                     highlightResizeDuration: 0
                     currentIndex: -1
                     delegate: ListDelegateItem {
+                        enabled: diskQuota.cleanUpToolInstalled
                         width: listView.width
-                        mountPoint: model.details
+                        mountPoint: model.mountPoint
+                        details: model.details
                         iconName: model.icon
                         usedString: model.used
                         freeString: model.free
@@ -92,10 +92,6 @@ Item {
                 }
             }
         }
-    }
-
-    Kio.KRun {
-        id: kRun
     }
 
     Plasmoid.toolTipMainText: diskQuota.toolTip

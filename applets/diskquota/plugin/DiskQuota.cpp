@@ -32,7 +32,8 @@ DiskQuota::DiskQuota(QObject * parent)
     : QObject(parent)
     , m_timer(new QTimer(this))
     , m_quotaInstalled(true)
-    , m_status(QStringLiteral("quota-ok"))
+    , m_cleanUpToolInstalled(true)
+    , m_status(PassiveStatus)
     , m_iconName(QStringLiteral("quota"))
     , m_model(new QuotaListModel(this))
 {
@@ -53,7 +54,7 @@ void DiskQuota::setQuotaInstalled(bool installed)
 
         if (! installed) {
             m_model->clear();
-            setStatus(QStringLiteral("status-not-installed"));
+            setStatus(PassiveStatus);
             setToolTip(i18n("Disk Quota"));
             setSubToolTip(i18n("Please install 'quota'"));
         }
@@ -62,12 +63,25 @@ void DiskQuota::setQuotaInstalled(bool installed)
     }
 }
 
-QString DiskQuota::status() const
+bool DiskQuota::cleanUpToolInstalled() const
+{
+    return m_cleanUpToolInstalled;
+}
+
+void DiskQuota::setCleanUpToolInstalled(bool installed)
+{
+    if (m_cleanUpToolInstalled != installed) {
+        m_cleanUpToolInstalled = installed;
+        emit cleanUpToolInstalledChanged();
+    }
+}
+
+DiskQuota::TrayStatus DiskQuota::status() const
 {
     return m_status;
 }
 
-void DiskQuota::setStatus(const QString & status)
+void DiskQuota::setStatus(TrayStatus status)
 {
     if (m_status != status) {
         m_status = status;
@@ -173,6 +187,9 @@ void DiskQuota::updateQuota()
         return;
     }
 
+    // for now, only filelight is supported
+    setCleanUpToolInstalled(! QStandardPaths::findExecutable(QStringLiteral("filelight")).isEmpty());
+
     // get quota output
     QString rawData;
     const bool success = runQuotaApp(rawData);
@@ -254,10 +271,9 @@ void DiskQuota::updateQuota()
     setIconName(iconNameForQuota(maxQuota));
 
     // update status
-    setStatus(maxQuota < 50 ? QStringLiteral("status-ok")
-            : maxQuota < 75 ? QStringLiteral("status-75")
-            : maxQuota < 90 ? QStringLiteral("status-90")
-            : QStringLiteral("status-critical"));
+    setStatus(maxQuota < 50 ? PassiveStatus
+            : maxQuota < 98 ? ActiveStatus
+            : NeedsAttentionStatus);
 
     if (!items.isEmpty()) {
         setToolTip(i18nc("example: Quota: 83% used",
@@ -277,3 +293,11 @@ QuotaListModel * DiskQuota::model() const
     return m_model;
 }
 
+void DiskQuota::openCleanUpTool(const QString & mountPoint)
+{
+    if (!cleanUpToolInstalled()) {
+        return;
+    }
+
+    QProcess::startDetached(QStringLiteral("filelight"), {mountPoint});
+}
