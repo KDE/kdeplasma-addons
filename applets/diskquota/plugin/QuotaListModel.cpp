@@ -25,6 +25,9 @@ QuotaListModel::QuotaListModel(QObject * parent)
 }
 
 namespace {
+    /**
+     * QML data roles.
+     */
     enum {
         DetailsRole = Qt::UserRole + 0,
         IconRole,
@@ -85,6 +88,10 @@ bool QuotaListModel::setData(const QModelIndex & index, const QVariant & variant
     const int row = index.row();
     if (index.isValid() && row < m_items.size()) {
         const QuotaItem item = variant.value<QuotaItem>();
+
+        // This assert makes sure that changing items modify the correct item:
+        // therefore, the unique identifier 'mountPoint()' is used. If that
+        // is not the case, the newly inserted row must have an empty mountPoint().
         Q_ASSERT(item.mountPoint() == m_items[row].mountPoint()
             || m_items[row].mountPoint().isEmpty());
 
@@ -100,9 +107,11 @@ bool QuotaListModel::setData(const QModelIndex & index, const QVariant & variant
 
 bool QuotaListModel::insertRows(int row, int count, const QModelIndex & parent)
 {
+    // only top-level items are supported
     if (parent.isValid()) {
         return false;
     }
+
     beginInsertRows(QModelIndex(), row, row + count - 1);
     m_items.insert(row, count, QuotaItem());
     endInsertRows();
@@ -112,6 +121,7 @@ bool QuotaListModel::insertRows(int row, int count, const QModelIndex & parent)
 
 bool QuotaListModel::removeRows(int row, int count, const QModelIndex & parent)
 {
+    // only top-level items are valid
     if (parent.isValid() || (row + count) >= m_items.size()) {
         return false;
     }

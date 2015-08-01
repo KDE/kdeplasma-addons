@@ -202,12 +202,12 @@ void DiskQuota::updateQuota()
 
 //     const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
     QStringList lines = QStringList()
-//         << QStringLiteral("/home/peterpan 4471196*  5000000 7000000           57602 0       0")
-//         << QStringLiteral("/home/archive 2263536  5000000 5100000            3932 0       0")
-//         << QStringLiteral("/home/shared 3171196*  5000000 7000000           57602 0       0");
-        << QStringLiteral("/home/peterpan %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000)
-        << QStringLiteral("/home/archive %1  5000000 5100000            3932 0       0").arg(qrand() % 5000000)
-        << QStringLiteral("/home/shared %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000);
+        << QStringLiteral("/home/peterpan 4471196*  5000000 7000000           57602 0       0")
+        << QStringLiteral("/home/archive 2263536  5000000 5100000            3932 0       0")
+        << QStringLiteral("/home/shared 3171196*  5000000 7000000           57602 0       0");
+//         << QStringLiteral("/home/peterpan %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000)
+//         << QStringLiteral("/home/archive %1  5000000 5100000            3932 0       0").arg(qrand() % 5000000)
+//         << QStringLiteral("/home/shared %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000);
 //     lines.removeAt(qrand() % lines.size());
 
     // format class needed for GiB/MiB/KiB formatting
@@ -253,7 +253,7 @@ void DiskQuota::updateQuota()
         item.setMountPoint(parts[0]);
         item.setUsage(percent);
         item.setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", parts[0], percent));
-        item.setUsedString(i18nc("e.g.: 12 GiB of 20 GiB used", "%1 of %2 used", fmt.formatByteSize(used), fmt.formatByteSize(softLimit)));
+        item.setUsedString(i18nc("e.g.: 12 GiB of 20 GiB", "%1 of %2", fmt.formatByteSize(used), fmt.formatByteSize(softLimit)));
         item.setFreeString(i18nc("e.g.: 8 GiB free", "%1 free", fmt.formatByteSize(qMax(qint64(0), freeSize))));
 
         items.append(item);
@@ -284,7 +284,7 @@ void DiskQuota::updateQuota()
         setSubToolTip(i18n("No quota restrictions found."));
     }
 
-    // update all items
+    // merge new items, add new ones, remove old ones
     m_model->updateItems(items);
 }
 

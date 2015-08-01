@@ -20,7 +20,7 @@
 #include <QDebug>
 
 QuotaItem::QuotaItem()
-    : m_iconName()
+    : m_iconName(QStringLiteral("quota"))
     , m_mountPoint()
     , m_usage(0)
     , m_mountString()

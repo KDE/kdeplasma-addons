@@ -21,6 +21,9 @@
 #include <QString>
 #include <QMetaType>
 
+/**
+ * Class that holds all quota info for one mount point.
+ */
 class QuotaItem
 {
 public:

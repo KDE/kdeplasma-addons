@@ -24,9 +24,7 @@
 #include "QuotaItem.h"
 
 /**
- * Class monitoring the file system quota.
- * The monitoring is performed through a timer, running the 'quota'
- * command line tool.
+ * Data model holding disk quota items.
  */
 class QuotaListModel : public QAbstractListModel
 {
@@ -35,6 +33,7 @@ class QuotaListModel : public QAbstractListModel
 public:
     QuotaListModel(QObject * parent = nullptr);
 
+public: // QAbstractListModel overrides
     /**
      * List of available roles for the QML ListView.
      */
@@ -55,11 +54,20 @@ public:
      */
     bool setData(const QModelIndex & index, const QVariant & variant, int role = Qt::EditRole) Q_DECL_OVERRIDE;
 
+    /**
+     * Inserts @p count rows at position @p row.
+     */
     bool insertRows(int row, int count, const QModelIndex & parent = QModelIndex()) Q_DECL_OVERRIDE;
-    bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex()) Q_DECL_OVERRIDE;
 
     /**
-     *
+     * Removes @p count rows at position @p row.
+     */
+    bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex()) Q_DECL_OVERRIDE;
+
+public: // additional helper functions
+    /**
+     * Merges @p items into the existing quota item list. Old items that are
+     * not available in @p items anymore are deleted.
      */
     void updateItems(const QVector<QuotaItem> & items);
 

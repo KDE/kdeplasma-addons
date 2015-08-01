@@ -46,6 +46,9 @@ public:
     DiskQuota(QObject * parent = nullptr);
 
 public:
+    /**
+     * System tray icon states.
+     */
     enum TrayStatus {
         ActiveStatus = 0,
         PassiveStatus,
