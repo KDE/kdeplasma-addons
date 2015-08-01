@@ -258,7 +258,7 @@ void DiskQuota::updateQuota()
 
         items.append(item);
 
-        maxQuota = qMax(0, percent);
+        maxQuota = qMax(maxQuota, percent);
     }
 
 //     qDebug() << "QUOTAS:" << quotas;
