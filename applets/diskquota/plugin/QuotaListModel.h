@@ -37,32 +37,32 @@ public: // QAbstractListModel overrides
     /**
      * List of available roles for the QML ListView.
      */
-    QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
+    QHash<int, QByteArray> roleNames() const override;
 
     /**
      * Returns the data for @p index and given @p role.
      */
-    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role) const override;
 
     /**
      * Returns the number of items for the toplevel model index, otherwise 0.
      */
-    int rowCount(const QModelIndex &index) const Q_DECL_OVERRIDE;
+    int rowCount(const QModelIndex &index) const override;
 
     /**
      * Changes the data for @p index to @p variant.
      */
-    bool setData(const QModelIndex &index, const QVariant &variant, int role = Qt::EditRole) Q_DECL_OVERRIDE;
+    bool setData(const QModelIndex &index, const QVariant &variant, int role = Qt::EditRole) override;
 
     /**
      * Inserts @p count rows at position @p row.
      */
-    bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
+    bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 
     /**
      * Removes @p count rows at position @p row.
      */
-    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 
 public: // additional helper functions
     /**

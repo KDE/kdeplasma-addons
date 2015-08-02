@@ -40,15 +40,14 @@ namespace {
 
 QHash<int, QByteArray> QuotaListModel::roleNames() const
 {
-    static QHash<int, QByteArray> roles;
-    if (roles.isEmpty()) {
-        roles[DetailsRole] = "details";
-        roles[IconRole] = "icon";
-        roles[FreeStringRole] = "free";
-        roles[UsedStringRole] = "used";
-        roles[MountPointRole] = "mountPoint";
-        roles[UsageRole] = "usage";
-    }
+    QHash<int, QByteArray> roles;
+    roles[DetailsRole] = "details";
+    roles[IconRole] = "icon";
+    roles[FreeStringRole] = "free";
+    roles[UsedStringRole] = "used";
+    roles[MountPointRole] = "mountPoint";
+    roles[UsageRole] = "usage";
+
     return roles;
 }
 

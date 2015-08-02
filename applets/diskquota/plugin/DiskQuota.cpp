@@ -52,7 +52,7 @@ void DiskQuota::setQuotaInstalled(bool installed)
     if (m_quotaInstalled != installed) {
         m_quotaInstalled = installed;
 
-        if (! installed) {
+        if (!installed) {
             m_model->clear();
             setStatus(PassiveStatus);
             setToolTip(i18n("Disk Quota"));
