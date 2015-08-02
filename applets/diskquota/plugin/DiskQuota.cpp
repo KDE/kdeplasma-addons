@@ -38,7 +38,7 @@ DiskQuota::DiskQuota(QObject * parent)
     , m_model(new QuotaListModel(this))
 {
     connect(m_timer, &QTimer::timeout, this, &DiskQuota::updateQuota);
-    m_timer->start(5 * 1000);
+    m_timer->start(2 * 60 * 1000); // check every 2 minutes
     updateQuota();
 }
 
