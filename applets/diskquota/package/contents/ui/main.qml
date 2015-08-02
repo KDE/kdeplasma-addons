@@ -63,10 +63,10 @@ Item {
             anchors.fill: root
             Components.Label {
                 visible: ! diskQuota.quotaInstalled
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: i18n("Quota tool not found. Please install 'quota'.")
-                horizontalAlignment: Text.AlignLeft
+                anchors.fill: parent
+                text: i18n("<p>Quota tool not found.</p><p>Please install 'quota'.</p>")
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
             }
 
             PlasmaExtras.ScrollArea {

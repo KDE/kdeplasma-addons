@@ -200,11 +200,12 @@ void DiskQuota::updateQuota()
         return;
     }
 
-//     const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
-    QStringList lines = QStringList()
-        << QStringLiteral("/home/peterpan 4471196*  5000000 7000000           57602 0       0")
-        << QStringLiteral("/home/archive 2263536  5000000 5100000            3932 0       0")
-        << QStringLiteral("/home/shared 3171196*  5000000 7000000           57602 0       0");
+    const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
+    // Testing
+//     QStringList lines = QStringList()
+//         << QStringLiteral("/home/peterpan 3975379*  5000000 7000000           57602 0       0")
+//         << QStringLiteral("/home/archive 2263536  6000000 5100000            3932 0       0")
+//         << QStringLiteral("/home/shared 4271196*  10000000 7000000           57602 0       0");
 //         << QStringLiteral("/home/peterpan %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000)
 //         << QStringLiteral("/home/archive %1  5000000 5100000            3932 0       0").arg(qrand() % 5000000)
 //         << QStringLiteral("/home/shared %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000);
@@ -217,7 +218,7 @@ void DiskQuota::updateQuota()
 
     // assumption: Filesystem starts with slash
     for (const QString & line : lines) {
-        qDebug() << line << isQuotaLine(line);
+//         qDebug() << line << isQuotaLine(line);
         if (!isQuotaLine(line)) {
             continue;
         }
