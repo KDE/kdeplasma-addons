@@ -19,7 +19,7 @@
 
 #include <QDebug>
 
-QuotaListModel::QuotaListModel(QObject * parent)
+QuotaListModel::QuotaListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
 }
@@ -72,7 +72,7 @@ QVariant QuotaListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-int QuotaListModel::rowCount(const QModelIndex & index) const
+int QuotaListModel::rowCount(const QModelIndex &index) const
 {
     if (! index.isValid()) {
         return m_items.size();
@@ -81,7 +81,7 @@ int QuotaListModel::rowCount(const QModelIndex & index) const
     return 0;
 }
 
-bool QuotaListModel::setData(const QModelIndex & index, const QVariant & variant, int role)
+bool QuotaListModel::setData(const QModelIndex &index, const QVariant &variant, int role)
 {
     Q_UNUSED(role)
 
@@ -105,7 +105,7 @@ bool QuotaListModel::setData(const QModelIndex & index, const QVariant & variant
     return false;
 }
 
-bool QuotaListModel::insertRows(int row, int count, const QModelIndex & parent)
+bool QuotaListModel::insertRows(int row, int count, const QModelIndex &parent)
 {
     // only top-level items are supported
     if (parent.isValid()) {
@@ -119,7 +119,7 @@ bool QuotaListModel::insertRows(int row, int count, const QModelIndex & parent)
     return true;
 }
 
-bool QuotaListModel::removeRows(int row, int count, const QModelIndex & parent)
+bool QuotaListModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     // only top-level items are valid
     if (parent.isValid() || (row + count) >= m_items.size()) {
@@ -141,7 +141,7 @@ void QuotaListModel::clear()
 }
 
 namespace {
-    QStringList mountPoints(const QVector<QuotaItem> & items)
+    QStringList mountPoints(const QVector<QuotaItem> &items)
     {
         QStringList list;
         for (auto & item : items) {
@@ -150,7 +150,7 @@ namespace {
         return list;
     }
 
-    int indexOfMountPoint(const QString & mountPoint, const QVector<QuotaItem> & items)
+    int indexOfMountPoint(const QString &mountPoint, const QVector<QuotaItem> &items)
     {
         for (int i = 0; i < items.size(); ++i) {
             if (mountPoint == items[i].mountPoint()) {
@@ -161,7 +161,7 @@ namespace {
     }
 }
 
-void QuotaListModel::updateItems(const QVector<QuotaItem> & items)
+void QuotaListModel::updateItems(const QVector<QuotaItem> &items)
 {
     QStringList unusedMountPoints = mountPoints(m_items);
 

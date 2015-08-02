@@ -30,25 +30,25 @@ public:
     QuotaItem();
 
     QString mountPoint() const;
-    void setMountPoint(const QString & mountPoint);
+    void setMountPoint(const QString &mountPoint);
 
     int usage() const;
     void setUsage(int usage);
 
     QString iconName() const;
-    void setIconName(const QString & name);
+    void setIconName(const QString &name);
 
     QString mountString() const;
-    void setMountString(const QString & mountString);
+    void setMountString(const QString &mountString);
 
     QString usedString() const;
-    void setUsedString(const QString & usedString);
+    void setUsedString(const QString &usedString);
 
     QString freeString() const;
-    void setFreeString(const QString & freeString);
+    void setFreeString(const QString &freeString);
 
-    bool operator==(const QuotaItem & other) const;
-    bool operator!=(const QuotaItem & other) const;
+    bool operator==(const QuotaItem &other) const;
+    bool operator!=(const QuotaItem &other) const;
 
 private:
     QString m_iconName;

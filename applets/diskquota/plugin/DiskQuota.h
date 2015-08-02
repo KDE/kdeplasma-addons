@@ -33,18 +33,18 @@ class DiskQuota : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool quotaInstalled READ quotaInstalled WRITE setQuotaInstalled NOTIFY quotaInstalledChanged)
-    Q_PROPERTY(bool cleanUpToolInstalled READ cleanUpToolInstalled WRITE setCleanUpToolInstalled NOTIFY cleanUpToolInstalledChanged)
+    Q_PROPERTY(bool quotaInstalled READ quotaInstalled NOTIFY quotaInstalledChanged)
+    Q_PROPERTY(bool cleanUpToolInstalled READ cleanUpToolInstalled NOTIFY cleanUpToolInstalledChanged)
 
-    Q_PROPERTY(TrayStatus status READ status WRITE setStatus NOTIFY statusChanged)
-    Q_PROPERTY(QString toolTip READ toolTip WRITE setToolTip NOTIFY toolTipChanged)
-    Q_PROPERTY(QString subToolTip READ subToolTip WRITE setSubToolTip NOTIFY subToolTipChanged)
-    Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
+    Q_PROPERTY(TrayStatus status READ status NOTIFY statusChanged)
+    Q_PROPERTY(QString toolTip READ toolTip NOTIFY toolTipChanged)
+    Q_PROPERTY(QString subToolTip READ subToolTip NOTIFY subToolTipChanged)
+    Q_PROPERTY(QString iconName READ iconName NOTIFY iconNameChanged)
 
     Q_ENUMS(TrayStatus)
 
 public:
-    DiskQuota(QObject * parent = nullptr);
+    DiskQuota(QObject *parent = nullptr);
 
 public:
     /**
@@ -56,7 +56,7 @@ public:
         NeedsAttentionStatus
     };
 
-public Q_SLOTS:
+public:
     bool quotaInstalled() const;
     void setQuotaInstalled(bool installed);
 
@@ -67,14 +67,15 @@ public Q_SLOTS:
     void setStatus(TrayStatus status);
 
     QString toolTip() const;
-    void setToolTip(const QString & toolTip);
+    void setToolTip(const QString &toolTip);
 
     QString subToolTip() const;
-    void setSubToolTip(const QString & subToolTip);
+    void setSubToolTip(const QString &subToolTip);
 
     QString iconName() const;
-    void setIconName(const QString & name);
+    void setIconName(const QString &name);
 
+public Q_SLOTS:
     /**
      * Called every timer timeout to update the data model.
      * Launches an asynchronous 'quota' process to obtain data,
@@ -95,7 +96,7 @@ public Q_SLOTS:
     /**
      * Opens the cleanup tool (filelight) at the folder @p mountPoint.
      */
-    void openCleanUpTool(const QString & mountPoint);
+    void openCleanUpTool(const QString &mountPoint);
 
 Q_SIGNALS:
     void quotaInstalledChanged();
@@ -106,15 +107,15 @@ Q_SIGNALS:
     void iconNameChanged();
 
 private:
-    QTimer * m_timer;
-    QProcess * m_quotaProcess;
-    bool m_quotaInstalled;
-    bool m_cleanUpToolInstalled;
-    TrayStatus m_status;
-    QString m_iconName;
+    QTimer *m_timer = nullptr;
+    QProcess *m_quotaProcess = nullptr;
+    bool m_quotaInstalled = true;
+    bool m_cleanUpToolInstalled = true;
+    TrayStatus m_status = PassiveStatus;
+    QString m_iconName = QStringLiteral("quota");
     QString m_toolTip;
     QString m_subToolTip;
-    QuotaListModel * m_model;
+    QuotaListModel *m_model = nullptr;
 };
 
 #endif // PLASMA_DISK_QUOTA_H

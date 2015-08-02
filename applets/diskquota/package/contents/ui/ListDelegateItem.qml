@@ -47,8 +47,7 @@ Components.ListItem {
 
     RowLayout {
         id: contents
-        anchors.left: parent.left
-        anchors.right: parent.right
+        width: parent.width
         spacing: units.gridUnit
 
         PlasmaCore.IconItem {
@@ -94,7 +93,6 @@ Components.ListItem {
                 height: paintedHeight
                 anchors.left: parent.left
                 text: usedString
-                horizontalAlignment: Text.AlignLeft
                 opacity: 0.6
             }
         }

@@ -33,7 +33,7 @@ QString QuotaItem::iconName() const
     return m_iconName;
 }
 
-void QuotaItem::setIconName(const QString & name)
+void QuotaItem::setIconName(const QString &name)
 {
     m_iconName = name;
 }
@@ -43,7 +43,7 @@ QString QuotaItem::mountPoint() const
     return m_mountPoint;
 }
 
-void QuotaItem::setMountPoint(const QString & mountPoint)
+void QuotaItem::setMountPoint(const QString &mountPoint)
 {
     m_mountPoint = mountPoint;
 }
@@ -63,7 +63,7 @@ QString QuotaItem::mountString() const
     return m_mountString;
 }
 
-void QuotaItem::setMountString(const QString & mountString)
+void QuotaItem::setMountString(const QString &mountString)
 {
     m_mountString = mountString;
 }
@@ -73,7 +73,7 @@ QString QuotaItem::usedString() const
     return m_usedString;
 }
 
-void QuotaItem::setUsedString(const QString & usedString)
+void QuotaItem::setUsedString(const QString &usedString)
 {
     m_usedString = usedString;
 }
@@ -83,12 +83,12 @@ QString QuotaItem::freeString() const
     return m_freeString;
 }
 
-void QuotaItem::setFreeString(const QString & freeString)
+void QuotaItem::setFreeString(const QString &freeString)
 {
     m_freeString = freeString;
 }
 
-bool QuotaItem::operator==(const QuotaItem & other) const
+bool QuotaItem::operator==(const QuotaItem &other) const
 {
     return m_mountPoint == other.m_mountPoint
         && m_iconName == other.m_iconName
@@ -98,7 +98,7 @@ bool QuotaItem::operator==(const QuotaItem & other) const
         && m_freeString == other.m_freeString;
 }
 
-bool QuotaItem::operator!=(const QuotaItem & other) const
+bool QuotaItem::operator!=(const QuotaItem &other) const
 {
     return ! (*this == other);
 }

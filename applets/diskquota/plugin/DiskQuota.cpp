@@ -25,16 +25,12 @@
 #include <QTimer>
 #include <QRegularExpression>
 #include <QStandardPaths>
-#include <QDebug>
+// #include <QDebug>
 
-DiskQuota::DiskQuota(QObject * parent)
+DiskQuota::DiskQuota(QObject *parent)
     : QObject(parent)
     , m_timer(new QTimer(this))
     , m_quotaProcess(new QProcess(this))
-    , m_quotaInstalled(true)
-    , m_cleanUpToolInstalled(true)
-    , m_status(PassiveStatus)
-    , m_iconName(QStringLiteral("quota"))
     , m_model(new QuotaListModel(this))
 {
     connect(m_timer, &QTimer::timeout, this, &DiskQuota::updateQuota);
@@ -98,7 +94,7 @@ QString DiskQuota::iconName() const
     return m_iconName;
 }
 
-void DiskQuota::setIconName(const QString & name)
+void DiskQuota::setIconName(const QString &name)
 {
     if (m_iconName != name) {
         m_iconName = name;
@@ -111,7 +107,7 @@ QString DiskQuota::toolTip() const
     return m_toolTip;
 }
 
-void DiskQuota::setToolTip(const QString & toolTip)
+void DiskQuota::setToolTip(const QString &toolTip)
 {
     if (m_toolTip != toolTip) {
         m_toolTip = toolTip;
@@ -124,7 +120,7 @@ QString DiskQuota::subToolTip() const
     return m_subToolTip;
 }
 
-void DiskQuota::setSubToolTip(const QString & subToolTip)
+void DiskQuota::setSubToolTip(const QString &subToolTip)
 {
     if (m_subToolTip != subToolTip) {
         m_subToolTip = subToolTip;
@@ -146,7 +142,7 @@ static QString iconNameForQuota(int quota)
     return QStringLiteral("quota-critical");
 }
 
-static bool isQuotaLine(const QString & line)
+static bool isQuotaLine(const QString &line)
 {
     const int iMax = line.size();
     for (int i = 0; i < iMax; ++i) {
@@ -174,13 +170,14 @@ void DiskQuota::updateQuota()
     }
 
     // Try to run 'quota'
-    const QStringList args = QStringList()
-        << QStringLiteral("--show-mntpoint")      // second entry is e.g. '/home'
-        << QStringLiteral("--hide-device")        // hide e.g. /dev/sda3
-        << QStringLiteral("--no-mixed-pathnames") // trim leading slashes from NFSv4 mountpoints
-        << QStringLiteral("--all-nfs")            // show all mount points
-        << QStringLiteral("--no-wrap")            // do not wrap long lines
-        << QStringLiteral("--quiet-refuse");      // no not print error message when NFS server does not respond
+    const QStringList args{
+        QStringLiteral("--show-mntpoint"),     // second entry is e.g. '/home'
+        QStringLiteral("--hide-device"),       // hide e.g. /dev/sda3
+        QStringLiteral("--no-mixed-pathnames"),// trim leading slashes from NFSv4 mountpoints
+        QStringLiteral("--all-nfs"),           // show all mount points
+        QStringLiteral("--no-wrap"),           // do not wrap long lines
+        QStringLiteral("--quiet-refuse"),      // no not print error message when NFS server does not respond
+    };
 
     m_quotaProcess->start(QStringLiteral("quota"), args, QIODevice::ReadOnly);
 }
@@ -217,7 +214,7 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
     QVector<QuotaItem> items;
 
     // assumption: Filesystem starts with slash
-    for (const QString & line : lines) {
+    for (const QString &line : lines) {
 //         qDebug() << line << isQuotaLine(line);
         if (!isQuotaLine(line)) {
             continue;
@@ -294,7 +291,7 @@ QuotaListModel * DiskQuota::model() const
     return m_model;
 }
 
-void DiskQuota::openCleanUpTool(const QString & mountPoint)
+void DiskQuota::openCleanUpTool(const QString &mountPoint)
 {
     if (!cleanUpToolInstalled()) {
         return;

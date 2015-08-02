@@ -28,7 +28,16 @@ import org.kde.plasma.private.diskquota 1.0
 Item {
     id: quotaApplet
     Component.onCompleted: plasmoid.removeAction("configure")
-    Plasmoid.status: (diskQuota.status === DiskQuota.ActiveStatus) ? PlasmaCore.Types.ActiveStatus : ((diskQuota.status === DiskQuota.PassiveStatus) ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.NeedsAttentionStatus)
+    Plasmoid.status: {
+        switch (diskQuota.status) {
+            case DiskQuota.NeedsAttentionStatus:
+                return PlasmaCore.Types.NeedsAttentionStatus
+            case DiskQuota.ActiveStatus:
+                return PlasmaCore.Types.ActiveStatus
+        }
+        // default case: DiskQuota.PassiveStatus
+        return PlasmaCore.Types.PassiveStatus
+    }
 
     Layout.minimumWidth: units.gridUnit * 10
     Layout.minimumHeight: units.gridUnit * 2
@@ -62,7 +71,7 @@ Item {
         ColumnLayout {
             anchors.fill: root
             Components.Label {
-                visible: ! diskQuota.quotaInstalled
+                visible: !diskQuota.quotaInstalled
                 anchors.fill: parent
                 text: i18n("<p>Quota tool not found.</p><p>Please install 'quota'.</p>")
                 horizontalAlignment: Text.AlignHCenter
