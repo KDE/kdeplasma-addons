@@ -19,6 +19,7 @@
 #define PLASMA_DISK_QUOTA_H
 
 #include <QObject>
+#include <QProcess>
 
 class QTimer;
 class QuotaListModel;
@@ -76,8 +77,15 @@ public Q_SLOTS:
 
     /**
      * Called every timer timeout to update the data model.
+     * Launches an asynchronous 'quota' process to obtain data,
+     * and finally calls quotaProcessFinished().
      */
     void updateQuota();
+
+    /**
+     * Processes the quota data from the 'quota' process.
+     */
+    void quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
 
     /**
      * Getter function for the model that is used in QML.
@@ -99,6 +107,7 @@ Q_SIGNALS:
 
 private:
     QTimer * m_timer;
+    QProcess * m_quotaProcess;
     bool m_quotaInstalled;
     bool m_cleanUpToolInstalled;
     TrayStatus m_status;

@@ -23,7 +23,6 @@
 #include <KFormat>
 
 #include <QTimer>
-#include <QProcess>
 #include <QRegularExpression>
 #include <QStandardPaths>
 #include <QDebug>
@@ -31,6 +30,7 @@
 DiskQuota::DiskQuota(QObject * parent)
     : QObject(parent)
     , m_timer(new QTimer(this))
+    , m_quotaProcess(new QProcess(this))
     , m_quotaInstalled(true)
     , m_cleanUpToolInstalled(true)
     , m_status(PassiveStatus)
@@ -39,6 +39,10 @@ DiskQuota::DiskQuota(QObject * parent)
 {
     connect(m_timer, &QTimer::timeout, this, &DiskQuota::updateQuota);
     m_timer->start(2 * 60 * 1000); // check every 2 minutes
+
+    connect(m_quotaProcess, (void (QProcess::*)(int, QProcess::ExitStatus))&QProcess::finished,
+            this, &DiskQuota::quotaProcessFinished);
+
     updateQuota();
 }
 
@@ -153,32 +157,6 @@ static bool isQuotaLine(const QString & line)
     return false;
 }
 
-static bool runQuotaApp(QString & stdout)
-{
-    // Try to run 'quota'
-    const QStringList args = QStringList()
-        << QStringLiteral("--show-mntpoint")      // second entry is e.g. '/home'
-        << QStringLiteral("--hide-device")        // hide e.g. /dev/sda3
-        << QStringLiteral("--no-mixed-pathnames") // trim leading slashes from NFSv4 mountpoints
-        << QStringLiteral("--all-nfs")            // show all mount points
-        << QStringLiteral("--no-wrap")            // do not wrap long lines
-        << QStringLiteral("--quiet-refuse");      // no not print error message when NFS server does not respond
-
-    QProcess proc;
-    proc.start(QStringLiteral("quota"), args);
-
-    const bool success = proc.waitForStarted() && proc.waitForFinished();
-    if (!success) {
-        return false;
-    }
-
-    // get stdout
-    proc.closeWriteChannel();
-    stdout = QString::fromLocal8Bit(proc.readAllStandardOutput());
-
-    return true;
-}
-
 void DiskQuota::updateQuota()
 {
     const bool quotaFound = ! QStandardPaths::findExecutable(QStringLiteral("quota")).isEmpty();
@@ -190,15 +168,37 @@ void DiskQuota::updateQuota()
     // for now, only filelight is supported
     setCleanUpToolInstalled(! QStandardPaths::findExecutable(QStringLiteral("filelight")).isEmpty());
 
-    // get quota output
-    QString rawData;
-    const bool success = runQuotaApp(rawData);
-    if (!success) {
+    // kill running process in case it hanged for whatever reason
+    if (m_quotaProcess->state() != QProcess::NotRunning) {
+        m_quotaProcess->kill();
+    }
+
+    // Try to run 'quota'
+    const QStringList args = QStringList()
+        << QStringLiteral("--show-mntpoint")      // second entry is e.g. '/home'
+        << QStringLiteral("--hide-device")        // hide e.g. /dev/sda3
+        << QStringLiteral("--no-mixed-pathnames") // trim leading slashes from NFSv4 mountpoints
+        << QStringLiteral("--all-nfs")            // show all mount points
+        << QStringLiteral("--no-wrap")            // do not wrap long lines
+        << QStringLiteral("--quiet-refuse");      // no not print error message when NFS server does not respond
+
+    m_quotaProcess->start(QStringLiteral("quota"), args, QIODevice::ReadOnly);
+}
+
+void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
+{
+    Q_UNUSED(exitCode)
+
+    if (exitStatus != QProcess::NormalExit) {
         m_model->clear();
         setToolTip(i18n("Disk Quota"));
         setSubToolTip(i18n("Running quota failed"));
         return;
     }
+
+    // get quota output
+    const QString rawData = QString::fromLocal8Bit(m_quotaProcess->readAllStandardOutput());
+//     qDebug() << rawData;
 
     const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
     // Testing
@@ -278,7 +278,7 @@ void DiskQuota::updateQuota()
 
     if (!items.isEmpty()) {
         setToolTip(i18nc("example: Quota: 83% used",
-                         "Quota: %1% used", static_cast<int>(maxQuota)));
+                         "Quota: %1% used", maxQuota));
         setSubToolTip(QString());
     } else {
         setToolTip(i18n("Disk Quota"));
