@@ -27,7 +27,10 @@ import org.kde.plasma.private.diskquota 1.0
 
 Item {
     id: quotaApplet
-    Component.onCompleted: plasmoid.removeAction("configure")
+
+    Layout.minimumWidth: units.gridUnit * 10
+    Layout.minimumHeight: units.gridUnit * 2
+
     Plasmoid.status: {
         switch (diskQuota.status) {
             case DiskQuota.NeedsAttentionStatus:
@@ -39,17 +42,18 @@ Item {
         return PlasmaCore.Types.PassiveStatus
     }
 
-    Layout.minimumWidth: units.gridUnit * 10
-    Layout.minimumHeight: units.gridUnit * 2
-
     Plasmoid.switchWidth: units.gridUnit * 10
     Plasmoid.switchHeight: units.gridUnit * 10
+
+    Plasmoid.icon: diskQuota.iconName
+    Plasmoid.toolTipMainText: diskQuota.toolTip
+    Plasmoid.toolTipSubText: diskQuota.subToolTip
+
+    Component.onCompleted: plasmoid.removeAction("configure")
 
     DiskQuota {
         id: diskQuota
     }
-
-    Plasmoid.icon: diskQuota.iconName
 
     Plasmoid.fullRepresentation: Item {
         id: root
@@ -102,7 +106,4 @@ Item {
             }
         }
     }
-
-    Plasmoid.toolTipMainText: diskQuota.toolTip
-    Plasmoid.toolTipSubText: diskQuota.subToolTip
 }
