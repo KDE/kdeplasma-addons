@@ -77,7 +77,7 @@ Item {
             Components.Label {
                 visible: !diskQuota.quotaInstalled
                 anchors.fill: parent
-                text: i18n("<p>Quota tool not found.</p><p>Please install 'quota'.</p>")
+                text: i18n("Quota tool not found.\n\nPlease install 'quota'.")
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }

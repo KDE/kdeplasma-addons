@@ -29,7 +29,7 @@ namespace {
      * QML data roles.
      */
     enum {
-        DetailsRole = Qt::UserRole + 0,
+        DetailsRole = Qt::UserRole,
         IconRole,
         FreeStringRole,
         UsedStringRole,
