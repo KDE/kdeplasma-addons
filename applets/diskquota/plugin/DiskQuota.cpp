@@ -34,7 +34,7 @@ DiskQuota::DiskQuota(QObject *parent)
     , m_model(new QuotaListModel(this))
 {
     connect(m_timer, &QTimer::timeout, this, &DiskQuota::updateQuota);
-    m_timer->start(2 * 60 * 1000); // check every 2 minutes
+    m_timer->start(5 * 1000); // check every 2 minutes
 
     connect(m_quotaProcess, (void (QProcess::*)(int, QProcess::ExitStatus))&QProcess::finished,
             this, &DiskQuota::quotaProcessFinished);
@@ -286,7 +286,7 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
     m_model->updateItems(items);
 }
 
-QuotaListModel * DiskQuota::model() const
+QuotaListModel *DiskQuota::model() const
 {
     return m_model;
 }

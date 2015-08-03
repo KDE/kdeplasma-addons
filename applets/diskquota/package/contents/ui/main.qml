@@ -86,7 +86,7 @@ Item {
                 anchors.fill: parent
                 ListView {
                     id: listView
-                    model: diskQuota.model()
+                    model: diskQuota.model
                     boundsBehavior: Flickable.StopAtBounds
                     highlight: Components.Highlight { }
                     highlightMoveDuration: 0

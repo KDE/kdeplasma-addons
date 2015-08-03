@@ -41,6 +41,8 @@ class DiskQuota : public QObject
     Q_PROPERTY(QString subToolTip READ subToolTip NOTIFY subToolTipChanged)
     Q_PROPERTY(QString iconName READ iconName NOTIFY iconNameChanged)
 
+    Q_PROPERTY(QuotaListModel* model READ model CONSTANT)
+
     Q_ENUMS(TrayStatus)
 
 public:
@@ -75,6 +77,11 @@ public:
     QString iconName() const;
     void setIconName(const QString &name);
 
+    /**
+     * Getter function for the model that is used in QML.
+     */
+    QuotaListModel *model() const;
+
 public Q_SLOTS:
     /**
      * Called every timer timeout to update the data model.
@@ -87,11 +94,6 @@ public Q_SLOTS:
      * Processes the quota data from the 'quota' process.
      */
     void quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
-
-    /**
-     * Getter function for the model that is used in QML.
-     */
-    QuotaListModel * model() const;
 
     /**
      * Opens the cleanup tool (filelight) at the folder @p mountPoint.
