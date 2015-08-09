@@ -66,7 +66,8 @@ PlasmaCore.SvgItem {
     Connections {
         target: plasmoid
         onExpandedChanged: {
-            if (expanded) {
+            // don't autofocus when we're on the desktop
+            if (expanded && (plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal)) {
                 mainTextArea.forceActiveFocus()
             }
         }
