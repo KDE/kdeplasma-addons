@@ -76,6 +76,9 @@ PlasmaCore.SvgItem {
         }
         onExternalData: {
             mainTextArea.text = data.replace(/\n/g, "<br>")
+            // place cursor at the end of text, there's no "just move the cursor" function
+            mainTextArea.moveCursorSelection(mainTextArea.length)
+            mainTextArea.deselect()
         }
     }
 
