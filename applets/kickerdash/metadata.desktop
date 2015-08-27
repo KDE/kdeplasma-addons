@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Application Dashboard
 Name[ca]=Tauler d'aplicacions
+Name[da]=Programinstrumentbræt
 Name[de]=Anwendungsübersicht
 Name[en_GB]=Application Dashboard
 Name[es]=Tablero de mandos de aplicaciones
@@ -26,6 +27,7 @@ Name[x-test]=xxApplication Dashboardxx
 Name[zh_CN]=应用程序面板
 Comment=A fullscreen application launcher
 Comment[ca]=Un llançador d'aplicacions a pantalla completa
+Comment[da]=Programstarter i fuldskærm
 Comment[de]=Anwendungsstarter im Vollbildmodus
 Comment[en_GB]=A fullscreen application launcher
 Comment[es]=Un lanzador de aplicaciones a pantalla completa
