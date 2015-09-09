@@ -1,6 +1,0 @@
-#ifndef CONFIG_KOLOURPICKER_H
-#define CONFIG_KOLOURPICKER_H
-
-#cmakedefine KOLOURPICKER_X11_LIB 1
-
-#endif

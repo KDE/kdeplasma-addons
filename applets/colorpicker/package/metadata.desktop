@@ -114,17 +114,15 @@ Comment[zh_CN]=从桌面拾取颜色
 Comment[zh_TW]=從桌面上挑選顏色
 Icon=color-picker
 Type=Service
-ServiceTypes=Plasma/Applet
+X-KDE-ServiceTypes=Plasma/Applet
 
-X-KDE-Library=plasma_applet_kolourpicker
-X-KDE-PluginInfo-Author=Pino Toscano
-X-KDE-PluginInfo-Email=pino@kde.org
-X-KDE-PluginInfo-Name=kolourpicker
-X-KDE-PluginInfo-Version=1.0
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+
+X-KDE-PluginInfo-Author=Kai Uwe Broulik
+X-KDE-PluginInfo-Email=kde@privat.broulik.de
+X-KDE-PluginInfo-Name=org.kde.plasma.colorpicker
+X-KDE-PluginInfo-Version=2.0
 X-KDE-PluginInfo-Website=http://userbase.kde.org/Plasma/ColorPicker
 X-KDE-PluginInfo-Category=Graphics
-X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=true
-X-Plasma-Requires-FileDialog=Unused
-X-Plasma-Requires-LaunchApp=Unused

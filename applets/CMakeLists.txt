@@ -1,6 +1,7 @@
 add_subdirectory(fifteenPuzzle)
 add_subdirectory(fuzzy-clock)
 add_subdirectory(calculator)
+add_subdirectory(colorpicker)
 add_subdirectory(notes)
 add_subdirectory(timer)
 
