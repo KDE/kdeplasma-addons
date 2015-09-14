@@ -27,6 +27,7 @@ plasma_install_package(webbrowser org.kde.plasma.webbrowser)
 add_subdirectory(comic)
 add_subdirectory(konsoleprofiles)
 add_subdirectory(kickerdash)
+add_subdirectory(quicklaunch)
 
 #This applet is disabled because although ported it does not work
 # add_subdirectory(eyes)
