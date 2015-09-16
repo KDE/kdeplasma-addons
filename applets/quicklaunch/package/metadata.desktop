@@ -1,7 +1,19 @@
 [Desktop Entry]
 Name=Quicklaunch
+Name[nl]=Snelstarten
+Name[pt]=Lançamento Rápido
+Name[pt_BR]=Lançamento rápido
+Name[sv]=Snabbstart
+Name[uk]=Швидкий запуск
+Name[x-test]=xxQuicklaunchxx
 
 Comment=Launch your favourite Applications
+Comment[nl]=Uw favoriete programma's starten
+Comment[pt]=Lança as suas aplicações favoritas
+Comment[pt_BR]=Executa seus aplicativos favoritos
+Comment[sv]=Start dina favoritprogram
+Comment[uk]=Запуск ваших улюблених програм
+Comment[x-test]=xxLaunch your favourite Applicationsxx
 
 Icon=fork
 Type=Service
