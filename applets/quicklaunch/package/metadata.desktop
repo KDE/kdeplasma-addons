@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=Quicklaunch
+Name[ca]=Quicklaunch
+Name[fi]=Pikakäynnistin
 Name[nl]=Snelstarten
 Name[pt]=Lançamento Rápido
 Name[pt_BR]=Lançamento rápido
@@ -8,6 +10,8 @@ Name[uk]=Швидкий запуск
 Name[x-test]=xxQuicklaunchxx
 
 Comment=Launch your favourite Applications
+Comment[ca]=Llança les vostres aplicacions preferides
+Comment[fi]=Käynnistä suosikkisovelluksiasi
 Comment[nl]=Uw favoriete programma's starten
 Comment[pt]=Lança as suas aplicações favoritas
 Comment[pt_BR]=Executa seus aplicativos favoritos
