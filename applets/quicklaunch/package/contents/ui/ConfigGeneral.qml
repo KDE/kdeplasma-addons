@@ -31,6 +31,7 @@ Item {
 
     property alias cfg_maxSectionCount: maxSectionCount.value
     property alias cfg_showLauncherNames: showLauncherNames.checked
+    property alias cfg_enablePopup: enablePopup.checked
 
     ColumnLayout {
         GroupBox {
@@ -57,9 +58,16 @@ Item {
             flat: true
             title: i18n("Appearance")
 
-            CheckBox {
-                id: showLauncherNames
-                text: i18n("Show launcher names")
+            ColumnLayout {
+                CheckBox {
+                    id: showLauncherNames
+                    text: i18n("Show launcher names")
+                }
+
+                CheckBox {
+                    id: enablePopup
+                    text: i18n("Enable popup")
+                }
             }
         }
     }

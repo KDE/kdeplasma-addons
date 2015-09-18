@@ -32,6 +32,7 @@ Item {
 
     property int maxSectionCount: Plasmoid.configuration.maxSectionCount
     property bool showLauncherNames : Plasmoid.configuration.showLauncherNames
+    property bool enablePopup : Plasmoid.configuration.enablePopup
     property bool vertical : Plasmoid.formFactor == PlasmaCore.Types.Vertical
     property bool horizontal : Plasmoid.formFactor == PlasmaCore.Types.Horizontal
 
@@ -65,6 +66,8 @@ Item {
             } else if (event.mimeData.hasUrls) {
                 launcherModel.showDropMarker(index);
             }
+
+            popup.visible = root.childAt(event.x, event.y) == popupArrow;
         }
 
         onDragLeave: {
@@ -81,48 +84,118 @@ Item {
                 saveConfiguration();
             } else if (event.mimeData.hasUrls) {
                 var index = grid.indexAt(event.x, event.y);
-                launcherModel.insertUrls(index == -1 ? grid.count : index, event.mimeData.urls);
+                launcherModel.insertUrls(index == -1 ? launcherModel.count : index, event.mimeData.urls);
                 event.accept(event.proposedAction);
             }
         }
     }
 
-    GridView {
-        id: grid
-        anchors.fill: parent
-        interactive: false
-        flow: horizontal ? GridView.FlowTopToBottom : GridView.FlowLeftToRight
-        cellWidth: LayoutManager.preferredCellWidth()
-        cellHeight: LayoutManager.preferredCellHeight()
-        visible: count
+    Item {
+        id: launcher
 
-        model: UrlModel {
-            id: launcherModel
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: !vertical && enablePopup ? popupArrow.left : parent.right
+            bottom: vertical && enablePopup ? popupArrow.top : parent.bottom
         }
 
-        delegate: IconItem { }
-    }
-
-    PlasmaCore.FrameSvgItem {
-        anchors.centerIn: parent
-        width: Math.min(parent.height, parent.width)
-        height: width
-        imagePath: "widgets/viewitem"
-        prefix: "hover"
-        visible: dragging && defaultIcon.visible
-    }
-
-    PlasmaCore.IconItem {
-        id: defaultIcon
-        anchors.fill: parent
-        source: "fork"
-        visible: !grid.visible
-
-        PlasmaCore.ToolTipArea {
+        GridView {
+            id: grid
             anchors.fill: parent
-            icon: "fork"
-            mainText: i18n("Quicklaunch")
-            subText: i18n("Add launchers by Drag and Drop or by using the context menu.")
+            interactive: false
+            flow: horizontal ? GridView.FlowTopToBottom : GridView.FlowLeftToRight
+            cellWidth: LayoutManager.preferredCellWidth()
+            cellHeight: LayoutManager.preferredCellHeight()
+            visible: count
+
+            model: UrlModel {
+                id: launcherModel
+            }
+
+            delegate: IconItem { }
+        }
+
+        PlasmaCore.IconItem {
+            id: defaultIcon
+            anchors.fill: parent
+            source: "fork"
+            visible: !grid.visible
+
+            PlasmaCore.ToolTipArea {
+                anchors.fill: parent
+                icon: "fork"
+                mainText: i18n("Quicklaunch")
+                subText: i18n("Add launchers by Drag and Drop or by using the context menu.")
+            }
+        }
+    }
+
+    PlasmaCore.Dialog {
+        id: popup
+        type: PlasmaCore.Dialog.PopupMenu
+        flags: Qt.WindowStaysOnTopHint
+        hideOnWindowDeactivate: true
+        location: plasmoid.location
+        visualParent: vertical ? popupArrow : root
+
+        mainItem: Popup { }
+    }
+
+    PlasmaCore.ToolTipArea {
+        id: popupArrow
+        width: vertical ? root.width : units.iconSizes.smallMedium
+        height: !vertical ? root.height : units.iconSizes.smallMedium
+        visible: enablePopup
+
+        anchors {
+            top: vertical ? undefined : parent.top
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        subText: popup.visible ? i18n("Hide icons") : i18n("Show hidden icons")
+
+        MouseArea {
+            id: arrowMouseArea
+            anchors.fill: parent
+
+            onClicked: {
+                popup.visible = !popup.visible
+            }
+
+            PlasmaCore.Svg {
+                id: arrowSvg
+                imagePath: "widgets/arrows"
+            }
+
+            PlasmaCore.SvgItem {
+                id: arrow
+
+                anchors.centerIn: parent
+                width: Math.min(parent.width, parent.height)
+                height: width
+
+                rotation: popup.visible ? 180 : 0
+                Behavior on rotation {
+                    RotationAnimation {
+                        duration: units.shortDuration * 3
+                    }
+                }
+
+                svg: arrowSvg
+                elementId: {
+                    if (plasmoid.location == PlasmaCore.Types.TopEdge) {
+                        return "down-arrow";
+                    } else if (plasmoid.location == PlasmaCore.Types.LeftEdge) {
+                        return "right-arrow";
+                    } else if (plasmoid.location == PlasmaCore.Types.RightEdge) {
+                        return "left-arrow";
+                    } else {
+                        return "up-arrow";
+                    }
+                }
+            }
         }
     }
 
@@ -130,11 +203,13 @@ Item {
         id: logic
 
         onLauncherAdded: {
-            launcherModel.appendUrl(url);
+            var m = isPopup ? popup.mainItem.popupModel : launcherModel;
+            m.appendUrl(url);
         }
 
         onLauncherEdited: {
-            launcherModel.changeUrl(index, url);
+            var m = isPopup ? popup.mainItem.popupModel : launcherModel;
+            m.changeUrl(index, url);
         }
     }
 

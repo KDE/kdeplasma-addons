@@ -108,7 +108,7 @@ ListModel {
             move(dropMarkerIndex, index, 1);
             dropMarkerIndex = index;
         } else {
-            launcherModel.insert(index, { url: "quicklaunch:drop" });
+            insert(index, { url: "quicklaunch:drop" });
             dropMarkerIndex = index;
         }
     }
@@ -116,7 +116,7 @@ ListModel {
     function clearDropMarker()
     {
         if (dropMarkerIndex != -1) {
-            launcherModel.remove(dropMarkerIndex, 1);
+            remove(dropMarkerIndex, 1);
             dropMarkerIndex = -1;
         }
     }

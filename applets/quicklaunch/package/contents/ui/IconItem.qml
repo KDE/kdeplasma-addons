@@ -30,19 +30,15 @@ Item {
 
     property int itemIndex : index
     property bool dragging : false
+    property bool isPopupItem : false
     property var launcher : logic.launcherData(url)
 
-    width: grid.cellWidth
-    height: grid.cellHeight
+    width: isPopupItem ? LayoutManager.popupItemWidth() : grid.cellWidth
+    height: isPopupItem ? LayoutManager.popupItemHeight() : grid.cellHeight
 
     DragAndDrop.DragArea {
         id: dragArea
-
-        anchors {
-            centerIn: parent
-            margins: LayoutManager.itemPadding()
-        }
-
+        anchors.margins: LayoutManager.itemPadding()
         width: Math.min(iconItem.width, iconItem.height)
         height: width
         enabled: !plasmoid.immutable
@@ -63,7 +59,7 @@ Item {
             dragging = false;
 
             if (action == Qt.MoveAction) {
-                launcherModel.removeUrl(itemIndex);
+                removeLauncher();
             }
         }
 
@@ -85,30 +81,26 @@ Item {
                 id: icon
 
                 anchors {
-                    left: parent.left
-                    right: parent.right
                     top: parent.top
-                    bottom: text.visible ? text.top : parent.bottom
+                    left: parent.left
                 }
 
+                width: height
                 source: iconItem.launcher.iconName;
                 active: mouseArea.containsMouse
             }
 
             PlasmaComponents.Label {
-                id: text
+                id: label
 
                 anchors {
-                    left : parent.left
                     bottom : parent.bottom
                     right : parent.right
                 }
 
                 text: iconItem.launcher.applicationName
-                horizontalAlignment: Text.AlignHCenter
                 maximumLineCount: 1
                 wrapMode: Text.Wrap
-                visible: showLauncherNames
             }
 
             PlasmaCore.FrameSvgItem {
@@ -120,6 +112,7 @@ Item {
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: parent
+                active: !dragging
                 mainText: iconItem.launcher.applicationName
                 subText: iconItem.launcher.genericName
                 icon: iconItem.launcher.iconName
@@ -130,19 +123,21 @@ Item {
                 visualParent: mouseArea
 
                 PlasmaComponents.MenuItem {
-                    action: plasmoid.action("addLauncher")
+                    text: i18n("Add Launcher...")
+                    icon: "list-add"
+                    onClicked: addLauncher()
                 }
 
                 PlasmaComponents.MenuItem {
                     text: i18n("Edit Launcher...")
                     icon: "document-edit"
-                    onClicked: logic.editLauncher(url, itemIndex)
+                    onClicked: editLauncher()
                 }
 
                 PlasmaComponents.MenuItem {
                     text: i18n("Remove Launcher")
                     icon: "list-remove"
-                    onClicked: launcherModel.removeUrl(itemIndex)
+                    onClicked: removeLauncher()
                 }
 
                 PlasmaComponents.MenuItem {
@@ -158,5 +153,85 @@ Item {
                 }
             }
         }
+    }
+
+    states: [
+        State {
+            name: "popup"
+            when: isPopupItem
+
+            AnchorChanges {
+                target: dragArea
+                anchors.left: dragArea.parent.left
+                anchors.right: dragArea.parent.right
+                anchors.top: dragArea.parent.top
+                anchors.bottom: dragArea.parent.bottom
+            }
+
+            AnchorChanges {
+                target: icon
+                anchors.right: undefined
+                anchors.bottom: undefined
+            }
+
+            AnchorChanges {
+                target: label
+                anchors.top: label.parent.top
+                anchors.left: icon.right
+            }
+
+            PropertyChanges {
+                target: label
+                horizontalAlignment: Text.AlignHLeft
+                visible: true
+                elide: Text.ElideRight
+            }
+        },
+
+        State {
+            name: "grid"
+            when: !isPopupItem
+
+            AnchorChanges {
+                target: dragArea
+                anchors.verticalCenter: dragArea.parent.verticalCenter
+                anchors.horizontalCenter: dragArea.parent.horizontalCenter
+            }
+
+            AnchorChanges {
+                target: icon
+                anchors.right: icon.parent.right
+                anchors.bottom: label.visible ? label.top : icon.parent.bottom
+            }
+
+            AnchorChanges {
+                target: label
+                anchors.top: undefined
+                anchors.left: label.parent.left
+            }
+
+            PropertyChanges {
+                target: label
+                horizontalAlignment: Text.AlignHCenter
+                visible: showLauncherNames
+                elide: Text.ElideNone
+            }
+        }
+    ]
+
+    function addLauncher()
+    {
+        logic.addLauncher(isPopupItem);
+    }
+
+    function editLauncher()
+    {
+        logic.editLauncher(url, itemIndex, isPopupItem);
+    }
+
+    function removeLauncher()
+    {
+        var m = isPopupItem ? popupModel : launcherModel;
+        m.removeUrl(itemIndex);
     }
 }

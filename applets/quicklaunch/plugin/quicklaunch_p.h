@@ -37,12 +37,12 @@ public:
     Q_INVOKABLE void openUrl(const QUrl &url);
     Q_INVOKABLE QImage iconFromTheme(const QString &iconName, const QSize &size);
 
-    Q_INVOKABLE void addLauncher();
-    Q_INVOKABLE void editLauncher(QUrl url, int index);
+    Q_INVOKABLE void addLauncher(bool isPopup = false);
+    Q_INVOKABLE void editLauncher(QUrl url, int index, bool isPopup = false);
 
 Q_SIGNALS:
-    void launcherAdded(const QString &url);
-    void launcherEdited(const QString &url, int index);
+    void launcherAdded(const QString &url, bool isPopup);
+    void launcherEdited(const QString &url, int index, bool isPopup);
 };
 
 #endif // QUICKLAUNCH_P_H

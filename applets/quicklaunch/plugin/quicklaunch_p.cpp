@@ -99,7 +99,7 @@ QImage QuicklaunchPrivate::iconFromTheme(const QString &iconName, const QSize &s
     return QIcon::fromTheme(iconName).pixmap(size).toImage();
 }
 
-void QuicklaunchPrivate::addLauncher()
+void QuicklaunchPrivate::addLauncher(bool isPopup)
 {
     KOpenWithDialog *dialog = new KOpenWithDialog();
     dialog->setModal(false);
@@ -108,10 +108,10 @@ void QuicklaunchPrivate::addLauncher()
     dialog->setSaveNewApplications(true);
     dialog->show();
 
-    connect(dialog, &KOpenWithDialog::accepted, this, [this, dialog]() {
+    connect(dialog, &KOpenWithDialog::accepted, this, [this, dialog, isPopup]() {
         const QUrl &url = QUrl::fromLocalFile(dialog->service()->entryPath());
         if (url.isValid()) {
-            Q_EMIT launcherAdded(url.toString());
+            Q_EMIT launcherAdded(url.toString(), isPopup);
         }
     });
 }
@@ -146,7 +146,7 @@ static QString determineNewDesktopFilePath(const QString &baseName)
     return desktopFilePath;
 }
 
-void QuicklaunchPrivate::editLauncher(QUrl url, int index)
+void QuicklaunchPrivate::editLauncher(QUrl url, int index, bool isPopup)
 {
     // If the launcher does not point to a desktop file, create one,
     // so that user can change url, icon, text and description.
@@ -176,7 +176,7 @@ void QuicklaunchPrivate::editLauncher(QUrl url, int index)
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->show();
 
-    connect(dialog, &KPropertiesDialog::accepted, this, [this, dialog, index]() {
+    connect(dialog, &KPropertiesDialog::accepted, this, [this, dialog, index, isPopup]() {
         QUrl url = dialog->url();
         QString path = url.toLocalFile();
 
@@ -187,7 +187,7 @@ void QuicklaunchPrivate::editLauncher(QUrl url, int index)
             path += QLatin1String(".desktop");
             url = QUrl::fromLocalFile(path);
         }
-        Q_EMIT launcherEdited(url.toString(), index);
+        Q_EMIT launcherEdited(url.toString(), index, isPopup);
     });
 
     connect(dialog, &KPropertiesDialog::rejected, this, [this, url, desktopFileCreated]() {

@@ -41,28 +41,44 @@ function cols()
 
 function minimumWidth()
 {
-    return cols() * minimumCellWidth();
+    var w = cols() * minimumCellWidth();
+    if (!vertical && enablePopup) {
+        w += popupArrow.width;
+    }
+    return w;
 }
 
 function minimumHeight()
 {
-    return rows() * minimumCellHeight();
+    var h = rows() * minimumCellHeight();
+    if (vertical && enablePopup) {
+        h += popupArrow.height;
+    }
+    return h;
 }
 
 function preferredWidth()
 {
+    var w = cols() * preferredCellWidth();
     if (horizontal) {
-        return (preferredHeight() / rows()) * cols();
+        w = (preferredHeight() / rows()) * cols();
     }
-    return cols() * preferredCellWidth();
+    if (!vertical && enablePopup) {
+        w += popupArrow.width;
+    }
+    return w;
 }
 
 function preferredHeight()
 {
+    var h = rows() * preferredCellHeight();
     if (vertical) {
-        return (preferredWidth() / cols()) * rows();
+        h = (preferredWidth() / cols()) * rows();
+        if (enablePopup) {
+            h += popupArrow.height;
+        }
     }
-    return rows() * preferredCellHeight();
+    return h;
 }
 
 function minimumCellWidth()
@@ -87,4 +103,15 @@ function preferredCellWidth()
 function preferredCellHeight()
 {
     return Math.floor(grid.height / rows());
+}
+
+function popupItemWidth()
+{
+    var fw = theme.mSize(theme.defaultFont).width;
+    return Math.max(root.width, units.iconSizes.medium + 20 * fw);
+}
+
+function popupItemHeight()
+{
+    return units.iconSizes.medium + 2 * itemPadding();
 }
