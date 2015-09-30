@@ -109,7 +109,7 @@ Comment[x-test]=xxTime displayed in a less precise formatxx
 Comment[zh_CN]=以不精确格式显示的时间
 Comment[zh_TW]=以較不精確的方式顯示時間
 
-Icon=preferences-system-time
+Icon=org.kde.plasma.fuzzyclock
 Type=Service
 
 X-KDE-ParentApp=

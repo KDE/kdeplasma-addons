@@ -110,7 +110,7 @@ Comment[wa]=Cårculez des ptits carculs
 Comment[x-test]=xxCalculate simple sumsxx
 Comment[zh_CN]=计算简单的求和
 Comment[zh_TW]=計算簡單的算式
-Icon=accessories-calculator
+Icon=org.kde.plasma.calculator
 Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 

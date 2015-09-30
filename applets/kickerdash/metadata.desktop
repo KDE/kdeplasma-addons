@@ -57,7 +57,7 @@ Comment[uk]=Повноекранний засіб запуску програм
 Comment[x-test]=xxA fullscreen application launcherxx
 Comment[zh_CN]=全屏应用程序启动器
 Type=Service
-Icon=start-here-kde
+Icon=org.kde.plasma.kickerdash
 X-KDE-ServiceTypes=Plasma/Applet
 
 X-Plasma-API=declarativeappletscript

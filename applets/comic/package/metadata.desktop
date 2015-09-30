@@ -107,7 +107,7 @@ Comment[wa]=Vey ene binde d' imådje di l' Etrernet
 Comment[x-test]=xxView comic strips from the Internetxx
 Comment[zh_CN]=查看来自互联网的连环画
 Comment[zh_TW]=從網路上顯示漫畫
-Icon=face-smile-big
+Icon=org.kde.plasma.comic
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 
