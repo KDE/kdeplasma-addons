@@ -170,16 +170,23 @@ Item {
     }
 
     function fitCpuLoad(load) {
-        return load / maxCpuLoad
+        var x = load / maxCpuLoad;
+        if (isNaN(x)) {return 0;}
+        return x;
     }
 
     function fitMemoryUsage(usage) {
-        return (usage / (parseFloat(dataSource.data[dataSource.memFree].value) +
+        var x = (usage / (parseFloat(dataSource.data[dataSource.memFree].value) +
                          parseFloat(dataSource.data[dataSource.memUsed].value)))
+        if (isNaN(x)) {return 0;}
+        return x;
     }
 
     function fitSwapUsage(usage) {
-        return (usage / (parseFloat(usage) + parseFloat(dataSource.data[dataSource.swapFree].value)))
+        var x = (usage / (parseFloat(usage) + parseFloat(dataSource.data[dataSource.swapFree].value)))
+
+        if (isNaN(x)) {return 0;}
+        return x;
     }
 
     function columnCount() {
