@@ -20,6 +20,7 @@ Name[sr@latin]=brzokret
 Name[sv]=Snabbstart
 Name[uk]=Швидкий запуск
 Name[x-test]=xxQuicklaunchxx
+Name[zh_CN]=快速启动
 
 Comment=Launch your favourite Applications
 Comment[ca]=Llança les vostres aplicacions preferides
@@ -43,6 +44,7 @@ Comment[sr@latin]=Pokrećite omiljene programe
 Comment[sv]=Start dina favoritprogram
 Comment[uk]=Запуск ваших улюблених програм
 Comment[x-test]=xxLaunch your favourite Applicationsxx
+Comment[zh_CN]=启动您最常用的程序
 
 Icon=org.kde.plasma.quicklaunch
 Type=Service
