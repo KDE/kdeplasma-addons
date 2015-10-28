@@ -109,6 +109,9 @@ void QuicklaunchPrivate::addLauncher(bool isPopup)
     dialog->show();
 
     connect(dialog, &KOpenWithDialog::accepted, this, [this, dialog, isPopup]() {
+        if (!dialog->service()) {
+            return;
+        }
         const QUrl &url = QUrl::fromLocalFile(dialog->service()->entryPath());
         if (url.isValid()) {
             Q_EMIT launcherAdded(url.toString(), isPopup);
