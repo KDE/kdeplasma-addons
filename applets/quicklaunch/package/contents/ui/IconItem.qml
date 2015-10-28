@@ -32,6 +32,7 @@ Item {
     property bool dragging : false
     property bool isPopupItem : false
     property var launcher : logic.launcherData(url)
+    property string iconName : launcher.iconName || "fork"
 
     width: isPopupItem ? LayoutManager.popupItemWidth() : grid.cellWidth
     height: isPopupItem ? LayoutManager.popupItemHeight() : grid.cellHeight
@@ -44,7 +45,7 @@ Item {
         enabled: !plasmoid.immutable
         defaultAction: Qt.MoveAction
         supportedActions: Qt.IgnoreAction | Qt.MoveAction
-        delegateImage: logic.iconFromTheme(launcher.iconName, Qt.size(icon.width, icon.height))
+        delegateImage: logic.iconFromTheme(iconName, Qt.size(icon.width, icon.height))
 
         mimeData {
             url: url
@@ -86,7 +87,7 @@ Item {
                 }
 
                 width: height
-                source: iconItem.launcher.iconName;
+                source: url == "quicklaunch:drop" ? "" : iconName
                 active: mouseArea.containsMouse
             }
 
@@ -115,7 +116,7 @@ Item {
                 active: !dragging
                 mainText: iconItem.launcher.applicationName
                 subText: iconItem.launcher.genericName
-                icon: iconItem.launcher.iconName
+                icon: iconName
             }
 
             PlasmaComponents.ContextMenu {
