@@ -121,4 +121,4 @@ X-Plasma-Requires-LaunchApp=Optional
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/SystemLoadViewer.qml
 X-Plasma-StandAloneApp=true
-
+X-KDE-FormFactors=desktop
