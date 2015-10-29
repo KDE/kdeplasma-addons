@@ -172,21 +172,21 @@ Item {
     function fitCpuLoad(load) {
         var x = load / maxCpuLoad;
         if (isNaN(x)) {return 0;}
-        return x;
+        return Math.min(x, 1); // Ensure that we do not get values that might cause problems
     }
 
     function fitMemoryUsage(usage) {
         var x = (usage / (parseFloat(dataSource.data[dataSource.memFree].value) +
                          parseFloat(dataSource.data[dataSource.memUsed].value)))
         if (isNaN(x)) {return 0;}
-        return x;
+        return Math.min(x, 1);
     }
 
     function fitSwapUsage(usage) {
         var x = (usage / (parseFloat(usage) + parseFloat(dataSource.data[dataSource.swapFree].value)))
 
         if (isNaN(x)) {return 0;}
-        return x;
+        return Math.min(x, 1);
     }
 
     function columnCount() {
