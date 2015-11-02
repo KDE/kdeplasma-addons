@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=User Switcher
+Name[ca]=Commutador d'usuaris
+Name[fi]=Käyttäjän vaihdin
+Name[nl]=Wisselen van gebruiker
+Name[pt]=Mudança de Utilizador
+Name[pt_BR]=Seletor de usuário
+Name[sk]=Prepínač používateľov
+Name[sl]=Preklopnik uporabnikov
+Name[sv]=Använd användarbyte
+Name[uk]=Перемикання користувачів
+Name[x-test]=xxUser Switcherxx
 Comment=Quickly switch between different users
+Comment[ca]=Commuta ràpidament entre usuaris diferents
+Comment[fi]=Vaihda nopeasti käyttäjien välillä
+Comment[nl]=Snel wisselen tussen verschillende gebruikers
+Comment[pt]=Mudar rapidamente entre os diferentes utilizadores
+Comment[pt_BR]=Alterna rapidamente entre os usuários
+Comment[sk]=Rýchlo prepnúť medzi rôznymi používateľmi
+Comment[sl]=Hitro preklopite med različnimi uporabniki
+Comment[sv]=Byt snabbt mellan olika användare
+Comment[uk]=Швидке перемикання між записами користувачів
+Comment[x-test]=xxQuickly switch between different usersxx
 Icon=preferences-desktop-user
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
