@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2014 Martin Yrjölä <martin.yrjola@gmail.com>
  * Copyright (C) 2015 Joshua Worth <joshua@worth.id.au>
+ * Copyright (C) 2015 Kåre Särs <kae.sars@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -63,16 +64,50 @@ Item {
 
     property bool circularMonitorsInUse: plasmoid.configuration.monitorType == 1
     property bool compactBarMonitorsInUse: plasmoid.configuration.monitorType == 2
+    property bool allCPUsShown: plasmoid.configuration.cpuAllActivated
 
-    property double barWidth: compactBarMonitorsInUse ? parent.height * 0.35 * columnCount()
-                                                      : parent.height * 0.5 * columnCount()
+    property double barsWidth: compactBarMonitorsInUse ? main.height * 0.35 * columnCount()
+                                                       : main.height * 0.5 * columnCount()
+
 
     // Don't show icon in panel.
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 
     // Correct the size when in panel
-    Layout.preferredWidth: circularMonitorsInUse ? parent.height * 1.2 * columnCount()
-                                                 : barWidth + (compactBarMonitorsInUse ? 0 : rowLayout.spacing * (columnCount() - 1))
+    Layout.preferredWidth: {
+        if (circularMonitorsInUse) {
+            return parent.height * 1.2 * columnCount()
+        }
+        else if (!plasmoid.configuration.cpuAllActivated) {
+            return barsWidth + rowLayout.spacing * (columnCount() - 1) // 0 * x == 0 (compact)
+        }
+        // else plasmoid.configuration.cpuAllActivated
+        var wantedWidth = cpusRow.minWidth
+        if (plasmoid.configuration.swapActivated) {
+            wantedWidth += memColumn.minWidth
+        }
+        if (plasmoid.configuration.memoryActivated) {
+            wantedWidth += swapColumn.minWidth
+        }
+        return wantedWidth
+    }
+
+    Layout.minimumWidth: {
+        if (circularMonitorsInUse) {
+            return units.gridUnit * columnCount() * 2
+        }
+        else if (!plasmoid.configuration.cpuAllActivated) {
+            return memColumn.minWidth * columnCount() + rowLayout.spacing * (columnCount() - 1)
+        }
+        var wantedWidth = cpusRow.minWidth
+        if (plasmoid.configuration.swapActivated) {
+            wantedWidth += memColumn.minWidth
+        }
+        if (plasmoid.configuration.memoryActivated) {
+            wantedWidth += swapColumn.minWidth
+        }
+        return wantedWidth
+    }
 
     property bool labelsVisible
 
@@ -107,6 +142,7 @@ Item {
         property string swapFree: swap + "free"
 
         property var totalCpuLoadProportions: [.0, .0, .0, .0]
+        property int maxCpuIndex: 0
         property var memoryUsageProportions: [.0, .0, .0]
         property double swapUsageProportion: .0
 
@@ -114,6 +150,16 @@ Item {
             ioWait, memFree, memApplication, memBuffers,
             memCached, memUsed, swapUsed, swapFree,
             averageClock, totalLoad]
+
+        onSourceAdded: {
+            var match = source.match(/^cpu\/cpu(\w+)\//)
+            if (match) {
+                connectSource(source)
+                if (maxCpuIndex < match[1]) {
+                    maxCpuIndex = match[1]
+                }
+            }
+        }
 
         onNewData: {
             if (sourceName == sysLoad) {
@@ -148,23 +194,44 @@ Item {
     }
 
     onWidthChanged: labelsVisible = shouldLabelsBeVisible()
+    onAllCPUsShownChanged: labelsVisible = shouldLabelsBeVisible()
 
     function toolTipSubText() {
-        var cpuLoad = dataSource.data[dataSource.totalLoad].value
-        var averageClock = dataSource.data[dataSource.averageClock].value
-        var clock = dataSource.data[dataSource.averageClock].value
-        var cpuLoadPart = i18n("CPU: %1%", Math.round(cpuLoad))
-        var cpuClockPart = i18n("Average clock: %1 MHz", Math.round(averageClock))
-
-        var memFree = parseFloat(dataSource.data[dataSource.memFree].value) / 1024
-        var memUsed = parseFloat(dataSource.data[dataSource.memUsed].value) / 1024
+        var cpuLoadPart = "";
+        var cpuClockPart = "";
+        if (plasmoid.configuration.cpuAllActivated) {
+            for (var i=0; i<=dataSource.maxCpuIndex; i++) {
+                if (i>0) {
+                    cpuLoadPart += "\n"
+                }
+                var totalName = "cpu/cpu" + i + "/TotalLoad"
+                var clockName = "cpu/cpu" + i + "/clock"
+                var totValue = dataSource.data[totalName] ? dataSource.data[totalName].value : 0
+                var clockValue = dataSource.data[clockName] ? dataSource.data[clockName].value : 0
+                cpuLoadPart += i18n("CPU%1: %2% @ %3 Mhz", i,
+                                    Math.round(totValue),
+                                    Math.round(clockValue))
+            }
+        }
+        else {
+            var cpuLoad = dataSource.data[dataSource.totalLoad] ? dataSource.data[dataSource.totalLoad].value : 0
+            var averageClock = dataSource.data[dataSource.averageClock] ? dataSource.data[dataSource.averageClock].value : 0
+            cpuLoadPart = i18n("CPU: %1%", Math.round(cpuLoad))
+            cpuClockPart = i18n("Average clock: %1 MHz", Math.round(averageClock))
+        }
+        var memFree = parseFloat(dataSource.data[dataSource.memFree] ? dataSource.data[dataSource.memFree].value : 0) / 1024
+        var memUsed = parseFloat(dataSource.data[dataSource.memUsed] ? dataSource.data[dataSource.memUsed].value : 0) / 1024
         var memTotal = memFree + memUsed
         var memoryPart = i18n("Memory: %1/%2 MiB", Math.round(memUsed), Math.round(memTotal))
 
-        var swapFree = parseFloat(dataSource.data[dataSource.swapFree].value) / 1024
-        var swapUsed = parseFloat(dataSource.data[dataSource.swapUsed].value) / 1024
+        var swapFree = parseFloat(dataSource.data[dataSource.swapFree] ? dataSource.data[dataSource.swapFree].value : 0) / 1024
+        var swapUsed = parseFloat(dataSource.data[dataSource.swapUsed] ? dataSource.data[dataSource.swapUsed].value : 0) / 1024
         var swapTotal = swapFree + swapUsed
         var swapPart = i18n("Swap: %1/%2 MiB", Math.round(swapUsed), Math.round(swapTotal))
+
+        if (cpuClockPart === "") {
+            return [cpuLoadPart, memoryPart, swapPart].join("\n")
+        }
 
         return [cpuLoadPart, cpuClockPart, memoryPart, swapPart].join("\n")
     }
@@ -228,17 +295,57 @@ Item {
 
     // Hide all labels when one of them is wider than the column width
     function shouldLabelsBeVisible() {
+        if (plasmoid.configuration.cpuAllActivated) {
+            return false;
+        }
         return widestLabelWidth() <= columnWidth()
+    }
+
+    PlasmaCore.ToolTipArea {
+        id: stdToolTip
+        anchors.fill: parent
+        active: true
+        mainText: i18n("System load")
+        subText: toolTipSubText()
+        visible: !plasmoid.configuration.cpuAllActivated || dataSource.maxCpuIndex < 5
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: {
+                kRun.openUrl(apps.data["org.kde.ksysguard.desktop"].entryPath)
+            }
+        }
     }
 
     PlasmaCore.ToolTipArea {
         anchors.fill: parent
         active: true
-        mainText: i18n("System load")
-        subText: toolTipSubText()
+        visible: !stdToolTip.visible
+
+        mainItem: Item {
+            height: childrenRect.height + units.gridUnit * 2
+            width: childrenRect.width + units.gridUnit * 2
+            ColumnLayout {
+                anchors {
+                    top: parent.top
+                    left:parent.left
+                    margins: units.gridUnit
+                }
+                PlasmaExtras.Heading {
+                    id: tooltipMaintext
+                    level: 3
+                    text: stdToolTip.mainText
+                }
+                PlasmaComponents.Label {
+                    id: tooltipSubtext
+                    text: toolTipSubText()
+                    opacity: 0.7
+                }
+            }
+        }
 
         MouseArea {
-            id: mouseArea
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
@@ -256,10 +363,54 @@ Item {
 
         spacing: main.compactBarMonitorsInUse ? 0 : 5
 
-        property double columnPreferredWidth: main.circularMonitorsInUse ? parent.height : columnWidth(main.compactBarMonitorsInUse);
+
+        RowLayout {
+            id: cpusRow
+            property int minCpuWidth: memColumn.minWidth * 0.33
+            property int minWidth : Math.max(memColumn.minWidth * 2, cpuRepeater.count * minCpuWidth)
+            visible: plasmoid.configuration.cpuActivated && plasmoid.configuration.cpuAllActivated
+            Layout.minimumWidth: minWidth
+            Layout.preferredWidth: height * 2
+
+            spacing: 0
+            Repeater {
+                id: cpuRepeater
+                model: (dataSource.maxCpuIndex+1)
+
+                delegate: ColumnLayout {
+                    Layout.minimumWidth: cpusRow.minCpuWidth
+                    property int cpuIndex: index
+
+                    PlasmaExtras.Heading {
+                        id: cpuLabel
+                        level: main.headingLevel
+                        text: i18n("CPU %1", cpuIndex)
+                        visible: main.labelsVisible
+                    }
+                    ConditionallyLoadedMonitors {
+                        colors: cpuColors
+                        property string niceLoad: "cpu/cpu" + cpuIndex + "/nice"
+                        property string userLoad: "cpu/cpu" + cpuIndex + "/user"
+                        property string sysLoad:  "cpu/cpu" + cpuIndex + "/sys"
+                        property string ioWait:   "cpu/cpu" + cpuIndex + "/wait"
+                        property var cpuLoadProportions: dataSource.data[ioWait] ? [
+                        fitCpuLoad(dataSource.data[sysLoad].value),
+                        fitCpuLoad(dataSource.data[userLoad].value),
+                        fitCpuLoad(dataSource.data[niceLoad].value),
+                        fitCpuLoad(dataSource.data[ioWait].value)
+                        ] : [.0, .0, .0, .0]
+                        proportions: cpuLoadProportions
+                    }
+                }
+            }
+        }
 
         ColumnLayout {
-            visible: plasmoid.configuration.cpuActivated
+            id: cpuColumn
+            property double minWidth: memColumn.minWidth
+            visible: plasmoid.configuration.cpuActivated && !plasmoid.configuration.cpuAllActivated
+            Layout.minimumWidth: minWidth
+            Layout.preferredWidth: height
 
             PlasmaExtras.Heading {
                 id: cpuLabel
@@ -275,7 +426,11 @@ Item {
         }
 
         ColumnLayout {
+            id: memColumn
+            property double minWidth: units.gridUnit * 0.7
             visible: plasmoid.configuration.memoryActivated
+            Layout.minimumWidth: minWidth
+            Layout.preferredWidth: height
 
             PlasmaExtras.Heading {
                 id: memoryLabel
@@ -291,7 +446,11 @@ Item {
         }
 
         ColumnLayout {
+            id: swapColumn
+            property double minWidth: memColumn.minWidth
             visible: plasmoid.configuration.swapActivated
+            Layout.minimumWidth: minWidth
+            Layout.preferredWidth: height
 
             PlasmaExtras.Heading {
                 id: swapLabel

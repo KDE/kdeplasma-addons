@@ -26,6 +26,7 @@ Item {
     id: generalSettings
 
     property alias cfg_cpuActivated: cpuActivatedCheckBox.checked
+    property alias cfg_cpuAllActivated: cpuAllActivatedCheckBox.checked
     property alias cfg_memoryActivated: memoryActivatedCheckBox.checked
     property alias cfg_swapActivated: swapActivatedCheckBox.checked
     property alias cfg_updateInterval: updateIntervalSpinBox.value
@@ -54,13 +55,23 @@ Item {
         Label {
             text: i18n("Show:")
             Layout.alignment: Qt.AlignRight
-            Layout.rowSpan: 3
+            Layout.rowSpan: 4
             anchors.verticalCenter: cpuActivatedCheckBox.verticalCenter
         }
 
         CheckBox {
             id: cpuActivatedCheckBox
             text: i18n("CPU monitor")
+            onCheckedChanged: if (!checked) {cpuAllActivatedCheckBox.checked = false;}
+        }
+
+        Row {
+            Item { height: 1; width: 50; }
+            CheckBox {
+                id: cpuAllActivatedCheckBox
+                text: i18n("CPUs separately")
+                enabled: cpuActivatedCheckBox.checked && cfg_monitorType === 2
+            }
         }
 
         CheckBox {
@@ -84,14 +95,14 @@ Item {
             id: barMonitorRadio
             exclusiveGroup: monitorTypeGroup
             text: i18n("Bar")
-            onCheckedChanged: if (checked) cfg_monitorType = 0;
+            onCheckedChanged: if (checked) {cfg_monitorType = 0; cpuAllActivatedCheckBox.checked = false;}
         }
 
         RadioButton {
             id: circularMonitorRadio
             exclusiveGroup: monitorTypeGroup
             text: i18n("Circular")
-            onCheckedChanged: if (checked) cfg_monitorType = 1;
+            onCheckedChanged: if (checked) {cfg_monitorType = 1; cpuAllActivatedCheckBox.checked = false;}
         }
 
         RadioButton {
