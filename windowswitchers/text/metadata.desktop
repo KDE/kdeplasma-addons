@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Text Only
 Name[ca]=Només text
+Name[ca@valencia]=Només text
 Name[cs]=Pouze text
 Name[da]=Kun tekst
 Name[de]=Nur Text
@@ -35,6 +36,7 @@ Name[zh_CN]=只有文字
 Name[zh_TW]=只有文字
 Comment=A window switcher layout only showing window captions
 Comment[ca]=Una disposició del commutador de finestres que només mostra els títols de finestra
+Comment[ca@valencia]=Una disposició del commutador de finestres que només mostra els títols de finestra
 Comment[cs]=Rozvržení přepínače oken zobrazující pouze titulek okna
 Comment[da]=Et vinduesskifter-layout som kun viser vinduestitler
 Comment[de]=Ein Fensterwechsler-Layout, das nur die Titel der Fenster anzeigt

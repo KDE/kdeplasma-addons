@@ -1,7 +1,9 @@
 [Desktop Entry]
 Name=User Switcher
 Name[ca]=Commutador d'usuaris
+Name[ca@valencia]=Commutador d'usuaris
 Name[en_GB]=User Switcher
+Name[es]=Selector de usuario
 Name[fi]=Käyttäjän vaihdin
 Name[nl]=Wisselen van gebruiker
 Name[nn]=Brukarbytar
@@ -14,7 +16,9 @@ Name[uk]=Перемикання користувачів
 Name[x-test]=xxUser Switcherxx
 Comment=Quickly switch between different users
 Comment[ca]=Commuta ràpidament entre usuaris diferents
+Comment[ca@valencia]=Commuta ràpidament entre usuaris diferents
 Comment[en_GB]=Quickly switch between different users
+Comment[es]=Cambiar rápidamente entre diferentes usuarios
 Comment[fi]=Vaihda nopeasti käyttäjien välillä
 Comment[nl]=Snel wisselen tussen verschillende gebruikers
 Comment[nn]=Byt kjapt mellom ulike brukarar

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Grid
 Name[ca]=Graella
+Name[ca@valencia]=Graella
 Name[cs]=Mřížka
 Name[da]=Gitter
 Name[de]=Raster
@@ -35,6 +36,7 @@ Name[zh_CN]=网格
 Name[zh_TW]=格線
 Comment=A Window Switcher layout showing all windows as thumbnails in a grid
 Comment[ca]=Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una graella
+Comment[ca@valencia]=Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una graella
 Comment[cs]=Rozvržení přepínače oken zobrazující všechna okna jako miniatury v mřížce
 Comment[da]=Et vinduesskifter-layout som viser alle vinduer som miniaturer i et gitter
 Comment[de]=Ein Fensterwechsler-Layout, das Vorschauen aller Fenster in einem Raster anzeigt
