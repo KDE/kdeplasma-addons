@@ -1,3 +1,4 @@
+add_subdirectory(activitypager)
 add_subdirectory(fifteenPuzzle)
 add_subdirectory(fuzzy-clock)
 add_subdirectory(calculator)
