@@ -17,7 +17,10 @@ if (KDEExperimentalPurpose_FOUND)
 endif()
 
 if(NOT WIN32)
-   add_subdirectory(systemloadviewer)
+    # uses the command line tool 'quota', does not make sense on Windows
+    add_subdirectory(diskquota)
+
+    add_subdirectory(systemloadviewer)
 endif(NOT WIN32)
 
 add_subdirectory(kimpanel)
