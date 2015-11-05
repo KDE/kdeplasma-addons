@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Activity Pager
+Name[ca]=Paginador d'activitats
+Name[nl]=Pager van activiteiten
+Name[pt_BR]=Paginador de atividades
+Name[sv]=Aktivitetsbytare
+Name[uk]=Пейджер просторів дій
+Name[x-test]=xxActivity Pagerxx
 Comment=Switch between activities
+Comment[ca]=Commuta entre activitats
+Comment[nl]=Tussen activiteiten schakelen
+Comment[pt_BR]=Alterna entre as atividades
+Comment[sv]=Byt mellan aktiviteter
+Comment[uk]=Перемикання між просторами дій
+Comment[x-test]=xxSwitch between activitiesxx
 
 Icon=org.kde.plasma.pager
 Type=Service

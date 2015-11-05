@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Disk Quota
+Name[ca]=Quota de disc
+Name[nl]=Schijfquota
+Name[pt_BR]=Quota de disco
+Name[sv]=Diskkvot
+Name[uk]=Квота на диску
+Name[x-test]=xxDisk Quotaxx
 Comment=Shows details about disk quota
+Comment[ca]=Mostra els detalls de la quota de disc
+Comment[nl]=Toont details van schijfquota
+Comment[pt_BR]=Mostra detalhes sobre a quota do disco
+Comment[sv]=Visar information om diskkvot
+Comment[uk]=Показати дані щодо квот на диску
+Comment[x-test]=xxShows details about disk quotaxx
 Icon=quota
 Type=Service
 
