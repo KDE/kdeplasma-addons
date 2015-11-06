@@ -1,14 +1,19 @@
 [Desktop Entry]
 Name=Activity Pager
 Name[ca]=Paginador d'activitats
+Name[fi]=Aktiviteettisivutin
 Name[nl]=Pager van activiteiten
+Name[pt]=Paginador de Actividades
 Name[pt_BR]=Paginador de atividades
 Name[sv]=Aktivitetsbytare
 Name[uk]=Пейджер просторів дій
 Name[x-test]=xxActivity Pagerxx
 Comment=Switch between activities
 Comment[ca]=Commuta entre activitats
+Comment[de]=Zwischen Aktivitäten wechseln
+Comment[fi]=Vaihda aktiviteettien välillä
 Comment[nl]=Tussen activiteiten schakelen
+Comment[pt]=Mudar de actividades
 Comment[pt_BR]=Alterna entre as atividades
 Comment[sv]=Byt mellan aktiviteter
 Comment[uk]=Перемикання між просторами дій

@@ -1,14 +1,20 @@
 [Desktop Entry]
 Name=Disk Quota
 Name[ca]=Quota de disc
+Name[de]=Speicherplatzlimit (Quota)
+Name[fi]=Levykiintiö
 Name[nl]=Schijfquota
+Name[pt]=Quota do Disco
 Name[pt_BR]=Quota de disco
 Name[sv]=Diskkvot
 Name[uk]=Квота на диску
 Name[x-test]=xxDisk Quotaxx
 Comment=Shows details about disk quota
 Comment[ca]=Mostra els detalls de la quota de disc
+Comment[de]=Zeigt details zum Speicherplatzlimit an
+Comment[fi]=Näyttää tietoa levykiintiöstä
 Comment[nl]=Toont details van schijfquota
+Comment[pt]=Mostra os detalhes sobre as quotas do disco
 Comment[pt_BR]=Mostra detalhes sobre a quota do disco
 Comment[sv]=Visar information om diskkvot
 Comment[uk]=Показати дані щодо квот на диску
