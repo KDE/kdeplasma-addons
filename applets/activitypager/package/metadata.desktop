@@ -1,8 +1,11 @@
 [Desktop Entry]
 Name=Activity Pager
 Name[ca]=Paginador d'activitats
+Name[ca@valencia]=Paginador d'activitats
 Name[fi]=Aktiviteettisivutin
+Name[ko]=활동 호출기
 Name[nl]=Pager van activiteiten
+Name[nn]=Aktivitetsbytar
 Name[pt]=Paginador de Actividades
 Name[pt_BR]=Paginador de atividades
 Name[sv]=Aktivitetsbytare
@@ -10,9 +13,12 @@ Name[uk]=Пейджер просторів дій
 Name[x-test]=xxActivity Pagerxx
 Comment=Switch between activities
 Comment[ca]=Commuta entre activitats
+Comment[ca@valencia]=Commuta entre activitats
 Comment[de]=Zwischen Aktivitäten wechseln
 Comment[fi]=Vaihda aktiviteettien välillä
+Comment[ko]=활동간 전환
 Comment[nl]=Tussen activiteiten schakelen
+Comment[nn]=Byt mellom aktiviteter
 Comment[pt]=Mudar de actividades
 Comment[pt_BR]=Alterna entre as atividades
 Comment[sv]=Byt mellan aktiviteter
