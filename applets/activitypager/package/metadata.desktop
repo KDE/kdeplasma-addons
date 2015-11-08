@@ -2,6 +2,8 @@
 Name=Activity Pager
 Name[ca]=Paginador d'activitats
 Name[ca@valencia]=Paginador d'activitats
+Name[en_GB]=Activity Pager
+Name[es]=Paginador de actividades
 Name[fi]=Aktiviteettisivutin
 Name[ko]=활동 호출기
 Name[nl]=Pager van activiteiten
@@ -15,6 +17,8 @@ Comment=Switch between activities
 Comment[ca]=Commuta entre activitats
 Comment[ca@valencia]=Commuta entre activitats
 Comment[de]=Zwischen Aktivitäten wechseln
+Comment[en_GB]=Switch between activities
+Comment[es]=Cambiar entre actividades
 Comment[fi]=Vaihda aktiviteettien välillä
 Comment[ko]=활동간 전환
 Comment[nl]=Tussen activiteiten schakelen
