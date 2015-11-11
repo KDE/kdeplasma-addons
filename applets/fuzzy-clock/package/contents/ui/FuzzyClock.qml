@@ -209,9 +209,11 @@ Item {
                     sector = (minutes - 3) / 5 + 1
                 }
             } else {
-                if (minutes > 6) {
-                    sector = ((minutes - 7) / 15 + 1) * 3
-                }
+                // this formula has been determined by carefully filling a spreadsheet
+                // and looking at the numbers :)
+                sector = ((minutes + 7) / 15 * 3)
+                // now round down to the nearest three
+                sector = (Math.floor(sector / 3) * 3)
             }
 
             if (hours % 12 > 0) {
