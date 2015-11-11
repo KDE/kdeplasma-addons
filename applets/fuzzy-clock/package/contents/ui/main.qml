@@ -40,7 +40,8 @@ Item {
         id: dataSource
         engine: "time"
         connectedSources: ["Local"]
-        interval: 30000
+        interval: 60000
+        intervalAlignment: PlasmaCore.Types.AlignToMinute
     }
 
     Plasmoid.compactRepresentation: FuzzyClock { }
