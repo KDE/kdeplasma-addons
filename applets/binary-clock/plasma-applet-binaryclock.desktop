@@ -109,7 +109,7 @@ Comment[wa]=Eure håynêye e cogne binaire
 Comment[x-test]=xxTime displayed in binary formatxx
 Comment[zh_CN]=以二进制格式显示的时间
 Comment[zh_TW]=以二進位格式顯示時間
-Icon=org.kde.plasma.binaryclock
+Icon=clock
 Type=Service
 ServiceTypes=Plasma/Applet
 

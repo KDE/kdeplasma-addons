@@ -110,7 +110,7 @@ Comment[x-test]=xxPut the pieces in orderxx
 Comment[zh_CN]=按顺序摆放拼图块
 Comment[zh_TW]=將數字依順序排好
 
-Icon=org.kde.plasma.fifteenpuzzle
+Icon=fifteenpuzzle
 Type=Service
 
 X-KDE-ParentApp=

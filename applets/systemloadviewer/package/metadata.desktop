@@ -103,7 +103,7 @@ Comment[wa]=Tot ptit corwaitoe des CPU/RAM/Swap
 Comment[x-test]=xxTiny CPU/RAM/Swap monitorxx
 Comment[zh_CN]=微型 CPU/RAM/Swap 监视器
 Comment[zh_TW]=迷你 CPU/記憶體/置換空間監視器
-Icon=org.kde.plasma.systemloadviewer
+Icon=view-statistics
 Type=Service
 ServiceTypes=Plasma/Applet
 

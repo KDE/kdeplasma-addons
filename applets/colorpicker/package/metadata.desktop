@@ -112,7 +112,7 @@ Comment[wa]=Apice ene coleur do scribanne
 Comment[x-test]=xxPick a color from the desktopxx
 Comment[zh_CN]=从桌面拾取颜色
 Comment[zh_TW]=從桌面上挑選顏色
-Icon=org.kde.plasma.colorpicker
+Icon=color-picker
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 

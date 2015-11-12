@@ -113,7 +113,7 @@ Comment[wa]=Aclapantès notes sol scribanne
 Comment[x-test]=xxDesktop sticky notesxx
 Comment[zh_CN]=桌面 n 次贴
 Comment[zh_TW]=桌面便利貼
-Icon=org.kde.plasma.notes
+Icon=knotes
 Type=Service
 
 X-Plasma-API=declarativeappletscript

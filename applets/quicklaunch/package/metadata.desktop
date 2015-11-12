@@ -61,7 +61,7 @@ Comment[uk]=Запуск ваших улюблених програм
 Comment[x-test]=xxLaunch your favourite Applicationsxx
 Comment[zh_CN]=启动您最常用的程序
 
-Icon=org.kde.plasma.quicklaunch
+Icon=fork
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 
