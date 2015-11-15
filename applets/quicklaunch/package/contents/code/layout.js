@@ -42,7 +42,7 @@ function cols()
 function minimumWidth()
 {
     var w = cols() * minimumCellWidth();
-    if (!vertical && enablePopup) {
+    if (!vertical && popupArrow.visible) {
         w += popupArrow.width;
     }
     return w;
@@ -51,7 +51,7 @@ function minimumWidth()
 function minimumHeight()
 {
     var h = rows() * minimumCellHeight();
-    if (vertical && enablePopup) {
+    if (vertical && popupArrow.visible) {
         h += popupArrow.height;
     }
     return h;
@@ -63,7 +63,7 @@ function preferredWidth()
     if (horizontal) {
         w = (preferredHeight() / rows()) * cols();
     }
-    if (!vertical && enablePopup) {
+    if (!vertical && popupArrow.visible) {
         w += popupArrow.width;
     }
     return w;
@@ -74,7 +74,7 @@ function preferredHeight()
     var h = rows() * preferredCellHeight();
     if (vertical) {
         h = (preferredWidth() / cols()) * rows();
-        if (enablePopup) {
+        if (popupArrow.visible) {
             h += popupArrow.height;
         }
     }

@@ -33,9 +33,8 @@ Item {
     property int maxSectionCount: Plasmoid.configuration.maxSectionCount
     property bool showLauncherNames : Plasmoid.configuration.showLauncherNames
     property bool enablePopup : Plasmoid.configuration.enablePopup
-    property bool vertical : Plasmoid.formFactor == PlasmaCore.Types.Vertical
+    property bool vertical : Plasmoid.formFactor == PlasmaCore.Types.Vertical || (Plasmoid.formFactor == PlasmaCore.Types.Planar && height > width)
     property bool horizontal : Plasmoid.formFactor == PlasmaCore.Types.Horizontal
-
     property bool dragging : false
 
     Layout.minimumWidth: LayoutManager.minimumWidth()
@@ -96,8 +95,8 @@ Item {
         anchors {
             top: parent.top
             left: parent.left
-            right: !vertical && enablePopup ? popupArrow.left : parent.right
-            bottom: vertical && enablePopup ? popupArrow.top : parent.bottom
+            right: !vertical && popupArrow.visible ? popupArrow.left : parent.right
+            bottom: vertical && popupArrow.visible ? popupArrow.top : parent.bottom
         }
 
         GridView {
@@ -144,8 +143,6 @@ Item {
 
     PlasmaCore.ToolTipArea {
         id: popupArrow
-        width: vertical ? root.width : units.iconSizes.smallMedium
-        height: !vertical ? root.height : units.iconSizes.smallMedium
         visible: enablePopup
 
         anchors {
@@ -191,6 +188,8 @@ Item {
                         return "right-arrow";
                     } else if (plasmoid.location == PlasmaCore.Types.RightEdge) {
                         return "left-arrow";
+                    } else if (vertical) {
+                        return "right-arrow";
                     } else {
                         return "up-arrow";
                     }
@@ -212,6 +211,31 @@ Item {
             m.changeUrl(index, url);
         }
     }
+
+    // States to fix binding loop with enabled popup
+    states: [
+        State {
+            name: "normal"
+            when: !vertical
+
+            PropertyChanges {
+                target: popupArrow
+                width: units.iconSizes.smallMedium
+                height: root.height
+            }
+        },
+
+        State {
+            name: "vertical"
+            when: vertical
+
+            PropertyChanges {
+                target: popupArrow
+                width: root.width
+                height: units.iconSizes.smallMedium
+            }
+        }
+    ]
 
     Component.onCompleted: {
         launcherModel.setUrls(plasmoid.configuration.launcherUrls);
