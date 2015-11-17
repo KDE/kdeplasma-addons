@@ -82,7 +82,7 @@ Item {
         Row {
             id: compactRow
 
-            readonly property int contentWidth: (icon.visible ? icon.width : 0) + (icon.visible || label.visible ? spacing : 0) + (label.visible ? label.contentWidth : 0)
+            readonly property int contentWidth: (icon.visible ? icon.width : 0) + (icon.visible && label.visible ? spacing : 0) + (label.visible ? label.contentWidth : 0)
 
             anchors.fill: parent
             spacing: units.smallSpacing
