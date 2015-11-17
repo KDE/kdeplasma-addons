@@ -313,7 +313,6 @@ void ComicProviderWrapper::init()
             QFileInfo info(mainscript);
             for (int i = 0; i < extensions().count() && !info.exists(); ++i) {
                     info.setFile(mainscript + extensions().value(i));
-                    mainscript = info.filePath();
                     //qDebug() << "ComicProviderWrapper::init() mainscript found as" << info.filePath();
             }
 
