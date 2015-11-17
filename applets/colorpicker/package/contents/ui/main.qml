@@ -87,9 +87,17 @@ Item {
         PlasmaComponents.ToolButton {
             width: buttonSize
             height: buttonSize
-            iconName: "color-picker"
             tooltip: i18n("Pick Color")
             onClicked: picker.pick()
+
+            PlasmaCore.IconItem {
+                id: pickerIcon
+                anchors.centerIn: parent
+                width: Math.round(parent.width * 0.9)
+                height: width
+                source: "color-picker"
+                active: parent.hovered
+            }
         }
 
         Item { // spacer
@@ -129,8 +137,8 @@ Item {
                 id: colorCircle
                 anchors.centerIn: parent
                 // try to match the color-picker icon in size
-                width: units.roundToIconSize(parent.width - surfaceNormal.margins.left - surfaceNormal.margins.right) * 0.75
-                height: width
+                width: units.roundToIconSize(pickerIcon.width) * 0.75
+                height: units.roundToIconSize(pickerIcon.height) * 0.75
                 radius: width / 2
                 color: root.recentColor
             }
