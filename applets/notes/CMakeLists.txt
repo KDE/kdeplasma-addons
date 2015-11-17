@@ -25,7 +25,3 @@ target_link_libraries(notesplugin
                         KF5::CoreAddons)
 
 install(TARGETS notesplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/notes)
-
-install(
-    FILES notes.svgz
-    DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
