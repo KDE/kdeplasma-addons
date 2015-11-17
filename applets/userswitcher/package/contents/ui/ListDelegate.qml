@@ -88,11 +88,15 @@ Item {
             PlasmaComponents.Label {
                 id: label
                 Layout.fillWidth: true
+                wrapMode: Text.NoWrap
+                elide: Text.ElideRight
             }
 
             PlasmaComponents.Label {
                 id: sublabel
                 Layout.fillWidth: true
+                wrapMode: Text.NoWrap
+                elide: Text.ElideRight
                 opacity: 0.6
                 font: theme.smallestFont
                 visible: text !== ""
