@@ -73,7 +73,7 @@ void ComicEngine::loadProviders()
         data << comic.name();
         QFileInfo file(comic.iconName());
         if (file.isRelative()) {
-            data << QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(QLatin1String("plasma-comic/%1.png")).arg(comic.iconName()));
+            data << QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("plasma/comics/%1/%2").arg(comic.pluginId(), comic.iconName()));
         } else {
             data << comic.iconName();
         }
