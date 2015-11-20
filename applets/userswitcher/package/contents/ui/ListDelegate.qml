@@ -36,7 +36,8 @@ Item {
     property bool interactiveIcon: false
 
     property alias containsMouse: area.containsMouse
-    property bool highlightOnHover: true
+
+    property Item highlight
 
     Layout.fillWidth: true
 
@@ -49,13 +50,17 @@ Item {
         hoverEnabled: true
         onClicked: item.clicked()
         onContainsMouseChanged: {
-            if (item.highlightOnHover) {
-                if (containsMouse) {
-                    highlight.show(this)
-                } else {
-                    highlight.hide()
-                }
+            if (!highlight) {
+                return
             }
+
+            if (containsMouse) {
+                highlight.parent = item
+                highlight.width = item.width
+                highlight.height = item.height
+            }
+
+            highlight.visible = containsMouse
         }
     }
 
