@@ -107,6 +107,8 @@ DragDrop.DropArea {
                     mime = mimeDb.mimeTypeForUrl(contentTracker.uri).name;
                 }
                 sendData([contentTracker.uri], mime);
+            } else {
+                action_paste();
             }
         }
     }
