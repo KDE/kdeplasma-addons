@@ -2,6 +2,7 @@
 Name=Quicklaunch
 Name[ca]=Quicklaunch
 Name[ca@valencia]=Quicklaunch
+Name[da]=Kvikstart
 Name[de]=Schnellstarter
 Name[el]=Γρήγορη εκτέλεση
 Name[en_GB]=Quicklaunch
@@ -26,11 +27,13 @@ Name[sv]=Snabbstart
 Name[uk]=Швидкий запуск
 Name[x-test]=xxQuicklaunchxx
 Name[zh_CN]=快速启动
+Name[zh_TW]=快速啟動
 
 Comment=Launch your favourite Applications
 Comment[ca]=Llança les vostres aplicacions preferides
 Comment[ca@valencia]=Llança les vostres aplicacions preferides
 Comment[cs]=Spouštějte své oblíbené aplikace
+Comment[da]=Start dine favoritprogrammer
 Comment[de]=Ermöglicht den Aufruf Ihrer Lieblingsprogramme
 Comment[el]=Εκτελέστε τις αγαπημένες σας εφαρμογές
 Comment[en_GB]=Launch your favourite Applications
@@ -55,6 +58,7 @@ Comment[sv]=Start dina favoritprogram
 Comment[uk]=Запуск ваших улюблених програм
 Comment[x-test]=xxLaunch your favourite Applicationsxx
 Comment[zh_CN]=启动您最常用的程序
+Comment[zh_TW]=啟動您最愛的應用程式
 
 Icon=org.kde.plasma.quicklaunch
 Type=Service
