@@ -2,6 +2,7 @@
 Name=Quicklaunch
 Name[ca]=Quicklaunch
 Name[ca@valencia]=Quicklaunch
+Name[da]=Kvikstart
 Name[de]=Schnellstarter
 Name[el]=Γρήγορη εκτέλεση
 Name[en_GB]=Quicklaunch
@@ -31,6 +32,7 @@ Comment=Launch your favourite Applications
 Comment[ca]=Llança les vostres aplicacions preferides
 Comment[ca@valencia]=Llança les vostres aplicacions preferides
 Comment[cs]=Spouštějte své oblíbené aplikace
+Comment[da]=Start dine favoritprogrammer
 Comment[de]=Ermöglicht den Aufruf Ihrer Lieblingsprogramme
 Comment[el]=Εκτελέστε τις αγαπημένες σας εφαρμογές
 Comment[en_GB]=Launch your favourite Applications

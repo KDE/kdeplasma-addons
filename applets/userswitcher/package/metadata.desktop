@@ -2,6 +2,7 @@
 Name=User Switcher
 Name[ca]=Commutador d'usuaris
 Name[ca@valencia]=Commutador d'usuaris
+Name[da]=Brugerskifter
 Name[de]=Benutzerwechsel
 Name[en_GB]=User Switcher
 Name[es]=Selector de usuario
@@ -22,6 +23,7 @@ Name[x-test]=xxUser Switcherxx
 Comment=Quickly switch between different users
 Comment[ca]=Commuta ràpidament entre usuaris diferents
 Comment[ca@valencia]=Commuta ràpidament entre usuaris diferents
+Comment[da]=Skift hurtigt mellem forskellige brugere
 Comment[de]=Schnell zwischen verschiedenen Benutzern wechseln
 Comment[en_GB]=Quickly switch between different users
 Comment[es]=Cambiar rápidamente entre diferentes usuarios
