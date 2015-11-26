@@ -24,9 +24,8 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 import QtQuick.Layouts 1.1
 import org.kde.plasma.private.purpose 1.0
-import org.kde.draganddrop 2.0 as DragDrop
 
-DragDrop.DropArea {
+DropArea {
     id: root
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
@@ -35,10 +34,10 @@ DragDrop.DropArea {
     Layout.minimumWidth: 0
     Layout.minimumHeight: 0
 
-    preventStealing: true
-
     property string url: ""
     property string errorMessage: ""
+    property var pasteUrls: []
+    property int nextPaste: 0
 
     function firstMimeType(formats) {
         for (var v in formats) {
@@ -66,18 +65,28 @@ DragDrop.DropArea {
         return parts[parts.length - 1];
     }
 
-    onDragEnter: {
+    function objectToArray(object) {
+        var array = [];
+        for(var v in object) {
+            array.push(object[v]);
+        }
+        return array;
+    }
+
+    onEntered: {
         root.state = "idle";
         var mimetype;
-        if (event.mimeData.hasUrls) {
-            mimetype = urlsMimetype(event.mimeData.urls);
+        if (drag.hasUrls) {
+            mimetype = urlsMimetype(objectToArray(drag.urls));
         } else {
-            mimetype = firstMimeType(event.mimeData.formats);
+            mimetype = firstMimeType(drag.formats);
         }
         icon.source = mimetype.iconName;
-        event.accepted = true
+        drag.accepted = true
     }
-    onDragLeave: icon.source = "edit-paste"
+    onExited: {
+        icon.source = "edit-paste"
+    }
 
     QtExtra.Clipboard {
         id: clipboard
@@ -178,20 +187,18 @@ DragDrop.DropArea {
         root.state = "configuration"
     }
 
-    onDrop: {
-        var mimeData = event.mimeData;
-        var mimetype = firstMimeType(mimeData.formats).name;
-        if (mimeData.hasUrls) {
-            sendData(mimeData.urls, urlsMimetype(mimeData.urls).name);
+    onDropped: {
+        if (drop.hasUrls) {
+            var urls = objectToArray(drop.urls);
+
+            sendData(urls, urlsMimetype(urls).name);
         } else {
-            var data = mimeData.getDataAsByteArray(mimetype);
+            var mimetype = firstMimeType(drop.formats).name;
+            var data = mimeData.getDataAsArrayBuffer(mimetype);
             sendBase64Data(PurposeHelper.variantToBase64(data), mimetype);
         }
-        event.accepted = true;
+        drop.accepted = true;
     }
-
-    property var pasteUrls: []
-    property int nextPaste: 0
 
     Component.onCompleted: {
         plasmoid.setAction("paste", i18n("Paste"), "edit-paste");
