@@ -49,9 +49,9 @@ function formatColor(color, format) {
     case "rgba":
         return "rgba(" + formatColor(color, "RRR,GGG,BBB") + ", 1)"
     case "Qt.rgba":
-        return "Qt.rgba(" + [roundComponent(color.r), roundComponent(color.b), roundComponent(color.g)].join(", ") + ", 1)"
+        return "Qt.rgba(" + [roundComponent(color.r), roundComponent(color.g), roundComponent(color.b)].join(", ") + ", 1)"
     case "LaTeX":
-        return "\definecolor{ColorName}{rgb}{" + [roundComponent(color.r), roundComponent(color.b), roundComponent(color.g)].join(",") + "}"
+        return "\\definecolor{ColorName}{rgb}{" + [roundComponent(color.r), roundComponent(color.g), roundComponent(color.b)].join(",") + "}"
     }
 }
 
