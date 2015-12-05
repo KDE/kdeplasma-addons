@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2014 David Edmundson <davidedmundson@kde.org>
+    Copyright (C) 2015 Kai Uwe Broulik <kde@privat.broulik.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +23,40 @@
 #include "note.h"
 
 #include <QtQml>
+#include <QFile>
+
+class NotesHelper : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit NotesHelper(QObject *parent = nullptr) : QObject(parent)
+    {
+
+    }
+
+    virtual ~NotesHelper() = default;
+
+    Q_INVOKABLE QString fileContents(const QString &path) const
+    {
+        const QUrl &url = QUrl::fromUserInput(path);
+        if (!url.isValid()) {
+            return QString();
+        }
+
+        QFile file(url.toLocalFile());
+        if (!file.open(QIODevice::ReadOnly)) {
+            return QString();
+        }
+
+        return QString::fromUtf8(file.readAll());
+    }
+};
+
+static QObject *notesHelper_provider(QQmlEngine *, QJSEngine *)
+{
+    return new NotesHelper();
+}
 
 void NotesPlugin::registerTypes (const char *uri)
 {
@@ -29,5 +64,8 @@ void NotesPlugin::registerTypes (const char *uri)
     qmlRegisterType<DocumentHandler>(uri, 0, 1, "DocumentHandler");
     qmlRegisterType<NoteManager>(uri, 0, 1, "NoteManager");
     qmlRegisterUncreatableType<Note>(uri, 0, 1, "Note", "Create through NoteManager");
+    qmlRegisterSingletonType<NotesHelper>(uri, 0, 1, "NotesHelper", notesHelper_provider);
 
 }
+
+#include "notesplugin.moc"
