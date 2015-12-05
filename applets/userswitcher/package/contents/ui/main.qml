@@ -142,19 +142,8 @@ Item {
         }
 
         PlasmaComponents.Highlight {
-            id: highlight
+            id: delegateHighlight
             visible: false
-
-            function show(item) {
-                y = item.mapToItem(fullRoot).y
-                width = item.width
-                height = item.height
-                visible = true
-            }
-
-            function hide() {
-                visible = false
-            }
         }
 
         ColumnLayout {
@@ -205,7 +194,6 @@ Item {
                             return model.name
                         }
                         icon: model.icon || "user-identity"
-                        highlightOnHover: false
                         subText: {
                             if (!root.showTechnicalInfo) {
                                 return ""
@@ -235,6 +223,7 @@ Item {
                 id: newSessionButton
                 text: i18n("New Session")
                 icon: "system-switch-user"
+                highlight: delegateHighlight
                 visible: sessionsModel.canStartNewSession
                 onClicked: sessionsModel.startNewSession(sessionsModel.shouldLock)
             }
@@ -243,13 +232,16 @@ Item {
                 id: lockScreenButton
                 text: i18n("Lock Screen")
                 icon: "system-lock-screen"
-                visible: pmEngine.data["Sleep States"]["LockScreen"]
+                highlight: delegateHighlight
+                enabled: pmEngine.data["Sleep States"]["LockScreen"]
+                visible: enabled
                 onClicked: pmEngine.performOperation("lockScreen")
             }
 
             ListDelegate {
                 id: leaveButton
                 text: i18n("Leave...")
+                highlight: delegateHighlight
                 icon: "system-shutdown"
                 onClicked: pmEngine.performOperation("requestShutDown")
             }
