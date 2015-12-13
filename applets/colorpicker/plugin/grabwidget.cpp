@@ -69,15 +69,14 @@ bool GrabWidget::eventFilter(QObject *watched, QEvent *event)
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
         const QPoint pos = me->globalPos();
 
-        foreach (QScreen *screen, QApplication::screens()) {
-            if (screen->geometry().contains(pos)) {
-                const QPixmap pixmap = screen->grabWindow(0);
-                const QPoint localPos = (pos - screen->geometry().topLeft()) * qApp->devicePixelRatio();
-                m_currentColor = QColor(pixmap.toImage().pixel(localPos));
-                emit currentColorChanged();
-                break;
-            }
-        }
+        // the grabbed pixmap will contain all screens, not just the primary one
+        // originally we traversed all screens looking for where the mouse is
+        // but this isn't neccessarily apparently
+        const QPixmap pixmap = qApp->primaryScreen()->grabWindow(0);
+        const QPoint localPos = pos * qApp->devicePixelRatio();
+
+        m_currentColor = QColor(pixmap.toImage().pixel(localPos));
+        emit currentColorChanged();
     }
 
     return QObject::eventFilter(watched, event);
