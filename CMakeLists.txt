@@ -32,14 +32,6 @@ set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
                         PURPOSE "Required for building the X11 based workspace"
                       )
 
-find_package(XCB
-    REQUIRED COMPONENTS
-        XCB SHM IMAGE
-)
-set_package_properties(XCB PROPERTIES TYPE REQUIRED)
-add_feature_info("XCB-XKB" XCB_XKB_FOUND "Required for building kcm/keyboard")
-add_feature_info("libxft" X11_Xft_FOUND "X FreeType interface library required for font installation")
-
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 #########################################################################
 
