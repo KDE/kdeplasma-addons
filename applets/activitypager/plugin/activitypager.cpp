@@ -50,6 +50,8 @@
 #include <kactivities/consumer.h>
 #include <kactivities/controller.h>
 
+#include <taskmanager/task.h>
+
 const int FAST_UPDATE_DELAY = 100;
 const int UPDATE_DELAY = 500;
 const int MAXDESKTOPS = 20;
@@ -580,6 +582,31 @@ QRect ActivityPager::fixViewportPosition( const QRect& r )
 void ActivityPager::openVirtualDesktopsKCM()
 {
     KProcess::execute("kcmshell5", QStringList() << "desktop");
+}
+
+void ActivityPager::dropMimeData(QMimeData *mimeData, int desktopId)
+{
+    if (!mimeData) {
+        return;
+    }
+
+    QString newActivity;
+
+    if (desktopId < m_consumer->activities(KActivities::Info::Running).length()) {
+        newActivity = m_consumer->activities(KActivities::Info::Running).value(desktopId);
+    }
+
+    if (newActivity.isEmpty()) {
+        return;
+    }
+
+    bool ok;
+    const QList<WId> &ids = TaskManager::Task::idsFromMimeData(mimeData, &ok);
+    if (ok) {
+        foreach (const WId &id, ids) {
+            KWindowSystem::setOnActivities(id, {newActivity});
+        }
+    }
 }
 
 

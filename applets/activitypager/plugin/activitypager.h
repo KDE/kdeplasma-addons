@@ -100,6 +100,7 @@ class ActivityPager : public QObject
 
         Q_INVOKABLE void moveWindow(int, double, double, int, int);
         Q_INVOKABLE void changeDesktop(int desktopId);
+        Q_INVOKABLE void dropMimeData(QMimeData *mimeData, int desktopId);
 
     Q_SIGNALS:
         void currentDesktopChanged();

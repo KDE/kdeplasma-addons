@@ -25,6 +25,8 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui DBus Quick Qml 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Activities Config ConfigWidgets CoreAddons I18n KIO KCMUtils Plasma Runner Service UnitConversion KDELibs4Support NewStuff Kross)
 
+find_package(LibTaskManager CONFIG REQUIRED)
+
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
                         URL "http://www.x.org"
