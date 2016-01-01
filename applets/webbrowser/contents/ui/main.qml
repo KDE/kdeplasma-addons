@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright 2014 by Mikhail Ivchenko <ematirov@gmail.com>           *
+ *   Copyright 2014, 2016 by Mikhail Ivchenko <ematirov@gmail.com>         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -51,8 +51,9 @@ ColumnLayout {
         Layout.fillHeight: true
         WebView {
             id: webview
-            url: "http://kde.org"
             anchors.fill: parent
+            onUrlChanged: plasmoid.configuration.url = url;
+            Component.onCompleted: url = plasmoid.configuration.url;
         }
     }
     //There will be RowLayout with buttons for bookmarks and zooming.
