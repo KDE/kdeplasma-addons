@@ -22,6 +22,7 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragAndDrop
 import org.kde.plasma.private.quicklaunch 1.0
 
@@ -33,6 +34,7 @@ Item {
     property int maxSectionCount: Plasmoid.configuration.maxSectionCount
     property bool showLauncherNames : Plasmoid.configuration.showLauncherNames
     property bool enablePopup : Plasmoid.configuration.enablePopup
+    property string title : Plasmoid.formFactor == PlasmaCore.Types.Planar ? Plasmoid.configuration.title : ""
     property bool vertical : Plasmoid.formFactor == PlasmaCore.Types.Vertical || (Plasmoid.formFactor == PlasmaCore.Types.Planar && height > width)
     property bool horizontal : Plasmoid.formFactor == PlasmaCore.Types.Horizontal
     property bool dragging : false
@@ -89,11 +91,27 @@ Item {
         }
     }
 
+    PlasmaComponents.Label {
+        id: titleLabel
+
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+
+        height: theme.mSize(theme.defaultFont).height
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignTop
+        elide: Text.ElideMiddle
+        text: title
+    }
+
     Item {
         id: launcher
 
         anchors {
-            top: parent.top
+            top: title.length ? titleLabel.bottom : parent.top
             left: parent.left
             right: !vertical && popupArrow.visible ? popupArrow.left : parent.right
             bottom: vertical && popupArrow.visible ? popupArrow.top : parent.bottom

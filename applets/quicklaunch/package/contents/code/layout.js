@@ -54,6 +54,9 @@ function minimumHeight()
     if (vertical && popupArrow.visible) {
         h += popupArrow.height;
     }
+    if (title.length) {
+        h += titleLabel.height;
+    }
     return h;
 }
 
@@ -77,6 +80,9 @@ function preferredHeight()
         if (popupArrow.visible) {
             h += popupArrow.height;
         }
+    }
+    if (title.length) {
+        h += titleLabel.height;
     }
     return h;
 }

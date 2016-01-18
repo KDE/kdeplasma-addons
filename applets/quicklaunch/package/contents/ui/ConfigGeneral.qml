@@ -32,6 +32,7 @@ Item {
     property alias cfg_maxSectionCount: maxSectionCount.value
     property alias cfg_showLauncherNames: showLauncherNames.checked
     property alias cfg_enablePopup: enablePopup.checked
+    property alias cfg_title: title.text
 
     ColumnLayout {
         GroupBox {
@@ -67,6 +68,36 @@ Item {
                 CheckBox {
                     id: enablePopup
                     text: i18n("Enable popup")
+                }
+            }
+        }
+
+        GroupBox {
+            Layout.fillWidth: true
+
+            flat: true
+            title: i18n("Title")
+            visible: plasmoid.formFactor == PlasmaCore.Types.Planar
+
+            ColumnLayout {
+                CheckBox {
+                    id: showTitle
+                    checked: title.activeFocus || title.length
+                    text: i18n("Show title")
+
+                    onClicked: {
+                        if (checked) {
+                            title.forceActiveFocus();
+                        } else {
+                            title.text = "";
+                        }
+                    }
+                }
+
+                TextField {
+                    id: title
+                    enabled: showTitle.checked
+                    placeholderText: i18n("Enter title")
                 }
             }
         }
