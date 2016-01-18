@@ -1,0 +1,24 @@
+[Desktop Entry]
+Name=Media frame
+Name[x-test]=xxImagexx
+Comment=(Picture) Frame
+Comment[x-test]=xxCommentxx
+Icon=image-x-generic
+Type=Service
+ServiceTypes=Plasma/Applet,Plasma/PopupApplet
+
+X-KDE-PluginInfo-Author=Lars Pontoppidan
+X-KDE-PluginInfo-Email=dev.larpon@gmail.com
+X-KDE-PluginInfo-Name=org.kde.plasma.mediaframe
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-StandAloneApp=true
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-Requires-FileDialog=True
+X-Plasma-Requires-LaunchApp=Unused
