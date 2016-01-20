@@ -124,7 +124,7 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 
 X-Plasma-API=declarativeappletscript
-X-Plasma-MainScript=ui/timer.qml
+X-Plasma-MainScript=ui/main.qml
 X-Plasma-Requires-FileDialog=Unused
 X-Plasma-Requires-LaunchApp=Unused
 X-Plasma-StandAloneApp=true
