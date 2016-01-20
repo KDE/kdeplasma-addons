@@ -52,19 +52,19 @@ Item {
         enabled: !plasmoid.immutable
 
         onDragEnter: {
-            dragging = true;
+            if (event.mimeData.hasUrls) {
+                dragging = true;
+            } else {
+                event.ignore();
+            }
         }
 
         onDragMove: {
-            if (!event.mimeData.hasUrls) {
-                return;
-            }
-
             var index = grid.indexAt(event.x, event.y);
 
             if (isInternalDrop(event)) {
                 launcherModel.moveUrl(event.mimeData.source.itemIndex, index);
-            } else if (event.mimeData.hasUrls) {
+            } else {
                 launcherModel.showDropMarker(index);
             }
 
@@ -83,7 +83,7 @@ Item {
             if (isInternalDrop(event)) {
                 event.accept(Qt.IgnoreAction);
                 saveConfiguration();
-            } else if (event.mimeData.hasUrls) {
+            } else {
                 var index = grid.indexAt(event.x, event.y);
                 launcherModel.insertUrls(index == -1 ? launcherModel.count : index, event.mimeData.urls);
                 event.accept(event.proposedAction);
