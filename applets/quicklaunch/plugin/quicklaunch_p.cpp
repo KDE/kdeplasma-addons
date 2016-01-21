@@ -94,11 +94,6 @@ void QuicklaunchPrivate::openUrl(const QUrl &url)
     new KRun(url, Q_NULLPTR);
 }
 
-QImage QuicklaunchPrivate::iconFromTheme(const QString &iconName, const QSize &size)
-{
-    return QIcon::fromTheme(iconName).pixmap(size).toImage();
-}
-
 void QuicklaunchPrivate::addLauncher(bool isPopup)
 {
     KOpenWithDialog *dialog = new KOpenWithDialog();

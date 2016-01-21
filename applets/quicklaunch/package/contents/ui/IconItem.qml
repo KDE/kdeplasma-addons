@@ -45,7 +45,7 @@ Item {
         enabled: !plasmoid.immutable
         defaultAction: Qt.MoveAction
         supportedActions: Qt.IgnoreAction | Qt.MoveAction
-        delegateImage: logic.iconFromTheme(iconName, Qt.size(icon.width, icon.height))
+        delegate: icon
 
         mimeData {
             url: url
