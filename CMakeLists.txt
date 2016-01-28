@@ -16,7 +16,7 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDECompilerSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 
 set(REQUIRED_QT_VERSION 5.3.0)
 set(KF5_MIN_VERSION 5.8.0)
