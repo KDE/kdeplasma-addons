@@ -32,132 +32,123 @@ Item {
     width: parent.width
     height: parent.height
 
-    property string cfg_pathList: ""
-    
+    property var pathList: []
+    property alias cfg_pathList: root.pathList
+
     function addPath(object) {
         pathModel.append( object )
-        
-        var t = []
-        if(cfg_pathList != '')
-            t = JSON.parse(cfg_pathList)
-        t.push(object)
-        cfg_pathList = JSON.stringify(t)
+        pathList.push( JSON.stringify(object) )
     }
-    
+
     function removePath(index) {
         if(pathModel.count > 0) {
             pathModel.remove(index)
-            var t = JSON.parse(cfg_pathList)
-            t.splice(index,1)
-            cfg_pathList = JSON.stringify(t)
+            pathList.splice(index,1)
         }
     }
-    
+
+    /*
+    Component.onCompleted: {
+        var list = plasmoid.configuration.pathList
+        for(var i in list) {
+            addPath( list[i] )
+        }
+    }
+    */
+
     FileDialog {
         id: fileDialog
-        
+
         visible: false
-        
+
         title: i18n("Choose files")
-        
+
         folder: shortcuts.pictures
-        
+
         selectMultiple: true
-        
+
         // TODO get valid filter list from native code?
         //nameFilters: [ "Image files (*.png *.jpg)", "All files (*)" ]
         //selectedNameFilter: "All files (*)"
-        
+
         onAccepted: {
             console.log("Accepted: " + fileUrls)
-            
+
             for (var i = 0; i < fileUrls.length; ++i) {
                 var item = { 'path':fileUrls[i], 'type':'file' }
                 addPath(item)
             }
         }
-        
+
         onRejected: {
             console.log("Canceled")
         }
     }
-    
+
     FileDialog {
         id: folderDialog
-        
+
         visible: false
-        
+
         title: i18n("Choose a folder")
-        
+
         folder: shortcuts.pictures
-        
+
         selectFolder: true
-        
+
         onAccepted: {
             console.log("Accepted: " + fileUrls)
-            
+
             for (var i = 0; i < fileUrls.length; ++i) {
                 var item = { 'path':fileUrls[i], 'type':'folder' }
                 addPath(item)
             }
         }
-        
+
         onRejected: {
             console.log("Canceled")
         }
-        
+
     }
-    
+
     ColumnLayout {
-        
+
         width: parent.width
         height: parent.height
-        
+
         RowLayout {
             Layout.fillWidth: true
-            
+
             PlasmaComponents.Button {
-                iconSource: "folder"
+                iconSource: "folder-new"
                 onClicked: folderDialog.visible = true
             }
-            
-            Text {
+
+            Label {
                 text: i18n("Add folder")
             }
-            
+
             PlasmaComponents.Button {
                 iconSource: "document-new"
                 onClicked: fileDialog.visible = true
             }
-            
-            Text {
+
+            Label {
                 text: i18n("Add files")
             }
-            
+
         }
-        
+
         Label {
             Layout.fillWidth: true
 
             text: i18n("Paths")
         }
-        
-        ListModel { 
+
+        ListModel {
             id: pathModel
-            
-            Component.onCompleted: {
-                var json = plasmoid.configuration.pathList
-                if(json != '') {
-                    var list = JSON.parse(json)
-                    for(var i in list) {
-                        var pathObject = list[i]
-                        addPath(pathObject)
-                    }
-                }
-                
-            }
         }
-        
+
         RowLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -174,27 +165,25 @@ Item {
 
                     delegate: RowLayout {
                         width: parent.width
-                        
+
                         Text {
                             id: pathText
 
                             Layout.fillWidth: true
-                            
+
                             text: model.path
                         }
-                        
+
                         PlasmaComponents.Button {
                             id: removePathButton
 
                             iconSource: "list-remove"
-                            
+
                             onClicked: removePath(model.index)
                         }
                     }
                 }
-                
             }
-
         }
     }
 }

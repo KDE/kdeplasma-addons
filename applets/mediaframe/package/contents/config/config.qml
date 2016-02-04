@@ -28,7 +28,7 @@ ConfigModel {
     }
     ConfigCategory {
          name: i18n("Paths")
-         icon: "folder-new"
+         icon: "folder"
          source: "ConfigPaths.qml"
     }
 }

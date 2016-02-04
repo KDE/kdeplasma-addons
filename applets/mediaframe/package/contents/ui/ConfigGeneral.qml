@@ -31,100 +31,117 @@ Item {
     width: parent.width
     height: parent.height
 
-    property int cfg_interval: 6850
+    property alias cfg_interval: intervalSpinBox.value
     property alias cfg_randomize: randomizeCheckBox.checked
     property alias cfg_pauseOnMouseOver: pauseOnMouseOverCheckBox.checked
     property alias cfg_useBackground: useBackgroundCheckBox.checked
     property alias cfg_leftClickOpenImage: leftClickOpenImageCheckBox.checked
     property alias cfg_showCountdown: showCountdownCheckBox.checked
-    
+    property alias cfg_fillMode: root.fillMode
+
+    /*
+     * Image.Stretch - the image is scaled to fit
+     * Image.PreserveAspectFit - the image is scaled uniformly to fit without cropping
+     * Image.PreserveAspectCrop - the image is scaled uniformly to fill, cropping if necessary
+     * Image.Tile - the image is duplicated horizontally and vertically
+     * Image.TileVertically - the image is stretched horizontally and tiled vertically
+     * Image.TileHorizontally - the image is stretched vertically and tiled horizontally
+     * Image.Pad - the image is not transformed
+     */
+    property int fillMode: Image.PreserveAspectFit
+
     ColumnLayout {
-        
+
         width: parent.width
         height: parent.height
 
         RowLayout {
             Layout.fillWidth: true
-            
-            Text {
-                //Layout.fillWidth: true
-                
+
+            Label {
                 text: i18n("Change picture every")
             }
-            
-            TextField {
-                id: intervalTextField
 
-                //Layout.fillWidth: true
+            SpinBox {
 
-                placeholderText: i18n("milliseconds")
-                
-                text: root.cfg_interval
-                
-                onTextChanged: {
-                    cfg_interval = parseInt(text)
+                id: intervalSpinBox
+
+                suffix: i18n("s")
+                decimals: 1
+
+                // Once a day should be high enough
+                maximumValue: 24*(60*60)
+            }
+        }
+
+        ColumnLayout {
+            RowLayout {
+                Layout.fillWidth: true
+
+                Label {
+                    text: i18n("Fill mode")
+                }
+
+                ComboBox {
+                    id: comboBox
+                    currentIndex: 1
+                    model: ListModel {
+                        id: comboBoxItems
+                        ListElement { text: "Stretch"; value: Image.Stretch; description: "The image is scaled to fit" }
+                        ListElement { text: "Preserve aspect fit"; value: Image.PreserveAspectFit; description: "The image is scaled uniformly to fit without cropping" }
+                        ListElement { text: "Preserve aspect crop"; value: Image.PreserveAspectCrop; description: "The image is scaled uniformly to fill, cropping if necessary" }
+                        ListElement { text: "Tile"; value: Image.Tile; description: "The image is duplicated horizontally and vertically" }
+                        ListElement { text: "Tile vertically"; value: Image.TileVertically; description: "The image is stretched horizontally and tiled vertically" }
+                        ListElement { text: "Tile horizontally"; value: Image.TileHorizontally; description: "The image is stretched vertically and tiled horizontally" }
+                        ListElement { text: "Pad"; value: Image.Pad; description: "The image is not transformed" }
+                    }
+
+                    onActivated: {
+                        root.fillMode = comboBoxItems.get(index).value
+                        fillModeDescription.text = comboBoxItems.get(index).description
+                    }
+
+                    // Stupid hack to avoid "ListElement: Cannot use script for property value" error
+                    Component.onCompleted: {
+                        for (var i=0; i < comboBoxItems.count; i++) {
+                            var text = comboBoxItems.get(i).text
+                            comboBoxItems.get(i).text = i18n(text)
+                            var description = comboBoxItems.get(i).description
+                            comboBoxItems.get(i).description = description
+                        }
+                    }
                 }
             }
-            
-            Text {
-                text: i18n("milliseconds")
+            Label {
+                id: fillModeDescription
+                text: i18n("The image is scaled uniformly to fit without cropping")
             }
         }
-        
-        RowLayout {
-            Layout.fillWidth: true
-            
-            CheckBox {
-                id: randomizeCheckBox
-                text: i18n("Randomize items")
-                checked: true
-            }
-            
+
+        CheckBox {
+            id: randomizeCheckBox
+            text: i18n("Randomize items")
         }
-        
-        RowLayout {
-            Layout.fillWidth: true
-            
-            CheckBox {
-                id: pauseOnMouseOverCheckBox
-                text: i18n("Pause on mouseover")
-                checked: true
-            }
-            
+
+        CheckBox {
+            id: pauseOnMouseOverCheckBox
+            text: i18n("Pause on mouseover")
         }
-        
-        RowLayout {
-            Layout.fillWidth: true
-            
-            CheckBox {
-                id: useBackgroundCheckBox
-                text: i18n("Background frame")
-                checked: true
-            }
-            
+
+        CheckBox {
+            id: useBackgroundCheckBox
+            text: i18n("Background frame")
         }
-        
-        RowLayout {
-            Layout.fillWidth: true
-            
-            CheckBox {
-                id: leftClickOpenImageCheckBox
-                text: i18n("Left click image opens in external viewer")
-                checked: true
-            }
-            
+
+        CheckBox {
+            id: leftClickOpenImageCheckBox
+            text: i18n("Left click image opens in external viewer")
         }
-        
-        RowLayout {
-            Layout.fillWidth: true
-            
-            CheckBox {
-                id: showCountdownCheckBox
-                text: i18n("Show countdown")
-                checked: true
-            }
-            
+
+        CheckBox {
+            id: showCountdownCheckBox
+            text: i18n("Show countdown")
         }
-        
+
     }
 }

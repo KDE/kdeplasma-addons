@@ -5,8 +5,8 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
     <!-- <kcfgfile name=""/> -->
   <group name="General">
-    <entry name="interval" type="int">
-        <default>6850</default>
+    <entry name="interval" type="Double">
+        <default>6.8</default>
     </entry>
     <entry name="randomize" type="Bool">
         <default>true</default>
@@ -23,9 +23,12 @@
     <entry name="showCountdown" type="Bool">
         <default>true</default>
     </entry>
+    <entry name="fillMode" type="int">
+        <default>1</default>
+    </entry>
   </group>
   <group name="Paths">
-    <entry name="pathList" type="String">
+    <entry name="pathList" type="StringList">
         <default></default>
     </entry>
   </group>
