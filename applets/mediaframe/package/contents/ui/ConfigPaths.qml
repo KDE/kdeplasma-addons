@@ -32,36 +32,19 @@ Item {
     width: parent.width
     height: parent.height
 
-    signal configurationChanged
-
     property var cfg_pathList: []
 
     function addPath(object) {
         pathModel.append( object )
         cfg_pathList.push( JSON.stringify(object) )
-        configurationChanged();
     }
 
     function removePath(index) {
         if(pathModel.count > 0) {
             pathModel.remove(index)
             cfg_pathList.splice(index,1)
-            configurationChanged();
         }
     }
-
-    /* Crash galore
-    Connections {
-        target: plasmoid.configuration
-        onPathListChanged: {
-            var list = plasmoid.configuration.pathList
-            for(var i in list) {
-                console.debug( list[i] )
-            }
-        }
-    }
-
-    */
 
     Component.onCompleted: {
         var list = plasmoid.configuration.pathList
