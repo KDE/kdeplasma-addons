@@ -32,29 +32,43 @@ Item {
     width: parent.width
     height: parent.height
 
-    property var pathList: []
-    property alias cfg_pathList: root.pathList
+    signal configurationChanged
+
+    property var cfg_pathList: []
 
     function addPath(object) {
         pathModel.append( object )
-        pathList.push( JSON.stringify(object) )
+        cfg_pathList.push( JSON.stringify(object) )
+        configurationChanged();
     }
 
     function removePath(index) {
         if(pathModel.count > 0) {
             pathModel.remove(index)
-            pathList.splice(index,1)
+            cfg_pathList.splice(index,1)
+            configurationChanged();
         }
     }
 
-    /*
+    /* Crash galore
+    Connections {
+        target: plasmoid.configuration
+        onPathListChanged: {
+            var list = plasmoid.configuration.pathList
+            for(var i in list) {
+                console.debug( list[i] )
+            }
+        }
+    }
+
+    */
+
     Component.onCompleted: {
         var list = plasmoid.configuration.pathList
         for(var i in list) {
             addPath( list[i] )
         }
     }
-    */
 
     FileDialog {
         id: fileDialog

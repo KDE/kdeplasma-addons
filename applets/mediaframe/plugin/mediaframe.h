@@ -36,6 +36,14 @@ class MediaFrame : public QObject
     Q_PROPERTY(bool random READ random WRITE setRandom NOTIFY randomChanged)
 
     public:
+
+        enum AddOption
+        {
+            NON_RECURSIVE,
+            RECURSIVE
+        };
+        Q_ENUMS(AddOption)
+
         MediaFrame(QObject *parent = nullptr);
         virtual ~MediaFrame();
 
@@ -49,12 +57,12 @@ class MediaFrame : public QObject
         Q_INVOKABLE bool isFile(const QString &path);
 
         Q_INVOKABLE void add(const QString &path);
-        Q_INVOKABLE void add(const QString &path, bool recursive);
+        Q_INVOKABLE void add(const QString &path, AddOption option);
         Q_INVOKABLE void clear();
 
         Q_INVOKABLE void watch(const QString &path);
 
-        Q_INVOKABLE bool has(const QString &path);
+        Q_INVOKABLE bool isAdded(const QString &path);
 
         Q_INVOKABLE void get(QJSValue callback);
         Q_INVOKABLE void get(QJSValue callback, QJSValue error_callback);

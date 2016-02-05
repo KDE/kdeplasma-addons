@@ -48,9 +48,7 @@ MediaFrame::MediaFrame(QObject *parent) : QObject(parent)
     m_next = 0;
 
     connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &MediaFrame::slotItemChanged);
-    //QObject::connect(&m_watcher, SIGNAL(directoryChanged(QString)), this, SLOT(slotItemChanged(QString)));
     connect(&m_watcher, &QFileSystemWatcher::fileChanged, this, &MediaFrame::slotItemChanged);
-    //QObject::connect(&m_watcher, SIGNAL(fileChanged(QString)), this, SLOT(slotItemChanged(QString)));
 }
 
 MediaFrame::~MediaFrame() = default;
@@ -102,31 +100,30 @@ bool MediaFrame::isDir(const QString &path)
 
 bool MediaFrame::isDirEmpty(const QString &path)
 {
-    return (isDir(path) && QDir(path).entryInfoList(QDir::NoDotAndDotDot|QDir::AllEntries).count() == 0);
+    return (isDir(path) && QDir(path).entryInfoList(QDir::NoDotAndDotDot|QDir::AllEntries).isEmpty());
 }
 
 bool MediaFrame::isFile(const QString &path)
 {
-    QFileInfo checkFile(path);
-    // Check if the file exists and not a directory
-    return (checkFile.exists() && checkFile.isFile());
+    // Check if the file exists and is not a directory
+    return (QFileInfo::exists(path) && QFileInfo(path).isFile());
 }
 
 void MediaFrame::add(const QString &path)
 {
-    add(path, false);
+    add(path, AddOption::NON_RECURSIVE);
 }
 
-void MediaFrame::add(const QString &path, bool recursive)
+void MediaFrame::add(const QString &path, AddOption option)
 {
-    if(has(path)) {
-        qWarning() << "Path" << path << "already exists";
+    if(isAdded(path)) {
+        qWarning() << "Path" << path << "already added";
         return;
     }
 
     QUrl url = QUrl(path);
     QString localPath = url.toString(QUrl::PreferLocalFile);
-    //qDebug() << "Local path" << localPath;
+    //qDebug() << "Local path" << localPath << "Path" << path;
 
     QStringList paths;
     QString filePath;
@@ -135,7 +132,7 @@ void MediaFrame::add(const QString &path, bool recursive)
 
         if(!isDirEmpty(localPath))
         {
-            QDirIterator dirIterator(localPath, m_filters, QDir::Files, (recursive ? QDirIterator::Subdirectories | QDirIterator::FollowSymlinks : QDirIterator::NoIteratorFlags));
+            QDirIterator dirIterator(localPath, m_filters, QDir::Files, (option == AddOption::RECURSIVE ? QDirIterator::Subdirectories | QDirIterator::FollowSymlinks : QDirIterator::NoIteratorFlags));
 
             while (dirIterator.hasNext()) {
                 dirIterator.next();
@@ -148,7 +145,7 @@ void MediaFrame::add(const QString &path, bool recursive)
             }
             if(paths.count() > 0)
             {
-                m_pathMap[path] = paths;
+                m_pathMap.insert(path, paths);
                 qDebug() << "Added" << paths.count() << "files from" << path;
             }
             else
@@ -180,7 +177,7 @@ void MediaFrame::add(const QString &path, bool recursive)
         {
             qDebug() << "Adding" << url.toString() << "as remote file";
             paths.append(path);
-            m_pathMap[path] = paths;
+            m_pathMap.insert(path, paths);
             m_allFiles.append(path);
             emit countChanged();
         }
@@ -225,7 +222,7 @@ void MediaFrame::watch(const QString &path)
     }
 }
 
-bool MediaFrame::has(const QString &path)
+bool MediaFrame::isAdded(const QString &path)
 {
     return (m_pathMap.contains(path));
 }
