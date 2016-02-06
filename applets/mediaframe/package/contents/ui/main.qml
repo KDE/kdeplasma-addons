@@ -55,13 +55,10 @@ Item {
     property string activeSource: ""
     property string transitionSource: ""
 
-    property var history: []
-    property var future: []
-
     property bool pause: overlayMouseArea.containsMouse
 
-    readonly property int itemCount: (items.count + future.length)
-    readonly property bool hasItems: ((itemCount > 0) || (future.length > 0))
+    readonly property int itemCount: (items.count + items.futureLength())
+    readonly property bool hasItems: ((itemCount > 0) || (items.futureLength() > 0))
     readonly property bool isTransitioning: faderAnimation.running
 
     onActiveSourceChanged: {
@@ -112,10 +109,10 @@ Item {
 
         // Only record history if we have more than one item
         if(itemCount > 1)
-            pushHistory(active)
+            items.pushHistory(active)
 
-        if(future.length > 0) {
-            setActiveSource(popFuture())
+        if(items.futureLength() > 0) {
+            setActiveSource(items.popFuture())
         } else {
             //setLoading()
             items.get(function(filePath){
@@ -126,64 +123,17 @@ Item {
                 console.error("Error while getting next image",errorMessage)
             })
         }
-
-
     }
 
     function previousItem() {
         var active = activeSource
-        pushFuture(active)
-        var filePath = popHistory()
+        items.pushFuture(active)
+        var filePath = items.popHistory()
         setActiveSource(filePath)
     }
 
     function blacklistItem() {
         // TODO
-    }
-
-    function pushHistory(entry) {
-        if(entry != "") {
-            //console.debug("pushing to history",entry)
-
-            // Don't keep a sane size of history
-            if(history.length > 50)
-                history.shift()
-
-            // TODO (move to native code?)
-            // Rather nasty trick to let QML know that the array has changed
-            // We do this because we're doing actions based on the .length property
-            var t = history
-            t.push(entry)
-            history = t
-        }
-    }
-
-    function popHistory() {
-        // NOTE see comment in "pushHistory"
-        var t = history
-        var entry = t.pop()
-        history = t
-        //console.debug("poping from history",entry)
-        return entry
-    }
-
-    function pushFuture(entry) {
-        if(entry != "") {
-            //console.debug("pushing to future",entry)
-            // NOTE see comment in "pushHistory"
-            var t = future
-            t.push(entry)
-            future = t
-        }
-    }
-
-    function popFuture() {
-        // NOTE see comment in "pushHistory"
-        var t = future
-        var entry = t.pop()
-        future = t
-        //console.debug("poping from future",entry)
-        return entry
     }
 
     Connections {
@@ -230,7 +180,6 @@ Item {
 
             Image {
                 id: bufferImage
-
 
                 anchors.fill: parent
                 fillMode: plasmoid.configuration.fillMode
@@ -338,7 +287,7 @@ Item {
         PlasmaComponents.Button {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
-            enabled: (history.length > 0) && !isTransitioning
+            enabled: (items.historyLength() > 0) && !isTransitioning
             iconSource: "arrow-left"
             onClicked: {
                 nextTimer.stop()

@@ -67,6 +67,14 @@ class MediaFrame : public QObject
         Q_INVOKABLE void get(QJSValue callback);
         Q_INVOKABLE void get(QJSValue callback, QJSValue error_callback);
 
+        Q_INVOKABLE void pushHistory(const QString &string);
+        Q_INVOKABLE QString popHistory();
+        Q_INVOKABLE int historyLength();
+
+        Q_INVOKABLE void pushFuture(const QString &string);
+        Q_INVOKABLE QString popFuture();
+        Q_INVOKABLE int futureLength();
+
     Q_SIGNALS:
         void countChanged();
         void randomChanged();
@@ -86,6 +94,9 @@ class MediaFrame : public QObject
         QStringList m_allFiles;
         QString m_watchFile;
         QFileSystemWatcher m_watcher;
+
+        QStringList m_history;
+        QStringList m_future;
 
         QJSValue m_successCallback;
         QJSValue m_errorCallback;

@@ -323,6 +323,44 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
 
 }
 
+void MediaFrame::pushHistory(const QString &string)
+{
+    m_history.prepend(string);
+
+    // Keep a sane history size
+    if(m_history.length() > 50)
+        m_history.removeLast();
+}
+
+QString MediaFrame::popHistory()
+{
+    if(m_history.isEmpty())
+        return "";
+    return m_history.takeFirst();
+}
+
+int MediaFrame::historyLength()
+{
+    return m_history.length();
+}
+
+void MediaFrame::pushFuture(const QString &string)
+{
+    m_future.prepend(string);
+}
+
+QString MediaFrame::popFuture()
+{
+    if(m_future.isEmpty())
+        return "";
+    return m_future.takeFirst();
+}
+
+int MediaFrame::futureLength()
+{
+    return m_future.length();
+}
+
 void MediaFrame::slotItemChanged(const QString &path)
 {
     emit itemChanged(path);
