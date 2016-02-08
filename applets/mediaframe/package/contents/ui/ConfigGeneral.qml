@@ -84,7 +84,7 @@ Item {
 
                 ComboBox {
                     id: comboBox
-                    currentIndex: 1
+                    currentIndex: fillModeToIndex(fillMode)
                     model: ListModel {
                         id: comboBoxItems
                         ListElement { text: "Stretch"; value: Image.Stretch; description: "The image is scaled to fit" }
@@ -96,19 +96,36 @@ Item {
                         ListElement { text: "Pad"; value: Image.Pad; description: "The image is not transformed" }
                     }
 
-                    onActivated: {
-                        root.fillMode = comboBoxItems.get(index).value
-                        fillModeDescription.text = comboBoxItems.get(index).description
-                    }
+                    onActivated: root.fillMode = comboBoxItems.get(index).value
 
-                    // Stupid hack to avoid "ListElement: Cannot use script for property value" error
+                    onCurrentIndexChanged: fillModeDescription.text = comboBoxItems.get(currentIndex).description
+
                     Component.onCompleted: {
+                        // Stupid hack to avoid "ListElement: Cannot use script for property value" error
                         for (var i=0; i < comboBoxItems.count; i++) {
                             var text = comboBoxItems.get(i).text
                             comboBoxItems.get(i).text = i18n(text)
                             var description = comboBoxItems.get(i).description
                             comboBoxItems.get(i).description = description
                         }
+
+                    }
+
+                    function fillModeToIndex(fillMode) {
+                        if(fillMode == Image.Stretch)
+                            return 0
+                        else if(fillMode == Image.PreserveAspectFit)
+                            return 1
+                        else if(fillMode == Image.PreserveAspectCrop)
+                            return 2
+                        else if(fillMode == Image.Tile)
+                            return 3
+                        else if(fillMode == Image.TileVertically)
+                            return 4
+                        else if(fillMode == Image.TileHorizontally)
+                            return 5
+                        else if(fillMode == Image.Pad)
+                            return 6
                     }
                 }
             }

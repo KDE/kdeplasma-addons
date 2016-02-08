@@ -47,9 +47,11 @@ Item {
     }
 
     Component.onCompleted: {
+        // Load the list back in
         var list = plasmoid.configuration.pathList
+        cfg_pathList = []
         for(var i in list) {
-            addPath( list[i] )
+            addPath( JSON.parse(list[i]) )
         }
     }
 
