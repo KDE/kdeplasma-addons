@@ -36,7 +36,7 @@ Item {
     property alias cfg_pauseOnMouseOver: pauseOnMouseOverCheckBox.checked
     property alias cfg_useBackground: useBackgroundCheckBox.checked
     property alias cfg_leftClickOpenImage: leftClickOpenImageCheckBox.checked
-    property alias cfg_showCountdown: showCountdownCheckBox.checked
+    //property alias cfg_showCountdown: showCountdownCheckBox.checked
     property alias cfg_fillMode: root.fillMode
 
     /*
@@ -138,10 +138,12 @@ Item {
             text: i18n("Left click image opens in external viewer")
         }
 
+        /*
         CheckBox {
             id: showCountdownCheckBox
             text: i18n("Show countdown")
         }
+        */
 
     }
 }

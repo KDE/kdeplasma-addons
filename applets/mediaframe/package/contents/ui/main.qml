@@ -181,13 +181,18 @@ Item {
             Image {
                 id: bufferImage
 
+
                 anchors.fill: parent
                 fillMode: plasmoid.configuration.fillMode
+
                 opacity: 0
 
                 cache: false
                 source: transitionSource
 
+                // TODO
+                //asynchronous: true
+                //autoTransform: true //new API in Qt 5.5, do not backport into Plasma 5.4.
             }
 
             Image {
@@ -198,6 +203,10 @@ Item {
 
                 cache: false
                 source: activeSource
+
+                // TODO
+                //asynchronous: true
+                //autoTransform: true //new API in Qt 5.5, do not backport into Plasma 5.4.
 
                 MouseArea {
                     anchors.fill: parent
@@ -358,7 +367,8 @@ Item {
     }
 
     // Visualization of the count down
-
+    // TODO Makes plasmashell suck CPU until the universe or the computer collapse in on itself
+    /*
     Rectangle {
         id: progress
 
@@ -406,6 +416,7 @@ Item {
             colorGroup: PlasmaCore.ColorScope.colorGroup
         }
     }
+    */
 
     PlasmaComponents.Button {
 
