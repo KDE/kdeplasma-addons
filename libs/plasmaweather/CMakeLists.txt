@@ -18,6 +18,7 @@ ki18n_wrap_ui(plasmaweather_LIB_SRCS
 )
 
 add_library(plasmaweather SHARED ${plasmaweather_LIB_SRCS})
+generate_export_header(plasmaweather)
 
 target_link_libraries(plasmaweather
     KF5::Plasma
