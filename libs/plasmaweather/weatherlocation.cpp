@@ -93,3 +93,6 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
     emit finished(QString());
 }
 
+
+// needed due to private slots
+#include "moc_weatherlocation.cpp"

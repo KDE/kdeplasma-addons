@@ -18,8 +18,8 @@
  */
 
 #include "weathervalidator.h"
-#include <KInputDialog>
 
+#include <KLocalizedString>
 #include <KMessageBox>
 
 class WeatherValidator::Private

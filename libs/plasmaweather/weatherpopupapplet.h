@@ -21,8 +21,8 @@
 #define WEATHERPOPUPAPPLET_HEADER
 
 #include <KUnitConversion/Unit>
-#include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
+#include <Plasma/Applet>
 
 #include "plasmaweather_export.h"
 
@@ -33,7 +33,7 @@ class WeatherConfig;
  *
  * @short Base class for Weather Applets
  */
-class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
+class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 {
     Q_OBJECT
     public:
@@ -48,27 +48,27 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
         /**
          * Reimplemented from Plasma::Applet
          */
-        virtual void createConfigurationInterface(KConfigDialog *parent);
+//         virtual void createConfigurationInterface(KConfigDialog *parent);
 
         /**
          * @return pressure unit
          **/
-        KUnitConversion::UnitPtr pressureUnit();
+        KUnitConversion::Unit pressureUnit();
 
         /**
          * @return temperature unit
          **/
-        KUnitConversion::UnitPtr temperatureUnit();
+        KUnitConversion::Unit temperatureUnit();
 
         /**
          * @return speed unit
          **/
-        KUnitConversion::UnitPtr speedUnit();
+        KUnitConversion::Unit speedUnit();
 
         /**
          * @return visibility unit
          **/
-        KUnitConversion::UnitPtr visibilityUnit();
+        KUnitConversion::Unit visibilityUnit();
 
         /**
          * @return condition icon with guessed value if it was empty

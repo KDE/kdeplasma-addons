@@ -20,9 +20,8 @@
 #include "weatherconfig.h"
 
 #include <QLineEdit>
+#include <QDebug>
 
-#include <KDebug>
-#include <KInputDialog>
 #include <KPixmapSequence>
 #include <kpixmapsequencewidget.h>
 //#include <KPixmapSequenceWidget>
@@ -85,7 +84,8 @@ public:
     void enableOK()
     {
         if (dlg) {
-            dlg->enableButton(KDialog::Ok, !source.isEmpty());
+            // PORT!
+//             dlg->enableButton(QDialog::Ok, !source.isEmpty());
         }
     }
 
@@ -98,7 +98,7 @@ public:
     Plasma::DataEngine *dataengine;
     QString source;
     Ui::WeatherConfig ui;
-    KDialog *dlg;
+    QDialog *dlg;
     KPixmapSequenceWidget *busyWidget;
     int checkedInCount;
 };
@@ -107,7 +107,7 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     : QWidget(parent)
     , d(new Private(this))
 {
-    d->dlg = qobject_cast<KDialog*>(parent);
+    d->dlg = qobject_cast<QDialog*>(parent);
     d->ui.setupUi(this);
     d->ui.temperatureComboBox->addItem(i18n("Celsius \302\260C"), Celsius);
     d->ui.temperatureComboBox->addItem(i18n("Fahrenheit \302\260F"), Fahrenheit);
@@ -177,11 +177,13 @@ void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
     qDeleteAll(d->validators);
     d->validators.clear();
     if (d->dataengine) {
+    // PORT!
+#if 0
         const QVariantList plugins = d->dataengine->query(QLatin1String( "ions" )).values();
         foreach (const QVariant& plugin, plugins) {
             const QStringList pluginInfo = plugin.toString().split(QLatin1Char( '|' ));
             if (pluginInfo.count() > 1) {
-                //kDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
+                //qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
                 //d->ions.insert(pluginInfo[1], pluginInfo[0]);
                 WeatherValidator *validator = new WeatherValidator(this);
                 connect(validator, SIGNAL(error(QString)), this, SLOT(validatorError(QString)));
@@ -191,12 +193,13 @@ void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
                 d->validators.append(validator);
             }
         }
+#endif
     }
 }
 
 void WeatherConfig::Private::validatorError(const QString &error)
 {
-    kDebug() << error;
+    qDebug() << error;
 }
 
 void WeatherConfig::Private::addSources(const QMap<QString, QString> &sources)
@@ -207,7 +210,7 @@ void WeatherConfig::Private::addSources(const QMap<QString, QString> &sources)
         it.next();
         QStringList list = it.value().split(QLatin1Char( '|' ), QString::SkipEmptyParts);
         if (list.count() > 2) {
-            //kDebug() << list;
+            //qDebug() << list;
             QString result = i18nc("A weather station location and the weather service it comes from",
                                    "%1 (%2)", list[2], list[0]); // the names are too looong ions.value(list[0]));
             ui.locationCombo->addItem(result, it.value());
@@ -218,7 +221,7 @@ void WeatherConfig::Private::addSources(const QMap<QString, QString> &sources)
     if (checkedInCount >= validators.count()) {
         delete busyWidget;
         busyWidget = 0;
-        kDebug() << ui.locationCombo->count();
+        qDebug() << ui.locationCombo->count();
         if (ui.locationCombo->count() == 0 && ui.locationCombo->itemText(0).isEmpty()) {
             const QString current = ui.locationCombo->currentText();
             ui.locationCombo->addItem(i18n("No weather stations found for '%1'", current));
@@ -231,7 +234,7 @@ void WeatherConfig::Private::addSources(const QMap<QString, QString> &sources)
 void WeatherConfig::setUpdateInterval(int interval)
 {
     d->ui.updateIntervalSpinBox->setValue(interval);
-    d->ui.updateIntervalSpinBox->setSuffix(ki18np(" minute", " minutes"));
+    d->ui.updateIntervalSpinBox->setSuffix(i18nc("unit with minutes", " min"));
 }
 
 void WeatherConfig::setTemperatureUnit(int unit)
@@ -272,7 +275,7 @@ void WeatherConfig::setVisibilityUnit(int unit)
 
 void WeatherConfig::setSource(const QString &source)
 {
-    //kDebug() << "source set to" << source;
+    //qDebug() << "source set to" << source;
     const QStringList list = source.split(QLatin1Char( '|' ));
     if (list.count() > 2) {
         QString result = i18nc("A weather station location and the weather service it comes from",
@@ -330,4 +333,7 @@ void WeatherConfig::setHeadersVisible(bool visible)
     d->ui.locationLabel->setVisible(visible);
     d->ui.unitsLabel->setVisible(visible);
 }
+
+// needed due to private slots
+#include "moc_weatherconfig.cpp"
 

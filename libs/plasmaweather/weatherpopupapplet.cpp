@@ -20,11 +20,15 @@
 #include "weatherpopupapplet.h"
 
 #include <QTimer>
+#include <QIcon>
 
 #include <KConfigGroup>
 #include <KConfigDialog>
+#include <KLocalizedString>
 
 #include <KUnitConversion/Converter>
+
+#include <Plasma/PluginLoader>
 
 #include "weatherconfig.h"
 #include "weatherlocation.h"
@@ -53,10 +57,10 @@ public:
     Plasma::DataEngine *weatherEngine;
     Plasma::DataEngine *timeEngine;
     Converter converter;
-    UnitPtr temperatureUnit;
-    UnitPtr speedUnit;
-    UnitPtr pressureUnit;
-    UnitPtr visibilityUnit;
+    Unit temperatureUnit;
+    Unit speedUnit;
+    Unit pressureUnit;
+    Unit visibilityUnit;
     int updateInterval;
     QString source;
     WeatherLocation *location;
@@ -80,8 +84,12 @@ public:
             q->setConfigurationRequired(false);
         } else {
             busyTimer->stop();
-            q->showMessage(QIcon(), QString(), Plasma::ButtonNone);
-            q->setBusy(false);
+            // PORT!
+//             q->showMessage(QIcon(), QString(), Plasma::ButtonNone);
+            QObject *graphicObject = q->property("_plasma_graphicObject").value<QObject *>();
+            if (graphicObject) {
+                graphicObject->setProperty("busy", false);
+            }
             q->setConfigurationRequired(true);
         }
 
@@ -91,15 +99,19 @@ public:
 
     void giveUpBeingBusy()
     {
-        q->setBusy(false);
+        QObject *graphicObject = q->property("_plasma_graphicObject").value<QObject *>();
+        if (graphicObject) {
+            graphicObject->setProperty("busy", false);
+        }
 
         QStringList list = source.split(QLatin1Char( '|' ), QString::SkipEmptyParts);
         if (list.count() < 3) {
             q->setConfigurationRequired(true);
         } else {
-            q->showMessage(KIcon(QLatin1String( "dialog-error" )),
-                           i18n("Weather information retrieval for %1 timed out.", list.value(2)),
-                           Plasma::ButtonNone);
+            // PORT!
+//             q->showMessage(KIcon(QLatin1String( "dialog-error" )),
+//                            i18n("Weather information retrieval for %1 timed out.", list.value(2)),
+//                            Plasma::ButtonNone);
         }
     }
 
@@ -130,9 +142,10 @@ public:
         // This is completely unscientific so if anyone have a better formula for this :-)
         p += t * 10;
 
-        Plasma::DataEngine::Data data = timeEngine->query(
-                QString(QLatin1String( "Local|Solar|Latitude=%1|Longitude=%2" )).arg(latitude).arg(longitude));
-        bool day = (data[QLatin1String( "Corrected Elevation" )].toDouble() > 0.0);
+        // PORT!
+//         Plasma::DataEngine::Data data = timeEngine->query(
+//                 QString(QLatin1String( "Local|Solar|Latitude=%1|Longitude=%2" )).arg(latitude).arg(longitude));
+        bool day = true;//(data[QLatin1String( "Corrected Elevation" )].toDouble() > 0.0);
 
         if (p > 103.0) {
             if (day) {
@@ -177,19 +190,19 @@ public:
         return result;
     }
 
-    UnitPtr unit(const QString& unit)
+    Unit unit(const QString& unit)
     {
         if (!unit.isEmpty() && unit[0].isDigit()) {
-            return converter.unit(unit.toInt());
-        } else {
-            // Support < 4.4 config values
-            return converter.unit(unit);
+            // PORT?
+            return converter.unit(static_cast<UnitId>(unit.toInt()));
         }
+        // Support < 4.4 config values
+        return converter.unit(unit);
     }
 };
 
 WeatherPopupApplet::WeatherPopupApplet(QObject *parent, const QVariantList &args)
-    : Plasma::PopupApplet(parent, args)
+    : Plasma::Applet(parent, args)
     , d(new Private(this))
 {
     setHasConfigurationInterface(true);
@@ -216,18 +229,26 @@ void WeatherPopupApplet::connectToEngine()
             connect(d->location, SIGNAL(finished(QString)), this, SLOT(locationReady(QString)));
         }
 
-        d->location->setDataEngines(dataEngine(QLatin1String( "geolocation" )), d->weatherEngine);
+        Plasma::DataEngine *dataEngine =
+            Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("geolocation") );
+        d->location->setDataEngines(dataEngine, d->weatherEngine);
         d->location->getDefault();
-        setBusy(false);
+        QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
+        if (graphicObject) {
+            graphicObject->setProperty("busy", false);
+        }
     } else {
         delete d->location;
         d->location = 0;
         d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
-        setBusy(true);
+        QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
+        if (graphicObject) {
+            graphicObject->setProperty("busy", true);
+        }
         d->busyTimer->start();
     }
 }
-
+#if 0
 void WeatherPopupApplet::createConfigurationInterface(KConfigDialog *parent)
 {
     d->weatherConfig = new WeatherConfig(parent);
@@ -243,21 +264,21 @@ void WeatherPopupApplet::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     connect(d->weatherConfig, SIGNAL(configValueChanged()) , parent , SLOT(settingsModified()));
 }
-
+#endif
 void WeatherPopupApplet::configAccepted()
 {
-    d->temperatureUnit = d->converter.unit(d->weatherConfig->temperatureUnit());
-    d->speedUnit = d->converter.unit(d->weatherConfig->speedUnit());
-    d->pressureUnit = d->converter.unit(d->weatherConfig->pressureUnit());
-    d->visibilityUnit = d->converter.unit(d->weatherConfig->visibilityUnit());
+    d->temperatureUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->temperatureUnit()));
+    d->speedUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->speedUnit()));
+    d->pressureUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->pressureUnit()));
+    d->visibilityUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->visibilityUnit()));
     d->updateInterval = d->weatherConfig->updateInterval();
     d->source = d->weatherConfig->source();
 
     KConfigGroup cfg = config();
-    cfg.writeEntry("temperatureUnit", d->temperatureUnit->id());
-    cfg.writeEntry("speedUnit", d->speedUnit->id());
-    cfg.writeEntry("pressureUnit", d->pressureUnit->id());
-    cfg.writeEntry("visibilityUnit", d->visibilityUnit->id());
+    cfg.writeEntry("temperatureUnit", static_cast<int>(d->temperatureUnit.id()));
+    cfg.writeEntry("speedUnit", static_cast<int>(d->speedUnit.id()));
+    cfg.writeEntry("pressureUnit", static_cast<int>(d->pressureUnit.id()));
+    cfg.writeEntry("visibilityUnit", static_cast<int>(d->visibilityUnit.id()));
     cfg.writeEntry("updateInterval", d->updateInterval);
     cfg.writeEntry("source", d->source);
 
@@ -272,7 +293,7 @@ void WeatherPopupApplet::configChanged()
 
     KConfigGroup cfg = config();
 
-    if (KGlobal::locale()->measureSystem() == KLocale::Metric) {
+    if (QLocale().measurementSystem() == QLocale::MetricSystem) {
         d->temperatureUnit = d->unit(cfg.readEntry("temperatureUnit", "C"));
         d->speedUnit = d->unit(cfg.readEntry("speedUnit", "m/s"));
         d->pressureUnit = d->unit(cfg.readEntry("pressureUnit", "hPa"));
@@ -284,10 +305,11 @@ void WeatherPopupApplet::configChanged()
         d->visibilityUnit = d->unit(cfg.readEntry("visibilityUnit", "ml"));
     }
     d->updateInterval = cfg.readEntry("updateInterval", 30);
-    d->source = cfg.readEntry("source", "");
+    // TEMP!
+    d->source = cfg.readEntry("source", "wettercom|weather|Turin, Piemont, IT|IT0PI0397;Turin");//"");
     setConfigurationRequired(d->source.isEmpty());
-    d->weatherEngine = dataEngine(QLatin1String( "weather" ));
-    d->timeEngine = dataEngine(QLatin1String( "time" ));
+    d->weatherEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("weather") );
+    d->timeEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("time") );
 
     connectToEngine();
 }
@@ -303,37 +325,43 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
 
     d->conditionIcon = data[QLatin1String( "Condition Icon" )].toString();
     if (data[QLatin1String( "Pressure" )].toString() != QLatin1String( "N/A" )) {
-        d->pressure = Value(data[QLatin1String( "Pressure" )].toDouble(), data[QLatin1String( "Pressure Unit" )].toInt());
+        d->pressure = Value(data[QLatin1String( "Pressure" )].toDouble(),
+                            static_cast<UnitId>(data[QLatin1String( "Pressure Unit" )].toInt()));
     } else {
         d->pressure = Value();
     }
     d->tend = data[QLatin1String( "Pressure Tendency" )].toString();
-    d->temperature = Value(data[QLatin1String( "Temperature" )].toDouble(), data[QLatin1String( "Temperature Unit" )].toInt());
+    d->temperature = Value(data[QLatin1String( "Temperature" )].toDouble(),
+                           static_cast<UnitId>(data[QLatin1String( "Temperature Unit" )].toInt()));
     d->latitude = data[QLatin1String( "Latitude" )].toDouble();
     d->longitude = data[QLatin1String( "Longitude" )].toDouble();
-    setAssociatedApplicationUrls(KUrl(data.value(QLatin1String( "Credit Url" )).toString()));
+    setAssociatedApplicationUrls(QList<QUrl>() << QUrl(data.value(QLatin1String( "Credit Url" )).toString()));
 
     d->busyTimer->stop();
-    showMessage(QIcon(), QString(), Plasma::ButtonNone);
-    setBusy(false);
+    // PORT!
+//     showMessage(QIcon(), QString(), Plasma::ButtonNone);
+    QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
+    if (graphicObject) {
+        graphicObject->setProperty("busy", false);
+    }
 }
 
-UnitPtr WeatherPopupApplet::pressureUnit()
+Unit WeatherPopupApplet::pressureUnit()
 {
     return d->pressureUnit;
 }
 
-UnitPtr WeatherPopupApplet::temperatureUnit()
+Unit WeatherPopupApplet::temperatureUnit()
 {
     return d->temperatureUnit;
 }
 
-UnitPtr WeatherPopupApplet::speedUnit()
+Unit WeatherPopupApplet::speedUnit()
 {
     return d->speedUnit;
 }
 
-UnitPtr WeatherPopupApplet::visibilityUnit()
+Unit WeatherPopupApplet::visibilityUnit()
 {
     return d->visibilityUnit;
 }
@@ -351,3 +379,6 @@ WeatherConfig* WeatherPopupApplet::weatherConfig()
     return d->weatherConfig;
 }
 
+
+// needed due to private slots
+#include "moc_weatherpopupapplet.cpp"

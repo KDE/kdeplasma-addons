@@ -13,13 +13,20 @@ set(plasmaweather_HEADERS
     plasmaweather_export.h
 )
 
-kde4_add_ui_files(plasmaweather_LIB_SRCS
+ki18n_wrap_ui(plasmaweather_LIB_SRCS
     weatherconfig.ui
 )
 
-kde4_add_library(plasmaweather SHARED ${plasmaweather_LIB_SRCS})
+add_library(plasmaweather SHARED ${plasmaweather_LIB_SRCS})
 
-target_link_libraries(plasmaweather ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KUNITCONVERSION_LIBS} ${KDE4WORKSPACE_WEATHERION_LIBRARY} ${KDE4_KNEWSTUFF3_LIBS})
+target_link_libraries(plasmaweather
+    KF5::Plasma
+    KF5::UnitConversion
+    KF5::ConfigWidgets
+    KF5::Completion
+    KF5::NewStuff
+    KF5::I18n
+)
 set_target_properties(plasmaweather PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 install(TARGETS plasmaweather ${INSTALL_TARGETS_DEFAULT_ARGS})
 # nothing outside of kdeplasma-addons uses this library, and the API is not stable -> do not install headers!

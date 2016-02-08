@@ -54,7 +54,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="KPushButton" name="ghnsProviderButton">
+      <widget class="QPushButton" name="ghnsProviderButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -155,7 +155,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="KPushButton" name="changeButton">
+      <widget class="QPushButton" name="changeButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -194,7 +194,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="KIntSpinBox" name="updateIntervalSpinBox">
+      <widget class="QSpinBox" name="updateIntervalSpinBox">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -455,16 +455,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
   <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
