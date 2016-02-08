@@ -41,7 +41,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 #add_subdirectory(src)
 #add_subdirectory( desktoptheme )
 
-# add_subdirectory(libs)
+add_subdirectory(libs)
 add_subdirectory(applets)
 add_subdirectory(dataengines)
 add_subdirectory(runners)
