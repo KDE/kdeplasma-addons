@@ -3,7 +3,6 @@ set(plasmaweather_LIB_SRCS
     weathervalidator.cpp
     weatherlocation.cpp
     weatherconfig.cpp
-    weatheri18ncatalog.cpp
 )
 
 set(plasmaweather_HEADERS

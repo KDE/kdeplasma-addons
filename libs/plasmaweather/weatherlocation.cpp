@@ -18,8 +18,8 @@
  */
 
 #include "weatherlocation.h"
+
 #include "weathervalidator.h"
-#include "weatheri18ncatalog.h"
 
 class WeatherLocation::Private
 {
@@ -48,7 +48,6 @@ WeatherLocation::WeatherLocation(QObject *parent)
     : QObject(parent)
     , d(new Private(this))
 {
-    Weatheri18nCatalog::loadCatalog();
     QObject::connect(&d->validator, SIGNAL(finished(QMap<QString,QString>)),
                      this, SLOT(validatorFinished(QMap<QString,QString>)));
 }

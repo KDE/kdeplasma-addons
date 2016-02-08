@@ -18,8 +18,8 @@
  */
 
 #include "weathervalidator.h"
-#include "weatheri18ncatalog.h"
 #include <KInputDialog>
+
 #include <KMessageBox>
 
 class WeatherValidator::Private
@@ -40,7 +40,6 @@ WeatherValidator::WeatherValidator(QWidget *parent)
     : QObject(parent)
     , d(new Private())
 {
-    Weatheri18nCatalog::loadCatalog();
 }
 
 WeatherValidator::~WeatherValidator()
