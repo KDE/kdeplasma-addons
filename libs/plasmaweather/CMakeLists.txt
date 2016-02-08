@@ -28,7 +28,8 @@ target_link_libraries(plasmaweather
     KF5::NewStuff
     KF5::I18n
 )
-set_target_properties(plasmaweather PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+# TODO: find vars which would bump the version on every release, given ABI is unstable
+set_target_properties(plasmaweather PROPERTIES VERSION 2.0.0 SOVERSION 1)
 install(TARGETS plasmaweather ${INSTALL_TARGETS_DEFAULT_ARGS})
 # nothing outside of kdeplasma-addons uses this library, and the API is not stable -> do not install headers!
 #install(FILES ${plasmaweather_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/plasmaweather COMPONENT Devel)
