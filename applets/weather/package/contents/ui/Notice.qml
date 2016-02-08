@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
+import QtQuick 2.1
 
 Column {
     property alias model: repeater.model
@@ -40,7 +40,7 @@ Column {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: weatherApplet.invokeBrowser(modelData.info);
+                onClicked: plasmoid.nativeInterface.invokeBrowser(modelData.info);
             }
         }
     }

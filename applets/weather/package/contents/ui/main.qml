@@ -15,9 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
+import QtQuick 2.1
+
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     id: root
@@ -31,10 +32,6 @@ Item {
     anchors.fill: parent
     clip: true
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     TopPanel {
         id: panel
         anchors {
@@ -44,7 +41,7 @@ Item {
             margins: 5
         }
         height: parent.height * 0.21
-        model: weatherApplet.panelModel
+        model: plasmoid.nativeInterface.panelModel
     }
 
     PlasmaComponents.TabBar {
@@ -58,7 +55,7 @@ Item {
         visible: detailsView.model.length > 0
 
         PlasmaComponents.TabButton {
-            text: weatherApplet.panelModel.totalDays
+            text: plasmoid.nativeInterface.panelModel.totalDays
             tab: fiveDaysView
         }
         PlasmaComponents.TabButton {
@@ -84,19 +81,19 @@ Item {
         FiveDaysView {
             id: fiveDaysView
             anchors.fill: parent
-            model: weatherApplet.fiveDaysModel
+            model: plasmoid.nativeInterface.fiveDaysModel
         }
 
         DetailsView {
             id: detailsView
             anchors.fill: parent
-            model: weatherApplet.detailsModel
+            model: plasmoid.nativeInterface.detailsModel
         }
 
         NoticesView {
             id: noticesView
             anchors.fill: parent
-            model: weatherApplet.noticesModel
+            model: plasmoid.nativeInterface.noticesModel
         }
     }
 
@@ -112,13 +109,13 @@ Item {
             underline: mouseArea.enabled
         }
         color: theme.textColor
-        text: weatherApplet.panelModel.courtesy
+        text: plasmoid.nativeInterface.panelModel.courtesy
 
         MouseArea {
             id: mouseArea
             anchors.fill: parent
-            enabled: weatherApplet.panelModel.enableLink
-            onClicked: weatherApplet.invokeBrowser();
+            enabled: plasmoid.nativeInterface.panelModel.enableLink
+            onClicked: plasmoid.nativeInterface.invokeBrowser();
         }
     }
 }

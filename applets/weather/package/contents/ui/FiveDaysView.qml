@@ -15,9 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1 as QtExtraComponents
+import QtQuick 2.1
+
+import org.kde.plasma.core 2.0 as PlasmaCore
+
 import "Utils.js" as Utils
 
 WeatherListView {
@@ -38,7 +39,7 @@ WeatherListView {
                 onLoaded: {
                     if (rowIndex == 1) {
                         var values = modelData.split("|");
-                        item.icon = values[0];
+                        item.source = values[0];
                         item.toolTip = values[1];
                     } else {
                         var txt = modelData;
@@ -74,7 +75,7 @@ WeatherListView {
     Component {
         id: iconDelegate
 
-        QtExtraComponents.QIconItem {
+        PlasmaCore.IconItem {
             property alias toolTip: iconToolTip.mainText
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -root.spacing/2

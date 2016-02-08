@@ -23,11 +23,6 @@
 
 #include <plasmaweather/weatherpopupapplet.h>
 
-namespace Plasma
-{
-    class DeclarativeWidget;
-}
-
 class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
@@ -40,7 +35,6 @@ public:
     ~WeatherApplet();
 
     void init();
-    QGraphicsWidget *graphicsWidget();
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
     QVariantList detailsModel() const { return m_detailsModel; }
@@ -57,9 +51,6 @@ protected Q_SLOTS:
     void configAccepted();
     void toolTipAboutToShow();
 
-protected:
-    void constraintsEvent(Plasma::Constraints constraints);
-
 private:
     bool isValidData(const QVariant &data) const;
     void resetPanelModel();
@@ -67,10 +58,8 @@ private:
     void updateFiveDaysModel(const Plasma::DataEngine::Data &data);
     void updateDetailsModel(const Plasma::DataEngine::Data &data);
     void updateNoticesModel(const Plasma::DataEngine::Data &data);
-    QString convertTemperature(KUnitConversion::UnitPtr format, QString value,
+    QString convertTemperature(KUnitConversion::Unit format, const QString &value,
                                int type, bool rounded = false, bool degreesOnly = false);
-
-    Plasma::DeclarativeWidget *m_declarativeWidget;
 
     QString m_creditUrl;
 
@@ -79,7 +68,5 @@ private:
     QVariantList m_detailsModel;
     QVariantList m_noticesModel;
 };
-
-K_EXPORT_PLASMA_APPLET(weather, WeatherApplet)
 
 #endif

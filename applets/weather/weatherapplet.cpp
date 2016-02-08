@@ -21,17 +21,14 @@
 
 #include "weatherapplet.h"
 
-#include <QtGui/QGraphicsLinearLayout>
-#include <QtDeclarative/QDeclarativeEngine>
-#include <QtDeclarative/QDeclarativeContext>
+#include <QIcon>
+#include <QDesktopServices>
 
-#include <KIcon>
+#include <KLocalizedString>
 #include <KIconLoader>
-#include <KToolInvocation>
 #include <KUnitConversion/Value>
 
-#include <Plasma/ToolTipManager>
-#include <Plasma/DeclarativeWidget>
+// #include <Plasma/ToolTipManager>
 #include <Plasma/Package>
 
 #include <cmath>
@@ -45,32 +42,23 @@ T clampValue(T value, int decimals)
 
 bool isValidIconName(const QString &icon)
 {
-    return !icon.isEmpty() &&
-           !KIconLoader::global()->loadIcon(icon, KIconLoader::Desktop, 0,
-                                            KIconLoader::DefaultState, QStringList(), 0, true).isNull();
+    return !icon.isEmpty();// &&
+    // PORT!
+//            !KIconLoader::global()->loadIcon(icon, KIconLoader::Desktop, 0,
+//                                             KIconLoader::DefaultState, QStringList(), 0, true).isNull();
 }
 
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         : WeatherPopupApplet(parent, args)
-        , m_declarativeWidget(0)
 {
-    setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    setPopupIcon("weather-none-available");
+    // PORT!
+//     setAspectRatioMode(Plasma::IgnoreAspectRatio);
+//     setPopupIcon("weather-none-available");
 }
 
 void WeatherApplet::init()
 {
-    switch (formFactor()) {
-    case Plasma::Horizontal:
-    case Plasma::Vertical:
-        Plasma::ToolTipManager::self()->registerWidget(this);
-        break;
-    default:
-        Plasma::ToolTipManager::self()->unregisterWidget(this);
-        break;
-    }
-
     resetPanelModel();
 
     WeatherPopupApplet::init();
@@ -80,27 +68,10 @@ WeatherApplet::~WeatherApplet()
 {
 }
 
-QGraphicsWidget *WeatherApplet::graphicsWidget()
-{
-    if (!m_declarativeWidget) {
-        m_declarativeWidget = new Plasma::DeclarativeWidget(this);
-
-        m_declarativeWidget->engine()->rootContext()->setContextProperty("weatherApplet", this);
-
-        Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-        Plasma::Package package(QString(), "org.kde.weather", structure);
-        m_declarativeWidget->setQmlPath(package.filePath("mainscript"));
-    }
-    return m_declarativeWidget;
-}
-
 void WeatherApplet::toolTipAboutToShow()
 {
-    if (isPopupShowing()) {
-        Plasma::ToolTipManager::self()->clearContent(this);
-        return;
-    }
-
+    // PORT!
+#if 0
     QString config = i18nc("Shown when you have not set a weather provider", "Please Configure");
     Plasma::ToolTipContent data(config, "", popupIcon().pixmap(IconSize(KIconLoader::Desktop)));
 
@@ -112,36 +83,19 @@ void WeatherApplet::toolTipAboutToShow()
          data.setSubText(i18nc("%1 is the weather condition, %2 is the temperature,"
                                " both come from the weather provider", "%1 %2", conditions, temp));
     }
-    Plasma::ToolTipManager::self()->setContent(this, data);
-}
-
-void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
-{
-    if (constraints & Plasma::FormFactorConstraint) {
-        switch (formFactor()) {
-        case Plasma::Horizontal:
-        case Plasma::Vertical:
-            Plasma::ToolTipManager::self()->registerWidget(this);
-            break;
-        default:
-            Plasma::ToolTipManager::self()->unregisterWidget(this);
-            break;
-        }
-    }
+//     Plasma::ToolTipManager::self()->setContent(this, data);
+#endif
 }
 
 void WeatherApplet::invokeBrowser(const QString& url) const
 {
-    if (url.isEmpty())
-        KToolInvocation::invokeBrowser(m_creditUrl);
-    else
-        KToolInvocation::invokeBrowser(url);
+    QDesktopServices::openUrl(url.isEmpty() ? m_creditUrl : url);
 }
 
-QString WeatherApplet::convertTemperature(KUnitConversion::UnitPtr format, QString value,
+QString WeatherApplet::convertTemperature(KUnitConversion::Unit format, const QString &value,
                                           int type, bool rounded, bool degreesOnly)
 {
-    KUnitConversion::Value v(value.toDouble(), type);
+    KUnitConversion::Value v(value.toDouble(), static_cast<KUnitConversion::UnitId>(type));
     v = v.convertTo(format);
 
     if (rounded) {
@@ -149,14 +103,14 @@ QString WeatherApplet::convertTemperature(KUnitConversion::UnitPtr format, QStri
         if (degreesOnly) {
             return i18nc("temperature, unit", "%1%2", tempNumber, i18nc("Degree, unit symbol", "°"));
         } else {
-            return i18nc("temperature, unit", "%1%2", tempNumber, v.unit()->symbol());
+            return i18nc("temperature, unit", "%1%2", tempNumber, v.unit().symbol());
         }
     } else {
         float formattedTemp = clampValue(v.number(), 1);
         if (degreesOnly) {
             return i18nc("temperature, unit", "%1%2", formattedTemp, i18nc("Degree, unit symbol", "°"));
         } else {
-            return i18nc("temperature, unit", "%1%2", formattedTemp, v.unit()->symbol());
+            return i18nc("temperature, unit", "%1%2", formattedTemp, v.unit().symbol());
         }
     }
 }
@@ -229,18 +183,19 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
         if (fiveDayTokens.count() > 2) {
             // if there is no specific icon, show the current weather
             m_panelModel["conditionIcon"] = fiveDayTokens[1];
-            setPopupIcon(KIcon(fiveDayTokens[1]));
+                // PORT! also same below
+//             setPopupIcon(QIcon::fromTheme(fiveDayTokens[1]));
         } else {
             // if we could not find any proper icon then just hide it
             m_panelModel["conditionIcon"] = "";
-            setPopupIcon(KIcon("weather-none-available"));
+//             setPopupIcon(QIcon::fromTheme("weather-none-available"));
         }
     } else {
         m_panelModel["conditionIcon"] = conditionIcon;
         if (isValidIconName(conditionIcon)) {
-            setPopupIcon(conditionIcon);
+//             setPopupIcon(conditionIcon);
         } else {
-            setPopupIcon("weather-not-available");
+//             setPopupIcon("weather-not-available");
         }
     }
 }
@@ -362,10 +317,11 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
     }
 
     if (isValidData(data["Pressure"])) {
-        KUnitConversion::Value v(data["Pressure"].toDouble(), data["Pressure Unit"].toInt());
+        KUnitConversion::Value v(data["Pressure"].toDouble(),
+                                 static_cast<KUnitConversion::UnitId>(data["Pressure Unit"].toInt()));
         v = v.convertTo(pressureUnit());
         row["text"] = i18nc("pressure, unit","Pressure: %1 %2",
-                            clampValue(v.number(), 2), v.unit()->symbol());
+                            clampValue(v.number(), 2), v.unit().symbol());
         m_detailsModel << row;
     }
 
@@ -379,10 +335,11 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
         bool isNumeric;
         data["Visibility"].toDouble(&isNumeric);
         if (isNumeric) {
-            KUnitConversion::Value v(data["Visibility"].toDouble(), data["Visibility Unit"].toInt());
+            KUnitConversion::Value v(data["Visibility"].toDouble(),
+                                     static_cast<KUnitConversion::UnitId>(data["Visibility Unit"].toInt()));
             v = v.convertTo(visibilityUnit());
             row["text"] = i18nc("distance, unit","Visibility: %1 %2",
-                                clampValue(v.number(), 1), v.unit()->symbol());
+                                clampValue(v.number(), 1), v.unit().symbol());
         } else {
             row["text"] = i18nc("visibility from distance", "Visibility: %1", data["Visibility"].toString());
         }
@@ -402,10 +359,11 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
         if (data["Wind Speed"] == "N/A") {
             row["text"] = i18nc("Not available","N/A");
         } else if (data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
-            KUnitConversion::Value v(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt());
+            KUnitConversion::Value v(data["Wind Speed"].toDouble(),
+                                     static_cast<KUnitConversion::UnitId>(data["Wind Speed Unit"].toInt()));
             v = v.convertTo(speedUnit());
             row["text"] = i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
-                                clampValue(v.number(), 1), v.unit()->symbol());
+                                clampValue(v.number(), 1), v.unit().symbol());
         } else {
             row["text"] = i18nc("Wind condition","Calm");
         }
@@ -416,10 +374,11 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
 
     if (isValidData(data["Wind Gust"])) {
         // Convert the wind format for nonstandard types
-        KUnitConversion::Value v(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt());
+        KUnitConversion::Value v(data["Wind Gust"].toDouble(),
+                                 static_cast<KUnitConversion::UnitId>(data["Wind Gust Unit"].toInt()));
         v = v.convertTo(speedUnit());
         row["text"] = i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2",
-                            clampValue(v.number(), 1), v.unit()->symbol());
+                            clampValue(v.number(), 1), v.unit().symbol());
         m_detailsModel << row;
     }
 }
@@ -460,7 +419,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     WeatherPopupApplet::dataUpdated(source, data);
 
     emit modelUpdated();
-    update();
 }
 
 void WeatherApplet::configAccepted()
@@ -473,3 +431,6 @@ void WeatherApplet::configAccepted()
     WeatherPopupApplet::configAccepted();
 }
 
+K_EXPORT_PLASMA_APPLET_WITH_JSON(weather, WeatherApplet, "metadata.json")
+
+#include "weatherapplet.moc"

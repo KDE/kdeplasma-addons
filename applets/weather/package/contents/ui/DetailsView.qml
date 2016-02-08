@@ -15,9 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1 as QtExtraComponents
+import QtQuick 2.1
+
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 WeatherListView {
     id: root
@@ -32,9 +32,10 @@ WeatherListView {
             height: parent.height
             width: childrenRect.width
 
-            QtExtraComponents.QPixmapItem {
+            PlasmaCore.SvgItem {
                 id: icon
-                pixmap: svg.pixmap(rowData.icon)
+                svg: mySvg
+                elementId: rowData.icon
                 height: nativeHeight
                 width: nativeWidth
                 visible: rowData.icon.length > 0
