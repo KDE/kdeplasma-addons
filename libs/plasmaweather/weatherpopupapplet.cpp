@@ -267,13 +267,14 @@ void WeatherPopupApplet::createConfigurationInterface(KConfigDialog *parent)
 #endif
 void WeatherPopupApplet::configAccepted()
 {
+#if 0
     d->temperatureUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->temperatureUnit()));
     d->speedUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->speedUnit()));
     d->pressureUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->pressureUnit()));
     d->visibilityUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->visibilityUnit()));
     d->updateInterval = d->weatherConfig->updateInterval();
     d->source = d->weatherConfig->source();
-
+#endif
     KConfigGroup cfg = config();
     cfg.writeEntry("temperatureUnit", static_cast<int>(d->temperatureUnit.id()));
     cfg.writeEntry("speedUnit", static_cast<int>(d->speedUnit.id()));
@@ -365,6 +366,77 @@ Unit WeatherPopupApplet::visibilityUnit()
 {
     return d->visibilityUnit;
 }
+
+int WeatherPopupApplet::updateInterval() const
+{
+    return d->updateInterval;
+}
+
+void WeatherPopupApplet::setUpdateInterval(int updateInterval)
+{
+    if (d->updateInterval == updateInterval) {
+        return;
+    }
+    d->updateInterval = updateInterval;
+    emit updateIntervalChanged(updateInterval);
+}
+
+int WeatherPopupApplet::temperatureUnitId() const
+{
+    return d->temperatureUnit.id();
+}
+
+void WeatherPopupApplet::setTemperatureUnitId(int temperatureUnitId)
+{
+    if (d->temperatureUnit.id() == temperatureUnitId) {
+        return;
+    }
+    d->temperatureUnit = d->converter.unit(static_cast<UnitId>(temperatureUnitId));
+    emit temperatureUnitIdChanged(temperatureUnitId);
+}
+
+int WeatherPopupApplet::pressureUnitId() const
+{
+    return d->pressureUnit.id();
+}
+
+void WeatherPopupApplet::setPressureUnitId(int pressureUnitId)
+{
+    if (d->pressureUnit.id() == pressureUnitId) {
+        return;
+    }
+    d->pressureUnit = d->converter.unit(static_cast<UnitId>(pressureUnitId));
+    emit pressureUnitIdChanged(pressureUnitId);
+}
+
+int WeatherPopupApplet::windSpeedUnitId() const
+{
+    return d->speedUnit.id();
+}
+
+void WeatherPopupApplet::setWindSpeedUnitId(int windSpeedUnitId)
+{
+    if (d->speedUnit.id() == windSpeedUnitId) {
+        return;
+    }
+    d->speedUnit = d->converter.unit(static_cast<UnitId>(windSpeedUnitId));
+    emit windSpeedUnitIdChanged(windSpeedUnitId);
+}
+
+int WeatherPopupApplet::visibilityUnitId() const
+{
+    return d->visibilityUnit.id();
+}
+
+void WeatherPopupApplet::setVisibilityUnitId(int visibilityUnitId)
+{
+    if (d->visibilityUnit.id() == visibilityUnitId) {
+        return;
+    }
+    d->visibilityUnit = d->converter.unit(static_cast<UnitId>(visibilityUnitId));
+    emit visibilityUnitIdChanged(visibilityUnitId);
+}
+
 
 QString WeatherPopupApplet::conditionIcon()
 {

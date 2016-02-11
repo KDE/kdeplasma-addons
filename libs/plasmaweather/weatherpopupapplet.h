@@ -36,6 +36,12 @@ class WeatherConfig;
 class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 {
     Q_OBJECT
+    Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval NOTIFY updateIntervalChanged);
+    Q_PROPERTY(int temperatureUnitId READ temperatureUnitId WRITE setTemperatureUnitId NOTIFY temperatureUnitIdChanged);
+    Q_PROPERTY(int pressureUnitId READ pressureUnitId WRITE setPressureUnitId NOTIFY pressureUnitIdChanged);
+    Q_PROPERTY(int windSpeedUnitId READ windSpeedUnitId WRITE setWindSpeedUnitId NOTIFY windSpeedUnitIdChanged);
+    Q_PROPERTY(int visibilityUnitId READ visibilityUnitId WRITE setVisibilityUnitId NOTIFY visibilityUnitIdChanged);
+
     public:
         WeatherPopupApplet(QObject *parent, const QVariantList &args);
         ~WeatherPopupApplet();
@@ -50,6 +56,7 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
          */
 //         virtual void createConfigurationInterface(KConfigDialog *parent);
 
+    public:
         /**
          * @return pressure unit
          **/
@@ -71,6 +78,11 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
         KUnitConversion::Unit visibilityUnit();
 
         /**
+         * @return update interval
+         **/
+        int updateInterval() const;
+
+        /**
          * @return condition icon with guessed value if it was empty
          **/
         QString conditionIcon();
@@ -79,6 +91,23 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
          * @return weather config dialog widget
          **/
         WeatherConfig* weatherConfig();
+
+        /**
+         * Sets update interval
+         **/
+        void setUpdateInterval(int updateInterval);
+
+        int temperatureUnitId() const;
+        void setTemperatureUnitId(int temperatureUnitId);
+
+        int pressureUnitId() const;
+        void setPressureUnitId(int pressureUnitId);
+
+        int windSpeedUnitId() const;
+        void setWindSpeedUnitId(int windSpeedUnitId);
+
+        int visibilityUnitId() const;
+        void setVisibilityUnitId(int visibilityUnitId);
 
     public Q_SLOTS:
         /**
@@ -102,6 +131,12 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
          * Emitted when the applet begins a fetch for a new weather source
          */
         void newWeatherSource();
+
+        void updateIntervalChanged(int updateInterval);
+        void temperatureUnitIdChanged(int temperatureUnitId);
+        void pressureUnitIdChanged(int pressureUnitId);
+        void windSpeedUnitIdChanged(int windSpeedUnitId);
+        void visibilityUnitIdChanged(int visibilityUnitId);
 
     protected:
         /**

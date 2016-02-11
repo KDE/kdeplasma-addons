@@ -30,22 +30,31 @@ class WeatherApplet : public WeatherPopupApplet
     Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY modelUpdated)
+
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
 
-    void init();
+public: // Plasma::Applet API
+    void init() override;
+
+public:
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
     QVariantList detailsModel() const { return m_detailsModel; }
     QVariantList noticesModel() const { return m_noticesModel; }
 
-signals:
+    Q_INVOKABLE void invokeBrowser(const QString &url = QString()) const;
+
+Q_SIGNALS:
     void modelUpdated();
 
-public Q_SLOTS:
+public Q_SLOTS: // as expected by connected dataengines
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
-    void invokeBrowser(const QString &url = QString()) const;
+
+public Q_SLOTS: // config control API
+    void configChanged();
+    void saveConfig();
 
 protected Q_SLOTS:
     void configAccepted();
