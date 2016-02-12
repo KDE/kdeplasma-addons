@@ -52,10 +52,6 @@ Q_SIGNALS:
 public Q_SLOTS: // as expected by connected dataengines
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 
-public Q_SLOTS: // config control API
-    void configChanged();
-    void saveConfig();
-
 protected Q_SLOTS:
     void configAccepted();
     void toolTipAboutToShow();
