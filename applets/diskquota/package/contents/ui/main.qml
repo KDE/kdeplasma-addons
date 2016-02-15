@@ -75,9 +75,9 @@ Item {
         ColumnLayout {
             anchors.fill: root
             Components.Label {
-                visible: !diskQuota.quotaInstalled
+                visible: !diskQuota.quotaInstalled || listView.count == 0
                 anchors.fill: parent
-                text: i18n("Quota tool not found.\n\nPlease install 'quota'.")
+                text: diskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
