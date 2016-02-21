@@ -45,7 +45,7 @@ PlasmaCore.SvgItem {
     height: units.gridUnit * 14
     Layout.minimumWidth: units.gridUnit * 4
     Layout.minimumHeight: units.gridUnit * 4
-    Plasmoid.switchWidth: units.gridUnit * 12 // make sure the formatting buttons never leak outside
+    Plasmoid.switchWidth: Math.max(units.gridUnit * 13, fontButtons.Layout.preferredWidth)
     Plasmoid.switchHeight: units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
