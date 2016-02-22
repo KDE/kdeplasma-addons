@@ -72,7 +72,7 @@ class ActivityPager : public QObject
             None
         };
         Q_ENUMS(DisplayedText)
-        
+
         ActivityPager(QObject *parent = 0);
         ~ActivityPager();
 
@@ -153,7 +153,6 @@ class ActivityPager : public QObject
         QSizeF m_size;
         QSize m_preferredSize;
         Qt::Orientation m_orientation;
-        KActivities::Consumer *m_consumer;
         KActivities::Controller *m_controller;
 
         bool m_showWindowIcons : 1;

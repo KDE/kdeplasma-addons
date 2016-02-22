@@ -73,16 +73,15 @@ ActivityPager::ActivityPager(QObject *parent)
       , m_isX11(QX11Info::isPlatformX11())
 #endif
 {
-    m_consumer = new KActivities::Consumer(this);
     m_controller = new KActivities::Controller(this);
-    connect(m_consumer, SIGNAL(currentActivityChanged(QString)), this, SLOT(currentActivityChanged(QString)));
-    m_currentActivity = m_consumer->currentActivity();
+    connect(m_controller, SIGNAL(currentActivityChanged(QString)), this, SLOT(currentActivityChanged(QString)));
+    m_currentActivity = m_controller->currentActivity();
 
     NETRootInfo info(QX11Info::connection(), NET::NumberOfDesktops | NET::DesktopNames, NET::WM2DesktopLayout);
     m_rows = info.desktopLayoutColumnsRows().height();
 
     // initialize with a decent default
-    m_desktopCount = qMax(1, m_consumer->activities(KActivities::Info::Running).length());
+    m_desktopCount = qMax(1, m_controller->activities(KActivities::Info::Running).length());
 
     m_pagerModel = new PagerModel(this);
 
@@ -90,12 +89,12 @@ ActivityPager::ActivityPager(QObject *parent)
     m_timer->setSingleShot(true);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(recalculateWindowRects()));
 
-    connect(m_consumer, SIGNAL(currentActivityChanged(QString)), this, SLOT(currentActivityChanged(QString)));
-    
+    connect(m_controller, SIGNAL(currentActivityChanged(QString)), this, SLOT(currentActivityChanged(QString)));
+
     connect(KWindowSystem::self(), SIGNAL(windowAdded(WId)), this, SLOT(startTimerFast()));
     connect(KWindowSystem::self(), SIGNAL(windowRemoved(WId)), this, SLOT(startTimerFast()));
     connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)), this, SLOT(startTimerFast()));
-    connect(m_consumer, SIGNAL(activitiesChanged(QStringList)), this, SLOT(numberOfDesktopsChanged()));
+    connect(m_controller, SIGNAL(activitiesChanged(QStringList)), this, SLOT(numberOfDesktopsChanged()));
  /**/connect(KWindowSystem::self(), SIGNAL(desktopNamesChanged()), this, SLOT(desktopNamesChanged()));
     connect(KWindowSystem::self(), SIGNAL(stackingOrderChanged()), this, SLOT(startTimerFast()));
     connect(KWindowSystem::self(), SIGNAL(windowChanged(WId,const ulong*)), this, SLOT(windowChanged(WId,const ulong*)));
@@ -110,7 +109,7 @@ ActivityPager::ActivityPager(QObject *parent)
 
     recalculateGridSizes(m_rows);
 
-    setCurrentDesktop(m_consumer->activities(KActivities::Info::Running).indexOf(m_currentActivity) + 1);
+    setCurrentDesktop(m_controller->activities(KActivities::Info::Running).indexOf(m_currentActivity) + 1);
 }
 
 ActivityPager::~ActivityPager()
@@ -148,7 +147,7 @@ void ActivityPager::setOrientation(Qt::Orientation orientation)
 
     m_orientation = orientation;
     emit orientationChanged();
- 
+
     // whenever we switch to/from vertical form factor, swap the rows and columns around
     if (m_columns != m_rows) {
         // pass in columns as the new rows
@@ -175,7 +174,7 @@ void ActivityPager::setSize(const QSizeF &size)
 
     m_size = size;
     emit sizeChanged();
-    
+
     m_validSizes = false;
 
     startTimer();
@@ -298,7 +297,7 @@ void ActivityPager::updateSizes()
             // afford increasing width of applet to be able to display every name of desktops
             for (int i = 0; i < m_desktopCount; i++) {
                 QFontMetricsF metrics(KGlobalSettings::taskbarFont());
-                QSizeF textSize = metrics.size(Qt::TextSingleLine, KActivities::Info(m_consumer->activities(KActivities::Info::Running)[i]).name());
+                QSizeF textSize = metrics.size(Qt::TextSingleLine, KActivities::Info(m_controller->activities(KActivities::Info::Running)[i]).name());
                 if (textSize.width() + textMargin * 2 > preferredItemWidth) {
                      preferredItemWidth = textSize.width() + textMargin * 2;
                 }
@@ -338,7 +337,7 @@ void ActivityPager::updateSizes()
         itemRect.moveLeft(leftMargin + (i % m_columns)  * (itemWidth + padding));
         itemRect.moveTop(topMargin + (i / m_columns) * (itemHeight + padding));
 
-        QString name = KActivities::Info(m_consumer->activities(KActivities::Info::Running)[i]).name();
+        QString name = KActivities::Info(m_controller->activities(KActivities::Info::Running)[i]).name();
         m_pagerModel->appendDesktopRect(itemRect, name);
     }
 
@@ -360,7 +359,7 @@ void ActivityPager::recalculateWindowRects()
 
     //FIXME: this has to be done here since we don't know the slot order
     //probably m_desktopCount should be removed alsogether
-    int newCount = m_consumer->activities(KActivities::Info::Running).length();
+    int newCount = m_controller->activities(KActivities::Info::Running).length();
 
     if (m_desktopCount != newCount) {
         m_desktopCount = newCount;
@@ -396,7 +395,7 @@ void ActivityPager::recalculateWindowRects()
             QString result(netInfo.activities());
             if (!result.isEmpty() && result != "00000000-0000-0000-0000-000000000000") {
                 QStringList activities = result.split(',');
-                if (!activities.contains(m_consumer->activities(KActivities::Info::Running)[i])) {
+                if (!activities.contains(m_controller->activities(KActivities::Info::Running)[i])) {
                     continue;
                 }
             }
@@ -426,7 +425,7 @@ void ActivityPager::recalculateWindowRects()
 void ActivityPager::currentActivityChanged(const QString &activity)
 {
     m_currentActivity = activity;
-    setCurrentDesktop(m_consumer->activities(KActivities::Info::Running).indexOf(activity) + 1);
+    setCurrentDesktop(m_controller->activities(KActivities::Info::Running).indexOf(activity) + 1);
     m_desktopDown = false;
     startTimerFast();
 }
@@ -437,7 +436,7 @@ void ActivityPager::numberOfDesktopsChanged()
     NETRootInfo info(QX11Info::connection(), NET::NumberOfDesktops | NET::DesktopNames, NET::WM2DesktopLayout);
     m_rows = info.desktopLayoutColumnsRows().height();
 
-    m_desktopCount = m_consumer->activities(KActivities::Info::Running).length();
+    m_desktopCount = m_controller->activities(KActivities::Info::Running).length();
 
     m_pagerModel->clearDesktopRects();
     recalculateGridSizes(m_rows);
@@ -504,10 +503,10 @@ void ActivityPager::moveWindow(int window, double x, double y, int targetDesktop
     if (!KWindowSystem::mapViewport()) {
         KWindowInfo windowInfo = KWindowSystem::windowInfo(windowId, NET::WMDesktop | NET::WMState);
 
-        if (targetDesktop < m_consumer->activities(KActivities::Info::Running).length()) {
+        if (targetDesktop < m_controller->activities(KActivities::Info::Running).length()) {
             NETWinInfo netInfo(QX11Info::connection(), window, QX11Info::appRootWindow(), 0, NET::WM2Activities);
 
-            QString newActivity = m_consumer->activities(KActivities::Info::Running)[targetDesktop];
+            QString newActivity = m_controller->activities(KActivities::Info::Running)[targetDesktop];
 
             netInfo.setActivities(QString(newActivity).toLatin1());
         }
@@ -553,8 +552,8 @@ void ActivityPager::changeDesktop(int newDesktop)
             QDBusInterface plasmaApp("org.kde.plasma-desktop", "/App");
             plasmaApp.call("toggleDashboard");
         }
-    } else if (newDesktop < m_consumer->activities(KActivities::Info::Running).length()) {
-        m_controller->setCurrentActivity(m_consumer->activities(KActivities::Info::Running)[newDesktop]);
+    } else if (newDesktop < m_controller->activities(KActivities::Info::Running).length()) {
+        m_controller->setCurrentActivity(m_controller->activities(KActivities::Info::Running)[newDesktop]);
         setCurrentDesktop(newDesktop + 1);
     }
 #else
@@ -592,8 +591,8 @@ void ActivityPager::dropMimeData(QMimeData *mimeData, int desktopId)
 
     QString newActivity;
 
-    if (desktopId < m_consumer->activities(KActivities::Info::Running).length()) {
-        newActivity = m_consumer->activities(KActivities::Info::Running).value(desktopId);
+    if (desktopId < m_controller->activities(KActivities::Info::Running).length()) {
+        newActivity = m_controller->activities(KActivities::Info::Running).value(desktopId);
     }
 
     if (newActivity.isEmpty()) {
