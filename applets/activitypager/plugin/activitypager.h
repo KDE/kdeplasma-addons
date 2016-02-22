@@ -21,7 +21,6 @@
 #ifndef ACTIVITYPAGER_H
 #define ACTIVITYPAGER_H
 
-#include <QGraphicsSceneHoverEvent>
 #include <QList>
 
 #include <Plasma/Applet>
