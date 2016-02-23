@@ -21,9 +21,6 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.3
 import QtQuick.Controls.Styles 1.2
-import QtGraphicalEffects 1.0
-
-import QtMultimedia 5.0
 
 import org.kde.draganddrop 2.0 as DragDrop
 
@@ -39,7 +36,7 @@ Item {
 
     MediaFrame {
         id: items
-        random: true
+        random: plasmoid.configuration.randomize
     }
 
     Plasmoid.preferredRepresentation: plasmoid.fullRepresentation
@@ -130,10 +127,6 @@ Item {
         items.pushFuture(active)
         var filePath = items.popHistory()
         setActiveSource(filePath)
-    }
-
-    function blacklistItem() {
-        // TODO
     }
 
     Connections {
