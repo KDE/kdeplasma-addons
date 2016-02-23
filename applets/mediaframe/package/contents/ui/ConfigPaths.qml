@@ -118,8 +118,8 @@ Item {
         RowLayout {
             Layout.fillWidth: true
 
-            PlasmaComponents.Button {
-                iconSource: "folder-new"
+            Button {
+                iconName: "folder-new"
                 onClicked: folderDialog.visible = true
             }
 
@@ -127,8 +127,8 @@ Item {
                 text: i18n("Add folder")
             }
 
-            PlasmaComponents.Button {
-                iconSource: "document-new"
+            Button {
+                iconName: "document-new"
                 onClicked: fileDialog.visible = true
             }
 
@@ -173,10 +173,10 @@ Item {
                             text: model.path
                         }
 
-                        PlasmaComponents.Button {
+                        Button {
                             id: removePathButton
 
-                            iconSource: "list-remove"
+                            iconName: "list-remove"
 
                             onClicked: removePath(model.index)
                         }
