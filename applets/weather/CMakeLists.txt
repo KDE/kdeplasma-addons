@@ -28,11 +28,13 @@ plasma_install_package(package org.kde.plasma.weather)
 set(weather_SRCS
     plugin/plugin.cpp
     plugin/abstractunitlistmodel.cpp
+    plugin/locationlistmodel.cpp
 )
 
 add_library(weatherplugin SHARED ${weather_SRCS})
 
 target_link_libraries(weatherplugin
+    plasmaweather
     KF5::UnitConversion
     KF5::I18n
     Qt5::Qml

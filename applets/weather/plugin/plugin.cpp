@@ -18,6 +18,7 @@
 #include "plugin.h"
 
 #include "abstractunitlistmodel.h"
+#include "locationlistmodel.h"
 
 #include <KLocalizedString>
 
@@ -95,4 +96,5 @@ void WeatherPlugin::registerTypes(const char *uri)
                                                     windSpeedUnitListModelSingletonTypeProvider);
     qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "VisibilityUnitListModel",
                                                     visibilityUnitListModelSingletonTypeProvider);
+    qmlRegisterType<LocationListModel>(uri, 1, 0, "LocationListModel");
 }
