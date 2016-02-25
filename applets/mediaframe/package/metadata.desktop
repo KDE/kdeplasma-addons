@@ -1,8 +1,6 @@
 [Desktop Entry]
 Name=Media frame
-Name[x-test]=xxImagexx
 Comment=(Picture) Frame
-Comment[x-test]=xxCommentxx
 Icon=image-x-generic
 Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet
