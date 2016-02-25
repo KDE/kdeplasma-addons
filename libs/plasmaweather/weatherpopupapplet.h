@@ -36,11 +36,13 @@ class WeatherConfig;
 class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 {
     Q_OBJECT
+    Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged);
     Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval NOTIFY updateIntervalChanged);
     Q_PROPERTY(int temperatureUnitId READ temperatureUnitId WRITE setTemperatureUnitId NOTIFY temperatureUnitIdChanged);
     Q_PROPERTY(int pressureUnitId READ pressureUnitId WRITE setPressureUnitId NOTIFY pressureUnitIdChanged);
     Q_PROPERTY(int windSpeedUnitId READ windSpeedUnitId WRITE setWindSpeedUnitId NOTIFY windSpeedUnitIdChanged);
     Q_PROPERTY(int visibilityUnitId READ visibilityUnitId WRITE setVisibilityUnitId NOTIFY visibilityUnitIdChanged);
+    Q_PROPERTY(Plasma::DataEngine* weatherDataEngine READ weatherDataEngine NOTIFY weatherDataEngineChanged)
 
     public:
         WeatherPopupApplet(QObject *parent, const QVariantList &args);
@@ -92,6 +94,9 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
          **/
         WeatherConfig* weatherConfig();
 
+        QString source() const;
+        void setSource(const QString &source);
+
         /**
          * Sets update interval
          **/
@@ -108,6 +113,8 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 
         int visibilityUnitId() const;
         void setVisibilityUnitId(int visibilityUnitId);
+
+        Plasma::DataEngine* weatherDataEngine() const;
 
     public Q_SLOTS:
         /**
@@ -132,11 +139,14 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
          */
         void newWeatherSource();
 
+        void sourceChanged(const QString &source);
         void updateIntervalChanged(int updateInterval);
         void temperatureUnitIdChanged(int temperatureUnitId);
         void pressureUnitIdChanged(int pressureUnitId);
         void windSpeedUnitIdChanged(int windSpeedUnitId);
         void visibilityUnitIdChanged(int visibilityUnitId);
+
+        void weatherDataEngineChanged(Plasma::DataEngine* weatherDataEngine);
 
     protected:
         /**

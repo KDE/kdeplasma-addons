@@ -306,13 +306,14 @@ void WeatherPopupApplet::configChanged()
         d->visibilityUnit = d->unit(cfg.readEntry("visibilityUnit", "ml"));
     }
     d->updateInterval = cfg.readEntry("updateInterval", 30);
-    // TEMP!
-    d->source = cfg.readEntry("source", "wettercom|weather|Turin, Piemont, IT|IT0PI0397;Turin");//"");
+    d->source = cfg.readEntry("source", QString());
     setConfigurationRequired(d->source.isEmpty());
     d->weatherEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("weather") );
     d->timeEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("time") );
 
     connectToEngine();
+
+    emit weatherDataEngineChanged(d->weatherEngine);
 }
 
 void WeatherPopupApplet::dataUpdated(const QString& source,
@@ -365,6 +366,21 @@ Unit WeatherPopupApplet::speedUnit()
 Unit WeatherPopupApplet::visibilityUnit()
 {
     return d->visibilityUnit;
+}
+
+
+QString WeatherPopupApplet::source() const
+{
+    return d->source;
+}
+
+void WeatherPopupApplet::setSource(const QString &source)
+{
+    if (d->source == source) {
+        return;
+    }
+    d->source = source;
+    emit sourceChanged(source);
 }
 
 int WeatherPopupApplet::updateInterval() const
@@ -435,6 +451,11 @@ void WeatherPopupApplet::setVisibilityUnitId(int visibilityUnitId)
     }
     d->visibilityUnit = d->converter.unit(static_cast<UnitId>(visibilityUnitId));
     emit visibilityUnitIdChanged(visibilityUnitId);
+}
+
+Plasma::DataEngine* WeatherPopupApplet::weatherDataEngine() const
+{
+    return d->weatherEngine;
 }
 
 

@@ -27,6 +27,8 @@ ColumnLayout {
     signal configurationChanged
 
     function saveConfig() {
+        plasmoid.nativeInterface.source = locationListModel.valueForListIndex(locationComboBox.currentIndex);
+
         plasmoid.nativeInterface.updateInterval = updateIntervalSpin.value;
 
         plasmoid.nativeInterface.temperatureUnitId =
@@ -42,7 +44,18 @@ ColumnLayout {
         plasmoid.nativeInterface.configChanged();
     }
 
+    function searchLocation() {
+        locationListModel.searchLocations(locationComboBox.editText);
+    }
+
     Component.onCompleted: {
+        var sourceDetails = plasmoid.nativeInterface.source.split('|');
+        if (sourceDetails.length > 2) {
+            var source = i18nc("A weather station location and the weather service it comes from",
+                                "%1 (%2)", sourceDetails[2], sourceDetails[0]);
+            locationComboBox.editText = source;
+        }
+
         updateIntervalSpin.value = plasmoid.nativeInterface.updateInterval;
         temperatureComboBox.currentIndex =
             TemperatureUnitListModel.listIndexForUnitId(plasmoid.nativeInterface.temperatureUnitId);
@@ -54,18 +67,64 @@ ColumnLayout {
             VisibilityUnitListModel.listIndexForUnitId(plasmoid.nativeInterface.visibilityUnitId);
     }
 
+    LocationListModel {
+        id: locationListModel
+        dataEngine: plasmoid.nativeInterface.weatherDataEngine;
+    }
 
     QtControls.GroupBox {
         title: i18n("Weather Station")
         flat: true
+        Layout.fillWidth: true
 
-        RowLayout {
-            Layout.alignment: Qt.AlignRight
+        GridLayout {
+            Layout.alignment: Qt.AlignLeft
+            columns: 3
+
             QtControls.Label {
+                Layout.row: 0
+                Layout.column: 0
+                horizontalAlignment: Text.AlignRight
+                text: i18n("Location:")
+            }
+            QtControls.ComboBox {
+                id: locationComboBox
+                Layout.row: 0
+                Layout.column: 1
+                Layout.columnSpan: 2
+                Layout.fillWidth: true
+                // TODO: make use of all width available
+                editable: true
+                model: locationListModel
+                textRole: "display"
+                onCurrentIndexChanged: generalConfigPage.configurationChanged();
+            }
+
+//             somespinningwheel {
+//                 id: somespinningwheel
+//                 Layout.row: 1
+//                 Layout.column: 1
+//                 Layout.alignment: Qt.AlignRight
+//                 visible: locationListModel.validatingInput
+//             }
+
+            QtControls.Button {
+                Layout.row: 1
+                Layout.column: 2
+                text: "Search"
+                onClicked: searchLocation();
+            }
+
+            QtControls.Label {
+                Layout.row: 2
+                Layout.column: 0
+                horizontalAlignment: Text.AlignRight
                 text: i18n("Update every:")
             }
             QtControls.SpinBox {
                 id: updateIntervalSpin
+                Layout.row: 2
+                Layout.column: 1
                 Layout.minimumWidth: units.gridUnit * 8
                 suffix: i18n(" min")
                 stepSize: 5
@@ -79,6 +138,7 @@ ColumnLayout {
     QtControls.GroupBox {
         title: i18n("Units")
         flat: true
+        Layout.fillWidth: true
 
         GridLayout {
             Layout.fillWidth: false // Layout thinks it's smart whereas it's not
@@ -88,7 +148,6 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 0
                 Layout.column: 0
-                Layout.fillWidth: true
                 horizontalAlignment: Text.AlignRight
                 text: i18n("Temperature:")
             }
@@ -105,7 +164,6 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 1
                 Layout.column: 0
-                Layout.fillWidth: true
                 horizontalAlignment: Text.AlignRight
                 text: i18n("Pressure:")
             }
@@ -122,7 +180,6 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 2
                 Layout.column: 0
-                Layout.fillWidth: true
                 horizontalAlignment: Text.AlignRight
                 text: i18n("Wind speed:")
             }
@@ -139,7 +196,6 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 3
                 Layout.column: 0
-                Layout.fillWidth: true
                 horizontalAlignment: Text.AlignRight
                 text: i18n("Visibility:")
             }
