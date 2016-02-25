@@ -22,6 +22,8 @@
 #include <QLineEdit>
 #include <QDebug>
 
+#include <Plasma/DataContainer>
+
 #include <KPixmapSequence>
 #include <kpixmapsequencewidget.h>
 //#include <KPixmapSequenceWidget>
@@ -177,9 +179,7 @@ void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
     qDeleteAll(d->validators);
     d->validators.clear();
     if (d->dataengine) {
-    // PORT!
-#if 0
-        const QVariantList plugins = d->dataengine->query(QLatin1String( "ions" )).values();
+        const QVariantList plugins = d->dataengine->containerForSource(QLatin1String( "ions" ))->data().values();
         foreach (const QVariant& plugin, plugins) {
             const QStringList pluginInfo = plugin.toString().split(QLatin1Char( '|' ));
             if (pluginInfo.count() > 1) {
@@ -193,7 +193,6 @@ void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
                 d->validators.append(validator);
             }
         }
-#endif
     }
 }
 
