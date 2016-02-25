@@ -31,12 +31,6 @@ void ComicData::init(const QString &id, const KConfigGroup &config)
 {
     mId = id;
     mCfg = config;
-    mFirstStripNum = 0;
-    mMaxStripNum = 0;
-    mScaleComic = false;
-    mIsLeftToRight = true;
-    mIsTopToBottom = true;
-
     load();
 }
 

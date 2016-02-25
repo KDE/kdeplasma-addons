@@ -145,12 +145,12 @@ class ComicData
         QImage mImage;
 
         // only applicable if the comic is of type Number
-        int mFirstStripNum;
-        int mMaxStripNum;
+        int mFirstStripNum = 0;
+        int mMaxStripNum = 0;
 
-        bool mScaleComic;
-        bool mIsLeftToRight;
-        bool mIsTopToBottom;
+        bool mScaleComic = false;
+        bool mIsLeftToRight = false;
+        bool mIsTopToBottom = false;
 
         KConfigGroup mCfg;
 };
