@@ -36,7 +36,7 @@ public:
     bool silent;
 };
 
-WeatherValidator::WeatherValidator(QWidget *parent)
+WeatherValidator::WeatherValidator(QObject *parent)
     : QObject(parent)
     , d(new Private())
 {
