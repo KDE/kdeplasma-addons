@@ -33,18 +33,9 @@ Item {
     anchors.fill: parent
     clip: true
 
-    Plasmoid.compactRepresentation: Component {
-        MouseArea {
-            id: compactRoot
-            onClicked: plasmoid.expanded = !plasmoid.expanded
-
-            PlasmaCore.IconItem {
-                width: height
-                height: compactRoot.height
-                source: plasmoid.nativeInterface.currentWeatherIconName
-            }
-        }
-    }
+    Plasmoid.icon: plasmoid.nativeInterface.currentWeatherIconName
+    Plasmoid.toolTipMainText: plasmoid.nativeInterface.currentWeatherToolTip
+    Plasmoid.toolTipSubText: plasmoid.nativeInterface.currentWeatherSubToolTip
 
     TopPanel {
         id: panel

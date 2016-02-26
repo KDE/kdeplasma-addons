@@ -27,6 +27,8 @@ class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
     Q_PROPERTY(QString currentWeatherIconName READ currentWeatherIconName NOTIFY currentWeatherIconNameChanged)
+    Q_PROPERTY(QString currentWeatherToolTip READ currentWeatherToolTip NOTIFY currentWeatherToolTipChanged)
+    Q_PROPERTY(QString currentWeatherSubToolTip READ currentWeatherSubToolTip NOTIFY currentWeatherSubToolTipChanged)
 
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY modelUpdated)
@@ -42,6 +44,9 @@ public: // Plasma::Applet API
 
 public:
     QString currentWeatherIconName() const { return m_currentWeatherIconName; }
+    QString currentWeatherToolTip() const { return m_currentWeatherToolTip; }
+    QString currentWeatherSubToolTip() const { return m_currentWeatherSubToolTip; }
+
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
     QVariantList detailsModel() const { return m_detailsModel; }
@@ -52,13 +57,14 @@ public:
 Q_SIGNALS:
     void modelUpdated();
     void currentWeatherIconNameChanged(const QString &currentWeatherIconName);
+    void currentWeatherToolTipChanged(const QString &currentWeatherToolTip);
+    void currentWeatherSubToolTipChanged(const QString &currentWeatherSubToolTip);
 
 public Q_SLOTS: // as expected by connected dataengines
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 
 protected Q_SLOTS:
     void configAccepted();
-    void toolTipAboutToShow();
 
 private:
     bool isValidData(const QVariant &data) const;
@@ -68,12 +74,17 @@ private:
     void updateFiveDaysModel(const Plasma::DataEngine::Data &data);
     void updateDetailsModel(const Plasma::DataEngine::Data &data);
     void updateNoticesModel(const Plasma::DataEngine::Data &data);
+    void updateToolTip();
     QString convertTemperature(KUnitConversion::Unit format, const QString &value,
                                int type, bool rounded = false, bool degreesOnly = false);
 
+private:
     QString m_creditUrl;
 
     QString m_currentWeatherIconName;
+    QString m_currentWeatherToolTip;
+    QString m_currentWeatherSubToolTip;
+
     QVariantMap m_panelModel;
     QVariantList m_fiveDaysModel;
     QVariantList m_detailsModel;

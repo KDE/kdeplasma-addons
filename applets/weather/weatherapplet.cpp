@@ -28,7 +28,6 @@
 #include <KIconLoader>
 #include <KUnitConversion/Value>
 
-// #include <Plasma/ToolTipManager>
 #include <Plasma/Package>
 
 #include <cmath>
@@ -66,25 +65,6 @@ void WeatherApplet::init()
 
 WeatherApplet::~WeatherApplet()
 {
-}
-
-void WeatherApplet::toolTipAboutToShow()
-{
-    // PORT!
-#if 0
-    QString config = i18nc("Shown when you have not set a weather provider", "Please Configure");
-    Plasma::ToolTipContent data(config, "", popupIcon().pixmap(IconSize(KIconLoader::Desktop)));
-
-    QString location = m_panelModel["location"].toString();
-    QString conditions = m_panelModel["conditions"].toString();
-    QString temp = m_panelModel["temp"].toString();
-    if (!location.isEmpty()) {
-         data.setMainText(location);
-         data.setSubText(i18nc("%1 is the weather condition, %2 is the temperature,"
-                               " both come from the weather provider", "%1 %2", conditions, temp));
-    }
-//     Plasma::ToolTipManager::self()->setContent(this, data);
-#endif
 }
 
 void WeatherApplet::invokeBrowser(const QString& url) const
@@ -415,6 +395,35 @@ void WeatherApplet::updateNoticesModel(const Plasma::DataEngine::Data &data)
     m_noticesModel << QVariant(watches);
 }
 
+void WeatherApplet::updateToolTip()
+{
+    QString currentWeatherToolTip;
+    QString currentWeatherSubToolTip;
+
+    const QString location = m_panelModel["location"].toString();
+
+    if (!location.isEmpty()) {
+        currentWeatherToolTip = location;
+
+        const QString conditions = m_panelModel["conditions"].toString();
+        const QString temp = m_panelModel["temp"].toString();
+        currentWeatherSubToolTip = i18nc("%1 is the weather condition, %2 is the temperature,"
+                                         " both come from the weather provider",
+                                         "%1 %2", conditions, temp);
+    } else {
+        currentWeatherToolTip = i18nc("Shown when you have not set a weather provider", "Please Configure");
+    }
+
+    if (m_currentWeatherToolTip != currentWeatherToolTip) {
+        m_currentWeatherToolTip = currentWeatherToolTip;
+        emit currentWeatherToolTipChanged(m_currentWeatherToolTip);
+    }
+    if (m_currentWeatherSubToolTip != currentWeatherSubToolTip) {
+        m_currentWeatherSubToolTip = currentWeatherSubToolTip;
+        emit currentWeatherSubToolTipChanged(m_currentWeatherSubToolTip);
+    }
+}
+
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     if (data.isEmpty()) {
@@ -426,6 +435,7 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     updateDetailsModel(data);
     updateNoticesModel(data);
     WeatherPopupApplet::dataUpdated(source, data);
+    updateToolTip();
 
     emit modelUpdated();
 }
@@ -435,6 +445,8 @@ void WeatherApplet::configAccepted()
     resetPanelModel();
     m_fiveDaysModel.clear();
     m_detailsModel.clear();
+    updateToolTip();
+
     emit modelUpdated();
 
     WeatherPopupApplet::configAccepted();
