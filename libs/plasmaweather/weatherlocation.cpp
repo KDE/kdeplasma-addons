@@ -85,6 +85,7 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
     if (city.contains(QLatin1Char( ',' )))
         city.truncate(city.indexOf(QLatin1Char( ',' )) - 1);
 
+    // TODO: relies on bbcukmet ion engine, is that always available?
     if (!city.isEmpty()) {
         d->validator.validate(QLatin1String( "bbcukmet" ), city, true);
         return;
