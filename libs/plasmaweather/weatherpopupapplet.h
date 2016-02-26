@@ -53,11 +53,6 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
          */
         virtual void init();
 
-        /**
-         * Reimplemented from Plasma::Applet
-         */
-//         virtual void createConfigurationInterface(KConfigDialog *parent);
-
     public:
         /**
          * @return pressure unit

@@ -23,14 +23,12 @@
 #include <QIcon>
 
 #include <KConfigGroup>
-#include <KConfigDialog>
 #include <KLocalizedString>
 
 #include <KUnitConversion/Converter>
 
 #include <Plasma/PluginLoader>
 
-#include "weatherconfig.h"
 #include "weatherlocation.h"
 
 using namespace KUnitConversion;
@@ -248,33 +246,9 @@ void WeatherPopupApplet::connectToEngine()
         d->busyTimer->start();
     }
 }
-#if 0
-void WeatherPopupApplet::createConfigurationInterface(KConfigDialog *parent)
-{
-    d->weatherConfig = new WeatherConfig(parent);
-    d->weatherConfig->setDataEngine(d->weatherEngine);
-    d->weatherConfig->setSource(d->source);
-    d->weatherConfig->setUpdateInterval(d->updateInterval);
-    d->weatherConfig->setTemperatureUnit(d->temperatureUnit->id());
-    d->weatherConfig->setSpeedUnit(d->speedUnit->id());
-    d->weatherConfig->setPressureUnit(d->pressureUnit->id());
-    d->weatherConfig->setVisibilityUnit(d->visibilityUnit->id());
-    parent->addPage(d->weatherConfig, i18n("Weather"), icon());
-    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    connect(d->weatherConfig, SIGNAL(configValueChanged()) , parent , SLOT(settingsModified()));
-}
-#endif
+
 void WeatherPopupApplet::configAccepted()
 {
-#if 0
-    d->temperatureUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->temperatureUnit()));
-    d->speedUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->speedUnit()));
-    d->pressureUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->pressureUnit()));
-    d->visibilityUnit = d->converter.unit(static_cast<UnitId>(d->weatherConfig->visibilityUnit()));
-    d->updateInterval = d->weatherConfig->updateInterval();
-    d->source = d->weatherConfig->source();
-#endif
     KConfigGroup cfg = config();
     cfg.writeEntry("temperatureUnit", static_cast<int>(d->temperatureUnit.id()));
     cfg.writeEntry("speedUnit", static_cast<int>(d->speedUnit.id()));

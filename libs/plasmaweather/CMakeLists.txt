@@ -2,19 +2,13 @@ set(plasmaweather_LIB_SRCS
     weatherpopupapplet.cpp
     weathervalidator.cpp
     weatherlocation.cpp
-    weatherconfig.cpp
 )
 
 set(plasmaweather_HEADERS
     weatherpopupapplet.h
     weathervalidator.h
-    weatherconfig.h
     weatherlocation.h
     plasmaweather_export.h
-)
-
-ki18n_wrap_ui(plasmaweather_LIB_SRCS
-    weatherconfig.ui
 )
 
 add_library(plasmaweather SHARED ${plasmaweather_LIB_SRCS})
@@ -23,9 +17,7 @@ generate_export_header(plasmaweather)
 target_link_libraries(plasmaweather
     KF5::Plasma
     KF5::UnitConversion
-    KF5::ConfigWidgets
-    KF5::Completion
-    KF5::NewStuff
+    KF5::WidgetsAddons
     KF5::I18n
 )
 # TODO: find vars which would bump the version on every release, given ABI is unstable

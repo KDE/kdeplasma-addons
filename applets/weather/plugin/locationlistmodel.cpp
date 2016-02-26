@@ -157,6 +157,13 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
     ++m_checkedInCount;
     if (m_checkedInCount >= m_validators.count()) {
         m_validatingInput = false;
+        // TODO: port this to QML
+//         if (ui.locationCombo->count() == 0) {
+//             const QString current = ui.locationCombo->currentText();
+//             ui.locationCombo->addItem(i18n("No weather stations found for '%1'", current));
+//             ui.locationCombo->lineEdit()->setText(current);
+//         }
+//         ui.locationCombo->showPopup();
         emit validatingInputChanged(false);
     }
 }
