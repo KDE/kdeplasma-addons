@@ -33,7 +33,8 @@ PlasmaCore.Dialog
 
     hideOnWindowDeactivate: true
     mainItem: ColumnLayout {
-        height: 300
+        height: units.gridUnit * 16
+        width: units.gridUnit * 16
 
         PlasmaExtras.Heading {
             id: title
