@@ -42,19 +42,19 @@ T clampValue(T value, int decimals)
 
 bool isValidIconName(const QString &icon)
 {
-    return !icon.isEmpty();// &&
-    // PORT!
-//            !KIconLoader::global()->loadIcon(icon, KIconLoader::Desktop, 0,
-//                                             KIconLoader::DefaultState, QStringList(), 0, true).isNull();
+    bool result = !icon.isEmpty() &&
+           !KIconLoader::global()->loadIcon(icon, KIconLoader::Desktop, 0,
+                                            KIconLoader::DefaultState, QStringList(), 0, true).isNull();
+    return result;
 }
 
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         : WeatherPopupApplet(parent, args)
+        , m_currentWeatherIconName("weather-none-available")
 {
     // PORT!
 //     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-//     setPopupIcon("weather-none-available");
 }
 
 void WeatherApplet::init()
@@ -120,6 +120,16 @@ bool WeatherApplet::isValidData(const QVariant &data) const
     return ((data != "N/A") && (!data.toString().isEmpty()));
 }
 
+void WeatherApplet::setCurrentWeatherIconName(const QString &currentWeatherIconName)
+{
+    if (m_currentWeatherIconName == currentWeatherIconName) {
+        return;
+    }
+
+    m_currentWeatherIconName = currentWeatherIconName;
+    emit currentWeatherIconNameChanged(m_currentWeatherIconName);
+}
+
 void WeatherApplet::resetPanelModel()
 {
     m_panelModel.clear();
@@ -183,19 +193,18 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
         if (fiveDayTokens.count() > 2) {
             // if there is no specific icon, show the current weather
             m_panelModel["conditionIcon"] = fiveDayTokens[1];
-                // PORT! also same below
-//             setPopupIcon(QIcon::fromTheme(fiveDayTokens[1]));
+            setCurrentWeatherIconName(fiveDayTokens[1]);
         } else {
             // if we could not find any proper icon then just hide it
             m_panelModel["conditionIcon"] = "";
-//             setPopupIcon(QIcon::fromTheme("weather-none-available"));
+            setCurrentWeatherIconName("weather-none-available");
         }
     } else {
         m_panelModel["conditionIcon"] = conditionIcon;
         if (isValidIconName(conditionIcon)) {
-//             setPopupIcon(conditionIcon);
+            setCurrentWeatherIconName(conditionIcon);
         } else {
-//             setPopupIcon("weather-not-available");
+            setCurrentWeatherIconName("weather-not-available");
         }
     }
 }

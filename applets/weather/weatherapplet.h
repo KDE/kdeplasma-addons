@@ -26,6 +26,8 @@
 class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
+    Q_PROPERTY(QString currentWeatherIconName READ currentWeatherIconName NOTIFY currentWeatherIconNameChanged)
+
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY modelUpdated)
@@ -39,6 +41,7 @@ public: // Plasma::Applet API
     void init() override;
 
 public:
+    QString currentWeatherIconName() const { return m_currentWeatherIconName; }
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
     QVariantList detailsModel() const { return m_detailsModel; }
@@ -48,6 +51,7 @@ public:
 
 Q_SIGNALS:
     void modelUpdated();
+    void currentWeatherIconNameChanged(const QString &currentWeatherIconName);
 
 public Q_SLOTS: // as expected by connected dataengines
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
@@ -58,6 +62,7 @@ protected Q_SLOTS:
 
 private:
     bool isValidData(const QVariant &data) const;
+    void setCurrentWeatherIconName(const QString &currentWeatherIconName);
     void resetPanelModel();
     void updatePanelModel(const Plasma::DataEngine::Data &data);
     void updateFiveDaysModel(const Plasma::DataEngine::Data &data);
@@ -68,6 +73,7 @@ private:
 
     QString m_creditUrl;
 
+    QString m_currentWeatherIconName;
     QVariantMap m_panelModel;
     QVariantList m_fiveDaysModel;
     QVariantList m_detailsModel;

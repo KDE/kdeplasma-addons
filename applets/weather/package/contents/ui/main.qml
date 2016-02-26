@@ -17,6 +17,7 @@
 
 import QtQuick 2.1
 
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
@@ -31,6 +32,19 @@ Item {
 
     anchors.fill: parent
     clip: true
+
+    Plasmoid.compactRepresentation: Component {
+        MouseArea {
+            id: compactRoot
+            onClicked: plasmoid.expanded = !plasmoid.expanded
+
+            PlasmaCore.IconItem {
+                width: height
+                height: compactRoot.height
+                source: plasmoid.nativeInterface.currentWeatherIconName
+            }
+        }
+    }
 
     TopPanel {
         id: panel
