@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Media frame
+Name[nl]=Mediaframe
+Name[pt]=Moldura multimédia
+Name[pt_BR]=Quadro multimídia
+Name[sv]=Media frame
+Name[uk]=Медіарамка
+Name[x-test]=xxMedia framexx
 Comment=(Picture) Frame
+Comment[nl]=(Afbeelding) frame
+Comment[pt]=Moldura (de Imagens)
+Comment[pt_BR]=Quadro (Imagens)
+Comment[sv]=Bildram
+Comment[uk]=(Картинна) рамка
+Comment[x-test]=xx(Picture) Framexx
 Icon=image-x-generic
 Type=Service
 ServiceTypes=Plasma/Applet,Plasma/PopupApplet
