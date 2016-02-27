@@ -18,6 +18,7 @@ target_link_libraries(plasmaweather
     KF5::Plasma
     KF5::UnitConversion
     KF5::WidgetsAddons
+    KF5::Notifications
     KF5::I18n
 )
 # TODO: find vars which would bump the version on every release, given ABI is unstable

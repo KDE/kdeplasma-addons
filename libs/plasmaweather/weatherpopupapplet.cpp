@@ -24,6 +24,7 @@
 
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KNotification>
 
 #include <KUnitConversion/Converter>
 
@@ -43,6 +44,7 @@ public:
         , timeEngine(0)
         , updateInterval(0)
         , location(0)
+        , timeoutNotification(0)
     {
         busyTimer = new QTimer(q);
         busyTimer->setInterval(2*60*1000);
@@ -70,6 +72,7 @@ public:
     double latitude;
     double longitude;
     QTimer *busyTimer;
+    KNotification *timeoutNotification;
 
     void locationReady(const QString &src)
     {
@@ -82,8 +85,9 @@ public:
             q->setConfigurationRequired(false);
         } else {
             busyTimer->stop();
-            // PORT!
-//             q->showMessage(QIcon(), QString(), Plasma::ButtonNone);
+            if (timeoutNotification) {
+                timeoutNotification->close();
+            }
             QObject *graphicObject = q->property("_plasma_graphicObject").value<QObject *>();
             if (graphicObject) {
                 graphicObject->setProperty("busy", false);
@@ -106,11 +110,17 @@ public:
         if (list.count() < 3) {
             q->setConfigurationRequired(true);
         } else {
-            // PORT!
-//             q->showMessage(KIcon(QLatin1String( "dialog-error" )),
-//                            i18n("Weather information retrieval for %1 timed out.", list.value(2)),
-//                            Plasma::ButtonNone);
+            timeoutNotification =
+                KNotification::event( KNotification::Error, QString(), // TODO: some title?
+                                      i18n("Weather information retrieval for %1 timed out.", list.value(2)),
+                                      QLatin1String("dialog-error"));
+            QObject::connect(timeoutNotification, SIGNAL(close()), q, SLOT(onTimeoutNotificationClosed()));
         }
+    }
+
+    void onTimeoutNotificationClosed()
+    {
+        timeoutNotification = 0;
     }
 
     qreal tendency(const Value& pressure, const QString& tendency)
@@ -218,6 +228,11 @@ void WeatherPopupApplet::init()
 
 void WeatherPopupApplet::connectToEngine()
 {
+    if (d->timeoutNotification) {
+        QObject::disconnect(d->timeoutNotification, SIGNAL(close()), this, SLOT(onTimeoutNotificationClosed()));
+        d->timeoutNotification = 0;
+    }
+
     emit newWeatherSource();
     const bool missingLocation = d->source.isEmpty();
 
@@ -314,8 +329,9 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     setAssociatedApplicationUrls(QList<QUrl>() << QUrl(data.value(QLatin1String( "Credit Url" )).toString()));
 
     d->busyTimer->stop();
-    // PORT!
-//     showMessage(QIcon(), QString(), Plasma::ButtonNone);
+    if (d->timeoutNotification) {
+        d->timeoutNotification->close();
+    }
     QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
     if (graphicObject) {
         graphicObject->setProperty("busy", false);
