@@ -1,15 +1,23 @@
 [Desktop Entry]
 Name=Media frame
+Name[ca]=Marc multimèdia
+Name[de]=Medien-Rahmen
 Name[nl]=Mediaframe
+Name[pl]=Ramka multimedialna
 Name[pt]=Moldura multimédia
 Name[pt_BR]=Quadro multimídia
+Name[sk]=Snímka médií
 Name[sv]=Media frame
 Name[uk]=Медіарамка
 Name[x-test]=xxMedia framexx
 Comment=(Picture) Frame
+Comment[ca]=Marc (fotografies)
+Comment[de]=(Bilder)-Rahmen
 Comment[nl]=(Afbeelding) frame
+Comment[pl]=(Zdjęcie) Ramka
 Comment[pt]=Moldura (de Imagens)
 Comment[pt_BR]=Quadro (Imagens)
+Comment[sk]=Snímka obrázku
 Comment[sv]=Bildram
 Comment[uk]=(Картинна) рамка
 Comment[x-test]=xx(Picture) Framexx
