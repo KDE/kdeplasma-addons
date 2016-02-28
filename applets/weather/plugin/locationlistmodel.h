@@ -67,7 +67,7 @@ Q_SIGNALS:
     void validatingInputChanged(bool validatingInput);
     void dataEngineChanged(Plasma::DataEngine* dataEngine);
 
-private Q_SLOTS:
+private:
     void addSources(const QMap<QString, QString> &sources);
     void validatorError(const QString &error);
 

@@ -116,8 +116,8 @@ void LocationListModel::setDataEngine(Plasma::DataEngine* dataengine)
                 //d->ions.insert(pluginInfo[1], pluginInfo[0]);
 
                 WeatherValidator *validator = new WeatherValidator(this);
-                connect(validator, SIGNAL(error(QString)), this, SLOT(validatorError(QString)));
-                connect(validator, SIGNAL(finished(QMap<QString,QString>)), this, SLOT(addSources(QMap<QString,QString>)));
+                connect(validator, &WeatherValidator::error, this, &LocationListModel::validatorError);
+                connect(validator, &WeatherValidator::finished, this, &LocationListModel::addSources);
                 validator->setDataEngine(m_dataengine);
                 validator->setIon(pluginInfo[1]);
 
