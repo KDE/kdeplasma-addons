@@ -39,7 +39,6 @@ class WeatherPopupApplet::Private
 public:
     Private(WeatherPopupApplet *weatherapplet)
         : q(weatherapplet)
-        , weatherConfig(0)
         , weatherEngine(nullptr)
         , timeEngine(nullptr)
         , updateInterval(0)
@@ -53,7 +52,6 @@ public:
     }
 
     WeatherPopupApplet *q;
-    WeatherConfig *weatherConfig;
     Plasma::DataEngine *weatherEngine;
     Plasma::DataEngine *timeEngine;
     Converter converter;
@@ -455,11 +453,6 @@ QString WeatherPopupApplet::conditionIcon()
         d->conditionIcon = d->conditionFromPressure();
     }
     return d->conditionIcon;
-}
-
-WeatherConfig* WeatherPopupApplet::weatherConfig()
-{
-    return d->weatherConfig;
 }
 
 

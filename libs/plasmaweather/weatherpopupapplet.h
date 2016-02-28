@@ -26,7 +26,6 @@
 
 #include "plasmaweather_export.h"
 
-class WeatherConfig;
 
 /**
  * @class WeatherPopupApplet <plasmaweather/weatherpopupapplet.h>
@@ -83,11 +82,6 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
          * @return condition icon with guessed value if it was empty
          **/
         QString conditionIcon();
-
-        /**
-         * @return weather config dialog widget
-         **/
-        WeatherConfig* weatherConfig();
 
         QString source() const;
         void setSource(const QString &source);
