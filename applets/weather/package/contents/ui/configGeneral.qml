@@ -19,6 +19,8 @@ import QtQuick 2.0
 import QtQuick.Controls 1.0 as QtControls
 import QtQuick.Layouts 1.0
 
+import org.kde.plasma.components 2.0 as PlasmaComponents
+
 import org.kde.plasma.private.weather 1.0
 
 ColumnLayout {
@@ -100,13 +102,13 @@ ColumnLayout {
                 onCurrentIndexChanged: generalConfigPage.configurationChanged();
             }
 
-//             somespinningwheel {
-//                 id: somespinningwheel
-//                 Layout.row: 1
-//                 Layout.column: 1
-//                 Layout.alignment: Qt.AlignRight
-//                 visible: locationListModel.validatingInput
-//             }
+            PlasmaComponents.BusyIndicator {
+                id: busy
+                Layout.row: 1
+                Layout.column: 1
+                Layout.alignment: Qt.AlignRight
+                visible: locationListModel.validatingInput
+            }
 
             QtControls.Button {
                 Layout.row: 1
