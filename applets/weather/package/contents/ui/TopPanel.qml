@@ -24,7 +24,7 @@ PlasmaCore.FrameSvgItem {
 
     imagePath: "widgets/frame"
     prefix: "plain"
-    visible: model.location.length > 0
+    visible: !!model.location
 
     PlasmaCore.IconItem {
         // TODO: source correct property?

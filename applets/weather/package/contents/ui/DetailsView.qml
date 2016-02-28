@@ -38,7 +38,7 @@ WeatherListView {
                 elementId: rowData.icon
                 height: nativeHeight
                 width: nativeWidth
-                visible: rowData.icon.length > 0
+                visible: !!rowData.icon
             }
 
             Text {
