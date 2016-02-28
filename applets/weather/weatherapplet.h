@@ -27,8 +27,8 @@ class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
     Q_PROPERTY(QString currentWeatherIconName READ currentWeatherIconName NOTIFY currentWeatherIconNameChanged)
-    Q_PROPERTY(QString currentWeatherToolTip READ currentWeatherToolTip NOTIFY currentWeatherToolTipChanged)
-    Q_PROPERTY(QString currentWeatherSubToolTip READ currentWeatherSubToolTip NOTIFY currentWeatherSubToolTipChanged)
+    Q_PROPERTY(QString currentWeatherToolTipMainText READ currentWeatherToolTipMainText NOTIFY currentWeatherToolTipMainTextChanged)
+    Q_PROPERTY(QString currentWeatherToolTipSubText READ currentWeatherToolTipSubText NOTIFY currentWeatherToolTipSubTextChanged)
 
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY modelUpdated)
@@ -44,8 +44,8 @@ public: // Plasma::Applet API
 
 public:
     QString currentWeatherIconName() const { return m_currentWeatherIconName; }
-    QString currentWeatherToolTip() const { return m_currentWeatherToolTip; }
-    QString currentWeatherSubToolTip() const { return m_currentWeatherSubToolTip; }
+    QString currentWeatherToolTipMainText() const { return m_currentWeatherToolTipMainText; }
+    QString currentWeatherToolTipSubText() const { return m_currentWeatherToolTipSubText; }
 
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
@@ -55,8 +55,8 @@ public:
 Q_SIGNALS:
     void modelUpdated();
     void currentWeatherIconNameChanged(const QString &currentWeatherIconName);
-    void currentWeatherToolTipChanged(const QString &currentWeatherToolTip);
-    void currentWeatherSubToolTipChanged(const QString &currentWeatherSubToolTip);
+    void currentWeatherToolTipMainTextChanged(const QString &currentWeatherToolTipMainText);
+    void currentWeatherToolTipSubTextChanged(const QString &currentWeatherToolTipSubText);
 
 public Q_SLOTS: // as expected by connected dataengines
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
@@ -78,8 +78,8 @@ private:
 
 private:
     QString m_currentWeatherIconName;
-    QString m_currentWeatherToolTip;
-    QString m_currentWeatherSubToolTip;
+    QString m_currentWeatherToolTipMainText;
+    QString m_currentWeatherToolTipSubText;
 
     QVariantMap m_panelModel;
     QVariantList m_fiveDaysModel;

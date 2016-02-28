@@ -391,30 +391,30 @@ void WeatherApplet::updateNoticesModel(const Plasma::DataEngine::Data &data)
 
 void WeatherApplet::updateToolTip()
 {
-    QString currentWeatherToolTip;
-    QString currentWeatherSubToolTip;
+    QString currentWeatherToolTipMainText;
+    QString currentWeatherToolTipSubText;
 
     const QString location = m_panelModel["location"].toString();
 
     if (!location.isEmpty()) {
-        currentWeatherToolTip = location;
+        currentWeatherToolTipMainText = location;
 
         const QString conditions = m_panelModel["conditions"].toString();
         const QString temp = m_panelModel["temp"].toString();
-        currentWeatherSubToolTip = i18nc("%1 is the weather condition, %2 is the temperature,"
+        currentWeatherToolTipSubText = i18nc("%1 is the weather condition, %2 is the temperature,"
                                          " both come from the weather provider",
                                          "%1 %2", conditions, temp);
     } else {
-        currentWeatherToolTip = i18nc("Shown when you have not set a weather provider", "Please Configure");
+        currentWeatherToolTipMainText = i18nc("Shown when you have not set a weather provider", "Please Configure");
     }
 
-    if (m_currentWeatherToolTip != currentWeatherToolTip) {
-        m_currentWeatherToolTip = currentWeatherToolTip;
-        emit currentWeatherToolTipChanged(m_currentWeatherToolTip);
+    if (m_currentWeatherToolTipMainText != currentWeatherToolTipMainText) {
+        m_currentWeatherToolTipMainText = currentWeatherToolTipMainText;
+        emit currentWeatherToolTipMainTextChanged(m_currentWeatherToolTipMainText);
     }
-    if (m_currentWeatherSubToolTip != currentWeatherSubToolTip) {
-        m_currentWeatherSubToolTip = currentWeatherSubToolTip;
-        emit currentWeatherSubToolTipChanged(m_currentWeatherSubToolTip);
+    if (m_currentWeatherToolTipSubText != currentWeatherToolTipSubText) {
+        m_currentWeatherToolTipSubText = currentWeatherToolTipSubText;
+        emit currentWeatherToolTipSubTextChanged(m_currentWeatherToolTipSubText);
     }
 }
 

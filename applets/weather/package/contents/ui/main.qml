@@ -31,8 +31,8 @@ Item {
     property int minimumHeight: 272
 
     Plasmoid.icon: plasmoid.nativeInterface.currentWeatherIconName
-    Plasmoid.toolTipMainText: plasmoid.nativeInterface.currentWeatherToolTip
-    Plasmoid.toolTipSubText: plasmoid.nativeInterface.currentWeatherSubToolTip
+    Plasmoid.toolTipMainText: plasmoid.nativeInterface.currentWeatherToolTipMainText
+    Plasmoid.toolTipSubText: plasmoid.nativeInterface.currentWeatherToolTipSubText
 
     TopPanel {
         id: panel
