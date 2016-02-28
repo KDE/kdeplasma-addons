@@ -121,7 +121,6 @@ Item {
             anchors {
                 bottom: parent.bottom
                 right: parent.right
-                bottomMargin: unit.smallSpacing
             }
             font {
                 pointSize: theme.smallestFont.pointSize
