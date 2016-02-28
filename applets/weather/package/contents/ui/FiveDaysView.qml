@@ -60,12 +60,14 @@ WeatherListView {
     Component {
         id: textDelegate
 
-        // TODO: find why first item has bad vertical position with PlasmaComponents.Label instead of Text
         PlasmaComponents.Label {
             function checkTitle(txt) {
                 return txt.indexOf("ight") != -1 || txt.indexOf("nite") != -1;
             }
 
+            // resetting the default height set by PlasmaComponents.Label,
+            // which would result in first item in row with bad vertical position
+            height: undefined
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
