@@ -30,11 +30,11 @@ static QObject* temperatureUnitListModelSingletonTypeProvider(QQmlEngine *engine
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    QVector<UnitItem> items;
-    items.reserve(3);
-    items.append(UnitItem(i18n("Celsius \302\260C"), KUnitConversion::Celsius));
-    items.append(UnitItem(i18n("Fahrenheit \302\260F"), KUnitConversion::Fahrenheit));
-    items.append(UnitItem(i18n("Kelvin K"), KUnitConversion::Kelvin));
+    QVector<UnitItem> items {
+        UnitItem(i18n("Celsius \302\260C"), KUnitConversion::Celsius),
+        UnitItem(i18n("Fahrenheit \302\260F"), KUnitConversion::Fahrenheit),
+        UnitItem(i18n("Kelvin K"), KUnitConversion::Kelvin)
+    };
 
     return new AbstractUnitListModel(items);
 }
@@ -44,12 +44,12 @@ static QObject* pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, Q
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    QVector<UnitItem> items;
-    items.reserve(4);
-    items.append(UnitItem(i18n("Hectopascals hPa"), KUnitConversion::Hectopascal));
-    items.append(UnitItem(i18n("Kilopascals kPa"), KUnitConversion::Kilopascal));
-    items.append(UnitItem(i18n("Millibars mbar"), KUnitConversion::Millibar));
-    items.append(UnitItem(i18n("Inches of Mercury inHg"), KUnitConversion::InchesOfMercury));
+    QVector<UnitItem> items {
+        UnitItem(i18n("Hectopascals hPa"), KUnitConversion::Hectopascal),
+        UnitItem(i18n("Kilopascals kPa"), KUnitConversion::Kilopascal),
+        UnitItem(i18n("Millibars mbar"), KUnitConversion::Millibar),
+        UnitItem(i18n("Inches of Mercury inHg"), KUnitConversion::InchesOfMercury)
+    };
 
     return new AbstractUnitListModel(items);
 }
@@ -59,13 +59,13 @@ static QObject* windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, 
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    QVector<UnitItem> items;
-    items.reserve(5);
-    items.append(UnitItem(i18n("Meters per Second m/s"), KUnitConversion::MeterPerSecond));
-    items.append(UnitItem(i18n("Kilometers per Hour km/h"), KUnitConversion::KilometerPerHour));
-    items.append(UnitItem(i18n("Miles per Hour mph"), KUnitConversion::MilePerHour));
-    items.append(UnitItem(i18n("Knots kt"), KUnitConversion::Knot));
-    items.append(UnitItem(i18n("Beaufort scale bft"), KUnitConversion::Beaufort));
+    QVector<UnitItem> items {
+        UnitItem(i18n("Meters per Second m/s"), KUnitConversion::MeterPerSecond),
+        UnitItem(i18n("Kilometers per Hour km/h"), KUnitConversion::KilometerPerHour),
+        UnitItem(i18n("Miles per Hour mph"), KUnitConversion::MilePerHour),
+        UnitItem(i18n("Knots kt"), KUnitConversion::Knot),
+        UnitItem(i18n("Beaufort scale bft"), KUnitConversion::Beaufort)
+    };
 
     return new AbstractUnitListModel(items);
 }
@@ -75,10 +75,10 @@ static QObject* visibilityUnitListModelSingletonTypeProvider(QQmlEngine *engine,
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    QVector<UnitItem> items;
-    items.reserve(2);
-    items.append(UnitItem(i18n("Kilometers"), KUnitConversion::Kilometer));
-    items.append(UnitItem(i18n("Miles"), KUnitConversion::Mile));
+    QVector<UnitItem> items {
+        UnitItem(i18n("Kilometers"), KUnitConversion::Kilometer),
+        UnitItem(i18n("Miles"), KUnitConversion::Mile)
+    };
 
     return new AbstractUnitListModel(items);
 }
