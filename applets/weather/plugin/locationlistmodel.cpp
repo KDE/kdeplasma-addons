@@ -36,7 +36,7 @@ LocationListModel::LocationListModel(QObject *parent)
 
 QVariant LocationListModel::data(const QModelIndex &index, int role) const
 {
-    if (! index.isValid() || index.row() >= m_locations.size()) {
+    if (!index.isValid() || index.row() >= m_locations.size()) {
         return QVariant();
     }
 
@@ -51,7 +51,7 @@ QVariant LocationListModel::data(const QModelIndex &index, int role) const
 
 int LocationListModel::rowCount(const QModelIndex &index) const
 {
-    if (! index.isValid()) {
+    if (!index.isValid()) {
         return m_locations.size();
     }
 
@@ -85,7 +85,7 @@ void LocationListModel::searchLocations(const QString &text)
         return;
     }
 
-    if (! m_validatingInput) {
+    if (!m_validatingInput) {
         m_validatingInput = true;
         emit validatingInputChanged(true);
     }

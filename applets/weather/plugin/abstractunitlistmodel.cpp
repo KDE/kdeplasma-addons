@@ -25,7 +25,7 @@ AbstractUnitListModel::AbstractUnitListModel(const QVector<UnitItem> &items, QOb
 
 QVariant AbstractUnitListModel::data(const QModelIndex &index, int role) const
 {
-    if (! index.isValid() || index.row() >= m_items.size()) {
+    if (!index.isValid() || index.row() >= m_items.size()) {
         return QVariant();
     }
 
@@ -40,7 +40,7 @@ QVariant AbstractUnitListModel::data(const QModelIndex &index, int role) const
 
 int AbstractUnitListModel::rowCount(const QModelIndex &index) const
 {
-    if (! index.isValid()) {
+    if (!index.isValid()) {
         return m_items.size();
     }
 
