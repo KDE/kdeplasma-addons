@@ -404,6 +404,8 @@ void WeatherApplet::updateToolTip()
         currentWeatherToolTipSubText = i18nc("%1 is the weather condition, %2 is the temperature,"
                                          " both come from the weather provider",
                                          "%1 %2", conditions, temp);
+        // avoid almost empty or leading/trailing spaces, if conditions or temp is empty
+        currentWeatherToolTipSubText = currentWeatherToolTipSubText.trimmed();
     } else {
         currentWeatherToolTipMainText = i18nc("Shown when you have not set a weather provider", "Please Configure");
     }
