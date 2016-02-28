@@ -40,11 +40,11 @@ public:
     Private(WeatherPopupApplet *weatherapplet)
         : q(weatherapplet)
         , weatherConfig(0)
-        , weatherEngine(0)
-        , timeEngine(0)
+        , weatherEngine(nullptr)
+        , timeEngine(nullptr)
         , updateInterval(0)
-        , location(0)
-        , timeoutNotification(0)
+        , location(nullptr)
+        , timeoutNotification(nullptr)
     {
         busyTimer = new QTimer(q);
         busyTimer->setInterval(2*60*1000);
@@ -96,7 +96,7 @@ public:
         }
 
         location->deleteLater();
-        location = 0;
+        location = nullptr;
     }
 
     void giveUpBeingBusy()
@@ -120,7 +120,7 @@ public:
 
     void onTimeoutNotificationClosed()
     {
-        timeoutNotification = 0;
+        timeoutNotification = nullptr;
     }
 
     qreal tendency(const Value& pressure, const QString& tendency)
@@ -230,7 +230,7 @@ void WeatherPopupApplet::connectToEngine()
 {
     if (d->timeoutNotification) {
         QObject::disconnect(d->timeoutNotification, SIGNAL(close()), this, SLOT(onTimeoutNotificationClosed()));
-        d->timeoutNotification = 0;
+        d->timeoutNotification = nullptr;
     }
 
     emit newWeatherSource();
@@ -252,7 +252,7 @@ void WeatherPopupApplet::connectToEngine()
         }
     } else {
         delete d->location;
-        d->location = 0;
+        d->location = nullptr;
         d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
         QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
         if (graphicObject) {

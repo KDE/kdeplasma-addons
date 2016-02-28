@@ -31,7 +31,7 @@ class WeatherLocation : public QObject
 {
     Q_OBJECT
 public:
-    WeatherLocation(QObject *parent = 0);
+    explicit WeatherLocation(QObject *parent = nullptr);
     virtual ~WeatherLocation();
 
     /**

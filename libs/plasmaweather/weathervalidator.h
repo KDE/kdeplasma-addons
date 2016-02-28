@@ -33,7 +33,7 @@ class PLASMAWEATHER_EXPORT WeatherValidator : public QObject
 {
     Q_OBJECT
 public:
-    WeatherValidator(QObject *parent = 0);
+    explicit WeatherValidator(QObject *parent = nullptr);
     virtual ~WeatherValidator();
 
     /**

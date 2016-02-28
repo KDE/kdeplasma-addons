@@ -28,7 +28,7 @@
 
 LocationListModel::LocationListModel(QObject *parent)
     : QAbstractListModel(parent)
-    , m_dataengine(0)
+    , m_dataengine(nullptr)
     , m_validatingInput(false)
     , m_checkedInCount(0)
 {

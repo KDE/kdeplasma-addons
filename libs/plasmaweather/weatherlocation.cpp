@@ -26,7 +26,7 @@ class WeatherLocation::Private
 public:
     Private(WeatherLocation *location)
         : q(location),
-          locationEngine(0)
+          locationEngine(nullptr)
     {}
 
     void validatorFinished(const QMap<QString, QString> &results)

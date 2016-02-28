@@ -26,7 +26,7 @@ class WeatherValidator::Private
 {
 public:
     Private()
-        : dataengine(0),
+        : dataengine(nullptr),
           ion(QLatin1String( "bbcukmet" ))
     {}
 
