@@ -44,14 +44,16 @@ WeatherListView {
                         item.toolTip = values[1];
                     } else {
                         var txt = modelData;
-                        if (txt.indexOf("nt") != -1)
+                        if (txt.indexOf("nt") != -1) {
                             txt = txt.replace(" nt", "");
+                        }
 
                         item.text = txt;
                     }
 
-                    if (rowIndex == 0)
+                    if (rowIndex == 0) {
                         item.font.bold = true;
+                    }
                 }
             }
         }
