@@ -41,7 +41,7 @@ Column {
 
             Loader {
                 property int rowIndex: index
-                property variant rowData: modelData
+                property var rowData: modelData
                 anchors.fill: parent
                 sourceComponent: root.delegate
             }

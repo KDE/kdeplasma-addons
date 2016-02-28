@@ -20,7 +20,7 @@ import QtQuick 2.1
 Column {
     id: root
 
-    property variant model
+    property var model
 
     spacing: units.largeSpacing
     visible: model.length > 0 && model[0].length > 0 && model[1].length > 0
