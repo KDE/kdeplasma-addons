@@ -17,8 +17,6 @@
 
 import QtQuick 2.1
 
-import "Utils.js" as Utils
-
 Column {
     id: root
 
@@ -37,7 +35,7 @@ Column {
             height: root.rowHeight
             width: root.width
             radius: root.roundedRows ? units.smallSpacing : 0
-            color: Utils.setAlphaF(theme.textColor, ((index+1)/repeater.count)*0.3);
+            color: Qt.rgba(theme.textColor.r, theme.textColor.g, theme.textColor.b, ((index+1)/repeater.count)*0.3)
 
             Loader {
                 property int rowIndex: index
