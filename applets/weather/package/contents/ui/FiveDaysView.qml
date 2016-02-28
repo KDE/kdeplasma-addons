@@ -18,6 +18,7 @@
 import QtQuick 2.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 import "Utils.js" as Utils
 
@@ -59,7 +60,8 @@ WeatherListView {
     Component {
         id: textDelegate
 
-        Text {
+        // TODO: find why first item has bad vertical position with PlasmaComponents.Label instead of Text
+        PlasmaComponents.Label {
             function checkTitle(txt) {
                 return txt.indexOf("ight") != -1 || txt.indexOf("nite") != -1;
             }
@@ -67,7 +69,6 @@ WeatherListView {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            color: theme.textColor
             opacity: font.bold && checkTitle(text) ? 0.5 : 1
         }
     }

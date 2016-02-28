@@ -18,6 +18,7 @@
 import QtQuick 2.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 WeatherListView {
     id: root
@@ -27,10 +28,11 @@ WeatherListView {
     delegate: Item {
         anchors.fill: parent
 
-        Item {
+        Row {
             anchors.centerIn: parent
             height: parent.height
             width: childrenRect.width
+            spacing: units.smallSpacing
 
             PlasmaCore.SvgItem {
                 id: icon
@@ -41,13 +43,10 @@ WeatherListView {
                 visible: !!rowData.icon
             }
 
-            Text {
+            PlasmaComponents.Label {
                 anchors {
-                    left: icon.right
-                    leftMargin: 2
                     verticalCenter: parent.verticalCenter
                 }
-                color: theme.textColor
                 text: rowData.text
             }
         }

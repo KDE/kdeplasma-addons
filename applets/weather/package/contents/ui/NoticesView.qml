@@ -22,9 +22,8 @@ Column {
 
     property variant model
 
-    spacing: 10
+    spacing: units.largeSpacing
     visible: model.length > 0 && model[0].length > 0 && model[1].length > 0
-    clip: true
 
     Notice {
         title: i18nc("weather warnings", "Warnings Issued:")

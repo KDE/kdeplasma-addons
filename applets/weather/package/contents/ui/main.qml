@@ -30,9 +30,6 @@ Item {
     property int minimumWidth: 373
     property int minimumHeight: 272
 
-    anchors.fill: parent
-    clip: true
-
     Plasmoid.icon: plasmoid.nativeInterface.currentWeatherIconName
     Plasmoid.toolTipMainText: plasmoid.nativeInterface.currentWeatherToolTip
     Plasmoid.toolTipSubText: plasmoid.nativeInterface.currentWeatherSubToolTip
@@ -43,7 +40,8 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
-            margins: 5
+            // matching round ends of bars behind data rows
+            margins: units.smallSpacing
         }
         height: parent.height * 0.21
         model: plasmoid.nativeInterface.panelModel
@@ -53,7 +51,7 @@ Item {
         id: tabBar
         anchors {
             top: panel.bottom
-            topMargin: 5
+            topMargin: units.smallSpacing
             horizontalCenter: parent.horizontalCenter
         }
 
@@ -79,8 +77,8 @@ Item {
         anchors {
             top: tabBar.visible ? tabBar.bottom : tabBar.top
             bottom: courtesyLabel.top
-            topMargin: 12
-            bottomMargin: 15
+            topMargin: units.largeSpacing
+            bottomMargin: units.largeSpacing
         }
         width: panel.width
         FiveDaysView {
@@ -102,18 +100,17 @@ Item {
         }
     }
 
-    Text {
+    PlasmaComponents.Label {
         id: courtesyLabel
         anchors {
             bottom: parent.bottom
             right: parent.right
-            bottomMargin: 7
+            bottomMargin: unit.smallSpacing
         }
         font {
             pointSize: theme.smallestFont.pointSize
             underline: mouseArea.enabled
         }
-        color: theme.textColor
         text: plasmoid.nativeInterface.panelModel.courtesy
 
         MouseArea {

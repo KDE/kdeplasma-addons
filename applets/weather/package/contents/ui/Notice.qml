@@ -17,6 +17,8 @@
 
 import QtQuick 2.1
 
+import org.kde.plasma.components 2.0 as PlasmaComponents
+
 Column {
     property alias model: repeater.model
     property alias title: title.text
@@ -24,16 +26,15 @@ Column {
     anchors.left: parent.left
     anchors.right: parent.right
 
-    Text {
+    PlasmaComponents.Label {
         id: title
         font.bold: true
-        color: theme.textColor
     }
 
     Repeater {
         id: repeater
 
-        Text {
+        PlasmaComponents.Label {
             font.underline: true
             color: theme.linkColor
             text: modelData.description
