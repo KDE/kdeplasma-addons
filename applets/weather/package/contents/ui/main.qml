@@ -116,8 +116,8 @@ Item {
         MouseArea {
             id: mouseArea
             anchors.fill: parent
-            enabled: plasmoid.nativeInterface.panelModel.enableLink
-            onClicked: plasmoid.nativeInterface.invokeBrowser();
+            enabled: !!plasmoid.nativeInterface.panelModel.creditUrl
+            onClicked: Qt.openUrlExternally(plasmoid.nativeInterface.panelModel.creditUrl);
         }
     }
 }

@@ -67,11 +67,6 @@ WeatherApplet::~WeatherApplet()
 {
 }
 
-void WeatherApplet::invokeBrowser(const QString& url) const
-{
-    QDesktopServices::openUrl(url.isEmpty() ? m_creditUrl : url);
-}
-
 QString WeatherApplet::convertTemperature(KUnitConversion::Unit format, const QString &value,
                                           int type, bool rounded, bool degreesOnly)
 {
@@ -120,7 +115,7 @@ void WeatherApplet::resetPanelModel()
     m_panelModel["courtesy"] = "";
     m_panelModel["conditionIcon"] = "";
     m_panelModel["totalDays"] = "";
-    m_panelModel["enableLink"] = false;
+    m_panelModel["creditUrl"] = "";
 }
 
 void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
@@ -161,8 +156,7 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
     }
 
     m_panelModel["courtesy"] = data["Credit"].toString();
-    m_creditUrl = data["Credit Url"].toString();
-    m_panelModel["enableLink"] = !m_creditUrl.isEmpty();
+    m_panelModel["creditUrl"] = data["Credit Url"].toString();
 
     const QString conditionIcon = data["Condition Icon"].toString();
     if (!isValidData(data["Condition Icon"])

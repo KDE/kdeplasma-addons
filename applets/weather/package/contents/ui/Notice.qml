@@ -41,7 +41,7 @@ Column {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: plasmoid.nativeInterface.invokeBrowser(modelData.info);
+                onClicked: Qt.openUrlExternally(modelData.info);
             }
         }
     }

@@ -52,8 +52,6 @@ public:
     QVariantList detailsModel() const { return m_detailsModel; }
     QVariantList noticesModel() const { return m_noticesModel; }
 
-    Q_INVOKABLE void invokeBrowser(const QString &url = QString()) const;
-
 Q_SIGNALS:
     void modelUpdated();
     void currentWeatherIconNameChanged(const QString &currentWeatherIconName);
@@ -79,8 +77,6 @@ private:
                                int type, bool rounded = false, bool degreesOnly = false);
 
 private:
-    QString m_creditUrl;
-
     QString m_currentWeatherIconName;
     QString m_currentWeatherToolTip;
     QString m_currentWeatherSubToolTip;
