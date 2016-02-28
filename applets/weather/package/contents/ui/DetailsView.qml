@@ -36,7 +36,7 @@ WeatherListView {
 
             PlasmaCore.SvgItem {
                 id: icon
-                svg: mySvg
+                svg: svg
                 elementId: rowData.icon
                 height: nativeHeight
                 width: nativeWidth
