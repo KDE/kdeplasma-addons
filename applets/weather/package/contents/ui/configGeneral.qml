@@ -86,7 +86,7 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 0
                 Layout.column: 0
-                horizontalAlignment: Text.AlignRight
+                Layout.alignment: Qt.AlignRight
                 text: i18n("Location:")
             }
             QtControls.ComboBox {
@@ -120,7 +120,7 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 2
                 Layout.column: 0
-                horizontalAlignment: Text.AlignRight
+                Layout.alignment: Qt.AlignRight
                 text: i18n("Update every:")
             }
             QtControls.SpinBox {
@@ -150,7 +150,7 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 0
                 Layout.column: 0
-                horizontalAlignment: Text.AlignRight
+                Layout.alignment: Qt.AlignRight
                 text: i18n("Temperature:")
             }
 
@@ -166,7 +166,7 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 1
                 Layout.column: 0
-                horizontalAlignment: Text.AlignRight
+                Layout.alignment: Qt.AlignRight
                 text: i18n("Pressure:")
             }
 
@@ -182,7 +182,7 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 2
                 Layout.column: 0
-                horizontalAlignment: Text.AlignRight
+                Layout.alignment: Qt.AlignRight
                 text: i18n("Wind speed:")
             }
 
@@ -198,7 +198,7 @@ ColumnLayout {
             QtControls.Label {
                 Layout.row: 3
                 Layout.column: 0
-                horizontalAlignment: Text.AlignRight
+                Layout.alignment: Qt.AlignRight
                 text: i18n("Visibility:")
             }
 
