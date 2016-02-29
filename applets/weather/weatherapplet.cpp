@@ -52,8 +52,6 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         : WeatherPopupApplet(parent, args)
         , m_currentWeatherIconName("weather-none-available")
 {
-    // PORT!
-//     setAspectRatioMode(Plasma::IgnoreAspectRatio);
 }
 
 void WeatherApplet::init()
