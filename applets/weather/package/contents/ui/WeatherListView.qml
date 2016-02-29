@@ -23,7 +23,8 @@ Column {
     property alias model: repeater.model
     property Component delegate
     property bool roundedRows: true
-    property int rowHeight: 18
+    // ensure text fits in rectangle, relies on delegates only using labels with theme.defaultFont
+    property int rowHeight: theme.mSize(theme.defaultFont).height
 
     spacing: (root.height - (repeater.count*rowHeight)) / (repeater.count-1)
 
