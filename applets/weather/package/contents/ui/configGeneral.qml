@@ -113,7 +113,7 @@ ColumnLayout {
                 }
 
                 QtControls.Button {
-                    text: "Search"
+                    text: i18n("Search")
                     onClicked: searchLocation();
                 }
             }
