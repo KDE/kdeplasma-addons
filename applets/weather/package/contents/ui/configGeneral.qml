@@ -108,7 +108,6 @@ ColumnLayout {
 
                 PlasmaComponents.BusyIndicator {
                     id: busy
-                    Layout.alignment: Qt.AlignRight
                     visible: locationListModel.validatingInput
                 }
 
@@ -144,8 +143,6 @@ ColumnLayout {
         Layout.fillWidth: true
 
         GridLayout {
-            Layout.fillWidth: false // Layout thinks it's smart whereas it's not
-            Layout.alignment: Qt.AlignLeft
             columns: 2
 
             QtControls.Label {
