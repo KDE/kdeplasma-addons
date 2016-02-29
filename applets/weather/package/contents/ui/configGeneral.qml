@@ -80,8 +80,8 @@ ColumnLayout {
         Layout.fillWidth: true
 
         GridLayout {
-            Layout.alignment: Qt.AlignLeft
-            columns: 3
+            columns: 2
+            anchors.fill: parent
 
             QtControls.Label {
                 Layout.row: 0
@@ -89,32 +89,33 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
                 text: i18n("Location:")
             }
+
             QtControls.ComboBox {
                 id: locationComboBox
                 Layout.row: 0
                 Layout.column: 1
-                Layout.columnSpan: 2
                 Layout.fillWidth: true
-                // TODO: make use of all width available
                 editable: true
                 model: locationListModel
                 textRole: "display"
                 onCurrentIndexChanged: generalConfigPage.configurationChanged();
             }
 
-            PlasmaComponents.BusyIndicator {
-                id: busy
+            RowLayout {
                 Layout.row: 1
                 Layout.column: 1
                 Layout.alignment: Qt.AlignRight
-                visible: locationListModel.validatingInput
-            }
 
-            QtControls.Button {
-                Layout.row: 1
-                Layout.column: 2
-                text: "Search"
-                onClicked: searchLocation();
+                PlasmaComponents.BusyIndicator {
+                    id: busy
+                    Layout.alignment: Qt.AlignRight
+                    visible: locationListModel.validatingInput
+                }
+
+                QtControls.Button {
+                    text: "Search"
+                    onClicked: searchLocation();
+                }
             }
 
             QtControls.Label {
