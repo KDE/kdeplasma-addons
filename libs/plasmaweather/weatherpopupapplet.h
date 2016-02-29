@@ -137,11 +137,11 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 
         void weatherDataEngineChanged(Plasma::DataEngine* weatherDataEngine);
 
-    protected:
+    private:
         /**
          * Connects applet to dataengine
          */
-        virtual void connectToEngine();
+        void connectToEngine();
 
     private:
         class Private;
