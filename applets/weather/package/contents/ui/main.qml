@@ -17,15 +17,14 @@
 
 import QtQuick 2.1
 
+import QtQuick.Layouts 1.0
+
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     id: root
-
-    property int minimumWidth: 373
-    property int minimumHeight: 272
 
     Plasmoid.icon: plasmoid.nativeInterface.currentWeatherIconName
     Plasmoid.toolTipMainText: plasmoid.nativeInterface.currentWeatherToolTipMainText
@@ -46,6 +45,10 @@ Item {
 
     Plasmoid.fullRepresentation: Item {
         id: fullRoot
+        Layout.minimumWidth: units.gridUnit * 12
+        Layout.minimumHeight: units.gridUnit * 12
+        Layout.preferredWidth: Layout.minimumWidth * 1.5
+        Layout.preferredHeight: Layout.minimumHeight * 1.5
 
         TopPanel {
             id: panel
