@@ -93,10 +93,11 @@ Item {
             anchors {
                 top: tabBar.visible ? tabBar.bottom : tabBar.top
                 bottom: courtesyLabel.top
+                left: parent.left
+                right: parent.right
                 topMargin: units.largeSpacing
                 bottomMargin: units.largeSpacing
             }
-            width: panel.width
             FiveDaysView {
                 id: fiveDaysView
                 anchors.fill: parent
