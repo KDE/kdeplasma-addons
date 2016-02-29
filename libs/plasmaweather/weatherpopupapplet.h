@@ -123,11 +123,6 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
         virtual void configChanged();
 
     Q_SIGNALS:
-        /**
-         * Emitted when the applet begins a fetch for a new weather source
-         */
-        void newWeatherSource();
-
         void sourceChanged(const QString &source);
         void updateIntervalChanged(int updateInterval);
         void temperatureUnitIdChanged(int temperatureUnitId);

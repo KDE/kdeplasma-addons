@@ -231,7 +231,6 @@ void WeatherPopupApplet::connectToEngine()
         d->timeoutNotification = nullptr;
     }
 
-    emit newWeatherSource();
     const bool missingLocation = d->source.isEmpty();
 
     if (missingLocation) {
