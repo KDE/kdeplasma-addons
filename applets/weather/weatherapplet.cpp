@@ -59,6 +59,12 @@ void WeatherApplet::init()
     resetPanelModel();
 
     WeatherPopupApplet::init();
+
+    // workaround for now to ensure "Please Configure" tooltip
+    // TODO: remove when configurationRequired works
+    if (source().isEmpty()) {
+        updateToolTip();
+    }
 }
 
 WeatherApplet::~WeatherApplet()
@@ -406,6 +412,7 @@ void WeatherApplet::updateToolTip()
         currentWeatherToolTipSubText = currentWeatherToolTipSubText.trimmed();
     } else {
         currentWeatherToolTipMainText = i18nc("Shown when you have not set a weather provider", "Please Configure");
+        setCurrentWeatherIconName("weather-none-available");
     }
 
     if (m_currentWeatherToolTipMainText != currentWeatherToolTipMainText) {
