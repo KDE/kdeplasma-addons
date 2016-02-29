@@ -122,6 +122,8 @@ Item {
             anchors {
                 bottom: parent.bottom
                 right: parent.right
+                // matching round ends of bars behind data rows
+                rightMargin: units.smallSpacing
             }
             font {
                 pointSize: theme.smallestFont.pointSize
