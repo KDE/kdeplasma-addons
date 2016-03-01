@@ -30,7 +30,7 @@ ColumnLayout {
 
     function saveConfig() {
         // only pick a new source if there is one selected in the locationComboBox
-        if (locationComboBox.count && locationComboBox.currentIndex != -1) {
+        if (locationComboBox.count && locationComboBox.currentIndex !== -1) {
             plasmoid.nativeInterface.source = locationListModel.valueForListIndex(locationComboBox.currentIndex);
         }
 
@@ -56,8 +56,8 @@ ColumnLayout {
 
     function handleLocationSearchDone(success, searchString) {
         // nothing selected yet or no new string entered?
-        if (locationComboBox.currentIndex == -1 &&
-            locationComboBox.editText == searchString) {
+        if (locationComboBox.currentIndex === -1 &&
+            locationComboBox.editText === searchString) {
             if (success) {
                 // we would like to force popup of combobox here
                 // instead pick first, to show some result
@@ -117,7 +117,7 @@ ColumnLayout {
                 model: locationListModel
                 textRole: "display"
                 onActivated: {
-                    if (index != -1) {
+                    if (index !== -1) {
                         generalConfigPage.configurationChanged();
                     }
                 }

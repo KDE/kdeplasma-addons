@@ -32,24 +32,24 @@ WeatherListView {
             model: rowData
 
             Loader {
-                height: rowIndex == 1 ? parent.height + root.spacing : parent.height
+                height: rowIndex === 1 ? parent.height + root.spacing : parent.height
                 width: parent.width / rowRepeater.count
-                sourceComponent: rowIndex == 1 ? iconDelegate : textDelegate
+                sourceComponent: rowIndex === 1 ? iconDelegate : textDelegate
                 onLoaded: {
-                    if (rowIndex == 1) {
+                    if (rowIndex === 1) {
                         var values = modelData.split("|");
                         item.source = values[0];
                         item.toolTip = values[1];
                     } else {
                         var txt = modelData;
-                        if (txt.indexOf("nt") != -1) {
+                        if (txt.indexOf("nt") !== -1) {
                             txt = txt.replace(" nt", "");
                         }
 
                         item.text = txt;
                     }
 
-                    if (rowIndex == 0) {
+                    if (rowIndex === 0) {
                         item.font.bold = true;
                     }
                 }
@@ -62,7 +62,7 @@ WeatherListView {
 
         PlasmaComponents.Label {
             function checkTitle(txt) {
-                return txt.indexOf("ight") != -1 || txt.indexOf("nite") != -1;
+                return txt.indexOf("ight") !== -1 || txt.indexOf("nite") !== -1;
             }
 
             // resetting the default height set by PlasmaComponents.Label,
