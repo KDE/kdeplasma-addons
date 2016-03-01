@@ -37,3 +37,4 @@ add_subdirectory(quicklaunch)
 # add_subdirectory(eyes)
 
 add_subdirectory(userswitcher)
+add_subdirectory(weather)

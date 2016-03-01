@@ -21,21 +21,28 @@
 #define WEATHERPOPUPAPPLET_HEADER
 
 #include <KUnitConversion/Unit>
-#include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
+#include <Plasma/Applet>
 
 #include "plasmaweather_export.h"
 
-class WeatherConfig;
 
 /**
  * @class WeatherPopupApplet <plasmaweather/weatherpopupapplet.h>
  *
  * @short Base class for Weather Applets
  */
-class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
+class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 {
     Q_OBJECT
+    Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged);
+    Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval NOTIFY updateIntervalChanged);
+    Q_PROPERTY(int temperatureUnitId READ temperatureUnitId WRITE setTemperatureUnitId NOTIFY temperatureUnitIdChanged);
+    Q_PROPERTY(int pressureUnitId READ pressureUnitId WRITE setPressureUnitId NOTIFY pressureUnitIdChanged);
+    Q_PROPERTY(int windSpeedUnitId READ windSpeedUnitId WRITE setWindSpeedUnitId NOTIFY windSpeedUnitIdChanged);
+    Q_PROPERTY(int visibilityUnitId READ visibilityUnitId WRITE setVisibilityUnitId NOTIFY visibilityUnitIdChanged);
+    Q_PROPERTY(Plasma::DataEngine* weatherDataEngine READ weatherDataEngine NOTIFY weatherDataEngineChanged)
+
     public:
         WeatherPopupApplet(QObject *parent, const QVariantList &args);
         ~WeatherPopupApplet();
@@ -45,40 +52,58 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
          */
         virtual void init();
 
-        /**
-         * Reimplemented from Plasma::Applet
-         */
-        virtual void createConfigurationInterface(KConfigDialog *parent);
-
+    public:
         /**
          * @return pressure unit
          **/
-        KUnitConversion::UnitPtr pressureUnit();
+        KUnitConversion::Unit pressureUnit();
 
         /**
          * @return temperature unit
          **/
-        KUnitConversion::UnitPtr temperatureUnit();
+        KUnitConversion::Unit temperatureUnit();
 
         /**
          * @return speed unit
          **/
-        KUnitConversion::UnitPtr speedUnit();
+        KUnitConversion::Unit speedUnit();
 
         /**
          * @return visibility unit
          **/
-        KUnitConversion::UnitPtr visibilityUnit();
+        KUnitConversion::Unit visibilityUnit();
+
+        /**
+         * @return update interval
+         **/
+        int updateInterval() const;
 
         /**
          * @return condition icon with guessed value if it was empty
          **/
         QString conditionIcon();
 
+        QString source() const;
+        void setSource(const QString &source);
+
         /**
-         * @return weather config dialog widget
+         * Sets update interval
          **/
-        WeatherConfig* weatherConfig();
+        void setUpdateInterval(int updateInterval);
+
+        int temperatureUnitId() const;
+        void setTemperatureUnitId(int temperatureUnitId);
+
+        int pressureUnitId() const;
+        void setPressureUnitId(int pressureUnitId);
+
+        int windSpeedUnitId() const;
+        void setWindSpeedUnitId(int windSpeedUnitId);
+
+        int visibilityUnitId() const;
+        void setVisibilityUnitId(int visibilityUnitId);
+
+        Plasma::DataEngine* weatherDataEngine() const;
 
     public Q_SLOTS:
         /**
@@ -98,16 +123,20 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
         virtual void configChanged();
 
     Q_SIGNALS:
-        /**
-         * Emitted when the applet begins a fetch for a new weather source
-         */
-        void newWeatherSource();
+        void sourceChanged(const QString &source);
+        void updateIntervalChanged(int updateInterval);
+        void temperatureUnitIdChanged(int temperatureUnitId);
+        void pressureUnitIdChanged(int pressureUnitId);
+        void windSpeedUnitIdChanged(int windSpeedUnitId);
+        void visibilityUnitIdChanged(int visibilityUnitId);
 
-    protected:
+        void weatherDataEngineChanged(Plasma::DataEngine* weatherDataEngine);
+
+    private:
         /**
          * Connects applet to dataengine
          */
-        virtual void connectToEngine();
+        void connectToEngine();
 
     private:
         class Private;
@@ -115,6 +144,7 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
 
         Q_PRIVATE_SLOT(d, void locationReady(const QString &source))
         Q_PRIVATE_SLOT(d, void giveUpBeingBusy())
+        Q_PRIVATE_SLOT(d, void onTimeoutNotificationClosed())
 };
 
 #endif

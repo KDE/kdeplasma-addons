@@ -1,5 +1,5 @@
 /*
- * Copyright 2012  Luís Gabriel Lima <lampih@gmail.com>
+ * Copyright 2016  Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,32 +17,12 @@
 
 import QtQuick 2.1
 
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.configuration 2.0
 
-Column {
-    property alias model: repeater.model
-    property alias title: title.text
-
-    anchors.left: parent.left
-    anchors.right: parent.right
-
-    PlasmaComponents.Label {
-        id: title
-        font.bold: true
-    }
-
-    Repeater {
-        id: repeater
-
-        PlasmaComponents.Label {
-            font.underline: true
-            color: theme.linkColor
-            text: modelData.description
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: Qt.openUrlExternally(modelData.info);
-            }
-        }
+ConfigModel {
+    ConfigCategory {
+        name: i18n("General")
+        icon: "weather-clear"
+        source: "configGeneral.qml"
     }
 }

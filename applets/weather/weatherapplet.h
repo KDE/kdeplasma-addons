@@ -23,63 +23,68 @@
 
 #include <plasmaweather/weatherpopupapplet.h>
 
-namespace Plasma
-{
-    class DeclarativeWidget;
-}
-
 class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
+    Q_PROPERTY(QString currentWeatherIconName READ currentWeatherIconName NOTIFY currentWeatherIconNameChanged)
+    Q_PROPERTY(QString currentWeatherToolTipMainText READ currentWeatherToolTipMainText NOTIFY currentWeatherToolTipMainTextChanged)
+    Q_PROPERTY(QString currentWeatherToolTipSubText READ currentWeatherToolTipSubText NOTIFY currentWeatherToolTipSubTextChanged)
+
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY modelUpdated)
+
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
 
-    void init();
-    QGraphicsWidget *graphicsWidget();
+public: // Plasma::Applet API
+    void init() override;
+
+public:
+    QString currentWeatherIconName() const { return m_currentWeatherIconName; }
+    QString currentWeatherToolTipMainText() const { return m_currentWeatherToolTipMainText; }
+    QString currentWeatherToolTipSubText() const { return m_currentWeatherToolTipSubText; }
+
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
     QVariantList detailsModel() const { return m_detailsModel; }
     QVariantList noticesModel() const { return m_noticesModel; }
 
-signals:
+Q_SIGNALS:
     void modelUpdated();
+    void currentWeatherIconNameChanged(const QString &currentWeatherIconName);
+    void currentWeatherToolTipMainTextChanged(const QString &currentWeatherToolTipMainText);
+    void currentWeatherToolTipSubTextChanged(const QString &currentWeatherToolTipSubText);
 
-public Q_SLOTS:
+public Q_SLOTS: // as expected by connected dataengines
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
-    void invokeBrowser(const QString &url = QString()) const;
 
 protected Q_SLOTS:
     void configAccepted();
-    void toolTipAboutToShow();
-
-protected:
-    void constraintsEvent(Plasma::Constraints constraints);
 
 private:
     bool isValidData(const QVariant &data) const;
+    void setCurrentWeatherIconName(const QString &currentWeatherIconName);
     void resetPanelModel();
     void updatePanelModel(const Plasma::DataEngine::Data &data);
     void updateFiveDaysModel(const Plasma::DataEngine::Data &data);
     void updateDetailsModel(const Plasma::DataEngine::Data &data);
     void updateNoticesModel(const Plasma::DataEngine::Data &data);
-    QString convertTemperature(KUnitConversion::UnitPtr format, QString value,
+    void updateToolTip();
+    QString convertTemperature(KUnitConversion::Unit format, const QString &value,
                                int type, bool rounded = false, bool degreesOnly = false);
 
-    Plasma::DeclarativeWidget *m_declarativeWidget;
-
-    QString m_creditUrl;
+private:
+    QString m_currentWeatherIconName;
+    QString m_currentWeatherToolTipMainText;
+    QString m_currentWeatherToolTipSubText;
 
     QVariantMap m_panelModel;
     QVariantList m_fiveDaysModel;
     QVariantList m_detailsModel;
     QVariantList m_noticesModel;
 };
-
-K_EXPORT_PLASMA_APPLET(weather, WeatherApplet)
 
 #endif

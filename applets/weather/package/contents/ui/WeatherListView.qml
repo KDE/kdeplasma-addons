@@ -15,8 +15,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import QtQuick 1.1
-import "Utils.js" as Utils
+import QtQuick 2.1
 
 Column {
     id: root
@@ -24,7 +23,8 @@ Column {
     property alias model: repeater.model
     property Component delegate
     property bool roundedRows: true
-    property int rowHeight: 18
+    // ensure text fits in rectangle, relies on delegates only using labels with theme.defaultFont
+    property int rowHeight: theme.mSize(theme.defaultFont).height
 
     spacing: (root.height - (repeater.count*rowHeight)) / (repeater.count-1)
 
@@ -35,12 +35,12 @@ Column {
             id: rect
             height: root.rowHeight
             width: root.width
-            radius: root.roundedRows ? 5 : 0
-            color: Utils.setAlphaF(theme.textColor, ((index+1)/repeater.count)*0.3);
+            radius: root.roundedRows ? units.smallSpacing : 0
+            color: Qt.rgba(theme.textColor.r, theme.textColor.g, theme.textColor.b, ((index+1)/repeater.count)*0.3)
 
             Loader {
                 property int rowIndex: index
-                property variant rowData: modelData
+                property var rowData: modelData
                 anchors.fill: parent
                 sourceComponent: root.delegate
             }

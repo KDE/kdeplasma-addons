@@ -1,5 +1,5 @@
 /*
- * Copyright 2012  Luís Gabriel Lima <lampih@gmail.com>
+ * Copyright 2016  Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,23 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.1
+#ifndef PLUGIN_H
+#define PLUGIN_H
 
-Column {
-    id: root
+#include <QQmlExtensionPlugin>
 
-    property var model
+class WeatherPlugin : public QQmlExtensionPlugin
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-    spacing: units.largeSpacing
-    visible: model.length > 0 && model[0].length > 0 && model[1].length > 0
+public:
+    void registerTypes(const char *uri);
+};
 
-    Notice {
-        title: i18nc("weather warnings", "Warnings Issued:")
-        model: root.model[0]
-    }
-
-    Notice {
-        title: i18nc("weather watches" ,"Watches Issued:")
-        model: root.model[1]
-    }
-}
+#endif // PLUGIN_H

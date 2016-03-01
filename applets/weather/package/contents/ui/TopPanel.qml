@@ -15,71 +15,70 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1 as QtExtraComponents
+import QtQuick 2.1
+
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 PlasmaCore.FrameSvgItem {
-    property variant model
+    property var model
 
     imagePath: "widgets/frame"
     prefix: "plain"
-    visible: model.location.length > 0
+    visible: !!model.location
 
-    QtExtraComponents.QIconItem {
-        icon: model.conditionIcon
+    PlasmaCore.IconItem {
+        source: model.conditionIcon
         height: parent.height
         width: height
     }
 
-    Text {
+    PlasmaExtras.Heading {
         id: locationLabel
         anchors {
             top: parent.top
             left: parent.left
             right: tempLabel.visible ? forecastTempsLabel.left : parent.right
-            topMargin: 5
+            topMargin: units.smallSpacing
             leftMargin: parent.width * 0.21
         }
-        font.bold: true
-        color: theme.textColor
+        font {
+            bold: true
+            pointSize: theme.defaultFont.pointSize * 1.4
+        }
         text: model.location
         elide: Text.ElideRight
-
-        Component.onCompleted: font.pointSize = Math.floor(font.pointSize * 1.4);
     }
 
-    Text {
+    PlasmaComponents.Label {
         id: conditionLabel
         anchors {
             top: parent.top
             left: locationLabel.left
             topMargin: parent.height * 0.6
         }
-        color: theme.textColor
         text: model.conditions
     }
 
-    Text {
+    PlasmaComponents.Label {
         id: tempLabel
         anchors {
             right: parent.right
             top: locationLabel.top
-            rightMargin: 5
+            rightMargin: units.smallSpacing
         }
         font: locationLabel.font
-        color: theme.textColor
         text: model.temp
     }
 
-    Text{
+    PlasmaComponents.Label {
         id: forecastTempsLabel
         anchors {
             right: tempLabel.right
             top: conditionLabel.top
         }
         font.pointSize: theme.smallestFont.pointSize
-        color: theme.textColor
         text: model.forecastTemps
     }
 }

@@ -18,15 +18,15 @@
  */
 
 #include "weathervalidator.h"
-#include "weatheri18ncatalog.h"
-#include <KInputDialog>
+
+#include <KLocalizedString>
 #include <KMessageBox>
 
 class WeatherValidator::Private
 {
 public:
     Private()
-        : dataengine(0),
+        : dataengine(nullptr),
           ion(QLatin1String( "bbcukmet" ))
     {}
 
@@ -36,11 +36,10 @@ public:
     bool silent;
 };
 
-WeatherValidator::WeatherValidator(QWidget *parent)
+WeatherValidator::WeatherValidator(QObject *parent)
     : QObject(parent)
     , d(new Private())
 {
-    Weatheri18nCatalog::loadCatalog();
 }
 
 WeatherValidator::~WeatherValidator()

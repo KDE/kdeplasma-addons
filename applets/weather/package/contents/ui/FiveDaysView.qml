@@ -15,10 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1 as QtExtraComponents
-import "Utils.js" as Utils
+import QtQuick 2.1
+
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 WeatherListView {
     id: root
@@ -32,24 +32,26 @@ WeatherListView {
             model: rowData
 
             Loader {
-                height: rowIndex == 1 ? parent.height + root.spacing : parent.height
+                height: rowIndex === 1 ? parent.height + root.spacing : parent.height
                 width: parent.width / rowRepeater.count
-                sourceComponent: rowIndex == 1 ? iconDelegate : textDelegate
+                sourceComponent: rowIndex === 1 ? iconDelegate : textDelegate
                 onLoaded: {
-                    if (rowIndex == 1) {
+                    if (rowIndex === 1) {
                         var values = modelData.split("|");
-                        item.icon = values[0];
+                        item.source = values[0];
                         item.toolTip = values[1];
                     } else {
                         var txt = modelData;
-                        if (txt.indexOf("nt") != -1)
+                        if (txt.indexOf("nt") !== -1) {
                             txt = txt.replace(" nt", "");
+                        }
 
                         item.text = txt;
                     }
 
-                    if (rowIndex == 0)
+                    if (rowIndex === 0) {
                         item.font.bold = true;
+                    }
                 }
             }
         }
@@ -58,15 +60,17 @@ WeatherListView {
     Component {
         id: textDelegate
 
-        Text {
+        PlasmaComponents.Label {
             function checkTitle(txt) {
-                return txt.indexOf("ight") != -1 || txt.indexOf("nite") != -1;
+                return txt.indexOf("ight") !== -1 || txt.indexOf("nite") !== -1;
             }
 
+            // resetting the default height set by PlasmaComponents.Label,
+            // which would result in first item in row with bad vertical position
+            height: undefined
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            color: theme.textColor
             opacity: font.bold && checkTitle(text) ? 0.5 : 1
         }
     }
@@ -74,7 +78,7 @@ WeatherListView {
     Component {
         id: iconDelegate
 
-        QtExtraComponents.QIconItem {
+        PlasmaCore.IconItem {
             property alias toolTip: iconToolTip.mainText
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -root.spacing/2

@@ -1,6 +1,8 @@
 
 add_subdirectory(plasmaweather)
-add_subdirectory(rtm)
+
+# other libs are still unported
+return()
 
 add_subdirectory(lancelot)
 

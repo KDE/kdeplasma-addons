@@ -15,9 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1 as QtExtraComponents
+import QtQuick 2.1
+
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 WeatherListView {
     id: root
@@ -27,26 +28,25 @@ WeatherListView {
     delegate: Item {
         anchors.fill: parent
 
-        Item {
+        Row {
             anchors.centerIn: parent
             height: parent.height
             width: childrenRect.width
+            spacing: units.smallSpacing
 
-            QtExtraComponents.QPixmapItem {
+            PlasmaCore.SvgItem {
                 id: icon
-                pixmap: svg.pixmap(rowData.icon)
+                svg: svg
+                elementId: rowData.icon
                 height: nativeHeight
                 width: nativeWidth
-                visible: rowData.icon.length > 0
+                visible: !!rowData.icon
             }
 
-            Text {
+            PlasmaComponents.Label {
                 anchors {
-                    left: icon.right
-                    leftMargin: 2
                     verticalCenter: parent.verticalCenter
                 }
-                color: theme.textColor
                 text: rowData.text
             }
         }

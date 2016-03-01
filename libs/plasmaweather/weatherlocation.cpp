@@ -18,15 +18,15 @@
  */
 
 #include "weatherlocation.h"
+
 #include "weathervalidator.h"
-#include "weatheri18ncatalog.h"
 
 class WeatherLocation::Private
 {
 public:
     Private(WeatherLocation *location)
         : q(location),
-          locationEngine(0)
+          locationEngine(nullptr)
     {}
 
     void validatorFinished(const QMap<QString, QString> &results)
@@ -48,7 +48,6 @@ WeatherLocation::WeatherLocation(QObject *parent)
     : QObject(parent)
     , d(new Private(this))
 {
-    Weatheri18nCatalog::loadCatalog();
     QObject::connect(&d->validator, SIGNAL(finished(QMap<QString,QString>)),
                      this, SLOT(validatorFinished(QMap<QString,QString>)));
 }
@@ -86,6 +85,7 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
     if (city.contains(QLatin1Char( ',' )))
         city.truncate(city.indexOf(QLatin1Char( ',' )) - 1);
 
+    // TODO: relies on bbcukmet ion engine, is that always available?
     if (!city.isEmpty()) {
         d->validator.validate(QLatin1String( "bbcukmet" ), city, true);
         return;
@@ -94,3 +94,6 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
     emit finished(QString());
 }
 
+
+// needed due to private slots
+#include "moc_weatherlocation.cpp"

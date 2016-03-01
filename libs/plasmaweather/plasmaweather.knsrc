@@ -1,8 +1,0 @@
-[KNewStuff2]
-ProvidersUrl=http://www.sh0n.net/spstarr/khotnewstuff/plasmaweather-providers.xml
-ChecksumPolicy=ifpossible
-SignaturePolicy=ifpossible
-TargetDir=plasma/dataengines
-Uncompress=never
-InstallationCommand=plasmapkg -t dataengine -u %f
-UninstallCommand=plasmapkg -t dataengine -r %f
