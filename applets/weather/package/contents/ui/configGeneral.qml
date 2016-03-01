@@ -26,6 +26,8 @@ import org.kde.plasma.private.weather 1.0
 ColumnLayout {
     id: generalConfigPage
 
+    property string locationEditTextOnSearchStart
+
     signal configurationChanged
 
     function saveConfig() {
@@ -50,19 +52,27 @@ ColumnLayout {
     }
 
     function searchLocation() {
-        locationListModel.searchLocations(locationComboBox.editText);
+        var searchString = locationComboBox.editText;
+        // avoid automatic selection once model is refilled
         locationComboBox.currentIndex = -1;
+        // changing the currentIndex to -1 sometimes resets the edittext, so just store the state
+        locationEditTextOnSearchStart = locationComboBox.editText;
+
+        locationListModel.searchLocations(searchString);
     }
 
     function handleLocationSearchDone(success, searchString) {
         // nothing selected yet or no new string entered?
         if (locationComboBox.currentIndex === -1 &&
-            locationComboBox.editText === searchString) {
+            locationComboBox.editText === locationEditTextOnSearchStart) {
             if (success) {
                 // we would like to force popup of combobox here
                 // instead pick first, to show some result
                 locationComboBox.currentIndex = 0;
                 generalConfigPage.configurationChanged();
+            } else {
+                // show old search string
+                locationComboBox.editText = searchString;
             }
         }
     }
