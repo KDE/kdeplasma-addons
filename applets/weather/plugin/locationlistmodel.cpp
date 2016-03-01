@@ -159,13 +159,13 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
     ++m_checkedInCount;
     if (m_checkedInCount >= m_validators.count()) {
         m_validatingInput = false;
-        if (m_locations.empty()) {
+        const bool success = !m_locations.empty();
+        if (!success) {
             beginResetModel();
             m_locations.append(LocationItem(i18n("No weather stations found for '%1'", m_searchString), QString()));
             endResetModel();
-
-            emit noLocationsFound(m_searchString);
         }
+        emit locationSearchDone(success, m_searchString);
         emit validatingInputChanged(false);
     }
 }

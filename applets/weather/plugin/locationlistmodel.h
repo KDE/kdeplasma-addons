@@ -66,7 +66,7 @@ public:
 Q_SIGNALS:
     void validatingInputChanged(bool validatingInput);
     void dataEngineChanged(Plasma::DataEngine* dataEngine);
-    void noLocationsFound(const QString &searchString);
+    void locationSearchDone(bool success, const QString &searchString);
 
 private:
     void addSources(const QMap<QString, QString> &sources);

@@ -54,8 +54,17 @@ ColumnLayout {
         locationComboBox.currentIndex = -1;
     }
 
-    function handleNoLocationsFound(searchString) {
-        locationComboBox.editText = searchString;
+    function handleLocationSearchDone(success, searchString) {
+        // nothing selected yet or no new string entered?
+        if (locationComboBox.currentIndex == -1 &&
+            locationComboBox.editText == searchString) {
+            if (success) {
+                // we would like to force popup of combobox here
+                // instead pick first, to show some result
+                locationComboBox.currentIndex = 0;
+                generalConfigPage.configurationChanged();
+            }
+        }
     }
 
     Component.onCompleted: {
@@ -80,7 +89,7 @@ ColumnLayout {
     LocationListModel {
         id: locationListModel
         dataEngine: plasmoid.nativeInterface.weatherDataEngine;
-        onNoLocationsFound: handleNoLocationsFound(searchString);
+        onLocationSearchDone: handleLocationSearchDone(success, searchString);
     }
 
     QtControls.GroupBox {
@@ -107,7 +116,11 @@ ColumnLayout {
                 editable: true
                 model: locationListModel
                 textRole: "display"
-                onCurrentIndexChanged: generalConfigPage.configurationChanged();
+                onActivated: {
+                    if (index != -1) {
+                        generalConfigPage.configurationChanged();
+                    }
+                }
             }
 
             RowLayout {
