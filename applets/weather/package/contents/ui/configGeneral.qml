@@ -29,7 +29,10 @@ ColumnLayout {
     signal configurationChanged
 
     function saveConfig() {
-        plasmoid.nativeInterface.source = locationListModel.valueForListIndex(locationComboBox.currentIndex);
+        // only pick a new source if there is one selected in the locationComboBox
+        if (locationComboBox.count && locationComboBox.currentIndex != -1) {
+            plasmoid.nativeInterface.source = locationListModel.valueForListIndex(locationComboBox.currentIndex);
+        }
 
         plasmoid.nativeInterface.updateInterval = updateIntervalSpin.value;
 
@@ -48,6 +51,11 @@ ColumnLayout {
 
     function searchLocation() {
         locationListModel.searchLocations(locationComboBox.editText);
+        locationComboBox.currentIndex = -1;
+    }
+
+    function handleNoLocationsFound(searchString) {
+        locationComboBox.editText = searchString;
     }
 
     Component.onCompleted: {
@@ -72,6 +80,7 @@ ColumnLayout {
     LocationListModel {
         id: locationListModel
         dataEngine: plasmoid.nativeInterface.weatherDataEngine;
+        onNoLocationsFound: handleNoLocationsFound(searchString);
     }
 
     QtControls.GroupBox {

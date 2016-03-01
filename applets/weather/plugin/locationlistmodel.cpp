@@ -77,13 +77,15 @@ QString LocationListModel::valueForListIndex(int listIndex) const
     return QString();
 }
 
-void LocationListModel::searchLocations(const QString &text)
+void LocationListModel::searchLocations(const QString &searchString)
 {
     m_checkedInCount = 0;
 
-    if (text.isEmpty()) {
+    if (searchString.isEmpty()) {
         return;
     }
+
+    m_searchString = searchString;
 
     if (!m_validatingInput) {
         m_validatingInput = true;
@@ -96,7 +98,7 @@ void LocationListModel::searchLocations(const QString &text)
 
     // TODO: reset any currently running validation for older input
     foreach (WeatherValidator *validator, m_validators) {
-        validator->validate(text, true);
+        validator->validate(m_searchString, true);
     }
 }
 
@@ -157,13 +159,13 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
     ++m_checkedInCount;
     if (m_checkedInCount >= m_validators.count()) {
         m_validatingInput = false;
-        // TODO: port this to QML
-//         if (ui.locationCombo->count() == 0) {
-//             const QString current = ui.locationCombo->currentText();
-//             ui.locationCombo->addItem(i18n("No weather stations found for '%1'", current));
-//             ui.locationCombo->lineEdit()->setText(current);
-//         }
-//         ui.locationCombo->showPopup();
+        if (m_locations.empty()) {
+            beginResetModel();
+            m_locations.append(LocationItem(i18n("No weather stations found for '%1'", m_searchString), QString()));
+            endResetModel();
+
+            emit noLocationsFound(m_searchString);
+        }
         emit validatingInputChanged(false);
     }
 }

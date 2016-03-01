@@ -61,11 +61,12 @@ public:
 
 public:
     Q_INVOKABLE QString valueForListIndex(int listIndex) const;
-    Q_INVOKABLE void searchLocations(const QString &text);
+    Q_INVOKABLE void searchLocations(const QString &searchString);
 
 Q_SIGNALS:
     void validatingInputChanged(bool validatingInput);
     void dataEngineChanged(Plasma::DataEngine* dataEngine);
+    void noLocationsFound(const QString &searchString);
 
 private:
     void addSources(const QMap<QString, QString> &sources);
@@ -76,6 +77,7 @@ private:
 
     Plasma::DataEngine* m_dataengine;
     bool m_validatingInput;
+    QString m_searchString;
     int m_checkedInCount;
     QVector<WeatherValidator*> m_validators;
 };
