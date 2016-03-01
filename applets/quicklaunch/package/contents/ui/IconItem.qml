@@ -39,7 +39,6 @@ Item {
 
     DragAndDrop.DragArea {
         id: dragArea
-        anchors.margins: LayoutManager.itemPadding()
         width: Math.min(iconItem.width, iconItem.height)
         height: width
         enabled: !plasmoid.immutable
@@ -67,6 +66,7 @@ Item {
         MouseArea {
             id: mouseArea
             anchors.fill: parent
+            anchors.margins: LayoutManager.itemPadding()
             hoverEnabled: true
             acceptedButtons: Qt.LeftButton | Qt.RightButton
 
