@@ -23,6 +23,6 @@ target_link_libraries(plasmaweather
 )
 # TODO: find vars which would bump the version on every release, given ABI is unstable
 set_target_properties(plasmaweather PROPERTIES VERSION 2.0.0 SOVERSION 1)
-install(TARGETS plasmaweather ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS plasmaweather ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 # nothing outside of kdeplasma-addons uses this library, and the API is not stable -> do not install headers!
 #install(FILES ${plasmaweather_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/plasmaweather COMPONENT Devel)
