@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=Media frame
 Name[ca]=Marc multimèdia
+Name[ca@valencia]=Marc multimèdia
 Name[cs]=Rámešek médií
 Name[de]=Medien-Rahmen
+Name[en_GB]=Media frame
 Name[es]=Marco multimedia
 Name[fi]=Mediakehys
 Name[it]=Cornice media
@@ -21,8 +23,10 @@ Name[x-test]=xxMedia framexx
 Name[zh_CN]=媒体相框
 Comment=(Picture) Frame
 Comment[ca]=Marc (fotografies)
+Comment[ca@valencia]=Marc (fotografies)
 Comment[cs]=Rámeček (obrázku)
 Comment[de]=(Bilder)-Rahmen
+Comment[en_GB]=(Picture) Frame
 Comment[es]=Marco (de retrato)
 Comment[fi]=Kehys kuville ja muulle
 Comment[it]=(Immagine) Cornice
