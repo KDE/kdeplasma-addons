@@ -86,7 +86,8 @@ Item {
                     left: parent.left
                 }
 
-                width: height
+                width: units.iconSizes.medium
+                height: width
                 source: url == "quicklaunch:drop" ? "" : iconName
                 active: mouseArea.containsMouse
             }
@@ -186,6 +187,8 @@ Item {
                 horizontalAlignment: Text.AlignHLeft
                 visible: true
                 elide: Text.ElideRight
+                anchors.leftMargin: units.smallSpacing
+                anchors.rightMargin: units.smallSpacing
             }
         },
 
