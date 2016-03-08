@@ -73,7 +73,7 @@ Item {
         Layout.maximumWidth: isVertical ? Infinity : Layout.minimumWidth
         Layout.preferredWidth: isVertical ? undefined : Layout.minimumWidth
 
-        Layout.minimumHeight: isVertical ? label.height : 0
+        Layout.minimumHeight: isVertical ? label.height : theme.smallestFont.pixelSize
         Layout.maximumHeight: isVertical ? Layout.minimumHeight : Infinity
         Layout.preferredHeight: isVertical ? Layout.minimumHeight : theme.mSize(theme.defaultFont).height * 2
 
@@ -84,7 +84,7 @@ Item {
 
             readonly property int contentWidth: (icon.visible ? icon.width : 0) + (icon.visible && label.visible ? spacing : 0) + (label.visible ? label.contentWidth : 0)
 
-            anchors.fill: parent
+            anchors.centerIn: parent
             spacing: units.smallSpacing
 
             PlasmaCore.IconItem {
@@ -100,10 +100,11 @@ Item {
                 id: label
                 text: root.displayedName
                 height: compactRoot.height
+                horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.NoWrap
                 fontSizeMode: Text.VerticalFit
-                font.pointSize: tooSmall ? theme.defaultFont.pointSize : 1024
+                font.pixelSize: tooSmall ? theme.defaultFont.pixelSize : units.roundToIconSize(units.gridUnit * 2)
                 minimumPointSize: theme.smallesFont.pointSize
                 visible: root.showName
             }
