@@ -56,12 +56,9 @@ Item {
         case 0:
             currentDesktopSelectedGroup.current = doesNothingRadio;
             break;
+        default:
         case 1:
             currentDesktopSelectedGroup.current = showsDesktopRadio;
-            break;
-        default:
-        case 2:
-            currentDesktopSelectedGroup.current = showsDashboardRadio;
             break;
         }
     }
@@ -133,12 +130,6 @@ Item {
             exclusiveGroup: currentDesktopSelectedGroup
             text: i18n("Shows desktop")
             onCheckedChanged: if (checked) cfg_currentDesktopSelected = 1;
-        }
-        QtControls.RadioButton {
-            id: showsDashboardRadio
-            exclusiveGroup: currentDesktopSelectedGroup
-            text: i18n("Shows the dashboard")
-            onCheckedChanged: if (checked) cfg_currentDesktopSelected = 2;
         }
     }
     
