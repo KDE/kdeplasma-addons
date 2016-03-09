@@ -548,9 +548,6 @@ void ActivityPager::changeDesktop(int newDesktop)
             NETRootInfo info(QX11Info::connection(), 0);
             m_desktopDown = !m_desktopDown;
             info.setShowingDesktop(m_desktopDown);
-        } else if (m_currentDesktopSelected == ShowDashboard) {
-            QDBusInterface plasmaApp("org.kde.plasma-desktop", "/App");
-            plasmaApp.call("toggleDashboard");
         }
     } else if (newDesktop < m_controller->activities(KActivities::Info::Running).length()) {
         m_controller->setCurrentActivity(m_controller->activities(KActivities::Info::Running)[newDesktop]);
