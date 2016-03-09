@@ -211,7 +211,6 @@ WeatherPopupApplet::WeatherPopupApplet(QObject *parent, const QVariantList &args
     : Plasma::Applet(parent, args)
     , d(new Private(this))
 {
-    setHasConfigurationInterface(true);
 }
 
 WeatherPopupApplet::~WeatherPopupApplet()
