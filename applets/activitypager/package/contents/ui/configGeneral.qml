@@ -111,7 +111,7 @@ Item {
         }
 
         QtControls.Label {
-            text: i18n("Selecting current desktop:")
+            text: i18n("Selecting current activity:")
             Layouts.Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
         }
         QtControls.RadioButton {
