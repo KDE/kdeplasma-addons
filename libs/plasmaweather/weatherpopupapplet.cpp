@@ -233,6 +233,8 @@ void WeatherPopupApplet::connectToEngine()
     const bool missingLocation = d->source.isEmpty();
 
     if (missingLocation) {
+// TODO: fix WeatherLocation from using no longer existing bbcukmet ion for getting weather station for current position
+#if 0
         if (!d->location) {
             d->location = new WeatherLocation(this);
             connect(d->location, SIGNAL(finished(QString)), this, SLOT(locationReady(QString)));
@@ -242,10 +244,14 @@ void WeatherPopupApplet::connectToEngine()
             Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("geolocation") );
         d->location->setDataEngines(dataEngine, d->weatherEngine);
         d->location->getDefault();
+#endif
         QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
         if (graphicObject) {
             graphicObject->setProperty("busy", false);
         }
+        // TODO: remove once WeatherLocation is fixed above
+        // fake d->location returning no result
+        d->locationReady(QString());
     } else {
         delete d->location;
         d->location = nullptr;
