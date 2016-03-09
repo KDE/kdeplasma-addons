@@ -36,10 +36,16 @@ QtObject {
     Plasmoid.title: i18n("Show Desktop")
     Plasmoid.toolTipSubText: i18n("Show the Plasma desktop")
 
-    // Bug 354257 add minimize all context menu entry
-
     // QtObject has no default property
     property QtObject showdesktop: ShowDesktop { }
+
+    Component.onCompleted: {
+        plasmoid.setAction("minimizeall", i18n("Minimize All Windows"))
+    }
+
+    function action_minimizeall() {
+        showdesktop.minimizeAll()
+    }
 
     Plasmoid.fullRepresentation: PlasmaCore.ToolTipArea {
         Layout.minimumWidth: units.iconSizes.small

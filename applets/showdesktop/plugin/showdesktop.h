@@ -29,6 +29,7 @@ public:
     ~ShowDesktop();
 
     Q_INVOKABLE void showDesktop();
+    Q_INVOKABLE void minimizeAll();
 
 };
 

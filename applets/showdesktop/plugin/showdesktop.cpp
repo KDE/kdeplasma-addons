@@ -30,3 +30,10 @@ void ShowDesktop::showDesktop()
     KWindowSystem::setShowingDesktop(!KWindowSystem::showingDesktop());
 }
 
+void ShowDesktop::minimizeAll()
+{
+    const auto &windows = KWindowSystem::windows();
+    for (WId wid : windows) {
+        KWindowSystem::minimizeWindow(wid);
+    }
+}
