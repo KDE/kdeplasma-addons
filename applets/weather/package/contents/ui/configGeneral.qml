@@ -31,23 +31,25 @@ ColumnLayout {
     signal configurationChanged
 
     function saveConfig() {
+        var config = {};
+
         // only pick a new source if there is one selected in the locationComboBox
         if (locationComboBox.count && locationComboBox.currentIndex !== -1) {
-            plasmoid.nativeInterface.source = locationListModel.valueForListIndex(locationComboBox.currentIndex);
+            config.source = locationListModel.valueForListIndex(locationComboBox.currentIndex);
         }
 
-        plasmoid.nativeInterface.updateInterval = updateIntervalSpin.value;
+        config.updateInterval = updateIntervalSpin.value;
 
-        plasmoid.nativeInterface.temperatureUnitId =
+        config.temperatureUnitId =
             TemperatureUnitListModel.unitIdForListIndex(temperatureComboBox.currentIndex);
-        plasmoid.nativeInterface.pressureUnitId =
+        config.pressureUnitId =
             PressureUnitListModel.unitIdForListIndex(pressureComboBox.currentIndex);
-        plasmoid.nativeInterface.windSpeedUnitId =
+        config.windSpeedUnitId =
             WindSpeedUnitListModel.unitIdForListIndex(windSpeedComboBox.currentIndex);
-        plasmoid.nativeInterface.visibilityUnitId =
+        config.visibilityUnitId =
             VisibilityUnitListModel.unitIdForListIndex(visibilityComboBox.currentIndex);
 
-        plasmoid.nativeInterface.configAccepted();//comic uses saveConfig(); think about passing a config object here
+        plasmoid.nativeInterface.saveConfig(config);
         plasmoid.nativeInterface.configChanged();
     }
 
@@ -78,22 +80,24 @@ ColumnLayout {
     }
 
     Component.onCompleted: {
-        var sourceDetails = plasmoid.nativeInterface.source.split('|');
+        var config = plasmoid.nativeInterface.configValues();
+
+        var sourceDetails = config.source.split('|');
         if (sourceDetails.length > 2) {
             var source = i18nc("A weather station location and the weather service it comes from",
                                 "%1 (%2)", sourceDetails[2], sourceDetails[0]);
             locationComboBox.editText = source;
         }
 
-        updateIntervalSpin.value = plasmoid.nativeInterface.updateInterval;
+        updateIntervalSpin.value = config.updateInterval;
         temperatureComboBox.currentIndex =
-            TemperatureUnitListModel.listIndexForUnitId(plasmoid.nativeInterface.temperatureUnitId);
+            TemperatureUnitListModel.listIndexForUnitId(config.temperatureUnitId);
         pressureComboBox.currentIndex =
-            PressureUnitListModel.listIndexForUnitId(plasmoid.nativeInterface.pressureUnitId);
+            PressureUnitListModel.listIndexForUnitId(config.pressureUnitId);
         windSpeedComboBox.currentIndex =
-            WindSpeedUnitListModel.listIndexForUnitId(plasmoid.nativeInterface.windSpeedUnitId);
+            WindSpeedUnitListModel.listIndexForUnitId(config.windSpeedUnitId);
         visibilityComboBox.currentIndex =
-            VisibilityUnitListModel.listIndexForUnitId(plasmoid.nativeInterface.visibilityUnitId);
+            VisibilityUnitListModel.listIndexForUnitId(config.visibilityUnitId);
     }
 
     LocationListModel {

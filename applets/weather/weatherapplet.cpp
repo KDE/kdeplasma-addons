@@ -441,8 +441,9 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     emit modelUpdated();
 }
 
-void WeatherApplet::configAccepted()
+void WeatherApplet::saveConfig(const QVariantMap& configChanges)
 {
+    // TODO: if just units where changed there is no need to reset the complete model or reconnect to engine
     resetPanelModel();
     m_fiveDaysModel.clear();
     m_detailsModel.clear();
@@ -450,7 +451,7 @@ void WeatherApplet::configAccepted()
 
     emit modelUpdated();
 
-    WeatherPopupApplet::configAccepted();
+    WeatherPopupApplet::saveConfig(configChanges);
 }
 
 K_EXPORT_PLASMA_APPLET_WITH_JSON(weather, WeatherApplet, "metadata.json")
