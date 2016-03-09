@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2014 Ashish Madeti <ashishmadeti@gmail.com>
+    Copyright (C) 2016 Kai Uwe Broulik <kde@privat.broulik.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,47 +20,45 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+
+import org.kde.plasma.plasmoid 2.0
 
 import org.kde.plasma.private.showdesktop 0.1
 
-import org.kde.kquickcontrolsaddons 2.0
-
-Item {
+QtObject {
     id: root
 
-    property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
-
-    Layout.minimumWidth: Layout.maximumWidth
-    Layout.minimumHeight: Layout.maximumHeight
-
+    // you can't have an applet with just a compact representation :(
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
-    Plasmoid.onActivated: showdesktop.showDesktop();
+    Plasmoid.onActivated: showdesktop.showDesktop()
+    Plasmoid.icon: plasmoid.configuration.icon
+    Plasmoid.title: i18n("Show Desktop")
+    Plasmoid.toolTipSubText: i18n("Show the Plasma desktop")
 
-    PlasmaCore.IconItem {
-        id:icon
-        source: plasmoid.configuration.icon
-        active: mouseArea.containsMouse
-        anchors.fill: parent
-    }
-    ShowDesktop {
-        id: showdesktop
-    }
+    // Bug 354257 add minimize all context menu entry
 
-    PlasmaCore.ToolTipArea {
-        anchors.fill: parent
-        mainText : i18n("Show Desktop")
-        subText : i18n("Show the Plasma desktop")
-        icon : plasmoid.configuration.icon
+    // QtObject has no default property
+    property QtObject showdesktop: ShowDesktop { }
+
+    Plasmoid.fullRepresentation: PlasmaCore.ToolTipArea {
+        Layout.minimumWidth: units.iconSizes.small
+        Layout.minimumHeight: Layout.minimumWidth
+
+        icon: plasmoid.icon
+        mainText: plasmoid.title
+        subText: plasmoid.toolTipSubText
 
         MouseArea {
-            id: mouseArea
             anchors.fill: parent
-            hoverEnabled: true
-            onClicked: showdesktop.showDesktop();
+            onClicked: showdesktop.showDesktop()
+        }
+
+        PlasmaCore.IconItem {
+            anchors.fill: parent
+            source: plasmoid.icon
+            active: parent.containsMouse
         }
     }
+
 }

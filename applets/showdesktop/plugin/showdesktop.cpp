@@ -17,21 +17,16 @@
 
 #include "showdesktop.h"
 
-#include <KGlobalSettings>
 #include <KWindowSystem>
-
 
 ShowDesktop::ShowDesktop()
 {
 }
 
-ShowDesktop::~ShowDesktop()
-{
-}
+ShowDesktop::~ShowDesktop() = default;
 
 void ShowDesktop::showDesktop()
 {
-
     KWindowSystem::setShowingDesktop(!KWindowSystem::showingDesktop());
 }
 

@@ -18,15 +18,11 @@
 #ifndef SHOWDESKTOP_HEADER
 #define SHOWDESKTOP_HEADER
 
-// #define MINIMIZE_ONLY
-
-#include <config-kdeplasma-addons.h>
 #include <QObject>
 
 class ShowDesktop : public QObject
 {
-
-Q_OBJECT
+    Q_OBJECT
 
 public:
     ShowDesktop();
@@ -34,12 +30,6 @@ public:
 
     Q_INVOKABLE void showDesktop();
 
-private:
-    bool m_wm2ShowingDesktop;
-
-#ifndef MINIMIZE_ONLY
-    bool m_down;
-#endif
 };
 
 #endif //SHOWDESKTOP_HEADER
