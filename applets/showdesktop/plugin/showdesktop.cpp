@@ -19,15 +19,22 @@
 
 #include <KWindowSystem>
 
-ShowDesktop::ShowDesktop()
+ShowDesktop::ShowDesktop(QObject *parent) : QObject(parent)
 {
+    connect(KWindowSystem::self(), &KWindowSystem::showingDesktopChanged,
+            this, &ShowDesktop::showingDesktopChanged);
 }
 
 ShowDesktop::~ShowDesktop() = default;
 
-void ShowDesktop::showDesktop()
+bool ShowDesktop::showingDesktop() const
 {
-    KWindowSystem::setShowingDesktop(!KWindowSystem::showingDesktop());
+    return KWindowSystem::showingDesktop();
+}
+
+void ShowDesktop::setShowingDesktop(bool showingDesktop)
+{
+    KWindowSystem::setShowingDesktop(showingDesktop);
 }
 
 void ShowDesktop::minimizeAll()

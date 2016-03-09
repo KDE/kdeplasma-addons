@@ -24,12 +24,19 @@ class ShowDesktop : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(bool showingDesktop READ showingDesktop WRITE setShowingDesktop NOTIFY showingDesktopChanged)
+
 public:
-    ShowDesktop();
+    ShowDesktop(QObject *parent = nullptr);
     ~ShowDesktop();
 
-    Q_INVOKABLE void showDesktop();
+    bool showingDesktop() const;
+    void setShowingDesktop(bool showingDesktop);
+
     Q_INVOKABLE void minimizeAll();
+
+signals:
+    void showingDesktopChanged(bool showingDesktop);
 
 };
 

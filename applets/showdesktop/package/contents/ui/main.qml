@@ -57,13 +57,13 @@ QtObject {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: showdesktop.showDesktop()
+            onClicked: showdesktop.showingDesktop = !showdesktop.showingDesktop
         }
 
         PlasmaCore.IconItem {
             anchors.fill: parent
             source: plasmoid.icon
-            active: parent.containsMouse
+            active: parent.containsMouse || showdesktop.showingDesktop
         }
     }
 
