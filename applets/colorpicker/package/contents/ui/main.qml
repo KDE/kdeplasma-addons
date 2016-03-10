@@ -40,19 +40,23 @@ Item {
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
+    function addColorToHistory(color) {
+        // this is needed, otherwise the first pick after plasma start isn't registered
+        var history = plasmoid.configuration.history
+
+        // this .toString() is needed otherwise Qt completely screws it up
+        // replacing *all* items in the list by the new items and other nonsense
+        history.unshift(color.toString())
+
+        // limit to 9 entries
+        plasmoid.configuration.history = history.slice(0, 9)
+    }
+
     ColorPicker.GrabWidget {
         id: picker
         onCurrentColorChanged: {
             if (currentColor != recentColor) {
-                // this is needed, otherwise the first pick after plasma start isn't registered
-                var history = plasmoid.configuration.history
-
-                // this .toString() is needed otherwise Qt completely screws it up
-                // replacing *all* items in the list by the new items and other nonsense
-                history.unshift(currentColor.toString())
-
-                // limit to 9 entries
-                plasmoid.configuration.history = history.slice(0, 9)
+                addColorToHistory(currentColor)
             }
 
             if (plasmoid.configuration.autoClipboard) {
@@ -128,21 +132,42 @@ Item {
             visible: false
         }
 
-        PlasmaComponents.ToolButton {
+        DropArea {
+            id: dropArea
+
+            property bool containsAcceptableDrag: false
+
             width: buttonSize
             height: buttonSize
-            tooltip: i18n("Color Options")
-            enabled: plasmoid.configuration.history.length > 0
-            onClicked: plasmoid.expanded = !plasmoid.expanded
+            preventStealing: true
+            // why the hell is hasColor not a property?!
+            onDragEnter: containsAcceptableDrag = event.mimeData.hasColor()
+            onDragLeave: containsAcceptableDrag = false
+            onDrop: {
+                if (event.mimeData.hasColor()) {
+                    addColorToHistory(event.mimeData.color)
+                }
+                containsAcceptableDrag = false
+            }
 
-            Rectangle {
-                id: colorCircle
-                anchors.centerIn: parent
-                // try to match the color-picker icon in size
-                width: units.roundToIconSize(pickerIcon.width) * 0.75
-                height: units.roundToIconSize(pickerIcon.height) * 0.75
-                radius: width / 2
-                color: root.recentColor
+            PlasmaComponents.ToolButton {
+                anchors.fill: parent
+                tooltip: i18n("Color Options")
+                enabled: plasmoid.configuration.history.length > 0
+                onClicked: plasmoid.expanded = !plasmoid.expanded
+                // indicate viable drag...
+                checked: dropArea.containsAcceptableDrag
+                checkable: checked
+
+                Rectangle {
+                    id: colorCircle
+                    anchors.centerIn: parent
+                    // try to match the color-picker icon in size
+                    width: units.roundToIconSize(pickerIcon.width) * 0.75
+                    height: units.roundToIconSize(pickerIcon.height) * 0.75
+                    radius: width / 2
+                    color: root.recentColor
+                }
             }
         }
     }
