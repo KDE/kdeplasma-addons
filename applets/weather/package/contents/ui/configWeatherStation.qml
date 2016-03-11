@@ -126,6 +126,7 @@ ColumnLayout {
             QtControls.Button {
                 id: searchButton
                 text: i18n("Search")
+                enabled: !!searchStringEdit.text
                 onClicked: searchLocation();
             }
         }
