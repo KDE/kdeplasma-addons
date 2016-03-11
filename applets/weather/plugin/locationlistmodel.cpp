@@ -21,6 +21,8 @@
 #include <plasmaweather/weathervalidator.h>
 
 #include <Plasma/DataContainer>
+#include <Plasma/DataEngine>
+#include <Plasma/PluginLoader>
 
 #include <KLocalizedString>
 
@@ -28,7 +30,6 @@
 
 LocationListModel::LocationListModel(QObject *parent)
     : QAbstractListModel(parent)
-    , m_dataengine(nullptr)
     , m_validatingInput(false)
     , m_checkedInCount(0)
 {
@@ -40,10 +41,8 @@ QVariant LocationListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const LocationItem &item = m_locations.at(index.row());
-
     switch (role) {
-        case Qt::DisplayRole: return item.name;
+        case Qt::DisplayRole: return nameForListIndex(index.row());
     }
 
     return QVariant();
@@ -63,11 +62,6 @@ bool LocationListModel::isValidatingInput() const
     return m_validatingInput;
 }
 
-Plasma::DataEngine* LocationListModel::dataEngine() const
-{
-    return m_dataengine;
-}
-
 QString LocationListModel::valueForListIndex(int listIndex) const
 {
     if (0 <= listIndex && listIndex < m_locations.count()) {
@@ -77,13 +71,26 @@ QString LocationListModel::valueForListIndex(int listIndex) const
     return QString();
 }
 
+QString LocationListModel::nameForListIndex(int listIndex) const
+{
+    if (0 <= listIndex && listIndex < m_locations.count()) {
+        const LocationItem& item = m_locations.at(listIndex);
+        if (!item.weatherService.isEmpty()) {
+            return i18nc("A weather station location and the weather service it comes from",
+                        "%1 (%2)", item.weatherStation, item.weatherService);
+        }
+    }
+
+    return QString();
+}
+
 void LocationListModel::searchLocations(const QString &searchString)
 {
     m_checkedInCount = 0;
 
-    if (searchString.isEmpty()) {
-        return;
-    }
+    // reset current validators
+    qDeleteAll(m_validators);
+    m_validators.clear();
 
     m_searchString = searchString;
 
@@ -96,39 +103,33 @@ void LocationListModel::searchLocations(const QString &searchString)
     m_locations.clear();
     endResetModel();
 
-    // TODO: reset any currently running validation for older input
-    foreach (WeatherValidator *validator, m_validators) {
-        validator->validate(m_searchString, true);
+    if (searchString.isEmpty()) {
+        completeSearch();
+        return;
     }
-}
 
-void LocationListModel::setDataEngine(Plasma::DataEngine* dataengine)
-{
-    m_dataengine = dataengine;
+    Plasma::DataEngine *dataengine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("weather") );
 
-    qDeleteAll(m_validators);
-    m_validators.clear();
+    const QVariantList plugins = dataengine->containerForSource(QLatin1String("ions"))->data().values();
+    foreach (const QVariant& plugin, plugins) {
+        const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
+        if (pluginInfo.count() > 1) {
+            //qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
+            //d->ions.insert(pluginInfo[1], pluginInfo[0]);
 
-    if (m_dataengine) {
-        const QVariantList plugins = m_dataengine->containerForSource(QLatin1String("ions"))->data().values();
-        foreach (const QVariant& plugin, plugins) {
-            const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
-            if (pluginInfo.count() > 1) {
-                //qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
-                //d->ions.insert(pluginInfo[1], pluginInfo[0]);
+            WeatherValidator *validator = new WeatherValidator(this);
+            connect(validator, &WeatherValidator::error, this, &LocationListModel::validatorError);
+            connect(validator, &WeatherValidator::finished, this, &LocationListModel::addSources);
+            validator->setDataEngine(dataengine);
+            validator->setIon(pluginInfo[1]);
 
-                WeatherValidator *validator = new WeatherValidator(this);
-                connect(validator, &WeatherValidator::error, this, &LocationListModel::validatorError);
-                connect(validator, &WeatherValidator::finished, this, &LocationListModel::addSources);
-                validator->setDataEngine(m_dataengine);
-                validator->setIon(pluginInfo[1]);
-
-                m_validators.append(validator);
-            }
+            m_validators.append(validator);
         }
     }
 
-    emit dataEngineChanged(m_dataengine);
+    foreach (WeatherValidator *validator, m_validators) {
+        validator->validate(m_searchString, true);
+    }
 }
 
 void LocationListModel::validatorError(const QString &error)
@@ -147,10 +148,8 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
         it.next();
         const QStringList list = it.value().split(QLatin1Char('|'), QString::SkipEmptyParts);
         if (list.count() > 2) {
-            //qDebug() << list;
-            QString result = i18nc("A weather station location and the weather service it comes from",
-                                   "%1 (%2)", list[2], list[0]); // the names are too looong ions.value(list[0]));
-            m_locations.append(LocationItem(result, it.value()));
+            qDebug() << list;
+            m_locations.append(LocationItem(list[2], list[0], it.value()));
         }
     }
 
@@ -158,14 +157,14 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
 
     ++m_checkedInCount;
     if (m_checkedInCount >= m_validators.count()) {
-        m_validatingInput = false;
-        const bool success = !m_locations.empty();
-        if (!success) {
-            beginResetModel();
-            m_locations.append(LocationItem(i18n("No weather stations found for '%1'", m_searchString), QString()));
-            endResetModel();
-        }
-        emit locationSearchDone(success, m_searchString);
-        emit validatingInputChanged(false);
+        completeSearch();
     }
+}
+
+void LocationListModel::completeSearch()
+{
+    m_validatingInput = false;
+    const bool success = !m_locations.empty();
+    emit locationSearchDone(success, m_searchString);
+    emit validatingInputChanged(false);
 }

@@ -149,6 +149,9 @@ public:
         p += t * 10;
 
         // PORT!
+//         if (!timeEngine) {
+//             timeEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("time") );
+//         }
 //         Plasma::DataEngine::Data data = timeEngine->query(
 //                 QString(QLatin1String( "Local|Solar|Latitude=%1|Longitude=%2" )).arg(latitude).arg(longitude));
         bool day = true;//(data[QLatin1String( "Corrected Elevation" )].toDouble() > 0.0);
@@ -220,6 +223,13 @@ WeatherPopupApplet::~WeatherPopupApplet()
 
 void WeatherPopupApplet::init()
 {
+    // workaround for weather dataengine being destructed behind our back when there are no
+    // current connections for a while
+    // get the weather dataengine and do a dummy connect for ions source, never to be disconnected
+    // this will keep the refcount of connections for the dataengine always above 0
+    d->weatherEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("weather") );
+    d->weatherEngine->connectSource(QStringLiteral("ions"), this);
+
     configChanged();
 }
 
@@ -255,6 +265,7 @@ void WeatherPopupApplet::connectToEngine()
     } else {
         delete d->location;
         d->location = nullptr;
+
         d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
         QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
         if (graphicObject) {
@@ -264,15 +275,31 @@ void WeatherPopupApplet::connectToEngine()
     }
 }
 
-void WeatherPopupApplet::configAccepted()
+void WeatherPopupApplet::saveConfig(const QVariantMap& configChanges)
 {
     KConfigGroup cfg = config();
-    cfg.writeEntry("temperatureUnit", static_cast<int>(d->temperatureUnit.id()));
-    cfg.writeEntry("speedUnit", static_cast<int>(d->speedUnit.id()));
-    cfg.writeEntry("pressureUnit", static_cast<int>(d->pressureUnit.id()));
-    cfg.writeEntry("visibilityUnit", static_cast<int>(d->visibilityUnit.id()));
-    cfg.writeEntry("updateInterval", d->updateInterval);
-    cfg.writeEntry("source", d->source);
+
+    // units
+    if (configChanges.contains("temperatureUnitId")) {
+        cfg.writeEntry("temperatureUnit", configChanges.value("temperatureUnitId").toInt());
+    }
+    if (configChanges.contains("windSpeedUnitId")) {
+        cfg.writeEntry("speedUnit", configChanges.value("windSpeedUnitId").toInt());
+    }
+    if (configChanges.contains("pressureUnitId")) {
+        cfg.writeEntry("pressureUnit", configChanges.value("pressureUnitId").toInt());
+    }
+    if (configChanges.contains("visibilityUnitId")) {
+        cfg.writeEntry("visibilityUnit", configChanges.value("visibilityUnitId").toInt());
+    }
+
+    // data source
+    if (configChanges.contains("updateInterval")) {
+        cfg.writeEntry("updateInterval", configChanges.value("updateInterval").toInt());
+    }
+    if (configChanges.contains("source")) {
+        cfg.writeEntry("source", configChanges.value("source").toString());
+    }
 
     emit configNeedsSaving();
 }
@@ -299,18 +326,16 @@ void WeatherPopupApplet::configChanged()
     d->updateInterval = cfg.readEntry("updateInterval", 30);
     d->source = cfg.readEntry("source", QString());
     setConfigurationRequired(d->source.isEmpty());
-    d->weatherEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("weather") );
-    d->timeEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("time") );
 
     connectToEngine();
-
-    emit weatherDataEngineChanged(d->weatherEngine);
 }
 
 void WeatherPopupApplet::dataUpdated(const QString& source,
                                      const Plasma::DataEngine::Data &data)
 {
-    Q_UNUSED(source)
+    if (source == QLatin1String("ions")) {
+        return;
+    }
 
     if (data.isEmpty()) {
         return;
@@ -366,88 +391,21 @@ QString WeatherPopupApplet::source() const
     return d->source;
 }
 
-void WeatherPopupApplet::setSource(const QString &source)
+QVariantMap WeatherPopupApplet::configValues() const
 {
-    if (d->source == source) {
-        return;
-    }
-    d->source = source;
-    emit sourceChanged(source);
-}
+    QVariantMap config;
 
-int WeatherPopupApplet::updateInterval() const
-{
-    return d->updateInterval;
-}
+    // units
+    config.insert("temperatureUnitId", d->temperatureUnit.id());
+    config.insert("windSpeedUnitId", d->speedUnit.id());
+    config.insert("pressureUnitId", d->pressureUnit.id());
+    config.insert("visibilityUnitId", d->visibilityUnit.id());
 
-void WeatherPopupApplet::setUpdateInterval(int updateInterval)
-{
-    if (d->updateInterval == updateInterval) {
-        return;
-    }
-    d->updateInterval = updateInterval;
-    emit updateIntervalChanged(updateInterval);
-}
+    // data source
+    config.insert("updateInterval", d->updateInterval);
+    config.insert("source", d->source);
 
-int WeatherPopupApplet::temperatureUnitId() const
-{
-    return d->temperatureUnit.id();
-}
-
-void WeatherPopupApplet::setTemperatureUnitId(int temperatureUnitId)
-{
-    if (d->temperatureUnit.id() == temperatureUnitId) {
-        return;
-    }
-    d->temperatureUnit = d->converter.unit(static_cast<UnitId>(temperatureUnitId));
-    emit temperatureUnitIdChanged(temperatureUnitId);
-}
-
-int WeatherPopupApplet::pressureUnitId() const
-{
-    return d->pressureUnit.id();
-}
-
-void WeatherPopupApplet::setPressureUnitId(int pressureUnitId)
-{
-    if (d->pressureUnit.id() == pressureUnitId) {
-        return;
-    }
-    d->pressureUnit = d->converter.unit(static_cast<UnitId>(pressureUnitId));
-    emit pressureUnitIdChanged(pressureUnitId);
-}
-
-int WeatherPopupApplet::windSpeedUnitId() const
-{
-    return d->speedUnit.id();
-}
-
-void WeatherPopupApplet::setWindSpeedUnitId(int windSpeedUnitId)
-{
-    if (d->speedUnit.id() == windSpeedUnitId) {
-        return;
-    }
-    d->speedUnit = d->converter.unit(static_cast<UnitId>(windSpeedUnitId));
-    emit windSpeedUnitIdChanged(windSpeedUnitId);
-}
-
-int WeatherPopupApplet::visibilityUnitId() const
-{
-    return d->visibilityUnit.id();
-}
-
-void WeatherPopupApplet::setVisibilityUnitId(int visibilityUnitId)
-{
-    if (d->visibilityUnit.id() == visibilityUnitId) {
-        return;
-    }
-    d->visibilityUnit = d->converter.unit(static_cast<UnitId>(visibilityUnitId));
-    emit visibilityUnitIdChanged(visibilityUnitId);
-}
-
-Plasma::DataEngine* WeatherPopupApplet::weatherDataEngine() const
-{
-    return d->weatherEngine;
+    return config;
 }
 
 

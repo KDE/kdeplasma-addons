@@ -61,8 +61,8 @@ Q_SIGNALS:
 public Q_SLOTS: // as expected by connected dataengines
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 
-protected Q_SLOTS:
-    void configAccepted();
+public: // WeatherPopupApplet API
+    void saveConfig(const QVariantMap& configChanges) override;
 
 private:
     bool isValidData(const QVariant &data) const;

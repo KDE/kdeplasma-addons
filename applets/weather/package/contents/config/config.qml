@@ -21,8 +21,13 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-        name: i18n("General")
-        icon: "weather-clear"
-        source: "configGeneral.qml"
+        name: i18n("Weather Station")
+        icon: "services"
+        source: "configWeatherStation.qml"
+    }
+    ConfigCategory {
+        name: i18n("Units")
+        icon: "preferences-other"
+        source: "configUnits.qml"
     }
 }

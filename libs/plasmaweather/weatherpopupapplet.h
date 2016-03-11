@@ -35,13 +35,6 @@
 class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 {
     Q_OBJECT
-    Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged);
-    Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval NOTIFY updateIntervalChanged);
-    Q_PROPERTY(int temperatureUnitId READ temperatureUnitId WRITE setTemperatureUnitId NOTIFY temperatureUnitIdChanged);
-    Q_PROPERTY(int pressureUnitId READ pressureUnitId WRITE setPressureUnitId NOTIFY pressureUnitIdChanged);
-    Q_PROPERTY(int windSpeedUnitId READ windSpeedUnitId WRITE setWindSpeedUnitId NOTIFY windSpeedUnitIdChanged);
-    Q_PROPERTY(int visibilityUnitId READ visibilityUnitId WRITE setVisibilityUnitId NOTIFY visibilityUnitIdChanged);
-    Q_PROPERTY(Plasma::DataEngine* weatherDataEngine READ weatherDataEngine NOTIFY weatherDataEngineChanged)
 
     public:
         WeatherPopupApplet(QObject *parent, const QVariantList &args);
@@ -74,42 +67,24 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
         KUnitConversion::Unit visibilityUnit();
 
         /**
-         * @return update interval
-         **/
-        int updateInterval() const;
-
-        /**
          * @return condition icon with guessed value if it was empty
          **/
         QString conditionIcon();
 
         QString source() const;
-        void setSource(const QString &source);
 
         /**
-         * Sets update interval
-         **/
-        void setUpdateInterval(int updateInterval);
-
-        int temperatureUnitId() const;
-        void setTemperatureUnitId(int temperatureUnitId);
-
-        int pressureUnitId() const;
-        void setPressureUnitId(int pressureUnitId);
-
-        int windSpeedUnitId() const;
-        void setWindSpeedUnitId(int windSpeedUnitId);
-
-        int visibilityUnitId() const;
-        void setVisibilityUnitId(int visibilityUnitId);
-
-        Plasma::DataEngine* weatherDataEngine() const;
+         * Used by QML config code, so check used keys carefully
+         * @return currently used config values
+         */
+        Q_INVOKABLE virtual QVariantMap configValues() const;
 
     public Q_SLOTS:
         /**
          * Called when config is accepted
+         * @param changedConfigValues config values which got changed
          */
-        virtual void configAccepted();
+        virtual void saveConfig(const QVariantMap& changedConfigValues);
 
         /**
          * Called when data is updated
@@ -121,16 +96,6 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
          * Called when config is chnaged
          */
         virtual void configChanged();
-
-    Q_SIGNALS:
-        void sourceChanged(const QString &source);
-        void updateIntervalChanged(int updateInterval);
-        void temperatureUnitIdChanged(int temperatureUnitId);
-        void pressureUnitIdChanged(int pressureUnitId);
-        void windSpeedUnitIdChanged(int windSpeedUnitId);
-        void visibilityUnitIdChanged(int visibilityUnitId);
-
-        void weatherDataEngineChanged(Plasma::DataEngine* weatherDataEngine);
 
     private:
         /**

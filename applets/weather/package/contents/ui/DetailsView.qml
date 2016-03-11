@@ -36,10 +36,10 @@ WeatherListView {
 
             PlasmaCore.SvgItem {
                 id: icon
-                svg: svg
+                svg: windSvg
                 elementId: rowData.icon
-                height: nativeHeight
-                width: nativeWidth
+                height: naturalSize.height
+                width: naturalSize.width
                 visible: !!rowData.icon
             }
 
@@ -53,7 +53,7 @@ WeatherListView {
     }
 
     PlasmaCore.Svg {
-        id: svg
+        id: windSvg
         imagePath: "weather/wind-arrows"
     }
 }

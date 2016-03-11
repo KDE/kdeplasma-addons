@@ -18,8 +18,6 @@
 #ifndef LOCATIONLISTMODEL_H
 #define LOCATIONLISTMODEL_H
 
-#include <Plasma/DataEngine>
-
 #include <QAbstractListModel>
 #include <QVector>
 #include <QMap>
@@ -31,9 +29,14 @@ class LocationItem
 {
 public:
     LocationItem() {}
-    explicit LocationItem(const QString &_name, const QString &_value) : name(_name), value(_value) {}
+    LocationItem(const QString &_weatherStation, const QString &_weatherService, const QString &_value)
+    : weatherStation(_weatherStation)
+    , weatherService(_weatherService)
+    , value(_value)
+    {}
 
-    QString name;
+    QString weatherStation;
+    QString weatherService;
     QString value;
 };
 
@@ -45,7 +48,6 @@ class LocationListModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(bool validatingInput READ isValidatingInput NOTIFY validatingInputChanged)
-    Q_PROPERTY(Plasma::DataEngine* dataEngine READ dataEngine WRITE setDataEngine NOTIFY dataEngineChanged)
 
 public:
     explicit LocationListModel(QObject *parent = nullptr);
@@ -56,26 +58,24 @@ public: // QAbstractListModel API
 
 public:
     bool isValidatingInput() const;
-    Plasma::DataEngine* dataEngine() const;
-    void setDataEngine(Plasma::DataEngine* dataengine);
 
 public:
+    Q_INVOKABLE QString nameForListIndex(int listIndex) const;
     Q_INVOKABLE QString valueForListIndex(int listIndex) const;
     Q_INVOKABLE void searchLocations(const QString &searchString);
 
 Q_SIGNALS:
     void validatingInputChanged(bool validatingInput);
-    void dataEngineChanged(Plasma::DataEngine* dataEngine);
     void locationSearchDone(bool success, const QString &searchString);
 
 private:
     void addSources(const QMap<QString, QString> &sources);
     void validatorError(const QString &error);
+    void completeSearch();
 
 private:
     QVector<LocationItem> m_locations;
 
-    Plasma::DataEngine* m_dataengine;
     bool m_validatingInput;
     QString m_searchString;
     int m_checkedInCount;
