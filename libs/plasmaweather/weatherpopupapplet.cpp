@@ -223,6 +223,13 @@ WeatherPopupApplet::~WeatherPopupApplet()
 
 void WeatherPopupApplet::init()
 {
+    // workaround for weather dataengine being destructed behind our back when there are no
+    // current connections for a while
+    // get the weather dataengine and do a dummy connect for ions source, never to be disconnected
+    // this will keep the refcount of connections for the dataengine always above 0
+    d->weatherEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("weather") );
+    d->weatherEngine->connectSource(QStringLiteral("ions"), this);
+
     configChanged();
 }
 
@@ -258,14 +265,6 @@ void WeatherPopupApplet::connectToEngine()
     } else {
         delete d->location;
         d->location = nullptr;
-
-        Plasma::DataEngine* currentWeatherDataEngine = d->weatherEngine;
-        // assure there is a dataengine, as disconnecting before could have resulted in the dataengine being deleted
-        // due to the last having disconnected
-        d->weatherEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("weather") );
-        if (currentWeatherDataEngine != d->weatherEngine) {
-            emit weatherDataEngineChanged(d->weatherEngine);
-        }
 
         d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
         QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
@@ -334,7 +333,9 @@ void WeatherPopupApplet::configChanged()
 void WeatherPopupApplet::dataUpdated(const QString& source,
                                      const Plasma::DataEngine::Data &data)
 {
-    Q_UNUSED(source)
+    if (source == QLatin1String("ions")) {
+        return;
+    }
 
     if (data.isEmpty()) {
         return;
@@ -405,12 +406,6 @@ QVariantMap WeatherPopupApplet::configValues() const
     config.insert("source", d->source);
 
     return config;
-}
-
-
-Plasma::DataEngine* WeatherPopupApplet::weatherDataEngine() const
-{
-    return d->weatherEngine;
 }
 
 

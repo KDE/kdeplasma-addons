@@ -35,7 +35,6 @@
 class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 {
     Q_OBJECT
-    Q_PROPERTY(Plasma::DataEngine* weatherDataEngine READ weatherDataEngine NOTIFY weatherDataEngineChanged)
 
     public:
         WeatherPopupApplet(QObject *parent, const QVariantList &args);
@@ -74,8 +73,6 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 
         QString source() const;
 
-        Plasma::DataEngine* weatherDataEngine() const;
-
         /**
          * Used by QML config code, so check used keys carefully
          * @return currently used config values
@@ -99,9 +96,6 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
          * Called when config is chnaged
          */
         virtual void configChanged();
-
-    Q_SIGNALS:
-        void weatherDataEngineChanged(Plasma::DataEngine* weatherDataEngine);
 
     private:
         /**

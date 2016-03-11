@@ -18,8 +18,6 @@
 #ifndef LOCATIONLISTMODEL_H
 #define LOCATIONLISTMODEL_H
 
-#include <Plasma/DataEngine>
-
 #include <QAbstractListModel>
 #include <QVector>
 #include <QMap>
@@ -50,7 +48,6 @@ class LocationListModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(bool validatingInput READ isValidatingInput NOTIFY validatingInputChanged)
-    Q_PROPERTY(Plasma::DataEngine* dataEngine READ dataEngine WRITE setDataEngine NOTIFY dataEngineChanged)
 
 public:
     explicit LocationListModel(QObject *parent = nullptr);
@@ -61,8 +58,6 @@ public: // QAbstractListModel API
 
 public:
     bool isValidatingInput() const;
-    Plasma::DataEngine* dataEngine() const;
-    void setDataEngine(Plasma::DataEngine* dataengine);
 
 public:
     Q_INVOKABLE QString nameForListIndex(int listIndex) const;
@@ -71,17 +66,16 @@ public:
 
 Q_SIGNALS:
     void validatingInputChanged(bool validatingInput);
-    void dataEngineChanged(Plasma::DataEngine* dataEngine);
     void locationSearchDone(bool success, const QString &searchString);
 
 private:
     void addSources(const QMap<QString, QString> &sources);
     void validatorError(const QString &error);
+    void completeSearch();
 
 private:
     QVector<LocationItem> m_locations;
 
-    Plasma::DataEngine* m_dataengine;
     bool m_validatingInput;
     QString m_searchString;
     int m_checkedInCount;

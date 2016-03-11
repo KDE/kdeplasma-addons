@@ -77,7 +77,6 @@ ColumnLayout {
 
     LocationListModel {
         id: locationListModel
-        dataEngine: plasmoid.nativeInterface.weatherDataEngine;
         onLocationSearchDone: handleLocationSearchDone(success, searchString);
     }
 
