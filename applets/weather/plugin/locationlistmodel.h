@@ -31,9 +31,14 @@ class LocationItem
 {
 public:
     LocationItem() {}
-    explicit LocationItem(const QString &_name, const QString &_value) : name(_name), value(_value) {}
+    LocationItem(const QString &_weatherStation, const QString &_weatherService, const QString &_value)
+    : weatherStation(_weatherStation)
+    , weatherService(_weatherService)
+    , value(_value)
+    {}
 
-    QString name;
+    QString weatherStation;
+    QString weatherService;
     QString value;
 };
 
@@ -60,6 +65,7 @@ public:
     void setDataEngine(Plasma::DataEngine* dataengine);
 
 public:
+    Q_INVOKABLE QString nameForListIndex(int listIndex) const;
     Q_INVOKABLE QString valueForListIndex(int listIndex) const;
     Q_INVOKABLE void searchLocations(const QString &searchString);
 

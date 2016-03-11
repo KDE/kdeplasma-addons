@@ -40,10 +40,8 @@ QVariant LocationListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const LocationItem &item = m_locations.at(index.row());
-
     switch (role) {
-        case Qt::DisplayRole: return item.name;
+        case Qt::DisplayRole: return nameForListIndex(index.row());
     }
 
     return QVariant();
@@ -72,6 +70,19 @@ QString LocationListModel::valueForListIndex(int listIndex) const
 {
     if (0 <= listIndex && listIndex < m_locations.count()) {
         return m_locations.at(listIndex).value;
+    }
+
+    return QString();
+}
+
+QString LocationListModel::nameForListIndex(int listIndex) const
+{
+    if (0 <= listIndex && listIndex < m_locations.count()) {
+        const LocationItem& item = m_locations.at(listIndex);
+        if (!item.weatherService.isEmpty()) {
+            return i18nc("A weather station location and the weather service it comes from",
+                        "%1 (%2)", item.weatherStation, item.weatherService);
+        }
     }
 
     return QString();
@@ -147,10 +158,8 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
         it.next();
         const QStringList list = it.value().split(QLatin1Char('|'), QString::SkipEmptyParts);
         if (list.count() > 2) {
-            //qDebug() << list;
-            QString result = i18nc("A weather station location and the weather service it comes from",
-                                   "%1 (%2)", list[2], list[0]); // the names are too looong ions.value(list[0]));
-            m_locations.append(LocationItem(result, it.value()));
+            qDebug() << list;
+            m_locations.append(LocationItem(list[2], list[0], it.value()));
         }
     }
 
@@ -160,11 +169,6 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
     if (m_checkedInCount >= m_validators.count()) {
         m_validatingInput = false;
         const bool success = !m_locations.empty();
-        if (!success) {
-            beginResetModel();
-            m_locations.append(LocationItem(i18n("No weather stations found for '%1'", m_searchString), QString()));
-            endResetModel();
-        }
         emit locationSearchDone(success, m_searchString);
         emit validatingInputChanged(false);
     }
