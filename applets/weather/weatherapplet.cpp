@@ -96,7 +96,7 @@ QString WeatherApplet::convertTemperature(KUnitConversion::Unit format, const QS
 
 bool WeatherApplet::isValidData(const QVariant &data) const
 {
-    return ((data != "N/A") && (!data.toString().isEmpty()));
+    return ((data != i18n("N/A")) && (!data.toString().isEmpty()));
 }
 
 void WeatherApplet::setCurrentWeatherIconName(const QString &currentWeatherIconName)
