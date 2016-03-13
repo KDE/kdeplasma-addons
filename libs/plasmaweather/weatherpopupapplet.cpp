@@ -112,7 +112,7 @@ public:
                 KNotification::event( KNotification::Error, QString(), // TODO: some title?
                                       i18n("Weather information retrieval for %1 timed out.", list.value(2)),
                                       QLatin1String("dialog-error"));
-            QObject::connect(timeoutNotification, SIGNAL(close()), q, SLOT(onTimeoutNotificationClosed()));
+            QObject::connect(timeoutNotification, SIGNAL(closed()), q, SLOT(onTimeoutNotificationClosed()));
         }
     }
 
@@ -236,7 +236,7 @@ void WeatherPopupApplet::init()
 void WeatherPopupApplet::connectToEngine()
 {
     if (d->timeoutNotification) {
-        QObject::disconnect(d->timeoutNotification, SIGNAL(close()), this, SLOT(onTimeoutNotificationClosed()));
+        QObject::disconnect(d->timeoutNotification, SIGNAL(closed()), this, SLOT(onTimeoutNotificationClosed()));
         d->timeoutNotification = nullptr;
     }
 
