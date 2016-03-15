@@ -98,6 +98,7 @@ void ComicApplet::init()
     mDateChangedTimer = new QTimer( this );
     connect( mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
+    mDateChangedTimer->start();
 
     mActionNextNewStripTab = new QAction( QIcon::fromTheme( "go-next-view" ), i18nc( "here strip means comic strip", "&Next Tab with a new Strip" ), this );
     mActionNextNewStripTab->setShortcuts( KStandardShortcut::openNew() );
@@ -151,21 +152,28 @@ void ComicApplet::init()
 
 ComicApplet::~ComicApplet()
 {
+    if (mEngine && mEngine->isValid()) {
+        auto sources = mEngine->sources();
+        Q_FOREACH(auto source, sources) {
+            mEngine->disconnectSource(source, this);
+        }
+    }
     delete mSavingDir;
 }
 
 void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
 {
+    QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
+    if (graphicObject) {
+        graphicObject->setProperty("busy", false);
+    }
+
     //disconnect prefetched comic strips
     if ( source != mOldSource ) {
         mEngine->disconnectSource( source, this );
         return;
     }
 
-    QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
-    if (graphicObject) {
-        graphicObject->setProperty("busy", false);
-    }
     setConfigurationRequired( false );
 
     //there was an error, display information as image
@@ -188,7 +196,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     KConfigGroup cg = config();
     if (!mCurrent.hasNext() && mCheckNewComicStripsInterval) {
         setTabHighlighted( mCurrent.id(), false );
-        mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
+        mActionNextNewStripTab->setEnabled( isTabHighlighted(mCurrent.id()) );
     }
 
     //call the slot to check if the position needs to be saved
@@ -295,7 +303,7 @@ void ComicApplet::updateUsedComics()
     }
 
     mActionNextNewStripTab->setVisible( mCheckNewComicStripsInterval );
-    mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
+    mActionNextNewStripTab->setEnabled( isTabHighlighted(mCurrent.id()) );
 
     delete mCheckNewStrips;
     mCheckNewStrips = 0;
@@ -393,13 +401,11 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
     Q_UNUSED(index)
 
     KConfigGroup cg = config();
-    if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
+    if (suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
         qDebug() << identifier << "has a newer strip.";
-        setTabHighlighted( identifier, true );
         cg.writeEntry( "lastStripVisited_" + identifier, false );
+        updateComic(suffix);
     }
-
-    mActionNextNewStripTab->setEnabled( hasHighlightedTabs() );
 }
 
 void ComicApplet::slotGoJump()
@@ -483,9 +489,8 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
             mEngine->disconnectSource( mOldSource, this );
         }
         mOldSource = identifier;
-        mEngine->disconnectSource( identifier, this );
         mEngine->connectSource( identifier, this );
-
+        slotScaleToContent();
     } else {
         qWarning() << "Either no identifier was specified or the engine could not be created:" << "id" << id << "engine valid:" << ( mEngine && mEngine->isValid() );
         setConfigurationRequired( true );
@@ -744,11 +749,11 @@ int ComicApplet::maxComicLimit() const
 void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
 {
     //Search for matching id
-    for (int index = 0; index < mActiveComicModel->rowCount(); ++index) {
-        QStandardItem * item = mActiveComicModel->item(index);
+    for (int i = 0; i < mActiveComicModel->rowCount(); ++i) {
+        QStandardItem *item = mActiveComicModel->item(i);
 
         QString currentId = item->data(ActiveComicModel::ComicKeyRole).toString();
-        if (id == currentId){
+        if (id == currentId) {
             if (highlight != item->data(ActiveComicModel::ComicHighlightRole).toBool()) {
                 item->setData(highlight, ActiveComicModel::ComicHighlightRole);
                 emit tabHighlightRequest(id, highlight);
@@ -757,26 +762,17 @@ void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
     }
 }
 
-bool ComicApplet::hasHighlightedTabs()
+bool ComicApplet::isTabHighlighted(const QString &id) const
 {
     for (int i = 0; i < mActiveComicModel->rowCount(); ++i) {
-        if (isTabHighlighted(i)) {
-            return true;
+        QStandardItem *item = mActiveComicModel->item(i);
+
+        QString currentId = item->data(ActiveComicModel::ComicKeyRole).toString();
+        if (id == currentId) {
+            return item->data(ActiveComicModel::ComicHighlightRole).toBool();
         }
     }
-
     return false;
-}
-
-bool ComicApplet::isTabHighlighted(int index) const
-{
-    if (index < 0 || index >= mActiveComicModel->rowCount()) {
-        return false;
-    }
-
-    QStandardItem * item = mActiveComicModel->item(index);
-
-    return item->data(ActiveComicModel::ComicHighlightRole).toBool();
 }
 
 K_EXPORT_PLASMA_APPLET_WITH_JSON(comic, ComicApplet, "metadata.json")

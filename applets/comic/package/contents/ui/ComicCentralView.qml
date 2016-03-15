@@ -62,7 +62,7 @@ Item {
 
         onClicked: {
             if (mouse.button == Qt.MiddleButton && plasmoid.nativeInterface.middleClick) {
-                fullDialog.open();
+                fullDialog.toggleVisibility();
             }
         }
 
@@ -104,7 +104,7 @@ Item {
             }
 
             onZoomClicked: {
-                fullDialog.open();
+                fullDialog.toggleVisibility();
             }
 
             states: State {

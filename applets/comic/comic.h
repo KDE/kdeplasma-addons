@@ -173,8 +173,7 @@ Q_SIGNALS:
         void updateView();
         void refreshComicData();
         void setTabHighlighted(const QString &id, bool highlight);
-        bool hasHighlightedTabs();
-        bool isTabHighlighted(int index) const;
+        bool isTabHighlighted(const QString &id) const;
 
     private:
         static const int CACHE_LIMIT;

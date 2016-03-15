@@ -30,12 +30,14 @@ PlasmaCore.Dialog {
 
     flags: Qt.Popup
     visible: false
-    
-    function open()
+
+    function toggleVisibility()
     {
-        root.visible = true;
-        plasmoid.nativeInterface.positionFullView(root);
-        root.activateWindow();
+        root.visible = !root.visible;
+        if (root.visible) {
+            plasmoid.nativeInterface.positionFullView(root);
+            root.activateWindow;
+        }
     }
 
     function close() {
@@ -55,7 +57,7 @@ PlasmaCore.Dialog {
         Flickable {
             id: viewContainer
 
-            anchors.fill:parent
+            anchors.fill: parent
 
             contentWidth: comicPicture.nativeWidth
             contentHeight: comicPicture.nativeHeight
