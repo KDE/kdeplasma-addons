@@ -26,13 +26,26 @@ import org.kde.kquickcontrolsaddons 2.0
 Item {
     id: mainWindow
 
-    property int implicitWidth: units.gridUnit * 30
-    property int implicitHeight: units.gridUnit * 20
-    Plasmoid.switchWidth: units.gridUnit * 5
-    Plasmoid.switchHeight: units.gridUnit * 5
+    property int implicitWidth: units.gridUnit * 40
+    property int implicitHeight: units.gridUnit * 15
+    Plasmoid.switchWidth: {
+        if (centerLayout.comicData.image) {
+            return Math.max(minimumWidth, Math.min(centerLayout.comicData.image.nativeWidth * 0.6, implicitWidth));
+        } else {
+            return implicitWidth;
+        }
+    }
+    Plasmoid.switchHeight: {
+        if (centerLayout.comicData.image) {
+            return Math.max(minimumHeight, Math.min(centerLayout.comicData.image.nativeHeight * 0.6, implicitHeight));
+        } else {
+            return implicitHeight;
+        }
+    }
+    Plasmoid.icon: "face-laughing"
 
-    width: minimumWidth
-    height: minimumHeight
+    width: implicitWidth
+    height: implicitHeight
 
     property int minimumWidth: theme.mSize(theme.defaultFont).width * 35
     property int minimumHeight: theme.mSize(theme.defaultFont).height * 12

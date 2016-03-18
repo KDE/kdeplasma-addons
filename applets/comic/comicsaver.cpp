@@ -34,32 +34,19 @@ ComicSaver::ComicSaver(SavingDir *savingDir)
 
 bool ComicSaver::save(const ComicData &comic)
 {
-    QTemporaryFile tempFile;
-
-    if (!tempFile.open()) {
-        return false;
-    }
-
-    // save image to temporary file
-    comic.image().save(tempFile.fileName(), "PNG");
-
-    QUrl srcUrl = QUrl::fromLocalFile( tempFile.fileName() );
-
     const QString title = comic.title();
 
     const QString name = title + " - " + comic.current() + ".png";
-    QUrl destUrl = QUrl(mSavingDir->getDir());
-    destUrl.setPath( destUrl.path() + name );
+    QUrl destUrl = QUrl::fromLocalFile( mSavingDir->getDir() + '/'+ name );
 
-    destUrl = QFileDialog::getSaveFileUrl(0, QString(),destUrl, "*.png" );
+    destUrl = QFileDialog::getSaveFileUrl(0, QString(), destUrl, "*.png" );
+
     if ( !destUrl.isValid() ) {
         return false;
     }
 
-   mSavingDir->setDir(destUrl.path());
+    mSavingDir->setDir(destUrl.path());
+    comic.image().save(destUrl.toLocalFile(), "PNG");
 
-   KIO::FileCopyJob *job = KIO::file_copy( srcUrl, destUrl );
-   job->start();
-
-   return true;
+    return true;
 }
