@@ -33,8 +33,8 @@ Item {
 
     property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
 
-    Layout.minimumWidth: Layout.maximumWidth
-    Layout.minimumHeight: Layout.maximumHeight
+    Layout.minimumWidth: units.iconSizes.small
+    Layout.minimumHeight: Layout.minimumWidth
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
     Plasmoid.onActivated: showdesktop.showDesktop();
