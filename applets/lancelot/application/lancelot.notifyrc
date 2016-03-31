@@ -1,6 +1,7 @@
 [Global]
 Name=Lancelot
 Name[ar]=لانسلوت
+Name[ast]=Lancelot
 Name[bs]=Lancelot
 Name[ca]=Lancelot
 Name[ca@valencia]=Lancelot
@@ -112,6 +113,7 @@ Version=1
 [Event/UsageLoggingOn]
 Name=Usage logging is activated
 Name[ar]=تستجيل الاستخدام نشط
+Name[ast]=El rexistru d'usu ta activáu
 Name[bs]=Bilježenje upotrebe aktivirano
 Name[ca]=El registre d'ús està activat
 Name[ca@valencia]=El registre d'ús està activat
@@ -209,6 +211,7 @@ Action=Popup
 [Event/ErrorOpeningLog]
 Name=Error opening the log
 Name[ar]=خطأ أثناء فتح السجل
+Name[ast]=Fallu al abrir el rexistru
 Name[bs]=Greška pri otvaranju dnevnika
 Name[ca]=Hi ha hagut un error en obrir el registre
 Name[ca@valencia]=Hi ha hagut un error en obrir el registre
