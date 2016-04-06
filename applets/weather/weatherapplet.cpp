@@ -21,16 +21,11 @@
 
 #include "weatherapplet.h"
 
-#include <QIcon>
-#include <QDesktopServices>
-
 #include <KLocalizedString>
 #include <KIconLoader>
 #include <KUnitConversion/Value>
 
 #include <Plasma/Package>
-
-#include <cmath>
 
 template <typename T>
 T clampValue(T value, int decimals)
