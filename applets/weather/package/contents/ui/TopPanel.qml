@@ -29,7 +29,7 @@ PlasmaCore.FrameSvgItem {
     visible: !!model.location
 
     PlasmaCore.IconItem {
-        source: model.conditionIcon
+        source: model.currentConditionIcon
         height: parent.height
         width: height
     }
@@ -58,7 +58,7 @@ PlasmaCore.FrameSvgItem {
             left: locationLabel.left
             topMargin: parent.height * 0.6
         }
-        text: model.conditions
+        text: model.currentConditions
     }
 
     PlasmaComponents.Label {
@@ -69,7 +69,7 @@ PlasmaCore.FrameSvgItem {
             rightMargin: units.smallSpacing
         }
         font: locationLabel.font
-        text: model.temp
+        text: model.currentTemperature
     }
 
     PlasmaComponents.Label {

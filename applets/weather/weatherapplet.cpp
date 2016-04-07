@@ -118,9 +118,9 @@ void WeatherApplet::resetPanelModel()
     m_panelModel["location"] = "";
     m_panelModel["currentDayLowTemperature"] = "";
     m_panelModel["currentDayHighTemperature"] = "";
-    m_panelModel["conditions"] = "";
-    m_panelModel["temp"] = "";
-    m_panelModel["conditionIcon"] = "";
+    m_panelModel["currentConditions"] = "";
+    m_panelModel["currentTemperature"] = "";
+    m_panelModel["currentConditionIcon"] = "";
     m_panelModel["totalDays"] = "";
     m_panelModel["courtesy"] = "";
     m_panelModel["creditUrl"] = "";
@@ -153,11 +153,11 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
         }
     }
 
-    m_panelModel["conditions"] = data["Current Conditions"].toString().trimmed();
+    m_panelModel["currentConditions"] = data["Current Conditions"].toString().trimmed();
 
     const QString temperature = data["Temperature"].toString();
     if (isValidData(temperature)) {
-        m_panelModel["temp"] = convertTemperature(displayTemperatureUnit, temperature, reportTemperatureUnit);
+        m_panelModel["currentTemperature"] = convertTemperature(displayTemperatureUnit, temperature, reportTemperatureUnit);
     }
 
     const QString conditionIconName = data["Condition Icon"].toString();
@@ -181,7 +181,7 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
             widgetIconName = QStringLiteral("weather-none-available");
         }
     }
-    m_panelModel["conditionIcon"] = panelIconName;
+    m_panelModel["currentConditionIcon"] = panelIconName;
     setCurrentWeatherIconName(widgetIconName);
 
     m_panelModel["courtesy"] = data["Credit"].toString();
@@ -436,8 +436,8 @@ void WeatherApplet::updateToolTip()
     if (!location.isEmpty()) {
         currentWeatherToolTipMainText = location;
 
-        const QString conditions = m_panelModel["conditions"].toString();
-        const QString temp = m_panelModel["temp"].toString();
+        const QString conditions = m_panelModel["currentConditions"].toString();
+        const QString temp = m_panelModel["currentTemperature"].toString();
         currentWeatherToolTipSubText = i18nc("%1 is the weather condition, %2 is the temperature,"
                                          " both come from the weather provider",
                                          "%1 %2", conditions, temp);
