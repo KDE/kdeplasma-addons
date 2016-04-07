@@ -365,22 +365,22 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     }
 }
 
-Unit WeatherPopupApplet::pressureUnit()
+Unit WeatherPopupApplet::pressureUnit() const
 {
     return d->pressureUnit;
 }
 
-Unit WeatherPopupApplet::temperatureUnit()
+Unit WeatherPopupApplet::temperatureUnit() const
 {
     return d->temperatureUnit;
 }
 
-Unit WeatherPopupApplet::speedUnit()
+Unit WeatherPopupApplet::speedUnit() const
 {
     return d->speedUnit;
 }
 
-Unit WeatherPopupApplet::visibilityUnit()
+Unit WeatherPopupApplet::visibilityUnit() const
 {
     return d->visibilityUnit;
 }

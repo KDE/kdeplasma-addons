@@ -49,22 +49,22 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
         /**
          * @return pressure unit
          **/
-        KUnitConversion::Unit pressureUnit();
+        KUnitConversion::Unit pressureUnit() const;
 
         /**
          * @return temperature unit
          **/
-        KUnitConversion::Unit temperatureUnit();
+        KUnitConversion::Unit temperatureUnit() const;
 
         /**
          * @return speed unit
          **/
-        KUnitConversion::Unit speedUnit();
+        KUnitConversion::Unit speedUnit() const;
 
         /**
          * @return visibility unit
          **/
-        KUnitConversion::Unit visibilityUnit();
+        KUnitConversion::Unit visibilityUnit() const;
 
         /**
          * @return condition icon with guessed value if it was empty
