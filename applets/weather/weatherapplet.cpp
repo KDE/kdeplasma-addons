@@ -116,7 +116,8 @@ void WeatherApplet::setCurrentWeatherIconName(const QString &currentWeatherIconN
 void WeatherApplet::resetPanelModel()
 {
     m_panelModel["location"] = "";
-    m_panelModel["forecastTemps"] = "";
+    m_panelModel["currentDayLowTemperature"] = "";
+    m_panelModel["currentDayHighTemperature"] = "";
     m_panelModel["conditions"] = "";
     m_panelModel["temp"] = "";
     m_panelModel["conditionIcon"] = "";
@@ -138,23 +139,18 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
     const QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split(QLatin1Char('|'));
 
     if (fiveDayTokens.count() == 6) {
-        QString high, low;
 
         const QString& reportLowString = fiveDayTokens[4];
         if (reportLowString != QLatin1String("N/A")) {
-            low = convertTemperature(displayTemperatureUnit, reportLowString, reportTemperatureUnit, true);
+            m_panelModel["currentDayLowTemperature"] =
+                convertTemperature(displayTemperatureUnit, reportLowString, reportTemperatureUnit, true);
         }
 
         const QString& reportHighString = fiveDayTokens[3];
         if (reportHighString != QLatin1String("N/A")) {
-            high = convertTemperature(displayTemperatureUnit, reportHighString, reportTemperatureUnit, true);
+            m_panelModel["currentDayHighTemperature"] =
+                convertTemperature(displayTemperatureUnit, reportHighString, reportTemperatureUnit, true);
         }
-
-        m_panelModel["forecastTemps"] =
-            (!low.isEmpty() && !high.isEmpty()) ? i18nc("High & Low temperature", "H: %1 L: %2", high, low) :
-            (!low.isEmpty()) ?                    i18nc("Low temperature", "Low: %1", low) :
-            (!high.isEmpty()) ?                   i18nc("High temperature", "High: %1", high) :
-            /*else*/                              QString();
     }
 
     m_panelModel["conditions"] = data["Current Conditions"].toString().trimmed();

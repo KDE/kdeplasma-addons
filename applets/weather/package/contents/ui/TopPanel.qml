@@ -79,6 +79,18 @@ PlasmaCore.FrameSvgItem {
             top: conditionLabel.top
         }
         font.pointSize: theme.smallestFont.pointSize
-        text: model.forecastTemps
+        text: {
+            var low = model.currentDayLowTemperature, high = model.currentDayHighTemperature;
+            if (!!low && !!high) {
+                return i18nc("High & Low temperature", "H: %1 L: %2", high, low);
+            }
+            if (!!low) {
+                return i18nc("Low temperature", "Low: %1", low);
+            }
+            if (!!high) {
+                return i18nc("High temperature", "High: %1", high);
+            }
+            return "";
+        }
     }
 }
