@@ -66,6 +66,7 @@ public: // WeatherPopupApplet API
 
 private:
     bool isValidData(const QVariant &data) const;
+    bool isValidData(const QString &data) const;
     void setCurrentWeatherIconName(const QString &currentWeatherIconName);
     void resetPanelModel();
     void updatePanelModel(const Plasma::DataEngine::Data &data);

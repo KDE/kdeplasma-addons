@@ -34,12 +34,16 @@ T clampValue(T value, int decimals)
     return int(value * mul) / mul;
 }
 
-bool isValidIconName(const QString &icon)
+/**
+ * Returns the @p iconName if the current icon theme contains an icon with that name,
+ * otherwise returns "weather-not-available" (expecting the icon theme to have that in any case).
+ */
+QString existingWeatherIconName(const QString &iconName)
 {
-    bool result = !icon.isEmpty() &&
-           !KIconLoader::global()->loadIcon(icon, KIconLoader::Desktop, 0,
+    const bool isValid = !iconName.isEmpty() &&
+           !KIconLoader::global()->loadIcon(iconName, KIconLoader::Desktop, 0,
                                             KIconLoader::DefaultState, QStringList(), 0, true).isNull();
-    return result;
+    return isValid ? iconName : QStringLiteral("weather-not-available");
 }
 
 
@@ -89,9 +93,14 @@ QString WeatherApplet::convertTemperature(KUnitConversion::Unit format, const QS
     }
 }
 
+bool WeatherApplet::isValidData(const QString &data) const
+{
+    return (!data.isEmpty() && data != i18n("N/A"));
+}
+
 bool WeatherApplet::isValidData(const QVariant &data) const
 {
-    return ((data != i18n("N/A")) && (!data.toString().isEmpty()));
+    return isValidData(data.toString());
 }
 
 void WeatherApplet::setCurrentWeatherIconName(const QString &currentWeatherIconName)
@@ -106,98 +115,103 @@ void WeatherApplet::setCurrentWeatherIconName(const QString &currentWeatherIconN
 
 void WeatherApplet::resetPanelModel()
 {
-    m_panelModel.clear();
     m_panelModel["location"] = "";
     m_panelModel["forecastTemps"] = "";
     m_panelModel["conditions"] = "";
     m_panelModel["temp"] = "";
-    m_panelModel["courtesy"] = "";
     m_panelModel["conditionIcon"] = "";
     m_panelModel["totalDays"] = "";
+    m_panelModel["courtesy"] = "";
     m_panelModel["creditUrl"] = "";
 }
 
 void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
 {
     resetPanelModel();
+
     m_panelModel["location"] = data["Place"].toString();
 
-    int unit = data["Temperature Unit"].toInt();
-    // Get current time period of day
-    QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split('|');
+    const int reportTemperatureUnit = data["Temperature Unit"].toInt();
+    const KUnitConversion::Unit displayTemperatureUnit = temperatureUnit();
 
-    if (fiveDayTokens.count() > 1) {
-        // fiveDayTokens[3] => High Temperature
-        // fiveDayTokens[4] => Low Temperature
+    // Get current time period of day
+    const QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split(QLatin1Char('|'));
+
+    if (fiveDayTokens.count() == 6) {
         QString high, low;
 
-        if (fiveDayTokens[4] != "N/A") {
-            low = convertTemperature(temperatureUnit(), fiveDayTokens[4], unit, true);
+        const QString& reportLowString = fiveDayTokens[4];
+        if (reportLowString != QLatin1String("N/A")) {
+            low = convertTemperature(displayTemperatureUnit, reportLowString, reportTemperatureUnit, true);
         }
 
-        if (fiveDayTokens[3] != "N/A") {
-            high = convertTemperature(temperatureUnit(), fiveDayTokens[3], unit, true);
+        const QString& reportHighString = fiveDayTokens[3];
+        if (reportHighString != QLatin1String("N/A")) {
+            high = convertTemperature(displayTemperatureUnit, reportHighString, reportTemperatureUnit, true);
         }
 
-        if (!low.isEmpty() && !high.isEmpty()) {
-            m_panelModel["forecastTemps"] = i18nc("High & Low temperature", "H: %1 L: %2", high, low);
-        } else if (!low.isEmpty()) {
-            m_panelModel["forecastTemps"] = i18nc("Low temperature", "Low: %1", low);
-        } else {
-            m_panelModel["forecastTemps"] = i18nc("High temperature", "High: %1", high);
-        }
+        m_panelModel["forecastTemps"] =
+            (!low.isEmpty() && !high.isEmpty()) ? i18nc("High & Low temperature", "H: %1 L: %2", high, low) :
+            (!low.isEmpty()) ?                    i18nc("Low temperature", "Low: %1", low) :
+            (!high.isEmpty()) ?                   i18nc("High temperature", "High: %1", high) :
+            /*else*/                              QString();
     }
 
     m_panelModel["conditions"] = data["Current Conditions"].toString().trimmed();
 
-    if (isValidData(data["Temperature"])) {
-        m_panelModel["temp"] = convertTemperature(temperatureUnit(), data["Temperature"].toString(), unit);
+    const QString temperature = data["Temperature"].toString();
+    if (isValidData(temperature)) {
+        m_panelModel["temp"] = convertTemperature(displayTemperatureUnit, temperature, reportTemperatureUnit);
     }
+
+    const QString conditionIconName = data["Condition Icon"].toString();
+    QString widgetIconName, panelIconName;
+    // specific icon?
+    if (!conditionIconName.isEmpty() &&
+        conditionIconName != QLatin1String("weather-none-available") &&
+        conditionIconName != QLatin1String("N/U") && // TODO: N/U and N/A should not be used here, fix dataengines
+        conditionIconName != QLatin1String("N/A")) {
+
+        panelIconName = existingWeatherIconName(conditionIconName);
+        widgetIconName = panelIconName;
+    } else {
+        // icon to use from current weather forecast?
+        if (fiveDayTokens.count() == 6 && fiveDayTokens[1] != QLatin1String("N/U")) {
+            // show the current weather
+            panelIconName = existingWeatherIconName(fiveDayTokens[1]);
+            widgetIconName = panelIconName;
+        } else {
+            // do not set one for the panel, but at least for the widget
+            widgetIconName = QStringLiteral("weather-none-available");
+        }
+    }
+    m_panelModel["conditionIcon"] = panelIconName;
+    setCurrentWeatherIconName(widgetIconName);
 
     m_panelModel["courtesy"] = data["Credit"].toString();
     m_panelModel["creditUrl"] = data["Credit Url"].toString();
-
-    const QString conditionIcon = data["Condition Icon"].toString();
-    if (!isValidData(data["Condition Icon"])
-        || conditionIcon == "weather-none-available"
-        || conditionIcon == "N/U"
-        || conditionIcon == "N/A") {
-
-        if (fiveDayTokens.count() > 2) {
-            // if there is no specific icon, show the current weather
-            m_panelModel["conditionIcon"] = fiveDayTokens[1];
-            setCurrentWeatherIconName(fiveDayTokens[1]);
-        } else {
-            // if we could not find any proper icon then just hide it
-            m_panelModel["conditionIcon"] = "";
-            setCurrentWeatherIconName("weather-none-available");
-        }
-    } else {
-        m_panelModel["conditionIcon"] = conditionIcon;
-        if (isValidIconName(conditionIcon)) {
-            setCurrentWeatherIconName(conditionIcon);
-        } else {
-            setCurrentWeatherIconName("weather-not-available");
-        }
-    }
 }
 
 void WeatherApplet::updateFiveDaysModel(const Plasma::DataEngine::Data &data)
 {
-    if (data["Total Weather Days"].toInt() <= 0) {
+    const int foreCastDayCount = data[QStringLiteral("Total Weather Days")].toInt();
+    if (foreCastDayCount <= 0) {
         return;
     }
 
     m_fiveDaysModel.clear();
+
+    const int reportTemperatureUnit = data[QStringLiteral("Temperature Unit")].toInt();
+    const KUnitConversion::Unit displayTemperatureUnit = temperatureUnit();
 
     QStringList dayItems;
     QStringList conditionItems; // Icon
     QStringList hiItems;
     QStringList lowItems;
 
-    for (int i = 0; i < data["Total Weather Days"].toInt(); i++) {
-        QString current = QString("Short Forecast Day %1").arg(i);
-        QStringList fiveDayTokens = data[current].toString().split('|');
+    for (int i = 0; i < foreCastDayCount; ++i) {
+        const QString foreCastDayKey = QStringLiteral("Short Forecast Day %1").arg(i);
+        const QStringList fiveDayTokens = data[foreCastDayKey].toString().split(QLatin1Char('|'));
 
         if (fiveDayTokens.count() != 6) {
             // We don't have the right number of tokens, abort trying
@@ -207,160 +221,188 @@ void WeatherApplet::updateFiveDaysModel(const Plasma::DataEngine::Data &data)
         dayItems << fiveDayTokens[0];
 
         // If we see N/U (Not Used) we skip the item
-        if (fiveDayTokens[1] != "N/U") {
-            QString iconAndToolTip;
-            if (isValidIconName(fiveDayTokens[1])) {
-                iconAndToolTip = fiveDayTokens[1];
-            } else {
-                iconAndToolTip = "weather-not-available";
-            }
-            iconAndToolTip += "|";
+        const QString& weatherIconName = fiveDayTokens[1];
+        if (weatherIconName != QLatin1String("N/U")) {
+            QString iconAndToolTip = existingWeatherIconName(weatherIconName);
 
-            if (fiveDayTokens[5] != "N/U" && fiveDayTokens[5] != "N/A") {
-                iconAndToolTip += i18nc("certain weather condition, probability percentage",
-                                        "%1 (%2%)", fiveDayTokens[2], fiveDayTokens[5]);
+            iconAndToolTip += QLatin1Char('|');
+
+            const QString& condition = fiveDayTokens[2];
+            const QString& probability = fiveDayTokens[5];
+            if (probability != QLatin1String("N/U") &&
+                probability != QLatin1String("N/A")) {
+                iconAndToolTip += i18nc("certain weather condition (probability percentage)",
+                                        "%1 (%2%)", condition, probability);
             } else {
-                iconAndToolTip += fiveDayTokens[2];
+                iconAndToolTip += condition;
             }
             conditionItems << iconAndToolTip;
         }
 
-        if (fiveDayTokens[3] != "N/U") {
-            if (fiveDayTokens[3] == "N/A") {
+        const QString& tempHigh = fiveDayTokens[3];
+        if (tempHigh != QLatin1String("N/U")) {
+            if (tempHigh == QLatin1String("N/A")) {
                 hiItems << i18nc("Short for no data available", "-");
             } else {
-                hiItems << convertTemperature(temperatureUnit(),
-                                              fiveDayTokens[3],
-                                              data["Temperature Unit"].toInt(),
+                hiItems << convertTemperature(displayTemperatureUnit,
+                                              tempHigh,
+                                              reportTemperatureUnit,
                                               true);
             }
         }
 
-        if (fiveDayTokens[4] != "N/U") {
-            if (fiveDayTokens[4] == "N/A") {
+        const QString& tempLow = fiveDayTokens[4];
+        if (tempLow != QLatin1String("N/U")) {
+            if (tempLow == QLatin1String("N/A")) {
                 lowItems << i18nc("Short for no data available", "-");
             } else {
-                lowItems << convertTemperature(temperatureUnit(),
-                                               fiveDayTokens[4],
-                                               data["Temperature Unit"].toInt(),
+                lowItems << convertTemperature(displayTemperatureUnit,
+                                               tempLow,
+                                               reportTemperatureUnit,
                                                true);
             }
         }
     }
 
-    if (dayItems.count() > 0) {
+    if (!dayItems.isEmpty()) {
         m_fiveDaysModel << dayItems;
     }
-    if (conditionItems.count() > 0) {
+    if (!conditionItems.isEmpty()) {
         m_fiveDaysModel << conditionItems;
     }
-    if (hiItems.count() > 0)  {
+    if (!hiItems.isEmpty())  {
         m_fiveDaysModel << hiItems;
     }
-    if (lowItems.count() > 0) {
+    if (!lowItems.isEmpty()) {
         m_fiveDaysModel << lowItems;
     }
 
     m_panelModel["totalDays"] = i18ncp("Forecast period timeframe", "1 Day",
-                                       "%1 Days", data["Total Weather Days"].toInt());
+                                       "%1 Days", foreCastDayCount);
 }
 
 void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
 {
     m_detailsModel.clear();
 
+    const QString textId = QStringLiteral("text");
+    const QString iconId = QStringLiteral("icon");
+
+    // reused map for each row
     QVariantMap row;
-    row["icon"] = "";
-    row["text"] = "";
+    row.insert(iconId, QString());
+    row.insert(textId, QString());
 
-    int unit = data["Temperature Unit"].toInt();
-    QString temp;
+    const int reportTemperatureUnit = data[QStringLiteral("Temperature Unit")].toInt();
+    const KUnitConversion::Unit displayTemperatureUnit = temperatureUnit();
 
-    if (isValidData(data["Windchill"])) {
+    const QString windChill = data["Windchill"].toString();
+    if (isValidData(windChill)) {
         // Use temperature unit to convert windchill temperature
         // we only show degrees symbol not actual temperature unit
-        temp = convertTemperature(temperatureUnit(), data["Windchill"].toString(), unit, false, true);
-        row["text"] = i18nc("windchill, unit", "Windchill: %1", temp);
+        const QString temp = convertTemperature(displayTemperatureUnit, windChill, reportTemperatureUnit, false, true);
+        row[textId] = i18nc("windchill, unit", "Windchill: %1", temp);
+
         m_detailsModel << row;
     }
 
-    if (isValidData(data["Humidex"])) {
+    const QString humidex = data["Humidex"].toString();
+    if (isValidData(humidex)) {
         // Use temperature unit to convert humidex temperature
         // we only show degrees symbol not actual temperature unit
-        temp = convertTemperature(temperatureUnit(), data["Humidex"].toString(), unit, false, true);
-        row["text"] = i18nc("humidex, unit","Humidex: %1", temp);
+        QString temp = convertTemperature(displayTemperatureUnit, humidex, reportTemperatureUnit, false, true);
+        row[textId] = i18nc("humidex, unit","Humidex: %1", temp);
+
         m_detailsModel << row;
     }
 
-    if (isValidData(data["Dewpoint"])) {
-        temp = convertTemperature(temperatureUnit(), data["Dewpoint"].toString(), unit);
-        row["text"] = i18nc("ground temperature, unit", "Dewpoint: %1", temp);
+    const QString dewpoint = data["Dewpoint"].toString();
+    if (isValidData(dewpoint)) {
+        QString temp = convertTemperature(displayTemperatureUnit, dewpoint, reportTemperatureUnit);
+        row[textId] = i18nc("ground temperature, unit", "Dewpoint: %1", temp);
+
         m_detailsModel << row;
     }
 
-    if (isValidData(data["Pressure"])) {
-        KUnitConversion::Value v(data["Pressure"].toDouble(),
+    const QVariant pressure = data["Pressure"];
+    if (isValidData(pressure)) {
+        KUnitConversion::Value v(pressure.toDouble(),
                                  static_cast<KUnitConversion::UnitId>(data["Pressure Unit"].toInt()));
         v = v.convertTo(pressureUnit());
-        row["text"] = i18nc("pressure, unit","Pressure: %1 %2",
+        row[textId] = i18nc("pressure, unit","Pressure: %1 %2",
                             clampValue(v.number(), 2), v.unit().symbol());
+
         m_detailsModel << row;
     }
 
-    if (isValidData(data["Pressure Tendency"])) {
-        row["text"] = i18nc("pressure tendency, rising/falling/steady",
-                            "Pressure Tendency: %1", data["Pressure Tendency"].toString());
+    const QString pressureTendency = data["Pressure Tendency"].toString();
+    if (isValidData(pressureTendency)) {
+        row[textId] = i18nc("pressure tendency, rising/falling/steady",
+                            "Pressure Tendency: %1", pressureTendency);
+
         m_detailsModel << row;
     }
 
-    if (isValidData(data["Visibility"])) {
+    const QVariant visibility = data["Visibility"];
+    if (isValidData(visibility)) {
         bool isNumeric;
-        data["Visibility"].toDouble(&isNumeric);
+        visibility.toDouble(&isNumeric);
         if (isNumeric) {
-            KUnitConversion::Value v(data["Visibility"].toDouble(),
+            KUnitConversion::Value v(visibility.toDouble(),
                                      static_cast<KUnitConversion::UnitId>(data["Visibility Unit"].toInt()));
             v = v.convertTo(visibilityUnit());
-            row["text"] = i18nc("distance, unit","Visibility: %1 %2",
+            row[textId] = i18nc("distance, unit","Visibility: %1 %2",
                                 clampValue(v.number(), 1), v.unit().symbol());
         } else {
-            row["text"] = i18nc("visibility from distance", "Visibility: %1", data["Visibility"].toString());
+            row[textId] = i18nc("visibility from distance", "Visibility: %1", visibility.toString());
         }
 
         m_detailsModel << row;
     }
 
-    if (isValidData(data["Humidity"])) {
-        row["text"] = i18nc("content of water in air", "Humidity: %1%2",
-                            data["Humidity"].toString(), i18nc("Precent, measure unit", "%"));
+    const QString humidity = data["Humidity"].toString();
+    if (isValidData(humidity)) {
+        row[textId] = i18nc("content of water in air", "Humidity: %1%2",
+                            humidity, i18nc("Percent, measure unit", "%"));
+
         m_detailsModel << row;
     }
 
-    if (isValidData(data["Wind Speed"])) {
-        row["icon"] = data["Wind Direction"].toString();
+    const QVariant windSpeed = data["Wind Speed"];
+    if (isValidData(windSpeed)) {
+        // TODO: missing check for windDirection validness
+        const QString windDirection = data["Wind Direction"].toString();
+        row[iconId] = windDirection;
 
-        if (data["Wind Speed"] == "N/A") {
-            row["text"] = i18nc("Not available","N/A");
-        } else if (data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
-            KUnitConversion::Value v(data["Wind Speed"].toDouble(),
-                                     static_cast<KUnitConversion::UnitId>(data["Wind Speed Unit"].toInt()));
-            v = v.convertTo(speedUnit());
-            row["text"] = i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
-                                clampValue(v.number(), 1), v.unit().symbol());
+        bool isNumeric;
+        const double windSpeedNumeric = windSpeed.toDouble(&isNumeric);
+        if (isNumeric) {
+            if (windSpeedNumeric != 0) {
+                KUnitConversion::Value v(windSpeedNumeric,
+                                        static_cast<KUnitConversion::UnitId>(data["Wind Speed Unit"].toInt()));
+                v = v.convertTo(speedUnit());
+                row[textId] = i18nc("wind direction, speed","%1 %2 %3", windDirection,
+                                    clampValue(v.number(), 1), v.unit().symbol());
+            } else {
+                row[textId] = i18nc("Wind condition", "Calm");
+            }
         } else {
-            row["text"] = i18nc("Wind condition","Calm");
+            row[textId] = windSpeed.toString();
         }
 
         m_detailsModel << row;
-        row["icon"] = "";
+        row[iconId] = QString(); // reset
     }
 
-    if (isValidData(data["Wind Gust"])) {
+    const QVariant windGust = data["Wind Gust"];
+    if (isValidData(windGust)) {
         // Convert the wind format for nonstandard types
-        KUnitConversion::Value v(data["Wind Gust"].toDouble(),
+        KUnitConversion::Value v(windGust.toDouble(),
                                  static_cast<KUnitConversion::UnitId>(data["Wind Gust Unit"].toInt()));
         v = v.convertTo(speedUnit());
-        row["text"] = i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2",
+        row[textId] = i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2",
                             clampValue(v.number(), 1), v.unit().symbol());
+
         m_detailsModel << row;
     }
 }
@@ -370,19 +412,19 @@ void WeatherApplet::updateNoticesModel(const Plasma::DataEngine::Data &data)
     m_noticesModel.clear();
 
     QVariantList warnings;
-    for (int i = 0; i < data["Total Warnings Issued"].toInt(); i++) {
+    for (int i = 0; i < data["Total Warnings Issued"].toInt(); ++i) {
         QVariantMap warning;
-        warning["description"] = data[QString("Warning Description %1").arg(i)];
-        warning["info"] = data[QString("Warning Info %1").arg(i)];
+        warning["description"] = data[QStringLiteral("Warning Description %1").arg(i)];
+        warning["info"] = data[QStringLiteral("Warning Info %1").arg(i)];
         warnings << warning;
     }
     m_noticesModel << QVariant(warnings);
 
     QVariantList watches;
-    for (int i = 0; i < data["Total Watches Issued"].toInt(); i++) {
+    for (int i = 0; i < data["Total Watches Issued"].toInt(); ++i) {
         QVariantMap watch;
-        watch["description"] = data[QString("Watch Description %1").arg(i)];
-        watch["info"] = data[QString("Watch Info %1").arg(i)];
+        watch["description"] = data[QStringLiteral("Watch Description %1").arg(i)];
+        watch["info"] = data[QStringLiteral("Watch Info %1").arg(i)];
         watches << watch;
     }
     m_noticesModel << QVariant(watches);
