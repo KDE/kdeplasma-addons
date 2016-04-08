@@ -85,31 +85,48 @@ Item {
                 ComboBox {
                     id: comboBox
                     currentIndex: fillModeToIndex(fillMode)
-                    model: ListModel {
-                        id: comboBoxItems
-                        ListElement { text: "Stretch"; value: Image.Stretch; description: "The image is scaled to fit" }
-                        ListElement { text: "Preserve aspect fit"; value: Image.PreserveAspectFit; description: "The image is scaled uniformly to fit without cropping" }
-                        ListElement { text: "Preserve aspect crop"; value: Image.PreserveAspectCrop; description: "The image is scaled uniformly to fill, cropping if necessary" }
-                        ListElement { text: "Tile"; value: Image.Tile; description: "The image is duplicated horizontally and vertically" }
-                        ListElement { text: "Tile vertically"; value: Image.TileVertically; description: "The image is stretched horizontally and tiled vertically" }
-                        ListElement { text: "Tile horizontally"; value: Image.TileHorizontally; description: "The image is stretched vertically and tiled horizontally" }
-                        ListElement { text: "Pad"; value: Image.Pad; description: "The image is not transformed" }
-                    }
+                    model:
+                        [
+                            {
+                                "text": i18n("Stretch"),
+                                "value": Image.Stretch,
+                                "description": i18n("The image is scaled to fit")
+                            },
+                            {
+                                "text": i18n("Preserve aspect fit"),
+                                "value": Image.PreserveAspectFit,
+                                "description": i18n("The image is scaled uniformly to fit without cropping")
+                            },
+                            {
+                                "text": i18n("Preserve aspect crop"),
+                                "value": Image.PreserveAspectCrop,
+                                "description": i18n("The image is scaled uniformly to fill, cropping if necessary")
+                            },
+                            {
+                                "text": i18n("Tile"),
+                                "value": Image.Tile,
+                                "description": i18n("The image is duplicated horizontally and vertically")
+                            },
+                            {
+                                "text": i18n("Tile vertically"),
+                                "value": Image.TileVertically,
+                                "description": i18n("The image is stretched horizontally and tiled vertically")
+                            },
+                            {
+                                "text": i18n("Tile horizontally"),
+                                "value": Image.TileHorizontally,
+                                "description": i18n("The image is stretched vertically and tiled horizontally")
+                            },
+                            {
+                                "text": i18n("Pad"),
+                                "value": Image.Pad,
+                                "description": i18n("The image is not transformed")
+                            }
+                        ]
 
                     onActivated: root.fillMode = comboBoxItems.get(index).value
 
                     onCurrentIndexChanged: fillModeDescription.text = comboBoxItems.get(currentIndex).description
-
-                    Component.onCompleted: {
-                        // Stupid hack to avoid "ListElement: Cannot use script for property value" error
-                        for (var i=0; i < comboBoxItems.count; i++) {
-                            var text = comboBoxItems.get(i).text
-                            comboBoxItems.get(i).text = i18n(text)
-                            var description = comboBoxItems.get(i).description
-                            comboBoxItems.get(i).description = description
-                        }
-
-                    }
 
                     function fillModeToIndex(fillMode) {
                         if(fillMode == Image.Stretch)
