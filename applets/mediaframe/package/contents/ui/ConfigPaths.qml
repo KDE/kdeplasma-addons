@@ -121,21 +121,14 @@ Item {
             Button {
                 iconName: "folder-new"
                 onClicked: folderDialog.visible = true
-            }
-
-            Label {
-                text: i18n("Add folder")
+                text: i18n("Add folder...")
             }
 
             Button {
                 iconName: "document-new"
                 onClicked: fileDialog.visible = true
+                text: i18n("Add files...")
             }
-
-            Label {
-                text: i18n("Add files")
-            }
-
         }
 
         Label {
