@@ -26,9 +26,28 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 Item {
     id: root
 
-    Plasmoid.icon: plasmoid.nativeInterface.currentWeatherIconName
-    Plasmoid.toolTipMainText: plasmoid.nativeInterface.currentWeatherToolTipMainText
-    Plasmoid.toolTipSubText: plasmoid.nativeInterface.currentWeatherToolTipSubText
+    property string currentWeatherIconName: {
+        var panelModel = plasmoid.nativeInterface.panelModel;
+        return !panelModel.location ? "weather-none-available" : panelModel.currentConditionIcon;
+    }
+
+    Plasmoid.icon: currentWeatherIconName
+    Plasmoid.toolTipMainText: {
+        // workaround for now to ensure "Please Configure" tooltip
+        // TODO: remove when configurationRequired works
+        return plasmoid.nativeInterface.panelModel.location || i18nc("Shown when you have not set a weather provider", "Please Configure");
+    }
+    Plasmoid.toolTipSubText: {
+        var panelModel = plasmoid.nativeInterface.panelModel;
+        if (!panelModel.location) {
+            return "";
+        }
+        if (panelModel.currentConditions && panelModel.currentTemperature) {
+            return i18nc("%1 is the weather condition, %2 is the temperature,  both come from the weather provider",
+                         "%1 %2", panelModel.currentConditions, panelModel.currentTemperature);
+        }
+        return panelModel.currentConditions || panelModel.currentTemperature || "";
+    }
 
     Plasmoid.compactRepresentation: Component {
         MouseArea {
@@ -38,7 +57,7 @@ Item {
             PlasmaCore.IconItem {
                 width: height
                 height: compactRoot.height
-                source: plasmoid.nativeInterface.currentWeatherIconName
+                source: currentWeatherIconName
             }
         }
     }

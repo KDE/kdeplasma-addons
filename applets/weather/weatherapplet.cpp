@@ -49,7 +49,6 @@ QString existingWeatherIconName(const QString &iconName)
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         : WeatherPopupApplet(parent, args)
-        , m_currentWeatherIconName("weather-none-available")
 {
 }
 
@@ -58,12 +57,6 @@ void WeatherApplet::init()
     resetPanelModel();
 
     WeatherPopupApplet::init();
-
-    // workaround for now to ensure "Please Configure" tooltip
-    // TODO: remove when configurationRequired works
-    if (source().isEmpty()) {
-        updateToolTip();
-    }
 }
 
 WeatherApplet::~WeatherApplet()
@@ -101,16 +94,6 @@ bool WeatherApplet::isValidData(const QString &data) const
 bool WeatherApplet::isValidData(const QVariant &data) const
 {
     return isValidData(data.toString());
-}
-
-void WeatherApplet::setCurrentWeatherIconName(const QString &currentWeatherIconName)
-{
-    if (m_currentWeatherIconName == currentWeatherIconName) {
-        return;
-    }
-
-    m_currentWeatherIconName = currentWeatherIconName;
-    emit currentWeatherIconNameChanged(m_currentWeatherIconName);
 }
 
 void WeatherApplet::resetPanelModel()
@@ -161,28 +144,24 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
     }
 
     const QString conditionIconName = data["Condition Icon"].toString();
-    QString widgetIconName, panelIconName;
+    QString weatherIconName;
     // specific icon?
     if (!conditionIconName.isEmpty() &&
         conditionIconName != QLatin1String("weather-none-available") &&
         conditionIconName != QLatin1String("N/U") && // TODO: N/U and N/A should not be used here, fix dataengines
         conditionIconName != QLatin1String("N/A")) {
 
-        panelIconName = existingWeatherIconName(conditionIconName);
-        widgetIconName = panelIconName;
+        weatherIconName = existingWeatherIconName(conditionIconName);
     } else {
         // icon to use from current weather forecast?
         if (fiveDayTokens.count() == 6 && fiveDayTokens[1] != QLatin1String("N/U")) {
             // show the current weather
-            panelIconName = existingWeatherIconName(fiveDayTokens[1]);
-            widgetIconName = panelIconName;
+            weatherIconName = existingWeatherIconName(fiveDayTokens[1]);
         } else {
-            // do not set one for the panel, but at least for the widget
-            widgetIconName = QStringLiteral("weather-none-available");
+            weatherIconName = QStringLiteral("weather-none-available");
         }
     }
-    m_panelModel["currentConditionIcon"] = panelIconName;
-    setCurrentWeatherIconName(widgetIconName);
+    m_panelModel["currentConditionIcon"] = weatherIconName;
 
     m_panelModel["courtesy"] = data["Credit"].toString();
     m_panelModel["creditUrl"] = data["Credit Url"].toString();
@@ -426,38 +405,6 @@ void WeatherApplet::updateNoticesModel(const Plasma::DataEngine::Data &data)
     m_noticesModel << QVariant(watches);
 }
 
-void WeatherApplet::updateToolTip()
-{
-    QString currentWeatherToolTipMainText;
-    QString currentWeatherToolTipSubText;
-
-    const QString location = m_panelModel["location"].toString();
-
-    if (!location.isEmpty()) {
-        currentWeatherToolTipMainText = location;
-
-        const QString conditions = m_panelModel["currentConditions"].toString();
-        const QString temp = m_panelModel["currentTemperature"].toString();
-        currentWeatherToolTipSubText = i18nc("%1 is the weather condition, %2 is the temperature,"
-                                         " both come from the weather provider",
-                                         "%1 %2", conditions, temp);
-        // avoid almost empty or leading/trailing spaces, if conditions or temp is empty
-        currentWeatherToolTipSubText = currentWeatherToolTipSubText.trimmed();
-    } else {
-        currentWeatherToolTipMainText = i18nc("Shown when you have not set a weather provider", "Please Configure");
-        setCurrentWeatherIconName("weather-none-available");
-    }
-
-    if (m_currentWeatherToolTipMainText != currentWeatherToolTipMainText) {
-        m_currentWeatherToolTipMainText = currentWeatherToolTipMainText;
-        emit currentWeatherToolTipMainTextChanged(m_currentWeatherToolTipMainText);
-    }
-    if (m_currentWeatherToolTipSubText != currentWeatherToolTipSubText) {
-        m_currentWeatherToolTipSubText = currentWeatherToolTipSubText;
-        emit currentWeatherToolTipSubTextChanged(m_currentWeatherToolTipSubText);
-    }
-}
-
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     if (data.isEmpty()) {
@@ -469,7 +416,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     updateDetailsModel(data);
     updateNoticesModel(data);
     WeatherPopupApplet::dataUpdated(source, data);
-    updateToolTip();
 
     emit modelUpdated();
 }
@@ -480,7 +426,6 @@ void WeatherApplet::saveConfig(const QVariantMap& configChanges)
     resetPanelModel();
     m_fiveDaysModel.clear();
     m_detailsModel.clear();
-    updateToolTip();
 
     emit modelUpdated();
 
