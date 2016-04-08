@@ -219,7 +219,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
             match.setText(i18n("Correct")+QLatin1String(": ")+query);
         } else {
             match.setIcon(QIcon::fromTheme(QLatin1String( "edit-delete" )));
-            const QString recommended = i18n("Suggested words: %1", suggestions.join(i18nc("seperator for a list of words", ", ")));
+            const QString recommended = i18n("Suggested words: %1", suggestions.join(i18nc("separator for a list of words", ", ")));
             //TODO: try setting a text and a subtext, with the subtext being the suggestions
             match.setText(recommended);
             match.setData(suggestions);
