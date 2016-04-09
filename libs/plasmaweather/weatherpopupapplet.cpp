@@ -111,7 +111,7 @@ public:
             timeoutNotification =
                 KNotification::event( KNotification::Error, QString(), // TODO: some title?
                                       i18n("Weather information retrieval for %1 timed out.", list.value(2)),
-                                      QLatin1String("dialog-error"));
+                                      QStringLiteral("dialog-error"));
             QObject::connect(timeoutNotification, SIGNAL(closed()), q, SLOT(onTimeoutNotificationClosed()));
         }
     }
@@ -139,7 +139,7 @@ public:
     {
         QString result;
         if (!pressure.isValid()) {
-            return QLatin1String( "weather-none-available" );
+            return QStringLiteral("weather-none-available");
         }
         qreal temp = temperature.convertTo(Celsius).number();
         qreal p = pressure.convertTo(Kilopascal).number();
@@ -158,41 +158,41 @@ public:
 
         if (p > 103.0) {
             if (day) {
-                result = QLatin1String( "weather-clear" );
+                result = QStringLiteral("weather-clear");
             } else {
-                result = QLatin1String( "weather-clear-night" );
+                result = QStringLiteral("weather-clear-night");
             }
         } else if (p > 100.0) {
             if (day) {
-                result = QLatin1String( "weather-clouds" );
+                result = QStringLiteral("weather-clouds");
             } else {
-                result = QLatin1String( "weather-clouds-night" );
+                result = QStringLiteral("weather-clouds-night");
             }
         } else if (p > 99.0) {
             if (day) {
                 if (temp > 1.0) {
-                    result = QLatin1String( "weather-showers-scattered-day" );
+                    result = QStringLiteral("weather-showers-scattered-day");
                 } else if (temp < -1.0)  {
-                    result = QLatin1String( "weather-snow-scattered-day" );
+                    result = QStringLiteral("weather-snow-scattered-day");
                 } else {
-                    result = QLatin1String( "weather-snow-rain" );
+                    result = QStringLiteral("weather-snow-rain");
                 }
             } else {
                 if (temp > 1.0) {
-                    result = QLatin1String( "weather-showers-scattered-night" );
+                    result = QStringLiteral("weather-showers-scattered-night");
                 } else if (temp < -1.0)  {
-                    result = QLatin1String( "weather-snow-scattered-night" );
+                    result = QStringLiteral("weather-snow-scattered-night");
                 } else {
-                    result = QLatin1String( "weather-snow-rain" );
+                    result = QStringLiteral("weather-snow-rain");
                 }
             }
         } else {
             if (temp > 1.0) {
-                result = QLatin1String( "weather-showers" );
+                result = QStringLiteral("weather-showers");
             } else if (temp < -1.0)  {
-                result = QLatin1String( "weather-snow" );
+                result = QStringLiteral("weather-snow");
             } else {
-                result = QLatin1String( "weather-snow-rain" );
+                result = QStringLiteral("weather-snow-rain");
             }
         }
         //kDebug() << result;
@@ -280,25 +280,25 @@ void WeatherPopupApplet::saveConfig(const QVariantMap& configChanges)
     KConfigGroup cfg = config();
 
     // units
-    if (configChanges.contains("temperatureUnitId")) {
-        cfg.writeEntry("temperatureUnit", configChanges.value("temperatureUnitId").toInt());
+    if (configChanges.contains(QStringLiteral("temperatureUnitId"))) {
+        cfg.writeEntry("temperatureUnit", configChanges.value(QStringLiteral("temperatureUnitId")).toInt());
     }
-    if (configChanges.contains("windSpeedUnitId")) {
-        cfg.writeEntry("speedUnit", configChanges.value("windSpeedUnitId").toInt());
+    if (configChanges.contains(QStringLiteral("windSpeedUnitId"))) {
+        cfg.writeEntry("speedUnit", configChanges.value(QStringLiteral("windSpeedUnitId")).toInt());
     }
-    if (configChanges.contains("pressureUnitId")) {
-        cfg.writeEntry("pressureUnit", configChanges.value("pressureUnitId").toInt());
+    if (configChanges.contains(QStringLiteral("pressureUnitId"))) {
+        cfg.writeEntry("pressureUnit", configChanges.value(QStringLiteral("pressureUnitId")).toInt());
     }
-    if (configChanges.contains("visibilityUnitId")) {
-        cfg.writeEntry("visibilityUnit", configChanges.value("visibilityUnitId").toInt());
+    if (configChanges.contains(QStringLiteral("visibilityUnitId"))) {
+        cfg.writeEntry("visibilityUnit", configChanges.value(QStringLiteral("visibilityUnitId")).toInt());
     }
 
     // data source
-    if (configChanges.contains("updateInterval")) {
-        cfg.writeEntry("updateInterval", configChanges.value("updateInterval").toInt());
+    if (configChanges.contains(QStringLiteral("updateInterval"))) {
+        cfg.writeEntry("updateInterval", configChanges.value(QStringLiteral("updateInterval")).toInt());
     }
-    if (configChanges.contains("source")) {
-        cfg.writeEntry("source", configChanges.value("source").toString());
+    if (configChanges.contains(QStringLiteral("source"))) {
+        cfg.writeEntry("source", configChanges.value(QStringLiteral("source")).toString());
     }
 
     emit configNeedsSaving();
@@ -341,19 +341,19 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
         return;
     }
 
-    d->conditionIcon = data[QLatin1String( "Condition Icon" )].toString();
+    d->conditionIcon = data[QStringLiteral("Condition Icon")].toString();
     if (data[QLatin1String( "Pressure" )].toString() != QLatin1String( "N/A" )) {
-        d->pressure = Value(data[QLatin1String( "Pressure" )].toDouble(),
-                            static_cast<UnitId>(data[QLatin1String( "Pressure Unit" )].toInt()));
+        d->pressure = Value(data[QStringLiteral("Pressure")].toDouble(),
+                            static_cast<UnitId>(data[QStringLiteral("Pressure Unit")].toInt()));
     } else {
         d->pressure = Value();
     }
-    d->tend = data[QLatin1String( "Pressure Tendency" )].toString();
-    d->temperature = Value(data[QLatin1String( "Temperature" )].toDouble(),
-                           static_cast<UnitId>(data[QLatin1String( "Temperature Unit" )].toInt()));
-    d->latitude = data[QLatin1String( "Latitude" )].toDouble();
-    d->longitude = data[QLatin1String( "Longitude" )].toDouble();
-    setAssociatedApplicationUrls(QList<QUrl>() << QUrl(data.value(QLatin1String( "Credit Url" )).toString()));
+    d->tend = data[QStringLiteral("Pressure Tendency")].toString();
+    d->temperature = Value(data[QStringLiteral("Temperature")].toDouble(),
+                           static_cast<UnitId>(data[QStringLiteral("Temperature Unit")].toInt()));
+    d->latitude = data[QStringLiteral("Latitude")].toDouble();
+    d->longitude = data[QStringLiteral("Longitude")].toDouble();
+    setAssociatedApplicationUrls(QList<QUrl>() << QUrl(data.value(QStringLiteral("Credit Url")).toString()));
 
     d->busyTimer->stop();
     if (d->timeoutNotification) {
@@ -396,14 +396,14 @@ QVariantMap WeatherPopupApplet::configValues() const
     QVariantMap config;
 
     // units
-    config.insert("temperatureUnitId", d->temperatureUnit.id());
-    config.insert("windSpeedUnitId", d->speedUnit.id());
-    config.insert("pressureUnitId", d->pressureUnit.id());
-    config.insert("visibilityUnitId", d->visibilityUnit.id());
+    config.insert(QStringLiteral("temperatureUnitId"), d->temperatureUnit.id());
+    config.insert(QStringLiteral("windSpeedUnitId"), d->speedUnit.id());
+    config.insert(QStringLiteral("pressureUnitId"), d->pressureUnit.id());
+    config.insert(QStringLiteral("visibilityUnitId"), d->visibilityUnit.id());
 
     // data source
-    config.insert("updateInterval", d->updateInterval);
-    config.insert("source", d->source);
+    config.insert(QStringLiteral("updateInterval"), d->updateInterval);
+    config.insert(QStringLiteral("source"), d->source);
 
     return config;
 }

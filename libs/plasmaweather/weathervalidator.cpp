@@ -26,8 +26,7 @@ class WeatherValidator::Private
 {
 public:
     Private()
-        : dataengine(nullptr),
-          ion(QLatin1String( "bbcukmet" ))
+        : dataengine(nullptr)
     {}
 
     Plasma::DataEngine* dataengine;
@@ -64,7 +63,7 @@ void WeatherValidator::validate(const QString& location, bool silent)
     }
 
     d->silent = silent;
-    QString validation = QString(QLatin1String( "%1|validate|%2" )).arg(d->ion).arg(location);
+    const QString validation = d->ion + QStringLiteral("|validate|") + location;
     if (d->validating != validation) {
         d->dataengine->disconnectSource(d->validating, this);
     }
@@ -87,8 +86,10 @@ void WeatherValidator::setDataEngine(Plasma::DataEngine* dataengine)
 void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     QMap<QString, QString> locations;
+
     d->dataengine->disconnectSource(source, this);
-    QStringList result = data[QLatin1String( "validate" )].toString().split(QLatin1Char( '|' ));
+
+    const QStringList result = data[QStringLiteral("validate")].toString().split(QLatin1Char('|'));
 
     if (result.count() < 2) {
         QString message = i18n("Cannot find '%1' using %2.", source, d->ion);
@@ -97,23 +98,23 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
             KMessageBox::error(0, message);
         }
     } else if (result[1] == QLatin1String( "valid" ) && result.count() > 2) {
-        QString weatherSource = result[0] + QLatin1String( "|weather|%1|%2" );
-        QString singleWeatherSource = result[0] + QLatin1String( "|weather|%1" );
+        const QString weatherSource = result[0] + QLatin1String( "|weather|");
         int i = 3;
         //kDebug() << d->ion << result.count() << result;
         while (i < result.count() - 1) {
             if (result[i] == QLatin1String( "place" )) {
+                // not enough fields left for place data?
                 if (i + 1 > result.count()) {
-                    continue;
+                    break;
                 }
 
-                QString name = result[i + 1];
+                const QString& name = result[i + 1];
                 if (i + 2 < result.count() && result[i + 2] == QLatin1String( "extra" )) {
-                    QString id = result[i + 3];
-                    locations.insert(name, weatherSource.arg(name, id));
+                    const QString& id = result[i + 3];
+                    locations.insert(name, weatherSource + name + QLatin1Char('|') + id);
                     i += 4;
                 } else {
-                    locations.insert(name, singleWeatherSource.arg(name));
+                    locations.insert(name, weatherSource + name);
                     i += 2;
                 }
             } else {
