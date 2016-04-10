@@ -22,7 +22,6 @@
 
 #include <Plasma/DataContainer>
 #include <Plasma/DataEngine>
-#include <Plasma/PluginLoader>
 
 #include <KLocalizedString>
 
@@ -108,7 +107,7 @@ void LocationListModel::searchLocations(const QString &searchString)
         return;
     }
 
-    Plasma::DataEngine *dataengine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("weather") );
+    Plasma::DataEngine* dataengine = dataEngine(QStringLiteral("weather"));
 
     const QVariantList plugins = dataengine->containerForSource(QLatin1String("ions"))->data().values();
     foreach (const QVariant& plugin, plugins) {

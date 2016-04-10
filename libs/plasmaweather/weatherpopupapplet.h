@@ -21,7 +21,9 @@
 #define WEATHERPOPUPAPPLET_HEADER
 
 #include <KUnitConversion/Unit>
+
 #include <Plasma/DataEngine>
+#include <Plasma/DataEngineConsumer>
 #include <Plasma/Applet>
 
 #include "plasmaweather_export.h"
@@ -32,7 +34,7 @@
  *
  * @short Base class for Weather Applets
  */
-class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
+class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
 

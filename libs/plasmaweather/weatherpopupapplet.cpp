@@ -20,15 +20,12 @@
 #include "weatherpopupapplet.h"
 
 #include <QTimer>
-#include <QIcon>
 
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KNotification>
 
 #include <KUnitConversion/Converter>
-
-#include <Plasma/PluginLoader>
 
 #include "weatherlocation.h"
 
@@ -39,8 +36,6 @@ class Q_DECL_HIDDEN WeatherPopupApplet::Private
 public:
     Private(WeatherPopupApplet *weatherapplet)
         : q(weatherapplet)
-        , weatherEngine(nullptr)
-        , timeEngine(nullptr)
         , updateInterval(0)
         , location(nullptr)
         , timeoutNotification(nullptr)
@@ -52,8 +47,6 @@ public:
     }
 
     WeatherPopupApplet *q;
-    Plasma::DataEngine *weatherEngine;
-    Plasma::DataEngine *timeEngine;
     Converter converter;
     Unit temperatureUnit;
     Unit speedUnit;
@@ -149,9 +142,7 @@ public:
         p += t * 10;
 
         // PORT!
-//         if (!timeEngine) {
-//             timeEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("time") );
-//         }
+//         Plasma::DataEngine *timeEngine = dataEngine(QStringLiteral("time"));
 //         Plasma::DataEngine::Data data = timeEngine->query(
 //                 QString(QLatin1String( "Local|Solar|Latitude=%1|Longitude=%2" )).arg(latitude).arg(longitude));
         bool day = true;//(data[QLatin1String( "Corrected Elevation" )].toDouble() > 0.0);
@@ -223,13 +214,6 @@ WeatherPopupApplet::~WeatherPopupApplet()
 
 void WeatherPopupApplet::init()
 {
-    // workaround for weather dataengine being destructed behind our back when there are no
-    // current connections for a while
-    // get the weather dataengine and do a dummy connect for ions source, never to be disconnected
-    // this will keep the refcount of connections for the dataengine always above 0
-    d->weatherEngine = Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("weather") );
-    d->weatherEngine->connectSource(QStringLiteral("ions"), this);
-
     configChanged();
 }
 
@@ -250,8 +234,7 @@ void WeatherPopupApplet::connectToEngine()
             connect(d->location, SIGNAL(finished(QString)), this, SLOT(locationReady(QString)));
         }
 
-        Plasma::DataEngine *dataEngine =
-            Plasma::PluginLoader::self()->loadDataEngine( QStringLiteral("geolocation") );
+        Plasma::DataEngine *dataEngine = dataEngine(QStringLiteral("geolocation"));
         d->location->setDataEngines(dataEngine, d->weatherEngine);
         d->location->getDefault();
 #endif
@@ -266,7 +249,8 @@ void WeatherPopupApplet::connectToEngine()
         delete d->location;
         d->location = nullptr;
 
-        d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
+        Plasma::DataEngine* weatherDataEngine = dataEngine(QStringLiteral("weather"));
+        weatherDataEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
         QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
         if (graphicObject) {
             graphicObject->setProperty("busy", true);
@@ -307,7 +291,8 @@ void WeatherPopupApplet::saveConfig(const QVariantMap& configChanges)
 void WeatherPopupApplet::configChanged()
 {
     if (!d->source.isEmpty()) {
-        d->weatherEngine->disconnectSource(d->source, this);
+        Plasma::DataEngine* weatherDataEngine = dataEngine(QStringLiteral("weather"));
+        weatherDataEngine->disconnectSource(d->source, this);
     }
 
     KConfigGroup cfg = config();
@@ -333,9 +318,7 @@ void WeatherPopupApplet::configChanged()
 void WeatherPopupApplet::dataUpdated(const QString& source,
                                      const Plasma::DataEngine::Data &data)
 {
-    if (source == QLatin1String("ions")) {
-        return;
-    }
+    Q_UNUSED(source);
 
     if (data.isEmpty()) {
         return;

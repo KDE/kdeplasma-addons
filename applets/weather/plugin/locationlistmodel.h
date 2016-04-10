@@ -18,6 +18,8 @@
 #ifndef LOCATIONLISTMODEL_H
 #define LOCATIONLISTMODEL_H
 
+#include <Plasma/DataEngineConsumer>
+
 #include <QAbstractListModel>
 #include <QVector>
 #include <QMap>
@@ -44,7 +46,7 @@ Q_DECLARE_METATYPE(LocationItem)
 Q_DECLARE_TYPEINFO(LocationItem, Q_MOVABLE_TYPE);
 
 
-class LocationListModel : public QAbstractListModel
+class LocationListModel : public QAbstractListModel, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
     Q_PROPERTY(bool validatingInput READ isValidatingInput NOTIFY validatingInputChanged)
