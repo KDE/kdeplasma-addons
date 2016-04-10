@@ -38,12 +38,40 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
 
     public:
         WeatherPopupApplet(QObject *parent, const QVariantList &args);
-        ~WeatherPopupApplet();
+        ~WeatherPopupApplet() override;
+
+    public: // Plasma::Applet API
+        /**
+         * Called once the applet is loaded and added to a Corona.
+         */
+        void init() override;
 
         /**
-         * Reimplemented from Plasma::Applet
+         * Called when config is chnaged
          */
-        virtual void init();
+        void configChanged() override;
+
+    public: // API to be implemented by subclasses
+        /**
+         * Used by QML config code, so check used keys carefully
+         * @return currently used config values
+         */
+        Q_INVOKABLE virtual QVariantMap configValues() const;
+
+    public Q_SLOTS: // API to be implemented by subclasses
+        /**
+         * Called when config is accepted
+         * @param changedConfigValues config values which got changed
+         */
+        virtual void saveConfig(const QVariantMap& changedConfigValues);
+
+        /**
+         * Called when data is updated.
+         * Method with this signature expected by connected dataengines.
+         * Virtual, so subclasses can override it to also handle the data.
+         */
+        virtual void dataUpdated(const QString &name,
+                                 const Plasma::DataEngine::Data &data);
 
     public:
         /**
@@ -72,30 +100,6 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet
         QString conditionIcon();
 
         QString source() const;
-
-        /**
-         * Used by QML config code, so check used keys carefully
-         * @return currently used config values
-         */
-        Q_INVOKABLE virtual QVariantMap configValues() const;
-
-    public Q_SLOTS:
-        /**
-         * Called when config is accepted
-         * @param changedConfigValues config values which got changed
-         */
-        virtual void saveConfig(const QVariantMap& changedConfigValues);
-
-        /**
-         * Called when data is updated
-         */
-        virtual void dataUpdated(const QString &name,
-                                 const Plasma::DataEngine::Data &data);
-
-        /**
-         * Called when config is chnaged
-         */
-        virtual void configChanged();
 
     private:
         /**

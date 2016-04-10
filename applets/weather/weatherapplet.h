@@ -33,7 +33,7 @@ class WeatherApplet : public WeatherPopupApplet
 
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
-    ~WeatherApplet();
+    ~WeatherApplet() override;
 
 public: // Plasma::Applet API
     void init() override;
@@ -47,11 +47,9 @@ public:
 Q_SIGNALS:
     void modelUpdated();
 
-public Q_SLOTS: // as expected by connected dataengines
-    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
-
 public: // WeatherPopupApplet API
     void saveConfig(const QVariantMap& configChanges) override;
+    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data) override;
 
 private:
     bool isValidData(const QVariant &data) const;
