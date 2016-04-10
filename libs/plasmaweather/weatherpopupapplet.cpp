@@ -34,7 +34,7 @@
 
 using namespace KUnitConversion;
 
-class WeatherPopupApplet::Private
+class Q_DECL_HIDDEN WeatherPopupApplet::Private
 {
 public:
     Private(WeatherPopupApplet *weatherapplet)
