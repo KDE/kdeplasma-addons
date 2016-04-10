@@ -353,7 +353,12 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
                            static_cast<UnitId>(data[QStringLiteral("Temperature Unit")].toInt()));
     d->latitude = data[QStringLiteral("Latitude")].toDouble();
     d->longitude = data[QStringLiteral("Longitude")].toDouble();
-    setAssociatedApplicationUrls(QList<QUrl>() << QUrl(data.value(QStringLiteral("Credit Url")).toString()));
+    const QString creditUrl = data[QStringLiteral("Credit Url")].toString();
+    QList<QUrl> associatedApplicationUrls;
+    if (!creditUrl.isEmpty()) {
+        associatedApplicationUrls << creditUrl;
+    }
+    setAssociatedApplicationUrls(associatedApplicationUrls);
 
     d->busyTimer->stop();
     if (d->timeoutNotification) {
