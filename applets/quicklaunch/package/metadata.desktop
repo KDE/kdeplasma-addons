@@ -30,6 +30,7 @@ Name[sv]=Snabbstart
 Name[uk]=Швидкий запуск
 Name[x-test]=xxQuicklaunchxx
 Name[zh_CN]=快速启动
+Name[zh_TW]=快速啟動
 
 Comment=Launch your favourite Applications
 Comment[ca]=Llança les vostres aplicacions preferides
@@ -62,6 +63,7 @@ Comment[sv]=Start dina favoritprogram
 Comment[uk]=Запуск ваших улюблених програм
 Comment[x-test]=xxLaunch your favourite Applicationsxx
 Comment[zh_CN]=启动您最常用的程序
+Comment[zh_TW]=啟動您最愛的應用程式
 
 Icon=fork
 Type=Service
