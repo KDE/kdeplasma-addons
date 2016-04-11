@@ -141,9 +141,12 @@ Item {
             anchors {
                 bottom: parent.bottom
                 right: parent.right
+                left: parent.left
                 // matching round ends of bars behind data rows
                 rightMargin: units.smallSpacing
             }
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignRight
             font {
                 pointSize: theme.smallestFont.pointSize
                 underline: mouseArea.enabled
