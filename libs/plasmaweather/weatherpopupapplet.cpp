@@ -29,6 +29,7 @@
 #include <KUnitConversion/Converter>
 
 #include <Plasma/PluginLoader>
+#include <plasma_version.h>
 
 #include "weatherlocation.h"
 
@@ -354,11 +355,29 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     d->latitude = data[QLatin1String( "Latitude" )].toDouble();
     d->longitude = data[QLatin1String( "Longitude" )].toDouble();
     const QString creditUrl = data[QStringLiteral("Credit Url")].toString();
+#if PLASMA_VERSION >= 0x052200
     QList<QUrl> associatedApplicationUrls;
     if (!creditUrl.isEmpty()) {
         associatedApplicationUrls << creditUrl;
     }
     setAssociatedApplicationUrls(associatedApplicationUrls);
+#else
+    // older plasma framework versions are exposed to a crash risk if
+    // the associatedApplicationUrls are explicitely set to an empty list.
+    // So once some urls had been set before and we need to update them to the current,
+    // always use a non-empty list.
+    // As we do not have a proper url as fallback if there is no credit url given,
+    // just set an empty url (which creditUrl then is, so same code works).
+    // That empty url will result in the associated-application action being active and
+    // activating it will result in a "bogus url" error. Which seems the least grave error
+    // case to escape into here.
+    const QList<QUrl> oldAssociatedApplicationUrls = associatedApplicationUrls();
+    if (!creditUrl.isEmpty() || !oldAssociatedApplicationUrls.isEmpty()) {
+        QList<QUrl> associatedApplicationUrls;
+        associatedApplicationUrls << creditUrl;
+        setAssociatedApplicationUrls(associatedApplicationUrls);
+    }
+#endif
 
     d->busyTimer->stop();
     if (d->timeoutNotification) {
