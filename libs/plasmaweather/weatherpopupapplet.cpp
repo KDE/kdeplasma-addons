@@ -267,12 +267,13 @@ void WeatherPopupApplet::connectToEngine()
         delete d->location;
         d->location = nullptr;
 
-        d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
         QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
         if (graphicObject) {
             graphicObject->setProperty("busy", true);
         }
         d->busyTimer->start();
+
+        d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
     }
 }
 
