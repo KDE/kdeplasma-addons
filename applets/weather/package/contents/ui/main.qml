@@ -119,6 +119,7 @@ Item {
 
         PlasmaComponents.Label {
             id: courtesyLabel
+            property string creditUrl: plasmoid.nativeInterface.panelModel.creditUrl
             anchors {
                 bottom: parent.bottom
                 right: parent.right
@@ -130,16 +131,18 @@ Item {
             horizontalAlignment: Text.AlignRight
             font {
                 pointSize: theme.smallestFont.pointSize
-                underline: mouseArea.enabled
+                underline: !!creditUrl
             }
-            text: plasmoid.nativeInterface.panelModel.courtesy
-
-            MouseArea {
-                id: mouseArea
-                anchors.fill: parent
-                enabled: !!plasmoid.nativeInterface.panelModel.creditUrl
-                onClicked: Qt.openUrlExternally(plasmoid.nativeInterface.panelModel.creditUrl);
+            linkColor : color
+            textFormat: Text.StyledText
+            text: {
+                var result = plasmoid.nativeInterface.panelModel.courtesy;
+                if (creditUrl) {
+                    result = "<a href=\"" + creditUrl + "\">" + result + "</a>";
+                }
+                return result;
             }
+            onLinkActivated: Qt.openUrlExternally(link);
         }
     }
 }
