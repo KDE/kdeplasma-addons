@@ -62,7 +62,7 @@ X-KDE-Library=plasma_applet_weather
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
-X-Plasma-NotificationArea=true
+X-Plasma-NotificationArea=false
 X-KDE-PluginInfo-Author=Luís Gabriel Lima
 X-KDE-PluginInfo-Email=lampih@gmail.com
 X-KDE-PluginInfo-Name=org.kde.plasma.weather
