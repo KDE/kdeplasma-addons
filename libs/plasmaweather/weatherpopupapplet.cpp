@@ -79,10 +79,7 @@ public:
             if (timeoutNotification) {
                 timeoutNotification->close();
             }
-            QObject *graphicObject = q->property("_plasma_graphicObject").value<QObject *>();
-            if (graphicObject) {
-                graphicObject->setProperty("busy", false);
-            }
+            q->setBusy(false);
             q->setConfigurationRequired(true);
         }
 
@@ -92,10 +89,7 @@ public:
 
     void giveUpBeingBusy()
     {
-        QObject *graphicObject = q->property("_plasma_graphicObject").value<QObject *>();
-        if (graphicObject) {
-            graphicObject->setProperty("busy", false);
-        }
+        q->setBusy(false);
 
         QStringList list = source.split(QLatin1Char( '|' ), QString::SkipEmptyParts);
         if (list.count() < 3) {
@@ -238,10 +232,7 @@ void WeatherPopupApplet::connectToEngine()
         d->location->setDataEngines(dataEngine, d->weatherEngine);
         d->location->getDefault();
 #endif
-        QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
-        if (graphicObject) {
-            graphicObject->setProperty("busy", false);
-        }
+        setBusy(false);
         // TODO: remove once WeatherLocation is fixed above
         // fake d->location returning no result
         d->locationReady(QString());
@@ -249,10 +240,7 @@ void WeatherPopupApplet::connectToEngine()
         delete d->location;
         d->location = nullptr;
 
-        QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
-        if (graphicObject) {
-            graphicObject->setProperty("busy", true);
-        }
+        setBusy(true);
         d->busyTimer->start();
 
         Plasma::DataEngine* weatherDataEngine = dataEngine(QStringLiteral("weather"));
@@ -348,10 +336,7 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     if (d->timeoutNotification) {
         d->timeoutNotification->close();
     }
-    QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
-    if (graphicObject) {
-        graphicObject->setProperty("busy", false);
-    }
+    setBusy(false);
 }
 
 Unit WeatherPopupApplet::pressureUnit() const

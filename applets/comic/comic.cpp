@@ -163,10 +163,7 @@ ComicApplet::~ComicApplet()
 
 void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
 {
-    QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
-    if (graphicObject) {
-        graphicObject->setProperty("busy", false);
-    }
+    setBusy(false);
 
     //disconnect prefetched comic strips
     if ( source != mOldSource ) {
@@ -473,10 +470,8 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 
     if ( !id.isEmpty() && mEngine && mEngine->isValid() ) {
 
-        QObject *graphicObject = property("_plasma_graphicObject").value<QObject *>();
-        if (graphicObject) {
-            graphicObject->setProperty("busy", true);
-        }
+        setBusy(true);
+
         const QString identifier = id + ':' + identifierSuffix;
 
         //disconnecting of the oldSource is needed, otherwise you could get data for comics you are not looking at if you use tabs
