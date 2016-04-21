@@ -233,6 +233,11 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
             continue;
         }
         KUnitConversion::Value v = category.convert(KUnitConversion::Value(value.toDouble(), u1), u);
+
+	if (!v.isValid()) {
+		continue;
+	}
+
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIcon(QIcon::fromTheme(QLatin1String( "edit-copy" )));
