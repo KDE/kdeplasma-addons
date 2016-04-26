@@ -46,7 +46,7 @@ Name[zh_TW]=翻譯器
 Comment=Translates into any language using Google Translate. For list of supported languages visit https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[ar]=ترجم إلى أيّ لغة باستخدام ترجمات جوجل. للحصول على لاحة باللغات المدعومة زُر https://developers.google.com/translate/v2/using_rest?hl=ar#language-params
 Comment[bs]=Prevodi u bilo koji jezik koristeći Google Translate. Za listu podržanih jezika posjetite https://developers.google.com/translate/v2/using_rest?hl=de#language-params
-Comment[ca]=Tradueix a qualsevol idioma usant el Google Translate. Per la llista d'idiomes acceptats visiteu https://developers.google.com/translate/v2/using_rest?hl=de#language-params
+Comment[ca]=Tradueix a qualsevol idioma usant el Google Translate. Per a la llista d'idiomes acceptats visiteu https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[ca@valencia]=Tradueix a qualsevol idioma usant el Google Translate. Per la llista d'idiomes acceptats visiteu https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[cs]=Překládá do jakéhokoliv jazyka pomocí Google Translate. Pro seznam podporovaných jazyků navštivte https://developers.google.com/translate/v2/using_rest?hl=de#language-params
 Comment[da]=Oversætter til alle sprog med Google Translate. Besøg https://developers.google.com/translate/v2/using_rest?hl=de#language-params for en liste over understøttede sprog
