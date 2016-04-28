@@ -27,6 +27,8 @@
 
 #include <Plasma/Package>
 
+#include <cmath>
+
 template <typename T>
 T clampValue(T value, int decimals)
 {
