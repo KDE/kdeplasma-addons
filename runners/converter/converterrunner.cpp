@@ -244,9 +244,9 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
         KUnitConversion::Value v = category.convert(KUnitConversion::Value(numberValue, u1), u);
 
-	if (!v.isValid()) {
-		continue;
-	}
+        if (!v.isValid()) {
+            continue;
+        }
 
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
