@@ -227,12 +227,22 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
     }
 
+    QLocale locale;
     KUnitConversion::Unit u1 = category.unit(unit1);
     foreach (const KUnitConversion::Unit& u, units) {
         if (u1 == u) {
             continue;
         }
-        KUnitConversion::Value v = category.convert(KUnitConversion::Value(value.toDouble(), u1), u);
+
+        bool ok;
+        double numberValue = locale.toDouble(value, &ok);
+        if (!ok) {
+            numberValue = value.toDouble(&ok);
+            if (!ok) {
+                continue;
+            }
+        }
+        KUnitConversion::Value v = category.convert(KUnitConversion::Value(numberValue, u1), u);
 
 	if (!v.isValid()) {
 		continue;
