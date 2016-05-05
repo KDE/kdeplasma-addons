@@ -123,21 +123,6 @@ Item {
 
                 text: model.title
                 iconSource: model.icon
-
-                Rectangle {
-                    id: highlightMask
-
-                    anchors {
-                        bottom: parent.bottom
-                        left: parent.left
-                    }
-
-                    width: Math.max(units.iconSizes.small, tabButton.height)
-                    height: Math.max(units.iconSizes.small, tabButton.height)
-
-                    color: "white"
-                    opacity: model.highlight ? 0 : 0.5
-                }
             }
         }
     }
@@ -183,6 +168,7 @@ Item {
             topMargin: (comicTabbar.visible) ? 3 : 0
         }
 
+        visible: plasmoid.nativeInterface.tabIdentifiers.length > 0
         comicData: plasmoid.nativeInterface.comicData
     }
 
