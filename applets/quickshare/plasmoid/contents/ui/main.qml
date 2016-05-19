@@ -169,7 +169,8 @@ DropArea {
             root.errorMessage = message;
         }
         onWindowDeactivated: {
-            root.state = "idle";
+            if (!running)
+                root.state = "idle";
         }
     }
 
