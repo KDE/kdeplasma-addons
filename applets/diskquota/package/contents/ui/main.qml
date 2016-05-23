@@ -72,36 +72,33 @@ Item {
             }
         }
 
-        ColumnLayout {
-            anchors.fill: root
-            Components.Label {
-                visible: !diskQuota.quotaInstalled || listView.count == 0
-                anchors.fill: parent
-                text: diskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
+        Components.Label {
+            visible: !diskQuota.quotaInstalled || listView.count == 0
+            anchors.fill: parent
+            text: diskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
 
-            PlasmaExtras.ScrollArea {
-                anchors.fill: parent
-                ListView {
-                    id: listView
-                    model: diskQuota.model
-                    boundsBehavior: Flickable.StopAtBounds
-                    highlight: Components.Highlight { }
-                    highlightMoveDuration: 0
-                    highlightResizeDuration: 0
-                    currentIndex: -1
-                    delegate: ListDelegateItem {
-                        enabled: diskQuota.cleanUpToolInstalled
-                        width: listView.width
-                        mountPoint: model.mountPoint
-                        details: model.details
-                        iconName: model.icon
-                        usedString: model.used
-                        freeString: model.free
-                        usage: model.usage
-                    }
+        PlasmaExtras.ScrollArea {
+            anchors.fill: parent
+            ListView {
+                id: listView
+                model: diskQuota.model
+                boundsBehavior: Flickable.StopAtBounds
+                highlight: Components.Highlight { }
+                highlightMoveDuration: 0
+                highlightResizeDuration: 0
+                currentIndex: -1
+                delegate: ListDelegateItem {
+                    enabled: diskQuota.cleanUpToolInstalled
+                    width: listView.width
+                    mountPoint: model.mountPoint
+                    details: model.details
+                    iconName: model.icon
+                    usedString: model.used
+                    freeString: model.free
+                    usage: model.usage
                 }
             }
         }
