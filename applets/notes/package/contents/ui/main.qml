@@ -116,6 +116,14 @@ PlasmaCore.SvgItem {
         }
     }
 
+    DocumentHandler {
+        id: documentHandler
+        target: mainTextArea
+        cursorPosition: mainTextArea.cursorPosition
+        selectionStart: mainTextArea.selectionStart
+        selectionEnd: mainTextArea.selectionEnd
+    }
+
     PlasmaComponents.TextArea {
         id: mainTextArea
         anchors {
@@ -137,7 +145,26 @@ PlasmaCore.SvgItem {
 
         onLinkActivated: Qt.openUrlExternally(link)
 
-        Keys.onEscapePressed: plasmoid.expanded = false
+        Keys.onPressed: {
+            if(event.key === Qt.Key_Escape) {
+                plasmoid.expanded = false;
+                event.accepted = true;
+            } else if(event.modifiers === Qt.ControlModifier) {
+                if(event.key === Qt.Key_B) {
+                    documentHandler.bold = !documentHandler.bold;
+                    event.accepted = true;
+                } else if(event.key === Qt.Key_I) {
+                    documentHandler.italic = !documentHandler.italic;
+                    event.accepted = true;
+                } else if(event.key === Qt.Key_U) {
+                    documentHandler.underline = !documentHandler.underline;
+                    event.accepted = true;
+                } else if(event.key === Qt.Key_S) {
+                    documentHandler.strikeOut = !documentHandler.strikeOut;
+                    event.accepted = true;
+                }
+            }
+        }
 
         style: PlasmaStyle.TextAreaStyle {
             //this is deliberately _NOT_ the theme color as we are over a known bright background
@@ -191,14 +218,6 @@ PlasmaCore.SvgItem {
             mainTextArea.deselect()
         }
         onDragEnter: mainTextArea.forceActiveFocus()
-    }
-
-    DocumentHandler {
-        id: documentHandler
-        target: mainTextArea
-        cursorPosition: mainTextArea.cursorPosition
-        selectionStart: mainTextArea.selectionStart
-        selectionEnd: mainTextArea.selectionEnd
     }
 
     RowLayout {
