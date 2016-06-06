@@ -18,7 +18,7 @@ target_link_libraries(activitypagerplugin
                       Qt5::Qml
                       Qt5::Quick
                       Qt5::DBus
-                      PW::LibTaskManager
+                      PW::LibLegacyTaskManager
 )
 
 if (X11_FOUND)
