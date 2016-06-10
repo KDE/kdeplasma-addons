@@ -38,6 +38,8 @@ public:
         : q(weatherapplet)
         , updateInterval(0)
         , location(nullptr)
+        , latitude(qQNaN())
+        , longitude(qQNaN())
         , timeoutNotification(nullptr)
     {
         busyTimer = new QTimer(q);
@@ -64,6 +66,13 @@ public:
     double longitude;
     QTimer *busyTimer;
     KNotification *timeoutNotification;
+
+    bool isValidLatitude() {
+        return -90 <= latitude && latitude <= 90;
+    }
+    bool isValidLongitude() {
+        return -180 <= longitude && longitude <= 180;
+    }
 
     void locationReady(const QString &src)
     {
@@ -304,6 +313,22 @@ void WeatherPopupApplet::configChanged()
     connectToEngine();
 }
 
+inline double readGeoDouble(const Plasma::DataEngine::Data &data, const QString &key)
+{
+    const Plasma::DataEngine::Data::ConstIterator it = data.find(key);
+
+    if (it == data.end()) {
+        return qQNaN();
+    }
+
+    bool ok = false;
+    double result = it.value().toDouble(&ok);
+    if (!ok) {
+        result = qQNaN();
+    }
+    return result;
+}
+
 void WeatherPopupApplet::dataUpdated(const QString& source,
                                      const Plasma::DataEngine::Data &data)
 {
@@ -323,8 +348,8 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     d->tend = data[QStringLiteral("Pressure Tendency")].toString();
     d->temperature = Value(data[QStringLiteral("Temperature")].toDouble(),
                            static_cast<UnitId>(data[QStringLiteral("Temperature Unit")].toInt()));
-    d->latitude = data[QStringLiteral("Latitude")].toDouble();
-    d->longitude = data[QStringLiteral("Longitude")].toDouble();
+    d->latitude = readGeoDouble(data, QStringLiteral("Latitude"));
+    d->longitude = readGeoDouble(data, QStringLiteral("Longitude"));
     const QString creditUrl = data[QStringLiteral("Credit Url")].toString();
     QList<QUrl> associatedApplicationUrls;
     if (!creditUrl.isEmpty()) {
