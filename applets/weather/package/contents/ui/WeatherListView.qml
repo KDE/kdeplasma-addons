@@ -31,12 +31,10 @@ Column {
     Repeater {
         id: repeater
 
-        Rectangle {
+        Item {
             id: rect
             height: root.rowHeight
             width: root.width
-            radius: root.roundedRows ? units.smallSpacing : 0
-            color: Qt.rgba(theme.textColor.r, theme.textColor.g, theme.textColor.b, ((index+1)/repeater.count)*0.3)
 
             Loader {
                 property int rowIndex: index

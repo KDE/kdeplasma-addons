@@ -29,6 +29,7 @@ PlasmaCore.FrameSvgItem {
     visible: !!model.location
 
     PlasmaCore.IconItem {
+        id: iconItem
         source: model.currentConditionIcon
         height: parent.height
         width: height
@@ -41,7 +42,7 @@ PlasmaCore.FrameSvgItem {
             left: parent.left
             right: tempLabel.visible ? forecastTempsLabel.left : parent.right
             topMargin: units.smallSpacing
-            leftMargin: parent.width * 0.21
+            leftMargin: iconItem.width
         }
         font {
             bold: true
@@ -56,7 +57,7 @@ PlasmaCore.FrameSvgItem {
         anchors {
             top: parent.top
             left: locationLabel.left
-            topMargin: parent.height * 0.6
+            topMargin: parent.height * 0.5
         }
         text: model.currentConditions
     }

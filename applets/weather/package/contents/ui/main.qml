@@ -114,8 +114,8 @@ Item {
                 bottom: courtesyLabel.top
                 left: parent.left
                 right: parent.right
-                topMargin: units.largeSpacing
-                bottomMargin: units.largeSpacing
+                topMargin: units.smallSpacing
+                bottomMargin: units.smallSpacing
             }
             FiveDaysView {
                 id: fiveDaysView
@@ -153,6 +153,7 @@ Item {
                 underline: !!creditUrl
             }
             linkColor : color
+            opacity: 0.6
             textFormat: Text.StyledText
             text: {
                 var result = plasmoid.nativeInterface.panelModel.courtesy;
