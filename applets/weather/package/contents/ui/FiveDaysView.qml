@@ -71,7 +71,7 @@ WeatherListView {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            opacity: font.bold && checkTitle(text) ? 0.5 : 1
+            opacity: font.bold && checkTitle(text) ? 0.6 : 1
         }
     }
 
