@@ -24,11 +24,11 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 Item {
    id: konsoleProfiles
 
-    Plasmoid.switchWidth: units.gridUnit * 13
-    Plasmoid.switchHeight: units.gridUnit * 16
+    Plasmoid.switchWidth: units.gridUnit * 11
+    Plasmoid.switchHeight: units.gridUnit * 11
 
     Layout.minimumWidth: units.gridUnit * 12
-    Layout.minimumHeight: units.gridUnit * 15
+    Layout.minimumHeight: units.gridUnit * 12
 
     function popupEventSlot(shown) {
         if (shown) {
@@ -72,8 +72,8 @@ Item {
         PlasmaCore.IconItem {
             id: appIcon
             source: "utilities-terminal"
-            width: 32
-            height: 32
+            width: units.iconSizes.medium
+            height: units.iconSizes.medium
         }
 
         PlasmaComponents.Label {

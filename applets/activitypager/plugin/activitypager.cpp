@@ -50,7 +50,7 @@
 #include <kactivities/consumer.h>
 #include <kactivities/controller.h>
 
-#include <taskmanager/task.h>
+#include <legacytaskmanager/task.h>
 
 const int FAST_UPDATE_DELAY = 100;
 const int UPDATE_DELAY = 500;
@@ -597,7 +597,7 @@ void ActivityPager::dropMimeData(QMimeData *mimeData, int desktopId)
     }
 
     bool ok;
-    const QList<WId> &ids = TaskManager::Task::idsFromMimeData(mimeData, &ok);
+    const QList<WId> &ids = LegacyTaskManager::Task::idsFromMimeData(mimeData, &ok);
     if (ok) {
         foreach (const WId &id, ids) {
             KWindowSystem::setOnActivities(id, {newActivity});

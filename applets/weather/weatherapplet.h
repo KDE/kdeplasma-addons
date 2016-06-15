@@ -59,7 +59,9 @@ private:
     void updateFiveDaysModel(const Plasma::DataEngine::Data &data);
     void updateDetailsModel(const Plasma::DataEngine::Data &data);
     void updateNoticesModel(const Plasma::DataEngine::Data &data);
-    QString convertTemperature(KUnitConversion::Unit format, const QString &value,
+    QString convertTemperature(KUnitConversion::Unit format, float value,
+                               int type, bool rounded = false, bool degreesOnly = false);
+    QString convertTemperature(KUnitConversion::Unit format, const QVariant &value,
                                int type, bool rounded = false, bool degreesOnly = false);
 
 private:
