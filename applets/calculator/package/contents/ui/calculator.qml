@@ -278,7 +278,7 @@ Item {
             Layout.fillWidth: true
             Layout.minimumHeight: 2 * display.font.pixelSize;
             imagePath: "widgets/frame";
-            prefix: "sunken";
+            prefix: "plain";
 
             TextEdit {
                 id: display;
@@ -287,7 +287,7 @@ Item {
                     margins: parent.margins.right;
                 }
                 text: "0";
-                font.pointSize: 16;
+                font.pointSize: theme.defaultFont.pointSize * 2;
                 font.weight: Font.Bold;
                 color: theme.viewTextColor;
                 horizontalAlignment: TextEdit.AlignRight;
