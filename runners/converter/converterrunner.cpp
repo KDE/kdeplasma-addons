@@ -227,6 +227,8 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
     }
 
+    QList<Plasma::QueryMatch> matches;
+
     QLocale locale;
     KUnitConversion::Unit u1 = category.unit(unit1);
     foreach (const KUnitConversion::Unit& u, units) {
@@ -253,8 +255,11 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         match.setIcon(QIcon::fromTheme(QLatin1String( "edit-copy" )));
         match.setText(QString(QLatin1String( "%1 (%2)" )).arg(v.toString()).arg(u.symbol()));
         match.setData(v.number());
-        context.addMatch(match);
+        match.setRelevance(1.0 - std::abs(std::log10(v.number())) / 50.0);
+        matches.append(match);
     }
+
+    context.addMatches(matches);
 }
 
 void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
