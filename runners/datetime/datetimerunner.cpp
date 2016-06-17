@@ -125,7 +125,7 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
     match.setText(text);
     match.setData(clipboardText);
     match.setType(Plasma::QueryMatch::InformationalMatch);
-    match.setIcon(QIcon::fromTheme(iconName));
+    match.setIconName(iconName);
 
     context.addMatch(match);
 }

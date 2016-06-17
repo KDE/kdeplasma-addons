@@ -5,7 +5,6 @@
 #include "dictionaryrunner.h"
 #include "dictionaryrunner_config.h"
 #include <QStringList>
-#include <QIcon>
 #include <klocalizedstring.h>
 
 DictionaryRunner::DictionaryRunner(QObject *parent, const QVariantList &args)
@@ -62,7 +61,6 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
     int item = 0;
     static const QRegExp partOfSpeech(QLatin1String("(?: ([a-z]{1,5})){0,1} [0-9]{1,2}: (.*)"));
     QString lastPartOfSpeech;
-    static const QIcon icon = QIcon::fromTheme(QLatin1String("accessories-dictionary"));
     foreach (const QString &line, lines) {
         if (partOfSpeech.indexIn(line) == -1)
             continue;
@@ -72,7 +70,7 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
         match.setText(QString(QLatin1String("%1: %2")).arg(query, lastPartOfSpeech));
         match.setRelevance(1 - (static_cast<double>(++item) / static_cast<double>(lines.length())));
         match.setType(Plasma::QueryMatch::InformationalMatch);
-        match.setIcon(icon);
+        match.setIconName(QStringLiteral("accessories-dictionary"));
         match.setSubtext(partOfSpeech.cap(2));
         matches.append(match);
     }
