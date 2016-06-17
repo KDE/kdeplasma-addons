@@ -25,6 +25,8 @@
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/UnitCategory>
 
+#include <cmath>
+
 #define CONVERSION_CHAR QLatin1Char( '>' )
 
 K_EXPORT_PLASMA_RUNNER(converterrunner, ConverterRunner)
