@@ -28,13 +28,15 @@ import org.kde.plasma.calendar 2.0 as PlasmaCalendar
 Item {
     id: root
 
+    readonly property date currentDateTime: dataSource.data.Local ? dataSource.data.Local.DateTime : new Date()
+
     width: units.gridUnit * 10
     height: units.gridUnit * 4
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
-    Plasmoid.toolTipMainText: Qt.formatTime(dataSource.data["Local"]["DateTime"])
-    Plasmoid.toolTipSubText: Qt.formatDate(dataSource.data["Local"]["DateTime"], Qt.locale().dateFormat(Locale.LongFormat))
+    Plasmoid.toolTipMainText: Qt.formatTime(currentDateTime)
+    Plasmoid.toolTipSubText: Qt.formatDate(currentDateTime, Qt.locale().dateFormat(Locale.LongFormat))
 
     PlasmaCore.DataSource {
         id: dataSource
@@ -50,6 +52,6 @@ Item {
         Layout.minimumWidth: units.gridUnit * 20
         Layout.minimumHeight: units.gridUnit * 20
 
-        today: dataSource.data["Local"]["DateTime"]
+        today: currentDateTime
     }
 }
