@@ -35,6 +35,9 @@ set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
                       )
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+
 #########################################################################
 
 ################# list the subdirectories #################

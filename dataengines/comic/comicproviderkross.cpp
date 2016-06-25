@@ -49,12 +49,12 @@ ComicProvider::IdentifierType ComicProviderKross::identifierType() const
 
 QUrl ComicProviderKross::websiteUrl() const
 {
-    return m_wrapper.websiteUrl();
+    return QUrl(m_wrapper.websiteUrl());
 }
 
 QUrl ComicProviderKross::shopUrl() const
 {
-    return m_wrapper.shopUrl();
+    return QUrl(m_wrapper.shopUrl());
 }
 
 QImage ComicProviderKross::image() const

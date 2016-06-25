@@ -353,7 +353,7 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     const QString creditUrl = data[QStringLiteral("Credit Url")].toString();
     QList<QUrl> associatedApplicationUrls;
     if (!creditUrl.isEmpty()) {
-        associatedApplicationUrls << creditUrl;
+        associatedApplicationUrls << QUrl(creditUrl);
     }
     setAssociatedApplicationUrls(associatedApplicationUrls);
 

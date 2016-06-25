@@ -88,7 +88,7 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
     //TODO suggest file name!
     ui.dest->fileDialog()->setAcceptMode( QFileDialog::AcceptSave );
     if ( !savingDir.isEmpty() ) {
-        ui.dest->setStartDir( savingDir );
+        ui.dest->setStartDir(QUrl::fromLocalFile(savingDir));
     }
 
     connect( ui.archiveType, SIGNAL(currentIndexChanged(int)), this, SLOT(archiveTypeChanged(int)) );

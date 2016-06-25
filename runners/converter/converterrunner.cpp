@@ -269,7 +269,7 @@ void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::Qu
     Q_UNUSED(context)
     const QString data = match.data().toString();
     if (data.startsWith(QLatin1String("http://"))) {
-        QDesktopServices::openUrl(data);
+        QDesktopServices::openUrl(QUrl(data));
     } else {
         QGuiApplication::clipboard()->setText(data);
     }
