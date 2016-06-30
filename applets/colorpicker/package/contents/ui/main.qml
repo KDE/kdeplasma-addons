@@ -222,6 +222,14 @@ Item {
             width: fullRoot.cellWidth
             height: fullRoot.cellHeight
 
+            drag.target: rect
+            Drag.dragType: Drag.Automatic
+            Drag.active: delegateMouse.drag.active
+            Drag.mimeData: {
+                "application/x-color": rect.color,
+                "text/plain": colorLabel.text
+            }
+
             hoverEnabled: true
             onContainsMouseChanged: {
                 if (containsMouse) {
@@ -245,15 +253,6 @@ Item {
                 }
 
                 color: delegateMouse.currentColor
-
-                DragArea {
-                    anchors.fill: parent
-                    mimeData {
-                        text: colorLabel.text
-                        color: rect.color
-                        source: parent
-                    }
-                }
 
                 Rectangle {
                     anchors.bottom: parent.bottom
