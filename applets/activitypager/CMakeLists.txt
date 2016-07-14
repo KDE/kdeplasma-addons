@@ -18,11 +18,10 @@ target_link_libraries(activitypagerplugin
                       Qt5::Qml
                       Qt5::Quick
                       Qt5::DBus
-                      PW::LibLegacyTaskManager
 )
 
 if (X11_FOUND)
-    target_link_libraries(activitypagerplugin Qt5::X11Extras)
+    target_link_libraries(activitypagerplugin Qt5::X11Extras PW::LibTaskManager)
 endif()
 
 install(TARGETS activitypagerplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/activitypager)
