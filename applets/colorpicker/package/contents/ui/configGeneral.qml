@@ -31,9 +31,6 @@ ColumnLayout {
     property string cfg_defaultFormat
     property bool cfg_pickOnActivate
 
-    // by the time Component.onComplete fires, the cfg isn't there yet, hence doing it here
-    onCfg_defaultFormatChanged: defaultFormatCombo.currentIndex = defaultFormatCombo.model.indexOf(cfg_defaultFormat)
-
     QtControls.CheckBox {
         id: autoClipboardCheckBox
         Layout.fillWidth: true
@@ -60,7 +57,8 @@ ColumnLayout {
             // ComboBox default sizing is totally off
             Layout.minimumWidth: theme.mSize(theme.defaultFont).width * 12
             model: Logic.formats
-            onCurrentIndexChanged: cfg_defaultFormat = model[currentIndex]
+            currentIndex: defaultFormatCombo.model.indexOf(cfg_defaultFormat)
+            onActivated: cfg_defaultFormat = model[index]
         }
 
         QtControls.Label {
