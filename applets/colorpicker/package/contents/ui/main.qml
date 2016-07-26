@@ -39,6 +39,7 @@ Item {
     readonly property string defaultFormat: plasmoid.configuration.defaultFormat
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+    Plasmoid.toolTipSubText: Logic.formatColor(recentColor, defaultFormat)
 
     function addColorToHistory(color) {
         // this is needed, otherwise the first pick after plasma start isn't registered
