@@ -245,6 +245,12 @@ Item {
                 formattingMenu.open(0, rect.height)
             }
 
+            PlasmaCore.ToolTipArea {
+                anchors.fill: parent
+                active: colorLabel.elided
+                mainText: colorLabel.text
+            }
+
             Rectangle {
                 id: rect
 
