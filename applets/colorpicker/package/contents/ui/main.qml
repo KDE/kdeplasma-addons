@@ -253,7 +253,7 @@ Item {
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: parent
-                active: colorLabel.elided
+                active: colorLabel.truncated
                 mainText: colorLabel.text
             }
 
