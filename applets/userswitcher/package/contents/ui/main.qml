@@ -145,6 +145,7 @@ Item {
         PlasmaComponents.Highlight {
             id: delegateHighlight
             visible: false
+            z: -1 // otherwise it shows ontop of the icon/label and tints them slightly
         }
 
         ColumnLayout {
