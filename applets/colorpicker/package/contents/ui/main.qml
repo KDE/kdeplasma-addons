@@ -154,7 +154,6 @@ Item {
             PlasmaComponents.ToolButton {
                 anchors.fill: parent
                 tooltip: i18n("Color Options")
-                enabled: plasmoid.configuration.history.length > 0
                 onClicked: plasmoid.expanded = !plasmoid.expanded
                 // indicate viable drag...
                 checked: dropArea.containsAcceptableDrag
@@ -191,6 +190,13 @@ Item {
 
         highlight: PlasmaComponents.Highlight {}
         highlightMoveDuration: 0
+
+        PlasmaComponents.Button {
+            anchors.centerIn: parent
+            text: i18n("Pick Color")
+            visible: fullRoot.count === 0
+            onClicked: picker.pick()
+        }
 
         Connections {
             target: plasmoid
