@@ -82,6 +82,14 @@ Item {
         }
     }
 
+    function action_clear() {
+        plasmoid.configuration.history = []
+    }
+
+    Component.onCompleted: {
+        plasmoid.setAction("clear", i18n("Clear History"), "edit-clear-history")
+    }
+
     Plasmoid.compactRepresentation: Grid {
         readonly property int buttonSize: root.isVertical ? width : height
 
