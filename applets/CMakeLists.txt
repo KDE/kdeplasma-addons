@@ -25,6 +25,7 @@ if(NOT WIN32)
 endif(NOT WIN32)
 
 add_subdirectory(showdesktop)
+add_subdirectory(minimizeall)
 
 plasma_install_package(webbrowser org.kde.plasma.webbrowser)
 
