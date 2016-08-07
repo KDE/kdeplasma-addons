@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Minimize all Windows
+Name[ca]=Minimitza totes les finestres
+Name[nl]=Alle vensters minimaliseren
+Name[pt]=Minimizar Todas as Janelas
+Name[sv]=Minimera alla fönster
+Name[uk]=Згорнути усі вікна
+Name[x-test]=xxMinimize all Windowsxx
 Comment=Shows the desktop by minimizing all windows
+Comment[ca]=Mostra l'escriptori minimitzant totes les finestres
+Comment[nl]=Toont het bureaublad door alle vensters te minimaliseren
+Comment[pt]=Mostra o ecrã ao minimizar todas as janelas
+Comment[sv]=Visar skrivbordet genom att minimera alla fönster
+Comment[uk]=Показує стільницю, згорнувши усі вікна
+Comment[x-test]=xxShows the desktop by minimizing all windowsxx
 Type=Service
 Icon=user-desktop
 ServiceTypes=Plasma/Applet
