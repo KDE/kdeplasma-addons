@@ -26,7 +26,6 @@ class SavingDir;
 /**
  * ComicSaver takes care of saving a comic strip to a user chosen
  * destination.
- * Further if available Nepomuk is used to store the title, author
  * etc.
  */
 class ComicSaver
