@@ -31,7 +31,7 @@ QtObject {
 
     // you can't have an applet with just a compact representation :(
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
-    Plasmoid.onActivated: showdesktop.showDesktop()
+    Plasmoid.onActivated: showdesktop.showingDesktop = !showdesktop.showingDesktop
     Plasmoid.icon: plasmoid.configuration.icon
     Plasmoid.title: i18n("Show Desktop")
     Plasmoid.toolTipSubText: i18n("Show the Plasma desktop")

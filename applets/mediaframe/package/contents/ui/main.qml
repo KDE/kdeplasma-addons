@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
  */
 
-import QtQuick 2.3
+import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.3
@@ -183,9 +183,8 @@ Item {
                 cache: false
                 source: transitionSource
 
-                // TODO
-                //asynchronous: true
-                //autoTransform: true //new API in Qt 5.5, do not backport into Plasma 5.4.
+                asynchronous: true
+                autoTransform: true
             }
 
             Image {
@@ -197,9 +196,8 @@ Item {
                 cache: false
                 source: activeSource
 
-                // TODO
-                //asynchronous: true
-                //autoTransform: true //new API in Qt 5.5, do not backport into Plasma 5.4.
+                asynchronous: true
+                autoTransform: true
 
                 MouseArea {
                     anchors.fill: parent
