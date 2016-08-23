@@ -13,7 +13,7 @@ target_link_libraries(plasma_engine_konsoleprofiles
     KF5::KDELibs4Support
 )
 
-kcoreaddons_desktop_to_json(plasma_engine_konsoleprofiles plasma-dataengine-konsoleprofiles.desktop)
+kcoreaddons_desktop_to_json(plasma_engine_konsoleprofiles plasma-dataengine-konsoleprofiles.desktop SERVICE_TYPES plasma-dataengine.desktop)
 
 install(TARGETS plasma_engine_konsoleprofiles DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/dataengine)
 install(FILES plasma-dataengine-konsoleprofiles.desktop DESTINATION ${SERVICES_INSTALL_DIR} )

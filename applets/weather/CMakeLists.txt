@@ -9,7 +9,7 @@ set(weatherapplet_SRCS
 
 add_library(plasma_applet_weather MODULE ${weatherapplet_SRCS})
 
-kcoreaddons_desktop_to_json(plasma_applet_weather package/metadata.desktop)
+kcoreaddons_desktop_to_json(plasma_applet_weather package/metadata.desktop SERVICE_TYPES plasma-applet.desktop)
 
 target_link_libraries(plasma_applet_weather
     plasmaweather
