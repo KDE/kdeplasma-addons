@@ -62,8 +62,6 @@ target_link_libraries(plasmacomicprovidercore
 #)
 set_target_properties(plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1)
 
-kcoreaddons_desktop_to_json(plasmacomicprovidercore plasma_comicprovider.desktop)
-
 install( TARGETS plasmacomicprovidercore ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP )
 
 install( FILES plasma_comicprovider.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR} )
