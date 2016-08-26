@@ -30,7 +30,7 @@ ComicModel::ComicModel( Plasma::DataEngine *engine, const QString &source, const
     engine->connectSource( source, this );
 }
 
-void ComicModel::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
+void ComicModel::dataUpdated( const QString &/*source*/, const Plasma::DataEngine::Data &data )
 {
     setComics( data, mUsedComics );
 }
@@ -44,7 +44,7 @@ QHash<int, QByteArray> ComicModel::roleNames() const
     return roles;
 }
 
-void ComicModel::setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics )
+void ComicModel::setComics( const Plasma::DataEngine::Data &comics, const QStringList &/*usedComics*/ )
 {
     beginResetModel();
 
