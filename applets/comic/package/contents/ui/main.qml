@@ -32,14 +32,14 @@ Item {
         if (centerLayout.comicData.image) {
             return Math.max(minimumWidth, Math.min(centerLayout.comicData.image.nativeWidth * 0.6, implicitWidth));
         } else {
-            return implicitWidth;
+            return units.gridUnit * 8;
         }
     }
     Plasmoid.switchHeight: {
         if (centerLayout.comicData.image) {
             return Math.max(minimumHeight, Math.min(centerLayout.comicData.image.nativeHeight * 0.6, implicitHeight));
         } else {
-            return implicitHeight;
+            return units.gridUnit * 8;
         }
     }
     Plasmoid.icon: "face-laughing"
@@ -47,8 +47,8 @@ Item {
     width: implicitWidth
     height: implicitHeight
 
-    property int minimumWidth: theme.mSize(theme.defaultFont).width * 35
-    property int minimumHeight: theme.mSize(theme.defaultFont).height * 12
+    property int minimumWidth: units.gridUnit * 8
+    property int minimumHeight: units.gridUnit * 8
     property bool showComicAuthor: plasmoid.nativeInterface.showComicAuthor
     property bool showComicTitle: plasmoid.nativeInterface.showComicTitle
     property bool showErrorPicture: plasmoid.nativeInterface.showErrorPicture
