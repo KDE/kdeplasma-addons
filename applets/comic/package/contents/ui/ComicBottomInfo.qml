@@ -93,7 +93,6 @@ Item {
             anchors.fill: parent
 
             hoverEnabled: true
-            visible: plasmoid.nativeInterface.checkAuthorization("LaunchApp")
 
             onEntered: {
                 parent.color = theme.highlightColor;
