@@ -30,6 +30,7 @@ Name[sr@ijekavianlatin]=Listač aktivnosti
 Name[sr@latin]=Listač aktivnosti
 Name[sv]=Aktivitetsbytare
 Name[uk]=Пейджер просторів дій
+Name[x-test]=xxActivity Pagerxx
 Name[zh_CN]=活动分页器
 Comment=Switch between activities
 Comment[ca]=Commuta entre activitats
@@ -61,6 +62,7 @@ Comment[sr@ijekavianlatin]=Prebacivanje između aktivnosti
 Comment[sr@latin]=Prebacivanje između aktivnosti
 Comment[sv]=Byt mellan aktiviteter
 Comment[uk]=Перемикання між просторами дій
+Comment[x-test]=xxSwitch between activitiesxx
 Comment[zh_CN]=在活动间切换
 
 Icon=org.kde.plasma.pager
