@@ -70,6 +70,7 @@ Item {
             id: tooltip
             anchors.fill: comicImageArea
             subText: plasmoid.nativeInterface.comicData.additionalText
+            active: subText
         }
 
         ImageWidget {
