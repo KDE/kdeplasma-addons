@@ -366,7 +366,8 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
                 KUnitConversion::Value v(windSpeedNumeric,
                                         static_cast<KUnitConversion::UnitId>(data["Wind Speed Unit"].toInt()));
                 v = v.convertTo(speedUnit());
-                row[textId] = i18nc("wind direction, speed","%1 %2 %3", windDirection,
+                const QString i18nWindDirection = i18nc("wind direction", windDirection.toUtf8().data());
+                row[textId] = i18nc("wind direction, speed","%1 %2 %3", i18nWindDirection,
                                     locale.toString(clampValue(v.number(), 1), 'f', 1), v.unit().symbol());
             } else {
                 row[textId] = i18nc("Wind condition", "Calm");
