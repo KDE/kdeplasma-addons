@@ -44,11 +44,12 @@ QuicklaunchPrivate::QuicklaunchPrivate(QObject *parent)
 {
 }
 
-QJsonObject QuicklaunchPrivate::launcherData(const QUrl &url)
+QVariantMap QuicklaunchPrivate::launcherData(const QUrl &url)
 {
     QString name;
     QString icon;
     QString genericName;
+    QVariantList jumpListActions;
 
     if (url.scheme() == QLatin1String("quicklaunch")) {
         // Ignore internal scheme
@@ -63,6 +64,28 @@ QJsonObject QuicklaunchPrivate::launcherData(const QUrl &url)
             genericName = f.readGenericName();
             if (name.isEmpty()) {
                 name = QFileInfo(url.toLocalFile()).fileName();
+            }
+
+            const QStringList &actions = f.readActions();
+
+            foreach (const QString &actionName, actions) {
+                const KConfigGroup &actionGroup = f.actionGroup(actionName);
+
+                if (!actionGroup.isValid() || !actionGroup.exists()) {
+                    continue;
+                }
+
+                const QString &name = actionGroup.readEntry("Name");
+                const QString &exec = actionGroup.readEntry("Exec");
+                if (name.isEmpty() || exec.isEmpty()) {
+                    continue;
+                }
+
+                jumpListActions << QVariantMap{
+                    {QStringLiteral("name"), name},
+                    {QStringLiteral("icon"), actionGroup.readEntry("Icon")},
+                    {QStringLiteral("exec"), exec}
+                };
             }
         } else {
             QMimeDatabase db;
@@ -82,16 +105,22 @@ QJsonObject QuicklaunchPrivate::launcherData(const QUrl &url)
         icon = KIO::iconNameForUrl(url);
     }
 
-    QJsonObject data;
-    data[QStringLiteral("applicationName")] = name;
-    data[QStringLiteral("iconName")] = icon;
-    data[QStringLiteral("genericName")] = genericName;
-    return data;
+    return QVariantMap{
+        {QStringLiteral("applicationName"), name},
+        {QStringLiteral("iconName"), icon},
+        {QStringLiteral("genericName"), genericName},
+        {QStringLiteral("jumpListActions"), jumpListActions}
+    };
 }
 
 void QuicklaunchPrivate::openUrl(const QUrl &url)
 {
     new KRun(url, Q_NULLPTR);
+}
+
+void QuicklaunchPrivate::openExec(const QString &exec)
+{
+    KRun::run(exec, {}, Q_NULLPTR);
 }
 
 void QuicklaunchPrivate::addLauncher(bool isPopup)
@@ -151,8 +180,8 @@ void QuicklaunchPrivate::editLauncher(QUrl url, int index, bool isPopup)
     bool desktopFileCreated = false;
 
     if (!url.isLocalFile() || !KDesktopFile::isDesktopFile(url.toLocalFile())) {
-        QString desktopFilePath = determineNewDesktopFilePath(QStringLiteral("launcher"));
-        QJsonObject data = launcherData(url);
+        const QString desktopFilePath = determineNewDesktopFilePath(QStringLiteral("launcher"));
+        const QVariantMap data = launcherData(url);
 
         KConfig desktopFile(desktopFilePath);
         KConfigGroup desktopEntry(&desktopFile, "Desktop Entry");

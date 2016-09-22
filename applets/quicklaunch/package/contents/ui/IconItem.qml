@@ -74,6 +74,7 @@ Item {
                 if (mouse.button == Qt.LeftButton) {
                     logic.openUrl(url)
                 } else if (mouse.button == Qt.RightButton) {
+                    contextMenu.refreshActions();
                     contextMenu.open(mouse.x, mouse.y);
                 }
             }
@@ -122,7 +123,15 @@ Item {
 
             PlasmaComponents.ContextMenu {
                 id: contextMenu
+
+                property var jumpListItems : []
+
                 visualParent: mouseArea
+
+                PlasmaComponents.MenuItem {
+                    id: jumpListSeparator
+                    separator: true
+                }
 
                 PlasmaComponents.MenuItem {
                     text: i18n("Add Launcher...")
@@ -153,6 +162,34 @@ Item {
                 PlasmaComponents.MenuItem {
                     action: plasmoid.action("remove")
                 }
+
+                function refreshActions() {
+                    for (var i = 0; i < jumpListItems.length; ++i) {
+                        var item = jumpListItems[i];
+                        removeMenuItem(item);
+                        item.destroy();
+                    }
+                    jumpListItems = [];
+
+                    for (var i = 0; i < launcher.jumpListActions.length; ++i) {
+                        var action = launcher.jumpListActions[i];
+                        var item = menuItemComponent.createObject(iconItem, {
+                            "text": action.name,
+                            "icon": action.icon
+                        });
+                        item.clicked.connect(function() {
+                            logic.openExec(this.exec);
+                        }.bind(action));
+
+                        addMenuItem(item, jumpListSeparator);
+                        jumpListItems.push(item);
+                    }
+                }
+            }
+
+            Component {
+                id: menuItemComponent
+                PlasmaComponents.MenuItem { }
             }
         }
     }
