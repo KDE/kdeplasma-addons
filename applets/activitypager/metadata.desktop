@@ -32,6 +32,7 @@ Name[sv]=Aktivitetsbytare
 Name[uk]=Пейджер просторів дій
 Name[x-test]=xxActivity Pagerxx
 Name[zh_CN]=活动分页器
+Name[zh_TW]=活動通知器
 Comment=Switch between activities
 Comment[ca]=Commuta entre activitats
 Comment[ca@valencia]=Commuta entre activitats
@@ -64,6 +65,7 @@ Comment[sv]=Byt mellan aktiviteter
 Comment[uk]=Перемикання між просторами дій
 Comment[x-test]=xxSwitch between activitiesxx
 Comment[zh_CN]=在活动间切换
+Comment[zh_TW]=在活動間切換
 
 Icon=org.kde.plasma.pager
 Type=Service

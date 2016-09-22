@@ -78,7 +78,12 @@ Item {
         }
     }
 
-    Component.onCompleted: loadPathList()
+    Component.onCompleted: {
+        loadPathList()
+
+        if (items.random)
+            nextItem()
+    }
 
     Connections {
         target: plasmoid.configuration

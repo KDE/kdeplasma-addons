@@ -31,6 +31,7 @@ Name[sv]=Diskkvot
 Name[uk]=Квота на диску
 Name[x-test]=xxDisk Quotaxx
 Name[zh_CN]=磁盘配额
+Name[zh_TW]=磁碟大小限制
 Comment=Shows details about disk quota
 Comment[ca]=Mostra els detalls de la quota de disc
 Comment[ca@valencia]=Mostra els detalls de la quota de disc
@@ -62,6 +63,7 @@ Comment[sv]=Visar information om diskkvot
 Comment[uk]=Показати дані щодо квот на диску
 Comment[x-test]=xxShows details about disk quotaxx
 Comment[zh_CN]=显示磁盘配额细节
+Comment[zh_TW]=顯示關於磁碟大小限制的詳情
 Icon=quota
 Type=Service
 
