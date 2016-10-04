@@ -13,9 +13,7 @@ set_package_properties(KDEExperimentalPurpose PROPERTIES DESCRIPTION "EXPERIMENT
                        TYPE RUNTIME
                       )
 
-if (KDEExperimentalPurpose_FOUND)
-    add_subdirectory(quickshare)
-endif()
+add_subdirectory(quickshare)
 
 if(NOT WIN32)
     # uses the command line tool 'quota', does not make sense on Windows
