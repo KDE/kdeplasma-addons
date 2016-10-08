@@ -255,6 +255,15 @@ Item {
         }
     ]
 
+    Connections {
+        target: plasmoid.configuration
+        onLauncherUrlsChanged: {
+            launcherModel.urlsChanged.disconnect(saveConfiguration);
+            launcherModel.setUrls(plasmoid.configuration.launcherUrls);
+            launcherModel.urlsChanged.connect(saveConfiguration);
+        }
+    }
+
     Component.onCompleted: {
         launcherModel.setUrls(plasmoid.configuration.launcherUrls);
         launcherModel.urlsChanged.connect(saveConfiguration);
