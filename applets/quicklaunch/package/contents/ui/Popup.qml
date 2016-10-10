@@ -89,6 +89,15 @@ Item {
         }
     }
 
+    Connections {
+        target: plasmoid.configuration
+        onPopupUrlsChanged: {
+            popupModel.urlsChanged.disconnect(saveConfiguration);
+            popupModel.setUrls(plasmoid.configuration.popupUrls);
+            popupModel.urlsChanged.connect(saveConfiguration);
+        }
+    }
+
     Component.onCompleted: {
         popupModel.setUrls(plasmoid.configuration.popupUrls);
         popupModel.urlsChanged.connect(saveConfiguration);
