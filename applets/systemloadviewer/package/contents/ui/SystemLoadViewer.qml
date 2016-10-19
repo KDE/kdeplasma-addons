@@ -222,7 +222,7 @@ Item {
         var memFree = parseFloat(dataSource.data[dataSource.memFree] ? dataSource.data[dataSource.memFree].value : 0) / 1024
         var memUsed = parseFloat(dataSource.data[dataSource.memUsed] ? dataSource.data[dataSource.memUsed].value : 0) / 1024
         var memTotal = memFree + memUsed
-        var memoryPart = i18n("Memory: %1/%2 MiB", Math.round(memUsed), Math.round(memTotal))
+        var memoryPart = i18n("Memory: %1/%2 MiB", Math.round(memApplication), Math.round(memTotal))
 
         var swapFree = parseFloat(dataSource.data[dataSource.swapFree] ? dataSource.data[dataSource.swapFree].value : 0) / 1024
         var swapUsed = parseFloat(dataSource.data[dataSource.swapUsed] ? dataSource.data[dataSource.swapUsed].value : 0) / 1024
