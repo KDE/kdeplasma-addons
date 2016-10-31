@@ -27,7 +27,9 @@
 ComicModel::ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent )
   : QAbstractTableModel( parent ), mUsedComics(usedComics)
 {
-    engine->connectSource( source, this );
+    if (engine) {
+        engine->connectSource( source, this );
+    }
 }
 
 void ComicModel::dataUpdated( const QString &/*source*/, const Plasma::DataEngine::Data &data )
