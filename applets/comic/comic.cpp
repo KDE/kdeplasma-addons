@@ -92,7 +92,9 @@ void ComicApplet::init()
     //set maximum number of cached strips per comic, -1 means that there is no limit
     KConfigGroup global = globalConfig();
     const int maxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
-    mEngine->connectSource( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ), this );
+    if (mEngine) {
+        mEngine->connectSource( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ), this );
+    }
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
@@ -166,7 +168,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     setBusy(false);
 
     //disconnect prefetched comic strips
-    if ( source != mOldSource ) {
+    if (mEngine && source != mOldSource ) {
         mEngine->disconnectSource( source, this );
         return;
     }
@@ -178,7 +180,7 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     const bool errorAutoFixable = data[ "Error automatically fixable" ].toBool();
     if ( hasError ) {
         const QString previousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
-        if ( !mShowErrorPicture && !previousIdentifierSuffix.isEmpty() ) {
+        if (mEngine && !mShowErrorPicture && !previousIdentifierSuffix.isEmpty() ) {
             mEngine->disconnectSource( source, this );
             updateComic( previousIdentifierSuffix );
             return;
@@ -199,19 +201,21 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     //call the slot to check if the position needs to be saved
     slotStorePosition();
 
-    //disconnect if there is either no error, or an error that can not be fixed automatically
-    if ( !errorAutoFixable ) {
-        mEngine->disconnectSource( source, this );
-    }
+    if (mEngine) {
+        //disconnect if there is either no error, or an error that can not be fixed automatically
+        if ( !errorAutoFixable ) {
+            mEngine->disconnectSource( source, this );
+        }
 
-    //prefetch the previous and following comic for faster navigation
-    if (mCurrent.hasNext()) {
-        const QString prefetch = mCurrent.id() + ':' + mCurrent.next();
-        mEngine->connectSource( prefetch, this );
-    }
-    if ( mCurrent.hasPrev()) {
-        const QString prefetch = mCurrent.id() + ':' + mCurrent.prev();
-        mEngine->connectSource( prefetch, this );
+        //prefetch the previous and following comic for faster navigation
+        if (mCurrent.hasNext()) {
+            const QString prefetch = mCurrent.id() + ':' + mCurrent.next();
+            mEngine->connectSource( prefetch, this );
+        }
+        if ( mCurrent.hasPrev()) {
+            const QString prefetch = mCurrent.id() + ':' + mCurrent.prev();
+            mEngine->connectSource( prefetch, this );
+        }
     }
 
     updateView();
@@ -226,7 +230,7 @@ void ComicApplet::updateView()
 
 void ComicApplet::getNewComics()
 {
-    if (!m_newStuffDialog) {
+    if (mEngine && !m_newStuffDialog) {
         m_newStuffDialog = new KNS3::DownloadDialog( QString::fromLatin1("comic.knsrc") );
         KNS3::DownloadDialog *strong = m_newStuffDialog.data();
         strong->setTitle(i18n("Download Comics"));
@@ -304,7 +308,7 @@ void ComicApplet::updateUsedComics()
 
     delete mCheckNewStrips;
     mCheckNewStrips = 0;
-    if ( mCheckNewComicStripsInterval ) {
+    if (mEngine && mCheckNewComicStripsInterval ) {
         mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsInterval, this );
         connect( mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip );
     }
@@ -434,6 +438,10 @@ void ComicApplet::createComicBook()
 
 void ComicApplet::slotArchive( int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier )
 {
+    if (!mEngine) {
+        return;
+    }
+
     mSavingDir->setDir(dest.path());
 
     const QString id = mCurrent.id();
