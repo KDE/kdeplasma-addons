@@ -221,6 +221,7 @@ Item {
         }
         var memFree = parseFloat(dataSource.data[dataSource.memFree] ? dataSource.data[dataSource.memFree].value : 0) / 1024
         var memUsed = parseFloat(dataSource.data[dataSource.memUsed] ? dataSource.data[dataSource.memUsed].value : 0) / 1024
+        var memApplication = parseFloat(dataSource.data[dataSource.memApplication] ? dataSource.data[dataSource.memApplication].value : 0) / 1024
         var memTotal = memFree + memUsed
         var memoryPart = i18n("Memory: %1/%2 MiB", Math.round(memApplication), Math.round(memTotal))
 
