@@ -1,4 +1,4 @@
-add_subdirectory(activitypager)
+plasma_install_package(activitypager org.kde.plasma.activitypager)
 add_subdirectory(fifteenPuzzle)
 add_subdirectory(fuzzy-clock)
 add_subdirectory(calculator)
@@ -28,8 +28,8 @@ add_subdirectory(minimizeall)
 plasma_install_package(webbrowser org.kde.plasma.webbrowser)
 
 add_subdirectory(comic)
-add_subdirectory(konsoleprofiles)
-add_subdirectory(kickerdash)
+plasma_install_package(konsoleprofiles/package org.kde.plasma.konsoleprofiles)
+plasma_install_package(kickerdash org.kde.plasma.kickerdash)
 add_subdirectory(quicklaunch)
 
 #This applet is disabled because although ported it does not work
