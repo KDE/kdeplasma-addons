@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kwin 2.0 as KWin
 
@@ -105,11 +106,10 @@ KWin.Switcher {
                             Layout.preferredWidth: iconSize
                             Layout.preferredHeight: iconSize
                         }
-                        Text {
+                        PlasmaComponents.Label {
                             text: caption
                             font.italic: minimized
-                            font.bold: index == thumbnailListView.currentIndex
-                            color: theme.textColor
+                            font.weight: index === thumbnailListView.currentIndex ? Font.Bold : Font.Normal
                             elide: Text.ElideMiddle
                             Layout.fillWidth: true
                             Layout.maximumWidth: captionItem.maximumWidth - iconItem.iconSize - captionItem.spacing * 2

@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kwin 2.0 as KWin
 
@@ -87,13 +88,12 @@ KWin.Switcher {
                             leftMargin: hoverItem.margins.left
                         }
                     }
-                    Text {
+                    PlasmaComponents.Label {
                         id: captionItem
                         horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignBottom
                         text: dialogMainItem.itemCaption(caption, minimized)
-                        font.bold: index == compactListView.currentIndex
-                        color: theme.textColor
+                        font.weight: index === compactListView.currentIndex ? Font.Bold : Font.Normal
                         elide: Text.ElideMiddle
                         anchors {
                             left: iconItem.right

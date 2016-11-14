@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kwin 2.0 as KWin
 
@@ -74,13 +75,12 @@ KWin.Switcher {
                             leftMargin: hoverItem.margins.left
                         }
                     }
-                    Text {
+                    PlasmaComponents.Label {
                         id: captionItem
                         horizontalAlignment: Text.AlignHCenter
                         text: listView.itemCaption(caption, minimized)
-                        font.bold: true
+                        font.weight: Font.Bold
                         font.italic: minimized
-                        color: theme.textColor
                         elide: Text.ElideMiddle
                         anchors {
                             left: iconItem.right
@@ -90,13 +90,11 @@ KWin.Switcher {
                             rightMargin: hoverItem.margins.right
                         }
                     }
-                    Text {
+                    PlasmaComponents.Label {
                         id: desktopNameItem
                         horizontalAlignment: Text.AlignHCenter
                         text: desktopName
-                        font.bold: false
                         font.italic: true
-                        color: theme.textColor
                         elide: Text.ElideMiddle
                         visible: tabBox.allDesktops
                         anchors {
