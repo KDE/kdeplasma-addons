@@ -23,11 +23,11 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QTimer>
 #include <QtCore/QThreadPool>
+#include <QStandardPaths>
+#include <QDir>
 #include <QtGui/QImage>
 
-#include <KDebug>
-
-#include <kstandarddirs.h>
+#include <QDebug>
 
 LoadImageThread::LoadImageThread(const QString &filePath)
     : m_filePath(filePath)
@@ -56,7 +56,9 @@ void SaveImageThread::run()
 
 QString CachedProvider::identifierToPath( const QString &identifier )
 {
-    const QString dataDir = KStandardDirs::locateLocal( "cache", QLatin1String("plasma_engine_podt/") );
+    const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QLatin1String("/plasma_engine_potd/");
+    QDir d;
+    d.mkpath(dataDir);
     return QString( dataDir + identifier );
 }
 

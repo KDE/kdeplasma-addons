@@ -23,10 +23,8 @@
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 
-#include <KDebug>
+#include <QDebug>
 #include <kio/job.h>
-
-POTDPROVIDER_EXPORT_PLUGIN( ApodProvider, "ApodProvider", "" )
 
 class ApodProvider::Private
 {
@@ -59,7 +57,7 @@ void ApodProvider::Private::pageRequestFinished( KJob *_job )
     exp.setMinimal( true );
     if ( exp.indexIn( data ) != -1 ) {
         const QString sub = exp.cap(1);
-        KUrl url( QString( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/%1" ) ).arg( sub ) );
+        QUrl url( QString( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/%1" ) ).arg( sub ) );
         KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
         mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
     } else {
@@ -82,7 +80,7 @@ void ApodProvider::Private::imageRequestFinished( KJob *_job )
 ApodProvider::ApodProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
-    KUrl url( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/" ) );
+    QUrl url( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
 }
@@ -97,3 +95,7 @@ QImage ApodProvider::image() const
     return d->mImage;
 }
 
+K_PLUGIN_FACTORY_WITH_JSON(ApodProviderFactory, "apodprovider.json", registerPlugin<ApodProvider>();)
+
+#include "moc_apodprovider.cpp"
+#include "apodprovider.moc"

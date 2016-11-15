@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=PlasmaPoTD/Plugin
+X-KDE-Library=plasma_potd_noaaprovider
+X-KDE-PlasmaPoTDProvider-SuffixType=Date
+X-KDE-PlasmaPoTDProvider-Identifier=noaa
+Icon=
+
+Name=NOAA Environmental Visualization Laboratory Picture of the Day
+Comment=NOAA Provider

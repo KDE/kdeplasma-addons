@@ -17,9 +17,9 @@ http://www.ubcbotanicalgarden.org/potd/
 http://epod.usra.edu/
 RSS feed http://interglacial.com/rss/epod.rss
 
-* OSEI (Operational Significant Event Imagery) 
+* NOAA
 Image Of the Day -------------------------------------  DONE
-http://www.osei.noaa.gov/OSEIiod.html
+http://www.nnvl.noaa.gov/imageoftheday.php
 
 * WCPoTD Wikimedia Commons Picture of The Day ---------- almost DONE (need to add the Credits URL below the pic)
 http://tools.wikimedia.de/~daniel/potd/potd.php

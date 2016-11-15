@@ -23,6 +23,7 @@
 #define FLICKRPROVIDER_H
 
 #include "potdprovider.h"
+#include <kio/job.h>
 
 /**
 * This class grabs a random image from the flickr

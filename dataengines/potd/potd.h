@@ -20,7 +20,8 @@
 #ifndef POTD_DATAENGINE_H
 #define POTD_DATAENGINE_H
 
-#include "plasma/dataengine.h"
+#include <Plasma/DataEngine>
+#include <KPluginMetaData>
 
 class PotdProvider;
 
@@ -44,7 +45,6 @@ class PotdEngine : public Plasma::DataEngine
         ~PotdEngine();
 
     protected:
-        void init();
         bool sourceRequestEvent( const QString &identifier );
 
     protected Q_SLOTS:
@@ -59,11 +59,9 @@ class PotdEngine : public Plasma::DataEngine
     private:
         bool updateSource( const QString &identifier, bool loadCachedAlways );
 
-        QMap<QString, KService::Ptr> mFactories;
+        QMap<QString, KPluginMetaData> mFactories;
         QTimer *m_checkDatesTimer;
         bool m_canDiscardCache;
 };
-
-K_EXPORT_PLASMA_DATAENGINE(potd, PotdEngine)
 
 #endif

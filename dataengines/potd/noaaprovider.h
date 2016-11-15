@@ -1,6 +1,7 @@
 /*
  *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
- *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>                 
+ *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>
+ *   Copyright 2016 Weng Xuetian <wengxt@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify  
  *   it under the terms of the GNU General Public License as published by  
@@ -18,34 +19,33 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef OSEIPROVIDER_H
-#define OSEIPROVIDER_H
+#ifndef NOAAPROVIDER_H
+#define NOAAPROVIDER_H
 
 #include "potdprovider.h"
 
 /**
- * This class provides the image for OSEI 
- * "Operational Significant Event Imagery"
+ * This class provides the image for NOAA Environmental Visualization Laboratory
  * Picture Of the Day
- * located at http://www.osei.noaa.gov/OSEIiod.html.
+ * located at http://www.nnvl.noaa.gov/imageoftheday.php.
  */
-class OseiProvider : public PotdProvider
+class NOAAProvider : public PotdProvider
 {
     Q_OBJECT
 
     public:
         /**
-         * Creates a new OSEI provider.
+         * Creates a new NOAA provider.
          *
          * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        OseiProvider( QObject *parent, const QVariantList &args );
+        NOAAProvider( QObject *parent, const QVariantList &args );
 
         /**
-         * Destroys the OSEI provider.
+         * Destroys the NOAA provider.
          */
-        ~OseiProvider();
+        ~NOAAProvider();
 
         /**
          * Returns the requested image.
@@ -59,7 +59,7 @@ class OseiProvider : public PotdProvider
       class Private;
       Private* const d;
 
-      Q_PRIVATE_SLOT( d, void pageRequestFinished( KJob* ) )
+      Q_PRIVATE_SLOT( d, void pageRequestFinished( bool ) )
       Q_PRIVATE_SLOT( d, void imageRequestFinished( KJob* ) )
 };
 

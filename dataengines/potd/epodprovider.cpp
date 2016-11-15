@@ -23,10 +23,8 @@
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 
-#include <KDebug>
+#include <QDebug>
 #include <kio/job.h>
-
-POTDPROVIDER_EXPORT_PLUGIN( EpodProvider, "EpodProvider", "" )
 
 class EpodProvider::Private
 {
@@ -60,7 +58,7 @@ void EpodProvider::Private::pageRequestFinished(KJob *_job)
 
     int pos = exp.indexIn( data ) + pattern.length();
     const QString sub = data.mid( pos-4, pattern.length()+6);
-    KUrl url( QString(QLatin1String( "http://epod.usra.edu/.a/%1-pi" )) .arg(sub)  );
+    QUrl url( QString(QLatin1String( "http://epod.usra.edu/.a/%1-pi" )) .arg(sub)  );
     KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     QObject::connect(imageJob, SIGNAL(finished(KJob*)), mParent, SLOT(imageRequestFinished(KJob*)) );
 }
@@ -81,7 +79,7 @@ void EpodProvider::Private::imageRequestFinished( KJob *_job)
 EpodProvider::EpodProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
-    KUrl url( QLatin1String( "http://epod.usra.edu/blog/" ) );
+    QUrl url( QLatin1String( "http://epod.usra.edu/blog/" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
 
     connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
@@ -97,3 +95,7 @@ QImage EpodProvider::image() const
     return d->mImage;
 }
 
+K_PLUGIN_FACTORY_WITH_JSON(EpodProviderFactory, "epodprovider.json", registerPlugin<EpodProvider>();)
+
+#include "moc_epodprovider.cpp"
+#include "epodprovider.moc"

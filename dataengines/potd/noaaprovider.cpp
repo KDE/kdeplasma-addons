@@ -1,7 +1,6 @@
 /*
- *   Copyright 2007 Tobias Koenig <tokoe@kde.org>
- *   Copyright 2008 Anne-Marie Mahfouf <annma@kde.org>
- *   Copyright 2013 Aaron Seigo <aseigo@kde.org>
+ *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
+ *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,44 +18,43 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "natgeoprovider.h"
+#include "noaaprovider.h"
 
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 
 #include <QDebug>
-#include <KIO/Job>
-
+#include <kio/job.h>
 #include <KWebPage>
 #include <QWebFrame>
-#include <QWebElement>
 #include <QWebElementCollection>
 
-class NatGeoProvider::Private
+class NOAAProvider::Private
 {
   public:
-    Private( NatGeoProvider *parent )
+    Private( NOAAProvider *parent )
       : mParent( parent ),
         mPage( new KWebPage( parent, KWebPage::KIOIntegration ) )
     {
     }
 
-    void pageRequestFinished( bool ok );
+    void pageRequestFinished( bool );
     void imageRequestFinished( KJob* );
+    void parsePage();
 
-    NatGeoProvider *mParent;
+    NOAAProvider *mParent;
     QImage mImage;
     KWebPage *mPage;
 };
 
-void NatGeoProvider::Private::pageRequestFinished( bool ok )
+void NOAAProvider::Private::pageRequestFinished( bool ok )
 {
     if ( !ok ) {
-        emit mParent->error( mParent );
-        return;
+	emit mParent->error( mParent );
+	return;
     }
 
-    QWebElementCollection links = mPage->mainFrame()->findAllElements( QLatin1String( "meta" ) );
+    QWebElementCollection links = mPage->mainFrame()->findAllElements( QLatin1String( "script" ) );
     if ( links.count() < 1 ) {
         emit mParent->error( mParent );
         return;
@@ -64,8 +62,9 @@ void NatGeoProvider::Private::pageRequestFinished( bool ok )
 
     QString url;
     for (int i = 0, e = links.count(); i < e; i++) {
-        if (links.at(i).attribute(QLatin1String("property")) == "og:image") {
-            url = links.at(i).attribute(QLatin1String("content"));
+        const auto text = links.at(i).toPlainText();
+        if (text.startsWith("_curPic = ")) {
+            url = "http://www.nnvl.noaa.gov/" + text.mid(10);
             break;
         }
     }
@@ -78,37 +77,37 @@ void NatGeoProvider::Private::pageRequestFinished( bool ok )
     mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
 }
 
-void NatGeoProvider::Private::imageRequestFinished( KJob *_job )
+void NOAAProvider::Private::imageRequestFinished( KJob *_job )
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if ( job->error() ) {
-        emit mParent->error( mParent );
-        return;
+	emit mParent->error( mParent );
+	return;
     }
 
     mImage = QImage::fromData( job->data() );
     emit mParent->finished( mParent );
 }
 
-NatGeoProvider::NatGeoProvider( QObject *parent, const QVariantList &args )
+NOAAProvider::NOAAProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
-    const QUrl url( QLatin1String( "https://www.nationalgeographic.com/photography/photo-of-the-day" ) );
+    QUrl url( QLatin1String( "http://www.nnvl.noaa.gov/imageoftheday.php" ) );
     connect( d->mPage, SIGNAL(loadFinished(bool)), this, SLOT(pageRequestFinished(bool)) );
     d->mPage->mainFrame()->setUrl( url );
 }
 
-NatGeoProvider::~NatGeoProvider()
+NOAAProvider::~NOAAProvider()
 {
     delete d;
 }
 
-QImage NatGeoProvider::image() const
+QImage NOAAProvider::image() const
 {
     return d->mImage;
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(NatGeoProviderFactory, "natgeoprovider.json", registerPlugin<NatGeoProvider>();)
+K_PLUGIN_FACTORY_WITH_JSON(NOAAProviderFactory, "noaaprovider.json", registerPlugin<NOAAProvider>();)
 
-#include "natgeoprovider.moc"
-#include "moc_natgeoprovider.moc"
+#include "moc_noaaprovider.cpp"
+#include "noaaprovider.moc"

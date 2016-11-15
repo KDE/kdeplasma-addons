@@ -23,15 +23,11 @@
 #include <QtCore/QObject>
 #include <QtCore/QDate>
 
-#include <kpluginfactory.h>
+#include <KPluginFactory>
 
 #include "plasma_potd_export.h"
 
 class QImage;
-
-#define POTDPROVIDER_EXPORT_PLUGIN( classname, componentName, catalogName ) \
-    K_PLUGIN_FACTORY( classname ## Factory, registerPlugin< classname >(); ) \
-    K_EXPORT_PLUGIN( classname ## Factory( componentName, catalogName ) )
 
 /**
  * This class is an interface for PoTD providers.

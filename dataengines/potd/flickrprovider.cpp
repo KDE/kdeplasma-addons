@@ -25,10 +25,10 @@
 #include <QtGui/QImage>
 #include <QXmlStreamReader>
 
-#include <KDebug>
+#include <QDebug>
 #include <kio/job.h>
 
-POTDPROVIDER_EXPORT_PLUGIN( FlickrProvider, "FlickrProvider", "" )
+#define FLICKR_API_KEY "11829a470557ad8e10b02e80afacb3af"
 
 class FlickrProvider::Private
 {
@@ -58,7 +58,7 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if (job->error()) {
         emit mParent->error( mParent );
-        kDebug() << "pageRequestFinished error";
+        qDebug() << "pageRequestFinished error";
         return;
     }
 
@@ -80,7 +80,10 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
                     /* To be sure, decrement the date to two days earlier... @TODO */
                     mActualDate = mActualDate.addDays(-2);
 
-                            KUrl url( QLatin1String( "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date=" ) + mActualDate.toString( Qt::ISODate) );
+                            QUrl url(QLatin1String( "https://api.flickr.com/services/rest/"));
+                            url.addQueryItem("api_key", FLICKR_API_KEY);
+                            url.addQueryItem("method", "flickr.interestingness.getList");
+                            url.addQueryItem("date", mActualDate.toString(Qt::ISODate));
                             KIO::StoredTransferJob *pageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
                             mParent->connect( pageJob, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
                     return;
@@ -103,11 +106,11 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
     }
 
     if (m_photoList.begin() != m_photoList.end()) {
-        KUrl url( m_photoList.at(qrand() % m_photoList.size()) );
+        QUrl url( m_photoList.at(qrand() % m_photoList.size()) );
             KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
             mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
     } else {
-        kDebug() << "empty list";
+        qDebug() << "empty list";
     }
 }
 
@@ -127,9 +130,11 @@ FlickrProvider::FlickrProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
     d->mActualDate = date();
-    KUrl url(QLatin1String(
-                "http://api.flickr.com/services/rest/?api_key=a902f4e74cf1e7bce231742d8ffb46b4&method=flickr.interestingness.getList&date="
-                ) + date().toString( Qt::ISODate ) );
+
+    QUrl url(QLatin1String( "https://api.flickr.com/services/rest/"));
+    url.addQueryItem("api_key", FLICKR_API_KEY);
+    url.addQueryItem("method", "flickr.interestingness.getList");
+    url.addQueryItem("date", date().toString( Qt::ISODate ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
 }
@@ -144,3 +149,7 @@ QImage FlickrProvider::image() const
     return d->mImage;
 }
 
+K_PLUGIN_FACTORY_WITH_JSON(FlickrProviderFactory, "flickrprovider.json", registerPlugin<FlickrProvider>();)
+
+#include "moc_flickrprovider.cpp"
+#include "flickrprovider.moc"

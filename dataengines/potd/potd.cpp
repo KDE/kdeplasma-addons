@@ -25,13 +25,13 @@
 #include <QtCore/QTimer>
 #include <QtCore/QThreadPool>
 
-#include <KDebug>
-#include <KServiceTypeTrader>
+#include <QDebug>
+#include <KPluginLoader>
+#include <KPluginMetaData>
 
 #include <Plasma/DataContainer>
 
 #include "cachedprovider.h"
-#include "kstandarddirs.h"
 
 PotdEngine::PotdEngine( QObject* parent, const QVariantList& args )
     : Plasma::DataEngine( parent, args )
@@ -45,20 +45,23 @@ PotdEngine::PotdEngine( QObject* parent, const QVariantList& args )
     // every 2 seconds (!)
     m_checkDatesTimer->setInterval( 10 * 60 * 1000 ); // check every 10 minutes
     m_checkDatesTimer->start();
+
+    const QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(QStringLiteral("potd"), [](const KPluginMetaData & md) {
+        return md.serviceTypes().contains(QStringLiteral("PlasmaPoTD/Plugin"));
+    });
+
+    for (const auto &metadata : plugins) {
+        QString provider = metadata.value(QLatin1String( "X-KDE-PlasmaPoTDProvider-Identifier" ));
+        if (provider.isEmpty()) {
+            continue;
+        }
+        mFactories.insert(provider, metadata);
+        setData( QLatin1String( "Providers" ), provider, metadata.name() );
+    }
 }
 
 PotdEngine::~PotdEngine()
 {
-}
-
-void PotdEngine::init()
-{
-    KService::List services = KServiceTypeTrader::self()->query(QLatin1String( "PlasmaPoTD/Plugin" ));
-    Q_FOREACH ( const KService::Ptr &service, services ) {
-        QString provider = service->property(QLatin1String( "X-KDE-PlasmaPoTDProvider-Identifier" ), QVariant::String).toString();
-        mFactories.insert(provider, service);
-        setData( QLatin1String( "Providers" ), provider, service->name() );
-    }
 }
 
 bool PotdEngine::updateSourceEvent( const QString &identifier )
@@ -84,9 +87,13 @@ bool PotdEngine::updateSource( const QString &identifier, bool loadCachedAlways 
     }
 
     const QStringList parts = identifier.split( QLatin1Char( ':' ), QString::SkipEmptyParts );
+    if (parts.empty()) {
+        qDebug() << "invalid identifier";
+        return false;
+    }
     const QString providerName = parts[ 0 ];
     if ( !mFactories.contains( providerName ) ) {
-        kDebug() << "invalid provider: " << parts[ 0 ];
+        qDebug() << "invalid provider: " << parts[ 0 ];
         return false;
     }
 
@@ -95,14 +102,18 @@ bool PotdEngine::updateSource( const QString &identifier, bool loadCachedAlways 
     if ( parts.count() > 1 ) {
         const QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
         if ( !date.isValid() ) {
-            kDebug() << "invalid date:" << parts[1];
+            qDebug() << "invalid date:" << parts[1];
             return false;
         }
 
         args << date;
     }
 
-    PotdProvider *provider = qobject_cast<PotdProvider*>( mFactories[ providerName ]->createInstance<QObject>( this, args ) );
+    auto factory = KPluginLoader(mFactories[ providerName ].fileName()).factory();
+    PotdProvider *provider = nullptr;
+    if (factory) {
+        provider = factory->create<PotdProvider>(this, args);
+    }
     if (provider) {
         connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
         connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
@@ -183,4 +194,6 @@ void PotdEngine::checkDayChanged()
     }
 }
 
+K_EXPORT_PLASMA_DATAENGINE_WITH_JSON(potdengine, PotdEngine, "plasma-dataengine-potd.json")
 
+#include "potd.moc"
