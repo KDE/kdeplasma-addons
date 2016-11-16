@@ -58,9 +58,6 @@ class NOAAProvider : public PotdProvider
     private:
       class Private;
       Private* const d;
-
-      Q_PRIVATE_SLOT( d, void pageRequestFinished( bool ) )
-      Q_PRIVATE_SLOT( d, void imageRequestFinished( KJob* ) )
 };
 
 #endif

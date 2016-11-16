@@ -23,59 +23,63 @@
 
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
+#include <QXmlStreamReader>
 
 #include <QDebug>
 #include <KIO/Job>
-
-#include <KWebPage>
-#include <QWebFrame>
-#include <QWebElement>
-#include <QWebElementCollection>
 
 class NatGeoProvider::Private
 {
   public:
     Private( NatGeoProvider *parent )
-      : mParent( parent ),
-        mPage( new KWebPage( parent, KWebPage::KIOIntegration ) )
+      : mParent( parent )
     {
     }
 
-    void pageRequestFinished( bool ok );
+    void pageRequestFinished( KJob* );
     void imageRequestFinished( KJob* );
 
     NatGeoProvider *mParent;
     QImage mImage;
-    KWebPage *mPage;
+
+    QXmlStreamReader mXmlReader;
 };
 
-void NatGeoProvider::Private::pageRequestFinished( bool ok )
+void NatGeoProvider::Private::pageRequestFinished( KJob* _job )
 {
-    if ( !ok ) {
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
+    if (job->error()) {
         emit mParent->error( mParent );
         return;
     }
 
-    QWebElementCollection links = mPage->mainFrame()->findAllElements( QLatin1String( "meta" ) );
-    if ( links.count() < 1 ) {
-        emit mParent->error( mParent );
-        return;
-    }
+    const QString data = QString::fromUtf8( job->data() );
+
+    mXmlReader.clear();
+    mXmlReader.addData(data);
 
     QString url;
-    for (int i = 0, e = links.count(); i < e; i++) {
-        if (links.at(i).attribute(QLatin1String("property")) == "og:image") {
-            url = links.at(i).attribute(QLatin1String("content"));
-            break;
+    while (!mXmlReader.atEnd()) {
+        mXmlReader.readNext();
+
+        if (mXmlReader.isStartElement() && mXmlReader.name() == QLatin1String( "meta" )) {
+            const auto attrs = mXmlReader.attributes();
+            if (attrs.value(QLatin1String("property")).toString() == QLatin1String("og:image")) {
+                url = attrs.value(QLatin1String("content")).toString();
+                break;
+            }
         }
     }
+
     if (url.isEmpty()) {
         emit mParent->error( mParent );
         return;
     }
 
     KIO::StoredTransferJob *imageJob = KIO::storedGet( QUrl(url), KIO::NoReload, KIO::HideProgressInfo );
-    mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
+    mParent->connect( imageJob, &KIO::StoredTransferJob::finished, mParent, [this] (KJob *job) {
+        imageRequestFinished(job);
+    });
 }
 
 void NatGeoProvider::Private::imageRequestFinished( KJob *_job )
@@ -94,8 +98,10 @@ NatGeoProvider::NatGeoProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
     const QUrl url( QLatin1String( "https://www.nationalgeographic.com/photography/photo-of-the-day" ) );
-    connect( d->mPage, SIGNAL(loadFinished(bool)), this, SLOT(pageRequestFinished(bool)) );
-    d->mPage->mainFrame()->setUrl( url );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+    connect( job, &KIO::StoredTransferJob::finished, this, [this] (KJob *job) {
+        d->pageRequestFinished(job);
+    });
 }
 
 NatGeoProvider::~NatGeoProvider()
@@ -111,4 +117,3 @@ QImage NatGeoProvider::image() const
 K_PLUGIN_FACTORY_WITH_JSON(NatGeoProviderFactory, "natgeoprovider.json", registerPlugin<NatGeoProvider>();)
 
 #include "natgeoprovider.moc"
-#include "moc_natgeoprovider.moc"

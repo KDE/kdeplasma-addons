@@ -58,7 +58,7 @@ set( potd_natgeo_provider_SRCS
 )
 
 add_library( plasma_potd_natgeoprovider MODULE ${potd_natgeo_provider_SRCS} )
-target_link_libraries( plasma_potd_natgeoprovider plasmapotdprovidercore KF5::KIOCore KF5::WebKit)
+target_link_libraries( plasma_potd_natgeoprovider plasmapotdprovidercore KF5::KIOCore)
 
 kcoreaddons_desktop_to_json(plasma_potd_natgeoprovider natgeoprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 
@@ -80,7 +80,7 @@ set( potd_noaa_provider_SRCS
 )
 
 add_library( plasma_potd_noaaprovider MODULE ${potd_noaa_provider_SRCS} )
-target_link_libraries( plasma_potd_noaaprovider plasmapotdprovidercore KF5::KIOCore KF5::WebKit)
+target_link_libraries( plasma_potd_noaaprovider plasmapotdprovidercore KF5::KIOCore)
 
 kcoreaddons_desktop_to_json(plasma_potd_noaaprovider noaaprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 

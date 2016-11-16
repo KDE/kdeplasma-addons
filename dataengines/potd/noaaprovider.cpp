@@ -22,51 +22,47 @@
 
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
+#include <QRegularExpression>
 
 #include <QDebug>
 #include <kio/job.h>
-#include <KWebPage>
-#include <QWebFrame>
-#include <QWebElementCollection>
 
 class NOAAProvider::Private
 {
   public:
     Private( NOAAProvider *parent )
-      : mParent( parent ),
-        mPage( new KWebPage( parent, KWebPage::KIOIntegration ) )
+      : mParent( parent )
     {
     }
 
-    void pageRequestFinished( bool );
+    void pageRequestFinished( KJob* );
     void imageRequestFinished( KJob* );
     void parsePage();
 
     NOAAProvider *mParent;
     QImage mImage;
-    KWebPage *mPage;
 };
 
-void NOAAProvider::Private::pageRequestFinished( bool ok )
+void NOAAProvider::Private::pageRequestFinished( KJob* _job )
 {
-    if ( !ok ) {
-	emit mParent->error( mParent );
-	return;
-    }
-
-    QWebElementCollection links = mPage->mainFrame()->findAllElements( QLatin1String( "script" ) );
-    if ( links.count() < 1 ) {
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
+    if (job->error()) {
         emit mParent->error( mParent );
         return;
     }
 
+    const QString data = QString::fromUtf8( job->data() );
+
+    // Using regular expression could be fragile in such case, but the HTML
+    // NOAA page itself is not a valid XML file and unfortunately it could
+    // not be parsed successfully till the content we want. And we do not want
+    // to use heavy weight QtWebkit. So we use QRegularExpression to capture
+    // the wanted url here.
     QString url;
-    for (int i = 0, e = links.count(); i < e; i++) {
-        const auto text = links.at(i).toPlainText();
-        if (text.startsWith("_curPic = ")) {
-            url = "http://www.nnvl.noaa.gov/" + text.mid(10);
-            break;
-        }
+    QRegularExpression re("_curPic = (.*?)</script>");
+    auto result = re.match(data);
+    if (result.hasMatch()) {
+        url = QString("http://www.nnvl.noaa.gov/").append(result.captured(1));
     }
     if (url.isEmpty()) {
         emit mParent->error( mParent );
@@ -74,7 +70,9 @@ void NOAAProvider::Private::pageRequestFinished( bool ok )
     }
 
     KIO::StoredTransferJob *imageJob = KIO::storedGet( QUrl(url), KIO::NoReload, KIO::HideProgressInfo );
-    mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
+    mParent->connect( imageJob, &KIO::StoredTransferJob::finished, mParent, [this] (KJob* job) {
+        imageRequestFinished(job);
+    });
 }
 
 void NOAAProvider::Private::imageRequestFinished( KJob *_job )
@@ -93,8 +91,10 @@ NOAAProvider::NOAAProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
     QUrl url( QLatin1String( "http://www.nnvl.noaa.gov/imageoftheday.php" ) );
-    connect( d->mPage, SIGNAL(loadFinished(bool)), this, SLOT(pageRequestFinished(bool)) );
-    d->mPage->mainFrame()->setUrl( url );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+    connect( job, &KIO::StoredTransferJob::finished, this, [this] (KJob *job) {
+        d->pageRequestFinished(job);
+    });
 }
 
 NOAAProvider::~NOAAProvider()
@@ -109,5 +109,4 @@ QImage NOAAProvider::image() const
 
 K_PLUGIN_FACTORY_WITH_JSON(NOAAProviderFactory, "noaaprovider.json", registerPlugin<NOAAProvider>();)
 
-#include "moc_noaaprovider.cpp"
 #include "noaaprovider.moc"
