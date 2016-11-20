@@ -8,6 +8,7 @@ Icon=
 
 Name=NOAA Environmental Visualization Laboratory Picture of the Day
 Name[ca]=Imatge del dia del NOAA Environmental Visualization Laboratory
+Name[es]=Imagen del día del Laboratorio de Visualización Ambiental del NOAA
 Name[nl]=NOAA afbeelding-van-de-dag van het Laboratorium voor visualisatie van het milieu
 Name[nn]=Dagens bilete frå NOAA Environmental Visualization Laboratory
 Name[pt]=Imagem do Dia do Laboratório de Visualização Ambiental do NOAA
@@ -19,6 +20,7 @@ Name[x-test]=xxNOAA Environmental Visualization Laboratory Picture of the Dayxx
 Name[zh_TW]=美國國家海洋暨大氣總署環境視覺化實驗室每日圖片
 Comment=NOAA Provider
 Comment[ca]=Proveïdor NOAA
+Comment[es]=Proveedor del NOAA
 Comment[nl]=NOAA-provider
 Comment[nn]=NOAA-tilbydar
 Comment[pt]=Fornecedor do NOAA
