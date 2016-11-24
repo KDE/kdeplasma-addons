@@ -26,6 +26,55 @@
 
 class QWidget;
 
+class Grabber : public QObject
+{
+    Q_OBJECT
+public:
+    virtual ~Grabber();
+
+    virtual void pick() = 0;
+
+    QColor color() const {
+        return m_color;
+    }
+
+Q_SIGNALS:
+    void colorChanged();
+
+protected:
+    void setColor(const QColor &color);
+    explicit Grabber(QObject *parent = nullptr);
+
+private:
+    QColor m_color;
+};
+
+class X11Grabber : public Grabber
+{
+    Q_OBJECT
+public:
+    explicit X11Grabber(QObject *parent = nullptr);
+    virtual ~X11Grabber();
+
+    void pick() override;
+
+protected:
+    virtual bool eventFilter(QObject *watched, QEvent *event) override;
+
+private:
+    QWidget *m_grabWidget;
+};
+
+class KWinWaylandGrabber : public Grabber
+{
+    Q_OBJECT
+public:
+    explicit KWinWaylandGrabber(QObject *parent = nullptr);
+    virtual ~KWinWaylandGrabber();
+
+    void pick() override;
+};
+
 class GrabWidget : public QObject
 {
     Q_OBJECT
@@ -44,13 +93,8 @@ public:
 signals:
     void currentColorChanged();
 
-protected:
-    virtual bool eventFilter(QObject *watched, QEvent *event) override;
-
 private:
-    QWidget *m_grabWidget;
-
-    QColor m_currentColor;
+    Grabber *m_grabber = nullptr;
 
 };
 

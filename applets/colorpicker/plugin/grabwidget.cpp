@@ -21,6 +21,12 @@
 #include "grabwidget.h"
 
 #include <QDebug>
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusMetaType>
+#include <QDBusPendingCall>
+#include <QDBusPendingCallWatcher>
+#include <QDBusPendingReply>
 #include <QApplication>
 #include <QClipboard>
 #include <QEvent>
@@ -28,24 +34,57 @@
 #include <QScreen>
 #include <QWidget>
 
-GrabWidget::GrabWidget(QObject *parent)
+#include <KWindowSystem>
+
+Q_DECLARE_METATYPE(QColor)
+
+QDBusArgument &operator<< (QDBusArgument &argument, const QColor &color)
+{
+    argument.beginStructure();
+    argument << color.rgba();
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument &operator>>(const QDBusArgument &argument, QColor &color)
+{
+    argument.beginStructure();
+    QRgb rgba;
+    argument >> rgba;
+    argument.endStructure();
+    color = QColor::fromRgba(rgba);
+    return argument;
+}
+
+Grabber::Grabber(QObject *parent)
     : QObject(parent)
+{
+}
+
+Grabber::~Grabber() = default;
+
+void Grabber::setColor(const QColor &color)
+{
+    if (m_color == color) {
+        return;
+    }
+    m_color = color;
+    emit colorChanged();
+}
+
+X11Grabber::X11Grabber(QObject *parent)
+    : Grabber(parent)
     , m_grabWidget(new QWidget(nullptr, Qt::BypassWindowManagerHint))
 {
     m_grabWidget->move(-5000, -5000);
 }
 
-GrabWidget::~GrabWidget()
+X11Grabber::~X11Grabber()
 {
     delete m_grabWidget;
 }
 
-QColor GrabWidget::currentColor() const
-{
-    return m_currentColor;
-}
-
-void GrabWidget::pick()
+void X11Grabber::pick()
 {
     // TODO pretend the mouse went somewhere else to prevent the tooltip from spawning
 
@@ -54,12 +93,7 @@ void GrabWidget::pick()
     m_grabWidget->grabMouse(Qt::CrossCursor);
 }
 
-void GrabWidget::copyToClipboard(const QString &text)
-{
-    QApplication::clipboard()->setText(text);
-}
-
-bool GrabWidget::eventFilter(QObject *watched, QEvent *event)
+bool X11Grabber::eventFilter(QObject *watched, QEvent *event)
 {
     if (watched == m_grabWidget && event->type() == QEvent::MouseButtonRelease) {
         m_grabWidget->removeEventFilter(this);
@@ -75,9 +109,67 @@ bool GrabWidget::eventFilter(QObject *watched, QEvent *event)
         const QPixmap pixmap = qApp->primaryScreen()->grabWindow(0);
         const QPoint localPos = pos * qApp->devicePixelRatio();
 
-        m_currentColor = QColor(pixmap.toImage().pixel(localPos));
-        emit currentColorChanged();
+        setColor(QColor(pixmap.toImage().pixel(localPos)));
     }
 
     return QObject::eventFilter(watched, event);
+}
+
+KWinWaylandGrabber::KWinWaylandGrabber(QObject *parent)
+    : Grabber(parent)
+{
+    qDBusRegisterMetaType<QColor>();
+}
+
+KWinWaylandGrabber::~KWinWaylandGrabber() = default;
+
+void KWinWaylandGrabber::pick()
+{
+    QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("org.kde.KWin"),
+                                                      QStringLiteral("/ColorPicker"),
+                                                      QStringLiteral("org.kde.kwin.ColorPicker"),
+                                                      QStringLiteral("pick"));
+    auto call = QDBusConnection::sessionBus().asyncCall(msg);
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this,
+        [this] (QDBusPendingCallWatcher *watcher) {
+            watcher->deleteLater();
+            QDBusPendingReply<QColor> reply = *watcher;
+            if (!reply.isError()) {
+                setColor(reply.value());
+            }
+        }
+    );
+}
+
+GrabWidget::GrabWidget(QObject *parent)
+    : QObject(parent)
+{
+    if (KWindowSystem::isPlatformX11()) {
+        m_grabber = new X11Grabber(this);
+    } else if (KWindowSystem::isPlatformWayland()) {
+        m_grabber = new KWinWaylandGrabber(this);
+    }
+    if (m_grabber) {
+        connect(m_grabber, &Grabber::colorChanged, this, &GrabWidget::currentColorChanged);
+    }
+}
+
+GrabWidget::~GrabWidget() = default;
+
+QColor GrabWidget::currentColor() const
+{
+    return m_grabber ? m_grabber->color() : QColor();
+}
+
+void GrabWidget::pick()
+{
+    if (m_grabber) {
+        m_grabber->pick();
+    }
+}
+
+void GrabWidget::copyToClipboard(const QString &text)
+{
+    QApplication::clipboard()->setText(text);
 }
