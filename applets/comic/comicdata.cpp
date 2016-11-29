@@ -36,6 +36,10 @@ void ComicData::init(const QString &id, const KConfigGroup &config)
 
 void ComicData::load()
 {
+    if (!mCfg.isValid()) {
+        return;
+    }
+
     mScaleComic = mCfg.readEntry("scaleToContent_" + mId, false);
     mMaxStripNum = mCfg.readEntry("maxStripNum_" + mId, 0);
     mStored = mCfg.readEntry("storedPosition_" + mId, QString());
@@ -43,6 +47,10 @@ void ComicData::load()
 
 void ComicData::save()
 {
+    if (!mCfg.isValid()) {
+        return;
+    }
+
     mCfg.writeEntry("scaleToContent_" + mId,  mScaleComic);
     mCfg.writeEntry("maxStripNum_" + mId, mMaxStripNum);
     mCfg.writeEntry("storedPosition_" + id(), mStored);
@@ -52,6 +60,11 @@ void ComicData::save()
         mCfg.writeEntry("lastStripVisited_" + mId, true);
         mCfg.writeEntry("lastStrip_" + mId, mLast);
     }
+}
+
+bool ComicData::isValid() const
+{
+    return mCfg.isValid();
 }
 
 void ComicData::setScaleComic(bool scale)

@@ -73,6 +73,11 @@ class ComicData
          */
         QString first() const { return mFirst; }
 
+        /**
+         * if false this doesn't represent a valid comic data
+         */
+        bool isValid() const;
+
         bool hasNext() const { return !mNext.isEmpty(); }
 
         bool hasPrev() const { return !mPrev.isEmpty(); }

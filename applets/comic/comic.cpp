@@ -270,6 +270,7 @@ void ComicApplet::updateUsedComics()
 
     mActiveComicModel->clear();
     mCurrent = ComicData();
+    updateContextMenu();
 
     bool isFirst = true;
     QModelIndex data;
@@ -343,6 +344,7 @@ void ComicApplet::configChanged()
 
     const QString id = mTabIdentifier.count() ? mTabIdentifier.at( 0 ) : QString();
     mCurrent = ComicData();
+    updateContextMenu();
     mCurrent.init(id, cg);
 
     mShowComicUrl = cg.readEntry( "showComicUrl", false );
@@ -502,11 +504,19 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 
 void ComicApplet::updateContextMenu()
 {
-    mActionGoFirst->setVisible(mCurrent.hasFirst());
-    mActionGoFirst->setEnabled(mCurrent.hasPrev());
-    mActionGoLast->setEnabled(true);//always enable to have some kind of refresh action
+    if (mActions.isEmpty()) {
+        return;
+    }
+    mActionGoFirst->setVisible(mCurrent.isValid() && mCurrent.hasFirst());
+    mActionGoFirst->setEnabled(mCurrent.isValid() && mCurrent.hasPrev());
+    mActionGoLast->setEnabled(mCurrent.isValid());
+
     if (mActionShop) {
-        mActionShop->setEnabled(mCurrent.shopUrl().isValid());
+        mActionShop->setEnabled(mCurrent.isValid() && mCurrent.shopUrl().isValid());
+    }
+
+    for (auto a : mActions) {
+        a->setEnabled(mCurrent.isValid());
     }
 }
 
