@@ -37,3 +37,4 @@ add_subdirectory(quicklaunch)
 
 add_subdirectory(userswitcher)
 add_subdirectory(weather)
+add_subdirectory(grouping)
