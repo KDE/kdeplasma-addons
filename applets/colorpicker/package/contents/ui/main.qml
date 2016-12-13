@@ -19,6 +19,7 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1 as QtControls
 import QtQuick.Layouts 1.1
+import QtQuick.Dialogs 1.0 as QtDialogs
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -53,17 +54,25 @@ Item {
         plasmoid.configuration.history = history.slice(0, 9)
     }
 
+    function colorPicked(color) {
+        if (color != recentColor) {
+            addColorToHistory(color)
+        }
+
+        if (plasmoid.configuration.autoClipboard) {
+            picker.copyToClipboard(Logic.formatColor(color, root.defaultFormat))
+        }
+    }
+
     ColorPicker.GrabWidget {
         id: picker
-        onCurrentColorChanged: {
-            if (currentColor != recentColor) {
-                addColorToHistory(currentColor)
-            }
+        onCurrentColorChanged: colorPicked(currentColor)
+    }
 
-            if (plasmoid.configuration.autoClipboard) {
-                picker.copyToClipboard(Logic.formatColor(currentColor, root.defaultFormat))
-            }
-        }
+    QtDialogs.ColorDialog {
+        id: colorDialog
+        color: recentColor
+        onColorChanged: colorPicked(color)
     }
 
     // prevents the popup from actually opening, needs to be queued
@@ -86,7 +95,12 @@ Item {
         plasmoid.configuration.history = []
     }
 
+    function action_colordialog() {
+        colorDialog.open()
+    }
+
     Component.onCompleted: {
+        plasmoid.setAction("colordialog", i18n("Open Color Dialog"), "color-management")
         plasmoid.setAction("clear", i18n("Clear History"), "edit-clear-history")
     }
 
