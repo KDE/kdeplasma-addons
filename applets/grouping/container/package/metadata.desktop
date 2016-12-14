@@ -1,5 +1,11 @@
 [Desktop Entry]
 Name=Grouping Plasmoid
+Name[ca]=Plasmoide d'agrupació
+Name[it]=Plasmoide di raggruppamento
+Name[nl]=Plasmoid-groepering
+Name[pt]=Plasmóide de Agrupamento
+Name[uk]=Плазмоїд групування
+Name[x-test]=xxGrouping Plasmoidxx
 Encoding=UTF-8
 Icon=preferences-desktop-notification
 Type=Service

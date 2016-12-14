@@ -1,6 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Grouping Plasmoid
+Name[ca]=Plasmoide d'agrupació
+Name[it]=Plasmoide di raggruppamento
+Name[nl]=Plasmoid-groepering
+Name[pt]=Plasmóide de Agrupamento
+Name[uk]=Плазмоїд групування
+Name[x-test]=xxGrouping Plasmoidxx
 Icon=preferences-desktop-notification
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
