@@ -2,12 +2,14 @@
 Name=Grouping Plasmoid
 Name[ca]=Plasmoide d'agrupació
 Name[el]=Πλασμοειδές ομαδοποίησης
+Name[eu]=Taldekatzeko plasmoidea
 Name[it]=Plasmoide di raggruppamento
 Name[nl]=Plasmoid-groepering
 Name[pt]=Plasmóide de Agrupamento
 Name[sv]=Grupperingsplasmoid
 Name[uk]=Плазмоїд групування
 Name[x-test]=xxGrouping Plasmoidxx
+Name[zh_CN]=分组小部件
 Encoding=UTF-8
 Icon=preferences-desktop-notification
 Type=Service
