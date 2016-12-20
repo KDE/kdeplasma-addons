@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Microblogging
 Name[ar]=التدوين المصغر
-Name[ast]=Microblogging
 Name[bs]=Microblogging
 Name[ca]=Microblogs
 Name[ca@valencia]=Microblogs
@@ -105,7 +104,6 @@ Comment[zh_CN]=更新并浏览您的微博客状态
 Comment[zh_TW]=更新並檢視您的 microblog 狀態。
 Keywords=identi.ca;twitter;
 Keywords[ar]=identi.ca;twitter;
-Keywords[ast]=identi.ca;twitter;
 Keywords[bs]=identi.ca;twitter;
 Keywords[ca]=identi.ca;twitter;
 Keywords[ca@valencia]=identi.ca;twitter;
