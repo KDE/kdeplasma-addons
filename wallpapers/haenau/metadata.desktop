@@ -46,7 +46,7 @@ Name[zh_TW]=Haenau
 
 
 Type=Service
-ServiceTypes=Plasma/DeclarativeWallpaper
+ServiceTypes=Plasma/Wallpaper
 Icon=preferences-desktop-wallpaper
 X-Plasma-MainScript=ui/main.qml
 X-KDE-PluginInfo-Author=Marco Martin
