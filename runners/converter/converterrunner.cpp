@@ -227,6 +227,16 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         if (!u.isNull() && units.indexOf(u) < 0) {
             units << u;
         }
+
+        // suggest converting to the user's local currency
+        if (category.id() == KUnitConversion::CurrencyCategory) {
+            const QString &currencyIsoCode = QLocale().currencySymbol(QLocale::CurrencyIsoCode);
+
+            KUnitConversion::Unit localCurrency = category.unit(currencyIsoCode);
+            if (localCurrency.isValid() && !units.contains(localCurrency)) {
+                units << localCurrency;
+            }
+        }
     }
 
     QList<Plasma::QueryMatch> matches;
