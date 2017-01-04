@@ -24,6 +24,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.2 as QtControls
 import QtQuick.Layouts 1.0 as QtLayouts
+import org.kde.kquickcontrols 2.0 as KQC
 
 Item {
     id: appearancePage
@@ -31,8 +32,8 @@ Item {
     height: childrenRect.height
 
     property alias cfg_boardSize: sizeSpinBox.value
-    property alias cfg_boardColor: pieceColorPicker.chosenColor
-    property alias cfg_numberColor: numberColorPicker.chosenColor
+    property alias cfg_boardColor: pieceColorPicker.color
+    property alias cfg_numberColor: numberColorPicker.color
     property alias cfg_showNumerals: showNumeralsCheckBox.checked
 
     property alias cfg_useImage: useImageCheckBox.checked
@@ -66,7 +67,7 @@ Item {
                     QtLayouts.Layout.alignment: Qt.AlignRight
                 }
 
-                ColorPicker {
+                KQC.ColorButton {
                     id: pieceColorPicker
                 }
 
@@ -75,7 +76,7 @@ Item {
                     QtLayouts.Layout.alignment: Qt.AlignRight
                 }
 
-                ColorPicker {
+                KQC.ColorButton {
                     id: numberColorPicker
                 }
 
