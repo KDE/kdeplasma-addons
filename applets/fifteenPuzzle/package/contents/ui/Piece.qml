@@ -51,6 +51,19 @@ Rectangle {
     property int number
     property int position
 
+    Behavior on x {
+        NumberAnimation {
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+    Behavior on y {
+        NumberAnimation {
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+
     Components.Label {
         id: pieceNumeral
         anchors.centerIn: parent
