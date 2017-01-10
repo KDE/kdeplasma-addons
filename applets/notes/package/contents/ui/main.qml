@@ -43,9 +43,9 @@ PlasmaCore.SvgItem {
 
     width: units.gridUnit * 14
     height: units.gridUnit * 14
-    Layout.minimumWidth: units.gridUnit * 4
-    Layout.minimumHeight: units.gridUnit * 4
-    Plasmoid.switchWidth: Math.max(units.gridUnit * 13, fontButtons.Layout.preferredWidth)
+    Layout.minimumWidth: units.iconSizes.medium
+    Layout.minimumHeight: units.iconSizes.medium
+    Plasmoid.switchWidth: units.gridUnit * 5
     Plasmoid.switchHeight: units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
@@ -232,57 +232,54 @@ PlasmaCore.SvgItem {
             bottomMargin: verticalMargins
         }
 
+        readonly property int requiredWidth: toggleFormatBarButton.width + formatButtonsRow.width + settingsButton.width + 3 * spacing
+        readonly property bool showFormatButtons: width > requiredWidth
+
         PlasmaComponents.ToolButton {
             id: toggleFormatBarButton
             tooltip: i18n("Toggle text format options")
             iconSource: "draw-text"
             checkable: true
             Accessible.name: tooltip
+            visible: fontButtons.showFormatButtons
         }
 
-        PlasmaComponents.ToolButton {
-            tooltip: i18n("Bold")
-            iconSource: "format-text-bold"
-            opacity: toggleFormatBarButton.checked ? 1 : 0
+        Row {
+            id: formatButtonsRow
+            spacing: units.smallSpacing
+            opacity: fontButtons.showFormatButtons && toggleFormatBarButton.checked ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: units.longDuration } }
             enabled: opacity > 0
+            visible: fontButtons.showFormatButtons
 
-            checked: documentHandler.bold
-            onClicked: documentHandler.bold = !documentHandler.bold
-            Accessible.name: tooltip
-        }
-        PlasmaComponents.ToolButton {
-            tooltip: i18n("Italic")
-            iconSource: "format-text-italic"
-            opacity: toggleFormatBarButton.checked ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
-            enabled: opacity > 0
-
-            checked: documentHandler.italic
-            onClicked: documentHandler.italic = !documentHandler.italic
-            Accessible.name: tooltip
-        }
-        PlasmaComponents.ToolButton {
-            tooltip: i18n("Underline")
-            iconSource: "format-text-underline"
-            opacity: toggleFormatBarButton.checked ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
-            enabled: opacity > 0
-
-            checked: documentHandler.underline
-            onClicked: documentHandler.underline = !documentHandler.underline
-            Accessible.name: tooltip
-        }
-        PlasmaComponents.ToolButton {
-            tooltip: i18n("Strikethrough")
-            iconSource: "format-text-strikethrough"
-            opacity: toggleFormatBarButton.checked ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
-            enabled: opacity > 0
-
-            checked: documentHandler.strikeOut
-            onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
-            Accessible.name: tooltip
+            PlasmaComponents.ToolButton {
+                tooltip: i18n("Bold")
+                iconSource: "format-text-bold"
+                checked: documentHandler.bold
+                onClicked: documentHandler.bold = !documentHandler.bold
+                Accessible.name: tooltip
+            }
+            PlasmaComponents.ToolButton {
+                tooltip: i18n("Italic")
+                iconSource: "format-text-italic"
+                checked: documentHandler.italic
+                onClicked: documentHandler.italic = !documentHandler.italic
+                Accessible.name: tooltip
+            }
+            PlasmaComponents.ToolButton {
+                tooltip: i18n("Underline")
+                iconSource: "format-text-underline"
+                checked: documentHandler.underline
+                onClicked: documentHandler.underline = !documentHandler.underline
+                Accessible.name: tooltip
+            }
+            PlasmaComponents.ToolButton {
+                tooltip: i18n("Strikethrough")
+                iconSource: "format-text-strikethrough"
+                checked: documentHandler.strikeOut
+                onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
+                Accessible.name: tooltip
+            }
         }
 
         Item { // spacer
@@ -291,6 +288,7 @@ PlasmaCore.SvgItem {
         }
 
         PlasmaComponents.ToolButton {
+            id: settingsButton
             tooltip: plasmoid.action("configure").text
             iconSource: "configure"
             onClicked: plasmoid.action("configure").trigger()
