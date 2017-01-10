@@ -291,7 +291,7 @@ PlasmaCore.SvgItem {
         }
 
         PlasmaComponents.ToolButton {
-            tooltip: i18n("Notes Settings...")
+            tooltip: plasmoid.action("configure").text
             iconSource: "configure"
             onClicked: plasmoid.action("configure").trigger()
             Accessible.name: tooltip
