@@ -1,4 +1,3 @@
-add_subdirectory(audioplayercontrol)
 # add_subdirectory(browserhistory)
 add_subdirectory(converter)
 add_subdirectory(datetime)
