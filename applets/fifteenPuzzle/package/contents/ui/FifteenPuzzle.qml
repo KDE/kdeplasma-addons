@@ -55,7 +55,6 @@ Item {
         // Hide the solved rectangle in case it was visible
         solvedRect.visible = false;
         main.seconds = 0;
-        secondsTimer.start();
 
         var size = boardSize * boardSize;
         for (var i = size - 1; i >= 0; --i) {
@@ -111,6 +110,7 @@ Item {
             }
             swapPieces(pieceA, pieceB);
         }
+        secondsTimer.stop();
     }
 
     function pieceClicked(position) {
@@ -128,6 +128,7 @@ Item {
         } else if (below != -1 && pieces[below].number == 0) {
             swapPieces(below, position);
         }
+        secondsTimer.start();
         checkSolved();
     }
 
