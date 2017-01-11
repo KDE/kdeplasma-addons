@@ -24,6 +24,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.2 as QtControls
 import QtQuick.Layouts 1.0 as QtLayouts
+import QtQuick.Dialogs 1.2 as QtDialogs
 import org.kde.kquickcontrols 2.0 as KQC
 
 Item {
@@ -86,9 +87,36 @@ Item {
                     QtLayouts.Layout.alignment: Qt.AlignRight
                 }
 
-                QtControls.TextField {
-                    id: imagePathTextField
-                    placeholderText: i18n("Path to custom image")
+                QtLayouts.RowLayout {
+                    QtControls.TextField {
+                        id: imagePathTextField
+                        QtLayouts.Layout.fillWidth: true
+                        QtLayouts.Layout.minimumWidth: units.gridUnit * 10
+                        placeholderText: i18n("Path to custom image")
+                        onTextChanged: useImageCheckBox.checked = true
+                    }
+
+                    QtControls.Button {
+                        iconName: "document-open"
+                        tooltip: i18n("Browse...")
+
+                        onClicked: imagePicker.open()
+
+                        QtDialogs.FileDialog {
+                            id: imagePicker
+
+                            title: i18n("Choose an image")
+
+                            folder: shortcuts.pictures
+
+                            // TODO ask QImageReader for supported formats
+                            nameFilters: [ i18n("Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)") ]
+
+                            onFileUrlChanged: {
+                                imagePathTextField.text = fileUrl.toString().replace("file://", "")
+                            }
+                        }
+                    }
                 }
 
                 QtControls.CheckBox {
