@@ -266,8 +266,8 @@ DropArea {
     states: [
         State {
             name: "idle"
-            PropertyChanges { target: icon; source: "document-share" }
-            PropertyChanges { target: tooltipArea; icon: "document-share" }
+            PropertyChanges { target: icon; source: "emblem-shared-symbolic" }
+            PropertyChanges { target: tooltipArea; icon: "emblem-shared-symbolic" }
             PropertyChanges { target: tooltipArea; mainText: i18n("Share") }
             PropertyChanges { target: tooltipArea; subText: contentTracker.uri ? i18n("Upload %1 to an online service", contentTracker.title ? contentTracker.title : filenameFromUrl(contentTracker.uri)) :  i18n("Drop text or an image onto me to upload it to an online service.") }
         },
