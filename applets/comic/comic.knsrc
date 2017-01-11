@@ -1,5 +1,10 @@
 [KNewStuff3]
 Name=Comics
+Name[nl]=Stripboeken
+Name[pt]=Banda Desenhada
+Name[sv]=Serier
+Name[uk]=Комікси
+Name[x-test]=xxComicsxx
 
 ProvidersUrl=http://download.kde.org/ocs/providers.xml
 Categories=Plasma Comic
