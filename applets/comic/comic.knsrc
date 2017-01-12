@@ -1,7 +1,9 @@
 [KNewStuff3]
 Name=Comics
+Name[ca]=Còmics
 Name[nl]=Stripboeken
 Name[pt]=Banda Desenhada
+Name[sk]=Komiks
 Name[sv]=Serier
 Name[uk]=Комікси
 Name[x-test]=xxComicsxx
