@@ -1,10 +1,16 @@
 [KNewStuff3]
 Name=Comics
 Name[ca]=Còmics
+Name[de]=Comics
 Name[es]=Cómics
+Name[it]=Fumetti
 Name[nl]=Stripboeken
 Name[pt]=Banda Desenhada
 Name[sk]=Komiks
+Name[sr]=стрипови
+Name[sr@ijekavian]=стрипови
+Name[sr@ijekavianlatin]=stripovi
+Name[sr@latin]=stripovi
 Name[sv]=Serier
 Name[uk]=Комікси
 Name[x-test]=xxComicsxx
