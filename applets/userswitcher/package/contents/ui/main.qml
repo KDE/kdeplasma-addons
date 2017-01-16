@@ -69,7 +69,7 @@ Item {
         // Taken from DigitalClock to ensure uniform sizing when next to each other
         readonly property bool tooSmall: plasmoid.formFactor === PlasmaCore.Types.Horizontal && Math.round(2 * (compactRoot.height / 5)) <= theme.smallestFont.pixelSize
 
-        Layout.minimumWidth: isVertical ? 0 : compactRow.contentWidth
+        Layout.minimumWidth: isVertical ? 0 : compactRow.implicitWidth
         Layout.maximumWidth: isVertical ? Infinity : Layout.minimumWidth
         Layout.preferredWidth: isVertical ? undefined : Layout.minimumWidth
 
@@ -81,8 +81,6 @@ Item {
 
         Row {
             id: compactRow
-
-            readonly property int contentWidth: (icon.visible ? icon.width : 0) + (icon.visible && label.visible ? spacing : 0) + (label.visible ? label.contentWidth : 0)
 
             anchors.centerIn: parent
             spacing: units.smallSpacing
