@@ -48,13 +48,13 @@ PlasmaCore.Dialog
             inputData: window.inputData
             pluginType: "Export"
             delegate: PlasmaComponents.ListItem {
-                height: button.height * 1.2
                 enabled: true
 
                 onClicked: view.createJob(index)
 
                 RowLayout {
-                    anchors.fill: parent
+                    anchors.left: parent.left
+                    anchors.right: parent.right
                     PlasmaComponents.Label {
                         Layout.fillWidth: true
                         text: display
