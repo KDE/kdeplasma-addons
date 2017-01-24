@@ -24,6 +24,7 @@ Name[sv]=Grupperingsplasmoid
 Name[uk]=Плазмоїд групування
 Name[x-test]=xxGrouping Plasmoidxx
 Name[zh_CN]=分组小部件
+Name[zh_TW]=組織 Plasmoid
 Icon=preferences-desktop-notification
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
