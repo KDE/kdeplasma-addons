@@ -189,6 +189,35 @@ Item {
                     height: units.roundToIconSize(pickerIcon.height) * 0.75
                     radius: width / 2
                     color: root.recentColor
+
+                    function luminance(color) {
+                        if (!color) {
+                            return 0;
+                        }
+
+                        // formula for luminance according to https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+
+                        var a = [color.r, color.g, color.b].map(function (v) {
+                            return (v <= 0.03928) ? v / 12.92 :
+                                                    Math.pow( ((v + 0.055) / 1.055), 2.4 );
+                        });
+
+                        return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+                    }
+
+                    border {
+                        color: theme.textColor
+                        width: {
+                            var contrast = luminance(theme.viewBackgroundColor) / luminance(colorCircle.color) + 0.05;
+
+                            // show border only if there's too little contrast to the surrounding view
+                            if (contrast > 3) {
+                                return 0;
+                            } else {
+                                return Math.round(Math.max(units.devicePixelRatio, width / 20));
+                            }
+                        }
+                    }
                 }
             }
         }
