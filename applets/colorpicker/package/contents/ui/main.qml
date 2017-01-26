@@ -318,9 +318,18 @@ Item {
 
                 color: delegateMouse.currentColor
 
+                border {
+                    color: theme.textColor
+                    width: Math.round(units.devicePixelRatio)
+                }
+
                 Rectangle {
-                    anchors.bottom: parent.bottom
-                    width: parent.width
+                    anchors {
+                        bottom: parent.bottom
+                        left: parent.left
+                        right: parent.right
+                        margins: rect.border.width
+                    }
                     height: colorLabel.contentHeight + 2 * units.smallSpacing
                     color: theme.backgroundColor
                     opacity: 0.8
