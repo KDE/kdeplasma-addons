@@ -101,15 +101,18 @@ bool X11Grabber::eventFilter(QObject *watched, QEvent *event)
         m_grabWidget->releaseMouse();
 
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
-        const QPoint pos = me->globalPos();
 
-        // the grabbed pixmap will contain all screens, not just the primary one
-        // originally we traversed all screens looking for where the mouse is
-        // but this isn't neccessarily apparently
-        const QPixmap pixmap = qApp->primaryScreen()->grabWindow(0);
-        const QPoint localPos = pos * qApp->devicePixelRatio();
+        if (me->button() == Qt::LeftButton) {
+            const QPoint pos = me->globalPos();
 
-        setColor(QColor(pixmap.toImage().pixel(localPos)));
+            // the grabbed pixmap will contain all screens, not just the primary one
+            // originally we traversed all screens looking for where the mouse is
+            // but this isn't neccessarily apparently
+            const QPixmap pixmap = qApp->primaryScreen()->grabWindow(0);
+            const QPoint localPos = pos * qApp->devicePixelRatio();
+
+            setColor(QColor(pixmap.toImage().pixel(localPos)));
+        }
     }
 
     return QObject::eventFilter(watched, event);
