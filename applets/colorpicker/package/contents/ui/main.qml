@@ -64,6 +64,11 @@ Item {
         }
     }
 
+    function pickColor() {
+        plasmoid.expanded = false
+        picker.pick()
+    }
+
     ColorPicker.GrabWidget {
         id: picker
         onCurrentColorChanged: colorPicked(currentColor)
@@ -79,10 +84,7 @@ Item {
     Timer {
         id: delayedPickTimer
         interval: 0
-        onTriggered: {
-            plasmoid.expanded = false
-            picker.pick()
-        }
+        onTriggered: root.pickColor()
     }
 
     Plasmoid.onActivated: {
@@ -117,7 +119,7 @@ Item {
             width: buttonSize
             height: buttonSize
             tooltip: i18n("Pick Color")
-            onClicked: picker.pick()
+            onClicked: root.pickColor()
 
             PlasmaCore.IconItem {
                 id: pickerIcon
@@ -246,7 +248,7 @@ Item {
             anchors.centerIn: parent
             text: i18n("Pick Color")
             visible: fullRoot.count === 0
-            onClicked: picker.pick()
+            onClicked: root.pickColor()
         }
 
         Connections {
