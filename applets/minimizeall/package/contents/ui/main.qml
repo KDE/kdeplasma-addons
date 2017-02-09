@@ -84,11 +84,12 @@ Item {
     PlasmaCore.IconItem {
         id:icon
         source: plasmoid.configuration.icon
-        active: mouseArea.containsMouse
+        active: tooltip.containsMouse
         anchors.fill: parent
     }
 
     PlasmaCore.ToolTipArea {
+        id: tooltip
         anchors.fill: parent
         mainText : i18n("Minimize Windows")
         subText : i18n("Show the desktop by minimizing all windows")
