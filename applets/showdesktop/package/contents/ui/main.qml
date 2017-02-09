@@ -65,6 +65,19 @@ QtObject {
             source: plasmoid.icon
             active: parent.containsMouse || showdesktop.showingDesktop
         }
+
+        // also activate when dragging an item over the plasmoid so a user can easily drag data to the desktop
+        DropArea {
+            anchors.fill: parent
+            onEntered: activateTimer.start()
+            onExited: activateTimer.stop()
+
+            Timer {
+                id: activateTimer
+                interval: 250 //to match TaskManager
+                onTriggered: plasmoid.activated()
+            }
+        }
     }
 
 }
