@@ -38,7 +38,13 @@ ColumnLayout {
         }
         PlasmaComponents.TextField{
             Layout.fillWidth: true
-            onAccepted: webview.url = text
+            onAccepted: {
+                var url = text;
+                if (url.indexOf(":/") < 0) {
+                    url = "http://" + url;
+                }
+                webview.url = url;
+            }
             text: webview.url
         }
         PlasmaComponents.Button{
