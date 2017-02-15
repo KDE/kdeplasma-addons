@@ -1,3 +1,0 @@
-set (KDE_PLASMA_UIC_EXECUTABLE ${CMAKE_CURRENT_SOURCE_DIR}/puck.py
-   CACHE STRING "Puck Location")
-

@@ -1,1 +1,0 @@
-#cmakedefine LANCELOT_HAVE_COMPOSITING 1
