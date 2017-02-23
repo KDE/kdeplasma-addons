@@ -29,6 +29,7 @@ Item {
     property alias cfg_cpuAllActivated: cpuAllActivatedCheckBox.checked
     property alias cfg_memoryActivated: memoryActivatedCheckBox.checked
     property alias cfg_swapActivated: swapActivatedCheckBox.checked
+    property alias cfg_cacheActivated: cacheActivatedCheckBox.checked
     property alias cfg_updateInterval: updateIntervalSpinBox.value
     property int cfg_monitorType: plasmoid.configuration.monitorType
 
@@ -55,7 +56,7 @@ Item {
         Label {
             text: i18n("Show:")
             Layout.alignment: Qt.AlignRight
-            Layout.rowSpan: 4
+            Layout.rowSpan: 5
             anchors.verticalCenter: cpuActivatedCheckBox.verticalCenter
         }
 
@@ -82,6 +83,11 @@ Item {
         CheckBox {
             id: swapActivatedCheckBox
             text: i18n("Swap monitor")
+        }
+
+        CheckBox {
+            id: cacheActivatedCheckBox
+            text: i18n("Cache monitor")
         }
 
         Label {

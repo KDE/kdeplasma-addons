@@ -33,6 +33,8 @@ Item {
     property alias cfg_cpuSysColor: cpuSysColorPicker.chosenColor
     property alias cfg_cpuNiceColor: cpuNiceColorPicker.chosenColor
     property alias cfg_swapUsedColor: swapUsedColorPicker.chosenColor
+    property alias cfg_cacheDirtyColor: cacheDirtyColorPicker.chosenColor
+    property alias cfg_cacheWritebackColor: cacheWritebackColorPicker.chosenColor
     property alias cfg_setColorsManually: setColorsManuallyGroupBox.checked
 
     GroupBox {
@@ -139,6 +141,30 @@ Item {
 
             ColorPicker {
                 id: swapUsedColorPicker
+            }
+
+            Label {
+                text: i18n("Cache")
+                Layout.columnSpan: 2
+                font.bold: true
+            }
+
+            Label {
+                text: i18n("Dirty memory:")
+                Layout.alignment: Qt.AlignRight
+            }
+
+            ColorPicker {
+                id: cacheDirtyColorPicker
+            }
+
+            Label {
+                text: i18n("Writeback memory:")
+                Layout.alignment: Qt.AlignRight
+            }
+
+            ColorPicker {
+                id: cacheWritebackColorPicker
             }
         }
     }

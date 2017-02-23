@@ -57,6 +57,11 @@ Item {
     property var swapColors: setColorsManually ? [plasmoid.configuration.swapUsedColor]
                                                : [theme.hightlightColor]
 
+    property var cacheColors: setColorsManually ? [plasmoid.configuration.cacheDirtyColor,
+                                                   plasmoid.configuration.cacheWritebackColor]
+                                                : [theme.buttonFocusColor,
+                                                   theme.visitedLinkColor]
+
     // Make labels visible first time so that the
     // user knows which monitor is which.
     implicitWidth: widestLabelWidth()*1.3 * columnCount()
@@ -89,6 +94,9 @@ Item {
         if (plasmoid.configuration.memoryActivated) {
             wantedWidth += swapColumn.minWidth
         }
+        if (plasmoid.configuration.cacheActivated) {
+            wantedWidth += cacheColumn.minWidth
+        }
         return wantedWidth
     }
 
@@ -105,6 +113,9 @@ Item {
         }
         if (plasmoid.configuration.memoryActivated) {
             wantedWidth += swapColumn.minWidth
+        }
+        if (plasmoid.configuration.cacheActivated) {
+            wantedWidth += cacheColumn.minWidth
         }
         return wantedWidth
     }
@@ -140,16 +151,23 @@ Item {
         property string swap: "mem/swap/"
         property string swapUsed: swap + "used"
         property string swapFree: swap + "free"
+        property string cache: "mem/cache/"
+        property string cacheDirty: cache + "dirty"
+        property string cacheWriteback: cache + "writeback"
 
         property var totalCpuLoadProportions: [.0, .0, .0, .0]
         property int maxCpuIndex: 0
         property var memoryUsageProportions: [.0, .0, .0]
         property double swapUsageProportion: .0
+        property var cacheUsageProportions: [.0, .0]
+
+        property double maxCache: 0.0
 
         connectedSources: [niceLoad, userLoad, sysLoad,
             ioWait, memFree, memApplication, memBuffers,
             memCached, memUsed, swapUsed, swapFree,
-            averageClock, totalLoad]
+            averageClock, totalLoad, cacheDirty,
+            cacheWriteback]
 
         onSourceAdded: {
             var match = source.match(/^cpu\/cpu(\w+)\//)
@@ -188,6 +206,10 @@ Item {
             else if (sourceName == swapUsed) {
                 swapUsageProportion = fitSwapUsage(data.value)
                 swapUsageProportionChanged()
+            }
+            else if (sourceName == cacheWriteback) {
+                cacheUsageProportions = fitCacheUsage()
+                cacheUsageProportionsChanged()
             }
         }
         interval: 1000 * plasmoid.configuration.updateInterval
@@ -230,11 +252,15 @@ Item {
         var swapTotal = swapFree + swapUsed
         var swapPart = i18n("Swap: %1/%2 MiB", Math.round(swapUsed), Math.round(swapTotal))
 
+        var cacheDirty = parseFloat(dataSource.data[dataSource.cacheDirty].value) / 1024
+        var cacheWriteback = parseFloat(dataSource.data[dataSource.cacheWriteback].value) / 1024
+        var cachePart = i18n("Cache Dirty, Writeback: %1 MiB, %2 MiB", Math.round(cacheDirty), Math.round(cacheWriteback))
+
         if (cpuClockPart === "") {
-            return [cpuLoadPart, memoryPart, swapPart].join("\n")
+            return [cpuLoadPart, memoryPart, swapPart, cachePart].join("\n")
         }
 
-        return [cpuLoadPart, cpuClockPart, memoryPart, swapPart].join("\n")
+        return [cpuLoadPart, cpuClockPart, memoryPart, swapPart, cachePart].join("\n")
     }
 
     function fitCpuLoad(load) {
@@ -257,11 +283,37 @@ Item {
         return Math.min(x, 1);
     }
 
+    function fitCacheUsage() {
+        var values = [ parseFloat(dataSource.data[dataSource.cacheDirty].value),
+                       parseFloat(dataSource.data[dataSource.cacheWriteback].value) ];
+        var total = values[0] + values[1];
+        var props = [.0, .0];
+
+        // hide the persistent small amount of dirty cache (10M seems a good threshold)
+        if ( total < 10000 ) {
+            dataSource.maxCache = 0;
+            return props;
+        }
+
+        if (total > dataSource.maxCache) {
+            dataSource.maxCache = total;
+        }
+
+        for (var i = 0; i < values.length; i++) {
+           props[i] = values[i] / dataSource.maxCache;
+           if (isNaN(props[i])) { props[i] = 0; }
+           else { props[i] = Math.min(props[i], 0.99); }
+        }
+
+        return props;
+    }
+
     function columnCount() {
         var columns = 0;
         var activeMonitors = [plasmoid.configuration.cpuActivated,
             plasmoid.configuration.memoryActivated,
-            plasmoid.configuration.swapActivated]
+            plasmoid.configuration.swapActivated,
+            plasmoid.configuration.cacheActivated]
 
         for (var i = 0; i < activeMonitors.length; i++) {
             if (activeMonitors[i]) {
@@ -290,6 +342,9 @@ Item {
         }
         if (plasmoid.configuration.swapActivated) {
             widest = Math.max(widest, swapLabel.paintedWidth)
+        }
+        if (plasmoid.configuration.cacheActivated) {
+            widest = Math.max(widest, cacheLabel.paintedWidth)
         }
         return widest
     }
@@ -463,6 +518,26 @@ Item {
             ConditionallyLoadedMonitors {
                 colors: swapColors
                 proportions: [dataSource.swapUsageProportion]
+            }
+        }
+
+        ColumnLayout {
+            id: cacheColumn
+            property double minWidth: memColumn.minWidth
+            visible: plasmoid.configuration.cacheActivated
+            Layout.minimumWidth: minWidth
+            Layout.preferredWidth: height
+
+            PlasmaExtras.Heading {
+                id: cacheLabel
+                level: main.headingLevel
+                text: i18n("Cache")
+                visible: main.labelsVisible
+            }
+
+            ConditionallyLoadedMonitors {
+                colors: cacheColors
+                proportions: dataSource.cacheUsageProportions
             }
         }
     } // rowLayout

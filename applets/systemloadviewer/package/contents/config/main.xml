@@ -15,6 +15,12 @@
     <entry name="memBuffersColor" type="Color">
       <default>yellow</default>
     </entry>
+    <entry name="cacheDirtyColor" type="Color">
+      <default>blue</default>
+    </entry>
+    <entry name="cacheWritebackColor" type="Color">
+      <default>yellow</default>
+    </entry>
     <entry name="swapUsedColor" type="Color">
       <default>turquoise</default>
     </entry>
@@ -41,6 +47,9 @@
     </entry>
     <entry name="swapActivated" type="Bool">
       <default>true</default>
+    </entry>
+    <entry name="cacheActivated" type="Bool">
+      <default>false</default>
     </entry>
     <entry name="setColorsManually" type="Bool">
       <default>false</default>
