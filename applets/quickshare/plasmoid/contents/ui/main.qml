@@ -68,7 +68,8 @@ DropArea {
     function objectToArray(object) {
         var array = [];
         for(var v in object) {
-            array.push(object[v]);
+            // toString() here too because sometimes the contents are non-string (eg QUrl)
+            array.push(object[v].toString());
         }
         return array;
     }
@@ -105,21 +106,29 @@ DropArea {
     ContentTracker {
         id: contentTracker
     }
+
+    function activate() {
+        if (root.state == "configuration") {
+            root.state = "idle";
+        } else if (contentTracker.uri) {
+            var mime = contentTracker.mimeType;
+            if (!mime) {
+                mime = mimeDb.mimeTypeForUrl(contentTracker.uri).name;
+            }
+            sendData([contentTracker.uri], mime);
+        } else {
+            action_paste();
+        }
+    }
+
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            if (root.state == "configuration") {
-                root.state = "idle";
-            } else if (contentTracker.uri) {
-                var mime = contentTracker.mimeType;
-                if (!mime) {
-                    mime = mimeDb.mimeTypeForUrl(contentTracker.uri).name;
-                }
-                sendData([contentTracker.uri], mime);
-            } else {
-                action_paste();
-            }
+            activate();
         }
+    }
+    Plasmoid.onActivated: {
+        activate();
     }
 
     ShowUrlDialog {
@@ -214,8 +223,12 @@ DropArea {
     }
 
     function action_paste() {
+        if (clipboard.formats.length < 1) { // empty clipboard!
+            return; // do nothing (there's the tooltip!)
+        }
         if (clipboard.formats.indexOf("text/uri-list")>=0) {
-            sendData(clipboard.contentFormat("text/uri-list"));
+            var urls = objectToArray(clipboard.contentFormat("text/uri-list"))
+            sendData(urls, urlsMimetype(urls).name);
         } else {
             var mimetype = firstMimeType(clipboard.formats).name;
             sendBase64Data(PurposeHelper.variantToBase64(clipboard.contentFormat(mimetype)), mimetype);
