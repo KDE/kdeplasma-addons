@@ -70,12 +70,16 @@ Item {
             hoverEnabled: true
             acceptedButtons: Qt.LeftButton | Qt.RightButton
 
+            onPressed: {
+                if (mouse.button == Qt.RightButton) {
+                    contextMenu.refreshActions();
+                    contextMenu.open(mouse.x, mouse.y);
+                }
+            }
+
             onClicked: {
                 if (mouse.button == Qt.LeftButton) {
                     logic.openUrl(url)
-                } else if (mouse.button == Qt.RightButton) {
-                    contextMenu.refreshActions();
-                    contextMenu.open(mouse.x, mouse.y);
                 }
             }
 
