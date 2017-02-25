@@ -93,6 +93,7 @@ Item {
 
                 width: units.iconSizes.medium
                 height: width
+                usesPlasmaTheme: false
                 source: url == "quicklaunch:drop" ? "" : iconName
                 active: mouseArea.containsMouse
             }
