@@ -47,6 +47,7 @@ PlasmaCore.Dialog
             Layout.fillHeight: true
             inputData: window.inputData
             pluginType: "Export"
+            highlight: PlasmaComponents.Highlight {}
             delegate: PlasmaComponents.ListItem {
                 enabled: true
 
