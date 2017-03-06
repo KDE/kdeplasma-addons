@@ -32,8 +32,8 @@ PlasmaCore.Dialog
 
     hideOnWindowDeactivate: true
     mainItem: ColumnLayout {
-        height: 300
-        width: 300
+        height: units.gridUnit * 16
+        width: units.gridUnit * 16
         RowLayout {
             TextField {
                 id: field
