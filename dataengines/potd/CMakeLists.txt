@@ -96,3 +96,14 @@ target_link_libraries( plasma_potd_wcpotdprovider plasmapotdprovidercore KF5::KI
 kcoreaddons_desktop_to_json(plasma_potd_wcpotdprovider wcpotdprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 
 install( TARGETS plasma_potd_wcpotdprovider DESTINATION ${PLUGIN_INSTALL_DIR}/potd )
+
+set( potd_bing_provider_SRCS
+	bingprovider.cpp
+)
+
+add_library( plasma_potd_bingprovider MODULE ${potd_bing_provider_SRCS} )
+target_link_libraries( plasma_potd_bingprovider plasmapotdprovidercore KF5::KIOCore )
+
+kcoreaddons_desktop_to_json(plasma_potd_bingprovider bingprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
+
+install( TARGETS plasma_potd_bingprovider DESTINATION ${PLUGIN_INSTALL_DIR}/potd )
