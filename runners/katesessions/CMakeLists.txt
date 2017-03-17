@@ -1,11 +1,11 @@
+add_definitions(-DTRANSLATION_DOMAIN=\"plasma_runner_katesessions\")
+
 set(krunner_katesessions_SRCS
     katesessions.cpp
 )
 
-kde4_add_plugin(krunner_katesessions ${krunner_katesessions_SRCS})
-target_link_libraries(krunner_katesessions ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS})
 
-install(TARGETS krunner_katesessions DESTINATION ${PLUGIN_INSTALL_DIR} )
-
-install(FILES katesessions.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-
+add_library(krunner_katesessions MODULE ${krunner_katesessions_SRCS})
+target_link_libraries(krunner_katesessions KF5::KIOCore KF5::I18n KF5::Runner)
+install(TARGETS krunner_katesessions DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES plasma-runner-katesessions.desktop DESTINATION ${SERVICES_INSTALL_DIR})

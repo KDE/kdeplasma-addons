@@ -1,5 +1,6 @@
 /*
  *   Copyright 2008 Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2017 Kai Uwe Broulik <kde@privat.broulik.de>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -19,25 +20,20 @@
 
 #include "katesessions.h"
 
+#include <QCollator>
+#include <QDir>
+#include <QFileInfo>
+#include <QStandardPaths>
 
-#include <KDebug>
 #include <KDirWatch>
-#include <KStandardDirs>
+#include <KLocalizedString>
 #include <KToolInvocation>
-#include <KIcon>
-#include <KConfig>
-#include <KConfigGroup>
-#include <KUrl>
-#include <KStringHandler>
-#include <QFile>
 
-bool katesessions_runner_compare_sessions(const QString &s1, const QString &s2) {
-    return KStringHandler::naturalCompare(s1,s2)==-1;
-}
+K_EXPORT_PLASMA_RUNNER(katesessionsrunner, KateSessions)
 
 KateSessions::KateSessions(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args),
-    m_sessionWatch(0)
+    m_sessionWatch(nullptr)
 {
     setObjectName(QLatin1String("Kate Sessions"));
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
@@ -47,6 +43,9 @@ KateSessions::KateSessions(QObject *parent, const QVariantList& args)
     addSyntax(s);
 
     setDefaultSyntax(Plasma::RunnerSyntax(QLatin1String("kate"), i18n("Lists all the Kate editor sessions in your account.")));
+
+    m_sessionsFolderPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
+                         + QLatin1String("/kate/sessions");
 
     connect(this, SIGNAL(prepare()), SLOT(slotPrepare()));
     connect(this, SIGNAL(teardown()), SLOT(slotTeardown()));
@@ -63,42 +62,39 @@ void KateSessions::slotPrepare()
     // listen for changes to the list of kate sessions
     if (!m_sessionWatch) {
         KDirWatch *m_sessionWatch = new KDirWatch(this);
-        const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String("kate/sessions/"));
-        foreach (const QString &dir, sessiondirs) {
-            m_sessionWatch->addDir(dir);
-        }
-        connect(m_sessionWatch,SIGNAL(dirty(QString)),this,SLOT(loadSessions()));
-        connect(m_sessionWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
-        connect(m_sessionWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
+        m_sessionWatch->addDir(m_sessionsFolderPath);
+        connect(m_sessionWatch, &KDirWatch::dirty, this, &KateSessions::loadSessions);
+        connect(m_sessionWatch, &KDirWatch::created, this, &KateSessions::loadSessions);
+        connect(m_sessionWatch, &KDirWatch::deleted, this, &KateSessions::loadSessions);
     }
 }
 
 void KateSessions::slotTeardown()
 {
     delete m_sessionWatch;
-    m_sessionWatch = 0;
+    m_sessionWatch = nullptr;
     m_sessions.clear();
 }
 
 void KateSessions::loadSessions()
 {
-    // Switch kate session: -u
-    // Should we add a match for this option or would that clutter the matches too much?
-    QStringList sessions = QStringList();
-    const QStringList list = KGlobal::dirs()->findAllResources( "data", QLatin1String("kate/sessions/*.katesession"), KStandardDirs::NoDuplicates );
-    KUrl url;
-    for (QStringList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it)
-    {
-/*        KConfig _config( *it, KConfig::SimpleConfig );
-        KConfigGroup config(&_config, "General" );
-        QString name =  config.readEntry( "Name" );*/
-        url.setPath(*it);
-        QString name=url.fileName();
-        name = QUrl::fromPercentEncoding(QFile::encodeName(url.fileName()));
-        name.chop(12);///.katesession==12
-        sessions.append( name );
+    QStringList sessions;
+
+    QDir sessionsDir(m_sessionsFolderPath);
+
+    const auto &sessionFiles = sessionsDir.entryInfoList({QStringLiteral("*.katesession")}, QDir::Files);
+
+    for (const QFileInfo &sessionFile : sessionFiles) {
+        const QString name = QUrl::fromPercentEncoding(sessionFile.baseName().toLocal8Bit()); // is this the right encoding?
+        sessions.append(name);
     }
-    qSort(sessions.begin(),sessions.end(),katesessions_runner_compare_sessions);
+
+    QCollator collator;
+    collator.setCaseSensitivity(Qt::CaseInsensitive);
+    std::sort(sessions.begin(), sessions.end(), [&collator](const QString &a, const QString &b) {
+        return collator.compare(a, b) < 0;
+    });
+
     m_sessions = sessions;
 }
 
@@ -153,11 +149,11 @@ void KateSessions::match(Plasma::RunnerContext &context)
                     match.setRelevance(0.8);
                 }
             }
-            match.setIcon(KIcon(QLatin1String("kate")));
+            match.setIconName(QStringLiteral("kate"));
             match.setData(session);
             match.setText(session);
             match.setSubtext(i18n("Open Kate Session"));
-            context.addMatch(term, match);
+            context.addMatch(match);
         }
     }
 }
@@ -166,7 +162,6 @@ void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::Query
 {
     Q_UNUSED(context)
     QString session = match.data().toString();
-    kDebug() << "Open Kate Session " << session;
 
     if (!session.isEmpty()) {
         QStringList args;
@@ -175,3 +170,4 @@ void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::Query
     }
 }
 
+#include "katesessions.moc"

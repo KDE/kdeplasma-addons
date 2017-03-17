@@ -1,5 +1,6 @@
 /*
  *   Copyright 2008 Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2017 Kai Uwe Broulik <kde@privat.broulik.de>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -20,7 +21,7 @@
 #ifndef KATESESSIONS_H
 #define KATESESSIONS_H
 
-#include <plasma/abstractrunner.h>
+#include <krunner/abstractrunner.h>
 
 class KDirWatch;
 
@@ -31,8 +32,8 @@ class KateSessions : public Plasma::AbstractRunner {
         KateSessions( QObject *parent, const QVariantList& args );
         ~KateSessions();
 
-        void match(Plasma::RunnerContext &context);
-        void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+        void match(Plasma::RunnerContext &context) override;
+        void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
 
     private Q_SLOTS:
         void loadSessions();
@@ -41,9 +42,8 @@ class KateSessions : public Plasma::AbstractRunner {
 
     private:
         KDirWatch* m_sessionWatch;
+        QString m_sessionsFolderPath;
         QStringList m_sessions;
 };
-
-K_EXPORT_PLASMA_RUNNER(katesessions, KateSessions)
 
 #endif
