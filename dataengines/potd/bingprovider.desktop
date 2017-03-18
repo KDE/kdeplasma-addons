@@ -7,4 +7,16 @@ X-KDE-PlasmaPoTDProvider-Identifier=bing
 Icon=
 
 Name=Bing's Picture of the Day
+Name[ca]=Imatge del dia del Bing
+Name[nl]=Afbeelding van de dag van Bing
+Name[pt]=Imagem do Dia do Bing
+Name[sv]=Dagens bild på Bing
+Name[uk]=Картинка дня Bing
+Name[x-test]=xxBing's Picture of the Dayxx
 Comment=Bing Provider
+Comment[ca]=Proveïdor Bing
+Comment[nl]=Bing-provider
+Comment[pt]=Fornecedor do Bing
+Comment[sv]=Tillhandahåll från Bing
+Comment[uk]=Постачальник даних Bing
+Comment[x-test]=xxBing Providerxx
