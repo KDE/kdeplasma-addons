@@ -93,12 +93,12 @@ Item {
 
         // we have a solveable board if:
         // size is odd:  there are an even number of inversions
-        // size is even: the number of inversions is odd if and only if
+        // size is even: the number of inversions is even if and only if
         //               the blank tile is on an odd row from the bottom-
         var sizeMod2 = Math.floor(boardSize % 2);
         var inversionsMod2 = Math.floor(inversions % 2);
         var solveable = (sizeMod2 == 1 && inversionsMod2 == 0) ||
-                         (sizeMod2 == 0 && inversionsMod2 == 0) == (Math.floor((boardSize - blankRow) % 2) == 1);
+                         (sizeMod2 == 0 && inversionsMod2 == 0) == (Math.floor((boardSize - blankRow) % 2) == 0);
         if (!solveable) {
             // make the grid solveable by swapping two adjacent pieces around
             var pieceA = 0;
