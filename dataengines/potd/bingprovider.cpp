@@ -60,7 +60,7 @@ void BingProvider::Private::pageRequestFinished(KJob* _job)
         if (!imagesArray.isArray() || imagesArray.toArray().size() <= 0) {
             break;
         }
-        auto imageObj = imagesArray.toArray()[0];
+        auto imageObj = imagesArray.toArray().at(0);
         if (!imageObj.isObject()) {
             break;
         }
