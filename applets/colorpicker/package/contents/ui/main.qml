@@ -76,6 +76,7 @@ Item {
 
     QtDialogs.ColorDialog {
         id: colorDialog
+        title: plasmoid.title
         color: recentColor
         onColorChanged: colorPicked(color)
     }
