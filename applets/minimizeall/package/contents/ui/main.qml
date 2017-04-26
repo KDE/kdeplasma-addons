@@ -29,8 +29,16 @@ import org.kde.plasma.private.minimizeall 1.0
 Item {
     id: root
 
+    readonly property bool inPanel: (plasmoid.location === PlasmaCore.Types.TopEdge
+        || plasmoid.location === PlasmaCore.Types.RightEdge
+        || plasmoid.location === PlasmaCore.Types.BottomEdge
+        || plasmoid.location === PlasmaCore.Types.LeftEdge)
+
     Layout.minimumWidth: units.gridUnit
     Layout.minimumHeight: units.gridUnit
+
+    Layout.maximumWidth: inPanel ? units.iconSizeHints.panel : -1
+    Layout.maximumHeight: inPanel ? units.iconSizeHints.panel : -1
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 
