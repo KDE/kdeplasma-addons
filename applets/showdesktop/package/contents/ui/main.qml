@@ -48,8 +48,16 @@ QtObject {
     }
 
     Plasmoid.fullRepresentation: PlasmaCore.ToolTipArea {
+        readonly property bool inPanel: (plasmoid.location === PlasmaCore.Types.TopEdge
+            || plasmoid.location === PlasmaCore.Types.RightEdge
+            || plasmoid.location === PlasmaCore.Types.BottomEdge
+            || plasmoid.location === PlasmaCore.Types.LeftEdge)
+
         Layout.minimumWidth: units.iconSizes.small
         Layout.minimumHeight: Layout.minimumWidth
+
+        Layout.maximumWidth: inPanel ? units.iconSizeHints.panel : -1
+        Layout.maximumHeight: inPanel ? units.iconSizeHints.panel : -1
 
         icon: plasmoid.icon
         mainText: plasmoid.title
