@@ -19,14 +19,11 @@
  */
 
 import QtQuick 2.5
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.3
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.plasmoid 2.0
 import org.kde.draganddrop 2.0 as DnD
-import QtQuick.Controls 1.1
-import QtQuick.Controls.Styles.Plasma 2.0 as Styles
-
 
 import "items"
 
@@ -41,13 +38,19 @@ Item {
 
     property Component plasmoidItemComponent
 
-    Containment.onAppletAdded: addApplet(applet);
+    Containment.onAppletAdded: {
+        addApplet(applet);
+        //when we add an applet, select it straight away
+        //we know it will always be at the end of the stack
+        tabbar.currentIndex = mainStack.count -1
+    }
     Containment.onAppletRemoved: {
-        for (var i=0; i<tabView.count; i++) {
-            if (tabView.getTab(i).itemId == applet.id) {
-                tabView.removeTab(i);
+       for (var i=0; i<mainStack.count; i++) {
+            if (mainStack.children[i].itemId == applet.id) {
+                mainStack.children[i].destroy();
+                break;
             }
-        }
+       }
     }
 
     function addApplet(applet) {
@@ -58,7 +61,7 @@ Item {
             console.warn("Could not create PlasmoidItem", plasmoidItemComponent.errorString());
         }
 
-        var plasmoidContainer = plasmoidItemComponent.createObject(tabView, {"applet": applet});
+        var plasmoidContainer = plasmoidItemComponent.createObject(mainStack, {"applet": applet});
 
         applet.parent = plasmoidContainer;
         applet.anchors.fill = plasmoidContainer;
@@ -72,14 +75,33 @@ Item {
         }
     }
 
-    TabView {
-        id: tabView
-        style: Styles.TabViewStyle {}
+    PlasmaComponents.TabBar {
+        id: tabbar
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
 
         LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-        LayoutMirroring.childrenInherit: false //we don't want to mirror applets that don't explicitly support it
+        LayoutMirroring.childrenInherit: true
 
-        anchors.fill: parent
+        Repeater {
+            model: mainStack.children
+
+            PlasmaComponents.TabButton {
+                text: model.text
+            }
+        }
+        //hack: PlasmaComponents.TabBar is being weird with heights. Probably a bug
+        height: contentChildren[0].height || 0
+    }
+
+    StackLayout {
+        id: mainStack
+        currentIndex: tabbar.currentIndex
+        anchors.top: tabbar.bottom
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
 
     DnD.DropArea {
@@ -114,9 +136,9 @@ Item {
     }
 
     PlasmaComponents.Label {
-        anchors.fill: tabView
+        anchors.fill: mainStack
         text: i18n("Drag applets here")
-        visible: tabView.count == 0
+        visible: mainStack.count == 0
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter

@@ -21,25 +21,16 @@
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-import QtQuick.Controls 1.3
-
-Tab { //Note this makes this a loader not an Item.
+MouseArea {
     id: abstractItem
-    property alias text: abstractItem.title
+    property string text
     property string itemId
     property int status     //PlasmaCore.Types.ItemStatus
+    property bool active
 
-    MouseArea {
-        id: mouseArea
-        anchors.fill: item
-        hoverEnabled: true
-        drag.filterChildren: true
-        acceptedButtons: Qt.RightButton
-        onClicked: {
-            abstractItem.clicked(mouse)
-        }
-    }
-
-    signal clicked(var mouse)
+    anchors.fill: abstractItem
+    hoverEnabled: true
+    drag.filterChildren: true
+    acceptedButtons: Qt.RightButton
 }
 
