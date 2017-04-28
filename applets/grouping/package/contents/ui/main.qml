@@ -87,8 +87,18 @@ Item {
         Repeater {
             model: mainStack.children
 
+            //attached properties:
+            //  model == a QQmlDMObjectData wrapper round the PlasmoidItem
+            //  modelData == the PlasmoidItem instance
             PlasmaComponents.TabButton {
                 text: model.text
+                MouseArea {
+                    acceptedButtons: Qt.RightButton
+                    anchors.fill: parent
+                    onClicked: {
+                        modelData.clicked(mouse);
+                    }
+                }
             }
         }
         //hack: PlasmaComponents.TabBar is being weird with heights. Probably a bug
