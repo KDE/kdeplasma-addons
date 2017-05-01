@@ -1,6 +1,7 @@
 plasma_install_package(activitypager org.kde.plasma.activitypager)
 add_subdirectory(fifteenPuzzle)
 add_subdirectory(fuzzy-clock)
+add_subdirectory(binary-clock)
 add_subdirectory(calculator)
 add_subdirectory(colorpicker)
 add_subdirectory(mediaframe)

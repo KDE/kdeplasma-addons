@@ -109,19 +109,21 @@ Comment[x-test]=xxTime displayed in binary formatxx
 Comment[zh_CN]=以二进制格式显示的时间
 Comment[zh_TW]=以二進位格式顯示時間
 Icon=clock
+
 Type=Service
 ServiceTypes=Plasma/Applet
-
-X-KDE-Library=plasma_applet_binaryclock
-X-KDE-PluginInfo-Author=Davide Bettio
-X-KDE-PluginInfo-Email=davide.bettio@kdemail.net
-X-KDE-PluginInfo-Name=binaryclock
-X-KDE-PluginInfo-Version=1.0
-X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Author=Joseph Wenninger,Davide Bettio
+X-KDE-PluginInfo-Email=jowenn@kde.org, davide.bettio@kdemail.net
+X-KDE-PluginInfo-Name=org.kde.plasma.binaryclock
+X-KDE-PluginInfo-Version=2.0
+X-KDE-PluginInfo-Website=plasma.kde.org
 X-KDE-PluginInfo-Category=Date and Time
-X-KDE-PluginInfo-Depends=
-X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-Provides=org.kde.plasma.time,org.kde.plasma.date
+X-KDE-PluginInfo-Category=Date and Time
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-RemoteLocation=
+-X-KDE-PluginInfo-Depends=
+-X-KDE-PluginInfo-License=GPL
+-X-KDE-PluginInfo-EnabledByDefault=true
 
-X-Plasma-Requires-FileDialog=Unused
-X-Plasma-Requires-LaunchApp=Unused
