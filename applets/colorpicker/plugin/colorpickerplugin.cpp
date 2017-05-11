@@ -22,10 +22,32 @@
 
 #include <QtQml>
 
+#include <QColor>
+
 #include "grabwidget.h"
+
+class Utils : public QObject
+{
+    Q_OBJECT
+
+public:
+    Q_INVOKABLE bool isValidColor(const QString &colorString) const
+    {
+        return QColor::isValidColor(colorString);
+    }
+
+};
+
+static QObject *utils_singletontype_provider(QQmlEngine *, QJSEngine *)
+{
+    return new Utils();
+}
 
 void ColorPickerPlugin::registerTypes(const char* uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.colorpicker"));
     qmlRegisterType<GrabWidget>(uri, 2, 0, "GrabWidget");
+    qmlRegisterSingletonType<Utils>(uri, 2, 0, "Utils", utils_singletontype_provider);
 }
+
+#include "colorpickerplugin.moc"

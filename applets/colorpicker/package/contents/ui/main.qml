@@ -167,11 +167,13 @@ Item {
             height: buttonSize
             preventStealing: true
             // why the hell is hasColor not a property?!
-            onDragEnter: containsAcceptableDrag = event.mimeData.hasColor()
+            onDragEnter: containsAcceptableDrag = (event.mimeData.hasColor() || ColorPicker.Utils.isValidColor(event.mimeData.text))
             onDragLeave: containsAcceptableDrag = false
             onDrop: {
                 if (event.mimeData.hasColor()) {
                     addColorToHistory(event.mimeData.color)
+                } else if (ColorPicker.Utils.isValidColor(event.mimeData.text)) {
+                    addColorToHistory(event.mimeData.text)
                 }
                 containsAcceptableDrag = false
             }
