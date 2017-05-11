@@ -66,7 +66,7 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
         QString tz = term.right(term.length() - timeWord.length() - 1);
         QDateTime dt = datetime(tz, tzName);
         if (dt.isValid()) {
-            const QString time = QLocale().toString(dt.time());
+            const QString time = QLocale().toString(dt.time(),QLocale::ShortFormat);
             addMatch(QString("%1 - %2").arg(tzName, time), time, context, QStringLiteral("clock"));
         }
     }
