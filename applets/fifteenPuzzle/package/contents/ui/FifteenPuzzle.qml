@@ -74,7 +74,7 @@ Item {
         var blankRow = -1;
         for (var i = 0; i < size; ++i) {
             if (pieces[i].number == 0) {
-                blankRow = i / boardSize;
+                blankRow = Math.floor(i / boardSize);
                 continue;
             }
             for (var j = 0; j < i; ++j) {
@@ -134,7 +134,7 @@ Item {
 
     function checkSolved() {
         var size = boardSize * boardSize;
-        for (var i = 0; i < size - 1; ++i) {
+        for (var i = 0; i < size - 2; ++i) {
             if (pieces[i].number > pieces[i + 1].number) {
                 // Not solved.
                 return;
