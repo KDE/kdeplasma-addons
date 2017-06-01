@@ -27,7 +27,7 @@ class DiskQuotaPlugin : public QQmlExtensionPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
 public:
-    virtual void registerTypes(const char *uri);
+    void registerTypes(const char *uri) Q_DECL_OVERRIDE;
 };
 
 #endif // QUOTA_WATCH_PLUGIN_H

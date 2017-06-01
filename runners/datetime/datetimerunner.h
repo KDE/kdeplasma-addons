@@ -39,7 +39,7 @@ public:
     DateTimeRunner(QObject *parent, const QVariantList &args);
     ~DateTimeRunner();
 
-    void match(Plasma::RunnerContext &context);
+    void match(Plasma::RunnerContext &context) Q_DECL_OVERRIDE;
 
 private:
     QDateTime datetime(const QString &tz, QString &tzName);

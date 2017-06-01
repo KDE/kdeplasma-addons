@@ -49,13 +49,13 @@ class CachedProvider : public ComicProvider
          *
          * Is always StringIdentifier here.
          */
-        IdentifierType identifierType() const;
+        IdentifierType identifierType() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the type of identifier that is used by this
          * comic provider.
          */
-        virtual QString suffixType() const;
+        QString suffixType() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the requested image.
@@ -63,27 +63,27 @@ class CachedProvider : public ComicProvider
          * Note: This method returns only a valid image after the
          *       finished() signal has been emitted.
          */
-        virtual QImage image() const;
+        QImage image() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the identifier of the comic request (name + date).
          */
-        virtual QString identifier() const;
+        QString identifier() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the identifier suffix of the next comic.
          */
-        virtual QString nextIdentifier() const;
+        QString nextIdentifier() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the identifier suffix of the previous comic.
          */
-        virtual QString previousIdentifier() const;
+        QString previousIdentifier() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the identifier of the first strip.
          */
-        virtual QString firstStripIdentifier() const;
+        QString firstStripIdentifier() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the identifier of the last cached strip.
@@ -93,32 +93,32 @@ class CachedProvider : public ComicProvider
         /**
          * Returns the title of the strip.
          */
-        virtual QString stripTitle() const;
+        QString stripTitle() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the author of the comic.
          */
-        virtual QString comicAuthor() const;
+        QString comicAuthor() const Q_DECL_OVERRIDE;
 
         /**
          * Returns additionalText of the comic.
          */
-        virtual QString additionalText() const;
+        QString additionalText() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the name for the comic
          */
-        virtual QString name() const;
+        QString name() const Q_DECL_OVERRIDE;
 
         /**
         * Returns wether the comic is leftToRight or not
         */
-        virtual bool isLeftToRight() const;
+        bool isLeftToRight() const Q_DECL_OVERRIDE;
 
         /**
         * Returns wether the comic is topToBottom or not
         */
-        virtual bool isTopToBottom() const;
+        bool isTopToBottom() const Q_DECL_OVERRIDE;
 
         /**
          * Returns whether a comic with the given @p identifier is cached.
@@ -138,14 +138,14 @@ class CachedProvider : public ComicProvider
         /**
          * Returns the website of the comic.
          */
-        virtual QUrl websiteUrl() const;
+        QUrl websiteUrl() const Q_DECL_OVERRIDE;
 
-        virtual QUrl imageUrl() const;
+        QUrl imageUrl() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the shop website of the comic.
          */
-        virtual QUrl shopUrl() const;
+        QUrl shopUrl() const Q_DECL_OVERRIDE;
 
         /**
           * Returns the maximum number of cached strips per comic, -1 means that there is no limit

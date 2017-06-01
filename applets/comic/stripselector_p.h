@@ -30,7 +30,7 @@ class StringStripSelector : public StripSelector
         explicit StringStripSelector(QObject *parent = 0);
         virtual ~StringStripSelector();
 
-        virtual void select(const ComicData &currentStrip);
+        void select(const ComicData &currentStrip) Q_DECL_OVERRIDE;
 };
 
 class NumberStripSelector : public StripSelector
@@ -39,7 +39,7 @@ class NumberStripSelector : public StripSelector
         explicit NumberStripSelector(QObject *parent = 0);
         virtual ~NumberStripSelector();
 
-        virtual void select(const ComicData &currentStrip);
+        void select(const ComicData &currentStrip) Q_DECL_OVERRIDE;
 };
 
 class DateStripSelector : public StripSelector
@@ -50,7 +50,7 @@ class DateStripSelector : public StripSelector
         explicit DateStripSelector(QObject *parent = 0);
         virtual ~DateStripSelector();
 
-        virtual void select(const ComicData &currentStrip);
+        void select(const ComicData &currentStrip) Q_DECL_OVERRIDE;
 
     private slots:
         void slotChosenDay(const QDate &date);

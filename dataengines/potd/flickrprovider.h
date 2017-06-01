@@ -55,7 +55,7 @@ class FlickrProvider : public PotdProvider
          * Note: This method returns only a valid image after the
          *       finished() signal has been emitted.
          */
-        virtual QImage image() const;
+        QImage image() const Q_DECL_OVERRIDE;
 
     private:
       class Private;

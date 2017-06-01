@@ -30,7 +30,7 @@ class FifteenImageProvider : public QQuickImageProvider
 public:
     FifteenImageProvider();
 
-    QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize);
+    QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) Q_DECL_OVERRIDE;
 
 private:
     // Update our pixmaps, called when sizes change or boardSize changes

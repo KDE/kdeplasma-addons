@@ -71,15 +71,15 @@ class ComicArchiveJob : public KJob
          */
         void setFromIdentifier( const QString &fromIdentifier );
 
-        virtual void start();
+        void start() Q_DECL_OVERRIDE;
 
     public slots:
         void dataUpdated( const QString &source, const Plasma::DataEngine::Data& data );
 
     protected:
-        virtual bool doKill();
-        virtual bool doSuspend();
-        virtual bool doResume();
+        bool doKill() Q_DECL_OVERRIDE;
+        bool doSuspend() Q_DECL_OVERRIDE;
+        bool doResume() Q_DECL_OVERRIDE;
 
     private:
         /**

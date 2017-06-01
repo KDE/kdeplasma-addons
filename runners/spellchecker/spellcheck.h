@@ -35,13 +35,13 @@ public:
     SpellCheckRunner(QObject* parent, const QVariantList &args);
     ~SpellCheckRunner();
 
-    void match(Plasma::RunnerContext &context);
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &action);
+    void match(Plasma::RunnerContext &context) Q_DECL_OVERRIDE;
+    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &action) Q_DECL_OVERRIDE;
 
-    void reloadConfiguration();
+    void reloadConfiguration() Q_DECL_OVERRIDE;
 
 protected slots:
-    void init();
+    void init() Q_DECL_OVERRIDE;
     void loaddata();
     void destroydata();
 

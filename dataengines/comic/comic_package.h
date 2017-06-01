@@ -27,7 +27,7 @@ class ComicPackage : public KPackage::PackageStructure
 
 public:
         explicit ComicPackage(QObject *parent = 0, const QVariantList& args = QVariantList());
-        void initPackage(KPackage::Package *package);
+        void initPackage(KPackage::Package *package) Q_DECL_OVERRIDE;
 };
 
 #endif

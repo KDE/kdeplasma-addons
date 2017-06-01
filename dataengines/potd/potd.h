@@ -45,10 +45,10 @@ class PotdEngine : public Plasma::DataEngine
         ~PotdEngine();
 
     protected:
-        bool sourceRequestEvent( const QString &identifier );
+        bool sourceRequestEvent( const QString &identifier ) Q_DECL_OVERRIDE;
 
     protected Q_SLOTS:
-        bool updateSourceEvent( const QString &identifier );
+        bool updateSourceEvent( const QString &identifier ) Q_DECL_OVERRIDE;
 
     private Q_SLOTS:
         void finished( PotdProvider* );

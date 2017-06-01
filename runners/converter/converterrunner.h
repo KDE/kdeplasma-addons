@@ -31,8 +31,8 @@ public:
     ConverterRunner(QObject* parent, const QVariantList &args);
     ~ConverterRunner();
 
-    void match(Plasma::RunnerContext &context);
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+    void match(Plasma::RunnerContext &context) Q_DECL_OVERRIDE;
+    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) Q_DECL_OVERRIDE;
 
 private:
     QStringList m_separators;

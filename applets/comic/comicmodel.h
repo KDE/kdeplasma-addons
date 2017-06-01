@@ -36,12 +36,12 @@ class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
 
         void setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics );
 
-        QHash<int, QByteArray> roleNames() const;
+        QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
-        int rowCount( const QModelIndex &index = QModelIndex() ) const;
-        int columnCount( const QModelIndex &index = QModelIndex() ) const;
-        QVariant data( const QModelIndex &index, int role = Qt::CheckStateRole ) const;
-        Qt::ItemFlags flags( const QModelIndex &index ) const;
+        int rowCount( const QModelIndex &index = QModelIndex() ) const Q_DECL_OVERRIDE;
+        int columnCount( const QModelIndex &index = QModelIndex() ) const Q_DECL_OVERRIDE;
+        QVariant data( const QModelIndex &index, int role = Qt::CheckStateRole ) const Q_DECL_OVERRIDE;
+        Qt::ItemFlags flags( const QModelIndex &index ) const Q_DECL_OVERRIDE;
 
 
     public Q_SLOTS:

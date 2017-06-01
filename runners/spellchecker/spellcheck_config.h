@@ -38,9 +38,9 @@ class SpellCheckConfig : public KCModule
         ~SpellCheckConfig();
 
     public slots:
-        void save();
-        void load();
-        void defaults();
+        void save() Q_DECL_OVERRIDE;
+        void load() Q_DECL_OVERRIDE;
+        void defaults() Q_DECL_OVERRIDE;
 
         void toggleTriggerWord(int state);
 

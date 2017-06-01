@@ -19,9 +19,9 @@ public:
 	DictionaryRunnerConfig(QWidget* parent = 0, const QVariantList& args = QVariantList());
 
 public slots:
-	void save();
-	void load();
-	void defaults();
+	void save() Q_DECL_OVERRIDE;
+	void load() Q_DECL_OVERRIDE;
+	void defaults() Q_DECL_OVERRIDE;
 
 private:
 	QLineEdit *m_triggerWord;

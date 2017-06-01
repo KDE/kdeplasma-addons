@@ -50,10 +50,10 @@ class ComicEngine : public Plasma::DataEngine
 
     protected:
         void init();
-        bool sourceRequestEvent(const QString &identifier);
+        bool sourceRequestEvent(const QString &identifier) Q_DECL_OVERRIDE;
 
     protected Q_SLOTS:
-        bool updateSourceEvent(const QString &identifier);
+        bool updateSourceEvent(const QString &identifier) Q_DECL_OVERRIDE;
 
     private Q_SLOTS:
         void finished(ComicProvider*);

@@ -52,12 +52,12 @@ class CachedProvider : public PotdProvider
          * Note: This method returns only a valid image after the
          *       finished() signal has been emitted.
          */
-        virtual QImage image() const;
+        QImage image() const Q_DECL_OVERRIDE;
 
         /**
          * Returns the identifier of the picture request (name + date).
          */
-        virtual QString identifier() const;
+        QString identifier() const Q_DECL_OVERRIDE;
 
         /**
          * Returns whether a picture with the given @p identifier is cached.
@@ -83,7 +83,7 @@ class LoadImageThread : public QObject, public QRunnable
 
 public:
     LoadImageThread(const QString &filePath);
-    void run();
+    void run() Q_DECL_OVERRIDE;
 
 Q_SIGNALS:
     void done(const QImage &pixmap);
@@ -98,7 +98,7 @@ class SaveImageThread : public QObject, public QRunnable
 
 public:
     SaveImageThread(const QString &identifier, const QImage &image);
-    void run();
+    void run() Q_DECL_OVERRIDE;
 
 Q_SIGNALS:
     void done( const QString &source, const QString &path, const QImage &img );

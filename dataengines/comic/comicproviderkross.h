@@ -37,23 +37,23 @@ class ComicProviderKross : public ComicProvider
 
         static KPackage::PackageStructure *packageStructure();
 
-        virtual bool isLeftToRight() const;
-        virtual bool isTopToBottom() const;
-        virtual IdentifierType identifierType() const;
-        virtual QUrl websiteUrl() const;
-        virtual QUrl shopUrl() const;
-        virtual QImage image() const;
-        virtual QString identifier() const;
-        virtual QString nextIdentifier() const;
-        virtual QString previousIdentifier() const;
-        virtual QString firstStripIdentifier() const;
-        virtual QString stripTitle() const;
-        virtual QString additionalText() const;
+        bool isLeftToRight() const Q_DECL_OVERRIDE;
+        bool isTopToBottom() const Q_DECL_OVERRIDE;
+        IdentifierType identifierType() const Q_DECL_OVERRIDE;
+        QUrl websiteUrl() const Q_DECL_OVERRIDE;
+        QUrl shopUrl() const Q_DECL_OVERRIDE;
+        QImage image() const Q_DECL_OVERRIDE;
+        QString identifier() const Q_DECL_OVERRIDE;
+        QString nextIdentifier() const Q_DECL_OVERRIDE;
+        QString previousIdentifier() const Q_DECL_OVERRIDE;
+        QString firstStripIdentifier() const Q_DECL_OVERRIDE;
+        QString stripTitle() const Q_DECL_OVERRIDE;
+        QString additionalText() const Q_DECL_OVERRIDE;
 
     protected:
-        virtual void pageRetrieved(int id, const QByteArray &data);
-        virtual void pageError(int id, const QString &message);
-        virtual void redirected(int id, const QUrl &newUrl);
+        void pageRetrieved(int id, const QByteArray &data) Q_DECL_OVERRIDE;
+        void pageError(int id, const QString &message) Q_DECL_OVERRIDE;
+        void redirected(int id, const QUrl &newUrl) Q_DECL_OVERRIDE;
         QString identifierToString(const QVariant &identifier) const;
 
     private:

@@ -32,7 +32,7 @@ public:
     ~KonsoleProfilesEngine();
 
     void init();
-    Plasma::Service *serviceForSource(const QString &source);
+    Plasma::Service *serviceForSource(const QString &source) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     void profilesChanged();
