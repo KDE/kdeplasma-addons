@@ -47,7 +47,16 @@ PlasmaCore.Dialog
             Layout.fillHeight: true
             inputData: window.inputData
             pluginType: "Export"
-            highlight: PlasmaComponents.Highlight {}
+            Component {
+                id: highlightComponent
+                PlasmaComponents.Highlight {}
+            }
+            Component.onCompleted: {
+                if (view.hasOwnProperty("highlight")) { //Purpose 1.1 doesn't have highlight
+                    view.highlight = highlightComponent
+                }
+            }
+
             delegate: PlasmaComponents.ListItem {
                 enabled: true
 
