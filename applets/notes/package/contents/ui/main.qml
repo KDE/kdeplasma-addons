@@ -232,22 +232,14 @@ PlasmaCore.SvgItem {
             bottomMargin: verticalMargins
         }
 
-        readonly property int requiredWidth: toggleFormatBarButton.width + formatButtonsRow.width + settingsButton.width + 3 * spacing
+        readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width
         readonly property bool showFormatButtons: width > requiredWidth
-
-        PlasmaComponents.ToolButton {
-            id: toggleFormatBarButton
-            tooltip: i18n("Toggle text format options")
-            iconSource: "draw-text"
-            checkable: true
-            Accessible.name: tooltip
-            visible: fontButtons.showFormatButtons
-        }
 
         Row {
             id: formatButtonsRow
             spacing: units.smallSpacing
-            opacity: fontButtons.showFormatButtons && toggleFormatBarButton.checked ? 1 : 0
+            // show format buttons if TextField or any of the buttons have focus
+            opacity: fontButtons.showFormatButtons && root.Plasmoid.activeFocus ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: units.longDuration } }
             enabled: opacity > 0
             visible: fontButtons.showFormatButtons
