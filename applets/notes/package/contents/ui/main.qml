@@ -239,7 +239,25 @@ PlasmaCore.SvgItem {
             id: formatButtonsRow
             spacing: units.smallSpacing
             // show format buttons if TextField or any of the buttons have focus
-            opacity: fontButtons.showFormatButtons && root.Plasmoid.activeFocus ? 1 : 0
+
+            opacity: {
+                if (!fontButtons.showFormatButtons) {
+                    return 0;
+                }
+
+                if (mainTextArea.activeFocus || settingsButton.activeFocus) {
+                    return 1;
+                }
+
+                for (var i = 0; i < children.length; ++i) {
+                    if (children[i].activeFocus) {
+                        return 1;
+                    }
+                }
+
+                return 0;
+            }
+
             Behavior on opacity { NumberAnimation { duration: units.longDuration } }
             enabled: opacity > 0
             visible: fontButtons.showFormatButtons
