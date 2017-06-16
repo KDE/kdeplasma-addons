@@ -106,4 +106,3 @@ X-KDE-PluginInfo-Name=org.kde.events_runner
 X-KDE-PluginInfo-Version=0.3.0
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
-X-Ubuntu-Gettext-Domain=desktop_kdesdk
