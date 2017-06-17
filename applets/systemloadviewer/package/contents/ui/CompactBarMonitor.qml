@@ -27,7 +27,7 @@ Item {
     id: barMonitor
 
     property var colors
-    property var proportions
+    property var proportions: []
 
     Layout.fillHeight: true
     Layout.fillWidth: true
