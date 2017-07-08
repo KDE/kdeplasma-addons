@@ -124,185 +124,171 @@ PlasmaCore.SvgItem {
         selectionEnd: mainTextArea.selectionEnd
     }
 
-    PlasmaComponents.TextArea {
-        id: mainTextArea
+    FocusScope {
+        id: focusScope
         anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-
+            fill: parent
             leftMargin: horizontalMargins
             rightMargin: horizontalMargins
             topMargin: verticalMargins
-
-            bottom: fontButtons.top
-            bottomMargin: Math.round(units.largeSpacing / 2)
-        }
-
-        backgroundVisible: false
-        frameVisible: false
-        textFormat: TextEdit.RichText
-
-        onLinkActivated: Qt.openUrlExternally(link)
-
-        Keys.onPressed: {
-            if(event.key === Qt.Key_Escape) {
-                plasmoid.expanded = false;
-                event.accepted = true;
-            } else if(event.modifiers === Qt.ControlModifier) {
-                if(event.key === Qt.Key_B) {
-                    documentHandler.bold = !documentHandler.bold;
-                    event.accepted = true;
-                } else if(event.key === Qt.Key_I) {
-                    documentHandler.italic = !documentHandler.italic;
-                    event.accepted = true;
-                } else if(event.key === Qt.Key_U) {
-                    documentHandler.underline = !documentHandler.underline;
-                    event.accepted = true;
-                } else if(event.key === Qt.Key_S) {
-                    documentHandler.strikeOut = !documentHandler.strikeOut;
-                    event.accepted = true;
-                }
-            }
-        }
-
-        style: PlasmaStyle.TextAreaStyle {
-            //this is deliberately _NOT_ the theme color as we are over a known bright background
-            //an unknown colour over a known colour is a bad move as you end up with white on yellow
-            textColor: plasmoid.configuration.color === "black" ? "#dfdfdf" : "#202020"
-        }
-
-        //update the note if the source changes, but only if the user isn't editing it currently
-        Binding {
-            target: mainTextArea
-            property: "text"
-            value: note.noteText
-            when: !mainTextArea.activeFocus
-        }
-
-        onActiveFocusChanged: {
-            if (!activeFocus) {
-                note.save(mainTextArea.text);
-            }
-        }
-    }
-
-    DragDrop.DropArea {
-        id: dropArea
-        anchors.fill: mainTextArea
-
-        function positionOfDrop(event) {
-            return mainTextArea.positionAt(event.x, event.y + mainTextArea.flickableItem.contentY)
-        }
-
-        onDrop: {
-            var mimeData = event.mimeData
-            var text = ""
-            if (mimeData.hasUrls) {
-                var urls = mimeData.urls
-                for (var i = 0, j = urls.length; i < j; ++i) {
-                    var url = urls[i]
-                    text += "<a href=\"" + url + "\">" + url + "</a><br>"
-                }
-            } else {
-                text = mimeData.text.replace(/\n/g, "<br>")
-            }
-
-            mainTextArea.insert(positionOfDrop(event), text)
-            event.accept(Qt.CopyAction)
-        }
-        onDragMove: {
-            // there doesn't seem to be a "just move the cursor", so we move
-            // the selection and then unselect so the cursor follows the mouse
-            mainTextArea.moveCursorSelection(positionOfDrop(event))
-            mainTextArea.deselect()
-        }
-        onDragEnter: mainTextArea.forceActiveFocus()
-    }
-
-    RowLayout {
-        id: fontButtons
-        spacing: units.smallSpacing
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-            leftMargin: horizontalMargins
-            rightMargin: horizontalMargins
             bottomMargin: verticalMargins
         }
 
-        readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width
-        readonly property bool showFormatButtons: width > requiredWidth
+        PlasmaComponents.TextArea {
+            id: mainTextArea
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+                bottom: fontButtons.top
+                bottomMargin: Math.round(units.largeSpacing / 2)
+            }
 
-        Row {
-            id: formatButtonsRow
-            spacing: units.smallSpacing
-            // show format buttons if TextField or any of the buttons have focus
+            backgroundVisible: false
+            frameVisible: false
+            textFormat: TextEdit.RichText
 
-            opacity: {
-                if (!fontButtons.showFormatButtons) {
-                    return 0;
-                }
+            onLinkActivated: Qt.openUrlExternally(link)
 
-                if (mainTextArea.activeFocus || settingsButton.activeFocus) {
-                    return 1;
-                }
-
-                for (var i = 0; i < children.length; ++i) {
-                    if (children[i].activeFocus) {
-                        return 1;
+            Keys.onPressed: {
+                if(event.key === Qt.Key_Escape) {
+                    plasmoid.expanded = false;
+                    event.accepted = true;
+                } else if(event.modifiers === Qt.ControlModifier) {
+                    if(event.key === Qt.Key_B) {
+                        documentHandler.bold = !documentHandler.bold;
+                        event.accepted = true;
+                    } else if(event.key === Qt.Key_I) {
+                        documentHandler.italic = !documentHandler.italic;
+                        event.accepted = true;
+                    } else if(event.key === Qt.Key_U) {
+                        documentHandler.underline = !documentHandler.underline;
+                        event.accepted = true;
+                    } else if(event.key === Qt.Key_S) {
+                        documentHandler.strikeOut = !documentHandler.strikeOut;
+                        event.accepted = true;
                     }
                 }
-
-                return 0;
             }
 
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
-            enabled: opacity > 0
-            visible: fontButtons.showFormatButtons
+            style: PlasmaStyle.TextAreaStyle {
+                //this is deliberately _NOT_ the theme color as we are over a known bright background
+                //an unknown colour over a known colour is a bad move as you end up with white on yellow
+                textColor: plasmoid.configuration.color === "black" ? "#dfdfdf" : "#202020"
+            }
 
-            PlasmaComponents.ToolButton {
-                tooltip: i18n("Bold")
-                iconSource: "format-text-bold"
-                checked: documentHandler.bold
-                onClicked: documentHandler.bold = !documentHandler.bold
-                Accessible.name: tooltip
+            //update the note if the source changes, but only if the user isn't editing it currently
+            Binding {
+                target: mainTextArea
+                property: "text"
+                value: note.noteText
+                when: !mainTextArea.activeFocus
             }
-            PlasmaComponents.ToolButton {
-                tooltip: i18n("Italic")
-                iconSource: "format-text-italic"
-                checked: documentHandler.italic
-                onClicked: documentHandler.italic = !documentHandler.italic
-                Accessible.name: tooltip
-            }
-            PlasmaComponents.ToolButton {
-                tooltip: i18n("Underline")
-                iconSource: "format-text-underline"
-                checked: documentHandler.underline
-                onClicked: documentHandler.underline = !documentHandler.underline
-                Accessible.name: tooltip
-            }
-            PlasmaComponents.ToolButton {
-                tooltip: i18n("Strikethrough")
-                iconSource: "format-text-strikethrough"
-                checked: documentHandler.strikeOut
-                onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
-                Accessible.name: tooltip
+
+            onActiveFocusChanged: {
+                if (!activeFocus) {
+                    note.save(mainTextArea.text);
+                }
             }
         }
 
-        Item { // spacer
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+        DragDrop.DropArea {
+            id: dropArea
+            anchors.fill: mainTextArea
+
+            function positionOfDrop(event) {
+                return mainTextArea.positionAt(event.x, event.y + mainTextArea.flickableItem.contentY)
+            }
+
+            onDrop: {
+                var mimeData = event.mimeData
+                var text = ""
+                if (mimeData.hasUrls) {
+                    var urls = mimeData.urls
+                    for (var i = 0, j = urls.length; i < j; ++i) {
+                        var url = urls[i]
+                        text += "<a href=\"" + url + "\">" + url + "</a><br>"
+                    }
+                } else {
+                    text = mimeData.text.replace(/\n/g, "<br>")
+                }
+
+                mainTextArea.insert(positionOfDrop(event), text)
+                event.accept(Qt.CopyAction)
+            }
+            onDragMove: {
+                // there doesn't seem to be a "just move the cursor", so we move
+                // the selection and then unselect so the cursor follows the mouse
+                mainTextArea.moveCursorSelection(positionOfDrop(event))
+                mainTextArea.deselect()
+            }
+            onDragEnter: mainTextArea.forceActiveFocus()
         }
 
-        PlasmaComponents.ToolButton {
-            id: settingsButton
-            tooltip: plasmoid.action("configure").text
-            iconSource: "configure"
-            onClicked: plasmoid.action("configure").trigger()
-            Accessible.name: tooltip
+        RowLayout {
+            id: fontButtons
+            spacing: units.smallSpacing
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+            }
+
+            readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width
+            readonly property bool showFormatButtons: width > requiredWidth
+
+            Row {
+                id: formatButtonsRow
+                spacing: units.smallSpacing
+                // show format buttons if TextField or any of the buttons have focus
+                opacity: fontButtons.showFormatButtons && focusScope.activeFocus ? 1 : 0
+
+                Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+                enabled: opacity > 0
+                visible: fontButtons.showFormatButtons
+
+                PlasmaComponents.ToolButton {
+                    tooltip: i18n("Bold")
+                    iconSource: "format-text-bold"
+                    checked: documentHandler.bold
+                    onClicked: documentHandler.bold = !documentHandler.bold
+                    Accessible.name: tooltip
+                }
+                PlasmaComponents.ToolButton {
+                    tooltip: i18n("Italic")
+                    iconSource: "format-text-italic"
+                    checked: documentHandler.italic
+                    onClicked: documentHandler.italic = !documentHandler.italic
+                    Accessible.name: tooltip
+                }
+                PlasmaComponents.ToolButton {
+                    tooltip: i18n("Underline")
+                    iconSource: "format-text-underline"
+                    checked: documentHandler.underline
+                    onClicked: documentHandler.underline = !documentHandler.underline
+                    Accessible.name: tooltip
+                }
+                PlasmaComponents.ToolButton {
+                    tooltip: i18n("Strikethrough")
+                    iconSource: "format-text-strikethrough"
+                    checked: documentHandler.strikeOut
+                    onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
+                    Accessible.name: tooltip
+                }
+            }
+
+            Item { // spacer
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            PlasmaComponents.ToolButton {
+                id: settingsButton
+                tooltip: plasmoid.action("configure").text
+                iconSource: "configure"
+                onClicked: plasmoid.action("configure").trigger()
+                Accessible.name: tooltip
+            }
         }
     }
 
