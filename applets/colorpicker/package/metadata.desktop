@@ -119,6 +119,7 @@ X-KDE-ServiceTypes=Plasma/Applet
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
+X-Plasma-StandAloneApp=true
 
 X-KDE-PluginInfo-Author=Kai Uwe Broulik
 X-KDE-PluginInfo-Email=kde@privat.broulik.de
