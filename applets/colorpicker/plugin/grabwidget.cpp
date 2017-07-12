@@ -29,6 +29,7 @@
 #include <QDBusPendingReply>
 #include <QApplication>
 #include <QClipboard>
+#include <QDesktopWidget>
 #include <QEvent>
 #include <QMouseEvent>
 #include <QScreen>
@@ -104,14 +105,14 @@ bool X11Grabber::eventFilter(QObject *watched, QEvent *event)
 
         if (me->button() == Qt::LeftButton) {
             const QPoint pos = me->globalPos();
-
-            // the grabbed pixmap will contain all screens, not just the primary one
-            // originally we traversed all screens looking for where the mouse is
-            // but this isn't neccessarily apparently
-            const QPixmap pixmap = qApp->primaryScreen()->grabWindow(0);
-            const QPoint localPos = pos * qApp->devicePixelRatio();
-
-            setColor(QColor(pixmap.toImage().pixel(localPos)));
+            const QDesktopWidget *desktop = QApplication::desktop();
+            const QPixmap pixmap = QGuiApplication::screens().at(desktop->screenNumber())->grabWindow(desktop->winId(),
+                                                                                                      pos.x(), pos.y(), 1, 1);
+            if (!pixmap.isNull()) {
+                QImage i = pixmap.toImage();
+                QColor color(i.pixel(0, 0));
+                setColor(color);
+            }
         }
     }
 

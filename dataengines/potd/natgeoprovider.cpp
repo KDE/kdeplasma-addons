@@ -23,7 +23,7 @@
 
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
-#include <QXmlStreamReader>
+#include <QRegularExpression>
 
 #include <QDebug>
 #include <KIO/Job>
@@ -42,7 +42,7 @@ class NatGeoProvider::Private
     NatGeoProvider *mParent;
     QImage mImage;
 
-    QXmlStreamReader mXmlReader;
+    QRegularExpression re;
 };
 
 void NatGeoProvider::Private::pageRequestFinished( KJob* _job )
@@ -54,20 +54,16 @@ void NatGeoProvider::Private::pageRequestFinished( KJob* _job )
     }
 
     const QString data = QString::fromUtf8( job->data() );
-
-    mXmlReader.clear();
-    mXmlReader.addData(data);
+    const QStringList lines = data.split('\n');
 
     QString url;
-    while (!mXmlReader.atEnd()) {
-        mXmlReader.readNext();
 
-        if (mXmlReader.isStartElement() && mXmlReader.name() == QLatin1String( "meta" )) {
-            const auto attrs = mXmlReader.attributes();
-            if (attrs.value(QLatin1String("property")).toString() == QLatin1String("og:image")) {
-                url = attrs.value(QLatin1String("content")).toString();
-                break;
-            }
+    re.setPattern("^<meta\\s+property=\"og:image\"\\s+content=\"(.*)\".*/>$");
+
+    for (int i = 0; i < lines.size(); i++) {
+        QRegularExpressionMatch match = re.match(lines.at(i).toLocal8Bit().constData());
+        if (match.hasMatch()) {
+            url = match.captured(1);
         }
     }
 
@@ -97,7 +93,7 @@ void NatGeoProvider::Private::imageRequestFinished( KJob *_job )
 NatGeoProvider::NatGeoProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
-    const QUrl url( QLatin1String( "https://www.nationalgeographic.com/photography/photo-of-the-day" ) );
+    const QUrl url( QLatin1String( "http://www.nationalgeographic.com/photography/photo-of-the-day/" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, &KIO::StoredTransferJob::finished, this, [this] (KJob *job) {
         d->pageRequestFinished(job);

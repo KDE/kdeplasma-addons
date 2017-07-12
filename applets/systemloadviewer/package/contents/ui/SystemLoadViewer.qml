@@ -154,6 +154,7 @@ Item {
         property string cache: "mem/cache/"
         property string cacheDirty: cache + "dirty"
         property string cacheWriteback: cache + "writeback"
+        property string cores: "system/cores"
 
         property var totalCpuLoadProportions: [.0, .0, .0, .0]
         property int maxCpuIndex: 0
@@ -163,20 +164,26 @@ Item {
 
         property double maxCache: 0.0
 
-        connectedSources: [niceLoad, userLoad, sysLoad,
-            ioWait, memFree, memApplication, memBuffers,
-            memCached, memUsed, swapUsed, swapFree,
-            averageClock, totalLoad, cacheDirty,
-            cacheWriteback]
+        connectedSources: [ cores ]
 
-        onSourceAdded: {
-            var match = source.match(/^cpu\/cpu(\w+)\//)
-            if (match) {
-                connectSource(source)
-                if (maxCpuIndex < match[1]) {
-                    maxCpuIndex = match[1]
+        function sources() {
+            var array = [niceLoad, userLoad, sysLoad,
+                         ioWait, memFree, memApplication, memBuffers,
+                         memCached, memUsed, swapUsed, swapFree,
+                         averageClock, totalLoad, cores, cacheDirty,
+                         cacheWriteback]
+
+            if (plasmoid.configuration.cpuAllActivated) {
+                for (var i = 0; i <= maxCpuIndex; i++) {
+                    array.push("cpu/cpu" + i + "/TotalLoad");
+                    array.push("cpu/cpu" + i + "/clock");
+                    array.push("cpu/cpu" + i + "/nice");
+                    array.push("cpu/cpu" + i + "/user");
+                    array.push("cpu/cpu" + i + "/sys");
+                    array.push("cpu/cpu" + i + "/wait");
                 }
             }
+            return array;
         }
 
         onNewData: {
@@ -210,6 +217,10 @@ Item {
             else if (sourceName == cacheWriteback) {
                 cacheUsageProportions = fitCacheUsage()
                 cacheUsageProportionsChanged()
+            }
+            else if (sourceName == cores) {
+                maxCpuIndex = data.value - 1
+                connectedSources = sources()
             }
         }
         interval: 1000 * plasmoid.configuration.updateInterval
@@ -270,6 +281,9 @@ Item {
     }
 
     function fitMemoryUsage(usage) {
+        if (!dataSource.data[dataSource.memFree] || !dataSource.data[dataSource.memUsed])
+            return 0;
+
         var x = (usage / (parseFloat(dataSource.data[dataSource.memFree].value) +
                          parseFloat(dataSource.data[dataSource.memUsed].value)))
         if (isNaN(x)) {return 0;}
@@ -277,6 +291,9 @@ Item {
     }
 
     function fitSwapUsage(usage) {
+        if (!dataSource.data[dataSource.swapFree])
+            return 0;
+
         var x = (usage / (parseFloat(usage) + parseFloat(dataSource.data[dataSource.swapFree].value)))
 
         if (isNaN(x)) {return 0;}
