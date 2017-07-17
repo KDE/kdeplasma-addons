@@ -230,7 +230,10 @@ void ComicApplet::updateView()
 
 void ComicApplet::getNewComics()
 {
-    if (mEngine && !m_newStuffDialog) {
+    if (!mEngine) {
+        return;
+    }
+    if (!m_newStuffDialog) {
         m_newStuffDialog = new KNS3::DownloadDialog( QString::fromLatin1("comic.knsrc") );
         KNS3::DownloadDialog *strong = m_newStuffDialog.data();
         strong->setTitle(i18n("Download Comics"));
