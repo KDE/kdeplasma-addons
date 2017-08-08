@@ -277,6 +277,19 @@ Item {
             onTriggered: plasmoid.expanded = false
         }
 
+        // This item serves as a drag pixmap and is captured when a drag starts
+        Rectangle {
+            id: dragImageDummy
+            border {
+                color: theme.textColor
+                width: Math.round(units.devicePixelRatio)
+            }
+            radius: width
+            width: units.iconSizes.large
+            height: units.iconSizes.large
+            visible: false
+        }
+
         delegate: MouseArea {
             id: delegateMouse
 
@@ -299,6 +312,16 @@ Item {
                     fullRoot.currentIndex = index
                 } else {
                     fullRoot.currentIndex = -1
+                }
+            }
+
+            onPressed: {
+                // grab pixmap only once
+                if (Drag.imageSource.toString() === "") { // cannot just do !Drage.imageSource on QUrl
+                    dragImageDummy.color = currentColor;
+                    dragImageDummy.grabToImage(function (result) {
+                        Drag.imageSource = result.url;
+                    });
                 }
             }
 
