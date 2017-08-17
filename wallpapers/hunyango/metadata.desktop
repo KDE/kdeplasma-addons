@@ -43,7 +43,7 @@ Name[wa]=Hunyango
 Name[x-test]=xxHunyangoxx
 Name[zh_CN]=变色龙
 Name[zh_TW]=Hunyango
-
+Comment=Hunyango wallpaper
 
 Type=Service
 ServiceTypes=Plasma/Wallpaper
@@ -54,5 +54,5 @@ X-KDE-PluginInfo-Email=mart@kde.org
 X-KDE-PluginInfo-Name=org.kde.hunyango
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://kde.org/
-X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-License=LGPL-2.1
 X-KDE-PluginInfo-EnabledByDefault=true
