@@ -120,7 +120,7 @@ X-KDE-PluginInfo-Email=bettio@kde.org
 X-KDE-PluginInfo-Name=org.kde.plasma.eyes
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
-X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-License=GPL-2.0+
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/eyes.qml

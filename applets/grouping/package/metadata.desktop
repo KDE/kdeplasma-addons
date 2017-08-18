@@ -35,6 +35,7 @@ Name[uk]=Плазмоїд групування
 Name[x-test]=xxGrouping Plasmoidxx
 Name[zh_CN]=分组小部件
 Name[zh_TW]=組織 Plasmoid
+Comment=Group Plasma widgets together
 Icon=preferences-desktop-notification
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
@@ -48,7 +49,7 @@ X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Windows and Tasks
 X-KDE-PluginInfo-Depends=
-X-KDE-PluginInfo-License=GPL v2+
+X-KDE-PluginInfo-License=GPL-2.0+
 X-KDE-PluginInfo-EnabledByDefault=true
 X-Plasma-ContainmentType=Panel
 #this is the internal implementation: can't be loaded directly

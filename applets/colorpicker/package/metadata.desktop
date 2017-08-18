@@ -127,5 +127,5 @@ X-KDE-PluginInfo-Name=org.kde.plasma.colorpicker
 X-KDE-PluginInfo-Version=2.0
 X-KDE-PluginInfo-Website=http://userbase.kde.org/Plasma/ColorPicker
 X-KDE-PluginInfo-Category=Graphics
-X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-License=GPL-2.0+
 X-KDE-FormFactors=desktop
