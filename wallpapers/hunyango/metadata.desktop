@@ -44,6 +44,12 @@ Name[x-test]=xxHunyangoxx
 Name[zh_CN]=变色龙
 Name[zh_TW]=Hunyango
 Comment=Hunyango wallpaper
+Comment[ca]=Fons d'escriptor Hunyango
+Comment[nl]=Hunyango achtergrondafbeelding
+Comment[sk]=Tapeta Hunyango
+Comment[sv]=Hunyango skrivbordsunderlägg
+Comment[uk]=Шпалера Уньянго
+Comment[x-test]=xxHunyango wallpaperxx
 
 Type=Service
 ServiceTypes=Plasma/Wallpaper

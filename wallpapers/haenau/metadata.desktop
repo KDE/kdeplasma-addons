@@ -44,6 +44,12 @@ Name[x-test]=xxHaenauxx
 Name[zh_CN]=层次
 Name[zh_TW]=Haenau
 Comment=Haenau wallpaper
+Comment[ca]=Fons d'escriptori Haenau
+Comment[nl]=Haenau achtergrondafbeelding
+Comment[sk]=Tapeta Haenau
+Comment[sv]=Haenau skrivbordsunderlägg
+Comment[uk]=Шпалера Ганау
+Comment[x-test]=xxHaenau wallpaperxx
 
 Type=Service
 ServiceTypes=Plasma/Wallpaper
