@@ -59,6 +59,7 @@ Comment[sr@latin]=Tapet Hunjango
 Comment[sv]=Hunyango skrivbordsunderlägg
 Comment[uk]=Шпалера Уньянго
 Comment[x-test]=xxHunyango wallpaperxx
+Comment[zh_CN]=Hunyango 壁纸
 
 Type=Service
 ServiceTypes=Plasma/Wallpaper

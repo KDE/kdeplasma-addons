@@ -71,6 +71,7 @@ Comment[sr@latin]=Pogledajte vreme za danas
 Comment[sv]=Ta reda på dagens väder
 Comment[uk]=Ознайомитися із прогнозом погоди на сьогодні
 Comment[x-test]=xxFind out weather for todayxx
+Comment[zh_CN]=了解今日天气
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=weather-clear
