@@ -125,10 +125,16 @@ Item {
     Kio.KRun { id: kRun }
 
     // We need to get the full path to KSysguard to be able to run it
+    property var ksysguardUrl
+    
     PlasmaCore.DataSource {
         id: apps
         engine: "apps"
         connectedSources: ["org.kde.ksysguard.desktop"]
+        onNewData: {
+            if(sourceName == "org.kde.ksysguard.desktop")
+                ksysguardUrl = data.entryPath
+        }
     }
 
     PlasmaCore.DataSource {
@@ -386,7 +392,7 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                kRun.openUrl(apps.data["org.kde.ksysguard.desktop"].entryPath)
+                kRun.openUrl(ksysguardUrl)
             }
         }
     }
@@ -422,7 +428,7 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                kRun.openUrl(apps.data["org.kde.ksysguard.desktop"].entryPath)
+                kRun.openUrl(ksysguardUrl)
             }
         }
     }
