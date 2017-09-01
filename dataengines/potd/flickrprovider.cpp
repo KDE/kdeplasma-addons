@@ -39,6 +39,17 @@ class FlickrProvider::Private
         qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
     }
 
+    QUrl buildUrl(const QDate &date) {
+        QUrl url(QLatin1String( "https://api.flickr.com/services/rest/"));
+        url.addQueryItem("api_key", FLICKR_API_KEY);
+        url.addQueryItem("method", "flickr.interestingness.getList");
+        url.addQueryItem("date", date.toString( Qt::ISODate ) );
+        // url_o might be either too small or too large.
+        url.addQueryItem("extras", "url_k,url_h,url_o");
+
+        return url;
+    }
+
     void pageRequestFinished( KJob* );
     void imageRequestFinished( KJob* );
     void parsePage();
@@ -48,6 +59,8 @@ class FlickrProvider::Private
     QImage mImage;
 
     QXmlStreamReader xml;
+
+    int mFailureNumber = 0;
 
   private:
     QStringList m_photoList;
@@ -74,29 +87,54 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
         xml.readNext();
 
         if (xml.isStartElement()) {
+            auto attributes = xml.attributes();
             if (xml.name() == "rsp") {
+                const int maxFailure = 5;
                 /* no pictures available for the specified parameters */
-                if (xml.attributes().value ( QLatin1String( "stat" ) ).toString() == QLatin1String( "fail" ) ) {
-                    /* To be sure, decrement the date to two days earlier... @TODO */
-                    mActualDate = mActualDate.addDays(-2);
-
-                            QUrl url(QLatin1String( "https://api.flickr.com/services/rest/"));
-                            url.addQueryItem("api_key", FLICKR_API_KEY);
-                            url.addQueryItem("method", "flickr.interestingness.getList");
-                            url.addQueryItem("date", mActualDate.toString(Qt::ISODate));
-                            KIO::StoredTransferJob *pageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-                            mParent->connect( pageJob, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
-                    return;
+                if (attributes.value ( QLatin1String( "stat" ) ).toString() != QLatin1String( "ok" )) {
+                    if (mFailureNumber < maxFailure) {
+                        /* To be sure, decrement the date to two days earlier... @TODO */
+                        mActualDate = mActualDate.addDays(-2);
+                        QUrl url = buildUrl(mActualDate);
+                        KIO::StoredTransferJob *pageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+                        mParent->connect( pageJob, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
+                        mFailureNumber++;
+                        return;
+                    } else {
+                        emit mParent->error(mParent);
+                        qDebug() << "pageRequestFinished error";
+                        return;
+                    }
                 }
             } else if (xml.name() == QLatin1String( "photo" )) {
-                if (xml.attributes().value ( QLatin1String( "ispublic" ) ).toString() != QLatin1String( "1" ))
-                continue;
+                if (attributes.value ( QLatin1String( "ispublic" ) ).toString() != QLatin1String( "1" )) {
+                    continue;
+                }
 
-                QString fileUrl = QString(QLatin1String( "http://farm" ) + xml.attributes().value ( QLatin1String( "farm" ) ).toString() + QLatin1String( ".static.flickr.com/" )
-                + xml.attributes().value ( QLatin1String( "server" ) ).toString() + QLatin1Char( '/' ) + xml.attributes().value ( QLatin1String( "id" ) ).toString()
-                                          + QLatin1Char( '_' ) + xml.attributes().value ( QLatin1String( "secret" ) ).toString() + QLatin1String( ".jpg" ));
+                const char *fallbackList[] = {
+                    "url_k", "url_h"
+                };
 
-                m_photoList.append(fileUrl);
+                bool found = false;
+                for (auto urlAttr : fallbackList) {
+                    // Get the best url.
+                    QLatin1String urlAttrString(urlAttr);
+                    if (attributes.hasAttribute(urlAttrString)) {
+                        m_photoList.append(attributes.value(urlAttrString).toString());
+                        found = true;
+                        break;
+                    }
+                }
+
+                // The logic here is, if url_h or url_k are present, url_o must
+                // has higher quality, otherwise, url_o is worse than k/h size.
+                // If url_o is better, prefer url_o.
+                if (found) {
+                    QLatin1String originAttr("url_o");
+                    if (attributes.hasAttribute(originAttr)) {
+                        m_photoList.back() = attributes.value(QLatin1String(originAttr)).toString();
+                    }
+                }
             }
         }
     }
@@ -131,10 +169,7 @@ FlickrProvider::FlickrProvider( QObject *parent, const QVariantList &args )
 {
     d->mActualDate = date();
 
-    QUrl url(QLatin1String( "https://api.flickr.com/services/rest/"));
-    url.addQueryItem("api_key", FLICKR_API_KEY);
-    url.addQueryItem("method", "flickr.interestingness.getList");
-    url.addQueryItem("date", date().toString( Qt::ISODate ) );
+    QUrl url = d->buildUrl(date());
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
 }
