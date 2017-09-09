@@ -186,6 +186,11 @@ Item {
           i18n("Five to one") ]
     ]
 
+    readonly property var hobbitTime: [
+        i18n("Sleep"), i18n("Breakfast"), i18n("Second Breakfast"), i18n("Elevenses"),
+        i18n("Lunch"), i18n("Afternoon tea"), i18n("Dinner"), i18n("Supper")
+    ]
+
     readonly property var dayTime: [
         i18n("Night"), i18n("Early morning"), i18n("Morning"), i18n("Almost noon"),
         i18n("Noon"), i18n("Afternoon"), i18n("Evening"), i18n("Late evening")
@@ -233,6 +238,8 @@ Item {
 
             return hourNames[Math.floor(realHour)][sector]
         } else if (main.fuzzyness == 3) {
+            return hobbitTime[Math.floor(hours / 3)]
+        } else if (main.fuzzyness == 4) {
             return dayTime[Math.floor(hours / 3)]
         } else {
             var dow = d.getDay()
