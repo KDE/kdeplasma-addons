@@ -65,7 +65,7 @@ Item {
                     id: fuzzyness
                     QtLayouts.Layout.fillWidth: true
                     minimumValue: 1
-                    maximumValue: 4
+                    maximumValue: 5
                     stepSize: 1
                     tickmarksEnabled: true
                 }
