@@ -15,6 +15,7 @@ DictionaryMatchEngine::DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngin
     /* We have to connect source in two different places, due to the difference in
      * how the connection is made based on data availability. There are two cases,
      * and this extra connection handles the second case. */
+    Q_ASSERT(m_dictionaryEngine);
     connect(m_dictionaryEngine, SIGNAL(sourceAdded(QString)), this, SLOT(sourceAdded(QString)));
 }
 
@@ -36,17 +37,21 @@ QString DictionaryMatchEngine::lookupWord(const QString &word)
     m_lockers.insert(word, &data);
     m_wordLock.unlock();
 
-    /* We lock it in this thread. Then we try to lock it again, which we cannot do, until the other thread
-     * unlocks it for us first. We time-out after 30 seconds. */
-    data.mutex.lock();
     QMetaObject::invokeMethod(this, "sourceAdded", Qt::QueuedConnection, Q_ARG(const QString&, QLatin1Char(':') + word));
-    if (!data.mutex.tryLock(30 * 1000))
-        qDebug() << "The dictionary data engine timed out.";
+    QMutexLocker locker(&data.mutex);
+    if (!data.waitCondition.wait(&data.mutex, 30 * 1000)) // Timeout after 30 seconds
+        qDebug() << "The dictionary data engine timed out (word:" << word << ")";
+    locker.unlock();
+
+    // after a timeout, if dataUpdated gets m_wordLock here, it can lock data->mutex successfully.
 
     m_wordLock.lockForWrite();
     m_lockers.remove(word, &data);
     m_wordLock.unlock();
 
+    // after a timeout, if dataUpdated gets m_wordLock here, it won't see this data instance anymore.
+
+    locker.relock();
     return data.definition;
 }
 
@@ -64,10 +69,11 @@ void DictionaryMatchEngine::dataUpdated(const QString &source, const Plasma::Dat
 
     m_wordLock.lockForRead();
     foreach (ThreadData *data, m_lockers.values(source)) {
+        QMutexLocker locker(&data->mutex);
         /* Because of QString's CoW semantics, we don't have to worry about
          * the overhead of assigning this to every item. */
         data->definition = definition;
-        data->mutex.unlock();
+        data->waitCondition.notify_one();
     }
     m_wordLock.unlock();
 }
