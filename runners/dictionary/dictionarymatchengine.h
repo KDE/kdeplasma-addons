@@ -10,6 +10,7 @@
 #include <QReadWriteLock>
 #include <QMutex>
 #include <QMultiMap>
+#include <QWaitCondition>
 
 namespace Plasma
 {
@@ -25,6 +26,7 @@ public:
 
 private:
     struct ThreadData {
+        QWaitCondition waitCondition;
         QMutex mutex;
         QString definition;
     };
