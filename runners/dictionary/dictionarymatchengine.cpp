@@ -73,7 +73,7 @@ void DictionaryMatchEngine::dataUpdated(const QString &source, const Plasma::Dat
         /* Because of QString's CoW semantics, we don't have to worry about
          * the overhead of assigning this to every item. */
         data->definition = definition;
-        data->waitCondition.notify_one();
+        data->waitCondition.wakeOne();
     }
     m_wordLock.unlock();
 }
