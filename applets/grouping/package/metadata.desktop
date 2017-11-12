@@ -60,6 +60,7 @@ Comment[tr]=Plasma programcıklarını birlikte grupla
 Comment[uk]=Групувати віджети Плазми
 Comment[x-test]=xxGroup Plasma widgets togetherxx
 Comment[zh_CN]=将 Plasma 小部件组合在一起
+Comment[zh_TW]=將 Plasma 元件群組在一起
 Icon=preferences-desktop-notification
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

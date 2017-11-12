@@ -67,6 +67,7 @@ Comment[tr]=Hunyango duvar kağıdı
 Comment[uk]=Шпалера Уньянго
 Comment[x-test]=xxHunyango wallpaperxx
 Comment[zh_CN]=Hunyango 壁纸
+Comment[zh_TW]=Hunyango 桌布
 
 Type=Service
 ServiceTypes=Plasma/Wallpaper
