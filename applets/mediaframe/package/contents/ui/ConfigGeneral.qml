@@ -79,7 +79,7 @@ Item {
                 Layout.fillWidth: true
 
                 Label {
-                    text: i18n("Fill mode")
+                    text: i18n("Fill mode:")
                 }
 
                 ComboBox {
