@@ -134,7 +134,7 @@ Item {
         Label {
             Layout.fillWidth: true
 
-            text: i18n("Paths")
+            text: i18n("Paths:")
         }
 
         ListModel {
