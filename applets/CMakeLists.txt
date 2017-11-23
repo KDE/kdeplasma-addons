@@ -7,6 +7,7 @@ add_subdirectory(colorpicker)
 add_subdirectory(mediaframe)
 add_subdirectory(notes)
 add_subdirectory(timer)
+add_subdirectory(dict)
 
 find_package(KDEExperimentalPurpose QUIET)
 set_package_properties(KDEExperimentalPurpose PROPERTIES DESCRIPTION "EXPERIMENTAL. Support for QuickShare sharing"

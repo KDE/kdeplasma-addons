@@ -116,16 +116,19 @@ Type=Service
 Icon=accessories-dictionary
 
 X-KDE-ServiceTypes=Plasma/Applet
-X-KDE-Library=plasma_applet_dict
 X-KDE-PluginInfo-Author=The Plasma Team
 X-KDE-PluginInfo-Email=plasma-devel@kde.org
-X-KDE-PluginInfo-Name=dict
+X-KDE-PluginInfo-Name=org.kde.plasma_applet_dict
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Language
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL-2.0+
 X-KDE-PluginInfo-EnabledByDefault=true
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-RemoteLocation=
 
 X-Plasma-Requires-FileDialog=Unused
 X-Plasma-Requires-LaunchApp=Unused
