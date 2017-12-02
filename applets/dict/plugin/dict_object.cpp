@@ -47,16 +47,15 @@ signals:
 
 DictObject::DictObject(QObject *parent)
     : QObject(parent),
-    m_dataEngine(QString::fromLatin1(defaultDataEngine))
+    m_dataEngineName(QString::fromLatin1(defaultDataEngine))
 {
-    dataEngine(m_dataEngine)->connectSource(QLatin1String("list-dictionaries"), this);
-
-    m_selectedDict = QStringLiteral("wn"); // for testing, use e.g. fd-fra-eng
+    m_selectedDict = QStringLiteral("wn");
     m_webProfile = new QQuickWebEngineProfile(this);
     auto *schemeHandler = new DictSchemeHandler(this);
     connect(schemeHandler, &DictSchemeHandler::wordClicked,
             this, &DictObject::lookup);
     m_webProfile->installUrlSchemeHandler("dict", schemeHandler);
+    m_dataEngine = dataEngine(m_dataEngineName); // Load it upfront so the config dialog can reuse this one
 }
 
 void DictObject::lookup(const QString &word)
@@ -64,33 +63,36 @@ void DictObject::lookup(const QString &word)
     const QString newSource = m_selectedDict + ':' + word;
 
     if (!m_source.isEmpty()) {
-        dataEngine(m_dataEngine)->disconnectSource(m_source, this);
+        m_dataEngine->disconnectSource(m_source, this);
     }
 
     if (!newSource.isEmpty()) {
         // Look up new definition
         emit searchInProgress();
         m_source = newSource;
-        dataEngine(m_dataEngine)->connectSource(m_source, this);
+        m_dataEngine->connectSource(m_source, this);
     }
 }
 
 void DictObject::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    if (sourceName == QLatin1String("list-dictionaries")) {
-        m_availableDicts = {};
-        m_availableDicts.resize(data.count());
-        int i = 0;
-        for (auto it = data.begin(), end = data.end(); it != end; ++it, ++i) {
-            m_availableDicts[i] = AvailableDict{it.key(), it.value().toString()};
-        }
-    } else {
-        const QString html = data.value(QStringLiteral("text")).toString();
-        if (!html.isEmpty()) {
-            emit definitionFound(html);
-        }
+    Q_UNUSED(sourceName); // always == m_source
+    const QString html = data.value(QStringLiteral("text")).toString();
+    if (!html.isEmpty()) {
+        emit definitionFound(html);
     }
 }
+
+QString DictObject::selectedDictionary() const
+{
+    return m_selectedDict;
+}
+
+void DictObject::setSelectedDictionary(const QString& dict)
+{
+    m_selectedDict = dict;
+}
+
 
 QQuickWebEngineProfile* DictObject::webProfile() const
 {

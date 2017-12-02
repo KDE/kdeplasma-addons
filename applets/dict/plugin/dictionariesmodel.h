@@ -15,45 +15,36 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#ifndef DICT_OBJECT_H
-#define DICT_OBJECT_H
+#ifndef DICTIONARIES_MODEL_H
+#define DICTIONARIES_MODEL_H
 
+#include <QAbstractListModel>
 #include <Plasma/DataEngineConsumer>
 #include <Plasma/DataEngine>
-#include <QObject>
-class QQuickWebEngineProfile;
+#include <vector>
 
-class DictObject : public QObject, public Plasma::DataEngineConsumer
+class DictionariesModel : public QAbstractListModel, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
-    Q_PROPERTY(QQuickWebEngineProfile* webProfile READ webProfile CONSTANT)
-    Q_PROPERTY(QString selectedDictionary READ selectedDictionary WRITE setSelectedDictionary)
 
 public:
-    explicit DictObject(QObject *parent = nullptr);
+    explicit DictionariesModel(QObject *parent = nullptr);
 
-    QQuickWebEngineProfile* webProfile() const;
-
-    QString selectedDictionary() const;
-    void setSelectedDictionary(const QString &dict);
-
-public Q_SLOTS:
-    void lookup(const QString &word);
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    int rowCount(const QModelIndex &index = QModelIndex()) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
 private Q_SLOTS:
     void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
 
-Q_SIGNALS:
-    void searchInProgress();
-    void definitionFound(const QString &html);
-
 private:
-    QString m_source;
-    QString m_dataEngineName;
-    QString m_selectedDict;
+    void setAvailableDicts(const QVariantMap &data);
 
-    Plasma::DataEngine* m_dataEngine;
-    QQuickWebEngineProfile* m_webProfile;
+    struct AvailableDict {
+        QString id;
+        QString description;
+    };
+    std::vector<AvailableDict> m_availableDicts;
 };
 
 #endif

@@ -18,6 +18,7 @@
  */
 #include "dict_plugin.h"
 #include "dict_object.h"
+#include "dictionariesmodel.h"
 
 #include <QtQml>
 
@@ -25,4 +26,5 @@ void DictPlugin::registerTypes (const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.dict"));
     qmlRegisterType<DictObject>(uri, 1, 0, "DictObject");
+    qmlRegisterType<DictionariesModel>(uri, 1, 0, "DictionariesModel");
 }

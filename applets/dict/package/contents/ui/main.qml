@@ -10,22 +10,29 @@ ColumnLayout {
 
     DictObject {
         id: dict
+        selectedDictionary: plasmoid.configuration.dictionary
         onSearchInProgress: web.loadHtml(i18n("Looking up definition..."));
         onDefinitionFound: web.loadHtml(html);
     }
 
-    PlasmaComponents.TextField {
-        id: input
-        placeholderText: i18n("Enter word to define here")
-        implicitWidth: units.gridUnit * 40
+    RowLayout {
         Layout.fillWidth: true
-        onAccepted: {
-            if (input.text === "") {
-                web.visible = false;
-            } else {
-                web.visible = true;
-                dict.lookup(input.text);
+        PlasmaComponents.TextField {
+            id: input
+            placeholderText: i18n("Enter word to define here")
+            implicitWidth: units.gridUnit * 40
+            onAccepted: {
+                if (input.text === "") {
+                    web.visible = false;
+                } else {
+                    web.visible = true;
+                    dict.lookup(input.text);
+                }
             }
+        }
+        PlasmaComponents.Button {
+            iconSource: "configure"
+            onClicked: plasmoid.action("configure").trigger();
         }
     }
 
