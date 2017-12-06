@@ -161,6 +161,7 @@ ComicApplet::~ComicApplet()
         }
     }
     delete mSavingDir;
+    delete m_newStuffDialog;
 }
 
 void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
@@ -234,7 +235,7 @@ void ComicApplet::getNewComics()
         return;
     }
     if (!m_newStuffDialog) {
-        m_newStuffDialog = new KNS3::DownloadDialog( QString::fromLatin1("comic.knsrc") );
+        m_newStuffDialog = new KNS3::DownloadDialog(QString::fromLatin1("comic.knsrc"));
         KNS3::DownloadDialog *strong = m_newStuffDialog.data();
         strong->setTitle(i18n("Download Comics"));
         connect(m_newStuffDialog.data(), SIGNAL(finished(int)), mEngine, SLOT(loadProviders()));
