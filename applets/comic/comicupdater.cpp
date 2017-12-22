@@ -49,15 +49,18 @@ void ComicUpdater::load()
 {
     //check when the last update happened and update if necessary
     mUpdateIntervall = mGroup.readEntry( "updateInterval", 3 );
-    if ( mUpdateIntervall ) {
+    if ( mUpdateIntervall > 0 ) {
         mLastUpdate = mGroup.readEntry( "lastUpdate", QDateTime() );
-        checkForUpdate();
+    } else {
+        mUpdateIntervall = 3;
     }
+    checkForUpdate();
 }
 
 void ComicUpdater::save()
 {
     mGroup.writeEntry( "updateInterval", mUpdateIntervall );
+    mGroup.sync();
 }
 
 void ComicUpdater::setInterval( int interval )
@@ -80,7 +83,9 @@ void ComicUpdater::checkForUpdate()
     }
 
     if ( !mLastUpdate.isValid() || ( mLastUpdate.addDays( mUpdateIntervall ) < QDateTime::currentDateTime() ) ) {
-        mGroup.writeEntry( "lastUpdate", QDateTime::currentDateTime() );
+        mLastUpdate = QDateTime::currentDateTime();
+        mGroup.writeEntry( "lastUpdate", mLastUpdate );
+        mGroup.sync();
         downloadManager()->checkForUpdates();
     }
 }
