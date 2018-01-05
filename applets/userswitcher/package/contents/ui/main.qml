@@ -56,7 +56,7 @@ Item {
         property: "icon"
         value: kuser.faceIconUrl
         // revert to the plasmoid icon if no face given
-        when: !!kuser.faceIconUrl
+        when: kuser.faceIconUrl.toString() !== ""
     }
 
     KCoreAddons.KUser {
@@ -90,7 +90,7 @@ Item {
                 width: height
                 height: compactRoot.height
                 Layout.preferredWidth: height
-                source: visible ? (kuser.faceIconUrl || "user-identity") : ""
+                source: visible ? (kuser.faceIconUrl.toString() || "user-identity") : ""
                 visible: root.showFace
             }
 
@@ -163,7 +163,7 @@ Item {
                 id: currentUserItem
                 text: root.displayedName
                 subText: i18n("Current user")
-                icon: kuser.faceIconUrl || "user-identity"
+                icon: kuser.faceIconUrl.toString() || "user-identity"
                 interactive: false
                 interactiveIcon: true
                 onIconClicked: KCMShell.open("user_manager")
