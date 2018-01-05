@@ -103,7 +103,7 @@ Item {
                 wrapMode: Text.NoWrap
                 fontSizeMode: Text.VerticalFit
                 font.pixelSize: tooSmall ? theme.defaultFont.pixelSize : units.roundToIconSize(units.gridUnit * 2)
-                minimumPointSize: theme.smallesFont.pointSize
+                minimumPointSize: theme.smallestFont.pointSize
                 visible: root.showName
             }
         }
