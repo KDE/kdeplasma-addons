@@ -92,6 +92,7 @@ Item {
                 Layout.preferredWidth: height
                 source: visible ? (kuser.faceIconUrl.toString() || "user-identity") : ""
                 visible: root.showFace
+                usesPlasmaTheme: false
             }
 
             PlasmaComponents.Label {

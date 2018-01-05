@@ -77,6 +77,7 @@ Item {
             Layout.maximumWidth: units.iconSizes.medium
             Layout.minimumHeight: units.iconSizes.medium
             Layout.maximumHeight: units.iconSizes.medium
+            usesPlasmaTheme: false
 
             MouseArea {
                 anchors.fill: parent
