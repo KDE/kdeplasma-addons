@@ -166,7 +166,7 @@ Item {
                 subText: i18n("Current user")
                 icon: kuser.faceIconUrl.toString() || "user-identity"
                 interactive: false
-                interactiveIcon: true
+                interactiveIcon: KCMShell.authorize("user_manager.desktop").length > 0
                 onIconClicked: KCMShell.open("user_manager")
                 usesPlasmaTheme: false
             }
