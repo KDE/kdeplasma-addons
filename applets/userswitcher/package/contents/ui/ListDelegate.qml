@@ -35,6 +35,8 @@ Item {
     property bool interactive: true
     property bool interactiveIcon: false
 
+    property alias usesPlasmaTheme: icon.usesPlasmaTheme
+
     property alias containsMouse: area.containsMouse
 
     property Item highlight
@@ -77,7 +79,6 @@ Item {
             Layout.maximumWidth: units.iconSizes.medium
             Layout.minimumHeight: units.iconSizes.medium
             Layout.maximumHeight: units.iconSizes.medium
-            usesPlasmaTheme: false
 
             MouseArea {
                 anchors.fill: parent

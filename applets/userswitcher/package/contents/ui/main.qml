@@ -168,6 +168,7 @@ Item {
                 interactive: false
                 interactiveIcon: true
                 onIconClicked: KCMShell.open("user_manager")
+                usesPlasmaTheme: false
             }
 
             PlasmaExtras.ScrollArea {
@@ -216,6 +217,7 @@ Item {
                                 userList.currentIndex = -1
                             }
                         }
+                        usesPlasmaTheme: false
                     }
                 }
             }
