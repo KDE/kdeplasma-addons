@@ -132,15 +132,6 @@ Item {
             id: sessionsModel
         }
 
-        Connections {
-            target: plasmoid
-            onExpandedChanged: {
-                if (plasmoid.expanded) {
-                    sessionsModel.reload()
-                }
-            }
-        }
-
         PlasmaComponents.Highlight {
             id: delegateHighlight
             visible: false
@@ -248,6 +239,14 @@ Item {
                 icon: "system-shutdown"
                 onClicked: pmEngine.performOperation("requestShutDown")
             }
+        }
+
+        Component.onCompleted: {
+            plasmoid.expandedChanged.connect(function (expanded) {
+                if (expanded) {
+                    sessionsModel.reload();
+                }
+            });
         }
     }
 }
