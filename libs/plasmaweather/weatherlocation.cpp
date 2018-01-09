@@ -48,8 +48,8 @@ WeatherLocation::WeatherLocation(QObject *parent)
     : QObject(parent)
     , d(new WeatherLocationPrivate(this))
 {
-    QObject::connect(&d->validator, SIGNAL(finished(QMap<QString,QString>)),
-                     this, SLOT(validatorFinished(QMap<QString,QString>)));
+    connect(&d->validator, &WeatherValidator::finished,
+            this, [&](const QMap<QString, QString>& sources) { d->validatorFinished(sources); } );
 }
 
 WeatherLocation::~WeatherLocation() = default;
@@ -90,7 +90,3 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
 
     emit finished(QString());
 }
-
-
-// needed due to private slots
-#include "moc_weatherlocation.cpp"

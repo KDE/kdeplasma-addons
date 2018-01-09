@@ -113,9 +113,6 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet, public Pl
         const QScopedPointer<class WeatherPopupAppletPrivate> d;
 
         friend class WeatherPopupAppletPrivate;
-        Q_PRIVATE_SLOT(d, void locationReady(const QString &source))
-        Q_PRIVATE_SLOT(d, void giveUpBeingBusy())
-        Q_PRIVATE_SLOT(d, void onTimeoutNotificationClosed())
 };
 
 #endif

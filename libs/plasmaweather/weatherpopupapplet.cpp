@@ -45,7 +45,8 @@ public:
         busyTimer = new QTimer(q);
         busyTimer->setInterval(2*60*1000);
         busyTimer->setSingleShot(true);
-        QObject::connect(busyTimer, SIGNAL(timeout()), q, SLOT(giveUpBeingBusy()));
+        QObject::connect(busyTimer, &QTimer::timeout,
+                         q, [&]() { giveUpBeingBusy(); });
     }
 
     WeatherPopupApplet *q;
@@ -66,6 +67,7 @@ public:
     double longitude;
     QTimer *busyTimer;
     KNotification *timeoutNotification;
+    QMetaObject::Connection timeoutNotificationConnection;
 
     bool isValidLatitude() {
         return -90 <= latitude && latitude <= 90;
@@ -108,7 +110,10 @@ public:
                 KNotification::event( KNotification::Error, QString(), // TODO: some title?
                                       i18n("Weather information retrieval for %1 timed out.", list.value(2)),
                                       QStringLiteral("dialog-error"));
-            QObject::connect(timeoutNotification, SIGNAL(closed()), q, SLOT(onTimeoutNotificationClosed()));
+            // seems global disconnect with wildcard does not cover lambdas, so remembering manually for disconnect
+            timeoutNotificationConnection =
+                QObject::connect(timeoutNotification, &KNotification::closed,
+                                 q, [&]() { onTimeoutNotificationClosed(); });
         }
     }
 
@@ -220,7 +225,7 @@ void WeatherPopupApplet::init()
 void WeatherPopupApplet::connectToEngine()
 {
     if (d->timeoutNotification) {
-        QObject::disconnect(d->timeoutNotification, SIGNAL(closed()), this, SLOT(onTimeoutNotificationClosed()));
+        QObject::disconnect(d->timeoutNotificationConnection);
         d->timeoutNotification = nullptr;
     }
 
@@ -231,7 +236,8 @@ void WeatherPopupApplet::connectToEngine()
 #if 0
         if (!d->location) {
             d->location = new WeatherLocation(this);
-            connect(d->location, SIGNAL(finished(QString)), this, SLOT(locationReady(QString)));
+            connect(d->location, &WeatherLocation::finished,
+                    this, [&](const QString& source) { d->locationReady(source); });
         }
 
         Plasma::DataEngine *dataEngine = dataEngine(QStringLiteral("geolocation"));
@@ -412,7 +418,3 @@ QString WeatherPopupApplet::conditionIcon()
     }
     return d->conditionIcon;
 }
-
-
-// needed due to private slots
-#include "moc_weatherpopupapplet.cpp"

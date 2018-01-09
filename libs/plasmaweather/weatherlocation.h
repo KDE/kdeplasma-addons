@@ -58,8 +58,6 @@ public Q_SLOTS:
 
 private:
     const QScopedPointer<class WeatherLocationPrivate> d;
-
-    Q_PRIVATE_SLOT(d, void validatorFinished(const QMap<QString, QString> &results))
 };
 
 #endif
