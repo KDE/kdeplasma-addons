@@ -110,7 +110,7 @@ void LocationListModel::searchLocations(const QString &searchString)
     Plasma::DataEngine* dataengine = dataEngine(QStringLiteral("weather"));
 
     const QVariantList plugins = dataengine->containerForSource(QLatin1String("ions"))->data().values();
-    foreach (const QVariant& plugin, plugins) {
+    for (const QVariant& plugin : plugins) {
         const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
         if (pluginInfo.count() > 1) {
             //qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
@@ -126,7 +126,7 @@ void LocationListModel::searchLocations(const QString &searchString)
         }
     }
 
-    foreach (WeatherValidator *validator, m_validators) {
+    for (WeatherValidator* validator : qAsConst(m_validators)) {
         validator->validate(m_searchString, true);
     }
 }
