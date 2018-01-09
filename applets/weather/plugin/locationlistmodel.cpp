@@ -83,7 +83,7 @@ QString LocationListModel::nameForListIndex(int listIndex) const
     return QString();
 }
 
-void LocationListModel::searchLocations(const QString &searchString)
+void LocationListModel::searchLocations(const QString &searchString, const QStringList& services)
 {
     m_checkedInCount = 0;
 
@@ -113,6 +113,10 @@ void LocationListModel::searchLocations(const QString &searchString)
     for (const QVariant& plugin : plugins) {
         const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
         if (pluginInfo.count() > 1) {
+            const QString& ionId = pluginInfo[1];
+            if (!services.contains(ionId)) {
+                continue;
+            }
             //qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
             //d->ions.insert(pluginInfo[1], pluginInfo[0]);
 
@@ -120,7 +124,7 @@ void LocationListModel::searchLocations(const QString &searchString)
             connect(validator, &WeatherValidator::error, this, &LocationListModel::validatorError);
             connect(validator, &WeatherValidator::finished, this, &LocationListModel::addSources);
             validator->setDataEngine(dataengine);
-            validator->setIon(pluginInfo[1]);
+            validator->setIon(ionId);
 
             m_validators.append(validator);
         }

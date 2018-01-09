@@ -23,6 +23,7 @@
 
 #include <KLocalizedString>
 #include <KIconLoader>
+#include <KConfigGroup>
 #include <KUnitConversion/Value>
 
 #include <Plasma/Package>
@@ -37,6 +38,12 @@ T clampValue(T value, int decimals)
 }
 
 namespace {
+namespace AppletConfigKeys {
+inline QString services() { return QStringLiteral("services"); }
+}
+namespace StorageConfigKeys {
+const char weatherServiceProviders[] = "weatherServiceProviders";
+}
 namespace PanelModelKeys {
 inline QString location()                  { return QStringLiteral("location"); }
 inline QString currentDayLowTemperature()  { return QStringLiteral("currentDayLowTemperature"); }
@@ -447,6 +454,16 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     emit modelUpdated();
 }
 
+QVariantMap WeatherApplet::configValues() const
+{
+    QVariantMap config = WeatherPopupApplet::configValues();
+
+    KConfigGroup cfg = this->config();
+    config.insert(AppletConfigKeys::services(), cfg.readEntry(StorageConfigKeys::weatherServiceProviders, QStringList()));
+
+    return config;
+}
+
 void WeatherApplet::saveConfig(const QVariantMap& configChanges)
 {
     // TODO: if just units where changed there is no need to reset the complete model or reconnect to engine
@@ -455,6 +472,13 @@ void WeatherApplet::saveConfig(const QVariantMap& configChanges)
     m_detailsModel.clear();
 
     emit modelUpdated();
+
+    KConfigGroup cfg = config();
+
+    auto it = configChanges.find(AppletConfigKeys::services());
+    if (it != configChanges.end()) {
+        cfg.writeEntry(StorageConfigKeys::weatherServiceProviders, it.value().toStringList());
+    }
 
     WeatherPopupApplet::saveConfig(configChanges);
 }

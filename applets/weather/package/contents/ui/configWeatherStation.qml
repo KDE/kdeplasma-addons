@@ -1,5 +1,5 @@
 /*
- * Copyright 2016  Friedrich W. H. Kossebau <kossebau@kde.org>
+ * Copyright 2016,2018  Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 1.0 as QtControls
+import QtQuick 2.2
+import QtQuick.Controls 1.4 as QtControls
 import QtQuick.Layouts 1.0
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -27,10 +27,14 @@ import org.kde.plasma.private.weather 1.0
 ColumnLayout {
     id: generalConfigPage
 
+    property alias selectedServices : serviceListModel.selectedServices
+
     signal configurationChanged
 
     function saveConfig() {
         var config = {};
+
+        config.services = selectedServices;
 
         // only pick a new source if there is one selected in the locationListView
         if (locationListView.rowCount && locationListView.currentRow !== -1) {
@@ -49,7 +53,7 @@ ColumnLayout {
         locationListView.selection.clear();
         noSearchResultReport.visible = false;
 
-        locationListModel.searchLocations(searchStringEdit.text);
+        locationListModel.searchLocations(searchStringEdit.text, selectedServices);
     }
 
     function handleLocationSearchDone(success, searchString) {
@@ -61,6 +65,8 @@ ColumnLayout {
 
     Component.onCompleted: {
         var config = plasmoid.nativeInterface.configValues();
+
+        selectedServices = config.services;
 
         var source;
         var sourceDetails = config.source.split('|');
@@ -78,6 +84,32 @@ ColumnLayout {
     LocationListModel {
         id: locationListModel
         onLocationSearchDone: handleLocationSearchDone(success, searchString);
+    }
+
+    ServiceListModel {
+        id: serviceListModel
+    }
+
+    QtControls.Menu {
+        id: serviceSelectionMenu
+
+        Instantiator {
+            model: serviceListModel
+            delegate: QtControls.MenuItem {
+                text: model.display
+                checkable: true
+                checked: model.checked
+
+                onToggled: {
+                    model.checked = checked;
+                    checked = Qt.binding(function() { return model.checked; });
+                    generalConfigPage.configurationChanged();
+                }
+            }
+            onObjectAdded: serviceSelectionMenu.insertItem(index, object)
+            onObjectRemoved: serviceSelectionMenu.removeItem(object)
+        }
+
     }
 
     GridLayout {
@@ -112,6 +144,13 @@ ColumnLayout {
                 Layout.fillWidth: true
             }
 
+            QtControls.Button {
+                id: serviceSelectionButton
+                iconName: "services"
+                tooltip: i18n("Select weather services providers")
+                menu: serviceSelectionMenu
+            }
+
             Item {
                 Layout.preferredHeight: Math.max(searchButton.height, searchStringEdit.height)
                 Layout.preferredWidth: Layout.preferredHeight
@@ -126,7 +165,7 @@ ColumnLayout {
             QtControls.Button {
                 id: searchButton
                 text: i18n("Search")
-                enabled: !!searchStringEdit.text
+                enabled: !!searchStringEdit.text && selectedServices.length
                 onClicked: searchLocation();
             }
         }

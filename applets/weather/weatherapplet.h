@@ -48,6 +48,7 @@ Q_SIGNALS:
     void modelUpdated();
 
 public: // WeatherPopupApplet API
+    QVariantMap configValues() const override;
     void saveConfig(const QVariantMap& configChanges) override;
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data) override;
 
