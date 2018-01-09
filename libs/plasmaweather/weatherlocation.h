@@ -32,7 +32,7 @@ class WeatherLocation : public QObject
     Q_OBJECT
 public:
     explicit WeatherLocation(QObject *parent = nullptr);
-    virtual ~WeatherLocation();
+    ~WeatherLocation() override;
 
     /**
      * Get default source
