@@ -92,7 +92,7 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
         QString message = i18n("Cannot find '%1' using %2.", source, d->ion);
         emit error(message);
         if (!d->silent) {
-            KMessageBox::error(0, message);
+            KMessageBox::error(nullptr, message);
         }
     } else if (result[1] == QLatin1String( "valid" ) && result.count() > 2) {
         const QString weatherSource = result[0] + QLatin1String( "|weather|");
@@ -123,13 +123,13 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
         QString message = i18n("Connection to %1 weather server timed out.", d->ion);
         emit error(message);
         if (!d->silent) {
-            KMessageBox::error(0, message);
+            KMessageBox::error(nullptr, message);
         }
     } else {
         QString message = i18n("Cannot find '%1' using %2.", result.count() > 3 ? result[3] : source, d->ion);
         emit error(message);
         if (!d->silent) {
-            KMessageBox::error(0, message);
+            KMessageBox::error(nullptr, message);
         }
     }
 

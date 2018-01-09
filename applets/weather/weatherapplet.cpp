@@ -44,7 +44,7 @@ QString existingWeatherIconName(const QString &iconName)
 {
     const bool isValid = !iconName.isEmpty() &&
            !KIconLoader::global()->loadIcon(iconName, KIconLoader::Desktop, 0,
-                                            KIconLoader::DefaultState, QStringList(), 0, true).isNull();
+                                            KIconLoader::DefaultState, QStringList(), nullptr, true).isNull();
     return isValid ? iconName : QStringLiteral("weather-not-available");
 }
 
