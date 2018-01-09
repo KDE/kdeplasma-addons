@@ -22,10 +22,10 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
-class WeatherValidator::Private
+class WeatherValidatorPrivate
 {
 public:
-    Private()
+    WeatherValidatorPrivate()
         : dataengine(nullptr)
     {}
 
@@ -37,14 +37,11 @@ public:
 
 WeatherValidator::WeatherValidator(QObject *parent)
     : QObject(parent)
-    , d(new Private())
+    , d(new WeatherValidatorPrivate())
 {
 }
 
-WeatherValidator::~WeatherValidator()
-{
-    delete d;
-}
+WeatherValidator::~WeatherValidator() = default;
 
 QString WeatherValidator::ion() const
 {

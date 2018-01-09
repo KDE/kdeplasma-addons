@@ -57,8 +57,7 @@ public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 
 private:
-    class Private;
-    Private * const d;
+    const QScopedPointer<class WeatherLocationPrivate> d;
 
     Q_PRIVATE_SLOT(d, void validatorFinished(const QMap<QString, QString> &results))
 };

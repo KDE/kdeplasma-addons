@@ -21,10 +21,10 @@
 
 #include "weathervalidator.h"
 
-class WeatherLocation::Private
+class WeatherLocationPrivate
 {
 public:
-    Private(WeatherLocation *location)
+    WeatherLocationPrivate(WeatherLocation *location)
         : q(location),
           locationEngine(nullptr)
     {}
@@ -46,16 +46,13 @@ public:
 
 WeatherLocation::WeatherLocation(QObject *parent)
     : QObject(parent)
-    , d(new Private(this))
+    , d(new WeatherLocationPrivate(this))
 {
     QObject::connect(&d->validator, SIGNAL(finished(QMap<QString,QString>)),
                      this, SLOT(validatorFinished(QMap<QString,QString>)));
 }
 
-WeatherLocation::~WeatherLocation()
-{
-    delete d;
-}
+WeatherLocation::~WeatherLocation() = default;
 
 void WeatherLocation::setDataEngines(Plasma::DataEngine* location, Plasma::DataEngine* weather)
 {

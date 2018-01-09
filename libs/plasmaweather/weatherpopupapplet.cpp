@@ -31,10 +31,10 @@
 
 using namespace KUnitConversion;
 
-class Q_DECL_HIDDEN WeatherPopupApplet::Private
+class WeatherPopupAppletPrivate
 {
 public:
-    Private(WeatherPopupApplet *weatherapplet)
+    WeatherPopupAppletPrivate(WeatherPopupApplet *weatherapplet)
         : q(weatherapplet)
         , updateInterval(0)
         , location(nullptr)
@@ -206,14 +206,11 @@ public:
 
 WeatherPopupApplet::WeatherPopupApplet(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
-    , d(new Private(this))
+    , d(new WeatherPopupAppletPrivate(this))
 {
 }
 
-WeatherPopupApplet::~WeatherPopupApplet()
-{
-    delete d;
-}
+WeatherPopupApplet::~WeatherPopupApplet() = default;
 
 void WeatherPopupApplet::init()
 {
