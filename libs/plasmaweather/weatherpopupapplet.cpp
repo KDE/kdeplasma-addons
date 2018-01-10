@@ -31,6 +31,28 @@
 
 using namespace KUnitConversion;
 
+namespace {
+namespace AppletConfigKeys {
+inline QString temperatureUnitId() { return QStringLiteral("temperatureUnitId"); }
+inline QString windSpeedUnitId()   { return QStringLiteral("windSpeedUnitId"); }
+inline QString pressureUnitId()    { return QStringLiteral("pressureUnitId"); }
+inline QString visibilityUnitId()  { return QStringLiteral("visibilityUnitId"); }
+inline QString updateInterval()    { return QStringLiteral("updateInterval"); }
+inline QString source()            { return QStringLiteral("source"); }
+}
+namespace StorageConfigKeys {
+const char temperatureUnit[] = "temperatureUnit";
+const char speedUnit[] =       "speedUnit";
+const char pressureUnit[] =    "pressureUnit";
+const char visibilityUnit[] =  "visibilityUnit";
+const char updateInterval[] =  "updateInterval";
+const char source[] =          "source";
+}
+namespace DataEngineIds {
+inline QString weather() { return QStringLiteral("weather"); }
+}
+}
+
 class WeatherPopupAppletPrivate
 {
 public:
@@ -81,7 +103,7 @@ public:
         if (!src.isEmpty()) {
             source = src;
             KConfigGroup cfg = q->config();
-            cfg.writeEntry("source", source);
+            cfg.writeEntry(StorageConfigKeys::source, source);
             emit q->configNeedsSaving();
             q->connectToEngine();
             q->setConfigurationRequired(false);
@@ -255,7 +277,7 @@ void WeatherPopupApplet::connectToEngine()
         setBusy(true);
         d->busyTimer->start();
 
-        Plasma::DataEngine* weatherDataEngine = dataEngine(QStringLiteral("weather"));
+        Plasma::DataEngine* weatherDataEngine = dataEngine(DataEngineIds::weather());
         weatherDataEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
     }
 }
@@ -265,25 +287,31 @@ void WeatherPopupApplet::saveConfig(const QVariantMap& configChanges)
     KConfigGroup cfg = config();
 
     // units
-    if (configChanges.contains(QStringLiteral("temperatureUnitId"))) {
-        cfg.writeEntry("temperatureUnit", configChanges.value(QStringLiteral("temperatureUnitId")).toInt());
+    auto it = configChanges.find(AppletConfigKeys::temperatureUnitId());
+    if (it != configChanges.end()) {
+        cfg.writeEntry(StorageConfigKeys::temperatureUnit, it.value().toInt());
     }
-    if (configChanges.contains(QStringLiteral("windSpeedUnitId"))) {
-        cfg.writeEntry("speedUnit", configChanges.value(QStringLiteral("windSpeedUnitId")).toInt());
+    it = configChanges.find(AppletConfigKeys::windSpeedUnitId());
+    if (it != configChanges.end()) {
+        cfg.writeEntry(StorageConfigKeys::speedUnit, it.value().toInt());
     }
-    if (configChanges.contains(QStringLiteral("pressureUnitId"))) {
-        cfg.writeEntry("pressureUnit", configChanges.value(QStringLiteral("pressureUnitId")).toInt());
+    it = configChanges.find(AppletConfigKeys::pressureUnitId());
+    if (it != configChanges.end()) {
+        cfg.writeEntry(StorageConfigKeys::pressureUnit, it.value().toInt());
     }
-    if (configChanges.contains(QStringLiteral("visibilityUnitId"))) {
-        cfg.writeEntry("visibilityUnit", configChanges.value(QStringLiteral("visibilityUnitId")).toInt());
+    it = configChanges.find(AppletConfigKeys::visibilityUnitId());
+    if (it != configChanges.end()) {
+        cfg.writeEntry(StorageConfigKeys::visibilityUnit, it.value().toInt());
     }
 
     // data source
-    if (configChanges.contains(QStringLiteral("updateInterval"))) {
-        cfg.writeEntry("updateInterval", configChanges.value(QStringLiteral("updateInterval")).toInt());
+    it = configChanges.find(AppletConfigKeys::updateInterval());
+    if (it != configChanges.end()) {
+        cfg.writeEntry(StorageConfigKeys::updateInterval, it.value().toInt());
     }
-    if (configChanges.contains(QStringLiteral("source"))) {
-        cfg.writeEntry("source", configChanges.value(QStringLiteral("source")).toString());
+    it = configChanges.find(AppletConfigKeys::source());
+    if (it != configChanges.end()) {
+        cfg.writeEntry(StorageConfigKeys::source, it.value().toString());
     }
 
     emit configNeedsSaving();
@@ -292,25 +320,22 @@ void WeatherPopupApplet::saveConfig(const QVariantMap& configChanges)
 void WeatherPopupApplet::configChanged()
 {
     if (!d->source.isEmpty()) {
-        Plasma::DataEngine* weatherDataEngine = dataEngine(QStringLiteral("weather"));
+        Plasma::DataEngine* weatherDataEngine = dataEngine(DataEngineIds::weather());
         weatherDataEngine->disconnectSource(d->source, this);
     }
 
     KConfigGroup cfg = config();
 
-    if (QLocale().measurementSystem() == QLocale::MetricSystem) {
-        d->temperatureUnit = d->unit(cfg.readEntry("temperatureUnit", "C"));
-        d->speedUnit = d->unit(cfg.readEntry("speedUnit", "m/s"));
-        d->pressureUnit = d->unit(cfg.readEntry("pressureUnit", "hPa"));
-        d->visibilityUnit = d->unit(cfg.readEntry("visibilityUnit", "km"));
-    } else {
-        d->temperatureUnit = d->unit(cfg.readEntry("temperatureUnit", "F"));
-        d->speedUnit = d->unit(cfg.readEntry("speedUnit", "mph"));
-        d->pressureUnit = d->unit(cfg.readEntry("pressureUnit", "inHg"));
-        d->visibilityUnit = d->unit(cfg.readEntry("visibilityUnit", "ml"));
-    }
-    d->updateInterval = cfg.readEntry("updateInterval", 30);
-    d->source = cfg.readEntry("source", QString());
+    const bool useMetric = (QLocale().measurementSystem() == QLocale::MetricSystem);
+
+    d->temperatureUnit = d->unit(cfg.readEntry(StorageConfigKeys::temperatureUnit, (useMetric ? "C" :   "F")));
+    d->speedUnit =       d->unit(cfg.readEntry(StorageConfigKeys::speedUnit,       (useMetric ? "m/s" : "mph")));
+    d->pressureUnit =    d->unit(cfg.readEntry(StorageConfigKeys::pressureUnit,    (useMetric ? "hPa" : "inHg")));
+    d->visibilityUnit =  d->unit(cfg.readEntry(StorageConfigKeys::visibilityUnit,  (useMetric ? "km" :  "ml")));
+
+    d->updateInterval = cfg.readEntry(StorageConfigKeys::updateInterval, 30);
+    d->source =         cfg.readEntry(StorageConfigKeys::source,         QString());
+
     setConfigurationRequired(d->source.isEmpty());
 
     connectToEngine();
@@ -342,8 +367,9 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     }
 
     d->conditionIcon = data[QStringLiteral("Condition Icon")].toString();
-    if (data[QLatin1String( "Pressure" )].toString() != QLatin1String( "N/A" )) {
-        d->pressure = Value(data[QStringLiteral("Pressure")].toDouble(),
+    const auto pressure = data[QStringLiteral("Pressure")];
+    if (pressure.toString() != QLatin1String( "N/A" )) {
+        d->pressure = Value(pressure.toDouble(),
                             static_cast<UnitId>(data[QStringLiteral("Pressure Unit")].toInt()));
     } else {
         d->pressure = Value();
@@ -395,19 +421,17 @@ QString WeatherPopupApplet::source() const
 
 QVariantMap WeatherPopupApplet::configValues() const
 {
-    QVariantMap config;
+    return QVariantMap {
+        // units
+        { AppletConfigKeys::temperatureUnitId(), d->temperatureUnit.id() },
+        { AppletConfigKeys::windSpeedUnitId(),   d->speedUnit.id() },
+        { AppletConfigKeys::pressureUnitId(),    d->pressureUnit.id() },
+        { AppletConfigKeys::visibilityUnitId(),  d->visibilityUnit.id() },
 
-    // units
-    config.insert(QStringLiteral("temperatureUnitId"), d->temperatureUnit.id());
-    config.insert(QStringLiteral("windSpeedUnitId"), d->speedUnit.id());
-    config.insert(QStringLiteral("pressureUnitId"), d->pressureUnit.id());
-    config.insert(QStringLiteral("visibilityUnitId"), d->visibilityUnit.id());
-
-    // data source
-    config.insert(QStringLiteral("updateInterval"), d->updateInterval);
-    config.insert(QStringLiteral("source"), d->source);
-
-    return config;
+        // data source
+        { AppletConfigKeys::updateInterval(), d->updateInterval },
+        { AppletConfigKeys::source(),         d->source },
+    };
 }
 
 

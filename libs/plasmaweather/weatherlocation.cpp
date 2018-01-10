@@ -63,7 +63,7 @@ void WeatherLocation::setDataEngines(Plasma::DataEngine* location, Plasma::DataE
 void WeatherLocation::getDefault()
 {
     if (d->locationEngine && d->locationEngine->isValid()) {
-        d->locationEngine->connectSource(QLatin1String( "location" ), this);
+        d->locationEngine->connectSource(QStringLiteral("location"), this);
     } else {
         emit finished(QString());
     }
@@ -77,14 +77,14 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
 
     d->locationEngine->disconnectSource(source, this);
 
-    QString city = data[QLatin1String( "city" )].toString();
+    QString city = data[QStringLiteral("city")].toString();
 
     if (city.contains(QLatin1Char( ',' )))
         city.truncate(city.indexOf(QLatin1Char( ',' )) - 1);
 
     // TODO: relies on bbcukmet ion engine, is that always available?
     if (!city.isEmpty()) {
-        d->validator.validate(QLatin1String( "bbcukmet" ), city, true);
+        d->validator.validate(QStringLiteral("bbcukmet"), city, true);
         return;
     }
 
