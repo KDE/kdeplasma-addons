@@ -83,13 +83,13 @@ WeatherApplet::~WeatherApplet()
 {
 }
 
-QString WeatherApplet::convertTemperature(KUnitConversion::Unit format, const QVariant &value,
+QString WeatherApplet::convertTemperature(const KUnitConversion::Unit& format, const QVariant& value,
                                           int type, bool rounded, bool degreesOnly)
 {
     return convertTemperature(format, value.toFloat(), type, rounded, degreesOnly);
 }
 
-QString WeatherApplet::convertTemperature(KUnitConversion::Unit format, float value,
+QString WeatherApplet::convertTemperature(const KUnitConversion::Unit& format, float value,
                                           int type, bool rounded, bool degreesOnly)
 {
     KUnitConversion::Value v(value, static_cast<KUnitConversion::UnitId>(type));
