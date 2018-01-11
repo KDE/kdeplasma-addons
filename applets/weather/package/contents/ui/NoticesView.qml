@@ -21,9 +21,9 @@ Column {
     id: root
 
     property var model
+    readonly property bool hasContent: model && model.length > 0 && model[0].length > 0 && model[1].length > 0
 
     spacing: units.largeSpacing
-    visible: model.length > 0 && model[0].length > 0 && model[1].length > 0
 
     Notice {
         title: i18nc("weather warnings", "Warnings Issued:")

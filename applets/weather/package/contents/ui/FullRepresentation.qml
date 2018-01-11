@@ -58,6 +58,8 @@ Item {
         visible: detailsView.model.length > 0
 
         PlasmaComponents.TabButton {
+            id: fiveDaysTabButton
+
             text: plasmoid.nativeInterface.panelModel.totalDays
             tab: fiveDaysView
         }
@@ -66,9 +68,18 @@ Item {
             tab: detailsView
         }
         PlasmaComponents.TabButton {
+            id: noticesTabButton
+
             text: i18n("Notices")
-            visible: noticesView.visible
+            visible: noticesView.hasContent
             tab: noticesView
+            onVisibleChanged: {
+                // PlasmaComponents.TabBar does not handle this, so let's do it ourselves
+                if (!visible && (tabBar.currentTab == noticesTabButton)) {
+                    tabBar.currentTab = fiveDaysTabButton;
+                    mainTabGroup.currentTab = fiveDaysTabButton.tab;
+                }
+            }
         }
     }
 
