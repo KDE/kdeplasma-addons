@@ -26,6 +26,8 @@ Column {
     // ensure text fits in rectangle, relies on delegates only using labels with theme.defaultFont
     property int rowHeight: theme.mSize(theme.defaultFont).height
 
+    readonly property bool hasContent: model && model.length > 0
+
     spacing: (root.height - (repeater.count*rowHeight)) / (repeater.count-1)
 
     Repeater {

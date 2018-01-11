@@ -55,7 +55,15 @@ Item {
             horizontalCenter: parent.horizontalCenter
         }
 
-        visible: detailsView.model.length > 0
+        visible: detailsView.hasContent || noticesView.hasContent
+
+        function fallBackToFiveDaysIfInvisble(tabButton) {
+            // PlasmaComponents.TabBar does not handle this (yet), so let's do it ourselves
+            if (!tabButton.visible && (currentTab == tabButton)) {
+                currentTab = fiveDaysTabButton;
+                mainTabGroup.currentTab = fiveDaysTabButton.tab;
+            }
+        }
 
         PlasmaComponents.TabButton {
             id: fiveDaysTabButton
@@ -64,8 +72,14 @@ Item {
             tab: fiveDaysView
         }
         PlasmaComponents.TabButton {
+            id: detailsTabButton
+
             text: i18n("Details")
+            visible: detailsView.hasContent
             tab: detailsView
+            onVisibleChanged: {
+                tabBar.fallBackToFiveDaysIfInvisble(detailsTabButton);
+            }
         }
         PlasmaComponents.TabButton {
             id: noticesTabButton
@@ -74,11 +88,7 @@ Item {
             visible: noticesView.hasContent
             tab: noticesView
             onVisibleChanged: {
-                // PlasmaComponents.TabBar does not handle this, so let's do it ourselves
-                if (!visible && (tabBar.currentTab == noticesTabButton)) {
-                    tabBar.currentTab = fiveDaysTabButton;
-                    mainTabGroup.currentTab = fiveDaysTabButton.tab;
-                }
+                tabBar.fallBackToFiveDaysIfInvisble(noticesTabButton);
             }
         }
     }
