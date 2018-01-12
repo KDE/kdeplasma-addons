@@ -25,7 +25,7 @@ import org.kde.plasma.private.weather 1.0
 
 
 ColumnLayout {
-    id: generalConfigPage
+    id: weatherStationConfigPage
 
     property alias selectedServices : serviceListModel.selectedServices
 
@@ -103,7 +103,7 @@ ColumnLayout {
                 onToggled: {
                     model.checked = checked;
                     checked = Qt.binding(function() { return model.checked; });
-                    generalConfigPage.configurationChanged();
+                    weatherStationConfigPage.configurationChanged();
                 }
             }
             onObjectAdded: serviceSelectionMenu.insertItem(index, object)
@@ -181,7 +181,7 @@ ColumnLayout {
             onActivated: {
                 if (row !== -1) {
                     locationDisplay.setLocation(locationListModel.nameForListIndex(row));
-                    generalConfigPage.configurationChanged();
+                    weatherStationConfigPage.configurationChanged();
                 }
             }
 
@@ -214,7 +214,7 @@ ColumnLayout {
             stepSize: 5
             minimumValue: 30
             maximumValue: 3600
-            onValueChanged: generalConfigPage.configurationChanged();
+            onValueChanged: weatherStationConfigPage.configurationChanged();
         }
     }
 }

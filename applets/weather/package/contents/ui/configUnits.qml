@@ -23,7 +23,7 @@ import org.kde.plasma.private.weather 1.0
 
 
 ColumnLayout {
-    id: generalConfigPage
+    id: unitsConfigPage
 
     signal configurationChanged
 
@@ -74,7 +74,7 @@ ColumnLayout {
             Layout.minimumWidth: units.gridUnit * 8
             model: TemperatureUnitListModel
             textRole: "display"
-            onCurrentIndexChanged: generalConfigPage.configurationChanged();
+            onCurrentIndexChanged: unitsConfigPage.configurationChanged();
         }
 
         QtControls.Label {
@@ -91,7 +91,7 @@ ColumnLayout {
             Layout.minimumWidth: units.gridUnit * 8
             model: PressureUnitListModel
             textRole: "display"
-            onCurrentIndexChanged: generalConfigPage.configurationChanged();
+            onCurrentIndexChanged: unitsConfigPage.configurationChanged();
         }
 
         QtControls.Label {
@@ -108,7 +108,7 @@ ColumnLayout {
             Layout.minimumWidth: units.gridUnit * 8
             model: WindSpeedUnitListModel
             textRole: "display"
-            onCurrentIndexChanged: generalConfigPage.configurationChanged();
+            onCurrentIndexChanged: unitsConfigPage.configurationChanged();
         }
 
         QtControls.Label {
@@ -125,7 +125,7 @@ ColumnLayout {
             Layout.minimumWidth: units.gridUnit * 8
             model: VisibilityUnitListModel
             textRole: "display"
-            onCurrentIndexChanged: generalConfigPage.configurationChanged();
+            onCurrentIndexChanged: unitsConfigPage.configurationChanged();
         }
     }
 
