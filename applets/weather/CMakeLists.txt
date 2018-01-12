@@ -1,9 +1,5 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.weather\")
 
-include_directories(
-    ${CMAKE_SOURCE_DIR}/libs
-)
-
 set(weatherapplet_SRCS
     weatherapplet.cpp)
 
@@ -16,6 +12,7 @@ target_link_libraries(plasma_applet_weather
     KF5::Plasma
     KF5::UnitConversion
     KF5::IconThemes
+    KF5::I18n
 )
 
 install(TARGETS plasma_applet_weather DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/applets)
