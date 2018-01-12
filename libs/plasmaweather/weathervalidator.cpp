@@ -22,6 +22,8 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
+namespace Plasma {
+
 class WeatherValidatorPrivate
 {
 public:
@@ -136,3 +138,4 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
     emit finished(locations);
 }
 
+}

@@ -53,6 +53,8 @@ inline QString weather() { return QStringLiteral("weather"); }
 }
 }
 
+namespace Plasma {
+
 class WeatherPopupAppletPrivate
 {
 public:
@@ -441,4 +443,6 @@ QString WeatherPopupApplet::conditionIcon()
         d->conditionIcon = d->conditionFromPressure();
     }
     return d->conditionIcon;
+}
+
 }

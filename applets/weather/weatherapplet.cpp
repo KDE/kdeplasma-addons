@@ -75,7 +75,7 @@ QString existingWeatherIconName(const QString &iconName)
 
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
-        : WeatherPopupApplet(parent, args)
+    : Plasma::WeatherPopupApplet(parent, args)
 {
 }
 
@@ -83,7 +83,7 @@ void WeatherApplet::init()
 {
     resetPanelModel();
 
-    WeatherPopupApplet::init();
+    Plasma::WeatherPopupApplet::init();
 }
 
 WeatherApplet::~WeatherApplet()

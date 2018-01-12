@@ -21,6 +21,8 @@
 
 #include "weathervalidator.h"
 
+namespace Plasma {
+
 class WeatherLocationPrivate
 {
 public:
@@ -89,4 +91,6 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
     }
 
     emit finished(QString());
+}
+
 }

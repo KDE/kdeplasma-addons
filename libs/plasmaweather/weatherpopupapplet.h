@@ -28,6 +28,7 @@
 
 #include "plasmaweather_export.h"
 
+namespace Plasma {
 
 /**
  * @class WeatherPopupApplet <plasmaweather/weatherpopupapplet.h>
@@ -114,5 +115,7 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::Applet, public Pl
 
         friend class WeatherPopupAppletPrivate;
 };
+
+}
 
 #endif

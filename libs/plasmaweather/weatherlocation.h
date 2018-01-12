@@ -22,6 +22,8 @@
 
 #include <Plasma/DataEngine>
 
+namespace Plasma {
+
 /**
  * @class WeatherLocation
  *
@@ -59,5 +61,7 @@ public Q_SLOTS:
 private:
     const QScopedPointer<class WeatherLocationPrivate> d;
 };
+
+}
 
 #endif

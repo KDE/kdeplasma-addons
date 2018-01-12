@@ -24,8 +24,9 @@
 #include <QVector>
 #include <QMap>
 
+namespace Plasma {
 class WeatherValidator;
-
+}
 
 class LocationItem
 {
@@ -81,7 +82,7 @@ private:
     bool m_validatingInput;
     QString m_searchString;
     int m_checkedInCount;
-    QVector<WeatherValidator*> m_validators;
+    QVector<Plasma::WeatherValidator*> m_validators;
 };
 
 #endif // LOCATIONLISTMODEL_H

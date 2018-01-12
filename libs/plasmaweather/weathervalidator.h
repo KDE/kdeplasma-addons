@@ -24,6 +24,8 @@
 
 #include "plasmaweather_export.h"
 
+namespace Plasma {
+
 /**
  * @class WeatherValidator <plasmaweather/weathervalidator.h>
  *
@@ -89,5 +91,7 @@ public Q_SLOTS:
 private:
     const QScopedPointer<class WeatherValidatorPrivate> d;
 };
+
+}
 
 #endif

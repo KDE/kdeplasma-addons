@@ -120,9 +120,9 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
             //qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
             //d->ions.insert(pluginInfo[1], pluginInfo[0]);
 
-            WeatherValidator *validator = new WeatherValidator(this);
-            connect(validator, &WeatherValidator::error, this, &LocationListModel::validatorError);
-            connect(validator, &WeatherValidator::finished, this, &LocationListModel::addSources);
+            auto* validator = new Plasma::WeatherValidator(this);
+            connect(validator, &Plasma::WeatherValidator::error, this, &LocationListModel::validatorError);
+            connect(validator, &Plasma::WeatherValidator::finished, this, &LocationListModel::addSources);
             validator->setDataEngine(dataengine);
             validator->setIon(ionId);
 
@@ -130,7 +130,7 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
         }
     }
 
-    for (WeatherValidator* validator : qAsConst(m_validators)) {
+    for (auto* validator : qAsConst(m_validators)) {
         validator->validate(m_searchString, true);
     }
 }

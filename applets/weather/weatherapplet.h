@@ -23,7 +23,7 @@
 
 #include <plasmaweather/weatherpopupapplet.h>
 
-class WeatherApplet : public WeatherPopupApplet
+class WeatherApplet : public Plasma::WeatherPopupApplet
 {
     Q_OBJECT
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated)
