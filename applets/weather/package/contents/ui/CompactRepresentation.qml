@@ -22,25 +22,52 @@ import QtQuick.Layouts 1.0
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-Item {
+ColumnLayout {
     id: compactRoot
 
     readonly property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
-    readonly property int wantedItemSize: vertical ? width : height
+    readonly property bool showTemperature: plasmoid.nativeInterface.configuration.showTemperatureInCompactMode
 
-    Layout.minimumWidth: vertical ? units.iconSizes.small : wantedItemSize
-    Layout.minimumHeight: vertical ? wantedItemSize : units.iconSizes.small
+    Loader {
+        id: loader
 
-    PlasmaCore.IconItem {
-        anchors.fill: parent
-        source: currentWeatherIconName
+        sourceComponent: showTemperature ? iconAndTextComponent : iconComponent
+        Layout.fillWidth: compactRoot.vertical
+        Layout.fillHeight: !compactRoot.vertical
+        Layout.minimumWidth: item.Layout.minimumWidth
+        Layout.minimumHeight: item.Layout.minimumHeight
+
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: {
+                plasmoid.expanded = !plasmoid.expanded;
+            }
+        }
+   }
+
+    Component {
+        id: iconComponent
+
+        PlasmaCore.IconItem {
+            readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), units.iconSizes.small)
+
+            source: currentWeatherIconName
+            // reset implicit size, so layout in free dimension does not stop at the default one
+            implicitWidth: units.iconSizes.small
+            implicitHeight: units.iconSizes.small
+            Layout.minimumWidth: compactRoot.vertical ? units.iconSizes.small : minIconSize
+            Layout.minimumHeight: compactRoot.vertical ? minIconSize : units.iconSizes.small
+        }
     }
 
-    MouseArea {
-        anchors.fill: parent
+    Component {
+        id: iconAndTextComponent
 
-        onClicked: {
-            plasmoid.expanded = !plasmoid.expanded;
+        IconAndTextItem {
+            vertical: compactRoot.vertical
+            iconSource: currentWeatherIconName
+            text: plasmoid.nativeInterface.panelModel.currentTemperature
         }
     }
 }

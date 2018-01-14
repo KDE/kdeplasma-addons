@@ -39,10 +39,12 @@ T clampValue(T value, int decimals)
 
 namespace {
 namespace AppletConfigKeys {
-inline QString services() { return QStringLiteral("services"); }
+inline QString services()                     { return QStringLiteral("services"); }
+inline QString showTemperatureInCompactMode() { return QStringLiteral("showTemperatureInCompactMode"); }
 }
 namespace StorageConfigKeys {
-const char weatherServiceProviders[] = "weatherServiceProviders";
+const char weatherServiceProviders[] =      "weatherServiceProviders";
+const char showTemperatureInCompactMode[] = "showTemperatureInCompactMode";
 }
 namespace PanelModelKeys {
 inline QString location()                  { return QStringLiteral("location"); }
@@ -84,6 +86,17 @@ void WeatherApplet::init()
     resetPanelModel();
 
     Plasma::WeatherPopupApplet::init();
+}
+
+void WeatherApplet::configChanged()
+{
+    Plasma::WeatherPopupApplet::WeatherPopupApplet::configChanged();
+
+    KConfigGroup cfg = config();
+
+    m_configuration.insert(AppletConfigKeys::showTemperatureInCompactMode(),
+                           cfg.readEntry(StorageConfigKeys::showTemperatureInCompactMode, false));
+    emit configurationChanged();
 }
 
 WeatherApplet::~WeatherApplet()
@@ -460,6 +473,7 @@ QVariantMap WeatherApplet::configValues() const
 
     KConfigGroup cfg = this->config();
     config.insert(AppletConfigKeys::services(), cfg.readEntry(StorageConfigKeys::weatherServiceProviders, QStringList()));
+    config.insert(AppletConfigKeys::showTemperatureInCompactMode(), cfg.readEntry(StorageConfigKeys::showTemperatureInCompactMode, false));
 
     return config;
 }
@@ -478,6 +492,10 @@ void WeatherApplet::saveConfig(const QVariantMap& configChanges)
     auto it = configChanges.find(AppletConfigKeys::services());
     if (it != configChanges.end()) {
         cfg.writeEntry(StorageConfigKeys::weatherServiceProviders, it.value().toStringList());
+    }
+    it = configChanges.find(AppletConfigKeys::showTemperatureInCompactMode());
+    if (it != configChanges.end()) {
+        cfg.writeEntry(StorageConfigKeys::showTemperatureInCompactMode, it.value().toBool());
     }
 
     WeatherPopupApplet::saveConfig(configChanges);

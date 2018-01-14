@@ -31,21 +31,26 @@ class WeatherApplet : public Plasma::WeatherPopupApplet
     Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY modelUpdated)
 
+    Q_PROPERTY(QVariantMap configuration READ configuration NOTIFY configurationChanged FINAL)
+
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet() override;
 
 public: // Plasma::Applet API
     void init() override;
+    void configChanged() override;
 
 public:
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
     QVariantList detailsModel() const { return m_detailsModel; }
     QVariantList noticesModel() const { return m_noticesModel; }
+    QVariantMap configuration() const { return m_configuration; }
 
 Q_SIGNALS:
     void modelUpdated();
+    void configurationChanged();
 
 public: // WeatherPopupApplet API
     QVariantMap configValues() const override;
@@ -70,6 +75,8 @@ private:
     QVariantList m_fiveDaysModel;
     QVariantList m_detailsModel;
     QVariantList m_noticesModel;
+
+    QVariantMap m_configuration;
 };
 
 #endif

@@ -25,6 +25,13 @@ ConfigModel {
         icon: "services"
         source: "configWeatherStation.qml"
     }
+
+    ConfigCategory {
+        name: i18n("Appearance")
+        icon: "preferences-desktop-color"
+        source: "configAppearance.qml"
+    }
+
     ConfigCategory {
         name: i18n("Units")
         icon: "preferences-other"
