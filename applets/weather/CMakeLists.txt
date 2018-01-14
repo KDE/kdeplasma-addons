@@ -15,7 +15,7 @@ target_link_libraries(plasma_applet_weather
     KF5::I18n
 )
 
-install(TARGETS plasma_applet_weather DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/applets)
+install(TARGETS plasma_applet_weather DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
 
 install(FILES wind-arrows.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/weather/)
 
@@ -38,5 +38,5 @@ target_link_libraries(weatherplugin
     Qt5::Qml
 )
 
-install(TARGETS weatherplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/weather)
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/weather)
+install(TARGETS weatherplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/weather)
+install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/weather)
