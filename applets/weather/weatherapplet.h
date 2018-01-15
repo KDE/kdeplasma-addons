@@ -32,6 +32,8 @@ class WeatherApplet : public Plasma::WeatherPopupApplet
     Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY modelUpdated)
 
     Q_PROPERTY(QVariantMap configuration READ configuration NOTIFY configurationChanged FINAL)
+    // used for making this information available to the config pages
+    Q_PROPERTY(bool needsToBeSquare MEMBER m_needsToBeSquare NOTIFY needsToBeSquareChanged FINAL)
 
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
@@ -51,6 +53,7 @@ public:
 Q_SIGNALS:
     void modelUpdated();
     void configurationChanged();
+    void needsToBeSquareChanged();
 
 public: // WeatherPopupApplet API
     QVariantMap configValues() const override;
@@ -77,6 +80,7 @@ private:
     QVariantList m_noticesModel;
 
     QVariantMap m_configuration;
+    bool m_needsToBeSquare = false;
 };
 
 #endif

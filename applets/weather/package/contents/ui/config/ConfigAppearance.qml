@@ -25,6 +25,8 @@ import org.kde.plasma.private.weather 1.0
 ColumnLayout {
     id: displayConfigPage
 
+    readonly property bool canShowTemperature: !plasmoid.nativeInterface.needsToBeSquare
+
     signal configurationChanged
 
     function saveConfig() {
@@ -50,6 +52,7 @@ ColumnLayout {
             Layout.row: 0
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
+            enabled: canShowTemperature
             text: i18n("Show temperature in compact mode:")
         }
 
@@ -58,6 +61,7 @@ ColumnLayout {
 
             Layout.row: 0
             Layout.column: 1
+            enabled: canShowTemperature
 
             onCheckedChanged: displayConfigPage.configurationChanged();
         }

@@ -26,7 +26,8 @@ ColumnLayout {
     id: compactRoot
 
     readonly property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
-    readonly property bool showTemperature: plasmoid.nativeInterface.configuration.showTemperatureInCompactMode
+    readonly property bool showTemperature: plasmoid.nativeInterface.configuration.showTemperatureInCompactMode &&
+                                            !plasmoid.nativeInterface.needsToBeSquare
 
     Loader {
         id: loader
