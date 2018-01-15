@@ -23,18 +23,18 @@ ConfigModel {
     ConfigCategory {
         name: i18n("Weather Station")
         icon: "services"
-        source: "configWeatherStation.qml"
+        source: "config/ConfigWeatherStation.qml"
     }
 
     ConfigCategory {
         name: i18n("Appearance")
         icon: "preferences-desktop-color"
-        source: "configAppearance.qml"
+        source: "config/ConfigAppearance.qml"
     }
 
     ConfigCategory {
         name: i18n("Units")
         icon: "preferences-other"
-        source: "configUnits.qml"
+        source: "config/ConfigUnits.qml"
     }
 }
