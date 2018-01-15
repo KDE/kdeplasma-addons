@@ -164,6 +164,7 @@ ColumnLayout {
 
             QtControls.Button {
                 id: searchButton
+                iconName: "edit-find"
                 text: i18n("Search")
                 enabled: !!searchStringEdit.text && selectedServices.length
                 onClicked: searchLocation();
