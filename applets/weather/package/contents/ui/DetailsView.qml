@@ -23,8 +23,6 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 WeatherListView {
     id: root
 
-    roundedRows: false
-
     delegate: Item {
         anchors.fill: parent
 
