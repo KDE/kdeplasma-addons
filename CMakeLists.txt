@@ -19,7 +19,7 @@ include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
-set(REQUIRED_QT_VERSION 5.3.0)
+set(REQUIRED_QT_VERSION 5.9.0)
 set(KF5_MIN_VERSION 5.42.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui DBus Quick Qml Widgets X11Extras)
 
