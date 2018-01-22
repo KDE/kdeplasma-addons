@@ -1,5 +1,5 @@
 /*
- * Copyright 2012  Luís Gabriel Lima <lampih@gmail.com>
+ * Copyright 2018  Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,43 +15,66 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.1
+import QtQuick 2.9
+
+import QtQuick.Layouts 1.3
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 
-WeatherListView {
+ColumnLayout {
     id: root
 
-    delegate: Item {
-        anchors.fill: parent
-
-        Row {
-            anchors.centerIn: parent
-            height: parent.height
-            width: childrenRect.width
-            spacing: units.smallSpacing
-
-            PlasmaCore.SvgItem {
-                id: icon
-                svg: windSvg
-                elementId: rowData.icon
-                height: naturalSize.height
-                width: naturalSize.width
-                visible: !!rowData.icon
-            }
-
-            PlasmaComponents.Label {
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                }
-                text: rowData.text
-            }
-        }
-    }
+    property alias model: repeater.model
 
     PlasmaCore.Svg {
         id: windSvg
+
         imagePath: "weather/wind-arrows"
+    }
+
+    ColumnLayout {
+        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+
+        spacing: units.largeSpacing
+
+        Repeater {
+            id: repeater
+
+            delegate: Loader {
+                property int rowIndex: index
+                property var rowData: modelData
+
+                Layout.minimumWidth: item.Layout.minimumWidth
+                Layout.minimumHeight: item.Layout.minimumHeight
+                Layout.alignment: item.Layout.alignment
+                Layout.preferredWidth: item.Layout.preferredWidth
+                Layout.preferredHeight: item.Layout.preferredHeight
+
+                sourceComponent: RowLayout {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    PlasmaCore.SvgItem {
+                        id: icon
+
+                        Layout.preferredHeight: naturalSize.height
+                        Layout.preferredWidth: naturalSize.width
+
+                        svg: windSvg
+                        elementId: rowData.icon
+
+                        visible: !!rowData.icon
+                    }
+
+                    PlasmaComponents.Label {
+                        id: text
+
+                        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                        text: rowData.text
+                    }
+                }
+            }
+        }
     }
 }

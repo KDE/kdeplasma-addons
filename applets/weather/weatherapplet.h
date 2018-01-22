@@ -27,7 +27,7 @@ class WeatherApplet : public Plasma::WeatherPopupApplet
 {
     Q_OBJECT
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated)
-    Q_PROPERTY(QVariantList fiveDaysModel READ fiveDaysModel NOTIFY modelUpdated)
+    Q_PROPERTY(QVariantList forecastModel READ forecastModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY modelUpdated)
     Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY modelUpdated)
 
@@ -45,7 +45,7 @@ public: // Plasma::Applet API
 
 public:
     QVariantMap panelModel() const { return m_panelModel; }
-    QVariantList fiveDaysModel() const { return m_fiveDaysModel; }
+    QVariantList forecastModel() const { return m_forecastModel; }
     QVariantList detailsModel() const { return m_detailsModel; }
     QVariantList noticesModel() const { return m_noticesModel; }
     QVariantMap configuration() const { return m_configuration; }
@@ -65,7 +65,7 @@ private:
     bool isValidData(const QString &data) const;
     void resetPanelModel();
     void updatePanelModel(const Plasma::DataEngine::Data &data);
-    void updateFiveDaysModel(const Plasma::DataEngine::Data &data);
+    void updateForecastModel(const Plasma::DataEngine::Data &data);
     void updateDetailsModel(const Plasma::DataEngine::Data &data);
     void updateNoticesModel(const Plasma::DataEngine::Data &data);
     QString convertTemperature(const KUnitConversion::Unit& format, float value,
@@ -75,7 +75,7 @@ private:
 
 private:
     QVariantMap m_panelModel;
-    QVariantList m_fiveDaysModel;
+    QVariantList m_forecastModel;
     QVariantList m_detailsModel;
     QVariantList m_noticesModel;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012  Luís Gabriel Lima <lampih@gmail.com>
+ * Copyright 2018  Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,23 +15,59 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.1
+import QtQuick 2.9
 
-Column {
+import QtQuick.Layouts 1.3
+
+import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+
+ColumnLayout {
     id: root
 
-    property var model
+    property alias model: categoryRepeater.model
     readonly property bool hasContent: model && model.length > 0 && model[0].length > 0 && model[1].length > 0
 
     spacing: units.largeSpacing
 
-    Notice {
-        title: i18nc("weather warnings", "Warnings Issued:")
-        model: root.model[0]
+    Repeater {
+        id: categoryRepeater
+
+        delegate: ColumnLayout {
+            property var categoryData: modelData
+
+            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+
+            PlasmaExtras.Heading {
+                level: 4
+
+                text: index == 0 ? i18nc("weather warnings", "Warnings Issued") : i18nc("weather watches" ,"Watches Issued")
+            }
+
+            Repeater {
+                id: repeater
+
+                model: categoryData
+
+                delegate: PlasmaComponents.Label {
+                    font.underline: true
+                    color: theme.linkColor
+
+                    text: modelData.description
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onClicked: {
+                            Qt.openUrlExternally(modelData.info);
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    Notice {
-        title: i18nc("weather watches" ,"Watches Issued:")
-        model: root.model[1]
+    Item {
+        Layout.fillHeight: true
     }
 }

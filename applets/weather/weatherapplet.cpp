@@ -207,14 +207,14 @@ void WeatherApplet::updatePanelModel(const Plasma::DataEngine::Data &data)
     m_panelModel[PanelModelKeys::creditUrl()] = data[QStringLiteral("Credit Url")].toString();
 }
 
-void WeatherApplet::updateFiveDaysModel(const Plasma::DataEngine::Data &data)
+void WeatherApplet::updateForecastModel(const Plasma::DataEngine::Data &data)
 {
     const int foreCastDayCount = data[QStringLiteral("Total Weather Days")].toInt();
     if (foreCastDayCount <= 0) {
         return;
     }
 
-    m_fiveDaysModel.clear();
+    m_forecastModel.clear();
 
     const int reportTemperatureUnit = data[QStringLiteral("Temperature Unit")].toInt();
     const KUnitConversion::Unit displayTemperatureUnit = temperatureUnit();
@@ -281,16 +281,16 @@ void WeatherApplet::updateFiveDaysModel(const Plasma::DataEngine::Data &data)
     }
 
     if (!dayItems.isEmpty()) {
-        m_fiveDaysModel << dayItems;
+        m_forecastModel << dayItems;
     }
     if (!conditionItems.isEmpty()) {
-        m_fiveDaysModel << conditionItems;
+        m_forecastModel << conditionItems;
     }
     if (!hiItems.isEmpty())  {
-        m_fiveDaysModel << hiItems;
+        m_forecastModel << hiItems;
     }
     if (!lowItems.isEmpty()) {
-        m_fiveDaysModel << lowItems;
+        m_forecastModel << lowItems;
     }
 
     m_panelModel[PanelModelKeys::totalDays()] = i18ncp("Forecast period timeframe", "1 Day",
@@ -459,7 +459,7 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     }
 
     updatePanelModel(data);
-    updateFiveDaysModel(data);
+    updateForecastModel(data);
     updateDetailsModel(data);
     updateNoticesModel(data);
     WeatherPopupApplet::dataUpdated(source, data);
@@ -482,7 +482,7 @@ void WeatherApplet::saveConfig(const QVariantMap& configChanges)
 {
     // TODO: if just units where changed there is no need to reset the complete model or reconnect to engine
     resetPanelModel();
-    m_fiveDaysModel.clear();
+    m_forecastModel.clear();
     m_detailsModel.clear();
 
     emit modelUpdated();
