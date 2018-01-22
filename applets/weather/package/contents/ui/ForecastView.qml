@@ -39,6 +39,7 @@ ColumnLayout {
             font.bold: true
             // still needed? was in old code
             opacity: (text.indexOf("ight") !== -1 || text.indexOf("nite") !== -1) ? 0.6 : 1
+            horizontalAlignment: Text.AlignHCenter
 
             text: {
                 var time = cellData;
@@ -56,6 +57,8 @@ ColumnLayout {
 
         PlasmaComponents.Label {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+            horizontalAlignment: Text.AlignHCenter
 
             text: cellData
         }
