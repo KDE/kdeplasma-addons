@@ -19,9 +19,16 @@
 
 #include "charrunner.h"
 
-#include <KIcon>
+// KF
+#include <KRunner/QueryMatch>
+#include <KLocalizedString>
 
-#include <Plasma/QueryMatch>
+
+//Names of config-entries
+static const char CONFIG_TRIGGERWORD[] = "triggerWord";
+static const char CONFIG_ALIASES[] = "aliases";
+static const char CONFIG_CODES[] = "codes";
+
 
 CharacterRunner::CharacterRunner( QObject* parent, const QVariantList &args )
     : Plasma::AbstractRunner(parent, args)
@@ -52,7 +59,6 @@ void CharacterRunner::reloadConfiguration()
 void CharacterRunner::match(Plasma::RunnerContext &context)
 {
     QString term = context.query();
-    QString specChar;
 
     term = term.replace(QLatin1Char( ' ' ), QLatin1String( "" )); //remove blanks
     if (term.length() < 2) //ignore too short queries
@@ -78,17 +84,18 @@ void CharacterRunner::match(Plasma::RunnerContext &context)
     }
 
     //make special caracter out of the hex.-code
-    specChar=QString();
-    specChar.toUtf8();
-    specChar[0]=hex;
+    const QString specChar = QChar(hex);
 
     //create match
     Plasma::QueryMatch match(this);
     match.setType(Plasma::QueryMatch::InformationalMatch);
-    match.setIcon(KIcon(QLatin1String( "accessories-character-map" )));
+    match.setIconName(QStringLiteral("accessories-character-map"));
     match.setText(specChar);
     match.setData(specChar);
     match.setId(QString());
-    context.addMatch(term, match);
+    context.addMatch(match);
 }
 
+K_EXPORT_PLASMA_RUNNER(CharacterRunner, CharacterRunner)
+
+#include "charrunner.moc"

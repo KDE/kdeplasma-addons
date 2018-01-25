@@ -31,8 +31,8 @@
          </widget>
         </item>
         <item>
-         <widget class="KLineEdit" name="edit_trigger">
-          <property name="showClearButton" stdset="0">
+         <widget class="QLineEdit" name="edit_trigger">
+          <property name="clearButtonEnabled">
            <bool>true</bool>
           </property>
          </widget>
@@ -147,13 +147,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>edit_trigger</tabstop>
  </tabstops>

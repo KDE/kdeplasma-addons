@@ -20,8 +20,7 @@
 #ifndef CHARRUNNER_H
 #define CHARRUNNER_H
 
-#include <Plasma/AbstractRunner>
-#include "charrunner_config.h"
+#include <KRunner/AbstractRunner>
 
 class CharacterRunner : public Plasma::AbstractRunner
 {
@@ -29,9 +28,10 @@ class CharacterRunner : public Plasma::AbstractRunner
 
   public:
     CharacterRunner(QObject* parent, const QVariantList &args);
-    ~CharacterRunner();
-    void match(Plasma::RunnerContext &context);
-    void reloadConfiguration();
+    ~CharacterRunner() override;
+
+    void match(Plasma::RunnerContext &context) override;
+    void reloadConfiguration() override;
 	
   private:
     //config-variables
@@ -39,7 +39,5 @@ class CharacterRunner : public Plasma::AbstractRunner
     QList<QString> m_aliases;
     QList<QString> m_codes;
 };
-
-K_EXPORT_PLASMA_RUNNER(CharacterRunner, CharacterRunner)
 
 #endif

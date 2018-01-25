@@ -17,20 +17,24 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//Project-Includes
 #include "charrunner_config.h"
-//KDE-Includes
-#include <plasma/abstractrunner.h>
 
-K_EXPORT_RUNNER_CONFIG(CharacterRunner, CharacterRunnerConfig)
+// KF
+#include <KRunner/AbstractRunner>
+#include <KSharedConfig>
+
+//Names of config-entries
+static const char CONFIG_TRIGGERWORD[] = "triggerWord";
+static const char CONFIG_ALIASES[] = "aliases";
+static const char CONFIG_CODES[] = "codes";
 
 CharacterRunnerConfigForm::CharacterRunnerConfigForm(QWidget* parent) : QWidget(parent)
 {
     setupUi(this);
 }
 
-CharacterRunnerConfig::CharacterRunnerConfig(QWidget* parent, const QVariantList& args) :
-        KCModule(ConfigFactory::componentData(), parent, args)
+CharacterRunnerConfig::CharacterRunnerConfig(QWidget* parent, const QVariantList& args)
+    : KCModule(parent, args)
 {
     m_ui = new CharacterRunnerConfigForm(this);
 
@@ -119,3 +123,8 @@ void CharacterRunnerConfig::defaults()
 
     emit changed(true);
 }
+
+K_PLUGIN_FACTORY(CharacterRunnerConfigFactory,
+                 registerPlugin<CharacterRunnerConfig>(QStringLiteral("kcm_krunner_charrunner"));)
+
+#include "charrunner_config.moc"

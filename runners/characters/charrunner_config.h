@@ -22,13 +22,9 @@
 
 //Project-Includes
 #include "ui_charrunner_config.h"
-//KDE-Includes
+// KF
 #include <KCModule>
 
-//Names of config-entries
-static const char CONFIG_TRIGGERWORD[] = "triggerWord";
-static const char CONFIG_ALIASES[] = "aliases";
-static const char CONFIG_CODES[] = "codes";
 
 class CharacterRunnerConfigForm : public QWidget, public Ui::CharacterRunnerConfigUi
 {
@@ -43,12 +39,14 @@ class CharacterRunnerConfig : public KCModule
   Q_OBJECT
 
   public:
-    explicit CharacterRunnerConfig(QWidget* parent = 0, const QVariantList& args = QVariantList());
+    explicit CharacterRunnerConfig(QWidget* parent, const QVariantList& args = QVariantList());
 
-  public slots:
-    void save();
-    void load();
-    void defaults();
+  public Q_SLOTS:
+    void save() override;
+    void load() override;
+    void defaults() override;
+
+  private Q_SLOTS:
     void addItem();
     void deleteItem();
 
