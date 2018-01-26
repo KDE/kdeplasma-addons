@@ -94,16 +94,15 @@ void KonsoleSessions::loadSessions()
         QFileInfo info(profilePath);
         const QString profileName = info.baseName();
 
-        QString niceName=profileName;
         KConfig _config(profilePath, KConfig::SimpleConfig);
         if (_config.hasGroup("General"))
         {
+            KonsoleProfileData profileData;
             KConfigGroup cfg(&_config, "General");
-            if (cfg.hasKey("Name")) {
-                niceName = cfg.readEntry("Name");
-            }
+            profileData.displayName = cfg.readEntry("Name", profileName);
+            profileData.iconName = cfg.readEntry("Icon", QStringLiteral("utilities-terminal"));
 
-            m_sessions.insert(profileName, niceName);
+            m_sessions.insert(profileName, profileData);
         }
     }
 }
@@ -120,22 +119,24 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
     }
 
     if (term.compare(QLatin1String( "konsole" ), Qt::CaseInsensitive) == 0) {
-        QHashIterator<QString, QString> i(m_sessions);
+        QHashIterator<QString, KonsoleProfileData> i(m_sessions);
         while (i.hasNext()) {
             i.next();
+            const auto& profileData = i.value();
+
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::PossibleMatch);
             match.setRelevance(1.0);
-            match.setIconName(QStringLiteral("utilities-terminal"));
+            match.setIconName(profileData.iconName);
             match.setData(i.key());
-            match.setText(QLatin1String( "Konsole: " ) + i.value());
+            match.setText(QLatin1String("Konsole: ") + profileData.displayName);
             context.addMatch(match);
         }
     } else {
         if (term.startsWith(QLatin1String("konsole "), Qt::CaseInsensitive)) {
             term.remove(0, 8);
         }
-        QHashIterator<QString, QString> i(m_sessions);
+        QHashIterator<QString, KonsoleProfileData> i(m_sessions);
         while (i.hasNext()) {
             if (!context.isValid()) {
                 return;
@@ -143,14 +144,15 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
 
             i.next();
 
-            if (i.value().contains(term, Qt::CaseInsensitive)) {
+            const auto& profileData = i.value();
+            if (profileData.displayName.contains(term, Qt::CaseInsensitive)) {
                 Plasma::QueryMatch match(this);
                 match.setType(Plasma::QueryMatch::PossibleMatch);
-                match.setIconName(QStringLiteral("utilities-terminal"));
+                match.setIconName(profileData.iconName);
                 match.setData(i.key());
-                match.setText(QLatin1String( "Konsole: " ) + i.value());
+                match.setText(QLatin1String("Konsole: ") + profileData.displayName);
 
-                if (i.value().compare(term, Qt::CaseInsensitive) == 0) {
+                if (profileData.displayName.compare(term, Qt::CaseInsensitive) == 0) {
                     match.setRelevance(1.0);
                 } else {
                     match.setRelevance(0.6);

@@ -24,6 +24,14 @@
 
 class KDirWatch;
 
+struct KonsoleProfileData
+{
+    QString displayName;
+    QString iconName;
+};
+
+Q_DECLARE_TYPEINFO(KonsoleProfileData, Q_MOVABLE_TYPE);
+
 
 class KonsoleSessions : public Plasma::AbstractRunner {
     Q_OBJECT
@@ -43,7 +51,7 @@ private Q_SLOTS:
 private:
     KDirWatch* m_sessionWatch = nullptr;
 
-    QHash<QString, QString> m_sessions;
+    QHash<QString, KonsoleProfileData> m_sessions;
 };
 
 #endif
