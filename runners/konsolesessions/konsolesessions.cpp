@@ -20,58 +20,82 @@
 
 #include "konsolesessions.h"
 
-#include <QFileInfo>
+// KF
 #include <KDirWatch>
-#include <KDebug>
-#include <KStandardDirs>
 #include <KToolInvocation>
-#include <KIcon>
+#include <KLocalizedString>
 #include <KConfig>
-#include <KConfigGroup>
-#include <kio/global.h>
+// Qt
+#include <QFileInfo>
+#include <QDir>
+#include <QStandardPaths>
 
 
 KonsoleSessions::KonsoleSessions(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
-    Q_UNUSED(args);
-    setObjectName(QLatin1String( "Konsole Sessions" ));
-    m_icon = KIcon(QLatin1String( "utilities-terminal" ));
+    setObjectName(QStringLiteral("Konsole Sessions"));
+
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
-    loadSessions();
 
-    KDirWatch *historyWatch = new KDirWatch(this);
-    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", QLatin1String( "konsole/" ));
-    foreach (const QString &dir, sessiondirs) {
-        historyWatch->addDir(dir);
-    }
-
-    connect(historyWatch, SIGNAL(dirty(QString)), this,SLOT(loadSessions()));
-    connect(historyWatch, SIGNAL(created(QString)), this,SLOT(loadSessions()));
-    connect(historyWatch, SIGNAL(deleted(QString)), this,SLOT(loadSessions()));
-
-    Plasma::RunnerSyntax s(QLatin1String( ":q:" ), i18n("Finds Konsole sessions matching :q:."));
-    s.addExampleQuery(QLatin1String( "konsole :q:" ));
+    Plasma::RunnerSyntax s(QStringLiteral( ":q:" ), i18n("Finds Konsole sessions matching :q:."));
+    s.addExampleQuery(QStringLiteral( "konsole :q:" ));
     addSyntax(s);
 
-    addSyntax(Plasma::RunnerSyntax(QLatin1String( "konsole" ), i18n("Lists all the Konsole sessions in your account.")));
+    setDefaultSyntax(Plasma::RunnerSyntax(QStringLiteral( "konsole" ), i18n("Lists all the Konsole sessions in your account.")));
+
+    connect(this, &Plasma::AbstractRunner::prepare, this, &KonsoleSessions::slotPrepare);
+    connect(this, &Plasma::AbstractRunner::teardown, this, &KonsoleSessions::slotTeardown);
 }
 
 KonsoleSessions::~KonsoleSessions()
 {
 }
 
+void KonsoleSessions::slotPrepare()
+{
+    loadSessions();
+
+    if (!m_sessionWatch) {
+        m_sessionWatch = new KDirWatch(this);
+        const QStringList sessiondirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
+        foreach (const QString &dir, sessiondirs) {
+            m_sessionWatch->addDir(dir);
+        }
+
+        connect(m_sessionWatch, &KDirWatch::dirty, this, &KonsoleSessions::loadSessions);
+        connect(m_sessionWatch, &KDirWatch::created, this, &KonsoleSessions::loadSessions);
+        connect(m_sessionWatch, &KDirWatch::deleted, this, &KonsoleSessions::loadSessions);
+    }
+}
+
+void KonsoleSessions::slotTeardown()
+{
+    delete m_sessionWatch;
+    m_sessionWatch = nullptr;
+    m_sessions.clear();
+}
+
 void KonsoleSessions::loadSessions()
 {
-    const QStringList list = KGlobal::dirs()->findAllResources("data", QLatin1String( "konsole/*.profile" ), KStandardDirs::NoDuplicates);
-    QStringList::ConstIterator end = list.constEnd();
-    for (QStringList::ConstIterator it = list.constBegin(); it != end; ++it) {
-        QFileInfo info(*it);
-        const QString profileName = KIO::decodeFileName(info.baseName());
+    m_sessions.clear();
+
+    QStringList profilesPaths;
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
+
+    for (const auto& dir : dirs) {
+        const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.profile")});
+        for (const QString& fileName : fileNames) {
+            profilesPaths.append(dir + QLatin1Char('/') + fileName);
+        }
+    }
+
+    for (const auto& profilePath : qAsConst(profilesPaths)) {
+        QFileInfo info(profilePath);
+        const QString profileName = info.baseName();
 
         QString niceName=profileName;
-        //kDebug()<<" loadSessions :";
-        KConfig _config(*it, KConfig::SimpleConfig);
+        KConfig _config(profilePath, KConfig::SimpleConfig);
         if (_config.hasGroup("General"))
         {
             KConfigGroup cfg(&_config, "General");
@@ -80,7 +104,6 @@ void KonsoleSessions::loadSessions()
             }
 
             m_sessions.insert(profileName, niceName);
-            //kDebug()<<" profileName :"<<profileName<<" niceName :"<<niceName;
         }
     }
 }
@@ -103,10 +126,10 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::PossibleMatch);
             match.setRelevance(1.0);
-            match.setIcon(m_icon);
+            match.setIconName(QStringLiteral("utilities-terminal"));
             match.setData(i.key());
             match.setText(QLatin1String( "Konsole: " ) + i.value());
-            context.addMatch(term, match);
+            context.addMatch(match);
         }
     } else {
         if (term.startsWith(QLatin1String("konsole "), Qt::CaseInsensitive)) {
@@ -119,11 +142,11 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
             }
 
             i.next();
-            kDebug() << "checking" << term << i.value();
+
             if (i.value().contains(term, Qt::CaseInsensitive)) {
                 Plasma::QueryMatch match(this);
                 match.setType(Plasma::QueryMatch::PossibleMatch);
-                match.setIcon(m_icon);
+                match.setIconName(QStringLiteral("utilities-terminal"));
                 match.setData(i.key());
                 match.setText(QLatin1String( "Konsole: " ) + i.value());
 
@@ -133,7 +156,7 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
                     match.setRelevance(0.6);
                 }
 
-                context.addMatch(term, match);
+                context.addMatch(match);
             }
         }
     }
@@ -143,14 +166,19 @@ void KonsoleSessions::run(const Plasma::RunnerContext &context, const Plasma::Qu
 {
     Q_UNUSED(context)
     const QString session = match.data().toString();
-    kDebug() << "Open Konsole Session " << session;
 
     if (!session.isEmpty()) {
-        QStringList args;
-        args << QLatin1String( "--profile" );
-        args << session;
-        kDebug() << "=== START: konsole" << args;
-        KToolInvocation::kdeinitExec(QLatin1String( "konsole" ), args);
+        return;
     }
+
+    const QStringList args {
+        QStringLiteral("--profile"),
+        session
+    };
+    KToolInvocation::kdeinitExec(QStringLiteral("konsole"), args);
 }
 
+
+K_EXPORT_PLASMA_RUNNER(konsolesessions, KonsoleSessions)
+
+#include "konsolesessions.moc"

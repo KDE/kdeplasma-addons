@@ -20,28 +20,30 @@
 #ifndef KONSOLESESSIONS_H
 #define KONSOLESESSIONS_H
 
-#include <plasma/abstractrunner.h>
+#include <KRunner/AbstractRunner>
 
-#include <KIcon>
+class KDirWatch;
+
 
 class KonsoleSessions : public Plasma::AbstractRunner {
     Q_OBJECT
 
 public:
     KonsoleSessions( QObject *parent, const QVariantList& args );
-    ~KonsoleSessions();
+    ~KonsoleSessions() override;
 
-    void match(Plasma::RunnerContext &context);
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+    void match(Plasma::RunnerContext &context) override;
+    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
 
-protected slots:
+private Q_SLOTS:
     void loadSessions();
-private:
-    KIcon m_icon;
-    QHash<QString, QString> m_sessions;
-    QTime m_time;
-};
+    void slotPrepare();
+    void slotTeardown();
 
-K_EXPORT_PLASMA_RUNNER(konsolesessions, KonsoleSessions)
+private:
+    KDirWatch* m_sessionWatch = nullptr;
+
+    QHash<QString, QString> m_sessions;
+};
 
 #endif
