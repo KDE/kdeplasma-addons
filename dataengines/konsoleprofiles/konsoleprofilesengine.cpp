@@ -31,7 +31,7 @@
 
 KonsoleProfilesEngine::KonsoleProfilesEngine(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args),
-      m_dirWatch(0)
+      m_dirWatch(nullptr)
 {
     init();
 }
