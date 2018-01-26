@@ -61,7 +61,7 @@ void KateSessions::slotPrepare()
 
     // listen for changes to the list of kate sessions
     if (!m_sessionWatch) {
-        KDirWatch *m_sessionWatch = new KDirWatch(this);
+        m_sessionWatch = new KDirWatch(this);
         m_sessionWatch->addDir(m_sessionsFolderPath);
         connect(m_sessionWatch, &KDirWatch::dirty, this, &KateSessions::loadSessions);
         connect(m_sessionWatch, &KDirWatch::created, this, &KateSessions::loadSessions);
