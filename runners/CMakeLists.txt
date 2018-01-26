@@ -10,9 +10,6 @@ add_subdirectory(characters)
 add_subdirectory(dictionary)
 # 
 # if(KDEPIMLIBS_FOUND)
-#  if (NOT KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
-#   add_subdirectory(contacts)
-#  endif (NOT KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
 #  add_subdirectory(events)
 # endif(KDEPIMLIBS_FOUND)
 # 
