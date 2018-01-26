@@ -58,9 +58,9 @@ void KonsoleSessions::slotPrepare()
 
     if (!m_sessionWatch) {
         m_sessionWatch = new KDirWatch(this);
-        const QStringList sessiondirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
-        foreach (const QString &dir, sessiondirs) {
-            m_sessionWatch->addDir(dir);
+        const QStringList konsoleDataBaseDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+        for (const QString& konsoleDataBaseDir : konsoleDataBaseDirs) {
+            m_sessionWatch->addDir(konsoleDataBaseDir + QLatin1String("/konsole"));
         }
 
         connect(m_sessionWatch, &KDirWatch::dirty, this, &KonsoleSessions::loadSessions);
