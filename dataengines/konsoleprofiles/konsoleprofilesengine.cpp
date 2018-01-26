@@ -19,14 +19,15 @@
 #include "konsoleprofilesengine.h"
 #include "konsoleprofilesservice.h"
 
+// KF
+#include <KDirWatch>
+#include <KConfig>
+// Qt
+#include <QFileInfo>
+#include <QDir>
+#include <QStandardPaths>
 #include <QDebug>
 
-#include <KStandardDirs>
-#include <KDirWatch>
-#include <QFileInfo>
-#include <kio/global.h>
-#include <KGlobal>
-#include <KGlobalSettings>
 
 KonsoleProfilesEngine::KonsoleProfilesEngine(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args),
@@ -44,8 +45,13 @@ void KonsoleProfilesEngine::init()
     qDebug() << "KonsoleProfilesDataEngine init";
 
     m_dirWatch = new KDirWatch( this );
+    const QStringList konsoleDataBaseDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+    for (const QString& konsoleDataBaseDir : konsoleDataBaseDirs) {
+        m_dirWatch->addDir(konsoleDataBaseDir + QLatin1String("/konsole"));
+    }
+    connect(m_dirWatch, &KDirWatch::dirty, this, &KonsoleProfilesEngine::profilesChanged);
+
     loadProfiles();
-    connect(m_dirWatch, SIGNAL(dirty(QString)), this, SLOT(profilesChanged()));
 }
 
 Plasma::Service *KonsoleProfilesEngine::serviceForSource(const QString &source)
@@ -63,20 +69,21 @@ void KonsoleProfilesEngine::profilesChanged()
 
 void KonsoleProfilesEngine::loadProfiles()
 {
-    const QStringList lst = KGlobal::dirs()->findDirs( "data", "konsole/" );
-    for ( int i = 0; i < lst.count(); i++ )
-    {
-        m_dirWatch->addDir( lst[i] );
+    QStringList profilesPaths;
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
+
+    for (const auto& dir : dirs) {
+        const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.profile")});
+        for (const QString& fileName : fileNames) {
+            profilesPaths.append(dir + QLatin1Char('/') + fileName);
+        }
     }
 
-    const QStringList list = KGlobal::dirs()->findAllResources( "data", "konsole/*.profile", KStandardDirs::NoDuplicates );
-    const QStringList::ConstIterator end = list.constEnd();
-    for (QStringList::ConstIterator it = list.constBegin(); it != end; ++it)
-    {
-        QFileInfo info( *it );
-        const QString profileName = KIO::decodeFileName( info.baseName() );
+    for (const auto& profilePath : qAsConst(profilesPaths)) {
+        QFileInfo info(profilePath);
+        const QString profileName = info.baseName();
         QString niceName = profileName;
-        KConfig cfg( *it, KConfig::SimpleConfig );
+        KConfig cfg(profilePath, KConfig::SimpleConfig);
 
         if ( cfg.hasGroup( "General" ) ) {
             KConfigGroup grp( &cfg, "General" );

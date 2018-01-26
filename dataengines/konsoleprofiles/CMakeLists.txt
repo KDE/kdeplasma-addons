@@ -10,7 +10,6 @@ target_link_libraries(plasma_engine_konsoleprofiles
     KF5::Plasma
     KF5::Service
     KF5::KIOCore
-    KF5::KDELibs4Support
 )
 
 kcoreaddons_desktop_to_json(plasma_engine_konsoleprofiles plasma-dataengine-konsoleprofiles.desktop SERVICE_TYPES plasma-dataengine.desktop)
