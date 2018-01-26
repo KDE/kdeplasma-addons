@@ -29,10 +29,10 @@ class KonsoleProfilesEngine : public Plasma::DataEngine
 
 public:
     KonsoleProfilesEngine(QObject *parent, const QVariantList &args);
-    ~KonsoleProfilesEngine();
+    ~KonsoleProfilesEngine() override;
 
     void init();
-    Plasma::Service *serviceForSource(const QString &source) Q_DECL_OVERRIDE;
+    Plasma::Service *serviceForSource(const QString &source) override;
 
 private Q_SLOTS:
     void profilesChanged();
