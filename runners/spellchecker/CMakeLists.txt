@@ -14,7 +14,6 @@ target_link_libraries(kcm_krunner_spellcheck
     Qt5::Gui
     KF5::Runner
     KF5::KCMUtils
-    KF5::KDELibs4Support
     KF5::I18n
 )
 
