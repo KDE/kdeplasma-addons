@@ -164,7 +164,7 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
         } else {
             //existing strips haven't been stored in the conf-file yet, do that now, oldest first, newest last
             QDir dir(dirPath);
-            comics = dir.entryList(QStringList() << QUrl::toPercentEncoding(comicName + ':') + '*', QDir::Files, QDir::Time | QDir::Reversed);
+            comics = dir.entryList(QStringList() << QString::fromLatin1(QUrl::toPercentEncoding(comicName + ':')) + '*', QDir::Files, QDir::Time | QDir::Reversed);
             QStringList::iterator it = comics.begin();
             while (it != comics.end()) {
                 //only count images, not the conf files
