@@ -32,7 +32,7 @@ Q_PROPERTY(bool active READ active NOTIFY activeChanged)
 
 public:
     MinimizeAll();
-    ~MinimizeAll();
+    ~MinimizeAll() override;
 
     Q_INVOKABLE void minimizeAllWindows();
     Q_INVOKABLE void unminimizeAllWindows();

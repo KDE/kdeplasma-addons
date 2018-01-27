@@ -29,9 +29,9 @@ class FileSystemNoteLoader : public AbstractNoteLoader
 {
 public:
     explicit FileSystemNoteLoader();
-    virtual QStringList allNoteIds() Q_DECL_OVERRIDE;
-    virtual Note* loadNote(const QString &id) Q_DECL_OVERRIDE;
-    virtual void deleteNoteResources(const QString &id) Q_DECL_OVERRIDE;
+    QStringList allNoteIds() override;
+    Note* loadNote(const QString &id) override;
+    void deleteNoteResources(const QString &id) override;
 
 private:
     QDir m_notesDir;

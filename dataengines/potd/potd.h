@@ -42,13 +42,13 @@ class PotdEngine : public Plasma::DataEngine
 
     public:
         PotdEngine( QObject* parent, const QVariantList& args );
-        ~PotdEngine();
+        ~PotdEngine() override;
 
     protected:
-        bool sourceRequestEvent( const QString &identifier ) Q_DECL_OVERRIDE;
+        bool sourceRequestEvent( const QString &identifier ) override;
 
     protected Q_SLOTS:
-        bool updateSourceEvent( const QString &identifier ) Q_DECL_OVERRIDE;
+        bool updateSourceEvent( const QString &identifier ) override;
 
     private Q_SLOTS:
         void finished( PotdProvider* );

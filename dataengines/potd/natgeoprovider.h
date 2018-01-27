@@ -49,7 +49,7 @@ class NatGeoProvider : public PotdProvider
         /**
          * Destroys the APOD provider.
          */
-        ~NatGeoProvider();
+        ~NatGeoProvider() override;
 
         /**
          * Returns the requested image.
@@ -57,7 +57,7 @@ class NatGeoProvider : public PotdProvider
          * Note: This method returns only a valid image after the
          *       finished() signal has been emitted.
          */
-        QImage image() const Q_DECL_OVERRIDE;
+        QImage image() const override;
 
     private:
       class Private;

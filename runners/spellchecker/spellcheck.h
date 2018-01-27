@@ -33,15 +33,15 @@ Q_OBJECT
 
 public:
     SpellCheckRunner(QObject* parent, const QVariantList &args);
-    ~SpellCheckRunner();
+    ~SpellCheckRunner() override;
 
-    void match(Plasma::RunnerContext &context) Q_DECL_OVERRIDE;
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &action) Q_DECL_OVERRIDE;
+    void match(Plasma::RunnerContext &context) override;
+    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &action) override;
 
-    void reloadConfiguration() Q_DECL_OVERRIDE;
+    void reloadConfiguration() override;
 
 protected Q_SLOTS:
-    void init() Q_DECL_OVERRIDE;
+    void init() override;
     void loaddata();
     void destroydata();
 

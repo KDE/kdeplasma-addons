@@ -45,7 +45,7 @@ class NOAAProvider : public PotdProvider
         /**
          * Destroys the NOAA provider.
          */
-        ~NOAAProvider();
+        ~NOAAProvider() override;
 
         /**
          * Returns the requested image.
@@ -53,7 +53,7 @@ class NOAAProvider : public PotdProvider
          * Note: This method returns only a valid image after the
          *       finished() signal has been emitted.
          */
-        QImage image() const Q_DECL_OVERRIDE;
+        QImage image() const override;
 
     private:
       class Private;

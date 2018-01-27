@@ -39,7 +39,7 @@ class StripSelector : public QObject
     Q_OBJECT
 
     public:
-        virtual ~StripSelector();
+        ~StripSelector() override;
 
         /**
          * Select a strip depending on the subclass

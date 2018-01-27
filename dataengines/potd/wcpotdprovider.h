@@ -47,7 +47,7 @@ class WcpotdProvider : public PotdProvider
         /**
          * Destroys the Wcpotd provider.
          */
-        ~WcpotdProvider();
+        ~WcpotdProvider() override;
 
         /**
          * Returns the requested image.
@@ -55,7 +55,7 @@ class WcpotdProvider : public PotdProvider
          * Note: This method returns only a valid image after the
          *       finished() signal has been emitted.
          */
-        QImage image() const Q_DECL_OVERRIDE;
+        QImage image() const override;
 
     private:
       class Private;

@@ -47,7 +47,7 @@ class FlickrProvider : public PotdProvider
         /**
          * Destroys the flickr provider.
          */
-        ~FlickrProvider();
+        ~FlickrProvider() override;
 
         /**
          * Returns the requested image.
@@ -55,7 +55,7 @@ class FlickrProvider : public PotdProvider
          * Note: This method returns only a valid image after the
          *       finished() signal has been emitted.
          */
-        QImage image() const Q_DECL_OVERRIDE;
+        QImage image() const override;
 
     private:
       class Private;

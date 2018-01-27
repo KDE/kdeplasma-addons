@@ -35,7 +35,7 @@ class ContentTracker : public QObject
 
 public:
     ContentTracker(QObject *parent = 0);
-    ~ContentTracker();
+    ~ContentTracker() override;
 
     QString uri() const;
     QString mimeType() const;

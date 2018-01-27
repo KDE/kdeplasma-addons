@@ -29,10 +29,10 @@ Q_OBJECT
 
 public:
     ConverterRunner(QObject* parent, const QVariantList &args);
-    ~ConverterRunner();
+    ~ConverterRunner() override;
 
-    void match(Plasma::RunnerContext &context) Q_DECL_OVERRIDE;
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) Q_DECL_OVERRIDE;
+    void match(Plasma::RunnerContext &context) override;
+    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
 
 private:
     QStringList m_separators;

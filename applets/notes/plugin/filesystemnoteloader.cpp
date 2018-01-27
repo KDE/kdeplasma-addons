@@ -33,7 +33,7 @@ Q_OBJECT
 public:
     FileNote(const QString &path, const QString &id);
     void load();
-    void save(const QString &text) Q_DECL_OVERRIDE;
+    void save(const QString &text) override;
 private:
     void fileSystemChanged(const QString &path);
     QString m_path;

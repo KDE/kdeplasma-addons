@@ -42,20 +42,20 @@ class CachedProvider : public ComicProvider
         /**
          * Destroys the cached provider.
          */
-        ~CachedProvider();
+        ~CachedProvider() override;
 
         /**
          * Returns the identifier type.
          *
          * Is always StringIdentifier here.
          */
-        IdentifierType identifierType() const Q_DECL_OVERRIDE;
+        IdentifierType identifierType() const override;
 
         /**
          * Returns the type of identifier that is used by this
          * comic provider.
          */
-        QString suffixType() const Q_DECL_OVERRIDE;
+        QString suffixType() const override;
 
         /**
          * Returns the requested image.
@@ -63,27 +63,27 @@ class CachedProvider : public ComicProvider
          * Note: This method returns only a valid image after the
          *       finished() signal has been emitted.
          */
-        QImage image() const Q_DECL_OVERRIDE;
+        QImage image() const override;
 
         /**
          * Returns the identifier of the comic request (name + date).
          */
-        QString identifier() const Q_DECL_OVERRIDE;
+        QString identifier() const override;
 
         /**
          * Returns the identifier suffix of the next comic.
          */
-        QString nextIdentifier() const Q_DECL_OVERRIDE;
+        QString nextIdentifier() const override;
 
         /**
          * Returns the identifier suffix of the previous comic.
          */
-        QString previousIdentifier() const Q_DECL_OVERRIDE;
+        QString previousIdentifier() const override;
 
         /**
          * Returns the identifier of the first strip.
          */
-        QString firstStripIdentifier() const Q_DECL_OVERRIDE;
+        QString firstStripIdentifier() const override;
 
         /**
          * Returns the identifier of the last cached strip.
@@ -93,32 +93,32 @@ class CachedProvider : public ComicProvider
         /**
          * Returns the title of the strip.
          */
-        QString stripTitle() const Q_DECL_OVERRIDE;
+        QString stripTitle() const override;
 
         /**
          * Returns the author of the comic.
          */
-        QString comicAuthor() const Q_DECL_OVERRIDE;
+        QString comicAuthor() const override;
 
         /**
          * Returns additionalText of the comic.
          */
-        QString additionalText() const Q_DECL_OVERRIDE;
+        QString additionalText() const override;
 
         /**
          * Returns the name for the comic
          */
-        QString name() const Q_DECL_OVERRIDE;
+        QString name() const override;
 
         /**
         * Returns wether the comic is leftToRight or not
         */
-        bool isLeftToRight() const Q_DECL_OVERRIDE;
+        bool isLeftToRight() const override;
 
         /**
         * Returns wether the comic is topToBottom or not
         */
-        bool isTopToBottom() const Q_DECL_OVERRIDE;
+        bool isTopToBottom() const override;
 
         /**
          * Returns whether a comic with the given @p identifier is cached.
@@ -138,14 +138,14 @@ class CachedProvider : public ComicProvider
         /**
          * Returns the website of the comic.
          */
-        QUrl websiteUrl() const Q_DECL_OVERRIDE;
+        QUrl websiteUrl() const override;
 
-        QUrl imageUrl() const Q_DECL_OVERRIDE;
+        QUrl imageUrl() const override;
 
         /**
          * Returns the shop website of the comic.
          */
-        QUrl shopUrl() const Q_DECL_OVERRIDE;
+        QUrl shopUrl() const override;
 
         /**
           * Returns the maximum number of cached strips per comic, -1 means that there is no limit

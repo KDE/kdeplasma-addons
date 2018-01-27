@@ -33,27 +33,27 @@ class ComicProviderKross : public ComicProvider
 
     public:
         ComicProviderKross(QObject *parent, const QVariantList &args);
-        virtual ~ComicProviderKross();
+        ~ComicProviderKross() override;
 
         static KPackage::PackageStructure *packageStructure();
 
-        bool isLeftToRight() const Q_DECL_OVERRIDE;
-        bool isTopToBottom() const Q_DECL_OVERRIDE;
-        IdentifierType identifierType() const Q_DECL_OVERRIDE;
-        QUrl websiteUrl() const Q_DECL_OVERRIDE;
-        QUrl shopUrl() const Q_DECL_OVERRIDE;
-        QImage image() const Q_DECL_OVERRIDE;
-        QString identifier() const Q_DECL_OVERRIDE;
-        QString nextIdentifier() const Q_DECL_OVERRIDE;
-        QString previousIdentifier() const Q_DECL_OVERRIDE;
-        QString firstStripIdentifier() const Q_DECL_OVERRIDE;
-        QString stripTitle() const Q_DECL_OVERRIDE;
-        QString additionalText() const Q_DECL_OVERRIDE;
+        bool isLeftToRight() const override;
+        bool isTopToBottom() const override;
+        IdentifierType identifierType() const override;
+        QUrl websiteUrl() const override;
+        QUrl shopUrl() const override;
+        QImage image() const override;
+        QString identifier() const override;
+        QString nextIdentifier() const override;
+        QString previousIdentifier() const override;
+        QString firstStripIdentifier() const override;
+        QString stripTitle() const override;
+        QString additionalText() const override;
 
     protected:
-        void pageRetrieved(int id, const QByteArray &data) Q_DECL_OVERRIDE;
-        void pageError(int id, const QString &message) Q_DECL_OVERRIDE;
-        void redirected(int id, const QUrl &newUrl) Q_DECL_OVERRIDE;
+        void pageRetrieved(int id, const QByteArray &data) override;
+        void pageError(int id, const QString &message) override;
+        void redirected(int id, const QUrl &newUrl) override;
         QString identifierToString(const QVariant &identifier) const;
 
     private:

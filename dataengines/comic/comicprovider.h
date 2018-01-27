@@ -64,7 +64,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         /**
          * Destroys the comic provider.
          */
-        virtual ~ComicProvider();
+        ~ComicProvider() override;
 
         /**
          * Returns the type of identifier that is used by this

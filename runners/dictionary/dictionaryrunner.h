@@ -14,15 +14,15 @@ class DictionaryRunner : public Plasma::AbstractRunner
 
 public:
     DictionaryRunner(QObject *parent, const QVariantList &args);
-    void match(Plasma::RunnerContext &context) Q_DECL_OVERRIDE;
-    void reloadConfiguration() Q_DECL_OVERRIDE;
+    void match(Plasma::RunnerContext &context) override;
+    void reloadConfiguration() override;
 
 private:
     QString m_triggerWord;
     DictionaryMatchEngine *m_engine;
 
 protected Q_SLOTS:
-    void init() Q_DECL_OVERRIDE;
+    void init() override;
 
 };
 

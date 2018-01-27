@@ -35,7 +35,7 @@ public:
         : QWebEngineUrlSchemeHandler(parent)
     {
     }
-    void requestStarted(QWebEngineUrlRequestJob *job) {
+    void requestStarted(QWebEngineUrlRequestJob *job) override {
         job->fail(QWebEngineUrlRequestJob::UrlInvalid);
         const QString word = job->requestUrl().path();
         emit wordClicked(word);

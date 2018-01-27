@@ -30,7 +30,7 @@ class Grabber : public QObject
 {
     Q_OBJECT
 public:
-    virtual ~Grabber();
+    ~Grabber() override;
 
     virtual void pick() = 0;
 
@@ -54,12 +54,12 @@ class X11Grabber : public Grabber
     Q_OBJECT
 public:
     explicit X11Grabber(QObject *parent = nullptr);
-    virtual ~X11Grabber();
+    ~X11Grabber() override;
 
     void pick() override;
 
 protected:
-    virtual bool eventFilter(QObject *watched, QEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
     QWidget *m_grabWidget;
@@ -70,7 +70,7 @@ class KWinWaylandGrabber : public Grabber
     Q_OBJECT
 public:
     explicit KWinWaylandGrabber(QObject *parent = nullptr);
-    virtual ~KWinWaylandGrabber();
+    ~KWinWaylandGrabber() override;
 
     void pick() override;
 };
@@ -83,7 +83,7 @@ class GrabWidget : public QObject
 
 public:
     explicit GrabWidget(QObject *parent = nullptr);
-    virtual ~GrabWidget();
+    ~GrabWidget() override;
 
     QColor currentColor() const;
 

@@ -196,7 +196,7 @@ class ComicProviderWrapper : public QObject
         };
 
         ComicProviderWrapper(ComicProviderKross *parent);
-        ~ComicProviderWrapper();
+        ~ComicProviderWrapper() override;
 
         int apiVersion() const { return 4600; }
 

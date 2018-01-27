@@ -47,7 +47,7 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
         /**
          * Destroys the PoTD provider.
          */
-        virtual ~PotdProvider();
+        ~PotdProvider() override;
 
         /**
          * Returns the requested image.

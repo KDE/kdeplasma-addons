@@ -28,7 +28,7 @@ class ShowDesktop : public QObject
 
 public:
     ShowDesktop(QObject *parent = nullptr);
-    ~ShowDesktop();
+    ~ShowDesktop() override;
 
     bool showingDesktop() const;
     void setShowingDesktop(bool showingDesktop);

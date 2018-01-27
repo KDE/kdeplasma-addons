@@ -35,7 +35,7 @@ public:
 
     }
 
-    virtual ~NotesHelper() = default;
+    ~NotesHelper() override = default;
 
     Q_INVOKABLE QString fileContents(const QString &path) const
     {

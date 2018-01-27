@@ -37,9 +37,9 @@ class DateTimeRunner : public Plasma::AbstractRunner
 
 public:
     DateTimeRunner(QObject *parent, const QVariantList &args);
-    ~DateTimeRunner();
+    ~DateTimeRunner() override;
 
-    void match(Plasma::RunnerContext &context) Q_DECL_OVERRIDE;
+    void match(Plasma::RunnerContext &context) override;
 
 private:
     QDateTime datetime(const QString &tz, QString &tzName);

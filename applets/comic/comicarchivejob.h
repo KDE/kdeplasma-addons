@@ -52,7 +52,7 @@ class ComicArchiveJob : public KJob
          * @see setToIdentifier, setFromIdentifier
          */
         ComicArchiveJob( const QUrl &dest, Plasma::DataEngine *engine, ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent = 0 );
-        ~ComicArchiveJob();
+        ~ComicArchiveJob() override;
 
         /**
          * Checks if all the needed data has been set
@@ -71,15 +71,15 @@ class ComicArchiveJob : public KJob
          */
         void setFromIdentifier( const QString &fromIdentifier );
 
-        void start() Q_DECL_OVERRIDE;
+        void start() override;
 
     public Q_SLOTS:
         void dataUpdated( const QString &source, const Plasma::DataEngine::Data& data );
 
     protected:
-        bool doKill() Q_DECL_OVERRIDE;
-        bool doSuspend() Q_DECL_OVERRIDE;
-        bool doResume() Q_DECL_OVERRIDE;
+        bool doKill() override;
+        bool doSuspend() override;
+        bool doResume() override;
 
     private:
         /**

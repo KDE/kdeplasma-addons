@@ -35,12 +35,12 @@ class SpellCheckConfig : public KCModule
     Q_OBJECT
     public:
         explicit SpellCheckConfig(QWidget* parent = 0, const QVariantList& args = QVariantList());
-        ~SpellCheckConfig();
+        ~SpellCheckConfig() override;
 
     public Q_SLOTS:
-        void save() Q_DECL_OVERRIDE;
-        void load() Q_DECL_OVERRIDE;
-        void defaults() Q_DECL_OVERRIDE;
+        void save() override;
+        void load() override;
+        void defaults() override;
 
         void toggleTriggerWord(int state);
 

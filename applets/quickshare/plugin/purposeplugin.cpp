@@ -63,7 +63,7 @@ class NotesPlugin : public QQmlExtensionPlugin
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 public:
-    virtual void registerTypes(const char *uri) Q_DECL_OVERRIDE
+    void registerTypes(const char *uri) override
     {
         Q_UNUSED(uri);
         qmlRegisterSingletonType<PurposeHelper>("org.kde.plasma.private.purpose", 1, 0, "PurposeHelper", [](QQmlEngine*, QJSEngine*) -> QObject* { return new PurposeHelper; });

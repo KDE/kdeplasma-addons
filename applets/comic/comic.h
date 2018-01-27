@@ -71,10 +71,10 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 
     public:
         ComicApplet( QObject *parent, const QVariantList &args );
-        ~ComicApplet();
+        ~ComicApplet() override;
 
-        void init() Q_DECL_OVERRIDE;
-        QList<QAction*> contextualActions() Q_DECL_OVERRIDE;
+        void init() override;
+        QList<QAction*> contextualActions() override;
 
         //For QML
         QObject *comicsModel() const;
@@ -157,7 +157,7 @@ Q_SIGNALS:
         void slotArchiveFinished( KJob *job );
 
     public Q_SLOTS:
-        void configChanged() Q_DECL_OVERRIDE;
+        void configChanged() override;
         void saveConfig();
         Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
         Q_INVOKABLE void goJump() { slotGoJump();}

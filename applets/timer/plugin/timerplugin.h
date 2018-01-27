@@ -28,7 +28,7 @@ class TimerPlugin : public QQmlExtensionPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
 public:
-    void registerTypes(const char *uri) Q_DECL_OVERRIDE;
+    void registerTypes(const char *uri) override;
 };
 
 #endif // TIMERPLUGIN_H

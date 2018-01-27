@@ -44,17 +44,17 @@ class ComicEngine : public Plasma::DataEngine
 
     public:
         ComicEngine(QObject* parent, const QVariantList& args);
-        ~ComicEngine();
+        ~ComicEngine() override;
 
     public Q_SLOTS:
         void loadProviders();
 
     protected:
         void init();
-        bool sourceRequestEvent(const QString &identifier) Q_DECL_OVERRIDE;
+        bool sourceRequestEvent(const QString &identifier) override;
 
     protected Q_SLOTS:
-        bool updateSourceEvent(const QString &identifier) Q_DECL_OVERRIDE;
+        bool updateSourceEvent(const QString &identifier) override;
 
     private Q_SLOTS:
         void finished(ComicProvider*);

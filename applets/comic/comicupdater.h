@@ -47,7 +47,7 @@ class ComicUpdater : public QObject
 
     public:
         explicit ComicUpdater( QObject *parent = 0 );
-        ~ComicUpdater();
+        ~ComicUpdater() override;
 
         void init( const KConfigGroup &group );
 
