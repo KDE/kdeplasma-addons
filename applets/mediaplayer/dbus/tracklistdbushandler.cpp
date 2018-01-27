@@ -115,7 +115,7 @@ void TrackListDBusHandler::SetRandom( bool enable )
 
     //sucky randomness, but we don't care the playlist is really cryptographically secure..
     if (m_random) {
-        qsrand(QDateTime::currentDateTime().toTime_t());
+        qsrand(QTime::currentTime().msec());
     }
 }
 

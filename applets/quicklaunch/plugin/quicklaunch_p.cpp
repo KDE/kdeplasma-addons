@@ -158,7 +158,7 @@ static QString determineNewDesktopFilePath(const QString &baseName)
 
     while (QFile::exists(desktopFilePath)) {
         if (appendix.isEmpty()) {
-            qsrand(QDateTime::currentDateTime().toTime_t());
+            qsrand(QTime::currentTime().msec());
             appendix += QLatin1Char('-');
         }
 
