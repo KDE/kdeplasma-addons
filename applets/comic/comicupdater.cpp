@@ -101,5 +101,3 @@ KNS3::DownloadManager *ComicUpdater::downloadManager()
 
     return mDownloadManager;
 }
-
-#include "comicupdater.moc"

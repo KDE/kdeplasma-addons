@@ -131,4 +131,4 @@ KPackage::PackageStructure *ComicProviderKross::packageStructure()
 
 //K_PLUGIN_FACTORY_WITH_JSON(ComicProviderKrossFactory, "plasma-packagestructure-comic.json", registerPlugin<ComicProviderKross>();)
 
-#include "comicproviderkross.moc"
+// #include "comicproviderkross.moc"
