@@ -35,7 +35,7 @@ static QString identifierToPath(const QString &identifier)
 {
     const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/plasma_engine_comic/");
 
-    return QString(dataDir + QString::fromAscii(QUrl::toPercentEncoding(identifier)));
+    return QString(dataDir + QString::fromLatin1(QUrl::toPercentEncoding(identifier)));
 }
 
 

@@ -29,9 +29,9 @@
 #include <QDebug>
 #include <QStandardPaths>
 #include <Plasma/Package>
-#include <Kross/Action>
-#include <Kross/Interpreter>
-#include <Kross/Manager>
+#include <Kross/Core/Action>
+#include <Kross/Core/Interpreter>
+#include <Kross/Core/Manager>
 
 #include <Plasma/PluginLoader>
 
@@ -480,12 +480,12 @@ void ComicProviderWrapper::setTopToBottom(bool ttb)
 
 QString ComicProviderWrapper::textCodec() const
 {
-    return QString::fromAscii(mTextCodec);
+    return QString::fromLatin1(mTextCodec);
 }
 
 void ComicProviderWrapper::setTextCodec(const QString &textCodec)
 {
-    mTextCodec = textCodec.toAscii();
+    mTextCodec = textCodec.toLatin1();
 }
 
 QString ComicProviderWrapper::comicAuthor() const

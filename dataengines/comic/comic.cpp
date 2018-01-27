@@ -48,14 +48,13 @@ ComicEngine::~ComicEngine()
 
 void ComicEngine::init()
 {
-    connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
-             this, SLOT(networkStatusChanged(Solid::Networking::Status)));
+    connect(&m_networkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged,
+            this, &ComicEngine::onOnlineStateChanged);
 }
 
-void ComicEngine::networkStatusChanged(Solid::Networking::Status status)
+void ComicEngine::onOnlineStateChanged(bool isOnline)
 {
-    if ((status == Solid::Networking::Connected || status == Solid::Networking::Unknown) &&
-         !mIdentifierError.isEmpty()) {
+    if (isOnline && !mIdentifierError.isEmpty()) {
         sourceRequestEvent(mIdentifierError);
     }
 }
@@ -131,8 +130,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         }
 
         // check if there is a connection
-        Solid::Networking::Status status = Solid::Networking::status();
-        if (status != Solid::Networking::Connected && status != Solid::Networking::Unknown) {
+        if (!m_networkConfigurationManager.isOnline()) {
             mIdentifierError = identifier;
             setData(identifier, QLatin1String("Error"), true);
             setData(identifier, QLatin1String("Error automatically fixable"), true);
@@ -321,7 +319,7 @@ QString ComicEngine::lastCachedIdentifier(const QString &identifier) const
 {
         const QString id = identifier.left(identifier.indexOf(QLatin1Char(':')));
         QString data = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/plasma_engine_comic/");
-        data += QString::fromAscii(QUrl::toPercentEncoding(id));
+        data += QString::fromLatin1(QUrl::toPercentEncoding(id));
         QSettings settings(data + QLatin1String(".conf"), QSettings::IniFormat);
         QString previousIdentifier = settings.value(QLatin1String("lastCachedStripIdentifier"), QString()).toString();
 

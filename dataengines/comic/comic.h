@@ -20,7 +20,8 @@
 #define COMIC_DATAENGINE_H
 
 #include <Plasma/DataEngine>
-#include <Solid/Networking>
+// Qt
+#include <QNetworkConfigurationManager>
 
 class ComicProvider;
 
@@ -58,7 +59,7 @@ class ComicEngine : public Plasma::DataEngine
     private Q_SLOTS:
         void finished(ComicProvider*);
         void error(ComicProvider*);
-        void networkStatusChanged(Solid::Networking::Status);
+        void onOnlineStateChanged(bool);
 
     private:
         bool mEmptySuffix;
@@ -67,6 +68,7 @@ class ComicEngine : public Plasma::DataEngine
         QString mIdentifierError;
         QStringList mProviders;
         QHash<QString, ComicProvider*> m_jobs;
+        QNetworkConfigurationManager m_networkConfigurationManager;
 };
 
 #endif

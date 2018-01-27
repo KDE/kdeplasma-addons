@@ -9,9 +9,7 @@ find_package(KF5Kross REQUIRED)
 add_library(plasma_engine_comic MODULE ${comic_engine_SRCS})
 
 target_link_libraries(plasma_engine_comic plasmacomicprovidercore
-    KF5::KDELibs4Support
     KF5::WidgetsAddons
-    KF5::Solid
     KF5::Plasma
     KF5::KrossCore
     KF5::KrossUi
@@ -48,9 +46,9 @@ set(comic_provider_core_SRCS
 )
 
 add_library(plasmacomicprovidercore SHARED ${comic_provider_core_SRCS})
+generate_export_header(plasmacomicprovidercore EXPORT_FILE_NAME plasma_comic_export.h EXPORT_MACRO_NAME PLASMA_COMIC_EXPORT)
 
 target_link_libraries(plasmacomicprovidercore
-    KF5::KDELibs4Support
     KF5::WidgetsAddons
     KF5::KIOCore
     KF5::KrossCore
@@ -76,7 +74,6 @@ set(plasma_comic_krossprovider_SRCS
 
 add_library(plasma_comic_krossprovider MODULE ${plasma_comic_krossprovider_SRCS})
 target_link_libraries(plasma_comic_krossprovider plasmacomicprovidercore
-    KF5::KDELibs4Support
     Qt5::Gui
     KF5::KIOCore
     KF5::KrossCore
