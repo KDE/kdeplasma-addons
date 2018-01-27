@@ -76,9 +76,6 @@ add_definitions(
 #########################################################################
 
 ################# list the subdirectories #################
-#add_subdirectory(src)
-#add_subdirectory( desktoptheme )
-
 add_subdirectory(libs)
 add_subdirectory(applets)
 add_subdirectory(dataengines)
