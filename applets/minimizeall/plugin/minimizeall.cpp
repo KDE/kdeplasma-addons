@@ -92,7 +92,7 @@ bool MinimizeAll::match(const WId& wid, bool includehidden) const
 void MinimizeAll::deactivate(bool unminimize)
 {
     if (m_active) {
-        disconnect(KWindowSystem::self(), 0, this, 0);
+        disconnect(KWindowSystem::self(), nullptr, this, nullptr);
 
         if (unminimize) {
             Q_FOREACH (auto wid, m_minimizedWindows) {

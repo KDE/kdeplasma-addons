@@ -51,7 +51,7 @@ class ComicArchiveJob : public KJob
          * "garfield:2010-03-04", here "garfield" is the plugin name
          * @see setToIdentifier, setFromIdentifier
          */
-        ComicArchiveJob( const QUrl &dest, Plasma::DataEngine *engine, ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent = 0 );
+        ComicArchiveJob( const QUrl &dest, Plasma::DataEngine *engine, ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent = nullptr );
         ~ComicArchiveJob() override;
 
         /**

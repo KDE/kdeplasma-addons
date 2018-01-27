@@ -56,7 +56,7 @@ class StripSelector : public QObject
         void stripChosen(const QString &strip);
 
     protected:
-        explicit StripSelector(QObject *parent = 0);
+        explicit StripSelector(QObject *parent = nullptr);
 };
 
 /**

@@ -276,10 +276,10 @@ QString StaticDateWrapper::shortMonthName (int month)
 
 ComicProviderWrapper::ComicProviderWrapper(ComicProviderKross *parent)
     : QObject(parent),
-      mAction(0),
+      mAction(nullptr),
       mProvider(parent),
-      mKrossImage(0),
-      mPackage(0),
+      mKrossImage(nullptr),
+      mPackage(nullptr),
       mRequests(0),
       mIdentifierSpecified(false),
       mIsLeftToRight(true),
@@ -723,7 +723,7 @@ void ComicProviderWrapper::pageRetrieved(int id, const QByteArray &data)
             finished();
         }
     } else {
-        QTextCodec *codec = 0;
+        QTextCodec *codec = nullptr;
         if (!mTextCodec.isEmpty()) {
             codec = QTextCodec::codecForName(mTextCodec);
         }

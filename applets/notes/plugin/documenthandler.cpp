@@ -51,8 +51,8 @@
 #include <QtGui/QFontDatabase>
 
 DocumentHandler::DocumentHandler()
-    : m_target(0)
-    , m_doc(0)
+    : m_target(nullptr)
+    , m_doc(nullptr)
     , m_cursorPosition(-1)
     , m_selectionStart(0)
     , m_selectionEnd(0)
@@ -61,7 +61,7 @@ DocumentHandler::DocumentHandler()
 
 void DocumentHandler::setTarget(QQuickItem *target)
 {
-    m_doc = 0;
+    m_doc = nullptr;
     m_target = target;
     if (!m_target)
         return;

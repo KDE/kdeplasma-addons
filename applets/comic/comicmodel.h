@@ -32,7 +32,7 @@ class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
     Q_OBJECT
 
     public:
-        ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent = 0 );
+        ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent = nullptr );
 
         void setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics );
 

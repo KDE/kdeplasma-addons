@@ -95,7 +95,7 @@ StripSelector *StripSelectorFactory::create(IdentifierType type)
             return new StringStripSelector();
     }
 
-    return 0;
+    return nullptr;
 }
 
 
@@ -111,7 +111,7 @@ StringStripSelector::~StringStripSelector()
 void StringStripSelector::select(const ComicData &currentStrip)
 {
     bool ok;
-    const QString strip = QInputDialog::getText(0, i18n("Go to Strip"), i18n("Strip identifier:"), QLineEdit::Normal,
+    const QString strip = QInputDialog::getText(nullptr, i18n("Go to Strip"), i18n("Strip identifier:"), QLineEdit::Normal,
                                                  currentStrip.current(), &ok);
     if (ok) {
         emit stripChosen(strip);
@@ -130,7 +130,7 @@ NumberStripSelector::~NumberStripSelector()
 
 void NumberStripSelector::select(const ComicData &currentStrip)
 {
-    QScopedPointer<ChooseStripNumDialog> pageDialog(new ChooseStripNumDialog(0, currentStrip.current().toInt(),
+    QScopedPointer<ChooseStripNumDialog> pageDialog(new ChooseStripNumDialog(nullptr, currentStrip.current().toInt(),
                                                     currentStrip.firstStripNum(), currentStrip.maxStripNum()));
     if (pageDialog->exec() == QDialog::Accepted) {
         emit stripChosen(QString::number(pageDialog->getStripNumber()));

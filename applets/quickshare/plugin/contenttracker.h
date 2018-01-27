@@ -34,7 +34,7 @@ class ContentTracker : public QObject
     Q_PROPERTY(QString title READ title NOTIFY changed)
 
 public:
-    ContentTracker(QObject *parent = 0);
+    ContentTracker(QObject *parent = nullptr);
     ~ContentTracker() override;
 
     QString uri() const;

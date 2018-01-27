@@ -32,7 +32,7 @@ class NoteManager : public QObject
     Q_OBJECT
 
 public:
-    explicit NoteManager(QObject* parent = 0);
+    explicit NoteManager(QObject* parent = nullptr);
 
     /**
      * Loads the note for the ID given

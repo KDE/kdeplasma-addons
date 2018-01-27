@@ -27,7 +27,7 @@
 class StringStripSelector : public StripSelector
 {
     public:
-        explicit StringStripSelector(QObject *parent = 0);
+        explicit StringStripSelector(QObject *parent = nullptr);
         ~StringStripSelector() override;
 
         void select(const ComicData &currentStrip) override;
@@ -36,7 +36,7 @@ class StringStripSelector : public StripSelector
 class NumberStripSelector : public StripSelector
 {
     public:
-        explicit NumberStripSelector(QObject *parent = 0);
+        explicit NumberStripSelector(QObject *parent = nullptr);
         ~NumberStripSelector() override;
 
         void select(const ComicData &currentStrip) override;
@@ -47,7 +47,7 @@ class DateStripSelector : public StripSelector
     Q_OBJECT
 
     public:
-        explicit DateStripSelector(QObject *parent = 0);
+        explicit DateStripSelector(QObject *parent = nullptr);
         ~DateStripSelector() override;
 
         void select(const ComicData &currentStrip) override;

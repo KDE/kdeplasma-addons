@@ -145,7 +145,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         bool isCurrentComic = parts[1].isEmpty();
 
         QVariantList args;
-        ComicProvider *provider = 0;
+        ComicProvider *provider = nullptr;
 
         //const QString type = service->property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"), QVariant::String).toString();
         const QString type = pkg.metadata().value("X-KDE-PlasmaComicProvider-SuffixType");

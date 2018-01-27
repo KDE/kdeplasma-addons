@@ -21,7 +21,7 @@
 #include <KPluginFactory>
 #include <KPackage/PackageLoader>
 
-KPackage::PackageStructure *ComicProviderKross::m_packageStructure(0);
+KPackage::PackageStructure *ComicProviderKross::m_packageStructure(nullptr);
 
 ComicProviderKross::ComicProviderKross(QObject *parent, const QVariantList &args)
     : ComicProvider(parent, args), m_wrapper(this)

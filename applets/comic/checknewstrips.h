@@ -31,7 +31,7 @@ class CheckNewStrips : public QObject
     Q_OBJECT
 
     public:
-        CheckNewStrips( const QStringList &identifiers, Plasma::DataEngine *engine, int minutes, QObject *parent = 0 );
+        CheckNewStrips( const QStringList &identifiers, Plasma::DataEngine *engine, int minutes, QObject *parent = nullptr );
 
     Q_SIGNALS:
         /**

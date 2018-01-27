@@ -30,9 +30,9 @@
 
 ComicUpdater::ComicUpdater( QObject *parent )
   : QObject( parent ),
-    mDownloadManager( 0 ),
+    mDownloadManager(nullptr),
     mUpdateIntervall( 3 ),
-    m_updateTimer( 0 )
+    m_updateTimer(nullptr)
 {
 }
 

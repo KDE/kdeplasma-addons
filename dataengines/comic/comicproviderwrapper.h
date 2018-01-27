@@ -41,7 +41,7 @@ class ImageWrapper : public QObject
         Q_PROPERTY(QImage image READ image WRITE setImage)
         Q_PROPERTY(QByteArray rawData READ rawData WRITE setRawData)
     public:
-        explicit ImageWrapper(QObject *parent = 0, const QByteArray &image = QByteArray());
+        explicit ImageWrapper(QObject *parent = nullptr, const QByteArray &image = QByteArray());
 
         QImage image() const;
         /**
@@ -87,7 +87,7 @@ class DateWrapper : public QObject
         Q_OBJECT
         Q_PROPERTY(QDate date READ date WRITE setDate)
     public:
-        explicit DateWrapper(QObject *parent = 0, const QDate &date = QDate());
+        explicit DateWrapper(QObject *parent = nullptr, const QDate &date = QDate());
 
         QDate date() const;
         void setDate(const QDate &date);
@@ -131,7 +131,7 @@ class StaticDateWrapper : public QObject
             DefaultLocaleLongDate = Qt::DefaultLocaleLongDate
         };
 
-        StaticDateWrapper(QObject *parent = 0);
+        StaticDateWrapper(QObject *parent = nullptr);
 
     public Q_SLOTS:
         QObject* currentDate();

@@ -85,7 +85,7 @@ void ContentTracker::connectToActivityManager()
                 this, &ContentTracker::focusChanged);
     } else {
         delete m_activityManagerIface;
-        m_activityManagerIface = 0;
+        m_activityManagerIface = nullptr;
         qWarning() << "activityManager not reachable";
     }
 }

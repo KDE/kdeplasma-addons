@@ -41,7 +41,7 @@ ComicArchiveJob::ComicArchiveJob( const QUrl &dest, Plasma::DataEngine *engine, 
     mTotalFiles( -1 ),
     mEngine( engine ),
     mZipFile( new QTemporaryFile ),
-    mZip( 0 ),
+    mZip(nullptr),
     mPluginName( pluginName ),
     mDest( dest )
 {

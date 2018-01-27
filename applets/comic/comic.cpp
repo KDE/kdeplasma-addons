@@ -55,7 +55,7 @@ const int ComicApplet::CACHE_LIMIT = 20;
 
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
-      mProxy(0),
+      mProxy(nullptr),
       mActiveComicModel(new ActiveComicModel(parent)),
       mDifferentComic( true ),
       mShowComicUrl( false ),
@@ -67,10 +67,10 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mMiddleClick( true ),
       mCheckNewComicStripsInterval(0),
       mMaxComicLimit( CACHE_LIMIT ),
-      mCheckNewStrips( 0 ),
-      mActionShop( 0 ),
-      mEngine( 0 ),
-      mSavingDir(0)
+      mCheckNewStrips(nullptr),
+      mActionShop(nullptr),
+      mEngine(nullptr),
+      mSavingDir(nullptr)
 {
     setHasConfigurationInterface( true );
 }
@@ -311,7 +311,7 @@ void ComicApplet::updateUsedComics()
     mActionNextNewStripTab->setEnabled( isTabHighlighted(mCurrent.id()) );
 
     delete mCheckNewStrips;
-    mCheckNewStrips = 0;
+    mCheckNewStrips = nullptr;
     if (mEngine && mCheckNewComicStripsInterval ) {
         mCheckNewStrips = new CheckNewStrips( mTabIdentifier, mEngine, mCheckNewComicStripsInterval, this );
         connect( mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip );
@@ -428,7 +428,7 @@ void ComicApplet::slotStorePosition()
 
 void ComicApplet::slotShop()
 {
-    KRun::runUrl(mCurrent.shopUrl(), "text/html", 0);
+    KRun::runUrl(mCurrent.shopUrl(), "text/html", nullptr);
 }
 
 void ComicApplet::createComicBook()

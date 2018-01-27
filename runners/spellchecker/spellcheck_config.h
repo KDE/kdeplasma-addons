@@ -34,7 +34,7 @@ class SpellCheckConfig : public KCModule
 {
     Q_OBJECT
     public:
-        explicit SpellCheckConfig(QWidget* parent = 0, const QVariantList& args = QVariantList());
+        explicit SpellCheckConfig(QWidget* parent = nullptr, const QVariantList& args = QVariantList());
         ~SpellCheckConfig() override;
 
     public Q_SLOTS:

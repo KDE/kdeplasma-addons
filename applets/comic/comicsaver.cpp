@@ -39,7 +39,7 @@ bool ComicSaver::save(const ComicData &comic)
     const QString name = title + " - " + comic.current() + ".png";
     QUrl destUrl = QUrl::fromLocalFile( mSavingDir->getDir() + '/'+ name );
 
-    destUrl = QFileDialog::getSaveFileUrl(0, QString(), destUrl, "*.png" );
+    destUrl = QFileDialog::getSaveFileUrl(nullptr, QString(), destUrl, "*.png" );
 
     if ( !destUrl.isValid() ) {
         return false;

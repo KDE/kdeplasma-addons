@@ -34,7 +34,7 @@ public:
         ComicHighlightRole = Qt::UserRole+4
     };
 
-    ActiveComicModel(QObject *parent = 0);
+    ActiveComicModel(QObject *parent = nullptr);
 
     QHash<int, QByteArray> roleNames() const override;
 
