@@ -81,8 +81,6 @@ add_subdirectory(wallpapers)
 add_subdirectory(windowswitchers)
 add_subdirectory(desktopswitchers)
 
-configure_file(config-kdeplasma-addons.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdeplasma-addons.h)
-
 configure_file(config-X11.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-X11.h)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
