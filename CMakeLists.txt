@@ -53,7 +53,17 @@ set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+add_definitions(
+    -DQT_DEPRECATED_WARNINGS
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050900
+    -DQT_USE_QSTRINGBUILDER
+    -DQT_NO_CAST_TO_ASCII
+#     -DQT_NO_CAST_FROM_ASCII
+    -DQT_NO_CAST_FROM_BYTEARRAY
+    -DQT_STRICT_ITERATORS
+    -DQT_NO_URL_CAST_FROM_STRING
+    -DQT_NO_SIGNALS_SLOTS_KEYWORDS
+)
 
 #########################################################################
 
