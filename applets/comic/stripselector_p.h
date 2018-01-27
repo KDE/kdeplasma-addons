@@ -22,7 +22,7 @@
 
 #include "stripselector.h"
 
-#include <QtCore/QString>
+#include <QString>
 
 class StringStripSelector : public StripSelector
 {

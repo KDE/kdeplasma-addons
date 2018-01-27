@@ -18,14 +18,12 @@
 
 #include "cachedprovider.h"
 
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QSettings>
-#include <QtCore/QTimer>
-#include <QtGui/QImage>
-
+#include <QDir>
+#include <QFile>
+#include <QSettings>
+#include <QTimer>
+#include <QImage>
 #include <QDebug>
-
 #include <QUrl>
 #include <QStandardPaths>
 

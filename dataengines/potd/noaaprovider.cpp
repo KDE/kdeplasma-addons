@@ -20,11 +20,11 @@
 
 #include "noaaprovider.h"
 
-#include <QtCore/QRegExp>
-#include <QtGui/QImage>
+#include <QRegExp>
+#include <QImage>
 #include <QRegularExpression>
-
 #include <QDebug>
+
 #include <kio/job.h>
 
 class NOAAProvider::Private

@@ -21,7 +21,7 @@
 
 #include "comicprovider.h"
 
-#include <QtCore/QHash>
+#include <QHash>
 
 /**
  * This class provides comics from the local cache.

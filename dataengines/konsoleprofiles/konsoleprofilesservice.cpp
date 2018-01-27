@@ -18,7 +18,7 @@
 
 #include "konsoleprofilesservice.h"
 
-#include <QtCore/QMap>
+#include <QMap>
 #include <KToolInvocation>
 #include <QDebug>
 

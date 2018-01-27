@@ -19,16 +19,15 @@
 
 #include "potd.h"
 
-#include <QtCore/QDate>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QTimer>
-#include <QtCore/QThreadPool>
-
+#include <QDate>
+#include <QFile>
+#include <QFileInfo>
+#include <QTimer>
+#include <QThreadPool>
 #include <QDebug>
+
 #include <KPluginLoader>
 #include <KPluginMetaData>
-
 #include <Plasma/DataContainer>
 
 #include "cachedprovider.h"

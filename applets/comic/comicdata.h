@@ -22,11 +22,11 @@
 
 #include "comicinfo.h"
 
+#include <Plasma/DataEngine>
+// Qt
 #include <QUrl>
 #include <QImage>
-#include <Plasma/DataEngine>
-
-#include <QtCore/QString>
+#include <QString>
 
 class ComicData
 {

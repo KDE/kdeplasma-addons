@@ -20,9 +20,9 @@
 #include "comicinfo.h"
 
 #include <KConfigGroup>
+// Qt
 #include <QStandardPaths>
-
-#include <QtCore/QDir>
+#include <QDir>
 
 class SavingDir::SavingDirPrivate
 {

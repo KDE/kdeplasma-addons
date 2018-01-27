@@ -19,7 +19,7 @@
 
 #include "checknewstrips.h"
 
-#include <QtCore/QTimer>
+#include <QTimer>
 
 CheckNewStrips::CheckNewStrips( const QStringList &identifiers, Plasma::DataEngine *engine, int minutes, QObject *parent)
   : QObject( parent ),

@@ -18,8 +18,7 @@
 #ifndef ACTIVE_COMIC_MODEL_H
 #define ACTIVE_COMIC_MODEL_H
 
-#include <QtGui/QtGui>
-#include <QtCore/QtCore>
+#include <QStandardItemModel>
 
 class ActiveComicModel : public QStandardItemModel
 {

@@ -21,12 +21,12 @@
 
 #include "flickrprovider.h"
 
-#include <QtCore/QRegExp>
-#include <QtGui/QImage>
+#include <QRegExp>
+#include <QImage>
 #include <QXmlStreamReader>
 #include <QUrlQuery>
-
 #include <QDebug>
+
 #include <kio/job.h>
 
 #define FLICKR_API_KEY "11829a470557ad8e10b02e80afacb3af"

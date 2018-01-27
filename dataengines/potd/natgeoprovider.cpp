@@ -21,11 +21,11 @@
 
 #include "natgeoprovider.h"
 
-#include <QtCore/QRegExp>
-#include <QtGui/QImage>
+#include <QRegExp>
+#include <QImage>
 #include <QRegularExpression>
-
 #include <QDebug>
+
 #include <KIO/Job>
 
 class NatGeoProvider::Private

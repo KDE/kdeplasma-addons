@@ -21,7 +21,8 @@
 
 #include <Plasma/Theme>
 #include <KLocalizedString>
-#include <QtGui/QPainter>
+// Qt
+#include <QPainter>
 
 ComicData::ComicData()
 {

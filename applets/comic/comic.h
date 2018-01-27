@@ -27,9 +27,9 @@
 
 #include "comicdata.h"
 
-#include <QtCore/QDate>
-
+#include <QDate>
 #include <QUrl>
+
 #include <Plasma/DataEngine>
 #include <Plasma/DataEngineConsumer>
 #include <Plasma/Applet>

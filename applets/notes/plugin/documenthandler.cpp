@@ -46,9 +46,9 @@
 
 #include "documenthandler.h"
 
-#include <QtGui/QTextDocument>
-#include <QtGui/QTextCursor>
-#include <QtGui/QFontDatabase>
+#include <QTextDocument>
+#include <QTextCursor>
+#include <QFontDatabase>
 
 DocumentHandler::DocumentHandler()
     : m_target(nullptr)

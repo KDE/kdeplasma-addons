@@ -19,8 +19,8 @@
 #ifndef COMICPROVIDER_H
 #define COMICPROVIDER_H
 
-#include <QtCore/QDate>
-#include <QtCore/QObject>
+#include <QDate>
+#include <QObject>
 #include <KPluginInfo>
 #include <KPluginFactory>
 

@@ -20,10 +20,10 @@
 
 #include "apodprovider.h"
 
-#include <QtCore/QRegExp>
-#include <QtGui/QImage>
-
+#include <QRegExp>
+#include <QImage>
 #include <QDebug>
+
 #include <kio/job.h>
 
 class ApodProvider::Private

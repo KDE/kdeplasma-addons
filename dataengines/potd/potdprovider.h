@@ -20,8 +20,8 @@
 #ifndef POTDPROVIDER_H
 #define POTDPROVIDER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QDate>
+#include <QObject>
+#include <QDate>
 
 #include <KPluginFactory>
 

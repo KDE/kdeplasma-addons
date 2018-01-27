@@ -28,11 +28,13 @@
 #include "stripselector.h"
 #include "comicsaver.h"
 
+#include <QScreen>
+#include <QWindow>
 #include <QTimer>
 #include <QSortFilterProxyModel>
-
 #include <QAction>
 #include <QDebug>
+
 #include <KActionCollection>
 #include <KConfigDialog>
 #include <KNotification>

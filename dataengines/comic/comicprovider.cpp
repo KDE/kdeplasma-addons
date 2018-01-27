@@ -18,12 +18,12 @@
 
 #include "comicprovider.h"
 
-#include <QtCore/QTimer>
-
+#include <QTimer>
+#include <QUrl>
 #include <QDebug>
+
 #include <KIO/Job>
 #include <KIO/StoredTransferJob>
-#include <QUrl>
 #include <KPluginMetaData>
 
 class ComicProvider::Private

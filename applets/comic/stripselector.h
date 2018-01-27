@@ -20,7 +20,7 @@
 #ifndef STRIP_SELECTOR_H
 #define STRIP_SELECTOR_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "comicinfo.h"
 

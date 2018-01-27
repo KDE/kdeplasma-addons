@@ -18,9 +18,9 @@
 
 #include "comic.h"
 
-#include <QtCore/QDate>
-#include <QtCore/QFileInfo>
-#include <QtCore/QSettings>
+#include <QDate>
+#include <QFileInfo>
+#include <QSettings>
 #include <QImage>
 #include <QUrl>
 #include <QDebug>

@@ -42,11 +42,8 @@
 #define DOCUMENTHANDLER_H
 
 #include <QQuickTextDocument>
-
-#include <QtGui/QTextCharFormat>
-#include <QtCore/QTextCodec>
-
-#include <qqmlfile.h>
+#include <QTextCharFormat>
+#include <QTextCodec>
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;

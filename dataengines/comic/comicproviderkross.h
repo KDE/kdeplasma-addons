@@ -22,7 +22,7 @@
 #include "comicprovider.h"
 #include "comicproviderwrapper.h"
 
-#include <QtGui/QImage>
+#include <QImage>
 #include <QUrl>
 #include <KPackage/PackageStructure>
 

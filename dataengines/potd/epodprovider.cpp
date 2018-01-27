@@ -20,10 +20,10 @@
 
 #include "epodprovider.h"
 
-#include <QtCore/QRegExp>
-#include <QtGui/QImage>
-
+#include <QRegExp>
+#include <QImage>
 #include <QDebug>
+
 #include <kio/job.h>
 
 class EpodProvider::Private
