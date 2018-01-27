@@ -26,7 +26,7 @@
 
 #include <KConfigDialog>
 #include <KNS3/DownloadDialog>
-#include <KNS3/DownloadManager>
+#include <KNSCore/DownloadManager>
 
 ComicUpdater::ComicUpdater( QObject *parent )
   : QObject( parent ),
@@ -85,18 +85,18 @@ void ComicUpdater::checkForUpdate()
     }
 }
 
-void ComicUpdater::slotUpdatesFound( const KNS3::Entry::List &entries )
+void ComicUpdater::slotUpdatesFound(const KNSCore::EntryInternal::List& entries)
 {
     for ( int i = 0; i < entries.count(); ++i ) {
         downloadManager()->installEntry( entries[ i ] );
     }
 }
 
-KNS3::DownloadManager *ComicUpdater::downloadManager()
+KNSCore::DownloadManager *ComicUpdater::downloadManager()
 {
     if ( !mDownloadManager ) {
-        mDownloadManager = new KNS3::DownloadManager( "comic.knsrc", this );
-        connect(mDownloadManager, &KNS3::DownloadManager::searchResult, this, &ComicUpdater::slotUpdatesFound);
+        mDownloadManager = new KNSCore::DownloadManager(QStringLiteral("comic.knsrc"), this );
+        connect(mDownloadManager, &KNSCore::DownloadManager::searchResult, this, &ComicUpdater::slotUpdatesFound);
     }
 
     return mDownloadManager;

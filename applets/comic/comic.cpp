@@ -430,7 +430,7 @@ void ComicApplet::slotStorePosition()
 
 void ComicApplet::slotShop()
 {
-    KRun::runUrl(mCurrent.shopUrl(), "text/html", nullptr);
+    KRun::runUrl(mCurrent.shopUrl(), QStringLiteral("text/html"), nullptr, KRun::RunFlags());
 }
 
 void ComicApplet::createComicBook()

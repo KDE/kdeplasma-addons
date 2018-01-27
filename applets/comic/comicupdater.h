@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QTime>
 
-#include <KNS3/Entry>
+#include <KNSCore/EntryInternal>
 #include <Plasma/DataEngine>
 
 class ComicModel;
@@ -32,6 +32,8 @@ class ComicModel;
 
 namespace KNS3 {
     class DownloadDialog;
+}
+namespace KNSCore {
     class DownloadManager;
 }
 
@@ -62,13 +64,13 @@ class ComicUpdater : public QObject
           * for updates and do them automatically
           */
         void checkForUpdate();
-        void slotUpdatesFound( const KNS3::Entry::List &entries );
+        void slotUpdatesFound(const KNSCore::EntryInternal::List& entries);
 
     private:
-        KNS3::DownloadManager *downloadManager();
+        KNSCore::DownloadManager *downloadManager();
 
     private:
-        KNS3::DownloadManager *mDownloadManager;
+        KNSCore::DownloadManager *mDownloadManager;
         KConfigGroup mGroup;
         int mUpdateIntervall;
         QDateTime mLastUpdate;

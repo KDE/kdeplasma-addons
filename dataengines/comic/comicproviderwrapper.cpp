@@ -256,22 +256,22 @@ bool StaticDateWrapper::isValid (int year, int month, int day)
 
 QString StaticDateWrapper::longDayName (int weekday)
 {
-    return QDate::longDayName(weekday);
+    return QLocale::system().dayName(weekday, QLocale::LongFormat);
 }
 
 QString StaticDateWrapper::longMonthName (int month)
 {
-    return QDate::longMonthName(month);
+    return QLocale::system().monthName(month, QLocale::LongFormat);
 }
 
 QString StaticDateWrapper::shortDayName (int weekday)
 {
-    return QDate::shortDayName(weekday);
+    return QLocale::system().dayName(weekday, QLocale::ShortFormat);
 }
 
 QString StaticDateWrapper::shortMonthName (int month)
 {
-    return QDate::shortMonthName(month);
+    return QLocale::system().monthName(month, QLocale::ShortFormat);
 }
 
 ComicProviderWrapper::ComicProviderWrapper(ComicProviderKross *parent)
