@@ -25,7 +25,22 @@ set(KF5_MIN_VERSION 5.42.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui DBus Quick Qml Widgets X11Extras)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-    Activities Config ConfigWidgets CoreAddons I18n KIO KCMUtils Plasma Runner Service UnitConversion KDELibs4Support NewStuff Kross)
+    Archive
+    Config
+    CoreAddons
+    I18n
+    IconThemes
+    KIO
+    KCMUtils
+    Notifications
+    Plasma
+    Runner
+    Service
+    Sonnet
+    UnitConversion
+    WindowSystem
+    NewStuff
+)
 
 find_package(LibTaskManager CONFIG REQUIRED)
 
