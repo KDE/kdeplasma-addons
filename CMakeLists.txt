@@ -51,15 +51,6 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 
 find_package(LibTaskManager CONFIG REQUIRED)
 
-find_package(X11)
-set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
-                        URL "http://www.x.org"
-                        TYPE REQUIRED
-                        PURPOSE "Required for building the X11 based workspace"
-                      )
-
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
     -DQT_DISABLE_DEPRECATED_BEFORE=0x050900
@@ -87,7 +78,5 @@ add_subdirectory(wallpapers)
 
 add_subdirectory(windowswitchers)
 add_subdirectory(desktopswitchers)
-
-configure_file(config-X11.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-X11.h)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
