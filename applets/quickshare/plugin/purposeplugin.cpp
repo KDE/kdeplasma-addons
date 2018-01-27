@@ -65,6 +65,7 @@ class NotesPlugin : public QQmlExtensionPlugin
 public:
     virtual void registerTypes(const char *uri) Q_DECL_OVERRIDE
     {
+        Q_UNUSED(uri);
         qmlRegisterSingletonType<PurposeHelper>("org.kde.plasma.private.purpose", 1, 0, "PurposeHelper", [](QQmlEngine*, QJSEngine*) -> QObject* { return new PurposeHelper; });
         qmlRegisterType<ContentTracker>("org.kde.plasma.private.purpose", 1, 0, "ContentTracker");
     }
