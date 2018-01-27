@@ -11,8 +11,8 @@ target_link_libraries(plasma_engine_potd plasmapotdprovidercore
 
 kcoreaddons_desktop_to_json(plasma_engine_potd plasma-dataengine-potd.desktop SERVICE_TYPES plasma-dataengine.desktop)
 
-install(TARGETS plasma_engine_potd DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/dataengine )
-install(FILES plasma-dataengine-potd.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install(TARGETS plasma_engine_potd DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/dataengine )
+install(FILES plasma-dataengine-potd.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
 
 
 ########### plugin core library ############
@@ -40,7 +40,7 @@ target_link_libraries( plasma_potd_flickrprovider plasmapotdprovidercore KF5::KI
 
 kcoreaddons_desktop_to_json(plasma_potd_flickrprovider flickrprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 
-install( TARGETS plasma_potd_flickrprovider DESTINATION ${PLUGIN_INSTALL_DIR}/potd )
+install( TARGETS plasma_potd_flickrprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )
 
 set( potd_apod_provider_SRCS
 	apodprovider.cpp
@@ -51,7 +51,7 @@ target_link_libraries( plasma_potd_apodprovider plasmapotdprovidercore KF5::KIOC
 
 kcoreaddons_desktop_to_json(plasma_potd_apodprovider apodprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 
-install( TARGETS plasma_potd_apodprovider DESTINATION ${PLUGIN_INSTALL_DIR}/potd )
+install( TARGETS plasma_potd_apodprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )
 
 set( potd_natgeo_provider_SRCS
 	natgeoprovider.cpp
@@ -62,7 +62,7 @@ target_link_libraries( plasma_potd_natgeoprovider plasmapotdprovidercore KF5::KI
 
 kcoreaddons_desktop_to_json(plasma_potd_natgeoprovider natgeoprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 
-install( TARGETS plasma_potd_natgeoprovider DESTINATION ${PLUGIN_INSTALL_DIR}/potd )
+install( TARGETS plasma_potd_natgeoprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )
 
 set( potd_epod_provider_SRCS
 	epodprovider.cpp
@@ -73,7 +73,7 @@ target_link_libraries( plasma_potd_epodprovider plasmapotdprovidercore KF5::KIOC
 
 kcoreaddons_desktop_to_json(plasma_potd_epodprovider epodprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 
-install( TARGETS plasma_potd_epodprovider DESTINATION ${PLUGIN_INSTALL_DIR}/potd )
+install( TARGETS plasma_potd_epodprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )
 
 set( potd_noaa_provider_SRCS
 	noaaprovider.cpp
@@ -84,7 +84,7 @@ target_link_libraries( plasma_potd_noaaprovider plasmapotdprovidercore KF5::KIOC
 
 kcoreaddons_desktop_to_json(plasma_potd_noaaprovider noaaprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 
-install( TARGETS plasma_potd_noaaprovider DESTINATION ${PLUGIN_INSTALL_DIR}/potd )
+install( TARGETS plasma_potd_noaaprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )
 
 set( potd_wcpotd_provider_SRCS
 	wcpotdprovider.cpp
@@ -95,7 +95,7 @@ target_link_libraries( plasma_potd_wcpotdprovider plasmapotdprovidercore KF5::KI
 
 kcoreaddons_desktop_to_json(plasma_potd_wcpotdprovider wcpotdprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 
-install( TARGETS plasma_potd_wcpotdprovider DESTINATION ${PLUGIN_INSTALL_DIR}/potd )
+install( TARGETS plasma_potd_wcpotdprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )
 
 set( potd_bing_provider_SRCS
 	bingprovider.cpp
@@ -106,4 +106,4 @@ target_link_libraries( plasma_potd_bingprovider plasmapotdprovidercore KF5::KIOC
 
 kcoreaddons_desktop_to_json(plasma_potd_bingprovider bingprovider.desktop SERVICE_TYPES ${CMAKE_CURRENT_SOURCE_DIR}/plasma_potdprovider.desktop)
 
-install( TARGETS plasma_potd_bingprovider DESTINATION ${PLUGIN_INSTALL_DIR}/potd )
+install( TARGETS plasma_potd_bingprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )

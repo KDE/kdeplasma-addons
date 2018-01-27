@@ -1,5 +1,3 @@
-install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/purpose)
-
 set(purposeplugin_SRCS
     purposeplugin.cpp
     contenttracker.cpp
@@ -15,4 +13,5 @@ target_link_libraries(purposeplugin
                         Qt5::DBus
                         KF5::CoreAddons)
 
-install(TARGETS purposeplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/purpose)
+install(TARGETS purposeplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/purpose)
+install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/purpose)

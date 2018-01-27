@@ -17,11 +17,11 @@ set(notes_SRCS
     plugin/notesplugin.cpp
 )
 
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/notes)
 add_library(notesplugin SHARED ${notes_SRCS})
 
 target_link_libraries(notesplugin
                         Qt5::Quick
                         KF5::CoreAddons)
 
-install(TARGETS notesplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/notes)
+install(TARGETS notesplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/notes)
+install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/notes)

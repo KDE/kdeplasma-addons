@@ -7,7 +7,6 @@ set(timer_SRCS
     plugin/timerplugin.cpp
 )
 
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/timer)
 add_library(timerplugin SHARED ${timer_SRCS})
 
 target_link_libraries(timerplugin
@@ -15,7 +14,8 @@ target_link_libraries(timerplugin
     Qt5::Qml
 )
 
-install(TARGETS timerplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/timer)
+install(TARGETS timerplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/timer)
+install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/timer)
 
 install(FILES timer.svgz
 	DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)

@@ -7,7 +7,6 @@ set(showdesktop_SRCS
     plugin/showdesktopplugin.cpp
 )
 
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/showdesktop)
 add_library(showdesktopplugin SHARED ${showdesktop_SRCS})
 
 target_link_libraries(showdesktopplugin
@@ -23,4 +22,5 @@ if (Qt5X11Extras_FOUND)
         )
 endif()
 
-install(TARGETS showdesktopplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/showdesktop)
+install(TARGETS showdesktopplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/showdesktop)
+install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/showdesktop)

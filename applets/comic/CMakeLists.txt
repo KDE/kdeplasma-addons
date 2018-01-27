@@ -36,9 +36,9 @@ target_link_libraries(plasma_applet_comic
                       KF5::Archive)
 
 
-install(TARGETS plasma_applet_comic DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/applets)
+install(TARGETS plasma_applet_comic DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
 #install(FILES plasma-comic-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
-install(FILES comic.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
+install(FILES comic.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})
 plasma_install_package(package org.kde.plasma.comic)
 

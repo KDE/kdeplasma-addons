@@ -5,7 +5,7 @@ plasma_install_package(package org.kde.plasma_applet_dict)
 #######################################################################################
 # Icon for the package
 install(FILES accessories-dictionary.svgz
-        DESTINATION ${DATA_INSTALL_DIR}/icons/hicolor/scalable/apps/)
+        DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps/)
 
 #######################################################################################
 # C++ Plugin
@@ -29,6 +29,6 @@ target_link_libraries(dictplugin
     Qt5::WebEngine
 )
 
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/dict)
-install(TARGETS dictplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/dict)
+install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/dict)
+install(TARGETS dictplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/dict)
 

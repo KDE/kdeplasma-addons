@@ -15,7 +15,7 @@ target_link_libraries(minimizeallplugin
      KF5::WindowSystem
     )
 
-install(TARGETS minimizeallplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/minimizeall)
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/minimizeall)
+install(TARGETS minimizeallplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/minimizeall)
+install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/minimizeall)
 
 plasma_install_package(package org.kde.plasma.minimizeall)

@@ -15,8 +15,8 @@ target_link_libraries(mediaframeplugin
                       KF5::KIOCore
                       KF5::KIOWidgets)
 
-install(TARGETS mediaframeplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/mediaframe)
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/mediaframe)
+install(TARGETS mediaframeplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mediaframe)
+install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mediaframe)
 
 
 

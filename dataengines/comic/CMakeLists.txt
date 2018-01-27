@@ -18,9 +18,9 @@ target_link_libraries(plasma_engine_comic plasmacomicprovidercore
 
 kcoreaddons_desktop_to_json(plasma_engine_comic plasma-dataengine-comic.desktop SERVICE_TYPES plasma-dataengine.desktop)
 
-install(TARGETS plasma_engine_comic DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/dataengine)
+install(TARGETS plasma_engine_comic DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/dataengine)
 
-install(FILES plasma-dataengine-comic.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install(FILES plasma-dataengine-comic.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
 
 
 set(comicpackage_SRCS
@@ -37,7 +37,7 @@ target_link_libraries( plasma_packagestructure_comic
     KF5::I18n
 )
 kcoreaddons_desktop_to_json(plasma_packagestructure_comic plasma-packagestructure-comic.desktop SERVICE_TYPES plasma-packagestructure.desktop)
-install(TARGETS plasma_packagestructure_comic DESTINATION ${PLUGIN_INSTALL_DIR}/kpackage/packagestructure)
+install(TARGETS plasma_packagestructure_comic DESTINATION ${KDE_INSTALL_PLUGINDIR}/kpackage/packagestructure)
 
 ########### plugin core library ############
 
@@ -62,7 +62,7 @@ set_target_properties(plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION
 
 install( TARGETS plasmacomicprovidercore ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP )
 
-install( FILES plasma_comicprovider.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR} )
+install( FILES plasma_comicprovider.desktop DESTINATION ${KDE_INSTALL_KSERVICETYPES5DIR} )
 
 ########### kross ###############
 
@@ -84,4 +84,4 @@ target_link_libraries(plasma_comic_krossprovider plasmacomicprovidercore
 
 kcoreaddons_desktop_to_json(plasma_comic_krossprovider plasma-packagestructure-comic.desktop SERVICE_TYPES plasma-packagestructure.desktop)
 
-install( TARGETS plasma_comic_krossprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( TARGETS plasma_comic_krossprovider DESTINATION ${KDE_INSTALL_PLUGINDIR} )

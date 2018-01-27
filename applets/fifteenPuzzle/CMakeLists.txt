@@ -1,5 +1,5 @@
 install(FILES fifteenpuzzle.svgz
-        DESTINATION ${DATA_INSTALL_DIR}/icons/hicolor/scalable/apps/)
+        DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps/)
 
 plasma_install_package(package org.kde.plasma.fifteenpuzzle)
 
@@ -11,5 +11,5 @@ set(fifteenpuzzleplugin_SRCS
 add_library(fifteenpuzzleplugin SHARED ${fifteenpuzzleplugin_SRCS})
 
 target_link_libraries(fifteenpuzzleplugin Qt5::Quick Qt5::Qml)
-install(TARGETS fifteenpuzzleplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/fifteenpuzzle)
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/fifteenpuzzle)
+install(TARGETS fifteenpuzzleplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/fifteenpuzzle)
+install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/fifteenpuzzle)
