@@ -73,7 +73,7 @@ class ComicArchiveJob : public KJob
 
         void start() Q_DECL_OVERRIDE;
 
-    public slots:
+    public Q_SLOTS:
         void dataUpdated( const QString &source, const Plasma::DataEngine::Data& data );
 
     protected:

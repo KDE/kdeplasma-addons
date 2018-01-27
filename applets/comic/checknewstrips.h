@@ -33,7 +33,7 @@ class CheckNewStrips : public QObject
     public:
         CheckNewStrips( const QStringList &identifiers, Plasma::DataEngine *engine, int minutes, QObject *parent = 0 );
 
-    signals:
+    Q_SIGNALS:
         /**
          * @param index of the identifier in identifiers
          * @param identifier of the comic
@@ -42,10 +42,10 @@ class CheckNewStrips : public QObject
          */
         void lastStrip( int index, const QString &identifier, const QString &suffix );
 
-    public slots:
+    public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
 
-    private slots:
+    private Q_SLOTS:
         void start();
 
     private:

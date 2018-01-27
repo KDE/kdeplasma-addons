@@ -18,7 +18,7 @@ class DictionaryRunnerConfig : public KCModule
 public:
 	DictionaryRunnerConfig(QWidget* parent = 0, const QVariantList& args = QVariantList());
 
-public slots:
+public Q_SLOTS:
 	void save() Q_DECL_OVERRIDE;
 	void load() Q_DECL_OVERRIDE;
 	void defaults() Q_DECL_OVERRIDE;

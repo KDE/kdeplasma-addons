@@ -55,7 +55,7 @@ class ImageWrapper : public QObject
          */
         void setRawData(const QByteArray &rawData);
 
-    public slots:
+    public Q_SLOTS:
         /**
          * Returns the numbers of images contained in the image
          * 0 if there is just one image, > 0 if the image format supports animation (the number of frames),
@@ -93,7 +93,7 @@ class DateWrapper : public QObject
         void setDate(const QDate &date);
         static QDate fromVariant(const QVariant &variant);
 
-    public slots:
+    public Q_SLOTS:
         QObject* addDays(int ndays);
         QObject* addMonths(int nmonths);
         QObject* addYears(int nyears);
@@ -133,7 +133,7 @@ class StaticDateWrapper : public QObject
 
         StaticDateWrapper(QObject *parent = 0);
 
-    public slots:
+    public Q_SLOTS:
         QObject* currentDate();
         QObject* fromJulianDay(int jd);
         QObject* fromString(const QString & string, int format = Qt::TextDate);
@@ -240,7 +240,7 @@ class ComicProviderWrapper : public QObject
         QVariant nextIdentifierVariant() const;
         QVariant previousIdentifierVariant() const;
 
-    public slots:
+    public Q_SLOTS:
         void finished() const;
         void error() const;
 

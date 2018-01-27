@@ -36,10 +36,10 @@ class ComicArchiveDialog : public QDialog
     public:
         ComicArchiveDialog( const QString &pluginName, const QString &comicName, IdentifierType identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, const QString &savingDir = QString(), QWidget *parent = 0 );
 
-    signals:
+    Q_SIGNALS:
         void archive( int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
 
-    private slots:
+    private Q_SLOTS:
         void archiveTypeChanged( int newType );
         void fromDateChanged( const QDate &newDate );
         void toDateChanged( const QDate &newDate );

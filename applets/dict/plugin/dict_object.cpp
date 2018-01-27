@@ -41,7 +41,7 @@ public:
         emit wordClicked(word);
    }
 
-signals:
+Q_SIGNALS:
     void wordClicked(const QString &word);
 };
 

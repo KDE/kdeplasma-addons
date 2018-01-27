@@ -48,7 +48,7 @@ class StripSelector : public QObject
          */
         virtual void select(const ComicData &currentStrip) = 0;
 
-    signals:
+    Q_SIGNALS:
         /**
          * @param strip the selected strip, can be empty
          * 

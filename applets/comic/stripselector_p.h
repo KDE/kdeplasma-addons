@@ -52,7 +52,7 @@ class DateStripSelector : public StripSelector
 
         void select(const ComicData &currentStrip) Q_DECL_OVERRIDE;
 
-    private slots:
+    private Q_SLOTS:
         void slotChosenDay(const QDate &date);
 
     private:

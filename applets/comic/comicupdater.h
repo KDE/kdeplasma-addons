@@ -56,7 +56,7 @@ class ComicUpdater : public QObject
         void setInterval( int interval );
         int interval() const;
 
-    private slots:
+    private Q_SLOTS:
          /**
           * Will check if an update is needed, if so will search
           * for updates and do them automatically

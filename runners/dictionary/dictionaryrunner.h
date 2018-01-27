@@ -21,7 +21,7 @@ private:
     QString m_triggerWord;
     DictionaryMatchEngine *m_engine;
 
-protected slots:
+protected Q_SLOTS:
     void init() Q_DECL_OVERRIDE;
 
 };

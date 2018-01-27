@@ -34,7 +34,7 @@ private:
     QReadWriteLock m_wordLock;
     Plasma::DataEngine *m_dictionaryEngine;
 
-private slots:
+private Q_SLOTS:
     void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
     void sourceAdded(const QString &source);
 

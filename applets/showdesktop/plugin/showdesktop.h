@@ -35,7 +35,7 @@ public:
 
     Q_INVOKABLE void minimizeAll();
 
-signals:
+Q_SIGNALS:
     void showingDesktopChanged(bool showingDesktop);
 
 };

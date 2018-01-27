@@ -90,7 +90,7 @@ public:
     Q_INVOKABLE void pick();
     Q_INVOKABLE void copyToClipboard(const QString &text);
 
-signals:
+Q_SIGNALS:
     void currentColorChanged();
 
 private:

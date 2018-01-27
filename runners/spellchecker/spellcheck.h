@@ -40,7 +40,7 @@ public:
 
     void reloadConfiguration() Q_DECL_OVERRIDE;
 
-protected slots:
+protected Q_SLOTS:
     void init() Q_DECL_OVERRIDE;
     void loaddata();
     void destroydata();

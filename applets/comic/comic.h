@@ -156,7 +156,7 @@ Q_SIGNALS:
         void slotArchive( int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
         void slotArchiveFinished( KJob *job );
 
-    public slots:
+    public Q_SLOTS:
         void configChanged() Q_DECL_OVERRIDE;
         void saveConfig();
         Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
