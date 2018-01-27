@@ -16,11 +16,5 @@ target_link_libraries(showdesktopplugin
      KF5::WindowSystem
     )
 
-if (Qt5X11Extras_FOUND)
-    target_link_libraries(showdesktopplugin
-         Qt5::X11Extras
-        )
-endif()
-
 install(TARGETS showdesktopplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/showdesktop)
 install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/showdesktop)
