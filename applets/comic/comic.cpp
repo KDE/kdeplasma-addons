@@ -161,6 +161,7 @@ ComicApplet::~ComicApplet()
         }
     }
     delete mSavingDir;
+    delete m_newStuffDialog;
 }
 
 void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )

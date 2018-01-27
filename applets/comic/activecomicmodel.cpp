@@ -20,19 +20,23 @@
 ActiveComicModel::ActiveComicModel(QObject *parent)
     : QStandardItemModel(0, 1, parent)
 {
-    QHash<int, QByteArray> newRoleNames = roleNames();
-    newRoleNames[ComicKeyRole] = "key";
-    newRoleNames[ComicTitleRole] = "title";
-    newRoleNames[ComicIconRole] = "icon";
-    newRoleNames[ComicHighlightRole] = "highlight";
-
-    setRoleNames(newRoleNames);
     connect(this, &ActiveComicModel::modelReset,
             this, &ActiveComicModel::countChanged);
     connect(this, &ActiveComicModel::rowsInserted,
             this, &ActiveComicModel::countChanged);
     connect(this, &ActiveComicModel::rowsRemoved,
             this, &ActiveComicModel::countChanged);
+}
+
+QHash<int, QByteArray> ActiveComicModel::roleNames() const
+{
+    auto roleNames = QStandardItemModel::roleNames();
+    roleNames.insert(ComicKeyRole, "key");
+    roleNames.insert(ComicTitleRole, "title");
+    roleNames.insert(ComicIconRole, "icon");
+    roleNames.insert(ComicHighlightRole, "highlight");
+
+    return roleNames;
 }
 
 void ActiveComicModel::addComic(const QString &key, const QString &title, const QString &iconPath, bool highlight)

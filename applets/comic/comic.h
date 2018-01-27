@@ -211,7 +211,7 @@ Q_SIGNALS:
         QSizeF mLastSize;
         QSizeF mIdealSize;
         Plasma::DataEngine *mEngine;
-        QWeakPointer<KNS3::DownloadDialog> m_newStuffDialog;
+        QPointer<KNS3::DownloadDialog> m_newStuffDialog;
 
         //Tabs
         bool mTabAdded;

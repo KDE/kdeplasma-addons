@@ -36,6 +36,8 @@ public:
 
     ActiveComicModel(QObject *parent = 0);
 
+    QHash<int, QByteArray> roleNames() const override;
+
     void addComic(const QString &key, const QString &title, const QString &iconPath, bool highlight = true);
 
     int count() { return rowCount(QModelIndex()); }

@@ -24,6 +24,7 @@
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 #include <QXmlStreamReader>
+#include <QUrlQuery>
 
 #include <QDebug>
 #include <kio/job.h>
@@ -41,11 +42,13 @@ class FlickrProvider::Private
 
     QUrl buildUrl(const QDate &date) {
         QUrl url(QLatin1String( "https://api.flickr.com/services/rest/"));
-        url.addQueryItem("api_key", FLICKR_API_KEY);
-        url.addQueryItem("method", "flickr.interestingness.getList");
-        url.addQueryItem("date", date.toString( Qt::ISODate ) );
+        QUrlQuery urlQuery(url);
+        urlQuery.addQueryItem("api_key", FLICKR_API_KEY);
+        urlQuery.addQueryItem("method", "flickr.interestingness.getList");
+        urlQuery.addQueryItem("date", date.toString( Qt::ISODate ) );
         // url_o might be either too small or too large.
-        url.addQueryItem("extras", "url_k,url_h,url_o");
+        urlQuery.addQueryItem("extras", "url_k,url_h,url_o");
+        url.setQuery(urlQuery);
 
         return url;
     }
