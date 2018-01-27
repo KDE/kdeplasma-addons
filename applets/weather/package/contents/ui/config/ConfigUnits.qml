@@ -16,8 +16,8 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Layouts 1.0
+import QtQuick.Controls 2.2 as QtControls
+import QtQuick.Layouts 1.3
 
 import org.kde.plasma.private.weather 1.0
 
@@ -71,7 +71,6 @@ ColumnLayout {
             id: temperatureComboBox
             Layout.row: 0
             Layout.column: 1
-            Layout.minimumWidth: units.gridUnit * 8
             model: TemperatureUnitListModel
             textRole: "display"
             onCurrentIndexChanged: unitsConfigPage.configurationChanged();
@@ -88,7 +87,6 @@ ColumnLayout {
             id: pressureComboBox
             Layout.row: 1
             Layout.column: 1
-            Layout.minimumWidth: units.gridUnit * 8
             model: PressureUnitListModel
             textRole: "display"
             onCurrentIndexChanged: unitsConfigPage.configurationChanged();
@@ -105,7 +103,6 @@ ColumnLayout {
             id: windSpeedComboBox
             Layout.row: 2
             Layout.column: 1
-            Layout.minimumWidth: units.gridUnit * 8
             model: WindSpeedUnitListModel
             textRole: "display"
             onCurrentIndexChanged: unitsConfigPage.configurationChanged();
@@ -122,7 +119,6 @@ ColumnLayout {
             id: visibilityComboBox
             Layout.row: 3
             Layout.column: 1
-            Layout.minimumWidth: units.gridUnit * 8
             model: VisibilityUnitListModel
             textRole: "display"
             onCurrentIndexChanged: unitsConfigPage.configurationChanged();
