@@ -9,12 +9,6 @@ add_subdirectory(notes)
 add_subdirectory(timer)
 add_subdirectory(dict)
 
-find_package(KDEExperimentalPurpose QUIET)
-set_package_properties(KDEExperimentalPurpose PROPERTIES DESCRIPTION "EXPERIMENTAL. Support for QuickShare sharing"
-                       URL "https://projects.kde.org/projects/playground/libs/purpose"
-                       TYPE RUNTIME
-                      )
-
 add_subdirectory(quickshare)
 
 if(NOT WIN32)

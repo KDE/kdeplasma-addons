@@ -29,6 +29,7 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     Quick
     Qml
     Widgets
+    WebEngine
 )
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
@@ -39,6 +40,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     IconThemes
     KIO
     KCMUtils
+    Kross
     Notifications
     Plasma
     Runner
@@ -50,6 +52,14 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 )
 
 find_package(LibTaskManager CONFIG REQUIRED)
+
+find_package(KF5Purpose CONFIG QUIET)
+set_package_properties(KF5Purpose PROPERTIES
+    DESCRIPTION "Framework for cross-application services and actions"
+    PURPOSE "Needed for QuickShare applet"
+    URL "https://commits.kde.org/purpose"
+    TYPE RUNTIME
+)
 
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
@@ -79,4 +89,4 @@ add_subdirectory(wallpapers)
 add_subdirectory(windowswitchers)
 add_subdirectory(desktopswitchers)
 
-feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

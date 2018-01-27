@@ -10,8 +10,6 @@ install(FILES accessories-dictionary.svgz
 #######################################################################################
 # C++ Plugin
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED WebEngine)
-
 add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.dict")
 
 set(dict_SRCS

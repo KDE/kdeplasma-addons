@@ -4,7 +4,6 @@ set(comic_engine_SRCS
     comicproviderkross.cpp
     comicproviderwrapper.cpp
 )
-find_package(KF5Kross REQUIRED)
 
 add_library(plasma_engine_comic MODULE ${comic_engine_SRCS})
 
