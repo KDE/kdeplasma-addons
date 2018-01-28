@@ -29,7 +29,6 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     Quick
     Qml
     Widgets
-    WebEngine
 )
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
