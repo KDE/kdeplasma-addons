@@ -1,23 +1,11 @@
-# add_subdirectory(browserhistory)
 add_subdirectory(converter)
 add_subdirectory(datetime)
 add_subdirectory(katesessions)
-# add_subdirectory(konquerorsessions)
-# add_subdirectory(kopete)
 # add_subdirectory(mediawiki)
 add_subdirectory(spellchecker)
 # add_subdirectory(characters)
 add_subdirectory(dictionary)
-# 
-# if(KDEPIMLIBS_FOUND)
-#  add_subdirectory(events)
-# endif(KDEPIMLIBS_FOUND)
-# 
+
 # if(NOT WIN32)
 #  add_subdirectory(konsolesessions)
 # endif(NOT WIN32)
-# 
-# if(QJSON_FOUND)
-#  add_subdirectory(youtube)
-#  add_subdirectory(translator)
-# endif(QJSON_FOUND)
