@@ -1,3 +1,11 @@
+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG COMPONENTS WebEngine)
+
+set_package_properties(Qt5WebEngine PROPERTIES DESCRIPTION "needed by the dict applet"
+    URL "https://doc.qt.io/qt-5/qtwebengine-index.html"
+)
+
+if (Qt5WebEngine_FOUND)
+
 #######################################################################################
 # Package (metadata.desktop and QML)
 plasma_install_package(package org.kde.plasma_applet_dict)
@@ -30,3 +38,4 @@ target_link_libraries(dictplugin
 install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/dict)
 install(TARGETS dictplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/dict)
 
+endif()
