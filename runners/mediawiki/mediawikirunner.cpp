@@ -18,45 +18,45 @@
  */
 
 #include "mediawikirunner.h"
+
 #include "mediawiki.h"
 
-#include <QMutex>
-#include <QtCore/QEventLoop>
-#include <QWaitCondition>
-
-#include <KDebug>
-#include <KIcon>
+// KF
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
-#include <KToolInvocation>
-#include <solid/networking.h>
+#include <KLocalizedString>
+// Qt
+#include <QMutex>
+#include <QEventLoop>
+#include <QWaitCondition>
+#include <QDesktopServices>
+#include <QDebug>
 
-MediaWikiRunner::MediaWikiRunner(QObject *parent, const QVariantList& args)
+
+MediaWikiRunner::MediaWikiRunner(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
-    Q_UNUSED(args);
-    setObjectName("MediaWikiRunner");
+    setObjectName(QStringLiteral("MediaWikiRunner"));
 
-    const QString constraint = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(id());
-    const KService::List offers = KServiceTypeTrader::self()->query("Plasma/Runner", constraint);
+    const QString constraint = QStringLiteral("[X-KDE-PluginInfo-Name] == '%1'").arg(id());
+    const KService::List offers = KServiceTypeTrader::self()->query(QStringLiteral("Plasma/Runner"), constraint);
 
     foreach (const KPluginInfo &info, KPluginInfo::fromServices(offers)) {
 
-        QStringList _urls = info.property("X-Plasma-Args").toStringList();
-        QString _u;
-        kDebug() << info.name() << info.property("X-Plasma-Args").toStringList() << _urls.count();
+        const auto _urls = info.property(QStringLiteral("X-Plasma-Args")).toStringList();
+        qDebug() << info.name() << _urls << _urls.count();
         if (_urls.count()) {
-            m_apiUrl = _urls[0];
+            m_apiUrl = QUrl(_urls[0]);
         } else {
-            kWarning() << "No X-Plasma-Args found in .desktop file";
+            qWarning() << "No X-Plasma-Args found in .desktop file";
         }
         m_name = info.name();
         m_comment = info.comment();
-        m_icon = KIcon(info.icon());
+        m_iconName = info.icon();
     }
 
 
-    addSyntax(Plasma::RunnerSyntax("wiki :q:", i18n("Searches %1 for :q:.", m_name)));
+    addSyntax(Plasma::RunnerSyntax(QStringLiteral("wiki :q:"), i18n("Searches %1 for :q:.", m_name)));
 
     setSpeed( SlowSpeed );
 }
@@ -69,20 +69,23 @@ MediaWikiRunner::~MediaWikiRunner()
 void MediaWikiRunner::match(Plasma::RunnerContext &context)
 {
     // Check for networkconnection
-    if(Solid::Networking::status() == Solid::Networking::Unconnected) {
+    if (!m_networkConfigurationManager.isOnline() ||
+        !m_apiUrl.isValid()) {
         return;
     }
 
     QString term = context.query();
+
     if (!context.singleRunnerQueryMode()) {
-        if (!term.startsWith("wiki ")) {
+        if (!term.startsWith(QLatin1String("wiki "))) {
             return;
-        } else {
-            term = term.remove("wiki ");
         }
+
+        term.remove(0, 5);
     }
-    if (!m_apiUrl.isValid() || term.length() < 3) {
-        //kDebug() << "yours is too short" << term;
+
+    if (term.length() < 3) {
+        //qDebug() << "yours is too short" << term;
         return;
     }
 
@@ -105,10 +108,10 @@ void MediaWikiRunner::match(Plasma::RunnerContext &context)
         mediawiki.setMaxItems(3);
     }
     mediawiki.setApiUrl( m_apiUrl );
-    connect( &mediawiki, SIGNAL(finished(bool)), &loop, SLOT(quit()) );
+    connect(&mediawiki, &MediaWiki::finished, &loop, &QEventLoop::quit);
 
     mediawiki.search(term);
-    kDebug() << "Wikisearch:" << m_name << term;
+    qDebug() << "Wikisearch:" << m_name << term;
 
     loop.exec();
 
@@ -119,27 +122,32 @@ void MediaWikiRunner::match(Plasma::RunnerContext &context)
     qreal stepRelevance = 0.1;
 
     foreach(const MediaWiki::Result& res, mediawiki.results()) {
-        kDebug() << "Match:" << res.url << res.title;
+        qDebug() << "Match:" << res.url << res.title;
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::PossibleMatch);
-        match.setIcon(m_icon);
-        match.setText(QString("%1: %2").arg(m_name, res.title));
+        match.setIconName(m_iconName);
+        match.setText(QStringLiteral("%1: %2").arg(m_name, res.title));
         match.setData(res.url);
         match.setRelevance(relevance);
         relevance +=stepRelevance;
         stepRelevance *=0.5;
-        context.addMatch(res.title, match);
+        context.addMatch(match);
     }
 }
 
 void MediaWikiRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
+
     const QString wikiurl = match.data().toUrl().toString();
-    kDebug() << "Open MediaWiki page " << wikiurl;
+    qDebug() << "Open MediaWiki page " << wikiurl;
 
     if (!wikiurl.isEmpty()) {
-        KToolInvocation::invokeBrowser(wikiurl, "");
+        QDesktopServices::openUrl(QUrl(wikiurl));
     }
 }
 
+
+K_EXPORT_PLASMA_RUNNER(mediawiki, MediaWikiRunner)
+
+#include "mediawikirunner.moc"

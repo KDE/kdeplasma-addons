@@ -20,16 +20,15 @@
 
 #include "mediawiki.h"
 
+// KF
+#include <KRunner/RunnerContext>
+// Qt
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QXmlStreamReader>
 #include <QTimer>
-
-#include <KDebug>
-#include <KIO/AccessManager>
-
-#include <Plasma/RunnerContext>
+#include <QUrlQuery>
 
 enum State {
     StateApiChanged,
@@ -56,16 +55,17 @@ MediaWiki::MediaWiki( QObject *parent )
 {
     d->state = StateApiChanged;
     // should be overwritten by the user
-    d->apiUrl = QUrl("http://en.wikipedia.org/w/api.php");
+    d->apiUrl = QUrl(QStringLiteral("https://en.wikipedia.org/w/api.php"));
     //FIXME: at the moment KIO doesn't seem to work in threads
     d->manager = new QNetworkAccessManager( this );
+    d->manager->setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
     //d->manager = new KIO::AccessManager( this );
     d->maxItems = 10;
     d->timeout = 30 * 1000; // 30 second
-    d->reply = 0;
+    d->reply = nullptr;
     d->userAgent = QByteArray("KDE Plasma Silk; MediaWikiRunner; 1.0");
 
-    connect( d->manager, SIGNAL(finished(QNetworkReply*)), SLOT(finished(QNetworkReply*)) );
+    connect(d->manager, &QNetworkAccessManager::finished, this, &MediaWiki::onNetworkRequestFinished);
 }
 
 MediaWiki::~MediaWiki()
@@ -118,24 +118,26 @@ void MediaWiki::abort()
     return;
 
     d->reply->abort();
-    d->reply = 0;
+    d->reply = nullptr;
 }
 
 void MediaWiki::search( const QString &searchTerm )
 {
     QUrl url = d->apiUrl;
-    url.addQueryItem( QString("action"), QString("query") );
-    url.addQueryItem( QString("format"), QString("xml") );
-    url.addQueryItem( QString("list"), QString("search") );
-    url.addQueryItem( QString("srsearch"), searchTerm );
-    url.addQueryItem( QString("srlimit"), QString::number(d->maxItems) );
+    QUrlQuery urlQuery(url);
+    urlQuery.addQueryItem(QStringLiteral("action"), QStringLiteral("query"));
+    urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("xml"));
+    urlQuery.addQueryItem(QStringLiteral("list"), QStringLiteral("search"));
+    urlQuery.addQueryItem(QStringLiteral("srsearch"), searchTerm );
+    urlQuery.addQueryItem(QStringLiteral("srlimit"), QString::number(d->maxItems));
+    url.setQuery(urlQuery);
 
-    kDebug() << "Constructed search URL" << url;
+    qDebug() << "Constructed search URL" << url;
 
     if ( d->state == StateReady ) {
         QNetworkRequest req(url);
         req.setRawHeader( QByteArray("User-Agent"), d->userAgent );
-        kDebug() << "mediawiki User-Agent" << req.rawHeader(QByteArray("UserAgent"));
+        qDebug() << "mediawiki User-Agent" << req.rawHeader(QByteArray("UserAgent"));
 
         d->reply = d->manager->get( req );
         QTimer::singleShot( d->timeout, this, SLOT(abort()) );
@@ -149,11 +151,13 @@ void MediaWiki::findBase()
 {
     // http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo
     QUrl url = d->apiUrl;
-    url.addQueryItem( QString("action"), QString("query") );
-    url.addQueryItem( QString("format"), QString("xml") );
-    url.addQueryItem( QString("meta"), QString("siteinfo") );
+    QUrlQuery urlQuery(url);
+    urlQuery.addQueryItem(QStringLiteral("action"), QStringLiteral("query"));
+    urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("xml"));
+    urlQuery.addQueryItem(QStringLiteral("meta"), QStringLiteral("siteinfo"));
+    url.setQuery(urlQuery);
 
-    kDebug() << "Constructed base query URL" << url;
+    qDebug() << "Constructed base query URL" << url;
     QNetworkRequest req(url);
     req.setRawHeader( QByteArray("User-Agent"), d->userAgent );
 
@@ -161,21 +165,21 @@ void MediaWiki::findBase()
     d->state = StateApiUpdating;
 }
 
-void MediaWiki::finished( QNetworkReply *reply )
+void MediaWiki::onNetworkRequestFinished(QNetworkReply *reply)
 {
     if ( reply->error() != QNetworkReply::NoError ) {
-        kDebug() << "Request failed, " << reply->errorString();
+        qDebug() << "Request failed, " << reply->errorString();
         emit finished(false);
         return;
     }
 
-    kDebug() << "Request succeeded" << d->apiUrl;
+    qDebug() << "Request succeeded" << d->apiUrl;
 
     if ( d->state == StateApiUpdating ) {
         bool ok = processBaseResult( reply );
         Q_UNUSED ( ok );
         reply->deleteLater();
-        reply= 0;
+        reply= nullptr;
         d->state = StateReady;
 
         QNetworkRequest req(d->query);
@@ -187,7 +191,7 @@ void MediaWiki::finished( QNetworkReply *reply )
 
         emit finished( ok );
         d->reply->deleteLater();
-        d->reply = 0;
+        d->reply = nullptr;
     }
 }
 
@@ -197,13 +201,13 @@ bool MediaWiki::processBaseResult( QIODevice *source )
 
     while ( !reader.atEnd() ) {
         QXmlStreamReader::TokenType tokenType = reader.readNext();
-        // kDebug() << "Token" << int(tokenType);
+        // qDebug() << "Token" << int(tokenType);
         if ( tokenType == QXmlStreamReader::StartElement ) {
-            if ( reader.name() == QString("general") ) {
+            if (reader.name() == QLatin1String("general")) {
                 QXmlStreamAttributes attrs = reader.attributes();
 
-            d->baseUrl = QUrl( attrs.value( QString("base") ).toString() );
-            return true;
+                d->baseUrl = QUrl(attrs.value(QStringLiteral("base")).toString());
+                return true;
             }
         } else if ( tokenType == QXmlStreamReader::Invalid )
             return false;
@@ -219,18 +223,18 @@ bool MediaWiki::processSearchResult( QIODevice *source )
     QXmlStreamReader reader( source );
     while ( !reader.atEnd() ) {
         QXmlStreamReader::TokenType tokenType = reader.readNext();
-        // kDebug() << "Token" << int(tokenType);
+        // qDebug() << "Token" << int(tokenType);
         if ( tokenType == QXmlStreamReader::StartElement ) {
-            if ( reader.name() == QString("p") ) {
+            if (reader.name() == QLatin1String("p")) {
                 QXmlStreamAttributes attrs = reader.attributes();
 
-            Result r;
-            r.url = d->baseUrl.resolved( attrs.value( QString("title") ).toString() );
-            r.title = attrs.value( QString("title") ).toString();
+                Result r;
+                r.title = attrs.value(QStringLiteral("title")).toString();
+                r.url = d->baseUrl.resolved(QUrl(r.title));
 
-            kDebug() << "Got result: url=" << r.url << "title=" << r.title;
+                qDebug() << "Got result: url=" << r.url << "title=" << r.title;
 
-            d->results.prepend( r );
+                d->results.prepend( r );
             }
         } else if ( tokenType == QXmlStreamReader::Invalid ) {
             return false;
@@ -238,5 +242,3 @@ bool MediaWiki::processSearchResult( QIODevice *source )
     }
     return true;
 }
-
-

@@ -106,4 +106,4 @@ X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=false
 
-X-Plasma-Args=http://techbase.kde.org/api.php
+X-Plasma-Args=https://techbase.kde.org/api.php

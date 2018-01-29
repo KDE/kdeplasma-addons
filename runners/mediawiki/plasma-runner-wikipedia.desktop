@@ -115,4 +115,4 @@ X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=false
 X-Plasma-AdvertiseSingleRunnerQueryMode=true
 
-X-Plasma-Args=http://en.wikipedia.org/w/api.php
+X-Plasma-Args=https://en.wikipedia.org/w/api.php

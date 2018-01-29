@@ -20,37 +20,30 @@
 #ifndef MEDIAWIKIRUNNER_H
 #define MEDIAWIKIRUNNER_H
 
-#include <plasma/abstractrunner.h>
+// KF
+#include <KRunner/AbstractRunner>
+// Qt
+#include <QNetworkConfigurationManager>
 
-class KIcon;
 
-#include <KIcon>
-#include <QWaitCondition>
-
-class QWaitCondition;
-
-#include "mediawiki.h"
-
-class MediaWikiRunner : public Plasma::AbstractRunner {
+class MediaWikiRunner : public Plasma::AbstractRunner
+{
     Q_OBJECT
 
-    public:
-        MediaWikiRunner( QObject *parent, const QVariantList& args );
-        ~MediaWikiRunner();
+public:
+    MediaWikiRunner(QObject *parent, const QVariantList &args);
+    ~MediaWikiRunner() override;
 
-        void match(Plasma::RunnerContext &context);
-        void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+    void match(Plasma::RunnerContext &context) override;
+    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
 
-    signals:
-        void done();
+private:
+    QString m_iconName;
+    QString m_name;
+    QString m_comment;
+    QUrl m_apiUrl;
 
-    private:
-        KIcon m_icon;
-        QString m_name;
-        QString m_comment;
-        QUrl m_apiUrl;
+    QNetworkConfigurationManager m_networkConfigurationManager;
 };
-
-K_EXPORT_PLASMA_RUNNER(mediawiki, MediaWikiRunner)
 
 #endif

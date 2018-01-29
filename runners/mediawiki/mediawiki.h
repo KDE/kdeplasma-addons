@@ -21,11 +21,13 @@
 #ifndef MEDIAWIKI_H
 #define MEDIAWIKI_H
 
+// Qt
 #include <QObject>
 #include <QList>
 #include <QUrl>
 
 class QNetworkReply;
+class QIODevice;
 
 /**
  * Searches MediaWiki based wikis like wikipedia and techbase.
@@ -69,8 +71,8 @@ public:
      * a time.
      * @param parent The parent object
      */
-    MediaWiki( QObject *parent=0 );
-    virtual ~MediaWiki();
+    explicit MediaWiki(QObject *parent = nullptr);
+    ~MediaWiki() override;
 
     /**
      * @returns a list of matches.
@@ -108,14 +110,14 @@ public:
      */
     void setTimeout( int millis );
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when a search has been completed.
      * @param success true if the search was completed successfully.
      */
     void finished( bool success );
 
-public slots:
+public Q_SLOTS:
     /**
      * Search the wiki for the specified search term.
      */
@@ -126,8 +128,8 @@ public slots:
      */
     void abort();
 
-private slots:
-    void finished( QNetworkReply *reply );
+private Q_SLOTS:
+    void onNetworkRequestFinished(QNetworkReply *reply);
 
 private:
     void findBase();

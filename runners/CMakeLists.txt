@@ -1,7 +1,7 @@
 add_subdirectory(converter)
 add_subdirectory(datetime)
 add_subdirectory(katesessions)
-# add_subdirectory(mediawiki)
+add_subdirectory(mediawiki)
 add_subdirectory(spellchecker)
 add_subdirectory(characters)
 add_subdirectory(dictionary)
