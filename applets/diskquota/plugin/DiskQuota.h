@@ -43,8 +43,6 @@ class DiskQuota : public QObject
 
     Q_PROPERTY(QuotaListModel* model READ model CONSTANT)
 
-    Q_ENUMS(TrayStatus)
-
 public:
     DiskQuota(QObject *parent = nullptr);
 
@@ -57,6 +55,7 @@ public:
         PassiveStatus,
         NeedsAttentionStatus
     };
+    Q_ENUM(TrayStatus)
 
 public:
     bool quotaInstalled() const;

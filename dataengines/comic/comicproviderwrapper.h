@@ -120,7 +120,6 @@ class DateWrapper : public QObject
 class StaticDateWrapper : public QObject
 {
         Q_OBJECT
-        Q_ENUMS(DateType)
     public:
         enum DateType {
             TextDate = Qt::TextDate,
@@ -130,6 +129,7 @@ class StaticDateWrapper : public QObject
             DefaultLocaleShortDate = Qt::DefaultLocaleShortDate,
             DefaultLocaleLongDate = Qt::DefaultLocaleLongDate
         };
+        Q_ENUM(DateType)
 
         StaticDateWrapper(QObject *parent = nullptr);
 
@@ -149,10 +149,6 @@ class StaticDateWrapper : public QObject
 class ComicProviderWrapper : public QObject
 {
         Q_OBJECT
-        Q_ENUMS(IdentifierType)
-        Q_ENUMS(RequestType)
-        Q_ENUMS(PositionType)
-        Q_ENUMS(RedirectedUrlType)
         Q_PROPERTY(bool identifierSpecified READ identifierSpecified)
         Q_PROPERTY(QString textCodec READ textCodec WRITE setTextCodec)
         Q_PROPERTY(QString comicAuthor READ comicAuthor WRITE setComicAuthor)
@@ -175,16 +171,21 @@ class ComicProviderWrapper : public QObject
             Right,
             Bottom
         };
+        Q_ENUM(PositionType)
+
         enum RequestType {
             Page = ComicProvider::Page,
             Image = ComicProvider::Image,
             User = ComicProvider::User
         };
+        Q_ENUM(RequestType)
+
         enum IdentifierType {
             DateIdentifier   = ComicProvider::DateIdentifier,
             NumberIdentifier = ComicProvider::NumberIdentifier,
             StringIdentifier = ComicProvider::StringIdentifier
         };
+        Q_ENUM(IdentifierType)
 
         enum RedirectedUrlType {
             PreviousUrl = 0,
@@ -194,6 +195,7 @@ class ComicProviderWrapper : public QObject
             LastUrl = 4,
             UserUrl = 10
         };
+        Q_ENUM(RedirectedUrlType)
 
         ComicProviderWrapper(ComicProviderKross *parent);
         ~ComicProviderWrapper() override;

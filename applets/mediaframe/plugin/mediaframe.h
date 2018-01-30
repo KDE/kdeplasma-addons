@@ -42,7 +42,7 @@ class MediaFrame : public QObject
             NON_RECURSIVE,
             RECURSIVE
         };
-        Q_ENUMS(AddOption)
+        Q_ENUM(AddOption)
 
         MediaFrame(QObject *parent = nullptr);
         ~MediaFrame() override;

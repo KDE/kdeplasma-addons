@@ -57,7 +57,7 @@ class PLASMA_GROUPINGCONTAINMENT_EXPORT AbstractGroup : public QGraphicsWidget
                                          e.g. a layout */
             FreeGroup = 1           /**< The applets can be freely transformed */
         };
-        Q_ENUMS(GroupType)
+        Q_ENUM(GroupType)
 
         /**
          * Description on how draw a background for the group
