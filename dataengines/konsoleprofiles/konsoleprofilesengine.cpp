@@ -92,7 +92,6 @@ void KonsoleProfilesEngine::loadProfiles()
                 niceName = grp.readEntry( "Name" );
             }
 
-            QString sourceName = "name:" + profileName;
             qDebug() << "adding sourcename: " << profileName << " ++" << niceName;
             setData(profileName, "prettyName", niceName);
         }
