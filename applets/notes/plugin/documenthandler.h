@@ -53,8 +53,6 @@ class DocumentHandler : public QObject
 {
     Q_OBJECT
 
-    Q_ENUMS(HAlignment)
-
     Q_PROPERTY(QQuickItem *target READ target WRITE setTarget NOTIFY targetChanged)
     Q_PROPERTY(int cursorPosition READ cursorPosition WRITE setCursorPosition NOTIFY cursorPositionChanged)
     Q_PROPERTY(int selectionStart READ selectionStart WRITE setSelectionStart NOTIFY selectionStartChanged)
