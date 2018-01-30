@@ -28,9 +28,6 @@ plasma_install_package(konsoleprofiles/package org.kde.plasma.konsoleprofiles)
 plasma_install_package(kickerdash org.kde.plasma.kickerdash)
 add_subdirectory(quicklaunch)
 
-#This applet is disabled because although ported it does not work
-# add_subdirectory(eyes)
-
 add_subdirectory(userswitcher)
 add_subdirectory(weather)
 add_subdirectory(grouping)
