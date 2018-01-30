@@ -12,8 +12,10 @@ plasma_install_package(package org.kde.plasma_applet_dict)
 
 #######################################################################################
 # Icon for the package
-install(FILES accessories-dictionary.svgz
-        DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps/)
+ecm_install_icons(
+    ICONS sc-apps-accessories-dictionary.svgz
+    DESTINATION ${KDE_INSTALL_ICONDIR}
+)
 
 #######################################################################################
 # C++ Plugin

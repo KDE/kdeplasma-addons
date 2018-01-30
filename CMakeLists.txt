@@ -18,6 +18,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
+include(ECMInstallIcons)
 include(GenerateExportHeader)
 
 set(REQUIRED_QT_VERSION 5.9.0)

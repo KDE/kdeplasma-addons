@@ -1,5 +1,7 @@
-install(FILES fifteenpuzzle.svgz
-        DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps/)
+ecm_install_icons(
+    ICONS sc-apps-fifteenpuzzle.svgz
+    DESTINATION ${KDE_INSTALL_ICONDIR}
+)
 
 plasma_install_package(package org.kde.plasma.fifteenpuzzle)
 
