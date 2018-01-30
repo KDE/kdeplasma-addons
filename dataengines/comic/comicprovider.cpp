@@ -80,7 +80,7 @@ class ComicProvider::Private
         void slotTimeout()
         {
             //operation took too long, abort it
-            mParent->error(mParent);
+            emit mParent->error(mParent);
         }
 
         void slotFinished()
