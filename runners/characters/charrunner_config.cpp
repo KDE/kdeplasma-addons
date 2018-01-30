@@ -22,6 +22,8 @@
 // KF
 #include <KRunner/AbstractRunner>
 #include <KSharedConfig>
+// Qt
+#include <QDebug>
 
 //Names of config-entries
 static const char CONFIG_TRIGGERWORD[] = "triggerWord";
@@ -75,12 +77,17 @@ void CharacterRunnerConfig::load()
     grp = KConfigGroup(&grp, "CharacterRunner");
 
     m_ui->edit_trigger->setText(grp.readEntry(CONFIG_TRIGGERWORD, "#")); //read out triggerword and put into the trigger-lineEdit
-    for(int i=0; i<grp.readEntry(CONFIG_ALIASES, QList<QString>()).size(); i++) //read out aliaslist and add Items to the list-view widget
-    {
-      QTreeWidgetItem* item = new QTreeWidgetItem(m_ui->list, 2);
-      item->setText(0, grp.readEntry(CONFIG_ALIASES, QList<QString>())[i]);
-      item->setText(1, grp.readEntry(CONFIG_CODES, QList<QString>())[i]);
-      m_ui->list->addTopLevelItem(item);
+    const auto aliasList = grp.readEntry(CONFIG_ALIASES, QList<QString>());
+    const auto codeList = grp.readEntry(CONFIG_CODES, QList<QString>());
+    if (aliasList.size() == codeList.size()) {
+        for (int i = 0; i < aliasList.size(); ++i) { //read out aliaslist and add Items to the list-view widget
+            QTreeWidgetItem* item = new QTreeWidgetItem(m_ui->list, 2);
+            item->setText(0, aliasList[i]);
+            item->setText(1, codeList[i]);
+            m_ui->list->addTopLevelItem(item);
+        }
+    } else {
+        qWarning() << "Config entries for alias list and code list have different sizes, ignoring all.";
     }
     emit changed(false);
 }
