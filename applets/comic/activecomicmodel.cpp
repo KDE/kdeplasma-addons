@@ -54,9 +54,10 @@ QVariantHash ActiveComicModel::get(int row) const
     QModelIndex idx = index(row, 0);
     QVariantHash hash;
 
-    QHash<int, QByteArray>::const_iterator i;
-    for (i = roleNames().constBegin(); i != roleNames().constEnd(); ++i) {
-        hash[i.value()] = data(idx, i.key());
+    const auto roleNames = this->roleNames();
+    hash.reserve(roleNames.size());
+    for (auto end = roleNames.constEnd(), it = roleNames.constBegin(); it != end; ++it) {
+        hash.insert(it.value(), data(idx, it.key()));
     }
 
     return hash;
