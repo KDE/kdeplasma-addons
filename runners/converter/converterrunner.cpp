@@ -265,7 +265,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIconName(QStringLiteral("edit-copy"));
-        match.setText(QString(QLatin1String( "%1 (%2)" )).arg(v.toString()).arg(u.symbol()));
+        match.setText(QStringLiteral("%1 (%2)").arg(v.toString(), u.symbol()));
         match.setData(v.number());
         match.setRelevance(1.0 - std::abs(std::log10(v.number())) / 50.0);
         matches.append(match);
