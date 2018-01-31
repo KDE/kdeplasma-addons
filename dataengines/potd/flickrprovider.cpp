@@ -29,7 +29,7 @@
 
 #include <kio/job.h>
 
-#define FLICKR_API_KEY "11829a470557ad8e10b02e80afacb3af"
+#define FLICKR_API_KEY QStringLiteral("11829a470557ad8e10b02e80afacb3af")
 
 class FlickrProvider::Private
 {
@@ -43,11 +43,11 @@ class FlickrProvider::Private
     QUrl buildUrl(const QDate &date) {
         QUrl url(QLatin1String( "https://api.flickr.com/services/rest/"));
         QUrlQuery urlQuery(url);
-        urlQuery.addQueryItem("api_key", FLICKR_API_KEY);
-        urlQuery.addQueryItem("method", "flickr.interestingness.getList");
-        urlQuery.addQueryItem("date", date.toString( Qt::ISODate ) );
+        urlQuery.addQueryItem(QStringLiteral("api_key"), FLICKR_API_KEY);
+        urlQuery.addQueryItem(QStringLiteral("method"), QStringLiteral("flickr.interestingness.getList"));
+        urlQuery.addQueryItem(QStringLiteral("date"), date.toString(Qt::ISODate));
         // url_o might be either too small or too large.
-        urlQuery.addQueryItem("extras", "url_k,url_h,url_o");
+        urlQuery.addQueryItem(QStringLiteral("extras"), QStringLiteral("url_k,url_h,url_o"));
         url.setQuery(urlQuery);
 
         return url;
@@ -91,7 +91,7 @@ void FlickrProvider::Private::pageRequestFinished( KJob *_job )
 
         if (xml.isStartElement()) {
             auto attributes = xml.attributes();
-            if (xml.name() == "rsp") {
+            if (xml.name() == QLatin1String("rsp")) {
                 const int maxFailure = 5;
                 /* no pictures available for the specified parameters */
                 if (attributes.value ( QLatin1String( "stat" ) ).toString() != QLatin1String( "ok" )) {

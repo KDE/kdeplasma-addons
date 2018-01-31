@@ -109,6 +109,6 @@ void SpellCheckConfig::defaults()
 }
 
 K_PLUGIN_FACTORY(SpellCheckConfigFactory,
-                 registerPlugin<SpellCheckConfig>("kcm_krunner_spellcheck");)
+                 registerPlugin<SpellCheckConfig>(QStringLiteral("kcm_krunner_spellcheck"));)
 
 #include "spellcheck_config.moc"

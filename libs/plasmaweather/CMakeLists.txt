@@ -1,9 +1,5 @@
 add_definitions(-DTRANSLATION_DOMAIN="libplasmaweather")
 
-add_definitions(
-    -DQT_NO_CAST_FROM_ASCII
-)
-
 set(plasmaweather_LIB_SRCS
     weatherpopupapplet.cpp
     weathervalidator.cpp

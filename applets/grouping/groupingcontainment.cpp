@@ -61,7 +61,7 @@ void GroupingContainment::init()
 
 void GroupingContainment::newTask(const QString &task)
 {
-    createApplet(task, QVariantList() << "org.kde.plasma:force-create");
+    createApplet(task, QVariantList() << QStringLiteral("org.kde.plasma:force-create"));
 }
 
 void GroupingContainment::cleanupTask(const QString &task)

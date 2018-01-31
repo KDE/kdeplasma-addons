@@ -63,7 +63,7 @@ void ComicEngine::loadProviders()
 {
     mProviders.clear();
     removeAllData(QLatin1String("providers"));
-    auto comics = KPackage::PackageLoader::self()->listPackages("Plasma/Comic");
+    auto comics = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/Comic"));
     for (auto comic : comics) {
         mProviders << comic.pluginId();
 
@@ -140,7 +140,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             return true;
         }
 
-        KPackage::Package pkg = KPackage::PackageLoader::self()->loadPackage("Plasma/Comic", parts[0]);
+        KPackage::Package pkg = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Comic"), parts[0]);
 
         bool isCurrentComic = parts[1].isEmpty();
 
@@ -148,7 +148,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         ComicProvider *provider = nullptr;
 
         //const QString type = service->property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"), QVariant::String).toString();
-        const QString type = pkg.metadata().value("X-KDE-PlasmaComicProvider-SuffixType");
+        const QString type = pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType"));
         if (type == QLatin1String("Date")) {
             QDate date = QDate::fromString(parts[1], Qt::ISODate);
             if (!date.isValid())

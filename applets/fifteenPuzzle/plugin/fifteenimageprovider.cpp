@@ -34,7 +34,7 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
 {
     // id format is boardSize-imagenumber-pieceWidth-pieceHeight-imagePath
     qDebug() << "pixmap requested with id " << id;
-    QStringList idParts = id.split('-');
+    QStringList idParts = id.split(QLatin1Char('-'));
     if (idParts.size() < 4)
         return QPixmap();
 
@@ -49,7 +49,7 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
         update = true;
     }
 
-    if (idParts.at(1) == "all") {
+    if (idParts.at(1) == QLatin1String("all")) {
         return m_pixmap;
     } else {
         if (pieceWidth != m_pieceWidth || pieceHeight != m_pieceHeight) {

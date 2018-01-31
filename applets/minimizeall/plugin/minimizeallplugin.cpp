@@ -23,6 +23,6 @@
 
 void MinimizeAllPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.minimizeall"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.minimizeall"));
     qmlRegisterType<MinimizeAll>(uri, 1, 0, "MinimizeAll");
 }

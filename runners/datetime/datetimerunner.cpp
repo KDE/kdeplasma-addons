@@ -56,7 +56,7 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
         QDateTime dt = datetime(tz, tzName);
         if (dt.isValid()) {
             const QString date = QLocale().toString(dt.date());
-            addMatch(QString("%1 - %2").arg(tzName, date), date, context, QStringLiteral("view-calendar-day"));
+            addMatch(QStringLiteral("%1 - %2").arg(tzName, date), date, context, QStringLiteral("view-calendar-day"));
         }
     } else if (term.compare(timeWord, Qt::CaseInsensitive) == 0) {
         const QString time = QLocale().toString(QTime::currentTime());
@@ -67,7 +67,7 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
         QDateTime dt = datetime(tz, tzName);
         if (dt.isValid()) {
             const QString time = QLocale().toString(dt.time(),QLocale::ShortFormat);
-            addMatch(QString("%1 - %2").arg(tzName, time), time, context, QStringLiteral("clock"));
+            addMatch(QStringLiteral("%1 - %2").arg(tzName, time), time, context, QStringLiteral("clock"));
         }
     }
 }

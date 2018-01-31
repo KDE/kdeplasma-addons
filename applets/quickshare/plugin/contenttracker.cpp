@@ -33,7 +33,7 @@ ContentTracker::ContentTracker(QObject *parent)
     : QObject(parent)
 {
     connectToActivityManager();
-    QDBusServiceWatcher *watcher = new QDBusServiceWatcher("org.kde.ActivityManager", QDBusConnection::sessionBus(),
+    QDBusServiceWatcher *watcher = new QDBusServiceWatcher(QStringLiteral("org.kde.ActivityManager"), QDBusConnection::sessionBus(),
                                              QDBusServiceWatcher::WatchForOwnerChange, this);
     connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
             this, SLOT(serviceChange(QString,QString,QString)));
@@ -77,7 +77,7 @@ void ContentTracker::focusChanged(const QString &uri, const QString &mimetype, c
 void ContentTracker::connectToActivityManager()
 {
     delete m_activityManagerIface.data();
-    m_activityManagerIface = new OrgKdeActivityManagerSLCInterface("org.kde.ActivityManager", "/SLC",
+    m_activityManagerIface = new OrgKdeActivityManagerSLCInterface(QStringLiteral("org.kde.ActivityManager"), QStringLiteral("/SLC"),
                                     QDBusConnection::sessionBus());
     if (m_activityManagerIface->isValid()) {
 

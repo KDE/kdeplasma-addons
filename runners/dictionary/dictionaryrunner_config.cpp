@@ -10,7 +10,8 @@
 #include <klocalizedstring.h>
 #include <KPluginFactory>
 
-K_PLUGIN_FACTORY(DictionaryRunnerConfigFactory, registerPlugin<DictionaryRunnerConfig>("kcm_krunner_dictionary");)
+K_PLUGIN_FACTORY(DictionaryRunnerConfigFactory,
+                 registerPlugin<DictionaryRunnerConfig>(QStringLiteral("kcm_krunner_dictionary"));)
 
 DictionaryRunnerConfig::DictionaryRunnerConfig(QWidget* parent, const QVariantList& args) :
 	KCModule(parent, args)

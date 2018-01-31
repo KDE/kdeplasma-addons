@@ -60,7 +60,7 @@ DictObject::DictObject(QObject *parent)
 
 void DictObject::lookup(const QString &word)
 {
-    const QString newSource = m_selectedDict + ':' + word;
+    const QString newSource = m_selectedDict + QLatin1Char(':') + word;
 
     if (!m_source.isEmpty()) {
         m_dataEngine->disconnectSource(m_source, this);

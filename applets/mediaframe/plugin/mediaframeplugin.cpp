@@ -23,7 +23,7 @@
 
 void MediaFramePlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.mediaframe"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.mediaframe"));
 
     qmlRegisterType<MediaFrame>(uri, 2, 0, "MediaFrame");
 }

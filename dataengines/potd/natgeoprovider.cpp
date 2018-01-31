@@ -54,14 +54,14 @@ void NatGeoProvider::Private::pageRequestFinished( KJob* _job )
     }
 
     const QString data = QString::fromUtf8( job->data() );
-    const QStringList lines = data.split('\n');
+    const QStringList lines = data.split(QLatin1Char('\n'));
 
     QString url;
 
-    re.setPattern("^<meta\\s+property=\"og:image\"\\s+content=\"(.*)\".*/>$");
+    re.setPattern(QStringLiteral("^<meta\\s+property=\"og:image\"\\s+content=\"(.*)\".*/>$"));
 
     for (int i = 0; i < lines.size(); i++) {
-        QRegularExpressionMatch match = re.match(lines.at(i).toLocal8Bit().constData());
+        QRegularExpressionMatch match = re.match(lines.at(i));
         if (match.hasMatch()) {
             url = match.captured(1);
         }

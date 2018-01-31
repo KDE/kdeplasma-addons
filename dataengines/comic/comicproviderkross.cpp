@@ -124,7 +124,7 @@ void ComicProviderKross::redirected(int id, const QUrl &newUrl)
 KPackage::PackageStructure *ComicProviderKross::packageStructure()
 {
     if (!m_packageStructure) {
-        m_packageStructure = KPackage::PackageLoader::self()->loadPackageStructure("Plasma/Comic");
+        m_packageStructure = KPackage::PackageLoader::self()->loadPackageStructure(QStringLiteral("Plasma/Comic"));
     }
     return m_packageStructure;
 }

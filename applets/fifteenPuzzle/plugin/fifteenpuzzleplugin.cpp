@@ -26,12 +26,12 @@
 void FifteenPuzzlePlugin::registerTypes(const char* uri)
 {
     Q_UNUSED(uri);
-    Q_ASSERT(uri == QStringLiteral("org.kde.plasma.private.fifteenpuzzle"));
-    qmlRegisterTypeNotAvailable(uri, 0, 1, "fifteenpuzzle", "fifteenpuzzle");
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.fifteenpuzzle"));
+    qmlRegisterTypeNotAvailable(uri, 0, 1, "fifteenpuzzle", QStringLiteral("fifteenpuzzle"));
 }
 
 void FifteenPuzzlePlugin::initializeEngine(QQmlEngine * engine, const char * uri)
 {
     qDebug() << "initializeEngine called, uri is " << uri;
-    engine->addImageProvider("fifteenpuzzle", new FifteenImageProvider());
+    engine->addImageProvider(QStringLiteral("fifteenpuzzle"), new FifteenImageProvider());
 }

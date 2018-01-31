@@ -93,7 +93,7 @@ void KonsoleProfilesEngine::loadProfiles()
             }
 
             qDebug() << "adding sourcename: " << profileName << " ++" << niceName;
-            setData(profileName, "prettyName", niceName);
+            setData(profileName, QStringLiteral("prettyName"), niceName);
         }
     }
 }

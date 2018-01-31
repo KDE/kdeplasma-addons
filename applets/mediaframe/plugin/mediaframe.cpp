@@ -45,7 +45,6 @@ MediaFrame::MediaFrame(QObject *parent) : QObject(parent)
     }
     qDebug() << "Added" << m_filters.count() << "filters";
     //qDebug() << m_filters;
-    m_watchFile = "";
     m_next = 0;
 
     connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &MediaFrame::slotItemChanged);
@@ -91,7 +90,7 @@ QString MediaFrame::getCacheDirectory()
 
 QString MediaFrame::hash(const QString &str)
 {
-    return QString( QCryptographicHash::hash( str.toUtf8(), QCryptographicHash::Md5).toHex() );
+    return QString::fromLatin1(QCryptographicHash::hash(str.toUtf8(), QCryptographicHash::Md5).toHex());
 }
 
 bool MediaFrame::isDir(const QString &path)
@@ -203,7 +202,7 @@ void MediaFrame::watch(const QString &path)
     QString localPath = url.toString(QUrl::PreferLocalFile);
     if(isFile(localPath))
     {
-        if(m_watchFile != "")
+        if(!m_watchFile.isEmpty())
         {
             //qDebug() << "Removing" << m_watchFile << "from watch list";
             m_watcher.removePath(m_watchFile);
@@ -238,7 +237,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
     int size = m_allFiles.count() - 1;
 
     QString path;
-    QString errorMessage = QString("");
+    QString errorMessage;
     QJSValueList args;
 
     if(size < 1) {
@@ -252,7 +251,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
             }
             return;
         } else {
-            errorMessage = "No files available";
+            errorMessage = QStringLiteral("No files available");
             qWarning() << errorMessage;
 
             args << QJSValue(errorMessage);
@@ -280,7 +279,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
         QString localPath = url.toString(QUrl::PreferLocalFile);
 
         if (!isFile(localPath)) {
-            m_filename = path.section('/', -1);
+            m_filename = path.section(QLatin1Char('/'), -1);
 
             QString cachedFile = getCacheDirectory()+QLatin1Char('/')+hash(path)+QLatin1Char('_')+m_filename;
 
@@ -312,7 +311,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
             return;
         }
     } else {
-        errorMessage = path+" is not a valid URL";
+        errorMessage = path + QLatin1String(" is not a valid URL");
         qCritical() << errorMessage;
 
         if(errorCallback.isCallable()) {
@@ -336,7 +335,7 @@ void MediaFrame::pushHistory(const QString &string)
 QString MediaFrame::popHistory()
 {
     if(m_history.isEmpty())
-        return "";
+        return QString();
     return m_history.takeFirst();
 }
 
@@ -353,7 +352,7 @@ void MediaFrame::pushFuture(const QString &string)
 QString MediaFrame::popFuture()
 {
     if(m_future.isEmpty())
-        return "";
+        return QString();
     return m_future.takeFirst();
 }
 
@@ -369,11 +368,11 @@ void MediaFrame::slotItemChanged(const QString &path)
 
 void MediaFrame::slotFinished(KJob *job)
 {
-    QString errorMessage = QString("");
+    QString errorMessage;
     QJSValueList args;
 
     if (job->error()) {
-        errorMessage = "Error loading image: " + job->errorString();
+        errorMessage = QLatin1String("Error loading image: ") + job->errorString();
         qCritical() << errorMessage;
 
         if(m_errorCallback.isCallable()) {
@@ -398,7 +397,7 @@ void MediaFrame::slotFinished(KJob *job)
         }
     }
     else {
-        errorMessage = "Unknown error occured";
+        errorMessage = QStringLiteral("Unknown error occured");
 
         qCritical() << errorMessage;
 

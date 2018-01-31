@@ -32,6 +32,13 @@
 
 #include "cachedprovider.h"
 
+namespace {
+namespace DataKeys {
+inline QString image() { return QStringLiteral("Image"); }
+inline QString url()   { return QStringLiteral("Url"); }
+}
+}
+
 PotdEngine::PotdEngine( QObject* parent, const QVariantList& args )
     : Plasma::DataEngine( parent, args )
 {
@@ -125,7 +132,7 @@ bool PotdEngine::updateSource( const QString &identifier, bool loadCachedAlways 
 bool PotdEngine::sourceRequestEvent( const QString &identifier )
 {
     if ( updateSource( identifier, true ) ) {
-        setData( identifier, "Image", QImage() );
+        setData(identifier, DataKeys::image(), QImage());
         return true;
     }
 
@@ -136,7 +143,7 @@ void PotdEngine::finished( PotdProvider *provider )
 {
     if ( m_canDiscardCache && qobject_cast<CachedProvider *>( provider ) ) {
         Plasma::DataContainer *source = containerForSource( provider->identifier() );
-        if ( source && !source->data().value( "Image" ).value<QImage>().isNull() ) {
+        if ( source && !source->data().value(DataKeys::image()).value<QImage>().isNull() ) {
             provider->deleteLater();
             return;
         }
@@ -149,8 +156,8 @@ void PotdEngine::finished( PotdProvider *provider )
         connect(thread, SIGNAL(done(QString,QString,QImage)), this, SLOT(cachingFinished(QString,QString,QImage)));
         QThreadPool::globalInstance()->start(thread);
     } else {
-        setData( provider->identifier(), "Image", img );
-        setData( provider->identifier(), "Url", CachedProvider::identifierToPath( provider->identifier()) );
+        setData(provider->identifier(), DataKeys::image(), img);
+        setData(provider->identifier(), DataKeys::url(), CachedProvider::identifierToPath( provider->identifier()));
     }
 
     provider->deleteLater();
@@ -158,8 +165,8 @@ void PotdEngine::finished( PotdProvider *provider )
 
 void PotdEngine::cachingFinished( const QString &source, const QString &path, const QImage &img )
 {
-    setData( source, "Image", img );
-    setData( source, "Url", path );
+    setData(source, DataKeys::image(), img);
+    setData(source, DataKeys::url(), path);
 }
 
 void PotdEngine::error( PotdProvider *provider )
@@ -175,11 +182,11 @@ void PotdEngine::checkDayChanged()
     while ( it.hasNext() ) {
         it.next();
 
-        if ( it.key() == "Providers" ) {
+        if (it.key() == QLatin1String("Providers")) {
             continue;
         }
 
-        if ( !it.key().contains(':') ) {
+        if ( !it.key().contains(QLatin1Char(':')) ) {
             const QString path = CachedProvider::identifierToPath( it.key() );
             if ( !QFile::exists(path) ) {
                 updateSourceEvent( it.key() );

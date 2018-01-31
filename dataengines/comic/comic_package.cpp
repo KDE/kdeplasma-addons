@@ -41,7 +41,7 @@ void ComicPackage::initPackage(KPackage::Package *package)
 
     package->addFileDefinition("mainscript", QLatin1String("code/main"), i18n("Main Script File"));
     //package->setRequired("mainscript", true); Package::isValid() fails with this because of Kross and different file extensions
-    package->setDefaultPackageRoot("plasma/comics/");
+    package->setDefaultPackageRoot(QStringLiteral("plasma/comics/"));
 }
 
 K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(ComicPackage, "plasma-packagestructure-comic.json")

@@ -37,7 +37,7 @@ PotdProvider::PotdProvider( QObject *parent, const QVariantList &args )
             d->date = args[ 1 ].toDate();
         }
     } else {
-        d->name = "Unknown";
+        d->name = QStringLiteral("Unknown");
     }
 }
 

@@ -23,7 +23,7 @@
 
 void DiskQuotaPlugin::registerTypes (const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.diskquota"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.diskquota"));
     qmlRegisterType<DiskQuota>(uri, 1, 0, "DiskQuota");
     qmlRegisterType<QuotaListModel>(uri, 1, 0, "QuotaListModel");
 }

@@ -31,7 +31,7 @@ static QObject *timer_singletontype_provider(QQmlEngine *engine, QJSEngine *scri
 
 void TimerPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.timer"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.timer"));
 
     qmlRegisterSingletonType<Timer>(uri, 0, 1, "Timer", timer_singletontype_provider);
 }

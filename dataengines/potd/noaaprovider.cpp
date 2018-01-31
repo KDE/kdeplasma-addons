@@ -59,10 +59,10 @@ void NOAAProvider::Private::pageRequestFinished( KJob* _job )
     // to use heavy weight QtWebkit. So we use QRegularExpression to capture
     // the wanted url here.
     QString url;
-    QRegularExpression re("_curPic = (.*?)</script>");
+    QRegularExpression re(QStringLiteral("_curPic = (.*?)</script>"));
     auto result = re.match(data);
     if (result.hasMatch()) {
-        url = QString("http://www.nnvl.noaa.gov/").append(result.captured(1));
+        url = QLatin1String("http://www.nnvl.noaa.gov/") + result.captured(1);
     }
     if (url.isEmpty()) {
         emit mParent->error( mParent );

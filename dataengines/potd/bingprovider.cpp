@@ -56,7 +56,7 @@ void BingProvider::Private::pageRequestFinished(KJob* _job)
         if (json.isNull()) {
             break;
         }
-        auto imagesArray = json.object().value("images");
+        auto imagesArray = json.object().value(QLatin1String("images"));
         if (!imagesArray.isArray() || imagesArray.toArray().size() <= 0) {
             break;
         }
@@ -64,11 +64,11 @@ void BingProvider::Private::pageRequestFinished(KJob* _job)
         if (!imageObj.isObject()) {
             break;
         }
-        auto url = imageObj.toObject().value("url");
+        auto url = imageObj.toObject().value(QLatin1String("url"));
         if (!url.isString() || url.toString().isEmpty()) {
             break;
         }
-        QUrl picUrl(QString(QLatin1String("https://www.bing.com/%1")).arg(url.toString()));
+        QUrl picUrl(QStringLiteral("https://www.bing.com/%1").arg(url.toString()));
         KIO::StoredTransferJob* imageJob = KIO::storedGet(picUrl, KIO::NoReload, KIO::HideProgressInfo);
         mParent->connect(imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)));
         return;
@@ -93,7 +93,7 @@ void BingProvider::Private::imageRequestFinished(KJob* _job)
 BingProvider::BingProvider(QObject* parent, const QVariantList& args)
     : PotdProvider(parent, args), d(new Private(this))
 {
-    QUrl url(QLatin1String("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"));
+    QUrl url(QStringLiteral("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"));
 
     KIO::StoredTransferJob* job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)));

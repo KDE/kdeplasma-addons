@@ -10,7 +10,7 @@
 DictionaryRunner::DictionaryRunner(QObject *parent, const QVariantList &args)
     : AbstractRunner(parent, args)
 {
-    m_engine = new DictionaryMatchEngine(dataEngine("dict"), this);
+    m_engine = new DictionaryMatchEngine(dataEngine(QStringLiteral("dict")), this);
 
     setSpeed(SlowSpeed);
     setPriority(LowPriority);

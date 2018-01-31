@@ -51,12 +51,15 @@ void SpellCheckRunner::init()
 void SpellCheckRunner::loaddata()
 {
     //Load the default speller, with the default language
-    if (!m_spellers.contains("")) {
-        m_spellers[""] = QSharedPointer<Sonnet::Speller> (new Sonnet::Speller(""));
+    auto defaultSpellerIt = m_spellers.find(QString());
+    if (defaultSpellerIt == m_spellers.end()) {
+        defaultSpellerIt = m_spellers.insert(QString(), QSharedPointer<Sonnet::Speller> (new Sonnet::Speller(QString())));
     }
+    auto& defaultSpeller = defaultSpellerIt.value();
+
     //store all language names, makes it possible to type "spell german TERM" if english locale is set
     //Need to construct a map between natual language names and names the spell-check recognises.
-    const QStringList avail = m_spellers[""]->availableLanguages();
+    const QStringList avail = defaultSpeller->availableLanguages();
     //We need to filter the available languages so that we associate the natural language
     //name (eg. 'german') with one sub-code.
     QSet<QString> families;
@@ -70,17 +73,18 @@ void SpellCheckRunner::loaddata()
         QString code;
         //If we only have one code, use it.
         //If a string is the default language, use it
-        if (family.contains(m_spellers[""]->language())) {
-            code = m_spellers[""]->language();
+        if (family.contains(defaultSpeller->language())) {
+            code = defaultSpeller->language();
         } else if (fcode == QLatin1String("en")) {
             //If the family is english, default to en_US.
-            if (family.contains("en_US")) {
-                code = QLatin1String("en_US");
+            const auto enUS = QStringLiteral("en_US");
+            if (family.contains(enUS)) {
+                code = enUS;
             }
-        } else if (family.contains(fcode+QLatin1String("_")+fcode.toUpper())) {
+        } else if (family.contains(fcode+QLatin1Char('_')+fcode.toUpper())) {
             //If we have a speller of the form xx_XX, try that.
             //This gets us most European languages with more than one spelling.
-            code =  fcode+QLatin1String("_")+fcode.toUpper();
+            code =  fcode+QLatin1Char('_')+fcode.toUpper();
         } else {
             //Otherwise, pick the first value as it is highest priority.
             code = family.first();
@@ -127,8 +131,9 @@ void SpellCheckRunner::reloadConfiguration()
  * Return the empty string if we can't match a language. */
 QString SpellCheckRunner::findlang(const QStringList& terms)
 {
+    auto defaultSpeller = m_spellers[QString()];
     //If first term is a language code (like en_GB), set it as the spell-check language
-    if (terms.count() >= 1 && m_spellers[""]->availableLanguages().contains(terms[0])) {
+    if (terms.count() >= 1 && defaultSpeller->availableLanguages().contains(terms[0])) {
         return terms[0];
     }
     //If we have two terms and the first is a language name (eg 'french'),
@@ -152,7 +157,7 @@ QString SpellCheckRunner::findlang(const QStringList& terms)
 
         if (!code.isEmpty()) {
             //We found a valid language! Check still available
-            const QStringList avail = m_spellers[""]->availableLanguages();
+            const QStringList avail = defaultSpeller->availableLanguages();
             //Does the spell-checker like it?
             if (avail.contains(code)) {
                 return code;
@@ -160,7 +165,7 @@ QString SpellCheckRunner::findlang(const QStringList& terms)
         }
         //FIXME: Support things like 'british english' or 'canadian french'
     }
-    return QLatin1String("");
+    return QString();
 }
 
 void SpellCheckRunner::match(Plasma::RunnerContext &context)
@@ -181,10 +186,10 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
     }
 
     //Pointer to speller object with our chosen language
-    QSharedPointer<Sonnet::Speller> speller = m_spellers[""];
+    QSharedPointer<Sonnet::Speller> speller = m_spellers[QString()];
 
     if (speller->isValid()) {
-        QStringList terms = query.split(' ', QString::SkipEmptyParts);
+        QStringList terms = query.split(QLatin1Char(' '), QString::SkipEmptyParts);
         QString lang = findlang(terms);
         //If we found a language, create a new speller object using it.
         if (!lang.isEmpty()) {

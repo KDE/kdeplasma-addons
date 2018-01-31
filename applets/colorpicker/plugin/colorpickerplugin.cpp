@@ -45,7 +45,7 @@ static QObject *utils_singletontype_provider(QQmlEngine *, QJSEngine *)
 
 void ColorPickerPlugin::registerTypes(const char* uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.colorpicker"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.colorpicker"));
     qmlRegisterType<GrabWidget>(uri, 2, 0, "GrabWidget");
     qmlRegisterSingletonType<Utils>(uri, 2, 0, "Utils", utils_singletontype_provider);
 }

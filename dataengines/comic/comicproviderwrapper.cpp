@@ -309,7 +309,7 @@ void ComicProviderWrapper::init()
             // https://techbase.kde.org/Development/Tutorials/Plasma4/ComicPlugin#Package_Structure has main.es defined as mainscript.
             // Also Package::isValid() fails because the mainscript search fails to find the "main" file from mainscript.
 
-            QString mainscript = mPackage->filePath("scripts") + "/" + "main";
+            QString mainscript = mPackage->filePath("scripts") + QLatin1String("/main");
             QFileInfo info(mainscript);
             for (int i = 0; i < extensions().count() && !info.exists(); ++i) {
                     info.setFile(mainscript + extensions().value(i));

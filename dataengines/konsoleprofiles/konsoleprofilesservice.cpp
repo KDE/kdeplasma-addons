@@ -25,7 +25,7 @@
 KonsoleProfilesService::KonsoleProfilesService(QObject* parent, const QString& profileName)
     : Plasma::Service(parent)
 {
-    setName("org.kde.plasma.dataengine.konsoleprofiles");
+    setName(QStringLiteral("org.kde.plasma.dataengine.konsoleprofiles"));
     setDestination(profileName);
 }
 
@@ -46,12 +46,12 @@ void ProfileJob::start()
     const QString operation = operationName();
 
 qDebug() << "SERVICE START...operation: " << operation << " dest: " << destination();
-    if (operation == "open") {
+    if (operation == QLatin1String("open")) {
   //      Q_ASSERT(!jobParameters.isEmpty());
 
         QStringList args;
-        args << "--profile" << destination();
-        KToolInvocation::kdeinitExec("konsole", args);
+        args << QStringLiteral("--profile") << destination();
+        KToolInvocation::kdeinitExec(QStringLiteral("konsole"), args);
 
         setResult(true);
     }

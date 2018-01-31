@@ -165,7 +165,7 @@ static QString determineNewDesktopFilePath(const QString &baseName)
         // Limit to [0-9] and [a-z] range.
         char newChar = qrand() % 36;
         newChar += newChar < 10 ? 48 : 97-10;
-        appendix += newChar;
+        appendix += QLatin1Char(newChar);
 
         desktopFilePath = locateLocal(baseName + appendix + QLatin1String(".desktop"));
     }

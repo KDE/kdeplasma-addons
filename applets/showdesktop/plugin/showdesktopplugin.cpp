@@ -23,6 +23,6 @@
 
 void ShowDesktopPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.showdesktop"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.showdesktop"));
     qmlRegisterType<ShowDesktop>(uri, 0, 1, "ShowDesktop");
 }

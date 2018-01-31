@@ -60,10 +60,10 @@ static QObject *notesHelper_provider(QQmlEngine *, QJSEngine *)
 
 void NotesPlugin::registerTypes (const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.notes"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.notes"));
     qmlRegisterType<DocumentHandler>(uri, 0, 1, "DocumentHandler");
     qmlRegisterType<NoteManager>(uri, 0, 1, "NoteManager");
-    qmlRegisterUncreatableType<Note>(uri, 0, 1, "Note", "Create through NoteManager");
+    qmlRegisterUncreatableType<Note>(uri, 0, 1, "Note", QStringLiteral("Create through NoteManager"));
     qmlRegisterSingletonType<NotesHelper>(uri, 0, 1, "NotesHelper", notesHelper_provider);
 
 }

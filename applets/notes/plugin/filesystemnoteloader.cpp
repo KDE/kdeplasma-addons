@@ -43,7 +43,7 @@ private:
 FileSystemNoteLoader::FileSystemNoteLoader()
 {
     const QString genericDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-    const QString suffix = "plasma_notes";
+    const QString suffix = QStringLiteral("plasma_notes");
     QDir(genericDataLocation).mkdir(suffix);
     m_notesDir = genericDataLocation + QDir::separator() + suffix;
 }
@@ -51,7 +51,7 @@ FileSystemNoteLoader::FileSystemNoteLoader()
 
 QStringList FileSystemNoteLoader::allNoteIds()
 {
-    return m_notesDir.entryList(QStringList {"*.txt"});
+    return m_notesDir.entryList(QStringList {QStringLiteral("*.txt")});
 }
 
 void FileSystemNoteLoader::deleteNoteResources(const QString &id)
@@ -87,7 +87,7 @@ void FileNote::load()
 {
     QFile file(m_path);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        setNoteText(file.readAll());
+        setNoteText(QString::fromUtf8(file.readAll()));
     }
 }
 
