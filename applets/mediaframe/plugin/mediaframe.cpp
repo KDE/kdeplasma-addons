@@ -24,6 +24,7 @@
 #include <QUrl>
 #include <QDebug>
 #include <QImageReader>
+#include <QMimeDatabase>
 #include <QTime>
 #include <QRegularExpression>
 #include <QCryptographicHash>
@@ -36,13 +37,13 @@ MediaFrame::MediaFrame(QObject *parent) : QObject(parent)
 {
     qsrand(QTime::currentTime().msec());
 
-    QList<QByteArray> list = QImageReader::supportedImageFormats();
-    //qDebug() << "List" << list;
-    for(int i=0; i<list.count(); ++i){
-        QString str(list[i].constData());
-        m_filters << "*."+str;
+    const auto imageMimeTypeNames = QImageReader::supportedMimeTypes();
+    QMimeDatabase mimeDb;
+    for (const auto& imageMimeTypeName : imageMimeTypeNames) {
+        const auto mimeType = mimeDb.mimeTypeForName(QLatin1String(imageMimeTypeName));
+        m_filters << mimeType.globPatterns();
     }
-    qDebug() << "Added" << list.count() << "filters";
+    qDebug() << "Added" << m_filters.count() << "filters";
     //qDebug() << m_filters;
     m_watchFile = "";
     m_next = 0;
