@@ -9,9 +9,12 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
    message(FATAL_ERROR "plasma requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma [options]' there.")
 endif()
 
+set(REQUIRED_QT_VERSION 5.9.0)
+set(KF5_MIN_VERSION 5.42.0)
+
 include(FeatureSummary)
 
-find_package(ECM 1.0.0 REQUIRED NO_MODULE)
+find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -21,8 +24,6 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMInstallIcons)
 include(GenerateExportHeader)
 
-set(REQUIRED_QT_VERSION 5.9.0)
-set(KF5_MIN_VERSION 5.42.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     Core
     Gui
