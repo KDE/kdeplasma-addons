@@ -41,8 +41,8 @@ void CheckNewStrips::dataUpdated( const QString &source, const Plasma::DataEngin
 {
     QString lastIdentifierSuffix;
 
-    if ( !data[ "Error" ].toBool() ) {
-        lastIdentifierSuffix = data[ "Identifier" ].toString();
+    if (!data[QStringLiteral("Error")].toBool()) {
+        lastIdentifierSuffix = data[QStringLiteral("Identifier")].toString();
         lastIdentifierSuffix.remove( source );
     }
 
@@ -50,13 +50,13 @@ void CheckNewStrips::dataUpdated( const QString &source, const Plasma::DataEngin
 
     if ( !lastIdentifierSuffix.isEmpty() ) {
         QString temp = source;
-        temp.remove( ':' );
+        temp.remove(QLatin1Char(':'));
         emit lastStrip( mIndex, temp, lastIdentifierSuffix );
     }
     ++mIndex;
 
     if ( mIndex < mIdentifiers.count() ) {
-        const QString newSource = mIdentifiers[mIndex] + ':';
+        const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
         mEngine->connectSource( newSource, this );
     } else {
         mIndex = 0;
@@ -71,7 +71,7 @@ void CheckNewStrips::start()
     }
 
     if ( mIndex < mIdentifiers.count() ) {
-        const QString newSource = mIdentifiers[mIndex] + ':';
+        const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
         mEngine->connectSource( newSource, this );
     }
 }

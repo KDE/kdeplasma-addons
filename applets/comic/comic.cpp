@@ -84,8 +84,8 @@ void ComicApplet::init()
 
     configChanged();
 
-    mEngine = Plasma::PluginLoader::self()->loadDataEngine( "comic" );
-    mModel = new ComicModel( mEngine, "providers", mTabIdentifier, this );
+    mEngine = Plasma::PluginLoader::self()->loadDataEngine(QStringLiteral("comic"));
+    mModel = new ComicModel(mEngine, QStringLiteral("providers"), mTabIdentifier, this);
     mProxy = new QSortFilterProxyModel( this );
     mProxy->setSourceModel( mModel );
     mProxy->setSortCaseSensitivity( Qt::CaseInsensitive );
@@ -104,21 +104,25 @@ void ComicApplet::init()
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
     mDateChangedTimer->start();
 
-    mActionNextNewStripTab = new QAction( QIcon::fromTheme( "go-next-view" ), i18nc( "here strip means comic strip", "&Next Tab with a new Strip" ), this );
+    mActionNextNewStripTab = new QAction(QIcon::fromTheme(QStringLiteral("go-next-view")),
+                                         i18nc("here strip means comic strip", "&Next Tab with a new Strip"), this);
     mActionNextNewStripTab->setShortcuts( KStandardShortcut::openNew() );
-    actions()->addAction( "next new strip" , mActionNextNewStripTab );
+    actions()->addAction(QStringLiteral("next new strip"), mActionNextNewStripTab);
     mActions.append( mActionNextNewStripTab );
     connect( mActionNextNewStripTab, &QAction::triggered, this, &ComicApplet::showNextNewStrip );
 
-    mActionGoFirst = new QAction( QIcon::fromTheme( "go-first" ), i18n( "Jump to &first Strip" ), this );
+    mActionGoFirst = new QAction(QIcon::fromTheme(QStringLiteral("go-first")),
+                                 i18n("Jump to &first Strip"), this);
     mActions.append( mActionGoFirst );
     connect( mActionGoFirst, &QAction::triggered, this, &ComicApplet::slotFirstDay );
 
-    mActionGoLast = new QAction( QIcon::fromTheme( "go-last" ), i18n( "Jump to &current Strip" ), this );
+    mActionGoLast = new QAction(QIcon::fromTheme(QStringLiteral("go-last")),
+                                i18n("Jump to &current Strip"), this);
     mActions.append( mActionGoLast );
     connect( mActionGoLast, &QAction::triggered, this, &ComicApplet::slotCurrentDay );
 
-    mActionGoJump = new QAction( QIcon::fromTheme( "go-jump" ), i18n( "Jump to Strip ..." ), this );
+    mActionGoJump = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
+                                i18n("Jump to Strip ..."), this);
     mActions.append( mActionGoJump );
     connect( mActionGoJump, &QAction::triggered, this, &ComicApplet::slotGoJump );
 
@@ -127,21 +131,25 @@ void ComicApplet::init()
     mActions.append( mActionShop );
     connect( mActionShop, &QAction::triggered, this, &ComicApplet::slotShop );
 
-    QAction *action = new QAction( QIcon::fromTheme( "document-save-as" ), i18n( "&Save Comic As..." ), this );
+    QAction *action = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")),
+                                  i18n("&Save Comic As..."), this);
     mActions.append( action );
     connect( action, &QAction::triggered, this, &ComicApplet::slotSaveComicAs );
 
-    action = new QAction( QIcon::fromTheme( "application-epub+zip" ), i18n( "&Create Comic Book Archive..." ), this );
+    action = new QAction(QIcon::fromTheme(QStringLiteral("application-epub+zip")),
+                         i18n("&Create Comic Book Archive..."), this);
     mActions.append( action );
     connect( action, &QAction::triggered, this, &ComicApplet::createComicBook );
 
-    mActionScaleContent = new QAction( QIcon::fromTheme( "zoom-original" ), i18nc( "@option:check Context menu of comic image", "&Actual Size" ), this );
+    mActionScaleContent = new QAction(QIcon::fromTheme(QStringLiteral("zoom-original")),
+                                      i18nc("@option:check Context menu of comic image", "&Actual Size"), this);
     mActionScaleContent->setCheckable( true );
     mActionScaleContent->setChecked( mCurrent.scaleComic() );
     mActions.append( mActionScaleContent );
     connect( mActionScaleContent, &QAction::triggered, this, &ComicApplet::slotScaleToContent );
 
-    mActionStorePosition = new QAction( QIcon::fromTheme( "go-home" ), i18nc( "@option:check Context menu of comic image", "Store current &Position" ), this);
+    mActionStorePosition = new QAction(QIcon::fromTheme(QStringLiteral("go-home")),
+                                       i18nc("@option:check Context menu of comic image", "Store current &Position"), this);
     mActionStorePosition->setCheckable( true );
     mActionStorePosition->setChecked(mCurrent.hasStored());
     mActions.append( mActionStorePosition );
@@ -179,10 +187,10 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
     setConfigurationRequired( false );
 
     //there was an error, display information as image
-    const bool hasError = data[ "Error" ].toBool();
-    const bool errorAutoFixable = data[ "Error automatically fixable" ].toBool();
+    const bool hasError = data[QStringLiteral("Error")].toBool();
+    const bool errorAutoFixable = data[QStringLiteral("Error automatically fixable")].toBool();
     if ( hasError ) {
-        const QString previousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
+        const QString previousIdentifierSuffix = data[QStringLiteral("Previous identifier suffix")].toString();
         if (mEngine && !mShowErrorPicture && !previousIdentifierSuffix.isEmpty() ) {
             mEngine->disconnectSource( source, this );
             updateComic( previousIdentifierSuffix );
@@ -212,11 +220,11 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
 
         //prefetch the previous and following comic for faster navigation
         if (mCurrent.hasNext()) {
-            const QString prefetch = mCurrent.id() + ':' + mCurrent.next();
+            const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.next();
             mEngine->connectSource( prefetch, this );
         }
         if ( mCurrent.hasPrev()) {
-            const QString prefetch = mCurrent.id() + ':' + mCurrent.prev();
+            const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
             mEngine->connectSource( prefetch, this );
         }
     }
@@ -237,7 +245,7 @@ void ComicApplet::getNewComics()
         return;
     }
     if (!m_newStuffDialog) {
-        m_newStuffDialog = new KNS3::DownloadDialog( QString::fromLatin1("comic.knsrc") );
+        m_newStuffDialog = new KNS3::DownloadDialog( QStringLiteral("comic.knsrc") );
         KNS3::DownloadDialog *strong = m_newStuffDialog.data();
         strong->setTitle(i18n("Download Comics"));
         connect(m_newStuffDialog.data(), SIGNAL(finished(int)), mEngine, SLOT(loadProviders()));
@@ -299,7 +307,7 @@ void ComicApplet::updateUsedComics()
             const QString iconPath = data.data( Qt::DecorationRole ).value<QIcon>().name();
             //found a newer strip last time, which was not visited
 
-            if ( mCheckNewComicStripsInterval && !cg.readEntry( "lastStripVisited_" + identifier, true ) ) {
+            if (mCheckNewComicStripsInterval && !cg.readEntry(QLatin1String("lastStripVisited_") + identifier, true)) {
                 mActiveComicModel->addComic(identifier, name, iconPath, true);
             } else {
                 mActiveComicModel->addComic(identifier, name, iconPath);
@@ -408,9 +416,9 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
     Q_UNUSED(index)
 
     KConfigGroup cg = config();
-    if (suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
+    if (suffix != cg.readEntry(QLatin1String("lastStrip_") + identifier, QString())) {
         qDebug() << identifier << "has a newer strip.";
-        cg.writeEntry( "lastStripVisited_" + identifier, false );
+        cg.writeEntry(QLatin1String("lastStripVisited_") + identifier, false);
         updateComic(suffix);
     }
 }
@@ -453,8 +461,8 @@ void ComicApplet::slotArchive( int archiveType, const QUrl &dest, const QString 
     const QString id = mCurrent.id();
     qDebug() << "Archiving:" << id <<  archiveType << dest << fromIdentifier << toIdentifier;
     ComicArchiveJob *job = new ComicArchiveJob(dest, mEngine, static_cast< ComicArchiveJob::ArchiveType >( archiveType ), mCurrent.type(),  id, this);
-    job->setFromIdentifier(id + ':' + fromIdentifier);
-    job->setToIdentifier(id + ':' + toIdentifier);
+    job->setFromIdentifier(id + QLatin1Char(':') + fromIdentifier);
+    job->setToIdentifier(id + QLatin1Char(':') + toIdentifier);
     if (job->isValid()) {
         connect(job, &ComicArchiveJob::finished, this, &ComicApplet::slotArchiveFinished);
         KIO::getJobTracker()->registerJob(job);
@@ -468,7 +476,7 @@ void ComicApplet::slotArchive( int archiveType, const QUrl &dest, const QString 
 void ComicApplet::slotArchiveFinished (KJob *job )
 {
     if ( job->error() ) {
-        KNotification::event( KNotification::Warning, i18n( "Archiving comic failed" ), job->errorText(), QIcon::fromTheme( "dialog-warning" ).pixmap( KIconLoader::SizeMedium ) );
+        KNotification::event( KNotification::Warning, i18n( "Archiving comic failed" ), job->errorText(), QIcon::fromTheme(QStringLiteral("dialog-warning")).pixmap(KIconLoader::SizeMedium));
     }
 }
 
@@ -486,7 +494,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 
         setBusy(true);
 
-        const QString identifier = id + ':' + identifierSuffix;
+        const QString identifier = id + QLatin1Char(':') + identifierSuffix;
 
         //disconnecting of the oldSource is needed, otherwise you could get data for comics you are not looking at if you use tabs
         //if there was an error only disconnect the oldSource if it had nothing to do with the error or if the comic changed, that way updates of the error can come in
@@ -668,28 +676,28 @@ void ComicApplet::setTabIdentifiers(const QStringList &tabs)
 
 void ComicApplet::refreshComicData()
 {
-    mComicData["image"] = mCurrent.image();
-    mComicData["prev"] = mCurrent.prev();
-    mComicData["next"] = mCurrent.next();
-    mComicData["additionalText"] = mCurrent.additionalText();
+    mComicData[QStringLiteral("image")] = mCurrent.image();
+    mComicData[QStringLiteral("prev")] = mCurrent.prev();
+    mComicData[QStringLiteral("next")] = mCurrent.next();
+    mComicData[QStringLiteral("additionalText")] = mCurrent.additionalText();
 
-    mComicData["websiteUrl"] = mCurrent.websiteUrl().toString();
-    mComicData["websiteHost"] = mCurrent.websiteUrl().host();
-    mComicData["imageUrl"] = mCurrent.websiteUrl().toString();
-    mComicData["shopUrl"] = mCurrent.websiteUrl().toString();
-    mComicData["first"] = mCurrent.first();
-    mComicData["stripTitle"] = mCurrent.stripTitle();
-    mComicData["author"] = mCurrent.author();
-    mComicData["title"] = mCurrent.title();
+    mComicData[QStringLiteral("websiteUrl")] = mCurrent.websiteUrl().toString();
+    mComicData[QStringLiteral("websiteHost")] = mCurrent.websiteUrl().host();
+    mComicData[QStringLiteral("imageUrl")] = mCurrent.websiteUrl().toString();
+    mComicData[QStringLiteral("shopUrl")] = mCurrent.websiteUrl().toString();
+    mComicData[QStringLiteral("first")] = mCurrent.first();
+    mComicData[QStringLiteral("stripTitle")] = mCurrent.stripTitle();
+    mComicData[QStringLiteral("author")] = mCurrent.author();
+    mComicData[QStringLiteral("title")] = mCurrent.title();
 
-    mComicData["suffixType"] = "Date";
-    mComicData["current"] = mCurrent.current();
-    //mComicData["last"] = mCurrent.last();
-    mComicData["currentReadable"] = mCurrent.currentReadable();
-    mComicData["firstStripNum"] = mCurrent.firstStripNum();
-    mComicData["maxStripNum"] = mCurrent.maxStripNum();
-    mComicData["isLeftToRight"] = mCurrent.isLeftToRight();
-    mComicData["isTopToBottom"] = mCurrent.isTopToBottom();
+    mComicData[QStringLiteral("suffixType")] = QStringLiteral("Date");
+    mComicData[QStringLiteral("current")] = mCurrent.current();
+    //mComicData[QStringLiteral("last")] = mCurrent.last();
+    mComicData[QStringLiteral("currentReadable")] = mCurrent.currentReadable();
+    mComicData[QStringLiteral("firstStripNum")] = mCurrent.firstStripNum();
+    mComicData[QStringLiteral("maxStripNum")] = mCurrent.maxStripNum();
+    mComicData[QStringLiteral("isLeftToRight")] = mCurrent.isLeftToRight();
+    mComicData[QStringLiteral("isTopToBottom")] = mCurrent.isTopToBottom();
 
     emit comicDataChanged();
 }

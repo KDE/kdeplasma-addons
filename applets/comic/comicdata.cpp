@@ -37,21 +37,21 @@ void ComicData::init(const QString &id, const KConfigGroup &config)
 
 void ComicData::load()
 {
-    mScaleComic = mCfg.readEntry("scaleToContent_" + mId, false);
-    mMaxStripNum = mCfg.readEntry("maxStripNum_" + mId, 0);
-    mStored = mCfg.readEntry("storedPosition_" + mId, QString());
+    mScaleComic = mCfg.readEntry(QLatin1String("scaleToContent_") + mId, false);
+    mMaxStripNum = mCfg.readEntry(QLatin1String("maxStripNum_") + mId, 0);
+    mStored = mCfg.readEntry(QLatin1String("storedPosition_") + mId, QString());
 }
 
 void ComicData::save()
 {
-    mCfg.writeEntry("scaleToContent_" + mId,  mScaleComic);
-    mCfg.writeEntry("maxStripNum_" + mId, mMaxStripNum);
-    mCfg.writeEntry("storedPosition_" + id(), mStored);
+    mCfg.writeEntry(QLatin1String("scaleToContent_") + mId,  mScaleComic);
+    mCfg.writeEntry(QLatin1String("maxStripNum_") + mId, mMaxStripNum);
+    mCfg.writeEntry(QLatin1String("storedPosition_") + id(), mStored);
 
     // no next, thus the most recent strip
     if (!hasNext()) {
-        mCfg.writeEntry("lastStripVisited_" + mId, true);
-        mCfg.writeEntry("lastStrip_" + mId, mLast);
+        mCfg.writeEntry(QLatin1String("lastStripVisited_") + mId, true);
+        mCfg.writeEntry(QLatin1String("lastStrip_") + mId, mLast);
     }
 }
 
@@ -69,40 +69,40 @@ void ComicData::storePosition(bool store)
 
 void ComicData::setData(const Plasma::DataEngine::Data &data)
 {
-    const bool hasError = data[ "Error" ].toBool();
+    const bool hasError = data[QStringLiteral("Error")].toBool();
     if (!hasError) {
-        mImage = data["Image"].value<QImage>();
-        mPrev = data["Previous identifier suffix"].toString();
-        mNext = data["Next identifier suffix"].toString();
-        mAdditionalText = data["Additional text"].toString();
+        mImage = data[QStringLiteral("Image")].value<QImage>();
+        mPrev = data[QStringLiteral("Previous identifier suffix")].toString();
+        mNext = data[QStringLiteral("Next identifier suffix")].toString();
+        mAdditionalText = data[QStringLiteral("Additional text")].toString();
     }
 
-    mWebsiteUrl = data[ "Website Url" ].value<QUrl>();
-    mImageUrl = data["Image Url"].value<QUrl>();
-    mShopUrl = data[ "Shop Url" ].value<QUrl>();
-    mFirst = data[ "First strip identifier suffix" ].toString();
-    mStripTitle = data[ "Strip title" ].toString();
-    mAuthor = data[ "Comic Author" ].toString();
-    mTitle = data[ "Title" ].toString();
+    mWebsiteUrl = data[QStringLiteral("Website Url")].value<QUrl>();
+    mImageUrl = data[QStringLiteral("Image Url")].value<QUrl>();
+    mShopUrl = data[QStringLiteral("Shop Url")].value<QUrl>();
+    mFirst = data[QStringLiteral("First strip identifier suffix")].toString();
+    mStripTitle = data[QStringLiteral("Strip title")].toString();
+    mAuthor = data[QStringLiteral("Comic Author")].toString();
+    mTitle = data[QStringLiteral("Title")].toString();
 
-    const QString suffixType = data[ "SuffixType" ].toString();
-    if ( suffixType == "Date" ) {
+    const QString suffixType = data[QStringLiteral("SuffixType")].toString();
+    if ( suffixType == QLatin1String("Date")) {
         mType = Date;
-    } else if ( suffixType == "Number" ) {
+    } else if ( suffixType == QLatin1String("Number")) {
         mType = Number;
     } else {
         mType = String;
     }
 
-    QString temp = data["Identifier"].toString();
-    mCurrent = temp.remove(mId + ':');
+    QString temp = data[QStringLiteral("Identifier")].toString();
+    mCurrent = temp.remove(mId + QLatin1Char(':'));
 
     //found a new last identifier
     if (!hasNext()) {
         mLast = mCurrent;
     }
 
-    mCurrentReadable = "";
+    mCurrentReadable.clear();
     if ( mType == Number ) {
         mCurrentReadable = i18nc("an abbreviation for Number", "# %1", mCurrent);
         int tempNum = mCurrent.toInt();
@@ -110,16 +110,16 @@ void ComicData::setData(const Plasma::DataEngine::Data &data)
             mMaxStripNum = tempNum;
         }
 
-        temp = mFirst.remove(mId + ':');
+        temp = mFirst.remove(mId + QLatin1Char(':'));
         mFirstStripNum = temp.toInt();
-    } else if ( mType == Date && QDate::fromString( temp, "yyyy-MM-dd" ).isValid() ) {
+    } else if (mType == Date && QDate::fromString(temp, QStringLiteral("yyyy-MM-dd")).isValid()) {
         mCurrentReadable = mCurrent;
     } else if ( mType == String ) {
         mCurrentReadable = mCurrent;
     }
 
-    mIsLeftToRight = data["isLeftToRight"].toBool();
-    mIsTopToBottom = data["isTopToBottom"].toBool();
+    mIsLeftToRight = data[QStringLiteral("isLeftToRight")].toBool();
+    mIsTopToBottom = data[QStringLiteral("isTopToBottom")].toBool();
 
     save();
 }
@@ -137,10 +137,11 @@ void ComicData::createErrorPicture(const Plasma::DataEngine::Data &data)
     p.drawText( QRect( 10, 10 , 480, 100 ), Qt::TextWordWrap | Qt::AlignHCenter | Qt::AlignVCenter, title );
     QString text = i18n( "Maybe there is no Internet connection.\nMaybe the comic plugin is broken.\nAnother reason might be that there is no comic for this day/number/string, so choosing a different one might work." );
 
-    mPrev = data["Previous identifier suffix"].toString();
+    mPrev = data[QStringLiteral("Previous identifier suffix")].toString();
     if (hasPrev()) {
-        if (!data["Identifier"].toString().isEmpty() ) {
-            mErrorStrip = data["Identifier"].toString();
+        const auto identifier = data[QStringLiteral("Identifier")].toString();
+        if (!identifier.isEmpty()) {
+            mErrorStrip = identifier;
         }
         text.append( i18n( "\n\nChoose the previous strip to go to the last cached strip." ) );
     }

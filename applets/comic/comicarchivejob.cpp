@@ -95,14 +95,14 @@ void ComicArchiveJob::setToIdentifier( const QString &toIdentifier )
 {
     mToIdentifier = toIdentifier;
     mToIdentifierSuffix = mToIdentifier;
-    mToIdentifierSuffix.remove( mPluginName + ':' );
+    mToIdentifierSuffix.remove(mPluginName + QLatin1Char(':'));
 }
 
 void ComicArchiveJob::setFromIdentifier( const QString &fromIdentifier )
 {
     mFromIdentifier = fromIdentifier;
     mFromIdentifierSuffix = mFromIdentifier;
-    mFromIdentifierSuffix.remove( mPluginName + ':' );
+    mFromIdentifierSuffix.remove(mPluginName + QLatin1Char(':'));
 }
 
 void ComicArchiveJob::start()
@@ -139,21 +139,21 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
         return;
     }
 
-    const QString currentIdentifier = data[ "Identifier" ].toString();
+    const QString currentIdentifier = data[QStringLiteral("Identifier")].toString();
     QString currentIdentifierSuffix = currentIdentifier;
-    currentIdentifierSuffix.remove( mPluginName + ':' );
+    currentIdentifierSuffix.remove(mPluginName + QLatin1Char(':'));
 
-    const QImage image = data[ "Image" ].value<QImage>();
-    const bool hasError = data[ "Error" ].toBool() || image.isNull();
-    const QString previousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
-    const QString nextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
-    const QString firstIdentifierSuffix = data[ "First strip identifier suffix" ].toString();
+    const QImage image = data[QStringLiteral("Image")].value<QImage>();
+    const bool hasError = data[QStringLiteral("Error")].toBool() || image.isNull();
+    const QString previousIdentifierSuffix = data[QStringLiteral("Previous identifier suffix")].toString();
+    const QString nextIdentifierSuffix = data[QStringLiteral("Next identifier suffix")].toString();
+    const QString firstIdentifierSuffix = data[QStringLiteral("First strip identifier suffix")].toString();
 
-    mAuthors << data[ "Comic Author" ].toString().split( ',', QString::SkipEmptyParts );
+    mAuthors << data[QStringLiteral("Comic Author")].toString().split(QLatin1Char(','), QString::SkipEmptyParts);
     mAuthors.removeDuplicates();
 
     if ( mComicTitle.isEmpty() ) {
-        mComicTitle = data[ "Title" ].toString();
+        mComicTitle = data[QStringLiteral("Title")].toString();
     }
 
     if ( hasError ) {
@@ -272,8 +272,8 @@ void ComicArchiveJob::defineTotalNumber( const QString &currentSuffix )
     //if there are no strips for certain days/numbers
     if ( !currentSuffix.isEmpty() ) {
         if ( mIdentifierType == Date ) {
-            const QDate current = QDate::fromString( currentSuffix, "yyyy-MM-dd" );
-            const QDate to = QDate::fromString( mToIdentifierSuffix, "yyyy-MM-dd" );
+            const QDate current = QDate::fromString(currentSuffix, QStringLiteral("yyyy-MM-dd"));
+            const QDate to = QDate::fromString(mToIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
             if ( current.isValid() && to.isValid() ) {
                 //processed files + files still to download
                 mTotalFiles = mProcessedFiles + qAbs( current.daysTo( to ) );
@@ -304,8 +304,8 @@ void ComicArchiveJob::findTotalNumberFromTo()
     }
 
     if ( mIdentifierType == Date ) {
-        const QDate from = QDate::fromString( mFromIdentifierSuffix, "yyyy-MM-dd" );
-        const QDate to = QDate::fromString( mToIdentifierSuffix, "yyyy-MM-dd" );
+        const QDate from = QDate::fromString( mFromIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
+        const QDate to = QDate::fromString(mToIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
         if ( from.isValid() && to.isValid() ) {
             mTotalFiles = qAbs( from.daysTo( to ) ) + 1;
         }
@@ -324,7 +324,7 @@ void ComicArchiveJob::findTotalNumberFromTo()
 
 QString ComicArchiveJob::suffixToIdentifier( const QString &suffix ) const
 {
-    return mPluginName + ':' + suffix;
+    return mPluginName + QLatin1Char(':') + suffix;
 }
 
 void ComicArchiveJob::requestComic( QString identifier ) //krazy:exclude=passbyvalue
@@ -336,8 +336,8 @@ void ComicArchiveJob::requestComic( QString identifier ) //krazy:exclude=passbyv
     }
 
     emit description( this, i18n( "Creating Comic Book Archive" ),
-                      qMakePair( QString( "source" ), identifier ),
-                      qMakePair( QString( "destination" ), mDest.toString() ) );
+                      qMakePair(QStringLiteral("source"), identifier),
+                      qMakePair(QStringLiteral("destination"), mDest.toString()));
 
     mEngine->connectSource( identifier, this );
 //    mEngine->query( identifier );

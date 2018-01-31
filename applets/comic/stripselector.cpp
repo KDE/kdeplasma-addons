@@ -154,7 +154,7 @@ void DateStripSelector::select(const ComicData &currentStrip)
     KDatePicker *calendar = new KDatePicker;
     calendar->setAttribute(Qt::WA_DeleteOnClose);//to have destroyed emitted upon closing
     calendar->setMinimumSize(calendar->sizeHint());
-    calendar->setDate(QDate::fromString(currentStrip.current(), "yyyy-MM-dd"));
+    calendar->setDate(QDate::fromString(currentStrip.current(), QStringLiteral("yyyy-MM-dd")));
 
     connect(calendar, &KDatePicker::dateSelected, this, &DateStripSelector::slotChosenDay);
     connect(calendar, &KDatePicker::dateEntered, this, &DateStripSelector::slotChosenDay);
@@ -167,11 +167,11 @@ void DateStripSelector::select(const ComicData &currentStrip)
 void DateStripSelector::slotChosenDay(const QDate &date)
 {
     if (date <= QDate::currentDate()) {
-        QDate temp = QDate::fromString(mFirstIdentifierSuffix, "yyyy-MM-dd");
+        QDate temp = QDate::fromString(mFirstIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
         // only update if date >= first strip date, or if there is no first
         // strip date
         if (temp.isValid() || date >= temp) {
-            emit stripChosen(date.toString("yyyy-MM-dd"));
+            emit stripChosen(date.toString(QStringLiteral("yyyy-MM-dd")));
         }
     }
 }

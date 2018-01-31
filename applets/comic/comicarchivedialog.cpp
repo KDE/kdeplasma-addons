@@ -40,8 +40,8 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
 
     switch ( mIdentifierType ) {
         case Date: {
-            const QDate current = QDate::fromString( currentIdentifierSuffix, "yyyy-MM-dd" );
-            const QDate first = QDate::fromString( firstIdentifierSuffix, "yyyy-MM-dd" );
+            const QDate current = QDate::fromString(currentIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
+            const QDate first = QDate::fromString(firstIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
             const QDate today = QDate::currentDate();
             QDate maxDate = today;
             if ( current.isValid() ) {
@@ -162,8 +162,8 @@ void ComicArchiveDialog::slotOkClicked()
 
     switch ( mIdentifierType ) {
         case Date:
-            fromIdentifier = ui.fromDate->date().toString( "yyyy-MM-dd" );
-            toIdentifier = ui.toDate->date().toString( "yyyy-MM-dd" );
+            fromIdentifier = ui.fromDate->date().toString(QStringLiteral("yyyy-MM-dd"));
+            toIdentifier = ui.toDate->date().toString(QStringLiteral("yyyy-MM-dd"));
             break;
         case Number: {
             fromIdentifier = QString::number( ui.fromNumber->value() );
