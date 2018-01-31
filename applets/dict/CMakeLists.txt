@@ -33,7 +33,6 @@ set(dict_SRCS
 add_library(dictplugin SHARED ${dict_SRCS})
 target_link_libraries(dictplugin
     KF5::Plasma
-    KF5::IconThemes
     KF5::I18n
     Qt5::Quick
     Qt5::WebEngine
