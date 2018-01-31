@@ -42,7 +42,6 @@
 #include <KNewStuff3/KNS3/DownloadDialog>
 #include <KRun>
 #include <KStandardShortcut>
-#include <KIconLoader>
 
 #include <Plasma/Containment>
 #include <Plasma/Package>
@@ -476,7 +475,7 @@ void ComicApplet::slotArchive( int archiveType, const QUrl &dest, const QString 
 void ComicApplet::slotArchiveFinished (KJob *job )
 {
     if ( job->error() ) {
-        KNotification::event( KNotification::Warning, i18n( "Archiving comic failed" ), job->errorText(), QIcon::fromTheme(QStringLiteral("dialog-warning")).pixmap(KIconLoader::SizeMedium));
+        KNotification::event(KNotification::Warning, i18n("Archiving comic failed"), job->errorText(), QStringLiteral("dialog-warning"));
     }
 }
 

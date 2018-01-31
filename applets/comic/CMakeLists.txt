@@ -31,7 +31,6 @@ target_link_libraries(plasma_applet_comic
                       KF5::KIOWidgets
                       KF5::NewStuff
                       KF5::Notifications
-                      KF5::IconThemes
                       KF5::Archive)
 
 
