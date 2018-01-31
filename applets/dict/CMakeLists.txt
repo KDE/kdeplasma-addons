@@ -1,7 +1,9 @@
 find_package(Qt5WebEngine ${REQUIRED_QT_VERSION} CONFIG)
 
-set_package_properties(Qt5WebEngine PROPERTIES DESCRIPTION "needed by the dict applet"
-    URL "https://doc.qt.io/qt-5/qtwebengine-index.html" TYPE OPTIONAL
+set_package_properties(Qt5WebEngine PROPERTIES
+    PURPOSE "Needed by the dict applet"
+    URL "https://doc.qt.io/qt-5/qtwebengine-index.html"
+    TYPE OPTIONAL
 )
 
 if (Qt5WebEngine_FOUND)
