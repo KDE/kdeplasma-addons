@@ -104,6 +104,3 @@ void ContentTracker::serviceChange(const QString& name, const QString& oldOwner,
         connectToActivityManager();
     }
 }
-
-#include "contenttracker.h"
-
