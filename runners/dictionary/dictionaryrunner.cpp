@@ -3,9 +3,11 @@
  */
 
 #include "dictionaryrunner.h"
-#include "dictionaryrunner_config.h"
+
 #include <QStringList>
 #include <klocalizedstring.h>
+
+static const char CONFIG_TRIGGERWORD[] = "triggerWord";
 
 DictionaryRunner::DictionaryRunner(QObject *parent, const QVariantList &args)
     : AbstractRunner(parent, args)
