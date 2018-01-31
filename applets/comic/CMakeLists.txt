@@ -26,7 +26,6 @@ target_link_libraries(plasma_applet_comic
                       Qt5::Gui
                       Qt5::Widgets
                       KF5::Plasma
-                      KF5::Solid
                       KF5::I18n
                       KF5::KIOCore
                       KF5::KIOWidgets
