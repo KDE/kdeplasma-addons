@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Media frame
+Name[ar]=إطار وسائط
 Name[ca]=Marc multimèdia
 Name[ca@valencia]=Marc multimèdia
 Name[cs]=Rámec médií
@@ -37,6 +38,7 @@ Name[x-test]=xxMedia framexx
 Name[zh_CN]=媒体相框
 Name[zh_TW]=媒體框架
 Comment=(Picture) Frame
+Comment[ar]=إطار (صورة)
 Comment[ca]=Marc (fotografies)
 Comment[ca@valencia]=Marc (fotografies)
 Comment[cs]=Rámeček (obrázku)
