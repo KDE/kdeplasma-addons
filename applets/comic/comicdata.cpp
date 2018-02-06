@@ -77,9 +77,9 @@ void ComicData::setData(const Plasma::DataEngine::Data &data)
         mAdditionalText = data[QStringLiteral("Additional text")].toString();
     }
 
-    mWebsiteUrl = data[QStringLiteral("Website Url")].value<QUrl>();
-    mImageUrl = data[QStringLiteral("Image Url")].value<QUrl>();
-    mShopUrl = data[QStringLiteral("Shop Url")].value<QUrl>();
+    mWebsiteUrl = data[QStringLiteral("Website Url")].toUrl();
+    mImageUrl = data[QStringLiteral("Image Url")].toUrl();
+    mShopUrl = data[QStringLiteral("Shop Url")].toUrl();
     mFirst = data[QStringLiteral("First strip identifier suffix")].toString();
     mStripTitle = data[QStringLiteral("Strip title")].toString();
     mAuthor = data[QStringLiteral("Comic Author")].toString();
