@@ -83,13 +83,13 @@ Item {
     DotColumn {
         x:displayLeft
         y:displayTop
-        val:hours
-        startbit:4
+        val:hours/10
+        startbit:0
     }
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)
         y:displayTop
-        val:hours
+        val:hours%10
         startbit:0
     }
 
@@ -98,13 +98,13 @@ Item {
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)*2
         y:displayTop
-        val:minutes
-        startbit:4
+        val:minutes/10
+        startbit:0
     }
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)*3
         y:displayTop
-        val:minutes
+        val:minutes%10
         startbit:0
     }
 
@@ -112,15 +112,15 @@ Item {
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)*4
         y:displayTop
-        val:seconds
-        startbit:4
+        val:seconds/10
+        startbit:0
         visible:showSeconds
     }
 
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)*5
         y:displayTop
-        val:seconds
+        val:seconds%10
         startbit:0
         visible:showSeconds
     }
