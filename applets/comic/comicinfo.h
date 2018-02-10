@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef COMIC_TYPE_H
-#define COMIC_TYPE_H
+#ifndef COMICINFO_H
+#define COMICINFO_H
 
 class KConfigGroup;
 class QString;

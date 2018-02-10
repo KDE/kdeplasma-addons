@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef SYSTEMTRAY_H
-#define SYSTEMTRAY_H
+#ifndef GROUPINGCONTAINMENT_H
+#define GROUPINGCONTAINMENT_H
 
 #include <Plasma/Containment>
 
