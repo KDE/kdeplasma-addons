@@ -397,7 +397,7 @@ void MediaFrame::slotFinished(KJob *job)
         }
     }
     else {
-        errorMessage = QStringLiteral("Unknown error occured");
+        errorMessage = QStringLiteral("Unknown error occurred");
 
         qCritical() << errorMessage;
 

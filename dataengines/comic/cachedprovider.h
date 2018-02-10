@@ -111,12 +111,12 @@ class CachedProvider : public ComicProvider
         QString name() const override;
 
         /**
-        * Returns wether the comic is leftToRight or not
+        * Returns whether the comic is leftToRight or not
         */
         bool isLeftToRight() const override;
 
         /**
-        * Returns wether the comic is topToBottom or not
+        * Returns whether the comic is topToBottom or not
         */
         bool isTopToBottom() const override;
 

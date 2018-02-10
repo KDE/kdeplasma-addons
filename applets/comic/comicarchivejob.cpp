@@ -73,7 +73,7 @@ bool ComicArchiveJob::isValid() const
     switch ( mType ) {
         case ArchiveFromTo:
             if ( mToIdentifier.isEmpty() || mFromIdentifier.isEmpty() ) {
-                qWarning() << "Not enought data provided to archive a range.";
+                qWarning() << "Not enough data provided to archive a range.";
                 return false;
             }
             break;
@@ -157,7 +157,7 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
     }
 
     if ( hasError ) {
-        qWarning() << "An error occured at" << source << "stopping.";
+        qWarning() << "An error occurred at" << source << "stopping.";
         setErrorText( i18n( "An error happened for identifier %1.", source ) );
         setError( KilledJobError );
         copyZipFileToDestination();

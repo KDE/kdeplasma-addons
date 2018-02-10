@@ -23,7 +23,7 @@
 #include <Plasma/DataEngine>
 
 /**
- * This class searches for the newest comic strips of predefined comics in a defined intervall.
+ * This class searches for the newest comic strips of predefined comics in a defined interval.
  * Once found it emits lastStrip
  */
 class CheckNewStrips : public QObject

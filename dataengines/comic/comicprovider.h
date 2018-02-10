@@ -151,12 +151,12 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         virtual QString name() const;
 
         /**
-         * Returns wether the comic is leftToRight or not
+         * Returns whether the comic is leftToRight or not
          */
         virtual bool isLeftToRight() const;
 
         /**
-        * Returns wether the comic is topToBottom or not
+        * Returns whether the comic is topToBottom or not
         */
         virtual bool isTopToBottom() const;
 
