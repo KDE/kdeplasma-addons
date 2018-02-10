@@ -113,7 +113,7 @@ class ComicArchiveJob : public KJob
     private:
         enum ArchiveDirection {
             Undefined,
-            Foward,
+            Forward,
             Backward
         };
 

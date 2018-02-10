@@ -122,7 +122,7 @@ void ComicArchiveJob::start()
             break;
         }
         case ArchiveFromTo:
-            mDirection = Foward;
+            mDirection = Forward;
             defineTotalNumber();
             requestComic( mFromIdentifier );
             break;
@@ -172,8 +172,8 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
             if ( mType == ArchiveAll ) {
                 setToIdentifier( currentIdentifier );
             }
-            mDirection = ( firstIdentifierSuffix.isEmpty() ? Backward : Foward );
-            if ( mDirection == Foward ) {
+            mDirection = ( firstIdentifierSuffix.isEmpty() ? Backward : Forward );
+            if ( mDirection == Forward ) {
                 requestComic( suffixToIdentifier( firstIdentifierSuffix ) );
                 return;
             } else {
@@ -182,7 +182,7 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
                 mToIdentifierSuffix.clear();
             }
         } else if ( mType == ArchiveEndTo ) {
-            mDirection = Foward;
+            mDirection = Forward;
             setToIdentifier( currentIdentifier );
             requestComic( mFromIdentifier );
             return;
@@ -191,7 +191,7 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
 
     bool worked = false;
     ++mProcessedFiles;
-    if ( mDirection == Foward ) {
+    if ( mDirection == Forward ) {
         QTemporaryFile tempFile;
         worked = tempFile.open();
         worked = worked && tempFile.flush();
