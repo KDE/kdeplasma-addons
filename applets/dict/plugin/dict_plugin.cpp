@@ -20,7 +20,8 @@
 #include "dict_object.h"
 #include "dictionariesmodel.h"
 
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
 
 void DictPlugin::registerTypes (const char *uri)
 {

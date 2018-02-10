@@ -19,7 +19,8 @@
 #include "showdesktopplugin.h"
 #include "showdesktop.h"
 
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
 
 void ShowDesktopPlugin::registerTypes(const char *uri)
 {

@@ -19,7 +19,8 @@
 #include "DiskQuota.h"
 #include "QuotaListModel.h"
 
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
 
 void DiskQuotaPlugin::registerTypes (const char *uri)
 {

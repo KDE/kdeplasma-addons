@@ -19,7 +19,8 @@
 #include "mediaframeplugin.h"
 #include "mediaframe.h"
 
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
 
 void MediaFramePlugin::registerTypes(const char *uri)
 {

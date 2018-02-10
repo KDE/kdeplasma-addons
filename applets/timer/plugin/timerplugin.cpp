@@ -19,7 +19,8 @@
 #include "timerplugin.h"
 #include "timer.h"
 
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
 
 static QObject *timer_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {

@@ -22,7 +22,8 @@
 #include "notemanager.h"
 #include "note.h"
 
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
 #include <QFile>
 
 class NotesHelper : public QObject

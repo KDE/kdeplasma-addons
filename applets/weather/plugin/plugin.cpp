@@ -21,9 +21,10 @@
 #include "locationlistmodel.h"
 #include "servicelistmodel.h"
 
+// KF
 #include <KLocalizedString>
-
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
 
 
 static QObject* temperatureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)

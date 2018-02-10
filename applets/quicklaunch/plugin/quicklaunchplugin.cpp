@@ -21,7 +21,8 @@
 #include "quicklaunchplugin.h"
 #include "quicklaunch_p.h"
 
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
 
 void QuicklaunchPlugin::registerTypes(const char *uri)
 {

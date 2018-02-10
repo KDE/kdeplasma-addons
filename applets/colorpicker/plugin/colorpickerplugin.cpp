@@ -20,9 +20,9 @@
 
 #include "colorpickerplugin.h"
 
-#include <QtQml>
-
+// Qt
 #include <QColor>
+#include <QQmlEngine>
 
 #include "grabwidget.h"
 

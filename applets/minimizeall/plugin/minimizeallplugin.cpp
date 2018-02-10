@@ -19,7 +19,8 @@
 #include "minimizeallplugin.h"
 #include "minimizeall.h"
 
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
 
 void MinimizeAllPlugin::registerTypes(const char *uri)
 {

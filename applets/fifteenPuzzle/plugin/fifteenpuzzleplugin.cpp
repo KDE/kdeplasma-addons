@@ -21,7 +21,9 @@
 #include "fifteenpuzzleplugin.h"
 #include "fifteenimageprovider.h"
 
-#include <QtQml>
+// Qt
+#include <QQmlEngine>
+#include <QDebug>
 
 void FifteenPuzzlePlugin::registerTypes(const char* uri)
 {
