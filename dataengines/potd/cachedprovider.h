@@ -82,7 +82,7 @@ class LoadImageThread : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    LoadImageThread(const QString &filePath);
+    explicit LoadImageThread(const QString &filePath);
     void run() override;
 
 Q_SIGNALS:

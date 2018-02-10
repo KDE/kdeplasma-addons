@@ -27,7 +27,7 @@ class Timer : public QObject
     Q_OBJECT
 
 public:
-    Timer(QObject *parent = nullptr);
+    explicit Timer(QObject *parent = nullptr);
     Q_INVOKABLE void runCommand(const QString &command);
 };
 

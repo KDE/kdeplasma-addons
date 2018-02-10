@@ -21,7 +21,7 @@ class DictionaryMatchEngine : public QObject
     Q_OBJECT
 
 public:
-    DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngine, QObject *parent = nullptr);
+    explicit DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngine, QObject *parent = nullptr);
     QString lookupWord(const QString &word);
 
 private:

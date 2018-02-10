@@ -27,7 +27,7 @@ class ShowDesktop : public QObject
     Q_PROPERTY(bool showingDesktop READ showingDesktop WRITE setShowingDesktop NOTIFY showingDesktopChanged)
 
 public:
-    ShowDesktop(QObject *parent = nullptr);
+    explicit ShowDesktop(QObject *parent = nullptr);
     ~ShowDesktop() override;
 
     bool showingDesktop() const;

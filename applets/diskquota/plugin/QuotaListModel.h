@@ -31,7 +31,7 @@ class QuotaListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    QuotaListModel(QObject *parent = nullptr);
+    explicit QuotaListModel(QObject *parent = nullptr);
 
 public: // QAbstractListModel overrides
     /**

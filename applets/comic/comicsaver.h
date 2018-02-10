@@ -31,7 +31,7 @@ class SavingDir;
 class ComicSaver
 {
     public:
-        ComicSaver(SavingDir *savingDir);
+        explicit ComicSaver(SavingDir *savingDir);
 
         /**
          * Asks the user for a destination to save the specified

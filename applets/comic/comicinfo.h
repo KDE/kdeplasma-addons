@@ -40,7 +40,7 @@ class SavingDir
          * @param config the config that should be used to retrieve
          * the saving directory and to store it to in case of changes
          */
-        SavingDir(const KConfigGroup &config);
+        explicit SavingDir(const KConfigGroup &config);
 
         ~SavingDir();
 

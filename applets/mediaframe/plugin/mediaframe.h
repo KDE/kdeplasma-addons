@@ -44,7 +44,7 @@ class MediaFrame : public QObject
         };
         Q_ENUM(AddOption)
 
-        MediaFrame(QObject *parent = nullptr);
+        explicit MediaFrame(QObject *parent = nullptr);
         ~MediaFrame() override;
 
         int count() const;

@@ -131,7 +131,7 @@ class StaticDateWrapper : public QObject
         };
         Q_ENUM(DateType)
 
-        StaticDateWrapper(QObject *parent = nullptr);
+        explicit StaticDateWrapper(QObject *parent = nullptr);
 
     public Q_SLOTS:
         QObject* currentDate();
@@ -197,7 +197,7 @@ class ComicProviderWrapper : public QObject
         };
         Q_ENUM(RedirectedUrlType)
 
-        ComicProviderWrapper(ComicProviderKross *parent);
+        explicit ComicProviderWrapper(ComicProviderKross *parent);
         ~ComicProviderWrapper() override;
 
         int apiVersion() const { return 4600; }

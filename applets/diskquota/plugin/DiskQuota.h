@@ -44,7 +44,7 @@ class DiskQuota : public QObject
     Q_PROPERTY(QuotaListModel* model READ model CONSTANT)
 
 public:
-    DiskQuota(QObject *parent = nullptr);
+    explicit DiskQuota(QObject *parent = nullptr);
 
 public:
     /**
