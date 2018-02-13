@@ -32,6 +32,8 @@ FifteenImageProvider::FifteenImageProvider()
 
 QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, const QSize &requestedSize)
 {
+    Q_UNUSED(requestedSize); // wanted sizes are actually encoded in the id
+
     // id format is boardSize-imagenumber-pieceWidth-pieceHeight-imagePath
     qDebug() << "pixmap requested with id " << id;
     QStringList idParts = id.split(QLatin1Char('-'));
