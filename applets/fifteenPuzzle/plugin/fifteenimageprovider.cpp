@@ -37,8 +37,10 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
     // id format is boardSize-imagenumber-pieceWidth-pieceHeight-imagePath
     qDebug() << "pixmap requested with id " << id;
     QStringList idParts = id.split(QLatin1Char('-'));
-    if (idParts.size() < 4)
+    if (idParts.size() < 4) {
+        *size = QSize();
         return QPixmap();
+    }
 
     bool update = false;
     int boardSize = idParts.at(0).toInt();
@@ -71,9 +73,13 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
         int number = idParts.at(1).toInt();
 
         qDebug() << "pixmap for piece " << number << " requested";
-        if (number > 0 && number < m_pixmaps.size())
+        if (number > 0 && number < m_pixmaps.size()) {
+            *size = QSize(m_pieceWidth, m_pieceHeight);
             return m_pixmaps.at(number);
+        }
     }
+
+    *size = QSize();
     return QPixmap();
 }
 
