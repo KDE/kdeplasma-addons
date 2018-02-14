@@ -21,4 +21,4 @@ add_dependencies(krunner_charrunner kcm_krunner_charrunner)
 
 # Install the library and .desktop file
 install(TARGETS krunner_charrunner kcm_krunner_charrunner DESTINATION ${KDE_INSTALL_PLUGINDIR})
-install(FILES CharacterRunner.desktop CharRunner_config.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+install(FILES plasma-runner-character.desktop plasma-runner-character_config.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
