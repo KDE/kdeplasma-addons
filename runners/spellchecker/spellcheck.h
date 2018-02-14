@@ -42,6 +42,9 @@ public:
 
 protected Q_SLOTS:
     void init() override;
+    QList<QAction *> actionsForMatch(const Plasma::QueryMatch &match) override;
+    QMimeData * mimeDataForMatch(const Plasma::QueryMatch &match) override;
+
     void loaddata();
     void destroydata();
 

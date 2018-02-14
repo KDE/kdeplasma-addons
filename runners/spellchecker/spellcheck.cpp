@@ -18,12 +18,21 @@
 
 #include "spellcheck.h"
 
+#include <QGuiApplication>
 #include <QClipboard>
 #include <QDebug>
 #include <QLocale>
 #include <QSet>
+#include <QIcon>
+#include <QMimeData>
 
 #include <KLocalizedString>
+
+namespace {
+namespace ActionIds {
+inline QString copyToClipboard() { return QStringLiteral("copyToClipboard"); }
+}
+}
 
 SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
@@ -32,6 +41,8 @@ SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
     setObjectName(QLatin1String( "Spell Checker" ));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     setSpeed(AbstractRunner::SlowSpeed);
+
+    addAction(ActionIds::copyToClipboard(), QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy to Clipboard"));
 }
 
 SpellCheckRunner::~SpellCheckRunner()
@@ -213,36 +224,60 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         return;
     }
 
-    Plasma::QueryMatch match(this);
-    match.setType(Plasma::QueryMatch::InformationalMatch);
-
     if (speller->isValid()) {
         QStringList suggestions;
         const bool correct = speller->checkAndSuggest(query,suggestions);
         if (correct) {
+            Plasma::QueryMatch match(this);
+            match.setType(Plasma::QueryMatch::InformationalMatch);
             match.setIconName(QStringLiteral("checkbox"));
-            match.setText(i18n("Correct")+QLatin1String(": ")+query);
+            match.setText(query);
+            match.setSubtext(i18nc("Term is spelled correctly", "Correct"));
+            match.setData(query);
+            context.addMatch(match);
         } else {
-            match.setIconName(QStringLiteral("edit-delete"));
-            const QString recommended = i18n("Suggested words: %1", suggestions.join(i18nc("separator for a list of words", ", ")));
-            //TODO: try setting a text and a subtext, with the subtext being the suggestions
-            match.setText(recommended);
-            match.setData(suggestions);
+            for (const auto& suggestion : qAsConst(suggestions)) {
+                Plasma::QueryMatch match(this);
+                match.setType(Plasma::QueryMatch::InformationalMatch);
+                match.setIconName(QStringLiteral("edit-rename"));
+                match.setText(suggestion);
+                match.setSubtext(i18n("Suggested term"));
+                match.setData(suggestion);
+                context.addMatch(match);
+            }
         }
     } else {
+        Plasma::QueryMatch match(this);
+        match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIconName(QStringLiteral("task-attention"));
         match.setText(i18n("Could not find a dictionary."));
+        context.addMatch(match);
     }
-
-    context.addMatch(match);
 }
 
 void SpellCheckRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    //Copy words to clipboard
-    // FIXME:
-    // kapp->clipboard()->setText(match.data().toString());
+    if (match.selectedAction() == action(ActionIds::copyToClipboard())) {
+        //Copy words to clipboard
+        const QString text = match.data().toString();
+        QGuiApplication::clipboard()->setText(text);
+    }
+}
+
+QList<QAction *> SpellCheckRunner::actionsForMatch(const Plasma::QueryMatch &match)
+{
+    Q_UNUSED(match)
+
+    return {action(ActionIds::copyToClipboard())};
+}
+
+QMimeData * SpellCheckRunner::mimeDataForMatch(const Plasma::QueryMatch &match)
+{
+    QMimeData *result = new QMimeData();
+    const QString text = match.data().toString();
+    result->setText(text);
+    return result;
 }
 
 K_EXPORT_PLASMA_RUNNER(krunner_spellcheck, SpellCheckRunner)
