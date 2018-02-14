@@ -7,5 +7,5 @@ add_subdirectory(characters)
 add_subdirectory(dictionary)
 
 if(NOT WIN32)
- add_subdirectory(konsolesessions)
+    add_subdirectory(konsoleprofiles)
 endif(NOT WIN32)

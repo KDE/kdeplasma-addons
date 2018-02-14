@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef KONSOLESESSIONS_H
-#define KONSOLESESSIONS_H
+#ifndef KONSOLEPROFILES_H
+#define KONSOLEPROFILES_H
 
 #include <KRunner/AbstractRunner>
 
@@ -33,25 +33,25 @@ struct KonsoleProfileData
 Q_DECLARE_TYPEINFO(KonsoleProfileData, Q_MOVABLE_TYPE);
 
 
-class KonsoleSessions : public Plasma::AbstractRunner {
+class KonsoleProfiles : public Plasma::AbstractRunner {
     Q_OBJECT
 
 public:
-    KonsoleSessions( QObject *parent, const QVariantList& args );
-    ~KonsoleSessions() override;
+    KonsoleProfiles( QObject *parent, const QVariantList& args );
+    ~KonsoleProfiles() override;
 
     void match(Plasma::RunnerContext &context) override;
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
 
 private Q_SLOTS:
-    void loadSessions();
+    void loadProfiles();
     void slotPrepare();
     void slotTeardown();
 
 private:
-    KDirWatch* m_sessionWatch = nullptr;
+    KDirWatch* m_profileFilesWatch = nullptr;
 
-    QHash<QString, KonsoleProfileData> m_sessions;
+    QHash<QString, KonsoleProfileData> m_profiles;
 };
 
 #endif

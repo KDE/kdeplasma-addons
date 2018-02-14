@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "konsolesessions.h"
+#include "konsoleprofiles.h"
 
 // KF
 #include <KDirWatch>
@@ -31,54 +31,54 @@
 #include <QStandardPaths>
 
 
-KonsoleSessions::KonsoleSessions(QObject *parent, const QVariantList& args)
+KonsoleProfiles::KonsoleProfiles(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
-    setObjectName(QStringLiteral("Konsole Sessions"));
+    setObjectName(QStringLiteral("Konsole Profiles"));
 
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QStringLiteral( ":q:" ), i18n("Finds Konsole sessions matching :q:."));
+    Plasma::RunnerSyntax s(QStringLiteral( ":q:" ), i18n("Finds Konsole profiles matching :q:."));
     s.addExampleQuery(QStringLiteral( "konsole :q:" ));
     addSyntax(s);
 
-    setDefaultSyntax(Plasma::RunnerSyntax(QStringLiteral( "konsole" ), i18n("Lists all the Konsole sessions in your account.")));
+    setDefaultSyntax(Plasma::RunnerSyntax(QStringLiteral( "konsole" ), i18n("Lists all the Konsole profiles in your account.")));
 
-    connect(this, &Plasma::AbstractRunner::prepare, this, &KonsoleSessions::slotPrepare);
-    connect(this, &Plasma::AbstractRunner::teardown, this, &KonsoleSessions::slotTeardown);
+    connect(this, &Plasma::AbstractRunner::prepare, this, &KonsoleProfiles::slotPrepare);
+    connect(this, &Plasma::AbstractRunner::teardown, this, &KonsoleProfiles::slotTeardown);
 }
 
-KonsoleSessions::~KonsoleSessions()
+KonsoleProfiles::~KonsoleProfiles()
 {
 }
 
-void KonsoleSessions::slotPrepare()
+void KonsoleProfiles::slotPrepare()
 {
-    loadSessions();
+    loadProfiles();
 
-    if (!m_sessionWatch) {
-        m_sessionWatch = new KDirWatch(this);
+    if (!m_profileFilesWatch) {
+        m_profileFilesWatch = new KDirWatch(this);
         const QStringList konsoleDataBaseDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
         for (const QString& konsoleDataBaseDir : konsoleDataBaseDirs) {
-            m_sessionWatch->addDir(konsoleDataBaseDir + QLatin1String("/konsole"));
+            m_profileFilesWatch->addDir(konsoleDataBaseDir + QLatin1String("/konsole"));
         }
 
-        connect(m_sessionWatch, &KDirWatch::dirty, this, &KonsoleSessions::loadSessions);
-        connect(m_sessionWatch, &KDirWatch::created, this, &KonsoleSessions::loadSessions);
-        connect(m_sessionWatch, &KDirWatch::deleted, this, &KonsoleSessions::loadSessions);
+        connect(m_profileFilesWatch, &KDirWatch::dirty, this, &KonsoleProfiles::loadProfiles);
+        connect(m_profileFilesWatch, &KDirWatch::created, this, &KonsoleProfiles::loadProfiles);
+        connect(m_profileFilesWatch, &KDirWatch::deleted, this, &KonsoleProfiles::loadProfiles);
     }
 }
 
-void KonsoleSessions::slotTeardown()
+void KonsoleProfiles::slotTeardown()
 {
-    delete m_sessionWatch;
-    m_sessionWatch = nullptr;
-    m_sessions.clear();
+    delete m_profileFilesWatch;
+    m_profileFilesWatch = nullptr;
+    m_profiles.clear();
 }
 
-void KonsoleSessions::loadSessions()
+void KonsoleProfiles::loadProfiles()
 {
-    m_sessions.clear();
+    m_profiles.clear();
 
     QStringList profilesPaths;
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
@@ -102,14 +102,14 @@ void KonsoleSessions::loadSessions()
             profileData.displayName = cfg.readEntry("Name", profileName);
             profileData.iconName = cfg.readEntry("Icon", QStringLiteral("utilities-terminal"));
 
-            m_sessions.insert(profileName, profileData);
+            m_profiles.insert(profileName, profileData);
         }
     }
 }
 
-void KonsoleSessions::match(Plasma::RunnerContext &context)
+void KonsoleProfiles::match(Plasma::RunnerContext &context)
 {
-    if (m_sessions.isEmpty()) {
+    if (m_profiles.isEmpty()) {
         return;
     }
 
@@ -119,7 +119,7 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
     }
 
     if (term.compare(QLatin1String( "konsole" ), Qt::CaseInsensitive) == 0) {
-        QHashIterator<QString, KonsoleProfileData> i(m_sessions);
+        QHashIterator<QString, KonsoleProfileData> i(m_profiles);
         while (i.hasNext()) {
             i.next();
             const auto& profileData = i.value();
@@ -136,7 +136,7 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
         if (term.startsWith(QLatin1String("konsole "), Qt::CaseInsensitive)) {
             term.remove(0, 8);
         }
-        QHashIterator<QString, KonsoleProfileData> i(m_sessions);
+        QHashIterator<QString, KonsoleProfileData> i(m_profiles);
         while (i.hasNext()) {
             if (!context.isValid()) {
                 return;
@@ -164,23 +164,23 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
     }
 }
 
-void KonsoleSessions::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void KonsoleProfiles::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    const QString session = match.data().toString();
+    const QString profile = match.data().toString();
 
-    if (!session.isEmpty()) {
+    if (!profile.isEmpty()) {
         return;
     }
 
     const QStringList args {
         QStringLiteral("--profile"),
-        session
+        profile
     };
     KToolInvocation::kdeinitExec(QStringLiteral("konsole"), args);
 }
 
 
-K_EXPORT_PLASMA_RUNNER(konsolesessions, KonsoleSessions)
+K_EXPORT_PLASMA_RUNNER(konsoleprofiles, KonsoleProfiles)
 
-#include "konsolesessions.moc"
+#include "konsoleprofiles.moc"
