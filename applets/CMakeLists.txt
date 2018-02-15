@@ -1,7 +1,6 @@
 plasma_install_package(activitypager org.kde.plasma.activitypager)
 plasma_install_package(kickerdash org.kde.plasma.kickerdash)
 plasma_install_package(konsoleprofiles/package org.kde.plasma.konsoleprofiles)
-plasma_install_package(webbrowser org.kde.plasma.webbrowser)
 
 add_subdirectory(binary-clock)
 add_subdirectory(calculator)
@@ -27,3 +26,4 @@ endif(NOT WIN32)
 add_subdirectory(timer)
 add_subdirectory(userswitcher)
 add_subdirectory(weather)
+add_subdirectory(webbrowser)
