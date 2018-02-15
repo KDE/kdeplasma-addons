@@ -158,7 +158,7 @@ Item {
                     delegate: RowLayout {
                         width: parent.width
 
-                        Text {
+                        Label {
                             id: pathText
 
                             Layout.fillWidth: true

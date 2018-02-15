@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=User Switcher
+Name[ar]=مبدّل المستخدمين
 Name[ca]=Commutador d'usuaris
 Name[ca@valencia]=Commutador d'usuaris
 Name[cs]=Přepínání uživatelů
@@ -37,6 +38,7 @@ Name[x-test]=xxUser Switcherxx
 Name[zh_CN]=用户切换器
 Name[zh_TW]=使用者切換器
 Comment=Quickly switch between different users
+Comment[ar]=بدّل بين مختلف المستخدمين بسرعة
 Comment[ca]=Commuta ràpidament entre diferents usuaris
 Comment[ca@valencia]=Commuta ràpidament entre diferents usuaris
 Comment[da]=Skift hurtigt mellem forskellige brugere
