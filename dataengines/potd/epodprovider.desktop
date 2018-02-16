@@ -7,7 +7,7 @@ X-KDE-PlasmaPoTDProvider-Identifier=epod
 Icon=
 
 Name=Earth Science Picture of the Day
-Name[ar]=صورة «عِلم الأرض» اليوميّة
+Name[ar]=صورة علم الأرض اليومية
 Name[bs]=Geonaučna slika dana
 Name[ca]=Imatge de ciències terràqüies del dia
 Name[ca@valencia]=Imatge de ciències terràqüies del dia
@@ -58,7 +58,7 @@ Name[x-test]=xxEarth Science Picture of the Dayxx
 Name[zh_CN]=每日一图(地球科学)
 Name[zh_TW]=本日地球科學圖片
 Comment=Epod Provider
-Comment[ar]=مزوّد Epod
+Comment[ar]=المزود Epod
 Comment[bs]=Dobavljač Epod-a
 Comment[ca]=Proveïdor Epod
 Comment[ca@valencia]=Proveïdor Epod

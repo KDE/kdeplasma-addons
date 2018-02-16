@@ -7,7 +7,6 @@ X-KDE-PlasmaPoTDProvider-Identifier=bing
 Icon=
 
 Name=Bing's Picture of the Day
-Name[ar]=صورة «بنغ» اليوميّة
 Name[ca]=Imatge del dia del Bing
 Name[ca@valencia]=Imatge del dia del Bing
 Name[cs]=Obrázek dne na Bing
@@ -43,7 +42,6 @@ Name[x-test]=xxBing's Picture of the Dayxx
 Name[zh_CN]=必应每日图片
 Name[zh_TW]=Bing 本日圖片
 Comment=Bing Provider
-Comment[ar]=مزوّد «بنغ»
 Comment[ca]=Proveïdor Bing
 Comment[ca@valencia]=Proveïdor Bing
 Comment[cs]=Poskytovatel Bing

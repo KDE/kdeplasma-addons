@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=Previews
-Name[ar]=معاينات
 Name[ca]=Vistes prèvies
 Name[ca@valencia]=Vistes prèvies
 Name[cs]=Náhledy
@@ -40,7 +39,6 @@ Name[x-test]=xxPreviewsxx
 Name[zh_CN]=预览
 Name[zh_TW]=預覽
 Comment=A desktop switcher layout with previews of the desktops
-Comment[ar]=مبدّل أسطح مكتب بمعاينات لأسطح المكتب
 Comment[ca]=Una disposició del commutador d'escriptori amb vistes prèvies dels escriptoris
 Comment[ca@valencia]=Una disposició del commutador d'escriptori amb vistes prèvies dels escriptoris
 Comment[cs]=Přepínač oken s náhledy ploch

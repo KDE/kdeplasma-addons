@@ -1,7 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Web browser
-Name[ar]=متصفّح وبّ
 Name[ca]=Navegador web
 Name[ca@valencia]=Navegador web
 Name[cs]=Webový prohlížeč
@@ -41,7 +40,6 @@ Name[x-test]=xxWeb browserxx
 Name[zh_CN]=网页浏览器
 Name[zh_TW]=網頁瀏覽器
 Comment=Add a webpage on your desktop.
-Comment[ar]=أضف صفحة وبّ إلى سطح المكتب.
 Comment[ca]=Afegeix una pàgina web a l'escriptori.
 Comment[ca@valencia]=Afig una pàgina web a l'escriptori.
 Comment[da]=Tilføj en webside til dit skrivebord.

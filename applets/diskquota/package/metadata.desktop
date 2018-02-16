@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=Disk Quota
-Name[ar]=استخدام القرص
 Name[ca]=Quota de disc
 Name[ca@valencia]=Quota de disc
 Name[cs]=Kvóta disku
@@ -39,7 +38,6 @@ Name[x-test]=xxDisk Quotaxx
 Name[zh_CN]=磁盘配额
 Name[zh_TW]=磁碟配額
 Comment=Shows details about disk quota
-Comment[ar]=تعرض تفاصيل عن استخدام القرص
 Comment[ca]=Mostra els detalls de la quota de disc
 Comment[ca@valencia]=Mostra els detalls de la quota de disc
 Comment[da]=Viser detaljer om diskkvote
