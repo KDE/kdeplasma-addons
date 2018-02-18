@@ -55,6 +55,13 @@ Name[x-test]=xxKonsole Profilesxx
 Name[zh_CN]=Konsole 配置集
 Name[zh_TW]=Konsole 設定檔
 Comment=Matches Konsole Profiles
+Comment[ca]=Correspon amb perfils del Konsole
+Comment[de]=Findet Konsole-Profile
+Comment[nl]=Komt overeen met Konsole-profielen
+Comment[pt]=Corresponde aos Perfis do Konsole
+Comment[sv]=Matchar terminalprofiler
+Comment[uk]=Шукає профілі Konsole
+Comment[x-test]=xxMatches Konsole Profilesxx
 Icon=utilities-terminal
 
 X-KDE-ServiceTypes=Plasma/Runner
