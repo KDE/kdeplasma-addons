@@ -16,8 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
  */
 
-import QtQuick 2.1
-import QtQuick.Controls 1.1
+import QtQuick 2.7
+import QtQuick.Controls 1.5
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
@@ -28,9 +28,7 @@ import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 
 Item {
     id: root
-    width: parent.width
-    height: parent.height
-
+   
     property alias cfg_interval: intervalSpinBox.value
     property alias cfg_randomize: randomizeCheckBox.checked
     property alias cfg_pauseOnMouseOver: pauseOnMouseOverCheckBox.checked
@@ -50,108 +48,144 @@ Item {
      */
     property int fillMode: Image.PreserveAspectFit
 
-    ColumnLayout {
+    ColumnLayout {    
+        spacing: 20
+        
 
-        width: parent.width
-        height: parent.height
-
-        RowLayout {
-            Layout.fillWidth: true
-
+        Grid {
+            columns: 2
+            rows: 7
+            rowSpacing: 20
+            columnSpacing: 10
+            verticalItemAlignment: Grid.AlignVCenter
+            
+            // Row 1, Col 1
             Label {
                 text: i18n("Change picture every")
             }
 
+            // Row 1, Col 2
             SpinBox {
-
                 id: intervalSpinBox
-
                 suffix: i18n("s")
                 decimals: 1
 
                 // Once a day should be high enough
                 maximumValue: 24*(60*60)
+            } // end SpinBox
+        
+            
+            // Row 2, Col 1
+            Label {
+                id: fillLabel
+                text: i18n("Fill mode:")
             }
-        }
 
-        ColumnLayout {
-            RowLayout {
-                Layout.fillWidth: true
+                
+            // Row 2, Col 2  
+            ComboBox {
+                id: comboBox
+                width: units.gridUnit * 10
+                currentIndex: fillModeToIndex(fillMode)
+                model: 
+                    [
+                         {
+                            text: i18n("Stretch"),
+                            value: Image.Stretch
+                            },
+                        
+                         {
+                            text: i18n("Preserve aspect fit"),
+                            value: Image.PreserveAspectFit
+                
+                        },
+                        
+                         {
+                            text: i18n("Preserve aspect crop"),
+                            value: Image.PreserveAspectCrop
+                        },
+                        
+                         {
+                            text: i18n("Tile"),
+                            value: Image.Tile
+                        },
 
-                Label {
-                    text: i18n("Fill mode:")
+                         {
+                            text: i18n("Tile vertically"),
+                            value: Image.TileVertically
+                        },
+                        
+                         {
+                            text: i18n("Tile horizontally"),
+                            value: Image.TileHorizontally
+                        },
+                        
+                         {
+                            text: i18n("Pad"),
+                            value: Image.Pad
+                        }
+
+                    ] // end of ComboBox model
+                
+                    
+
+                onCurrentIndexChanged: {
+                    root.fillMode = comboBox.currentIndex
+                    fillModeToIndex(root.fillMode)
+                    //console.log(comboBox.currentIndex);
                 }
 
-                ComboBox {
-                    id: comboBox
-                    currentIndex: fillModeToIndex(fillMode)
-                    model:
-                        [
-                            {
-                                "text": i18n("Stretch"),
-                                "value": Image.Stretch,
-                                "description": i18n("The image is scaled to fit")
-                            },
-                            {
-                                "text": i18n("Preserve aspect fit"),
-                                "value": Image.PreserveAspectFit,
-                                "description": i18n("The image is scaled uniformly to fit without cropping")
-                            },
-                            {
-                                "text": i18n("Preserve aspect crop"),
-                                "value": Image.PreserveAspectCrop,
-                                "description": i18n("The image is scaled uniformly to fill, cropping if necessary")
-                            },
-                            {
-                                "text": i18n("Tile"),
-                                "value": Image.Tile,
-                                "description": i18n("The image is duplicated horizontally and vertically")
-                            },
-                            {
-                                "text": i18n("Tile vertically"),
-                                "value": Image.TileVertically,
-                                "description": i18n("The image is stretched horizontally and tiled vertically")
-                            },
-                            {
-                                "text": i18n("Tile horizontally"),
-                                "value": Image.TileHorizontally,
-                                "description": i18n("The image is stretched vertically and tiled horizontally")
-                            },
-                            {
-                                "text": i18n("Pad"),
-                                "value": Image.Pad,
-                                "description": i18n("The image is not transformed")
-                            }
-                        ]
 
-                    onActivated: root.fillMode = comboBoxItems.get(index).value
-
-                    onCurrentIndexChanged: fillModeDescription.text = comboBoxItems.get(currentIndex).description
-
-                    function fillModeToIndex(fillMode) {
-                        if(fillMode == Image.Stretch)
-                            return 0
-                        else if(fillMode == Image.PreserveAspectFit)
-                            return 1
-                        else if(fillMode == Image.PreserveAspectCrop)
-                            return 2
-                        else if(fillMode == Image.Tile)
-                            return 3
-                        else if(fillMode == Image.TileVertically)
-                            return 4
-                        else if(fillMode == Image.TileHorizontally)
-                            return 5
-                        else if(fillMode == Image.Pad)
-                            return 6
+                function fillModeToIndex(fillMode) {
+                    //console.log("function called");
+                    if(fillMode == Image.Stretch) {
+                        fillModeDescription.text = i18n( "The image is scaled to fit the frame");
+                        return 0
                     }
-                }
-            }
+                    else if(fillMode == Image.PreserveAspectFit) {
+                        fillModeDescription.text = i18n("The image is scaled uniformly to fit without cropping");
+                        return 1
+                    }
+                    else if(fillMode == Image.PreserveAspectCrop) {
+                        fillModeDescription.text = i18n( "The image is scaled uniformly to fill, cropping if necessary");
+                        return 2
+                    }
+                    else if(fillMode == Image.Tile) {
+                        fillModeDescription.text = i18n("The image is duplicated horizontally and vertically");
+                        return 3
+                    }
+                    else if(fillMode == Image.TileVertically) {
+                        fillModeDescription.text = i18n("The image is stretched horizontally and tiled vertically");
+                        return 4
+                    }
+                    else if(fillMode == Image.TileHorizontally) {
+                        fillModeDescription.text = i18n("The image is stretched vertically and tiled horizontally");
+                        return 5
+                    }
+                    else if(fillMode == Image.Pad) {
+                        fillModeDescription.text = i18n("The image is not transformed");
+                        return 6
+                    }
+                } // end of fillModeToIndex function
+            } // end of ComboBox and related functions
+            
+            
+            // Row 3, Col 1 (cheater to fill empty cell)
+            Label {
+                width: 10
+                text: ""
+                } 
+            
+
+            //Row 3, Col 2
             Label {
                 id: fillModeDescription
                 text: i18n("The image is scaled uniformly to fit without cropping")
             }
-        }
-
+        
+        } // end of top section GridLayout
+    
+        // these CheckBoxes should take over as their own ColumnLayout entries
         CheckBox {
             id: randomizeCheckBox
             text: i18n("Randomize items")
@@ -172,12 +206,10 @@ Item {
             text: i18n("Left click image opens in external viewer")
         }
 
-        /*
-        CheckBox {
-            id: showCountdownCheckBox
-            text: i18n("Show countdown")
-        }
-        */
+  } // end ColumnLayout
 
-    }
-}
+ } // end Item
+        
+
+
+

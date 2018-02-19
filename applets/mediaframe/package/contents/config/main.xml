@@ -6,7 +6,7 @@
     <!-- <kcfgfile name=""/> -->
   <group name="General">
     <entry name="interval" type="Double">
-        <default>6.8</default>
+        <default>10.0</default>
     </entry>
     <entry name="randomize" type="Bool">
         <default>true</default>
