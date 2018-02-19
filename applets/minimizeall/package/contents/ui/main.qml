@@ -1,6 +1,7 @@
 /*
  *    Copyright 2015 Sebastian Kügler <sebas@kde.org>
  *    Copyright 2016 Anthony Fieroni <bvbfan@abv.bg>
+ *    Copyright 2018 David Edmundson <davidedmundson@kde.org>
  *
  *    This program is free software; you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -23,8 +24,7 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-import org.kde.plasma.private.minimizeall 1.0
-
+import org.kde.taskmanager 0.1 as TaskManager
 
 Item {
     id: root
@@ -42,18 +42,68 @@ Item {
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 
+    Plasmoid.onActivated: toggleActive()
+
+    property bool active: false
+    property var minimizedClients: [] //list of persistentmodelindexes from task manager model of clients minimised by us
+
     function activate() {
-        if (!minimizeall.active) {
-            minimizeall.minimizeAllWindows();
+        var clients = []
+        for (var i = 0 ; i < tasksModel.count; i++) {
+            var idx = tasksModel.makeModelIndex(i);
+            if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
+                tasksModel.requestToggleMinimized(idx);
+                clients.push(tasksModel.makePersistentModelIndex(i));
+            }
+        }
+        root.minimizedClients = clients;
+        root.active = true;
+    }
+
+    function deactivate() {
+        root.active = false;
+        for (var i = 0 ; i < root.minimizedClients.length; i++) {
+            var idx = root.minimizedClients[i]
+            //client deleted, do nothing
+            if (!idx.valid) {
+                continue;
+            }
+            //if the user has restored it already, do nothing
+            if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
+                continue;
+            }
+            tasksModel.requestToggleMinimized(idx);
+        }
+        root.minimizedClients = [];
+    }
+
+    function toggleActive() {
+        if (root.active) {
+            deactivate();
         } else {
-            minimizeall.unminimizeAllWindows();
+            activate();
         }
     }
 
-    Plasmoid.onActivated: activate()
+    TaskManager.TasksModel {
+        id: tasksModel
+        sortMode: TaskManager.TasksModel.SortDisabled
+        groupMode: TaskManager.TasksModel.GroupDisabled
+    }
 
-    MinimizeAll {
-        id: minimizeall
+    Connections {
+        target: tasksModel
+        enabled: root.active
+        onDataChanged: {
+            for (var i = topLeft.row; i <= bottomRight.row ; i++) {
+                var idx = tasksModel.makeModelIndex(i);
+                if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
+                    deactivate();
+                }
+            }
+        }
+        onVirtualDesktopChanged: deactivate()
+        onActivityChanged: deactivate()
     }
 
     PlasmaCore.FrameSvgItem {
@@ -80,7 +130,7 @@ Item {
             }
             return prefix;
         }
-        opacity: minimizeall.active ? 1 : 0
+        opacity: root.active ? 1 : 0
         Behavior on opacity {
             NumberAnimation {
                 duration: units.shortDuration
@@ -106,7 +156,7 @@ Item {
         MouseArea {
             id: mouseArea
             anchors.fill: parent
-            onClicked: activate()
+            onClicked: root.toggleActive()
         }
         //also activate when dragging an item over the plasmoid so a user can easily drag data to the desktop
         DropArea {
@@ -116,7 +166,7 @@ Item {
             Timer {
                 id: activateTimer
                 interval: 250 //to match TaskManager
-                onTriggered: activate()
+                onTriggered: toggleActive()
             }
         }
     }
