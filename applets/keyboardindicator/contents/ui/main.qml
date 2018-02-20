@@ -26,21 +26,31 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 Item {
     id: root
 
-    Plasmoid.onActivated: toggle()
-
-    PlasmaCore.DataSource {
+    readonly property QtObject source: PlasmaCore.DataSource {
         id: keystateSource
         engine: "keystate"
-        connectedSources: ["Caps Lock", "Num Lock"]
+        connectedSources: [plasmoid.configuration.key]
     }
 
-    readonly property bool capsLock: keystateSource.data["Caps Lock"]["Locked"]
-    readonly property bool numLock: keystateSource.data["Num Lock"]["Locked"]
-    readonly property string capsLockMessage: capsLock ? i18n("Caps Lock is on") : i18n("Caps Lock is off")
-    readonly property string numLockMessage: numLock ? i18n("Num Lock is on") : i18n("Num Lock is off")
+    function translate(identifier) {
+        switch(identifier) {
+            case "CapsLock": return i18n("Caps Lock")
+            case "Num Lock": return i18n("Num Lock")
+        }
+        return identifier;
+    }
+    function icon(identifier) {
+        switch(identifier) {
+            case "CapsLock": return "input-caps-on"
+        }
+        return "emblem-locked";
+    }
 
-    Plasmoid.icon: capsLock ? "input-caps-on" : "input-keyboard"
-    Plasmoid.toolTipSubText: capsLockMessage + "\n" + numLockMessage
+    readonly property bool isLocked: keystateSource.data[plasmoid.configuration.key].Locked
+    readonly property string message: isLocked ? i18n("%1 is locked", translate(plasmoid.configuration.key)) : i18n("%1 is unlocked", translate(plasmoid.configuration.key))
+
+    Plasmoid.icon: isLocked ? "input-caps-on" : ""
+    Plasmoid.title: message
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
     Plasmoid.fullRepresentation: PlasmaCore.ToolTipArea {
         readonly property bool inPanel: (plasmoid.location === PlasmaCore.Types.TopEdge
@@ -48,20 +58,20 @@ Item {
             || plasmoid.location === PlasmaCore.Types.BottomEdge
             || plasmoid.location === PlasmaCore.Types.LeftEdge)
 
-        Layout.minimumWidth: units.iconSizes.small
-        Layout.minimumHeight: Layout.minimumWidth
+        Layout.minimumWidth: isLocked ? units.iconSizes.small : 0
+        Layout.minimumHeight: isLocked ? Layout.minimumWidth : 0
 
         Layout.maximumWidth: inPanel ? units.iconSizeHints.panel : -1
         Layout.maximumHeight: inPanel ? units.iconSizeHints.panel : -1
 
-        icon: plasmoid.icon
+        icon: plasmoid.icon || "input-keyboard"
         mainText: plasmoid.title
         subText: plasmoid.toolTipSubText
 
         PlasmaCore.IconItem {
             anchors.fill: parent
             source: plasmoid.icon
-            active: parent.containsMouse || root.capsLock
+            active: parent.containsMouse || root.isLocked
         }
     }
 }
