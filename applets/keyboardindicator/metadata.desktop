@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Keyboard Indicator
+Name[ca]=Indicador de teclat
+Name[nl]=Toetsenbordindicator
+Name[pt]=Indicador do Teclado
+Name[uk]=Індикатор клавіатури
+Name[x-test]=xxKeyboard Indicatorxx
 Comment=Shows the state of the keyboard
+Comment[ca]=Mostra l'estat del teclat
+Comment[nl]=Toont de status van het toetsenbord
+Comment[pt]=Mostra o estado do teclado
+Comment[uk]=Показує стан клавіатури
+Comment[x-test]=xxShows the state of the keyboardxx
 Type=Service
 Icon=input-keyboard
 ServiceTypes=Plasma/Applet
