@@ -64,6 +64,7 @@ Comment[pt]=Corresponde aos Perfis do Konsole
 Comment[sv]=Matchar terminalprofiler
 Comment[uk]=Шукає профілі Konsole
 Comment[x-test]=xxMatches Konsole Profilesxx
+Comment[zh_CN]=匹配 Konsole 配置
 Icon=utilities-terminal
 
 X-KDE-ServiceTypes=Plasma/Runner
