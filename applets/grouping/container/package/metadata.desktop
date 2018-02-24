@@ -1,4 +1,5 @@
 [Desktop Entry]
+Encoding=UTF-8
 Name=Grouping Plasmoid
 Name[ar]=بلازمويد تجميع
 Name[ca]=Plasmoide d'agrupació
@@ -35,7 +36,7 @@ Name[uk]=Плазмоїд групування
 Name[x-test]=xxGrouping Plasmoidxx
 Name[zh_CN]=分组小部件
 Name[zh_TW]=組織 Plasmoid
-Encoding=UTF-8
+Comment=Group Plasma widgets together
 Icon=preferences-desktop-notification
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
