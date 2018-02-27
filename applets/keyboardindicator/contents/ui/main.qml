@@ -34,14 +34,14 @@ Item {
 
     function translate(identifier) {
         switch(identifier) {
-            case "CapsLock": return i18n("Caps Lock")
+            case "Caps Lock": return i18n("Caps Lock")
             case "Num Lock": return i18n("Num Lock")
         }
         return identifier;
     }
     function icon(identifier) {
         switch(identifier) {
-            case "CapsLock": return "input-caps-on"
+            case "Caps Lock": return "input-caps-on"
         }
         return "emblem-locked";
     }
@@ -49,7 +49,7 @@ Item {
     readonly property bool isLocked: keystateSource.data[plasmoid.configuration.key].Locked
     readonly property string message: isLocked ? i18n("%1 is locked", translate(plasmoid.configuration.key)) : i18n("%1 is unlocked", translate(plasmoid.configuration.key))
 
-    Plasmoid.icon: isLocked ? "input-caps-on" : ""
+    Plasmoid.icon: isLocked ? icon(plasmoid.configuration.key) : ""
     Plasmoid.title: message
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
     Plasmoid.fullRepresentation: PlasmaCore.ToolTipArea {
