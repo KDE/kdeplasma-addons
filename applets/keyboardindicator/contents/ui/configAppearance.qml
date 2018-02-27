@@ -17,47 +17,37 @@
 */
 
 import QtQuick 2.2
-import QtQml.Models 2.2
-import QtQuick.Controls 1.1 as Controls
-import QtQuick.Layouts 1.1 as Layouts
+import QtQuick.Controls 2.2 as Controls
+import QtQuick.Layouts 1.1
 
-Controls.GroupBox
+Item
 {
+    id: root
     signal configurationChanged
 
     function saveConfig() {
-        plasmoid.nativeInterface.key = keysModel.get(keysCombo.currentIndex).name
-
-        plasmoid.nativeInterface.saveConfig();
-        plasmoid.nativeInterface.configChanged();
+        plasmoid.configuration.key = group.checkedButton.name
     }
 
-    Component.onCompleted: {
-        for(var i=0; i<keysModel.count; ++i) {
-            if (keysModel.get(i).name === plasmoid.nativeInterface.key) {
-                keysCombo.currentIndex = i
-            }
+    Controls.ButtonGroup {
+        id: group
+        buttons: layout.children
+        onCheckedButtonChanged: root.configurationChanged()
+    }
+
+    ColumnLayout {
+        id: layout
+        Controls.RadioButton {
+            Layout.fillWidth: true
+            readonly property string name: "Caps Lock"
+            checked: plasmoid.configuration.key === name
+            text: i18n("Caps Lock")
         }
-    }
-
-    title: i18n("Appearance")
-    flat: true
-
-    Layouts.ColumnLayout {
-        Controls.ComboBox {
-            id: keysCombo
-            textRole: "name"
-            model: ObjectModel {
-                id: keysModel
-                QtObject {
-                    readonly property string name: "Caps Lock"
-                    readonly property string text: i18n("Caps Lock")
-                }
-                QtObject {
-                    readonly property string name: "Num Lock"
-                    readonly property string text: i18n("Num Lock")
-                }
-            }
+        Controls.RadioButton {
+            Layout.fillWidth: true
+            readonly property string name: "Num Lock"
+            checked: plasmoid.configuration.key === name
+            text: i18n("Num Lock")
         }
     }
 }
