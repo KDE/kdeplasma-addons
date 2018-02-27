@@ -22,7 +22,6 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-
 Item {
     id: root
 
@@ -44,6 +43,13 @@ Item {
             case "Caps Lock": return "input-caps-on"
         }
         return "emblem-locked";
+    }
+
+    function overlays(identifier) {
+        switch(identifier) {
+            case "Num Lock": return ["accessories-calculator"]
+            default: return []
+        }
     }
 
     readonly property bool isLocked: keystateSource.data[plasmoid.configuration.key].Locked
@@ -72,6 +78,7 @@ Item {
             anchors.fill: parent
             source: plasmoid.icon
             active: parent.containsMouse || root.isLocked
+            overlays: root.overlays(plasmoid.configuration.key)
         }
     }
 }
