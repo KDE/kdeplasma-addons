@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Keyboard Indicator
 Name[ca]=Indicador de teclat
+Name[ca@valencia]=Indicador de teclat
 Name[de]=Tastaturstatus
 Name[en_GB]=Keyboard Indicator
 Name[fi]=Näppäimistöosoitin
@@ -13,6 +14,7 @@ Name[x-test]=xxKeyboard Indicatorxx
 Name[zh_CN]=键盘指示器
 Comment=Shows the state of the keyboard
 Comment[ca]=Mostra l'estat del teclat
+Comment[ca@valencia]=Mostra l'estat del teclat
 Comment[de]=Zeigt den Status der Tastatur an
 Comment[en_GB]=Shows the state of the keyboard
 Comment[fi]=Näyttää näppäimistön tilan
