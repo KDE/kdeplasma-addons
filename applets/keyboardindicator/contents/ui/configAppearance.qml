@@ -26,28 +26,30 @@ Item
     signal configurationChanged
 
     function saveConfig() {
-        plasmoid.configuration.key = group.checkedButton.name
-    }
-
-    Controls.ButtonGroup {
-        id: group
-        buttons: layout.children
-        onCheckedButtonChanged: root.configurationChanged()
+        var names = []
+        for(var i in layout.children) {
+            var cur = layout.children[i]
+            if (cur.checked)
+                names.push(cur.name)
+        }
+        plasmoid.configuration.key = names
     }
 
     ColumnLayout {
         id: layout
-        Controls.RadioButton {
+        Controls.CheckBox {
             Layout.fillWidth: true
             readonly property string name: "Caps Lock"
-            checked: plasmoid.configuration.key === name
+            checked: plasmoid.configuration.key.indexOf(name) >= 0
             text: i18n("Caps Lock")
+            onCheckedChanged: root.configurationChanged()
         }
-        Controls.RadioButton {
+        Controls.CheckBox {
             Layout.fillWidth: true
             readonly property string name: "Num Lock"
-            checked: plasmoid.configuration.key === name
+            checked: plasmoid.configuration.key.indexOf(name) >= 0
             text: i18n("Num Lock")
+            onCheckedChanged: root.configurationChanged()
         }
     }
 }

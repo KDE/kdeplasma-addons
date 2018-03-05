@@ -6,7 +6,7 @@
   <kcfgfile name=""/>
 
   <group name="General">
-    <entry name="key" type="String">
+    <entry name="key" type="StringList">
       <default>Caps Lock</default>
     </entry>
   </group>

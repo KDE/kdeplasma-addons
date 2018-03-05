@@ -17,7 +17,6 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -28,7 +27,7 @@ Item {
     readonly property QtObject source: PlasmaCore.DataSource {
         id: keystateSource
         engine: "keystate"
-        connectedSources: [plasmoid.configuration.key]
+        connectedSources: plasmoid.configuration.key
     }
 
     function translate(identifier) {
@@ -38,47 +37,56 @@ Item {
         }
         return identifier;
     }
+
     function icon(identifier) {
         switch(identifier) {
+            case "Num Lock": return "accessories-calculator"
             case "Caps Lock": return "input-caps-on"
         }
-        return "emblem-locked";
+        return null
     }
 
-    function overlays(identifier) {
-        switch(identifier) {
-            case "Num Lock": return ["accessories-calculator"]
-            default: return []
+    readonly property bool lockedCount: {
+        var ret = 0;
+        for (var v in keystateSource.connectedSources) {
+            ret += keystateSource.data[keystateSource.connectedSources[v]].Locked
         }
+        return ret
     }
 
-    readonly property bool isLocked: keystateSource.data[plasmoid.configuration.key].Locked
-    readonly property string message: isLocked ? i18n("%1 is locked", translate(plasmoid.configuration.key)) : i18n("%1 is unlocked", translate(plasmoid.configuration.key))
+    Plasmoid.icon: {
+        for (var v in keystateSource.connectedSources) {
+            var source = keystateSource.connectedSources[v]
+            if (keystateSource.data[source].Locked)
+                return icon(source)
+        }
+        return "input-keyboard"
+    }
 
-    Plasmoid.icon: isLocked ? icon(plasmoid.configuration.key) : ""
-    Plasmoid.title: message
-    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
-    Plasmoid.fullRepresentation: PlasmaCore.ToolTipArea {
-        readonly property bool inPanel: (plasmoid.location === PlasmaCore.Types.TopEdge
-            || plasmoid.location === PlasmaCore.Types.RightEdge
-            || plasmoid.location === PlasmaCore.Types.BottomEdge
-            || plasmoid.location === PlasmaCore.Types.LeftEdge)
+    Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+    Plasmoid.compactRepresentation: PlasmaCore.IconItem {
+        source: plasmoid.icon
+        active: lockedCount>0
 
-        Layout.minimumWidth: isLocked ? units.iconSizes.small : 0
-        Layout.minimumHeight: isLocked ? Layout.minimumWidth : 0
-
-        Layout.maximumWidth: inPanel ? units.iconSizeHints.panel : -1
-        Layout.maximumHeight: inPanel ? units.iconSizeHints.panel : -1
-
-        icon: plasmoid.icon || "input-keyboard"
-        mainText: plasmoid.title
-        subText: plasmoid.toolTipSubText
-
-        PlasmaCore.IconItem {
+        MouseArea {
+            id: compactMouse
             anchors.fill: parent
-            source: plasmoid.icon
-            active: parent.containsMouse || root.isLocked
-            overlays: root.overlays(plasmoid.configuration.key)
+            hoverEnabled: true
+            acceptedButtons: null
         }
+    }
+
+    Plasmoid.status: lockedCount>0 ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
+    Plasmoid.toolTipSubText: {
+        var ret = "";
+        var found = false;
+        for (var v in keystateSource.connectedSources) {
+            var source = keystateSource.connectedSources[v]
+            if (keystateSource.data[source].Locked) {
+                found = true
+                ret+=i18n("%1: Locked\n", translate(source))
+            }
+        }
+        return found ? ret.trim() : i18n("Unlocked")
     }
 }
