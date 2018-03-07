@@ -60,6 +60,8 @@ Item {
 
     property bool showOffLeds: plasmoid.configuration.showOffLeds
     property bool showGrid: plasmoid.configuration.showGrid
+    
+    property int base: plasmoid.configuration.showBcdFormat? 10:16
 
     property int dots: showSeconds? 6:4
 
@@ -83,14 +85,12 @@ Item {
     DotColumn {
         x:displayLeft
         y:displayTop
-        val:hours
-        startbit:4
+        val:hours/base
     }
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)
         y:displayTop
-        val:hours
-        startbit:0
+        val:hours%base
     }
 
 
@@ -98,30 +98,26 @@ Item {
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)*2
         y:displayTop
-        val:minutes
-        startbit:4
+        val:minutes/base
     }
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)*3
         y:displayTop
-        val:minutes
-        startbit:0
+        val:minutes%base
     }
 
     /* seconds */
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)*4
         y:displayTop
-        val:seconds
-        startbit:4
+        val:seconds/base
         visible:showSeconds
     }
 
     DotColumn {
         x:displayLeft+(dotSize+units.smallSpacing)*5
         y:displayTop
-        val:seconds
-        startbit:0
+        val:seconds%base
         visible:showSeconds
     }
 

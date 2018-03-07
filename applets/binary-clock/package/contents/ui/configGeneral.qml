@@ -35,6 +35,7 @@ QtControls.GroupBox {
     property alias cfg_showGrid: showGridCheckBox.checked
     property alias cfg_showOffLeds: showOffLedsCheckBox.checked
     property alias cfg_showSeconds: showSecondsCheckBox.checked
+    property alias cfg_showBcdFormat: showBcdFormatCheckBox.checked
     property alias cfg_useCustomColorForActive: useCustomColorForActiveCheckBox.checked
     property alias cfg_customColorForActive: customColorForActive.color
     property alias cfg_useCustomColorForInactive: useCustomColorForInactiveCheckBox.checked
@@ -66,6 +67,10 @@ QtControls.GroupBox {
         QtControls.CheckBox {
             id: showSecondsCheckBox
             text: i18n("Display seconds")
+        }
+        QtControls.CheckBox {
+            id: showBcdFormatCheckBox
+            text: i18n("Display in BCD format (decimal)")
         }
         QtControls.Label {
             text: i18n("Colors:")

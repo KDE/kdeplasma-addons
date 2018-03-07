@@ -15,6 +15,9 @@
     <entry name="showSeconds" type="Bool">
       <default>true</default>
     </entry>
+    <entry name="showBcdFormat" type="Bool">
+      <default>false</default>
+    </entry>
     <entry name="useCustomColorForActive" type="Bool">
       <default>false</default>
     </entry>

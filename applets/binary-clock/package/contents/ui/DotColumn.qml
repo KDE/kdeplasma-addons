@@ -26,29 +26,28 @@ import QtQuick 2.0
 
 Item {
     property int val
-    property int startbit
     Dot {
         x:0
         y:0
         val:parent.val
-        bit:1<<(startbit+3)
+        bit:8
     }
     Dot {
         x:0
         y:(dotSize+units.smallSpacing)
         val:parent.val
-        bit:1<<(startbit+2)
+        bit:4
     }
     Dot {
         x:0
         y:2*(dotSize+units.smallSpacing)
         val:parent.val
-        bit:1<<(startbit+1)
+        bit:2
     }
     Dot {
         x:0
         y:3*(dotSize+units.smallSpacing)
         val:parent.val
-        bit:1<<startbit
+        bit:1
     }
 }
