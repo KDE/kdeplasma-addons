@@ -30,7 +30,7 @@ class QuicklaunchPrivate : public QObject
     Q_OBJECT
 
 public:
-    explicit QuicklaunchPrivate(QObject *parent = Q_NULLPTR);
+    explicit QuicklaunchPrivate(QObject *parent = nullptr);
 
     Q_INVOKABLE QVariantMap launcherData(const QUrl &url);
     Q_INVOKABLE void openUrl(const QUrl &url);

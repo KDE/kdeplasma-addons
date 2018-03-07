@@ -115,12 +115,12 @@ QVariantMap QuicklaunchPrivate::launcherData(const QUrl &url)
 
 void QuicklaunchPrivate::openUrl(const QUrl &url)
 {
-    new KRun(url, Q_NULLPTR);
+    new KRun(url, nullptr);
 }
 
 void QuicklaunchPrivate::openExec(const QString &exec)
 {
-    KRun::run(exec, {}, Q_NULLPTR);
+    KRun::run(exec, {}, nullptr);
 }
 
 void QuicklaunchPrivate::addLauncher(bool isPopup)
