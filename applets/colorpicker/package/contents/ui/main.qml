@@ -29,7 +29,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.draganddrop 2.0
 
 import org.kde.plasma.private.colorpicker 2.0 as ColorPicker
-import "../code/logic.js" as Logic
+import "logic.js" as Logic
 
 Item {
     id: root

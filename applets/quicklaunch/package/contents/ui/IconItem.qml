@@ -23,7 +23,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragAndDrop
 
-import "../code/layout.js" as LayoutManager
+import "layout.js" as LayoutManager
 
 Item {
     id: iconItem

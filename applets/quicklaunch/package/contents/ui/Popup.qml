@@ -21,7 +21,7 @@
 import QtQuick 2.2
 import org.kde.draganddrop 2.0 as DragAndDrop
 
-import "../code/layout.js" as LayoutManager
+import "layout.js" as LayoutManager
 
 Item {
     id: popup

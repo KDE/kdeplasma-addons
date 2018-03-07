@@ -26,7 +26,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragAndDrop
 import org.kde.plasma.private.quicklaunch 1.0
 
-import "../code/layout.js" as LayoutManager
+import "layout.js" as LayoutManager
 
 Item {
     id: root

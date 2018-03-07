@@ -22,7 +22,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.0 as QtControls
 import QtQuick.Layouts 1.0
 
-import "../code/logic.js" as Logic
+import "logic.js" as Logic
 
 ColumnLayout {
     id: appearancePage
