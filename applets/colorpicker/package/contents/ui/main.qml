@@ -36,7 +36,7 @@ Item {
 
     readonly property bool isVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
 
-    readonly property color recentColor: plasmoid.configuration.history[0] || theme.highlightColor // nice default color
+    readonly property color recentColor: plasmoid.configuration.history[0] || "#00000000" // transparent as fallback
     readonly property string defaultFormat: plasmoid.configuration.defaultFormat
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
@@ -215,8 +215,8 @@ Item {
                         width: {
                             var contrast = luminance(theme.viewBackgroundColor) / luminance(colorCircle.color) + 0.05;
 
-                            // show border only if there's too little contrast to the surrounding view
-                            if (contrast > 3) {
+                            // show border only if there's too little contrast to the surrounding view or color is transparent
+                            if (contrast > 3 && colorCircle.color.a > 0.5) {
                                 return 0;
                             } else {
                                 return Math.round(Math.max(units.devicePixelRatio, width / 20));
