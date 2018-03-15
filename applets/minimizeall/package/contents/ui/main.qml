@@ -96,6 +96,9 @@ Item {
         enabled: root.active
         onDataChanged: {
             for (var i = topLeft.row; i <= bottomRight.row ; i++) {
+                if (! (roles.length == 0 || roles.indexOf(TaskManager.AbstractTasksModel.IsMinimized) > 0)) {
+                    continue;
+                }
                 var idx = tasksModel.makeModelIndex(i);
                 if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
                     deactivate();
