@@ -110,9 +110,11 @@ Comment[wa]=Disconter l' tins d' on moumint dné
 Comment[x-test]=xxCountdown over a specified time periodxx
 Comment[zh_CN]=在指定时间段倒计时
 Comment[zh_TW]=倒數計時
-Type=Service
 Icon=chronometer
-ServiceTypes=Plasma/Applet
+
+Type=Service
+X-KDE-ServiceTypes=Plasma/Applet
+
 X-KDE-PluginInfo-Author=Davide Bettio
 X-KDE-PluginInfo-Email=davide.bettio@kdemail.net
 X-KDE-PluginInfo-Name=org.kde.plasma.timer

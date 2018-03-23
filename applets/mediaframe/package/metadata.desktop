@@ -54,8 +54,9 @@ Comment[x-test]=xx(Picture) Framexx
 Comment[zh_CN]=(图片) 像框
 Comment[zh_TW]=（圖片）框架
 Icon=image-x-generic
+
 Type=Service
-ServiceTypes=Plasma/Applet
+X-KDE-ServiceTypes=Plasma/Applet
 
 X-KDE-PluginInfo-Author=Lars Pontoppidan
 X-KDE-PluginInfo-Email=dev.larpon@gmail.com

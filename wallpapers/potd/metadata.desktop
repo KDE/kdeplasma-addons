@@ -92,10 +92,11 @@ Comment[uk]=Нове зображення з інтернету щодня
 Comment[x-test]=xxA new picture from the Internet each dayxx
 Comment[zh_CN]=每天从互联网获取新图片
 Comment[zh_TW]=每天從網路上顯示新照片
+Icon=office-calendar
 
 Type=Service
-ServiceTypes=Plasma/Wallpaper
-Icon=office-calendar
+X-KDE-ServiceTypes=Plasma/Wallpaper
+
 X-Plasma-MainScript=ui/main.qml
 X-KDE-PluginInfo-Author=Weng Xuetian
 X-KDE-PluginInfo-Email=wengxt@gmail.com

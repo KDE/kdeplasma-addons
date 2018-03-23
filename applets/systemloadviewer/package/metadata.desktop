@@ -108,8 +108,9 @@ Comment[x-test]=xxTiny CPU/RAM/Swap monitorxx
 Comment[zh_CN]=微型 CPU/RAM/Swap 监视器
 Comment[zh_TW]=迷你 CPU/記憶體/置換空間監視器
 Icon=view-statistics
+
 Type=Service
-ServiceTypes=Plasma/Applet
+X-KDE-ServiceTypes=Plasma/Applet
 
 X-KDE-PluginInfo-Author=Martin Yrjölä, Matthew Dawson
 X-KDE-PluginInfo-Email=martin.yrjola@gmail.com, matthew@mjdsystems.ca

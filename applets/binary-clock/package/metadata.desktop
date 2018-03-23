@@ -111,7 +111,7 @@ Comment[zh_TW]=以二進位格式顯示時間
 Icon=clock
 
 Type=Service
-ServiceTypes=Plasma/Applet
+X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-PluginInfo-Author=Joseph Wenninger,Davide Bettio
 X-KDE-PluginInfo-Email=jowenn@kde.org, davide.bettio@kdemail.net
 X-KDE-PluginInfo-Name=org.kde.plasma.binaryclock

@@ -76,10 +76,11 @@ Comment[uk]=Шпалера Ганау
 Comment[x-test]=xxHaenau wallpaperxx
 Comment[zh_CN]=Haenau 壁纸
 Comment[zh_TW]=Haenau 桌布
+Icon=preferences-desktop-wallpaper
 
 Type=Service
-ServiceTypes=Plasma/Wallpaper
-Icon=preferences-desktop-wallpaper
+X-KDE-ServiceTypes=Plasma/Wallpaper
+
 X-Plasma-MainScript=ui/main.qml
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Email=mart@kde.org

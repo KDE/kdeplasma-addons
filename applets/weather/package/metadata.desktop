@@ -88,10 +88,10 @@ Comment[uk]=Ознайомитися із прогнозом погоди на �
 Comment[x-test]=xxFind out weather for todayxx
 Comment[zh_CN]=了解今日天气
 Comment[zh_TW]=顯示今天的天氣
-Type=Service
-ServiceTypes=Plasma/Applet
 Icon=weather-clear
 
+Type=Service
+X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_weather
 
 X-Plasma-API=declarativeappletscript
