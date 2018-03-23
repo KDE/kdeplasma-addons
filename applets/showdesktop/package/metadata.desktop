@@ -111,11 +111,10 @@ Comment[wa]=Mostrer l' sicribanne Plasma
 Comment[x-test]=xxShow the Plasma desktopxx
 Comment[zh_CN]=显示 Plasma 桌面
 Comment[zh_TW]=顯示 Plasma 桌面
-
+Icon=user-desktop
 
 Type=Service
-Icon=user-desktop
-ServiceTypes=Plasma/Applet
+X-KDE-ServiceTypes=Plasma/Applet
 
 X-KDE-PluginInfo-Author=Petri Damstén
 X-KDE-PluginInfo-Email=damu@iki.fi
@@ -129,5 +128,4 @@ X-KDE-PluginInfo-EnabledByDefault=true
 X-Plasma-MainScript=ui/main.qml
 X-Plasma-API=declarativeappletscript
 
-X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-FormFactors=desktop

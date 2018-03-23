@@ -33,10 +33,9 @@ Comment[sv]=Visar tangentbordets tillstånd
 Comment[uk]=Показує стан клавіатури
 Comment[x-test]=xxShows the state of the keyboardxx
 Comment[zh_CN]=显示键盘的状态
-Type=Service
 Icon=input-keyboard
-ServiceTypes=Plasma/Applet
 
+Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-PluginInfo-Author=Aleix Pol Gonzalez
 X-KDE-PluginInfo-Email=aleixpol@kde.org

@@ -74,10 +74,9 @@ Comment[uk]=Показує стільницю, згорнувши усі вік�
 Comment[x-test]=xxShows the desktop by minimizing all windowsxx
 Comment[zh_CN]=最小化所有窗口以显示桌面
 Comment[zh_TW]=透過最小化所有視窗來顯示桌面
-Type=Service
 Icon=user-desktop
-ServiceTypes=Plasma/Applet
 
+Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-PluginInfo-Author=Sebastian Kügler
 X-KDE-PluginInfo-Email=sebas@kde.org
