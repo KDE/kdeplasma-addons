@@ -1,1 +1,1 @@
-plasma_install_package(package org.kde.plasma.fuzzyclock)
+plasma_install_bundled_package(package org.kde.plasma.fuzzyclock)

@@ -10,7 +10,7 @@ if (Qt5WebEngine_FOUND)
 
 #######################################################################################
 # Package (metadata.desktop and QML)
-plasma_install_package(package org.kde.plasma_applet_dict)
+plasma_install_bundled_package(package org.kde.plasma_applet_dict)
 
 #######################################################################################
 # Icon for the package

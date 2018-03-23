@@ -38,5 +38,5 @@ install(TARGETS plasma_applet_comic DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/
 #install(FILES plasma-comic-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES comic.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})
-plasma_install_package(package org.kde.plasma.comic)
+plasma_install_bundled_package(package org.kde.plasma.comic)
 

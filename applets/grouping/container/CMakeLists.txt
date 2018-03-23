@@ -1,4 +1,4 @@
-plasma_install_package(package org.kde.plasma.grouping)
+plasma_install_bundled_package(package org.kde.plasma.grouping)
 
 set(groupedappletscontainer_SRCS
     groupedappletscontainer.cpp

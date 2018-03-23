@@ -1,7 +1,7 @@
 
 #######################################################################################
 # Package
-plasma_install_package(package org.kde.plasma.diskquota)
+plasma_install_bundled_package(package org.kde.plasma.diskquota)
 
 
 #######################################################################################

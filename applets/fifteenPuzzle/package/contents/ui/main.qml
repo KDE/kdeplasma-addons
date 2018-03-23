@@ -21,7 +21,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.private.fifteenpuzzle 0.1
+import org.kde.plasma.private.fifteenpuzzle 0.1 as Private
 
 Item {
     id: root

@@ -19,7 +19,7 @@ install(TARGETS plasma_applet_weather DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasm
 
 install(FILES wind-arrows.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/weather/)
 
-plasma_install_package(package org.kde.plasma.weather)
+plasma_install_bundled_package(package org.kde.plasma.weather)
 
 
 set(weather_SRCS
