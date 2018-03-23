@@ -29,6 +29,7 @@ void FifteenPuzzlePlugin::registerTypes(const char* uri)
 {
     Q_UNUSED(uri);
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.fifteenpuzzle"));
+    // Do some dummy registration, otherwise the plugin will be ignored at runtime
     qmlRegisterTypeNotAvailable(uri, 0, 1, "FifteenPuzzle", QStringLiteral("fifteenpuzzle"));
 }
 
