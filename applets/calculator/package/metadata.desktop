@@ -128,5 +128,3 @@ X-Plasma-StandAloneApp=true
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/calculator.qml
-X-Plasma-Requires-FileDialog=Unused
-X-Plasma-Requires-LaunchApp=Unused
