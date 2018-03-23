@@ -70,5 +70,3 @@ X-Plasma-StandAloneApp=true
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
-X-Plasma-Requires-FileDialog=True
-X-Plasma-Requires-LaunchApp=Unused
