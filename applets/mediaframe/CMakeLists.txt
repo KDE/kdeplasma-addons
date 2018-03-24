@@ -1,4 +1,4 @@
-plasma_install_bundled_package(package org.kde.plasma.mediaframe)
+plasma_install_package(package org.kde.plasma.mediaframe)
 
 set(mediaframeplugin_SRCS
     plugin/mediaframe.cpp

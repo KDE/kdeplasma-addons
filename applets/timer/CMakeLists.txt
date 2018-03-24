@@ -1,4 +1,4 @@
-plasma_install_bundled_package(package org.kde.plasma.timer)
+plasma_install_package(package org.kde.plasma.timer)
 
 add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.timer")
 

@@ -1,7 +1,7 @@
-plasma_install_bundled_package(activitypager org.kde.plasma.activitypager)
-plasma_install_bundled_package(kickerdash org.kde.plasma.kickerdash)
-plasma_install_bundled_package(konsoleprofiles/package org.kde.plasma.konsoleprofiles)
-plasma_install_bundled_package(keyboardindicator org.kde.plasma.keyboardindicator)
+plasma_install_package(activitypager org.kde.plasma.activitypager)
+plasma_install_package(kickerdash org.kde.plasma.kickerdash)
+plasma_install_package(konsoleprofiles/package org.kde.plasma.konsoleprofiles)
+plasma_install_package(keyboardindicator org.kde.plasma.keyboardindicator)
 
 add_subdirectory(binary-clock)
 add_subdirectory(calculator)

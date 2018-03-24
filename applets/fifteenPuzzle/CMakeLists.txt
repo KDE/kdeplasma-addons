@@ -3,7 +3,7 @@ ecm_install_icons(
     DESTINATION ${KDE_INSTALL_ICONDIR}
 )
 
-plasma_install_bundled_package(package org.kde.plasma.fifteenpuzzle)
+plasma_install_package(package org.kde.plasma.fifteenpuzzle)
 
 set(fifteenpuzzleplugin_SRCS
     plugin/fifteenimageprovider.cpp

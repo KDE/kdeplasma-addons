@@ -1,6 +1,6 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.private.grouping\")
 
-plasma_install_bundled_package(package org.kde.plasma.private.grouping)
+plasma_install_package(package org.kde.plasma.private.grouping)
 
 ecm_qt_declare_logging_category(groupingplasmoid_SRCS HEADER debug.h
                                             IDENTIFIER GROUPING_DEBUG

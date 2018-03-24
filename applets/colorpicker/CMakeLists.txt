@@ -1,6 +1,6 @@
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
-plasma_install_bundled_package(package org.kde.plasma.colorpicker)
+plasma_install_package(package org.kde.plasma.colorpicker)
 
 set(colorpickerplugin_SRCS
     plugin/grabwidget.cpp

@@ -8,6 +8,6 @@ set_package_properties(Qt5WebEngine PROPERTIES
 
 if (Qt5WebEngine_FOUND)
 
-plasma_install_bundled_package(package org.kde.plasma.webbrowser)
+plasma_install_package(package org.kde.plasma.webbrowser)
 
 endif()
