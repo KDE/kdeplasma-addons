@@ -1,4 +1,4 @@
-find_package(Qt5WebEngine ${REQUIRED_QT_VERSION} CONFIG)
+find_package(Qt5WebEngine ${QT_MIN_VERSION} CONFIG)
 
 set_package_properties(Qt5WebEngine PROPERTIES
     PURPOSE "Needed by the dict applet"

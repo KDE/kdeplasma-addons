@@ -9,7 +9,7 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
    message(FATAL_ERROR "plasma requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma [options]' there.")
 endif()
 
-set(REQUIRED_QT_VERSION 5.9.0)
+set(QT_MIN_VERSION 5.9.0)
 set(KF5_MIN_VERSION 5.45.0)
 
 include(FeatureSummary)
@@ -24,7 +24,7 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMInstallIcons)
 include(GenerateExportHeader)
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Gui
     DBus
