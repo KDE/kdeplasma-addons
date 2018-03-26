@@ -55,7 +55,7 @@ Item {
                                                     theme.highlightColor]
 
     property var swapColors: setColorsManually ? [plasmoid.configuration.swapUsedColor]
-                                               : [theme.hightlightColor]
+                                               : [theme.highlightColor]
 
     property var cacheColors: setColorsManually ? [plasmoid.configuration.cacheDirtyColor,
                                                    plasmoid.configuration.cacheWritebackColor]
