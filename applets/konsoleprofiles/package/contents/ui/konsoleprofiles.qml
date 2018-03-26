@@ -56,7 +56,6 @@ Item {
 
     Component.onCompleted: {
         plasmoid.popupIcon = "utilities-terminal";
-        plasmoid.aspectRatioMode = IgnoreAspectRatio;
         plasmoid.popupEvent.connect('popupEvent', popupEventSlot);
     }
 
