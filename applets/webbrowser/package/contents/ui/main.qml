@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 import QtQuick 2.0
-import QtWebEngine 1.1
+import QtWebEngine 1.5
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -54,6 +54,33 @@ ColumnLayout {
 
             text: webview.url
         }
+
+        // this shows page-related information such as blocked popups
+        PlasmaComponents.ToolButton {
+            id: infoButton
+
+            // callback invoked when button is clicked
+            property var cb
+
+            // button itself adds sufficient visual padding
+            Layout.leftMargin: -parent.spacing
+            Layout.rightMargin: -parent.spacing
+
+            onClicked: cb();
+
+            function show(text, icon, tooltip, cb) {
+                infoButton.text = text;
+                infoButton.iconName = icon;
+                infoButton.tooltip = tooltip;
+                infoButton.cb = cb;
+                infoButton.visible = true;
+            }
+
+            function dismiss() {
+                infoButton.visible = false;
+            }
+        }
+
         PlasmaComponents.Button{
             iconSource: webview.loading ? "process-stop" : "view-refresh"
             onClicked: webview.loading ? webview.stop() : webview.reload()
@@ -76,7 +103,28 @@ ColumnLayout {
                 // Try to fit contents for a smaller screen
                 webview.zoomFactor = Math.min(1, webview.width / 1000);
             }
+        }
 
+        // This reimplements WebEngineView context menu for links to add a "open externally" entry
+        // since you cannot add custom items there yet
+        // there's a FIXME comment about that in QQuickWebEngineViewPrivate::contextMenuRequested
+        PlasmaComponents.Menu {
+            id: linkContextMenu
+            visualParent: webview
+
+            property string link
+
+            PlasmaComponents.MenuItem {
+                text: i18n("Open Link in Browser")
+                icon:  "internet-web-browser"
+                onClicked: Qt.openUrlExternally(linkContextMenu.link)
+            }
+
+            PlasmaComponents.MenuItem {
+                text: i18n("Copy Link Address")
+                icon: "edit-copy"
+                onClicked: webview.triggerWebAction(WebEngineView.CopyLinkToClipboard)
+            }
         }
 
         WebEngineView {
@@ -95,8 +143,32 @@ ColumnLayout {
 
             onWidthChanged: updateZoomTimer.start()
             onLoadingChanged: {
-                if (loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus) {
+                if (loadRequest.status === WebEngineLoadRequest.LoadStartedStatus) {
+                    infoButton.dismiss();
+                } else if (loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus) {
                     updateZoomTimer.start();
+                }
+            }
+
+            onContextMenuRequested: {
+                if (request.mediaType === ContextMenuRequest.MediaTypeNone && request.linkUrl.toString() !== "") {
+                    linkContextMenu.link = request.linkUrl;
+                    linkContextMenu.open(request.x, request.y);
+                    request.accepted = true;
+                }
+            }
+
+            onNewViewRequested: {
+                var url = request.requestedUrl;
+
+                if (request.userInitiated) {
+                    Qt.openUrlExternally(url);
+                } else {
+                    infoButton.show(i18nc("An unwanted popup was blocked", "Popup blocked"), "document-close",
+                                    i18n("Click here to open the following blocked popup:\n%1", url), function () {
+                        Qt.openUrlExternally(url);
+                        infoButton.dismiss();
+                    });
                 }
             }
         }
