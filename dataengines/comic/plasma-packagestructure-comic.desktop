@@ -107,7 +107,7 @@ Comment[uk]=Структура пакунка коміксів
 Comment[wa]=Sitructeure do pacaedje del binde d' imådje
 Comment[x-test]=xxComic Package Structurexx
 Comment[zh_CN]=连环画包结构
-Comment[zh_TW]=漫畫套件結構
+Comment[zh_TW]=漫畫包結構
 Type=Service
 X-KDE-ServiceTypes=KPackage/PackageStructure
 
