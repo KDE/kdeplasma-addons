@@ -2,7 +2,6 @@
 Type=Service
 X-KDE-ServiceTypes=PlasmaPoTD/Plugin
 X-KDE-Library=plasma_potd_bingprovider
-X-KDE-PlasmaPoTDProvider-SuffixType=Date
 X-KDE-PlasmaPoTDProvider-Identifier=bing
 Icon=
 

@@ -52,8 +52,5 @@ Comment[x-test]=xxPlugin for Plasma PoTD Enginexx
 Comment[zh_CN]=Plasma 每日一图引擎插件
 Comment[zh_TW]=Plasma 本日圖片引擎外掛程式
 
-[PropertyDef::X-KDE-PlasmaPoTDProvider-SuffixType]
-Type=QString
-
 [PropertyDef::X-KDE-PlasmaPoTDProvider-Identifier]
 Type=QString
