@@ -54,9 +54,6 @@ target_link_libraries(plasmacomicprovidercore
     KF5::KrossUi
     KF5::I18n
 )
-#target_link_libraries( plasmacomicprovidercore LINK_INTERFACE_LIBRARIES
-#    KF5::KDELibs4Support
-#)
 set_target_properties(plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1)
 
 install( TARGETS plasmacomicprovidercore ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP )
