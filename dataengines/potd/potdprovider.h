@@ -21,13 +21,12 @@
 #define POTDPROVIDER_H
 
 #include <QObject>
-#include <QDate>
-
-#include <KPluginFactory>
+#include <QVariantList>
 
 #include "plasma_potd_export.h"
 
 class QImage;
+class QDate;
 
 /**
  * This class is an interface for PoTD providers.

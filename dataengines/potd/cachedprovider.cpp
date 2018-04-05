@@ -25,7 +25,7 @@
 #include <QThreadPool>
 #include <QStandardPaths>
 #include <QDir>
-#include <QImage>
+#include <QDateTime>
 
 #include <QDebug>
 

@@ -23,6 +23,10 @@
 
 #include "potdprovider.h"
 
+#include <QImage>
+
+class KJob;
+
 /**
  * This class provides the image for APOD 
  * "Astronomy Picture Of the Day"
@@ -59,11 +63,11 @@ class ApodProvider : public PotdProvider
         QImage image() const override;
 
     private:
-      class Private;
-      Private* const d;
+        void pageRequestFinished(KJob *job);
+        void imageRequestFinished(KJob *job);
 
-      Q_PRIVATE_SLOT( d, void pageRequestFinished( KJob* ) )
-      Q_PRIVATE_SLOT( d, void imageRequestFinished( KJob* ) )
+    private:
+        QImage mImage;
 };
 
 #endif

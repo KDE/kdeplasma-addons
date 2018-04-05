@@ -20,34 +20,34 @@
 
 #include "noaaprovider.h"
 
-#include <QRegExp>
-#include <QImage>
 #include <QRegularExpression>
 #include <QDebug>
 
-#include <kio/job.h>
+#include <KPluginFactory>
+#include <KIO/Job>
 
-class NOAAProvider::Private
+
+NOAAProvider::NOAAProvider(QObject *parent, const QVariantList &args)
+    : PotdProvider(parent, args)
 {
-  public:
-    Private( NOAAProvider *parent )
-      : mParent( parent )
-    {
-    }
+    const QUrl url(QStringLiteral("http://www.nnvl.noaa.gov/imageoftheday.php"));
 
-    void pageRequestFinished( KJob* );
-    void imageRequestFinished( KJob* );
-    void parsePage();
+    KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, &KIO::StoredTransferJob::finished, this, &NOAAProvider::pageRequestFinished);
+}
 
-    NOAAProvider *mParent;
-    QImage mImage;
-};
+NOAAProvider::~NOAAProvider() = default;
 
-void NOAAProvider::Private::pageRequestFinished( KJob* _job )
+QImage NOAAProvider::image() const
+{
+    return mImage;
+}
+
+void NOAAProvider::pageRequestFinished(KJob* _job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if (job->error()) {
-        emit mParent->error( mParent );
+        emit error(this);
         return;
     }
 
@@ -65,46 +65,24 @@ void NOAAProvider::Private::pageRequestFinished( KJob* _job )
         url = QLatin1String("http://www.nnvl.noaa.gov/") + result.captured(1);
     }
     if (url.isEmpty()) {
-        emit mParent->error( mParent );
+        emit error(this);
         return;
     }
 
     KIO::StoredTransferJob *imageJob = KIO::storedGet( QUrl(url), KIO::NoReload, KIO::HideProgressInfo );
-    mParent->connect( imageJob, &KIO::StoredTransferJob::finished, mParent, [this] (KJob* job) {
-        imageRequestFinished(job);
-    });
+    connect(imageJob, &KIO::StoredTransferJob::finished, this, &NOAAProvider::imageRequestFinished);
 }
 
-void NOAAProvider::Private::imageRequestFinished( KJob *_job )
+void NOAAProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if ( job->error() ) {
-	emit mParent->error( mParent );
+	emit error(this);
 	return;
     }
 
     mImage = QImage::fromData( job->data() );
-    emit mParent->finished( mParent );
-}
-
-NOAAProvider::NOAAProvider( QObject *parent, const QVariantList &args )
-    : PotdProvider( parent, args ), d( new Private( this ) )
-{
-    QUrl url( QLatin1String( "http://www.nnvl.noaa.gov/imageoftheday.php" ) );
-    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
-    connect( job, &KIO::StoredTransferJob::finished, this, [this] (KJob *job) {
-        d->pageRequestFinished(job);
-    });
-}
-
-NOAAProvider::~NOAAProvider()
-{
-    delete d;
-}
-
-QImage NOAAProvider::image() const
-{
-    return d->mImage;
+    emit finished(this);
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(NOAAProviderFactory, "noaaprovider.json", registerPlugin<NOAAProvider>();)

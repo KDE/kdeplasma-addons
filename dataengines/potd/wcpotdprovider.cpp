@@ -27,29 +27,39 @@
 #include <QImage>
 #include <QDebug>
 
-#include <kio/job.h>
+#include <KPluginFactory>
+#include <KIO/Job>
 
-class WcpotdProvider::Private
+
+WcpotdProvider::WcpotdProvider(QObject *parent, const QVariantList &args)
+    : PotdProvider(parent, args)
 {
-  public:
-    Private( WcpotdProvider *parent )
-      : mParent( parent )
-    {
-    }
+    QUrl url(QStringLiteral("https://commons.wikimedia.org/w/api.php"));
 
-    void pageRequestFinished( KJob* );
-    void imageRequestFinished( KJob* );
-    void parsePage();
+    QUrlQuery urlQuery(url);
+    urlQuery.addQueryItem(QStringLiteral("action"), QStringLiteral("parse"));
+    urlQuery.addQueryItem(QStringLiteral("text"), QStringLiteral("{{Potd}}"));
+    urlQuery.addQueryItem(QStringLiteral("contentmodel"), QStringLiteral("wikitext"));
+    urlQuery.addQueryItem(QStringLiteral("prop"), QStringLiteral("images"));
+    urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("json"));
+    url.setQuery(urlQuery);
 
-    WcpotdProvider *mParent;
-    QImage mImage;
-};
+    KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, &KIO::StoredTransferJob::finished, this, &WcpotdProvider::pageRequestFinished);
+}
 
-void WcpotdProvider::Private::pageRequestFinished( KJob *_job )
+WcpotdProvider::~WcpotdProvider() = default;
+
+QImage WcpotdProvider::image() const
+{
+    return mImage;
+}
+
+void WcpotdProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if ( job->error() ) {
-	emit mParent->error( mParent );
+	emit error(this);
 	return;
     }
 
@@ -63,54 +73,26 @@ void WcpotdProvider::Private::pageRequestFinished( KJob *_job )
         if (!imageFile.isEmpty()) {
             const QUrl picUrl(QLatin1String("https://commons.wikimedia.org/wiki/Special:FilePath/") + imageFile);
             KIO::StoredTransferJob *imageJob = KIO::storedGet( picUrl, KIO::NoReload, KIO::HideProgressInfo );
-            mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
+            connect(imageJob, &KIO::StoredTransferJob::finished, this, &WcpotdProvider::imageRequestFinished);
             return;
         }
     }
 
-    emit mParent->error(mParent);
+    emit error(this);
 }
 
-void WcpotdProvider::Private::imageRequestFinished( KJob *_job )
+void WcpotdProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if ( job->error() ) {
-	emit mParent->error( mParent );
+	emit error(this);
 	return;
     }
     QByteArray data = job->data();
     mImage = QImage::fromData( data );
-    emit mParent->finished( mParent );
-}
-
-WcpotdProvider::WcpotdProvider( QObject *parent, const QVariantList &args )
-    : PotdProvider( parent, args ), d( new Private( this ) )
-{
-    QUrl url(QStringLiteral("https://commons.wikimedia.org/w/api.php"));
-
-    QUrlQuery urlQuery(url);
-    urlQuery.addQueryItem(QStringLiteral("action"), QStringLiteral("parse"));
-    urlQuery.addQueryItem(QStringLiteral("text"), QStringLiteral("{{Potd}}"));
-    urlQuery.addQueryItem(QStringLiteral("contentmodel"), QStringLiteral("wikitext"));
-    urlQuery.addQueryItem(QStringLiteral("prop"), QStringLiteral("images"));
-    urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("json"));
-    url.setQuery(urlQuery);
-
-    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
-    connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
-}
-
-WcpotdProvider::~WcpotdProvider()
-{
-    delete d;
-}
-
-QImage WcpotdProvider::image() const
-{
-    return d->mImage;
+    emit finished(this);
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(WcpotdProviderFactory, "wcpotdprovider.json", registerPlugin<WcpotdProvider>();)
 
 #include "wcpotdprovider.moc"
-#include "moc_wcpotdprovider.cpp"

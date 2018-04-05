@@ -19,35 +19,34 @@
 
 #include "bingprovider.h"
 
-#include <QRegExp>
-#include <QImage>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QDebug>
 
-#include <kio/job.h>
+#include <KPluginFactory>
+#include <KIO/Job>
 
-class BingProvider::Private
+BingProvider::BingProvider(QObject* parent, const QVariantList& args)
+    : PotdProvider(parent, args)
 {
-public:
-    Private(BingProvider* parent)
-        : mParent(parent)
-    {
-    }
+    const QUrl url(QStringLiteral("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"));
 
-    void pageRequestFinished(KJob*);
-    void imageRequestFinished(KJob*);
-    void parsePage();
+    KIO::StoredTransferJob* job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, &KIO::StoredTransferJob::finished, this, &BingProvider::pageRequestFinished);
+}
 
-    BingProvider* mParent;
-    QImage mImage;
-};
+BingProvider::~BingProvider() = default;
 
-void BingProvider::Private::pageRequestFinished(KJob* _job)
+QImage BingProvider::image() const
+{
+    return mImage;
+}
+
+void BingProvider::pageRequestFinished(KJob* _job)
 {
     KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(_job);
     if (job->error()) {
-        emit mParent->error(mParent);
+        emit error(this);
         return;
     }
 
@@ -70,47 +69,26 @@ void BingProvider::Private::pageRequestFinished(KJob* _job)
         }
         QUrl picUrl(QStringLiteral("https://www.bing.com/%1").arg(url.toString()));
         KIO::StoredTransferJob* imageJob = KIO::storedGet(picUrl, KIO::NoReload, KIO::HideProgressInfo);
-        mParent->connect(imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)));
+        connect(imageJob, &KIO::StoredTransferJob::finished, this, &BingProvider::imageRequestFinished);
         return;
     } while (0);
 
-    emit mParent->error(mParent);
+    emit error(this);
     return;
 }
 
-void BingProvider::Private::imageRequestFinished(KJob* _job)
+void BingProvider::imageRequestFinished(KJob* _job)
 {
     KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(_job);
     if (job->error()) {
-        emit mParent->error(mParent);
+        emit error(this);
         return;
     }
     QByteArray data = job->data();
     mImage = QImage::fromData(data);
-    emit mParent->finished(mParent);
-}
-
-BingProvider::BingProvider(QObject* parent, const QVariantList& args)
-    : PotdProvider(parent, args), d(new Private(this))
-{
-    QUrl url(QStringLiteral("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"));
-
-    KIO::StoredTransferJob* job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)));
-}
-
-BingProvider::~BingProvider()
-{
-    delete d;
-}
-
-QImage BingProvider::image() const
-{
-    return d->mImage;
+    emit finished(this);
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(BingProviderFactory, "bingprovider.json", registerPlugin<BingProvider>();)
 
 #include "bingprovider.moc"
-#include "moc_bingprovider.cpp"
-

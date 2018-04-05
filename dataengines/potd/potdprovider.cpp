@@ -19,6 +19,10 @@
 
 #include "potdprovider.h"
 
+// Qt
+#include <QDate>
+
+
 class PotdProviderPrivate
 {
 public:

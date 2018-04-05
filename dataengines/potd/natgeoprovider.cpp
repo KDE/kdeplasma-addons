@@ -21,35 +21,33 @@
 
 #include "natgeoprovider.h"
 
-#include <QRegExp>
-#include <QImage>
-#include <QRegularExpression>
 #include <QDebug>
 
+#include <KPluginFactory>
 #include <KIO/Job>
 
-class NatGeoProvider::Private
+
+NatGeoProvider::NatGeoProvider(QObject *parent, const QVariantList &args)
+    : PotdProvider(parent, args)
 {
-  public:
-    Private( NatGeoProvider *parent )
-      : mParent( parent )
-    {
-    }
+    const QUrl url(QStringLiteral("http://www.nationalgeographic.com/photography/photo-of-the-day/"));
 
-    void pageRequestFinished( KJob* );
-    void imageRequestFinished( KJob* );
+    KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, &KIO::StoredTransferJob::finished, this, &NatGeoProvider::pageRequestFinished);
+}
 
-    NatGeoProvider *mParent;
-    QImage mImage;
+NatGeoProvider::~NatGeoProvider() = default;
 
-    QRegularExpression re;
-};
+QImage NatGeoProvider::image() const
+{
+    return mImage;
+}
 
-void NatGeoProvider::Private::pageRequestFinished( KJob* _job )
+void NatGeoProvider::pageRequestFinished(KJob* _job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if (job->error()) {
-        emit mParent->error( mParent );
+        emit error(this);
         return;
     }
 
@@ -68,46 +66,24 @@ void NatGeoProvider::Private::pageRequestFinished( KJob* _job )
     }
 
     if (url.isEmpty()) {
-        emit mParent->error( mParent );
+        emit error(this);
         return;
     }
 
     KIO::StoredTransferJob *imageJob = KIO::storedGet( QUrl(url), KIO::NoReload, KIO::HideProgressInfo );
-    mParent->connect( imageJob, &KIO::StoredTransferJob::finished, mParent, [this] (KJob *job) {
-        imageRequestFinished(job);
-    });
+    connect(imageJob, &KIO::StoredTransferJob::finished, this, &NatGeoProvider::imageRequestFinished);
 }
 
-void NatGeoProvider::Private::imageRequestFinished( KJob *_job )
+void NatGeoProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if ( job->error() ) {
-        emit mParent->error( mParent );
+        emit error(this);
         return;
     }
 
     mImage = QImage::fromData( job->data() );
-    emit mParent->finished( mParent );
-}
-
-NatGeoProvider::NatGeoProvider( QObject *parent, const QVariantList &args )
-    : PotdProvider( parent, args ), d( new Private( this ) )
-{
-    const QUrl url( QLatin1String( "http://www.nationalgeographic.com/photography/photo-of-the-day/" ) );
-    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
-    connect( job, &KIO::StoredTransferJob::finished, this, [this] (KJob *job) {
-        d->pageRequestFinished(job);
-    });
-}
-
-NatGeoProvider::~NatGeoProvider()
-{
-    delete d;
-}
-
-QImage NatGeoProvider::image() const
-{
-    return d->mImage;
+    emit finished(this);
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(NatGeoProviderFactory, "natgeoprovider.json", registerPlugin<NatGeoProvider>();)

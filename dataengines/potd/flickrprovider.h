@@ -23,7 +23,12 @@
 #define FLICKRPROVIDER_H
 
 #include "potdprovider.h"
-#include <kio/job.h>
+// Qt
+#include <QImage>
+#include <QDate>
+#include <QXmlStreamReader>
+
+class KJob;
 
 /**
 * This class grabs a random image from the flickr
@@ -58,11 +63,18 @@ class FlickrProvider : public PotdProvider
         QImage image() const override;
 
     private:
-      class Private;
-      Private* const d;
+        void pageRequestFinished(KJob *job);
+        void imageRequestFinished(KJob *job);
 
-      Q_PRIVATE_SLOT( d, void pageRequestFinished( KJob* ) )
-      Q_PRIVATE_SLOT( d, void imageRequestFinished( KJob* ) )
+    private:
+        QDate mActualDate;
+        QImage mImage;
+
+        QXmlStreamReader xml;
+
+        int mFailureNumber = 0;
+
+        QStringList m_photoList;
 };
 
 #endif

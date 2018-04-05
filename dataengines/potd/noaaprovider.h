@@ -23,6 +23,10 @@
 #define NOAAPROVIDER_H
 
 #include "potdprovider.h"
+// Qt
+#include <QImage>
+
+class KJob;
 
 /**
  * This class provides the image for NOAA Environmental Visualization Laboratory
@@ -56,8 +60,11 @@ class NOAAProvider : public PotdProvider
         QImage image() const override;
 
     private:
-      class Private;
-      Private* const d;
+        void pageRequestFinished(KJob *job);
+        void imageRequestFinished(KJob *job);
+
+   private:
+        QImage mImage;
 };
 
 #endif
