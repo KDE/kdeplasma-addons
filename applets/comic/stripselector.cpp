@@ -175,6 +175,3 @@ void DateStripSelector::slotChosenDay(const QDate &date)
         }
     }
 }
-
-#include "moc_stripselector.cpp"
-#include "moc_stripselector_p.cpp"
