@@ -69,7 +69,7 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
         if (!partOfSpeech.cap(1).isEmpty())
             lastPartOfSpeech = partOfSpeech.cap(1);
         Plasma::QueryMatch match(this);
-        match.setText(QString(QLatin1String("%1: %2")).arg(query, lastPartOfSpeech));
+        match.setText(query + QLatin1String(": ") + lastPartOfSpeech);
         match.setRelevance(1 - (static_cast<double>(++item) / static_cast<double>(lines.length())));
         match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIconName(QStringLiteral("accessories-dictionary"));

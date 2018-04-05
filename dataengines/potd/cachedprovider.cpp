@@ -59,7 +59,7 @@ QString CachedProvider::identifierToPath( const QString &identifier )
     const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QLatin1String("/plasma_engine_potd/");
     QDir d;
     d.mkpath(dataDir);
-    return QString( dataDir + identifier );
+    return dataDir + identifier;
 }
 
 

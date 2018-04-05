@@ -52,12 +52,12 @@ void ApodProvider::Private::pageRequestFinished( KJob *_job )
 
     const QString data = QString::fromUtf8( job->data() );
 
-    const QString pattern( QLatin1String( "<a href=\"(image/.*)\"" ) );
+    const QString pattern = QStringLiteral("<a href=\"(image/.*)\"" );
     QRegExp exp( pattern );
     exp.setMinimal( true );
     if ( exp.indexIn( data ) != -1 ) {
         const QString sub = exp.cap(1);
-        QUrl url( QString( QLatin1String( "http://antwrp.gsfc.nasa.gov/apod/%1" ) ).arg( sub ) );
+        const QUrl url(QLatin1String("http://antwrp.gsfc.nasa.gov/apod/") + sub);
         KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
         mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
     } else {

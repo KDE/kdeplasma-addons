@@ -78,7 +78,7 @@ public:
         if (ch.isNumber()) {
             return true;
         }
-        if (QString(QLatin1String( ".,-+" )).contains( ch )) {
+        if (QStringLiteral(".,-+").contains(ch)) {
             return true;
         }
         return false;

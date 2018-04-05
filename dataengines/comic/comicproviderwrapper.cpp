@@ -756,16 +756,16 @@ void ComicProviderWrapper::redirected(int id, const QUrl &newUrl)
 
 void ComicProviderWrapper::finished() const
 {
-    qDebug() << QString(QLatin1String("Author")).leftJustified(22, QLatin1Char('.')) << comicAuthor();
-    qDebug() << QString(QLatin1String("Website URL")).leftJustified(22, QLatin1Char('.')) << mWebsiteUrl;
-    qDebug() << QString(QLatin1String("Shop URL")).leftJustified(22, QLatin1Char('.')) << mShopUrl;
-    qDebug() << QString(QLatin1String("Title")).leftJustified(22, QLatin1Char('.')) << mTitle;
-    qDebug() << QString(QLatin1String("Additional Text")).leftJustified(22, QLatin1Char('.')) << mAdditionalText;
-    qDebug() << QString(QLatin1String("Identifier")).leftJustified(22, QLatin1Char('.')) << mIdentifier;
-    qDebug() << QString(QLatin1String("First Identifier")).leftJustified(22, QLatin1Char('.')) << mFirstIdentifier;
-    qDebug() << QString(QLatin1String("Last Identifier")).leftJustified(22, QLatin1Char('.')) << mLastIdentifier;
-    qDebug() << QString(QLatin1String("Next Identifier")).leftJustified(22, QLatin1Char('.')) << mNextIdentifier;
-    qDebug() << QString(QLatin1String("Previous Identifier")).leftJustified(22, QLatin1Char('.')) << mPreviousIdentifier;
+    qDebug() << QString::fromLatin1("Author").leftJustified(22, QLatin1Char('.')) << comicAuthor();
+    qDebug() << QString::fromLatin1("Website URL").leftJustified(22, QLatin1Char('.')) << mWebsiteUrl;
+    qDebug() << QString::fromLatin1("Shop URL").leftJustified(22, QLatin1Char('.')) << mShopUrl;
+    qDebug() << QString::fromLatin1("Title").leftJustified(22, QLatin1Char('.')) << mTitle;
+    qDebug() << QString::fromLatin1("Additional Text").leftJustified(22, QLatin1Char('.')) << mAdditionalText;
+    qDebug() << QString::fromLatin1("Identifier").leftJustified(22, QLatin1Char('.')) << mIdentifier;
+    qDebug() << QString::fromLatin1("First Identifier").leftJustified(22, QLatin1Char('.')) << mFirstIdentifier;
+    qDebug() << QString::fromLatin1("Last Identifier").leftJustified(22, QLatin1Char('.')) << mLastIdentifier;
+    qDebug() << QString::fromLatin1("Next Identifier").leftJustified(22, QLatin1Char('.')) << mNextIdentifier;
+    qDebug() << QString::fromLatin1("Previous Identifier").leftJustified(22, QLatin1Char('.')) << mPreviousIdentifier;
     emit mProvider->finished(mProvider);
 }
 

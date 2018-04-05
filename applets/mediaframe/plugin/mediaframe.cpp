@@ -214,7 +214,7 @@ void MediaFrame::watch(const QString &path)
 
         //qDebug() << "watching" << localPath << "for changes";
         m_watcher.addPath(localPath);
-        m_watchFile = QString(localPath);
+        m_watchFile = localPath;
     }
     else
     {

@@ -63,7 +63,7 @@ bool PotdProvider::isFixedDate() const
 QString PotdProvider::identifier() const
 {
     if (isFixedDate()) {
-        return QString( QLatin1String( "%1:%2" ) ).arg( d->name, d->date.toString( Qt::ISODate ));
+        return d->name + QLatin1Char(':') + d->date.toString(Qt::ISODate);
     }
 
     return d->name;
