@@ -22,7 +22,9 @@ include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 include(ECMInstallIcons)
+include(KDEPackageAppTemplates)
 include(GenerateExportHeader)
+include(CMakePackageConfigHelpers)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
@@ -83,5 +85,7 @@ add_subdirectory(wallpapers)
 
 add_subdirectory(windowswitchers)
 add_subdirectory(desktopswitchers)
+
+add_subdirectory(templates)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

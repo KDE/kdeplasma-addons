@@ -16,6 +16,8 @@ install(FILES plasma-dataengine-potd.desktop DESTINATION ${KDE_INSTALL_KSERVICES
 
 
 ########### plugin core library ############
+set(POTDPROVIDER_VERSION 1.0.0)
+set(POTDPROVIDER_VERSION_MAJOR 1)
 
 set(potd_provider_core_SRCS
 	potdprovider.cpp
@@ -23,11 +25,51 @@ set(potd_provider_core_SRCS
 )
 
 add_library( plasmapotdprovidercore SHARED ${potd_provider_core_SRCS} )
+add_library(Plasma::PotdProvider ALIAS plasmapotdprovidercore)
+set_target_properties(plasmapotdprovidercore PROPERTIES
+    VERSION ${POTDPROVIDER_VERSION}
+    SOVERSION ${POTDPROVIDER_VERSION_MAJOR}
+    EXPORT_NAME PotdProvider
+)
 target_link_libraries( plasmapotdprovidercore Qt5::Gui KF5::CoreAddons )
-set_target_properties( plasmapotdprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1 )
+target_include_directories(plasmapotdprovidercore
+    PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}>"
+)
 generate_export_header(plasmapotdprovidercore BASE_NAME PLASMA_POTD EXPORT_FILE_NAME plasma_potd_export.h)
 
-install( TARGETS plasmapotdprovidercore ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS plasmapotdprovidercore EXPORT plasmapotdproviderTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
+install(FILES
+        potdprovider.h
+        ${CMAKE_CURRENT_BINARY_DIR}/plasma_potd_export.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/plasma/potdprovider
+    COMPONENT Devel
+)
+
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/PlasmaPotdProviderConfigVersion.cmake
+    VERSION "${POTDPROVIDER_VERSION}"
+    COMPATIBILITY SameMajorVersion
+)
+
+set(CMAKECONFIG_INSTALL_DIR ${KDE_INSTALL_LIBDIR}/cmake/PlasmaPotdProvider)
+configure_package_config_file(PlasmaPotdProvider.cmake.in
+        "${CMAKE_CURRENT_BINARY_DIR}/PlasmaPotdProviderConfig.cmake"
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/PlasmaPotdProviderConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/PlasmaPotdProviderConfigVersion.cmake
+    DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+    COMPONENT Devel
+)
+
+install(EXPORT plasmapotdproviderTargets
+    NAMESPACE Plasma::
+    DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+    FILE PlasmaPotdProviderTargets.cmake
+    COMPONENT Devel
+)
 
 ########### plugins ###############
 

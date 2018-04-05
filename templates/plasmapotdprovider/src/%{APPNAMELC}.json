@@ -1,0 +1,16 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "%{EMAIL}",
+                "Name": "%{AUTHOR}"
+            }
+        ],
+        "Description": "%{APPNAME}",
+        "Name": "%{APPNAME}",
+        "ServiceTypes": [
+            "PlasmaPoTD/Plugin"
+        ]
+    },
+    "X-KDE-PlasmaPoTDProvider-Identifier": "%{APPNAMELC}"
+}
