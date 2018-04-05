@@ -19,7 +19,7 @@
 
 #include "potdprovider.h"
 
-class PotdProvider::Private
+class PotdProviderPrivate
 {
 public:
     QString name;
@@ -28,7 +28,7 @@ public:
 
 PotdProvider::PotdProvider( QObject *parent, const QVariantList &args )
     : QObject( parent ),
-      d(new Private)
+      d(new PotdProviderPrivate)
 {
     if ( args.count() > 0 ) {
         d->name = args[ 0 ].toString();

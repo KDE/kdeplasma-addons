@@ -94,8 +94,7 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
         void error( PotdProvider *provider );
 
     private:
-        class Private;
-        Private * const d;
+        const QScopedPointer<class PotdProviderPrivate> d;
 };
 
 #endif
