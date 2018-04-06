@@ -72,7 +72,7 @@ Item {
             id: compactMouse
             anchors.fill: parent
             hoverEnabled: true
-            acceptedButtons: null
+            acceptedButtons: Qt.NoButton
         }
     }
 
