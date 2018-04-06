@@ -21,8 +21,10 @@
 
 #include "wcpotdprovider.h"
 
-#include <QtCore/QRegExp>
-#include <QtGui/QImage>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QImage>
 
 #include <QDebug>
 #include <kio/job.h>
@@ -51,8 +53,22 @@ void WcpotdProvider::Private::pageRequestFinished( KJob *_job )
 	return;
     }
 
-    QUrl picUrl( QLatin1String( "https://tools.wmflabs.org/potd-feed/potd.php/commons/full" ) );  KIO::StoredTransferJob *imageJob = KIO::storedGet( picUrl, KIO::NoReload, KIO::HideProgressInfo );
-    mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
+    auto jsonImageArray = QJsonDocument::fromJson(job->data())
+        .object().value(QLatin1String("parse"))
+        .toObject().value(QLatin1String("images"))
+        .toArray();
+
+    if (jsonImageArray.size() > 0) {
+        const QString imageFile = jsonImageArray.at(0).toString();
+        if (!imageFile.isEmpty()) {
+            const QUrl picUrl(QLatin1String("https://commons.wikimedia.org/wiki/Special:FilePath/") + imageFile);
+            KIO::StoredTransferJob *imageJob = KIO::storedGet( picUrl, KIO::NoReload, KIO::HideProgressInfo );
+            mParent->connect( imageJob, SIGNAL(finished(KJob*)), SLOT(imageRequestFinished(KJob*)) );
+            return;
+        }
+    }
+
+    emit mParent->error(mParent);
 }
 
 void WcpotdProvider::Private::imageRequestFinished( KJob *_job )
@@ -70,7 +86,15 @@ void WcpotdProvider::Private::imageRequestFinished( KJob *_job )
 WcpotdProvider::WcpotdProvider( QObject *parent, const QVariantList &args )
     : PotdProvider( parent, args ), d( new Private( this ) )
 {
-    QUrl url( QLatin1String( "https://tools.wmflabs.org/potd-feed/potd.php/commons/full" ));
+    QUrl url(QStringLiteral("https://commons.wikimedia.org/w/api.php"));
+
+    QUrlQuery urlQuery(url);
+    urlQuery.addQueryItem(QStringLiteral("action"), QStringLiteral("parse"));
+    urlQuery.addQueryItem(QStringLiteral("text"), QStringLiteral("{{Potd}}"));
+    urlQuery.addQueryItem(QStringLiteral("contentmodel"), QStringLiteral("wikitext"));
+    urlQuery.addQueryItem(QStringLiteral("prop"), QStringLiteral("images"));
+    urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("json"));
+    url.setQuery(urlQuery);
 
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect( job, SIGNAL(finished(KJob*)), SLOT(pageRequestFinished(KJob*)) );
