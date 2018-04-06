@@ -18,11 +18,12 @@
  */
 
 import QtQuick 2.5
+import QtQuick.Layouts 1.0
 import QtQuick.Controls 1.0 as QtControls
 import QtQuick.Dialogs 1.1 as QtDialogs
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-Column {
+ColumnLayout {
     id: root
     property string cfg_Provider
     property int cfg_FillMode
@@ -163,5 +164,9 @@ Column {
                 color: colorDialog.color
             }
         }
+    }
+
+    Item { // tighten layout
+        Layout.fillHeight: true
     }
 }
