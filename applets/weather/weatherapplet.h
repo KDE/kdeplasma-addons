@@ -35,10 +35,10 @@ class QTimer;
 class WeatherApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
-    Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated)
-    Q_PROPERTY(QVariantList forecastModel READ forecastModel NOTIFY modelUpdated)
-    Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY modelUpdated)
-    Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY modelUpdated)
+    Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated FINAL)
+    Q_PROPERTY(QVariantList forecastModel READ forecastModel NOTIFY modelUpdated FINAL)
+    Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY modelUpdated FINAL)
+    Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY modelUpdated FINAL)
 
     Q_PROPERTY(QVariantMap configuration READ configuration NOTIFY configurationChanged FINAL)
     // used for making this information available to the config pages
