@@ -75,7 +75,6 @@ add_definitions(
 #########################################################################
 
 ################# list the subdirectories #################
-add_subdirectory(libs)
 add_subdirectory(applets)
 add_subdirectory(dataengines)
 add_subdirectory(runners)
