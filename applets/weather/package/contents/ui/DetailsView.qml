@@ -61,7 +61,7 @@ ColumnLayout {
                         Layout.preferredWidth: naturalSize.width
 
                         svg: windSvg
-                        elementId: rowData.icon
+                        elementId: rowData.icon || ""
 
                         visible: !!rowData.icon
                     }

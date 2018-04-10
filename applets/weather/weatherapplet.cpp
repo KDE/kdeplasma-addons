@@ -347,11 +347,6 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
     const QString textId = QStringLiteral("text");
     const QString iconId = QStringLiteral("icon");
 
-    // reused map for each row
-    QVariantMap row;
-    row.insert(iconId, QString());
-    row.insert(textId, QString());
-
     const int reportTemperatureUnit = data[QStringLiteral("Temperature Unit")].toInt();
 
     const QVariant windChill = data[QStringLiteral("Windchill")];
@@ -359,9 +354,10 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
         // Use temperature unit to convert windchill temperature
         // we only show degrees symbol not actual temperature unit
         const QString temp = convertTemperature(m_displayTemperatureUnit, windChill, reportTemperatureUnit, false, true);
-        row[textId] = i18nc("windchill, unit", "Windchill: %1", temp);
 
-        m_detailsModel << row;
+        m_detailsModel << QVariantMap {
+            { textId, i18nc("windchill, unit", "Windchill: %1", temp) }
+        };
     }
 
     const QString humidex = data[QStringLiteral("Humidex")].toString();
@@ -370,17 +366,19 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
         // Use temperature unit to convert humidex temperature
         // we only show degrees symbol not actual temperature unit
         QString temp = convertTemperature(m_displayTemperatureUnit, humidex, reportTemperatureUnit, false, true);
-        row[textId] = i18nc("humidex, unit","Humidex: %1", temp);
 
-        m_detailsModel << row;
+        m_detailsModel << QVariantMap {
+            { textId, i18nc("humidex, unit","Humidex: %1", temp) }
+        };
     }
 
     const QVariant dewpoint = data[QStringLiteral("Dewpoint")];
     if (isValidData(dewpoint)) {
         QString temp = convertTemperature(m_displayTemperatureUnit, dewpoint, reportTemperatureUnit);
-        row[textId] = i18nc("ground temperature, unit", "Dewpoint: %1", temp);
 
-        m_detailsModel << row;
+        m_detailsModel << QVariantMap {
+            { textId, i18nc("ground temperature, unit", "Dewpoint: %1", temp) }
+        };
     }
 
     const QVariant pressure = data[QStringLiteral("Pressure")];
@@ -388,50 +386,55 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
         KUnitConversion::Value v(pressure.toDouble(),
                                  static_cast<KUnitConversion::UnitId>(data[QStringLiteral("Pressure Unit")].toInt()));
         v = v.convertTo(m_displayPressureUnit);
-        row[textId] = i18nc("pressure, unit","Pressure: %1 %2",
-                            locale.toString(clampValue(v.number(), 2), 'f', 2), v.unit().symbol());
 
-        m_detailsModel << row;
+        m_detailsModel << QVariantMap {
+            { textId, i18nc("pressure, unit","Pressure: %1 %2",
+                            locale.toString(clampValue(v.number(), 2), 'f', 2), v.unit().symbol()) }
+        };
     }
 
     const QString pressureTendency = data[QStringLiteral("Pressure Tendency")].toString();
     if (isValidData(pressureTendency)) {
         const QString i18nPressureTendency = i18nc("pressure tendency", pressureTendency.toUtf8().data());
-        row[textId] = i18nc("pressure tendency, rising/falling/steady",
-                            "Pressure Tendency: %1", i18nPressureTendency);
 
-        m_detailsModel << row;
+        m_detailsModel << QVariantMap {
+            { textId, i18nc("pressure tendency, rising/falling/steady",
+                            "Pressure Tendency: %1", i18nPressureTendency) }
+        };
     }
 
     const QVariant visibility = data[QStringLiteral("Visibility")];
     if (isValidData(visibility)) {
         const KUnitConversion::UnitId unitId = static_cast<KUnitConversion::UnitId>(data[QStringLiteral("Visibility Unit")].toInt());
+        QString visibilityText;
         if (unitId != KUnitConversion::NoUnit) {
             KUnitConversion::Value v(visibility.toDouble(), unitId);
             v = v.convertTo(m_displayVisibilityUnit);
-            row[textId] = i18nc("distance, unit","Visibility: %1 %2",
-                                locale.toString(clampValue(v.number(), 1), 'f', 1), v.unit().symbol());
+            visibilityText = i18nc("distance, unit","Visibility: %1 %2",
+                                   locale.toString(clampValue(v.number(), 1), 'f', 1), v.unit().symbol());
         } else {
-            row[textId] = i18nc("visibility from distance", "Visibility: %1", visibility.toString());
+            visibilityText = i18nc("visibility from distance", "Visibility: %1", visibility.toString());
         }
 
-        m_detailsModel << row;
+        m_detailsModel << QVariantMap {
+            { textId, visibilityText }
+        };
     }
 
     const QVariant humidity = data[QStringLiteral("Humidity")];
     if (isValidData(humidity)) {
-        row[textId] = i18nc("content of water in air", "Humidity: %1%2",
-                            locale.toString(clampValue(humidity.toFloat(), 0), 'f', 0), i18nc("Percent, measure unit", "%"));
-
-        m_detailsModel << row;
+        m_detailsModel << QVariantMap {
+            { textId, i18nc("content of water in air", "Humidity: %1%2",
+                            locale.toString(clampValue(humidity.toFloat(), 0), 'f', 0), i18nc("Percent, measure unit", "%")) }
+        };
     }
 
     const QVariant windSpeed = data[QStringLiteral("Wind Speed")];
     if (isValidData(windSpeed)) {
         // TODO: missing check for windDirection validness
         const QString windDirection = data[QStringLiteral("Wind Direction")].toString();
-        row[iconId] = windDirection;
 
+        QString windSpeedText;
         bool isNumeric;
         const double windSpeedNumeric = windSpeed.toDouble(&isNumeric);
         if (isNumeric) {
@@ -440,17 +443,19 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
                                         static_cast<KUnitConversion::UnitId>(data[QStringLiteral("Wind Speed Unit")].toInt()));
                 v = v.convertTo(m_displaySpeedUnit);
                 const QString i18nWindDirection = i18nc("wind direction", windDirection.toUtf8().data());
-                row[textId] = i18nc("wind direction, speed","%1 %2 %3", i18nWindDirection,
-                                    locale.toString(clampValue(v.number(), 1), 'f', 1), v.unit().symbol());
+                windSpeedText = i18nc("wind direction, speed","%1 %2 %3", i18nWindDirection,
+                                      locale.toString(clampValue(v.number(), 1), 'f', 1), v.unit().symbol());
             } else {
-                row[textId] = i18nc("Wind condition", "Calm");
+                windSpeedText = i18nc("Wind condition", "Calm");
             }
         } else {
-            row[textId] = windSpeed.toString();
+            windSpeedText = windSpeed.toString();
         }
 
-        m_detailsModel << row;
-        row[iconId] = QString(); // reset
+        m_detailsModel << QVariantMap {
+            { iconId, windDirection } ,
+            { textId, windSpeedText } ,
+        };
     }
 
     const QVariant windGust = data[QStringLiteral("Wind Gust")];
@@ -459,10 +464,11 @@ void WeatherApplet::updateDetailsModel(const Plasma::DataEngine::Data &data)
         KUnitConversion::Value v(windGust.toDouble(),
                                  static_cast<KUnitConversion::UnitId>(data[QStringLiteral("Wind Speed Unit")].toInt()));
         v = v.convertTo(m_displaySpeedUnit);
-        row[textId] = i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2",
-                            locale.toString(clampValue(v.number(), 1), 'f', 1), v.unit().symbol());
 
-        m_detailsModel << row;
+        m_detailsModel << QVariantMap {
+            { textId, i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2",
+                            locale.toString(clampValue(v.number(), 1), 'f', 1), v.unit().symbol()) }
+        };
     }
 }
 
