@@ -65,7 +65,7 @@ ColumnLayout {
         QtControls.Label {
             width: formAlignment - units.largeSpacing
             horizontalAlignment: Text.AlignRight
-            text: i18nd("plasma_applet_org.kde.potd", "Providers:")
+            text: i18nd("plasma_wallpaper_org.kde.potd", "Providers:")
             anchors.verticalCenter: providerComboBox.verticalCenter
         }
         QtControls.ComboBox {
@@ -89,7 +89,7 @@ ColumnLayout {
             anchors {
                 verticalCenter: resizeComboBox.verticalCenter
             }
-            text: i18nd("plasma_applet_org.kde.potd", "Positioning:")
+            text: i18nd("plasma_wallpaper_org.kde.potd", "Positioning:")
             horizontalAlignment: Text.AlignRight
         }
         QtControls.ComboBox {
@@ -98,23 +98,23 @@ ColumnLayout {
             width: theme.mSize(theme.defaultFont).width * textLength
             model: [
                         {
-                            'label': i18nd("plasma_applet_org.kde.potd", "Scaled and Cropped"),
+                            'label': i18nd("plasma_wallpaper_org.kde.potd", "Scaled and Cropped"),
                             'fillMode': Image.PreserveAspectCrop
                         },
                         {
-                            'label': i18nd("plasma_applet_org.kde.potd","Scaled"),
+                            'label': i18nd("plasma_wallpaper_org.kde.potd", "Scaled"),
                             'fillMode': Image.Stretch
                         },
                         {
-                            'label': i18nd("plasma_applet_org.kde.potd","Scaled, Keep Proportions"),
+                            'label': i18nd("plasma_wallpaper_org.kde.potd", "Scaled, Keep Proportions"),
                             'fillMode': Image.PreserveAspectFit
                         },
                         {
-                            'label': i18nd("plasma_applet_org.kde.potd", "Centered"),
+                            'label': i18nd("plasma_wallpaper_org.kde.potd", "Centered"),
                             'fillMode': Image.Pad
                         },
                         {
-                            'label': i18nd("plasma_applet_org.kde.potd","Tiled"),
+                            'label': i18nd("plasma_wallpaper_org.kde.potd", "Tiled"),
                             'fillMode': Image.Tile
                         }
                     ]
@@ -138,7 +138,7 @@ ColumnLayout {
         id: colorDialog
         modality: Qt.WindowModal
         showAlphaChannel: false
-        title: i18nd("plasma_applet_org.kde.potd", "Select Background Color")
+        title: i18nd("plasma_wallpaper_org.kde.potd", "Select Background Color")
     }
 
     Row {
@@ -148,7 +148,7 @@ ColumnLayout {
             width: formAlignment - units.largeSpacing
             anchors.verticalCenter: colorButton.verticalCenter
             horizontalAlignment: Text.AlignRight
-            text: i18nd("plasma_applet_org.kde.potd", "Background Color:")
+            text: i18nd("plasma_wallpaper_org.kde.potd", "Background Color:")
         }
         QtControls.Button {
             id: colorButton
