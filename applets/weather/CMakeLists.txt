@@ -8,8 +8,8 @@ add_library(plasma_applet_weather MODULE ${weatherapplet_SRCS})
 kcoreaddons_desktop_to_json(plasma_applet_weather package/metadata.desktop SERVICE_TYPES plasma-applet.desktop)
 
 target_link_libraries(plasma_applet_weather
-    plasmaweather
     KF5::Plasma
+    KF5::Notifications
     KF5::UnitConversion
     KF5::IconThemes
     KF5::I18n
@@ -32,7 +32,7 @@ set(weather_SRCS
 add_library(weatherplugin SHARED ${weather_SRCS})
 
 target_link_libraries(weatherplugin
-    plasmaweather
+    KF5::Plasma
     KF5::UnitConversion
     KF5::I18n
     Qt5::Qml

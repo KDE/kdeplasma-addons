@@ -19,14 +19,44 @@
 #define LOCATIONLISTMODEL_H
 
 #include <Plasma/DataEngineConsumer>
+#include <Plasma/DataEngine>
 
 #include <QAbstractListModel>
 #include <QVector>
 #include <QMap>
 
-namespace Plasma {
-class WeatherValidator;
-}
+class WeatherValidator : public QObject
+{
+    Q_OBJECT
+public:
+    WeatherValidator(Plasma::DataEngine* weatherDataengine, const QString& ionName, QObject* parent = nullptr);
+    ~WeatherValidator() override;
+
+    /**
+     * @param location the name of the location to find
+     */
+    void validate(const QString& location);
+
+Q_SIGNALS:
+    /**
+     * Emitted when an error in validation occurs
+     **/
+    void error(const QString& message);
+
+    /**
+     * Emitted when validation is done
+     * @param sources a mapping of user-friendly names to the DataEngine source
+     **/
+    void finished(const QMap<QString, QString>& sources);
+
+public Q_SLOTS: // callback for the weather dataengine
+    void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
+
+private:
+    Plasma::DataEngine* m_weatherDataEngine;
+    QString m_ionName;
+};
+
 
 class LocationItem
 {
@@ -82,7 +112,7 @@ private:
     bool m_validatingInput;
     QString m_searchString;
     int m_checkedInCount;
-    QVector<Plasma::WeatherValidator*> m_validators;
+    QVector<WeatherValidator*> m_validators;
 };
 
 #endif // LOCATIONLISTMODEL_H

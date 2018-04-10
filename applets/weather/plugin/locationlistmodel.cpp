@@ -1,6 +1,6 @@
 /*
  * Copyright 2009  Petri Damstén <damu@iki.fi>
- * Copyright 2016  Friedrich W. H. Kossebau <kossebau@kde.org>
+ * Copyright 2016, 2018  Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,14 +18,74 @@
 
 #include "locationlistmodel.h"
 
-#include <plasmaweather/weathervalidator.h>
-
 #include <Plasma/DataContainer>
 #include <Plasma/DataEngine>
 
 #include <KLocalizedString>
 
 #include <QDebug>
+
+
+WeatherValidator::WeatherValidator(Plasma::DataEngine* weatherDataengine, const QString& ionName,
+                                   QObject* parent)
+    : QObject(parent)
+    , m_weatherDataEngine(weatherDataengine)
+    , m_ionName(ionName)
+{
+}
+
+WeatherValidator::~WeatherValidator() = default;
+
+void WeatherValidator::validate(const QString& location)
+{
+    const QString validationSource = m_ionName + QLatin1String("|validate|") + location;
+
+    m_weatherDataEngine->connectSource(validationSource, this);
+}
+
+void WeatherValidator::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
+{
+    QMap<QString, QString> locationSources;
+
+    m_weatherDataEngine->disconnectSource(source, this);
+
+    const auto validationResult = data[QStringLiteral("validate")].toString().split(QLatin1Char('|'));
+
+    if (validationResult.size() < 2) {
+        emit error(i18n("Cannot find '%1' using %2.", source, m_ionName));
+    } else if (validationResult[1] == QLatin1String("valid") && validationResult.size() > 2) {
+        const QString weatherSourcePrefix = validationResult[0] + QLatin1String("|weather|");
+        int i = 3;
+
+        const int lastFieldIndex = validationResult.size() - 1;
+        while (i < lastFieldIndex) {
+            if (validationResult[i] == QLatin1String("place")) {
+                const QString& name = validationResult[i + 1];
+                QString locationSource;
+                if (i + 2 < lastFieldIndex && validationResult[i + 2] == QLatin1String("extra")) {
+                    const QString& id = validationResult[i + 3];
+                    locationSource = weatherSourcePrefix + name + QLatin1Char('|') + id;
+                    i += 4;
+                } else {
+                    locationSource = weatherSourcePrefix + name;
+                    i += 2;
+                }
+                locationSources.insert(name, locationSource);
+            } else {
+                ++i;
+            }
+        }
+
+    } else if (validationResult[1] == QLatin1String("timeout")) {
+        emit error(i18n("Connection to %1 weather server timed out.", m_ionName));
+    } else {
+        const QString searchTerm = validationResult.size() > 3 ? validationResult[3] : source;
+        emit error(i18n("Cannot find '%1' using %2.", searchTerm, m_ionName));
+    }
+
+    emit finished(locationSources);
+}
+
 
 LocationListModel::LocationListModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -120,18 +180,16 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
             //qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
             //d->ions.insert(pluginInfo[1], pluginInfo[0]);
 
-            auto* validator = new Plasma::WeatherValidator(this);
-            connect(validator, &Plasma::WeatherValidator::error, this, &LocationListModel::validatorError);
-            connect(validator, &Plasma::WeatherValidator::finished, this, &LocationListModel::addSources);
-            validator->setDataEngine(dataengine);
-            validator->setIon(ionId);
+            auto* validator = new WeatherValidator(dataengine, ionId, this);
+            connect(validator, &WeatherValidator::error, this, &LocationListModel::validatorError);
+            connect(validator, &WeatherValidator::finished, this, &LocationListModel::addSources);
 
             m_validators.append(validator);
         }
     }
 
     for (auto* validator : qAsConst(m_validators)) {
-        validator->validate(m_searchString, true);
+        validator->validate(m_searchString);
     }
 }
 

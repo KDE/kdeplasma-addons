@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007-2009 by Shawn Starr <shawn.starr@rogers.com>       *
  *   Copyright (C) 2012 by Luís Gabriel Lima <lampih@gmail.com>            *
+ *   Copyright (C) 2017-2018 Friedrich W. H. Kossebau <kossebau@kde.org>   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -21,9 +22,17 @@
 #ifndef WEATHERAPPLET_H
 #define WEATHERAPPLET_H
 
-#include <plasmaweather/weatherpopupapplet.h>
+#include <KUnitConversion/Unit>
+#include <KUnitConversion/Converter>
 
-class WeatherApplet : public Plasma::WeatherPopupApplet
+#include <Plasma/DataEngine>
+#include <Plasma/DataEngineConsumer>
+#include <Plasma/Applet>
+
+class KNotification;
+class QTimer;
+
+class WeatherApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
     Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated)
@@ -43,6 +52,17 @@ public: // Plasma::Applet API
     void init() override;
     void configChanged() override;
 
+public: // QML config control API
+    /**
+     * @return currently used config values
+     */
+    Q_INVOKABLE QVariantMap configValues() const;
+
+    /**
+     * @param configChanges config key-value entries which have changed
+     */
+    Q_INVOKABLE void saveConfig(const QVariantMap& configChanges);
+
 public:
     QVariantMap panelModel() const { return m_panelModel; }
     QVariantList forecastModel() const { return m_forecastModel; }
@@ -50,17 +70,18 @@ public:
     QVariantList noticesModel() const { return m_noticesModel; }
     QVariantMap configuration() const { return m_configuration; }
 
+public Q_SLOTS: // callback for the weather dataengine
+    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+
 Q_SIGNALS:
     void modelUpdated();
     void configurationChanged();
     void needsToBeSquareChanged();
 
-public: // WeatherPopupApplet API
-    QVariantMap configValues() const override;
-    void saveConfig(const QVariantMap& configChanges) override;
-    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data) override;
-
 private:
+    void connectToEngine();
+    void giveUpBeingBusy();
+
     bool isValidData(const QVariant &data) const;
     bool isValidData(const QString &data) const;
     void resetPanelModel();
@@ -72,8 +93,24 @@ private:
                                int type, bool rounded = false, bool degreesOnly = false);
     QString convertTemperature(const KUnitConversion::Unit& format, const QVariant& value,
                                int type, bool rounded = false, bool degreesOnly = false);
+    KUnitConversion::Unit unit(const QString& unit);
+
+    void onTimeoutNotificationClosed();
 
 private:
+    KUnitConversion::Converter m_converter;
+    KUnitConversion::Unit m_displayTemperatureUnit;
+    KUnitConversion::Unit m_displaySpeedUnit;
+    KUnitConversion::Unit m_displayPressureUnit;
+    KUnitConversion::Unit m_displayVisibilityUnit;
+
+    int m_updateInterval = 0; // in minutes
+    QString m_source;
+
+    QTimer* m_busyTimer = nullptr;
+    KNotification* m_timeoutNotification = nullptr;
+    QMetaObject::Connection m_timeoutNotificationConnection;
+
     QVariantMap m_panelModel;
     QVariantList m_forecastModel;
     QVariantList m_detailsModel;
