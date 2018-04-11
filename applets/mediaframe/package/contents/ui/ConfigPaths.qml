@@ -23,10 +23,8 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 
-Item {
+ColumnLayout {
     id: root
-    width: parent.width
-    height: parent.height
 
     property var cfg_pathList: []
 
@@ -106,11 +104,6 @@ Item {
 
     }
 
-    ColumnLayout {
-
-        width: parent.width
-        height: parent.height
-
         RowLayout {
             Layout.fillWidth: true
 
@@ -173,5 +166,4 @@ Item {
                 }
             }
         }
-    }
 }

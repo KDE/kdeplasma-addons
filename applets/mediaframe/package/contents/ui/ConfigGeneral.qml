@@ -20,9 +20,9 @@ import QtQuick 2.7
 import QtQuick.Controls 1.5
 import QtQuick.Layouts 1.1
 
-Item {
+ColumnLayout {
     id: root
-   
+
     property alias cfg_interval: intervalSpinBox.value
     property alias cfg_randomize: randomizeCheckBox.checked
     property alias cfg_pauseOnMouseOver: pauseOnMouseOverCheckBox.checked
@@ -41,10 +41,6 @@ Item {
      * Image.Pad - the image is not transformed
      */
     property int fillMode: Image.PreserveAspectFit
-
-    ColumnLayout {    
-        spacing: 20
-        
 
         Grid {
             columns: 2
@@ -200,10 +196,7 @@ Item {
             text: i18n("Left click image opens in external viewer")
         }
 
-  } // end ColumnLayout
-
- } // end Item
-        
-
-
-
+        Item { // tighten layout
+            Layout.fillHeight: true
+        }
+} // end ColumnLayout
