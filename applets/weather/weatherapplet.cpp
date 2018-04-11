@@ -512,13 +512,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     updateDetailsModel(data);
     updateNoticesModel(data);
 
-    const QString creditUrl = data[QStringLiteral("Credit Url")].toString();
-    QList<QUrl> associatedApplicationUrls;
-    if (!creditUrl.isEmpty()) {
-        associatedApplicationUrls << QUrl(creditUrl);
-    }
-    setAssociatedApplicationUrls(associatedApplicationUrls);
-
     m_busyTimer->stop();
     if (m_timeoutNotification) {
         m_timeoutNotification->close();

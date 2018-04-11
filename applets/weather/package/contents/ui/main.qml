@@ -44,6 +44,7 @@ Item {
         }
         return panelModel.currentConditions || panelModel.currentTemperature || "";
     }
+    Plasmoid.associatedApplicationUrls: plasmoid.nativeInterface.panelModel.creditUrl || null
 
     Plasmoid.compactRepresentation: CompactRepresentation {
     }
