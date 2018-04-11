@@ -117,9 +117,7 @@ ColumnLayout {
                             }
                         ]
 
-                    onActivated: root.fillMode = comboBoxItems.get(index).value
-
-                    onCurrentIndexChanged: fillModeDescription.text = comboBoxItems.get(currentIndex).description
+                    onActivated: root.fillMode = comboBox.model[index].value
 
                     function fillModeToIndex(fillMode) {
                         if(fillMode == Image.Stretch)
@@ -141,7 +139,7 @@ ColumnLayout {
             }
             Label {
                 id: fillModeDescription
-                text: i18n("The image is scaled uniformly to fit without cropping")
+                text: comboBox.model[comboBox.currentIndex] ? comboBox.model[comboBox.currentIndex].description : ""
             }
         }
 
