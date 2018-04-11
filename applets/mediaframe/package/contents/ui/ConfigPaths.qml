@@ -27,10 +27,8 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 
-Item {
+ColumnLayout {
     id: root
-    width: parent.width
-    height: parent.height
 
     property var cfg_pathList: []
 
@@ -110,11 +108,6 @@ Item {
 
     }
 
-    ColumnLayout {
-
-        width: parent.width
-        height: parent.height
-
         RowLayout {
             Layout.fillWidth: true
 
@@ -177,5 +170,4 @@ Item {
                 }
             }
         }
-    }
 }

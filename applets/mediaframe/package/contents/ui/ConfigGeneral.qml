@@ -26,10 +26,8 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 
-Item {
+ColumnLayout {
     id: root
-    width: parent.width
-    height: parent.height
 
     property alias cfg_interval: intervalSpinBox.value
     property alias cfg_randomize: randomizeCheckBox.checked
@@ -49,11 +47,6 @@ Item {
      * Image.Pad - the image is not transformed
      */
     property int fillMode: Image.PreserveAspectFit
-
-    ColumnLayout {
-
-        width: parent.width
-        height: parent.height
 
         RowLayout {
             Layout.fillWidth: true
@@ -179,5 +172,7 @@ Item {
         }
         */
 
-    }
+        Item { // tighten layout
+            Layout.fillHeight: true
+        }
 }
