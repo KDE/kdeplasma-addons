@@ -22,7 +22,7 @@ import org.kde.plasma.plasmoid 2.0
 Item {
     id: root
 
-    property string currentWeatherIconName: {
+    readonly property string currentWeatherIconName: {
         var panelModel = plasmoid.nativeInterface.panelModel;
         return !panelModel.location ? "weather-none-available" : panelModel.currentConditionIcon;
     }

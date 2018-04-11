@@ -43,7 +43,7 @@ ColumnLayout {
     }
 
     PlasmaComponents.Label {
-        property string creditUrl: plasmoid.nativeInterface.panelModel.creditUrl
+        readonly property string creditUrl: plasmoid.nativeInterface.panelModel.creditUrl
 
         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 

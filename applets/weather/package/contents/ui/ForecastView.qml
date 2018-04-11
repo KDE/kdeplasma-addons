@@ -91,8 +91,8 @@ ColumnLayout {
         id: repeater
 
         delegate: Loader {
-            property int rowIndex: index
-            property var rowData: modelData
+            readonly property int rowIndex: index
+            readonly property var rowData: modelData
 
             Layout.fillWidth: item.Layout.fillWidth
             Layout.fillHeight: item.Layout.fillHeight
@@ -104,7 +104,7 @@ ColumnLayout {
             sourceComponent: RowLayout {
                 id: row
 
-                property int maxItemImplicitWidth: {
+                readonly property int maxItemImplicitWidth: {
                     var mw = 0;
                     for (var i = 0; i < children.length; i++) {
                         mw = Math.max(mw, children[i].implicitWidth);

@@ -42,8 +42,8 @@ ColumnLayout {
             id: repeater
 
             delegate: Loader {
-                property int rowIndex: index
-                property var rowData: modelData
+                readonly property int rowIndex: index
+                readonly property var rowData: modelData
 
                 Layout.minimumWidth: item.Layout.minimumWidth
                 Layout.minimumHeight: item.Layout.minimumHeight
