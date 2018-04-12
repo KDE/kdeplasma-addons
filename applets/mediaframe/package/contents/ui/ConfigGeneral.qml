@@ -56,7 +56,7 @@ ColumnLayout {
             id: intervalSpinBox
             Layout.row: 0
             Layout.column: 1
-            suffix: i18n("s")
+            suffix: i18nc("spacing to number + unit (seconds)", " s")
             decimals: 1
 
             // Once a day should be high enough

@@ -128,7 +128,7 @@ Item {
             decimals: 1
             stepSize: 0.1
             minimumValue: 0.1
-            suffix: i18nc("Abbreviation for seconds", "s")
+            suffix: i18nc("spacing to number + unit (seconds)", " s")
         }
     }
 

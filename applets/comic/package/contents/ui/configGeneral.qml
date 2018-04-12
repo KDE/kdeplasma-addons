@@ -112,7 +112,7 @@ Item {
                     Controls.SpinBox {
                         id: providerUpdateInterval
                         Layouts.Layout.minimumWidth: units.gridUnit * 8
-                        suffix: " "+i18n("days")
+                        suffix: i18nc("spacing to number + unit", " days")
                         stepSize: 1
                         onValueChanged: root.configurationChanged();
                     }
@@ -125,7 +125,7 @@ Item {
                     Controls.SpinBox {
                         id: checkNewComicStripsInterval
                         Layouts.Layout.minimumWidth: units.gridUnit * 8
-                        suffix: " "+i18n("minutes")
+                        suffix: i18nc("spacing to number + unit (minutes)", " min")
                         stepSize: 1
                         onValueChanged: root.configurationChanged();
                     }

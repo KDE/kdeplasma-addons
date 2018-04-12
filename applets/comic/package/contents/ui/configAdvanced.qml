@@ -61,7 +61,7 @@ Item {
                 Controls.SpinBox {
                     id: maxComicLimit
                     Layouts.Layout.minimumWidth: units.gridUnit * 8
-                    suffix: " "+i18n("strips per comic")
+                    suffix: i18nc("spacing to number + unit", " strips per comic")
                     stepSize: 1
                     onValueChanged: root.configurationChanged();
                 }
