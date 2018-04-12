@@ -42,161 +42,144 @@ ColumnLayout {
      */
     property int fillMode: Image.PreserveAspectFit
 
-        Grid {
-            columns: 2
-            rows: 7
-            rowSpacing: 20
-            columnSpacing: 10
-            verticalItemAlignment: Grid.AlignVCenter
-            
-            // Row 1, Col 1
-            Label {
-                text: i18n("Change picture every")
-            }
+    GridLayout {
+        columns: 2
 
-            // Row 1, Col 2
-            SpinBox {
-                id: intervalSpinBox
-                suffix: i18n("s")
-                decimals: 1
+        Label {
+            Layout.row: 0
+            Layout.column: 0
+            Layout.alignment: Qt.AlignRight
+            text: i18n("Change picture every")
+        }
 
-                // Once a day should be high enough
-                maximumValue: 24*(60*60)
-            } // end SpinBox
-        
-            
-            // Row 2, Col 1
-            Label {
-                id: fillLabel
-                text: i18n("Fill mode:")
-            }
+        SpinBox {
+            id: intervalSpinBox
+            Layout.row: 0
+            Layout.column: 1
+            suffix: i18n("s")
+            decimals: 1
 
-                
-            // Row 2, Col 2  
-            ComboBox {
-                id: comboBox
-                width: units.gridUnit * 10
-                currentIndex: fillModeToIndex(fillMode)
-                model: 
-                    [
-                         {
-                            text: i18n("Stretch"),
-                            value: Image.Stretch
-                            },
-                        
-                         {
-                            text: i18n("Preserve aspect fit"),
-                            value: Image.PreserveAspectFit
-                
-                        },
-                        
-                         {
-                            text: i18n("Preserve aspect crop"),
-                            value: Image.PreserveAspectCrop
-                        },
-                        
-                         {
-                            text: i18n("Tile"),
-                            value: Image.Tile
-                        },
+            // Once a day should be high enough
+            maximumValue: 24*(60*60)
+        } // end SpinBox
 
-                         {
-                            text: i18n("Tile vertically"),
-                            value: Image.TileVertically
-                        },
-                        
-                         {
-                            text: i18n("Tile horizontally"),
-                            value: Image.TileHorizontally
-                        },
-                        
-                         {
-                            text: i18n("Pad"),
-                            value: Image.Pad
-                        }
+        Label {
+            id: fillLabel
+            Layout.row: 1
+            Layout.column: 0
+            Layout.alignment: Qt.AlignRight
+            text: i18n("Fill mode:")
+        }
 
-                    ] // end of ComboBox model
-                
-                    
-
-                onCurrentIndexChanged: {
-                    root.fillMode = comboBox.currentIndex
-                    fillModeToIndex(root.fillMode)
-                    //console.log(comboBox.currentIndex);
+        ComboBox {
+            id: comboBox
+            Layout.row: 1
+            Layout.column: 1
+            width: units.gridUnit * 10
+            currentIndex: fillModeToIndex(fillMode)
+            model: [
+                {
+                    text: i18n("Stretch"),
+                    value: Image.Stretch
+                },
+                {
+                    text: i18n("Preserve aspect fit"),
+                    value: Image.PreserveAspectFit
+                },
+                {
+                    text: i18n("Preserve aspect crop"),
+                    value: Image.PreserveAspectCrop
+                },
+                {
+                    text: i18n("Tile"),
+                    value: Image.Tile
+                },
+                {
+                    text: i18n("Tile vertically"),
+                    value: Image.TileVertically
+                },
+                {
+                    text: i18n("Tile horizontally"),
+                    value: Image.TileHorizontally
+                },
+                {
+                    text: i18n("Pad"),
+                    value: Image.Pad
                 }
+            ] // end of ComboBox model
 
-
-                function fillModeToIndex(fillMode) {
-                    //console.log("function called");
-                    if(fillMode == Image.Stretch) {
-                        fillModeDescription.text = i18n( "The image is scaled to fit the frame");
-                        return 0
-                    }
-                    else if(fillMode == Image.PreserveAspectFit) {
-                        fillModeDescription.text = i18n("The image is scaled uniformly to fit without cropping");
-                        return 1
-                    }
-                    else if(fillMode == Image.PreserveAspectCrop) {
-                        fillModeDescription.text = i18n( "The image is scaled uniformly to fill, cropping if necessary");
-                        return 2
-                    }
-                    else if(fillMode == Image.Tile) {
-                        fillModeDescription.text = i18n("The image is duplicated horizontally and vertically");
-                        return 3
-                    }
-                    else if(fillMode == Image.TileVertically) {
-                        fillModeDescription.text = i18n("The image is stretched horizontally and tiled vertically");
-                        return 4
-                    }
-                    else if(fillMode == Image.TileHorizontally) {
-                        fillModeDescription.text = i18n("The image is stretched vertically and tiled horizontally");
-                        return 5
-                    }
-                    else if(fillMode == Image.Pad) {
-                        fillModeDescription.text = i18n("The image is not transformed");
-                        return 6
-                    }
-                } // end of fillModeToIndex function
-            } // end of ComboBox and related functions
-            
-            
-            // Row 3, Col 1 (cheater to fill empty cell)
-            Label {
-                width: 10
-                text: ""
-                } 
-            
-
-            //Row 3, Col 2
-            Label {
-                id: fillModeDescription
-                text: i18n("The image is scaled uniformly to fit without cropping")
+            onCurrentIndexChanged: {
+                root.fillMode = comboBox.currentIndex
+                fillModeToIndex(root.fillMode)
+                //console.log(comboBox.currentIndex);
             }
-        
-        } // end of top section GridLayout
-    
-        // these CheckBoxes should take over as their own ColumnLayout entries
-        CheckBox {
-            id: randomizeCheckBox
-            text: i18n("Randomize items")
-        }
 
-        CheckBox {
-            id: pauseOnMouseOverCheckBox
-            text: i18n("Pause on mouseover")
-        }
 
-        CheckBox {
-            id: useBackgroundCheckBox
-            text: i18n("Background frame")
-        }
+            function fillModeToIndex(fillMode) {
+                //console.log("function called");
+                if(fillMode == Image.Stretch) {
+                    fillModeDescription.text = i18n( "The image is scaled to fit the frame");
+                    return 0
+                }
+                else if(fillMode == Image.PreserveAspectFit) {
+                    fillModeDescription.text = i18n("The image is scaled uniformly to fit without cropping");
+                    return 1
+                }
+                else if(fillMode == Image.PreserveAspectCrop) {
+                    fillModeDescription.text = i18n( "The image is scaled uniformly to fill, cropping if necessary");
+                    return 2
+                }
+                else if(fillMode == Image.Tile) {
+                    fillModeDescription.text = i18n("The image is duplicated horizontally and vertically");
+                    return 3
+                }
+                else if(fillMode == Image.TileVertically) {
+                    fillModeDescription.text = i18n("The image is stretched horizontally and tiled vertically");
+                    return 4
+                }
+                else if(fillMode == Image.TileHorizontally) {
+                    fillModeDescription.text = i18n("The image is stretched vertically and tiled horizontally");
+                    return 5
+                }
+                else if(fillMode == Image.Pad) {
+                    fillModeDescription.text = i18n("The image is not transformed");
+                    return 6
+                }
+            } // end of fillModeToIndex function
+        } // end of ComboBox and related functions
 
-        CheckBox {
-            id: leftClickOpenImageCheckBox
-            text: i18n("Left click image opens in external viewer")
+        Label {
+            id: fillModeDescription
+            Layout.row: 2
+            Layout.column: 1
+            Layout.fillWidth: true
+            elide: Text.ElideRight
+            text: i18n("The image is scaled uniformly to fit without cropping")
         }
+    } // end of top section GridLayout
 
-        Item { // tighten layout
-            Layout.fillHeight: true
-        }
+    // these CheckBoxes should take over as their own ColumnLayout entries
+    CheckBox {
+        id: randomizeCheckBox
+        text: i18n("Randomize items")
+    }
+
+    CheckBox {
+        id: pauseOnMouseOverCheckBox
+        text: i18n("Pause on mouseover")
+    }
+
+    CheckBox {
+        id: useBackgroundCheckBox
+        text: i18n("Background frame")
+    }
+
+    CheckBox {
+        id: leftClickOpenImageCheckBox
+        text: i18n("Left click image opens in external viewer")
+    }
+
+    Item { // tighten layout
+        Layout.fillHeight: true
+    }
 } // end ColumnLayout
