@@ -1,8 +1,20 @@
 {
     "KPlugin": {
         "Description": "Wcpotd Provider",
+        "Description[ca]": "Proveïdor Wcpotd",
+        "Description[nl]": "Wcpotd-provider",
+        "Description[pt]": "Fornecedor do Wcpotd",
+        "Description[sv]": "Tillhandahåll från Wcpotd",
+        "Description[uk]": "Постачальник даних Wcpotd",
+        "Description[x-test]": "xxWcpotd Providerxx",
         "Icon": "",
         "Name": "Wikimedia Picture of the Day",
+        "Name[ca]": "Imatge Wikimedia del dia",
+        "Name[nl]": "Wikimedia afbeelding van de dag",
+        "Name[pt]": "Imagem do Dia do Wikimédia",
+        "Name[sv]": "Dagens bild från Wikimedia",
+        "Name[uk]": "Зображення дня Wikimedia",
+        "Name[x-test]": "xxWikimedia Picture of the Dayxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

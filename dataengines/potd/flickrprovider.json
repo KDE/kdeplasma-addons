@@ -1,8 +1,20 @@
 {
     "KPlugin": {
         "Description": "Flickr Provider",
+        "Description[ca]": "Proveïdor Flickr",
+        "Description[nl]": "Flickr-provider",
+        "Description[pt]": "Fornecedor do Flickr",
+        "Description[sv]": "Tillhandahåll från Flickr",
+        "Description[uk]": "Постачальник даних Flickr",
+        "Description[x-test]": "xxFlickr Providerxx",
         "Icon": "",
         "Name": "Flickr Picture of the Day",
+        "Name[ca]": "Imatge Flickr del dia",
+        "Name[nl]": "Flickr-afbeelding van de dag",
+        "Name[pt]": "Imagem do Dia do Flickr",
+        "Name[sv]": "Dagens bild från Flickr",
+        "Name[uk]": "Зображення дня Flickr",
+        "Name[x-test]": "xxFlickr Picture of the Dayxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

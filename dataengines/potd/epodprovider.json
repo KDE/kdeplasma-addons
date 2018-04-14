@@ -1,8 +1,20 @@
 {
     "KPlugin": {
         "Description": "Epod Provider",
+        "Description[ca]": "Proveïdor Epod",
+        "Description[nl]": "Epod-provider",
+        "Description[pt]": "Fornecedor do Epod",
+        "Description[sv]": "Tillhandahåll från Epod",
+        "Description[uk]": "Постачальник даних Epod",
+        "Description[x-test]": "xxEpod Providerxx",
         "Icon": "",
         "Name": "Earth Science Picture of the Day",
+        "Name[ca]": "Imatge de ciències terràqüies del dia",
+        "Name[nl]": "Geologische afbeelding van de dag",
+        "Name[pt]": "Imagem do Dia da Earth Science",
+        "Name[sv]": "Dagens geovetenskapliga bild",
+        "Name[uk]": "Зображення дня Earth Science",
+        "Name[x-test]": "xxEarth Science Picture of the Dayxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

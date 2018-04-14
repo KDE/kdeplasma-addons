@@ -1,8 +1,20 @@
 {
     "KPlugin": {
         "Description": "Apod Provider",
+        "Description[ca]": "Proveïdor Apod",
+        "Description[nl]": "Apod-provider",
+        "Description[pt]": "Fornecedor do Apod",
+        "Description[sv]": "Tillhandahåll från Apod",
+        "Description[uk]": "Постачальник даних Apod",
+        "Description[x-test]": "xxApod Providerxx",
         "Icon": "",
         "Name": "Astronomy Picture of the Day",
+        "Name[ca]": "Imatge astronòmica del dia",
+        "Name[nl]": "Astronomische afbeelding van de dag",
+        "Name[pt]": "Imagem do Dia do Astronomy",
+        "Name[sv]": "Dagens astronomiska bild",
+        "Name[uk]": "Зображення дня Astronomy",
+        "Name[x-test]": "xxAstronomy Picture of the Dayxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

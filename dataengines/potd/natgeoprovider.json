@@ -2,6 +2,7 @@
     "KPlugin": {
         "Icon": "",
         "Name": "National Geographic",
+        "Name[x-test]": "xxNational Geographicxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

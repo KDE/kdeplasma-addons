@@ -1,8 +1,20 @@
 {
     "KPlugin": {
         "Description": "NOAA Provider",
+        "Description[ca]": "Proveïdor NOAA",
+        "Description[nl]": "NOAA-provider",
+        "Description[pt]": "Fornecedor da NOAA",
+        "Description[sv]": "Tillhandahåll från NOAA",
+        "Description[uk]": "Постачальник даних NOAA",
+        "Description[x-test]": "xxNOAA Providerxx",
         "Icon": "",
         "Name": "NOAA Environmental Visualization Laboratory Picture of the Day",
+        "Name[ca]": "Imatge del dia del NOAA Environmental Visualization Laboratory",
+        "Name[nl]": "NOAA afbeelding-van-de-dag van het Laboratorium voor visualisatie van het milieu",
+        "Name[pt]": "Imagem do Dia do Laboratório de Visualização Ambiente da NOAA",
+        "Name[sv]": "Dagens bild från NOAA:s miljövisualiseringslaboratorium",
+        "Name[uk]": "Зображення дня від Лабораторії візуалізації середовища NOAA",
+        "Name[x-test]": "xxNOAA Environmental Visualization Laboratory Picture of the Dayxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

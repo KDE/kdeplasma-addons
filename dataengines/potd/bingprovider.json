@@ -1,8 +1,20 @@
 {
     "KPlugin": {
         "Description": "Bing Provider",
+        "Description[ca]": "Proveïdor Bing",
+        "Description[nl]": "Bing-provider",
+        "Description[pt]": "Fornecedor do Bing",
+        "Description[sv]": "Tillhandahåll från Bing",
+        "Description[uk]": "Постачальник даних Bing",
+        "Description[x-test]": "xxBing Providerxx",
         "Icon": "",
         "Name": "Bing's Picture of the Day",
+        "Name[ca]": "Imatge del dia del Bing",
+        "Name[nl]": "Afbeelding van de dag van Bing",
+        "Name[pt]": "Imagem do Dia do Bing",
+        "Name[sv]": "Dagens bild på Bing",
+        "Name[uk]": "Картинка дня Bing",
+        "Name[x-test]": "xxBing's Picture of the Dayxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]
