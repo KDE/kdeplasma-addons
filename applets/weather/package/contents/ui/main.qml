@@ -356,10 +356,10 @@ Item {
         }
     }
 
-    // workaround for now to ensure "Please Configure" tooltip
+    // workaround for now to ensure "Please configure" tooltip
     // TODO: remove when configurationRequired works
     Plasmoid.icon: needsConfiguration ? "configure" : currentWeatherIconName
-    Plasmoid.toolTipMainText: needsConfiguration ? i18nc("@info:tooltip", "Please Configure") : panelModel.location
+    Plasmoid.toolTipMainText: needsConfiguration ? i18nc("@info:tooltip", "Please configure") : panelModel.location
     Plasmoid.toolTipSubText: {
         if (!panelModel.location) {
             return "";
