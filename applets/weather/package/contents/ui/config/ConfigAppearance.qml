@@ -53,7 +53,7 @@ ColumnLayout {
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
             enabled: canShowTemperature
-            text: i18n("Show temperature in compact mode:")
+            text: i18nc("@label", "Show temperature in compact mode:")
         }
 
         QtControls.CheckBox {

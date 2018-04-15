@@ -64,7 +64,7 @@ ColumnLayout {
             Layout.row: 0
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("Temperature:")
+            text: i18nc("@label:listbox", "Temperature:")
         }
 
         QtControls.ComboBox {
@@ -80,7 +80,7 @@ ColumnLayout {
             Layout.row: 1
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("Pressure:")
+            text: i18nc("@label:listbox", "Pressure:")
         }
 
         QtControls.ComboBox {
@@ -96,7 +96,7 @@ ColumnLayout {
             Layout.row: 2
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("Wind speed:")
+            text: i18nc("@label:listbox", "Wind speed:")
         }
 
         QtControls.ComboBox {
@@ -112,7 +112,7 @@ ColumnLayout {
             Layout.row: 3
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("Visibility:")
+            text: i18nc("@label:listbox", "Visibility:")
         }
 
         QtControls.ComboBox {

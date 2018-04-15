@@ -119,7 +119,7 @@ ColumnLayout {
             Layout.row: 0
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("Location:")
+            text: i18nc("@label", "Location:")
         }
 
         QtControls.Label {
@@ -147,7 +147,7 @@ ColumnLayout {
             QtControls.Button {
                 id: serviceSelectionButton
                 iconName: "services"
-                tooltip: i18n("Select weather services providers")
+                tooltip: i18nc("@info:tooltip", "Select weather services providers")
                 menu: serviceSelectionMenu
             }
 
@@ -165,7 +165,7 @@ ColumnLayout {
             QtControls.Button {
                 id: searchButton
                 iconName: "edit-find"
-                text: i18n("Search")
+                text: i18nc("@action:button", "Search")
                 enabled: !!searchStringEdit.text && selectedServices.length
                 onClicked: searchLocation();
             }
@@ -204,7 +204,7 @@ ColumnLayout {
             Layout.row: 3
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("Update every:")
+            text: i18nc("@label:spinbox", "Update every:")
         }
         QtControls.SpinBox {
             id: updateIntervalSpin

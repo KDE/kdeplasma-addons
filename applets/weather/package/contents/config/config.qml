@@ -21,19 +21,19 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-        name: i18n("Weather Station")
+        name: i18nc("@title:tab", "Weather Station")
         icon: "services"
         source: "config/ConfigWeatherStation.qml"
     }
 
     ConfigCategory {
-        name: i18n("Appearance")
+        name: i18nc("@title:tab", "Appearance")
         icon: "preferences-desktop-color"
         source: "config/ConfigAppearance.qml"
     }
 
     ConfigCategory {
-        name: i18n("Units")
+        name: i18nc("@title:tab", "Units")
         icon: "preferences-other"
         source: "config/ConfigUnits.qml"
     }

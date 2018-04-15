@@ -41,7 +41,7 @@ ColumnLayout {
             PlasmaExtras.Heading {
                 level: 4
 
-                text: index == 0 ? i18nc("weather warnings", "Warnings Issued") : i18nc("weather watches" ,"Watches Issued")
+                text: index == 0 ? i18nc("@title:column weather warnings", "Warnings Issued") : i18nc("@title:column weather watches" ,"Watches Issued")
             }
 
             Repeater {

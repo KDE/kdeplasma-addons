@@ -51,7 +51,7 @@ ColumnLayout {
 
         visible: false;
 
-        text: i18n("Details")
+        text: i18nc("@title:tab", "Details")
     }
 
     DetailsView {
@@ -67,7 +67,7 @@ ColumnLayout {
 
         visible: false;
 
-        text: i18n("Notices")
+        text: i18nc("@title:tab", "Notices")
     }
 
     NoticesView {
