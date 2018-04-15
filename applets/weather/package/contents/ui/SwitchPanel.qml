@@ -115,7 +115,6 @@ ColumnLayout {
 
                 Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                 Layout.fillWidth: false
-                model: forecastModel
             }
         }
 
