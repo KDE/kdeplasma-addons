@@ -71,4 +71,17 @@ ColumnLayout {
             Qt.openUrlExternally(link);
         }
     }
+
+    // workaround for now to make applet state obvious and allow quick access to config dialog
+    // follows approach by comic applet
+    // TODO: remove when configurationRequired works and container cares for this
+    PlasmaComponents.Button {
+        anchors.centerIn: parent
+
+        visible: root.needsConfiguration
+        text: i18nc("@action:button", "Configure...")
+        onClicked: {
+            plasmoid.action("configure").trigger();
+        }
+    }
 }
