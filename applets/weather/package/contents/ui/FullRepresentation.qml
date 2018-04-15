@@ -27,23 +27,25 @@ ColumnLayout {
 
     Layout.margins: units.smallSpacing
 
-    TopPanel {
-        Layout.fillWidth: true
+    property alias model: topPanel.model
 
-        model: plasmoid.nativeInterface.panelModel
+    TopPanel {
+        id: topPanel
+
+        Layout.fillWidth: true
     }
 
     SwitchPanel {
         Layout.fillWidth: true
 
-        forecastViewTitle: plasmoid.nativeInterface.panelModel.totalDays
-        forecastModel: plasmoid.nativeInterface.forecastModel
-        detailsModel: plasmoid.nativeInterface.detailsModel
-        noticesModel: plasmoid.nativeInterface.noticesModel
+        forecastViewTitle: model.forecastTitle
+        forecastModel: root.forecastModel
+        detailsModel: root.detailsModel
+        noticesModel: root.noticesModel
     }
 
     PlasmaComponents.Label {
-        readonly property string creditUrl: plasmoid.nativeInterface.panelModel.creditUrl
+        readonly property string creditUrl: model.creditUrl
 
         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 
@@ -58,7 +60,7 @@ ColumnLayout {
         textFormat: Text.StyledText
 
         text: {
-            var result = plasmoid.nativeInterface.panelModel.courtesy;
+            var result = model.courtesy;
             if (creditUrl) {
                 result = "<a href=\"" + creditUrl + "\">" + result + "</a>";
             }

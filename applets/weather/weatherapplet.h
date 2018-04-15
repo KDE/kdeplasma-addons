@@ -25,24 +25,33 @@
 #include <KUnitConversion/Unit>
 #include <KUnitConversion/Converter>
 
-#include <Plasma/DataEngine>
-#include <Plasma/DataEngineConsumer>
 #include <Plasma/Applet>
 
-class KNotification;
-class QTimer;
-
-class WeatherApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
+// TODO: remove C++ applet and use main.xml-based config
+// Blocked by:
+// configuration has been stored via config() and without further config sub group
+// E.g.
+// [Containments][18][Applets][101][Configuration]
+// main.xml based config storage though uses additional subgroups using the name attribute of
+// the <group> containers, so e.g. <group name="General"> would use
+// [Containments][18][Applets][101][Configuration][General]
+// Challenge: migrating configuration e.g. using kconf_update? how?
+class WeatherApplet : public Plasma::Applet
 {
     Q_OBJECT
-    Q_PROPERTY(QVariantMap panelModel READ panelModel NOTIFY modelUpdated FINAL)
-    Q_PROPERTY(QVariantList forecastModel READ forecastModel NOTIFY modelUpdated FINAL)
-    Q_PROPERTY(QVariantList detailsModel READ detailsModel NOTIFY modelUpdated FINAL)
-    Q_PROPERTY(QVariantList noticesModel READ noticesModel NOTIFY modelUpdated FINAL)
-
-    Q_PROPERTY(QVariantMap configuration READ configuration NOTIFY configurationChanged FINAL)
     // used for making this information available to the config pages
     Q_PROPERTY(bool needsToBeSquare MEMBER m_needsToBeSquare NOTIFY needsToBeSquareChanged FINAL)
+
+    // config properties
+    Q_PROPERTY(QString source READ source NOTIFY sourceChanged FINAL)
+    Q_PROPERTY(int updateInterval READ updateInterval NOTIFY updateIntervalChanged FINAL)
+
+    Q_PROPERTY(int displayTemperatureUnit READ displayTemperatureUnit NOTIFY displayUnitsChanged FINAL)
+    Q_PROPERTY(int displaySpeedUnit READ displaySpeedUnit NOTIFY displayUnitsChanged FINAL)
+    Q_PROPERTY(int displayPressureUnit READ displayPressureUnit NOTIFY displayUnitsChanged FINAL)
+    Q_PROPERTY(int displayVisibilityUnit READ displayVisibilityUnit NOTIFY displayUnitsChanged FINAL)
+
+    Q_PROPERTY(bool temperatureShownInCompactMode READ temperatureShownInCompactMode NOTIFY temperatureShownInCompactModeChanged FINAL)
 
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
@@ -64,38 +73,26 @@ public: // QML config control API
     Q_INVOKABLE void saveConfig(const QVariantMap& configChanges);
 
 public:
-    QVariantMap panelModel() const { return m_panelModel; }
-    QVariantList forecastModel() const { return m_forecastModel; }
-    QVariantList detailsModel() const { return m_detailsModel; }
-    QVariantList noticesModel() const { return m_noticesModel; }
-    QVariantMap configuration() const { return m_configuration; }
+    QString source() const     { return m_source; }
+    int updateInterval() const { return m_updateInterval; }
 
-public Q_SLOTS: // callback for the weather dataengine
-    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+    int displayTemperatureUnit() const { return m_displayTemperatureUnit.id(); }
+    int displaySpeedUnit() const       { return m_displaySpeedUnit.id(); }
+    int displayPressureUnit() const    { return m_displayPressureUnit.id(); }
+    int displayVisibilityUnit() const  { return m_displayVisibilityUnit.id(); }
+
+    bool temperatureShownInCompactMode() const  { return m_temperatureShownInCompactMode; }
 
 Q_SIGNALS:
-    void modelUpdated();
     void configurationChanged();
     void needsToBeSquareChanged();
+    void sourceChanged();
+    void updateIntervalChanged();
+    void displayUnitsChanged();
+    void temperatureShownInCompactModeChanged();
 
 private:
-    void connectToEngine();
-    void giveUpBeingBusy();
-
-    bool isValidData(const QVariant &data) const;
-    bool isValidData(const QString &data) const;
-    void resetPanelModel();
-    void updatePanelModel(const Plasma::DataEngine::Data &data);
-    void updateForecastModel(const Plasma::DataEngine::Data &data);
-    void updateDetailsModel(const Plasma::DataEngine::Data &data);
-    void updateNoticesModel(const Plasma::DataEngine::Data &data);
-    QString convertTemperature(const KUnitConversion::Unit& format, float value,
-                               int type, bool rounded = false, bool degreesOnly = false);
-    QString convertTemperature(const KUnitConversion::Unit& format, const QVariant& value,
-                               int type, bool rounded = false, bool degreesOnly = false);
     KUnitConversion::Unit unit(const QString& unit);
-
-    void onTimeoutNotificationClosed();
 
 private:
     KUnitConversion::Converter m_converter;
@@ -104,19 +101,11 @@ private:
     KUnitConversion::Unit m_displayPressureUnit;
     KUnitConversion::Unit m_displayVisibilityUnit;
 
-    int m_updateInterval = 0; // in minutes
+    int m_updateInterval = 30; // in minutes
     QString m_source;
 
-    QTimer* m_busyTimer = nullptr;
-    KNotification* m_timeoutNotification = nullptr;
-    QMetaObject::Connection m_timeoutNotificationConnection;
+    bool m_temperatureShownInCompactMode = false;
 
-    QVariantMap m_panelModel;
-    QVariantList m_forecastModel;
-    QVariantList m_detailsModel;
-    QVariantList m_noticesModel;
-
-    QVariantMap m_configuration;
     bool m_needsToBeSquare = false;
 };
 

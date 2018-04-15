@@ -86,8 +86,6 @@ ColumnLayout {
 
         PlasmaComponents.TabButton {
             id: forecastTabButton
-
-            text: forecastViewTitle
         }
     }
 

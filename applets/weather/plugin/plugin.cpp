@@ -20,6 +20,7 @@
 #include "abstractunitlistmodel.h"
 #include "locationlistmodel.h"
 #include "servicelistmodel.h"
+#include "util.h"
 
 // KF
 #include <KLocalizedString>
@@ -85,6 +86,14 @@ static QObject* visibilityUnitListModelSingletonTypeProvider(QQmlEngine *engine,
     return new AbstractUnitListModel(items);
 }
 
+static QObject* utilSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return new Util();
+}
+
 
 void WeatherPlugin::registerTypes(const char *uri)
 {
@@ -98,6 +107,8 @@ void WeatherPlugin::registerTypes(const char *uri)
                                                     windSpeedUnitListModelSingletonTypeProvider);
     qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "VisibilityUnitListModel",
                                                     visibilityUnitListModelSingletonTypeProvider);
+    qmlRegisterSingletonType<Util>(uri, 1, 0, "Util",
+                                   utilSingletonTypeProvider);
     qmlRegisterType<LocationListModel>(uri, 1, 0, "LocationListModel");
     qmlRegisterType<ServiceListModel>(uri, 1, 0, "ServiceListModel");
 }

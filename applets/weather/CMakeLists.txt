@@ -9,9 +9,7 @@ kcoreaddons_desktop_to_json(plasma_applet_weather package/metadata.desktop SERVI
 
 target_link_libraries(plasma_applet_weather
     KF5::Plasma
-    KF5::Notifications
     KF5::UnitConversion
-    KF5::IconThemes
     KF5::I18n
 )
 
@@ -24,6 +22,7 @@ plasma_install_package(package org.kde.plasma.weather)
 
 set(weather_SRCS
     plugin/plugin.cpp
+    plugin/util.cpp
     plugin/abstractunitlistmodel.cpp
     plugin/locationlistmodel.cpp
     plugin/servicelistmodel.cpp
@@ -34,6 +33,7 @@ add_library(weatherplugin SHARED ${weather_SRCS})
 target_link_libraries(weatherplugin
     KF5::Plasma
     KF5::UnitConversion
+    KF5::IconThemes
     KF5::I18n
     Qt5::Qml
 )

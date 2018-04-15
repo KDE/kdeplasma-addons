@@ -25,8 +25,10 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 ColumnLayout {
     id: compactRoot
 
+    property var model: []
+
     readonly property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
-    readonly property bool showTemperature: plasmoid.nativeInterface.configuration.showTemperatureInCompactMode &&
+    readonly property bool showTemperature: plasmoid.nativeInterface.temperatureShownInCompactMode &&
                                             !plasmoid.nativeInterface.needsToBeSquare
 
     Loader {
@@ -68,7 +70,7 @@ ColumnLayout {
         IconAndTextItem {
             vertical: compactRoot.vertical
             iconSource: currentWeatherIconName
-            text: plasmoid.nativeInterface.panelModel.currentTemperature
+            text: model.currentTemperature
         }
     }
 }
