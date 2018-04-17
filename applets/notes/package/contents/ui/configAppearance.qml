@@ -25,8 +25,6 @@ import QtQuick.Layouts 1.1 as QtLayouts
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-import org.kde.plasma.private.notifications 1.0
-
 QtLayouts.ColumnLayout {
     id: appearancePage
 

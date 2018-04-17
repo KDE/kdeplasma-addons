@@ -80,69 +80,63 @@ ColumnLayout {
             model: [
                 {
                     text: i18n("Stretch"),
+                    description: i18n("The image is scaled to fit the frame"),
                     value: Image.Stretch
                 },
                 {
                     text: i18n("Preserve aspect fit"),
+                    description: i18n("The image is scaled uniformly to fit without cropping"),
                     value: Image.PreserveAspectFit
                 },
                 {
                     text: i18n("Preserve aspect crop"),
+                    description: i18n("The image is scaled uniformly to fill, cropping if necessary"),
                     value: Image.PreserveAspectCrop
                 },
                 {
                     text: i18n("Tile"),
+                    description: i18n("The image is duplicated horizontally and vertically"),
                     value: Image.Tile
                 },
                 {
                     text: i18n("Tile vertically"),
+                    description: i18n("The image is stretched horizontally and tiled vertically"),
                     value: Image.TileVertically
                 },
                 {
                     text: i18n("Tile horizontally"),
+                    description: i18n("The image is stretched vertically and tiled horizontally"),
                     value: Image.TileHorizontally
                 },
                 {
                     text: i18n("Pad"),
+                    description: i18n("The image is not transformed"),
                     value: Image.Pad
                 }
             ] // end of ComboBox model
 
-            onCurrentIndexChanged: {
-                root.fillMode = comboBox.currentIndex
-                fillModeToIndex(root.fillMode)
-                //console.log(comboBox.currentIndex);
-            }
-
+            onActivated: root.fillMode = comboBox.model[index].value
 
             function fillModeToIndex(fillMode) {
-                //console.log("function called");
                 if(fillMode == Image.Stretch) {
-                    fillModeDescription.text = i18n( "The image is scaled to fit the frame");
                     return 0
                 }
                 else if(fillMode == Image.PreserveAspectFit) {
-                    fillModeDescription.text = i18n("The image is scaled uniformly to fit without cropping");
                     return 1
                 }
                 else if(fillMode == Image.PreserveAspectCrop) {
-                    fillModeDescription.text = i18n( "The image is scaled uniformly to fill, cropping if necessary");
                     return 2
                 }
                 else if(fillMode == Image.Tile) {
-                    fillModeDescription.text = i18n("The image is duplicated horizontally and vertically");
                     return 3
                 }
                 else if(fillMode == Image.TileVertically) {
-                    fillModeDescription.text = i18n("The image is stretched horizontally and tiled vertically");
                     return 4
                 }
                 else if(fillMode == Image.TileHorizontally) {
-                    fillModeDescription.text = i18n("The image is stretched vertically and tiled horizontally");
                     return 5
                 }
                 else if(fillMode == Image.Pad) {
-                    fillModeDescription.text = i18n("The image is not transformed");
                     return 6
                 }
             } // end of fillModeToIndex function
@@ -154,7 +148,7 @@ ColumnLayout {
             Layout.column: 1
             Layout.fillWidth: true
             elide: Text.ElideRight
-            text: i18n("The image is scaled uniformly to fit without cropping")
+            text: comboBox.model[comboBox.currentIndex] ? comboBox.model[comboBox.currentIndex].description : ""
         }
     } // end of top section GridLayout
 
