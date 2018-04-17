@@ -69,6 +69,6 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL-2.0+
 X-KDE-PluginInfo-EnabledByDefault=true
 X-Plasma-StandAloneApp=true
-
+X-Plasma-DropMimeTypes=inode/directory,image/jpeg,image/png,image/svg+xml,image/svg+xml-compressed,image/bmp
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml

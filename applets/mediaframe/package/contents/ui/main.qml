@@ -430,4 +430,16 @@ Item {
         }
     }
 
+    Connections {
+        target: plasmoid
+        onExternalData: {
+            var type = items.isDir(data) ? "folder" : "file";
+            var item = {
+                "path": data,
+                "type": type
+            };
+
+            addItem(item);
+        }
+    }
 }
