@@ -92,12 +92,16 @@ Item {
 
     function addItem(item) {
 
-        if(items.has(item.path)) {
+        if(items.isAdded(item.path)) {
             console.info(item.path,"already exists. Skipping...")
             return
         }
-
-        plasmoid.configuration.pathList.push( JSON.stringify(item) )
+        // work-around for QTBUG-67773:
+        // C++ object property of type QVariant(QStringList) is not updated on changes from QML
+        // so explicitly create a deep JSValue copy, modify that and then set it back to overwrite the old
+        var updatedList = plasmoid.configuration.pathList.slice();
+        updatedList.push(JSON.stringify(item));
+        plasmoid.configuration.pathList = updatedList;
     }
 
     function nextItem() {
