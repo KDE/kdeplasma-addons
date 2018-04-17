@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Wcpotd Provider",
+        "Description[ca@valencia]": "Proveïdor Wcpotd",
         "Description[ca]": "Proveïdor Wcpotd",
         "Description[nl]": "Wcpotd-provider",
         "Description[pt]": "Fornecedor do Wcpotd",
@@ -10,9 +11,11 @@
         "Description[x-test]": "xxWcpotd Providerxx",
         "Icon": "",
         "Name": "Wikimedia Picture of the Day",
+        "Name[ca@valencia]": "Imatge Wikimedia del dia",
         "Name[ca]": "Imatge Wikimedia del dia",
         "Name[fr]": "Image du jour de Wikimedia",
         "Name[nl]": "Wikimedia afbeelding van de dag",
+        "Name[nn]": "Dagens bilete frå Wikimedia",
         "Name[pt]": "Imagem do Dia do Wikimédia",
         "Name[sk]": "Obrázok dňa z Wikimedie",
         "Name[sv]": "Dagens bild från Wikimedia",

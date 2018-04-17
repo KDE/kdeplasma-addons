@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "NOAA Provider",
+        "Description[ca@valencia]": "Proveïdor NOAA",
         "Description[ca]": "Proveïdor NOAA",
         "Description[nl]": "NOAA-provider",
         "Description[pt]": "Fornecedor da NOAA",
@@ -10,10 +11,12 @@
         "Description[x-test]": "xxNOAA Providerxx",
         "Icon": "",
         "Name": "NOAA Environmental Visualization Laboratory Picture of the Day",
+        "Name[ca@valencia]": "Imatge del dia del NOAA Environmental Visualization Laboratory",
         "Name[ca]": "Imatge del dia del NOAA Environmental Visualization Laboratory",
         "Name[en_GB]": "NOAA Environmental Visualisation Laboratory Picture of the Day",
         "Name[fr]": "Image du jour du laboratoire de visualisation environnementale NOAA",
         "Name[nl]": "NOAA afbeelding-van-de-dag van het Laboratorium voor visualisatie van het milieu",
+        "Name[nn]": "Dagens bilete frå NOAA Environmental Visualization Laboratory",
         "Name[pt]": "Imagem do Dia do Laboratório de Visualização Ambiente da NOAA",
         "Name[sk]": "Obrázok dňa NOAA, environmentálneho vizualizačného laboratória",
         "Name[sv]": "Dagens bild från NOAA:s miljövisualiseringslaboratorium",

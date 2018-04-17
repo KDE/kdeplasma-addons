@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Flickr Provider",
+        "Description[ca@valencia]": "Proveïdor Flickr",
         "Description[ca]": "Proveïdor Flickr",
         "Description[nl]": "Flickr-provider",
         "Description[pt]": "Fornecedor do Flickr",
@@ -10,9 +11,11 @@
         "Description[x-test]": "xxFlickr Providerxx",
         "Icon": "",
         "Name": "Flickr Picture of the Day",
+        "Name[ca@valencia]": "Imatge Flickr del dia",
         "Name[ca]": "Imatge Flickr del dia",
         "Name[fr]": "Image du jour « Flickr »",
         "Name[nl]": "Flickr-afbeelding van de dag",
+        "Name[nn]": "Dagens bilete frå Flickr",
         "Name[pt]": "Imagem do Dia do Flickr",
         "Name[sk]": "Obrázok dňa z Flickr",
         "Name[sv]": "Dagens bild från Flickr",

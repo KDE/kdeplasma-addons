@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Apod Provider",
+        "Description[ca@valencia]": "Proveïdor Apod",
         "Description[ca]": "Proveïdor Apod",
         "Description[nl]": "Apod-provider",
         "Description[pt]": "Fornecedor do Apod",
@@ -10,9 +11,11 @@
         "Description[x-test]": "xxApod Providerxx",
         "Icon": "",
         "Name": "Astronomy Picture of the Day",
+        "Name[ca@valencia]": "Imatge astronòmica del dia",
         "Name[ca]": "Imatge astronòmica del dia",
         "Name[fr]": "Image du jour d'astronomie",
         "Name[nl]": "Astronomische afbeelding van de dag",
+        "Name[nn]": "Dagens astronomibilete",
         "Name[pt]": "Imagem do Dia do Astronomy",
         "Name[sk]": "Obrázok dňa z Astronómie",
         "Name[sv]": "Dagens astronomiska bild",

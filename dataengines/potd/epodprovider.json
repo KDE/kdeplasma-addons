@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Epod Provider",
+        "Description[ca@valencia]": "Proveïdor Epod",
         "Description[ca]": "Proveïdor Epod",
         "Description[nl]": "Epod-provider",
         "Description[pt]": "Fornecedor do Epod",
@@ -10,9 +11,11 @@
         "Description[x-test]": "xxEpod Providerxx",
         "Icon": "",
         "Name": "Earth Science Picture of the Day",
+        "Name[ca@valencia]": "Imatge de ciències terràqüies del dia",
         "Name[ca]": "Imatge de ciències terràqüies del dia",
         "Name[fr]": "Image du jour des sciences de la terre",
         "Name[nl]": "Geologische afbeelding van de dag",
+        "Name[nn]": "Dagens geovitskap-bilete",
         "Name[pt]": "Imagem do Dia da Earth Science",
         "Name[sk]": "Obrázok dňa z Vedy o zemi",
         "Name[sv]": "Dagens geovetenskapliga bild",

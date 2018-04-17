@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Bing Provider",
+        "Description[ca@valencia]": "Proveïdor Bing",
         "Description[ca]": "Proveïdor Bing",
         "Description[nl]": "Bing-provider",
         "Description[pt]": "Fornecedor do Bing",
@@ -10,9 +11,11 @@
         "Description[x-test]": "xxBing Providerxx",
         "Icon": "",
         "Name": "Bing's Picture of the Day",
+        "Name[ca@valencia]": "Imatge del dia del Bing",
         "Name[ca]": "Imatge del dia del Bing",
         "Name[fr]": "Image du jour Bing",
         "Name[nl]": "Afbeelding van de dag van Bing",
+        "Name[nn]": "Dagens bilete frå Bing",
         "Name[pt]": "Imagem do Dia do Bing",
         "Name[sk]": "Obrázok dňa Bing",
         "Name[sv]": "Dagens bild på Bing",
