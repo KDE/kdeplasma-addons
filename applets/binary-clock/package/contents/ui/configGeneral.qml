@@ -21,8 +21,8 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Dialogs 1.1
 import QtQuick.Layouts 1.1
+import org.kde.kquickcontrols 2.0 as KQuickControls
 
 
 QtControls.GroupBox {
@@ -42,18 +42,6 @@ QtControls.GroupBox {
     property alias cfg_customColorForInactive: customColorForInactive.color
     property alias cfg_useCustomColorForGrid: useCustomColorForGridCheckBox.checked
     property alias cfg_customColorForGrid: customColorForGrid.color
-
-    ColorDialog {
-        property var element;
-        id: colorDialog
-        visible: false
-        modality: Qt.WindowModal
-        title: "Choose a color"
-        showAlphaChannel: true
-        onAccepted: { element.color=color }
-        onRejected: { }
-    }
-
 
     ColumnLayout {
         QtControls.CheckBox {
@@ -81,54 +69,27 @@ QtControls.GroupBox {
                 id: useCustomColorForActiveCheckBox
                 text: i18n("Use custom color for active LEDs")
             }
-            Rectangle {
-                width:20
-                height:20
-                id:customColorForActive
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        colorDialog.element=parent;
-                        colorDialog.color=parent.color;
-                        colorDialog.open();
-                    }
-                }
+            KQuickControls.ColorButton {
+                id: customColorForActive
+                enabled: useCustomColorForActiveCheckBox.checked
             }
 
             QtControls.CheckBox {
                 id: useCustomColorForInactiveCheckBox
                 text: i18n("Use custom color for inactive LEDs")
             }
-            Rectangle {
-                width:20
-                height:20
+            KQuickControls.ColorButton {
                 id:customColorForInactive
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        colorDialog.element=parent;
-                        colorDialog.color=parent.color;
-                        colorDialog.open();
-                    }
-                }
+                enabled: useCustomColorForInactiveCheckBox.checked
             }
 
             QtControls.CheckBox {
                 id: useCustomColorForGridCheckBox
                 text: i18n("Use custom color for grid")
             }
-            Rectangle {
-                width:20
-                height:20
+            KQuickControls.ColorButton {
                 id:customColorForGrid
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        colorDialog.element=parent;
-                        colorDialog.color=parent.color;
-                        colorDialog.open();
-                    }
-                }
+                enabled: useCustomColorForGridCheckBox.checked
             }
         }
     }

@@ -21,20 +21,21 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.0
+import org.kde.kquickcontrols 2.0 as KQuickControls
 
 ColumnLayout {
     id: colorSettings
 
-    property alias cfg_memApplicationColor: memApplicationColorPicker.chosenColor
-    property alias cfg_memBuffersColor: memBuffersColorPicker.chosenColor
-    property alias cfg_memCachedColor: memCachedColorPicker.chosenColor
-    property alias cfg_cpuUserColor: cpuUserColorPicker.chosenColor
-    property alias cfg_cpuIOWaitColor: cpuIOWaitColorPicker.chosenColor
-    property alias cfg_cpuSysColor: cpuSysColorPicker.chosenColor
-    property alias cfg_cpuNiceColor: cpuNiceColorPicker.chosenColor
-    property alias cfg_swapUsedColor: swapUsedColorPicker.chosenColor
-    property alias cfg_cacheDirtyColor: cacheDirtyColorPicker.chosenColor
-    property alias cfg_cacheWritebackColor: cacheWritebackColorPicker.chosenColor
+    property alias cfg_memApplicationColor: memApplicationColorPicker.color
+    property alias cfg_memBuffersColor: memBuffersColorPicker.color
+    property alias cfg_memCachedColor: memCachedColorPicker.color
+    property alias cfg_cpuUserColor: cpuUserColorPicker.color
+    property alias cfg_cpuIOWaitColor: cpuIOWaitColorPicker.color
+    property alias cfg_cpuSysColor: cpuSysColorPicker.color
+    property alias cfg_cpuNiceColor: cpuNiceColorPicker.color
+    property alias cfg_swapUsedColor: swapUsedColorPicker.color
+    property alias cfg_cacheDirtyColor: cacheDirtyColorPicker.color
+    property alias cfg_cacheWritebackColor: cacheWritebackColorPicker.color
     property alias cfg_setColorsManually: setColorsManuallyGroupBox.checked
 
     GroupBox {
@@ -57,7 +58,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: cpuUserColorPicker
             }
 
@@ -66,7 +67,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: cpuIOWaitColorPicker
             }
 
@@ -75,7 +76,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: cpuSysColorPicker
             }
 
@@ -84,7 +85,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: cpuNiceColorPicker
             }
 
@@ -100,7 +101,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: memApplicationColorPicker
             }
 
@@ -109,7 +110,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: memBuffersColorPicker
             }
 
@@ -118,7 +119,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: memCachedColorPicker
             }
 
@@ -134,7 +135,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: swapUsedColorPicker
             }
 
@@ -149,7 +150,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: cacheDirtyColorPicker
             }
 
@@ -158,7 +159,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
             }
 
-            ColorPicker {
+            KQuickControls.ColorButton {
                 id: cacheWritebackColorPicker
             }
         }

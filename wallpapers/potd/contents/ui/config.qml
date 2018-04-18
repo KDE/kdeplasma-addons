@@ -20,14 +20,14 @@
 import QtQuick 2.5
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Dialogs 1.1 as QtDialogs
+import org.kde.kquickcontrols 2.0 as KQuickControls
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 ColumnLayout {
     id: root
     property string cfg_Provider
     property int cfg_FillMode
-    property alias cfg_Color: colorDialog.color
+    property alias cfg_Color: colorButton.color
     ListModel {
         id: providerModel
     }
@@ -134,13 +134,6 @@ ColumnLayout {
         }
     }
 
-    QtDialogs.ColorDialog {
-        id: colorDialog
-        modality: Qt.WindowModal
-        showAlphaChannel: false
-        title: i18nd("plasma_wallpaper_org.kde.potd", "Select Background Color")
-    }
-
     Row {
         id: colorRow
         spacing: units.largeSpacing / 2
@@ -150,19 +143,8 @@ ColumnLayout {
             horizontalAlignment: Text.AlignRight
             text: i18nd("plasma_wallpaper_org.kde.potd", "Background Color:")
         }
-        QtControls.Button {
+        KQuickControls.ColorButton {
             id: colorButton
-            width: units.gridUnit * 3
-            text: " " // needed to it gets a proper height...
-            onClicked: colorDialog.open()
-
-            Rectangle {
-                id: colorRect
-                anchors.centerIn: parent
-                width: parent.width - 2 * units.smallSpacing
-                height: theme.mSize(theme.defaultFont).height
-                color: colorDialog.color
-            }
         }
     }
 
