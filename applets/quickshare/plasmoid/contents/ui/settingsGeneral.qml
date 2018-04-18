@@ -19,32 +19,43 @@
 
 import QtQuick 2.2
 import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Layouts 1.0 as QtLayouts
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick.Layouts 1.0
 
-Item
-{
+ColumnLayout {
     id: configRoot
     property alias cfg_historySize: historySpin.value
     property alias cfg_copyAutomatically: copyAutomatically.checked
 
-    QtLayouts.GridLayout {
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-        }
+    GridLayout {
         columns: 2
 
-        QtControls.Label { text: i18n("History Size:") }
+        QtControls.Label {
+            Layout.row: 0
+            Layout.column: 0
+            Layout.alignment: Qt.AlignRight
+            text: i18n("History Size:")
+        }
         QtControls.SpinBox {
             id: historySpin
+            Layout.row: 0
+            Layout.column: 1
             value: 3
         }
 
-        QtControls.Label { text: i18n("Copy Automatically:") }
+        QtControls.Label {
+            Layout.row: 1
+            Layout.column: 0
+            Layout.alignment: Qt.AlignRight
+            text: i18n("Copy Automatically:")
+        }
         QtControls.CheckBox {
+            Layout.row: 1
+            Layout.column: 1
             id: copyAutomatically
         }
+    }
+
+    Item {
+        Layout.fillHeight: true
     }
 }
