@@ -9,11 +9,13 @@
         "Description[sv]": "Tillhandahåll från Wcpotd",
         "Description[uk]": "Постачальник даних Wcpotd",
         "Description[x-test]": "xxWcpotd Providerxx",
+        "Description[zh_CN]": "Wcpotd 提供方",
         "Icon": "",
         "Name": "Wikimedia Picture of the Day",
         "Name[ca@valencia]": "Imatge Wikimedia del dia",
         "Name[ca]": "Imatge Wikimedia del dia",
         "Name[fr]": "Image du jour de Wikimedia",
+        "Name[it]": "Immagine del giorno di Wikimedia",
         "Name[nl]": "Wikimedia afbeelding van de dag",
         "Name[nn]": "Dagens bilete frå Wikimedia",
         "Name[pt]": "Imagem do Dia do Wikimédia",
@@ -21,6 +23,7 @@
         "Name[sv]": "Dagens bild från Wikimedia",
         "Name[uk]": "Зображення дня Wikimedia",
         "Name[x-test]": "xxWikimedia Picture of the Dayxx",
+        "Name[zh_CN]": "每日一图(维基百科)",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

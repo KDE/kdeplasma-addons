@@ -9,11 +9,13 @@
         "Description[sv]": "Tillhandahåll från Flickr",
         "Description[uk]": "Постачальник даних Flickr",
         "Description[x-test]": "xxFlickr Providerxx",
+        "Description[zh_CN]": "Flickr 提供方",
         "Icon": "",
         "Name": "Flickr Picture of the Day",
         "Name[ca@valencia]": "Imatge Flickr del dia",
         "Name[ca]": "Imatge Flickr del dia",
         "Name[fr]": "Image du jour « Flickr »",
+        "Name[it]": "Immagine del giorno di Flickr",
         "Name[nl]": "Flickr-afbeelding van de dag",
         "Name[nn]": "Dagens bilete frå Flickr",
         "Name[pt]": "Imagem do Dia do Flickr",
@@ -21,6 +23,7 @@
         "Name[sv]": "Dagens bild från Flickr",
         "Name[uk]": "Зображення дня Flickr",
         "Name[x-test]": "xxFlickr Picture of the Dayxx",
+        "Name[zh_CN]": "每日一图(Flickr)",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]
