@@ -139,6 +139,7 @@ ColumnLayout {
             }
             Label {
                 id: fillModeDescription
+                wrapMode: Text.WordWrap
                 text: comboBox.model[comboBox.currentIndex] ? comboBox.model[comboBox.currentIndex].description : ""
             }
         }
