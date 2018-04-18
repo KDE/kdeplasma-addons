@@ -424,7 +424,7 @@ Item {
 
         visible: !hasItems
         iconSource: "configure"
-        text: i18n("Configure plasmoid...")
+        text: i18nc("@action:button", "Configure...")
         onClicked: {
             plasmoid.action("configure").trigger();
         }
