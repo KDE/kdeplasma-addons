@@ -145,6 +145,7 @@ ColumnLayout {
         }
         KQuickControls.ColorButton {
             id: colorButton
+            dialogTitle: i18nd("plasma_wallpaper_org.kde.potd", "Select Background Color")
         }
     }
 
