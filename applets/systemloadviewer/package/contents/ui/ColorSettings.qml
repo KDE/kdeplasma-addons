@@ -22,7 +22,7 @@ import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.0
 
-Item {
+ColumnLayout {
     id: colorSettings
 
     property alias cfg_memApplicationColor: memApplicationColorPicker.chosenColor
@@ -39,17 +39,12 @@ Item {
 
     GroupBox {
         id: setColorsManuallyGroupBox
+        Layout.fillWidth: true
         title: i18n("Set colors manually")
         checkable: true
         flat: true
-
-        width: parent.width
-        height: parent.height
-
         GridLayout {
             columns: 2
-            anchors.left: parent.left
-            anchors.leftMargin: units.largeSpacing
 
             Label {
                 text: i18n("CPU")
@@ -167,5 +162,9 @@ Item {
                 id: cacheWritebackColorPicker
             }
         }
+    }
+
+    Item {
+        Layout.fillHeight: true
     }
 }
