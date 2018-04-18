@@ -147,7 +147,7 @@ ColumnLayout {
             Layout.row: 2
             Layout.column: 1
             Layout.fillWidth: true
-            elide: Text.ElideRight
+            wrapMode: Text.WordWrap
             text: comboBox.model[comboBox.currentIndex] ? comboBox.model[comboBox.currentIndex].description : ""
         }
     } // end of top section GridLayout
