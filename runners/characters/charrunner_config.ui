@@ -58,7 +58,7 @@
         <item>
          <widget class="QLabel" name="label_hex">
           <property name="text">
-           <string>Hex Code:</string>
+           <string>Hex code:</string>
           </property>
          </widget>
         </item>
