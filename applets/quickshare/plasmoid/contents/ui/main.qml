@@ -163,13 +163,15 @@ DropArea {
             if (error==0 && output.url !== "") {
                 console.assert(output.url !== undefined);
                 var resultUrl = output.url;
-                console.log("Received", resultUrl)
-                root.url = resultUrl;
-                copyUrl(resultUrl)
+                console.log("Received url", resultUrl)
+                if (resultUrl) {
+                    root.url = resultUrl;
+                    copyUrl(resultUrl)
 
-                root.pasteUrls.push(resultUrl);
-                while (plasmoid.configuration.historySize <= root.pasteUrls.length && root.pasteUrls.length !== 0) {
-                    root.pasteUrls.shift();
+                    root.pasteUrls.push(resultUrl);
+                    while (plasmoid.configuration.historySize <= root.pasteUrls.length && root.pasteUrls.length !== 0) {
+                        root.pasteUrls.shift();
+                    }
                 }
 
                 resetActions();
@@ -205,7 +207,7 @@ DropArea {
             sendData(urls, urlsMimetype(urls).name);
         } else {
             var mimetype = firstMimeType(drop.formats).name;
-            var data = mimeData.getDataAsArrayBuffer(mimetype);
+            var data = drop.getDataAsArrayBuffer(mimetype);
             sendBase64Data(PurposeHelper.variantToBase64(data), mimetype);
         }
         drop.accepted = true;
@@ -307,7 +309,7 @@ DropArea {
             PropertyChanges { target: idleTimer; running: true }
             PropertyChanges { target: tooltipArea; icon: "dialog-ok" }
             PropertyChanges { target: tooltipArea; mainText: i18n("Successfully uploaded") }
-            PropertyChanges { target: tooltipArea; subText: i18n("<a href='%1'>%1</a>", root.url) }
+            PropertyChanges { target: tooltipArea; subText: root.url ? i18n("<a href='%1'>%1</a>", root.url) : "" }
         },
         State {
             name: "failure"
