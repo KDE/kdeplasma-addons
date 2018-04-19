@@ -104,7 +104,7 @@ void ComicApplet::init()
     mDateChangedTimer->start();
 
     mActionNextNewStripTab = new QAction(QIcon::fromTheme(QStringLiteral("go-next-view")),
-                                         i18nc("here strip means comic strip", "&Next Tab with a new Strip"), this);
+                                         i18nc("@action comic strip", "&Next Tab with a New Strip"), this);
     mActionNextNewStripTab->setShortcuts( KStandardShortcut::openNew() );
     actions()->addAction(QStringLiteral("next new strip"), mActionNextNewStripTab);
     mActions.append( mActionNextNewStripTab );
@@ -148,7 +148,7 @@ void ComicApplet::init()
     connect( mActionScaleContent, &QAction::triggered, this, &ComicApplet::slotScaleToContent );
 
     mActionStorePosition = new QAction(QIcon::fromTheme(QStringLiteral("go-home")),
-                                       i18nc("@option:check Context menu of comic image", "Store current &Position"), this);
+                                       i18nc("@option:check Context menu of comic image", "Store Current &Position"), this);
     mActionStorePosition->setCheckable( true );
     mActionStorePosition->setChecked(mCurrent.hasStored());
     mActions.append( mActionStorePosition );
