@@ -41,20 +41,20 @@ ColumnLayout {
     GroupBox {
         id: setColorsManuallyGroupBox
         Layout.fillWidth: true
-        title: i18n("Set colors manually")
+        title: i18nc("@option:check", "Set Colors Manually")
         checkable: true
         flat: true
         GridLayout {
             columns: 2
 
             Label {
-                text: i18n("CPU")
+                text: i18nc("@title:group", "CPU")
                 Layout.columnSpan: 2
                 font.bold: true
             }
 
             Label {
-                text: i18n("User:")
+                text: i18nc("@label:chooser", "User:")
                 Layout.alignment: Qt.AlignRight
             }
 
@@ -63,7 +63,7 @@ ColumnLayout {
             }
 
             Label {
-                text: i18n("IOWait:")
+                text: i18nc("@label:chooser", "IOWait:")
                 Layout.alignment: Qt.AlignRight
             }
 
@@ -72,7 +72,7 @@ ColumnLayout {
             }
 
             Label {
-                text: i18n("Sys:")
+                text: i18nc("@label:chooser", "Sys:")
                 Layout.alignment: Qt.AlignRight
             }
 
@@ -81,7 +81,7 @@ ColumnLayout {
             }
 
             Label {
-                text: i18n("Nice:")
+                text: i18nc("@label:chooser", "Nice:")
                 Layout.alignment: Qt.AlignRight
             }
 
@@ -90,14 +90,14 @@ ColumnLayout {
             }
 
             Label {
-                text: i18n("Memory")
+                text: i18nc("@title:group", "Memory")
                 Layout.columnSpan: 2
                 font.bold: true
             }
 
 
             Label {
-                text: i18n("Application:")
+                text: i18nc("@label:chooser", "Application:")
                 Layout.alignment: Qt.AlignRight
             }
 
@@ -106,7 +106,7 @@ ColumnLayout {
             }
 
             Label {
-                text: i18n("Buffers:")
+                text: i18nc("@label:chooser", "Buffers:")
                 Layout.alignment: Qt.AlignRight
             }
 
@@ -115,7 +115,7 @@ ColumnLayout {
             }
 
             Label {
-                text: i18n("Cached:")
+                text: i18nc("@label:chooser", "Cached:")
                 Layout.alignment: Qt.AlignRight
             }
 
@@ -124,14 +124,14 @@ ColumnLayout {
             }
 
             Label {
-                text: i18n("Swap")
+                text: i18nc("@title:group", "Swap")
                 Layout.columnSpan: 2
                 font.bold: true
             }
 
 
             Label {
-                text: i18n("Used swap:")
+                text: i18nc("@label:chooser", "Used swap:")
                 Layout.alignment: Qt.AlignRight
             }
 
@@ -140,13 +140,13 @@ ColumnLayout {
             }
 
             Label {
-                text: i18n("Cache")
+                text: i18nc("@title:group", "Cache")
                 Layout.columnSpan: 2
                 font.bold: true
             }
 
             Label {
-                text: i18n("Dirty memory:")
+                text: i18nc("@label:chooser", "Dirty memory:")
                 Layout.alignment: Qt.AlignRight
             }
 
@@ -155,7 +155,7 @@ ColumnLayout {
             }
 
             Label {
-                text: i18n("Writeback memory:")
+                text: i18nc("@label:chooser", "Writeback memory:")
                 Layout.alignment: Qt.AlignRight
             }
 

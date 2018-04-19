@@ -50,13 +50,13 @@ Item {
         Controls.GroupBox {
             Layouts.Layout.fillWidth: true
 
-            title: i18n("Cache")
+            title: i18nc("@title:group", "Cache")
             flat: true
 
             Layouts.RowLayout {
                 Layouts.Layout.alignment: Qt.AlignRight
                 Controls.Label {
-                    text: i18n("Comic cache:")
+                    text: i18nc("@label:spinbox", "Comic cache:")
                 }
                 Controls.SpinBox {
                     id: maxComicLimit
@@ -70,13 +70,13 @@ Item {
         Controls.GroupBox {
             Layouts.Layout.fillWidth: true
 
-            title: i18n("Error Handling")
+            title: i18nc("@title:group", "Error Handling")
             flat: true
 
             Layouts.ColumnLayout {
                 Controls.CheckBox {
                     id: showErrorPicture
-                    text: i18n("Display error when getting comic failed")
+                    text: i18nc("@option:check", "Display error when getting comic failed")
                     onCheckedChanged: root.configurationChanged();
                 }
             }

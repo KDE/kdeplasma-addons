@@ -54,7 +54,7 @@ Item {
         columns: 2
 
         Label {
-            text: i18n("Show:")
+            text: i18nc("@label", "Show:")
             Layout.alignment: Qt.AlignRight
             Layout.rowSpan: 5
             anchors.verticalCenter: cpuActivatedCheckBox.verticalCenter
@@ -62,7 +62,7 @@ Item {
 
         CheckBox {
             id: cpuActivatedCheckBox
-            text: i18n("CPU monitor")
+            text: i18nc("@option:check", "CPU monitor")
             onCheckedChanged: if (!checked) {cpuAllActivatedCheckBox.checked = false;}
         }
 
@@ -70,28 +70,28 @@ Item {
             Item { height: 1; width: 50; }
             CheckBox {
                 id: cpuAllActivatedCheckBox
-                text: i18n("CPUs separately")
+                text: i18nc("@option:check", "CPUs separately")
                 enabled: cpuActivatedCheckBox.checked && cfg_monitorType === 2
             }
         }
 
         CheckBox {
             id: memoryActivatedCheckBox
-            text: i18n("Memory monitor")
+            text: i18nc("@option:check", "Memory monitor")
         }
 
         CheckBox {
             id: swapActivatedCheckBox
-            text: i18n("Swap monitor")
+            text: i18nc("@option:check", "Swap monitor")
         }
 
         CheckBox {
             id: cacheActivatedCheckBox
-            text: i18n("Cache monitor")
+            text: i18nc("@option:check", "Cache monitor")
         }
 
         Label {
-            text: i18n("Monitor type:")
+            text: i18nc("@label", "Monitor type:")
             Layout.alignment: Qt.AlignRight
             Layout.rowSpan: 3
             anchors.verticalCenter: barMonitorRadio.verticalCenter
@@ -100,26 +100,26 @@ Item {
         RadioButton {
             id: barMonitorRadio
             exclusiveGroup: monitorTypeGroup
-            text: i18n("Bar")
+            text: i18nc("@option:radio", "Bar")
             onCheckedChanged: if (checked) {cfg_monitorType = 0; cpuAllActivatedCheckBox.checked = false;}
         }
 
         RadioButton {
             id: circularMonitorRadio
             exclusiveGroup: monitorTypeGroup
-            text: i18n("Circular")
+            text: i18nc("@option:radio", "Circular")
             onCheckedChanged: if (checked) {cfg_monitorType = 1; cpuAllActivatedCheckBox.checked = false;}
         }
 
         RadioButton {
             id: compactBarMonitorRadio
             exclusiveGroup: monitorTypeGroup
-            text: i18n("Compact Bar")
+            text: i18nc("@option:radio", "Compact bar")
             onCheckedChanged: if (checked) cfg_monitorType = 2;
         }
 
         Label {
-            text: i18n("Update interval:")
+            text: i18nc("@label:spinbox", "Update interval:")
             Layout.alignment: Qt.AlignRight
         }
 

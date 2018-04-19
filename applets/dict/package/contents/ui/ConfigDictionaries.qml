@@ -41,7 +41,7 @@ Item {
 
         Label {
             Layout.fillWidth: true
-            text: i18n("Available dictionaries:")
+            text: i18nc("@label:listbox", "Available dictionaries:")
         }
 
         ScrollView {

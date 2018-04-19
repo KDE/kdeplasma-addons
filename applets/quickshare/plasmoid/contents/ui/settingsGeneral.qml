@@ -33,7 +33,7 @@ ColumnLayout {
             Layout.row: 0
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("History Size:")
+            text: i18nc("@label:spinbox", "History size:")
         }
         QtControls.SpinBox {
             id: historySpin
@@ -46,7 +46,7 @@ ColumnLayout {
             Layout.row: 1
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("Copy Automatically:")
+            text: i18nc("@option:check", "Copy automatically:")
         }
         QtControls.CheckBox {
             Layout.row: 1

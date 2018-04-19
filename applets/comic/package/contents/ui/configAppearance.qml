@@ -55,13 +55,13 @@ Item {
         Controls.GroupBox {
             Layouts.Layout.fillWidth: true
 
-            title: i18n("Appearance")
+            title: i18nc("@title:group", "Appearance")
             flat: true
 
             Layouts.ColumnLayout {
                 Controls.CheckBox {
                     id: showArrowsOnOver
-                    text: i18n("Show arrows only on mouse over")
+                    text: i18nc("@option:check", "Show arrows only on mouse-over")
                     onCheckedChanged: root.configurationChanged();
                 }
             }
@@ -69,28 +69,28 @@ Item {
         Controls.GroupBox {
             Layouts.Layout.fillWidth: true
 
-            title: i18n("Information")
+            title: i18nc("@title:group", "Information")
             flat: true
 
             Layouts.ColumnLayout {
                 Controls.CheckBox {
                     id: showComicTitle
-                    text: i18n("Show comic title")
+                    text: i18nc("@option:check", "Show comic title")
                     onCheckedChanged: root.configurationChanged();
                 }
                 Controls.CheckBox {
                     id: showIdentifier
-                    text: i18n("Show comic identifier")
+                    text: i18nc("@option:check", "Show comic identifier")
                     onCheckedChanged: root.configurationChanged();
                 }
                 Controls.CheckBox {
                     id: showAuthor
-                    text: i18n("Show comic author")
+                    text: i18nc("@option:check", "Show comic author")
                     onCheckedChanged: root.configurationChanged();
                 }
                 Controls.CheckBox {
                     id: showUrl
-                    text: i18n("Show comic URL")
+                    text: i18nc("@option:check", "Show comic URL")
                     onCheckedChanged: root.configurationChanged();
                 }
             }

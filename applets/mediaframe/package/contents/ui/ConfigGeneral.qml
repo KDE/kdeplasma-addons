@@ -49,7 +49,7 @@ ColumnLayout {
             Layout.row: 0
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("Change picture every")
+            text: i18nc("@label:spinbox", "Change picture every")
         }
 
         SpinBox {
@@ -68,7 +68,7 @@ ColumnLayout {
             Layout.row: 1
             Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            text: i18n("Fill mode:")
+            text: i18nc("@label:listbox", "Fill mode:")
         }
 
         ComboBox {
@@ -79,37 +79,37 @@ ColumnLayout {
             currentIndex: fillModeToIndex(fillMode)
             model: [
                 {
-                    text: i18n("Stretch"),
+                    text: i18nc("@item:inlistbox", "Stretch"),
                     description: i18n("The image is scaled to fit the frame"),
                     value: Image.Stretch
                 },
                 {
-                    text: i18n("Preserve aspect fit"),
+                    text: i18nc("@item:inlistbox", "Preserve aspect fit"),
                     description: i18n("The image is scaled uniformly to fit without cropping"),
                     value: Image.PreserveAspectFit
                 },
                 {
-                    text: i18n("Preserve aspect crop"),
+                    text: i18nc("@item:inlistbox", "Preserve aspect crop"),
                     description: i18n("The image is scaled uniformly to fill, cropping if necessary"),
                     value: Image.PreserveAspectCrop
                 },
                 {
-                    text: i18n("Tile"),
+                    text: i18nc("@item:inlistbox", "Tile"),
                     description: i18n("The image is duplicated horizontally and vertically"),
                     value: Image.Tile
                 },
                 {
-                    text: i18n("Tile vertically"),
+                    text: i18nc("@item:inlistbox", "Tile vertically"),
                     description: i18n("The image is stretched horizontally and tiled vertically"),
                     value: Image.TileVertically
                 },
                 {
-                    text: i18n("Tile horizontally"),
+                    text: i18nc("@item:inlistbox", "Tile horizontally"),
                     description: i18n("The image is stretched vertically and tiled horizontally"),
                     value: Image.TileHorizontally
                 },
                 {
-                    text: i18n("Pad"),
+                    text: i18nc("@item:inlistbox", "Pad"),
                     description: i18n("The image is not transformed"),
                     value: Image.Pad
                 }
@@ -155,22 +155,22 @@ ColumnLayout {
     // these CheckBoxes should take over as their own ColumnLayout entries
     CheckBox {
         id: randomizeCheckBox
-        text: i18n("Randomize items")
+        text: i18nc("@option:check", "Randomize items")
     }
 
     CheckBox {
         id: pauseOnMouseOverCheckBox
-        text: i18n("Pause on mouseover")
+        text: i18nc("@option:check", "Pause on mouse-over")
     }
 
     CheckBox {
         id: useBackgroundCheckBox
-        text: i18n("Background frame")
+        text: i18nc("@option:check", "Background frame")
     }
 
     CheckBox {
         id: leftClickOpenImageCheckBox
-        text: i18n("Left click image opens in external viewer")
+        text: i18nc("@option:check", "Left click image opens in external viewer")
     }
 
     Item { // tighten layout

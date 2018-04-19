@@ -30,7 +30,7 @@ QtControls.GroupBox {
     height: childrenRect.height
 
     flat: true
-    title: i18n("Appearance")
+    title: i18nc("@title:group", "Appearance")
 
     property alias cfg_showGrid: showGridCheckBox.checked
     property alias cfg_showOffLeds: showOffLedsCheckBox.checked
@@ -46,19 +46,19 @@ QtControls.GroupBox {
     ColumnLayout {
         QtControls.CheckBox {
             id: showGridCheckBox
-            text: i18n("Draw grid")
+            text: i18nc("@option:check", "Draw grid")
         }
         QtControls.CheckBox {
             id: showOffLedsCheckBox
-            text: i18n("Show inactive LEDs:")
+            text: i18nc("@option:check", "Show inactive LEDs:")
         }
         QtControls.CheckBox {
             id: showSecondsCheckBox
-            text: i18n("Display seconds")
+            text: i18nc("@option:check", "Display seconds")
         }
         QtControls.CheckBox {
             id: showBcdFormatCheckBox
-            text: i18n("Display in BCD format (decimal)")
+            text: i18nc("@option:check", "Display in BCD format (decimal)")
         }
         QtControls.Label {
             text: i18n("Colors:")
@@ -67,7 +67,7 @@ QtControls.GroupBox {
             columns: 2;
             QtControls.CheckBox {
                 id: useCustomColorForActiveCheckBox
-                text: i18n("Use custom color for active LEDs")
+                text: i18nc("@option:check", "Use custom color for active LEDs")
             }
             KQuickControls.ColorButton {
                 id: customColorForActive
@@ -76,7 +76,7 @@ QtControls.GroupBox {
 
             QtControls.CheckBox {
                 id: useCustomColorForInactiveCheckBox
-                text: i18n("Use custom color for inactive LEDs")
+                text: i18nc("@option:check", "Use custom color for inactive LEDs")
             }
             KQuickControls.ColorButton {
                 id:customColorForInactive
@@ -85,7 +85,7 @@ QtControls.GroupBox {
 
             QtControls.CheckBox {
                 id: useCustomColorForGridCheckBox
-                text: i18n("Use custom color for grid")
+                text: i18nc("@option:check", "Use custom color for grid")
             }
             KQuickControls.ColorButton {
                 id:customColorForGrid

@@ -28,7 +28,7 @@ QtLayouts.ColumnLayout {
 
     QtControls.GroupBox {
         id: runCommandGroup
-        title: i18n("Run command")
+        title: i18nc("@title:group", "Run Command")
 
         QtLayouts.Layout.fillWidth: true
         QtLayouts.Layout.alignment: Qt.AlignTop
@@ -40,12 +40,12 @@ QtLayouts.ColumnLayout {
 
             QtControls.CheckBox {
                 id: runCommand
-                text: i18n("Execute command")
+                text: i18nc("@option:check", "Execute command")
             }
 
             QtLayouts.RowLayout {
                 QtControls.Label {
-                    text: i18n("Command:")
+                    text: i18nc("@label:textbox", "Command:")
                 }
                 QtControls.TextField {
                     id: command

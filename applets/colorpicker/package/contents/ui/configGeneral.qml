@@ -34,7 +34,7 @@ ColumnLayout {
     QtControls.CheckBox {
         id: autoClipboardCheckBox
         Layout.fillWidth: true
-        text: i18n("Automatically copy color to clipboard")
+        text: i18nc("@option:check", "Automatically copy color to clipboard")
     }
 
     GridLayout {
@@ -47,7 +47,7 @@ ColumnLayout {
             Layout.column: 0
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignRight
-            text: i18n("Default color format:")
+            text: i18nc("@label:listbox", "Default color format:")
         }
 
         QtControls.ComboBox {
@@ -66,7 +66,7 @@ ColumnLayout {
             Layout.column: 0
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignRight
-            text: i18n("When pressing the keyboard shortcut:")
+            text: i18nc("@label", "When pressing the keyboard shortcut:")
         }
 
         QtControls.ExclusiveGroup {
@@ -76,7 +76,7 @@ ColumnLayout {
         QtControls.RadioButton {
             Layout.row: 1
             Layout.column: 1
-            text: i18n("Pick a color")
+            text: i18nc("@option:radio", "Pick a color")
             exclusiveGroup: activationExclusiveGroup
             checked: cfg_pickOnActivate
             onCheckedChanged: cfg_pickOnActivate = checked
@@ -85,7 +85,7 @@ ColumnLayout {
         QtControls.RadioButton {
             Layout.row: 2
             Layout.column: 1
-            text: i18n("Show history")
+            text: i18nc("@option:radio", "Show history")
             exclusiveGroup: activationExclusiveGroup
             checked: !cfg_pickOnActivate
         }

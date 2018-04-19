@@ -42,7 +42,7 @@ Item {
 
     QtLayouts.ColumnLayout {
         QtControls.GroupBox {
-            title: i18n("Appearance")
+            title: i18nc("@title:group", "Appearance")
             flat: true
 
             QtLayouts.GridLayout {
@@ -55,7 +55,7 @@ Item {
                 }
 
                 QtControls.Label {
-                    text: i18n("Size")
+                    text: i18nc("@label:spinbox", "Size:")
                     QtLayouts.Layout.alignment: Qt.AlignRight
                 }
 
@@ -64,7 +64,7 @@ Item {
                 }
 
                 QtControls.Label {
-                    text: i18n("Piece color")
+                    text: i18nc("@label:chooser", "Piece color:")
                     QtLayouts.Layout.alignment: Qt.AlignRight
                 }
 
@@ -73,7 +73,7 @@ Item {
                 }
 
                 QtControls.Label {
-                    text: i18n("Number color")
+                    text: i18nc("@label:chooser", "Number color:")
                     QtLayouts.Layout.alignment: Qt.AlignRight
                 }
 
@@ -83,7 +83,7 @@ Item {
 
                 QtControls.CheckBox {
                     id: useImageCheckBox
-                    text: i18n("Use custom image")
+                    text: i18nc("@option:check", "Use custom image")
                     QtLayouts.Layout.alignment: Qt.AlignRight
                 }
 
@@ -98,14 +98,14 @@ Item {
 
                     QtControls.Button {
                         iconName: "document-open"
-                        tooltip: i18n("Browse...")
+                        tooltip: i18nc("@info:tooltip", "Browse...")
 
                         onClicked: imagePicker.open()
 
                         QtDialogs.FileDialog {
                             id: imagePicker
 
-                            title: i18n("Choose an image")
+                            title: i18nc("@title:window", "Choose an Image")
 
                             folder: shortcuts.pictures
 
@@ -122,7 +122,7 @@ Item {
                 QtControls.CheckBox {
                     id: showNumeralsCheckBox
                     QtLayouts.Layout.columnSpan: 2
-                    text: i18n("Show numerals")
+                    text: i18nc("@option:check", "Show numerals")
                 }
             }
         }

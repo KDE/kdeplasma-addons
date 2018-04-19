@@ -36,24 +36,24 @@ Item {
 
     QtLayouts.ColumnLayout {
         QtControls.GroupBox {
-            title: i18n("Appearance")
+            title: i18nc("@title:group", "Appearance")
             flat: true
 
             QtLayouts.ColumnLayout {
                 QtControls.CheckBox {
                     id: boldCheckBox
-                    text: i18n("Bold text")
+                    text: i18nc("@option:check", "Bold text")
                 }
 
                 QtControls.CheckBox {
                     id: italicCheckBox
-                    text: i18n("Italic text")
+                    text: i18nc("@option:check", "Italic text")
                 }
             }
         }
 
         QtControls.GroupBox {
-            title: i18n("Fuzzyness")
+            title: i18nc("@title:group", "Fuzzyness")
             flat: true
 
             QtLayouts.RowLayout {

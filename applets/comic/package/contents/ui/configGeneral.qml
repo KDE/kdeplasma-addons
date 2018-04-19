@@ -60,7 +60,7 @@ Item {
         Controls.GroupBox {
             Layouts.Layout.fillWidth: true
 
-            title: i18n("Comic")
+            title: i18nc("@title:group", "Comic")
             flat: true
 
             Layouts.ColumnLayout {
@@ -87,12 +87,12 @@ Item {
                 }
                 Controls.Button {
                     iconName: "get-hot-new-stuff"
-                    text: i18n("Get New Comics...")
+                    text: i18nc("@action:button", "Get New Comics...")
                     onClicked: plasmoid.nativeInterface.getNewComics();
                 }
                 Controls.CheckBox {
                     id: middleClickCheckBox
-                    text: i18n("Middle-click on the comic to show it at its original size")
+                    text: i18nc("@option:check", "Middle-click on the comic to show it at its original size")
                     onCheckedChanged: root.configurationChanged();
                 }
             }
@@ -100,14 +100,14 @@ Item {
         Controls.GroupBox {
             Layouts.Layout.fillWidth: true
 
-            title: i18n("Update")
+            title: i18nc("@title:group", "Update")
             flat: true
 
             Layouts.ColumnLayout {
                 Layouts.RowLayout {
                     Layouts.Layout.alignment: Qt.AlignRight
                     Controls.Label {
-                        text: i18n("Automatically update comic plugins:")
+                        text: i18nc("@label:spinbox", "Automatically update comic plugins:")
                     }
                     Controls.SpinBox {
                         id: providerUpdateInterval
@@ -120,7 +120,7 @@ Item {
                 Layouts.RowLayout {
                     Layouts.Layout.alignment: Qt.AlignRight
                     Controls.Label {
-                        text: i18n("Check for new comic strips:")
+                        text: i18nc("@label:spinbox", "Check for new comic strips:")
                     }
                     Controls.SpinBox {
                         id: checkNewComicStripsInterval

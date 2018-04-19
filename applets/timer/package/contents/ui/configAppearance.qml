@@ -33,7 +33,7 @@ QtLayouts.ColumnLayout {
 
     QtControls.GroupBox {
         id: displayGroup
-        title: i18n("Display")
+        title: i18nc("@title:group", "Display")
 
         QtLayouts.Layout.fillWidth: true
         QtLayouts.Layout.alignment: Qt.AlignTop
@@ -44,11 +44,11 @@ QtLayouts.ColumnLayout {
 
             QtControls.CheckBox {
                 id: showTitle
-                text: i18n("Show title");
+                text: i18nc("@option:check", "Show title");
             }
             QtLayouts.RowLayout {
                 QtControls.Label {
-                    text: i18n("Title:")
+                    text: i18nc("@label:textbox", "Title:")
                 }
                 QtControls.TextField {
                     id: title
@@ -59,14 +59,14 @@ QtLayouts.ColumnLayout {
 
             QtControls.CheckBox {
                 id: showSeconds
-                text: i18n("Show seconds");
+                text: i18nc("@option:check", "Show seconds");
             }
         }
     }
 
     QtControls.GroupBox {
         id: notificationGroup
-        title: i18n("Notifications")
+        title: i18nc("@title:group", "Notifications")
 
         QtLayouts.Layout.fillWidth: true
         anchors.top: displayGroup.bottom
@@ -77,11 +77,11 @@ QtLayouts.ColumnLayout {
 
             QtControls.CheckBox {
                 id: showNotification
-                text: i18n("Show notification");
+                text: i18nc("@option:check", "Show notification");
             }
             QtLayouts.RowLayout {
                 QtControls.Label {
-                    text: i18n("Text:")
+                    text: i18nc("@label:textbox", "Text:")
                 }
                 QtControls.TextField {
                     id: notificationText

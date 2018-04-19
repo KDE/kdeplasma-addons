@@ -54,7 +54,7 @@ ColumnLayout {
 
         visible: false
 
-        title: i18n("Choose files")
+        title: i18nc("@title:window", "Choose Files")
 
         folder: shortcuts.pictures
 
@@ -83,7 +83,7 @@ ColumnLayout {
 
         visible: false
 
-        title: i18n("Choose a folder")
+        title: i18nc("@title:window", "Choose a Folder")
 
         folder: shortcuts.pictures
 
@@ -110,20 +110,20 @@ ColumnLayout {
             Button {
                 iconName: "folder-new"
                 onClicked: folderDialog.visible = true
-                text: i18n("Add folder...")
+                text: i18nc("@action:button", "Add Folder...")
             }
 
             Button {
                 iconName: "document-new"
                 onClicked: fileDialog.visible = true
-                text: i18n("Add files...")
+                text: i18nc("@action:button", "Add Files...")
             }
         }
 
         Label {
             Layout.fillWidth: true
 
-            text: i18n("Paths:")
+            text: i18nc("@label:listbox", "Paths:")
         }
 
         ListModel {

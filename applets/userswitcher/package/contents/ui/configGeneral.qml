@@ -31,7 +31,7 @@ ColumnLayout {
     property alias cfg_showTechnicalInfo: showTechnicalInfoCheck.checked
 
     QtControls.GroupBox {
-        title: i18n("User name display")
+        title: i18nc("@title:group", "Username Display")
         flat: true
 
         QtControls.ExclusiveGroup {
@@ -44,21 +44,21 @@ ColumnLayout {
                 id: showFullNameRadio
                 Layout.fillWidth: true
                 exclusiveGroup: nameEg
-                text: i18n("Show full name (if available)")
+                text: i18nc("@option:radio", "Show full name (if available)")
                 checked: cfg_showFullName
             }
 
             QtControls.RadioButton {
                 Layout.fillWidth: true
                 exclusiveGroup: nameEg
-                text: i18n("Show login username")
+                text: i18nc("@option:radio", "Show login username")
                 checked: !cfg_showFullName
             }
         }
     }
 
     QtControls.GroupBox {
-        title: i18n("Layout")
+        title: i18nc("@title:group", "Layout")
         flat: true
 
         QtControls.ExclusiveGroup {
@@ -74,7 +74,7 @@ ColumnLayout {
                 id: showOnlyNameRadio
                 Layout.fillWidth: true
                 exclusiveGroup: layoutEg
-                text: i18n("Show only name")
+                text: i18nc("@option:radio", "Show only name")
                 checked: cfg_showName && !cfg_showFace
             }
 
@@ -82,7 +82,7 @@ ColumnLayout {
                 id: showOnlyFaceRadio
                 Layout.fillWidth: true
                 exclusiveGroup: layoutEg
-                text: i18n("Show only avatar")
+                text: i18nc("@option:radio", "Show only avatar")
                 checked: !cfg_showName && cfg_showFace
             }
 
@@ -90,13 +90,13 @@ ColumnLayout {
                 id: showBothRadio
                 Layout.fillWidth: true
                 exclusiveGroup: layoutEg
-                text: i18n("Show both avatar and name")
+                text: i18nc("@option:radio", "Show both avatar and name")
                 checked: cfg_showName && cfg_showFace
             }
 
             QtControls.CheckBox {
                 id: showTechnicalInfoCheck
-                text: i18n("Show technical information about sessions")
+                text: i18nc("@option:check", "Show technical information about sessions")
             }
         }
     }

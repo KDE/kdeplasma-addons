@@ -39,11 +39,11 @@ Item {
             Layout.fillWidth: true
 
             flat: true
-            title: i18n("Arrangement")
+            title: i18nc("@title:group", "Arrangement")
 
             RowLayout {
                 Label {
-                    text: vertical ? i18n("Maximum columns:") : i18n("Maximum rows:")
+                    text: vertical ? i18nc("@label:spinbox", "Maximum columns:") : i18nc("@label:spinbox", "Maximum rows:")
                 }
 
                 SpinBox {
@@ -57,17 +57,17 @@ Item {
             Layout.fillWidth: true
 
             flat: true
-            title: i18n("Appearance")
+            title: i18nc("@title:group", "Appearance")
 
             ColumnLayout {
                 CheckBox {
                     id: showLauncherNames
-                    text: i18n("Show launcher names")
+                    text: i18nc("@option:check", "Show launcher names")
                 }
 
                 CheckBox {
                     id: enablePopup
-                    text: i18n("Enable popup")
+                    text: i18nc("@option:check", "Enable popup")
                 }
             }
         }
@@ -76,14 +76,14 @@ Item {
             Layout.fillWidth: true
 
             flat: true
-            title: i18n("Title")
+            title: i18nc("@title:group", "Title")
             visible: plasmoid.formFactor == PlasmaCore.Types.Planar
 
             ColumnLayout {
                 CheckBox {
                     id: showTitle
                     checked: title.activeFocus || title.length
-                    text: i18n("Show title")
+                    text: i18nc("@option:check", "Show title")
 
                     onClicked: {
                         if (checked) {
