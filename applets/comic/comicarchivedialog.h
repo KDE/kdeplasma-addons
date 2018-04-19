@@ -27,8 +27,6 @@
 
 #include <QDialog>
 
-class QDialogButtonBox;
-
 class ComicArchiveDialog : public QDialog
 {
     Q_OBJECT
@@ -53,7 +51,6 @@ class ComicArchiveDialog : public QDialog
     private:
         Ui::ComicArchiveDialog ui;
         IdentifierType mIdentifierType;
-        QDialogButtonBox *mButtonBox;
         QString mPluginName;
 };
 

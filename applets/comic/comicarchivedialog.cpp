@@ -21,8 +21,6 @@
 #include "comicarchivedialog.h"
 #include "comicarchivejob.h"
 
-#include <QDialogButtonBox>
-
 
 ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString &comicName, IdentifierType identifierType, const QString &currentIdentifierSuffix, const QString &firstIdentifierSuffix, const QString &savingDir, QWidget *parent )
   : QDialog( parent ),
@@ -32,11 +30,8 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
     ui.setupUi(this);
     setWindowTitle(i18nc("@title:window", "Create %1 Comic Book Archive", comicName));
 
-    mButtonBox = new QDialogButtonBox(this);
-    mButtonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(mButtonBox, SIGNAL(accepted()), SLOT(slotOkClicked()));
-    connect(mButtonBox, SIGNAL(rejected()), SLOT(reject()));
-    layout()->addWidget(mButtonBox);
+    connect(ui.buttonBox, &QDialogButtonBox::accepted, this, &ComicArchiveDialog::slotOkClicked);
+    connect(ui.buttonBox, &QDialogButtonBox::rejected, this, &ComicArchiveDialog::reject);
 
     switch ( mIdentifierType ) {
         case Date: {
@@ -151,7 +146,7 @@ void ComicArchiveDialog::updateOkButton()
     }
 
     okEnabled = ( okEnabled && !ui.dest->url().isEmpty() );
-    mButtonBox->button(QDialogButtonBox::Ok)->setEnabled(okEnabled);
+    ui.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(okEnabled);
 }
 
 void ComicArchiveDialog::slotOkClicked()
