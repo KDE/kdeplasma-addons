@@ -68,7 +68,7 @@ Item {
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: idLabelArea
-                mainText: i18n( "Jump to Strip ..." )
+                mainText: i18nc("@info:tooltip", "Jump to strip...")
             }
         }
     }
@@ -108,7 +108,7 @@ Item {
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: idUrlLabelArea
-                mainText: i18n( "Visit the comic website" )
+                mainText: i18nc("@info:tooltip", "Visit the comic website")
             }
         }
     }

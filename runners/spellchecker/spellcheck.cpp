@@ -42,7 +42,7 @@ SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     setSpeed(AbstractRunner::SlowSpeed);
 
-    addAction(ActionIds::copyToClipboard(), QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy to Clipboard"));
+    addAction(ActionIds::copyToClipboard(), QIcon::fromTheme(QStringLiteral("edit-copy")), i18nc("@action", "Copy to Clipboard"));
 }
 
 SpellCheckRunner::~SpellCheckRunner()

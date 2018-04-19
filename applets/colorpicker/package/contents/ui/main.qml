@@ -103,8 +103,8 @@ Item {
     }
 
     Component.onCompleted: {
-        plasmoid.setAction("colordialog", i18n("Open Color Dialog"), "color-management")
-        plasmoid.setAction("clear", i18n("Clear History"), "edit-clear-history")
+        plasmoid.setAction("colordialog", i18nc("@action", "Open Color Dialog"), "color-management")
+        plasmoid.setAction("clear", i18nc("@action", "Clear History"), "edit-clear-history")
     }
 
     Plasmoid.compactRepresentation: Grid {
@@ -119,7 +119,7 @@ Item {
         PlasmaComponents.ToolButton {
             width: buttonSize
             height: buttonSize
-            tooltip: i18n("Pick Color")
+            tooltip: i18nc("@info:tooltip", "Pick color")
             onClicked: root.pickColor()
 
             PlasmaCore.IconItem {
@@ -180,7 +180,7 @@ Item {
 
             PlasmaComponents.ToolButton {
                 anchors.fill: parent
-                tooltip: i18n("Color Options")
+                tooltip: i18nc("@info:tooltip", "Color options")
                 onClicked: plasmoid.expanded = !plasmoid.expanded
                 // indicate viable drag...
                 checked: dropArea.containsAcceptableDrag
@@ -249,7 +249,7 @@ Item {
 
         PlasmaComponents.Button {
             anchors.centerIn: parent
-            text: i18n("Pick Color")
+            text: i18nc("@action:button", "Pick Color")
             visible: fullRoot.count === 0
             onClicked: root.pickColor()
         }

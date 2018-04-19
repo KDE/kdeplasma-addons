@@ -22,13 +22,13 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-         name: i18n("Appearance")
+         name: i18nc("@title", "Appearance")
          icon: "preferences-desktop-color"
          source: "configAppearance.qml"
     }
 
     ConfigCategory {
-         name: i18n("Advanced")
+         name: i18nc("@title", "Advanced")
          icon: "preferences-other"
          source: "configAdvanced.qml"
     }

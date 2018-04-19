@@ -40,7 +40,7 @@ QtObject {
     property QtObject showdesktop: ShowDesktop { }
 
     Component.onCompleted: {
-        plasmoid.setAction("minimizeall", i18n("Minimize All Windows"))
+        plasmoid.setAction("minimizeall", i18nc("@action", "Minimize All Windows"))
     }
 
     function action_minimizeall() {

@@ -214,7 +214,7 @@ DropArea {
     }
 
     Component.onCompleted: {
-        plasmoid.setAction("paste", i18n("Paste"), "edit-paste");
+        plasmoid.setAction("paste", i18nc("@action", "Paste"), "edit-paste");
         plasmoid.setActionSeparator("pastes");
     }
 

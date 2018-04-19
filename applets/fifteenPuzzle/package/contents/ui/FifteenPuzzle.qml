@@ -190,7 +190,7 @@ Item {
             id: button
             Layout.fillWidth: true
             iconName: "roll"
-            text: i18n("Shuffle");
+            text: i18nc("@action:button", "Shuffle");
             onClicked: main.shuffleBoard();
         }
 
@@ -227,7 +227,7 @@ Item {
             id: solvedLabel
             anchors.centerIn: parent
             color: theme.textColor
-            text: i18n("Solved! Try again.")
+            text: i18nc("@info", "Solved! Try again.")
             z: 2
         }
     }

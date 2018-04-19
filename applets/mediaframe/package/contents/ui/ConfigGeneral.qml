@@ -80,37 +80,37 @@ ColumnLayout {
             model: [
                 {
                     text: i18nc("@item:inlistbox", "Stretch"),
-                    description: i18n("The image is scaled to fit the frame"),
+                    description: i18nc("@info", "The image is scaled to fit the frame"),
                     value: Image.Stretch
                 },
                 {
                     text: i18nc("@item:inlistbox", "Preserve aspect fit"),
-                    description: i18n("The image is scaled uniformly to fit without cropping"),
+                    description: i18nc("@info", "The image is scaled uniformly to fit without cropping"),
                     value: Image.PreserveAspectFit
                 },
                 {
                     text: i18nc("@item:inlistbox", "Preserve aspect crop"),
-                    description: i18n("The image is scaled uniformly to fill, cropping if necessary"),
+                    description: i18nc("@info", "The image is scaled uniformly to fill, cropping if necessary"),
                     value: Image.PreserveAspectCrop
                 },
                 {
                     text: i18nc("@item:inlistbox", "Tile"),
-                    description: i18n("The image is duplicated horizontally and vertically"),
+                    description: i18nc("@info", "The image is duplicated horizontally and vertically"),
                     value: Image.Tile
                 },
                 {
                     text: i18nc("@item:inlistbox", "Tile vertically"),
-                    description: i18n("The image is stretched horizontally and tiled vertically"),
+                    description: i18nc("@info", "The image is stretched horizontally and tiled vertically"),
                     value: Image.TileVertically
                 },
                 {
                     text: i18nc("@item:inlistbox", "Tile horizontally"),
-                    description: i18n("The image is stretched vertically and tiled horizontally"),
+                    description: i18nc("@info", "The image is stretched vertically and tiled horizontally"),
                     value: Image.TileHorizontally
                 },
                 {
                     text: i18nc("@item:inlistbox", "Pad"),
-                    description: i18n("The image is not transformed"),
+                    description: i18nc("@info", "The image is not transformed"),
                     value: Image.Pad
                 }
             ] // end of ComboBox model

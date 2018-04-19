@@ -79,9 +79,9 @@ Item {
     }
 
     Component.onCompleted: {
-        plasmoid.setAction("timerStart", i18n("&Start"));
-        plasmoid.setAction("timerStop", i18n("S&top"));
-        plasmoid.setAction("timerReset", i18n("&Reset"));
+        plasmoid.setAction("timerStart", i18nc("@action", "&Start"));
+        plasmoid.setAction("timerStop", i18nc("@action", "S&top"));
+        plasmoid.setAction("timerReset", i18nc("@action", "&Reset"));
         plasmoid.setActionSeparator("separator0");
 
         for (var predefinedTimer in plasmoid.configuration.predefinedTimers) {

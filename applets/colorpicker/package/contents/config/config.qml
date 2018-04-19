@@ -22,7 +22,7 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-        name: i18n("General")
+        name: i18nc("@title", "General")
         icon: "preferences-desktop-color"
         source: "configGeneral.qml"
     }

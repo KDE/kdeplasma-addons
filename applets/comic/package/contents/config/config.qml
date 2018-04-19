@@ -22,17 +22,17 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-         name: i18n("General")
+         name: i18nc("@title", "General")
          icon: "face-smile-big"
          source: "configGeneral.qml"
     }
     ConfigCategory {
-         name: i18n("Appearance")
+         name: i18nc("@title", "Appearance")
          icon: "image"
          source: "configAppearance.qml"
     }
     ConfigCategory {
-         name: i18n("Advanced")
+         name: i18nc("@title", "Advanced")
          icon: "system-run"
          source: "configAdvanced.qml"
     }

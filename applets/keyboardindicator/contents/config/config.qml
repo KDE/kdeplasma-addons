@@ -22,7 +22,7 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-         name: i18n("Keys")
+         name: i18nc("@title", "Keys")
          icon: "input-keyboard"
          source: "configAppearance.qml"
     }

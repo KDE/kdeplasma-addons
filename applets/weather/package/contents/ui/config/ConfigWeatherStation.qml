@@ -58,7 +58,7 @@ ColumnLayout {
 
     function handleLocationSearchDone(success, searchString) {
         if (!success) {
-            noSearchResultReport.text = i18n("No weather stations found for '%1'", searchString);
+            noSearchResultReport.text = i18nc("@info", "No weather stations found for '%1'", searchString);
             noSearchResultReport.visible = true;
         }
     }

@@ -30,7 +30,7 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
     mPluginName( pluginName )
 {
     ui.setupUi(this);
-    setWindowTitle( i18n( "Create %1 Comic Book Archive", comicName ) );
+    setWindowTitle(i18nc("@title:window", "Create %1 Comic Book Archive", comicName));
 
     mButtonBox = new QDialogButtonBox(this);
     mButtonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);

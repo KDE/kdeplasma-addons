@@ -24,12 +24,12 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-         name: i18n("General")
+         name: i18nc("@title", "General")
          icon: "view-statistics"
          source: "GeneralSettings.qml"
     }
     ConfigCategory {
-         name: i18n("Colors")
+         name: i18nc("@title", "Colors")
          icon: "preferences-desktop-color"
          source: "ColorSettings.qml"
     }

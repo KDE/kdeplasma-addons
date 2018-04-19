@@ -61,7 +61,7 @@ QtControls.GroupBox {
             text: i18nc("@option:check", "Display in BCD format (decimal)")
         }
         QtControls.Label {
-            text: i18n("Colors:")
+            text: i18nc("@title:group", "Colors")
         }
         GridLayout {
             columns: 2;

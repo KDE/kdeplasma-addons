@@ -215,7 +215,7 @@ Item {
 
             ListDelegate {
                 id: newSessionButton
-                text: i18n("New Session")
+                text: i18nc("@action", "New Session")
                 icon: "system-switch-user"
                 highlight: delegateHighlight
                 visible: sessionsModel.canStartNewSession
@@ -224,7 +224,7 @@ Item {
 
             ListDelegate {
                 id: lockScreenButton
-                text: i18n("Lock Screen")
+                text: i18nc("@action", "Lock Screen")
                 icon: "system-lock-screen"
                 highlight: delegateHighlight
                 enabled: pmEngine.data["Sleep States"]["LockScreen"]

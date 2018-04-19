@@ -139,19 +139,19 @@ Item {
                 }
 
                 PlasmaComponents.MenuItem {
-                    text: i18n("Add Launcher...")
+                    text: i18nc("@action:inmenu", "Add Launcher...")
                     icon: "list-add"
                     onClicked: addLauncher()
                 }
 
                 PlasmaComponents.MenuItem {
-                    text: i18n("Edit Launcher...")
+                    text: i18nc("@action:inmenu", "Edit Launcher...")
                     icon: "document-edit"
                     onClicked: editLauncher()
                 }
 
                 PlasmaComponents.MenuItem {
-                    text: i18n("Remove Launcher")
+                    text: i18nc("@action:inmenu", "Remove Launcher")
                     icon: "list-remove"
                     onClicked: removeLauncher()
                 }

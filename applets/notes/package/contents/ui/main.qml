@@ -248,28 +248,28 @@ PlasmaCore.SvgItem {
                 visible: fontButtons.showFormatButtons
 
                 PlasmaComponents.ToolButton {
-                    tooltip: i18n("Bold")
+                    tooltip: i18nc("@info:tooltip", "Bold")
                     iconSource: "format-text-bold"
                     checked: documentHandler.bold
                     onClicked: documentHandler.bold = !documentHandler.bold
                     Accessible.name: tooltip
                 }
                 PlasmaComponents.ToolButton {
-                    tooltip: i18n("Italic")
+                    tooltip: i18nc("@info:tooltip", "Italic")
                     iconSource: "format-text-italic"
                     checked: documentHandler.italic
                     onClicked: documentHandler.italic = !documentHandler.italic
                     Accessible.name: tooltip
                 }
                 PlasmaComponents.ToolButton {
-                    tooltip: i18n("Underline")
+                    tooltip: i18nc("@info:tooltip", "Underline")
                     iconSource: "format-text-underline"
                     checked: documentHandler.underline
                     onClicked: documentHandler.underline = !documentHandler.underline
                     Accessible.name: tooltip
                 }
                 PlasmaComponents.ToolButton {
-                    tooltip: i18n("Strikethrough")
+                    tooltip: i18nc("@info:tooltip", "Strikethrough")
                     iconSource: "format-text-strikethrough"
                     checked: documentHandler.strikeOut
                     onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
@@ -293,15 +293,15 @@ PlasmaCore.SvgItem {
     }
 
     Component.onCompleted: {
-        plasmoid.setAction("change_note_color_white", i18n("White"));
-        plasmoid.setAction("change_note_color_black", i18n("Black"));
-        plasmoid.setAction("change_note_color_red", i18n("Red"));
-        plasmoid.setAction("change_note_color_orange", i18n("Orange"));
-        plasmoid.setAction("change_note_color_yellow", i18n("Yellow"));
-        plasmoid.setAction("change_note_color_green", i18n("Green"));
-        plasmoid.setAction("change_note_color_blue", i18n("Blue"));
-        plasmoid.setAction("change_note_color_pink", i18n("Pink"));
-        plasmoid.setAction("change_note_color_translucent", i18n("Translucent"));
+        plasmoid.setAction("change_note_color_white", i18nc("@item:inmenu", "White"));
+        plasmoid.setAction("change_note_color_black", i18nc("@item:inmenu", "Black"));
+        plasmoid.setAction("change_note_color_red", i18nc("@item:inmenu", "Red"));
+        plasmoid.setAction("change_note_color_orange", i18nc("@item:inmenu", "Orange"));
+        plasmoid.setAction("change_note_color_yellow", i18nc("@item:inmenu", "Yellow"));
+        plasmoid.setAction("change_note_color_green", i18nc("@item:inmenu", "Green"));
+        plasmoid.setAction("change_note_color_blue", i18nc("@item:inmenu", "Blue"));
+        plasmoid.setAction("change_note_color_pink", i18nc("@item:inmenu", "Pink"));
+        plasmoid.setAction("change_note_color_translucent", i18nc("@item:inmenu", "Translucent"));
         plasmoid.setActionSeparator("separator0");
 
         //plasmoid configuration doesn't check before emitting change signal

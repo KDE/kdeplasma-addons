@@ -111,32 +111,32 @@ void ComicApplet::init()
     connect( mActionNextNewStripTab, &QAction::triggered, this, &ComicApplet::showNextNewStrip );
 
     mActionGoFirst = new QAction(QIcon::fromTheme(QStringLiteral("go-first")),
-                                 i18n("Jump to &first Strip"), this);
+                                 i18nc("@action", "Jump to &First Strip"), this);
     mActions.append( mActionGoFirst );
     connect( mActionGoFirst, &QAction::triggered, this, &ComicApplet::slotFirstDay );
 
     mActionGoLast = new QAction(QIcon::fromTheme(QStringLiteral("go-last")),
-                                i18n("Jump to &current Strip"), this);
+                                i18nc("@action", "Jump to &Current Strip"), this);
     mActions.append( mActionGoLast );
     connect( mActionGoLast, &QAction::triggered, this, &ComicApplet::slotCurrentDay );
 
     mActionGoJump = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
-                                i18n("Jump to Strip ..."), this);
+                                i18nc("@action", "Jump to Strip..."), this);
     mActions.append( mActionGoJump );
     connect( mActionGoJump, &QAction::triggered, this, &ComicApplet::slotGoJump );
 
-    mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
+    mActionShop = new QAction(i18nc("@action", "Visit the Shop &Website"), this);
     mActionShop->setEnabled( false );
     mActions.append( mActionShop );
     connect( mActionShop, &QAction::triggered, this, &ComicApplet::slotShop );
 
     QAction *action = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")),
-                                  i18n("&Save Comic As..."), this);
+                                  i18nc("@action", "&Save Comic As..."), this);
     mActions.append( action );
     connect( action, &QAction::triggered, this, &ComicApplet::slotSaveComicAs );
 
     action = new QAction(QIcon::fromTheme(QStringLiteral("application-epub+zip")),
-                         i18n("&Create Comic Book Archive..."), this);
+                         i18nc("@action", "&Create Comic Book Archive..."), this);
     mActions.append( action );
     connect( action, &QAction::triggered, this, &ComicApplet::createComicBook );
 
@@ -246,7 +246,7 @@ void ComicApplet::getNewComics()
     if (!m_newStuffDialog) {
         m_newStuffDialog = new KNS3::DownloadDialog( QStringLiteral("comic.knsrc") );
         KNS3::DownloadDialog *strong = m_newStuffDialog.data();
-        strong->setTitle(i18n("Download Comics"));
+        strong->setTitle(i18nc("@title:window", "Download Comics"));
         connect(m_newStuffDialog.data(), SIGNAL(finished(int)), mEngine, SLOT(loadProviders()));
     }
     m_newStuffDialog.data()->show();

@@ -57,7 +57,7 @@ PlasmaCore.Dialog
             Layout.fillHeight: true
         }
         CheckBox {
-            text: i18n("Don't show this dialog, copy automatically.")
+            text: i18nc("@option:check", "Don't show this dialog, copy automatically.")
             checked: plasmoid.configuration.copyAutomatically
             onClicked: {
                 plasmoid.configuration.copyAutomatically = checked
@@ -65,7 +65,7 @@ PlasmaCore.Dialog
         }
         Button {
             Layout.alignment: Qt.AlignRight
-            text: i18n("Close")
+            text: i18nc("@action:button", "Close")
             onClicked: {
                 window.visible = false
             }

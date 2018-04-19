@@ -115,13 +115,13 @@ ColumnLayout {
             property string link
 
             PlasmaComponents.MenuItem {
-                text: i18n("Open Link in Browser")
+                text: i18nc("@action:inmenu", "Open Link in Browser")
                 icon:  "internet-web-browser"
                 onClicked: Qt.openUrlExternally(linkContextMenu.link)
             }
 
             PlasmaComponents.MenuItem {
-                text: i18n("Copy Link Address")
+                text: i18nc("@action:inmenu", "Copy Link Address")
                 icon: "edit-copy"
                 onClicked: webview.triggerWebAction(WebEngineView.CopyLinkToClipboard)
             }

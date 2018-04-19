@@ -143,7 +143,7 @@ Item {
                 anchors.fill: parent
                 icon: "fork"
                 mainText: i18n("Quicklaunch")
-                subText: i18n("Add launchers by Drag and Drop or by using the context menu.")
+                subText: i18nc("@info", "Add launchers by Drag and Drop or by using the context menu.")
             }
         }
     }
@@ -268,7 +268,7 @@ Item {
         launcherModel.setUrls(plasmoid.configuration.launcherUrls);
         launcherModel.urlsChanged.connect(saveConfiguration);
 
-        plasmoid.setAction("addLauncher", i18n("Add Launcher..."), "list-add");
+        plasmoid.setAction("addLauncher", i18nc("@action", "Add Launcher..."), "list-add");
     }
 
     function action_addLauncher()

@@ -23,7 +23,7 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-         name: i18n("General")
+         name: i18nc("@title", "General")
          icon: "plasma"
          source: "ConfigGeneral.qml"
     }

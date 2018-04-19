@@ -24,7 +24,7 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-         name: i18n("Appearance")
+         name: i18nc("@title", "Appearance")
          icon: "knotes"
          source: "configAppearance.qml"
     }

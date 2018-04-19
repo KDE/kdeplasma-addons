@@ -77,7 +77,7 @@ Item {
 
         PlasmaComponents.Label {
             id: header
-            text: i18n("Konsole Profiles")
+            text: i18nc("@title", "Konsole Profiles")
             horizontalAlignment: Text.AlignHCenter | Text.AlignVCenter
             width: parent.width - appIcon.width * 2
             height: parent.height

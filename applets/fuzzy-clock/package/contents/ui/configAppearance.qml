@@ -58,7 +58,7 @@ Item {
 
             QtLayouts.RowLayout {
                 QtControls.Label {
-                    text: i18n("Accurate")
+                    text: i18nc("@item:inrange", "Accurate")
                 }
 
                 QtControls.Slider {
@@ -71,7 +71,7 @@ Item {
                 }
 
                 QtControls.Label {
-                    text: i18n("Fuzzy")
+                    text: i18nc("@item:inrange", "Fuzzy")
                 }
             }
         }

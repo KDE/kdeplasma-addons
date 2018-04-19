@@ -18,7 +18,7 @@ DictionaryRunnerConfig::DictionaryRunnerConfig(QWidget* parent, const QVariantLi
 {
 	QFormLayout *layout = new QFormLayout;
 	m_triggerWord = new QLineEdit;
-	layout->addRow(i18n("Trigger Word"), m_triggerWord);
+	layout->addRow(i18nc("@label:textbox", "Trigger word:"), m_triggerWord);
 	setLayout(layout);
 	connect(m_triggerWord, SIGNAL(textChanged(QString)), this, SLOT(changed()));
 	load();

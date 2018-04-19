@@ -41,7 +41,7 @@ class ChooseStripNumDialog : public QDialog
         ChooseStripNumDialog(QWidget *parent, int current, int min, int max)
             : QDialog( parent )
         {
-            setWindowTitle(i18n("Go to Strip"));
+            setWindowTitle(i18nc("@title:window", "Go to Strip"));
 
             QVBoxLayout *topLayout = new QVBoxLayout(this);
             topLayout->setMargin(0);
@@ -49,7 +49,7 @@ class ChooseStripNumDialog : public QDialog
             numInput->setRange(min, max);
             numInput->setValue(current);
 
-            QLabel *label = new QLabel(i18n("&Strip Number:"), this);
+            QLabel *label = new QLabel(i18nc("@label:spinbox", "&Strip number:"), this);
             label->setBuddy(numInput);
             topLayout->addWidget(label);
             topLayout->addWidget(numInput) ;
@@ -111,7 +111,8 @@ StringStripSelector::~StringStripSelector()
 void StringStripSelector::select(const ComicData &currentStrip)
 {
     bool ok;
-    const QString strip = QInputDialog::getText(nullptr, i18n("Go to Strip"), i18n("Strip identifier:"), QLineEdit::Normal,
+    const QString strip = QInputDialog::getText(nullptr, i18nc("@title:window", "Go to Strip"),
+                                                i18nc("@label:textbox", "Strip identifier:"), QLineEdit::Normal,
                                                  currentStrip.current(), &ok);
     if (ok) {
         emit stripChosen(strip);
