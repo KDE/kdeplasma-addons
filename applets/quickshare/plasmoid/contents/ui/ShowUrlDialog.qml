@@ -64,7 +64,7 @@ PlasmaCore.Dialog
             }
         }
         Button {
-            anchors.right: parent.right
+            Layout.alignment: Qt.AlignRight
             text: i18n("Close")
             onClicked: {
                 window.visible = false

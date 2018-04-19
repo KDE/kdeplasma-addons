@@ -74,7 +74,7 @@ PlasmaCore.Dialog
                     }
                     PlasmaComponents.Button {
                         id: button
-                        anchors.verticalCenter: parent.verticalCenter
+                        Layout.alignment: Qt.AlignVCenter
                         iconSource: "arrow-right"
                         onClicked: view.createJob(index)
                     }
