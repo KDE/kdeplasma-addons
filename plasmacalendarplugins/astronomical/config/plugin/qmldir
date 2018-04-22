@@ -1,0 +1,3 @@
+module org.kde.plasmacalendar.astronomicaleventsconfig
+
+plugin plasmacalendarastronomicaleventsconfig

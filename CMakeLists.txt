@@ -39,6 +39,8 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Archive
     Config
     CoreAddons
+    Declarative
+    Holidays
     I18n
     IconThemes
     KIO
@@ -85,6 +87,8 @@ add_subdirectory(wallpapers)
 
 add_subdirectory(windowswitchers)
 add_subdirectory(desktopswitchers)
+
+add_subdirectory(plasmacalendarplugins)
 
 add_subdirectory(templates)
 

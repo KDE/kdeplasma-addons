@@ -1,0 +1,10 @@
+{
+    "Name": "Astronomical Events",
+    "Description": "Calendar plugin for displaying astronomical events",
+    "Icon": "globe",
+    "ConfigUi": "astronomicalevents/AstronomicalEventsConfig.qml",
+    "Authors": {
+        "Name": "Friedrich W. H. Kossebau",
+        "Email": "kossebau@kde.org"
+    }
+}
