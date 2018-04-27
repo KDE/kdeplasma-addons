@@ -48,6 +48,7 @@ QtLayouts.ColumnLayout {
             }
             QtLayouts.RowLayout {
                 QtControls.Label {
+                    enabled: showTitle.checked
                     text: i18nc("@label:textbox", "Title:")
                 }
                 QtControls.TextField {
@@ -81,6 +82,7 @@ QtLayouts.ColumnLayout {
             }
             QtLayouts.RowLayout {
                 QtControls.Label {
+                    enabled: showNotification.checked
                     text: i18nc("@label:textbox", "Text:")
                 }
                 QtControls.TextField {

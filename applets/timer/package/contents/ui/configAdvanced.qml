@@ -45,6 +45,7 @@ QtLayouts.ColumnLayout {
 
             QtLayouts.RowLayout {
                 QtControls.Label {
+                    enabled: runCommand.checked
                     text: i18nc("@label:textbox", "Command:")
                 }
                 QtControls.TextField {
