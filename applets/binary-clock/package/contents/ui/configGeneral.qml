@@ -50,7 +50,7 @@ QtControls.GroupBox {
         }
         QtControls.CheckBox {
             id: showOffLedsCheckBox
-            text: i18nc("@option:check", "Show inactive LEDs:")
+            text: i18nc("@option:check", "Show inactive LEDs")
         }
         QtControls.CheckBox {
             id: showSecondsCheckBox
