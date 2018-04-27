@@ -2,6 +2,7 @@
 Name=Keyboard Indicator
 Name[ca]=Indicador de teclat
 Name[ca@valencia]=Indicador de teclat
+Name[cs]=Indikátor klávesnice
 Name[de]=Tastaturstatus
 Name[en_GB]=Keyboard Indicator
 Name[es]=Indicador del teclado
@@ -21,6 +22,7 @@ Name[zh_TW]=鍵盤指示符號
 Comment=Shows the state of the keyboard
 Comment[ca]=Mostra l'estat del teclat
 Comment[ca@valencia]=Mostra l'estat del teclat
+Comment[cs]=Ukazuje stav klávesnice
 Comment[de]=Zeigt den Status der Tastatur an
 Comment[en_GB]=Shows the state of the keyboard
 Comment[es]=Muestra el estado del teclado
