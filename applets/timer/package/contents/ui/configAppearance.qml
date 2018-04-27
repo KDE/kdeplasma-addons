@@ -45,6 +45,11 @@ QtLayouts.ColumnLayout {
             QtControls.CheckBox {
                 id: showTitle
                 text: i18nc("@option:check", "Show title");
+                onClicked: {
+                    if (checked) {
+                        title.forceActiveFocus();
+                    }
+                }
             }
             QtLayouts.RowLayout {
                 QtControls.Label {
@@ -79,6 +84,11 @@ QtLayouts.ColumnLayout {
             QtControls.CheckBox {
                 id: showNotification
                 text: i18nc("@option:check", "Show notification");
+                onClicked: {
+                    if (checked) {
+                        notificationText.forceActiveFocus();
+                    }
+                }
             }
             QtLayouts.RowLayout {
                 QtControls.Label {

@@ -41,6 +41,11 @@ QtLayouts.ColumnLayout {
             QtControls.CheckBox {
                 id: runCommand
                 text: i18nc("@option:check", "Execute command")
+                onClicked: {
+                    if (checked) {
+                        command.forceActiveFocus();
+                    }
+                }
             }
 
             QtLayouts.RowLayout {
