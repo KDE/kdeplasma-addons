@@ -41,9 +41,11 @@ ColumnLayout {
     GroupBox {
         id: setColorsManuallyGroupBox
         Layout.fillWidth: true
+        flat: true
+
         title: i18nc("@option:check", "Set Colors Manually")
         checkable: true
-        flat: true
+
         GridLayout {
             columns: 2
 

@@ -22,7 +22,7 @@ import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.0
 
-Item {
+ColumnLayout {
     id: generalSettings
 
     property alias cfg_cpuActivated: cpuActivatedCheckBox.checked
@@ -32,9 +32,6 @@ Item {
     property alias cfg_cacheActivated: cacheActivatedCheckBox.checked
     property alias cfg_updateInterval: updateIntervalSpinBox.value
     property int cfg_monitorType: plasmoid.configuration.monitorType
-
-    height: layout.implicitHeight
-    width: layout.implicitWidth
 
     onCfg_monitorTypeChanged: {
         switch (cfg_monitorType) {
@@ -49,24 +46,26 @@ Item {
     }
 
     GridLayout {
-        id: layout
-
         columns: 2
 
         Label {
-            text: i18nc("@label", "Show:")
+            Layout.row: 0
+            Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            Layout.rowSpan: 5
-            anchors.verticalCenter: cpuActivatedCheckBox.verticalCenter
+            text: i18nc("@label", "Show:")
         }
 
         CheckBox {
             id: cpuActivatedCheckBox
+            Layout.row: 0
+            Layout.column: 1
             text: i18nc("@option:check", "CPU monitor")
             onCheckedChanged: if (!checked) {cpuAllActivatedCheckBox.checked = false;}
         }
 
         Row {
+            Layout.row: 1
+            Layout.column: 1
             Item { height: 1; width: 50; }
             CheckBox {
                 id: cpuAllActivatedCheckBox
@@ -77,28 +76,36 @@ Item {
 
         CheckBox {
             id: memoryActivatedCheckBox
+            Layout.row: 2
+            Layout.column: 1
             text: i18nc("@option:check", "Memory monitor")
         }
 
         CheckBox {
             id: swapActivatedCheckBox
+            Layout.row: 3
+            Layout.column: 1
             text: i18nc("@option:check", "Swap monitor")
         }
 
         CheckBox {
             id: cacheActivatedCheckBox
+            Layout.row: 4
+            Layout.column: 1
             text: i18nc("@option:check", "Cache monitor")
         }
 
         Label {
-            text: i18nc("@label", "Monitor type:")
+            Layout.row: 5
+            Layout.column: 0
             Layout.alignment: Qt.AlignRight
-            Layout.rowSpan: 3
-            anchors.verticalCenter: barMonitorRadio.verticalCenter
+            text: i18nc("@label", "Monitor type:")
         }
 
         RadioButton {
             id: barMonitorRadio
+            Layout.row: 5
+            Layout.column: 1
             exclusiveGroup: monitorTypeGroup
             text: i18nc("@option:radio", "Bar")
             onCheckedChanged: if (checked) {cfg_monitorType = 0; cpuAllActivatedCheckBox.checked = false;}
@@ -106,6 +113,8 @@ Item {
 
         RadioButton {
             id: circularMonitorRadio
+            Layout.row: 6
+            Layout.column: 1
             exclusiveGroup: monitorTypeGroup
             text: i18nc("@option:radio", "Circular")
             onCheckedChanged: if (checked) {cfg_monitorType = 1; cpuAllActivatedCheckBox.checked = false;}
@@ -113,23 +122,34 @@ Item {
 
         RadioButton {
             id: compactBarMonitorRadio
+            Layout.row: 7
+            Layout.column: 1
             exclusiveGroup: monitorTypeGroup
             text: i18nc("@option:radio", "Compact bar")
             onCheckedChanged: if (checked) cfg_monitorType = 2;
         }
 
         Label {
-            text: i18nc("@label:spinbox", "Update interval:")
+            Layout.row: 8
+            Layout.column: 0
             Layout.alignment: Qt.AlignRight
+            text: i18nc("@label:spinbox", "Update interval:")
         }
 
         SpinBox {
             id: updateIntervalSpinBox
+            Layout.row: 8
+            Layout.column: 1
             decimals: 1
             stepSize: 0.1
             minimumValue: 0.1
             suffix: i18nc("spacing to number + unit (seconds)", " s")
         }
+    }
+
+
+    Item { // tighten layout
+        Layout.fillHeight: true
     }
 
     Component.onCompleted: cfg_monitorTypeChanged()

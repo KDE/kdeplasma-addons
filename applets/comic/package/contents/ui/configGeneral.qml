@@ -23,10 +23,8 @@ import QtQuick.Layouts 1.1 as Layouts
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 
-Item {
+Layouts.ColumnLayout {
     id: root
-    width: childrenRect.width
-    height: childrenRect.height
 
     signal configurationChanged
 
@@ -54,83 +52,83 @@ Item {
         providerUpdateInterval.value = plasmoid.nativeInterface.providerUpdateInterval
     }
 
-    Layouts.ColumnLayout {
-        id: mainColumn
+    Controls.GroupBox {
+        Layouts.Layout.fillWidth: true
+        flat: true
 
-        Controls.GroupBox {
-            Layouts.Layout.fillWidth: true
+        title: i18nc("@title:group", "Comic")
 
-            title: i18nc("@title:group", "Comic")
-            flat: true
-
+        Layouts.ColumnLayout {
             Layouts.ColumnLayout {
-                Layouts.ColumnLayout {
-                    id: providerColumn
-                    Repeater {
-                        model: plasmoid.nativeInterface.availableComicsModel
-                        delegate: Controls.CheckBox {
-                            id: checkbox
-                            text: model.display
-                            checked: model.checked
-                            property string plugin: model.plugin
-                            Component.onCompleted: {
-                                checkbox.checked = plasmoid.nativeInterface.tabIdentifiers.indexOf(model.plugin) !== -1
-                            }
-                            onCheckedChanged: root.configurationChanged();
+                id: providerColumn
+                Repeater {
+                    model: plasmoid.nativeInterface.availableComicsModel
+                    delegate: Controls.CheckBox {
+                        id: checkbox
+                        text: model.display
+                        checked: model.checked
+                        property string plugin: model.plugin
+                        Component.onCompleted: {
+                            checkbox.checked = plasmoid.nativeInterface.tabIdentifiers.indexOf(model.plugin) !== -1
                         }
-                    }
-                }
-                Item {
-                    Layouts.Layout.fillWidth: true
-                    Layouts.Layout.fillHeight: true
-                    Layouts.Layout.minimumHeight: units.gridUnit * 2
-                }
-                Controls.Button {
-                    iconName: "get-hot-new-stuff"
-                    text: i18nc("@action:button", "Get New Comics...")
-                    onClicked: plasmoid.nativeInterface.getNewComics();
-                }
-                Controls.CheckBox {
-                    id: middleClickCheckBox
-                    text: i18nc("@option:check", "Middle-click on the comic to show it at its original size")
-                    onCheckedChanged: root.configurationChanged();
-                }
-            }
-        }
-        Controls.GroupBox {
-            Layouts.Layout.fillWidth: true
-
-            title: i18nc("@title:group", "Update")
-            flat: true
-
-            Layouts.ColumnLayout {
-                Layouts.RowLayout {
-                    Layouts.Layout.alignment: Qt.AlignRight
-                    Controls.Label {
-                        text: i18nc("@label:spinbox", "Automatically update comic plugins:")
-                    }
-                    Controls.SpinBox {
-                        id: providerUpdateInterval
-                        Layouts.Layout.minimumWidth: units.gridUnit * 8
-                        suffix: i18nc("spacing to number + unit", " days")
-                        stepSize: 1
-                        onValueChanged: root.configurationChanged();
-                    }
-                }
-                Layouts.RowLayout {
-                    Layouts.Layout.alignment: Qt.AlignRight
-                    Controls.Label {
-                        text: i18nc("@label:spinbox", "Check for new comic strips:")
-                    }
-                    Controls.SpinBox {
-                        id: checkNewComicStripsInterval
-                        Layouts.Layout.minimumWidth: units.gridUnit * 8
-                        suffix: i18nc("spacing to number + unit (minutes)", " min")
-                        stepSize: 1
-                        onValueChanged: root.configurationChanged();
+                        onCheckedChanged: root.configurationChanged();
                     }
                 }
             }
+            Item {
+                Layouts.Layout.fillWidth: true
+                Layouts.Layout.fillHeight: true
+                Layouts.Layout.minimumHeight: units.gridUnit * 2
+            }
+            Controls.Button {
+                iconName: "get-hot-new-stuff"
+                text: i18nc("@action:button", "Get New Comics...")
+                onClicked: plasmoid.nativeInterface.getNewComics();
+            }
+            Controls.CheckBox {
+                id: middleClickCheckBox
+                text: i18nc("@option:check", "Middle-click on the comic to show it at its original size")
+                onCheckedChanged: root.configurationChanged();
+            }
         }
+    }
+    Controls.GroupBox {
+        Layouts.Layout.fillWidth: true
+        flat: true
+
+        title: i18nc("@title:group", "Update")
+
+        Layouts.ColumnLayout {
+            Layouts.RowLayout {
+                Layouts.Layout.alignment: Qt.AlignRight
+                Controls.Label {
+                    text: i18nc("@label:spinbox", "Automatically update comic plugins:")
+                }
+                Controls.SpinBox {
+                    id: providerUpdateInterval
+                    Layouts.Layout.minimumWidth: units.gridUnit * 8
+                    suffix: i18nc("spacing to number + unit", " days")
+                    stepSize: 1
+                    onValueChanged: root.configurationChanged();
+                }
+            }
+            Layouts.RowLayout {
+                Layouts.Layout.alignment: Qt.AlignRight
+                Controls.Label {
+                    text: i18nc("@label:spinbox", "Check for new comic strips:")
+                }
+                Controls.SpinBox {
+                    id: checkNewComicStripsInterval
+                    Layouts.Layout.minimumWidth: units.gridUnit * 8
+                    suffix: i18nc("spacing to number + unit (minutes)", " min")
+                    stepSize: 1
+                    onValueChanged: root.configurationChanged();
+                }
+            }
+        }
+    }
+
+    Item {
+        Layouts.Layout.fillHeight: true
     }
 }

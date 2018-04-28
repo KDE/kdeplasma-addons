@@ -31,8 +31,10 @@ ColumnLayout {
     property alias cfg_showTechnicalInfo: showTechnicalInfoCheck.checked
 
     QtControls.GroupBox {
-        title: i18nc("@title:group", "Username Display")
+        Layout.fillWidth: true
         flat: true
+
+        title: i18nc("@title:group", "Username Display")
 
         QtControls.ExclusiveGroup {
             id: nameEg
@@ -58,8 +60,10 @@ ColumnLayout {
     }
 
     QtControls.GroupBox {
-        title: i18nc("@title:group", "Layout")
+        Layout.fillWidth: true
         flat: true
+
+        title: i18nc("@title:group", "Layout")
 
         QtControls.ExclusiveGroup {
             id: layoutEg

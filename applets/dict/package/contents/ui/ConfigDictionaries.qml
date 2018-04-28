@@ -22,7 +22,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.private.dict 1.0
 
-Item {
+ColumnLayout {
     id: root
 
     property string cfg_dictionary: ""
@@ -35,51 +35,46 @@ Item {
         id: syspal
     }
 
-    ColumnLayout {
-        width: parent.width
-        height: parent.height
+    Label {
+        Layout.fillWidth: true
+        text: i18nc("@label:listbox", "Available dictionaries:")
+    }
 
-        Label {
-            Layout.fillWidth: true
-            text: i18nc("@label:listbox", "Available dictionaries:")
-        }
+    ScrollView {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
 
-        ScrollView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+        frameVisible: true
 
-            frameVisible: true
+        ListView {
+            width: parent.width
+            model: dictionariesModel
 
-            ListView {
+            delegate: Item {
                 width: parent.width
-                model: dictionariesModel
+                height: pathText.height
+                Rectangle {
+                    id: highlight
+                    anchors.fill: parent
+                    visible: model.id == root.cfg_dictionary
+                    color: syspal.highlight
+                }
 
-                delegate: Item {
-                    width: parent.width
-                    height: pathText.height
-                    Rectangle {
-                        id: highlight
-                        anchors.fill: parent
-                        visible: model.id == root.cfg_dictionary
-                        color: syspal.highlight
-                    }
+                RowLayout {
+                    id: textLayout
+                    anchors.fill: parent
 
-                    RowLayout {
-                        id: textLayout
-                        anchors.fill: parent
-
-                        /*Text { text: model.id }*/
-                        Text {
-                            id: pathText
-                            Layout.fillWidth: true
-                            text: model.description
-                            color: model.id == root.cfg_dictionary ? syspal.highlightedText : syspal.text
-                        }
+                    /*Text { text: model.id }*/
+                    Text {
+                        id: pathText
+                        Layout.fillWidth: true
+                        text: model.description
+                        color: model.id == root.cfg_dictionary ? syspal.highlightedText : syspal.text
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: root.cfg_dictionary = model.id
-                    }
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: root.cfg_dictionary = model.id
                 }
             }
         }

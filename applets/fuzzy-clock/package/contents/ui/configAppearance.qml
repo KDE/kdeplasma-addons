@@ -24,56 +24,62 @@ import QtQuick 2.0
 import QtQuick.Controls 1.2 as QtControls
 import QtQuick.Layouts 1.0 as QtLayouts
 
-Item {
+QtLayouts.ColumnLayout {
     id: appearancePage
-    width: childrenRect.width
-    height: childrenRect.height
 
     property alias cfg_boldText: boldCheckBox.checked
     property alias cfg_italicText: italicCheckBox.checked
 
     property alias cfg_fuzzyness: fuzzyness.value
 
-    QtLayouts.ColumnLayout {
-        QtControls.GroupBox {
-            title: i18nc("@title:group", "Appearance")
-            flat: true
+    QtControls.GroupBox {
+        QtLayouts.Layout.fillWidth: true
+        flat: true
 
-            QtLayouts.ColumnLayout {
-                QtControls.CheckBox {
-                    id: boldCheckBox
-                    text: i18nc("@option:check", "Bold text")
-                }
+        title: i18nc("@title:group", "Font")
 
-                QtControls.CheckBox {
-                    id: italicCheckBox
-                    text: i18nc("@option:check", "Italic text")
-                }
+        QtLayouts.ColumnLayout {
+            QtControls.CheckBox {
+                id: boldCheckBox
+                text: i18nc("@option:check", "Bold text")
+            }
+
+            QtControls.CheckBox {
+                id: italicCheckBox
+                text: i18nc("@option:check", "Italic text")
             }
         }
+    }
 
-        QtControls.GroupBox {
-            title: i18nc("@title:group", "Fuzzyness")
-            flat: true
+    QtControls.GroupBox {
+        QtLayouts.Layout.fillWidth: true
+        flat: true
 
-            QtLayouts.RowLayout {
-                QtControls.Label {
-                    text: i18nc("@item:inrange", "Accurate")
-                }
+        title: i18nc("@title:group", "Fuzzyness")
 
-                QtControls.Slider {
-                    id: fuzzyness
-                    QtLayouts.Layout.fillWidth: true
-                    minimumValue: 1
-                    maximumValue: 5
-                    stepSize: 1
-                    tickmarksEnabled: true
-                }
+        QtLayouts.RowLayout {
+            anchors.fill: parent
 
-                QtControls.Label {
-                    text: i18nc("@item:inrange", "Fuzzy")
-                }
+            QtControls.Label {
+                text: i18nc("@item:inrange", "Accurate")
+            }
+
+            QtControls.Slider {
+                id: fuzzyness
+                QtLayouts.Layout.fillWidth: true
+                minimumValue: 1
+                maximumValue: 5
+                stepSize: 1
+                tickmarksEnabled: true
+            }
+
+            QtControls.Label {
+                text: i18nc("@item:inrange", "Fuzzy")
             }
         }
+    }
+
+    Item { // tighten layout
+        QtLayouts.Layout.fillHeight: true
     }
 }

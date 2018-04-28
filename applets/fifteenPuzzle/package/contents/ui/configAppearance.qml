@@ -27,10 +27,8 @@ import QtQuick.Layouts 1.0 as QtLayouts
 import QtQuick.Dialogs 1.2 as QtDialogs
 import org.kde.kquickcontrols 2.0 as KQC
 
-Item {
+QtLayouts.ColumnLayout {
     id: appearancePage
-    width: childrenRect.width
-    height: childrenRect.height
 
     property alias cfg_boardSize: sizeSpinBox.value
     property alias cfg_boardColor: pieceColorPicker.color
@@ -40,91 +38,81 @@ Item {
     property alias cfg_useImage: useImageCheckBox.checked
     property alias cfg_imagePath: imagePathTextField.text
 
-    QtLayouts.ColumnLayout {
-        QtControls.GroupBox {
-            title: i18nc("@title:group", "Appearance")
-            flat: true
+    QtLayouts.GridLayout {
+        columns: 2
 
-            QtLayouts.GridLayout {
-                columns: 2
-                anchors.left: parent.left
-                anchors.leftMargin: units.largeSpacing
+        QtControls.Label {
+            text: i18nc("@label:spinbox", "Size:")
+            QtLayouts.Layout.alignment: Qt.AlignRight
+        }
 
-                QtControls.ExclusiveGroup {
-                    id: plainPiecesGroup
-                }
+        QtControls.SpinBox {
+            id: sizeSpinBox
+        }
 
-                QtControls.Label {
-                    text: i18nc("@label:spinbox", "Size:")
-                    QtLayouts.Layout.alignment: Qt.AlignRight
-                }
+        QtControls.Label {
+            text: i18nc("@label:chooser", "Piece color:")
+            QtLayouts.Layout.alignment: Qt.AlignRight
+        }
 
-                QtControls.SpinBox {
-                    id: sizeSpinBox
-                }
+        KQC.ColorButton {
+            id: pieceColorPicker
+        }
 
-                QtControls.Label {
-                    text: i18nc("@label:chooser", "Piece color:")
-                    QtLayouts.Layout.alignment: Qt.AlignRight
-                }
+        QtControls.Label {
+            text: i18nc("@label:chooser", "Number color:")
+            QtLayouts.Layout.alignment: Qt.AlignRight
+        }
 
-                KQC.ColorButton {
-                    id: pieceColorPicker
-                }
+        KQC.ColorButton {
+            id: numberColorPicker
+        }
 
-                QtControls.Label {
-                    text: i18nc("@label:chooser", "Number color:")
-                    QtLayouts.Layout.alignment: Qt.AlignRight
-                }
+        QtControls.CheckBox {
+            id: useImageCheckBox
+            text: i18nc("@option:check", "Use custom image")
+            QtLayouts.Layout.alignment: Qt.AlignRight
+        }
 
-                KQC.ColorButton {
-                    id: numberColorPicker
-                }
+        QtLayouts.RowLayout {
+            QtControls.TextField {
+                id: imagePathTextField
+                QtLayouts.Layout.fillWidth: true
+                placeholderText: i18n("Path to custom image")
+                onTextChanged: useImageCheckBox.checked = true
+            }
 
-                QtControls.CheckBox {
-                    id: useImageCheckBox
-                    text: i18nc("@option:check", "Use custom image")
-                    QtLayouts.Layout.alignment: Qt.AlignRight
-                }
+            QtControls.Button {
+                iconName: "document-open"
+                tooltip: i18nc("@info:tooltip", "Browse...")
 
-                QtLayouts.RowLayout {
-                    QtControls.TextField {
-                        id: imagePathTextField
-                        QtLayouts.Layout.fillWidth: true
-                        QtLayouts.Layout.minimumWidth: units.gridUnit * 10
-                        placeholderText: i18n("Path to custom image")
-                        onTextChanged: useImageCheckBox.checked = true
+                onClicked: imagePicker.open()
+
+                QtDialogs.FileDialog {
+                    id: imagePicker
+
+                    title: i18nc("@title:window", "Choose an Image")
+
+                    folder: shortcuts.pictures
+
+                    // TODO ask QImageReader for supported formats
+                    nameFilters: [ i18n("Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)") ]
+
+                    onFileUrlChanged: {
+                        imagePathTextField.text = fileUrl.toString().replace("file://", "")
                     }
-
-                    QtControls.Button {
-                        iconName: "document-open"
-                        tooltip: i18nc("@info:tooltip", "Browse...")
-
-                        onClicked: imagePicker.open()
-
-                        QtDialogs.FileDialog {
-                            id: imagePicker
-
-                            title: i18nc("@title:window", "Choose an Image")
-
-                            folder: shortcuts.pictures
-
-                            // TODO ask QImageReader for supported formats
-                            nameFilters: [ i18n("Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)") ]
-
-                            onFileUrlChanged: {
-                                imagePathTextField.text = fileUrl.toString().replace("file://", "")
-                            }
-                        }
-                    }
-                }
-
-                QtControls.CheckBox {
-                    id: showNumeralsCheckBox
-                    QtLayouts.Layout.columnSpan: 2
-                    text: i18nc("@option:check", "Show numerals")
                 }
             }
         }
+
+        QtControls.CheckBox {
+            id: showNumeralsCheckBox
+            QtLayouts.Layout.columnSpan: 2
+            text: i18nc("@option:check", "Show numerals")
+        }
+    }
+
+    Item { // tighten layout
+        QtLayouts.Layout.fillHeight: true
     }
 }

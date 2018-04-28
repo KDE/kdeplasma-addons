@@ -23,10 +23,8 @@ import QtQuick.Layouts 1.1 as Layouts
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 
-Item {
+Layouts.ColumnLayout {
     id: root
-    width: childrenRect.width
-    height: childrenRect.height
 
     signal configurationChanged
 
@@ -49,51 +47,53 @@ Item {
         showUrl.checked = plasmoid.nativeInterface.showComicUrl;
     }
 
-    Layouts.ColumnLayout {
-        id: mainColumn
 
-        Controls.GroupBox {
-            Layouts.Layout.fillWidth: true
+    Controls.GroupBox {
+        Layouts.Layout.fillWidth: true
+        flat: true
 
-            title: i18nc("@title:group", "Appearance")
-            flat: true
+        title: i18nc("@title:group", "Navigation")
 
-            Layouts.ColumnLayout {
-                Controls.CheckBox {
-                    id: showArrowsOnOver
-                    text: i18nc("@option:check", "Show arrows only on mouse-over")
-                    onCheckedChanged: root.configurationChanged();
-                }
+        Layouts.ColumnLayout {
+            Controls.CheckBox {
+                id: showArrowsOnOver
+                text: i18nc("@option:check", "Show arrows only on mouse-over")
+                onCheckedChanged: root.configurationChanged();
             }
         }
-        Controls.GroupBox {
-            Layouts.Layout.fillWidth: true
+    }
 
-            title: i18nc("@title:group", "Information")
-            flat: true
+    Controls.GroupBox {
+        Layouts.Layout.fillWidth: true
+        flat: true
 
-            Layouts.ColumnLayout {
-                Controls.CheckBox {
-                    id: showComicTitle
-                    text: i18nc("@option:check", "Show comic title")
-                    onCheckedChanged: root.configurationChanged();
-                }
-                Controls.CheckBox {
-                    id: showIdentifier
-                    text: i18nc("@option:check", "Show comic identifier")
-                    onCheckedChanged: root.configurationChanged();
-                }
-                Controls.CheckBox {
-                    id: showAuthor
-                    text: i18nc("@option:check", "Show comic author")
-                    onCheckedChanged: root.configurationChanged();
-                }
-                Controls.CheckBox {
-                    id: showUrl
-                    text: i18nc("@option:check", "Show comic URL")
-                    onCheckedChanged: root.configurationChanged();
-                }
+        title: i18nc("@title:group", "Information")
+
+        Layouts.ColumnLayout {
+            Controls.CheckBox {
+                id: showComicTitle
+                text: i18nc("@option:check", "Show comic title")
+                onCheckedChanged: root.configurationChanged();
+            }
+            Controls.CheckBox {
+                id: showIdentifier
+                text: i18nc("@option:check", "Show comic identifier")
+                onCheckedChanged: root.configurationChanged();
+            }
+            Controls.CheckBox {
+                id: showAuthor
+                text: i18nc("@option:check", "Show comic author")
+                onCheckedChanged: root.configurationChanged();
+            }
+            Controls.CheckBox {
+                id: showUrl
+                text: i18nc("@option:check", "Show comic URL")
+                onCheckedChanged: root.configurationChanged();
             }
         }
+    }
+
+    Item {
+        Layouts.Layout.fillHeight: true
     }
 }

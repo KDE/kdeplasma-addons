@@ -23,9 +23,7 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-Item {
-    width: childrenRect.width
-    height: childrenRect.height
+ColumnLayout {
 
     property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical || (plasmoid.formFactor == PlasmaCore.Types.Planar && plasmoid.height > plasmoid.width)
 
@@ -34,72 +32,76 @@ Item {
     property alias cfg_enablePopup: enablePopup.checked
     property alias cfg_title: title.text
 
-    ColumnLayout {
-        GroupBox {
-            Layout.fillWidth: true
+    GroupBox {
+        Layout.fillWidth: true
+        flat: true
 
-            flat: true
-            title: i18nc("@title:group", "Arrangement")
+        title: i18nc("@title:group", "Arrangement")
 
-            RowLayout {
-                Label {
-                    text: vertical ? i18nc("@label:spinbox", "Maximum columns:") : i18nc("@label:spinbox", "Maximum rows:")
-                }
+        RowLayout {
+            Label {
+                text: vertical ? i18nc("@label:spinbox", "Maximum columns:") : i18nc("@label:spinbox", "Maximum rows:")
+            }
 
-                SpinBox {
-                    id: maxSectionCount
-                    minimumValue: 1
-                }
+            SpinBox {
+                id: maxSectionCount
+                minimumValue: 1
             }
         }
+    }
 
-        GroupBox {
-            Layout.fillWidth: true
+    GroupBox {
+        Layout.fillWidth: true
+        flat: true
 
-            flat: true
-            title: i18nc("@title:group", "Appearance")
+        title: i18nc("@title:group", "Appearance")
 
-            ColumnLayout {
-                CheckBox {
-                    id: showLauncherNames
-                    text: i18nc("@option:check", "Show launcher names")
-                }
+        ColumnLayout {
+            CheckBox {
+                id: showLauncherNames
+                text: i18nc("@option:check", "Show launcher names")
+            }
 
-                CheckBox {
-                    id: enablePopup
-                    text: i18nc("@option:check", "Enable popup")
-                }
+            CheckBox {
+                id: enablePopup
+                text: i18nc("@option:check", "Enable popup")
             }
         }
+    }
 
-        GroupBox {
-            Layout.fillWidth: true
+    GroupBox {
+        Layout.fillWidth: true
+        flat: true
 
-            flat: true
-            title: i18nc("@title:group", "Title")
-            visible: plasmoid.formFactor == PlasmaCore.Types.Planar
+        title: i18nc("@title:group", "Title")
+        visible: plasmoid.formFactor == PlasmaCore.Types.Planar
 
-            ColumnLayout {
-                CheckBox {
-                    id: showTitle
-                    checked: title.activeFocus || title.length
-                    text: i18nc("@option:check", "Show title")
+        RowLayout {
+            anchors.fill: parent
+            CheckBox {
+                id: showTitle
+                checked: title.activeFocus || title.length
+                text: i18nc("@option:check", "Show title")
 
-                    onClicked: {
-                        if (checked) {
-                            title.forceActiveFocus();
-                        } else {
-                            title.text = "";
-                        }
+                onClicked: {
+                    if (checked) {
+                        title.forceActiveFocus();
+                    } else {
+                        title.text = "";
                     }
                 }
+            }
 
-                TextField {
-                    id: title
-                    enabled: showTitle.checked
-                    placeholderText: i18n("Enter title")
-                }
+            TextField {
+                id: title
+                Layout.fillWidth: true
+                enabled: showTitle.checked
+                placeholderText: i18n("Enter title")
             }
         }
+    }
+
+    Item { // tighten layout
+        Layout.fillHeight: true
     }
 }

@@ -33,11 +33,11 @@ QtLayouts.ColumnLayout {
 
     QtControls.GroupBox {
         id: displayGroup
-        title: i18nc("@title:group", "Display")
 
         QtLayouts.Layout.fillWidth: true
-        QtLayouts.Layout.alignment: Qt.AlignTop
         flat: true
+
+        title: i18nc("@title:group", "Display")
 
         QtLayouts.ColumnLayout {
             anchors.fill: parent
@@ -72,11 +72,11 @@ QtLayouts.ColumnLayout {
 
     QtControls.GroupBox {
         id: notificationGroup
-        title: i18nc("@title:group", "Notifications")
 
         QtLayouts.Layout.fillWidth: true
-        anchors.top: displayGroup.bottom
         flat: true
+
+        title: i18nc("@title:group", "Notifications")
 
         QtLayouts.ColumnLayout {
             anchors.fill: parent
@@ -102,6 +102,10 @@ QtLayouts.ColumnLayout {
                 }
             }
         }
+    }
+
+    Item { // tighten layout
+        QtLayouts.Layout.fillHeight: true
     }
 }
 

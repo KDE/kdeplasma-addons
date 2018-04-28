@@ -23,10 +23,8 @@ import QtQuick.Layouts 1.1 as Layouts
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 
-Item {
+Layouts.ColumnLayout {
     id: root
-    width: childrenRect.width
-    height: childrenRect.height
 
     signal configurationChanged
 
@@ -43,43 +41,42 @@ Item {
         maxComicLimit.value = plasmoid.nativeInterface.maxComicLimit;
     }
 
+    Controls.GroupBox {
+        Layouts.Layout.fillWidth: true
+        flat: true
 
-    Layouts.ColumnLayout {
-        id: mainColumn
+        title: i18nc("@title:group", "Cache")
 
-        Controls.GroupBox {
-            Layouts.Layout.fillWidth: true
-
-            title: i18nc("@title:group", "Cache")
-            flat: true
-
-            Layouts.RowLayout {
-                Layouts.Layout.alignment: Qt.AlignRight
-                Controls.Label {
-                    text: i18nc("@label:spinbox", "Comic cache:")
-                }
-                Controls.SpinBox {
-                    id: maxComicLimit
-                    Layouts.Layout.minimumWidth: units.gridUnit * 8
-                    suffix: i18nc("spacing to number + unit", " strips per comic")
-                    stepSize: 1
-                    onValueChanged: root.configurationChanged();
-                }
+        Layouts.RowLayout {
+            Layouts.Layout.alignment: Qt.AlignRight
+            Controls.Label {
+                text: i18nc("@label:spinbox", "Comic cache:")
+            }
+            Controls.SpinBox {
+                id: maxComicLimit
+                Layouts.Layout.minimumWidth: units.gridUnit * 8
+                suffix: i18nc("spacing to number + unit", " strips per comic")
+                stepSize: 1
+                onValueChanged: root.configurationChanged();
             }
         }
-        Controls.GroupBox {
-            Layouts.Layout.fillWidth: true
+    }
+    Controls.GroupBox {
+        Layouts.Layout.fillWidth: true
+        flat: true
 
-            title: i18nc("@title:group", "Error Handling")
-            flat: true
+        title: i18nc("@title:group", "Error Handling")
 
-            Layouts.ColumnLayout {
-                Controls.CheckBox {
-                    id: showErrorPicture
-                    text: i18nc("@option:check", "Display error when getting comic failed")
-                    onCheckedChanged: root.configurationChanged();
-                }
+        Layouts.ColumnLayout {
+            Controls.CheckBox {
+                id: showErrorPicture
+                text: i18nc("@option:check", "Display error when getting comic failed")
+                onCheckedChanged: root.configurationChanged();
             }
         }
+    }
+
+    Item {
+        Layouts.Layout.fillHeight: true
     }
 }

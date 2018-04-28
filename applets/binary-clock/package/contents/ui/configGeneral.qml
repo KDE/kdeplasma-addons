@@ -25,12 +25,8 @@ import QtQuick.Layouts 1.1
 import org.kde.kquickcontrols 2.0 as KQuickControls
 
 
-QtControls.GroupBox {
-    width: childrenRect.width
-    height: childrenRect.height
-
-    flat: true
-    title: i18nc("@title:group", "Appearance")
+ColumnLayout {
+    id: generalConfigPage
 
     property alias cfg_showGrid: showGridCheckBox.checked
     property alias cfg_showOffLeds: showOffLedsCheckBox.checked
@@ -43,26 +39,40 @@ QtControls.GroupBox {
     property alias cfg_useCustomColorForGrid: useCustomColorForGridCheckBox.checked
     property alias cfg_customColorForGrid: customColorForGrid.color
 
-    ColumnLayout {
-        QtControls.CheckBox {
-            id: showGridCheckBox
-            text: i18nc("@option:check", "Draw grid")
+    QtControls.GroupBox {
+        Layout.fillWidth: true
+        flat: true
+
+        title: i18nc("@title:group", "Display")
+
+        ColumnLayout {
+            anchors.fill: parent
+
+            QtControls.CheckBox {
+                id: showGridCheckBox
+                text: i18nc("@option:check", "Draw grid")
+            }
+            QtControls.CheckBox {
+                id: showOffLedsCheckBox
+                text: i18nc("@option:check", "Show inactive LEDs")
+            }
+            QtControls.CheckBox {
+                id: showSecondsCheckBox
+                text: i18nc("@option:check", "Display seconds")
+            }
+            QtControls.CheckBox {
+                id: showBcdFormatCheckBox
+                text: i18nc("@option:check", "Display in BCD format (decimal)")
+            }
         }
-        QtControls.CheckBox {
-            id: showOffLedsCheckBox
-            text: i18nc("@option:check", "Show inactive LEDs")
-        }
-        QtControls.CheckBox {
-            id: showSecondsCheckBox
-            text: i18nc("@option:check", "Display seconds")
-        }
-        QtControls.CheckBox {
-            id: showBcdFormatCheckBox
-            text: i18nc("@option:check", "Display in BCD format (decimal)")
-        }
-        QtControls.Label {
-            text: i18nc("@title:group", "Colors")
-        }
+    }
+
+    QtControls.GroupBox {
+        Layout.fillWidth: true
+        flat: true
+
+        title: i18nc("@title:group", "Colors")
+
         GridLayout {
             columns: 2;
             QtControls.CheckBox {
@@ -92,5 +102,9 @@ QtControls.GroupBox {
                 enabled: useCustomColorForGridCheckBox.checked
             }
         }
+    }
+
+    Item { // tighten layout
+        Layout.fillHeight: true
     }
 }

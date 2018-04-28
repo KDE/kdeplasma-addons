@@ -28,14 +28,13 @@ QtLayouts.ColumnLayout {
 
     QtControls.GroupBox {
         id: runCommandGroup
-        title: i18nc("@title:group", "Run Command")
 
         QtLayouts.Layout.fillWidth: true
-        QtLayouts.Layout.alignment: Qt.AlignTop
         flat: true
 
+        title: i18nc("@title:group", "Run Command")
+
         QtLayouts.ColumnLayout {
-            QtLayouts.Layout.alignment: Qt.AlignTop
             anchors.fill: parent
 
             QtControls.CheckBox {
@@ -60,6 +59,10 @@ QtLayouts.ColumnLayout {
                 }
             }
         }
+    }
+
+    Item { // tighten layout
+        QtLayouts.Layout.fillHeight: true
     }
 }
 
