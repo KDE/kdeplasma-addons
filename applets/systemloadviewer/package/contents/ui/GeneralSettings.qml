@@ -143,7 +143,7 @@ ColumnLayout {
             decimals: 1
             stepSize: 0.1
             minimumValue: 0.1
-            suffix: i18nc("spacing to number + unit (seconds)", " s")
+            suffix: i18nc("@item:valuesuffix spacing to number + unit (seconds)", " s")
         }
     }
 

@@ -211,7 +211,7 @@ ColumnLayout {
             Layout.row: 3
             Layout.column: 1
             Layout.minimumWidth: units.gridUnit * 8
-            suffix: i18nc("spacing to number + unit (minutes)", " min")
+            suffix: i18nc("@item:valuesuffix spacing to number + unit (minutes)", " min")
             stepSize: 5
             minimumValue: 30
             maximumValue: 3600
