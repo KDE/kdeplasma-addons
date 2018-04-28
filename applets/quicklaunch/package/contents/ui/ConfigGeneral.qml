@@ -96,7 +96,7 @@ ColumnLayout {
                 id: title
                 Layout.fillWidth: true
                 enabled: showTitle.checked
-                placeholderText: i18n("Enter title")
+                placeholderText: i18nc("@info:placeholder", "Enter title")
             }
         }
     }

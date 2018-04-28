@@ -19,7 +19,7 @@ ColumnLayout {
         Layout.fillWidth: true
         PlasmaComponents.TextField {
             id: input
-            placeholderText: i18n("Enter word to define here")
+            placeholderText: i18nc("@info:placeholder", "Enter word to define here")
             implicitWidth: units.gridUnit * 40
             onAccepted: {
                 if (input.text === "") {

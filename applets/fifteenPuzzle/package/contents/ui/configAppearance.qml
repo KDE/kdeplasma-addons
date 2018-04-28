@@ -78,7 +78,7 @@ QtLayouts.ColumnLayout {
             QtControls.TextField {
                 id: imagePathTextField
                 QtLayouts.Layout.fillWidth: true
-                placeholderText: i18n("Path to custom image")
+                placeholderText: i18nc("@info:placeholder", "Path to custom image")
                 onTextChanged: useImageCheckBox.checked = true
             }
 
