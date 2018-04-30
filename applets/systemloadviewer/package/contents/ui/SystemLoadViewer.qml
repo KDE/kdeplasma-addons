@@ -48,11 +48,9 @@ Item {
                                                  theme.linkColor]
 
     property var memoryColors: setColorsManually ? [plasmoid.configuration.memApplicationColor,
-                                                    plasmoid.configuration.memBuffersColor,
-                                                    plasmoid.configuration.memCachedColor]
+                                                    plasmoid.configuration.memBuffersColor]
                                                  : [theme.buttonFocusColor,
-                                                    theme.visitedLinkColor,
-                                                    theme.highlightColor]
+                                                    theme.visitedLinkColor]
 
     property var swapColors: setColorsManually ? [plasmoid.configuration.swapUsedColor]
                                                : [theme.highlightColor]
@@ -139,7 +137,6 @@ Item {
         property string memFree: memPhysical + "free"
         property string memApplication: memPhysical + "application"
         property string memBuffers: memPhysical + "buf"
-        property string memCached: memPhysical + "cached"
         property string memUsed: memPhysical + "used"
         property string swap: "mem/swap/"
         property string swapUsed: swap + "used"
@@ -151,7 +148,7 @@ Item {
 
         property var totalCpuLoadProportions: [.0, .0, .0, .0]
         property int maxCpuIndex: 0
-        property var memoryUsageProportions: [.0, .0, .0]
+        property var memoryUsageProportions: [.0, .0]
         property double swapUsageProportion: .0
         property var cacheUsageProportions: [.0, .0]
 
@@ -162,7 +159,7 @@ Item {
         function sources() {
             var array = [niceLoad, userLoad, sysLoad,
                          ioWait, memFree, memApplication, memBuffers,
-                         memCached, memUsed, swapUsed, swapFree,
+                         memUsed, swapUsed, swapFree,
                          averageClock, totalLoad, cores, cacheDirty,
                          cacheWriteback]
 
@@ -198,10 +195,6 @@ Item {
             }
             else if (sourceName == memBuffers) {
                 memoryUsageProportions[1] = fitMemoryUsage(data.value)
-            }
-            else if (sourceName == memCached) {
-                memoryUsageProportions[2] = fitMemoryUsage(data.value)
-                memoryUsageProportionsChanged()
             }
             else if (sourceName == swapUsed) {
                 swapUsageProportion = fitSwapUsage(data.value)

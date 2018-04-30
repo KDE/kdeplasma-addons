@@ -9,9 +9,6 @@
     <entry name="memApplicationColor" type="Color">
       <default>blue</default>
     </entry>
-    <entry name="memCachedColor" type="Color">
-      <default>green</default>
-    </entry>
     <entry name="memBuffersColor" type="Color">
       <default>yellow</default>
     </entry>
