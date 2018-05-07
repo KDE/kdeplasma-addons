@@ -48,7 +48,6 @@ Item {
 
 
     property int formFactor: plasmoid.formFactor
-    property int timePixelSize: theme.defaultFont.pixelSize
 
     property bool constrained: formFactor == PlasmaCore.Types.Vertical || formFactor == PlasmaCore.Types.Horizontal
 
