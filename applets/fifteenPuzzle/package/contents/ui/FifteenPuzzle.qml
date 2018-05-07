@@ -27,7 +27,7 @@ Item {
     Layout.minimumWidth: Math.max(boardSize * 10, controlsRow.width)
     Layout.preferredWidth: Math.max(boardSize * 10, controlsRow.width)
 
-    property int boardSize: plasmoid.configuration.boardSize
+    readonly property int boardSize: plasmoid.configuration.boardSize
     property Component piece: Piece {}
     property var pieces: []
 

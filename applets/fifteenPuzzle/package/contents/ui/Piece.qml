@@ -41,12 +41,12 @@ Rectangle {
 
     signal activated(int position)
 
-    property int boardSize: plasmoid.configuration.boardSize
-    property int margin: units.smallSpacing
-    property int pieceWidth: (parent.width - (margin * boardSize)) / boardSize
-    property int pieceHeight: (parent.height - (margin * boardSize)) / boardSize
-    property int boardColumn: (position % boardSize)
-    property int boardRow: Math.floor(position / boardSize)
+    readonly property int boardSize: plasmoid.configuration.boardSize
+    readonly property int margin: units.smallSpacing
+    readonly property int pieceWidth: (parent.width - (margin * boardSize)) / boardSize
+    readonly property int pieceHeight: (parent.height - (margin * boardSize)) / boardSize
+    readonly property int boardColumn: (position % boardSize)
+    readonly property int boardRow: Math.floor(position / boardSize)
 
     property int number
     property int position

@@ -35,9 +35,9 @@ Item {
     Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     Layout.preferredHeight: vertical ? Layout.minimumHeight : theme.mSize(theme.defaultFont).height * 2
 
-    property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical
+    readonly property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical
 
-    property int fuzzyness: plasmoid.configuration.fuzzyness
+    readonly property int fuzzyness: plasmoid.configuration.fuzzyness
 
     readonly property var hourNames: [
         [ i18n("One o’clock"),

@@ -35,10 +35,10 @@ Item {
     Canvas {
         id: canvas
 
-        property int lineWidth: 1
-        property bool fill: true
-        property bool stroke: true
-        property real alpha: 1.0
+        readonly property int lineWidth: 1
+        readonly property bool fill: true
+        readonly property bool stroke: true
+        readonly property real alpha: 1.0
 
         property var proportions
         property var colors

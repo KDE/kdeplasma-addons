@@ -25,17 +25,17 @@ import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
 Item {
     id: root;
-    property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
+    readonly property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
 
     property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);
 
     // show title (can be customized in the settings dialog, default: disabled)
-    property bool showTitle: plasmoid.configuration.showTitle;
-    property string title: plasmoid.configuration.title;
+    readonly property bool showTitle: plasmoid.configuration.showTitle;
+    readonly property string title: plasmoid.configuration.title;
     property bool running: (plasmoid.configuration.running > 0) ? true : false;
     property bool suspended: false;
 
-    property string notificationText: plasmoid.configuration.notificationText;
+    readonly property string notificationText: plasmoid.configuration.notificationText;
 
     Plasmoid.toolTipMainText: {
         var timerName = "";

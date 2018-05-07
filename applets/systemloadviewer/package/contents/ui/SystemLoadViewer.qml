@@ -36,41 +36,39 @@ Item {
     readonly property int borderRounding: 3
     readonly property int headingLevel: 2
 
-    property bool setColorsManually: plasmoid.configuration.setColorsManually
+    readonly property bool setColorsManually: plasmoid.configuration.setColorsManually
 
-    property var cpuColors: setColorsManually ? [plasmoid.configuration.cpuSysColor,
-                                                 plasmoid.configuration.cpuUserColor,
-                                                 plasmoid.configuration.cpuNiceColor,
-                                                 plasmoid.configuration.cpuIOWaitColor]
-                                              : [theme.buttonFocusColor,
-                                                 theme.highlightColor,
-                                                 theme.visitedLinkColor,
-                                                 theme.linkColor]
+    readonly property var cpuColors: setColorsManually ? [plasmoid.configuration.cpuSysColor,
+                                                          plasmoid.configuration.cpuUserColor,
+                                                          plasmoid.configuration.cpuNiceColor,
+                                                          plasmoid.configuration.cpuIOWaitColor]
+                                                       : [theme.buttonFocusColor,
+                                                          theme.highlightColor,
+                                                          theme.visitedLinkColor,
+                                                          theme.linkColor]
 
-    property var memoryColors: setColorsManually ? [plasmoid.configuration.memApplicationColor,
-                                                    plasmoid.configuration.memBuffersColor]
-                                                 : [theme.buttonFocusColor,
-                                                    theme.visitedLinkColor]
-
-    property var swapColors: setColorsManually ? [plasmoid.configuration.swapUsedColor]
-                                               : [theme.highlightColor]
-
-    property var cacheColors: setColorsManually ? [plasmoid.configuration.cacheDirtyColor,
-                                                   plasmoid.configuration.cacheWritebackColor]
-                                                : [theme.buttonFocusColor,
-                                                   theme.visitedLinkColor]
+    readonly property var memoryColors: setColorsManually ? [plasmoid.configuration.memApplicationColor,
+                                                             plasmoid.configuration.memBuffersColor]
+                                                          : [theme.buttonFocusColor,
+                                                             theme.visitedLinkColor]
+    readonly property var swapColors: setColorsManually ? [plasmoid.configuration.swapUsedColor]
+                                                        : [theme.highlightColor]
+    readonly property var cacheColors: setColorsManually ? [plasmoid.configuration.cacheDirtyColor,
+                                                            plasmoid.configuration.cacheWritebackColor]
+                                                         : [theme.buttonFocusColor,
+                                                            theme.visitedLinkColor]
 
     // Make labels visible first time so that the
     // user knows which monitor is which.
     implicitWidth: widestLabelWidth()*1.3 * columnCount()
     implicitHeight: implicitWidth / 2
 
-    property bool circularMonitorsInUse: plasmoid.configuration.monitorType == 1
-    property bool compactBarMonitorsInUse: plasmoid.configuration.monitorType == 2
-    property bool allCPUsShown: plasmoid.configuration.cpuAllActivated
+    readonly property bool circularMonitorsInUse: plasmoid.configuration.monitorType == 1
+    readonly property bool compactBarMonitorsInUse: plasmoid.configuration.monitorType == 2
+    readonly property bool allCPUsShown: plasmoid.configuration.cpuAllActivated
 
-    property double barsWidth: compactBarMonitorsInUse ? main.height * 0.35 * columnCount()
-                                                       : main.height * 0.5 * columnCount()
+    readonly property double barsWidth: compactBarMonitorsInUse ? main.height * 0.35 * columnCount()
+                                                                : main.height * 0.5 * columnCount()
 
 
     // Don't show icon in panel.
@@ -126,25 +124,25 @@ Item {
         id: dataSource
         engine: "systemmonitor"
 
-        property string cpuSystem: "cpu/system/"
-        property string niceLoad: cpuSystem + "nice"
-        property string userLoad: cpuSystem + "user"
-        property string sysLoad: cpuSystem + "sys"
-        property string ioWait: cpuSystem + "wait"
-        property string averageClock: cpuSystem + "AverageClock"
-        property string totalLoad: cpuSystem + "TotalLoad"
-        property string memPhysical: "mem/physical/"
-        property string memFree: memPhysical + "free"
-        property string memApplication: memPhysical + "application"
-        property string memBuffers: memPhysical + "buf"
-        property string memUsed: memPhysical + "used"
-        property string swap: "mem/swap/"
-        property string swapUsed: swap + "used"
-        property string swapFree: swap + "free"
-        property string cache: "mem/cache/"
-        property string cacheDirty: cache + "dirty"
-        property string cacheWriteback: cache + "writeback"
-        property string cores: "system/cores"
+        readonly property string cpuSystem: "cpu/system/"
+        readonly property string niceLoad: cpuSystem + "nice"
+        readonly property string userLoad: cpuSystem + "user"
+        readonly property string sysLoad: cpuSystem + "sys"
+        readonly property string ioWait: cpuSystem + "wait"
+        readonly property string averageClock: cpuSystem + "AverageClock"
+        readonly property string totalLoad: cpuSystem + "TotalLoad"
+        readonly property string memPhysical: "mem/physical/"
+        readonly property string memFree: memPhysical + "free"
+        readonly property string memApplication: memPhysical + "application"
+        readonly property string memBuffers: memPhysical + "buf"
+        readonly property string memUsed: memPhysical + "used"
+        readonly property string swap: "mem/swap/"
+        readonly property string swapUsed: swap + "used"
+        readonly property string swapFree: swap + "free"
+        readonly property string cache: "mem/cache/"
+        readonly property string cacheDirty: cache + "dirty"
+        readonly property string cacheWriteback: cache + "writeback"
+        readonly property string cores: "system/cores"
 
         property var totalCpuLoadProportions: [.0, .0, .0, .0]
         property int maxCpuIndex: 0
@@ -425,8 +423,8 @@ Item {
 
         RowLayout {
             id: cpusRow
-            property int minCpuWidth: memColumn.minWidth * 0.33
-            property int minWidth : Math.max(memColumn.minWidth * 2, cpuRepeater.count * minCpuWidth)
+            readonly property int minCpuWidth: memColumn.minWidth * 0.33
+            readonly property int minWidth : Math.max(memColumn.minWidth * 2, cpuRepeater.count * minCpuWidth)
             visible: plasmoid.configuration.cpuActivated && plasmoid.configuration.cpuAllActivated
             Layout.minimumWidth: minWidth
             Layout.preferredWidth: height * 2
@@ -438,7 +436,7 @@ Item {
 
                 delegate: ColumnLayout {
                     Layout.minimumWidth: cpusRow.minCpuWidth
-                    property int cpuIndex: index
+                    readonly property int cpuIndex: index
 
                     PlasmaExtras.Heading {
                         id: cpuLabel
@@ -448,11 +446,11 @@ Item {
                     }
                     ConditionallyLoadedMonitors {
                         colors: cpuColors
-                        property string niceLoad: "cpu/cpu" + cpuIndex + "/nice"
-                        property string userLoad: "cpu/cpu" + cpuIndex + "/user"
-                        property string sysLoad:  "cpu/cpu" + cpuIndex + "/sys"
-                        property string ioWait:   "cpu/cpu" + cpuIndex + "/wait"
-                        property var cpuLoadProportions: dataSource.data[ioWait] ? [
+                        readonly property string niceLoad: "cpu/cpu" + cpuIndex + "/nice"
+                        readonly property string userLoad: "cpu/cpu" + cpuIndex + "/user"
+                        readonly property string sysLoad:  "cpu/cpu" + cpuIndex + "/sys"
+                        readonly property string ioWait:   "cpu/cpu" + cpuIndex + "/wait"
+                        readonly property var cpuLoadProportions: dataSource.data[ioWait] ? [
                         fitCpuLoad(dataSource.data[sysLoad].value),
                         fitCpuLoad(dataSource.data[userLoad].value),
                         fitCpuLoad(dataSource.data[niceLoad].value),
@@ -466,7 +464,7 @@ Item {
 
         ColumnLayout {
             id: cpuColumn
-            property double minWidth: memColumn.minWidth
+            readonly property double minWidth: memColumn.minWidth
             visible: plasmoid.configuration.cpuActivated && !plasmoid.configuration.cpuAllActivated
             Layout.minimumWidth: minWidth
             Layout.preferredWidth: height
@@ -486,7 +484,7 @@ Item {
 
         ColumnLayout {
             id: memColumn
-            property double minWidth: units.gridUnit * 0.7
+            readonly property double minWidth: units.gridUnit * 0.7
             visible: plasmoid.configuration.memoryActivated
             Layout.minimumWidth: minWidth
             Layout.preferredWidth: height
@@ -506,7 +504,7 @@ Item {
 
         ColumnLayout {
             id: swapColumn
-            property double minWidth: memColumn.minWidth
+            readonly property double minWidth: memColumn.minWidth
             visible: plasmoid.configuration.swapActivated
             Layout.minimumWidth: minWidth
             Layout.preferredWidth: height
@@ -526,7 +524,7 @@ Item {
 
         ColumnLayout {
             id: cacheColumn
-            property double minWidth: memColumn.minWidth
+            readonly property double minWidth: memColumn.minWidth
             visible: plasmoid.configuration.cacheActivated
             Layout.minimumWidth: minWidth
             Layout.preferredWidth: height

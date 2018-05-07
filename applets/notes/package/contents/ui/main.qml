@@ -51,8 +51,8 @@ PlasmaCore.SvgItem {
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     //this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
-    property real horizontalMargins: width * 0.07
-    property real verticalMargins: height * 0.07
+    readonly property real horizontalMargins: width * 0.07
+    readonly property real verticalMargins: height * 0.07
 
     //note is of type Note
     property QtObject note: noteManager.loadNote(plasmoid.configuration.noteId);

@@ -52,7 +52,7 @@ Item {
     property string activeSource: ""
     property string transitionSource: ""
 
-    property bool pause: overlayMouseArea.containsMouse
+    readonly property bool pause: overlayMouseArea.containsMouse
 
     readonly property int itemCount: (items.count + items.futureLength())
     readonly property bool hasItems: ((itemCount > 0) || (items.futureLength() > 0))

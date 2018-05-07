@@ -28,11 +28,11 @@ import "layout.js" as LayoutManager
 Item {
     id: iconItem
 
-    property int itemIndex : index
+    readonly property int itemIndex : index
     property bool dragging : false
     property bool isPopupItem : false
-    property var launcher : logic.launcherData(url)
-    property string iconName : launcher.iconName || "fork"
+    readonly property var launcher : logic.launcherData(url)
+    readonly property string iconName : launcher.iconName || "fork"
 
     width: isPopupItem ? LayoutManager.popupItemWidth() : grid.cellWidth
     height: isPopupItem ? LayoutManager.popupItemHeight() : grid.cellHeight

@@ -51,10 +51,10 @@ Item {
     property int decimals: 0;
     property int inputSize: 0;
 
-    property int maxInputLength: 18; // More than that and the number notation
-                                     // turns scientific (i.e.: 1.32324e+12).
-                                     // When calculating 1/3 the answer is
-                                     // 18 characters long.
+    readonly property int maxInputLength: 18; // More than that and the number notation
+                                              // turns scientific (i.e.: 1.32324e+12).
+                                              // When calculating 1/3 the answer is
+                                              // 18 characters long.
 
     Keys.onDigit0Pressed: { digitClicked(0); }
     Keys.onDigit1Pressed: { digitClicked(1); }

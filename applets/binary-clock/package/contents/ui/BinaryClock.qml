@@ -36,7 +36,7 @@ import org.kde.plasma.components 2.0 as Components
 Item {
     id: main
 
-    property real w1: (main.height-5*units.smallSpacing)*dots/4
+    readonly property real w1: (main.height-5*units.smallSpacing)*dots/4
 
     Layout.minimumWidth: w1 < 20 ? 20 : w1
     Layout.maximumWidth: Infinity
@@ -47,30 +47,30 @@ Item {
     //Layout.preferredHeight: Layout.minimumHeight
 
 
-    property int formFactor: plasmoid.formFactor
+    readonly property int formFactor: plasmoid.formFactor
 
-    property bool constrained: formFactor == PlasmaCore.Types.Vertical || formFactor == PlasmaCore.Types.Horizontal
+    readonly property bool constrained: formFactor == PlasmaCore.Types.Vertical || formFactor == PlasmaCore.Types.Horizontal
 
-    property bool showSeconds: root.showSeconds
+    readonly property bool showSeconds: root.showSeconds
 
-    property int hours:root.hours
-    property int minutes:root.minutes
-    property int seconds:root.seconds
+    readonly property int hours: root.hours
+    readonly property int minutes: root.minutes
+    readonly property int seconds: root.seconds
 
-    property bool showOffLeds: plasmoid.configuration.showOffLeds
-    property bool showGrid: plasmoid.configuration.showGrid
-    
-    property int base: plasmoid.configuration.showBcdFormat? 10:16
+    readonly property bool showOffLeds: plasmoid.configuration.showOffLeds
+    readonly property bool showGrid: plasmoid.configuration.showGrid
 
-    property int dots: showSeconds? 6:4
+    readonly property int base: plasmoid.configuration.showBcdFormat? 10:16
 
-    property color onColor: plasmoid.configuration.useCustomColorForActive?plasmoid.configuration.customColorForActive: theme.textColor
-    property color offColor: plasmoid.configuration.useCustomColorForInactive?plasmoid.configuration.customColorForInactive:Qt.rgba(onColor.r,onColor.g,onColor.b,0.4)
-    property color gridColor: plasmoid.configuration.useCustomColorForGrid?plasmoid.configuration.customColorForGrid:Qt.rgba(onColor.r,onColor.g,onColor.b,0.6)
+    readonly property int dots: showSeconds? 6:4
 
-    property real dotSize: Math.min((height-5*units.smallSpacing)/4,(width-(dots+1)*units.smallSpacing)/dots)
-    property real displayTop: (height - 4*dotSize-3*units.smallSpacing) /2
-    property real displayLeft: (width - dots*dotSize-(dots-1)*units.smallSpacing) /2
+    readonly property color onColor: plasmoid.configuration.useCustomColorForActive?plasmoid.configuration.customColorForActive: theme.textColor
+    readonly property color offColor: plasmoid.configuration.useCustomColorForInactive?plasmoid.configuration.customColorForInactive:Qt.rgba(onColor.r,onColor.g,onColor.b,0.4)
+    readonly property color gridColor: plasmoid.configuration.useCustomColorForGrid?plasmoid.configuration.customColorForGrid:Qt.rgba(onColor.r,onColor.g,onColor.b,0.6)
+
+    readonly property real dotSize: Math.min((height-5*units.smallSpacing)/4,(width-(dots+1)*units.smallSpacing)/dots)
+    readonly property real displayTop: (height - 4*dotSize-3*units.smallSpacing) /2
+    readonly property real displayLeft: (width - dots*dotSize-(dots-1)*units.smallSpacing) /2
 
     MouseArea {
         id: mouseArea

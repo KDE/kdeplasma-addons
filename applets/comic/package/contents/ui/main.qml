@@ -26,8 +26,8 @@ import org.kde.kquickcontrolsaddons 2.0
 Item {
     id: mainWindow
 
-    property int implicitWidth: units.gridUnit * 40
-    property int implicitHeight: units.gridUnit * 15
+    readonly property int implicitWidth: units.gridUnit * 40
+    readonly property int implicitHeight: units.gridUnit * 15
     Plasmoid.switchWidth: {
         if (centerLayout.comicData.image) {
             return Math.max(minimumWidth, Math.min(centerLayout.comicData.image.nativeWidth * 0.6, implicitWidth));
@@ -47,12 +47,12 @@ Item {
     width: implicitWidth
     height: implicitHeight
 
-    property int minimumWidth: units.gridUnit * 8
-    property int minimumHeight: units.gridUnit * 8
-    property bool showComicAuthor: plasmoid.nativeInterface.showComicAuthor
-    property bool showComicTitle: plasmoid.nativeInterface.showComicTitle
-    property bool showErrorPicture: plasmoid.nativeInterface.showErrorPicture
-    property bool middleClick: plasmoid.nativeInterface.middleClick
+    readonly property int minimumWidth: units.gridUnit * 8
+    readonly property int minimumHeight: units.gridUnit * 8
+    readonly property bool showComicAuthor: plasmoid.nativeInterface.showComicAuthor
+    readonly property bool showComicTitle: plasmoid.nativeInterface.showComicTitle
+    readonly property bool showErrorPicture: plasmoid.nativeInterface.showErrorPicture
+    readonly property bool middleClick: plasmoid.nativeInterface.middleClick
 
     Connections {
         target: plasmoid.nativeInterface
@@ -118,8 +118,8 @@ Item {
             delegate:  PlasmaComponents.TabButton {
                 id: tabButton
 
-                property string key: model.key
-                property bool highlighted: model.highlight
+                readonly property string key: model.key
+                readonly property bool highlighted: model.highlight
 
                 text: model.title
                 iconSource: model.icon

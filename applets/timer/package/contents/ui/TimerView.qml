@@ -28,21 +28,21 @@ import org.kde.plasma.private.timer 0.1 as TimerPlasmoid
 Item {
     id: main
 
-    property date savedAt: plasmoid.configuration.savedAt;
+    readonly property date savedAt: plasmoid.configuration.savedAt;
 
     // display seconds in addition to hours and minutes (default: enabled)
-    property bool showSeconds: plasmoid.configuration.showSeconds;
+    readonly property bool showSeconds: plasmoid.configuration.showSeconds;
 
     // show notification on timer completion (default: enabled)
-    property bool showNotification: plasmoid.configuration.showNotification;
+    readonly property bool showNotification: plasmoid.configuration.showNotification;
 
     // run custom command on timer completion (default: disabled)
-    property bool runCommand: plasmoid.configuration.runCommand;
-    property string command: plasmoid.configuration.command;
+    readonly property bool runCommand: plasmoid.configuration.runCommand;
+    readonly property string command: plasmoid.configuration.command;
 
-    property real digits: (showSeconds) ? 7 : 4.5;
-    property int digitH: ((height / 2) * digits < width ? height : ((width - (digits - 1)) / digits) * 2);
-    property int digitW: digitH / 2;
+    readonly property real digits: (showSeconds) ? 7 : 4.5;
+    readonly property int digitH: ((height / 2) * digits < width ? height : ((width - (digits - 1)) / digits) * 2);
+    readonly property int digitW: digitH / 2;
 
     PlasmaCore.Svg {
         id: timerSvg

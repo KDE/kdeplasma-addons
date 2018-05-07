@@ -25,7 +25,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 ColumnLayout {
 
-    property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical || (plasmoid.formFactor == PlasmaCore.Types.Planar && plasmoid.height > plasmoid.width)
+    readonly property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical || (plasmoid.formFactor == PlasmaCore.Types.Planar && plasmoid.height > plasmoid.width)
 
     property alias cfg_maxSectionCount: maxSectionCount.value
     property alias cfg_showLauncherNames: showLauncherNames.checked

@@ -23,7 +23,7 @@ import QtQuick 2.2
 Rectangle {
     property Rectangle borderRectangle
 
-    property real borderHeight: borderRectangle.height
+    readonly property real borderHeight: borderRectangle.height
 
     radius: borderRectangle.radius
 

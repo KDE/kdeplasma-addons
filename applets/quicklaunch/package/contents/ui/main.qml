@@ -31,12 +31,12 @@ import "layout.js" as LayoutManager
 Item {
     id: root
 
-    property int maxSectionCount: plasmoid.configuration.maxSectionCount
-    property bool showLauncherNames : plasmoid.configuration.showLauncherNames
-    property bool enablePopup : plasmoid.configuration.enablePopup
-    property string title : plasmoid.formFactor == PlasmaCore.Types.Planar ? plasmoid.configuration.title : ""
-    property bool vertical : plasmoid.formFactor == PlasmaCore.Types.Vertical || (plasmoid.formFactor == PlasmaCore.Types.Planar && height > width)
-    property bool horizontal : plasmoid.formFactor == PlasmaCore.Types.Horizontal
+    readonly property int maxSectionCount: plasmoid.configuration.maxSectionCount
+    readonly property bool showLauncherNames : plasmoid.configuration.showLauncherNames
+    readonly property bool enablePopup : plasmoid.configuration.enablePopup
+    readonly property string title : plasmoid.formFactor == PlasmaCore.Types.Planar ? plasmoid.configuration.title : ""
+    readonly property bool vertical : plasmoid.formFactor == PlasmaCore.Types.Vertical || (plasmoid.formFactor == PlasmaCore.Types.Planar && height > width)
+    readonly property bool horizontal : plasmoid.formFactor == PlasmaCore.Types.Horizontal
     property bool dragging : false
 
     Layout.minimumWidth: LayoutManager.minimumWidth()
