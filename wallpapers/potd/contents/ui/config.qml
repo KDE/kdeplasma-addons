@@ -65,8 +65,8 @@ ColumnLayout {
         QtControls.Label {
             width: formAlignment - units.largeSpacing
             horizontalAlignment: Text.AlignRight
-            text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Providers:")
             anchors.verticalCenter: providerComboBox.verticalCenter
+            text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Providers:")
         }
         QtControls.ComboBox {
             id: providerComboBox
@@ -84,13 +84,10 @@ ColumnLayout {
         //x: formAlignment - positionLabel.paintedWidth
         spacing: units.largeSpacing / 2
         QtControls.Label {
-            id: positionLabel
             width: formAlignment - units.largeSpacing
-            anchors {
-                verticalCenter: resizeComboBox.verticalCenter
-            }
-            text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Positioning:")
             horizontalAlignment: Text.AlignRight
+            anchors.verticalCenter: resizeComboBox.verticalCenter
+            text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Positioning:")
         }
         QtControls.ComboBox {
             id: resizeComboBox
@@ -140,6 +137,7 @@ ColumnLayout {
         QtControls.Label {
             width: formAlignment - units.largeSpacing
             horizontalAlignment: Text.AlignRight
+            anchors.verticalCenter: colorButton.verticalCenter
             text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:chooser", "Background color:")
         }
         KQuickControls.ColorButton {
