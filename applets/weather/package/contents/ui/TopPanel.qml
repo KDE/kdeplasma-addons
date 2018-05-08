@@ -24,7 +24,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 PlasmaCore.FrameSvgItem {
-    property var model
+    property var generalModel
+    property var observationModel
 
     implicitWidth: contentLayout.implicitWidth
     implicitHeight: contentLayout.implicitHeight
@@ -36,7 +37,7 @@ PlasmaCore.FrameSvgItem {
     Layout.maximumHeight: contentLayout.Layout.maximumHeight + margins.top + margins.bottom
     Layout.maximumWidth: contentLayout.Layout.maximumWidth + margins.left + margins.right
 
-    visible: !!model.location
+    visible: !!generalModel.location
     imagePath: "widgets/frame"
     prefix: "plain"
 
@@ -67,7 +68,7 @@ PlasmaCore.FrameSvgItem {
             Layout.preferredHeight: units.iconSizes.huge
             Layout.preferredWidth: units.iconSizes.huge
 
-            source: model.currentConditionIcon
+            source: generalModel.currentConditionIconName
         }
 
         PlasmaExtras.Heading {
@@ -82,7 +83,7 @@ PlasmaCore.FrameSvgItem {
             elide: Text.ElideRight
             wrapMode: Text.NoWrap
 
-            text: model.location
+            text: generalModel.location
 
             PlasmaCore.ToolTipArea {
                 id: locationToolTip
@@ -100,7 +101,7 @@ PlasmaCore.FrameSvgItem {
             Layout.column: 1
             Layout.preferredWidth: implicitWidth
 
-            text: model.currentConditions
+            text: observationModel.conditions
         }
 
         PlasmaExtras.Heading {
@@ -114,7 +115,7 @@ PlasmaCore.FrameSvgItem {
             level: 2
             wrapMode: Text.NoWrap
 
-            text: model.currentTemperature
+            text: observationModel.temperature
         }
 
         PlasmaComponents.Label {
@@ -126,7 +127,7 @@ PlasmaCore.FrameSvgItem {
             Layout.preferredWidth: implicitWidth
 
             text: {
-                var low = model.currentDayLowTemperature, high = model.currentDayHighTemperature;
+                var low = generalModel.currentDayLowTemperature, high = generalModel.currentDayHighTemperature;
                 if (!!low && !!high) {
                     return i18nc("High & Low temperature", "H: %1 L: %2", high, low);
                 }

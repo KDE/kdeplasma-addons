@@ -25,7 +25,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 ColumnLayout {
     id: compactRoot
 
-    property var model: []
+    property var generalModel
+    property var observationModel
 
     readonly property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
     readonly property bool showTemperature: plasmoid.nativeInterface.temperatureShownInCompactMode &&
@@ -55,7 +56,7 @@ ColumnLayout {
         PlasmaCore.IconItem {
             readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), units.iconSizes.small)
 
-            source: currentWeatherIconName
+            source: generalModel.currentConditionIconName
             // reset implicit size, so layout in free dimension does not stop at the default one
             implicitWidth: units.iconSizes.small
             implicitHeight: units.iconSizes.small
@@ -69,8 +70,8 @@ ColumnLayout {
 
         IconAndTextItem {
             vertical: compactRoot.vertical
-            iconSource: currentWeatherIconName
-            text: model.currentTemperature
+            iconSource: generalModel.currentConditionIconName
+            text: observationModel.temperature
         }
     }
 }

@@ -27,7 +27,8 @@ ColumnLayout {
 
     Layout.margins: units.smallSpacing
 
-    property alias model: topPanel.model
+    property alias generalModel: topPanel.generalModel
+    property alias observationModel: topPanel.observationModel
 
     TopPanel {
         id: topPanel
@@ -38,14 +39,14 @@ ColumnLayout {
     SwitchPanel {
         Layout.fillWidth: true
 
-        forecastViewTitle: model.forecastTitle
+        forecastViewTitle: generalModel.forecastTitle
         forecastModel: root.forecastModel
         detailsModel: root.detailsModel
         noticesModel: root.noticesModel
     }
 
     PlasmaComponents.Label {
-        readonly property string creditUrl: model.creditUrl
+        readonly property string creditUrl: generalModel.creditUrl
 
         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 
@@ -60,7 +61,7 @@ ColumnLayout {
         textFormat: Text.StyledText
 
         text: {
-            var result = model.courtesy;
+            var result = generalModel.courtesy;
             if (creditUrl) {
                 result = "<a href=\"" + creditUrl + "\">" + result + "</a>";
             }

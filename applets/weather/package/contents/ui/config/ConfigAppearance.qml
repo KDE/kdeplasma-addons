@@ -16,6 +16,7 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Controls 1.4 as QtControls1
 import QtQuick.Controls 2.2 as QtControls
 import QtQuick.Layouts 1.3
 
@@ -25,14 +26,19 @@ import org.kde.plasma.private.weather 1.0
 ColumnLayout {
     id: displayConfigPage
 
-    readonly property bool canShowTemperature: !plasmoid.nativeInterface.needsToBeSquare
+    readonly property bool canShowMoreInCompactMode: !plasmoid.nativeInterface.needsToBeSquare
 
     signal configurationChanged
 
     function saveConfig() {
         var config = {};
 
-        config.showTemperatureInCompactMode = showTemperatureCheckBox.checked;
+        config.showTemperatureInTooltip = showTemperatureInTooltipCheckBox.checked;
+        config.showWindInTooltip = showWindInTooltipCheckBox.checked;
+        config.showPressureInTooltip = showPressureInTooltipCheckBox.checked;
+        config.showHumidityInTooltip = showHumidityInTooltipCheckBox.checked;
+
+        config.showTemperatureInCompactMode = showTemperatureInCompactModeCheckBox.checked;
 
         plasmoid.nativeInterface.saveConfig(config);
         plasmoid.nativeInterface.configChanged();
@@ -41,29 +47,116 @@ ColumnLayout {
     Component.onCompleted: {
         var config = plasmoid.nativeInterface.configValues();
 
-        showTemperatureCheckBox.checked = config.showTemperatureInCompactMode;
+        showTemperatureInTooltipCheckBox.checked = config.showTemperatureInTooltip;
+        showWindInTooltipCheckBox.checked = config.showWindInTooltip;
+        showPressureInTooltipCheckBox.checked = config.showPressureInTooltip;
+        showHumidityInTooltipCheckBox.checked = config.showHumidityInTooltip;
+
+        showTemperatureInCompactModeCheckBox.checked = config.showTemperatureInCompactMode;
     }
 
 
-    GridLayout {
-        columns: 2
+    QtControls1.GroupBox {
+        Layout.fillWidth: true
+        flat: true
 
-        QtControls.Label {
-            Layout.row: 0
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            enabled: canShowTemperature
-            text: i18nc("@label", "Show temperature in compact mode:")
+        title: i18nc("@title:group", "Tooltip")
+
+        GridLayout {
+            columns: 2
+
+            QtControls.Label {
+                Layout.row: 0
+                Layout.column: 0
+                Layout.alignment: Qt.AlignRight
+                text: i18nc("@label", "Show temperature:")
+            }
+
+            QtControls.CheckBox {
+                id: showTemperatureInTooltipCheckBox
+
+                Layout.row: 0
+                Layout.column: 1
+
+                onCheckedChanged: displayConfigPage.configurationChanged();
+            }
+
+            QtControls.Label {
+                Layout.row: 1
+                Layout.column: 0
+                Layout.alignment: Qt.AlignRight
+                text: i18nc("@label", "Show wind:")
+            }
+
+            QtControls.CheckBox {
+                id: showWindInTooltipCheckBox
+
+                Layout.row: 1
+                Layout.column: 1
+
+                onCheckedChanged: displayConfigPage.configurationChanged();
+            }
+
+            QtControls.Label {
+                Layout.row: 2
+                Layout.column: 0
+                Layout.alignment: Qt.AlignRight
+                text: i18nc("@label", "Show pressure:")
+            }
+
+            QtControls.CheckBox {
+                id: showPressureInTooltipCheckBox
+
+                Layout.row: 2
+                Layout.column: 1
+
+                onCheckedChanged: displayConfigPage.configurationChanged();
+            }
+
+            QtControls.Label {
+                Layout.row: 3
+                Layout.column: 0
+                Layout.alignment: Qt.AlignRight
+                text: i18nc("@label", "Show humidity:")
+            }
+
+            QtControls.CheckBox {
+                id: showHumidityInTooltipCheckBox
+
+                Layout.row: 3
+                Layout.column: 1
+
+                onCheckedChanged: displayConfigPage.configurationChanged();
+            }
         }
+    }
 
-        QtControls.CheckBox {
-            id: showTemperatureCheckBox
+    QtControls1.GroupBox {
+        Layout.fillWidth: true
+        flat: true
 
-            Layout.row: 0
-            Layout.column: 1
-            enabled: canShowTemperature
+        title: i18nc("@title:group", "Compact Mode")
 
-            onCheckedChanged: displayConfigPage.configurationChanged();
+        GridLayout {
+            columns: 2
+
+            QtControls.Label {
+                Layout.row: 0
+                Layout.column: 0
+                Layout.alignment: Qt.AlignRight
+                enabled: canShowMoreInCompactMode
+                text: i18nc("@label", "Show temperature:")
+            }
+
+            QtControls.CheckBox {
+                id: showTemperatureInCompactModeCheckBox
+
+                Layout.row: 0
+                Layout.column: 1
+                enabled: canShowMoreInCompactMode
+
+                onCheckedChanged: displayConfigPage.configurationChanged();
+            }
         }
     }
 

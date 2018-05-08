@@ -33,12 +33,91 @@ Item {
     readonly property int displayVisibilityUnit: plasmoid.nativeInterface.displayVisibilityUnit
 
     property bool connectingToSource: false
-    readonly property string currentWeatherIconName: !panelModel.location ? "weather-none-available" : panelModel.currentConditionIcon
-    readonly property bool needsConfiguration: !panelModel.location && !connectingToSource
+    readonly property bool needsConfiguration: !generalModel.location && !connectingToSource
 
     readonly property int invalidUnit: -1 //TODO: make KUnitConversion::InvalidUnit usable here
 
-    readonly property var panelModel: {
+    // model providing final display strings for observation properties
+    readonly property var observationModel: {
+        var model = {};
+        var data = weatherDataSource.currentData;
+
+        var reportTemperatureUnit = (data && data["Temperature Unit"]) || invalidUnit;
+        var reportPressureUnit =    (data && data["Pressure Unit"])    || invalidUnit;
+        var reportVisibilityUnit =  (data && data["Visibility Unit"])  || invalidUnit;
+        var reportWindSpeedUnit =   (data && data["Wind Speed Unit"])  || invalidUnit;
+
+        model["conditions"] = (data && data["Current Conditions"]) || "";
+
+        var conditionIconName = (data && data["Condition Icon"]) || null;
+        model["conditionIconName"] = conditionIconName ? Util.existingWeatherIconName(conditionIconName) : "weather-none-available";
+
+        var temperature = (data && data["Temperature"]) || null;
+        model["temperature"] = temperature !== null ? Util.temperatureToDisplayString(displayTemperatureUnit, temperature, reportTemperatureUnit) : "";
+
+        var windchill = (data && data["Windchill"]) || null;
+        // Use temperature unit to convert windchill temperature
+        // we only show degrees symbol not actual temperature unit
+        model["windchill"] = windchill !== null ?
+            Util.temperatureToDisplayString(displayTemperatureUnit, windchill, reportTemperatureUnit, false, true) :
+            "";
+
+        var humidex = (data && data["Humidex"]) || null;
+        // TODO: this seems wrong, does the humidex have temperature as units?
+        // Use temperature unit to convert humidex temperature
+        // we only show degrees symbol not actual temperature unit
+        model["humidex"] = humidex !== null ?
+            Util.temperatureToDisplayString(displayTemperatureUnit, humidex, reportTemperatureUnit, false, true) :
+            "";
+
+        var dewpoint = (data && data["Dewpoint"]) || null;
+        model["dewpoint"] = dewpoint !== null ?
+            Util.temperatureToDisplayString(displayTemperatureUnit, dewpoint, reportTemperatureUnit) : "";
+
+        var pressure = (data && data["Pressure"]) || null;
+        model["pressure"] = pressure ?
+            Util.valueToDisplayString(displayPressureUnit, pressure, reportPressureUnit, 2) : "";
+
+        var pressureTendency = (data && data["Pressure Tendency"]) || null;
+        model["pressureTendency"] = pressureTendency ? i18nc("pressure tendency", pressureTendency) : "";
+
+        var visibility = (data && data["Visibility"]) || null;
+        model["visibility"] = visibility ?
+            ((reportVisibilityUnit !== invalidUnit) ?
+                Util.valueToDisplayString(displayVisibilityUnit, visibility, reportVisibilityUnit, 1) : visibility) :
+            "";
+
+        var humidity = (data && data["Humidity"]) || null;
+        model["humidity"] = humidity ? Util.percentToDisplayString(humidity) : "";
+
+        // TODO: missing check for windDirection validness
+        var windDirection = (data && data["Wind Direction"]) || null;
+        var windSpeed = (data && data["Wind Speed"]) || null;
+        var windSpeedText;
+        if (windSpeed !== null && windSpeed !== "") {
+            var windSpeedNumeric = (typeof windSpeed !== 'number') ? parseFloat(windSpeed) : windSpeed;
+            if (!isNaN(windSpeedNumeric)) {
+                if (windSpeedNumeric !== 0) {
+                    windSpeedText = Util.valueToDisplayString(displaySpeedUnit, windSpeedNumeric, reportWindSpeedUnit, 1);
+                } else {
+                    windSpeedText = i18nc("Wind condition", "Calm");
+                }
+            } else {
+                // TODO: i18n?
+                windSpeedText = windSpeed;
+            }
+        }
+        model["windSpeed"] = windSpeedText || "";
+        model["windDirectionId"] = windDirection || "";
+        model["windDirection"] = windDirection ? i18nc("wind direction", windDirection) : "";
+
+        var windGust = (data && data["Wind Gust"]) || null;
+        model["windGust"] = windGust ? Util.valueToDisplayString(displaySpeedUnit, windGust, reportWindSpeedUnit, 1) : "";
+
+        return model;
+    }
+
+    readonly property var generalModel: {
         var model = {};
         var data = weatherDataSource.currentData;
 
@@ -49,8 +128,6 @@ Item {
         model["courtesy"] = (data && data["Credit"]) || "";
         model["creditUrl"] = (data && data["Credit Url"]) || "";
 
-        model["currentConditions"] = (data && data["Current Conditions"]) || "";
-
         var forecastDayCount = parseInt((data && data["Total Weather Days"]) || "");
         var forecastTitle;
         if (!isNaN(forecastDayCount) && forecastDayCount > 0) {
@@ -58,23 +135,18 @@ Item {
         }
         model["forecastTitle"] = forecastTitle || "";
 
-        var conditionIconName = (data && data["Condition Icon"]) || null;
-        var weatherIconName;
+        var conditionIconName = observationModel.conditionIconName;
         if (!conditionIconName ||
             conditionIconName === "weather-none-available") {
+
             // try icon from current weather forecast
             if (todayForecastTokens.length === 6 && todayForecastTokens[1] !== "N/U") {
-                weatherIconName = Util.existingWeatherIconName(todayForecastTokens[1]);
+                conditionIconName = Util.existingWeatherIconName(todayForecastTokens[1]);
             } else {
-                weatherIconName = "weather-none-available";
+                conditionIconName = "weather-none-available";
             }
-        } else {
-            weatherIconName = Util.existingWeatherIconName(conditionIconName);
         }
-        model["currentConditionIcon"] = weatherIconName;
-
-        var temperature = (data && data["Temperature"]) || null;
-        model["currentTemperature"] = temperature !== null ? Util.temperatureToDisplayString(displayTemperatureUnit, temperature, reportTemperatureUnit) : "";
+        model["currentConditionIconName"] = conditionIconName;
 
         var currentDayLowTemperature;
         var currentDayHighTemperature;
@@ -97,105 +169,52 @@ Item {
 
     readonly property var detailsModel: {
         var model = [];
-        var data = weatherDataSource.currentData;
 
-        var reportTemperatureUnit = (data && data["Temperature Unit"]) || invalidUnit;
-
-        var windChill = (data && data["Windchill"]) || null;
-        if (windChill) {
-            // Use temperature unit to convert windchill temperature
-            // we only show degrees symbol not actual temperature unit
-            var windChillString = Util.temperatureToDisplayString(displayTemperatureUnit, windChill, reportTemperatureUnit, false, true);
-
-            model.push({ "text": i18n("Windchill: %1", windChillString) });
+        if (observationModel.windchill) {
+            model.push({ "text": i18n("Windchill: %1", observationModel.windchill) });
         };
 
-        var humidex = (data && data["Humidex"]) || null;
-        if (humidex) {
-            // TODO: this seems wrong, does the humidex have temperature as units?
-            // Use temperature unit to convert humidex temperature
-            // we only show degrees symbol not actual temperature unit
-            var humidexString = Util.temperatureToDisplayString(displayTemperatureUnit, humidex, reportTemperatureUnit, false, true);
-
-            model.push({ "text": i18n("Humidex: %1", humidexString) });
+        if (observationModel.humidex) {
+            model.push({ "text": i18n("Humidex: %1", observationModel.humidex) });
         }
 
-        var dewpoint = (data && data["Dewpoint"]) || null;
-        if (dewpoint) {
-            var dewpointString = Util.temperatureToDisplayString(displayTemperatureUnit, dewpoint, reportTemperatureUnit);
-
-            model.push({ "text": i18nc("ground temperature", "Dewpoint: %1", dewpointString) });
+        if (observationModel.dewpoint) {
+            model.push({ "text": i18nc("ground temperature", "Dewpoint: %1", observationModel.dewpoint) });
         }
 
-        var pressure = (data && data["Pressure"]) || null;
-        if (pressure) {
-            var reportPressureUnit = data["Pressure Unit"] || invalidUnit;
-            var pressureText = Util.valueToDisplayString(displayPressureUnit, pressure, reportPressureUnit, 2);
-            pressureText = i18n("Pressure: %1", pressureText);
-
-            model.push({ "text": pressureText });
+        if (observationModel.pressure) {
+            model.push({ "text": i18n("Pressure: %1", observationModel.pressure) });
         }
 
-        var pressureTendency = (data && data["Pressure Tendency"]) || null;
-        if (pressureTendency) {
-            var i18nPressureTendency = i18nc("pressure tendency", pressureTendency);
-            i18nPressureTendency = i18nc("pressure tendency, rising/falling/steady",
-                                         "Pressure Tendency: %1", i18nPressureTendency);
-
-            model.push({ "text": i18nPressureTendency });
+        if (observationModel.pressureTendency) {
+            model.push({ "text": i18nc("pressure tendency, rising/falling/steady",
+                                       "Pressure Tendency: %1", observationModel.pressureTendency) });
         }
 
-        var visibility = (data && data["Visibility"]) || null;
-        if (visibility) {
-            var visibilityText;
-            var reportVisibilityUnit = data["Visibility Unit"] || invalidUnit;
-            if (reportVisibilityUnit !== invalidUnit) {
-                visibilityText = Util.valueToDisplayString(displayVisibilityUnit, visibility, reportVisibilityUnit, 1);
-                visibilityText = i18n("Visibility: %1", visibilityText);
-            } else {
-                visibilityText = i18n("Visibility: %1", visibility);
-            }
-
-            model.push({ "text": visibilityText });
+        if (observationModel.visibility) {
+            model.push({ "text": i18n("Visibility: %1", observationModel.visibility) });
         }
 
-        var humidity = (data && data["Humidity"]) || null;
-        if (humidity) {
-            var humidityString = Util.percentToDisplayString(humidity);
-            model.push({ "text": i18n("Humidity: %1", humidityString) });
+        if (observationModel.humidity) {
+            model.push({ "text": i18n("Humidity: %1", observationModel.humidity) });
         }
 
-        var reportWindSpeedUnit = (data && data["Wind Speed Unit"]) || invalidUnit;
-
-        var windSpeed = (data && data["Wind Speed"]) || null;
-        if (windSpeed !== null && windSpeed !== "") {
-            // TODO: missing check for windDirection validness
-            var windDirection = data["Wind Direction"] || null;
-
+        if (observationModel.windSpeed) {
             var windSpeedText;
-            var windSpeedNumeric = (typeof windSpeed !== 'number') ? parseFloat(windSpeed) : windSpeed;
-            if (!isNaN(windSpeedNumeric)) {
-                if (windSpeedNumeric !== 0) {
-                    windSpeedText = Util.valueToDisplayString(displaySpeedUnit, windSpeedNumeric, reportWindSpeedUnit, 1);
-                    var i18nWindDirection = i18nc("wind direction", windDirection);
-                    windSpeedText = i18nc("wind direction, speed","%1 %2", i18nWindDirection, windSpeedText);
-                } else {
-                    windSpeedText = i18nc("Wind condition", "Calm");
-                }
+            if (observationModel.windDirection) {
+                windSpeedText = i18nc("winddirection windspeed","%1 %2", observationModel.windDirection, observationModel.windSpeed);
             } else {
-                windSpeedText = windSpeed;
+                windSpeedText = observationModel.windSpeed;
             }
 
             model.push({
-                "icon": windDirection,
+                "icon": observationModel.windDirectionId,
                 "text": windSpeedText
             });
         }
 
-        var windGust = (data && data["Wind Gust"]) || null;
-        if (windGust) {
-            var windGustString = Util.valueToDisplayString(displaySpeedUnit, windGust, reportWindSpeedUnit, 1);
-            model.push({ "text": i18n("Wind Gust: %1", windGustString) });
+        if (observationModel.windGust) {
+            model.push({ "text": i18n("Wind Gust: %1",observationModel. windGust) });
         }
 
         return model;
@@ -358,26 +377,53 @@ Item {
 
     // workaround for now to ensure "Please configure" tooltip
     // TODO: remove when configurationRequired works
-    Plasmoid.icon: needsConfiguration ? "configure" : currentWeatherIconName
-    Plasmoid.toolTipMainText: needsConfiguration ? i18nc("@info:tooltip", "Please configure") : panelModel.location
+    Plasmoid.icon: needsConfiguration ? "configure" : generalModel.currentConditionIconName
+    Plasmoid.toolTipMainText: needsConfiguration ? i18nc("@info:tooltip", "Please configure") : generalModel.location
     Plasmoid.toolTipSubText: {
-        if (!panelModel.location) {
+        if (!generalModel.location) {
             return "";
         }
-        if (panelModel.currentConditions && panelModel.currentTemperature) {
-            return i18nc("%1 is the weather condition, %2 is the temperature,  both come from the weather provider",
-                         "%1 %2", panelModel.currentConditions, panelModel.currentTemperature);
+        var tooltips = [];
+        var temperature = plasmoid.nativeInterface.temperatureShownInTooltip ? observationModel.temperature : null;
+        if (observationModel.conditions && temperature) {
+            tooltips.push(i18nc("weather condition + temperature",
+                                "%1 %2", observationModel.conditions, temperature));
+        } else if (observationModel.conditions || temperature) {
+            tooltips.push(observationModel.conditions || temperature);
         }
-        return panelModel.currentConditions || panelModel.currentTemperature || "";
+        if (plasmoid.nativeInterface.windShownInTooltip) {
+            if (observationModel.windGust) {
+                tooltips.push(i18nc("winddirection windspeed (windgust)", "%1 %2 (%3)",
+                                    observationModel.windDirection, observationModel.windSpeed, observationModel.windGust));
+            } else {
+                tooltips.push(i18nc("winddirection windspeed", "%1 %2",
+                                    observationModel.windDirection, observationModel.windSpeed));
+            }
+        }
+        if (plasmoid.nativeInterface.pressureShownInTooltip && observationModel.pressure) {
+            if (observationModel.pressureTendency) {
+                tooltips.push(i18nc("pressure (tendency)", "%1 (%2)",
+                                    observationModel.pressure, observationModel.pressureTendency));
+            } else {
+                tooltips.push(observationModel.pressure);
+            }
+        }
+        if (plasmoid.nativeInterface.humidityShownInTooltip && observationModel.humidity) {
+            tooltips.push(i18n("Humidity: %1", observationModel.humidity));
+        }
+
+        return tooltips.join("\n");
     }
-    Plasmoid.associatedApplicationUrls: panelModel.creditUrl || null
+    Plasmoid.associatedApplicationUrls: generalModel.creditUrl || null
 
     Plasmoid.compactRepresentation: CompactRepresentation {
-        model: panelModel
+        generalModel: root.generalModel
+        observationModel: root.observationModel
     }
 
     Plasmoid.fullRepresentation: FullRepresentation {
-        model: panelModel
+        generalModel: root.generalModel
+        observationModel: root.observationModel
     }
 
     Component.onCompleted: {

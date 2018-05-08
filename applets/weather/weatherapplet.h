@@ -51,6 +51,10 @@ class WeatherApplet : public Plasma::Applet
     Q_PROPERTY(int displayPressureUnit READ displayPressureUnit NOTIFY displayUnitsChanged FINAL)
     Q_PROPERTY(int displayVisibilityUnit READ displayVisibilityUnit NOTIFY displayUnitsChanged FINAL)
 
+    Q_PROPERTY(bool temperatureShownInTooltip READ temperatureShownInTooltip NOTIFY temperatureShownInTooltipChanged FINAL)
+    Q_PROPERTY(bool windShownInTooltip READ windShownInTooltip NOTIFY windShownInTooltipChanged FINAL)
+    Q_PROPERTY(bool pressureShownInTooltip READ pressureShownInTooltip NOTIFY pressureShownInTooltipChanged FINAL)
+    Q_PROPERTY(bool humidityShownInTooltip READ humidityShownInTooltip NOTIFY humidityShownInTooltipChanged FINAL)
     Q_PROPERTY(bool temperatureShownInCompactMode READ temperatureShownInCompactMode NOTIFY temperatureShownInCompactModeChanged FINAL)
 
 public:
@@ -81,6 +85,11 @@ public:
     int displayPressureUnit() const    { return m_displayPressureUnit.id(); }
     int displayVisibilityUnit() const  { return m_displayVisibilityUnit.id(); }
 
+    bool temperatureShownInTooltip() const  { return m_temperatureShownInTooltip; }
+    bool windShownInTooltip() const         { return m_windShownInTooltip; }
+    bool pressureShownInTooltip() const     { return m_pressureShownInTooltip; }
+    bool humidityShownInTooltip() const     { return m_humidityShownInTooltip; }
+
     bool temperatureShownInCompactMode() const  { return m_temperatureShownInCompactMode; }
 
 Q_SIGNALS:
@@ -89,6 +98,12 @@ Q_SIGNALS:
     void sourceChanged();
     void updateIntervalChanged();
     void displayUnitsChanged();
+
+    void temperatureShownInTooltipChanged();
+    void windShownInTooltipChanged();
+    void pressureShownInTooltipChanged();
+    void humidityShownInTooltipChanged();
+
     void temperatureShownInCompactModeChanged();
 
 private:
@@ -103,6 +118,11 @@ private:
 
     int m_updateInterval = 30; // in minutes
     QString m_source;
+
+    bool m_temperatureShownInTooltip = true;
+    bool m_windShownInTooltip = false;
+    bool m_pressureShownInTooltip = false;
+    bool m_humidityShownInTooltip = false;
 
     bool m_temperatureShownInCompactMode = false;
 
