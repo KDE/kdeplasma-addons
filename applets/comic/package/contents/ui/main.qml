@@ -119,7 +119,7 @@ Item {
                 id: tabButton
 
                 readonly property string key: model.key
-                readonly property bool highlighted: model.highlight
+                property bool highlighted: model.highlight
 
                 text: model.title
                 iconSource: model.icon
