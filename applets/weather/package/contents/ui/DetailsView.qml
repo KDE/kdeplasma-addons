@@ -19,19 +19,12 @@ import QtQuick 2.9
 
 import QtQuick.Layouts 1.3
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 ColumnLayout {
     id: root
 
     property alias model: repeater.model
-
-    PlasmaCore.Svg {
-        id: windSvg
-
-        imagePath: "weather/wind-arrows"
-    }
 
     ColumnLayout {
         Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
@@ -53,18 +46,6 @@ ColumnLayout {
 
                 sourceComponent: RowLayout {
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-
-                    PlasmaCore.SvgItem {
-                        id: icon
-
-                        Layout.preferredHeight: naturalSize.height
-                        Layout.preferredWidth: naturalSize.width
-
-                        svg: windSvg
-                        elementId: rowData.icon || ""
-
-                        visible: !!rowData.icon
-                    }
 
                     PlasmaComponents.Label {
                         id: text

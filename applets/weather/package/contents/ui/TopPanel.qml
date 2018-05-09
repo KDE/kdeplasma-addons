@@ -23,122 +23,111 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-PlasmaCore.FrameSvgItem {
+GridLayout {
     property var generalModel
     property var observationModel
 
-    implicitWidth: contentLayout.implicitWidth
-    implicitHeight: contentLayout.implicitHeight
+    readonly property int sideWidth: Math.max(
+        windSpeedLabel.implicitWidth,
+        tempLabel.implicitWidth,
+        windSpeedDirection.naturalSize.width
+    )
 
-    Layout.minimumHeight: contentLayout.Layout.minimumHeight + margins.top + margins.bottom
-    Layout.minimumWidth: contentLayout.Layout.minimumWidth + margins.left + margins.right
-    Layout.preferredHeight: contentLayout.Layout.preferredHeight + margins.top + margins.bottom
-    Layout.preferredWidth: contentLayout.Layout.preferredWidth + margins.left + margins.right
-    Layout.maximumHeight: contentLayout.Layout.maximumHeight + margins.top + margins.bottom
-    Layout.maximumWidth: contentLayout.Layout.maximumWidth + margins.left + margins.right
+    Layout.minimumWidth: Math.max(
+        locationLabel.implicitWidth,
+        (sideWidth + columnSpacing) * 2 + conditionIcon.Layout.minimumWidth
+    )
 
     visible: !!generalModel.location
-    imagePath: "widgets/frame"
-    prefix: "plain"
 
-    GridLayout {
-        id: contentLayout
+    columnSpacing: units.largeSpacing
+    rowSpacing: units.smallSpacing
 
-        anchors {
-            fill: parent
-            leftMargin: parent.margins.left
-            topMargin: parent.margins.top
-            rightMargin: parent.margins.right
-            bottomMargin: parent.margins.bottom
-        }
-        Layout.preferredWidth: iconItem.Layout.preferredWidth + locationLabel.Layout.preferredWidth + tempLabel.Layout.preferredWidth + 2 * columnSpacing
+    columns: 3
 
-        columnSpacing: units.largeSpacing
-        rowSpacing: units.smallSpacing
+    PlasmaCore.Svg {
+        id: windSvg
 
-        columns: 3
-        rows: 2
+        imagePath: "weather/wind-arrows"
+    }
 
-        PlasmaCore.IconItem {
-            id: iconItem
+    PlasmaExtras.Heading {
+        id: locationLabel
 
-            Layout.row: 0
-            Layout.column: 0
-            Layout.rowSpan: 2
-            Layout.preferredHeight: units.iconSizes.huge
-            Layout.preferredWidth: units.iconSizes.huge
+        Layout.row: 0
+        Layout.column: 0
+        Layout.columnSpan: 3
+        Layout.fillWidth: true
 
-            source: generalModel.currentConditionIconName
-        }
+        wrapMode: Text.NoWrap
 
-        PlasmaExtras.Heading {
-            id: locationLabel
+        text: generalModel.location
+    }
 
-            Layout.row: 0
-            Layout.column: 1
-            Layout.fillWidth: true
-            Layout.preferredWidth: implicitWidth
+    PlasmaCore.IconItem {
+        id: conditionIcon
 
-            level: 2
-            elide: Text.ElideRight
-            wrapMode: Text.NoWrap
+        Layout.row: 1
+        Layout.column: 1
+        Layout.minimumHeight: units.iconSizes.huge
+        Layout.minimumWidth: units.iconSizes.huge
+        Layout.fillWidth: true
 
-            text: generalModel.location
+        source: generalModel.currentConditionIconName
+    }
 
-            PlasmaCore.ToolTipArea {
-                id: locationToolTip
+    PlasmaComponents.Label {
+        id: conditionLabel
 
-                anchors.fill: parent
-                visible: parent.truncated
-                mainText: parent.text
-            }
+        Layout.row: 2
+        Layout.column: 0
+        Layout.columnSpan: 3
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+        text: observationModel.conditions
+    }
+
+    ColumnLayout {
+        Layout.row: 1
+        Layout.column: 0
+        Layout.minimumWidth: sideWidth
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+
+        PlasmaCore.SvgItem {
+            id: windSpeedDirection
+
+            Layout.preferredHeight: naturalSize.height
+            Layout.preferredWidth: naturalSize.width
+
+            svg: windSvg
+            elementId: observationModel.windDirectionId || ""
+
+            visible: !!observationModel.windDirectionId
         }
 
         PlasmaComponents.Label {
-            id: conditionLabel
+            id: windSpeedLabel
 
-            Layout.row: 1
-            Layout.column: 1
-            Layout.preferredWidth: implicitWidth
-
-            text: observationModel.conditions
+            text: observationModel.windSpeed
         }
+    }
+
+    ColumnLayout {
+        Layout.row: 1
+        Layout.column: 2
+        Layout.minimumWidth: sideWidth
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 
         PlasmaExtras.Heading {
             id: tempLabel
 
-            Layout.row: 0
-            Layout.column: 2
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-            Layout.preferredWidth: implicitWidth
 
-            level: 2
+            level: 3
+            horizontalAlignment: Text.AlignRight
             wrapMode: Text.NoWrap
 
             text: observationModel.temperature
-        }
-
-        PlasmaComponents.Label {
-            id: forecastTempsLabel
-
-            Layout.row: 1
-            Layout.column: 2
-            Layout.alignment: Qt.AlignBaseline | Qt.AlignRight
-            Layout.preferredWidth: implicitWidth
-
-            text: {
-                var low = generalModel.currentDayLowTemperature, high = generalModel.currentDayHighTemperature;
-                if (!!low && !!high) {
-                    return i18nc("High & Low temperature", "H: %1 L: %2", high, low);
-                }
-                if (!!low) {
-                    return i18nc("Low temperature", "Low: %1", low);
-                }
-                if (!!high) {
-                    return i18nc("High temperature", "High: %1", high);
-                }
-                return "";
-            }
         }
     }
 }

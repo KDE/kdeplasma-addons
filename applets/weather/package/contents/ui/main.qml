@@ -122,7 +122,6 @@ Item {
         var data = weatherDataSource.currentData;
 
         var todayForecastTokens = ((data && data["Short Forecast Day 0"]) || "").split("|");
-        var reportTemperatureUnit = (data && data["Temperature Unit"]) || invalidUnit;
 
         model["location"] = (data && data["Place"]) || "";
         model["courtesy"] = (data && data["Credit"]) || "";
@@ -147,22 +146,6 @@ Item {
             }
         }
         model["currentConditionIconName"] = conditionIconName;
-
-        var currentDayLowTemperature;
-        var currentDayHighTemperature;
-        if (todayForecastTokens.length === 6) {
-            var reportLowString = todayForecastTokens[4];
-            if (reportLowString && reportLowString !== "N/A") {
-                currentDayLowTemperature = Util.temperatureToDisplayString(displayTemperatureUnit, reportLowString, reportTemperatureUnit, true);
-            }
-
-            var reportHighString = todayForecastTokens[3];
-            if (reportHighString && reportHighString !== "N/A") {
-                currentDayHighTemperature = Util.temperatureToDisplayString(displayTemperatureUnit, reportHighString, reportTemperatureUnit, true);
-            }
-        }
-        model["currentDayLowTemperature"] = currentDayLowTemperature || "";
-        model["currentDayHighTemperature"] = currentDayHighTemperature || "";
 
         return model;
     }
@@ -197,20 +180,6 @@ Item {
 
         if (observationModel.humidity) {
             model.push({ "text": i18n("Humidity: %1", observationModel.humidity) });
-        }
-
-        if (observationModel.windSpeed) {
-            var windSpeedText;
-            if (observationModel.windDirection) {
-                windSpeedText = i18nc("winddirection windspeed","%1 %2", observationModel.windDirection, observationModel.windSpeed);
-            } else {
-                windSpeedText = observationModel.windSpeed;
-            }
-
-            model.push({
-                "icon": observationModel.windDirectionId,
-                "text": windSpeedText
-            });
         }
 
         if (observationModel.windGust) {
