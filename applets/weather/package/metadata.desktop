@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Weather Forecast
+Name=Weather Report
 Name[ar]=تنبؤات الطقس
 Name[bs]=Vremenska prognoza
 Name[ca]=Previsió meteorològica
@@ -54,7 +54,7 @@ Name[wa]=Prédijhaedjes del meteyo
 Name[x-test]=xxWeather Forecastxx
 Name[zh_CN]=天气预报
 Name[zh_TW]=氣象預報
-Comment=Find out weather for today
+Comment=Forecast and current conditions
 Comment[ca]=Descobreix la meteorologia per avui
 Comment[ca@valencia]=Descobreix la meteorologia per hui
 Comment[cs]=Zjistit počasí na dnešek
