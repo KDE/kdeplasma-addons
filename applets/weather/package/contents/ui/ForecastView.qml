@@ -28,7 +28,7 @@ ColumnLayout {
     property alias model: repeater.model
     readonly property bool hasContent: model && model.length > 0
 
-    spacing: units.largeSpacing
+    spacing: units.smallSpacing
 
     Component {
         id: timeDelegate

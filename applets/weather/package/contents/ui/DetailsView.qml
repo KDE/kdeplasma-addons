@@ -29,7 +29,7 @@ ColumnLayout {
     GridLayout {
         Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
-        rowSpacing: units.largeSpacing
+        rowSpacing: units.smallSpacing
 
         Repeater {
             id: labelRepeater
