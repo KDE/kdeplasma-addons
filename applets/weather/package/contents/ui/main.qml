@@ -154,36 +154,59 @@ Item {
         var model = [];
 
         if (observationModel.windchill) {
-            model.push({ "text": i18n("Windchill: %1", observationModel.windchill) });
+            model.push({
+                "label": i18nc("@label", "Windchill:"),
+                "text":  observationModel.windchill
+            });
         };
 
         if (observationModel.humidex) {
-            model.push({ "text": i18n("Humidex: %1", observationModel.humidex) });
+            model.push({
+                "label": i18nc("@label", "Humidex:"),
+                "text":  observationModel.humidex
+            });
         }
 
         if (observationModel.dewpoint) {
-            model.push({ "text": i18nc("ground temperature", "Dewpoint: %1", observationModel.dewpoint) });
+            model.push({
+                "label": i18nc("@label ground temperature", "Dewpoint:"),
+                "text":  observationModel.dewpoint
+            });
         }
 
         if (observationModel.pressure) {
-            model.push({ "text": i18n("Pressure: %1", observationModel.pressure) });
+            model.push({
+                "label": i18nc("@label", "Pressure:"),
+                "text":  observationModel.pressure
+            });
         }
 
         if (observationModel.pressureTendency) {
-            model.push({ "text": i18nc("pressure tendency, rising/falling/steady",
-                                       "Pressure Tendency: %1", observationModel.pressureTendency) });
+            model.push({
+                "label": i18nc("@label pressure tendency, rising/falling/steady", "Pressure Tendency:"),
+                "text":  observationModel.pressureTendency
+            });
         }
 
         if (observationModel.visibility) {
-            model.push({ "text": i18n("Visibility: %1", observationModel.visibility) });
+            model.push({
+                "label": i18nc("@label", "Visibility:"),
+                "text":  observationModel.visibility
+            });
         }
 
         if (observationModel.humidity) {
-            model.push({ "text": i18n("Humidity: %1", observationModel.humidity) });
+            model.push({
+                "label": i18nc("@label", "Humidity:"),
+                "text":  observationModel.humidity
+            });
         }
 
         if (observationModel.windGust) {
-            model.push({ "text": i18n("Wind Gust: %1",observationModel. windGust) });
+            model.push({
+                "label": i18nc("@label", "Wind Gust:"),
+                "text":  observationModel.windGust
+            });
         }
 
         return model;
