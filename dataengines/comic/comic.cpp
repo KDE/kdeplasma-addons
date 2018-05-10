@@ -26,9 +26,6 @@
 #include <QDebug>
 #include <QStandardPaths>
 
-#include <KServiceTypeTrader>
-#include <KPluginInfo>
-
 #include <Plasma/DataContainer>
 #include <KPackage/PackageLoader>
 
