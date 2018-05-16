@@ -47,7 +47,7 @@ class FlickrProvider : public PotdProvider
          * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        FlickrProvider( QObject *parent, const QVariantList &args );
+        explicit FlickrProvider( QObject *parent, const QVariantList &args );
 
         /**
          * Destroys the flickr provider.

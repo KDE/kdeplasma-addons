@@ -13,7 +13,7 @@ class DictionaryRunner : public Plasma::AbstractRunner
     Q_OBJECT
 
 public:
-    DictionaryRunner(QObject *parent, const QVariantList &args);
+    explicit DictionaryRunner(QObject *parent, const QVariantList &args);
     void match(Plasma::RunnerContext &context) override;
     void reloadConfiguration() override;
 

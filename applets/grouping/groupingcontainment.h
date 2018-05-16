@@ -29,7 +29,7 @@ class GroupingContainment : public Plasma::Containment
 {
     Q_OBJECT
 public:
-    GroupingContainment( QObject *parent, const QVariantList &args );
+    explicit GroupingContainment( QObject *parent, const QVariantList &args );
     ~GroupingContainment() override;
 
     void init() override;

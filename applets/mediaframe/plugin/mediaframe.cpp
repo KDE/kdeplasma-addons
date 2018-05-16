@@ -29,7 +29,6 @@
 #include <QRegularExpression>
 #include <QCryptographicHash>
 
-//#include <KUrl>
 #include <KIO/StoredTransferJob>
 #include <KIO/Job>
 

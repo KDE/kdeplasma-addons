@@ -32,7 +32,7 @@ class GroupedAppletsContainer : public Plasma::Applet
     Q_PROPERTY(QQuickItem *internalContainmentItem READ internalContainmentItem NOTIFY internalContainmentItemChanged)
 
 public:
-    GroupedAppletsContainer(QObject *parent, const QVariantList &args);
+    explicit GroupedAppletsContainer(QObject *parent, const QVariantList &args);
     ~GroupedAppletsContainer() override;
 
     void init() override;

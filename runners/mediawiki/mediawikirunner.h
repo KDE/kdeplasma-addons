@@ -31,7 +31,7 @@ class MediaWikiRunner : public Plasma::AbstractRunner
     Q_OBJECT
 
 public:
-    MediaWikiRunner(QObject *parent, const QVariantList &args);
+    explicit MediaWikiRunner(QObject *parent, const QVariantList &args);
     ~MediaWikiRunner() override;
 
     void match(Plasma::RunnerContext &context) override;

@@ -32,8 +32,7 @@
 K_EXPORT_PLASMA_RUNNER(katesessionsrunner, KateSessions)
 
 KateSessions::KateSessions(QObject *parent, const QVariantList& args)
-    : Plasma::AbstractRunner(parent, args),
-    m_sessionWatch(nullptr)
+    : Plasma::AbstractRunner(parent, args)
 {
     setObjectName(QLatin1String("Kate Sessions"));
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);

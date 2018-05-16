@@ -47,7 +47,7 @@ class ApodProvider : public PotdProvider
          * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        ApodProvider( QObject *parent, const QVariantList &args );
+        explicit ApodProvider( QObject *parent, const QVariantList &args );
 
         /**
          * Destroys the APOD provider.

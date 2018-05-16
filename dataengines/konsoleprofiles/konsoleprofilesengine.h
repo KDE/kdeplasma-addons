@@ -28,7 +28,7 @@ class KonsoleProfilesEngine : public Plasma::DataEngine
     Q_OBJECT
 
 public:
-    KonsoleProfilesEngine(QObject *parent, const QVariantList &args);
+    explicit KonsoleProfilesEngine(QObject *parent, const QVariantList &args);
     ~KonsoleProfilesEngine() override;
 
     void init();

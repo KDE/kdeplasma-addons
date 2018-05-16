@@ -67,7 +67,7 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
         QString name() const;
 
         /**
-         * @reutrn the date to load for this item, if any
+         * @return the date to load for this item, if any
          */
         QDate date() const;
 

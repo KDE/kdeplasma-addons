@@ -40,8 +40,8 @@ public:
         GetDigit  = 2
     };
 
-    StringParser(const QString &s) : m_index(0), m_s(s) {};
-    ~StringParser() {};
+    StringParser(const QString &s) : m_index(0), m_s(s) {}
+    ~StringParser() {}
 
     QString get(int type)
     {

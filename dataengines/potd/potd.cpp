@@ -151,7 +151,7 @@ void PotdEngine::finished( PotdProvider *provider )
 
     QImage img(provider->image());
     // store in cache if it's not the response of a CachedProvider
-    if ( qobject_cast<CachedProvider*>( provider ) == 0 && !img.isNull() ) {
+    if ( qobject_cast<CachedProvider*>( provider ) == nullptr && !img.isNull() ) {
         SaveImageThread *thread = new SaveImageThread( provider->identifier(), img );
         connect(thread, SIGNAL(done(QString,QString,QImage)), this, SLOT(cachingFinished(QString,QString,QImage)));
         QThreadPool::globalInstance()->start(thread);

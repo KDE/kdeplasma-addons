@@ -29,7 +29,7 @@ class KateSessions : public Plasma::AbstractRunner {
     Q_OBJECT
 
     public:
-        KateSessions( QObject *parent, const QVariantList& args );
+        explicit KateSessions( QObject *parent, const QVariantList& args );
         ~KateSessions() override;
 
         void match(Plasma::RunnerContext &context) override;
@@ -41,7 +41,7 @@ class KateSessions : public Plasma::AbstractRunner {
         void slotTeardown();
 
     private:
-        KDirWatch* m_sessionWatch;
+        KDirWatch* m_sessionWatch = nullptr;
         QString m_sessionsFolderPath;
         QStringList m_sessions;
 };

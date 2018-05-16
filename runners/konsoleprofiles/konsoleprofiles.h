@@ -37,7 +37,7 @@ class KonsoleProfiles : public Plasma::AbstractRunner {
     Q_OBJECT
 
 public:
-    KonsoleProfiles( QObject *parent, const QVariantList& args );
+    explicit KonsoleProfiles( QObject *parent, const QVariantList& args );
     ~KonsoleProfiles() override;
 
     void match(Plasma::RunnerContext &context) override;

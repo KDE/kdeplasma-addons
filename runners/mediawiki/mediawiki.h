@@ -45,19 +45,19 @@ public:
     class Result {
         public:
             Result() {
-        };
+        }
 
         Result( const Result &r ) {
             this->title = r.title;
             this->url = r.url;
-        };
+        }
 
         Result &operator= (const Result &other)  {
             this->title = other.title;
             this->url = other.url;
 
             return *this;
-        };
+        }
 
         /** The page title of the match. */
         QString title;

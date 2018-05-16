@@ -67,7 +67,7 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
     Q_PROPERTY(QStringList tabIdentifiers READ tabIdentifiers WRITE setTabIdentifiers NOTIFY tabIdentifiersChanged)
     Q_PROPERTY(int checkNewComicStripsInterval READ checkNewComicStripsInterval WRITE setCheckNewComicStripsInterval NOTIFY checkNewComicStripsIntervalChanged)
     Q_PROPERTY(int providerUpdateInterval READ providerUpdateInterval WRITE setProviderUpdateInterval NOTIFY providerUpdateIntervalChanged)
-    Q_PROPERTY(int maxComicLimit READ maxComicLimit WRITE setMaxComicLimit NOTIFY maxComicLimitChanged);
+    Q_PROPERTY(int maxComicLimit READ maxComicLimit WRITE setMaxComicLimit NOTIFY maxComicLimitChanged)
 
     public:
         ComicApplet( QObject *parent, const QVariantList &args );
