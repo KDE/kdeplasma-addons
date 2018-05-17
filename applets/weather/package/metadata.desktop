@@ -1,6 +1,22 @@
 [Desktop Entry]
 Name=Weather Report
+Name[ca]=Informe meteorològic
+Name[gl]=Informe meteorolóxico
+Name[nl]=Weerrapport
+Name[pt]=Boletim Meteorológico
+Name[sv]=Väderprognos
+Name[uk]=Звіт щодо погоди
+Name[x-test]=xxWeather Reportxx
+Name[zh_TW]=氣象回報
 Comment=Forecast and current conditions
+Comment[ca]=Previsió i condicions actuals
+Comment[gl]=Prognóstico e condicións actuais
+Comment[nl]=Voorspelling en huidige condities
+Comment[pt]=Condições actuais e previstas
+Comment[sv]=Prognos och aktuella förhållanden
+Comment[uk]=Прогноз і поточні умови
+Comment[x-test]=xxForecast and current conditionsxx
+Comment[zh_TW]=預報與目前狀況
 Icon=weather-clear
 
 Type=Service
