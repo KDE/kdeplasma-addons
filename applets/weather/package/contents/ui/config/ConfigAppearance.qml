@@ -60,81 +60,6 @@ ColumnLayout {
         Layout.fillWidth: true
         flat: true
 
-        title: i18nc("@title:group", "Tooltip")
-
-        GridLayout {
-            columns: 2
-
-            QtControls.Label {
-                Layout.row: 0
-                Layout.column: 0
-                Layout.alignment: Qt.AlignRight
-                text: i18nc("@label", "Show temperature:")
-            }
-
-            QtControls.CheckBox {
-                id: showTemperatureInTooltipCheckBox
-
-                Layout.row: 0
-                Layout.column: 1
-
-                onCheckedChanged: displayConfigPage.configurationChanged();
-            }
-
-            QtControls.Label {
-                Layout.row: 1
-                Layout.column: 0
-                Layout.alignment: Qt.AlignRight
-                text: i18nc("@label", "Show wind:")
-            }
-
-            QtControls.CheckBox {
-                id: showWindInTooltipCheckBox
-
-                Layout.row: 1
-                Layout.column: 1
-
-                onCheckedChanged: displayConfigPage.configurationChanged();
-            }
-
-            QtControls.Label {
-                Layout.row: 2
-                Layout.column: 0
-                Layout.alignment: Qt.AlignRight
-                text: i18nc("@label", "Show pressure:")
-            }
-
-            QtControls.CheckBox {
-                id: showPressureInTooltipCheckBox
-
-                Layout.row: 2
-                Layout.column: 1
-
-                onCheckedChanged: displayConfigPage.configurationChanged();
-            }
-
-            QtControls.Label {
-                Layout.row: 3
-                Layout.column: 0
-                Layout.alignment: Qt.AlignRight
-                text: i18nc("@label", "Show humidity:")
-            }
-
-            QtControls.CheckBox {
-                id: showHumidityInTooltipCheckBox
-
-                Layout.row: 3
-                Layout.column: 1
-
-                onCheckedChanged: displayConfigPage.configurationChanged();
-            }
-        }
-    }
-
-    QtControls1.GroupBox {
-        Layout.fillWidth: true
-        flat: true
-
         title: i18nc("@title:group", "Compact Mode")
 
         GridLayout {
@@ -145,7 +70,7 @@ ColumnLayout {
                 Layout.column: 0
                 Layout.alignment: Qt.AlignRight
                 enabled: canShowMoreInCompactMode
-                text: i18nc("@label", "Show temperature:")
+                text: i18nc("@label", "Display:")
             }
 
             QtControls.CheckBox {
@@ -155,6 +80,54 @@ ColumnLayout {
                 Layout.column: 1
                 enabled: canShowMoreInCompactMode
 
+                text: i18nc("@option:check", "Show temperature")
+                onCheckedChanged: displayConfigPage.configurationChanged();
+            }
+
+            QtControls.Label {
+                Layout.row: 1
+                Layout.column: 0
+                Layout.alignment: Qt.AlignRight
+                text: i18nc("@label", "Tooltip:")
+            }
+
+            QtControls.CheckBox {
+                id: showTemperatureInTooltipCheckBox
+
+                Layout.row: 1
+                Layout.column: 1
+
+                text: i18nc("@option:check", "Show temperature")
+                onCheckedChanged: displayConfigPage.configurationChanged();
+            }
+
+            QtControls.CheckBox {
+                id: showWindInTooltipCheckBox
+
+                Layout.row: 2
+                Layout.column: 1
+
+                text: i18nc("@option:check", "Show wind")
+                onCheckedChanged: displayConfigPage.configurationChanged();
+            }
+
+            QtControls.CheckBox {
+                id: showPressureInTooltipCheckBox
+
+                Layout.row: 3
+                Layout.column: 1
+
+                text: i18nc("@option:check", "Show pressure")
+                onCheckedChanged: displayConfigPage.configurationChanged();
+            }
+
+            QtControls.CheckBox {
+                id: showHumidityInTooltipCheckBox
+
+                Layout.row: 4
+                Layout.column: 1
+
+                text: i18nc("@option:check", "Show humidity")
                 onCheckedChanged: displayConfigPage.configurationChanged();
             }
         }
