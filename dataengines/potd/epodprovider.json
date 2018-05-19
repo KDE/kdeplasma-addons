@@ -19,7 +19,7 @@
         "Description[sv]": "Tillhandahåll från Epod",
         "Description[uk]": "Постачальник даних Epod",
         "Description[x-test]": "xxEpod Providerxx",
-        "Description[zh_CN]": "Epod 提供方",
+        "Description[zh_CN]": "Epod提供源",
         "Icon": "",
         "Name": "Earth Science Picture of the Day",
         "Name[ca@valencia]": "Imatge de ciències terràqüies del dia",
@@ -42,7 +42,7 @@
         "Name[sv]": "Dagens geovetenskapliga bild",
         "Name[uk]": "Зображення дня Earth Science",
         "Name[x-test]": "xxEarth Science Picture of the Dayxx",
-        "Name[zh_CN]": "每日一图(地球科学)",
+        "Name[zh_CN]": "每日一图（地球科学）",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]
