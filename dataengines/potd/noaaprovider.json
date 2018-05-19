@@ -19,7 +19,7 @@
         "Description[sv]": "Tillhandahåll från NOAA",
         "Description[uk]": "Постачальник даних NOAA",
         "Description[x-test]": "xxNOAA Providerxx",
-        "Description[zh_CN]": "NOAA 提供方",
+        "Description[zh_CN]": "NOAA提供源",
         "Icon": "",
         "Name": "NOAA Environmental Visualization Laboratory Picture of the Day",
         "Name[ca@valencia]": "Imatge del dia del NOAA Environmental Visualization Laboratory",
@@ -41,7 +41,7 @@
         "Name[sv]": "Dagens bild från NOAA:s miljövisualiseringslaboratorium",
         "Name[uk]": "Зображення дня від Лабораторії візуалізації середовища NOAA",
         "Name[x-test]": "xxNOAA Environmental Visualization Laboratory Picture of the Dayxx",
-        "Name[zh_CN]": "NOAA 环境可视化实验室每日一图",
+        "Name[zh_CN]": "每日一图（NOAA 环境可视化实验室）",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]
