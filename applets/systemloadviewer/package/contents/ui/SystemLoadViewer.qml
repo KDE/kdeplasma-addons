@@ -193,6 +193,7 @@ Item {
             }
             else if (sourceName == memBuffers) {
                 memoryUsageProportions[1] = fitMemoryUsage(data.value)
+                memoryUsageProportionsChanged()
             }
             else if (sourceName == swapUsed) {
                 swapUsageProportion = fitSwapUsage(data.value)
