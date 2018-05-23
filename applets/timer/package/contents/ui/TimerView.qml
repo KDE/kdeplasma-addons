@@ -23,7 +23,6 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
-import org.kde.plasma.private.timer 0.1 as TimerPlasmoid
 
 Item {
     id: main
@@ -33,13 +32,6 @@ Item {
     // display seconds in addition to hours and minutes (default: enabled)
     readonly property bool showSeconds: plasmoid.configuration.showSeconds;
 
-    // show notification on timer completion (default: enabled)
-    readonly property bool showNotification: plasmoid.configuration.showNotification;
-
-    // run custom command on timer completion (default: disabled)
-    readonly property bool runCommand: plasmoid.configuration.runCommand;
-    readonly property string command: plasmoid.configuration.command;
-
     readonly property real digits: (showSeconds) ? 7 : 4.5;
     readonly property int digitH: ((height / 2) * digits < width ? height : ((width - (digits - 1)) / digits) * 2);
     readonly property int digitW: digitH / 2;
@@ -47,35 +39,6 @@ Item {
     PlasmaCore.Svg {
         id: timerSvg
         imagePath: "widgets/timer"
-    }
-
-    Timer {
-        id: t;
-        interval: 1000;
-        onTriggered: {
-            if (root.seconds != 0) {
-                root.seconds--;
-            }
-            if (root.seconds == 0) {
-                root.running = false;
-
-                if (showNotification) {
-                    root.createNotification();
-                }
-                if (runCommand) {
-                    TimerPlasmoid.Timer.runCommand(command);
-                }
-                saveTimer();
-            }
-        }
-        repeat: true;
-        running: root.running;
-    }
-
-    Timer {
-        id: delayedSaveTimer;
-        interval: 3000;
-        onTriggered: saveTimer();
     }
 
     Column {
@@ -177,18 +140,12 @@ Item {
         }
     }
 
-    function digitChanged() {
-        delayedSaveTimer.stop();
-        delayedSaveTimer.start();
-    }
-
     function resetOpacity() {
         timerDigits.opacity = 1.0;
     }
 
     Component.onCompleted: {
         root.opacityNeedsReset.connect(resetOpacity);
-        root.digitHasChanged.connect(digitChanged);
     }
 
 }
