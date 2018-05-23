@@ -22,12 +22,19 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
+import org.kde.plasma.private.timer 0.1 as TimerPlasmoid
 
 Item {
     id: root;
     property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
 
     property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);
+
+    // show notification on timer completion (default: enabled)
+    property bool showNotification: plasmoid.configuration.showNotification;
+    // run custom command on timer completion (default: disabled)
+    property bool runCommand: plasmoid.configuration.runCommand;
+    property string command: plasmoid.configuration.command;
 
     // show title (can be customized in the settings dialog, default: disabled)
     property bool showTitle: plasmoid.configuration.showTitle;
@@ -63,6 +70,40 @@ Item {
         id: notificationSource
         engine: "notifications"
         connectedSources: "org.freedesktop.Notifications"
+    }
+
+    Timer {
+        id: t;
+        interval: 1000;
+        onTriggered: {
+            if (root.seconds != 0) {
+                root.seconds--;
+            }
+            if (root.seconds == 0) {
+                root.running = false;
+
+                if (showNotification) {
+                    root.createNotification();
+                }
+                if (runCommand) {
+                    TimerPlasmoid.Timer.runCommand(command);
+                }
+                saveTimer();
+            }
+        }
+        repeat: true;
+        running: root.running;
+    }
+
+    Timer {
+        id: delayedSaveTimer;
+        interval: 3000;
+        onTriggered: saveTimer();
+    }
+
+    function onDigitHasChanged() {
+        delayedSaveTimer.stop();
+        delayedSaveTimer.start();
     }
 
     function createNotification() {
