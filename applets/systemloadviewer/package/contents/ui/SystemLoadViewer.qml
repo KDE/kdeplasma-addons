@@ -444,6 +444,8 @@ Item {
                         level: main.headingLevel
                         text: i18n("CPU %1", cpuIndex)
                         visible: main.labelsVisible
+                        horizontalAlignment: Text.AlignHCenter
+                        Layout.fillWidth: true
                     }
                     ConditionallyLoadedMonitors {
                         colors: cpuColors
@@ -475,6 +477,8 @@ Item {
                 level: main.headingLevel
                 text: i18n("CPU")
                 visible: main.labelsVisible
+                horizontalAlignment: Text.AlignHCenter
+                Layout.fillWidth: true
             }
 
             ConditionallyLoadedMonitors {
@@ -495,6 +499,8 @@ Item {
                 level: main.headingLevel
                 text: i18n("Memory")
                 visible: main.labelsVisible
+                horizontalAlignment: Text.AlignHCenter
+                Layout.fillWidth: true
             }
 
             ConditionallyLoadedMonitors {
@@ -515,6 +521,8 @@ Item {
                 level: main.headingLevel
                 text: i18n("Swap")
                 visible: main.labelsVisible
+                horizontalAlignment: Text.AlignHCenter
+                Layout.fillWidth: true
             }
 
             ConditionallyLoadedMonitors {
@@ -535,6 +543,8 @@ Item {
                 level: main.headingLevel
                 text: i18n("Cache")
                 visible: main.labelsVisible
+                horizontalAlignment: Text.AlignHCenter
+                Layout.fillWidth: true
             }
 
             ConditionallyLoadedMonitors {
