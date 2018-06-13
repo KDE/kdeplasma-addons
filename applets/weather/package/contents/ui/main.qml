@@ -388,8 +388,10 @@ Item {
                 tooltips.push(i18nc("winddirection windspeed (windgust)", "%1 %2 (%3)",
                                     observationModel.windDirection, observationModel.windSpeed, observationModel.windGust));
             } else {
-                tooltips.push(i18nc("winddirection windspeed", "%1 %2",
-                                    observationModel.windDirection, observationModel.windSpeed));
+                if (observationModel.windSpeed) {
+                    tooltips.push(i18nc("winddirection windspeed", "%1 %2",
+                                       observationModel.windDirection, observationModel.windSpeed));
+                }
             }
         }
         if (plasmoid.nativeInterface.pressureShownInTooltip && observationModel.pressure) {
