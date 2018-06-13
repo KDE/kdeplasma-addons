@@ -383,13 +383,17 @@ Item {
         } else if (observationModel.conditions || temperature) {
             tooltips.push(observationModel.conditions || temperature);
         }
-        if (plasmoid.nativeInterface.windShownInTooltip) {
-            if (observationModel.windGust) {
-                tooltips.push(i18nc("winddirection windspeed (windgust)", "%1 %2 (%3)",
-                                    observationModel.windDirection, observationModel.windSpeed, observationModel.windGust));
+        if (plasmoid.nativeInterface.windShownInTooltip && observationModel.windSpeed) {
+            if (observationModel.windDirection) {
+                if (observationModel.windGust) {
+                    tooltips.push(i18nc("winddirection windspeed (windgust)", "%1 %2 (%3)",
+                                        observationModel.windDirection, observationModel.windSpeed, observationModel.windGust));
+                } else {
+                    tooltips.push(i18nc("winddirection windspeed", "%1 %2",
+                                        observationModel.windDirection, observationModel.windSpeed));
+                }
             } else {
-                tooltips.push(i18nc("winddirection windspeed", "%1 %2",
-                                    observationModel.windDirection, observationModel.windSpeed));
+                tooltips.push(observationModel.windSpeed);
             }
         }
         if (plasmoid.nativeInterface.pressureShownInTooltip && observationModel.pressure) {
