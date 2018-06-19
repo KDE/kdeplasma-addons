@@ -94,15 +94,11 @@ Item {
     Connections {
         target: tasksModel
         enabled: root.active
-        onDataChanged: {
-            for (var i = topLeft.row; i <= bottomRight.row ; i++) {
-                if (! (roles.length == 0 || roles.indexOf(TaskManager.AbstractTasksModel.IsMinimized) > 0)) {
-                    continue;
-                }
-                var idx = tasksModel.makeModelIndex(i);
-                if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
-                    deactivate();
-                }
+
+        onActiveTaskChanged: {
+            if (tasksModel.activeTask.valid) { //to supress changing focus to non windows, such as the desktop
+                root.active = false;
+                root.minimizedClients = [];
             }
         }
         onVirtualDesktopChanged: deactivate()
