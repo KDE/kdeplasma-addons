@@ -40,7 +40,7 @@ Item {
 
     function icon(identifier) {
         switch(identifier) {
-            case "Num Lock": return "accessories-calculator"
+            case "Num Lock": return "input-num-on"
             case "Caps Lock": return "input-caps-on"
         }
         return null
