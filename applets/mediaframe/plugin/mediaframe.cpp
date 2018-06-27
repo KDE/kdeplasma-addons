@@ -324,21 +324,32 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
 
 void MediaFrame::pushHistory(const QString &string)
 {
+    const int oldCount = m_history.count();
+
     m_history.prepend(string);
 
     // Keep a sane history size
-    if(m_history.length() > 50)
+    if (m_history.length() > 50) {
         m_history.removeLast();
+    }
+
+    if (oldCount != m_history.count()) {
+        emit historyLengthChanged();
+    }
 }
 
 QString MediaFrame::popHistory()
 {
-    if(m_history.isEmpty())
+    if (m_history.isEmpty()) {
         return QString();
-    return m_history.takeFirst();
+    }
+
+    const QString item = m_history.takeFirst();
+    emit historyLengthChanged();
+    return item;
 }
 
-int MediaFrame::historyLength()
+int MediaFrame::historyLength() const
 {
     return m_history.length();
 }
