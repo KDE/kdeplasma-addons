@@ -296,7 +296,7 @@ Item {
         PlasmaComponents.Button {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
-            enabled: (items.historyLength() > 0) && !isTransitioning
+            enabled: (items.historyLength > 0) && !isTransitioning
             iconSource: "arrow-left"
             onClicked: {
                 nextTimer.stop()
