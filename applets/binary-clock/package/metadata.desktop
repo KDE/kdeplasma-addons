@@ -113,8 +113,8 @@ Icon=clock
 
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
-X-KDE-PluginInfo-Author=Joseph Wenninger,Davide Bettio
-X-KDE-PluginInfo-Email=jowenn@kde.org, davide.bettio@kdemail.net
+X-KDE-PluginInfo-Author=Joseph Wenninger,Davide Bettio,Piotr Kąkol
+X-KDE-PluginInfo-Email=jowenn@kde.org, davide.bettio@kdemail.net, piotrkakol@protonmail.com
 X-KDE-PluginInfo-Name=org.kde.plasma.binaryclock
 X-KDE-PluginInfo-Version=2.0
 X-KDE-PluginInfo-Website=plasma.kde.org

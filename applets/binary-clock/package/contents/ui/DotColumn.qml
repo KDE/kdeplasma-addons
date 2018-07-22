@@ -4,8 +4,9 @@
  * Copyright 2014 Joseph Wenninger <jowenn@kde.org>
  *
  * Original code (KDE4):
- * Copyright 2007 by Riccardo Iaconelli <riccardo@kde.org>               *
+ * Copyright 2007 by Riccardo Iaconelli <riccardo@kde.org>
  * Copyright 2007 by Davide Bettio <davide.bettio@kdemail.net>
+ * Copyright 2018 Piotr Kąkol <piotrkakol@protonmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -23,31 +24,30 @@
 
 import QtQuick 2.0
 
-
 Item {
     property int val
     Dot {
-        x:0
-        y:0
-        val:parent.val
-        bit:8
+        x:   0
+        y:   0
+        val: parent.val
+        bit: 8
     }
     Dot {
-        x:0
-        y:(dotSize+units.smallSpacing)
-        val:parent.val
-        bit:4
+        x:   0
+        y:   (dotSize+units.smallSpacing)
+        val: parent.val
+        bit: 4
     }
     Dot {
-        x:0
-        y:2*(dotSize+units.smallSpacing)
-        val:parent.val
-        bit:2
+        x:   0
+        y:   2*(dotSize+units.smallSpacing)
+        val: parent.val
+        bit: 2
     }
     Dot {
-        x:0
-        y:3*(dotSize+units.smallSpacing)
-        val:parent.val
-        bit:1
+        x:   0
+        y:   3*(dotSize+units.smallSpacing)
+        val: parent.val
+        bit: 1
     }
 }

@@ -5,6 +5,7 @@
  * Copyright 2013 Heena Mahour <heena393@gmail.com>
  * Copyright 2013 Sebastian Kügler <sebas@kde.org>
  * Copyright 2014 Kai Uwe Broulik <kde@privat.broulik.de>
+ * Copyright 2018 Piotr Kąkol <piotrkakol@protonmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -19,6 +20,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
@@ -31,7 +33,7 @@ import org.kde.plasma.calendar 2.0 as PlasmaCalendar
 Item {
     id: root
 
-    property bool showSeconds:plasmoid.configuration.showSeconds
+    property bool showSeconds: plasmoid.configuration.showSeconds
     property int hours
     property int minutes
     property int seconds
@@ -40,14 +42,14 @@ Item {
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
-    Plasmoid.toolTipMainText: Qt.formatDate(dataSource.data["Local"]["DateTime"],"dddd")
+    Plasmoid.toolTipMainText: Qt.formatDate(dataSource.data["Local"]["DateTime"], "dddd")
     Plasmoid.toolTipSubText: Qt.formatDate(dataSource.data["Local"]["DateTime"], Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
 
     PlasmaCore.DataSource {
         id: dataSource
         engine: "time"
         connectedSources: ["Local"]
-        interval: showSeconds?1000:30000
+        interval: showSeconds ? 1000 : 30000
         onDataChanged: {
             var date = new Date(data["Local"]["DateTime"]);
             hours = date.getHours();

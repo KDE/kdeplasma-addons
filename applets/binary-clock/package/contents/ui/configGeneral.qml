@@ -3,6 +3,7 @@
  *
  *  Based on analog-clock configGeneral.qml:
  *  Copyright 2013 David Edmundson <davidedmundson@kde.org>
+ *  Copyright 2018 Piotr Kąkol <piotrkakol@protonmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +24,6 @@ import QtQuick 2.0
 import QtQuick.Controls 1.0 as QtControls
 import QtQuick.Layouts 1.1
 import org.kde.kquickcontrols 2.0 as KQuickControls
-
 
 ColumnLayout {
     id: generalConfigPage
@@ -74,7 +74,7 @@ ColumnLayout {
         title: i18nc("@title:group", "Colors")
 
         GridLayout {
-            columns: 2;
+            columns: 2
             QtControls.CheckBox {
                 id: useCustomColorForActiveCheckBox
                 text: i18nc("@option:check", "Use custom color for active LEDs")

@@ -2,9 +2,10 @@
  * Rewrite of the KDE4-Plasma Binary Clock for KF5/Plasma/QML
  *
  * Copyright 2014 Joseph Wenninger <jowenn@kde.org>
+ * Copyright 2018 Piotr Kąkol <piotrkakol@protonmail.com>
  *
  * Original code (KDE4):
- * Copyright 2007 by Riccardo Iaconelli <riccardo@kde.org>               *
+ * Copyright 2007 by Riccardo Iaconelli <riccardo@kde.org>
  * Copyright 2007 by Davide Bettio <davide.bettio@kdemail.net>
  *
  * Based on FuzzyClock.qml:
@@ -42,10 +43,9 @@ Item {
     Layout.maximumWidth: Infinity
     Layout.preferredWidth: Layout.minimumWidth
 
-    Layout.minimumHeight: 16+(units.smallSpacing * 5)
-   // Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
+    Layout.minimumHeight: 16+(units.smallSpacing*5)
+    //Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     //Layout.preferredHeight: Layout.minimumHeight
-
 
     readonly property int formFactor: plasmoid.formFactor
 
@@ -60,82 +60,81 @@ Item {
     readonly property bool showOffLeds: plasmoid.configuration.showOffLeds
     readonly property bool showGrid: plasmoid.configuration.showGrid
 
-    readonly property int base: plasmoid.configuration.showBcdFormat? 10:16
+    readonly property int base: plasmoid.configuration.showBcdFormat ? 10 : 16
 
-    readonly property int dots: showSeconds? 6:4
+    readonly property int dots: showSeconds ? 6 : 4
 
-    readonly property color onColor: plasmoid.configuration.useCustomColorForActive?plasmoid.configuration.customColorForActive: theme.textColor
-    readonly property color offColor: plasmoid.configuration.useCustomColorForInactive?plasmoid.configuration.customColorForInactive:Qt.rgba(onColor.r,onColor.g,onColor.b,0.4)
-    readonly property color gridColor: plasmoid.configuration.useCustomColorForGrid?plasmoid.configuration.customColorForGrid:Qt.rgba(onColor.r,onColor.g,onColor.b,0.6)
+    readonly property color onColor: plasmoid.configuration.useCustomColorForActive ? plasmoid.configuration.customColorForActive : theme.textColor
+    readonly property color offColor: plasmoid.configuration.useCustomColorForInactive ? plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.4)
+    readonly property color gridColor: plasmoid.configuration.useCustomColorForGrid ? plasmoid.configuration.customColorForGrid : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.6)
 
-    readonly property real dotSize: Math.min((height-5*units.smallSpacing)/4,(width-(dots+1)*units.smallSpacing)/dots)
-    readonly property real displayTop: (height - 4*dotSize-3*units.smallSpacing) /2
-    readonly property real displayLeft: (width - dots*dotSize-(dots-1)*units.smallSpacing) /2
+    readonly property real dotSize: Math.min((height-5*units.smallSpacing)/4, (width-(dots+1)*units.smallSpacing)/dots)
+    readonly property real displayTop: (height - 4*dotSize-3*units.smallSpacing)/2
+    readonly property real displayLeft: (width - dots*dotSize-(dots-1)*units.smallSpacing)/2
 
+    /* displaying calendar after clicking binary clock applet */
     MouseArea {
-        id: mouseArea
+        id:           mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: plasmoid.expanded = !plasmoid.expanded
+        onClicked:    plasmoid.expanded = !plasmoid.expanded
     }
 
-
-    /*hours*/
+    /* hours */
     DotColumn {
-        x:displayLeft
-        y:displayTop
-        val:hours/base
+        x:   displayLeft
+        y:   displayTop
+        val: hours/base
     }
     DotColumn {
-        x:displayLeft+(dotSize+units.smallSpacing)
-        y:displayTop
-        val:hours%base
+        x:   displayLeft+(dotSize+units.smallSpacing)
+        y:   displayTop
+        val: hours%base
     }
 
-
-    /*minutes*/
+    /* minutes */
     DotColumn {
-        x:displayLeft+(dotSize+units.smallSpacing)*2
-        y:displayTop
-        val:minutes/base
+        x:   displayLeft+(dotSize+units.smallSpacing)*2
+        y:   displayTop
+        val: minutes/base
     }
     DotColumn {
-        x:displayLeft+(dotSize+units.smallSpacing)*3
-        y:displayTop
-        val:minutes%base
+        x:   displayLeft+(dotSize+units.smallSpacing)*3
+        y:   displayTop
+        val: minutes%base
     }
 
     /* seconds */
     DotColumn {
-        x:displayLeft+(dotSize+units.smallSpacing)*4
-        y:displayTop
-        val:seconds/base
-        visible:showSeconds
+        x:       displayLeft+(dotSize+units.smallSpacing)*4
+        y:       displayTop
+        val:     seconds/base
+        visible: showSeconds
     }
-
     DotColumn {
-        x:displayLeft+(dotSize+units.smallSpacing)*5
-        y:displayTop
-        val:seconds%base
-        visible:showSeconds
+        x:       displayLeft+(dotSize+units.smallSpacing)*5
+        y:       displayTop
+        val:     seconds%base
+        visible: showSeconds
     }
 
+    /* upper grid border */
     Rectangle {
-        x:displayLeft-units.smallSpacing
-        y:displayTop-units.smallSpacing
-        width:dots*(dotSize+units.smallSpacing)+units.smallSpacing
-        height:units.smallSpacing
-        visible:showGrid
-        color:gridColor
+        x:       displayLeft-units.smallSpacing
+        y:       displayTop-units.smallSpacing
+        width:   dots*(dotSize+units.smallSpacing)+units.smallSpacing
+        height:  units.smallSpacing
+        visible: showGrid
+        color:   gridColor
     }
 
+    /* left grid border */
     Rectangle {
-        x:displayLeft-units.smallSpacing
-        y:displayTop
-        width:units.smallSpacing
-        height:4*(dotSize+units.smallSpacing)
-        visible:showGrid
-        color:gridColor
+        x:       displayLeft-units.smallSpacing
+        y:       displayTop
+        width:   units.smallSpacing
+        height:  4*(dotSize+units.smallSpacing)
+        visible: showGrid
+        color:   gridColor
     }
-
 }
