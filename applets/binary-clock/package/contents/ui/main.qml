@@ -49,7 +49,8 @@ Item {
         id: dataSource
         engine: "time"
         connectedSources: ["Local"]
-        interval: showSeconds ? 1000 : 30000
+        intervalAlignment: plasmoid.configuration.showSeconds ? PlasmaCore.Types.NoAlignment : PlasmaCore.Types.AlignToMinute
+        interval: showSeconds ? 1000 : 60000
         onDataChanged: {
             var date = new Date(data["Local"]["DateTime"]);
             hours = date.getHours();
