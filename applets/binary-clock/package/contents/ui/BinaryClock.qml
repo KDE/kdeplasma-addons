@@ -68,7 +68,7 @@ Item {
     readonly property color offColor: plasmoid.configuration.useCustomColorForInactive ? plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.4)
     readonly property color gridColor: plasmoid.configuration.useCustomColorForGrid ? plasmoid.configuration.customColorForGrid : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.6)
 
-    readonly property real dotSize: Math.min((height-5*units.smallSpacing)/4, (width-(dots+1)*units.smallSpacing)/dots)
+    readonly property int dotSize: Math.min((height-5*units.smallSpacing)/4, (width-(dots+1)*units.smallSpacing)/dots)
     readonly property real displayTop: (height - 4*dotSize-3*units.smallSpacing)/2
     readonly property real displayLeft: (width - dots*dotSize-(dots-1)*units.smallSpacing)/2
 
