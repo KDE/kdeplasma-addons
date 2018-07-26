@@ -11,6 +11,7 @@ if (Qt5WebEngine_FOUND)
 #######################################################################################
 # Package (metadata.desktop and QML)
 plasma_install_package(package org.kde.plasma_applet_dict)
+# TODO: fix pluginid "org.kde.plasma_applet_dict" into properly namespaced id "org.kde.plasma.dict"
 
 #######################################################################################
 # Icon for the package
@@ -22,7 +23,7 @@ ecm_install_icons(
 #######################################################################################
 # C++ Plugin
 
-add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.dict")
+add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma_applet_dict")
 
 set(dict_SRCS
   plugin/dict_plugin.cpp
