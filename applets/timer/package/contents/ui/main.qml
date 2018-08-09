@@ -143,7 +143,7 @@ Item {
     function startTimer() {
         running = true;
         suspended = false;
-        // timerDigits.opacity = 1.0;
+        opacityNeedsReset();
         saveTimer();
     }
 
@@ -157,6 +157,7 @@ Item {
         running = false;
         suspended = false;
         seconds = 0;
+        opacityNeedsReset();
         saveTimer();
     }
 
