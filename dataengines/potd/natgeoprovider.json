@@ -2,6 +2,7 @@
     "KPlugin": {
         "Icon": "",
         "Name": "National Geographic",
+        "Name[ko]": "내셔널 지오그래픽",
         "Name[x-test]": "xxNational Geographicxx",
         "Name[zh_CN]": "国家地理",
         "ServiceTypes": [
