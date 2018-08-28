@@ -101,7 +101,7 @@ bool CachedProvider::isCached( const QString &identifier, bool ignoreAge )
     if (!ignoreAge && !identifier.contains(QLatin1Char(':'))) {
         // no date in the identifier, so it's a daily; check to see ifthe modification time is today
         QFileInfo info( path );
-        if ( info.lastModified().daysTo( QDateTime::currentDateTime() ) > 1 ) {
+        if ( info.lastModified().daysTo( QDateTime::currentDateTime() ) >= 1 ) {
             return false;
         }
     }

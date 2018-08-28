@@ -192,7 +192,7 @@ void PotdEngine::checkDayChanged()
                 updateSourceEvent( it.key() );
             } else {
                 QFileInfo info( path );
-                if ( info.lastModified().daysTo( QDateTime::currentDateTime() ) > 1 ) {
+                if ( info.lastModified().daysTo( QDateTime::currentDateTime() ) >= 1 ) {
                     updateSourceEvent( it.key() );
                 }
             }
