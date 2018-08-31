@@ -17,9 +17,11 @@
  */
 
 import QtQuick 2.1
+import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 Item {
     id: root
@@ -73,6 +75,19 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
             acceptedButtons: Qt.NoButton
+        }
+    }
+
+    Plasmoid.fullRepresentation: ColumnLayout {
+        PlasmaExtras.Heading {
+            Layout.fillWidth: true
+            level: 3
+            wrapMode: Text.WordWrap
+            text: root.Plasmoid.toolTipSubText
+        }
+        Item {
+            Layout.fillHeight: true
+            width: 5
         }
     }
 
