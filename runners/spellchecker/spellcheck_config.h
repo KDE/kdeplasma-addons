@@ -43,6 +43,7 @@ class SpellCheckConfig : public KCModule
         void defaults() override;
 
         void toggleTriggerWord(int state);
+        void openKcm();
 
     private:
         SpellCheckConfigForm* m_ui;

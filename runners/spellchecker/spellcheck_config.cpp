@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "spellcheck_config.h"
 
 #include <QGridLayout>
+#include <QProcess>
 
 #include <KConfigGroup>
 #include <KPluginFactory>
@@ -46,6 +47,9 @@ SpellCheckConfig::SpellCheckConfig(QWidget* parent, const QVariantList& args) :
     connect(m_ui->m_requireTriggerWord, SIGNAL(stateChanged(int)), this, SLOT(toggleTriggerWord(int)));
     connect(m_ui->m_triggerWord, SIGNAL(textChanged(QString)), this, SLOT(changed()));
 
+    m_ui->m_openKcmButton->setIcon(QIcon::fromTheme(QStringLiteral("tools-check-spelling")));
+    connect(m_ui->m_openKcmButton, &QPushButton::clicked, this, &SpellCheckConfig::openKcm);
+
     load();
 }
 
@@ -60,6 +64,11 @@ void SpellCheckConfig::toggleTriggerWord(int state)
     } else {
         m_ui->m_triggerWord->setEnabled(true);
     }
+}
+
+void SpellCheckConfig::openKcm()
+{
+    QProcess::startDetached(QStringLiteral("kcmshell5"), {QStringLiteral("spellchecking")});
 }
 
 void SpellCheckConfig::load()
