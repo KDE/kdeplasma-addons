@@ -1,6 +1,6 @@
 /*
  *   Copyright (C) 2006 Aaron Seigo <aseigo@kde.org>
- *   Copyright (C) 2010 Marco MArtin <notmart@gmail.com>
+ *   Copyright (C) 2010 Marco Martin <notmart@gmail.com>
  *   Copyright (C) 2015 Vishesh Handa <vhanda@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
