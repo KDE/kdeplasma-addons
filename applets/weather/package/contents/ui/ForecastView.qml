@@ -26,6 +26,7 @@ ColumnLayout {
     id: root
 
     property alias model: repeater.model
+    readonly property int preferredIconSize: units.iconSizes.large
     readonly property bool hasContent: model && model.length > 0
 
     spacing: units.smallSpacing
@@ -68,10 +69,9 @@ ColumnLayout {
         id: iconDelegate
 
         PlasmaCore.IconItem {
-
             Layout.fillWidth: true
-            Layout.minimumHeight: units.iconSizes.small
-            Layout.preferredHeight: units.iconSizes.medium
+            Layout.preferredHeight: preferredIconSize
+            Layout.preferredWidth: preferredIconSize
 
             PlasmaCore.ToolTipArea {
                 id: iconToolTip
@@ -87,6 +87,7 @@ ColumnLayout {
         }
     }
 
+    // simulate a table, by creating rowlayouts whose items all have the same width
     Repeater {
         id: repeater
 
@@ -104,10 +105,15 @@ ColumnLayout {
             sourceComponent: RowLayout {
                 id: row
 
-                readonly property int maxItemImplicitWidth: {
+                readonly property int maxItemPreferredWidth: {
                     var mw = 0;
-                    for (var i = 0; i < children.length; i++) {
-                        mw = Math.max(mw, children[i].implicitWidth);
+                    for (var i = 0; i < rowRepeater.count; i++) {
+                        var item = rowRepeater.itemAt(i);
+                        if (!item) {
+                            continue;
+                        }
+
+                        mw = Math.max(mw, item.itemPreferredWidth);
                     }
                     return mw;
                 }
@@ -124,16 +130,18 @@ ColumnLayout {
 
                     delegate: Loader {
                         property var cellData: modelData
+                        readonly property int itemPreferredWidth: (item.Layout && item.Layout.preferredWidth > 0) ? item.Layout.preferredWidth : item.implicitWidth
                         sourceComponent:
                             (rowIndex === 0) ? timeDelegate :
                             (rowIndex === 1) ? iconDelegate :
                             /* else */         temperatureDelegate
 
                         Layout.fillWidth: item.Layout.fillWidth
-                        Layout.minimumWidth: maxItemImplicitWidth
+                        Layout.minimumWidth: maxItemPreferredWidth
                         Layout.minimumHeight: item.Layout.minimumHeight
                         Layout.alignment: item.Layout.alignment
-                        Layout.preferredWidth: maxItemImplicitWidth
+                        Layout.preferredWidth: maxItemPreferredWidth
+                        Layout.preferredHeight: item.Layout.preferredHeight
                     }
                 }
             }

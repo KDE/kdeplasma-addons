@@ -71,6 +71,8 @@ GridLayout {
         Layout.column: 1
         Layout.minimumHeight: units.iconSizes.huge
         Layout.minimumWidth: units.iconSizes.huge
+        Layout.preferredHeight: Layout.minimumHeight
+        Layout.preferredWidth: Layout.minimumWidth
         Layout.fillWidth: true
 
         source: generalModel.currentConditionIconName
