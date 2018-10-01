@@ -30,8 +30,8 @@ Item {
     Layout.minimumWidth: units.gridUnit * 12
     Layout.minimumHeight: units.gridUnit * 12
 
-    function popupEventSlot(shown) {
-        if (shown) {
+    Plasmoid.onExpandedChanged: {
+        if (plasmoid.expanded) {
             view.forceActiveFocus();
         }
     }
@@ -56,7 +56,6 @@ Item {
 
     Component.onCompleted: {
         plasmoid.popupIcon = "utilities-terminal";
-        plasmoid.popupEvent.connect('popupEvent', popupEventSlot);
     }
 
    PlasmaCore.Svg {
