@@ -297,6 +297,7 @@ Item {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             enabled: (items.historyLength > 0) && !isTransitioning
+            visible: main.itemCount > 1
             iconSource: "arrow-left"
             onClicked: {
                 nextTimer.stop()
@@ -308,6 +309,7 @@ Item {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             enabled: hasItems && !isTransitioning
+            visible: main.itemCount > 1
             iconSource: "arrow-right"
             onClicked: {
                 nextTimer.stop()
