@@ -26,17 +26,21 @@ import org.kde.plasma.plasmoid 2.0
 ColumnLayout {
     id: root
 
+    signal configurationChanged
+
     property var cfg_pathList: []
 
     function addPath(object) {
         pathModel.append( object )
         cfg_pathList.push( JSON.stringify(object) )
+        configurationChanged();
     }
 
     function removePath(index) {
         if(pathModel.count > 0) {
             pathModel.remove(index)
             cfg_pathList.splice(index,1)
+            configurationChanged();
         }
     }
 
