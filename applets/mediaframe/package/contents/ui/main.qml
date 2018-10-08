@@ -54,8 +54,8 @@ Item {
 
     readonly property bool pause: overlayMouseArea.containsMouse
 
-    readonly property int itemCount: (items.count + items.futureLength())
-    readonly property bool hasItems: ((itemCount > 0) || (items.futureLength() > 0))
+    readonly property int itemCount: (items.count + items.futureLength)
+    readonly property bool hasItems: ((itemCount > 0) || (items.futureLength > 0))
     readonly property bool isTransitioning: faderAnimation.running
 
     onActiveSourceChanged: {
@@ -117,7 +117,7 @@ Item {
         if(itemCount > 1)
             items.pushHistory(active)
 
-        if(items.futureLength() > 0) {
+        if(items.futureLength > 0) {
             setActiveSource(items.popFuture())
         } else {
             //setLoading()

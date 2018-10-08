@@ -34,6 +34,7 @@ class MediaFrame : public QObject
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(int historyLength READ historyLength NOTIFY historyLengthChanged)
+    Q_PROPERTY(int futureLength READ futureLength NOTIFY futureLengthChanged)
     Q_PROPERTY(bool random READ random WRITE setRandom NOTIFY randomChanged)
 
     public:
@@ -51,6 +52,7 @@ class MediaFrame : public QObject
         int count() const;
 
         int historyLength() const;
+        int futureLength() const;
 
         bool random() const;
         void setRandom(bool random);
@@ -75,11 +77,11 @@ class MediaFrame : public QObject
 
         Q_INVOKABLE void pushFuture(const QString &string);
         Q_INVOKABLE QString popFuture();
-        Q_INVOKABLE int futureLength();
 
     Q_SIGNALS:
         void countChanged();
         void historyLengthChanged();
+        void futureLengthChanged();
         void randomChanged();
         void itemChanged(const QString &path);
 

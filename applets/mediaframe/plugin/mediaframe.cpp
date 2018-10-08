@@ -357,16 +357,21 @@ int MediaFrame::historyLength() const
 void MediaFrame::pushFuture(const QString &string)
 {
     m_future.prepend(string);
+    emit futureLengthChanged();
 }
 
 QString MediaFrame::popFuture()
 {
-    if(m_future.isEmpty())
+    if (m_future.isEmpty()) {
         return QString();
-    return m_future.takeFirst();
+    }
+
+    const QString item = m_future.takeFirst();
+    emit futureLengthChanged();
+    return item;
 }
 
-int MediaFrame::futureLength()
+int MediaFrame::futureLength() const
 {
     return m_future.length();
 }
