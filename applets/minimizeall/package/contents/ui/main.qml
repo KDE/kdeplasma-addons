@@ -18,7 +18,7 @@
  *    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-import QtQuick 2.1
+import QtQuick 2.7
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
