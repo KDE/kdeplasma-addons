@@ -264,6 +264,9 @@ void ComicProvider::requestPage(const QUrl &url, int id, const MetaInfos &infos)
 
 void ComicProvider::requestRedirectedUrl(const QUrl &url, int id, const MetaInfos &infos)
 {
+    //each request restarts the timer
+    d->mTimer->start();
+
     KIO::MimetypeJob *job = KIO::mimetype(url, KIO::HideProgressInfo);
     job->setProperty("uid", id);
     d->mRedirections[job] = url;
