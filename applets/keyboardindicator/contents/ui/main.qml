@@ -51,7 +51,8 @@ Item {
     readonly property bool lockedCount: {
         var ret = 0;
         for (var v in keystateSource.connectedSources) {
-            ret += keystateSource.data[keystateSource.connectedSources[v]].Locked
+            var data = keystateSource.data[keystateSource.connectedSources[v]];
+            ret += data && data.Locked
         }
         return ret
     }
@@ -59,7 +60,8 @@ Item {
     Plasmoid.icon: {
         for (var v in keystateSource.connectedSources) {
             var source = keystateSource.connectedSources[v]
-            if (keystateSource.data[source].Locked)
+            var data = keystateSource.data[source];
+            if (data && data.Locked)
                 return icon(source)
         }
         return "input-keyboard"
@@ -97,7 +99,8 @@ Item {
         var found = false;
         for (var v in keystateSource.connectedSources) {
             var source = keystateSource.connectedSources[v]
-            if (keystateSource.data[source].Locked) {
+            var data = keystateSource.data[source];
+            if (data && data.Locked) {
                 found = true
                 ret+=i18n("%1: Locked\n", translate(source))
             }
