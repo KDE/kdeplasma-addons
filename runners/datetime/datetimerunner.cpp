@@ -51,48 +51,47 @@ void DateTimeRunner::match(Plasma::RunnerContext &context)
         const QString date = QLocale().toString(QDate::currentDate());
         addMatch(i18n("Today's date is %1", date), date, context, QStringLiteral("view-calendar-day"));
     } else if (term.startsWith(dateWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
-        QString tzName;
-        QString tz = term.right(term.length() - dateWord.length() - 1);
-        QDateTime dt = datetime(tz, tzName);
-        if (dt.isValid()) {
-            const QString date = QLocale().toString(dt.date());
-            addMatch(QStringLiteral("%1 - %2").arg(tzName, date), date, context, QStringLiteral("view-calendar-day"));
+        const auto tz = term.rightRef(term.length() - dateWord.length() - 1);
+        const auto dates = datetime(tz);
+        for(auto it = dates.constBegin(), itEnd = dates.constEnd(); it != itEnd; ++it) {
+            const QString date = QLocale().toString(*it);
+            addMatch(QStringLiteral("%1 - %2").arg(it.key(), date), date, context, QStringLiteral("view-calendar-day"));
         }
     } else if (term.compare(timeWord, Qt::CaseInsensitive) == 0) {
         const QString time = QLocale().toString(QTime::currentTime());
         addMatch(i18n("Current time is %1", time), time, context, QStringLiteral("clock"));
     } else if (term.startsWith(timeWord + QLatin1Char( ' ' ), Qt::CaseInsensitive)) {
-        QString tzName;
-        QString tz = term.right(term.length() - timeWord.length() - 1);
-        QDateTime dt = datetime(tz, tzName);
-        if (dt.isValid()) {
-            const QString time = QLocale().toString(dt.time(),QLocale::ShortFormat);
-            addMatch(QStringLiteral("%1 - %2").arg(tzName, time), time, context, QStringLiteral("clock"));
+        const auto tz = term.rightRef(term.length() - timeWord.length() - 1);
+        const auto times = datetime(tz);
+        for(auto it = times.constBegin(), itEnd = times.constEnd(); it != itEnd; ++it) {
+            const QString time = QLocale().toString(*it, QLocale::ShortFormat);
+            addMatch(QStringLiteral("%1 - %2").arg(it.key(), time), time, context, QStringLiteral("clock"));
         }
     }
 }
 
-QDateTime DateTimeRunner::datetime(const QString &tz, QString &tzName)
+QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringRef& tz)
 {
+    QHash<QString, QDateTime> ret;
     //
     // KTimeZone gives us the actual timezone names such as "Asia/Kolkatta" and does
     // not give us country info. QTimeZone does not give us the actual timezone name
     // This is why we are using both for now.
     //
-    QList<QByteArray> timeZoneIds = QTimeZone::availableTimeZoneIds();
+    const QList<QByteArray> timeZoneIds = QTimeZone::availableTimeZoneIds();
     for (const QByteArray& zoneId : timeZoneIds) {
         QTimeZone timeZone(zoneId);
 
         const QString zoneName = QString::fromUtf8(zoneId);
         if (zoneName.startsWith(tz, Qt::CaseInsensitive)) {
-            tzName = zoneName;
-            return QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
+            ret[zoneName] = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
+            continue;
         }
 
         const QString country = QLocale::countryToString(timeZone.country());
         if (country.startsWith(tz, Qt::CaseInsensitive)) {
-            tzName = country;
-            return QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
+            ret[country] = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
+            continue;
         }
 
         // FIXME: This only includes the current abbreviation and not old abbreviation or
@@ -100,22 +99,12 @@ QDateTime DateTimeRunner::datetime(const QString &tz, QString &tzName)
         // Eg - depending on the current date, only CET or CEST will work
         const QString abbr = timeZone.abbreviation(QDateTime::currentDateTime());
         if (abbr.startsWith(tz, Qt::CaseInsensitive)) {
-            tzName = abbr;
-            return QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
+            ret[abbr] = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
+            continue;
         }
     }
 
-    for (const QByteArray& zoneId : timeZoneIds) {
-        QTimeZone timeZone(zoneId);
-
-        const QString zoneName = QString::fromUtf8(zoneId);
-        if (zoneName.contains(tz, Qt::CaseInsensitive)) {
-            tzName = zoneName;
-            return QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
-        }
-    }
-
-    return QDateTime();
+    return ret;
 }
 
 void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,

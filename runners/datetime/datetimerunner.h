@@ -42,7 +42,7 @@ public:
     void match(Plasma::RunnerContext &context) override;
 
 private:
-    QDateTime datetime(const QString &tz, QString &tzName);
+    QHash<QString, QDateTime> datetime(const QStringRef &tz);
     void addMatch(const QString &text, const QString &clipboardText,
                   Plasma::RunnerContext &context, const QString& iconName);
 };
