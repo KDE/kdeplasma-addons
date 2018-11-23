@@ -40,29 +40,42 @@ Item {
     // model providing final display strings for observation properties
     readonly property var observationModel: {
         var model = {};
-        var data = weatherDataSource.currentData;
+        var data = weatherDataSource.currentData || {};
 
-        var reportTemperatureUnit = (data && data["Temperature Unit"]) || invalidUnit;
-        var reportPressureUnit =    (data && data["Pressure Unit"])    || invalidUnit;
-        var reportVisibilityUnit =  (data && data["Visibility Unit"])  || invalidUnit;
-        var reportWindSpeedUnit =   (data && data["Wind Speed Unit"])  || invalidUnit;
+        function getNumber(key) {
+            var number = data[key];
+            if (typeof number === "string") {
+                var parsedNumber = parseFloat(number);
+                return isNaN(parsedNumber) ? null : parsedNumber;
+            }
+            return (typeof number !== "undefined") && (number !== "") ? number : null;
+        }
+        function getNumberOrString(key) {
+            var number = data[key];
+            return (typeof number !== "undefined") && (number !== "") ? number : null;
+        }
 
-        model["conditions"] = (data && data["Current Conditions"]) || "";
+        var reportTemperatureUnit = data["Temperature Unit"] || invalidUnit;
+        var reportPressureUnit =    data["Pressure Unit"] || invalidUnit;
+        var reportVisibilityUnit =  data["Visibility Unit"] || invalidUnit;
+        var reportWindSpeedUnit =   data["Wind Speed Unit"] || invalidUnit;
 
-        var conditionIconName = (data && data["Condition Icon"]) || null;
+        model["conditions"] = data["Current Conditions"] || "";
+
+        var conditionIconName = data["Condition Icon"] || null;
         model["conditionIconName"] = conditionIconName ? Util.existingWeatherIconName(conditionIconName) : "weather-none-available";
 
-        var temperature = (data && data["Temperature"]) || null;
+        var temperature = getNumber("Temperature");
         model["temperature"] = temperature !== null ? Util.temperatureToDisplayString(displayTemperatureUnit, temperature, reportTemperatureUnit) : "";
 
-        var windchill = (data && data["Windchill"]) || null;
+        var windchill = getNumber("Windchill");
         // Use temperature unit to convert windchill temperature
         // we only show degrees symbol not actual temperature unit
         model["windchill"] = windchill !== null ?
             Util.temperatureToDisplayString(displayTemperatureUnit, windchill, reportTemperatureUnit, false, true) :
             "";
 
-        var humidex = (data && data["Humidex"]) || null;
+        var humidex = getNumber("Humidex");
         // TODO: this seems wrong, does the humidex have temperature as units?
         // Use temperature unit to convert humidex temperature
         // we only show degrees symbol not actual temperature unit
@@ -70,29 +83,29 @@ Item {
             Util.temperatureToDisplayString(displayTemperatureUnit, humidex, reportTemperatureUnit, false, true) :
             "";
 
-        var dewpoint = (data && data["Dewpoint"]) || null;
+        var dewpoint = getNumber("Dewpoint");
         model["dewpoint"] = dewpoint !== null ?
             Util.temperatureToDisplayString(displayTemperatureUnit, dewpoint, reportTemperatureUnit) : "";
 
-        var pressure = (data && data["Pressure"]) || null;
-        model["pressure"] = pressure ?
+        var pressure = getNumber("Pressure");
+        model["pressure"] = pressure !== null ?
             Util.valueToDisplayString(displayPressureUnit, pressure, reportPressureUnit, 2) : "";
 
         var pressureTendency = (data && data["Pressure Tendency"]) || null;
         model["pressureTendency"] = pressureTendency ? i18nc("pressure tendency", pressureTendency) : "";
 
-        var visibility = (data && data["Visibility"]) || null;
-        model["visibility"] = visibility ?
+        var visibility = getNumberOrString("Visibility");
+        model["visibility"] = visibility !== null ?
             ((reportVisibilityUnit !== invalidUnit) ?
                 Util.valueToDisplayString(displayVisibilityUnit, visibility, reportVisibilityUnit, 1) : visibility) :
             "";
 
-        var humidity = (data && data["Humidity"]) || null;
-        model["humidity"] = humidity ? Util.percentToDisplayString(humidity) : "";
+        var humidity = getNumber("Humidity");
+        model["humidity"] = humidity !== null ? Util.percentToDisplayString(humidity) : "";
 
         // TODO: missing check for windDirection validness
-        var windDirection = (data && data["Wind Direction"]) || null;
-        var windSpeed = (data && data["Wind Speed"]) || null;
+        var windDirection = data["Wind Direction"] || "";
+        var windSpeed = getNumberOrString("Wind Speed");
         var windSpeedText;
         if (windSpeed !== null && windSpeed !== "") {
             var windSpeedNumeric = (typeof windSpeed !== 'number') ? parseFloat(windSpeed) : windSpeed;
@@ -108,26 +121,26 @@ Item {
             }
         }
         model["windSpeed"] = windSpeedText || "";
-        model["windDirectionId"] = windDirection || "";
+        model["windDirectionId"] = windDirection;
         model["windDirection"] = windDirection ? i18nc("wind direction", windDirection) : "";
 
-        var windGust = (data && data["Wind Gust"]) || null;
-        model["windGust"] = windGust ? Util.valueToDisplayString(displaySpeedUnit, windGust, reportWindSpeedUnit, 1) : "";
+        var windGust = getNumber("Wind Gust");
+        model["windGust"] = windGust !== null ? Util.valueToDisplayString(displaySpeedUnit, windGust, reportWindSpeedUnit, 1) : "";
 
         return model;
     }
 
     readonly property var generalModel: {
         var model = {};
-        var data = weatherDataSource.currentData;
+        var data = weatherDataSource.currentData || {};
 
-        var todayForecastTokens = ((data && data["Short Forecast Day 0"]) || "").split("|");
+        var todayForecastTokens = (data["Short Forecast Day 0"] || "").split("|");
 
-        model["location"] = (data && data["Place"]) || "";
-        model["courtesy"] = (data && data["Credit"]) || "";
-        model["creditUrl"] = (data && data["Credit Url"]) || "";
+        model["location"] =  data["Place"] || "";
+        model["courtesy"] =  data["Credit"] || "";
+        model["creditUrl"] = data["Credit Url"] || "";
 
-        var forecastDayCount = parseInt((data && data["Total Weather Days"]) || "");
+        var forecastDayCount = parseInt(data["Total Weather Days"] || "");
         var forecastTitle;
         if (!isNaN(forecastDayCount) && forecastDayCount > 0) {
             forecastTitle = i18ncp("Forecast period timeframe", "1 Day", "%1 Days", forecastDayCount);
