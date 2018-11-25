@@ -83,7 +83,7 @@ void ComicApplet::init()
 
     configChanged();
 
-    mEngine = Plasma::PluginLoader::self()->loadDataEngine(QStringLiteral("comic"));
+    mEngine = dataEngine(QStringLiteral("comic"));
     mModel = new ComicModel(mEngine, QStringLiteral("providers"), mTabIdentifier, this);
     mProxy = new QSortFilterProxyModel( this );
     mProxy->setSourceModel( mModel );
@@ -163,12 +163,6 @@ void ComicApplet::init()
 
 ComicApplet::~ComicApplet()
 {
-    if (mEngine && mEngine->isValid()) {
-        auto sources = mEngine->sources();
-        Q_FOREACH(auto source, sources) {
-            mEngine->disconnectSource(source, this);
-        }
-    }
     delete mSavingDir;
     delete m_newStuffDialog;
 }
