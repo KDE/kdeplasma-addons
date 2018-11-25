@@ -193,8 +193,8 @@ void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::
         if (mEngine && !mShowErrorPicture && !previousIdentifierSuffix.isEmpty() ) {
             mEngine->disconnectSource( source, this );
             updateComic( previousIdentifierSuffix );
-            return;
         }
+        return;
     }
 
     mCurrent.setData(data);
