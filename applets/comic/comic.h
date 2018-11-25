@@ -207,6 +207,8 @@ Q_SIGNALS:
         QAction *mActionShop;
         QAction *mActionStorePosition;
         QAction *mActionNextNewStripTab;
+        QAction *mActionSaveComicAs;
+        QAction *mActionCreateComicBook;
         QSizeF mMaxSize;
         QSizeF mLastSize;
         QSizeF mIdealSize;

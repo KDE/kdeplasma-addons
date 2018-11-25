@@ -130,15 +130,15 @@ void ComicApplet::init()
     mActions.append( mActionShop );
     connect( mActionShop, &QAction::triggered, this, &ComicApplet::slotShop );
 
-    QAction *action = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")),
+    mActionSaveComicAs = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")),
                                   i18nc("@action", "&Save Comic As..."), this);
-    mActions.append( action );
-    connect( action, &QAction::triggered, this, &ComicApplet::slotSaveComicAs );
+    mActions.append( mActionSaveComicAs );
+    connect( mActionSaveComicAs, &QAction::triggered, this, &ComicApplet::slotSaveComicAs );
 
-    action = new QAction(QIcon::fromTheme(QStringLiteral("application-epub+zip")),
+    mActionCreateComicBook = new QAction(QIcon::fromTheme(QStringLiteral("application-epub+zip")),
                          i18nc("@action", "&Create Comic Book Archive..."), this);
-    mActions.append( action );
-    connect( action, &QAction::triggered, this, &ComicApplet::createComicBook );
+    mActions.append( mActionCreateComicBook );
+    connect( mActionCreateComicBook, &QAction::triggered, this, &ComicApplet::createComicBook );
 
     mActionScaleContent = new QAction(QIcon::fromTheme(QStringLiteral("zoom-original")),
                                       i18nc("@option:check Context menu of comic image", "&Actual Size"), this);
@@ -511,15 +511,38 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         qWarning() << "Either no identifier was specified or the engine could not be created:" << "id" << id << "engine valid:" << ( mEngine && mEngine->isValid() );
         setConfigurationRequired( true );
     }
+    updateContextMenu();
 }
 
 void ComicApplet::updateContextMenu()
 {
-    mActionGoFirst->setVisible(mCurrent.hasFirst());
-    mActionGoFirst->setEnabled(mCurrent.hasPrev());
-    mActionGoLast->setEnabled(true);//always enable to have some kind of refresh action
-    if (mActionShop) {
-        mActionShop->setEnabled(mCurrent.shopUrl().isValid());
+    if (mCurrent.id().isEmpty()) {
+
+        mActiveComicModel->clear();
+        mActionNextNewStripTab->setEnabled(false);
+        mActionGoFirst->setEnabled(false);
+        mActionGoLast->setEnabled(false);
+        mActionScaleContent->setEnabled(false);
+        if (mActionShop) {
+            mActionShop->setEnabled(false);
+        }
+        mActionStorePosition->setEnabled(false);
+        mActionGoJump->setEnabled(false);
+        mActionSaveComicAs->setEnabled(false);
+        mActionCreateComicBook->setEnabled(false);
+        mActionScaleContent->setChecked(false);
+    } else {
+        mActionGoFirst->setVisible(mCurrent.hasFirst());
+        mActionGoFirst->setEnabled(mCurrent.hasPrev());
+        mActionGoLast->setEnabled(true);
+        if (mActionShop) {
+            mActionShop->setEnabled(mCurrent.shopUrl().isValid());
+        }
+        mActionScaleContent->setEnabled(true);
+        mActionStorePosition->setEnabled(true);
+        mActionGoJump->setEnabled(true);
+        mActionSaveComicAs->setEnabled(true);
+        mActionCreateComicBook->setEnabled(true);
     }
 }
 
