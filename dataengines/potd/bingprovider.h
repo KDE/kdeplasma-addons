@@ -38,8 +38,8 @@ class BingProvider : public PotdProvider
         /**
          * Creates a new Bing provider.
          *
-         * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
+         * @param args The arguments.
          */
         BingProvider( QObject *parent, const QVariantList &args );
 

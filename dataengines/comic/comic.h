@@ -29,7 +29,7 @@ class ComicProvider;
  * This class provides the comic strip.
  *
  * The query keys have the following structure:
- *   <comic_identifier>:<suffix>
+ *   \<comic_identifier\>:\<suffix\>
  * usually the suffix is the date
  * e.g.
  *   userfriendly:2007-07-19

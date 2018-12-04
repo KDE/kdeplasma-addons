@@ -96,7 +96,7 @@ Item {
         enabled: root.active
 
         onActiveTaskChanged: {
-            if (tasksModel.activeTask.valid) { //to supress changing focus to non windows, such as the desktop
+            if (tasksModel.activeTask.valid) { //to suppress changing focus to non windows, such as the desktop
                 root.active = false;
                 root.minimizedClients = [];
             }

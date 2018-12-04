@@ -31,7 +31,7 @@ class QTimer;
  * This class provides the Pictures of The Day from various online websites.
  *
  * The query keys have the following structure:
- *   <potd_identifier>:<date>
+ *   \<potd_identifier\>:\<date\>
  * e.g.
  *   apod:2007-07-19
  *

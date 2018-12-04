@@ -40,8 +40,8 @@ class EpodProvider : public PotdProvider
         /**
          * Creates a new EPOD provider.
          *
-         * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
+         * @param args The arguments.
          */
         EpodProvider( QObject *parent, const QVariantList &args );
 

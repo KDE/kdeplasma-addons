@@ -41,8 +41,8 @@ class NOAAProvider : public PotdProvider
         /**
          * Creates a new NOAA provider.
          *
-         * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
+         * @param args The arguments.
          */
         NOAAProvider( QObject *parent, const QVariantList &args );
 

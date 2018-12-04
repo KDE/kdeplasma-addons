@@ -60,7 +60,7 @@ class StripSelector : public QObject
 };
 
 /**
- * Class to retrrieve the correct StripSelector depending on the
+ * Class to retrieve the correct StripSelector depending on the
  * specified IdentifierType
  */
 class StripSelectorFactory

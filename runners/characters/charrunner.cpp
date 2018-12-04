@@ -83,7 +83,7 @@ void CharacterRunner::match(Plasma::RunnerContext &context)
       return;
     }
 
-    //make special caracter out of the hex.-code
+    //make special character out of the hex.-code
     const QString specChar = QChar(hex);
 
     //create match

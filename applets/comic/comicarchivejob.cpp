@@ -80,7 +80,7 @@ bool ComicArchiveJob::isValid() const
         case ArchiveStartTo:
         case ArchiveEndTo:
             if ( mToIdentifier.isEmpty() ) {
-                qWarning() << "Not enough data provied to archive StartTo/EndTo.";
+                qWarning() << "Not enough data provided to archive StartTo/EndTo.";
                 return false;
             }
             break;

@@ -46,8 +46,8 @@ class NatGeoProvider : public PotdProvider
         /**
          * Creates a new APOD provider.
          *
-         * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
+         * @param args The arguments.
          */
         NatGeoProvider( QObject *parent, const QVariantList &args );
 

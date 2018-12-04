@@ -253,7 +253,7 @@ void ComicEngine::error(ComicProvider *provider)
     QString identifier(provider->identifier());
     mIdentifierError = identifier;
 
-    qWarning() << identifier << "pluging reported an error.";
+    qWarning() << identifier << "plugging reported an error.";
 
     /**
      * Requests for the current day have no suffix (date or id)

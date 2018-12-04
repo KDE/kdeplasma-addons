@@ -40,6 +40,7 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
          * Creates a new PoTD provider.
          *
          * @param parent The parent object.
+         * @param args The arguments.
          */
         explicit PotdProvider(QObject *parent, const QVariantList &args = QVariantList());
 
