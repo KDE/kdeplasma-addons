@@ -54,7 +54,7 @@ QtLayouts.ColumnLayout {
             cacheBuffer: 2000 // sometimes GridView gets confused and layouts items *somewhere*
             cellWidth: Math.floor(notesView.viewport.width / 3)
             cellHeight: cellWidth
-            model: ["white", "black", "red", "orange", "yellow", "green", "blue", "pink", "translucent"]
+            model: ["white", "black", "red", "orange", "yellow", "green", "blue", "pink", "translucent", "translucent-light"]
             currentIndex: model.indexOf(cfg_color)
             onCurrentIndexChanged: cfg_color = model[currentIndex]
 
@@ -105,12 +105,13 @@ QtLayouts.ColumnLayout {
                             case "blue": return i18n("A blue sticky note")
                             case "pink": return i18n("A pink sticky note")
                             case "translucent": return i18n("A translucent sticky note")
+                            case "translucent-light": return i18n("A translucent sticky note with light text")
                             }
                         }
                         //this is deliberately _NOT_ the theme color as we are over a known bright background
                         //an unknown colour over a known colour is a bad move as you end up with white on yellow
                         color: {
-                            if (modelData === "black") {
+                            if (modelData === "black" || modelData === "translucent-light") {
                                 return "#dfdfdf"
                             } else {
                                 return "#202020"

@@ -174,7 +174,7 @@ PlasmaCore.SvgItem {
             style: PlasmaStyle.TextAreaStyle {
                 //this is deliberately _NOT_ the theme color as we are over a known bright background
                 //an unknown colour over a known colour is a bad move as you end up with white on yellow
-                textColor: plasmoid.configuration.color === "black" ? "#dfdfdf" : "#202020"
+                textColor: (plasmoid.configuration.color === "black" || plasmoid.configuration.color === "translucent-light") ? "#dfdfdf" : "#202020"
             }
 
             //update the note if the source changes, but only if the user isn't editing it currently
@@ -302,6 +302,7 @@ PlasmaCore.SvgItem {
         plasmoid.setAction("change_note_color_blue", i18nc("@item:inmenu", "Blue"));
         plasmoid.setAction("change_note_color_pink", i18nc("@item:inmenu", "Pink"));
         plasmoid.setAction("change_note_color_translucent", i18nc("@item:inmenu", "Translucent"));
+        plasmoid.setAction("change_note_color_translucent-light", i18nc("@item:inmenu", "Translucent Light"));
         plasmoid.setActionSeparator("separator0");
 
         //plasmoid configuration doesn't check before emitting change signal
