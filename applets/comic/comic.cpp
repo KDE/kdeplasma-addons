@@ -333,10 +333,12 @@ void ComicApplet::slotTabChanged(const QString &identifier)
 
 void ComicApplet::checkDayChanged()
 {
-    if ( ( mCurrentDay != QDate::currentDate() ) || !mCurrent.hasImage() )
+    if ( mCurrentDay != QDate::currentDate() ) {
+        updateComic( mCurrent.current() );
+        mCurrentDay = QDate::currentDate();
+    } else if ( !mCurrent.hasImage() ) {
         updateComic( mCurrent.stored() );
-
-    mCurrentDay = QDate::currentDate();
+    }
 }
 
 void ComicApplet::configChanged()
