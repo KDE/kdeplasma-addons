@@ -95,8 +95,10 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             return true;
         }
 
-        // check whether it is cached already...
-        if (CachedProvider::isCached(identifier)) {
+        const QStringList parts = identifier.split(QLatin1Char(':'), QString::KeepEmptyParts);
+
+        // check whether it is cached, make sure second part present
+        if (parts.count() > 1 && CachedProvider::isCached(identifier)) {
             QVariantList args;
             args << QLatin1String("String") << identifier;
 
@@ -108,9 +110,6 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         }
 
         // ... start a new query otherwise
-        const QStringList parts = identifier.split(QLatin1Char(':'), QString::KeepEmptyParts);
-
-        //: are mandatory
         if (parts.count() < 2) {
             setData(identifier, QLatin1String("Error"), true);
             qWarning() << "Less than two arguments specified.";
