@@ -408,6 +408,10 @@ void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, cons
 {
     Q_UNUSED(index)
 
+    if (mCurrent.id() != identifier) {
+        return;
+    }
+
     KConfigGroup cg = config();
     if (suffix != cg.readEntry(QLatin1String("lastStrip_") + identifier, QString())) {
         qDebug() << identifier << "has a newer strip.";
