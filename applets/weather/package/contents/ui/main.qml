@@ -92,7 +92,11 @@ Item {
             Util.valueToDisplayString(displayPressureUnit, pressure, reportPressureUnit, 2) : "";
 
         var pressureTendency = (data && data["Pressure Tendency"]) || null;
-        model["pressureTendency"] = pressureTendency ? i18nc("pressure tendency", pressureTendency) : "";
+        model["pressureTendency"] =
+            pressureTendency === "rising"  ? i18nc("pressure tendency", "Rising")  :
+            pressureTendency === "falling" ? i18nc("pressure tendency", "Falling") :
+            pressureTendency === "steady"  ? i18nc("pressure tendency", "Steady")  :
+            /* else */                       "";
 
         var visibility = getNumberOrString("Visibility");
         model["visibility"] = visibility !== null ?
