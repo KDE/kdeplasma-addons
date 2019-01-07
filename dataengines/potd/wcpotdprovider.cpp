@@ -93,6 +93,6 @@ void WcpotdProvider::imageRequestFinished(KJob *_job)
     emit finished(this);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(WcpotdProviderFactory, "wcpotdprovider.json", registerPlugin<WcpotdProvider>();)
+K_PLUGIN_CLASS_WITH_JSON(WcpotdProvider, "wcpotdprovider.json")
 
 #include "wcpotdprovider.moc"

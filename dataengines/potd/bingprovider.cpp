@@ -89,6 +89,6 @@ void BingProvider::imageRequestFinished(KJob* _job)
     emit finished(this);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(BingProviderFactory, "bingprovider.json", registerPlugin<BingProvider>();)
+K_PLUGIN_CLASS_WITH_JSON(BingProvider, "bingprovider.json")
 
 #include "bingprovider.moc"

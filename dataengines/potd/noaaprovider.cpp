@@ -85,6 +85,6 @@ void NOAAProvider::imageRequestFinished(KJob *_job)
     emit finished(this);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(NOAAProviderFactory, "noaaprovider.json", registerPlugin<NOAAProvider>();)
+K_PLUGIN_CLASS_WITH_JSON(NOAAProvider, "noaaprovider.json")
 
 #include "noaaprovider.moc"

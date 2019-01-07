@@ -79,7 +79,6 @@ void %{APPNAME}::handleFinishedImageRequest(KJob *job)
 }
 
 
-K_PLUGIN_FACTORY_WITH_JSON(%{APPNAME}Factory, "%{APPNAMELC}.json",
-                           registerPlugin<%{APPNAME}>();)
+K_PLUGIN_CLASS_WITH_JSON(%{APPNAME}, "%{APPNAMELC}.json")
 
 #include "%{APPNAMELC}.moc"

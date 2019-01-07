@@ -86,6 +86,6 @@ void NatGeoProvider::imageRequestFinished(KJob *_job)
     emit finished(this);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(NatGeoProviderFactory, "natgeoprovider.json", registerPlugin<NatGeoProvider>();)
+K_PLUGIN_CLASS_WITH_JSON(NatGeoProvider, "natgeoprovider.json")
 
 #include "natgeoprovider.moc"

@@ -77,6 +77,6 @@ void ApodProvider::imageRequestFinished(KJob *_job)
     emit finished(this);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(ApodProviderFactory, "apodprovider.json", registerPlugin<ApodProvider>();)
+K_PLUGIN_CLASS_WITH_JSON(ApodProvider, "apodprovider.json")
 
 #include "apodprovider.moc"

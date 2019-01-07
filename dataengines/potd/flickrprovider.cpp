@@ -162,6 +162,6 @@ void FlickrProvider::imageRequestFinished(KJob *_job)
     emit finished(this);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(FlickrProviderFactory, "flickrprovider.json", registerPlugin<FlickrProvider>();)
+K_PLUGIN_CLASS_WITH_JSON(FlickrProvider, "flickrprovider.json")
 
 #include "flickrprovider.moc"
