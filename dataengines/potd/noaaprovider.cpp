@@ -58,11 +58,11 @@ void NOAAProvider::firstPageRequestFinished(KJob* _job)
     // to use heavy weight QtWebkit. So we use QRegularExpression to capture
     // the wanted url here.
     QString url;
-    QRegularExpression re(QStringLiteral("href=\"(.*)\"><img alt=\"Latest Image of the Day"), QRegularExpression::MultilineOption);
+    QRegularExpression re(QStringLiteral("href=\".*\\/content\\/(.*)\"><img alt=\"Latest Image of the Day"), QRegularExpression::MultilineOption);
     auto result = re.match(data);
     if (result.hasMatch())
     {
-        url = result.captured(1);
+        url = QStringLiteral("http://www.nesdis.noaa.gov/content/") + result.captured(1);
     }
     if (url.isEmpty())
     {
