@@ -26,6 +26,7 @@
         "Description[uk]": "Постачальник даних Bing",
         "Description[x-test]": "xxBing Providerxx",
         "Description[zh_CN]": "必应提供源",
+        "Description[zh_TW]": "Bing 提供者",
         "Icon": "",
         "Name": "Bing's Picture of the Day",
         "Name[ca@valencia]": "Imatge del dia del Bing",
@@ -52,6 +53,7 @@
         "Name[uk]": "Картинка дня Bing",
         "Name[x-test]": "xxBing's Picture of the Dayxx",
         "Name[zh_CN]": "每日一图（必应）",
+        "Name[zh_TW]": "今天的 Bing 影像",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]
