@@ -30,8 +30,8 @@ class KJob;
 
 /**
  * This class provides the image for NOAA Environmental Visualization Laboratory
- * Picture Of the Day
- * located at http://www.nnvl.noaa.gov/imageoftheday.php.
+ * Image Of the Day
+ * located at http://www.nesdis.noaa.gov/content/imagery-and-data.
  */
 class NOAAProvider : public PotdProvider
 {
@@ -60,7 +60,8 @@ class NOAAProvider : public PotdProvider
         QImage image() const override;
 
     private:
-        void pageRequestFinished(KJob *job);
+        void firstPageRequestFinished(KJob *job);
+        void secondPageRequestFinished(KJob *job);
         void imageRequestFinished(KJob *job);
 
    private:
