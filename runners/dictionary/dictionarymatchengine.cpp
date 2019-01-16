@@ -43,6 +43,7 @@ QString DictionaryMatchEngine::lookupWord(const QString &word)
         qDebug() << "The dictionary data engine timed out (word:" << word << ")";
     locker.unlock();
 
+    QMetaObject::invokeMethod(this, "sourceRemoved", Qt::QueuedConnection, Q_ARG(const QString&, word));
     // after a timeout, if dataUpdated gets m_wordLock here, it can lock data->mutex successfully.
 
     m_wordLock.lockForWrite();
@@ -58,6 +59,11 @@ QString DictionaryMatchEngine::lookupWord(const QString &word)
 void DictionaryMatchEngine::sourceAdded(const QString &source)
 {
     m_dictionaryEngine->connectSource(source, this);
+}
+
+void DictionaryMatchEngine::sourceRemoved(const QString &source)
+{
+    m_dictionaryEngine->disconnectSource(source, this);
 }
 
 void DictionaryMatchEngine::dataUpdated(const QString &source, const Plasma::DataEngine::Data &result)

@@ -37,6 +37,7 @@ private:
 private Q_SLOTS:
     void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
     void sourceAdded(const QString &source);
+    void sourceRemoved(const QString &source);
 
 };
 
