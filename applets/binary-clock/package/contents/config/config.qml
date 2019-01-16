@@ -1,9 +1,9 @@
 /*
  * Copyright 2014 Joseph Wenninger <jowenn@kde.org>
+ * Copyright 2018 Piotr Kąkol <piotrkakol@protonmail.com>
  * 
  *  Based on analog-clock config.qml:
  *  Copyright 2013 Marco Martin <mart@kde.org>
- *  Copyright 2018 Piotr Kąkol <piotrkakol@protonmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

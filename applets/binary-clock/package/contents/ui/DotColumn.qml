@@ -2,11 +2,11 @@
  * Rewrite of the KDE4-Plasma Binary Clock for KF5/Plasma/QML
  *
  * Copyright 2014 Joseph Wenninger <jowenn@kde.org>
+ * Copyright 2018 Piotr Kąkol <piotrkakol@protonmail.com>
  *
  * Original code (KDE4):
  * Copyright 2007 by Riccardo Iaconelli <riccardo@kde.org>
  * Copyright 2007 by Davide Bettio <davide.bettio@kdemail.net>
- * Copyright 2018 Piotr Kąkol <piotrkakol@protonmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
