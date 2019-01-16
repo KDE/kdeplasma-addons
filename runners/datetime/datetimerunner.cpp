@@ -83,13 +83,13 @@ QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringRef& tz)
         QTimeZone timeZone(zoneId);
 
         const QString zoneName = QString::fromUtf8(zoneId);
-        if (zoneName.startsWith(tz, Qt::CaseInsensitive)) {
+        if (zoneName.contains(tz, Qt::CaseInsensitive)) {
             ret[zoneName] = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
             continue;
         }
 
         const QString country = QLocale::countryToString(timeZone.country());
-        if (country.startsWith(tz, Qt::CaseInsensitive)) {
+        if (country.contains(tz, Qt::CaseInsensitive)) {
             ret[country] = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
             continue;
         }
@@ -98,7 +98,7 @@ QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringRef& tz)
         // other possible names.
         // Eg - depending on the current date, only CET or CEST will work
         const QString abbr = timeZone.abbreviation(QDateTime::currentDateTime());
-        if (abbr.startsWith(tz, Qt::CaseInsensitive)) {
+        if (abbr.contains(tz, Qt::CaseInsensitive)) {
             ret[abbr] = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
             continue;
         }
