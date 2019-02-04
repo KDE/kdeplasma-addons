@@ -179,11 +179,12 @@ Item {
             }
 
             PlasmaComponents.ToolButton {
+                id: colorButton
                 anchors.fill: parent
                 tooltip: i18nc("@info:tooltip", "Color options")
                 onClicked: plasmoid.expanded = !plasmoid.expanded
                 // indicate viable drag...
-                checked: dropArea.containsAcceptableDrag
+                checked: dropArea.containsAcceptableDrag || colorButtonDragger.pressed
                 checkable: checked
 
                 Rectangle {
@@ -222,6 +223,24 @@ Item {
                                 return Math.round(Math.max(units.devicePixelRatio, width / 20));
                             }
                         }
+                    }
+                }
+
+                MouseArea {
+                    id: colorButtonDragger
+                    anchors.fill: parent
+                    onClicked: colorButton.clicked()
+
+                    onPressed: colorCircle.grabToImage(function (result) {
+                        Drag.imageSource = result.url;
+                    });
+
+                    drag.target: colorCircle
+                    Drag.dragType: Drag.Automatic
+                    Drag.active: drag.active
+                    Drag.mimeData: {
+                        "application/x-color": colorCircle.color,
+                        "text/plain": Logic.formatColor(colorCircle.color, root.defaultFormat)
                     }
                 }
             }
