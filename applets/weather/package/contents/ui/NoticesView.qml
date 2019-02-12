@@ -43,6 +43,7 @@ ColumnLayout {
 
             PlasmaExtras.Heading {
                 level: 4
+                Layout.alignment: Qt.AlignHCenter
 
                 text: index == 0 ? i18nc("@title:column weather warnings", "Warnings Issued") : i18nc("@title:column weather watches" ,"Watches Issued")
             }
