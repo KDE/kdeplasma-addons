@@ -80,7 +80,8 @@ void ComicUpdater::checkForUpdate()
     }
 
     if ( !mLastUpdate.isValid() || ( mLastUpdate.addDays( mUpdateIntervall ) < QDateTime::currentDateTime() ) ) {
-        mGroup.writeEntry( "lastUpdate", QDateTime::currentDateTime() );
+        mLastUpdate = QDateTime::currentDateTime();
+        mGroup.writeEntry( "lastUpdate", mLastUpdate );
         downloadManager()->checkForUpdates();
     }
 }

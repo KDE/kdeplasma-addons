@@ -67,7 +67,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mArrowsOnHover( true ),
       mMiddleClick( true ),
       mCheckNewComicStripsInterval(0),
-      mMaxComicLimit( CACHE_LIMIT ),
+      mMaxComicLimit( 0 ),
       mCheckNewStrips(nullptr),
       mActionShop(nullptr),
       mEngine(nullptr),
@@ -89,13 +89,6 @@ void ComicApplet::init()
     mProxy->setSourceModel( mModel );
     mProxy->setSortCaseSensitivity( Qt::CaseInsensitive );
     mProxy->sort( 1, Qt::AscendingOrder );
-
-    //set maximum number of cached strips per comic, -1 means that there is no limit
-    KConfigGroup global = globalConfig();
-    const int maxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
-    if (mEngine) {
-        mEngine->connectSource( QLatin1String( "setting_maxComicLimit:" ) + QString::number( maxComicLimit ), this );
-    }
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
@@ -333,10 +326,12 @@ void ComicApplet::slotTabChanged(const QString &identifier)
 
 void ComicApplet::checkDayChanged()
 {
-    if ( ( mCurrentDay != QDate::currentDate() ) || !mCurrent.hasImage() )
+    if ( mCurrentDay != QDate::currentDate() ) {
+        updateComic( mCurrent.current() );
+        mCurrentDay = QDate::currentDate();
+    } else if ( !mCurrent.hasImage() ) {
         updateComic( mCurrent.stored() );
-
-    mCurrentDay = QDate::currentDate();
+    }
 }
 
 void ComicApplet::configChanged()
@@ -360,8 +355,13 @@ void ComicApplet::configChanged()
     mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
     mMiddleClick = cg.readEntry( "middleClick", true );
     mCheckNewComicStripsInterval = cg.readEntry( "checkNewComicStripsIntervall", 30 );
-    KConfigGroup global = globalConfig();
-    mMaxComicLimit = global.readEntry( "maxComicLimit", CACHE_LIMIT );
+
+    auto oldMaxComicLimit = mMaxComicLimit;
+    mMaxComicLimit = cg.readEntry( "maxComicLimit", CACHE_LIMIT );
+    if (oldMaxComicLimit != mMaxComicLimit && mEngine) {
+        mEngine->disconnectSource( QLatin1String( "setting_maxComicLimit:" ) + QString::number( oldMaxComicLimit ), this );
+        mEngine->connectSource( QLatin1String( "setting_maxComicLimit:" ) + QString::number( mMaxComicLimit ), this );
+    }
 
     globalComicUpdater->load();
 }
@@ -407,6 +407,10 @@ void ComicApplet::slotCurrentDay()
 void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, const QString &suffix )
 {
     Q_UNUSED(index)
+
+    if (mCurrent.id() != identifier) {
+        return;
+    }
 
     KConfigGroup cg = config();
     if (suffix != cg.readEntry(QLatin1String("lastStrip_") + identifier, QString())) {
