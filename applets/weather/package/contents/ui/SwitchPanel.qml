@@ -31,8 +31,7 @@ ColumnLayout {
     property alias forecastViewTitle: forecastTabButton.text
 
     readonly property bool hasDetailsContent: detailsModel && detailsModel.length > 0
-    readonly property bool hasNoticesContent: noticesModel && noticesModel.length > 0 &&
-                                              noticesModel[0].length > 0 && noticesModel[1].length > 0
+    readonly property alias hasNoticesContent: noticesView.hasContent
 
     function removePage(page) {
         // fill-in for removeItem, replace for QQC >= 2.3
