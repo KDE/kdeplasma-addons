@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Bing Provider",
+        "Description[ast]": "Fornidor Bing",
         "Description[ca@valencia]": "Proveïdor Bing",
         "Description[ca]": "Proveïdor Bing",
         "Description[cs]": "Poskytovatel Bing",

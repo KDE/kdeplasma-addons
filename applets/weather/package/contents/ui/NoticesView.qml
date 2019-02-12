@@ -26,7 +26,7 @@ ColumnLayout {
     id: root
 
     property alias model: categoryRepeater.model
-    readonly property bool hasContent: model && model.length > 0 && model[0].length > 0 && model[1].length > 0
+    readonly property bool hasContent: model && model.length > 0 && (model[0].length > 0 || model[1].length > 0)
 
     spacing: units.largeSpacing
 
@@ -36,10 +36,14 @@ ColumnLayout {
         delegate: ColumnLayout {
             property var categoryData: modelData
 
+            readonly property bool categoryHasNotices: categoryData.length > 0
+            visible: categoryHasNotices
+
             Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
             PlasmaExtras.Heading {
                 level: 4
+                Layout.alignment: Qt.AlignHCenter
 
                 text: index == 0 ? i18nc("@title:column weather warnings", "Warnings Issued") : i18nc("@title:column weather watches" ,"Watches Issued")
             }
