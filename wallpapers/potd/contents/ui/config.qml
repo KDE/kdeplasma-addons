@@ -19,7 +19,8 @@
 
 import QtQuick 2.5
 import QtQuick.Layouts 1.0
-import QtQuick.Controls 1.0 as QtControls
+import QtQuick.Controls 1.0 as QtControls1
+import QtQuick.Controls 2.0 as QtControls
 import org.kde.kquickcontrols 2.0 as KQuickControls
 import org.kde.plasma.core 2.0 as PlasmaCore
 
@@ -68,7 +69,8 @@ ColumnLayout {
             anchors.verticalCenter: providerComboBox.verticalCenter
             text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Providers:")
         }
-        QtControls.ComboBox {
+        // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
+        QtControls1.ComboBox {
             id: providerComboBox
             property int textLength: 24
             width: theme.mSize(theme.defaultFont).width * textLength
@@ -89,7 +91,8 @@ ColumnLayout {
             anchors.verticalCenter: resizeComboBox.verticalCenter
             text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Positioning:")
         }
-        QtControls.ComboBox {
+        // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
+        QtControls1.ComboBox {
             id: resizeComboBox
             property int textLength: 24
             width: theme.mSize(theme.defaultFont).width * textLength
