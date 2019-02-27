@@ -44,7 +44,7 @@ class ChooseStripNumDialog : public QDialog
             setWindowTitle(i18nc("@title:window", "Go to Strip"));
 
             QVBoxLayout *topLayout = new QVBoxLayout(this);
-            topLayout->setMargin(0);
+            topLayout->setContentsMargins(0, 0, 0, 0);
             numInput = new QSpinBox(this);
             numInput->setRange(min, max);
             numInput->setValue(current);
