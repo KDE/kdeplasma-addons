@@ -92,8 +92,8 @@ ColumnLayout {
         Layout.fillHeight: true
 
         // TODO use contentsSize but that crashes, now mostly for some sane initial size
-        Layout.preferredWidth: units.gridUnit * 25
-        Layout.preferredHeight: units.gridUnit * 12
+        Layout.preferredWidth: units.gridUnit * 36
+        Layout.preferredHeight: units.gridUnit * 18
 
         // Binding it to e.g. width will be super slow on resizing
         Timer {
