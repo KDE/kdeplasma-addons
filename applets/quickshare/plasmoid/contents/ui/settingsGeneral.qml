@@ -18,44 +18,29 @@
  ***************************************************************************/
 
 import QtQuick 2.2
-import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Layouts 1.0
+import QtQuick.Controls 2.5
+import org.kde.kirigami 2.5 as Kirigami
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: configRoot
+    anchors.left: parent.left
+    anchors.right: parent.right
+
     property alias cfg_historySize: historySpin.value
     property alias cfg_copyAutomatically: copyAutomatically.checked
 
-    GridLayout {
-        columns: 2
-
-        QtControls.Label {
-            Layout.row: 0
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label:spinbox", "History size:")
-        }
-        QtControls.SpinBox {
-            id: historySpin
-            Layout.row: 0
-            Layout.column: 1
-            value: 3
-        }
-
-        QtControls.Label {
-            Layout.row: 1
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@option:check", "Copy automatically:")
-        }
-        QtControls.CheckBox {
-            Layout.row: 1
-            Layout.column: 1
-            id: copyAutomatically
-        }
+    SpinBox {
+        id: historySpin
+        Kirigami.FormData.label: i18nc("@label:spinbox", "History size:")
+        value: 3
     }
 
     Item {
-        Layout.fillHeight: true
+        Kirigami.FormData.isSection: false
+    }
+
+    CheckBox {
+        id: copyAutomatically
+        Kirigami.FormData.label: i18nc("@option:check", "Copy automatically:")
     }
 }

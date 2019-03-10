@@ -25,7 +25,7 @@ import org.kde.plasma.configuration 2.0
 ConfigModel {
     ConfigCategory {
          name: i18nc("@title", "General")
-         icon: "edit-paste"
+         icon: "emblem-shared-symbolic"
          source: "settingsGeneral.qml"
     }
 }
