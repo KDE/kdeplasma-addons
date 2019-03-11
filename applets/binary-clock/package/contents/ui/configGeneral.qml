@@ -21,12 +21,15 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.0 as QtControls
+import QtQuick.Controls 2.5 as QtControls
 import QtQuick.Layouts 1.1
 import org.kde.kquickcontrols 2.0 as KQuickControls
+import org.kde.kirigami 2.5 as Kirigami
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: generalConfigPage
+    anchors.left: parent.left
+    anchors.right: parent.right
 
     property alias cfg_showGrid: showGridCheckBox.checked
     property alias cfg_showOffLeds: showOffLedsCheckBox.checked
@@ -39,72 +42,69 @@ ColumnLayout {
     property alias cfg_useCustomColorForGrid: useCustomColorForGridCheckBox.checked
     property alias cfg_customColorForGrid: customColorForGrid.color
 
-    QtControls.GroupBox {
-        Layout.fillWidth: true
-        flat: true
-
-        title: i18nc("@title:group", "Display")
-
-        ColumnLayout {
-            anchors.fill: parent
-
-            QtControls.CheckBox {
-                id: showGridCheckBox
-                text: i18nc("@option:check", "Draw grid")
-            }
-            QtControls.CheckBox {
-                id: showOffLedsCheckBox
-                text: i18nc("@option:check", "Show inactive LEDs")
-            }
-            QtControls.CheckBox {
-                id: showSecondsCheckBox
-                text: i18nc("@option:check", "Display seconds")
-            }
-            QtControls.CheckBox {
-                id: showBcdFormatCheckBox
-                text: i18nc("@option:check", "Display in BCD format (decimal)")
-            }
+        QtControls.CheckBox {
+            id: showGridCheckBox
+            Kirigami.FormData.label:i18n("Display:")
+            text: i18nc("@option:check", "Grid")
         }
-    }
 
-    QtControls.GroupBox {
-        Layout.fillWidth: true
-        flat: true
+        QtControls.CheckBox {
+            id: showOffLedsCheckBox
+            text: i18nc("@option:check", "Inactive LEDs")
+        }
 
-        title: i18nc("@title:group", "Colors")
+        QtControls.CheckBox {
+            id: showSecondsCheckBox
+            text: i18nc("@option:check", "Seconds")
+        }
 
-        GridLayout {
-            columns: 2
+        QtControls.CheckBox {
+            id: showBcdFormatCheckBox
+            text: i18nc("@option:check", "In BCD format (decimal)")
+        }
+
+
+        Item {
+            Kirigami.FormData.isSection:true
+        }
+
+        RowLayout {
+            Kirigami.FormData.label:i18n("Use custom color for:")
+
             QtControls.CheckBox {
                 id: useCustomColorForActiveCheckBox
-                text: i18nc("@option:check", "Use custom color for active LEDs")
+                text: i18nc("@option:check", "Active LEDs")
             }
+
             KQuickControls.ColorButton {
                 id: customColorForActive
                 enabled: useCustomColorForActiveCheckBox.checked
             }
+        }
+
+        RowLayout {
 
             QtControls.CheckBox {
                 id: useCustomColorForInactiveCheckBox
-                text: i18nc("@option:check", "Use custom color for inactive LEDs")
+                text: i18nc("@option:check", "Inactive LEDs")
             }
+
             KQuickControls.ColorButton {
                 id:customColorForInactive
                 enabled: useCustomColorForInactiveCheckBox.checked
             }
+        }
+
+        RowLayout {
 
             QtControls.CheckBox {
                 id: useCustomColorForGridCheckBox
-                text: i18nc("@option:check", "Use custom color for grid")
+                text: i18nc("@option:check", "Grid")
             }
+
             KQuickControls.ColorButton {
                 id:customColorForGrid
                 enabled: useCustomColorForGridCheckBox.checked
             }
         }
-    }
-
-    Item { // tighten layout
-        Layout.fillHeight: true
-    }
 }
