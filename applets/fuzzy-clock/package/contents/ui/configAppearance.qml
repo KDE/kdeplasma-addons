@@ -21,10 +21,12 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.2 as QtControls
-import QtQuick.Layouts 1.0 as QtLayouts
+import QtQuick.Controls 1.2 as QQC1
+import QtQuick.Controls 2.5 as QQC2
+import QtQuick.Layouts 1.0
+import org.kde.kirigami 2.5 as Kirigami
 
-QtLayouts.ColumnLayout {
+Kirigami.FormLayout {
     id: appearancePage
 
     property alias cfg_boldText: boldCheckBox.checked
@@ -32,54 +34,43 @@ QtLayouts.ColumnLayout {
 
     property alias cfg_fuzzyness: fuzzyness.value
 
-    QtControls.GroupBox {
-        QtLayouts.Layout.fillWidth: true
-        flat: true
-
-        title: i18nc("@title:group", "Font")
-
-        QtLayouts.ColumnLayout {
-            QtControls.CheckBox {
-                id: boldCheckBox
-                text: i18nc("@option:check", "Bold text")
-            }
-
-            QtControls.CheckBox {
-                id: italicCheckBox
-                text: i18nc("@option:check", "Italic text")
-            }
-        }
+    QQC2.CheckBox {
+        id: boldCheckBox
+        Kirigami.FormData.label: i18nc("@title:group", "Font:")
+        text: i18nc("@option:check", "Bold text")
     }
 
-    QtControls.GroupBox {
-        QtLayouts.Layout.fillWidth: true
-        flat: true
-
-        title: i18nc("@title:group", "Fuzzyness")
-
-        QtLayouts.RowLayout {
-            anchors.fill: parent
-
-            QtControls.Label {
-                text: i18nc("@item:inrange", "Accurate")
-            }
-
-            QtControls.Slider {
-                id: fuzzyness
-                QtLayouts.Layout.fillWidth: true
-                minimumValue: 1
-                maximumValue: 5
-                stepSize: 1
-                tickmarksEnabled: true
-            }
-
-            QtControls.Label {
-                text: i18nc("@item:inrange", "Fuzzy")
-            }
-        }
+    QQC2.CheckBox {
+        id: italicCheckBox
+        text: i18nc("@option:check", "Italic text")
     }
 
-    Item { // tighten layout
-        QtLayouts.Layout.fillHeight: true
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    QQC1.Slider { // FIXME: port to QQC2 once we've fixed: https://bugs.kde.org/show_bug.cgi?id=405471
+        id: fuzzyness
+        Kirigami.FormData.label: i18nc("@title:group", "Fuzzyness:")
+        minimumValue: 1
+        maximumValue: 5
+        stepSize: 1
+        tickmarksEnabled: true
+    }
+
+    RowLayout {
+       Layout.fillWidth: true
+
+        QQC2.Label {
+            text: i18nc("@item:inrange", "Accurate")
+        }
+
+        Item {
+            Layout.fillWidth: true
+        }
+
+        QQC2.Label {
+            text: i18nc("@item:inrange", "Fuzzy")
+        }
     }
 }
