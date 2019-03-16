@@ -169,6 +169,8 @@ void MediaWiki::onNetworkRequestFinished(QNetworkReply *reply)
 {
     if ( reply->error() != QNetworkReply::NoError ) {
         qDebug() << "Request failed, " << reply->errorString();
+        reply->deleteLater();
+        d->reply = nullptr;
         emit finished(false);
         return;
     }
