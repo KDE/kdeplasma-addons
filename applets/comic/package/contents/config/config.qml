@@ -28,7 +28,7 @@ ConfigModel {
     }
     ConfigCategory {
          name: i18nc("@title", "Appearance")
-         icon: "image"
+         icon: "preferences-desktop-color"
          source: "configAppearance.qml"
     }
     ConfigCategory {

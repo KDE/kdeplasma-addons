@@ -17,14 +17,17 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Controls 1.1 as Controls
+import QtQuick.Controls 2.5 as Controls
 import QtQuick.Layouts 1.1 as Layouts
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.5 as Kirigami
 
 
-Layouts.ColumnLayout {
+Kirigami.FormLayout {
     id: root
+    anchors.left: parent.left
+    anchors.right: parent.right
 
     signal configurationChanged
 
@@ -47,53 +50,46 @@ Layouts.ColumnLayout {
         showUrl.checked = plasmoid.nativeInterface.showComicUrl;
     }
 
-
-    Controls.GroupBox {
-        Layouts.Layout.fillWidth: true
-        flat: true
-
-        title: i18nc("@title:group", "Navigation")
-
-        Layouts.ColumnLayout {
-            Controls.CheckBox {
-                id: showArrowsOnOver
-                text: i18nc("@option:check", "Show arrows only on mouse-over")
-                onCheckedChanged: root.configurationChanged();
-            }
-        }
+    Controls.CheckBox {
+        id: showComicTitle
+        Kirigami.FormData.label: i18nc ("Heading for showing various elements of a comic", "Show:")
+        text: i18nc("@option:check", "Comic title")
+        onCheckedChanged: root.configurationChanged();
     }
 
-    Controls.GroupBox {
-        Layouts.Layout.fillWidth: true
-        flat: true
+    Controls.CheckBox {
+        id: showIdentifier
+        text: i18nc("@option:check", "Comic identifier")
+        onCheckedChanged: root.configurationChanged();
+    }
 
-        title: i18nc("@title:group", "Information")
+    Controls.CheckBox {
+        id: showAuthor
+        text: i18nc("@option:check", "Comic author")
+        onCheckedChanged: root.configurationChanged();
+    }
 
-        Layouts.ColumnLayout {
-            Controls.CheckBox {
-                id: showComicTitle
-                text: i18nc("@option:check", "Show comic title")
-                onCheckedChanged: root.configurationChanged();
-            }
-            Controls.CheckBox {
-                id: showIdentifier
-                text: i18nc("@option:check", "Show comic identifier")
-                onCheckedChanged: root.configurationChanged();
-            }
-            Controls.CheckBox {
-                id: showAuthor
-                text: i18nc("@option:check", "Show comic author")
-                onCheckedChanged: root.configurationChanged();
-            }
-            Controls.CheckBox {
-                id: showUrl
-                text: i18nc("@option:check", "Show comic URL")
-                onCheckedChanged: root.configurationChanged();
-            }
-        }
+    Controls.CheckBox {
+        id: showUrl
+        text: i18nc("@option:check", "Comic URL")
+        onCheckedChanged: root.configurationChanged();
     }
 
     Item {
-        Layouts.Layout.fillHeight: true
+        Kirigami.FormData.isSection: true
+    }
+
+    Controls.RadioButton {
+        id: alwaysShowArrows
+        Kirigami.FormData.label: i18n ("Show navigation buttons:")
+        text: i18nc("@option:check", "Always")
+        checked: !showArrowsOnOver.checked
+        onCheckedChanged: root.configurationChanged();
+    }
+
+    Controls.RadioButton {
+        id: showArrowsOnOver
+        text: i18nc("@option:check", "Only on hover")
+        onCheckedChanged: root.configurationChanged();
     }
 }

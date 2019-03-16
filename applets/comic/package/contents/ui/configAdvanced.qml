@@ -17,14 +17,17 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.1 as Controls
+import QtQuick.Controls 2.5 as Controls
 import QtQuick.Layouts 1.1 as Layouts
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.5 as Kirigami
 
 
-Layouts.ColumnLayout {
+Kirigami.FormLayout {
     id: root
+    anchors.left: parent.left
+    anchors.right: parent.right
 
     signal configurationChanged
 
@@ -41,42 +44,23 @@ Layouts.ColumnLayout {
         maxComicLimit.value = plasmoid.nativeInterface.maxComicLimit;
     }
 
-    Controls.GroupBox {
-        Layouts.Layout.fillWidth: true
-        flat: true
+    Layouts.RowLayout {
+        Kirigami.FormData.label: i18nc("@label:spinbox", "Comic cache:")
 
-        title: i18nc("@title:group", "Cache")
-
-        Layouts.RowLayout {
-            Layouts.Layout.alignment: Qt.AlignRight
-            Controls.Label {
-                text: i18nc("@label:spinbox", "Comic cache:")
-            }
-            Controls.SpinBox {
-                id: maxComicLimit
-                Layouts.Layout.minimumWidth: units.gridUnit * 8
-                suffix: i18nc("@item:valuesuffix spacing to number + unit", " strips per comic")
-                stepSize: 1
-                onValueChanged: root.configurationChanged();
-            }
+        Controls.SpinBox {
+            id: maxComicLimit
+            stepSize: 1
+            onValueChanged: root.configurationChanged();
         }
-    }
-    Controls.GroupBox {
-        Layouts.Layout.fillWidth: true
-        flat: true
 
-        title: i18nc("@title:group", "Error Handling")
-
-        Layouts.ColumnLayout {
-            Controls.CheckBox {
-                id: showErrorPicture
-                text: i18nc("@option:check", "Display error when getting comic failed")
-                onCheckedChanged: root.configurationChanged();
-            }
+        Controls.Label {
+            text: i18ncp("@item:valuesuffix spacing to number + unit", "strip per comic", "strips per comic")
         }
     }
 
-    Item {
-        Layouts.Layout.fillHeight: true
+    Controls.CheckBox {
+        id: showErrorPicture
+        text: i18nc("@option:check", "Display error when downloading comic fails")
+        onCheckedChanged: root.configurationChanged();
     }
 }
