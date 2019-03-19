@@ -180,6 +180,18 @@ Item {
             visible: hasItems
             anchors.fill: parent
 
+            // This timer prevents reloading the image too often when resizing,
+            // to minimize excessively re-reading the file on disk
+            Timer {
+                id: imageReloadTimer
+                interval: 250
+                running: false
+                onTriggered: {
+                    frontImage.sourceSize.width = width
+                    frontImage.sourceSize.height = height
+                }
+            }
+
             Image {
                 id: bufferImage
 
@@ -207,6 +219,12 @@ Item {
 
                 asynchronous: true
                 autoTransform: true
+
+                onWidthChanged: imageReloadTimer.restart()
+                onHeightChanged: imageReloadTimer.restart()
+
+                sourceSize.width: width
+                sourceSize.height: height
 
                 MouseArea {
                     anchors.fill: parent
