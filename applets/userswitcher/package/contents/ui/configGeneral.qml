@@ -18,11 +18,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Layouts 1.0
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QtControls
 
-ColumnLayout {
+import org.kde.kirigami 2.5 as Kirigami
+
+Kirigami.FormLayout {
     id: appearancePage
 
     property bool cfg_showFace
@@ -30,82 +31,93 @@ ColumnLayout {
     property bool cfg_showFullName
     property alias cfg_showTechnicalInfo: showTechnicalInfoCheck.checked
 
-    QtControls.GroupBox {
-        Layout.fillWidth: true
-        flat: true
+    QtControls.ButtonGroup {
+        id: nameGroup
+    }
 
-        title: i18nc("@title:group", "Username Display")
+    QtControls.RadioButton {
+        id: showFullNameRadio
 
-        QtControls.ExclusiveGroup {
-            id: nameEg
-            onCurrentChanged: cfg_showFullName = (current === showFullNameRadio)
-        }
+        Kirigami.FormData.label: i18nc("@title:label", "Username style:")
 
-        ColumnLayout {
-            QtControls.RadioButton {
-                id: showFullNameRadio
-                Layout.fillWidth: true
-                exclusiveGroup: nameEg
-                text: i18nc("@option:radio", "Show full name (if available)")
-                checked: cfg_showFullName
-            }
+        QtControls.ButtonGroup.group: nameGroup
+        text: i18nc("@option:radio", "Full name (if available)")
+        checked: cfg_showFullName
+        onClicked: if (checked) cfg_showFullName = true;
+    }
 
-            QtControls.RadioButton {
-                Layout.fillWidth: true
-                exclusiveGroup: nameEg
-                text: i18nc("@option:radio", "Show login username")
-                checked: !cfg_showFullName
+    QtControls.RadioButton {
+        QtControls.ButtonGroup.group: nameGroup
+        text: i18nc("@option:radio", "Login username")
+        checked: !cfg_showFullName
+        onClicked: if (checked) cfg_showFullName = false;
+    }
+
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+
+    QtControls.ButtonGroup {
+        id: layoutGroup
+    }
+
+    QtControls.RadioButton {
+        id: showOnlyNameRadio
+
+        Kirigami.FormData.label: i18nc("@title:label", "Show:")
+
+        QtControls.ButtonGroup.group: layoutGroup
+        text: i18nc("@option:radio", "Name")
+        checked: cfg_showName && !cfg_showFace
+        onClicked: {
+            if (checked) {
+                cfg_showName = true;
+                cfg_showFace = false;
             }
         }
     }
 
-    QtControls.GroupBox {
-        Layout.fillWidth: true
-        flat: true
+    QtControls.RadioButton {
+        id: showOnlyFaceRadio
 
-        title: i18nc("@title:group", "Layout")
-
-        QtControls.ExclusiveGroup {
-            id: layoutEg
-            onCurrentChanged: {
-                cfg_showName = (current === showOnlyNameRadio || current === showBothRadio)
-                cfg_showFace = (current === showOnlyFaceRadio || current === showBothRadio)
-            }
-        }
-
-        ColumnLayout {
-            QtControls.RadioButton {
-                id: showOnlyNameRadio
-                Layout.fillWidth: true
-                exclusiveGroup: layoutEg
-                text: i18nc("@option:radio", "Show only name")
-                checked: cfg_showName && !cfg_showFace
-            }
-
-            QtControls.RadioButton {
-                id: showOnlyFaceRadio
-                Layout.fillWidth: true
-                exclusiveGroup: layoutEg
-                text: i18nc("@option:radio", "Show only avatar")
-                checked: !cfg_showName && cfg_showFace
-            }
-
-            QtControls.RadioButton {
-                id: showBothRadio
-                Layout.fillWidth: true
-                exclusiveGroup: layoutEg
-                text: i18nc("@option:radio", "Show both avatar and name")
-                checked: cfg_showName && cfg_showFace
-            }
-
-            QtControls.CheckBox {
-                id: showTechnicalInfoCheck
-                text: i18nc("@option:check", "Show technical information about sessions")
+        QtControls.ButtonGroup.group: layoutGroup
+        text: i18nc("@option:radio", "User picture")
+        checked: !cfg_showName && cfg_showFace
+        onClicked: {
+            if (checked) {
+                cfg_showName = false;
+                cfg_showFace = true;
             }
         }
     }
 
-    Item { // tighten layout
-        Layout.fillHeight: true
+    QtControls.RadioButton {
+        id: showBothRadio
+
+        QtControls.ButtonGroup.group: layoutGroup
+        text: i18nc("@option:radio", "Name and user picture")
+        checked: cfg_showName && cfg_showFace
+        onClicked: {
+            if (checked) {
+                cfg_showName = true;
+                cfg_showFace = true;
+            }
+        }
+    }
+
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+
+    QtControls.CheckBox {
+        id: showTechnicalInfoCheck
+
+        Kirigami.FormData.label: i18nc("@title:label", "Advanced:")
+
+        text: i18nc("@option:check", "Show technical session information")
     }
 }
