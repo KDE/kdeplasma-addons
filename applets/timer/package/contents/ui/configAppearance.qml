@@ -16,11 +16,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
  */
 
-import QtQuick 2.2
-import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Layouts 1.0 as QtLayouts
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QQC2
+import QtQuick.Layouts 1.0
 
-QtLayouts.ColumnLayout {
+import org.kde.kirigami 2.5 as Kirigami
+
+Kirigami.FormLayout {
     id: appearancePage
 
     property alias cfg_showTitle: showTitle.checked
@@ -31,81 +33,61 @@ QtLayouts.ColumnLayout {
     property alias cfg_showNotification: showNotification.checked
     property alias cfg_notificationText: notificationText.text
 
-    QtControls.GroupBox {
-        id: displayGroup
+    RowLayout {
+        Layout.fillWidth: true
 
-        QtLayouts.Layout.fillWidth: true
-        flat: true
+        Kirigami.FormData.label: i18nc("@title:label", "Display:")
 
-        title: i18nc("@title:group", "Display")
+        QQC2.CheckBox {
+            id: showTitle
 
-        QtLayouts.ColumnLayout {
-            anchors.fill: parent
 
-            QtControls.CheckBox {
-                id: showTitle
-                text: i18nc("@option:check", "Show title");
-                onClicked: {
-                    if (checked) {
-                        title.forceActiveFocus();
-                    }
-                }
-            }
-            QtLayouts.RowLayout {
-                QtControls.Label {
-                    enabled: showTitle.checked
-                    text: i18nc("@label:textbox", "Title:")
-                }
-                QtControls.TextField {
-                    id: title
-                    QtLayouts.Layout.fillWidth: true
-                    enabled: showTitle.checked
-                }
-            }
-
-            QtControls.CheckBox {
-                id: showSeconds
-                text: i18nc("@option:check", "Show seconds");
-            }
-        }
-    }
-
-    QtControls.GroupBox {
-        id: notificationGroup
-
-        QtLayouts.Layout.fillWidth: true
-        flat: true
-
-        title: i18nc("@title:group", "Notifications")
-
-        QtLayouts.ColumnLayout {
-            anchors.fill: parent
-
-            QtControls.CheckBox {
-                id: showNotification
-                text: i18nc("@option:check", "Show notification");
-                onClicked: {
-                    if (checked) {
-                        notificationText.forceActiveFocus();
-                    }
-                }
-            }
-            QtLayouts.RowLayout {
-                QtControls.Label {
-                    enabled: showNotification.checked
-                    text: i18nc("@label:textbox", "Text:")
-                }
-                QtControls.TextField {
-                    id: notificationText
-                    QtLayouts.Layout.fillWidth: true
-                    enabled: showNotification.checked
+            text: i18nc("@option:check", "Show title:");
+            onClicked: {
+                if (checked) {
+                    title.forceActiveFocus();
                 }
             }
         }
+
+        QQC2.TextField {
+            id: title
+            Layout.fillWidth: true
+            enabled: showTitle.checked
+        }
     }
 
-    Item { // tighten layout
-        QtLayouts.Layout.fillHeight: true
+    QQC2.CheckBox {
+        id: showSeconds
+        text: i18nc("@option:check", "Show seconds");
+    }
+
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+
+    RowLayout {
+        Layout.fillWidth: true
+
+        Kirigami.FormData.label: i18nc("@title:label", "Notifications:")
+
+        QQC2.CheckBox {
+            id: showNotification
+            text: i18nc("@option:check", "Show notification text:");
+            onClicked: {
+                if (checked) {
+                    notificationText.forceActiveFocus();
+                }
+            }
+        }
+
+        QQC2.TextField {
+            id: notificationText
+            Layout.fillWidth: true
+            enabled: showNotification.checked
+        }
     }
 }
 

@@ -16,53 +16,38 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
  */
 
-import QtQuick 2.2
-import QtQuick.Controls 1.3 as QtControls
-import QtQuick.Layouts 1.0 as QtLayouts
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QQC2
+import QtQuick.Layouts 1.0
 
-QtLayouts.ColumnLayout {
+import org.kde.kirigami 2.5 as Kirigami
+
+Kirigami.FormLayout {
     id: generalPage
 
     property alias cfg_runCommand: runCommand.checked
     property alias cfg_command: command.text
 
-    QtControls.GroupBox {
-        id: runCommandGroup
+    RowLayout {
+        Layout.fillWidth: true
 
-        QtLayouts.Layout.fillWidth: true
-        flat: true
+        Kirigami.FormData.label: i18nc("@title:label", "After timer completes:")
 
-        title: i18nc("@title:group", "Run Command")
-
-        QtLayouts.ColumnLayout {
-            anchors.fill: parent
-
-            QtControls.CheckBox {
-                id: runCommand
-                text: i18nc("@option:check", "Execute command")
-                onClicked: {
-                    if (checked) {
-                        command.forceActiveFocus();
-                    }
-                }
-            }
-
-            QtLayouts.RowLayout {
-                QtControls.Label {
-                    enabled: runCommand.checked
-                    text: i18nc("@label:textbox", "Command:")
-                }
-                QtControls.TextField {
-                    id: command
-                    QtLayouts.Layout.fillWidth: true
-                    enabled: runCommand.checked
+        QQC2.CheckBox {
+            id: runCommand
+            text: i18nc("@option:check", "Execute command:")
+            onClicked: {
+                if (checked) {
+                    command.forceActiveFocus();
                 }
             }
         }
-    }
 
-    Item { // tighten layout
-        QtLayouts.Layout.fillHeight: true
+        QQC2.TextField {
+            id: command
+            Layout.fillWidth: true
+            enabled: runCommand.checked
+        }
     }
 }
 
