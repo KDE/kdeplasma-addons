@@ -15,14 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 2.2 as QtControls
-import QtQuick.Layouts 1.3
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QtControls
 
+import org.kde.kirigami 2.5 as Kirigami
 import org.kde.plasma.private.weather 1.0
 
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: unitsConfigPage
 
     signal configurationChanged
@@ -56,76 +56,43 @@ ColumnLayout {
             VisibilityUnitListModel.listIndexForUnitId(config.visibilityUnitId);
     }
 
+    QtControls.ComboBox {
+        id: temperatureComboBox
 
-    GridLayout {
-        columns: 2
+        Kirigami.FormData.label: i18nc("@label:listbox", "Temperature:")
 
-        QtControls.Label {
-            Layout.row: 0
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label:listbox", "Temperature:")
-        }
-
-        QtControls.ComboBox {
-            id: temperatureComboBox
-            Layout.row: 0
-            Layout.column: 1
-            model: TemperatureUnitListModel
-            textRole: "display"
-            onCurrentIndexChanged: unitsConfigPage.configurationChanged();
-        }
-
-        QtControls.Label {
-            Layout.row: 1
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label:listbox", "Pressure:")
-        }
-
-        QtControls.ComboBox {
-            id: pressureComboBox
-            Layout.row: 1
-            Layout.column: 1
-            model: PressureUnitListModel
-            textRole: "display"
-            onCurrentIndexChanged: unitsConfigPage.configurationChanged();
-        }
-
-        QtControls.Label {
-            Layout.row: 2
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label:listbox", "Wind speed:")
-        }
-
-        QtControls.ComboBox {
-            id: windSpeedComboBox
-            Layout.row: 2
-            Layout.column: 1
-            model: WindSpeedUnitListModel
-            textRole: "display"
-            onCurrentIndexChanged: unitsConfigPage.configurationChanged();
-        }
-
-        QtControls.Label {
-            Layout.row: 3
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label:listbox", "Visibility:")
-        }
-
-        QtControls.ComboBox {
-            id: visibilityComboBox
-            Layout.row: 3
-            Layout.column: 1
-            model: VisibilityUnitListModel
-            textRole: "display"
-            onCurrentIndexChanged: unitsConfigPage.configurationChanged();
-        }
+        model: TemperatureUnitListModel
+        textRole: "display"
+        onCurrentIndexChanged: unitsConfigPage.configurationChanged();
     }
 
-    Item { // tighten layout
-        Layout.fillHeight: true
+    QtControls.ComboBox {
+        id: pressureComboBox
+
+        Kirigami.FormData.label: i18nc("@label:listbox", "Pressure:")
+
+        model: PressureUnitListModel
+        textRole: "display"
+        onCurrentIndexChanged: unitsConfigPage.configurationChanged();
+    }
+
+    QtControls.ComboBox {
+        id: windSpeedComboBox
+
+        Kirigami.FormData.label: i18nc("@label:listbox", "Wind speed:")
+
+        model: WindSpeedUnitListModel
+        textRole: "display"
+        onCurrentIndexChanged: unitsConfigPage.configurationChanged();
+    }
+
+    QtControls.ComboBox {
+        id: visibilityComboBox
+
+        Kirigami.FormData.label: i18nc("@label:listbox", "Visibility:")
+
+        model: VisibilityUnitListModel
+        textRole: "display"
+        onCurrentIndexChanged: unitsConfigPage.configurationChanged();
     }
 }

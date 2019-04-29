@@ -15,15 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 1.4 as QtControls1
-import QtQuick.Controls 2.2 as QtControls
-import QtQuick.Layouts 1.3
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QtControls
 
+import org.kde.kirigami 2.5 as Kirigami
 import org.kde.plasma.private.weather 1.0
 
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: displayConfigPage
 
     readonly property bool canShowMoreInCompactMode: !plasmoid.nativeInterface.needsToBeSquare
@@ -56,84 +55,58 @@ ColumnLayout {
     }
 
 
-    QtControls1.GroupBox {
-        Layout.fillWidth: true
-        flat: true
+    Item {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18nc("@title:group", "Compact Mode")
 
-        title: i18nc("@title:group", "Compact Mode")
-
-        GridLayout {
-            columns: 2
-
-            QtControls.Label {
-                Layout.row: 0
-                Layout.column: 0
-                Layout.alignment: Qt.AlignRight
-                enabled: canShowMoreInCompactMode
-                text: i18nc("@label", "Display:")
-            }
-
-            QtControls.CheckBox {
-                id: showTemperatureInCompactModeCheckBox
-
-                Layout.row: 0
-                Layout.column: 1
-                enabled: canShowMoreInCompactMode
-
-                text: i18nc("@option:check", "Show temperature")
-                onCheckedChanged: displayConfigPage.configurationChanged();
-            }
-
-            QtControls.Label {
-                Layout.row: 1
-                Layout.column: 0
-                Layout.alignment: Qt.AlignRight
-                text: i18nc("@label", "Tooltip:")
-            }
-
-            QtControls.CheckBox {
-                id: showTemperatureInTooltipCheckBox
-
-                Layout.row: 1
-                Layout.column: 1
-
-                text: i18nc("@option:check", "Show temperature")
-                onCheckedChanged: displayConfigPage.configurationChanged();
-            }
-
-            QtControls.CheckBox {
-                id: showWindInTooltipCheckBox
-
-                Layout.row: 2
-                Layout.column: 1
-
-                text: i18nc("@option:check", "Show wind")
-                onCheckedChanged: displayConfigPage.configurationChanged();
-            }
-
-            QtControls.CheckBox {
-                id: showPressureInTooltipCheckBox
-
-                Layout.row: 3
-                Layout.column: 1
-
-                text: i18nc("@option:check", "Show pressure")
-                onCheckedChanged: displayConfigPage.configurationChanged();
-            }
-
-            QtControls.CheckBox {
-                id: showHumidityInTooltipCheckBox
-
-                Layout.row: 4
-                Layout.column: 1
-
-                text: i18nc("@option:check", "Show humidity")
-                onCheckedChanged: displayConfigPage.configurationChanged();
-            }
-        }
+        // TODO: conditionalize this once there are also settings for non-compact mode
+        visible: false
     }
 
-    Item { // tighten layout
-        Layout.fillHeight: true
+    QtControls.CheckBox {
+        id: showTemperatureInCompactModeCheckBox
+
+        Kirigami.FormData.label: i18nc("@label", "Show beside widget icon:")
+
+        enabled: canShowMoreInCompactMode
+
+        text: i18nc("@option:check Show on widget icon: temperature", "Temperature")
+        onCheckedChanged: displayConfigPage.configurationChanged();
+    }
+
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+
+    QtControls.CheckBox {
+        id: showTemperatureInTooltipCheckBox
+
+        Kirigami.FormData.label: i18nc("@label", "Show in tooltip:")
+
+        text: i18nc("@option:check", "Temperature")
+        onCheckedChanged: displayConfigPage.configurationChanged();
+    }
+
+    QtControls.CheckBox {
+        id: showWindInTooltipCheckBox
+
+        text: i18nc("@option:check Show in tooltip: wind", "Wind")
+        onCheckedChanged: displayConfigPage.configurationChanged();
+    }
+
+    QtControls.CheckBox {
+        id: showPressureInTooltipCheckBox
+
+        text: i18nc("@option:check Show in tooltip: pressure", "Pressure")
+        onCheckedChanged: displayConfigPage.configurationChanged();
+    }
+
+    QtControls.CheckBox {
+        id: showHumidityInTooltipCheckBox
+
+        text: i18nc("@option:check Show in tooltip: humidity", "Humidity")
+        onCheckedChanged: displayConfigPage.configurationChanged();
     }
 }

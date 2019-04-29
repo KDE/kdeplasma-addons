@@ -16,16 +16,14 @@
  */
 
 import QtQuick 2.9
-
-import QtQuick.Controls 1.4 as QtControls
+import QtQuick.Controls 2.5 as QtControls
 import QtQuick.Layouts 1.3
 
-import org.kde.plasma.components 2.0 as PlasmaComponents
-
+import org.kde.kirigami 2.5 as Kirigami
 import org.kde.plasma.private.weather 1.0
 
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: weatherStationConfigPage
 
     property string source
@@ -63,65 +61,49 @@ ColumnLayout {
         }
     }
 
-    GridLayout {
-        columns: 2
+
+    RowLayout {
+        Kirigami.FormData.label: i18nc("@label", "Location:")
+        Layout.fillWidth: true
 
         QtControls.Label {
-            Layout.row: 0
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label", "Location:")
-        }
-
-        RowLayout {
-            Layout.row: 0
-            Layout.column: 1
+            id: locationDisplay
             Layout.fillWidth: true
+            elide: Text.ElideRight
+            visible: text != ""
 
-            QtControls.Label {
-                id: locationDisplay
-                Layout.fillWidth: true
-                elide: Text.ElideRight
-
-                text: {
-                    var sourceDetails = source.split('|');
-                    if (sourceDetails.length > 2) {
-                        return i18nc("A weather station location and the weather service it comes from",
-                                     "%1 (%2)", sourceDetails[2], sourceDetails[0]);
-                    }
-                    return i18nc("no weather station", "-");
+            text: {
+                var sourceDetails = source.split('|');
+                if (sourceDetails.length > 2) {
+                    return i18nc("A weather station location and the weather service it comes from",
+                                    "%1 (%2)", sourceDetails[2], sourceDetails[0]);
                 }
-            }
-
-            QtControls.Button {
-                id: selectButton
-                iconName: "edit-find"
-                text: i18nc("@action:button", "Select")
-                onClicked: stationPicker.visible = true;
+                return ""
             }
         }
 
-
-        QtControls.Label {
-            Layout.row: 1
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label:spinbox", "Update every:")
-        }
-        QtControls.SpinBox {
-            id: updateIntervalSpin
-            Layout.row: 1
-            Layout.column: 1
-            Layout.minimumWidth: units.gridUnit * 8
-            suffix: i18nc("@item:valuesuffix spacing to number + unit (minutes)", " min")
-            stepSize: 5
-            minimumValue: 30
-            maximumValue: 3600
-            onValueChanged: weatherStationConfigPage.configurationChanged();
+        QtControls.Button {
+            id: selectButton
+            Layout.fillWidth: true
+            icon.name: "find-location"
+            text: i18nc("@action:button", "Choose...")
+            onClicked: stationPicker.visible = true;
         }
     }
 
-    Item { // tighten layout
-        Layout.fillHeight: true
+    QtControls.SpinBox {
+        id: updateIntervalSpin
+
+        Kirigami.FormData.label: i18nc("@label:spinbox", "Update every:")
+
+        textFromValue: function(value) {
+                        return (i18np("%1 minute", "%1 minutes", value));
+                        }
+
+        stepSize: 5
+        from: 30
+        to: 3600
+
+        onValueChanged: weatherStationConfigPage.configurationChanged();
     }
 }
