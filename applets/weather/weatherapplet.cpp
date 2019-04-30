@@ -94,7 +94,7 @@ void WeatherApplet::configChanged()
     m_displayTemperatureUnit = unit(cfg.readEntry(StorageConfigKeys::temperatureUnit, (useMetric ? "C" :   "F")));
     m_displaySpeedUnit =       unit(cfg.readEntry(StorageConfigKeys::speedUnit,       (useMetric ? "m/s" : "mph")));
     m_displayPressureUnit =    unit(cfg.readEntry(StorageConfigKeys::pressureUnit,    (useMetric ? "hPa" : "inHg")));
-    m_displayVisibilityUnit =  unit(cfg.readEntry(StorageConfigKeys::visibilityUnit,  (useMetric ? "km" :  "ml")));
+    m_displayVisibilityUnit =  unit(cfg.readEntry(StorageConfigKeys::visibilityUnit,  (useMetric ? "km" :  "mi")));
 
     m_updateInterval = cfg.readEntry(StorageConfigKeys::updateInterval, 30);
     m_source =         cfg.readEntry(StorageConfigKeys::source,         QString());
