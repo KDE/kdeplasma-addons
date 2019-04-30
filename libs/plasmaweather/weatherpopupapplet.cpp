@@ -333,7 +333,7 @@ void WeatherPopupApplet::configChanged()
     d->temperatureUnit = d->unit(cfg.readEntry(StorageConfigKeys::temperatureUnit, (useMetric ? "C" :   "F")));
     d->speedUnit =       d->unit(cfg.readEntry(StorageConfigKeys::speedUnit,       (useMetric ? "m/s" : "mph")));
     d->pressureUnit =    d->unit(cfg.readEntry(StorageConfigKeys::pressureUnit,    (useMetric ? "hPa" : "inHg")));
-    d->visibilityUnit =  d->unit(cfg.readEntry(StorageConfigKeys::visibilityUnit,  (useMetric ? "km" :  "ml")));
+    d->visibilityUnit =  d->unit(cfg.readEntry(StorageConfigKeys::visibilityUnit,  (useMetric ? "km" :  "mi")));
 
     d->updateInterval = cfg.readEntry(StorageConfigKeys::updateInterval, 30);
     d->source =         cfg.readEntry(StorageConfigKeys::source,         QString());
