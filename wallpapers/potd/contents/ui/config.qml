@@ -18,17 +18,22 @@
  */
 
 import QtQuick 2.5
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 1.0 as QtControls1
-import QtQuick.Controls 2.0 as QtControls
+import QtQuick.Controls 1.4 as QQC1
 import org.kde.kquickcontrols 2.0 as KQuickControls
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.5 as Kirigami
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: root
+    twinFormLayouts: parentLayout
+    anchors.left: parent.left
+    anchors.right: parent.right
+
     property string cfg_Provider
     property int cfg_FillMode
     property alias cfg_Color: colorButton.color
+    property alias formLayout: root
+
     ListModel {
         id: providerModel
     }
@@ -60,96 +65,71 @@ ColumnLayout {
             }
         }
     }
-
-    Row {
-        spacing: units.largeSpacing / 2
-        QtControls.Label {
-            width: formAlignment - units.largeSpacing
-            horizontalAlignment: Text.AlignRight
-            anchors.verticalCenter: providerComboBox.verticalCenter
-            text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Providers:")
+    // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
+    QQC1.ComboBox {
+        id: providerComboBox
+        TextMetrics {
+            id: providerTextMetrics
+            text: providerComboBox.currentText
         }
-        // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
-        QtControls1.ComboBox {
-            id: providerComboBox
-            property int textLength: 24
-            width: theme.mSize(theme.defaultFont).width * textLength
-            model: providerModel
-            textRole: "name"
-            onCurrentIndexChanged: {
-                cfg_Provider = providerModel.get(currentIndex)["id"]
-            }
+        implicitWidth: Math.max(providerTextMetrics.width + Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing * 2, pluginComboBox.width) //QQC1 Combobox default sizing is broken
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Provider:")
+        model: providerModel
+        textRole: "name"
+        onCurrentIndexChanged: {
+            cfg_Provider = providerModel.get(currentIndex)["id"]
         }
     }
 
-    Row {
-        //x: formAlignment - positionLabel.paintedWidth
-        spacing: units.largeSpacing / 2
-        QtControls.Label {
-            width: formAlignment - units.largeSpacing
-            horizontalAlignment: Text.AlignRight
-            anchors.verticalCenter: resizeComboBox.verticalCenter
-            text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Positioning:")
+    // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
+    QQC1.ComboBox {
+        id: resizeComboBox
+        TextMetrics {
+            id: resizeTextMetrics
+            text: resizeComboBox.currentText
         }
-        // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
-        QtControls1.ComboBox {
-            id: resizeComboBox
-            property int textLength: 24
-            width: theme.mSize(theme.defaultFont).width * textLength
-            model: [
-                        {
-                            'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled and Cropped"),
-                            'fillMode': Image.PreserveAspectCrop
-                        },
-                        {
-                            'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled"),
-                            'fillMode': Image.Stretch
-                        },
-                        {
-                            'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled, Keep Proportions"),
-                            'fillMode': Image.PreserveAspectFit
-                        },
-                        {
-                            'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Centered"),
-                            'fillMode': Image.Pad
-                        },
-                        {
-                            'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Tiled"),
-                            'fillMode': Image.Tile
-                        }
-                    ]
-
-            textRole: "label"
-            onCurrentIndexChanged: cfg_FillMode = model[currentIndex]["fillMode"]
-            Component.onCompleted: setMethod();
-
-            function setMethod() {
-                for (var i = 0; i < model.length; i++) {
-                    if (model[i]["fillMode"] == wallpaper.configuration.FillMode) {
-                        resizeComboBox.currentIndex = i;
-                        var tl = model[i]["label"].length;
+        implicitWidth: Math.max(resizeTextMetrics.width + Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing * 2, pluginComboBox.width) //QQC1 Combobox default sizing is broken
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Positioning:")
+        model: [
+                    {
+                        'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled and Cropped"),
+                        'fillMode': Image.PreserveAspectCrop
+                    },
+                    {
+                        'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled"),
+                        'fillMode': Image.Stretch
+                    },
+                    {
+                        'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled, Keep Proportions"),
+                        'fillMode': Image.PreserveAspectFit
+                    },
+                    {
+                        'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Centered"),
+                        'fillMode': Image.Pad
+                    },
+                    {
+                        'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Tiled"),
+                        'fillMode': Image.Tile
                     }
+                ]
+
+        textRole: "label"
+        onCurrentIndexChanged: cfg_FillMode = model[currentIndex]["fillMode"]
+        Component.onCompleted: setMethod();
+
+        function setMethod() {
+            for (var i = 0; i < model.length; i++) {
+                if (model[i]["fillMode"] == wallpaper.configuration.FillMode) {
+                    resizeComboBox.currentIndex = i;
+                    var tl = model[i]["label"].length;
                 }
             }
         }
     }
 
-    Row {
-        id: colorRow
-        spacing: units.largeSpacing / 2
-        QtControls.Label {
-            width: formAlignment - units.largeSpacing
-            horizontalAlignment: Text.AlignRight
-            anchors.verticalCenter: colorButton.verticalCenter
-            text: i18ndc("plasma_wallpaper_org.kde.potd", "@label:chooser", "Background color:")
-        }
-        KQuickControls.ColorButton {
-            id: colorButton
-            dialogTitle: i18ndc("plasma_wallpaper_org.kde.potd", "@title:window", "Select Background Color")
-        }
-    }
-
-    Item { // tighten layout
-        Layout.fillHeight: true
+    KQuickControls.ColorButton {
+        id: colorButton
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:chooser", "Background color:")
+        dialogTitle: i18ndc("plasma_wallpaper_org.kde.potd", "@title:window", "Select Background Color")
     }
 }
