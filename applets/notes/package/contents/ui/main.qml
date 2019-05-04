@@ -18,7 +18,7 @@
 */
 
 import QtQuick 2.1
-import QtQuick.Controls 1.3 as QtControls
+import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.1
 
 import org.kde.draganddrop 2.0 as DragDrop
@@ -50,12 +50,22 @@ PlasmaCore.SvgItem {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    //this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
+    // this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
     readonly property real horizontalMargins: width * 0.07
     readonly property real verticalMargins: height * 0.07
 
-    //note is of type Note
+    // note is of type Note
     property QtObject note: noteManager.loadNote(plasmoid.configuration.noteId);
+
+    // define colors used for icons in ToolButtons and for text in TextArea.
+    // this is deliberately _NOT_ the theme color as we are over a known bright background!
+    // an unknown colour over a known colour is a bad move as you end up with white on yellow.
+    readonly property color textIconColor: {
+        if (plasmoid.configuration.color === "black" || plasmoid.configuration.color === "translucent-light") {
+            return "#dfdfdf";
+        }
+        return "#202020";
+    }
 
     Timer {
         id: forceFocusTimer
@@ -172,12 +182,10 @@ PlasmaCore.SvgItem {
             }
 
             style: PlasmaStyle.TextAreaStyle {
-                //this is deliberately _NOT_ the theme color as we are over a known bright background
-                //an unknown colour over a known colour is a bad move as you end up with white on yellow
-                textColor: (plasmoid.configuration.color === "black" || plasmoid.configuration.color === "translucent-light") ? "#dfdfdf" : "#202020"
+                textColor: textIconColor
             }
 
-            //update the note if the source changes, but only if the user isn't editing it currently
+            // update the note if the source changes, but only if the user isn't editing it currently
             Binding {
                 target: mainTextArea
                 property: "text"
@@ -250,33 +258,57 @@ PlasmaCore.SvgItem {
                 enabled: opacity > 0
                 visible: fontButtons.showFormatButtons
 
-                PlasmaComponents.ToolButton {
-                    tooltip: i18nc("@info:tooltip", "Bold")
-                    iconSource: "format-text-bold"
+                QQC2.ToolButton {
+                    icon.name: "format-text-bold"
+                    icon.color: textIconColor
+                    icon.width: units.iconSizes.smallMedium
+                    icon.height: icon.width
                     checked: documentHandler.bold
                     onClicked: documentHandler.bold = !documentHandler.bold
-                    Accessible.name: tooltip
+                    Accessible.name: boldTooltip.text
+                    QQC2.ToolTip {
+                        id: boldTooltip
+                        text: i18nc("@info:tooltip", "Bold")
+                    }
                 }
-                PlasmaComponents.ToolButton {
-                    tooltip: i18nc("@info:tooltip", "Italic")
-                    iconSource: "format-text-italic"
+                QQC2.ToolButton {
+                    icon.name: "format-text-italic"
+                    icon.color: textIconColor
+                    icon.width: units.iconSizes.smallMedium
+                    icon.height: icon.width
                     checked: documentHandler.italic
                     onClicked: documentHandler.italic = !documentHandler.italic
-                    Accessible.name: tooltip
+                    Accessible.name: italicTooltip.text
+                    QQC2.ToolTip {
+                        id: italicTooltip
+                        text: i18nc("@info:tooltip", "Italic")
+                    }
                 }
-                PlasmaComponents.ToolButton {
-                    tooltip: i18nc("@info:tooltip", "Underline")
-                    iconSource: "format-text-underline"
+                QQC2.ToolButton {
+                    icon.name: "format-text-underline"
+                    icon.color: textIconColor
+                    icon.width: units.iconSizes.smallMedium
+                    icon.height: icon.width
                     checked: documentHandler.underline
                     onClicked: documentHandler.underline = !documentHandler.underline
-                    Accessible.name: tooltip
+                    Accessible.name: underlineTooltip.text
+                    QQC2.ToolTip {
+                        id: underlineTooltip
+                        text: i18nc("@info:tooltip", "Underline")
+                    }
                 }
-                PlasmaComponents.ToolButton {
-                    tooltip: i18nc("@info:tooltip", "Strikethrough")
-                    iconSource: "format-text-strikethrough"
+                QQC2.ToolButton {
+                    icon.name: "format-text-strikethrough"
+                    icon.color: textIconColor
+                    icon.width: units.iconSizes.smallMedium
+                    icon.height: icon.width
                     checked: documentHandler.strikeOut
                     onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
-                    Accessible.name: tooltip
+                    Accessible.name: strikethroughTooltip.text
+                    QQC2.ToolTip {
+                        id: strikethroughTooltip
+                        text: i18nc("@info:tooltip", "Strikethrough")
+                    }
                 }
             }
 
@@ -285,12 +317,18 @@ PlasmaCore.SvgItem {
                 Layout.fillHeight: true
             }
 
-            PlasmaComponents.ToolButton {
+            QQC2.ToolButton {
                 id: settingsButton
-                tooltip: plasmoid.action("configure").text
-                iconSource: "configure"
+                icon.name: "configure"
+                icon.color: textIconColor
+                icon.width: units.iconSizes.smallMedium
+                icon.height: icon.width
                 onClicked: plasmoid.action("configure").trigger()
-                Accessible.name: tooltip
+                Accessible.name: settingsTooltip.text
+                QQC2.ToolTip {
+                    id: settingsTooltip
+                    text: plasmoid.action("configure").text
+                }
             }
         }
     }
@@ -308,8 +346,8 @@ PlasmaCore.SvgItem {
         plasmoid.setAction("change_note_color_translucent-light", i18nc("@item:inmenu", "Translucent Light"));
         plasmoid.setActionSeparator("separator0");
 
-        //plasmoid configuration doesn't check before emitting change signal
-        //explicit check is needed (at time of writing)
+        // plasmoid configuration doesn't check before emitting change signal
+        // explicit check is needed (at time of writing)
         if (note.id != plasmoid.configuration.noteId) {
             plasmoid.configuration.noteId = note.id;
         }
