@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Martin Yrjölä <martin.yrjola@gmail.com>
+ * Copyright (C) 2019 Nate Graham <nate@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,12 +19,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-import QtQuick 2.2
-import QtQuick.Controls 1.2
-import QtQuick.Layouts 1.0
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QQC2
+
+import org.kde.kirigami 2.5 as Kirigami
 import org.kde.kquickcontrols 2.0 as KQuickControls
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: colorSettings
 
     property alias cfg_memApplicationColor: memApplicationColorPicker.color
@@ -35,129 +37,95 @@ ColumnLayout {
     property alias cfg_swapUsedColor: swapUsedColorPicker.color
     property alias cfg_cacheDirtyColor: cacheDirtyColorPicker.color
     property alias cfg_cacheWritebackColor: cacheWritebackColorPicker.color
-    property alias cfg_setColorsManually: setColorsManuallyGroupBox.checked
+    property alias cfg_setColorsManually: setColorsManually.checked
 
-    GroupBox {
-        id: setColorsManuallyGroupBox
-        Layout.fillWidth: true
-        flat: true
-
-        title: i18nc("@option:check", "Set Colors Manually")
-        checkable: true
-
-        GridLayout {
-            columns: 2
-
-            Label {
-                text: i18nc("@title:group", "CPU")
-                Layout.columnSpan: 2
-                font.bold: true
-            }
-
-            Label {
-                text: i18nc("@label:chooser", "User:")
-                Layout.alignment: Qt.AlignRight
-            }
-
-            KQuickControls.ColorButton {
-                id: cpuUserColorPicker
-            }
-
-            Label {
-                text: i18nc("@label:chooser", "IOWait:")
-                Layout.alignment: Qt.AlignRight
-            }
-
-            KQuickControls.ColorButton {
-                id: cpuIOWaitColorPicker
-            }
-
-            Label {
-                text: i18nc("@label:chooser", "Sys:")
-                Layout.alignment: Qt.AlignRight
-            }
-
-            KQuickControls.ColorButton {
-                id: cpuSysColorPicker
-            }
-
-            Label {
-                text: i18nc("@label:chooser", "Nice:")
-                Layout.alignment: Qt.AlignRight
-            }
-
-            KQuickControls.ColorButton {
-                id: cpuNiceColorPicker
-            }
-
-            Label {
-                text: i18nc("@title:group", "Memory")
-                Layout.columnSpan: 2
-                font.bold: true
-            }
-
-
-            Label {
-                text: i18nc("@label:chooser", "Application:")
-                Layout.alignment: Qt.AlignRight
-            }
-
-            KQuickControls.ColorButton {
-                id: memApplicationColorPicker
-            }
-
-            Label {
-                text: i18nc("@label:chooser", "Buffers:")
-                Layout.alignment: Qt.AlignRight
-            }
-
-            KQuickControls.ColorButton {
-                id: memBuffersColorPicker
-            }
-
-            Label {
-                text: i18nc("@title:group", "Swap")
-                Layout.columnSpan: 2
-                font.bold: true
-            }
-
-
-            Label {
-                text: i18nc("@label:chooser", "Used swap:")
-                Layout.alignment: Qt.AlignRight
-            }
-
-            KQuickControls.ColorButton {
-                id: swapUsedColorPicker
-            }
-
-            Label {
-                text: i18nc("@title:group", "Cache")
-                Layout.columnSpan: 2
-                font.bold: true
-            }
-
-            Label {
-                text: i18nc("@label:chooser", "Dirty memory:")
-                Layout.alignment: Qt.AlignRight
-            }
-
-            KQuickControls.ColorButton {
-                id: cacheDirtyColorPicker
-            }
-
-            Label {
-                text: i18nc("@label:chooser", "Writeback memory:")
-                Layout.alignment: Qt.AlignRight
-            }
-
-            KQuickControls.ColorButton {
-                id: cacheWritebackColorPicker
-            }
-        }
+    QQC2.CheckBox {
+        id: setColorsManually
+        text: i18nc("@option:check", "Set Colors Manually")
     }
 
     Item {
-        Layout.fillHeight: true
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18nc("@title:group", "CPU")
+        enabled: setColorsManually.checked
+    }
+
+
+    KQuickControls.ColorButton {
+        id: cpuUserColorPicker
+        Kirigami.FormData.label: i18nc("@label:chooser", "User:")
+        enabled: setColorsManually.checked
+    }
+
+    KQuickControls.ColorButton {
+        id: cpuIOWaitColorPicker
+        Kirigami.FormData.label: i18nc("@label:chooser", "IOWait:")
+        enabled: setColorsManually.checked
+    }
+
+    KQuickControls.ColorButton {
+        id: cpuSysColorPicker
+        Kirigami.FormData.label: i18nc("@label:chooser", "Sys:")
+        enabled: setColorsManually.checked
+    }
+
+    KQuickControls.ColorButton {
+        id: cpuNiceColorPicker
+        Kirigami.FormData.label: i18nc("@label:chooser", "Nice:")
+        enabled: setColorsManually.checked
+    }
+
+
+    Item {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18nc("@title:group", "Memory")
+        enabled: setColorsManually.checked
+    }
+
+
+    KQuickControls.ColorButton {
+        id: memApplicationColorPicker
+        Kirigami.FormData.label: i18nc("@label:chooser", "Application:")
+        enabled: setColorsManually.checked
+    }
+
+    KQuickControls.ColorButton {
+        id: memBuffersColorPicker
+        Kirigami.FormData.label: i18nc("@label:chooser", "Buffers:")
+        enabled: setColorsManually.checked
+    }
+
+
+    Item {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18nc("@title:group", "Swap")
+        enabled: setColorsManually.checked
+    }
+
+
+    KQuickControls.ColorButton {
+        id: swapUsedColorPicker
+        Kirigami.FormData.label: i18nc("@label:chooser", "Used swap:")
+        enabled: setColorsManually.checked
+    }
+
+
+    Item {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: i18nc("@title:group", "Cache")
+        enabled: setColorsManually.checked
+    }
+
+
+    KQuickControls.ColorButton {
+        id: cacheDirtyColorPicker
+        Kirigami.FormData.label: i18nc("@label:chooser", "Dirty memory:")
+        enabled: setColorsManually.checked
+    }
+
+    KQuickControls.ColorButton {
+        id: cacheWritebackColorPicker
+        Kirigami.FormData.label: i18nc("@label:chooser", "Writeback memory:")
+        enabled: setColorsManually.checked
     }
 }

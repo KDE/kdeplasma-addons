@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Martin Yrjölä <martin.yrjola@gmail.com>
+ * Copyright (C) 2019 Nate Graham <nate@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,11 +19,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-import QtQuick 2.2
-import QtQuick.Controls 1.2
-import QtQuick.Layouts 1.0
+import QtQuick 2.5
+import QtQuick.Controls 1.4 as QQC1
+import QtQuick.Controls 2.5 as QQC2
+import QtQuick.Layouts 1.3
 
-ColumnLayout {
+import org.kde.kirigami 2.5 as Kirigami
+
+Kirigami.FormLayout {
     id: generalSettings
 
     property alias cfg_cpuActivated: cpuActivatedCheckBox.checked
@@ -33,124 +37,104 @@ ColumnLayout {
     property alias cfg_updateInterval: updateIntervalSpinBox.value
     property int cfg_monitorType: plasmoid.configuration.monitorType
 
-    onCfg_monitorTypeChanged: {
-        switch (cfg_monitorType) {
-            default: case 0: monitorTypeGroup.current = barMonitorRadio; break;
-            case 1: monitorTypeGroup.current = circularMonitorRadio; break;
-            case 2: monitorTypeGroup.current = compactBarMonitorRadio; break;
-        }
-    }
-
-    ExclusiveGroup {
+    QQC2.ButtonGroup {
         id: monitorTypeGroup
     }
 
-    GridLayout {
-        columns: 2
+    QQC2.CheckBox {
+        id: cpuActivatedCheckBox
 
-        Label {
-            Layout.row: 0
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label", "Show:")
+        Kirigami.FormData.label: i18nc("@label", "Show:")
+
+        text: i18nc("@option:check", "CPU monitor")
+        onCheckedChanged: if (!checked) {cpuAllActivatedCheckBox.checked = false;}
+    }
+
+    RowLayout {
+        Layout.fillWidth: true
+
+        Item {
+            width: Kirigami.Units.gridUnit
         }
+        QQC2.CheckBox {
+            id: cpuAllActivatedCheckBox
 
-        CheckBox {
-            id: cpuActivatedCheckBox
-            Layout.row: 0
-            Layout.column: 1
-            text: i18nc("@option:check", "CPU monitor")
-            onCheckedChanged: if (!checked) {cpuAllActivatedCheckBox.checked = false;}
-        }
+            Layout.fillWidth: true
 
-        Row {
-            Layout.row: 1
-            Layout.column: 1
-            Item { height: 1; width: 50; }
-            CheckBox {
-                id: cpuAllActivatedCheckBox
-                text: i18nc("@option:check", "CPUs separately")
-                enabled: cpuActivatedCheckBox.checked && cfg_monitorType === 2
-            }
-        }
-
-        CheckBox {
-            id: memoryActivatedCheckBox
-            Layout.row: 2
-            Layout.column: 1
-            text: i18nc("@option:check", "Memory monitor")
-        }
-
-        CheckBox {
-            id: swapActivatedCheckBox
-            Layout.row: 3
-            Layout.column: 1
-            text: i18nc("@option:check", "Swap monitor")
-        }
-
-        CheckBox {
-            id: cacheActivatedCheckBox
-            Layout.row: 4
-            Layout.column: 1
-            text: i18nc("@option:check", "Cache monitor")
-        }
-
-        Label {
-            Layout.row: 5
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label", "Monitor type:")
-        }
-
-        RadioButton {
-            id: barMonitorRadio
-            Layout.row: 5
-            Layout.column: 1
-            exclusiveGroup: monitorTypeGroup
-            text: i18nc("@option:radio", "Bar")
-            onCheckedChanged: if (checked) {cfg_monitorType = 0; cpuAllActivatedCheckBox.checked = false;}
-        }
-
-        RadioButton {
-            id: circularMonitorRadio
-            Layout.row: 6
-            Layout.column: 1
-            exclusiveGroup: monitorTypeGroup
-            text: i18nc("@option:radio", "Circular")
-            onCheckedChanged: if (checked) {cfg_monitorType = 1; cpuAllActivatedCheckBox.checked = false;}
-        }
-
-        RadioButton {
-            id: compactBarMonitorRadio
-            Layout.row: 7
-            Layout.column: 1
-            exclusiveGroup: monitorTypeGroup
-            text: i18nc("@option:radio", "Compact bar")
-            onCheckedChanged: if (checked) cfg_monitorType = 2;
-        }
-
-        Label {
-            Layout.row: 8
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            text: i18nc("@label:spinbox", "Update interval:")
-        }
-
-        SpinBox {
-            id: updateIntervalSpinBox
-            Layout.row: 8
-            Layout.column: 1
-            decimals: 1
-            stepSize: 0.1
-            minimumValue: 0.1
-            suffix: i18nc("@item:valuesuffix spacing to number + unit (seconds)", " s")
+            text: i18nc("@option:check", "CPUs separately")
+            enabled: cpuActivatedCheckBox.checked && cfg_monitorType === 2
         }
     }
 
-
-    Item { // tighten layout
-        Layout.fillHeight: true
+    QQC2.CheckBox {
+        id: memoryActivatedCheckBox
+        text: i18nc("@option:check", "Memory monitor")
     }
 
-    Component.onCompleted: cfg_monitorTypeChanged()
+    QQC2.CheckBox {
+        id: swapActivatedCheckBox
+        text: i18nc("@option:check", "Swap monitor")
+    }
+
+    QQC2.CheckBox {
+        id: cacheActivatedCheckBox
+        text: i18nc("@option:check", "Cache monitor")
+    }
+
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+
+    QQC2.RadioButton {
+        id: barMonitorRadio
+        QQC2.ButtonGroup.group: monitorTypeGroup
+
+        Kirigami.FormData.label: i18nc("@label", "Monitor type:")
+
+        text: i18nc("@option:radio", "Bar")
+
+        checked: cfg_monitorType == 0
+        onClicked: if (checked) {cfg_monitorType = 0; cpuAllActivatedCheckBox.checked = false;}
+    }
+
+    QQC2.RadioButton {
+        id: circularMonitorRadio
+        QQC2.ButtonGroup.group: monitorTypeGroup
+
+        text: i18nc("@option:radio", "Circular")
+
+        checked: cfg_monitorType == 1
+        onClicked: if (checked) {cfg_monitorType = 1; cpuAllActivatedCheckBox.checked = false;}
+    }
+
+    QQC2.RadioButton {
+        id: compactBarMonitorRadio
+        QQC2.ButtonGroup.group: monitorTypeGroup
+
+        text: i18nc("@option:radio", "Compact bar")
+
+        checked: cfg_monitorType == 2
+        onClicked: if (checked) cfg_monitorType = 2;
+    }
+
+
+        Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    // QQC2 SpinBox doesn't cleanly support non-integer values, which can be worked
+    // around, but the code is messy and the user experience is somewhat poor.
+    // So for now, we stick with the QQC1 SpinBox
+    QQC1.SpinBox {
+        id: updateIntervalSpinBox
+
+        Kirigami.FormData.label: i18nc("@label:spinbox", "Update interval:")
+
+        decimals: 1
+        stepSize: 0.1
+        minimumValue: 0.1
+        suffix: i18ncp("@item:valuesuffix spacing to number + unit (seconds)", " second", " seconds")
+    }
 }
