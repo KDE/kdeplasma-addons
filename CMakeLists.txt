@@ -10,7 +10,7 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
 endif()
 
 set(QT_MIN_VERSION 5.11.0)
-set(KF5_MIN_VERSION 5.50.0)
+set(KF5_MIN_VERSION 5.58.0)
 
 include(FeatureSummary)
 
