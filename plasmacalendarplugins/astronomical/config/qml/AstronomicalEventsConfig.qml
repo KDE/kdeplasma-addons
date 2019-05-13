@@ -15,15 +15,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-import QtQuick 2.0
-
-import QtQuick.Controls 1.2 as QtControls
-import QtQuick.Layouts 1.0
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QQC2
+import QtQuick.Layouts 1.3
 
 import org.kde.plasmacalendar.astronomicaleventsconfig 1.0
+import org.kde.kirigami 2.5 as Kirigami
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: configPage
+
+    anchors.left: parent.left
+    anchors.right: parent.right
 
     // expected API
     signal configurationChanged
@@ -41,23 +44,21 @@ ColumnLayout {
         id: configStorage
     }
 
-    QtControls.CheckBox {
+    QQC2.CheckBox {
         id: showLunarPhasesCheckBox
 
+        Kirigami.FormData.label: i18n("Show:")
+
         checked: configStorage.isLunarPhaseShown
-        text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Show lunar phases")
+        text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Lunar phases")
         onCheckedChanged: configPage.configurationChanged();
     }
 
-    QtControls.CheckBox {
+    QQC2.CheckBox {
         id: showSeasonsCheckBox
 
         checked: configStorage.isSeasonShown
-        text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Show astronomical seasons (solstices and equinoxes)")
+        text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Astronomical seasons (solstices and equinoxes)")
         onCheckedChanged: configPage.configurationChanged();
-    }
-
-    Item { // tighten layout
-        Layout.fillHeight: true
     }
 }
