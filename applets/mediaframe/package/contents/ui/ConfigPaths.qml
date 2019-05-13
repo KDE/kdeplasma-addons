@@ -16,12 +16,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
  */
 
-import QtQuick 2.1
-import QtQuick.Controls 1.1
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.3
 
 import org.kde.plasma.plasmoid 2.0
+import org.kde.kirigami 2.5 as Kirigami
 
 ColumnLayout {
     id: root
@@ -57,11 +58,8 @@ ColumnLayout {
         id: fileDialog
 
         visible: false
-
         title: i18nc("@title:window", "Choose Files")
-
         folder: shortcuts.pictures
-
         selectMultiple: true
 
         // TODO get valid filter list from native code?
@@ -86,11 +84,8 @@ ColumnLayout {
         id: folderDialog
 
         visible: false
-
         title: i18nc("@title:window", "Choose a Folder")
-
         folder: shortcuts.pictures
-
         selectFolder: true
 
         onAccepted: {
@@ -108,66 +103,56 @@ ColumnLayout {
 
     }
 
-        RowLayout {
-            Layout.fillWidth: true
+    ListModel {
+        id: pathModel
+    }
 
-            Button {
-                iconName: "folder-new"
-                onClicked: folderDialog.visible = true
-                text: i18nc("@action:button", "Add Folder...")
-            }
+    QQC2.ScrollView {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        Component.onCompleted: background.visible = true;
 
-            Button {
-                iconName: "document-new"
-                onClicked: fileDialog.visible = true
-                text: i18nc("@action:button", "Add Files...")
-            }
-        }
+        ListView {
+            id: pathsList
 
-        Label {
-            Layout.fillWidth: true
+            anchors.margins: 4
+            model: pathModel
 
-            text: i18nc("@label:listbox", "Paths:")
-        }
+            delegate: Kirigami.SwipeListItem {
+                id: folderDelegate
 
-        ListModel {
-            id: pathModel
-        }
+                width: pathsList.width
+                height: paintedHeight;
 
-        RowLayout {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            ScrollView {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                frameVisible: true
-
-                ListView {
-                    width: parent.width
-                    model: pathModel
-
-                    delegate: RowLayout {
-                        width: parent.width
-
-                        Label {
-                            id: pathText
-
-                            Layout.fillWidth: true
-
-                            text: model.path
-                        }
-
-                        Button {
-                            id: removePathButton
-
-                            iconName: "list-remove"
-
-                            onClicked: removePath(model.index)
-                        }
-                    }
+                QQC2.Label {
+                    Layout.fillWidth: true
+                    text: model.path.replace("file://", "")
                 }
+
+                actions: [
+                    Kirigami.Action {
+                        iconName: "list-remove"
+                        tooltip: i18nd("plasma_wallpaper_org.kde.image", "Remove path")
+                        onTriggered: removePath(model.index)
+                    }
+                ]
             }
         }
+    }
+
+    RowLayout {
+        Layout.fillWidth: true
+
+        QQC2.Button {
+            icon.name: "folder-new"
+            onClicked: folderDialog.visible = true
+            text: i18nc("@action:button", "Add Folder...")
+        }
+
+        QQC2.Button {
+            icon.name: "document-new"
+            onClicked: fileDialog.visible = true
+            text: i18nc("@action:button", "Add Files...")
+        }
+    }
 }
