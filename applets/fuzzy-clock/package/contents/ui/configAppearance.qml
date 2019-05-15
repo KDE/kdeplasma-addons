@@ -21,7 +21,6 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.2 as QQC1
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.5 as Kirigami
@@ -49,13 +48,12 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: true
     }
 
-    QQC1.Slider { // FIXME: port to QQC2 once we've fixed: https://bugs.kde.org/show_bug.cgi?id=405471
+    QQC2.Slider {
         id: fuzzyness
         Kirigami.FormData.label: i18nc("@title:group", "Fuzzyness:")
-        minimumValue: 1
-        maximumValue: 5
+        from: 1
+        to: 5
         stepSize: 1
-        tickmarksEnabled: true
     }
 
     RowLayout {
