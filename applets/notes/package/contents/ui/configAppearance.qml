@@ -76,7 +76,7 @@ KCM.GridView {
                 //this is deliberately _NOT_ the theme color as we are over a known bright background
                 //an unknown colour over a known colour is a bad move as you end up with white on yellow
                 color: {
-                    if (modelData == "black" || modelData == "translucent-light") {
+                    if (modelData === "black" || modelData === "translucent-light") {
                         return "#dfdfdf"
                     } else {
                         return "#202020"
