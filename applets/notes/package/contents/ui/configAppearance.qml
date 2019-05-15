@@ -18,108 +18,75 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 1.3 as QtControls
-import QtQuick.Layouts 1.1 as QtLayouts
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QQC2
 
+import org.kde.kcm 1.1 as KCM
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
 
-QtLayouts.ColumnLayout {
+KCM.GridView {
     id: appearancePage
 
     property string cfg_color
+
+    contentWidth: implicitWidth
+    contentHeight: implicitHeight
 
     PlasmaCore.Svg {
         id: noteSvg
         imagePath: "widgets/notes"
     }
 
-    SystemPalette {
-        id: syspal
-    }
+    view.model: ["white", "black", "red", "orange", "yellow", "green", "blue", "pink", "translucent", "translucent-light"]
+    view.currentIndex: view.model.indexOf(cfg_color)
+    view.onCurrentIndexChanged: cfg_color = view.model[view.currentIndex]
 
-    QtControls.ScrollView {
-        id: notesView
-        QtLayouts.Layout.fillWidth: true
-        QtLayouts.Layout.fillHeight: true
-        frameVisible: true
-        verticalScrollBarPolicy: Qt.ScrollBarAlwaysOn // otherwise we get stuck in a re-layout loop
-        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+    view.delegate: KCM.GridDelegate {
+        id: delegate
+        thumbnailAvailable: true
+        thumbnail: PlasmaCore.SvgItem {
+            anchors.fill: parent
+            anchors.margins: units.gridUnit / 2
+            
+            svg: noteSvg
+            elementId: modelData + "-notes"
 
-        GridView {
-            id: notesGrid
-            width: notesView.width
-            height: notesView.height
-            cacheBuffer: 2000 // sometimes GridView gets confused and layouts items *somewhere*
-            cellWidth: Math.floor(notesView.viewport.width / 3)
-            cellHeight: cellWidth
-            model: ["white", "black", "red", "orange", "yellow", "green", "blue", "pink", "translucent", "translucent-light"]
-            currentIndex: model.indexOf(cfg_color)
-            onCurrentIndexChanged: cfg_color = model[currentIndex]
+            QQC2.Label {
+                anchors.fill: parent
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
 
-            highlight: Rectangle {
-                color: syspal.highlight
-            }
-            highlightMoveDuration: 0
-
-            delegate: MouseArea {
-                width: notesGrid.cellWidth
-                height: notesGrid.cellHeight
-                hoverEnabled: true
-                onClicked: notesGrid.currentIndex = index
-
-                Rectangle {
-                    anchors.fill: parent
-                    color: syspal.highlight
-                    opacity: 0.5
-                    visible: parent.containsMouse
-                }
-
-                PlasmaCore.SvgItem {
-                    anchors {
-                        fill: parent
-                        margins: units.gridUnit / 2
+                text: {
+                    switch (modelData) {
+                    case "white": return i18n("A white sticky note")
+                    case "black": return i18n("A black sticky note")
+                    case "red": return i18n("A red sticky note")
+                    case "orange": return i18n("An orange sticky note")
+                    case "yellow": return i18n("A yellow sticky note")
+                    case "green": return i18n("A green sticky note")
+                    case "blue": return i18n("A blue sticky note")
+                    case "pink": return i18n("A pink sticky note")
+                    case "translucent": return i18n("A translucent sticky note")
+                    case "translucent-light": return i18n("A translucent sticky note with light text")
                     }
-                    svg: noteSvg
-                    elementId: modelData + "-notes"
+                }
+                elide: Text.ElideRight
+                wrapMode: Text.WordWrap
 
-                    PlasmaComponents.Label {
-                        anchors {
-                            fill: parent
-                            //this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
-                            margins: parent.width * 0.07
-                        }
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        wrapMode: Text.WordWrap
-                        elide: Text.ElideRight
-                        text: {
-                            switch (modelData) {
-                            case "white": return i18n("A white sticky note")
-                            case "black": return i18n("A black sticky note")
-                            case "red": return i18n("A red sticky note")
-                            case "orange": return i18n("An orange sticky note")
-                            case "yellow": return i18n("A yellow sticky note")
-                            case "green": return i18n("A green sticky note")
-                            case "blue": return i18n("A blue sticky note")
-                            case "pink": return i18n("A pink sticky note")
-                            case "translucent": return i18n("A translucent sticky note")
-                            case "translucent-light": return i18n("A translucent sticky note with light text")
-                            }
-                        }
-                        //this is deliberately _NOT_ the theme color as we are over a known bright background
-                        //an unknown colour over a known colour is a bad move as you end up with white on yellow
-                        color: {
-                            if (modelData === "black" || modelData === "translucent-light") {
-                                return "#dfdfdf"
-                            } else {
-                                return "#202020"
-                            }
-                        }
+                //this is deliberately _NOT_ the theme color as we are over a known bright background
+                //an unknown colour over a known colour is a bad move as you end up with white on yellow
+                color: {
+                    if (modelData == "black" || modelData == "translucent-light") {
+                        return "#dfdfdf"
+                    } else {
+                        return "#202020"
                     }
                 }
             }
+        }
+        onClicked: {
+            cfg_color = modelData
+            appearancePage.forceActiveFocus();
         }
     }
 }
