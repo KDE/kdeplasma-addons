@@ -186,7 +186,10 @@ PlasmaCore.SvgItem {
             }
 
             onActiveFocusChanged: {
-                if (!activeFocus) {
+                if (activeFocus) {
+                    plasmoid.status = PlasmaCore.Types.AcceptingInputStatus
+                } else {
+                    plasmoid.status = PlasmaCore.Types.ActiveStatus
                     note.save(mainTextArea.text);
                 }
             }
