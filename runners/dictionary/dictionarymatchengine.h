@@ -14,7 +14,6 @@
 
 namespace Plasma
 {
-class RunnerContext;
 }
 class DictionaryMatchEngine : public QObject
 {

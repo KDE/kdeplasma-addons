@@ -25,7 +25,6 @@
 #include "comicinfo.h"
 
 class ComicData;
-class QDate;
 
 /**
  * Enables users to visually select a strip they want to navigate to.

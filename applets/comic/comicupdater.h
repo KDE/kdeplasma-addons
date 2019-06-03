@@ -27,11 +27,9 @@
 #include <KNSCore/EntryInternal>
 #include <Plasma/DataEngine>
 
-class ComicModel;
 
 
 namespace KNS3 {
-    class DownloadDialog;
 }
 namespace KNSCore {
     class DownloadManager;
@@ -41,7 +39,6 @@ namespace Plasma {
     class DataEngine;
 }
 
-class ConfigWidget;
 
 class ComicUpdater : public QObject
 {

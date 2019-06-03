@@ -23,7 +23,6 @@
 #include <QObject>
 #include <QPointer>
 
-class QDBusPendingCallWatcher;
 class OrgKdeActivityManagerSLCInterface;
 
 class ContentTracker : public QObject

@@ -21,7 +21,6 @@
 
 #include <QQmlExtensionPlugin>
 
-class QQmlEngine;
 class TimerPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
