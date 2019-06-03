@@ -23,14 +23,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .          *
  *****************************************************************************/
 
-import QtQuick 2.2
-import QtQuick.Layouts 1.1
+import QtQuick 2.5
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.5 as QQC2
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 import org.kde.plasma.plasmoid 2.0
 
-Item {
+QQC2.Control {
     id: main;
 
     Plasmoid.switchWidth: Layout.minimumWidth
@@ -40,6 +41,10 @@ Item {
 
     width: units.gridSize * 3
     height: units.gridSize * 4
+
+    // Make the buttons' text labels scale with the widget's size
+    // This is propagated down to all child controls with text
+    font.pixelSize: Math.round(width/12)
 
     property real result: 0;
     property bool hasResult: false;
