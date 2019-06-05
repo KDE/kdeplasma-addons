@@ -28,6 +28,7 @@ GridLayout {
     property alias iconSource: icon.source
     property alias text: label.text
     property bool vertical: false // too bad we cannot make this an enum
+    property alias active: icon.active
 
     readonly property int minimumIconSize: units.iconSizes.small
     readonly property int iconSize: iconAndTextRoot.vertical ? width : height

@@ -42,7 +42,10 @@ ColumnLayout {
         Layout.minimumHeight: item.Layout.minimumHeight
 
         MouseArea {
+            id: compactMouseArea
             anchors.fill: parent
+
+            hoverEnabled: true
 
             onClicked: {
                 plasmoid.expanded = !plasmoid.expanded;
@@ -57,6 +60,7 @@ ColumnLayout {
             readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), units.iconSizes.small)
 
             source: generalModel.currentConditionIconName
+            active: compactMouseArea.containsMouse
             // reset implicit size, so layout in free dimension does not stop at the default one
             implicitWidth: units.iconSizes.small
             implicitHeight: units.iconSizes.small
@@ -71,6 +75,7 @@ ColumnLayout {
         IconAndTextItem {
             vertical: compactRoot.vertical
             iconSource: generalModel.currentConditionIconName
+            active: compactMouseArea.containsMouse
             text: observationModel.temperature
         }
     }
