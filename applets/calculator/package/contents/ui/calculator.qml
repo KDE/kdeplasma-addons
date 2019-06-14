@@ -36,8 +36,8 @@ QQC2.Control {
 
     Plasmoid.switchWidth: Layout.minimumWidth
     Plasmoid.switchHeight: Layout.minimumHeight
-    Layout.minimumWidth: mainLayout.Layout.minimumWidth + 8
-    Layout.minimumHeight: mainLayout.Layout.minimumHeight + 8
+    Layout.minimumWidth: 150
+    Layout.minimumHeight: 225
 
     width: units.gridSize * 3
     height: units.gridSize * 4
