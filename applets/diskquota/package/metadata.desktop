@@ -76,7 +76,7 @@ Comment[uk]=Показати дані щодо квот на диску
 Comment[x-test]=xxShows details about disk quotaxx
 Comment[zh_CN]=显示磁盘配额细节
 Comment[zh_TW]=顯示關於磁碟大小限制的詳情
-Icon=quota
+Icon=disk-quota
 Type=Service
 
 X-Plasma-API=declarativeappletscript

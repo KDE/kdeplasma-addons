@@ -131,15 +131,15 @@ void DiskQuota::setSubToolTip(const QString &subToolTip)
 static QString iconNameForQuota(int quota)
 {
     if (quota < 50) {
-        return QStringLiteral("quota");
+        return QStringLiteral("disk-quota");
     } else if (quota < 75) {
-        return QStringLiteral("quota-low");
+        return QStringLiteral("disk-quota-low");
     } else if (quota < 90) {
-        return QStringLiteral("quota-high");
+        return QStringLiteral("disk-quota-high");
     }
 
     // quota >= 90%
-    return QStringLiteral("quota-critical");
+    return QStringLiteral("disk-quota-critical");
 }
 
 static bool isQuotaLine(const QString &line)
