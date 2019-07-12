@@ -135,3 +135,12 @@ add_library( plasma_potd_bingprovider MODULE ${potd_bing_provider_SRCS} )
 target_link_libraries( plasma_potd_bingprovider plasmapotdprovidercore KF5::KIOCore )
 
 install( TARGETS plasma_potd_bingprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )
+
+set( potd_unsplash_provider_SRCS
+	unsplashprovider.cpp
+)
+
+add_library( plasma_potd_unsplashprovider MODULE ${potd_unsplash_provider_SRCS} )
+target_link_libraries( plasma_potd_unsplashprovider plasmapotdprovidercore KF5::KIOCore )
+
+install( TARGETS plasma_potd_unsplashprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )

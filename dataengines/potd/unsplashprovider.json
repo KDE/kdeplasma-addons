@@ -1,0 +1,11 @@
+{
+    "KPlugin": {
+        "Description": "Unsplash Wallpaper Provider",
+        "Icon": "",
+        "Name": "Unsplash Wallpapers",
+        "ServiceTypes": [
+            "PlasmaPoTD/Plugin"
+        ]
+    },
+    "X-KDE-PlasmaPoTDProvider-Identifier": "unsplash"
+}
