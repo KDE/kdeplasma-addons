@@ -50,13 +50,23 @@ void UnsplashProvider::pageRequestFinished(KJob* _job)
     }
 
     const QString html = QString::fromUtf8(job->data());
-    
-    QRegularExpression re(QStringLiteral("src=\"(https://images\\.unsplash\\.com/photo-\\w+-\\w+)"));
-    
-    QRegularExpressionMatch match = re.match(html);
-    
-    if (match.hasMatch()) {
-        QUrl picUrl(match.captured(1)); // url to full size photo (compressed)
+
+    // "?ixlib" will filter out the banner image which rarely change...
+    QRegularExpression re(QStringLiteral("src=\"(https://images\\.unsplash\\.com/photo-\\w+-\\w+)\\?ixlib"));
+
+    QRegularExpressionMatchIterator i = re.globalMatch(html);
+
+    QStringList urls;
+
+    while (i.hasNext()) {
+        QRegularExpressionMatch match = i.next();
+        QString url = match.captured(1);
+        urls << url;
+    }
+
+    if (urls.size() > 0) {
+        // Pick a ramdom photo because the wallpaper page doesn't update every day
+        QUrl picUrl(urls.at(rand() % urls.size())); // url to full size photo (compressed)
         KIO::StoredTransferJob* imageJob = KIO::storedGet(picUrl, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &UnsplashProvider::imageRequestFinished);
         return;

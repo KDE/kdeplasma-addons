@@ -45,5 +45,6 @@ Rectangle {
         anchors.fill: parent
         image: engine.data[provider]["Image"]
         fillMode: wallpaper.configuration.FillMode
+        smooth: true
     }
 }
