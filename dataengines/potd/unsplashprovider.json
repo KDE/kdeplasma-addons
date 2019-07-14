@@ -1,8 +1,24 @@
 {
     "KPlugin": {
         "Description": "Unsplash Wallpaper Provider",
+        "Description[ca]": "Proveïdor de fons de pantalla Unsplash",
+        "Description[eu]": "Unsplash horma-paper hornitzailea",
+        "Description[lt]": "Unsplash darbalaukio fonų teikėjas",
+        "Description[nl]": "Leverancier van achtergrondafbeelding niet als startscherm gebruiken",
+        "Description[pt]": "Fornecedor de Papéis de Parede Unsplash",
+        "Description[sv]": "Tillhandahåll från Unsplash skrivbordsunderlägg",
+        "Description[uk]": "Постачальник зображень тла Unsplash",
+        "Description[x-test]": "xxUnsplash Wallpaper Providerxx",
         "Icon": "",
         "Name": "Unsplash Wallpapers",
+        "Name[ca]": "Fons de pantalla d'Unsplash",
+        "Name[eu]": "Unsplash horma-paperak",
+        "Name[lt]": "Unsplash darbalaukio fonai",
+        "Name[nl]": "Achtergrondafbeeldingen niet als startscherm gebruiken",
+        "Name[pt]": "Papéis de Parede Unsplash",
+        "Name[sv]": "Unsplash skrivbordsunderlägg",
+        "Name[uk]": "Зображення тла з Unsplash",
+        "Name[x-test]": "xxUnsplash Wallpapersxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]
