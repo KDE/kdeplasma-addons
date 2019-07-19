@@ -54,7 +54,7 @@
         "Name[sv]": "Dagens bild från NOAA:s miljövisualiseringslaboratorium",
         "Name[uk]": "Зображення дня від Лабораторії візуалізації середовища NOAA",
         "Name[x-test]": "xxNOAA Environmental Visualization Laboratory Picture of the Dayxx",
-        "Name[zh_CN]": "每日一图（NOAA 环境可视化实验室）",
+        "Name[zh_CN]": "NOAA 环境可视化实验室",
         "Name[zh_TW]": "今天的 NOAA Environmental Visualization Laboratory 影像",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"

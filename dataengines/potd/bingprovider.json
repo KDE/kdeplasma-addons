@@ -55,7 +55,7 @@
         "Name[sv]": "Dagens bild på Bing",
         "Name[uk]": "Картинка дня Bing",
         "Name[x-test]": "xxBing's Picture of the Dayxx",
-        "Name[zh_CN]": "每日一图（必应）",
+        "Name[zh_CN]": "必应",
         "Name[zh_TW]": "今天的 Bing 影像",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
