@@ -55,7 +55,7 @@
         "Name[sv]": "Dagens astronomiska bild",
         "Name[uk]": "Зображення дня Astronomy",
         "Name[x-test]": "xxAstronomy Picture of the Dayxx",
-        "Name[zh_CN]": "每日一图（天文）",
+        "Name[zh_CN]": "天文",
         "Name[zh_TW]": "今天的天文影像",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
