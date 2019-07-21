@@ -76,7 +76,9 @@ Item {
             id: compactMouse
             anchors.fill: parent
             hoverEnabled: true
-            acceptedButtons: Qt.NoButton
+            onClicked: {
+                plasmoid.expanded = !plasmoid.expanded
+            }
         }
     }
 
