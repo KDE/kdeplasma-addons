@@ -10,6 +10,10 @@
       <label>Provider of Picture of the Day</label>
       <default>apod</default>
     </entry>
+    <entry name="Category" type="String">
+      <label>Category for Unsplash provider</label>
+      <default>1065976</default>
+    </entry>
     <entry name="FillMode" type="int">
       <label>Sizing, cropping and positioning of the wallpaper image</label>
       <default>0</default>

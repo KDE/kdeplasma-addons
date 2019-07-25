@@ -22,12 +22,12 @@
 // Qt
 #include <QDate>
 
-
 class PotdProviderPrivate
 {
 public:
     QString name;
     QDate date;
+    QString identifier;
 };
 
 PotdProvider::PotdProvider( QObject *parent, const QVariantList &args )
@@ -36,12 +36,21 @@ PotdProvider::PotdProvider( QObject *parent, const QVariantList &args )
 {
     if ( args.count() > 0 ) {
         d->name = args[ 0 ].toString();
+        
+        d->identifier = d->name;
 
-        if ( args.count() > 1 && args[ 1 ].canConvert( QVariant::Date ) ) {
-            d->date = args[ 1 ].toDate();
+        if ( args.count() > 1 ) {
+            for (int i = 1; i < args.count(); i++) {
+                d->identifier += QStringLiteral(":") + args[i].toString();
+                QDate date = QDate::fromString(args[ i ].toString(), Qt::ISODate);
+                if (date.isValid()) {
+                    d->date = date;
+                }
+            }
         }
     } else {
         d->name = QStringLiteral("Unknown");
+        d->identifier = d->name;
     }
 }
 
@@ -66,11 +75,7 @@ bool PotdProvider::isFixedDate() const
 
 QString PotdProvider::identifier() const
 {
-    if (isFixedDate()) {
-        return d->name + QLatin1Char(':') + d->date.toString(Qt::ISODate);
-    }
-
-    return d->name;
+    return d->identifier;
 }
 
 

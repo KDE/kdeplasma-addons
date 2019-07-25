@@ -102,17 +102,11 @@ bool PotdEngine::updateSource( const QString &identifier, bool loadCachedAlways 
         qDebug() << "invalid provider: " << parts[ 0 ];
         return false;
     }
-
+    
     QVariantList args;
-    args << providerName;
-    if ( parts.count() > 1 ) {
-        const QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
-        if ( !date.isValid() ) {
-            qDebug() << "invalid date:" << parts[1];
-            return false;
-        }
 
-        args << date;
+    for (int i = 0; i < parts.count(); i++) {
+        args << parts[i];
     }
 
     auto factory = KPluginLoader(mFactories[ providerName ].fileName()).factory();

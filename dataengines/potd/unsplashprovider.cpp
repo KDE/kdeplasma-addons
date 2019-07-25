@@ -28,10 +28,18 @@
 UnsplashProvider::UnsplashProvider(QObject* parent, const QVariantList& args)
     : PotdProvider(parent, args)
 {
-    const QUrl url(QStringLiteral("https://unsplash.com/wallpaper/1065396/desktop-wallpapers"));
+    QString collectionId = QStringLiteral("1065976");
+    QRegularExpression re(QStringLiteral("^\\d+$"));
+    for (int i = 1; i < args.count(); i++) {
+        QString str = args[i].toString();
+        if (re.match(str).hasMatch()) {
+            collectionId = str;
+        }
+    }
+    const QUrl url(QStringLiteral("https://source.unsplash.com/collection/%1/3840x2160/daily").arg(collectionId));
 
     KIO::StoredTransferJob* job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, &KIO::StoredTransferJob::finished, this, &UnsplashProvider::pageRequestFinished);
+    connect(job, &KIO::StoredTransferJob::finished, this, &UnsplashProvider::imageRequestFinished);
 }
 
 UnsplashProvider::~UnsplashProvider() = default;
@@ -39,41 +47,6 @@ UnsplashProvider::~UnsplashProvider() = default;
 QImage UnsplashProvider::image() const
 {
     return mImage;
-}
-
-void UnsplashProvider::pageRequestFinished(KJob* _job)
-{
-    KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(_job);
-    if (job->error()) {
-        emit error(this);
-        return;
-    }
-
-    const QString html = QString::fromUtf8(job->data());
-
-    // "?ixlib" will filter out the banner image which rarely change...
-    QRegularExpression re(QStringLiteral("src=\"(https://images\\.unsplash\\.com/photo-\\w+-\\w+)\\?ixlib"));
-
-    QRegularExpressionMatchIterator i = re.globalMatch(html);
-
-    QStringList urls;
-
-    while (i.hasNext()) {
-        QRegularExpressionMatch match = i.next();
-        QString url = match.captured(1);
-        urls << url;
-    }
-
-    if (urls.size() > 0) {
-        // Pick a ramdom photo because the wallpaper page doesn't update every day
-        QUrl picUrl(urls.at(rand() % urls.size())); // url to full size photo (compressed)
-        KIO::StoredTransferJob* imageJob = KIO::storedGet(picUrl, KIO::NoReload, KIO::HideProgressInfo);
-        connect(imageJob, &KIO::StoredTransferJob::finished, this, &UnsplashProvider::imageRequestFinished);
-        return;
-    } else {
-        emit error(this);
-        return;
-    }
 }
 
 void UnsplashProvider::imageRequestFinished(KJob* _job)

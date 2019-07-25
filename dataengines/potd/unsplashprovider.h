@@ -28,7 +28,7 @@ class KJob;
 
 /**
  * This class provides random wallpapers from Unsplash Wallpapers
- * Image urls are parsed from https://unsplash.com/wallpaper/1065396/desktop-wallpapers
+ * https://unsplash.com/wallpaper/
  */
 class UnsplashProvider : public PotdProvider
 {
@@ -57,7 +57,6 @@ class UnsplashProvider : public PotdProvider
         QImage image() const override;
 
     private:
-        void pageRequestFinished(KJob *job);
         void imageRequestFinished(KJob *job);
 
     private:

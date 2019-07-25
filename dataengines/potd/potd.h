@@ -31,9 +31,10 @@ class QTimer;
  * This class provides the Pictures of The Day from various online websites.
  *
  * The query keys have the following structure:
- *   \<potd_identifier\>:\<date\>
+ *   \<potd_identifier\>:\<date\>[:other_args]
  * e.g.
  *   apod:2007-07-19
+ *   unsplash:12435322
  *
  */
 class PotdEngine : public Plasma::DataEngine

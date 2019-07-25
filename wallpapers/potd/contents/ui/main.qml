@@ -25,11 +25,13 @@ Rectangle {
     id: root
 
     readonly property string provider: wallpaper.configuration.Provider
+    readonly property string category: wallpaper.configuration.Category
+    readonly property string identifier: provider === 'unsplash' && category ? provider + ':' + category : provider
 
     PlasmaCore.DataSource {
         id: engine
         engine: "potd"
-        connectedSources: [provider]
+        connectedSources: [identifier]
     }
 
     Rectangle {
@@ -43,7 +45,7 @@ Rectangle {
 
     QImageItem {
         anchors.fill: parent
-        image: engine.data[provider]["Image"]
+        image: engine.data[identifier].Image
         fillMode: wallpaper.configuration.FillMode
         smooth: true
     }

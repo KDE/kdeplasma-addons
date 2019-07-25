@@ -30,6 +30,7 @@ Kirigami.FormLayout {
     anchors.right: parent.right
 
     property string cfg_Provider
+    property string cfg_Category
     property int cfg_FillMode
     property alias cfg_Color: colorButton.color
     property alias formLayout: root
@@ -78,6 +79,135 @@ Kirigami.FormLayout {
         textRole: "name"
         onCurrentIndexChanged: {
             cfg_Provider = providerModel.get(currentIndex)["id"]
+        }
+    }
+    
+    // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
+    QQC1.ComboBox {
+        id: categoryComboBox
+        visible: cfg_Provider === 'unsplash'
+        TextMetrics {
+            id: categoryTextMetrics
+            text: categoryComboBox.currentText
+        }
+        implicitWidth: Math.max(providerTextMetrics.width + Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing * 2, pluginComboBox.width) //QQC1 Combobox default sizing is broken
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Category:")
+        model: [
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "All"),
+                'value': '1065976'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "1080p"),
+                'value': '1339107'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "4K"),
+                'value': '1339090'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Ultra Wide"),
+                'value': '1339089'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Background"),
+                'value': '1339276'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Lock Screen"),
+                'value': '1339070'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Nature"),
+                'value': '1065376'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Tumblr"),
+                'value': '1111644'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Black"),
+                'value': '1101680'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Flower"),
+                'value': '1100232'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Funny"),
+                'value': '1111682'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Cute"),
+                'value': '1111680'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Cool"),
+                'value': '1111678'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Fall"),
+                'value': '1100229'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Love"),
+                'value': '1066280'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Design"),
+                'value': '1066276'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Christmas"),
+                'value': '1066273'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Travel"),
+                'value': '1065428'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Beach"),
+                'value': '1065423'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Car"),
+                'value': '1065408'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Sports"),
+                'value': '1065402'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Animal"),
+                'value': '1065390'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "People"),
+                'value': '1065386'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Music"),
+                'value': '1065384'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Summer"),
+                'value': '1065380'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Galaxy"),
+                'value': '1065374'
+            },
+        ]
+        textRole: "label"
+        onCurrentIndexChanged: {
+            cfg_Category = model[currentIndex]["value"]
+        }
+        Component.onCompleted: {
+            for (var i = 0; i < model.length; i++) {
+                if (model[i]["value"] == wallpaper.configuration.Category) {
+                    categoryComboBox.currentIndex = i;
+                }
+            }
         }
     }
 
