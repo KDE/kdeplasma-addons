@@ -37,7 +37,7 @@ QString DictionaryMatchEngine::lookupWord(const QString &word)
     m_lockers.insert(word, &data);
     m_wordLock.unlock();
 
-    QMetaObject::invokeMethod(this, "sourceAdded", Qt::QueuedConnection, Q_ARG(const QString&, QLatin1Char(':') + word));
+    QMetaObject::invokeMethod(this, "sourceAdded", Qt::QueuedConnection, Q_ARG(const QString&, word));
     QMutexLocker locker(&data.mutex);
     if (!data.waitCondition.wait(&data.mutex, 30 * 1000)) // Timeout after 30 seconds
         qDebug() << "The dictionary data engine timed out (word:" << word << ")";
