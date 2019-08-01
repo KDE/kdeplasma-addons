@@ -78,7 +78,7 @@ public:
         if (ch.isNumber()) {
             return true;
         }
-        if (QStringLiteral(".,-+").contains(ch)) {
+        if (QStringLiteral(".,-+/").contains(ch)) {
             return true;
         }
         return false;
@@ -242,20 +242,47 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     QList<Plasma::QueryMatch> matches;
 
     QLocale locale;
+    auto stringToDouble = [&locale](const QStringRef &value, bool *ok) {
+        double numberValue = locale.toDouble(value, ok);
+        if (!(*ok)) {
+            numberValue = value.toDouble(ok);
+        }
+        return numberValue;
+    };
+
     KUnitConversion::Unit u1 = category.unit(unit1);
     foreach (const KUnitConversion::Unit& u, units) {
         if (u1 == u) {
             continue;
         }
 
-        bool ok;
-        double numberValue = locale.toDouble(value, &ok);
-        if (!ok) {
-            numberValue = value.toDouble(&ok);
+        double numberValue = 0.0;
+
+        const auto fractionParts = value.splitRef(QLatin1Char('/'), QString::SkipEmptyParts);
+        if (fractionParts.isEmpty() || fractionParts.count() > 2) {
+            continue;
+        }
+
+        if (fractionParts.count() == 2) {
+            bool ok;
+            const double numerator = stringToDouble(fractionParts.first(), &ok);
+            if (!ok) {
+                continue;
+            }
+            const double denominator = stringToDouble(fractionParts.last(), &ok);
+            if (!ok || qFuzzyIsNull(denominator)) {
+                continue;
+            }
+
+            numberValue = numerator / denominator;
+        } else if (fractionParts.count() == 1) {
+            bool ok;
+            numberValue = stringToDouble(fractionParts.first(), &ok);
             if (!ok) {
                 continue;
             }
         }
+
         KUnitConversion::Value v = category.convert(KUnitConversion::Value(numberValue, u1), u);
 
         if (!v.isValid()) {
