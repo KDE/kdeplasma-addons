@@ -22,6 +22,7 @@
 #include <QDate>
 #include <QFile>
 #include <QFileInfo>
+#include <QRegularExpression>
 #include <QTimer>
 #include <QThreadPool>
 #include <QDebug>
@@ -173,6 +174,8 @@ void PotdEngine::checkDayChanged()
 {
     SourceDict dict = containerDict();
     QHashIterator<QString, Plasma::DataContainer*> it( dict );
+    QRegularExpression re(QLatin1String(":\\d{4}-\\d{2}-\\d{2}"));
+
     while ( it.hasNext() ) {
         it.next();
 
@@ -180,7 +183,9 @@ void PotdEngine::checkDayChanged()
             continue;
         }
 
-        if ( !it.key().contains(QLatin1Char(':')) ) {
+        // Check if the identifier contains ISO date string, like 2019-01-09.
+        // If so, don't update the picture. Otherwise, update the picture.
+        if ( !re.match(it.key()).hasMatch() ) {
             const QString path = CachedProvider::identifierToPath( it.key() );
             if ( !QFile::exists(path) ) {
                 updateSourceEvent( it.key() );

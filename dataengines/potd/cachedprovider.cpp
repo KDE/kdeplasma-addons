@@ -26,6 +26,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QDateTime>
+#include <QRegularExpression>
 
 #include <QDebug>
 
@@ -97,8 +98,10 @@ bool CachedProvider::isCached( const QString &identifier, bool ignoreAge )
     if (!QFile::exists( path ) ) {
         return false;
     }
+    
+    QRegularExpression re(QLatin1String(":\\d{4}-\\d{2}-\\d{2}"));
 
-    if (!ignoreAge && !identifier.contains(QLatin1Char(':'))) {
+    if (!ignoreAge && !re.match(identifier).hasMatch()) {
         // no date in the identifier, so it's a daily; check to see ifthe modification time is today
         QFileInfo info( path );
         if ( info.lastModified().daysTo( QDateTime::currentDateTime() ) >= 1 ) {
