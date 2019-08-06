@@ -22,6 +22,7 @@
 #include <sonnet/speller.h>
 
 #include <KRunner/AbstractRunner>
+#include <QMutex>
 #include <QSharedPointer>
 
 /**
