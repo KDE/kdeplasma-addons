@@ -213,7 +213,10 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
             QList<KUnitConversion::Unit> matchingUnits;
             foreach (const QString& s, unitStrings) {
                 if (s.startsWith(unit2, Qt::CaseInsensitive)) {
-                    matchingUnits << category.unit(s);
+                    u = category.unit(s);
+                    if (!matchingUnits.contains(u)) {
+                        matchingUnits << u;
+                    }
                 }
             }
             units = matchingUnits;
