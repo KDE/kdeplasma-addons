@@ -25,7 +25,7 @@
         "Description[sv]": "Tillhandahåll från Apod",
         "Description[uk]": "Постачальник даних Apod",
         "Description[x-test]": "xxApod Providerxx",
-        "Description[zh_CN]": "Apod提供源",
+        "Description[zh_CN]": "每日一天文图 (APOD) 提供方",
         "Description[zh_TW]": "Apod 提供者",
         "Icon": "",
         "Name": "Astronomy Picture of the Day",
@@ -55,7 +55,7 @@
         "Name[sv]": "Dagens astronomiska bild",
         "Name[uk]": "Зображення дня Astronomy",
         "Name[x-test]": "xxAstronomy Picture of the Dayxx",
-        "Name[zh_CN]": "天文",
+        "Name[zh_CN]": "天文每日一图",
         "Name[zh_TW]": "今天的天文影像",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
