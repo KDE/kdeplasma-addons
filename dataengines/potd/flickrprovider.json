@@ -26,7 +26,7 @@
         "Description[sv]": "Tillhandahåll från Flickr",
         "Description[uk]": "Постачальник даних Flickr",
         "Description[x-test]": "xxFlickr Providerxx",
-        "Description[zh_CN]": "Flickr提供源",
+        "Description[zh_CN]": "Flickr 提供方",
         "Description[zh_TW]": "Flickr 提供者",
         "Icon": "",
         "Name": "Flickr Picture of the Day",
@@ -57,7 +57,7 @@
         "Name[sv]": "Dagens bild från Flickr",
         "Name[uk]": "Зображення дня Flickr",
         "Name[x-test]": "xxFlickr Picture of the Dayxx",
-        "Name[zh_CN]": "Flickr",
+        "Name[zh_CN]": "Flickr 每日一图",
         "Name[zh_TW]": "今天的 Flickr 影像",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
