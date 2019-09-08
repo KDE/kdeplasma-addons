@@ -120,6 +120,9 @@ public Q_SLOTS:
 
     void setDocumentTitle(QString arg);
 
+    void pasteWithoutFormatting();
+    void reset();
+
 Q_SIGNALS:
     void targetChanged();
     void cursorPositionChanged();
@@ -144,7 +147,6 @@ Q_SIGNALS:
     void documentTitleChanged();
 
 private:
-    void reset();
     QTextCursor textCursor() const;
     void mergeFormatOnWordOrSelection(const QTextCharFormat &format);
 

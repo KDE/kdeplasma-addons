@@ -17,7 +17,7 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-import QtQuick 2.1
+import QtQuick 2.6
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.1
 
@@ -25,6 +25,7 @@ import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
 
@@ -144,8 +145,7 @@ PlasmaCore.SvgItem {
             bottomMargin: verticalMargins
         }
 
-        PlasmaComponents.TextArea {
-            id: mainTextArea
+        QQC2.ScrollView {
             anchors {
                 top: parent.top
                 left: parent.left
@@ -154,51 +154,154 @@ PlasmaCore.SvgItem {
                 bottomMargin: Math.round(units.largeSpacing / 2)
             }
 
-            backgroundVisible: false
-            frameVisible: false
-            textFormat: TextEdit.RichText
+            clip: true
 
-            onLinkActivated: Qt.openUrlExternally(link)
+            PlasmaComponents3.TextArea {
+                id: mainTextArea
 
-            Keys.onPressed: {
-                if(event.key === Qt.Key_Escape) {
-                    plasmoid.expanded = false;
-                    event.accepted = true;
-                } else if(event.modifiers === Qt.ControlModifier) {
-                    if(event.key === Qt.Key_B) {
-                        documentHandler.bold = !documentHandler.bold;
+                textFormat: TextEdit.RichText
+                onLinkActivated: Qt.openUrlExternally(link)
+                background: Rectangle { color: "transparent" }
+                color: textIconColor
+                persistentSelection: true
+                wrapMode: TextEdit.Wrap
+
+                Keys.onPressed: {
+                    if(event.key === Qt.Key_Escape) {
+                        plasmoid.expanded = false;
                         event.accepted = true;
-                    } else if(event.key === Qt.Key_I) {
-                        documentHandler.italic = !documentHandler.italic;
-                        event.accepted = true;
-                    } else if(event.key === Qt.Key_U) {
-                        documentHandler.underline = !documentHandler.underline;
-                        event.accepted = true;
-                    } else if(event.key === Qt.Key_S) {
-                        documentHandler.strikeOut = !documentHandler.strikeOut;
-                        event.accepted = true;
+                    } else if(event.modifiers === Qt.ControlModifier) {
+                        if(event.key === Qt.Key_B) {
+                            documentHandler.bold = !documentHandler.bold;
+                            event.accepted = true;
+                        } else if(event.key === Qt.Key_I) {
+                            documentHandler.italic = !documentHandler.italic;
+                            event.accepted = true;
+                        } else if(event.key === Qt.Key_U) {
+                            documentHandler.underline = !documentHandler.underline;
+                            event.accepted = true;
+                        } else if(event.key === Qt.Key_S) {
+                            documentHandler.strikeOut = !documentHandler.strikeOut;
+                            event.accepted = true;
+                        } else if(event.matches(StandardKey.Paste)) {
+                            documentHandler.pasteWithoutFormatting();
+                            documentHandler.reset();
+                            event.accepted = true;
+                        } else if(event.matches(StandardKey.Cut)) {
+                            mainTextArea.cut();
+                            documentHandler.reset();
+                            event.accepted = true;
+                        }
                     }
                 }
-            }
 
-            style: PlasmaStyle.TextAreaStyle {
-                textColor: textIconColor
-            }
+                // update the note if the source changes, but only if the user isn't editing it currently
+                Binding {
+                    target: mainTextArea
+                    property: "text"
+                    value: note.noteText
+                    when: !mainTextArea.activeFocus
+                }
 
-            // update the note if the source changes, but only if the user isn't editing it currently
-            Binding {
-                target: mainTextArea
-                property: "text"
-                value: note.noteText
-                when: !mainTextArea.activeFocus
-            }
+                onActiveFocusChanged: {
+                    if (activeFocus) {
+                        plasmoid.status = PlasmaCore.Types.AcceptingInputStatus
+                    } else {
+                        plasmoid.status = PlasmaCore.Types.ActiveStatus
+                        note.save(mainTextArea.text);
+                    }
+                }
 
-            onActiveFocusChanged: {
-                if (activeFocus) {
-                    plasmoid.status = PlasmaCore.Types.AcceptingInputStatus
-                } else {
-                    plasmoid.status = PlasmaCore.Types.ActiveStatus
-                    note.save(mainTextArea.text);
+                onPressed: {
+                    if (event.button === Qt.RightButton) {
+                        event.accepted = true;
+                        contextMenu.popup();
+                        mainTextArea.forceActiveFocus();
+                    }
+                }
+
+                QQC2.Menu {
+                    id: contextMenu
+
+                    ShortcutMenuItem {
+                        _sequence: StandardKey.Undo
+                        _enabled: mainTextArea.canUndo
+                        _iconName: "edit-undo"
+                        _text: i18n("Undo")
+                        onTriggered: contextMenu.retFocus(() => mainTextArea.undo())
+                    }
+
+                    ShortcutMenuItem {
+                        _sequence: StandardKey.Redo
+                        _enabled: mainTextArea.canRedo
+                        _iconName: "edit-redo"
+                        _text: i18n("Redo")
+                        onTriggered: contextMenu.retFocus(() => mainTextArea.redo())
+                    }
+
+                    QQC2.MenuSeparator {}
+
+                    ShortcutMenuItem {
+                        _sequence: StandardKey.Cut
+                        _enabled: mainTextArea.selectedText.length > 0
+                        _iconName: "edit-cut"
+                        _text: i18n("Cut")
+                        onTriggered: contextMenu.retFocus(() => mainTextArea.cut())
+                    }
+
+                    ShortcutMenuItem {
+                        _sequence: StandardKey.Copy
+                        _enabled: mainTextArea.selectedText.length > 0
+                        _iconName: "edit-copy"
+                        _text: i18n("Copy")
+                        onTriggered: contextMenu.retFocus(() => mainTextArea.copy())
+                    }
+
+                    ShortcutMenuItem {
+                        _sequence: StandardKey.Paste
+                        _enabled: mainTextArea.canPaste
+                        _iconName: "edit-paste"
+                        _text: i18n("Paste Without Formatting")
+                        onTriggered: contextMenu.retFocus(() => documentHandler.pasteWithoutFormatting())
+                    }
+
+                    ShortcutMenuItem {
+                        _enabled: mainTextArea.canPaste
+                        _text: i18n("Paste")
+                        _iconName: "edit-paste"
+                        onTriggered: contextMenu.retFocus(() => mainTextArea.paste())
+                    }
+
+                    ShortcutMenuItem {
+                        _sequence: StandardKey.Delete
+                        _enabled: mainTextArea.selectedText.length > 0
+                        _iconName: "edit-delete"
+                        _text: i18n("Delete")
+                        onTriggered: contextMenu.retFocus(() => mainTextArea.remove(mainTextArea.selectionStart, mainTextArea.selectionEnd))
+                    }
+
+                    ShortcutMenuItem {
+                        _enabled: mainTextArea.text.length > 0
+                        _iconName: "edit-clear"
+                        _text: i18n("Clear")
+                        onTriggered: contextMenu.retFocus(() => mainTextArea.clear())
+                    }
+
+                    QQC2.MenuSeparator {}
+
+                    ShortcutMenuItem {
+                        _sequence: StandardKey.SelectAll
+                        _enabled: mainTextArea.text.length > 0
+                        _iconName: "edit-select-all"
+                        _text: i18n("Select All")
+                        onTriggered: contextMenu.retFocus(() => mainTextArea.selectAll())
+                    }
+
+                    function retFocus(f) {
+                        f()
+                        documentHandler.reset()
+                        mainTextArea.forceActiveFocus()
+                    }
                 }
             }
         }

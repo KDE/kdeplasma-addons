@@ -49,6 +49,9 @@
 #include <QTextDocument>
 #include <QTextCursor>
 #include <QFontDatabase>
+#include <QGuiApplication>
+#include <QMimeData>
+#include <QClipboard>
 
 DocumentHandler::DocumentHandler()
     : m_target(nullptr)
@@ -86,6 +89,24 @@ void DocumentHandler::setDocumentTitle(QString arg)
         m_documentTitle = arg;
         emit documentTitleChanged();
     }
+}
+
+void DocumentHandler::pasteWithoutFormatting()
+{
+    QTextCursor cursor = textCursor();
+    if (cursor.isNull())
+        return;
+    
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    if (!clipboard)
+        return;
+
+    const QMimeData *mimeData = clipboard->mimeData();
+    if (!mimeData)
+        return;
+
+    QString content = mimeData->text();
+    cursor.insertText(content, QTextCharFormat());
 }
 
 void DocumentHandler::setText(const QString &arg)
