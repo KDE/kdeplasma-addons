@@ -718,7 +718,7 @@ void ComicProviderWrapper::pageRetrieved(int id, const QByteArray &data)
     if (id == Image) {
         mKrossImage = new ImageWrapper(this, data);
         callFunction(QLatin1String("pageRetrieved"), QVariantList() << id <<
-                      qVariantFromValue(qobject_cast<QObject*>(mKrossImage)));
+                      QVariant::fromValue(qobject_cast<QObject*>(mKrossImage)));
         if (mRequests < 1) { // Don't finish if we still have pageRequests
             finished();
         }
