@@ -45,7 +45,7 @@ FileSystemNoteLoader::FileSystemNoteLoader()
     const QString genericDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     const QString suffix = QStringLiteral("plasma_notes");
     QDir(genericDataLocation).mkdir(suffix);
-    m_notesDir = genericDataLocation + QDir::separator() + suffix;
+    m_notesDir.setPath(genericDataLocation + QDir::separator() + suffix);
 }
 
 
