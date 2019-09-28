@@ -25,7 +25,7 @@ import org.kde.plasma.configuration 2.0
 ConfigModel {
     ConfigCategory {
          name: i18nc("@title", "General")
-         icon: "emblem-shared-symbolic"
+         icon: "preferences-desktop-plasma"
          source: "settingsGeneral.qml"
     }
 }
