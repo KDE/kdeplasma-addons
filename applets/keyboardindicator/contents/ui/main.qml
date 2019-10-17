@@ -70,7 +70,7 @@ Item {
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
     Plasmoid.compactRepresentation: PlasmaCore.IconItem {
         source: plasmoid.icon
-        active: lockedCount>0
+        active: compactMouse.containsMouse
 
         MouseArea {
             id: compactMouse
