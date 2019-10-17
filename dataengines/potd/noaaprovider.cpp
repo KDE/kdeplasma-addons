@@ -29,10 +29,10 @@
 NOAAProvider::NOAAProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
 {
-    const QUrl url(QStringLiteral("http://www.nesdis.noaa.gov/content/imagery-and-data"));
+    const QUrl url(QStringLiteral("https://www.nesdis.noaa.gov/content/imagery-and-data"));
 
     KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, &KIO::StoredTransferJob::finished, this, &NOAAProvider::firstPageRequestFinished);
+    connect(job, &KIO::StoredTransferJob::finished, this, &NOAAProvider::pageRequestFinished);
 }
 
 NOAAProvider::~NOAAProvider() = default;
@@ -42,7 +42,7 @@ QImage NOAAProvider::image() const
     return mImage;
 }
 
-void NOAAProvider::firstPageRequestFinished(KJob* _job)
+void NOAAProvider::pageRequestFinished(KJob* _job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
     if (job->error()) {
@@ -57,50 +57,18 @@ void NOAAProvider::firstPageRequestFinished(KJob* _job)
     // not be parsed successfully till the content we want. And we do not want
     // to use heavy weight QtWebkit. So we use QRegularExpression to capture
     // the wanted url here.
-    QString url;
-    QRegularExpression re(QStringLiteral("href=\".*\\/content\\/(.*)\"><img alt=\"Latest Image of the Day"), QRegularExpression::MultilineOption);
-    auto result = re.match(data);
-    if (result.hasMatch())
-    {
-        url = QStringLiteral("http://www.nesdis.noaa.gov/content/") + result.captured(1);
-    }
-    if (url.isEmpty())
-    {
-        emit error(this);
-        return;
-    }
-
-    job = KIO::storedGet(QUrl(url), KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, &KIO::StoredTransferJob::finished, this, &NOAAProvider::secondPageRequestFinished);
-}
-
-void NOAAProvider::secondPageRequestFinished(KJob* _job)
-{
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
-    if (job->error()) {
-        emit error(this);
-        return;
-    }
-
-    const QString data = QString::fromUtf8( job->data() );
-
-    // Using regular expression could be fragile in such case, but the HTML
-    // NOAA page itself is not a valid XML file and unfortunately it could
-    // not be parsed successfully till the content we want. And we do not want
-    // to use heavy weight QtWebkit. So we use QRegularExpression to capture
-    // the wanted url here.
-    QString url;
-    QRegularExpression re(QStringLiteral("a href='(.*)'><img style"), QRegularExpression::MultilineOption);
+    QUrl url;
+    QRegularExpression re(QStringLiteral("\"(/sites/default/files/.*\\.jpg)\""));
     auto result = re.match(data);
     if (result.hasMatch()) {
-        url = result.captured(1);
+        url = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
     }
-    if (url.isEmpty()) {
+    if (!url.isValid()) {
         emit error(this);
         return;
     }
 
-    KIO::StoredTransferJob *imageJob = KIO::storedGet( QUrl(url), KIO::NoReload, KIO::HideProgressInfo );
+    KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &NOAAProvider::imageRequestFinished);
 }
 
