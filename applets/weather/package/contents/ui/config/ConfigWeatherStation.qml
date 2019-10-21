@@ -97,12 +97,15 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18nc("@label:spinbox", "Update every:")
 
         textFromValue: function(value) {
-                        return (i18np("%1 minute", "%1 minutes", value));
-                        }
+            return (i18np("%1 minute", "%1 minutes", value));
+        }
+        valueFromText: function(text) {
+            return parseInt(text);
+        }
 
-        stepSize: 5
         from: 30
         to: 3600
+        editable: true
 
         onValueChanged: weatherStationConfigPage.configurationChanged();
     }
