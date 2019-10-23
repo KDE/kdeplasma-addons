@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Dictionary
 Name[ar]=قاموس
+Name[ast]=Diccionariu
 Name[bs]=Rječnik
 Name[ca]=Diccionari
 Name[ca@valencia]=Diccionari
@@ -63,6 +64,7 @@ Name[zh_CN]=词典
 Name[zh_TW]=字典
 Comment=Look up the meaning of words and their translation into different languages
 Comment[ar]=انظر معاني الكلمات و ترجمتها بلغات مختلفة
+Comment[ast]=Gueta'l significáu de pallabres y la so traducción en llingües diferentes
 Comment[bs]=Potražite značenja riječi i njihove prevode na različite jezike
 Comment[ca]=Cerca el significat de paraules i la seva traducció en diferents idiomes
 Comment[ca@valencia]=Busca el significat de paraules i la seua traducció en diferents idiomes

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Activity Pager
+Name[ast]=Paxinador d'actividaes
 Name[ca]=Paginador d'activitats
 Name[ca@valencia]=Paginador d'activitats
 Name[cs]=Prohlížeč aktivit
@@ -39,6 +40,7 @@ Name[x-test]=xxActivity Pagerxx
 Name[zh_CN]=活动分页器
 Name[zh_TW]=活動分頁
 Comment=Switch between activities
+Comment[ast]=Cambia d'actividaes
 Comment[ca]=Commuta entre activitats
 Comment[ca@valencia]=Commuta entre activitats
 Comment[cs]=Přepnout mezi aktivitami

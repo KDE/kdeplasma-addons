@@ -30,6 +30,7 @@ Name[x-test]=xxKeyboard Indicatorxx
 Name[zh_CN]=键盘指示器
 Name[zh_TW]=鍵盤指示符號
 Comment=Shows the state of the keyboard
+Comment[ast]=Amuesa l'estáu del tecláu
 Comment[ca]=Mostra l'estat del teclat
 Comment[ca@valencia]=Mostra l'estat del teclat
 Comment[cs]=Ukazuje stav klávesnice

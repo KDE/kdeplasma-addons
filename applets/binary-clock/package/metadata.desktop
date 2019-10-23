@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Binary Clock
 Name[ar]=ساعة ثنائية
+Name[ast]=Reló binariu
 Name[bs]=Binarni sat
 Name[ca]=Rellotge binari
 Name[ca@valencia]=Rellotge binari
@@ -58,6 +59,7 @@ Name[zh_CN]=二进制时钟
 Name[zh_TW]=二進制時鐘
 Comment=Time displayed in binary format
 Comment[ar]=الوقت يظهر بالتنسيق الثنائي
+Comment[ast]=La hora amosada en formatu binariu
 Comment[bs]=Vrijeme prikazano u binarnom obliku
 Comment[ca]=Mostra l'hora en format binari
 Comment[ca@valencia]=Mostra l'hora en format binari

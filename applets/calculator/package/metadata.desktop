@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Calculator
 Name[ar]=آلة حاسبة
+Name[ast]=Calculadora
 Name[bs]=Kalkulator
 Name[ca]=Calculadora
 Name[ca@valencia]=Calculadora
@@ -61,6 +62,7 @@ Name[zh_CN]=计算器
 Name[zh_TW]=計算機
 Comment=Calculate simple sums
 Comment[ar]=احسب عمليات جمع بسيطة
+Comment[ast]=Calcula sumes cencielles
 Comment[bs]=Izračunajte jednostavne izraze
 Comment[ca]=Calcula sumes senzilles
 Comment[ca@valencia]=Calcula sumes senzilles

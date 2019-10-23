@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Picture of the Day
 Name[ar]=صورة اليوم
+Name[ast]=Semeya del día
 Name[bs]=Slika dana
 Name[ca]=Imatge del dia
 Name[ca@valencia]=Imatge del dia
@@ -54,6 +55,7 @@ Name[zh_CN]=每日一图
 Name[zh_TW]=本日圖片
 Comment=A new picture from the Internet each day
 Comment[ar]=صورة من السابكة كل يوم
+Comment[ast]=Una semeya nueva d'internet caldía
 Comment[ca]=Una imatge nova des d'Internet cada dia
 Comment[ca@valencia]=Una imatge nova des d'Internet cada dia
 Comment[cs]=Nový obrázek z internetu denně

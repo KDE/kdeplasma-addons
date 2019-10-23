@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Dictionary
 Name[ar]=قاموس
+Name[ast]=Diccionariu
 Name[bs]=Rječnik
 Name[ca]=Diccionari
 Name[ca@valencia]=Diccionari
@@ -63,6 +64,7 @@ Name[zh_CN]=词典
 Name[zh_TW]=字典
 Comment=Define words
 Comment[ar]=تعريف الكلمات
+Comment[ast]=Define pallabres
 Comment[bs]=Definipi riječi
 Comment[ca]=Defineix mots
 Comment[ca@valencia]=Defineix mots
