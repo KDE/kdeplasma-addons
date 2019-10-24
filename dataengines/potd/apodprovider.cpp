@@ -62,6 +62,7 @@ void ApodProvider::pageRequestFinished(KJob *_job)
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &ApodProvider::imageRequestFinished);
     } else {
         emit error(this);
+	return;
     }
 }
 
