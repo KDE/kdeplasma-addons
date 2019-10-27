@@ -18,10 +18,10 @@
 #include "util.h"
 
 // KF
-#include <KIconLoader>
 #include <KUnitConversion/Value>
 #include <KLocalizedString>
 // Qt
+#include <QIcon>
 #include <QPixmap>
 #include <QLocale>
 // Std
@@ -43,9 +43,7 @@ Util::Util(QObject *parent)
 
 QString Util::existingWeatherIconName(const QString &iconName) const
 {
-    const bool isValid = !iconName.isEmpty() &&
-           !KIconLoader::global()->loadIcon(iconName, KIconLoader::Desktop, 0,
-                                            KIconLoader::DefaultState, QStringList(), nullptr, true).isNull();
+    const bool isValid = !iconName.isEmpty() && QIcon::hasThemeIcon(iconName);
     return isValid ? iconName : QStringLiteral("weather-not-available");
 }
 
