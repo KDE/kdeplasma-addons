@@ -51,7 +51,8 @@ static QObject* pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, Q
         UnitItem(i18nc("@item", "Hectopascals hPa"), KUnitConversion::Hectopascal),
         UnitItem(i18nc("@item", "Kilopascals kPa"), KUnitConversion::Kilopascal),
         UnitItem(i18nc("@item", "Millibars mbar"), KUnitConversion::Millibar),
-        UnitItem(i18nc("@item", "Inches of Mercury inHg"), KUnitConversion::InchesOfMercury)
+        UnitItem(i18nc("@item", "Inches of Mercury inHg"), KUnitConversion::InchesOfMercury),
+        UnitItem(i18nc("@item", "Millimeters of Mercury mmHg"), KUnitConversion::MillimetersOfMercury)
     };
 
     return new AbstractUnitListModel(items);
