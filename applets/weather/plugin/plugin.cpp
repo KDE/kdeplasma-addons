@@ -34,9 +34,9 @@ static QObject* temperatureUnitListModelSingletonTypeProvider(QQmlEngine *engine
     Q_UNUSED(scriptEngine)
 
     QVector<UnitItem> items {
-        UnitItem(i18nc("@item", "Celsius \302\260C"), KUnitConversion::Celsius),
-        UnitItem(i18nc("@item", "Fahrenheit \302\260F"), KUnitConversion::Fahrenheit),
-        UnitItem(i18nc("@item", "Kelvin K"), KUnitConversion::Kelvin)
+        UnitItem(KUnitConversion::Celsius),
+        UnitItem(KUnitConversion::Fahrenheit),
+        UnitItem(KUnitConversion::Kelvin)
     };
 
     return new AbstractUnitListModel(items);
@@ -48,11 +48,11 @@ static QObject* pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, Q
     Q_UNUSED(scriptEngine)
 
     QVector<UnitItem> items {
-        UnitItem(i18nc("@item", "Hectopascals hPa"), KUnitConversion::Hectopascal),
-        UnitItem(i18nc("@item", "Kilopascals kPa"), KUnitConversion::Kilopascal),
-        UnitItem(i18nc("@item", "Millibars mbar"), KUnitConversion::Millibar),
-        UnitItem(i18nc("@item", "Inches of Mercury inHg"), KUnitConversion::InchesOfMercury),
-        UnitItem(i18nc("@item", "Millimeters of Mercury mmHg"), KUnitConversion::MillimetersOfMercury)
+        UnitItem(KUnitConversion::Hectopascal),
+        UnitItem(KUnitConversion::Kilopascal),
+        UnitItem(KUnitConversion::Millibar),
+        UnitItem(KUnitConversion::InchesOfMercury),
+        UnitItem(KUnitConversion::MillimetersOfMercury)
     };
 
     return new AbstractUnitListModel(items);
@@ -64,11 +64,11 @@ static QObject* windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, 
     Q_UNUSED(scriptEngine)
 
     QVector<UnitItem> items {
-        UnitItem(i18nc("@item", "Meters per Second m/s"), KUnitConversion::MeterPerSecond),
-        UnitItem(i18nc("@item", "Kilometers per Hour km/h"), KUnitConversion::KilometerPerHour),
-        UnitItem(i18nc("@item", "Miles per Hour mph"), KUnitConversion::MilePerHour),
-        UnitItem(i18nc("@item", "Knots kt"), KUnitConversion::Knot),
-        UnitItem(i18nc("@item", "Beaufort scale bft"), KUnitConversion::Beaufort)
+        UnitItem(KUnitConversion::MeterPerSecond),
+        UnitItem(KUnitConversion::KilometerPerHour),
+        UnitItem(KUnitConversion::MilePerHour),
+        UnitItem(KUnitConversion::Knot),
+        UnitItem(KUnitConversion::Beaufort)
     };
 
     return new AbstractUnitListModel(items);
@@ -80,8 +80,8 @@ static QObject* visibilityUnitListModelSingletonTypeProvider(QQmlEngine *engine,
     Q_UNUSED(scriptEngine)
 
     QVector<UnitItem> items {
-        UnitItem(i18nc("@item", "Kilometers"), KUnitConversion::Kilometer),
-        UnitItem(i18nc("@item", "Miles"), KUnitConversion::Mile)
+        UnitItem(KUnitConversion::Kilometer),
+        UnitItem(KUnitConversion::Mile)
     };
 
     return new AbstractUnitListModel(items);

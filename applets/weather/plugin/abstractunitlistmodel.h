@@ -18,6 +18,8 @@
 #ifndef ABSTRACTUNITLISTMODEL_H
 #define ABSTRACTUNITLISTMODEL_H
 
+#include "util.h"
+
 #include <KUnitConversion/Unit>
 
 #include <QAbstractListModel>
@@ -27,7 +29,7 @@ class UnitItem
 {
 public:
     UnitItem() {}
-    UnitItem(const QString &_name, KUnitConversion::UnitId _unitId) : name(_name), unitId(_unitId) {}
+    UnitItem(KUnitConversion::UnitId _unitId) : name(Util::nameFromUnitId(_unitId)), unitId(_unitId) {}
 
     QString name;
     KUnitConversion::UnitId unitId;

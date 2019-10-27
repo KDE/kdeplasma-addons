@@ -44,8 +44,10 @@ public:
                                              int valueUnitType, int precision = 0) const;
     Q_INVOKABLE QString percentToDisplayString(double value) const;
 
+    static QString nameFromUnitId(KUnitConversion::UnitId unitId);
+
 private:
-    KUnitConversion::Converter m_converter;
+    static KUnitConversion::Converter m_converter;
 };
 
 #endif

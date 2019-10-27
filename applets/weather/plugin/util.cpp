@@ -18,6 +18,7 @@
 #include "util.h"
 
 // KF
+#include <KUnitConversion/Converter>
 #include <KUnitConversion/Value>
 #include <KLocalizedString>
 // Qt
@@ -40,6 +41,7 @@ Util::Util(QObject *parent)
 {
 }
 
+KUnitConversion::Converter Util::m_converter;
 
 QString Util::existingWeatherIconName(const QString &iconName) const
 {
@@ -81,3 +83,10 @@ QString Util::percentToDisplayString(double value) const
     return i18nc("value percentsymbol", "%1 %", formattedPercentValue);
 }
 
+QString Util::nameFromUnitId(KUnitConversion::UnitId unitId)
+{
+    const KUnitConversion::Unit unit = m_converter.unit(unitId);
+    QString unitDescription = i18nc("@item %1 is a unit description and %2 its unit symbol",
+                                    "%1 (%2)", unit.description(), unit.symbol());
+    return unitDescription;
+}
