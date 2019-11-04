@@ -56,6 +56,9 @@ GridLayout {
     Item {
         id: text
 
+        // Otherwise it takes up too much space while loading
+        visible: label.text.length > 0
+
         Layout.fillWidth: iconAndTextRoot.vertical
         Layout.fillHeight: !iconAndTextRoot.vertical
         Layout.minimumWidth: iconAndTextRoot.vertical ? 0 : sizehelper.paintedWidth
