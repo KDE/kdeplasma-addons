@@ -25,6 +25,7 @@ include(ECMInstallIcons)
 include(KDEPackageAppTemplates)
 include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
+include(KDEClangFormat)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
@@ -87,5 +88,9 @@ add_subdirectory(desktopswitchers)
 add_subdirectory(plasmacalendarplugins)
 
 add_subdirectory(templates)
+
+# add clang-format target for all our real source files
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
