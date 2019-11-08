@@ -76,7 +76,7 @@ GridLayout {
                 italic: label.font.italic
                 pixelSize: iconAndTextRoot.vertical ? theme.mSize(theme.defaultFont).height * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
             }
-            minimumPixelSize: theme.mSize(theme.smallestFont).height
+            minimumPixelSize: theme.mSize(theme.smallestFont).height / 2
             fontSizeMode: iconAndTextRoot.vertical ? Text.HorizontalFit : Text.VerticalFit
             wrapMode: Text.NoWrap
 
@@ -101,7 +101,7 @@ GridLayout {
                 pixelSize: 1024
                 pointSize: 0 // we need to unset pointSize otherwise it breaks the Text.Fit size mode
             }
-            minimumPixelSize: theme.mSize(theme.smallestFont).height
+            minimumPixelSize: theme.mSize(theme.smallestFont).height / 2
             fontSizeMode: Text.Fit
             wrapMode: Text.NoWrap
 
