@@ -18,16 +18,14 @@
  */
 
 import QtQuick 2.5
-import QtQuick.Controls 1.4 as QQC1
-import org.kde.kquickcontrols 2.0 as KQuickControls
+import QtQuick.Controls 2.8 as QQC2
+import org.kde.kquickcontrols 2.0 as KQC2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.5 as Kirigami
 
 Kirigami.FormLayout {
     id: root
     twinFormLayouts: parentLayout
-    anchors.left: parent.left
-    anchors.right: parent.right
 
     property string cfg_Provider
     property string cfg_Category
@@ -66,14 +64,9 @@ Kirigami.FormLayout {
             }
         }
     }
-    // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
-    QQC1.ComboBox {
+
+    QQC2.ComboBox {
         id: providerComboBox
-        TextMetrics {
-            id: providerTextMetrics
-            text: providerComboBox.currentText
-        }
-        implicitWidth: Math.max(providerTextMetrics.width + Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing * 2, pluginComboBox.width) //QQC1 Combobox default sizing is broken
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Provider:")
         model: providerModel
         textRole: "name"
@@ -81,16 +74,10 @@ Kirigami.FormLayout {
             cfg_Provider = providerModel.get(currentIndex)["id"]
         }
     }
-    
-    // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
-    QQC1.ComboBox {
+
+    QQC2.ComboBox {
         id: categoryComboBox
         visible: cfg_Provider === 'unsplash'
-        TextMetrics {
-            id: categoryTextMetrics
-            text: categoryComboBox.currentText
-        }
-        implicitWidth: Math.max(providerTextMetrics.width + Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing * 2, pluginComboBox.width) //QQC1 Combobox default sizing is broken
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Category:")
         model: [
             {
@@ -211,14 +198,8 @@ Kirigami.FormLayout {
         }
     }
 
-    // TODO: port to QQC2 version once we've fixed https://bugs.kde.org/show_bug.cgi?id=403153
-    QQC1.ComboBox {
+    QQC2.ComboBox {
         id: resizeComboBox
-        TextMetrics {
-            id: resizeTextMetrics
-            text: resizeComboBox.currentText
-        }
-        implicitWidth: Math.max(resizeTextMetrics.width + Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing * 2, pluginComboBox.width) //QQC1 Combobox default sizing is broken
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Positioning:")
         model: [
                     {
@@ -257,7 +238,7 @@ Kirigami.FormLayout {
         }
     }
 
-    KQuickControls.ColorButton {
+    KQC2.ColorButton {
         id: colorButton
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:chooser", "Background color:")
         dialogTitle: i18ndc("plasma_wallpaper_org.kde.potd", "@title:window", "Select Background Color")
