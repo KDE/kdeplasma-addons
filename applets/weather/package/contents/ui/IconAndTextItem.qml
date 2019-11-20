@@ -83,10 +83,12 @@ GridLayout {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors {
-                fill: parent
                 leftMargin: units.smallSpacing
                 rightMargin: units.smallSpacing
             }
+            // This magic value of 0.7 is taken from the digital clock, so that the
+            // text sizes are identical
+            height: Math.min (parent.height * 0.7, 3 * theme.defaultFont.pixelSize)
             visible: false
 
             // pattern to reserve some constant space TODO: improve and take formatting/i18n into account
