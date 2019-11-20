@@ -2,6 +2,14 @@
     "KPlugin": {
         "Icon": "",
         "Name": "Bing",
+        "Name[ca]": "Bing",
+        "Name[cs]": "Bing",
+        "Name[eu]": "Bing",
+        "Name[lt]": "Bing",
+        "Name[nl]": "Bing",
+        "Name[pt]": "Bing",
+        "Name[uk]": "Bing",
+        "Name[x-test]": "xxBingxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

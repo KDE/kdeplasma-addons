@@ -2,6 +2,13 @@
     "KPlugin": {
         "Icon": "",
         "Name": "Weather Satellite (NOAA)",
+        "Name[ca]": "Satèl·lits meteorològics (NOAA)",
+        "Name[eu]": "Satelite meteorologikoa - Weather Satellite (NOAA)",
+        "Name[lt]": "Orų palydovas (NOAA)",
+        "Name[nl]": "Weersatelliet (NOAA)",
+        "Name[pt]": "Weather Satellite (NOAA)",
+        "Name[uk]": "Метеорологічний супутник (NOAA)",
+        "Name[x-test]": "xxWeather Satellite (NOAA)xx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

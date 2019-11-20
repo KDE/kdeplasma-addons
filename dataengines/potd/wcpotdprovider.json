@@ -2,6 +2,13 @@
     "KPlugin": {
         "Icon": "",
         "Name": "Wikimedia Commons",
+        "Name[ca]": "Wikimedia Commons",
+        "Name[eu]": "Wikimedia Commons",
+        "Name[lt]": "Wikimedia Commons",
+        "Name[nl]": "Wikimedia Commons",
+        "Name[pt]": "Wikimedia Commons",
+        "Name[uk]": "ВікіСховище",
+        "Name[x-test]": "xxWikimedia Commonsxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

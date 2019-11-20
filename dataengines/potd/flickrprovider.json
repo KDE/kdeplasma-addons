@@ -2,6 +2,14 @@
     "KPlugin": {
         "Icon": "",
         "Name": "Flickr",
+        "Name[ca]": "Flickr",
+        "Name[cs]": "Flickr",
+        "Name[eu]": "Flickr",
+        "Name[lt]": "Flickr",
+        "Name[nl]": "Flickr",
+        "Name[pt]": "Flickr",
+        "Name[uk]": "Flickr",
+        "Name[x-test]": "xxFlickrxx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]
