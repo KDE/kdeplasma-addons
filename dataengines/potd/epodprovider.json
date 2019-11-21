@@ -7,8 +7,11 @@
         "Name[lt]": "Mokslas apie Žemę (USRA)",
         "Name[nl]": "Aardwetenschappen (USRA)",
         "Name[pt]": "Earth Science (USRA)",
+        "Name[pt_BR]": "Earth Science (USRA)",
+        "Name[sv]": "Geovetenskap (USRA)",
         "Name[uk]": "Earth Science (USRA)",
         "Name[x-test]": "xxEarth Science (USRA)xx",
+        "Name[zh_TW]": "Earth Science (USRA)",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

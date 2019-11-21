@@ -7,8 +7,11 @@
         "Name[lt]": "Wikimedia Commons",
         "Name[nl]": "Wikimedia Commons",
         "Name[pt]": "Wikimedia Commons",
+        "Name[pt_BR]": "Wikimedia Commons",
+        "Name[sv]": "Wikimedia Commons",
         "Name[uk]": "ВікіСховище",
         "Name[x-test]": "xxWikimedia Commonsxx",
+        "Name[zh_TW]": "Wikimedia Commons",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]

@@ -8,8 +8,11 @@
         "Name[lt]": "Bing",
         "Name[nl]": "Bing",
         "Name[pt]": "Bing",
+        "Name[pt_BR]": "Bing",
+        "Name[sv]": "Bing",
         "Name[uk]": "Bing",
         "Name[x-test]": "xxBingxx",
+        "Name[zh_TW]": "Bing",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]
