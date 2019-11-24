@@ -86,88 +86,86 @@ ColumnLayout {
 
     }
 
-    ColumnLayout {
-        RowLayout {
+    RowLayout {
+        Layout.fillWidth: true
+
+        QtControls.TextField {
+            id: searchStringEdit
+
             Layout.fillWidth: true
-
-            QtControls.TextField {
-                id: searchStringEdit
-
-                Layout.fillWidth: true
-                Layout.minimumWidth: implicitWidth
-                placeholderText: i18nc("@info:placeholder", "Enter location")
-                onAccepted: {
-                    searchLocation();
-                }
-            }
-
-            QtControls.Button {
-                id: serviceSelectionButton
-
-                iconName: "services"
-                tooltip: i18nc("@info:tooltip", "Select weather services providers")
-                menu: serviceSelectionMenu
-            }
-
-            Item {
-                Layout.preferredHeight: Math.max(searchButton.height, searchStringEdit.height)
-                Layout.preferredWidth: Layout.preferredHeight
-
-                PlasmaComponents.BusyIndicator {
-                    id: busy
-
-                    anchors.fill: parent
-                    visible: locationListModel.validatingInput
-                }
-            }
-
-            QtControls.Button {
-                id: searchButton
-
-                iconName: "edit-find"
-                text: i18nc("@action:button", "Search")
-                enabled: canSearch
-
-                onClicked: {
-                    searchLocation();
-                }
+            Layout.minimumWidth: implicitWidth
+            placeholderText: i18nc("@info:placeholder", "Enter location")
+            onAccepted: {
+                searchLocation();
             }
         }
 
-        QtControls.TableView {
-            id: locationListView
+        QtControls.Button {
+            id: serviceSelectionButton
 
-            Layout.minimumWidth: implicitWidth
-            Layout.minimumHeight: implicitHeight
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            iconName: "services"
+            tooltip: i18nc("@info:tooltip", "Select weather services providers")
+            menu: serviceSelectionMenu
+        }
 
-            headerVisible: false
-            model: locationListModel
+        Item {
+            Layout.preferredHeight: Math.max(searchButton.height, searchStringEdit.height)
+            Layout.preferredWidth: Layout.preferredHeight
 
-            onActivated: {
-                if (row !== -1 && rowCount) {
-                    source = locationListModel.valueForListIndex(row);
-                }
-            }
-
-            QtControls.TableViewColumn {
-                id: locationListViewStationColumn
-
-                movable: false
-                resizable: false
-                role: "display"
-            }
-
-            QtControls.Label {
-                id: noSearchResultReport
+            PlasmaComponents.BusyIndicator {
+                id: busy
 
                 anchors.fill: parent
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                wrapMode: Text.WordWrap
-                visible: false
+                visible: locationListModel.validatingInput
             }
+        }
+
+        QtControls.Button {
+            id: searchButton
+
+            iconName: "edit-find"
+            text: i18nc("@action:button", "Search")
+            enabled: canSearch
+
+            onClicked: {
+                searchLocation();
+            }
+        }
+    }
+
+    QtControls.TableView {
+        id: locationListView
+
+        Layout.minimumWidth: implicitWidth
+        Layout.minimumHeight: implicitHeight
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+
+        headerVisible: false
+        model: locationListModel
+
+        onActivated: {
+            if (row !== -1 && rowCount) {
+                source = locationListModel.valueForListIndex(row);
+            }
+        }
+
+        QtControls.TableViewColumn {
+            id: locationListViewStationColumn
+
+            movable: false
+            resizable: false
+            role: "display"
+        }
+
+        QtControls.Label {
+            id: noSearchResultReport
+
+            anchors.fill: parent
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.WordWrap
+            visible: false
         }
     }
 

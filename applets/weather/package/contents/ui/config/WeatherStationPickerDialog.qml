@@ -22,6 +22,7 @@ import QtQuick.Controls 1.4 as QtControls
 import QtQuick.Layouts 1.3
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.5 as Kirigami
 
 
 Window {
@@ -33,8 +34,8 @@ Window {
     flags: Qt.Dialog
     modality: Qt.WindowModal
 
-    minimumWidth: mainColumn.Layout.minimumWidth
-    minimumHeight: mainColumn.Layout.minimumHeight
+    width: Kirigami.Units.gridUnit * 25
+    height: Kirigami.Units.gridUnit * 20
 
     title: i18nc("@title:window", "Select Weather Station")
     color: syspal.window
@@ -79,9 +80,6 @@ Window {
             fill: parent
             margins: mainColumn.spacing * units.devicePixelRatio //margins are hardcoded in QStyle we should match that here
         }
-        // TODO: not yet perfect
-        Layout.minimumWidth: Math.max(stationPicker.Layout.minimumWidth, buttonsRow.implicitWidth) + 2*anchors.margins
-        Layout.minimumHeight: stationPicker.Layout.minimumHeight + buttonsRow.implicitHeight + 2*anchors.margins
 
         WeatherStationPicker {
             id: stationPicker
