@@ -18,10 +18,9 @@
 import QtQuick 2.9
 
 import QtQuick.Window 2.2
-import QtQuick.Controls 1.4 as QtControls
+import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.3
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.5 as Kirigami
 
 
@@ -54,7 +53,7 @@ Window {
         id: syspal
     }
 
-    QtControls.Action {
+    QQC2.Action {
         id: acceptAction
 
         shortcut: "Return"
@@ -65,7 +64,7 @@ Window {
         }
     }
 
-    QtControls.Action {
+    QQC2.Action {
         id: cancelAction
 
         shortcut: "Escape"
@@ -78,7 +77,7 @@ Window {
         id: mainColumn
         anchors {
             fill: parent
-            margins: mainColumn.spacing * units.devicePixelRatio //margins are hardcoded in QStyle we should match that here
+            margins: mainColumn.spacing * Screen.devicePixelRatio //margins are hardcoded in QStyle we should match that here
         }
 
         WeatherStationPicker {
@@ -93,16 +92,16 @@ Window {
 
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 
-            QtControls.Button {
+            QQC2.Button {
                 enabled: !!source
-                iconName: "dialog-ok"
+                icon.name: "dialog-ok"
                 text: i18nc("@action:button", "Select")
                 onClicked: {
                     acceptAction.trigger();
                 }
             }
-            QtControls.Button {
-                iconName: "dialog-cancel"
+            QQC2.Button {
+                icon.name: "dialog-cancel"
                 text: i18nc("@action:button", "Cancel")
                 onClicked: {
                     cancelAction.trigger();

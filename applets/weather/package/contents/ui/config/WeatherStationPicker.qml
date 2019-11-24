@@ -17,10 +17,9 @@
 
 import QtQuick 2.9
 
-import QtQuick.Controls 1.4 as QtControls
+import QtQuick.Controls 1.4 as QQC1
+import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.3
-
-import org.kde.plasma.components 2.0 as PlasmaComponents
 
 import org.kde.plasma.private.weather 1.0
 
@@ -64,12 +63,12 @@ ColumnLayout {
         id: serviceListModel
     }
 
-    QtControls.Menu {
+    QQC2.Menu {
         id: serviceSelectionMenu
 
         Instantiator {
             model: serviceListModel
-            delegate: QtControls.MenuItem {
+            delegate: QQC2.MenuItem {
                 text: model.display
                 checkable: true
                 checked: model.checked
@@ -89,7 +88,7 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
 
-        QtControls.TextField {
+        QQC2.TextField {
             id: searchStringEdit
 
             Layout.fillWidth: true
@@ -100,30 +99,25 @@ ColumnLayout {
             }
         }
 
-        QtControls.Button {
+        QQC2.Button {
             id: serviceSelectionButton
 
-            iconName: "services"
-            tooltip: i18nc("@info:tooltip", "Select weather services providers")
-            menu: serviceSelectionMenu
-        }
+            icon.name: "services"
 
-        Item {
-            Layout.preferredHeight: Math.max(searchButton.height, searchStringEdit.height)
-            Layout.preferredWidth: Layout.preferredHeight
+            checkable: true
+            checked: serviceSelectionMenu.opened
+            onClicked: serviceSelectionMenu.popup(serviceSelectionButton, serviceSelectionButton.width - serviceSelectionMenu.width, serviceSelectionButton.height)
 
-            PlasmaComponents.BusyIndicator {
-                id: busy
-
-                anchors.fill: parent
-                visible: locationListModel.validatingInput
+            QQC2.ToolTip {
+                text: i18nc("@info:tooltip", "Select weather services providers")
+                visible: hovered
             }
         }
 
-        QtControls.Button {
+        QQC2.Button {
             id: searchButton
 
-            iconName: "edit-find"
+            icon.name: "edit-find"
             text: i18nc("@action:button", "Search")
             enabled: canSearch
 
@@ -133,7 +127,7 @@ ColumnLayout {
         }
     }
 
-    QtControls.TableView {
+    QQC1.TableView {
         id: locationListView
 
         Layout.minimumWidth: implicitWidth
@@ -150,7 +144,7 @@ ColumnLayout {
             }
         }
 
-        QtControls.TableViewColumn {
+        QQC1.TableViewColumn {
             id: locationListViewStationColumn
 
             movable: false
@@ -158,7 +152,7 @@ ColumnLayout {
             role: "display"
         }
 
-        QtControls.Label {
+        QQC2.Label {
             id: noSearchResultReport
 
             anchors.fill: parent
@@ -166,6 +160,16 @@ ColumnLayout {
             verticalAlignment: Text.AlignVCenter
             wrapMode: Text.WordWrap
             visible: false
+        }
+
+        QQC2.BusyIndicator {
+            id: busy
+
+            anchors.centerIn: parent
+            width: Kirigami.Units.gridUnit
+            height: width
+
+            visible: locationListModel.validatingInput
         }
     }
 

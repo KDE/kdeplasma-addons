@@ -16,7 +16,7 @@
  */
 
 import QtQuick 2.9
-import QtQuick.Controls 2.5 as QtControls
+import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.3
 
 import org.kde.kirigami 2.5 as Kirigami
@@ -66,7 +66,7 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18nc("@label", "Location:")
         Layout.fillWidth: true
 
-        QtControls.Label {
+        QQC2.Label {
             id: locationDisplay
             Layout.fillWidth: true
             elide: Text.ElideRight
@@ -82,7 +82,7 @@ Kirigami.FormLayout {
             }
         }
 
-        QtControls.Button {
+        QQC2.Button {
             id: selectButton
             Layout.fillWidth: true
             icon.name: "find-location"
@@ -91,7 +91,7 @@ Kirigami.FormLayout {
         }
     }
 
-    QtControls.SpinBox {
+    QQC2.SpinBox {
         id: updateIntervalSpin
 
         Kirigami.FormData.label: i18nc("@label:spinbox", "Update every:")
