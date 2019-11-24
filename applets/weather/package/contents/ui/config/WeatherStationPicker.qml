@@ -162,7 +162,10 @@ ColumnLayout {
             QtControls.Label {
                 id: noSearchResultReport
 
-                anchors.centerIn: parent
+                anchors.fill: parent
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                wrapMode: Text.WordWrap
                 visible: false
             }
         }
