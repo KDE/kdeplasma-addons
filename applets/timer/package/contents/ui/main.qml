@@ -28,6 +28,8 @@ Item {
     id: root;
     readonly property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
 
+    Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
+
     property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);
 
     // show notification on timer completion (default: enabled)

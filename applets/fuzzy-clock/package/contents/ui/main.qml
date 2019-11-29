@@ -38,6 +38,8 @@ Item {
     Plasmoid.toolTipMainText: Qt.formatTime(currentDateTime)
     Plasmoid.toolTipSubText: Qt.formatDate(currentDateTime, Qt.locale().dateFormat(Locale.LongFormat))
 
+    Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
+
     PlasmaCore.DataSource {
         id: dataSource
         engine: "time"

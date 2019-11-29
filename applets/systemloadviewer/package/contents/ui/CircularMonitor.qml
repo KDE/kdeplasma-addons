@@ -21,6 +21,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import org.kde.plasma.core 2.0 as PlasmaCore
+
 Item {
     property alias colors: canvas.colors
     property alias proportions: canvas.proportions
@@ -74,7 +76,7 @@ Item {
 
             // Draw border
             ctx.fillStyle = "transparent"
-            ctx.strokeStyle = theme.textColor
+            ctx.strokeStyle = PlasmaCore.ColorScope.textColor
             ctx.lineWidth = canvas.lineWidth
             ctx.globalAlpha = .4
             ctx.beginPath();

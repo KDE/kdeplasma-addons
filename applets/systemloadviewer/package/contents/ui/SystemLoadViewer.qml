@@ -31,6 +31,8 @@ import org.kde.plasma.plasmoid 2.0
 Item {
     id: main
 
+    Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
+
     readonly property double maxCpuLoad: 100.0
     readonly property int borderWidth: 1
     readonly property int borderRounding: 3

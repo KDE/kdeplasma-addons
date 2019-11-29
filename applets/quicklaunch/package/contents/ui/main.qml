@@ -45,6 +45,7 @@ Item {
     Layout.preferredHeight: LayoutManager.preferredHeight()
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
     DragAndDrop.DropArea {
         anchors.fill: parent

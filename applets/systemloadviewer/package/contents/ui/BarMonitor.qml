@@ -21,6 +21,8 @@
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
 
+import org.kde.plasma.core 2.0 as PlasmaCore
+
 Item {
     id: barMonitor
 
@@ -37,7 +39,7 @@ Item {
         radius: 3
         opacity: .4
         border {
-            color: theme.textColor
+            color: PlasmaCore.ColorScope.textColor
             width: 1
         }
     }

@@ -28,6 +28,7 @@ Item {
 
     readonly property int implicitWidth: units.gridUnit * 40
     readonly property int implicitHeight: units.gridUnit * 15
+    Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
     Plasmoid.switchWidth: {
         if (centerLayout.comicData.image) {
             return Math.max(minimumWidth, Math.min(centerLayout.comicData.image.nativeWidth * 0.6, implicitWidth));
