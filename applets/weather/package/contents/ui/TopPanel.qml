@@ -49,6 +49,7 @@ GridLayout {
         id: windSvg
 
         imagePath: "weather/wind-arrows"
+        colorGroup: parent.PlasmaCore.ColorScope.colorGroup
     }
 
     PlasmaExtras.Heading {

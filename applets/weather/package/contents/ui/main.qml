@@ -25,6 +25,8 @@ import org.kde.plasma.private.weather 1.0
 Item {
     id: root
 
+    Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
+
     readonly property string weatherSource: plasmoid.nativeInterface.source
     readonly property int updateInterval: plasmoid.nativeInterface.updateInterval
     readonly property int displayTemperatureUnit: plasmoid.nativeInterface.displayTemperatureUnit
