@@ -130,6 +130,12 @@ ColumnLayout {
     QQC1.TableView {
         id: locationListView
 
+        function tableItemActivated() {
+            if (locationListView.row !== -1 && locationListView.rowCount) {
+                source = locationListModel.valueForListIndex(locationListView.row);
+            }
+        }
+
         Layout.minimumWidth: implicitWidth
         Layout.minimumHeight: implicitHeight
         Layout.fillWidth: true
@@ -138,10 +144,10 @@ ColumnLayout {
         headerVisible: false
         model: locationListModel
 
-        onActivated: {
-            if (row !== -1 && rowCount) {
-                source = locationListModel.valueForListIndex(row);
-            }
+        onActivated: tableItemActivated();
+        onClicked: {
+            locationListView.forceActiveFocus;
+            tableItemActivated();
         }
 
         QQC1.TableViewColumn {
