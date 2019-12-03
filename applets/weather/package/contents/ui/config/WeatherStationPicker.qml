@@ -172,8 +172,6 @@ ColumnLayout {
             id: busy
 
             anchors.centerIn: parent
-            width: Kirigami.Units.gridUnit
-            height: width
 
             visible: locationListModel.validatingInput
         }
