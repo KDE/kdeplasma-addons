@@ -103,7 +103,6 @@ Icon=office-calendar
 Type=Service
 X-KDE-ServiceTypes=Plasma/Wallpaper
 
-X-Plasma-MainScript=ui/main.qml
 X-KDE-PluginInfo-Author=Weng Xuetian
 X-KDE-PluginInfo-Email=wengxt@gmail.com
 X-KDE-PluginInfo-Name=org.kde.potd

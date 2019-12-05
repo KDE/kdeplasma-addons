@@ -86,7 +86,6 @@ Icon=preferences-desktop-wallpaper
 Type=Service
 X-KDE-ServiceTypes=Plasma/Wallpaper
 
-X-Plasma-MainScript=ui/main.qml
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Email=mart@kde.org
 X-KDE-PluginInfo-Name=org.kde.haenau
