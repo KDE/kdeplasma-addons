@@ -57,6 +57,7 @@ Name[zh_TW]=特殊字元
 Icon=accessories-character-map
 Comment=Creates special characters from their hexadecimal codes
 Comment[ar]=يُنشئ محارف خاصة لأكوادهم الست-عشريّة
+Comment[ast]=Crea caráuteres especiales a partir de los sos códigos hexadecimales
 Comment[bs]=Stvara posebne znakove iz heksadecimalnih kodova
 Comment[ca]=Crea caràcters especials a partir dels seus codis hexadecimals
 Comment[ca@valencia]=Crea caràcters especials a partir dels seus codis hexadecimals
