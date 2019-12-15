@@ -86,9 +86,15 @@ GridLayout {
                 leftMargin: units.smallSpacing
                 rightMargin: units.smallSpacing
             }
-            // This magic value of 0.7 is taken from the digital clock, so that the
-            // text sizes are identical
-            height: Math.min (parent.height * 0.7, 3 * theme.defaultFont.pixelSize)
+            // These magic values are taken from the digital clock, so that the
+            // text sizes here are identical with various clock text sizes
+            height: {
+                var textHeightScaleFactor = 0.7;
+                if (parent.height <= 26) {
+                    textHeightScaleFactor = 0.9;
+                }
+                return Math.min (parent.height * textHeightScaleFactor, 3 * theme.defaultFont.pixelSize);
+            }
             visible: false
 
             // pattern to reserve some constant space TODO: improve and take formatting/i18n into account
