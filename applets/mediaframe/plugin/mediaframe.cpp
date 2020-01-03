@@ -28,14 +28,13 @@
 #include <QTime>
 #include <QRegularExpression>
 #include <QCryptographicHash>
+#include <QRandomGenerator>
 
 #include <KIO/StoredTransferJob>
 #include <KIO/Job>
 
 MediaFrame::MediaFrame(QObject *parent) : QObject(parent)
 {
-    qsrand(QTime::currentTime().msec());
-
     const auto imageMimeTypeNames = QImageReader::supportedMimeTypes();
     QMimeDatabase mimeDb;
     for (const auto& imageMimeTypeName : imageMimeTypeNames) {
@@ -79,7 +78,7 @@ int MediaFrame::random(int min, int max)
     }
 
     //qDebug() << "random" << min << "<->" << max << "=" << ((qrand()%(max-min+1))+min);
-    return ((qrand() % (max - min + 1) ) + min);
+    return (QRandomGenerator::global()->bounded((max - min + 1) ) + min);
 }
 
 QString MediaFrame::getCacheDirectory()

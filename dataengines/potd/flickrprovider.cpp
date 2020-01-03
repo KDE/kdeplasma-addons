@@ -23,7 +23,7 @@
 
 #include <QUrlQuery>
 #include <QDebug>
-
+#include <QRandomGenerator>
 #include <KPluginFactory>
 #include <KIO/Job>
 
@@ -47,8 +47,6 @@ QUrl buildUrl(const QDate &date)
 FlickrProvider::FlickrProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
 {
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-
     mActualDate = date();
 
     const QUrl url = buildUrl(mActualDate);
@@ -142,7 +140,7 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
     }
 
     if (m_photoList.begin() != m_photoList.end()) {
-        QUrl url( m_photoList.at(qrand() % m_photoList.size()) );
+        QUrl url( m_photoList.at(QRandomGenerator::global()->bounded(m_photoList.size())) );
             KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
             connect(imageJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::imageRequestFinished);
     } else {

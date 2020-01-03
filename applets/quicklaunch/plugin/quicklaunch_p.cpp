@@ -28,6 +28,7 @@
 #include <QMimeType>
 #include <QMimeDatabase>
 #include <QStandardPaths>
+#include <QRandomGenerator>
 
 #include <KRun>
 #include <KConfig>
@@ -156,14 +157,14 @@ static QString determineNewDesktopFilePath(const QString &baseName)
     QString appendix;
     QString desktopFilePath = locateLocal(baseName) + QLatin1String(".desktop");
 
+    auto *generator = QRandomGenerator::global();
     while (QFile::exists(desktopFilePath)) {
         if (appendix.isEmpty()) {
-            qsrand(QTime::currentTime().msec());
             appendix += QLatin1Char('-');
         }
 
         // Limit to [0-9] and [a-z] range.
-        char newChar = qrand() % 36;
+        char newChar = generator->bounded(36);
         newChar += newChar < 10 ? 48 : 97-10;
         appendix += QLatin1Char(newChar);
 
