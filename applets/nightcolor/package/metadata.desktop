@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Night Color Control
+Comment=Plasmoid for controlling Night Color
+Icon=preferences-desktop-display-nightcolor
+
+Type=Service
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-PluginInfo-Author=Vlad Zahorodnii
+X-KDE-PluginInfo-Category=Graphics
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-Email=vladzzag@gmail.com
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-PluginInfo-License=GPL-2.0+
+X-KDE-PluginInfo-Name=org.kde.plasma.nightcolorcontrol
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=plasma.kde.org
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-NotificationArea=true
+X-Plasma-NotificationAreaCategory=SystemServices
