@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Night Color Control
+Name[ca]=Control del color de nit
+Name[et]=Öise värvi juhtimine
+Name[nl]=Besturing van nachtkleur
+Name[pt]=Controlo da Cor Nocturna
+Name[sv]=Nattfärgkontroll
+Name[x-test]=xxNight Color Controlxx
 Comment=Plasmoid for controlling Night Color
+Comment[ca]=Plasmoide per controlar el Color de nit
+Comment[et]=Öise värvi juhtimise plasmoid
+Comment[nl]=Plasmoid voor besturing van nachtkleur
+Comment[pt]=Plasmóide para controlar a Cor Nocturna
+Comment[sv]=Plasmoid för att kontrollera nattfärg
+Comment[x-test]=xxPlasmoid for controlling Night Colorxx
 Icon=preferences-desktop-display-nightcolor
 
 Type=Service
