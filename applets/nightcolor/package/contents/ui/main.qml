@@ -39,7 +39,7 @@ Item {
         return PlasmaCore.Types.PassiveStatus;
     }
 
-    Plasmoid.toolTipMainText: i18n('Night Color Control')
+    Plasmoid.toolTipMainText: i18n("Night Color Control")
     Plasmoid.toolTipSubText: {
         if (inhibitor.state == Inhibitor.Inhibited) {
             return i18n("Night Color is inhibited");
@@ -53,7 +53,7 @@ Item {
         if (!monitor.running) {
             return i18n("Night Color is not running");
         }
-        return i18n('Night Color is active (%1K)', monitor.currentTemperature);
+        return i18n("Night Color is active (%1K)", monitor.currentTemperature);
     }
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
