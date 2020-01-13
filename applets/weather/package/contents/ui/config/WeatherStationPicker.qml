@@ -17,9 +17,9 @@
 
 import QtQuick 2.9
 
-import QtQuick.Controls 1.4 as QQC1
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.8 as Kirigami
 
 import org.kde.plasma.private.weather 1.0
 
@@ -36,27 +36,25 @@ ColumnLayout {
         if (!canSearch) {
             return;
         }
-
-        // avoid automatic selection once model is refilled
-        locationListView.currentRow = -1;
-        locationListView.selection.clear();
         noSearchResultReport.visible = false;
         source = "";
-        locationListView.forceActiveFocus();
-
         locationListModel.searchLocations(searchStringEdit.text, selectedServices);
-    }
-
-    function handleLocationSearchDone(success, searchString) {
-        if (!success) {
-            noSearchResultReport.text = i18nc("@info", "No weather stations found for '%1'", searchString);
-            noSearchResultReport.visible = true;
-        }
     }
 
     LocationListModel {
         id: locationListModel
-        onLocationSearchDone: handleLocationSearchDone(success, searchString);
+        onLocationSearchDone: {
+            if (!success) {
+                noSearchResultReport.text = i18nc("@info", "No weather stations found for '%1'", searchString);
+                noSearchResultReport.visible = true;
+            } else {
+                // If we got any results, pre-select the top item to potentially
+                // save the user a step
+                locationListView.currentIndex = 0;
+                locationListView.forceActiveFocus();
+                noSearchResultReport.visible = false;
+            }
+        }
     }
 
     ServiceListModel {
@@ -88,11 +86,12 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
 
-        QQC2.TextField {
+        Kirigami.SearchField {
             id: searchStringEdit
 
             Layout.fillWidth: true
             Layout.minimumWidth: implicitWidth
+            focus: true
             placeholderText: i18nc("@info:placeholder", "Enter location")
             onAccepted: {
                 searchLocation();
@@ -127,53 +126,55 @@ ColumnLayout {
         }
     }
 
-    QQC1.TableView {
-        id: locationListView
-
-        function tableItemActivated() {
-            if (locationListView.row !== -1 && locationListView.rowCount) {
-                source = locationListModel.valueForListIndex(locationListView.row);
-            }
-        }
-
-        Layout.minimumWidth: implicitWidth
-        Layout.minimumHeight: implicitHeight
+    QQC2.ScrollView {
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        headerVisible: false
-        model: locationListModel
-
-        onActivated: tableItemActivated();
-        onClicked: {
-            locationListView.forceActiveFocus;
-            tableItemActivated();
+        Component.onCompleted: {
+            background.visible = true;
         }
 
-        QQC1.TableViewColumn {
-            id: locationListViewStationColumn
+        ListView {
+            id: locationListView
+            model: locationListModel
+            clip: true
+            focus: true
+            activeFocusOnTab: true
+            keyNavigationEnabled: true
 
-            movable: false
-            resizable: false
-            role: "display"
-        }
+            onCurrentItemChanged: {
+                source = locationListModel.valueForListIndex(locationListView.currentIndex);
+            }
 
-        QQC2.Label {
-            id: noSearchResultReport
+            delegate: QQC2.ItemDelegate {
+                width: locationListView.width
+                text: model.display
+                highlighted: ListView.isCurrentItem
 
-            anchors.fill: parent
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.WordWrap
-            visible: false
-        }
+                onClicked: {
+                    locationListView.forceActiveFocus();
+                    locationListView.currentIndex = index;
+                }
+            }
 
-        QQC2.BusyIndicator {
-            id: busy
+            QQC2.Label {
+                id: noSearchResultReport
 
-            anchors.centerIn: parent
+                anchors.fill: parent
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                wrapMode: Text.WordWrap
+                visible: false
+                enabled: false
+            }
 
-            visible: locationListModel.validatingInput
+            QQC2.BusyIndicator {
+                id: busy
+
+                anchors.centerIn: parent
+
+                visible: locationListModel.validatingInput
+            }
         }
     }
 
