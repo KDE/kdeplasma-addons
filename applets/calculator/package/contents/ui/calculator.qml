@@ -198,10 +198,6 @@ QQC2.Control {
                             Math.floor(Math.log(Math.abs(number))/Math.log(10)) + 1;
     }
 
-    function localizeNumber(number) {
-        return number.toString().replace(".", Qt.locale().decimalPoint);
-    }
-
     // use the clipboard datasource for being able to inspect the clipboard content before pasting it
     PlasmaCore.DataSource {
         id: clipboardSource
@@ -242,25 +238,13 @@ QQC2.Control {
     }
 
     function displayNumber(number) {
-        display.text = localizeNumber(number);
-
-        if (display.length > maxInputLength) {
-            display.text = localizeNumber(convertToScientific(number, 14));
-        }
+        display.text = number.toLocaleString(Qt.locale(), "g", 14);
 
         var decimalsToShow = 9;
         // Decrease precision until the text fits to the display.
         while (display.contentWidth > display.width && decimalsToShow > 0) {
-            display.text = localizeNumber(convertToScientific(number, decimalsToShow--));
+            display.text = number.toLocaleString(Qt.locale(), "g", decimalsToShow--);
         }
-    }
-
-    function convertToScientific(number, decimalsToShow){
-        var exponent = algarismCount(number) - 1;
-        var roundedNumber = +(number / Math.pow(10, exponent)).toFixed(decimalsToShow);
-        var scientificFormat = roundedNumber.toString() +
-            "e" + exponent;
-        return scientificFormat;
     }
 
     Connections {
