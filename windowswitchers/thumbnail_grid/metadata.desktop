@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Thumbnail Grid
+Comment=A window switcher layout using a small grid of thumbnails
+
+Type=Service
+X-KDE-ServiceTypes=KWin/WindowSwitcher
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+
+Icon=preferences-system-windows-switcher-thumbnail-grid
+X-KDE-PluginInfo-Author=Chris Holland
+X-KDE-PluginInfo-Email=zrenfire@gmail.com
+X-KDE-PluginInfo-Name=thumbnail_grid
+X-KDE-PluginInfo-Version=6
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Depends=
