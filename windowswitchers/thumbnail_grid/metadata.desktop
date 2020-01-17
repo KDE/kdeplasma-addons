@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Thumbnail Grid
+Name[ca]=Quadrícula de miniatures
+Name[es]=Cuadrícula de miniaturas
+Name[et]=Pisipildivõrgustik
+Name[lt]=Miniatiūrų tinklelis
+Name[pt]=Grelha de Miniaturas
+Name[pt_BR]=Grade de miniaturas
+Name[sv]=Miniatyrbildsrutnät
+Name[uk]=Таблиця мініатюр
+Name[x-test]=xxThumbnail Gridxx
+Name[zh_TW]=縮圖格線
 Comment=A window switcher layout using a small grid of thumbnails
+Comment[ca]=Una disposició del commutador de finestres que utilitza una quadrícula petita de miniatures
+Comment[es]=Un esquema de selector de ventanas que usa una pequeña cuadrícula de miniaturas
+Comment[et]=Aknavahetaja paigutus väikese pisipiltide võrgustikuga
+Comment[lt]=Langų perjungiklio išdėstymas naudojantis mažą miniatiūrų tinklelį
+Comment[pt]=Uma disposição de selecção de janelas que usa uma pequena grelha de miniaturas
+Comment[pt_BR]=Um layout do seletor de janelas que usa uma pequena grade de miniaturas
+Comment[sv]=En layout för fönsterbyte som använder ett litet miniatyrbildsrutnät
+Comment[uk]=Компонування засобу перемикання вікон з малою таблицею мініатюр поточного стану вікон
+Comment[x-test]=xxA window switcher layout using a small grid of thumbnailsxx
+Comment[zh_TW]=使用小格線縮圖的視窗切換器佈局
 
 Type=Service
 X-KDE-ServiceTypes=KWin/WindowSwitcher
