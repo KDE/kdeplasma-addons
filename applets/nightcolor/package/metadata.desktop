@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Night Color Control
 Name[ca]=Control del color de nit
+Name[da]=Kontrol af natfarve
 Name[es]=Control del color nocturno
 Name[et]=Öise värvi juhtimine
 Name[eu]=Gaueko kolorearen agintea
@@ -18,6 +19,7 @@ Name[x-test]=xxNight Color Controlxx
 Name[zh_TW]=夜色模式控制
 Comment=Plasmoid for controlling Night Color
 Comment[ca]=Plasmoide per controlar el Color de nit
+Comment[da]=Plasmoid til kontrol af natfarve
 Comment[es]=Plasmoide para controlar el color nocturno
 Comment[et]=Öise värvi juhtimise plasmoid
 Comment[eu]=Gaueko kolorea kontrolatzeko plasmoidea
