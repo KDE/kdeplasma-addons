@@ -31,7 +31,7 @@ class KJob;
 /**
  * This class provides the image for NOAA Environmental Visualization Laboratory
  * Image Of the Day
- * located at http://www.nesdis.noaa.gov/content/imagery-and-data.
+ * located at https://www.nesdis.noaa.gov/content/imagery-and-data.
  */
 class NOAAProvider : public PotdProvider
 {

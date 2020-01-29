@@ -28,7 +28,7 @@ class KJob;
 
 /**
  * This class provides the image for the Bing's homepage
- * url is obtained from http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1
+ * url is obtained from https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1
  */
 class BingProvider : public PotdProvider
 {

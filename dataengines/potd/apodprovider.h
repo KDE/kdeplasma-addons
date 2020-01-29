@@ -30,9 +30,9 @@ class KJob;
 /**
  * This class provides the image for APOD 
  * "Astronomy Picture Of the Day"
- * located at http://antwrp.gsfc.nasa.gov/apod.
+ * located at https://antwrp.gsfc.nasa.gov/apod.
  * Direct link to the picture of the day page is 
- * http://antwrp.gsfc.nasa.gov/apod/apYYMMDD.html 
+ * https://antwrp.gsfc.nasa.gov/apod/apYYMMDD.html 
  * where YY is the year last 2 digits,
  * MM is the month and DD the day, in 2 digits.
  */

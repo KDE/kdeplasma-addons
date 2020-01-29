@@ -149,7 +149,7 @@ void MediaWiki::search( const QString &searchTerm )
 
 void MediaWiki::findBase()
 {
-    // http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo
+    // https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo
     QUrl url = d->apiUrl;
     QUrlQuery urlQuery(url);
     urlQuery.addQueryItem(QStringLiteral("action"), QStringLiteral("query"));

@@ -67,7 +67,7 @@ public:
 
     /**
      * Create a media wiki querying object with the specified parent. The querying
-     * object can be used for multple queries, though only one can be performed at
+     * object can be used for multiple queries, though only one can be performed at
      * a time.
      * @param parent The parent object
      */
@@ -84,7 +84,7 @@ public:
 
     /** Sets the maximum number of results to return.
      *
-     * @param limit Maximumber number of results to retrieve
+     * @param limit Maximum number number of results to retrieve
      */
     void setMaxItems( int limit );
 
@@ -93,9 +93,9 @@ public:
 
     /**
      * Sets the URL at which the wikis API page can be found. For example, wikipedia
-     * has the API file at http://en.wikipedia.org/w/api.php whilst techbase has the
+     * has the API file at https://en.wikipedia.org/w/api.php whilst techbase has the
      *
-     * @param url The URL of the api.php file, for example http://techbase.kde.org/api.php
+     * @param url The URL of the api.php file, for example https://techbase.kde.org/api.php
      */
     void setApiUrl( const QUrl &url );
 

@@ -30,7 +30,7 @@
 NatGeoProvider::NatGeoProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
 {
-    const QUrl url(QStringLiteral("http://www.nationalgeographic.com/photography/photo-of-the-day/"));
+    const QUrl url(QStringLiteral("https://www.nationalgeographic.com/photography/photo-of-the-day/"));
 
     KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::StoredTransferJob::finished, this, &NatGeoProvider::pageRequestFinished);

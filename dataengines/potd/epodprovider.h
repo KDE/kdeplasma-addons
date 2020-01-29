@@ -30,7 +30,7 @@ class KJob;
 /**
  * This class provides the image for EPOD 
  * "Earth Science Picture Of the Day"
- * located at http://epod.usra.edu/.
+ * located at https://epod.usra.edu/.
  */
 class EpodProvider : public PotdProvider
 {

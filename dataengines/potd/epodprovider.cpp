@@ -29,7 +29,7 @@
 EpodProvider::EpodProvider( QObject *parent, const QVariantList &args )
     : PotdProvider(parent, args)
 {
-    const QUrl url(QStringLiteral("http://epod.usra.edu/blog/"));
+    const QUrl url(QStringLiteral("https://epod.usra.edu/blog/"));
 
     KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::StoredTransferJob::finished, this, &EpodProvider::pageRequestFinished);
@@ -58,7 +58,7 @@ void EpodProvider::pageRequestFinished(KJob *_job)
 
     int pos = exp.indexIn( data ) + pattern.length();
     const QString sub = data.mid( pos-4, pattern.length()+10);
-    const QUrl url(QStringLiteral("http://epod.usra.edu/.a/%1-pi").arg(sub));
+    const QUrl url(QStringLiteral("https://epod.usra.edu/.a/%1-pi").arg(sub));
     KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &EpodProvider::imageRequestFinished);
 }
