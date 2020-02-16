@@ -1,6 +1,7 @@
 /*
  *   Copyright 2008 Sebastian Kügler <sebas@kde.org>
  *   Copyright 2017 Kai Uwe Broulik <kde@privat.broulik.de>
+ *   Copyright 2020  Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -31,124 +32,76 @@
 
 K_EXPORT_PLASMA_RUNNER(katesessionsrunner, KateSessions)
 
-KateSessions::KateSessions(QObject *parent, const QVariantList& args)
+KateSessions::KateSessions(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
-    setObjectName(QLatin1String("Kate Sessions"));
-    setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
+    setObjectName(QStringLiteral("Kate Sessions"));
+    setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory
+                        | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QLatin1String(":q:"), i18n("Finds Kate sessions matching :q:."));
-    s.addExampleQuery(QLatin1String("kate :q:"));
+    Plasma::RunnerSyntax s(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:."));
     addSyntax(s);
-
-    setDefaultSyntax(Plasma::RunnerSyntax(QLatin1String("kate"), i18n("Lists all the Kate editor sessions in your account.")));
+    setDefaultSyntax(Plasma::RunnerSyntax(QStringLiteral("kate"),
+                                          i18n("Lists all the Kate editor sessions in your account.")));
 
     m_sessionsFolderPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
-                         + QLatin1String("/kate/sessions");
+                            + QStringLiteral("/kate/sessions");
 
-    connect(this, SIGNAL(prepare()), SLOT(slotPrepare()));
-    connect(this, SIGNAL(teardown()), SLOT(slotTeardown()));
+    // Initialize watchers and sessions
+    m_sessionWatch = new KDirWatch(this);
+    m_sessionWatch->addDir(m_sessionsFolderPath);
+    connect(m_sessionWatch, &KDirWatch::dirty, this, &KateSessions::loadSessions);
+    connect(m_sessionWatch, &KDirWatch::created, this, &KateSessions::loadSessions);
+    connect(m_sessionWatch, &KDirWatch::deleted, this, &KateSessions::loadSessions);
+    loadSessions();
 }
 
 KateSessions::~KateSessions()
 {
 }
 
-void KateSessions::slotPrepare()
-{
-    loadSessions();
-
-    // listen for changes to the list of kate sessions
-    if (!m_sessionWatch) {
-        m_sessionWatch = new KDirWatch(this);
-        m_sessionWatch->addDir(m_sessionsFolderPath);
-        connect(m_sessionWatch, &KDirWatch::dirty, this, &KateSessions::loadSessions);
-        connect(m_sessionWatch, &KDirWatch::created, this, &KateSessions::loadSessions);
-        connect(m_sessionWatch, &KDirWatch::deleted, this, &KateSessions::loadSessions);
-    }
-}
-
-void KateSessions::slotTeardown()
-{
-    delete m_sessionWatch;
-    m_sessionWatch = nullptr;
-    m_sessions.clear();
-}
-
 void KateSessions::loadSessions()
 {
     QStringList sessions;
+    const QDir sessionsDir(m_sessionsFolderPath);
 
-    QDir sessionsDir(m_sessionsFolderPath);
-
-    const auto &sessionFiles = sessionsDir.entryInfoList({QStringLiteral("*.katesession")}, QDir::Files);
-
+    const auto &sessionFiles = sessionsDir.entryInfoList({QStringLiteral("*.katesession")}, QDir::Files, QDir::Name);
     for (const QFileInfo &sessionFile : sessionFiles) {
-        const QString name = QUrl::fromPercentEncoding(sessionFile.baseName().toLocal8Bit()); // is this the right encoding?
-        sessions.append(name);
+        sessions.append(QUrl::fromPercentEncoding(sessionFile.baseName().toLocal8Bit()));
     }
-
-    QCollator collator;
-    collator.setCaseSensitivity(Qt::CaseInsensitive);
-    std::sort(sessions.begin(), sessions.end(), [&collator](const QString &a, const QString &b) {
-        return collator.compare(a, b) < 0;
-    });
 
     m_sessions = sessions;
 }
 
 void KateSessions::match(Plasma::RunnerContext &context)
 {
-    if (m_sessions.isEmpty()) {
+    QString term = context.query();
+    if (term.length() < 3 || m_sessions.isEmpty() || !context.isValid()) {
         return;
     }
-
-    QString term = context.query();
-    if (term.length() < 3) {
+    // Kate writes sessions as desktop actions in the local .desktop file =>
+    // they are already available from the "Applications" Runner and in the normal launcher
+    if (!term.startsWith(m_triggerWord, Qt::CaseInsensitive)) {
         return;
     }
 
     bool listAll = false;
-
-    if (term.startsWith(QLatin1String("kate"), Qt::CaseInsensitive)) {
-        if (term.trimmed().compare(QLatin1String("kate"), Qt::CaseInsensitive) == 0) {
-            listAll = true;
-            term.clear();
-        } else if (term.at(4) == QLatin1Char(' ') ) {
-            term.remove(QLatin1String("kate"), Qt::CaseInsensitive);
-            term = term.trimmed();
-        } else {
-            term.clear();
-        }
-    }
-
-    if (term.isEmpty() && !listAll) {
+    if (term.trimmed().compare(m_triggerWord, Qt::CaseInsensitive) == 0) {
+        listAll = true;
+        term.clear();
+    } else if (term.at(4) == QLatin1Char(' ')) {
+        term = term.remove(m_triggerWord, Qt::CaseInsensitive).trimmed();
+    } else {
+        // Prevent results for queries like "katee"
         return;
     }
 
-    foreach (const QString &session, m_sessions) {
-        if (!context.isValid()) {
-            return;
-        }
-
-        if (listAll || (!term.isEmpty() && session.contains(term, Qt::CaseInsensitive))) {
+    for (const QString &session: qAsConst(m_sessions)) {
+        if (listAll || session.contains(term, Qt::CaseInsensitive)) {
             Plasma::QueryMatch match(this);
-            if (listAll) {
-                // All sessions listed, but with a low priority
-                match.setType(Plasma::QueryMatch::ExactMatch);
-                match.setRelevance(0.8);
-            } else {
-                if (session.compare(term, Qt::CaseInsensitive) == 0) {
-                    // parameter to kate matches session exactly, bump it up!
-                    match.setType(Plasma::QueryMatch::ExactMatch);
-                    match.setRelevance(1.0);
-                } else {
-                    // fuzzy match of the session in "kate $session"
-                    match.setType(Plasma::QueryMatch::PossibleMatch);
-                    match.setRelevance(0.8);
-                }
-            }
-            match.setIconName(QStringLiteral("kate"));
+            match.setType(Plasma::QueryMatch::ExactMatch);
+            match.setRelevance(session.compare(term, Qt::CaseInsensitive) == 0 ? 1 : 0.8);
+            match.setIconName(m_triggerWord);
             match.setData(session);
             match.setText(session);
             match.setSubtext(i18n("Open Kate Session"));
@@ -160,13 +113,9 @@ void KateSessions::match(Plasma::RunnerContext &context)
 void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    QString session = match.data().toString();
 
-    if (!session.isEmpty()) {
-        QStringList args;
-       	args << QLatin1String("--start") << session << QLatin1String("-n");
-        KToolInvocation::kdeinitExec(QLatin1String("kate"), args);
-    }
+    KToolInvocation::kdeinitExec(QStringLiteral("kate"), {QStringLiteral("--start"),
+                                                          match.data().toString(), QStringLiteral("-n")});
 }
 
 #include "katesessions.moc"

@@ -1,6 +1,7 @@
 /*
  *   Copyright 2008 Sebastian Kügler <sebas@kde.org>
  *   Copyright 2017 Kai Uwe Broulik <kde@privat.broulik.de>
+ *   Copyright 2020  Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -21,7 +22,7 @@
 #ifndef KATESESSIONS_H
 #define KATESESSIONS_H
 
-#include <krunner/abstractrunner.h>
+#include <KRunner/AbstractRunner>
 
 class KDirWatch;
 
@@ -29,7 +30,7 @@ class KateSessions : public Plasma::AbstractRunner {
     Q_OBJECT
 
     public:
-        explicit KateSessions( QObject *parent, const QVariantList& args );
+        explicit KateSessions(QObject *parent, const QVariantList& args);
         ~KateSessions() override;
 
         void match(Plasma::RunnerContext &context) override;
@@ -37,13 +38,12 @@ class KateSessions : public Plasma::AbstractRunner {
 
     private Q_SLOTS:
         void loadSessions();
-        void slotPrepare();
-        void slotTeardown();
 
     private:
         KDirWatch* m_sessionWatch = nullptr;
         QString m_sessionsFolderPath;
         QStringList m_sessions;
+        const QLatin1String m_triggerWord = QLatin1String("kate");
 };
 
 #endif
