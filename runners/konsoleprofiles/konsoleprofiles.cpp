@@ -169,7 +169,7 @@ void KonsoleProfiles::run(const Plasma::RunnerContext &context, const Plasma::Qu
     Q_UNUSED(context)
     const QString profile = match.data().toString();
 
-    if (!profile.isEmpty()) {
+    if (profile.isEmpty()) {
         return;
     }
 
