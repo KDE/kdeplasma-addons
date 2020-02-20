@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Notes
+Name=Sticky Note
 Name[ar]=ملاحظات
 Name[ast]=Notes
 Name[be]=Заметкі
@@ -63,7 +63,7 @@ Name[wa]=Notes
 Name[x-test]=xxNotesxx
 Name[zh_CN]=注记
 Name[zh_TW]=Notes
-Comment=Desktop sticky notes
+Comment=Desktop sticky note
 Comment[ar]=ملاحظات لاصقة على سطح المكتب
 Comment[bs]=Ljepljive bilješke za površ
 Comment[ca]=Notes adhesives per a l'escriptori
