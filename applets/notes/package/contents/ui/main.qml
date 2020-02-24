@@ -348,6 +348,9 @@ PlasmaCore.SvgItem {
                 right: parent.right
             }
 
+            opacity: focusScope.activeFocus ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+
             readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width
             readonly property bool showFormatButtons: width > requiredWidth
 
@@ -355,9 +358,6 @@ PlasmaCore.SvgItem {
                 id: formatButtonsRow
                 spacing: units.smallSpacing
                 // show format buttons if TextField or any of the buttons have focus
-                opacity: fontButtons.showFormatButtons && focusScope.activeFocus ? 1 : 0
-
-                Behavior on opacity { NumberAnimation { duration: units.longDuration } }
                 enabled: opacity > 0
                 visible: fontButtons.showFormatButtons
 
