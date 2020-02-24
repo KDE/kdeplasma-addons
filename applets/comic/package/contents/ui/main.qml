@@ -187,14 +187,6 @@ Item {
         showIdentifier: plasmoid.nativeInterface.showComicIdentifier
     }
 
-    PlasmaComponents.Button {
-        anchors.centerIn: parent
-        iconSource: "configure"
-        text: i18nc("@action:button", "Configure...")
-        visible: plasmoid.nativeInterface.tabIdentifiers.length == 0
-        onClicked: plasmoid.action("configure").trigger();
-    }
-
     states: [
         State {
             name: "topInfoVisible"
