@@ -146,6 +146,7 @@ PlasmaCore.SvgItem {
         }
 
         QQC2.ScrollView {
+            id: scrollview
             anchors {
                 top: parent.top
                 left: parent.left
@@ -308,10 +309,10 @@ PlasmaCore.SvgItem {
 
         DragDrop.DropArea {
             id: dropArea
-            anchors.fill: mainTextArea
+            anchors.fill: scrollview
 
             function positionOfDrop(event) {
-                return mainTextArea.positionAt(event.x, event.y + mainTextArea.flickableItem.contentY)
+                return mainTextArea.positionAt(event.x, event.y)
             }
 
             onDrop: {
@@ -337,6 +338,12 @@ PlasmaCore.SvgItem {
                 mainTextArea.deselect()
             }
             onDragEnter: mainTextArea.forceActiveFocus()
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: mainTextArea.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor
+                acceptedButtons: Qt.NoButton
+            }
         }
 
         RowLayout {
