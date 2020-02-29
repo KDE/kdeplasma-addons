@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Sticky Note
 Name[ca]=Nota adhesiva
+Name[es]=Nota adhesiva
 Name[et]=Märkmepaberid
 Name[eu]=Ohar itsaskorra
 Name[lt]=Lipnus lapelis
@@ -13,6 +14,7 @@ Name[x-test]=xxSticky Notexx
 Name[zh_TW]=便利貼
 Comment=Desktop sticky note
 Comment[ca]=Nota adhesiva per a l'escriptori
+Comment[es]=Nota adhesiva del escritorio
 Comment[et]=Töölaua märkmepaberid
 Comment[eu]=Mahaigaineko ohar itsaskorra
 Comment[lt]=Lipnus darbalaukio lapelis
