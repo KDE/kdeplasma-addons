@@ -95,7 +95,11 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             return true;
         }
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
         const QStringList parts = identifier.split(QLatin1Char(':'), QString::KeepEmptyParts);
+#else
+        const QStringList parts = identifier.split(QLatin1Char(':'), Qt::KeepEmptyParts);
+#endif
 
         // check whether it is cached, make sure second part present
         if (parts.count() > 1 && CachedProvider::isCached(identifier)) {

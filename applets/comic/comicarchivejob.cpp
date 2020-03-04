@@ -149,7 +149,11 @@ void ComicArchiveJob::dataUpdated( const QString &source, const Plasma::DataEngi
     const QString nextIdentifierSuffix = data[QStringLiteral("Next identifier suffix")].toString();
     const QString firstIdentifierSuffix = data[QStringLiteral("First strip identifier suffix")].toString();
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     mAuthors << data[QStringLiteral("Comic Author")].toString().split(QLatin1Char(','), QString::SkipEmptyParts);
+#else
+    mAuthors << data[QStringLiteral("Comic Author")].toString().split(QLatin1Char(','), Qt::SkipEmptyParts);
+#endif
     mAuthors.removeDuplicates();
 
     if ( mComicTitle.isEmpty() ) {

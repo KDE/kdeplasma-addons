@@ -28,6 +28,6 @@ Timer::Timer(QObject *parent) : QObject(parent)
 
 void Timer::runCommand(const QString &command)
 {
-    QProcess::startDetached(command);
+    QProcess::startDetached(command, QStringList());
 }
 

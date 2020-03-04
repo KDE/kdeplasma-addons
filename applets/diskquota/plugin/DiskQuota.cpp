@@ -197,7 +197,11 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
     const QString rawData = QString::fromLocal8Bit(m_quotaProcess->readAllStandardOutput());
 //     qDebug() << rawData;
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
+#else
+    const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), Qt::SkipEmptyParts);
+#endif
     // Testing
 //     QStringList lines = QStringList()
 //         << QStringLiteral("/home/peterpan 3975379*  5000000 7000000           57602 0       0")
@@ -220,7 +224,11 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
             continue;
         }
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
         QStringList parts = line.split(QLatin1Char(' '), QString::SkipEmptyParts);
+#else
+        QStringList parts = line.split(QLatin1Char(' '), Qt::SkipEmptyParts);
+#endif
         // valid lines range from 7 to 9 parts (grace not always there):
         // Disk quotas for user dh (uid 1000):
         //      Filesystem   blocks  quota    limit     grace   files    quota   limit   grace
