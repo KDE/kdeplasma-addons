@@ -42,8 +42,8 @@ PlasmaCore.SvgItem {
     }
     elementId: plasmoid.configuration.color + "-notes"
 
-    width: units.gridUnit * 14
-    height: units.gridUnit * 14
+    width: units.gridUnit * 15
+    height: units.gridUnit * 15
     Layout.minimumWidth: units.iconSizes.medium
     Layout.minimumHeight: units.iconSizes.medium
     Plasmoid.switchWidth: units.gridUnit * 5
@@ -358,7 +358,7 @@ PlasmaCore.SvgItem {
             opacity: focusScope.activeFocus ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: units.longDuration } }
 
-            readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width
+            readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width + removeButton.width
             readonly property bool showFormatButtons: width > requiredWidth
 
             Row {
@@ -438,6 +438,20 @@ PlasmaCore.SvgItem {
                 QQC2.ToolTip {
                     id: settingsTooltip
                     text: plasmoid.action("configure").text
+                }
+            }
+
+            QQC2.ToolButton {
+                id: removeButton
+                icon.name: "edit-delete"
+                icon.color: textIconColor
+                icon.width: units.iconSizes.smallMedium
+                icon.height: icon.width
+                onClicked: plasmoid.action("remove").trigger()
+                Accessible.name: removeTooltip.text
+                QQC2.ToolTip {
+                    id: removeTooltip
+                    text: plasmoid.action("remove").text
                 }
             }
         }
