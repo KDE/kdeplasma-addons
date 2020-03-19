@@ -1,4 +1,5 @@
 /* Copyright 2010  Anton Kreuzkamp <akreuzkamp@web.de>
+ * Copyright 2020  Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,8 +21,8 @@
 #ifndef CHARRUNNERCONFIG_H
 #define CHARRUNNERCONFIG_H
 
-//Project-Includes
 #include "ui_charrunner_config.h"
+
 // KF
 #include <KCModule>
 
@@ -49,6 +50,8 @@ class CharacterRunnerConfig : public KCModule
   private Q_SLOTS:
     void addItem();
     void deleteItem();
+    void validateAddButton();
+    void validateDeleteButton();
 
   private:
     CharacterRunnerConfigForm* m_ui;

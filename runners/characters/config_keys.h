@@ -1,5 +1,4 @@
-/* Copyright 2010  Anton Kreuzkamp <akreuzkamp@web.de>
- * Copyright 2020  Alexander Lohnau <alexander.lohnau@gmx.de>
+/* Copyright 2020  Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,28 +17,12 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CHARRUNNER_H
-#define CHARRUNNER_H
+#ifndef CONFIG_KEYS_H
+#define CONFIG_KEYS_H
 
-#include <KRunner/AbstractRunner>
+static const char CONFIG_TRIGGERWORD[] = "triggerWord";
+static const char CONFIG_ALIASES[] = "aliases";
+static const char CONFIG_CODES[] = "codes";
+static constexpr QStringView DEFAULT_TRIGGERWORD = u"#";
 
-class CharacterRunner : public Plasma::AbstractRunner
-{
-  Q_OBJECT
-
-  public:
-    CharacterRunner(QObject* parent, const QVariantList &args);
-    ~CharacterRunner() override;
-
-    void reloadConfiguration() override;
-    void match(Plasma::RunnerContext &context) override;
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
-
-  private:
-    //config-variables
-    QString m_triggerWord;
-    QList<QString> m_aliases;
-    QList<QString> m_codes;
-};
-
-#endif
+#endif //CONFIG_KEYS_H

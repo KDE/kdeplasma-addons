@@ -103,12 +103,18 @@
             <property name="text">
              <string>Add Item</string>
             </property>
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="deleteItem">
             <property name="text">
              <string>Delete Item</string>
+            </property>
+            <property name="enabled">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
