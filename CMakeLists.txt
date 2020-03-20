@@ -69,9 +69,6 @@ add_definitions(
     -DQT_DEPRECATED_WARNINGS
     -DQT_NO_URL_CAST_FROM_STRING
 )
-if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
-   add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
-endif()
 
 #########################################################################
 
