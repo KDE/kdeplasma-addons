@@ -355,6 +355,7 @@ PlasmaCore.SvgItem {
                 right: parent.right
             }
 
+            visible: opacity > 0
             opacity: focusScope.activeFocus ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: units.longDuration } }
 
