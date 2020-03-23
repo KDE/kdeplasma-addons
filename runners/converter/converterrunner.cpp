@@ -16,7 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "converterrunner.h"
 
 #include <QGuiApplication>
@@ -26,8 +25,6 @@
 #include <KLocalizedString>
 
 #include <cmath>
-
-K_EXPORT_PLASMA_RUNNER(converterrunner, ConverterRunner)
 
 ConverterRunner::ConverterRunner(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
@@ -262,5 +259,3 @@ void ConverterRunner::insertCompatibleUnits()
         }
     }
 }
-
-#include "converterrunner.moc"
