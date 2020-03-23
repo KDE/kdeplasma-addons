@@ -50,6 +50,7 @@ void ConverterRunnerTest::initTestCase()
 {
     setlocale(LC_ALL, "C.utf8");
     qputenv("LANG", "en_US");
+    QLocale::setDefault(QLocale::English);
     runner = new ConverterRunner(this, QVariantList());
     runner->init();
 }
@@ -103,10 +104,10 @@ void ConverterRunnerTest::testCaseSensitiveUnits()
     runner->match(context);
 
     QCOMPARE(context.matches().count(), 1);
-    QCOMPARE(context.matches().first().text(), QStringLiteral("1.000.000.000 milliseconds (ms)"));
+    QCOMPARE(context.matches().first().text(), QStringLiteral("1,000,000,000 milliseconds (ms)"));
 
     Plasma::RunnerContext context2;
-    context2.setQuery(QStringLiteral("1.000.000.000milliseconds>Ms"));
+    context2.setQuery(QStringLiteral("1,000,000,000milliseconds>Ms"));
     runner->match(context2);
     QCOMPARE(context2.matches().count(), 1);
     QCOMPARE(context2.matches().first().text(), "1 megasecond (Ms)");
