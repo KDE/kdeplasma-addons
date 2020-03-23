@@ -22,6 +22,8 @@
 
 #include "../converterrunner.h"
 
+#include <clocale>
+
 using namespace KUnitConversion;
 
 class ConverterRunnerTest : public QObject
