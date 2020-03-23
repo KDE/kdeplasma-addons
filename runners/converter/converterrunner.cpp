@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2020 Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,307 +16,250 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 #include "converterrunner.h"
+
 #include <QGuiApplication>
 #include <QClipboard>
 #include <QDesktopServices>
-#include <QSet>
 #include <QDebug>
 #include <KLocalizedString>
-#include <KUnitConversion/Converter>
-#include <KUnitConversion/UnitCategory>
 
 #include <cmath>
 
-#define CONVERSION_CHAR QLatin1Char( '>' )
-
 K_EXPORT_PLASMA_RUNNER(converterrunner, ConverterRunner)
 
-class StringParser
-{
-public:
-    enum GetType
-    {
-        GetString = 1,
-        GetDigit  = 2
-    };
-
-    StringParser(const QString &s) : m_index(0), m_s(s) {}
-    ~StringParser() {}
-
-    QString get(int type)
-    {
-        QChar current;
-        QString result;
-
-        passWhiteSpace();
-        while (true) {
-            current = next();
-            if (current.isNull()) {
-                break;
-            }
-            if (current.isSpace()) {
-                break;
-            }
-            bool number = isNumber(current);
-            if (type == GetDigit && !number) {
-                break;
-            }
-            if (type == GetString && number) {
-                break;
-            }
-            if(current == QLatin1Char( CONVERSION_CHAR )) {
-                break;
-            }
-            ++m_index;
-            result += current;
-        }
-        return result;
-    }
-
-    bool isNumber(const QChar &ch)
-    {
-        if (ch.isNumber()) {
-            return true;
-        }
-        if (QStringLiteral(".,-+/").contains(ch)) {
-            return true;
-        }
-        return false;
-    }
-
-    QString rest()
-    {
-        return m_s.mid(m_index).simplified();
-    }
-
-    void pass(const QStringList &strings)
-    {
-        passWhiteSpace();
-        const QString temp = m_s.mid(m_index);
-
-        foreach (const QString& s, strings) {
-            if (temp.startsWith(s)) {
-                m_index += s.length();
-                return;
-            }
-        }
-    }
-
-private:
-    void passWhiteSpace()
-    {
-        while (next().isSpace()) {
-            ++m_index;
-        }
-    }
-
-    QChar next()
-    {
-        if (m_index >= m_s.size()) {
-            return QChar::Null;
-        }
-        return m_s.at(m_index);
-    }
-
-    int m_index;
-    QString m_s;
-};
-
-ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
+ConverterRunner::ConverterRunner(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
-    Q_UNUSED(args)
-    setObjectName(QLatin1String( "Converter" ));
-
-    m_separators << QString( CONVERSION_CHAR );
-    m_separators << i18nc("list of words that can used as amount of 'unit1' [in|to|as] 'unit2'",
-                          "in;to;as").split(QLatin1Char( ';' ));
-
+    setObjectName(QStringLiteral("Converter"));
     //can not ignore commands: we have things like m4
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
-                    Plasma::RunnerContext::NetworkLocation);
+        Plasma::RunnerContext::NetworkLocation);
 
-    QString description = i18n("Converts the value of :q: when :q: is made up of "
-                               "\"value unit [>, to, as, in] unit\". You can use the "
-                               "Unit converter applet to find all available units.");
-    addSyntax(Plasma::RunnerSyntax(QLatin1String(":q:"), description));
+    const QString description = i18n("Converts the value of :q: when :q: is made up of "
+                                     "\"value unit [>, to, as, in] unit\". You can use the "
+                                     "Unit converter applet to find all available units.");
+    addSyntax(Plasma::RunnerSyntax(QStringLiteral(":q:"), description));
 }
 
-ConverterRunner::~ConverterRunner()
+void ConverterRunner::init()
 {
+    valueRegex = QRegularExpression(QStringLiteral("^([0-9,./+-]+)"));
+    const QStringList conversionWords = i18nc("list of words that can used as amount of 'unit1' [in|to|as] 'unit2'",
+                                              "in;to;as").split(QLatin1Char(';'));
+    QString conversionRegex;
+    for (const auto &word: conversionWords) {
+        conversionRegex.append(QLatin1Char(' ') + word + QStringLiteral(" |"));
+    }
+    conversionRegex.append(QStringLiteral(" ?> ?"));
+    unitSeperatorRegex = QRegularExpression(conversionRegex);
+    valueRegex.optimize();
+    unitSeperatorRegex.optimize();
+
+    insertCompatibleUnits();
+
+    addAction(copyActionId, QIcon::fromTheme(QStringLiteral("edit-copy")),
+              QStringLiteral("Copy number"));
+    addAction(copyUnitActionId, QIcon::fromTheme(QStringLiteral("edit-copy")),
+              QStringLiteral("Copy unit and number"));
+    actionList = {action(copyActionId), action(copyUnitActionId)};
 }
+
+ConverterRunner::~ConverterRunner() = default;
 
 void ConverterRunner::match(Plasma::RunnerContext &context)
 {
     const QString term = context.query();
-    if (term.size() < 2) {
+    if (term.size() < 2 || !context.isValid()) {
         return;
     }
 
-    StringParser cmd(term);
-    QString unit1;
-    QString value;
-    QString unit2;
-
-    unit1 = cmd.get(StringParser::GetString);
-    value = cmd.get(StringParser::GetDigit);
-    if (value.isEmpty()) {
+    const QRegularExpressionMatch valueRegexMatch = valueRegex.match(context.query());
+    if (!valueRegexMatch.hasMatch()) {
         return;
     }
-    if (unit1.isEmpty()) {
-        unit1 = cmd.get(StringParser::GetString | StringParser::GetDigit);
-        if (unit1.isEmpty()) {
+    const QString inputValueString = valueRegexMatch.captured(1);
+
+    // Get the different units by splitting up the query with the regex
+    QStringList unitStrings = context.query().simplified().remove(valueRegex).split(unitSeperatorRegex);
+    if (unitStrings.isEmpty()) {
+        return;
+    }
+    // Check if unit is valid, otherwise check for the value in the compatibleUnits map
+    QString inputUnitString = unitStrings.first().simplified();
+    KUnitConversion::UnitCategory inputCategory = converter.categoryForUnit(inputUnitString);
+    if (inputCategory.id() == KUnitConversion::InvalidCategory) {
+        inputUnitString = compatibleUnits.value(inputUnitString.toUpper());
+        if (inputUnitString.isEmpty()) {
+            return;
+        }
+        inputCategory = converter.categoryForUnit(inputUnitString);
+        if (inputCategory.id() == KUnitConversion::InvalidCategory) {
             return;
         }
     }
 
-    const QString s = cmd.get(StringParser::GetString);
-
-    if (!s.isEmpty() && !m_separators.contains(s)) {
-        unit1 += QLatin1Char( ' ' ) + s;
-    }
-    if (s.isEmpty() || !m_separators.contains(s)) {
-        cmd.pass(m_separators);
-    }
-    unit2 = cmd.rest();
-
-    KUnitConversion::Converter converter;
-    KUnitConversion::UnitCategory category = converter.categoryForUnit(unit1);
-    bool found = false;
-    if (category.id() == KUnitConversion::InvalidCategory) {
-        foreach (category, converter.categories()) {
-            foreach (const QString& s, category.allUnits()) {
-                if (s.compare(unit1, Qt::CaseInsensitive) == 0) {
-                    unit1 = s;
-                    found = true;
-                    break;
-                }
-            }
-            if (found) {
-                break;
-            }
-        }
-        if (!found) {
-            return;
-        }
+    QString outputUnitString;
+    if (unitStrings.size() == 2) {
+        outputUnitString = unitStrings.at(1).simplified();
     }
 
-    QList<KUnitConversion::Unit> units;
-
-    if (!unit2.isEmpty()) {
-        KUnitConversion::Unit u = category.unit(unit2);
-        if (!u.isNull() && u.isValid()) {
-            units.append(u);
-            config().writeEntry(category.name(), u.symbol());
-        } else {
-            const QStringList unitStrings = category.allUnits();
-            QList<KUnitConversion::Unit> matchingUnits;
-            foreach (const QString& s, unitStrings) {
-                if (s.startsWith(unit2, Qt::CaseInsensitive)) {
-                    u = category.unit(s);
-                    if (!matchingUnits.contains(u)) {
-                        matchingUnits << u;
-                    }
-                }
-            }
-            units = matchingUnits;
-            if (units.count() == 1) {
-                config().writeEntry(category.name(), units[0].symbol());
-            }
-        }
-    } else {
-        units = category.mostCommonUnits();
-        KUnitConversion::Unit u = category.unit(config().readEntry(category.name()));
-        if (!u.isNull() && units.indexOf(u) < 0) {
-            units << u;
-        }
-
-        // suggest converting to the user's local currency
-        if (category.id() == KUnitConversion::CurrencyCategory) {
-            const QString &currencyIsoCode = QLocale().currencySymbol(QLocale::CurrencyIsoCode);
-
-            KUnitConversion::Unit localCurrency = category.unit(currencyIsoCode);
-            if (localCurrency.isValid() && !units.contains(localCurrency)) {
-                units << localCurrency;
-            }
-        }
+    const KUnitConversion::Unit inputUnit = inputCategory.unit(inputUnitString);
+    const QList<KUnitConversion::Unit> outputUnits = createResultUnits(outputUnitString, inputCategory);
+    const auto numberDataPair = getValidatedNumberValue(inputValueString);
+    // Return on invalid user input
+    if (!numberDataPair.first) {
+        return;
     }
 
+    const double numberValue = numberDataPair.second;
     QList<Plasma::QueryMatch> matches;
-
-    QLocale locale;
-    auto stringToDouble = [&locale](const QStringRef &value, bool *ok) {
-        double numberValue = locale.toDouble(value, ok);
-        if (!(*ok)) {
-            numberValue = value.toDouble(ok);
-        }
-        return numberValue;
-    };
-
-    KUnitConversion::Unit u1 = category.unit(unit1);
-    foreach (const KUnitConversion::Unit& u, units) {
-        if (u1 == u) {
-            continue;
-        }
-
-        double numberValue = 0.0;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-        const auto fractionParts = value.splitRef(QLatin1Char('/'), QString::SkipEmptyParts);
-#else
-        const auto fractionParts = value.splitRef(QLatin1Char('/'), Qt::SkipEmptyParts);
-#endif
-        if (fractionParts.isEmpty() || fractionParts.count() > 2) {
-            continue;
-        }
-
-        if (fractionParts.count() == 2) {
-            bool ok;
-            const double numerator = stringToDouble(fractionParts.first(), &ok);
-            if (!ok) {
-                continue;
-            }
-            const double denominator = stringToDouble(fractionParts.last(), &ok);
-            if (!ok || qFuzzyIsNull(denominator)) {
-                continue;
-            }
-
-            numberValue = numerator / denominator;
-        } else if (fractionParts.count() == 1) {
-            bool ok;
-            numberValue = stringToDouble(fractionParts.first(), &ok);
-            if (!ok) {
-                continue;
-            }
-        }
-
-        KUnitConversion::Value v = category.convert(KUnitConversion::Value(numberValue, u1), u);
-
-        if (!v.isValid()) {
+    for (const KUnitConversion::Unit &outputUnit: outputUnits) {
+        KUnitConversion::Value outputValue = inputCategory.convert(
+            KUnitConversion::Value(numberValue, inputUnit), outputUnit);
+        if (!outputValue.isValid() || inputUnit == outputUnit) {
             continue;
         }
 
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
-        match.setIconName(QStringLiteral("edit-copy"));
-        match.setText(QStringLiteral("%1 (%2)").arg(v.toString(), u.symbol()));
-        match.setData(v.number());
-        match.setRelevance(1.0 - std::abs(std::log10(v.number())) / 50.0);
+        match.setIconName(QStringLiteral("accessories-calculator"));
+        if (outputUnit.categoryId() == KUnitConversion::CurrencyCategory) {
+            outputValue.round(2);
+            match.setText(QStringLiteral("%1 (%2)").arg(outputValue.toString(0, 'f', 2), outputUnit.symbol()));
+        } else {
+            match.setText(QStringLiteral("%1 (%2)").arg(outputValue.toString(), outputUnit.symbol()));
+        }
+        match.setData(outputValue.number());
+        match.setRelevance(1.0 - std::abs(std::log10(outputValue.number())) / 50.0);
         matches.append(match);
     }
 
     context.addMatches(matches);
 }
 
+QList<QAction *> ConverterRunner::actionsForMatch(const Plasma::QueryMatch &match)
+{
+    Q_UNUSED(match)
+
+    return actionList;
+}
+
 void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    const QString data = match.data().toString();
-    if (data.startsWith(QLatin1String("http://"))) {
-        QDesktopServices::openUrl(QUrl(data));
+
+    if (match.selectedAction() == action(copyActionId)) {
+        QGuiApplication::clipboard()->setText(match.data().toString());
     } else {
-        QGuiApplication::clipboard()->setText(data);
+        QGuiApplication::clipboard()->setText(match.text().split(QLatin1String(" (")).first());
+    }
+}
+
+QPair<bool, double> ConverterRunner::stringToDouble(const QStringRef &value)
+{
+    bool ok;
+    double numberValue = locale.toDouble(value, &ok);
+    if (!ok) {
+        numberValue = value.toDouble(&ok);
+    }
+    return {ok, numberValue};
+}
+
+QPair<bool, double> ConverterRunner::getValidatedNumberValue(const QString &value)
+{
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+    const auto fractionParts = value.splitRef(QLatin1Char('/'), QString::SkipEmptyParts);
+#else
+    const auto fractionParts = value.splitRef(QLatin1Char('/'), Qt::SkipEmptyParts);
+#endif
+    if (fractionParts.isEmpty() || fractionParts.count() > 2) {
+        return {false, 0};
+    }
+
+    if (fractionParts.count() == 2) {
+        const QPair<bool, double> doubleFirstResults = stringToDouble(fractionParts.first());
+        if (!doubleFirstResults.first) {
+            return {false, 0};
+        }
+        const QPair<bool, double> doubleSecondResult = stringToDouble(fractionParts.last());
+        if (!doubleSecondResult.first || qFuzzyIsNull(doubleSecondResult.second)) {
+            return {false, 0};
+        }
+        return {true, doubleFirstResults.second / doubleSecondResult.second};
+    } else if (fractionParts.count() == 1) {
+        const QPair<bool, double> doubleResult = stringToDouble(fractionParts.first());
+        if (!doubleResult.first) {
+            return {false, 0};
+        }
+        return {true, doubleResult.second};
+    } else {
+        return {true, 0};
+    }
+}
+
+QList<KUnitConversion::Unit> ConverterRunner::createResultUnits(QString &outputUnitString,
+                                                                const KUnitConversion::UnitCategory &category)
+{
+    QList<KUnitConversion::Unit> units;
+    if (!outputUnitString.isEmpty()) {
+        KUnitConversion::Unit outputUnit = category.unit(outputUnitString);
+        if (!outputUnit.isNull() && outputUnit.isValid()) {
+            units.append(outputUnit);
+        } else {
+            // Autocompletion for the target units
+            outputUnitString = outputUnitString.toUpper();
+            for (const auto &unitStringKey: compatibleUnits.keys()) {
+                if (unitStringKey.startsWith(outputUnitString)) {
+                    outputUnit = category.unit(compatibleUnits.value(unitStringKey));
+                    if (!units.contains(outputUnit)) {
+                        units << outputUnit;
+                    }
+                }
+            }
+        }
+    } else {
+        units = category.mostCommonUnits();
+        // suggest converting to the user's local currency
+        if (category.id() == KUnitConversion::CurrencyCategory) {
+            const QString &currencyIsoCode = QLocale().currencySymbol(QLocale::CurrencyIsoCode);
+
+            const KUnitConversion::Unit localCurrency = category.unit(currencyIsoCode);
+            if (localCurrency.isValid() && !units.contains(localCurrency)) {
+                units << localCurrency;
+            }
+        }
+    }
+
+    return units;
+}
+void ConverterRunner::insertCompatibleUnits()
+{
+    // Add all currency symbols to the map, if their ISO code is supported by backend
+    const QList<QLocale> allLocales = QLocale::matchingLocales(
+        QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+    KUnitConversion::UnitCategory currencyCategory = converter.category(QStringLiteral("Currency"));
+    const QStringList availableISOCodes = currencyCategory.allUnits();
+    QRegularExpression hasCurrencyRegex = QRegularExpression(QStringLiteral("\\p{Sc}"));
+    hasCurrencyRegex.optimize();
+    for (const auto &currencyLocale: allLocales) {
+        const QString symbol = currencyLocale.currencySymbol(QLocale::CurrencySymbol);
+        const QString isoCode = currencyLocale.currencySymbol(QLocale::CurrencyIsoCode);
+
+        if (isoCode.isEmpty() || !symbol.contains(hasCurrencyRegex)) {
+            continue;
+        }
+        if (availableISOCodes.contains(isoCode)) {
+            compatibleUnits.insert(symbol.toUpper(), isoCode);
+        }
+    }
+
+    // Add all units as uppercase in the map
+    for (const auto &category: converter.categories()) {
+        for (const auto &unit: category.allUnits()) {
+            compatibleUnits.insert(unit.toUpper(), unit);
+        }
     }
 }
 
