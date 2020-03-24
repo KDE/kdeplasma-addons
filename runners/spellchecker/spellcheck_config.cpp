@@ -43,14 +43,12 @@ SpellCheckConfig::SpellCheckConfig(QWidget* parent, const QVariantList& args) :
 
     layout->addWidget(m_ui, 0, 0);
 
-    connect(m_ui->m_requireTriggerWord, SIGNAL(stateChanged(int)), this, SLOT(changed()));
-    connect(m_ui->m_requireTriggerWord, SIGNAL(stateChanged(int)), this, SLOT(toggleTriggerWord(int)));
-    connect(m_ui->m_triggerWord, SIGNAL(textChanged(QString)), this, SLOT(changed()));
-
-    m_ui->m_openKcmButton->setIcon(QIcon::fromTheme(QStringLiteral("tools-check-spelling")));
+    connect(m_ui->m_requireTriggerWord, &QCheckBox::stateChanged, this, &SpellCheckConfig::markAsChanged);
+    connect(m_ui->m_requireTriggerWord, &QCheckBox::stateChanged, this, &SpellCheckConfig::toggleTriggerWord);
+    connect(m_ui->m_triggerWord, &QLineEdit::textChanged, this, &SpellCheckConfig::markAsChanged);
     connect(m_ui->m_openKcmButton, &QPushButton::clicked, this, &SpellCheckConfig::openKcm);
 
-    load();
+    m_ui->m_openKcmButton->setIcon(QIcon::fromTheme(QStringLiteral("tools-check-spelling")));
 }
 
 SpellCheckConfig::~SpellCheckConfig()
@@ -59,11 +57,7 @@ SpellCheckConfig::~SpellCheckConfig()
 
 void SpellCheckConfig::toggleTriggerWord(int state)
 {
-    if (state == Qt::Unchecked) {
-        m_ui->m_triggerWord->setEnabled(false);
-    } else {
-        m_ui->m_triggerWord->setEnabled(true);
-    }
+    m_ui->m_triggerWord->setEnabled(state == Qt::Checked);
 }
 
 void SpellCheckConfig::openKcm()
@@ -76,9 +70,8 @@ void SpellCheckConfig::load()
     KCModule::load();
 
     //FIXME: This shouldn't be hardcoded!
-    KSharedConfig::Ptr cfg = KSharedConfig::openConfig( QLatin1String( "krunnerrc" ) );
-    KConfigGroup conf = cfg->group( "Runners" );
-    KConfigGroup grp = KConfigGroup( &conf, "Spell Checker");
+    const KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
+    const KConfigGroup grp = cfg->group("Runners").group("Spell Checker");
 
     const bool requireTrigger = grp.readEntry("requireTriggerWord", true);
     const QString trigger = grp.readEntry("trigger", i18n("spell"));
@@ -87,8 +80,8 @@ void SpellCheckConfig::load()
         m_ui->m_triggerWord->setEnabled(false);
     }
 
-    m_ui->m_requireTriggerWord->setCheckState( (requireTrigger) ? Qt::Checked : Qt::Unchecked );
-    m_ui->m_triggerWord->setText( trigger );
+    m_ui->m_requireTriggerWord->setCheckState((requireTrigger) ? Qt::Checked : Qt::Unchecked);
+    m_ui->m_triggerWord->setText(trigger);
 
     emit changed(false);
 }
@@ -96,9 +89,8 @@ void SpellCheckConfig::load()
 void SpellCheckConfig::save()
 {
     //FIXME: This shouldn't be hardcoded!
-    KSharedConfig::Ptr cfg = KSharedConfig::openConfig( QLatin1String( "krunnerrc" ) );
-    KConfigGroup conf = cfg->group( "Runners" );
-    KConfigGroup grp = KConfigGroup( &conf, "Spell Checker");
+    KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
+    KConfigGroup grp = cfg->group("Runners").group("Spell Checker");
 
     bool requireTrigger = m_ui->m_requireTriggerWord->checkState() == Qt::Checked;
     if (requireTrigger) {

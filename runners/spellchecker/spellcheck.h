@@ -46,17 +46,18 @@ protected Q_SLOTS:
     QList<QAction *> actionsForMatch(const Plasma::QueryMatch &match) override;
     QMimeData * mimeDataForMatch(const Plasma::QueryMatch &match) override;
 
-    void loaddata();
+    void loadData();
     void destroydata();
 
 private:
-    QString findlang(const QStringList &terms);
+    QString findLang(const QStringList &terms);
 
     QString m_triggerWord;
     QMap<QString, QString> m_languages;//key=language name, value=language code
     bool m_requireTriggerWord;
     QMap<QString, QSharedPointer<Sonnet::Speller> > m_spellers; //spellers
     QMutex m_spellLock; //Lock held when constructing a new speller
+    QList<QAction *> m_actions;
 };
 
 #endif

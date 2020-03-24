@@ -28,38 +28,32 @@
 
 #include <KLocalizedString>
 
-namespace {
-namespace ActionIds {
-inline QString copyToClipboard() { return QStringLiteral("copyToClipboard"); }
-}
-}
-
 SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args)
-    setObjectName(QLatin1String( "Spell Checker" ));
+    setObjectName(QStringLiteral("Spell Checker"));
     setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     setSpeed(AbstractRunner::SlowSpeed);
-
-    addAction(ActionIds::copyToClipboard(), QIcon::fromTheme(QStringLiteral("edit-copy")), i18nc("@action", "Copy to Clipboard"));
 }
 
-SpellCheckRunner::~SpellCheckRunner()
-{
-}
+SpellCheckRunner::~SpellCheckRunner() = default;
 
 void SpellCheckRunner::init()
 {
-    Plasma::AbstractRunner::init();
+    m_actions = {addAction(QStringLiteral("copyToClipboard"),
+                           QIcon::fromTheme(QStringLiteral("edit-copy")),
+                           i18nc("@action", "Copy to Clipboard"))};
 
     //Connect prepare and teardown signals
-    connect(this, SIGNAL(prepare()), this, SLOT(loaddata()));
-    connect(this, SIGNAL(teardown()), this, SLOT(destroydata()));
+    connect(this, &SpellCheckRunner::prepare, this, &SpellCheckRunner::loadData);
+    connect(this, &SpellCheckRunner::teardown, this, &SpellCheckRunner::destroydata);
+
+    reloadConfiguration();
 }
 
 //Load a default dictionary and some locale names
-void SpellCheckRunner::loaddata()
+void SpellCheckRunner::loadData()
 {
     //Load the default speller, with the default language
     auto defaultSpellerIt = m_spellers.find(QString());
@@ -75,12 +69,12 @@ void SpellCheckRunner::loaddata()
     //name (eg. 'german') with one sub-code.
     QSet<QString> families;
     //First get the families
-    foreach (const QString &code, avail) {
+    for (const QString &code: avail) {
         families +=code.left(2);
     }
     //Now for each family figure out which is the main code.
-    foreach (const QString &fcode,families) {
-        QStringList family = avail.filter(fcode);
+    for (const QString &fcode: qAsConst(families)) {
+        const QStringList family = avail.filter(fcode);
         QString code;
         //If we only have one code, use it.
         //If a string is the default language, use it
@@ -106,7 +100,6 @@ void SpellCheckRunner::loaddata()
         if (!name.isEmpty()) {
             m_languages[name.toLower()] = code;
         }
-//         kDebug() << "SPELL lang: " << fcode<< "::"<< name << "  :  " << code;
     }
 
 }
@@ -119,32 +112,29 @@ void SpellCheckRunner::destroydata()
 
 void SpellCheckRunner::reloadConfiguration()
 {
-    m_triggerWord = config().readEntry("trigger", i18n("spell"));
+    const KConfigGroup cfg = config();
+    m_triggerWord = cfg.readEntry("trigger", i18n("spell"));
     //Processing will be triggered by "keyword "
+    m_requireTriggerWord = cfg.readEntry("requireTriggerWord", true) && !m_triggerWord.isEmpty();
     m_triggerWord += QLatin1Char( ' ' );
 
-    m_requireTriggerWord = config().readEntry("requireTriggerWord", true);
-
     Plasma::RunnerSyntax s(i18nc("Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\".",
-                                 "%1:q:", m_triggerWord),
-                           i18n("Checks the spelling of :q:."));
+                                 "%1:q:", m_triggerWord), i18n("Checks the spelling of :q:."));
 
     if (!m_requireTriggerWord) {
-        s.addExampleQuery(QLatin1String( ":q:" ));
+        s.addExampleQuery(QStringLiteral(":q:"));
     }
 
-    QList<Plasma::RunnerSyntax> syns;
-    syns << s;
-    setSyntaxes(syns);
+    setSyntaxes({s});
 }
 
 /* Take the input query, split into a list, and see if it contains a language to spell in.
  * Return the empty string if we can't match a language. */
-QString SpellCheckRunner::findlang(const QStringList& terms)
+QString SpellCheckRunner::findLang(const QStringList& terms)
 {
-    auto defaultSpeller = m_spellers[QString()];
+    const auto &defaultSpeller = m_spellers[QString()];
     //If first term is a language code (like en_GB), set it as the spell-check language
-    if (terms.count() >= 1 && defaultSpeller->availableLanguages().contains(terms[0])) {
+    if (!terms.isEmpty() && defaultSpeller->availableLanguages().contains(terms[0])) {
         return terms[0];
     }
     //If we have two terms and the first is a language name (eg 'french'),
@@ -205,7 +195,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
 #else
         QStringList terms = query.split(QLatin1Char(' '), Qt::SkipEmptyParts);
 #endif
-        QString lang = findlang(terms);
+        const QString lang = findlang(terms);
         //If we found a language, create a new speller object using it.
         if (!lang.isEmpty()) {
             //First term is the language
@@ -220,7 +210,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
             }
             speller = m_spellers[lang];
             //Rejoin the strings
-            query = terms.join(QLatin1String(" "));
+            query = terms.join(QLatin1Char(' '));
         }
     }
 
@@ -262,18 +252,15 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
 void SpellCheckRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    if (match.selectedAction() == action(ActionIds::copyToClipboard())) {
-        //Copy words to clipboard
-        const QString text = match.data().toString();
-        QGuiApplication::clipboard()->setText(text);
-    }
+
+    QGuiApplication::clipboard()->setText(match.data().toString());
 }
 
 QList<QAction *> SpellCheckRunner::actionsForMatch(const Plasma::QueryMatch &match)
 {
     Q_UNUSED(match)
 
-    return {action(ActionIds::copyToClipboard())};
+    return m_actions;
 }
 
 QMimeData * SpellCheckRunner::mimeDataForMatch(const Plasma::QueryMatch &match)
