@@ -195,7 +195,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
 #else
         QStringList terms = query.split(QLatin1Char(' '), Qt::SkipEmptyParts);
 #endif
-        const QString lang = findlang(terms);
+        const QString lang = findLang(terms);
         //If we found a language, create a new speller object using it.
         if (!lang.isEmpty()) {
             //First term is the language
