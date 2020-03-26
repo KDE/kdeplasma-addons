@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Thumbnail Grid
 Name[ca]=Quadrícula de miniatures
+Name[cs]=Mřížka náhledů
 Name[da]=Miniaturegitter
 Name[es]=Cuadrícula de miniaturas
 Name[et]=Pisipildivõrgustik
@@ -19,9 +20,11 @@ Name[sk]=Mriežka miniatúr
 Name[sv]=Miniatyrbildsrutnät
 Name[uk]=Таблиця мініатюр
 Name[x-test]=xxThumbnail Gridxx
+Name[zh_CN]=缩略图网格
 Name[zh_TW]=縮圖格線
 Comment=A window switcher layout using a small grid of thumbnails
 Comment[ca]=Una disposició del commutador de finestres que utilitza una quadrícula petita de miniatures
+Comment[cs]=Přepínač oken používající malou mřížku náhledů
 Comment[da]=Et vinduesskifter-layout som bruger et lille gitter af miniaturer
 Comment[es]=Un esquema de selector de ventanas que usa una pequeña cuadrícula de miniaturas
 Comment[et]=Aknavahetaja paigutus väikese pisipiltide võrgustikuga
@@ -40,6 +43,7 @@ Comment[sk]=Rozloženie prepínača okien používajúce malú mriežku miniatú
 Comment[sv]=En layout för fönsterbyte som använder ett litet miniatyrbildsrutnät
 Comment[uk]=Компонування засобу перемикання вікон з малою таблицею мініатюр поточного стану вікон
 Comment[x-test]=xxA window switcher layout using a small grid of thumbnailsxx
+Comment[zh_CN]=使用小网格缩略图布局的窗口切换器
 Comment[zh_TW]=使用小格線縮圖的視窗切換器佈局
 
 Type=Service

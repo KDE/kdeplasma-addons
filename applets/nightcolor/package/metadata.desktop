@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Night Color Control
 Name[ca]=Control del color de nit
+Name[cs]=Ovládání noční barvy
 Name[da]=Kontrol af natfarve
 Name[es]=Control del color nocturno
 Name[et]=Öise värvi juhtimine
@@ -20,9 +21,11 @@ Name[sk]=Ovládanie nočnej farby
 Name[sv]=Nattfärgkontroll
 Name[uk]=Керування нічними кольорами
 Name[x-test]=xxNight Color Controlxx
+Name[zh_CN]=夜间颜色控制
 Name[zh_TW]=夜色模式控制
 Comment=Plasmoid for controlling Night Color
 Comment[ca]=Plasmoide per controlar el Color de nit
+Comment[cs]=Plasmoid pro ovládání noční barvy
 Comment[da]=Plasmoid til kontrol af natfarve
 Comment[es]=Plasmoide para controlar el color nocturno
 Comment[et]=Öise värvi juhtimise plasmoid
@@ -41,6 +44,7 @@ Comment[sk]=Plasmoid na ovládanie Nočnej farby
 Comment[sv]=Plasmoid för att kontrollera nattfärg
 Comment[uk]=Плазмоїд для керування нічними кольорами
 Comment[x-test]=xxPlasmoid for controlling Night Colorxx
+Comment[zh_CN]=控制夜间颜色的小部件
 Comment[zh_TW]=控制夜色的 Plasmoid
 Icon=preferences-desktop-display-nightcolor
 
