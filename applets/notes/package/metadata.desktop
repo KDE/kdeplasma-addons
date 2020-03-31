@@ -2,6 +2,7 @@
 Name=Sticky Note
 Name[ca]=Nota adhesiva
 Name[cs]=Lepicí poznámka
+Name[en_GB]=Sticky Note
 Name[es]=Nota adhesiva
 Name[et]=Märkmepaberid
 Name[eu]=Ohar itsaskorra
@@ -24,6 +25,7 @@ Name[zh_TW]=便利貼
 Comment=Desktop sticky note
 Comment[ca]=Nota adhesiva per a l'escriptori
 Comment[cs]=Lepicí poznámka na plochu
+Comment[en_GB]=Desktop sticky note
 Comment[es]=Nota adhesiva del escritorio
 Comment[et]=Töölaua märkmepaberid
 Comment[eu]=Mahaigaineko ohar itsaskorra
