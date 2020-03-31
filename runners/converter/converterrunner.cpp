@@ -79,7 +79,13 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     const QString inputValueString = valueRegexMatch.captured(1);
 
     // Get the different units by splitting up the query with the regex
-    QStringList unitStrings = context.query().simplified().remove(valueRegex).split(unitSeperatorRegex);
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+    QStringList unitStrings = context.query().simplified().remove(valueRegex)
+        .split(unitSeperatorRegex, QString::SkipEmptyParts);
+#else
+    QStringList unitStrings = context.query().simplified().remove(valueRegex)
+        .split(unitSeperatorRegex, Qt::SkipEmptyParts);
+#endif
     if (unitStrings.isEmpty()) {
         return;
     }
