@@ -21,10 +21,11 @@
 #include "konsoleprofiles.h"
 
 // KF
-#include <KDirWatch>
-#include <KToolInvocation>
-#include <KLocalizedString>
+#include <KIO/CommandLauncherJob>
 #include <KConfig>
+#include <KDirWatch>
+#include <KLocalizedString>
+#include <KNotificationJobUiDelegate>
 // Qt
 #include <QFileInfo>
 #include <QDir>
@@ -173,11 +174,16 @@ void KonsoleProfiles::run(const Plasma::RunnerContext &context, const Plasma::Qu
         return;
     }
 
-    const QStringList args {
-        QStringLiteral("--profile"),
-        profile
-    };
-    KToolInvocation::kdeinitExec(QStringLiteral("konsole"), args);
+    auto *job = new KIO::CommandLauncherJob(QStringLiteral("konsole"), {
+        QStringLiteral("--profile"), profile
+    });
+    job->setDesktopName(QStringLiteral("org.kde.konsole"));
+
+    auto *delegate = new KNotificationJobUiDelegate;
+    delegate->setAutoErrorHandlingEnabled(true);
+    job->setUiDelegate(delegate);
+
+    job->start();
 }
 
 

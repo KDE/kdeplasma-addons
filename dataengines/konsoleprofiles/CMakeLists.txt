@@ -8,8 +8,9 @@ set(konsoleprofilesengine_SRCS
 add_library(plasma_engine_konsoleprofiles MODULE ${konsoleprofilesengine_SRCS})
 target_link_libraries(plasma_engine_konsoleprofiles
     KF5::Plasma
+    KF5::Notifications
+    KF5::KIOGui
     KF5::Service
-    KF5::KIOCore
 )
 
 kcoreaddons_desktop_to_json(plasma_engine_konsoleprofiles plasma-dataengine-konsoleprofiles.desktop SERVICE_TYPES plasma-dataengine.desktop)

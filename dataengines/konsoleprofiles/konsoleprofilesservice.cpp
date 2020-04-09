@@ -19,8 +19,11 @@
 #include "konsoleprofilesservice.h"
 
 #include <QMap>
-#include <KToolInvocation>
 #include <QDebug>
+
+#include <KNotificationJobUiDelegate>
+
+#include <KIO/CommandLauncherJob>
 
 KonsoleProfilesService::KonsoleProfilesService(QObject* parent, const QString& profileName)
     : Plasma::Service(parent)
@@ -49,11 +52,23 @@ qDebug() << "SERVICE START...operation: " << operation << " dest: " << destinati
     if (operation == QLatin1String("open")) {
   //      Q_ASSERT(!jobParameters.isEmpty());
 
-        QStringList args;
-        args << QStringLiteral("--profile") << destination();
-        KToolInvocation::kdeinitExec(QStringLiteral("konsole"), args);
+        // Would be nice if we could just return this in createJob above
+        auto *job = new KIO::CommandLauncherJob(QStringLiteral("konsole"), {
+            QStringLiteral("--profile"), destination()
+        });
+        job->setDesktopName(QStringLiteral("org.kde.konsole"));
 
-        setResult(true);
+        auto *delegate = new KNotificationJobUiDelegate;
+        delegate->setAutoErrorHandlingEnabled(true);
+        job->setUiDelegate(delegate);
+
+        connect(job, &KIO::CommandLauncherJob::result, this, [this, job] {
+            setError(job->error());
+            setErrorText(job->errorText());
+            emitResult();
+        });
+
+        job->start();
     }
 }
 

@@ -28,7 +28,9 @@
 
 #include <KDirWatch>
 #include <KLocalizedString>
-#include <KToolInvocation>
+#include <KNotificationJobUiDelegate>
+
+#include <KIO/CommandLauncherJob>
 
 K_EXPORT_PLASMA_RUNNER(katesessionsrunner, KateSessions)
 
@@ -114,8 +116,16 @@ void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::Query
 {
     Q_UNUSED(context)
 
-    KToolInvocation::kdeinitExec(QStringLiteral("kate"), {QStringLiteral("--start"),
-                                                          match.data().toString(), QStringLiteral("-n")});
+    auto *job = new KIO::CommandLauncherJob(QStringLiteral("kate"), {
+        QStringLiteral("--start"), match.data().toString(), QStringLiteral("-n")
+    });
+    job->setDesktopName(QStringLiteral("org.kde.kate"));
+
+    auto *delegate = new KNotificationJobUiDelegate;
+    delegate->setAutoErrorHandlingEnabled(true);
+    job->setUiDelegate(delegate);
+
+    job->start();
 }
 
 #include "katesessions.moc"
