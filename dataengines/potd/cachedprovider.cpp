@@ -1,10 +1,10 @@
 /*
  *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
  *
- *   This program is free software; you can redistribute it and/or modify  
- *   it under the terms of the GNU General Public License as published by  
- *   the Free Software Foundation; either version 2 of the License, or     
- *   (at your option) any later version.   
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
  *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -51,13 +51,13 @@ SaveImageThread::SaveImageThread(const QString &identifier, const QImage &image)
 void SaveImageThread::run()
 {
     const QString path = CachedProvider::identifierToPath( m_identifier );
-    m_image.save(path, "PNG");
+    m_image.save(path, "JPEG");
     emit done( m_identifier, path, m_image );
 }
 
 QString CachedProvider::identifierToPath( const QString &identifier )
 {
-    const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QLatin1String("/plasma_engine_potd/");
+    const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QLatin1String("/plasma_engine_potd/");
     QDir d;
     d.mkpath(dataDir);
     return dataDir + identifier;
@@ -98,7 +98,7 @@ bool CachedProvider::isCached( const QString &identifier, bool ignoreAge )
     if (!QFile::exists( path ) ) {
         return false;
     }
-    
+
     QRegularExpression re(QLatin1String(":\\d{4}-\\d{2}-\\d{2}"));
 
     if (!ignoreAge && !re.match(identifier).hasMatch()) {

@@ -5,6 +5,7 @@ LIST OF POSSIBLE PROVIDERS
 http://antwrp.gsfc.nasa.gov/apod/astropix.html
 Each day can be reached via the URL http://antwrp.gsfc.nasa.gov/apod/apYYMMDD.html
 where YY is the 2 digits year, MM is the 2 digits month and DD is the 2 digits day.
+Note: sometimes, the webpage shows a YouTube video and picture cannot be fetched.
 
 * Flickr Interestingness  ----------------------------  DONE
 http://www.flickr.com/explore/interesting/

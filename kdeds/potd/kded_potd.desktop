@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Picture of The Day
+Comment=Cache picture of the day for lock screen and SDDM
+Type=Service
+X-KDE-ServiceTypes=KDEDModule
+X-KDE-Library=potd
+X-KDE-Kded-autoload=true
+OnlyShowIn=KDE;
