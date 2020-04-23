@@ -33,8 +33,10 @@
 #include <KRun>
 #include <KConfig>
 #include <KConfigGroup>
+#include <KNotificationJobUiDelegate>
 #include <KFileItem>
 #include <KDesktopFile>
+#include <KIO/CommandLauncherJob>
 #include <KOpenWithDialog>
 #include <KPropertiesDialog>
 
@@ -121,7 +123,9 @@ void QuicklaunchPrivate::openUrl(const QUrl &url)
 
 void QuicklaunchPrivate::openExec(const QString &exec)
 {
-    KRun::run(exec, {}, nullptr);
+    KIO::CommandLauncherJob *job = new KIO::CommandLauncherJob(exec);
+    job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
+    job->start();
 }
 
 void QuicklaunchPrivate::addLauncher(bool isPopup)
