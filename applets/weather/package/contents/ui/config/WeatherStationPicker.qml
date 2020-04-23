@@ -61,30 +61,31 @@ ColumnLayout {
         id: serviceListModel
     }
 
-    QQC2.Menu {
-        id: serviceSelectionMenu
+    Kirigami.FormLayout {
+        ColumnLayout {
+            Kirigami.FormData.label: i18n("Weather providers:")
+            Kirigami.FormData.buddyFor: calendarPluginsRepeater.itemAt(0)
 
-        Instantiator {
-            model: serviceListModel
-            delegate: QQC2.MenuItem {
-                text: model.display
-                checkable: true
-                checked: model.checked
-
-                onToggled: {
-                    model.checked = checked;
-                    checked = Qt.binding(function() { return model.checked; });
-                    weatherStationConfigPage.configurationChanged();
+            Repeater {
+                id: calendarPluginsRepeater
+                model: serviceListModel
+                delegate: QQC2.CheckBox {
+                    text: model.display
+                    checked: model.checked
+                    onToggled: {
+                        model.checked = checked;
+                        checked = Qt.binding(function() { return model.checked; });
+                        weatherStationConfigPage.configurationChanged();
+                    }
                 }
             }
-            onObjectAdded: serviceSelectionMenu.insertItem(index, object)
-            onObjectRemoved: serviceSelectionMenu.removeItem(object)
         }
-
     }
 
     RowLayout {
         Layout.fillWidth: true
+
+        enabled: selectedServices.length > 0
 
         Kirigami.SearchField {
             id: searchStringEdit
@@ -95,21 +96,6 @@ ColumnLayout {
             placeholderText: i18nc("@info:placeholder", "Enter location")
             onAccepted: {
                 searchLocation();
-            }
-        }
-
-        QQC2.Button {
-            id: serviceSelectionButton
-
-            icon.name: "services"
-
-            checkable: true
-            checked: serviceSelectionMenu.opened
-            onClicked: serviceSelectionMenu.popup(serviceSelectionButton, serviceSelectionButton.width - serviceSelectionMenu.width, serviceSelectionButton.height)
-
-            QQC2.ToolTip {
-                text: i18nc("@info:tooltip", "Select weather services providers")
-                visible: hovered
             }
         }
 
@@ -129,6 +115,8 @@ ColumnLayout {
     QQC2.ScrollView {
         Layout.fillWidth: true
         Layout.fillHeight: true
+
+        enabled: selectedServices.length > 0
 
         Component.onCompleted: {
             background.visible = true;
