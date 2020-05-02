@@ -1,5 +1,6 @@
 /*
  *   Copyright 2008 Montel Laurent <montel@kde.org>
+ *   Copyright 2020  Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -32,26 +33,25 @@ struct KonsoleProfileData
 
 Q_DECLARE_TYPEINFO(KonsoleProfileData, Q_MOVABLE_TYPE);
 
-
-class KonsoleProfiles : public Plasma::AbstractRunner {
-    Q_OBJECT
+class KonsoleProfiles: public Plasma::AbstractRunner
+{
+Q_OBJECT
 
 public:
-    explicit KonsoleProfiles( QObject *parent, const QVariantList& args );
+    explicit KonsoleProfiles(QObject *parent, const QVariantList &args);
     ~KonsoleProfiles() override;
 
+    void init() override;
     void match(Plasma::RunnerContext &context) override;
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
 
 private Q_SLOTS:
     void loadProfiles();
-    void slotPrepare();
-    void slotTeardown();
 
 private:
-    KDirWatch* m_profileFilesWatch = nullptr;
-
-    QHash<QString, KonsoleProfileData> m_profiles;
+    KDirWatch *m_profileFilesWatch = nullptr;
+    QList<KonsoleProfileData> m_profiles;
+    QLatin1String m_triggerWord = QLatin1String("konsole");
 };
 
 #endif

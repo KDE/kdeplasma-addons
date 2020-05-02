@@ -1,6 +1,7 @@
 /*
  *   Copyright 2008 Montel Laurent <montel@kde.org>
  *   based on kate session from sebas
+ *   Copyright 2020  Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -32,49 +33,38 @@
 #include <QStandardPaths>
 
 
-KonsoleProfiles::KonsoleProfiles(QObject *parent, const QVariantList& args)
+KonsoleProfiles::KonsoleProfiles(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
     setObjectName(QStringLiteral("Konsole Profiles"));
 
-    setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
+    setIgnoredTypes(Plasma::RunnerContext::File
+                        | Plasma::RunnerContext::Directory
+                        | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QStringLiteral( ":q:" ), i18n("Finds Konsole profiles matching :q:."));
-    s.addExampleQuery(QStringLiteral( "konsole :q:" ));
+    Plasma::RunnerSyntax s(QStringLiteral(":q:"), i18n("Finds Konsole profiles matching :q:."));
+    s.addExampleQuery(QStringLiteral("konsole :q:"));
     addSyntax(s);
-
-    setDefaultSyntax(Plasma::RunnerSyntax(QStringLiteral( "konsole" ), i18n("Lists all the Konsole profiles in your account.")));
-
-    connect(this, &Plasma::AbstractRunner::prepare, this, &KonsoleProfiles::slotPrepare);
-    connect(this, &Plasma::AbstractRunner::teardown, this, &KonsoleProfiles::slotTeardown);
+    setDefaultSyntax(Plasma::RunnerSyntax(QStringLiteral("konsole"),
+                                          i18n("Lists all the Konsole profiles in your account.")));
 }
 
-KonsoleProfiles::~KonsoleProfiles()
+KonsoleProfiles::~KonsoleProfiles() = default;
+
+void KonsoleProfiles::init()
 {
-}
-
-void KonsoleProfiles::slotPrepare()
-{
-    loadProfiles();
-
-    if (!m_profileFilesWatch) {
-        m_profileFilesWatch = new KDirWatch(this);
-        const QStringList konsoleDataBaseDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
-        for (const QString& konsoleDataBaseDir : konsoleDataBaseDirs) {
-            m_profileFilesWatch->addDir(konsoleDataBaseDir + QLatin1String("/konsole"));
-        }
-
-        connect(m_profileFilesWatch, &KDirWatch::dirty, this, &KonsoleProfiles::loadProfiles);
-        connect(m_profileFilesWatch, &KDirWatch::created, this, &KonsoleProfiles::loadProfiles);
-        connect(m_profileFilesWatch, &KDirWatch::deleted, this, &KonsoleProfiles::loadProfiles);
+    // Initialize profiles and file watcher
+    m_profileFilesWatch = new KDirWatch(this);
+    const QStringList konsoleDataBaseDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+    for (const QString &konsoleDataBaseDir : konsoleDataBaseDirs) {
+        m_profileFilesWatch->addDir(konsoleDataBaseDir + QStringLiteral("/konsole"));
     }
-}
 
-void KonsoleProfiles::slotTeardown()
-{
-    delete m_profileFilesWatch;
-    m_profileFilesWatch = nullptr;
-    m_profiles.clear();
+    connect(m_profileFilesWatch, &KDirWatch::dirty, this, &KonsoleProfiles::loadProfiles);
+    connect(m_profileFilesWatch, &KDirWatch::created, this, &KonsoleProfiles::loadProfiles);
+    connect(m_profileFilesWatch, &KDirWatch::deleted, this, &KonsoleProfiles::loadProfiles);
+
+    loadProfiles();
 }
 
 void KonsoleProfiles::loadProfiles()
@@ -82,97 +72,57 @@ void KonsoleProfiles::loadProfiles()
     m_profiles.clear();
 
     QStringList profilesPaths;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
+                                                       QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
 
-    for (const auto& dir : dirs) {
+    for (const auto &dir : dirs) {
         const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.profile")});
-        for (const QString& fileName : fileNames) {
+        for (const QString &fileName : fileNames) {
             profilesPaths.append(dir + QLatin1Char('/') + fileName);
         }
     }
 
-    for (const auto& profilePath : qAsConst(profilesPaths)) {
-        QFileInfo info(profilePath);
-        const QString profileName = info.baseName();
+    for (const auto &profilePath : qAsConst(profilesPaths)) {
+        const QString profileName = QFileInfo(profilePath).baseName();
 
-        KConfig _config(profilePath, KConfig::SimpleConfig);
-        if (_config.hasGroup("General"))
-        {
+        const KConfig _config(profilePath, KConfig::SimpleConfig);
+        if (_config.hasGroup("General")) {
             KonsoleProfileData profileData;
-            KConfigGroup cfg(&_config, "General");
+            const KConfigGroup cfg = _config.group("General");
             profileData.displayName = cfg.readEntry("Name", profileName);
             profileData.iconName = cfg.readEntry("Icon", QStringLiteral("utilities-terminal"));
-
-            m_profiles.insert(profileName, profileData);
+            if (!profileData.displayName.isEmpty()) {
+                m_profiles.append(profileData);
+            }
         }
     }
+    suspendMatching(m_profiles.isEmpty());
 }
 
 void KonsoleProfiles::match(Plasma::RunnerContext &context)
 {
-    if (m_profiles.isEmpty()) {
-        return;
-    }
-
     QString term = context.query();
-    if (term.length() < 3) {
+    if (term.length() < 3 || !context.isValid()) {
         return;
     }
 
-    if (term.compare(QLatin1String( "konsole" ), Qt::CaseInsensitive) == 0) {
-        QHashIterator<QString, KonsoleProfileData> i(m_profiles);
-        while (i.hasNext()) {
-            i.next();
-            const auto& profileData = i.value();
-
+    term = term.remove(m_triggerWord).simplified();
+    for (const KonsoleProfileData &data: qAsConst(m_profiles)) {
+        if (data.displayName.contains(term, Qt::CaseInsensitive)) {
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::PossibleMatch);
-            match.setRelevance(1.0);
-            match.setIconName(profileData.iconName);
-            match.setData(i.key());
-            match.setText(QLatin1String("Konsole: ") + profileData.displayName);
+            match.setIconName(data.iconName);
+            match.setData(data.displayName);
+            match.setText(QStringLiteral("Konsole: ") + data.displayName);
+            match.setRelevance((float) term.length() / (float) data.displayName.length());
             context.addMatch(match);
-        }
-    } else {
-        if (term.startsWith(QLatin1String("konsole "), Qt::CaseInsensitive)) {
-            term.remove(0, 8);
-        }
-        QHashIterator<QString, KonsoleProfileData> i(m_profiles);
-        while (i.hasNext()) {
-            if (!context.isValid()) {
-                return;
-            }
-
-            i.next();
-
-            const auto& profileData = i.value();
-            if (profileData.displayName.contains(term, Qt::CaseInsensitive)) {
-                Plasma::QueryMatch match(this);
-                match.setType(Plasma::QueryMatch::PossibleMatch);
-                match.setIconName(profileData.iconName);
-                match.setData(i.key());
-                match.setText(QLatin1String("Konsole: ") + profileData.displayName);
-
-                if (profileData.displayName.compare(term, Qt::CaseInsensitive) == 0) {
-                    match.setRelevance(1.0);
-                } else {
-                    match.setRelevance(0.6);
-                }
-
-                context.addMatch(match);
-            }
         }
     }
 }
-
 void KonsoleProfiles::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
     const QString profile = match.data().toString();
-
-    if (profile.isEmpty()) {
-        return;
-    }
 
     auto *job = new KIO::CommandLauncherJob(QStringLiteral("konsole"), {
         QStringLiteral("--profile"), profile
@@ -185,7 +135,6 @@ void KonsoleProfiles::run(const Plasma::RunnerContext &context, const Plasma::Qu
 
     job->start();
 }
-
 
 K_EXPORT_PLASMA_RUNNER(konsoleprofiles, KonsoleProfiles)
 

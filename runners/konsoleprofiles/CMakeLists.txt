@@ -13,5 +13,4 @@ target_link_libraries(krunner_konsoleprofiles
 )
 
 install(TARGETS krunner_konsoleprofiles DESTINATION ${KDE_INSTALL_PLUGINDIR})
-
 install(FILES plasma-runner-konsoleprofiles.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
