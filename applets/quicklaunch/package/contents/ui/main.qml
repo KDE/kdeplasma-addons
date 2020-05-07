@@ -142,7 +142,6 @@ Item {
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: parent
-                icon: "fork"
                 mainText: i18n("Quicklaunch")
                 subText: i18nc("@info", "Add launchers by Drag and Drop or by using the context menu.")
             }

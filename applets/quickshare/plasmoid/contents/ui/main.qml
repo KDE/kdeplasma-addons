@@ -289,14 +289,12 @@ DropArea {
         State {
             name: "idle"
             PropertyChanges { target: icon; source: "emblem-shared-symbolic" }
-            PropertyChanges { target: tooltipArea; icon: "emblem-shared-symbolic" }
             PropertyChanges { target: tooltipArea; mainText: i18n("Share") }
             PropertyChanges { target: tooltipArea; subText: contentTracker.uri ? i18n("Upload %1 to an online service", contentTracker.title ? contentTracker.title : filenameFromUrl(contentTracker.uri)) :  i18n("Drop text or an image onto me to upload it to an online service.") }
         },
         State {
             name: "configuration"
             PropertyChanges { target: icon; source: "configure" }
-            PropertyChanges { target: tooltipArea; icon: "edit-paste" }
             PropertyChanges { target: shareDialog; visible: true }
         },
         State {
@@ -305,7 +303,6 @@ DropArea {
             PropertyChanges { target: busy; visible: true }
             PropertyChanges { target: busy; running: true }
 
-            PropertyChanges { target: tooltipArea; icon: "view-history" }
             PropertyChanges { target: tooltipArea; mainText: i18n("Sending...") }
             PropertyChanges { target: tooltipArea; subText: i18n("Please wait") }
         },
@@ -314,7 +311,6 @@ DropArea {
             PropertyChanges { target: icon; source: "dialog-ok" }
 
             PropertyChanges { target: idleTimer; running: true }
-            PropertyChanges { target: tooltipArea; icon: "dialog-ok" }
             PropertyChanges { target: tooltipArea; mainText: i18n("Successfully uploaded") }
             PropertyChanges { target: tooltipArea; subText: root.url ? i18n("<a href='%1'>%1</a>", root.url) : "" }
         },
@@ -323,7 +319,6 @@ DropArea {
             PropertyChanges { target: icon; source: "dialog-cancel" }
 
             PropertyChanges { target: idleTimer; running: true }
-            PropertyChanges { target: tooltipArea; icon: icon.source }
             PropertyChanges { target: tooltipArea; mainText: i18n("Error during upload.") }
             PropertyChanges { target: tooltipArea; subText: (root.errorMessage=="" ? i18n("Please, try again.") : root.errorMessage) }
         }
