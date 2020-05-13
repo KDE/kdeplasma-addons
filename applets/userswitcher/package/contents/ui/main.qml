@@ -158,7 +158,7 @@ Item {
                 icon: kuser.faceIconUrl.toString() || "user-identity"
                 interactive: false
                 interactiveIcon: KCMShell.authorize("user_manager.desktop").length > 0
-                onIconClicked: KCMShell.open("user_manager")
+                onIconClicked: KCMShell.openSystemSettings("user_manager")
                 usesPlasmaTheme: false
             }
 

@@ -89,7 +89,7 @@ Item {
     }
 
     function action_KCMNightColor() {
-        KCMShell.open("kcm_nightcolor");
+        KCMShell.openSystemSettings("kcm_nightcolor");
     }
 
     Inhibitor {
