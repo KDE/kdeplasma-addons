@@ -20,6 +20,7 @@
 import QtQuick 2.6
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.1
+import QtQuick.Window 2.12
 
 import org.kde.draganddrop 2.0 as DragDrop
 
@@ -205,7 +206,7 @@ PlasmaCore.SvgItem {
                 }
 
                 onActiveFocusChanged: {
-                    if (activeFocus) {
+                    if (activeFocus && root.Window && (root.Window.window.flags & Qt.WindowDoesNotAcceptFocus)) {
                         plasmoid.status = PlasmaCore.Types.AcceptingInputStatus
                     } else {
                         plasmoid.status = PlasmaCore.Types.ActiveStatus
