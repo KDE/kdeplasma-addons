@@ -3,11 +3,26 @@
         "Authors": [
             {
                 "Email": "%{EMAIL}",
-                "Name": "%{AUTHOR}"
+                "Name": "%{AUTHOR}",
+                "Name[ca]": "%{AUTHOR}",
+                "Name[es]": "%{AUTHOR}",
+                "Name[sk]": "%{AUTHOR}",
+                "Name[sv]": "%{AUTHOR}",
+                "Name[x-test]": "xx%{AUTHOR}xx"
             }
         ],
         "Description": "%{APPNAME}",
+        "Description[ca]": "%{APPNAME}",
+        "Description[es]": "%{APPNAME}",
+        "Description[sk]": "%{APPNAME}",
+        "Description[sv]": "%{APPNAME}",
+        "Description[x-test]": "xx%{APPNAME}xx",
         "Name": "%{APPNAME}",
+        "Name[ca]": "%{APPNAME}",
+        "Name[es]": "%{APPNAME}",
+        "Name[sk]": "%{APPNAME}",
+        "Name[sv]": "%{APPNAME}",
+        "Name[x-test]": "xx%{APPNAME}xx",
         "ServiceTypes": [
             "PlasmaPoTD/Plugin"
         ]
