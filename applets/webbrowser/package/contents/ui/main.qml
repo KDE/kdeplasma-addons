@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright 2014, 2016 by Mikhail Ivchenko <ematirov@gmail.com>         *
  *   Copyright 2018 by Kai Uwe Broulik <kde@privat.broulik.de>             *
+ *   Copyright 2020 by Sora Steenvoort <sora@dillbox.me>             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -99,9 +100,26 @@ ColumnLayout {
         Timer {
             id: updateZoomTimer
             interval: 100
+
+            readonly property int minViewWidth: plasmoid.configuration.minViewWidth
+            readonly property bool useMinViewWidth: plasmoid.configuration.useMinViewWidth
+            readonly property int constantZoomFactor: plasmoid.configuration.constantZoomFactor
+
             onTriggered: {
-                // Try to fit contents for a smaller screen
-                webview.zoomFactor = Math.min(1, webview.width / 1000);
+                var newZoom = 1;
+                if (useMinViewWidth) {
+                    // Try to fit contents for a smaller screen
+                    newZoom = Math.min(1, webview.width / minViewWidth);
+                    // make sure value is valid
+                    newZoom = Math.max(0.25, newZoom);
+                } else {
+                    newZoom = constantZoomFactor / 100.0;
+                }
+                webview.zoomFactor = newZoom;
+                // setting the zoom factor does not always work on the first try; also, numbers get rounded
+                if (Math.round(1000 * webview.zoomFactor) != Math.round(1000 * newZoom)) {
+                    updateZoomTimer.restart();
+                }
             }
         }
 
@@ -133,6 +151,20 @@ ColumnLayout {
             onUrlChanged: plasmoid.configuration.url = url;
             Component.onCompleted: url = plasmoid.configuration.url;
 
+            readonly property bool useMinViewWidth : plasmoid.configuration.useMinViewWidth
+
+            Connections {
+                target: plasmoid.configuration
+                
+                onMinViewWidthChanged: updateZoomTimer.start()
+
+                onUseMinViewWidthChanged: updateZoomTimer.start()
+
+                onConstantZoomFactorChanged: updateZoomTimer.start()
+
+                onUseConstantZoomChanged: updateZoomTimer.start()
+            }
+
             onLinkHovered: {
                 if (hoveredUrl.toString() !== "") {
                     mouseArea.cursorShape = Qt.PointingHandCursor;
@@ -141,11 +173,16 @@ ColumnLayout {
                 }
             }
 
-            onWidthChanged: updateZoomTimer.start()
+            onWidthChanged: {
+                if (useMinViewWidth) {
+                    updateZoomTimer.start()
+                }
+            }
+
             onLoadingChanged: {
                 if (loadRequest.status === WebEngineLoadRequest.LoadStartedStatus) {
                     infoButton.dismiss();
-                } else if (loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus) {
+                } else if (loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus && useMinViewWidth) {
                     updateZoomTimer.start();
                 }
             }
