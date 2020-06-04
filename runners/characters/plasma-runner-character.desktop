@@ -107,8 +107,6 @@ Comment[zh_CN]=从十六进制码创建特殊字符
 Comment[zh_TW]=從它們的十六進位碼建立特殊字元
 Type=Service
 X-KDE-ServiceTypes=Plasma/Runner
-
-X-KDE-Library=krunner_charrunner
 X-KDE-PluginInfo-Author=Anton Kreuzkamp
 X-KDE-PluginInfo-Email=akreuzkamp@web.de
 X-KDE-PluginInfo-Name=CharacterRunner

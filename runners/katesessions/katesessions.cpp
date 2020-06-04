@@ -32,7 +32,7 @@
 
 #include <KIO/CommandLauncherJob>
 
-K_EXPORT_PLASMA_RUNNER(katesessionsrunner, KateSessions)
+K_EXPORT_PLASMA_RUNNER_WITH_JSON(KateSessions, "plasma-runner-katesessions.json")
 
 KateSessions::KateSessions(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)

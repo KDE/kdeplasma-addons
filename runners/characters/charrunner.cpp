@@ -97,6 +97,6 @@ void CharacterRunner::run(const Plasma::RunnerContext &context, const Plasma::Qu
     QGuiApplication::clipboard()->setText(match.data().toString());
 }
 
-K_EXPORT_PLASMA_RUNNER(CharacterRunner, CharacterRunner)
+K_EXPORT_PLASMA_RUNNER_WITH_JSON(CharacterRunner, "plasma-runner-character.json")
 
 #include "charrunner.moc"

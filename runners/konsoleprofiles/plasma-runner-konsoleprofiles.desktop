@@ -92,7 +92,6 @@ Icon=utilities-terminal
 
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
-X-KDE-Library=krunner_konsoleprofiles
 X-KDE-PluginInfo-Author=Laurent Montel
 X-KDE-PluginInfo-Email=montel@kde.org
 X-KDE-PluginInfo-Name=konsoleprofiles

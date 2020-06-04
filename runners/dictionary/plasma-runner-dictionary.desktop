@@ -112,7 +112,6 @@ Comment[zh_TW]=定義單字
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=accessories-dictionary
-X-KDE-Library=krunner_dictionary
 X-KDE-PluginInfo-Author=Jason A. Donenfeld
 X-KDE-PluginInfo-Email=Jason@zx2c4.com
 X-KDE-PluginInfo-Name=Dictionary

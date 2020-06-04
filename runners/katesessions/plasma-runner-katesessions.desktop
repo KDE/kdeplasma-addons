@@ -116,7 +116,6 @@ Icon=kate
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 TryExec=kate
-X-KDE-Library=krunner_katesessions
 X-KDE-PluginInfo-Author=Sebastian Kügler
 X-KDE-PluginInfo-Email=sebas@kde.org
 X-KDE-PluginInfo-Name=katesessions

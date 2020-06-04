@@ -83,6 +83,6 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
     context.addMatches(matches);
 }
 
-K_EXPORT_PLASMA_RUNNER(krunner_dictionary, DictionaryRunner)
+K_EXPORT_PLASMA_RUNNER_WITH_JSON(DictionaryRunner, "plasma-runner-dictionary.json")
 
 #include "dictionaryrunner.moc"

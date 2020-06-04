@@ -18,6 +18,6 @@
 
 #include "converterrunner.h"
 
-K_EXPORT_PLASMA_RUNNER(converterrunner, ConverterRunner)
+K_EXPORT_PLASMA_RUNNER_WITH_JSON(ConverterRunner, "plasma-runner-converter.json")
 
 #include "plugin.moc"

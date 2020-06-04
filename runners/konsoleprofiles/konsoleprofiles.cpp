@@ -136,6 +136,6 @@ void KonsoleProfiles::run(const Plasma::RunnerContext &context, const Plasma::Qu
     job->start();
 }
 
-K_EXPORT_PLASMA_RUNNER(konsoleprofiles, KonsoleProfiles)
+K_EXPORT_PLASMA_RUNNER_WITH_JSON(KonsoleProfiles, "plasma-runner-konsoleprofiles.json")
 
 #include "konsoleprofiles.moc"

@@ -119,7 +119,7 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
     context.addMatch(match);
 }
 
-K_EXPORT_PLASMA_RUNNER(krunner_datetime, DateTimeRunner)
+K_EXPORT_PLASMA_RUNNER_WITH_JSON(DateTimeRunner, "plasma-runner-datetime.json")
 
 #include "datetimerunner.moc"
 
