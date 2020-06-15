@@ -243,8 +243,8 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
     } else {
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
-        match.setIconName(QStringLiteral("task-attention"));
-        match.setText(i18n("Could not find a dictionary."));
+        match.setIconName(QStringLiteral("data-error"));
+        match.setText(i18n("No dictionary found, please install hspell"));
         context.addMatch(match);
     }
 }
