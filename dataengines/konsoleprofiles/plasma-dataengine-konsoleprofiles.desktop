@@ -53,7 +53,6 @@ Name[th]=โพรไฟล์คอนโซล-K
 Name[tr]=Konsole Profilleri
 Name[uk]=Профілі Konsole
 Name[wa]=Profils di Konsole
-Name[x-test]=xxKonsole Profilesxx
 Name[zh_CN]=Konsole 配置
 Name[zh_TW]=Konsole 設定檔
 Comment=List and launch Konsole profiles
@@ -108,7 +107,6 @@ Comment[th]=เรียกรายการและเรียกให้�
 Comment[tr]=Konsole profillerini listeleyin ve çalıştırın
 Comment[uk]=Перегляньте і запустіть профілі Konsole
 Comment[wa]=Fé l' djivêye des profils di Konsole eyet ls enonder
-Comment[x-test]=xxList and launch Konsole profilesxx
 Comment[zh_CN]=罗列和启动 Konsole 配置集
 Comment[zh_TW]=列出並啟動 Konsole 設定檔
 
