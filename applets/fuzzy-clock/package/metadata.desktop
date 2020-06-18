@@ -52,6 +52,7 @@ Name[th]=นาฬิกาแบบตรรกะพื้นฐาน
 Name[tr]=Bulanık Saat
 Name[uk]=Нечіткий годинник
 Name[wa]=Ôrlodje a l' avirance
+Name[x-test]=xxFuzzy Clockxx
 Name[zh_CN]=模糊时钟
 Name[zh_TW]=模糊時鐘
 Comment=Time displayed in a less precise format
@@ -105,6 +106,7 @@ Comment[th]=แสดงเวลาในรูปแบบที่มีค�
 Comment[tr]=Saati daha az belirli bir şekilde göster
 Comment[uk]=Час, показаний у менш точному форматі
 Comment[wa]=L' eure håynêye dins ene cogne moens precise
+Comment[x-test]=xxTime displayed in a less precise formatxx
 Comment[zh_CN]=以不精确格式显示的时间
 Comment[zh_TW]=以較不精確的方式顯示時間
 
