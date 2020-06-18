@@ -52,6 +52,7 @@ Name[tr]=Tarih ve Saat
 Name[ug]=چېسلا ۋە ۋاقىت
 Name[uk]=Дата і час
 Name[wa]=Date et eure
+Name[x-test]=xxDate and Timexx
 Name[zh_CN]=日期和时间
 Name[zh_TW]=日期和時間
 
@@ -104,6 +105,7 @@ Comment[sr@latin]=Trenutni datum i vreme, lokalno ili u nekoj drugoj vremenskoj 
 Comment[sv]=Nuvarande datum och tid, lokalt eller i godtycklig tidszon
 Comment[tr]=Yerel veya herhangi bir zaman dilimindeki tarih ve zaman
 Comment[uk]=Поточна дата і час, місцевий або час будь-якого часового поясу
+Comment[x-test]=xxThe current date and time, locally or in any timezonexx
 Comment[zh_CN]=当前日期和时间，本地或任何时区
 Comment[zh_TW]=目前的日期與時間，可以是任何時區
 
