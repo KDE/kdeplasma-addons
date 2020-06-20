@@ -1,6 +1,21 @@
 [Desktop Entry]
 Name=Picture of The Day
+Name[ca]=Imatge del dia
+Name[de]=Bild des Tages
+Name[it]=Immagine del giorno
+Name[nl]=Afbeelding van de dag
+Name[pt]=Imagem do Dia
+Name[sv]=Dagens bild
+Name[uk]=Картинка дня
+Name[x-test]=xxPicture of The Dayxx
 Comment=Cache picture of the day for lock screen and SDDM
+Comment[ca]=Posa la imatge del dia a la memòria cau per a la pantalla de bloqueig i l'SDDM
+Comment[it]=Salva in cache l'immagine del giorno per la schermata di blocco e SDDM
+Comment[nl]=Afbeelding van de dag in cache zetten voor scherm vergrendelen en SDDM
+Comment[pt]=Pôr em 'cache' a imagem do dia para o ecrã de bloqueio e o SDDM
+Comment[sv]=Lagra dagens bild för skärmlåsning och SDDM
+Comment[uk]=Кешувати картинку дня для екрана блокування та SDDM
+Comment[x-test]=xxCache picture of the day for lock screen and SDDMxx
 Type=Service
 X-KDE-ServiceTypes=KDEDModule
 X-KDE-Library=potd
