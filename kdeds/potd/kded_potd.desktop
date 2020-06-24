@@ -2,6 +2,8 @@
 Name=Picture of The Day
 Name[ca]=Imatge del dia
 Name[de]=Bild des Tages
+Name[es]=Imagen del día
+Name[fr]=Image du jour
 Name[it]=Immagine del giorno
 Name[nl]=Afbeelding van de dag
 Name[pt]=Imagem do Dia
@@ -10,6 +12,8 @@ Name[uk]=Картинка дня
 Name[x-test]=xxPicture of The Dayxx
 Comment=Cache picture of the day for lock screen and SDDM
 Comment[ca]=Posa la imatge del dia a la memòria cau per a la pantalla de bloqueig i l'SDDM
+Comment[es]=Usar caché para la imagen del día de la pantalla de bloqueo y de SDDM
+Comment[fr]=Mettre en cache l'image du jour pour l'écran de verrouillage et de démarrage « SDDM »
 Comment[it]=Salva in cache l'immagine del giorno per la schermata di blocco e SDDM
 Comment[nl]=Afbeelding van de dag in cache zetten voor scherm vergrendelen en SDDM
 Comment[pt]=Pôr em 'cache' a imagem do dia para o ecrã de bloqueio e o SDDM
