@@ -58,7 +58,7 @@ KWin.Switcher {
                 id: thumbnailListView
                 model: tabBox.model
                 orientation: ListView.Horizontal
-                property int thumbnailWidth: 300
+                property int thumbnailWidth: 300 * units.devicePixelRatio
                 height: thumbnailWidth * (1.0/dialogMainItem.screenFactor) + hoverItem.margins.bottom + hoverItem.margins.top
                 spacing: 5
                 highlightMoveDuration: 0

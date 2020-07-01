@@ -66,8 +66,8 @@ KWin.Switcher {
                     QIconItem {
                         id: iconItem
                         icon: model.icon
-                        width: 32
-                        height: 32
+                        width: units.iconSizes.medium
+                        height: units.iconSizes.medium
                         state: index == listView.currentIndex ? QIconItem.ActiveState : QIconItem.DisabledState
                         anchors {
                             verticalCenter: parent.verticalCenter
