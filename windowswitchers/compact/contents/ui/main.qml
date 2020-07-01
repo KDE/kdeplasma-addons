@@ -80,8 +80,8 @@ KWin.Switcher {
                     QIconItem {
                         id: iconItem
                         icon: model.icon
-                        width: 16
-                        height: 16
+                        width: units.iconSizes.small
+                        height: units.iconSizes.small
                         anchors {
                             verticalCenter: parent.verticalCenter
                             left: parent.left
