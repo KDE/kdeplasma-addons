@@ -45,7 +45,7 @@ KWin.Switcher {
             height: Math.min(Math.max(tabBox.screenGeometry.height * 0.2, optimalHeight), tabBox.screenGeometry.height * 0.8)
             focus: true
 
-            property int textMargin: 2
+            property int textMargin: units.smallSpacing
 
             /**
             * Returns the caption with adjustments for minimized items.
@@ -127,7 +127,7 @@ KWin.Switcher {
                         compactListView, "calculateMaxRowWidth");
                     width = Math.max(textElement.width, width);
                     textElement.destroy();
-                    return width + 16 + 2 * dialogMainItem.textMargin + hoverItem.margins.right + hoverItem.margins.left
+                    return width + units.iconSizes.small + 2 * dialogMainItem.textMargin + hoverItem.margins.right + hoverItem.margins.left
                 }
                 /**
                 * Calculates the height of one row based on the text height and icon size.
@@ -145,7 +145,7 @@ KWin.Switcher {
                     var height = textElement.height;
                     textElement.destroy();
                     // icon size or two text elements and margins and hoverItem margins
-                    return Math.max(16, height + hoverItem.margins.top + hoverItem.margins.bottom);
+                    return Math.max(units.iconSizes.small, height + hoverItem.margins.top + hoverItem.margins.bottom);
                 }
                 id: compactListView
                 // the maximum text width + icon item width (32 + 4 margin) + margins for hover item

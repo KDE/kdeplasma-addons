@@ -141,7 +141,7 @@ KWin.Switcher {
                         listView, "calculateMaxRowWidth");
                     width = Math.max(textElement.width, width);
                     textElement.destroy();
-                    return width + 32 + hoverItem.margins.right + hoverItem.margins.left;
+                    return width + units.iconSizes.medium + hoverItem.margins.right + hoverItem.margins.left;
                 }
                 /**
                 * Calculates the height of one row based on the text height and icon size.
@@ -159,7 +159,7 @@ KWin.Switcher {
                     var height = textElement.height;
                     textElement.destroy();
                     // icon size or two text elements and margins and hoverItem margins
-                    return Math.max(32, height*2 + informativeTabBox.textMargin * 3 + hoverItem.margins.top + hoverItem.margins.bottom);
+                    return Math.max(units.iconSizes.medium, height*2 + informativeTabBox.textMargin * 3 + hoverItem.margins.top + hoverItem.margins.bottom);
                 }
                 id: listView
                 model: tabBox.model
