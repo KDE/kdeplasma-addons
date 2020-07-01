@@ -38,7 +38,8 @@ KWin.Switcher {
         mainItem: Item {
             id: dialogMainItem
             property int optimalWidth: (icons.iconSize + icons.margins.left + icons.margins.right) * icons.count
-            property int optimalHeight: icons.iconSize + icons.margins.top + icons.margins.bottom + 40
+            property int optimalHeight: icons.iconSize + icons.margins.top + icons.margins.bottom + units.gridUnit * 2
+
             property bool canStretchX: false
             property bool canStretchY: false
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.3, optimalWidth), tabBox.screenGeometry.width * 0.9)

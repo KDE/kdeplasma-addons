@@ -172,7 +172,7 @@ KWin.Switcher {
 
                         RowLayout {
                             id: captionRow
-                            spacing: 4 * units.devicePixelRatio
+                            spacing: units.smallSpacing
 
                             QIconItem {
                                 id: iconItem
