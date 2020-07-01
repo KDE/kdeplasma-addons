@@ -126,7 +126,7 @@ KWin.Switcher {
 
                 model: tabBox.model
 
-                property int iconSize: 22 * units.devicePixelRatio
+                property int iconSize: units.iconSizes.smallMedium
                 property int captionRowHeight: 30 * units.devicePixelRatio // The close button is 30x30 in Breeze
                 property int thumbnailWidth: 300 * units.devicePixelRatio
                 property int thumbnailHeight: thumbnailWidth * (1.0/dialogMainItem.screenFactor)

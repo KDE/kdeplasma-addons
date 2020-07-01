@@ -47,7 +47,7 @@ KWin.Switcher {
             IconTabBox {
                 id: icons
                 model: tabBox.model
-                iconSize: 128
+                iconSize: units.iconSizes.enormous
                 height: iconSize + icons.margins.top + icons.margins.bottom
                 anchors {
                     top: parent.top

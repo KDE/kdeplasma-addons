@@ -99,7 +99,7 @@ KWin.Switcher {
                         QIconItem {
                             id: iconItem
                             icon: model.icon
-                            property int iconSize: 32
+                            property int iconSize: units.iconSizes.medium
                             width: iconSize
                             height: iconSize
                             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
