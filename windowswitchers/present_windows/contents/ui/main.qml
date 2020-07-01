@@ -40,7 +40,7 @@ KWin.Switcher {
             id: dialogMainItem
             property int optimalWidth: 0.9*tabBox.screenGeometry.width
             property int optimalHeight: 0.9*tabBox.screenGeometry.height
-            property int standardMargin: 2
+            property int standardMargin: units.smallSpacing
             width: optimalWidth
             height: optimalHeight
             focus: true

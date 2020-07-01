@@ -45,7 +45,7 @@ KWin.Switcher {
             height: Math.min(Math.max(tabBox.screenGeometry.height * 0.2, optimalHeight), tabBox.screenGeometry.height * 0.8)
             focus: true
 
-            property int textMargin: 2
+            property int textMargin: units.smallSpacing
 
             // just to get the margin sizes
             PlasmaCore.FrameSvgItem {
