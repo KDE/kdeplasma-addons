@@ -28,8 +28,8 @@ private Q_SLOTS:
 private:
     QString getSource();
 
-    Plasma::DataEngineConsumer *consumer;
-    Plasma::DataEngine *engine;
+    Plasma::DataEngineConsumer *consumer = nullptr;
+    Plasma::DataEngine *engine = nullptr;
     QFileSystemWatcher *watcher;
     QString configPath;
     QString previousSource;
