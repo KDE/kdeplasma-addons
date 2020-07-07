@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 // SPDX-FileCopyrightText: 2020 Guo Yunhe <i@guoyunhe.me>
+// SPDX-FileCopyrightText: 2020 Harald Sitter <sitter@kde.org>
 
 #include "kded_potd.h"
 
@@ -9,12 +10,12 @@ K_PLUGIN_CLASS_WITH_JSON(PotdModule, "kded_potd.json")
 
 PotdModule::PotdModule(QObject* parent, const QList<QVariant>&)
     : KDEDModule(parent)
-    , configPath(QStandardPaths::locate(QStandardPaths::ConfigLocation,  QStringLiteral("kscreenlockerrc")))
+    , config(KSharedConfig::openConfig(QStringLiteral("kscreenlockerrc"), KConfig::CascadeConfig))
+    , configWatcher(KConfigWatcher::create(config))
 {
-    watcher = new QFileSystemWatcher(this);
-    watcher->addPath(configPath);
-    connect(watcher, &QFileSystemWatcher::fileChanged, this, &PotdModule::fileChanged);
-    fileChanged(configPath);
+    connect(configWatcher.data(), &KConfigWatcher::configChanged,
+            this, &PotdModule::configChanged);
+    configChanged();
 }
 
 PotdModule::~PotdModule()
@@ -22,10 +23,8 @@ PotdModule::~PotdModule()
     delete consumer;
 }
 
-void PotdModule::fileChanged(const QString &path)
+void PotdModule::configChanged()
 {
-    Q_UNUSED(path);
-
     if (engine) {
         engine->disconnectSource(previousSource, this);
     }
@@ -40,17 +39,11 @@ void PotdModule::fileChanged(const QString &path)
 
         engine->connectSource(previousSource, this);
     }
-
-    // For some reason, Qt *rc files are always recreated instead of modified.
-    // Recreated files were removed from watchers and have to be added again.
-    watcher->addPath(configPath);
 }
 
 QString PotdModule::getSource()
 {
-    KConfig config(configPath);
-
-    KConfigGroup greeterGroup = config.group(QStringLiteral("Greeter"));
+    KConfigGroup greeterGroup = config->group(QStringLiteral("Greeter"));
     QString plugin = greeterGroup.readEntry(QStringLiteral("WallpaperPlugin"), QString());
     if (plugin != QStringLiteral("org.kde.potd")) {
         return QStringLiteral("");
