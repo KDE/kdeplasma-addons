@@ -23,7 +23,7 @@
 #include <QDebug>
 #include <QTemporaryFile>
 #include <KZip>
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include <QImage>
 

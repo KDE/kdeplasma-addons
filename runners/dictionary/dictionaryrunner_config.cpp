@@ -7,7 +7,7 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <KSharedConfig>
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <KPluginFactory>
 
 K_PLUGIN_FACTORY(DictionaryRunnerConfigFactory,

@@ -5,7 +5,7 @@
 #include "dictionaryrunner.h"
 
 #include <QStringList>
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 static const char CONFIG_TRIGGERWORD[] = "triggerWord";
 

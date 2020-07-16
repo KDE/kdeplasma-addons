@@ -25,7 +25,7 @@
 #include <QQuickItem>
 
 #include <Plasma/Corona>
-#include <kactioncollection.h>
+#include <KActionCollection>
 #include <QAction>
 
 GroupedAppletsContainer::GroupedAppletsContainer(QObject *parent, const QVariantList &args)
