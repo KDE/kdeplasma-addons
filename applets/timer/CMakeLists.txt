@@ -12,6 +12,7 @@ add_library(timerplugin SHARED ${timer_SRCS})
 target_link_libraries(timerplugin
     Qt5::Core
     Qt5::Qml
+    KF5::CoreAddons
 )
 
 install(TARGETS timerplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/timer)
