@@ -2,6 +2,7 @@
 Name=Sticky Note
 Name[ca]=Nota adhesiva
 Name[cs]=Lepicí poznámka
+Name[da]=Post-it-note
 Name[de]=Haftnotiz
 Name[en_GB]=Sticky Note
 Name[es]=Nota adhesiva
@@ -28,6 +29,7 @@ Name[zh_TW]=便利貼
 Comment=Desktop sticky note
 Comment[ca]=Nota adhesiva per a l'escriptori
 Comment[cs]=Lepicí poznámka na plochu
+Comment[da]=Post-it-noter på skrivebordet
 Comment[de]=Haftnotiz für die Arbeitsfläche
 Comment[en_GB]=Desktop sticky note
 Comment[es]=Nota adhesiva del escritorio
