@@ -18,7 +18,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as Components
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kcoreaddons 1.0 as KCoreAddons
 
 Item {
@@ -186,15 +186,15 @@ Item {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
         }
-        Components.Button {
+        PlasmaComponents3.Button {
             id: button
             Layout.fillWidth: true
-            iconName: "roll"
+            icon.name: "roll"
             text: i18nc("@action:button", "Shuffle");
             onClicked: main.shuffleBoard();
         }
 
-        Components.Label {
+        PlasmaComponents3.Label {
             id: timeLabel
             Layout.fillWidth: true
             text: main.timerText()
@@ -223,7 +223,7 @@ Item {
             }
         }
 
-        Components.Label {
+        PlasmaComponents3.Label {
             id: solvedLabel
             anchors.centerIn: parent
             color: theme.textColor

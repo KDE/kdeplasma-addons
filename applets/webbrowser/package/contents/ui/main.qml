@@ -22,23 +22,24 @@
 import QtQuick 2.0
 import QtWebEngine 1.5
 import QtQuick.Layouts 1.1
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents // for Menu+MenuItem
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ColumnLayout {
     RowLayout{
         Layout.fillWidth: true
-        PlasmaComponents.Button{
-            iconSource: "go-previous"
+        PlasmaComponents3.Button {
+            icon.name: "go-previous"
             onClicked: webview.goBack()
             enabled: webview.canGoBack
         }
-        PlasmaComponents.Button{
-            iconSource: "go-next"
+        PlasmaComponents3.Button {
+            icon.name: "go-next"
             onClicked: webview.goForward()
             enabled: webview.canGoForward
         }
-        PlasmaComponents.TextField{
+        PlasmaComponents3.TextField {
             Layout.fillWidth: true
             onAccepted: {
                 var url = text;
@@ -57,7 +58,7 @@ ColumnLayout {
         }
 
         // this shows page-related information such as blocked popups
-        PlasmaComponents.ToolButton {
+        PlasmaComponents3.ToolButton {
             id: infoButton
 
             // callback invoked when button is clicked
@@ -69,10 +70,14 @@ ColumnLayout {
 
             onClicked: cb();
 
-            function show(text, icon, tooltip, cb) {
+            PlasmaComponents3.ToolTip {
+                id: tooltip
+            }
+
+            function show(text, icon, tooltipText, cb) {
                 infoButton.text = text;
-                infoButton.iconName = icon;
-                infoButton.tooltip = tooltip;
+                infoButton.icon.name = icon;
+                tooltip.text = tooltipText;
                 infoButton.cb = cb;
                 infoButton.visible = true;
             }
@@ -82,8 +87,8 @@ ColumnLayout {
             }
         }
 
-        PlasmaComponents.Button{
-            iconSource: webview.loading ? "process-stop" : "view-refresh"
+        PlasmaComponents3.Button {
+            icon.name: webview.loading ? "process-stop" : "view-refresh"
             onClicked: webview.loading ? webview.stop() : webview.reload()
         }
     }

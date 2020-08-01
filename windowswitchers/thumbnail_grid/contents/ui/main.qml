@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kwin 2.0 as KWin
 
@@ -184,17 +184,17 @@ KWin.Switcher {
                                 state: index == thumbnailGridView.currentIndex ? QIconItem.ActiveState : QIconItem.DefaultState
                             }
 
-                            PlasmaComponents.Label {
+                            PlasmaComponents3.Label {
                                 id: label
                                 Layout.fillWidth: true
                                 text: model.caption
                                 elide: Text.ElideRight
                             }
 
-                            PlasmaComponents.ToolButton {
+                            PlasmaComponents3.ToolButton {
                                 id: closeButton
                                 visible: model.closeable && typeof tabBox.model.close !== 'undefined' || false
-                                iconSource: 'window-close-symbolic'
+                                icon.name: 'window-close-symbolic'
                                 onClicked: {
                                     tabBox.model.close(index);
                                 }

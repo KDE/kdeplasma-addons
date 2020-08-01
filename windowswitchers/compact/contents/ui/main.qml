@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kwin 2.0 as KWin
 
@@ -88,7 +88,7 @@ KWin.Switcher {
                             leftMargin: hoverItem.margins.left
                         }
                     }
-                    PlasmaComponents.Label {
+                    PlasmaComponents3.Label {
                         id: captionItem
                         horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignBottom

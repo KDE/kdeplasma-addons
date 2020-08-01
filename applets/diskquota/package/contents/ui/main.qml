@@ -20,7 +20,8 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.components 2.0 as Components
+import org.kde.plasma.components 2.0 as PlasmaComponents // for Highlight
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.plasma.private.diskquota 1.0
@@ -72,7 +73,7 @@ Item {
             }
         }
 
-        Components.Label {
+        PlasmaComponents3.Label {
             visible: !diskQuota.quotaInstalled || listView.count == 0
             anchors.fill: parent
             text: diskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
@@ -86,7 +87,7 @@ Item {
                 id: listView
                 model: diskQuota.model
                 boundsBehavior: Flickable.StopAtBounds
-                highlight: Components.Highlight { }
+                highlight: PlasmaComponents.Highlight { }
                 highlightMoveDuration: 0
                 highlightResizeDuration: 0
                 currentIndex: -1

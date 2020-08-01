@@ -298,8 +298,8 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
+
                 text: i18nc("Text of the clear button", "C");
                 onClicked: clearClicked();
             }
@@ -307,8 +307,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: i18nc("Text of the division button", "÷");
                 onClicked: setOperator("/");
             }
@@ -316,8 +315,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: i18nc("Text of the multiplication button", "×");
                 onClicked: setOperator("*");
             }
@@ -325,8 +323,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: i18nc("Text of the all clear button", "AC");
                 onClicked: allClearClicked();
             }
@@ -335,8 +332,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: "7";
                 onClicked: digitClicked(7);
             }
@@ -344,8 +340,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: "8";
                 onClicked: digitClicked(8);
             }
@@ -353,8 +348,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: "9";
                 onClicked: digitClicked(9);
             }
@@ -362,8 +356,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: i18nc("Text of the minus button", "-");
                 onClicked: setOperator("-");
             }
@@ -372,8 +365,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: "4";
                 onClicked: digitClicked(4);
             }
@@ -381,8 +373,8 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
+
                 text: "5";
                 onClicked: digitClicked(5);
             }
@@ -390,8 +382,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: "6";
                 onClicked: digitClicked(6);
             }
@@ -399,8 +390,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: i18nc("Text of the plus button", "+");
                 onClicked: setOperator("+");
             }
@@ -409,8 +399,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: "1";
                 onClicked: digitClicked(1);
             }
@@ -418,8 +407,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: "2";
                 onClicked: digitClicked(2);
             }
@@ -427,8 +415,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: "3";
                 onClicked: digitClicked(3);
             }
@@ -437,8 +424,7 @@ QQC2.Control {
                 id: ansButton;
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 Layout.rowSpan: 2
                 text: i18nc("Text of the equals button", "=");
                 onClicked: equalsClicked();
@@ -447,8 +433,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 Layout.columnSpan: 2
                 text: "0";
                 onClicked: digitClicked(0);
@@ -457,8 +442,7 @@ QQC2.Control {
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: minimumWidth
-                Layout.minimumHeight: minimumHeight
+
                 text: Qt.locale().decimalPoint;
                 onClicked: decimalClicked();
             }

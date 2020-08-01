@@ -20,11 +20,12 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.components 2.0 as Components
+import org.kde.plasma.components 2.0 as PlasmaComponents // for ListItem
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 import org.kde.plasma.private.diskquota 1.0
 
-Components.ListItem {
+PlasmaComponents.ListItem {
     id: quotaItem
     property string mountPoint
     property string details
@@ -63,24 +64,22 @@ Components.ListItem {
 
             RowLayout {
                 width: parent.width
-                Components.Label {
+                PlasmaComponents3.Label {
                     Layout.fillWidth: true
-                    height: paintedHeight
                     text: details
                 }
-                Components.Label {
+                PlasmaComponents3.Label {
                     Layout.fillWidth: true
-                    height: paintedHeight
                     horizontalAlignment: Text.AlignRight
                     text: freeString
                     opacity: 0.6
                 }
             }
-            Components.ProgressBar {
+            PlasmaComponents3.ProgressBar {
                 width: parent.width
                 value: usage
-                minimumValue: 0
-                maximumValue: 100
+                from: 0
+                to: 100
                 // HACK to make progressbar clickable
                 MouseArea {
                     anchors.fill: parent
@@ -89,8 +88,7 @@ Components.ListItem {
                     }
                 }
             }
-            Components.Label {
-                height: paintedHeight
+            PlasmaComponents3.Label {
                 anchors.left: parent.left
                 text: usedString
                 opacity: 0.6

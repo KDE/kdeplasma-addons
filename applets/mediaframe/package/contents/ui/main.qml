@@ -26,7 +26,7 @@ import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.mediaframe 2.0
@@ -311,24 +311,24 @@ Item {
             NumberAnimation {}
         }
 
-        PlasmaComponents.Button {
+        PlasmaComponents3.Button {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             enabled: (items.historyLength > 0) && !isTransitioning
             visible: main.itemCount > 1
-            iconSource: "arrow-left"
+            icon.name: "arrow-left"
             onClicked: {
                 nextTimer.stop()
                 previousItem()
             }
         }
 
-        PlasmaComponents.Button {
+        PlasmaComponents3.Button {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             enabled: hasItems && !isTransitioning
             visible: main.itemCount > 1
-            iconSource: "arrow-right"
+            icon.name: "arrow-right"
             onClicked: {
                 nextTimer.stop()
                 nextItem()
@@ -341,26 +341,29 @@ Item {
             anchors.bottomMargin: units.smallSpacing
 
             /*
-            PlasmaComponents.Button {
-                iconSource: "documentinfo"
+            PlasmaComponents3.Button {
+                icon.name: "documentinfo"
                 onClicked: {  }
             }
             */
-            PlasmaComponents.Button {
+            PlasmaComponents3.Button {
 
                 //text: activeSource.split("/").pop().slice(-25)
-                iconSource: "document-preview"
+                icon.name: "document-preview"
                 onClicked: Qt.openUrlExternally(main.activeSource)
-                //tooltip: activeSource
+
+                // PlasmaComponents3.ToolTip {
+                //     text: activeSource
+                // }
             }
             /*
-            PlasmaComponents.Button {
-                iconSource: "trash-empty"
+            PlasmaComponents3.Button {
+                icon.name: "trash-empty"
                 onClicked: {  }
             }
 
-            PlasmaComponents.Button {
-                iconSource: "flag-black"
+            PlasmaComponents3.Button {
+                icon.name: "flag-black"
                 onClicked: {  }
             }
             */
@@ -438,12 +441,12 @@ Item {
     }
     */
 
-    PlasmaComponents.Button {
+    PlasmaComponents3.Button {
 
         anchors.centerIn: parent
 
         visible: !hasItems
-        iconSource: "configure"
+        icon.name: "configure"
         text: i18nc("@action:button", "Configure...")
         onClicked: {
             plasmoid.action("configure").trigger();

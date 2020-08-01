@@ -19,16 +19,18 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents // for Highlight
+import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 FocusScope {
    id: konsoleProfiles
 
     Plasmoid.switchWidth: units.gridUnit * 11
-    Plasmoid.switchHeight: units.gridUnit * 11
+    Plasmoid.switchHeight: units.gridUnit * 9
 
     Layout.minimumWidth: units.gridUnit * 12
-    Layout.minimumHeight: units.gridUnit * 12
+    Layout.minimumHeight: units.gridUnit * 10
 
     Plasmoid.onExpandedChanged: {
         if (plasmoid.expanded) {
@@ -74,7 +76,7 @@ FocusScope {
             height: units.iconSizes.medium
         }
 
-        PlasmaComponents.Label {
+        PlasmaComponents3.Label {
             id: header
             text: i18nc("@title", "Konsole Profiles")
             horizontalAlignment: Text.AlignHCenter | Text.AlignVCenter
@@ -99,84 +101,75 @@ FocusScope {
         text: i18n("Arbitrary String Which Says Something")
     }
 
-    ListView {
-        id: view
+    PlasmaExtras.ScrollArea {
+        anchors { left: parent.left; right: parent.right; bottom: parent.bottom; top: separator.bottom; topMargin: units.smallSpacing}
 
-        anchors { left: parent.left; right: scrollBar.left; bottom: parent.bottom; top: separator.bottom; topMargin: 5 }
+        ListView {
+            id: view
 
-        model: profilesModel
-        clip: true
-        focus: true
-        keyNavigationWraps: true
 
-        delegate: Item {
-            id: listdelegate
-            height: textMetric.paintedHeight * 2
+            model: profilesModel
+            clip: true
+            focus: true
+            keyNavigationWraps: true
 
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-
-            function openProfile() {
-                var service = profilesSource.serviceForSource(model["DataEngineSource"])
-                var operation = service.operationDescription("open")
-                var job = service.startOperationCall(operation)
-            }
-
-            PlasmaComponents.Label {
-                id: profileText
+            delegate: Item {
+                id: listdelegate
+                height: textMetric.paintedHeight * 2
 
                 anchors {
-                    verticalCenter: parent.verticalCenter
                     left: parent.left
                     right: parent.right
-                    leftMargin: 10
-                    rightMargin: 10
                 }
 
-                verticalAlignment: Text.AlignVCenter
-                text: model.prettyName
-                elide: Text.ElideRight
-            }
-
-            MouseArea {
-                height: parent.height + 15
-                anchors { left: parent.left; right: parent.right;}
-                hoverEnabled: true
-
-                onClicked: {
-                    openProfile();
+                function openProfile() {
+                    var service = profilesSource.serviceForSource(model["DataEngineSource"])
+                    var operation = service.operationDescription("open")
+                    var job = service.startOperationCall(operation)
                 }
 
-                onEntered: {
-                    view.currentIndex = index;
+                PlasmaComponents3.Label {
+                    id: profileText
+
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: 10
+                        rightMargin: 10
+                    }
+
+                    verticalAlignment: Text.AlignVCenter
+                    text: model.prettyName
+                    elide: Text.ElideRight
+                }
+
+                MouseArea {
+                    height: parent.height + 15
+                    anchors { left: parent.left; right: parent.right;}
+                    hoverEnabled: true
+
+                    onClicked: {
+                        openProfile();
+                    }
+
+                    onEntered: {
+                        view.currentIndex = index;
+                    }
+                }
+
+                Keys.onPressed: {
+                    if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return)
+                        openProfile();
                 }
             }
 
-            Keys.onPressed: {
-                if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return)
-                    openProfile();
+            highlight: PlasmaComponents.Highlight {
+                hover: true
             }
+
+            highlightMoveDuration: 250
+            highlightMoveVelocity: 1
         }
-
-        highlight: PlasmaComponents.Highlight {
-            hover: true
-        }
-
-        highlightMoveDuration: 250
-        highlightMoveVelocity: 1
-    }
-
-    PlasmaComponents.ScrollBar {
-        id: scrollBar
-
-        anchors { bottom: parent.bottom; top: separator.top; right: parent.right }
-
-        orientation: Qt.Vertical
-        stepSize: view.count / 4
-        scrollButtonInterval: view.count / 4
-
-        flickableItem: view
     }
 }

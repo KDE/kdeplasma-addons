@@ -17,7 +17,7 @@
 
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
 Item {
@@ -28,7 +28,7 @@ Item {
 
     property variant comicData
 
-    PlasmaComponents.ToolButton {
+    PlasmaComponents3.ToolButton {
         id: arrowLeft
 
         anchors {
@@ -36,7 +36,7 @@ Item {
             verticalCenter: root.verticalCenter
         }
 
-        iconSource: "go-previous"
+        icon.name: "go-previous"
         visible: (!plasmoid.nativeInterface.arrowsOnHover && (comicData.prev !== undefined))
 
         onClicked: {
@@ -120,7 +120,7 @@ Item {
         }
     }
 
-    PlasmaComponents.ToolButton {
+    PlasmaComponents3.ToolButton {
         id: arrowRight
 
         anchors {
@@ -128,7 +128,7 @@ Item {
             verticalCenter: root.verticalCenter
         }
 
-        iconSource: "go-next"
+        icon.name: "go-next"
         visible: (!plasmoid.nativeInterface.arrowsOnHover && (comicData.next !== undefined))
 
         onClicked: {

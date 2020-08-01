@@ -18,7 +18,7 @@
  ***************************************************************************/
 
 import QtQuick 2.2
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents // for MenuItem
 
 PlasmaComponents.MenuItem
 {

@@ -19,7 +19,7 @@
 import QtQuick 2.2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.purpose 1.0 as Purpose
 
@@ -35,35 +35,35 @@ PlasmaCore.Dialog
         height: units.gridUnit * 16
         width: units.gridUnit * 16
         RowLayout {
-            TextField {
+            PlasmaComponents3.TextField {
                 id: field
                 Layout.fillWidth: true
                 readOnly: true
                 focus: true
                 text: window.url
             }
-            Button {
-                iconName: "edit-copy"
+            PlasmaComponents3.Button {
+                icon.name: "edit-copy"
                 onClicked: {
                     field.selectAll()
                     window.copyUrl()
                 }
             }
         }
-        Label {
+        PlasmaComponents3.Label {
             text: i18n("The URL was just shared")
         }
         Item {
             Layout.fillHeight: true
         }
-        CheckBox {
+        PlasmaComponents3.CheckBox {
             text: i18nc("@option:check", "Don't show this dialog, copy automatically.")
             checked: plasmoid.configuration.copyAutomatically
             onClicked: {
                 plasmoid.configuration.copyAutomatically = checked
             }
         }
-        Button {
+        PlasmaComponents3.Button {
             Layout.alignment: Qt.AlignRight
             text: i18nc("@action:button", "Close")
             onClicked: {

@@ -23,7 +23,8 @@ import QtQuick.Dialogs 1.0 as QtDialogs
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents // for Highlight and ModelContextMenu and deficiencies with PC3 ToolButton+ToolTip (see inline TODOs)
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.draganddrop 2.0
@@ -116,6 +117,9 @@ Item {
         Layout.minimumWidth: isVertical ? units.iconSizes.small : ((height * 2) + spacer.width)
         Layout.minimumHeight: isVertical ? ((width * 2) + spacer.height) : units.iconSizes.small
 
+        // TODO: Still PC2 for now because:
+        // - It never loses visible focus despite panel widgets never getting focus anyway: https://bugs.kde.org/show_bug.cgi?id=424446
+        // - PC3.ToolTip has visual glitches: https://bugs.kde.org/show_bug.cgi?id=424448
         PlasmaComponents.ToolButton {
             width: buttonSize
             height: buttonSize
@@ -178,6 +182,9 @@ Item {
                 containsAcceptableDrag = false
             }
 
+            // TODO: Still PC2 for now because:
+            // - It never loses visible focus despite panel widgets never getting focus anyway: https://bugs.kde.org/show_bug.cgi?id=424446
+            // - PC3.ToolTip visual glitches: https://bugs.kde.org/show_bug.cgi?id=424448
             PlasmaComponents.ToolButton {
                 id: colorButton
                 anchors.fill: parent
@@ -266,7 +273,7 @@ Item {
         highlight: PlasmaComponents.Highlight {}
         highlightMoveDuration: 0
 
-        PlasmaComponents.Button {
+        PlasmaComponents3.Button {
             anchors.centerIn: parent
             text: i18nc("@action:button", "Pick Color")
             visible: fullRoot.count === 0
@@ -381,7 +388,7 @@ Item {
                     color: theme.backgroundColor
                     opacity: 0.8
 
-                    PlasmaComponents.Label {
+                    PlasmaComponents3.Label {
                         id: colorLabel
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter

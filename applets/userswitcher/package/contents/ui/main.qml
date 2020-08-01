@@ -23,7 +23,8 @@ import QtQuick.Window 2.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents // for Highlight
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kcoreaddons 1.0 as KCoreAddons // kuser
 import org.kde.kquickcontrolsaddons 2.0 // kcmshell
@@ -95,7 +96,7 @@ Item {
                 usesPlasmaTheme: false
             }
 
-            PlasmaComponents.Label {
+            PlasmaComponents3.Label {
                 id: label
                 text: root.displayedName
                 height: compactRoot.height

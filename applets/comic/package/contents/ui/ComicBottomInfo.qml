@@ -17,7 +17,7 @@
 
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
 Item {
@@ -32,7 +32,7 @@ Item {
 
     visible: (comicIdentifier.text.length > 0 || comicUrl.text.length > 0)
 
-    PlasmaComponents.Label {
+    PlasmaComponents3.Label {
         id: comicIdentifier
 
         anchors {
@@ -73,7 +73,7 @@ Item {
         }
     }
 
-    PlasmaComponents.Label {
+    PlasmaComponents3.Label {
         id:comicUrl
 
         anchors {

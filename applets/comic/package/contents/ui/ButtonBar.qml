@@ -17,7 +17,7 @@
 
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
     id: root
@@ -46,23 +46,23 @@ Item {
 
         spacing: 4
         //ToolButton or Button in C++ use PushButton?
-        PlasmaComponents.Button {
+        PlasmaComponents3.Button {
             id: prevButton
 
-            iconSource: "arrow-left"
+            icon.name: "arrow-left"
             enabled: (comicData.prev != undefined && comicData.prev.length > 0)
         }
 
-        PlasmaComponents.Button {
+        PlasmaComponents3.Button {
             id: zoomButton
 
-            iconSource: "zoom-original"
+            icon.name: "zoom-original"
         }
 
-        PlasmaComponents.Button {
+        PlasmaComponents3.Button {
             id: nextButton
 
-            iconSource: "arrow-right"
+            icon.name: "arrow-right"
             enabled: (comicData.next != undefined && comicData.next.length > 0)
         }
     }

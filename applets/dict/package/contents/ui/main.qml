@@ -18,7 +18,7 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import QtWebEngine 1.1
 
@@ -35,7 +35,7 @@ ColumnLayout {
 
     RowLayout {
         Layout.fillWidth: true
-        PlasmaComponents.TextField {
+        PlasmaComponents3.TextField {
             id: input
             placeholderText: i18nc("@info:placeholder", "Enter word to define here")
             implicitWidth: units.gridUnit * 40
@@ -48,8 +48,8 @@ ColumnLayout {
                 }
             }
         }
-        PlasmaComponents.Button {
-            iconSource: "configure"
+        PlasmaComponents3.Button {
+            icon.name: "configure"
             onClicked: plasmoid.action("configure").trigger();
         }
     }

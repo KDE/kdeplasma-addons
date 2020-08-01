@@ -20,7 +20,7 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
     id: item
@@ -92,14 +92,14 @@ Item {
             Layout.fillWidth: true
             spacing: 0
 
-            PlasmaComponents.Label {
+            PlasmaComponents3.Label {
                 id: label
                 Layout.fillWidth: true
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
             }
 
-            PlasmaComponents.Label {
+            PlasmaComponents3.Label {
                 id: sublabel
                 Layout.fillWidth: true
                 wrapMode: Text.NoWrap

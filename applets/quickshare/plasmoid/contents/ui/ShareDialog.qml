@@ -19,7 +19,8 @@
 import QtQuick 2.2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents // for Highlight and ListItem
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.purpose 1.0 as Purpose
 
@@ -33,7 +34,7 @@ PlasmaCore.Dialog
 
     hideOnWindowDeactivate: true
     mainItem: ColumnLayout {
-        height: units.gridUnit * 16
+        height: units.gridUnit * 17
         width: units.gridUnit * 16
 
         PlasmaExtras.Heading {
@@ -68,14 +69,14 @@ PlasmaCore.Dialog
                 RowLayout {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    PlasmaComponents.Label {
+                    PlasmaComponents3.Label {
                         Layout.fillWidth: true
                         text: display
                     }
-                    PlasmaComponents.Button {
+                    PlasmaComponents3.Button {
                         id: button
                         Layout.alignment: Qt.AlignVCenter
-                        iconSource: "arrow-right"
+                        icon.name: "arrow-right"
                         onClicked: view.createJob(index)
                     }
                 }

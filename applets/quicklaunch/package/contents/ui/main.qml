@@ -22,7 +22,7 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.draganddrop 2.0 as DragAndDrop
 import org.kde.plasma.private.quicklaunch 1.0
 
@@ -92,7 +92,7 @@ Item {
         }
     }
 
-    PlasmaComponents.Label {
+    PlasmaComponents3.Label {
         id: titleLabel
 
         anchors {
