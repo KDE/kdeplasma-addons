@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2010, 2012 Jason A. Donenfeld <Jason@zx2c4.com>
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2010, 2012 Jason A. Donenfeld <Jason@zx2c4.com>
  */
 
 #include "dictionarymatchengine.h"
