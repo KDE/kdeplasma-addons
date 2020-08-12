@@ -57,7 +57,7 @@ void SaveImageThread::run()
 
 QString CachedProvider::identifierToPath( const QString &identifier )
 {
-    const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QLatin1String("/plasma_engine_potd/");
+    const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/plasma_engine_potd/");
     QDir d;
     d.mkpath(dataDir);
     return dataDir + identifier;
