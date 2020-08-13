@@ -77,7 +77,6 @@ add_definitions(
 ################# list the subdirectories #################
 add_subdirectory(applets)
 add_subdirectory(dataengines)
-add_subdirectory(kdeds)
 add_subdirectory(runners)
 
 add_subdirectory(wallpapers)
