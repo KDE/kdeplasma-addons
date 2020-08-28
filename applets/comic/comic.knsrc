@@ -45,7 +45,6 @@ Name[zh_TW]=漫畫
 ProvidersUrl=https://download.kde.org/ocs/providers.xml
 Categories=Plasma Comic
 TargetDir=plasma/comics
-Uncompress=never
-InstallationCommand=kpackagetool5 -t Plasma/Comic -i %f
-UninstallCommand=kpackagetool5 -t Plasma/Comic -r %f
+Uncompress=kpackage
+KPackageType=Plasma/Comic
 
