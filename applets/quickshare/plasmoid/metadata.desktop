@@ -111,7 +111,6 @@ X-KDE-PluginInfo-Name=org.kde.plasma.quickshare
 X-KDE-PluginInfo-Version=2.0
 X-KDE-PluginInfo-Website=https://kde.org/plasma-desktop/
 X-KDE-PluginInfo-Category=Online Services
-X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL-2.0+
 X-KDE-PluginInfo-EnabledByDefault=true
 

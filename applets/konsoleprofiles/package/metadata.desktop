@@ -125,7 +125,6 @@ X-KDE-PluginInfo-Name=org.kde.plasma.konsoleprofiles
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=https://userbase.kde.org/Plasma
 X-KDE-PluginInfo-Category=Utilities
-X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL-2.0+
 X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-FormFactors=desktop
