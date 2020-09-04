@@ -41,7 +41,6 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Archive
     Config
     CoreAddons
-    DBusAddons
     Declarative
     Holidays
     I18n
