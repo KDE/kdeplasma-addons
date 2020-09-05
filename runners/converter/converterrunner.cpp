@@ -79,14 +79,8 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     const QString inputValueString = valueRegexMatch.captured(1);
 
     // Get the different units by splitting up the query with the regex
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    QStringList unitStrings = context.query().simplified().remove(valueRegex)
-        .split(unitSeperatorRegex, QString::SkipEmptyParts);
-#else
-    QStringList unitStrings = context.query().simplified().remove(valueRegex)
-        .split(unitSeperatorRegex, Qt::SkipEmptyParts);
-#endif
-    if (unitStrings.isEmpty()) {
+    QStringList unitStrings = context.query().simplified().remove(valueRegex).split(unitSeperatorRegex);
+    if (unitStrings.isEmpty() || unitStrings.at(0).isEmpty()) {
         return;
     }
     // Check if unit is valid, otherwise check for the value in the compatibleUnits map
@@ -94,9 +88,6 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     KUnitConversion::UnitCategory inputCategory = converter.categoryForUnit(inputUnitString);
     if (inputCategory.id() == KUnitConversion::InvalidCategory) {
         inputUnitString = compatibleUnits.value(inputUnitString.toUpper());
-        if (inputUnitString.isEmpty()) {
-            return;
-        }
         inputCategory = converter.categoryForUnit(inputUnitString);
         if (inputCategory.id() == KUnitConversion::InvalidCategory) {
             return;

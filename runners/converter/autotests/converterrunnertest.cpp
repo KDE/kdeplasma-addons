@@ -40,7 +40,9 @@ private Q_SLOTS:
     void testLettersAndCurrency();
     void testInvalidCurrency();
     void testFractions();
-    void testInvalidFractions();
+    void testFractionsWithoutSpecifiedTarget();
+    void testInvalidFractionsWithoutSourceUnit();
+    void testInvalidFractionsWithoutAnyUnit();
     void testSymbolsInUnits();
     void testNegativeValue();
 
@@ -163,7 +165,7 @@ void ConverterRunnerTest::testInvalidCurrency()
 }
 
 /**
- * Test if the factions are correctly parsed
+ * Test if the fractions are correctly parsed
  */
 void ConverterRunnerTest::testFractions()
 {
@@ -176,12 +178,38 @@ void ConverterRunnerTest::testFractions()
 }
 
 /**
+ * Test if fractions with source unit, but without target unit get parsed
+ */
+void ConverterRunnerTest::testFractionsWithoutSpecifiedTarget()
+{
+    Plasma::RunnerContext context;
+    context.setQuery(QStringLiteral("6/3 m"));
+    runner->match(context);
+
+    Converter converter;
+    const auto lengthCategory = converter.category(KUnitConversion::LengthCategory);
+    QCOMPARE(context.matches().count(), lengthCategory.mostCommonUnits().count() - 1);
+}
+
+/**
  * Test if an invalid query with a fraction gets rejected
  */
-void ConverterRunnerTest::testInvalidFractions()
+void ConverterRunnerTest::testInvalidFractionsWithoutSourceUnit()
 {
     Plasma::RunnerContext context;
     context.setQuery(QStringLiteral("4/4>cm"));
+    runner->match(context);
+
+    QCOMPARE(context.matches().count(), 0);
+}
+
+/**
+ * Test if an invalid query with a fraction but no unit gets rejected
+ */
+void ConverterRunnerTest::testInvalidFractionsWithoutAnyUnit()
+{
+    Plasma::RunnerContext context;
+    context.setQuery(QStringLiteral("1/2"));
     runner->match(context);
 
     QCOMPARE(context.matches().count(), 0);
