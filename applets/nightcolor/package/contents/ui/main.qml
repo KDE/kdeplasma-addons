@@ -66,6 +66,7 @@ Item {
             id: compactMouseArea
             anchors.fill: parent
             hoverEnabled: true
+            acceptedButtons: Qt.LeftButton | Qt.MiddleButton
             onClicked: toggleInhibition()
         }
     }
