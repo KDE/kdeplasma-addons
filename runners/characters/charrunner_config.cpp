@@ -93,6 +93,7 @@ void CharacterRunnerConfig::save()
     }
     grp.writeEntry(CONFIG_ALIASES, aliasList);
     grp.writeEntry(CONFIG_CODES, codeList);
+    grp.sync();
 }
 
 void CharacterRunnerConfig::defaults()

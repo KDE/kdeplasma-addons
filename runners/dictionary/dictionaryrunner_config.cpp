@@ -42,6 +42,7 @@ void DictionaryRunnerConfig::save()
 	KConfigGroup grp = cfg->group("Runners");
 	grp = KConfigGroup(&grp, "Dictionary");
 	grp.writeEntry(CONFIG_TRIGGERWORD, m_triggerWord->text());
+	grp.sync();
 	emit changed(false);
 }
 
