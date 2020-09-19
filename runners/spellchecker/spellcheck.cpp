@@ -245,6 +245,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIconName(QStringLiteral("data-error"));
         match.setText(i18n("No dictionary found, please install hspell"));
+        match.setActions(m_actions);
         context.addMatch(match);
     }
 }
@@ -254,13 +255,6 @@ void SpellCheckRunner::run(const Plasma::RunnerContext &context, const Plasma::Q
     Q_UNUSED(context)
 
     QGuiApplication::clipboard()->setText(match.data().toString());
-}
-
-QList<QAction *> SpellCheckRunner::actionsForMatch(const Plasma::QueryMatch &match)
-{
-    Q_UNUSED(match)
-
-    return m_actions;
 }
 
 QMimeData * SpellCheckRunner::mimeDataForMatch(const Plasma::QueryMatch &match)

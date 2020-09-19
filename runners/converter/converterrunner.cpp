@@ -127,17 +127,11 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
         match.setData(outputValue.number());
         match.setRelevance(1.0 - std::abs(std::log10(outputValue.number())) / 50.0);
+        match.setActions(actionList);
         matches.append(match);
     }
 
     context.addMatches(matches);
-}
-
-QList<QAction *> ConverterRunner::actionsForMatch(const Plasma::QueryMatch &match)
-{
-    Q_UNUSED(match)
-
-    return actionList;
 }
 
 void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
