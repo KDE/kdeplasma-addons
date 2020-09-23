@@ -1,25 +1,12 @@
-/***************************************************************************
- *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
- *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
- *   Copyright (C) 2008-2011 Matthias Fuchs <mat69@gmx.net>                *
- *   Copyright (C) 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>      *
- *   Copyright (C) 2015 Marco Martin <mart@kde.org>                        *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
- ***************************************************************************/
+/*
+ *   SPDX-FileCopyrightText: 2007 Tobias Koenig <tokoe@kde.org>
+ *   SPDX-FileCopyrightText: 2008 Marco Martin <notmart@gmail.com>
+ *   SPDX-FileCopyrightText: 2008-2011 Matthias Fuchs <mat69@gmx.net>
+ *   SPDX-FileCopyrightText: 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>
+ *   SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+ *
+ *   SPDX-License-Identifier: GPL-2.0-or-later
+ */
 
 #include "comic.h"
 #include "comicarchivedialog.h"
