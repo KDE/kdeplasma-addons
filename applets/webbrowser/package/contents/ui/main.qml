@@ -11,6 +11,7 @@ import QtWebEngine 1.5
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 2.0 as PlasmaComponents // for Menu+MenuItem
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ColumnLayout {
@@ -85,8 +86,8 @@ ColumnLayout {
         Layout.fillHeight: true
 
         // TODO use contentsSize but that crashes, now mostly for some sane initial size
-        Layout.preferredWidth: units.gridUnit * 36
-        Layout.preferredHeight: units.gridUnit * 18
+        Layout.preferredWidth: PlasmaCore.Units.gridUnit * 36
+        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 18
 
         // Binding it to e.g. width will be super slow on resizing
         Timer {

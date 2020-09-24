@@ -39,7 +39,7 @@ ColumnLayout {
 
                 background: Rectangle {
                     id: highlight
-                    implicitWidth: root.width - units.largeSpacing
+                    implicitWidth: root.width - Kirigami.Units.largeSpacing
                     visible: model.id == root.cfg_dictionary
                     color: Kirigami.Theme.highlightColor
                 }

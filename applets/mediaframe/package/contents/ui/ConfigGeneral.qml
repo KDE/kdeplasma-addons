@@ -103,7 +103,7 @@ Kirigami.FormLayout {
         id: comboBox
         Kirigami.FormData.label: i18nc("@label:listbox", "Image fill mode:")
 
-//         Layout.minimumWidth: units.gridUnit * 10
+//         Layout.minimumWidth: Kirigami.Units.gridUnit * 10
         currentIndex: fillModeToIndex(fillMode)
         textRole: "text"
         model: [

@@ -12,6 +12,7 @@
  */
 
 import QtQuick 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     property int val
@@ -23,19 +24,19 @@ Item {
     }
     Dot {
         x:   0
-        y:   (dotSize+units.smallSpacing)
+        y:   (dotSize+PlasmaCore.Units.smallSpacing)
         val: parent.val
         bit: 4
     }
     Dot {
         x:   0
-        y:   2*(dotSize+units.smallSpacing)
+        y:   2*(dotSize+PlasmaCore.Units.smallSpacing)
         val: parent.val
         bit: 2
     }
     Dot {
         x:   0
-        y:   3*(dotSize+units.smallSpacing)
+        y:   3*(dotSize+PlasmaCore.Units.smallSpacing)
         val: parent.val
         bit: 1
     }

@@ -9,6 +9,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ColumnLayout {
@@ -17,7 +18,7 @@ ColumnLayout {
     property alias model: categoryRepeater.model
     readonly property bool hasContent: model && model.length > 0 && (model[0].length > 0 || model[1].length > 0)
 
-    spacing: units.largeSpacing
+    spacing: PlasmaCore.Units.largeSpacing
 
     Repeater {
         id: categoryRepeater
