@@ -246,7 +246,7 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
         item.setIconName(iconNameForQuota(percent));
         item.setMountPoint(parts[0]);
         item.setUsage(percent);
-        item.setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", parts[0], percent));
+        item.setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38% used'", "%1: %2% used", parts[0], percent));
         item.setUsedString(i18nc("e.g.: 12 GiB of 20 GiB", "%1 of %2", fmt.formatByteSize(used), fmt.formatByteSize(softLimit)));
         item.setFreeString(i18nc("e.g.: 8 GiB free", "%1 free", fmt.formatByteSize(qMax(qint64(0), freeSize))));
 
