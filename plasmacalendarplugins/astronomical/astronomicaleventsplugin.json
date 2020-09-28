@@ -1,7 +1,7 @@
 {
     "Name": "Astronomical Events",
     "Description": "Calendar plugin for displaying astronomical events",
-    "Icon": "globe",
+    "Icon": "weather-clear-night",
     "ConfigUi": "astronomicalevents/AstronomicalEventsConfig.qml",
     "Authors": {
         "Name": "Friedrich W. H. Kossebau",
