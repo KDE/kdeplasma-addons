@@ -28,10 +28,8 @@ KateSessions::KateSessions(QObject *parent, const QVariantList &args)
     setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory
                         | Plasma::RunnerContext::NetworkLocation);
 
-    Plasma::RunnerSyntax s(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:."));
-    addSyntax(s);
-    setDefaultSyntax(Plasma::RunnerSyntax(QStringLiteral("kate"),
-                                          i18n("Lists all the Kate editor sessions in your account.")));
+    addSyntax(Plasma::RunnerSyntax(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:.")));
+    addSyntax(Plasma::RunnerSyntax(QStringLiteral("kate"), i18n("Lists all the Kate editor sessions in your account.")));
 
     m_sessionsFolderPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
                             + QStringLiteral("/kate/sessions");
