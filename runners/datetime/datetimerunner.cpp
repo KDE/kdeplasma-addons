@@ -26,6 +26,7 @@ DateTimeRunner::DateTimeRunner(QObject *parent, const QVariantList &args)
     addSyntax(Plasma::RunnerSyntax(dateWord + QLatin1String( " :q:" ), i18n("Displays the current date in a given timezone")));
     addSyntax(Plasma::RunnerSyntax(timeWord, i18n("Displays the current time")));
     addSyntax(Plasma::RunnerSyntax(timeWord + QLatin1String( " :q:" ), i18n("Displays the current time in a given timezone")));
+    setTriggerWords({timeWord, dateWord});
 }
 
 DateTimeRunner::~DateTimeRunner()

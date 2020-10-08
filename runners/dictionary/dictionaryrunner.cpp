@@ -32,23 +32,23 @@ void DictionaryRunner::reloadConfiguration()
 {
     KConfigGroup c = config();
     m_triggerWord = c.readEntry(CONFIG_TRIGGERWORD, i18nc("Trigger word before word to define", "define"));
-    if (!m_triggerWord.isEmpty())
+    if (!m_triggerWord.isEmpty()) {
         m_triggerWord.append(QLatin1Char(' '));
+        setTriggerWords({m_triggerWord});
+    } else {
+        setMatchRegex(QRegularExpression());
+    }
     setSyntaxes(QList<Plasma::RunnerSyntax>() << Plasma::RunnerSyntax(Plasma::RunnerSyntax(i18nc("Dictionary keyword", "%1:q:", m_triggerWord), i18n("Finds the definition of :q:."))));
 }
 
 void DictionaryRunner::match(Plasma::RunnerContext &context)
 {
     QString query = context.query();
-    if (!query.startsWith(m_triggerWord, Qt::CaseInsensitive))
-        return;
-    query.remove(0, m_triggerWord.length());
+    if (query.startsWith(m_triggerWord, Qt::CaseInsensitive))
+        query.remove(0, m_triggerWord.length());
     if (query.isEmpty())
         return;
     QString returnedQuery = m_engine->lookupWord(query);
-
-    if (!context.isValid())
-        return;
 
     static const QRegExp removeHtml(QLatin1String("<[^>]*>"));
     QString definitions(returnedQuery);

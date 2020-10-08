@@ -50,6 +50,8 @@ void ConverterRunner::init()
     addAction(copyUnitActionId, QIcon::fromTheme(QStringLiteral("edit-copy")),
               QStringLiteral("Copy unit and number"));
     actionList = {action(copyActionId), action(copyUnitActionId)};
+    setMinLetterCount(2);
+    setMatchRegex(valueRegex);
 }
 
 ConverterRunner::~ConverterRunner() = default;
@@ -57,10 +59,6 @@ ConverterRunner::~ConverterRunner() = default;
 void ConverterRunner::match(Plasma::RunnerContext &context)
 {
     const QString term = context.query();
-    if (term.size() < 2 || !context.isValid()) {
-        return;
-    }
-
     const QRegularExpressionMatch valueRegexMatch = valueRegex.match(context.query());
     if (!valueRegexMatch.hasMatch()) {
         return;

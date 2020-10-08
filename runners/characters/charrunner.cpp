@@ -44,16 +44,13 @@ void CharacterRunner::reloadConfiguration()
 
     addSyntax(Plasma::RunnerSyntax(m_triggerWord + QStringLiteral(":q:"),
                                    i18n("Creates Characters from :q: if it is a hexadecimal code or defined alias.")));
+    setTriggerWords({m_triggerWord});
+    setMinLetterCount(minLetterCount() + 1);
 }
 
 void CharacterRunner::match(Plasma::RunnerContext &context)
 {
     QString term = context.query().remove(QLatin1Char(' '));
-
-    if (term.length() < 2 || !term.startsWith(m_triggerWord) || !context.isValid()) {
-        return;
-    }
-
     term = term.remove(0, m_triggerWord.length()); //remove the triggerword
 
     //replace aliases by their hex.-code

@@ -43,6 +43,7 @@ KateSessions::KateSessions(QObject *parent, const QVariantList &args)
     connect(m_sessionWatch, &KDirWatch::created, this, &KateSessions::loadSessions);
     connect(m_sessionWatch, &KDirWatch::deleted, this, &KateSessions::loadSessions);
     loadSessions();
+    setTriggerWords({m_triggerWord});
 }
 
 KateSessions::~KateSessions()
@@ -60,20 +61,12 @@ void KateSessions::loadSessions()
     }
 
     m_sessions = sessions;
+    suspendMatching(m_sessions.isEmpty());
 }
 
 void KateSessions::match(Plasma::RunnerContext &context)
 {
     QString term = context.query();
-    if (term.length() < 3 || m_sessions.isEmpty() || !context.isValid()) {
-        return;
-    }
-    // Kate writes sessions as desktop actions in the local .desktop file =>
-    // they are already available from the "Applications" Runner and in the normal launcher
-    if (!term.startsWith(m_triggerWord, Qt::CaseInsensitive)) {
-        return;
-    }
-
     bool listAll = false;
     if (term.trimmed().compare(m_triggerWord, Qt::CaseInsensitive) == 0) {
         listAll = true;

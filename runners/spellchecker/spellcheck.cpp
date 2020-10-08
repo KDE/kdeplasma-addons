@@ -113,6 +113,14 @@ void SpellCheckRunner::reloadConfiguration()
         s.addExampleQuery(QStringLiteral(":q:"));
     }
 
+    if (m_requireTriggerWord) {
+        setTriggerWords({m_triggerWord});
+        setMinLetterCount(minLetterCount() + 2); // We want at least two letters after the trigger word
+    } else {
+        setMinLetterCount(2);
+        setMatchRegex(QRegularExpression());
+    }
+
     setSyntaxes({s});
 }
 
