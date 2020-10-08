@@ -89,7 +89,7 @@ void CharacterRunnerConfig::defaults()
     m_ui->edit_trigger->setText(DEFAULT_TRIGGERWORD.toString());
     m_ui->list->clear();
 
-    emit markAsChanged();
+    markAsChanged();
 }
 
 void CharacterRunnerConfig::addItem()

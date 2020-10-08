@@ -58,7 +58,6 @@ ConverterRunner::~ConverterRunner() = default;
 
 void ConverterRunner::match(Plasma::RunnerContext &context)
 {
-    const QString term = context.query();
     const QRegularExpressionMatch valueRegexMatch = valueRegex.match(context.query());
     if (!valueRegexMatch.hasMatch()) {
         return;

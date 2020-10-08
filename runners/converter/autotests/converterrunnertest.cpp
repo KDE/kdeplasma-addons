@@ -69,7 +69,7 @@ void ConverterRunnerTest::testSpecificTargetUnit()
     runner->match(context);
 
     QCOMPARE(context.matches().count(), 1);
-    QCOMPARE(context.matches().first().text(), QStringLiteral("100 centimeters (cm)"));
+    QCOMPARE(context.matches().constFirst().text(), QStringLiteral("100 centimeters (cm)"));
 }
 
 /**
@@ -94,13 +94,13 @@ void ConverterRunnerTest::testCaseSensitiveUnits()
     runner->match(context);
 
     QCOMPARE(context.matches().count(), 1);
-    QCOMPARE(context.matches().first().text(), QStringLiteral("1,000,000,000 milliseconds (ms)"));
+    QCOMPARE(context.matches().constFirst().text(), QStringLiteral("1,000,000,000 milliseconds (ms)"));
 
     Plasma::RunnerContext context2;
     context2.setQuery(QStringLiteral("1,000,000,000milliseconds>Ms"));
     runner->match(context2);
     QCOMPARE(context2.matches().count(), 1);
-    QCOMPARE(context2.matches().first().text(), "1 megasecond (Ms)");
+    QCOMPARE(context2.matches().constFirst().text(), "1 megasecond (Ms)");
 }
 
 /**
@@ -135,7 +135,7 @@ void ConverterRunnerTest::testLettersAndCurrency()
     runner->match(context);
 
     QCOMPARE(context.matches().count(), 1);
-    QVERIFY(context.matches().first().text().contains(QLatin1String("Canadian dollars (CAD)")));
+    QVERIFY(context.matches().constFirst().text().contains(QLatin1String("Canadian dollars (CAD)")));
 }
 
 /**
@@ -160,7 +160,7 @@ void ConverterRunnerTest::testFractions()
     runner->match(context);
 
     QCOMPARE(context.matches().count(), 1);
-    QCOMPARE(context.matches().first().text(), QStringLiteral("200 centimeters (cm)"));
+    QCOMPARE(context.matches().constFirst().text(), QStringLiteral("200 centimeters (cm)"));
 }
 
 /**
@@ -223,7 +223,7 @@ void ConverterRunnerTest::testNegativeValue()
     runner->match(context);
 
     QCOMPARE(context.matches().count(), 1);
-    QCOMPARE(context.matches().first().text(), "-400 centimeters (cm)");
+    QCOMPARE(context.matches().constFirst().text(), "-400 centimeters (cm)");
 }
 
 QTEST_MAIN(ConverterRunnerTest)
