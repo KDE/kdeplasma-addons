@@ -223,7 +223,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         const bool correct = speller->checkAndSuggest(query,suggestions);
         if (correct) {
             Plasma::QueryMatch match(this);
-            match.setType(Plasma::QueryMatch::InformationalMatch);
+            match.setType(Plasma::QueryMatch::ExactMatch);
             match.setIconName(QStringLiteral("checkbox"));
             match.setText(query);
             match.setSubtext(i18nc("Term is spelled correctly", "Correct"));
@@ -232,7 +232,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         } else {
             for (const auto& suggestion : qAsConst(suggestions)) {
                 Plasma::QueryMatch match(this);
-                match.setType(Plasma::QueryMatch::InformationalMatch);
+                match.setType(Plasma::QueryMatch::ExactMatch);
                 match.setIconName(QStringLiteral("edit-rename"));
                 match.setText(suggestion);
                 match.setSubtext(i18n("Suggested term"));
@@ -242,7 +242,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         }
     } else {
         Plasma::QueryMatch match(this);
-        match.setType(Plasma::QueryMatch::InformationalMatch);
+        match.setType(Plasma::QueryMatch::ExactMatch);
         match.setIconName(QStringLiteral("data-error"));
         match.setText(i18n("No dictionary found, please install hspell"));
         context.addMatch(match);
