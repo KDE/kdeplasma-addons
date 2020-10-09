@@ -186,11 +186,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
     QSharedPointer<Sonnet::Speller> speller = m_spellers[QString()];
 
     if (speller->isValid()) {
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-        QStringList terms = query.split(QLatin1Char(' '), QString::SkipEmptyParts);
-#else
         QStringList terms = query.split(QLatin1Char(' '), Qt::SkipEmptyParts);
-#endif
         const QString lang = findLang(terms);
         //If we found a language, create a new speller object using it.
         if (!lang.isEmpty()) {

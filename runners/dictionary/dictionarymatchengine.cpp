@@ -8,9 +8,8 @@
 #include <QThread>
 #include <QMetaMethod>
 #include <QDebug>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 #include <QDeadlineTimer>
-#endif
+
 DictionaryMatchEngine::DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngine, QObject *parent)
     : QObject(parent),
       m_dictionaryEngine(dictionaryEngine)
@@ -42,11 +41,7 @@ QString DictionaryMatchEngine::lookupWord(const QString &word)
 
     QMetaObject::invokeMethod(this, "sourceAdded", Qt::QueuedConnection, Q_ARG(const QString&, word));
     QMutexLocker locker(&data.mutex);
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    if (!data.waitCondition.wait(&data.mutex, 30 * 1000)) // Timeout after 30 seconds
-#else
     if (!data.waitCondition.wait(&data.mutex, QDeadlineTimer(30 * 1000))) // Timeout after 30 seconds
-#endif
         qDebug() << "The dictionary data engine timed out (word:" << word << ")";
     locker.unlock();
 

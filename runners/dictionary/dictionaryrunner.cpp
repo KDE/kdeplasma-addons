@@ -55,11 +55,7 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
     definitions.remove(QLatin1Char('\r')).remove(removeHtml);
     while (definitions.contains(QLatin1String("  ")))
         definitions.replace(QLatin1String("  "), QLatin1String(" "));
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    QStringList lines = definitions.split(QLatin1Char('\n'), QString::SkipEmptyParts);
-#else
     QStringList lines = definitions.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
-#endif
     if (lines.length() < 2)
         return;
     lines.removeFirst();

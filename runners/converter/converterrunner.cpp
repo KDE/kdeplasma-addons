@@ -143,11 +143,7 @@ QPair<bool, double> ConverterRunner::stringToDouble(const QStringRef &value)
 
 QPair<bool, double> ConverterRunner::getValidatedNumberValue(const QString &value)
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    const auto fractionParts = value.splitRef(QLatin1Char('/'), QString::SkipEmptyParts);
-#else
     const auto fractionParts = value.splitRef(QLatin1Char('/'), Qt::SkipEmptyParts);
-#endif
     if (fractionParts.isEmpty() || fractionParts.count() > 2) {
         return {false, 0};
     }

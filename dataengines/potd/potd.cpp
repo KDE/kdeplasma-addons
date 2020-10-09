@@ -80,11 +80,7 @@ bool PotdEngine::updateSource( const QString &identifier, bool loadCachedAlways 
         }
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    const QStringList parts = identifier.split( QLatin1Char( ':' ), QString::SkipEmptyParts );
-#else
     const QStringList parts = identifier.split( QLatin1Char( ':' ), Qt::SkipEmptyParts );
-#endif
     if (parts.empty()) {
         qDebug() << "invalid identifier";
         return false;
