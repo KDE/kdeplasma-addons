@@ -180,9 +180,9 @@ QList<KUnitConversion::Unit> ConverterRunner::createResultUnits(QString &outputU
         } else {
             // Autocompletion for the target units
             outputUnitString = outputUnitString.toUpper();
-            for (const auto &unitStringKey: compatibleUnits.keys()) {
-                if (unitStringKey.startsWith(outputUnitString)) {
-                    outputUnit = category.unit(compatibleUnits.value(unitStringKey));
+            for (auto it = compatibleUnits.constBegin(); it != compatibleUnits.constEnd(); it++) {
+                if (it.key().startsWith(outputUnitString)) {
+                    outputUnit = category.unit(it.value());
                     if (!units.contains(outputUnit)) {
                         units << outputUnit;
                     }
@@ -226,8 +226,10 @@ void ConverterRunner::insertCompatibleUnits()
     }
 
     // Add all units as uppercase in the map
-    for (const auto &category: converter.categories()) {
-        for (const auto &unit: category.allUnits()) {
+    const auto categories = converter.categories();
+    for (const auto &category: categories) {
+        const auto allUnits = category.allUnits();
+        for (const auto &unit : allUnits) {
             compatibleUnits.insert(unit.toUpper(), unit);
         }
     }
