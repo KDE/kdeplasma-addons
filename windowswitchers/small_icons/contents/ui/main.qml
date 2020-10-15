@@ -66,7 +66,7 @@ KWin.Switcher {
                     right: parent.right
                     bottom: parent.bottom
                 }
-                PlasmaComponent3.Label {
+                PlasmaComponents3.Label {
                     id: textItem
                     text: icons.currentItem ? icons.currentItem.caption : ""
                     horizontalAlignment: Text.AlignHCenter
