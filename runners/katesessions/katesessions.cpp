@@ -25,8 +25,6 @@ KateSessions::KateSessions(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
     setObjectName(QStringLiteral("Kate Sessions"));
-    setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory
-                        | Plasma::RunnerContext::NetworkLocation);
 
     addSyntax(Plasma::RunnerSyntax(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:.")));
     addSyntax(Plasma::RunnerSyntax(QStringLiteral("kate"), i18n("Lists all the Kate editor sessions in your account.")));

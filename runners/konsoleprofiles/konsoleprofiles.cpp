@@ -25,10 +25,6 @@ KonsoleProfiles::KonsoleProfiles(QObject *parent, const QVariantList &args)
 {
     setObjectName(QStringLiteral("Konsole Profiles"));
 
-    setIgnoredTypes(Plasma::RunnerContext::File
-                        | Plasma::RunnerContext::Directory
-                        | Plasma::RunnerContext::NetworkLocation);
-
     Plasma::RunnerSyntax s(QStringLiteral(":q:"), i18n("Finds Konsole profiles matching :q:."));
     s.addExampleQuery(QStringLiteral("konsole :q:"));
     addSyntax(s);

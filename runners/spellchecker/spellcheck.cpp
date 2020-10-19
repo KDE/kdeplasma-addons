@@ -21,7 +21,6 @@ SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
 {
     Q_UNUSED(args)
     setObjectName(QStringLiteral("Spell Checker"));
-    setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     setSpeed(AbstractRunner::SlowSpeed);
 }
 

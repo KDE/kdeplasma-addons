@@ -19,9 +19,6 @@ ConverterRunner::ConverterRunner(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
     setObjectName(QStringLiteral("Converter"));
-    //can not ignore commands: we have things like m4
-    setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
-        Plasma::RunnerContext::NetworkLocation);
 
     const QString description = i18n("Converts the value of :q: when :q: is made up of "
                                      "\"value unit [>, to, as, in] unit\". You can use the "

@@ -20,9 +20,6 @@ CharacterRunner::CharacterRunner(QObject *parent, const QVariantList &args)
 {
     Q_UNUSED(args)
     setObjectName(QStringLiteral("CharacterRunner"));
-    setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
-        Plasma::RunnerContext::NetworkLocation | Plasma::RunnerContext::Executable |
-        Plasma::RunnerContext::ShellCommand);
 }
 
 CharacterRunner::~CharacterRunner()
@@ -31,7 +28,6 @@ CharacterRunner::~CharacterRunner()
 
 void CharacterRunner::reloadConfiguration()
 {
-
     const KConfigGroup grp = config();
     m_triggerWord = grp.readEntry(CONFIG_TRIGGERWORD, DEFAULT_TRIGGERWORD.toString());
     m_aliases = grp.readEntry(CONFIG_ALIASES, QStringList());

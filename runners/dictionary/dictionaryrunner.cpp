@@ -18,9 +18,6 @@ DictionaryRunner::DictionaryRunner(QObject *parent, const QVariantList &args)
     setSpeed(SlowSpeed);
     setPriority(LowPriority);
     setObjectName(QLatin1String("Dictionary"));
-    setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
-            Plasma::RunnerContext::NetworkLocation | Plasma::RunnerContext::Executable |
-            Plasma::RunnerContext::ShellCommand);
 }
 
 void DictionaryRunner::init()
