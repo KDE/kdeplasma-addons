@@ -43,9 +43,9 @@ void ConverterRunner::init()
     insertCompatibleUnits();
 
     addAction(copyActionId, QIcon::fromTheme(QStringLiteral("edit-copy")),
-              QStringLiteral("Copy number"));
+              i18n("Copy number"));
     addAction(copyUnitActionId, QIcon::fromTheme(QStringLiteral("edit-copy")),
-              QStringLiteral("Copy unit and number"));
+              i18n("Copy unit and number"));
     actionList = {action(copyActionId), action(copyUnitActionId)};
     setMinLetterCount(2);
     setMatchRegex(valueRegex);
