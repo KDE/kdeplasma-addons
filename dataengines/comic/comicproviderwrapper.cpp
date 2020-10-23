@@ -7,10 +7,8 @@
 
 #include "comicproviderwrapper.h"
 #include "comicproviderkross.h"
-#include "comicprovider.h"
 
 #include <QTimer>
-#include <QBuffer>
 #include <QPainter>
 #include <QTextCodec>
 #include <QUrl>

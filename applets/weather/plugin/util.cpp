@@ -7,7 +7,6 @@
 #include "util.h"
 
 // KF
-#include <KUnitConversion/Converter>
 #include <KUnitConversion/Value>
 #include <KLocalizedString>
 // Qt

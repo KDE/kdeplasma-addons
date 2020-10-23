@@ -19,7 +19,6 @@
 #include <QRandomGenerator>
 
 #include <KIO/StoredTransferJob>
-#include <KIO/Job>
 
 MediaFrame::MediaFrame(QObject *parent) : QObject(parent)
 {

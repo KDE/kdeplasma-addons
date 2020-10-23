@@ -8,7 +8,6 @@
 #include "fifteenimageprovider.h"
 
 // Qt
-#include <QQmlEngine>
 #include <QDebug>
 
 void FifteenPuzzlePlugin::registerTypes(const char* uri)

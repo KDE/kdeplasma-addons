@@ -8,7 +8,6 @@
 #include "QuotaListModel.h"
 
 // Qt
-#include <QQmlEngine>
 
 void DiskQuotaPlugin::registerTypes (const char *uri)
 {

@@ -8,7 +8,6 @@
 #include "mediaframe.h"
 
 // Qt
-#include <QQmlEngine>
 
 void MediaFramePlugin::registerTypes(const char *uri)
 {

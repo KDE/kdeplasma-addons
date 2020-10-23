@@ -11,7 +11,6 @@
 #include "note.h"
 
 // Qt
-#include <QQmlEngine>
 #include <QFile>
 
 class NotesHelper : public QObject

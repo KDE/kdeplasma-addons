@@ -9,7 +9,6 @@
 #include "dictionariesmodel.h"
 
 // Qt
-#include <QQmlEngine>
 
 void DictPlugin::registerTypes (const char *uri)
 {

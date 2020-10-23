@@ -8,7 +8,6 @@
 
 // Qt
 #include <QColor>
-#include <QQmlEngine>
 
 #include "grabwidget.h"
 

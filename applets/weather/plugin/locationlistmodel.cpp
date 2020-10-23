@@ -8,7 +8,6 @@
 #include "locationlistmodel.h"
 
 #include <Plasma/DataContainer>
-#include <Plasma/DataEngine>
 
 #include <KLocalizedString>
 

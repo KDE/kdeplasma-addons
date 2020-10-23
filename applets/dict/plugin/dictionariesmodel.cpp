@@ -5,7 +5,6 @@
  */
 
 #include "dictionariesmodel.h"
-#include <Plasma/DataEngine>
 #include <Plasma/DataContainer>
 #include <QDebug>
 

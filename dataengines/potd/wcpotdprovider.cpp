@@ -11,7 +11,6 @@
 #include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonArray>
-#include <QImage>
 #include <QDebug>
 
 #include <KPluginFactory>
