@@ -136,7 +136,7 @@ void QuicklaunchPrivate::addLauncher(bool isPopup)
 
 static QString locateLocal(const QString &file)
 {
-    const QString &dataPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+    const QString &dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     const QString appDataPath = QStringLiteral("%1/quicklaunch").arg(dataPath);
     QDir().mkpath(appDataPath);
     return QStringLiteral("%1/%2").arg(appDataPath, file);
