@@ -430,12 +430,9 @@ Item {
         observationModel: root.observationModel
     }
 
-    Component.onCompleted: {
-        // workaround for missing note about being in systray or similar (kde bug #388995)
-        // guess from cointainer structure data and make available to config page
-        plasmoid.nativeInterface.needsToBeSquare =
-            (plasmoid.parent !== null &&
-            ((plasmoid.parent.pluginName === 'org.kde.plasma.private.systemtray' ||
-              plasmoid.parent.objectName === 'taskItemContainer')));
+    Binding {
+        target: plasmoid.nativeInterface
+        property: "needsToBeSquare"
+        value: plasmoid.containmentType === PlasmaCore.Types.CustomEmbeddedContainment
     }
 }
