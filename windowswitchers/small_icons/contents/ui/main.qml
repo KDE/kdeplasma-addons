@@ -45,7 +45,7 @@ KWin.Switcher {
                 }
                 Connections {
                     target: tabBox
-                    onCurrentIndexChanged: {icons.currentIndex = tabBox.currentIndex;}
+                    function onCurrentIndexChanged() {icons.currentIndex = tabBox.currentIndex;}
                 }
             }
             Item {

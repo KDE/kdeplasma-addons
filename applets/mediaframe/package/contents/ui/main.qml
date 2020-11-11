@@ -75,7 +75,9 @@ Item {
 
     Connections {
         target: plasmoid.configuration
-        onPathListChanged: loadPathList()
+        function onPathListChanged() {
+            loadPathList()
+        }
     }
 
     function addItem(item) {
@@ -129,7 +131,7 @@ Item {
     Connections {
         target: items
 
-        onItemChanged: {
+        function onItemChanged(path) {
             console.log("item",path,"changed")
             activeSource = ""
             setActiveSource(path)
@@ -443,7 +445,7 @@ Item {
 
     Connections {
         target: plasmoid
-        onExternalData: {
+        function onExternalData(mimetype, data) {
             var type = items.isDir(data) ? "folder" : "file";
             var item = {
                 "path": data,

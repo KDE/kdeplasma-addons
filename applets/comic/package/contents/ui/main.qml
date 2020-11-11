@@ -48,11 +48,11 @@ Item {
     Connections {
         target: plasmoid.nativeInterface
 
-        onComicsModelChanged: {
+        function onComicsModelChanged() {
             comicTabbar.currentTab = comicTabbar.layout.children[1];
         }
 
-        onTabHighlightRequest: {
+        function onTabHighlightRequest(id, highlight) {
             for (var i = 0; i < comicTabbar.layout.children.length; ++i) {
                 var button = comicTabbar.layout.children[i];
 
@@ -62,7 +62,7 @@ Item {
             }
         }
 
-        onShowNextNewStrip: {
+        function onShowNextNewStrip() {
             var firstButton = undefined;
 
             for (var i = 0; i < comicTabbar.layout.children.length; ++i) {

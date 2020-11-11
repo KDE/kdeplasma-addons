@@ -216,7 +216,7 @@ KWin.Switcher {
 
                 Connections {
                     target: tabBox
-                    onCurrentIndexChanged: {
+                    function onCurrentIndexChanged() {
                         thumbnailGridView.currentIndex = tabBox.currentIndex;
                     }
                 }

@@ -46,7 +46,7 @@ KWin.Switcher {
                 }
                 Connections {
                     target: tabBox
-                    onCurrentIndexChanged: {icons.currentIndex = tabBox.currentIndex;}
+                    function onCurrentIndexChanged() {icons.currentIndex = tabBox.currentIndex;}
                 }
             }
             Item {
@@ -83,7 +83,7 @@ KWin.Switcher {
                     Component.onCompleted: textItem.calculateMaxWidth()
                     Connections {
                         target: dialogMainItem
-                        onWidthChanged: {
+                        function onWidthChanged() {
                             textItem.calculateMaxWidth();
                             textItem.constrainWidth();
                         }

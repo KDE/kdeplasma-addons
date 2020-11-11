@@ -54,7 +54,7 @@ Item {
         // uninstalling filelight, the selection highlight remains fixed (which is wrong)
         Connections {
             target: diskQuota
-            onCleanUpToolInstalledChanged: {
+            function onCleanUpToolInstalledChanged() {
                 if (!diskQuota.cleanUpToolInstalled) {
                     listView.currentIndex = -1
                 }

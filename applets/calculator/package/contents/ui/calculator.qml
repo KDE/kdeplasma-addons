@@ -236,7 +236,7 @@ QQC2.Control {
 
     Connections {
         target: plasmoid;
-        onPopupEvent: {
+        function onPopupEvent() {
             main.focus = true;
         }
     }

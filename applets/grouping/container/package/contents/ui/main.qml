@@ -33,7 +33,7 @@ Item {
 
     Connections {
         target: plasmoid.nativeInterface
-        onInternalContainmentItemChanged: {
+        function onInternalContainmentItemChanged() {
             root.internalContainmentItem = plasmoid.nativeInterface.internalContainmentItem;
             root.internalContainmentItem.parent = root;
             root.internalContainmentItem.anchors.fill = root;

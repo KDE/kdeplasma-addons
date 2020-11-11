@@ -50,9 +50,9 @@ Kirigami.FormLayout {
 
         Connections {
             target: root
-            onHoursIntervalValueChanged: hoursInterval.value = root.hoursIntervalValue
-            onMinutesIntervalValueChanged: minutesInterval.value = root.minutesIntervalValue
-            onSecondsIntervalValueChanged: secondsInterval.value = root.secondsIntervalValue
+            function onHoursIntervalValueChanged() {hoursInterval.value = root.hoursIntervalValue}
+            function onMinutesIntervalValueChanged() {minutesInterval.value = root.minutesIntervalValue}
+            function onSecondsIntervalValueChanged() {secondsInterval.value = root.secondsIntervalValue}
         }
         SpinBox {
             id: hoursInterval

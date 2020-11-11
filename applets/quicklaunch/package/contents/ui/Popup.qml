@@ -77,7 +77,7 @@ Item {
 
     Connections {
         target: plasmoid.configuration
-        onPopupUrlsChanged: {
+        function onPopupUrlsChanged() {
             popupModel.urlsChanged.disconnect(saveConfiguration);
             popupModel.setUrls(plasmoid.configuration.popupUrls);
             popupModel.urlsChanged.connect(saveConfiguration);

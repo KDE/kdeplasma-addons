@@ -270,7 +270,7 @@ Item {
 
         Connections {
             target: plasmoid
-            onExpandedChanged: {
+            function onExpandedChanged() {
                 if (plasmoid.expanded) {
                     fullRoot.forceActiveFocus()
                 }

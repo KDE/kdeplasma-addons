@@ -231,7 +231,7 @@ Item {
 
     Connections {
         target: plasmoid.configuration
-        onBoardSizeChanged: {
+        function onBoardSizeChanged() {
             main.fillBoard();
             solvedImage.update();
         }
@@ -239,7 +239,7 @@ Item {
 
     Connections {
         target: plasmoid.configuration
-        onImagePathChanged: {
+        function onImagePathChanged() {
             main.fillBoard();
             solvedImage.update();
         }

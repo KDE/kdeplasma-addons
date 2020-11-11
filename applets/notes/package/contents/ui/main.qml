@@ -64,17 +64,17 @@ PlasmaCore.SvgItem {
 
     Connections {
         target: plasmoid
-        onExpandedChanged: {
+        function onExpandedChanged(expanded) {
             // don't autofocus when we're on the desktop
             if (expanded && (plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal)) {
                 mainTextArea.forceActiveFocus()
             }
         }
-        onActivated: {
+        function onActivated() {
             // FIXME doing forceActiveFocus here directly doesn't work
             forceFocusTimer.restart()
         }
-        onExternalData: {
+        function onExternalData(mimetype, data) {
             // if we dropped a text file, we want its contents,
             // otherwise we take the external data verbatim
             var contents = NotesHelper.fileContents(data) || data

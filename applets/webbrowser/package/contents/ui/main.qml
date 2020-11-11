@@ -149,13 +149,13 @@ ColumnLayout {
             Connections {
                 target: plasmoid.configuration
                 
-                onMinViewWidthChanged: updateZoomTimer.start()
+                function onMinViewWidthChanged() {updateZoomTimer.start()}
 
-                onUseMinViewWidthChanged: updateZoomTimer.start()
+                function onUseMinViewWidthChanged() {updateZoomTimer.start()}
 
-                onConstantZoomFactorChanged: updateZoomTimer.start()
+                function onConstantZoomFactorChanged() {updateZoomTimer.start()}
 
-                onUseConstantZoomChanged: updateZoomTimer.start()
+                function onUseConstantZoomChanged() {updateZoomTimer.start()}
             }
 
             onLinkHovered: {

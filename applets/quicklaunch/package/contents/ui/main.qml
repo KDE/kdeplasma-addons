@@ -243,7 +243,7 @@ Item {
 
     Connections {
         target: plasmoid.configuration
-        onLauncherUrlsChanged: {
+       function onLauncherUrlsChanged() {
             launcherModel.urlsChanged.disconnect(saveConfiguration);
             launcherModel.setUrls(plasmoid.configuration.launcherUrls);
             launcherModel.urlsChanged.connect(saveConfiguration);
