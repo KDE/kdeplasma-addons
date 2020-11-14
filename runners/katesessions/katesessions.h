@@ -17,7 +17,7 @@ class KateSessions : public Plasma::AbstractRunner {
     Q_OBJECT
 
     public:
-        explicit KateSessions(QObject *parent, const QVariantList& args);
+        explicit KateSessions(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
         ~KateSessions() override;
 
         void match(Plasma::RunnerContext &context) override;
