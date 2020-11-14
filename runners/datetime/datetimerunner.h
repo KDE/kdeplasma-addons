@@ -24,7 +24,7 @@ class DateTimeRunner : public Plasma::AbstractRunner
     Q_OBJECT
 
 public:
-    DateTimeRunner(QObject *parent, const QVariantList &args);
+    DateTimeRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
     ~DateTimeRunner() override;
 
     void match(Plasma::RunnerContext &context) override;

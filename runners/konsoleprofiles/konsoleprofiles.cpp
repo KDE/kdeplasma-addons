@@ -20,8 +20,8 @@
 #include <QStandardPaths>
 
 
-KonsoleProfiles::KonsoleProfiles(QObject *parent, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, args)
+KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : Plasma::AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("Konsole Profiles"));
 

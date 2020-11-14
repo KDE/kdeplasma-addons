@@ -14,7 +14,7 @@ class CharacterRunner : public Plasma::AbstractRunner
   Q_OBJECT
 
   public:
-    CharacterRunner(QObject* parent, const QVariantList &args);
+    CharacterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
     ~CharacterRunner() override;
 
     void reloadConfiguration() override;

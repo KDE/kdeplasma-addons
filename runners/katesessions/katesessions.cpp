@@ -21,8 +21,8 @@
 
 K_EXPORT_PLASMA_RUNNER_WITH_JSON(KateSessions, "plasma-runner-katesessions.json")
 
-KateSessions::KateSessions(QObject *parent, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, args)
+KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : Plasma::AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("Kate Sessions"));
 

@@ -17,8 +17,8 @@
 static const QString dateWord = i18nc("Note this is a KRunner keyword", "date");
 static const QString timeWord = i18nc("Note this is a KRunner keyword", "time");
 
-DateTimeRunner::DateTimeRunner(QObject *parent, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, args)
+DateTimeRunner::DateTimeRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : Plasma::AbstractRunner(parent, metaData, args)
 {
     setObjectName(QLatin1String( "DataTimeRunner" ));
 

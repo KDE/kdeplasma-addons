@@ -16,10 +16,9 @@
 
 #include <KLocalizedString>
 
-SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, args)
+SpellCheckRunner::SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : Plasma::AbstractRunner(parent, metaData, args)
 {
-    Q_UNUSED(args)
     setObjectName(QStringLiteral("Spell Checker"));
     setSpeed(AbstractRunner::SlowSpeed);
 }

@@ -10,8 +10,8 @@
 
 static const char CONFIG_TRIGGERWORD[] = "triggerWord";
 
-DictionaryRunner::DictionaryRunner(QObject *parent, const QVariantList &args)
-    : AbstractRunner(parent, args)
+DictionaryRunner::DictionaryRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : AbstractRunner(parent, metaData, args)
 {
     m_engine = new DictionaryMatchEngine(dataEngine(QStringLiteral("dict")), this);
 
