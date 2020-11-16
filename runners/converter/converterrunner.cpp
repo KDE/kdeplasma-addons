@@ -15,8 +15,8 @@
 
 #include <cmath>
 
-ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, metaData, args)
+ConverterRunner::ConverterRunner(QObject *parent, const QVariantList &args)
+    : Plasma::AbstractRunner(parent, args)
 {
     setObjectName(QStringLiteral("Converter"));
 

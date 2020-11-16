@@ -25,7 +25,7 @@ class KonsoleProfiles: public Plasma::AbstractRunner
 Q_OBJECT
 
 public:
-    explicit KonsoleProfiles(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    explicit KonsoleProfiles(QObject *parent, const QVariantList &args);
     ~KonsoleProfiles() override;
 
     void init() override;

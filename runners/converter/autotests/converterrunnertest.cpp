@@ -41,7 +41,7 @@ void ConverterRunnerTest::initTestCase()
     setlocale(LC_ALL, "C.utf8");
     qputenv("LANG", "en_US");
     QLocale::setDefault(QLocale::English);
-    runner = new ConverterRunner(this, KPluginMetaData(), QVariantList());
+    runner = new ConverterRunner(this, QVariantList());
     runner->init();
 }
 

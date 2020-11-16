@@ -14,7 +14,7 @@ class DictionaryRunner : public Plasma::AbstractRunner
     Q_OBJECT
 
 public:
-    explicit DictionaryRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    explicit DictionaryRunner(QObject *parent, const QVariantList &args);
     void match(Plasma::RunnerContext &context) override;
     void reloadConfiguration() override;
 

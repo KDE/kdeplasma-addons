@@ -21,7 +21,7 @@ class SpellCheckRunner : public Plasma::AbstractRunner
 Q_OBJECT
 
 public:
-    SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    SpellCheckRunner(QObject* parent, const QVariantList &args);
     ~SpellCheckRunner() override;
 
     void match(Plasma::RunnerContext &context) override;
