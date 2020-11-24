@@ -30,7 +30,6 @@ add_library(plasma_packagestructure_comic MODULE ${comicpackage_SRCS})
 target_link_libraries( plasma_packagestructure_comic
     KF5::WidgetsAddons
     KF5::Plasma
-    KF5::Service
     KF5::KrossCore
     KF5::KrossUi
     KF5::I18n

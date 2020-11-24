@@ -9,9 +9,7 @@
 
 #include <QDate>
 #include <QObject>
-#include <KPluginInfo>
-#include <KPluginFactory>
-
+#include <KPluginMetaData>
 #include "plasma_comic_export.h"
 
 class QImage;

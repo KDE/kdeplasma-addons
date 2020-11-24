@@ -6,7 +6,6 @@
 
 #include "comicproviderkross.h"
 #include "comic_package.h"
-#include <KPluginFactory>
 #include <KPackage/PackageLoader>
 
 KPackage::PackageStructure *ComicProviderKross::m_packageStructure(nullptr);

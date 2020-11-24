@@ -12,7 +12,6 @@
 
 #include <KIO/Job>
 #include <KIO/StoredTransferJob>
-#include <KPluginMetaData>
 
 class ComicProvider::Private
 {

@@ -19,8 +19,6 @@
 #include <Kross/Core/Interpreter>
 #include <Kross/Core/Manager>
 
-#include <Plasma/PluginLoader>
-
 QStringList ComicProviderWrapper::mExtensions;
 
 ImageWrapper::ImageWrapper(QObject *parent, const QByteArray &data)
