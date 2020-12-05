@@ -290,13 +290,13 @@ void ComicApplet::updateUsedComics()
 
             const QString name = data.data().toString();
             const QString identifier = data.data( Qt::UserRole ).toString();
-            const QString iconPath = data.data( Qt::DecorationRole ).value<QIcon>().name();
+            const QIcon icon = data.data( Qt::DecorationRole ).value<QIcon>();
             //found a newer strip last time, which was not visited
 
             if (mCheckNewComicStripsInterval && !cg.readEntry(QLatin1String("lastStripVisited_") + identifier, true)) {
-                mActiveComicModel->addComic(identifier, name, iconPath, true);
+                mActiveComicModel->addComic(identifier, name, icon, true);
             } else {
-                mActiveComicModel->addComic(identifier, name, iconPath);
+                mActiveComicModel->addComic(identifier, name, icon);
             }
 
             ++tab;
