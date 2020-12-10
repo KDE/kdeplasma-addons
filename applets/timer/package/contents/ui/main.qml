@@ -107,27 +107,27 @@ Item {
         service.startOperationCall(operation);
     }
 
-    Component.onCompleted: {
+    Component.onCompleted: rebuildMenu()
+
+    Connections {
+        target: plasmoid.configuration
+        onPredefinedTimersChanged: rebuildMenu()
+    }
+
+    function rebuildMenu() {
+        plasmoid.clearActions();
         plasmoid.setAction("timerStart", i18nc("@action", "&Start"));
         plasmoid.setAction("timerStop", i18nc("@action", "S&top"));
         plasmoid.setAction("timerReset", i18nc("@action", "&Reset"));
         plasmoid.setActionSeparator("separator0");
 
-        for (var predefinedTimer in plasmoid.configuration.predefinedTimers) {
-            plasmoid.setAction("predefined_timer_" + plasmoid.configuration.predefinedTimers[predefinedTimer],
-                               secondsToDisplayableString(plasmoid.configuration.predefinedTimers[predefinedTimer]));
+        for (var predefinedTimer of plasmoid.configuration.predefinedTimers) {
+            plasmoid.setAction("predefined_timer_" + predefinedTimer,
+                               TimerPlasmoid.Timer.secondsToString(predefinedTimer, "hh:mm:ss"));
         }
         plasmoid.setActionSeparator("separator1");
     }
 
-    function secondsToDisplayableString(sec) {
-        return ~~((sec / (60*60)) / 10) + "" +
-            (~~(~~(sec / (60*60))) % 10) + ":" +
-            ~~(~~((sec % (60*60)) / 60) / 10) + "" +
-            ~~((sec % (60*60)) / 60) % 10 + ":" +
-            ~~((sec % 60) / 10) + "" +
-            (sec % 60) % 10;
-    }
     function startTimer() {
         running = true;
         suspended = false;
@@ -159,7 +159,7 @@ Item {
     }
 
     function actionTriggered(actionName) {
-        if (actionName.indexOf("predefined_timer_") == 0) {
+        if (actionName.indexOf("predefined_timer_") === 0) {
             seconds = actionName.replace("predefined_timer_", "");
             startTimer();
         }

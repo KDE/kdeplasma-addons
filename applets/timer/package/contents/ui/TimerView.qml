@@ -12,32 +12,27 @@ import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
 Item {
     id: main
-
-    readonly property date savedAt: plasmoid.configuration.savedAt;
-
-    // display seconds in addition to hours and minutes (default: enabled)
-    readonly property bool showSeconds: plasmoid.configuration.showSeconds;
-
-    readonly property real digits: (showSeconds) ? 7 : 4.5;
-    readonly property int digitH: ((height / 2) * digits < width ? height : ((width - (digits - 1)) / digits) * 2);
-    readonly property int digitW: digitH / 2;
-
-    PlasmaCore.Svg {
-        id: timerSvg
-        imagePath: "widgets/timer"
-    }
+    readonly property int secondsForAlert: 60
 
     Column {
-        anchors.centerIn: parent;
+
         Text {
-            id: titleLabel;
-            text: root.title;
+            id: titleLabel
+            text: root.title
             visible: root.showTitle;
             horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: parent.parent.height - digitH;
+            height: 0.25 * main.height
+            font.pixelSize: 0.5 * height
         }
-        Row {
-            id: timerDigits;
+        
+        TimerEdit {
+            id: timerDigits
+            value: root.seconds
+            editable: !root.running
+            alertMode: root.running && (root.seconds < main.secondsForAlert)
+            width: main.width
+            height: main.height - titleLabel.height
+            onDigitModified: root.seconds += valueDelta
             SequentialAnimation on opacity {
                 running: root.suspended;
                 loops: Animation.Infinite;
@@ -59,54 +54,6 @@ Item {
                 PauseAnimation {
                     duration: 400;
                 }
-            }
-
-            TimerDigit {
-                meaning: 60*60*10;
-                num: ~~((root.seconds / (60*60)) / 10);
-                suffix: (root.running && root.seconds < 60) ? "_1" : "";
-            }
-            TimerDigit {
-                meaning: 60*60;
-                num: ~~(~~(root.seconds / (60*60))) % 10;
-                suffix: (root.running && root.seconds < 60) ? "_1" : "";
-            }
-
-            PlasmaCore.SvgItem {
-                svg: timerSvg;
-                width: digitW / 2;
-                height: digitH;
-                elementId: "separator" + ((root.running && root.seconds < 60) ? "_1" : "");
-            }
-            TimerDigit {
-                meaning: 600;
-                num: ~~(~~((root.seconds % (60*60)) / 60) / 10);
-                suffix: (root.running && root.seconds < 60) ? "_1" : "";
-            }
-            TimerDigit {
-                meaning: 60;
-                num: ~~((root.seconds % (60*60)) / 60) % 10;
-                suffix: (root.running && root.seconds < 60) ? "_1" : "";
-            }
-
-            PlasmaCore.SvgItem {
-                svg: timerSvg;
-                width: digitW / 2;
-                height: digitH;
-                elementId: "separator" + ((root.running && root.seconds < 60) ? "_1" : "");
-                visible: showSeconds;
-            }
-            TimerDigit {
-                meaning: 10;
-                num: ~~((root.seconds % 60) / 10);
-                suffix: (root.running && root.seconds < 60) ? "_1" : "";
-                visible: showSeconds;
-            }
-            TimerDigit {
-                meaning: 1;
-                num: (root.seconds % 60) % 10;
-                suffix: (root.running && root.seconds < 60) ? "_1" : "";
-                visible: showSeconds;
             }
         }
     }

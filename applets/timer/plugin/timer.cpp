@@ -8,6 +8,7 @@
 
 #include <KProcess>
 #include <KShell>
+#include <QDateTime>
 
 Timer::Timer(QObject *parent) : QObject(parent)
 {
@@ -23,3 +24,7 @@ void Timer::runCommand(const QString &command)
     }
 }
 
+QString Timer::secondsToString(int seconds, const QString &format)
+{
+    return QTime::fromMSecsSinceStartOfDay(seconds * 1000).toString(format);
+}

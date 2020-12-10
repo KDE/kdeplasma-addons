@@ -16,6 +16,11 @@ ConfigModel {
     }
 
     ConfigCategory {
+         name: i18nc("@title", "Predefined Timers")
+         icon: "chronometer"
+         source: "configTimes.qml"
+    }
+    ConfigCategory {
          name: i18nc("@title", "Advanced")
          icon: "preferences-other"
          source: "configAdvanced.qml"
