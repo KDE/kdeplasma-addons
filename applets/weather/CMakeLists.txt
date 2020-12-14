@@ -33,7 +33,6 @@ add_library(weatherplugin SHARED ${weather_SRCS})
 target_link_libraries(weatherplugin
     KF5::Plasma
     KF5::UnitConversion
-    KF5::IconThemes
     KF5::I18n
     Qt5::Qml
 )
