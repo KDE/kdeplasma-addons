@@ -19,7 +19,6 @@
 
 static QObject* temperatureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
-    Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
     QVector<UnitItem> items {
@@ -28,12 +27,11 @@ static QObject* temperatureUnitListModelSingletonTypeProvider(QQmlEngine *engine
         UnitItem(KUnitConversion::Kelvin)
     };
 
-    return new AbstractUnitListModel(items);
+    return new AbstractUnitListModel(items, engine);
 }
 
 static QObject* pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
-    Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
     QVector<UnitItem> items {
@@ -44,12 +42,11 @@ static QObject* pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, Q
         UnitItem(KUnitConversion::MillimetersOfMercury)
     };
 
-    return new AbstractUnitListModel(items);
+    return new AbstractUnitListModel(items, engine);
 }
 
 static QObject* windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
-    Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
     QVector<UnitItem> items {
@@ -60,12 +57,11 @@ static QObject* windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, 
         UnitItem(KUnitConversion::Beaufort)
     };
 
-    return new AbstractUnitListModel(items);
+    return new AbstractUnitListModel(items, engine);
 }
 
 static QObject* visibilityUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
-    Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
     QVector<UnitItem> items {
@@ -73,7 +69,7 @@ static QObject* visibilityUnitListModelSingletonTypeProvider(QQmlEngine *engine,
         UnitItem(KUnitConversion::Mile)
     };
 
-    return new AbstractUnitListModel(items);
+    return new AbstractUnitListModel(items, engine);
 }
 
 static QObject* utilSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
