@@ -32,10 +32,6 @@ class QSortFilterProxyModel;
 class QTimer;
 class SavingDir;
 
-namespace KNS3 {
-    class DownloadDialog;
-}
-
 class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
@@ -149,7 +145,7 @@ Q_SIGNALS:
         Q_INVOKABLE void goJump() { slotGoJump();}
         Q_INVOKABLE void shop() { slotShop();}
         Q_INVOKABLE void tabChanged(const QString &newIdentifier) { slotTabChanged(newIdentifier);}
-        Q_INVOKABLE void getNewComics();
+        Q_INVOKABLE void loadProviders();
         Q_INVOKABLE void positionFullView(QWindow *window);
 
     private:
@@ -199,7 +195,6 @@ Q_SIGNALS:
         QSizeF mLastSize;
         QSizeF mIdealSize;
         Plasma::DataEngine *mEngine;
-        QPointer<KNS3::DownloadDialog> m_newStuffDialog;
 
         //Tabs
         bool mTabAdded;

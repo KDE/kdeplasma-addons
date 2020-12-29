@@ -26,7 +26,6 @@
 #include <KConfigDialog>
 #include <KNotification>
 #include <kuiserverjobtracker.h>
-#include <KNewStuff3/KNS3/DownloadDialog>
 #include <KRun>
 #include <KStandardShortcut>
 
@@ -144,7 +143,6 @@ void ComicApplet::init()
 ComicApplet::~ComicApplet()
 {
     delete mSavingDir;
-    delete m_newStuffDialog;
 }
 
 void ComicApplet::dataUpdated( const QString &source, const Plasma::DataEngine::Data &data )
@@ -212,18 +210,11 @@ void ComicApplet::updateView()
     updateContextMenu();
 }
 
-void ComicApplet::getNewComics()
+void ComicApplet::loadProviders()
 {
-    if (!mEngine) {
-        return;
+    if (mEngine) {
+        QMetaObject::invokeMethod(mEngine, "loadProviders");
     }
-    if (!m_newStuffDialog) {
-        m_newStuffDialog = new KNS3::DownloadDialog( QStringLiteral("comic.knsrc") );
-        KNS3::DownloadDialog *strong = m_newStuffDialog.data();
-        strong->setTitle(i18nc("@title:window", "Download Comics"));
-        connect(m_newStuffDialog.data(), SIGNAL(finished(int)), mEngine, SLOT(loadProviders()));
-    }
-    m_newStuffDialog.data()->show();
 }
 
 void ComicApplet::positionFullView(QWindow *window)
