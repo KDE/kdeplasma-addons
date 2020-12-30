@@ -1,0 +1,7 @@
+Version=5
+ 
+# Switch from thumbnails switcher to org.kde.breeze.desktop switcher
+Id=thumbnails-to-breeze-2020
+File=kwinrc
+Group=LayoutName
+Script=thumbnails-to-breeze.py,python3
