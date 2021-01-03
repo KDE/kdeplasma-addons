@@ -33,7 +33,7 @@ PotdEngine::PotdEngine( QObject* parent, const QVariantList& args )
     // set polling to every 5 minutes
     setMinimumPollingInterval(5 * 60 * 1000);
     m_checkDatesTimer = new QTimer( this );//change picture after 24 hours
-    connect( m_checkDatesTimer, SIGNAL(timeout()), this, SLOT(checkDayChanged()) );
+    connect( m_checkDatesTimer, &QTimer::timeout, this, &PotdEngine::checkDayChanged );
     //FIXME: would be nice to stop and start this timer ONLY as needed, e.g. only when there are
     // time insensitive sources to serve; still, this is better than how i found it, checking
     // every 2 seconds (!)
@@ -71,8 +71,8 @@ bool PotdEngine::updateSource( const QString &identifier, bool loadCachedAlways 
         args << QLatin1String( "String" ) << identifier;
 
         CachedProvider *provider = new CachedProvider( identifier, this );
-        connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
-        connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
+        connect( provider, &PotdProvider::finished, this, &PotdEngine::finished );
+        connect( provider, &PotdProvider::error, this, &PotdEngine::error );
 
         m_canDiscardCache = loadCachedAlways;
         if (!loadCachedAlways) {
@@ -103,8 +103,8 @@ bool PotdEngine::updateSource( const QString &identifier, bool loadCachedAlways 
         provider = factory->create<PotdProvider>(this, args);
     }
     if (provider) {
-        connect( provider, SIGNAL(finished(PotdProvider*)), this, SLOT(finished(PotdProvider*)) );
-        connect( provider, SIGNAL(error(PotdProvider*)), this, SLOT(error(PotdProvider*)) );
+        connect( provider, &PotdProvider::finished, this, &PotdEngine::finished );
+        connect( provider, &PotdProvider::error, this, &PotdEngine::error );
         return true;
     }
 
@@ -135,7 +135,7 @@ void PotdEngine::finished( PotdProvider *provider )
     // store in cache if it's not the response of a CachedProvider
     if ( qobject_cast<CachedProvider*>( provider ) == nullptr && !img.isNull() ) {
         SaveImageThread *thread = new SaveImageThread( provider->identifier(), img );
-        connect(thread, SIGNAL(done(QString,QString,QImage)), this, SLOT(cachingFinished(QString,QString,QImage)));
+        connect(thread, &SaveImageThread::done, this, &PotdEngine::cachingFinished);
         QThreadPool::globalInstance()->start(thread);
     } else {
         setData(provider->identifier(), DataKeys::image(), img);

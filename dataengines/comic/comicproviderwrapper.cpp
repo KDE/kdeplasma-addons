@@ -269,7 +269,7 @@ ComicProviderWrapper::ComicProviderWrapper(ComicProviderKross *parent)
       mIsLeftToRight(true),
       mIsTopToBottom(true)
 {
-    QTimer::singleShot(0, this, SLOT(init()));
+    QTimer::singleShot(0, this, &ComicProviderWrapper::init);
 }
 
 ComicProviderWrapper::~ComicProviderWrapper()

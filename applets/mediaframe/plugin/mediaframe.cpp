@@ -286,7 +286,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
             qDebug() << path << "doesn't exist locally, trying remote.";
 
             KIO::StoredTransferJob * job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo);
-            connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
+            connect(job, &KJob::finished, this, &MediaFrame::slotFinished);
 
         } else {
             if(successCallback.isCallable()) {

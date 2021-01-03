@@ -28,7 +28,7 @@ static QString identifierToPath(const QString &identifier)
 CachedProvider::CachedProvider(QObject *parent, const QVariantList &args)
     : ComicProvider(parent, args)
 {
-    QTimer::singleShot(0, this, SLOT(triggerFinished()));
+    QTimer::singleShot(0, this, &CachedProvider::triggerFinished);
 }
 
 CachedProvider::~CachedProvider()

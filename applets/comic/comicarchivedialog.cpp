@@ -36,8 +36,8 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
                 ui.toDate->setMinimumDate( first );
             }
 
-            connect( ui.fromDate, SIGNAL(dateChanged(QDate)), this, SLOT(fromDateChanged(QDate)) );
-            connect( ui.toDate, SIGNAL(dateChanged(QDate)), this, SLOT(toDateChanged(QDate)) );
+            connect( ui.fromDate, &QDateTimeEdit::dateChanged, this, &ComicArchiveDialog::fromDateChanged );
+            connect( ui.toDate, &QDateTimeEdit::dateChanged, this, &ComicArchiveDialog::toDateChanged );
             break;
         }
         case Number: {
@@ -57,8 +57,8 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
         case String: {
             ui.fromString->setText( currentIdentifierSuffix );
             ui.toString->setText( currentIdentifierSuffix );
-            connect( ui.fromString, SIGNAL(textEdited(QString)), this, SLOT(updateOkButton()) );
-            connect( ui.toString, SIGNAL(textEdited(QString)), this, SLOT(updateOkButton()) );
+            connect( ui.fromString, &QLineEdit::textEdited, this, &ComicArchiveDialog::updateOkButton );
+            connect( ui.toString, &QLineEdit::textEdited, this, &ComicArchiveDialog::updateOkButton );
             break;
         }
     }
@@ -74,7 +74,7 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
     }
 
     connect( ui.archiveType, SIGNAL(currentIndexChanged(int)), this, SLOT(archiveTypeChanged(int)) );
-    connect( ui.dest, SIGNAL(textChanged(QString)), this, SLOT(updateOkButton()) );
+    connect( ui.dest, &KUrlRequester::textChanged, this, &ComicArchiveDialog::updateOkButton );
     connect( this, SIGNAL(okClicked()), this, SLOT(slotOkClicked()) );
 }
 

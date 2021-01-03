@@ -18,7 +18,7 @@ DictionaryMatchEngine::DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngin
      * how the connection is made based on data availability. There are two cases,
      * and this extra connection handles the second case. */
     Q_ASSERT(m_dictionaryEngine);
-    connect(m_dictionaryEngine, SIGNAL(sourceAdded(QString)), this, SLOT(sourceAdded(QString)));
+    connect(m_dictionaryEngine, &Plasma::DataEngine::sourceAdded, this, &DictionaryMatchEngine::sourceAdded);
 }
 
 /* This function should be called from a different thread. */

@@ -55,7 +55,7 @@ CachedProvider::CachedProvider( const QString &identifier, QObject *parent )
     : PotdProvider( parent ), mIdentifier( identifier )
 {
     LoadImageThread *thread = new LoadImageThread( identifierToPath( mIdentifier ) );
-    connect(thread, SIGNAL(done(QImage)), this, SLOT(triggerFinished(QImage)));
+    connect(thread, &LoadImageThread::done, this, &CachedProvider::triggerFinished);
     QThreadPool::globalInstance()->start(thread);
 }
 

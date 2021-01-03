@@ -22,8 +22,8 @@ ContentTracker::ContentTracker(QObject *parent)
     connectToActivityManager();
     QDBusServiceWatcher *watcher = new QDBusServiceWatcher(QStringLiteral("org.kde.ActivityManager"), QDBusConnection::sessionBus(),
                                              QDBusServiceWatcher::WatchForOwnerChange, this);
-    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
-            this, SLOT(serviceChange(QString,QString,QString)));
+    connect(watcher, &QDBusServiceWatcher::serviceOwnerChanged,
+            this, &ContentTracker::serviceChange);
 }
 
 ContentTracker::~ContentTracker()

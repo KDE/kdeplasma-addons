@@ -92,8 +92,8 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
 
             ComicProvider *provider = new CachedProvider(this, args);
             m_jobs[identifier] = provider;
-            connect(provider, SIGNAL(finished(ComicProvider*)), this, SLOT(finished(ComicProvider*)));
-            connect(provider, SIGNAL(error(ComicProvider*)), this, SLOT(error(ComicProvider*)));
+            connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
+            connect(provider, &ComicProvider::error, this, &ComicEngine::error);
             return true;
         }
 
@@ -156,8 +156,8 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
 
         m_jobs[identifier] = provider;
 
-        connect(provider, SIGNAL(finished(ComicProvider*)), this, SLOT(finished(ComicProvider*)));
-        connect(provider, SIGNAL(error(ComicProvider*)), this, SLOT(error(ComicProvider*)));
+        connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
+        connect(provider, &ComicProvider::error, this, &ComicEngine::error);
         return true;
     }
 }

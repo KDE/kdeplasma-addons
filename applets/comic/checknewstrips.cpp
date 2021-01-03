@@ -17,7 +17,7 @@ CheckNewStrips::CheckNewStrips( const QStringList &identifiers, Plasma::DataEngi
 {
     QTimer *timer = new QTimer( this );
     timer->setInterval( minutes * 60 * 1000 );
-    connect( timer, SIGNAL(timeout()), this, SLOT(start()) );
+    connect( timer, &QTimer::timeout, this, &CheckNewStrips::start );
     timer->start();
 
     //start at once, that way the user does not have to wait for minutes to get the initial result
