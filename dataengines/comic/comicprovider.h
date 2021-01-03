@@ -273,13 +273,6 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
     private:
         class Private;
         Private* const d;
-
-        Q_PRIVATE_SLOT(d, void jobDone(KJob*))
-        Q_PRIVATE_SLOT(d, void slotRedirection(KIO::Job*, QUrl))
-        Q_PRIVATE_SLOT(d, void slotRedirection(KIO::Job*, QUrl, QUrl))
-        Q_PRIVATE_SLOT(d, void slotRedirectionDone(KJob*))
-        Q_PRIVATE_SLOT(d, void slotTimeout())
-        Q_PRIVATE_SLOT(d, void slotFinished())
 };
 
 #endif

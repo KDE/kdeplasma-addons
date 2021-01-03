@@ -25,7 +25,10 @@ class ComicProvider::Private
             mTimer = new QTimer(parent);
             mTimer->setSingleShot(true);
             mTimer->setInterval(15000);//timeout after 15 seconds
-            connect(mTimer, SIGNAL(timeout()), mParent, SLOT(slotTimeout()));
+            connect(mTimer, &QTimer::timeout, mParent, [this](){
+                //operation took too long, abort it
+                emit mParent->error(mParent);
+            });
         }
 
         void jobDone(KJob *job)
@@ -38,12 +41,7 @@ class ComicProvider::Private
             }
         }
 
-        void slotRedirection(KIO::Job *job, QUrl newUrl)
-        {
-            slotRedirection(job, QUrl(), newUrl);
-        }
-
-        void slotRedirection(KIO::Job *job, QUrl oldUrl, QUrl newUrl)
+        void slotRedirection(KIO::Job *job, const QUrl& oldUrl, const QUrl& newUrl)
         {
             Q_UNUSED(oldUrl)
 
@@ -62,18 +60,6 @@ class ComicProvider::Private
                 mParent->redirected(job->property("uid").toInt(), mRedirections[job]);
                 mRedirections.remove(job);
             }
-        }
-
-        void slotTimeout()
-        {
-            //operation took too long, abort it
-            emit mParent->error(mParent);
-        }
-
-        void slotFinished()
-        {
-            //everything finished, stop the timeout timer
-            mTimer->stop();
         }
 
         ComicProvider *mParent;
@@ -115,7 +101,10 @@ ComicProvider::ComicProvider(QObject *parent, const QVariantList &args)
     }
 
     d->mTimer->start();
-    connect(this, SIGNAL(finished(ComicProvider*)), this, SLOT(slotFinished()));
+    connect(this, &ComicProvider::finished, this, [this](){
+        //everything finished, stop the timeout timer
+        d->mTimer->stop();
+    });
 }
 
 ComicProvider::~ComicProvider()
@@ -238,7 +227,9 @@ void ComicProvider::requestPage(const QUrl &url, int id, const MetaInfos &infos)
         job = KIO::storedGet(url, KIO::Reload, KIO::HideProgressInfo);
     }
     job->setProperty("uid", id);
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(jobDone(KJob*)));
+    connect(job, &KJob::result, this, [this](KJob *job) {
+        d->jobDone(job);
+    });
 
     if (!infos.isEmpty()) {
         QMapIterator<QString, QString> it(infos);
@@ -257,9 +248,15 @@ void ComicProvider::requestRedirectedUrl(const QUrl &url, int id, const MetaInfo
     KIO::MimetypeJob *job = KIO::mimetype(url, KIO::HideProgressInfo);
     job->setProperty("uid", id);
     d->mRedirections[job] = url;
-    connect(job, SIGNAL(redirection(KIO::Job*,QUrl)), this, SLOT(slotRedirection(KIO::Job*,QUrl)));
-    connect(job, SIGNAL(permanentRedirection(KIO::Job*,QUrl,QUrl)), this, SLOT(slotRedirection(KIO::Job*,QUrl,QUrl)));
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(slotRedirectionDone(KJob*)));
+    connect(job, &KIO::MimetypeJob::redirection, this, [this](KIO::Job *job, const QUrl &newUrl) {
+        d->slotRedirection(job, QUrl(), newUrl);
+    });
+    connect(job, &KIO::MimetypeJob::permanentRedirection, this, [this](KIO::Job *job, const QUrl &oldUrl, const QUrl &newUrl) {
+        d->slotRedirection(job, oldUrl, newUrl);
+    });
+    connect(job, &KIO::MimetypeJob::result, this, [this](KJob *job) {
+        d->slotRedirectionDone(job);
+    });
 
     if (!infos.isEmpty()) {
         QMapIterator<QString, QString> it(infos);
