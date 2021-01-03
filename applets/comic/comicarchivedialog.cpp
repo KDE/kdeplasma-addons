@@ -73,9 +73,8 @@ ComicArchiveDialog::ComicArchiveDialog( const QString &pluginName, const QString
         ui.dest->setStartDir(QUrl::fromLocalFile(savingDir));
     }
 
-    connect( ui.archiveType, SIGNAL(currentIndexChanged(int)), this, SLOT(archiveTypeChanged(int)) );
+    connect( ui.archiveType, qOverload<int>(&KComboBox::currentIndexChanged), this, &ComicArchiveDialog::archiveTypeChanged );
     connect( ui.dest, &KUrlRequester::textChanged, this, &ComicArchiveDialog::updateOkButton );
-    connect( this, SIGNAL(okClicked()), this, SLOT(slotOkClicked()) );
 }
 
 void ComicArchiveDialog::archiveTypeChanged( int newType )
