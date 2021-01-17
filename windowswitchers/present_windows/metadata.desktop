@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Grid
 Name[ast]=Rexáu
+Name[az]=Tor
 Name[ca]=Quadrícula
 Name[ca@valencia]=Quadrícula
 Name[cs]=Mřížka
@@ -43,6 +44,7 @@ Name[x-test]=xxGridxx
 Name[zh_CN]=网格
 Name[zh_TW]=格線
 Comment=A Window Switcher layout showing all windows as thumbnails in a grid
+Comment[az]=Pəncərələri torda miniatürləri ilə göstərən pəncərə dəyişdiricisi
 Comment[ca]=Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una quadrícula
 Comment[ca@valencia]=Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una quadrícula
 Comment[cs]=Rozvržení přepínače oken zobrazující všechna okna jako miniatury v mřížce

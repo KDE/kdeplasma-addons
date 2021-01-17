@@ -2,6 +2,7 @@
 Name=Date and Time
 Name[ar]=التاريخ والوقت
 Name[ast]=Data y hora
+Name[az]=Tarix və Vaxt
 Name[bs]=Datum i vrijeme
 Name[ca]=Data i hora
 Name[ca@valencia]=Data i hora
@@ -61,6 +62,7 @@ Name[zh_TW]=日期和時間
 Comment=The current date and time, locally or in any timezone
 Comment[ar]=التاريخ والوقت الحاليين، محلياً أو في أيّ منطقة زمنية
 Comment[ast]=La data y hora actuales, llocales o de cualesquier fusu horariu
+Comment[az]=Cari tarix və vaxt. Yerli və ya istənilən vaxt qurşağı
 Comment[bs]=Trenutni datum i vrijeme, lokalno ili u nekoj drugoj vremenskoj zoni
 Comment[ca]=La data i l'hora actuals, localment o en qualsevol zona horària
 Comment[ca@valencia]=La data i l'hora actuals, localment o en qualsevol zona horària

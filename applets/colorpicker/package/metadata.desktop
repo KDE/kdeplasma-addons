@@ -2,6 +2,7 @@
 Name=Color Picker
 Name[ar]=منتق الألوان
 Name[ast]=Seleutor de colores
+Name[az]=Rəng seçici
 Name[bs]=Birač boja
 Name[ca]=Selector de color
 Name[ca@valencia]=Selector de color
@@ -65,6 +66,7 @@ Name[zh_TW]=顏色挑選器
 Comment=Pick a color from the desktop
 Comment[ar]=اختر لونا من سطح المكتب
 Comment[ast]=Escueye un color del escritoriu
+Comment[az]=Rəngi İş Masasından seçin
 Comment[bs]=Izaberite boju sa površi
 Comment[ca]=Selecciona un color de l'escriptori
 Comment[ca@valencia]=Selecciona un color de l'escriptori

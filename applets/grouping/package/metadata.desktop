@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Grouping Plasmoid
 Name[ast]=Plasmoide d'agrupación
+Name[az]=Plasmoid qruplaşması
 Name[ca]=Plasmoide d'agrupació
 Name[ca@valencia]=Plasmoide d'agrupació
 Name[cs]=Seskupovací Plasmoid
@@ -41,6 +42,7 @@ Name[x-test]=xxGrouping Plasmoidxx
 Name[zh_CN]=分组小部件
 Name[zh_TW]=組織 Plasmoid
 Comment=Group Plasma widgets together
+Comment[az]=Plasma vidjetlərini birlikdə qruplaşdırmaq
 Comment[ca]=Agrupa els ginys del Plasma
 Comment[ca@valencia]=Agrupa els ginys («widgets») de Plasma
 Comment[cs]=Seskupit widgety Plasma dohromady

@@ -2,6 +2,7 @@
 Name=Picture of the Day
 Name[ar]=صورة اليوم
 Name[ast]=Semeya del día
+Name[az]=Günün şəkli
 Name[bs]=Slika dana
 Name[ca]=Imatge del dia
 Name[ca@valencia]=Imatge del dia
@@ -56,6 +57,7 @@ Name[zh_CN]=每日一图
 Name[zh_TW]=本日圖片
 Comment=Data Engine for getting various online Pictures of The Day.
 Comment[ar]=محرك بيانات للحصول على مختلف صور هذا اليوم من الإنترنت.
+Comment[az]=İnternetdən günün müxtəlif şəkillərini almaq üçün vasitə
 Comment[bs]=Pogon podataka za dobivanje različitih slika dana sa veze.
 Comment[ca]=Motor de dades per a accedir a diverses «imatges del dia» en línia.
 Comment[ca@valencia]=Motor de dades per a accedir a diverses «imatges del dia» en línia.

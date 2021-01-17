@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Compact
+Name[az]=Yığcam
 Name[ca]=Compacte
 Name[ca@valencia]=Compacte
 Name[cs]=Kompaktní
@@ -42,6 +43,7 @@ Name[x-test]=xxCompactxx
 Name[zh_CN]=紧凑
 Name[zh_TW]=簡潔
 Comment=A compact window switcher layout
+Comment[az]=Yığcam pəncərə dəyişdiricisi
 Comment[ca]=Una disposició del commutador de finestres compacta
 Comment[ca@valencia]=Una disposició del commutador de finestres compacta
 Comment[cs]=Kompaktní rozvržení přepínače oken

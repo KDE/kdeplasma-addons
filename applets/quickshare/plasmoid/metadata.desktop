@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Quick Share
 Name[ast]=Compartición rápida
+Name[az]=Sürətli paylaşmaq
 Name[bs]=Quick Share
 Name[ca]=Comparteix ràpid
 Name[ca@valencia]=Comparteix ràpidament
@@ -46,6 +47,7 @@ Name[zh_CN]=快速共享
 Name[zh_TW]=快速分享
 Comment=Paste text/images to a remote server
 Comment[ar]=الصق نص/صور في خادم بعيد
+Comment[az]=Uzaq serverə mətni/şəkli yerləşdirmək
 Comment[bs]=Umeće tekst/slike na udaljeni server
 Comment[ca]=Enganxa text/imatges en un servidor remot
 Comment[ca@valencia]=Apega text/imatges en un servidor remot

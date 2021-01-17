@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Text Only
 Name[ast]=Namás testu
+Name[az]=Yalnız mətn
 Name[ca]=Només el text
 Name[ca@valencia]=Només el text
 Name[cs]=Pouze text
@@ -44,6 +45,7 @@ Name[x-test]=xxText Onlyxx
 Name[zh_CN]=仅文本
 Name[zh_TW]=只有文字
 Comment=A window switcher layout only showing window captions
+Comment[az]=Yalnız pəncərə başlıqlarını göstərən pəncərə dəyişdiricisi
 Comment[ca]=Una disposició del commutador de finestres que només mostra els títols de les finestres
 Comment[ca@valencia]=Una disposició del commutador de finestres que només mostra els títols de les finestres
 Comment[cs]=Rozvržení přepínače oken zobrazující pouze titulek okna

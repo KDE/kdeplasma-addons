@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Web browser
 Name[ast]=Restolador web
+Name[az]=Veb Bələdçi
 Name[ca]=Navegador web
 Name[ca@valencia]=Navegador web
 Name[cs]=Webový prohlížeč
@@ -44,6 +45,7 @@ Name[zh_CN]=网页浏览器
 Name[zh_TW]=網頁瀏覽器
 Comment=Add a webpage on your desktop.
 Comment[ast]=Amuesa una páxina web nel escritoriu
+Comment[az]=Veb səhifəni İş Masanızda göstərir
 Comment[ca]=Afegeix una pàgina web a l'escriptori.
 Comment[ca@valencia]=Afig una pàgina web a l'escriptori.
 Comment[da]=Tilføj en webside til dit skrivebord.

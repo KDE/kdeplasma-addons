@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Sticky Note
+Name[az]=Qeyd vərəqi
 Name[ca]=Nota adhesiva
 Name[cs]=Lepicí poznámka
 Name[da]=Post-it-note
@@ -31,6 +32,7 @@ Name[x-test]=xxSticky Notexx
 Name[zh_CN]=便利贴
 Name[zh_TW]=便利貼
 Comment=Desktop sticky note
+Comment[az]=İş Masası qeyd vərəqi
 Comment[ca]=Nota adhesiva per a l'escriptori
 Comment[cs]=Lepicí poznámka na plochu
 Comment[da]=Post-it-noter på skrivebordet

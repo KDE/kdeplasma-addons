@@ -2,6 +2,7 @@
 Name=Kate Sessions
 Name[ar]=جلسات كيت
 Name[ast]=Sesiones de Kate
+Name[az]=Kate sessiyası
 Name[bs]=Kate sesije
 Name[ca]=Sessions del Kate
 Name[ca@valencia]=Sessions de Kate
@@ -59,6 +60,7 @@ Name[zh_CN]=Kate 会话
 Name[zh_TW]=Kate 作業階段
 Comment=Matches Kate Sessions
 Comment[ar]=تطابق جلسات كيت
+Comment[az]=Kate sessiyalarına uyğun
 Comment[bs]=Odgovarajuće Kate sesije
 Comment[ca]=Correspon amb sessions del Kate
 Comment[ca@valencia]=Correspon amb sessions de Kate

@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=PlasmaPoTD/Plugin
 Comment=Plugin for Plasma PoTD Engine
 Comment[ar]=ملحق لمحرك PoTD
+Comment[az]=Plasma PoTD mühərriki üçün qoşma
 Comment[bs]=Dodaci za plazma PoTD motor
 Comment[ca]=Connector per al motor PoTD del Plasma
 Comment[ca@valencia]=Connector per al motor PoTD del plasma

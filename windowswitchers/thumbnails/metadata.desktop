@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Thumbnails
 Name[ast]=Miniatures
+Name[az]=Miniatürlər
 Name[ca]=Miniatures
 Name[ca@valencia]=Miniatures
 Name[cs]=Miniatury
@@ -43,6 +44,7 @@ Name[x-test]=xxThumbnailsxx
 Name[zh_CN]=缩略图
 Name[zh_TW]=縮圖
 Comment=A window switcher layout using live thumbnails
+Comment[az]=Canlı miniatürlər istifadə edən pəncərə dəyişdiricisi
 Comment[ca]=Una disposició del commutador de finestres que utilitza miniatures animades
 Comment[ca@valencia]=Una disposició del commutador de finestres que utilitza miniatures animades
 Comment[cs]=Přepínač oken s živými náhledy

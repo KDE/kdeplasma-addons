@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Weather Report
+Name[az]=Hava məlumatı
 Name[ca]=Informe meteorològic
 Name[ca@valencia]=Informe meteorològic
 Name[cs]=Hlášení počasí
@@ -35,6 +36,7 @@ Name[x-test]=xxWeather Reportxx
 Name[zh_CN]=天气报告
 Name[zh_TW]=氣象回報
 Comment=Forecast and current conditions
+Comment[az]=Cari və gözlənilən hava məlumatı
 Comment[ca]=Previsió i condicions actuals
 Comment[ca@valencia]=Previsió i condicions actuals
 Comment[cs]=Předpověď a současná situace

@@ -2,6 +2,7 @@
 Name=Timer
 Name[ar]=مؤقت
 Name[ast]=Temporizador
+Name[az]=Vaxtölçən
 Name[bs]=Timer
 Name[ca]=Temporitzador
 Name[ca@valencia]=Temporitzador
@@ -62,6 +63,7 @@ Name[zh_CN]=定时器
 Name[zh_TW]=計時器
 Comment=Countdown over a specified time period
 Comment[ar]=قم بالعد التنازلي خلال فترة زمنية محددة
+Comment[az]=Müəyyən bir vaxtın geri sayımı
 Comment[bs]=Odbrojavaj određeni vremenski period
 Comment[ca]=Compte enrere durant un període de temps especificat
 Comment[ca@valencia]=Compte arrere durant un període de temps especificat

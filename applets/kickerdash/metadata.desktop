@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Application Dashboard
 Name[ast]=Panel d'aplicaciones
+Name[az]=Tətbiq tablosu
 Name[ca]=Tauler d'aplicacions
 Name[ca@valencia]=Tauler d'aplicacions
 Name[cs]=Pracovní plocha aplikace
@@ -45,6 +46,7 @@ Name[zh_CN]=应用程序面板
 Name[zh_TW]=應用程式控制面板
 Comment=A fullscreen application launcher
 Comment[ast]=Un llanzador d'aplicaciones a pantalla completa
+Comment[az]=Tam ekran tətbiq başladıcısı
 Comment[ca]=Un llançador d'aplicacions a pantalla completa
 Comment[ca@valencia]=Un llançador d'aplicacions a pantalla completa
 Comment[da]=Programstarter i fuldskærm

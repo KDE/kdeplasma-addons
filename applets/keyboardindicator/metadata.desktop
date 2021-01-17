@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Keyboard Indicator
 Name[ast]=Indicador del tecláu
+Name[az]=Klaviatura indikatoru
 Name[ca]=Indicador de teclat
 Name[ca@valencia]=Indicador de teclat
 Name[cs]=Ukazatel klávesnice
@@ -38,6 +39,7 @@ Name[zh_CN]=键盘指示器
 Name[zh_TW]=鍵盤指示符號
 Comment=Shows the state of the keyboard
 Comment[ast]=Amuesa l'estáu del tecláu
+Comment[az]=Klaviaturanın vəziyyətini göstərir
 Comment[ca]=Mostra l'estat del teclat
 Comment[ca@valencia]=Mostra l'estat del teclat
 Comment[cs]=Ukazuje stav klávesnice

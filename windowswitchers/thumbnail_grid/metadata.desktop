@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Thumbnail Grid
 Name[ast]=Rexáu de miniatures
+Name[az]=Miniatür toru
 Name[ca]=Quadrícula de miniatures
 Name[cs]=Mřížka náhledů
 Name[da]=Miniaturegitter
@@ -33,6 +34,7 @@ Name[x-test]=xxThumbnail Gridxx
 Name[zh_CN]=缩略图网格
 Name[zh_TW]=縮圖格線
 Comment=A window switcher layout using a small grid of thumbnails
+Comment[az]=Miniatür pəncərə toru şəklində pəncərə dəyişdiricisi
 Comment[ca]=Una disposició del commutador de finestres que utilitza una quadrícula petita de miniatures
 Comment[cs]=Přepínač oken používající malou mřížku náhledů
 Comment[da]=Et vinduesskifter-layout som bruger et lille gitter af miniaturer

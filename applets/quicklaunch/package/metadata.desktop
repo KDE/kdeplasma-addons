@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Quicklaunch
+Name[az]=Sürətli başlatmaq
 Name[ca]=Quicklaunch
 Name[ca@valencia]=Quicklaunch
 Name[cs]=Rychlé spuštění
@@ -42,6 +43,7 @@ Name[zh_CN]=快速启动
 Name[zh_TW]=快速啟動
 
 Comment=Launch your favourite Applications
+Comment[az]=Seçilmiş tətbiqlərinizi başladın
 Comment[ca]=Llança les vostres aplicacions preferides
 Comment[ca@valencia]=Llança les vostres aplicacions preferides
 Comment[cs]=Spouštějte své oblíbené aplikace

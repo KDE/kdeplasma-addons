@@ -2,6 +2,7 @@
 Name=Konsole Profiles
 Name[ar]=تشكيلات كونسول
 Name[ast]=Perfiles de Konsole
+Name[az]=Konsol profilləri
 Name[bs]=Konzolini profili
 Name[ca]=Perfils del Konsole
 Name[ca@valencia]=Perfils de Konsole
@@ -58,6 +59,7 @@ Name[x-test]=xxKonsole Profilesxx
 Name[zh_CN]=Konsole 配置
 Name[zh_TW]=Konsole 設定檔
 Comment=Matches Konsole Profiles
+Comment[az]=Konsol profillərinə uyğun
 Comment[ca]=Correspon amb perfils del Konsole
 Comment[ca@valencia]=Correspon amb perfils de Konsole
 Comment[da]=Matcher Konsole-profiler
