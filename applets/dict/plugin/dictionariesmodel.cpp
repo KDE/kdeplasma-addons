@@ -36,8 +36,9 @@ QVariant DictionariesModel::data(const QModelIndex &index, int role) const
 
 int DictionariesModel::rowCount(const QModelIndex &index) const
 {
-    if (index.isValid())
+    if (index.isValid()) {
         return 0; // flat model
+    }
     return m_availableDicts.size();
 }
 

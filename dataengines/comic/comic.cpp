@@ -136,8 +136,9 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         const QString type = pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType"));
         if (type == QLatin1String("Date")) {
             QDate date = QDate::fromString(parts[1], Qt::ISODate);
-            if (!date.isValid())
+            if (!date.isValid()) {
                 date = QDate::currentDate();
+            }
 
             args << QLatin1String("Date") << date;
         } else if (type == QLatin1String("Number")) {
@@ -247,8 +248,9 @@ void ComicEngine::error(ComicProvider *provider)
      * set initially, so we have to remove the 'faked' suffix
      * here again to not confuse the applet.
      */
-    if (provider->isCurrent())
+    if (provider->isCurrent()) {
         identifier = identifier.left(identifier.indexOf(QLatin1Char(':')) + 1);
+    }
 
     setData(identifier, QLatin1String("Identifier"), identifier);
     setData(identifier, QLatin1String("Error"), true);
@@ -278,8 +280,9 @@ void ComicEngine::setComicData(ComicProvider *provider)
      * set initially, so we have to remove the 'faked' suffix
      * here again to not confuse the applet.
      */
-    if (provider->isCurrent())
+    if (provider->isCurrent()) {
         identifier = identifier.left(identifier.indexOf(QLatin1Char(':')) + 1);
+    }
 
     setData(identifier, QLatin1String("Image"), provider->image());
     setData(identifier, QLatin1String("Website Url"), provider->websiteUrl());

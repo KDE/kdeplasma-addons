@@ -33,14 +33,16 @@ void DocumentHandler::setTarget(QQuickItem *target)
 {
     m_doc = nullptr;
     m_target = target;
-    if (!m_target)
+    if (!m_target) {
         return;
+    }
 
     QVariant doc = m_target->property("textDocument");
     if (doc.canConvert<QQuickTextDocument *>()) {
         QQuickTextDocument *qqdoc = doc.value<QQuickTextDocument *>();
-        if (qqdoc)
+        if (qqdoc) {
             m_doc = qqdoc->textDocument();
+        }
     }
     emit targetChanged();
 }
@@ -61,16 +63,19 @@ void DocumentHandler::setDocumentTitle(QString arg)
 void DocumentHandler::pasteWithoutFormatting()
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return;
+    }
 
     QClipboard *clipboard = QGuiApplication::clipboard();
-    if (!clipboard)
+    if (!clipboard) {
         return;
+    }
 
     const QMimeData *mimeData = clipboard->mimeData();
-    if (!mimeData)
+    if (!mimeData) {
         return;
+    }
 
     QString content = mimeData->text();
     cursor.insertText(content, QTextCharFormat());
@@ -91,8 +96,9 @@ QString DocumentHandler::text() const
 
 void DocumentHandler::setCursorPosition(int position)
 {
-    if (position == m_cursorPosition)
+    if (position == m_cursorPosition) {
         return;
+    }
 
     m_cursorPosition = position;
 
@@ -129,8 +135,9 @@ QTextCursor DocumentHandler::textCursor() const
 void DocumentHandler::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 {
     QTextCursor cursor = textCursor();
-    if (!cursor.hasSelection())
+    if (!cursor.hasSelection()) {
         cursor.select(QTextCursor::WordUnderCursor);
+    }
     cursor.mergeCharFormat(format);
 }
 
@@ -158,40 +165,45 @@ void DocumentHandler::setAlignment(Qt::Alignment a)
 Qt::Alignment DocumentHandler::alignment() const
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return Qt::AlignLeft;
+    }
     return textCursor().blockFormat().alignment();
 }
 
 bool DocumentHandler::bold() const
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return false;
+    }
     return textCursor().charFormat().fontWeight() == QFont::Bold;
 }
 
 bool DocumentHandler::italic() const
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return false;
+    }
     return textCursor().charFormat().fontItalic();
 }
 
 bool DocumentHandler::underline() const
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return false;
+    }
     return textCursor().charFormat().fontUnderline();
 }
 
 bool DocumentHandler::strikeOut() const
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return false;
+    }
     return textCursor().charFormat().fontStrikeOut();
 }
 
@@ -230,8 +242,9 @@ void DocumentHandler::setStrikeOut(bool arg)
 int DocumentHandler::fontSize() const
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return 0;
+    }
     QTextCharFormat format = cursor.charFormat();
     return format.font().pointSize();
 }
@@ -239,8 +252,9 @@ int DocumentHandler::fontSize() const
 void DocumentHandler::setFontSize(int arg)
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return;
+    }
     QTextCharFormat format;
     format.setFontPointSize(arg);
     mergeFormatOnWordOrSelection(format);
@@ -250,8 +264,9 @@ void DocumentHandler::setFontSize(int arg)
 QColor DocumentHandler::textColor() const
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return QColor(Qt::black);
+    }
     QTextCharFormat format = cursor.charFormat();
     return format.foreground().color();
 }
@@ -259,8 +274,9 @@ QColor DocumentHandler::textColor() const
 void DocumentHandler::setTextColor(const QColor &c)
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return;
+    }
     QTextCharFormat format;
     format.setForeground(QBrush(c));
     mergeFormatOnWordOrSelection(format);
@@ -270,8 +286,9 @@ void DocumentHandler::setTextColor(const QColor &c)
 QString DocumentHandler::fontFamily() const
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return QString();
+    }
     QTextCharFormat format = cursor.charFormat();
     return format.font().family();
 }
@@ -279,8 +296,9 @@ QString DocumentHandler::fontFamily() const
 void DocumentHandler::setFontFamily(const QString &arg)
 {
     QTextCursor cursor = textCursor();
-    if (cursor.isNull())
+    if (cursor.isNull()) {
         return;
+    }
     QTextCharFormat format;
     format.setFontFamily(arg);
     mergeFormatOnWordOrSelection(format);

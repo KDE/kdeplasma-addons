@@ -53,8 +53,9 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
             update = true;
         }
 
-        if (update)
+        if (update) {
             updatePixmaps();
+        }
 
         int number = idParts.at(1).toInt();
 

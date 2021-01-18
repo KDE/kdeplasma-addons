@@ -41,8 +41,9 @@ QString DictionaryMatchEngine::lookupWord(const QString &word)
 
     QMetaObject::invokeMethod(this, "sourceAdded", Qt::QueuedConnection, Q_ARG(const QString &, word));
     QMutexLocker locker(&data.mutex);
-    if (!data.waitCondition.wait(&data.mutex, QDeadlineTimer(30 * 1000))) // Timeout after 30 seconds
+    if (!data.waitCondition.wait(&data.mutex, QDeadlineTimer(30 * 1000))) { // Timeout after 30 seconds
         qDebug() << "The dictionary data engine timed out (word:" << word << ")";
+    }
     locker.unlock();
 
     QMetaObject::invokeMethod(this, "sourceRemoved", Qt::QueuedConnection, Q_ARG(const QString &, word));
@@ -70,8 +71,9 @@ void DictionaryMatchEngine::sourceRemoved(const QString &source)
 
 void DictionaryMatchEngine::dataUpdated(const QString &source, const Plasma::DataEngine::Data &result)
 {
-    if (!result.contains(QLatin1String("text")))
+    if (!result.contains(QLatin1String("text"))) {
         return;
+    }
 
     QString definition(result[QLatin1String("text")].toString());
 

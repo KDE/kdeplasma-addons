@@ -86,11 +86,11 @@ ComicProvider::ComicProvider(QObject *parent, const QVariantList &args)
     Q_ASSERT(args.count() >= 2);
     const QString type = args[0].toString();
 
-    if (type == QLatin1String("Date"))
+    if (type == QLatin1String("Date")) {
         d->mRequestedDate = args[1].toDate();
-    else if (type == QLatin1String("Number"))
+    } else if (type == QLatin1String("Number")) {
         d->mRequestedNumber = args[1].toInt();
-    else if (type == QLatin1String("String")) {
+    } else if (type == QLatin1String("String")) {
         d->mRequestedId = args[1].toString();
 
         int index = d->mRequestedId.indexOf(QLatin1Char(':'));
@@ -113,16 +113,18 @@ ComicProvider::~ComicProvider()
 
 QString ComicProvider::nextIdentifier() const
 {
-    if (identifierType() == DateIdentifier && d->mRequestedDate != QDate::currentDate())
+    if (identifierType() == DateIdentifier && d->mRequestedDate != QDate::currentDate()) {
         return d->mRequestedDate.addDays(1).toString(Qt::ISODate);
+    }
 
     return QString();
 }
 
 QString ComicProvider::previousIdentifier() const
 {
-    if ((identifierType() == DateIdentifier) && (!firstStripDate().isValid() || d->mRequestedDate > firstStripDate()))
+    if ((identifierType() == DateIdentifier) && (!firstStripDate().isValid() || d->mRequestedDate > firstStripDate())) {
         return d->mRequestedDate.addDays(-1).toString(Qt::ISODate);
+    }
 
     return QString();
 }

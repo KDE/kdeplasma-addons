@@ -41,8 +41,9 @@ ComicProvider::IdentifierType CachedProvider::identifierType() const
 
 QImage CachedProvider::image() const
 {
-    if (!QFile::exists(identifierToPath(requestedString())))
+    if (!QFile::exists(identifierToPath(requestedString()))) {
         return QImage();
+    }
 
     QImage img;
     img.load(identifierToPath(requestedString()), "PNG");

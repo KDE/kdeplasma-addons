@@ -42,20 +42,24 @@ void DictionaryRunner::reloadConfiguration()
 void DictionaryRunner::match(Plasma::RunnerContext &context)
 {
     QString query = context.query();
-    if (query.startsWith(m_triggerWord, Qt::CaseInsensitive))
+    if (query.startsWith(m_triggerWord, Qt::CaseInsensitive)) {
         query.remove(0, m_triggerWord.length());
-    if (query.isEmpty())
+    }
+    if (query.isEmpty()) {
         return;
+    }
     QString returnedQuery = m_engine->lookupWord(query);
 
     static const QRegExp removeHtml(QLatin1String("<[^>]*>"));
     QString definitions(returnedQuery);
     definitions.remove(QLatin1Char('\r')).remove(removeHtml);
-    while (definitions.contains(QLatin1String("  ")))
+    while (definitions.contains(QLatin1String("  "))) {
         definitions.replace(QLatin1String("  "), QLatin1String(" "));
+    }
     QStringList lines = definitions.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
-    if (lines.length() < 2)
+    if (lines.length() < 2) {
         return;
+    }
     lines.removeFirst();
 
     QList<Plasma::QueryMatch> matches;
@@ -63,10 +67,12 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
     static const QRegExp partOfSpeech(QLatin1String("(?: ([a-z]{1,5})){0,1} [0-9]{1,2}: (.*)"));
     QString lastPartOfSpeech;
     foreach (const QString &line, lines) {
-        if (partOfSpeech.indexIn(line) == -1)
+        if (partOfSpeech.indexIn(line) == -1) {
             continue;
-        if (!partOfSpeech.cap(1).isEmpty())
+        }
+        if (!partOfSpeech.cap(1).isEmpty()) {
             lastPartOfSpeech = partOfSpeech.cap(1);
+        }
         Plasma::QueryMatch match(this);
         match.setText(query + QLatin1String(": ") + lastPartOfSpeech);
         match.setRelevance(1 - (static_cast<double>(++item) / static_cast<double>(lines.length())));

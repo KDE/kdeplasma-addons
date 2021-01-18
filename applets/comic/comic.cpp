@@ -550,8 +550,9 @@ bool ComicApplet::showComicUrl() const
 
 void ComicApplet::setShowComicUrl(bool show)
 {
-    if (show == mShowComicUrl)
+    if (show == mShowComicUrl) {
         return;
+    }
 
     mShowComicUrl = show;
 
@@ -565,8 +566,9 @@ bool ComicApplet::showComicAuthor() const
 
 void ComicApplet::setShowComicAuthor(bool show)
 {
-    if (show == mShowComicAuthor)
+    if (show == mShowComicAuthor) {
         return;
+    }
 
     mShowComicAuthor = show;
 
@@ -580,8 +582,9 @@ bool ComicApplet::showComicTitle() const
 
 void ComicApplet::setShowComicTitle(bool show)
 {
-    if (show == mShowComicTitle)
+    if (show == mShowComicTitle) {
         return;
+    }
 
     mShowComicTitle = show;
 
@@ -595,8 +598,9 @@ bool ComicApplet::showComicIdentifier() const
 
 void ComicApplet::setShowComicIdentifier(bool show)
 {
-    if (show == mShowComicIdentifier)
+    if (show == mShowComicIdentifier) {
         return;
+    }
 
     mShowComicIdentifier = show;
 
@@ -610,8 +614,9 @@ bool ComicApplet::showErrorPicture() const
 
 void ComicApplet::setShowErrorPicture(bool show)
 {
-    if (show == mShowErrorPicture)
+    if (show == mShowErrorPicture) {
         return;
+    }
 
     mShowErrorPicture = show;
 
@@ -625,8 +630,9 @@ bool ComicApplet::arrowsOnHover() const
 
 void ComicApplet::setArrowsOnHover(bool show)
 {
-    if (show == mArrowsOnHover)
+    if (show == mArrowsOnHover) {
         return;
+    }
 
     mArrowsOnHover = show;
 
@@ -640,8 +646,9 @@ bool ComicApplet::middleClick() const
 
 void ComicApplet::setMiddleClick(bool show)
 {
-    if (show == mMiddleClick)
+    if (show == mMiddleClick) {
         return;
+    }
 
     mMiddleClick = show;
 
@@ -706,8 +713,9 @@ bool ComicApplet::showActualSize() const
 
 void ComicApplet::setShowActualSize(bool show)
 {
-    if (show == mCurrent.scaleComic())
+    if (show == mCurrent.scaleComic()) {
         return;
+    }
 
     mCurrent.setScaleComic(show);
 
