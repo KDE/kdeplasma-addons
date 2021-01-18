@@ -41,7 +41,7 @@ public:
     enum TrayStatus {
         ActiveStatus = 0,
         PassiveStatus,
-        NeedsAttentionStatus
+        NeedsAttentionStatus,
     };
     Q_ENUM(TrayStatus)
 

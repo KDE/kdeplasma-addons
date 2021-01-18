@@ -25,7 +25,7 @@ class ComicArchiveJob : public KJob
             ArchiveAll = 0,
             ArchiveStartTo,
             ArchiveEndTo,
-            ArchiveFromTo
+            ArchiveFromTo,
         };
 
         /**
@@ -101,7 +101,7 @@ class ComicArchiveJob : public KJob
         enum ArchiveDirection {
             Undefined,
             Forward,
-            Backward
+            Backward,
         };
 
         ArchiveType mType;

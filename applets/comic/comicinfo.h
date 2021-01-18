@@ -13,7 +13,7 @@ class QString;
 enum IdentifierType {
     Date = 0,
     Number,
-    String
+    String,
 };
 
 /**

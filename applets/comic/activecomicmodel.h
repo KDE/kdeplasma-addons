@@ -19,7 +19,7 @@ public:
         ComicKeyRole = Qt::UserRole+1,
         ComicTitleRole = Qt::UserRole+2,
         ComicIconRole = Qt::UserRole+3,
-        ComicHighlightRole = Qt::UserRole+4
+        ComicHighlightRole = Qt::UserRole+4,
     };
 
     explicit ActiveComicModel(QObject *parent = nullptr);

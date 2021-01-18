@@ -22,7 +22,7 @@ namespace {
         FreeStringRole,
         UsedStringRole,
         MountPointRole,
-        UsageRole
+        UsageRole,
     };
 }
 

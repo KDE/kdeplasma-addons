@@ -30,13 +30,13 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         enum IdentifierType {
             DateIdentifier = 0,   ///< References by date
             NumberIdentifier,     ///< References by numerical identifier
-            StringIdentifier      ///< References by arbitrary string
+            StringIdentifier,      ///< References by arbitrary string
         };
 
         enum RequestType {
             Page = 0,
             Image,
-            User
+            User,
         };
 
         /**

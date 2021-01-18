@@ -30,7 +30,7 @@ class MediaFrame : public QObject
         enum AddOption
         {
             NON_RECURSIVE,
-            RECURSIVE
+            RECURSIVE,
         };
         Q_ENUM(AddOption)
 

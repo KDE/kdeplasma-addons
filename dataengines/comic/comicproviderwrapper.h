@@ -115,7 +115,7 @@ class StaticDateWrapper : public QObject
             SystemLocaleShortDate = Qt::SystemLocaleShortDate,
             SystemLocaleLongDate = Qt::SystemLocaleLongDate,
             DefaultLocaleShortDate = Qt::DefaultLocaleShortDate,
-            DefaultLocaleLongDate = Qt::DefaultLocaleLongDate
+            DefaultLocaleLongDate = Qt::DefaultLocaleLongDate,
         };
         Q_ENUM(DateType)
 
@@ -157,21 +157,21 @@ class ComicProviderWrapper : public QObject
             Left = 0,
             Top,
             Right,
-            Bottom
+            Bottom,
         };
         Q_ENUM(PositionType)
 
         enum RequestType {
             Page = ComicProvider::Page,
             Image = ComicProvider::Image,
-            User = ComicProvider::User
+            User = ComicProvider::User,
         };
         Q_ENUM(RequestType)
 
         enum IdentifierType {
             DateIdentifier   = ComicProvider::DateIdentifier,
             NumberIdentifier = ComicProvider::NumberIdentifier,
-            StringIdentifier = ComicProvider::StringIdentifier
+            StringIdentifier = ComicProvider::StringIdentifier,
         };
         Q_ENUM(IdentifierType)
 
@@ -181,7 +181,7 @@ class ComicProviderWrapper : public QObject
             NextUrl = 2,
             FirstUrl = 3,
             LastUrl = 4,
-            UserUrl = 10
+            UserUrl = 10,
         };
         Q_ENUM(RedirectedUrlType)
 
