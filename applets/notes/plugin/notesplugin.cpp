@@ -7,8 +7,8 @@
 
 #include "notesplugin.h"
 #include "documenthandler.h"
-#include "notemanager.h"
 #include "note.h"
+#include "notemanager.h"
 
 // Qt
 #include <QFile>
@@ -18,9 +18,9 @@ class NotesHelper : public QObject
     Q_OBJECT
 
 public:
-    explicit NotesHelper(QObject *parent = nullptr) : QObject(parent)
+    explicit NotesHelper(QObject *parent = nullptr)
+        : QObject(parent)
     {
-
     }
 
     ~NotesHelper() override = default;
@@ -46,14 +46,13 @@ static QObject *notesHelper_provider(QQmlEngine *, QJSEngine *)
     return new NotesHelper();
 }
 
-void NotesPlugin::registerTypes (const char *uri)
+void NotesPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.notes"));
     qmlRegisterType<DocumentHandler>(uri, 0, 1, "DocumentHandler");
     qmlRegisterType<NoteManager>(uri, 0, 1, "NoteManager");
     qmlRegisterUncreatableType<Note>(uri, 0, 1, "Note", QStringLiteral("Create through NoteManager"));
     qmlRegisterSingletonType<NotesHelper>(uri, 0, 1, "NotesHelper", notesHelper_provider);
-
 }
 
 #include "notesplugin.moc"

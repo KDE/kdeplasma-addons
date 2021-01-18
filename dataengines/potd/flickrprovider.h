@@ -11,57 +11,57 @@
 
 #include "potdprovider.h"
 // Qt
-#include <QImage>
 #include <QDate>
+#include <QImage>
 #include <QXmlStreamReader>
 
 class KJob;
 
 /**
-* This class grabs a random image from the flickr
-* interestingness stream of pictures, for the given date.
-* Should there be no image for the current date, it tries
-* to grab one from the day before yesterday.
+ * This class grabs a random image from the flickr
+ * interestingness stream of pictures, for the given date.
+ * Should there be no image for the current date, it tries
+ * to grab one from the day before yesterday.
  */
 class FlickrProvider : public PotdProvider
 {
     Q_OBJECT
 
-    public:
-        /**
-         * Creates a new flickr provider.
-         *
-         * @param parent The parent object.
-         * @param args The arguments.
-         */
-        explicit FlickrProvider( QObject *parent, const QVariantList &args );
+public:
+    /**
+     * Creates a new flickr provider.
+     *
+     * @param parent The parent object.
+     * @param args The arguments.
+     */
+    explicit FlickrProvider(QObject *parent, const QVariantList &args);
 
-        /**
-         * Destroys the flickr provider.
-         */
-        ~FlickrProvider() override;
+    /**
+     * Destroys the flickr provider.
+     */
+    ~FlickrProvider() override;
 
-        /**
-         * Returns the requested image.
-         *
-         * Note: This method returns only a valid image after the
-         *       finished() signal has been emitted.
-         */
-        QImage image() const override;
+    /**
+     * Returns the requested image.
+     *
+     * Note: This method returns only a valid image after the
+     *       finished() signal has been emitted.
+     */
+    QImage image() const override;
 
-    private:
-        void pageRequestFinished(KJob *job);
-        void imageRequestFinished(KJob *job);
+private:
+    void pageRequestFinished(KJob *job);
+    void imageRequestFinished(KJob *job);
 
-    private:
-        QDate mActualDate;
-        QImage mImage;
+private:
+    QDate mActualDate;
+    QImage mImage;
 
-        QXmlStreamReader xml;
+    QXmlStreamReader xml;
 
-        int mFailureNumber = 0;
+    int mFailureNumber = 0;
 
-        QStringList m_photoList;
+    QStringList m_photoList;
 };
 
 #endif

@@ -16,9 +16,9 @@
 #include <QDate>
 #include <QUrl>
 
+#include <Plasma/Applet>
 #include <Plasma/DataEngine>
 #include <Plasma/DataEngineConsumer>
-#include <Plasma/Applet>
 
 #include "activecomicmodel.h"
 
@@ -51,54 +51,54 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
     Q_PROPERTY(int providerUpdateInterval READ providerUpdateInterval WRITE setProviderUpdateInterval NOTIFY providerUpdateIntervalChanged)
     Q_PROPERTY(int maxComicLimit READ maxComicLimit WRITE setMaxComicLimit NOTIFY maxComicLimitChanged)
 
-    public:
-        ComicApplet( QObject *parent, const QVariantList &args );
-        ~ComicApplet() override;
+public:
+    ComicApplet(QObject *parent, const QVariantList &args);
+    ~ComicApplet() override;
 
-        void init() override;
-        QList<QAction*> contextualActions() override;
+    void init() override;
+    QList<QAction *> contextualActions() override;
 
-        //For QML
-        QObject *comicsModel() const;
-        QObject *availableComicsModel() const;
-        QVariantMap comicData() const;
+    // For QML
+    QObject *comicsModel() const;
+    QObject *availableComicsModel() const;
+    QVariantMap comicData() const;
 
-        QStringList tabIdentifiers() const;
-        void setTabIdentifiers(const QStringList &tabs);
+    QStringList tabIdentifiers() const;
+    void setTabIdentifiers(const QStringList &tabs);
 
-        bool showComicUrl() const;
-        void setShowComicUrl(bool show);
+    bool showComicUrl() const;
+    void setShowComicUrl(bool show);
 
-        bool showComicAuthor() const;
-        void setShowComicAuthor(bool show);
+    bool showComicAuthor() const;
+    void setShowComicAuthor(bool show);
 
-        bool showComicTitle() const;
-        void setShowComicTitle(bool show);
+    bool showComicTitle() const;
+    void setShowComicTitle(bool show);
 
-        bool showComicIdentifier() const;
-        void setShowComicIdentifier(bool show);
+    bool showComicIdentifier() const;
+    void setShowComicIdentifier(bool show);
 
-        bool showErrorPicture() const;
-        void setShowErrorPicture(bool show);
+    bool showErrorPicture() const;
+    void setShowErrorPicture(bool show);
 
-        bool arrowsOnHover() const;
-        void setArrowsOnHover(bool show);
+    bool arrowsOnHover() const;
+    void setArrowsOnHover(bool show);
 
-        bool middleClick() const;
-        void setMiddleClick(bool show);
+    bool middleClick() const;
+    void setMiddleClick(bool show);
 
-        bool showActualSize() const;
-        void setShowActualSize(bool show);
+    bool showActualSize() const;
+    void setShowActualSize(bool show);
 
-        int checkNewComicStripsInterval() const;
-        void setCheckNewComicStripsInterval(int interval);
+    int checkNewComicStripsInterval() const;
+    void setCheckNewComicStripsInterval(int interval);
 
-        int providerUpdateInterval() const;
-        void setProviderUpdateInterval(int interval);
+    int providerUpdateInterval() const;
+    void setProviderUpdateInterval(int interval);
 
-        void setMaxComicLimit(int limit);
-        int maxComicLimit() const;
-        //End for QML
+    void setMaxComicLimit(int limit);
+    int maxComicLimit() const;
+    // End for QML
 
 Q_SIGNALS:
     void comicModelChanged();
@@ -118,90 +118,103 @@ Q_SIGNALS:
     void providerUpdateIntervalChanged();
     void maxComicLimitChanged();
 
-    public Q_SLOTS:
-        void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
+public Q_SLOTS:
+    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
 
-    private Q_SLOTS:
-        void slotTabChanged( const QString &newIdentifier );
-        void slotNextDay();
-        void slotPreviousDay();
-        void slotFirstDay();
-        void slotCurrentDay();
-        void slotFoundLastStrip( int index, const QString &identifier, const QString &suffix );
-        void slotGoJump();
-        void slotSaveComicAs();
-        void slotScaleToContent();
-        void slotShop();
-        void slotStorePosition();
-        void checkDayChanged();
-        void createComicBook();
-        void slotArchive( int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier );
-        void slotArchiveFinished( KJob *job );
+private Q_SLOTS:
+    void slotTabChanged(const QString &newIdentifier);
+    void slotNextDay();
+    void slotPreviousDay();
+    void slotFirstDay();
+    void slotCurrentDay();
+    void slotFoundLastStrip(int index, const QString &identifier, const QString &suffix);
+    void slotGoJump();
+    void slotSaveComicAs();
+    void slotScaleToContent();
+    void slotShop();
+    void slotStorePosition();
+    void checkDayChanged();
+    void createComicBook();
+    void slotArchive(int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier);
+    void slotArchiveFinished(KJob *job);
 
-    public Q_SLOTS:
-        void configChanged() override;
-        void saveConfig();
-        Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
-        Q_INVOKABLE void goJump() { slotGoJump();}
-        Q_INVOKABLE void shop() { slotShop();}
-        Q_INVOKABLE void tabChanged(const QString &newIdentifier) { slotTabChanged(newIdentifier);}
-        Q_INVOKABLE void loadProviders();
-        Q_INVOKABLE void positionFullView(QWindow *window);
+public Q_SLOTS:
+    void configChanged() override;
+    void saveConfig();
+    Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
 
-    private:
-        void changeComic( bool differentComic );
-        void updateUsedComics();
-        void updateContextMenu();
-        void updateView();
-        void refreshComicData();
-        void setTabHighlighted(const QString &id, bool highlight);
-        bool isTabHighlighted(const QString &id) const;
+    Q_INVOKABLE void goJump()
+    {
+        slotGoJump();
+    }
 
-    private:
-        static const int CACHE_LIMIT;
-        ComicModel *mModel;
-        QSortFilterProxyModel *mProxy;
-        ActiveComicModel *mActiveComicModel;
-        QVariantMap mComicData;
+    Q_INVOKABLE void shop()
+    {
+        slotShop();
+    }
 
-        QDate mCurrentDay;
+    Q_INVOKABLE void tabChanged(const QString &newIdentifier)
+    {
+        slotTabChanged(newIdentifier);
+    }
 
-        QString mIdentifierError;
-        QString mOldSource;
-        ConfigWidget *mConfigWidget;
-        bool mDifferentComic;
-        bool mShowComicUrl;
-        bool mShowComicAuthor;
-        bool mShowComicTitle;
-        bool mShowComicIdentifier;
-        bool mShowErrorPicture;
-        bool mArrowsOnHover;
-        bool mMiddleClick;
-        int mCheckNewComicStripsInterval;
-        int mMaxComicLimit;
-        CheckNewStrips *mCheckNewStrips;
-        QTimer *mDateChangedTimer;
-        QList<QAction*> mActions;
-        QAction *mActionGoFirst;
-        QAction *mActionGoLast;
-        QAction *mActionGoJump;
-        QAction *mActionScaleContent;
-        QAction *mActionShop;
-        QAction *mActionStorePosition;
-        QAction *mActionNextNewStripTab;
-        QAction *mActionSaveComicAs;
-        QAction *mActionCreateComicBook;
-        QSizeF mMaxSize;
-        QSizeF mLastSize;
-        QSizeF mIdealSize;
-        Plasma::DataEngine *mEngine;
+    Q_INVOKABLE void loadProviders();
+    Q_INVOKABLE void positionFullView(QWindow *window);
 
-        //Tabs
-        bool mTabAdded;
-        QStringList mTabIdentifier;
+private:
+    void changeComic(bool differentComic);
+    void updateUsedComics();
+    void updateContextMenu();
+    void updateView();
+    void refreshComicData();
+    void setTabHighlighted(const QString &id, bool highlight);
+    bool isTabHighlighted(const QString &id) const;
 
-        ComicData mCurrent;
-        SavingDir *mSavingDir;
+private:
+    static const int CACHE_LIMIT;
+    ComicModel *mModel;
+    QSortFilterProxyModel *mProxy;
+    ActiveComicModel *mActiveComicModel;
+    QVariantMap mComicData;
+
+    QDate mCurrentDay;
+
+    QString mIdentifierError;
+    QString mOldSource;
+    ConfigWidget *mConfigWidget;
+    bool mDifferentComic;
+    bool mShowComicUrl;
+    bool mShowComicAuthor;
+    bool mShowComicTitle;
+    bool mShowComicIdentifier;
+    bool mShowErrorPicture;
+    bool mArrowsOnHover;
+    bool mMiddleClick;
+    int mCheckNewComicStripsInterval;
+    int mMaxComicLimit;
+    CheckNewStrips *mCheckNewStrips;
+    QTimer *mDateChangedTimer;
+    QList<QAction *> mActions;
+    QAction *mActionGoFirst;
+    QAction *mActionGoLast;
+    QAction *mActionGoJump;
+    QAction *mActionScaleContent;
+    QAction *mActionShop;
+    QAction *mActionStorePosition;
+    QAction *mActionNextNewStripTab;
+    QAction *mActionSaveComicAs;
+    QAction *mActionCreateComicBook;
+    QSizeF mMaxSize;
+    QSizeF mLastSize;
+    QSizeF mIdealSize;
+    Plasma::DataEngine *mEngine;
+
+    // Tabs
+    bool mTabAdded;
+    QStringList mTabIdentifier;
+
+    ComicData mCurrent;
+    SavingDir *mSavingDir;
 };
 
 #endif

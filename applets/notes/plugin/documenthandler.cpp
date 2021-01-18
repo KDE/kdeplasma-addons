@@ -13,12 +13,12 @@
 
 #include "documenthandler.h"
 
-#include <QTextDocument>
-#include <QTextCursor>
+#include <QClipboard>
 #include <QFontDatabase>
 #include <QGuiApplication>
 #include <QMimeData>
-#include <QClipboard>
+#include <QTextCursor>
+#include <QTextDocument>
 
 DocumentHandler::DocumentHandler()
     : m_target(nullptr)
@@ -37,8 +37,8 @@ void DocumentHandler::setTarget(QQuickItem *target)
         return;
 
     QVariant doc = m_target->property("textDocument");
-    if (doc.canConvert<QQuickTextDocument*>()) {
-        QQuickTextDocument *qqdoc = doc.value<QQuickTextDocument*>();
+    if (doc.canConvert<QQuickTextDocument *>()) {
+        QQuickTextDocument *qqdoc = doc.value<QQuickTextDocument *>();
         if (qqdoc)
             m_doc = qqdoc->textDocument();
     }
@@ -63,7 +63,7 @@ void DocumentHandler::pasteWithoutFormatting()
     QTextCursor cursor = textCursor();
     if (cursor.isNull())
         return;
-    
+
     QClipboard *clipboard = QGuiApplication::clipboard();
     if (!clipboard)
         return;
@@ -147,7 +147,7 @@ void DocumentHandler::setSelectionEnd(int position)
 void DocumentHandler::setAlignment(Qt::Alignment a)
 {
     QTextBlockFormat fmt;
-    fmt.setAlignment((Qt::Alignment) a);
+    fmt.setAlignment((Qt::Alignment)a);
     QTextCursor cursor = QTextCursor(m_doc);
     cursor.setPosition(m_selectionStart, QTextCursor::MoveAnchor);
     cursor.setPosition(m_selectionEnd, QTextCursor::KeepAnchor);
@@ -194,7 +194,6 @@ bool DocumentHandler::strikeOut() const
         return false;
     return textCursor().charFormat().fontStrikeOut();
 }
-
 
 void DocumentHandler::setBold(bool arg)
 {

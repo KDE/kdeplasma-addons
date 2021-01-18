@@ -7,11 +7,11 @@
 #include "astronomicaleventsplugin.h"
 
 // KF
-#include <KSharedConfig>
 #include <KConfigGroup>
-#include <KHolidays/LunarPhase>
 #include <KHolidays/AstroSeasons>
+#include <KHolidays/LunarPhase>
 #include <KLocalizedString>
+#include <KSharedConfig>
 // Qt
 #include <QDebug>
 

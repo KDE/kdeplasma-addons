@@ -10,9 +10,9 @@
 #include <KShell>
 #include <QDateTime>
 
-Timer::Timer(QObject *parent) : QObject(parent)
+Timer::Timer(QObject *parent)
+    : QObject(parent)
 {
-
 }
 
 void Timer::runCommand(const QString &command)

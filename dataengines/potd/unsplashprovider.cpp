@@ -9,10 +9,10 @@
 #include <QDebug>
 #include <QRegularExpression>
 
-#include <KPluginFactory>
 #include <KIO/Job>
+#include <KPluginFactory>
 
-UnsplashProvider::UnsplashProvider(QObject* parent, const QVariantList& args)
+UnsplashProvider::UnsplashProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
 {
     QString collectionId = QStringLiteral("1065976");
@@ -25,7 +25,7 @@ UnsplashProvider::UnsplashProvider(QObject* parent, const QVariantList& args)
     }
     const QUrl url(QStringLiteral("https://source.unsplash.com/collection/%1/3840x2160/daily").arg(collectionId));
 
-    KIO::StoredTransferJob* job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::StoredTransferJob::finished, this, &UnsplashProvider::imageRequestFinished);
 }
 
@@ -36,9 +36,9 @@ QImage UnsplashProvider::image() const
     return mImage;
 }
 
-void UnsplashProvider::imageRequestFinished(KJob* _job)
+void UnsplashProvider::imageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(_job);
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
         emit error(this);
         return;

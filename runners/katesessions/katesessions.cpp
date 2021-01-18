@@ -29,8 +29,7 @@ KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData, con
     addSyntax(Plasma::RunnerSyntax(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:.")));
     addSyntax(Plasma::RunnerSyntax(QStringLiteral("kate"), i18n("Lists all the Kate editor sessions in your account.")));
 
-    m_sessionsFolderPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
-                            + QStringLiteral("/kate/sessions");
+    m_sessionsFolderPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/kate/sessions");
 
     // Initialize watchers and sessions
     m_sessionWatch = new KDirWatch(this);
@@ -74,7 +73,7 @@ void KateSessions::match(Plasma::RunnerContext &context)
         return;
     }
 
-    for (const QString &session: qAsConst(m_sessions)) {
+    for (const QString &session : qAsConst(m_sessions)) {
         if (listAll || session.contains(term, Qt::CaseInsensitive)) {
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::ExactMatch);
@@ -92,9 +91,7 @@ void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::Query
 {
     Q_UNUSED(context)
 
-    auto *job = new KIO::CommandLauncherJob(QStringLiteral("kate"), {
-        QStringLiteral("--start"), match.data().toString(), QStringLiteral("-n")
-    });
+    auto *job = new KIO::CommandLauncherJob(QStringLiteral("kate"), {QStringLiteral("--start"), match.data().toString(), QStringLiteral("-n")});
     job->setDesktopName(QStringLiteral("org.kde.kate"));
 
     auto *delegate = new KNotificationJobUiDelegate;

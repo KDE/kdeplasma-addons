@@ -10,15 +10,15 @@
 
 #include "abstractnoteloader.h"
 
-#include <QObject>
 #include <QDir>
+#include <QObject>
 
 class FileSystemNoteLoader : public AbstractNoteLoader
 {
 public:
     explicit FileSystemNoteLoader();
     QStringList allNoteIds() override;
-    Note* loadNote(const QString &id) override;
+    Note *loadNote(const QString &id) override;
     void deleteNoteResources(const QString &id) override;
 
 private:

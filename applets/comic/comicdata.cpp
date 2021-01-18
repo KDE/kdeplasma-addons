@@ -6,8 +6,8 @@
 
 #include "comicdata.h"
 
-#include <Plasma/Theme>
 #include <KLocalizedString>
+#include <Plasma/Theme>
 // Qt
 #include <QPainter>
 
@@ -31,7 +31,7 @@ void ComicData::load()
 
 void ComicData::save()
 {
-    mCfg.writeEntry(QLatin1String("scaleToContent_") + mId,  mScaleComic);
+    mCfg.writeEntry(QLatin1String("scaleToContent_") + mId, mScaleComic);
     mCfg.writeEntry(QLatin1String("maxStripNum_") + mId, mMaxStripNum);
     mCfg.writeEntry(QLatin1String("storedPosition_") + id(), mStored);
 
@@ -73,9 +73,9 @@ void ComicData::setData(const Plasma::DataEngine::Data &data)
     mTitle = data[QStringLiteral("Title")].toString();
 
     const QString suffixType = data[QStringLiteral("SuffixType")].toString();
-    if ( suffixType == QLatin1String("Date")) {
+    if (suffixType == QLatin1String("Date")) {
         mType = Date;
-    } else if ( suffixType == QLatin1String("Number")) {
+    } else if (suffixType == QLatin1String("Number")) {
         mType = Number;
     } else {
         mType = String;
@@ -84,16 +84,16 @@ void ComicData::setData(const Plasma::DataEngine::Data &data)
     QString temp = data[QStringLiteral("Identifier")].toString();
     mCurrent = temp.remove(mId + QLatin1Char(':'));
 
-    //found a new last identifier
+    // found a new last identifier
     if (!hasNext()) {
         mLast = mCurrent;
     }
 
     mCurrentReadable.clear();
-    if ( mType == Number ) {
+    if (mType == Number) {
         mCurrentReadable = i18nc("an abbreviation for Number", "# %1", mCurrent);
         int tempNum = mCurrent.toInt();
-        if ( mMaxStripNum < tempNum ) {
+        if (mMaxStripNum < tempNum) {
             mMaxStripNum = tempNum;
         }
 
@@ -101,7 +101,7 @@ void ComicData::setData(const Plasma::DataEngine::Data &data)
         mFirstStripNum = temp.toInt();
     } else if (mType == Date && QDate::fromString(temp, QStringLiteral("yyyy-MM-dd")).isValid()) {
         mCurrentReadable = mCurrent;
-    } else if ( mType == String ) {
+    } else if (mType == String) {
         mCurrentReadable = mCurrent;
     }
 
@@ -113,16 +113,19 @@ void ComicData::setData(const Plasma::DataEngine::Data &data)
 
 void ComicData::createErrorPicture(const Plasma::DataEngine::Data &data)
 {
-    QPixmap errorPic( 500, 400 );
+    QPixmap errorPic(500, 400);
     errorPic.fill();
-    QPainter p( &errorPic );
+    QPainter p(&errorPic);
     QFont font = QGuiApplication::font();
-    font.setPointSize( 24 );
-    p.setPen( QColor( 0, 0, 0 ) );
-    p.setFont( font );
-    QString title = i18n( "Getting comic strip failed:" );
-    p.drawText( QRect( 10, 10 , 480, 100 ), Qt::TextWordWrap | Qt::AlignHCenter | Qt::AlignVCenter, title );
-    QString text = i18n( "Maybe there is no Internet connection.\nMaybe the comic plugin is broken.\nAnother reason might be that there is no comic for this day/number/string, so choosing a different one might work." );
+    font.setPointSize(24);
+    p.setPen(QColor(0, 0, 0));
+    p.setFont(font);
+    QString title = i18n("Getting comic strip failed:");
+    p.drawText(QRect(10, 10, 480, 100), Qt::TextWordWrap | Qt::AlignHCenter | Qt::AlignVCenter, title);
+    QString text = i18n(
+        "Maybe there is no Internet connection.\nMaybe the comic plugin is broken.\n"
+        "Another reason might be that there is no comic for this day/number/string, "
+        "so choosing a different one might work.");
 
     mPrev = data[QStringLiteral("Previous identifier suffix")].toString();
     if (hasPrev()) {
@@ -130,12 +133,12 @@ void ComicData::createErrorPicture(const Plasma::DataEngine::Data &data)
         if (!identifier.isEmpty()) {
             mErrorStrip = identifier;
         }
-        text.append( i18n( "\n\nChoose the previous strip to go to the last cached strip." ) );
+        text.append(i18n("\n\nChoose the previous strip to go to the last cached strip."));
     }
 
-    font.setPointSize( 16 );
-    p.setFont( font );
-    p.drawText( QRect( 10, 120 , 480, 270 ), Qt::TextWordWrap | Qt::AlignLeft, text );
+    font.setPointSize(16);
+    p.setFont(font);
+    p.drawText(QRect(10, 120, 480, 270), Qt::TextWordWrap | Qt::AlignLeft, text);
 
     mImage = errorPic.toImage();
     mAdditionalText = title + text;

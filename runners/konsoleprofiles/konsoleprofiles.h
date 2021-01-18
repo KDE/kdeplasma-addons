@@ -12,17 +12,16 @@
 
 class KDirWatch;
 
-struct KonsoleProfileData
-{
+struct KonsoleProfileData {
     QString displayName;
     QString iconName;
 };
 
 Q_DECLARE_TYPEINFO(KonsoleProfileData, Q_MOVABLE_TYPE);
 
-class KonsoleProfiles: public Plasma::AbstractRunner
+class KonsoleProfiles : public Plasma::AbstractRunner
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     explicit KonsoleProfiles(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);

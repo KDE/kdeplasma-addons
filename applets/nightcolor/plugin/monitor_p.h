@@ -32,9 +32,7 @@ Q_SIGNALS:
 private Q_SLOTS:
     void handleServiceRegistered();
     void handleServiceUnregistered();
-    void handlePropertiesChanged(const QString &interfaceName,
-                                 const QVariantMap &changedProperties,
-                                 const QStringList &invalidatedProperties);
+    void handlePropertiesChanged(const QString &interfaceName, const QVariantMap &changedProperties, const QStringList &invalidatedProperties);
 
 private:
     void updateProperties(const QVariantMap &properties);

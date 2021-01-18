@@ -6,11 +6,11 @@
 
 #include "comic_package.h"
 
-#include <KPackage/Package>
 #include <KLocalizedString>
+#include <KPackage/Package>
 #include <QDebug>
 
-ComicPackage::ComicPackage(QObject *parent, const QVariantList& args)
+ComicPackage::ComicPackage(QObject *parent, const QVariantList &args)
     : KPackage::PackageStructure(parent, args)
 {
 }
@@ -28,7 +28,7 @@ void ComicPackage::initPackage(KPackage::Package *package)
     package->setMimeTypes("scripts", mimetypes);
 
     package->addFileDefinition("mainscript", QLatin1String("code/main"), i18n("Main Script File"));
-    //package->setRequired("mainscript", true); Package::isValid() fails with this because of Kross and different file extensions
+    // package->setRequired("mainscript", true); Package::isValid() fails with this because of Kross and different file extensions
     package->setDefaultPackageRoot(QStringLiteral("plasma/comics/"));
 }
 

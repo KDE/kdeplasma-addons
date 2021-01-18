@@ -7,18 +7,16 @@
 #include "util.h"
 
 // KF
-#include <KUnitConversion/Value>
 #include <KLocalizedString>
+#include <KUnitConversion/Value>
 // Qt
 #include <QIcon>
-#include <QPixmap>
 #include <QLocale>
+#include <QPixmap>
 // Std
 #include <cmath>
 
-
-template <typename T>
-T clampValue(T value, int decimals)
+template<typename T> T clampValue(T value, int decimals)
 {
     const T mul = std::pow(static_cast<T>(10), decimals);
     return int(value * mul) / mul;
@@ -37,8 +35,7 @@ QString Util::existingWeatherIconName(const QString &iconName) const
     return isValid ? iconName : QStringLiteral("weather-not-available");
 }
 
-QString Util::temperatureToDisplayString(int displayUnitType, double value,
-                                         int valueUnitType, bool rounded, bool degreesOnly) const
+QString Util::temperatureToDisplayString(int displayUnitType, double value, int valueUnitType, bool rounded, bool degreesOnly) const
 {
     KUnitConversion::Value v(value, static_cast<KUnitConversion::UnitId>(valueUnitType));
     v = v.convertTo(static_cast<KUnitConversion::UnitId>(displayUnitType));
@@ -54,8 +51,7 @@ QString Util::temperatureToDisplayString(int displayUnitType, double value,
     return i18nc("temperature unitsymbol", "%1 %2", formattedTemp, unit);
 }
 
-QString Util::valueToDisplayString(int displayUnitType, double value,
-                                   int valueUnitType, int precision) const
+QString Util::valueToDisplayString(int displayUnitType, double value, int valueUnitType, int precision) const
 {
     KUnitConversion::Value v(value, static_cast<KUnitConversion::UnitId>(valueUnitType));
     v = v.convertTo(static_cast<KUnitConversion::UnitId>(displayUnitType));
@@ -74,7 +70,6 @@ QString Util::percentToDisplayString(double value) const
 QString Util::nameFromUnitId(KUnitConversion::UnitId unitId)
 {
     const KUnitConversion::Unit unit = m_converter.unit(unitId);
-    QString unitDescription = i18nc("@item %1 is a unit description and %2 its unit symbol",
-                                    "%1 (%2)", unit.description(), unit.symbol());
+    QString unitDescription = i18nc("@item %1 is a unit description and %2 its unit symbol", "%1 (%2)", unit.description(), unit.symbol());
     return unitDescription;
 }

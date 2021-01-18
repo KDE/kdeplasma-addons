@@ -7,11 +7,11 @@
 
 #include "converterrunner.h"
 
-#include <QGuiApplication>
-#include <QClipboard>
-#include <QDesktopServices>
-#include <QDebug>
 #include <KLocalizedString>
+#include <QClipboard>
+#include <QDebug>
+#include <QDesktopServices>
+#include <QGuiApplication>
 
 #include <cmath>
 
@@ -20,19 +20,19 @@ ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaDat
 {
     setObjectName(QStringLiteral("Converter"));
 
-    const QString description = i18n("Converts the value of :q: when :q: is made up of "
-                                     "\"value unit [>, to, as, in] unit\". You can use the "
-                                     "Unit converter applet to find all available units.");
+    const QString description = i18n(
+        "Converts the value of :q: when :q: is made up of "
+        "\"value unit [>, to, as, in] unit\". You can use the "
+        "Unit converter applet to find all available units.");
     addSyntax(Plasma::RunnerSyntax(QStringLiteral(":q:"), description));
 }
 
 void ConverterRunner::init()
 {
     valueRegex = QRegularExpression(QStringLiteral("^([0-9,./+-]+)"));
-    const QStringList conversionWords = i18nc("list of words that can used as amount of 'unit1' [in|to|as] 'unit2'",
-                                              "in;to;as").split(QLatin1Char(';'));
+    const QStringList conversionWords = i18nc("list of words that can used as amount of 'unit1' [in|to|as] 'unit2'", "in;to;as").split(QLatin1Char(';'));
     QString conversionRegex;
-    for (const auto &word: conversionWords) {
+    for (const auto &word : conversionWords) {
         conversionRegex.append(QLatin1Char(' ') + word + QStringLiteral(" |"));
     }
     conversionRegex.append(QStringLiteral(" ?> ?"));
@@ -42,10 +42,8 @@ void ConverterRunner::init()
 
     insertCompatibleUnits();
 
-    addAction(copyActionId, QIcon::fromTheme(QStringLiteral("edit-copy")),
-              i18n("Copy number"));
-    addAction(copyUnitActionId, QIcon::fromTheme(QStringLiteral("edit-copy")),
-              i18n("Copy unit and number"));
+    addAction(copyActionId, QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy number"));
+    addAction(copyUnitActionId, QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy unit and number"));
     actionList = {action(copyActionId), action(copyUnitActionId)};
     setMinLetterCount(2);
     setMatchRegex(valueRegex);
@@ -92,9 +90,8 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
 
     const double numberValue = numberDataPair.second;
     QList<Plasma::QueryMatch> matches;
-    for (const KUnitConversion::Unit &outputUnit: outputUnits) {
-        KUnitConversion::Value outputValue = inputCategory.convert(
-            KUnitConversion::Value(numberValue, inputUnit), outputUnit);
+    for (const KUnitConversion::Unit &outputUnit : outputUnits) {
+        KUnitConversion::Value outputValue = inputCategory.convert(KUnitConversion::Value(numberValue, inputUnit), outputUnit);
         if (!outputValue.isValid() || inputUnit == outputUnit) {
             continue;
         }
@@ -166,8 +163,7 @@ QPair<bool, double> ConverterRunner::getValidatedNumberValue(const QString &valu
     }
 }
 
-QList<KUnitConversion::Unit> ConverterRunner::createResultUnits(QString &outputUnitString,
-                                                                const KUnitConversion::UnitCategory &category)
+QList<KUnitConversion::Unit> ConverterRunner::createResultUnits(QString &outputUnitString, const KUnitConversion::UnitCategory &category)
 {
     QList<KUnitConversion::Unit> units;
     if (!outputUnitString.isEmpty()) {
@@ -204,13 +200,12 @@ QList<KUnitConversion::Unit> ConverterRunner::createResultUnits(QString &outputU
 void ConverterRunner::insertCompatibleUnits()
 {
     // Add all currency symbols to the map, if their ISO code is supported by backend
-    const QList<QLocale> allLocales = QLocale::matchingLocales(
-        QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+    const QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
     KUnitConversion::UnitCategory currencyCategory = converter.category(QStringLiteral("Currency"));
     const QStringList availableISOCodes = currencyCategory.allUnits();
     QRegularExpression hasCurrencyRegex = QRegularExpression(QStringLiteral("\\p{Sc}"));
     hasCurrencyRegex.optimize();
-    for (const auto &currencyLocale: allLocales) {
+    for (const auto &currencyLocale : allLocales) {
         const QString symbol = currencyLocale.currencySymbol(QLocale::CurrencySymbol);
         const QString isoCode = currencyLocale.currencySymbol(QLocale::CurrencyIsoCode);
 
@@ -224,7 +219,7 @@ void ConverterRunner::insertCompatibleUnits()
 
     // Add all units as uppercase in the map
     const auto categories = converter.categories();
-    for (const auto &category: categories) {
+    for (const auto &category : categories) {
         const auto allUnits = category.allUnits();
         for (const auto &unit : allUnits) {
             compatibleUnits.insert(unit.toUpper(), unit);

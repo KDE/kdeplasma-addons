@@ -6,8 +6,8 @@
 #ifndef PLASMA_QUOTA_ITEM_H
 #define PLASMA_QUOTA_ITEM_H
 
-#include <QString>
 #include <QMetaType>
+#include <QString>
 
 /**
  * Class that holds all quota info for one mount point.

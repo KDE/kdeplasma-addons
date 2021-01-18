@@ -17,11 +17,11 @@
 class KJob;
 
 /**
- * This class provides the image for APOD 
+ * This class provides the image for APOD
  * "Astronomy Picture Of the Day"
  * located at http://antwrp.gsfc.nasa.gov/apod.
- * Direct link to the picture of the day page is 
- * http://antwrp.gsfc.nasa.gov/apod/apYYMMDD.html 
+ * Direct link to the picture of the day page is
+ * http://antwrp.gsfc.nasa.gov/apod/apYYMMDD.html
  * where YY is the year last 2 digits,
  * MM is the month and DD the day, in 2 digits.
  */
@@ -29,36 +29,36 @@ class NatGeoProvider : public PotdProvider
 {
     Q_OBJECT
 
-    public:
-        /**
-         * Creates a new APOD provider.
-         *
-         * @param parent The parent object.
-         * @param args The arguments.
-         */
-        NatGeoProvider( QObject *parent, const QVariantList &args );
+public:
+    /**
+     * Creates a new APOD provider.
+     *
+     * @param parent The parent object.
+     * @param args The arguments.
+     */
+    NatGeoProvider(QObject *parent, const QVariantList &args);
 
-        /**
-         * Destroys the APOD provider.
-         */
-        ~NatGeoProvider() override;
+    /**
+     * Destroys the APOD provider.
+     */
+    ~NatGeoProvider() override;
 
-        /**
-         * Returns the requested image.
-         *
-         * Note: This method returns only a valid image after the
-         *       finished() signal has been emitted.
-         */
-        QImage image() const override;
+    /**
+     * Returns the requested image.
+     *
+     * Note: This method returns only a valid image after the
+     *       finished() signal has been emitted.
+     */
+    QImage image() const override;
 
-    private:
-        void pageRequestFinished(KJob *job);
-        void imageRequestFinished(KJob *job);
+private:
+    void pageRequestFinished(KJob *job);
+    void imageRequestFinished(KJob *job);
 
-    private:
-        QImage mImage;
+private:
+    QImage mImage;
 
-        QRegularExpression re;
+    QRegularExpression re;
 };
 
 #endif

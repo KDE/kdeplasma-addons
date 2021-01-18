@@ -6,14 +6,14 @@
 
 #include "cachedprovider.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QFile>
-#include <QSettings>
-#include <QTimer>
 #include <QImage>
-#include <QDebug>
-#include <QUrl>
+#include <QSettings>
 #include <QStandardPaths>
+#include <QTimer>
+#include <QUrl>
 
 const int CachedProvider::CACHE_DEFAULT = 20;
 
@@ -23,7 +23,6 @@ static QString identifierToPath(const QString &identifier)
 
     return dataDir + QString::fromLatin1(QUrl::toPercentEncoding(identifier));
 }
-
 
 CachedProvider::CachedProvider(QObject *parent, const QVariantList &args)
     : ComicProvider(parent, args)
@@ -88,25 +87,25 @@ QString CachedProvider::comicAuthor() const
 
 QString CachedProvider::stripTitle() const
 {
-    QSettings settings(identifierToPath (requestedString()) + QLatin1String(".conf"), QSettings::IniFormat);
+    QSettings settings(identifierToPath(requestedString()) + QLatin1String(".conf"), QSettings::IniFormat);
     return settings.value(QLatin1String("stripTitle"), QString()).toString();
 }
 
 QString CachedProvider::additionalText() const
 {
-    QSettings settings(identifierToPath (requestedString()) + QLatin1String(".conf"), QSettings::IniFormat);
+    QSettings settings(identifierToPath(requestedString()) + QLatin1String(".conf"), QSettings::IniFormat);
     return settings.value(QLatin1String("additionalText"), QString()).toString();
 }
 
 QString CachedProvider::suffixType() const
 {
-    QSettings settings(identifierToPath (requestedComicName()) + QLatin1String(".conf"), QSettings::IniFormat);
+    QSettings settings(identifierToPath(requestedComicName()) + QLatin1String(".conf"), QSettings::IniFormat);
     return settings.value(QLatin1String("suffixType"), QString()).toString();
 }
 
 QString CachedProvider::name() const
 {
-    QSettings settings(identifierToPath (requestedComicName()) + QLatin1String(".conf"), QSettings::IniFormat);
+    QSettings settings(identifierToPath(requestedComicName()) + QLatin1String(".conf"), QSettings::IniFormat);
     return settings.value(QLatin1String("title"), QString()).toString();
 }
 
@@ -127,33 +126,34 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
     int index = identifier.indexOf(QLatin1Char(':'));
     const QString comicName = identifier.mid(0, index);
     const QString pathMain = identifierToPath(comicName);
-    const QString dirPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/plasma_engine_comic/") ;
+    const QString dirPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/plasma_engine_comic/");
 
     if (!info.isEmpty()) {
         QSettings settings(path + QLatin1String(".conf"), QSettings::IniFormat);
         QSettings settingsMain(pathMain + QLatin1String(".conf"), QSettings::IniFormat);
 
         for (Settings::const_iterator i = info.constBegin(); i != info.constEnd(); ++i) {
-                if ((i.key() == QLatin1String("firstStripIdentifier")) || (i.key() == QLatin1String("title")) ||
-                     (i.key() == QLatin1String("lastCachedStripIdentifier")) || (i.key() == QLatin1String("suffixType")) ||
-                     (i.key() == QLatin1String("shopUrl")) || (i.key() == QLatin1String("isLeftToRight")) ||
-                     (i.key() == QLatin1String("isTopToBottom"))) {
-                    settingsMain.setValue(i.key(), i.value());
-                } else {
-                    settings.setValue(i.key(), i.value());
-                }
+            if ((i.key() == QLatin1String("firstStripIdentifier")) || (i.key() == QLatin1String("title"))
+                || (i.key() == QLatin1String("lastCachedStripIdentifier")) || (i.key() == QLatin1String("suffixType")) || (i.key() == QLatin1String("shopUrl"))
+                || (i.key() == QLatin1String("isLeftToRight")) || (i.key() == QLatin1String("isTopToBottom"))) {
+                settingsMain.setValue(i.key(), i.value());
+            } else {
+                settings.setValue(i.key(), i.value());
+            }
         }
 
         QStringList comics;
         if (settingsMain.contains(QLatin1String("comics"))) {
             comics = settingsMain.value(QLatin1String("comics"), QStringList()).toStringList();
         } else {
-            //existing strips haven't been stored in the conf-file yet, do that now, oldest first, newest last
+            // existing strips haven't been stored in the conf-file yet, do that now, oldest first, newest last
             QDir dir(dirPath);
-            comics = dir.entryList(QStringList() << QString::fromLatin1(QUrl::toPercentEncoding(comicName + QLatin1Char(':'))) + QLatin1Char('*'), QDir::Files, QDir::Time | QDir::Reversed);
+            comics = dir.entryList(QStringList() << QString::fromLatin1(QUrl::toPercentEncoding(comicName + QLatin1Char(':'))) + QLatin1Char('*'),
+                                   QDir::Files,
+                                   QDir::Time | QDir::Reversed);
             QStringList::iterator it = comics.begin();
             while (it != comics.end()) {
-                //only count images, not the conf files
+                // only count images, not the conf files
                 if ((*it).endsWith(QLatin1String(".conf"))) {
                     it = comics.erase(it);
                 } else {
@@ -164,7 +164,7 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
         comics.append(QString::fromLatin1(QUrl::toPercentEncoding(identifier)));
 
         const int limit = CachedProvider::maxComicLimit();
-        //limit is on
+        // limit is on
         if (limit > 0) {
             qDebug() << QLatin1String("MaxComicLimit on.");
             int comicsToRemove = comics.count() - limit;
@@ -174,7 +174,7 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
                 QFile::remove(dirPath + (*it));
                 QFile::remove(dirPath + (*it) + QLatin1String(".conf"));
                 it = comics.erase(it);
-                -- comicsToRemove;
+                --comicsToRemove;
             }
         }
         settingsMain.setValue(QLatin1String("comics"), comics);
@@ -216,7 +216,7 @@ bool CachedProvider::isTopToBottom() const
 int CachedProvider::maxComicLimit()
 {
     QSettings settings(identifierToPath(QLatin1String("comic_settings.conf")), QSettings::IniFormat);
-    return  qMax(settings.value(QLatin1String("maxComics"), CACHE_DEFAULT).toInt(), 0);//old value was -1, thus use qMax
+    return qMax(settings.value(QLatin1String("maxComics"), CACHE_DEFAULT).toInt(), 0); // old value was -1, thus use qMax
 }
 
 void CachedProvider::setMaxComicLimit(int limit)
@@ -228,4 +228,3 @@ void CachedProvider::setMaxComicLimit(int limit)
     QSettings settings(identifierToPath(QLatin1String("comic_settings.conf")), QSettings::IniFormat);
     settings.setValue(QLatin1String("maxComics"), limit);
 }
-

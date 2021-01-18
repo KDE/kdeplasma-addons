@@ -10,7 +10,7 @@
 
 // Qt
 
-void DictPlugin::registerTypes (const char *uri)
+void DictPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.dict"));
     qmlRegisterType<DictObject>(uri, 1, 0, "DictObject");

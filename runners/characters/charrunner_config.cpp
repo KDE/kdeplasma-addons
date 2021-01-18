@@ -8,10 +8,10 @@
 #include "config_keys.h"
 
 // KF
+#include <KLocalizedString>
+#include <KMessageWidget>
 #include <KRunner/AbstractRunner>
 #include <KSharedConfig>
-#include <KMessageWidget>
-#include <KLocalizedString>
 
 CharacterRunnerConfigForm::CharacterRunnerConfigForm(QWidget *parent)
     : QWidget(parent)
@@ -55,8 +55,9 @@ void CharacterRunnerConfig::load()
             m_ui->list->addTopLevelItem(item);
         }
     } else {
-        const auto msg = new KMessageWidget(i18nc("Message that config is corrupted",
-            "Config entries for alias list and code list have different sizes, ignoring all."), this);
+        const auto msg = new KMessageWidget(i18nc("Message that config is corrupted", //
+                                                  "Config entries for alias list and code list have different sizes, ignoring all."),
+                                            this);
         m_ui->verticalLayout->insertWidget(0, msg);
     }
 }
@@ -68,8 +69,7 @@ void CharacterRunnerConfig::save()
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
     KConfigGroup grp = cfg->group("Runners").group("CharacterRunner");
 
-    grp.writeEntry(CONFIG_TRIGGERWORD, m_ui->edit_trigger->text().isEmpty()
-                                       ? DEFAULT_TRIGGERWORD.toString() : m_ui->edit_trigger->text());
+    grp.writeEntry(CONFIG_TRIGGERWORD, m_ui->edit_trigger->text().isEmpty() ? DEFAULT_TRIGGERWORD.toString() : m_ui->edit_trigger->text());
 
     QList<QString> aliasList;
     QList<QString> codeList;
@@ -117,7 +117,6 @@ void CharacterRunnerConfig::validateDeleteButton()
     m_ui->deleteItem->setDisabled(!m_ui->list->selectedItems().count());
 }
 
-K_PLUGIN_FACTORY(CharacterRunnerConfigFactory,
-                 registerPlugin<CharacterRunnerConfig>(QStringLiteral("kcm_krunner_charrunner"));)
+K_PLUGIN_FACTORY(CharacterRunnerConfigFactory, registerPlugin<CharacterRunnerConfig>(QStringLiteral("kcm_krunner_charrunner"));)
 
 #include "charrunner_config.moc"

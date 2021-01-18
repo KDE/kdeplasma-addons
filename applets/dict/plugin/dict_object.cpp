@@ -5,12 +5,11 @@
  */
 
 #include "dict_object.h"
-#include <QDebug>
 #include <KLocalizedString>
+#include <QDebug>
 #include <QQuickWebEngineProfile>
-#include <QWebEngineUrlSchemeHandler>
 #include <QWebEngineUrlRequestJob>
-
+#include <QWebEngineUrlSchemeHandler>
 
 // The KDE4 applet could use "qstardict" if available, but I have no idea where this came from.
 static const char defaultDataEngine[] = "dict";
@@ -23,25 +22,25 @@ public:
         : QWebEngineUrlSchemeHandler(parent)
     {
     }
-    void requestStarted(QWebEngineUrlRequestJob *job) override {
+    void requestStarted(QWebEngineUrlRequestJob *job) override
+    {
         job->fail(QWebEngineUrlRequestJob::UrlInvalid);
         const QString word = job->requestUrl().path();
         emit wordClicked(word);
-   }
+    }
 
 Q_SIGNALS:
     void wordClicked(const QString &word);
 };
 
 DictObject::DictObject(QObject *parent)
-    : QObject(parent),
-    m_dataEngineName(QString::fromLatin1(defaultDataEngine))
+    : QObject(parent)
+    , m_dataEngineName(QString::fromLatin1(defaultDataEngine))
 {
     m_selectedDict = QStringLiteral("wn");
     m_webProfile = new QQuickWebEngineProfile(this);
     auto *schemeHandler = new DictSchemeHandler(this);
-    connect(schemeHandler, &DictSchemeHandler::wordClicked,
-            this, &DictObject::lookup);
+    connect(schemeHandler, &DictSchemeHandler::wordClicked, this, &DictObject::lookup);
     m_webProfile->installUrlSchemeHandler("dict", schemeHandler);
     m_dataEngine = dataEngine(m_dataEngineName); // Load it upfront so the config dialog can reuse this one
 }
@@ -76,13 +75,12 @@ QString DictObject::selectedDictionary() const
     return m_selectedDict;
 }
 
-void DictObject::setSelectedDictionary(const QString& dict)
+void DictObject::setSelectedDictionary(const QString &dict)
 {
     m_selectedDict = dict;
 }
 
-
-QQuickWebEngineProfile* DictObject::webProfile() const
+QQuickWebEngineProfile *DictObject::webProfile() const
 {
     return m_webProfile;
 }

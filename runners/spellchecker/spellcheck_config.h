@@ -14,27 +14,27 @@
 class SpellCheckConfigForm : public QWidget, public Ui::SpellCheckConfigUi
 {
     Q_OBJECT
-    public:
-        explicit SpellCheckConfigForm(QWidget* parent);
+public:
+    explicit SpellCheckConfigForm(QWidget *parent);
 };
 
 class SpellCheckConfig : public KCModule
 {
     Q_OBJECT
-    public:
-        explicit SpellCheckConfig(QWidget* parent = nullptr, const QVariantList& args = QVariantList());
-        ~SpellCheckConfig() override;
+public:
+    explicit SpellCheckConfig(QWidget *parent = nullptr, const QVariantList &args = QVariantList());
+    ~SpellCheckConfig() override;
 
-    public Q_SLOTS:
-        void save() override;
-        void load() override;
-        void defaults() override;
+public Q_SLOTS:
+    void save() override;
+    void load() override;
+    void defaults() override;
 
-        void toggleTriggerWord(int state);
-        void openKcm();
+    void toggleTriggerWord(int state);
+    void openKcm();
 
-    private:
-        SpellCheckConfigForm* m_ui;
+private:
+    SpellCheckConfigForm *m_ui;
 };
 
 #endif

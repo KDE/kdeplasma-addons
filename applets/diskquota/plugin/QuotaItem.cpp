@@ -78,15 +78,17 @@ void QuotaItem::setFreeString(const QString &freeString)
 
 bool QuotaItem::operator==(const QuotaItem &other) const
 {
+    // clang-format off
     return m_mountPoint == other.m_mountPoint
         && m_iconName == other.m_iconName
         && m_usage == other.m_usage
         && m_mountString == other.m_mountString
         && m_usedString == other.m_usedString
         && m_freeString == other.m_freeString;
+    // clang-format on
 }
 
 bool QuotaItem::operator!=(const QuotaItem &other) const
 {
-    return ! (*this == other);
+    return !(*this == other);
 }

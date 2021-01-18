@@ -8,14 +8,13 @@
 
 #include "wcpotdprovider.h"
 
-#include <QUrlQuery>
-#include <QJsonDocument>
-#include <QJsonArray>
 #include <QDebug>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QUrlQuery>
 
-#include <KPluginFactory>
 #include <KIO/Job>
-
+#include <KPluginFactory>
 
 WcpotdProvider::WcpotdProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
@@ -43,22 +42,19 @@ QImage WcpotdProvider::image() const
 
 void WcpotdProvider::pageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
-    if ( job->error() ) {
-	emit error(this);
-	return;
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
+    if (job->error()) {
+        emit error(this);
+        return;
     }
 
-    auto jsonImageArray = QJsonDocument::fromJson(job->data())
-        .object().value(QLatin1String("parse"))
-        .toObject().value(QLatin1String("images"))
-        .toArray();
+    auto jsonImageArray = QJsonDocument::fromJson(job->data()).object().value(QLatin1String("parse")).toObject().value(QLatin1String("images")).toArray();
 
     if (jsonImageArray.size() > 0) {
         const QString imageFile = jsonImageArray.at(0).toString();
         if (!imageFile.isEmpty()) {
             const QUrl picUrl(QLatin1String("https://commons.wikimedia.org/wiki/Special:FilePath/") + imageFile);
-            KIO::StoredTransferJob *imageJob = KIO::storedGet( picUrl, KIO::NoReload, KIO::HideProgressInfo );
+            KIO::StoredTransferJob *imageJob = KIO::storedGet(picUrl, KIO::NoReload, KIO::HideProgressInfo);
             connect(imageJob, &KIO::StoredTransferJob::finished, this, &WcpotdProvider::imageRequestFinished);
             return;
         }
@@ -69,13 +65,13 @@ void WcpotdProvider::pageRequestFinished(KJob *_job)
 
 void WcpotdProvider::imageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
-    if ( job->error() ) {
-	emit error(this);
-	return;
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
+    if (job->error()) {
+        emit error(this);
+        return;
     }
     QByteArray data = job->data();
-    mImage = QImage::fromData( data );
+    mImage = QImage::fromData(data);
     emit finished(this);
 }
 

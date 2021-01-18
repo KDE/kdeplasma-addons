@@ -7,9 +7,9 @@
 
 #include "note.h"
 
-Note::Note(const QString &id):
-    QObject(),
-    m_id(id)
+Note::Note(const QString &id)
+    : QObject()
+    , m_id(id)
 {
 }
 
@@ -31,4 +31,3 @@ QString Note::noteText() const
 {
     return m_noteText;
 }
-

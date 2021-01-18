@@ -5,14 +5,14 @@
 
 #include "dictionarymatchengine.h"
 #include <KRunner/AbstractRunner>
-#include <QThread>
-#include <QMetaMethod>
-#include <QDebug>
 #include <QDeadlineTimer>
+#include <QDebug>
+#include <QMetaMethod>
+#include <QThread>
 
 DictionaryMatchEngine::DictionaryMatchEngine(Plasma::DataEngine *dictionaryEngine, QObject *parent)
-    : QObject(parent),
-      m_dictionaryEngine(dictionaryEngine)
+    : QObject(parent)
+    , m_dictionaryEngine(dictionaryEngine)
 {
     /* We have to connect source in two different places, due to the difference in
      * how the connection is made based on data availability. There are two cases,
@@ -39,13 +39,13 @@ QString DictionaryMatchEngine::lookupWord(const QString &word)
     m_lockers.insert(word, &data);
     m_wordLock.unlock();
 
-    QMetaObject::invokeMethod(this, "sourceAdded", Qt::QueuedConnection, Q_ARG(const QString&, word));
+    QMetaObject::invokeMethod(this, "sourceAdded", Qt::QueuedConnection, Q_ARG(const QString &, word));
     QMutexLocker locker(&data.mutex);
     if (!data.waitCondition.wait(&data.mutex, QDeadlineTimer(30 * 1000))) // Timeout after 30 seconds
         qDebug() << "The dictionary data engine timed out (word:" << word << ")";
     locker.unlock();
 
-    QMetaObject::invokeMethod(this, "sourceRemoved", Qt::QueuedConnection, Q_ARG(const QString&, word));
+    QMetaObject::invokeMethod(this, "sourceRemoved", Qt::QueuedConnection, Q_ARG(const QString &, word));
     // after a timeout, if dataUpdated gets m_wordLock here, it can lock data->mutex successfully.
 
     m_wordLock.lockForWrite();
@@ -85,4 +85,3 @@ void DictionaryMatchEngine::dataUpdated(const QString &source, const Plasma::Dat
     }
     m_wordLock.unlock();
 }
-

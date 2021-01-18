@@ -9,8 +9,8 @@
 #ifndef WEATHERAPPLET_H
 #define WEATHERAPPLET_H
 
-#include <KUnitConversion/Unit>
 #include <KUnitConversion/Converter>
+#include <KUnitConversion/Unit>
 
 #include <Plasma/Applet>
 
@@ -61,23 +61,63 @@ public: // QML config control API
     /**
      * @param configChanges config key-value entries which have changed
      */
-    Q_INVOKABLE void saveConfig(const QVariantMap& configChanges);
+    Q_INVOKABLE void saveConfig(const QVariantMap &configChanges);
 
 public:
-    QString source() const     { return m_source; }
-    int updateInterval() const { return m_updateInterval; }
+    QString source() const
+    {
+        return m_source;
+    }
 
-    int displayTemperatureUnit() const { return m_displayTemperatureUnit.id(); }
-    int displaySpeedUnit() const       { return m_displaySpeedUnit.id(); }
-    int displayPressureUnit() const    { return m_displayPressureUnit.id(); }
-    int displayVisibilityUnit() const  { return m_displayVisibilityUnit.id(); }
+    int updateInterval() const
+    {
+        return m_updateInterval;
+    }
 
-    bool temperatureShownInTooltip() const  { return m_temperatureShownInTooltip; }
-    bool windShownInTooltip() const         { return m_windShownInTooltip; }
-    bool pressureShownInTooltip() const     { return m_pressureShownInTooltip; }
-    bool humidityShownInTooltip() const     { return m_humidityShownInTooltip; }
+    int displayTemperatureUnit() const
+    {
+        return m_displayTemperatureUnit.id();
+    }
 
-    bool temperatureShownInCompactMode() const  { return m_temperatureShownInCompactMode; }
+    int displaySpeedUnit() const
+    {
+        return m_displaySpeedUnit.id();
+    }
+
+    int displayPressureUnit() const
+    {
+        return m_displayPressureUnit.id();
+    }
+
+    int displayVisibilityUnit() const
+    {
+        return m_displayVisibilityUnit.id();
+    }
+
+    bool temperatureShownInTooltip() const
+    {
+        return m_temperatureShownInTooltip;
+    }
+
+    bool windShownInTooltip() const
+    {
+        return m_windShownInTooltip;
+    }
+
+    bool pressureShownInTooltip() const
+    {
+        return m_pressureShownInTooltip;
+    }
+
+    bool humidityShownInTooltip() const
+    {
+        return m_humidityShownInTooltip;
+    }
+
+    bool temperatureShownInCompactMode() const
+    {
+        return m_temperatureShownInCompactMode;
+    }
 
 Q_SIGNALS:
     void configurationChanged();
@@ -94,7 +134,7 @@ Q_SIGNALS:
     void temperatureShownInCompactModeChanged();
 
 private:
-    KUnitConversion::Unit unit(const QString& unit);
+    KUnitConversion::Unit unit(const QString &unit);
 
 private:
     KUnitConversion::Converter m_converter;

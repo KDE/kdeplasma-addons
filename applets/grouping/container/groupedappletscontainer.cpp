@@ -11,8 +11,8 @@
 #include <QDebug>
 #include <QQuickItem>
 
-#include <Plasma/Corona>
 #include <KActionCollection>
+#include <Plasma/Corona>
 #include <QAction>
 
 GroupedAppletsContainer::GroupedAppletsContainer(QObject *parent, const QVariantList &args)
@@ -31,7 +31,7 @@ void GroupedAppletsContainer::init()
 {
     Applet::init();
 
-    //in the first creation we immediately create the systray: so it's accessible during desktop scripting
+    // in the first creation we immediately create the systray: so it's accessible during desktop scripting
     uint id = config().readEntry("ContainmentId", 0);
 
     if (id == 0) {
@@ -64,11 +64,12 @@ void GroupedAppletsContainer::ensureSystrayExists()
             }
         }
         qCDebug(GROUPING_DEBUG) << "Containment id" << id << "that used to be a grouped containment that was deleted";
-        //id = 0;
+        // id = 0;
     }
 
     if (!m_innerContainment) {
-        m_innerContainment = c->createContainment(QStringLiteral("org.kde.plasma.private.grouping"), QVariantList() << QStringLiteral("org.kde.plasma:force-create"));
+        m_innerContainment = c->createContainment(QStringLiteral("org.kde.plasma.private.grouping"), //
+                                                  QVariantList() << QStringLiteral("org.kde.plasma:force-create"));
         config().writeEntry("ContainmentId", m_innerContainment->id());
     }
 
@@ -85,18 +86,16 @@ void GroupedAppletsContainer::ensureSystrayExists()
     emit internalContainmentItemChanged();
 
     actions()->addAction(QStringLiteral("configure"), m_innerContainment->actions()->action(QStringLiteral("configure")));
-    connect(m_innerContainment.data(), &Plasma::Containment::configureRequested, this,
-        [this](Plasma::Applet *applet) {
-            emit containment()->configureRequested(applet);
-        }
-    );
+    connect(m_innerContainment.data(), &Plasma::Containment::configureRequested, this, [this](Plasma::Applet *applet) {
+        emit containment()->configureRequested(applet);
+    });
 
     if (m_internalContainmentItem) {
-        //don't let internal systray manage context menus
+        // don't let internal systray manage context menus
         m_internalContainmentItem->setAcceptedMouseButtons(Qt::NoButton);
     }
 
-    //replace internal remove action with ours
+    // replace internal remove action with ours
     m_innerContainment->actions()->addAction(QStringLiteral("remove"), actions()->action(QStringLiteral("remove")));
 }
 

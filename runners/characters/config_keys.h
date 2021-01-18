@@ -11,4 +11,4 @@ static const char CONFIG_ALIASES[] = "aliases";
 static const char CONFIG_CODES[] = "codes";
 static constexpr QStringView DEFAULT_TRIGGERWORD = u"#";
 
-#endif //CONFIG_KEYS_H
+#endif // CONFIG_KEYS_H

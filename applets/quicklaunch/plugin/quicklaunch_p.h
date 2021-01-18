@@ -7,8 +7,8 @@
 #ifndef QUICKLAUNCH_P_H
 #define QUICKLAUNCH_P_H
 
-#include <QUrl>
 #include <QObject>
+#include <QUrl>
 #include <QVariantMap>
 
 class QuicklaunchPrivate : public QObject

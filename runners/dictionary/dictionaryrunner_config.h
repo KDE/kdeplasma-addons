@@ -6,7 +6,6 @@
 #ifndef DICTIONARYRUNNERCONFIG_H
 #define DICTIONARYRUNNERCONFIG_H
 
-
 #include <KCModule>
 class QLineEdit;
 
@@ -14,17 +13,17 @@ static const char CONFIG_TRIGGERWORD[] = "triggerWord";
 
 class DictionaryRunnerConfig : public KCModule
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	explicit DictionaryRunnerConfig(QWidget* parent = nullptr, const QVariantList& args = QVariantList());
+    explicit DictionaryRunnerConfig(QWidget *parent = nullptr, const QVariantList &args = QVariantList());
 
 public Q_SLOTS:
-	void save() override;
-	void load() override;
-	void defaults() override;
+    void save() override;
+    void load() override;
+    void defaults() override;
 
 private:
-	QLineEdit *m_triggerWord;
+    QLineEdit *m_triggerWord;
 };
 #endif

@@ -54,10 +54,7 @@ void Inhibitor::inhibit()
         return;
     }
 
-    QDBusMessage message = QDBusMessage::createMethodCall(s_serviceName,
-                                                          s_path,
-                                                          s_interface,
-                                                          QStringLiteral("inhibit"));
+    QDBusMessage message = QDBusMessage::createMethodCall(s_serviceName, s_path, s_interface, QStringLiteral("inhibit"));
 
     QDBusPendingReply<uint> cookie = QDBusConnection::sessionBus().asyncCall(message);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(cookie, this);
@@ -100,11 +97,8 @@ void Inhibitor::uninhibit()
         return;
     }
 
-    QDBusMessage message = QDBusMessage::createMethodCall(s_serviceName,
-                                                          s_path,
-                                                          s_interface,
-                                                          QStringLiteral("uninhibit"));
-    message.setArguments({ d->cookie });
+    QDBusMessage message = QDBusMessage::createMethodCall(s_serviceName, s_path, s_interface, QStringLiteral("uninhibit"));
+    message.setArguments({d->cookie});
 
     QDBusPendingReply<void> reply = QDBusConnection::sessionBus().asyncCall(message);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);

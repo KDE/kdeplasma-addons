@@ -21,7 +21,8 @@ QVariant AbstractUnitListModel::data(const QModelIndex &index, int role) const
     const UnitItem &item = m_items.at(index.row());
 
     switch (role) {
-        case Qt::DisplayRole: return item.name;
+    case Qt::DisplayRole:
+        return item.name;
     }
 
     return QVariant();

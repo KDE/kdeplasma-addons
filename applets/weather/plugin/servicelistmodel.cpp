@@ -11,14 +11,13 @@
 
 #include <KLocalizedString>
 
-
 ServiceListModel::ServiceListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    Plasma::DataEngine* dataengine = dataEngine(QStringLiteral("weather"));
+    Plasma::DataEngine *dataengine = dataEngine(QStringLiteral("weather"));
 
     const QVariantList plugins = dataengine->containerForSource(QLatin1String("ions"))->data().values();
-    for (const QVariant& plugin : plugins) {
+    for (const QVariant &plugin : plugins) {
         const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
         if (pluginInfo.count() > 1) {
             m_services.append(ServiceItem(pluginInfo[0], pluginInfo[1]));
@@ -48,28 +47,27 @@ QVariant ServiceListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const ServiceItem& item = m_services.at(index.row());
+    const ServiceItem &item = m_services.at(index.row());
 
     switch (role) {
-        case Qt::DisplayRole: {
-            return i18nc("weather services provider name (id)",
-                         "%1 (%2)", item.displayName, item.id);
-        case Qt::CheckStateRole:
-            return item.checked;
-        }
+    case Qt::DisplayRole: {
+        return i18nc("weather services provider name (id)", "%1 (%2)", item.displayName, item.id);
+    case Qt::CheckStateRole:
+        return item.checked;
+    }
     }
 
     return QVariant();
 }
 
-bool ServiceListModel::setData(const QModelIndex& index, const QVariant& value, int role)
+bool ServiceListModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (!index.isValid() || value.isNull()) {
         return false;
     }
 
     if (role == Qt::CheckStateRole) {
-        ServiceItem& item = m_services[index.row()];
+        ServiceItem &item = m_services[index.row()];
 
         const bool checked = value.toBool();
         if (checked == item.checked) {
@@ -92,7 +90,7 @@ bool ServiceListModel::setData(const QModelIndex& index, const QVariant& value, 
     return false;
 }
 
-void ServiceListModel::setSelectedServices(const QStringList& selectedServices)
+void ServiceListModel::setSelectedServices(const QStringList &selectedServices)
 {
     if (m_selectedServices == selectedServices) {
         return;
@@ -101,7 +99,7 @@ void ServiceListModel::setSelectedServices(const QStringList& selectedServices)
     m_selectedServices = selectedServices;
 
     for (int i = 0, size = m_services.size(); i < size; ++i) {
-        ServiceItem& item = m_services[i];
+        ServiceItem &item = m_services[i];
 
         const bool checked = m_selectedServices.contains(item.id);
         if (checked == item.checked) {

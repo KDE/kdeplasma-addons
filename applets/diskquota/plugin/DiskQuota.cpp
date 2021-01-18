@@ -7,12 +7,12 @@
 #include "QuotaItem.h"
 #include "QuotaListModel.h"
 
-#include <KLocalizedString>
 #include <KFormat>
+#include <KLocalizedString>
 
-#include <QTimer>
 #include <QRegularExpression>
 #include <QStandardPaths>
+#include <QTimer>
 // #include <QDebug>
 
 DiskQuota::DiskQuota(QObject *parent)
@@ -24,8 +24,7 @@ DiskQuota::DiskQuota(QObject *parent)
     connect(m_timer, &QTimer::timeout, this, &DiskQuota::updateQuota);
     m_timer->start(2 * 60 * 1000); // check every 2 minutes
 
-    connect(m_quotaProcess, (void (QProcess::*)(int, QProcess::ExitStatus))&QProcess::finished,
-            this, &DiskQuota::quotaProcessFinished);
+    connect(m_quotaProcess, (void (QProcess::*)(int, QProcess::ExitStatus)) & QProcess::finished, this, &DiskQuota::quotaProcessFinished);
 
     updateQuota();
 }
@@ -143,14 +142,14 @@ static bool isQuotaLine(const QString &line)
 
 void DiskQuota::updateQuota()
 {
-    const bool quotaFound = ! QStandardPaths::findExecutable(QStringLiteral("quota")).isEmpty();
+    const bool quotaFound = !QStandardPaths::findExecutable(QStringLiteral("quota")).isEmpty();
     setQuotaInstalled(quotaFound);
     if (!quotaFound) {
         return;
     }
 
     // for now, only filelight is supported
-    setCleanUpToolInstalled(! QStandardPaths::findExecutable(QStringLiteral("filelight")).isEmpty());
+    setCleanUpToolInstalled(!QStandardPaths::findExecutable(QStringLiteral("filelight")).isEmpty());
 
     // kill running process in case it hanged for whatever reason
     if (m_quotaProcess->state() != QProcess::NotRunning) {
@@ -159,12 +158,12 @@ void DiskQuota::updateQuota()
 
     // Try to run 'quota'
     const QStringList args{
-        QStringLiteral("--show-mntpoint"),     // second entry is e.g. '/home'
-        QStringLiteral("--hide-device"),       // hide e.g. /dev/sda3
-        QStringLiteral("--no-mixed-pathnames"),// trim leading slashes from NFSv4 mountpoints
-        QStringLiteral("--all-nfs"),           // show all mount points
-        QStringLiteral("--no-wrap"),           // do not wrap long lines
-        QStringLiteral("--quiet-refuse"),      // no not print error message when NFS server does not respond
+        QStringLiteral("--show-mntpoint"), // second entry is e.g. '/home'
+        QStringLiteral("--hide-device"), // hide e.g. /dev/sda3
+        QStringLiteral("--no-mixed-pathnames"), // trim leading slashes from NFSv4 mountpoints
+        QStringLiteral("--all-nfs"), // show all mount points
+        QStringLiteral("--no-wrap"), // do not wrap long lines
+        QStringLiteral("--quiet-refuse"), // no not print error message when NFS server does not respond
     };
 
     m_quotaProcess->start(QStringLiteral("quota"), args, QIODevice::ReadOnly);
@@ -183,18 +182,18 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
 
     // get quota output
     const QString rawData = QString::fromLocal8Bit(m_quotaProcess->readAllStandardOutput());
-//     qDebug() << rawData;
+    //     qDebug() << rawData;
 
     const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), Qt::SkipEmptyParts);
     // Testing
-//     QStringList lines = QStringList()
-//         << QStringLiteral("/home/peterpan 3975379*  5000000 7000000           57602 0       0")
-//         << QStringLiteral("/home/archive 2263536  6000000 5100000            3932 0       0")
-//         << QStringLiteral("/home/shared 4271196*  10000000 7000000           57602 0       0");
-//         << QStringLiteral("/home/peterpan %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000)
-//         << QStringLiteral("/home/archive %1  5000000 5100000            3932 0       0").arg(qrand() % 5000000)
-//         << QStringLiteral("/home/shared %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000);
-//     lines.removeAt(qrand() % lines.size());
+    //     QStringList lines = QStringList()
+    //         << QStringLiteral("/home/peterpan 3975379*  5000000 7000000           57602 0       0")
+    //         << QStringLiteral("/home/archive 2263536  6000000 5100000            3932 0       0")
+    //         << QStringLiteral("/home/shared 4271196*  10000000 7000000           57602 0       0");
+    //         << QStringLiteral("/home/peterpan %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000)
+    //         << QStringLiteral("/home/archive %1  5000000 5100000            3932 0       0").arg(qrand() % 5000000)
+    //         << QStringLiteral("/home/shared %1*  5000000 7000000           57602 0       0").arg(qrand() % 5000000);
+    //     lines.removeAt(qrand() % lines.size());
 
     // format class needed for GiB/MiB/KiB formatting
     KFormat fmt;
@@ -203,7 +202,7 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
 
     // assumption: Filesystem starts with slash
     for (const QString &line : lines) {
-//         qDebug() << line << isQuotaLine(line);
+        //         qDebug() << line << isQuotaLine(line);
         if (!isQuotaLine(line)) {
             continue;
         }
@@ -247,7 +246,7 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
         maxQuota = qMax(maxQuota, percent);
     }
 
-//     qDebug() << "QUOTAS:" << quotas;
+    //     qDebug() << "QUOTAS:" << quotas;
 
     // make sure max quota is 100. Could be more, due to the
     // hard limit > soft limit, and we take soft limit as 100%
@@ -257,13 +256,10 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
     setIconName(iconNameForQuota(maxQuota));
 
     // update status
-    setStatus(maxQuota < 50 ? PassiveStatus
-            : maxQuota < 98 ? ActiveStatus
-            : NeedsAttentionStatus);
+    setStatus(maxQuota < 50 ? PassiveStatus : maxQuota < 98 ? ActiveStatus : NeedsAttentionStatus);
 
     if (!items.isEmpty()) {
-        setToolTip(i18nc("example: Quota: 83% used",
-                         "Quota: %1% used", maxQuota));
+        setToolTip(i18nc("example: Quota: 83% used", "Quota: %1% used", maxQuota));
         setSubToolTip(QString());
     } else {
         setToolTip(i18n("Disk Quota"));

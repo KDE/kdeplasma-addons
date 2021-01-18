@@ -8,9 +8,9 @@
 
 #include <Plasma/DataEngine>
 #include <QHash>
-#include <QReadWriteLock>
-#include <QMutex>
 #include <QMultiMap>
+#include <QMutex>
+#include <QReadWriteLock>
 #include <QWaitCondition>
 
 namespace Plasma
@@ -30,7 +30,7 @@ private:
         QMutex mutex;
         QString definition;
     };
-    QMultiMap <QString, ThreadData*> m_lockers;
+    QMultiMap<QString, ThreadData *> m_lockers;
     QReadWriteLock m_wordLock;
     Plasma::DataEngine *m_dictionaryEngine;
 
@@ -38,7 +38,6 @@ private Q_SLOTS:
     void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
     void sourceAdded(const QString &source);
     void sourceRemoved(const QString &source);
-
 };
 
 #endif

@@ -21,10 +21,7 @@ static const QString s_propertiesInterface = QStringLiteral("org.freedesktop.DBu
 MonitorPrivate::MonitorPrivate(QObject *parent)
     : QObject(parent)
 {
-    QDBusServiceWatcher *watcher = new QDBusServiceWatcher(s_serviceName,
-                                                           QDBusConnection::sessionBus(),
-                                                           QDBusServiceWatcher::WatchForOwnerChange,
-                                                           this);
+    QDBusServiceWatcher *watcher = new QDBusServiceWatcher(s_serviceName, QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForOwnerChange, this);
     connect(watcher, &QDBusServiceWatcher::serviceRegistered, this, &MonitorPrivate::handleServiceRegistered);
     connect(watcher, &QDBusServiceWatcher::serviceUnregistered, this, &MonitorPrivate::handleServiceUnregistered);
 
@@ -39,18 +36,18 @@ void MonitorPrivate::handleServiceRegistered()
 {
     QDBusConnection bus = QDBusConnection::sessionBus();
 
-    const bool connected = bus.connect(s_serviceName, s_nightColorPath, s_propertiesInterface,
+    const bool connected = bus.connect(s_serviceName,
+                                       s_nightColorPath,
+                                       s_propertiesInterface,
                                        QStringLiteral("PropertiesChanged"),
-                                       this, SLOT(handlePropertiesChanged(QString,QVariantMap,QStringList)));
+                                       this,
+                                       SLOT(handlePropertiesChanged(QString, QVariantMap, QStringList)));
     if (!connected) {
         return;
     }
 
-    QDBusMessage message = QDBusMessage::createMethodCall(s_serviceName,
-                                                          s_nightColorPath,
-                                                          s_propertiesInterface,
-                                                          QStringLiteral("GetAll"));
-    message.setArguments({ s_nightColorInterface });
+    QDBusMessage message = QDBusMessage::createMethodCall(s_serviceName, s_nightColorPath, s_propertiesInterface, QStringLiteral("GetAll"));
+    message.setArguments({s_nightColorInterface});
 
     QDBusPendingReply<QVariantMap> properties = bus.asyncCall(message);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(properties, this);
@@ -71,16 +68,17 @@ void MonitorPrivate::handleServiceUnregistered()
 {
     QDBusConnection bus = QDBusConnection::sessionBus();
 
-    bus.disconnect(s_serviceName, s_nightColorPath, s_propertiesInterface,
+    bus.disconnect(s_serviceName,
+                   s_nightColorPath,
+                   s_propertiesInterface,
                    QStringLiteral("PropertiesChanged"),
-                   this, SLOT(handlePropertiesChanged(QString,QVariantMap,QStringList)));
+                   this,
+                   SLOT(handlePropertiesChanged(QString, QVariantMap, QStringList)));
 
     setAvailable(false);
 }
 
-void MonitorPrivate::handlePropertiesChanged(const QString &interfaceName,
-                                             const QVariantMap &changedProperties,
-                                             const QStringList &invalidatedProperties)
+void MonitorPrivate::handlePropertiesChanged(const QString &interfaceName, const QVariantMap &changedProperties, const QStringList &invalidatedProperties)
 {
     Q_UNUSED(interfaceName)
     Q_UNUSED(invalidatedProperties)

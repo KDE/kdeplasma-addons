@@ -16,10 +16,10 @@ class ActiveComicModel : public QStandardItemModel
 
 public:
     enum Roles {
-        ComicKeyRole = Qt::UserRole+1,
-        ComicTitleRole = Qt::UserRole+2,
-        ComicIconRole = Qt::UserRole+3,
-        ComicHighlightRole = Qt::UserRole+4,
+        ComicKeyRole = Qt::UserRole + 1,
+        ComicTitleRole = Qt::UserRole + 2,
+        ComicIconRole = Qt::UserRole + 3,
+        ComicHighlightRole = Qt::UserRole + 4,
     };
 
     explicit ActiveComicModel(QObject *parent = nullptr);
@@ -28,7 +28,10 @@ public:
 
     void addComic(const QString &key, const QString &title, const QIcon &icon, bool highlight = true);
 
-    int count() { return rowCount(QModelIndex()); }
+    int count()
+    {
+        return rowCount(QModelIndex());
+    }
 
     Q_INVOKABLE QVariantHash get(int i) const;
 

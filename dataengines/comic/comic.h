@@ -30,33 +30,33 @@ class ComicEngine : public Plasma::DataEngine
 {
     Q_OBJECT
 
-    public:
-        ComicEngine(QObject* parent, const QVariantList& args);
-        ~ComicEngine() override;
+public:
+    ComicEngine(QObject *parent, const QVariantList &args);
+    ~ComicEngine() override;
 
-    public Q_SLOTS:
-        void loadProviders();
+public Q_SLOTS:
+    void loadProviders();
 
-    protected:
-        void init();
-        bool sourceRequestEvent(const QString &identifier) override;
+protected:
+    void init();
+    bool sourceRequestEvent(const QString &identifier) override;
 
-    protected Q_SLOTS:
-        bool updateSourceEvent(const QString &identifier) override;
+protected Q_SLOTS:
+    bool updateSourceEvent(const QString &identifier) override;
 
-    private Q_SLOTS:
-        void finished(ComicProvider*);
-        void error(ComicProvider*);
-        void onOnlineStateChanged(bool);
+private Q_SLOTS:
+    void finished(ComicProvider *);
+    void error(ComicProvider *);
+    void onOnlineStateChanged(bool);
 
-    private:
-        bool mEmptySuffix;
-        void setComicData(ComicProvider *provider);
-        QString lastCachedIdentifier(const QString &identifier) const;
-        QString mIdentifierError;
-        QStringList mProviders;
-        QHash<QString, ComicProvider*> m_jobs;
-        QNetworkConfigurationManager m_networkConfigurationManager;
+private:
+    bool mEmptySuffix;
+    void setComicData(ComicProvider *provider);
+    QString lastCachedIdentifier(const QString &identifier) const;
+    QString mIdentifierError;
+    QStringList mProviders;
+    QHash<QString, ComicProvider *> m_jobs;
+    QNetworkConfigurationManager m_networkConfigurationManager;
 };
 
 #endif

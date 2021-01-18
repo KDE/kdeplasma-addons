@@ -7,21 +7,22 @@
 #include "comic.h"
 
 #include <QDate>
-#include <QFileInfo>
-#include <QSettings>
-#include <QImage>
-#include <QUrl>
 #include <QDebug>
+#include <QFileInfo>
+#include <QImage>
+#include <QSettings>
 #include <QStandardPaths>
+#include <QUrl>
 
-#include <Plasma/DataContainer>
 #include <KPackage/PackageLoader>
+#include <Plasma/DataContainer>
 
 #include "cachedprovider.h"
 #include "comicproviderkross.h"
 
-ComicEngine::ComicEngine(QObject* parent, const QVariantList& args)
-    : Plasma::DataEngine(parent, args), mEmptySuffix(false)
+ComicEngine::ComicEngine(QObject *parent, const QVariantList &args)
+    : Plasma::DataEngine(parent, args)
+    , mEmptySuffix(false)
 {
     setPollingInterval(0);
     loadProviders();
@@ -33,8 +34,7 @@ ComicEngine::~ComicEngine()
 
 void ComicEngine::init()
 {
-    connect(&m_networkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged,
-            this, &ComicEngine::onOnlineStateChanged);
+    connect(&m_networkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged, this, &ComicEngine::onOnlineStateChanged);
 }
 
 void ComicEngine::onOnlineStateChanged(bool isOnline)
@@ -52,12 +52,13 @@ void ComicEngine::loadProviders()
     for (auto comic : comics) {
         mProviders << comic.pluginId();
 
-        //qDebug() << "ComicEngine::loadProviders()  service name=" << comic.name();
+        // qDebug() << "ComicEngine::loadProviders()  service name=" << comic.name();
         QStringList data;
         data << comic.name();
         QFileInfo file(comic.iconName());
         if (file.isRelative()) {
-            data << QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("plasma/comics/%1/%2").arg(comic.pluginId(), comic.iconName()));
+            data << QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                           QString::fromLatin1("plasma/comics/%1/%2").arg(comic.pluginId(), comic.iconName()));
         } else {
             data << comic.iconName();
         }
@@ -131,7 +132,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         QVariantList args;
         ComicProvider *provider = nullptr;
 
-        //const QString type = service->property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"), QVariant::String).toString();
+        // const QString type = service->property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"), QVariant::String).toString();
         const QString type = pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType"));
         if (type == QLatin1String("Date")) {
             QDate date = QDate::fromString(parts[1], Qt::ISODate);
@@ -146,7 +147,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         }
         args << QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/comics/") + parts[0] + QLatin1String("/metadata.desktop"));
 
-        //provider = service->createInstance<ComicProvider>(this, args);
+        // provider = service->createInstance<ComicProvider>(this, args);
         provider = new ComicProviderKross(this, args);
         if (!provider) {
             setData(identifier, QLatin1String("Error"), true);
@@ -184,15 +185,14 @@ void ComicEngine::finished(ComicProvider *provider)
         mIdentifierError.clear();
     }
     // comic strip with error worked now
-    if (!mIdentifierError.isEmpty() && (mIdentifierError == provider->identifier())){
+    if (!mIdentifierError.isEmpty() && (mIdentifierError == provider->identifier())) {
         mIdentifierError.clear();
     }
 
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic
     // (if we're on today's comic it could become stale)
-    if (!provider->inherits("CachedProvider") && !provider->image().isNull() &&
-         !provider->nextIdentifier().isEmpty()) {
+    if (!provider->inherits("CachedProvider") && !provider->image().isNull() && !provider->nextIdentifier().isEmpty()) {
         CachedProvider::Settings info;
 
         info[QLatin1String("websiteUrl")] = provider->websiteUrl().toString(QUrl::PrettyDecoded);
@@ -208,7 +208,7 @@ void ComicEngine::finished(ComicProvider *provider)
         info[QLatin1String("isLeftToRight")] = isLeftToRight.setNum(provider->isLeftToRight());
         info[QLatin1String("isTopToBottom")] = isTopToBottom.setNum(provider->isTopToBottom());
 
-        //data that should be only written if available
+        // data that should be only written if available
         if (!provider->comicAuthor().isEmpty()) {
             info[QLatin1String("comicAuthor")] = provider->comicAuthor();
         }
@@ -301,13 +301,13 @@ void ComicEngine::setComicData(ComicProvider *provider)
 
 QString ComicEngine::lastCachedIdentifier(const QString &identifier) const
 {
-        const QString id = identifier.left(identifier.indexOf(QLatin1Char(':')));
-        QString data = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/plasma_engine_comic/");
-        data += QString::fromLatin1(QUrl::toPercentEncoding(id));
-        QSettings settings(data + QLatin1String(".conf"), QSettings::IniFormat);
-        QString previousIdentifier = settings.value(QLatin1String("lastCachedStripIdentifier"), QString()).toString();
+    const QString id = identifier.left(identifier.indexOf(QLatin1Char(':')));
+    QString data = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/plasma_engine_comic/");
+    data += QString::fromLatin1(QUrl::toPercentEncoding(id));
+    QSettings settings(data + QLatin1String(".conf"), QSettings::IniFormat);
+    QString previousIdentifier = settings.value(QLatin1String("lastCachedStripIdentifier"), QString()).toString();
 
-        return previousIdentifier;
+    return previousIdentifier;
 }
 
 K_EXPORT_PLASMA_DATAENGINE_WITH_JSON(comic, ComicEngine, "plasma-dataengine-comic.json")

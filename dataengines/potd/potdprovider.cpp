@@ -17,19 +17,19 @@ public:
     QString identifier;
 };
 
-PotdProvider::PotdProvider( QObject *parent, const QVariantList &args )
-    : QObject( parent ),
-      d(new PotdProviderPrivate)
+PotdProvider::PotdProvider(QObject *parent, const QVariantList &args)
+    : QObject(parent)
+    , d(new PotdProviderPrivate)
 {
-    if ( args.count() > 0 ) {
-        d->name = args[ 0 ].toString();
-        
+    if (args.count() > 0) {
+        d->name = args[0].toString();
+
         d->identifier = d->name;
 
-        if ( args.count() > 1 ) {
+        if (args.count() > 1) {
             for (int i = 1; i < args.count(); i++) {
                 d->identifier += QStringLiteral(":") + args[i].toString();
-                QDate date = QDate::fromString(args[ i ].toString(), Qt::ISODate);
+                QDate date = QDate::fromString(args[i].toString(), Qt::ISODate);
                 if (date.isValid()) {
                     d->date = date;
                 }
@@ -64,5 +64,3 @@ QString PotdProvider::identifier() const
 {
     return d->identifier;
 }
-
-

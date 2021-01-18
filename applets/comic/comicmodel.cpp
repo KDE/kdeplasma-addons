@@ -8,20 +8,21 @@
 
 #include "comicmodel.h"
 
-#include <QIcon>
 #include <QDebug>
+#include <QIcon>
 
-ComicModel::ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent )
-  : QAbstractTableModel( parent ), mUsedComics(usedComics)
+ComicModel::ComicModel(Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent)
+    : QAbstractTableModel(parent)
+    , mUsedComics(usedComics)
 {
     if (engine) {
-        engine->connectSource( source, this );
+        engine->connectSource(source, this);
     }
 }
 
-void ComicModel::dataUpdated( const QString &/*source*/, const Plasma::DataEngine::Data &data )
+void ComicModel::dataUpdated(const QString & /*source*/, const Plasma::DataEngine::Data &data)
 {
-    setComics( data, mUsedComics );
+    setComics(data, mUsedComics);
 }
 
 QHash<int, QByteArray> ComicModel::roleNames() const
@@ -33,7 +34,7 @@ QHash<int, QByteArray> ComicModel::roleNames() const
     return roles;
 }
 
-void ComicModel::setComics( const Plasma::DataEngine::Data &comics, const QStringList &/*usedComics*/ )
+void ComicModel::setComics(const Plasma::DataEngine::Data &comics, const QStringList & /*usedComics*/)
 {
     beginResetModel();
 
@@ -42,49 +43,46 @@ void ComicModel::setComics( const Plasma::DataEngine::Data &comics, const QStrin
     endResetModel();
 }
 
-int ComicModel::rowCount( const QModelIndex &index ) const
+int ComicModel::rowCount(const QModelIndex &index) const
 {
-    if ( !index.isValid() ) {
+    if (!index.isValid()) {
         return mComics.count();
     }
 
     return 0;
 }
 
-int ComicModel::columnCount( const QModelIndex &index ) const
+int ComicModel::columnCount(const QModelIndex &index) const
 {
-    Q_UNUSED( index )
+    Q_UNUSED(index)
     return 2;
 }
 
-QVariant ComicModel::data( const QModelIndex &index, int role ) const
+QVariant ComicModel::data(const QModelIndex &index, int role) const
 {
-    if ( !index.isValid() || index.row() >= mComics.keys().count() ) {
+    if (!index.isValid() || index.row() >= mComics.keys().count()) {
         return QVariant();
     }
 
-    const QString data = mComics.keys()[ index.row() ];
+    const QString data = mComics.keys()[index.row()];
 
-    switch( role ) {
-        case Qt::DisplayRole:
-            return mComics[ data ].toStringList()[ 0 ];
-        case Qt::DecorationRole:
-            return QIcon::fromTheme( mComics[ data ].toStringList()[ 1 ] );
-        case Qt::UserRole:
-            return data;
+    switch (role) {
+    case Qt::DisplayRole:
+        return mComics[data].toStringList()[0];
+    case Qt::DecorationRole:
+        return QIcon::fromTheme(mComics[data].toStringList()[1]);
+    case Qt::UserRole:
+        return data;
     }
-
 
     return QVariant();
 }
 
-Qt::ItemFlags ComicModel::flags( const QModelIndex &index ) const
+Qt::ItemFlags ComicModel::flags(const QModelIndex &index) const
 {
-    if ( index.isValid() && ( index.column() == 0 ) ) {
-        return QAbstractItemModel::flags( index ) | Qt::ItemIsUserCheckable;
+    if (index.isValid() && (index.column() == 0)) {
+        return QAbstractItemModel::flags(index) | Qt::ItemIsUserCheckable;
     }
 
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
-
-

@@ -6,15 +6,15 @@
 
 #include "grabwidget.h"
 
-#include <QDebug>
+#include <QApplication>
+#include <QClipboard>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusMetaType>
 #include <QDBusPendingCall>
 #include <QDBusPendingCallWatcher>
 #include <QDBusPendingReply>
-#include <QApplication>
-#include <QClipboard>
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QEvent>
 #include <QMouseEvent>
@@ -25,7 +25,7 @@
 
 Q_DECLARE_METATYPE(QColor)
 
-QDBusArgument &operator<< (QDBusArgument &argument, const QColor &color)
+QDBusArgument &operator<<(QDBusArgument &argument, const QColor &color)
 {
     argument.beginStructure();
     argument << color.rgba();
@@ -92,8 +92,7 @@ bool X11Grabber::eventFilter(QObject *watched, QEvent *event)
         if (me->button() == Qt::LeftButton) {
             const QPoint pos = me->globalPos();
             const QDesktopWidget *desktop = QApplication::desktop();
-            const QPixmap pixmap = QGuiApplication::screens().at(desktop->screenNumber())->grabWindow(desktop->winId(),
-                                                                                                      pos.x(), pos.y(), 1, 1);
+            const QPixmap pixmap = QGuiApplication::screens().at(desktop->screenNumber())->grabWindow(desktop->winId(), pos.x(), pos.y(), 1, 1);
             if (!pixmap.isNull()) {
                 QImage i = pixmap.toImage();
                 QColor color(i.pixel(0, 0));
@@ -121,15 +120,13 @@ void KWinWaylandGrabber::pick()
                                                       QStringLiteral("pick"));
     auto call = QDBusConnection::sessionBus().asyncCall(msg);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
-    connect(watcher, &QDBusPendingCallWatcher::finished, this,
-        [this] (QDBusPendingCallWatcher *watcher) {
-            watcher->deleteLater();
-            QDBusPendingReply<QColor> reply = *watcher;
-            if (!reply.isError()) {
-                setColor(reply.value());
-            }
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
+        watcher->deleteLater();
+        QDBusPendingReply<QColor> reply = *watcher;
+        if (!reply.isError()) {
+            setColor(reply.value());
         }
-    );
+    });
 }
 
 GrabWidget::GrabWidget(QObject *parent)

@@ -12,34 +12,33 @@
 // KF
 #include <KCModule>
 
-
 class CharacterRunnerConfigForm : public QWidget, public Ui::CharacterRunnerConfigUi
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit CharacterRunnerConfigForm(QWidget* parent);
+public:
+    explicit CharacterRunnerConfigForm(QWidget *parent);
 };
 
 class CharacterRunnerConfig : public KCModule
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit CharacterRunnerConfig(QWidget* parent, const QVariantList& args = QVariantList());
+public:
+    explicit CharacterRunnerConfig(QWidget *parent, const QVariantList &args = QVariantList());
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void save() override;
     void load() override;
     void defaults() override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void addItem();
     void deleteItem();
     void validateAddButton();
     void validateDeleteButton();
 
-  private:
-    CharacterRunnerConfigForm* m_ui;
+private:
+    CharacterRunnerConfigForm *m_ui;
 };
 #endif

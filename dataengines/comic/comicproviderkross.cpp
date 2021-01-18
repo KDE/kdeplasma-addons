@@ -11,7 +11,8 @@
 KPackage::PackageStructure *ComicProviderKross::m_packageStructure(nullptr);
 
 ComicProviderKross::ComicProviderKross(QObject *parent, const QVariantList &args)
-    : ComicProvider(parent, args), m_wrapper(this)
+    : ComicProvider(parent, args)
+    , m_wrapper(this)
 {
 }
 
@@ -75,7 +76,7 @@ QString ComicProviderKross::nextIdentifier() const
 
 QString ComicProviderKross::previousIdentifier() const
 {
-    return  identifierToString(m_wrapper.previousIdentifierVariant());
+    return identifierToString(m_wrapper.previousIdentifierVariant());
 }
 
 QString ComicProviderKross::firstStripIdentifier() const
@@ -116,6 +117,6 @@ KPackage::PackageStructure *ComicProviderKross::packageStructure()
     return m_packageStructure;
 }
 
-//K_PLUGIN_FACTORY_WITH_JSON(ComicProviderKrossFactory, "plasma-packagestructure-comic.json", registerPlugin<ComicProviderKross>();)
+// K_PLUGIN_FACTORY_WITH_JSON(ComicProviderKrossFactory, "plasma-packagestructure-comic.json", registerPlugin<ComicProviderKross>();)
 
 // #include "comicproviderkross.moc"

@@ -9,16 +9,15 @@
 #include "konsoleprofiles.h"
 
 // KF
-#include <KIO/CommandLauncherJob>
 #include <KConfig>
 #include <KDirWatch>
+#include <KIO/CommandLauncherJob>
 #include <KLocalizedString>
 #include <KNotificationJobUiDelegate>
 // Qt
-#include <QFileInfo>
 #include <QDir>
+#include <QFileInfo>
 #include <QStandardPaths>
-
 
 KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : Plasma::AbstractRunner(parent, metaData, args)
@@ -28,8 +27,7 @@ KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaDat
     Plasma::RunnerSyntax s(QStringLiteral(":q:"), i18n("Finds Konsole profiles matching :q:."));
     s.addExampleQuery(QStringLiteral("konsole :q:"));
     addSyntax(s);
-    addSyntax(Plasma::RunnerSyntax(QStringLiteral("konsole"),
-                                   i18n("Lists all the Konsole profiles in your account.")));
+    addSyntax(Plasma::RunnerSyntax(QStringLiteral("konsole"), i18n("Lists all the Konsole profiles in your account.")));
 }
 
 KonsoleProfiles::~KonsoleProfiles() = default;
@@ -56,8 +54,7 @@ void KonsoleProfiles::loadProfiles()
     m_profiles.clear();
 
     QStringList profilesPaths;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
-                                                       QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
 
     for (const auto &dir : dirs) {
         const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.profile")});
@@ -87,14 +84,14 @@ void KonsoleProfiles::match(Plasma::RunnerContext &context)
 {
     QString term = context.query();
     term = term.remove(m_triggerWord).simplified();
-    for (const KonsoleProfileData &data: qAsConst(m_profiles)) {
+    for (const KonsoleProfileData &data : qAsConst(m_profiles)) {
         if (data.displayName.contains(term, Qt::CaseInsensitive)) {
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::PossibleMatch);
             match.setIconName(data.iconName);
             match.setData(data.displayName);
             match.setText(QStringLiteral("Konsole: ") + data.displayName);
-            match.setRelevance((float) term.length() / (float) data.displayName.length());
+            match.setRelevance((float)term.length() / (float)data.displayName.length());
             context.addMatch(match);
         }
     }
@@ -104,9 +101,7 @@ void KonsoleProfiles::run(const Plasma::RunnerContext &context, const Plasma::Qu
     Q_UNUSED(context)
     const QString profile = match.data().toString();
 
-    auto *job = new KIO::CommandLauncherJob(QStringLiteral("konsole"), {
-        QStringLiteral("--profile"), profile
-    });
+    auto *job = new KIO::CommandLauncherJob(QStringLiteral("konsole"), {QStringLiteral("--profile"), profile});
     job->setDesktopName(QStringLiteral("org.kde.konsole"));
 
     auto *delegate = new KNotificationJobUiDelegate;

@@ -29,7 +29,7 @@ class DiskQuota : public QObject
     Q_PROPERTY(QString subToolTip READ subToolTip NOTIFY subToolTipChanged)
     Q_PROPERTY(QString iconName READ iconName NOTIFY iconNameChanged)
 
-    Q_PROPERTY(QuotaListModel* model READ model CONSTANT)
+    Q_PROPERTY(QuotaListModel *model READ model CONSTANT)
 
 public:
     explicit DiskQuota(QObject *parent = nullptr);

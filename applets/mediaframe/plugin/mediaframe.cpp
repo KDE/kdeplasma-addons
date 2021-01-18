@@ -6,30 +6,31 @@
 
 #include "mediaframe.h"
 
+#include <QCryptographicHash>
+#include <QDebug>
 #include <QDir>
 #include <QDirIterator>
 #include <QFileInfo>
-#include <QUrl>
-#include <QDebug>
 #include <QImageReader>
 #include <QMimeDatabase>
-#include <QTime>
-#include <QRegularExpression>
-#include <QCryptographicHash>
 #include <QRandomGenerator>
+#include <QRegularExpression>
+#include <QTime>
+#include <QUrl>
 
 #include <KIO/StoredTransferJob>
 
-MediaFrame::MediaFrame(QObject *parent) : QObject(parent)
+MediaFrame::MediaFrame(QObject *parent)
+    : QObject(parent)
 {
     const auto imageMimeTypeNames = QImageReader::supportedMimeTypes();
     QMimeDatabase mimeDb;
-    for (const auto& imageMimeTypeName : imageMimeTypeNames) {
+    for (const auto &imageMimeTypeName : imageMimeTypeNames) {
         const auto mimeType = mimeDb.mimeTypeForName(QLatin1String(imageMimeTypeName));
         m_filters << mimeType.globPatterns();
     }
     qDebug() << "Added" << m_filters.count() << "filters";
-    //qDebug() << m_filters;
+    // qDebug() << m_filters;
     m_next = 0;
 
     connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &MediaFrame::slotItemChanged);
@@ -64,8 +65,8 @@ int MediaFrame::random(int min, int max)
         max = temp;
     }
 
-    //qDebug() << "random" << min << "<->" << max << "=" << ((qrand()%(max-min+1))+min);
-    return (QRandomGenerator::global()->bounded((max - min + 1) ) + min);
+    // qDebug() << "random" << min << "<->" << max << "=" << ((qrand()%(max-min+1))+min);
+    return (QRandomGenerator::global()->bounded((max - min + 1)) + min);
 }
 
 QString MediaFrame::getCacheDirectory()
@@ -85,7 +86,7 @@ bool MediaFrame::isDir(const QString &path)
 
 bool MediaFrame::isDirEmpty(const QString &path)
 {
-    return (isDir(path) && QDir(path).entryInfoList(QDir::NoDotAndDotDot|QDir::AllEntries).isEmpty());
+    return (isDir(path) && QDir(path).entryInfoList(QDir::NoDotAndDotDot | QDir::AllEntries).isEmpty());
 }
 
 bool MediaFrame::isFile(const QString &path)
@@ -101,23 +102,25 @@ void MediaFrame::add(const QString &path)
 
 void MediaFrame::add(const QString &path, AddOption option)
 {
-    if(isAdded(path)) {
+    if (isAdded(path)) {
         qWarning() << "Path" << path << "already added";
         return;
     }
 
     QUrl url = QUrl(path);
     QString localPath = url.toString(QUrl::PreferLocalFile);
-    //qDebug() << "Local path" << localPath << "Path" << path;
+    // qDebug() << "Local path" << localPath << "Path" << path;
 
     QStringList paths;
     QString filePath;
 
-    if(isDir(localPath)) {
-
-        if(!isDirEmpty(localPath))
-        {
-            QDirIterator dirIterator(localPath, m_filters, QDir::Files, (option == AddOption::RECURSIVE ? QDirIterator::Subdirectories | QDirIterator::FollowSymlinks : QDirIterator::NoIteratorFlags));
+    if (isDir(localPath)) {
+        if (!isDirEmpty(localPath)) {
+            QDirIterator dirIterator(
+                localPath,
+                m_filters,
+                QDir::Files,
+                (option == AddOption::RECURSIVE ? QDirIterator::Subdirectories | QDirIterator::FollowSymlinks : QDirIterator::NoIteratorFlags));
 
             while (dirIterator.hasNext()) {
                 dirIterator.next();
@@ -125,53 +128,40 @@ void MediaFrame::add(const QString &path, AddOption option)
                 filePath = dirIterator.filePath();
                 paths.append(filePath);
                 m_allFiles.append(filePath);
-                //qDebug() << "Appended" << filePath;
+                // qDebug() << "Appended" << filePath;
                 emit countChanged();
             }
-            if(paths.count() > 0)
-            {
+            if (paths.count() > 0) {
                 m_pathMap.insert(path, paths);
                 qDebug() << "Added" << paths.count() << "files from" << path;
-            }
-            else
-            {
+            } else {
                 qWarning() << "No images found in directory" << path;
             }
-        }
-        else
-        {
+        } else {
             qWarning() << "Not adding empty directory" << path;
         }
 
         // the pictures have to be sorted before adding them to the list,
         // because the QDirIterator sorts them in a different way than QDir::entryList
-        //paths.sort();
+        // paths.sort();
 
-    }
-    else if(isFile(localPath))
-    {
+    } else if (isFile(localPath)) {
         paths.append(path);
         m_pathMap.insert(path, paths);
         m_allFiles.append(path);
         qDebug() << "Added" << paths.count() << "files from" << path;
         emit countChanged();
-    }
-    else
-    {
-        if (url.isValid() && !url.isLocalFile())
-        {
+    } else {
+        if (url.isValid() && !url.isLocalFile()) {
             qDebug() << "Adding" << url.toString() << "as remote file";
             paths.append(path);
             m_pathMap.insert(path, paths);
             m_allFiles.append(path);
             emit countChanged();
-        }
-        else
-        {
+        } else {
             qWarning() << "Path" << path << "is not a valid file url or directory";
         }
     }
-
 }
 
 void MediaFrame::clear()
@@ -185,24 +175,18 @@ void MediaFrame::watch(const QString &path)
 {
     QUrl url = QUrl(path);
     QString localPath = url.toString(QUrl::PreferLocalFile);
-    if(isFile(localPath))
-    {
-        if(!m_watchFile.isEmpty())
-        {
-            //qDebug() << "Removing" << m_watchFile << "from watch list";
+    if (isFile(localPath)) {
+        if (!m_watchFile.isEmpty()) {
+            // qDebug() << "Removing" << m_watchFile << "from watch list";
             m_watcher.removePath(m_watchFile);
-        }
-        else
-        {
+        } else {
             qDebug() << "Nothing in watch list";
         }
 
-        //qDebug() << "watching" << localPath << "for changes";
+        // qDebug() << "watching" << localPath << "for changes";
         m_watcher.addPath(localPath);
         m_watchFile = localPath;
-    }
-    else
-    {
+    } else {
         qWarning() << "Can't watch remote file" << path << "for changes";
     }
 }
@@ -225,12 +209,11 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
     QString errorMessage;
     QJSValueList args;
 
-    if(size < 1) {
-        if(size == 0) {
+    if (size < 1) {
+        if (size == 0) {
             path = m_allFiles.at(0);
 
-            if(successCallback.isCallable())
-            {
+            if (successCallback.isCallable()) {
                 args << QJSValue(path);
                 successCallback.call(args);
             }
@@ -245,34 +228,32 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
         }
     }
 
-    if(m_random) {
+    if (m_random) {
         path = m_allFiles.at(this->random(0, size));
     } else {
         path = m_allFiles.at(m_next);
         m_next++;
-        if(m_next > size)
-        {
+        if (m_next > size) {
             qDebug() << "Resetting next count from" << m_next << "due to queue size" << size;
             m_next = 0;
         }
-
     }
 
     QUrl url = QUrl(path);
 
-    if(url.isValid()) {
+    if (url.isValid()) {
         QString localPath = url.toString(QUrl::PreferLocalFile);
 
         if (!isFile(localPath)) {
             m_filename = path.section(QLatin1Char('/'), -1);
 
-            QString cachedFile = getCacheDirectory()+QLatin1Char('/')+hash(path)+QLatin1Char('_')+m_filename;
+            QString cachedFile = getCacheDirectory() + QLatin1Char('/') + hash(path) + QLatin1Char('_') + m_filename;
 
-            if(isFile(cachedFile)) {
+            if (isFile(cachedFile)) {
                 // File has been cached
                 qDebug() << path << "is cached as" << cachedFile;
 
-                if(successCallback.isCallable()) {
+                if (successCallback.isCallable()) {
                     args << QJSValue(cachedFile);
                     successCallback.call(args);
                 }
@@ -285,11 +266,11 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
 
             qDebug() << path << "doesn't exist locally, trying remote.";
 
-            KIO::StoredTransferJob * job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo);
+            KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
             connect(job, &KJob::finished, this, &MediaFrame::slotFinished);
 
         } else {
-            if(successCallback.isCallable()) {
+            if (successCallback.isCallable()) {
                 args << QJSValue(path);
                 successCallback.call(args);
             }
@@ -299,13 +280,12 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
         errorMessage = path + QLatin1String(" is not a valid URL");
         qCritical() << errorMessage;
 
-        if(errorCallback.isCallable()) {
+        if (errorCallback.isCallable()) {
             args << QJSValue(errorMessage);
             errorCallback.call(args);
         }
         return;
     }
-
 }
 
 void MediaFrame::pushHistory(const QString &string)
@@ -376,7 +356,7 @@ void MediaFrame::slotFinished(KJob *job)
         errorMessage = QLatin1String("Error loading image: ") + job->errorString();
         qCritical() << errorMessage;
 
-        if(m_errorCallback.isCallable()) {
+        if (m_errorCallback.isCallable()) {
             args << QJSValue(errorMessage);
             m_errorCallback.call(args);
         }
@@ -392,17 +372,16 @@ void MediaFrame::slotFinished(KJob *job)
 
         qDebug() << "Saved to" << path;
 
-        if(m_successCallback.isCallable()) {
+        if (m_successCallback.isCallable()) {
             args << QJSValue(path);
             m_successCallback.call(args);
         }
-    }
-    else {
+    } else {
         errorMessage = QStringLiteral("Unknown error occurred");
 
         qCritical() << errorMessage;
 
-        if(m_errorCallback.isCallable()) {
+        if (m_errorCallback.isCallable()) {
             args << QJSValue(errorMessage);
             m_errorCallback.call(args);
         }

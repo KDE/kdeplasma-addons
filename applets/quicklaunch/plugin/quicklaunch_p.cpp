@@ -11,20 +11,20 @@
 
 #include <QDir>
 #include <QFileInfo>
-#include <QMimeType>
 #include <QMimeDatabase>
-#include <QStandardPaths>
+#include <QMimeType>
 #include <QRandomGenerator>
+#include <QStandardPaths>
 
-#include <KRun>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KNotificationJobUiDelegate>
-#include <KFileItem>
 #include <KDesktopFile>
+#include <KFileItem>
 #include <KIO/CommandLauncherJob>
+#include <KNotificationJobUiDelegate>
 #include <KOpenWithDialog>
 #include <KPropertiesDialog>
+#include <KRun>
 
 #include <kio/global.h>
 
@@ -70,11 +70,9 @@ QVariantMap QuicklaunchPrivate::launcherData(const QUrl &url)
                     continue;
                 }
 
-                jumpListActions << QVariantMap{
-                    {QStringLiteral("name"), name},
-                    {QStringLiteral("icon"), actionGroup.readEntry("Icon")},
-                    {QStringLiteral("exec"), exec}
-                };
+                jumpListActions << QVariantMap{{QStringLiteral("name"), name},
+                                               {QStringLiteral("icon"), actionGroup.readEntry("Icon")},
+                                               {QStringLiteral("exec"), exec}};
             }
         } else {
             QMimeDatabase db;
@@ -94,12 +92,10 @@ QVariantMap QuicklaunchPrivate::launcherData(const QUrl &url)
         icon = KIO::iconNameForUrl(url);
     }
 
-    return QVariantMap{
-        {QStringLiteral("applicationName"), name},
-        {QStringLiteral("iconName"), icon},
-        {QStringLiteral("genericName"), genericName},
-        {QStringLiteral("jumpListActions"), jumpListActions}
-    };
+    return QVariantMap{{QStringLiteral("applicationName"), name},
+                       {QStringLiteral("iconName"), icon},
+                       {QStringLiteral("genericName"), genericName},
+                       {QStringLiteral("jumpListActions"), jumpListActions}};
 }
 
 void QuicklaunchPrivate::openUrl(const QUrl &url)
@@ -155,7 +151,7 @@ static QString determineNewDesktopFilePath(const QString &baseName)
 
         // Limit to [0-9] and [a-z] range.
         char newChar = generator->bounded(36);
-        newChar += newChar < 10 ? 48 : 97-10;
+        newChar += newChar < 10 ? 48 : 97 - 10;
         appendix += QLatin1Char(newChar);
 
         desktopFilePath = locateLocal(baseName + appendix + QLatin1String(".desktop"));

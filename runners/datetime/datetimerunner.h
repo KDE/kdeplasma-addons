@@ -31,9 +31,7 @@ public:
 
 private:
     QHash<QString, QDateTime> datetime(const QStringRef &tz);
-    void addMatch(const QString &text, const QString &clipboardText,
-                  Plasma::RunnerContext &context, const QString& iconName);
+    void addMatch(const QString &text, const QString &clipboardText, Plasma::RunnerContext &context, const QString &iconName);
 };
 
 #endif
-

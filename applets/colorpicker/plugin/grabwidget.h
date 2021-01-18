@@ -7,8 +7,8 @@
 #ifndef GRABWIDGET_H
 #define GRABWIDGET_H
 
-#include <QObject>
 #include <QColor>
+#include <QObject>
 
 class QWidget;
 
@@ -20,7 +20,8 @@ public:
 
     virtual void pick() = 0;
 
-    QColor color() const {
+    QColor color() const
+    {
         return m_color;
     }
 
@@ -81,7 +82,6 @@ Q_SIGNALS:
 
 private:
     Grabber *m_grabber = nullptr;
-
 };
 
 #endif // GRABWIDGET_H

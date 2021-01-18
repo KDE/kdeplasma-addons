@@ -6,19 +6,19 @@
 
 #include "bingprovider.h"
 
-#include <QJsonDocument>
-#include <QJsonArray>
 #include <QDebug>
+#include <QJsonArray>
+#include <QJsonDocument>
 
-#include <KPluginFactory>
 #include <KIO/Job>
+#include <KPluginFactory>
 
-BingProvider::BingProvider(QObject* parent, const QVariantList& args)
+BingProvider::BingProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
 {
     const QUrl url(QStringLiteral("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"));
 
-    KIO::StoredTransferJob* job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::StoredTransferJob::finished, this, &BingProvider::pageRequestFinished);
 }
 
@@ -29,9 +29,9 @@ QImage BingProvider::image() const
     return mImage;
 }
 
-void BingProvider::pageRequestFinished(KJob* _job)
+void BingProvider::pageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(_job);
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
         emit error(this);
         return;
@@ -55,7 +55,7 @@ void BingProvider::pageRequestFinished(KJob* _job)
             break;
         }
         QUrl picUrl(QStringLiteral("https://www.bing.com/%1").arg(url.toString()));
-        KIO::StoredTransferJob* imageJob = KIO::storedGet(picUrl, KIO::NoReload, KIO::HideProgressInfo);
+        KIO::StoredTransferJob *imageJob = KIO::storedGet(picUrl, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &BingProvider::imageRequestFinished);
         return;
     } while (0);
@@ -64,9 +64,9 @@ void BingProvider::pageRequestFinished(KJob* _job)
     return;
 }
 
-void BingProvider::imageRequestFinished(KJob* _job)
+void BingProvider::imageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(_job);
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
         emit error(this);
         return;

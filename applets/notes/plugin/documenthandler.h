@@ -44,7 +44,10 @@ class DocumentHandler : public QObject
 public:
     DocumentHandler();
 
-    QQuickItem *target() { return m_target; }
+    QQuickItem *target()
+    {
+        return m_target;
+    }
 
     void setTarget(QQuickItem *target);
 
@@ -52,9 +55,20 @@ public:
     void setSelectionStart(int position);
     void setSelectionEnd(int position);
 
-    int cursorPosition() const { return m_cursorPosition; }
-    int selectionStart() const { return m_selectionStart; }
-    int selectionEnd() const { return m_selectionEnd; }
+    int cursorPosition() const
+    {
+        return m_cursorPosition;
+    }
+
+    int selectionStart() const
+    {
+        return m_selectionStart;
+    }
+
+    int selectionEnd() const
+    {
+        return m_selectionEnd;
+    }
 
     QString fontFamily() const;
 

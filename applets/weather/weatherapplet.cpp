@@ -10,43 +10,92 @@
 #include "weatherapplet.h"
 
 // KF
-#include <KLocalizedString>
 #include <KConfigGroup>
+#include <KLocalizedString>
 #include <KUnitConversion/Value>
 
 using namespace KUnitConversion;
 
-namespace {
-namespace AppletConfigKeys {
-inline QString services()                     { return QStringLiteral("services"); }
-inline QString showTemperatureInTooltip()     { return QStringLiteral("showTemperatureInTooltip"); }
-inline QString showWindInTooltip()            { return QStringLiteral("showWindInTooltip"); }
-inline QString showPressureInTooltip()        { return QStringLiteral("showPressureInTooltip"); }
-inline QString showHumidityInTooltip()        { return QStringLiteral("showHumidityInTooltip"); }
-inline QString showTemperatureInCompactMode() { return QStringLiteral("showTemperatureInCompactMode"); }
-inline QString temperatureUnitId()            { return QStringLiteral("temperatureUnitId"); }
-inline QString windSpeedUnitId()              { return QStringLiteral("windSpeedUnitId"); }
-inline QString pressureUnitId()               { return QStringLiteral("pressureUnitId"); }
-inline QString visibilityUnitId()             { return QStringLiteral("visibilityUnitId"); }
-inline QString updateInterval()               { return QStringLiteral("updateInterval"); }
-inline QString source()                       { return QStringLiteral("source"); }
-}
-namespace StorageConfigKeys {
-const char weatherServiceProviders[] =      "weatherServiceProviders";
-const char showTemperatureInTooltip[] =     "showTemperatureInTooltip";
-const char showWindInTooltip[] =            "showWindInTooltip";
-const char showPressureInTooltip[] =        "showPressureInTooltip";
-const char showHumidityInTooltip[] =        "showHumidityInTooltip";
-const char showTemperatureInCompactMode[] = "showTemperatureInCompactMode";
-const char temperatureUnit[] =              "temperatureUnit";
-const char speedUnit[] =                    "speedUnit";
-const char pressureUnit[] =                 "pressureUnit";
-const char visibilityUnit[] =               "visibilityUnit";
-const char updateInterval[] =               "updateInterval";
-const char source[] =                       "source";
-}
+namespace
+{
+namespace AppletConfigKeys
+{
+inline QString services()
+{
+    return QStringLiteral("services");
 }
 
+inline QString showTemperatureInTooltip()
+{
+    return QStringLiteral("showTemperatureInTooltip");
+}
+
+inline QString showWindInTooltip()
+{
+    return QStringLiteral("showWindInTooltip");
+}
+
+inline QString showPressureInTooltip()
+{
+    return QStringLiteral("showPressureInTooltip");
+}
+
+inline QString showHumidityInTooltip()
+{
+    return QStringLiteral("showHumidityInTooltip");
+}
+
+inline QString showTemperatureInCompactMode()
+{
+    return QStringLiteral("showTemperatureInCompactMode");
+}
+
+inline QString temperatureUnitId()
+{
+    return QStringLiteral("temperatureUnitId");
+}
+
+inline QString windSpeedUnitId()
+{
+    return QStringLiteral("windSpeedUnitId");
+}
+
+inline QString pressureUnitId()
+{
+    return QStringLiteral("pressureUnitId");
+}
+
+inline QString visibilityUnitId()
+{
+    return QStringLiteral("visibilityUnitId");
+}
+
+inline QString updateInterval()
+{
+    return QStringLiteral("updateInterval");
+}
+
+inline QString source()
+{
+    return QStringLiteral("source");
+}
+}
+namespace StorageConfigKeys
+{
+const char weatherServiceProviders[] = "weatherServiceProviders";
+const char showTemperatureInTooltip[] = "showTemperatureInTooltip";
+const char showWindInTooltip[] = "showWindInTooltip";
+const char showPressureInTooltip[] = "showPressureInTooltip";
+const char showHumidityInTooltip[] = "showHumidityInTooltip";
+const char showTemperatureInCompactMode[] = "showTemperatureInCompactMode";
+const char temperatureUnit[] = "temperatureUnit";
+const char speedUnit[] = "speedUnit";
+const char pressureUnit[] = "pressureUnit";
+const char visibilityUnit[] = "visibilityUnit";
+const char updateInterval[] = "updateInterval";
+const char source[] = "source";
+}
+}
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
@@ -78,13 +127,13 @@ void WeatherApplet::configChanged()
     // read values from config storage
     const bool useMetric = (QLocale().measurementSystem() == QLocale::MetricSystem);
 
-    m_displayTemperatureUnit = unit(cfg.readEntry(StorageConfigKeys::temperatureUnit, (useMetric ? "C" :   "F")));
-    m_displaySpeedUnit =       unit(cfg.readEntry(StorageConfigKeys::speedUnit,       (useMetric ? "m/s" : "mph")));
-    m_displayPressureUnit =    unit(cfg.readEntry(StorageConfigKeys::pressureUnit,    (useMetric ? "hPa" : "inHg")));
-    m_displayVisibilityUnit =  unit(cfg.readEntry(StorageConfigKeys::visibilityUnit,  (useMetric ? "km" :  "mi")));
+    m_displayTemperatureUnit = unit(cfg.readEntry(StorageConfigKeys::temperatureUnit, (useMetric ? "C" : "F")));
+    m_displaySpeedUnit = unit(cfg.readEntry(StorageConfigKeys::speedUnit, (useMetric ? "m/s" : "mph")));
+    m_displayPressureUnit = unit(cfg.readEntry(StorageConfigKeys::pressureUnit, (useMetric ? "hPa" : "inHg")));
+    m_displayVisibilityUnit = unit(cfg.readEntry(StorageConfigKeys::visibilityUnit, (useMetric ? "km" : "mi")));
 
     m_updateInterval = cfg.readEntry(StorageConfigKeys::updateInterval, 30);
-    m_source =         cfg.readEntry(StorageConfigKeys::source,         QString());
+    m_source = cfg.readEntry(StorageConfigKeys::source, QString());
 
     m_temperatureShownInTooltip = cfg.readEntry(StorageConfigKeys::showTemperatureInTooltip, true);
     m_windShownInTooltip = cfg.readEntry(StorageConfigKeys::showWindInTooltip, false);
@@ -115,10 +164,10 @@ void WeatherApplet::configChanged()
     if (oldUpdateInterval != m_updateInterval) {
         emit updateIntervalChanged();
     }
-    if (oldDisplayTemperatureUnit != m_displayTemperatureUnit ||
-        oldDisplaySpeedUnit != m_displaySpeedUnit ||
-        oldDisplayPressureUnit != m_displayPressureUnit ||
-        oldDisplayVisibilityUnit != m_displayVisibilityUnit) {
+    if (oldDisplayTemperatureUnit != m_displayTemperatureUnit //
+        || oldDisplaySpeedUnit != m_displaySpeedUnit //
+        || oldDisplayPressureUnit != m_displayPressureUnit //
+        || oldDisplayVisibilityUnit != m_displayVisibilityUnit) {
         emit displayUnitsChanged();
     }
 }
@@ -131,28 +180,28 @@ QVariantMap WeatherApplet::configValues() const
 {
     KConfigGroup cfg = this->config();
 
-    return QVariantMap {
+    return QVariantMap{
         // UI settings
-        { AppletConfigKeys::services(),       cfg.readEntry(StorageConfigKeys::weatherServiceProviders, QStringList()) },
-        { AppletConfigKeys::showTemperatureInTooltip(), cfg.readEntry(StorageConfigKeys::showTemperatureInTooltip, true) },
-        { AppletConfigKeys::showWindInTooltip(), cfg.readEntry(StorageConfigKeys::showWindInTooltip, false) },
-        { AppletConfigKeys::showPressureInTooltip(), cfg.readEntry(StorageConfigKeys::showPressureInTooltip, false) },
-        { AppletConfigKeys::showHumidityInTooltip(), cfg.readEntry(StorageConfigKeys::showHumidityInTooltip, false) },
-        { AppletConfigKeys::showTemperatureInCompactMode(), cfg.readEntry(StorageConfigKeys::showTemperatureInCompactMode, false) },
+        {AppletConfigKeys::services(), cfg.readEntry(StorageConfigKeys::weatherServiceProviders, QStringList())},
+        {AppletConfigKeys::showTemperatureInTooltip(), cfg.readEntry(StorageConfigKeys::showTemperatureInTooltip, true)},
+        {AppletConfigKeys::showWindInTooltip(), cfg.readEntry(StorageConfigKeys::showWindInTooltip, false)},
+        {AppletConfigKeys::showPressureInTooltip(), cfg.readEntry(StorageConfigKeys::showPressureInTooltip, false)},
+        {AppletConfigKeys::showHumidityInTooltip(), cfg.readEntry(StorageConfigKeys::showHumidityInTooltip, false)},
+        {AppletConfigKeys::showTemperatureInCompactMode(), cfg.readEntry(StorageConfigKeys::showTemperatureInCompactMode, false)},
 
         // units
-        { AppletConfigKeys::temperatureUnitId(), m_displayTemperatureUnit.id() },
-        { AppletConfigKeys::windSpeedUnitId(),   m_displaySpeedUnit.id() },
-        { AppletConfigKeys::pressureUnitId(),    m_displayPressureUnit.id() },
-        { AppletConfigKeys::visibilityUnitId(),  m_displayVisibilityUnit.id() },
+        {AppletConfigKeys::temperatureUnitId(), m_displayTemperatureUnit.id()},
+        {AppletConfigKeys::windSpeedUnitId(), m_displaySpeedUnit.id()},
+        {AppletConfigKeys::pressureUnitId(), m_displayPressureUnit.id()},
+        {AppletConfigKeys::visibilityUnitId(), m_displayVisibilityUnit.id()},
 
         // data source
-        { AppletConfigKeys::updateInterval(), m_updateInterval },
-        { AppletConfigKeys::source(),         m_source },
+        {AppletConfigKeys::updateInterval(), m_updateInterval},
+        {AppletConfigKeys::source(), m_source},
     };
 }
 
-void WeatherApplet::saveConfig(const QVariantMap& configChanges)
+void WeatherApplet::saveConfig(const QVariantMap &configChanges)
 {
     KConfigGroup cfg = config();
 
@@ -213,7 +262,7 @@ void WeatherApplet::saveConfig(const QVariantMap& configChanges)
     emit configNeedsSaving();
 }
 
-Unit WeatherApplet::unit(const QString& unit)
+Unit WeatherApplet::unit(const QString &unit)
 {
     if (!unit.isEmpty() && unit[0].isDigit()) {
         return m_converter.unit(static_cast<UnitId>(unit.toInt()));

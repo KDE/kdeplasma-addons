@@ -9,12 +9,9 @@
 ActiveComicModel::ActiveComicModel(QObject *parent)
     : QStandardItemModel(0, 1, parent)
 {
-    connect(this, &ActiveComicModel::modelReset,
-            this, &ActiveComicModel::countChanged);
-    connect(this, &ActiveComicModel::rowsInserted,
-            this, &ActiveComicModel::countChanged);
-    connect(this, &ActiveComicModel::rowsRemoved,
-            this, &ActiveComicModel::countChanged);
+    connect(this, &ActiveComicModel::modelReset, this, &ActiveComicModel::countChanged);
+    connect(this, &ActiveComicModel::rowsInserted, this, &ActiveComicModel::countChanged);
+    connect(this, &ActiveComicModel::rowsRemoved, this, &ActiveComicModel::countChanged);
 }
 
 QHash<int, QByteArray> ActiveComicModel::roleNames() const
@@ -28,7 +25,7 @@ QHash<int, QByteArray> ActiveComicModel::roleNames() const
     return roleNames;
 }
 
-void ActiveComicModel::addComic(const QString& key, const QString& title, const QIcon& icon, bool highlight)
+void ActiveComicModel::addComic(const QString &key, const QString &title, const QIcon &icon, bool highlight)
 {
     QList<QStandardItem *> newRow;
     QStandardItem *item = new QStandardItem(title);

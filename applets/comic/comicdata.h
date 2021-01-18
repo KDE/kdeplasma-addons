@@ -11,135 +11,223 @@
 
 #include <Plasma/DataEngine>
 // Qt
-#include <QUrl>
 #include <QImage>
 #include <QString>
+#include <QUrl>
 
 class ComicData
 {
-    public:
-        ComicData();
+public:
+    ComicData();
 
-        void init(const QString &id, const KConfigGroup &config);
+    void init(const QString &id, const KConfigGroup &config);
 
-        void setData(const Plasma::DataEngine::Data &data);
+    void setData(const Plasma::DataEngine::Data &data);
 
-        IdentifierType type() const { return mType; }
+    IdentifierType type() const
+    {
+        return mType;
+    }
 
-        /**
-         * The identifier of the comic, e.g. "garfield"
-         */
-        QString id() const { return mId; }
+    /**
+     * The identifier of the comic, e.g. "garfield"
+     */
+    QString id() const
+    {
+        return mId;
+    }
 
-        /**
-         * The stored comic e.g. "2007-12-21" for a comic of the Date type
-         */
-        QString stored() const { return mStored; }
+    /**
+     * The stored comic e.g. "2007-12-21" for a comic of the Date type
+     */
+    QString stored() const
+    {
+        return mStored;
+    }
 
-        void storePosition(bool store);
+    void storePosition(bool store);
 
-        /**
-         * The previous comic e.g. "2007-12-21" for a comic of the Date type
-         */
-        QString prev() const { return mPrev; }
+    /**
+     * The previous comic e.g. "2007-12-21" for a comic of the Date type
+     */
+    QString prev() const
+    {
+        return mPrev;
+    }
 
-        /**
-         * The current comic e.g. "2007-12-21" for a comic of the Date type
-         */
-        QString current() const { return mCurrent; }
+    /**
+     * The current comic e.g. "2007-12-21" for a comic of the Date type
+     */
+    QString current() const
+    {
+        return mCurrent;
+    }
 
-        /**
-         * The next comic e.g. "2007-12-21" for a comic of the Date type
-         */
-        QString next() const { return mNext; }
+    /**
+     * The next comic e.g. "2007-12-21" for a comic of the Date type
+     */
+    QString next() const
+    {
+        return mNext;
+    }
 
-        QString currentReadable() const { return mCurrentReadable; }
+    QString currentReadable() const
+    {
+        return mCurrentReadable;
+    }
 
-        /**
-         * The first comic e.g. "2007-12-21" for a comic of the Date type
-         */
-        QString first() const { return mFirst; }
+    /**
+     * The first comic e.g. "2007-12-21" for a comic of the Date type
+     */
+    QString first() const
+    {
+        return mFirst;
+    }
 
-        bool hasNext() const { return !mNext.isEmpty(); }
+    bool hasNext() const
+    {
+        return !mNext.isEmpty();
+    }
 
-        bool hasPrev() const { return !mPrev.isEmpty(); }
+    bool hasPrev() const
+    {
+        return !mPrev.isEmpty();
+    }
 
-        bool hasFirst() const { return !mFirst.isEmpty(); }
+    bool hasFirst() const
+    {
+        return !mFirst.isEmpty();
+    }
 
-        bool hasStored() const { return !mStored.isEmpty(); }
+    bool hasStored() const
+    {
+        return !mStored.isEmpty();
+    }
 
-        bool hasImage() const { return !mImage.isNull(); }
+    bool hasImage() const
+    {
+        return !mImage.isNull();
+    }
 
-        QString additionalText() const { return mAdditionalText; }
+    QString additionalText() const
+    {
+        return mAdditionalText;
+    }
 
-        QString title() const { return mTitle; }
-        void setTitle(const QString &title) { mTitle = title; }
+    QString title() const
+    {
+        return mTitle;
+    }
+    void setTitle(const QString &title)
+    {
+        mTitle = title;
+    }
 
+    QString stripTitle() const
+    {
+        return mStripTitle;
+    }
 
-        QString stripTitle() const { return mStripTitle; }
+    QUrl websiteUrl() const
+    {
+        return mWebsiteUrl;
+    }
 
-        QUrl websiteUrl() const { return mWebsiteUrl; }
+    QUrl imageUrl() const
+    {
+        return mImageUrl;
+    }
 
-        QUrl imageUrl() const { return mImageUrl; }
+    QUrl shopUrl() const
+    {
+        return mShopUrl;
+    }
 
-        QUrl shopUrl() const { return mShopUrl; }
+    QString author() const
+    {
+        return mAuthor;
+    }
 
-        QString author() const { return mAuthor; }
+    QImage image() const
+    {
+        return mImage;
+    }
 
-        QImage image() const { return mImage; }
+    bool scaleComic() const
+    {
+        return mScaleComic;
+    }
 
-        bool scaleComic() const { return mScaleComic; }
-        bool isLeftToRight() const { return mIsLeftToRight; }
-        bool isTopToBottom() const { return mIsTopToBottom; }
-        bool storePosition() const { return !mStored.isEmpty(); }
+    bool isLeftToRight() const
+    {
+        return mIsLeftToRight;
+    }
 
-        void setScaleComic(bool scale);
+    bool isTopToBottom() const
+    {
+        return mIsTopToBottom;
+    }
 
+    bool storePosition() const
+    {
+        return !mStored.isEmpty();
+    }
 
-        QString errorStrip() const { return mErrorStrip; }
+    void setScaleComic(bool scale);
 
-        int firstStripNum() const { return mFirstStripNum; }
-        int maxStripNum() const { return mMaxStripNum; }
+    QString errorStrip() const
+    {
+        return mErrorStrip;
+    }
 
-        void save();
+    int firstStripNum() const
+    {
+        return mFirstStripNum;
+    }
 
-    private:
-        void load();
-        void createErrorPicture(const Plasma::DataEngine::Data &data);
+    int maxStripNum() const
+    {
+        return mMaxStripNum;
+    }
 
-    private:
+    void save();
 
-        IdentifierType mType;
-        QString mId;
-        QString mFirst;
-        QString mLast;
-        QString mCurrent;
-        QString mNext;
-        QString mPrev;
-        QString mStored;
-        QString mCurrentReadable;
+private:
+    void load();
+    void createErrorPicture(const Plasma::DataEngine::Data &data);
 
-        QString mErrorStrip;
+private:
+    IdentifierType mType;
+    QString mId;
+    QString mFirst;
+    QString mLast;
+    QString mCurrent;
+    QString mNext;
+    QString mPrev;
+    QString mStored;
+    QString mCurrentReadable;
 
-        QString mAuthor;
-        QString mTitle;
-        QString mStripTitle;
-        QString mAdditionalText;
-        QUrl mWebsiteUrl;
-        QUrl mImageUrl;
-        QUrl mShopUrl;
+    QString mErrorStrip;
 
-        QImage mImage;
+    QString mAuthor;
+    QString mTitle;
+    QString mStripTitle;
+    QString mAdditionalText;
+    QUrl mWebsiteUrl;
+    QUrl mImageUrl;
+    QUrl mShopUrl;
 
-        // only applicable if the comic is of type Number
-        int mFirstStripNum = 0;
-        int mMaxStripNum = 0;
+    QImage mImage;
 
-        bool mScaleComic = false;
-        bool mIsLeftToRight = false;
-        bool mIsTopToBottom = false;
+    // only applicable if the comic is of type Number
+    int mFirstStripNum = 0;
+    int mMaxStripNum = 0;
 
-        KConfigGroup mCfg;
+    bool mScaleComic = false;
+    bool mIsLeftToRight = false;
+    bool mIsTopToBottom = false;
+
+    KConfigGroup mCfg;
 };
 
 #endif

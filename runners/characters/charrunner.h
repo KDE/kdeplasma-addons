@@ -11,9 +11,9 @@
 
 class CharacterRunner : public Plasma::AbstractRunner
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     CharacterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
     ~CharacterRunner() override;
 
@@ -21,8 +21,8 @@ class CharacterRunner : public Plasma::AbstractRunner
     void match(Plasma::RunnerContext &context) override;
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
 
-  private:
-    //config-variables
+private:
+    // config-variables
     QString m_triggerWord;
     QList<QString> m_aliases;
     QList<QString> m_codes;

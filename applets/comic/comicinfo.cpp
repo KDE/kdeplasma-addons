@@ -8,35 +8,33 @@
 
 #include <KConfigGroup>
 // Qt
-#include <QStandardPaths>
 #include <QDir>
+#include <QStandardPaths>
 
 class SavingDir::SavingDirPrivate
 {
-    public:
-        SavingDirPrivate(const KConfigGroup &cfg);
+public:
+    SavingDirPrivate(const KConfigGroup &cfg);
 
-        void init();
+    void init();
 
-        QString getDir() const;
-        void setDir(const QString &dir);
+    QString getDir() const;
+    void setDir(const QString &dir);
 
-    private:
-        void load();
-        void save();
-        bool isValid();
+private:
+    void load();
+    void save();
+    bool isValid();
 
-    private:
-        KConfigGroup mCfg;
-        QString mDir;
+private:
+    KConfigGroup mCfg;
+    QString mDir;
 };
 
-
 SavingDir::SavingDirPrivate::SavingDirPrivate(const KConfigGroup &cfg)
-  : mCfg(cfg)
+    : mCfg(cfg)
 {
 }
-
 
 void SavingDir::SavingDirPrivate::init()
 {
@@ -71,7 +69,7 @@ void SavingDir::SavingDirPrivate::load()
 
 void SavingDir::SavingDirPrivate::save()
 {
-     mCfg.writeEntry("savingDir", mDir);
+    mCfg.writeEntry("savingDir", mDir);
 }
 
 bool SavingDir::SavingDirPrivate::isValid()
@@ -81,7 +79,7 @@ bool SavingDir::SavingDirPrivate::isValid()
 }
 
 SavingDir::SavingDir(const KConfigGroup &cfg)
-  : d(new SavingDirPrivate(cfg))
+    : d(new SavingDirPrivate(cfg))
 {
     d->init();
 }

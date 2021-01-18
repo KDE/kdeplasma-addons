@@ -24,25 +24,25 @@ class StripSelector : public QObject
 {
     Q_OBJECT
 
-    public:
-        ~StripSelector() override;
+public:
+    ~StripSelector() override;
 
-        /**
-         * Select a strip depending on the subclass
-         * @param currentStrip the currently active strip
-         * @note StripSelector takes care to delete itself
-         */
-        virtual void select(const ComicData &currentStrip) = 0;
+    /**
+     * Select a strip depending on the subclass
+     * @param currentStrip the currently active strip
+     * @note StripSelector takes care to delete itself
+     */
+    virtual void select(const ComicData &currentStrip) = 0;
 
-    Q_SIGNALS:
-        /**
-         * @param strip the selected strip, can be empty
-         * 
-         */
-        void stripChosen(const QString &strip);
+Q_SIGNALS:
+    /**
+     * @param strip the selected strip, can be empty
+     *
+     */
+    void stripChosen(const QString &strip);
 
-    protected:
-        explicit StripSelector(QObject *parent = nullptr);
+protected:
+    explicit StripSelector(QObject *parent = nullptr);
 };
 
 /**
@@ -51,8 +51,8 @@ class StripSelector : public QObject
  */
 class StripSelectorFactory
 {
-    public:
-        static StripSelector *create(IdentifierType type);
+public:
+    static StripSelector *create(IdentifierType type);
 };
 
 #endif

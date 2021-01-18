@@ -22,32 +22,32 @@ enum IdentifierType {
  */
 class SavingDir
 {
-    public:
-        /**
-         * @param config the config that should be used to retrieve
-         * the saving directory and to store it to in case of changes
-         */
-        explicit SavingDir(const KConfigGroup &config);
+public:
+    /**
+     * @param config the config that should be used to retrieve
+     * the saving directory and to store it to in case of changes
+     */
+    explicit SavingDir(const KConfigGroup &config);
 
-        ~SavingDir();
+    ~SavingDir();
 
-        /**
-         * @return the directory to be displayed to the user
-         */
-        QString getDir() const;
+    /**
+     * @return the directory to be displayed to the user
+     */
+    QString getDir() const;
 
-        /**
-         * Set the directory that should be displayed to the user first
-         * when choosing a destination. Automatically writes the directory
-         * to the config, if one was specified in init.
-         * @param dir the directory to display the user first
-         * @see init
-         */
-        void setDir(const QString &dir);
+    /**
+     * Set the directory that should be displayed to the user first
+     * when choosing a destination. Automatically writes the directory
+     * to the config, if one was specified in init.
+     * @param dir the directory to display the user first
+     * @see init
+     */
+    void setDir(const QString &dir);
 
-    private:
-        class SavingDirPrivate;
-        SavingDirPrivate *d;
+private:
+    class SavingDirPrivate;
+    SavingDirPrivate *d;
 };
 
 #endif

@@ -13,9 +13,7 @@
 
 #include <QDebug>
 
-
-WeatherValidator::WeatherValidator(Plasma::DataEngine* weatherDataengine, const QString& ionName,
-                                   QObject* parent)
+WeatherValidator::WeatherValidator(Plasma::DataEngine *weatherDataengine, const QString &ionName, QObject *parent)
     : QObject(parent)
     , m_weatherDataEngine(weatherDataengine)
     , m_ionName(ionName)
@@ -24,14 +22,14 @@ WeatherValidator::WeatherValidator(Plasma::DataEngine* weatherDataengine, const 
 
 WeatherValidator::~WeatherValidator() = default;
 
-void WeatherValidator::validate(const QString& location)
+void WeatherValidator::validate(const QString &location)
 {
     const QString validationSource = m_ionName + QLatin1String("|validate|") + location;
 
     m_weatherDataEngine->connectSource(validationSource, this);
 }
 
-void WeatherValidator::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
+void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     QMap<QString, QString> locationSources;
 
@@ -48,10 +46,10 @@ void WeatherValidator::dataUpdated(const QString& source, const Plasma::DataEngi
         const int lastFieldIndex = validationResult.size() - 1;
         while (i < lastFieldIndex) {
             if (validationResult[i] == QLatin1String("place")) {
-                const QString& name = validationResult[i + 1];
+                const QString &name = validationResult[i + 1];
                 QString locationSource;
                 if (i + 2 < lastFieldIndex && validationResult[i + 2] == QLatin1String("extra")) {
-                    const QString& id = validationResult[i + 3];
+                    const QString &id = validationResult[i + 3];
                     locationSource = weatherSourcePrefix + name + QLatin1Char('|') + id;
                     i += 4;
                 } else {
@@ -74,7 +72,6 @@ void WeatherValidator::dataUpdated(const QString& source, const Plasma::DataEngi
     emit finished(locationSources);
 }
 
-
 LocationListModel::LocationListModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_validatingInput(false)
@@ -89,7 +86,8 @@ QVariant LocationListModel::data(const QModelIndex &index, int role) const
     }
 
     switch (role) {
-        case Qt::DisplayRole: return nameForListIndex(index.row());
+    case Qt::DisplayRole:
+        return nameForListIndex(index.row());
     }
 
     return QVariant();
@@ -121,17 +119,16 @@ QString LocationListModel::valueForListIndex(int listIndex) const
 QString LocationListModel::nameForListIndex(int listIndex) const
 {
     if (0 <= listIndex && listIndex < m_locations.count()) {
-        const LocationItem& item = m_locations.at(listIndex);
+        const LocationItem &item = m_locations.at(listIndex);
         if (!item.weatherService.isEmpty()) {
-            return i18nc("A weather station location and the weather service it comes from",
-                        "%1 (%2)", item.weatherStation, item.weatherService);
+            return i18nc("A weather station location and the weather service it comes from", "%1 (%2)", item.weatherStation, item.weatherService);
         }
     }
 
     return QString();
 }
 
-void LocationListModel::searchLocations(const QString &searchString, const QStringList& services)
+void LocationListModel::searchLocations(const QString &searchString, const QStringList &services)
 {
     m_checkedInCount = 0;
 
@@ -155,20 +152,20 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
         return;
     }
 
-    Plasma::DataEngine* dataengine = dataEngine(QStringLiteral("weather"));
+    Plasma::DataEngine *dataengine = dataEngine(QStringLiteral("weather"));
 
     const QVariantList plugins = dataengine->containerForSource(QStringLiteral("ions"))->data().values();
-    for (const QVariant& plugin : plugins) {
+    for (const QVariant &plugin : plugins) {
         const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
         if (pluginInfo.count() > 1) {
-            const QString& ionId = pluginInfo[1];
+            const QString &ionId = pluginInfo[1];
             if (!services.contains(ionId)) {
                 continue;
             }
-            //qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
-            //d->ions.insert(pluginInfo[1], pluginInfo[0]);
+            // qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
+            // d->ions.insert(pluginInfo[1], pluginInfo[0]);
 
-            auto* validator = new WeatherValidator(dataengine, ionId, this);
+            auto *validator = new WeatherValidator(dataengine, ionId, this);
             connect(validator, &WeatherValidator::error, this, &LocationListModel::validatorError);
             connect(validator, &WeatherValidator::finished, this, &LocationListModel::addSources);
 
@@ -176,7 +173,7 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
         }
     }
 
-    for (auto* validator : qAsConst(m_validators)) {
+    for (auto *validator : qAsConst(m_validators)) {
         validator->validate(m_searchString);
     }
 }

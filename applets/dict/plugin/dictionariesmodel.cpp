@@ -8,10 +8,10 @@
 #include <Plasma/DataContainer>
 #include <QDebug>
 
-DictionariesModel::DictionariesModel(QObject* parent)
+DictionariesModel::DictionariesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    Plasma::DataEngine* dataengine = dataEngine(QStringLiteral("dict"));
+    Plasma::DataEngine *dataengine = dataEngine(QStringLiteral("dict"));
     const QString source = QLatin1String("list-dictionaries");
     Plasma::DataContainer *container = dataengine->containerForSource(source);
     if (container) { // in practice this never seems to happen, this source is only used here, so never shared
@@ -20,7 +20,7 @@ DictionariesModel::DictionariesModel(QObject* parent)
     dataengine->connectSource(source, this);
 }
 
-QVariant DictionariesModel::data(const QModelIndex& index, int role) const
+QVariant DictionariesModel::data(const QModelIndex &index, int role) const
 {
     const int row = index.row();
     switch (role) {
@@ -34,7 +34,7 @@ QVariant DictionariesModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
-int DictionariesModel::rowCount(const QModelIndex& index) const
+int DictionariesModel::rowCount(const QModelIndex &index) const
 {
     if (index.isValid())
         return 0; // flat model
@@ -43,10 +43,10 @@ int DictionariesModel::rowCount(const QModelIndex& index) const
 
 QHash<int, QByteArray> DictionariesModel::roleNames() const
 {
-    return { { Qt::DisplayRole, "description" }, { Qt::EditRole, "id" } };
+    return {{Qt::DisplayRole, "description"}, {Qt::EditRole, "id"}};
 }
 
-void DictionariesModel::dataUpdated(const QString& sourceName, const Plasma::DataEngine::Data& data)
+void DictionariesModel::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
     Q_ASSERT(sourceName == QLatin1String("list-dictionaries"));
     beginResetModel();
@@ -54,7 +54,7 @@ void DictionariesModel::dataUpdated(const QString& sourceName, const Plasma::Dat
     endResetModel();
 }
 
-void DictionariesModel::setAvailableDicts(const QVariantMap& data)
+void DictionariesModel::setAvailableDicts(const QVariantMap &data)
 {
     m_availableDicts = {};
     m_availableDicts.resize(data.count());

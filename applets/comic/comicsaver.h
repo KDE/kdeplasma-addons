@@ -17,19 +17,19 @@ class SavingDir;
  */
 class ComicSaver
 {
-    public:
-        explicit ComicSaver(SavingDir *savingDir);
+public:
+    explicit ComicSaver(SavingDir *savingDir);
 
-        /**
-         * Asks the user for a destination to save the specified
-         * comic to. If possible writes it to that destination.
-         * @param comic the comic to save
-         * @return true if saving worked, false if there was a problem
-         */
-        bool save(const ComicData &comic);
+    /**
+     * Asks the user for a destination to save the specified
+     * comic to. If possible writes it to that destination.
+     * @param comic the comic to save
+     * @return true if saving worked, false if there was a problem
+     */
+    bool save(const ComicData &comic);
 
-    private:
-        SavingDir *mSavingDir;
+private:
+    SavingDir *mSavingDir;
 };
 
 #endif

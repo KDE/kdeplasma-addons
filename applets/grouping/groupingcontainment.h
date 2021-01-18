@@ -16,15 +16,15 @@ class GroupingContainment : public Plasma::Containment
 {
     Q_OBJECT
 public:
-    explicit GroupingContainment( QObject *parent, const QVariantList &args );
+    explicit GroupingContainment(QObject *parent, const QVariantList &args);
     ~GroupingContainment() override;
 
     void init() override;
 
-    //Creates an applet
+    // Creates an applet
     Q_INVOKABLE void newTask(const QString &task);
 
-    //cleans all instances of a given applet
+    // cleans all instances of a given applet
     void cleanupTask(const QString &task);
 
     /**
@@ -36,7 +36,7 @@ public:
      * Find out global coordinates for a popup given local MouseArea
      * coordinates
      */
-    Q_INVOKABLE QPointF popupPosition(QQuickItem* visualParent, int x, int y);
+    Q_INVOKABLE QPointF popupPosition(QQuickItem *visualParent, int x, int y);
 
     /**
      * Reparent the item "before" with the same parent as the item "after",
@@ -44,7 +44,7 @@ public:
      * used to quickly reorder icons in the systray (or hidden popup)
      * @see QQuickITem::stackBefore
      */
-    Q_INVOKABLE void reorderItemBefore(QQuickItem* before, QQuickItem* after);
+    Q_INVOKABLE void reorderItemBefore(QQuickItem *before, QQuickItem *after);
 
     /**
      * Reparent the item "after" with the same parent as the item "before",
@@ -52,7 +52,7 @@ public:
      * used to quickly reorder icons in the systray (or hidden popup)
      * @see QQuickITem::stackAfter
      */
-    Q_INVOKABLE void reorderItemAfter(QQuickItem* after, QQuickItem* before);
+    Q_INVOKABLE void reorderItemAfter(QQuickItem *after, QQuickItem *before);
 };
 
 #endif

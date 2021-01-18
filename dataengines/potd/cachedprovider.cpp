@@ -6,14 +6,14 @@
 
 #include "cachedprovider.h"
 
+#include <QDateTime>
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QTimer>
-#include <QThreadPool>
-#include <QStandardPaths>
-#include <QDir>
-#include <QDateTime>
 #include <QRegularExpression>
+#include <QStandardPaths>
+#include <QThreadPool>
+#include <QTimer>
 
 #include <QDebug>
 
@@ -25,24 +25,24 @@ LoadImageThread::LoadImageThread(const QString &filePath)
 void LoadImageThread::run()
 {
     QImage image;
-    image.load(m_filePath );
+    image.load(m_filePath);
     emit done(image);
 }
 
 SaveImageThread::SaveImageThread(const QString &identifier, const QImage &image)
-    : m_image(image),
-      m_identifier(identifier)
+    : m_image(image)
+    , m_identifier(identifier)
 {
 }
 
 void SaveImageThread::run()
 {
-    const QString path = CachedProvider::identifierToPath( m_identifier );
+    const QString path = CachedProvider::identifierToPath(m_identifier);
     m_image.save(path, "JPEG");
-    emit done( m_identifier, path, m_image );
+    emit done(m_identifier, path, m_image);
 }
 
-QString CachedProvider::identifierToPath( const QString &identifier )
+QString CachedProvider::identifierToPath(const QString &identifier)
 {
     const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/plasma_engine_potd/");
     QDir d;
@@ -50,11 +50,11 @@ QString CachedProvider::identifierToPath( const QString &identifier )
     return dataDir + identifier;
 }
 
-
-CachedProvider::CachedProvider( const QString &identifier, QObject *parent )
-    : PotdProvider( parent ), mIdentifier( identifier )
+CachedProvider::CachedProvider(const QString &identifier, QObject *parent)
+    : PotdProvider(parent)
+    , mIdentifier(identifier)
 {
-    LoadImageThread *thread = new LoadImageThread( identifierToPath( mIdentifier ) );
+    LoadImageThread *thread = new LoadImageThread(identifierToPath(mIdentifier));
     connect(thread, &LoadImageThread::done, this, &CachedProvider::triggerFinished);
     QThreadPool::globalInstance()->start(thread);
 }
@@ -76,13 +76,13 @@ QString CachedProvider::identifier() const
 void CachedProvider::triggerFinished(const QImage &image)
 {
     mImage = image;
-    emit finished( this );
+    emit finished(this);
 }
 
-bool CachedProvider::isCached( const QString &identifier, bool ignoreAge )
+bool CachedProvider::isCached(const QString &identifier, bool ignoreAge)
 {
-    const QString path = identifierToPath( identifier );
-    if (!QFile::exists( path ) ) {
+    const QString path = identifierToPath(identifier);
+    if (!QFile::exists(path)) {
         return false;
     }
 
@@ -90,13 +90,11 @@ bool CachedProvider::isCached( const QString &identifier, bool ignoreAge )
 
     if (!ignoreAge && !re.match(identifier).hasMatch()) {
         // no date in the identifier, so it's a daily; check to see ifthe modification time is today
-        QFileInfo info( path );
-        if ( info.lastModified().daysTo( QDateTime::currentDateTime() ) >= 1 ) {
+        QFileInfo info(path);
+        if (info.lastModified().daysTo(QDateTime::currentDateTime()) >= 1) {
             return false;
         }
     }
 
     return true;
 }
-
-

@@ -16,10 +16,10 @@ class KonsoleProfilesService : public Plasma::Service
     Q_OBJECT
 
 public:
-    KonsoleProfilesService(QObject* parent, const QString& profileName);
+    KonsoleProfilesService(QObject *parent, const QString &profileName);
 
 protected:
-    Plasma::ServiceJob* createJob(const QString& operation, QMap<QString,QVariant>& parameters) override;
+    Plasma::ServiceJob *createJob(const QString &operation, QMap<QString, QVariant> &parameters) override;
 };
 
 class ProfileJob : public Plasma::ServiceJob
@@ -27,7 +27,7 @@ class ProfileJob : public Plasma::ServiceJob
     Q_OBJECT
 
 public:
-    ProfileJob(KonsoleProfilesService *service, const QString& operation, const QMap<QString, QVariant> &parameters);
+    ProfileJob(KonsoleProfilesService *service, const QString &operation, const QMap<QString, QVariant> &parameters);
     void start() override;
 };
 

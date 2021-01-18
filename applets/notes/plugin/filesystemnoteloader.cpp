@@ -9,19 +9,20 @@
 
 #include "note.h"
 
-#include <QUuid>
 #include <QDebug>
 #include <QStandardPaths>
+#include <QUuid>
 
 #include <KDirWatch>
 
 class FileNote : public Note
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     FileNote(const QString &path, const QString &id);
     void load();
     void save(const QString &text) override;
+
 private:
     void fileSystemChanged(const QString &path);
     QString m_path;
@@ -36,10 +37,9 @@ FileSystemNoteLoader::FileSystemNoteLoader()
     m_notesDir.setPath(genericDataLocation + QDir::separator() + suffix);
 }
 
-
 QStringList FileSystemNoteLoader::allNoteIds()
 {
-    return m_notesDir.entryList(QStringList {QStringLiteral("*.txt")});
+    return m_notesDir.entryList(QStringList{QStringLiteral("*.txt")});
 }
 
 void FileSystemNoteLoader::deleteNoteResources(const QString &id)
@@ -47,21 +47,21 @@ void FileSystemNoteLoader::deleteNoteResources(const QString &id)
     m_notesDir.remove(id);
 }
 
-Note* FileSystemNoteLoader::loadNote(const QString &id)
+Note *FileSystemNoteLoader::loadNote(const QString &id)
 {
     QString idToUse = id;
     if (id.isEmpty()) {
-        idToUse = QUuid::createUuid().toString().mid(1, 34);//UUID adds random braces I don't want them on my file system
+        idToUse = QUuid::createUuid().toString().mid(1, 34); // UUID adds random braces I don't want them on my file system
     }
 
-    FileNote* note = new FileNote(m_notesDir.absoluteFilePath(idToUse), idToUse);
+    FileNote *note = new FileNote(m_notesDir.absoluteFilePath(idToUse), idToUse);
     return note;
 }
 
-FileNote::FileNote(const QString& path, const QString& id):
-    Note(id),
-    m_path(path),
-    m_watcher(new KDirWatch(this))
+FileNote::FileNote(const QString &path, const QString &id)
+    : Note(id)
+    , m_path(path)
+    , m_watcher(new KDirWatch(this))
 {
     m_watcher->addFile(path);
 
@@ -104,7 +104,5 @@ void FileNote::fileSystemChanged(const QString &path)
         load();
     }
 }
-
-
 
 #include "filesystemnoteloader.moc"

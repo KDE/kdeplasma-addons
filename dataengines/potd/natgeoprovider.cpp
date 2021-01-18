@@ -10,9 +10,8 @@
 
 #include <QDebug>
 
-#include <KPluginFactory>
 #include <KIO/Job>
-
+#include <KPluginFactory>
 
 NatGeoProvider::NatGeoProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
@@ -30,15 +29,15 @@ QImage NatGeoProvider::image() const
     return mImage;
 }
 
-void NatGeoProvider::pageRequestFinished(KJob* _job)
+void NatGeoProvider::pageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
         emit error(this);
         return;
     }
 
-    const QString data = QString::fromUtf8( job->data() );
+    const QString data = QString::fromUtf8(job->data());
     const QStringList lines = data.split(QLatin1Char('\n'));
 
     QString url;
@@ -57,19 +56,19 @@ void NatGeoProvider::pageRequestFinished(KJob* _job)
         return;
     }
 
-    KIO::StoredTransferJob *imageJob = KIO::storedGet( QUrl(url), KIO::NoReload, KIO::HideProgressInfo );
+    KIO::StoredTransferJob *imageJob = KIO::storedGet(QUrl(url), KIO::NoReload, KIO::HideProgressInfo);
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &NatGeoProvider::imageRequestFinished);
 }
 
 void NatGeoProvider::imageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
-    if ( job->error() ) {
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
+    if (job->error()) {
         emit error(this);
         return;
     }
 
-    mImage = QImage::fromData( job->data() );
+    mImage = QImage::fromData(job->data());
     emit finished(this);
 }
 

@@ -20,7 +20,6 @@ public:
     {
         return QColor::isValidColor(colorString);
     }
-
 };
 
 static QObject *utils_singletontype_provider(QQmlEngine *, QJSEngine *)
@@ -28,7 +27,7 @@ static QObject *utils_singletontype_provider(QQmlEngine *, QJSEngine *)
     return new Utils();
 }
 
-void ColorPickerPlugin::registerTypes(const char* uri)
+void ColorPickerPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.colorpicker"));
     qmlRegisterType<GrabWidget>(uri, 2, 0, "GrabWidget");

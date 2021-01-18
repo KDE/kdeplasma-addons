@@ -17,29 +17,29 @@ class CheckNewStrips : public QObject
 {
     Q_OBJECT
 
-    public:
-        CheckNewStrips( const QStringList &identifiers, Plasma::DataEngine *engine, int minutes, QObject *parent = nullptr );
+public:
+    CheckNewStrips(const QStringList &identifiers, Plasma::DataEngine *engine, int minutes, QObject *parent = nullptr);
 
-    Q_SIGNALS:
-        /**
-         * @param index of the identifier in identifiers
-         * @param identifier of the comic
-         * @param suffix of the last comic strip
-         * @see CheckNewStrips
-         */
-        void lastStrip( int index, const QString &identifier, const QString &suffix );
+Q_SIGNALS:
+    /**
+     * @param index of the identifier in identifiers
+     * @param identifier of the comic
+     * @param suffix of the last comic strip
+     * @see CheckNewStrips
+     */
+    void lastStrip(int index, const QString &identifier, const QString &suffix);
 
-    public Q_SLOTS:
-        void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
+public Q_SLOTS:
+    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
 
-    private Q_SLOTS:
-        void start();
+private Q_SLOTS:
+    void start();
 
-    private:
-        int mMinutes;
-        int mIndex;
-        Plasma::DataEngine *mEngine;
-        const QStringList mIdentifiers;
+private:
+    int mMinutes;
+    int mIndex;
+    Plasma::DataEngine *mEngine;
+    const QStringList mIdentifiers;
 };
 
 #endif

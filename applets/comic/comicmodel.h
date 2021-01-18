@@ -18,25 +18,24 @@ class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
 
-    public:
-        ComicModel( Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent = nullptr );
+public:
+    ComicModel(Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent = nullptr);
 
-        void setComics( const Plasma::DataEngine::Data &comics, const QStringList &usedComics );
+    void setComics(const Plasma::DataEngine::Data &comics, const QStringList &usedComics);
 
-        QHash<int, QByteArray> roleNames() const override;
+    QHash<int, QByteArray> roleNames() const override;
 
-        int rowCount( const QModelIndex &index = QModelIndex() ) const override;
-        int columnCount( const QModelIndex &index = QModelIndex() ) const override;
-        QVariant data( const QModelIndex &index, int role = Qt::CheckStateRole ) const override;
-        Qt::ItemFlags flags( const QModelIndex &index ) const override;
+    int rowCount(const QModelIndex &index = QModelIndex()) const override;
+    int columnCount(const QModelIndex &index = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::CheckStateRole) const override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 
+public Q_SLOTS:
+    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 
-    public Q_SLOTS:
-        void dataUpdated( const QString &source, const Plasma::DataEngine::Data &data );
-
-    private:
-        Plasma::DataEngine::Data mComics;
-        QStringList mUsedComics;
+private:
+    Plasma::DataEngine::Data mComics;
+    QStringList mUsedComics;
 };
 
 #endif

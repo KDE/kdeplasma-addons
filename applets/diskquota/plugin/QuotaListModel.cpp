@@ -12,18 +12,19 @@ QuotaListModel::QuotaListModel(QObject *parent)
 {
 }
 
-namespace {
-    /**
-     * QML data roles.
-     */
-    enum {
-        DetailsRole = Qt::UserRole,
-        IconRole,
-        FreeStringRole,
-        UsedStringRole,
-        MountPointRole,
-        UsageRole,
-    };
+namespace
+{
+/**
+ * QML data roles.
+ */
+enum {
+    DetailsRole = Qt::UserRole,
+    IconRole,
+    FreeStringRole,
+    UsedStringRole,
+    MountPointRole,
+    UsageRole,
+};
 }
 
 QHash<int, QByteArray> QuotaListModel::roleNames() const
@@ -41,19 +42,25 @@ QHash<int, QByteArray> QuotaListModel::roleNames() const
 
 QVariant QuotaListModel::data(const QModelIndex &index, int role) const
 {
-    if (! index.isValid() || index.row() >= m_items.size()) {
+    if (!index.isValid() || index.row() >= m_items.size()) {
         return QVariant();
     }
 
     const auto item = m_items[index.row()];
 
     switch (role) {
-        case DetailsRole: return item.mountString();
-        case IconRole: return item.iconName();
-        case FreeStringRole: return item.freeString();
-        case UsedStringRole: return item.usedString();
-        case MountPointRole: return item.mountPoint();
-        case UsageRole: return item.usage();
+    case DetailsRole:
+        return item.mountString();
+    case IconRole:
+        return item.iconName();
+    case FreeStringRole:
+        return item.freeString();
+    case UsedStringRole:
+        return item.usedString();
+    case MountPointRole:
+        return item.mountPoint();
+    case UsageRole:
+        return item.usage();
     }
 
     return QVariant();
@@ -61,7 +68,7 @@ QVariant QuotaListModel::data(const QModelIndex &index, int role) const
 
 int QuotaListModel::rowCount(const QModelIndex &index) const
 {
-    if (! index.isValid()) {
+    if (!index.isValid()) {
         return m_items.size();
     }
 
@@ -79,8 +86,7 @@ bool QuotaListModel::setData(const QModelIndex &index, const QVariant &variant, 
         // This assert makes sure that changing items modify the correct item:
         // therefore, the unique identifier 'mountPoint()' is used. If that
         // is not the case, the newly inserted row must have an empty mountPoint().
-        Q_ASSERT(item.mountPoint() == m_items[row].mountPoint()
-            || m_items[row].mountPoint().isEmpty());
+        Q_ASSERT(item.mountPoint() == m_items[row].mountPoint() || m_items[row].mountPoint().isEmpty());
 
         if (m_items[row] != item) {
             m_items[row] = item;
@@ -127,25 +133,26 @@ void QuotaListModel::clear()
     endResetModel();
 }
 
-namespace {
-    QStringList mountPoints(const QVector<QuotaItem> &items)
-    {
-        QStringList list;
-        for (auto & item : items) {
-            list.append(item.mountPoint());
-        }
-        return list;
+namespace
+{
+QStringList mountPoints(const QVector<QuotaItem> &items)
+{
+    QStringList list;
+    for (auto &item : items) {
+        list.append(item.mountPoint());
     }
+    return list;
+}
 
-    int indexOfMountPoint(const QString &mountPoint, const QVector<QuotaItem> &items)
-    {
-        for (int i = 0; i < items.size(); ++i) {
-            if (mountPoint == items[i].mountPoint()) {
-                return i;
-            }
+int indexOfMountPoint(const QString &mountPoint, const QVector<QuotaItem> &items)
+{
+    for (int i = 0; i < items.size(); ++i) {
+        if (mountPoint == items[i].mountPoint()) {
+            return i;
         }
-        return -1;
     }
+    return -1;
+}
 }
 
 void QuotaListModel::updateItems(const QVector<QuotaItem> &items)
@@ -153,7 +160,7 @@ void QuotaListModel::updateItems(const QVector<QuotaItem> &items)
     QStringList unusedMountPoints = mountPoints(m_items);
 
     // merge existing and new mount points
-    for (auto & item : items) {
+    for (auto &item : items) {
         // remove still used item from unused list
         unusedMountPoints.removeOne(item.mountPoint());
 
@@ -168,7 +175,7 @@ void QuotaListModel::updateItems(const QVector<QuotaItem> &items)
     }
 
     // remove mount points, that do not exist anymore
-    for (const auto & mountPoint : unusedMountPoints) {
+    for (const auto &mountPoint : unusedMountPoints) {
         const int row = indexOfMountPoint(mountPoint, m_items);
         Q_ASSERT(row >= 0);
         removeRow(row);

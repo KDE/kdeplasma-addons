@@ -7,21 +7,21 @@
 
 #include "konsoleprofilesservice.h"
 
-#include <QMap>
 #include <QDebug>
+#include <QMap>
 
 #include <KNotificationJobUiDelegate>
 
 #include <KIO/CommandLauncherJob>
 
-KonsoleProfilesService::KonsoleProfilesService(QObject* parent, const QString& profileName)
+KonsoleProfilesService::KonsoleProfilesService(QObject *parent, const QString &profileName)
     : Plasma::Service(parent)
 {
     setName(QStringLiteral("org.kde.plasma.dataengine.konsoleprofiles"));
     setDestination(profileName);
 }
 
-Plasma::ServiceJob* KonsoleProfilesService::createJob(const QString& operation, QMap<QString,QVariant>& parameters)
+Plasma::ServiceJob *KonsoleProfilesService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
     return new ProfileJob(this, operation, parameters);
 }
@@ -33,18 +33,16 @@ ProfileJob::ProfileJob(KonsoleProfilesService *service, const QString &operation
 
 void ProfileJob::start()
 {
-    //destination is the profile name, operation is e.g. "open"
- //   QMap<QString, QVariant>jobParameters = parameters();
+    // destination is the profile name, operation is e.g. "open"
+    //   QMap<QString, QVariant>jobParameters = parameters();
     const QString operation = operationName();
 
-qDebug() << "SERVICE START...operation: " << operation << " dest: " << destination();
+    qDebug() << "SERVICE START...operation: " << operation << " dest: " << destination();
     if (operation == QLatin1String("open")) {
-  //      Q_ASSERT(!jobParameters.isEmpty());
+        //      Q_ASSERT(!jobParameters.isEmpty());
 
         // Would be nice if we could just return this in createJob above
-        auto *job = new KIO::CommandLauncherJob(QStringLiteral("konsole"), {
-            QStringLiteral("--profile"), destination()
-        });
+        auto *job = new KIO::CommandLauncherJob(QStringLiteral("konsole"), {QStringLiteral("--profile"), destination()});
         job->setDesktopName(QStringLiteral("org.kde.konsole"));
 
         auto *delegate = new KNotificationJobUiDelegate;
@@ -60,4 +58,3 @@ qDebug() << "SERVICE START...operation: " << operation << " dest: " << destinati
         job->start();
     }
 }
-

@@ -14,20 +14,21 @@
 #include <KPluginLoader>
 #include <KSharedConfig>
 
-//For the macro
+// For the macro
 #include <KRunner/AbstractRunner>
 
-SpellCheckConfigForm::SpellCheckConfigForm(QWidget* parent) : QWidget(parent)
+SpellCheckConfigForm::SpellCheckConfigForm(QWidget *parent)
+    : QWidget(parent)
 {
-  setupUi(this);
+    setupUi(this);
 }
 
-SpellCheckConfig::SpellCheckConfig(QWidget* parent, const QVariantList& args) :
-        KCModule(parent, args)
+SpellCheckConfig::SpellCheckConfig(QWidget *parent, const QVariantList &args)
+    : KCModule(parent, args)
 {
     m_ui = new SpellCheckConfigForm(this);
 
-    QGridLayout* layout = new QGridLayout(this);
+    QGridLayout *layout = new QGridLayout(this);
 
     layout->addWidget(m_ui, 0, 0);
 
@@ -57,7 +58,7 @@ void SpellCheckConfig::load()
 {
     KCModule::load();
 
-    //FIXME: This shouldn't be hardcoded!
+    // FIXME: This shouldn't be hardcoded!
     const KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
     const KConfigGroup grp = cfg->group("Runners").group("Spell Checker");
 
@@ -76,15 +77,15 @@ void SpellCheckConfig::load()
 
 void SpellCheckConfig::save()
 {
-    //FIXME: This shouldn't be hardcoded!
+    // FIXME: This shouldn't be hardcoded!
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
     KConfigGroup grp = cfg->group("Runners").group("Spell Checker");
 
     bool requireTrigger = m_ui->m_requireTriggerWord->checkState() == Qt::Checked;
     if (requireTrigger) {
-        grp.writeEntry( "trigger", m_ui->m_triggerWord->text() );
+        grp.writeEntry("trigger", m_ui->m_triggerWord->text());
     }
-    grp.writeEntry( "requireTriggerWord", requireTrigger );
+    grp.writeEntry("requireTriggerWord", requireTrigger);
     grp.sync();
 
     emit changed(false);
@@ -92,12 +93,11 @@ void SpellCheckConfig::save()
 
 void SpellCheckConfig::defaults()
 {
-    m_ui->m_requireTriggerWord->setCheckState( Qt::Checked );
-    m_ui->m_triggerWord->setText( i18n("spell") );
+    m_ui->m_requireTriggerWord->setCheckState(Qt::Checked);
+    m_ui->m_triggerWord->setText(i18n("spell"));
     emit changed(true);
 }
 
-K_PLUGIN_FACTORY(SpellCheckConfigFactory,
-                 registerPlugin<SpellCheckConfig>(QStringLiteral("kcm_krunner_spellcheck"));)
+K_PLUGIN_FACTORY(SpellCheckConfigFactory, registerPlugin<SpellCheckConfig>(QStringLiteral("kcm_krunner_spellcheck"));)
 
 #include "spellcheck_config.moc"

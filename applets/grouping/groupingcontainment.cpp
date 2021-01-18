@@ -11,7 +11,6 @@
 #include <QDebug>
 #include <QProcess>
 
-
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusPendingCallWatcher>
@@ -66,7 +65,7 @@ void GroupingContainment::showPlasmoidMenu(QQuickItem *appletInterface, int x, i
         return;
     }
 
-    Plasma::Applet *applet = appletInterface->property("_plasma_applet").value<Plasma::Applet*>();
+    Plasma::Applet *applet = appletInterface->property("_plasma_applet").value<Plasma::Applet *>();
 
     QPointF pos = appletInterface->mapToScene(QPointF(x, y));
 
@@ -87,7 +86,7 @@ void GroupingContainment::showPlasmoidMenu(QQuickItem *appletInterface, int x, i
         }
     }
 
-    //add run associated action/ remove / alternatives
+    // add run associated action/ remove / alternatives
     desktopMenu->addActions(applet->actions()->actions());
 
     if (desktopMenu->isEmpty()) {
@@ -100,14 +99,14 @@ void GroupingContainment::showPlasmoidMenu(QQuickItem *appletInterface, int x, i
     if (QScreen *screen = appletInterface->window()->screen()) {
         const QRect geo = screen->availableGeometry();
 
-        pos = QPoint(qBound(geo.left(), (int)pos.x(), geo.right() - desktopMenu->width()),
-                        qBound(geo.top(), (int)pos.y(), geo.bottom() - desktopMenu->height()));
+        pos =
+            QPoint(qBound(geo.left(), (int)pos.x(), geo.right() - desktopMenu->width()), qBound(geo.top(), (int)pos.y(), geo.bottom() - desktopMenu->height()));
     }
 
     desktopMenu->popup(pos.toPoint());
 }
 
-QPointF GroupingContainment::popupPosition(QQuickItem* visualParent, int x, int y)
+QPointF GroupingContainment::popupPosition(QQuickItem *visualParent, int x, int y)
 {
     if (!visualParent) {
         return QPointF(0, 0);
@@ -123,7 +122,7 @@ QPointF GroupingContainment::popupPosition(QQuickItem* visualParent, int x, int 
     return pos;
 }
 
-void GroupingContainment::reorderItemBefore(QQuickItem* before, QQuickItem* after)
+void GroupingContainment::reorderItemBefore(QQuickItem *before, QQuickItem *after)
 {
     if (!before || !after) {
         return;
@@ -135,7 +134,7 @@ void GroupingContainment::reorderItemBefore(QQuickItem* before, QQuickItem* afte
     before->setVisible(true);
 }
 
-void GroupingContainment::reorderItemAfter(QQuickItem* after, QQuickItem* before)
+void GroupingContainment::reorderItemAfter(QQuickItem *after, QQuickItem *before)
 {
     if (!before || !after) {
         return;

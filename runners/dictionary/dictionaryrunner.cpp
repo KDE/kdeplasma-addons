@@ -5,8 +5,8 @@
 
 #include "dictionaryrunner.h"
 
-#include <QStringList>
 #include <KLocalizedString>
+#include <QStringList>
 
 static const char CONFIG_TRIGGERWORD[] = "triggerWord";
 
@@ -35,7 +35,8 @@ void DictionaryRunner::reloadConfiguration()
     } else {
         setMatchRegex(QRegularExpression());
     }
-    setSyntaxes(QList<Plasma::RunnerSyntax>() << Plasma::RunnerSyntax(Plasma::RunnerSyntax(i18nc("Dictionary keyword", "%1:q:", m_triggerWord), i18n("Finds the definition of :q:."))));
+    setSyntaxes(QList<Plasma::RunnerSyntax>() << Plasma::RunnerSyntax(
+                    Plasma::RunnerSyntax(i18nc("Dictionary keyword", "%1:q:", m_triggerWord), i18n("Finds the definition of :q:."))));
 }
 
 void DictionaryRunner::match(Plasma::RunnerContext &context)

@@ -4,36 +4,35 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <QVariant>
-#include <QQmlEngine>
-#include <QQmlExtensionPlugin>
+#include "contenttracker.h"
+#include <QBuffer>
 #include <QImage>
 #include <QPixmap>
-#include <QBuffer>
+#include <QQmlEngine>
+#include <QQmlExtensionPlugin>
+#include <QVariant>
 #include <qqml.h>
-#include "contenttracker.h"
 
 class PurposeHelper : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 public:
-    Q_INVOKABLE static QByteArray variantToBase64(const QVariant& content)
+    Q_INVOKABLE static QByteArray variantToBase64(const QVariant &content)
     {
-        switch (content.type())
-        {
-            case QVariant::Image:
-                return imageToBase64(content.value<QImage>());
-            case QVariant::Pixmap:
-                return imageToBase64(content.value<QPixmap>().toImage());
-            case QVariant::ByteArray:
-                return content.toByteArray().toBase64();
-            case QVariant::String:
-            default:
-                return content.toString().toLatin1().toBase64();
+        switch (content.type()) {
+        case QVariant::Image:
+            return imageToBase64(content.value<QImage>());
+        case QVariant::Pixmap:
+            return imageToBase64(content.value<QPixmap>().toImage());
+        case QVariant::ByteArray:
+            return content.toByteArray().toBase64();
+        case QVariant::String:
+        default:
+            return content.toString().toLatin1().toBase64();
         }
     }
 
-    static QByteArray imageToBase64(const QImage& img)
+    static QByteArray imageToBase64(const QImage &img)
     {
         QByteArray bytes;
         {
@@ -54,7 +53,9 @@ public:
     void registerTypes(const char *uri) override
     {
         Q_UNUSED(uri);
-        qmlRegisterSingletonType<PurposeHelper>("org.kde.plasma.private.purpose", 1, 0, "PurposeHelper", [](QQmlEngine*, QJSEngine*) -> QObject* { return new PurposeHelper; });
+        qmlRegisterSingletonType<PurposeHelper>("org.kde.plasma.private.purpose", 1, 0, "PurposeHelper", [](QQmlEngine *, QJSEngine *) -> QObject * {
+            return new PurposeHelper;
+        });
         qmlRegisterType<ContentTracker>("org.kde.plasma.private.purpose", 1, 0, "ContentTracker");
     }
 };

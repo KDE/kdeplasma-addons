@@ -7,20 +7,20 @@
 
 #include "notemanager.h"
 
-#include <QMutex>
 #include <QDebug>
+#include <QMutex>
 #include <QQmlEngine>
 
 #include "filesystemnoteloader.h"
 #include "note.h"
 
-NoteManager::NoteManager(QObject* parent):
-    QObject(parent)
+NoteManager::NoteManager(QObject *parent)
+    : QObject(parent)
 {
     m_backend = loadBackend();
 }
 
-Note* NoteManager::loadNote(const QString &id)
+Note *NoteManager::loadNote(const QString &id)
 {
     Note *note = m_backend->loadNote(id);
     QQmlEngine::setObjectOwnership(note, QQmlEngine::JavaScriptOwnership);
@@ -32,7 +32,7 @@ void NoteManager::deleteNoteResources(const QString &id)
     m_backend->deleteNoteResources(id);
 }
 
-QSharedPointer< AbstractNoteLoader > NoteManager::loadBackend()
+QSharedPointer<AbstractNoteLoader> NoteManager::loadBackend()
 {
     static QMutex mutex;
     static QWeakPointer<AbstractNoteLoader> s_backend;
@@ -46,4 +46,3 @@ QSharedPointer< AbstractNoteLoader > NoteManager::loadBackend()
     mutex.unlock();
     return manager;
 }
-

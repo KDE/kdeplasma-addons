@@ -17,8 +17,14 @@
 class UnitItem
 {
 public:
-    UnitItem() {}
-    UnitItem(KUnitConversion::UnitId _unitId) : name(Util::nameFromUnitId(_unitId)), unitId(_unitId) {}
+    UnitItem()
+    {
+    }
+    UnitItem(KUnitConversion::UnitId _unitId)
+        : name(Util::nameFromUnitId(_unitId))
+        , unitId(_unitId)
+    {
+    }
 
     QString name;
     KUnitConversion::UnitId unitId;
@@ -26,7 +32,6 @@ public:
 
 Q_DECLARE_METATYPE(UnitItem)
 Q_DECLARE_TYPEINFO(UnitItem, Q_MOVABLE_TYPE);
-
 
 class AbstractUnitListModel : public QAbstractListModel
 {

@@ -7,13 +7,13 @@
 
 #include "epodprovider.h"
 
-#include <QRegExp>
 #include <QDebug>
+#include <QRegExp>
 
-#include <KPluginFactory>
 #include <KIO/Job>
+#include <KPluginFactory>
 
-EpodProvider::EpodProvider( QObject *parent, const QVariantList &args )
+EpodProvider::EpodProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
 {
     const QUrl url(QStringLiteral("https://epod.usra.edu/blog/"));
@@ -32,34 +32,34 @@ QImage EpodProvider::image() const
 void EpodProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
-    if ( job->error() ) {
-	emit error(this);
-	return;
+    if (job->error()) {
+        emit error(this);
+        return;
     }
 
-    const QString data = QString::fromUtf8( job->data() );
+    const QString data = QString::fromUtf8(job->data());
 
     const QString pattern = QStringLiteral("://epod.usra.edu/.a/*-pi");
-    QRegExp exp( pattern );
+    QRegExp exp(pattern);
     exp.setPatternSyntax(QRegExp::Wildcard);
 
-    int pos = exp.indexIn( data ) + pattern.length();
-    const QString sub = data.mid( pos-4, pattern.length()+10);
+    int pos = exp.indexIn(data) + pattern.length();
+    const QString sub = data.mid(pos - 4, pattern.length() + 10);
     const QUrl url(QStringLiteral("https://epod.usra.edu/.a/%1-pi").arg(sub));
-    KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+    KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &EpodProvider::imageRequestFinished);
 }
 
 void EpodProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
-    if ( job->error() ) {
-	emit error(this);
-	return;
+    if (job->error()) {
+        emit error(this);
+        return;
     }
 
     // FIXME: this really should be done in a thread as this can block
-    mImage = QImage::fromData( job->data() );
+    mImage = QImage::fromData(job->data());
     emit finished(this);
 }
 

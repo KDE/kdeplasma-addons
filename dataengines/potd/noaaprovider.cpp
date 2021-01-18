@@ -7,11 +7,11 @@
 
 #include "noaaprovider.h"
 
-#include <QRegularExpression>
 #include <QDebug>
+#include <QRegularExpression>
 
-#include <KPluginFactory>
 #include <KIO/Job>
+#include <KPluginFactory>
 
 NOAAProvider::NOAAProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
@@ -29,15 +29,15 @@ QImage NOAAProvider::image() const
     return mImage;
 }
 
-void NOAAProvider::pageRequestFinished(KJob* _job)
+void NOAAProvider::pageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
         emit error(this);
         return;
     }
 
-    const QString data = QString::fromUtf8( job->data() );
+    const QString data = QString::fromUtf8(job->data());
 
     // Using regular expression could be fragile in such case, but the HTML
     // NOAA page itself is not a valid XML file and unfortunately it could
@@ -55,19 +55,19 @@ void NOAAProvider::pageRequestFinished(KJob* _job)
         return;
     }
 
-    KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+    KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &NOAAProvider::imageRequestFinished);
 }
 
 void NOAAProvider::imageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
-    if ( job->error() ) {
-	emit error(this);
-	return;
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
+    if (job->error()) {
+        emit error(this);
+        return;
     }
 
-    mImage = QImage::fromData( job->data() );
+    mImage = QImage::fromData(job->data());
     emit finished(this);
 }
 

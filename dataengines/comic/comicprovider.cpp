@@ -6,82 +6,82 @@
 
 #include "comicprovider.h"
 
+#include <QDebug>
 #include <QTimer>
 #include <QUrl>
-#include <QDebug>
 
 #include <KIO/Job>
 #include <KIO/StoredTransferJob>
 
 class ComicProvider::Private
 {
-    public:
-        Private(const KPluginMetaData &data, ComicProvider *parent)
-            : mParent(parent),
-              mIsCurrent(false),
-              mFirstStripNumber(1),
-              mComicDescription(data)
-        {
-            mTimer = new QTimer(parent);
-            mTimer->setSingleShot(true);
-            mTimer->setInterval(15000);//timeout after 15 seconds
-            connect(mTimer, &QTimer::timeout, mParent, [this](){
-                //operation took too long, abort it
-                emit mParent->error(mParent);
-            });
+public:
+    Private(const KPluginMetaData &data, ComicProvider *parent)
+        : mParent(parent)
+        , mIsCurrent(false)
+        , mFirstStripNumber(1)
+        , mComicDescription(data)
+    {
+        mTimer = new QTimer(parent);
+        mTimer->setSingleShot(true);
+        mTimer->setInterval(15000); // timeout after 15 seconds
+        connect(mTimer, &QTimer::timeout, mParent, [this]() {
+            // operation took too long, abort it
+            emit mParent->error(mParent);
+        });
+    }
+
+    void jobDone(KJob *job)
+    {
+        if (job->error()) {
+            mParent->pageError(job->property("uid").toInt(), job->errorText());
+        } else {
+            KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob *>(job);
+            mParent->pageRetrieved(job->property("uid").toInt(), storedJob->data());
+        }
+    }
+
+    void slotRedirection(KIO::Job *job, const QUrl &oldUrl, const QUrl &newUrl)
+    {
+        Q_UNUSED(oldUrl)
+
+        mParent->redirected(job->property("uid").toInt(), newUrl);
+        mRedirections.remove(job);
+    }
+
+    void slotRedirectionDone(KJob *job)
+    {
+        if (job->error()) {
+            qDebug() << "Redirection job with id" << job->property("uid").toInt() << "finished with an error.";
         }
 
-        void jobDone(KJob *job)
-        {
-            if (job->error()) {
-                mParent->pageError(job->property("uid").toInt(), job->errorText());
-            } else {
-                KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>(job);
-                mParent->pageRetrieved(job->property("uid").toInt(), storedJob->data());
-            }
-        }
-
-        void slotRedirection(KIO::Job *job, const QUrl& oldUrl, const QUrl& newUrl)
-        {
-            Q_UNUSED(oldUrl)
-
-            mParent->redirected(job->property("uid").toInt(), newUrl);
+        if (mRedirections.contains(job)) {
+            // no redirection took place, return the original url
+            mParent->redirected(job->property("uid").toInt(), mRedirections[job]);
             mRedirections.remove(job);
         }
+    }
 
-        void slotRedirectionDone(KJob *job)
-        {
-            if (job->error()) {
-                qDebug() << "Redirection job with id" << job->property("uid").toInt() <<  "finished with an error.";
-            }
-
-            if (mRedirections.contains(job)) {
-                //no redirection took place, return the original url
-                mParent->redirected(job->property("uid").toInt(), mRedirections[job]);
-                mRedirections.remove(job);
-            }
-        }
-
-        ComicProvider *mParent;
-        QString mRequestedId;
-        QString mRequestedComicName;
-        QString mComicAuthor;
-        QUrl mImageUrl;
-        bool mIsCurrent;
-        bool mIsLeftToRight;
-        bool mIsTopToBottom;
-        QDate mRequestedDate;
-        QDate mFirstStripDate;
-        int mRequestedNumber;
-        int mFirstStripNumber;
-        KPluginMetaData mComicDescription;
-        QTimer *mTimer;
-        QHash< KJob*, QUrl > mRedirections;
+    ComicProvider *mParent;
+    QString mRequestedId;
+    QString mRequestedComicName;
+    QString mComicAuthor;
+    QUrl mImageUrl;
+    bool mIsCurrent;
+    bool mIsLeftToRight;
+    bool mIsTopToBottom;
+    QDate mRequestedDate;
+    QDate mFirstStripDate;
+    int mRequestedNumber;
+    int mFirstStripNumber;
+    KPluginMetaData mComicDescription;
+    QTimer *mTimer;
+    QHash<KJob *, QUrl> mRedirections;
 };
 
 ComicProvider::ComicProvider(QObject *parent, const QVariantList &args)
-    : QObject(parent), d(new Private(
-      KPluginMetaData(args.count() > 2 ? args[2].toString() : QString()), this))
+    : QObject(parent)
+    , d(new Private(KPluginMetaData(args.count() > 2 ? args[2].toString() : QString()), this))
 {
     Q_ASSERT(args.count() >= 2);
     const QString type = args[0].toString();
@@ -95,14 +95,13 @@ ComicProvider::ComicProvider(QObject *parent, const QVariantList &args)
 
         int index = d->mRequestedId.indexOf(QLatin1Char(':'));
         d->mRequestedComicName = d->mRequestedId.mid(0, index);
-    }
-    else {
+    } else {
         Q_ASSERT(false && "Invalid type passed to comic provider");
     }
 
     d->mTimer->start();
-    connect(this, &ComicProvider::finished, this, [this](){
-        //everything finished, stop the timeout timer
+    connect(this, &ComicProvider::finished, this, [this]() {
+        // everything finished, stop the timeout timer
         d->mTimer->stop();
     });
 }
@@ -211,7 +210,7 @@ QString ComicProvider::requestedComicName() const
 
 void ComicProvider::requestPage(const QUrl &url, int id, const MetaInfos &infos)
 {
-    //each request restarts the timer
+    // each request restarts the timer
     d->mTimer->start();
 
     if (id == Image) {
@@ -220,10 +219,10 @@ void ComicProvider::requestPage(const QUrl &url, int id, const MetaInfos &infos)
 
     KIO::StoredTransferJob *job;
     if (id == Image) {
-        //use cached information for the image if available
+        // use cached information for the image if available
         job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     } else {
-        //for webpages we always reload, making sure, that changes are recognised
+        // for webpages we always reload, making sure, that changes are recognised
         job = KIO::storedGet(url, KIO::Reload, KIO::HideProgressInfo);
     }
     job->setProperty("uid", id);
@@ -242,7 +241,7 @@ void ComicProvider::requestPage(const QUrl &url, int id, const MetaInfos &infos)
 
 void ComicProvider::requestRedirectedUrl(const QUrl &url, int id, const MetaInfos &infos)
 {
-    //each request restarts the timer
+    // each request restarts the timer
     d->mTimer->start();
 
     KIO::MimetypeJob *job = KIO::mimetype(url, KIO::HideProgressInfo);
@@ -267,15 +266,15 @@ void ComicProvider::requestRedirectedUrl(const QUrl &url, int id, const MetaInfo
     }
 }
 
-void ComicProvider::pageRetrieved(int, const QByteArray&)
+void ComicProvider::pageRetrieved(int, const QByteArray &)
 {
 }
 
-void ComicProvider::pageError(int, const QString&)
+void ComicProvider::pageError(int, const QString &)
 {
 }
 
-void ComicProvider::redirected(int, const QUrl&)
+void ComicProvider::redirected(int, const QUrl &)
 {
 }
 

@@ -8,7 +8,6 @@
 #ifndef GROUPEDAPPLETSCONTAINER_H
 #define GROUPEDAPPLETSCONTAINER_H
 
-
 #include <Plasma/Applet>
 
 class QQuickItem;

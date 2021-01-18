@@ -19,49 +19,49 @@ class CachedProvider : public PotdProvider
 {
     Q_OBJECT
 
-    public:
-        /**
-         * Creates a new cached provider.
-         *
-         * @param identifier The identifier of the cached picture.
-         * @param parent The parent object.
-         */
-        CachedProvider( const QString &identifier, QObject *parent );
+public:
+    /**
+     * Creates a new cached provider.
+     *
+     * @param identifier The identifier of the cached picture.
+     * @param parent The parent object.
+     */
+    CachedProvider(const QString &identifier, QObject *parent);
 
-        /**
-         * Destroys the cached provider.
-         */
-        ~CachedProvider() override;
+    /**
+     * Destroys the cached provider.
+     */
+    ~CachedProvider() override;
 
-        /**
-         * Returns the requested image.
-         *
-         * Note: This method returns only a valid image after the
-         *       finished() signal has been emitted.
-         */
-        QImage image() const override;
+    /**
+     * Returns the requested image.
+     *
+     * Note: This method returns only a valid image after the
+     *       finished() signal has been emitted.
+     */
+    QImage image() const override;
 
-        /**
-         * Returns the identifier of the picture request (name + date).
-         */
-        QString identifier() const override;
+    /**
+     * Returns the identifier of the picture request (name + date).
+     */
+    QString identifier() const override;
 
-        /**
-         * Returns whether a picture with the given @p identifier is cached.
-         */
-        static bool isCached( const QString &identifier, bool ignoreAge = false );
+    /**
+     * Returns whether a picture with the given @p identifier is cached.
+     */
+    static bool isCached(const QString &identifier, bool ignoreAge = false);
 
-        /**
-         * Returns a path for the given identifier
-         */
-        static QString identifierToPath( const QString &identifier );
+    /**
+     * Returns a path for the given identifier
+     */
+    static QString identifierToPath(const QString &identifier);
 
-    private Q_SLOTS:
-        void triggerFinished(const QImage &image);
+private Q_SLOTS:
+    void triggerFinished(const QImage &image);
 
-    private:
-        QString mIdentifier;
-        QImage mImage;
+private:
+    QString mIdentifier;
+    QImage mImage;
 };
 
 class LoadImageThread : public QObject, public QRunnable
@@ -88,7 +88,7 @@ public:
     void run() override;
 
 Q_SIGNALS:
-    void done( const QString &source, const QString &path, const QImage &img );
+    void done(const QString &source, const QString &path, const QImage &img);
 
 private:
     QImage m_image;

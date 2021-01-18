@@ -6,9 +6,9 @@
 #ifndef DICTIONARIES_MODEL_H
 #define DICTIONARIES_MODEL_H
 
-#include <QAbstractListModel>
-#include <Plasma/DataEngineConsumer>
 #include <Plasma/DataEngine>
+#include <Plasma/DataEngineConsumer>
+#include <QAbstractListModel>
 #include <vector>
 
 class DictionariesModel : public QAbstractListModel, public Plasma::DataEngineConsumer

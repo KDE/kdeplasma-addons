@@ -11,10 +11,8 @@
 
 AbstractNoteLoader::AbstractNoteLoader()
 {
-
 }
 
 AbstractNoteLoader::~AbstractNoteLoader()
 {
-
 }

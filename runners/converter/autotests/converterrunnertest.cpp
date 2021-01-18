@@ -14,7 +14,7 @@ using namespace KUnitConversion;
 
 class ConverterRunnerTest : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 private Q_SLOTS:
     void initTestCase();
 
@@ -56,7 +56,7 @@ void ConverterRunnerTest::testMostCommonUnits()
 
     Converter converter;
     const auto lengthCategory = converter.category(KUnitConversion::LengthCategory);
-    QCOMPARE(context.matches().count(), lengthCategory.mostCommonUnits().count() -1);
+    QCOMPARE(context.matches().count(), lengthCategory.mostCommonUnits().count() - 1);
 }
 
 /*
@@ -122,7 +122,6 @@ void ConverterRunnerTest::testCurrency()
         currencyUnits << localCurrency;
     }
     QCOMPARE(context.matches().count(), currencyUnits.count() - 1);
-
 }
 
 /**

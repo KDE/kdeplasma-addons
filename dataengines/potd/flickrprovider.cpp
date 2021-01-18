@@ -8,18 +8,17 @@
 
 #include "flickrprovider.h"
 
-#include <QUrlQuery>
+#include <KIO/Job>
+#include <KPluginFactory>
 #include <QDebug>
 #include <QRandomGenerator>
-#include <KPluginFactory>
-#include <KIO/Job>
+#include <QUrlQuery>
 
 #define FLICKR_API_KEY QStringLiteral("11829a470557ad8e10b02e80afacb3af")
 
-static
-QUrl buildUrl(const QDate &date)
+static QUrl buildUrl(const QDate &date)
 {
-    QUrl url(QLatin1String( "https://api.flickr.com/services/rest/"));
+    QUrl url(QLatin1String("https://api.flickr.com/services/rest/"));
     QUrlQuery urlQuery(url);
     urlQuery.addQueryItem(QStringLiteral("api_key"), FLICKR_API_KEY);
     urlQuery.addQueryItem(QStringLiteral("method"), QStringLiteral("flickr.interestingness.getList"));
@@ -51,14 +50,14 @@ QImage FlickrProvider::image() const
 
 void FlickrProvider::pageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
         emit error(this);
         qDebug() << "pageRequestFinished error";
         return;
     }
 
-    const QString data = QString::fromUtf8( job->data() );
+    const QString data = QString::fromUtf8(job->data());
 
     // Clear the list
     m_photoList.clear();
@@ -74,7 +73,7 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
             if (xml.name() == QLatin1String("rsp")) {
                 const int maxFailure = 5;
                 /* no pictures available for the specified parameters */
-                if (attributes.value ( QLatin1String( "stat" ) ).toString() != QLatin1String( "ok" )) {
+                if (attributes.value(QLatin1String("stat")).toString() != QLatin1String("ok")) {
                     if (mFailureNumber < maxFailure) {
                         /* To be sure, decrement the date to two days earlier... @TODO */
                         mActualDate = mActualDate.addDays(-2);
@@ -89,14 +88,12 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
                         return;
                     }
                 }
-            } else if (xml.name() == QLatin1String( "photo" )) {
-                if (attributes.value ( QLatin1String( "ispublic" ) ).toString() != QLatin1String( "1" )) {
+            } else if (xml.name() == QLatin1String("photo")) {
+                if (attributes.value(QLatin1String("ispublic")).toString() != QLatin1String("1")) {
                     continue;
                 }
 
-                const char *fallbackList[] = {
-                    "url_k", "url_h"
-                };
+                const char *fallbackList[] = {"url_k", "url_h"};
 
                 bool found = false;
                 for (auto urlAttr : fallbackList) {
@@ -127,9 +124,9 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
     }
 
     if (m_photoList.begin() != m_photoList.end()) {
-        QUrl url( m_photoList.at(QRandomGenerator::global()->bounded(m_photoList.size())) );
-            KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-            connect(imageJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::imageRequestFinished);
+        QUrl url(m_photoList.at(QRandomGenerator::global()->bounded(m_photoList.size())));
+        KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+        connect(imageJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::imageRequestFinished);
     } else {
         qDebug() << "empty list";
     }
@@ -137,13 +134,13 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
 
 void FlickrProvider::imageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
-    if ( job->error() ) {
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
+    if (job->error()) {
         emit error(this);
         return;
     }
 
-    mImage = QImage::fromData( job->data() );
+    mImage = QImage::fromData(job->data());
     emit finished(this);
 }
 

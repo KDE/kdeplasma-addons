@@ -4,13 +4,11 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #ifndef NOTESPLUGIN_H
 #define NOTESPLUGIN_H
 
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
-
 
 class NotesPlugin : public QQmlExtensionPlugin
 {

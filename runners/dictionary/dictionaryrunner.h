@@ -6,8 +6,8 @@
 #ifndef DICTIONARYRUNNER_H
 #define DICTIONARYRUNNER_H
 
-#include <KRunner/AbstractRunner>
 #include "dictionarymatchengine.h"
+#include <KRunner/AbstractRunner>
 
 class DictionaryRunner : public Plasma::AbstractRunner
 {
@@ -24,7 +24,6 @@ private:
 
 protected Q_SLOTS:
     void init() override;
-
 };
 
 #endif

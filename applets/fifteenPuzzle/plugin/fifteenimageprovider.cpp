@@ -9,10 +9,10 @@
 #include <QDebug>
 
 FifteenImageProvider::FifteenImageProvider()
-: QQuickImageProvider(QQuickImageProvider::Pixmap)
-, m_boardSize(4)
-, m_pieceWidth(30)
-, m_pieceHeight(30)
+    : QQuickImageProvider(QQuickImageProvider::Pixmap)
+    , m_boardSize(4)
+    , m_pieceWidth(30)
+    , m_pieceHeight(30)
 {
 }
 
@@ -84,4 +84,3 @@ void FifteenImageProvider::updatePixmaps()
         m_pixmaps[i] = copyPixmap.copy(posX, posY, m_pieceWidth, m_pieceHeight);
     }
 }
-

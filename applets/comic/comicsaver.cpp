@@ -8,14 +8,14 @@
 #include "comicdata.h"
 #include "comicinfo.h"
 
+#include <QDebug>
 #include <QFileDialog>
 #include <QTemporaryFile>
-#include <QDebug>
 
 #include <KIO/Job>
 
 ComicSaver::ComicSaver(SavingDir *savingDir)
-  : mSavingDir(savingDir)
+    : mSavingDir(savingDir)
 {
 }
 
@@ -28,7 +28,7 @@ bool ComicSaver::save(const ComicData &comic)
 
     destUrl = QFileDialog::getSaveFileUrl(nullptr, QString(), destUrl, QStringLiteral("*.png"));
 
-    if ( !destUrl.isValid() ) {
+    if (!destUrl.isValid()) {
         return false;
     }
 

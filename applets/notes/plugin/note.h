@@ -20,19 +20,20 @@ public:
     explicit Note(const QString &id);
     QString id() const;
 
-    //what's in the plasmoid
-    //backends save this and write into storedText
-    QString noteText() const ;
+    // what's in the plasmoid
+    // backends save this and write into storedText
+    QString noteText() const;
     void setNoteText(const QString &text);
 
 public Q_SLOTS:
     virtual void save(const QString &text) = 0;
 
-    //FUTURE
-//     status  None, Ready, Loading, Error
+    // FUTURE
+    //     status  None, Ready, Loading, Error
 
 Q_SIGNALS:
     void noteTextChanged();
+
 private:
     const QString m_id;
     QString m_noteText;

@@ -27,10 +27,10 @@ public:
      * This enum type is used to specify the state of the inhibitor.
      */
     enum State {
-        Inhibiting,   ///< Night Color is being inhibited.
-        Inhibited,    ///< Night Color is inhibited.
+        Inhibiting, ///< Night Color is being inhibited.
+        Inhibited, ///< Night Color is inhibited.
         Uninhibiting, ///< Night Color is being uninhibited.
-        Uninhibited,  ///< Night Color is uninhibited.
+        Uninhibited, ///< Night Color is uninhibited.
     };
     Q_ENUM(State)
 

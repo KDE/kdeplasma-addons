@@ -9,19 +9,18 @@
 #define CONVERTERRUNNER_H
 
 #include <KRunner/AbstractRunner>
-#include <QRegularExpression>
-#include <QLocale>
-#include <QAction>
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/UnitCategory>
-
+#include <QAction>
+#include <QLocale>
+#include <QRegularExpression>
 
 /**
  * This class converts values to different units.
  */
-class ConverterRunner: public Plasma::AbstractRunner
+class ConverterRunner : public Plasma::AbstractRunner
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     ConverterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
@@ -46,8 +45,7 @@ private:
 
     QPair<bool, double> stringToDouble(const QStringRef &value);
     QPair<bool, double> getValidatedNumberValue(const QString &value);
-    QList<KUnitConversion::Unit> createResultUnits(QString &outputUnitString,
-                                                   const KUnitConversion::UnitCategory &category);
+    QList<KUnitConversion::Unit> createResultUnits(QString &outputUnitString, const KUnitConversion::UnitCategory &category);
 };
 
 #endif

@@ -7,16 +7,16 @@
 
 #include "apodprovider.h"
 
-#include <QRegExp>
 #include <QDebug>
+#include <QRegExp>
 
-#include <KPluginFactory>
 #include <KIO/Job>
+#include <KPluginFactory>
 
 ApodProvider::ApodProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
 {
-    const  QUrl url(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/"));
+    const QUrl url(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/"));
 
     KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::StoredTransferJob::finished, this, &ApodProvider::pageRequestFinished);
@@ -31,21 +31,21 @@ QImage ApodProvider::image() const
 
 void ApodProvider::pageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
-    if ( job->error() ) {
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
+    if (job->error()) {
         emit error(this);
         return;
     }
 
-    const QString data = QString::fromUtf8( job->data() );
+    const QString data = QString::fromUtf8(job->data());
 
-    const QString pattern = QStringLiteral("<a href=\"(image/.*)\"" );
-    QRegExp exp( pattern );
-    exp.setMinimal( true );
-    if ( exp.indexIn( data ) != -1 ) {
+    const QString pattern = QStringLiteral("<a href=\"(image/.*)\"");
+    QRegExp exp(pattern);
+    exp.setMinimal(true);
+    if (exp.indexIn(data) != -1) {
         const QString sub = exp.cap(1);
         const QUrl url(QLatin1String("http://antwrp.gsfc.nasa.gov/apod/") + sub);
-        KIO::StoredTransferJob *imageJob = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+        KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &ApodProvider::imageRequestFinished);
     } else {
         emit error(this);
@@ -54,13 +54,13 @@ void ApodProvider::pageRequestFinished(KJob *_job)
 
 void ApodProvider::imageRequestFinished(KJob *_job)
 {
-    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>( _job );
-    if ( job->error() ) {
-	emit error(this);
-	return;
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
+    if (job->error()) {
+        emit error(this);
+        return;
     }
 
-    mImage = QImage::fromData( job->data() );
+    mImage = QImage::fromData(job->data());
     emit finished(this);
 }
 

@@ -9,7 +9,6 @@
 // KF
 #include <KSharedConfig>
 
-
 ConfigStorage::ConfigStorage(QObject *parent)
     : QObject(parent)
 {
@@ -27,4 +26,3 @@ void ConfigStorage::save()
 
     m_generalConfigGroup.sync();
 }
-

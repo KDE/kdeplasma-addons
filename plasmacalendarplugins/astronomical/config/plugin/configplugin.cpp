@@ -11,8 +11,7 @@
 // Qt
 #include <QQmlEngine>
 
-
-void AstronomicalConfigPlugin::registerTypes(const char* uri)
+void AstronomicalConfigPlugin::registerTypes(const char *uri)
 {
     qmlRegisterType<ConfigStorage>(uri, 1, 0, "ConfigStorage");
 }
