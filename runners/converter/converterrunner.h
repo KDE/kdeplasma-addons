@@ -40,8 +40,6 @@ private:
     QMap<QString, QString> compatibleUnits;
 
     QList<QAction *> actionList;
-    QLatin1String copyActionId = QLatin1String("copy");
-    QLatin1String copyUnitActionId = QLatin1String("copy-unit");
 
     QPair<bool, double> stringToDouble(const QStringRef &value);
     QPair<bool, double> getValidatedNumberValue(const QString &value);

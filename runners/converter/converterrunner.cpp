@@ -42,9 +42,7 @@ void ConverterRunner::init()
 
     insertCompatibleUnits();
 
-    addAction(copyActionId, QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy number"));
-    addAction(copyUnitActionId, QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy unit and number"));
-    actionList = {action(copyActionId), action(copyUnitActionId)};
+    actionList = {addAction(QStringLiteral("copy-unit"), QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy unit and number"))};
     setMinLetterCount(2);
     setMatchRegex(valueRegex);
 }
@@ -97,7 +95,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
 
         Plasma::QueryMatch match(this);
-        match.setType(Plasma::QueryMatch::InformationalMatch);
+        match.setType(Plasma::QueryMatch::HelperMatch);
         match.setIconName(QStringLiteral("accessories-calculator"));
         if (outputUnit.categoryId() == KUnitConversion::CurrencyCategory) {
             outputValue.round(2);
@@ -118,10 +116,11 @@ void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::Qu
 {
     Q_UNUSED(context)
 
-    if (match.selectedAction() == action(copyActionId)) {
-        QGuiApplication::clipboard()->setText(match.data().toString());
+    if (match.selectedAction()) {
+        const QString text = match.text();
+        QGuiApplication::clipboard()->setText(text.left(text.indexOf(QLatin1String(" ("))));
     } else {
-        QGuiApplication::clipboard()->setText(match.text().split(QLatin1String(" (")).first());
+        QGuiApplication::clipboard()->setText(match.data().toString());
     }
 }
 
