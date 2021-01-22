@@ -15,6 +15,8 @@
 
 #include <cmath>
 
+K_EXPORT_PLASMA_RUNNER_WITH_JSON(ConverterRunner, "plasma-runner-converter.json")
+
 ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : Plasma::AbstractRunner(parent, metaData, args)
 {
@@ -225,3 +227,4 @@ void ConverterRunner::insertCompatibleUnits()
         }
     }
 }
+#include "converterrunner.moc"
