@@ -13,13 +13,14 @@
 
 #include <KConfigDialog>
 #include <KNS3/DownloadDialog>
-#include <KNSCore/DownloadManager>
+#include <KNSCore/Engine>
 
 ComicUpdater::ComicUpdater(QObject *parent)
     : QObject(parent)
-    , mDownloadManager(nullptr)
+    , mEngine(nullptr)
     , mUpdateIntervall(3)
     , m_updateTimer(nullptr)
+    , mProvidersLoaded(false)
 {
 }
 
@@ -69,23 +70,33 @@ void ComicUpdater::checkForUpdate()
     if (!mLastUpdate.isValid() || (mLastUpdate.addDays(mUpdateIntervall) < QDateTime::currentDateTime())) {
         mLastUpdate = QDateTime::currentDateTime();
         mGroup.writeEntry("lastUpdate", mLastUpdate);
-        downloadManager()->checkForUpdates();
+        if (mProvidersLoaded) {
+            engine()->checkForUpdates();
+        } else {
+            connect(engine(), &KNSCore::Engine::signalProvidersLoaded, this, [this]() {
+                engine()->checkForUpdates();
+            });
+        }
     }
 }
 
 void ComicUpdater::slotUpdatesFound(const KNSCore::EntryInternal::List &entries)
 {
     for (int i = 0; i < entries.count(); ++i) {
-        downloadManager()->installEntry(entries[i]);
+        engine()->install(entries[i]);
     }
 }
 
-KNSCore::DownloadManager *ComicUpdater::downloadManager()
+KNSCore::Engine *ComicUpdater::engine()
 {
-    if (!mDownloadManager) {
-        mDownloadManager = new KNSCore::DownloadManager(QStringLiteral("comic.knsrc"), this);
-        connect(mDownloadManager, &KNSCore::DownloadManager::searchResult, this, &ComicUpdater::slotUpdatesFound);
+    if (!mEngine) {
+        mEngine = new KNSCore::Engine(this);
+        if (mEngine->init(QStringLiteral("comic.knsrc"))) {
+            connect(mEngine, &KNSCore::Engine::signalUpdateableEntriesLoaded, this, &ComicUpdater::slotUpdatesFound);
+            connect(mEngine, &KNSCore::Engine::signalProvidersLoaded, this, [this]() {
+                mProvidersLoaded = true;
+            });
+        }
     }
-
-    return mDownloadManager;
+    return mEngine;
 }

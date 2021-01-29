@@ -19,7 +19,7 @@ namespace KNS3
 }
 namespace KNSCore
 {
-class DownloadManager;
+class Engine;
 }
 
 namespace Plasma
@@ -51,14 +51,15 @@ private Q_SLOTS:
     void slotUpdatesFound(const KNSCore::EntryInternal::List &entries);
 
 private:
-    KNSCore::DownloadManager *downloadManager();
+    KNSCore::Engine *engine();
 
 private:
-    KNSCore::DownloadManager *mDownloadManager;
+    KNSCore::Engine *mEngine;
     KConfigGroup mGroup;
     int mUpdateIntervall;
     QDateTime mLastUpdate;
     QTimer *m_updateTimer;
+    bool mProvidersLoaded;
 };
 
 #endif
