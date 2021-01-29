@@ -55,7 +55,7 @@ target_link_libraries(plasmacomicprovidercore
 )
 set_target_properties(plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1)
 
-install( TARGETS plasmacomicprovidercore ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP )
+install( TARGETS plasmacomicprovidercore ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP )
 
 install( FILES plasma_comicprovider.desktop DESTINATION ${KDE_INSTALL_KSERVICETYPES5DIR} )
 
