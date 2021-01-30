@@ -9,8 +9,8 @@ qt5_add_dbus_interface(purposeplugin_SRCS ${activitymanagerslc_xml} activitymana
 add_library(purposeplugin SHARED ${purposeplugin_SRCS})
 
 target_link_libraries(purposeplugin
-                        Qt5::Quick
-                        Qt5::DBus
+                        Qt::Quick
+                        Qt::DBus
                         KF5::CoreAddons)
 
 install(TARGETS purposeplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/purpose)

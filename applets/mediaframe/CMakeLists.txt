@@ -8,9 +8,9 @@ set(mediaframeplugin_SRCS
 add_library(mediaframeplugin SHARED ${mediaframeplugin_SRCS})
 
 target_link_libraries(mediaframeplugin
-                      Qt5::Core
-                      Qt5::Qml
-                      Qt5::Quick
+                      Qt::Core
+                      Qt::Qml
+                      Qt::Quick
                       KF5::I18n
                       KF5::KIOCore
 )

@@ -4,8 +4,8 @@ set(quicklaunchplugin_SRCS
 
 add_library(quicklaunchplugin SHARED ${quicklaunchplugin_SRCS})
 target_link_libraries(quicklaunchplugin
-    Qt5::Core
-    Qt5::Qml
+    Qt::Core
+    Qt::Qml
     KF5::KIOCore
     KF5::KIOWidgets
     KF5::Notifications)

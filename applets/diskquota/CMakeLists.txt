@@ -18,7 +18,7 @@ set(diskquota_SRCS
 add_library(diskquotaplugin SHARED ${diskquota_SRCS})
 
 target_link_libraries(diskquotaplugin
-                      Qt5::Quick
+                      Qt::Quick
                       KF5::CoreAddons
                       KF5::I18n)
 

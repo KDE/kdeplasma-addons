@@ -34,7 +34,7 @@ target_link_libraries(weatherplugin
     KF5::Plasma
     KF5::UnitConversion
     KF5::I18n
-    Qt5::Qml
+    Qt::Qml
 )
 
 install(TARGETS weatherplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/weather)

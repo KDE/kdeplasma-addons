@@ -10,5 +10,5 @@ set(colorpickerplugin_SRCS
 install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/colorpicker)
 add_library(colorpickerplugin SHARED ${colorpickerplugin_SRCS})
 
-target_link_libraries(colorpickerplugin Qt5::DBus Qt5::Gui Qt5::Qml Qt5::Widgets KF5::WindowSystem)
+target_link_libraries(colorpickerplugin Qt::DBus Qt::Gui Qt::Qml Qt::Widgets KF5::WindowSystem)
 install(TARGETS colorpickerplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/colorpicker)

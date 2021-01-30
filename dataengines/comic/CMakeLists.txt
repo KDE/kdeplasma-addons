@@ -69,7 +69,7 @@ set(plasma_comic_krossprovider_SRCS
 
 add_library(plasma_comic_krossprovider MODULE ${plasma_comic_krossprovider_SRCS})
 target_link_libraries(plasma_comic_krossprovider plasmacomicprovidercore
-    Qt5::Gui
+    Qt::Gui
     KF5::KIOCore
     KF5::KrossCore
     KF5::KrossUi

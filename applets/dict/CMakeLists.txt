@@ -35,8 +35,8 @@ add_library(dictplugin SHARED ${dict_SRCS})
 target_link_libraries(dictplugin
     KF5::Plasma
     KF5::I18n
-    Qt5::Quick
-    Qt5::WebEngine
+    Qt::Quick
+    Qt::WebEngine
 )
 
 install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/dict)

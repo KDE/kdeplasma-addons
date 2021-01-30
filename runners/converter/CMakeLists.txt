@@ -7,7 +7,7 @@ target_link_libraries(krunner_converter_static
         KF5::I18n
         KF5::Runner
         KF5::UnitConversion
-        Qt5::Widgets
+        Qt::Widgets
         )
 
 add_library(krunner_converter MODULE plugin.cpp)

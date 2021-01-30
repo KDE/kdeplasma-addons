@@ -14,8 +14,8 @@ kcoreaddons_desktop_to_json(org.kde.plasma.grouping package/metadata.desktop)
 
 
 target_link_libraries(org.kde.plasma.grouping
-                      Qt5::Gui
-                      Qt5::Quick
+                      Qt::Gui
+                      Qt::Quick
                       KF5::Plasma
                       KF5::XmlGui
                       KF5::I18n)

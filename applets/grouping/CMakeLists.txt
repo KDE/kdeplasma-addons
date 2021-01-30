@@ -12,10 +12,10 @@ add_library(org.kde.plasma.private.grouping MODULE groupingcontainment.cpp ${gro
 kcoreaddons_desktop_to_json(org.kde.plasma.private.grouping package/metadata.desktop)
 
 target_link_libraries(org.kde.plasma.private.grouping
-                      Qt5::Gui
-                      Qt5::Quick
-                      Qt5::DBus
-                      Qt5::Widgets
+                      Qt::Gui
+                      Qt::Quick
+                      Qt::DBus
+                      Qt::Widgets
                       KF5::Plasma
                       KF5::XmlGui
                       KF5::I18n)

@@ -1,8 +1,8 @@
 add_library(plasmacalendarastronomicaleventsconfig SHARED configplugin.cpp configstorage.cpp)
 
 target_link_libraries(plasmacalendarastronomicaleventsconfig
-    Qt5::Qml
-    Qt5::Core
+    Qt::Qml
+    Qt::Core
     KF5::ConfigCore
 )
 

@@ -10,8 +10,8 @@ set(timer_SRCS
 add_library(timerplugin SHARED ${timer_SRCS})
 
 target_link_libraries(timerplugin
-    Qt5::Core
-    Qt5::Qml
+    Qt::Core
+    Qt::Qml
     KF5::CoreAddons
 )
 

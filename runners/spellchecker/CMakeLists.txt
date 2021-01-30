@@ -11,7 +11,7 @@ set(kcm_krunner_spellcheck_SRCS
 ki18n_wrap_ui(kcm_krunner_spellcheck_SRCS spellcheck_config.ui)
 add_library(kcm_krunner_spellcheck MODULE ${kcm_krunner_spellcheck_SRCS})
 target_link_libraries(kcm_krunner_spellcheck 
-    Qt5::Gui
+    Qt::Gui
     KF5::Runner
     KF5::KCMUtils
     KF5::I18n
