@@ -35,7 +35,7 @@ target_link_libraries(plasma_applet_comic
 
 
 install(TARGETS plasma_applet_comic DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
-#install(FILES plasma-comic-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+#install(FILES plasma-comic-default.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 
 install(FILES comic.knsrc DESTINATION ${KDE_INSTALL_KNSRCDIR})
 plasma_install_package(package org.kde.plasma.comic)
