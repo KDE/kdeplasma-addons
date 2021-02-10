@@ -38,7 +38,7 @@ void CheckNewStrips::dataUpdated(const QString &source, const Plasma::DataEngine
     if (!lastIdentifierSuffix.isEmpty()) {
         QString temp = source;
         temp.remove(QLatin1Char(':'));
-        emit lastStrip(mIndex, temp, lastIdentifierSuffix);
+        Q_EMIT lastStrip(mIndex, temp, lastIdentifierSuffix);
     }
     ++mIndex;
 

@@ -31,7 +31,7 @@ void DictionaryRunnerConfig::load()
     KConfigGroup grp = cfg->group("Runners");
     grp = KConfigGroup(&grp, "Dictionary");
     m_triggerWord->setText(grp.readEntry(CONFIG_TRIGGERWORD, i18nc("Trigger word before word to define", "define")));
-    emit changed(false);
+    Q_EMIT changed(false);
 }
 
 void DictionaryRunnerConfig::save()
@@ -42,14 +42,14 @@ void DictionaryRunnerConfig::save()
     grp = KConfigGroup(&grp, "Dictionary");
     grp.writeEntry(CONFIG_TRIGGERWORD, m_triggerWord->text());
     grp.sync();
-    emit changed(false);
+    Q_EMIT changed(false);
 }
 
 void DictionaryRunnerConfig::defaults()
 {
     KCModule::defaults();
     m_triggerWord->setText(i18nc("Trigger word before word to define", "define"));
-    emit changed(true);
+    Q_EMIT changed(true);
 }
 
 #include "dictionaryrunner_config.moc"

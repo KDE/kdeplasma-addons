@@ -90,7 +90,7 @@ bool QuotaListModel::setData(const QModelIndex &index, const QVariant &variant, 
 
         if (m_items[row] != item) {
             m_items[row] = item;
-            emit dataChanged(index, index);
+            Q_EMIT dataChanged(index, index);
             return true;
         }
     }

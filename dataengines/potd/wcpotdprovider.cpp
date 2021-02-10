@@ -44,7 +44,7 @@ void WcpotdProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
@@ -60,19 +60,19 @@ void WcpotdProvider::pageRequestFinished(KJob *_job)
         }
     }
 
-    emit error(this);
+    Q_EMIT error(this);
 }
 
 void WcpotdProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
     QByteArray data = job->data();
     mImage = QImage::fromData(data);
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 K_PLUGIN_CLASS_WITH_JSON(WcpotdProvider, "wcpotdprovider.json")

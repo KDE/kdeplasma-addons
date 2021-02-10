@@ -33,7 +33,7 @@ void EpodProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
@@ -54,13 +54,13 @@ void EpodProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
     // FIXME: this really should be done in a thread as this can block
     mImage = QImage::fromData(job->data());
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 K_PLUGIN_CLASS_WITH_JSON(EpodProvider, "epodprovider.json")

@@ -33,7 +33,7 @@ void NOAAProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
@@ -51,7 +51,7 @@ void NOAAProvider::pageRequestFinished(KJob *_job)
         url = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
     }
     if (!url.isValid()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
@@ -63,12 +63,12 @@ void NOAAProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
     mImage = QImage::fromData(job->data());
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 K_PLUGIN_CLASS_WITH_JSON(NOAAProvider, "noaaprovider.json")

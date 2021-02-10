@@ -75,7 +75,7 @@ bool ServiceListModel::setData(const QModelIndex &index, const QVariant &value, 
         }
 
         item.checked = checked;
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
 
         if (checked) {
             m_selectedServices.append(item.id);
@@ -83,7 +83,7 @@ bool ServiceListModel::setData(const QModelIndex &index, const QVariant &value, 
             m_selectedServices.removeAll(item.id);
         }
 
-        emit selectedServicesChanged();
+        Q_EMIT selectedServicesChanged();
         return true;
     }
 
@@ -109,8 +109,8 @@ void ServiceListModel::setSelectedServices(const QStringList &selectedServices)
         item.checked = checked;
 
         const QModelIndex index = createIndex(i, 0);
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
     }
 
-    emit selectedServicesChanged();
+    Q_EMIT selectedServicesChanged();
 }

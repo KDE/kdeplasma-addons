@@ -46,7 +46,7 @@ void DiskQuota::setQuotaInstalled(bool installed)
             setSubToolTip(i18n("Please install 'quota'"));
         }
 
-        emit quotaInstalledChanged();
+        Q_EMIT quotaInstalledChanged();
     }
 }
 
@@ -59,7 +59,7 @@ void DiskQuota::setCleanUpToolInstalled(bool installed)
 {
     if (m_cleanUpToolInstalled != installed) {
         m_cleanUpToolInstalled = installed;
-        emit cleanUpToolInstalledChanged();
+        Q_EMIT cleanUpToolInstalledChanged();
     }
 }
 
@@ -72,7 +72,7 @@ void DiskQuota::setStatus(TrayStatus status)
 {
     if (m_status != status) {
         m_status = status;
-        emit statusChanged();
+        Q_EMIT statusChanged();
     }
 }
 
@@ -85,7 +85,7 @@ void DiskQuota::setIconName(const QString &name)
 {
     if (m_iconName != name) {
         m_iconName = name;
-        emit iconNameChanged();
+        Q_EMIT iconNameChanged();
     }
 }
 
@@ -98,7 +98,7 @@ void DiskQuota::setToolTip(const QString &toolTip)
 {
     if (m_toolTip != toolTip) {
         m_toolTip = toolTip;
-        emit toolTipChanged();
+        Q_EMIT toolTipChanged();
     }
 }
 
@@ -111,7 +111,7 @@ void DiskQuota::setSubToolTip(const QString &subToolTip)
 {
     if (m_subToolTip != subToolTip) {
         m_subToolTip = subToolTip;
-        emit subToolTipChanged();
+        Q_EMIT subToolTipChanged();
     }
 }
 

@@ -112,7 +112,7 @@ QString CachedProvider::name() const
 
 void CachedProvider::triggerFinished()
 {
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 bool CachedProvider::isCached(const QString &identifier)

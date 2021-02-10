@@ -56,7 +56,7 @@ void Grabber::setColor(const QColor &color)
         return;
     }
     m_color = color;
-    emit colorChanged();
+    Q_EMIT colorChanged();
 }
 
 X11Grabber::X11Grabber(QObject *parent)

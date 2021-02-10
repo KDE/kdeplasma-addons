@@ -286,7 +286,7 @@ void ComicApplet::updateUsedComics()
         connect(mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip);
     }
 
-    emit comicModelChanged();
+    Q_EMIT comicModelChanged();
 }
 
 void ComicApplet::slotTabChanged(const QString &identifier)
@@ -556,7 +556,7 @@ void ComicApplet::setShowComicUrl(bool show)
 
     mShowComicUrl = show;
 
-    emit showComicUrlChanged();
+    Q_EMIT showComicUrlChanged();
 }
 
 bool ComicApplet::showComicAuthor() const
@@ -572,7 +572,7 @@ void ComicApplet::setShowComicAuthor(bool show)
 
     mShowComicAuthor = show;
 
-    emit showComicAuthorChanged();
+    Q_EMIT showComicAuthorChanged();
 }
 
 bool ComicApplet::showComicTitle() const
@@ -588,7 +588,7 @@ void ComicApplet::setShowComicTitle(bool show)
 
     mShowComicTitle = show;
 
-    emit showComicTitleChanged();
+    Q_EMIT showComicTitleChanged();
 }
 
 bool ComicApplet::showComicIdentifier() const
@@ -604,7 +604,7 @@ void ComicApplet::setShowComicIdentifier(bool show)
 
     mShowComicIdentifier = show;
 
-    emit showComicIdentifierChanged();
+    Q_EMIT showComicIdentifierChanged();
 }
 
 bool ComicApplet::showErrorPicture() const
@@ -620,7 +620,7 @@ void ComicApplet::setShowErrorPicture(bool show)
 
     mShowErrorPicture = show;
 
-    emit showErrorPictureChanged();
+    Q_EMIT showErrorPictureChanged();
 }
 
 bool ComicApplet::arrowsOnHover() const
@@ -636,7 +636,7 @@ void ComicApplet::setArrowsOnHover(bool show)
 
     mArrowsOnHover = show;
 
-    emit arrowsOnHoverChanged();
+    Q_EMIT arrowsOnHoverChanged();
 }
 
 bool ComicApplet::middleClick() const
@@ -652,7 +652,7 @@ void ComicApplet::setMiddleClick(bool show)
 
     mMiddleClick = show;
 
-    emit middleClickChanged();
+    Q_EMIT middleClickChanged();
     saveConfig();
 }
 
@@ -673,7 +673,7 @@ void ComicApplet::setTabIdentifiers(const QStringList &tabs)
     }
 
     mTabIdentifier = tabs;
-    emit tabIdentifiersChanged();
+    Q_EMIT tabIdentifiersChanged();
     saveConfig();
     changeComic(mDifferentComic);
 }
@@ -703,7 +703,7 @@ void ComicApplet::refreshComicData()
     mComicData[QStringLiteral("isLeftToRight")] = mCurrent.isLeftToRight();
     mComicData[QStringLiteral("isTopToBottom")] = mCurrent.isTopToBottom();
 
-    emit comicDataChanged();
+    Q_EMIT comicDataChanged();
 }
 
 bool ComicApplet::showActualSize() const
@@ -719,7 +719,7 @@ void ComicApplet::setShowActualSize(bool show)
 
     mCurrent.setScaleComic(show);
 
-    emit showActualSizeChanged();
+    Q_EMIT showActualSizeChanged();
 }
 
 int ComicApplet::checkNewComicStripsInterval() const
@@ -734,7 +734,7 @@ void ComicApplet::setCheckNewComicStripsInterval(int interval)
     }
 
     mCheckNewComicStripsInterval = interval;
-    emit checkNewComicStripsIntervalChanged();
+    Q_EMIT checkNewComicStripsIntervalChanged();
 }
 
 int ComicApplet::providerUpdateInterval() const
@@ -749,7 +749,7 @@ void ComicApplet::setProviderUpdateInterval(int interval)
     }
 
     globalComicUpdater->setInterval(interval);
-    emit providerUpdateIntervalChanged();
+    Q_EMIT providerUpdateIntervalChanged();
 }
 
 void ComicApplet::setMaxComicLimit(int limit)
@@ -759,7 +759,7 @@ void ComicApplet::setMaxComicLimit(int limit)
     }
 
     mMaxComicLimit = limit;
-    emit maxComicLimitChanged();
+    Q_EMIT maxComicLimitChanged();
 }
 
 int ComicApplet::maxComicLimit() const
@@ -778,7 +778,7 @@ void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
         if (id == currentId) {
             if (highlight != item->data(ActiveComicModel::ComicHighlightRole).toBool()) {
                 item->setData(highlight, ActiveComicModel::ComicHighlightRole);
-                emit tabHighlightRequest(id, highlight);
+                Q_EMIT tabHighlightRequest(id, highlight);
             }
         }
     }

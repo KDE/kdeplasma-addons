@@ -35,7 +35,7 @@ void %{APPNAME}::handleFinishedFeedRequest(KJob *job)
 {
     KIO::StoredTransferJob *requestJob = static_cast<KIO::StoredTransferJob*>(job);
     if (requestJob->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
@@ -51,18 +51,18 @@ void %{APPNAME}::handleFinishedImageRequest(KJob *job)
 {
     KIO::StoredTransferJob *requestJob = static_cast<KIO::StoredTransferJob*>(job);
     if (requestJob->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
     mImage = QImage::fromData(requestJob->data());
 
     if (mImage.isNull()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 

@@ -72,7 +72,7 @@ void SpellCheckConfig::load()
     m_ui->m_requireTriggerWord->setCheckState((requireTrigger) ? Qt::Checked : Qt::Unchecked);
     m_ui->m_triggerWord->setText(trigger);
 
-    emit changed(false);
+    Q_EMIT changed(false);
 }
 
 void SpellCheckConfig::save()
@@ -88,14 +88,14 @@ void SpellCheckConfig::save()
     grp.writeEntry("requireTriggerWord", requireTrigger);
     grp.sync();
 
-    emit changed(false);
+    Q_EMIT changed(false);
 }
 
 void SpellCheckConfig::defaults()
 {
     m_ui->m_requireTriggerWord->setCheckState(Qt::Checked);
     m_ui->m_triggerWord->setText(i18n("spell"));
-    emit changed(true);
+    Q_EMIT changed(true);
 }
 
 K_PLUGIN_FACTORY(SpellCheckConfigFactory, registerPlugin<SpellCheckConfig>(QStringLiteral("kcm_krunner_spellcheck"));)

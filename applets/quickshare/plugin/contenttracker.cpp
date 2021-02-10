@@ -58,7 +58,7 @@ void ContentTracker::focusChanged(const QString &uri, const QString &mimetype, c
     m_title = title;
     // m_window = (int)KWindowSystem::activeWindow();
 
-    emit changed();
+    Q_EMIT changed();
 }
 
 void ContentTracker::connectToActivityManager()

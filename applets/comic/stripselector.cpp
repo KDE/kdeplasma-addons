@@ -104,7 +104,7 @@ void StringStripSelector::select(const ComicData &currentStrip)
                                                 currentStrip.current(),
                                                 &ok);
     if (ok) {
-        emit stripChosen(strip);
+        Q_EMIT stripChosen(strip);
     }
     deleteLater();
 }
@@ -123,7 +123,7 @@ void NumberStripSelector::select(const ComicData &currentStrip)
     QScopedPointer<ChooseStripNumDialog> pageDialog(
         new ChooseStripNumDialog(nullptr, currentStrip.current().toInt(), currentStrip.firstStripNum(), currentStrip.maxStripNum()));
     if (pageDialog->exec() == QDialog::Accepted) {
-        emit stripChosen(QString::number(pageDialog->getStripNumber()));
+        Q_EMIT stripChosen(QString::number(pageDialog->getStripNumber()));
     }
     deleteLater();
 }
@@ -161,7 +161,7 @@ void DateStripSelector::slotChosenDay(const QDate &date)
         // only update if date >= first strip date, or if there is no first
         // strip date
         if (temp.isValid() || date >= temp) {
-            emit stripChosen(date.toString(QStringLiteral("yyyy-MM-dd")));
+            Q_EMIT stripChosen(date.toString(QStringLiteral("yyyy-MM-dd")));
         }
     }
 }

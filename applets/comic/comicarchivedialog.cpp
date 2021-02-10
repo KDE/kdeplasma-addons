@@ -168,7 +168,7 @@ void ComicArchiveDialog::slotOkClicked()
         break;
     }
 
-    emit archive(archiveType, ui.dest->url(), fromIdentifier, toIdentifier);
+    Q_EMIT archive(archiveType, ui.dest->url(), fromIdentifier, toIdentifier);
     accept();
 }
 

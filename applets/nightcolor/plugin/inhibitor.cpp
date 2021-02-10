@@ -69,13 +69,13 @@ void Inhibitor::inhibit()
         if (reply.isError()) {
             qCWarning(NIGHTCOLOR_CONTROL()) << "Could not inhibit Night Color:" << reply.error().message();
             d->state = Uninhibited;
-            emit stateChanged();
+            Q_EMIT stateChanged();
             return;
         }
 
         d->cookie = reply.value();
         d->state = Inhibited;
-        emit stateChanged();
+        Q_EMIT stateChanged();
 
         if (wasPendingUninhibit) {
             uninhibit();
@@ -83,7 +83,7 @@ void Inhibitor::inhibit()
     });
 
     d->state = Inhibiting;
-    emit stateChanged();
+    Q_EMIT stateChanged();
 }
 
 void Inhibitor::uninhibit()
@@ -116,9 +116,9 @@ void Inhibitor::uninhibit()
         }
 
         d->state = Uninhibited;
-        emit stateChanged();
+        Q_EMIT stateChanged();
     });
 
     d->state = Uninhibiting;
-    emit stateChanged();
+    Q_EMIT stateChanged();
 }

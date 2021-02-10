@@ -44,7 +44,7 @@ void DocumentHandler::setTarget(QQuickItem *target)
             m_doc = qqdoc->textDocument();
         }
     }
-    emit targetChanged();
+    Q_EMIT targetChanged();
 }
 
 QString DocumentHandler::documentTitle() const
@@ -56,7 +56,7 @@ void DocumentHandler::setDocumentTitle(QString arg)
 {
     if (m_documentTitle != arg) {
         m_documentTitle = arg;
-        emit documentTitleChanged();
+        Q_EMIT documentTitleChanged();
     }
 }
 
@@ -85,7 +85,7 @@ void DocumentHandler::setText(const QString &arg)
 {
     if (m_text != arg) {
         m_text = arg;
-        emit textChanged();
+        Q_EMIT textChanged();
     }
 }
 
@@ -107,14 +107,14 @@ void DocumentHandler::setCursorPosition(int position)
 
 void DocumentHandler::reset()
 {
-    emit fontFamilyChanged();
-    emit alignmentChanged();
-    emit boldChanged();
-    emit italicChanged();
-    emit underlineChanged();
-    emit strikeOutChanged();
-    emit fontSizeChanged();
-    emit textColorChanged();
+    Q_EMIT fontFamilyChanged();
+    Q_EMIT alignmentChanged();
+    Q_EMIT boldChanged();
+    Q_EMIT italicChanged();
+    Q_EMIT underlineChanged();
+    Q_EMIT strikeOutChanged();
+    Q_EMIT fontSizeChanged();
+    Q_EMIT textColorChanged();
 }
 
 QTextCursor DocumentHandler::textCursor() const
@@ -159,7 +159,7 @@ void DocumentHandler::setAlignment(Qt::Alignment a)
     cursor.setPosition(m_selectionStart, QTextCursor::MoveAnchor);
     cursor.setPosition(m_selectionEnd, QTextCursor::KeepAnchor);
     cursor.mergeBlockFormat(fmt);
-    emit alignmentChanged();
+    Q_EMIT alignmentChanged();
 }
 
 Qt::Alignment DocumentHandler::alignment() const
@@ -212,7 +212,7 @@ void DocumentHandler::setBold(bool arg)
     QTextCharFormat fmt;
     fmt.setFontWeight(arg ? QFont::Bold : QFont::Normal);
     mergeFormatOnWordOrSelection(fmt);
-    emit boldChanged();
+    Q_EMIT boldChanged();
 }
 
 void DocumentHandler::setItalic(bool arg)
@@ -220,7 +220,7 @@ void DocumentHandler::setItalic(bool arg)
     QTextCharFormat fmt;
     fmt.setFontItalic(arg);
     mergeFormatOnWordOrSelection(fmt);
-    emit italicChanged();
+    Q_EMIT italicChanged();
 }
 
 void DocumentHandler::setUnderline(bool arg)
@@ -228,7 +228,7 @@ void DocumentHandler::setUnderline(bool arg)
     QTextCharFormat fmt;
     fmt.setFontUnderline(arg);
     mergeFormatOnWordOrSelection(fmt);
-    emit underlineChanged();
+    Q_EMIT underlineChanged();
 }
 
 void DocumentHandler::setStrikeOut(bool arg)
@@ -236,7 +236,7 @@ void DocumentHandler::setStrikeOut(bool arg)
     QTextCharFormat fmt;
     fmt.setFontStrikeOut(arg);
     mergeFormatOnWordOrSelection(fmt);
-    emit strikeOutChanged();
+    Q_EMIT strikeOutChanged();
 }
 
 int DocumentHandler::fontSize() const
@@ -258,7 +258,7 @@ void DocumentHandler::setFontSize(int arg)
     QTextCharFormat format;
     format.setFontPointSize(arg);
     mergeFormatOnWordOrSelection(format);
-    emit fontSizeChanged();
+    Q_EMIT fontSizeChanged();
 }
 
 QColor DocumentHandler::textColor() const
@@ -280,7 +280,7 @@ void DocumentHandler::setTextColor(const QColor &c)
     QTextCharFormat format;
     format.setForeground(QBrush(c));
     mergeFormatOnWordOrSelection(format);
-    emit textColorChanged();
+    Q_EMIT textColorChanged();
 }
 
 QString DocumentHandler::fontFamily() const
@@ -302,7 +302,7 @@ void DocumentHandler::setFontFamily(const QString &arg)
     QTextCharFormat format;
     format.setFontFamily(arg);
     mergeFormatOnWordOrSelection(format);
-    emit fontFamilyChanged();
+    Q_EMIT fontFamilyChanged();
 }
 
 QStringList DocumentHandler::defaultFontSizes() const

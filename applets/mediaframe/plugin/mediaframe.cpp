@@ -53,7 +53,7 @@ void MediaFrame::setRandom(bool random)
 {
     if (random != m_random) {
         m_random = random;
-        emit randomChanged();
+        Q_EMIT randomChanged();
     }
 }
 
@@ -129,7 +129,7 @@ void MediaFrame::add(const QString &path, AddOption option)
                 paths.append(filePath);
                 m_allFiles.append(filePath);
                 // qDebug() << "Appended" << filePath;
-                emit countChanged();
+                Q_EMIT countChanged();
             }
             if (paths.count() > 0) {
                 m_pathMap.insert(path, paths);
@@ -150,14 +150,14 @@ void MediaFrame::add(const QString &path, AddOption option)
         m_pathMap.insert(path, paths);
         m_allFiles.append(path);
         qDebug() << "Added" << paths.count() << "files from" << path;
-        emit countChanged();
+        Q_EMIT countChanged();
     } else {
         if (url.isValid() && !url.isLocalFile()) {
             qDebug() << "Adding" << url.toString() << "as remote file";
             paths.append(path);
             m_pathMap.insert(path, paths);
             m_allFiles.append(path);
-            emit countChanged();
+            Q_EMIT countChanged();
         } else {
             qWarning() << "Path" << path << "is not a valid file url or directory";
         }
@@ -168,7 +168,7 @@ void MediaFrame::clear()
 {
     m_pathMap.clear();
     m_allFiles.clear();
-    emit countChanged();
+    Q_EMIT countChanged();
 }
 
 void MediaFrame::watch(const QString &path)
@@ -300,7 +300,7 @@ void MediaFrame::pushHistory(const QString &string)
     }
 
     if (oldCount != m_history.count()) {
-        emit historyLengthChanged();
+        Q_EMIT historyLengthChanged();
     }
 }
 
@@ -311,7 +311,7 @@ QString MediaFrame::popHistory()
     }
 
     const QString item = m_history.takeFirst();
-    emit historyLengthChanged();
+    Q_EMIT historyLengthChanged();
     return item;
 }
 
@@ -323,7 +323,7 @@ int MediaFrame::historyLength() const
 void MediaFrame::pushFuture(const QString &string)
 {
     m_future.prepend(string);
-    emit futureLengthChanged();
+    Q_EMIT futureLengthChanged();
 }
 
 QString MediaFrame::popFuture()
@@ -333,7 +333,7 @@ QString MediaFrame::popFuture()
     }
 
     const QString item = m_future.takeFirst();
-    emit futureLengthChanged();
+    Q_EMIT futureLengthChanged();
     return item;
 }
 
@@ -344,7 +344,7 @@ int MediaFrame::futureLength() const
 
 void MediaFrame::slotItemChanged(const QString &path)
 {
-    emit itemChanged(path);
+    Q_EMIT itemChanged(path);
 }
 
 void MediaFrame::slotFinished(KJob *job)

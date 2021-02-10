@@ -79,7 +79,7 @@ void GroupingContainment::showPlasmoidMenu(QQuickItem *appletInterface, int x, i
     connect(this, &QObject::destroyed, desktopMenu, &QMenu::close);
     desktopMenu->setAttribute(Qt::WA_DeleteOnClose);
 
-    emit applet->contextualActionsAboutToShow();
+    Q_EMIT applet->contextualActionsAboutToShow();
     foreach (QAction *action, applet->contextualActions()) {
         if (action) {
             desktopMenu->addAction(action);

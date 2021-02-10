@@ -717,7 +717,7 @@ void ComicProviderWrapper::pageError(int id, const QString &message)
     --mRequests;
     callFunction(QLatin1String("pageError"), QVariantList() << id << message);
     if (!functionCalled()) {
-        emit mProvider->error(mProvider);
+        Q_EMIT mProvider->error(mProvider);
     }
 }
 
@@ -742,12 +742,12 @@ void ComicProviderWrapper::finished() const
     qDebug() << QString::fromLatin1("Last Identifier").leftJustified(22, QLatin1Char('.')) << mLastIdentifier;
     qDebug() << QString::fromLatin1("Next Identifier").leftJustified(22, QLatin1Char('.')) << mNextIdentifier;
     qDebug() << QString::fromLatin1("Previous Identifier").leftJustified(22, QLatin1Char('.')) << mPreviousIdentifier;
-    emit mProvider->finished(mProvider);
+    Q_EMIT mProvider->finished(mProvider);
 }
 
 void ComicProviderWrapper::error() const
 {
-    emit mProvider->error(mProvider);
+    Q_EMIT mProvider->error(mProvider);
 }
 
 void ComicProviderWrapper::requestPage(const QString &url, int id, const QVariantMap &infos)

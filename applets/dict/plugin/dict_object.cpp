@@ -26,7 +26,7 @@ public:
     {
         job->fail(QWebEngineUrlRequestJob::UrlInvalid);
         const QString word = job->requestUrl().path();
-        emit wordClicked(word);
+        Q_EMIT wordClicked(word);
     }
 
 Q_SIGNALS:
@@ -55,7 +55,7 @@ void DictObject::lookup(const QString &word)
 
     if (!newSource.isEmpty()) {
         // Look up new definition
-        emit searchInProgress();
+        Q_EMIT searchInProgress();
         m_source = newSource;
         m_dataEngine->connectSource(m_source, this);
     }
@@ -66,7 +66,7 @@ void DictObject::dataUpdated(const QString &sourceName, const Plasma::DataEngine
     Q_UNUSED(sourceName); // always == m_source
     const QString html = data.value(QStringLiteral("text")).toString();
     if (!html.isEmpty()) {
-        emit definitionFound(html);
+        Q_EMIT definitionFound(html);
     }
 }
 

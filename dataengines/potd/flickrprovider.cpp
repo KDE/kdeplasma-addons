@@ -52,7 +52,7 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         qDebug() << "pageRequestFinished error";
         return;
     }
@@ -83,7 +83,7 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
                         mFailureNumber++;
                         return;
                     } else {
-                        emit error(this);
+                        Q_EMIT error(this);
                         qDebug() << "pageRequestFinished error";
                         return;
                     }
@@ -136,12 +136,12 @@ void FlickrProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        emit error(this);
+        Q_EMIT error(this);
         return;
     }
 
     mImage = QImage::fromData(job->data());
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 K_PLUGIN_CLASS_WITH_JSON(FlickrProvider, "flickrprovider.json")

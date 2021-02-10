@@ -130,7 +130,7 @@ void MonitorPrivate::setCurrentTemperature(int temperature)
         return;
     }
     m_currentTemperature = temperature;
-    emit currentTemperatureChanged();
+    Q_EMIT currentTemperatureChanged();
 }
 
 void MonitorPrivate::setTargetTemperature(int temperature)
@@ -139,7 +139,7 @@ void MonitorPrivate::setTargetTemperature(int temperature)
         return;
     }
     m_targetTemperature = temperature;
-    emit targetTemperatureChanged();
+    Q_EMIT targetTemperatureChanged();
 }
 
 bool MonitorPrivate::isAvailable() const
@@ -153,7 +153,7 @@ void MonitorPrivate::setAvailable(bool available)
         return;
     }
     m_isAvailable = available;
-    emit availableChanged();
+    Q_EMIT availableChanged();
 }
 
 bool MonitorPrivate::isEnabled() const
@@ -167,7 +167,7 @@ void MonitorPrivate::setEnabled(bool enabled)
         return;
     }
     m_isEnabled = enabled;
-    emit enabledChanged();
+    Q_EMIT enabledChanged();
 }
 
 bool MonitorPrivate::isRunning() const
@@ -181,7 +181,7 @@ void MonitorPrivate::setRunning(bool running)
         return;
     }
     m_isRunning = running;
-    emit runningChanged();
+    Q_EMIT runningChanged();
 }
 
 Monitor::Monitor(QObject *parent)

@@ -38,7 +38,7 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
     const auto validationResult = data[QStringLiteral("validate")].toString().split(QLatin1Char('|'));
 
     if (validationResult.size() < 2) {
-        emit error(i18n("Cannot find '%1' using %2.", source, m_ionName));
+        Q_EMIT error(i18n("Cannot find '%1' using %2.", source, m_ionName));
     } else if (validationResult[1] == QLatin1String("valid") && validationResult.size() > 2) {
         const QString weatherSourcePrefix = validationResult[0] + QLatin1String("|weather|");
         int i = 3;
@@ -63,13 +63,13 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
         }
 
     } else if (validationResult[1] == QLatin1String("timeout")) {
-        emit error(i18n("Connection to %1 weather server timed out.", m_ionName));
+        Q_EMIT error(i18n("Connection to %1 weather server timed out.", m_ionName));
     } else {
         const QString searchTerm = validationResult.size() > 3 ? validationResult[3] : source;
-        emit error(i18n("Cannot find '%1' using %2.", searchTerm, m_ionName));
+        Q_EMIT error(i18n("Cannot find '%1' using %2.", searchTerm, m_ionName));
     }
 
-    emit finished(locationSources);
+    Q_EMIT finished(locationSources);
 }
 
 LocationListModel::LocationListModel(QObject *parent)
@@ -140,7 +140,7 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
 
     if (!m_validatingInput) {
         m_validatingInput = true;
-        emit validatingInputChanged(true);
+        Q_EMIT validatingInputChanged(true);
     }
 
     beginResetModel();
@@ -211,6 +211,6 @@ void LocationListModel::completeSearch()
 {
     m_validatingInput = false;
     const bool success = !m_locations.empty();
-    emit locationSearchDone(success, m_searchString);
-    emit validatingInputChanged(false);
+    Q_EMIT locationSearchDone(success, m_searchString);
+    Q_EMIT validatingInputChanged(false);
 }

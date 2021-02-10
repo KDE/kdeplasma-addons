@@ -83,11 +83,11 @@ void GroupedAppletsContainer::ensureSystrayExists()
     m_innerContainment->setLocation(location());
 
     m_internalContainmentItem = m_innerContainment->property("_plasma_graphicObject").value<QQuickItem *>();
-    emit internalContainmentItemChanged();
+    Q_EMIT internalContainmentItemChanged();
 
     actions()->addAction(QStringLiteral("configure"), m_innerContainment->actions()->action(QStringLiteral("configure")));
     connect(m_innerContainment.data(), &Plasma::Containment::configureRequested, this, [this](Plasma::Applet *applet) {
-        emit containment()->configureRequested(applet);
+        Q_EMIT containment()->configureRequested(applet);
     });
 
     if (m_internalContainmentItem) {

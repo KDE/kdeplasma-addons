@@ -327,10 +327,10 @@ void ComicArchiveJob::requestComic(QString identifier) // krazy:exclude=passbyva
         return;
     }
 
-    emit description(this,
-                     i18n("Creating Comic Book Archive"),
-                     qMakePair(QStringLiteral("source"), identifier),
-                     qMakePair(QStringLiteral("destination"), mDest.toString()));
+    Q_EMIT description(this,
+                       i18n("Creating Comic Book Archive"),
+                       qMakePair(QStringLiteral("source"), identifier),
+                       qMakePair(QStringLiteral("destination"), mDest.toString()));
 
     mEngine->connectSource(identifier, this);
     //    mEngine->query( identifier );

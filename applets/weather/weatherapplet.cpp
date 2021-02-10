@@ -144,31 +144,31 @@ void WeatherApplet::configChanged()
     setConfigurationRequired(m_source.isEmpty());
 
     if (oldTemperatureShownInTooltip != m_temperatureShownInTooltip) {
-        emit temperatureShownInTooltipChanged();
+        Q_EMIT temperatureShownInTooltipChanged();
     }
     if (oldWindShownInTooltip != m_windShownInTooltip) {
-        emit windShownInTooltipChanged();
+        Q_EMIT windShownInTooltipChanged();
     }
     if (oldPressureShownInTooltip != m_pressureShownInTooltip) {
-        emit pressureShownInTooltipChanged();
+        Q_EMIT pressureShownInTooltipChanged();
     }
     if (oldHumidityShownInTooltip != m_humidityShownInTooltip) {
-        emit humidityShownInTooltipChanged();
+        Q_EMIT humidityShownInTooltipChanged();
     }
     if (oldTemperatureShownInCompactMode != m_temperatureShownInCompactMode) {
-        emit temperatureShownInCompactModeChanged();
+        Q_EMIT temperatureShownInCompactModeChanged();
     }
     if (oldSource != m_source) {
-        emit sourceChanged();
+        Q_EMIT sourceChanged();
     }
     if (oldUpdateInterval != m_updateInterval) {
-        emit updateIntervalChanged();
+        Q_EMIT updateIntervalChanged();
     }
     if (oldDisplayTemperatureUnit != m_displayTemperatureUnit //
         || oldDisplaySpeedUnit != m_displaySpeedUnit //
         || oldDisplayPressureUnit != m_displayPressureUnit //
         || oldDisplayVisibilityUnit != m_displayVisibilityUnit) {
-        emit displayUnitsChanged();
+        Q_EMIT displayUnitsChanged();
     }
 }
 
@@ -259,7 +259,7 @@ void WeatherApplet::saveConfig(const QVariantMap &configChanges)
         cfg.writeEntry(StorageConfigKeys::source, it.value().toString());
     }
 
-    emit configNeedsSaving();
+    Q_EMIT configNeedsSaving();
 }
 
 Unit WeatherApplet::unit(const QString &unit)

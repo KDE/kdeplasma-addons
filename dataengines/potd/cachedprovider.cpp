@@ -26,7 +26,7 @@ void LoadImageThread::run()
 {
     QImage image;
     image.load(m_filePath);
-    emit done(image);
+    Q_EMIT done(image);
 }
 
 SaveImageThread::SaveImageThread(const QString &identifier, const QImage &image)
@@ -39,7 +39,7 @@ void SaveImageThread::run()
 {
     const QString path = CachedProvider::identifierToPath(m_identifier);
     m_image.save(path, "JPEG");
-    emit done(m_identifier, path, m_image);
+    Q_EMIT done(m_identifier, path, m_image);
 }
 
 QString CachedProvider::identifierToPath(const QString &identifier)
@@ -76,7 +76,7 @@ QString CachedProvider::identifier() const
 void CachedProvider::triggerFinished(const QImage &image)
 {
     mImage = image;
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 bool CachedProvider::isCached(const QString &identifier, bool ignoreAge)
