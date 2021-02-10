@@ -57,7 +57,7 @@ QVariantMap QuicklaunchPrivate::launcherData(const QUrl &url)
 
             const QStringList &actions = f.readActions();
 
-            foreach (const QString &actionName, actions) {
+            for (const QString &actionName : actions) {
                 const KConfigGroup &actionGroup = f.actionGroup(actionName);
 
                 if (!actionGroup.isValid() || !actionGroup.exists()) {

@@ -57,7 +57,8 @@ void GroupedAppletsContainer::ensureSystrayExists()
 
     uint id = config().readEntry("ContainmentId", 0);
     if (id > 0) {
-        foreach (Plasma::Containment *candidate, c->containments()) {
+        const auto containments = c->containments();
+        for (Plasma::Containment *candidate : containments) {
             if (candidate->id() == id) {
                 m_innerContainment = candidate;
                 break;

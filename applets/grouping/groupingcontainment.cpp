@@ -52,7 +52,8 @@ void GroupingContainment::newTask(const QString &task)
 
 void GroupingContainment::cleanupTask(const QString &task)
 {
-    foreach (Plasma::Applet *applet, applets()) {
+    const auto appletList = applets();
+    for (Plasma::Applet *applet : appletList) {
         if (!applet->pluginMetaData().isValid() || task == applet->pluginMetaData().pluginId()) {
             applet->destroy();
         }
@@ -80,7 +81,8 @@ void GroupingContainment::showPlasmoidMenu(QQuickItem *appletInterface, int x, i
     desktopMenu->setAttribute(Qt::WA_DeleteOnClose);
 
     Q_EMIT applet->contextualActionsAboutToShow();
-    foreach (QAction *action, applet->contextualActions()) {
+    const QList<QAction *> actions = applet->contextualActions();
+    for (QAction *action : actions) {
         if (action) {
             desktopMenu->addAction(action);
         }

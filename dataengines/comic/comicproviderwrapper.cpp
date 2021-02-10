@@ -326,7 +326,8 @@ const QStringList &ComicProviderWrapper::extensions() const
         QStringList list;
         QString wildcards;
 
-        foreach (const QString &interpretername, Kross::Manager::self().interpreters()) {
+        const auto interpreters = Kross::Manager::self().interpreters();
+        for (const QString &interpretername : interpreters) {
             info = Kross::Manager::self().interpreterInfo(interpretername);
             wildcards = info->wildcard();
             wildcards.remove(QLatin1Char('*'));
@@ -754,7 +755,7 @@ void ComicProviderWrapper::requestPage(const QString &url, int id, const QVarian
 {
     QMap<QString, QString> map;
 
-    foreach (const QString &key, infos.keys()) {
+    for (const QString &key : infos.keys()) {
         map[key] = infos[key].toString();
     }
     mProvider->requestPage(QUrl(url), id, map);
@@ -765,7 +766,7 @@ void ComicProviderWrapper::requestRedirectedUrl(const QString &url, int id, cons
 {
     QMap<QString, QString> map;
 
-    foreach (const QString &key, infos.keys()) {
+    for (const QString &key : infos.keys()) {
         map[key] = infos[key].toString();
     }
     mProvider->requestRedirectedUrl(QUrl(url), id, map);
