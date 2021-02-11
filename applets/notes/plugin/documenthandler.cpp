@@ -309,8 +309,10 @@ QStringList DocumentHandler::defaultFontSizes() const
 {
     // uhm... this is quite ugly
     QStringList sizes;
-    QFontDatabase db;
-    for (int size : db.standardSizes())
+    const QList<int> standardSizes = QFontDatabase::standardSizes();
+    sizes.reserve(standardSizes.count());
+    for (int size : standardSizes) {
         sizes.append(QString::number(size));
+    }
     return sizes;
 }

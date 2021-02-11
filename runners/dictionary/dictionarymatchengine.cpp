@@ -78,8 +78,7 @@ void DictionaryMatchEngine::dataUpdated(const QString &source, const Plasma::Dat
     QString definition(result[QLatin1String("text")].toString());
 
     m_wordLock.lockForRead();
-    const auto values = m_lockers.values(source);
-    for (ThreadData *data : values) {
+    for (ThreadData *data : qAsConst(m_lockers)) {
         QMutexLocker locker(&data->mutex);
         /* Because of QString's CoW semantics, we don't have to worry about
          * the overhead of assigning this to every item. */

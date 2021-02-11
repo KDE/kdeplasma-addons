@@ -755,8 +755,8 @@ void ComicProviderWrapper::requestPage(const QString &url, int id, const QVarian
 {
     QMap<QString, QString> map;
 
-    for (const QString &key : infos.keys()) {
-        map[key] = infos[key].toString();
+    for (auto it = infos.begin(), end = infos.end(); it != end; ++it) {
+        map[it.key()] = it.value().toString();
     }
     mProvider->requestPage(QUrl(url), id, map);
     ++mRequests;
@@ -766,8 +766,8 @@ void ComicProviderWrapper::requestRedirectedUrl(const QString &url, int id, cons
 {
     QMap<QString, QString> map;
 
-    for (const QString &key : infos.keys()) {
-        map[key] = infos[key].toString();
+    for (auto it = infos.begin(), end = infos.end(); it != end; ++it) {
+        map[it.key()] = it.value().toString();
     }
     mProvider->requestRedirectedUrl(QUrl(url), id, map);
     ++mRequests;
