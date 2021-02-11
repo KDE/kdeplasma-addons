@@ -36,12 +36,14 @@ void MonitorPrivate::handleServiceRegistered()
 {
     QDBusConnection bus = QDBusConnection::sessionBus();
 
+    // clang-format off
     const bool connected = bus.connect(s_serviceName,
                                        s_nightColorPath,
                                        s_propertiesInterface,
                                        QStringLiteral("PropertiesChanged"),
                                        this,
-                                       SLOT(handlePropertiesChanged(QString, QVariantMap, QStringList)));
+                                       SLOT(handlePropertiesChanged(QString,QVariantMap,QStringList)));
+    // clang-format on
     if (!connected) {
         return;
     }
@@ -68,12 +70,14 @@ void MonitorPrivate::handleServiceUnregistered()
 {
     QDBusConnection bus = QDBusConnection::sessionBus();
 
+    // clang-format off
     bus.disconnect(s_serviceName,
                    s_nightColorPath,
                    s_propertiesInterface,
                    QStringLiteral("PropertiesChanged"),
                    this,
-                   SLOT(handlePropertiesChanged(QString, QVariantMap, QStringList)));
+                   SLOT(handlePropertiesChanged(QString,QVariantMap,QStringList)));
+    // clang-format on
 
     setAvailable(false);
 }
