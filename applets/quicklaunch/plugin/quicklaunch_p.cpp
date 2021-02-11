@@ -204,7 +204,7 @@ void QuicklaunchPrivate::editLauncher(QUrl url, int index, bool isPopup)
         Q_EMIT launcherEdited(url.toString(), index, isPopup);
     });
 
-    connect(dialog, &KPropertiesDialog::rejected, this, [this, url, desktopFileCreated]() {
+    connect(dialog, &KPropertiesDialog::rejected, this, [url, desktopFileCreated]() {
         if (desktopFileCreated) {
             // User didn't save the data, delete the temporary desktop file.
             QFile::remove(url.toLocalFile());
