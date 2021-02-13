@@ -4,45 +4,34 @@
  *   SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
+#undef KRUNNER_TEST_RUNNER_PLUGIN_NAME
+#define KRUNNER_TEST_RUNNER_PLUGIN_NAME "unitconverter"
+
+#include <KRunner/AbstractRunnerTest>
+#include <KUnitConversion/Converter>
+#include <KUnitConversion/UnitCategory>
 #include <QTest>
-
-#include "../converterrunner.h"
-
-#include <clocale>
 
 using namespace KUnitConversion;
 
-class ConverterRunnerTest : public QObject
+class ConverterRunnerTest : public AbstractRunnerTest
 {
     Q_OBJECT
 private Q_SLOTS:
     void initTestCase();
-
     void testMostCommonUnits();
-    void testSpecificTargetUnit();
-    void testUnitsCaseInsensitive();
-    void testCaseSensitiveUnits();
     void testCurrency();
     void testLettersAndCurrency();
-    void testInvalidCurrency();
-    void testFractions();
     void testFractionsWithoutSpecifiedTarget();
-    void testInvalidFractionsWithoutSourceUnit();
-    void testInvalidFractionsWithoutAnyUnit();
-    void testSymbolsInUnits();
-    void testNegativeValue();
-
-private:
-    ConverterRunner *runner = nullptr;
+    void testQuery_data();
+    void testQuery();
+    void testInvalidQuery_data();
+    void testInvalidQuery();
 };
 
 void ConverterRunnerTest::initTestCase()
 {
-    setlocale(LC_ALL, "C.utf8");
-    qputenv("LANG", "en_US");
-    QLocale::setDefault(QLocale::English);
-    runner = new ConverterRunner(this, KPluginMetaData(), QVariantList());
-    runner->init();
+    initProperties();
 }
 
 /**
@@ -50,57 +39,11 @@ void ConverterRunnerTest::initTestCase()
  */
 void ConverterRunnerTest::testMostCommonUnits()
 {
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("1m"));
-    runner->match(context);
+    launchQuery(QStringLiteral("1m"));
 
     Converter converter;
     const auto lengthCategory = converter.category(KUnitConversion::LengthCategory);
-    QCOMPARE(context.matches().count(), lengthCategory.mostCommonUnits().count() - 1);
-}
-
-/*
- * Test if specifying a target unit works
- */
-void ConverterRunnerTest::testSpecificTargetUnit()
-{
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("1m > cm"));
-    runner->match(context);
-
-    QCOMPARE(context.matches().count(), 1);
-    QCOMPARE(context.matches().constFirst().text(), QStringLiteral("100 centimeters (cm)"));
-}
-
-/**
- * Test if the units are case insensitive
- */
-void ConverterRunnerTest::testUnitsCaseInsensitive()
-{
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("1Liter in ML"));
-    runner->match(context);
-
-    QCOMPARE(context.matches().count(), 1);
-}
-
-/**
- * Test if the units that are case sensitive are correctly parsed
- */
-void ConverterRunnerTest::testCaseSensitiveUnits()
-{
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("1Ms as ms"));
-    runner->match(context);
-
-    QCOMPARE(context.matches().count(), 1);
-    QCOMPARE(context.matches().constFirst().text(), QStringLiteral("1,000,000,000 milliseconds (ms)"));
-
-    Plasma::RunnerContext context2;
-    context2.setQuery(QStringLiteral("1,000,000,000milliseconds>Ms"));
-    runner->match(context2);
-    QCOMPARE(context2.matches().count(), 1);
-    QCOMPARE(context2.matches().constFirst().text(), "1 megasecond (Ms)");
+    QCOMPARE(manager->matches().count(), lengthCategory.mostCommonUnits().count() - 1);
 }
 
 /**
@@ -108,9 +51,7 @@ void ConverterRunnerTest::testCaseSensitiveUnits()
  */
 void ConverterRunnerTest::testCurrency()
 {
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("1$"));
-    runner->match(context);
+    launchQuery(QStringLiteral("1$"));
 
     Converter converter;
     const auto currencyCategory = converter.category(KUnitConversion::CurrencyCategory);
@@ -121,7 +62,7 @@ void ConverterRunnerTest::testCurrency()
     if (localCurrency.isValid() && !currencyUnits.contains(localCurrency)) {
         currencyUnits << localCurrency;
     }
-    QCOMPARE(context.matches().count(), currencyUnits.count() - 1);
+    QCOMPARE(manager->matches().count(), currencyUnits.count() - 1);
 }
 
 /**
@@ -129,37 +70,10 @@ void ConverterRunnerTest::testCurrency()
  */
 void ConverterRunnerTest::testLettersAndCurrency()
 {
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("4us$>ca$"));
-    runner->match(context);
+    launchQuery(QStringLiteral("4us$>ca$"));
 
-    QCOMPARE(context.matches().count(), 1);
-    QVERIFY(context.matches().constFirst().text().contains(QLatin1String("Canadian dollars (CAD)")));
-}
-
-/**
- * Test a query that matches the regex but is not valid
- */
-void ConverterRunnerTest::testInvalidCurrency()
-{
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("4us$>abc$"));
-    runner->match(context);
-
-    QCOMPARE(context.matches().count(), 0);
-}
-
-/**
- * Test if the fractions are correctly parsed
- */
-void ConverterRunnerTest::testFractions()
-{
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("6/3m>cm"));
-    runner->match(context);
-
-    QCOMPARE(context.matches().count(), 1);
-    QCOMPARE(context.matches().constFirst().text(), QStringLiteral("200 centimeters (cm)"));
+    QCOMPARE(manager->matches().count(), 1);
+    QVERIFY(manager->matches().constFirst().text().contains(QLatin1String("Canadian dollars (CAD)")));
 }
 
 /**
@@ -167,62 +81,53 @@ void ConverterRunnerTest::testFractions()
  */
 void ConverterRunnerTest::testFractionsWithoutSpecifiedTarget()
 {
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("6/3 m"));
-    runner->match(context);
+    launchQuery(QStringLiteral("6/3 m"));
 
     Converter converter;
     const auto lengthCategory = converter.category(KUnitConversion::LengthCategory);
-    QCOMPARE(context.matches().count(), lengthCategory.mostCommonUnits().count() - 1);
+    QCOMPARE(manager->matches().count(), lengthCategory.mostCommonUnits().count() - 1);
 }
 
-/**
- * Test if an invalid query with a fraction gets rejected
- */
-void ConverterRunnerTest::testInvalidFractionsWithoutSourceUnit()
+void ConverterRunnerTest::testQuery_data()
 {
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("4/4>cm"));
-    runner->match(context);
+    QTest::addColumn<QString>("query");
+    QTest::addColumn<QString>("expectedText");
 
-    QCOMPARE(context.matches().count(), 0);
+    QTest::newRow("test specific target unit") << QStringLiteral("1m > cm") << QStringLiteral("100 centimeters (cm)");
+    QTest::newRow("test symbols (other than currencies)") << QStringLiteral("1000 µs as year") << QStringLiteral("3.17098e-11 year (y)");
+    QTest::newRow("test negative value") << QStringLiteral("-4m as cm") << QStringLiteral("-400 centimeters (cm)");
+    QTest::newRow("test fractions") << QStringLiteral("6/3m>cm") << QStringLiteral("200 centimeters (cm)");
+    QTest::newRow("test case insensitive units") << QStringLiteral("1Liter in ML") << QStringLiteral("1,000 milliliters (ml)");
+    // megaseconds (Ms) and milliseconds (ms)
+    QTest::newRow("test case sensitive units") << QStringLiteral("1Ms as ms") << QStringLiteral("1,000,000,000 milliseconds (ms)");
+    QTest::newRow("test case sensitive units") << QStringLiteral("1,000,000,000milliseconds>Ms") << QStringLiteral("1 megasecond (Ms)");
 }
 
-/**
- * Test if an invalid query with a fraction but no unit gets rejected
- */
-void ConverterRunnerTest::testInvalidFractionsWithoutAnyUnit()
+void ConverterRunnerTest::testQuery()
 {
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("1/2"));
-    runner->match(context);
+    QFETCH(QString, query);
+    QFETCH(QString, expectedText);
 
-    QCOMPARE(context.matches().count(), 0);
+    launchQuery(query);
+    const QList<Plasma::QueryMatch> matches = manager->matches();
+    QCOMPARE(matches.count(), 1);
+    QCOMPARE(matches.first().text(), expectedText);
 }
 
-/**
- * Test if symbols (other than currencies) are accepted
- */
-void ConverterRunnerTest::testSymbolsInUnits()
+void ConverterRunnerTest::testInvalidQuery_data()
 {
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("1000 µs as year"));
-    runner->match(context);
+    QTest::addColumn<QString>("query");
 
-    QCOMPARE(context.matches().count(), 1);
+    QTest::newRow("test invalid fraction without unit") << QStringLiteral("1/2");
+    QTest::newRow("test invalid fraction without unit but valid target unit") << QStringLiteral("4/4>cm");
+    QTest::newRow("test invalid currency") << QStringLiteral("4us$>abc$");
 }
 
-/**
- * Test if negative values are accepted
- */
-void ConverterRunnerTest::testNegativeValue()
+void ConverterRunnerTest::testInvalidQuery()
 {
-    Plasma::RunnerContext context;
-    context.setQuery(QStringLiteral("-4m as cm"));
-    runner->match(context);
-
-    QCOMPARE(context.matches().count(), 1);
-    QCOMPARE(context.matches().constFirst().text(), "-400 centimeters (cm)");
+    QFETCH(QString, query);
+    launchQuery(query);
+    QCOMPARE(manager->matches().count(), 0);
 }
 
 QTEST_MAIN(ConverterRunnerTest)
