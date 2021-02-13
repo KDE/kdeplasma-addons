@@ -4,6 +4,9 @@
  *   SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
+#undef KRUNNER_TEST_RUNNER_PLUGIN_NAME
+#define KRUNNER_TEST_RUNNER_PLUGIN_NAME "unitconverter"
+
 #include <KRunner/AbstractRunnerTest>
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/UnitCategory>
