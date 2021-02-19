@@ -14,9 +14,6 @@
 #include <KNSCore/EntryInternal>
 #include <Plasma/DataEngine>
 
-namespace KNS3
-{
-}
 namespace KNSCore
 {
 class Engine;

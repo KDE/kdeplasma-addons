@@ -12,7 +12,6 @@
 #include <QTimer>
 
 #include <KConfigDialog>
-#include <KNS3/DownloadDialog>
 #include <KNSCore/Engine>
 
 ComicUpdater::ComicUpdater(QObject *parent)
