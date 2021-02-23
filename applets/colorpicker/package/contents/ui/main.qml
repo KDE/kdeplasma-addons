@@ -258,9 +258,6 @@ Item {
 
         model: plasmoid.configuration.history
 
-        highlight: PlasmaComponents.Highlight {}
-        highlightMoveDuration: 0
-
         PlasmaComponents3.Button {
             anchors.centerIn: parent
             text: i18nc("@action:button", "Pick Color")
@@ -355,14 +352,21 @@ Item {
 
                 anchors {
                     fill: parent
-                    margins: units.smallSpacing
                 }
 
                 color: delegateMouse.currentColor
 
-                border {
-                    color: theme.textColor
-                    width: Math.round(units.devicePixelRatio)
+                Rectangle {
+                    color: Qt.rgba(0,0,0,0.5)
+                    anchors.fill: parent
+                    opacity: (fullRoot.currentIndex == index) ? 1 : 0
+
+                    PlasmaCore.IconItem {
+                        anchors.centerIn: parent
+                        source: "edit-copy"
+                        height: PlasmaCore.Units.iconSizes.large
+                        width: PlasmaCore.Units.iconSizes.large
+                    }
                 }
 
                 Rectangle {
@@ -370,11 +374,12 @@ Item {
                         bottom: parent.bottom
                         left: parent.left
                         right: parent.right
-                        margins: rect.border.width
+                        margins: PlasmaCore.Units.smallSpacing
                     }
                     height: colorLabel.contentHeight + 2 * units.smallSpacing
                     color: theme.backgroundColor
                     opacity: 0.8
+                    radius: 3
 
                     PlasmaComponents3.Label {
                         id: colorLabel
