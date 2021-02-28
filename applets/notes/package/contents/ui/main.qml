@@ -122,6 +122,7 @@ PlasmaCore.SvgItem {
         cursorPosition: mainTextArea.cursorPosition
         selectionStart: mainTextArea.selectionStart
         selectionEnd: mainTextArea.selectionEnd
+        defaultFontSize: mainTextArea.cfgFontPointSize
     }
 
     FocusScope {
@@ -148,6 +149,7 @@ PlasmaCore.SvgItem {
 
             PlasmaComponents3.TextArea {
                 id: mainTextArea
+                property real cfgFontPointSize: plasmoid.configuration.fontSize
 
                 textFormat: TextEdit.RichText
                 onLinkActivated: Qt.openUrlExternally(link)
@@ -155,6 +157,8 @@ PlasmaCore.SvgItem {
                 color: textIconColor
                 persistentSelection: true
                 wrapMode: TextEdit.Wrap
+
+                font.pointSize: cfgFontPointSize
 
                 Keys.onPressed: {
                     if(event.key === Qt.Key_Escape) {
@@ -185,6 +189,15 @@ PlasmaCore.SvgItem {
                     }
                 }
 
+                // Apply the font size change to existing texts
+                onCfgFontPointSizeChanged: {
+                    var [start, end] = [mainTextArea.selectionStart, mainTextArea.selectionEnd];
+
+                    mainTextArea.selectAll();
+                    documentHandler.fontSize = cfgFontPointSize;
+                    mainTextArea.select(start, end);
+                }
+
                 // update the note if the source changes, but only if the user isn't editing it currently
                 Binding {
                     target: mainTextArea
@@ -208,6 +221,12 @@ PlasmaCore.SvgItem {
                         contextMenu.popup();
                         mainTextArea.forceActiveFocus();
                     }
+                }
+
+                Component.onCompleted: {
+                    if (!plasmoid.configuration.fontSize)
+                        // Set fontSize to default if it is not set
+                        plasmoid.configuration.fontSize = mainTextArea.font.pointSize
                 }
 
                 QQC2.Menu {

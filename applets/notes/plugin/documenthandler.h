@@ -35,6 +35,7 @@ class DocumentHandler : public QObject
     Q_PROPERTY(bool strikeOut READ strikeOut WRITE setStrikeOut NOTIFY strikeOutChanged)
 
     Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
+    Q_PROPERTY(int defaultFontSize READ defaultFontSize WRITE setDefaultFontSize NOTIFY defaultFontSizeChanged)
 
     Q_PROPERTY(QStringList defaultFontSizes READ defaultFontSizes NOTIFY defaultFontSizesChanged)
 
@@ -82,6 +83,7 @@ public:
     bool underline() const;
     bool strikeOut() const;
     int fontSize() const;
+    int defaultFontSize() const;
 
     QStringList defaultFontSizes() const;
     QString text() const;
@@ -97,6 +99,7 @@ public Q_SLOTS:
     void setUnderline(bool arg);
     void setStrikeOut(bool arg);
     void setFontSize(int arg);
+    void setDefaultFontSize(int arg);
     void setTextColor(const QColor &arg);
     void setFontFamily(const QString &arg);
 
@@ -123,6 +126,7 @@ Q_SIGNALS:
     void strikeOutChanged();
 
     void fontSizeChanged();
+    void defaultFontSizeChanged();
     void defaultFontSizesChanged();
 
     void fileUrlChanged();

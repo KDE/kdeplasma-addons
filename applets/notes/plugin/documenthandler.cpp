@@ -259,7 +259,27 @@ void DocumentHandler::setFontSize(int arg)
     QTextCharFormat format;
     format.setFontPointSize(arg);
     mergeFormatOnWordOrSelection(format);
+    // Also set the block char format, otherwise the old block font will stay and
+    // end up taking effect if the user deletes all the text.
+    cursor.mergeBlockCharFormat(format);
+
     Q_EMIT fontSizeChanged();
+}
+
+int DocumentHandler::defaultFontSize() const
+{
+    return m_doc ? m_doc->defaultFont().pointSize() : 0;
+}
+
+void DocumentHandler::setDefaultFontSize(int arg)
+{
+    if (!m_doc)
+        return;
+
+    auto font = m_doc->defaultFont();
+    font.setPointSize(arg);
+    m_doc->setDefaultFont(font);
+    Q_EMIT defaultFontSizeChanged();
 }
 
 QColor DocumentHandler::textColor() const
