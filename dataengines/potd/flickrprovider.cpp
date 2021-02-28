@@ -14,7 +14,7 @@
 #include <QRandomGenerator>
 #include <QUrlQuery>
 
-#define FLICKR_API_KEY QStringLiteral("11829a470557ad8e10b02e80afacb3af")
+#define FLICKR_API_KEY QStringLiteral("65a0b7386726804b1af4f30dcf69adaf")
 
 static QUrl buildUrl(const QDate &date)
 {
