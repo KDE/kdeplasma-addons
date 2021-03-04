@@ -104,7 +104,7 @@ Item {
 
             transitions: Transition {
                 from: ""; to: "show"; reversible: true
-                NumberAnimation { properties: "opacity"; duration: 250; easing.type: Easing.InOutQuad }
+                NumberAnimation { properties: "opacity"; duration: PlasmaCore.Units.longDuration; easing.type: Easing.InOutQuad }
             }
         }
     }

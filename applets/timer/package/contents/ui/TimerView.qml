@@ -37,22 +37,22 @@ Item {
                 running: root.suspended;
                 loops: Animation.Infinite;
                 NumberAnimation {
-                    duration: 800;
+                    duration: PlasmaCore.Units.veryLongDuration * 2;
                     from: 1.0;
                     to: 0.2;
                     easing.type: Easing.InOutQuad;
                 }
                 PauseAnimation {
-                    duration: 400;
+                    duration: PlasmaCore.Units.veryLongDuration;
                 }
                 NumberAnimation {
-                    duration: 800;
+                    duration: PlasmaCore.Units.veryLongDuration * 2;
                     from: 0.2;
                     to: 1.0;
                     easing.type: Easing.InOutQuad;
                 }
                 PauseAnimation {
-                    duration: 400;
+                    duration: PlasmaCore.Units.veryLongDuration;
                 }
             }
         }

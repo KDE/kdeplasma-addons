@@ -261,7 +261,7 @@ DropArea {
         anchors.fill: parent
         opacity: root.containsDrag || tooltipArea.containsMouse ? .3 : 0
 
-        Behavior on opacity { NumberAnimation { duration: 100 } }
+        Behavior on opacity { NumberAnimation { duration: PlasmaCore.Units.shortDuration } }
     }
 
     Timer {

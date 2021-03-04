@@ -89,7 +89,7 @@ KWin.Switcher {
                         }
                     }
                 }
-                highlightMoveDuration: 250
+                highlightMoveDuration: PlasmaCore.Units.longDuration
                 boundsBehavior: Flickable.StopAtBounds
                 Connections {
                     target: tabBox

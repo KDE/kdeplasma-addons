@@ -255,8 +255,8 @@ Item {
         id: faderAnimation
 
         ParallelAnimation {
-            OpacityAnimator { target: frontImage; from: 1; to: 0; duration: 450 }
-            OpacityAnimator { target: bufferImage; from: 0; to: 1; duration: 450 }
+            OpacityAnimator { target: frontImage; from: 1; to: 0; duration: PlasmaCore.Units.veryLongDuration }
+            OpacityAnimator { target: bufferImage; from: 0; to: 1; duration: PlasmaCore.Units.veryLongDuration }
         }
         ScriptAction {
             script: {

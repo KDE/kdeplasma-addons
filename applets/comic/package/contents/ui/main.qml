@@ -208,7 +208,7 @@ Item {
     transitions:
         Transition {
             AnchorAnimation {
-                duration: 500
+                duration: PlasmaCore.Units.veryLongDuration
                 easing.type: Easing.InOutQuad
             }
         }

@@ -40,5 +40,9 @@ Rectangle {
         interval: 30000
         onTriggered: randomColor()
     }
+    // Intentionally not using a standard duration value as this is an animated
+    // wallpaper so disabling animations doesn't make sense, and the duration
+    // shouldn't be scaled with the user's preferences because this is tuned to
+    // create a specific visual effect.
     Behavior on color { ColorAnimation { duration: 1000; easing.type: Easing.InQuad } }
 }
