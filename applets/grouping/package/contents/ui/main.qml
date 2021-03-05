@@ -18,8 +18,8 @@ Item {
     id: root
 
     //be at least the same size as the system tray popup
-    Layout.minimumWidth: units.gridUnit * 24
-    Layout.minimumHeight: units.gridUnit * 21
+    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 24
+    Layout.minimumHeight: PlasmaCore.Units.gridUnit * 21
     Layout.preferredWidth: Layout.minimumWidth
     Layout.preferredHeight: Layout.minimumHeight * 1.5
 

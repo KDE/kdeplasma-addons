@@ -30,12 +30,12 @@ PlasmaCore.SvgItem {
     }
     elementId: plasmoid.configuration.color + "-notes"
 
-    width: units.gridUnit * 15
-    height: units.gridUnit * 15
-    Layout.minimumWidth: units.iconSizes.medium
-    Layout.minimumHeight: units.iconSizes.medium
-    Plasmoid.switchWidth: units.gridUnit * 5
-    Plasmoid.switchHeight: units.gridUnit * 5
+    width: PlasmaCore.Units.gridUnit * 15
+    height: PlasmaCore.Units.gridUnit * 15
+    Layout.minimumWidth: PlasmaCore.Units.iconSizes.medium
+    Layout.minimumHeight: PlasmaCore.Units.iconSizes.medium
+    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 5
+    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
@@ -140,7 +140,7 @@ PlasmaCore.SvgItem {
                 left: parent.left
                 right: parent.right
                 bottom: fontButtons.top
-                bottomMargin: Math.round(units.largeSpacing / 2)
+                bottomMargin: Math.round(PlasmaCore.Units.largeSpacing / 2)
             }
 
             clip: true
@@ -336,7 +336,7 @@ PlasmaCore.SvgItem {
 
         RowLayout {
             id: fontButtons
-            spacing: units.smallSpacing
+            spacing: PlasmaCore.Units.smallSpacing
             anchors {
                 bottom: parent.bottom
                 left: parent.left
@@ -345,14 +345,14 @@ PlasmaCore.SvgItem {
 
             visible: opacity > 0
             opacity: focusScope.activeFocus ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            Behavior on opacity { NumberAnimation { duration: PlasmaCore.Units.longDuration } }
 
             readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width + removeButton.width
             readonly property bool showFormatButtons: width > requiredWidth
 
             Row {
                 id: formatButtonsRow
-                spacing: units.smallSpacing
+                spacing: PlasmaCore.Units.smallSpacing
                 // show format buttons if TextField or any of the buttons have focus
                 enabled: opacity > 0
                 visible: fontButtons.showFormatButtons
@@ -360,7 +360,7 @@ PlasmaCore.SvgItem {
                 QQC2.ToolButton {
                     icon.name: "format-text-bold"
                     icon.color: textIconColor
-                    icon.width: units.iconSizes.smallMedium
+                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
                     icon.height: icon.width
                     checked: documentHandler.bold
                     onClicked: documentHandler.bold = !documentHandler.bold
@@ -373,7 +373,7 @@ PlasmaCore.SvgItem {
                 QQC2.ToolButton {
                     icon.name: "format-text-italic"
                     icon.color: textIconColor
-                    icon.width: units.iconSizes.smallMedium
+                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
                     icon.height: icon.width
                     checked: documentHandler.italic
                     onClicked: documentHandler.italic = !documentHandler.italic
@@ -386,7 +386,7 @@ PlasmaCore.SvgItem {
                 QQC2.ToolButton {
                     icon.name: "format-text-underline"
                     icon.color: textIconColor
-                    icon.width: units.iconSizes.smallMedium
+                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
                     icon.height: icon.width
                     checked: documentHandler.underline
                     onClicked: documentHandler.underline = !documentHandler.underline
@@ -399,7 +399,7 @@ PlasmaCore.SvgItem {
                 QQC2.ToolButton {
                     icon.name: "format-text-strikethrough"
                     icon.color: textIconColor
-                    icon.width: units.iconSizes.smallMedium
+                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
                     icon.height: icon.width
                     checked: documentHandler.strikeOut
                     onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
@@ -420,7 +420,7 @@ PlasmaCore.SvgItem {
                 id: settingsButton
                 icon.name: "configure"
                 icon.color: textIconColor
-                icon.width: units.iconSizes.smallMedium
+                icon.width: PlasmaCore.Units.iconSizes.smallMedium
                 icon.height: icon.width
                 onClicked: plasmoid.action("configure").trigger()
                 Accessible.name: settingsTooltip.text
@@ -434,7 +434,7 @@ PlasmaCore.SvgItem {
                 id: removeButton
                 icon.name: "edit-delete"
                 icon.color: textIconColor
-                icon.width: units.iconSizes.smallMedium
+                icon.width: PlasmaCore.Units.iconSizes.smallMedium
                 icon.height: icon.width
                 onClicked: plasmoid.action("remove").trigger()
                 Accessible.name: removeTooltip.text

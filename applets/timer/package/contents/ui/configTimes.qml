@@ -72,7 +72,7 @@ ColumnLayout {
             Kirigami.PlaceholderMessage {
                 visible: timeListView.count === 0
                 anchors.centerIn: parent
-                width: parent.width - (units.largeSpacing * 4)
+                width: parent.width - (PlasmaCore.Units.largeSpacing * 4)
                 text: i18n("If you add predefined timers here, they will appear in plasmoid context menu.");
             }
         }
@@ -93,7 +93,7 @@ ColumnLayout {
         Kirigami.SwipeListItem {
             id: timeEditItem
             Row {
-                spacing: units.largeSpacing
+                spacing: PlasmaCore.Units.largeSpacing
                 Kirigami.ListItemDragHandle {
                     anchors.verticalCenter: parent.verticalCenter
                     enabled: !editor.editable

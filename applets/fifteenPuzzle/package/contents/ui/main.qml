@@ -22,8 +22,8 @@ Item {
     Layout.minimumWidth: width
     Layout.minimumHeight: height
 
-    width: units.gridUnit * 16
-    height: units.gridUnit * 16
+    width: PlasmaCore.Units.gridUnit * 16
+    height: PlasmaCore.Units.gridUnit * 16
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 

@@ -180,7 +180,7 @@ Item {
                 rotation: popup.visible ? 180 : 0
                 Behavior on rotation {
                     RotationAnimation {
-                        duration: units.shortDuration * 3
+                        duration: PlasmaCore.Units.shortDuration * 3
                     }
                 }
 
@@ -224,7 +224,7 @@ Item {
 
             PropertyChanges {
                 target: popupArrow
-                width: units.iconSizes.smallMedium
+                width: PlasmaCore.Units.iconSizes.smallMedium
                 height: root.height
             }
         },
@@ -236,7 +236,7 @@ Item {
             PropertyChanges {
                 target: popupArrow
                 width: root.width
-                height: units.iconSizes.smallMedium
+                height: PlasmaCore.Units.iconSizes.smallMedium
             }
         }
     ]

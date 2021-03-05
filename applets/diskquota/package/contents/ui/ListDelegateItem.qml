@@ -37,12 +37,12 @@ PlasmaComponents.ListItem {
     RowLayout {
         id: contents
         width: parent.width
-        spacing: units.gridUnit
+        spacing: PlasmaCore.Units.gridUnit
 
         PlasmaCore.IconItem {
             source: iconName
             Layout.alignment: Qt.AlignTop
-            width: units.iconSizes.medium
+            width: PlasmaCore.Units.iconSizes.medium
             height: width
         }
 

@@ -18,8 +18,8 @@ Item {
 
     readonly property date currentDateTime: dataSource.data.Local ? dataSource.data.Local.DateTime : new Date()
 
-    width: units.gridUnit * 10
-    height: units.gridUnit * 4
+    width: PlasmaCore.Units.gridUnit * 10
+    height: PlasmaCore.Units.gridUnit * 4
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
@@ -39,8 +39,8 @@ Item {
     Plasmoid.compactRepresentation: FuzzyClock { }
 
     Plasmoid.fullRepresentation: PlasmaCalendar.MonthView {
-        Layout.minimumWidth: units.gridUnit * 20
-        Layout.minimumHeight: units.gridUnit * 20
+        Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
+        Layout.minimumHeight: PlasmaCore.Units.gridUnit * 20
 
         today: currentDateTime
     }

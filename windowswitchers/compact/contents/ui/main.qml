@@ -34,7 +34,7 @@ KWin.Switcher {
             height: Math.min(Math.max(tabBox.screenGeometry.height * 0.2, optimalHeight), tabBox.screenGeometry.height * 0.8)
             focus: true
 
-            property int textMargin: units.smallSpacing
+            property int textMargin: PlasmaCore.Units.smallSpacing
 
             /**
             * Returns the caption with adjustments for minimized items.
@@ -69,8 +69,8 @@ KWin.Switcher {
                     QIconItem {
                         id: iconItem
                         icon: model.icon
-                        width: units.iconSizes.small
-                        height: units.iconSizes.small
+                        width: PlasmaCore.Units.iconSizes.small
+                        height: PlasmaCore.Units.iconSizes.small
                         anchors {
                             verticalCenter: parent.verticalCenter
                             left: parent.left
@@ -116,7 +116,7 @@ KWin.Switcher {
                         compactListView, "calculateMaxRowWidth");
                     width = Math.max(textElement.width, width);
                     textElement.destroy();
-                    return width + units.iconSizes.small + 2 * dialogMainItem.textMargin + hoverItem.margins.right + hoverItem.margins.left
+                    return width + PlasmaCore.Units.iconSizes.small + 2 * dialogMainItem.textMargin + hoverItem.margins.right + hoverItem.margins.left
                 }
                 /**
                 * Calculates the height of one row based on the text height and icon size.
@@ -134,7 +134,7 @@ KWin.Switcher {
                     var height = textElement.height;
                     textElement.destroy();
                     // icon size or two text elements and margins and hoverItem margins
-                    return Math.max(units.iconSizes.small, height + hoverItem.margins.top + hoverItem.margins.bottom);
+                    return Math.max(PlasmaCore.Units.iconSizes.small, height + hoverItem.margins.top + hoverItem.margins.bottom);
                 }
                 id: compactListView
                 // the maximum text width + icon item width (32 + 4 margin) + margins for hover item

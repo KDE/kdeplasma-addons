@@ -115,9 +115,9 @@ KWin.Switcher {
 
                 model: tabBox.model
 
-                property int iconSize: units.iconSizes.smallMedium
-                property int captionRowHeight: 30 * units.devicePixelRatio // The close button is 30x30 in Breeze
-                property int thumbnailWidth: 300 * units.devicePixelRatio
+                property int iconSize: PlasmaCore.Units.iconSizes.smallMedium
+                property int captionRowHeight: 30 * PlasmaCore.Units.devicePixelRatio // The close button is 30x30 in Breeze
+                property int thumbnailWidth: 300 * PlasmaCore.Units.devicePixelRatio
                 property int thumbnailHeight: thumbnailWidth * (1.0/dialogMainItem.screenFactor)
                 cellWidth: hoverItem.margins.left + thumbnailWidth + hoverItem.margins.right
                 cellHeight: hoverItem.margins.top + captionRowHeight + thumbnailHeight + hoverItem.margins.bottom
@@ -161,7 +161,7 @@ KWin.Switcher {
 
                         RowLayout {
                             id: captionRow
-                            spacing: units.smallSpacing
+                            spacing: PlasmaCore.Units.smallSpacing
 
                             QIconItem {
                                 id: iconItem

@@ -26,7 +26,7 @@ ColumnLayout {
         PlasmaComponents3.TextField {
             id: input
             placeholderText: i18nc("@info:placeholder", "Enter word to define here")
-            implicitWidth: units.gridUnit * 40
+            implicitWidth: PlasmaCore.Units.gridUnit * 40
             onAccepted: {
                 if (input.text === "") {
                     web.visible = false;
@@ -48,7 +48,7 @@ ColumnLayout {
         Layout.fillWidth: true
         //Layout.fillHeight: true
         Layout.preferredHeight: 400
-        zoomFactor: units.devicePixelRatio
+        zoomFactor: PlasmaCore.Units.devicePixelRatio
         profile: dict.webProfile
     }
 

@@ -27,7 +27,7 @@ KWin.Switcher {
             id: dialogMainItem
             property real screenFactor: tabBox.screenGeometry.width/tabBox.screenGeometry.height
             property int optimalWidth: (thumbnailListView.thumbnailWidth + hoverItem.margins.left + hoverItem.margins.right) * thumbnailListView.count
-            property int optimalHeight: thumbnailListView.thumbnailWidth*(1.0/screenFactor) + hoverItem.margins.top + hoverItem.margins.bottom + units.gridUnit * 2
+            property int optimalHeight: thumbnailListView.thumbnailWidth*(1.0/screenFactor) + hoverItem.margins.top + hoverItem.margins.bottom + PlasmaCore.Units.gridUnit * 2
             property bool canStretchX: false
             property bool canStretchY: false
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.3, optimalWidth), tabBox.screenGeometry.width * 0.9)
@@ -47,9 +47,9 @@ KWin.Switcher {
                 id: thumbnailListView
                 model: tabBox.model
                 orientation: ListView.Horizontal
-                property int thumbnailWidth: 300 * units.devicePixelRatio
+                property int thumbnailWidth: 300 * PlasmaCore.Units.devicePixelRatio
                 height: thumbnailWidth * (1.0/dialogMainItem.screenFactor) + hoverItem.margins.bottom + hoverItem.margins.top
-                spacing: units.smallSpacing
+                spacing: PlasmaCore.Units.smallSpacing
                 highlightMoveDuration: 0
                 highlightResizeDuration: 0
                 width: Math.min(parent.width - (anchors.leftMargin + anchors.rightMargin) - (hoverItem.margins.left + hoverItem.margins.right), thumbnailWidth * count + 5 * (count - 1))
@@ -103,7 +103,7 @@ KWin.Switcher {
                 }
             }
             Item {
-                height: units.gridUnit * 2
+                height: PlasmaCore.Units.gridUnit * 2
                 id: captionFrame
                 anchors {
                     top: thumbnailListView.bottom
@@ -115,12 +115,12 @@ KWin.Switcher {
                 QIconItem {
                     id: iconItem
                     icon: thumbnailListView.currentItem ? thumbnailListView.currentItem.icon : ""
-                    width: units.iconSizes.medium
-                    height: units.iconSizes.medium
+                    width: PlasmaCore.Units.iconSizes.medium
+                    height: PlasmaCore.Units.iconSizes.medium
                     anchors {
                         verticalCenter: parent.verticalCenter
                         right: textItem.left
-                        rightMargin: units.smallSpacing
+                        rightMargin: PlasmaCore.Units.smallSpacing
                     }
                 }
                 PlasmaComponents3.Label {

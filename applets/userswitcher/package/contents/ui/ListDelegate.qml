@@ -31,7 +31,7 @@ Item {
 
     Layout.fillWidth: true
 
-    height: row.height + 2 * units.smallSpacing
+    height: row.height + 2 * PlasmaCore.Units.smallSpacing
 
     MouseArea {
         id: area
@@ -57,16 +57,16 @@ Item {
     RowLayout {
         id: row
         anchors.centerIn: parent
-        width: parent.width - 2 * units.smallSpacing
-        spacing: units.smallSpacing
+        width: parent.width - 2 * PlasmaCore.Units.smallSpacing
+        spacing: PlasmaCore.Units.smallSpacing
 
         PlasmaCore.IconItem {
             id: icon
             // gosh, there needs to be a Layout.fixedWidth
-            Layout.minimumWidth: units.iconSizes.medium
-            Layout.maximumWidth: units.iconSizes.medium
-            Layout.minimumHeight: units.iconSizes.medium
-            Layout.maximumHeight: units.iconSizes.medium
+            Layout.minimumWidth: PlasmaCore.Units.iconSizes.medium
+            Layout.maximumWidth: PlasmaCore.Units.iconSizes.medium
+            Layout.minimumHeight: PlasmaCore.Units.iconSizes.medium
+            Layout.maximumHeight: PlasmaCore.Units.iconSizes.medium
 
             MouseArea {
                 anchors.fill: parent

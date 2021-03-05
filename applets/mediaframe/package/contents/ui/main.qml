@@ -29,13 +29,13 @@ Item {
 
     Plasmoid.preferredRepresentation: plasmoid.fullRepresentation
 
-    Plasmoid.switchWidth: units.gridUnit * 5
-    Plasmoid.switchHeight: units.gridUnit * 5
+    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 5
+    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 5
 
     Plasmoid.backgroundHints: plasmoid.configuration.useBackground ? PlasmaCore.Types.DefaultBackground : PlasmaCore.Types.NoBackground
 
-    width: units.gridUnit * 20
-    height: units.gridUnit * 13
+    width: PlasmaCore.Units.gridUnit * 20
+    height: PlasmaCore.Units.gridUnit * 13
 
     property string activeSource: ""
     property string transitionSource: ""
@@ -328,7 +328,7 @@ Item {
         Row {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin: units.smallSpacing
+            anchors.bottomMargin: PlasmaCore.Units.smallSpacing
 
             /*
             PlasmaComponents3.Button {
@@ -389,7 +389,7 @@ Item {
 
         color: "transparent"
 
-        implicitWidth: units.gridUnit
+        implicitWidth: PlasmaCore.Units.gridUnit
         implicitHeight: implicitWidth
 
         Rectangle {

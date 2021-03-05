@@ -32,7 +32,7 @@ KCM.GridView {
         thumbnailAvailable: true
         thumbnail: PlasmaCore.SvgItem {
             anchors.fill: parent
-            anchors.margins: units.gridUnit / 2
+            anchors.margins: PlasmaCore.Units.gridUnit / 2
             
             svg: noteSvg
             elementId: modelData + "-notes"

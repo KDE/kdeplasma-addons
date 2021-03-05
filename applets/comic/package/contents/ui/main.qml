@@ -16,21 +16,21 @@ import org.kde.kquickcontrolsaddons 2.0
 Item {
     id: mainWindow
 
-    readonly property int implicitWidth: units.gridUnit * 40
-    readonly property int implicitHeight: units.gridUnit * 15
+    readonly property int implicitWidth: PlasmaCore.Units.gridUnit * 40
+    readonly property int implicitHeight: PlasmaCore.Units.gridUnit * 15
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
     Plasmoid.switchWidth: {
         if (centerLayout.comicData.image) {
             return Math.max(minimumWidth, Math.min(centerLayout.comicData.image.nativeWidth * 0.6, implicitWidth));
         } else {
-            return units.gridUnit * 8;
+            return PlasmaCore.Units.gridUnit * 8;
         }
     }
     Plasmoid.switchHeight: {
         if (centerLayout.comicData.image) {
             return Math.max(minimumHeight, Math.min(centerLayout.comicData.image.nativeHeight * 0.6, implicitHeight));
         } else {
-            return units.gridUnit * 8;
+            return PlasmaCore.Units.gridUnit * 8;
         }
     }
     Plasmoid.icon: "face-laughing"
@@ -38,8 +38,8 @@ Item {
     width: implicitWidth
     height: implicitHeight
 
-    readonly property int minimumWidth: units.gridUnit * 8
-    readonly property int minimumHeight: units.gridUnit * 8
+    readonly property int minimumWidth: PlasmaCore.Units.gridUnit * 8
+    readonly property int minimumHeight: PlasmaCore.Units.gridUnit * 8
     readonly property bool showComicAuthor: plasmoid.nativeInterface.showComicAuthor
     readonly property bool showComicTitle: plasmoid.nativeInterface.showComicTitle
     readonly property bool showErrorPicture: plasmoid.nativeInterface.showErrorPicture

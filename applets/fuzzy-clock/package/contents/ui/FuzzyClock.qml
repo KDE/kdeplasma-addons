@@ -16,11 +16,11 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 Item {
     id: main
 
-    Layout.minimumWidth: vertical ? 0 : sizehelper.paintedWidth + (units.smallSpacing * 2)
+    Layout.minimumWidth: vertical ? 0 : sizehelper.paintedWidth + (PlasmaCore.Units.smallSpacing * 2)
     Layout.maximumWidth: vertical ? Infinity : Layout.minimumWidth
     Layout.preferredWidth: vertical ? undefined : Layout.minimumWidth
 
-    Layout.minimumHeight: vertical ? sizehelper.paintedHeight + (units.smallSpacing * 2) : 0
+    Layout.minimumHeight: vertical ? sizehelper.paintedHeight + (PlasmaCore.Units.smallSpacing * 2) : 0
     Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     Layout.preferredHeight: vertical ? Layout.minimumHeight : theme.mSize(theme.defaultFont).height * 2
 
@@ -267,8 +267,8 @@ Item {
         width: 0
         anchors {
             fill: parent
-            leftMargin: units.smallSpacing
-            rightMargin: units.smallSpacing
+            leftMargin: PlasmaCore.Units.smallSpacing
+            rightMargin: PlasmaCore.Units.smallSpacing
         }
     }
 
@@ -294,8 +294,8 @@ Item {
         visible: false
         anchors {
             fill: parent
-            leftMargin: units.smallSpacing
-            rightMargin: units.smallSpacing
+            leftMargin: PlasmaCore.Units.smallSpacing
+            rightMargin: PlasmaCore.Units.smallSpacing
         }
     }
 }

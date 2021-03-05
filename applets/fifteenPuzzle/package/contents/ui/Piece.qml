@@ -31,7 +31,7 @@ Rectangle {
     signal activated(int position)
 
     readonly property int boardSize: plasmoid.configuration.boardSize
-    readonly property int margin: units.smallSpacing
+    readonly property int margin: PlasmaCore.Units.smallSpacing
     readonly property int pieceWidth: (parent.width - (margin * boardSize)) / boardSize
     readonly property int pieceHeight: (parent.height - (margin * boardSize)) / boardSize
     readonly property int boardColumn: (position % boardSize)
@@ -42,13 +42,13 @@ Rectangle {
 
     Behavior on x {
         NumberAnimation {
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
     Behavior on y {
         NumberAnimation {
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }

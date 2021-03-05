@@ -46,15 +46,15 @@ ColumnLayout {
         id: iconComponent
 
         PlasmaCore.IconItem {
-            readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), units.iconSizes.small)
+            readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), PlasmaCore.Units.iconSizes.small)
 
             source: generalModel.currentConditionIconName
             active: compactMouseArea.containsMouse
             // reset implicit size, so layout in free dimension does not stop at the default one
-            implicitWidth: units.iconSizes.small
-            implicitHeight: units.iconSizes.small
-            Layout.minimumWidth: compactRoot.vertical ? units.iconSizes.small : minIconSize
-            Layout.minimumHeight: compactRoot.vertical ? minIconSize : units.iconSizes.small
+            implicitWidth: PlasmaCore.Units.iconSizes.small
+            implicitHeight: PlasmaCore.Units.iconSizes.small
+            Layout.minimumWidth: compactRoot.vertical ? PlasmaCore.Units.iconSizes.small : minIconSize
+            Layout.minimumHeight: compactRoot.vertical ? minIconSize : PlasmaCore.Units.iconSizes.small
         }
     }
 

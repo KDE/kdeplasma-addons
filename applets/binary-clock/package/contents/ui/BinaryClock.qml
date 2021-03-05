@@ -25,13 +25,13 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 Item {
     id: main
 
-    readonly property real w1: (main.height-5*units.smallSpacing)*dots/4
+    readonly property real w1: (main.height-5*PlasmaCore.Units.smallSpacing)*dots/4
 
     Layout.minimumWidth: w1 < 20 ? 20 : w1
     Layout.maximumWidth: Infinity
     Layout.preferredWidth: Layout.minimumWidth
 
-    Layout.minimumHeight: 16+(units.smallSpacing*5)
+    Layout.minimumHeight: 16+(PlasmaCore.Units.smallSpacing*5)
     //Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     //Layout.preferredHeight: Layout.minimumHeight
 
@@ -56,9 +56,9 @@ Item {
     readonly property color offColor: plasmoid.configuration.useCustomColorForInactive ? plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.4)
     readonly property color gridColor: plasmoid.configuration.useCustomColorForGrid ? plasmoid.configuration.customColorForGrid : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.6)
 
-    readonly property int dotSize: Math.min((height-5*units.smallSpacing)/4, (width-(dots+1)*units.smallSpacing)/dots)
-    readonly property real displayTop: (height - 4*dotSize-3*units.smallSpacing)/2
-    readonly property real displayLeft: (width - dots*dotSize-(dots-1)*units.smallSpacing)/2
+    readonly property int dotSize: Math.min((height-5*PlasmaCore.Units.smallSpacing)/4, (width-(dots+1)*PlasmaCore.Units.smallSpacing)/dots)
+    readonly property real displayTop: (height - 4*dotSize-3*PlasmaCore.Units.smallSpacing)/2
+    readonly property real displayLeft: (width - dots*dotSize-(dots-1)*PlasmaCore.Units.smallSpacing)/2
 
     /* displaying calendar after clicking binary clock applet */
     MouseArea {
@@ -75,32 +75,32 @@ Item {
         val: hours/base
     }
     DotColumn {
-        x:   displayLeft+(dotSize+units.smallSpacing)
+        x:   displayLeft+(dotSize+PlasmaCore.Units.smallSpacing)
         y:   displayTop
         val: hours%base
     }
 
     /* minutes */
     DotColumn {
-        x:   displayLeft+(dotSize+units.smallSpacing)*2
+        x:   displayLeft+(dotSize+PlasmaCore.Units.smallSpacing)*2
         y:   displayTop
         val: minutes/base
     }
     DotColumn {
-        x:   displayLeft+(dotSize+units.smallSpacing)*3
+        x:   displayLeft+(dotSize+PlasmaCore.Units.smallSpacing)*3
         y:   displayTop
         val: minutes%base
     }
 
     /* seconds */
     DotColumn {
-        x:       displayLeft+(dotSize+units.smallSpacing)*4
+        x:       displayLeft+(dotSize+PlasmaCore.Units.smallSpacing)*4
         y:       displayTop
         val:     seconds/base
         visible: showSeconds
     }
     DotColumn {
-        x:       displayLeft+(dotSize+units.smallSpacing)*5
+        x:       displayLeft+(dotSize+PlasmaCore.Units.smallSpacing)*5
         y:       displayTop
         val:     seconds%base
         visible: showSeconds
@@ -108,20 +108,20 @@ Item {
 
     /* upper grid border */
     Rectangle {
-        x:       displayLeft-units.smallSpacing
-        y:       displayTop-units.smallSpacing
-        width:   dots*(dotSize+units.smallSpacing)+units.smallSpacing
-        height:  units.smallSpacing
+        x:       displayLeft-PlasmaCore.Units.smallSpacing
+        y:       displayTop-PlasmaCore.Units.smallSpacing
+        width:   dots*(dotSize+PlasmaCore.Units.smallSpacing)+PlasmaCore.Units.smallSpacing
+        height:  PlasmaCore.Units.smallSpacing
         visible: showGrid
         color:   gridColor
     }
 
     /* left grid border */
     Rectangle {
-        x:       displayLeft-units.smallSpacing
+        x:       displayLeft-PlasmaCore.Units.smallSpacing
         y:       displayTop
-        width:   units.smallSpacing
-        height:  4*(dotSize+units.smallSpacing)
+        width:   PlasmaCore.Units.smallSpacing
+        height:  4*(dotSize+PlasmaCore.Units.smallSpacing)
         visible: showGrid
         color:   gridColor
     }

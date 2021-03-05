@@ -29,7 +29,7 @@ KWin.Switcher {
             id: dialogMainItem
             property int optimalWidth: 0.9*tabBox.screenGeometry.width
             property int optimalHeight: 0.9*tabBox.screenGeometry.height
-            property int standardMargin: units.smallSpacing
+            property int standardMargin: PlasmaCore.Units.smallSpacing
             width: optimalWidth
             height: optimalHeight
             focus: true
@@ -88,7 +88,7 @@ KWin.Switcher {
                         QIconItem {
                             id: iconItem
                             icon: model.icon
-                            property int iconSize: units.iconSizes.medium
+                            property int iconSize: PlasmaCore.Units.iconSizes.medium
                             width: iconSize
                             height: iconSize
                             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight

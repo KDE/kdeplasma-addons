@@ -12,8 +12,8 @@ import org.kde.kquickcontrolsaddons 2.0
 Item {
     id: root
 
-    width: units.gridUnit
-    height: units.gridUnit
+    width: PlasmaCore.Units.gridUnit
+    height: PlasmaCore.Units.gridUnit
 
     property variant comicData
 

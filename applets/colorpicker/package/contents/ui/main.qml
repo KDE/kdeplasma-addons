@@ -102,8 +102,8 @@ Item {
         columns: root.isVertical ? 1 : 3
         rows: root.isVertical ? 3 : 1
 
-        Layout.minimumWidth: isVertical ? units.iconSizes.small : ((height * 2) + spacer.width)
-        Layout.minimumHeight: isVertical ? ((width * 2) + spacer.height) : units.iconSizes.small
+        Layout.minimumWidth: isVertical ? PlasmaCore.Units.iconSizes.small : ((height * 2) + spacer.width)
+        Layout.minimumHeight: isVertical ? ((width * 2) + spacer.height) : PlasmaCore.Units.iconSizes.small
 
         // TODO: Still PC2 for now because:
         // - It never loses visible focus despite panel widgets never getting focus anyway: https://bugs.kde.org/show_bug.cgi?id=424446
@@ -127,7 +127,7 @@ Item {
         Item { // spacer
             id: spacer
 
-            readonly property int thickness: Math.ceil(Math.min(parent.width, parent.height) / units.iconSizes.small)
+            readonly property int thickness: Math.ceil(Math.min(parent.width, parent.height) / PlasmaCore.Units.iconSizes.small)
 
             width: root.isVertical ? parent.width : thickness
             height: root.isVertical ? thickness : parent.height
@@ -186,8 +186,8 @@ Item {
                     id: colorCircle
                     anchors.centerIn: parent
                     // try to match the color-picker icon in size
-                    width: units.roundToIconSize(pickerIcon.width) * 0.75
-                    height: units.roundToIconSize(pickerIcon.height) * 0.75
+                    width: PlasmaCore.Units.roundToIconSize(pickerIcon.width) * 0.75
+                    height: PlasmaCore.Units.roundToIconSize(pickerIcon.height) * 0.75
                     radius: width / 2
                     color: root.recentColor
 
@@ -215,7 +215,7 @@ Item {
                             if (contrast > 3 && colorCircle.color.a > 0.5) {
                                 return 0;
                             } else {
-                                return Math.round(Math.max(units.devicePixelRatio, width / 20));
+                                return Math.round(Math.max(PlasmaCore.Units.devicePixelRatio, width / 20));
                             }
                         }
                     }
@@ -247,7 +247,7 @@ Item {
 
         readonly property int columns: 3
 
-        Layout.minimumWidth: columns * units.gridUnit * 6
+        Layout.minimumWidth: columns * PlasmaCore.Units.gridUnit * 6
         Layout.minimumHeight: Layout.minimumWidth
         Layout.maximumWidth: Layout.minimumWidth
         Layout.maximumHeight: Layout.minimumHeight
@@ -296,11 +296,11 @@ Item {
             id: dragImageDummy
             border {
                 color: theme.textColor
-                width: Math.round(units.devicePixelRatio)
+                width: Math.round(PlasmaCore.Units.devicePixelRatio)
             }
             radius: width
-            width: units.iconSizes.large
-            height: units.iconSizes.large
+            width: PlasmaCore.Units.iconSizes.large
+            height: PlasmaCore.Units.iconSizes.large
             visible: false
         }
 
@@ -355,14 +355,14 @@ Item {
 
                 anchors {
                     fill: parent
-                    margins: units.smallSpacing
+                    margins: PlasmaCore.Units.smallSpacing
                 }
 
                 color: delegateMouse.currentColor
 
                 border {
                     color: theme.textColor
-                    width: Math.round(units.devicePixelRatio)
+                    width: Math.round(PlasmaCore.Units.devicePixelRatio)
                 }
 
                 Rectangle {
@@ -372,7 +372,7 @@ Item {
                         right: parent.right
                         margins: rect.border.width
                     }
-                    height: colorLabel.contentHeight + 2 * units.smallSpacing
+                    height: colorLabel.contentHeight + 2 * PlasmaCore.Units.smallSpacing
                     color: theme.backgroundColor
                     opacity: 0.8
 

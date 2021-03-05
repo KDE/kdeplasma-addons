@@ -26,7 +26,7 @@ Rectangle {
         anchors.fill: parent
         color: wallpaper.configuration.Color
         Behavior on color {
-            ColorAnimation { duration: units.longDuration }
+            ColorAnimation { duration: PlasmaCore.Units.longDuration }
         }
     }
 

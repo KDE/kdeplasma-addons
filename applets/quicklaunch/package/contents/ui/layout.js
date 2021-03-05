@@ -4,10 +4,9 @@
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-function itemPadding()
-{
-    return units.smallSpacing / 2;
-}
+.import org.kde.plasma.core 2.0 as PlasmaCore
+
+function itemPadding() { return PlasmaCore.Units.smallSpacing / 2; }
 
 function rows()
 {
@@ -75,15 +74,15 @@ function preferredHeight()
 
 function minimumCellWidth()
 {
-    return units.iconSizes.small + 2 * itemPadding();
+  return PlasmaCore.Units.iconSizes.small + 2 * itemPadding();
 }
 
 function minimumCellHeight()
 {
-    var h = units.iconSizes.small + 2 * itemPadding();
-    if (showLauncherNames) {
-        h += theme.mSize(theme.defaultFont).height * 2;
-    }
+  var h = PlasmaCore.Units.iconSizes.small + 2 * itemPadding();
+  if (showLauncherNames) {
+    h += theme.mSize(theme.defaultFont).height * 2;
+  }
     return h;
 }
 
@@ -100,10 +99,10 @@ function preferredCellHeight()
 function popupItemWidth()
 {
     var fw = theme.mSize(theme.defaultFont).width;
-    return Math.max(root.width, units.iconSizes.medium + 20 * fw);
+    return Math.max(root.width, PlasmaCore.Units.iconSizes.medium + 20 * fw);
 }
 
 function popupItemHeight()
 {
-    return units.iconSizes.medium + 2 * itemPadding();
+  return PlasmaCore.Units.iconSizes.medium + 2 * itemPadding();
 }

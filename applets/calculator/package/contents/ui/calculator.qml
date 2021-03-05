@@ -26,8 +26,8 @@ QQC2.Control {
     Layout.minimumWidth: 150
     Layout.minimumHeight: 225
 
-    width: units.gridSize * 3
-    height: units.gridSize * 4
+    width: PlasmaCore.Units.gridSize * 3
+    height: PlasmaCore.Units.gridSize * 4
 
     // Make the buttons' text labels scale with the widget's size
     // This is propagated down to all child controls with text

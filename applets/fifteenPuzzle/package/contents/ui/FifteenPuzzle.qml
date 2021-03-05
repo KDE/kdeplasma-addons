@@ -164,14 +164,14 @@ Item {
             left: parent.left
             right: parent.right
             bottom: controlsRow.top
-            bottomMargin: units.smallSpacing
+            bottomMargin: PlasmaCore.Units.smallSpacing
         }
     }
 
     RowLayout {
         id: controlsRow
         anchors {
-            margins: units.smallSpacing
+            margins: PlasmaCore.Units.smallSpacing
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
         }

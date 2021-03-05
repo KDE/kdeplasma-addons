@@ -34,8 +34,8 @@ Item {
     // TTY number and X display
     readonly property bool showTechnicalInfo: plasmoid.configuration.showTechnicalInfo
 
-    Plasmoid.switchWidth: units.gridUnit * 10
-    Plasmoid.switchHeight: units.gridUnit * 12
+    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 10
+    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 12
 
     Plasmoid.toolTipTextFormat: Text.StyledText
     Plasmoid.toolTipSubText: i18n("You are logged in as <b>%1</b>", displayedName)
@@ -72,7 +72,7 @@ Item {
             id: compactRow
 
             anchors.centerIn: parent
-            spacing: units.smallSpacing
+            spacing: PlasmaCore.Units.smallSpacing
 
             PlasmaCore.IconItem {
                 id: icon
@@ -92,7 +92,7 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.NoWrap
                 fontSizeMode: Text.VerticalFit
-                font.pixelSize: tooSmall ? theme.defaultFont.pixelSize : units.roundToIconSize(units.gridUnit * 2)
+                font.pixelSize: tooSmall ? theme.defaultFont.pixelSize : PlasmaCore.Units.roundToIconSize(PlasmaCore.Units.gridUnit * 2)
                 minimumPointSize: theme.smallestFont.pointSize
                 visible: root.showName
             }
@@ -102,7 +102,7 @@ Item {
     Plasmoid.fullRepresentation: Item {
         id: fullRoot
 
-        Layout.preferredWidth: units.gridUnit * 12
+        Layout.preferredWidth: PlasmaCore.Units.gridUnit * 12
         Layout.preferredHeight: Math.min(Screen.height * 0.5, column.contentHeight)
 
         PlasmaCore.DataSource {
@@ -131,7 +131,7 @@ Item {
             id: column
 
             // there doesn't seem a more sensible way of getting this due to the expanding ListView
-            readonly property int contentHeight: currentUserItem.height + userList.contentHeight + units.smallSpacing
+            readonly property int contentHeight: currentUserItem.height + userList.contentHeight + PlasmaCore.Units.smallSpacing
                                                + (newSessionButton.visible ? newSessionButton.height : 0)
                                                + (lockScreenButton.visible ? lockScreenButton.height : 0)
                                                + leaveButton.height

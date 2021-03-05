@@ -29,8 +29,8 @@ GridLayout {
 
     visible: !!generalModel.location
 
-    columnSpacing: units.largeSpacing
-    rowSpacing: units.smallSpacing
+    columnSpacing: PlasmaCore.Units.largeSpacing
+    rowSpacing: PlasmaCore.Units.smallSpacing
 
     columns: 3
 
@@ -59,8 +59,8 @@ GridLayout {
 
         Layout.row: 1
         Layout.column: 1
-        Layout.minimumHeight: units.iconSizes.huge
-        Layout.minimumWidth: units.iconSizes.huge
+        Layout.minimumHeight: PlasmaCore.Units.iconSizes.huge
+        Layout.minimumWidth: PlasmaCore.Units.iconSizes.huge
         Layout.preferredHeight: Layout.minimumHeight
         Layout.preferredWidth: Layout.minimumWidth
         Layout.fillWidth: true

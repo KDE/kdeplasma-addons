@@ -17,8 +17,8 @@ import org.kde.plasma.private.diskquota 1.0
 Item {
     id: quotaApplet
 
-    Layout.minimumWidth: units.gridUnit * 10
-    Layout.minimumHeight: units.gridUnit * 2
+    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 10
+    Layout.minimumHeight: PlasmaCore.Units.gridUnit * 2
 
     Plasmoid.status: {
         switch (diskQuota.status) {
@@ -31,8 +31,8 @@ Item {
         return PlasmaCore.Types.PassiveStatus
     }
 
-    Plasmoid.switchWidth: units.gridUnit * 10
-    Plasmoid.switchHeight: units.gridUnit * 10
+    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 10
+    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 10
 
     Plasmoid.icon: diskQuota.iconName
     Plasmoid.toolTipMainText: diskQuota.toolTip
@@ -47,8 +47,8 @@ Item {
     Plasmoid.fullRepresentation: Item {
         id: root
 
-        width: units.gridUnit * 20
-        height: units.gridUnit * 14
+        width: PlasmaCore.Units.gridUnit * 20
+        height: PlasmaCore.Units.gridUnit * 14
 
         // HACK: connection to reset currentIndex to -1. Without this, when
         // uninstalling filelight, the selection highlight remains fixed (which is wrong)

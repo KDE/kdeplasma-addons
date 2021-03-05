@@ -14,11 +14,11 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 FocusScope {
    id: konsoleProfiles
 
-    Plasmoid.switchWidth: units.gridUnit * 11
-    Plasmoid.switchHeight: units.gridUnit * 9
+    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 11
+    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 9
 
-    Layout.minimumWidth: units.gridUnit * 12
-    Layout.minimumHeight: units.gridUnit * 10
+    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 12
+    Layout.minimumHeight: PlasmaCore.Units.gridUnit * 10
 
     Plasmoid.onExpandedChanged: {
         if (plasmoid.expanded) {
@@ -60,8 +60,8 @@ FocusScope {
         PlasmaCore.IconItem {
             id: appIcon
             source: "utilities-terminal"
-            width: units.iconSizes.medium
-            height: units.iconSizes.medium
+            width: PlasmaCore.Units.iconSizes.medium
+            height: PlasmaCore.Units.iconSizes.medium
         }
 
         PlasmaComponents3.Label {
@@ -90,7 +90,7 @@ FocusScope {
     }
 
     PlasmaExtras.ScrollArea {
-        anchors { left: parent.left; right: parent.right; bottom: parent.bottom; top: separator.bottom; topMargin: units.smallSpacing}
+        anchors { left: parent.left; right: parent.right; bottom: parent.bottom; top: separator.bottom; topMargin: PlasmaCore.Units.smallSpacing}
 
         ListView {
             id: view

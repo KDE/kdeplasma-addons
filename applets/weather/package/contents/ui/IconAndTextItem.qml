@@ -19,7 +19,7 @@ GridLayout {
     property bool vertical: false // too bad we cannot make this an enum
     property alias active: icon.active
 
-    readonly property int minimumIconSize: units.iconSizes.small
+    readonly property int minimumIconSize: PlasmaCore.Units.iconSizes.small
     readonly property int iconSize: iconAndTextRoot.vertical ? width : height
 
     columns: iconAndTextRoot.vertical ? 1 : 2
@@ -72,8 +72,8 @@ GridLayout {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors {
-                leftMargin: units.smallSpacing
-                rightMargin: units.smallSpacing
+                leftMargin: PlasmaCore.Units.smallSpacing
+                rightMargin: PlasmaCore.Units.smallSpacing
             }
             // These magic values are taken from the digital clock, so that the
             // text sizes here are identical with various clock text sizes
@@ -108,8 +108,8 @@ GridLayout {
             horizontalAlignment: Text.AlignHCenter
             anchors {
                 fill: parent
-                leftMargin: units.smallSpacing
-                rightMargin: units.smallSpacing
+                leftMargin: PlasmaCore.Units.smallSpacing
+                rightMargin: PlasmaCore.Units.smallSpacing
             }
         }
     }

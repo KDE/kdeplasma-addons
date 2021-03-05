@@ -15,10 +15,10 @@ ColumnLayout {
     id: root
 
     property alias model: repeater.model
-    readonly property int preferredIconSize: units.iconSizes.large
+    readonly property int preferredIconSize: PlasmaCore.Units.iconSizes.large
     readonly property bool hasContent: model && model.length > 0
 
-    spacing: units.smallSpacing
+    spacing: PlasmaCore.Units.smallSpacing
 
     Component {
         id: timeDelegate
@@ -110,7 +110,7 @@ ColumnLayout {
                 Layout.fillWidth: true
                 Layout.fillHeight: false
 
-                spacing: units.largeSpacing
+                spacing: PlasmaCore.Units.largeSpacing
 
                 Repeater {
                     id: rowRepeater

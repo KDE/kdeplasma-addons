@@ -78,7 +78,7 @@ Item {
                     left: parent.left
                 }
 
-                width: units.iconSizes.medium
+                width: PlasmaCore.Units.iconSizes.medium
                 height: width
                 usesPlasmaTheme: false
                 source: url == "quicklaunch:drop" ? "" : iconName
@@ -216,8 +216,8 @@ Item {
                 horizontalAlignment: Text.AlignHLeft
                 visible: true
                 elide: Text.ElideRight
-                anchors.leftMargin: units.smallSpacing
-                anchors.rightMargin: units.smallSpacing
+                anchors.leftMargin: PlasmaCore.Units.smallSpacing
+                anchors.rightMargin: PlasmaCore.Units.smallSpacing
             }
         },
 
