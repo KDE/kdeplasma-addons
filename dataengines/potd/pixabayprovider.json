@@ -1,0 +1,41 @@
+{
+    "KPlugin": {
+        "Icon": "",
+        "Name": "Pixabay",
+        "Name[ca]": "Pixabay",
+        "Name[cs]": "Pixabay",
+        "Name[da]": "Pixabay",
+        "Name[de]": "Pixabay",
+        "Name[en_GB]": "Pixabay",
+        "Name[es]": "Pixabay",
+        "Name[et]": "Pixabay",
+        "Name[eu]": "Pixabay",
+        "Name[fi]": "Pixabay",
+        "Name[fr]": "Pixabay",
+        "Name[gl]": "Pixabay",
+        "Name[hu]": "Pixabay",
+        "Name[ia]": "Pixabay",
+        "Name[id]": "Pixabay",
+        "Name[it]": "Pixabay",
+        "Name[ko]": "Pixabay",
+        "Name[lt]": "Pixabay",
+        "Name[nl]": "Pixabay",
+        "Name[nn]": "Pixabay",
+        "Name[pl]": "Pixabay",
+        "Name[pt]": "Pixabay",
+        "Name[pt_BR]": "Pixabay",
+        "Name[ro]": "Pixabay",
+        "Name[ru]": "Pixabay",
+        "Name[sk]": "Pixabay",
+        "Name[sl]": "Pixabay",
+        "Name[sv]": "Pixabay",
+        "Name[uk]": "Pixabay",
+        "Name[x-test]": "xxPixabayxx",
+        "Name[zh_CN]": "Pixabay",
+        "Name[zh_TW]": "Pixabay",
+        "ServiceTypes": [
+            "PlasmaPoTD/Plugin"
+        ]
+    },
+    "X-KDE-PlasmaPoTDProvider-Identifier": "pixabay"
+}

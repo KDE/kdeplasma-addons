@@ -82,6 +82,13 @@ target_link_libraries( plasma_potd_flickrprovider plasmapotdprovidercore KF5::KI
 
 install( TARGETS plasma_potd_flickrprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )
 
+set( potd_pixabay_provider_SRCS flickrprovider.cpp )
+
+add_library( plasma_potd_pixabayprovider MODULE ${potd_pixabay_provider_SRCS} )
+target_link_libraries( plasma_potd_pixabayprovider plasmapotdprovidercore KF5::KIOCore KF5::CoreAddons)
+
+install( TARGETS plasma_potd_pixabayprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/potd )
+
 set( potd_apod_provider_SRCS
 	apodprovider.cpp
 )
