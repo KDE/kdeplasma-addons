@@ -19,6 +19,7 @@
 #include <QMimeData>
 #include <QTextCursor>
 #include <QTextDocument>
+#include <QTextDocumentFragment>
 
 DocumentHandler::DocumentHandler()
     : m_target(nullptr)
@@ -315,4 +316,23 @@ QStringList DocumentHandler::defaultFontSizes() const
         sizes.append(QString::number(size));
     }
     return sizes;
+}
+
+QString DocumentHandler::stripAndSimplify(const QString text)
+{
+    QString myText = text;
+    QString plainText = QTextDocumentFragment::fromHtml(myText).toPlainText();
+    // Normalize all whitespace to increase the fuzziness of the match
+    plainText = plainText.simplified();
+    return plainText;
+}
+
+QString DocumentHandler::strippedClipboardText()
+{
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    if (!clipboard) {
+        return QString();
+    }
+
+    return stripAndSimplify(clipboard->text());
 }

@@ -9,6 +9,7 @@ import QtQuick 2.6
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.12
+import QtQuick.Dialogs 1.3
 
 import org.kde.draganddrop 2.0 as DragDrop
 
@@ -436,7 +437,27 @@ PlasmaCore.SvgItem {
                 icon.color: textIconColor
                 icon.width: PlasmaCore.Units.iconSizes.smallMedium
                 icon.height: icon.width
-                onClicked: plasmoid.action("remove").trigger()
+                onClicked: {
+                    // No need to ask for confirmation in the cases when...
+                    // ...the note is blank
+                    if (mainTextArea.length == 0 ||
+                        // ...the note's content is equal to the clipboard text
+
+                        // Note that we are intentionally not using
+                        // mainTextArea.getText() because it has a method of
+                        // converting the text to plainText that does not produce
+                        // the same exact output of various other methods, and if
+                        // we go out of our way to match it, we will be
+                        // depending on an implementation detail. So we instead
+                        // roll our own version to ensure that the conversion
+                        // is done in the same way every time.
+                        documentHandler.stripAndSimplify(mainTextArea.text) == documentHandler.strippedClipboardText()
+                    ) {
+                        plasmoid.action("remove").trigger();
+                    } else {
+                        discardConfirmationDialogLoader.open();
+                    }
+                }
                 Accessible.name: removeTooltip.text
                 QQC2.ToolTip {
                     id: removeTooltip
@@ -445,6 +466,35 @@ PlasmaCore.SvgItem {
             }
         }
     }
+
+    Loader {
+        id: discardConfirmationDialogLoader
+
+        function open() {
+            if (item) {
+                item.open();
+            } else {
+                active = true;
+            }
+            item.visible = true;
+        }
+
+        active: false
+
+        sourceComponent: MessageDialog {
+            visible: false
+            title: i18n("Discard this note?")
+            text: i18n("Are you sure you want to discard this note?")
+            icon: StandardIcon.Warning
+
+            standardButtons: StandardButton.Discard | StandardButton.Cancel
+
+            onDiscard: {
+                plasmoid.action("remove").trigger()
+                visible = false;
+            }
+        }
+}
 
     Component.onCompleted: {
         plasmoid.setAction("change_note_color_white", i18nc("@item:inmenu", "White"));

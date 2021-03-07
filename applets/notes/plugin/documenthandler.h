@@ -88,6 +88,9 @@ public:
 
     QString documentTitle() const;
 
+    Q_INVOKABLE QString stripAndSimplify(const QString text);
+    Q_INVOKABLE QString strippedClipboardText();
+
 public Q_SLOTS:
     void setBold(bool arg);
     void setItalic(bool arg);
