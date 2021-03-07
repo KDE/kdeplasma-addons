@@ -20,7 +20,6 @@ SpellCheckRunner::SpellCheckRunner(QObject *parent, const KPluginMetaData &metaD
     : Plasma::AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("Spell Checker"));
-    setSpeed(AbstractRunner::SlowSpeed);
 }
 
 SpellCheckRunner::~SpellCheckRunner() = default;
@@ -160,10 +159,6 @@ QString SpellCheckRunner::findLang(const QStringList &terms)
 
 void SpellCheckRunner::match(Plasma::RunnerContext &context)
 {
-    if (!context.isValid()) {
-        return;
-    }
-
     const QString term = context.query();
     QString query = term;
 
