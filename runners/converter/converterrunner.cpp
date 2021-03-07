@@ -98,7 +98,6 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         match.setType(Plasma::QueryMatch::HelperMatch);
         match.setIconName(QStringLiteral("accessories-calculator"));
         if (outputUnit.categoryId() == KUnitConversion::CurrencyCategory) {
-            outputValue.round(2);
             match.setText(QStringLiteral("%1 (%2)").arg(outputValue.toString(0, 'f', 2), outputUnit.symbol()));
         } else {
             match.setText(QStringLiteral("%1 (%2)").arg(outputValue.toString(), outputUnit.symbol()));
