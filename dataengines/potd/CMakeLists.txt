@@ -31,7 +31,7 @@ set_target_properties(plasmapotdprovidercore PROPERTIES
     SOVERSION ${POTDPROVIDER_VERSION_MAJOR}
     EXPORT_NAME PotdProvider
 )
-target_link_libraries( plasmapotdprovidercore Qt::Gui KF5::CoreAddons )
+target_link_libraries( plasmapotdprovidercore Qt::Gui KF5::CoreAddons KF5::ConfigCore KF5::KIOCore)
 target_include_directories(plasmapotdprovidercore
     PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
     INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}>"

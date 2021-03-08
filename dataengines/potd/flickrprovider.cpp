@@ -1,26 +1,25 @@
-/*
- *   SPDX-FileCopyrightText: 2007 Tobias Koenig <tokoe@kde.org>
- *   SPDX-FileCopyrightText: 2008 Anne-Marie Mahfouf <annma@kde.org>
- *   SPDX-FileCopyrightText: 2008 Georges Toth <gtoth@trypill.org>
- *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2007 Tobias Koenig <tokoe@kde.org>
+// SPDX-FileCopyrightText: 2008 Anne-Marie Mahfouf <annma@kde.org>
+// SPDX-FileCopyrightText: 2008 Georges Toth <gtoth@trypill.org>
+// SPDX-FileCopyrightText: 2021 Guo Yunhe <i@guoyunhe.me>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "flickrprovider.h"
 
-#include <KIO/Job>
-#include <KPluginFactory>
 #include <QDebug>
 #include <QRandomGenerator>
+#include <QRegularExpression>
 #include <QUrlQuery>
 
-#define FLICKR_API_KEY QStringLiteral("65a0b7386726804b1af4f30dcf69adaf")
+#include <KIO/Job>
+#include <KPluginFactory>
 
-static QUrl buildUrl(const QDate &date)
+static QUrl buildUrl(const QDate &date, const QString apiKey)
 {
     QUrl url(QLatin1String("https://api.flickr.com/services/rest/"));
     QUrlQuery urlQuery(url);
-    urlQuery.addQueryItem(QStringLiteral("api_key"), FLICKR_API_KEY);
+    urlQuery.addQueryItem(QStringLiteral("api_key"), apiKey);
     urlQuery.addQueryItem(QStringLiteral("method"), QStringLiteral("flickr.interestingness.getList"));
     urlQuery.addQueryItem(QStringLiteral("date"), date.toString(Qt::ISODate));
     // url_o might be either too small or too large.
@@ -33,12 +32,9 @@ static QUrl buildUrl(const QDate &date)
 FlickrProvider::FlickrProvider(QObject *parent, const QVariantList &args)
     : PotdProvider(parent, args)
 {
-    mActualDate = date();
+    connect(this, &PotdProvider::configLoaded, this, &FlickrProvider::sendXmlRequest);
 
-    const QUrl url = buildUrl(mActualDate);
-
-    KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, &KIO::StoredTransferJob::finished, this, &FlickrProvider::pageRequestFinished);
+    loadConfig();
 }
 
 FlickrProvider::~FlickrProvider() = default;
@@ -48,12 +44,30 @@ QImage FlickrProvider::image() const
     return mImage;
 }
 
-void FlickrProvider::pageRequestFinished(KJob *_job)
+void FlickrProvider::sendXmlRequest(QString apiKey, QString apiSecret)
+{
+    Q_UNUSED(apiSecret);
+    if (apiKey.isNull()) {
+        refreshConfig();
+        return;
+    }
+
+    mApiKey = apiKey;
+    mActualDate = date().addDays(-2);
+
+    const QUrl xmlUrl = buildUrl(mActualDate, apiKey);
+
+    KIO::StoredTransferJob *xmlJob = KIO::storedGet(xmlUrl, KIO::NoReload, KIO::HideProgressInfo);
+    connect(xmlJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::xmlRequestFinished);
+}
+
+void FlickrProvider::xmlRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
         Q_EMIT error(this);
-        qDebug() << "pageRequestFinished error";
+        qDebug() << "xmlRequestFinished error";
+        refreshConfig();
         return;
     }
 
@@ -71,22 +85,11 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
         if (xml.isStartElement()) {
             auto attributes = xml.attributes();
             if (xml.name() == QLatin1String("rsp")) {
-                const int maxFailure = 5;
                 /* no pictures available for the specified parameters */
                 if (attributes.value(QLatin1String("stat")).toString() != QLatin1String("ok")) {
-                    if (mFailureNumber < maxFailure) {
-                        /* To be sure, decrement the date to two days earlier... @TODO */
-                        mActualDate = mActualDate.addDays(-2);
-                        QUrl url = buildUrl(mActualDate);
-                        KIO::StoredTransferJob *pageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-                        connect(pageJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::pageRequestFinished);
-                        mFailureNumber++;
-                        return;
-                    } else {
-                        Q_EMIT error(this);
-                        qDebug() << "pageRequestFinished error";
-                        return;
-                    }
+                    Q_EMIT error(this);
+                    qDebug() << "xmlRequestFinished error: no photos for the query";
+                    return;
                 }
             } else if (xml.name() == QLatin1String("photo")) {
                 if (attributes.value(QLatin1String("ispublic")).toString() != QLatin1String("1")) {

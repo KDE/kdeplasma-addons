@@ -1,14 +1,15 @@
-/*
- *   SPDX-FileCopyrightText: 2007 Tobias Koenig <tokoe@kde.org>
- *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2007 Tobias Koenig <tokoe@kde.org>
+// SPDX-FileCopyrightText: 2021 Guo Yunhe <i@guoyunhe.me>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #ifndef POTDPROVIDER_H
 #define POTDPROVIDER_H
 
 #include <QObject>
+#include <QUrl>
 #include <QVariantList>
+
+#include <KIO/Job>
 
 #include "plasma_potd_export.h"
 
@@ -64,6 +65,9 @@ public:
      */
     bool isFixedDate() const;
 
+    void refreshConfig();
+    void loadConfig();
+
 Q_SIGNALS:
     /**
      * This signal is emitted whenever a request has been finished
@@ -80,8 +84,18 @@ Q_SIGNALS:
      */
     void error(PotdProvider *provider);
 
+    void configLoaded(QString apiKey, QString apiSecret);
+
 private:
+    void configRequestFinished(KJob *job);
+    void configWriteFinished(KJob *job);
+
     const QScopedPointer<class PotdProviderPrivate> d;
+
+    QUrl configRemoteUrl;
+    QUrl configLocalUrl;
+    QString configLocalPath;
+    bool refreshed = false;
 };
 
 #endif

@@ -1,21 +1,20 @@
-/*
- *   SPDX-FileCopyrightText: 2007 Tobias Koenig <tokoe@kde.org>
- *   SPDX-FileCopyrightText: 2008 Anne-Marie Mahfouf <annma@kde.org>
- *   SPDX-FileCopyrightText: 2008 Georges Toth <gtoth@trypill.org>
- *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2007 Tobias Koenig <tokoe@kde.org>
+// SPDX-FileCopyrightText: 2008 Anne-Marie Mahfouf <annma@kde.org>
+// SPDX-FileCopyrightText: 2008 Georges Toth <gtoth@trypill.org>
+// SPDX-FileCopyrightText: 2021 Guo Yunhe <i@guoyunhe.me>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #ifndef FLICKRPROVIDER_H
 #define FLICKRPROVIDER_H
 
 #include "potdprovider.h"
-// Qt
+
 #include <QDate>
 #include <QImage>
 #include <QXmlStreamReader>
 
-class KJob;
+#include <KIO/Job>
 
 /**
  * This class grabs a random image from the flickr
@@ -50,11 +49,13 @@ public:
     QImage image() const override;
 
 private:
-    void pageRequestFinished(KJob *job);
+    void sendXmlRequest(QString apiKey, QString apiSecret);
+    void xmlRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
 
 private:
     QDate mActualDate;
+    QString mApiKey;
     QImage mImage;
 
     QXmlStreamReader xml;
