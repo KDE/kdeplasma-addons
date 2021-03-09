@@ -33,7 +33,12 @@ void AstronomicalEventsPlugin::loadEventsForDateRange(const QDate &startDate, co
 {
     QMultiHash<QDate, CalendarEvents::EventData> data;
 
-    for (QDate date = startDate; date <= endDate; date = date.addDays(1)) {
+    if (!endDate.isValid()) {
+        Q_EMIT dataReady(data);
+        return;
+    }
+
+    for (QDate date = startDate; date <= endDate && date.isValid(); date = date.addDays(1)) {
         if (m_lunarPhaseShown) {
             const auto phase = KHolidays::LunarPhase::phaseAtDate(date);
             if (phase != KHolidays::LunarPhase::None) {
