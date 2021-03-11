@@ -8,6 +8,7 @@
 
 #include "dictionarymatchengine.h"
 #include <KRunner/AbstractRunner>
+#include <Plasma/DataEngineConsumer>
 
 class DictionaryRunner : public Plasma::AbstractRunner
 {
@@ -21,6 +22,7 @@ public:
 private:
     QString m_triggerWord;
     DictionaryMatchEngine *m_engine;
+    Plasma::DataEngineConsumer m_consumer;
 
 protected Q_SLOTS:
     void init() override;
