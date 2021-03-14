@@ -7,6 +7,7 @@
 #include <KRunner/AbstractRunnerTest>
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/UnitCategory>
+#include <QRegularExpression>
 #include <QTest>
 
 using namespace KUnitConversion;
@@ -24,6 +25,7 @@ private Q_SLOTS:
     void testQuery();
     void testInvalidQuery_data();
     void testInvalidQuery();
+    void testRoundingOfCurrencies();
 };
 
 void ConverterRunnerTest::initTestCase()
@@ -125,6 +127,17 @@ void ConverterRunnerTest::testInvalidQuery()
     QFETCH(QString, query);
     launchQuery(query);
     QCOMPARE(manager->matches().count(), 0);
+}
+
+void ConverterRunnerTest::testRoundingOfCurrencies()
+{
+    launchQuery(QStringLiteral("40000000000000000000000000000000000000000000000000$"));
+    QVERIFY(!manager->matches().isEmpty());
+    QVERIFY(!manager->matches().constFirst().text().startsWith("-"));
+    launchQuery(QStringLiteral("50.123$"));
+    QVERIFY(!manager->matches().isEmpty());
+    QRegularExpression hasTwoDecimalPrescision(QStringLiteral(R"(^\d+\.\d\d)"));
+    QVERIFY(manager->matches().constFirst().text().contains(hasTwoDecimalPrescision));
 }
 
 QTEST_MAIN(ConverterRunnerTest)
