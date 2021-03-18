@@ -17,13 +17,8 @@
 class KJob;
 
 /**
- * This class provides the image for APOD
- * "Astronomy Picture Of the Day"
- * located at http://antwrp.gsfc.nasa.gov/apod.
- * Direct link to the picture of the day page is
- * http://antwrp.gsfc.nasa.gov/apod/apYYMMDD.html
- * where YY is the year last 2 digits,
- * MM is the month and DD the day, in 2 digits.
+ * This class provides the image for the National Geographic's photo of the day.
+ * Image URL is obtained from https://www.nationalgeographic.com/photo-of-the-day.
  */
 class NatGeoProvider : public PotdProvider
 {

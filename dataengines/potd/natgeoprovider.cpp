@@ -42,7 +42,7 @@ void NatGeoProvider::pageRequestFinished(KJob *_job)
 
     QString url;
 
-    re.setPattern(QStringLiteral("^<meta\\s+property=\"og:image\"\\s+content=\"(.*)\".*/>$"));
+    re.setPattern(QStringLiteral("<meta.+property=\"og:image\"\\s+content=\"(.*?)\".*/>"));
 
     for (int i = 0; i < lines.size(); i++) {
         QRegularExpressionMatch match = re.match(lines.at(i));
