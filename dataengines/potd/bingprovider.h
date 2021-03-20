@@ -1,14 +1,12 @@
-/*
- *   SPDX-FileCopyrightText: 2017 Weng Xuetian <wengxt@gmail.com>
- *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2017 Weng Xuetian <wengxt@gmail.com>
+// SPDX-FileCopyrightText: 2021 Guo Yunhe <i@guoyunhe.me>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #ifndef BINGPROVIDER_H
 #define BINGPROVIDER_H
 
 #include "potdprovider.h"
-// Qt
+
 #include <QImage>
 
 class KJob;
@@ -44,7 +42,7 @@ public:
     QImage image() const override;
 
 private:
-    void pageRequestFinished(KJob *job);
+    void jsonRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
 
 private:
