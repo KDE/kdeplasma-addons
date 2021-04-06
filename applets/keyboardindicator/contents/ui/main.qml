@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 Item {
@@ -22,8 +23,11 @@ Item {
 
     function translate(identifier) {
         switch(identifier) {
-            case "Caps Lock": return i18n("Caps Lock")
-            case "Num Lock": return i18n("Num Lock")
+            // Not using KUIT markup for these newline characters because those
+            // get translated into HTML, and this text is displayed in the applet's
+            // tooltip which does not render HTML at all for security reasons
+            case "Caps Lock": return i18n("Caps Lock activated\n")
+            case "Num Lock": return i18n("Num Lock activated\n")
         }
         return identifier;
     }
@@ -70,16 +74,15 @@ Item {
         }
     }
 
-    Plasmoid.fullRepresentation: ColumnLayout {
-        PlasmaExtras.Heading {
-            Layout.fillWidth: true
-            level: 3
-            wrapMode: Text.WordWrap
-            text: root.Plasmoid.toolTipSubText
-        }
-        Item {
-            Layout.fillHeight: true
-            width: 5
+    Plasmoid.fullRepresentation: PlasmaComponents3.Page {
+        implicitWidth: PlasmaCore.Units.gridUnit * 12
+        implicitHeight: PlasmaCore.Units.gridUnit * 12
+
+        PlasmaExtras.PlaceholderMessage {
+            anchors.centerIn: parent
+            width: parent.width - (PlasmaCore.Units.gridUnit * 4)
+            iconName: plasmoid.icon
+            text: plasmoid.toolTipSubText
         }
     }
 
@@ -92,9 +95,9 @@ Item {
             var data = keystateSource.data[source];
             if (data && data.Locked) {
                 found = true
-                ret+=i18n("%1: Locked\n", translate(source))
+                ret+=translate(source)
             }
         }
-        return found ? ret.trim() : i18n("Unlocked")
+        return found ? ret.trim() : i18n("No lock keys activated")
     }
 }
