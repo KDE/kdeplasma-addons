@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Keyboard Indicator
+Name=Lock keys status
 Name[ast]=Indicador del tecláu
 Name[az]=Klaviatura indikatoru
 Name[ca]=Indicador de teclat
@@ -37,7 +37,7 @@ Name[vi]=Trình biểu thị bàn phím
 Name[x-test]=xxKeyboard Indicatorxx
 Name[zh_CN]=键盘指示器
 Name[zh_TW]=鍵盤指示符號
-Comment=Shows the state of the keyboard
+Comment=Shows whether Caps Lock or Num Lock are active
 Comment[ast]=Amuesa l'estáu del tecláu
 Comment[az]=Klaviaturanın vəziyyətini göstərir
 Comment[ca]=Mostra l'estat del teclat
