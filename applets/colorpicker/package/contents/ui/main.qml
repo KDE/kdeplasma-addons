@@ -136,7 +136,7 @@ Item {
                 anchors.centerIn: parent
                 width: Math.min(parent.width, colorCircle.height)
                 height: Math.min(parent.height, colorCircle.height)
-                color: theme.textColor
+                color: PlasmaCore.Theme.textColor
                 opacity: 0.6
             }
         }
@@ -207,9 +207,9 @@ Item {
                     }
 
                     border {
-                        color: theme.textColor
+                        color: PlasmaCore.Theme.textColor
                         width: {
-                            var contrast = luminance(theme.viewBackgroundColor) / luminance(colorCircle.color) + 0.05;
+                            var contrast = luminance(PlasmaCore.Theme.viewBackgroundColor) / luminance(colorCircle.color) + 0.05;
 
                             // show border only if there's too little contrast to the surrounding view or color is transparent
                             if (contrast > 3 && colorCircle.color.a > 0.5) {
@@ -295,7 +295,7 @@ Item {
         Rectangle {
             id: dragImageDummy
             border {
-                color: theme.textColor
+                color: PlasmaCore.Theme.textColor
                 width: Math.round(PlasmaCore.Units.devicePixelRatio)
             }
             radius: width
@@ -361,7 +361,7 @@ Item {
                 color: delegateMouse.currentColor
 
                 border {
-                    color: theme.textColor
+                    color: PlasmaCore.Theme.textColor
                     width: Math.round(PlasmaCore.Units.devicePixelRatio)
                 }
 
@@ -373,7 +373,7 @@ Item {
                         margins: rect.border.width
                     }
                     height: colorLabel.contentHeight + 2 * PlasmaCore.Units.smallSpacing
-                    color: theme.backgroundColor
+                    color: PlasmaCore.Theme.backgroundColor
                     opacity: 0.8
 
                     PlasmaComponents3.Label {
@@ -383,7 +383,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideLeft
                         fontSizeMode: Text.HorizontalFit
-                        minimumPointSize: theme.smallestFont.pointSize
+                        minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
                         text: Logic.formatColor(delegateMouse.currentColor, root.defaultFormat)
                     }
                 }

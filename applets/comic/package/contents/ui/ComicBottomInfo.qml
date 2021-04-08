@@ -32,7 +32,7 @@ Item {
             leftMargin: 2
         }
 
-        color: theme.textColor
+        color: PlasmaCore.Theme.textColor
         visible: (showIdentifier && comicIdentifier.text.length > 0)
         text: (showIdentifier && comicData.currentReadable != undefined) ? comicData.currentReadable : ""
 
@@ -44,11 +44,11 @@ Item {
             hoverEnabled: true
 
             onEntered: {
-                parent.color = theme.highlightColor;
+                parent.color = PlasmaCore.Theme.highlightColor;
             }
 
             onExited: {
-                parent.color = theme.textColor;
+                parent.color = PlasmaCore.Theme.textColor;
             }
 
             onClicked: {
@@ -72,7 +72,7 @@ Item {
             rightMargin: 2
         }
 
-        color: theme.textColor
+        color: PlasmaCore.Theme.textColor
         visible: (showUrl && comicUrl.text.length > 0)
         text: (showUrl && comicData.websiteHost.length > 0) ? comicData.websiteHost : ""
 
@@ -84,11 +84,11 @@ Item {
             hoverEnabled: true
 
             onEntered: {
-                parent.color = theme.highlightColor;
+                parent.color = PlasmaCore.Theme.highlightColor;
             }
 
             onExited: {
-                parent.color = theme.textColor;
+                parent.color = PlasmaCore.Theme.textColor;
             }
 
             onClicked: {

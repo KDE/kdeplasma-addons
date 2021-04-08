@@ -93,7 +93,7 @@ Item {
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
                 opacity: 0.6
-                font: theme.smallestFont
+                font: PlasmaCore.Theme.smallestFont
                 visible: text !== ""
             }
         }

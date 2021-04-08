@@ -43,7 +43,7 @@ ColumnLayout {
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignRight
         font {
-            pointSize: theme.smallestFont.pointSize
+            pointSize: PlasmaCore.Theme.smallestFont.pointSize
             underline: !!creditUrl
         }
         linkColor : color

@@ -52,7 +52,7 @@ Item {
 
     readonly property int dots: showSeconds ? 6 : 4
 
-    readonly property color onColor: plasmoid.configuration.useCustomColorForActive ? plasmoid.configuration.customColorForActive : theme.textColor
+    readonly property color onColor: plasmoid.configuration.useCustomColorForActive ? plasmoid.configuration.customColorForActive : PlasmaCore.Theme.textColor
     readonly property color offColor: plasmoid.configuration.useCustomColorForInactive ? plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.4)
     readonly property color gridColor: plasmoid.configuration.useCustomColorForGrid ? plasmoid.configuration.customColorForGrid : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.6)
 

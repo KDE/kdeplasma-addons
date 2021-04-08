@@ -45,7 +45,7 @@ ColumnLayout {
 
                 delegate: PlasmaComponents.Label {
                     font.underline: true
-                    color: theme.linkColor
+                    color: PlasmaCore.Theme.linkColor
 
                     text: modelData.description
 

@@ -253,10 +253,10 @@ DropArea {
 
     Rectangle {
         border {
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
             width: root.containsDrag ? 5 : 1
         }
-        color: theme.backgroundColor
+        color: PlasmaCore.Theme.backgroundColor
         radius: Math.max(parent.width, parent.height)/10
         anchors.fill: parent
         opacity: root.containsDrag || tooltipArea.containsMouse ? .3 : 0

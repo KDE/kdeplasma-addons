@@ -56,15 +56,15 @@ Item {
         id: compactRoot
 
         // Taken from DigitalClock to ensure uniform sizing when next to each other
-        readonly property bool tooSmall: plasmoid.formFactor === PlasmaCore.Types.Horizontal && Math.round(2 * (compactRoot.height / 5)) <= theme.smallestFont.pixelSize
+        readonly property bool tooSmall: plasmoid.formFactor === PlasmaCore.Types.Horizontal && Math.round(2 * (compactRoot.height / 5)) <= PlasmaCore.Theme.smallestFont.pixelSize
 
         Layout.minimumWidth: isVertical ? 0 : compactRow.implicitWidth
         Layout.maximumWidth: isVertical ? Infinity : Layout.minimumWidth
         Layout.preferredWidth: isVertical ? undefined : Layout.minimumWidth
 
-        Layout.minimumHeight: isVertical ? label.height : theme.smallestFont.pixelSize
+        Layout.minimumHeight: isVertical ? label.height : PlasmaCore.Theme.smallestFont.pixelSize
         Layout.maximumHeight: isVertical ? Layout.minimumHeight : Infinity
-        Layout.preferredHeight: isVertical ? Layout.minimumHeight : theme.mSize(theme.defaultFont).height * 2
+        Layout.preferredHeight: isVertical ? Layout.minimumHeight : PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2
 
         onClicked: plasmoid.expanded = !plasmoid.expanded
 
@@ -92,8 +92,8 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.NoWrap
                 fontSizeMode: Text.VerticalFit
-                font.pixelSize: tooSmall ? theme.defaultFont.pixelSize : PlasmaCore.Units.roundToIconSize(PlasmaCore.Units.gridUnit * 2)
-                minimumPointSize: theme.smallestFont.pointSize
+                font.pixelSize: tooSmall ? PlasmaCore.Theme.defaultFont.pixelSize : PlasmaCore.Units.roundToIconSize(PlasmaCore.Units.gridUnit * 2)
+                minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
                 visible: root.showName
             }
         }

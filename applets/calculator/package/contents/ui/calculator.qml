@@ -263,9 +263,9 @@ QQC2.Control {
                     margins: parent.margins.right;
                 }
                 text: "0";
-                font.pointSize: theme.defaultFont.pointSize * 2;
+                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 2;
                 font.weight: Font.Bold;
-                color: theme.viewTextColor;
+                color: PlasmaCore.Theme.viewTextColor;
                 horizontalAlignment: TextEdit.AlignRight;
                 verticalAlignment: TextEdit.AlignVCenter;
                 readOnly: true;

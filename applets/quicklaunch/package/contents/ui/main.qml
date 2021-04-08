@@ -87,7 +87,7 @@ Item {
             right: parent.right
         }
 
-        height: theme.mSize(theme.defaultFont).height
+        height: PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignTop
         elide: Text.ElideMiddle

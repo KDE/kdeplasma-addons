@@ -158,7 +158,7 @@ Item {
 
     Rectangle {
         id: mainGrid
-        color: theme.backgroundColor
+        color: PlasmaCore.Theme.backgroundColor
         anchors {
             top: parent.top
             left: parent.left
@@ -187,7 +187,7 @@ Item {
             id: timeLabel
             Layout.fillWidth: true
             text: main.timerText()
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
         }
     }
 
@@ -195,7 +195,7 @@ Item {
         id: solvedRect
         visible: false
         anchors.fill: mainGrid
-        color: theme.backgroundColor
+        color: PlasmaCore.Theme.backgroundColor
         z: 0
 
         Image {
@@ -215,7 +215,7 @@ Item {
         PlasmaComponents3.Label {
             id: solvedLabel
             anchors.centerIn: parent
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
             text: i18nc("@info", "Solved! Try again.")
             z: 2
         }

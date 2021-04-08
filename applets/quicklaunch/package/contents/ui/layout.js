@@ -81,7 +81,7 @@ function minimumCellHeight()
 {
   var h = PlasmaCore.Units.iconSizes.small + 2 * itemPadding();
   if (showLauncherNames) {
-    h += theme.mSize(theme.defaultFont).height * 2;
+    h += PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2;
   }
     return h;
 }
@@ -98,8 +98,8 @@ function preferredCellHeight()
 
 function popupItemWidth()
 {
-    var fw = theme.mSize(theme.defaultFont).width;
-    return Math.max(root.width, PlasmaCore.Units.iconSizes.medium + 20 * fw);
+  var fw = PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).width;
+  return Math.max(root.width, PlasmaCore.Units.iconSizes.medium + 20 * fw);
 }
 
 function popupItemHeight()

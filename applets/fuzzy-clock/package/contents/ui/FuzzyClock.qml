@@ -22,7 +22,7 @@ Item {
 
     Layout.minimumHeight: vertical ? sizehelper.paintedHeight + (PlasmaCore.Units.smallSpacing * 2) : 0
     Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
-    Layout.preferredHeight: vertical ? Layout.minimumHeight : theme.mSize(theme.defaultFont).height * 2
+    Layout.preferredHeight: vertical ? Layout.minimumHeight : PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2
 
     readonly property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical
 
@@ -256,7 +256,7 @@ Item {
             pixelSize: 1024
             pointSize: 0 // we need to unset pointSize otherwise it breaks the Text.Fit size mode
         }
-        minimumPixelSize: theme.mSize(theme.smallestFont).height
+        minimumPixelSize: PlasmaCore.Theme.mSize(PlasmaCore.Theme.smallestFont).height
         fontSizeMode: Text.Fit
         text: timeString()
 
@@ -283,8 +283,8 @@ Item {
         id: sizehelper
         font.weight: timeLabel.font.weight
         font.italic: timeLabel.font.italic
-        font.pixelSize: vertical ? theme.mSize(theme.defaultFont).height * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
-        minimumPixelSize: theme.mSize(theme.smallestFont).height
+        font.pixelSize: vertical ? PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
+        minimumPixelSize: PlasmaCore.Theme.mSize(PlasmaCore.Theme.smallestFont).height
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         text: timeLabel.text
