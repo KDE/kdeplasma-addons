@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Lock Keys Status
+Name[ca]=Estat de les tecles de bloqueig
+Name[nl]=Status van vergrendeltoetsen
+Name[sv]=Status för låstangenter
+Name[uk]=Стан клавіш блокування
+Name[vi]=Trạng thái các phím khoá
+Name[x-test]=xxLock Keys Statusxx
 Comment=Shows whether Caps Lock or Num Lock are active
+Comment[ca]=Mostra si està actiu el bloqueig de «Bloq Maj» o «Bloq Núm»
+Comment[nl]=Toont of Caps Lock of Num Lock actief zijn
+Comment[sv]=Visar om Caps Lock eller Num Lock är aktiva
+Comment[uk]=Показує, чи задіяно Caps Lock або Num Lock
+Comment[vi]=Cho biết Caps Lock hay Num Lock có đang hoạt động không
+Comment[x-test]=xxShows whether Caps Lock or Num Lock are activexx
 Icon=input-keyboard
 
 Type=Service
