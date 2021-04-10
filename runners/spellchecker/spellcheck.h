@@ -44,7 +44,6 @@ private:
     bool m_requireTriggerWord;
     QMap<QString, QSharedPointer<Sonnet::Speller>> m_spellers; // spellers
     QMutex m_spellLock; // Lock held when constructing a new speller
-    QList<QAction *> m_actions;
 };
 
 #endif

@@ -27,8 +27,6 @@ SpellCheckRunner::~SpellCheckRunner() = default;
 
 void SpellCheckRunner::init()
 {
-    m_actions = {addAction(QStringLiteral("copyToClipboard"), QIcon::fromTheme(QStringLiteral("edit-copy")), i18nc("@action", "Copy to Clipboard"))};
-
     // Connect prepare and teardown signals
     connect(this, &SpellCheckRunner::prepare, this, &SpellCheckRunner::loadData);
     connect(this, &SpellCheckRunner::teardown, this, &SpellCheckRunner::destroydata);
@@ -232,7 +230,6 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         match.setType(Plasma::QueryMatch::ExactMatch);
         match.setIconName(QStringLiteral("data-error"));
         match.setText(i18n("No dictionary found, please install hspell"));
-        match.setActions(m_actions);
         context.addMatch(match);
     }
 }

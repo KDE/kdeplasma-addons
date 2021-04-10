@@ -44,7 +44,7 @@ void ConverterRunner::init()
 
     insertCompatibleUnits();
 
-    actionList = {addAction(QStringLiteral("copy-unit"), QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy unit and number"))};
+    actionList = {new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy unit and number"), this)};
     setMinLetterCount(2);
     setMatchRegex(valueRegex);
 }
