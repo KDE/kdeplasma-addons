@@ -74,11 +74,11 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
             lastPartOfSpeech = partOfSpeech.cap(1);
         }
         Plasma::QueryMatch match(this);
-        match.setText(query + QLatin1String(": ") + lastPartOfSpeech);
+        match.setMultiLine(true);
+        match.setText(lastPartOfSpeech + QLatin1String(": ") + partOfSpeech.cap(2));
         match.setRelevance(1 - (static_cast<double>(++item) / static_cast<double>(lines.length())));
         match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIconName(QStringLiteral("accessories-dictionary"));
-        match.setSubtext(partOfSpeech.cap(2));
         matches.append(match);
     }
     context.addMatches(matches);
