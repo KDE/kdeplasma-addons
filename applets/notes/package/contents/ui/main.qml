@@ -380,8 +380,6 @@ PlasmaCore.SvgItem {
                 QQC2.ToolButton {
                     icon.name: "format-text-bold"
                     icon.color: textIconColor
-                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
-                    icon.height: icon.width
                     checked: documentHandler.bold
                     onClicked: documentHandler.bold = !documentHandler.bold
                     Accessible.name: boldTooltip.text
@@ -393,8 +391,6 @@ PlasmaCore.SvgItem {
                 QQC2.ToolButton {
                     icon.name: "format-text-italic"
                     icon.color: textIconColor
-                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
-                    icon.height: icon.width
                     checked: documentHandler.italic
                     onClicked: documentHandler.italic = !documentHandler.italic
                     Accessible.name: italicTooltip.text
@@ -406,8 +402,6 @@ PlasmaCore.SvgItem {
                 QQC2.ToolButton {
                     icon.name: "format-text-underline"
                     icon.color: textIconColor
-                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
-                    icon.height: icon.width
                     checked: documentHandler.underline
                     onClicked: documentHandler.underline = !documentHandler.underline
                     Accessible.name: underlineTooltip.text
@@ -419,8 +413,6 @@ PlasmaCore.SvgItem {
                 QQC2.ToolButton {
                     icon.name: "format-text-strikethrough"
                     icon.color: textIconColor
-                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
-                    icon.height: icon.width
                     checked: documentHandler.strikeOut
                     onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
                     Accessible.name: strikethroughTooltip.text
@@ -440,8 +432,6 @@ PlasmaCore.SvgItem {
                 id: settingsButton
                 icon.name: "configure"
                 icon.color: textIconColor
-                icon.width: PlasmaCore.Units.iconSizes.smallMedium
-                icon.height: icon.width
                 onClicked: plasmoid.action("configure").trigger()
                 Accessible.name: settingsTooltip.text
                 QQC2.ToolTip {
@@ -454,8 +444,6 @@ PlasmaCore.SvgItem {
                 id: removeButton
                 icon.name: "edit-delete"
                 icon.color: textIconColor
-                icon.width: PlasmaCore.Units.iconSizes.smallMedium
-                icon.height: icon.width
                 onClicked: {
                     // No need to ask for confirmation in the cases when...
                     // ...the note is blank
