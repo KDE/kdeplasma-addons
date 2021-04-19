@@ -71,7 +71,11 @@ Kirigami.FormLayout {
         id: ghnsButton
         text: i18nc("@action:button", "Get New Comics...")
         configFile: "comic.knsrc"
-        onChangedEntriesChanged : plasmoid.nativeInterface.loadProviders();
+        onEntryEvent: function(entry, event) {
+            if (event == 1) {
+                plasmoid.nativeInterface.loadProviders()
+            }
+        }
     }
 
     Controls.CheckBox {
