@@ -2,7 +2,7 @@
 Name=Lock Keys Status
 Name[az]=Düymələrin vəziyyətini kilidləyin
 Name[ca]=Estat de les tecles de bloqueig
-Name[de]=Tastaturstatus sperren
+Name[de]=Sperrtastenstatus
 Name[es]=Estado de las teclas de bloqueo
 Name[fr]=État du verrouillage des touches
 Name[it]=Stato della permanenza dei tasti
@@ -17,6 +17,7 @@ Name[x-test]=xxLock Keys Statusxx
 Comment=Shows whether Caps Lock or Num Lock are active
 Comment[az]=Caps Lock və ya Num Lock'un aktivliyini göstərir
 Comment[ca]=Mostra si està actiu el bloqueig de «Bloq Maj» o «Bloq Núm»
+Comment[de]=Zeigt an, ob die Feststelltaste oder die Nummernblocktaste aktiv ist.
 Comment[es]=Muestra si están activas «Bloqueo de mayúsculas» o «Bloqueo numérico»
 Comment[fr]=Affiche si le verrouillage des majuscules ou du pavé numérique est activé ou non.
 Comment[it]=Mostra se Bloc Maiusc o Bloc num sono attivi
