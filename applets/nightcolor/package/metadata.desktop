@@ -67,7 +67,7 @@ Comment[vi]=Plasmoid để điều khiển "Màu buổi tối"
 Comment[x-test]=xxPlasmoid for controlling Night Colorxx
 Comment[zh_CN]=控制夜间颜色的小部件
 Comment[zh_TW]=控制夜色的 Plasmoid
-Icon=preferences-desktop-display-nightcolor
+Icon=redshift-status-on
 
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
