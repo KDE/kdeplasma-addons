@@ -48,9 +48,7 @@ PotdEngine::PotdEngine(QObject *parent, const QVariantList &args)
     m_checkDatesTimer->setInterval(10 * 60 * 1000); // check every 10 minutes
     m_checkDatesTimer->start();
 
-    const QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(QStringLiteral("potd"), [](const KPluginMetaData &md) {
-        return md.serviceTypes().contains(QStringLiteral("PlasmaPoTD/Plugin"));
-    });
+    const QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(QStringLiteral("potd"));
 
     for (const auto &metadata : plugins) {
         QString provider = metadata.value(QLatin1String("X-KDE-PlasmaPoTDProvider-Identifier"));

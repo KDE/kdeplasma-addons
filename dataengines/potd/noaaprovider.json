@@ -34,10 +34,7 @@
         "Name[vi]": "Vệ tinh thời tiết (NOAA)",
         "Name[x-test]": "xxWeather Satellite (NOAA)xx",
         "Name[zh_CN]": "气象卫星 (NOAA)",
-        "Name[zh_TW]": "Weather Satellite (NOAA)",
-        "ServiceTypes": [
-            "PlasmaPoTD/Plugin"
-        ]
+        "Name[zh_TW]": "Weather Satellite (NOAA)"
     },
     "X-KDE-PlasmaPoTDProvider-Identifier": "noaa"
 }

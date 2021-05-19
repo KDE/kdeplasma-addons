@@ -7,10 +7,7 @@
             }
         ],
         "Description": "%{APPNAME}",
-        "Name": "%{APPNAME}",
-        "ServiceTypes": [
-            "PlasmaPoTD/Plugin"
-        ]
+        "Name": "%{APPNAME}"
     },
     "X-KDE-PlasmaPoTDProvider-Identifier": "%{APPNAMELC}"
 }

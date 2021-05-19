@@ -34,10 +34,7 @@
         "Name[vi]": "Wikimedia Commons",
         "Name[x-test]": "xxWikimedia Commonsxx",
         "Name[zh_CN]": "维基共享资源",
-        "Name[zh_TW]": "Wikimedia Commons",
-        "ServiceTypes": [
-            "PlasmaPoTD/Plugin"
-        ]
+        "Name[zh_TW]": "Wikimedia Commons"
     },
     "X-KDE-PlasmaPoTDProvider-Identifier": "wcpotd"
 }

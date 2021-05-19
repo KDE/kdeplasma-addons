@@ -34,10 +34,7 @@
         "Name[vi]": "Thiên văn học (NASA)",
         "Name[x-test]": "xxAstronomy (NASA)xx",
         "Name[zh_CN]": "天文 (NASA)",
-        "Name[zh_TW]": "Astronomy (NASA)",
-        "ServiceTypes": [
-            "PlasmaPoTD/Plugin"
-        ]
+        "Name[zh_TW]": "Astronomy (NASA)"
     },
     "X-KDE-PlasmaPoTDProvider-Identifier": "apod"
 }
