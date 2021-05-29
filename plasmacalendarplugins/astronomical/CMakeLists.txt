@@ -1,15 +1,9 @@
-set(astronomicalevents_SRCS
-    astronomicaleventsplugin.cpp
-)
-
-add_library(astronomicalevents MODULE ${astronomicalevents_SRCS})
+kcoreaddons_add_plugin(astronomicalevents SOURCES astronomicaleventsplugin.cpp INSTALL_NAMESPACE "plasmacalendarplugins")
 target_link_libraries(astronomicalevents
     KF5::ConfigCore
     KF5::Holidays
     KF5::CalendarEvents
     KF5::I18n
 )
-
-install(TARGETS astronomicalevents  DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasmacalendarplugins)
 
 add_subdirectory(config)
