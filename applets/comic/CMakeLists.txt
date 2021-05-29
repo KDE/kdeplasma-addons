@@ -17,9 +17,7 @@ set(comic_SRCS
 ki18n_wrap_ui(comic_SRCS comicarchivedialog.ui
 )
 
-
-add_library(plasma_applet_comic MODULE ${comic_SRCS})
-
+kcoreaddons_add_plugin(plasma_applet_comic SOURCES ${comic_SRCS} INSTALL_NAMESPACE "plasma/applets")
 kcoreaddons_desktop_to_json(plasma_applet_comic package/metadata.desktop SERVICE_TYPES plasma-applet.desktop)
 
 target_link_libraries(plasma_applet_comic
@@ -32,10 +30,6 @@ target_link_libraries(plasma_applet_comic
                       KF5::NewStuff
                       KF5::Notifications
                       KF5::Archive)
-
-
-install(TARGETS plasma_applet_comic DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
-#install(FILES plasma-comic-default.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 
 install(FILES comic.knsrc DESTINATION ${KDE_INSTALL_KNSRCDIR})
 plasma_install_package(package org.kde.plasma.comic)

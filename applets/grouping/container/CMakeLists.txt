@@ -8,7 +8,7 @@ ecm_qt_declare_logging_category(groupedappletscontainer_SRCS HEADER debug.h
                                             CATEGORY_NAME kde.grouping
                                             DEFAULT_SEVERITY Info)
 
-add_library(org.kde.plasma.grouping MODULE ${groupedappletscontainer_SRCS})
+kcoreaddons_add_plugin(org.kde.plasma.grouping SOURCES ${groupedappletscontainer_SRCS} INSTALL_NAMESPACE "plasma/applets")
 
 kcoreaddons_desktop_to_json(org.kde.plasma.grouping package/metadata.desktop)
 
@@ -19,7 +19,3 @@ target_link_libraries(org.kde.plasma.grouping
                       KF5::Plasma
                       KF5::XmlGui
                       KF5::I18n)
-
-install(TARGETS org.kde.plasma.grouping DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
-
-
