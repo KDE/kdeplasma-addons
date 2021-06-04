@@ -22,6 +22,7 @@ Name[tr]=Kilit Tuşları Durumu
 Name[uk]=Стан клавіш блокування
 Name[vi]=Trạng thái các phím khoá
 Name[x-test]=xxLock Keys Statusxx
+Name[zh_CN]=锁定按键状态
 Comment=Shows whether Caps Lock or Num Lock are active
 Comment[az]=Caps Lock və ya Num Lock'un aktivliyini göstərir
 Comment[ca]=Mostra si està actiu el bloqueig de «Bloq Maj» o «Bloq Núm»
@@ -45,6 +46,7 @@ Comment[tr]=Caps Lock veya Num Lock'un etkin olup olmadığını gösterir
 Comment[uk]=Показує, чи задіяно Caps Lock або Num Lock
 Comment[vi]=Cho biết Caps Lock hay Num Lock có đang hoạt động không
 Comment[x-test]=xxShows whether Caps Lock or Num Lock are activexx
+Comment[zh_CN]=显示大写锁定或小键盘数字锁定是否激活
 Icon=input-keyboard
 
 Type=Service
