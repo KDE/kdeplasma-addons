@@ -9,8 +9,6 @@ ecm_qt_declare_logging_category(groupingplasmoid_SRCS HEADER debug.h
 
 kcoreaddons_add_plugin(org.kde.plasma.private.grouping SOURCES groupingcontainment.cpp ${groupingplasmoid_SRCS} INSTALL_NAMESPACE "plasma/applets")
 
-kcoreaddons_desktop_to_json(org.kde.plasma.private.grouping package/metadata.desktop)
-
 target_link_libraries(org.kde.plasma.private.grouping
                       Qt::Gui
                       Qt::Quick

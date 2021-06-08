@@ -18,7 +18,6 @@ ki18n_wrap_ui(comic_SRCS comicarchivedialog.ui
 )
 
 kcoreaddons_add_plugin(plasma_applet_comic SOURCES ${comic_SRCS} INSTALL_NAMESPACE "plasma/applets")
-kcoreaddons_desktop_to_json(plasma_applet_comic package/metadata.desktop SERVICE_TYPES plasma-applet.desktop)
 
 target_link_libraries(plasma_applet_comic
                       Qt::Gui

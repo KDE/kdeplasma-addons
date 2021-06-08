@@ -10,9 +10,6 @@ ecm_qt_declare_logging_category(groupedappletscontainer_SRCS HEADER debug.h
 
 kcoreaddons_add_plugin(org.kde.plasma.grouping SOURCES ${groupedappletscontainer_SRCS} INSTALL_NAMESPACE "plasma/applets")
 
-kcoreaddons_desktop_to_json(org.kde.plasma.grouping package/metadata.desktop)
-
-
 target_link_libraries(org.kde.plasma.grouping
                       Qt::Gui
                       Qt::Quick

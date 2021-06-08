@@ -2,8 +2,6 @@ add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.weather\")
 
 kcoreaddons_add_plugin(plasma_applet_weather SOURCES weatherapplet.cpp INSTALL_NAMESPACE "plasma/applets")
 
-kcoreaddons_desktop_to_json(plasma_applet_weather package/metadata.desktop SERVICE_TYPES plasma-applet.desktop)
-
 target_link_libraries(plasma_applet_weather
     KF5::Plasma
     KF5::UnitConversion
