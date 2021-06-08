@@ -122,10 +122,6 @@
         "Name[wa]": "Date et eure",
         "Name[x-test]": "xxDate and Timexx",
         "Name[zh_CN]": "日期和时间",
-        "Name[zh_TW]": "日期和時間",
-        "ServiceTypes": [
-            "Plasma/Runner"
-        ],
-        "Version": "1.0"
+        "Name[zh_TW]": "日期和時間"
     }
 }

@@ -125,11 +125,7 @@
         "Name[wa]": "Sessions di Kate",
         "Name[x-test]": "xxKate Sessionsxx",
         "Name[zh_CN]": "Kate 会话",
-        "Name[zh_TW]": "Kate 作業階段",
-        "ServiceTypes": [
-            "Plasma/Runner"
-        ],
-        "Version": "1.1"
+        "Name[zh_TW]": "Kate 作業階段"
     },
     "TryExec": "kate"
 }

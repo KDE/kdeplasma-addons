@@ -104,10 +104,6 @@
         "Name[wa]": "Profils di Konsole",
         "Name[x-test]": "xxKonsole Profilesxx",
         "Name[zh_CN]": "Konsole 配置",
-        "Name[zh_TW]": "Konsole 設定檔",
-        "ServiceTypes": [
-            "Plasma/Runner"
-        ],
-        "Version": "1.0"
+        "Name[zh_TW]": "Konsole 設定檔"
     }
 }

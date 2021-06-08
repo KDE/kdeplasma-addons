@@ -128,10 +128,6 @@
         "Name[wa]": "Radapteu d' unité",
         "Name[x-test]": "xxUnit Converterxx",
         "Name[zh_CN]": "单位转换器",
-        "Name[zh_TW]": "單位轉換器",
-        "ServiceTypes": [
-            "Plasma/Runner"
-        ],
-        "Version": "1.0"
+        "Name[zh_TW]": "單位轉換器"
     }
 }

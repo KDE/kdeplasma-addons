@@ -123,10 +123,6 @@
         "Name[wa]": "Coridjrece ortografike",
         "Name[x-test]": "xxSpell Checkerxx",
         "Name[zh_CN]": "拼写检查",
-        "Name[zh_TW]": "拼字檢查",
-        "ServiceTypes": [
-            "Plasma/Runner"
-        ],
-        "Version": "1.0"
+        "Name[zh_TW]": "拼字檢查"
     }
 }
