@@ -378,6 +378,7 @@ PlasmaCore.SvgItem {
                 visible: fontButtons.showFormatButtons
 
                 QQC2.ToolButton {
+                    focusPolicy: Qt.TabFocus
                     icon.name: "format-text-bold"
                     icon.color: textIconColor
                     checked: documentHandler.bold
@@ -389,6 +390,7 @@ PlasmaCore.SvgItem {
                     }
                 }
                 QQC2.ToolButton {
+                    focusPolicy: Qt.TabFocus
                     icon.name: "format-text-italic"
                     icon.color: textIconColor
                     checked: documentHandler.italic
@@ -400,6 +402,7 @@ PlasmaCore.SvgItem {
                     }
                 }
                 QQC2.ToolButton {
+                    focusPolicy: Qt.TabFocus
                     icon.name: "format-text-underline"
                     icon.color: textIconColor
                     checked: documentHandler.underline
@@ -411,6 +414,7 @@ PlasmaCore.SvgItem {
                     }
                 }
                 QQC2.ToolButton {
+                    focusPolicy: Qt.TabFocus
                     icon.name: "format-text-strikethrough"
                     icon.color: textIconColor
                     checked: documentHandler.strikeOut
@@ -430,6 +434,7 @@ PlasmaCore.SvgItem {
 
             QQC2.ToolButton {
                 id: settingsButton
+                focusPolicy: Qt.TabFocus
                 icon.name: "configure"
                 icon.color: textIconColor
                 onClicked: plasmoid.action("configure").trigger()
@@ -442,6 +447,7 @@ PlasmaCore.SvgItem {
 
             QQC2.ToolButton {
                 id: removeButton
+                focusPolicy: Qt.TabFocus
                 icon.name: "edit-delete"
                 icon.color: textIconColor
                 onClicked: {
