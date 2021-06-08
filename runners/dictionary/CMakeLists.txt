@@ -4,7 +4,6 @@ set(dictionaryrunner_SRCS dictionaryrunner.cpp dictionarymatchengine.cpp)
 set(kcm_dictionaryrunner_SRCS dictionaryrunner_config.cpp)
 
 kcoreaddons_add_plugin(krunner_dictionary SOURCES ${dictionaryrunner_SRCS} INSTALL_NAMESPACE "kf5/krunner")
-kcoreaddons_desktop_to_json(krunner_dictionary plasma-runner-dictionary.desktop )
 target_link_libraries(krunner_dictionary KF5::Runner KF5::I18n)
 
 add_library(kcm_krunner_dictionary MODULE ${kcm_dictionaryrunner_SRCS})

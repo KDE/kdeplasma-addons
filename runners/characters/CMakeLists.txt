@@ -12,7 +12,6 @@ target_link_libraries(kcm_krunner_charrunner
 
 # Now make sure all files get to the right place
 kcoreaddons_add_plugin(krunner_charrunner SOURCES charrunner.cpp INSTALL_NAMESPACE "kf5/krunner")
-kcoreaddons_desktop_to_json(krunner_charrunner plasma-runner-character.desktop )
 target_link_libraries(krunner_charrunner
     KF5::Runner
     KF5::I18n

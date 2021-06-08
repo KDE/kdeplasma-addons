@@ -14,7 +14,6 @@ target_link_libraries(kcm_krunner_spellcheck
 )
 
 kcoreaddons_add_plugin(krunner_spellcheck SOURCES spellcheck.cpp INSTALL_NAMESPACE "kf5/krunner")
-kcoreaddons_desktop_to_json(krunner_spellcheck plasma-runner-spellchecker.desktop)
 target_link_libraries(krunner_spellcheck
     KF5::Runner
     KF5::KIOWidgets
