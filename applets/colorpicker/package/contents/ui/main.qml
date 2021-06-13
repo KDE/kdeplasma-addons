@@ -15,8 +15,6 @@ import org.kde.plasma.components 2.0 as PlasmaComponents // for Highlight and Mo
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-import org.kde.draganddrop 2.0
-
 import org.kde.plasma.private.colorpicker 2.0 as ColorPicker
 import "logic.js" as Logic
 
@@ -157,15 +155,18 @@ Item {
 
             width: buttonSize
             height: buttonSize
-            preventStealing: true
-            // why the hell is hasColor not a property?!
-            onDragEnter: containsAcceptableDrag = (event.mimeData.hasColor() || ColorPicker.Utils.isValidColor(event.mimeData.text))
-            onDragLeave: containsAcceptableDrag = false
-            onDrop: {
-                if (event.mimeData.hasColor()) {
-                    addColorToHistory(event.mimeData.color)
-                } else if (ColorPicker.Utils.isValidColor(event.mimeData.text)) {
-                    addColorToHistory(event.mimeData.text)
+            onEntered: function (event) {
+                const isAcceptable = (event.hasColor || ColorPicker.Utils.isValidColor(event.text))
+                dropArea.containsAcceptableDrag = isAcceptable
+                if (isAcceptable)
+                    event.accept()
+            }
+            onExited: containsAcceptableDrag = false
+            onDropped: function(event) {
+                if (event.hasColor) {
+                    addColorToHistory(event.colorData)
+                } else if (ColorPicker.Utils.isValidColor(event.text)) {
+                    addColorToHistory(event.text)
                 }
                 containsAcceptableDrag = false
             }
