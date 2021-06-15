@@ -148,6 +148,6 @@ void GroupingContainment::reorderItemAfter(QQuickItem *after, QQuickItem *before
     after->setVisible(true);
 }
 
-K_EXPORT_PLASMA_APPLET_WITH_JSON(groupingcontainment, GroupingContainment, "metadata.json")
+K_PLUGIN_CLASS_WITH_JSON(GroupingContainment, "metadata.json")
 
 #include "groupingcontainment.moc"
