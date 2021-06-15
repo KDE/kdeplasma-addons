@@ -244,6 +244,6 @@ QMimeData *SpellCheckRunner::mimeDataForMatch(const Plasma::QueryMatch &match)
     return result;
 }
 
-K_EXPORT_PLASMA_RUNNER_WITH_JSON(SpellCheckRunner, "plasma-runner-spellchecker.json")
+K_PLUGIN_CLASS_WITH_JSON(SpellCheckRunner, "plasma-runner-spellchecker.json")
 
 #include "spellcheck.moc"
