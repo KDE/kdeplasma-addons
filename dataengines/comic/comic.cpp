@@ -313,6 +313,6 @@ QString ComicEngine::lastCachedIdentifier(const QString &identifier) const
     return previousIdentifier;
 }
 
-K_EXPORT_PLASMA_DATAENGINE_WITH_JSON(comic, ComicEngine, "plasma-dataengine-comic.json")
+K_PLUGIN_CLASS_WITH_JSON(ComicEngine, "plasma-dataengine-comic.json")
 
 #include "comic.moc"

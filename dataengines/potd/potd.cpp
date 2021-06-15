@@ -192,6 +192,6 @@ void PotdEngine::checkDayChanged()
     }
 }
 
-K_EXPORT_PLASMA_DATAENGINE_WITH_JSON(potdengine, PotdEngine, "plasma-dataengine-potd.json")
+K_PLUGIN_CLASS_WITH_JSON(PotdEngine, "plasma-dataengine-potd.json")
 
 #include "potd.moc"

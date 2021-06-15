@@ -86,6 +86,6 @@ void KonsoleProfilesEngine::loadProfiles()
     }
 }
 
-K_EXPORT_PLASMA_DATAENGINE_WITH_JSON(konsoleprofilesengine, KonsoleProfilesEngine, "plasma-dataengine-konsoleprofiles.json")
+K_PLUGIN_CLASS_WITH_JSON(KonsoleProfilesEngine, "plasma-dataengine-konsoleprofiles.json")
 
 #include "konsoleprofilesengine.moc"

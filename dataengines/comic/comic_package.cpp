@@ -32,6 +32,6 @@ void ComicPackage::initPackage(KPackage::Package *package)
     package->setDefaultPackageRoot(QStringLiteral("plasma/comics/"));
 }
 
-K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(ComicPackage, "plasma-packagestructure-comic.json")
+K_PLUGIN_CLASS_WITH_JSON(ComicPackage, "plasma-packagestructure-comic.json")
 
 #include "comic_package.moc"
