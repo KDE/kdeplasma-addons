@@ -201,8 +201,6 @@ KWin.Switcher {
                                 id: thumbnailItem
                                 anchors.fill: parent
                                 wId: windowId
-                                clip: true
-                                clipTo: parent
                             }
                         }
                     }

@@ -71,8 +71,6 @@ KWin.Switcher {
                     KWin.DesktopThumbnailItem {
                         id: thumbnailItem
                         property variant caption: model.caption
-                        clip: true
-                        clipTo: listView
                         desktop: model.desktop
                         anchors {
                             fill: parent

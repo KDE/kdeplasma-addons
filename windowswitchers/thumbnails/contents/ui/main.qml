@@ -77,8 +77,6 @@ KWin.Switcher {
                         }
                         KWin.ThumbnailItem {
                             wId: windowId
-                            clip: true
-                            clipTo: thumbnailListView
                             anchors.fill: parent
                         }
                     }
