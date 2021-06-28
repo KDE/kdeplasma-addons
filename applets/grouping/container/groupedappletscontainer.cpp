@@ -123,6 +123,6 @@ QQuickItem *GroupedAppletsContainer::internalContainmentItem()
     return m_internalContainmentItem;
 }
 
-K_PLUGIN_CLASS_WITH_JSON(GroupedAppletsContainer, "metadata.json")
+K_PLUGIN_CLASS_WITH_JSON(GroupedAppletsContainer, "package/metadata.json")
 
 #include "groupedappletscontainer.moc"

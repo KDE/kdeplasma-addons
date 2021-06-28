@@ -271,6 +271,6 @@ Unit WeatherApplet::unit(const QString &unit)
     return m_converter.unit(unit);
 }
 
-K_PLUGIN_CLASS_WITH_JSON(WeatherApplet, "metadata.json")
+K_PLUGIN_CLASS_WITH_JSON(WeatherApplet, "package/metadata.json")
 
 #include "weatherapplet.moc"
