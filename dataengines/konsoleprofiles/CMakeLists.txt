@@ -15,6 +15,4 @@ target_link_libraries(plasma_engine_konsoleprofiles
 
 kcoreaddons_desktop_to_json(plasma_engine_konsoleprofiles plasma-dataengine-konsoleprofiles.desktop SERVICE_TYPES plasma-dataengine.desktop)
 
-install(FILES plasma-dataengine-konsoleprofiles.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
 install(FILES org.kde.plasma.dataengine.konsoleprofiles.operations DESTINATION ${PLASMA_DATA_INSTALL_DIR}/services)
-

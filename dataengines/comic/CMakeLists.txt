@@ -17,9 +17,6 @@ target_link_libraries(plasma_engine_comic plasmacomicprovidercore
 
 kcoreaddons_desktop_to_json(plasma_engine_comic plasma-dataengine-comic.desktop SERVICE_TYPES plasma-dataengine.desktop)
 
-install(FILES plasma-dataengine-comic.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
-
-
 set(comicpackage_SRCS
     comic_package.cpp
 )

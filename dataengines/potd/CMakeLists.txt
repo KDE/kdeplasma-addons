@@ -11,9 +11,6 @@ target_link_libraries(plasma_engine_potd plasmapotdprovidercore
 
 kcoreaddons_desktop_to_json(plasma_engine_potd plasma-dataengine-potd.desktop SERVICE_TYPES plasma-dataengine.desktop)
 
-install(FILES plasma-dataengine-potd.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
-
-
 ########### plugin core library ############
 set(POTDPROVIDER_VERSION 1.0.0)
 set(POTDPROVIDER_VERSION_MAJOR 1)
