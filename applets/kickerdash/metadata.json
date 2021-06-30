@@ -3,11 +3,27 @@
         "Authors": [
             {
                 "Email": "hein@kde.org",
-                "Name": "Eike Hein"
+                "Name": "Eike Hein",
+                "Name[az]": "Eike Hein",
+                "Name[ca]": "Eike Hein",
+                "Name[es]": "Eike Hein",
+                "Name[nl]": "Eike Hein",
+                "Name[pt_BR]": "Eike Hein",
+                "Name[sv]": "Eike Hein",
+                "Name[uk]": "Eike Hein",
+                "Name[x-test]": "xxEike Heinxx"
             }
         ],
         "Category": "Application Launchers",
         "Description": "A fullscreen application launcher",
+        "Description[az]": "Tam ekran tətbiq başladıcısı",
+        "Description[ca]": "Un llançador d'aplicacions a pantalla completa",
+        "Description[es]": "Lanzador de aplicaciones a pantalla completa",
+        "Description[nl]": "Een programmastarter met volledig scherm",
+        "Description[pt_BR]": "Lançador de aplicativos em tela inteira",
+        "Description[sv]": "Ett fullskärmsverktyg för programstart",
+        "Description[uk]": "Повноекранний засіб запуску програм",
+        "Description[x-test]": "xxA fullscreen application launcherxx",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
@@ -16,6 +32,14 @@
         "Id": "org.kde.plasma.kickerdash",
         "License": "GPL-2.0+",
         "Name": "Application Dashboard",
+        "Name[az]": "Tətbiq tablosu",
+        "Name[ca]": "Tauler d'aplicacions",
+        "Name[es]": "Tablero de aplicaciones",
+        "Name[nl]": "Toepassingendashboard",
+        "Name[pt_BR]": "Painel de aplicativos",
+        "Name[sv]": "Instrumentpanel för program",
+        "Name[uk]": "Панель приладів програм",
+        "Name[x-test]": "xxApplication Dashboardxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

@@ -3,14 +3,38 @@
         "Authors": [
             {
                 "Email": "montel@kde.org",
-                "Name": "Laurent Montel"
+                "Name": "Laurent Montel",
+                "Name[az]": "Laurent Montel",
+                "Name[ca]": "Laurent Montel",
+                "Name[es]": "Laurent Montel",
+                "Name[nl]": "Laurent Montel",
+                "Name[pt_BR]": "Laurent Montel",
+                "Name[sv]": "Laurent Montel",
+                "Name[uk]": "Laurent Montel",
+                "Name[x-test]": "xxLaurent Montelxx"
             }
         ],
         "Description": "Matches Konsole Profiles",
+        "Description[az]": "Konsol profillərinə uyğun",
+        "Description[ca]": "Correspon amb perfils del Konsole",
+        "Description[es]": "Coincide perfiles de Konsole",
+        "Description[nl]": "Komt overeen met Konsole-profielen",
+        "Description[pt_BR]": "Corresponde aos perfis do Konsole",
+        "Description[sv]": "Matchar terminalprofiler",
+        "Description[uk]": "Шукає профілі Konsole",
+        "Description[x-test]": "xxMatches Konsole Profilesxx",
         "EnabledByDefault": true,
         "Icon": "utilities-terminal",
         "Id": "konsoleprofiles",
         "License": "LGPL",
-        "Name": "Konsole Profiles"
+        "Name": "Konsole Profiles",
+        "Name[az]": "Konsol profilləri",
+        "Name[ca]": "Perfils del Konsole",
+        "Name[es]": "Perfiles de Konsole",
+        "Name[nl]": "Konsole-profielen",
+        "Name[pt_BR]": "Perfis do Konsole",
+        "Name[sv]": "Terminalprofiler",
+        "Name[uk]": "Профілі Konsole",
+        "Name[x-test]": "xxKonsole Profilesxx"
     }
 }

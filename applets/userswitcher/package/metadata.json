@@ -3,15 +3,39 @@
         "Authors": [
             {
                 "Email": "kde@privat.broulik.de",
-                "Name": "Kai Uwe Broulik"
+                "Name": "Kai Uwe Broulik",
+                "Name[az]": "Kai Uwe Broulik",
+                "Name[ca]": "Kai Uwe Broulik",
+                "Name[es]": "Kai Uwe Broulik",
+                "Name[nl]": "Kai Uwe Broulik",
+                "Name[pt_BR]": "Kai Uwe Broulik",
+                "Name[sv]": "Kai Uwe Broulik",
+                "Name[uk]": "Kai Uwe Broulik",
+                "Name[x-test]": "xxKai Uwe Broulikxx"
             }
         ],
         "Category": "System Information",
         "Description": "Quickly switch between different users",
+        "Description[az]": "Müxtəlif istifadəçilər arasında sürətli keçid",
+        "Description[ca]": "Commuta ràpidament entre diferents usuaris",
+        "Description[es]": "Cambio rápido entre distintos usuarios",
+        "Description[nl]": "Snel wisselen tussen verschillende gebruikers",
+        "Description[pt_BR]": "Alterna rapidamente entre os usuários",
+        "Description[sv]": "Byt snabbt mellan olika användare",
+        "Description[uk]": "Швидке перемикання між записами користувачів",
+        "Description[x-test]": "xxQuickly switch between different usersxx",
         "Icon": "preferences-desktop-user",
         "Id": "org.kde.plasma.userswitcher",
         "License": "GPL-2.0+",
         "Name": "User Switcher",
+        "Name[az]": "İstifadəçi dəyişdiricisi",
+        "Name[ca]": "Commutador d'usuaris",
+        "Name[es]": "Selector de usuario",
+        "Name[nl]": "Wisselen van gebruiker",
+        "Name[pt_BR]": "Seletor de usuário",
+        "Name[sv]": "Användarbytare",
+        "Name[uk]": "Перемикання користувачів",
+        "Name[x-test]": "xxUser Switcherxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

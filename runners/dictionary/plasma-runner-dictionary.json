@@ -3,14 +3,38 @@
         "Authors": [
             {
                 "Email": "Jason@zx2c4.com",
-                "Name": "Jason A. Donenfeld"
+                "Name": "Jason A. Donenfeld",
+                "Name[az]": "Jason A. Donenfeld",
+                "Name[ca]": "Jason A. Donenfeld",
+                "Name[es]": "Jason A. Donenfeld",
+                "Name[nl]": "Jason A. Donenfeld",
+                "Name[pt_BR]": "Jason A. Donenfeld",
+                "Name[sv]": "Jason A. Donenfeld",
+                "Name[uk]": "Jason A. Donenfeld",
+                "Name[x-test]": "xxJason A. Donenfeldxx"
             }
         ],
         "Description": "Define words",
+        "Description[az]": "Sözlərin tanınması",
+        "Description[ca]": "Defineix mots",
+        "Description[es]": "Definir palabras",
+        "Description[nl]": "Woorden definiëren",
+        "Description[pt_BR]": "Definição de palavras",
+        "Description[sv]": "Definiera ord",
+        "Description[uk]": "Визначення термінів",
+        "Description[x-test]": "xxDefine wordsxx",
         "EnabledByDefault": true,
         "Icon": "accessories-dictionary",
         "Id": "Dictionary",
         "License": "LGPL",
-        "Name": "Dictionary"
+        "Name": "Dictionary",
+        "Name[az]": "Lüğət",
+        "Name[ca]": "Diccionari",
+        "Name[es]": "Diccionario",
+        "Name[nl]": "Woordenboek",
+        "Name[pt_BR]": "Dicionário",
+        "Name[sv]": "Ordlista",
+        "Name[uk]": "Словник",
+        "Name[x-test]": "xxDictionaryxx"
     }
 }

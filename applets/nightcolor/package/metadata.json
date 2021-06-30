@@ -3,16 +3,40 @@
         "Authors": [
             {
                 "Email": "vlad.zahorodnii@kde.org",
-                "Name": "Vlad Zahorodnii"
+                "Name": "Vlad Zahorodnii",
+                "Name[az]": "Vlad Zahorodnii",
+                "Name[ca]": "Vlad Zahorodnii",
+                "Name[es]": "Vlad Zahorodnii",
+                "Name[nl]": "Vlad Zahorodnii",
+                "Name[pt_BR]": "Vlad Zahorodnii",
+                "Name[sv]": "Vlad Zahorodnii",
+                "Name[uk]": "Влад Загородній",
+                "Name[x-test]": "xxVlad Zahorodniixx"
             }
         ],
         "Category": "Graphics",
         "Description": "Plasmoid for controlling Night Color",
+        "Description[az]": "Gecə rəng sxemini idarə etmək üçün plasmoid",
+        "Description[ca]": "Plasmoide per a controlar el Color de nit",
+        "Description[es]": "Plasmoide para controlar el color nocturno",
+        "Description[nl]": "Plasmoid voor besturing van nachtkleur",
+        "Description[pt_BR]": "Plasmoide para controlar a cor noturna",
+        "Description[sv]": "Plasmoid för att kontrollera nattfärg",
+        "Description[uk]": "Плазмоїд для керування нічними кольорами",
+        "Description[x-test]": "xxPlasmoid for controlling Night Colorxx",
         "EnabledByDefault": true,
         "Icon": "redshift-status-on",
         "Id": "org.kde.plasma.nightcolorcontrol",
         "License": "GPL-2.0+",
         "Name": "Night Color Control",
+        "Name[az]": "Gecə rənginin idarə edilməsi",
+        "Name[ca]": "Control del color de nit",
+        "Name[es]": "Control del color nocturno",
+        "Name[nl]": "Besturing van nachtkleur",
+        "Name[pt_BR]": "Controle da cor noturna",
+        "Name[sv]": "Nattfärgkontroll",
+        "Name[uk]": "Керування нічними кольорами",
+        "Name[x-test]": "xxNight Color Controlxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

@@ -3,15 +3,39 @@
         "Authors": [
             {
                 "Email": "lampih@gmail.com",
-                "Name": "Luís Gabriel Lima"
+                "Name": "Luís Gabriel Lima",
+                "Name[az]": "Luís Gabriel Lima",
+                "Name[ca]": "Luís Gabriel Lima",
+                "Name[es]": "Luís Gabriel Lima",
+                "Name[nl]": "Luís Gabriel Lima",
+                "Name[pt_BR]": "Luís Gabriel Lima",
+                "Name[sv]": "Luís Gabriel Lima",
+                "Name[uk]": "Luís Gabriel Lima",
+                "Name[x-test]": "xxLuís Gabriel Limaxx"
             }
         ],
         "Category": "Environment and Weather",
         "Description": "Forecast and current conditions",
+        "Description[az]": "Cari və gözlənilən hava məlumatı",
+        "Description[ca]": "Previsió i condicions actuals",
+        "Description[es]": "Previsión meteorológica y condiciones actuales",
+        "Description[nl]": "Voorspelling en huidige condities",
+        "Description[pt_BR]": "Previsão e condições atuais",
+        "Description[sv]": "Prognos och aktuella förhållanden",
+        "Description[uk]": "Прогноз і поточні умови",
+        "Description[x-test]": "xxForecast and current conditionsxx",
         "Icon": "weather-clear",
         "Id": "org.kde.plasma.weather",
         "License": "GPL-2.0+",
         "Name": "Weather Report",
+        "Name[az]": "Hava məlumatı",
+        "Name[ca]": "Informe meteorològic",
+        "Name[es]": "Informe meteorológico",
+        "Name[nl]": "Weerrapport",
+        "Name[pt_BR]": "Previsão do tempo",
+        "Name[sv]": "Väderprognos",
+        "Name[uk]": "Звіт щодо погоди",
+        "Name[x-test]": "xxWeather Reportxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

@@ -3,14 +3,38 @@
         "Authors": [
             {
                 "Email": "akreuzkamp@web.de",
-                "Name": "Anton Kreuzkamp"
+                "Name": "Anton Kreuzkamp",
+                "Name[az]": "Anton Kreuzkamp",
+                "Name[ca]": "Anton Kreuzkamp",
+                "Name[es]": "Anton Kreuzkamp",
+                "Name[nl]": "Anton Kreuzkamp",
+                "Name[pt_BR]": "Anton Kreuzkamp",
+                "Name[sv]": "Anton Kreuzkamp",
+                "Name[uk]": "Anton Kreuzkamp",
+                "Name[x-test]": "xxAnton Kreuzkampxx"
             }
         ],
         "Description": "Creates special characters from their hexadecimal codes",
+        "Description[az]": "Onların onaltılıq kodundan xüsusi simvollar yaradır",
+        "Description[ca]": "Crea caràcters especials a partir dels seus codis hexadecimals",
+        "Description[es]": "Crea caracteres especiales a partir de sus códigos en hexadecimal",
+        "Description[nl]": "Maakt speciale tekens aan uit hun hexadecimale codes",
+        "Description[pt_BR]": "Cria caracteres especiais de seus códigos hexadecimais",
+        "Description[sv]": "Skapar specialtecken från deras hexadecimala koder",
+        "Description[uk]": "Створення спеціальних символів за їхнім шістнадцятковим кодом",
+        "Description[x-test]": "xxCreates special characters from their hexadecimal codesxx",
         "EnabledByDefault": true,
         "Icon": "accessories-character-map",
         "Id": "CharacterRunner",
         "License": "GPL",
-        "Name": "Special Characters"
+        "Name": "Special Characters",
+        "Name[az]": "Xüsusi simvollar",
+        "Name[ca]": "Caràcters especials",
+        "Name[es]": "Caracteres especiales",
+        "Name[nl]": "Speciale tekens",
+        "Name[pt_BR]": "Caracteres especiais",
+        "Name[sv]": "Specialtecken",
+        "Name[uk]": "Спеціальні символи",
+        "Name[x-test]": "xxSpecial Charactersxx"
     }
 }

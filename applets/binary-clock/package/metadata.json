@@ -3,16 +3,40 @@
         "Authors": [
             {
                 "Email": "jowenn@kde.org, davide.bettio@kdemail.net, piotrkakol@protonmail.com",
-                "Name": "Joseph Wenninger,Davide Bettio,Piotr Kąkol"
+                "Name": "Joseph Wenninger,Davide Bettio,Piotr Kąkol",
+                "Name[az]": "Joseph Wenninger,Davide Bettio,Piotr Kąkol",
+                "Name[ca]": "Joseph Wenninger,Davide Bettio,Piotr Kąkol",
+                "Name[es]": "Joseph Wenninger, Davide Bettio, Piotr Kąkol",
+                "Name[nl]": "Joseph Wenninger,Davide Bettio,Piotr Kąkol",
+                "Name[pt_BR]": "Joseph Wenninger, Davide Bettio, Piotr Kąkol",
+                "Name[sv]": "Joseph Wenninger,Davide Bettio,Piotr Kąkol",
+                "Name[uk]": "Joseph Wenninger,Davide Bettio,Piotr Kąkol",
+                "Name[x-test]": "xxJoseph Wenninger,Davide Bettio,Piotr Kąkolxx"
             }
         ],
         "Category": "Date and Time",
         "Description": "Time displayed in binary format",
+        "Description[az]": "Vaxt, binar formatında göstərilir",
+        "Description[ca]": "Mostra l'hora en format binari",
+        "Description[es]": "Hora mostrada en formato binario",
+        "Description[nl]": "De tijd in binair formaat",
+        "Description[pt_BR]": "Hora exibida em formato binário",
+        "Description[sv]": "Tid visad med binärformat",
+        "Description[uk]": "Час, показаний у двійковому форматі",
+        "Description[x-test]": "xxTime displayed in binary formatxx",
         "EnabledByDefault": true,
         "Icon": "clock",
         "Id": "org.kde.plasma.binaryclock",
         "License": "GPL-2.0+",
         "Name": "Binary Clock",
+        "Name[az]": "Binar saat",
+        "Name[ca]": "Rellotge binari",
+        "Name[es]": "Reloj binario",
+        "Name[nl]": "Binaire klok",
+        "Name[pt_BR]": "Relógio binário",
+        "Name[sv]": "Binärklocka",
+        "Name[uk]": "Двійковий годинник",
+        "Name[x-test]": "xxBinary Clockxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

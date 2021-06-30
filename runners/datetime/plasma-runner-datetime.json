@@ -3,14 +3,38 @@
         "Authors": [
             {
                 "Email": "plasma-devel@kde.org",
-                "Name": "Plasma Team"
+                "Name": "Plasma Team",
+                "Name[az]": "Plasma komandası",
+                "Name[ca]": "L'equip del Plasma",
+                "Name[es]": "Equipo de Plasma",
+                "Name[nl]": "Team van Plasma",
+                "Name[pt_BR]": "Equipe do Plasma",
+                "Name[sv]": "Plasma-gruppen",
+                "Name[uk]": "Команда розробників Плазми",
+                "Name[x-test]": "xxPlasma Teamxx"
             }
         ],
         "Description": "The current date and time, locally or in any timezone",
+        "Description[az]": "Cari tarix və vaxt. Yerli və ya istənilən vaxt qurşağı",
+        "Description[ca]": "La data i l'hora actuals, localment o en qualsevol zona horària",
+        "Description[es]": "La fecha y hora actuales, locales o de cualquier zona horaria",
+        "Description[nl]": "De huidige datum en tijd, lokaal of in elke tijdzone",
+        "Description[pt_BR]": "A data e a hora atual, local ou em qualquer fuso horário",
+        "Description[sv]": "Nuvarande datum och tid, lokalt eller i godtycklig tidszon",
+        "Description[uk]": "Поточна дата і час, місцевий або час будь-якого часового поясу",
+        "Description[x-test]": "xxThe current date and time, locally or in any timezonexx",
         "EnabledByDefault": true,
         "Icon": "clock",
         "Id": "org.kde.datetime",
         "License": "LGPL",
-        "Name": "Date and Time"
+        "Name": "Date and Time",
+        "Name[az]": "Tarix və Vaxt",
+        "Name[ca]": "Data i hora",
+        "Name[es]": "Fecha y hora",
+        "Name[nl]": "Datum en tijd",
+        "Name[pt_BR]": "Data e hora",
+        "Name[sv]": "Datum och tid",
+        "Name[uk]": "Дата і час",
+        "Name[x-test]": "xxDate and Timexx"
     }
 }

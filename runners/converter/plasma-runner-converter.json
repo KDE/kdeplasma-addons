@@ -3,14 +3,38 @@
         "Authors": [
             {
                 "Email": "damu@iki.fi",
-                "Name": "Petri Damstén"
+                "Name": "Petri Damstén",
+                "Name[az]": "Petri Damstén",
+                "Name[ca]": "Petri Damstén",
+                "Name[es]": "Petri Damstén",
+                "Name[nl]": "Petri Damstén",
+                "Name[pt_BR]": "Petri Damstén",
+                "Name[sv]": "Petri Damstén",
+                "Name[uk]": "Petri Damstén",
+                "Name[x-test]": "xxPetri Damsténxx"
             }
         ],
         "Description": "Convert values to different units",
+        "Description[az]": "Dəyərləri fərqli vahidlərə çevirir",
+        "Description[ca]": "Converteix valors a diferents unitats",
+        "Description[es]": "Convierte valores a distintas unidades",
+        "Description[nl]": "Converteert waarden naar verschillende eenheden",
+        "Description[pt_BR]": "Converte valores para diferentes unidades",
+        "Description[sv]": "Konverterar värden till andra enheter",
+        "Description[uk]": "Перетворення значень у різних одиницях",
+        "Description[x-test]": "xxConvert values to different unitsxx",
         "EnabledByDefault": true,
         "Icon": "accessories-calculator",
         "Id": "unitconverter",
         "License": "GPL",
-        "Name": "Unit Converter"
+        "Name": "Unit Converter",
+        "Name[az]": "Ölçü vahidi çeviricisi",
+        "Name[ca]": "Convertidor d'unitats",
+        "Name[es]": "Conversor de unidades",
+        "Name[nl]": "Eenheden converteren",
+        "Name[pt_BR]": "Conversor de unidades",
+        "Name[sv]": "Enhetskonvertering",
+        "Name[uk]": "Перетворювач одиниць",
+        "Name[x-test]": "xxUnit Converterxx"
     }
 }

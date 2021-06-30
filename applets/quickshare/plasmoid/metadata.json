@@ -3,11 +3,27 @@
         "Authors": [
             {
                 "Email": "plasma-devel@kde.org",
-                "Name": "The Plasma Team"
+                "Name": "The Plasma Team",
+                "Name[az]": "Plasma komandası",
+                "Name[ca]": "L'equip del Plasma",
+                "Name[es]": "El equipo de Plasma",
+                "Name[nl]": "Het team van Plasma",
+                "Name[pt_BR]": "A equipe do Plasma",
+                "Name[sv]": "Plasma-gruppen",
+                "Name[uk]": "Команда розробників Плазми",
+                "Name[x-test]": "xxThe Plasma Teamxx"
             }
         ],
         "Category": "Online Services",
         "Description": "Paste text/images to a remote server",
+        "Description[az]": "Uzaq serverə mətni/şəkli yerləşdirmək",
+        "Description[ca]": "Enganxa text/imatges en un servidor remot",
+        "Description[es]": "Pegar texto/imágenes en un servidor remoto",
+        "Description[nl]": "Tekst/afbeeldingen plakken op een externe server",
+        "Description[pt_BR]": "Cola textos e imagens em um servidor remoto",
+        "Description[sv]": "Klistra in text eller bilder på en fjärrserver",
+        "Description[uk]": "Викласти текст/зображення на віддалений сервер",
+        "Description[x-test]": "xxPaste text/images to a remote serverxx",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop",
@@ -17,6 +33,14 @@
         "Id": "org.kde.plasma.quickshare",
         "License": "GPL-2.0+",
         "Name": "Quick Share",
+        "Name[az]": "Sürətli paylaşmaq",
+        "Name[ca]": "Comparteix ràpid",
+        "Name[es]": "Compartir rápidamente",
+        "Name[nl]": "Snel Share maken",
+        "Name[pt_BR]": "Compartilhamento rápido",
+        "Name[sv]": "Snabbdelning",
+        "Name[uk]": "Швидке оприлюднення",
+        "Name[x-test]": "xxQuick Sharexx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

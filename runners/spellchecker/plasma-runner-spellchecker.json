@@ -3,14 +3,38 @@
         "Authors": [
             {
                 "Email": "ryan.bitanga@gmail.com",
-                "Name": "Ryan P. Bitanga"
+                "Name": "Ryan P. Bitanga",
+                "Name[az]": "Ryan P. Bitanga",
+                "Name[ca]": "Ryan P. Bitanga",
+                "Name[es]": "Ryan P. Bitanga",
+                "Name[nl]": "Ryan P. Bitanga",
+                "Name[pt_BR]": "Ryan P. Bitanga",
+                "Name[sv]": "Ryan P. Bitanga",
+                "Name[uk]": "Ryan P. Bitanga",
+                "Name[x-test]": "xxRyan P. Bitangaxx"
             }
         ],
         "Description": "Check the spelling of a word",
+        "Description[az]": "Sözlərin düzgün yazılışının yoxlanılması",
+        "Description[ca]": "Comprova l'ortografia d'una paraula",
+        "Description[es]": "Comprobar la ortografía de una palabra",
+        "Description[nl]": "Controleer de spelling van een woord",
+        "Description[pt_BR]": "Verifica a ortografia de uma palavra",
+        "Description[sv]": "Kontrollera stavning av ett ord",
+        "Description[uk]": "Перевірте правопис слова",
+        "Description[x-test]": "xxCheck the spelling of a wordxx",
         "EnabledByDefault": true,
         "Icon": "tools-check-spelling",
         "Id": "Spell Checker",
         "License": "GPL",
-        "Name": "Spell Checker"
+        "Name": "Spell Checker",
+        "Name[az]": "Orfoqrafiya yoxlaması",
+        "Name[ca]": "Corrector ortogràfic",
+        "Name[es]": "Comprobación ortográfica",
+        "Name[nl]": "Spellingcontrole",
+        "Name[pt_BR]": "Verificador ortográfico",
+        "Name[sv]": "Stavningskontroll",
+        "Name[uk]": "Перевірка правопису",
+        "Name[x-test]": "xxSpell Checkerxx"
     }
 }

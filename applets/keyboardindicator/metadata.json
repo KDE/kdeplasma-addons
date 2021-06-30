@@ -3,15 +3,39 @@
         "Authors": [
             {
                 "Email": "aleixpol@kde.org",
-                "Name": "Aleix Pol Gonzalez"
+                "Name": "Aleix Pol Gonzalez",
+                "Name[az]": "Aleix Pol Gonzalez",
+                "Name[ca]": "Aleix Pol Gonzalez",
+                "Name[es]": "Aleix Pol Gonzalez",
+                "Name[nl]": "Aleix Pol Gonzalez",
+                "Name[pt_BR]": "Aleix Pol Gonzalez",
+                "Name[sv]": "Aleix Pol Gonzalez",
+                "Name[uk]": "Aleix Pol Gonzalez",
+                "Name[x-test]": "xxAleix Pol Gonzalezxx"
             }
         ],
         "Description": "Shows whether Caps Lock or Num Lock are active",
+        "Description[az]": "Caps Lock və ya Num Lock'un aktivliyini göstərir",
+        "Description[ca]": "Mostra si està actiu el bloqueig de «Bloq Maj» o «Bloq Núm»",
+        "Description[es]": "Muestra si BloqNum o BloqMayúsculas están activadas",
+        "Description[nl]": "Toont of Caps Lock of Num Lock actief zijn",
+        "Description[pt_BR]": "Mostra quando o Caps Lock ou Num Lock estão ativos",
+        "Description[sv]": "Visar om Caps Lock eller Num Lock är aktiva",
+        "Description[uk]": "Показує, чи задіяно Caps Lock або Num Lock",
+        "Description[x-test]": "xxShows whether Caps Lock or Num Lock are activexx",
         "EnabledByDefault": true,
         "Icon": "input-keyboard",
         "Id": "org.kde.plasma.keyboardindicator",
         "License": "GPL-2.0+",
         "Name": "Lock Keys Status",
+        "Name[az]": "Düymələrin vəziyyətini kilidləyin",
+        "Name[ca]": "Estat de les tecles de bloqueig",
+        "Name[es]": "Estado de las teclas de bloqueo",
+        "Name[nl]": "Status van vergrendeltoetsen",
+        "Name[pt_BR]": "Status das teclas de bloqueio",
+        "Name[sv]": "Status för låstangenter",
+        "Name[uk]": "Стан клавіш блокування",
+        "Name[x-test]": "xxLock Keys Statusxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

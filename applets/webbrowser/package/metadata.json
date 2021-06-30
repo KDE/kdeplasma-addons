@@ -3,15 +3,39 @@
         "Authors": [
             {
                 "Email": "ematirov@gmail.com",
-                "Name": "Mikhail Ivchenko"
+                "Name": "Mikhail Ivchenko",
+                "Name[az]": "Mikhail Ivchenko",
+                "Name[ca]": "Mikhail Ivchenko",
+                "Name[es]": "Mikhail Ivchenko",
+                "Name[nl]": "Mikhail Ivchenko",
+                "Name[pt_BR]": "Mikhail Ivchenko",
+                "Name[sv]": "Mikhail Ivchenko",
+                "Name[uk]": "Михайло Івченко",
+                "Name[x-test]": "xxMikhail Ivchenkoxx"
             }
         ],
         "Category": "Online Services",
         "Description": "Add a webpage on your desktop.",
+        "Description[az]": "Veb səhifəni İş Masanızda göstərir",
+        "Description[ca]": "Afegeix una pàgina web a l'escriptori.",
+        "Description[es]": "Añadir una página web al escritorio.",
+        "Description[nl]": "Een webpagina toevoegen aan uw bureaublad.",
+        "Description[pt_BR]": "Adiciona um site na sua área de trabalho.",
+        "Description[sv]": "Lägg till en webbsida på skrivbordet.",
+        "Description[uk]": "Додати сторінку інтернету на вашу стільницю.",
+        "Description[x-test]": "xxAdd a webpage on your desktop.xx",
         "Icon": "applications-internet",
         "Id": "org.kde.plasma.webbrowser",
         "License": "GPL-2.0+",
         "Name": "Web browser",
+        "Name[az]": "Veb Bələdçi",
+        "Name[ca]": "Navegador web",
+        "Name[es]": "Navegador web",
+        "Name[nl]": "Webbrowser",
+        "Name[pt_BR]": "Navegador",
+        "Name[sv]": "Webbläsare",
+        "Name[uk]": "Переглядач інтернету",
+        "Name[x-test]": "xxWeb browserxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

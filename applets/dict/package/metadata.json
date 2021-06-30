@@ -3,16 +3,40 @@
         "Authors": [
             {
                 "Email": "plasma-devel@kde.org",
-                "Name": "The Plasma Team"
+                "Name": "The Plasma Team",
+                "Name[az]": "Plasma komandası",
+                "Name[ca]": "L'equip del Plasma",
+                "Name[es]": "El equipo de Plasma",
+                "Name[nl]": "Het team van Plasma",
+                "Name[pt_BR]": "A equipe do Plasma",
+                "Name[sv]": "Plasma-gruppen",
+                "Name[uk]": "Команда розробників Плазми",
+                "Name[x-test]": "xxThe Plasma Teamxx"
             }
         ],
         "Category": "Language",
         "Description": "Look up the meaning of words and their translation into different languages",
+        "Description[az]": "Müxtəlif dillərdə sözlərin izahına və tərcüməsinə baxın",
+        "Description[ca]": "Cerca el significat de paraules i la seva traducció en diferents idiomes",
+        "Description[es]": "Buscar el significado de palabras y su traducción a otros idiomas",
+        "Description[nl]": "Zoek de betekenis van woorden en hun vertaling in verschillende talen op",
+        "Description[pt_BR]": "Procura o significado de palavras e a tradução para vários idiomas",
+        "Description[sv]": "Slå upp betydelsen hos ord och deras översättning till olika språk",
+        "Description[uk]": "Погляньте на значення слів та на їхній переклад іншими мовами",
+        "Description[x-test]": "xxLook up the meaning of words and their translation into different languagesxx",
         "EnabledByDefault": true,
         "Icon": "accessories-dictionary",
         "Id": "org.kde.plasma_applet_dict",
         "License": "GPL-2.0+",
         "Name": "Dictionary",
+        "Name[az]": "Lüğət",
+        "Name[ca]": "Diccionari",
+        "Name[es]": "Diccionario",
+        "Name[nl]": "Woordenboek",
+        "Name[pt_BR]": "Dicionário",
+        "Name[sv]": "Ordlista",
+        "Name[uk]": "Словник",
+        "Name[x-test]": "xxDictionaryxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

@@ -3,11 +3,27 @@
         "Authors": [
             {
                 "Email": "kde@privat.broulik.de",
-                "Name": "Kai Uwe Broulik"
+                "Name": "Kai Uwe Broulik",
+                "Name[az]": "Kai Uwe Broulik",
+                "Name[ca]": "Kai Uwe Broulik",
+                "Name[es]": "Kai Uwe Broulik",
+                "Name[nl]": "Kai Uwe Broulik",
+                "Name[pt_BR]": "Kai Uwe Broulik",
+                "Name[sv]": "Kai Uwe Broulik",
+                "Name[uk]": "Kai Uwe Broulik",
+                "Name[x-test]": "xxKai Uwe Broulikxx"
             }
         ],
         "Category": "Graphics",
         "Description": "Pick a color from the desktop",
+        "Description[az]": "Rəngi İş Masasından seçin",
+        "Description[ca]": "Selecciona un color de l'escriptori",
+        "Description[es]": "Seleccionar un color del escritorio",
+        "Description[nl]": "Kies een kleur van het bureaublad",
+        "Description[pt_BR]": "Escolha uma cor na área de trabalho",
+        "Description[sv]": "Hämta en färg från skrivbordet",
+        "Description[uk]": "Вибір кольору зі стільниці",
+        "Description[x-test]": "xxPick a color from the desktopxx",
         "FormFactors": [
             "desktop"
         ],
@@ -15,6 +31,14 @@
         "Id": "org.kde.plasma.colorpicker",
         "License": "GPL-2.0+",
         "Name": "Color Picker",
+        "Name[az]": "Rəng seçici",
+        "Name[ca]": "Selector de color",
+        "Name[es]": "Selector de color",
+        "Name[nl]": "Kleurenkiezer",
+        "Name[pt_BR]": "Seletor de cores",
+        "Name[sv]": "Färgväljare",
+        "Name[uk]": "Піпетка",
+        "Name[x-test]": "xxColor Pickerxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

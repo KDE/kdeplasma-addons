@@ -3,16 +3,40 @@
         "Authors": [
             {
                 "Email": "shaun.reich@kdemail.net",
-                "Name": "Shaun Reich"
+                "Name": "Shaun Reich",
+                "Name[az]": "Shaun Reich",
+                "Name[ca]": "Shaun Reich",
+                "Name[es]": "Shaun Reich",
+                "Name[nl]": "Shaun Reich",
+                "Name[pt_BR]": "Shaun Reich",
+                "Name[sv]": "Shaun Reich",
+                "Name[uk]": "Shaun Reich",
+                "Name[x-test]": "xxShaun Reichxx"
             }
         ],
         "Category": "Utiltities",
         "Description": "List and launch Konsole profiles",
+        "Description[az]": "Konsol profillərini sıralamaq və başlatmaq",
+        "Description[ca]": "Llista i llança els perfils del Konsole",
+        "Description[es]": "Listar y lanzar perfiles de Konsole",
+        "Description[nl]": "Toon en start Konsole-profielen",
+        "Description[pt_BR]": "Lista e carrega os perfis do Konsole",
+        "Description[sv]": "Lista och starta terminalprofiler",
+        "Description[uk]": "Перегляньте і запустіть профілі Konsole",
+        "Description[x-test]": "xxList and launch Konsole profilesxx",
         "EnabledByDefault": true,
         "Icon": "utilities-terminal",
         "Id": "org.kde.konsoleprofiles",
         "License": "GPL-2.0+",
         "Name": "Konsole Profiles",
+        "Name[az]": "Konsol profilləri",
+        "Name[ca]": "Perfils del Konsole",
+        "Name[es]": "Perfiles de Konsole",
+        "Name[nl]": "Konsole-profielen",
+        "Name[pt_BR]": "Perfis do Konsole",
+        "Name[sv]": "Terminalprofiler",
+        "Name[uk]": "Профілі Konsole",
+        "Name[x-test]": "xxKonsole Profilesxx",
         "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop/"
     }

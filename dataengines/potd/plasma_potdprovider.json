@@ -1,5 +1,13 @@
 {
     "KPlugin": {
-        "Description": "Plugin for Plasma PoTD Engine"
+        "Description": "Plugin for Plasma PoTD Engine",
+        "Description[az]": "Plasma Comic mühərriki üçün qoşma",
+        "Description[ca]": "Connector per al motor PoTD del Plasma",
+        "Description[es]": "Complemento para el motor de imagen del día de Plasma",
+        "Description[nl]": "Plug-in voor Plasma-PoTD-engine",
+        "Description[pt_BR]": "Plugin para o mecanismo PoTD do Plasma",
+        "Description[sv]": "Insticksprogram för Plasma gränssnitt till dagens bild",
+        "Description[uk]": "Додаток для рушія Плазми PoTD",
+        "Description[x-test]": "xxPlugin for Plasma PoTD Enginexx"
     }
 }

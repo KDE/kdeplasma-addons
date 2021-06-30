@@ -3,16 +3,40 @@
         "Authors": [
             {
                 "Email": "bettio@kde.org, lukas.krop@gmail.com",
-                "Name": "Davide Bettio, Lukas Kropatschek"
+                "Name": "Davide Bettio, Lukas Kropatschek",
+                "Name[az]": "Davide Bettio, Lukas Kropatschek",
+                "Name[ca]": "Davide Bettio, Lukas Kropatschek",
+                "Name[es]": "Davide Bettio, Lukas Kropatschek",
+                "Name[nl]": "Davide Bettio, Lukas Kropatschek",
+                "Name[pt_BR]": "Davide Bettio, Lukas Kropatschek",
+                "Name[sv]": "Davide Bettio, Lukas Kropatschek",
+                "Name[uk]": "Davide Bettio, Lukas Kropatschek",
+                "Name[x-test]": "xxDavide Bettio, Lukas Kropatschekxx"
             }
         ],
         "Category": "Utilities",
         "Description": "Desktop sticky note",
+        "Description[az]": "İş Masası qeyd vərəqi",
+        "Description[ca]": "Nota adhesiva per a l'escriptori",
+        "Description[es]": "Nota adhesiva del escritorio",
+        "Description[nl]": "Plaknotitie op het bureaublad",
+        "Description[pt_BR]": "Nota adesiva na área de trabalho",
+        "Description[sv]": "Klisterlapp med meddelande för skrivbordet",
+        "Description[uk]": "Стільничні липкі нотатки",
+        "Description[x-test]": "xxDesktop sticky notexx",
         "EnabledByDefault": true,
         "Icon": "knotes",
         "Id": "org.kde.plasma.notes",
         "License": "GPL-2.0+",
         "Name": "Sticky Note",
+        "Name[az]": "Qeyd vərəqi",
+        "Name[ca]": "Nota adhesiva",
+        "Name[es]": "Notas adhesivas",
+        "Name[nl]": "Plaknotitie",
+        "Name[pt_BR]": "Nota adesiva",
+        "Name[sv]": "Klisterlapp",
+        "Name[uk]": "Липка нотатка",
+        "Name[x-test]": "xxSticky Notexx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

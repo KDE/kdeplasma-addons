@@ -3,11 +3,27 @@
         "Authors": [
             {
                 "Email": "nowrep@gmail.com",
-                "Name": "David Rosca"
+                "Name": "David Rosca",
+                "Name[az]": "David Rosca",
+                "Name[ca]": "David Rosca",
+                "Name[es]": "David Rosca",
+                "Name[nl]": "David Rosca",
+                "Name[pt_BR]": "David Rosca",
+                "Name[sv]": "David Rosca",
+                "Name[uk]": "David Rosca",
+                "Name[x-test]": "xxDavid Roscaxx"
             }
         ],
         "Category": "Application Launchers",
         "Description": "Launch your favourite Applications",
+        "Description[az]": "Seçilmiş tətbiqlərinizi başladın",
+        "Description[ca]": "Llança les vostres aplicacions preferides",
+        "Description[es]": "Lanzar sus aplicaciones favoritas",
+        "Description[nl]": "Uw favoriete programma's starten",
+        "Description[pt_BR]": "Executa seus aplicativos favoritos",
+        "Description[sv]": "Start dina favoritprogram",
+        "Description[uk]": "Запуск ваших улюблених програм",
+        "Description[x-test]": "xxLaunch your favourite Applicationsxx",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
@@ -16,6 +32,14 @@
         "Id": "org.kde.plasma.quicklaunch",
         "License": "GPL-2.0+",
         "Name": "Quicklaunch",
+        "Name[az]": "Sürətli başlatmaq",
+        "Name[ca]": "Quicklaunch",
+        "Name[es]": "Lanzamiento rápido",
+        "Name[nl]": "Snelstarten",
+        "Name[pt_BR]": "Lançamento rápido",
+        "Name[sv]": "Snabbstart",
+        "Name[uk]": "Швидкий запуск",
+        "Name[x-test]": "xxQuicklaunchxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

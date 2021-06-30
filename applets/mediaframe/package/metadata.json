@@ -3,16 +3,40 @@
         "Authors": [
             {
                 "Email": "dev.larpon@gmail.com",
-                "Name": "Lars Pontoppidan"
+                "Name": "Lars Pontoppidan",
+                "Name[az]": "Lars Pontoppidan",
+                "Name[ca]": "Lars Pontoppidan",
+                "Name[es]": "Lars Pontoppidan",
+                "Name[nl]": "Lars Pontoppidan",
+                "Name[pt_BR]": "Lars Pontoppidan",
+                "Name[sv]": "Lars Pontoppidan",
+                "Name[uk]": "Lars Pontoppidan",
+                "Name[x-test]": "xxLars Pontoppidanxx"
             }
         ],
         "Category": "Utilities",
         "Description": "(Picture) Frame",
+        "Description[az]": "(Şəkil) Çərçivə",
+        "Description[ca]": "Marc (fotografies)",
+        "Description[es]": "Marco (de imagen)",
+        "Description[nl]": "(Afbeelding) frame",
+        "Description[pt_BR]": "Quadro (Imagens)",
+        "Description[sv]": "Bildram",
+        "Description[uk]": "(Картинна) рамка",
+        "Description[x-test]": "xx(Picture) Framexx",
         "EnabledByDefault": true,
         "Icon": "image-x-generic",
         "Id": "org.kde.plasma.mediaframe",
         "License": "GPL-2.0+",
         "Name": "Media Frame",
+        "Name[az]": "Fotoçərçivə",
+        "Name[ca]": "Marc multimèdia",
+        "Name[es]": "Marco multimedia",
+        "Name[nl]": "Mediaframe",
+        "Name[pt_BR]": "Quadro multimídia",
+        "Name[sv]": "Mediaram",
+        "Name[uk]": "Медіарамка",
+        "Name[x-test]": "xxMedia Framexx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

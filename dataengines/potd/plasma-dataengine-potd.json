@@ -8,8 +8,24 @@
         ],
         "Category": "",
         "Description": "Data Engine for getting various online Pictures of The Day.",
+        "Description[az]": "İnternetdən günün müxtəlif şəkillərini almaq üçün vasitə",
+        "Description[ca]": "Motor de dades per a accedir a diverses «imatges del dia» en línia.",
+        "Description[es]": "Motor de datos para obtener diversas imágenes del día en línea.",
+        "Description[nl]": "Gegevensengine voor het verkrijgen van online afbeeldingen-van-de-dag.",
+        "Description[pt_BR]": "Mecanismo de dados para obter várias imagens do dia online.",
+        "Description[sv]": "Datagränssnitt för att hämta diverse dagens bilder från nätet.",
+        "Description[uk]": "Рушій даних для отримання різноманітних мережевих «Зображень дня»",
+        "Description[x-test]": "xxData Engine for getting various online Pictures of The Day.xx",
         "Icon": "image-jpeg2000",
         "Id": "potd",
-        "Name": "Picture of the Day"
+        "Name": "Picture of the Day",
+        "Name[az]": "Günün şəkli",
+        "Name[ca]": "Imatge del dia",
+        "Name[es]": "Imagen del día",
+        "Name[nl]": "Afbeelding van de dag",
+        "Name[pt_BR]": "Imagem do dia",
+        "Name[sv]": "Dagens bild",
+        "Name[uk]": "Картинка дня",
+        "Name[x-test]": "xxPicture of the Dayxx"
     }
 }

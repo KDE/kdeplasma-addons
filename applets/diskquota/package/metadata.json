@@ -3,16 +3,40 @@
         "Authors": [
             {
                 "Email": "dhaumann@kde.org",
-                "Name": "Dominik Haumann"
+                "Name": "Dominik Haumann",
+                "Name[az]": "Dominik Haumann",
+                "Name[ca]": "Dominik Haumann",
+                "Name[es]": "Dominik Haumann",
+                "Name[nl]": "Dominik Haumann",
+                "Name[pt_BR]": "Dominik Haumann",
+                "Name[sv]": "Dominik Haumann",
+                "Name[uk]": "Dominik Haumann",
+                "Name[x-test]": "xxDominik Haumannxx"
             }
         ],
         "Category": "Utilities",
         "Description": "Shows details about disk quota",
+        "Description[az]": "Disk kvotası təfərrüatlarını göstərir",
+        "Description[ca]": "Mostra els detalls de la quota de disc",
+        "Description[es]": "Muestra detalles sobre la cuota de disco",
+        "Description[nl]": "Toont details van schijfquota",
+        "Description[pt_BR]": "Mostra detalhes sobre a quota do disco",
+        "Description[sv]": "Visar information om diskkvot",
+        "Description[uk]": "Показати дані щодо квот на диску",
+        "Description[x-test]": "xxShows details about disk quotaxx",
         "EnabledByDefault": false,
         "Icon": "disk-quota",
         "Id": "org.kde.plasma.diskquota",
         "License": "LGPL",
         "Name": "Disk Quota",
+        "Name[az]": "Disk kvotası",
+        "Name[ca]": "Quota de disc",
+        "Name[es]": "Cuota de disco",
+        "Name[nl]": "Schijfquota",
+        "Name[pt_BR]": "Quota de disco",
+        "Name[sv]": "Diskkvot",
+        "Name[uk]": "Квота на диску",
+        "Name[x-test]": "xxDisk Quotaxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],
