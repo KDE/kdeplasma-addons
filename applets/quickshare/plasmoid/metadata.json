@@ -9,11 +9,13 @@
                 "Name[cs]": "Team Plasma",
                 "Name[es]": "El equipo de Plasma",
                 "Name[fr]": "L'équipe de Plasma",
+                "Name[it]": "La squadra di Plasma",
                 "Name[nl]": "Het team van Plasma",
                 "Name[pt]": "A Equipa do Plasma",
                 "Name[pt_BR]": "A equipe do Plasma",
                 "Name[sv]": "Plasma-gruppen",
                 "Name[uk]": "Команда розробників Плазми",
+                "Name[vi]": "Đội ngũ Plasma",
                 "Name[x-test]": "xxThe Plasma Teamxx"
             }
         ],
@@ -24,11 +26,13 @@
         "Description[cs]": "Vložit text/obrázky na vzdálený server",
         "Description[es]": "Pegar texto/imágenes en un servidor remoto",
         "Description[fr]": "Coller du texte ou des images vers un serveur distant",
+        "Description[it]": "Incolla testo/immagini su un server remoto",
         "Description[nl]": "Tekst/afbeeldingen plakken op een externe server",
         "Description[pt]": "Colar texto/imagens num servidor remoto",
         "Description[pt_BR]": "Cola textos e imagens em um servidor remoto",
         "Description[sv]": "Klistra in text eller bilder på en fjärrserver",
         "Description[uk]": "Викласти текст/зображення на віддалений сервер",
+        "Description[vi]": "Dán chữ/ảnh vào một máy chủ ở xa",
         "Description[x-test]": "xxPaste text/images to a remote serverxx",
         "EnabledByDefault": true,
         "FormFactors": [
@@ -44,11 +48,13 @@
         "Name[cs]": "Rychlé sdílení",
         "Name[es]": "Compartir rápidamente",
         "Name[fr]": "Partage rapide",
+        "Name[it]": "Condivisione rapida",
         "Name[nl]": "Snel Share maken",
         "Name[pt]": "Partilha Rápida",
         "Name[pt_BR]": "Compartilhamento rápido",
         "Name[sv]": "Snabbdelning",
         "Name[uk]": "Швидке оприлюднення",
+        "Name[vi]": "Chia sẻ nhanh",
         "Name[x-test]": "xxQuick Sharexx",
         "ServiceTypes": [
             "Plasma/Applet"

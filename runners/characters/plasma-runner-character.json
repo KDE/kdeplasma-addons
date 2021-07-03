@@ -9,11 +9,13 @@
                 "Name[cs]": "Anton Kreuzkamp",
                 "Name[es]": "Anton Kreuzkamp",
                 "Name[fr]": "Anton Kreuzkamp",
+                "Name[it]": "Anton Kreuzkamp",
                 "Name[nl]": "Anton Kreuzkamp",
                 "Name[pt]": "Anton Kreuzkamp",
                 "Name[pt_BR]": "Anton Kreuzkamp",
                 "Name[sv]": "Anton Kreuzkamp",
                 "Name[uk]": "Anton Kreuzkamp",
+                "Name[vi]": "Anton Kreuzkamp",
                 "Name[x-test]": "xxAnton Kreuzkampxx"
             }
         ],
@@ -23,11 +25,13 @@
         "Description[cs]": "Vytváří speciální znaky z jejich hexadecimálních kódů",
         "Description[es]": "Crea caracteres especiales a partir de sus códigos en hexadecimal",
         "Description[fr]": "Crée des caractères spéciaux à partir de leurs codes hexadécimaux.",
+        "Description[it]": "Crea caratteri speciali dal loro codice esadecimale",
         "Description[nl]": "Maakt speciale tekens aan uit hun hexadecimale codes",
         "Description[pt]": "Cria caracteres especiais a partir dos seus códigos em hexadecimal",
         "Description[pt_BR]": "Cria caracteres especiais de seus códigos hexadecimais",
         "Description[sv]": "Skapar specialtecken från deras hexadecimala koder",
         "Description[uk]": "Створення спеціальних символів за їхнім шістнадцятковим кодом",
+        "Description[vi]": "Tạo ra các kí tự đặc biệt từ mã thập lục phân",
         "Description[x-test]": "xxCreates special characters from their hexadecimal codesxx",
         "EnabledByDefault": true,
         "Icon": "accessories-character-map",
@@ -39,11 +43,13 @@
         "Name[cs]": "Zvláštní znaky",
         "Name[es]": "Caracteres especiales",
         "Name[fr]": "Caractères spéciaux",
+        "Name[it]": "Caratteri speciali",
         "Name[nl]": "Speciale tekens",
         "Name[pt]": "Caracteres Especiais",
         "Name[pt_BR]": "Caracteres especiais",
         "Name[sv]": "Specialtecken",
         "Name[uk]": "Спеціальні символи",
+        "Name[vi]": "Kí tự đặc biệt",
         "Name[x-test]": "xxSpecial Charactersxx"
     }
 }

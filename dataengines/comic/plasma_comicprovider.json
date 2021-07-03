@@ -6,11 +6,13 @@
         "Description[cs]": "Modul pro Plasma komiksy",
         "Description[es]": "Complemento para el motor de cómics de Plasma",
         "Description[fr]": "Module externe pour le moteur « Comic » de Plasma",
+        "Description[it]": "Estensione per il motore di fumetti di Plasma",
         "Description[nl]": "Plug-in voor Plasma-stripboek-gegevensengine",
         "Description[pt]": "'Plugin' para o Motor de Bandas Desenhadas do Plasma",
         "Description[pt_BR]": "Plugin para o mecanismo das tirinhas do Plasma",
         "Description[sv]": "Insticksprogram för Plasma seriegränssnitt",
         "Description[uk]": "Додаток для джерела жартів Плазми",
+        "Description[vi]": "Phần cài cắm cho \"Dụng cụ truyện tranh Plasma\"",
         "Description[x-test]": "xxPlugin for Plasma Comic Enginexx"
     }
 }

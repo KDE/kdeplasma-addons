@@ -9,11 +9,13 @@
                 "Name[cs]": "David Rosca",
                 "Name[es]": "David Rosca",
                 "Name[fr]": "David Rosca",
+                "Name[it]": "David Rosca",
                 "Name[nl]": "David Rosca",
                 "Name[pt]": "David Rosca",
                 "Name[pt_BR]": "David Rosca",
                 "Name[sv]": "David Rosca",
                 "Name[uk]": "David Rosca",
+                "Name[vi]": "David Rosca",
                 "Name[x-test]": "xxDavid Roscaxx"
             }
         ],
@@ -24,11 +26,13 @@
         "Description[cs]": "Spouštějte své oblíbené aplikace",
         "Description[es]": "Lanzar sus aplicaciones favoritas",
         "Description[fr]": "Lancer vos applications préférées",
+        "Description[it]": "Avvia le tue applicazioni preferite",
         "Description[nl]": "Uw favoriete programma's starten",
         "Description[pt]": "Invocar as suas aplicações favoritas",
         "Description[pt_BR]": "Executa seus aplicativos favoritos",
         "Description[sv]": "Start dina favoritprogram",
         "Description[uk]": "Запуск ваших улюблених програм",
+        "Description[vi]": "Khởi chạy các ứng dụng bạn ưa thích",
         "Description[x-test]": "xxLaunch your favourite Applicationsxx",
         "EnabledByDefault": true,
         "FormFactors": [
@@ -43,11 +47,13 @@
         "Name[cs]": "Rychlé spuštění",
         "Name[es]": "Lanzamiento rápido",
         "Name[fr]": "Lancement rapide",
+        "Name[it]": "Avvio rapido",
         "Name[nl]": "Snelstarten",
         "Name[pt]": "Lançador Rápido",
         "Name[pt_BR]": "Lançamento rápido",
         "Name[sv]": "Snabbstart",
         "Name[uk]": "Швидкий запуск",
+        "Name[vi]": "Khởi chạy nhanh",
         "Name[x-test]": "xxQuicklaunchxx",
         "ServiceTypes": [
             "Plasma/Applet"

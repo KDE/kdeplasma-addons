@@ -9,11 +9,13 @@
                 "Name[cs]": "Team Plasma",
                 "Name[es]": "Equipo de Plasma",
                 "Name[fr]": "Équipe de Plasma",
+                "Name[it]": "La squadra di Plasma",
                 "Name[nl]": "Team van Plasma",
                 "Name[pt]": "Equipa do Plasma",
                 "Name[pt_BR]": "Equipe do Plasma",
                 "Name[sv]": "Plasma-gruppen",
                 "Name[uk]": "Команда розробників Плазми",
+                "Name[vi]": "Đội ngũ Plasma",
                 "Name[x-test]": "xxPlasma Teamxx"
             }
         ],
@@ -23,11 +25,13 @@
         "Description[cs]": "Aktuální datum a čas, lokální, nebo v libovolné časové zóně",
         "Description[es]": "La fecha y hora actuales, locales o de cualquier zona horaria",
         "Description[fr]": "La date et l'heure actuelles, localement ou dans un fuseau horaire quelconque.",
+        "Description[it]": "La data e l'ora corrente, localmente o in qualsiasi fuso orario",
         "Description[nl]": "De huidige datum en tijd, lokaal of in elke tijdzone",
         "Description[pt]": "A data e hora actuais, localmente ou em qualquer fuso-horário",
         "Description[pt_BR]": "A data e a hora atual, local ou em qualquer fuso horário",
         "Description[sv]": "Nuvarande datum och tid, lokalt eller i godtycklig tidszon",
         "Description[uk]": "Поточна дата і час, місцевий або час будь-якого часового поясу",
+        "Description[vi]": "Ngày giờ hiện tại, ở địa phương hoặc bất kì múi giờ nào",
         "Description[x-test]": "xxThe current date and time, locally or in any timezonexx",
         "EnabledByDefault": true,
         "Icon": "clock",
@@ -39,11 +43,13 @@
         "Name[cs]": "Datum a čas",
         "Name[es]": "Fecha y hora",
         "Name[fr]": "Date et heure",
+        "Name[it]": "Data e ora",
         "Name[nl]": "Datum en tijd",
         "Name[pt]": "Data e Hora",
         "Name[pt_BR]": "Data e hora",
         "Name[sv]": "Datum och tid",
         "Name[uk]": "Дата і час",
+        "Name[vi]": "Ngày giờ",
         "Name[x-test]": "xxDate and Timexx"
     }
 }

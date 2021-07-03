@@ -9,11 +9,13 @@
                 "Name[cs]": "Ryan P. Bitanga",
                 "Name[es]": "Ryan P. Bitanga",
                 "Name[fr]": "Ryan P. Bitanga",
+                "Name[it]": "Ryan P. Bitanga",
                 "Name[nl]": "Ryan P. Bitanga",
                 "Name[pt]": "Ryan P. Bitanga",
                 "Name[pt_BR]": "Ryan P. Bitanga",
                 "Name[sv]": "Ryan P. Bitanga",
                 "Name[uk]": "Ryan P. Bitanga",
+                "Name[vi]": "Ryan P. Bitanga",
                 "Name[x-test]": "xxRyan P. Bitangaxx"
             }
         ],
@@ -23,11 +25,13 @@
         "Description[cs]": "Kontrola pravopisu",
         "Description[es]": "Comprobar la ortografía de una palabra",
         "Description[fr]": "Vérifier l'orthographe d'un mot",
+        "Description[it]": "Controlla l'ortografia di una parola",
         "Description[nl]": "Controleer de spelling van een woord",
         "Description[pt]": "Verifica a ortografia de uma palavra",
         "Description[pt_BR]": "Verifica a ortografia de uma palavra",
         "Description[sv]": "Kontrollera stavning av ett ord",
         "Description[uk]": "Перевірте правопис слова",
+        "Description[vi]": "Kiểm tra cách đánh vần của một chữ",
         "Description[x-test]": "xxCheck the spelling of a wordxx",
         "EnabledByDefault": true,
         "Icon": "tools-check-spelling",
@@ -39,11 +43,13 @@
         "Name[cs]": "Kontrola pravopisu",
         "Name[es]": "Comprobación ortográfica",
         "Name[fr]": "Vérificateur orthographique",
+        "Name[it]": "Controllo ortografico",
         "Name[nl]": "Spellingcontrole",
         "Name[pt]": "Verificador Ortográfico",
         "Name[pt_BR]": "Verificador ortográfico",
         "Name[sv]": "Stavningskontroll",
         "Name[uk]": "Перевірка правопису",
+        "Name[vi]": "Trình kiểm tra đánh vần",
         "Name[x-test]": "xxSpell Checkerxx"
     }
 }

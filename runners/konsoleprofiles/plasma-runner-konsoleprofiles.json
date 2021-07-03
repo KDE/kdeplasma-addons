@@ -9,11 +9,13 @@
                 "Name[cs]": "Laurent Montel",
                 "Name[es]": "Laurent Montel",
                 "Name[fr]": "Laurent Montel",
+                "Name[it]": "Laurent Montel",
                 "Name[nl]": "Laurent Montel",
                 "Name[pt]": "Laurent Montel",
                 "Name[pt_BR]": "Laurent Montel",
                 "Name[sv]": "Laurent Montel",
                 "Name[uk]": "Laurent Montel",
+                "Name[vi]": "Laurent Montel",
                 "Name[x-test]": "xxLaurent Montelxx"
             }
         ],
@@ -22,11 +24,13 @@
         "Description[ca]": "Correspon amb perfils del Konsole",
         "Description[es]": "Coincide perfiles de Konsole",
         "Description[fr]": "Correspond aux profils de Konsole",
+        "Description[it]": "Verifica profili di Konsole",
         "Description[nl]": "Komt overeen met Konsole-profielen",
         "Description[pt]": "Correspondência a Perfis do Kate",
         "Description[pt_BR]": "Corresponde aos perfis do Konsole",
         "Description[sv]": "Matchar terminalprofiler",
         "Description[uk]": "Шукає профілі Konsole",
+        "Description[vi]": "Tìm các hồ sơ Konsole",
         "Description[x-test]": "xxMatches Konsole Profilesxx",
         "EnabledByDefault": true,
         "Icon": "utilities-terminal",
@@ -38,11 +42,13 @@
         "Name[cs]": "Profily Konsole",
         "Name[es]": "Perfiles de Konsole",
         "Name[fr]": "Profils de Konsole",
+        "Name[it]": "Profili di Konsole",
         "Name[nl]": "Konsole-profielen",
         "Name[pt]": "Perfis do Konsole",
         "Name[pt_BR]": "Perfis do Konsole",
         "Name[sv]": "Terminalprofiler",
         "Name[uk]": "Профілі Konsole",
+        "Name[vi]": "Hồ sơ Konsole",
         "Name[x-test]": "xxKonsole Profilesxx"
     }
 }

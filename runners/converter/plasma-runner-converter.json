@@ -9,11 +9,13 @@
                 "Name[cs]": "Petri Damstén",
                 "Name[es]": "Petri Damstén",
                 "Name[fr]": "Petri Damstén",
+                "Name[it]": "Petri Damstén",
                 "Name[nl]": "Petri Damstén",
                 "Name[pt]": "Petri Damstén",
                 "Name[pt_BR]": "Petri Damstén",
                 "Name[sv]": "Petri Damstén",
                 "Name[uk]": "Petri Damstén",
+                "Name[vi]": "Petri Damstén",
                 "Name[x-test]": "xxPetri Damsténxx"
             }
         ],
@@ -23,11 +25,13 @@
         "Description[cs]": "Převod jednotek",
         "Description[es]": "Convierte valores a distintas unidades",
         "Description[fr]": "Convertir les valeurs vers des unités différentes",
+        "Description[it]": "Converte valori tra unità di misura differenti",
         "Description[nl]": "Converteert waarden naar verschillende eenheden",
         "Description[pt]": "Converter os valores para diferentes unidades",
         "Description[pt_BR]": "Converte valores para diferentes unidades",
         "Description[sv]": "Konverterar värden till andra enheter",
         "Description[uk]": "Перетворення значень у різних одиницях",
+        "Description[vi]": "Đổi các giá trị sang các đơn vị khác nhau",
         "Description[x-test]": "xxConvert values to different unitsxx",
         "EnabledByDefault": true,
         "Icon": "accessories-calculator",
@@ -39,11 +43,13 @@
         "Name[cs]": "Převod jednotek",
         "Name[es]": "Conversor de unidades",
         "Name[fr]": "Convertisseur d'unités",
+        "Name[it]": "Convertitore di unità",
         "Name[nl]": "Eenheden converteren",
         "Name[pt]": "Conversor de Unidades",
         "Name[pt_BR]": "Conversor de unidades",
         "Name[sv]": "Enhetskonvertering",
         "Name[uk]": "Перетворювач одиниць",
+        "Name[vi]": "Trình đổi đơn vị",
         "Name[x-test]": "xxUnit Converterxx"
     }
 }

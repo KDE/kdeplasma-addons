@@ -9,11 +9,13 @@
                 "Name[cs]": "Jason A. Donenfeld",
                 "Name[es]": "Jason A. Donenfeld",
                 "Name[fr]": "Jason A. Donenfeld",
+                "Name[it]": "Jason A. Donenfeld",
                 "Name[nl]": "Jason A. Donenfeld",
                 "Name[pt]": "Jason A. Donenfeld",
                 "Name[pt_BR]": "Jason A. Donenfeld",
                 "Name[sv]": "Jason A. Donenfeld",
                 "Name[uk]": "Jason A. Donenfeld",
+                "Name[vi]": "Jason A. Donenfeld",
                 "Name[x-test]": "xxJason A. Donenfeldxx"
             }
         ],
@@ -23,11 +25,13 @@
         "Description[cs]": "Definujte slova",
         "Description[es]": "Definir palabras",
         "Description[fr]": "Définir des mots",
+        "Description[it]": "Definizione delle parole",
         "Description[nl]": "Woorden definiëren",
         "Description[pt]": "Definir as palavras",
         "Description[pt_BR]": "Definição de palavras",
         "Description[sv]": "Definiera ord",
         "Description[uk]": "Визначення термінів",
+        "Description[vi]": "Định nghĩa từ",
         "Description[x-test]": "xxDefine wordsxx",
         "EnabledByDefault": true,
         "Icon": "accessories-dictionary",
@@ -39,11 +43,13 @@
         "Name[cs]": "Slovník",
         "Name[es]": "Diccionario",
         "Name[fr]": "Dictionnaire",
+        "Name[it]": "Dizionario",
         "Name[nl]": "Woordenboek",
         "Name[pt]": "Dicionário",
         "Name[pt_BR]": "Dicionário",
         "Name[sv]": "Ordlista",
         "Name[uk]": "Словник",
+        "Name[vi]": "Từ điển",
         "Name[x-test]": "xxDictionaryxx"
     }
 }
