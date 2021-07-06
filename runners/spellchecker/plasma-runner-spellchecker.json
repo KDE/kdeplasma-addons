@@ -21,6 +21,7 @@
             }
         ],
         "Description": "Check the spelling of a word",
+        "Description[ar]": "تحقق من هجاء الكلمات",
         "Description[az]": "Sözlərin düzgün yazılışının yoxlanılması",
         "Description[ca]": "Comprova l'ortografia d'una paraula",
         "Description[cs]": "Kontrola pravopisu",
@@ -40,6 +41,7 @@
         "Id": "Spell Checker",
         "License": "GPL",
         "Name": "Spell Checker",
+        "Name[ar]": "المدقق الإملائي",
         "Name[az]": "Orfoqrafiya yoxlaması",
         "Name[ca]": "Corrector ortogràfic",
         "Name[cs]": "Kontrola pravopisu",

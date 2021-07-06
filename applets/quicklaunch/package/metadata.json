@@ -4,6 +4,7 @@
             {
                 "Email": "nowrep@gmail.com",
                 "Name": "David Rosca",
+                "Name[ar]": "David Rosca",
                 "Name[az]": "David Rosca",
                 "Name[ca]": "David Rosca",
                 "Name[cs]": "David Rosca",
@@ -44,6 +45,7 @@
         "Id": "org.kde.plasma.quicklaunch",
         "License": "GPL-2.0+",
         "Name": "Quicklaunch",
+        "Name[ar]": "الإطلاق السّريع",
         "Name[az]": "Sürətli başlatmaq",
         "Name[ca]": "Quicklaunch",
         "Name[cs]": "Rychlé spuštění",

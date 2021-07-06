@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Small Icons
+Name[ar]=أيقونات صغيرة
 Name[ast]=Iconos pequeños
 Name[az]=Kiçik ikonlar
 Name[ca]=Icones petites
@@ -44,6 +45,7 @@ Name[x-test]=xxSmall Iconsxx
 Name[zh_CN]=小图标
 Name[zh_TW]=小圖示
 Comment=A window switcher layout using small icons to represent the window
+Comment[ar]=مخطط مبدل النوافذ باستخدام أيقونات صغيرة لتمثيل النافذة
 Comment[az]=Pəncərələri kiçik nişanlarla göstərən pəncərə dəyişdiricisi maketi
 Comment[ca]=Una disposició del commutador de finestres que usa icones petites per a representar la finestra
 Comment[ca@valencia]=Una disposició del commutador de finestres que utilitza icones xicotetes per a representar la finestra

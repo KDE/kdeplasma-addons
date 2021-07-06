@@ -21,6 +21,7 @@
             }
         ],
         "Description": "Comic Package Structure",
+        "Description[ar]": "بنية حزمة Comic",
         "Description[az]": "Komikslər paketinin quruluşu",
         "Description[ca]": "Estructura de paquet de còmic",
         "Description[cs]": "Struktura komiksového balíčku",
@@ -39,6 +40,7 @@
         "Id": "Plasma/Comic",
         "License": "GPLv2+",
         "Name": "Comic",
+        "Name[ar]": "Comic",
         "Name[az]": "Komikslər",
         "Name[ca]": "Còmic",
         "Name[cs]": "Komiks",

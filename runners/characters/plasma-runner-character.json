@@ -21,6 +21,7 @@
             }
         ],
         "Description": "Creates special characters from their hexadecimal codes",
+        "Description[ar]": "يُنشئ محارف خاصة لأكوادهم الست-عشريّة",
         "Description[az]": "Onların onaltılıq kodundan xüsusi simvollar yaradır",
         "Description[ca]": "Crea caràcters especials a partir dels seus codis hexadecimals",
         "Description[cs]": "Vytváří speciální znaky z jejich hexadecimálních kódů",
@@ -40,6 +41,7 @@
         "Id": "CharacterRunner",
         "License": "GPL",
         "Name": "Special Characters",
+        "Name[ar]": "محارف خاصة",
         "Name[az]": "Xüsusi simvollar",
         "Name[ca]": "Caràcters especials",
         "Name[cs]": "Zvláštní znaky",

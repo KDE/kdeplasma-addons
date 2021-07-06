@@ -22,6 +22,7 @@
         ],
         "Category": "Online Services",
         "Description": "Paste text/images to a remote server",
+        "Description[ar]": "الصق نص/صور في خادم بعيد",
         "Description[az]": "Uzaq serverə mətni/şəkli yerləşdirmək",
         "Description[ca]": "Enganxa text/imatges en un servidor remot",
         "Description[cs]": "Vložit text/obrázky na vzdálený server",

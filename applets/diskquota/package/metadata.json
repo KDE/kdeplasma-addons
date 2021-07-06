@@ -4,6 +4,7 @@
             {
                 "Email": "dhaumann@kde.org",
                 "Name": "Dominik Haumann",
+                "Name[ar]": "Dominik Haumann",
                 "Name[az]": "Dominik Haumann",
                 "Name[ca]": "Dominik Haumann",
                 "Name[cs]": "Dominik Haumann",
@@ -40,6 +41,7 @@
         "Id": "org.kde.plasma.diskquota",
         "License": "LGPL",
         "Name": "Disk Quota",
+        "Name[ar]": "حصّة القرص",
         "Name[az]": "Disk kvotası",
         "Name[ca]": "Quota de disc",
         "Name[cs]": "Kvóta disku",

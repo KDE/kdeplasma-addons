@@ -39,6 +39,7 @@
         "Id": "org.kde.plasma.webbrowser",
         "License": "GPL-2.0+",
         "Name": "Web browser",
+        "Name[ar]": "متصفّح الوبّ",
         "Name[az]": "Veb Bələdçi",
         "Name[ca]": "Navegador web",
         "Name[cs]": "Webový prohlížeč",

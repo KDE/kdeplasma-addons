@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Large Icons
+Name[ar]=أيقونات كبيرة
 Name[ast]=Iconos grandes
 Name[az]=Geniş nişanlar
 Name[ca]=Icones grans
@@ -44,6 +45,7 @@ Name[x-test]=xxLarge Iconsxx
 Name[zh_CN]=大图标
 Name[zh_TW]=大圖示
 Comment=A window switcher layout using large icons to represent the window
+Comment[ar]=مخطط مبدل النوافذ باستخدام أيقونات كبيرة لتمثيل النافذة
 Comment[az]=Pəncərənin böyük nişanlarını göstərən pəncərə dəyişdiricisi
 Comment[ca]=Una disposició del commutador de finestres que usa icones grans per a representar la finestra
 Comment[ca@valencia]=Una disposició del commutador de finestres que utilitza icones grans per a representar la finestra

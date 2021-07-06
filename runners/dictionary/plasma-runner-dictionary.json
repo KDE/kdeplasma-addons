@@ -21,6 +21,7 @@
             }
         ],
         "Description": "Define words",
+        "Description[ar]": "تعريف الكلمات",
         "Description[az]": "Sözlərin tanınması",
         "Description[ca]": "Defineix mots",
         "Description[cs]": "Definujte slova",
@@ -40,6 +41,7 @@
         "Id": "Dictionary",
         "License": "LGPL",
         "Name": "Dictionary",
+        "Name[ar]": "قاموس",
         "Name[az]": "Lüğət",
         "Name[ca]": "Diccionari",
         "Name[cs]": "Slovník",

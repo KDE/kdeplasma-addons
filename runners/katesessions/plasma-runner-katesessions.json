@@ -21,6 +21,7 @@
             }
         ],
         "Description": "Matches Kate Sessions",
+        "Description[ar]": "تطابق جلسات كيت",
         "Description[az]": "Kate sessiyalarına uyğun",
         "Description[ca]": "Correspon amb sessions del Kate",
         "Description[cs]": "Vyhledávání v sezeních Kate",
@@ -40,6 +41,7 @@
         "Id": "katesessions",
         "License": "LGPL",
         "Name": "Kate Sessions",
+        "Name[ar]": "جلسات كيت",
         "Name[az]": "Kate sessiyaları",
         "Name[ca]": "Sessions del Kate",
         "Name[cs]": "Sezení Kate",

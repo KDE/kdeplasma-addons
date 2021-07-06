@@ -21,6 +21,7 @@
             }
         ],
         "Description": "The current date and time, locally or in any timezone",
+        "Description[ar]": "التاريخ والوقت الحاليين، محلياً أو في أيّ منطقة زمنية",
         "Description[az]": "Cari tarix və vaxt. Yerli və ya istənilən vaxt qurşağı",
         "Description[ca]": "La data i l'hora actuals, localment o en qualsevol zona horària",
         "Description[cs]": "Aktuální datum a čas, lokální, nebo v libovolné časové zóně",
@@ -40,6 +41,7 @@
         "Id": "org.kde.datetime",
         "License": "LGPL",
         "Name": "Date and Time",
+        "Name[ar]": "التاريخ والوقت",
         "Name[az]": "Tarix və Vaxt",
         "Name[ca]": "Data i hora",
         "Name[cs]": "Datum a čas",

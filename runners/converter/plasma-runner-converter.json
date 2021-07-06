@@ -21,6 +21,7 @@
             }
         ],
         "Description": "Convert values to different units",
+        "Description[ar]": "حول قيمة الى وحدات مختلفة",
         "Description[az]": "Dəyərləri fərqli vahidlərə çevirir",
         "Description[ca]": "Converteix valors a diferents unitats",
         "Description[cs]": "Převod jednotek",
@@ -40,6 +41,7 @@
         "Id": "unitconverter",
         "License": "GPL",
         "Name": "Unit Converter",
+        "Name[ar]": "محول الوحدات",
         "Name[az]": "Ölçü vahidi çeviricisi",
         "Name[ca]": "Convertidor d'unitats",
         "Name[cs]": "Převod jednotek",
