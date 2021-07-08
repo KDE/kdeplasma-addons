@@ -17,7 +17,8 @@
                 "Name[sv]": "Ryan P. Bitanga",
                 "Name[uk]": "Ryan P. Bitanga",
                 "Name[vi]": "Ryan P. Bitanga",
-                "Name[x-test]": "xxRyan P. Bitangaxx"
+                "Name[x-test]": "xxRyan P. Bitangaxx",
+                "Name[zh_CN]": "Ryan P. Bitanga"
             }
         ],
         "Description": "Check the spelling of a word",
@@ -36,6 +37,7 @@
         "Description[uk]": "Перевірте правопис слова",
         "Description[vi]": "Kiểm tra cách đánh vần của một chữ",
         "Description[x-test]": "xxCheck the spelling of a wordxx",
+        "Description[zh_CN]": "检查单词拼写",
         "EnabledByDefault": true,
         "Icon": "tools-check-spelling",
         "Id": "Spell Checker",
@@ -55,6 +57,7 @@
         "Name[sv]": "Stavningskontroll",
         "Name[uk]": "Перевірка правопису",
         "Name[vi]": "Trình kiểm tra đánh vần",
-        "Name[x-test]": "xxSpell Checkerxx"
+        "Name[x-test]": "xxSpell Checkerxx",
+        "Name[zh_CN]": "拼写检查"
     }
 }

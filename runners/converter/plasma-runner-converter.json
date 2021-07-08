@@ -17,7 +17,8 @@
                 "Name[sv]": "Petri Damstén",
                 "Name[uk]": "Petri Damstén",
                 "Name[vi]": "Petri Damstén",
-                "Name[x-test]": "xxPetri Damsténxx"
+                "Name[x-test]": "xxPetri Damsténxx",
+                "Name[zh_CN]": "Petri Damstén"
             }
         ],
         "Description": "Convert values to different units",
@@ -36,6 +37,7 @@
         "Description[uk]": "Перетворення значень у різних одиницях",
         "Description[vi]": "Đổi các giá trị sang các đơn vị khác nhau",
         "Description[x-test]": "xxConvert values to different unitsxx",
+        "Description[zh_CN]": "转换数值到不同单位",
         "EnabledByDefault": true,
         "Icon": "accessories-calculator",
         "Id": "unitconverter",
@@ -55,6 +57,7 @@
         "Name[sv]": "Enhetskonvertering",
         "Name[uk]": "Перетворювач одиниць",
         "Name[vi]": "Trình đổi đơn vị",
-        "Name[x-test]": "xxUnit Converterxx"
+        "Name[x-test]": "xxUnit Converterxx",
+        "Name[zh_CN]": "单位转换器"
     }
 }

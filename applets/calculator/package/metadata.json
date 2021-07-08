@@ -17,7 +17,8 @@
                 "Name[sv]": "Henry Stanaland, Davide Bettio",
                 "Name[uk]": "Henry Stanaland, Davide Bettio",
                 "Name[vi]": "Henry Stanaland, Davide Bettio",
-                "Name[x-test]": "xxHenry Stanaland, Davide Bettioxx"
+                "Name[x-test]": "xxHenry Stanaland, Davide Bettioxx",
+                "Name[zh_CN]": "Henry Stanaland, Davide Bettio"
             }
         ],
         "Category": "Utilities",
@@ -37,6 +38,7 @@
         "Description[uk]": "Обчисліть прості суми",
         "Description[vi]": "Tính các phép tính đơn giản",
         "Description[x-test]": "xxCalculate simple sumsxx",
+        "Description[zh_CN]": "简单求和计算",
         "EnabledByDefault": true,
         "Icon": "accessories-calculator",
         "Id": "org.kde.plasma.calculator",
@@ -57,6 +59,7 @@
         "Name[uk]": "Калькулятор",
         "Name[vi]": "Máy tính bỏ túi",
         "Name[x-test]": "xxCalculatorxx",
+        "Name[zh_CN]": "计算器",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

@@ -17,7 +17,8 @@
                 "Name[sv]": "Plasma-gruppen",
                 "Name[uk]": "Команда розробників Плазми",
                 "Name[vi]": "Đội ngũ Plasma",
-                "Name[x-test]": "xxThe Plasma Teamxx"
+                "Name[x-test]": "xxThe Plasma Teamxx",
+                "Name[zh_CN]": "Plasma 开发团队"
             }
         ],
         "Category": "Language",
@@ -37,6 +38,7 @@
         "Description[uk]": "Погляньте на значення слів та на їхній переклад іншими мовами",
         "Description[vi]": "Tra nghĩa của các từ và phần dịch của chúng sang các ngôn ngữ khác nhau",
         "Description[x-test]": "xxLook up the meaning of words and their translation into different languagesxx",
+        "Description[zh_CN]": "查阅单词词义以及其不同语言的翻译",
         "EnabledByDefault": true,
         "Icon": "accessories-dictionary",
         "Id": "org.kde.plasma_applet_dict",
@@ -57,6 +59,7 @@
         "Name[uk]": "Словник",
         "Name[vi]": "Từ điển",
         "Name[x-test]": "xxDictionaryxx",
+        "Name[zh_CN]": "词典",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

@@ -17,7 +17,8 @@
                 "Name[sv]": "Petri Damstén",
                 "Name[uk]": "Petri Damstén",
                 "Name[vi]": "Petri Damstén",
-                "Name[x-test]": "xxPetri Damsténxx"
+                "Name[x-test]": "xxPetri Damsténxx",
+                "Name[zh_CN]": "Petri Damstén"
             }
         ],
         "Description": "Comic Package Structure",
@@ -36,6 +37,7 @@
         "Description[uk]": "Структура пакунка коміксів",
         "Description[vi]": "Cấu trúc gói Truyện tranh",
         "Description[x-test]": "xxComic Package Structurexx",
+        "Description[zh_CN]": "连环画包结构",
         "EnabledByDefault": true,
         "Id": "Plasma/Comic",
         "License": "GPLv2+",
@@ -55,6 +57,7 @@
         "Name[uk]": "Комікси",
         "Name[vi]": "Truyện tranh",
         "Name[x-test]": "xxComicxx",
+        "Name[zh_CN]": "连环画",
         "Version": "pre0.1",
         "Website": "https://kde.org/plasma-desktop/"
     },

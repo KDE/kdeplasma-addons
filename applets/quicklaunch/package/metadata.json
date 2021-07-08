@@ -18,7 +18,8 @@
                 "Name[sv]": "David Rosca",
                 "Name[uk]": "David Rosca",
                 "Name[vi]": "David Rosca",
-                "Name[x-test]": "xxDavid Roscaxx"
+                "Name[x-test]": "xxDavid Roscaxx",
+                "Name[zh_CN]": "David Rosca"
             }
         ],
         "Category": "Application Launchers",
@@ -37,6 +38,7 @@
         "Description[uk]": "Запуск ваших улюблених програм",
         "Description[vi]": "Khởi chạy các ứng dụng bạn ưa thích",
         "Description[x-test]": "xxLaunch your favourite Applicationsxx",
+        "Description[zh_CN]": "启动您最常用的程序",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
@@ -60,6 +62,7 @@
         "Name[uk]": "Швидкий запуск",
         "Name[vi]": "Khởi chạy nhanh",
         "Name[x-test]": "xxQuicklaunchxx",
+        "Name[zh_CN]": "快速启动",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

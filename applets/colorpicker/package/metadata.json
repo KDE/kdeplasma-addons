@@ -18,7 +18,8 @@
                 "Name[sv]": "Kai Uwe Broulik",
                 "Name[uk]": "Kai Uwe Broulik",
                 "Name[vi]": "Kai Uwe Broulik",
-                "Name[x-test]": "xxKai Uwe Broulikxx"
+                "Name[x-test]": "xxKai Uwe Broulikxx",
+                "Name[zh_CN]": "Kai Uwe Broulik"
             }
         ],
         "Category": "Graphics",
@@ -38,6 +39,7 @@
         "Description[uk]": "Вибір кольору зі стільниці",
         "Description[vi]": "Chọn một màu trên bàn làm việc",
         "Description[x-test]": "xxPick a color from the desktopxx",
+        "Description[zh_CN]": "从桌面拾取颜色",
         "FormFactors": [
             "desktop"
         ],
@@ -60,6 +62,7 @@
         "Name[uk]": "Піпетка",
         "Name[vi]": "Trình chọn màu",
         "Name[x-test]": "xxColor Pickerxx",
+        "Name[zh_CN]": "拾色器",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

@@ -17,7 +17,8 @@
                 "Name[sv]": "Sebastian Kügler",
                 "Name[uk]": "Sebastian Kügler",
                 "Name[vi]": "Sebastian Kügler",
-                "Name[x-test]": "xxSebastian Küglerxx"
+                "Name[x-test]": "xxSebastian Küglerxx",
+                "Name[zh_CN]": "Sebastian Kügler"
             }
         ],
         "Description": "Matches Kate Sessions",
@@ -36,6 +37,7 @@
         "Description[uk]": "Шукає сеанси Kate",
         "Description[vi]": "Tìm các phiên Kate",
         "Description[x-test]": "xxMatches Kate Sessionsxx",
+        "Description[zh_CN]": "匹配 Kate 会话",
         "EnabledByDefault": true,
         "Icon": "kate",
         "Id": "katesessions",
@@ -55,7 +57,8 @@
         "Name[sv]": "Kate-sessioner",
         "Name[uk]": "Сеанси Kate",
         "Name[vi]": "Các phiên Kate",
-        "Name[x-test]": "xxKate Sessionsxx"
+        "Name[x-test]": "xxKate Sessionsxx",
+        "Name[zh_CN]": "Kate 会话"
     },
     "TryExec": "kate"
 }

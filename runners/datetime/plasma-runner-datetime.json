@@ -17,7 +17,8 @@
                 "Name[sv]": "Plasma-gruppen",
                 "Name[uk]": "Команда розробників Плазми",
                 "Name[vi]": "Đội ngũ Plasma",
-                "Name[x-test]": "xxPlasma Teamxx"
+                "Name[x-test]": "xxPlasma Teamxx",
+                "Name[zh_CN]": "Plasma 开发团队"
             }
         ],
         "Description": "The current date and time, locally or in any timezone",
@@ -36,6 +37,7 @@
         "Description[uk]": "Поточна дата і час, місцевий або час будь-якого часового поясу",
         "Description[vi]": "Ngày giờ hiện tại, ở địa phương hoặc bất kì múi giờ nào",
         "Description[x-test]": "xxThe current date and time, locally or in any timezonexx",
+        "Description[zh_CN]": "显示当前日期和时间，可以是本地时间也可以是或任何时区",
         "EnabledByDefault": true,
         "Icon": "clock",
         "Id": "org.kde.datetime",
@@ -55,6 +57,7 @@
         "Name[sv]": "Datum och tid",
         "Name[uk]": "Дата і час",
         "Name[vi]": "Ngày giờ",
-        "Name[x-test]": "xxDate and Timexx"
+        "Name[x-test]": "xxDate and Timexx",
+        "Name[zh_CN]": "日期和时间"
     }
 }

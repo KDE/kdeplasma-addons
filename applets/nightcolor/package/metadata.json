@@ -18,7 +18,8 @@
                 "Name[sv]": "Vlad Zahorodnii",
                 "Name[uk]": "Влад Загородній",
                 "Name[vi]": "Vlad Zahorodnii",
-                "Name[x-test]": "xxVlad Zahorodniixx"
+                "Name[x-test]": "xxVlad Zahorodniixx",
+                "Name[zh_CN]": "Vlad Zahorodnii"
             }
         ],
         "Category": "Graphics",
@@ -37,6 +38,7 @@
         "Description[uk]": "Плазмоїд для керування нічними кольорами",
         "Description[vi]": "Plasmoid để điều khiển \"Màu buổi tối\"",
         "Description[x-test]": "xxPlasmoid for controlling Night Colorxx",
+        "Description[zh_CN]": "控制夜间颜色的小部件",
         "EnabledByDefault": true,
         "Icon": "redshift-status-on",
         "Id": "org.kde.plasma.nightcolorcontrol",
@@ -57,6 +59,7 @@
         "Name[uk]": "Керування нічними кольорами",
         "Name[vi]": "Điều khiển \"Màu buổi tối\"",
         "Name[x-test]": "xxNight Color Controlxx",
+        "Name[zh_CN]": "夜间颜色控制",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

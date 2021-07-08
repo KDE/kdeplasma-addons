@@ -15,6 +15,7 @@
         "Description[sv]": "Insticksprogram för Plasma gränssnitt till dagens bild",
         "Description[uk]": "Додаток для рушія Плазми PoTD",
         "Description[vi]": "Phần cài cắm cho dụng cụ Plasma \"Ảnh của ngày\"",
-        "Description[x-test]": "xxPlugin for Plasma PoTD Enginexx"
+        "Description[x-test]": "xxPlugin for Plasma PoTD Enginexx",
+        "Description[zh_CN]": "Plasma 每日一图引擎插件"
     }
 }

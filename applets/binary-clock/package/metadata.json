@@ -17,7 +17,8 @@
                 "Name[sv]": "Joseph Wenninger,Davide Bettio,Piotr Kąkol",
                 "Name[uk]": "Joseph Wenninger,Davide Bettio,Piotr Kąkol",
                 "Name[vi]": "Joseph Wenninger,Davide Bettio,Piotr Kąkol",
-                "Name[x-test]": "xxJoseph Wenninger,Davide Bettio,Piotr Kąkolxx"
+                "Name[x-test]": "xxJoseph Wenninger,Davide Bettio,Piotr Kąkolxx",
+                "Name[zh_CN]": "Joseph Wenninger,Davide Bettio,Piotr Kąkol"
             }
         ],
         "Category": "Date and Time",
@@ -37,6 +38,7 @@
         "Description[uk]": "Час, показаний у двійковому форматі",
         "Description[vi]": "Thời gian hiển thị ở dạng nhị phân",
         "Description[x-test]": "xxTime displayed in binary formatxx",
+        "Description[zh_CN]": "以二进制格式显示时间",
         "EnabledByDefault": true,
         "Icon": "clock",
         "Id": "org.kde.plasma.binaryclock",
@@ -57,6 +59,7 @@
         "Name[uk]": "Двійковий годинник",
         "Name[vi]": "Đồng hồ nhị phân",
         "Name[x-test]": "xxBinary Clockxx",
+        "Name[zh_CN]": "二进制时钟",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

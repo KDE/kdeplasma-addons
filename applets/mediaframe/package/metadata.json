@@ -17,7 +17,8 @@
                 "Name[sv]": "Lars Pontoppidan",
                 "Name[uk]": "Lars Pontoppidan",
                 "Name[vi]": "Lars Pontoppidan",
-                "Name[x-test]": "xxLars Pontoppidanxx"
+                "Name[x-test]": "xxLars Pontoppidanxx",
+                "Name[zh_CN]": "Lars Pontoppidan"
             }
         ],
         "Category": "Utilities",
@@ -36,6 +37,7 @@
         "Description[uk]": "(Картинна) рамка",
         "Description[vi]": "Khung (ảnh)",
         "Description[x-test]": "xx(Picture) Framexx",
+        "Description[zh_CN]": "(图片) 相框",
         "EnabledByDefault": true,
         "Icon": "image-x-generic",
         "Id": "org.kde.plasma.mediaframe",
@@ -55,6 +57,7 @@
         "Name[uk]": "Медіарамка",
         "Name[vi]": "Khung phương tiện",
         "Name[x-test]": "xxMedia Framexx",
+        "Name[zh_CN]": "媒体相框",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

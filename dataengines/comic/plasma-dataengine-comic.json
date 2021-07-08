@@ -23,6 +23,7 @@
         "Description[uk]": "Мережеві стрічки коміксів",
         "Description[vi]": "Truyện tranh trực tuyến",
         "Description[x-test]": "xxOnline comic stripsxx",
+        "Description[zh_CN]": "在线连环画",
         "Icon": "face-smile-big",
         "Id": "comic",
         "Name": "Comic Strips",
@@ -40,6 +41,7 @@
         "Name[sv]": "Tecknad serie",
         "Name[uk]": "Комічна стрічка",
         "Name[vi]": "Truyện tranh",
-        "Name[x-test]": "xxComic Stripsxx"
+        "Name[x-test]": "xxComic Stripsxx",
+        "Name[zh_CN]": "连环画"
     }
 }

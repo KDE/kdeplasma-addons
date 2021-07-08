@@ -18,7 +18,8 @@
                 "Name[sv]": "Laurent Montel",
                 "Name[uk]": "Laurent Montel",
                 "Name[vi]": "Laurent Montel",
-                "Name[x-test]": "xxLaurent Montelxx"
+                "Name[x-test]": "xxLaurent Montelxx",
+                "Name[zh_CN]": "Laurent Montel"
             }
         ],
         "Description": "Matches Konsole Profiles",
@@ -35,6 +36,7 @@
         "Description[uk]": "Шукає профілі Konsole",
         "Description[vi]": "Tìm các hồ sơ Konsole",
         "Description[x-test]": "xxMatches Konsole Profilesxx",
+        "Description[zh_CN]": "匹配 Konsole 配置",
         "EnabledByDefault": true,
         "Icon": "utilities-terminal",
         "Id": "konsoleprofiles",
@@ -54,6 +56,7 @@
         "Name[sv]": "Terminalprofiler",
         "Name[uk]": "Профілі Konsole",
         "Name[vi]": "Hồ sơ Konsole",
-        "Name[x-test]": "xxKonsole Profilesxx"
+        "Name[x-test]": "xxKonsole Profilesxx",
+        "Name[zh_CN]": "Konsole 配置"
     }
 }

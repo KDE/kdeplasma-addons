@@ -17,7 +17,8 @@
                 "Name[sv]": "Luís Gabriel Lima",
                 "Name[uk]": "Luís Gabriel Lima",
                 "Name[vi]": "Luís Gabriel Lima",
-                "Name[x-test]": "xxLuís Gabriel Limaxx"
+                "Name[x-test]": "xxLuís Gabriel Limaxx",
+                "Name[zh_CN]": "Luís Gabriel Lima"
             }
         ],
         "Category": "Environment and Weather",
@@ -36,6 +37,7 @@
         "Description[uk]": "Прогноз і поточні умови",
         "Description[vi]": "Dự báo và điều kiện hiện tại",
         "Description[x-test]": "xxForecast and current conditionsxx",
+        "Description[zh_CN]": "天气预告和当前天气",
         "Icon": "weather-clear",
         "Id": "org.kde.plasma.weather",
         "License": "GPL-2.0+",
@@ -54,6 +56,7 @@
         "Name[uk]": "Звіт щодо погоди",
         "Name[vi]": "Tin thời tiết",
         "Name[x-test]": "xxWeather Reportxx",
+        "Name[zh_CN]": "天气报告",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

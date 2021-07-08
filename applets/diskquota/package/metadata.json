@@ -18,7 +18,8 @@
                 "Name[sv]": "Dominik Haumann",
                 "Name[uk]": "Dominik Haumann",
                 "Name[vi]": "Dominik Haumann",
-                "Name[x-test]": "xxDominik Haumannxx"
+                "Name[x-test]": "xxDominik Haumannxx",
+                "Name[zh_CN]": "Dominik Haumann"
             }
         ],
         "Category": "Utilities",
@@ -36,6 +37,7 @@
         "Description[uk]": "Показати дані щодо квот на диску",
         "Description[vi]": "Hiện các chi tiết về hạn ngạch đĩa",
         "Description[x-test]": "xxShows details about disk quotaxx",
+        "Description[zh_CN]": "显示磁盘配额详情",
         "EnabledByDefault": false,
         "Icon": "disk-quota",
         "Id": "org.kde.plasma.diskquota",
@@ -56,6 +58,7 @@
         "Name[uk]": "Квота на диску",
         "Name[vi]": "Hạn ngạch đĩa",
         "Name[x-test]": "xxDisk Quotaxx",
+        "Name[zh_CN]": "磁盘配额",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

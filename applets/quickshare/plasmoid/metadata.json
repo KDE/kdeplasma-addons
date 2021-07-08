@@ -17,7 +17,8 @@
                 "Name[sv]": "Plasma-gruppen",
                 "Name[uk]": "Команда розробників Плазми",
                 "Name[vi]": "Đội ngũ Plasma",
-                "Name[x-test]": "xxThe Plasma Teamxx"
+                "Name[x-test]": "xxThe Plasma Teamxx",
+                "Name[zh_CN]": "Plasma 开发团队"
             }
         ],
         "Category": "Online Services",
@@ -37,6 +38,7 @@
         "Description[uk]": "Викласти текст/зображення на віддалений сервер",
         "Description[vi]": "Dán chữ/ảnh vào một máy chủ ở xa",
         "Description[x-test]": "xxPaste text/images to a remote serverxx",
+        "Description[zh_CN]": "粘贴文本/图像到远程服务器",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop",
@@ -60,6 +62,7 @@
         "Name[uk]": "Швидке оприлюднення",
         "Name[vi]": "Chia sẻ nhanh",
         "Name[x-test]": "xxQuick Sharexx",
+        "Name[zh_CN]": "快速分享",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

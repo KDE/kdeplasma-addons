@@ -18,7 +18,8 @@
                 "Name[sv]": "Aleix Pol Gonzalez",
                 "Name[uk]": "Aleix Pol Gonzalez",
                 "Name[vi]": "Aleix Pol Gonzalez",
-                "Name[x-test]": "xxAleix Pol Gonzalezxx"
+                "Name[x-test]": "xxAleix Pol Gonzalezxx",
+                "Name[zh_CN]": "Aleix Pol Gonzalez"
             }
         ],
         "Description": "Shows whether Caps Lock or Num Lock are active",
@@ -36,6 +37,7 @@
         "Description[uk]": "Показує, чи задіяно Caps Lock або Num Lock",
         "Description[vi]": "Cho biết Caps Lock hay Num Lock có đang hoạt động không",
         "Description[x-test]": "xxShows whether Caps Lock or Num Lock are activexx",
+        "Description[zh_CN]": "显示大写锁定或小键盘数字锁定是否激活",
         "EnabledByDefault": true,
         "Icon": "input-keyboard",
         "Id": "org.kde.plasma.keyboardindicator",
@@ -55,6 +57,7 @@
         "Name[uk]": "Стан клавіш блокування",
         "Name[vi]": "Trạng thái các phím khoá",
         "Name[x-test]": "xxLock Keys Statusxx",
+        "Name[zh_CN]": "锁定按键状态",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

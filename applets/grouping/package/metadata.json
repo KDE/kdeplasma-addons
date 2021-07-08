@@ -18,7 +18,8 @@
                 "Name[sv]": "David Edmundson",
                 "Name[uk]": "David Edmundson",
                 "Name[vi]": "David Edmundson",
-                "Name[x-test]": "xxDavid Edmundsonxx"
+                "Name[x-test]": "xxDavid Edmundsonxx",
+                "Name[zh_CN]": "David Edmundson"
             }
         ],
         "Category": "Windows and Tasks",
@@ -37,6 +38,7 @@
         "Description[uk]": "Групувати віджети Плазми",
         "Description[vi]": "Nhóm các phụ kiện Plasma lại với nhau",
         "Description[x-test]": "xxGroup Plasma widgets togetherxx",
+        "Description[zh_CN]": "组合多个 Plasma 小部件",
         "EnabledByDefault": true,
         "Icon": "object-group",
         "Id": "org.kde.plasma.private.grouping",
@@ -56,6 +58,7 @@
         "Name[uk]": "Плазмоїд групування",
         "Name[vi]": "Plasmoid nhóm",
         "Name[x-test]": "xxGrouping Plasmoidxx",
+        "Name[zh_CN]": "分组小部件",
         "ServiceTypes": [
             "Plasma/Applet",
             "Plasma/Containment"

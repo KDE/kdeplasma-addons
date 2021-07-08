@@ -15,6 +15,7 @@
         "Description[sv]": "Insticksprogram för Plasma seriegränssnitt",
         "Description[uk]": "Додаток для джерела жартів Плазми",
         "Description[vi]": "Phần cài cắm cho \"Dụng cụ truyện tranh Plasma\"",
-        "Description[x-test]": "xxPlugin for Plasma Comic Enginexx"
+        "Description[x-test]": "xxPlugin for Plasma Comic Enginexx",
+        "Description[zh_CN]": "Plasma 连环画引擎插件"
     }
 }

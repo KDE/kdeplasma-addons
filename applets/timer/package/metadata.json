@@ -17,7 +17,8 @@
                 "Name[sv]": "Davide Bettio",
                 "Name[uk]": "Davide Bettio",
                 "Name[vi]": "Davide Bettio",
-                "Name[x-test]": "xxDavide Bettioxx"
+                "Name[x-test]": "xxDavide Bettioxx",
+                "Name[zh_CN]": "Davide Bettio"
             }
         ],
         "Category": "Date and Time",
@@ -37,6 +38,7 @@
         "Description[uk]": "Зворотній відлік визначеного часу",
         "Description[vi]": "Đếm ngược một khoảng thời gian chỉ định",
         "Description[x-test]": "xxCountdown over a specified time periodxx",
+        "Description[zh_CN]": "对指定的时间长度进行倒计时",
         "EnabledByDefault": true,
         "Icon": "chronometer",
         "Id": "org.kde.plasma.timer",
@@ -57,6 +59,7 @@
         "Name[uk]": "Таймер",
         "Name[vi]": "Hẹn giờ",
         "Name[x-test]": "xxTimerxx",
+        "Name[zh_CN]": "计时器",
         "ServiceTypes": [
             "Plasma/Applet"
         ],
