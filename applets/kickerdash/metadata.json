@@ -51,6 +51,7 @@
         "Id": "org.kde.plasma.kickerdash",
         "License": "GPL-2.0+",
         "Name": "Application Dashboard",
+        "Name[ar]": "لوحة معلومات التطبيق",
         "Name[az]": "Tətbiq tablosu",
         "Name[ca]": "Tauler d'aplicacions",
         "Name[cs]": "Pracovní plocha aplikace",

@@ -47,6 +47,7 @@
         "Id": "org.kde.plasma.notes",
         "License": "GPL-2.0+",
         "Name": "Sticky Note",
+        "Name[ar]": "ملاحظة لاصقة",
         "Name[az]": "Qeyd vərəqi",
         "Name[ca]": "Nota adhesiva",
         "Name[cs]": "Lepicí poznámka",

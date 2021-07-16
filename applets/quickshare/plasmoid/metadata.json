@@ -52,6 +52,7 @@
         "Id": "org.kde.plasma.quickshare",
         "License": "GPL-2.0+",
         "Name": "Quick Share",
+        "Name[ar]": "المشاركة السريعة",
         "Name[az]": "Sürətli paylaşmaq",
         "Name[ca]": "Comparteix ràpid",
         "Name[cs]": "Rychlé sdílení",

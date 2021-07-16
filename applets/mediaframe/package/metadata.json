@@ -47,6 +47,7 @@
         "Id": "org.kde.plasma.mediaframe",
         "License": "GPL-2.0+",
         "Name": "Media Frame",
+        "Name[ar]": "إطار صور",
         "Name[az]": "Fotoçərçivə",
         "Name[ca]": "Marc multimèdia",
         "Name[cs]": "Rámec médií",

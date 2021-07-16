@@ -47,6 +47,7 @@
         "Id": "org.kde.plasma.keyboardindicator",
         "License": "GPL-2.0+",
         "Name": "Lock Keys Status",
+        "Name[ar]": "حالة قفل المفاتيح",
         "Name[az]": "Düymələrin vəziyyətini kilidləyin",
         "Name[ca]": "Estat de les tecles de bloqueig",
         "Name[cs]": "Uzamknout stav kláves",

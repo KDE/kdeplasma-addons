@@ -48,6 +48,7 @@
         "Id": "org.kde.plasma.private.grouping",
         "License": "GPL-2.0+",
         "Name": "Grouping Plasmoid",
+        "Name[ar]": "تجميع البلازمويد",
         "Name[az]": "Plasmoid qruplaşması",
         "Name[ca]": "Plasmoide d'agrupació",
         "Name[cs]": "Seskupovací Plasmoid",
