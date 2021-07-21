@@ -117,6 +117,6 @@ void CharacterRunnerConfig::validateDeleteButton()
     m_ui->deleteItem->setDisabled(!m_ui->list->selectedItems().count());
 }
 
-K_PLUGIN_FACTORY(CharacterRunnerConfigFactory, registerPlugin<CharacterRunnerConfig>(QStringLiteral("kcm_krunner_charrunner"));)
+K_PLUGIN_FACTORY(CharacterRunnerConfigFactory, registerPlugin<CharacterRunnerConfig>();)
 
 #include "charrunner_config.moc"

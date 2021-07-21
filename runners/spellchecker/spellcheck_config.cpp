@@ -98,6 +98,6 @@ void SpellCheckConfig::defaults()
     Q_EMIT changed(true);
 }
 
-K_PLUGIN_FACTORY(SpellCheckConfigFactory, registerPlugin<SpellCheckConfig>(QStringLiteral("kcm_krunner_spellcheck"));)
+K_PLUGIN_FACTORY(SpellCheckConfigFactory, registerPlugin<SpellCheckConfig>();)
 
 #include "spellcheck_config.moc"

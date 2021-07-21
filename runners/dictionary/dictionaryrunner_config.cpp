@@ -11,7 +11,7 @@
 #include <QFormLayout>
 #include <QLineEdit>
 
-K_PLUGIN_FACTORY(DictionaryRunnerConfigFactory, registerPlugin<DictionaryRunnerConfig>(QStringLiteral("kcm_krunner_dictionary"));)
+K_PLUGIN_FACTORY(DictionaryRunnerConfigFactory, registerPlugin<DictionaryRunnerConfig>();)
 
 DictionaryRunnerConfig::DictionaryRunnerConfig(QWidget *parent, const QVariantList &args)
     : KCModule(parent, args)
