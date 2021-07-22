@@ -45,7 +45,7 @@
         "Description[sl]": "Izberi barvo iz namizja",
         "Description[sv]": "Hämta en färg från skrivbordet",
         "Description[uk]": "Вибір кольору зі стільниці",
-        "Description[vi]": "Chọn một màu trên bàn làm việc",
+        "Description[vi]": "Nhặt một màu trên bàn làm việc",
         "Description[x-test]": "xxPick a color from the desktopxx",
         "Description[zh_CN]": "从桌面拾取颜色",
         "FormFactors": [
@@ -72,7 +72,7 @@
         "Name[sl]": "Izbirnik barve",
         "Name[sv]": "Färgväljare",
         "Name[uk]": "Піпетка",
-        "Name[vi]": "Trình chọn màu",
+        "Name[vi]": "Trình nhặt màu",
         "Name[x-test]": "xxColor Pickerxx",
         "Name[zh_CN]": "拾色器",
         "ServiceTypes": [
