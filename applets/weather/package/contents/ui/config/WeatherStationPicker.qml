@@ -19,7 +19,6 @@ ColumnLayout {
     property alias selectedServices: serviceListModel.selectedServices
     property string source
     readonly property bool canSearch: !!searchStringEdit.text && selectedServices.length
-    readonly property bool handlesEnterKey: canSearch && searchStringEdit.activeFocus
 
     function searchLocation() {
         if (!canSearch) {
@@ -40,7 +39,6 @@ ColumnLayout {
                 // If we got any results, pre-select the top item to potentially
                 // save the user a step
                 locationListView.currentIndex = 0;
-                locationListView.forceActiveFocus();
                 noSearchResultReport.visible = false;
             }
         }
@@ -83,20 +81,33 @@ ColumnLayout {
             Layout.minimumWidth: implicitWidth
             focus: true
             placeholderText: i18nc("@info:placeholder", "Enter location")
-            onAccepted: {
-                searchLocation();
+
+            Timer {
+                id: searchDelayTimer
+                interval: 500
+                onTriggered: {
+                    searchLocation();
+                }
             }
-        }
 
-        QQC2.Button {
-            id: searchButton
+            onTextChanged: {
+                searchDelayTimer.restart();
+            }
 
-            icon.name: "edit-find"
-            text: i18nc("@action:button", "Search")
-            enabled: canSearch
-
-            onClicked: {
-                searchLocation();
+            Keys.onPressed: {
+                if (event.key == Qt.Key_Up) {
+                    if (locationListView.currentIndex != 0) {
+                        locationListView.currentIndex--;
+                    }
+                    event.accepted = true;
+                } else if (event.key == Qt.Key_Down) {
+                    if (locationListView.currentIndex != locationListView.count - 1) {
+                        locationListView.currentIndex++;
+                    }
+                    event.accepted = true;
+                } else {
+                    event.accepted = false;
+                }
             }
         }
     }

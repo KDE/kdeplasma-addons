@@ -46,7 +46,7 @@ Window {
         id: acceptAction
 
         shortcut: "Return"
-        enabled: !!source && !stationPicker.handlesEnterKey
+        enabled: !!source
         onTriggered: {
             accepted();
             dialog.close();
