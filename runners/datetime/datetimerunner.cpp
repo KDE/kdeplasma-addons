@@ -77,6 +77,12 @@ QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringRef &tz)
             continue;
         }
 
+        const QString displayName = timeZone.displayName(QDateTime::currentDateTime(), QTimeZone::LongName);
+        if (displayName.contains(tz, Qt::CaseInsensitive)) {
+            ret[displayName] = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
+            continue;
+        }
+
         const QString country = QLocale::countryToString(timeZone.country());
         if (country.contains(tz, Qt::CaseInsensitive)) {
             ret[country] = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
