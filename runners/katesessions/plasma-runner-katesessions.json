@@ -75,6 +75,5 @@
         "Name[vi]": "Các phiên Kate",
         "Name[x-test]": "xxKate Sessionsxx",
         "Name[zh_CN]": "Kate 会话"
-    },
-    "TryExec": "kate"
+    }
 }
