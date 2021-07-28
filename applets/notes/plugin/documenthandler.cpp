@@ -273,8 +273,9 @@ int DocumentHandler::defaultFontSize() const
 
 void DocumentHandler::setDefaultFontSize(int arg)
 {
-    if (!m_doc)
+    if (!m_doc) {
         return;
+    }
 
     auto font = m_doc->defaultFont();
     font.setPointSize(arg);
