@@ -15,18 +15,15 @@ target_link_libraries(plasma_engine_comic plasmacomicprovidercore
     KF5::I18n
 )
 
-set(comicpackage_SRCS
-    comic_package.cpp
-)
-
-kcoreaddons_add_plugin(plasma_packagestructure_comic SOURCES ${comicpackage_SRCS} INSTALL_NAMESPACE "kpackage/packagestructure")
-target_link_libraries( plasma_packagestructure_comic
+kcoreaddons_add_plugin(plasma_packagestructure_comic SOURCES comic_package.cpp INSTALL_NAMESPACE "kpackage/packagestructure")
+target_link_libraries(plasma_packagestructure_comic
     KF5::WidgetsAddons
     KF5::Plasma
     KF5::KrossCore
     KF5::KrossUi
     KF5::I18n
 )
+set_target_properties(plasma_packagestructure_comic PROPERTIES OUTPUT_NAME plasma_comic)
 
 ########### plugin core library ############
 
