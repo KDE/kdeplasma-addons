@@ -49,7 +49,6 @@
         "Description[x-test]": "xxComic Package Structurexx",
         "Description[zh_CN]": "连环画包结构",
         "EnabledByDefault": true,
-        "Id": "Plasma/Comic",
         "License": "GPLv2+",
         "Name": "Comic",
         "Name[ar]": "Comic",
@@ -76,6 +75,7 @@
         "Version": "pre0.1",
         "Website": "https://kde.org/plasma-desktop/"
     },
+    "KPackageStructure": "Plasma/Comic",
     "X-Plasma-PackageFileFilter": "*.comic",
     "X-Plasma-PackageFileMimetypes": "application/zip"
 }
