@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Comic",
     "KPlugin": {
         "Authors": [
             {
@@ -75,7 +76,6 @@
         "Version": "pre0.1",
         "Website": "https://kde.org/plasma-desktop/"
     },
-    "KPackageStructure": "Plasma/Comic",
     "X-Plasma-PackageFileFilter": "*.comic",
     "X-Plasma-PackageFileMimetypes": "application/zip"
 }
