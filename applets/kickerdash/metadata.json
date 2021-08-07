@@ -88,5 +88,6 @@
     "X-Plasma-Provides": [
         "org.kde.plasma.launchermenu"
     ],
-    "X-Plasma-RootPath": "org.kde.plasma.kicker"
+    "X-Plasma-RootPath": "org.kde.plasma.kicker",
+    "X-KDE-Applet-Library": ""
 }

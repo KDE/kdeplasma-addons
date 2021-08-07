@@ -83,5 +83,6 @@
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/calculator.qml",
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-StandAloneApp": true,
+    "X-KDE-Applet-Library": ""
 }

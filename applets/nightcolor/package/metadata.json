@@ -84,5 +84,6 @@
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-NotificationArea": "true",
-    "X-Plasma-NotificationAreaCategory": "SystemServices"
+    "X-Plasma-NotificationAreaCategory": "SystemServices",
+    "X-KDE-Applet-Library": ""
 }

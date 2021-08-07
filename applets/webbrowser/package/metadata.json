@@ -81,5 +81,6 @@
     "X-KDE-ParentApp": "",
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-StandAloneApp": true,
+    "X-KDE-Applet-Library": ""
 }

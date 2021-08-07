@@ -85,5 +85,6 @@
         "Website": "https://userbase.kde.org/Plasma"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/konsoleprofiles.qml"
+    "X-Plasma-MainScript": "ui/konsoleprofiles.qml",
+    "X-KDE-Applet-Library": ""
 }

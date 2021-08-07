@@ -90,5 +90,6 @@
         "image/bmp"
     ],
     "X-Plasma-MainScript": "ui/main.qml",
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-StandAloneApp": true,
+    "X-KDE-Applet-Library": ""
 }

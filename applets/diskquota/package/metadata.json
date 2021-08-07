@@ -84,5 +84,6 @@
     "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-NotificationArea": "true",
     "X-Plasma-NotificationAreaCategory": "SystemServices",
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-StandAloneApp": true,
+    "X-KDE-Applet-Library": ""
 }

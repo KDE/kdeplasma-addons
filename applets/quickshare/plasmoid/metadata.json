@@ -90,5 +90,6 @@
     "X-Plasma-RequiredExtensions": [
         "ExternalScripts"
     ],
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-StandAloneApp": true,
+    "X-KDE-Applet-Library": ""
 }

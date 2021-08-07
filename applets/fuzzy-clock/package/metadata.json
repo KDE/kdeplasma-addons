@@ -87,5 +87,6 @@
     "X-Plasma-Provides": [
         "org.kde.plasma.time",
         "org.kde.plasma.date"
-    ]
+    ],
+    "X-KDE-Applet-Library": ""
 }
