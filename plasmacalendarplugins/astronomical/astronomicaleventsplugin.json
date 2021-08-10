@@ -1,10 +1,14 @@
 {
-    "Name": "Astronomical Events",
-    "Description": "Calendar plugin for displaying astronomical events",
-    "Icon": "weather-clear-night",
-    "ConfigUi": "astronomicalevents/AstronomicalEventsConfig.qml",
-    "Authors": {
-        "Name": "Friedrich W. H. Kossebau",
-        "Email": "kossebau@kde.org"
-    }
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "kossebau@kde.org",
+                "Name": "Friedrich W. H. Kossebau"
+            }
+        ],
+        "Description": "Calendar plugin for displaying astronomical events",
+        "Icon": "weather-clear-night",
+        "Name": "Astronomical Events"
+    },
+    "X-KDE-PlasmaCalendar-ConfigUi": "astronomicalevents/AstronomicalEventsConfig.qml"
 }
