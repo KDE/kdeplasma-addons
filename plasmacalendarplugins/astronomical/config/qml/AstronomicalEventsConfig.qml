@@ -36,7 +36,7 @@ Kirigami.FormLayout {
     QQC2.CheckBox {
         id: showLunarPhasesCheckBox
 
-        Kirigami.FormData.label: i18n("Show:")
+        Kirigami.FormData.label: i18nd("plasma_calendar_astronomicalevents", "Show:")
 
         checked: configStorage.isLunarPhaseShown
         text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Lunar phases")
