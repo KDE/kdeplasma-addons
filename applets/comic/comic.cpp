@@ -24,8 +24,8 @@
 
 #include <KActionCollection>
 #include <KConfigDialog>
+#include <KIO/OpenUrlJob>
 #include <KNotification>
-#include <KRun>
 #include <KStandardShortcut>
 #include <kuiserverjobtracker.h>
 
@@ -408,7 +408,8 @@ void ComicApplet::slotStorePosition()
 
 void ComicApplet::slotShop()
 {
-    KRun::runUrl(mCurrent.shopUrl(), QStringLiteral("text/html"), nullptr, KRun::RunFlags());
+    auto *job = new KIO::OpenUrlJob(mCurrent.shopUrl());
+    job->start();
 }
 
 void ComicApplet::createComicBook()
