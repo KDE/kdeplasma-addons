@@ -14,16 +14,14 @@
 #include <QByteArray>
 #include <QImage>
 #include <QImageReader>
+#include <QJSValue>
 
-namespace Kross
-{
-class Action;
-}
 namespace KPackage
 {
 class Package;
 }
 class ComicProviderKross;
+class QJSEngine;
 
 class ImageWrapper : public QObject
 {
@@ -72,21 +70,24 @@ private:
     QImageReader mImageReader;
 };
 
-class DateWrapper : public QObject
+class DateWrapper
 {
-    Q_OBJECT
+    Q_GADGET
     Q_PROPERTY(QDate date READ date WRITE setDate)
 public:
-    explicit DateWrapper(QObject *parent = nullptr, const QDate &date = QDate());
+    explicit DateWrapper(const QDate &date = QDate());
 
     QDate date() const;
     void setDate(const QDate &date);
     static QDate fromVariant(const QVariant &variant);
 
+    Q_INVOKABLE QString toString(const QString &format) const;
+    Q_INVOKABLE QString toString(int format = 0) const;
+
 public Q_SLOTS:
-    QObject *addDays(int ndays);
-    QObject *addMonths(int nmonths);
-    QObject *addYears(int nyears);
+    DateWrapper addDays(int ndays);
+    DateWrapper addMonths(int nmonths);
+    DateWrapper addYears(int nyears);
     int day() const;
     int dayOfWeek() const;
     int dayOfYear() const;
@@ -98,8 +99,6 @@ public Q_SLOTS:
     int month() const;
     bool setDate(int year, int month, int day);
     int toJulianDay() const;
-    QString toString(const QString &format) const;
-    QString toString(int format = 0) const;
     int weekNumber() const;
     int year() const;
 
@@ -124,10 +123,10 @@ public:
     explicit StaticDateWrapper(QObject *parent = nullptr);
 
 public Q_SLOTS:
-    QObject *currentDate();
-    QObject *fromJulianDay(int jd);
-    QObject *fromString(const QString &string, int format = Qt::TextDate);
-    QObject *fromString(const QString &string, const QString &format);
+    DateWrapper currentDate();
+    DateWrapper fromJulianDay(int jd);
+    DateWrapper fromString(const QString &string, int format = Qt::TextDate);
+    DateWrapper fromString(const QString &string, const QString &format);
     bool isLeapYear(int year);
     bool isValid(int year, int month, int day);
     QString longDayName(int weekday);
@@ -146,11 +145,11 @@ class ComicProviderWrapper : public QObject
     Q_PROPERTY(QString shopUrl READ shopUrl WRITE setShopUrl)
     Q_PROPERTY(QString title READ title WRITE setTitle)
     Q_PROPERTY(QString additionalText READ additionalText WRITE setAdditionalText)
-    Q_PROPERTY(QVariant identifier READ identifier WRITE setIdentifier)
-    Q_PROPERTY(QVariant nextIdentifier READ nextIdentifier WRITE setNextIdentifier)
-    Q_PROPERTY(QVariant previousIdentifier READ previousIdentifier WRITE setPreviousIdentifier)
-    Q_PROPERTY(QVariant firstIdentifier READ firstIdentifier WRITE setFirstIdentifier)
-    Q_PROPERTY(QVariant lastIdentifier READ lastIdentifier WRITE setLastIdentifier)
+    Q_PROPERTY(QJSValue identifier READ identifier WRITE setIdentifier)
+    Q_PROPERTY(QJSValue nextIdentifier READ nextIdentifier WRITE setNextIdentifier)
+    Q_PROPERTY(QJSValue previousIdentifier READ previousIdentifier WRITE setPreviousIdentifier)
+    Q_PROPERTY(QJSValue firstIdentifier READ firstIdentifier WRITE setFirstIdentifier)
+    Q_PROPERTY(QJSValue lastIdentifier READ lastIdentifier WRITE setLastIdentifier)
     Q_PROPERTY(bool isLeftToRight READ isLeftToRight WRITE setLeftToRight)
     Q_PROPERTY(bool isTopToBottom READ isTopToBottom WRITE setTopToBottom)
     Q_PROPERTY(int apiVersion READ apiVersion)
@@ -162,20 +161,6 @@ public:
         Bottom,
     };
     Q_ENUM(PositionType)
-
-    enum RequestType {
-        Page = ComicProvider::Page,
-        Image = ComicProvider::Image,
-        User = ComicProvider::User,
-    };
-    Q_ENUM(RequestType)
-
-    enum IdentifierType {
-        DateIdentifier = ComicProvider::DateIdentifier,
-        NumberIdentifier = ComicProvider::NumberIdentifier,
-        StringIdentifier = ComicProvider::StringIdentifier,
-    };
-    Q_ENUM(IdentifierType)
 
     enum RedirectedUrlType {
         PreviousUrl = 0,
@@ -193,6 +178,11 @@ public:
     int apiVersion() const
     {
         return 4600;
+    }
+
+    Q_INVOKABLE void print(const QJSValue &str)
+    {
+        qWarning() << str.toString();
     }
 
     ComicProvider::IdentifierType identifierType() const;
@@ -214,16 +204,16 @@ public:
     void setTitle(const QString &title);
     QString additionalText() const;
     void setAdditionalText(const QString &additionalText);
-    QVariant identifier();
-    void setIdentifier(const QVariant &identifier);
-    QVariant nextIdentifier();
-    void setNextIdentifier(const QVariant &nextIdentifier);
-    QVariant previousIdentifier();
-    void setPreviousIdentifier(const QVariant &previousIdentifier);
-    QVariant firstIdentifier();
-    void setFirstIdentifier(const QVariant &firstIdentifier);
-    QVariant lastIdentifier();
-    void setLastIdentifier(const QVariant &lastIdentifier);
+    QJSValue identifier();
+    void setIdentifier(const QJSValue &identifier);
+    QJSValue nextIdentifier();
+    void setNextIdentifier(const QJSValue &nextIdentifier);
+    QJSValue previousIdentifier();
+    void setPreviousIdentifier(const QJSValue &previousIdentifier);
+    QJSValue firstIdentifier();
+    void setFirstIdentifier(const QJSValue &firstIdentifier);
+    QJSValue lastIdentifier();
+    void setLastIdentifier(const QJSValue &lastIdentifier);
     bool isLeftToRight() const;
     void setLeftToRight(bool ltr);
     bool isTopToBottom() const;
@@ -247,16 +237,15 @@ public Q_SLOTS:
     void init();
 
 protected:
-    QVariant callFunction(const QString &name, const QVariantList &args = QVariantList());
-    const QStringList &extensions() const;
+    QVariant callFunction(const QString &name, const QJSValueList &args = {});
     bool functionCalled() const;
-    QVariant identifierToScript(const QVariant &identifier);
-    QVariant identifierFromScript(const QVariant &identifier) const;
+    QJSValue identifierToScript(const QVariant &identifier);
+    QVariant identifierFromScript(const QJSValue &identifier) const;
     void setIdentifierToDefault();
     void checkIdentifier(QVariant *identifier);
 
 private:
-    Kross::Action *mAction;
+    QJSEngine *m_engine = nullptr;
     ComicProviderKross *mProvider;
     QStringList mFunctions;
     bool mFuncFound;

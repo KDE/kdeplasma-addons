@@ -176,6 +176,7 @@ void ComicEngine::finished(ComicProvider *provider)
     // sets the data
     setComicData(provider);
     if (provider->image().isNull()) {
+        qWarning() << "provider->image().isNull()" << Q_FUNC_INFO;
         error(provider);
         return;
     }

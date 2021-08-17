@@ -8,10 +8,9 @@ set(comic_engine_SRCS
 kcoreaddons_add_plugin(plasma_engine_comic SOURCES ${comic_engine_SRCS} INSTALL_NAMESPACE "plasma/dataengine")
 
 target_link_libraries(plasma_engine_comic plasmacomicprovidercore
+    Qt::Qml
     KF5::WidgetsAddons
     KF5::Plasma
-    KF5::KrossCore
-    KF5::KrossUi
     KF5::I18n
 )
 
@@ -19,8 +18,6 @@ kcoreaddons_add_plugin(plasma_packagestructure_comic SOURCES comic_package.cpp I
 target_link_libraries(plasma_packagestructure_comic
     KF5::WidgetsAddons
     KF5::Plasma
-    KF5::KrossCore
-    KF5::KrossUi
     KF5::I18n
 )
 set_target_properties(plasma_packagestructure_comic PROPERTIES OUTPUT_NAME plasma_comic)
@@ -37,8 +34,6 @@ generate_export_header(plasmacomicprovidercore EXPORT_FILE_NAME plasma_comic_exp
 target_link_libraries(plasmacomicprovidercore
     KF5::WidgetsAddons
     KF5::KIOCore
-    KF5::KrossCore
-    KF5::KrossUi
     KF5::I18n
 )
 set_target_properties(plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1)
@@ -56,9 +51,8 @@ set(plasma_comic_krossprovider_SRCS
 add_library(plasma_comic_krossprovider MODULE ${plasma_comic_krossprovider_SRCS})
 target_link_libraries(plasma_comic_krossprovider plasmacomicprovidercore
     Qt::Gui
+    Qt::Qml
     KF5::KIOCore
-    KF5::KrossCore
-    KF5::KrossUi
     KF5::Plasma
     KF5::I18n
 )

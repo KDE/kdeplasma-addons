@@ -50,7 +50,6 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     KIO
     KCMUtils
-    Kross
     Notifications
     Plasma
     Runner
