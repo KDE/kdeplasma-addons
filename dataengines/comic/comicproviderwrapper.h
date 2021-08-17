@@ -24,6 +24,7 @@ namespace KPackage
 class Package;
 }
 class ComicProviderKross;
+class QJSEngine;
 
 class ImageWrapper : public QObject
 {
@@ -248,7 +249,6 @@ public Q_SLOTS:
 
 protected:
     QVariant callFunction(const QString &name, const QVariantList &args = QVariantList());
-    const QStringList &extensions() const;
     bool functionCalled() const;
     QVariant identifierToScript(const QVariant &identifier);
     QVariant identifierFromScript(const QVariant &identifier) const;
@@ -256,7 +256,7 @@ protected:
     void checkIdentifier(QVariant *identifier);
 
 private:
-    Kross::Action *mAction;
+    QJSEngine *m_engine = nullptr;
     ComicProviderKross *mProvider;
     QStringList mFunctions;
     bool mFuncFound;

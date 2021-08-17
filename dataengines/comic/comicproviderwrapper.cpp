@@ -8,11 +8,12 @@
 #include "comicproviderwrapper.h"
 #include "comicproviderkross.h"
 
-#include <Kross/Core/Action>
-#include <Kross/Core/Interpreter>
-#include <Kross/Core/Manager>
 #include <Plasma/Package>
-#include <QDebug>
+#include <QFile>
+#include <QFileInfo>
+#include <QJSEngine>
+#include <QJSValueIterator>
+#include <QJSValueList>
 #include <QPainter>
 #include <QStandardPaths>
 #include <QTextCodec>
@@ -259,7 +260,6 @@ QString StaticDateWrapper::shortMonthName(int month)
 
 ComicProviderWrapper::ComicProviderWrapper(ComicProviderKross *parent)
     : QObject(parent)
-    , mAction(nullptr)
     , mProvider(parent)
     , mKrossImage(nullptr)
     , mPackage(nullptr)
@@ -295,46 +295,36 @@ void ComicProviderWrapper::init()
             // Package::isValid() fails because the mainscript search fails to find the "main" file from mainscript.
 
             QString mainscript = mPackage->filePath("scripts") + QLatin1String("/main");
+            const QStringList extensions{QStringLiteral(".es"), QStringLiteral(".js")};
             QFileInfo info(mainscript);
-            for (int i = 0; i < extensions().count() && !info.exists(); ++i) {
-                info.setFile(mainscript + extensions().value(i));
+            for (int i = 0; i < extensions.count() && !info.exists(); ++i) {
+                info.setFile(mainscript + extensions.value(i));
                 // qDebug() << "ComicProviderWrapper::init() mainscript found as" << info.filePath();
             }
 
             if (info.exists()) {
-                mAction = new Kross::Action(parent(), mProvider->pluginName());
-                if (mAction) {
-                    mAction->addObject(this, QLatin1String("comic"));
-                    mAction->addObject(new StaticDateWrapper(this), QLatin1String("date"));
-                    mAction->setFile(info.filePath());
-                    mAction->trigger();
-                    mFunctions = mAction->functionNames();
-
+                m_engine = new QJSEngine(this);
+                QFile f(info.absoluteFilePath());
+                if (f.open(QFile::ReadOnly)) {
+                    m_engine->setProperty("comic", m_engine->newQObject(this).toVariant());
+                    m_engine->setProperty("date", m_engine->newQObject(new StaticDateWrapper(this)).toVariant());
+                    m_engine->globalObject().setProperty("comic", m_engine->newQObject(this));
+                    m_engine->globalObject().setProperty("date", m_engine->newQObject(new StaticDateWrapper(this)));
                     mIdentifierSpecified = !mProvider->isCurrent();
+                    m_engine->evaluate(f.readAll(), info.absoluteFilePath());
+                    QJSValueIterator it(m_engine->globalObject());
+                    while (it.hasNext()) {
+                        it.next();
+                        if (it.value().isCallable()) {
+                            mFunctions << it.name();
+                        }
+                    }
                     setIdentifierToDefault();
-                    callFunction(QLatin1String("init"));
+                    callFunction(QStringLiteral("init"));
                 }
             }
         }
     }
-}
-
-const QStringList &ComicProviderWrapper::extensions() const
-{
-    if (mExtensions.isEmpty()) {
-        Kross::InterpreterInfo *info;
-        QStringList list;
-        QString wildcards;
-
-        const auto interpreters = Kross::Manager::self().interpreters();
-        for (const QString &interpretername : interpreters) {
-            info = Kross::Manager::self().interpreterInfo(interpretername);
-            wildcards = info->wildcard();
-            wildcards.remove(QLatin1Char('*'));
-            mExtensions << wildcards.split(QLatin1Char(' '));
-        }
-    }
-    return mExtensions;
 }
 
 ComicProvider::IdentifierType ComicProviderWrapper::identifierType() const
@@ -780,10 +770,15 @@ bool ComicProviderWrapper::functionCalled() const
 
 QVariant ComicProviderWrapper::callFunction(const QString &name, const QVariantList &args)
 {
-    if (mAction) {
+    if (m_engine) {
         mFuncFound = mFunctions.contains(name);
         if (mFuncFound) {
-            return mAction->callFunction(name, args);
+            QJSValueList jsArgs;
+            for (const auto &arg : args) {
+                jsArgs << m_engine->toScriptValue(arg);
+            }
+            auto val = m_engine->globalObject().property(name).call(jsArgs);
+            return val.toVariant();
         }
     }
     return QVariant();
