@@ -71,12 +71,12 @@ private:
     QImageReader mImageReader;
 };
 
-class DateWrapper : public QObject
+class DateWrapper
 {
-    Q_OBJECT
+    Q_GADGET
     Q_PROPERTY(QDate date READ date WRITE setDate)
 public:
-    explicit DateWrapper(QObject *parent = nullptr, const QDate &date = QDate());
+    explicit DateWrapper(const QDate &date = QDate());
 
     QDate date() const;
     void setDate(const QDate &date);
@@ -94,9 +94,9 @@ public:
     };
 
 public Q_SLOTS:
-    QObject *addDays(int ndays);
-    QObject *addMonths(int nmonths);
-    QObject *addYears(int nyears);
+    DateWrapper addDays(int ndays);
+    DateWrapper addMonths(int nmonths);
+    DateWrapper addYears(int nyears);
     int day() const;
     int dayOfWeek() const;
     int dayOfYear() const;
@@ -132,10 +132,10 @@ public:
     explicit StaticDateWrapper(QObject *parent = nullptr);
 
 public Q_SLOTS:
-    QObject *currentDate();
-    QObject *fromJulianDay(int jd);
-    QObject *fromString(const QString &string, int format = Qt::TextDate);
-    QObject *fromString(const QString &string, const QString &format);
+    DateWrapper currentDate();
+    DateWrapper fromJulianDay(int jd);
+    DateWrapper fromString(const QString &string, int format = Qt::TextDate);
+    DateWrapper fromString(const QString &string, const QString &format);
     bool isLeapYear(int year);
     bool isValid(int year, int month, int day);
     QString longDayName(int weekday);

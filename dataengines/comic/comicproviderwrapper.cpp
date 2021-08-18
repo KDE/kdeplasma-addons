@@ -84,9 +84,8 @@ QImage ImageWrapper::read()
     return mImageReader.read();
 }
 
-DateWrapper::DateWrapper(QObject *parent, const QDate &date)
-    : QObject(parent)
-    , mDate(date)
+DateWrapper::DateWrapper(const QDate &date)
+    : mDate(date)
 {
 }
 
@@ -107,27 +106,26 @@ QDate DateWrapper::fromVariant(const QVariant &variant)
     } else if (variant.type() == QVariant::String) {
         return QDate::fromString(variant.toString(), Qt::ISODate);
     } else {
-        DateWrapper *dw = qobject_cast<DateWrapper *>(variant.value<QObject *>());
-        if (dw) {
-            return dw->date();
+        if (variant.canConvert<DateWrapper>()) {
+            return variant.value<DateWrapper>().date();
         }
     }
     return QDate();
 }
 
-QObject *DateWrapper::addDays(int ndays)
+DateWrapper DateWrapper::addDays(int ndays)
 {
-    return new DateWrapper(this, mDate.addDays(ndays));
+    return DateWrapper(mDate.addDays(ndays));
 }
 
-QObject *DateWrapper::addMonths(int nmonths)
+DateWrapper DateWrapper::addMonths(int nmonths)
 {
-    return new DateWrapper(this, mDate.addMonths(nmonths));
+    return DateWrapper(mDate.addMonths(nmonths));
 }
 
-QObject *DateWrapper::addYears(int nyears)
+DateWrapper DateWrapper::addYears(int nyears)
 {
-    return new DateWrapper(this, mDate.addYears(nyears));
+    return DateWrapper(mDate.addYears(nyears));
 }
 
 int DateWrapper::day() const
@@ -210,24 +208,24 @@ StaticDateWrapper::StaticDateWrapper(QObject *parent)
 {
 }
 
-QObject *StaticDateWrapper::currentDate()
+DateWrapper StaticDateWrapper::currentDate()
 {
-    return new DateWrapper(this, QDate::currentDate());
+    return DateWrapper(QDate::currentDate());
 }
 
-QObject *StaticDateWrapper::fromJulianDay(int jd)
+DateWrapper StaticDateWrapper::fromJulianDay(int jd)
 {
-    return new DateWrapper(this, QDate::fromJulianDay(jd));
+    return DateWrapper(QDate::fromJulianDay(jd));
 }
 
-QObject *StaticDateWrapper::fromString(const QString &string, int format)
+DateWrapper StaticDateWrapper::fromString(const QString &string, int format)
 {
-    return new DateWrapper(this, QDate::fromString(string, (Qt::DateFormat)format));
+    return DateWrapper(QDate::fromString(string, (Qt::DateFormat)format));
 }
 
-QObject *StaticDateWrapper::fromString(const QString &string, const QString &format)
+DateWrapper StaticDateWrapper::fromString(const QString &string, const QString &format)
 {
-    return new DateWrapper(this, QDate::fromString(string, format));
+    return DateWrapper(QDate::fromString(string, format));
 }
 
 bool StaticDateWrapper::isLeapYear(int year)
@@ -364,37 +362,19 @@ QImage ComicProviderWrapper::comicImage()
 
 QJSValue ComicProviderWrapper::identifierToScript(const QVariant &identifier)
 {
-    qWarning() << Q_FUNC_INFO << identifierType() << identifier;
     if (identifierType() == ComicProvider::DateIdentifier && identifier.type() != QVariant::Bool) {
-        auto obj = m_engine->newQObject(new DateWrapper(this, identifier.toDate()));
-        qWarning() << Q_FUNC_INFO << obj.toString() << obj.toQObject();
-        return obj;
+        return m_engine->toScriptValue(DateWrapper(identifier.toDate()));
     }
     return m_engine->toScriptValue(identifier);
 }
 
 QVariant ComicProviderWrapper::identifierFromScript(const QJSValue &identifier) const
 {
-    QVariant result = identifier.toString();
     if (identifier.isQObject()) {
-        result = QVariant::fromValue(identifier.toQObject());
+        return QVariant::fromValue(identifier.toQObject());
     }
-    qWarning() << result;
-    /*
-    if (identifier.type() != QVariant::Bool) {
-        switch (identifierType()) {
-        case DateIdentifier:
-            result = DateWrapper::fromVariant(identifier).toString();
-            break;
-        case NumberIdentifier:
-            result = identifier.toInt();
-            break;
-        case StringIdentifier:
-            result = identifier.toString();
-            break;
-        }
-    }*/
-    return result;
+    return identifier.toString();
+    ;
 }
 
 void ComicProviderWrapper::checkIdentifier(QVariant *identifier)
