@@ -778,7 +778,12 @@ QVariant ComicProviderWrapper::callFunction(const QString &name, const QVariantL
                 jsArgs << m_engine->toScriptValue(arg);
             }
             auto val = m_engine->globalObject().property(name).call(jsArgs);
-            return val.toVariant();
+            if (val.isError()) {
+                qWarning() << "Error when calling function" << name << "with arguments" << args << val.toString();
+                return QVariant();
+            } else {
+                return val.toVariant();
+            }
         }
     }
     return QVariant();
