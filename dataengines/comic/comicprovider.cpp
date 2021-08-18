@@ -212,6 +212,7 @@ QString ComicProvider::requestedComicName() const
 
 void ComicProvider::requestPage(const QUrl &url, int id, const MetaInfos &infos)
 {
+    qWarning() << Q_FUNC_INFO << url << id << "fdsfsad" << RequestType::User;
     // each request restarts the timer
     d->mTimer->start();
 

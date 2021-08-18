@@ -14,11 +14,9 @@
 #include <QByteArray>
 #include <QImage>
 #include <QImageReader>
+#include <QJSValueList>
+#include <qjsvalue.h>
 
-namespace Kross
-{
-class Action;
-}
 namespace KPackage
 {
 class Package;
@@ -84,6 +82,17 @@ public:
     void setDate(const QDate &date);
     static QDate fromVariant(const QVariant &variant);
 
+    Q_INVOKABLE QString toString(const QString &format) const;
+    Q_INVOKABLE QString toString(int format = 0) const;
+    Q_INVOKABLE QString toUiString(int format = 0) const
+    {
+        return toString(format);
+    };
+    Q_INVOKABLE QString toUiString(const QString &format) const
+    {
+        return toString(format);
+    };
+
 public Q_SLOTS:
     QObject *addDays(int ndays);
     QObject *addMonths(int nmonths);
@@ -99,8 +108,6 @@ public Q_SLOTS:
     int month() const;
     bool setDate(int year, int month, int day);
     int toJulianDay() const;
-    QString toString(const QString &format) const;
-    QString toString(int format = 0) const;
     int weekNumber() const;
     int year() const;
 
@@ -147,11 +154,11 @@ class ComicProviderWrapper : public QObject
     Q_PROPERTY(QString shopUrl READ shopUrl WRITE setShopUrl)
     Q_PROPERTY(QString title READ title WRITE setTitle)
     Q_PROPERTY(QString additionalText READ additionalText WRITE setAdditionalText)
-    Q_PROPERTY(QVariant identifier READ identifier WRITE setIdentifier)
-    Q_PROPERTY(QVariant nextIdentifier READ nextIdentifier WRITE setNextIdentifier)
-    Q_PROPERTY(QVariant previousIdentifier READ previousIdentifier WRITE setPreviousIdentifier)
-    Q_PROPERTY(QVariant firstIdentifier READ firstIdentifier WRITE setFirstIdentifier)
-    Q_PROPERTY(QVariant lastIdentifier READ lastIdentifier WRITE setLastIdentifier)
+    Q_PROPERTY(QJSValue identifier READ identifier WRITE setIdentifier)
+    Q_PROPERTY(QJSValue nextIdentifier READ nextIdentifier WRITE setNextIdentifier)
+    Q_PROPERTY(QJSValue previousIdentifier READ previousIdentifier WRITE setPreviousIdentifier)
+    Q_PROPERTY(QJSValue firstIdentifier READ firstIdentifier WRITE setFirstIdentifier)
+    Q_PROPERTY(QJSValue lastIdentifier READ lastIdentifier WRITE setLastIdentifier)
     Q_PROPERTY(bool isLeftToRight READ isLeftToRight WRITE setLeftToRight)
     Q_PROPERTY(bool isTopToBottom READ isTopToBottom WRITE setTopToBottom)
     Q_PROPERTY(int apiVersion READ apiVersion)
@@ -196,6 +203,11 @@ public:
         return 4600;
     }
 
+    Q_INVOKABLE void print(const QJSValue &str)
+    {
+        qWarning() << str.toString();
+    }
+
     ComicProvider::IdentifierType identifierType() const;
     QImage comicImage();
     void pageRetrieved(int id, const QByteArray &data);
@@ -215,16 +227,16 @@ public:
     void setTitle(const QString &title);
     QString additionalText() const;
     void setAdditionalText(const QString &additionalText);
-    QVariant identifier();
-    void setIdentifier(const QVariant &identifier);
-    QVariant nextIdentifier();
-    void setNextIdentifier(const QVariant &nextIdentifier);
-    QVariant previousIdentifier();
-    void setPreviousIdentifier(const QVariant &previousIdentifier);
-    QVariant firstIdentifier();
-    void setFirstIdentifier(const QVariant &firstIdentifier);
-    QVariant lastIdentifier();
-    void setLastIdentifier(const QVariant &lastIdentifier);
+    QJSValue identifier();
+    void setIdentifier(const QJSValue &identifier);
+    QJSValue nextIdentifier();
+    void setNextIdentifier(const QJSValue &nextIdentifier);
+    QJSValue previousIdentifier();
+    void setPreviousIdentifier(const QJSValue &previousIdentifier);
+    QJSValue firstIdentifier();
+    void setFirstIdentifier(const QJSValue &firstIdentifier);
+    QJSValue lastIdentifier();
+    void setLastIdentifier(const QJSValue &lastIdentifier);
     bool isLeftToRight() const;
     void setLeftToRight(bool ltr);
     bool isTopToBottom() const;
@@ -248,10 +260,10 @@ public Q_SLOTS:
     void init();
 
 protected:
-    QVariant callFunction(const QString &name, const QVariantList &args = QVariantList());
+    QVariant callFunction(const QString &name, const QJSValueList &args = {});
     bool functionCalled() const;
-    QVariant identifierToScript(const QVariant &identifier);
-    QVariant identifierFromScript(const QVariant &identifier) const;
+    QJSValue identifierToScript(const QVariant &identifier);
+    QVariant identifierFromScript(const QJSValue &identifier) const;
     void setIdentifierToDefault();
     void checkIdentifier(QVariant *identifier);
 
