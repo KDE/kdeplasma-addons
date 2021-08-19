@@ -311,9 +311,13 @@ void ComicProviderWrapper::init()
                     obj.setProperty("Page", ComicProvider::Page);
                     obj.setProperty("Image", ComicProvider::Image);
                     obj.setProperty("User", ComicProvider::User);
-                    obj.setProperty("Page", ComicProvider::Page);
-                    obj.setProperty("Image", ComicProvider::Image);
-                    obj.setProperty("User", ComicProvider::User);
+                    obj.setProperty("Left", ComicProviderWrapper::Left);
+                    obj.setProperty("Top", ComicProviderWrapper::Top);
+                    obj.setProperty("Right", ComicProviderWrapper::Right);
+                    obj.setProperty("Bottom", ComicProviderWrapper::Bottom);
+                    obj.setProperty("DateIdentifier", ComicProvider::DateIdentifier);
+                    obj.setProperty("NumberIdentifier", ComicProvider::NumberIdentifier);
+                    obj.setProperty("StringIdentifier", ComicProvider::StringIdentifier);
                     m_engine->globalObject().setProperty("comic", obj);
                     m_engine->globalObject().setProperty("date", m_engine->newQObject(new StaticDateWrapper(this)));
                     m_engine->evaluate("var print = comic.print");
@@ -374,13 +378,12 @@ QVariant ComicProviderWrapper::identifierFromScript(const QJSValue &identifier) 
         return QVariant::fromValue(identifier.toQObject());
     }
     return identifier.toString();
-    ;
 }
 
 void ComicProviderWrapper::checkIdentifier(QVariant *identifier)
 {
     switch (identifierType()) {
-    case DateIdentifier:
+    case ComicProvider::DateIdentifier:
         if (!mLastIdentifier.isNull() && !identifier->isNull() && (!mIdentifierSpecified || identifier->toDate() > mLastIdentifier.toDate())) {
             *identifier = mLastIdentifier;
         }
@@ -388,7 +391,7 @@ void ComicProviderWrapper::checkIdentifier(QVariant *identifier)
             *identifier = mFirstIdentifier;
         }
         break;
-    case NumberIdentifier:
+    case ComicProvider::NumberIdentifier:
         if (!mLastIdentifier.isNull() && !identifier->isNull() && (!mIdentifierSpecified || identifier->toInt() > mLastIdentifier.toInt())) {
             *identifier = mLastIdentifier;
         }
@@ -396,7 +399,7 @@ void ComicProviderWrapper::checkIdentifier(QVariant *identifier)
             *identifier = mFirstIdentifier;
         }
         break;
-    case StringIdentifier:
+    case ComicProvider::StringIdentifier:
         if (!mLastIdentifier.isNull() && !mLastIdentifier.toString().isEmpty() && !mIdentifierSpecified) {
             *identifier = mLastIdentifier;
         }
@@ -407,15 +410,15 @@ void ComicProviderWrapper::checkIdentifier(QVariant *identifier)
 void ComicProviderWrapper::setIdentifierToDefault()
 {
     switch (identifierType()) {
-    case DateIdentifier:
+    case ComicProvider::DateIdentifier:
         mIdentifier = mProvider->requestedDate();
         mLastIdentifier = QDate::currentDate();
         break;
-    case NumberIdentifier:
+    case ComicProvider::NumberIdentifier:
         mIdentifier = mProvider->requestedNumber();
         mFirstIdentifier = 1;
         break;
-    case StringIdentifier:
+    case ComicProvider::StringIdentifier:
         mIdentifier = mProvider->requestedString();
         break;
     }
@@ -553,13 +556,13 @@ QJSValue ComicProviderWrapper::firstIdentifier()
 void ComicProviderWrapper::setFirstIdentifier(const QJSValue &firstIdentifier)
 {
     switch (identifierType()) {
-    case DateIdentifier:
+    case ComicProvider::DateIdentifier:
         mProvider->setFirstStripDate(DateWrapper::fromVariant(QVariant::fromValue(firstIdentifier.toQObject())));
         break;
-    case NumberIdentifier:
+    case ComicProvider::NumberIdentifier:
         mProvider->setFirstStripNumber(firstIdentifier.toInt());
         break;
-    case StringIdentifier:
+    case ComicProvider::StringIdentifier:
         break;
     }
     mFirstIdentifier = identifierFromScript(firstIdentifier);
@@ -597,37 +600,37 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
     // either handle both previousIdentifier and nextIdentifier or handle none
     if (mPreviousIdentifier.isNull() && mNextIdentifier.isNull()) {
         switch (identifierType()) {
-        case DateIdentifier:
+        case ComicProvider::DateIdentifier:
             if ((mLastIdentifier.isNull() && mIdentifier.toDate() < QDate::currentDate())
                 || (!mLastIdentifier.isNull() && mIdentifier.toDate() < mLastIdentifier.toDate())) {
                 return mIdentifier.toDate().addDays(1);
             } else {
                 return false;
             }
-        case NumberIdentifier:
+        case ComicProvider::NumberIdentifier:
             if (mLastIdentifier.isNull() || mIdentifier.toInt() < mLastIdentifier.toInt()) {
                 return mIdentifier.toInt() + 1;
             } else {
                 return false;
             }
-        case StringIdentifier:
+        case ComicProvider::StringIdentifier:
             break;
         }
         // check if the nextIdentifier is correct
     } else if (!mNextIdentifier.isNull()) {
         // no nextIdentifier if mIdentifier == mLastIdentifier or if no identifier has been specified
         switch (identifierType()) {
-        case DateIdentifier:
+        case ComicProvider::DateIdentifier:
             if ((!mLastIdentifier.isNull() && (mIdentifier.toDate() == mLastIdentifier.toDate())) || !mIdentifierSpecified) {
                 return false;
             }
             break;
-        case NumberIdentifier:
+        case ComicProvider::NumberIdentifier:
             if ((!mLastIdentifier.isNull() && (mIdentifier.toInt() == mLastIdentifier.toInt())) || !mIdentifierSpecified) {
                 return false;
             }
             break;
-        case StringIdentifier:
+        case ComicProvider::StringIdentifier:
             if (!mIdentifierSpecified) {
                 return false;
             }
@@ -642,35 +645,35 @@ QVariant ComicProviderWrapper::previousIdentifierVariant() const
     // either handle both previousIdentifier and nextIdentifier or handle none
     if (mPreviousIdentifier.isNull() && mNextIdentifier.isNull()) {
         switch (identifierType()) {
-        case DateIdentifier:
+        case ComicProvider::DateIdentifier:
             if (mFirstIdentifier.isNull() || mIdentifier.toDate() > mFirstIdentifier.toDate()) {
                 return mIdentifier.toDate().addDays(-1);
             } else {
                 return false;
             }
-        case NumberIdentifier:
+        case ComicProvider::NumberIdentifier:
             if ((mFirstIdentifier.isNull() && mIdentifier.toInt() > 1) || (!mFirstIdentifier.isNull() && mIdentifier.toInt() > mFirstIdentifier.toInt())) {
                 return mIdentifier.toInt() - 1;
             } else {
                 return false;
             }
-        case StringIdentifier:
+        case ComicProvider::StringIdentifier:
             break;
         }
     } else if (!mPreviousIdentifier.isNull()) {
         // no previousIdentifier if mIdentifier == mFirstIdentifier
         switch (identifierType()) {
-        case DateIdentifier:
+        case ComicProvider::DateIdentifier:
             if (!mFirstIdentifier.isNull() && (mIdentifier.toDate() == mFirstIdentifier.toDate())) {
                 return false;
             }
             break;
-        case NumberIdentifier:
+        case ComicProvider::NumberIdentifier:
             if (!mFirstIdentifier.isNull() && (mIdentifier.toInt() == mFirstIdentifier.toInt())) {
                 return false;
             }
             break;
-        case StringIdentifier:
+        case ComicProvider::StringIdentifier:
             break;
         }
     }
@@ -681,7 +684,7 @@ void ComicProviderWrapper::pageRetrieved(int id, const QByteArray &data)
 {
     --mRequests;
     qWarning() << Q_FUNC_INFO << id;
-    if (id == Image) {
+    if (id == ComicProvider::Image) {
         mKrossImage = new ImageWrapper(this, data);
         callFunction(QLatin1String("pageRetrieved"), {id, m_engine->newQObject(mKrossImage)});
         if (mRequests < 1) { // Don't finish if we still have pageRequests

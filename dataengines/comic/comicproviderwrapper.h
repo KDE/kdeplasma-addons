@@ -171,20 +171,6 @@ public:
     };
     Q_ENUM(PositionType)
 
-    enum RequestType {
-        Page = ComicProvider::Page,
-        Image = ComicProvider::Image,
-        User = ComicProvider::User,
-    };
-    Q_ENUM(RequestType)
-
-    enum IdentifierType {
-        DateIdentifier = ComicProvider::DateIdentifier,
-        NumberIdentifier = ComicProvider::NumberIdentifier,
-        StringIdentifier = ComicProvider::StringIdentifier,
-    };
-    Q_ENUM(IdentifierType)
-
     enum RedirectedUrlType {
         PreviousUrl = 0,
         CurrentUrl = 1,
