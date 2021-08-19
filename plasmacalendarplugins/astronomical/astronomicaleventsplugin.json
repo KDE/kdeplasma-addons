@@ -15,8 +15,10 @@
                 "Name[lt]": "Friedrich W. H. Kossebau",
                 "Name[nl]": "Friedrich W. H. Kossebau",
                 "Name[pt]": "Friedrich W. H. Kossebau",
+                "Name[pt_BR]": "Friedrich W. H. Kossebau",
                 "Name[sv]": "Friedrich W. H. Kossebau",
                 "Name[uk]": "Friedrich W. H. Kossebau",
+                "Name[vi]": "Friedrich W. H. Kossebau",
                 "Name[x-test]": "xxFriedrich W. H. Kossebauxx"
             }
         ],
@@ -31,8 +33,10 @@
         "Description[it]": "Estensione del calendario per visualizzare gli eventi astronomici",
         "Description[lt]": "Kalendoriaus priedas, skirtas astronominių įvykių rodymui",
         "Description[nl]": "Plug-in voor agenda voor tonen van astronomische gebeurtenissen",
+        "Description[pt_BR]": "Plugin de calendário para mostrar eventos astronômicos",
         "Description[sv]": "Kalenderinsticksprogram för att visa astronomiska händelser",
         "Description[uk]": "Додаток календаря для показу астрономічних подій",
+        "Description[vi]": "Phần cài cắm lịch để hiển thị các sự kiện thiên văn",
         "Description[x-test]": "xxCalendar plugin for displaying astronomical eventsxx",
         "Icon": "weather-clear-night",
         "Name": "Astronomical Events",
@@ -46,8 +50,10 @@
         "Name[it]": "Eventi astronomici",
         "Name[lt]": "Astronominiai įvykiai",
         "Name[nl]": "Astronomische gebeurtenissen",
+        "Name[pt_BR]": "Eventos astronômicos",
         "Name[sv]": "Astronomiska händelser",
         "Name[uk]": "Астрономічні події",
+        "Name[vi]": "Các sự kiện thiên văn",
         "Name[x-test]": "xxAstronomical Eventsxx"
     },
     "X-KDE-PlasmaCalendar-ConfigUi": "astronomicalevents/AstronomicalEventsConfig.qml"
