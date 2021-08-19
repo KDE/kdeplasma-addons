@@ -8,7 +8,6 @@
 
 #include <KLocalizedString>
 #include <KPackage/Package>
-#include <QDebug>
 
 ComicPackage::ComicPackage(QObject *parent, const QVariantList &args)
     : KPackage::PackageStructure(parent, args)

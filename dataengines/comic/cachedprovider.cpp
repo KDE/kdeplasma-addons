@@ -5,6 +5,7 @@
  */
 
 #include "cachedprovider.h"
+#include "comic_debug.h"
 
 #include <QDebug>
 #include <QDir>
@@ -167,11 +168,11 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
         const int limit = CachedProvider::maxComicLimit();
         // limit is on
         if (limit > 0) {
-            qDebug() << QLatin1String("MaxComicLimit on.");
+            qCDebug(PLASMA_COMIC) << QLatin1String("MaxComicLimit on.");
             int comicsToRemove = comics.count() - limit;
             QStringList::iterator it = comics.begin();
             while (comicsToRemove > 0 && it != comics.end()) {
-                qDebug() << QLatin1String("Remove file") << (dirPath + (*it));
+                qCDebug(PLASMA_COMIC) << QLatin1String("Remove file") << (dirPath + (*it));
                 QFile::remove(dirPath + (*it));
                 QFile::remove(dirPath + (*it) + QLatin1String(".conf"));
                 it = comics.erase(it);
@@ -223,7 +224,7 @@ int CachedProvider::maxComicLimit()
 void CachedProvider::setMaxComicLimit(int limit)
 {
     if (limit < 0) {
-        qDebug() << "Wrong limit, setting to default.";
+        qCDebug(PLASMA_COMIC) << "Wrong limit, setting to default.";
         limit = CACHE_DEFAULT;
     }
     QSettings settings(identifierToPath(QLatin1String("comic_settings.conf")), QSettings::IniFormat);

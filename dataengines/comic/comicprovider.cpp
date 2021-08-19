@@ -5,8 +5,8 @@
  */
 
 #include "comicprovider.h"
+#include "comic_debug.h"
 
-#include <QDebug>
 #include <QTimer>
 #include <QUrl>
 
@@ -52,7 +52,7 @@ public:
     void slotRedirectionDone(KJob *job)
     {
         if (job->error()) {
-            qDebug() << "Redirection job with id" << job->property("uid").toInt() << "finished with an error.";
+            qCDebug(PLASMA_COMIC) << "Redirection job with id" << job->property("uid").toInt() << "finished with an error.";
         }
 
         if (mRedirections.contains(job)) {
@@ -212,6 +212,7 @@ QString ComicProvider::requestedComicName() const
 
 void ComicProvider::requestPage(const QUrl &url, int id, const MetaInfos &infos)
 {
+    qCDebug(PLASMA_COMIC) << "Requested page" << url << "with id" << id << "and additional metadata" << infos;
     // each request restarts the timer
     d->mTimer->start();
 

@@ -18,6 +18,7 @@
 #include <Plasma/DataContainer>
 
 #include "cachedprovider.h"
+#include "comic_debug.h"
 #include "comicproviderkross.h"
 
 ComicEngine::ComicEngine(QObject *parent, const QVariantList &args)
@@ -52,7 +53,7 @@ void ComicEngine::loadProviders()
     for (auto comic : comics) {
         mProviders << comic.pluginId();
 
-        // qDebug() << "ComicEngine::loadProviders()  service name=" << comic.name();
+        qCDebug(PLASMA_COMIC) << "ComicEngine::loadProviders()  service name=" << comic.name();
         QStringList data;
         data << comic.name();
         QFileInfo file(comic.iconName());
@@ -121,7 +122,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             setData(identifier, QLatin1String("Error automatically fixable"), true);
             setData(identifier, QLatin1String("Identifier"), identifier);
             setData(identifier, QLatin1String("Previous identifier suffix"), lastCachedIdentifier(identifier));
-            qDebug() << "No connection.";
+            qCDebug(PLASMA_COMIC) << "No internet connection, using cached data";
             return true;
         }
 
@@ -176,7 +177,7 @@ void ComicEngine::finished(ComicProvider *provider)
     // sets the data
     setComicData(provider);
     if (provider->image().isNull()) {
-        qWarning() << "provider->image().isNull()" << Q_FUNC_INFO;
+        qCWarning(PLASMA_COMIC) << "Provider returned null image" << provider->name();
         error(provider);
         return;
     }

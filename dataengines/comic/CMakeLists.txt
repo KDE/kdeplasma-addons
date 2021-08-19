@@ -1,8 +1,23 @@
+set(LOGGING_SRCS)
+ecm_qt_declare_logging_category(LOGGING_SRCS
+    HEADER comic_debug.h
+    IDENTIFIER PLASMA_COMIC
+    CATEGORY_NAME ork.kde.plasma.comic
+    DESCRIPTION "Plasma Comic Engine"
+    EXPORT PLASMA_COMIC
+)
+ecm_qt_install_logging_categories(
+    EXPORT PLASMA_COMIC
+    FILE plasma_comic.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)
+
 set(comic_engine_SRCS
     cachedprovider.cpp
     comic.cpp
     comicproviderkross.cpp
     comicproviderwrapper.cpp
+    ${LOGGING_SRCS}
 )
 
 kcoreaddons_add_plugin(plasma_engine_comic SOURCES ${comic_engine_SRCS} INSTALL_NAMESPACE "plasma/dataengine")
@@ -26,6 +41,7 @@ set_target_properties(plasma_packagestructure_comic PROPERTIES OUTPUT_NAME plasm
 
 set(comic_provider_core_SRCS
   comicprovider.cpp
+  ${LOGGING_SRCS}
 )
 
 add_library(plasmacomicprovidercore SHARED ${comic_provider_core_SRCS})
@@ -46,6 +62,7 @@ set(plasma_comic_krossprovider_SRCS
   comicproviderkross.cpp
   comicproviderwrapper.cpp
   comic_package.cpp
+  ${LOGGING_SRCS}
 )
 
 add_library(plasma_comic_krossprovider MODULE ${plasma_comic_krossprovider_SRCS})
