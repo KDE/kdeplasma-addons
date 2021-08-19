@@ -374,8 +374,8 @@ QJSValue ComicProviderWrapper::identifierToScript(const QVariant &identifier)
 
 QVariant ComicProviderWrapper::identifierFromScript(const QJSValue &identifier) const
 {
-    if (identifier.isQObject()) {
-        return QVariant::fromValue(identifier.toQObject());
+    if (identifier.toVariant().canConvert<DateWrapper>()) {
+        return identifier.toVariant().value<DateWrapper>().date();
     }
     return identifier.toString();
 }
@@ -683,7 +683,6 @@ QVariant ComicProviderWrapper::previousIdentifierVariant() const
 void ComicProviderWrapper::pageRetrieved(int id, const QByteArray &data)
 {
     --mRequests;
-    qWarning() << Q_FUNC_INFO << id;
     if (id == ComicProvider::Image) {
         mKrossImage = new ImageWrapper(this, data);
         callFunction(QLatin1String("pageRetrieved"), {id, m_engine->newQObject(mKrossImage)});
@@ -774,7 +773,6 @@ QVariant ComicProviderWrapper::callFunction(const QString &name, const QJSValueL
     if (m_engine) {
         mFuncFound = mFunctions.contains(name);
         if (mFuncFound) {
-            // jsArgs << m_engine->toScriptValue(arg);
             auto val = m_engine->globalObject().property(name).call(args);
             if (val.isError()) {
                 qWarning() << "Error when calling function" << name << "with arguments" << QVariant::fromValue(args) << val.toString();
