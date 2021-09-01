@@ -90,3 +90,6 @@ target_link_libraries( plasma_potd_bingprovider plasmapotdprovidercore KF5::KIOC
 
 kcoreaddons_add_plugin(plasma_potd_unsplashprovider SOURCES unsplashprovider.cpp INSTALL_NAMESPACE "potd")
 target_link_libraries( plasma_potd_unsplashprovider plasmapotdprovidercore KF5::KIOCore )
+
+kcoreaddons_add_plugin(plasma_potd_simonstalenhagprovider SOURCES simonstalenhagprovider.cpp INSTALL_NAMESPACE "potd")
+target_link_libraries( plasma_potd_simonstalenhagprovider plasmapotdprovidercore KF5::KIOCore )
