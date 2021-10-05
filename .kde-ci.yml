@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
+Dependencies:
+- 'on': ['@all']
+  'require':
+    'frameworks/attica': '@latest'
+    'frameworks/extra-cmake-modules': '@latest'
+    'frameworks/karchive': '@latest'
+    'frameworks/kauth': '@latest'
+    'frameworks/kcmutils': '@latest'
+    'frameworks/kcodecs': '@latest'
+    'frameworks/kcompletion': '@latest'
+    'frameworks/kconfig': '@latest'
+    'frameworks/kconfigwidgets': '@latest'
+    'frameworks/kcoreaddons': '@latest'
+    'frameworks/kholidays': '@latest'
+    'frameworks/ki18n': '@latest'
+    'frameworks/kio': '@latest'
+    'frameworks/kjobwidgets': '@latest'
+    'frameworks/knewstuff': '@latest'
+    'frameworks/knotifications': '@latest'
+    'frameworks/kpackage': '@latest'
+    'frameworks/kross': '@latest'
+    'frameworks/krunner': '@latest'
+    'frameworks/kservice': '@latest'
+    'frameworks/kwidgetsaddons': '@latest'
+    'frameworks/kwindowsystem': '@latest'
+    'frameworks/kxmlgui': '@latest'
+    'frameworks/plasma-framework': '@latest'
+    'frameworks/solid': '@latest'
+    'frameworks/sonnet': '@latest'
+    'frameworks/unitconversion': '@latest'
+    'plasma/plasma-workspace': '@same'
