@@ -277,18 +277,14 @@ Item {
             }
         }
 
-        QtControls.Action {
-            shortcut: "Return"
-            onTriggered: {
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Return || event.key == Qt.Key_Menu) {
                 if (fullRoot.currentItem) {
-                    fullRoot.currentItem.clicked(null)
+                    fullRoot.currentItem.clicked(null);
                 }
+            } else if (event.key == Qt.Key_Escape) {
+                plasmoid.expanded = false;
             }
-        }
-
-        QtControls.Action {
-            shortcut: "Escape"
-            onTriggered: plasmoid.expanded = false
         }
 
         // This item serves as a drag pixmap and is captured when a drag starts
@@ -320,6 +316,7 @@ Item {
                 "text/plain": colorLabel.text
             }
 
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
             hoverEnabled: true
             onContainsMouseChanged: {
                 if (containsMouse) {
