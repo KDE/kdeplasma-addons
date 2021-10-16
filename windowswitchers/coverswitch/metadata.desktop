@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Cover Switch
+Comment=A Window Switcher layout showing thumbnails as a 3D carousel
+Icon=preferences-system-windows-effect-coverswitch
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+
+X-KDE-PluginInfo-Author=Ismael Asensio
+X-KDE-PluginInfo-Email=isma.af@gmail.com
+X-KDE-PluginInfo-Name=coverswitch
+X-KDE-PluginInfo-Version=1.0
+
+X-KDE-PluginInfo-License=GPL
+X-KDE-ServiceTypes=KWin/WindowSwitcher
+Type=Service

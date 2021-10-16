@@ -2,6 +2,8 @@
 set(KWIN_NAME "kwin")
 install( DIRECTORY big_icons    DESTINATION ${KDE_INSTALL_DATADIR}/${KWIN_NAME}/tabbox )
 install( DIRECTORY compact      DESTINATION ${KDE_INSTALL_DATADIR}/${KWIN_NAME}/tabbox )
+install( DIRECTORY coverswitch  DESTINATION ${KDE_INSTALL_DATADIR}/${KWIN_NAME}/tabbox )
+install( DIRECTORY flipswitch   DESTINATION ${KDE_INSTALL_DATADIR}/${KWIN_NAME}/tabbox )
 install( DIRECTORY informative  DESTINATION ${KDE_INSTALL_DATADIR}/${KWIN_NAME}/tabbox )
 install( DIRECTORY present_windows  DESTINATION ${KDE_INSTALL_DATADIR}/${KWIN_NAME}/tabbox )
 install( DIRECTORY small_icons  DESTINATION ${KDE_INSTALL_DATADIR}/${KWIN_NAME}/tabbox )
@@ -12,6 +14,8 @@ install( DIRECTORY thumbnails   DESTINATION ${KDE_INSTALL_DATADIR}/${KWIN_NAME}/
 # service files
 install( FILES big_icons/metadata.desktop    DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/${KWIN_NAME} RENAME kwin4_window_switcher_big_icons.desktop )
 install( FILES compact/metadata.desktop      DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/${KWIN_NAME} RENAME kwin4_window_switcher_compact.desktop )
+install( FILES coverswitch/metadata.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/${KWIN_NAME} RENAME kwin4_window_switcher_coverswitch.desktop )
+install( FILES flipswitch/metadata.desktop   DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/${KWIN_NAME} RENAME kwin4_window_switcher_flipswitch.desktop )
 install( FILES informative/metadata.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/${KWIN_NAME} RENAME kwin4_window_switcher_informative.desktop )
 install( FILES present_windows/metadata.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/${KWIN_NAME} RENAME kwin4_window_switcher_present_windows.desktop )
 install( FILES small_icons/metadata.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/${KWIN_NAME} RENAME kwin4_window_switcher_small_icons.desktop )
