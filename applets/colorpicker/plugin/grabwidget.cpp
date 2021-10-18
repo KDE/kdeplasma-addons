@@ -78,14 +78,13 @@ void X11Grabber::pick()
     m_grabWidget->show();
     m_grabWidget->installEventFilter(this);
     m_grabWidget->grabMouse(Qt::CrossCursor);
+    m_grabWidget->grabKeyboard();
 }
 
 bool X11Grabber::eventFilter(QObject *watched, QEvent *event)
 {
     if (watched == m_grabWidget && event->type() == QEvent::MouseButtonRelease) {
-        m_grabWidget->removeEventFilter(this);
-        m_grabWidget->hide();
-        m_grabWidget->releaseMouse();
+        releaseWidget();
 
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
 
@@ -99,9 +98,23 @@ bool X11Grabber::eventFilter(QObject *watched, QEvent *event)
                 setColor(color);
             }
         }
+    } else if (watched == m_grabWidget && event->type() == QEvent::KeyPress) {
+        QKeyEvent *me = static_cast<QKeyEvent *>(event);
+
+        if (me->key() == Qt::Key_Escape) {
+            releaseWidget();
+        }
     }
 
     return QObject::eventFilter(watched, event);
+}
+
+void X11Grabber::releaseWidget()
+{
+    m_grabWidget->removeEventFilter(this);
+    m_grabWidget->hide();
+    m_grabWidget->releaseMouse();
+    m_grabWidget->releaseKeyboard();
 }
 
 KWinWaylandGrabber::KWinWaylandGrabber(QObject *parent)

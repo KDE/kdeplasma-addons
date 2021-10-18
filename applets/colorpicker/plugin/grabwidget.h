@@ -49,6 +49,8 @@ protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
+    void releaseWidget();
+
     QWidget *m_grabWidget;
 };
 

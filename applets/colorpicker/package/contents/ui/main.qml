@@ -102,8 +102,8 @@ Item {
         columns: root.isVertical ? 1 : 3
         rows: root.isVertical ? 3 : 1
 
-        Layout.minimumWidth: isVertical ? PlasmaCore.Units.iconSizes.small : ((height * 2) + spacer.width)
-        Layout.minimumHeight: isVertical ? ((width * 2) + spacer.height) : PlasmaCore.Units.iconSizes.small
+        Layout.minimumWidth: root.isVertical ? PlasmaCore.Units.iconSizes.small : ((height * 2) + spacer.width)
+        Layout.minimumHeight: root.isVertical ? ((width * 2) + spacer.height) : PlasmaCore.Units.iconSizes.small
 
         // TODO: Still PC2 for now because:
         // - It never loses visible focus despite panel widgets never getting focus anyway: https://bugs.kde.org/show_bug.cgi?id=424446
@@ -328,7 +328,7 @@ Item {
 
             onPressed: {
                 // grab pixmap only once
-                if (Drag.imageSource.toString() === "") { // cannot just do !Drage.imageSource on QUrl
+                if (Drag.imageSource.toString() === "") { // cannot just do !Drag.imageSource on QUrl
                     dragImageDummy.color = currentColor;
                     dragImageDummy.grabToImage(function (result) {
                         Drag.imageSource = result.url;
