@@ -5,11 +5,13 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.6
+import QtQuick 2.15
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.12
 import QtQuick.Dialogs 1.3
+// Deliberately imported after QtQuick to avoid missing restoreMode property in Binding. Fix in Qt 6.
+import QtQml 2.15
 
 import org.kde.draganddrop 2.0 as DragDrop
 
@@ -204,6 +206,9 @@ PlasmaCore.SvgItem {
                     property: "text"
                     value: note.noteText
                     when: !mainTextArea.activeFocus
+                    // don't restore an empty value (which IS empty by default when the applet starts up),
+                    // instead only remove this binding for the time when the user edits the content.
+                    restoreMode: Binding.RestoreBinding
                 }
 
                 onActiveFocusChanged: {
