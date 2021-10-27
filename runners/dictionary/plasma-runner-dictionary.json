@@ -98,5 +98,6 @@
         "Name[vi]": "Từ điển",
         "Name[x-test]": "xxDictionaryxx",
         "Name[zh_CN]": "词典"
-    }
+    },
+    "X-KDE-ConfigModule": "kf5/krunner/kcms/kcm_krunner_dictionary"
 }

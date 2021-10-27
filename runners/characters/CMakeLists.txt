@@ -1,9 +1,8 @@
 add_definitions(-DTRANSLATION_DOMAIN="plasma_runner_CharacterRunner")
 
-set(kcm_krunner_charrunner_SRCS charrunner_config.cpp)
-
-ki18n_wrap_ui(kcm_krunner_charrunner_SRCS charrunner_config.ui)
-add_library(kcm_krunner_charrunner MODULE ${kcm_krunner_charrunner_SRCS})
+kcoreaddons_add_plugin(kcm_krunner_charrunner INSTALL_NAMESPACE "kf5/krunner/kcms")
+target_sources(kcm_krunner_charrunner PRIVATE charrunner_config.cpp)
+ki18n_wrap_ui(kcm_krunner_charrunner charrunner_config.ui)
 target_link_libraries(kcm_krunner_charrunner
     KF5::Runner
     KF5::KCMUtils
@@ -16,8 +15,3 @@ target_link_libraries(krunner_charrunner
     KF5::Runner
     KF5::I18n
 )
-add_dependencies(krunner_charrunner kcm_krunner_charrunner)
-
-# Install the library and .desktop file
-install(TARGETS kcm_krunner_charrunner DESTINATION ${KDE_INSTALL_PLUGINDIR})
-install(FILES plasma-runner-character_config.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})

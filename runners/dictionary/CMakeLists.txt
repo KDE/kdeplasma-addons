@@ -6,8 +6,6 @@ set(kcm_dictionaryrunner_SRCS dictionaryrunner_config.cpp)
 kcoreaddons_add_plugin(krunner_dictionary SOURCES ${dictionaryrunner_SRCS} INSTALL_NAMESPACE "kf5/krunner")
 target_link_libraries(krunner_dictionary KF5::Runner KF5::I18n)
 
-add_library(kcm_krunner_dictionary MODULE ${kcm_dictionaryrunner_SRCS})
+kcoreaddons_add_plugin(kcm_krunner_dictionary INSTALL_NAMESPACE "kf5/krunner/kcms")
+target_sources(kcm_krunner_dictionary PRIVATE dictionaryrunner_config.cpp)
 target_link_libraries(kcm_krunner_dictionary KF5::Runner KF5::I18n KF5::KCMUtils)
-
-install(TARGETS kcm_krunner_dictionary DESTINATION ${KDE_INSTALL_PLUGINDIR})
-install(FILES plasma-runner-dictionary_config.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})

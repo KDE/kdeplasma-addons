@@ -1,11 +1,8 @@
 add_definitions(-DTRANSLATION_DOMAIN="plasma_runner_spellcheckrunner")
 
-set(kcm_krunner_spellcheck_SRCS
-    spellcheck_config.cpp
-)
-
-ki18n_wrap_ui(kcm_krunner_spellcheck_SRCS spellcheck_config.ui)
-add_library(kcm_krunner_spellcheck MODULE ${kcm_krunner_spellcheck_SRCS})
+kcoreaddons_add_plugin(kcm_krunner_spellcheck INSTALL_NAMESPACE "kf5/krunner/kcms")
+ki18n_wrap_ui(kcm_krunner_spellcheck spellcheck_config.ui)
+target_sources(kcm_krunner_spellcheck PRIVATE spellcheck_config.cpp)
 target_link_libraries(kcm_krunner_spellcheck 
     Qt::Gui
     KF5::Runner
@@ -20,8 +17,3 @@ target_link_libraries(krunner_spellcheck
     KF5::I18n
     KF5::SonnetCore
 )
-
-install(TARGETS kcm_krunner_spellcheck
-        DESTINATION ${KDE_INSTALL_PLUGINDIR})
-install(FILES plasma-runner-spellchecker_config.desktop
-        DESTINATION ${KDE_INSTALL_KSERVICES5DIR})

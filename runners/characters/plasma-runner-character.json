@@ -97,5 +97,6 @@
         "Name[vi]": "Kí tự đặc biệt",
         "Name[x-test]": "xxSpecial Charactersxx",
         "Name[zh_CN]": "特殊字符"
-    }
+    },
+    "X-KDE-ConfigModule": "kf5/krunner/kcms/kcm_krunner_charrunner"
 }
