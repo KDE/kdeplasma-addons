@@ -1,9 +1,7 @@
 add_definitions(-DTRANSLATION_DOMAIN="plasma_runner_krunner_dictionary")
 
-set(dictionaryrunner_SRCS dictionaryrunner.cpp dictionarymatchengine.cpp)
-set(kcm_dictionaryrunner_SRCS dictionaryrunner_config.cpp)
-
 kcoreaddons_add_plugin(krunner_dictionary SOURCES ${dictionaryrunner_SRCS} INSTALL_NAMESPACE "kf5/krunner")
+target_sources(krunner_dictionary PRIVATE dictionaryrunner.cpp dictionarymatchengine.cpp)
 target_link_libraries(krunner_dictionary KF5::Runner KF5::I18n)
 
 kcoreaddons_add_plugin(kcm_krunner_dictionary INSTALL_NAMESPACE "kf5/krunner/kcms")
