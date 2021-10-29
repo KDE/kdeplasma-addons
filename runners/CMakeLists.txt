@@ -4,7 +4,4 @@ add_subdirectory(katesessions)
 add_subdirectory(spellchecker)
 add_subdirectory(characters)
 add_subdirectory(dictionary)
-
-if(NOT WIN32)
-    add_subdirectory(konsoleprofiles)
-endif(NOT WIN32)
+add_subdirectory(konsoleprofiles)
