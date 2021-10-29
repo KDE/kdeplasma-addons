@@ -73,9 +73,6 @@ add_definitions(
     -DQT_NO_URL_CAST_FROM_STRING
 )
 
-#########################################################################
-
-################# list the subdirectories #################
 add_subdirectory(applets)
 add_subdirectory(dataengines)
 add_subdirectory(runners)
