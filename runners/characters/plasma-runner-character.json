@@ -45,6 +45,7 @@
         "Description[eu]": "Karaktere bereziak sortzen ditu haien kode hamaseitarretatik abiatuta",
         "Description[fi]": "Lisää erikoismerkkejä niiden heksakoodeista",
         "Description[fr]": "Crée des caractères spéciaux à partir de leurs codes hexadécimaux.",
+        "Description[ia]": "Crea characteres special ab lor odices hexadecimal",
         "Description[it]": "Crea caratteri speciali dal loro codice esadecimale",
         "Description[ja]": "十六進コードから特殊文字を作ります",
         "Description[ko]": "16진 코드를 사용하여 특수 문자 삽입",
