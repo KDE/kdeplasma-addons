@@ -125,7 +125,7 @@ void MediaFrame::add(const QString &path, AddOption option)
             while (dirIterator.hasNext()) {
                 dirIterator.next();
 
-                filePath = dirIterator.filePath();
+                filePath = "file://" + dirIterator.filePath();
                 paths.append(filePath);
                 m_allFiles.append(filePath);
                 // qDebug() << "Appended" << filePath;
