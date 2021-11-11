@@ -84,23 +84,25 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.minimumWidth: Math.max(forecastView.Layout.minimumWidth,
-                                      detailsView.Layout.minimumWidth,
-                                      noticesView.Layout.minimumWidth)
-        Layout.minimumHeight: Math.max(forecastView.Layout.minimumHeight,
+        Layout.minimumHeight: Math.max(forecastScrollView.Layout.minimumHeight,
                                        detailsView.Layout.minimumHeight,
                                        noticesView.Layout.minimumHeight)
 
         clip: true // previous/next views are prepared outside of view, do not render them
-
+        //implicitWidth: forecastView.width
         currentIndex: tabBar.currentIndex
 
-        ColumnLayout {
-            ForecastView {
-                id: forecastView
+        QtControls.ScrollView {
+            id: forecastScrollView
+            clip: true
+            width: fullRoot.width
+            ColumnLayout {
+                ForecastView {
+                    id: forecastView
 
-                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                Layout.fillWidth: false
+                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                    Layout.fillWidth: false
+                }
             }
         }
 

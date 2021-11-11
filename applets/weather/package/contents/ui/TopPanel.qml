@@ -26,6 +26,7 @@ GridLayout {
         locationLabel.width,
         (sideWidth + columnSpacing) * 2 + conditionIcon.Layout.minimumWidth
     )
+    Layout.maximumWidth: fullRoot.width
 
     visible: !!generalModel.location
 
