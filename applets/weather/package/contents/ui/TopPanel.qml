@@ -23,7 +23,7 @@ GridLayout {
     )
 
     Layout.minimumWidth: Math.max(
-        locationLabel.implicitWidth,
+        locationLabel.width,
         (sideWidth + columnSpacing) * 2 + conditionIcon.Layout.minimumWidth
     )
 
@@ -49,7 +49,8 @@ GridLayout {
         Layout.columnSpan: 3
         Layout.fillWidth: true
 
-        wrapMode: Text.NoWrap
+        Layout.maximumWidth: fullRoot.width
+        wrapMode: Text.Wrap
 
         text: generalModel.location
     }
