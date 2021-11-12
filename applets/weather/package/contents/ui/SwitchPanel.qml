@@ -44,9 +44,9 @@ ColumnLayout {
 
     DetailsView {
         id: detailsView
-
-        visible: false;
-
+        visible: false
+        implicitHeight: swipeView.height
+        Layout.fillHeight: true
         model: detailsModel
     }
 
@@ -60,9 +60,9 @@ ColumnLayout {
 
     NoticesView {
         id: noticesView
-
-        visible: false;
-
+        visible: false
+        Layout.fillHeight: true
+        implicitHeight: swipeView.height
         model: noticesModel
     }
 
@@ -89,7 +89,6 @@ ColumnLayout {
                                        noticesView.Layout.minimumHeight)
 
         clip: true // previous/next views are prepared outside of view, do not render them
-        //implicitWidth: forecastView.width
         currentIndex: tabBar.currentIndex
 
         QtControls.ScrollView {
@@ -97,6 +96,7 @@ ColumnLayout {
             clip: true
             width: fullRoot.width
             ColumnLayout {
+                width: fullRoot.width
                 ForecastView {
                     id: forecastView
 
