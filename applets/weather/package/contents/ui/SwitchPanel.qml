@@ -91,12 +91,12 @@ ColumnLayout {
         clip: true // previous/next views are prepared outside of view, do not render them
         currentIndex: tabBar.currentIndex
 
-        QtControls.ScrollView {
+        PlasmaComponents.ScrollView {
             id: forecastScrollView
             clip: true
             width: fullRoot.width
             ColumnLayout {
-                width: fullRoot.width
+                Layout.fillWidth: true
                 ForecastView {
                     id: forecastView
 
