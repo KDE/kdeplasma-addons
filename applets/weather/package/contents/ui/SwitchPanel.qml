@@ -9,6 +9,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2 as QtControls
 
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 ColumnLayout {
@@ -18,6 +19,10 @@ ColumnLayout {
     property alias detailsModel: detailsView.model
     property alias noticesModel: noticesView.model
     property alias forecastViewTitle: forecastTabButton.text
+
+    property int maxWidth: PlasmaCore.Units.gridUnit * 22
+
+    width: maxWidth
 
     readonly property bool hasDetailsContent: detailsModel && detailsModel.length > 0
     readonly property alias hasNoticesContent: noticesView.hasContent
@@ -87,6 +92,7 @@ ColumnLayout {
         Layout.minimumHeight: Math.max(forecastScrollView.Layout.minimumHeight,
                                        detailsView.Layout.minimumHeight,
                                        noticesView.Layout.minimumHeight)
+        Layout.maximumWidth: maxWidth
 
         clip: true // previous/next views are prepared outside of view, do not render them
         currentIndex: tabBar.currentIndex
@@ -94,9 +100,8 @@ ColumnLayout {
         PlasmaComponents.ScrollView {
             id: forecastScrollView
             clip: true
-            width: fullRoot.width
             ColumnLayout {
-                Layout.fillWidth: true
+                width: maxWidth
                 ForecastView {
                     id: forecastView
 
