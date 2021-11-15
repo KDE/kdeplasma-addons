@@ -9,6 +9,9 @@
 
 #include "weatherapplet.h"
 
+#include <Plasma/DataContainer>
+#include <Plasma/DataEngine>
+
 // KF
 #include <KConfigGroup>
 #include <KLocalizedString>
@@ -100,6 +103,14 @@ const char source[] = "source";
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
 {
+    Plasma::DataEngine *dataengine = dataEngine(QStringLiteral("weather"));
+    const QVariantList plugins = dataengine->containerForSource(QLatin1String("ions"))->data().values();
+    for (const QVariant &plugin : plugins) {
+        const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
+        if (pluginInfo.count() > 1) {
+            m_defaultProviders << pluginInfo[1];
+        }
+    }
 }
 
 void WeatherApplet::init()
@@ -182,7 +193,7 @@ QVariantMap WeatherApplet::configValues() const
 
     return QVariantMap{
         // UI settings
-        {AppletConfigKeys::services(), cfg.readEntry(StorageConfigKeys::weatherServiceProviders, QStringList())},
+        {AppletConfigKeys::services(), cfg.readEntry(StorageConfigKeys::weatherServiceProviders, m_defaultProviders)},
         {AppletConfigKeys::showTemperatureInTooltip(), cfg.readEntry(StorageConfigKeys::showTemperatureInTooltip, true)},
         {AppletConfigKeys::showWindInTooltip(), cfg.readEntry(StorageConfigKeys::showWindInTooltip, false)},
         {AppletConfigKeys::showPressureInTooltip(), cfg.readEntry(StorageConfigKeys::showPressureInTooltip, false)},

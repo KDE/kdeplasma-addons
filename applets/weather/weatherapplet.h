@@ -9,6 +9,8 @@
 #ifndef WEATHERAPPLET_H
 #define WEATHERAPPLET_H
 
+#include <Plasma/DataEngineConsumer>
+
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/Unit>
 
@@ -23,7 +25,7 @@
 // the <group> containers, so e.g. <group name="General"> would use
 // [Containments][18][Applets][101][Configuration][General]
 // Challenge: migrating configuration e.g. using kconf_update? how?
-class WeatherApplet : public Plasma::Applet
+class WeatherApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 {
     Q_OBJECT
     // used for making this information available to the config pages
@@ -150,6 +152,7 @@ private:
     bool m_windShownInTooltip = false;
     bool m_pressureShownInTooltip = false;
     bool m_humidityShownInTooltip = false;
+    QStringList m_defaultProviders;
 
     bool m_temperatureShownInCompactMode = false;
 

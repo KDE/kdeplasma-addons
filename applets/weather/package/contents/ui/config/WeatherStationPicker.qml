@@ -48,27 +48,6 @@ ColumnLayout {
         id: serviceListModel
     }
 
-    Kirigami.FormLayout {
-        ColumnLayout {
-            Kirigami.FormData.label: i18n("Weather providers:")
-            Kirigami.FormData.buddyFor: calendarPluginsRepeater.itemAt(0)
-
-            Repeater {
-                id: calendarPluginsRepeater
-                model: serviceListModel
-                delegate: QQC2.CheckBox {
-                    text: model.display
-                    checked: model.checked
-                    onToggled: {
-                        model.checked = checked;
-                        checked = Qt.binding(function() { return model.checked; });
-                        weatherStationConfigPage.configurationChanged();
-                    }
-                }
-            }
-        }
-    }
-
     RowLayout {
         Layout.fillWidth: true
 
