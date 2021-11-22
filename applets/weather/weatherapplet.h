@@ -31,6 +31,8 @@ class WeatherApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
     // used for making this information available to the config pages
     Q_PROPERTY(bool needsToBeSquare MEMBER m_needsToBeSquare NOTIFY needsToBeSquareChanged FINAL)
 
+    Q_PROPERTY(QVariantMap providers MEMBER m_providers NOTIFY providersChanged FINAL)
+
     // config properties
     Q_PROPERTY(QString source READ source NOTIFY sourceChanged FINAL)
     Q_PROPERTY(int updateInterval READ updateInterval NOTIFY updateIntervalChanged FINAL)
@@ -69,6 +71,11 @@ public:
     QString source() const
     {
         return m_source;
+    }
+
+    QVariantMap providers() const
+    {
+        return m_providers;
     }
 
     int updateInterval() const
@@ -127,6 +134,7 @@ Q_SIGNALS:
     void sourceChanged();
     void updateIntervalChanged();
     void displayUnitsChanged();
+    void providersChanged();
 
     void temperatureShownInTooltipChanged();
     void windShownInTooltipChanged();
@@ -152,7 +160,7 @@ private:
     bool m_windShownInTooltip = false;
     bool m_pressureShownInTooltip = false;
     bool m_humidityShownInTooltip = false;
-    QStringList m_defaultProviders;
+    QVariantMap m_providers;
 
     bool m_temperatureShownInCompactMode = false;
 

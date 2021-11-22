@@ -21,7 +21,6 @@ Kirigami.FormLayout {
 
     function saveConfig() {
         var config = {
-            services: stationPicker.selectedServices,
             source: source,
             updateInterval: updateIntervalSpin.value
         };
@@ -30,11 +29,10 @@ Kirigami.FormLayout {
         plasmoid.nativeInterface.configChanged();
     }
 
+    property var providers: plasmoid.nativeInterface.providers
 
     Component.onCompleted: {
         var config = plasmoid.nativeInterface.configValues();
-
-        stationPicker.selectedServices = config.services;
 
         source = config.source;
 
@@ -43,6 +41,7 @@ Kirigami.FormLayout {
 
     WeatherStationPickerDialog {
         id: stationPicker
+        providers: plasmoid.nativeInterface.providers
 
         onAccepted: {
             weatherStationConfigPage.source = source;
@@ -65,7 +64,7 @@ Kirigami.FormLayout {
                 var sourceDetails = source.split('|');
                 if (sourceDetails.length > 2) {
                     return i18nc("A weather station location and the weather service it comes from",
-                                    "%1 (%2)", sourceDetails[2], sourceDetails[0]);
+                                    "%1 (%2)", sourceDetails[2], plasmoid.nativeInterface.providers[sourceDetails[0]]);
                 }
                 return ""
             }

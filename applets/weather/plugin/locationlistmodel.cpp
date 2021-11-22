@@ -8,6 +8,7 @@
 #include "locationlistmodel.h"
 
 #include <Plasma/DataContainer>
+#include <Plasma/DataEngine>
 
 #include <KLocalizedString>
 
@@ -121,7 +122,10 @@ QString LocationListModel::nameForListIndex(int listIndex) const
     if (0 <= listIndex && listIndex < m_locations.count()) {
         const LocationItem &item = m_locations.at(listIndex);
         if (!item.weatherService.isEmpty()) {
-            return i18nc("A weather station location and the weather service it comes from", "%1 (%2)", item.weatherStation, item.weatherService);
+            return i18nc("A weather station location and the weather service it comes from",
+                         "%1 (%2)",
+                         item.weatherStation,
+                         m_serviceCodeToDisplayName.value(item.weatherService, item.weatherService));
         }
     }
 
@@ -162,6 +166,9 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
             if (!services.contains(ionId)) {
                 continue;
             }
+
+            m_serviceCodeToDisplayName[pluginInfo[1]] = pluginInfo[0];
+
             // qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
             // d->ions.insert(pluginInfo[1], pluginInfo[0]);
 

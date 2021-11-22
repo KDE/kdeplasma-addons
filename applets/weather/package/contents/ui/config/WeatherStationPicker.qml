@@ -16,9 +16,9 @@ import org.kde.plasma.private.weather 1.0
 ColumnLayout {
     id: root
 
-    property alias selectedServices: serviceListModel.selectedServices
+    property var providers
     property string source
-    readonly property bool canSearch: !!searchStringEdit.text && selectedServices.length
+    readonly property bool canSearch: !!searchStringEdit.text && Object.keys(providers).length
 
     function searchLocation() {
         if (!canSearch) {
@@ -26,7 +26,7 @@ ColumnLayout {
         }
         noSearchResultReport.visible = false;
         source = "";
-        locationListModel.searchLocations(searchStringEdit.text, selectedServices);
+        locationListModel.searchLocations(searchStringEdit.text, Object.keys(providers));
     }
 
     LocationListModel {
@@ -44,14 +44,10 @@ ColumnLayout {
         }
     }
 
-    ServiceListModel {
-        id: serviceListModel
-    }
-
     RowLayout {
         Layout.fillWidth: true
 
-        enabled: selectedServices.length > 0
+        enabled: Object.keys(root.providers).length > 0
 
         Kirigami.SearchField {
             id: searchStringEdit
@@ -95,7 +91,7 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        enabled: selectedServices.length > 0
+        enabled: Object.keys(root.providers).length > 0
 
         Component.onCompleted: {
             background.visible = true;

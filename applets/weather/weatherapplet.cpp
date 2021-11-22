@@ -23,11 +23,6 @@ namespace
 {
 namespace AppletConfigKeys
 {
-inline QString services()
-{
-    return QStringLiteral("services");
-}
-
 inline QString showTemperatureInTooltip()
 {
     return QStringLiteral("showTemperatureInTooltip");
@@ -85,7 +80,6 @@ inline QString source()
 }
 namespace StorageConfigKeys
 {
-const char weatherServiceProviders[] = "weatherServiceProviders";
 const char showTemperatureInTooltip[] = "showTemperatureInTooltip";
 const char showWindInTooltip[] = "showWindInTooltip";
 const char showPressureInTooltip[] = "showPressureInTooltip";
@@ -108,9 +102,10 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
     for (const QVariant &plugin : plugins) {
         const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
         if (pluginInfo.count() > 1) {
-            m_defaultProviders << pluginInfo[1];
+            m_providers[pluginInfo[1]] = pluginInfo[0];
         }
     }
+    Q_EMIT providersChanged();
 }
 
 void WeatherApplet::init()
@@ -193,7 +188,6 @@ QVariantMap WeatherApplet::configValues() const
 
     return QVariantMap{
         // UI settings
-        {AppletConfigKeys::services(), cfg.readEntry(StorageConfigKeys::weatherServiceProviders, m_defaultProviders)},
         {AppletConfigKeys::showTemperatureInTooltip(), cfg.readEntry(StorageConfigKeys::showTemperatureInTooltip, true)},
         {AppletConfigKeys::showWindInTooltip(), cfg.readEntry(StorageConfigKeys::showWindInTooltip, false)},
         {AppletConfigKeys::showPressureInTooltip(), cfg.readEntry(StorageConfigKeys::showPressureInTooltip, false)},
@@ -217,11 +211,7 @@ void WeatherApplet::saveConfig(const QVariantMap &configChanges)
     KConfigGroup cfg = config();
 
     // UI settings
-    auto it = configChanges.find(AppletConfigKeys::services());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::weatherServiceProviders, it.value().toStringList());
-    }
-    it = configChanges.find(AppletConfigKeys::showTemperatureInTooltip());
+    auto it = configChanges.find(AppletConfigKeys::showTemperatureInTooltip());
     if (it != configChanges.end()) {
         cfg.writeEntry(StorageConfigKeys::showTemperatureInTooltip, it.value().toBool());
     }

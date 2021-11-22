@@ -8,7 +8,6 @@
 
 #include "abstractunitlistmodel.h"
 #include "locationlistmodel.h"
-#include "servicelistmodel.h"
 #include "util.h"
 
 // KF
@@ -78,5 +77,4 @@ void WeatherPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "VisibilityUnitListModel", visibilityUnitListModelSingletonTypeProvider);
     qmlRegisterSingletonType<Util>(uri, 1, 0, "Util", utilSingletonTypeProvider);
     qmlRegisterType<LocationListModel>(uri, 1, 0, "LocationListModel");
-    qmlRegisterType<ServiceListModel>(uri, 1, 0, "ServiceListModel");
 }

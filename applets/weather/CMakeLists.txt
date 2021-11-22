@@ -18,7 +18,6 @@ set(weather_SRCS
     plugin/util.cpp
     plugin/abstractunitlistmodel.cpp
     plugin/locationlistmodel.cpp
-    plugin/servicelistmodel.cpp
 )
 
 add_library(weatherplugin SHARED ${weather_SRCS})

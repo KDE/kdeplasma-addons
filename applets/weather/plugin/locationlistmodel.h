@@ -103,6 +103,8 @@ private:
     QString m_searchString;
     int m_checkedInCount;
     QVector<WeatherValidator *> m_validators;
+
+    QMap<QString, QString> m_serviceCodeToDisplayName;
 };
 
 #endif // LOCATIONLISTMODEL_H
