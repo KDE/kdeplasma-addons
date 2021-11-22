@@ -20,7 +20,7 @@ ColumnLayout {
     property alias noticesModel: noticesView.model
     property alias forecastViewTitle: forecastTabButton.text
 
-    property int maxWidth: PlasmaCore.Units.gridUnit * 22
+    property int maxWidth: PlasmaCore.Units.gridUnit * 24
 
     width: maxWidth
 
