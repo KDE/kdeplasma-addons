@@ -418,7 +418,6 @@ Item {
 
         return tooltips.join("\n");
     }
-    Plasmoid.associatedApplicationUrls: generalModel.creditUrl || null
 
     Plasmoid.compactRepresentation: CompactRepresentation {
         generalModel: root.generalModel
