@@ -420,12 +420,16 @@ Item {
     }
     Plasmoid.associatedApplicationUrls: generalModel.creditUrl || null
 
+    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 14
+    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 16
+
     Plasmoid.compactRepresentation: CompactRepresentation {
         generalModel: root.generalModel
         observationModel: root.observationModel
     }
 
     Plasmoid.fullRepresentation: FullRepresentation {
+        anchors.fill: parent
         generalModel: root.generalModel
         observationModel: root.observationModel
     }

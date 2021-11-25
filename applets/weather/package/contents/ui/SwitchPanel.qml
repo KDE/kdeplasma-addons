@@ -20,9 +20,7 @@ ColumnLayout {
     property alias noticesModel: noticesView.model
     property alias forecastViewTitle: forecastTabButton.text
 
-    property int maxWidth: PlasmaCore.Units.gridUnit * 24
-
-    width: maxWidth
+    width: fullRoot.width
 
     readonly property bool hasDetailsContent: detailsModel && detailsModel.length > 0
     readonly property alias hasNoticesContent: noticesView.hasContent
@@ -92,7 +90,7 @@ ColumnLayout {
         Layout.minimumHeight: Math.max(forecastScrollView.Layout.minimumHeight,
                                        detailsView.Layout.minimumHeight,
                                        noticesView.Layout.minimumHeight)
-        Layout.maximumWidth: maxWidth
+        Layout.maximumWidth: fullRoot.width
 
         clip: true // previous/next views are prepared outside of view, do not render them
         currentIndex: tabBar.currentIndex
@@ -101,7 +99,7 @@ ColumnLayout {
             id: forecastScrollView
             clip: true
             ColumnLayout {
-                width: maxWidth
+                width: fullRoot.width
                 ForecastView {
                     id: forecastView
 
