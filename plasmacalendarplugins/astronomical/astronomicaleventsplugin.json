@@ -4,6 +4,7 @@
             {
                 "Email": "kossebau@kde.org",
                 "Name": "Friedrich W. H. Kossebau",
+                "Name[ar]": "Friedrich W. H. Kossebau",
                 "Name[az]": "Friedrich W. H. Kossebau",
                 "Name[ca]": "Friedrich W. H. Kossebau",
                 "Name[cs]": "Friedrich W. H. Kossebau",
@@ -34,6 +35,7 @@
             }
         ],
         "Description": "Calendar plugin for displaying astronomical events",
+        "Description[ar]": "ملحق لتقويم يعرض الأحداث الفلكية",
         "Description[az]": "Astronomik hadisələri göstərmək üçün təqvim əlavəsi",
         "Description[ca]": "Connector de calendari per a mostrar esdeveniments astronòmics",
         "Description[cs]": "Modul kalendáře pro zobrazování astronomických událostí",
@@ -63,6 +65,7 @@
         "Description[zh_CN]": "显示天文事件的日历插件",
         "Icon": "weather-clear-night",
         "Name": "Astronomical Events",
+        "Name[ar]": "أحداث فلكية",
         "Name[az]": "Astronomik hadisələr",
         "Name[ca]": "Esdeveniments astronòmics",
         "Name[cs]": "Astronomické události",

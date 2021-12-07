@@ -37,6 +37,7 @@
         ],
         "Category": "Application Launchers",
         "Description": "A fullscreen application launcher",
+        "Description[ar]": "مطلق تطبيقات ملء الشاشة ",
         "Description[az]": "Tam ekran tətbiq başladıcısı",
         "Description[ca]": "Un llançador d'aplicacions a pantalla completa",
         "Description[cs]": "Spouštěč aplikací na celou obrazovku",

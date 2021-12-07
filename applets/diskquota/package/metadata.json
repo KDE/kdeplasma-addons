@@ -37,6 +37,7 @@
         ],
         "Category": "Utilities",
         "Description": "Shows details about disk quota",
+        "Description[ar]": "تظهر تفاصيل حول حصة القرص",
         "Description[az]": "Disk kvotası təfərrüatlarını göstərir",
         "Description[ca]": "Mostra els detalls de la quota de disc",
         "Description[de]": "Zeigt Details zum Speicherplatzkontingent an",

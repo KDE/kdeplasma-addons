@@ -4,6 +4,7 @@
             {
                 "Email": "dev.larpon@gmail.com",
                 "Name": "Lars Pontoppidan",
+                "Name[ar]": "Lars Pontoppidan",
                 "Name[az]": "Lars Pontoppidan",
                 "Name[ca]": "Lars Pontoppidan",
                 "Name[cs]": "Lars Pontoppidan",
@@ -36,6 +37,7 @@
         ],
         "Category": "Utilities",
         "Description": "(Picture) Frame",
+        "Description[ar]": "إطار (الصورة)",
         "Description[az]": "(Şəkil) Çərçivə",
         "Description[ca]": "Marc (fotografies)",
         "Description[cs]": "Rámeček (obrázku)",

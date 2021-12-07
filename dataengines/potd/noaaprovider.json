@@ -2,6 +2,7 @@
     "KPlugin": {
         "Icon": "",
         "Name": "Weather Satellite (NOAA)",
+        "Name[ar]": "قمر الطقس (NOAA)",
         "Name[az]": "Metereoloji Peyk (NOAA)",
         "Name[ca]": "Satèl·lits meteorològics (NOAA)",
         "Name[cs]": "Meteorologický satelit (NOAA)",

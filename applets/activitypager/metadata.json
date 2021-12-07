@@ -4,6 +4,7 @@
             {
                 "Email": "plasma-devel@kde.org",
                 "Name": "The Plasma Team",
+                "Name[ar]": "فريق بلازما",
                 "Name[az]": "Plasma komandası",
                 "Name[ca]": "L'equip del Plasma",
                 "Name[cs]": "Team Plasma",
@@ -36,6 +37,7 @@
         ],
         "Category": "Windows and Tasks",
         "Description": "Switch between activities",
+        "Description[ar]": "بدل بين الأنشطة",
         "Description[az]": "Otaqlar arası keçid",
         "Description[ca]": "Commuta entre activitats",
         "Description[cs]": "Přepnout mezi aktivitami",

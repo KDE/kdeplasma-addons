@@ -4,6 +4,7 @@
             {
                 "Email": "bettio@kde.org, lukas.krop@gmail.com",
                 "Name": "Davide Bettio, Lukas Kropatschek",
+                "Name[ar]": "Davide Bettio, Lukas Kropatschek",
                 "Name[az]": "Davide Bettio, Lukas Kropatschek",
                 "Name[ca]": "Davide Bettio, Lukas Kropatschek",
                 "Name[cs]": "Davide Bettio, Lukas Kropatschek",
@@ -36,6 +37,7 @@
         ],
         "Category": "Utilities",
         "Description": "Desktop sticky note",
+        "Description[ar]": "ملاحظة سطح مكتب لاصقة",
         "Description[az]": "İş Masası qeyd vərəqi",
         "Description[ca]": "Nota adhesiva per a l'escriptori",
         "Description[cs]": "Lepicí poznámka na plochu",

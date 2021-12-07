@@ -36,6 +36,7 @@
             }
         ],
         "Description": "Shows whether Caps Lock or Num Lock are active",
+        "Description[ar]": "تعرض إذا ما كان قفل الأرقام أو الحروف الكبيرة مفعل",
         "Description[az]": "Caps Lock və ya Num Lock'un aktivliyini göstərir",
         "Description[ca]": "Mostra si està actiu el bloqueig de «Bloq Maj» o «Bloq Núm»",
         "Description[cs]": "Zobrazit, zda je CapsLock nebo NumLock aktivní",

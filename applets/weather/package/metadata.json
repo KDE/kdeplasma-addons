@@ -4,6 +4,7 @@
             {
                 "Email": "lampih@gmail.com",
                 "Name": "Luís Gabriel Lima",
+                "Name[ar]": "Luís Gabriel Lima",
                 "Name[az]": "Luís Gabriel Lima",
                 "Name[ca]": "Luís Gabriel Lima",
                 "Name[cs]": "Luís Gabriel Lima",
@@ -36,6 +37,7 @@
         ],
         "Category": "Environment and Weather",
         "Description": "Forecast and current conditions",
+        "Description[ar]": "حالة الطق الحالية و المتوقعة",
         "Description[az]": "Cari və gözlənilən hava məlumatı",
         "Description[ca]": "Previsió i condicions actuals",
         "Description[cs]": "Předpověď a současná situace",
@@ -68,6 +70,7 @@
         "Id": "org.kde.plasma.weather",
         "License": "GPL-2.0+",
         "Name": "Weather Report",
+        "Name[ar]": "تقرير الطقس",
         "Name[az]": "Hava məlumatı",
         "Name[ca]": "Informe meteorològic",
         "Name[cs]": "Hlášení počasí",

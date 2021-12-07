@@ -36,6 +36,7 @@
             }
         ],
         "Description": "Matches Konsole Profiles",
+        "Description[ar]": "تطابق تشكيلات كونسول",
         "Description[az]": "Konsol profillərinə uyğun",
         "Description[ca]": "Correspon amb perfils del Konsole",
         "Description[de]": "Findet Konsole-Profile",

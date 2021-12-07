@@ -4,6 +4,7 @@
             {
                 "Email": "ematirov@gmail.com",
                 "Name": "Mikhail Ivchenko",
+                "Name[ar]": "Mikhail Ivchenko",
                 "Name[az]": "Mikhail Ivchenko",
                 "Name[ca]": "Mikhail Ivchenko",
                 "Name[cs]": "Mikhail Ivchenko",
@@ -36,6 +37,7 @@
         ],
         "Category": "Online Services",
         "Description": "Add a webpage on your desktop.",
+        "Description[ar]": "أضف صفحة ويب لسطح مكتبك",
         "Description[az]": "Veb səhifəni İş Masanızda göstərir",
         "Description[ca]": "Afegeix una pàgina web a l'escriptori.",
         "Description[de]": "Eine Webseite zu Ihrer Arbeitsfläche hinzufügen.",

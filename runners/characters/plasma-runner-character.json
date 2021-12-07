@@ -4,6 +4,7 @@
             {
                 "Email": "akreuzkamp@web.de",
                 "Name": "Anton Kreuzkamp",
+                "Name[ar]": "Anton Kreuzkamp",
                 "Name[az]": "Anton Kreuzkamp",
                 "Name[ca]": "Anton Kreuzkamp",
                 "Name[cs]": "Anton Kreuzkamp",
@@ -35,7 +36,7 @@
             }
         ],
         "Description": "Creates special characters from their hexadecimal codes",
-        "Description[ar]": "يُنشئ محارف خاصة لأكوادهم الست-عشريّة",
+        "Description[ar]": "يُنشئ محارف خاصة من رموزها الست-عشريّة",
         "Description[az]": "Onların onaltılıq kodundan xüsusi simvollar yaradır",
         "Description[ca]": "Crea caràcters especials a partir dels seus codis hexadecimals",
         "Description[cs]": "Vytváří speciální znaky z jejich hexadecimálních kódů",
