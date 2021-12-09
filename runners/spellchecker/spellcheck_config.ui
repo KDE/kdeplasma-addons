@@ -59,7 +59,7 @@
         <item>
          <widget class="QPushButton" name="m_openKcmButton">
           <property name="text">
-           <string>Configure Dictionaries...</string>
+           <string>Configure Dictionaries…</string>
           </property>
          </widget>
         </item>

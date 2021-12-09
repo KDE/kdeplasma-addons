@@ -69,7 +69,7 @@ Kirigami.FormLayout {
 
     NewStuff.Button {
         id: ghnsButton
-        text: i18nc("@action:button", "Get New Comics...")
+        text: i18nc("@action:button", "Get New Comics…")
         configFile: "comic.knsrc"
         onEntryEvent: function(entry, event) {
             if (event == 1) {

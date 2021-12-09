@@ -17,7 +17,7 @@ ColumnLayout {
     DictObject {
         id: dict
         selectedDictionary: plasmoid.configuration.dictionary
-        onSearchInProgress: web.loadHtml(i18n("Looking up definition..."));
+        onSearchInProgress: web.loadHtml(i18n("Looking up definition…"));
         onDefinitionFound: web.loadHtml(html);
     }
 

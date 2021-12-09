@@ -254,7 +254,7 @@ Item {
         launcherModel.setUrls(plasmoid.configuration.launcherUrls);
         launcherModel.urlsChanged.connect(saveConfiguration);
 
-        plasmoid.setAction("addLauncher", i18nc("@action", "Add Launcher..."), "list-add");
+        plasmoid.setAction("addLauncher", i18nc("@action", "Add Launcher…"), "list-add");
     }
 
     function action_addLauncher()

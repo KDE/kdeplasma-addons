@@ -57,7 +57,7 @@ Item {
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: idLabelArea
-                mainText: i18nc("@info:tooltip", "Jump to strip...")
+                mainText: i18nc("@info:tooltip", "Jump to strip…")
             }
         }
     }

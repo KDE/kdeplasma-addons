@@ -83,7 +83,7 @@ Item {
     function addItem(item) {
 
         if(items.isAdded(item.path)) {
-            console.info(item.path,"already exists. Skipping...")
+            console.info(item.path,"already exists. Skipping…")
             return
         }
         // work-around for QTBUG-67773:
@@ -437,7 +437,7 @@ Item {
 
         visible: !hasItems
         icon.name: "configure"
-        text: i18nc("@action:button", "Configure...")
+        text: i18nc("@action:button", "Configure…")
         onClicked: {
             plasmoid.action("configure").trigger();
         }

@@ -30,7 +30,7 @@ ColumnLayout {
         text: i18n("Please set your location")
         helpfulAction: QQC2.Action {
             icon.name: "configure"
-            text: i18n("Set location...")
+            text: i18n("Set location…")
             onTriggered: {
                 plasmoid.action("configure").trigger();
             }

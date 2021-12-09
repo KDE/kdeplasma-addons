@@ -75,7 +75,7 @@ Kirigami.FormLayout {
             enabled: imageBackgroundRadioButton.checked
 
             Layout.fillWidth: true
-            placeholderText: i18nc("@info:placeholder", "Path to custom image...")
+            placeholderText: i18nc("@info:placeholder", "Path to custom image…")
 
             rightActions: [
                 Kirigami.Action {
@@ -93,7 +93,7 @@ Kirigami.FormLayout {
 
             QtControls.ToolTip.visible: hovered
             QtControls.ToolTip.delay: 100
-            QtControls.ToolTip.text: i18nc("@info:tooltip", "Choose image...")
+            QtControls.ToolTip.text: i18nc("@info:tooltip", "Choose image…")
 
             onClicked: imagePicker.open()
 

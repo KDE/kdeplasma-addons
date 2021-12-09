@@ -96,7 +96,7 @@ void ComicApplet::init()
     mActions.append(mActionGoLast);
     connect(mActionGoLast, &QAction::triggered, this, &ComicApplet::slotCurrentDay);
 
-    mActionGoJump = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")), i18nc("@action", "Jump to Strip..."), this);
+    mActionGoJump = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")), i18nc("@action", "Jump to Strip…"), this);
     mActions.append(mActionGoJump);
     connect(mActionGoJump, &QAction::triggered, this, &ComicApplet::slotGoJump);
 
@@ -105,11 +105,11 @@ void ComicApplet::init()
     mActions.append(mActionShop);
     connect(mActionShop, &QAction::triggered, this, &ComicApplet::slotShop);
 
-    mActionSaveComicAs = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")), i18nc("@action", "&Save Comic As..."), this);
+    mActionSaveComicAs = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")), i18nc("@action", "&Save Comic As…"), this);
     mActions.append(mActionSaveComicAs);
     connect(mActionSaveComicAs, &QAction::triggered, this, &ComicApplet::slotSaveComicAs);
 
-    mActionCreateComicBook = new QAction(QIcon::fromTheme(QStringLiteral("application-epub+zip")), i18nc("@action", "&Create Comic Book Archive..."), this);
+    mActionCreateComicBook = new QAction(QIcon::fromTheme(QStringLiteral("application-epub+zip")), i18nc("@action", "&Create Comic Book Archive…"), this);
     mActions.append(mActionCreateComicBook);
     connect(mActionCreateComicBook, &QAction::triggered, this, &ComicApplet::createComicBook);
 

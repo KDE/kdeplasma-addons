@@ -91,7 +91,7 @@ Item {
 
     Component.onCompleted: {
         if (KCMShell.authorize("kcm_nightcolor.desktop").length > 0) {
-            plasmoid.setAction("KCMNightColor", i18n("Configure Night Color..."), "configure");
+            plasmoid.setAction("KCMNightColor", i18n("Configure Night Color…"), "configure");
         }
         plasmoid.removeAction("configure");
     }

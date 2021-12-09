@@ -290,7 +290,7 @@ DropArea {
             PropertyChanges { target: busy; visible: true }
             PropertyChanges { target: busy; running: true }
 
-            PropertyChanges { target: tooltipArea; mainText: i18n("Sending...") }
+            PropertyChanges { target: tooltipArea; mainText: i18n("Sending…") }
             PropertyChanges { target: tooltipArea; subText: i18n("Please wait") }
         },
         State {

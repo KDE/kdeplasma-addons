@@ -223,7 +223,7 @@ Item {
 
             ListDelegate {
                 id: leaveButton
-                text: i18nc("Show a dialog with options to logout/shutdown/restart", "Leave...")
+                text: i18nc("Show a dialog with options to logout/shutdown/restart", "Leave…")
                 highlight: delegateHighlight
                 icon: "system-shutdown"
                 onClicked: pmEngine.performOperation("requestShutDown")

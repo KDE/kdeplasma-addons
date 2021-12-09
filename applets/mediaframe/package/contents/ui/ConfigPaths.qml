@@ -134,13 +134,13 @@ ColumnLayout {
         QQC2.Button {
             icon.name: "folder-new"
             onClicked: folderDialog.visible = true
-            text: i18nc("@action:button", "Add Folder...")
+            text: i18nc("@action:button", "Add Folder…")
         }
 
         QQC2.Button {
             icon.name: "document-new"
             onClicked: fileDialog.visible = true
-            text: i18nc("@action:button", "Add Files...")
+            text: i18nc("@action:button", "Add Files…")
         }
     }
 }
