@@ -54,7 +54,7 @@ void SpellCheckRunner::loadData()
         families += code.left(2);
     }
     // Now for each family figure out which is the main code.
-    for (const QString &fcode : qAsConst(families)) {
+    for (const QString &fcode : std::as_const(families)) {
         const QStringList family = avail.filter(fcode);
         QString code;
         // If we only have one code, use it.
@@ -210,7 +210,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
             match.setData(query);
             context.addMatch(match);
         } else {
-            for (const auto &suggestion : qAsConst(suggestions)) {
+            for (const auto &suggestion : std::as_const(suggestions)) {
                 Plasma::QueryMatch match(this);
                 match.setType(Plasma::QueryMatch::ExactMatch);
                 match.setIconName(QStringLiteral("edit-rename"));

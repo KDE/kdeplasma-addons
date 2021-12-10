@@ -73,7 +73,7 @@ void KateSessions::match(Plasma::RunnerContext &context)
         return;
     }
 
-    for (const QString &session : qAsConst(m_sessions)) {
+    for (const QString &session : std::as_const(m_sessions)) {
         if (listAll || session.contains(term, Qt::CaseInsensitive)) {
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::ExactMatch);

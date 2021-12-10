@@ -63,7 +63,7 @@ void KonsoleProfiles::loadProfiles()
         }
     }
 
-    for (const auto &profilePath : qAsConst(profilesPaths)) {
+    for (const auto &profilePath : std::as_const(profilesPaths)) {
         const QString profileName = QFileInfo(profilePath).baseName();
 
         const KConfig _config(profilePath, KConfig::SimpleConfig);
@@ -84,7 +84,7 @@ void KonsoleProfiles::match(Plasma::RunnerContext &context)
 {
     QString term = context.query();
     term = term.remove(m_triggerWord).simplified();
-    for (const KonsoleProfileData &data : qAsConst(m_profiles)) {
+    for (const KonsoleProfileData &data : std::as_const(m_profiles)) {
         if (data.displayName.contains(term, Qt::CaseInsensitive)) {
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::PossibleMatch);

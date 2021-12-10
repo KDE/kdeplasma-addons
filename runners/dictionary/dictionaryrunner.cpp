@@ -77,7 +77,7 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
     int item = 0;
     static const QRegExp partOfSpeech(QLatin1String("(?: ([a-z]{1,5})){0,1} [0-9]{1,2}: (.*)"));
     QString lastPartOfSpeech;
-    for (const QString &line : qAsConst(lines)) {
+    for (const QString &line : std::as_const(lines)) {
         if (partOfSpeech.indexIn(line) == -1) {
             continue;
         }

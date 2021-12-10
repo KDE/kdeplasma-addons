@@ -67,7 +67,7 @@ void KonsoleProfilesEngine::loadProfiles()
         }
     }
 
-    for (const auto &profilePath : qAsConst(profilesPaths)) {
+    for (const auto &profilePath : std::as_const(profilesPaths)) {
         QFileInfo info(profilePath);
         const QString profileName = info.baseName();
         QString niceName = profileName;

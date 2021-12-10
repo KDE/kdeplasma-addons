@@ -180,7 +180,7 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
         }
     }
 
-    for (auto *validator : qAsConst(m_validators)) {
+    for (auto *validator : std::as_const(m_validators)) {
         validator->validate(m_searchString);
     }
 }
