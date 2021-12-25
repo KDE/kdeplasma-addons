@@ -23,9 +23,11 @@ DateTimeRunner::DateTimeRunner(QObject *parent, const KPluginMetaData &metaData,
     setObjectName(QLatin1String("DataTimeRunner"));
 
     addSyntax(Plasma::RunnerSyntax(dateWord, i18n("Displays the current date")));
-    addSyntax(Plasma::RunnerSyntax(dateWord + QLatin1String(" :q:"), i18n("Displays the current date in a given timezone")));
     addSyntax(Plasma::RunnerSyntax(timeWord, i18n("Displays the current time")));
-    addSyntax(Plasma::RunnerSyntax(timeWord + QLatin1String(" :q:"), i18n("Displays the current time in a given timezone")));
+    addSyntax(Plasma::RunnerSyntax(dateWord + i18nc("The <> and space are part of the example query", " <timezone>"),
+                                   i18n("Displays the current date in a given timezone")));
+    addSyntax(Plasma::RunnerSyntax(timeWord + i18nc("The <> and space are part of the example query", " <timezone>"),
+                                   i18n("Displays the current time in a given timezone")));
     setTriggerWords({timeWord, dateWord});
 }
 
