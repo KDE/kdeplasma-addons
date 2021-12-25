@@ -1,6 +1,17 @@
 [Desktop Entry]
 Name=Cover Switch
+Name[ca]=Canvi de capa
+Name[es]=Selector de portadas
+Name[fr]=Défilement circulaire
+Name[nl]=Omslagtonen
+Name[uk]=Перемикач обкладинок
+Name[x-test]=xxCover Switchxx
 Comment=A Window Switcher layout showing thumbnails as a 3D carousel
+Comment[ca]=Una disposició del commutador de finestres que mostra les miniatures com un carrusel en 3D
+Comment[es]=Un esquema de selección de ventanas que muestra miniaturas como una presentación en 3D
+Comment[nl]=Een indeling van de vensterwisselaar die miniaturen toont als 3D-carousel
+Comment[uk]=Компонування засобу перемикання вікон з мініатюрами у вигляді просторово каруселі
+Comment[x-test]=xxA Window Switcher layout showing thumbnails as a 3D carouselxx
 Icon=preferences-system-windows-effect-coverswitch
 
 X-Plasma-API=declarativeappletscript

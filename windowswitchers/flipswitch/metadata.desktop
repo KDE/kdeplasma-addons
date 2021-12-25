@@ -1,6 +1,17 @@
 [Desktop Entry]
 Name=Flip Switch
+Name[ca]=Canvi en roda
+Name[es]=Selector de volteo
+Name[fr]=Empilement en perspective
+Name[nl]=Flip Switch
+Name[uk]=Тасування карток
+Name[x-test]=xxFlip Switchxx
 Comment=A Window Switcher layout showing thumbnails as a 3D card deck
+Comment[ca]=Una disposició del commutador de finestres que mostra les miniatures com una baralla de cartes en 3D
+Comment[es]=Un esquema de selección de ventanas que muestra miniaturas como una baraja de cartas en 3D
+Comment[nl]=Een indeling van de vensterwisselaar die miniaturen toont als een 3D-kaartspel
+Comment[uk]=Компонування засобу перемикання вікон з мініатюрами вікон у вигляді колоди карт
+Comment[x-test]=xxA Window Switcher layout showing thumbnails as a 3D card deckxx
 Icon=preferences-system-windows-effect-flipswitch
 
 X-Plasma-API=declarativeappletscript
