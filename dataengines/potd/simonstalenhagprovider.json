@@ -1,7 +1,11 @@
 {
     "KPlugin": {
         "Icon": "",
-        "Name": "Simon Stålenhag Wallpapers"
+        "Name": "Simon Stålenhag Wallpapers",
+        "Name[ca]": "Fons de pantalla d'en Simon Stålenhag",
+        "Name[nl]": "Achtergrondafbeeldingen Simon Stålenhag",
+        "Name[uk]": "Фонові зображення Сімона Стелегаґа (Simon Stålenhag)",
+        "Name[x-test]": "xxSimon Stålenhag Wallpapersxx"
     },
     "X-KDE-PlasmaPoTDProvider-Identifier": "simonstalenhag"
 }
