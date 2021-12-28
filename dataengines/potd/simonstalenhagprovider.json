@@ -2,8 +2,14 @@
     "KPlugin": {
         "Icon": "",
         "Name": "Simon Stålenhag Wallpapers",
+        "Name[az]": "Simon Stålenhag'ın divar kağızları",
         "Name[ca]": "Fons de pantalla d'en Simon Stålenhag",
+        "Name[es]": "Fondos de pantalla de Simon Stålenhag",
+        "Name[fr]": "Fonds d'écran de Simon Stålenhag ",
+        "Name[ia]": "Simon Stålenhag Wallpapers (tapetes de papiro)",
         "Name[nl]": "Achtergrondafbeeldingen Simon Stålenhag",
+        "Name[sl]": "Simon Stålenhag Wallpapers",
+        "Name[sv]": "Skrivbordsunderlägg av Simon Stålenhag",
         "Name[uk]": "Фонові зображення Сімона Стелегаґа (Simon Stålenhag)",
         "Name[x-test]": "xxSimon Stålenhag Wallpapersxx"
     },
