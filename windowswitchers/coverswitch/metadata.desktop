@@ -2,6 +2,7 @@
 Name=Cover Switch
 Name[az]=Üz qabığı dəyişdiricisi
 Name[ca]=Canvi de capa
+Name[en_GB]=Cover Switch
 Name[es]=Selector de portadas
 Name[fr]=Défilement circulaire
 Name[ia]=Commutator de copertura
@@ -16,6 +17,7 @@ Name[x-test]=xxCover Switchxx
 Comment=A Window Switcher layout showing thumbnails as a 3D carousel
 Comment[az]=Pəncərə dəyişdiricisi qatı, eskizləri 3D karusel kimi göstərir
 Comment[ca]=Una disposició del commutador de finestres que mostra les miniatures com un carrusel en 3D
+Comment[en_GB]=A Window Switcher layout showing thumbnails as a 3D carousel
 Comment[es]=Un esquema de selección de ventanas que muestra miniaturas como una presentación en 3D
 Comment[fr]=Une disposition du sélecteur de fenêtres affichant des vignettes comme un carrousel 3D
 Comment[ia]=Un disposition de commutator de fenestra monstrante miniaturas como  un carosello 3D
