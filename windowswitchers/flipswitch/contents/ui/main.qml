@@ -12,10 +12,10 @@ import org.kde.kirigami 2.15 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PC3
 
-import org.kde.kwin 2.0 as KWin
+import org.kde.kwin 3.0 as KWin
 
 
-KWin.Switcher {
+KWin.TabBoxSwitcher {
     id: tabBox
     currentIndex: thumbnailView ? thumbnailView.currentIndex : -1
 
@@ -23,13 +23,13 @@ KWin.Switcher {
         id: dialog
         location: PlasmaCore.Types.Floating
         visible: tabBox.visible
-        flags: Qt.X11BypassWindowManagerHint
+        flags: Qt.BypassWindowManagerHint | Qt.FramelessWindowHint
         x: screenGeometry.x
         y: screenGeometry.y
 
-        mainItem: ColumnLayout {
-            width: tabBox.screenGeometry.width - dialog.margins.left - dialog.margins.right
-            height: tabBox.screenGeometry.height - dialog.margins.top - dialog.margins.bottom
+        mainItem: Item {
+            width: tabBox.screenGeometry.width
+            height: tabBox.screenGeometry.height
 
             PathView {
                 id: thumbnailView
@@ -42,8 +42,8 @@ KWin.Switcher {
                 readonly property int boxHeight: tabBox.screenGeometry.height * boxScaleFactor
 
                 focus: true
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+
+                anchors.fill: parent
 
                 preferredHighlightBegin: 1/(visibleCount + 1)
                 preferredHighlightEnd: preferredHighlightBegin
@@ -100,7 +100,7 @@ KWin.Switcher {
                     // Reduce opacity on the end so items dissapear more naturally
                     opacity: Math.min(1, (1 - PathView.progress) / thumbnailView.preferredHighlightBegin);
 
-                    KWin.ThumbnailItem {
+                    KWin.WindowThumbnailItem {
                         id: thumbnail
                         readonly property double ratio: implicitWidth / implicitHeight
 
@@ -165,10 +165,14 @@ KWin.Switcher {
             }
 
             RowLayout {
-                Layout.preferredHeight: PlasmaCore.Units.iconSizes.large
-                Layout.margins: PlasmaCore.Units.gridUnit
-                Layout.alignment: Qt.AlignCenter
+                height: PlasmaCore.Units.iconSizes.large
                 spacing: PlasmaCore.Units.gridUnit
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
+                    margins: PlasmaCore.Units.gridUnit
+                }
 
                 PlasmaCore.IconItem {
                     source: thumbnailView.currentItem ? thumbnailView.currentItem.icon : ""

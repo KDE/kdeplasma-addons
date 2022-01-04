@@ -12,10 +12,10 @@ import org.kde.kirigami 2.15 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PC3
 
-import org.kde.kwin 2.0 as KWin
+import org.kde.kwin 3.0 as KWin
 
 
-KWin.Switcher {
+KWin.TabBoxSwitcher {
     id: tabBox
     currentIndex: thumbnailView ? thumbnailView.currentIndex : -1
 
@@ -23,28 +23,28 @@ KWin.Switcher {
         id: dialog
         location: PlasmaCore.Types.Floating
         visible: tabBox.visible
-        flags: Qt.X11BypassWindowManagerHint
+        flags: Qt.BypassWindowManagerHint | Qt.FramelessWindowHint
         x: screenGeometry.x
         y: screenGeometry.y
 
-        mainItem: ColumnLayout {
-            width: tabBox.screenGeometry.width - dialog.margins.left - dialog.margins.right
-            height: tabBox.screenGeometry.height - dialog.margins.top - dialog.margins.bottom
+        mainItem: Item {
+            width: tabBox.screenGeometry.width
+            height: tabBox.screenGeometry.height
 
             PathView {
                 id: thumbnailView
 
                 readonly property int visibleCount: Math.min(count, pathItemCount)
-
-                readonly property int boxWidth: tabBox.screenGeometry.width / 2
-                readonly property int boxHeight: tabBox.screenGeometry.height / 2
+                readonly property real boxScaleFactor: 0.5
+                readonly property int boxWidth: tabBox.screenGeometry.width * boxScaleFactor
+                readonly property int boxHeight: tabBox.screenGeometry.height * boxScaleFactor
 
                 focus: true
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+
+                anchors.fill: parent
 
                 preferredHighlightBegin: 0.49
-                preferredHighlightEnd: 0.49
+                preferredHighlightEnd: preferredHighlightBegin
                 highlightRangeMode: PathView.StrictlyEnforceRange
 
                 // This property sets the animation duration between the current position to the next one,
@@ -57,13 +57,13 @@ KWin.Switcher {
 
                 path: Path {
                     // Left stack
-                    startX: thumbnailView.width * 0.1; startY: thumbnailView.height * 0.55
+                    startX: thumbnailView.width * 0.1; startY: thumbnailView.height * 0.5
                     PathAttribute { name: "progress"; value: 0 }
                     PathAttribute { name: "scale"; value: 0.7 }
                     PathAttribute { name: "rotation"; value: 70 }
                     PathPercent { value: 0 }
 
-                    PathLine { x: thumbnailView.width * 0.25 ; y: thumbnailView.height * 0.55 }
+                    PathLine { x: thumbnailView.width * 0.25 ; y: thumbnailView.height * 0.5 }
                     PathAttribute { name: "progress"; value: 0.8 }
                     PathAttribute { name: "scale"; value: 0.7 }
                     PathAttribute { name: "rotation"; value: 70 }
@@ -71,8 +71,8 @@ KWin.Switcher {
 
                     // Center Item
                     PathQuad {
-                        x: thumbnailView.width * 0.5 ; y: thumbnailView.height * 0.65
-                        controlX: thumbnailView.width * 0.45; controlY: thumbnailView.height * 0.6
+                        x: thumbnailView.width * 0.5 ; y: thumbnailView.height * 0.6
+                        controlX: thumbnailView.width * 0.45; controlY: thumbnailView.height * 0.55
                     }
                     PathAttribute { name: "progress"; value: 1 }
                     PathAttribute { name: "scale"; value: 1 }
@@ -81,15 +81,15 @@ KWin.Switcher {
 
                     // Right stack
                     PathQuad {
-                        x: thumbnailView.width * 0.75 ; y: thumbnailView.height * 0.55
-                        controlX: thumbnailView.width * 0.55; controlY: thumbnailView.height * 0.6
+                        x: thumbnailView.width * 0.75 ; y: thumbnailView.height * 0.5
+                        controlX: thumbnailView.width * 0.55; controlY: thumbnailView.height * 0.55
                     }
                     PathAttribute { name: "progress"; value: 0.8 }
                     PathAttribute { name: "scale"; value: 0.7 }
                     PathAttribute { name: "rotation"; value: -70 }
                     PathPercent { value: 0.6 }
 
-                    PathLine { x: thumbnailView.width * 0.9 ; y: thumbnailView.height * 0.55 }
+                    PathLine { x: thumbnailView.width * 0.9 ; y: thumbnailView.height * 0.5 }
                     PathAttribute { name: "progress"; value: 0 }
                     PathAttribute { name: "scale"; value: 0.7 }
                     PathAttribute { name: "rotation"; value: -70 }
@@ -122,7 +122,7 @@ KWin.Switcher {
                     scale: PathView.onPath ? PathView.scale : 0
                     z: PathView.onPath ? Math.floor(PathView.progress * thumbnailView.visibleCount) : -1
 
-                    KWin.ThumbnailItem {
+                    KWin.WindowThumbnailItem {
                         id: thumbnail
                         readonly property double ratio: implicitWidth / implicitHeight
 
@@ -196,10 +196,14 @@ KWin.Switcher {
             }
 
             RowLayout {
-                Layout.preferredHeight: PlasmaCore.Units.iconSizes.large
-                Layout.margins: PlasmaCore.Units.gridUnit
-                Layout.alignment: Qt.AlignCenter
+                height: PlasmaCore.Units.iconSizes.large
                 spacing: PlasmaCore.Units.gridUnit
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
+                    margins: PlasmaCore.Units.gridUnit
+                }
 
                 PlasmaCore.IconItem {
                     source: thumbnailView.currentItem ? thumbnailView.currentItem.icon : ""
@@ -231,7 +235,7 @@ KWin.Switcher {
         // in the same direction don't result into a combination of forward and backward movements.
         if (thumbnailView.count === 2 || (currentIndex === 0 && thumbnailView.currentIndex === thumbnailView.count - 1)) {
             thumbnailView.movementDirection = PathView.Positive
-        } else if (currentIndex === (thumbnailView.count - 1) && thumbnailView.currentIndex === 0) {
+        } else if (currentIndex === thumbnailView.count - 1 && thumbnailView.currentIndex === 0) {
             thumbnailView.movementDirection = PathView.Negative
         } else {
             thumbnailView.movementDirection = (currentIndex > thumbnailView.currentIndex) ? PathView.Positive : PathView.Negative
