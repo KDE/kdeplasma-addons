@@ -1,5 +1,5 @@
 /*
- SPDX-FileCopyrightText: 2021 Ismael Asensio <isma.af@gmail.com>
+ SPDX-FileCopyrightText: 2021-2023 Ismael Asensio <isma.af@gmail.com>
 
  SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -25,6 +25,23 @@ KWin.TabBoxSwitcher {
     // TODO: Make it user configurable ?
     property bool enableBlur: true
 
+    property bool originalState: true
+    property var currentDesktop: KWin.Workspace.currentDesktop
+    // Keep track of VD changes while the switcher is not visible
+    Connections {
+        target: KWin.Workspace
+        function onCurrentDesktopChanged() {
+            tabBox.currentDesktop = KWin.Workspace.currentDesktop
+        }
+    }
+
+    automaticallyHide: false
+
+    component IntroAnimation : NumberAnimation {
+        duration: Kirigami.Units.veryLongDuration
+        easing.type: Easing.InOutCubic
+    }
+
     Window {
         id: window
 
@@ -46,7 +63,8 @@ KWin.TabBoxSwitcher {
 
             layer.enabled: true
             layer.effect: FastBlur {
-                radius: enableBlur ? 64 : 0
+                radius: (enableBlur && !originalState) ? 64 : 0
+                Behavior on radius { IntroAnimation {} }
             }
         }
 
@@ -59,7 +77,8 @@ KWin.TabBoxSwitcher {
                 bottom: parent.bottom
             }
             color: Kirigami.Theme.backgroundColor
-            opacity: enableBlur ? 0.5 : 0.75
+            opacity: originalState ? 0 : enableBlur ? 0.5 : 0.75
+            Behavior on opacity { IntroAnimation {} }
         }
 
         PathView {
@@ -94,6 +113,7 @@ KWin.TabBoxSwitcher {
                 startY: Math.round(thumbnailView.height * 0.80)
                 PathAttribute { name: "progress"; value: 1 }
                 PathAttribute { name: "scale"; value: 1 }
+                PathPercent { value: 0 }
 
                 // Back point of the path on top-left corner
                 PathLine {
@@ -102,13 +122,17 @@ KWin.TabBoxSwitcher {
                 }
                 PathAttribute { name: "progress"; value: 0 }
                 PathAttribute { name: "scale"; value: 0.6 }
+                PathPercent { value: 1 }
             }
 
             model: tabBox.model
 
             delegate: Item {
+                id: delegateItem
+
                 readonly property string caption: model.caption
                 readonly property var icon: model.icon
+                readonly property var desktops: thumbnail.client ? thumbnail.client.desktops : []
 
                 readonly property real scaleFactor: {
                     if (thumbnail.implicitWidth < thumbnailView.boxWidth && thumbnail.implicitHeight < thumbnailView.boxHeight) {
@@ -123,51 +147,102 @@ KWin.TabBoxSwitcher {
                     }
                 }
 
-                width: Math.round(thumbnail.implicitWidth * scaleFactor)
-                height: Math.round(thumbnail.implicitHeight * scaleFactor)
-                scale: PathView.onPath ? PathView.scale : 0
-                z: PathView.onPath ? Math.floor(PathView.progress * thumbnailView.visibleCount) : -1
-
-                // Reduce opacity on the end so items dissapear more naturally
-                opacity: Math.min(1, (1 - PathView.progress) / thumbnailView.preferredHighlightBegin);
+                width: thumbnail.implicitWidth
+                height: thumbnail.implicitHeight
 
                 KWin.WindowThumbnail {
                     id: thumbnail
+
                     readonly property double ratio: implicitWidth / implicitHeight
 
                     wId: windowId
-                    anchors.fill: parent
-                }
+                    width: implicitWidth
+                    height: implicitHeight
 
-                Kirigami.ShadowedRectangle {
-                    anchors.fill: parent
-                    z: -1
+                    Kirigami.ShadowedRectangle {
+                        anchors.fill: parent
+                        z: -1
 
-                    color: "transparent"
-                    shadow.size: Kirigami.Units.gridUnit
-                    shadow.color: "black"
-                    opacity: 0.5
-                    shadow.yOffset: 1
+                        color: "transparent"
+                        shadow.size: Kirigami.Units.gridUnit
+                        shadow.color: "black"
+                        opacity: 0.5
+                    }
                 }
 
                 TapHandler {
+                    enabled: !originalState
                     grabPermissions: PointerHandler.TakeOverForbidden
                     gesturePolicy: TapHandler.WithinBounds
                     onSingleTapped: {
                         if (index === thumbnailView.currentIndex) {
-                            thumbnailView.model.activate(index);
-                            return;
+                            thumbnailView.model.activate(index)
+                            return
                         }
                         thumbnailView.movementDirection = PathView.Positive
                         thumbnailView.currentIndex = index
                     }
+                }
+
+                state: {
+                    if (!originalState) return "onPath";
+                    if (thumbnail.client.minimized || thumbnail.client.hidden) return "hidden";
+                    if (desktops.length === 0 || desktops.includes(tabBox.currentDesktop)) return "clientPosition";
+                    return "hidden";
+                }
+
+                states: [
+                    State {
+                        name: "onPath"
+                        PropertyChanges {
+                            target: delegateItem
+                            z: PathView.onPath ? Math.floor(PathView.progress * thumbnailView.visibleCount) : -1
+                            scale: PathView.scale * scaleFactor
+                            // Reduce opacity on the end so items dissapear more naturally
+                            opacity: Math.min(1, (1 - PathView.progress) / thumbnailView.preferredHighlightBegin)
+                        }
+                        PropertyChanges {
+                            target: thumbnail
+                            x: 0
+                            y: 0
+                        }
+                    }
+                    ,
+                    State {
+                        name: "clientPosition"
+                        PropertyChanges {
+                            target: delegateItem
+                            z: thumbnail.client.stackingOrder + (PathView.isCurrentItem ? thumbnailView.count : 0)
+                            scale: 1
+                            opacity: 1
+                        }
+                        PropertyChanges {
+                            target: thumbnail
+                            x: (client.x - tabBox.screenGeometry.x) - delegateItem.x
+                            y: (client.y - tabBox.screenGeometry.y) - delegateItem.y
+                        }
+                    }
+                    ,
+                    State {
+                        name: "hidden"
+                        extend: "onPath"
+                        PropertyChanges {
+                            target: delegateItem
+                            opacity: 0
+                        }
+                    }
+                ]
+
+                transitions: Transition {
+                    IntroAnimation { properties: "x, y, z, scale, opacity" }
                 }
             }
 
             transform: Rotation {
                 origin { x: thumbnailView.width/2; y: thumbnailView.height/2 }
                 axis { x: 0; y: 1; z: -0.15 }
-                angle: 10
+                angle: originalState ? 0 : 10
+                Behavior on angle { IntroAnimation {} }
             }
 
             highlight: KSvg.FrameSvgItem {
@@ -178,10 +253,19 @@ KWin.TabBoxSwitcher {
 
                 visible: target !== null
                 anchors.centerIn: target
-                width: target ? target.width + 6 * Kirigami.Units.smallSpacing : 0
-                height: target ? target.height + 6 * Kirigami.Units.smallSpacing : 0
-                scale: target ? target.scale : 1
+                width: target ? target.width * target.scaleFactor + 6 * Kirigami.Units.smallSpacing : 0
+                height: target ? target.height * target.scaleFactor + 6 * Kirigami.Units.smallSpacing : 0
+                scale: target ? target.PathView.scale : 1
                 z: target ? target.z - 0.5 : -0.5
+
+                opacity: originalState ? 0 : 1
+                Behavior on opacity {
+                    SequentialAnimation {
+                        PauseAnimation { duration: originalState ? Kirigami.Units.veryLongDuration : 0}
+                        NumberAnimation { duration: Kirigami.Units.shortDuration }
+                        PauseAnimation { duration: originalState ? 0 : Kirigami.Units.veryLongDuration }
+                    }
+                }
             }
 
             layer.enabled: true
@@ -225,6 +309,9 @@ KWin.TabBoxSwitcher {
                 Layout.maximumWidth: tabBox.screenGeometry.width * 0.8
                 Layout.alignment: Qt.AlignCenter
             }
+
+            opacity: originalState ? 0 : 1
+            Behavior on opacity { IntroAnimation {} }
         }
 
         Kirigami.PlaceholderMessage {
@@ -233,6 +320,14 @@ KWin.TabBoxSwitcher {
             icon.source: "edit-none"
             text: i18ndc("kwin", "@info:placeholder no entries in the task switcher", "No open windows")
             visible: thumbnailView.count === 0
+        }
+    }
+
+    Timer {
+        id: hidingTimer
+        interval: Kirigami.Units.veryLongDuration
+        onTriggered: {
+            visible = false
         }
     }
 
@@ -256,10 +351,25 @@ KWin.TabBoxSwitcher {
     }
 
     onVisibleChanged: {
-        // Reset the PathView index when hiding to avoid unwanted animations on relaunch
-        if (!visible) {
-            thumbnailView.currentIndex = 0;
+        window.visible = visible
+    }
+
+    onAboutToShow: {
+        hidingTimer.stop()
+        tabBox.currentDesktop = KWin.Workspace.currentDesktop
+        thumbnailView.positionViewAtIndex(tabBox.currentIndex, PathView.SnapPosition)
+        Qt.callLater(() => originalState = false) // Delayed call to ensure that PathView delegates are correctly placed
+    }
+
+    onAboutToHide: {
+        if (thumbnailView.currentItem
+                && thumbnailView.currentItem.desktops.length > 0  // not on all desktops
+                && !thumbnailView.currentItem.desktops.includes(tabBox.currentDesktop)) {
+            // Select the latest VD the window is on, to mimic Workspace.activate()
+            tabBox.currentDesktop = thumbnailView.currentItem.desktops.slice(-1)[0]
         }
-        window.visible = visible;
+        thumbnailView.positionViewAtIndex(tabBox.currentIndex, PathView.SnapPosition)
+        Qt.callLater(() => originalState = true)
+        hidingTimer.start()
     }
 }
