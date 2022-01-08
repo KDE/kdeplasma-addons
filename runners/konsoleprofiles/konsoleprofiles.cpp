@@ -20,14 +20,14 @@
 #include <QStandardPaths>
 
 KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, metaData, args)
+    : AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("Konsole Profiles"));
 
-    Plasma::RunnerSyntax s(QStringLiteral(":q:"), i18n("Finds Konsole profiles matching :q:."));
+    RunnerSyntax s(QStringLiteral(":q:"), i18n("Finds Konsole profiles matching :q:."));
     s.addExampleQuery(QStringLiteral("konsole :q:"));
     addSyntax(s);
-    addSyntax(Plasma::RunnerSyntax(QStringLiteral("konsole"), i18n("Lists all the Konsole profiles in your account.")));
+    addSyntax(RunnerSyntax(QStringLiteral("konsole"), i18n("Lists all the Konsole profiles in your account.")));
 }
 
 KonsoleProfiles::~KonsoleProfiles() = default;
@@ -80,14 +80,14 @@ void KonsoleProfiles::loadProfiles()
     suspendMatching(m_profiles.isEmpty());
 }
 
-void KonsoleProfiles::match(Plasma::RunnerContext &context)
+void KonsoleProfiles::match(RunnerContext &context)
 {
     QString term = context.query();
     term = term.remove(m_triggerWord).simplified();
     for (const KonsoleProfileData &data : std::as_const(m_profiles)) {
         if (data.displayName.contains(term, Qt::CaseInsensitive)) {
-            Plasma::QueryMatch match(this);
-            match.setType(Plasma::QueryMatch::PossibleMatch);
+            QueryMatch match(this);
+            match.setType(QueryMatch::PossibleMatch);
             match.setIconName(data.iconName);
             match.setData(data.displayName);
             match.setText(QStringLiteral("Konsole: ") + data.displayName);
@@ -96,7 +96,7 @@ void KonsoleProfiles::match(Plasma::RunnerContext &context)
         }
     }
 }
-void KonsoleProfiles::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void KonsoleProfiles::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
     const QString profile = match.data().toString();

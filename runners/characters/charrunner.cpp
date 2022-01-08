@@ -16,7 +16,7 @@
 #include <QGuiApplication>
 
 CharacterRunner::CharacterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, metaData, args)
+    : AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("CharacterRunner"));
 }
@@ -37,12 +37,12 @@ void CharacterRunner::reloadConfiguration()
         qWarning() << "Config entries for alias list and code list have different sizes, ignoring all.";
     }
 
-    addSyntax(Plasma::RunnerSyntax(m_triggerWord + QStringLiteral(":q:"), i18n("Creates Characters from :q: if it is a hexadecimal code or defined alias.")));
+    addSyntax(RunnerSyntax(m_triggerWord + QStringLiteral(":q:"), i18n("Creates Characters from :q: if it is a hexadecimal code or defined alias.")));
     setTriggerWords({m_triggerWord});
     setMinLetterCount(minLetterCount() + 1);
 }
 
-void CharacterRunner::match(Plasma::RunnerContext &context)
+void CharacterRunner::match(RunnerContext &context)
 {
     QString term = context.query().remove(QLatin1Char(' '));
     term = term.remove(0, m_triggerWord.length()); // remove the triggerword
@@ -60,15 +60,15 @@ void CharacterRunner::match(Plasma::RunnerContext &context)
 
     // make special character out of the hex.-code
     const QString specChar = QChar(hex);
-    Plasma::QueryMatch match(this);
-    match.setType(Plasma::QueryMatch::ExactMatch);
+    QueryMatch match(this);
+    match.setType(QueryMatch::ExactMatch);
     match.setIconName(QStringLiteral("accessories-character-map"));
     match.setText(specChar);
     match.setData(specChar);
     context.addMatch(match);
 }
 
-void CharacterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void CharacterRunner::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
     QGuiApplication::clipboard()->setText(match.data().toString());

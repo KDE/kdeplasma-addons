@@ -18,7 +18,7 @@
 K_PLUGIN_CLASS_WITH_JSON(ConverterRunner, "plasma-runner-converter.json")
 
 ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, metaData, args)
+    : AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("Converter"));
 
@@ -26,7 +26,7 @@ ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaDat
         "Converts the value of :q: when :q: is made up of "
         "\"value unit [>, to, as, in] unit\". You can use the "
         "Unit converter applet to find all available units.");
-    addSyntax(Plasma::RunnerSyntax(QStringLiteral(":q:"), description));
+    addSyntax(RunnerSyntax(QStringLiteral(":q:"), description));
 }
 
 void ConverterRunner::init()
@@ -51,7 +51,7 @@ void ConverterRunner::init()
 
 ConverterRunner::~ConverterRunner() = default;
 
-void ConverterRunner::match(Plasma::RunnerContext &context)
+void ConverterRunner::match(RunnerContext &context)
 {
     const QRegularExpressionMatch valueRegexMatch = valueRegex.match(context.query());
     if (!valueRegexMatch.hasMatch()) {
@@ -89,15 +89,15 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     }
 
     const double numberValue = numberDataPair.second;
-    QList<Plasma::QueryMatch> matches;
+    QList<QueryMatch> matches;
     for (const KUnitConversion::Unit &outputUnit : outputUnits) {
         KUnitConversion::Value outputValue = inputCategory.convert(KUnitConversion::Value(numberValue, inputUnit), outputUnit);
         if (!outputValue.isValid() || inputUnit == outputUnit) {
             continue;
         }
 
-        Plasma::QueryMatch match(this);
-        match.setType(Plasma::QueryMatch::HelperMatch);
+        QueryMatch match(this);
+        match.setType(QueryMatch::HelperMatch);
         match.setIconName(QStringLiteral("accessories-calculator"));
         if (outputUnit.categoryId() == KUnitConversion::CurrencyCategory) {
             match.setText(QStringLiteral("%1 (%2)").arg(outputValue.toString(0, 'f', 2), outputUnit.symbol()));
@@ -113,7 +113,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     context.addMatches(matches);
 }
 
-void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void ConverterRunner::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
 

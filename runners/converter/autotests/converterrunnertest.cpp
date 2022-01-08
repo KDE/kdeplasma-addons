@@ -108,7 +108,7 @@ void ConverterRunnerTest::testQuery()
     QFETCH(QString, expectedText);
 
     launchQuery(query);
-    const QList<Plasma::QueryMatch> matches = manager->matches();
+    const QList<QueryMatch> matches = manager->matches();
     QCOMPARE(matches.count(), 1);
     QCOMPARE(matches.first().text(), expectedText);
 }

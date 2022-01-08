@@ -19,7 +19,7 @@ struct KonsoleProfileData {
 
 Q_DECLARE_TYPEINFO(KonsoleProfileData, Q_MOVABLE_TYPE);
 
-class KonsoleProfiles : public Plasma::AbstractRunner
+class KonsoleProfiles : public AbstractRunner
 {
     Q_OBJECT
 
@@ -28,8 +28,8 @@ public:
     ~KonsoleProfiles() override;
 
     void init() override;
-    void match(Plasma::RunnerContext &context) override;
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
+    void match(RunnerContext &context) override;
+    void run(const RunnerContext &context, const QueryMatch &match) override;
 
 private Q_SLOTS:
     void loadProfiles();

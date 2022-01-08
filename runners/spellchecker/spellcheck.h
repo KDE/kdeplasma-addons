@@ -16,7 +16,7 @@
 /**
  * This checks the spelling of query
  */
-class SpellCheckRunner : public Plasma::AbstractRunner
+class SpellCheckRunner : public AbstractRunner
 {
     Q_OBJECT
 
@@ -24,14 +24,14 @@ public:
     SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
     ~SpellCheckRunner() override;
 
-    void match(Plasma::RunnerContext &context) override;
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &action) override;
+    void match(RunnerContext &context) override;
+    void run(const RunnerContext &context, const QueryMatch &action) override;
 
     void reloadConfiguration() override;
 
 protected Q_SLOTS:
     void init() override;
-    QMimeData *mimeDataForMatch(const Plasma::QueryMatch &match) override;
+    QMimeData *mimeDataForMatch(const QueryMatch &match) override;
 
     void loadData();
     void destroydata();

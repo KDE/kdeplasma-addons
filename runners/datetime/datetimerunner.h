@@ -19,7 +19,7 @@
  * that KService knows about, this runner can launch
  */
 
-class DateTimeRunner : public Plasma::AbstractRunner
+class DateTimeRunner : public AbstractRunner
 {
     Q_OBJECT
 
@@ -27,11 +27,11 @@ public:
     DateTimeRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
     ~DateTimeRunner() override;
 
-    void match(Plasma::RunnerContext &context) override;
+    void match(RunnerContext &context) override;
 
 private:
     QHash<QString, QDateTime> datetime(const QStringRef &tz);
-    void addMatch(const QString &text, const QString &clipboardText, Plasma::RunnerContext &context, const QString &iconName);
+    void addMatch(const QString &text, const QString &clipboardText, RunnerContext &context, const QString &iconName);
 };
 
 #endif

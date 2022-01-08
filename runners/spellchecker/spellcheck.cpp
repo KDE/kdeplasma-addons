@@ -17,7 +17,7 @@
 #include <KLocalizedString>
 
 SpellCheckRunner::SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, metaData, args)
+    : AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("Spell Checker"));
 }
@@ -98,8 +98,8 @@ void SpellCheckRunner::reloadConfiguration()
     m_requireTriggerWord = cfg.readEntry("requireTriggerWord", true) && !m_triggerWord.isEmpty();
     m_triggerWord += QLatin1Char(' ');
 
-    Plasma::RunnerSyntax s(i18nc("Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\".", "%1:q:", m_triggerWord),
-                           i18n("Checks the spelling of :q:."));
+    RunnerSyntax s(i18nc("Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\".", "%1:q:", m_triggerWord),
+                   i18n("Checks the spelling of :q:."));
 
     if (!m_requireTriggerWord) {
         s.addExampleQuery(QStringLiteral(":q:"));
@@ -157,7 +157,7 @@ QString SpellCheckRunner::findLang(const QStringList &terms)
     return QString();
 }
 
-void SpellCheckRunner::match(Plasma::RunnerContext &context)
+void SpellCheckRunner::match(RunnerContext &context)
 {
     const QString term = context.query();
     QString query = term;
@@ -202,8 +202,8 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         QStringList suggestions;
         const bool correct = speller->checkAndSuggest(query, suggestions);
         if (correct) {
-            Plasma::QueryMatch match(this);
-            match.setType(Plasma::QueryMatch::ExactMatch);
+            QueryMatch match(this);
+            match.setType(QueryMatch::ExactMatch);
             match.setIconName(QStringLiteral("checkbox"));
             match.setText(query);
             match.setSubtext(i18nc("Term is spelled correctly", "Correct"));
@@ -211,8 +211,8 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
             context.addMatch(match);
         } else {
             for (const auto &suggestion : std::as_const(suggestions)) {
-                Plasma::QueryMatch match(this);
-                match.setType(Plasma::QueryMatch::ExactMatch);
+                QueryMatch match(this);
+                match.setType(QueryMatch::ExactMatch);
                 match.setIconName(QStringLiteral("edit-rename"));
                 match.setText(suggestion);
                 match.setSubtext(i18n("Suggested term"));
@@ -221,22 +221,22 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
             }
         }
     } else {
-        Plasma::QueryMatch match(this);
-        match.setType(Plasma::QueryMatch::ExactMatch);
+        QueryMatch match(this);
+        match.setType(QueryMatch::ExactMatch);
         match.setIconName(QStringLiteral("data-error"));
         match.setText(i18n("No dictionary found, please install hspell"));
         context.addMatch(match);
     }
 }
 
-void SpellCheckRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void SpellCheckRunner::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
 
     QGuiApplication::clipboard()->setText(match.data().toString());
 }
 
-QMimeData *SpellCheckRunner::mimeDataForMatch(const Plasma::QueryMatch &match)
+QMimeData *SpellCheckRunner::mimeDataForMatch(const QueryMatch &match)
 {
     QMimeData *result = new QMimeData();
     const QString text = match.data().toString();

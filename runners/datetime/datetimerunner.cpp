@@ -18,16 +18,16 @@ static const QString dateWord = i18nc("Note this is a KRunner keyword", "date");
 static const QString timeWord = i18nc("Note this is a KRunner keyword", "time");
 
 DateTimeRunner::DateTimeRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, metaData, args)
+    : AbstractRunner(parent, metaData, args)
 {
     setObjectName(QLatin1String("DataTimeRunner"));
 
-    addSyntax(Plasma::RunnerSyntax(dateWord, i18n("Displays the current date")));
-    addSyntax(Plasma::RunnerSyntax(timeWord, i18n("Displays the current time")));
-    addSyntax(Plasma::RunnerSyntax(dateWord + i18nc("The <> and space are part of the example query", " <timezone>"),
-                                   i18n("Displays the current date in a given timezone")));
-    addSyntax(Plasma::RunnerSyntax(timeWord + i18nc("The <> and space are part of the example query", " <timezone>"),
-                                   i18n("Displays the current time in a given timezone")));
+    addSyntax(RunnerSyntax(dateWord, i18n("Displays the current date")));
+    addSyntax(RunnerSyntax(timeWord, i18n("Displays the current time")));
+    addSyntax(RunnerSyntax(dateWord + i18nc("The <> and space are part of the example query", " <timezone>"), //
+                           i18n("Displays the current date in a given timezone")));
+    addSyntax(RunnerSyntax(timeWord + i18nc("The <> and space are part of the example query", " <timezone>"), //
+                           i18n("Displays the current time in a given timezone")));
     setTriggerWords({timeWord, dateWord});
 }
 
@@ -35,7 +35,7 @@ DateTimeRunner::~DateTimeRunner()
 {
 }
 
-void DateTimeRunner::match(Plasma::RunnerContext &context)
+void DateTimeRunner::match(RunnerContext &context)
 {
     const QString term = context.query();
     if (term.compare(dateWord, Qt::CaseInsensitive) == 0) {
@@ -104,12 +104,12 @@ QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringRef &tz)
     return ret;
 }
 
-void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText, Plasma::RunnerContext &context, const QString &iconName)
+void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText, RunnerContext &context, const QString &iconName)
 {
-    Plasma::QueryMatch match(this);
+    QueryMatch match(this);
     match.setText(text);
     match.setData(clipboardText);
-    match.setType(Plasma::QueryMatch::InformationalMatch);
+    match.setType(QueryMatch::InformationalMatch);
     match.setIconName(iconName);
 
     context.addMatch(match);

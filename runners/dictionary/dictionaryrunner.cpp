@@ -36,10 +36,10 @@ void DictionaryRunner::reloadConfiguration()
     } else {
         setMatchRegex(QRegularExpression());
     }
-    setSyntaxes({Plasma::RunnerSyntax(i18nc("Dictionary keyword", "%1:q:", m_triggerWord), i18n("Finds the definition of :q:."))});
+    setSyntaxes({RunnerSyntax(i18nc("Dictionary keyword", "%1:q:", m_triggerWord), i18n("Finds the definition of :q:."))});
 }
 
-void DictionaryRunner::match(Plasma::RunnerContext &context)
+void DictionaryRunner::match(RunnerContext &context)
 {
     QString query = context.query();
     if (query.startsWith(m_triggerWord, Qt::CaseInsensitive)) {
@@ -73,7 +73,7 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
     }
     lines.removeFirst();
 
-    QList<Plasma::QueryMatch> matches;
+    QList<QueryMatch> matches;
     int item = 0;
     static const QRegExp partOfSpeech(QLatin1String("(?: ([a-z]{1,5})){0,1} [0-9]{1,2}: (.*)"));
     QString lastPartOfSpeech;
@@ -84,11 +84,11 @@ void DictionaryRunner::match(Plasma::RunnerContext &context)
         if (!partOfSpeech.cap(1).isEmpty()) {
             lastPartOfSpeech = partOfSpeech.cap(1);
         }
-        Plasma::QueryMatch match(this);
+        QueryMatch match(this);
         match.setMultiLine(true);
         match.setText(lastPartOfSpeech + QLatin1String(": ") + partOfSpeech.cap(2));
         match.setRelevance(1 - (static_cast<double>(++item) / static_cast<double>(lines.length())));
-        match.setType(Plasma::QueryMatch::InformationalMatch);
+        match.setType(QueryMatch::InformationalMatch);
         match.setIconName(QStringLiteral("accessories-dictionary"));
         matches.append(match);
     }

@@ -10,13 +10,13 @@
 #include <KRunner/AbstractRunner>
 #include <Plasma/DataEngineConsumer>
 
-class DictionaryRunner : public Plasma::AbstractRunner
+class DictionaryRunner : public AbstractRunner
 {
     Q_OBJECT
 
 public:
     explicit DictionaryRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-    void match(Plasma::RunnerContext &context) override;
+    void match(RunnerContext &context) override;
     void reloadConfiguration() override;
 
 private:

@@ -22,12 +22,12 @@
 K_PLUGIN_CLASS_WITH_JSON(KateSessions, "plasma-runner-katesessions.json")
 
 KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, metaData, args)
+    : AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("Kate Sessions"));
 
-    addSyntax(Plasma::RunnerSyntax(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:.")));
-    addSyntax(Plasma::RunnerSyntax(QStringLiteral("kate"), i18n("Lists all the Kate editor sessions in your account.")));
+    addSyntax(RunnerSyntax(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:.")));
+    addSyntax(RunnerSyntax(QStringLiteral("kate"), i18n("Lists all the Kate editor sessions in your account.")));
 
     m_sessionsFolderPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/kate/sessions");
 
@@ -59,7 +59,7 @@ void KateSessions::loadSessions()
     suspendMatching(m_sessions.isEmpty());
 }
 
-void KateSessions::match(Plasma::RunnerContext &context)
+void KateSessions::match(RunnerContext &context)
 {
     QString term = context.query();
     bool listAll = false;
@@ -75,8 +75,8 @@ void KateSessions::match(Plasma::RunnerContext &context)
 
     for (const QString &session : std::as_const(m_sessions)) {
         if (listAll || session.contains(term, Qt::CaseInsensitive)) {
-            Plasma::QueryMatch match(this);
-            match.setType(Plasma::QueryMatch::ExactMatch);
+            QueryMatch match(this);
+            match.setType(QueryMatch::ExactMatch);
             match.setRelevance(session.compare(term, Qt::CaseInsensitive) == 0 ? 1 : 0.8);
             match.setIconName(m_triggerWord);
             match.setData(session);
@@ -87,7 +87,7 @@ void KateSessions::match(Plasma::RunnerContext &context)
     }
 }
 
-void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void KateSessions::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
 
