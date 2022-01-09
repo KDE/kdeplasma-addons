@@ -17,6 +17,7 @@ Name[sl]=Preklopnik platnice
 Name[sv]=Omslagsbyte
 Name[uk]=Перемикач обкладинок
 Name[x-test]=xxCover Switchxx
+Name[zh_CN]=封面切换
 Comment=A Window Switcher layout showing thumbnails as a 3D carousel
 Comment[ar]=مبدل نوافذ يعرض كل النوافذ كمصغرات على شكل دائري ثلاثي الأبعاد.
 Comment[az]=Pəncərə dəyişdiricisi qatı, eskizləri 3D karusel kimi göstərir
@@ -35,6 +36,7 @@ Comment[sl]=Preklopnik med okni, ki vsa okna prikazuje kot sličice na 3D vrtilj
 Comment[sv]=En layout för fönsterbyte som visar miniatyrbilder som en tredimensionell karusell
 Comment[uk]=Компонування засобу перемикання вікон з мініатюрами у вигляді просторово каруселі
 Comment[x-test]=xxA Window Switcher layout showing thumbnails as a 3D carouselxx
+Comment[zh_CN]=一款将缩略图显示为 3D 转盘的窗口切换器。
 Icon=preferences-system-windows-effect-coverswitch
 
 X-Plasma-API=declarativeappletscript

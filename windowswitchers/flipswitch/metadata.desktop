@@ -17,6 +17,7 @@ Name[sl]=Preklop obrata
 Name[sv]=Blädderbyte
 Name[uk]=Тасування карток
 Name[x-test]=xxFlip Switchxx
+Name[zh_CN]=翻转切换
 Comment=A Window Switcher layout showing thumbnails as a 3D card deck
 Comment[ar]=مبدل نوافذ يعرض كل النوافذ كمجموعة بطاقات ثلاثية الأبعاد
 Comment[az]=Pəncərə dəyişdiricisi qatı, eskizləri 3D kartdəsti kimi göstərir
@@ -35,6 +36,7 @@ Comment[sl]=Preklopnik med okni, ki vsa okna prikazuje kot 3D kup igralnih kart
 Comment[sv]=En layout för fönsterbyte som visar miniatyrbilder som en tredimensionell kortlek
 Comment[uk]=Компонування засобу перемикання вікон з мініатюрами вікон у вигляді колоди карт
 Comment[x-test]=xxA Window Switcher layout showing thumbnails as a 3D card deckxx
+Comment[zh_CN]=一款将缩略图显示为 3D 卡片的窗口切换器。
 Icon=preferences-system-windows-effect-flipswitch
 
 X-Plasma-API=declarativeappletscript
