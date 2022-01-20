@@ -49,7 +49,7 @@ public:
     static QString identifierToPath(const QString &identifier);
 
 private Q_SLOTS:
-    void triggerFinished(const QImage &image);
+    void triggerFinished(const PotdProviderData &data);
 
 private:
     QString mIdentifier;
@@ -64,7 +64,7 @@ public:
     void run() override;
 
 Q_SIGNALS:
-    void done(const QImage &pixmap);
+    void done(const PotdProviderData &data);
 
 private:
     QString m_filePath;
