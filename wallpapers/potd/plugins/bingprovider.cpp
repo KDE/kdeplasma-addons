@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QRegularExpression> // Extract from the copyright text
 
 #include <KIO/Job>
 #include <KPluginFactory>
@@ -48,7 +49,8 @@ void BingProvider::pageRequestFinished(KJob *_job)
         if (!imageObj.isObject()) {
             break;
         }
-        auto url = imageObj.toObject().value(QLatin1String("urlbase"));
+        const QJsonObject imageObject = imageObj.toObject();
+        auto url = imageObject.value(QLatin1String("urlbase"));
         QString urlString = url.isString() ? url.toString() : QString();
         if (urlString.isEmpty()) {
             break;
@@ -62,8 +64,29 @@ void BingProvider::pageRequestFinished(KJob *_job)
         } else {
             urlString += QStringLiteral("_1920x1080.jpg");
         }
+        potdProviderData()->wallpaperRemoteUrl = QUrl(urlString);
 
-        KIO::StoredTransferJob *imageJob = KIO::storedGet(QUrl(urlString), KIO::NoReload, KIO::HideProgressInfo);
+        // Parse the title and the copyright text from the json data
+        // Example copyright text: "草丛中的母狮和它的幼崽，南非 (© Andrew Coleman/Getty Images)"
+        const QString copyright = imageObject.value(QStringLiteral("copyright")).toString();
+        const QRegularExpression copyrightRegEx(QStringLiteral("(.+?)[\\(（](.+?)[\\)）]"));
+        if (const QRegularExpressionMatch match = copyrightRegEx.match(copyright); match.hasMatch()) {
+            // In some regions "title" is empty, so extract the title from the copyright text.
+            potdProviderData()->wallpaperTitle = match.captured(1).trimmed();
+            potdProviderData()->wallpaperAuthor = match.captured(2).remove(QStringLiteral("©")).trimmed();
+        }
+
+        const QString title = imageObject.value(QStringLiteral("title")).toString();
+        if (!title.isEmpty()) {
+            potdProviderData()->wallpaperTitle = title;
+        }
+
+        const QString infoUrl = imageObject.value(QStringLiteral("copyrightlink")).toString();
+        if (!infoUrl.isEmpty()) {
+            potdProviderData()->wallpaperInfoUrl = QUrl(infoUrl);
+        }
+
+        KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &BingProvider::imageRequestFinished);
         return;
     } while (0);
