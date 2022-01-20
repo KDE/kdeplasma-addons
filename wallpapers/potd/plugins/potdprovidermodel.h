@@ -36,6 +36,16 @@ class PotdProviderModel : public QAbstractListModel
      */
     Q_PROPERTY(QImage image READ image NOTIFY imageChanged)
     Q_PROPERTY(QString localUrl READ localUrl NOTIFY localUrlChanged)
+    /**
+     * @return The website URL of the image
+     */
+    Q_PROPERTY(QUrl infoUrl READ infoUrl NOTIFY infoUrlChanged)
+    /**
+     * @return The remote image URL
+     */
+    Q_PROPERTY(QUrl remoteUrl READ remoteUrl NOTIFY remoteUrlChanged)
+    Q_PROPERTY(QString title READ title NOTIFY titleChanged)
+    Q_PROPERTY(QString author READ author NOTIFY authorChanged)
 
 public:
     enum Roles {
@@ -63,6 +73,10 @@ public:
 
     QImage image() const;
     QString localUrl() const;
+    QUrl infoUrl() const;
+    QUrl remoteUrl() const;
+    QString title() const;
+    QString author() const;
 
 Q_SIGNALS:
     void runningChanged();
@@ -71,6 +85,10 @@ Q_SIGNALS:
 
     void imageChanged();
     void localUrlChanged();
+    void infoUrlChanged();
+    void remoteUrlChanged();
+    void titleChanged();
+    void authorChanged();
 
 private Q_SLOTS:
     void slotFinished(PotdProvider *);
@@ -86,6 +104,10 @@ private:
 
     void setImage(const QImage &image);
     void setLocalUrl(const QString &urlString);
+    void setInfoUrl(const QUrl &url);
+    void setRemoteUrl(const QUrl &url);
+    void setTitle(const QString &title);
+    void setAuthor(const QString &author);
 
     std::vector<KPluginMetaData> m_providers;
     QString m_identifier;

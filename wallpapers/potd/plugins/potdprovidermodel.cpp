@@ -209,10 +209,74 @@ void PotdProviderModel::setLocalUrl(const QString &urlString)
     Q_EMIT localUrlChanged();
 }
 
+QUrl PotdProviderModel::infoUrl() const
+{
+    return m_data.wallpaperInfoUrl;
+}
+
+void PotdProviderModel::setInfoUrl(const QUrl &url)
+{
+    if (m_data.wallpaperInfoUrl == url) {
+        return;
+    }
+
+    m_data.wallpaperInfoUrl = url;
+    Q_EMIT infoUrlChanged();
+}
+
+QUrl PotdProviderModel::remoteUrl() const
+{
+    return m_data.wallpaperRemoteUrl;
+}
+
+void PotdProviderModel::setRemoteUrl(const QUrl &url)
+{
+    if (m_data.wallpaperRemoteUrl == url) {
+        return;
+    }
+
+    m_data.wallpaperRemoteUrl = url;
+    Q_EMIT remoteUrlChanged();
+}
+
+QString PotdProviderModel::title() const
+{
+    return m_data.wallpaperTitle;
+}
+
+void PotdProviderModel::setTitle(const QString &title)
+{
+    if (m_data.wallpaperTitle == title) {
+        return;
+    }
+
+    m_data.wallpaperTitle = title;
+    Q_EMIT titleChanged();
+}
+
+QString PotdProviderModel::author() const
+{
+    return m_data.wallpaperAuthor;
+}
+
+void PotdProviderModel::setAuthor(const QString &author)
+{
+    if (m_data.wallpaperAuthor == author) {
+        return;
+    }
+
+    m_data.wallpaperAuthor = author;
+    Q_EMIT authorChanged();
+}
+
 void PotdProviderModel::resetData()
 {
     setImage(QImage());
     setLocalUrl(QString());
+    setInfoUrl(QUrl());
+    setRemoteUrl(QUrl());
+    setTitle(QString());
+    setAuthor(QString());
 }
 
 bool PotdProviderModel::updateSource(bool refresh)
