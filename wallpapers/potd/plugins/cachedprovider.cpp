@@ -39,7 +39,10 @@ void SaveImageThread::run()
 {
     const QString path = CachedProvider::identifierToPath(m_identifier);
     m_image.save(path, "JPEG");
-    Q_EMIT done(m_identifier, path, m_image);
+    PotdProviderData data;
+    data.wallpaperImage = m_image;
+    data.wallpaperLocalUrl = path;
+    Q_EMIT done(m_identifier, data);
 }
 
 QString CachedProvider::identifierToPath(const QString &identifier)

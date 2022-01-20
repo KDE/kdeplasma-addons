@@ -92,7 +92,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void slotFinished(PotdProvider *);
-    void slotCachingFinished(const QString &source, const QString &path, const QImage &img);
+    void slotCachingFinished(const QString &source, const PotdProviderData &data);
     void slotError(PotdProvider *);
     void slotPrepareForSleep(bool sleep);
 

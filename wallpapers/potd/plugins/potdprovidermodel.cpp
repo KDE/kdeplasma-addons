@@ -30,6 +30,8 @@ PotdProviderModel::PotdProviderModel(QObject *parent)
 
     connect(&m_checkDatesTimer, &QTimer::timeout, this, &PotdProviderModel::forceUpdateSource);
     m_checkDatesTimer.setInterval(10min); // check every 10 minutes
+
+    qRegisterMetaType<PotdProviderData>();
 }
 
 int PotdProviderModel::rowCount(const QModelIndex &parent) const
@@ -337,11 +339,11 @@ void PotdProviderModel::slotFinished(PotdProvider *provider)
     provider->deleteLater();
 }
 
-void PotdProviderModel::slotCachingFinished(const QString &source, const QString &path, const QImage &img)
+void PotdProviderModel::slotCachingFinished(const QString &source, const PotdProviderData &data)
 {
     Q_UNUSED(source)
-    setImage(img);
-    setLocalUrl(path);
+    setImage(data.wallpaperImage);
+    setLocalUrl(data.wallpaperLocalUrl);
 }
 
 void PotdProviderModel::slotError(PotdProvider *provider)
