@@ -320,10 +320,14 @@ void PotdProviderModel::slotFinished(PotdProvider *provider)
     }
 
     setImage(provider->image());
+    setInfoUrl(provider->infoUrl());
+    setRemoteUrl(provider->remoteUrl());
+    setTitle(provider->title());
+    setAuthor(provider->author());
 
     // Store in cache if it's not the response of a CachedProvider
     if (qobject_cast<CachedProvider *>(provider) == nullptr && !m_data.wallpaperImage.isNull()) {
-        SaveImageThread *thread = new SaveImageThread(m_identifier, m_data.wallpaperImage);
+        SaveImageThread *thread = new SaveImageThread(m_identifier, m_data);
         connect(thread, &SaveImageThread::done, this, &PotdProviderModel::slotCachingFinished);
         QThreadPool::globalInstance()->start(thread);
     } else {
@@ -344,6 +348,10 @@ void PotdProviderModel::slotCachingFinished(const QString &source, const PotdPro
     Q_UNUSED(source)
     setImage(data.wallpaperImage);
     setLocalUrl(data.wallpaperLocalUrl);
+    setInfoUrl(data.wallpaperInfoUrl);
+    setRemoteUrl(data.wallpaperRemoteUrl);
+    setTitle(data.wallpaperTitle);
+    setAuthor(data.wallpaperAuthor);
 }
 
 void PotdProviderModel::slotError(PotdProvider *provider)

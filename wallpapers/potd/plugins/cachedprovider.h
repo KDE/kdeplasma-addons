@@ -75,15 +75,15 @@ class SaveImageThread : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    SaveImageThread(const QString &identifier, const QImage &image);
+    SaveImageThread(const QString &identifier, const PotdProviderData &data);
     void run() override;
 
 Q_SIGNALS:
     void done(const QString &source, const PotdProviderData &data);
 
 private:
-    QImage m_image;
     QString m_identifier;
+    PotdProviderData m_data;
 };
 
 #endif

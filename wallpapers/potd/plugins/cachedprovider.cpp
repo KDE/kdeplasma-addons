@@ -29,20 +29,18 @@ void LoadImageThread::run()
     Q_EMIT done(image);
 }
 
-SaveImageThread::SaveImageThread(const QString &identifier, const QImage &image)
-    : m_image(image)
-    , m_identifier(identifier)
+SaveImageThread::SaveImageThread(const QString &identifier, const PotdProviderData &data)
+    : m_identifier(identifier)
+    , m_data(data)
 {
 }
 
 void SaveImageThread::run()
 {
-    const QString path = CachedProvider::identifierToPath(m_identifier);
-    m_image.save(path, "JPEG");
-    PotdProviderData data;
-    data.wallpaperImage = m_image;
-    data.wallpaperLocalUrl = path;
-    Q_EMIT done(m_identifier, data);
+    m_data.wallpaperLocalUrl = CachedProvider::identifierToPath(m_identifier);
+    m_data.wallpaperImage.save(m_data.wallpaperLocalUrl, "JPEG");
+
+    Q_EMIT done(m_identifier, m_data);
 }
 
 QString CachedProvider::identifierToPath(const QString &identifier)
