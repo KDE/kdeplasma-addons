@@ -12,9 +12,11 @@ ecm_qt_declare_logging_category(potd_engine_SRCS
 
 add_library(plasma_wallpaper_potdplugin SHARED ${potd_engine_SRCS})
 target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
+    KF5::I18n
     KF5::KIOCore
     Qt::DBus
     Qt::Qml
+    Qt::Widgets # QFileDialog
 )
 install(TARGETS plasma_wallpaper_potdplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)
 install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)

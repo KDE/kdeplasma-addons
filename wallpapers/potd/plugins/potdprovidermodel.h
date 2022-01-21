@@ -11,6 +11,7 @@
 #include <QAbstractListModel>
 #include <QImage>
 #include <QTimer>
+#include <QUrl>
 
 #include <KPluginMetaData>
 
@@ -48,7 +49,34 @@ class PotdProviderModel : public QAbstractListModel
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(QString author READ author NOTIFY authorChanged)
 
+    /**
+     * @return the result of the file operation.
+     */
+    Q_PROPERTY(FileOperationStatus saveStatus MEMBER m_saveStatus NOTIFY saveStatusChanged)
+
+    /**
+     * @return the status message after a save operation.
+     */
+    Q_PROPERTY(QString saveStatusMessage MEMBER m_saveStatusMessage CONSTANT)
+
+    /**
+     * @return the folder path of the saved image file.
+     */
+    Q_PROPERTY(QUrl savedFolder MEMBER m_savedFolder CONSTANT)
+
+    /**
+     * @return the path of the saved image file.
+     */
+    Q_PROPERTY(QUrl savedUrl MEMBER m_savedUrl CONSTANT)
+
 public:
+    enum class FileOperationStatus {
+        None,
+        Successful,
+        Failed,
+    };
+    Q_ENUM(FileOperationStatus)
+
     enum Roles {
         Id = Qt::UserRole + 1,
     };
@@ -80,6 +108,12 @@ public:
     QString title() const;
     QString author() const;
 
+    /**
+     * Opens a Save dialog to choose the save location, and copies the source file to the
+     * selected destination.
+     */
+    Q_INVOKABLE void saveImage();
+
 Q_SIGNALS:
     void runningChanged();
     void identifierChanged();
@@ -92,6 +126,8 @@ Q_SIGNALS:
     void remoteUrlChanged();
     void titleChanged();
     void authorChanged();
+
+    void saveStatusChanged();
 
 private Q_SLOTS:
     void slotFinished(PotdProvider *);
@@ -122,6 +158,11 @@ private:
     bool m_loading;
 
     QTimer m_checkDatesTimer;
+
+    QUrl m_savedFolder;
+    QUrl m_savedUrl;
+    FileOperationStatus m_saveStatus;
+    QString m_saveStatusMessage;
 };
 
 #endif

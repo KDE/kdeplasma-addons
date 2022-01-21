@@ -12,8 +12,12 @@
 #include <QDate>
 #include <QDBusConnection>
 #include <QDebug>
+#include <QFileDialog>
+#include <QStandardPaths> // For "Pictures" folder
 #include <QThreadPool>
 
+#include <KIO/CopyJob> // For "Save Image"
+#include <KLocalizedString>
 #include <KPluginFactory>
 #include <KPluginMetaData>
 
@@ -290,6 +294,85 @@ void PotdProviderModel::setAuthor(const QString &author)
 
     m_data.wallpaperAuthor = author;
     Q_EMIT authorChanged();
+}
+
+void PotdProviderModel::saveImage()
+{
+    if (m_data.wallpaperLocalUrl.isEmpty()) {
+        return;
+    }
+
+    auto sanitizeFileName = [](const QString &name){
+        if (name.isEmpty()) {
+            return name;
+        }
+
+        const char notAllowedChars[] = ",^@={}[]~!?:&*\"|#%<>$\"'();`'/\\";
+        QString sanitizedName(name);
+
+        for (const char *c = notAllowedChars; *c; c++) {
+            sanitizedName.replace(QLatin1Char(*c), QLatin1Char('-'));
+        }
+
+        return sanitizedName;
+    };
+
+    const QStringList &locations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
+    const QString path = locations.isEmpty() ? QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) : locations.at(0);
+
+    // clang-format off
+    QString defaultFileName = m_providers.at(m_currentIndex).name().trimmed();
+
+    if (!m_data.wallpaperTitle.isEmpty()) {
+        defaultFileName += QLatin1Char('-') + m_data.wallpaperTitle.trimmed();
+        if (!m_data.wallpaperAuthor.isEmpty()) {
+            defaultFileName += QLatin1Char('-') + m_data.wallpaperAuthor.trimmed();
+        }
+    } else {
+        // Use current date
+        if (!defaultFileName.isEmpty()) {
+            defaultFileName += QLatin1Char('-');
+        }
+        defaultFileName += QDate::currentDate().toString();
+    }
+
+    m_savedUrl = QUrl::fromLocalFile(
+        QFileDialog::getSaveFileName(
+            nullptr,
+            i18nc("@title:window", "Save Today's Picture"),
+            path + "/" + sanitizeFileName(defaultFileName) + ".jpg",
+            i18nc("@label:listbox Template for file dialog", "JPEG image (*.jpeg *.jpg *.jpe)"),
+            nullptr,
+            QFileDialog::DontConfirmOverwrite // KIO::CopyJob will show the confirmation dialog.
+        )
+    );
+    // clang-format on
+
+    if (m_savedUrl.isEmpty() || !m_savedUrl.isValid()) {
+        return;
+    }
+
+    m_savedFolder = QUrl::fromLocalFile(m_savedUrl.toLocalFile().section(QDir::separator(), 0, -2));
+
+    KIO::CopyJob *copyJob = KIO::copy(QUrl::fromLocalFile(m_data.wallpaperLocalUrl), m_savedUrl, KIO::HideProgressInfo);
+    connect(copyJob, &KJob::finished, this, [this](KJob *job) {
+        if (job->error()) {
+            m_saveStatusMessage = job->errorText();
+            if (m_saveStatusMessage.isEmpty()) {
+                m_saveStatusMessage = i18nc("@info:status after a save action", "The image was not saved.");
+            }
+            m_saveStatus = FileOperationStatus::Failed;
+            Q_EMIT saveStatusChanged();
+        } else {
+            m_saveStatusMessage = i18nc("@info:status after a save action %1 file path %2 basename",
+                                         "The image was saved as <a href=\"%1\">%2</a>",
+                                         m_savedUrl.toString(),
+                                         m_savedUrl.fileName());
+            m_saveStatus = FileOperationStatus::Successful;
+            Q_EMIT saveStatusChanged();
+        }
+    });
+    copyJob->start();
 }
 
 void PotdProviderModel::resetData()
