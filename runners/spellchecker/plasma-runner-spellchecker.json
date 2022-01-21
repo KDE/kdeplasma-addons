@@ -67,7 +67,6 @@
         "Description[zh_CN]": "检查单词拼写",
         "EnabledByDefault": true,
         "Icon": "tools-check-spelling",
-        "Id": "Spell Checker",
         "License": "GPL",
         "Name": "Spell Checker",
         "Name[ar]": "المدقق الإملائي",
