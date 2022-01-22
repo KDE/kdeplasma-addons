@@ -11,6 +11,7 @@
 #include <QDebug>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QTextDocumentFragment>
 #include <QUrlQuery>
 
 #include <KIO/Job>
@@ -25,7 +26,6 @@ WcpotdProvider::WcpotdProvider(QObject *parent, const KPluginMetaData &data, con
     urlQuery.addQueryItem(QStringLiteral("action"), QStringLiteral("parse"));
     urlQuery.addQueryItem(QStringLiteral("text"), QStringLiteral("{{Potd}}"));
     urlQuery.addQueryItem(QStringLiteral("contentmodel"), QStringLiteral("wikitext"));
-    urlQuery.addQueryItem(QStringLiteral("prop"), QStringLiteral("images"));
     urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("json"));
     url.setQuery(urlQuery);
 
@@ -43,19 +43,43 @@ void WcpotdProvider::pageRequestFinished(KJob *_job)
         return;
     }
 
-    auto jsonImageArray = QJsonDocument::fromJson(job->data()).object().value(QLatin1String("parse")).toObject().value(QLatin1String("images")).toArray();
+    const QJsonObject jsonObject = QJsonDocument::fromJson(job->data()).object().value(QLatin1String("parse")).toObject();
+    const QJsonArray jsonImageArray = jsonObject.value(QLatin1String("images")).toArray();
 
-    if (jsonImageArray.size() > 0) {
-        const QString imageFile = jsonImageArray.at(0).toString();
-        if (!imageFile.isEmpty()) {
-            const QUrl picUrl(QLatin1String("https://commons.wikimedia.org/wiki/Special:FilePath/") + imageFile);
-            KIO::StoredTransferJob *imageJob = KIO::storedGet(picUrl, KIO::NoReload, KIO::HideProgressInfo);
-            connect(imageJob, &KIO::StoredTransferJob::finished, this, &WcpotdProvider::imageRequestFinished);
-            return;
-        }
+    if (jsonImageArray.size() == 0) {
+        Q_EMIT error(this);
+        return;
     }
 
-    Q_EMIT error(this);
+    const QString imageFile = jsonImageArray.at(0).toString();
+    if (!imageFile.isEmpty()) {
+        potdProviderData()->wallpaperRemoteUrl = QUrl(QStringLiteral("https://commons.wikimedia.org/wiki/Special:FilePath/") + imageFile);
+        KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
+        connect(imageJob, &KIO::StoredTransferJob::finished, this, &WcpotdProvider::imageRequestFinished);
+    } else {
+        Q_EMIT error(this);
+        return;
+    }
+
+    const QJsonObject jsonTextObject = jsonObject.value(QStringLiteral("text")).toObject();
+    const QString text = jsonTextObject.value(QStringLiteral("*")).toString().trimmed();
+
+    if (text.isEmpty()) {
+        return;
+    }
+
+    /**
+     * Match link and title.
+     * Example:
+     * <div lang="en" dir="ltr" class="description en" style="display:inline;"><a href="https://en.wikipedia.org/wiki/Petros_(Chornohora)" class="extiw"
+     * title="w:Petros (Chornohora)">Mount Petros</a>
+     */
+    const QRegularExpression titleRegEx(QStringLiteral("<div.*?class=\"description.*?>.*?<a href=\"(.+?)\".*?>(.+?)</a>"));
+    const QRegularExpressionMatch titleMatch = titleRegEx.match(text);
+    if (titleMatch.hasMatch()) {
+        potdProviderData()->wallpaperInfoUrl = QUrl(titleMatch.captured(1).trimmed());
+        potdProviderData()->wallpaperTitle = QTextDocumentFragment::fromHtml(titleMatch.captured(2).trimmed()).toPlainText();
+    }
 }
 
 void WcpotdProvider::imageRequestFinished(KJob *_job)
