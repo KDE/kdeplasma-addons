@@ -9,6 +9,7 @@
 #include "natgeoprovider.h"
 
 #include <QDebug>
+#include <QTextDocumentFragment>
 
 #include <KIO/Job>
 #include <KPluginFactory>
@@ -35,23 +36,58 @@ void NatGeoProvider::pageRequestFinished(KJob *_job)
     const QString data = QString::fromUtf8(job->data());
     const QStringList lines = data.split(QLatin1Char('\n'));
 
-    QString url;
-
     re.setPattern(QStringLiteral("<meta\\s+(?:\\S+=[\"']?(?:.(?![\"']?\\s+(?:\\S+)=|\\s*/?[>\"']))+.[\"']?\\s*)*property=\"og:image\"\\s*(?:\\S+=[\"']?(?:.(?![\"']?\\s+(?:\\S+)=|\\s*/?[>\"']))+.[\"']?\\s*)*content=[\"']?((?:.(?![\"']?\\s+(?:\\S+)=|\\s*/?[>\"']))+.)[\"']?\\s*(?:\\S+=[\"']?(?:.(?![\"']?\\s+(?:\\S+)=|\\s*/?[>\"']))+.[\"']?\\s*)*/>"));
 
     for (int i = 0; i < lines.size(); i++) {
         QRegularExpressionMatch match = re.match(lines.at(i));
         if (match.hasMatch()) {
-            url = match.captured(1);
+            potdProviderData()->wallpaperRemoteUrl = QUrl(match.captured(1));
         }
     }
 
-    if (url.isEmpty()) {
+    if (potdProviderData()->wallpaperRemoteUrl.isEmpty()) {
         Q_EMIT error(this);
         return;
     }
 
-    KIO::StoredTransferJob *imageJob = KIO::storedGet(QUrl(url), KIO::NoReload, KIO::HideProgressInfo);
+    const QString simplifiedData(data.simplified());
+
+    /**
+     * Match link
+     * Example:
+     * <meta data-react-helmet="true" property="og:url" content="https://www.nationalgeographic.com/photo-of-the-day/media-spotlight/wanapum-horse-oregon-native-american"/>
+     */
+    const QRegularExpression linkRegEx(QStringLiteral("<meta.*?property=\"og:url\" content=\"(.+?)\".*?>"));
+    const QRegularExpressionMatch linkMatch = linkRegEx.match(simplifiedData);
+    if (linkMatch.hasMatch()) {
+        potdProviderData()->wallpaperInfoUrl = QUrl(linkMatch.captured(1).trimmed());
+    }
+
+    /**
+     * Match title
+     * Example:
+     * <p class="Caption__Title" aria-hidden="false">Destiny and Daisy</p>
+     */
+    const QRegularExpression titleRegEx(QStringLiteral("<p class=\"Caption__Title\".*?>(.+?)</p>"));
+    const QRegularExpressionMatch titleMatch = titleRegEx.match(simplifiedData);
+    if (titleMatch.hasMatch()) {
+        potdProviderData()->wallpaperTitle = QTextDocumentFragment::fromHtml(titleMatch.captured(1).trimmed()).toPlainText();
+    }
+
+    /**
+     * Match author
+     * Example:
+     * <span aria-label="Photograph by Erika Larsen, Nat Geo Image Collection" class="RichText Caption__Credit">Photograph by Erika Larsen, Nat Geo Image
+     * Collection</span>
+     */
+    const QRegularExpression authorRegEx(QStringLiteral("<span.*?class=\".*?Caption__Credit.*?\".*?>(.+?)</span>"));
+    const QRegularExpressionMatch authorMatch = authorRegEx.match(simplifiedData);
+    if (authorMatch.hasMatch()) {
+        potdProviderData()->wallpaperAuthor =
+            QTextDocumentFragment::fromHtml(authorMatch.captured(1).remove(QStringLiteral("Photograph by")).trimmed()).toPlainText();
+    }
+
+    KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &NatGeoProvider::imageRequestFinished);
 }
 
