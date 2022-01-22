@@ -157,11 +157,12 @@ void PotdProviderModel::setIdentifier(const QString &identifier)
     m_currentIndex = indexOfProvider(identifier);
 
     // Avoid flickering
-    const bool isCached = CachedProvider::isCached(m_identifier, false);
-    if (!isCached) {
+    if (const QString path = CachedProvider::identifierToPath(m_identifier); QFile::exists(path)) {
+        setImage(QImage(path));
+    } else {
         resetData();
     }
-    updateSource(!isCached);
+    updateSource();
 
     Q_EMIT identifierChanged();
 }
@@ -179,7 +180,12 @@ void PotdProviderModel::setArguments(const QVariantList &args)
 
     m_args = args;
 
-    resetData();
+    // Avoid flickering
+    if (const QString path = CachedProvider::identifierToPath(m_identifier); QFile::exists(path)) {
+        setImage(QImage(path));
+    } else {
+        resetData();
+    }
     forceUpdateSource();
 
     Q_EMIT argumentsChanged();
@@ -194,6 +200,21 @@ void PotdProviderModel::setImage(const QImage &image)
 {
     m_data.wallpaperImage = image;
     Q_EMIT imageChanged();
+}
+
+bool PotdProviderModel::loading() const
+{
+    return m_loading;
+}
+
+void PotdProviderModel::setLoading(bool status)
+{
+    if (m_loading == status) {
+        return;
+    }
+
+    m_loading = status;
+    Q_EMIT loadingChanged();
 }
 
 QString PotdProviderModel::localUrl() const
@@ -283,16 +304,20 @@ void PotdProviderModel::resetData()
 
 bool PotdProviderModel::updateSource(bool refresh)
 {
+    setLoading(true);
+
     // Check whether it is cached already...
     if (!refresh && CachedProvider::isCached(m_identifier, false)) {
         CachedProvider *provider = new CachedProvider(m_identifier, this);
         connect(provider, &PotdProvider::finished, this, &PotdProviderModel::slotFinished);
         connect(provider, &PotdProvider::error, this, &PotdProviderModel::slotError);
+        setLoading(false);
         return true;
     }
 
     if (m_currentIndex < 0) {
         qCWarning(WALLPAPERPOTD) << "Invalid provider: " << m_identifier;
+        setLoading(false);
         return false;
     }
 
@@ -319,18 +344,20 @@ void PotdProviderModel::slotFinished(PotdProvider *provider)
         return;
     }
 
-    setImage(provider->image());
     setInfoUrl(provider->infoUrl());
     setRemoteUrl(provider->remoteUrl());
     setTitle(provider->title());
     setAuthor(provider->author());
 
     // Store in cache if it's not the response of a CachedProvider
-    if (qobject_cast<CachedProvider *>(provider) == nullptr && !m_data.wallpaperImage.isNull()) {
+    if (qobject_cast<CachedProvider *>(provider) == nullptr) {
+        setImage(provider->image());
+        setLoading(false);
         SaveImageThread *thread = new SaveImageThread(m_identifier, m_data);
         connect(thread, &SaveImageThread::done, this, &PotdProviderModel::slotCachingFinished);
         QThreadPool::globalInstance()->start(thread);
     } else {
+        // Image is loaded in setIdentifier or setArguments
         setLocalUrl(CachedProvider::identifierToPath(m_identifier));
     }
 
@@ -358,6 +385,8 @@ void PotdProviderModel::slotError(PotdProvider *provider)
 {
     provider->disconnect(this);
     provider->deleteLater();
+
+    setLoading(false);
 
     // Retry 10min later
     if (running()) {

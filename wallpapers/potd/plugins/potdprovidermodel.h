@@ -35,6 +35,7 @@ class PotdProviderModel : public QAbstractListModel
      * Read-only properties that expose data from the provider.
      */
     Q_PROPERTY(QImage image READ image NOTIFY imageChanged)
+    Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
     Q_PROPERTY(QString localUrl READ localUrl NOTIFY localUrlChanged)
     /**
      * @return The website URL of the image
@@ -72,6 +73,7 @@ public:
     void setArguments(const QVariantList &args);
 
     QImage image() const;
+    bool loading() const;
     QString localUrl() const;
     QUrl infoUrl() const;
     QUrl remoteUrl() const;
@@ -84,6 +86,7 @@ Q_SIGNALS:
     void argumentsChanged();
 
     void imageChanged();
+    void loadingChanged();
     void localUrlChanged();
     void infoUrlChanged();
     void remoteUrlChanged();
@@ -103,6 +106,7 @@ private:
     bool updateSource(bool refresh = false);
 
     void setImage(const QImage &image);
+    void setLoading(bool status);
     void setLocalUrl(const QString &urlString);
     void setInfoUrl(const QUrl &url);
     void setRemoteUrl(const QUrl &url);
@@ -115,6 +119,7 @@ private:
     QVariantList m_args;
 
     PotdProviderData m_data;
+    bool m_loading;
 
     QTimer m_checkDatesTimer;
 };
