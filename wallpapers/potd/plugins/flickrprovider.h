@@ -38,6 +38,11 @@ private:
     void xmlRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
 
+    /**
+     * Parse the author from the HTML source
+     */
+    void pageRequestFinished(KJob *job);
+
 private:
     QDate mActualDate;
     QString mApiKey;
@@ -46,7 +51,13 @@ private:
 
     int mFailureNumber = 0;
 
-    QStringList m_photoList;
+    struct PhotoEntry {
+        QString urlString;
+        QString title;
+        QString userId;
+        QString photoId;
+    };
+    std::vector<PhotoEntry> m_photoList;
 };
 
 #endif
