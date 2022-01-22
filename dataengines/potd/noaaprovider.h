@@ -47,6 +47,7 @@ public:
     QImage image() const override;
 
 private:
+    void listPageRequestFinished(KJob *job);
     void pageRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
 
