@@ -9,6 +9,7 @@
 
 #include <QDebug>
 #include <QRegularExpression>
+#include <QTextDocumentFragment> // For parsing title from HTML source
 
 #include <KIO/Job>
 #include <KPluginFactory>
@@ -40,18 +41,18 @@ void NOAAProvider::listPageRequestFinished(KJob *_job)
     // to use heavy weight QtWebkit. So we use QRegularExpression to capture
     // the wanted url here.
     // Example: <a href="/news/hunga-tonga-hunga-haapai-erupts-again" hreflang="en">Hunga Tonga-Hunga Ha&#039;apai Erupts Again</a>
-    QUrl url;
     const QRegularExpression re("<div class=\"item-list\">.*?<li>.*?<a href=\"(.+?)\".*?>");
     auto result = re.match(data);
     if (result.hasMatch()) {
-        url = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
+        potdProviderData()->wallpaperInfoUrl = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
     }
-    if (!url.isValid()) {
+    if (!potdProviderData()->wallpaperInfoUrl.isValid()) {
+        qWarning() << "Failed to get the latest article from NOAAProvider!";
         Q_EMIT error(this);
         return;
     }
 
-    KIO::StoredTransferJob *pageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *pageJob = KIO::storedGet(potdProviderData()->wallpaperInfoUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(pageJob, &KIO::StoredTransferJob::finished, this, &NOAAProvider::pageRequestFinished);
 }
 
@@ -73,16 +74,27 @@ void NOAAProvider::pageRequestFinished(KJob *_job)
      */
     const QRegularExpression re("<a class=\"call-to-action.*?\" href=\"(.+?)\">.*?Download.*?</a>");
     const QRegularExpressionMatch result = re.match(data);
-    QUrl url;
     if (result.hasMatch()) {
-        url = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
+        potdProviderData()->wallpaperRemoteUrl = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
     }
-    if (!url.isValid()) {
+    if (!potdProviderData()->wallpaperRemoteUrl.isValid()) {
+        qWarning() << "Failed to match the latest image URL from NOAAProvider!";
         Q_EMIT error(this);
         return;
     }
 
-    KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+    /**
+     * Match title
+     * Example:
+     * <meta property="og:title" content="Hunga Tonga-Hunga Ha&#039;apai Erupts Again" />
+     */
+    const QRegularExpression titleRegEx(QStringLiteral("<meta property=\"og:title\" content=\"(.+?)\""));
+    const QRegularExpressionMatch titleMatch = titleRegEx.match(data);
+    if (titleMatch.hasMatch()) {
+        potdProviderData()->wallpaperTitle = QTextDocumentFragment::fromHtml(titleMatch.captured(1).trimmed()).toPlainText();
+    }
+
+    KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &NOAAProvider::imageRequestFinished);
 }
 
