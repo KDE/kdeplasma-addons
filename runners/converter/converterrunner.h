@@ -15,6 +15,8 @@
 #include <QLocale>
 #include <QRegularExpression>
 
+using namespace Plasma;
+
 /**
  * This class converts values to different units.
  */

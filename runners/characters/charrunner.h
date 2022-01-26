@@ -9,6 +9,8 @@
 
 #include <KRunner/AbstractRunner>
 
+using namespace Plasma;
+
 class CharacterRunner : public AbstractRunner
 {
     Q_OBJECT

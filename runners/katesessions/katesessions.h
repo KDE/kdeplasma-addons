@@ -13,6 +13,8 @@
 
 class KDirWatch;
 
+using namespace Plasma;
+
 class KateSessions : public AbstractRunner
 {
     Q_OBJECT

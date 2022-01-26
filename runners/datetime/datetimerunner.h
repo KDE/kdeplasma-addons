@@ -12,6 +12,8 @@
 #include <KRunner/AbstractRunner>
 #include <KRunner/QueryMatch>
 
+using namespace Plasma;
+
 /**
  * This class looks for matches in the set of .desktop files installed by
  * applications. This way the user can type exactly what they see in the

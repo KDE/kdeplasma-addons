@@ -19,6 +19,8 @@ struct KonsoleProfileData {
 
 Q_DECLARE_TYPEINFO(KonsoleProfileData, Q_MOVABLE_TYPE);
 
+using namespace Plasma;
+
 class KonsoleProfiles : public AbstractRunner
 {
     Q_OBJECT

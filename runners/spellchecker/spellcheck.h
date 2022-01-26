@@ -13,6 +13,8 @@
 #include <QMutex>
 #include <QSharedPointer>
 
+using namespace Plasma;
+
 /**
  * This checks the spelling of query
  */

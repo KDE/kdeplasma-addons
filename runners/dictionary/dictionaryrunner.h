@@ -10,6 +10,8 @@
 #include <KRunner/AbstractRunner>
 #include <Plasma/DataEngineConsumer>
 
+using namespace Plasma;
+
 class DictionaryRunner : public AbstractRunner
 {
     Q_OBJECT
