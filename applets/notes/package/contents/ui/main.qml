@@ -163,27 +163,27 @@ PlasmaCore.SvgItem {
                 font.pointSize: cfgFontPointSize
 
                 Keys.onPressed: {
-                    if(event.key === Qt.Key_Escape) {
+                    if (event.key === Qt.Key_Escape) {
                         plasmoid.expanded = false;
                         event.accepted = true;
-                    } else if(event.modifiers === Qt.ControlModifier) {
-                        if(event.key === Qt.Key_B) {
+                    } else if (event.modifiers === Qt.ControlModifier) {
+                        if (event.key === Qt.Key_B) {
                             documentHandler.bold = !documentHandler.bold;
                             event.accepted = true;
-                        } else if(event.key === Qt.Key_I) {
+                        } else if (event.key === Qt.Key_I) {
                             documentHandler.italic = !documentHandler.italic;
                             event.accepted = true;
-                        } else if(event.key === Qt.Key_U) {
+                        } else if (event.key === Qt.Key_U) {
                             documentHandler.underline = !documentHandler.underline;
                             event.accepted = true;
-                        } else if(event.key === Qt.Key_S) {
+                        } else if (event.key === Qt.Key_S) {
                             documentHandler.strikeOut = !documentHandler.strikeOut;
                             event.accepted = true;
-                        } else if(event.matches(StandardKey.Paste)) {
+                        } else if (event.matches(StandardKey.Paste)) {
                             documentHandler.pasteWithoutFormatting();
                             documentHandler.reset();
                             event.accepted = true;
-                        } else if(event.matches(StandardKey.Cut)) {
+                        } else if (event.matches(StandardKey.Cut)) {
                             mainTextArea.cut();
                             documentHandler.reset();
                             event.accepted = true;
@@ -229,9 +229,10 @@ PlasmaCore.SvgItem {
                 }
 
                 Component.onCompleted: {
-                    if (!plasmoid.configuration.fontSize)
+                    if (!plasmoid.configuration.fontSize) {
                         // Set fontSize to default if it is not set
                         plasmoid.configuration.fontSize = mainTextArea.font.pointSize
+                    }
                 }
 
                 QQC2.Menu {
@@ -512,7 +513,7 @@ PlasmaCore.SvgItem {
                 visible = false;
             }
         }
-}
+    }
 
     Component.onCompleted: {
         plasmoid.setAction("change_note_color_white", i18nc("@item:inmenu", "White"));

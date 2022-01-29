@@ -4,10 +4,7 @@ set(potd_engine_SRCS
 )
 
 kcoreaddons_add_plugin(plasma_engine_potd SOURCES ${potd_engine_SRCS} INSTALL_NAMESPACE "plasma/dataengine")
-target_link_libraries(plasma_engine_potd plasmapotdprovidercore
-    KF5::Plasma
-    KF5::KIOCore
-)
+target_link_libraries( plasma_engine_potd plasmapotdprovidercore KF5::Plasma KF5::KIOCore)
 
 ########### plugin core library ############
 set(POTDPROVIDER_VERSION 1.0.0)
@@ -18,7 +15,7 @@ set(potd_provider_core_SRCS
 	${CMAKE_CURRENT_BINARY_DIR}/plasma_potd_export.h
 )
 
-add_library( plasmapotdprovidercore SHARED ${potd_provider_core_SRCS} )
+add_library(plasmapotdprovidercore SHARED ${potd_provider_core_SRCS})
 add_library(Plasma::PotdProvider ALIAS plasmapotdprovidercore)
 set_target_properties(plasmapotdprovidercore PROPERTIES
     VERSION ${POTDPROVIDER_VERSION}
@@ -32,7 +29,7 @@ target_include_directories(plasmapotdprovidercore
 )
 generate_export_header(plasmapotdprovidercore BASE_NAME PLASMA_POTD EXPORT_FILE_NAME plasma_potd_export.h)
 
-install(TARGETS plasmapotdprovidercore EXPORT plasmapotdproviderTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS plasmapotdprovidercore EXPORT plasmapotdproviderTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
         potdprovider.h
         ${CMAKE_CURRENT_BINARY_DIR}/plasma_potd_export.h
@@ -83,13 +80,13 @@ kcoreaddons_add_plugin(plasma_potd_noaaprovider SOURCES noaaprovider.cpp INSTALL
 target_link_libraries( plasma_potd_noaaprovider plasmapotdprovidercore KF5::KIOCore)
 
 kcoreaddons_add_plugin(plasma_potd_wcpotdprovider SOURCES wcpotdprovider.cpp INSTALL_NAMESPACE "potd")
-target_link_libraries( plasma_potd_wcpotdprovider plasmapotdprovidercore KF5::KIOCore )
+target_link_libraries( plasma_potd_wcpotdprovider plasmapotdprovidercore KF5::KIOCore)
 
 kcoreaddons_add_plugin(plasma_potd_bingprovider SOURCES bingprovider.cpp INSTALL_NAMESPACE "potd")
-target_link_libraries( plasma_potd_bingprovider plasmapotdprovidercore KF5::KIOCore )
+target_link_libraries( plasma_potd_bingprovider plasmapotdprovidercore KF5::KIOCore)
 
 kcoreaddons_add_plugin(plasma_potd_unsplashprovider SOURCES unsplashprovider.cpp INSTALL_NAMESPACE "potd")
-target_link_libraries( plasma_potd_unsplashprovider plasmapotdprovidercore KF5::KIOCore )
+target_link_libraries( plasma_potd_unsplashprovider plasmapotdprovidercore KF5::KIOCore)
 
 kcoreaddons_add_plugin(plasma_potd_simonstalenhagprovider SOURCES simonstalenhagprovider.cpp INSTALL_NAMESPACE "potd")
-target_link_libraries( plasma_potd_simonstalenhagprovider plasmapotdprovidercore KF5::KIOCore )
+target_link_libraries( plasma_potd_simonstalenhagprovider plasmapotdprovidercore KF5::KIOCore)

@@ -182,10 +182,10 @@ Kirigami.FormLayout {
             listModel = listModel.sort((a, b) => {
                 // Sort items by name but keep the 'All' entry at the top
                 if (b["value"] === allSectionValue) {
-                   return 1; 
+                   return 1;
                 }
                 if (a["value"] === allSectionValue) {
-                   return -1; 
+                   return -1;
                 }
                 return a["label"].localeCompare(b["label"]);
             })
