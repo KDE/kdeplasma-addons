@@ -58,6 +58,9 @@ Kirigami.FormLayout {
         model: providerModel
         textRole: "name"
         onCurrentIndexChanged: {
+            if (currentIndex < 0) {
+                return;
+            }
             cfg_Provider = providerModel.get(currentIndex)["id"]
         }
     }
