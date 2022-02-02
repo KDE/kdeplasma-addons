@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-import QtQuick 2.2
+import QtQuick 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents // for ContextMenu+MenuItem
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -56,6 +56,26 @@ Item {
             anchors.margins: LayoutManager.itemPadding()
             hoverEnabled: true
             acceptedButtons: Qt.LeftButton | Qt.RightButton
+
+            activeFocusOnTab: true
+            Keys.onPressed: {
+                switch (event.key) {
+                case Qt.Key_Space:
+                case Qt.Key_Enter:
+                case Qt.Key_Return:
+                case Qt.Key_Select:
+                    logic.openUrl(url);
+                    break;
+                case Qt.Key_Menu:
+                    contextMenu.refreshActions();
+                    contextMenu.open(0,0);
+                    event.accepted = true;
+                    break;
+                }
+            }
+            Accessible.name: iconItem.launcher.applicationName
+            Accessible.description: i18n("Launch %1", iconItem.launcher.genericName)
+            Accessible.role: Accessible.Button
 
             onPressed: {
                 if (mouse.button == Qt.RightButton) {
