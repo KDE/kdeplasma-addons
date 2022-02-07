@@ -4,6 +4,7 @@
 
 set(alternatecalendar_LIB_SRCS
     alternatecalendarplugin.cpp
+    provider/abstractcalendarprovider.cpp
 )
 
 set(alternatecalendar_LINK_LIBRARIES
