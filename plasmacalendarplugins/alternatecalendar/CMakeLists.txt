@@ -5,6 +5,7 @@
 set(alternatecalendar_LIB_SRCS
     alternatecalendarplugin.cpp
     provider/abstractcalendarprovider.cpp
+    provider/qtcalendar.cpp
 )
 
 set(alternatecalendar_LINK_LIBRARIES

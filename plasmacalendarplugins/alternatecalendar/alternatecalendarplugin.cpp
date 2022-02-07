@@ -6,6 +6,8 @@
 
 #include "alternatecalendarplugin.h"
 
+#include "provider/qtcalendar.h"
+
 class AlternateCalendarPluginPrivate
 {
 public:
