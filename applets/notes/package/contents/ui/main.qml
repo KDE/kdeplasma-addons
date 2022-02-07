@@ -350,7 +350,6 @@ PlasmaCore.SvgItem {
                 mainTextArea.moveCursorSelection(positionOfDrop(event))
                 mainTextArea.deselect()
             }
-            onDragEnter: mainTextArea.forceActiveFocus()
 
             MouseArea {
                 anchors.fill: parent
