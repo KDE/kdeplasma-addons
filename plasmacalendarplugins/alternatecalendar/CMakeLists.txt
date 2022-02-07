@@ -27,3 +27,5 @@ configure_file(config-ICU.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ICU.h)
 
 kcoreaddons_add_plugin(alternatecalendar SOURCES ${alternatecalendar_LIB_SRCS} INSTALL_NAMESPACE "plasmacalendarplugins")
 target_link_libraries(alternatecalendar ${alternatecalendar_LINK_LIBRARIES})
+
+add_subdirectory(config)

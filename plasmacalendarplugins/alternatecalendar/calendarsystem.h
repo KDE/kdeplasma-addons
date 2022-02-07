@@ -14,6 +14,9 @@ class CalendarSystem
     Q_GADGET
 
 public:
+    /**
+     * @note When adding a new calendar system, CalendarSystemModel should also be updated.
+     */
     enum System {
         Gregorian = static_cast<int>(QCalendar::System::Gregorian),
 #ifndef QT_BOOTSTRAPPED
