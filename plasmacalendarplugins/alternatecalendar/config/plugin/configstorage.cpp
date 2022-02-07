@@ -29,6 +29,7 @@ CalendarSystemModel::CalendarSystemModel(QObject *parent)
 #endif
 #ifdef HAVE_ICU
         {CalendarSystem::Chinese, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Chinese Lunar Calendar")},
+        {CalendarSystem::Indian, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Indian National Calendar")},
 #endif
     };
     const QMetaEnum e = QMetaEnum::fromType<CalendarSystem::System>();

@@ -30,6 +30,7 @@ public:
         IslamicCivil = static_cast<int>(QCalendar::System::IslamicCivil),
 #endif
         Chinese = static_cast<int>(QCalendar::System::Last) + 1, // QTBUG-89824: QCalendar doesn't support Chinese calendar system
+        Indian, // QCalendar doesn't support India calendar system
     };
     Q_ENUM(System)
 };

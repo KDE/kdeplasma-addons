@@ -25,6 +25,7 @@ if(ICU_FOUND)
         ${alternatecalendar_LIB_SRCS}
         provider/icucalendar_p.cpp
         provider/chinesecalendar.cpp
+        provider/indiancalendar.cpp
     )
     set(alternatecalendar_LINK_LIBRARIES
         ${alternatecalendar_LINK_LIBRARIES}
