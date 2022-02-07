@@ -18,6 +18,7 @@ public:
     AbstractCalendarProvider *calendarProvider() const;
 
     CalendarSystem::System m_calendarSystem;
+    int m_dateOffset; // For the (tabular) Islamic Civil calendar
 
 private:
     std::unique_ptr<AbstractCalendarProvider> m_calendarProvider;
@@ -79,11 +80,14 @@ void AlternateCalendarPlugin::loadEventsForDateRange(const QDate &startDate, con
     QHash<QDate, QDate> alternateDatesData;
     QHash<QDate, SubLabel> subLabelsData;
 
+    const int dateOffset = d->m_dateOffset;
+
     for (QDate date = startDate; date <= endDate && date.isValid(); date = date.addDays(1)) {
-        if (const QDate alt = d->calendarProvider()->fromGregorian(date); alt != date) {
+        const QDate offsetDate = date.addDays(dateOffset);
+        if (const QDate alt = d->calendarProvider()->fromGregorian(offsetDate); alt != date) {
             alternateDatesData.insert(date, alt);
         }
-        subLabelsData.insert(date, d->calendarProvider()->subLabels(date));
+        subLabelsData.insert(date, d->calendarProvider()->subLabels(offsetDate));
     }
 
     if (alternateDatesData.size() > 0) {
