@@ -21,6 +21,15 @@ set_package_properties(ICU
         )
 if(ICU_FOUND)
     set(HAVE_ICU TRUE)
+    set(alternatecalendar_LIB_SRCS
+        ${alternatecalendar_LIB_SRCS}
+        provider/icucalendar_p.cpp
+    )
+    set(alternatecalendar_LINK_LIBRARIES
+        ${alternatecalendar_LINK_LIBRARIES}
+        ICU::uc
+        ICU::i18n
+    )
 endif()
 
 configure_file(config-ICU.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ICU.h)
