@@ -3,5 +3,6 @@
         "Description": "Calendar plugin for displaying dates from the alternate calendar system",
         "Icon": "office-calendar",
         "Name": "Alternate Calendar"
-    }
+    },
+    "X-KDE-PlasmaCalendar-ConfigUi": "alternatecalendar/AlternateCalendarConfig.qml"
 }
