@@ -4,6 +4,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+#include "config-ICU.h"
+
 #include "alternatecalendarplugin.h"
 
 #include <KConfigGroup>
@@ -11,6 +13,9 @@
 #include <KSharedConfig>
 
 #include "provider/qtcalendar.h"
+#ifdef HAVE_ICU
+#include "provider/chinesecalendar.h"
+#endif
 
 class AlternateCalendarPluginPrivate
 {
@@ -55,6 +60,11 @@ void AlternateCalendarPluginPrivate::init()
 
     // Load/Reload the calendar provider
     switch (m_calendarSystem) {
+#ifdef HAVE_ICU
+    case CalendarSystem::Chinese:
+        m_calendarProvider.reset(new ChineseCalendarProvider(q, m_calendarSystem));
+        break;
+#endif
 #ifndef QT_BOOTSTRAPPED
     case CalendarSystem::Julian:
     case CalendarSystem::Milankovic:

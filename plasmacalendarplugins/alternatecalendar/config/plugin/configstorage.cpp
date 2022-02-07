@@ -5,7 +5,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "config-ICU.h"
+#include "../../config-ICU.h"
 #include "configstorage.h"
 
 #include <QMetaEnum>
@@ -26,6 +26,9 @@ CalendarSystemModel::CalendarSystemModel(QObject *parent)
 #endif
 #if QT_CONFIG(islamiccivilcalendar)
         {CalendarSystem::IslamicCivil, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "The Islamic Civil Calendar")},
+#endif
+#ifdef HAVE_ICU
+        {CalendarSystem::Chinese, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Chinese Lunar Calendar")},
 #endif
     };
     const QMetaEnum e = QMetaEnum::fromType<CalendarSystem::System>();

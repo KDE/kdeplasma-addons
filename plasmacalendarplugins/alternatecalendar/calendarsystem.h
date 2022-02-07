@@ -29,6 +29,7 @@ public:
 #if QT_CONFIG(islamiccivilcalendar)
         IslamicCivil = static_cast<int>(QCalendar::System::IslamicCivil),
 #endif
+        Chinese = static_cast<int>(QCalendar::System::Last) + 1, // QTBUG-89824: QCalendar doesn't support Chinese calendar system
     };
     Q_ENUM(System)
 };
