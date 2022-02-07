@@ -38,8 +38,20 @@ void AlternateCalendarPluginPrivate::init()
 {
     // Load/Reload the calendar provider
     switch (m_calendarSystem) {
+#ifndef QT_BOOTSTRAPPED
+    case CalendarSystem::Julian:
+    case CalendarSystem::Milankovic:
+#endif
+#if QT_CONFIG(jalalicalendar)
+    case CalendarSystem::Jalali:
+#endif
+#if QT_CONFIG(islamiccivilcalendar)
+    case CalendarSystem::IslamicCivil:
+#endif
+        m_calendarProvider.reset(new QtCalendarProvider(q, m_calendarSystem));
+        break;
     default:
-        m_calendarProvider.reset(new AbstractCalendarProvider(p, m_calendarSystem));
+        m_calendarProvider.reset(new AbstractCalendarProvider(q, m_calendarSystem));
     }
 }
 
