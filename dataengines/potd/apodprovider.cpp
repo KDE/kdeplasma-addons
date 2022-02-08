@@ -24,11 +24,6 @@ ApodProvider::ApodProvider(QObject *parent, const QVariantList &args)
 
 ApodProvider::~ApodProvider() = default;
 
-QImage ApodProvider::image() const
-{
-    return mImage;
-}
-
 void ApodProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
@@ -60,7 +55,7 @@ void ApodProvider::imageRequestFinished(KJob *_job)
         return;
     }
 
-    mImage = QImage::fromData(job->data());
+    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
     Q_EMIT finished(this);
 }
 

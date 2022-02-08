@@ -24,11 +24,6 @@ NatGeoProvider::NatGeoProvider(QObject *parent, const QVariantList &args)
 
 NatGeoProvider::~NatGeoProvider() = default;
 
-QImage NatGeoProvider::image() const
-{
-    return mImage;
-}
-
 void NatGeoProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
@@ -68,7 +63,7 @@ void NatGeoProvider::imageRequestFinished(KJob *_job)
         return;
     }
 
-    mImage = QImage::fromData(job->data());
+    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
     Q_EMIT finished(this);
 }
 

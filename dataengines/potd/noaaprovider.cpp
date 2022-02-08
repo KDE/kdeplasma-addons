@@ -24,11 +24,6 @@ NOAAProvider::NOAAProvider(QObject *parent, const QVariantList &args)
 
 NOAAProvider::~NOAAProvider() = default;
 
-QImage NOAAProvider::image() const
-{
-    return mImage;
-}
-
 void NOAAProvider::listPageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
@@ -100,7 +95,7 @@ void NOAAProvider::imageRequestFinished(KJob *_job)
         return;
     }
 
-    mImage = QImage::fromData(job->data());
+    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
     Q_EMIT finished(this);
 }
 

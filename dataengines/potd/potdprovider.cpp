@@ -16,10 +16,24 @@
 class PotdProviderPrivate
 {
 public:
+    explicit PotdProviderPrivate();
+    ~PotdProviderPrivate();
+
     QString name;
     QDate date;
     QString identifier;
+
+    std::unique_ptr<PotdProviderData> m_data;
 };
+
+PotdProviderPrivate::PotdProviderPrivate()
+    : m_data(std::make_unique<PotdProviderData>())
+{
+}
+
+PotdProviderPrivate::~PotdProviderPrivate()
+{
+}
 
 PotdProvider::PotdProvider(QObject *parent, const QVariantList &args)
     : QObject(parent)
@@ -74,6 +88,11 @@ QString PotdProvider::identifier() const
     return d->identifier;
 }
 
+QImage PotdProvider::image() const
+{
+    return potdProviderData()->wallpaperImage;
+}
+
 void PotdProvider::refreshConfig()
 {
     // You can only refresh it once in a provider's life cycle
@@ -126,4 +145,9 @@ void PotdProvider::loadConfig()
     QString apiSecret = apiGroup.readEntry("API_SECRET");
 
     Q_EMIT configLoaded(apiKey, apiSecret);
+}
+
+PotdProviderData *PotdProvider::potdProviderData() const
+{
+    return d->m_data.get();
 }

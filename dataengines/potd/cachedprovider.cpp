@@ -63,11 +63,6 @@ CachedProvider::~CachedProvider()
 {
 }
 
-QImage CachedProvider::image() const
-{
-    return mImage;
-}
-
 QString CachedProvider::identifier() const
 {
     return mIdentifier;
@@ -75,7 +70,7 @@ QString CachedProvider::identifier() const
 
 void CachedProvider::triggerFinished(const QImage &image)
 {
-    mImage = image;
+    potdProviderData()->wallpaperImage = image;
     Q_EMIT finished(this);
 }
 

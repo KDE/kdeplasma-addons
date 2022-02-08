@@ -26,11 +26,6 @@
 {
 }
 
-QImage %{APPNAME}::image() const
-{
-    return mImage;
-}
-
 void %{APPNAME}::handleFinishedFeedRequest(KJob *job)
 {
     KIO::StoredTransferJob *requestJob = static_cast<KIO::StoredTransferJob*>(job);
@@ -55,9 +50,9 @@ void %{APPNAME}::handleFinishedImageRequest(KJob *job)
         return;
     }
 
-    mImage = QImage::fromData(requestJob->data());
+    potdProviderData()->wallpaperImage = QImage::fromData(requestJob->data());
 
-    if (mImage.isNull()) {
+    if (potdProviderData()->wallpaperImage.isNull()) {
         Q_EMIT error(this);
         return;
     }

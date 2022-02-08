@@ -8,8 +8,6 @@
 #define UNSPLASHPROVIDER_H
 
 #include "potdprovider.h"
-// Qt
-#include <QImage>
 
 class KJob;
 
@@ -31,21 +29,10 @@ public:
      */
     SimonStalenhagProvider(QObject *parent, const QVariantList &args);
 
-    /**
-     * Returns the requested image.
-     *
-     * Note: This method returns only a valid image after the
-     *       finished() signal has been emitted.
-     */
-    QImage image() const override;
-
 private:
     void entrypointRequestFinished(KJob *job);
     void metaDataRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
-
-private:
-    QImage mImage;
 };
 
 #endif

@@ -31,17 +31,9 @@ public:
      */
     ~%{APPNAME}() override;
 
-    /**
-     * Returns the requested image.
-     */
-    QImage image() const override;
-
 private:
     void handleFinishedFeedRequest(KJob *job);
     void handleFinishedImageRequest(KJob *job);
-
-private:
-    QImage mImage;
 };
 
 #endif

@@ -10,8 +10,6 @@
 
 #include "potdprovider.h"
 
-#include <QImage>
-
 class KJob;
 
 /**
@@ -41,20 +39,9 @@ public:
      */
     ~ApodProvider() override;
 
-    /**
-     * Returns the requested image.
-     *
-     * Note: This method returns only a valid image after the
-     *       finished() signal has been emitted.
-     */
-    QImage image() const override;
-
 private:
     void pageRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
-
-private:
-    QImage mImage;
 };
 
 #endif

@@ -11,7 +11,6 @@
 #include "potdprovider.h"
 
 #include <QDate>
-#include <QImage>
 #include <QXmlStreamReader>
 
 #include <KIO/Job>
@@ -40,14 +39,6 @@ public:
      */
     ~FlickrProvider() override;
 
-    /**
-     * Returns the requested image.
-     *
-     * Note: This method returns only a valid image after the
-     *       finished() signal has been emitted.
-     */
-    QImage image() const override;
-
 private:
     void sendXmlRequest(QString apiKey, QString apiSecret);
     void xmlRequestFinished(KJob *job);
@@ -56,7 +47,6 @@ private:
 private:
     QDate mActualDate;
     QString mApiKey;
-    QImage mImage;
 
     QXmlStreamReader xml;
 

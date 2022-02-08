@@ -34,14 +34,6 @@ public:
     ~CachedProvider() override;
 
     /**
-     * Returns the requested image.
-     *
-     * Note: This method returns only a valid image after the
-     *       finished() signal has been emitted.
-     */
-    QImage image() const override;
-
-    /**
      * Returns the identifier of the picture request (name + date).
      */
     QString identifier() const override;
@@ -61,7 +53,6 @@ private Q_SLOTS:
 
 private:
     QString mIdentifier;
-    QImage mImage;
 };
 
 class LoadImageThread : public QObject, public QRunnable

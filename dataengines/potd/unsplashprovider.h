@@ -8,8 +8,6 @@
 #define UNSPLASHPROVIDER_H
 
 #include "potdprovider.h"
-// Qt
-#include <QImage>
 
 class KJob;
 
@@ -35,19 +33,8 @@ public:
      */
     ~UnsplashProvider() override;
 
-    /**
-     * Returns the requested image.
-     *
-     * Note: This method returns only a valid image after the
-     *       finished() signal has been emitted.
-     */
-    QImage image() const override;
-
 private:
     void imageRequestFinished(KJob *job);
-
-private:
-    QImage mImage;
 };
 
 #endif

@@ -24,11 +24,6 @@ BingProvider::BingProvider(QObject *parent, const QVariantList &args)
 
 BingProvider::~BingProvider() = default;
 
-QImage BingProvider::image() const
-{
-    return mImage;
-}
-
 void BingProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
@@ -72,7 +67,7 @@ void BingProvider::imageRequestFinished(KJob *_job)
         return;
     }
     QByteArray data = job->data();
-    mImage = QImage::fromData(data);
+    potdProviderData()->wallpaperImage = QImage::fromData(data);
     Q_EMIT finished(this);
 }
 

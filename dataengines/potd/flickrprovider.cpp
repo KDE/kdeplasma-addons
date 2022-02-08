@@ -39,11 +39,6 @@ FlickrProvider::FlickrProvider(QObject *parent, const QVariantList &args)
 
 FlickrProvider::~FlickrProvider() = default;
 
-QImage FlickrProvider::image() const
-{
-    return mImage;
-}
-
 void FlickrProvider::sendXmlRequest(QString apiKey, QString apiSecret)
 {
     Q_UNUSED(apiSecret);
@@ -143,7 +138,7 @@ void FlickrProvider::imageRequestFinished(KJob *_job)
         return;
     }
 
-    mImage = QImage::fromData(job->data());
+    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
     Q_EMIT finished(this);
 }
 

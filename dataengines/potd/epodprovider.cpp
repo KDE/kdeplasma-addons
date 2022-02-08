@@ -24,11 +24,6 @@ EpodProvider::EpodProvider(QObject *parent, const QVariantList &args)
 
 EpodProvider::~EpodProvider() = default;
 
-QImage EpodProvider::image() const
-{
-    return mImage;
-}
-
 void EpodProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
@@ -59,7 +54,7 @@ void EpodProvider::imageRequestFinished(KJob *_job)
     }
 
     // FIXME: this really should be done in a thread as this can block
-    mImage = QImage::fromData(job->data());
+    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
     Q_EMIT finished(this);
 }
 

@@ -35,11 +35,6 @@ WcpotdProvider::WcpotdProvider(QObject *parent, const QVariantList &args)
 
 WcpotdProvider::~WcpotdProvider() = default;
 
-QImage WcpotdProvider::image() const
-{
-    return mImage;
-}
-
 void WcpotdProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
@@ -71,7 +66,7 @@ void WcpotdProvider::imageRequestFinished(KJob *_job)
         return;
     }
     QByteArray data = job->data();
-    mImage = QImage::fromData(data);
+    potdProviderData()->wallpaperImage = QImage::fromData(data);
     Q_EMIT finished(this);
 }
 
