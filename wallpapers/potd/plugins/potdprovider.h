@@ -23,6 +23,10 @@ class QDate;
 struct PotdProviderData {
     QImage wallpaperImage;
     QString wallpaperLocalUrl;
+    QUrl wallpaperRemoteUrl;
+    QUrl wallpaperInfoUrl;
+    QString wallpaperTitle;
+    QString wallpaperAuthor;
 };
 Q_DECLARE_METATYPE(PotdProviderData)
 
@@ -65,6 +69,39 @@ public:
      * Returns the identifier of the PoTD request (name + date).
      */
     virtual QString identifier() const;
+
+    /**
+     * Returns the remote URL of the image from the provider
+     *
+     * @note No @c virtual to keep binary compatibility.
+     * @return the remote URL of the image, if any
+     * @since 5.25
+     */
+    QUrl remoteUrl() const;
+
+    /**
+     * Returns the information URL of the image from the provider
+     *
+     * @return the information URL of the image, if any
+     * @since 5.25
+     */
+    QUrl infoUrl() const;
+
+    /**
+     * Returns the title of the image from the provider, if any.
+     *
+     * @return the title of the image, if any
+     * @since 5.25
+     */
+    QString title() const;
+
+    /**
+     * Returns the author of the image from the provider
+     *
+     * @return the title of the image, if any
+     * @since 5.25
+     */
+    QString author() const;
 
     /**
      * @return the name of this provider (equiv to X-KDE-PlasmaPoTDProvider-Identifier)

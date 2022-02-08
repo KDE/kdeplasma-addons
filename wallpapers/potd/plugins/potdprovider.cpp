@@ -106,6 +106,26 @@ QImage PotdProvider::image() const
     return potdProviderData()->wallpaperImage;
 }
 
+QUrl PotdProvider::remoteUrl() const
+{
+    return potdProviderData()->wallpaperRemoteUrl;
+}
+
+QUrl PotdProvider::infoUrl() const
+{
+    return potdProviderData()->wallpaperInfoUrl;
+}
+
+QString PotdProvider::title() const
+{
+    return potdProviderData()->wallpaperTitle;
+}
+
+QString PotdProvider::author() const
+{
+    return potdProviderData()->wallpaperAuthor;
+}
+
 void PotdProvider::refreshConfig()
 {
     // You can only refresh it once in a provider's life cycle
