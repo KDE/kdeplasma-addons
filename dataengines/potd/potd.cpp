@@ -24,14 +24,12 @@ namespace
 {
 namespace DataKeys
 {
-inline QString image()
-{
+auto image = []() noexcept {
     return QStringLiteral("Image");
-}
-inline QString url()
-{
+};
+auto url = []() noexcept {
     return QStringLiteral("Url");
-}
+};
 }
 }
 
