@@ -23,8 +23,8 @@ public:
 
 private:
     QString m_triggerWord;
-    DictionaryMatchEngine *m_engine;
-    Plasma::DataEngineConsumer m_consumer;
+    std::unique_ptr<DictionaryMatchEngine> m_engine;
+    std::unique_ptr<Plasma::DataEngineConsumer> m_consumer;
 
 protected Q_SLOTS:
     void init() override;

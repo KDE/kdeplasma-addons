@@ -7,16 +7,20 @@
 
 #include <KLocalizedString>
 #include <QEventLoop>
+#include <QMutex>
+#include <QMutexLocker>
 #include <QStringList>
 #include <QTimer>
 
-static const char CONFIG_TRIGGERWORD[] = "triggerWord";
+namespace
+{
+const char CONFIG_TRIGGERWORD[] = "triggerWord";
+QMutex s_initMutex;
+}
 
 DictionaryRunner::DictionaryRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : AbstractRunner(parent, metaData, args)
 {
-    m_engine = new DictionaryMatchEngine(m_consumer.dataEngine(QStringLiteral("dict")), this);
-
     setPriority(LowPriority);
     setObjectName(QLatin1String("Dictionary"));
 }
@@ -48,6 +52,25 @@ void DictionaryRunner::match(RunnerContext &context)
     if (query.isEmpty()) {
         return;
     }
+
+    // Initialize engine
+    {
+        // It can happen that we are in this function and
+        // another match starts happening. Hence we lock to
+        // ensure that we always init the engine once
+        QMutexLocker lock(&s_initMutex);
+
+        if (!m_engine) {
+            QMetaObject::invokeMethod(
+                this,
+                [this] {
+                    m_consumer = std::make_unique<Plasma::DataEngineConsumer>();
+                    m_engine = std::make_unique<DictionaryMatchEngine>(m_consumer->dataEngine(QStringLiteral("dict")));
+                },
+                Qt::BlockingQueuedConnection);
+        }
+    }
+
     QEventLoop loop;
     QTimer::singleShot(400, &loop, [&loop]() {
         loop.quit();
