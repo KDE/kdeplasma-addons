@@ -14,6 +14,7 @@
 #include <QStandardPaths>
 
 #include <KDirWatch>
+#include <KFuzzyMatcher>
 #include <KLocalizedString>
 #include <KNotificationJobUiDelegate>
 
@@ -73,8 +74,13 @@ void KateSessions::match(RunnerContext &context)
         return;
     }
 
+    QList<QueryMatch> matches;
+    int maxScore = 0;
+
     for (const QString &session : std::as_const(sessions)) {
-        if (listAll || session.contains(term, Qt::CaseInsensitive)) {
+        // Does the query match exactly?
+        // no query = perfect match => list everything
+        if (listAll || session.compare(term, Qt::CaseInsensitive) == 0) {
             QueryMatch match(this);
             match.setType(QueryMatch::ExactMatch);
             match.setRelevance(session.compare(term, Qt::CaseInsensitive) == 0 ? 1 : 0.8);
@@ -83,8 +89,29 @@ void KateSessions::match(RunnerContext &context)
             match.setText(session);
             match.setSubtext(i18n("Open Kate Session"));
             context.addMatch(match);
+        } else {
+            // Do fuzzy matching
+            const auto res = KFuzzyMatcher::match(term, session);
+            if (res.matched) {
+                QueryMatch match(this);
+                match.setRelevance(res.score); // store the score here for now
+                match.setIconName(m_triggerWord);
+                match.setData(session);
+                match.setText(session);
+                match.setSubtext(i18n("Open Kate Session"));
+                matches.push_back(match);
+                maxScore = std::max(res.score, maxScore);
+            }
         }
     }
+
+    auto calculate_relevance = [maxScore](double score) {
+        return score / maxScore;
+    };
+    for (auto &match : matches) {
+        match.setRelevance(calculate_relevance(match.relevance()));
+    }
+    context.addMatches(matches);
 }
 
 void KateSessions::run(const RunnerContext &context, const QueryMatch &match)
