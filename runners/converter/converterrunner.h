@@ -34,7 +34,7 @@ public:
     void run(const RunnerContext &context, const QueryMatch &match) override;
 
 private:
-    KUnitConversion::Converter converter;
+    std::unique_ptr<KUnitConversion::Converter> converter;
     const QLocale locale;
     QRegularExpression valueRegex;
     QRegularExpression unitSeperatorRegex;
