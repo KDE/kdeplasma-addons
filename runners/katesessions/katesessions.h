@@ -27,12 +27,10 @@ public:
     void run(const RunnerContext &context, const QueryMatch &match) override;
 
 private Q_SLOTS:
-    void loadSessions();
+    QStringList loadSessions();
 
 private:
-    KDirWatch *m_sessionWatch = nullptr;
     QString m_sessionsFolderPath;
-    QStringList m_sessions;
     const QLatin1String m_triggerWord = QLatin1String("kate");
 };
 

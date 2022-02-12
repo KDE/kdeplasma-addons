@@ -32,12 +32,6 @@ KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData, con
     m_sessionsFolderPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/kate/sessions");
 
     // Initialize watchers and sessions
-    m_sessionWatch = new KDirWatch(this);
-    m_sessionWatch->addDir(m_sessionsFolderPath);
-    connect(m_sessionWatch, &KDirWatch::dirty, this, &KateSessions::loadSessions);
-    connect(m_sessionWatch, &KDirWatch::created, this, &KateSessions::loadSessions);
-    connect(m_sessionWatch, &KDirWatch::deleted, this, &KateSessions::loadSessions);
-    loadSessions();
     setTriggerWords({m_triggerWord});
 }
 
@@ -45,7 +39,7 @@ KateSessions::~KateSessions()
 {
 }
 
-void KateSessions::loadSessions()
+QStringList KateSessions::loadSessions()
 {
     QStringList sessions;
     const QDir sessionsDir(m_sessionsFolderPath);
@@ -55,8 +49,7 @@ void KateSessions::loadSessions()
         sessions.append(QUrl::fromPercentEncoding(sessionFile.baseName().toLocal8Bit()));
     }
 
-    m_sessions = sessions;
-    suspendMatching(m_sessions.isEmpty());
+    return sessions;
 }
 
 void KateSessions::match(RunnerContext &context)
@@ -73,7 +66,14 @@ void KateSessions::match(RunnerContext &context)
         return;
     }
 
-    for (const QString &session : std::as_const(m_sessions)) {
+    // we got here, load sessions now
+    const auto sessions = loadSessions();
+    if (sessions.isEmpty()) {
+        suspendMatching(true);
+        return;
+    }
+
+    for (const QString &session : std::as_const(sessions)) {
         if (listAll || session.contains(term, Qt::CaseInsensitive)) {
             QueryMatch match(this);
             match.setType(QueryMatch::ExactMatch);
