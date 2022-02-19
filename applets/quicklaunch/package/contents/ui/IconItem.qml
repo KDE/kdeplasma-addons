@@ -8,7 +8,6 @@ import QtQuick 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents // for ContextMenu+MenuItem
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.draganddrop 2.0 as DragAndDrop
 
 import "layout.js" as LayoutManager
 
@@ -24,185 +23,177 @@ Item {
     width: isPopupItem ? LayoutManager.popupItemWidth() : grid.cellWidth
     height: isPopupItem ? LayoutManager.popupItemHeight() : grid.cellHeight
 
-    DragAndDrop.DragArea {
-        id: dragArea
-        width: Math.min(iconItem.width, iconItem.height)
-        height: width
-        enabled: !plasmoid.immutable
-        defaultAction: Qt.MoveAction
-        supportedActions: Qt.IgnoreAction | Qt.MoveAction
-        delegate: icon
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        anchors.margins: LayoutManager.itemPadding()
+        hoverEnabled: true
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-        mimeData {
-            url: url
-            source: iconItem
+        Drag.active: drag.active &&!plasmoid.immutable
+        Drag.proposedAction: Qt.MoveAction
+        Drag.supportedActions: Qt.MoveAction | Qt.IgnoreAction
+        Drag.dragType: Drag.Automatic
+        Drag.source: iconItem
+        Drag.imageSource: "image://icon/" + iconName
+        Drag.mimeData: {
+            "text/uri-list": url
         }
 
-        onDragStarted: {
-            dragging = true;
-        }
-
-        onDrop: {
-            dragging = false;
-
-            if (action == Qt.MoveAction) {
+        Drag.onDragFinished: action => {
+            if (action === Qt.MoveAction) {
                 removeLauncher();
             }
         }
 
-        MouseArea {
-            id: mouseArea
+        drag.target: parent
+
+
+        activeFocusOnTab: true
+        Keys.onPressed: {
+            switch (event.key) {
+            case Qt.Key_Space:
+            case Qt.Key_Enter:
+            case Qt.Key_Return:
+            case Qt.Key_Select:
+                logic.openUrl(url);
+                break;
+            case Qt.Key_Menu:
+                contextMenu.refreshActions();
+                contextMenu.open(0,0);
+                event.accepted = true;
+                break;
+            }
+        }
+        Accessible.name: iconItem.launcher.applicationName
+        Accessible.description: i18n("Launch %1", iconItem.launcher.genericName)
+        Accessible.role: Accessible.Button
+
+        onPressed: {
+            if (mouse.button == Qt.RightButton) {
+                contextMenu.refreshActions();
+                contextMenu.open(mouse.x, mouse.y);
+            }
+        }
+
+        onClicked: {
+            if (mouse.button == Qt.LeftButton) {
+                logic.openUrl(url)
+            }
+        }
+
+        PlasmaCore.IconItem {
+            id: icon
+
+            anchors {
+                top: parent.top
+                left: parent.left
+            }
+
+            width: PlasmaCore.Units.iconSizes.medium
+            height: width
+            usesPlasmaTheme: false
+            source: url == "quicklaunch:drop" ? "" : iconName
+            active: mouseArea.containsMouse
+        }
+
+        PlasmaComponents3.Label {
+            id: label
+
+            anchors {
+                bottom : parent.bottom
+                right : parent.right
+            }
+
+            text: iconItem.launcher.applicationName
+            maximumLineCount: 1
+            wrapMode: Text.Wrap
+        }
+
+        PlasmaCore.FrameSvgItem {
             anchors.fill: parent
-            anchors.margins: LayoutManager.itemPadding()
-            hoverEnabled: true
-            acceptedButtons: Qt.LeftButton | Qt.RightButton
+            imagePath: "widgets/viewitem"
+            prefix: "hover"
+            visible: dragging || url == "quicklaunch:drop"
+        }
 
-            activeFocusOnTab: true
-            Keys.onPressed: {
-                switch (event.key) {
-                case Qt.Key_Space:
-                case Qt.Key_Enter:
-                case Qt.Key_Return:
-                case Qt.Key_Select:
-                    logic.openUrl(url);
-                    break;
-                case Qt.Key_Menu:
-                    contextMenu.refreshActions();
-                    contextMenu.open(0,0);
-                    event.accepted = true;
-                    break;
-                }
-            }
-            Accessible.name: iconItem.launcher.applicationName
-            Accessible.description: i18n("Launch %1", iconItem.launcher.genericName)
-            Accessible.role: Accessible.Button
+        PlasmaCore.ToolTipArea {
+            anchors.fill: parent
+            active: !dragging
+            mainText: iconItem.launcher.applicationName
+            subText: iconItem.launcher.genericName
+            icon: iconName
+        }
 
-            onPressed: {
-                if (mouse.button == Qt.RightButton) {
-                    contextMenu.refreshActions();
-                    contextMenu.open(mouse.x, mouse.y);
-                }
+        PlasmaComponents.ContextMenu {
+            id: contextMenu
+
+            property var jumpListItems : []
+
+            visualParent: mouseArea
+
+            PlasmaComponents.MenuItem {
+                id: jumpListSeparator
+                separator: true
             }
 
-            onClicked: {
-                if (mouse.button == Qt.LeftButton) {
-                    logic.openUrl(url)
-                }
+            PlasmaComponents.MenuItem {
+                text: i18nc("@action:inmenu", "Add Launcher…")
+                icon: "list-add"
+                onClicked: addLauncher()
             }
 
-            PlasmaCore.IconItem {
-                id: icon
-
-                anchors {
-                    top: parent.top
-                    left: parent.left
-                }
-
-                width: PlasmaCore.Units.iconSizes.medium
-                height: width
-                usesPlasmaTheme: false
-                source: url == "quicklaunch:drop" ? "" : iconName
-                active: mouseArea.containsMouse
+            PlasmaComponents.MenuItem {
+                text: i18nc("@action:inmenu", "Edit Launcher…")
+                icon: "document-edit"
+                onClicked: editLauncher()
             }
 
-            PlasmaComponents3.Label {
-                id: label
-
-                anchors {
-                    bottom : parent.bottom
-                    right : parent.right
-                }
-
-                text: iconItem.launcher.applicationName
-                maximumLineCount: 1
-                wrapMode: Text.Wrap
+            PlasmaComponents.MenuItem {
+                text: i18nc("@action:inmenu", "Remove Launcher")
+                icon: "list-remove"
+                onClicked: removeLauncher()
             }
 
-            PlasmaCore.FrameSvgItem {
-                anchors.fill: parent
-                imagePath: "widgets/viewitem"
-                prefix: "hover"
-                visible: dragging || url == "quicklaunch:drop"
+            PlasmaComponents.MenuItem {
+                separator: true
             }
 
-            PlasmaCore.ToolTipArea {
-                anchors.fill: parent
-                active: !dragging
-                mainText: iconItem.launcher.applicationName
-                subText: iconItem.launcher.genericName
-                icon: iconName
+            PlasmaComponents.MenuItem {
+                action: plasmoid.action("configure")
             }
 
-            PlasmaComponents.ContextMenu {
-                id: contextMenu
-
-                property var jumpListItems : []
-
-                visualParent: mouseArea
-
-                PlasmaComponents.MenuItem {
-                    id: jumpListSeparator
-                    separator: true
-                }
-
-                PlasmaComponents.MenuItem {
-                    text: i18nc("@action:inmenu", "Add Launcher…")
-                    icon: "list-add"
-                    onClicked: addLauncher()
-                }
-
-                PlasmaComponents.MenuItem {
-                    text: i18nc("@action:inmenu", "Edit Launcher…")
-                    icon: "document-edit"
-                    onClicked: editLauncher()
-                }
-
-                PlasmaComponents.MenuItem {
-                    text: i18nc("@action:inmenu", "Remove Launcher")
-                    icon: "list-remove"
-                    onClicked: removeLauncher()
-                }
-
-                PlasmaComponents.MenuItem {
-                    separator: true
-                }
-
-                PlasmaComponents.MenuItem {
-                    action: plasmoid.action("configure")
-                }
-
-                PlasmaComponents.MenuItem {
-                    action: plasmoid.action("remove")
-                }
-
-                function refreshActions() {
-                    for (var i = 0; i < jumpListItems.length; ++i) {
-                        var item = jumpListItems[i];
-                        removeMenuItem(item);
-                        item.destroy();
-                    }
-                    jumpListItems = [];
-
-                    for (var i = 0; i < launcher.jumpListActions.length; ++i) {
-                        var action = launcher.jumpListActions[i];
-                        var item = menuItemComponent.createObject(iconItem, {
-                            "text": action.name,
-                            "icon": action.icon
-                        });
-                        item.clicked.connect(function() {
-                            logic.openExec(this.exec);
-                        }.bind(action));
-
-                        addMenuItem(item, jumpListSeparator);
-                        jumpListItems.push(item);
-                    }
-                }
+            PlasmaComponents.MenuItem {
+                action: plasmoid.action("remove")
             }
 
-            Component {
-                id: menuItemComponent
-                PlasmaComponents.MenuItem { }
+            function refreshActions() {
+                for (var i = 0; i < jumpListItems.length; ++i) {
+                    var item = jumpListItems[i];
+                    removeMenuItem(item);
+                    item.destroy();
+                }
+                jumpListItems = [];
+
+                for (var i = 0; i < launcher.jumpListActions.length; ++i) {
+                    var action = launcher.jumpListActions[i];
+                    var item = menuItemComponent.createObject(iconItem, {
+                        "text": action.name,
+                        "icon": action.icon
+                    });
+                    item.clicked.connect(function() {
+                        logic.openExec(this.exec);
+                    }.bind(action));
+
+                    addMenuItem(item, jumpListSeparator);
+                    jumpListItems.push(item);
+                }
             }
+        }
+
+        Component {
+            id: menuItemComponent
+            PlasmaComponents.MenuItem { }
         }
     }
 
@@ -210,14 +201,6 @@ Item {
         State {
             name: "popup"
             when: isPopupItem
-
-            AnchorChanges {
-                target: dragArea
-                anchors.left: dragArea.parent.left
-                anchors.right: dragArea.parent.right
-                anchors.top: dragArea.parent.top
-                anchors.bottom: dragArea.parent.bottom
-            }
 
             AnchorChanges {
                 target: icon
@@ -244,12 +227,6 @@ Item {
         State {
             name: "grid"
             when: !isPopupItem
-
-            AnchorChanges {
-                target: dragArea
-                anchors.verticalCenter: dragArea.parent.verticalCenter
-                anchors.horizontalCenter: dragArea.parent.horizontalCenter
-            }
 
             AnchorChanges {
                 target: icon
