@@ -40,7 +40,7 @@ public:
     ~FlickrProvider() override;
 
 private:
-    void sendXmlRequest(QString apiKey, QString apiSecret);
+    void sendXmlRequest(const QString &apiKey, const QString &apiSecret);
     void xmlRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
 

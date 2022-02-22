@@ -39,7 +39,7 @@ FlickrProvider::FlickrProvider(QObject *parent, const QVariantList &args)
 
 FlickrProvider::~FlickrProvider() = default;
 
-void FlickrProvider::sendXmlRequest(QString apiKey, QString apiSecret)
+void FlickrProvider::sendXmlRequest(const QString &apiKey, const QString &apiSecret)
 {
     Q_UNUSED(apiSecret);
     if (apiKey.isNull()) {
