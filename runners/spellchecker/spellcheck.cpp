@@ -45,17 +45,17 @@ void SpellCheckRunner::loadData()
 
     // store all language names, makes it possible to type "spell german TERM" if english locale is set
     // Need to construct a map between natual language names and names the spell-check recognises.
-    const QStringList avail = defaultSpeller->availableLanguages();
+    m_availableLangCodes = defaultSpeller->availableLanguages();
     // We need to filter the available languages so that we associate the natural language
     // name (eg. 'german') with one sub-code.
     QSet<QString> families;
     // First get the families
-    for (const QString &code : avail) {
+    for (const QString &code : std::as_const(m_availableLangCodes)) {
         families += code.left(2);
     }
     // Now for each family figure out which is the main code.
     for (const QString &fcode : std::as_const(families)) {
-        const QStringList family = avail.filter(fcode);
+        const QStringList family = m_availableLangCodes.filter(fcode);
         QString code;
         // If we only have one code, use it.
         // If a string is the default language, use it
@@ -88,6 +88,7 @@ void SpellCheckRunner::destroydata()
 {
     // Clear the data arrays to save memory
     m_spellers.clear();
+    m_availableLangCodes.clear();
 }
 
 void SpellCheckRunner::reloadConfiguration()
@@ -120,14 +121,21 @@ void SpellCheckRunner::reloadConfiguration()
  * Return the empty string if we can't match a language. */
 QString SpellCheckRunner::findLang(const QStringList &terms)
 {
-    const auto &defaultSpeller = m_spellers[QString()];
-    // If first term is a language code (like en_GB), set it as the spell-check language
-    if (!terms.isEmpty() && defaultSpeller->availableLanguages().contains(terms[0])) {
-        return terms[0];
+    if (terms.isEmpty()) {
+        return QString();
     }
+
+    // If first term is a language code (like en_GB, en_gb or en), set it as the spell-check language
+    const auto langCodeIt = std::find_if(m_availableLangCodes.cbegin(), m_availableLangCodes.cend(), [&terms](const QString &languageCode) {
+        return languageCode.startsWith(terms[0], Qt::CaseInsensitive);
+    });
+    if (langCodeIt != m_availableLangCodes.cend()) {
+        return *langCodeIt;
+    }
+
     // If we have two terms and the first is a language name (eg 'french'),
     // set it as the available language
-    else if (terms.count() >= 2) {
+    if (terms.count() >= 2) {
         QString code;
         {
             // Is this a descriptive language name?
@@ -146,9 +154,8 @@ QString SpellCheckRunner::findLang(const QStringList &terms)
 
         if (!code.isEmpty()) {
             // We found a valid language! Check still available
-            const QStringList avail = defaultSpeller->availableLanguages();
             // Does the spell-checker like it?
-            if (avail.contains(code)) {
+            if (m_availableLangCodes.contains(code)) {
                 return code;
             }
         }

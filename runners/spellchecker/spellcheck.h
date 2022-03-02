@@ -42,6 +42,7 @@ private:
     QString findLang(const QStringList &terms);
 
     QString m_triggerWord;
+    QStringList m_availableLangCodes; // en_US, ru_RU, ...
     QMap<QString, QString> m_languages; // key=language name, value=language code
     bool m_requireTriggerWord;
     QMap<QString, QSharedPointer<Sonnet::Speller>> m_spellers; // spellers
