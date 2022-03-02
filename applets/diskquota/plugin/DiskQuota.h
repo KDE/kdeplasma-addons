@@ -6,11 +6,10 @@
 #ifndef PLASMA_DISK_QUOTA_H
 #define PLASMA_DISK_QUOTA_H
 
+#include "QuotaListModel.h"
 #include <QObject>
 #include <QProcess>
-
 class QTimer;
-class QuotaListModel;
 
 /**
  * Class monitoring the file system quota.

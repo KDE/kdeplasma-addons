@@ -5,7 +5,6 @@
  */
 #include "DiskQuota.h"
 #include "QuotaItem.h"
-#include "QuotaListModel.h"
 
 #include <KFormat>
 #include <KLocalizedString>
