@@ -32,7 +32,11 @@ public:
     void match(RunnerContext &context) override;
 
 private:
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QHash<QString, QDateTime> datetime(const QStringRef &tz);
+#else
+    QHash<QString, QDateTime> datetime(const QStringView &tz);
+#endif
     void addMatch(const QString &text, const QString &clipboardText, RunnerContext &context, const QString &iconName);
 };
 

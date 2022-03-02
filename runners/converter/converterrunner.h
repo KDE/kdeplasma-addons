@@ -42,8 +42,11 @@ private:
     QMap<QString, QString> compatibleUnits;
 
     QList<QAction *> actionList;
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QPair<bool, double> stringToDouble(const QStringRef &value);
+#else
+    QPair<bool, double> stringToDouble(const QStringView &value);
+#endif
     QPair<bool, double> getValidatedNumberValue(const QString &value);
     QList<KUnitConversion::Unit> createResultUnits(QString &outputUnitString, const KUnitConversion::UnitCategory &category);
 };

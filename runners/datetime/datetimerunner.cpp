@@ -42,7 +42,11 @@ void DateTimeRunner::match(RunnerContext &context)
         const QString date = QLocale().toString(QDate::currentDate());
         addMatch(i18n("Today's date is %1", date), date, context, QStringLiteral("view-calendar-day"));
     } else if (term.startsWith(dateWord + QLatin1Char(' '), Qt::CaseInsensitive)) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         const auto tz = term.rightRef(term.length() - dateWord.length() - 1);
+#else
+        const auto tz = QStringView(term).right(term.length() - dateWord.length() - 1);
+#endif
         const auto dates = datetime(tz);
         for (auto it = dates.constBegin(), itEnd = dates.constEnd(); it != itEnd; ++it) {
             const QString date = QLocale().toString(*it);
@@ -52,7 +56,11 @@ void DateTimeRunner::match(RunnerContext &context)
         const QString time = QLocale().toString(QTime::currentTime());
         addMatch(i18n("Current time is %1", time), time, context, QStringLiteral("clock"));
     } else if (term.startsWith(timeWord + QLatin1Char(' '), Qt::CaseInsensitive)) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         const auto tz = term.rightRef(term.length() - timeWord.length() - 1);
+#else
+        const auto tz = QStringView(term).right(term.length() - timeWord.length() - 1);
+#endif
         const auto times = datetime(tz);
         for (auto it = times.constBegin(), itEnd = times.constEnd(); it != itEnd; ++it) {
             const QString time = QLocale().toString(*it, QLocale::ShortFormat);
@@ -60,8 +68,11 @@ void DateTimeRunner::match(RunnerContext &context)
         }
     }
 }
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringRef &tz)
+#else
+QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringView &tz)
+#endif
 {
     QHash<QString, QDateTime> ret;
     //

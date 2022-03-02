@@ -134,8 +134,11 @@ void ConverterRunner::run(const RunnerContext &context, const QueryMatch &match)
         QGuiApplication::clipboard()->setText(match.data().toString());
     }
 }
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 QPair<bool, double> ConverterRunner::stringToDouble(const QStringRef &value)
+#else
+QPair<bool, double> ConverterRunner::stringToDouble(const QStringView &value)
+#endif
 {
     bool ok;
     double numberValue = locale.toDouble(value, &ok);
@@ -147,7 +150,11 @@ QPair<bool, double> ConverterRunner::stringToDouble(const QStringRef &value)
 
 QPair<bool, double> ConverterRunner::getValidatedNumberValue(const QString &value)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     const auto fractionParts = value.splitRef(QLatin1Char('/'), Qt::SkipEmptyParts);
+#else
+    const auto fractionParts = QStringView(value).split(QLatin1Char('/'), Qt::SkipEmptyParts);
+#endif
     if (fractionParts.isEmpty() || fractionParts.count() > 2) {
         return {false, 0};
     }
