@@ -29,8 +29,8 @@
 
 #include <plasma_version.h>
 
-GroupingContainment::GroupingContainment(QObject *parent, const QVariantList &args)
-    : Plasma::Containment(parent, args)
+GroupingContainment::GroupingContainment(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : Plasma::Containment(parent, data, args)
 {
     setHasConfigurationInterface(true);
     setContainmentType(Plasma::Types::CustomEmbeddedContainment);

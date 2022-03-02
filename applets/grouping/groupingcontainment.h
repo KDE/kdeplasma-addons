@@ -16,7 +16,7 @@ class GroupingContainment : public Plasma::Containment
 {
     Q_OBJECT
 public:
-    explicit GroupingContainment(QObject *parent, const QVariantList &args);
+    explicit GroupingContainment(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~GroupingContainment() override;
 
     void init() override;
