@@ -1,4 +1,4 @@
-find_package(Qt5WebEngine ${QT_MIN_VERSION} CONFIG)
+find_package(Qt${QT_MAJOR_VERSION}WebEngine ${QT_MIN_VERSION} CONFIG)
 
 set_package_properties(Qt5WebEngine PROPERTIES
     PURPOSE "Needed by the dict applet"
@@ -6,7 +6,7 @@ set_package_properties(Qt5WebEngine PROPERTIES
     TYPE OPTIONAL
 )
 
-if (Qt5WebEngine_FOUND)
+if (Qt${QT_MAJOR_VERSION}WebEngine_FOUND)
 
 #######################################################################################
 # Package (metadata.desktop and QML)
