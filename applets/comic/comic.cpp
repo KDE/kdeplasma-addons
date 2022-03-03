@@ -798,6 +798,6 @@ bool ComicApplet::isTabHighlighted(const QString &id) const
     return false;
 }
 
-K_PLUGIN_CLASS_WITH_JSON(ComicApplet, "package/metadata.json")
+K_PLUGIN_CLASS(ComicApplet)
 
 #include "comic.moc"

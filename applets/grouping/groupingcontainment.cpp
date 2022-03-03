@@ -148,6 +148,6 @@ void GroupingContainment::reorderItemAfter(QQuickItem *after, QQuickItem *before
     after->setVisible(true);
 }
 
-K_PLUGIN_CLASS_WITH_JSON(GroupingContainment, "package/metadata.json")
+K_PLUGIN_CLASS(GroupingContainment)
 
 #include "groupingcontainment.moc"

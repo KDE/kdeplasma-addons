@@ -1,8 +1,8 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.weather\")
 
-kcoreaddons_add_plugin(plasma_applet_weather SOURCES weatherapplet.cpp INSTALL_NAMESPACE "plasma/applets")
+kcoreaddons_add_plugin(org.kde.plasma.weather SOURCES weatherapplet.cpp INSTALL_NAMESPACE "plasma/applets")
 
-target_link_libraries(plasma_applet_weather
+target_link_libraries(org.kde.plasma.weather
     KF5::Plasma
     KF5::UnitConversion
     KF5::I18n
