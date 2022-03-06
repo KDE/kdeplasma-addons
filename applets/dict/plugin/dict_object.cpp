@@ -11,9 +11,6 @@
 #include <QWebEngineUrlRequestJob>
 #include <QWebEngineUrlSchemeHandler>
 
-// The KDE4 applet could use "qstardict" if available, but I have no idea where this came from.
-static const char defaultDataEngine[] = "dict";
-
 class DictSchemeHandler : public QWebEngineUrlSchemeHandler
 {
     Q_OBJECT
@@ -35,38 +32,26 @@ Q_SIGNALS:
 
 DictObject::DictObject(QObject *parent)
     : QObject(parent)
-    , m_dataEngineName(QString::fromLatin1(defaultDataEngine))
 {
     m_selectedDict = QStringLiteral("wn");
     m_webProfile = new QQuickWebEngineProfile(this);
     auto *schemeHandler = new DictSchemeHandler(this);
     connect(schemeHandler, &DictSchemeHandler::wordClicked, this, &DictObject::lookup);
+    connect(&m_engine, &DictEngine::definitionRecieved, this, [this](const QString &html) {
+        Q_EMIT definitionFound(html);
+    });
     m_webProfile->installUrlSchemeHandler("dict", schemeHandler);
-    m_dataEngine = dataEngine(m_dataEngineName); // Load it upfront so the config dialog can reuse this one
 }
 
 void DictObject::lookup(const QString &word)
 {
     const QString newSource = m_selectedDict + QLatin1Char(':') + word;
 
-    if (!m_source.isEmpty()) {
-        m_dataEngine->disconnectSource(m_source, this);
-    }
-
     if (!newSource.isEmpty()) {
         // Look up new definition
         Q_EMIT searchInProgress();
         m_source = newSource;
-        m_dataEngine->connectSource(m_source, this);
-    }
-}
-
-void DictObject::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
-{
-    Q_UNUSED(sourceName); // always == m_source
-    const QString html = data.value(QStringLiteral("text")).toString();
-    if (!html.isEmpty()) {
-        Q_EMIT definitionFound(html);
+        m_engine.requestDefinition(newSource);
     }
 }
 

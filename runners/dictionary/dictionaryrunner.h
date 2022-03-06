@@ -6,9 +6,8 @@
 #ifndef DICTIONARYRUNNER_H
 #define DICTIONARYRUNNER_H
 
-#include "dictionarymatchengine.h"
+#include "../../dict/dictengine.h"
 #include <KRunner/AbstractRunner>
-#include <Plasma/DataEngineConsumer>
 
 using namespace Plasma;
 
@@ -23,11 +22,7 @@ public:
 
 private:
     QString m_triggerWord;
-    std::unique_ptr<DictionaryMatchEngine> m_engine;
-    std::unique_ptr<Plasma::DataEngineConsumer> m_consumer;
-
-protected Q_SLOTS:
-    void init() override;
+    DictEngine m_dictEngine;
 };
 
 #endif

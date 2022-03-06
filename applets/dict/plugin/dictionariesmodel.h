@@ -6,12 +6,11 @@
 #ifndef DICTIONARIES_MODEL_H
 #define DICTIONARIES_MODEL_H
 
-#include <Plasma/DataEngine>
-#include <Plasma/DataEngineConsumer>
+#include "../../dict/dictengine.h"
 #include <QAbstractListModel>
 #include <vector>
 
-class DictionariesModel : public QAbstractListModel, public Plasma::DataEngineConsumer
+class DictionariesModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -21,9 +20,6 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &index = QModelIndex()) const override;
     QHash<int, QByteArray> roleNames() const override;
-
-private Q_SLOTS:
-    void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
 
 private:
     void setAvailableDicts(const QVariantMap &data);

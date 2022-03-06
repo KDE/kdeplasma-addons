@@ -25,11 +25,6 @@ DictionaryRunner::DictionaryRunner(QObject *parent, const KPluginMetaData &metaD
     setObjectName(QLatin1String("Dictionary"));
 }
 
-void DictionaryRunner::init()
-{
-    reloadConfiguration();
-}
-
 void DictionaryRunner::reloadConfiguration()
 {
     KConfigGroup c = config();
@@ -53,34 +48,25 @@ void DictionaryRunner::match(RunnerContext &context)
         return;
     }
 
-    // Initialize engine
     {
-        // It can happen that we are in this function and
-        // another match starts happening. Hence we lock to
-        // ensure that we always init the engine once
-        QMutexLocker lock(&s_initMutex);
-
-        if (!m_engine) {
-            QMetaObject::invokeMethod(
-                this,
-                [this] {
-                    m_consumer = std::make_unique<Plasma::DataEngineConsumer>();
-                    m_engine = std::make_unique<DictionaryMatchEngine>(m_consumer->dataEngine(QStringLiteral("dict")));
-                },
-                Qt::BlockingQueuedConnection);
-        }
+        QEventLoop loop;
+        QTimer::singleShot(400, &loop, [&loop]() {
+            loop.quit();
+        });
+        loop.exec();
     }
-
-    QEventLoop loop;
-    QTimer::singleShot(400, &loop, [&loop]() {
-        loop.quit();
-    });
-    loop.exec();
     if (!context.isValid()) {
         return;
     }
-    QString returnedQuery = m_engine->lookupWord(query);
-    if (!context.isValid()) {
+    QString returnedQuery;
+    QMetaObject::invokeMethod(&m_dictEngine, "requestDefinition", Qt::QueuedConnection, Q_ARG(const QString &, query));
+    QEventLoop loop;
+    connect(&m_dictEngine, &DictEngine::definitionRecieved, &loop, [&loop, &query, &returnedQuery, &context](const QString &html) {
+        returnedQuery = html;
+        loop.quit();
+    });
+    loop.exec();
+    if (!context.isValid() || returnedQuery.isEmpty()) {
         return;
     }
 

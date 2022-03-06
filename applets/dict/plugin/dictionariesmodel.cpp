@@ -5,19 +5,23 @@
  */
 
 #include "dictionariesmodel.h"
-#include <Plasma/DataContainer>
 #include <QDebug>
 
 DictionariesModel::DictionariesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    Plasma::DataEngine *dataengine = dataEngine(QStringLiteral("dict"));
-    const QString source = QLatin1String("list-dictionaries");
-    Plasma::DataContainer *container = dataengine->containerForSource(source);
-    if (container) { // in practice this never seems to happen, this source is only used here, so never shared
-        setAvailableDicts(container->data());
-    }
-    dataengine->connectSource(source, this);
+    static DictEngine engine; // Keep this around longer, because then we can use it's cache'
+    connect(&engine, &DictEngine::dictsRecieved, this, [this](const QMap<QString, QString> &dicts) {
+        beginResetModel();
+        m_availableDicts = {};
+        m_availableDicts.resize(dicts.count());
+        int i = 0;
+        for (auto it = dicts.begin(), end = dicts.end(); it != end; ++it, ++i) {
+            m_availableDicts[i] = AvailableDict{it.key(), it.value()};
+        }
+        endResetModel();
+    });
+    engine.requestDicts();
 }
 
 QVariant DictionariesModel::data(const QModelIndex &index, int role) const
@@ -45,22 +49,4 @@ int DictionariesModel::rowCount(const QModelIndex &index) const
 QHash<int, QByteArray> DictionariesModel::roleNames() const
 {
     return {{Qt::DisplayRole, "description"}, {Qt::EditRole, "id"}};
-}
-
-void DictionariesModel::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
-{
-    Q_ASSERT(sourceName == QLatin1String("list-dictionaries"));
-    beginResetModel();
-    setAvailableDicts(data);
-    endResetModel();
-}
-
-void DictionariesModel::setAvailableDicts(const QVariantMap &data)
-{
-    m_availableDicts = {};
-    m_availableDicts.resize(data.count());
-    int i = 0;
-    for (auto it = data.begin(), end = data.end(); it != end; ++it, ++i) {
-        m_availableDicts[i] = AvailableDict{it.key(), it.value().toString()};
-    }
 }
