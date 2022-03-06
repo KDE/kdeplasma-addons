@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2007 Jeff Cooper <weirdsox11@gmail.com>
     SPDX-FileCopyrightText: 2007 Thomas Georgiou <TAGeorgiou@gmail.com>
+    SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.0-only
 */
@@ -14,13 +15,9 @@
 #include <QTcpSocket>
 #include <QUrl>
 
-#include <Plasma/DataContainer>
-
-DictEngine::DictEngine(QObject *parent, const QVariantList &args)
-    : Plasma::DataEngine(parent, args)
-    , m_tcpSocket(nullptr)
+DictEngine::DictEngine(QObject *parent)
+    : QObject(parent)
 {
-    Q_UNUSED(args)
     m_serverName = QLatin1String("dict.org"); // In case we need to switch it later
     m_dictName = QLatin1String("wn"); // Default, good dictionary
 }
@@ -119,8 +116,7 @@ void DictEngine::getDefinition()
 
     m_tcpSocket->disconnectFromHost();
     const QString html = wnToHtml(m_currentWord, ret);
-    // setData(m_currentQuery, m_dictName, html);
-    setData(m_currentQuery, QStringLiteral("text"), html);
+    Q_EMIT definitionRecieved(html);
 }
 
 void DictEngine::getDicts()
@@ -137,7 +133,7 @@ void DictEngine::getDicts()
         ret += m_tcpSocket->readAll();
     }
 
-    QVariantMap *availableDicts = new QVariantMap;
+    QMap<QString, QString> availableDicts;
     const QList<QByteArray> retLines = ret.split('\n');
     for (const QByteArray &curr : retLines) {
         if (curr.startsWith("554")) {
@@ -159,36 +155,44 @@ void DictEngine::getDicts()
                 description.remove(0, 1);
                 description.chop(1);
             }
-            setData(QStringLiteral("list-dictionaries"), id, description); // this is additive
-            availableDicts->insert(id, description);
+            availableDicts.insert(id, description);
         }
     }
-    m_availableDictsCache.insert(m_serverName, availableDicts);
 
     m_tcpSocket->disconnectFromHost();
+    m_availableDictsCache.insert(m_serverName, availableDicts);
+    Q_EMIT dictsRecieved(availableDicts);
 }
 
-void DictEngine::socketClosed()
+void DictEngine::requestDicts()
 {
-    if (m_tcpSocket) {
-        m_tcpSocket->deleteLater();
+    if (m_availableDictsCache.contains(m_serverName)) {
+        Q_EMIT dictsRecieved(m_availableDictsCache.value(m_serverName));
+        return;
     }
-    m_tcpSocket = nullptr;
-}
-
-bool DictEngine::sourceRequestEvent(const QString &query)
-{
-    // FIXME: this is COMPLETELY broken .. it can only look up one query at a time!
-    //        a DataContainer subclass that does the look up should probably be made
     if (m_tcpSocket) {
         m_tcpSocket->abort(); // stop if lookup is in progress and new query is requested
         m_tcpSocket->deleteLater();
         m_tcpSocket = nullptr;
     }
 
+    m_tcpSocket = new QTcpSocket(this);
+    connect(m_tcpSocket, &QTcpSocket::disconnected, this, &DictEngine::socketClosed);
+    connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDicts);
+    m_tcpSocket->connectToHost(m_serverName, 2628);
+}
+void DictEngine::requestDefinition(const QString &query)
+{
+    if (m_tcpSocket) {
+        m_tcpSocket->abort(); // stop if lookup is in progress and new query is requested
+        m_tcpSocket->deleteLater();
+        m_tcpSocket = nullptr;
+        Q_EMIT definitionRecieved(QString());
+    }
+
     QStringList queryParts = query.split(':', Qt::SkipEmptyParts);
     if (queryParts.isEmpty()) {
-        return false;
+        return;
     }
 
     m_currentWord = queryParts.last();
@@ -209,42 +213,18 @@ bool DictEngine::sourceRequestEvent(const QString &query)
     } else {
         setServer(QStringLiteral("dict.org"));
     }
-
-    if (m_currentWord.simplified().isEmpty()) {
-        setData(m_currentQuery, m_dictName, QString());
-    } else {
-        if (m_currentWord == QLatin1String("list-dictionaries")) {
-            // Use cache if available
-            QVariantMap *dicts = m_availableDictsCache.object(m_serverName);
-            if (dicts) {
-                for (auto it = dicts->constBegin(); it != dicts->constEnd(); ++it) {
-                    setData(m_currentQuery, it.key(), it.value());
-                }
-                return true;
-            }
-        }
-
-        // We need to do this in order to create the DataContainer immediately in DataEngine
-        // so it can connect to updates. Not sure why DataEnginePrivate::requestSource
-        // doesn't create the DataContainer when sourceRequestEvent returns true, by doing
-        // source(sourceName) instead of source(sourceName, false), but well, I'm too scared to change that.
-        setData(m_currentQuery, QVariant());
-
-        m_tcpSocket = new QTcpSocket(this);
-        connect(m_tcpSocket, &QTcpSocket::disconnected, this, &DictEngine::socketClosed);
-
-        if (m_currentWord == QLatin1String("list-dictionaries")) {
-            connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDicts);
-        } else {
-            connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDefinition);
-        }
-
-        m_tcpSocket->connectToHost(m_serverName, 2628);
-    }
-
-    return true;
+    m_tcpSocket = new QTcpSocket(this);
+    connect(m_tcpSocket, &QTcpSocket::disconnected, this, &DictEngine::socketClosed);
+    connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDefinition);
+    m_tcpSocket->connectToHost(m_serverName, 2628);
 }
 
-K_PLUGIN_CLASS_WITH_JSON(DictEngine, "plasma-dataengine-dict.json")
+void DictEngine::socketClosed()
+{
+    if (m_tcpSocket) {
+        m_tcpSocket->deleteLater();
+    }
+    m_tcpSocket = nullptr;
+}
 
 #include "dictengine.moc"
