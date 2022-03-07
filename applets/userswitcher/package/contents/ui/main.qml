@@ -11,7 +11,6 @@ import QtQuick.Window 2.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents // for Highlight
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kcoreaddons 1.0 as KCoreAddons // kuser
@@ -121,7 +120,7 @@ Item {
             id: sessionsModel
         }
 
-        PlasmaComponents.Highlight {
+        PlasmaExtras.Highlight {
             id: delegateHighlight
             visible: false
             z: -1 // otherwise it shows ontop of the icon/label and tints them slightly
@@ -159,7 +158,7 @@ Item {
                     id: userList
                     model: sessionsModel
 
-                    highlight: PlasmaComponents.Highlight {}
+                    highlight: PlasmaExtras.Highlight {}
                     highlightMoveDuration: 0
 
                     delegate: ListDelegate {

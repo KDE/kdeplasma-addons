@@ -7,7 +7,7 @@
 import QtQuick 2.2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents // for Highlight and ListItem
+import org.kde.plasma.components 2.0 as PlasmaComponents // for ListItem
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.purpose 1.0 as Purpose
@@ -38,7 +38,7 @@ PlasmaCore.Dialog
             pluginType: "Export"
             Component {
                 id: highlightComponent
-                PlasmaComponents.Highlight {}
+                PlasmaExtras.Highlight {}
             }
             Component.onCompleted: {
                 if (view.hasOwnProperty("highlight")) { //Purpose 1.1 doesn't have highlight
