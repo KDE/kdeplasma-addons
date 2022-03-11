@@ -31,7 +31,7 @@ class ComicEngine : public Plasma::DataEngine
     Q_OBJECT
 
 public:
-    ComicEngine(QObject *parent, const QVariantList &args);
+    ComicEngine();
     ~ComicEngine() override;
 
 public Q_SLOTS:

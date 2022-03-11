@@ -35,6 +35,7 @@
 
 #include "comicmodel.h"
 #include "comicupdater.h"
+#include "engine/comic.h"
 
 Q_GLOBAL_STATIC(ComicUpdater, globalComicUpdater)
 
@@ -69,7 +70,7 @@ void ComicApplet::init()
 
     configChanged();
 
-    mEngine = dataEngine(QStringLiteral("comic"));
+    mEngine = new ComicEngine();
     mModel = new ComicModel(mEngine, QStringLiteral("providers"), mTabIdentifier, this);
     mProxy = new QSortFilterProxyModel(this);
     mProxy->setSourceModel(mModel);
@@ -465,7 +466,7 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
     const QString id = mCurrent.id();
     setConfigurationRequired(id.isEmpty());
 
-    if (!id.isEmpty() && mEngine && mEngine->isValid()) {
+    if (!id.isEmpty() && mEngine) {
         setBusy(true);
 
         const QString identifier = id + QLatin1Char(':') + identifierSuffix;

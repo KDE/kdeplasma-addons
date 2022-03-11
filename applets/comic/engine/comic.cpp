@@ -21,8 +21,8 @@
 #include "comic_debug.h"
 #include "comicproviderkross.h"
 
-ComicEngine::ComicEngine(QObject *parent, const QVariantList &args)
-    : Plasma::DataEngine(parent, args)
+ComicEngine::ComicEngine()
+    : Plasma::DataEngine(nullptr, QVariantList())
     , mEmptySuffix(false)
 {
     setPollingInterval(0);
@@ -314,7 +314,5 @@ QString ComicEngine::lastCachedIdentifier(const QString &identifier) const
 
     return previousIdentifier;
 }
-
-K_PLUGIN_CLASS_WITH_JSON(ComicEngine, "plasma-dataengine-comic.json")
 
 #include "comic.moc"

@@ -20,7 +20,7 @@ set(comic_engine_SRCS
     ${LOGGING_SRCS}
 )
 
-kcoreaddons_add_plugin(plasma_engine_comic SOURCES ${comic_engine_SRCS} INSTALL_NAMESPACE "plasma/dataengine")
+add_library(plasma_engine_comic STATIC ${comic_engine_SRCS})
 
 target_link_libraries(plasma_engine_comic plasmacomicprovidercore
     Qt::Qml
