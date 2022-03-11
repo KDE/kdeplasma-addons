@@ -45,26 +45,29 @@ void ComicEngine::onOnlineStateChanged(bool isOnline)
     }
 }
 
-QMap<QString, QStringList> ComicEngine::loadProviders()
+QList<ComicProviderInfo> ComicEngine::loadProviders()
 {
-    mProvidersMap.clear();
+    mProviders.clear();
     auto comics = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/Comic"));
+    QList<ComicProviderInfo> providers;
     for (auto comic : comics) {
 
         qCDebug(PLASMA_COMIC) << "ComicEngine::loadProviders()  service name=" << comic.name();
-        QStringList data;
-        data << comic.name();
+        ComicProviderInfo data;
+        data.pluginId = comic.pluginId();
+        data.name = comic.name();
         QFileInfo file(comic.iconName());
         if (file.isRelative()) {
-            data << QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                           QString::fromLatin1("plasma/comics/%1/%2").arg(comic.pluginId(), comic.iconName()));
+            data.icon =
+                QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("plasma/comics/%1/%2").arg(comic.pluginId(), comic.iconName()));
         } else {
-            data << comic.iconName();
+            data.icon = comic.iconName();
         }
-        mProvidersMap.insert(comic.pluginId(), data);
+        mProviders << comic.pluginId();
+        providers << data;
     }
     forceImmediateUpdateOfAllVisualizations();
-    return mProvidersMap;
+    return providers;
 }
 
 bool ComicEngine::updateSourceEvent(const QString &identifier)
@@ -103,10 +106,10 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             qWarning() << "Less than two arguments specified.";
             return false;
         }
-        if (!mProvidersMap.contains(parts[0])) {
+        if (!mProviders.contains(parts[0])) {
             // User might have installed more from GHNS
             loadProviders();
-            if (!mProvidersMap.contains(parts[0])) {
+            if (!mProviders.contains(parts[0])) {
                 setData(identifier, QLatin1String("Error"), true);
                 qWarning() << identifier << "comic plugin does not seem to be installed.";
                 return false;

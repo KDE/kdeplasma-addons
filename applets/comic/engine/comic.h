@@ -9,9 +9,16 @@
 
 #include <Plasma/DataEngine>
 // Qt
+#include <QIcon>
 #include <QNetworkConfigurationManager>
 
 class ComicProvider;
+
+struct ComicProviderInfo {
+    QString pluginId;
+    QString name;
+    QString icon;
+};
 
 /**
  * This class provides the comic strip.
@@ -34,7 +41,7 @@ public:
     ComicEngine();
     ~ComicEngine() override;
 
-    QMap<QString, QStringList> loadProviders();
+    QList<ComicProviderInfo> loadProviders();
 
 protected:
     void init();
@@ -55,7 +62,7 @@ private:
     QString mIdentifierError;
     QHash<QString, ComicProvider *> m_jobs;
     QNetworkConfigurationManager m_networkConfigurationManager;
-    QMap<QString, QStringList> mProvidersMap;
+    QSet<QString> mProviders;
 };
 
 #endif

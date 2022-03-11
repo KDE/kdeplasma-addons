@@ -8,6 +8,7 @@
 
 #include "comicmodel.h"
 #include "engine/comic.h"
+#include "engine/comicprovider.h"
 
 #include <QDebug>
 #include <QIcon>
@@ -48,19 +49,18 @@ int ComicModel::columnCount(const QModelIndex &index) const
 
 QVariant ComicModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.row() >= mComics.keys().count()) {
+    if (!index.isValid() || index.row() >= mComics.count()) {
         return QVariant();
     }
 
-    const QString data = mComics.keys()[index.row()];
-
+    const ComicProviderInfo &info = mComics.at(index.row());
     switch (role) {
     case Qt::DisplayRole:
-        return mComics[data][0];
+        return info.name;
     case Qt::DecorationRole:
-        return QIcon::fromTheme(mComics[data][1]);
+        return QIcon::fromTheme(info.icon);
     case Qt::UserRole:
-        return data;
+        return info.pluginId;
     }
 
     return QVariant();

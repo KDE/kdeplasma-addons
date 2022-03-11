@@ -27,7 +27,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
 private:
-    QMap<QString, QStringList> mComics;
+    QList<ComicProviderInfo> mComics;
     QStringList mUsedComics;
 };
 
