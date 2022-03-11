@@ -7,7 +7,6 @@
 #ifndef COMICPROVIDER_H
 #define COMICPROVIDER_H
 
-#include "plasma_comic_export.h"
 #include <KPluginMetaData>
 #include <QDate>
 #include <QObject>
@@ -18,7 +17,7 @@ class QUrl;
 /**
  * This class is an interface for comic providers.
  */
-class PLASMA_COMIC_EXPORT ComicProvider : public QObject
+class ComicProvider : public QObject
 {
     Q_OBJECT
 

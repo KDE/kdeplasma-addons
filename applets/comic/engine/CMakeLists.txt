@@ -44,17 +44,12 @@ set(comic_provider_core_SRCS
   ${LOGGING_SRCS}
 )
 
-add_library(plasmacomicprovidercore SHARED ${comic_provider_core_SRCS})
-generate_export_header(plasmacomicprovidercore EXPORT_FILE_NAME plasma_comic_export.h EXPORT_MACRO_NAME PLASMA_COMIC_EXPORT)
-
+add_library(plasmacomicprovidercore STATIC ${comic_provider_core_SRCS})
 target_link_libraries(plasmacomicprovidercore
     KF5::WidgetsAddons
     KF5::KIOCore
     KF5::I18n
 )
-set_target_properties(plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1)
-
-install( TARGETS plasmacomicprovidercore ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP )
 
 ########### kross ###############
 
