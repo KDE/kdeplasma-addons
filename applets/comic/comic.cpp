@@ -71,7 +71,7 @@ void ComicApplet::init()
     configChanged();
 
     mEngine = new ComicEngine();
-    mModel = new ComicModel(mEngine, QStringLiteral("providers"), mTabIdentifier, this);
+    mModel = new ComicModel(mEngine, mTabIdentifier, this);
     mProxy = new QSortFilterProxyModel(this);
     mProxy->setSourceModel(mModel);
     mProxy->setSortCaseSensitivity(Qt::CaseInsensitive);

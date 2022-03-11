@@ -31,6 +31,7 @@ class QAction;
 class QSortFilterProxyModel;
 class QTimer;
 class SavingDir;
+class ComicEngine;
 
 class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
 {
@@ -207,7 +208,7 @@ private:
     QSizeF mMaxSize;
     QSizeF mLastSize;
     QSizeF mIdealSize;
-    Plasma::DataEngine *mEngine;
+    ComicEngine *mEngine;
 
     // Tabs
     bool mTabAdded;

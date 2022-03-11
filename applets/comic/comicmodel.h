@@ -11,17 +11,13 @@
 
 #include <QAbstractTableModel>
 
-#include <Plasma/DataEngine>
-#include <Plasma/DataEngineConsumer>
-
-class ComicModel : public QAbstractTableModel, public Plasma::DataEngineConsumer
+#include "engine/comic.h"
+class ComicModel : public QAbstractTableModel
 {
     Q_OBJECT
 
 public:
-    ComicModel(Plasma::DataEngine *engine, const QString &source, const QStringList &usedComics, QObject *parent = nullptr);
-
-    void setComics(const Plasma::DataEngine::Data &comics, const QStringList &usedComics);
+    ComicModel(ComicEngine *engine, const QStringList &usedComics, QObject *parent = nullptr);
 
     QHash<int, QByteArray> roleNames() const override;
 
@@ -30,11 +26,8 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::CheckStateRole) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-public Q_SLOTS:
-    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
-
 private:
-    Plasma::DataEngine::Data mComics;
+    QMap<QString, QStringList> mComics;
     QStringList mUsedComics;
 };
 

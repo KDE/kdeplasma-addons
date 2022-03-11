@@ -34,8 +34,7 @@ public:
     ComicEngine();
     ~ComicEngine() override;
 
-public Q_SLOTS:
-    void loadProviders();
+    QMap<QString, QStringList> loadProviders();
 
 protected:
     void init();
@@ -54,9 +53,9 @@ private:
     void setComicData(ComicProvider *provider);
     QString lastCachedIdentifier(const QString &identifier) const;
     QString mIdentifierError;
-    QStringList mProviders;
     QHash<QString, ComicProvider *> m_jobs;
     QNetworkConfigurationManager m_networkConfigurationManager;
+    QMap<QString, QStringList> mProvidersMap;
 };
 
 #endif

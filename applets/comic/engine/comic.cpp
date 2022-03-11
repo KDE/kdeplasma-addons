@@ -45,13 +45,11 @@ void ComicEngine::onOnlineStateChanged(bool isOnline)
     }
 }
 
-void ComicEngine::loadProviders()
+QMap<QString, QStringList> ComicEngine::loadProviders()
 {
-    mProviders.clear();
-    removeAllData(QLatin1String("providers"));
+    mProvidersMap.clear();
     auto comics = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/Comic"));
     for (auto comic : comics) {
-        mProviders << comic.pluginId();
 
         qCDebug(PLASMA_COMIC) << "ComicEngine::loadProviders()  service name=" << comic.name();
         QStringList data;
@@ -63,16 +61,16 @@ void ComicEngine::loadProviders()
         } else {
             data << comic.iconName();
         }
-        setData(QLatin1String("providers"), comic.pluginId(), data);
+        mProvidersMap.insert(comic.pluginId(), data);
     }
     forceImmediateUpdateOfAllVisualizations();
+    return mProvidersMap;
 }
 
 bool ComicEngine::updateSourceEvent(const QString &identifier)
 {
     if (identifier == QLatin1String("providers")) {
-        loadProviders();
-        return true;
+        Q_UNREACHABLE();
     } else if (identifier.startsWith(QLatin1String("setting_maxComicLimit:"))) {
         bool worked;
         const int maxComicLimit = identifier.mid(22).toInt(&worked);
@@ -105,10 +103,10 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             qWarning() << "Less than two arguments specified.";
             return false;
         }
-        if (!mProviders.contains(parts[0])) {
+        if (!mProvidersMap.contains(parts[0])) {
             // User might have installed more from GHNS
             loadProviders();
-            if (!mProviders.contains(parts[0])) {
+            if (!mProvidersMap.contains(parts[0])) {
                 setData(identifier, QLatin1String("Error"), true);
                 qWarning() << identifier << "comic plugin does not seem to be installed.";
                 return false;
