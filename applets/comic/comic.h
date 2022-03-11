@@ -17,8 +17,6 @@
 #include <QUrl>
 
 #include <Plasma/Applet>
-#include <Plasma/DataEngine>
-#include <Plasma/DataEngineConsumer>
 
 #include "activecomicmodel.h"
 
@@ -33,7 +31,7 @@ class QTimer;
 class SavingDir;
 class ComicEngine;
 
-class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
+class ComicApplet : public Plasma::Applet
 {
     Q_OBJECT
     Q_PROPERTY(QObject *comicsModel READ comicsModel NOTIFY comicModelChanged)
