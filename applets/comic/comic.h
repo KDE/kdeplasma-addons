@@ -118,7 +118,7 @@ Q_SIGNALS:
     void maxComicLimitChanged();
 
 public Q_SLOTS:
-    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+    void dataUpdated(const QString &name, const QVariantMap &data);
 
 private Q_SLOTS:
     void slotTabChanged(const QString &newIdentifier);

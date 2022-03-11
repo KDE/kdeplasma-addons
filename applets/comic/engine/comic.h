@@ -4,13 +4,14 @@
  *   SPDX-License-Identifier: LGPL-2.0-only
  */
 
-#ifndef COMIC_DATAENGINE_H
-#define COMIC_DATAENGINE_H
+#ifndef COMIC_ENGINE_H
+#define COMIC_ENGINE_H
 
-#include <Plasma/DataEngine>
 // Qt
 #include <QIcon>
 #include <QNetworkConfigurationManager>
+#include <QSet>
+#include <QVariant>
 
 class ComicProvider;
 
@@ -33,7 +34,7 @@ struct ComicProviderInfo {
  * if the suffix is empty the latest comic will be returned
  *
  */
-class ComicEngine : public Plasma::DataEngine
+class ComicEngine : public QObject
 {
     Q_OBJECT
 
@@ -43,21 +44,24 @@ public:
 
     QList<ComicProviderInfo> loadProviders();
 
+    void setMaxComicLimit(int maxComicLimit);
+    using ComicRequestCallback = const std::function<void(const QVariantMap &data)> &;
+    bool requestSource(const QString &identifier, ComicRequestCallback callback);
+
+Q_SIGNALS:
+    void sourceUpdated(const QString &identifier);
+
 protected:
     void init();
-    bool sourceRequestEvent(const QString &identifier) override;
 
-protected Q_SLOTS:
-    bool updateSourceEvent(const QString &identifier) override;
-
-private Q_SLOTS:
-    void finished(ComicProvider *);
-    void error(ComicProvider *);
+private:
+    void finished(ComicProvider *, ComicRequestCallback callback);
+    void error(ComicProvider *, ComicRequestCallback callback);
     void onOnlineStateChanged(bool);
+    void setComicData(ComicProvider *provider, ComicRequestCallback callback);
 
 private:
     bool mEmptySuffix;
-    void setComicData(ComicProvider *provider);
     QString lastCachedIdentifier(const QString &identifier) const;
     QString mIdentifierError;
     QHash<QString, ComicProvider *> m_jobs;

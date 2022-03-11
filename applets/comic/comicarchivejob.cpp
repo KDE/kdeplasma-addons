@@ -15,7 +15,7 @@
 #include <QImage>
 
 ComicArchiveJob::ComicArchiveJob(const QUrl &dest,
-                                 Plasma::DataEngine *engine,
+                                 ComicEngine *engine,
                                  ComicArchiveJob::ArchiveType archiveType,
                                  IdentifierType identifierType,
                                  const QString &pluginName,
@@ -80,7 +80,7 @@ bool ComicArchiveJob::isValid() const
         break;
     }
 
-    return mEngine->isValid() && mZip && mZip->isOpen();
+    return mZip && mZip->isOpen();
 }
 
 void ComicArchiveJob::setToIdentifier(const QString &toIdentifier)
@@ -121,7 +121,7 @@ void ComicArchiveJob::start()
     }
 }
 
-void ComicArchiveJob::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
+void ComicArchiveJob::dataUpdated(const QString &source, const QVariantMap &data)
 {
     if (!mZip) {
         qWarning() << "No zip file, aborting.";
@@ -227,8 +227,6 @@ void ComicArchiveJob::dataUpdated(const QString &source, const Plasma::DataEngin
         setError(KilledJobError);
         emitResultIfNeeded();
     }
-
-    mEngine->disconnectSource(source, this);
 }
 
 bool ComicArchiveJob::doKill()
@@ -332,8 +330,9 @@ void ComicArchiveJob::requestComic(QString identifier) // krazy:exclude=passbyva
                        qMakePair(QStringLiteral("source"), identifier),
                        qMakePair(QStringLiteral("destination"), mDest.toString()));
 
-    mEngine->connectSource(identifier, this);
-    //    mEngine->query( identifier );
+    mEngine->requestSource(identifier, [this, identifier](const QVariantMap &data) {
+        dataUpdated(identifier, data);
+    });
 }
 
 bool ComicArchiveJob::addFileToZip(const QString &path)

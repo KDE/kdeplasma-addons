@@ -10,8 +10,8 @@
 
 #include "comicinfo.h"
 
+#include "engine/comic.h"
 #include <KIO/Job>
-#include <Plasma/DataEngine>
 
 class QTemporaryFile;
 class KZip;
@@ -30,7 +30,7 @@ public:
 
     /**
      * Creates a comic archive job.
-     * The engine has to be a working comic dataengine.
+     * The engine has to be a working comic engine.
      * The archiveType defines what kind of input is given, e.g. if ArchiveAll is
      * used no other parameters need to be defined, while ArchiveFromTo needs
      * both toIdentifier and fromIdentifier (from <= to!), the other two types need only the toIdentifier.
@@ -39,7 +39,7 @@ public:
      * @see setToIdentifier, setFromIdentifier
      */
     ComicArchiveJob(const QUrl &dest,
-                    Plasma::DataEngine *engine,
+                    ComicEngine *engine,
                     ArchiveType archiveType,
                     IdentifierType identifierType,
                     const QString &pluginName,
@@ -66,7 +66,7 @@ public:
     void start() override;
 
 public Q_SLOTS:
-    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+    void dataUpdated(const QString &source, const QVariantMap &data);
 
 protected:
     bool doKill() override;
@@ -119,7 +119,7 @@ private:
     int mComicNumber;
     int mProcessedFiles;
     int mTotalFiles;
-    Plasma::DataEngine *mEngine;
+    ComicEngine *mEngine;
     QTemporaryFile *mZipFile;
     KZip *mZip;
     QString mPluginName;

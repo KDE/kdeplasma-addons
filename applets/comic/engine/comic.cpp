@@ -22,10 +22,10 @@
 #include "comicproviderkross.h"
 
 ComicEngine::ComicEngine()
-    : Plasma::DataEngine(nullptr, QVariantList())
+    : QObject()
     , mEmptySuffix(false)
 {
-    setPollingInterval(0);
+    // TODO setPollingInterval(0);
     loadProviders();
 }
 
@@ -41,7 +41,7 @@ void ComicEngine::init()
 void ComicEngine::onOnlineStateChanged(bool isOnline)
 {
     if (isOnline && !mIdentifierError.isEmpty()) {
-        sourceRequestEvent(mIdentifierError);
+        // TODO sourceRequestEvent(mIdentifierError);
     }
 }
 
@@ -66,22 +66,16 @@ QList<ComicProviderInfo> ComicEngine::loadProviders()
         mProviders << comic.pluginId();
         providers << data;
     }
-    forceImmediateUpdateOfAllVisualizations();
     return providers;
 }
 
-bool ComicEngine::updateSourceEvent(const QString &identifier)
+void ComicEngine::setMaxComicLimit(int maxComicLimit)
 {
-    if (identifier == QLatin1String("providers")) {
-        Q_UNREACHABLE();
-    } else if (identifier.startsWith(QLatin1String("setting_maxComicLimit:"))) {
-        bool worked;
-        const int maxComicLimit = identifier.mid(22).toInt(&worked);
-        if (worked) {
-            CachedProvider::setMaxComicLimit(maxComicLimit);
-        }
-        return worked;
-    } else {
+    CachedProvider::setMaxComicLimit(maxComicLimit);
+}
+
+bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback callback)
+{
         if (m_jobs.contains(identifier)) {
             return true;
         }
@@ -95,14 +89,18 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
 
             ComicProvider *provider = new CachedProvider(this, args);
             m_jobs[identifier] = provider;
-            connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
-            connect(provider, &ComicProvider::error, this, &ComicEngine::error);
+            connect(provider, &ComicProvider::finished, this, [this, callback, provider]() {
+                finished(provider, callback);
+            });
+            connect(provider, &ComicProvider::error, this, [this, callback, provider]() {
+                error(provider, callback);
+            });
             return true;
         }
 
         // ... start a new query otherwise
         if (parts.count() < 2) {
-            setData(identifier, QLatin1String("Error"), true);
+            callback(QVariantMap{{QLatin1String("Error"), true}});
             qWarning() << "Less than two arguments specified.";
             return false;
         }
@@ -110,7 +108,7 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
             // User might have installed more from GHNS
             loadProviders();
             if (!mProviders.contains(parts[0])) {
-                setData(identifier, QLatin1String("Error"), true);
+                callback(QVariantMap{{QLatin1String("Error"), true}});
                 qWarning() << identifier << "comic plugin does not seem to be installed.";
                 return false;
             }
@@ -119,10 +117,12 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         // check if there is a connection
         if (!m_networkConfigurationManager.isOnline()) {
             mIdentifierError = identifier;
-            setData(identifier, QLatin1String("Error"), true);
-            setData(identifier, QLatin1String("Error automatically fixable"), true);
-            setData(identifier, QLatin1String("Identifier"), identifier);
-            setData(identifier, QLatin1String("Previous identifier suffix"), lastCachedIdentifier(identifier));
+            callback(QVariantMap{
+                {QLatin1String("Error"), true},
+                {QLatin1String("Error automatically fixable"), true},
+                {QLatin1String("Identifier"), identifier},
+                {QLatin1String("Previous identifier suffix"), lastCachedIdentifier(identifier)},
+            });
             qCDebug(PLASMA_COMIC) << "No internet connection, using cached data";
             return true;
         }
@@ -153,33 +153,29 @@ bool ComicEngine::updateSourceEvent(const QString &identifier)
         // provider = service->createInstance<ComicProvider>(this, args);
         provider = new ComicProviderKross(this, args);
         if (!provider) {
-            setData(identifier, QLatin1String("Error"), true);
+            callback(QVariantMap{{QLatin1String("Error"), true}});
             return false;
         }
         provider->setIsCurrent(isCurrentComic);
 
         m_jobs[identifier] = provider;
 
-        connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
-        connect(provider, &ComicProvider::error, this, &ComicEngine::error);
+        connect(provider, &ComicProvider::finished, this, [this, callback, provider]() {
+            finished(provider, callback);
+        });
+        connect(provider, &ComicProvider::error, this, [this, callback, provider]() {
+            error(provider, callback);
+        });
         return true;
-    }
 }
 
-bool ComicEngine::sourceRequestEvent(const QString &identifier)
-{
-    setData(identifier, DataEngine::Data());
-
-    return updateSourceEvent(identifier);
-}
-
-void ComicEngine::finished(ComicProvider *provider)
+void ComicEngine::finished(ComicProvider *provider, ComicRequestCallback callback)
 {
     // sets the data
-    setComicData(provider);
+    setComicData(provider, callback);
     if (provider->image().isNull()) {
         qCWarning(PLASMA_COMIC) << "Provider returned null image" << provider->name();
-        error(provider);
+        error(provider, callback);
         return;
     }
 
@@ -236,10 +232,10 @@ void ComicEngine::finished(ComicProvider *provider)
     }
 }
 
-void ComicEngine::error(ComicProvider *provider)
+void ComicEngine::error(ComicProvider *provider, ComicRequestCallback callback)
 {
     // sets the data
-    setComicData(provider);
+    setComicData(provider, callback);
 
     QString identifier(provider->identifier());
     mIdentifierError = identifier;
@@ -255,16 +251,18 @@ void ComicEngine::error(ComicProvider *provider)
         identifier = identifier.left(identifier.indexOf(QLatin1Char(':')) + 1);
     }
 
-    setData(identifier, QLatin1String("Identifier"), identifier);
-    setData(identifier, QLatin1String("Error"), true);
+    QVariantMap data{
+        {QLatin1String("Identifier"), identifier},
+        {QLatin1String("Error"), true},
+    };
 
     // if there was an error loading the last cached comic strip, do not return its id anymore
     const QString lastCachedId = lastCachedIdentifier(identifier);
     if (lastCachedId != provider->identifier().mid(provider->identifier().indexOf(QLatin1Char(':')) + 1)) {
         // sets the previousIdentifier to the identifier of a strip that has been cached before
-        setData(identifier, QLatin1String("Previous identifier suffix"), lastCachedId);
+        data.insert(QLatin1String("Previous identifier suffix"), lastCachedId);
     }
-    setData(identifier, QLatin1String("Next identifier suffix"), QString());
+    data.insert(QLatin1String("Next identifier suffix"), QString());
 
     const QString key = m_jobs.key(provider);
     if (!key.isEmpty()) {
@@ -272,9 +270,10 @@ void ComicEngine::error(ComicProvider *provider)
     }
 
     provider->deleteLater();
+    callback(data);
 }
 
-void ComicEngine::setComicData(ComicProvider *provider)
+void ComicEngine::setComicData(ComicProvider *provider, ComicRequestCallback callback)
 {
     QString identifier(provider->identifier());
 
@@ -287,22 +286,24 @@ void ComicEngine::setComicData(ComicProvider *provider)
         identifier = identifier.left(identifier.indexOf(QLatin1Char(':')) + 1);
     }
 
-    setData(identifier, QLatin1String("Image"), provider->image());
-    setData(identifier, QLatin1String("Website Url"), provider->websiteUrl());
-    setData(identifier, QLatin1String("Image Url"), provider->imageUrl());
-    setData(identifier, QLatin1String("Shop Url"), provider->shopUrl());
-    setData(identifier, QLatin1String("Next identifier suffix"), provider->nextIdentifier());
-    setData(identifier, QLatin1String("Previous identifier suffix"), provider->previousIdentifier());
-    setData(identifier, QLatin1String("Comic Author"), provider->comicAuthor());
-    setData(identifier, QLatin1String("Additional text"), provider->additionalText());
-    setData(identifier, QLatin1String("Strip title"), provider->stripTitle());
-    setData(identifier, QLatin1String("First strip identifier suffix"), provider->firstStripIdentifier());
-    setData(identifier, QLatin1String("Identifier"), provider->identifier());
-    setData(identifier, QLatin1String("Title"), provider->name());
-    setData(identifier, QLatin1String("SuffixType"), provider->suffixType());
-    setData(identifier, QLatin1String("isLeftToRight"), provider->isLeftToRight());
-    setData(identifier, QLatin1String("isTopToBottom"), provider->isTopToBottom());
-    setData(identifier, QLatin1String("Error"), false);
+    callback({
+        {QLatin1String("Image"), provider->image()},
+        {QLatin1String("Website Url"), provider->websiteUrl()},
+        {QLatin1String("Image Url"), provider->imageUrl()},
+        {QLatin1String("Shop Url"), provider->shopUrl()},
+        {QLatin1String("Next identifier suffix"), provider->nextIdentifier()},
+        {QLatin1String("Previous identifier suffix"), provider->previousIdentifier()},
+        {QLatin1String("Comic Author"), provider->comicAuthor()},
+        {QLatin1String("Additional text"), provider->additionalText()},
+        {QLatin1String("Strip title"), provider->stripTitle()},
+        {QLatin1String("First strip identifier suffix"), provider->firstStripIdentifier()},
+        {QLatin1String("Identifier"), provider->identifier()},
+        {QLatin1String("Title"), provider->name()},
+        {QLatin1String("SuffixType"), provider->suffixType()},
+        {QLatin1String("isLeftToRight"), provider->isLeftToRight()},
+        {QLatin1String("isTopToBottom"), provider->isTopToBottom()},
+        {QLatin1String("Error"), false},
+    });
 }
 
 QString ComicEngine::lastCachedIdentifier(const QString &identifier) const

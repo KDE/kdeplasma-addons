@@ -9,8 +9,8 @@
 
 #include "comicinfo.h"
 
-#include <Plasma/DataEngine>
 // Qt
+#include <KConfigGroup>
 #include <QImage>
 #include <QString>
 #include <QUrl>
@@ -22,7 +22,7 @@ public:
 
     void init(const QString &id, const KConfigGroup &config);
 
-    void setData(const Plasma::DataEngine::Data &data);
+    void setData(const QVariantMap &data);
 
     IdentifierType type() const
     {
@@ -194,7 +194,7 @@ public:
 
 private:
     void load();
-    void createErrorPicture(const Plasma::DataEngine::Data &data);
+    void createErrorPicture(const QVariantMap &data);
 
 private:
     IdentifierType mType;

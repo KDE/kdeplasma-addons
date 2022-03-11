@@ -11,17 +11,12 @@
 #include <QTime>
 #include <QWidget>
 
+#include <KConfigGroup>
 #include <KNSCore/EntryInternal>
-#include <Plasma/DataEngine>
 
 namespace KNSCore
 {
 class Engine;
-}
-
-namespace Plasma
-{
-class DataEngine;
 }
 
 class ComicUpdater : public QObject

@@ -7,7 +7,7 @@
 #ifndef CHECK_NEW_STRIPS_H
 #define CHECK_NEW_STRIPS_H
 
-#include <Plasma/DataEngine>
+#include "engine/comic.h"
 
 /**
  * This class searches for the newest comic strips of predefined comics in a defined interval.
@@ -18,7 +18,7 @@ class CheckNewStrips : public QObject
     Q_OBJECT
 
 public:
-    CheckNewStrips(const QStringList &identifiers, Plasma::DataEngine *engine, int minutes, QObject *parent = nullptr);
+    CheckNewStrips(const QStringList &identifiers, ComicEngine *engine, int minutes, QObject *parent = nullptr);
 
 Q_SIGNALS:
     /**
@@ -30,7 +30,7 @@ Q_SIGNALS:
     void lastStrip(int index, const QString &identifier, const QString &suffix);
 
 public Q_SLOTS:
-    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+    void dataUpdated(const QString &name, const QVariantMap &data);
 
 private Q_SLOTS:
     void start();
@@ -38,7 +38,7 @@ private Q_SLOTS:
 private:
     int mMinutes;
     int mIndex;
-    Plasma::DataEngine *mEngine;
+    ComicEngine *mEngine;
     const QStringList mIdentifiers;
 };
 

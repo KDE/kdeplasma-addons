@@ -54,7 +54,7 @@ void ComicData::storePosition(bool store)
     save();
 }
 
-void ComicData::setData(const Plasma::DataEngine::Data &data)
+void ComicData::setData(const QVariantMap &data)
 {
     const bool hasError = data[QStringLiteral("Error")].toBool();
     if (!hasError) {
@@ -111,7 +111,7 @@ void ComicData::setData(const Plasma::DataEngine::Data &data)
     save();
 }
 
-void ComicData::createErrorPicture(const Plasma::DataEngine::Data &data)
+void ComicData::createErrorPicture(const QVariantMap &data)
 {
     QPixmap errorPic(500, 400);
     errorPic.fill();

@@ -5,10 +5,11 @@
  */
 
 #include "checknewstrips.h"
+#include "engine/comic.h"
 
 #include <QTimer>
 
-CheckNewStrips::CheckNewStrips(const QStringList &identifiers, Plasma::DataEngine *engine, int minutes, QObject *parent)
+CheckNewStrips::CheckNewStrips(const QStringList &identifiers, ComicEngine *engine, int minutes, QObject *parent)
     : QObject(parent)
     , mMinutes(minutes)
     , mIndex(0)
@@ -24,7 +25,7 @@ CheckNewStrips::CheckNewStrips(const QStringList &identifiers, Plasma::DataEngin
     start();
 }
 
-void CheckNewStrips::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
+void CheckNewStrips::dataUpdated(const QString &source, const QVariantMap &data)
 {
     QString lastIdentifierSuffix;
 
@@ -32,8 +33,6 @@ void CheckNewStrips::dataUpdated(const QString &source, const Plasma::DataEngine
         lastIdentifierSuffix = data[QStringLiteral("Identifier")].toString();
         lastIdentifierSuffix.remove(source);
     }
-
-    mEngine->disconnectSource(source, this);
 
     if (!lastIdentifierSuffix.isEmpty()) {
         QString temp = source;
@@ -44,7 +43,9 @@ void CheckNewStrips::dataUpdated(const QString &source, const Plasma::DataEngine
 
     if (mIndex < mIdentifiers.count()) {
         const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
-        mEngine->connectSource(newSource, this);
+        mEngine->requestSource(newSource, [this, newSource](const QVariantMap &data) {
+            dataUpdated(newSource, data);
+        });
     } else {
         mIndex = 0;
     }
@@ -59,6 +60,8 @@ void CheckNewStrips::start()
 
     if (mIndex < mIdentifiers.count()) {
         const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
-        mEngine->connectSource(newSource, this);
+        mEngine->requestSource(newSource, [this, newSource](const QVariantMap &data) {
+            dataUpdated(newSource, data);
+        });
     }
 }

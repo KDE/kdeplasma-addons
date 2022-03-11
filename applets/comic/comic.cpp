@@ -141,13 +141,12 @@ ComicApplet::~ComicApplet()
     delete mSavingDir;
 }
 
-void ComicApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
+void ComicApplet::dataUpdated(const QString &source, const QVariantMap &data)
 {
     setBusy(false);
 
     // disconnect prefetched comic strips
     if (mEngine && source != mOldSource) {
-        mEngine->disconnectSource(source, this);
         return;
     }
 
@@ -159,7 +158,6 @@ void ComicApplet::dataUpdated(const QString &source, const Plasma::DataEngine::D
     if (hasError) {
         const QString previousIdentifierSuffix = data[QStringLiteral("Previous identifier suffix")].toString();
         if (mEngine && !mShowErrorPicture && !previousIdentifierSuffix.isEmpty()) {
-            mEngine->disconnectSource(source, this);
             updateComic(previousIdentifierSuffix);
         }
         return;
@@ -180,19 +178,18 @@ void ComicApplet::dataUpdated(const QString &source, const Plasma::DataEngine::D
     slotStorePosition();
 
     if (mEngine) {
-        // disconnect if there is either no error, or an error that can not be fixed automatically
-        if (!errorAutoFixable) {
-            mEngine->disconnectSource(source, this);
-        }
-
         // prefetch the previous and following comic for faster navigation
         if (mCurrent.hasNext()) {
             const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.next();
-            mEngine->connectSource(prefetch, this);
+            mEngine->requestSource(prefetch, [this, prefetch](const QVariantMap &data) {
+                dataUpdated(prefetch, data);
+            });
         }
         if (mCurrent.hasPrev()) {
             const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
-            mEngine->connectSource(prefetch, this);
+            mEngine->requestSource(prefetch, [this, prefetch](const QVariantMap &data) {
+                dataUpdated(prefetch, data);
+            });
         }
     }
 
@@ -333,8 +330,7 @@ void ComicApplet::configChanged()
     auto oldMaxComicLimit = mMaxComicLimit;
     mMaxComicLimit = cg.readEntry("maxComicLimit", CACHE_LIMIT);
     if (oldMaxComicLimit != mMaxComicLimit && mEngine) {
-        mEngine->disconnectSource(QLatin1String("setting_maxComicLimit:") + QString::number(oldMaxComicLimit), this);
-        mEngine->connectSource(QLatin1String("setting_maxComicLimit:") + QString::number(mMaxComicLimit), this);
+        mEngine->setMaxComicLimit(mMaxComicLimit);
     }
 
     globalComicUpdater->load();
@@ -475,18 +471,16 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
         // if there was an error only disconnect the oldSource if it had nothing to do with the error or if the comic changed, that way updates of the error can
         // come in
         if (!mIdentifierError.isEmpty() && !mIdentifierError.contains(id)) {
-            mEngine->disconnectSource(mIdentifierError, this);
             mIdentifierError.clear();
         }
-        if ((mIdentifierError != mOldSource) && (mOldSource != identifier)) {
-            mEngine->disconnectSource(mOldSource, this);
-        }
         mOldSource = identifier;
-        mEngine->connectSource(identifier, this);
+        mEngine->requestSource(identifier, [this, identifier](const QVariantMap &data) {
+            dataUpdated(identifier, data);
+        });
         slotScaleToContent();
     } else {
         qWarning() << "Either no identifier was specified or the engine could not be created:"
-                   << "id" << id << "engine valid:" << (mEngine && mEngine->isValid());
+                   << "id" << id;
         setConfigurationRequired(true);
     }
     updateContextMenu();
