@@ -52,7 +52,7 @@ class ComicApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
     Q_PROPERTY(int maxComicLimit READ maxComicLimit WRITE setMaxComicLimit NOTIFY maxComicLimitChanged)
 
 public:
-    ComicApplet(QObject *parent, const QVariantList &args);
+    ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~ComicApplet() override;
 
     void init() override;

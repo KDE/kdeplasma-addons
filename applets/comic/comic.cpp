@@ -40,8 +40,8 @@ Q_GLOBAL_STATIC(ComicUpdater, globalComicUpdater)
 
 const int ComicApplet::CACHE_LIMIT = 20;
 
-ComicApplet::ComicApplet(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : Plasma::Applet(parent, data, args)
     , mProxy(nullptr)
     , mActiveComicModel(new ActiveComicModel(parent))
     , mDifferentComic(true)
