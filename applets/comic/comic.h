@@ -116,9 +116,6 @@ Q_SIGNALS:
     void providerUpdateIntervalChanged();
     void maxComicLimitChanged();
 
-public Q_SLOTS:
-    void dataUpdated(const QString &name, const ComicMetaData &data);
-
 private Q_SLOTS:
     void slotTabChanged(const QString &newIdentifier);
     void slotNextDay();
@@ -167,6 +164,7 @@ private:
     void refreshComicData();
     void setTabHighlighted(const QString &id, bool highlight);
     bool isTabHighlighted(const QString &id) const;
+    void dataUpdated(const QString &name, const ComicMetaData &data);
 
 private:
     static const int CACHE_LIMIT;

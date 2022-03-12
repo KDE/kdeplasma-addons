@@ -65,15 +65,13 @@ public:
 
     void start() override;
 
-public Q_SLOTS:
-    void dataUpdated(const QString &source, const ComicMetaData &data);
-
 protected:
     bool doKill() override;
     bool doSuspend() override;
     bool doResume() override;
 
 private:
+    void dataUpdated(const QString &source, const ComicMetaData &data);
     /**
      * Sets the total number of comics to download.
      * @param currentSuffix if empty the from and to identifier suffix will be used.

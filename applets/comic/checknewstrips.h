@@ -29,13 +29,11 @@ Q_SIGNALS:
      */
     void lastStrip(int index, const QString &identifier, const QString &suffix);
 
-public Q_SLOTS:
-    void dataUpdated(const QString &name, const ComicMetaData &data);
-
 private Q_SLOTS:
     void start();
 
 private:
+    void dataUpdated(const QString &name, const ComicMetaData &data);
     int mMinutes;
     int mIndex;
     ComicEngine *mEngine;

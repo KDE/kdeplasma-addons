@@ -45,9 +45,6 @@ public:
     using ComicRequestCallback = const std::function<void(const ComicMetaData &data)> &;
     bool requestSource(const QString &identifier, ComicRequestCallback callback);
 
-Q_SIGNALS:
-    void sourceUpdated(const QString &identifier);
-
 protected:
     void init();
 
@@ -56,10 +53,10 @@ private:
     void error(ComicProvider *, ComicRequestCallback callback);
     void onOnlineStateChanged(bool);
     void setComicData(ComicProvider *provider, ComicRequestCallback callback);
+    QString lastCachedIdentifier(const QString &identifier) const;
 
 private:
     bool mEmptySuffix;
-    QString lastCachedIdentifier(const QString &identifier) const;
     QString mIdentifierError;
     QHash<QString, ComicProvider *> m_jobs;
     QT_WARNING_PUSH
