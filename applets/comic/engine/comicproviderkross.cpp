@@ -10,7 +10,7 @@
 
 KPackage::PackageStructure *ComicProviderKross::m_packageStructure(nullptr);
 
-ComicProviderKross::ComicProviderKross(QObject *parent, const KPluginMetaData &data, const QString &type, const QVariant &identifier)
+ComicProviderKross::ComicProviderKross(QObject *parent, const KPluginMetaData &data, ComicProvider::IdentifierType type, const QVariant &identifier)
     : ComicProvider(parent, data, type, identifier)
     , m_wrapper(this)
 {
@@ -116,7 +116,3 @@ KPackage::PackageStructure *ComicProviderKross::packageStructure()
     }
     return m_packageStructure;
 }
-
-// K_PLUGIN_FACTORY_WITH_JSON(ComicProviderKrossFactory, "plasma-packagestructure-comic.json", registerPlugin<ComicProviderKross>();)
-
-// #include "comicproviderkross.moc"

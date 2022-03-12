@@ -79,21 +79,21 @@ public:
     QHash<KJob *, QUrl> mRedirections;
 };
 
-ComicProvider::ComicProvider(QObject *parent, const KPluginMetaData &data, const QString &type, const QVariant &identifier)
+ComicProvider::ComicProvider(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier)
     : QObject(parent)
     , d(new Private(this, data))
 {
-    if (type == QLatin1String("Date")) {
+    if (type == DateIdentifier) {
         d->mRequestedDate = identifier.toDate();
-    } else if (type == QLatin1String("Number")) {
+    } else if (type == NumberIdentifier) {
         d->mRequestedNumber = identifier.toInt();
-    } else if (type == QLatin1String("String")) {
+    } else if (type == StringIdentifier) {
         d->mRequestedId = identifier.toString();
 
         int index = d->mRequestedId.indexOf(QLatin1Char(':'));
         d->mRequestedComicName = d->mRequestedId.mid(0, index);
     } else {
-        Q_ASSERT(false && "Invalid type passed to comic provider");
+        qFatal("Invalid type passed to comic provider");
     }
 
     d->mTimer->start();

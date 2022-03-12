@@ -26,7 +26,7 @@ static QString identifierToPath(const QString &identifier)
     return dataDir + QString::fromLatin1(QUrl::toPercentEncoding(identifier));
 }
 
-CachedProvider::CachedProvider(QObject *parent, const KPluginMetaData &data, const QString &type, const QString &identifier)
+CachedProvider::CachedProvider(QObject *parent, const KPluginMetaData &data, ComicProvider::IdentifierType type, const QString &identifier)
     : ComicProvider(parent, data, type, identifier)
 {
     QTimer::singleShot(0, this, &CachedProvider::triggerFinished);

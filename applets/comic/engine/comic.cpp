@@ -19,6 +19,7 @@
 
 #include "cachedprovider.h"
 #include "comic_debug.h"
+#include "comicprovider.h"
 #include "comicproviderkross.h"
 
 ComicEngine::ComicEngine()
@@ -87,7 +88,7 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
 
         // check whether it is cached, make sure second part present
         if (parts.count() > 1 && CachedProvider::isCached(identifier)) {
-            ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, QStringLiteral("String"), identifier);
+            ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, ComicProvider::StringIdentifier, identifier);
             m_jobs[identifier] = provider;
             connect(provider, &ComicProvider::finished, this, [this, callback, provider]() {
                 finished(provider, callback);
@@ -136,6 +137,7 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
         // const QString type = service->property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"), QVariant::String).toString();
         const QString type = pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType"));
         QVariant data;
+        ComicProvider::IdentifierType identifierType = ComicProvider::StringIdentifier;
         if (type == QLatin1String("Date")) {
             QDate date = QDate::fromString(parts[1], Qt::ISODate);
             if (!date.isValid()) {
@@ -143,12 +145,15 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
             }
 
             data = date;
+            identifierType = ComicProvider::DateIdentifier;
         } else if (type == QLatin1String("Number")) {
             data = parts[1].toInt();
+            identifierType = ComicProvider::NumberIdentifier;
         } else if (type == QLatin1String("String")) {
             data = parts[1];
+            identifierType = ComicProvider::StringIdentifier;
         }
-        provider = new ComicProviderKross(this, pkg.metadata(), type, data);
+        provider = new ComicProviderKross(this, pkg.metadata(), identifierType, data);
         provider->setIsCurrent(isCurrentComic);
 
         m_jobs[identifier] = provider;
@@ -306,5 +311,3 @@ QString ComicEngine::lastCachedIdentifier(const QString &identifier) const
 
     return previousIdentifier;
 }
-
-#include "comic.moc"

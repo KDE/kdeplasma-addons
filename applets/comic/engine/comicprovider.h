@@ -44,7 +44,7 @@ public:
      * @param parent The parent object.
      * @param args Arguments passed by the plugin loader.
      */
-    ComicProvider(QObject *parent, const KPluginMetaData &data, const QString &type, const QVariant &identifier);
+    ComicProvider(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier);
 
     /**
      * Destroys the comic provider.
