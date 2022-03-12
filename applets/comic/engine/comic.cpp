@@ -87,10 +87,7 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
 
         // check whether it is cached, make sure second part present
         if (parts.count() > 1 && CachedProvider::isCached(identifier)) {
-            QVariantList args;
-            args << QLatin1String("String") << identifier;
-
-            ComicProvider *provider = new CachedProvider(this, args);
+            ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, QStringLiteral("String"), identifier);
             m_jobs[identifier] = provider;
             connect(provider, &ComicProvider::finished, this, [this, callback, provider]() {
                 finished(provider, callback);
@@ -134,26 +131,24 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
 
         bool isCurrentComic = parts[1].isEmpty();
 
-        QVariantList args;
         ComicProvider *provider = nullptr;
 
         // const QString type = service->property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"), QVariant::String).toString();
         const QString type = pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType"));
+        QVariant data;
         if (type == QLatin1String("Date")) {
             QDate date = QDate::fromString(parts[1], Qt::ISODate);
             if (!date.isValid()) {
                 date = QDate::currentDate();
             }
 
-            args << QLatin1String("Date") << date;
+            data = date;
         } else if (type == QLatin1String("Number")) {
-            args << QLatin1String("Number") << parts[1].toInt();
+            data = parts[1].toInt();
         } else if (type == QLatin1String("String")) {
-            args << QLatin1String("String") << parts[1];
+            data = parts[1];
         }
-        args << QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/comics/") + parts[0] + QLatin1String("/metadata.desktop"));
-
-        provider = new ComicProviderKross(this, args);
+        provider = new ComicProviderKross(this, pkg.metadata(), type, data);
         provider->setIsCurrent(isCurrentComic);
 
         m_jobs[identifier] = provider;

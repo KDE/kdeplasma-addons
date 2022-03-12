@@ -10,8 +10,8 @@
 
 KPackage::PackageStructure *ComicProviderKross::m_packageStructure(nullptr);
 
-ComicProviderKross::ComicProviderKross(QObject *parent, const QVariantList &args)
-    : ComicProvider(parent, args)
+ComicProviderKross::ComicProviderKross(QObject *parent, const KPluginMetaData &data, const QString &type, const QVariant &identifier)
+    : ComicProvider(parent, data, type, identifier)
     , m_wrapper(this)
 {
 }

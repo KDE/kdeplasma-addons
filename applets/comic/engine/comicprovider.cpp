@@ -16,7 +16,7 @@
 class ComicProvider::Private
 {
 public:
-    Private(const KPluginMetaData &data, ComicProvider *parent)
+    Private(ComicProvider *parent, const KPluginMetaData &data)
         : mParent(parent)
         , mIsCurrent(false)
         , mFirstStripNumber(1)
@@ -74,24 +74,21 @@ public:
     QDate mFirstStripDate;
     int mRequestedNumber;
     int mFirstStripNumber;
-    KPluginMetaData mComicDescription;
+    const KPluginMetaData mComicDescription;
     QTimer *mTimer;
     QHash<KJob *, QUrl> mRedirections;
 };
 
-ComicProvider::ComicProvider(QObject *parent, const QVariantList &args)
+ComicProvider::ComicProvider(QObject *parent, const KPluginMetaData &data, const QString &type, const QVariant &identifier)
     : QObject(parent)
-    , d(new Private(KPluginMetaData(args.count() > 2 ? args[2].toString() : QString()), this))
+    , d(new Private(this, data))
 {
-    Q_ASSERT(args.count() >= 2);
-    const QString type = args[0].toString();
-
     if (type == QLatin1String("Date")) {
-        d->mRequestedDate = args[1].toDate();
+        d->mRequestedDate = identifier.toDate();
     } else if (type == QLatin1String("Number")) {
-        d->mRequestedNumber = args[1].toInt();
+        d->mRequestedNumber = identifier.toInt();
     } else if (type == QLatin1String("String")) {
-        d->mRequestedId = args[1].toString();
+        d->mRequestedId = identifier.toString();
 
         int index = d->mRequestedId.indexOf(QLatin1Char(':'));
         d->mRequestedComicName = d->mRequestedId.mid(0, index);
