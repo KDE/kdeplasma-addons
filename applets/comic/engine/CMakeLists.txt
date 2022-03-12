@@ -50,23 +50,3 @@ target_link_libraries(plasmacomicprovidercore
     KF5::KIOCore
     KF5::I18n
 )
-
-########### kross ###############
-
-set(plasma_comic_krossprovider_SRCS
-  comicproviderkross.cpp
-  comicproviderwrapper.cpp
-  comic_package.cpp
-  ${LOGGING_SRCS}
-)
-
-add_library(plasma_comic_krossprovider MODULE ${plasma_comic_krossprovider_SRCS})
-target_link_libraries(plasma_comic_krossprovider plasmacomicprovidercore
-    Qt::Gui
-    Qt::Qml
-    KF5::KIOCore
-    KF5::Plasma
-    KF5::I18n
-)
-
-install( TARGETS plasma_comic_krossprovider DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/dataengine)
