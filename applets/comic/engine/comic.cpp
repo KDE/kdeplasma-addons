@@ -154,10 +154,6 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
         args << QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/comics/") + parts[0] + QLatin1String("/metadata.desktop"));
 
         provider = new ComicProviderKross(this, args);
-        if (!provider) {
-            callback(ComicMetaData{.error = true});
-            return false;
-        }
         provider->setIsCurrent(isCurrentComic);
 
         m_jobs[identifier] = provider;
