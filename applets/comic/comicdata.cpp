@@ -54,25 +54,24 @@ void ComicData::storePosition(bool store)
     save();
 }
 
-void ComicData::setData(const QVariantMap &data)
+void ComicData::setData(const ComicMetaData &data)
 {
-    const bool hasError = data[QStringLiteral("Error")].toBool();
-    if (!hasError) {
-        mImage = data[QStringLiteral("Image")].value<QImage>();
-        mPrev = data[QStringLiteral("Previous identifier suffix")].toString();
-        mNext = data[QStringLiteral("Next identifier suffix")].toString();
-        mAdditionalText = data[QStringLiteral("Additional text")].toString();
+    if (!data.error) {
+        mImage = data.image;
+        mPrev = data.previousIdentifier;
+        mNext = data.nextIdentifier;
+        mAdditionalText = data.additionalText;
     }
 
-    mWebsiteUrl = data[QStringLiteral("Website Url")].toUrl();
-    mImageUrl = data[QStringLiteral("Image Url")].toUrl();
-    mShopUrl = data[QStringLiteral("Shop Url")].toUrl();
-    mFirst = data[QStringLiteral("First strip identifier suffix")].toString();
-    mStripTitle = data[QStringLiteral("Strip title")].toString();
-    mAuthor = data[QStringLiteral("Comic Author")].toString();
-    mTitle = data[QStringLiteral("Title")].toString();
+    mWebsiteUrl = data.websiteUrl;
+    mImageUrl = data.imageUrl;
+    mShopUrl = data.shopUrl;
+    mFirst = data.firstStripIdentifier;
+    mStripTitle = data.stripTitle;
+    mAuthor = data.comicAuthor;
+    mTitle = data.providerName;
 
-    const QString suffixType = data[QStringLiteral("SuffixType")].toString();
+    const QString suffixType = data.suffixType;
     if (suffixType == QLatin1String("Date")) {
         mType = Date;
     } else if (suffixType == QLatin1String("Number")) {
@@ -81,7 +80,7 @@ void ComicData::setData(const QVariantMap &data)
         mType = String;
     }
 
-    QString temp = data[QStringLiteral("Identifier")].toString();
+    QString temp = data.identifier;
     mCurrent = temp.remove(mId + QLatin1Char(':'));
 
     // found a new last identifier
@@ -105,8 +104,8 @@ void ComicData::setData(const QVariantMap &data)
         mCurrentReadable = mCurrent;
     }
 
-    mIsLeftToRight = data[QStringLiteral("isLeftToRight")].toBool();
-    mIsTopToBottom = data[QStringLiteral("isTopToBottom")].toBool();
+    mIsLeftToRight = data.isLeftToRight;
+    mIsTopToBottom = data.isTopToBottom;
 
     save();
 }

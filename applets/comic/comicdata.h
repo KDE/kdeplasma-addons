@@ -8,6 +8,7 @@
 #define COMIC_DATA_H
 
 #include "comicinfo.h"
+#include "engine/types.h"
 
 // Qt
 #include <KConfigGroup>
@@ -22,7 +23,7 @@ public:
 
     void init(const QString &id, const KConfigGroup &config);
 
-    void setData(const QVariantMap &data);
+    void setData(const ComicMetaData &data);
 
     IdentifierType type() const
     {

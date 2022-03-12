@@ -11,14 +11,14 @@
 #ifndef COMIC_H
 #define COMIC_H
 
-#include "comicdata.h"
-
 #include <QDate>
 #include <QUrl>
 
 #include <Plasma/Applet>
 
 #include "activecomicmodel.h"
+#include "comicdata.h"
+#include "engine/comic.h"
 
 class CheckNewStrips;
 class ComicModel;
@@ -29,7 +29,6 @@ class QAction;
 class QSortFilterProxyModel;
 class QTimer;
 class SavingDir;
-class ComicEngine;
 
 class ComicApplet : public Plasma::Applet
 {
@@ -118,7 +117,7 @@ Q_SIGNALS:
     void maxComicLimitChanged();
 
 public Q_SLOTS:
-    void dataUpdated(const QString &name, const QVariantMap &data);
+    void dataUpdated(const QString &name, const ComicMetaData &data);
 
 private Q_SLOTS:
     void slotTabChanged(const QString &newIdentifier);

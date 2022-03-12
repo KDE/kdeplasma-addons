@@ -7,7 +7,6 @@
  */
 
 #include "comicmodel.h"
-#include "engine/comic.h"
 #include "engine/comicprovider.h"
 
 #include <QDebug>

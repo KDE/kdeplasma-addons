@@ -12,6 +12,7 @@
 #include <QAbstractTableModel>
 
 #include "engine/comic.h"
+
 class ComicModel : public QAbstractTableModel
 {
     Q_OBJECT

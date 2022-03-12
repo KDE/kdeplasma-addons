@@ -5,7 +5,6 @@
  */
 
 #include "checknewstrips.h"
-#include "engine/comic.h"
 
 #include <QTimer>
 
@@ -25,12 +24,12 @@ CheckNewStrips::CheckNewStrips(const QStringList &identifiers, ComicEngine *engi
     start();
 }
 
-void CheckNewStrips::dataUpdated(const QString &source, const QVariantMap &data)
+void CheckNewStrips::dataUpdated(const QString &source, const ComicMetaData &data)
 {
     QString lastIdentifierSuffix;
 
-    if (!data[QStringLiteral("Error")].toBool()) {
-        lastIdentifierSuffix = data[QStringLiteral("Identifier")].toString();
+    if (!data.error) {
+        lastIdentifierSuffix = data.identifier;
         lastIdentifierSuffix.remove(source);
     }
 
@@ -43,7 +42,7 @@ void CheckNewStrips::dataUpdated(const QString &source, const QVariantMap &data)
 
     if (mIndex < mIdentifiers.count()) {
         const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
-        mEngine->requestSource(newSource, [this, newSource](const QVariantMap &data) {
+        mEngine->requestSource(newSource, [this, newSource](const auto &data) {
             dataUpdated(newSource, data);
         });
     } else {
@@ -60,7 +59,7 @@ void CheckNewStrips::start()
 
     if (mIndex < mIdentifiers.count()) {
         const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
-        mEngine->requestSource(newSource, [this, newSource](const QVariantMap &data) {
+        mEngine->requestSource(newSource, [this, newSource](const auto &data) {
             dataUpdated(newSource, data);
         });
     }

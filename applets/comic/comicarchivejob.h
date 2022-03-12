@@ -66,7 +66,7 @@ public:
     void start() override;
 
 public Q_SLOTS:
-    void dataUpdated(const QString &source, const QVariantMap &data);
+    void dataUpdated(const QString &source, const ComicMetaData &data);
 
 protected:
     bool doKill() override;

@@ -35,7 +35,6 @@
 
 #include "comicmodel.h"
 #include "comicupdater.h"
-#include "engine/comic.h"
 
 Q_GLOBAL_STATIC(ComicUpdater, globalComicUpdater)
 
@@ -141,7 +140,7 @@ ComicApplet::~ComicApplet()
     delete mSavingDir;
 }
 
-void ComicApplet::dataUpdated(const QString &source, const QVariantMap &data)
+void ComicApplet::dataUpdated(const QString &source, const ComicMetaData &data)
 {
     setBusy(false);
 
@@ -153,12 +152,9 @@ void ComicApplet::dataUpdated(const QString &source, const QVariantMap &data)
     setConfigurationRequired(false);
 
     // there was an error, display information as image
-    const bool hasError = data[QStringLiteral("Error")].toBool();
-    const bool errorAutoFixable = data[QStringLiteral("Error automatically fixable")].toBool();
-    if (hasError) {
-        const QString previousIdentifierSuffix = data[QStringLiteral("Previous identifier suffix")].toString();
-        if (mEngine && !mShowErrorPicture && !previousIdentifierSuffix.isEmpty()) {
-            updateComic(previousIdentifierSuffix);
+    if (data.error) {
+        if (mEngine && !mShowErrorPicture && !data.previousIdentifier.isEmpty()) {
+            updateComic(data.previousIdentifier);
         }
         return;
     }
@@ -181,13 +177,13 @@ void ComicApplet::dataUpdated(const QString &source, const QVariantMap &data)
         // prefetch the previous and following comic for faster navigation
         if (mCurrent.hasNext()) {
             const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.next();
-            mEngine->requestSource(prefetch, [this, prefetch](const QVariantMap &data) {
+            mEngine->requestSource(prefetch, [this, prefetch](const auto &data) {
                 dataUpdated(prefetch, data);
             });
         }
         if (mCurrent.hasPrev()) {
             const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
-            mEngine->requestSource(prefetch, [this, prefetch](const QVariantMap &data) {
+            mEngine->requestSource(prefetch, [this, prefetch](const auto &data) {
                 dataUpdated(prefetch, data);
             });
         }
@@ -474,7 +470,7 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
             mIdentifierError.clear();
         }
         mOldSource = identifier;
-        mEngine->requestSource(identifier, [this, identifier](const QVariantMap &data) {
+        mEngine->requestSource(identifier, [this, identifier](const auto &data) {
             dataUpdated(identifier, data);
         });
         slotScaleToContent();

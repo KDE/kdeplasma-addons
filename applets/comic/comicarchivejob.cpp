@@ -121,7 +121,7 @@ void ComicArchiveJob::start()
     }
 }
 
-void ComicArchiveJob::dataUpdated(const QString &source, const QVariantMap &data)
+void ComicArchiveJob::dataUpdated(const QString &source, const ComicMetaData &data)
 {
     if (!mZip) {
         qWarning() << "No zip file, aborting.";
@@ -131,21 +131,21 @@ void ComicArchiveJob::dataUpdated(const QString &source, const QVariantMap &data
         return;
     }
 
-    const QString currentIdentifier = data[QStringLiteral("Identifier")].toString();
+    const QString currentIdentifier = data.identifier;
     QString currentIdentifierSuffix = currentIdentifier;
     currentIdentifierSuffix.remove(mPluginName + QLatin1Char(':'));
 
-    const QImage image = data[QStringLiteral("Image")].value<QImage>();
-    const bool hasError = data[QStringLiteral("Error")].toBool() || image.isNull();
-    const QString previousIdentifierSuffix = data[QStringLiteral("Previous identifier suffix")].toString();
-    const QString nextIdentifierSuffix = data[QStringLiteral("Next identifier suffix")].toString();
-    const QString firstIdentifierSuffix = data[QStringLiteral("First strip identifier suffix")].toString();
+    const QImage image = data.image;
+    const bool hasError = data.error || image.isNull();
+    const QString previousIdentifierSuffix = data.previousIdentifier;
+    const QString nextIdentifierSuffix = data.nextIdentifier;
+    const QString firstIdentifierSuffix = data.firstStripIdentifier;
 
-    mAuthors << data[QStringLiteral("Comic Author")].toString().split(QLatin1Char(','), Qt::SkipEmptyParts);
+    mAuthors << data.comicAuthor.split(QLatin1Char(','), Qt::SkipEmptyParts);
     mAuthors.removeDuplicates();
 
     if (mComicTitle.isEmpty()) {
-        mComicTitle = data[QStringLiteral("Title")].toString();
+        mComicTitle = data.stripTitle;
     }
 
     if (hasError) {
@@ -330,7 +330,7 @@ void ComicArchiveJob::requestComic(QString identifier) // krazy:exclude=passbyva
                        qMakePair(QStringLiteral("source"), identifier),
                        qMakePair(QStringLiteral("destination"), mDest.toString()));
 
-    mEngine->requestSource(identifier, [this, identifier](const QVariantMap &data) {
+    mEngine->requestSource(identifier, [this, identifier](const auto &data) {
         dataUpdated(identifier, data);
     });
 }

@@ -11,15 +11,12 @@
 #include <QIcon>
 #include <QNetworkConfigurationManager>
 #include <QSet>
+#include <QUrl>
 #include <QVariant>
 
-class ComicProvider;
+#include "types.h"
 
-struct ComicProviderInfo {
-    QString pluginId;
-    QString name;
-    QString icon;
-};
+class ComicProvider;
 
 /**
  * This class provides the comic strip.
@@ -45,7 +42,7 @@ public:
     QList<ComicProviderInfo> loadProviders();
 
     void setMaxComicLimit(int maxComicLimit);
-    using ComicRequestCallback = const std::function<void(const QVariantMap &data)> &;
+    using ComicRequestCallback = const std::function<void(const ComicMetaData &data)> &;
     bool requestSource(const QString &identifier, ComicRequestCallback callback);
 
 Q_SIGNALS:
@@ -65,7 +62,10 @@ private:
     QString lastCachedIdentifier(const QString &identifier) const;
     QString mIdentifierError;
     QHash<QString, ComicProvider *> m_jobs;
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_DEPRECATED
     QNetworkConfigurationManager m_networkConfigurationManager;
+    QT_WARNING_POP
     QSet<QString> mProviders;
 };
 

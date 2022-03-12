@@ -6,6 +6,7 @@
 
 #include "cachedprovider.h"
 #include "comic_debug.h"
+#include "types.h"
 
 #include <QDebug>
 #include <QDir>
@@ -121,7 +122,7 @@ bool CachedProvider::isCached(const QString &identifier)
     return QFile::exists(identifierToPath(identifier));
 }
 
-bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic, const Settings &info)
+bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic, const ComicMetaData &data)
 {
     const QString path = identifierToPath(identifier);
 
@@ -130,19 +131,22 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
     const QString pathMain = identifierToPath(comicName);
     const QString dirPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/plasma_engine_comic/");
 
-    if (!info.isEmpty()) {
-        QSettings settings(path + QLatin1String(".conf"), QSettings::IniFormat);
         QSettings settingsMain(pathMain + QLatin1String(".conf"), QSettings::IniFormat);
+        settingsMain.setValue(QStringLiteral("firstStripIdentifier"), data.firstStripIdentifier);
+        settingsMain.setValue(QStringLiteral("title"), data.providerName);
+        settingsMain.setValue(QStringLiteral("lastCachedStripIdentifier"), data.lastCachedStripIdentifier);
+        settingsMain.setValue(QStringLiteral("suffixType"), data.suffixType);
+        settingsMain.setValue(QStringLiteral("shopUrl"), data.shopUrl);
+        settingsMain.setValue(QStringLiteral("isLeftToRight"), data.isLeftToRight);
+        settingsMain.setValue(QStringLiteral("isTopToBottom"), data.isTopToBottom);
 
-        for (Settings::const_iterator i = info.constBegin(); i != info.constEnd(); ++i) {
-            if ((i.key() == QLatin1String("firstStripIdentifier")) || (i.key() == QLatin1String("title"))
-                || (i.key() == QLatin1String("lastCachedStripIdentifier")) || (i.key() == QLatin1String("suffixType")) || (i.key() == QLatin1String("shopUrl"))
-                || (i.key() == QLatin1String("isLeftToRight")) || (i.key() == QLatin1String("isTopToBottom"))) {
-                settingsMain.setValue(i.key(), i.value());
-            } else {
-                settings.setValue(i.key(), i.value());
-            }
-        }
+        QSettings settings(path + QLatin1String(".conf"), QSettings::IniFormat);
+        settings.setValue(QStringLiteral("additionalText"), data.additionalText);
+        settings.setValue(QStringLiteral("comicAuthor"), data.comicAuthor);
+        settings.setValue(QStringLiteral("imageUrl"), data.imageUrl);
+        settings.setValue(QStringLiteral("nextIdentifier"), data.nextIdentifier);
+        settings.setValue(QStringLiteral("previousIdentifier"), data.previousIdentifier);
+        settings.setValue(QStringLiteral("websiteUrl"), data.websiteUrl);
 
         QStringList comics;
         if (settingsMain.contains(QLatin1String("comics"))) {
@@ -180,7 +184,6 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
             }
         }
         settingsMain.setValue(QLatin1String("comics"), comics);
-    }
 
     return comic.save(path, "PNG");
 }
