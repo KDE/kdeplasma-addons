@@ -199,13 +199,6 @@ void ComicApplet::updateView()
     updateContextMenu();
 }
 
-void ComicApplet::loadProviders()
-{
-    if (mEngine) {
-        QMetaObject::invokeMethod(mEngine, "loadProviders");
-    }
-}
-
 void ComicApplet::positionFullView(QWindow *window)
 {
     if (!window || !window->screen()) {
