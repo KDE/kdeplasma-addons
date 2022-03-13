@@ -16,6 +16,7 @@
 
 #include <KPackage/PackageLoader>
 #include <Plasma/DataContainer>
+#include <qloggingcategory.h>
 
 #include "cachedprovider.h"
 #include "comic_debug.h"
@@ -32,21 +33,6 @@ ComicEngine::ComicEngine()
 
 ComicEngine::~ComicEngine()
 {
-}
-
-void ComicEngine::init()
-{
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_DEPRECATED
-    connect(&m_networkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged, this, &ComicEngine::onOnlineStateChanged);
-    QT_WARNING_POP
-}
-
-void ComicEngine::onOnlineStateChanged(bool isOnline)
-{
-    if (isOnline && !mIdentifierError.isEmpty()) {
-        // TODO sourceRequestEvent(mIdentifierError);
-    }
 }
 
 QList<ComicProviderInfo> ComicEngine::loadProviders()
@@ -117,6 +103,7 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
 
         // check if there is a connection
         if (!m_networkConfigurationManager.isOnline()) {
+            qCDebug(PLASMA_COMIC) << "Currently offline, requested identifier was" << mIdentifierError;
             mIdentifierError = identifier;
             ComicMetaData data;
             data.error = true;

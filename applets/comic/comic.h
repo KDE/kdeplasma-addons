@@ -12,6 +12,7 @@
 #define COMIC_H
 
 #include <QDate>
+#include <QNetworkConfigurationManager>
 #include <QUrl>
 
 #include <Plasma/Applet>
@@ -172,6 +173,11 @@ private:
 private:
     static const int CACHE_LIMIT;
     ComicModel *mModel;
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_DEPRECATED
+    QNetworkConfigurationManager m_networkConfigurationManager;
+    QT_WARNING_POP
+    QString mPreviousFailedIdentifier;
     QSortFilterProxyModel *mProxy;
     ActiveComicModel *mActiveComicModel;
     QVariantMap mComicData;

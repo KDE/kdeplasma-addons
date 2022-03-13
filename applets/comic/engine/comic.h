@@ -45,13 +45,9 @@ public:
     using ComicRequestCallback = const std::function<void(const ComicMetaData &data)> &;
     bool requestSource(const QString &identifier, ComicRequestCallback callback);
 
-protected:
-    void init();
-
 private:
     void finished(ComicProvider *, ComicRequestCallback callback);
     void error(ComicProvider *, ComicRequestCallback callback);
-    void onOnlineStateChanged(bool);
     void setComicData(ComicProvider *provider, ComicRequestCallback callback);
     QString lastCachedIdentifier(const QString &identifier) const;
 

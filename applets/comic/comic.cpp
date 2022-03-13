@@ -10,6 +10,7 @@
 
 #include "comic.h"
 #include "checknewstrips.h"
+#include "comic_debug.h"
 #include "comicarchivedialog.h"
 #include "comicarchivejob.h"
 #include "comicsaver.h"
@@ -133,6 +134,19 @@ void ComicApplet::init()
 
     updateUsedComics();
     changeComic(true);
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_DEPRECATED
+    connect(&m_networkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged, this, [this](bool isOnline) {
+        if (!isOnline) {
+            return;
+        }
+        qCDebug(PLASMA_COMIC) << "Online status changed to true, requesting comic" << mPreviousFailedIdentifier;
+        mEngine->requestSource(mPreviousFailedIdentifier, [this](const auto &data) {
+            dataUpdated(mPreviousFailedIdentifier, data);
+        });
+    });
+    QT_WARNING_POP
 }
 
 ComicApplet::~ComicApplet()
@@ -153,6 +167,7 @@ void ComicApplet::dataUpdated(const QString &source, const ComicMetaData &data)
 
     // there was an error, display information as image
     if (data.error) {
+        mPreviousFailedIdentifier = source;
         if (mEngine && !mShowErrorPicture && !data.previousIdentifier.isEmpty()) {
             updateComic(data.previousIdentifier);
         }
