@@ -73,7 +73,7 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
         const QStringList parts = identifier.split(QLatin1Char(':'), Qt::KeepEmptyParts);
 
         // check whether it is cached, make sure second part present
-        if (parts.count() > 1 && CachedProvider::isCached(identifier)) {
+        if (parts.count() > 1 && (CachedProvider::isCached(identifier) || !m_networkConfigurationManager.isOnline())) {
             ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, ComicProvider::StringIdentifier, identifier);
             m_jobs[identifier] = provider;
             connect(provider, &ComicProvider::finished, this, [this, callback, provider]() {
@@ -175,9 +175,7 @@ void ComicEngine::finished(ComicProvider *provider, ComicRequestCallback callbac
     }
 
     // store in cache if it's not the response of a CachedProvider,
-    // if there is a valid image and if there is a next comic
-    // (if we're on today's comic it could become stale)
-    if (!provider->inherits("CachedProvider") && !provider->image().isNull() && !provider->nextIdentifier().isEmpty()) {
+    if (!provider->inherits("CachedProvider") && !provider->image().isNull()) {
         ComicMetaData info;
 
         info.websiteUrl = provider->websiteUrl();
