@@ -4,6 +4,7 @@
  *   SPDX-FileCopyrightText: 2008-2011 Matthias Fuchs <mat69@gmx.net>
  *   SPDX-FileCopyrightText: 2012 Reza Fatahilah Shah <rshah0385@kireihana.com>
  *   SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+ *   SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */

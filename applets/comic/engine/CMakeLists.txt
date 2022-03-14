@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
 set(LOGGING_SRCS)
 ecm_qt_declare_logging_category(LOGGING_SRCS
     HEADER comic_debug.h

@@ -1,5 +1,6 @@
 /*
  *   SPDX-FileCopyrightText: 2011 Matthias Fuchs <mat69@gmx.net>
+ *   SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */

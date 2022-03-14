@@ -2,6 +2,7 @@
  *   SPDX-FileCopyrightText: 2007 Tobias Koenig <tokoe@kde.org>
  *   SPDX-FileCopyrightText: 2008-2010 Matthias Fuchs <mat69@gmx.net>
  *   SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+ *   SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
  *
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
