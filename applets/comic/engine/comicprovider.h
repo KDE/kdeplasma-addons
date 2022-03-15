@@ -12,6 +12,8 @@
 #include <QDate>
 #include <QObject>
 
+#include "types.h"
+
 class QImage;
 class QUrl;
 
@@ -23,16 +25,6 @@ class ComicProvider : public QObject
     Q_OBJECT
 
 public:
-    /**
-     * Describes the type of how this comic provider
-     * references the previous or next comic strip.
-     */
-    enum IdentifierType {
-        DateIdentifier = 0, ///< References by date
-        NumberIdentifier, ///< References by numerical identifier
-        StringIdentifier, ///< References by arbitrary string
-    };
-
     enum RequestType {
         Page = 0,
         Image,
@@ -57,12 +49,6 @@ public:
      * comic provider.
      */
     virtual IdentifierType identifierType() const = 0;
-
-    /**
-     * Returns the type of suffix that is used by this
-     * comic provider.
-     */
-    virtual QString suffixType() const;
 
     /**
      * Returns the url of the website where the comic of that particular date resides.

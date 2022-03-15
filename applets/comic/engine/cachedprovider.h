@@ -27,7 +27,7 @@ public:
      * @param parent The parent object.
      * param args The arguments.
      */
-    explicit CachedProvider(QObject *parent, const KPluginMetaData &data, ComicProvider::IdentifierType type, const QString &identifier);
+    explicit CachedProvider(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QString &identifier);
 
     /**
      * Destroys the cached provider.
@@ -40,12 +40,6 @@ public:
      * Is always StringIdentifier here.
      */
     IdentifierType identifierType() const override;
-
-    /**
-     * Returns the type of identifier that is used by this
-     * comic provider.
-     */
-    QString suffixType() const override;
 
     /**
      * Returns the requested image.

@@ -74,11 +74,11 @@ StripSelector::~StripSelector()
 StripSelector *StripSelectorFactory::create(IdentifierType type)
 {
     switch (type) {
-    case Number:
+    case IdentifierType::NumberIdentifier:
         return new NumberStripSelector();
-    case Date:
+    case IdentifierType::DateIdentifier:
         return new DateStripSelector();
-    case String:
+    case IdentifierType::StringIdentifier:
         return new StringStripSelector();
     }
 

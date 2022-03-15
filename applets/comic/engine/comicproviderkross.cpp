@@ -11,7 +11,7 @@
 
 KPackage::PackageStructure *ComicProviderKross::m_packageStructure(nullptr);
 
-ComicProviderKross::ComicProviderKross(QObject *parent, const KPluginMetaData &data, ComicProvider::IdentifierType type, const QVariant &identifier)
+ComicProviderKross::ComicProviderKross(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier)
     : ComicProvider(parent, data, type, identifier)
     , m_wrapper(this)
 {
@@ -31,7 +31,7 @@ bool ComicProviderKross::isTopToBottom() const
     return m_wrapper.isTopToBottom();
 }
 
-ComicProvider::IdentifierType ComicProviderKross::identifierType() const
+IdentifierType ComicProviderKross::identifierType() const
 {
     return m_wrapper.identifierType();
 }
@@ -56,7 +56,7 @@ QString ComicProviderKross::identifierToString(const QVariant &identifier) const
     QString result;
 
     if (!identifier.isNull() && identifier.type() != QVariant::Bool) {
-        if (identifierType() == ComicProvider::DateIdentifier) {
+        if (identifierType() == IdentifierType::DateIdentifier) {
             result = identifier.toDate().toString(Qt::ISODate);
         } else {
             result = identifier.toString();

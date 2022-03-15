@@ -9,6 +9,7 @@
 #define COMICPROVIDERWRAPPER_H
 
 #include "comicprovider.h"
+#include "types.h"
 
 #include <QBuffer>
 #include <QByteArray>
@@ -185,7 +186,7 @@ public:
         qWarning() << str.toString();
     }
 
-    ComicProvider::IdentifierType identifierType() const;
+    IdentifierType identifierType() const;
     QImage comicImage();
     void pageRetrieved(int id, const QByteArray &data);
     void pageError(int id, const QString &message);

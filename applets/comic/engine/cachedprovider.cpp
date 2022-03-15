@@ -27,7 +27,7 @@ static QString identifierToPath(const QString &identifier)
     return dataDir + QString::fromLatin1(QUrl::toPercentEncoding(identifier));
 }
 
-CachedProvider::CachedProvider(QObject *parent, const KPluginMetaData &data, ComicProvider::IdentifierType type, const QString &identifier)
+CachedProvider::CachedProvider(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QString &identifier)
     : ComicProvider(parent, data, type, identifier)
 {
     QTimer::singleShot(0, this, &CachedProvider::triggerFinished);
@@ -37,9 +37,9 @@ CachedProvider::~CachedProvider()
 {
 }
 
-ComicProvider::IdentifierType CachedProvider::identifierType() const
+IdentifierType CachedProvider::identifierType() const
 {
-    return StringIdentifier;
+    return IdentifierType::StringIdentifier;
 }
 
 QImage CachedProvider::image() const
@@ -104,12 +104,6 @@ QString CachedProvider::additionalText() const
     return settings.value(QLatin1String("additionalText"), QString()).toString();
 }
 
-QString CachedProvider::suffixType() const
-{
-    QSettings settings(identifierToPath(requestedComicName()) + QLatin1String(".conf"), QSettings::IniFormat);
-    return settings.value(QLatin1String("suffixType"), QString()).toString();
-}
-
 QString CachedProvider::name() const
 {
     QSettings settings(identifierToPath(requestedComicName()) + QLatin1String(".conf"), QSettings::IniFormat);
@@ -139,7 +133,6 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
         settingsMain.setValue(QStringLiteral("firstStripIdentifier"), data.firstStripIdentifier);
         settingsMain.setValue(QStringLiteral("title"), data.providerName);
         settingsMain.setValue(QStringLiteral("lastCachedStripIdentifier"), data.lastCachedStripIdentifier);
-        settingsMain.setValue(QStringLiteral("suffixType"), data.suffixType);
         settingsMain.setValue(QStringLiteral("shopUrl"), data.shopUrl);
         settingsMain.setValue(QStringLiteral("isLeftToRight"), data.isLeftToRight);
         settingsMain.setValue(QStringLiteral("isTopToBottom"), data.isTopToBottom);

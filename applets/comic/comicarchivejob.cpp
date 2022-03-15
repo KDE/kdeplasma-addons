@@ -262,14 +262,14 @@ void ComicArchiveJob::defineTotalNumber(const QString &currentSuffix)
     // calculate a new value for total files, can be different from the previous one,
     // if there are no strips for certain days/numbers
     if (!currentSuffix.isEmpty()) {
-        if (mIdentifierType == Date) {
+        if (mIdentifierType == IdentifierType::DateIdentifier) {
             const QDate current = QDate::fromString(currentSuffix, QStringLiteral("yyyy-MM-dd"));
             const QDate to = QDate::fromString(mToIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
             if (current.isValid() && to.isValid()) {
                 // processed files + files still to download
                 mTotalFiles = mProcessedFiles + qAbs(current.daysTo(to));
             }
-        } else if (mIdentifierType == Number) {
+        } else if (mIdentifierType == IdentifierType::NumberIdentifier) {
             bool result = true;
             bool ok;
             const int current = currentSuffix.toInt(&ok);
@@ -294,13 +294,13 @@ void ComicArchiveJob::findTotalNumberFromTo()
         return;
     }
 
-    if (mIdentifierType == Date) {
+    if (mIdentifierType == IdentifierType::DateIdentifier) {
         const QDate from = QDate::fromString(mFromIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
         const QDate to = QDate::fromString(mToIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
         if (from.isValid() && to.isValid()) {
             mTotalFiles = qAbs(from.daysTo(to)) + 1;
         }
-    } else if (mIdentifierType == Number) {
+    } else if (mIdentifierType == IdentifierType::NumberIdentifier) {
         bool result = true;
         bool ok;
         const int from = mFromIdentifierSuffix.toInt(&ok);

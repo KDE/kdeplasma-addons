@@ -10,12 +10,6 @@
 class KConfigGroup;
 class QString;
 
-enum IdentifierType {
-    Date = 0,
-    Number,
-    String,
-};
-
 /**
  * Provides access (read/write) to the directory that should be used
  * whenever the user is presented with a file selection dialog.

@@ -9,6 +9,7 @@
 #define COMIC_ARCHIVE_DIALOG_H
 
 #include "comicinfo.h"
+#include "engine/types.h"
 
 #include "ui_comicarchivedialog.h"
 

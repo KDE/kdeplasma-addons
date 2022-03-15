@@ -26,7 +26,7 @@ ComicArchiveDialog::ComicArchiveDialog(const QString &pluginName,
     connect(ui.buttonBox, &QDialogButtonBox::rejected, this, &ComicArchiveDialog::reject);
 
     switch (mIdentifierType) {
-    case Date: {
+    case IdentifierType::DateIdentifier: {
         const QDate current = QDate::fromString(currentIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
         const QDate first = QDate::fromString(firstIdentifierSuffix, QStringLiteral("yyyy-MM-dd"));
         const QDate today = QDate::currentDate();
@@ -45,7 +45,7 @@ ComicArchiveDialog::ComicArchiveDialog(const QString &pluginName,
         connect(ui.toDate, &QDateTimeEdit::dateChanged, this, &ComicArchiveDialog::toDateChanged);
         break;
     }
-    case Number: {
+    case IdentifierType::NumberIdentifier: {
         bool ok;
         const int current = currentIdentifierSuffix.toInt(&ok);
         if (ok) {
@@ -59,7 +59,7 @@ ComicArchiveDialog::ComicArchiveDialog(const QString &pluginName,
         }
         break;
     }
-    case String: {
+    case IdentifierType::StringIdentifier: {
         ui.fromString->setText(currentIdentifierSuffix);
         ui.toString->setText(currentIdentifierSuffix);
         connect(ui.fromString, &QLineEdit::textEdited, this, &ComicArchiveDialog::updateOkButton);
@@ -68,7 +68,7 @@ ComicArchiveDialog::ComicArchiveDialog(const QString &pluginName,
     }
     }
 
-    ui.types->setCurrentIndex(mIdentifierType);
+    ui.types->setCurrentIndex((int)mIdentifierType);
 
     archiveTypeChanged(ComicArchiveJob::ArchiveAll);
 
@@ -126,7 +126,7 @@ void ComicArchiveDialog::updateOkButton()
     bool okEnabled = true;
 
     // string is handled here, as it is the only identifier which can be invalid (empty)
-    if (mIdentifierType == String) {
+    if (mIdentifierType == IdentifierType::StringIdentifier) {
         if (archiveType == ComicArchiveJob::ArchiveAll) {
             okEnabled = true;
         } else if (ui.archiveType->currentIndex() == ComicArchiveJob::ArchiveFromTo) {
@@ -147,11 +147,11 @@ void ComicArchiveDialog::slotOkClicked()
     QString toIdentifier;
 
     switch (mIdentifierType) {
-    case Date:
+    case IdentifierType::DateIdentifier:
         fromIdentifier = ui.fromDate->date().toString(QStringLiteral("yyyy-MM-dd"));
         toIdentifier = ui.toDate->date().toString(QStringLiteral("yyyy-MM-dd"));
         break;
-    case Number: {
+    case IdentifierType::NumberIdentifier: {
         fromIdentifier = QString::number(ui.fromNumber->value());
         toIdentifier = QString::number(ui.toNumber->value());
         // the user entered from and to wrong, swap them
@@ -162,7 +162,7 @@ void ComicArchiveDialog::slotOkClicked()
         }
         break;
     }
-    case String:
+    case IdentifierType::StringIdentifier:
         fromIdentifier = ui.fromString->text();
         toIdentifier = ui.toString->text();
         break;

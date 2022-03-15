@@ -70,15 +70,7 @@ void ComicData::setData(const ComicMetaData &data)
     mStripTitle = data.stripTitle;
     mAuthor = data.comicAuthor;
     mTitle = data.providerName;
-
-    const QString suffixType = data.suffixType;
-    if (suffixType == QLatin1String("Date")) {
-        mType = Date;
-    } else if (suffixType == QLatin1String("Number")) {
-        mType = Number;
-    } else {
-        mType = String;
-    }
+    mType = data.identifierType;
 
     QString temp = data.identifier;
     mCurrent = temp.remove(mId + QLatin1Char(':'));
@@ -89,7 +81,7 @@ void ComicData::setData(const ComicMetaData &data)
     }
 
     mCurrentReadable.clear();
-    if (mType == Number) {
+    if (mType == IdentifierType::NumberIdentifier) {
         mCurrentReadable = i18nc("an abbreviation for Number", "# %1", mCurrent);
         int tempNum = mCurrent.toInt();
         if (mMaxStripNum < tempNum) {
@@ -98,9 +90,9 @@ void ComicData::setData(const ComicMetaData &data)
 
         temp = mFirst.remove(mId + QLatin1Char(':'));
         mFirstStripNum = temp.toInt();
-    } else if (mType == Date && QDate::fromString(temp, QStringLiteral("yyyy-MM-dd")).isValid()) {
+    } else if (mType == IdentifierType::DateIdentifier && QDate::fromString(temp, QStringLiteral("yyyy-MM-dd")).isValid()) {
         mCurrentReadable = mCurrent;
-    } else if (mType == String) {
+    } else if (mType == IdentifierType::StringIdentifier) {
         mCurrentReadable = mCurrent;
     }
 

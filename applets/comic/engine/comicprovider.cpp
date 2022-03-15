@@ -7,6 +7,7 @@
 
 #include "comicprovider.h"
 #include "comic_debug.h"
+#include "types.h"
 
 #include <QTimer>
 #include <QUrl>
@@ -17,11 +18,12 @@
 class ComicProvider::Private
 {
 public:
-    Private(ComicProvider *parent, const KPluginMetaData &data)
+    Private(ComicProvider *parent, const KPluginMetaData &data, IdentifierType suffixType)
         : mParent(parent)
         , mIsCurrent(false)
         , mFirstStripNumber(1)
         , mComicDescription(data)
+        , mSuffixType(suffixType)
     {
         mTimer = new QTimer(parent);
         mTimer->setSingleShot(true);
@@ -78,17 +80,18 @@ public:
     const KPluginMetaData mComicDescription;
     QTimer *mTimer;
     QHash<KJob *, QUrl> mRedirections;
+    const IdentifierType mSuffixType;
 };
 
 ComicProvider::ComicProvider(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier)
     : QObject(parent)
-    , d(new Private(this, data))
+    , d(new Private(this, data, type))
 {
-    if (type == DateIdentifier) {
+    if (type == IdentifierType::DateIdentifier) {
         d->mRequestedDate = identifier.toDate();
-    } else if (type == NumberIdentifier) {
+    } else if (type == IdentifierType::NumberIdentifier) {
         d->mRequestedNumber = identifier.toInt();
-    } else if (type == StringIdentifier) {
+    } else if (type == IdentifierType::StringIdentifier) {
         d->mRequestedId = identifier.toString();
 
         int index = d->mRequestedId.indexOf(QLatin1Char(':'));
@@ -111,7 +114,7 @@ ComicProvider::~ComicProvider()
 
 QString ComicProvider::nextIdentifier() const
 {
-    if (identifierType() == DateIdentifier && d->mRequestedDate != QDate::currentDate()) {
+    if (identifierType() == IdentifierType::DateIdentifier && d->mRequestedDate != QDate::currentDate()) {
         return d->mRequestedDate.addDays(1).toString(Qt::ISODate);
     }
 
@@ -120,7 +123,7 @@ QString ComicProvider::nextIdentifier() const
 
 QString ComicProvider::previousIdentifier() const
 {
-    if ((identifierType() == DateIdentifier) && (!firstStripDate().isValid() || d->mRequestedDate > firstStripDate())) {
+    if ((identifierType() == IdentifierType::DateIdentifier) && (!firstStripDate().isValid() || d->mRequestedDate > firstStripDate())) {
         return d->mRequestedDate.addDays(-1).toString(Qt::ISODate);
     }
 
@@ -184,9 +187,9 @@ void ComicProvider::setFirstStripNumber(int number)
 
 QString ComicProvider::firstStripIdentifier() const
 {
-    if ((identifierType() == DateIdentifier) && d->mFirstStripDate.isValid()) {
+    if ((identifierType() == IdentifierType::DateIdentifier) && d->mFirstStripDate.isValid()) {
         return d->mFirstStripDate.toString(Qt::ISODate);
-    } else if (identifierType() == NumberIdentifier) {
+    } else if (identifierType() == IdentifierType::NumberIdentifier) {
         return QString::number(d->mFirstStripNumber);
     }
 
@@ -293,14 +296,6 @@ QString ComicProvider::name() const
         return QString();
     }
     return d->mComicDescription.name();
-}
-
-QString ComicProvider::suffixType() const
-{
-    if (!d->mComicDescription.isValid()) {
-        return QString();
-    }
-    return d->mComicDescription.value(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"));
 }
 
 KPluginMetaData ComicProvider::description() const

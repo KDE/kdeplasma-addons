@@ -23,6 +23,7 @@
 #include "comic_debug.h"
 #include "comicprovider.h"
 #include "comicproviderkross.h"
+#include "types.h"
 
 ComicEngine::ComicEngine()
     : QObject()
@@ -75,7 +76,7 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
 
         // check whether it is cached, make sure second part present
         if (parts.count() > 1 && (CachedProvider::isCached(identifier) || !m_networkConfigurationManager.isOnline())) {
-            ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, ComicProvider::StringIdentifier, identifier);
+            ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, IdentifierType::StringIdentifier, identifier);
             m_jobs[identifier] = provider;
             connect(provider, &ComicProvider::finished, this, [this, callback, provider]() {
                 finished(provider, callback);
@@ -122,24 +123,19 @@ bool ComicEngine::requestSource(const QString &identifier, ComicRequestCallback 
 
         ComicProvider *provider = nullptr;
 
-        // const QString type = service->property(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"), QVariant::String).toString();
-        const QString type = pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType"));
         QVariant data;
-        ComicProvider::IdentifierType identifierType = ComicProvider::StringIdentifier;
-        if (type == QLatin1String("Date")) {
+        const IdentifierType identifierType = stringToIdentifierType(pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType")));
+        if (identifierType == IdentifierType::DateIdentifier) {
             QDate date = QDate::fromString(parts[1], Qt::ISODate);
             if (!date.isValid()) {
                 date = QDate::currentDate();
             }
 
             data = date;
-            identifierType = ComicProvider::DateIdentifier;
-        } else if (type == QLatin1String("Number")) {
+        } else if (identifierType == IdentifierType::NumberIdentifier) {
             data = parts[1].toInt();
-            identifierType = ComicProvider::NumberIdentifier;
-        } else if (type == QLatin1String("String")) {
+        } else if (identifierType == IdentifierType::StringIdentifier) {
             data = parts[1];
-            identifierType = ComicProvider::StringIdentifier;
         }
         provider = new ComicProviderKross(this, pkg.metadata(), identifierType, data);
         provider->setIsCurrent(isCurrentComic);
@@ -185,7 +181,7 @@ void ComicEngine::finished(ComicProvider *provider, ComicRequestCallback callbac
         info.nextIdentifier = provider->nextIdentifier();
         info.previousIdentifier = provider->previousIdentifier();
         info.providerName = provider->name();
-        info.suffixType = provider->suffixType();
+        info.identifierType = provider->identifierType();
         info.lastCachedStripIdentifier = provider->identifier().mid(provider->identifier().indexOf(QLatin1Char(':')) + 1);
         info.isLeftToRight = provider->isLeftToRight();
         info.isTopToBottom = provider->isTopToBottom();
@@ -280,7 +276,7 @@ void ComicEngine::setComicData(ComicProvider *provider, ComicRequestCallback cal
     data.firstStripIdentifier = provider->firstStripIdentifier();
     data.identifier = provider->identifier();
     data.providerName = provider->name();
-    data.suffixType = provider->suffixType();
+    data.identifierType = provider->identifierType();
     data.isLeftToRight = provider->isLeftToRight();
     data.isTopToBottom = provider->isTopToBottom();
 

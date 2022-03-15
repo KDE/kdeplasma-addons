@@ -9,6 +9,28 @@
 #include <QString>
 #include <QUrl>
 
+/**
+ * Describes the type of how this comic provider
+ * references the previous or next comic strip.
+ */
+enum class IdentifierType {
+    DateIdentifier = 0, ///< References by date
+    NumberIdentifier, ///< References by numerical identifier
+    StringIdentifier, ///< References by arbitrary string
+};
+
+inline IdentifierType stringToIdentifierType(const QString type)
+{
+    if (type == QLatin1String("Date")) {
+        return IdentifierType::DateIdentifier;
+    } else if (type == QLatin1String("Number")) {
+        return IdentifierType::NumberIdentifier;
+    } else if (type == QLatin1String("String")) {
+        return IdentifierType::StringIdentifier;
+    }
+    return IdentifierType::StringIdentifier;
+}
+
 struct ComicProviderInfo {
     QString pluginId;
     QString name;
@@ -29,7 +51,7 @@ struct ComicMetaData {
     QString comicAuthor;
     QString additionalText;
     QString identifier;
-    QString suffixType;
+    IdentifierType identifierType;
     bool isLeftToRight = false;
     bool isTopToBottom = false;
     QString lastCachedStripIdentifier;

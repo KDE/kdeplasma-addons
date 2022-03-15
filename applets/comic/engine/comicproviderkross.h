@@ -10,6 +10,7 @@
 
 #include "comicprovider.h"
 #include "comicproviderwrapper.h"
+#include "types.h"
 
 #include <KPackage/PackageStructure>
 #include <QImage>
@@ -21,7 +22,7 @@ class ComicProviderKross : public ComicProvider
     Q_OBJECT
 
 public:
-    ComicProviderKross(QObject *parent, const KPluginMetaData &data, ComicProvider::IdentifierType type, const QVariant &identifier);
+    ComicProviderKross(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier);
     ~ComicProviderKross() override;
 
     static KPackage::PackageStructure *packageStructure();
