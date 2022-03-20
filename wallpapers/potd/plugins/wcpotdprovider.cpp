@@ -16,8 +16,8 @@
 #include <KIO/Job>
 #include <KPluginFactory>
 
-WcpotdProvider::WcpotdProvider(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+WcpotdProvider::WcpotdProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : PotdProvider(parent, data, args)
 {
     QUrl url(QStringLiteral("https://commons.wikimedia.org/w/api.php"));
 

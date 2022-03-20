@@ -26,13 +26,7 @@ class FlickrProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    /**
-     * Creates a new flickr provider.
-     *
-     * @param parent The parent object.
-     * @param args The arguments.
-     */
-    explicit FlickrProvider(QObject *parent, const QVariantList &args);
+    explicit FlickrProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     /**
      * Destroys the flickr provider.

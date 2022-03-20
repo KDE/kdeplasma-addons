@@ -20,13 +20,7 @@ class UnsplashProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    /**
-     * Creates a new Unsplash provider.
-     *
-     * @param parent The parent object.
-     * @param args The arguments.
-     */
-    UnsplashProvider(QObject *parent, const QVariantList &args);
+    UnsplashProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     /**
      * Destroys the Unsplash provider.

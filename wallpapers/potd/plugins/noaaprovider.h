@@ -23,13 +23,7 @@ class NOAAProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    /**
-     * Creates a new NOAA provider.
-     *
-     * @param parent The parent object.
-     * @param args The arguments.
-     */
-    NOAAProvider(QObject *parent, const QVariantList &args);
+    NOAAProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     /**
      * Destroys the NOAA provider.

@@ -12,15 +12,15 @@
 #include <KIO/Job>
 #include <KPluginFactory>
 
-UnsplashProvider::UnsplashProvider(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+UnsplashProvider::UnsplashProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : PotdProvider(parent, data, args)
 {
     QString collectionId = QStringLiteral("1065976");
-    QRegularExpression re(QStringLiteral("^\\d+$"));
-    for (int i = 1; i < args.count(); i++) {
-        QString str = args[i].toString();
-        if (re.match(str).hasMatch()) {
-            collectionId = str;
+    if (!args.empty()) {
+        const QRegularExpression re(QStringLiteral("^\\d+$"));
+        const QString arg = args[0].toString();
+        if (re.match(arg).hasMatch()) {
+            collectionId = arg;
         }
     }
     const QUrl url(QStringLiteral("https://source.unsplash.com/collection/%1/3840x2160/daily").arg(collectionId));

@@ -13,8 +13,8 @@
 #include <KIO/Job>
 #include <KPluginFactory>
 
-BingProvider::BingProvider(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+BingProvider::BingProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : PotdProvider(parent, data, args)
 {
     const QUrl url(QStringLiteral("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"));
 

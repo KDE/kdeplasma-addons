@@ -25,13 +25,7 @@ class WcpotdProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    /**
-     * Creates a new Wcpotd provider.
-     *
-     * @param parent The parent object.
-     * @param args The arguments.
-     */
-    WcpotdProvider(QObject *parent, const QVariantList &args);
+    WcpotdProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     /**
      * Destroys the Wcpotd provider.

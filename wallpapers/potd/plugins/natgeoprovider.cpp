@@ -13,8 +13,8 @@
 #include <KIO/Job>
 #include <KPluginFactory>
 
-NatGeoProvider::NatGeoProvider(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+NatGeoProvider::NatGeoProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : PotdProvider(parent, data, args)
 {
     const QUrl url(QStringLiteral("https://www.nationalgeographic.com/photography/photo-of-the-day/"));
 

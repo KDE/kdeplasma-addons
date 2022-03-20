@@ -24,13 +24,7 @@ class NatGeoProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    /**
-     * Creates a new APOD provider.
-     *
-     * @param parent The parent object.
-     * @param args The arguments.
-     */
-    NatGeoProvider(QObject *parent, const QVariantList &args);
+    NatGeoProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     /**
      * Destroys the APOD provider.

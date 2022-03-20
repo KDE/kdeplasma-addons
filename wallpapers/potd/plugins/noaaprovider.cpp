@@ -13,8 +13,8 @@
 #include <KIO/Job>
 #include <KPluginFactory>
 
-NOAAProvider::NOAAProvider(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+NOAAProvider::NOAAProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : PotdProvider(parent, data, args)
 {
     const QUrl url(QStringLiteral("https://www.nesdis.noaa.gov/real-time-imagery/imagery-collections/image-of-the-day"));
 

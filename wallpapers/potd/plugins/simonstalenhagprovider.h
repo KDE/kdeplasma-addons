@@ -21,13 +21,7 @@ class SimonStalenhagProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    /**
-     * Creates a new SimonStalenhag provider.
-     *
-     * @param parent The parent object.
-     * @param args The arguments.
-     */
-    SimonStalenhagProvider(QObject *parent, const QVariantList &args);
+    SimonStalenhagProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
 private:
     void entrypointRequestFinished(KJob *job);

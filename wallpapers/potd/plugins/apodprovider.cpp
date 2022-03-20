@@ -13,8 +13,8 @@
 #include <KIO/Job>
 #include <KPluginFactory>
 
-ApodProvider::ApodProvider(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+ApodProvider::ApodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : PotdProvider(parent, data, args)
 {
     const QUrl url(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/"));
 

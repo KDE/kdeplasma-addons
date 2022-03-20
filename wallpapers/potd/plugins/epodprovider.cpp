@@ -13,8 +13,8 @@
 #include <KIO/Job>
 #include <KPluginFactory>
 
-EpodProvider::EpodProvider(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+EpodProvider::EpodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : PotdProvider(parent, data, args)
 {
     const QUrl url(QStringLiteral("https://epod.usra.edu/blog/"));
 

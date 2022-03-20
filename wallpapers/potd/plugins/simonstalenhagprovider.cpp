@@ -32,8 +32,8 @@ static QJsonValue randomArrayValueByKey(const QJsonObject &object, QLatin1String
     return array.at(QRandomGenerator::global()->bounded(arraySize));
 }
 
-SimonStalenhagProvider::SimonStalenhagProvider(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+SimonStalenhagProvider::SimonStalenhagProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : PotdProvider(parent, data, args)
 {
     const QUrl url(QStringLiteral("https://raw.githubusercontent.com/a-andreyev/simonstalenhag-se-metadata/main/entrypoint.json"));
 

@@ -29,8 +29,8 @@ static QUrl buildUrl(const QDate &date, const QString apiKey)
     return url;
 }
 
-FlickrProvider::FlickrProvider(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+FlickrProvider::FlickrProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : PotdProvider(parent, data, args)
 {
     connect(this, &PotdProvider::configLoaded, this, &FlickrProvider::sendXmlRequest);
 

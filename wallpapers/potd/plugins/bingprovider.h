@@ -20,13 +20,7 @@ class BingProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    /**
-     * Creates a new Bing provider.
-     *
-     * @param parent The parent object.
-     * @param args The arguments.
-     */
-    BingProvider(QObject *parent, const QVariantList &args);
+    BingProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     /**
      * Destroys the Bing provider.

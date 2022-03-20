@@ -26,13 +26,7 @@ class ApodProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    /**
-     * Creates a new APOD provider.
-     *
-     * @param parent The parent object.
-     * @param args The arguments.
-     */
-    explicit ApodProvider(QObject *parent, const QVariantList &args);
+    explicit ApodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     /**
      * Destroys the APOD provider.
