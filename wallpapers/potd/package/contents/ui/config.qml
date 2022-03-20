@@ -10,6 +10,8 @@ import org.kde.kquickcontrols 2.0 as KQC2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.5 as Kirigami
 
+import org.kde.plasma.wallpapers.potd 1.0
+
 Kirigami.FormLayout {
     id: root
     twinFormLayouts: parentLayout
@@ -20,48 +22,21 @@ Kirigami.FormLayout {
     property alias cfg_Color: colorButton.color
     property alias formLayout: root
 
-    ListModel {
-        id: providerModel
-    }
-
-    function populateProviders() {
-        providerModel.clear();
-        var providers = engine.data["Providers"];
-        if (providers) {
-            var provider;
-            for (provider in providers) {
-                providerModel.append({'id': provider, 'name': providers[provider]})
-            }
-        }
-    }
-
-    PlasmaCore.DataSource {
-        id: engine
-        engine: "potd"
-        connectedSources: ["Providers"]
-        onDataChanged: populateProviders()
-    }
-
-    Component.onCompleted: {
-        populateProviders()
-        for (var i = 0; i < providerModel.count; i++) {
-            if (providerModel.get(i)["id"] == wallpaper.configuration.Provider) {
-                providerComboBox.currentIndex = i;
-                break;
-            }
-        }
-    }
 
     QQC2.ComboBox {
         id: providerComboBox
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Provider:")
-        model: providerModel
-        textRole: "name"
-        onCurrentIndexChanged: {
+        model: PotdProviderModel {
+            id: providerModel
+        }
+        currentIndex: model.indexOfProvider(wallpaper.configuration.Provider)
+        textRole: "display"
+        valueRole: "id"
+        onCurrentValueChanged: {
             if (currentIndex < 0) {
                 return;
             }
-            cfg_Provider = providerModel.get(currentIndex)["id"]
+            cfg_Provider = currentValue;
         }
     }
 

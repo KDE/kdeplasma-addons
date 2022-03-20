@@ -8,17 +8,17 @@ import QtQuick 2.5
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
+import org.kde.plasma.wallpapers.potd 1.0
+
 Rectangle {
     id: root
 
-    readonly property string provider: wallpaper.configuration.Provider
-    readonly property string category: wallpaper.configuration.Category
-    readonly property string identifier: provider === 'unsplash' && category ? provider + ':' + category : provider
-
-    PlasmaCore.DataSource {
+    PotdProviderModel {
         id: engine
-        engine: "potd"
-        connectedSources: [identifier]
+        identifier: wallpaper.configuration.Provider
+        // Needs to specify category for unsplash provider
+        arguments: identifier === "unsplash" ? [wallpaper.configuration.Category] : []
+        running: true
     }
 
     Rectangle {
@@ -32,7 +32,7 @@ Rectangle {
 
     QImageItem {
         anchors.fill: parent
-        image: engine.data[identifier].Image
+        image: engine.image
         fillMode: wallpaper.configuration.FillMode
         smooth: true
     }

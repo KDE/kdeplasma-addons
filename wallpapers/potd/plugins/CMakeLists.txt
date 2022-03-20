@@ -1,10 +1,22 @@
 set(potd_engine_SRCS
 	cachedprovider.cpp
-	potd.cpp
+	potdprovidermodel.cpp
+	potdplugin.cpp
 )
 
-kcoreaddons_add_plugin(plasma_engine_potd SOURCES ${potd_engine_SRCS} INSTALL_NAMESPACE "plasma/dataengine")
-target_link_libraries( plasma_engine_potd plasmapotdprovidercore KF5::Plasma KF5::KIOCore)
+ecm_qt_declare_logging_category(potd_engine_SRCS
+                                HEADER debug.h
+                                IDENTIFIER WALLPAPERPOTD
+                                CATEGORY_NAME kde.wallpapers.potd
+                                DEFAULT_SEVERITY Info)
+
+add_library(plasma_wallpaper_potdplugin SHARED ${potd_engine_SRCS})
+target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
+    KF5::KIOCore
+    Qt::Qml
+)
+install(TARGETS plasma_wallpaper_potdplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)
+install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)
 
 ########### plugin core library ############
 set(POTDPROVIDER_VERSION 1.0.0)
