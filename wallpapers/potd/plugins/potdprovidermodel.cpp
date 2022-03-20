@@ -10,9 +10,8 @@
 #include <chrono>
 
 #include <QDate>
+#include <QDBusConnection>
 #include <QDebug>
-#include <QFile>
-#include <QFileInfo>
 #include <QThreadPool>
 
 #include <KPluginFactory>
@@ -29,10 +28,7 @@ PotdProviderModel::PotdProviderModel(QObject *parent)
 {
     loadPluginMetaData();
 
-    connect(&m_checkDatesTimer, &QTimer::timeout, this, &PotdProviderModel::slotCheckDayChanged);
-    // FIXME: would be nice to stop and start this timer ONLY as needed, e.g. only when there are
-    // time insensitive sources to serve; still, this is better than how i found it, checking
-    // every 2 seconds (!)
+    connect(&m_checkDatesTimer, &QTimer::timeout, this, &PotdProviderModel::forceUpdateSource);
     m_checkDatesTimer.setInterval(10min); // check every 10 minutes
 }
 
@@ -125,8 +121,20 @@ void PotdProviderModel::setRunning(bool flag)
 
     if (flag) {
         m_checkDatesTimer.start();
+        QDBusConnection::systemBus().connect(QStringLiteral("org.freedesktop.login1"),
+                                             QStringLiteral("/org/freedesktop/login1"),
+                                             QStringLiteral("org.freedesktop.login1.Manager"),
+                                             QStringLiteral("PrepareForSleep"),
+                                             this,
+                                             SLOT(slotPrepareForSleep(bool)));
     } else {
         m_checkDatesTimer.stop();
+        QDBusConnection::systemBus().disconnect(QStringLiteral("org.freedesktop.login1"),
+                                                QStringLiteral("/org/freedesktop/login1"),
+                                                QStringLiteral("org.freedesktop.login1.Manager"),
+                                                QStringLiteral("PrepareForSleep"),
+                                                this,
+                                                SLOT(slotPrepareForSleep(bool)));
     }
 
     Q_EMIT runningChanged();
@@ -256,6 +264,12 @@ void PotdProviderModel::slotFinished(PotdProvider *provider)
         setLocalUrl(CachedProvider::identifierToPath(m_identifier));
     }
 
+    // Do not update until next day, and delay 1s to make sure last modified condition is satisfied.
+    if (running()) {
+        m_checkDatesTimer.setInterval(QDateTime::currentDateTime().msecsTo(QDate::currentDate().startOfDay().addDays(1)) + 1000);
+        m_checkDatesTimer.start();
+    }
+
     provider->deleteLater();
 }
 
@@ -270,18 +284,17 @@ void PotdProviderModel::slotError(PotdProvider *provider)
 {
     provider->disconnect(this);
     provider->deleteLater();
+
+    // Retry 10min later
+    if (running()) {
+        m_checkDatesTimer.setInterval(10min);
+        m_checkDatesTimer.start();
+    }
 }
 
-void PotdProviderModel::slotCheckDayChanged()
+void PotdProviderModel::slotPrepareForSleep(bool sleep)
 {
-    const QString path = CachedProvider::identifierToPath(m_identifier);
-
-    if (!QFile::exists(path)) {
-        updateSource();
-    } else {
-        const QFileInfo info(path);
-        if (info.lastModified().daysTo(QDateTime::currentDateTime()) >= 1) {
-            updateSource();
-        }
+    if (!sleep) {
+        forceUpdateSource();
     }
 }
