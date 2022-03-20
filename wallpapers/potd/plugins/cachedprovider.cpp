@@ -51,7 +51,7 @@ QString CachedProvider::identifierToPath(const QString &identifier)
 }
 
 CachedProvider::CachedProvider(const QString &identifier, QObject *parent)
-    : PotdProvider(parent)
+    : PotdProvider(parent, KPluginMetaData(), QVariantList())
     , mIdentifier(identifier)
 {
     LoadImageThread *thread = new LoadImageThread(identifierToPath(mIdentifier));

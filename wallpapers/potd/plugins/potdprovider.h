@@ -11,6 +11,7 @@
 #include <QVariantList>
 
 #include <KIO/Job>
+#include <KPluginMetaData>
 
 #include "plasma_potd_export.h"
 
@@ -37,9 +38,15 @@ public:
      * Creates a new PoTD provider.
      *
      * @param parent The parent object.
+     * @param data The metadata of the plugin
      * @param args The arguments.
      */
-    explicit PotdProvider(QObject *parent, const QVariantList &args = QVariantList());
+    explicit PotdProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+
+    /**
+     * @deprecated Since 5.25. The constructor will be removed in Plasma 6.
+     */
+    explicit PotdProvider(QObject *parent, const QVariantList &args);
 
     /**
      * Destroys the PoTD provider.

@@ -35,33 +35,46 @@ PotdProviderPrivate::~PotdProviderPrivate()
 {
 }
 
-PotdProvider::PotdProvider(QObject *parent, const QVariantList &args)
+PotdProvider::PotdProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : QObject(parent)
     , d(new PotdProviderPrivate)
 {
-    if (args.count() > 0) {
-        d->name = args[0].toString();
-
-        d->identifier = d->name;
-
-        if (args.count() > 1) {
-            for (int i = 1; i < args.count(); i++) {
-                d->identifier += QStringLiteral(":") + args[i].toString();
-                QDate date = QDate::fromString(args[i].toString(), Qt::ISODate);
-                if (date.isValid()) {
-                    d->date = date;
-                }
-            }
-        }
+    if (const QString name = data.name(); !name.isEmpty()) {
+        d->name = name;
     } else {
         d->name = QStringLiteral("Unknown");
+    }
+
+    if (const QString identifier = data.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")); !identifier.isEmpty()) {
+        d->identifier = identifier;
+    } else {
         d->identifier = d->name;
+    }
+
+    if (!args.empty()) {
+        for (const auto &arg : args) {
+            const QDate date = QDate::fromString(arg.toString(), Qt::ISODate);
+            if (date.isValid()) {
+                d->date = date;
+                break;
+            }
+        }
     }
 
     QString configFileName = d->identifier + QStringLiteral("provider.conf");
     configRemoteUrl = QUrl(QStringLiteral(CONFIG_ROOT_URL) + configFileName);
-    configLocalPath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/plasma_engine_potd/") + configFileName;
+    configLocalPath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QStringLiteral("/plasma_engine_potd/") + configFileName;
     configLocalUrl = QUrl::fromLocalFile(configLocalPath);
+}
+
+PotdProvider::PotdProvider(QObject *parent, const QVariantList &args)
+    : QObject(parent)
+    , d(new PotdProviderPrivate)
+{
+    Q_UNUSED(args)
+    d->name = QStringLiteral("Unknown");
+    d->identifier = d->name;
+    qWarning() << "You are using an old PoTD provider plugin. It will not work in Plasma 6. Please consider updating the plugin.";
 }
 
 PotdProvider::~PotdProvider()
