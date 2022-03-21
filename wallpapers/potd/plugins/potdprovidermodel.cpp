@@ -92,26 +92,9 @@ void PotdProviderModel::loadPluginMetaData()
     endResetModel();
 }
 
-KPluginMetaData PotdProviderModel::metadata(int index) const
+int PotdProviderModel::currentIndex() const
 {
-    if (index >= static_cast<int>(m_providers.size()) || index < 0) {
-        return m_providers.at(0);
-    }
-
-    return m_providers.at(index);
-}
-
-int PotdProviderModel::indexOfProvider(const QString &identifier) const
-{
-    const auto it = std::find_if(m_providers.cbegin(), m_providers.cend(), [&identifier](const KPluginMetaData &metadata) {
-        return metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")) == identifier;
-    });
-
-    if (it == m_providers.cend()) {
-        return -1;
-    }
-
-    return std::distance(m_providers.cbegin(), it);
+    return m_currentIndex;
 }
 
 bool PotdProviderModel::running() const
@@ -158,7 +141,15 @@ void PotdProviderModel::setIdentifier(const QString &identifier)
     }
 
     m_identifier = identifier;
-    m_currentIndex = indexOfProvider(identifier);
+
+    const auto it = std::find_if(m_providers.cbegin(), m_providers.cend(), [&identifier](const KPluginMetaData &metadata) {
+        return metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")) == identifier;
+    });
+    if (it == m_providers.cend()) {
+        m_currentIndex = -1;
+    } else {
+        m_currentIndex = std::distance(m_providers.cbegin(), it);
+    }
 
     // Avoid flickering
     if (const QString path = CachedProvider::identifierToPath(m_identifier); QFile::exists(path)) {
@@ -169,6 +160,7 @@ void PotdProviderModel::setIdentifier(const QString &identifier)
     updateSource();
 
     Q_EMIT identifierChanged();
+    Q_EMIT currentIndexChanged();
 }
 
 QVariantList PotdProviderModel::arguments() const
@@ -404,7 +396,8 @@ bool PotdProviderModel::updateSource(bool refresh)
         return false;
     }
 
-    const auto pluginResult = KPluginFactory::instantiatePlugin<PotdProvider>(metadata(m_currentIndex), this, m_args);
+    const KPluginMetaData &metadata = m_providers.at(m_currentIndex);
+    const auto pluginResult = KPluginFactory::instantiatePlugin<PotdProvider>(metadata, this, m_args);
 
     if (pluginResult) {
         connect(pluginResult.plugin, &PotdProvider::finished, this, &PotdProviderModel::slotFinished);
