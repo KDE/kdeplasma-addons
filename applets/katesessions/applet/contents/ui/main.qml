@@ -79,10 +79,10 @@ Item {
                 case Qt.Key_Enter:
                 case Qt.Key_Return: {
                     if (sessionsMenu.view.currentIndex >= 0) {
-                        const uuid = sessionsMenu.model.get(sessionsMenu.view.currentIndex).UuidRole
-                        if (uuid) {
-                            sessionsSource.serviceAction(uuid, "invoke")
-                            sessionsMenu.view.currentIndex = 0
+                        const profileIdentifier = sessionsMenu.model.get(sessionsMenu.view.currentIndex).profileIdentifier;
+                        if (profileIdentifier) {
+                            model.openProfile(profileIdentifier);
+                            sessionsMenu.view.currentIndex = 0;
                         }
                     }
                     break;

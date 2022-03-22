@@ -16,7 +16,7 @@ PlasmaExtras.ScrollArea {
     id: menu
     property alias view: menuListView
     property alias model: menuListView.model
-    signal itemSelected(string uuid)
+    signal itemSelected(string profileIdentifier)
 
     ListView {
         id: menuListView
@@ -35,7 +35,7 @@ PlasmaExtras.ScrollArea {
         delegate: KateSessionsItemDelegate {
             width: menuListView.width
 
-            onItemSelected: menu.itemSelected(uuid)
+            onItemSelected: menu.itemSelected(profileIdentifier)
         }
     }
 }

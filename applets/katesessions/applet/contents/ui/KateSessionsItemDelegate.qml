@@ -61,7 +61,7 @@ PlasmaComponents.ListItem {
                 }
                 maximumLineCount: 1
                 text: name.trim()
-                visible: !showInput // TypeRole: 0: Text, 1: Image, 2: Url
+                visible: !showInput
                 elide: Text.ElideRight
                 wrapMode: Text.Wrap
             }
