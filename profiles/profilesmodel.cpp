@@ -10,6 +10,7 @@
 #include <KConfigGroup>
 #include <KDirWatch>
 #include <KFileUtils>
+#include <KLocalizedString>
 // Qt
 #include <KIO/CommandLauncherJob>
 #include <QDebug>
@@ -36,17 +37,20 @@ void ProfilesModel::init()
 
 void ProfilesModel::loadProfiles()
 {
+    beginResetModel();
+    m_data.clear();
+
     QStringList profilesPaths;
     if (m_appName == QLatin1String("kate")) {
         const QDir sessionsDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/kate/sessions"));
         profilesPaths = sessionsDir.entryList({QStringLiteral("*.katesession")}, QDir::Files, QDir::Name);
+        m_data << ProfileData{i18n("Start Kate (no arguments)"), QString(), m_appName, ProfilesModel::Type::Default};
+        m_data << ProfileData{i18n("New Kate Session"), QString(), QStringLiteral("document-new"), ProfilesModel::Type::NewSession};
     } else {
         const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, m_appName, QStandardPaths::LocateDirectory);
         profilesPaths = KFileUtils::findAllUniqueFiles(dirs, {QStringLiteral("*.profile")});
     }
 
-    beginResetModel();
-    m_data.clear();
     for (const auto &profilePath : std::as_const(profilesPaths)) {
         QFileInfo info(profilePath);
         const QString profileIdentifier = info.baseName();
@@ -100,7 +104,12 @@ void ProfilesModel::openProfile(const QString profileIdentifier)
         job = new KIO::CommandLauncherJob(m_appName, QStringList{QStringLiteral("--profile"), profileIdentifier});
         job->setDesktopName(QStringLiteral("org.kde.konsole"));
     } else if (m_appName == QLatin1String("kate")) {
-        job = new KIO::CommandLauncherJob(m_appName, {QStringLiteral("--start"), profileIdentifier, QStringLiteral("-n")});
+        QStringList args;
+        if (!profileIdentifier.isEmpty()) {
+            args << QStringLiteral("--start") << profileIdentifier;
+        }
+        args << QStringLiteral("-n");
+        job = new KIO::CommandLauncherJob(m_appName, args);
         job->setDesktopName(QStringLiteral("org.kde.kate"));
     } else {
         Q_UNREACHABLE();
