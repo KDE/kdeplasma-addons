@@ -12,10 +12,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDirWatch>
-#include <KIO/CommandLauncherJob>
 #include <KLocalizedString>
-#include <KNotificationJobUiDelegate>
-// Qt
 #include <QDir>
 #include <QFileInfo>
 #include <QStandardPaths>
@@ -29,87 +26,37 @@ KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaDat
     s.addExampleQuery(QStringLiteral("konsole :q:"));
     addSyntax(s);
     addSyntax(RunnerSyntax(QStringLiteral("konsole"), i18n("Lists all the Konsole profiles in your account.")));
-}
-
-KonsoleProfiles::~KonsoleProfiles() = default;
-
-void KonsoleProfiles::init()
-{
-    // Initialize profiles and file watcher
-    m_profileFilesWatch = new KDirWatch(this);
-    const QStringList konsoleDataBaseDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
-    for (const QString &konsoleDataBaseDir : konsoleDataBaseDirs) {
-        m_profileFilesWatch->addDir(konsoleDataBaseDir + QStringLiteral("/konsole"));
-    }
-
-    connect(m_profileFilesWatch, &KDirWatch::dirty, this, &KonsoleProfiles::loadProfiles);
-    connect(m_profileFilesWatch, &KDirWatch::created, this, &KonsoleProfiles::loadProfiles);
-    connect(m_profileFilesWatch, &KDirWatch::deleted, this, &KonsoleProfiles::loadProfiles);
-
-    loadProfiles();
     setMinLetterCount(3);
-}
 
-void KonsoleProfiles::loadProfiles()
-{
-    m_profiles.clear();
-
-    QStringList profilesPaths;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
-
-    for (const auto &dir : dirs) {
-        const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.profile")});
-        for (const QString &fileName : fileNames) {
-            profilesPaths.append(dir + QLatin1Char('/') + fileName);
-        }
-    }
-
-    for (const auto &profilePath : std::as_const(profilesPaths)) {
-        const QString profileName = QFileInfo(profilePath).baseName();
-
-        const KConfig _config(profilePath, KConfig::SimpleConfig);
-        if (_config.hasGroup("General")) {
-            KonsoleProfileData profileData;
-            const KConfigGroup cfg = _config.group("General");
-            profileData.displayName = cfg.readEntry("Name", profileName);
-            profileData.iconName = cfg.readEntry("Icon", QStringLiteral("utilities-terminal"));
-            if (!profileData.displayName.isEmpty()) {
-                m_profiles.append(profileData);
-            }
-        }
-    }
-    suspendMatching(m_profiles.isEmpty());
+    m_model.setAppName(m_triggerWord);
+    suspendMatching(m_model.rowCount() == 0);
 }
 
 void KonsoleProfiles::match(RunnerContext &context)
 {
     QString term = context.query();
     term = term.remove(m_triggerWord).simplified();
-    for (const KonsoleProfileData &data : std::as_const(m_profiles)) {
-        if (data.displayName.contains(term, Qt::CaseInsensitive)) {
+    for (int i = 0, count = m_model.rowCount(); i < count; ++i) {
+        QModelIndex idx = m_model.index(i);
+        const QString name = idx.data(ProfilesModel::NameRole).toString();
+        if (name.contains(term, Qt::CaseInsensitive)) {
+            const QString profileIdentifier = idx.data(ProfilesModel::ProfileIdentifierRole).toString();
             QueryMatch match(this);
             match.setType(QueryMatch::PossibleMatch);
-            match.setIconName(data.iconName);
-            match.setData(data.displayName);
-            match.setText(QStringLiteral("Konsole: ") + data.displayName);
-            match.setRelevance((float)term.length() / (float)data.displayName.length());
+            match.setIconName(idx.data(ProfilesModel::IconNameRole).toString());
+            match.setData(profileIdentifier);
+            match.setText(QStringLiteral("Konsole: ") + name);
+            match.setRelevance((float)term.length() / (float)name.length());
             context.addMatch(match);
         }
     }
 }
+
 void KonsoleProfiles::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
     const QString profile = match.data().toString();
-
-    auto *job = new KIO::CommandLauncherJob(QStringLiteral("konsole"), {QStringLiteral("--profile"), profile});
-    job->setDesktopName(QStringLiteral("org.kde.konsole"));
-
-    auto *delegate = new KNotificationJobUiDelegate;
-    delegate->setAutoErrorHandlingEnabled(true);
-    job->setUiDelegate(delegate);
-
-    job->start();
+    m_model.openProfile(profile);
 }
 
 K_PLUGIN_CLASS_WITH_JSON(KonsoleProfiles, "plasma-runner-konsoleprofiles.json")

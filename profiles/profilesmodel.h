@@ -12,6 +12,7 @@ class KDirWatch;
 struct ProfileData {
     QString name;
     QString profileIdentifier;
+    QString iconName;
 };
 
 class ProfilesModel : public QAbstractListModel
@@ -19,14 +20,14 @@ class ProfilesModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(QString appName READ appName WRITE setAppName NOTIFY appNameChanged)
 
-    enum Roles {
-        NameRole = Qt::DisplayRole,
-        ProfileIdentifierRole = Qt::UserRole,
-    };
-
 public:
     explicit ProfilesModel(QObject *parent = nullptr);
 
+    enum Roles {
+        NameRole = Qt::DisplayRole,
+        ProfileIdentifierRole = Qt::UserRole,
+        IconNameRole,
+    };
     QHash<int, QByteArray> roleNames() const override;
     QVariant data(const QModelIndex &index, int role) const override;
     Q_INVOKABLE void openProfile(const QString profileIdentifier);

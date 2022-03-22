@@ -51,16 +51,18 @@ void ProfilesModel::loadProfiles()
         QFileInfo info(profilePath);
         const QString profileIdentifier = info.baseName();
         QString niceName = profileIdentifier;
+        QString iconName = QStringLiteral("utilities-terminal");
         KConfig cfg(profilePath, KConfig::SimpleConfig);
 
         if (cfg.hasGroup("General")) {
             KConfigGroup grp(&cfg, "General");
+            iconName = grp.readEntry("Icon", iconName);
 
             if (grp.hasKey("Name")) {
                 niceName = grp.readEntry("Name");
             }
 
-            m_data.append(ProfileData{niceName, profileIdentifier});
+            m_data.append(ProfileData{niceName, profileIdentifier, iconName});
         }
     }
     endResetModel();
@@ -71,6 +73,7 @@ QHash<int, QByteArray> ProfilesModel::roleNames() const
     return {
         {NameRole, "name"},
         {ProfileIdentifierRole, "profileIdentifier"},
+        {IconNameRole, "iconName"},
     };
 }
 
@@ -82,6 +85,8 @@ QVariant ProfilesModel::data(const QModelIndex &index, int role) const
         return data.name;
     case ProfileIdentifierRole:
         return data.profileIdentifier;
+    case IconNameRole:
+        return data.iconName;
     default:
         return QVariant();
     }
@@ -92,6 +97,7 @@ void ProfilesModel::openProfile(const QString profileIdentifier)
     KIO::CommandLauncherJob *job;
     if (m_appName == QLatin1String("konsole")) {
         job = new KIO::CommandLauncherJob(m_appName, QStringList{QStringLiteral("--profile"), profileIdentifier});
+        job->setDesktopName(QStringLiteral("org.kde.konsole"));
     } else {
         Q_UNREACHABLE();
     }
