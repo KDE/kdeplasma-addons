@@ -44,7 +44,7 @@ void ProfilesModel::loadProfiles()
     if (m_appName == QLatin1String("kate")) {
         const QDir sessionsDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/kate/sessions"));
         profilesPaths = sessionsDir.entryList({QStringLiteral("*.katesession")}, QDir::Files, QDir::Name);
-        m_data << ProfileData{i18n("Start Kate (no arguments)"), QString(), m_appName, ProfilesModel::Type::Default};
+        m_data << ProfileData{i18n("Start Kate (no arguments)"), QString(), m_appName, ProfilesModel::Type::EmptySession};
         m_data << ProfileData{i18n("New Kate Session"), QString(), QStringLiteral("document-new"), ProfilesModel::Type::NewSession};
     } else {
         const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, m_appName, QStandardPaths::LocateDirectory);
@@ -65,7 +65,7 @@ void ProfilesModel::loadProfiles()
             iconName = m_appName;
         }
 
-        m_data.append(ProfileData{name, profileIdentifier, iconName, ProfilesModel::Type::Default});
+        m_data.append(ProfileData{name, profileIdentifier, iconName, ProfilesModel::Type::DefaultSession});
     }
     endResetModel();
 }

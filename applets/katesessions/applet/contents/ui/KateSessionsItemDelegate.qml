@@ -22,7 +22,6 @@ PlasmaComponents.ListItem {
     id: menuItem
 
     signal itemSelected(string uuid)
-    signal newSession(string sessionname)
     signal remove(string uuid)
     
     property bool showInput: false
@@ -99,7 +98,7 @@ PlasmaComponents.ListItem {
                 PlasmaComponents3.ToolButton {
                     icon.name: "dialog-ok"
                     enabled: sessionname.text.replace(/^\s+|\s+$/g, '').length>0
-                    onClicked: {menuItem.newSession(sessionname.text.replace(/^\s+|\s+$/g, '')); showInput=false;}
+                    onClicked: {menuItem.itemSelected(sessionname.text.replace(/^\s+|\s+$/g, '')); showInput=false;}
 
                     PlasmaComponents3.ToolTip {
                         text: i18n("Create new session and start Kate")
@@ -133,7 +132,7 @@ PlasmaComponents.ListItem {
             }
 
             Component.onCompleted: {
-                toolButtonsLayout.visible = Qt.binding(function () { return (type == ProfilesModel.NewSession) && (menuListView.currentIndex == index); });
+                toolButtonsLayout.visible = Qt.binding(() => (type == ProfilesModel.DefaultSession) && (menuListView.currentIndex == index));
             }
         }
     }

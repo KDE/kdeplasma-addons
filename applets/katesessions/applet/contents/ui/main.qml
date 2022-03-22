@@ -135,7 +135,6 @@ Item {
                     plasmoid.expanded = false;
                 }
                 onRemove: sessionsSource.serviceAction(uuid, "remove")
-                onNewSession: sessionsSource.newSession(sessionName)
             }
         }
     }

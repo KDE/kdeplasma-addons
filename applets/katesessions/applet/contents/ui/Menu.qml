@@ -18,7 +18,6 @@ PlasmaExtras.ScrollArea {
     property alias model: menuListView.model
     signal itemSelected(string uuid)
     signal remove(string uuid)
-    signal newSession(string sessionName)
 
     ListView {
         id: menuListView
@@ -39,7 +38,6 @@ PlasmaExtras.ScrollArea {
 
             onItemSelected: menu.itemSelected(uuid)
             onRemove: menu.remove(uuid)
-            onNewSession:menu.newSession(sessionname)
         }
     }
 }

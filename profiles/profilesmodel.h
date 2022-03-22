@@ -33,7 +33,8 @@ public:
     };
 
     enum Type {
-        Default,
+        DefaultSession,
+        EmptySession,
         NewSession,
     };
     Q_ENUM(Type)
