@@ -1,0 +1,14 @@
+add_library(profiles_utility_static STATIC profilesmodel.cpp)
+target_link_libraries(profiles_utility_static PRIVATE Qt::Core KF5::CoreAddons KF5::ConfigCore KF5::KIOGui)
+target_include_directories(profiles_utility_static
+    PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+)
+
+add_library(profiles_qml_plugin profilesplugin.cpp)
+target_link_libraries(profiles_qml_plugin
+    Qt::Qml
+    profiles_utility_static
+)
+
+install(TARGETS profiles_qml_plugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/profiles/)
+install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/profiles)

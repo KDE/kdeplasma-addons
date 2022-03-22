@@ -9,6 +9,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.private.profiles 1.0 as Profiles
 
 FocusScope {
    id: konsoleProfiles
@@ -25,21 +26,13 @@ FocusScope {
         }
     }
 
-    PlasmaCore.DataSource {
-        id: profilesSource
-        engine: "org.kde.konsoleprofiles"
-        onSourceAdded: connectSource(source)
-        onSourceRemoved: disconnectSource(source)
-
-        Component.onCompleted: connectedSources = sources
-    }
-
     PlasmaCore.SortFilterModel {
-        id: profilesModel
-        sortRole: "prettyName"
+        id: sortModel
+        sortRole: "name"
         sortOrder: "AscendingOrder"
-        sourceModel: PlasmaCore.DataModel {
-            dataSource: profilesSource
+        sourceModel: Profiles.ProfilesModel {
+            id: profilesModel
+            appName: "konsole"
         }
     }
 
@@ -95,7 +88,7 @@ FocusScope {
             id: view
 
 
-            model: profilesModel
+            model: sortModel
             clip: true
             focus: true
             keyNavigationWraps: true
@@ -110,9 +103,11 @@ FocusScope {
                 }
 
                 function openProfile() {
-                    var service = profilesSource.serviceForSource(model["DataEngineSource"])
+                    /*var service = profilesSource.serviceForSource(model["DataEngineSource"])
                     var operation = service.operationDescription("open")
-                    var job = service.startOperationCall(operation)
+                    var  = service.startOperationCall(operation)*/
+                    console.error(model.profileIdentifier)
+                    profilesModel.openProfile(model.profileIdentifier)
                 }
 
                 PlasmaComponents3.Label {
@@ -127,7 +122,7 @@ FocusScope {
                     }
 
                     verticalAlignment: Text.AlignVCenter
-                    text: model.prettyName
+                    text: model.name
                     elide: Text.ElideRight
                 }
 

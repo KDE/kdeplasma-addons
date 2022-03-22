@@ -1,0 +1,3 @@
+module org.kde.plasma.private.profiles
+plugin profiles_qml_plugin
+
