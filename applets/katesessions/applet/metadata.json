@@ -65,7 +65,7 @@
         "Description[x-test]": "xxKate Session Launcherxx",
         "Description[zh_CN]": "Kate 会话启动器",
         "Icon": "kate",
-        "Id": "org.kde.plasma.katesessions",
+        "Id": "org.kde.plasma.addons.katesessions",
         "License": "GPL-2.0+",
         "Name": "Kate Sessions",
         "Name[az]": "Kate sessiyaları",
