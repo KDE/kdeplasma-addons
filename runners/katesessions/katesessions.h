@@ -9,9 +9,8 @@
 #ifndef KATESESSIONS_H
 #define KATESESSIONS_H
 
+#include "profilesmodel.h"
 #include <KRunner/AbstractRunner>
-
-class KDirWatch;
 
 using namespace Plasma;
 
@@ -21,17 +20,13 @@ class KateSessions : public AbstractRunner
 
 public:
     explicit KateSessions(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-    ~KateSessions() override;
 
     void match(RunnerContext &context) override;
     void run(const RunnerContext &context, const QueryMatch &match) override;
 
-private Q_SLOTS:
-    QStringList loadSessions();
-
 private:
-    QString m_sessionsFolderPath;
     const QLatin1String m_triggerWord = QLatin1String("kate");
+    ProfilesModel m_model;
 };
 
 #endif

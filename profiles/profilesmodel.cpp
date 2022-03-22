@@ -9,6 +9,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDirWatch>
+#include <KFileUtils>
 // Qt
 #include <KIO/CommandLauncherJob>
 #include <QDebug>
@@ -36,13 +37,12 @@ void ProfilesModel::init()
 void ProfilesModel::loadProfiles()
 {
     QStringList profilesPaths;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, m_appName, QStandardPaths::LocateDirectory);
-
-    for (const auto &dir : dirs) {
-        const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.profile")});
-        for (const QString &fileName : fileNames) {
-            profilesPaths.append(dir + QLatin1Char('/') + fileName);
-        }
+    if (m_appName == QLatin1String("kate")) {
+        const QDir sessionsDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/kate/sessions"));
+        profilesPaths = sessionsDir.entryList({QStringLiteral("*.katesession")}, QDir::Files, QDir::Name);
+    } else {
+        const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, m_appName, QStandardPaths::LocateDirectory);
+        profilesPaths = KFileUtils::findAllUniqueFiles(dirs, {QStringLiteral("*.profile")});
     }
 
     beginResetModel();
@@ -52,18 +52,14 @@ void ProfilesModel::loadProfiles()
         const QString profileIdentifier = info.baseName();
         QString niceName = profileIdentifier;
         QString iconName = QStringLiteral("utilities-terminal");
-        KConfig cfg(profilePath, KConfig::SimpleConfig);
-
-        if (cfg.hasGroup("General")) {
+        if (m_appName == QLatin1String("konsole")) {
+            KConfig cfg(profilePath, KConfig::SimpleConfig);
             KConfigGroup grp(&cfg, "General");
             iconName = grp.readEntry("Icon", iconName);
-
-            if (grp.hasKey("Name")) {
-                niceName = grp.readEntry("Name");
-            }
-
-            m_data.append(ProfileData{niceName, profileIdentifier, iconName});
+            niceName = grp.readEntry("Name", niceName);
         }
+
+        m_data.append(ProfileData{niceName, profileIdentifier, iconName});
     }
     endResetModel();
 }
@@ -98,6 +94,9 @@ void ProfilesModel::openProfile(const QString profileIdentifier)
     if (m_appName == QLatin1String("konsole")) {
         job = new KIO::CommandLauncherJob(m_appName, QStringList{QStringLiteral("--profile"), profileIdentifier});
         job->setDesktopName(QStringLiteral("org.kde.konsole"));
+    } else if (m_appName == QLatin1String("kate")) {
+        job = new KIO::CommandLauncherJob(m_appName, {QStringLiteral("--start"), profileIdentifier, QStringLiteral("-n")});
+        job->setDesktopName(QStringLiteral("org.kde.kate"));
     } else {
         Q_UNREACHABLE();
     }

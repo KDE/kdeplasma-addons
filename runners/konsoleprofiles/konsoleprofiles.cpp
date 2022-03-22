@@ -29,7 +29,6 @@ KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaDat
     setMinLetterCount(3);
 
     m_model.setAppName(m_triggerWord);
-    suspendMatching(m_model.rowCount() == 0);
 }
 
 void KonsoleProfiles::match(RunnerContext &context)

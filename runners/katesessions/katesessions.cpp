@@ -30,27 +30,10 @@ KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData, con
     addSyntax(RunnerSyntax(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:.")));
     addSyntax(RunnerSyntax(QStringLiteral("kate"), i18n("Lists all the Kate editor sessions in your account.")));
 
-    m_sessionsFolderPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/kate/sessions");
-
     // Initialize watchers and sessions
     setTriggerWords({m_triggerWord});
-}
 
-KateSessions::~KateSessions()
-{
-}
-
-QStringList KateSessions::loadSessions()
-{
-    QStringList sessions;
-    const QDir sessionsDir(m_sessionsFolderPath);
-
-    const auto &sessionFiles = sessionsDir.entryInfoList({QStringLiteral("*.katesession")}, QDir::Files, QDir::Name);
-    for (const QFileInfo &sessionFile : sessionFiles) {
-        sessions.append(QUrl::fromPercentEncoding(sessionFile.baseName().toLocal8Bit()));
-    }
-
-    return sessions;
+    m_model.setAppName(m_triggerWord);
 }
 
 void KateSessions::match(RunnerContext &context)
@@ -67,19 +50,13 @@ void KateSessions::match(RunnerContext &context)
         return;
     }
 
-    // we got here, load sessions now
-    const auto sessions = loadSessions();
-    if (sessions.isEmpty()) {
-        suspendMatching(true);
-        return;
-    }
-
     QList<QueryMatch> matches;
     int maxScore = 0;
 
-    for (const QString &session : std::as_const(sessions)) {
+    for (int i = 0, count = m_model.rowCount(); i < count; ++i) {
         // Does the query match exactly?
         // no query = perfect match => list everything
+        QString session = m_model.index(i).data(ProfilesModel::NameRole).toString();
         if (listAll || session.compare(term, Qt::CaseInsensitive) == 0) {
             QueryMatch match(this);
             match.setType(QueryMatch::ExactMatch);
@@ -118,14 +95,7 @@ void KateSessions::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
 
-    auto *job = new KIO::CommandLauncherJob(QStringLiteral("kate"), {QStringLiteral("--start"), match.data().toString(), QStringLiteral("-n")});
-    job->setDesktopName(QStringLiteral("org.kde.kate"));
-
-    auto *delegate = new KNotificationJobUiDelegate;
-    delegate->setAutoErrorHandlingEnabled(true);
-    job->setUiDelegate(delegate);
-
-    job->start();
+    m_model.openProfile(match.data().toString());
 }
 
 #include "katesessions.moc"
