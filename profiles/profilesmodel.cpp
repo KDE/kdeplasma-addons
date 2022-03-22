@@ -50,16 +50,18 @@ void ProfilesModel::loadProfiles()
     for (const auto &profilePath : std::as_const(profilesPaths)) {
         QFileInfo info(profilePath);
         const QString profileIdentifier = info.baseName();
-        QString niceName = profileIdentifier;
-        QString iconName = QStringLiteral("utilities-terminal");
+        QString name = profileIdentifier;
+        QString iconName;
         if (m_appName == QLatin1String("konsole")) {
             KConfig cfg(profilePath, KConfig::SimpleConfig);
             KConfigGroup grp(&cfg, "General");
             iconName = grp.readEntry("Icon", iconName);
-            niceName = grp.readEntry("Name", niceName);
+            name = grp.readEntry("Name", name);
+        } else {
+            iconName = m_appName;
         }
 
-        m_data.append(ProfileData{niceName, profileIdentifier, iconName});
+        m_data.append(ProfileData{name, profileIdentifier, iconName, ProfilesModel::Type::Default});
     }
     endResetModel();
 }
@@ -70,6 +72,7 @@ QHash<int, QByteArray> ProfilesModel::roleNames() const
         {NameRole, "name"},
         {ProfileIdentifierRole, "profileIdentifier"},
         {IconNameRole, "iconName"},
+        {TypeRole, "type"},
     };
 }
 
@@ -83,6 +86,8 @@ QVariant ProfilesModel::data(const QModelIndex &index, int role) const
         return data.profileIdentifier;
     case IconNameRole:
         return data.iconName;
+    case TypeRole:
+        return data.type;
     default:
         return QVariant();
     }

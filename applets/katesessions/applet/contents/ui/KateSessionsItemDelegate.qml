@@ -16,6 +16,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons
 import org.kde.plasma.core 2.0 as PlasmaCore
 
+import org.kde.plasma.private.profiles 1.0
 
 PlasmaComponents.ListItem {
     id: menuItem
@@ -33,8 +34,8 @@ PlasmaComponents.ListItem {
         hoverEnabled: true
 
         onClicked: {
-            if (TypeRole!=1)
-                menuItem.itemSelected(UuidRole);
+            if (type == ProfilesModel.Default)
+                menuItem.itemSelected(profileIdentifier);
             else {
                 showInput=true; 
             }
@@ -61,7 +62,7 @@ PlasmaComponents.ListItem {
                     verticalCenter: parent.verticalCenter
                 }
                 maximumLineCount: 1
-                text: DisplayRole.trim()
+                text: name.trim()
                 visible: !showInput // TypeRole: 0: Text, 1: Image, 2: Url
                 elide: Text.ElideRight
                 wrapMode: Text.Wrap
@@ -72,7 +73,7 @@ PlasmaComponents.ListItem {
                 width: PlasmaCore.Units.iconSizes.small
                 height: width
                 anchors.verticalCenter: parent.verticalCenter
-                source: DecorationRole
+                source: iconName
             }
         }
 
@@ -132,7 +133,7 @@ PlasmaComponents.ListItem {
             }
 
             Component.onCompleted: {
-                toolButtonsLayout.visible = Qt.binding(function () { return (TypeRole==2) && (menuListView.currentIndex == index); });
+                toolButtonsLayout.visible = Qt.binding(function () { return (type == ProfilesModel.NewSession) && (menuListView.currentIndex == index); });
             }
         }
     }

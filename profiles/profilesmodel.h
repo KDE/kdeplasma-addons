@@ -6,6 +6,7 @@
 #pragma once
 
 #include <QAbstractListModel>
+#include <qnamespace.h>
 
 class KDirWatch;
 
@@ -13,6 +14,7 @@ struct ProfileData {
     QString name;
     QString profileIdentifier;
     QString iconName;
+    int type;
 };
 
 class ProfilesModel : public QAbstractListModel
@@ -26,8 +28,16 @@ public:
     enum Roles {
         NameRole = Qt::DisplayRole,
         ProfileIdentifierRole = Qt::UserRole,
-        IconNameRole,
+        IconNameRole = Qt::DecorationRole,
+        TypeRole,
     };
+
+    enum Type {
+        Default,
+        NewSession,
+    };
+    Q_ENUM(Type)
+
     QHash<int, QByteArray> roleNames() const override;
     QVariant data(const QModelIndex &index, int role) const override;
     Q_INVOKABLE void openProfile(const QString profileIdentifier);

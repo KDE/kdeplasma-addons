@@ -17,6 +17,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
+import org.kde.plasma.private.profiles 1.0
+
 Item {
     id: main
     width: (Plasmoid.formFactor==PlasmaCore.Types.Planar)? PlasmaCore.Units.gridUnit * 14 : undefined
@@ -31,24 +33,6 @@ Item {
 
     Component.onCompleted: {
         plasmoid.removeAction("configure");
-    }
-
-    PlasmaCore.DataSource {
-        id: sessionsSource
-        property bool editing: false;
-        engine: "org.kde.plasma.katesessions"
-        connectedSources: "katesessions"
-        function serviceAction(uuid, op) {
-            const service = sessionsSource.serviceForSource(uuid);
-            var operation = service.operationDescription(op);
-            return service.startOperationCall(operation);
-        }
-        function newSession(sessionName) {
-            const service = sessionsSource.serviceForSource("");
-            var operation = service.operationDescription("newSession");
-            operation.sessionName = sessionName;
-            return service.startOperationCall(operation);
-        }
     }
 
     property var searchHeader: PlasmaExtras.PlasmoidHeading {
@@ -136,15 +120,18 @@ Item {
             Menu {
                 id: sessionsMenu
                 model: PlasmaCore.SortFilterModel {
-                    sourceModel: sessionsSource.models.katesessions
-                    filterRole: "DisplayRole"
+                    sourceModel: ProfilesModel {
+                        id: model
+                        appName: "kate"
+                    }
+                    filterRole: "name"
                     filterRegExp: filter.text
                 }
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.topMargin: PlasmaCore.Units.smallSpacing
-                onItemSelected: {
-                    sessionsSource.serviceAction(uuid, "invoke")
+                onItemSelected: function (profileIdentifier) {
+                    model.openProfile(profileIdentifier)
                     plasmoid.expanded = false;
                 }
                 onRemove: sessionsSource.serviceAction(uuid, "remove")
