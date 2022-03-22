@@ -14,7 +14,6 @@ struct ProfileData {
     QString name;
     QString profileIdentifier;
     QString iconName;
-    int type;
 };
 
 class ProfilesModel : public QAbstractListModel
@@ -29,15 +28,7 @@ public:
         NameRole = Qt::DisplayRole,
         ProfileIdentifierRole = Qt::UserRole,
         IconNameRole = Qt::DecorationRole,
-        TypeRole,
     };
-
-    enum Type {
-        DefaultSession,
-        EmptySession,
-        NewSession,
-    };
-    Q_ENUM(Type)
 
     QHash<int, QByteArray> roleNames() const override;
     QVariant data(const QModelIndex &index, int role) const override;

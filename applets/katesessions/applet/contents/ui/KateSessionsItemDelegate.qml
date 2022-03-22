@@ -22,18 +22,17 @@ PlasmaComponents.ListItem {
     id: menuItem
 
     signal itemSelected(string uuid)
-    signal remove(string uuid)
     
     property bool showInput: false
 
-    height: Math.max(Math.max(label.height, toolButtonsLayout.implicitHeight), sessionnameditlayout.implicitHeight) + PlasmaCore.Units.smallSpacing
+    height: Math.max(label.height, sessionnameditlayout.implicitHeight) + PlasmaCore.Units.smallSpacing
 
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
 
         onClicked: {
-            if (type == ProfilesModel.Default)
+            if (profileIdentifier !== "")
                 menuItem.itemSelected(profileIdentifier);
             else {
                 showInput=true; 
@@ -113,27 +112,6 @@ PlasmaComponents.ListItem {
                         text: i18n("Cancel session creation")
                     }
                 }
-        }
-        
-        RowLayout {
-            id: toolButtonsLayout
-            anchors {
-                right: label.right
-                verticalCenter: parent.verticalCenter
-            }
-
-            PlasmaComponents3.ToolButton {
-                icon.name: "edit-delete"
-                onClicked: menuItem.remove(UuidRole)
-
-                PlasmaComponents3.ToolTip {
-                    text: i18n("Delete session")
-                }
-            }
-
-            Component.onCompleted: {
-                toolButtonsLayout.visible = Qt.binding(() => (type == ProfilesModel.DefaultSession) && (menuListView.currentIndex == index));
-            }
         }
     }
 }

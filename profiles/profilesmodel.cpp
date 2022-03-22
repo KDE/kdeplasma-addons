@@ -44,8 +44,8 @@ void ProfilesModel::loadProfiles()
     if (m_appName == QLatin1String("kate")) {
         const QDir sessionsDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/kate/sessions"));
         profilesPaths = sessionsDir.entryList({QStringLiteral("*.katesession")}, QDir::Files, QDir::Name);
-        m_data << ProfileData{i18n("Start Kate (no arguments)"), QString(), m_appName, ProfilesModel::Type::EmptySession};
-        m_data << ProfileData{i18n("New Kate Session"), QString(), QStringLiteral("document-new"), ProfilesModel::Type::NewSession};
+        m_data << ProfileData{i18n("Start Kate (no arguments)"), QString(), m_appName};
+        m_data << ProfileData{i18n("New Kate Session"), QString(), QStringLiteral("document-new")};
     } else {
         const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, m_appName, QStandardPaths::LocateDirectory);
         profilesPaths = KFileUtils::findAllUniqueFiles(dirs, {QStringLiteral("*.profile")});
@@ -65,7 +65,7 @@ void ProfilesModel::loadProfiles()
             iconName = m_appName;
         }
 
-        m_data.append(ProfileData{name, profileIdentifier, iconName, ProfilesModel::Type::DefaultSession});
+        m_data.append(ProfileData{name, profileIdentifier, iconName});
     }
     endResetModel();
 }
@@ -76,7 +76,6 @@ QHash<int, QByteArray> ProfilesModel::roleNames() const
         {NameRole, "name"},
         {ProfileIdentifierRole, "profileIdentifier"},
         {IconNameRole, "iconName"},
-        {TypeRole, "type"},
     };
 }
 
@@ -90,8 +89,6 @@ QVariant ProfilesModel::data(const QModelIndex &index, int role) const
         return data.profileIdentifier;
     case IconNameRole:
         return data.iconName;
-    case TypeRole:
-        return data.type;
     default:
         return QVariant();
     }

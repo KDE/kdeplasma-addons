@@ -134,7 +134,6 @@ Item {
                     model.openProfile(profileIdentifier)
                     plasmoid.expanded = false;
                 }
-                onRemove: sessionsSource.serviceAction(uuid, "remove")
             }
         }
     }

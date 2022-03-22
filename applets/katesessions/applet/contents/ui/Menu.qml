@@ -17,7 +17,6 @@ PlasmaExtras.ScrollArea {
     property alias view: menuListView
     property alias model: menuListView.model
     signal itemSelected(string uuid)
-    signal remove(string uuid)
 
     ListView {
         id: menuListView
@@ -37,7 +36,6 @@ PlasmaExtras.ScrollArea {
             width: menuListView.width
 
             onItemSelected: menu.itemSelected(uuid)
-            onRemove: menu.remove(uuid)
         }
     }
 }
