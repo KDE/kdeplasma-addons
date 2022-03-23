@@ -47,7 +47,6 @@ Name[x-test]=xxComicsxx
 Name[zh_CN]=漫画
 Name[zh_TW]=漫畫
 
-ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml
 Categories=Plasma Comic
 TargetDir=plasma/comics
 Uncompress=kpackage
