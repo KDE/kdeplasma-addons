@@ -71,7 +71,7 @@ void ComicApplet::init()
 
     configChanged();
 
-    mEngine = new ComicEngine();
+    mEngine = new ComicEngine(this);
     mModel = new ComicModel(mEngine, mTabIdentifier, this);
     mProxy = new QSortFilterProxyModel(this);
     mProxy->setSourceModel(mModel);

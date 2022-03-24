@@ -18,9 +18,7 @@ ComicModel::ComicModel(ComicEngine *engine, const QStringList &usedComics, QObje
     , mUsedComics(usedComics)
 {
     Q_ASSERT(engine);
-    beginResetModel();
     mComics = engine->loadProviders();
-    endResetModel();
 }
 
 QHash<int, QByteArray> ComicModel::roleNames() const

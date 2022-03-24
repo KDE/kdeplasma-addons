@@ -25,16 +25,11 @@
 #include "comicproviderkross.h"
 #include "types.h"
 
-ComicEngine::ComicEngine()
-    : QObject()
+ComicEngine::ComicEngine(QObject *parent)
+    : QObject(parent)
     , mEmptySuffix(false)
 {
-    // TODO setPollingInterval(0);
     loadProviders();
-}
-
-ComicEngine::~ComicEngine()
-{
 }
 
 QList<ComicProviderInfo> ComicEngine::loadProviders()

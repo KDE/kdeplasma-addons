@@ -37,8 +37,7 @@ class ComicEngine : public QObject
     Q_OBJECT
 
 public:
-    ComicEngine();
-    ~ComicEngine() override;
+    ComicEngine(QObject *parent);
 
     QList<ComicProviderInfo> loadProviders();
 
