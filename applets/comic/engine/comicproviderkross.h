@@ -12,7 +12,6 @@
 #include "comicproviderwrapper.h"
 #include "types.h"
 
-#include <KPackage/PackageStructure>
 #include <QImage>
 #include <QUrl>
 
@@ -24,8 +23,6 @@ class ComicProviderKross : public ComicProvider
 public:
     ComicProviderKross(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier);
     ~ComicProviderKross() override;
-
-    static KPackage::PackageStructure *packageStructure();
 
     bool isLeftToRight() const override;
     bool isTopToBottom() const override;
@@ -48,7 +45,6 @@ protected:
 
 private:
     mutable ComicProviderWrapper m_wrapper;
-    static KPackage::PackageStructure *m_packageStructure;
 };
 
 #endif

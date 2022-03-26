@@ -10,7 +10,8 @@
 #include "comicproviderkross.h"
 #include "types.h"
 
-#include <Plasma/Package>
+#include <KPackage/Package>
+#include <KPackage/PackageLoader>
 #include <QFile>
 #include <QFileInfo>
 #include <QJSEngine>
@@ -284,7 +285,7 @@ void ComicProviderWrapper::init()
     qCDebug(PLASMA_COMIC) << "ComicProviderWrapper::init() package is" << mProvider->pluginName() << " at " << path;
 
     if (!path.isEmpty()) {
-        mPackage = new KPackage::Package(ComicProviderKross::packageStructure());
+        mPackage = new KPackage::Package(KPackage::PackageLoader::self()->loadPackageStructure(QStringLiteral("Plasma/Comic")));
         mPackage->setPath(path);
 
         if (mPackage->isValid()) {

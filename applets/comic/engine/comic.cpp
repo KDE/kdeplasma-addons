@@ -16,7 +16,6 @@
 #include <QUrl>
 
 #include <KPackage/PackageLoader>
-#include <Plasma/DataContainer>
 #include <qloggingcategory.h>
 
 #include "cachedprovider.h"

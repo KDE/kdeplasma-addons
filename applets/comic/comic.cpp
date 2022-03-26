@@ -32,8 +32,6 @@
 #include <kuiserverjobtracker.h>
 
 #include <Plasma/Containment>
-#include <Plasma/Package>
-#include <Plasma/PluginLoader>
 
 #include "comicmodel.h"
 #include "comicupdater.h"

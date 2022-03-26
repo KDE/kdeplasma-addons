@@ -7,9 +7,6 @@
 
 #include "comicproviderkross.h"
 #include "comic_package.h"
-#include <KPackage/PackageLoader>
-
-KPackage::PackageStructure *ComicProviderKross::m_packageStructure(nullptr);
 
 ComicProviderKross::ComicProviderKross(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier)
     : ComicProvider(parent, data, type, identifier)
@@ -108,12 +105,4 @@ void ComicProviderKross::pageError(int id, const QString &message)
 void ComicProviderKross::redirected(int id, const QUrl &newUrl)
 {
     m_wrapper.redirected(id, newUrl);
-}
-
-KPackage::PackageStructure *ComicProviderKross::packageStructure()
-{
-    if (!m_packageStructure) {
-        m_packageStructure = KPackage::PackageLoader::self()->loadPackageStructure(QStringLiteral("Plasma/Comic"));
-    }
-    return m_packageStructure;
 }

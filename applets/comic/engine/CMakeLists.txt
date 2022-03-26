@@ -27,14 +27,13 @@ add_library(plasma_engine_comic STATIC ${comic_engine_SRCS})
 target_link_libraries(plasma_engine_comic plasmacomicprovidercore
     Qt::Qml
     KF5::WidgetsAddons
-    KF5::Plasma
+    KF5::Package
     KF5::I18n
 )
 
 kcoreaddons_add_plugin(plasma_packagestructure_comic SOURCES comic_package.cpp INSTALL_NAMESPACE "kpackage/packagestructure")
 target_link_libraries(plasma_packagestructure_comic
-    KF5::WidgetsAddons
-    KF5::Plasma
+    KF5::Package
     KF5::I18n
 )
 set_target_properties(plasma_packagestructure_comic PROPERTIES OUTPUT_NAME plasma_comic)
@@ -48,7 +47,7 @@ set(comic_provider_core_SRCS
 
 add_library(plasmacomicprovidercore STATIC ${comic_provider_core_SRCS})
 target_link_libraries(plasmacomicprovidercore
-    KF5::WidgetsAddons
+    Qt::Gui
     KF5::KIOCore
     KF5::I18n
 )
