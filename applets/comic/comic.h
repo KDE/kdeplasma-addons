@@ -172,7 +172,6 @@ private:
     void dataUpdated(const ComicMetaData &data);
 
 private:
-    static const int CACHE_LIMIT;
     ComicModel *mModel;
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_DEPRECATED

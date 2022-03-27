@@ -39,8 +39,6 @@
 
 Q_GLOBAL_STATIC(ComicUpdater, globalComicUpdater)
 
-const int ComicApplet::CACHE_LIMIT = 20;
-
 ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
     , mProxy(nullptr)
@@ -331,7 +329,7 @@ void ComicApplet::configChanged()
     mCheckNewComicStripsInterval = cg.readEntry("checkNewComicStripsIntervall", 30);
 
     auto oldMaxComicLimit = mMaxComicLimit;
-    mMaxComicLimit = cg.readEntry("maxComicLimit", CACHE_LIMIT);
+    mMaxComicLimit = cg.readEntry("maxComicLimit", 29);
     if (oldMaxComicLimit != mMaxComicLimit && mEngine) {
         mEngine->setMaxComicLimit(mMaxComicLimit);
     }
