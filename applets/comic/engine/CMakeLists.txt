@@ -37,3 +37,4 @@ target_link_libraries(plasma_packagestructure_comic
     KF5::I18n
 )
 set_target_properties(plasma_packagestructure_comic PROPERTIES OUTPUT_NAME plasma_comic)
+install(FILES plasma-comic.desktop DESTINATION ${KDE_INSTALL_KSERVICETYPESDIR})

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=Plasma/Comic
+
+[PropertyDef::X-KDE-PlasmaComicProvider-SuffixType]
+Type=QString
+
+[PropertyDef::X-KDE-PluginInfo-Name]
+Type=QString
+
