@@ -42,13 +42,15 @@ public:
     QList<ComicProviderInfo> loadProviders();
 
     void setMaxComicLimit(int maxComicLimit);
-    using ComicRequestCallback = const std::function<void(const ComicMetaData &data)> &;
-    bool requestSource(const QString &identifier, ComicRequestCallback callback);
+    bool requestSource(const QString &identifier);
+
+Q_SIGNALS:
+    void requestFinished(const ComicMetaData &data);
 
 private:
-    void finished(ComicProvider *, ComicRequestCallback callback);
-    void error(ComicProvider *, ComicRequestCallback callback);
-    void setComicData(ComicProvider *provider, ComicRequestCallback callback);
+    void finished(ComicProvider *);
+    void error(ComicProvider *);
+    ComicMetaData metaDataFromProvider(ComicProvider *provider);
     QString lastCachedIdentifier(const QString &identifier) const;
 
 private:

@@ -14,6 +14,7 @@
 #include "comic_debug.h"
 #include "comicarchivedialog.h"
 #include "comicarchivejob.h"
+#include "comicdata.h"
 #include "comicsaver.h"
 #include "stripselector.h"
 
@@ -70,6 +71,7 @@ void ComicApplet::init()
     configChanged();
 
     mEngine = new ComicEngine(this);
+    connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
     mModel = new ComicModel(mEngine, mTabIdentifier, this);
     mProxy = new QSortFilterProxyModel(this);
     mProxy->setSourceModel(mModel);
@@ -141,9 +143,7 @@ void ComicApplet::init()
             return;
         }
         qCDebug(PLASMA_COMIC) << "Online status changed to true, requesting comic" << mPreviousFailedIdentifier;
-        mEngine->requestSource(mPreviousFailedIdentifier, [this](const auto &data) {
-            dataUpdated(mPreviousFailedIdentifier, data);
-        });
+        mEngine->requestSource(mPreviousFailedIdentifier);
     });
     QT_WARNING_POP
 }
@@ -153,12 +153,16 @@ ComicApplet::~ComicApplet()
     delete mSavingDir;
 }
 
-void ComicApplet::dataUpdated(const QString &source, const ComicMetaData &data)
+void ComicApplet::dataUpdated(const ComicMetaData &data)
 {
+    const QString source = data.identifier;
+    if (source.startsWith(mOldSource)) {
+        mOldSource = source;
+    }
     setBusy(false);
 
     // disconnect prefetched comic strips
-    if (mEngine && source != mOldSource) {
+    if (source != mOldSource) {
         return;
     }
 
@@ -191,15 +195,11 @@ void ComicApplet::dataUpdated(const QString &source, const ComicMetaData &data)
         // prefetch the previous and following comic for faster navigation
         if (mCurrent.hasNext()) {
             const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.next();
-            mEngine->requestSource(prefetch, [this, prefetch](const auto &data) {
-                dataUpdated(prefetch, data);
-            });
+            mEngine->requestSource(prefetch);
         }
         if (mCurrent.hasPrev()) {
             const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
-            mEngine->requestSource(prefetch, [this, prefetch](const auto &data) {
-                dataUpdated(prefetch, data);
-            });
+            mEngine->requestSource(prefetch);
         }
     }
 
@@ -477,9 +477,7 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
             mIdentifierError.clear();
         }
         mOldSource = identifier;
-        mEngine->requestSource(identifier, [this, identifier](const auto &data) {
-            dataUpdated(identifier, data);
-        });
+        mEngine->requestSource(identifier);
         slotScaleToContent();
     } else {
         qWarning() << "Either no identifier was specified or the engine could not be created:"

@@ -169,7 +169,7 @@ private:
     void refreshComicData();
     void setTabHighlighted(const QString &id, bool highlight);
     bool isTabHighlighted(const QString &id) const;
-    void dataUpdated(const QString &name, const ComicMetaData &data);
+    void dataUpdated(const ComicMetaData &data);
 
 private:
     static const int CACHE_LIMIT;

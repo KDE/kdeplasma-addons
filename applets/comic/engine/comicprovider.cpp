@@ -27,7 +27,7 @@ public:
     {
         mTimer = new QTimer(parent);
         mTimer->setSingleShot(true);
-        mTimer->setInterval(15000); // timeout after 15 seconds
+        mTimer->setInterval(60000); // timeout after 1 minute
         connect(mTimer, &QTimer::timeout, mParent, [this]() {
             // operation took too long, abort it
             Q_EMIT mParent->error(mParent);

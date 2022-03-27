@@ -23,10 +23,12 @@ CheckNewStrips::CheckNewStrips(const QStringList &identifiers, ComicEngine *engi
 
     // start at once, that way the user does not have to wait for minutes to get the initial result
     start();
+    connect(mEngine, &ComicEngine::requestFinished, this, &CheckNewStrips::dataUpdated);
 }
 
-void CheckNewStrips::dataUpdated(const QString &source, const ComicMetaData &data)
+void CheckNewStrips::dataUpdated(const ComicMetaData &data)
 {
+    const QString source = data.identifier;
     QString lastIdentifierSuffix;
 
     if (!data.error) {
@@ -43,9 +45,7 @@ void CheckNewStrips::dataUpdated(const QString &source, const ComicMetaData &dat
 
     if (mIndex < mIdentifiers.count()) {
         const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
-        mEngine->requestSource(newSource, [this, newSource](const auto &data) {
-            dataUpdated(newSource, data);
-        });
+        mEngine->requestSource(newSource);
     } else {
         mIndex = 0;
     }
@@ -60,8 +60,6 @@ void CheckNewStrips::start()
 
     if (mIndex < mIdentifiers.count()) {
         const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
-        mEngine->requestSource(newSource, [this, newSource](const auto &data) {
-            dataUpdated(newSource, data);
-        });
+        mEngine->requestSource(newSource);
     }
 }

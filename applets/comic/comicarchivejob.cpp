@@ -46,6 +46,7 @@ ComicArchiveJob::ComicArchiveJob(const QUrl &dest,
     } else {
         qWarning() << "Could not create a temporary file for the zip file.";
     }
+    connect(engine, &ComicEngine::requestFinished, this, &ComicArchiveJob::dataUpdated);
 }
 
 ComicArchiveJob::~ComicArchiveJob()
@@ -122,8 +123,9 @@ void ComicArchiveJob::start()
     }
 }
 
-void ComicArchiveJob::dataUpdated(const QString &source, const ComicMetaData &data)
+void ComicArchiveJob::dataUpdated(const ComicMetaData &data)
 {
+    const QString source = data.identifier;
     if (!mZip) {
         qWarning() << "No zip file, aborting.";
         setErrorText(i18n("No zip file is existing, aborting."));
@@ -331,9 +333,7 @@ void ComicArchiveJob::requestComic(QString identifier) // krazy:exclude=passbyva
                        qMakePair(QStringLiteral("source"), identifier),
                        qMakePair(QStringLiteral("destination"), mDest.toString()));
 
-    mEngine->requestSource(identifier, [this, identifier](const auto &data) {
-        dataUpdated(identifier, data);
-    });
+    mEngine->requestSource(identifier);
 }
 
 bool ComicArchiveJob::addFileToZip(const QString &path)

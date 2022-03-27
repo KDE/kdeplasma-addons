@@ -72,7 +72,7 @@ protected:
     bool doResume() override;
 
 private:
-    void dataUpdated(const QString &source, const ComicMetaData &data);
+    void dataUpdated(const ComicMetaData &data);
     /**
      * Sets the total number of comics to download.
      * @param currentSuffix if empty the from and to identifier suffix will be used.

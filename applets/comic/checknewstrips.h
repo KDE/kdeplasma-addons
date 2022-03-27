@@ -34,7 +34,7 @@ private Q_SLOTS:
     void start();
 
 private:
-    void dataUpdated(const QString &name, const ComicMetaData &data);
+    void dataUpdated(const ComicMetaData &data);
     int mMinutes;
     int mIndex;
     ComicEngine *mEngine;
