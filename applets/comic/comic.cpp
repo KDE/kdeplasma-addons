@@ -153,9 +153,6 @@ ComicApplet::~ComicApplet()
 void ComicApplet::dataUpdated(const ComicMetaData &data)
 {
     const QString source = data.identifier;
-    if (source.startsWith(mOldSource)) {
-        mOldSource = source;
-    }
     setBusy(false);
 
     // disconnect prefetched comic strips

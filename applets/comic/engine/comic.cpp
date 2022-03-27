@@ -178,17 +178,7 @@ void ComicEngine::error(ComicProvider *provider)
 
     qWarning() << identifier << "plugging reported an error.";
 
-    /**
-     * Requests for the current day have no suffix (date or id)
-     * set initially, so we have to remove the 'faked' suffix
-     * here again to not confuse the applet.
-     */
-    if (provider->isCurrent()) {
-        identifier = identifier.left(identifier.indexOf(QLatin1Char(':')) + 1);
-    }
-
     ComicMetaData data = metaDataFromProvider(provider);
-    data.identifier = identifier;
     data.error = true;
 
     // if there was an error loading the last cached comic strip, do not return its id anymore
@@ -232,7 +222,7 @@ ComicMetaData ComicEngine::metaDataFromProvider(ComicProvider *provider)
     data.additionalText = provider->additionalText();
     data.stripTitle = provider->stripTitle();
     data.firstStripIdentifier = provider->firstStripIdentifier();
-    data.identifier = provider->identifier();
+    data.identifier = identifier;
     data.providerName = provider->name();
     data.identifierType = provider->identifierType();
     data.isLeftToRight = provider->isLeftToRight();
