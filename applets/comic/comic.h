@@ -212,7 +212,7 @@ private:
     QSizeF mMaxSize;
     QSizeF mLastSize;
     QSizeF mIdealSize;
-    ComicEngine *mEngine;
+    ComicEngine *const mEngine;
 
     // Tabs
     bool mTabAdded;

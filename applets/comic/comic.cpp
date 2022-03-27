@@ -55,10 +55,11 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
     , mMaxComicLimit(0)
     , mCheckNewStrips(nullptr)
     , mActionShop(nullptr)
-    , mEngine(nullptr)
+    , mEngine(new ComicEngine(this))
     , mSavingDir(nullptr)
 {
     setHasConfigurationInterface(true);
+    connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
 }
 
 void ComicApplet::init()
@@ -68,8 +69,6 @@ void ComicApplet::init()
 
     configChanged();
 
-    mEngine = new ComicEngine(this);
-    connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
     mModel = new ComicModel(mEngine, mTabIdentifier, this);
     mProxy = new QSortFilterProxyModel(this);
     mProxy->setSourceModel(mModel);
@@ -169,7 +168,7 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     // there was an error, display information as image
     if (data.error) {
         mPreviousFailedIdentifier = source;
-        if (mEngine && !mShowErrorPicture && !data.previousIdentifier.isEmpty()) {
+        if (!mShowErrorPicture && !data.previousIdentifier.isEmpty()) {
             updateComic(data.previousIdentifier);
         }
         return;
@@ -189,16 +188,14 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     // call the slot to check if the position needs to be saved
     slotStorePosition();
 
-    if (mEngine) {
-        // prefetch the previous and following comic for faster navigation
-        if (mCurrent.hasNext()) {
-            const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.next();
-            mEngine->requestSource(prefetch);
-        }
-        if (mCurrent.hasPrev()) {
-            const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
-            mEngine->requestSource(prefetch);
-        }
+    // prefetch the previous and following comic for faster navigation
+    if (mCurrent.hasNext()) {
+        const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.next();
+        mEngine->requestSource(prefetch);
+    }
+    if (mCurrent.hasPrev()) {
+        const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
+        mEngine->requestSource(prefetch);
     }
 
     updateView();
@@ -280,7 +277,7 @@ void ComicApplet::updateUsedComics()
 
     delete mCheckNewStrips;
     mCheckNewStrips = nullptr;
-    if (mEngine && mCheckNewComicStripsInterval) {
+    if (mCheckNewComicStripsInterval) {
         mCheckNewStrips = new CheckNewStrips(mTabIdentifier, mEngine, mCheckNewComicStripsInterval, this);
         connect(mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip);
     }
@@ -330,7 +327,7 @@ void ComicApplet::configChanged()
 
     auto oldMaxComicLimit = mMaxComicLimit;
     mMaxComicLimit = cg.readEntry("maxComicLimit", 29);
-    if (oldMaxComicLimit != mMaxComicLimit && mEngine) {
+    if (oldMaxComicLimit != mMaxComicLimit) {
         mEngine->setMaxComicLimit(mMaxComicLimit);
     }
 
@@ -463,7 +460,7 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
     const QString id = mCurrent.id();
     setConfigurationRequired(id.isEmpty());
 
-    if (!id.isEmpty() && mEngine) {
+    if (!id.isEmpty()) {
         setBusy(true);
 
         const QString identifier = id + QLatin1Char(':') + identifierSuffix;
