@@ -5,6 +5,8 @@
  */
 
 import QtQuick 2.5
+import QtQuick.Window 2.15
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
@@ -16,8 +18,16 @@ Rectangle {
     PotdProviderModel {
         id: engine
         identifier: wallpaper.configuration.Provider
-        // Needs to specify category for unsplash provider
-        arguments: identifier === "unsplash" ? [wallpaper.configuration.Category] : []
+        arguments: {
+            if (identifier === "unsplash") {
+                // Needs to specify category for unsplash provider
+                return [wallpaper.configuration.Category];
+            } else if (identifier === "bing") {
+                // Bing supports 1366/1920/UHD resolutions
+                return [Screen.width, Screen.height, Screen.devicePixelRatio];
+            }
+            return [];
+        }
         running: true
     }
 

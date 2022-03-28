@@ -7,16 +7,17 @@
 #include "bingprovider.h"
 
 #include <QDebug>
-#include <QGuiApplication>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include <QScreen>
 
 #include <KIO/Job>
 #include <KPluginFactory>
 
 BingProvider::BingProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : PotdProvider(parent, data, args)
+    , m_screenDPI(args.size() >= 3 ? args[2].toDouble() : 1)
+    , m_screenWidth(args.size() >= 2 ? args[0].toInt() * m_screenDPI : 0)
+    , m_screenHeight(args.size() >= 2 ? args[1].toInt() * m_screenDPI : 0)
 {
     const QUrl url(QStringLiteral("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"));
 
@@ -55,7 +56,7 @@ void BingProvider::pageRequestFinished(KJob *_job)
 
         urlString = QStringLiteral("https://www.bing.com/") + urlString;
 
-        if (const QSize size = qGuiApp->primaryScreen()->size(); size.width() > 1920 || size.height() > 1080) {
+        if (m_screenWidth > 1920 || m_screenHeight > 1080) {
             // Use 4k wallpaper
             urlString += QStringLiteral("_UHD.jpg");
         } else {

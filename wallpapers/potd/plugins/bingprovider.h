@@ -30,6 +30,10 @@ public:
 private:
     void pageRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
+
+    double m_screenDPI;
+    int m_screenWidth;
+    int m_screenHeight;
 };
 
 #endif
