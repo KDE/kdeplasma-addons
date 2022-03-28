@@ -7,8 +7,10 @@
 #include "bingprovider.h"
 
 #include <QDebug>
+#include <QGuiApplication>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QScreen>
 
 #include <KIO/Job>
 #include <KPluginFactory>
@@ -45,12 +47,22 @@ void BingProvider::pageRequestFinished(KJob *_job)
         if (!imageObj.isObject()) {
             break;
         }
-        auto url = imageObj.toObject().value(QLatin1String("url"));
-        if (!url.isString() || url.toString().isEmpty()) {
+        auto url = imageObj.toObject().value(QLatin1String("urlbase"));
+        QString urlString = url.isString() ? url.toString() : QString();
+        if (urlString.isEmpty()) {
             break;
         }
-        QUrl picUrl(QStringLiteral("https://www.bing.com/%1").arg(url.toString()));
-        KIO::StoredTransferJob *imageJob = KIO::storedGet(picUrl, KIO::NoReload, KIO::HideProgressInfo);
+
+        urlString = QStringLiteral("https://www.bing.com/") + urlString;
+
+        if (const QSize size = qGuiApp->primaryScreen()->size(); size.width() > 1920 || size.height() > 1080) {
+            // Use 4k wallpaper
+            urlString += QStringLiteral("_UHD.jpg");
+        } else {
+            urlString += QStringLiteral("_1920x1080.jpg");
+        }
+
+        KIO::StoredTransferJob *imageJob = KIO::storedGet(QUrl(urlString), KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &BingProvider::imageRequestFinished);
         return;
     } while (0);
