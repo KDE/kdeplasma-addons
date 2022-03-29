@@ -171,7 +171,7 @@ QVariantList PotdProviderModel::arguments() const
 
 void PotdProviderModel::setArguments(const QVariantList &args)
 {
-    if (m_args == args) {
+    if (args.isEmpty() || m_args == args) {
         return;
     }
 
