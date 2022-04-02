@@ -60,6 +60,7 @@ Column {
     }
 
     Item {
+        width: delegate.width
         height: delegate.shadowOffset
     }
 }
