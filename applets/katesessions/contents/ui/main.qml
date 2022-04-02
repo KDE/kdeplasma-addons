@@ -1,14 +1,13 @@
-/********************************************************************
-This file is part of the KDE project.
+/*
+    SPDX-FileCopyrightText: 2014 Joseph Wenninger <jowenn@kde.org>
+    SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
 
-SPDX-FileCopyrightText: 2014 Joseph Wenninger <jowenn@kde.org>
+    Based on the clipboard applet:
+    SPDX-FileCopyrightText: 2014 Martin Gräßlin <mgraesslin@kde.org>
+    SPDX-FileCopyrightText: 2014 Kai Uwe Broulik <kde@privat.broulik.de>
 
-Based on the clipboard applet:
-SPDX-FileCopyrightText: 2014 Martin Gräßlin <mgraesslin@kde.org>
-SPDX-FileCopyrightText: 2014 Kai Uwe Broulik <kde@privat.broulik.de>
-
-SPDX-License-Identifier: GPL-2.0-or-later
-*********************************************************************/
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
