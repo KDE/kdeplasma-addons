@@ -24,11 +24,6 @@ class EpodProvider : public PotdProvider
 public:
     EpodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
-    /**
-     * Destroys the EPOD provider.
-     */
-    ~EpodProvider() override;
-
 private:
     void pageRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);

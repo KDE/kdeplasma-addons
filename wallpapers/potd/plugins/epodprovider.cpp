@@ -23,8 +23,6 @@ EpodProvider::EpodProvider(QObject *parent, const KPluginMetaData &data, const Q
     connect(job, &KIO::StoredTransferJob::finished, this, &EpodProvider::pageRequestFinished);
 }
 
-EpodProvider::~EpodProvider() = default;
-
 void EpodProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);

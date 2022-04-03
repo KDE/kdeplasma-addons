@@ -28,11 +28,6 @@ class ApodProvider : public PotdProvider
 public:
     explicit ApodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
-    /**
-     * Destroys the APOD provider.
-     */
-    ~ApodProvider() override;
-
 private:
     void pageRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);

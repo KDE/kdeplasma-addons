@@ -23,8 +23,6 @@ NOAAProvider::NOAAProvider(QObject *parent, const KPluginMetaData &data, const Q
     connect(job, &KIO::StoredTransferJob::finished, this, &NOAAProvider::listPageRequestFinished);
 }
 
-NOAAProvider::~NOAAProvider() = default;
-
 void NOAAProvider::listPageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);

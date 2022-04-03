@@ -38,8 +38,6 @@ FlickrProvider::FlickrProvider(QObject *parent, const KPluginMetaData &data, con
     loadConfig();
 }
 
-FlickrProvider::~FlickrProvider() = default;
-
 void FlickrProvider::sendXmlRequest(const QString &apiKey, const QString &apiSecret)
 {
     Q_UNUSED(apiSecret);

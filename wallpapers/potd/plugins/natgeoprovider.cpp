@@ -23,8 +23,6 @@ NatGeoProvider::NatGeoProvider(QObject *parent, const KPluginMetaData &data, con
     connect(job, &KIO::StoredTransferJob::finished, this, &NatGeoProvider::pageRequestFinished);
 }
 
-NatGeoProvider::~NatGeoProvider() = default;
-
 void NatGeoProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);

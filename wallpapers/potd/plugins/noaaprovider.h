@@ -25,11 +25,6 @@ class NOAAProvider : public PotdProvider
 public:
     NOAAProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
-    /**
-     * Destroys the NOAA provider.
-     */
-    ~NOAAProvider() override;
-
 private:
     void listPageRequestFinished(KJob *job);
     void pageRequestFinished(KJob *job);

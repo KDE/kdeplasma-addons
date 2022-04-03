@@ -27,11 +27,6 @@ class WcpotdProvider : public PotdProvider
 public:
     WcpotdProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
-    /**
-     * Destroys the Wcpotd provider.
-     */
-    ~WcpotdProvider() override;
-
 private:
     void pageRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);

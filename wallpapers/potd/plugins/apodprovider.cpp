@@ -23,8 +23,6 @@ ApodProvider::ApodProvider(QObject *parent, const KPluginMetaData &data, const Q
     connect(job, &KIO::StoredTransferJob::finished, this, &ApodProvider::pageRequestFinished);
 }
 
-ApodProvider::~ApodProvider() = default;
-
 void ApodProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);

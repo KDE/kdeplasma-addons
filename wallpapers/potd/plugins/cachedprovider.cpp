@@ -103,10 +103,6 @@ CachedProvider::CachedProvider(const QString &identifier, QObject *parent)
     QThreadPool::globalInstance()->start(thread);
 }
 
-CachedProvider::~CachedProvider()
-{
-}
-
 QString CachedProvider::identifier() const
 {
     return mIdentifier;

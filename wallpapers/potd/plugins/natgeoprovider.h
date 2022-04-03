@@ -26,11 +26,6 @@ class NatGeoProvider : public PotdProvider
 public:
     NatGeoProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
-    /**
-     * Destroys the APOD provider.
-     */
-    ~NatGeoProvider() override;
-
 private:
     void pageRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);

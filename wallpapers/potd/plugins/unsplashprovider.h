@@ -22,11 +22,6 @@ class UnsplashProvider : public PotdProvider
 public:
     UnsplashProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
-    /**
-     * Destroys the Unsplash provider.
-     */
-    ~UnsplashProvider() override;
-
 private:
     void imageRequestFinished(KJob *job);
 };

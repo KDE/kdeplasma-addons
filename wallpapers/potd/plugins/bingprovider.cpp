@@ -26,8 +26,6 @@ BingProvider::BingProvider(QObject *parent, const KPluginMetaData &data, const Q
     connect(job, &KIO::StoredTransferJob::finished, this, &BingProvider::pageRequestFinished);
 }
 
-BingProvider::~BingProvider() = default;
-
 void BingProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);

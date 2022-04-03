@@ -22,11 +22,6 @@ class BingProvider : public PotdProvider
 public:
     BingProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
-    /**
-     * Destroys the Bing provider.
-     */
-    ~BingProvider() override;
-
 private:
     void pageRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);

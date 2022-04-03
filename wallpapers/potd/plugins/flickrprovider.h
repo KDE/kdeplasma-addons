@@ -28,11 +28,6 @@ class FlickrProvider : public PotdProvider
 public:
     explicit FlickrProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
-    /**
-     * Destroys the flickr provider.
-     */
-    ~FlickrProvider() override;
-
 private:
     void sendXmlRequest(const QString &apiKey, const QString &apiSecret);
     void xmlRequestFinished(KJob *job);

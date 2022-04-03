@@ -29,8 +29,6 @@ UnsplashProvider::UnsplashProvider(QObject *parent, const KPluginMetaData &data,
     connect(job, &KIO::StoredTransferJob::finished, this, &UnsplashProvider::imageRequestFinished);
 }
 
-UnsplashProvider::~UnsplashProvider() = default;
-
 void UnsplashProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);

@@ -29,11 +29,6 @@ public:
     CachedProvider(const QString &identifier, QObject *parent);
 
     /**
-     * Destroys the cached provider.
-     */
-    ~CachedProvider() override;
-
-    /**
      * Returns the identifier of the picture request (name + date).
      */
     QString identifier() const override;
