@@ -5,8 +5,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef POTD_PROVIDERMODEL_H
-#define POTD_PROVIDERMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include <QImage>
@@ -166,5 +165,3 @@ private:
     FileOperationStatus m_saveStatus;
     QString m_saveStatusMessage;
 };
-
-#endif

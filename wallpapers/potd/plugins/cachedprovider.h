@@ -4,8 +4,7 @@
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef CACHEDPROVIDER_H
-#define CACHEDPROVIDER_H
+#pragma once
 
 #include <QImage>
 #include <QRunnable>
@@ -80,5 +79,3 @@ private:
     QString m_identifier;
     PotdProviderData m_data;
 };
-
-#endif

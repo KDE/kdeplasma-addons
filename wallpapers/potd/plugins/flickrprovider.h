@@ -5,8 +5,7 @@
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#ifndef FLICKRPROVIDER_H
-#define FLICKRPROVIDER_H
+#pragma once
 
 #include "potdprovider.h"
 
@@ -54,5 +53,3 @@ private:
     };
     std::vector<PhotoEntry> m_photoList;
 };
-
-#endif

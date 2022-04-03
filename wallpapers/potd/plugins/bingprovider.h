@@ -4,8 +4,7 @@
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef BINGPROVIDER_H
-#define BINGPROVIDER_H
+#pragma once
 
 #include "potdprovider.h"
 
@@ -30,5 +29,3 @@ private:
     int m_screenWidth;
     int m_screenHeight;
 };
-
-#endif

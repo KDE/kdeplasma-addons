@@ -4,8 +4,7 @@
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef UNSPLASHPROVIDER_H
-#define UNSPLASHPROVIDER_H
+#pragma once
 
 #include "potdprovider.h"
 
@@ -25,5 +24,3 @@ public:
 private:
     void imageRequestFinished(KJob *job);
 };
-
-#endif

@@ -6,8 +6,7 @@
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef NATGEOPROVIDER_H
-#define NATGEOPROVIDER_H
+#pragma once
 
 #include "potdprovider.h"
 // Qt
@@ -33,5 +32,3 @@ private:
 private:
     QRegularExpression re;
 };
-
-#endif

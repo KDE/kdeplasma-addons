@@ -5,8 +5,7 @@
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef APODPROVIDER_H
-#define APODPROVIDER_H
+#pragma once
 
 #include "potdprovider.h"
 
@@ -32,5 +31,3 @@ private:
     void pageRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
 };
-
-#endif

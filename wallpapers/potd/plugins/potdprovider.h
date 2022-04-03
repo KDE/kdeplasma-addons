@@ -2,8 +2,7 @@
 // SPDX-FileCopyrightText: 2021 Guo Yunhe <i@guoyunhe.me>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#ifndef POTDPROVIDER_H
-#define POTDPROVIDER_H
+#pragma once
 
 #include <QImage>
 #include <QObject>
@@ -153,5 +152,3 @@ private:
     QString configLocalPath;
     bool refreshed = false;
 };
-
-#endif
