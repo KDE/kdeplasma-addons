@@ -94,8 +94,8 @@ const char source[] = "source";
 }
 }
 
-WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+WeatherApplet::WeatherApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : Plasma::Applet(parent, data, args)
 {
     Plasma::DataEngine *dataengine = dataEngine(QStringLiteral("weather"));
     const QVariantList plugins = dataengine->containerForSource(QLatin1String("ions"))->data().values();

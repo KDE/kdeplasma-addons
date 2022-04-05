@@ -9,14 +9,13 @@
 #include "../debug.h"
 
 #include <QDebug>
-#include <QQuickItem>
 
 #include <KActionCollection>
 #include <Plasma/Corona>
 #include <QAction>
 
-GroupedAppletsContainer::GroupedAppletsContainer(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+GroupedAppletsContainer::GroupedAppletsContainer(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : Plasma::Applet(parent, data, args)
 {
 }
 

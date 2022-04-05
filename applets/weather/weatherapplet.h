@@ -49,7 +49,7 @@ class WeatherApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
     Q_PROPERTY(bool temperatureShownInCompactMode READ temperatureShownInCompactMode NOTIFY temperatureShownInCompactModeChanged FINAL)
 
 public:
-    WeatherApplet(QObject *parent, const QVariantList &args);
+    WeatherApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~WeatherApplet() override;
 
 public: // Plasma::Applet API

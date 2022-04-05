@@ -10,7 +10,6 @@
 
 #include <QQuickTextDocument>
 #include <QTextCharFormat>
-#include <QTextCodec>
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;

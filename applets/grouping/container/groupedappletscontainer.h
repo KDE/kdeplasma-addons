@@ -9,8 +9,7 @@
 #define GROUPEDAPPLETSCONTAINER_H
 
 #include <Plasma/Applet>
-
-class QQuickItem;
+#include <QQuickItem>
 
 class GroupedAppletsContainer : public Plasma::Applet
 {
@@ -18,7 +17,7 @@ class GroupedAppletsContainer : public Plasma::Applet
     Q_PROPERTY(QQuickItem *internalContainmentItem READ internalContainmentItem NOTIFY internalContainmentItemChanged)
 
 public:
-    explicit GroupedAppletsContainer(QObject *parent, const QVariantList &args);
+    explicit GroupedAppletsContainer(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~GroupedAppletsContainer() override;
 
     void init() override;
