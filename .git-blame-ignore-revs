@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
 # clang-tidy: Force braces around statements
 d674bee1947d75d598e194a9244f3b8d7e127717
 # clang-format
