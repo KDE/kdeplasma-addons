@@ -17,9 +17,9 @@
 
 DictEngine::DictEngine(QObject *parent)
     : QObject(parent)
+    , m_dictName(QStringLiteral("wn")) // In case we need to switch it later
+    , m_serverName(QStringLiteral("dict.org")) // Default, good dictionary
 {
-    m_serverName = QLatin1String("dict.org"); // In case we need to switch it later
-    m_dictName = QLatin1String("wn"); // Default, good dictionary
 }
 
 DictEngine::~DictEngine()
