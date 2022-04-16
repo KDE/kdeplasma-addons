@@ -60,7 +60,7 @@ static QString wnToHtml(const QString &word, QByteArray &text)
             continue;
         }
 
-        if (currentLine.startsWith("552")) {
+        if (currentLine.startsWith("552") || currentLine.startsWith("501")) {
             return i18n("No match found for %1", word);
         }
 
@@ -109,7 +109,7 @@ void DictEngine::getDefinition()
     m_tcpSocket->write(command);
     m_tcpSocket->flush();
 
-    while (!ret.contains("250") && !ret.contains("552") && !ret.contains("550")) {
+    while (!ret.contains("250") && !ret.contains("552") && !ret.contains("550") && !ret.contains("501") && !ret.contains("503")) {
         m_tcpSocket->waitForReadyRead();
         ret += m_tcpSocket->readAll();
     }
@@ -128,7 +128,7 @@ void DictEngine::getDicts()
     m_tcpSocket->flush();
 
     m_tcpSocket->waitForReadyRead();
-    while (!ret.contains("250")) {
+    while (!ret.contains("250") || !ret.contains("420") || !ret.contains("421")) {
         m_tcpSocket->waitForReadyRead();
         ret += m_tcpSocket->readAll();
     }
@@ -136,6 +136,9 @@ void DictEngine::getDicts()
     QMap<QString, QString> availableDicts;
     const QList<QByteArray> retLines = ret.split('\n');
     for (const QByteArray &curr : retLines) {
+        if (curr.endsWith("420") || curr.startsWith("421")) {
+            // TODO: what happens if the server is down
+        }
         if (curr.startsWith("554")) {
             // TODO: What happens if no DB available?
             // TODO: Eventually there will be functionality to change the server...
