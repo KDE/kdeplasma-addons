@@ -109,7 +109,17 @@ void DictEngine::getDefinition()
     m_tcpSocket->write(command);
     m_tcpSocket->flush();
 
-    while (!ret.contains("250") && !ret.contains("552") && !ret.contains("550") && !ret.contains("501") && !ret.contains("503")) {
+    static const std::array<QByteArray, 5> responses{
+        QByteArrayLiteral("250"), /**< ok (optional timing information here) */
+        QByteArrayLiteral("552"), /**< No match */
+        QByteArrayLiteral("550"), /**< Invalid database */
+        QByteArrayLiteral("501"), /**< Syntax error, illegal parameters */
+        QByteArrayLiteral("503"), /**< Command parameter not implemented */
+    };
+
+    while (std::none_of(responses.cbegin(), responses.cend(), [&ret](const QByteArray &code) {
+        return ret.contains(code);
+    })) {
         m_tcpSocket->waitForReadyRead();
         ret += m_tcpSocket->readAll();
     }
