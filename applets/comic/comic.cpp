@@ -465,7 +465,7 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
     const QString id = mCurrent.id();
     setConfigurationRequired(id.isEmpty());
 
-    if (!id.isEmpty() && mEngine && mEngine->isValid()) {
+    if (!id.isEmpty() && mEngine) {
         setBusy(true);
 
         const QString identifier = id + QLatin1Char(':') + identifierSuffix;
@@ -485,7 +485,7 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
         slotScaleToContent();
     } else {
         qWarning() << "Either no identifier was specified or the engine could not be created:"
-                   << "id" << id << "engine valid:" << (mEngine && mEngine->isValid());
+                   << "id" << id << "engine valid:" << mEngine;
         setConfigurationRequired(true);
     }
     updateContextMenu();

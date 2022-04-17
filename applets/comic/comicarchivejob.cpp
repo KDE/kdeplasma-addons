@@ -80,7 +80,7 @@ bool ComicArchiveJob::isValid() const
         break;
     }
 
-    return mEngine->isValid() && mZip && mZip->isOpen();
+    return mZip && mZip->isOpen();
 }
 
 void ComicArchiveJob::setToIdentifier(const QString &toIdentifier)
