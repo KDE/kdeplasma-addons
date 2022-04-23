@@ -111,16 +111,6 @@ class StaticDateWrapper : public QObject
 {
     Q_OBJECT
 public:
-    enum DateType {
-        TextDate = Qt::TextDate,
-        ISODate = Qt::ISODate,
-        SystemLocaleShortDate = Qt::SystemLocaleShortDate,
-        SystemLocaleLongDate = Qt::SystemLocaleLongDate,
-        DefaultLocaleShortDate = Qt::DefaultLocaleShortDate,
-        DefaultLocaleLongDate = Qt::DefaultLocaleLongDate,
-    };
-    Q_ENUM(DateType)
-
     explicit StaticDateWrapper(QObject *parent = nullptr);
 
 public Q_SLOTS:
