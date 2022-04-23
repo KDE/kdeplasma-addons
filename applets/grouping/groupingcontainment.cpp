@@ -17,7 +17,6 @@
 #include <QMenu>
 #include <QQuickItem>
 #include <QQuickWindow>
-#include <QRegExp>
 #include <QScreen>
 #include <QStandardItemModel>
 

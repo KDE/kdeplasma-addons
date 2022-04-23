@@ -34,10 +34,10 @@ void EpodProvider::pageRequestFinished(KJob *_job)
     const QString data = QString::fromUtf8(job->data()).simplified();
 
     const QString pattern = QStringLiteral("://epod.usra.edu/.a/*-pi");
-    QRegExp exp(pattern);
-    exp.setPatternSyntax(QRegExp::Wildcard);
+    const auto exp = QRegularExpression(QRegularExpression::wildcardToRegularExpression(pattern));
+    const auto expMatch = exp.match(data);
 
-    if (exp.indexIn(data) != -1) {
+    if (expMatch.hasMatch()) {
         /**
          * Match link and title
          * Example:
@@ -67,7 +67,7 @@ void EpodProvider::pageRequestFinished(KJob *_job)
         return;
     }
 
-    int pos = exp.indexIn(data) + pattern.length();
+    int pos = expMatch.capturedStart() + pattern.length();
     const QString sub = data.mid(pos - 4, pattern.length() + 10);
     potdProviderData()->wallpaperRemoteUrl = QUrl(QStringLiteral("https://epod.usra.edu/.a/%1-pi").arg(sub));
 

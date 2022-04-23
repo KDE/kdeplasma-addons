@@ -70,7 +70,7 @@ void DictionaryRunner::match(RunnerContext &context)
         return;
     }
 
-    static const QRegExp removeHtml(QLatin1String("<[^>]*>"));
+    static const QRegularExpression removeHtml(QLatin1String("<[^>]*>"));
     QString definitions(returnedQuery);
     definitions.remove(QLatin1Char('\r')).remove(removeHtml);
     while (definitions.contains(QLatin1String("  "))) {
@@ -84,18 +84,19 @@ void DictionaryRunner::match(RunnerContext &context)
 
     QList<QueryMatch> matches;
     int item = 0;
-    static const QRegExp partOfSpeech(QLatin1String("(?: ([a-z]{1,5})){0,1} [0-9]{1,2}: (.*)"));
+    static const QRegularExpression partOfSpeech(QLatin1String("(?: ([a-z]{1,5})){0,1} [0-9]{1,2}: (.*)"));
     QString lastPartOfSpeech;
     for (const QString &line : std::as_const(lines)) {
-        if (partOfSpeech.indexIn(line) == -1) {
+        const auto reMatch = partOfSpeech.match(line);
+        if (!reMatch.hasMatch()) {
             continue;
         }
-        if (!partOfSpeech.cap(1).isEmpty()) {
-            lastPartOfSpeech = partOfSpeech.cap(1);
+        if (!reMatch.capturedView(1).isEmpty()) {
+            lastPartOfSpeech = reMatch.captured(1);
         }
         QueryMatch match(this);
         match.setMultiLine(true);
-        match.setText(lastPartOfSpeech + QLatin1String(": ") + partOfSpeech.cap(2));
+        match.setText(lastPartOfSpeech + QLatin1String(": ") + reMatch.captured(2));
         match.setRelevance(1 - (static_cast<double>(++item) / static_cast<double>(lines.length())));
         match.setType(QueryMatch::InformationalMatch);
         match.setIconName(QStringLiteral("accessories-dictionary"));

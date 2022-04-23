@@ -33,11 +33,12 @@ void ApodProvider::pageRequestFinished(KJob *_job)
 
     const QString data = QString::fromUtf8(job->data()).simplified(); // Join lines so title match can work
 
-    const QString pattern = QStringLiteral("<a href=\"(image/.*)\"");
-    QRegExp exp(pattern);
-    exp.setMinimal(true);
-    if (exp.indexIn(data) != -1) {
-        const QString sub = exp.cap(1);
+    const QString pattern = QStringLiteral("<a href=\"(image/.*?)\"");
+    QRegularExpression exp(pattern);
+    const auto expMatch = exp.match(data);
+
+    if (expMatch.hasMatch()) {
+        const QString sub = expMatch.captured(1);
         potdProviderData()->wallpaperRemoteUrl = QUrl(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/") + sub);
 
         /**
