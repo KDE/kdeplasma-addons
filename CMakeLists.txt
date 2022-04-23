@@ -31,6 +31,7 @@ include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
+include(ECMDeprecationSettings)
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
@@ -72,6 +73,10 @@ set_package_properties(KF5Purpose PROPERTIES
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
     -DQT_NO_URL_CAST_FROM_STRING
+)
+
+ecm_set_disabled_deprecation_versions(
+    QT 5.15.2
 )
 
 add_subdirectory(dict)
