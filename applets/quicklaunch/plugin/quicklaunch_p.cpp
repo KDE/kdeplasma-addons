@@ -21,10 +21,10 @@
 #include <KDesktopFile>
 #include <KFileItem>
 #include <KIO/CommandLauncherJob>
+#include <KIO/OpenUrlJob>
 #include <KNotificationJobUiDelegate>
 #include <KOpenWithDialog>
 #include <KPropertiesDialog>
-#include <KRun>
 
 #include <kio/global.h>
 
@@ -100,7 +100,9 @@ QVariantMap QuicklaunchPrivate::launcherData(const QUrl &url)
 
 void QuicklaunchPrivate::openUrl(const QUrl &url)
 {
-    new KRun(url, nullptr);
+    auto *job = new KIO::OpenUrlJob(url);
+    job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
+    job->start();
 }
 
 void QuicklaunchPrivate::openExec(const QString &exec)
