@@ -10,7 +10,9 @@
 
 // Qt
 #include <QIcon>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QNetworkConfigurationManager>
+#endif
 #include <QSet>
 #include <QUrl>
 #include <QVariant>
@@ -52,15 +54,18 @@ private:
     void error(ComicProvider *);
     ComicMetaData metaDataFromProvider(ComicProvider *provider);
     QString lastCachedIdentifier(const QString &identifier) const;
+    bool isOnline() const;
 
 private:
     bool mEmptySuffix;
     QString mIdentifierError;
     QHash<QString, ComicProvider *> m_jobs;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_DEPRECATED
     QNetworkConfigurationManager m_networkConfigurationManager;
     QT_WARNING_POP
+#endif
     QSet<QString> mProviders;
 };
 

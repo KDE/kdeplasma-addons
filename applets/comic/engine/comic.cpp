@@ -11,6 +11,9 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QImage>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QNetworkInformation>
+#endif
 #include <QSettings>
 #include <QStandardPaths>
 #include <QUrl>
@@ -28,6 +31,9 @@ ComicEngine::ComicEngine(QObject *parent)
     : QObject(parent)
     , mEmptySuffix(false)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QNetworkInformation::instance()->load(QNetworkInformation::Feature::Reachability);
+#endif
     loadProviders();
 }
 
@@ -69,7 +75,7 @@ bool ComicEngine::requestSource(const QString &identifier)
         const QStringList parts = identifier.split(QLatin1Char(':'), Qt::KeepEmptyParts);
 
         // check whether it is cached, make sure second part present
-        if (parts.count() > 1 && (CachedProvider::isCached(identifier) || !m_networkConfigurationManager.isOnline())) {
+        if (parts.count() > 1 && (CachedProvider::isCached(identifier) || !isOnline())) {
             ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, IdentifierType::StringIdentifier, identifier);
             m_jobs[identifier] = provider;
             connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
@@ -94,7 +100,7 @@ bool ComicEngine::requestSource(const QString &identifier)
         }
 
         // check if there is a connection
-        if (!m_networkConfigurationManager.isOnline()) {
+        if (!isOnline()) {
             qCDebug(PLASMA_COMIC) << "Currently offline, requested identifier was" << mIdentifierError;
             mIdentifierError = identifier;
             ComicMetaData data;
@@ -240,4 +246,13 @@ QString ComicEngine::lastCachedIdentifier(const QString &identifier) const
     QString previousIdentifier = settings.value(QLatin1String("lastCachedStripIdentifier"), QString()).toString();
 
     return previousIdentifier;
+}
+
+bool ComicEngine::isOnline() const
+{
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    return m_networkConfigurationManager.isOnline();
+#else
+    return QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Online;
+#endif
 }
