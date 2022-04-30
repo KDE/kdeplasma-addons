@@ -11,7 +11,6 @@
 
 #include <KConfigGroup>
 #include <KPluginFactory>
-#include <KPluginLoader>
 #include <KSharedConfig>
 
 // For the macro
