@@ -47,4 +47,7 @@ private:
     QString m_dictName;
     QString m_serverName;
     QMap<QString, QMap<QString, QString>> m_availableDictsCache;
+
+    // https://datatracker.ietf.org/doc/html/rfc2229
+    std::array<QByteArray, 5> m_definitionResponses;
 };
