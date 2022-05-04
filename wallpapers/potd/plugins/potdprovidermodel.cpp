@@ -34,8 +34,6 @@ PotdProviderModel::PotdProviderModel(QObject *parent)
 
     connect(&m_checkDatesTimer, &QTimer::timeout, this, &PotdProviderModel::forceUpdateSource);
     m_checkDatesTimer.setInterval(10min); // check every 10 minutes
-
-    qRegisterMetaType<PotdProviderData>();
 }
 
 int PotdProviderModel::rowCount(const QModelIndex &parent) const

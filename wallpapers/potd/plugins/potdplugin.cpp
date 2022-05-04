@@ -31,6 +31,8 @@ public:
     {
         Q_ASSERT(uri == QByteArrayLiteral("org.kde.plasma.wallpapers.potd"));
 
+        qRegisterMetaType<PotdProviderData>();
+
         qmlRegisterType<PotdProviderModel>(uri, 1, 0, "PotdProviderModel");
         qmlRegisterSingletonType<PotdProviderModel>(uri, 1, 0, "PotdProviderModelInstance", self);
         qmlRegisterUncreatableType<PotdProviderModel>(uri, 1, 0, "Global", QStringLiteral("Error: only enums"));
