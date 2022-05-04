@@ -14,7 +14,6 @@
 #include "comic_debug.h"
 #include "comicarchivedialog.h"
 #include "comicarchivejob.h"
-#include "comicdata.h"
 #include "comicsaver.h"
 #include "stripselector.h"
 

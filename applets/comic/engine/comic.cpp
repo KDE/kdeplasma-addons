@@ -16,7 +16,6 @@
 #endif
 #include <QSettings>
 #include <QStandardPaths>
-#include <QUrl>
 
 #include <KPackage/PackageLoader>
 #include <qloggingcategory.h>
@@ -25,7 +24,6 @@
 #include "comic_debug.h"
 #include "comicprovider.h"
 #include "comicproviderkross.h"
-#include "types.h"
 
 ComicEngine::ComicEngine(QObject *parent)
     : QObject(parent)

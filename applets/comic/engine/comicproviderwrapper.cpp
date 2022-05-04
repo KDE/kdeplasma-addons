@@ -8,7 +8,6 @@
 #include "comicproviderwrapper.h"
 #include "comic_debug.h"
 #include "comicproviderkross.h"
-#include "types.h"
 
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>

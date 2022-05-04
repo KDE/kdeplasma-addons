@@ -7,7 +7,6 @@
 
 #include "cachedprovider.h"
 #include "comic_debug.h"
-#include "types.h"
 
 #include <QDebug>
 #include <QDir>

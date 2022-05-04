@@ -13,7 +13,6 @@
 #include <QTextDocumentFragment>
 #include <QUrlQuery>
 
-#include <KIO/Job>
 #include <KPluginFactory>
 
 static QUrl buildUrl(const QDate &date, const QString apiKey)
