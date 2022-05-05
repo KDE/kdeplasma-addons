@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.7
+import QtQuick 2.15
 import QtQuick.Controls 2.5
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.private.dict 1.0
@@ -27,6 +27,7 @@ Page {
         ListView {
             id: listView
             model: dictionariesModel
+            reuseItems: true
 
             section {
                 criteria: ViewSection.FirstCharacter
