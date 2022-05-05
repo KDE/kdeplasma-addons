@@ -7,8 +7,9 @@
 
 #include "flickrprovider.h"
 
+#include <random>
+
 #include <QDebug>
-#include <QRandomGenerator>
 #include <QRegularExpression>
 #include <QUrlQuery>
 
@@ -127,7 +128,11 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
     }
 
     if (m_photoList.begin() != m_photoList.end()) {
-        QUrl url(m_photoList.at(QRandomGenerator::global()->bounded(m_photoList.size())));
+        // Plasma 5.24.0 release date
+        std::mt19937 randomEngine(QDate(2022, 2, 3).daysTo(QDate::currentDate()));
+        std::uniform_int_distribution<int> distrib(0, m_photoList.size() - 1);
+
+        QUrl url(m_photoList.at(distrib(randomEngine)));
         KIO::StoredTransferJob *imageJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::imageRequestFinished);
     } else {
