@@ -7,8 +7,9 @@
 
 #include "flickrprovider.h"
 
+#include <random>
+
 #include <QDebug>
-#include <QRandomGenerator>
 #include <QRegularExpression>
 #include <QTextDocumentFragment>
 #include <QUrlQuery>
@@ -134,8 +135,11 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
     }
 
     if (m_photoList.begin() != m_photoList.end()) {
-        const auto randomNumber = QRandomGenerator::global()->bounded(static_cast<int>(m_photoList.size()));
-        const PhotoEntry &randomPhotoEntry = m_photoList.at(randomNumber);
+        // Plasma 5.24.0 release date
+        std::mt19937 randomEngine(QDate(2022, 2, 3).daysTo(QDate::currentDate()));
+        std::uniform_int_distribution<int> distrib(0, m_photoList.size() - 1);
+
+        const PhotoEntry &randomPhotoEntry = m_photoList.at(distrib(randomEngine));
         potdProviderData()->wallpaperRemoteUrl = QUrl(randomPhotoEntry.urlString);
         potdProviderData()->wallpaperTitle = randomPhotoEntry.title;
 
