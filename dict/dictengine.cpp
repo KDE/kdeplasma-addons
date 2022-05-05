@@ -238,5 +238,3 @@ void DictEngine::socketClosed()
     }
     m_tcpSocket = nullptr;
 }
-
-#include "dictengine.moc"
