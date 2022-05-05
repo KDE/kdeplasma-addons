@@ -159,6 +159,7 @@ private:
     bool m_loading;
 
     QTimer m_checkDatesTimer;
+    QDate m_lastUpdateDate;
 
     QUrl m_savedFolder;
     QUrl m_savedUrl;

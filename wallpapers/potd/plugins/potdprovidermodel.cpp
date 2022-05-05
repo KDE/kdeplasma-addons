@@ -29,6 +29,7 @@ using namespace std::chrono_literals;
 PotdProviderModel::PotdProviderModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_currentIndex(-1)
+    , m_lastUpdateDate(QDate::currentDate().addDays(-1))
 {
     loadPluginMetaData();
 
@@ -418,6 +419,8 @@ void PotdProviderModel::slotFinished(PotdProvider *provider)
         return;
     }
 
+    m_lastUpdateDate = QDate::currentDate();
+
     setInfoUrl(provider->infoUrl());
     setRemoteUrl(provider->remoteUrl());
     setTitle(provider->title());
@@ -437,7 +440,7 @@ void PotdProviderModel::slotFinished(PotdProvider *provider)
 
     // Do not update until next day, and delay 1s to make sure last modified condition is satisfied.
     if (running()) {
-        m_checkDatesTimer.setInterval(QDateTime::currentDateTime().msecsTo(QDate::currentDate().startOfDay().addDays(1)) + 1000);
+        m_checkDatesTimer.setInterval(QDateTime::currentDateTime().msecsTo(m_lastUpdateDate.startOfDay().addDays(1)) + 1000);
         m_checkDatesTimer.start();
     }
 
@@ -471,7 +474,20 @@ void PotdProviderModel::slotError(PotdProvider *provider)
 
 void PotdProviderModel::slotPrepareForSleep(bool sleep)
 {
-    if (!sleep) {
+    if (sleep) {
+        return;
+    }
+
+    // Resume from sleep
+
+    if (m_lastUpdateDate != QDate::currentDate()) {
         forceUpdateSource();
+    } else {
+        // Align the update timer's interval, and delay 1s to make sure last modified condition is satisfied.
+        const int remainingTime = QDateTime::currentDateTime().msecsTo(m_lastUpdateDate.addDays(1).startOfDay()) + 1000;
+
+        // In case there is a overflow or the remaining time is too short, set the interval to 1min
+        m_checkDatesTimer.setInterval(std::max(remainingTime, 60 * 1000));
+        m_checkDatesTimer.start();
     }
 }
