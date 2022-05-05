@@ -8,6 +8,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 import QtWebEngine 1.1
 
 import org.kde.plasma.private.dict 1.0
@@ -24,7 +25,7 @@ ColumnLayout {
     RowLayout {
         Layout.alignment: Qt.AlignTop
         Layout.fillWidth: true
-        PlasmaComponents3.TextField {
+        PlasmaExtras.SearchField {
             id: input
             placeholderText: i18nc("@info:placeholder", "Enter word to define here…")
             Layout.fillWidth: true
