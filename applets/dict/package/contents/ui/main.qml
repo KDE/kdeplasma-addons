@@ -22,11 +22,13 @@ ColumnLayout {
     }
 
     RowLayout {
+        Layout.alignment: Qt.AlignTop
         Layout.fillWidth: true
         PlasmaComponents3.TextField {
             id: input
             placeholderText: i18nc("@info:placeholder", "Enter word to define here")
-            implicitWidth: PlasmaCore.Units.gridUnit * 40
+            Layout.fillWidth: true
+            Layout.minimumWidth: PlasmaCore.Units.gridUnit * 12
             onAccepted: {
                 if (input.text === "") {
                     web.visible = false;
@@ -46,8 +48,8 @@ ColumnLayout {
         id: web
         visible: false
         Layout.fillWidth: true
-        //Layout.fillHeight: true
-        Layout.preferredHeight: 400
+        Layout.fillHeight: true
+        Layout.minimumHeight: input.Layout.minimumWidth
         zoomFactor: PlasmaCore.Units.devicePixelRatio
         profile: dict.webProfile
     }
