@@ -14,12 +14,22 @@ class DictionariesModel : public QAbstractListModel
 {
     Q_OBJECT
 
+    /**
+     * @return the number of dict items
+     */
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
+
 public:
     explicit DictionariesModel(QObject *parent = nullptr);
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &index = QModelIndex()) const override;
     QHash<int, QByteArray> roleNames() const override;
+
+    int count() const;
+
+Q_SIGNALS:
+    void countChanged();
 
 private:
     void setAvailableDicts(const QVariantMap &data);
