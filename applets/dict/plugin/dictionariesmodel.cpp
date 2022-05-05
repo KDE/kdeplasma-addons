@@ -22,6 +22,7 @@ DictionariesModel::DictionariesModel(QObject *parent)
         endResetModel();
     });
     connect(this, &QAbstractItemModel::modelReset, this, &DictionariesModel::countChanged);
+    connect(&engine, &DictEngine::dictLoadingChanged, this, &DictionariesModel::slotDictLoadingChanged);
 
     engine.requestDicts();
 }
@@ -56,4 +57,16 @@ QHash<int, QByteArray> DictionariesModel::roleNames() const
 int DictionariesModel::count() const
 {
     return rowCount();
+}
+
+bool DictionariesModel::loading() const
+{
+    return m_loading;
+}
+
+void DictionariesModel::slotDictLoadingChanged(bool loading)
+{
+    m_loading = loading;
+
+    Q_EMIT loadingChanged();
 }
