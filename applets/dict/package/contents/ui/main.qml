@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -18,8 +18,12 @@ ColumnLayout {
     DictObject {
         id: dict
         selectedDictionary: plasmoid.configuration.dictionary
-        onSearchInProgress: web.loadHtml(i18n("Looking up definition…"));
-        onDefinitionFound: web.loadHtml(html);
+        // Activate the busy indicator, and deactivate it when page is loaded.
+        onSearchInProgress: loadingPlaceholder.opacity = 1;
+        onDefinitionFound: {
+            web.loadHtml(html);
+            loadingPlaceholder.opacity = 0;
+        }
     }
 
     RowLayout {
@@ -45,14 +49,39 @@ ColumnLayout {
         }
     }
 
-    WebEngineView {
-        id: web
-        visible: false
+    Item {
         Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.minimumHeight: input.Layout.minimumWidth
-        zoomFactor: PlasmaCore.Units.devicePixelRatio
-        profile: dict.webProfile
+
+        WebEngineView {
+            id: web
+            anchors.fill: parent
+            visible: false
+
+            zoomFactor: PlasmaCore.Units.devicePixelRatio
+            profile: dict.webProfile
+        }
+
+        Rectangle {
+            id: loadingPlaceholder
+            anchors.fill: parent
+            color: web.backgroundColor
+            opacity: 0
+            visible: opacity > 0
+
+            PlasmaComponents3.BusyIndicator {
+                anchors.centerIn: parent
+                running: visible
+            }
+
+            Behavior on opacity {
+                NumberAnimation {
+                    easing.type: Easing.InOutQuad
+                    duration: PlasmaCore.Units.veryLongDuration
+                }
+            }
+        }
     }
 
 }
