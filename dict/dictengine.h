@@ -10,9 +10,8 @@
 
 #include <QMap>
 #include <QObject>
+#include <QTcpSocket>
 #include <QVariantMap>
-
-class QTcpSocket;
 
 /**
  * This class evaluates the basic expressions given in the interface.
@@ -27,6 +26,12 @@ public:
     ~DictEngine() override;
 
 Q_SIGNALS:
+    /**
+     * @param socketError the type of the last socket error
+     * @param errorString a human-readable description of the last socket error
+     */
+    void dictErrorOccurred(QAbstractSocket::SocketError socketError, const QString &errorString);
+
     /**
      * @param loading @c true if the dict finder is downloading dict list from
      * the Internet, @c false otherwise.
