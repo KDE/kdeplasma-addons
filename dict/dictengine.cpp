@@ -137,7 +137,7 @@ void DictEngine::getDicts()
     m_tcpSocket->flush();
 
     m_tcpSocket->waitForReadyRead();
-    while (!ret.contains("250") || !ret.contains("420") || !ret.contains("421")) {
+    while (!ret.contains("250") && !ret.contains("420") && !ret.contains("421")) {
         m_tcpSocket->waitForReadyRead();
         ret += m_tcpSocket->readAll();
     }
