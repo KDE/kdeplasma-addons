@@ -27,8 +27,15 @@ public:
     ~DictEngine() override;
 
 Q_SIGNALS:
+    /**
+     * @param loading @c true if the dict finder is downloading dict list from
+     * the Internet, @c false otherwise.
+     */
+    void dictLoadingChanged(bool loading);
+
     void dictsRecieved(const QMap<QString, QString> &dicts);
     void definitionRecieved(const QString &html);
+
 public Q_SLOTS:
     void requestDicts();
     void requestDefinition(const QString &query);

@@ -174,6 +174,7 @@ void DictEngine::getDicts()
     m_tcpSocket->disconnectFromHost();
     m_availableDictsCache.insert(m_serverName, availableDicts);
     Q_EMIT dictsRecieved(availableDicts);
+    Q_EMIT dictLoadingChanged(false);
 }
 
 void DictEngine::requestDicts()
@@ -188,11 +189,13 @@ void DictEngine::requestDicts()
         m_tcpSocket = nullptr;
     }
 
+    Q_EMIT dictLoadingChanged(true);
     m_tcpSocket = new QTcpSocket(this);
     connect(m_tcpSocket, &QTcpSocket::disconnected, this, &DictEngine::socketClosed);
     connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDicts);
     m_tcpSocket->connectToHost(m_serverName, 2628);
 }
+
 void DictEngine::requestDefinition(const QString &query)
 {
     if (m_tcpSocket) {
@@ -233,6 +236,8 @@ void DictEngine::requestDefinition(const QString &query)
 
 void DictEngine::socketClosed()
 {
+    Q_EMIT dictLoadingChanged(false);
+
     if (m_tcpSocket) {
         m_tcpSocket->deleteLater();
     }
