@@ -9,10 +9,14 @@
 #include "dictionariesmodel.h"
 
 // Qt
+#include <QAbstractSocket>
 
 void DictPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.dict"));
+
+    qRegisterMetaType<QAbstractSocket::SocketError>();
+
     qmlRegisterType<DictObject>(uri, 1, 0, "DictObject");
     qmlRegisterType<DictionariesModel>(uri, 1, 0, "DictionariesModel");
 }

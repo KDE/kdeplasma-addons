@@ -8,6 +8,7 @@
 
 #include "../../dict/dictengine.h"
 #include <QAbstractListModel>
+#include <QAbstractSocket>
 #include <vector>
 
 class DictionariesModel : public QAbstractListModel
@@ -25,6 +26,16 @@ class DictionariesModel : public QAbstractListModel
      */
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
 
+    /**
+     * @return the type of the last socket error
+     */
+    Q_PROPERTY(QAbstractSocket::SocketError errorCode READ errorCode NOTIFY errorCodeChanged)
+
+    /**
+     * @return a human-readable description of the last socket error
+     */
+    Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
+
 public:
     explicit DictionariesModel(QObject *parent = nullptr);
 
@@ -35,9 +46,18 @@ public:
     int count() const;
     bool loading() const;
 
+    QAbstractSocket::SocketError errorCode() const;
+    QString errorString() const;
+
 Q_SIGNALS:
     void countChanged();
     void loadingChanged();
+    void errorCodeChanged();
+    void errorStringChanged();
+
+private Q_SLOTS:
+    void slotDictErrorOccurred(QAbstractSocket::SocketError socketError, const QString &errorString);
+    void slotDictLoadingChanged(bool loading);
 
 private:
     void setAvailableDicts(const QVariantMap &data);
@@ -49,6 +69,8 @@ private:
     std::vector<AvailableDict> m_availableDicts;
 
     bool m_loading = false;
+    QAbstractSocket::SocketError m_errorCode = QAbstractSocket::UnknownSocketError;
+    QString m_errorString;
 };
 
 #endif

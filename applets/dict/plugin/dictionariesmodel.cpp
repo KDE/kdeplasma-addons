@@ -11,6 +11,7 @@ DictionariesModel::DictionariesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
     static DictEngine engine; // Keep this around longer, because then we can use it's cache'
+    connect(&engine, &DictEngine::dictErrorOccurred, this, &DictionariesModel::slotDictErrorOccurred);
     connect(&engine, &DictEngine::dictsRecieved, this, [this](const QMap<QString, QString> &dicts) {
         beginResetModel();
         m_availableDicts = {};
@@ -62,6 +63,25 @@ int DictionariesModel::count() const
 bool DictionariesModel::loading() const
 {
     return m_loading;
+}
+
+QAbstractSocket::SocketError DictionariesModel::errorCode() const
+{
+    return m_errorCode;
+}
+
+QString DictionariesModel::errorString() const
+{
+    return m_errorString;
+}
+
+void DictionariesModel::slotDictErrorOccurred(QAbstractSocket::SocketError socketError, const QString &errorString)
+{
+    m_errorCode = socketError;
+    m_errorString = errorString;
+
+    Q_EMIT errorCodeChanged();
+    Q_EMIT errorStringChanged();
 }
 
 void DictionariesModel::slotDictLoadingChanged(bool loading)
