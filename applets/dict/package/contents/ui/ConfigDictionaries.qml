@@ -28,26 +28,26 @@ Page {
             id: listView
             model: dictionariesModel
 
-            delegate: Control {
-
-                background: Rectangle {
-                    id: highlight
-                    implicitWidth: page.width - Kirigami.Units.largeSpacing
-                    visible: model.id == page.cfg_dictionary
-                    color: Kirigami.Theme.highlightColor
+            section {
+                criteria: ViewSection.FirstCharacter
+                property: "id"
+                delegate: Kirigami.ListSectionHeader {
+                    label: section
                 }
+            }
 
-                contentItem: Label {
-                    id: pathText
-                    width: listView.availableWidth
-                    text: model.description
-                    color: model.id == page.cfg_dictionary ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
-                }
+            delegate: Kirigami.BasicListItem {
+                width: listView.width
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: page.cfg_dictionary = model.id
-                }
+                bold: page.cfg_dictionary == model.id
+                highlighted: bold
+
+                icon: undefined
+
+                label: model.id
+                subtitle: model.description
+
+                onClicked: page.cfg_dictionary = model.id
             }
         }
     }
