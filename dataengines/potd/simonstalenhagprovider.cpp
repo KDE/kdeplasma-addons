@@ -6,10 +6,11 @@
 
 #include "simonstalenhagprovider.h"
 
+#include <random>
+
 #include <QDebug>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include <QRandomGenerator>
 
 #include <KIO/Job>
 #include <KPluginFactory>
@@ -28,8 +29,11 @@ static QJsonValue randomArrayValueByKey(const QJsonObject &object, QLatin1String
         return result;
     }
 
-    auto arraySize = array.size();
-    return array.at(QRandomGenerator::global()->bounded(arraySize));
+    // Plasma 5.24.0 release date
+    std::mt19937 randomEngine(QDate(2022, 2, 3).daysTo(QDate::currentDate()));
+    std::uniform_int_distribution<int> distrib(0, array.size() - 1);
+
+    return array.at(distrib(randomEngine));
 }
 
 SimonStalenhagProvider::SimonStalenhagProvider(QObject *parent, const QVariantList &args)
