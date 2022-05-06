@@ -10,6 +10,7 @@
 
 // Qt
 #include <QAbstractSocket>
+#include <QWebEngineUrlScheme>
 
 void DictPlugin::registerTypes(const char *uri)
 {
@@ -19,4 +20,6 @@ void DictPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<DictObject>(uri, 1, 0, "DictObject");
     qmlRegisterType<DictionariesModel>(uri, 1, 0, "DictionariesModel");
+
+    QWebEngineUrlScheme::registerScheme(QWebEngineUrlScheme(QByteArrayLiteral("dict")));
 }
