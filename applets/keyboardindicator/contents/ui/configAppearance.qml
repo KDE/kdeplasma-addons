@@ -13,28 +13,34 @@ Kirigami.FormLayout {
     id: layout
     signal configurationChanged
 
-    function saveConfig() {
-        var names = []
-        for(var i in layout.children) {
-            var cur = layout.children[i]
-            if (cur.checked)
-                names.push(cur.name)
+    property var cfg_key: []
+
+    function toggle(name, checked) {
+        const index = cfg_key.indexOf(name);
+
+        if (checked) {
+            if (index < 0) {
+                cfg_key.push(name);
+            }
+        } else if (index >= 0) {
+            cfg_key.splice(index, 1);
         }
-        plasmoid.configuration.key = names
+
+        configurationChanged();
     }
 
     Controls.CheckBox {
         Kirigami.FormData.label: i18nc("@label show keyboard indicator when Caps Lock or Num Lock is activated", "Show when activated:")
         readonly property string name: "Caps Lock"
-        checked: plasmoid.configuration.key.indexOf(name) >= 0
+        checked: cfg_key.indexOf(name) >= 0
         text: i18nc("@option:check", "Caps Lock")
-        onToggled: layout.configurationChanged()
+        onToggled: layout.toggle(name, checked)
     }
 
     Controls.CheckBox {
         readonly property string name: "Num Lock"
-        checked: plasmoid.configuration.key.indexOf(name) >= 0
+        checked: cfg_key.indexOf(name) >= 0
         text: i18nc("@option:check", "Num Lock")
-        onToggled: layout.configurationChanged()
+        onToggled: layout.toggle(name, checked)
     }
 }
