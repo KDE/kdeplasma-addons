@@ -6,11 +6,11 @@
 
 import QtQuick 2.2
 import QtQuick.Controls 2.2 as Controls
-import QtQuick.Layouts 1.1
 
-Item
-{
-    id: root
+import org.kde.kirigami 2.19 as Kirigami
+
+Kirigami.FormLayout {
+    id: layout
     signal configurationChanged
 
     function saveConfig() {
@@ -23,21 +23,18 @@ Item
         plasmoid.configuration.key = names
     }
 
-    ColumnLayout {
-        id: layout
-        Controls.CheckBox {
-            Layout.fillWidth: true
-            readonly property string name: "Caps Lock"
-            checked: plasmoid.configuration.key.indexOf(name) >= 0
-            text: i18nc("@option:check", "Caps Lock")
-            onCheckedChanged: root.configurationChanged()
-        }
-        Controls.CheckBox {
-            Layout.fillWidth: true
-            readonly property string name: "Num Lock"
-            checked: plasmoid.configuration.key.indexOf(name) >= 0
-            text: i18nc("@option:check", "Num Lock")
-            onCheckedChanged: root.configurationChanged()
-        }
+    Controls.CheckBox {
+        Kirigami.FormData.label: i18nc("@label show keyboard indicator when Caps Lock or Num Lock is activated", "Show when activated:")
+        readonly property string name: "Caps Lock"
+        checked: plasmoid.configuration.key.indexOf(name) >= 0
+        text: i18nc("@option:check", "Caps Lock")
+        onCheckedChanged: layout.configurationChanged()
+    }
+
+    Controls.CheckBox {
+        readonly property string name: "Num Lock"
+        checked: plasmoid.configuration.key.indexOf(name) >= 0
+        text: i18nc("@option:check", "Num Lock")
+        onCheckedChanged: layout.configurationChanged()
     }
 }
