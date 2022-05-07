@@ -37,6 +37,7 @@ ColumnLayout {
             onAccepted: {
                 if (input.text === "") {
                     web.visible = false;
+                    web.loadHtml("");
                 } else {
                     web.visible = true;
                     dict.lookup(input.text);
