@@ -19,10 +19,10 @@ ColumnLayout {
         id: dict
         selectedDictionary: plasmoid.configuration.dictionary
         // Activate the busy indicator, and deactivate it when page is loaded.
-        onSearchInProgress: loadingPlaceholder.opacity = 1;
+        onSearchInProgress: placeholder.opacity = 1;
         onDefinitionFound: {
             web.loadHtml(html);
-            loadingPlaceholder.opacity = 0;
+            placeholder.opacity = 0;
         }
     }
 
@@ -37,9 +37,10 @@ ColumnLayout {
             onAccepted: {
                 if (input.text === "") {
                     web.visible = false;
+                    placeholder.opacity = 0;
                     web.loadHtml("");
                 } else {
-                    web.visible = true;
+                    web.visible = Qt.binding(() => !dict.hasError);
                     dict.lookup(input.text);
                 }
             }
@@ -64,22 +65,52 @@ ColumnLayout {
             profile: dict.webProfile
         }
 
-        Rectangle {
-            id: loadingPlaceholder
+        Item {
+            id: placeholder
             anchors.fill: parent
-            color: web.backgroundColor
             opacity: 0
-            visible: opacity > 0
 
-            PlasmaComponents3.BusyIndicator {
-                anchors.centerIn: parent
-                running: visible
+            Loader {
+                active: placeholder.visible
+                anchors.fill: parent
+                asynchronous: true
+
+                sourceComponent: dict.hasError ? errorPlaceholder : loadingPlaceholder
             }
 
             Behavior on opacity {
                 NumberAnimation {
                     easing.type: Easing.InOutQuad
                     duration: PlasmaCore.Units.veryLongDuration
+                }
+            }
+        }
+
+        Component {
+            id: loadingPlaceholder
+
+            Rectangle {
+                anchors.fill: parent
+                color: web.backgroundColor
+
+                PlasmaComponents3.BusyIndicator {
+                    anchors.centerIn: parent
+                }
+            }
+        }
+
+        Component {
+            id: errorPlaceholder
+
+            Item {
+                anchors.fill: parent
+
+                PlasmaExtras.PlaceholderMessage {
+                    width: parent.width - PlasmaCore.Units.gridUnit * 2 // For text wrap
+                    anchors.centerIn: parent
+                    iconName: "network-disconnect"
+                    text: i18n("Unable to load definition")
+                    explanation: i18nc("%2 human-readable error string", "Error code: %1 (%2)", dict.errorCode, dict.errorString)
                 }
             }
         }
