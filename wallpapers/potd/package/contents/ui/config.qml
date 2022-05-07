@@ -6,9 +6,10 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 2.8 as QQC2
+import QtQuick.Layouts 1.15
 
 import org.kde.kquickcontrols 2.0 as KQC2
-import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.wallpapers.potd 1.0
 
@@ -241,26 +242,41 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: false
     }
 
-    SelectableLabel {
-        id: titleLabel
+    Row {
+        // HACK: If Kirigami.FormData.label is put inside a TextArea,
+        // the label will not align with text in the TextArea.
         Kirigami.FormData.label: i18nc("@label", "Title:")
-        contentWidth: wallpaperPreview.implicitWidth * 1.5
-        visible: wallpaperPreview.visible && text.length > 0
-        text: PotdProviderModelInstance.title
-        bold: true
+
+        Kirigami.SelectableLabel {
+            id: titleLabel
+
+            Layout.fillWidth: true
+            Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
+            visible: wallpaperPreview.visible && PotdProviderModelInstance.title.length > 0
+
+            font.bold: true
+            text: PotdProviderModelInstance.title
+            Accessible.name: titleLabel.Kirigami.FormData.label
+        }
     }
 
     Item {
         Kirigami.FormData.isSection: false
     }
 
-    SelectableLabel {
-        id: authorLabel
+    Row {
         Kirigami.FormData.label: i18nc("@label", "Author:")
-        contentWidth: titleLabel.contentWidth
-        visible: wallpaperPreview.visible && text.length > 0
-        text: PotdProviderModelInstance.author
-        bold: false
+
+        Kirigami.SelectableLabel {
+            id: authorLabel
+
+            Layout.fillWidth: true
+            Layout.maximumWidth: titleLabel.Layout.maximumWidth
+            visible: wallpaperPreview.visible && PotdProviderModelInstance.author.length > 0
+
+            text: PotdProviderModelInstance.author
+            Accessible.name: authorLabel.Kirigami.FormData.label
+        }
     }
 
     Kirigami.InlineMessage {
