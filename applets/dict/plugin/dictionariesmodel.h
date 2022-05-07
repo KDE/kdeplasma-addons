@@ -16,11 +16,6 @@ class DictionariesModel : public QAbstractListModel
     Q_OBJECT
 
     /**
-     * @return the number of dict items
-     */
-    Q_PROPERTY(int count READ count NOTIFY countChanged)
-
-    /**
      * @return @c true if the engine is downloading dict list from
      * the Internet, @c false otherwise.
      */
@@ -43,14 +38,12 @@ public:
     int rowCount(const QModelIndex &index = QModelIndex()) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    int count() const;
     bool loading() const;
 
     QAbstractSocket::SocketError errorCode() const;
     QString errorString() const;
 
 Q_SIGNALS:
-    void countChanged();
     void loadingChanged();
     void errorCodeChanged();
     void errorStringChanged();

@@ -54,7 +54,7 @@ Page {
     }
 
     Loader {
-        active: dictionariesModel.loading || dictionariesModel.count === 0
+        active: dictionariesModel.loading || listView.count === 0
         asynchronous: true
 
         anchors.centerIn: parent
