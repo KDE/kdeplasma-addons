@@ -238,6 +238,10 @@ void DictEngine::requestDefinition(const QString &query)
     }
     m_tcpSocket = new QTcpSocket(this);
     connect(m_tcpSocket, &QTcpSocket::disconnected, this, &DictEngine::socketClosed);
+    connect(m_tcpSocket, &QTcpSocket::errorOccurred, this, [this] {
+        Q_EMIT dictErrorOccurred(m_tcpSocket->error(), m_tcpSocket->errorString());
+        socketClosed();
+    });
     connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDefinition);
     m_tcpSocket->connectToHost(m_serverName, 2628);
 }

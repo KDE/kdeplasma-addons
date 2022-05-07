@@ -40,11 +40,15 @@ DictObject::DictObject(QObject *parent)
     connect(&m_engine, &DictEngine::definitionRecieved, this, [this](const QString &html) {
         Q_EMIT definitionFound(html);
     });
+    connect(&m_engine, &DictEngine::dictErrorOccurred, this, &DictObject::slotDictErrorOccurred);
     m_webProfile->installUrlSchemeHandler("dict", schemeHandler);
 }
 
 void DictObject::lookup(const QString &word)
 {
+    m_hasError = false;
+    Q_EMIT hasErrorChanged();
+
     const QString newSource = m_selectedDict + QLatin1Char(':') + word;
 
     if (!newSource.isEmpty()) {
@@ -68,6 +72,32 @@ void DictObject::setSelectedDictionary(const QString &dict)
 QQuickWebEngineProfile *DictObject::webProfile() const
 {
     return m_webProfile;
+}
+
+bool DictObject::hasError() const
+{
+    return m_hasError;
+}
+
+QAbstractSocket::SocketError DictObject::errorCode() const
+{
+    return m_errorCode;
+}
+
+QString DictObject::errorString() const
+{
+    return m_errorString;
+}
+
+void DictObject::slotDictErrorOccurred(QAbstractSocket::SocketError socketError, const QString &errorString)
+{
+    m_hasError = true;
+    m_errorCode = socketError;
+    m_errorString = errorString;
+
+    Q_EMIT errorCodeChanged();
+    Q_EMIT errorStringChanged();
+    Q_EMIT hasErrorChanged();
 }
 
 #include "dict_object.moc"
