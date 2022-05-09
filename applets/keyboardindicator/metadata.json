@@ -98,7 +98,7 @@
         "Name[uk]": "Стан клавіш блокування",
         "Name[vi]": "Trạng thái các phím khoá",
         "Name[x-test]": "xxLock Keys Statusxx",
-        "Name[zh_CN]": "锁定按键状态",
+        "Name[zh_CN]": "锁定键状态",
         "ServiceTypes": [
             "Plasma/Applet"
         ],
