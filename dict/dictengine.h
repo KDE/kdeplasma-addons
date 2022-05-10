@@ -11,6 +11,7 @@
 #include <QMap>
 #include <QObject>
 #include <QTcpSocket>
+#include <QTimer>
 #include <QVariantMap>
 
 /**
@@ -45,9 +46,25 @@ public Q_SLOTS:
     void requestDicts();
     void requestDefinition(const QString &query);
 
+private Q_SLOTS:
+    /**
+     * Slot to asynchronously handle \readyRead signal emitted
+     * when receiving new definitions.
+     */
+    void slotDefinitionReadyRead();
+
+    /**
+     * Slot to process definition data when any end response
+     * listed in \m_definitionResponses is received, or to handle
+     * \QTimer::timeout signal when no new data are received
+     * from the socket and no end response is received.
+     */
+    void slotDefinitionReadFinished();
+
+    void socketClosed();
+
 private:
     void getDefinition();
-    void socketClosed();
     void getDicts();
     void setDict(const QString &dict);
     void setServer(const QString &server);
@@ -59,6 +76,18 @@ private:
     QString m_dictName;
     QString m_serverName;
     QMap<QString, QMap<QString, QString>> m_availableDictsCache;
+
+    /**
+     * Stores temporarily received definition data
+     */
+    QByteArray m_definitionData;
+
+    /**
+     * When \QTimer::timeout is emitted, the existing socket will be closed
+     * and deleted, and will emit \definitionRecieved to stop the loading
+     * process.
+     */
+    QTimer m_definitionTimer;
 
     // https://datatracker.ietf.org/doc/html/rfc2229
     const std::array<QByteArray, 5> m_definitionResponses;

@@ -7,12 +7,15 @@
 */
 
 #include "dictengine.h"
-#include <iostream>
+
+#include <chrono>
 
 #include <KLocalizedString>
 #include <QDebug>
 #include <QRegularExpression>
 #include <QUrl>
+
+using namespace std::chrono_literals;
 
 DictEngine::DictEngine(QObject *parent)
     : QObject(parent)
@@ -26,6 +29,9 @@ DictEngine::DictEngine(QObject *parent)
           QByteArrayLiteral("503"), /**< Command parameter not implemented */
       }
 {
+    m_definitionTimer.setInterval(30s);
+    m_definitionTimer.setSingleShot(true);
+    connect(&m_definitionTimer, &QTimer::timeout, this, &DictEngine::slotDefinitionReadFinished);
 }
 
 DictEngine::~DictEngine()
@@ -107,26 +113,22 @@ static QString wnToHtml(const QString &word, QByteArray &text)
 
 void DictEngine::getDefinition()
 {
+    // One-time connection
+    disconnect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDefinition);
+
+    // Clear the old data to prepare for a new lookup
+    m_definitionData.clear();
+
+    connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::slotDefinitionReadyRead);
+
     m_tcpSocket->readAll();
-    QByteArray ret;
 
     const QByteArray command = QByteArray("DEFINE ") + m_dictName.toLatin1() + " \"" + m_currentWord.toUtf8() + "\"\n";
     // qDebug() << command;
     m_tcpSocket->write(command);
     m_tcpSocket->flush();
 
-    while (std::none_of(m_definitionResponses.cbegin(),
-                        m_definitionResponses.cend(),
-                        [&ret](const QByteArray &code) {
-                            return ret.contains(code);
-                        })
-           && m_tcpSocket->waitForReadyRead()) {
-        ret += m_tcpSocket->readAll();
-    }
-
-    m_tcpSocket->disconnectFromHost();
-    const QString html = wnToHtml(m_currentWord, ret);
-    Q_EMIT definitionRecieved(html);
+    m_definitionTimer.start();
 }
 
 void DictEngine::getDicts()
@@ -204,6 +206,7 @@ void DictEngine::requestDicts()
 void DictEngine::requestDefinition(const QString &query)
 {
     if (m_tcpSocket) {
+        m_definitionTimer.stop();
         m_tcpSocket->abort(); // stop if lookup is in progress and new query is requested
         m_tcpSocket->deleteLater();
         m_tcpSocket = nullptr;
@@ -237,6 +240,34 @@ void DictEngine::requestDefinition(const QString &query)
     connect(m_tcpSocket, &QTcpSocket::disconnected, this, &DictEngine::socketClosed);
     connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDefinition);
     m_tcpSocket->connectToHost(m_serverName, 2628);
+}
+
+void DictEngine::slotDefinitionReadyRead()
+{
+    m_definitionData += m_tcpSocket->readAll();
+
+    const bool finished = std::any_of(m_definitionResponses.cbegin(), m_definitionResponses.cend(), [this](const QByteArray &code) {
+        return m_definitionData.contains(code);
+    });
+
+    if (finished) {
+        slotDefinitionReadFinished();
+        return;
+    }
+
+    // Close the socket after 30s inactivity
+    m_definitionTimer.start();
+}
+
+void DictEngine::slotDefinitionReadFinished()
+{
+    m_definitionTimer.stop();
+
+    const QString html = wnToHtml(m_currentWord, m_definitionData);
+    Q_EMIT definitionRecieved(html);
+
+    m_tcpSocket->disconnectFromHost();
+    socketClosed();
 }
 
 void DictEngine::socketClosed()
