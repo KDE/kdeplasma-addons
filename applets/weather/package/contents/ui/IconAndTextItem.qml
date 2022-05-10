@@ -87,7 +87,7 @@ GridLayout {
             visible: false
 
             // pattern to reserve some constant space TODO: improve and take formatting/i18n into account
-            text: "888.8° X"
+            text: "888° X"
         }
 
         PlasmaComponents.Label {

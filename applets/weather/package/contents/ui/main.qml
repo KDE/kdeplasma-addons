@@ -57,7 +57,7 @@ Item {
         model["conditionIconName"] = conditionIconName ? Util.existingWeatherIconName(conditionIconName) : "weather-none-available";
 
         var temperature = getNumber("Temperature");
-        model["temperature"] = temperature !== null ? Util.temperatureToDisplayString(displayTemperatureUnit, temperature, reportTemperatureUnit) : "";
+        model["temperature"] = temperature !== null ? Util.temperatureToDisplayString(displayTemperatureUnit, temperature, reportTemperatureUnit, true, false) : "";
 
         var windchill = getNumber("Windchill");
         // Use temperature unit to convert windchill temperature
