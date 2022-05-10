@@ -115,10 +115,12 @@ void DictEngine::getDefinition()
     m_tcpSocket->write(command);
     m_tcpSocket->flush();
 
-    while (std::none_of(m_definitionResponses.cbegin(), m_definitionResponses.cend(), [&ret](const QByteArray &code) {
-        return ret.contains(code);
-    })) {
-        m_tcpSocket->waitForReadyRead();
+    while (std::none_of(m_definitionResponses.cbegin(),
+                        m_definitionResponses.cend(),
+                        [&ret](const QByteArray &code) {
+                            return ret.contains(code);
+                        })
+           && m_tcpSocket->waitForReadyRead()) {
         ret += m_tcpSocket->readAll();
     }
 
@@ -135,10 +137,10 @@ void DictEngine::getDicts()
     m_tcpSocket->write(QByteArray("SHOW DB\n"));
     m_tcpSocket->flush();
 
-    m_tcpSocket->waitForReadyRead();
-    while (!ret.contains("250") && !ret.contains("420") && !ret.contains("421")) {
-        m_tcpSocket->waitForReadyRead();
-        ret += m_tcpSocket->readAll();
+    if (m_tcpSocket->waitForReadyRead()) {
+        while (!ret.contains("250") && !ret.contains("420") && !ret.contains("421") && m_tcpSocket->waitForReadyRead()) {
+            ret += m_tcpSocket->readAll();
+        }
     }
 
     QMap<QString, QString> availableDicts;
