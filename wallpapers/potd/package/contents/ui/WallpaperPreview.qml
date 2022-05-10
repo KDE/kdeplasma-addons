@@ -21,6 +21,11 @@ Column {
      */
     property alias backgroundColor: delegate.backgroundColor
 
+    /**
+     * The shadow height needs to be considered in the padding.
+     */
+    property alias shadowOffset: delegate.shadowOffset
+
     // Wallpaper preview (including save button)
     WallpaperDelegate {
         id: delegate
@@ -57,10 +62,5 @@ Column {
                 Accessible.description: i18nc("@info:whatsthis for a menu item", "Open the website of today's picture in the default browser")
             }
         ]
-    }
-
-    Item {
-        width: delegate.width
-        height: delegate.shadowOffset
     }
 }

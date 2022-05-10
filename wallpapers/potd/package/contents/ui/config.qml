@@ -233,6 +233,11 @@ Kirigami.FormLayout {
     }
 
     Item {
+        width: wallpaperPreview.implicitWidth
+        height: wallpaperPreview.shadowOffset
+    }
+
+    Item {
         Kirigami.FormData.isSection: false
     }
 
