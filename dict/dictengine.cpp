@@ -18,14 +18,14 @@ DictEngine::DictEngine(QObject *parent)
     : QObject(parent)
     , m_dictName(QStringLiteral("wn")) // In case we need to switch it later
     , m_serverName(QStringLiteral("dict.org")) // Default, good dictionary
+    , m_definitionResponses{
+          QByteArrayLiteral("250"), /**< ok (optional timing information here) */
+          QByteArrayLiteral("552"), /**< No match */
+          QByteArrayLiteral("550"), /**< Invalid database */
+          QByteArrayLiteral("501"), /**< Syntax error, illegal parameters */
+          QByteArrayLiteral("503"), /**< Command parameter not implemented */
+      }
 {
-    m_definitionResponses = {
-        QByteArrayLiteral("250"), /**< ok (optional timing information here) */
-        QByteArrayLiteral("552"), /**< No match */
-        QByteArrayLiteral("550"), /**< Invalid database */
-        QByteArrayLiteral("501"), /**< Syntax error, illegal parameters */
-        QByteArrayLiteral("503"), /**< Command parameter not implemented */
-    };
 }
 
 DictEngine::~DictEngine()
