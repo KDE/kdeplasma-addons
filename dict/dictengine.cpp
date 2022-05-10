@@ -208,9 +208,9 @@ void DictEngine::requestDefinition(const QString &query)
     if (m_tcpSocket) {
         m_definitionTimer.stop();
         m_tcpSocket->abort(); // stop if lookup is in progress and new query is requested
-        m_tcpSocket->deleteLater();
+        // Delete now to fix "Unexpected null receiver"
+        delete m_tcpSocket;
         m_tcpSocket = nullptr;
-        Q_EMIT definitionRecieved(QString());
     }
 
     QStringList queryParts = query.split(':', Qt::SkipEmptyParts);
