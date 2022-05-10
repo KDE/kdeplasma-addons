@@ -102,6 +102,7 @@ void QuicklaunchPrivate::openUrl(const QUrl &url)
 {
     auto *job = new KIO::OpenUrlJob(url);
     job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
+    job->setRunExecutables(true);
     job->start();
 }
 
