@@ -55,6 +55,8 @@ private Q_SLOTS:
 private:
     void setAvailableDicts(const QVariantMap &data);
 
+    DictEngine m_engine;
+
     struct AvailableDict {
         QString id;
         QString description;

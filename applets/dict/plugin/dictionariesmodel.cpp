@@ -10,9 +10,8 @@
 DictionariesModel::DictionariesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    static DictEngine engine; // Keep this around longer, because then we can use it's cache'
-    connect(&engine, &DictEngine::dictErrorOccurred, this, &DictionariesModel::slotDictErrorOccurred);
-    connect(&engine, &DictEngine::dictsRecieved, this, [this](const QMap<QString, QString> &dicts) {
+    connect(&m_engine, &DictEngine::dictErrorOccurred, this, &DictionariesModel::slotDictErrorOccurred);
+    connect(&m_engine, &DictEngine::dictsRecieved, this, [this](const QMap<QString, QString> &dicts) {
         beginResetModel();
         m_availableDicts = {};
         m_availableDicts.resize(dicts.count());
@@ -22,9 +21,9 @@ DictionariesModel::DictionariesModel(QObject *parent)
         }
         endResetModel();
     });
-    connect(&engine, &DictEngine::dictLoadingChanged, this, &DictionariesModel::slotDictLoadingChanged);
+    connect(&m_engine, &DictEngine::dictLoadingChanged, this, &DictionariesModel::slotDictLoadingChanged);
 
-    engine.requestDicts();
+    m_engine.requestDicts();
 }
 
 QVariant DictionariesModel::data(const QModelIndex &index, int role) const
