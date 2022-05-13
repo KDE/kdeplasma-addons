@@ -81,8 +81,8 @@ Item {
                 height: compactRoot.height - PlasmaCore.Units.smallSpacing * 2
                 width: height
 
-                border.color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {alpha: 0.4*255})
-                border.width: 1
+                border.color: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {alpha: 0.4*255})
+                border.width: PlasmaCore.Units.devicePixelRatio
 
                 source: visible ? (kuser.faceIconUrl.toString() || "user-identity") : ""
                 visible: root.showFace
@@ -144,15 +144,14 @@ Item {
             anchors.fill: parent
             spacing: 0
 
-            ListDelegate {
+            UserListDelegate {
                 id: currentUserItem
                 text: root.displayedName
                 subText: i18n("Current user")
-                icon: kuser.faceIconUrl.toString() || "user-identity"
+                source: kuser.faceIconUrl.toString()
                 interactive: false
                 interactiveIcon: KCMShell.authorize("kcm_users.desktop").length > 0
                 onIconClicked: KCMShell.openSystemSettings("kcm_users")
-                usesPlasmaTheme: false
             }
 
             PlasmaComponents3.ScrollView {
@@ -171,7 +170,7 @@ Item {
                     highlight: PlasmaExtras.Highlight {}
                     highlightMoveDuration: 0
 
-                    delegate: ListDelegate {
+                    delegate: UserListDelegate {
                         width: ListView.view.width
                         text: {
                             if (!model.session) {
@@ -184,7 +183,7 @@ Item {
 
                             return model.name
                         }
-                        icon: model.icon || "user-identity"
+                        source: model.icon
                         subText: {
                             if (!root.showTechnicalInfo) {
                                 return ""
@@ -200,18 +199,13 @@ Item {
 
                         onClicked: sessionsModel.switchUser(model.vtNumber, sessionsModel.shouldLock)
                         onContainsMouseChanged: {
-                            if (containsMouse) {
-                                userList.currentIndex = index
-                            } else {
-                                userList.currentIndex = -1
-                            }
+                            userList.currentIndex = containsMouse ? index : -1;
                         }
-                        usesPlasmaTheme: false
                     }
                 }
             }
 
-            ListDelegate {
+            ActionListDelegate {
                 id: newSessionButton
                 text: i18nc("@action", "New Session")
                 icon: "system-switch-user"
@@ -220,7 +214,7 @@ Item {
                 onClicked: sessionsModel.startNewSession(sessionsModel.shouldLock)
             }
 
-            ListDelegate {
+            ActionListDelegate {
                 id: lockScreenButton
                 text: i18nc("@action", "Lock Screen")
                 icon: "system-lock-screen"
@@ -229,7 +223,7 @@ Item {
                 onClicked: pmEngine.performOperation("lockScreen")
             }
 
-            ListDelegate {
+            ActionListDelegate {
                 id: leaveButton
                 text: i18nc("Show a dialog with options to logout/shutdown/restart", "Leave…")
                 highlight: delegateHighlight

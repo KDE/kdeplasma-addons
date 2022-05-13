@@ -7,24 +7,19 @@
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
 
+import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
     id: item
 
-    signal clicked
-    signal iconClicked
+    signal clicked()
 
     property alias text: label.text
     property alias subText: sublabel.text
-    property alias icon: icon.source
-    // "enabled" also affects all children
     property bool interactive: true
-    property bool interactiveIcon: false
-
-    property alias usesPlasmaTheme: icon.usesPlasmaTheme
-
+    property alias iconItem: iconItem.children
     property alias containsMouse: area.containsMouse
 
     property Item highlight
@@ -61,20 +56,15 @@ Item {
         width: parent.width - 2 * PlasmaCore.Units.smallSpacing
         spacing: PlasmaCore.Units.smallSpacing
 
-        PlasmaCore.IconItem {
-            id: icon
-            // gosh, there needs to be a Layout.fixedWidth
-            Layout.minimumWidth: PlasmaCore.Units.iconSizes.medium
-            Layout.maximumWidth: PlasmaCore.Units.iconSizes.medium
-            Layout.minimumHeight: PlasmaCore.Units.iconSizes.medium
-            Layout.maximumHeight: PlasmaCore.Units.iconSizes.medium
+        Item {
+            id: iconItem
 
-            MouseArea {
-                anchors.fill: parent
-                visible: item.interactiveIcon
-                cursorShape: Qt.PointingHandCursor
-                onClicked: item.iconClicked()
-            }
+            Layout.preferredWidth: PlasmaCore.Units.iconSizes.medium
+            Layout.preferredHeight: PlasmaCore.Units.iconSizes.medium
+            Layout.minimumWidth: Layout.preferredWidth
+            Layout.maximumWidth: Layout.preferredWidth
+            Layout.minimumHeight: Layout.preferredHeight
+            Layout.maximumHeight: Layout.preferredHeight
         }
 
         ColumnLayout {
