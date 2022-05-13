@@ -14,6 +14,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kcoreaddons 1.0 as KCoreAddons // kuser
+import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kquickcontrolsaddons 2.0 // kcmshell
 
 import org.kde.plasma.private.sessions 2.0 as Sessions
@@ -73,14 +74,18 @@ Item {
             anchors.centerIn: parent
             spacing: PlasmaCore.Units.smallSpacing
 
-            PlasmaCore.IconItem {
+            Kirigami.Avatar {
                 id: icon
+
+                anchors.verticalCenter: parent.verticalCenter
+                height: compactRoot.height - PlasmaCore.Units.smallSpacing * 2
                 width: height
-                height: compactRoot.height
-                Layout.preferredWidth: height
+
+                border.color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {alpha: 0.4*255})
+                border.width: 1
+
                 source: visible ? (kuser.faceIconUrl.toString() || "user-identity") : ""
                 visible: root.showFace
-                usesPlasmaTheme: false
             }
 
             PlasmaComponents3.Label {
