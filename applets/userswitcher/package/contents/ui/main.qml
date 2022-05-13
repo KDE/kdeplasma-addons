@@ -220,8 +220,7 @@ Item {
                 text: i18nc("@action", "Lock Screen")
                 icon: "system-lock-screen"
                 highlight: delegateHighlight
-                enabled: pmEngine.data["Sleep States"]["LockScreen"]
-                visible: enabled
+                visible: pmEngine.data["Sleep States"]["LockScreen"]
                 onClicked: pmEngine.performOperation("lockScreen")
             }
 
