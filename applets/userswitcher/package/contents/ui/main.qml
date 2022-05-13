@@ -106,8 +106,11 @@ Item {
     Plasmoid.fullRepresentation: Item {
         id: fullRoot
 
+        implicitHeight: column.implicitHeight
+        implicitWidth: column.implicitWidth
+
         Layout.preferredWidth: PlasmaCore.Units.gridUnit * 12
-        Layout.preferredHeight: column.implicitContentHeight
+        Layout.preferredHeight: implicitHeight
         Layout.minimumWidth: Layout.preferredWidth
         Layout.minimumHeight: Layout.preferredHeight
         Layout.maximumWidth: Layout.preferredWidth
@@ -138,19 +141,6 @@ Item {
         ColumnLayout {
             id: column
 
-            // there doesn't seem a more sensible way of getting this due to the expanding ListView
-            readonly property real implicitContentHeight: {
-                let h = currentUserItem.implicitHeight;
-                h += userList.contentHeight;
-                if (newSessionButton.visible) {
-                    h += newSessionButton.implicitHeight;
-                }
-                if (lockScreenButton.visible) {
-                    h += lockScreenButton.implicitHeight;
-                }
-                h += leaveButton.implicitHeight;
-            }
-
             anchors.fill: parent
             spacing: 0
 
@@ -165,9 +155,14 @@ Item {
                 usesPlasmaTheme: false
             }
 
-            PlasmaExtras.ScrollArea {
+            PlasmaComponents3.ScrollView {
+                id: scroll
+
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+                // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
+                PlasmaComponents3.ScrollBar.horizontal.policy: PlasmaComponents3.ScrollBar.AlwaysOff
 
                 ListView {
                     id: userList
@@ -177,7 +172,7 @@ Item {
                     highlightMoveDuration: 0
 
                     delegate: ListDelegate {
-                        width: userList.width
+                        width: ListView.view.width
                         text: {
                             if (!model.session) {
                                 return i18nc("Nobody logged in on that session", "Unused")
