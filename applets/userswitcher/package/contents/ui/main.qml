@@ -21,17 +21,17 @@ import org.kde.plasma.private.sessions 2.0 as Sessions
 Item {
     id: root
 
-    readonly property bool isVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
+    readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
 
     readonly property string displayedName: showFullName ? kuser.fullName : kuser.loginName
 
-    readonly property bool showFace: plasmoid.configuration.showFace
-    readonly property bool showName: plasmoid.configuration.showName
+    readonly property bool showFace: Plasmoid.configuration.showFace
+    readonly property bool showName: Plasmoid.configuration.showName
 
-    readonly property bool showFullName: plasmoid.configuration.showFullName
+    readonly property bool showFullName: Plasmoid.configuration.showFullName
 
     // TTY number and X display
-    readonly property bool showTechnicalInfo: plasmoid.configuration.showTechnicalInfo
+    readonly property bool showTechnicalInfo: Plasmoid.configuration.showTechnicalInfo
 
     Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 10
     Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 12
@@ -40,10 +40,10 @@ Item {
     Plasmoid.toolTipSubText: i18n("You are logged in as <b>%1</b>", displayedName)
 
     Binding {
-        target: plasmoid
+        target: Plasmoid.self
         property: "icon"
         value: kuser.faceIconUrl
-        // revert to the plasmoid icon if no face given
+        // revert to the Plasmoid icon if no face given
         when: kuser.faceIconUrl.toString() !== ""
     }
 
@@ -55,7 +55,7 @@ Item {
         id: compactRoot
 
         // Taken from DigitalClock to ensure uniform sizing when next to each other
-        readonly property bool tooSmall: plasmoid.formFactor === PlasmaCore.Types.Horizontal && Math.round(2 * (compactRoot.height / 5)) <= PlasmaCore.Theme.smallestFont.pixelSize
+        readonly property bool tooSmall: Plasmoid.formFactor === PlasmaCore.Types.Horizontal && Math.round(2 * (compactRoot.height / 5)) <= PlasmaCore.Theme.smallestFont.pixelSize
 
         Layout.minimumWidth: isVertical ? 0 : compactRow.implicitWidth
         Layout.maximumWidth: isVertical ? Infinity : Layout.minimumWidth
@@ -65,7 +65,7 @@ Item {
         Layout.maximumHeight: isVertical ? Layout.minimumHeight : Infinity
         Layout.preferredHeight: isVertical ? Layout.minimumHeight : PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2
 
-        onClicked: plasmoid.expanded = !plasmoid.expanded
+        onClicked: Plasmoid.expanded = !Plasmoid.expanded
 
         Row {
             id: compactRow
@@ -229,12 +229,13 @@ Item {
             }
         }
 
-        Component.onCompleted: {
-            plasmoid.expandedChanged.connect(function (expanded) {
-                if (expanded) {
+        Connections {
+            target: Plasmoid.self
+            function onExpandedChanged() {
+                if (Plasmoid.expanded) {
                     sessionsModel.reload();
                 }
-            });
+            }
         }
     }
 }
