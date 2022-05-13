@@ -29,9 +29,10 @@ Item {
 
     property Item highlight
 
+    // sizing: top-down explicit width, bottom-up implicit height
+    implicitHeight: row.implicitHeight + 2 * PlasmaCore.Units.smallSpacing
+    implicitWidth: row.implicitWidth
     Layout.fillWidth: true
-
-    height: row.height + 2 * PlasmaCore.Units.smallSpacing
 
     MouseArea {
         id: area

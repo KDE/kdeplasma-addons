@@ -107,7 +107,11 @@ Item {
         id: fullRoot
 
         Layout.preferredWidth: PlasmaCore.Units.gridUnit * 12
-        Layout.preferredHeight: Math.min(Screen.height * 0.5, column.contentHeight)
+        Layout.preferredHeight: column.implicitContentHeight
+        Layout.minimumWidth: Layout.preferredWidth
+        Layout.minimumHeight: Layout.preferredHeight
+        Layout.maximumWidth: Layout.preferredWidth
+        Layout.maximumHeight: Screen.height / 2
 
         PlasmaCore.DataSource {
             id: pmEngine
@@ -135,13 +139,19 @@ Item {
             id: column
 
             // there doesn't seem a more sensible way of getting this due to the expanding ListView
-            readonly property int contentHeight: currentUserItem.height + userList.contentHeight + PlasmaCore.Units.smallSpacing
-                                               + (newSessionButton.visible ? newSessionButton.height : 0)
-                                               + (lockScreenButton.visible ? lockScreenButton.height : 0)
-                                               + leaveButton.height
+            readonly property real implicitContentHeight: {
+                let h = currentUserItem.implicitHeight;
+                h += userList.contentHeight;
+                if (newSessionButton.visible) {
+                    h += newSessionButton.implicitHeight;
+                }
+                if (lockScreenButton.visible) {
+                    h += lockScreenButton.implicitHeight;
+                }
+                h += leaveButton.implicitHeight;
+            }
 
             anchors.fill: parent
-
             spacing: 0
 
             ListDelegate {
