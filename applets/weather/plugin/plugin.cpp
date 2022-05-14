@@ -30,6 +30,7 @@ static QObject *pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, Q
 
     QVector<UnitItem> items{UnitItem(KUnitConversion::Hectopascal),
                             UnitItem(KUnitConversion::Kilopascal),
+                            UnitItem(KUnitConversion::Pascal),
                             UnitItem(KUnitConversion::Millibar),
                             UnitItem(KUnitConversion::InchesOfMercury),
                             UnitItem(KUnitConversion::MillimetersOfMercury)};
