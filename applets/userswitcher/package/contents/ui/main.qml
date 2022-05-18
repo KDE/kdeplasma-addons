@@ -132,12 +132,12 @@ Item {
             id: sessionsModel
         }
 
-        PlasmaExtras.Highlight {
+        property Item delegateHighlight: PlasmaExtras.Highlight {
             id: delegateHighlight
             parent: null
             width: parent ? parent.width : undefined
             height: parent ? parent.height : undefined
-            hovered: parent.containsMouse
+            hovered: parent && parent.containsMouse
             z: -1 // otherwise it shows ontop of the icon/label and tints them slightly
         }
 
