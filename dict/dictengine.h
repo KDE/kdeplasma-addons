@@ -67,14 +67,14 @@ private Q_SLOTS:
 private:
     void getDefinition();
     void getDicts();
-    void setDict(const QString &dict);
+    void setDict(const QByteArray &dict);
     void setServer(const QString &server);
 
     QHash<QString, QString> m_dictNameToDictCode;
     QTcpSocket *m_tcpSocket = nullptr;
     QString m_currentWord;
     QString m_currentQuery;
-    QString m_dictName;
+    QByteArrayList m_dictNames;
     QString m_serverName;
     QMap<QString, QMap<QString, QString>> m_availableDictsCache;
 

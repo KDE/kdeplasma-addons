@@ -19,7 +19,7 @@ using namespace std::chrono_literals;
 
 DictEngine::DictEngine(QObject *parent)
     : QObject(parent)
-    , m_dictName(QStringLiteral("wn")) // In case we need to switch it later
+    , m_dictNames{QByteArrayLiteral("wn")} // In case we need to switch it later
     , m_serverName(QStringLiteral("dict.org")) // Default, good dictionary
     , m_definitionResponses{
           QByteArrayLiteral("250"), /**< ok (optional timing information here) */
@@ -38,9 +38,9 @@ DictEngine::~DictEngine()
 {
 }
 
-void DictEngine::setDict(const QString &dict)
+void DictEngine::setDict(const QByteArray &dict)
 {
-    m_dictName = dict;
+    m_dictNames = dict.split(',');
 }
 
 void DictEngine::setServer(const QString &server)
@@ -123,8 +123,12 @@ void DictEngine::getDefinition()
 
     m_tcpSocket->readAll();
 
-    const QByteArray command = QByteArray("DEFINE ") + m_dictName.toLatin1() + " \"" + m_currentWord.toUtf8() + "\"\n";
-    // qDebug() << command;
+    // Command Pipelining: https://datatracker.ietf.org/doc/html/rfc2229#section-4
+    QByteArray command;
+    for (const QByteArray &dictName : std::as_const(m_dictNames)) {
+        command += QByteArrayLiteral("DEFINE ") + dictName + QByteArrayLiteral(" \"") + m_currentWord.toUtf8() + QByteArrayLiteral("\"\n");
+    }
+
     m_tcpSocket->write(command);
     m_tcpSocket->flush();
 
@@ -223,10 +227,10 @@ void DictEngine::requestDefinition(const QString &query)
 
     // asked for a dictionary?
     if (queryParts.count() > 1) {
-        setDict(queryParts[queryParts.count() - 2]);
+        setDict(queryParts[queryParts.count() - 2].toLatin1());
         // default to wordnet
     } else {
-        setDict(QStringLiteral("wn"));
+        setDict(QByteArrayLiteral("wn"));
     }
 
     // asked for a server?
