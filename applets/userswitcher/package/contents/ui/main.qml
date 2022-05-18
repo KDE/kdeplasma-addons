@@ -134,7 +134,10 @@ Item {
 
         PlasmaExtras.Highlight {
             id: delegateHighlight
-            visible: false
+            parent: null
+            width: parent ? parent.width : undefined
+            height: parent ? parent.height : undefined
+            hovered: parent.containsMouse
             z: -1 // otherwise it shows ontop of the icon/label and tints them slightly
         }
 

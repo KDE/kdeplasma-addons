@@ -20,7 +20,7 @@ Item {
     property alias subText: sublabel.text
     property bool interactive: true
     property alias iconItem: iconItem.children
-    property alias containsMouse: area.containsMouse
+    readonly property bool containsMouse: area.containsMouse
 
     property Item highlight
 
@@ -42,11 +42,7 @@ Item {
 
             if (containsMouse) {
                 highlight.parent = item
-                highlight.width = item.width
-                highlight.height = item.height
             }
-
-            highlight.visible = containsMouse
         }
     }
 
