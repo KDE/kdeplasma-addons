@@ -18,6 +18,8 @@ void DictPlugin::registerTypes(const char *uri)
 
     qRegisterMetaType<QAbstractSocket::SocketError>();
 
+    qmlRegisterAnonymousType<QAbstractListModel>("", 1);
+
     qmlRegisterType<DictObject>(uri, 1, 0, "DictObject");
     qmlRegisterType<DictionariesModel>(uri, 1, 0, "DictionariesModel");
 
