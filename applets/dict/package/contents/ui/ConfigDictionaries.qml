@@ -6,10 +6,11 @@
 
 import QtQuick 2.15
 import QtQuick.Controls 2.5
+import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.private.dict 1.0
 
-Page {
+ColumnLayout {
     id: page
     property string cfg_dictionary: ""
 
@@ -18,67 +19,100 @@ Page {
 
     DictionariesModel {
         id: dictionariesModel
+        Component.onCompleted: enabledDicts = cfg_dictionary
+        onEnabledDictsChanged: cfg_dictionary = enabledDicts
     }
 
-    ScrollView {
-        anchors.fill: parent
-        Component.onCompleted: background.visible = true;
+    AvailableDictSheet {
+        id: sheet
+    }
 
-        ListView {
-            id: listView
-            model: dictionariesModel
-            reuseItems: true
+    Item {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
 
-            section {
-                criteria: ViewSection.FirstCharacter
-                property: "id"
-                delegate: Kirigami.ListSectionHeader {
-                    label: section
+        ScrollView {
+            anchors.fill: parent
+            Component.onCompleted: background.visible = true;
+
+            ListView {
+                id: listView
+
+                model: dictionariesModel.enabledDictModel
+                reuseItems: true
+
+                displaced: Transition {
+                    NumberAnimation {
+                        properties: "y"
+                        duration: Kirigami.Units.longDuration
+                    }
+                }
+
+                delegate: DictItemDelegate {
+                    width: listView.width
+                    view: listView
+
+                    onMoveRequested: {
+                        dictionariesModel.move(oldIndex, newIndex);
+                    }
+                    onRemoved: {
+                        dictionariesModel.setDisabled(index);
+                    }
+                }
+            }
+        }
+
+        Loader {
+            active: dictionariesModel.loading || sheet.view.count === 0 || listView.count === 0
+            asynchronous: true
+
+            anchors.centerIn: parent
+            visible: active
+
+            sourceComponent: dictionariesModel.loading ? loadingPlaceHolder : (sheet.view.count === 0 ? errorPlaceHolder : emptyPlaceholder)
+
+            Component {
+                id: loadingPlaceHolder
+
+                Kirigami.LoadingPlaceholder {
+                    anchors.centerIn: parent
                 }
             }
 
-            delegate: Kirigami.BasicListItem {
-                width: listView.width
+            Component {
+                id: errorPlaceHolder
 
-                bold: page.cfg_dictionary == model.id
-                highlighted: bold
+                Kirigami.PlaceholderMessage {
+                    anchors.centerIn: parent
+                    width: root.width - (Kirigami.Units.largeSpacing * 4)
+                    icon.name: "network-disconnect"
+                    text: i18n("Unable to load dictionary list")
+                    explanation: i18nc("%2 human-readable error string", "Error code: %1 (%2)", dictionariesModel.errorCode, dictionariesModel.errorString)
+                }
+            }
 
-                icon: undefined
+            Component {
+                id: emptyPlaceholder
 
-                label: model.id
-                subtitle: model.description
-
-                onClicked: page.cfg_dictionary = model.id
+                Kirigami.PlaceholderMessage {
+                    anchors.centerIn: parent
+                    width: root.width - (Kirigami.Units.largeSpacing * 4)
+                    icon.name: "edit-none"
+                    text: i18n("No dictionaries")
+                }
             }
         }
     }
 
-    Loader {
-        active: dictionariesModel.loading || listView.count === 0
-        asynchronous: true
+    RowLayout {
+        Layout.fillWidth: true
 
-        anchors.centerIn: parent
-        visible: active
-
-        sourceComponent: dictionariesModel.loading ? loadingPlaceHolder : errorPlaceHolder
-
-        Component {
-            id: loadingPlaceHolder
-
-            Kirigami.LoadingPlaceholder {
-                anchors.centerIn: parent
-            }
-        }
-
-        Component {
-            id: errorPlaceHolder
-
-            Kirigami.PlaceholderMessage {
-                anchors.centerIn: parent
-                width: root.width - (Kirigami.Units.largeSpacing * 4)
-                icon.name: "network-disconnect"
-                text: i18n("Unable to load dictionary list")
-                explanation: i18nc("%2 human-readable error string", "Error code: %1 (%2)", dictionariesModel.errorCode, dictionariesModel.errorString)
+        Button {
+            enabled: sheet.view.count > 0
+            text: i18n("Add More…")
+            icon.name: "list-add"
+            onClicked: {
+                sheet.open();
             }
         }
     }
