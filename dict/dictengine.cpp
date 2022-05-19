@@ -23,7 +23,6 @@ DictEngine::DictEngine(QObject *parent)
     , m_serverName(QStringLiteral("dict.org")) // Default, good dictionary
     , m_definitionResponses{
           QByteArrayLiteral("250"), /**< ok (optional timing information here) */
-          QByteArrayLiteral("552"), /**< No match */
           QByteArrayLiteral("550"), /**< Invalid database */
           QByteArrayLiteral("501"), /**< Syntax error, illegal parameters */
           QByteArrayLiteral("503"), /**< Command parameter not implemented */
@@ -72,8 +71,10 @@ static QString wnToHtml(const QString &word, QByteArray &text)
             continue;
         }
 
+        // Don't early return if there are multiple dicts
         if (currentLine.startsWith("552") || currentLine.startsWith("501")) {
-            return i18n("No match found for %1", word);
+            def += QStringLiteral("<dt><b>%1</b></dt>\n<dd>%2</dd>").arg(word, i18n("No match found for %1", word));
+            continue;
         }
 
         if (!(currentLine.startsWith(QLatin1String("150")) || currentLine.startsWith(QLatin1String("151")) || currentLine.startsWith(QLatin1String("250")))) {

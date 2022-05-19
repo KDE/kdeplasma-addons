@@ -91,5 +91,5 @@ private:
     QTimer m_definitionTimer;
 
     // https://datatracker.ietf.org/doc/html/rfc2229
-    const std::array<QByteArray, 5> m_definitionResponses;
+    const std::array<QByteArray, 4> m_definitionResponses;
 };
