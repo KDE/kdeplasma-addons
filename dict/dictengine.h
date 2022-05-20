@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <array>
 #include <QMap>
 #include <QObject>
 #include <QTcpSocket>
