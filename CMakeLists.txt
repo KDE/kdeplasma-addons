@@ -70,6 +70,16 @@ set_package_properties(KF5Purpose PROPERTIES
     TYPE RUNTIME
 )
 
+find_package(ICU 66.1 COMPONENTS uc i18n)
+set_package_properties(ICU
+        PROPERTIES DESCRIPTION "Unicode and Globalization support for software applications"
+        TYPE OPTIONAL
+        PURPOSE "Provides alternate calendar systems that are not available in QCalendar"
+        )
+if(ICU_FOUND)
+    set(HAVE_ICU TRUE)
+endif()
+
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
     -DQT_NO_URL_CAST_FROM_STRING
