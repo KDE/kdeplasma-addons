@@ -14,6 +14,7 @@
 #include <QMimeData>
 #include <QSet>
 
+#include <KConfigGroup>
 #include <KLocalizedString>
 
 SpellCheckRunner::SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)

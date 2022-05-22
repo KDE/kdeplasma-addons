@@ -5,6 +5,7 @@
 
 #include "dictionaryrunner.h"
 
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <QEventLoop>
 #include <QMutex>

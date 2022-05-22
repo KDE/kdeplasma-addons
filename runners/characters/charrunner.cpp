@@ -8,6 +8,7 @@
 #include "config_keys.h"
 
 // KF
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KRunner/QueryMatch>
 // Qt

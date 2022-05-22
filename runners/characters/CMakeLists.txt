@@ -4,6 +4,8 @@ kcoreaddons_add_plugin(krunner_charrunner SOURCES charrunner.cpp INSTALL_NAMESPA
 target_link_libraries(krunner_charrunner
     KF5::Runner
     KF5::I18n
+    KF5::ConfigCore
+    Qt::Gui
 )
 
 kcoreaddons_add_plugin(kcm_krunner_charrunner INSTALL_NAMESPACE "kf${QT_MAJOR_VERSION}/krunner/kcms")

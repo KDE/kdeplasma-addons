@@ -10,6 +10,7 @@
 
 // KF
 #include <KConfig>
+#include <KConfigGroup>
 #include <KDirWatch>
 #include <KIO/CommandLauncherJob>
 #include <KLocalizedString>

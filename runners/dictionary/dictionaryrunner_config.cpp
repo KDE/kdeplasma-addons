@@ -4,6 +4,7 @@
  */
 
 #include "dictionaryrunner_config.h"
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <KRunner/AbstractRunner>
