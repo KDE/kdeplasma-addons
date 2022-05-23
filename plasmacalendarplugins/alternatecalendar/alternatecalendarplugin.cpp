@@ -8,6 +8,8 @@
 
 #include "alternatecalendarplugin.h"
 
+#include <QCache>
+
 #include <KConfigGroup>
 #include <KConfigWatcher>
 #include <KSharedConfig>
@@ -18,6 +20,8 @@
 #include "provider/indiancalendar.h"
 #endif
 
+using SubLabel = CalendarEvents::CalendarEventsPlugin::SubLabel;
+
 class AlternateCalendarPluginPrivate
 {
 public:
@@ -25,17 +29,20 @@ public:
     ~AlternateCalendarPluginPrivate();
 
     void init();
-    AbstractCalendarProvider *calendarProvider() const;
-
-    CalendarSystem::System m_calendarSystem;
-    int m_dateOffset; // For the (tabular) Islamic Civil calendar
+    void loadEventsForDateRange(const QDate &startDate, const QDate &endDate);
 
 private:
     std::unique_ptr<AbstractCalendarProvider> m_calendarProvider;
 
+    // Cache lookup data
+    QCache<QDate, SubLabel> m_subLabelsCache;
+
     // For updating config
     KConfigGroup m_generalConfigGroup;
     KConfigWatcher::Ptr m_configWatcher;
+
+    CalendarSystem::System m_calendarSystem;
+    int m_dateOffset; // For the (tabular) Islamic Civil calendar
 
     AlternateCalendarPlugin *q;
 };
@@ -43,6 +50,8 @@ private:
 AlternateCalendarPluginPrivate::AlternateCalendarPluginPrivate(AlternateCalendarPlugin *parent)
     : q(parent)
 {
+    m_subLabelsCache.setMaxCost(42 * 3 /*previous, current, next*/);
+
     auto config = KSharedConfig::openConfig(QStringLiteral("plasma_calendar_alternatecalendar"));
     m_generalConfigGroup = config->group("General");
     m_configWatcher = KConfigWatcher::create(config);
@@ -84,11 +93,39 @@ void AlternateCalendarPluginPrivate::init()
     default:
         m_calendarProvider.reset(new AbstractCalendarProvider(q, m_calendarSystem));
     }
+
+    // Clear the old cache when config is reloaded
+    m_subLabelsCache.clear();
 }
 
-AbstractCalendarProvider *AlternateCalendarPluginPrivate::calendarProvider() const
+void AlternateCalendarPluginPrivate::loadEventsForDateRange(const QDate &startDate, const QDate &endDate)
 {
-    return m_calendarProvider.get();
+    if (!endDate.isValid() || m_calendarSystem == CalendarSystem::Gregorian) {
+        return;
+    }
+
+    QHash<QDate, QDate> alternateDatesData;
+    QHash<QDate, CalendarEvents::CalendarEventsPlugin::SubLabel> subLabelsData;
+
+    for (QDate date = startDate; date <= endDate && date.isValid(); date = date.addDays(1)) {
+        const QDate offsetDate = date.addDays(m_dateOffset);
+
+        if (const QDate alt = m_calendarProvider->fromGregorian(offsetDate); alt != date) {
+            alternateDatesData.insert(date, alt);
+        }
+
+        if (m_subLabelsCache.contains(date)) {
+            subLabelsData.insert(date, *m_subLabelsCache.object(date));
+        } else {
+            const auto it = subLabelsData.insert(date, m_calendarProvider->subLabels(offsetDate));
+            m_subLabelsCache.insert(date, new SubLabel(*it));
+        }
+    }
+
+    if (alternateDatesData.size() > 0) {
+        Q_EMIT q->alternateDateReady(alternateDatesData);
+    }
+    Q_EMIT q->subLabelReady(subLabelsData);
 }
 
 AlternateCalendarPlugin::AlternateCalendarPlugin(QObject *parent)
@@ -103,30 +140,10 @@ AlternateCalendarPlugin::~AlternateCalendarPlugin()
 
 void AlternateCalendarPlugin::loadEventsForDateRange(const QDate &startDate, const QDate &endDate)
 {
-    if (!endDate.isValid() || d->m_calendarSystem == CalendarSystem::Gregorian) {
-        return;
-    }
-
     m_lastStartDate = startDate;
     m_lastEndDate = endDate;
 
-    QHash<QDate, QDate> alternateDatesData;
-    QHash<QDate, SubLabel> subLabelsData;
-
-    const int dateOffset = d->m_dateOffset;
-
-    for (QDate date = startDate; date <= endDate && date.isValid(); date = date.addDays(1)) {
-        const QDate offsetDate = date.addDays(dateOffset);
-        if (const QDate alt = d->calendarProvider()->fromGregorian(offsetDate); alt != date) {
-            alternateDatesData.insert(date, alt);
-        }
-        subLabelsData.insert(date, d->calendarProvider()->subLabels(offsetDate));
-    }
-
-    if (alternateDatesData.size() > 0) {
-        Q_EMIT alternateDateReady(alternateDatesData);
-    }
-    Q_EMIT subLabelReady(subLabelsData);
+    d->loadEventsForDateRange(startDate, endDate);
 }
 
 void AlternateCalendarPlugin::updateSettings()
