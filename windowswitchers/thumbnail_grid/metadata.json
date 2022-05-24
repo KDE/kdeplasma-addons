@@ -3,14 +3,41 @@
         "Authors": [
             {
                 "Email": "zrenfire@gmail.com",
-                "Name": "Chris Holland"
+                "Name": "Chris Holland",
+                "Name[ca]": "Chris Holland",
+                "Name[es]": "Chris Holland",
+                "Name[nl]": "Chris Holland",
+                "Name[pt]": "Chris Holland",
+                "Name[sv]": "Chris Holland",
+                "Name[tr]": "Chris Holland",
+                "Name[uk]": "Chris Holland",
+                "Name[vi]": "Chris Holland",
+                "Name[x-test]": "xxChris Hollandxx"
             }
         ],
         "Description": "A window switcher layout using a small grid of thumbnails",
+        "Description[ca]": "Una disposició del commutador de finestres que utilitza una quadrícula petita de miniatures",
+        "Description[es]": "Un esquema de selección de ventanas que usa una pequeña cuadrícula de miniaturas",
+        "Description[nl]": "Een indeling van de vensterwisselaar met een klein raster van miniaturen",
+        "Description[pt]": "Uma disposição de mudança de janelas que mostra uma pequena grelha de miniaturas",
+        "Description[sv]": "En layout för fönsterbyte som använder ett litet miniatyrbildsrutnät",
+        "Description[tr]": "Küçük görsellerin bir ızgarasını gösteren pencere değiştirici düzeni",
+        "Description[uk]": "Компонування засобу перемикання вікон з малою таблицею мініатюр поточного стану вікон",
+        "Description[vi]": "Bố cục trình chuyển cửa sổ dùng một lưới nhỏ các hình nhỏ",
+        "Description[x-test]": "xxA window switcher layout using a small grid of thumbnailsxx",
         "Icon": "preferences-system-windows-switcher-thumbnail-grid",
         "Id": "thumbnail_grid",
         "License": "GPL",
         "Name": "Thumbnail Grid",
+        "Name[ca]": "Quadrícula de miniatures",
+        "Name[es]": "Cuadrícula de miniaturas",
+        "Name[nl]": "Raster voor miniaturen",
+        "Name[pt]": "Grelha de Miniaturas",
+        "Name[sv]": "Miniatyrbildsrutnät",
+        "Name[tr]": "Küçük Görsel Izgarası",
+        "Name[uk]": "Таблиця мініатюр",
+        "Name[vi]": "Lưới hình nhỏ",
+        "Name[x-test]": "xxThumbnail Gridxx",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

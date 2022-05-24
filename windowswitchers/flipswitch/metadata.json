@@ -3,14 +3,41 @@
         "Authors": [
             {
                 "Email": "isma.af@gmail.com",
-                "Name": "Ismael Asensio"
+                "Name": "Ismael Asensio",
+                "Name[ca]": "Ismael Asensio",
+                "Name[es]": "Ismael Asensio",
+                "Name[nl]": "Ismael Asensio",
+                "Name[pt]": "Ismael Asensio",
+                "Name[sv]": "Ismael Asensio",
+                "Name[tr]": "Ismael Asensio",
+                "Name[uk]": "Ismael Asensio",
+                "Name[vi]": "Ismael Asensio",
+                "Name[x-test]": "xxIsmael Asensioxx"
             }
         ],
         "Description": "A Window Switcher layout showing thumbnails as a 3D card deck",
+        "Description[ca]": "Una disposició del commutador de finestres que mostra les miniatures com una baralla de cartes en 3D",
+        "Description[es]": "Un esquema de selección de ventanas que muestra miniaturas como una baraja de cartas en 3D",
+        "Description[nl]": "Een indeling van de vensterwisselaar die miniaturen toont als een 3D-kaartspel",
+        "Description[pt]": "Uma disposição de mudança de janelas que mostra miniaturas como um baralho de cartas em 3D",
+        "Description[sv]": "En layout för fönsterbyte som visar miniatyrbilder som en tredimensionell kortlek",
+        "Description[tr]": "Küçük görselleri 3B kart destesi olarak gösteren bir pencere değiştirici düzeni",
+        "Description[uk]": "Компонування засобу перемикання вікон з мініатюрами вікон у вигляді колоди карт",
+        "Description[vi]": "Bố cục trình chuyển cửa sổ hiển thị các hình nhỏ thành một tập bài 3D",
+        "Description[x-test]": "xxA Window Switcher layout showing thumbnails as a 3D card deckxx",
         "Icon": "preferences-system-windows-effect-flipswitch",
         "Id": "flipswitch",
         "License": "GPL",
         "Name": "Flip Switch",
+        "Name[ca]": "Canvi en roda",
+        "Name[es]": "Selector de volteo",
+        "Name[nl]": "Flip Switch",
+        "Name[pt]": "Mudança por Inversão",
+        "Name[sv]": "Blädderbyte",
+        "Name[tr]": "Ters Çevirme Anahtarı",
+        "Name[uk]": "Тасування карток",
+        "Name[vi]": "Chuyển kiểu lật",
+        "Name[x-test]": "xxFlip Switchxx",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

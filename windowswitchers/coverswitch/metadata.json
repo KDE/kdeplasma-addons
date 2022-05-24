@@ -3,14 +3,41 @@
         "Authors": [
             {
                 "Email": "isma.af@gmail.com",
-                "Name": "Ismael Asensio"
+                "Name": "Ismael Asensio",
+                "Name[ca]": "Ismael Asensio",
+                "Name[es]": "Ismael Asensio",
+                "Name[nl]": "Ismael Asensio",
+                "Name[pt]": "Ismael Asensio",
+                "Name[sv]": "Ismael Asensio",
+                "Name[tr]": "Ismael Asensio",
+                "Name[uk]": "Ismael Asensio",
+                "Name[vi]": "Ismael Asensio",
+                "Name[x-test]": "xxIsmael Asensioxx"
             }
         ],
         "Description": "A Window Switcher layout showing thumbnails as a 3D carousel",
+        "Description[ca]": "Una disposició del commutador de finestres que mostra les miniatures com un carrusel en 3D",
+        "Description[es]": "Un esquema de selección de ventanas que muestra miniaturas como una presentación en 3D",
+        "Description[nl]": "Een indeling van de vensterwisselaar die miniaturen toont als 3D-carousel",
+        "Description[pt]": "Uma disposição de mudança de janelas que mostra miniaturas como um carrossel em 3D",
+        "Description[sv]": "En layout för fönsterbyte som visar miniatyrbilder som en tredimensionell karusell",
+        "Description[tr]": "Küçük görselleri 3B atlıkarınca olarak gösteren bir pencere değiştirici düzeni",
+        "Description[uk]": "Компонування засобу перемикання вікон з мініатюрами у вигляді просторово каруселі",
+        "Description[vi]": "Bố cục trình chuyển cửa sổ hiển thị các hình nhỏ thành một băng chuyền 3D",
+        "Description[x-test]": "xxA Window Switcher layout showing thumbnails as a 3D carouselxx",
         "Icon": "preferences-system-windows-effect-coverswitch",
         "Id": "coverswitch",
         "License": "GPL",
         "Name": "Cover Switch",
+        "Name[ca]": "Canvi de capa",
+        "Name[es]": "Selector de portadas",
+        "Name[nl]": "Omslagtonen",
+        "Name[pt]": "Mudança de Capas",
+        "Name[sv]": "Omslagsbyte",
+        "Name[tr]": "Kapak Değiştirici",
+        "Name[uk]": "Перемикач обкладинок",
+        "Name[vi]": "Chuyển kiểu trang bìa",
+        "Name[x-test]": "xxCover Switchxx",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

@@ -3,14 +3,41 @@
         "Authors": [
             {
                 "Email": "mgraesslin@kde.org",
-                "Name": "Martin Gräßlin"
+                "Name": "Martin Gräßlin",
+                "Name[ca]": "Martin Gräßlin",
+                "Name[es]": "Martin Gräßlin",
+                "Name[nl]": "Martin Gräßlin",
+                "Name[pt]": "Martin Gräßlin",
+                "Name[sv]": "Martin Gräßlin",
+                "Name[tr]": "Martin Gräßlin",
+                "Name[uk]": "Martin Gräßlin",
+                "Name[vi]": "Martin Gräßlin",
+                "Name[x-test]": "xxMartin Gräßlinxx"
             }
         ],
         "Description": "A window switcher layout using live thumbnails",
+        "Description[ca]": "Una disposició del commutador de finestres que utilitza miniatures animades",
+        "Description[es]": "Un esquema de selección de ventanas que usa miniaturas en vivo",
+        "Description[nl]": "Een indeling van de vensterwisselaar met levende miniaturen",
+        "Description[pt]": "Uma disposição de mudança de janelas que usa miniaturas actualizadas em directo",
+        "Description[sv]": "En layout för fönsterbyte som använder direkta miniatyrbilder",
+        "Description[tr]": "Canlı küçük görseller kullanan bir pencere değiştirici düzeni",
+        "Description[uk]": "Компонування засобу перемикання вікон з мініатюрами поточного стану вікон",
+        "Description[vi]": "Bố cục trình chuyển cửa sổ dùng các hình nhỏ động",
+        "Description[x-test]": "xxA window switcher layout using live thumbnailsxx",
         "Icon": "preferences-system-windows-switcher-thumbnails",
         "Id": "thumbnails",
         "License": "GPL",
         "Name": "Thumbnails",
+        "Name[ca]": "Miniatures",
+        "Name[es]": "Miniaturas",
+        "Name[nl]": "Miniaturen",
+        "Name[pt]": "Miniaturas",
+        "Name[sv]": "Miniatyrbilder",
+        "Name[tr]": "Küçük Görseller",
+        "Name[uk]": "Мініатюри",
+        "Name[vi]": "Hình nhỏ",
+        "Name[x-test]": "xxThumbnailsxx",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

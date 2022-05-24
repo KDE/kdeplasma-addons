@@ -3,14 +3,41 @@
         "Authors": [
             {
                 "Email": "mgraesslin@kde.org",
-                "Name": "Martin Gräßlin"
+                "Name": "Martin Gräßlin",
+                "Name[ca]": "Martin Gräßlin",
+                "Name[es]": "Martin Gräßlin",
+                "Name[nl]": "Martin Gräßlin",
+                "Name[pt]": "Martin Gräßlin",
+                "Name[sv]": "Martin Gräßlin",
+                "Name[tr]": "Martin Gräßlin",
+                "Name[uk]": "Martin Gräßlin",
+                "Name[vi]": "Martin Gräßlin",
+                "Name[x-test]": "xxMartin Gräßlinxx"
             }
         ],
         "Description": "A compact window switcher layout",
+        "Description[ca]": "Una disposició compacta del commutador de finestres",
+        "Description[es]": "Un esquema de selección de ventanas compacto",
+        "Description[nl]": "Een compacte indeling van de vensterwisselaar",
+        "Description[pt]": "Uma disposição de mudança de janelas compacta",
+        "Description[sv]": "En kompakt layout för fönsterbyte",
+        "Description[tr]": "Kompakt bir pencere değiştirici düzeni",
+        "Description[uk]": "Компактне компонування засобу перемикання вікон",
+        "Description[vi]": "Bố cục gọn cho trình chuyển cửa sổ",
+        "Description[x-test]": "xxA compact window switcher layoutxx",
         "Icon": "preferences-system-windows-switcher-compact",
         "Id": "compact",
         "License": "GPL",
         "Name": "Compact",
+        "Name[ca]": "Compacte",
+        "Name[es]": "Compacto",
+        "Name[nl]": "Compact",
+        "Name[pt]": "Compacto",
+        "Name[sv]": "Kompakt",
+        "Name[tr]": "Kompakt",
+        "Name[uk]": "Компактне",
+        "Name[vi]": "Gọn",
+        "Name[x-test]": "xxCompactxx",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

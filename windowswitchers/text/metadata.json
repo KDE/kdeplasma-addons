@@ -3,14 +3,41 @@
         "Authors": [
             {
                 "Email": "mgraesslin@kde.org",
-                "Name": "Martin Gräßlin"
+                "Name": "Martin Gräßlin",
+                "Name[ca]": "Martin Gräßlin",
+                "Name[es]": "Martin Gräßlin",
+                "Name[nl]": "Martin Gräßlin",
+                "Name[pt]": "Martin Gräßlin",
+                "Name[sv]": "Martin Gräßlin",
+                "Name[tr]": "Martin Gräßlin",
+                "Name[uk]": "Martin Gräßlin",
+                "Name[vi]": "Martin Gräßlin",
+                "Name[x-test]": "xxMartin Gräßlinxx"
             }
         ],
         "Description": "A window switcher layout only showing window captions",
+        "Description[ca]": "Una disposició del commutador de finestres que només mostra els títols de les finestres",
+        "Description[es]": "Un esquema de selección de ventanas que solo muestra los títulos de las ventanas",
+        "Description[nl]": "Een indeling van de vensterwisselaar die alleen bijschriften van vensters toont",
+        "Description[pt]": "Uma disposição de mudança de janelas que só mostra os títulos das janelas",
+        "Description[sv]": "En layout för fönsterbyte som bara visar fönsterrubriker",
+        "Description[tr]": "Yalnızca pencere altyazılarını gösteren bir pencere değiştirici düzeni",
+        "Description[uk]": "Компонування засобу перемикання вікон з показом лише підписів вікон",
+        "Description[vi]": "Bố cục trình chuyển cửa sổ chỉ hiện các tiêu đề cửa sổ",
+        "Description[x-test]": "xxA window switcher layout only showing window captionsxx",
         "Icon": "preferences-system-windows-switcher-text",
         "Id": "text",
         "License": "GPL",
         "Name": "Text Only",
+        "Name[ca]": "Només el text",
+        "Name[es]": "Solo texto",
+        "Name[nl]": "Alleen tekst",
+        "Name[pt]": "Apenas Texto",
+        "Name[sv]": "Enbart text",
+        "Name[tr]": "Yalnızca Metin",
+        "Name[uk]": "Лише текст",
+        "Name[vi]": "Chỉ chữ",
+        "Name[x-test]": "xxText Onlyxx",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],
