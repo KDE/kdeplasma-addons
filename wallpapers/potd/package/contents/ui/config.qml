@@ -7,6 +7,7 @@
 import QtQuick 2.5
 import QtQuick.Controls 2.8 as QQC2
 import QtQuick.Layouts 1.15
+import QtQuick.Window 2.15
 
 import org.kde.kquickcontrols 2.0 as KQC2
 import org.kde.kirigami 2.20 as Kirigami
@@ -23,12 +24,26 @@ Kirigami.FormLayout {
     property alias cfg_Color: colorButton.color
     property alias formLayout: root
 
+    PotdBackend {
+        id: backend
+        identifier: cfg_Provider
+        arguments: {
+            if (identifier === "unsplash") {
+                // Needs to specify category for unsplash provider
+                return [cfg_Category];
+            } else if (identifier === "bing") {
+                // Bing supports 1366/1920/UHD resolutions
+                return [Screen.width, Screen.height, Screen.devicePixelRatio];
+            }
+            return [];
+        }
+    }
 
     QQC2.ComboBox {
         id: providerComboBox
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Provider:")
-        model: PotdProviderModelInstance
-        currentIndex: model.currentIndex
+        model: PotdProviderModel { }
+        currentIndex: model.indexOf(cfg_Provider)
         textRole: "display"
         valueRole: "id"
         onCurrentValueChanged: {
@@ -250,7 +265,7 @@ Kirigami.FormLayout {
         // HACK: If Kirigami.FormData.label is put inside a TextArea,
         // the label will not align with text in the TextArea.
         Kirigami.FormData.label: i18nc("@label", "Title:")
-        visible: wallpaperPreview.visible && PotdProviderModelInstance.title.length > 0
+        visible: wallpaperPreview.visible && backend.title.length > 0
 
         Kirigami.SelectableLabel {
             id: titleLabel
@@ -259,7 +274,7 @@ Kirigami.FormLayout {
             Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
 
             font.bold: true
-            text: PotdProviderModelInstance.title
+            text: backend.title
             Accessible.name: titleLabel.Kirigami.FormData.label
         }
     }
@@ -270,7 +285,7 @@ Kirigami.FormLayout {
 
     Row {
         Kirigami.FormData.label: i18nc("@label", "Author:")
-        visible: wallpaperPreview.visible && PotdProviderModelInstance.author.length > 0
+        visible: wallpaperPreview.visible && backend.author.length > 0
 
         Kirigami.SelectableLabel {
             id: authorLabel
@@ -278,7 +293,7 @@ Kirigami.FormLayout {
             Layout.fillWidth: true
             Layout.maximumWidth: titleLabel.Layout.maximumWidth
 
-            text: PotdProviderModelInstance.author
+            text: backend.author
             Accessible.name: authorLabel.Kirigami.FormData.label
         }
     }
@@ -296,26 +311,26 @@ Kirigami.FormLayout {
             Kirigami.Action {
                 icon.name: "document-open-folder"
                 text: i18nc("@action:button", "Open Containing Folder")
-                visible: PotdProviderModelInstance.saveStatus === Global.Successful
-                onTriggered: Qt.openUrlExternally(PotdProviderModelInstance.savedFolder)
+                visible: backend.saveStatus === Global.Successful
+                onTriggered: Qt.openUrlExternally(backend.savedFolder)
 
                 Accessible.description: i18nc("@info:whatsthis for a button", "Open the destination folder where the wallpaper image was saved.")
             }
         ]
 
-        onLinkActivated: Qt.openUrlExternally(PotdProviderModelInstance.savedUrl)
+        onLinkActivated: Qt.openUrlExternally(backend.savedUrl)
 
         Connections {
-            target: PotdProviderModelInstance
+            target: backend
 
             function onSaveStatusChanged() {
-                switch (PotdProviderModelInstance.saveStatus) {
+                switch (backend.saveStatus) {
                 case Global.Successful:
-                    saveMessage.text = PotdProviderModelInstance.saveStatusMessage;
+                    saveMessage.text = backend.saveStatusMessage;
                     saveMessage.type = Kirigami.MessageType.Positive;
                     break;
                 case Global.Failed:
-                    saveMessage.text = PotdProviderModelInstance.saveStatusMessage;
+                    saveMessage.text = backend.saveStatusMessage;
                     saveMessage.type = Kirigami.MessageType.Error;
                     break;
                 default:

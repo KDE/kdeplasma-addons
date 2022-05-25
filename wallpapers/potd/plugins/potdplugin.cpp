@@ -4,22 +4,13 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "potdprovidermodel.h"
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
 
-Q_GLOBAL_STATIC(PotdProviderModel, potdProviderModelSelf)
-
-PotdProviderModel *self(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-
-    QQmlEngine::setObjectOwnership(potdProviderModelSelf, QQmlEngine::CppOwnership);
-
-    return potdProviderModelSelf;
-}
+#include "potdbackend.h"
+#include "potdprovider.h"
+#include "potdprovidermodel.h"
 
 class PotdPlugin : public QQmlExtensionPlugin
 {
@@ -33,9 +24,10 @@ public:
 
         qRegisterMetaType<PotdProviderData>();
 
+        qmlRegisterType<PotdBackend>(uri, 1, 0, "PotdBackend");
         qmlRegisterType<PotdProviderModel>(uri, 1, 0, "PotdProviderModel");
-        qmlRegisterSingletonType<PotdProviderModel>(uri, 1, 0, "PotdProviderModelInstance", self);
-        qmlRegisterUncreatableType<PotdProviderModel>(uri, 1, 0, "Global", QStringLiteral("Error: only enums"));
+
+        qmlRegisterUncreatableType<PotdBackend>(uri, 1, 0, "Global", QStringLiteral("Error: only enums"));
     }
 };
 
