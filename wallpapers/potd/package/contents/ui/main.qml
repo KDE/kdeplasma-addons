@@ -15,6 +15,21 @@ import org.kde.plasma.wallpapers.potd 1.0
 Rectangle {
     id: root
 
+    PotdBackend {
+        id: backend
+        identifier: wallpaper.configuration.Provider
+        arguments: {
+            if (identifier === "unsplash") {
+                // Needs to specify category for unsplash provider
+                return [wallpaper.configuration.Category];
+            } else if (identifier === "bing") {
+                // Bing supports 1366/1920/UHD resolutions
+                return [Screen.width, Screen.height, Screen.devicePixelRatio];
+            }
+            return [];
+        }
+    }
+
     Rectangle {
         id: backgroundColor
         anchors.fill: parent
@@ -26,7 +41,7 @@ Rectangle {
 
     QImageItem {
         anchors.fill: parent
-        image: PotdProviderModelInstance.image
+        image: backend.image
         fillMode: wallpaper.configuration.FillMode
         smooth: true
 
@@ -34,23 +49,5 @@ Rectangle {
             // Update accent color
             wallpaper.repaintNeeded();
         }
-    }
-
-    Component.onCompleted: {
-        PotdProviderModelInstance.identifier = Qt.binding(() => wallpaper.configuration.Provider);
-        // Needs to specify category for unsplash provider
-        PotdProviderModelInstance.arguments = Qt.binding(() => {
-            const identifier = PotdProviderModelInstance.identifier;
-
-            if (identifier === "unsplash") {
-                // Needs to specify category for unsplash provider
-                return [wallpaper.configuration.Category];
-            } else if (identifier === "bing") {
-                // Bing supports 1366/1920/UHD resolutions
-                return [Screen.width, Screen.height, Screen.devicePixelRatio];
-            }
-            return [];
-        });
-        PotdProviderModelInstance.running = true;
     }
 }

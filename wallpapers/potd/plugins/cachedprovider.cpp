@@ -56,15 +56,16 @@ void LoadImageThread::run()
     Q_EMIT done(data);
 }
 
-SaveImageThread::SaveImageThread(const QString &identifier, const PotdProviderData &data)
+SaveImageThread::SaveImageThread(const QString &identifier, const QVariantList &args, const PotdProviderData &data)
     : m_identifier(identifier)
+    , m_args(args)
     , m_data(data)
 {
 }
 
 void SaveImageThread::run()
 {
-    m_data.wallpaperLocalUrl = CachedProvider::identifierToPath(m_identifier);
+    m_data.wallpaperLocalUrl = CachedProvider::identifierToPath(m_identifier, m_args);
     m_data.wallpaperImage.save(m_data.wallpaperLocalUrl, "JPEG");
 
     const QString infoPath = m_data.wallpaperLocalUrl + ".json";
@@ -86,19 +87,28 @@ void SaveImageThread::run()
     Q_EMIT done(m_identifier, m_data);
 }
 
-QString CachedProvider::identifierToPath(const QString &identifier)
+QString CachedProvider::identifierToPath(const QString &identifier, const QVariantList &args)
 {
+    const QString argString = std::accumulate(args.cbegin(), args.cend(), QString(), [](const QString &s, const QVariant &arg) {
+        if (arg.canConvert(QMetaType::QString)) {
+            return s + QStringLiteral(":%1").arg(arg.toString());
+        }
+
+        return s;
+    });
+
     const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/plasma_engine_potd/");
     QDir d;
     d.mkpath(dataDir);
-    return dataDir + identifier;
+    return QStringLiteral("%1%2%3").arg(dataDir, identifier, argString);
 }
 
-CachedProvider::CachedProvider(const QString &identifier, QObject *parent)
+CachedProvider::CachedProvider(const QString &identifier, const QVariantList &args, QObject *parent)
     : PotdProvider(parent, KPluginMetaData(), QVariantList())
     , mIdentifier(identifier)
+    , m_args(args)
 {
-    LoadImageThread *thread = new LoadImageThread(identifierToPath(mIdentifier));
+    LoadImageThread *thread = new LoadImageThread(identifierToPath(mIdentifier, m_args));
     connect(thread, &LoadImageThread::done, this, &CachedProvider::triggerFinished);
     QThreadPool::globalInstance()->start(thread);
 }
@@ -120,9 +130,9 @@ void CachedProvider::triggerFinished(const PotdProviderData &data)
     Q_EMIT finished(this);
 }
 
-bool CachedProvider::isCached(const QString &identifier, bool ignoreAge)
+bool CachedProvider::isCached(const QString &identifier, const QVariantList &args, bool ignoreAge)
 {
-    const QString path = identifierToPath(identifier);
+    const QString path = identifierToPath(identifier, args);
     if (!QFile::exists(path)) {
         return false;
     }

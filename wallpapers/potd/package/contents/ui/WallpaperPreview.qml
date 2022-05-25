@@ -33,31 +33,31 @@ Column {
         width: Math.round(Screen.width / 10 + Kirigami.Units.smallSpacing * 2)
         height: Math.round(Screen.height / 10 + Kirigami.Units.smallSpacing * 2)
 
-        image: PotdProviderModelInstance.image
-        localUrl: PotdProviderModelInstance.localUrl
-        infoUrl: PotdProviderModelInstance.infoUrl
-        title: PotdProviderModelInstance.title
-        author: PotdProviderModelInstance.author
+        image: backend.image
+        localUrl: backend.localUrl
+        infoUrl: backend.infoUrl
+        title: backend.title
+        author: backend.author
 
         thumbnailAvailable: !delegate.isNull
-        thumbnailLoading: PotdProviderModelInstance.loading
+        thumbnailLoading: backend.loading
 
         actions: [
             Kirigami.Action {
                 icon.name: "document-save"
-                enabled: PotdProviderModelInstance.localUrl.length > 0
+                enabled: backend.localUrl.length > 0
                 visible: enabled
                 tooltip: i18nc("@action:inmenu wallpaper preview menu", "Save Image as…")
-                onTriggered: PotdProviderModelInstance.saveImage()
+                onTriggered: backend.saveImage()
 
                 Accessible.description: i18nc("@info:whatsthis for a button and a menu item", "Save today's picture to local disk")
             },
             Kirigami.Action {
                 icon.name: "internet-services"
-                enabled: PotdProviderModelInstance.infoUrl.toString().length > 0
+                enabled: backend.infoUrl.toString().length > 0
                 visible: false
                 tooltip: i18nc("@action:inmenu wallpaper preview menu, will open the website of the wallpaper", "Open Link in Browser…")
-                onTriggered: Qt.openUrlExternally(PotdProviderModelInstance.infoUrl)
+                onTriggered: Qt.openUrlExternally(backend.infoUrl)
 
                 Accessible.description: i18nc("@info:whatsthis for a menu item", "Open the website of today's picture in the default browser")
             }

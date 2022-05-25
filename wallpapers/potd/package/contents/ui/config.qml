@@ -6,6 +6,8 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 2.8 as QQC2
+import QtQuick.Layouts 1.15
+import QtQuick.Window 2.15
 
 import org.kde.kquickcontrols 2.0 as KQC2
 import org.kde.kirigami 2.5 as Kirigami
@@ -22,12 +24,26 @@ Kirigami.FormLayout {
     property alias cfg_Color: colorButton.color
     property alias formLayout: root
 
+    PotdBackend {
+        id: backend
+        identifier: cfg_Provider
+        arguments: {
+            if (identifier === "unsplash") {
+                // Needs to specify category for unsplash provider
+                return [cfg_Category];
+            } else if (identifier === "bing") {
+                // Bing supports 1366/1920/UHD resolutions
+                return [Screen.width, Screen.height, Screen.devicePixelRatio];
+            }
+            return [];
+        }
+    }
 
     QQC2.ComboBox {
         id: providerComboBox
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Provider:")
-        model: PotdProviderModelInstance
-        currentIndex: model.currentIndex
+        model: PotdProviderModel { }
+        currentIndex: model.indexOf(cfg_Provider)
         textRole: "display"
         valueRole: "id"
         onCurrentValueChanged: {
@@ -246,7 +262,7 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18nc("@label", "Title:")
         contentWidth: wallpaperPreview.implicitWidth * 1.5
         visible: wallpaperPreview.visible && text.length > 0
-        text: PotdProviderModelInstance.title
+        text: backend.title
         bold: true
     }
 
@@ -259,7 +275,7 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18nc("@label", "Author:")
         contentWidth: titleLabel.contentWidth
         visible: wallpaperPreview.visible && text.length > 0
-        text: PotdProviderModelInstance.author
+        text: backend.author
         bold: false
     }
 
@@ -276,26 +292,26 @@ Kirigami.FormLayout {
             Kirigami.Action {
                 icon.name: "document-open-folder"
                 text: i18nc("@action:button", "Open Containing Folder")
-                visible: PotdProviderModelInstance.saveStatus === Global.Successful
-                onTriggered: Qt.openUrlExternally(PotdProviderModelInstance.savedFolder)
+                visible: backend.saveStatus === Global.Successful
+                onTriggered: Qt.openUrlExternally(backend.savedFolder)
 
                 Accessible.description: i18nc("@info:whatsthis for a button", "Open the destination folder where the wallpaper image was saved.")
             }
         ]
 
-        onLinkActivated: Qt.openUrlExternally(PotdProviderModelInstance.savedUrl)
+        onLinkActivated: Qt.openUrlExternally(backend.savedUrl)
 
         Connections {
-            target: PotdProviderModelInstance
+            target: backend
 
             function onSaveStatusChanged() {
-                switch (PotdProviderModelInstance.saveStatus) {
+                switch (backend.saveStatus) {
                 case Global.Successful:
-                    saveMessage.text = PotdProviderModelInstance.saveStatusMessage;
+                    saveMessage.text = backend.saveStatusMessage;
                     saveMessage.type = Kirigami.MessageType.Positive;
                     break;
                 case Global.Failed:
-                    saveMessage.text = PotdProviderModelInstance.saveStatusMessage;
+                    saveMessage.text = backend.saveStatusMessage;
                     saveMessage.type = Kirigami.MessageType.Error;
                     break;
                 default:
