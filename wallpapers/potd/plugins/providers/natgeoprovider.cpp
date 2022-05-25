@@ -34,7 +34,9 @@ void NatGeoProvider::pageRequestFinished(KJob *_job)
     const QString data = QString::fromUtf8(job->data());
     const QStringList lines = data.split(QLatin1Char('\n'));
 
+    // clang-format off
     re.setPattern(QStringLiteral("<meta\\s+(?:\\S+=[\"']?(?:.(?![\"']?\\s+(?:\\S+)=|\\s*/?[>\"']))+.[\"']?\\s*)*property=\"og:image\"\\s*(?:\\S+=[\"']?(?:.(?![\"']?\\s+(?:\\S+)=|\\s*/?[>\"']))+.[\"']?\\s*)*content=[\"']?((?:.(?![\"']?\\s+(?:\\S+)=|\\s*/?[>\"']))+.)[\"']?\\s*(?:\\S+=[\"']?(?:.(?![\"']?\\s+(?:\\S+)=|\\s*/?[>\"']))+.[\"']?\\s*)*/>"));
+    // clang-format on
 
     for (int i = 0; i < lines.size(); i++) {
         QRegularExpressionMatch match = re.match(lines.at(i));
@@ -50,10 +52,11 @@ void NatGeoProvider::pageRequestFinished(KJob *_job)
 
     const QString simplifiedData(data.simplified());
 
-    /**
+    /* clang-format off
      * Match link
      * Example:
      * <meta data-react-helmet="true" property="og:url" content="https://www.nationalgeographic.com/photo-of-the-day/media-spotlight/wanapum-horse-oregon-native-american"/>
+     * clang-format on
      */
     const QRegularExpression linkRegEx(QStringLiteral("<meta.*?property=\"og:url\" content=\"(.+?)\".*?>"));
     const QRegularExpressionMatch linkMatch = linkRegEx.match(simplifiedData);
