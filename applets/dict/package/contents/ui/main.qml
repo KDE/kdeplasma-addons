@@ -9,11 +9,15 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.plasmoid 2.0
 import QtWebEngine 1.1
+
+import org.kde.kirigami 2.19 as Kirigami
 
 import org.kde.plasma.private.dict 1.0
 
 ColumnLayout {
+    Keys.forwardTo: input
 
     DictObject {
         id: dict
@@ -27,10 +31,12 @@ ColumnLayout {
     }
 
     RowLayout {
+        focus: true
         Layout.alignment: Qt.AlignTop
         Layout.fillWidth: true
         PlasmaExtras.SearchField {
             id: input
+            focus: Plasmoid.expanded && !Kirigami.InputMethod.willShowOnActive
             placeholderText: i18nc("@info:placeholder", "Enter word to define here…")
             Layout.fillWidth: true
             Layout.minimumWidth: PlasmaCore.Units.gridUnit * 12
