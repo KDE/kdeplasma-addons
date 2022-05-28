@@ -4,6 +4,7 @@
             {
                 "Email": "zrenfire@gmail.com",
                 "Name": "Chris Holland",
+                "Name[ca@valencia]": "Chris Holland",
                 "Name[ca]": "Chris Holland",
                 "Name[es]": "Chris Holland",
                 "Name[fr]": "Chris Holland",
@@ -18,6 +19,7 @@
             }
         ],
         "Description": "A window switcher layout using a small grid of thumbnails",
+        "Description[ca@valencia]": "Una disposició del commutador de finestres que utilisa una quadrícula xicoteta de miniatures",
         "Description[ca]": "Una disposició del commutador de finestres que utilitza una quadrícula petita de miniatures",
         "Description[es]": "Un esquema de selección de ventanas que usa una pequeña cuadrícula de miniaturas",
         "Description[fr]": "Une disposition du sélecteur de fenêtres utilisant une petite grille de vignettes",
@@ -33,6 +35,7 @@
         "Id": "thumbnail_grid",
         "License": "GPL",
         "Name": "Thumbnail Grid",
+        "Name[ca@valencia]": "Quadrícula de miniatures",
         "Name[ca]": "Quadrícula de miniatures",
         "Name[es]": "Cuadrícula de miniaturas",
         "Name[fr]": "Grille de vignettes",

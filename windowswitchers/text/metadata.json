@@ -4,6 +4,7 @@
             {
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
+                "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
                 "Name[fr]": "Martin Gräßlin",
@@ -18,6 +19,7 @@
             }
         ],
         "Description": "A window switcher layout only showing window captions",
+        "Description[ca@valencia]": "Una disposició del commutador de finestres que només mostra els títols de les finestres",
         "Description[ca]": "Una disposició del commutador de finestres que només mostra els títols de les finestres",
         "Description[es]": "Un esquema de selección de ventanas que solo muestra los títulos de las ventanas",
         "Description[fr]": "Une disposition du sélecteur de fenêtres affichant uniquement les titres des fenêtres",
@@ -33,6 +35,7 @@
         "Id": "text",
         "License": "GPL",
         "Name": "Text Only",
+        "Name[ca@valencia]": "Només el text",
         "Name[ca]": "Només el text",
         "Name[es]": "Solo texto",
         "Name[fr]": "Texte seul",

@@ -4,6 +4,7 @@
             {
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
+                "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
                 "Name[fr]": "Martin Gräßlin",
@@ -18,6 +19,7 @@
             }
         ],
         "Description": "An informative window switcher layout including desktop name",
+        "Description[ca@valencia]": "Una disposició del commutador de finestres informativa que inclou el nom d'escriptori",
         "Description[ca]": "Una disposició del commutador de finestres informativa que inclou el nom d'escriptori",
         "Description[es]": "Un esquema de selección de ventanas informativo que incluye el nombre del escritorio",
         "Description[fr]": "Une disposition informative du sélecteur de fenêtres incluant le nom des bureaux",
@@ -33,6 +35,7 @@
         "Id": "informative",
         "License": "GPL",
         "Name": "Informative",
+        "Name[ca@valencia]": "Informatiu",
         "Name[ca]": "Informatiu",
         "Name[es]": "Informativo",
         "Name[fr]": "Informatif",

@@ -4,6 +4,7 @@
             {
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
+                "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
                 "Name[fr]": "Martin Gräßlin",
@@ -18,6 +19,7 @@
             }
         ],
         "Description": "A Window Switcher layout showing all windows as thumbnails in a grid",
+        "Description[ca@valencia]": "Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una quadrícula",
         "Description[ca]": "Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una quadrícula",
         "Description[es]": "Un esquema de selección de ventanas que muestra todas las ventanas como miniaturas de una cuadrícula",
         "Description[fr]": "Une disposition du sélecteur de fenêtres affichant toutes les fenêtres en vignettes dans une grille",
@@ -33,6 +35,7 @@
         "Id": "present_windows",
         "License": "GPL",
         "Name": "Grid",
+        "Name[ca@valencia]": "Quadrícula",
         "Name[ca]": "Quadrícula",
         "Name[es]": "Cuadrícula",
         "Name[fr]": "Grille",

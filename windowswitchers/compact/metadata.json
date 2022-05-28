@@ -4,6 +4,7 @@
             {
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
+                "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
                 "Name[fr]": "Martin Gräßlin",
@@ -18,6 +19,7 @@
             }
         ],
         "Description": "A compact window switcher layout",
+        "Description[ca@valencia]": "Una disposició compacta del commutador de finestres",
         "Description[ca]": "Una disposició compacta del commutador de finestres",
         "Description[es]": "Un esquema de selección de ventanas compacto",
         "Description[fr]": "Une disposition synthétique pour le basculement de fenêtres",
@@ -33,6 +35,7 @@
         "Id": "compact",
         "License": "GPL",
         "Name": "Compact",
+        "Name[ca@valencia]": "Compacte",
         "Name[ca]": "Compacte",
         "Name[es]": "Compacto",
         "Name[fr]": "Synthétique",

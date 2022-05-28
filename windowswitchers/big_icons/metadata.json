@@ -4,6 +4,7 @@
             {
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
+                "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
                 "Name[fr]": "Martin Gräßlin",
@@ -18,6 +19,7 @@
             }
         ],
         "Description": "A window switcher layout using large icons to represent the window",
+        "Description[ca@valencia]": "Una disposició del commutador de finestres que utilisa icones grans per a representar la finestra",
         "Description[ca]": "Una disposició del commutador de finestres que usa icones grans per a representar la finestra",
         "Description[es]": "Un esquema de selección de ventanas que usa iconos grandes para representar las ventanas",
         "Description[fr]": "Une disposition du sélecteur de fenêtres utilisant de grandes icônes pour représenter les fenêtres",
@@ -33,6 +35,7 @@
         "Id": "big_icons",
         "License": "GPL",
         "Name": "Large Icons",
+        "Name[ca@valencia]": "Icones grans",
         "Name[ca]": "Icones grans",
         "Name[es]": "Iconos grandes",
         "Name[fr]": "Grandes icônes",

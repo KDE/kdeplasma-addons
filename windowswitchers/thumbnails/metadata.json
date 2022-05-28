@@ -4,6 +4,7 @@
             {
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
+                "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
                 "Name[fr]": "Martin Gräßlin",
@@ -18,6 +19,7 @@
             }
         ],
         "Description": "A window switcher layout using live thumbnails",
+        "Description[ca@valencia]": "Una disposició del commutador de finestres que utilisa miniatures animades",
         "Description[ca]": "Una disposició del commutador de finestres que utilitza miniatures animades",
         "Description[es]": "Un esquema de selección de ventanas que usa miniaturas en vivo",
         "Description[fr]": "Une disposition du sélecteur de fenêtres utilisant des vignettes en temps réel",
@@ -33,6 +35,7 @@
         "Id": "thumbnails",
         "License": "GPL",
         "Name": "Thumbnails",
+        "Name[ca@valencia]": "Miniatures",
         "Name[ca]": "Miniatures",
         "Name[es]": "Miniaturas",
         "Name[fr]": "Vignettes",
