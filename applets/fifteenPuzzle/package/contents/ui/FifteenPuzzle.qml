@@ -87,7 +87,7 @@ Item {
         var sizeMod2 = Math.floor(boardSize % 2);
         var inversionsMod2 = Math.floor(inversions % 2);
         var solveable = (sizeMod2 == 1 && inversionsMod2 == 0) ||
-                         (sizeMod2 == 0 && inversionsMod2 == 0) == (Math.floor((boardSize - blankRow) % 2) == 1);
+                         (sizeMod2 == 0 && (inversionsMod2 == 0) == (Math.floor((boardSize - blankRow) % 2) == 1));
         if (!solveable) {
             // make the grid solveable by swapping two adjacent pieces around
             var pieceA = 0;
