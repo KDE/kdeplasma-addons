@@ -10,39 +10,25 @@
 
 #include <QMetaEnum>
 
-#include <KLocalizedString>
 #include <KSharedConfig>
 
 CalendarSystemModel::CalendarSystemModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    const std::map<CalendarSystem::System, QString> textMap{
-#ifndef QT_BOOTSTRAPPED
-        {CalendarSystem::Julian, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Julian")},
-        {CalendarSystem::Milankovic, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Milankovic")},
-#endif
-#if QT_CONFIG(jalalicalendar)
-        {CalendarSystem::Jalali, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "The Solar Hijri Calendar (Persian)")},
-#endif
-#if QT_CONFIG(islamiccivilcalendar)
-        {CalendarSystem::IslamicCivil, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "The Islamic Civil Calendar")},
-#endif
-#ifdef HAVE_ICU
-        {CalendarSystem::Chinese, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Chinese Lunar Calendar")},
-        {CalendarSystem::Indian, i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Indian National Calendar")},
-#endif
-    };
     const QMetaEnum e = QMetaEnum::fromType<CalendarSystem::System>();
 
     beginInsertRows(QModelIndex(), 0, e.keyCount() - 2 /* Gregorian */);
 
     m_items.reserve(e.keyCount() - 1);
     for (int k = 0; k < e.keyCount(); k++) {
-        CalendarSystemItem item;
-        item.value = static_cast<CalendarSystem::System>(e.value(k));
-        if (textMap.count(item.value) > 0) {
-            item.text = textMap.at(item.value);
-            m_items.emplace_back(item);
+        const auto system = static_cast<CalendarSystem::System>(e.value(k));
+
+        auto it = std::find_if(s_calendarMap.cbegin(), s_calendarMap.cend(), [system](const std::pair<QString, CalendarSystemItem> &pr) {
+            return pr.second.system == system;
+        });
+
+        if (it != s_calendarMap.cend()) {
+            m_items.emplace_back(it->second);
         }
     }
 
@@ -60,8 +46,8 @@ QVariant CalendarSystemModel::data(const QModelIndex &index, int role) const
     switch (role) {
     case Qt::DisplayRole:
         return item.text;
-    case ValueRole:
-        return item.value;
+    case IdRole:
+        return item.id;
     default:
         return QVariant();
     }
@@ -76,14 +62,14 @@ QHash<int, QByteArray> CalendarSystemModel::roleNames() const
 {
     return {
         {Qt::DisplayRole, QByteArrayLiteral("display")},
-        {ValueRole, QByteArrayLiteral("value")},
+        {IdRole, QByteArrayLiteral("id")},
     };
 }
 
-int CalendarSystemModel::indexOf(CalendarSystem::System value) const
+int CalendarSystemModel::indexOf(const QString &id) const
 {
-    const auto it = std::find_if(m_items.cbegin(), m_items.cend(), [value](const CalendarSystemItem &item) {
-        return item.value == value;
+    const auto it = std::find_if(m_items.cbegin(), m_items.cend(), [&id](const CalendarSystemItem &item) {
+        return item.id == id;
     });
 
     if (it != m_items.cend()) {
@@ -100,7 +86,7 @@ ConfigStorage::ConfigStorage(QObject *parent)
     auto config = KSharedConfig::openConfig(QStringLiteral("plasma_calendar_alternatecalendar"));
     m_generalConfigGroup = config->group("General");
 
-    m_calendarSystem = static_cast<CalendarSystem::System>(m_generalConfigGroup.readEntry("calendarSystem", static_cast<int>(CalendarSystem::Julian)));
+    m_calendarSystem = m_generalConfigGroup.readEntry("calendarSystem", "Gregorian");
     m_dateOffset = m_generalConfigGroup.readEntry("dateOffset", 0);
 }
 
@@ -116,7 +102,7 @@ int ConfigStorage::currentIndex() const
 
 void ConfigStorage::save()
 {
-    m_generalConfigGroup.writeEntry("calendarSystem", static_cast<int>(m_calendarSystem), KConfigBase::Notify);
+    m_generalConfigGroup.writeEntry("calendarSystem", m_calendarSystem, KConfigBase::Notify);
     m_generalConfigGroup.writeEntry("dateOffset", m_dateOffset, KConfigBase::Notify);
 
     m_generalConfigGroup.sync();

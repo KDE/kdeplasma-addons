@@ -65,8 +65,18 @@ AlternateCalendarPluginPrivate::~AlternateCalendarPluginPrivate()
 
 void AlternateCalendarPluginPrivate::init()
 {
-    m_calendarSystem = static_cast<CalendarSystem::System>(m_generalConfigGroup.readEntry("calendarSystem", static_cast<int>(CalendarSystem::Gregorian)));
     m_dateOffset = m_generalConfigGroup.readEntry("dateOffset", 0);
+
+    // Find the matched calendar system
+    const QString system = m_generalConfigGroup.readEntry("calendarSystem", "Julian");
+    const auto systemIt = s_calendarMap.find(system);
+
+    if (systemIt == s_calendarMap.end()) {
+        // Invalid config, fall back to Gregorian
+        m_calendarSystem = CalendarSystem::Gregorian;
+    } else {
+        m_calendarSystem = systemIt->second.system;
+    }
 
     // Load/Reload the calendar provider
     switch (m_calendarSystem) {

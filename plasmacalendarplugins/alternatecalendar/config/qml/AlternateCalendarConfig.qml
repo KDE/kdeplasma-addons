@@ -38,14 +38,14 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18ndc("plasma_calendar_alternatecalendar", "@label:listbox", "Calendar system:")
         model: configStorage.calendarSystemModel
         textRole: "display"
-        valueRole: "value"
+        valueRole: "id"
         currentIndex: configStorage.currentIndex
         onActivated: configPage.configurationChanged();
     }
 
     Loader {
         id: dateOffsetSpinBoxLoader
-        active: calendarSystemComboBox.currentValue === CalendarSystem.IslamicCivil
+        active: calendarSystemComboBox.currentValue === "IslamicCivil"
         visible: active
         Kirigami.FormData.label: i18ndc("plasma_calendar_alternatecalendar", "@label:spinbox", "Date offset:")
 

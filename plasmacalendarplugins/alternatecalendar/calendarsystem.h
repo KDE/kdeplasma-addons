@@ -6,8 +6,12 @@
 
 #pragma once
 
+#include <map>
+
 #include <QCalendar>
 #include <QMetaType>
+
+#include <KLocalizedString>
 
 class CalendarSystem
 {
@@ -15,7 +19,7 @@ class CalendarSystem
 
 public:
     /**
-     * @note When adding a new calendar system, CalendarSystemModel should also be updated.
+     * @note When adding a new calendar system, \s_calendarMap should also be updated.
      */
     enum System {
         Gregorian = static_cast<int>(QCalendar::System::Gregorian),
@@ -35,3 +39,38 @@ public:
     Q_ENUM(System)
 };
 Q_DECLARE_METATYPE(CalendarSystem)
+
+struct CalendarSystemItem {
+    CalendarSystem::System system;
+    QString id;
+    QString text;
+};
+
+// clang-format off
+static const std::map<QString /* id */, CalendarSystemItem> s_calendarMap{
+    {
+        QStringLiteral("Julian"),
+        {CalendarSystem::Julian, QStringLiteral("Julian"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Julian")}
+    },
+    {
+        QStringLiteral("Milankovic"),
+        {CalendarSystem::Milankovic, QStringLiteral("Milankovic"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Milankovic")}
+    },
+    {
+        QStringLiteral("Jalali"),
+        {CalendarSystem::Jalali, QStringLiteral("Jalali"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "The Solar Hijri Calendar (Persian)")}
+    },
+    {
+        QStringLiteral("IslamicCivil"),
+        {CalendarSystem::IslamicCivil, QStringLiteral("IslamicCivil"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "The Islamic Civil Calendar")}
+    },
+    {
+        QStringLiteral("Chinese"),
+        {CalendarSystem::Chinese, QStringLiteral("Chinese"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Chinese Lunar Calendar")}
+    },
+    {
+        QStringLiteral("Indian"),
+        {CalendarSystem::Indian, QStringLiteral("Indian"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Indian National Calendar")}
+    },
+};
+// clang-format on

@@ -20,7 +20,7 @@ class CalendarSystemModel : public QAbstractListModel
 
 public:
     enum Role {
-        ValueRole = Qt::UserRole,
+        IdRole = Qt::UserRole,
     };
 
     explicit CalendarSystemModel(QObject *parent = nullptr);
@@ -29,14 +29,9 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    int indexOf(CalendarSystem::System value) const;
+    int indexOf(const QString &id) const;
 
 private:
-    struct CalendarSystemItem {
-        QString text;
-        CalendarSystem::System value;
-    };
-
     std::vector<CalendarSystemItem> m_items;
 };
 
@@ -47,7 +42,7 @@ class ConfigStorage : public QObject
     /**
      * The current choosen calendar system
      */
-    Q_PROPERTY(CalendarSystem::System calendarSystem MEMBER m_calendarSystem NOTIFY calendarSystemChanged)
+    Q_PROPERTY(QString calendarSystem MEMBER m_calendarSystem NOTIFY calendarSystemChanged)
 
     /**
      * The available calendar system list
@@ -86,7 +81,7 @@ Q_SIGNALS:
 private:
     KConfigGroup m_generalConfigGroup;
 
-    CalendarSystem::System m_calendarSystem;
+    QString m_calendarSystem;
     CalendarSystemModel *const m_calendarSystemModel;
 
     int m_dateOffset; // For the (tabular) Islamic Civil calendar

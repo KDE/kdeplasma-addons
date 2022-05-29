@@ -4,6 +4,7 @@
 
 set(alternatecalendar_LIB_SRCS
     alternatecalendarplugin.cpp
+    calendarsystem.h
     provider/abstractcalendarprovider.cpp
     provider/qtcalendar.cpp
 )
@@ -11,6 +12,7 @@ set(alternatecalendar_LIB_SRCS
 set(alternatecalendar_LINK_LIBRARIES
     KF5::ConfigCore
     KF5::CalendarEvents
+    KF5::I18n
 )
 
 if(${HAVE_ICU})
