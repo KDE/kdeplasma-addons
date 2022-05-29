@@ -15,7 +15,8 @@
                 "Name[tr]": "Martin Gräßlin",
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
-                "Name[x-test]": "xxMartin Gräßlinxx"
+                "Name[x-test]": "xxMartin Gräßlinxx",
+                "Name[zh_CN]": "Martin Gräßlin"
             }
         ],
         "Description": "A compact window switcher layout",
@@ -31,6 +32,7 @@
         "Description[uk]": "Компактне компонування засобу перемикання вікон",
         "Description[vi]": "Bố cục gọn cho trình chuyển cửa sổ",
         "Description[x-test]": "xxA compact window switcher layoutxx",
+        "Description[zh_CN]": "紧凑的窗口切换器布局",
         "Icon": "preferences-system-windows-switcher-compact",
         "Id": "compact",
         "License": "GPL",
@@ -47,6 +49,7 @@
         "Name[uk]": "Компактне",
         "Name[vi]": "Gọn",
         "Name[x-test]": "xxCompactxx",
+        "Name[zh_CN]": "紧凑",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

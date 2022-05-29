@@ -14,6 +14,7 @@
         "Description[uk]": "Додаток календаря для показу дат із альтернативної календарної системи",
         "Description[vi]": "Phần cài cắm lịch để hiển thị ngày ở một hệ lịch khác",
         "Description[x-test]": "xxCalendar plugin for displaying dates from the alternate calendar systemxx",
+        "Description[zh_CN]": "用于显示备选日历系统日期的日历插件",
         "Icon": "office-calendar",
         "Name": "Alternate Calendar",
         "Name[ca@valencia]": "Calendari alternatiu",
@@ -28,7 +29,8 @@
         "Name[tr]": "Alternatif Takvim",
         "Name[uk]": "Альтернативний календар",
         "Name[vi]": "Lịch khác",
-        "Name[x-test]": "xxAlternate Calendarxx"
+        "Name[x-test]": "xxAlternate Calendarxx",
+        "Name[zh_CN]": "备选日历"
     },
     "X-KDE-PlasmaCalendar-ConfigUi": "alternatecalendar/AlternateCalendarConfig.qml"
 }

@@ -15,7 +15,8 @@
                 "Name[tr]": "Martin Gräßlin",
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
-                "Name[x-test]": "xxMartin Gräßlinxx"
+                "Name[x-test]": "xxMartin Gräßlinxx",
+                "Name[zh_CN]": "Martin Gräßlin"
             }
         ],
         "Description": "A Window Switcher layout showing all windows as thumbnails in a grid",
@@ -31,6 +32,7 @@
         "Description[uk]": "Компонування засобу перемикання вікон з мініатюрами всіх вікон у форматі ґратки",
         "Description[vi]": "Bố cục trình chuyển cửa sổ hiển thị tất cả các cửa sổ thành các hình nhỏ trong một lưới",
         "Description[x-test]": "xxA Window Switcher layout showing all windows as thumbnails in a gridxx",
+        "Description[zh_CN]": "将窗口缩略图按表格显示的窗口切换器布局",
         "Icon": "preferences-system-windows-switcher-present-windows",
         "Id": "present_windows",
         "License": "GPL",
@@ -47,6 +49,7 @@
         "Name[uk]": "Таблиця",
         "Name[vi]": "Lưới",
         "Name[x-test]": "xxGridxx",
+        "Name[zh_CN]": "网格",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

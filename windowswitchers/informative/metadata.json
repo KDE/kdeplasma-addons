@@ -15,7 +15,8 @@
                 "Name[tr]": "Martin Gräßlin",
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
-                "Name[x-test]": "xxMartin Gräßlinxx"
+                "Name[x-test]": "xxMartin Gräßlinxx",
+                "Name[zh_CN]": "Martin Gräßlin"
             }
         ],
         "Description": "An informative window switcher layout including desktop name",
@@ -31,6 +32,7 @@
         "Description[uk]": "Інформативне компонування засобу перемикання вікон з назвами стільниць",
         "Description[vi]": "Bố cục mang nhiều thông tin cho trình chuyển cửa sổ, gồm cả tên bàn làm việc",
         "Description[x-test]": "xxAn informative window switcher layout including desktop namexx",
+        "Description[zh_CN]": "显示包含桌面名称在内的详尽信息的窗口切换器布局",
         "Icon": "preferences-system-windows-switcher-informative",
         "Id": "informative",
         "License": "GPL",
@@ -47,6 +49,7 @@
         "Name[uk]": "Інформативне",
         "Name[vi]": "Nhiều thông tin",
         "Name[x-test]": "xxInformativexx",
+        "Name[zh_CN]": "详尽信息",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

@@ -15,7 +15,8 @@
                 "Name[tr]": "Martin Gräßlin",
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
-                "Name[x-test]": "xxMartin Gräßlinxx"
+                "Name[x-test]": "xxMartin Gräßlinxx",
+                "Name[zh_CN]": "Martin Gräßlin"
             }
         ],
         "Description": "A window switcher layout only showing window captions",
@@ -31,6 +32,7 @@
         "Description[uk]": "Компонування засобу перемикання вікон з показом лише підписів вікон",
         "Description[vi]": "Bố cục trình chuyển cửa sổ chỉ hiện các tiêu đề cửa sổ",
         "Description[x-test]": "xxA window switcher layout only showing window captionsxx",
+        "Description[zh_CN]": "只显示窗口标题的窗口切换器布局",
         "Icon": "preferences-system-windows-switcher-text",
         "Id": "text",
         "License": "GPL",
@@ -47,6 +49,7 @@
         "Name[uk]": "Лише текст",
         "Name[vi]": "Chỉ chữ",
         "Name[x-test]": "xxText Onlyxx",
+        "Name[zh_CN]": "仅文本",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],
