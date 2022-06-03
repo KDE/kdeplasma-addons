@@ -41,7 +41,8 @@ void AstronomicalEventsPlugin::loadEventsForDateRange(const QDate &startDate, co
     for (QDate date = startDate; date <= endDate && date.isValid(); date = date.addDays(1)) {
         if (m_lunarPhaseShown) {
             const auto phase = KHolidays::LunarPhase::phaseAtDate(date);
-            if (phase != KHolidays::LunarPhase::None) {
+            if (phase == KHolidays::LunarPhase::NewMoon || phase == KHolidays::LunarPhase::FirstQuarter || phase == KHolidays::LunarPhase::LastQuarter
+                || phase == KHolidays::LunarPhase::FullMoon) {
                 CalendarEvents::EventData lunarPhaseData;
                 lunarPhaseData.setIsAllDay(true);
                 lunarPhaseData.setTitle(KHolidays::LunarPhase::phaseName(phase));
