@@ -31,9 +31,5 @@ Item {
     Plasmoid.toolTipMainText: i18n("Fifteen Puzzle");
     Plasmoid.toolTipSubText: i18n("Solve by arranging in order");
 
-    PlasmaCore.DataSource {
-        id: dataSource
-    }
-
     Plasmoid.fullRepresentation: FifteenPuzzle { }
 }
