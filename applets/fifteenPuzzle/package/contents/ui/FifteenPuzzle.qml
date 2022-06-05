@@ -104,20 +104,35 @@ Item {
         secondsTimer.stop();
     }
 
+    // recursive function: performs swap and returns true when it has found an
+    // empty piece in the direction given by deltas.
+    function swapWithEmptyPiece(position, deltaRow, deltaColumn): bool {
+        const row = Math.floor(position / boardSize);
+        const column = position % boardSize;
+
+        const nextRow = row + deltaRow;
+        const nextColumn = column + deltaColumn;
+        const nextPosition = nextRow * boardSize + nextColumn;
+
+        if (nextRow < 0 || nextRow >= boardSize || nextColumn < 0 || nextColumn >= boardSize) {
+            return false;
+        }
+
+        if (pieces[nextPosition].empty || swapWithEmptyPiece(nextPosition, deltaRow, deltaColumn)) {
+            swapPieces(position, nextPosition);
+            return true;
+        }
+
+        return false;
+    }
+
     function pieceClicked(position) {
-        // If the position is next above, below, right or left of the piece 0, swap them
-        const left = (position % boardSize) > 0 ? position - 1 : -1;
-        const right = (position % boardSize) < (boardSize - 1) ? position + 1 : -1;
-        const above = Math.floor(position / boardSize) > 0 ? position - boardSize : -1;
-        const below = Math.floor(position / boardSize) < (boardSize - 1) ? position + boardSize : -1;
-        if (left !== -1 && pieces[left].empty) {
-            swapPieces(left, position);
-        } else if (right !== -1 && pieces[right].empty) {
-            swapPieces(right, position);
-        } else if (above !== -1 && pieces[above].empty) {
-            swapPieces(above, position);
-        } else if (below !== -1 && pieces[below].empty) {
-            swapPieces(below, position);
+        // deltas: up, down, left, right
+        for (const [row, col] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+            // stop at first direction that has (or rather "had" at this point) the empty piece
+            if (swapWithEmptyPiece(position, row, col)) {
+                break;
+            }
         }
         secondsTimer.start();
         checkSolved();
