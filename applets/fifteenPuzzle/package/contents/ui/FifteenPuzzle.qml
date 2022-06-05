@@ -26,15 +26,15 @@ Item {
 
     function fillBoard() {
         // Clear out old board
-        for (var i = 0; i < pieces.length; ++i)  {
-            pieces[i].destroy();
+        for (const piece of pieces) {
+            piece.destroy();
         }
 
         pieces = [];
-        var size = boardSize * boardSize;
-        if (piece.status == Component.Ready) {
-            for (var i = 0; i < size; ++i) {
-                var newPiece = piece.createObject(mainGrid, {"number": i, "position": i });
+        const count = boardSize * boardSize;
+        if (piece.status === Component.Ready) {
+            for (let i = 0; i < count; ++i) {
+                const newPiece = piece.createObject(mainGrid, {"number": i, "position": i });
                 pieces[i] = newPiece;
                 newPiece.activated.connect(pieceClicked);
             }
@@ -47,10 +47,10 @@ Item {
         solvedRect.visible = false;
         main.seconds = 0;
 
-        var size = boardSize * boardSize;
-        for (var i = size - 1; i >= 0; --i) {
+        const count = boardSize * boardSize;
+        for (let i = count - 1; i >= 0; --i) {
             // choose a random number such that 0 <= rand <= i
-            var rand = Math.floor(Math.random() * 10) % (i + 1);
+            const rand = Math.floor(Math.random() * 10) % (i + 1);
             swapPieces(i, rand);
         }
 
@@ -61,15 +61,15 @@ Item {
         // a < b but value(a) > value(b)
 
         // also count the number of lines the blank tile is from the bottom
-        var inversions = 0;
-        var blankRow = -1;
-        for (var i = 0; i < size; ++i) {
-            if (pieces[i].number == 0) {
+        let inversions = 0;
+        let blankRow = -1;
+        for (let i = 0; i < count; ++i) {
+            if (pieces[i].number === 0) {
                 blankRow = Math.floor(i / boardSize);
                 continue;
             }
-            for (var j = 0; j < i; ++j) {
-                if (pieces[j].number == 0) {
+            for (let j = 0; j < i; ++j) {
+                if (pieces[j].number === 0) {
                     continue;
                 }
                 if (pieces[i].number < pieces[j].number) {
@@ -78,7 +78,7 @@ Item {
             }
         }
 
-        if (blankRow == -1) {
+        if (blankRow === -1) {
             console.log("Unable to find row of blank tile");
         }
 
@@ -86,17 +86,17 @@ Item {
         // size is odd:  there are an even number of inversions
         // size is even: the number of inversions is odd if and only if
         //               the blank tile is on an odd row from the bottom-
-        var sizeMod2 = Math.floor(boardSize % 2);
-        var inversionsMod2 = Math.floor(inversions % 2);
-        var solveable = (sizeMod2 == 1 && inversionsMod2 == 0) ||
-                         (sizeMod2 == 0 && (inversionsMod2 == 0) == (Math.floor((boardSize - blankRow) % 2) == 1));
+        const sizeMod2 = Math.floor(boardSize % 2);
+        const inversionsMod2 = Math.floor(inversions % 2);
+        const solveable = (sizeMod2 === 1 && inversionsMod2 === 0) ||
+                          (sizeMod2 === 0 && (inversionsMod2 === 0) === (Math.floor((boardSize - blankRow) % 2) === 1));
         if (!solveable) {
             // make the grid solveable by swapping two adjacent pieces around
-            var pieceA = 0;
-            var pieceB = 1;
-            if (pieces[pieceA].number == 0) {
+            let pieceA = 0;
+            let pieceB = 1;
+            if (pieces[pieceA].number === 0) {
                 pieceA = boardSize + 1;
-            } else if (pieces[pieceB].number == 0) {
+            } else if (pieces[pieceB].number === 0) {
                 pieceB = boardSize;
             }
             swapPieces(pieceA, pieceB);
@@ -106,17 +106,17 @@ Item {
 
     function pieceClicked(position) {
         // If the position is next above, below, right or left of the piece 0, swap them
-        var left = (position % boardSize) > 0 ? position - 1 : -1;
-        var right = (position % boardSize) < (boardSize - 1) ? position + 1 : -1;
-        var above = Math.floor(position / boardSize) > 0 ? position - boardSize : -1;
-        var below = Math.floor(position / boardSize) < (boardSize - 1) ? position + boardSize : -1;
-        if (left != -1 && pieces[left].number == 0) {
+        const left = (position % boardSize) > 0 ? position - 1 : -1;
+        const right = (position % boardSize) < (boardSize - 1) ? position + 1 : -1;
+        const above = Math.floor(position / boardSize) > 0 ? position - boardSize : -1;
+        const below = Math.floor(position / boardSize) < (boardSize - 1) ? position + boardSize : -1;
+        if (left !== -1 && pieces[left].number === 0) {
             swapPieces(left, position);
-        } else if (right != -1 && pieces[right].number == 0) {
+        } else if (right !== -1 && pieces[right].number === 0) {
             swapPieces(right, position);
-        } else if (above != -1 && pieces[above].number == 0) {
+        } else if (above !== -1 && pieces[above].number === 0) {
             swapPieces(above, position);
-        } else if (below != -1 && pieces[below].number == 0) {
+        } else if (below !== -1 && pieces[below].number === 0) {
             swapPieces(below, position);
         }
         secondsTimer.start();
@@ -124,8 +124,8 @@ Item {
     }
 
     function checkSolved() {
-        var size = boardSize * boardSize;
-        for (var i = 0; i < size - 2; ++i) {
+        const count = boardSize * boardSize;
+        for (let i = 0; i < count - 2; ++i) {
             if (pieces[i].number > pieces[i + 1].number) {
                 // Not solved.
                 return;
@@ -143,9 +143,9 @@ Item {
     }
 
     function swapPieces(first, second) {
-        var firstPiece = pieces[first];
-        var secondPiece = pieces[second];
-        var temp = firstPiece.position;
+        const firstPiece = pieces[first];
+        const secondPiece = pieces[second];
+        let temp = firstPiece.position;
         firstPiece.position = secondPiece.position;
         secondPiece.position = temp;
         temp = pieces[first];
@@ -204,11 +204,11 @@ Item {
             id: solvedImage
             anchors.fill: parent
             z: 1
-            source: "image://fifteenpuzzle/" + boardSize + "-all-0-0-" + Plasmoid.configuration.imagePath;
-            visible: Plasmoid.configuration.useImage;
+            source: "image://fifteenpuzzle/" + boardSize + "-all-0-0-" + Plasmoid.configuration.imagePath
+            visible: Plasmoid.configuration.useImage
             cache: false
             function update() {
-                var tmp = source;
+                const tmp = source;
                 source = "";
                 source = tmp;
             }
@@ -228,7 +228,7 @@ Item {
         interval: 1000
         repeat: true
 
-        onTriggered: ++main.seconds;
+        onTriggered: ++main.seconds
     }
 
     Connections {

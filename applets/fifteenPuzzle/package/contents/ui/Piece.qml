@@ -17,7 +17,7 @@ Rectangle {
     border.color: "black"
     border.width: 1
     radius: 5
-    visible: number != 0
+    visible: number !== 0
 
     Layout.minimumWidth: 10
     Layout.preferredWidth: 30
