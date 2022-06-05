@@ -17,7 +17,7 @@ Rectangle {
     border.color: "black"
     border.width: 1
     radius: 5
-    visible: number !== 0
+    visible: !empty
 
     Layout.minimumWidth: 10
     Layout.preferredWidth: 30
@@ -38,6 +38,7 @@ Rectangle {
     readonly property int pieceHeight: (parent.height - (margin * boardSize)) / boardSize
     readonly property int boardColumn: (position % boardSize)
     readonly property int boardRow: Math.floor(position / boardSize)
+    readonly property bool empty: number === 0
 
     property int number
     property int position

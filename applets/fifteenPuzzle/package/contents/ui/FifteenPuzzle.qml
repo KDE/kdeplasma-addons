@@ -64,12 +64,12 @@ Item {
         let inversions = 0;
         let blankRow = -1;
         for (let i = 0; i < count; ++i) {
-            if (pieces[i].number === 0) {
+            if (pieces[i].empty) {
                 blankRow = Math.floor(i / boardSize);
                 continue;
             }
             for (let j = 0; j < i; ++j) {
-                if (pieces[j].number === 0) {
+                if (pieces[j].empty) {
                     continue;
                 }
                 if (pieces[i].number < pieces[j].number) {
@@ -94,9 +94,9 @@ Item {
             // make the grid solveable by swapping two adjacent pieces around
             let pieceA = 0;
             let pieceB = 1;
-            if (pieces[pieceA].number === 0) {
+            if (pieces[pieceA].empty) {
                 pieceA = boardSize + 1;
-            } else if (pieces[pieceB].number === 0) {
+            } else if (pieces[pieceB].empty) {
                 pieceB = boardSize;
             }
             swapPieces(pieceA, pieceB);
@@ -110,13 +110,13 @@ Item {
         const right = (position % boardSize) < (boardSize - 1) ? position + 1 : -1;
         const above = Math.floor(position / boardSize) > 0 ? position - boardSize : -1;
         const below = Math.floor(position / boardSize) < (boardSize - 1) ? position + boardSize : -1;
-        if (left !== -1 && pieces[left].number === 0) {
+        if (left !== -1 && pieces[left].empty) {
             swapPieces(left, position);
-        } else if (right !== -1 && pieces[right].number === 0) {
+        } else if (right !== -1 && pieces[right].empty) {
             swapPieces(right, position);
-        } else if (above !== -1 && pieces[above].number === 0) {
+        } else if (above !== -1 && pieces[above].empty) {
             swapPieces(above, position);
-        } else if (below !== -1 && pieces[below].number === 0) {
+        } else if (below !== -1 && pieces[below].empty) {
             swapPieces(below, position);
         }
         secondsTimer.start();
