@@ -9,10 +9,11 @@ import QtQuick.Layouts 1.15
 
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.plasmoid 2.0
 
 Rectangle {
     id: piece
-    color: plasmoid.configuration.boardColor
+    color: Plasmoid.configuration.boardColor
     border.color: "black"
     border.width: 1
     radius: 5
@@ -31,7 +32,7 @@ Rectangle {
 
     signal activated(int position)
 
-    readonly property int boardSize: plasmoid.configuration.boardSize
+    readonly property int boardSize: Plasmoid.configuration.boardSize
     readonly property int margin: PlasmaCore.Units.smallSpacing
     readonly property int pieceWidth: (parent.width - (margin * boardSize)) / boardSize
     readonly property int pieceHeight: (parent.height - (margin * boardSize)) / boardSize
@@ -58,8 +59,8 @@ Rectangle {
         id: pieceNumeral
         anchors.centerIn: parent
         text: piece.number
-        color: plasmoid.configuration.numberColor
-        visible: plasmoid.configuration.showNumerals
+        color: Plasmoid.configuration.numberColor
+        visible: Plasmoid.configuration.showNumerals
         z: 1
     }
 
@@ -67,8 +68,8 @@ Rectangle {
         id: pieceImage
         width: parent.width
         height: parent.height
-        visible: plasmoid.configuration.useImage
-        source: "image://fifteenpuzzle/" + boardSize + "-" + number + "-" + pieceWidth + "-" + pieceHeight + "-" + plasmoid.configuration.imagePath;
+        visible: Plasmoid.configuration.useImage
+        source: "image://fifteenpuzzle/" + boardSize + "-" + number + "-" + pieceWidth + "-" + pieceHeight + "-" + Plasmoid.configuration.imagePath;
         cache: false
         z: 0
     }

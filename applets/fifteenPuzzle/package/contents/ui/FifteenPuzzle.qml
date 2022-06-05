@@ -10,6 +10,7 @@ import QtQuick.Layouts 1.15
 import org.kde.kcoreaddons 1.0 as KCoreAddons
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.plasmoid 2.0
 
 Item {
     id: main
@@ -17,7 +18,7 @@ Item {
     Layout.minimumWidth: Math.max(boardSize * 10, controlsRow.width)
     Layout.preferredWidth: Math.max(boardSize * 10, controlsRow.width)
 
-    readonly property int boardSize: plasmoid.configuration.boardSize
+    readonly property int boardSize: Plasmoid.configuration.boardSize
     property Component piece: Piece {}
     property var pieces: []
 
@@ -203,8 +204,8 @@ Item {
             id: solvedImage
             anchors.fill: parent
             z: 1
-            source: "image://fifteenpuzzle/" + boardSize + "-all-0-0-" + plasmoid.configuration.imagePath;
-            visible: plasmoid.configuration.useImage;
+            source: "image://fifteenpuzzle/" + boardSize + "-all-0-0-" + Plasmoid.configuration.imagePath;
+            visible: Plasmoid.configuration.useImage;
             cache: false
             function update() {
                 var tmp = source;
@@ -231,7 +232,7 @@ Item {
     }
 
     Connections {
-        target: plasmoid.configuration
+        target: Plasmoid.configuration
         function onBoardSizeChanged() {
             main.fillBoard();
             solvedImage.update();
@@ -239,7 +240,7 @@ Item {
     }
 
     Connections {
-        target: plasmoid.configuration
+        target: Plasmoid.configuration
         function onImagePathChanged() {
             main.fillBoard();
             solvedImage.update();
