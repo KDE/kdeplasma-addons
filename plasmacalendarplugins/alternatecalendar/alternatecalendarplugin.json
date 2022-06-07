@@ -2,7 +2,7 @@
     "KPlugin": {
         "Description": "Calendar plugin for displaying dates from the alternate calendar system",
         "Description[ar]": "ملحق تقويم يعرض التاريخ في نظام تقوم بديل",
-        "Description[ca@valencia]": "Connector de calendari per a mostrar dates del sistema alternatiu de calendari",
+        "Description[ca@valencia]": "Conector de calendari per a mostrar dates del sistema alternatiu de calendari",
         "Description[ca]": "Connector de calendari per a mostrar dates del sistema alternatiu de calendari",
         "Description[es]": "Complemento del calendario para mostrar fechas del sistema de calendario alternativo",
         "Description[fr]": "Module externe d'agenda pour l'affichage de dates à partir d'un système alternatif d'agenda",
