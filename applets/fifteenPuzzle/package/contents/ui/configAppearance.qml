@@ -88,13 +88,15 @@ Kirigami.FormLayout {
         }
 
         QtControls.Button {
+            id: imageButton
             enabled: imageBackgroundRadioButton.checked
 
             icon.name: "document-open"
 
-            QtControls.ToolTip.visible: hovered
-            QtControls.ToolTip.delay: 100
-            QtControls.ToolTip.text: i18nc("@info:tooltip", "Choose image…")
+            QtControls.ToolTip {
+                visible: imageButton.hovered
+                text: i18nc("@info:tooltip", "Choose image…")
+            }
 
             onClicked: imagePicker.open()
 
