@@ -151,9 +151,7 @@ FocusScope {
                 }
             }
 
-            highlight: PlasmaExtras.Highlight {
-                hover: true
-            }
+            highlight: PlasmaExtras.Highlight {}
 
             highlightMoveDuration: PlasmaCore.Units.longDuration
             highlightMoveVelocity: 1
