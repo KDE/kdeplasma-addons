@@ -39,13 +39,8 @@ Item {
     Plasmoid.toolTipTextFormat: Text.StyledText
     Plasmoid.toolTipSubText: i18n("You are logged in as <b>%1</b>", displayedName)
 
-    Binding {
-        target: Plasmoid.self
-        property: "icon"
-        value: kuser.faceIconUrl
-        // revert to the Plasmoid icon if no face given
-        when: kuser.faceIconUrl.toString() !== ""
-    }
+    // revert to the Plasmoid icon if no face given
+    Plasmoid.icon: kuser.faceIconUrl.toString() || "preferences-desktop-user"
 
     KCoreAddons.KUser {
         id: kuser
