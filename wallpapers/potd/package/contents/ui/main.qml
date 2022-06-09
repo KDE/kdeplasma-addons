@@ -29,6 +29,11 @@ Rectangle {
         image: PotdProviderModelInstance.image
         fillMode: wallpaper.configuration.FillMode
         smooth: true
+
+        onImageChanged: {
+            // Update accent color
+            wallpaper.repaintNeeded();
+        }
     }
 
     Component.onCompleted: {
