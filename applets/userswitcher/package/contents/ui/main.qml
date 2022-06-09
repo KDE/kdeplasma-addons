@@ -65,7 +65,9 @@ Item {
         Layout.maximumHeight: isVertical ? Layout.minimumHeight : Infinity
         Layout.preferredHeight: isVertical ? Layout.minimumHeight : PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2
 
-        onClicked: Plasmoid.expanded = !Plasmoid.expanded
+        property bool wasExpanded
+        onPressed: wasExpanded = Plasmoid.expanded
+        onClicked: Plasmoid.expanded = !wasExpanded
 
         Row {
             id: compactRow
