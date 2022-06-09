@@ -25,6 +25,8 @@ UnsplashProvider::UnsplashProvider(QObject *parent, const KPluginMetaData &data,
     }
     const QUrl url(QStringLiteral("https://source.unsplash.com/collection/%1/3840x2160/daily").arg(collectionId));
 
+    potdProviderData()->wallpaperInfoUrl = QUrl(QStringLiteral("https://unsplash.com/collections/%1").arg(collectionId));
+
     KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::StoredTransferJob::finished, this, &UnsplashProvider::imageRequestFinished);
 }
