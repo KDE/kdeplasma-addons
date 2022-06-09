@@ -60,7 +60,7 @@ Item {
 
         Layout.minimumWidth: isVertical ? 0 : compactRow.implicitWidth
         Layout.maximumWidth: isVertical ? Infinity : Layout.minimumWidth
-        Layout.preferredWidth: isVertical ? undefined : Layout.minimumWidth
+        Layout.preferredWidth: isVertical ? -1 : Layout.minimumWidth
 
         Layout.minimumHeight: isVertical ? label.height : PlasmaCore.Theme.smallestFont.pixelSize
         Layout.maximumHeight: isVertical ? Layout.minimumHeight : Infinity
