@@ -1,3 +1,3 @@
 #pragma once
 
-#cmakedefine HAVE_ICU
+#cmakedefine01 HAVE_ICU

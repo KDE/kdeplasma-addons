@@ -15,7 +15,7 @@
 #include <KSharedConfig>
 
 #include "provider/qtcalendar.h"
-#ifdef HAVE_ICU
+#if HAVE_ICU
 #include "provider/chinesecalendar.h"
 #include "provider/indiancalendar.h"
 #endif
@@ -80,7 +80,7 @@ void AlternateCalendarPluginPrivate::init()
 
     // Load/Reload the calendar provider
     switch (m_calendarSystem) {
-#ifdef HAVE_ICU
+#if HAVE_ICU
     case CalendarSystem::Chinese:
         m_calendarProvider.reset(new ChineseCalendarProvider(q, m_calendarSystem));
         break;
