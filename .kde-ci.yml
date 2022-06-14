@@ -25,7 +25,6 @@ Dependencies:
     'frameworks/krunner': '@latest'
     'frameworks/kservice': '@latest'
     'frameworks/kwidgetsaddons': '@latest'
-    'frameworks/kwindowsystem': '@latest'
     'frameworks/kxmlgui': '@latest'
     'frameworks/plasma-framework': '@latest'
     'frameworks/solid': '@latest'

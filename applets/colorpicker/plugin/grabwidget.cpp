@@ -15,8 +15,6 @@
 #include <QDBusPendingCallWatcher>
 #include <QDBusPendingReply>
 
-#include <KWindowSystem>
-
 Q_DECLARE_METATYPE(QColor)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const QColor &color)
