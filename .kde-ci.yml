@@ -31,3 +31,5 @@ Dependencies:
     'frameworks/sonnet': '@latest'
     'frameworks/unitconversion': '@latest'
     'plasma/plasma-workspace': '@same'
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD']
