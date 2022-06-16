@@ -33,6 +33,8 @@ void PotdClient::updateSource(bool refresh)
 
     // Check whether it is cached already...
     if (!refresh && CachedProvider::isCached(m_identifier, m_args, false)) {
+        qCDebug(WALLPAPERPOTD) << "A local cache is available for" << m_identifier << "with arguments" << m_args;
+
         CachedProvider *provider = new CachedProvider(m_identifier, m_args, this);
         connect(provider, &PotdProvider::finished, this, &PotdClient::slotFinished);
         connect(provider, &PotdProvider::error, this, &PotdClient::slotError);
@@ -74,6 +76,8 @@ void PotdClient::slotFinished(PotdProvider *provider)
 
 void PotdClient::slotError(PotdProvider *provider)
 {
+    qCWarning(WALLPAPERPOTD) << m_identifier << "with arguments" << m_args
+                             << "failed to fetch the remote wallpaper. Please check your Internet connection or system date.";
     provider->deleteLater();
     setLoading(false);
     Q_EMIT done(this);
@@ -183,6 +187,7 @@ PotdClient *PotdEngine::registerClient(const QString &identifier, const QVariant
             return nullptr;
         }
 
+        qCDebug(WALLPAPERPOTD) << identifier << "is registered with arguments" << args;
         auto client = new PotdClient(pluginIt->second, args, this);
         m_clientMap.emplace(identifier, ClientPair{client, 1});
 
@@ -193,6 +198,7 @@ PotdClient *PotdEngine::registerClient(const QString &identifier, const QVariant
         // find exact match
         if (pr.first->second.client->m_args == args) {
             pr.first->second.instanceCount++;
+            qCDebug(WALLPAPERPOTD) << identifier << "is registered with arguments" << args << "Total client(s):" << pr.first->second.instanceCount;
             return pr.first->second.client;
         }
 
@@ -209,9 +215,12 @@ void PotdEngine::unregisterClient(const QString &identifier, const QVariantList 
     while (pr.first != pr.second) {
         // find exact match
         if (pr.first->second.client->m_args == args) {
-            if (!--pr.first->second.instanceCount) {
+            pr.first->second.instanceCount--;
+            qCDebug(WALLPAPERPOTD) << identifier << "with arguments" << args << "is unregistered. Remaining client(s):" << pr.first->second.instanceCount;
+            if (!pr.first->second.instanceCount) {
                 delete pr.first->second.client;
                 m_clientMap.erase(pr.first);
+                qCDebug(WALLPAPERPOTD) << identifier << "with arguments" << args << "is freed.";
                 break;
             }
         }
@@ -225,6 +234,7 @@ void PotdEngine::updateSource(bool refresh)
     for (const auto &pr : std::as_const(m_clientMap)) {
         connect(pr.second.client, &PotdClient::done, this, &PotdEngine::slotDone);
         m_updateCount++;
+        qCDebug(WALLPAPERPOTD) << pr.second.client->m_metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")) << "starts updating wallpaper.";
         pr.second.client->updateSource(refresh);
     }
 }
@@ -238,11 +248,15 @@ void PotdEngine::slotDone(PotdClient *client)
 {
     disconnect(client, &PotdClient::done, this, &PotdEngine::slotDone);
 
+    qCDebug(WALLPAPERPOTD) << client->m_identifier << "with arguments" << client->m_args
+                           << "finished updating the wallpaper. Remaining clients:" << m_updateCount - 1;
+
     if (!--m_updateCount) {
         // Do not update until next day, and delay 1s to make sure last modified condition is satisfied.
         m_lastUpdateDate = QDate::currentDate();
         m_checkDatesTimer.setInterval(QDateTime::currentDateTime().msecsTo(m_lastUpdateDate.startOfDay().addDays(1)) + 1000);
         m_checkDatesTimer.start();
+        qCDebug(WALLPAPERPOTD) << "Time to next update (ms):" << m_checkDatesTimer.interval();
     }
 }
 
