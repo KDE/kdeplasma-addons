@@ -189,10 +189,6 @@ PotdClient *PotdEngine::registerClient(const QString &identifier, const QVariant
         return client;
     };
 
-    if (pr.first == pr.second) {
-        return createClient();
-    }
-
     while (pr.first != pr.second) {
         // find exact match
         if (pr.first->second.client->m_args == args) {
