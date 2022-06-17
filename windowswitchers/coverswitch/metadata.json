@@ -5,6 +5,7 @@
                 "Email": "isma.af@gmail.com",
                 "Name": "Ismael Asensio",
                 "Name[ar]": "Ismael Asensio",
+                "Name[az]": "Ismael Asensio",
                 "Name[ca@valencia]": "Ismael Asensio",
                 "Name[ca]": "Ismael Asensio",
                 "Name[es]": "Ismael Asensio",
@@ -21,11 +22,13 @@
                 "Name[uk]": "Ismael Asensio",
                 "Name[vi]": "Ismael Asensio",
                 "Name[x-test]": "xxIsmael Asensioxx",
-                "Name[zh_CN]": "Ismael Asensio"
+                "Name[zh_CN]": "Ismael Asensio",
+                "Name[zh_TW]": "Ismael Asensio"
             }
         ],
         "Description": "A Window Switcher layout showing thumbnails as a 3D carousel",
         "Description[ar]": "مبدل نوافذ يعرض كل النوافذ كمصغرات على شكل دائري ثلاثي الأبعاد.",
+        "Description[az]": "Miniatürləri 3D karusel şəklində göstərən pəncərə dəyişdirici maketi",
         "Description[ca@valencia]": "Una disposició del commutador de finestres que mostra les miniatures com un carrusel en 3D",
         "Description[ca]": "Una disposició del commutador de finestres que mostra les miniatures com un carrusel en 3D",
         "Description[es]": "Un esquema de selección de ventanas que muestra miniaturas como una presentación en 3D",
@@ -48,6 +51,7 @@
         "License": "GPL",
         "Name": "Cover Switch",
         "Name[ar]": "مبدل المستخدم",
+        "Name[az]": "Üz qabığı dəyişdiricisi",
         "Name[ca@valencia]": "Canvi de capa",
         "Name[ca]": "Canvi de capa",
         "Name[es]": "Selector de portadas",

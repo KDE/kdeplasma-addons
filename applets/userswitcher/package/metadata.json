@@ -35,7 +35,8 @@
                 "Name[uk]": "Kai Uwe Broulik",
                 "Name[vi]": "Kai Uwe Broulik",
                 "Name[x-test]": "xxKai Uwe Broulikxx",
-                "Name[zh_CN]": "Kai Uwe Broulik"
+                "Name[zh_CN]": "Kai Uwe Broulik",
+                "Name[zh_TW]": "Kai Uwe Broulik"
             }
         ],
         "Category": "System Information",
@@ -72,6 +73,7 @@
         "Description[vi]": "Chuyển nhanh giữa những người dùng khác nhau",
         "Description[x-test]": "xxQuickly switch between different usersxx",
         "Description[zh_CN]": "在不同用户之间快速切换",
+        "Description[zh_TW]": "快速的在不同使用者間切換",
         "Icon": "preferences-desktop-user",
         "Id": "org.kde.plasma.userswitcher",
         "License": "GPL-2.0+",
@@ -108,6 +110,7 @@
         "Name[vi]": "Trình chuyển người dùng",
         "Name[x-test]": "xxUser Switcherxx",
         "Name[zh_CN]": "用户切换器",
+        "Name[zh_TW]": "使用者切換",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

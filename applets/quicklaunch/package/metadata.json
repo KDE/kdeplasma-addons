@@ -35,7 +35,8 @@
                 "Name[uk]": "David Rosca",
                 "Name[vi]": "David Rosca",
                 "Name[x-test]": "xxDavid Roscaxx",
-                "Name[zh_CN]": "David Rosca"
+                "Name[zh_CN]": "David Rosca",
+                "Name[zh_TW]": "David Rosca"
             }
         ],
         "Category": "Application Launchers",

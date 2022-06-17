@@ -35,7 +35,8 @@
                 "Name[uk]": "Davide Bettio, Lukas Kropatschek",
                 "Name[vi]": "Davide Bettio, Lukas Kropatschek",
                 "Name[x-test]": "xxDavide Bettio, Lukas Kropatschekxx",
-                "Name[zh_CN]": "Davide Bettio, Lukas Kropatschek"
+                "Name[zh_CN]": "Davide Bettio, Lukas Kropatschek",
+                "Name[zh_TW]": "Davide Bettio, Lukas Kropatschek"
             }
         ],
         "Category": "Utilities",
@@ -109,6 +110,7 @@
         "Name[vi]": "Giấy nhớ",
         "Name[x-test]": "xxSticky Notexx",
         "Name[zh_CN]": "便利贴",
+        "Name[zh_TW]": "便條貼",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

@@ -5,6 +5,7 @@
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
                 "Name[ar]": "Martin Gräßlin",
+                "Name[az]": "Martin Gräßlin",
                 "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
@@ -21,11 +22,13 @@
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
                 "Name[x-test]": "xxMartin Gräßlinxx",
-                "Name[zh_CN]": "Martin Gräßlin"
+                "Name[zh_CN]": "Martin Gräßlin",
+                "Name[zh_TW]": "Martin Gräßlin"
             }
         ],
         "Description": "A Window Switcher layout showing all windows as thumbnails in a grid",
         "Description[ar]": "مخطط مبدل النوافذ يعرض كل النوافذ كمصغرات في شبكة",
+        "Description[az]": "Bütün pəncərələri torda miniatürlər kimi göstərən pəncərə dəyişdirici maketi",
         "Description[ca@valencia]": "Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una quadrícula",
         "Description[ca]": "Una disposició del commutador de finestres que mostra totes les finestres com a miniatures en una quadrícula",
         "Description[es]": "Un esquema de selección de ventanas que muestra todas las ventanas como miniaturas de una cuadrícula",
@@ -48,6 +51,7 @@
         "License": "GPL",
         "Name": "Grid",
         "Name[ar]": "شبكة",
+        "Name[az]": "Tor",
         "Name[ca@valencia]": "Quadrícula",
         "Name[ca]": "Quadrícula",
         "Name[es]": "Cuadrícula",
@@ -65,6 +69,7 @@
         "Name[vi]": "Lưới",
         "Name[x-test]": "xxGridxx",
         "Name[zh_CN]": "网格",
+        "Name[zh_TW]": "格線",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

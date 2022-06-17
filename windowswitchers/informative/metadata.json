@@ -5,6 +5,7 @@
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
                 "Name[ar]": "Martin Gräßlin",
+                "Name[az]": "Martin Gräßlin",
                 "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
@@ -21,11 +22,13 @@
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
                 "Name[x-test]": "xxMartin Gräßlinxx",
-                "Name[zh_CN]": "Martin Gräßlin"
+                "Name[zh_CN]": "Martin Gräßlin",
+                "Name[zh_TW]": "Martin Gräßlin"
             }
         ],
         "Description": "An informative window switcher layout including desktop name",
         "Description[ar]": "مخطط مبدل نوافذ معلوماتي يشمل اسم سطح المكتب",
+        "Description[az]": "İş masası adı daxil olmaqla məlumatlı pəncərə dəyişdirici maketi",
         "Description[ca@valencia]": "Una disposició del commutador de finestres informativa que inclou el nom d'escriptori",
         "Description[ca]": "Una disposició del commutador de finestres informativa que inclou el nom d'escriptori",
         "Description[es]": "Un esquema de selección de ventanas informativo que incluye el nombre del escritorio",
@@ -48,6 +51,7 @@
         "License": "GPL",
         "Name": "Informative",
         "Name[ar]": "معلوماتي",
+        "Name[az]": "Məlumatlı",
         "Name[ca@valencia]": "Informatiu",
         "Name[ca]": "Informatiu",
         "Name[es]": "Informativo",
@@ -65,6 +69,7 @@
         "Name[vi]": "Nhiều thông tin",
         "Name[x-test]": "xxInformativexx",
         "Name[zh_CN]": "详尽信息",
+        "Name[zh_TW]": "資訊提供",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

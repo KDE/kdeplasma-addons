@@ -35,7 +35,8 @@
                 "Name[uk]": "Команда розробників Плазми",
                 "Name[vi]": "Đội Plasma",
                 "Name[x-test]": "xxThe Plasma Teamxx",
-                "Name[zh_CN]": "Plasma 开发团队"
+                "Name[zh_CN]": "Plasma 开发团队",
+                "Name[zh_TW]": "Plasma 團隊"
             }
         ],
         "Category": "Windows and Tasks",
@@ -72,6 +73,7 @@
         "Description[vi]": "Chuyển giữa các Hoạt động",
         "Description[x-test]": "xxSwitch between activitiesxx",
         "Description[zh_CN]": "在不同活动间切换",
+        "Description[zh_TW]": "在活動之間切換",
         "EnabledByDefault": true,
         "Icon": "org.kde.plasma.pager",
         "Id": "org.kde.plasma.activitypager",

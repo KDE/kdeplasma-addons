@@ -35,7 +35,8 @@
                 "Name[uk]": "Friedrich W. H. Kossebau",
                 "Name[vi]": "Friedrich W. H. Kossebau",
                 "Name[x-test]": "xxFriedrich W. H. Kossebauxx",
-                "Name[zh_CN]": "Friedrich W. H. Kossebau"
+                "Name[zh_CN]": "Friedrich W. H. Kossebau",
+                "Name[zh_TW]": "Friedrich W. H. Kossebau"
             }
         ],
         "Description": "Calendar plugin for displaying astronomical events",
@@ -104,7 +105,8 @@
         "Name[uk]": "Астрономічні події",
         "Name[vi]": "Các sự kiện thiên văn",
         "Name[x-test]": "xxAstronomical Eventsxx",
-        "Name[zh_CN]": "天文事件"
+        "Name[zh_CN]": "天文事件",
+        "Name[zh_TW]": "天文事件"
     },
     "X-KDE-PlasmaCalendar-ConfigUi": "astronomicalevents/AstronomicalEventsConfig.qml"
 }

@@ -35,7 +35,8 @@
                 "Name[uk]": "Davide Bettio",
                 "Name[vi]": "Davide Bettio",
                 "Name[x-test]": "xxDavide Bettioxx",
-                "Name[zh_CN]": "Davide Bettio"
+                "Name[zh_CN]": "Davide Bettio",
+                "Name[zh_TW]": "Davide Bettio"
             }
         ],
         "Category": "Date and Time",
@@ -109,6 +110,7 @@
         "Name[vi]": "Bộ hẹn giờ",
         "Name[x-test]": "xxTimerxx",
         "Name[zh_CN]": "计时器",
+        "Name[zh_TW]": "計時器",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

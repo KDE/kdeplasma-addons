@@ -5,6 +5,7 @@
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
                 "Name[ar]": "Martin Gräßlin",
+                "Name[az]": "Martin Gräßlin",
                 "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
@@ -21,11 +22,13 @@
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
                 "Name[x-test]": "xxMartin Gräßlinxx",
-                "Name[zh_CN]": "Martin Gräßlin"
+                "Name[zh_CN]": "Martin Gräßlin",
+                "Name[zh_TW]": "Martin Gräßlin"
             }
         ],
         "Description": "A window switcher layout using large icons to represent the window",
         "Description[ar]": "مخطط مبدل النوافذ باستخدام أيقونات كبيرة لتمثيل النافذة",
+        "Description[az]": "Pəncərələri göstərmək üçün böyük nişanlarla istifadə edilən pəncərə dəyişirici maketi",
         "Description[ca@valencia]": "Una disposició del commutador de finestres que utilitza icones grans per a representar la finestra",
         "Description[ca]": "Una disposició del commutador de finestres que usa icones grans per a representar la finestra",
         "Description[es]": "Un esquema de selección de ventanas que usa iconos grandes para representar las ventanas",
@@ -48,6 +51,7 @@
         "License": "GPL",
         "Name": "Large Icons",
         "Name[ar]": "أيقونات كبيرة",
+        "Name[az]": "Böyük nişanlar",
         "Name[ca@valencia]": "Icones grans",
         "Name[ca]": "Icones grans",
         "Name[es]": "Iconos grandes",
@@ -65,6 +69,7 @@
         "Name[vi]": "Biểu tượng lớn",
         "Name[x-test]": "xxLarge Iconsxx",
         "Name[zh_CN]": "大图标",
+        "Name[zh_TW]": "大圖示",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

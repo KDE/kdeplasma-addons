@@ -35,7 +35,8 @@
                 "Name[uk]": "Petri Damstén",
                 "Name[vi]": "Petri Damstén",
                 "Name[x-test]": "xxPetri Damsténxx",
-                "Name[zh_CN]": "Petri Damstén"
+                "Name[zh_CN]": "Petri Damstén",
+                "Name[zh_TW]": "Petri Damstén"
             }
         ],
         "Description": "Convert values to different units",
@@ -107,6 +108,7 @@
         "Name[uk]": "Перетворювач одиниць",
         "Name[vi]": "Trình đổi đơn vị",
         "Name[x-test]": "xxUnit Converterxx",
-        "Name[zh_CN]": "单位转换器"
+        "Name[zh_CN]": "单位转换器",
+        "Name[zh_TW]": "單位轉換"
     }
 }

@@ -35,7 +35,8 @@
                 "Name[uk]": "David Edmundson",
                 "Name[vi]": "David Edmundson",
                 "Name[x-test]": "xxDavid Edmundsonxx",
-                "Name[zh_CN]": "David Edmundson"
+                "Name[zh_CN]": "David Edmundson",
+                "Name[zh_TW]": "David Edmundson"
             }
         ],
         "Category": "Windows and Tasks",
@@ -72,6 +73,7 @@
         "Description[vi]": "Nhóm các phụ kiện Plasma lại với nhau",
         "Description[x-test]": "xxGroup Plasma widgets togetherxx",
         "Description[zh_CN]": "组合多个 Plasma 小部件",
+        "Description[zh_TW]": "組合數個 Plasma 元件",
         "EnabledByDefault": true,
         "Icon": "object-group",
         "Id": "org.kde.plasma.private.grouping",

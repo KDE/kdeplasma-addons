@@ -35,7 +35,8 @@
                 "Name[uk]": "Laurent Montel",
                 "Name[vi]": "Laurent Montel",
                 "Name[x-test]": "xxLaurent Montelxx",
-                "Name[zh_CN]": "Laurent Montel"
+                "Name[zh_CN]": "Laurent Montel",
+                "Name[zh_TW]": "Laurent Montel"
             }
         ],
         "Description": "Matches Konsole Profiles",
@@ -106,6 +107,7 @@
         "Name[uk]": "Профілі Konsole",
         "Name[vi]": "Hồ sơ Konsole",
         "Name[x-test]": "xxKonsole Profilesxx",
-        "Name[zh_CN]": "Konsole 配置"
+        "Name[zh_CN]": "Konsole 配置",
+        "Name[zh_TW]": "Konsole 設定檔"
     }
 }

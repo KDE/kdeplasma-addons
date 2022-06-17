@@ -35,7 +35,8 @@
                 "Name[uk]": "Eike Hein",
                 "Name[vi]": "Eike Hein",
                 "Name[x-test]": "xxEike Heinxx",
-                "Name[zh_CN]": "Eike Hein"
+                "Name[zh_CN]": "Eike Hein",
+                "Name[zh_TW]": "Eike Hein"
             }
         ],
         "Category": "Application Launchers",
@@ -72,6 +73,7 @@
         "Description[vi]": "Trình khởi chạy ứng dụng, với kích cỡ toàn màn hình",
         "Description[x-test]": "xxA fullscreen application launcherxx",
         "Description[zh_CN]": "全屏应用程序启动器",
+        "Description[zh_TW]": "一個全螢幕應用程式啟動器",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
@@ -112,6 +114,7 @@
         "Name[vi]": "Bảng điều khiển ứng dụng",
         "Name[x-test]": "xxApplication Dashboardxx",
         "Name[zh_CN]": "应用程序面板",
+        "Name[zh_TW]": "應用程式儀表板",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

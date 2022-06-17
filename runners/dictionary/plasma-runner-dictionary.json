@@ -35,7 +35,8 @@
                 "Name[uk]": "Jason A. Donenfeld",
                 "Name[vi]": "Jason A. Donenfeld",
                 "Name[x-test]": "xxJason A. Donenfeldxx",
-                "Name[zh_CN]": "Jason A. Donenfeld"
+                "Name[zh_CN]": "Jason A. Donenfeld",
+                "Name[zh_TW]": "Jason A. Donenfeld"
             }
         ],
         "Description": "Define words",
@@ -71,6 +72,7 @@
         "Description[vi]": "Định nghĩa từ",
         "Description[x-test]": "xxDefine wordsxx",
         "Description[zh_CN]": "查询单词含义",
+        "Description[zh_TW]": "查詢詞彙定義",
         "EnabledByDefault": true,
         "Icon": "accessories-dictionary",
         "Id": "Dictionary",
@@ -107,7 +109,8 @@
         "Name[uk]": "Словник",
         "Name[vi]": "Từ điển",
         "Name[x-test]": "xxDictionaryxx",
-        "Name[zh_CN]": "词典"
+        "Name[zh_CN]": "词典",
+        "Name[zh_TW]": "字典"
     },
     "X-KDE-ConfigModule": "kf5/krunner/kcms/kcm_krunner_dictionary"
 }

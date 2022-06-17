@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Calendar plugin for displaying dates from the alternate calendar system",
         "Description[ar]": "ملحق تقويم يعرض التاريخ في نظام تقوم بديل",
+        "Description[az]": "Alternativ təqvim sistemindən tarixləri göstərmək üçün təqvim qoşması",
         "Description[ca@valencia]": "Connector de calendari per a mostrar dates del sistema alternatiu de calendari",
         "Description[ca]": "Connector de calendari per a mostrar dates del sistema alternatiu de calendari",
         "Description[es]": "Complemento del calendario para mostrar fechas del sistema de calendario alternativo",
@@ -22,6 +23,7 @@
         "Icon": "office-calendar",
         "Name": "Alternate Calendar",
         "Name[ar]": "التقويم البديل",
+        "Name[az]": "Alternativ təqvim",
         "Name[ca@valencia]": "Calendari alternatiu",
         "Name[ca]": "Calendari alternatiu",
         "Name[es]": "Calendario alternativo",
@@ -38,7 +40,8 @@
         "Name[uk]": "Альтернативний календар",
         "Name[vi]": "Lịch khác",
         "Name[x-test]": "xxAlternate Calendarxx",
-        "Name[zh_CN]": "备选日历"
+        "Name[zh_CN]": "备选日历",
+        "Name[zh_TW]": "替代曆法"
     },
     "X-KDE-PlasmaCalendar-ConfigUi": "alternatecalendar/AlternateCalendarConfig.qml"
 }

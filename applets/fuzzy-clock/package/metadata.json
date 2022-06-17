@@ -35,7 +35,8 @@
                 "Name[uk]": "Kai Uwe Broulik",
                 "Name[vi]": "Kai Uwe Broulik",
                 "Name[x-test]": "xxKai Uwe Broulikxx",
-                "Name[zh_CN]": "Kai Uwe Broulik"
+                "Name[zh_CN]": "Kai Uwe Broulik",
+                "Name[zh_TW]": "Kai Uwe Broulik"
             }
         ],
         "Category": "Date and Time",
@@ -72,6 +73,7 @@
         "Description[vi]": "Thời gian hiển thị ở dạng ít chính xác hơn",
         "Description[x-test]": "xxTime displayed in a less precise formatxx",
         "Description[zh_CN]": "以不精确格式显示的时间",
+        "Description[zh_TW]": "用比較不精確的方式顯示時間",
         "Icon": "preferences-system-time",
         "Id": "org.kde.plasma.fuzzyclock",
         "License": "GPL-2.0+",
@@ -108,6 +110,7 @@
         "Name[vi]": "Đồng mơ hồ",
         "Name[x-test]": "xxFuzzy Clockxx",
         "Name[zh_CN]": "模糊时钟",
+        "Name[zh_TW]": "模糊時鐘",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

@@ -35,7 +35,8 @@
                 "Name[uk]": "Sebastian Kügler",
                 "Name[vi]": "Sebastian Kügler",
                 "Name[x-test]": "xxSebastian Küglerxx",
-                "Name[zh_CN]": "Sebastian Kügler"
+                "Name[zh_CN]": "Sebastian Kügler",
+                "Name[zh_TW]": "Sebastian Kügler"
             }
         ],
         "Description": "Matches Kate Sessions",
@@ -107,6 +108,7 @@
         "Name[uk]": "Сеанси Kate",
         "Name[vi]": "Các phiên Kate",
         "Name[x-test]": "xxKate Sessionsxx",
-        "Name[zh_CN]": "Kate 会话"
+        "Name[zh_CN]": "Kate 会话",
+        "Name[zh_TW]": "Kate 工作階段"
     }
 }

@@ -5,6 +5,7 @@
                 "Email": "mgraesslin@kde.org",
                 "Name": "Martin Gräßlin",
                 "Name[ar]": "Martin Gräßlin",
+                "Name[az]": "Martin Gräßlin",
                 "Name[ca@valencia]": "Martin Gräßlin",
                 "Name[ca]": "Martin Gräßlin",
                 "Name[es]": "Martin Gräßlin",
@@ -21,11 +22,13 @@
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
                 "Name[x-test]": "xxMartin Gräßlinxx",
-                "Name[zh_CN]": "Martin Gräßlin"
+                "Name[zh_CN]": "Martin Gräßlin",
+                "Name[zh_TW]": "Martin Gräßlin"
             }
         ],
         "Description": "A compact window switcher layout",
         "Description[ar]": "مخطط مبدل نوافذ متراص",
+        "Description[az]": "Yəğcam pəncərə dəyişdirici maketi",
         "Description[ca@valencia]": "Una disposició compacta del commutador de finestres",
         "Description[ca]": "Una disposició compacta del commutador de finestres",
         "Description[es]": "Un esquema de selección de ventanas compacto",
@@ -48,6 +51,7 @@
         "License": "GPL",
         "Name": "Compact",
         "Name[ar]": "متراصّ",
+        "Name[az]": "Yığcam",
         "Name[ca@valencia]": "Compacte",
         "Name[ca]": "Compacte",
         "Name[es]": "Compacto",
@@ -65,6 +69,7 @@
         "Name[vi]": "Gọn",
         "Name[x-test]": "xxCompactxx",
         "Name[zh_CN]": "紧凑",
+        "Name[zh_TW]": "簡潔",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

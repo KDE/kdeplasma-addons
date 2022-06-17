@@ -35,7 +35,8 @@
                 "Name[uk]": "Reza Fatahilah Shah",
                 "Name[vi]": "Reza Fatahilah Shah",
                 "Name[x-test]": "xxReza Fatahilah Shahxx",
-                "Name[zh_CN]": "Reza Fatahilah Shah"
+                "Name[zh_CN]": "Reza Fatahilah Shah",
+                "Name[zh_TW]": "Reza Fatahilah Shah"
             }
         ],
         "Category": "Fun and Games",
@@ -72,6 +73,7 @@
         "Description[vi]": "Xem các truyện tranh trên Liên Mạng",
         "Description[x-test]": "xxView comic strips from the Internetxx",
         "Description[zh_CN]": "查看来自互联网的连环画",
+        "Description[zh_TW]": "看網路上的連環漫畫",
         "EnabledByDefault": true,
         "Icon": "face-smile-big",
         "Id": "org.kde.plasma.comic",
@@ -109,6 +111,7 @@
         "Name[vi]": "Truyện tranh",
         "Name[x-test]": "xxComic Stripxx",
         "Name[zh_CN]": "连环画",
+        "Name[zh_TW]": "連環漫畫",
         "ServiceTypes": [
             "Plasma/Applet"
         ],
