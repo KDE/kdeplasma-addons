@@ -228,8 +228,8 @@ void PotdEngine::updateSource(bool refresh)
 {
     for (const auto &pr : std::as_const(m_clientMap)) {
         connect(pr.second.client, &PotdClient::done, this, &PotdEngine::slotDone);
-        pr.second.client->updateSource(refresh);
         m_updateCount++;
+        pr.second.client->updateSource(refresh);
     }
 }
 
