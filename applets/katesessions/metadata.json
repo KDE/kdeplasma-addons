@@ -18,7 +18,9 @@
                 "Name[sl]": "Joseph Wenninger",
                 "Name[tr]": "Joseph Wenninger",
                 "Name[uk]": "Joseph Wenninger",
-                "Name[x-test]": "xxJoseph Wenningerxx"
+                "Name[vi]": "Joseph Wenninger",
+                "Name[x-test]": "xxJoseph Wenningerxx",
+                "Name[zh_CN]": "Joseph Wenninger"
             }
         ],
         "Category": "Utilities",
@@ -37,7 +39,9 @@
         "Description[sl]": "Zaganjalnik sej Kate",
         "Description[tr]": "Kate Oturum Başlatıcı",
         "Description[uk]": "Засіб запуску сеансів Kate",
+        "Description[vi]": "Trình khởi chạy phiên Kate",
         "Description[x-test]": "xxKate Session Launcherxx",
+        "Description[zh_CN]": "Kate 会话启动器",
         "Icon": "kate",
         "Id": "org.kde.plasma.addons.katesessions",
         "License": "GPL-2.0+",
