@@ -6,7 +6,6 @@
 
 #include "bingprovider.h"
 
-#include <QDebug>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QRegularExpression> // Extract from the copyright text

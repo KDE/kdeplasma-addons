@@ -9,7 +9,6 @@
 
 #include <random>
 
-#include <QDebug>
 #include <QRegularExpression>
 #include <QTextDocumentFragment>
 #include <QUrlQuery>
@@ -60,7 +59,6 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
         Q_EMIT error(this);
-        qDebug() << "xmlRequestFinished error";
         refreshConfig();
         return;
     }
