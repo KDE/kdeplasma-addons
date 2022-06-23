@@ -40,7 +40,7 @@ Q_SIGNALS:
     void remoteUrlChanged();
     void titleChanged();
     void authorChanged();
-    void done(PotdClient *client);
+    void done(PotdClient *client, bool success);
 
 private Q_SLOTS:
     void slotFinished(PotdProvider *provider);
@@ -87,7 +87,7 @@ public:
 
 private Q_SLOTS:
     void forceUpdateSource();
-    void slotDone(PotdClient *client);
+    void slotDone(PotdClient *client, bool success);
     void slotPrepareForSleep(bool sleep);
 
 private:
@@ -101,6 +101,7 @@ private:
     std::unordered_map<QString, KPluginMetaData> m_providersMap;
 
     QTimer m_checkDatesTimer;
-    QDate m_lastUpdateDate;
     int m_updateCount = 0;
+
+    bool m_lastUpdateSuccess = false;
 };

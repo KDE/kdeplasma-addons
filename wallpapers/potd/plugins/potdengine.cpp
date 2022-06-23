@@ -71,7 +71,7 @@ void PotdClient::slotFinished(PotdProvider *provider)
 
     provider->deleteLater();
     setLoading(false);
-    Q_EMIT done(this);
+    Q_EMIT done(this, true);
 }
 
 void PotdClient::slotError(PotdProvider *provider)
@@ -80,7 +80,7 @@ void PotdClient::slotError(PotdProvider *provider)
                              << "failed to fetch the remote wallpaper. Please check your Internet connection or system date.";
     provider->deleteLater();
     setLoading(false);
-    Q_EMIT done(this);
+    Q_EMIT done(this, false);
 }
 
 void PotdClient::slotCachingFinished(const QString &, const PotdProviderData &data)
@@ -156,7 +156,6 @@ void PotdClient::setAuthor(const QString &author)
 
 PotdEngine::PotdEngine(QObject *parent)
     : QObject(parent)
-    , m_lastUpdateDate(QDate::currentDate().addDays(-1))
 {
     loadPluginMetaData();
 
@@ -231,6 +230,8 @@ void PotdEngine::unregisterClient(const QString &identifier, const QVariantList 
 
 void PotdEngine::updateSource(bool refresh)
 {
+    m_lastUpdateSuccess = true;
+
     for (const auto &pr : std::as_const(m_clientMap)) {
         connect(pr.second.client, &PotdClient::done, this, &PotdEngine::slotDone);
         m_updateCount++;
@@ -244,17 +245,24 @@ void PotdEngine::forceUpdateSource()
     updateSource(true);
 }
 
-void PotdEngine::slotDone(PotdClient *client)
+void PotdEngine::slotDone(PotdClient *client, bool success)
 {
     disconnect(client, &PotdClient::done, this, &PotdEngine::slotDone);
 
-    qCDebug(WALLPAPERPOTD) << client->m_identifier << "with arguments" << client->m_args
-                           << "finished updating the wallpaper. Remaining clients:" << m_updateCount - 1;
+    qCDebug(WALLPAPERPOTD) << client->m_identifier << "with arguments" << client->m_args << (success ? "finished" : "failed")
+                           << "updating the wallpaper. Remaining clients:" << m_updateCount - 1;
+
+    if (!success) {
+        m_lastUpdateSuccess = false;
+    }
 
     if (!--m_updateCount) {
         // Do not update until next day, and delay 1s to make sure last modified condition is satisfied.
-        m_lastUpdateDate = QDate::currentDate();
-        m_checkDatesTimer.setInterval(QDateTime::currentDateTime().msecsTo(m_lastUpdateDate.startOfDay().addDays(1)) + 1000);
+        if (m_lastUpdateSuccess) {
+            m_checkDatesTimer.setInterval(std::max<int>(QDateTime::currentDateTime().msecsTo(QDate::currentDate().startOfDay().addDays(1)) + 1000, 60000));
+        } else {
+            m_checkDatesTimer.setInterval(10min);
+        }
         m_checkDatesTimer.start();
         qCDebug(WALLPAPERPOTD) << "Time to next update (ms):" << m_checkDatesTimer.interval();
     }
