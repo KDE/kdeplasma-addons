@@ -275,17 +275,8 @@ void PotdEngine::slotPrepareForSleep(bool sleep)
     }
 
     // Resume from sleep
-    if (m_lastUpdateDate != QDate::currentDate()) {
-        // New day new wallpaper
-        forceUpdateSource();
-    } else {
-        // Align the update timer's interval, and delay 1s to make sure last modified condition is satisfied.
-        const int remainingTime = QDateTime::currentDateTime().msecsTo(m_lastUpdateDate.addDays(1).startOfDay()) + 1000;
-
-        // In case the remaining time is too short, set the interval to 1min
-        m_checkDatesTimer.setInterval(std::max(remainingTime, 60 * 1000));
-        m_checkDatesTimer.start();
-    }
+    // Always force update to work around the current date not being updated
+    forceUpdateSource();
 }
 
 void PotdEngine::loadPluginMetaData()
