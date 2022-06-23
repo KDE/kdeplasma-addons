@@ -41,6 +41,14 @@ void PotdClient::updateSource(bool refresh)
         return;
     }
 
+    // Find the old cached image and load it for now
+    if (m_data.wallpaperImage.isNull()) {
+        const QString path = CachedProvider::identifierToPath(m_identifier, m_args);
+        if (QFile::exists(path)) {
+            setImage(QImage(path));
+        }
+    }
+
     const auto pluginResult = KPluginFactory::instantiatePlugin<PotdProvider>(m_metadata, this, m_args);
 
     if (pluginResult) {
