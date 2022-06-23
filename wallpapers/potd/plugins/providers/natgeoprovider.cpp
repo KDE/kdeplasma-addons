@@ -8,7 +8,6 @@
 
 #include "natgeoprovider.h"
 
-#include <QDebug>
 #include <QTextDocumentFragment>
 
 #include <KIO/Job>

@@ -8,7 +8,6 @@
 
 #include <random>
 
-#include <QDebug>
 #include <QJsonArray>
 #include <QJsonDocument>
 

@@ -7,7 +7,6 @@
 
 #include "epodprovider.h"
 
-#include <QDebug>
 #include <QRegularExpression>
 #include <QTextDocumentFragment>
 

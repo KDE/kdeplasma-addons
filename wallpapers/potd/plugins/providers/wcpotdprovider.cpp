@@ -8,7 +8,6 @@
 
 #include "wcpotdprovider.h"
 
-#include <QDebug>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QTextDocumentFragment>

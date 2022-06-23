@@ -7,7 +7,6 @@
 
 #include "noaaprovider.h"
 
-#include <QDebug>
 #include <QRegularExpression>
 #include <QTextDocumentFragment> // For parsing title from HTML source
 

@@ -6,7 +6,6 @@
 
 #include "unsplashprovider.h"
 
-#include <QDebug>
 #include <QRegularExpression>
 
 #include <KIO/Job>
