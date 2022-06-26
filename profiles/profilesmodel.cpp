@@ -17,6 +17,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QStandardPaths>
+#include <QUrl>
 
 ProfilesModel::ProfilesModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -53,7 +54,7 @@ void ProfilesModel::loadProfiles()
 
     for (const auto &profilePath : std::as_const(profilesPaths)) {
         QFileInfo info(profilePath);
-        const QString profileIdentifier = info.baseName();
+        const QString profileIdentifier = QUrl::fromPercentEncoding(info.baseName().toLatin1());
         QString name = profileIdentifier;
         QString iconName;
         if (m_appName == QLatin1String("konsole")) {
