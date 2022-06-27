@@ -17,5 +17,18 @@
     <entry name="noteId" type="String">
       <default></default>
     </entry>
+
+    <entry name="scrollX" type="Double">
+      <default>0</default>
+    </entry>
+
+    <entry name="scrollY" type="Double">
+      <default>0</default>
+    </entry>
+
+    <entry name="cursorPosition" type="Int">
+      <default>0</default>
+    </entry>
+
   </group>
 </kcfg>

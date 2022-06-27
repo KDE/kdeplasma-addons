@@ -320,6 +320,51 @@ PlasmaCore.SvgItem {
                     }
                 }
             }
+
+            // Save scrolling position when it changes, but throttle to avoid
+            // killing a storage disk.
+            Connections {
+                target: scrollview.contentItem
+                function onContentXChanged() {
+                    throttedScrollSaver.restart();
+                }
+                function onContentYChanged() {
+                    throttedScrollSaver.restart();
+                }
+            }
+            Connections {
+                target: mainTextArea
+                function onCursorPositionChanged() {
+                    throttedScrollSaver.restart();
+                }
+            }
+
+            Timer {
+                id: throttedScrollSaver
+                interval: PlasmaCore.Units.humanMoment
+                repeat: false
+                running: false
+                onTriggered: scrollview.saveScroll()
+            }
+
+            function saveScroll() {
+                const flickable = scrollview.contentItem;
+                Plasmoid.configuration.scrollX = flickable.contentX;
+                Plasmoid.configuration.scrollY = flickable.contentY;
+                Plasmoid.configuration.cursorPosition = mainTextArea.cursorPosition;
+            }
+
+            function restoreScroll() {
+                const flickable = scrollview.contentItem;
+                flickable.contentX = Plasmoid.configuration.scrollX;
+                flickable.contentY = Plasmoid.configuration.scrollY;
+                mainTextArea.cursorPosition = Plasmoid.configuration.cursorPosition;
+            }
+
+            // Give it some time to lay out the text, because at this
+            // point in time content size is not reliable yet.
+            Component.onCompleted: Qt.callLater(restoreScroll)
+            Component.onDestruction: saveScroll()
         }
 
         DragDrop.DropArea {
