@@ -32,7 +32,7 @@ PlasmaCore.SvgItem {
     svg: PlasmaCore.Svg {
         imagePath: "widgets/notes"
     }
-    elementId: plasmoid.configuration.color + "-notes"
+    elementId: Plasmoid.configuration.color + "-notes"
 
     width: PlasmaCore.Units.gridUnit * 15
     height: PlasmaCore.Units.gridUnit * 15
@@ -48,13 +48,13 @@ PlasmaCore.SvgItem {
     readonly property real verticalMargins: height * 0.07
 
     // note is of type Note
-    property QtObject note: noteManager.loadNote(plasmoid.configuration.noteId);
+    property QtObject note: noteManager.loadNote(Plasmoid.configuration.noteId);
 
     // define colors used for icons in ToolButtons and for text in TextArea.
     // this is deliberately _NOT_ the theme color as we are over a known bright background!
     // an unknown colour over a known colour is a bad move as you end up with white on yellow.
     readonly property color textIconColor: {
-        if (plasmoid.configuration.color === "black" || plasmoid.configuration.color === "translucent-light") {
+        if (Plasmoid.configuration.color === "black" || Plasmoid.configuration.color === "translucent-light") {
             return "#dfdfdf";
         }
         return "#202020";
@@ -67,10 +67,10 @@ PlasmaCore.SvgItem {
     }
 
     Connections {
-        target: plasmoid
+        target: Plasmoid.self
         function onExpandedChanged(expanded) {
             // don't autofocus when we're on the desktop
-            if (expanded && (plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal)) {
+            if (expanded && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)) {
                 mainTextArea.forceActiveFocus()
             }
         }
@@ -102,13 +102,13 @@ PlasmaCore.SvgItem {
         Timer {
             id: activationTimer
             interval: 250 // matches taskmanager delay
-            onTriggered: plasmoid.expanded = true
+            onTriggered: Plasmoid.expanded = true
         }
 
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-            onClicked: plasmoid.expanded = !plasmoid.expanded
+            onClicked: Plasmoid.expanded = !Plasmoid.expanded
 
             PlasmaCore.IconItem {
                 anchors.fill: parent
@@ -152,7 +152,7 @@ PlasmaCore.SvgItem {
 
             PlasmaComponents3.TextArea {
                 id: mainTextArea
-                property real cfgFontPointSize: plasmoid.configuration.fontSize
+                property real cfgFontPointSize: Plasmoid.configuration.fontSize
 
                 textFormat: TextEdit.RichText
                 onLinkActivated: Qt.openUrlExternally(link)
@@ -165,7 +165,7 @@ PlasmaCore.SvgItem {
 
                 Keys.onPressed: {
                     if (event.key === Qt.Key_Escape) {
-                        plasmoid.expanded = false;
+                        Plasmoid.expanded = false;
                         event.accepted = true;
                     } else if (event.modifiers === Qt.ControlModifier) {
                         if (event.key === Qt.Key_B) {
@@ -214,9 +214,9 @@ PlasmaCore.SvgItem {
 
                 onActiveFocusChanged: {
                     if (activeFocus && root.Window && (root.Window.window.flags & Qt.WindowDoesNotAcceptFocus)) {
-                        plasmoid.status = PlasmaCore.Types.AcceptingInputStatus
+                        Plasmoid.status = PlasmaCore.Types.AcceptingInputStatus
                     } else {
-                        plasmoid.status = PlasmaCore.Types.ActiveStatus
+                        Plasmoid.status = PlasmaCore.Types.ActiveStatus
                         note.save(mainTextArea.text);
                     }
                 }
@@ -230,9 +230,9 @@ PlasmaCore.SvgItem {
                 }
 
                 Component.onCompleted: {
-                    if (!plasmoid.configuration.fontSize) {
+                    if (!Plasmoid.configuration.fontSize) {
                         // Set fontSize to default if it is not set
-                        plasmoid.configuration.fontSize = mainTextArea.font.pointSize
+                        Plasmoid.configuration.fontSize = mainTextArea.font.pointSize
                     }
                 }
 
@@ -443,11 +443,11 @@ PlasmaCore.SvgItem {
                 focusPolicy: Qt.TabFocus
                 icon.name: "configure"
                 icon.color: textIconColor
-                onClicked: plasmoid.action("configure").trigger()
+                onClicked: Plasmoid.action("configure").trigger()
                 Accessible.name: settingsTooltip.text
                 QQC2.ToolTip {
                     id: settingsTooltip
-                    text: plasmoid.action("configure").text
+                    text: Plasmoid.action("configure").text
                 }
             }
 
@@ -472,7 +472,7 @@ PlasmaCore.SvgItem {
                         // is done in the same way every time.
                         documentHandler.stripAndSimplify(mainTextArea.text) == documentHandler.strippedClipboardText()
                     ) {
-                        plasmoid.action("remove").trigger();
+                        Plasmoid.action("remove").trigger();
                     } else {
                         discardConfirmationDialogLoader.open();
                     }
@@ -480,7 +480,7 @@ PlasmaCore.SvgItem {
                 Accessible.name: removeTooltip.text
                 QQC2.ToolTip {
                     id: removeTooltip
-                    text: plasmoid.action("remove").text
+                    text: Plasmoid.action("remove").text
                 }
             }
         }
@@ -509,29 +509,29 @@ PlasmaCore.SvgItem {
             standardButtons: StandardButton.Discard | StandardButton.Cancel
 
             onDiscard: {
-                plasmoid.action("remove").trigger()
+                Plasmoid.action("remove").trigger()
                 visible = false;
             }
         }
     }
 
     Component.onCompleted: {
-        plasmoid.setAction("change_note_color_white", i18nc("@item:inmenu", "White"));
-        plasmoid.setAction("change_note_color_black", i18nc("@item:inmenu", "Black"));
-        plasmoid.setAction("change_note_color_red", i18nc("@item:inmenu", "Red"));
-        plasmoid.setAction("change_note_color_orange", i18nc("@item:inmenu", "Orange"));
-        plasmoid.setAction("change_note_color_yellow", i18nc("@item:inmenu", "Yellow"));
-        plasmoid.setAction("change_note_color_green", i18nc("@item:inmenu", "Green"));
-        plasmoid.setAction("change_note_color_blue", i18nc("@item:inmenu", "Blue"));
-        plasmoid.setAction("change_note_color_pink", i18nc("@item:inmenu", "Pink"));
-        plasmoid.setAction("change_note_color_translucent", i18nc("@item:inmenu", "Translucent"));
-        plasmoid.setAction("change_note_color_translucent-light", i18nc("@item:inmenu", "Translucent Light"));
-        plasmoid.setActionSeparator("separator0");
+        Plasmoid.setAction("change_note_color_white", i18nc("@item:inmenu", "White"));
+        Plasmoid.setAction("change_note_color_black", i18nc("@item:inmenu", "Black"));
+        Plasmoid.setAction("change_note_color_red", i18nc("@item:inmenu", "Red"));
+        Plasmoid.setAction("change_note_color_orange", i18nc("@item:inmenu", "Orange"));
+        Plasmoid.setAction("change_note_color_yellow", i18nc("@item:inmenu", "Yellow"));
+        Plasmoid.setAction("change_note_color_green", i18nc("@item:inmenu", "Green"));
+        Plasmoid.setAction("change_note_color_blue", i18nc("@item:inmenu", "Blue"));
+        Plasmoid.setAction("change_note_color_pink", i18nc("@item:inmenu", "Pink"));
+        Plasmoid.setAction("change_note_color_translucent", i18nc("@item:inmenu", "Translucent"));
+        Plasmoid.setAction("change_note_color_translucent-light", i18nc("@item:inmenu", "Translucent Light"));
+        Plasmoid.setActionSeparator("separator0");
 
-        // plasmoid configuration doesn't check before emitting change signal
+        // Plasmoid configuration doesn't check before emitting change signal
         // explicit check is needed (at time of writing)
-        if (note.id != plasmoid.configuration.noteId) {
-            plasmoid.configuration.noteId = note.id;
+        if (note.id != Plasmoid.configuration.noteId) {
+            Plasmoid.configuration.noteId = note.id;
         }
     }
 
@@ -541,7 +541,7 @@ PlasmaCore.SvgItem {
 
     function actionTriggered(actionName) {
         if (actionName.indexOf("change_note_color_") == 0){
-            plasmoid.configuration.color = actionName.replace("change_note_color_", "");
+            Plasmoid.configuration.color = actionName.replace("change_note_color_", "");
         }
     }
 }
