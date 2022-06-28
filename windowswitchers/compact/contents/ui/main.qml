@@ -6,7 +6,7 @@
 
  SPDX-License-Identifier: GPL-2.0-or-later
  */
-import QtQuick 2.0
+import QtQuick 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
@@ -15,6 +15,36 @@ import org.kde.kwin 2.0 as KWin
 KWin.Switcher {
     id: tabBox
     currentIndex: compactListView.currentIndex
+
+    /**
+    * Returns the caption with adjustments for minimized items.
+    * @param caption the original caption
+    * @param mimized whether the item is minimized
+    * @return Caption adjusted for minimized state
+    **/
+    function itemCaption(caption, minimized) {
+        if (minimized) {
+            return "(" + caption + ")";
+        }
+        return caption;
+    }
+
+    TextMetrics {
+        id: textMetrics
+        property string longestCaption: tabBox.model.longestCaption()
+        text: itemCaption(longestCaption, true)
+        font.bold: true
+    }
+
+    onVisibleChanged: {
+        if (visible) {
+            // Window captions may have change completely
+            textMetrics.longestCaption = tabBox.model.longestCaption();
+        }
+    }
+    onModelChanged: {
+        textMetrics.longestCaption = tabBox.model.longestCaption();
+    }
 
     PlasmaCore.Dialog {
         id: dialog
@@ -26,29 +56,14 @@ KWin.Switcher {
 
         mainItem: Item {
             id: dialogMainItem
-            property int optimalWidth: compactListView.maxRowWidth
+
+            property int optimalWidth: textMetrics.width + PlasmaCore.Units.iconSizes.small + 2 * dialogMainItem.textMargin + hoverItem.margins.right + hoverItem.margins.left
             property int optimalHeight: compactListView.rowHeight * compactListView.count
-            property bool canStretchX: true
-            property bool canStretchY: false
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, optimalWidth), tabBox.screenGeometry.width * 0.8)
-            height: Math.min(Math.max(tabBox.screenGeometry.height * 0.2, optimalHeight), tabBox.screenGeometry.height * 0.8)
+            height: Math.min(optimalHeight, tabBox.screenGeometry.height * 0.8)
             focus: true
 
             property int textMargin: PlasmaCore.Units.smallSpacing
-
-            /**
-            * Returns the caption with adjustments for minimized items.
-            * @param caption the original caption
-            * @param mimized whether the item is minimized
-            * @return Caption adjusted for minimized state
-            **/
-            function itemCaption(caption, minimized) {
-                var text = caption;
-                if (minimized) {
-                    text = "(" + text + ")";
-                }
-                return text;
-            }
 
             // just to get the margin sizes
             PlasmaCore.FrameSvgItem {
@@ -81,7 +96,7 @@ KWin.Switcher {
                         id: captionItem
                         horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignBottom
-                        text: dialogMainItem.itemCaption(caption, minimized)
+                        text: itemCaption(caption, minimized)
                         font.weight: index === compactListView.currentIndex ? Font.Bold : Font.Normal
                         elide: Text.ElideMiddle
                         anchors {
@@ -104,42 +119,10 @@ KWin.Switcher {
                 }
             }
             ListView {
-                function calculateMaxRowWidth() {
-                    var width = 0;
-                    var textElement = Qt.createQmlObject(
-                        'import QtQuick 2.0;'
-                        + 'Text {\n'
-                        + '     text: "' + dialogMainItem.itemCaption(tabBox.model.longestCaption(), true) + '"\n'
-                        + '     font.bold: true\n'
-                        + '     visible: false\n'
-                        + '}',
-                        compactListView, "calculateMaxRowWidth");
-                    width = Math.max(textElement.width, width);
-                    textElement.destroy();
-                    return width + PlasmaCore.Units.iconSizes.small + 2 * dialogMainItem.textMargin + hoverItem.margins.right + hoverItem.margins.left
-                }
-                /**
-                * Calculates the height of one row based on the text height and icon size.
-                * @return Row height
-                **/
-                function calcRowHeight() {
-                    var textElement = Qt.createQmlObject(
-                        'import QtQuick 2.0;'
-                        + 'Text {\n'
-                        + '     text: "Some Text"\n'
-                        + '     font.bold: true\n'
-                        + '     visible: false\n'
-                        + '}',
-                        compactListView, "calcRowHeight");
-                    var height = textElement.height;
-                    textElement.destroy();
-                    // icon size or two text elements and margins and hoverItem margins
-                    return Math.max(PlasmaCore.Units.iconSizes.small, height + hoverItem.margins.top + hoverItem.margins.bottom);
-                }
                 id: compactListView
+
                 // the maximum text width + icon item width (32 + 4 margin) + margins for hover item
-                property int maxRowWidth: calculateMaxRowWidth()
-                property int rowHeight: calcRowHeight()
+                property int rowHeight: Math.max(PlasmaCore.Units.iconSizes.small, textMetrics.height + hoverItem.margins.top + hoverItem.margins.bottom)
                 anchors {
                     fill: parent
                 }
