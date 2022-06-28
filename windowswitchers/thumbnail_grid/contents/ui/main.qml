@@ -46,7 +46,17 @@ KWin.Switcher {
             property real screenFactor: tabBox.screenGeometry.width / tabBox.screenGeometry.height
             property int maxGridColumnsByWidth: Math.floor(maxWidth / thumbnailGridView.cellWidth)
 
-            property int gridColumns: maxGridColumnsByWidth
+            property int gridColumns: {         // Simple greedy algorithm
+                // respect screenGeometry
+                const c = Math.min(thumbnailGridView.count, maxGridColumnsByWidth);
+                const residue = thumbnailGridView.count % c;
+                if (residue == 0) {
+                    return c;
+                }
+                // start greedy recursion
+                return columnCountRecursion(c, c, c - residue);
+            }
+
             property int gridRows: Math.ceil(thumbnailGridView.count / gridColumns)
             property int optimalWidth: thumbnailGridView.cellWidth * gridColumns
             property int optimalHeight: thumbnailGridView.cellHeight * gridRows
@@ -56,21 +66,6 @@ KWin.Switcher {
             height: Math.min(Math.max(thumbnailGridView.cellHeight, optimalHeight), maxHeight)
 
             clip: true
-
-            // Simple greedy algorithm
-            function calculateColumnCount() {
-                // respect screenGeometry
-                const c = Math.min(thumbnailGridView.count, maxGridColumnsByWidth);
-
-                const residue = thumbnailGridView.count % c;
-                if (residue == 0) {
-                    gridColumns = c;
-                    return;
-                }
-
-                // start greedy recursion
-                gridColumns = columnCountRecursion(c, c, c - residue);
-            }
 
             // Step for greedy algorithm
             function columnCountRecursion(prevC, prevBestC, prevDiff) {
