@@ -7,6 +7,7 @@
  SPDX-License-Identifier: GPL-2.0-or-later
  */
 import QtQuick 2.0
+import QtQuick.Layouts 1.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
@@ -28,8 +29,7 @@ KWin.Switcher {
             property real screenFactor: tabBox.screenGeometry.width/tabBox.screenGeometry.height
             property int optimalWidth: (thumbnailListView.thumbnailWidth + hoverItem.margins.left + hoverItem.margins.right) * thumbnailListView.count
             property int optimalHeight: thumbnailListView.thumbnailWidth*(1.0/screenFactor) + hoverItem.margins.top + hoverItem.margins.bottom + PlasmaCore.Units.gridUnit * 2
-            property bool canStretchX: false
-            property bool canStretchY: false
+
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.3, optimalWidth), tabBox.screenGeometry.width * 0.9)
             height: Math.min(Math.max(tabBox.screenGeometry.height * 0.15, optimalHeight), tabBox.screenGeometry.height * 0.7)
             clip: true
@@ -100,58 +100,36 @@ KWin.Switcher {
                     function onCurrentIndexChanged() {thumbnailListView.currentIndex = tabBox.currentIndex;}
                 }
             }
-            Item {
-                height: PlasmaCore.Units.gridUnit * 2
+            RowLayout {
                 id: captionFrame
+
+                spacing: PlasmaCore.Units.smallSpacing * 2
+                height: PlasmaCore.Units.gridUnit * 2
+
                 anchors {
                     top: thumbnailListView.bottom
-                    left: parent.left
-                    right: parent.right
+                    horizontalCenter: thumbnailListView.horizontalCenter
                     bottom: parent.bottom
                     topMargin: hoverItem.margins.bottom
                 }
+
                 QIconItem {
                     id: iconItem
                     icon: thumbnailListView.currentItem ? thumbnailListView.currentItem.icon : ""
-                    width: PlasmaCore.Units.iconSizes.medium
-                    height: PlasmaCore.Units.iconSizes.medium
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        right: textItem.left
-                        rightMargin: PlasmaCore.Units.smallSpacing
-                    }
+                    Layout.preferredWidth: PlasmaCore.Units.iconSizes.medium
+                    Layout.preferredHeight: PlasmaCore.Units.iconSizes.medium
+                    Layout.alignment: Qt.AlignVCenter
                 }
+
                 PlasmaComponents3.Label {
-                    function constrainWidth() {
-                        if (textItem.width > textItem.maxWidth && textItem.width > 0 && textItem.maxWidth > 0) {
-                            textItem.width = textItem.maxWidth;
-                        } else {
-                            textItem.width = undefined;
-                        }
-                    }
-                    function calculateMaxWidth() {
-                        textItem.maxWidth = dialogMainItem.width - captionFrame.anchors.leftMargin - captionFrame.anchors.rightMargin - iconItem.width * 2 - captionFrame.anchors.rightMargin;
-                    }
                     id: textItem
-                    property int maxWidth: 0
+
                     text: thumbnailListView.currentItem ? thumbnailListView.currentItem.caption : ""
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
                     elide: Text.ElideMiddle
                     font.weight: Font.Bold
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        horizontalCenter: parent.horizontalCenter
-                    }
-                    onTextChanged: textItem.constrainWidth()
-                    Component.onCompleted: textItem.calculateMaxWidth()
-                    Connections {
-                        target: dialogMainItem
-                        function onWidthChanged() {
-                            textItem.calculateMaxWidth();
-                            textItem.constrainWidth();
-                        }
-                    }
+
+                    Layout.alignment: Qt.AlignVCenter
+                    Layout.maximumWidth: dialogMainItem.width - iconItem.width - captionFrame.spacing * 2
                 }
             }
             /*
