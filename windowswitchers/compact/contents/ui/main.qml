@@ -7,6 +7,7 @@
  SPDX-License-Identifier: GPL-2.0-or-later
  */
 import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
@@ -57,13 +58,11 @@ KWin.Switcher {
         mainItem: Item {
             id: dialogMainItem
 
-            property int optimalWidth: textMetrics.width + PlasmaCore.Units.iconSizes.small + 2 * dialogMainItem.textMargin + hoverItem.margins.right + hoverItem.margins.left
+            property int optimalWidth: textMetrics.width + PlasmaCore.Units.iconSizes.small + 2 * PlasmaCore.Units.smallSpacing + hoverItem.margins.right + hoverItem.margins.left
             property int optimalHeight: compactListView.rowHeight * compactListView.count
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, optimalWidth), tabBox.screenGeometry.width * 0.8)
             height: Math.min(optimalHeight, tabBox.screenGeometry.height * 0.8)
             focus: true
-
-            property int textMargin: PlasmaCore.Units.smallSpacing
 
             // just to get the margin sizes
             PlasmaCore.FrameSvgItem {
@@ -73,24 +72,30 @@ KWin.Switcher {
                 visible: false
             }
 
-            // delegate
-            Component {
-                id: listDelegate
-                Item {
-                    id: delegateItem
+            ListView {
+                id: compactListView
+
+                // the maximum text width + icon item width (32 + 4 margin) + margins for hover item
+                property int rowHeight: Math.max(PlasmaCore.Units.iconSizes.small, textMetrics.height + hoverItem.margins.top + hoverItem.margins.bottom)
+
+                anchors.fill: parent
+                clip: true
+
+                model: tabBox.model
+                delegate: RowLayout {
+
                     width: compactListView.width
                     height: compactListView.rowHeight
                     opacity: minimized ? 0.6 : 1.0
+
+                    spacing: 2 * PlasmaCore.Units.smallSpacing
+
                     QIconItem {
                         id: iconItem
                         icon: model.icon
-                        width: PlasmaCore.Units.iconSizes.small
-                        height: PlasmaCore.Units.iconSizes.small
-                        anchors {
-                            verticalCenter: parent.verticalCenter
-                            left: parent.left
-                            leftMargin: hoverItem.margins.left
-                        }
+                        Layout.preferredWidth: PlasmaCore.Units.iconSizes.small
+                        Layout.preferredHeight: PlasmaCore.Units.iconSizes.small
+                        Layout.leftMargin: hoverItem.margins.left
                     }
                     PlasmaComponents3.Label {
                         id: captionItem
@@ -99,38 +104,23 @@ KWin.Switcher {
                         text: itemCaption(caption, minimized)
                         font.weight: index === compactListView.currentIndex ? Font.Bold : Font.Normal
                         elide: Text.ElideMiddle
-                        anchors {
-                            left: iconItem.right
-                            right: parent.right
-                            top: parent.top
-                            bottom: parent.bottom
-                            topMargin: hoverItem.margins.top
-                            rightMargin: hoverItem.margins.right
-                            bottomMargin: hoverItem.margins.bottom
-                            leftMargin: 2 * dialogMainItem.textMargin
-                        }
+                        Layout.fillWidth: true
+                        Layout.rightMargin: hoverItem.margins.right
+                        Layout.topMargin: hoverItem.margins.top
+                        Layout.bottomMargin: hoverItem.margins.bottom
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
+                    TapHandler {
+                        onSingleTapped: {
+                            if (index === compactListView.currentIndex) {
+                                compactListView.model.activate(index);
+                                return;
+                            }
                             compactListView.currentIndex = index;
                         }
+                        onDoubleTapped: compactListView.model.activate(index)
                     }
                 }
-            }
-            ListView {
-                id: compactListView
-
-                // the maximum text width + icon item width (32 + 4 margin) + margins for hover item
-                property int rowHeight: Math.max(PlasmaCore.Units.iconSizes.small, textMetrics.height + hoverItem.margins.top + hoverItem.margins.bottom)
-                anchors {
-                    fill: parent
-                }
-                model: tabBox.model
-                clip: true
-                delegate: listDelegate
                 highlight: PlasmaCore.FrameSvgItem {
-                    id: highlightItem
                     imagePath: "widgets/viewitem"
                     prefix: "hover"
                     width: compactListView.width
