@@ -15,9 +15,8 @@
 
 BingProvider::BingProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : PotdProvider(parent, data, args)
-    , m_screenDPI(args.size() >= 3 ? args[2].toDouble() : 1)
-    , m_screenWidth(args.size() >= 2 ? args[0].toInt() * m_screenDPI : 0)
-    , m_screenHeight(args.size() >= 2 ? args[1].toInt() * m_screenDPI : 0)
+    , m_screenWidth(args.size() >= 2 ? args[0].toInt() : 0)
+    , m_screenHeight(args.size() >= 2 ? args[1].toInt() : 0)
 {
     const QUrl url(QStringLiteral("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"));
 
