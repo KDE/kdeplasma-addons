@@ -33,7 +33,9 @@ Kirigami.FormLayout {
                 return [cfg_Category];
             } else if (identifier === "bing") {
                 // Bing supports 1366/1920/UHD resolutions
-                return [Screen.width, Screen.height, Screen.devicePixelRatio];
+                const w = Screen.width * Screen.devicePixelRatio > 1920 ? 3840 : 1920;
+                const h = Screen.height * Screen.devicePixelRatio > 1080 ? 2160 : 1080;
+                return [w, h];
             }
             return [];
         }
