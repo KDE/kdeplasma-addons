@@ -217,22 +217,22 @@ PotdClient *PotdEngine::registerClient(const QString &identifier, const QVariant
 
 void PotdEngine::unregisterClient(const QString &identifier, const QVariantList &args)
 {
-    auto pr = m_clientMap.equal_range(identifier);
+    auto [beginIt, endIt] = m_clientMap.equal_range(identifier);
 
-    while (pr.first != pr.second) {
+    while (beginIt != endIt) {
         // find exact match
-        if (pr.first->second.client->m_args == args) {
-            pr.first->second.instanceCount--;
-            qCDebug(WALLPAPERPOTD) << identifier << "with arguments" << args << "is unregistered. Remaining client(s):" << pr.first->second.instanceCount;
-            if (!pr.first->second.instanceCount) {
-                delete pr.first->second.client;
-                m_clientMap.erase(pr.first);
+        if (beginIt->second.client->m_args == args) {
+            beginIt->second.instanceCount--;
+            qCDebug(WALLPAPERPOTD) << identifier << "with arguments" << args << "is unregistered. Remaining client(s):" << beginIt->second.instanceCount;
+            if (!beginIt->second.instanceCount) {
+                delete beginIt->second.client;
+                m_clientMap.erase(beginIt);
                 qCDebug(WALLPAPERPOTD) << identifier << "with arguments" << args << "is freed.";
                 break;
             }
         }
 
-        pr.first++;
+        beginIt++;
     }
 }
 
@@ -240,11 +240,11 @@ void PotdEngine::updateSource(bool refresh)
 {
     m_lastUpdateSuccess = true;
 
-    for (const auto &pr : std::as_const(m_clientMap)) {
-        connect(pr.second.client, &PotdClient::done, this, &PotdEngine::slotDone);
+    for (const auto &[_, clientPair] : std::as_const(m_clientMap)) {
+        connect(clientPair.client, &PotdClient::done, this, &PotdEngine::slotDone);
         m_updateCount++;
-        qCDebug(WALLPAPERPOTD) << pr.second.client->m_metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")) << "starts updating wallpaper.";
-        pr.second.client->updateSource(refresh);
+        qCDebug(WALLPAPERPOTD) << clientPair.client->m_metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")) << "starts updating wallpaper.";
+        clientPair.client->updateSource(refresh);
     }
 }
 
