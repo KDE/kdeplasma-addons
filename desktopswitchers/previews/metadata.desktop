@@ -2,6 +2,7 @@
 Name=Previews
 Name[ar]=المعاينات
 Name[az]=Miniatürlər
+Name[bg]=Предварителен преглед
 Name[ca]=Vistes prèvies
 Name[ca@valencia]=Vistes prèvies
 Name[cs]=Náhledy
@@ -47,6 +48,7 @@ Name[zh_TW]=預覽
 Comment=A desktop switcher layout with previews of the desktops
 Comment[ar]=تخطيط محوّل سطح المكتب مع معاينات لسطح المكتب
 Comment[az]=İş Masalarının miniatürləri ilə İş Masası dəyişdiricisi
+Comment[bg]=Програма за превключване на работни плотове с предварителен преглед
 Comment[ca]=Una disposició del commutador d'escriptori amb vistes prèvies dels escriptoris
 Comment[ca@valencia]=Una disposició del commutador d'escriptori amb vistes prèvies dels escriptoris
 Comment[cs]=Přepínač oken s náhledy ploch
