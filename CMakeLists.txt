@@ -33,7 +33,7 @@ include(CMakePackageConfigHelpers)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(ECMDeprecationSettings)
-include(ECMQmlModule)
+include(ECMFindQmlModule)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
@@ -51,6 +51,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Config
     CoreAddons
     Declarative
+    GlobalAccel
     Holidays
     I18n
     KIO
@@ -100,6 +101,15 @@ if(ICU_FOUND)
     set(HAVE_ICU TRUE)
 endif()
 
+# TODO: KWinEffects pulls these, but they should not be needed
+find_package(epoxy REQUIRED)
+find_package(XCB REQUIRED COMPONENTS XCB)
+
+find_package(KWinDBusInterface CONFIG REQUIRED)
+find_package(KWinEffects REQUIRED COMPONENTS
+    kwineffects
+)
+
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
     -DQT_NO_URL_CAST_FROM_STRING
@@ -109,7 +119,10 @@ ecm_set_disabled_deprecation_versions(
     QT 6.5.0
 )
 
+ecm_find_qmlmodule(QtQuick3D 1.15)
+
 add_subdirectory(dict)
+add_subdirectory(effects)
 add_subdirectory(profiles)
 add_subdirectory(applets)
 add_subdirectory(runners)
