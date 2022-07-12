@@ -28,14 +28,6 @@ KWin.Switcher {
         x: tabBox.screenGeometry.x + tabBox.screenGeometry.width * 0.5 - dialogMainItem.width * 0.5
         y: tabBox.screenGeometry.y + tabBox.screenGeometry.height * 0.5 - dialogMainItem.height * 0.5
 
-        onVisibleChanged: {
-            if (visible) {
-                dialogMainItem.calculateColumnCount();
-            } else {
-                thumbnailGridView.highCount = 0;
-            }
-        }
-
         mainItem: Item {
             id: dialogMainItem
 
@@ -60,8 +52,6 @@ KWin.Switcher {
             property int gridRows: Math.ceil(thumbnailGridView.count / gridColumns)
             property int optimalWidth: thumbnailGridView.cellWidth * gridColumns
             property int optimalHeight: thumbnailGridView.cellHeight * gridRows
-            property bool canStretchX: false
-            property bool canStretchY: false
             width: Math.min(Math.max(thumbnailGridView.cellWidth, optimalWidth), maxWidth)
             height: Math.min(Math.max(thumbnailGridView.cellHeight, optimalHeight), maxHeight)
 
@@ -119,15 +109,6 @@ KWin.Switcher {
 
                 keyNavigationWraps: true
                 highlightMoveDuration: 0
-
-                // Allow expansion on increasing count
-                property int highCount: 0
-                onCountChanged: {
-                    if (highCount < count) {
-                        dialogMainItem.calculateColumnCount();
-                        highCount = count;
-                    }
-                }
 
                 delegate: Item {
                     id: thumbnailGridItem
