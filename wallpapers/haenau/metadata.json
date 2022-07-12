@@ -3,15 +3,42 @@
         "Authors": [
             {
                 "Email": "mart@kde.org",
-                "Name": "Marco Martin"
+                "Name": "Marco Martin",
+                "Name[ca@valencia]": "Marco Martin",
+                "Name[ca]": "Marco Martin",
+                "Name[es]": "Marco Martin",
+                "Name[nl]": "Marco Martin",
+                "Name[pt]": "Marco Martin",
+                "Name[tr]": "Marco Martin",
+                "Name[uk]": "Marco Martin",
+                "Name[vi]": "Marco Martin",
+                "Name[x-test]": "xxMarco Martinxx"
             }
         ],
         "Description": "Haenau wallpaper",
+        "Description[ca@valencia]": "Fons de pantalla Haenau",
+        "Description[ca]": "Fons de pantalla Haenau",
+        "Description[es]": "Fondo de pantalla Haenau",
+        "Description[nl]": "Haenau achtergrondafbeelding",
+        "Description[pt]": "Papel de parede Haenau",
+        "Description[tr]": "Haenau duvar kağıdı",
+        "Description[uk]": "Шпалера Ганау",
+        "Description[vi]": "Phông nền Haenau",
+        "Description[x-test]": "xxHaenau wallpaperxx",
         "EnabledByDefault": true,
         "Icon": "preferences-desktop-wallpaper",
         "Id": "org.kde.haenau",
         "License": "LGPL-2.1",
         "Name": "Haenau",
+        "Name[ca@valencia]": "Haenau",
+        "Name[ca]": "Haenau",
+        "Name[es]": "Haenau",
+        "Name[nl]": "Haenau",
+        "Name[pt]": "Haenau",
+        "Name[tr]": "Haenau",
+        "Name[uk]": "Ганау",
+        "Name[vi]": "Haenau",
+        "Name[x-test]": "xxHaenauxx",
         "ServiceTypes": [
             "Plasma/Wallpaper"
         ],

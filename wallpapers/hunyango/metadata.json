@@ -3,15 +3,42 @@
         "Authors": [
             {
                 "Email": "mart@kde.org",
-                "Name": "Marco Martin"
+                "Name": "Marco Martin",
+                "Name[ca@valencia]": "Marco Martin",
+                "Name[ca]": "Marco Martin",
+                "Name[es]": "Marco Martin",
+                "Name[nl]": "Marco Martin",
+                "Name[pt]": "Marco Martin",
+                "Name[tr]": "Marco Martin",
+                "Name[uk]": "Marco Martin",
+                "Name[vi]": "Marco Martin",
+                "Name[x-test]": "xxMarco Martinxx"
             }
         ],
         "Description": "Hunyango wallpaper",
+        "Description[ca@valencia]": "Fons de pantalla Hunyango",
+        "Description[ca]": "Fons de pantalla Hunyango",
+        "Description[es]": "Fondo de pantalla Hunyango",
+        "Description[nl]": "Hunyango achtergrondafbeelding",
+        "Description[pt]": "Papel de parede Hunyango",
+        "Description[tr]": "Hunyango duvar kağıdı",
+        "Description[uk]": "Шпалера Уньянго",
+        "Description[vi]": "Phông nền Hunyango",
+        "Description[x-test]": "xxHunyango wallpaperxx",
         "EnabledByDefault": true,
         "Icon": "preferences-desktop-wallpaper",
         "Id": "org.kde.hunyango",
         "License": "LGPL-2.1",
         "Name": "Hunyango",
+        "Name[ca@valencia]": "Hunyango",
+        "Name[ca]": "Hunyango",
+        "Name[es]": "Hunyango",
+        "Name[nl]": "Hunyango",
+        "Name[pt]": "Hunyango",
+        "Name[tr]": "Hunyango",
+        "Name[uk]": "Уньянго",
+        "Name[vi]": "Hunyango",
+        "Name[x-test]": "xxHunyangoxx",
         "ServiceTypes": [
             "Plasma/Wallpaper"
         ],
