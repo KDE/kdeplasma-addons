@@ -9,6 +9,7 @@
                 "Name[es]": "Marco Martin",
                 "Name[fr]": "Marco Martin",
                 "Name[ia]": "Marco Martin",
+                "Name[it]": "Marco Martin",
                 "Name[ko]": "Marco Martin",
                 "Name[nl]": "Marco Martin",
                 "Name[pt]": "Marco Martin",
@@ -17,7 +18,8 @@
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[vi]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx"
+                "Name[x-test]": "xxMarco Martinxx",
+                "Name[zh_CN]": "Marco Martin"
             }
         ],
         "Description": "Haenau wallpaper",
@@ -26,6 +28,7 @@
         "Description[es]": "Fondo de pantalla Haenau",
         "Description[fr]": "Fonds d'écran de Haenau",
         "Description[ia]": "Tapete de papiro de Haenau",
+        "Description[it]": "Sfondo Haenau",
         "Description[ko]": "Haenau 배경 그림",
         "Description[nl]": "Haenau achtergrondafbeelding",
         "Description[pt]": "Papel de parede Haenau",
@@ -35,6 +38,7 @@
         "Description[uk]": "Шпалера Ганау",
         "Description[vi]": "Phông nền Haenau",
         "Description[x-test]": "xxHaenau wallpaperxx",
+        "Description[zh_CN]": "色彩层次壁纸",
         "EnabledByDefault": true,
         "Icon": "preferences-desktop-wallpaper",
         "Id": "org.kde.haenau",
@@ -45,6 +49,7 @@
         "Name[es]": "Haenau",
         "Name[fr]": "Haenau",
         "Name[ia]": "Haenau",
+        "Name[it]": "Haenau",
         "Name[ko]": "Haenau",
         "Name[nl]": "Haenau",
         "Name[pt]": "Haenau",
@@ -54,6 +59,7 @@
         "Name[uk]": "Ганау",
         "Name[vi]": "Haenau",
         "Name[x-test]": "xxHaenauxx",
+        "Name[zh_CN]": "色彩层次",
         "ServiceTypes": [
             "Plasma/Wallpaper"
         ],

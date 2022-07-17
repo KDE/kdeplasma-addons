@@ -9,6 +9,7 @@
                 "Name[es]": "Weng Xuetian",
                 "Name[fr]": "Weng Xuetian",
                 "Name[ia]": "Weng Xuetian",
+                "Name[it]": "Weng Xuetian",
                 "Name[ko]": "Weng Xuetian",
                 "Name[nl]": "Weng Xuetian",
                 "Name[pt]": "Weng Xuetian",
@@ -17,7 +18,8 @@
                 "Name[tr]": "Weng Xuetian",
                 "Name[uk]": "Weng Xuetian",
                 "Name[vi]": "Weng Xuetian",
-                "Name[x-test]": "xxWeng Xuetianxx"
+                "Name[x-test]": "xxWeng Xuetianxx",
+                "Name[zh_CN]": "Weng Xuetian"
             }
         ],
         "Description": "A new picture from the Internet each day",
@@ -26,6 +28,7 @@
         "Description[es]": "Una nueva imagen de Internet cada día",
         "Description[fr]": "Une nouvelle image provenant d'Internet chaque jour",
         "Description[ia]": "Un nove photo ex le internet cata die",
+        "Description[it]": "Una nuova immagine ogni giorno da Internet",
         "Description[ko]": "인터넷에서 매일 새 그림 가져오기",
         "Description[nl]": "Elke dag een nieuw plaatje uit het internet",
         "Description[pt]": "Uma nova imagem da Internet todos os dias",
@@ -35,6 +38,7 @@
         "Description[uk]": "Нове зображення з інтернету щодня",
         "Description[vi]": "Mỗi ngày một ảnh mới từ Liên Mạng",
         "Description[x-test]": "xxA new picture from the Internet each dayxx",
+        "Description[zh_CN]": "每天从互联网获取一张新图片",
         "EnabledByDefault": true,
         "Icon": "office-calendar",
         "Id": "org.kde.potd",
@@ -69,6 +73,7 @@
         "Name[uk]": "Картинка дня",
         "Name[vi]": "Ảnh của ngày",
         "Name[x-test]": "xxPicture of the Dayxx",
+        "Name[zh_CN]": "每日一图",
         "ServiceTypes": [
             "Plasma/Wallpaper"
         ],

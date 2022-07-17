@@ -39,6 +39,7 @@
         "Description[es]": "Un esquema de selección de escritorios con vistas previas de los escritorios",
         "Description[fr]": "Une disposition de commutateur de bureaux avec des aperçus des bureaux",
         "Description[ia]": "Un disposition de commutator de scriptorio con vistas preliminar de scriptorios",
+        "Description[it]": "Un selettore dei desktop con le anteprime dei desktop",
         "Description[ko]": "바탕 화면 미리 보기를 제공하는 바탕 화면 전환기 레이아웃",
         "Description[nl]": "Een indeling van bureaubladwisselaar met voorbeelden op de bureaubladen",
         "Description[pt]": "Uma disposição de mudança de ecrãs com antevisões dos mesmos",
@@ -48,6 +49,7 @@
         "Description[uk]": "Компонування перемикача стільниць з ескізами стільниць",
         "Description[vi]": "Bố cục trình chuyển bàn làm việc với phần xem thử các bàn làm việc",
         "Description[x-test]": "xxA desktop switcher layout with previews of the desktopsxx",
+        "Description[zh_CN]": "带桌面预览的切换布局",
         "Icon": "preferences-system-desktop-switcher-previews",
         "Id": "previews",
         "License": "GPL",
@@ -57,6 +59,7 @@
         "Name[es]": "Vistas previas",
         "Name[fr]": "Aperçus",
         "Name[ia]": "Vistas preliminar",
+        "Name[it]": "Anteprime",
         "Name[ko]": "미리 보기",
         "Name[nl]": "Voorvertoningen",
         "Name[pt]": "Antevisões",
@@ -66,6 +69,7 @@
         "Name[uk]": "Ескізи",
         "Name[vi]": "Xem thử",
         "Name[x-test]": "xxPreviewsxx",
+        "Name[zh_CN]": "预览",
         "ServiceTypes": [
             "KWin/DesktopSwitcher"
         ],

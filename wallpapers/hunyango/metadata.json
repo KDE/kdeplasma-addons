@@ -9,6 +9,7 @@
                 "Name[es]": "Marco Martin",
                 "Name[fr]": "Marco Martin",
                 "Name[ia]": "Marco Martin",
+                "Name[it]": "Marco Martin",
                 "Name[ko]": "Marco Martin",
                 "Name[nl]": "Marco Martin",
                 "Name[pt]": "Marco Martin",
@@ -17,7 +18,8 @@
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[vi]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx"
+                "Name[x-test]": "xxMarco Martinxx",
+                "Name[zh_CN]": "Marco Martin"
             }
         ],
         "Description": "Hunyango wallpaper",
@@ -26,6 +28,7 @@
         "Description[es]": "Fondo de pantalla Hunyango",
         "Description[fr]": "Fond d'écran de Hunyango",
         "Description[ia]": "Tapete de papiro de Hunyango",
+        "Description[it]": "Sfondo Hunyango",
         "Description[ko]": "Hunyango 배경 그림",
         "Description[nl]": "Hunyango achtergrondafbeelding",
         "Description[pt]": "Papel de parede Hunyango",
@@ -35,6 +38,7 @@
         "Description[uk]": "Шпалера Уньянго",
         "Description[vi]": "Phông nền Hunyango",
         "Description[x-test]": "xxHunyango wallpaperxx",
+        "Description[zh_CN]": "变色龙壁纸",
         "EnabledByDefault": true,
         "Icon": "preferences-desktop-wallpaper",
         "Id": "org.kde.hunyango",
@@ -45,6 +49,7 @@
         "Name[es]": "Hunyango",
         "Name[fr]": "Hunyango",
         "Name[ia]": "Hunyango",
+        "Name[it]": "Hunyango",
         "Name[ko]": "Hunyango",
         "Name[nl]": "Hunyango",
         "Name[pt]": "Hunyango",
@@ -54,6 +59,7 @@
         "Name[uk]": "Уньянго",
         "Name[vi]": "Hunyango",
         "Name[x-test]": "xxHunyangoxx",
+        "Name[zh_CN]": "变色龙",
         "ServiceTypes": [
             "Plasma/Wallpaper"
         ],
