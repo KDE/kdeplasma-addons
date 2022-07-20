@@ -191,6 +191,11 @@ public:
         return mMaxStripNum;
     }
 
+    bool ready() const
+    {
+        return mReady;
+    }
+
     void save();
 
 private:
@@ -227,6 +232,7 @@ private:
     bool mScaleComic = false;
     bool mIsLeftToRight = false;
     bool mIsTopToBottom = false;
+    bool mReady = false;
 
     KConfigGroup mCfg;
 };

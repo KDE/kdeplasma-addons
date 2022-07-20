@@ -61,6 +61,7 @@ void ComicData::setData(const ComicMetaData &data)
         mPrev = data.previousIdentifier;
         mNext = data.nextIdentifier;
         mAdditionalText = data.additionalText;
+        mReady = true;
     }
 
     mWebsiteUrl = data.websiteUrl;
