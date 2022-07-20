@@ -134,9 +134,6 @@ private Q_SLOTS:
     void slotWebsite();
     void slotStorePosition();
     void checkDayChanged();
-    void createComicBook();
-    void slotArchive(int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier);
-    void slotArchiveFinished(KJob *job);
 
 public Q_SLOTS:
     void configChanged() override;

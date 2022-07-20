@@ -12,8 +12,6 @@
 #include "comic.h"
 #include "checknewstrips.h"
 #include "comic_debug.h"
-#include "comicarchivedialog.h"
-#include "comicarchivejob.h"
 #include "comicsaver.h"
 #include "stripselector.h"
 
@@ -31,6 +29,7 @@
 #include <KApplicationTrader>
 #include <KConfigDialog>
 #include <KIO/OpenUrlJob>
+#include <KLocalizedString>
 #include <KNotification>
 #include <KService>
 #include <KStandardShortcut>
@@ -123,10 +122,6 @@ void ComicApplet::init()
     mActionSaveComicAs = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")), i18nc("@action", "&Save Comic As…"), this);
     mActions.append(mActionSaveComicAs);
     connect(mActionSaveComicAs, &QAction::triggered, this, &ComicApplet::slotSaveComicAs);
-
-    mActionCreateComicBook = new QAction(QIcon::fromTheme(QStringLiteral("application-epub+zip")), i18nc("@action", "&Create Comic Book Archive…"), this);
-    mActions.append(mActionCreateComicBook);
-    connect(mActionCreateComicBook, &QAction::triggered, this, &ComicApplet::createComicBook);
 
     mActionScaleContent = new QAction(QIcon::fromTheme(QStringLiteral("zoom-original")), //
                                       i18nc("@option:check Context menu of comic image", "&Actual Size"),
@@ -435,49 +430,6 @@ void ComicApplet::slotShop()
     job->start();
 }
 
-void ComicApplet::createComicBook()
-{
-    ComicArchiveDialog *dialog = new ComicArchiveDialog(mCurrent.id(), //
-                                                        mCurrent.title(),
-                                                        mCurrent.type(),
-                                                        mCurrent.current(),
-                                                        mCurrent.first(),
-                                                        mSavingDir->getDir());
-    dialog->setAttribute(Qt::WA_DeleteOnClose); // to have destroyed emitted upon closing
-    connect(dialog, &ComicArchiveDialog::archive, this, &ComicApplet::slotArchive);
-    dialog->show();
-}
-
-void ComicApplet::slotArchive(int archiveType, const QUrl &dest, const QString &fromIdentifier, const QString &toIdentifier)
-{
-    if (!mEngine) {
-        return;
-    }
-
-    mSavingDir->setDir(dest.path());
-
-    const QString id = mCurrent.id();
-    qDebug() << "Archiving:" << id << archiveType << dest << fromIdentifier << toIdentifier;
-    ComicArchiveJob *job = new ComicArchiveJob(dest, mEngine, static_cast<ComicArchiveJob::ArchiveType>(archiveType), mCurrent.type(), id, this);
-    job->setFromIdentifier(id + QLatin1Char(':') + fromIdentifier);
-    job->setToIdentifier(id + QLatin1Char(':') + toIdentifier);
-    if (job->isValid()) {
-        connect(job, &ComicArchiveJob::finished, this, &ComicApplet::slotArchiveFinished);
-        KIO::getJobTracker()->registerJob(job);
-        job->start();
-    } else {
-        qWarning() << "Archiving job is not valid.";
-        delete job;
-    }
-}
-
-void ComicApplet::slotArchiveFinished(KJob *job)
-{
-    if (job->error()) {
-        KNotification::event(KNotification::Warning, i18n("Archiving comic failed"), job->errorText(), QStringLiteral("dialog-warning"));
-    }
-}
-
 QList<QAction *> ComicApplet::contextualActions()
 {
     return mActions;
@@ -526,7 +478,6 @@ void ComicApplet::updateContextMenu()
         mActionStorePosition->setEnabled(false);
         mActionGoJump->setEnabled(false);
         mActionSaveComicAs->setEnabled(false);
-        mActionCreateComicBook->setEnabled(false);
         mActionScaleContent->setChecked(false);
     } else {
         mActionGoFirst->setVisible(mCurrent.hasFirst());
@@ -538,7 +489,6 @@ void ComicApplet::updateContextMenu()
         mActionStorePosition->setEnabled(true);
         mActionGoJump->setEnabled(true);
         mActionSaveComicAs->setEnabled(true);
-        mActionCreateComicBook->setEnabled(true);
     }
 }
 

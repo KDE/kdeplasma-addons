@@ -6,17 +6,12 @@ set(comic_SRCS
     comic.cpp
     comicmodel.cpp
     comicupdater.cpp
-    comicarchivejob.cpp
-    comicarchivedialog.cpp
     checknewstrips.cpp
     comicdata.cpp
     comicinfo.cpp
     comicsaver.cpp
     stripselector.cpp
     activecomicmodel.cpp
-)
-
-ki18n_wrap_ui(comic_SRCS comicarchivedialog.ui
 )
 
 kcoreaddons_add_plugin(org.kde.plasma.comic SOURCES ${comic_SRCS} INSTALL_NAMESPACE "plasma/applets")
