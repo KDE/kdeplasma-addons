@@ -131,6 +131,7 @@ private Q_SLOTS:
     void slotSaveComicAs();
     void slotScaleToContent();
     void slotShop();
+    void slotWebsite();
     void slotStorePosition();
     void checkDayChanged();
     void createComicBook();
@@ -208,6 +209,7 @@ private:
     QAction *mActionGoLast;
     QAction *mActionGoJump;
     QAction *mActionScaleContent;
+    QAction *mActionWebsite;
     QAction *mActionShop;
     QAction *mActionStorePosition;
     QAction *mActionNextNewStripTab;

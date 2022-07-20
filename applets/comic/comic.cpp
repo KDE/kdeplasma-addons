@@ -28,9 +28,11 @@
 #include <QWindow>
 
 #include <KActionCollection>
+#include <KApplicationTrader>
 #include <KConfigDialog>
 #include <KIO/OpenUrlJob>
 #include <KNotification>
+#include <KService>
 #include <KStandardShortcut>
 #include <kuiserverjobtracker.h>
 
@@ -100,6 +102,18 @@ void ComicApplet::init()
     mActionGoJump = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")), i18nc("@action", "Jump to Strip…"), this);
     mActions.append(mActionGoJump);
     connect(mActionGoJump, &QAction::triggered, this, &ComicApplet::slotGoJump);
+
+    mActionWebsite = new QAction(i18nc("@action", "Visit the Website"), this);
+    KService::Ptr browser = KApplicationTrader::preferredService(QStringLiteral("x-scheme-handler/https"));
+
+    if (browser) {
+        mActionWebsite->setText(i18nc("@action:inmenu %1 is the name of a web browser", "View in %1", browser->name()));
+        mActionWebsite->setIcon(QIcon::fromTheme(browser->icon()));
+    }
+
+    mActionWebsite->setEnabled(false);
+    mActions.append(mActionWebsite);
+    connect(mActionWebsite, &QAction::triggered, this, &ComicApplet::slotWebsite);
 
     mActionShop = new QAction(i18nc("@action", "Visit the Shop &Website"), this);
     mActionShop->setEnabled(false);
@@ -185,8 +199,6 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     }
 
     mCurrent.setData(data);
-
-    setAssociatedApplicationUrls(QList<QUrl>() << mCurrent.websiteUrl());
 
     // looking at the last index, thus not mark it as new
     KConfigGroup cg = config();
@@ -411,6 +423,12 @@ void ComicApplet::slotStorePosition()
     mCurrent.storePosition(mActionStorePosition->isChecked());
 }
 
+void ComicApplet::slotWebsite()
+{
+    auto *job = new KIO::OpenUrlJob(mCurrent.websiteUrl());
+    job->start();
+}
+
 void ComicApplet::slotShop()
 {
     auto *job = new KIO::OpenUrlJob(mCurrent.shopUrl());
@@ -503,6 +521,7 @@ void ComicApplet::updateContextMenu()
         mActionGoFirst->setEnabled(false);
         mActionGoLast->setEnabled(false);
         mActionScaleContent->setEnabled(false);
+        mActionWebsite->setEnabled(false);
         mActionShop->setEnabled(false);
         mActionStorePosition->setEnabled(false);
         mActionGoJump->setEnabled(false);
@@ -513,6 +532,7 @@ void ComicApplet::updateContextMenu()
         mActionGoFirst->setVisible(mCurrent.hasFirst());
         mActionGoFirst->setEnabled(mCurrent.hasPrev());
         mActionGoLast->setEnabled(true);
+        mActionWebsite->setEnabled(true);
         mActionShop->setEnabled(mCurrent.shopUrl().isValid());
         mActionScaleContent->setEnabled(true);
         mActionStorePosition->setEnabled(true);
