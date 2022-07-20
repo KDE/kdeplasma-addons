@@ -495,6 +495,9 @@ void ComicApplet::updateContextMenu()
 {
     if (mCurrent.id().isEmpty()) {
         mActiveComicModel->clear();
+    }
+
+    if (mCurrent.id().isEmpty() || !mCurrent.ready()) {
         mActionNextNewStripTab->setEnabled(false);
         mActionGoFirst->setEnabled(false);
         mActionGoLast->setEnabled(false);

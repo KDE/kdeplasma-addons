@@ -62,6 +62,7 @@ void ComicData::setData(const Plasma::DataEngine::Data &data)
         mPrev = data[QStringLiteral("Previous identifier suffix")].toString();
         mNext = data[QStringLiteral("Next identifier suffix")].toString();
         mAdditionalText = data[QStringLiteral("Additional text")].toString();
+        mReady = true;
     }
 
     mWebsiteUrl = data[QStringLiteral("Website Url")].toUrl();
