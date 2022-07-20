@@ -503,9 +503,7 @@ void ComicApplet::updateContextMenu()
         mActionGoFirst->setEnabled(false);
         mActionGoLast->setEnabled(false);
         mActionScaleContent->setEnabled(false);
-        if (mActionShop) {
-            mActionShop->setEnabled(false);
-        }
+        mActionShop->setEnabled(false);
         mActionStorePosition->setEnabled(false);
         mActionGoJump->setEnabled(false);
         mActionSaveComicAs->setEnabled(false);
@@ -515,9 +513,7 @@ void ComicApplet::updateContextMenu()
         mActionGoFirst->setVisible(mCurrent.hasFirst());
         mActionGoFirst->setEnabled(mCurrent.hasPrev());
         mActionGoLast->setEnabled(true);
-        if (mActionShop) {
-            mActionShop->setEnabled(mCurrent.shopUrl().isValid());
-        }
+        mActionShop->setEnabled(mCurrent.shopUrl().isValid());
         mActionScaleContent->setEnabled(true);
         mActionStorePosition->setEnabled(true);
         mActionGoJump->setEnabled(true);
