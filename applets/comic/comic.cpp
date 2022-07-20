@@ -187,7 +187,7 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
         return;
     }
 
-    setConfigurationRequired(false);
+    setConfigurationRequired(mCurrent.id().isEmpty());
 
     // there was an error, display information as image
     if (data.error) {
@@ -503,9 +503,9 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
         mEngine->requestSource(identifier);
         slotScaleToContent();
     } else {
+        setBusy(false);
         qWarning() << "Either no identifier was specified or the engine could not be created:"
                    << "id" << id;
-        setConfigurationRequired(true);
     }
     updateContextMenu();
 }
