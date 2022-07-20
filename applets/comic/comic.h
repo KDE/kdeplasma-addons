@@ -39,7 +39,6 @@ class ComicApplet : public Plasma::Applet
     Q_OBJECT
     Q_PROPERTY(QObject *comicsModel READ comicsModel NOTIFY comicModelChanged)
     Q_PROPERTY(QObject *availableComicsModel READ availableComicsModel CONSTANT)
-    Q_PROPERTY(bool showComicUrl READ showComicUrl WRITE setShowComicUrl NOTIFY showComicUrlChanged)
     Q_PROPERTY(bool showComicAuthor READ showComicAuthor WRITE setShowComicAuthor NOTIFY showComicAuthorChanged)
     Q_PROPERTY(bool showComicTitle READ showComicTitle WRITE setShowComicTitle NOTIFY showComicTitleChanged)
     Q_PROPERTY(bool showComicIdentifier READ showComicIdentifier WRITE setShowComicIdentifier NOTIFY showComicIdentifierChanged)
@@ -67,9 +66,6 @@ public:
 
     QStringList tabIdentifiers() const;
     void setTabIdentifiers(const QStringList &tabs);
-
-    bool showComicUrl() const;
-    void setShowComicUrl(bool show);
 
     bool showComicAuthor() const;
     void setShowComicAuthor(bool show);
@@ -104,7 +100,6 @@ public:
 
 Q_SIGNALS:
     void comicModelChanged();
-    void showComicUrlChanged();
     void showComicAuthorChanged();
     void showComicTitleChanged();
     void showComicIdentifierChanged();
@@ -193,7 +188,6 @@ private:
     QString mOldSource;
     ConfigWidget *mConfigWidget;
     bool mDifferentComic;
-    bool mShowComicUrl;
     bool mShowComicAuthor;
     bool mShowComicTitle;
     bool mShowComicIdentifier;

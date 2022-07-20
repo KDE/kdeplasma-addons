@@ -173,7 +173,6 @@ Item {
         }
 
         comicData: plasmoid.nativeInterface.comicData
-        showUrl: plasmoid.nativeInterface.showComicUrl
         showIdentifier: plasmoid.nativeInterface.showComicIdentifier
     }
 

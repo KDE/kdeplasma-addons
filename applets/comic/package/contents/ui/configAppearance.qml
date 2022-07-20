@@ -24,7 +24,6 @@ Kirigami.FormLayout {
         plasmoid.nativeInterface.showComicTitle = showComicTitle.checked;
         plasmoid.nativeInterface.showComicIdentifier = showIdentifier.checked;
         plasmoid.nativeInterface.showComicAuthor = showAuthor.checked;
-        plasmoid.nativeInterface.showComicUrl = showUrl.checked;
 
         plasmoid.nativeInterface.saveConfig();
         plasmoid.nativeInterface.configChanged();
@@ -35,7 +34,6 @@ Kirigami.FormLayout {
         showComicTitle.checked = plasmoid.nativeInterface.showComicTitle;
         showIdentifier.checked = plasmoid.nativeInterface.showComicIdentifier;
         showAuthor.checked = plasmoid.nativeInterface.showComicAuthor;
-        showUrl.checked = plasmoid.nativeInterface.showComicUrl;
     }
 
     Controls.CheckBox {
@@ -54,12 +52,6 @@ Kirigami.FormLayout {
     Controls.CheckBox {
         id: showAuthor
         text: i18nc("@option:check", "Comic author")
-        onCheckedChanged: root.configurationChanged();
-    }
-
-    Controls.CheckBox {
-        id: showUrl
-        text: i18nc("@option:check", "Comic URL")
         onCheckedChanged: root.configurationChanged();
     }
 

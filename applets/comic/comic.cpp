@@ -48,7 +48,6 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
     , mProxy(nullptr)
     , mActiveComicModel(new ActiveComicModel(parent))
     , mDifferentComic(true)
-    , mShowComicUrl(false)
     , mShowComicAuthor(false)
     , mShowComicTitle(false)
     , mShowComicIdentifier(false)
@@ -338,7 +337,6 @@ void ComicApplet::configChanged()
     mCurrent = ComicData();
     mCurrent.init(id, cg);
 
-    mShowComicUrl = cg.readEntry("showComicUrl", false);
     mShowComicAuthor = cg.readEntry("showComicAuthor", false);
     mShowComicTitle = cg.readEntry("showComicTitle", false);
     mShowComicIdentifier = cg.readEntry("showComicIdentifier", false);
@@ -360,7 +358,6 @@ void ComicApplet::saveConfig()
 {
     KConfigGroup cg = config();
     cg.writeEntry("comic", mCurrent.id());
-    cg.writeEntry("showComicUrl", mShowComicUrl);
     cg.writeEntry("showComicAuthor", mShowComicAuthor);
     cg.writeEntry("showComicTitle", mShowComicTitle);
     cg.writeEntry("showComicIdentifier", mShowComicIdentifier);
@@ -564,22 +561,6 @@ QObject *ComicApplet::availableComicsModel() const
     return mProxy;
 }
 
-bool ComicApplet::showComicUrl() const
-{
-    return mShowComicUrl;
-}
-
-void ComicApplet::setShowComicUrl(bool show)
-{
-    if (show == mShowComicUrl) {
-        return;
-    }
-
-    mShowComicUrl = show;
-
-    Q_EMIT showComicUrlChanged();
-}
-
 bool ComicApplet::showComicAuthor() const
 {
     return mShowComicAuthor;
@@ -707,7 +688,6 @@ void ComicApplet::refreshComicData()
     mComicData[QStringLiteral("additionalText")] = mCurrent.additionalText();
 
     mComicData[QStringLiteral("websiteUrl")] = mCurrent.websiteUrl().toString();
-    mComicData[QStringLiteral("websiteHost")] = mCurrent.websiteUrl().host();
     mComicData[QStringLiteral("imageUrl")] = mCurrent.websiteUrl().toString();
     mComicData[QStringLiteral("shopUrl")] = mCurrent.websiteUrl().toString();
     mComicData[QStringLiteral("first")] = mCurrent.first();
