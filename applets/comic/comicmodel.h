@@ -28,9 +28,12 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::CheckStateRole) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
+    void load();
+
 private:
     QList<ComicProviderInfo> mComics;
     QStringList mUsedComics;
+    ComicEngine *mEngine;
 };
 
 #endif
