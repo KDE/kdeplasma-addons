@@ -16,9 +16,11 @@
 ComicModel::ComicModel(ComicEngine *engine, const QStringList &usedComics, QObject *parent)
     : QAbstractTableModel(parent)
     , mUsedComics(usedComics)
+    , mEngine(engine)
 {
     Q_ASSERT(engine);
-    mComics = engine->loadProviders();
+
+    load();
 }
 
 QHash<int, QByteArray> ComicModel::roleNames() const
@@ -71,4 +73,11 @@ Qt::ItemFlags ComicModel::flags(const QModelIndex &index) const
     }
 
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+}
+
+void ComicModel::load()
+{
+    beginResetModel();
+    mComics = mEngine->loadProviders();
+    endResetModel();
 }

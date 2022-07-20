@@ -818,6 +818,11 @@ bool ComicApplet::isTabHighlighted(const QString &id) const
     return false;
 }
 
+void ComicApplet::loadProviders()
+{
+    mModel->load();
+}
+
 K_PLUGIN_CLASS(ComicApplet)
 
 #include "comic.moc"

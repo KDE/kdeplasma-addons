@@ -158,10 +158,7 @@ public Q_SLOTS:
         slotTabChanged(newIdentifier);
     }
 
-    Q_INVOKABLE void loadProviders()
-    {
-        mEngine->loadProviders();
-    }
+    Q_INVOKABLE void loadProviders();
     Q_INVOKABLE void positionFullView(QWindow *window);
 
 private:
