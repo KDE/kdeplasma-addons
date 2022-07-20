@@ -4,6 +4,7 @@
             {
                 "Email": "wengxt@gmail.com",
                 "Name": "Weng Xuetian",
+                "Name[az]": "Weng Xuetian",
                 "Name[ca@valencia]": "Weng Xuetian",
                 "Name[ca]": "Weng Xuetian",
                 "Name[es]": "Weng Xuetian",
@@ -23,6 +24,7 @@
             }
         ],
         "Description": "A new picture from the Internet each day",
+        "Description[az]": "İnternetdən hər gün yeni şəkil",
         "Description[ca@valencia]": "Una imatge nova des d'Internet cada dia",
         "Description[ca]": "Una imatge nova des d'Internet cada dia",
         "Description[es]": "Una nueva imagen de Internet cada día",

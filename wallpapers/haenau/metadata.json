@@ -4,6 +4,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
+                "Name[az]": "Marco Martin",
                 "Name[ca@valencia]": "Marco Martin",
                 "Name[ca]": "Marco Martin",
                 "Name[es]": "Marco Martin",
@@ -23,6 +24,7 @@
             }
         ],
         "Description": "Haenau wallpaper",
+        "Description[az]": "Haenau divar kağızı",
         "Description[ca@valencia]": "Fons de pantalla Haenau",
         "Description[ca]": "Fons de pantalla Haenau",
         "Description[es]": "Fondo de pantalla Haenau",
@@ -44,6 +46,7 @@
         "Id": "org.kde.haenau",
         "License": "LGPL-2.1",
         "Name": "Haenau",
+        "Name[az]": "Haenau",
         "Name[ca@valencia]": "Haenau",
         "Name[ca]": "Haenau",
         "Name[es]": "Haenau",

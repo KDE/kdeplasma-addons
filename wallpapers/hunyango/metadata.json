@@ -4,6 +4,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
+                "Name[az]": "Marco Martin",
                 "Name[ca@valencia]": "Marco Martin",
                 "Name[ca]": "Marco Martin",
                 "Name[es]": "Marco Martin",
@@ -23,6 +24,7 @@
             }
         ],
         "Description": "Hunyango wallpaper",
+        "Description[az]": "Hunyango divar kağızı",
         "Description[ca@valencia]": "Fons de pantalla Hunyango",
         "Description[ca]": "Fons de pantalla Hunyango",
         "Description[es]": "Fondo de pantalla Hunyango",
@@ -44,6 +46,7 @@
         "Id": "org.kde.hunyango",
         "License": "LGPL-2.1",
         "Name": "Hunyango",
+        "Name[az]": "Hunyango",
         "Name[ca@valencia]": "Hunyango",
         "Name[ca]": "Hunyango",
         "Name[es]": "Hunyango",
