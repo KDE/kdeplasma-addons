@@ -102,36 +102,3 @@ void ComicData::setData(const ComicMetaData &data)
 
     save();
 }
-
-void ComicData::createErrorPicture(const QVariantMap &data)
-{
-    QPixmap errorPic(500, 400);
-    errorPic.fill();
-    QPainter p(&errorPic);
-    QFont font = QGuiApplication::font();
-    font.setPointSize(24);
-    p.setPen(QColor(0, 0, 0));
-    p.setFont(font);
-    QString title = i18n("Getting comic strip failed:");
-    p.drawText(QRect(10, 10, 480, 100), Qt::TextWordWrap | Qt::AlignHCenter | Qt::AlignVCenter, title);
-    QString text = i18n(
-        "Maybe there is no Internet connection.\nMaybe the comic plugin is broken.\n"
-        "Another reason might be that there is no comic for this day/number/string, "
-        "so choosing a different one might work.");
-
-    mPrev = data[QStringLiteral("Previous identifier suffix")].toString();
-    if (hasPrev()) {
-        const auto identifier = data[QStringLiteral("Identifier")].toString();
-        if (!identifier.isEmpty()) {
-            mErrorStrip = identifier;
-        }
-        text.append(i18n("\n\nChoose the previous strip to go to the last cached strip."));
-    }
-
-    font.setPointSize(16);
-    p.setFont(font);
-    p.drawText(QRect(10, 120, 480, 270), Qt::TextWordWrap | Qt::AlignLeft, text);
-
-    mImage = errorPic.toImage();
-    mAdditionalText = title + text;
-}

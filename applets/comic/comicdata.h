@@ -200,7 +200,6 @@ public:
 
 private:
     void load();
-    void createErrorPicture(const QVariantMap &data);
 
 private:
     IdentifierType mType;
