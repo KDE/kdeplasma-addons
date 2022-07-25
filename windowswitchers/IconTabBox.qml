@@ -31,13 +31,13 @@ ListView {
 
         TapHandler {
             onSingleTapped: {
-                if (index === ListView.view.currentIndex) {
-                    ListView.view.model.activate(index);
+                if (index === iconsListView.currentIndex) {
+                    iconsListView.model.activate(index);
                     return;
                 }
-                ListView.view.currentIndex = index;
+                iconsListView.currentIndex = index;
             }
-            onDoubleTapped: ListView.view.model.activate(index)
+            onDoubleTapped: iconsListView.model.activate(index)
         }
     }
 
