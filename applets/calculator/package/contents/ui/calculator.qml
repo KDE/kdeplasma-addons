@@ -87,6 +87,7 @@ QQC2.Control {
         case Qt.Key_Return:
         case Qt.Key_Enter:
             equalsClicked();
+            display.forceActiveFocus();
             break;
         default:
             if (event.matches(StandardKey.Copy)) {
@@ -274,6 +275,8 @@ QQC2.Control {
                 horizontalAlignment: TextEdit.AlignRight;
                 verticalAlignment: TextEdit.AlignVCenter;
                 readOnly: true;
+
+                Accessible.description: text
             }
         }
 
