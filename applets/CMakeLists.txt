@@ -1,4 +1,3 @@
-plasma_install_package(activitypager org.kde.plasma.activitypager)
 plasma_install_package(kickerdash org.kde.plasma.kickerdash)
 plasma_install_package(konsoleprofiles/package org.kde.plasma.konsoleprofiles)
 plasma_install_package(keyboardindicator org.kde.plasma.keyboardindicator)
