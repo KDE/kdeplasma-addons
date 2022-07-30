@@ -62,6 +62,17 @@ class PotdBackend : public QObject, public QQmlParserStatus
      */
     Q_PROPERTY(QUrl savedUrl MEMBER m_savedUrl CONSTANT)
 
+    /**
+     * @return NetworkMangerQt is available on the system
+     */
+    Q_PROPERTY(bool networkManagerQtAvailable MEMBER m_networkManagerQtAvailable CONSTANT)
+
+    /**
+     * @return Whether to update wallpapers over metered connection
+     */
+    Q_PROPERTY(
+        int updateOverMeteredConnection READ doesUpdateOverMeteredConnection WRITE setUpdateOverMeteredConnection NOTIFY updateOverMeteredConnectionChanged)
+
 public:
     enum class FileOperationStatus {
         None,
@@ -90,6 +101,9 @@ public:
     QString title() const;
     QString author() const;
 
+    int doesUpdateOverMeteredConnection() const;
+    void setUpdateOverMeteredConnection(int value);
+
     /**
      * Opens a Save dialog to choose the save location, and copies the source file to the
      * selected destination.
@@ -109,11 +123,13 @@ Q_SIGNALS:
     void authorChanged();
 
     void saveStatusChanged();
+    void updateOverMeteredConnectionChanged();
 
 private:
     void registerClient();
 
     bool m_ready = false;
+    bool m_networkManagerQtAvailable = false;
 
     QString m_identifier;
     QVariantList m_args;
@@ -122,6 +138,8 @@ private:
     QUrl m_savedUrl;
     FileOperationStatus m_saveStatus = FileOperationStatus::None;
     QString m_saveStatusMessage;
+
+    int m_doesUpdateOverMeteredConnection = 0;
 
     PotdClient *m_client = nullptr;
 };

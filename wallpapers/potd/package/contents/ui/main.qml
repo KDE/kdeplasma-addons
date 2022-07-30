@@ -30,6 +30,7 @@ Rectangle {
             }
             return [];
         }
+        updateOverMeteredConnection: wallpaper.configuration.UpdateOverMeteredConnection
     }
 
     Rectangle {

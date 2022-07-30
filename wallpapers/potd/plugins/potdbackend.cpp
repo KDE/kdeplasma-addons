@@ -5,6 +5,7 @@
 */
 
 #include "potdbackend.h"
+#include "config-NetworkManagerQt.h"
 
 #include <QDBusConnection>
 #include <QFileDialog>
@@ -23,6 +24,9 @@ static int s_instanceCount = 0;
 
 PotdBackend::PotdBackend(QObject *parent)
     : QObject(parent)
+#if HAVE_NetworkManagerQt
+    , m_networkManagerQtAvailable(true)
+#endif
 {
     if (!s_engine) {
         Q_ASSERT(s_instanceCount == 0);
@@ -53,6 +57,11 @@ void PotdBackend::componentComplete()
 
     // Register the identifier in the data engine
     registerClient();
+#if HAVE_NetworkManagerQt
+    if (m_client) {
+        m_client->setUpdateOverMeteredConnection(m_doesUpdateOverMeteredConnection);
+    }
+#endif
 }
 
 QString PotdBackend::identifier() const
@@ -156,6 +165,27 @@ QString PotdBackend::author() const
     }
 
     return m_client->m_data.wallpaperAuthor;
+}
+
+int PotdBackend::doesUpdateOverMeteredConnection() const
+{
+    return m_doesUpdateOverMeteredConnection;
+}
+
+void PotdBackend::setUpdateOverMeteredConnection(int value)
+{
+    if (m_doesUpdateOverMeteredConnection == std::clamp(0, 2, value)) {
+        return;
+    }
+
+    m_doesUpdateOverMeteredConnection = std::clamp(0, 2, value);
+    Q_EMIT updateOverMeteredConnectionChanged();
+
+#if HAVE_NetworkManagerQt
+    if (m_ready && m_client) {
+        m_client->setUpdateOverMeteredConnection(m_doesUpdateOverMeteredConnection);
+    }
+#endif
 }
 
 void PotdBackend::saveImage()

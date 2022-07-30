@@ -11,12 +11,28 @@
 #include <QDBusConnection>
 #include <QThreadPool>
 
+#if HAVE_NetworkManagerQt
+#include <NetworkManagerQt/Manager>
+#endif
 #include <KPluginFactory>
 
 #include "cachedprovider.h"
 #include "debug.h"
 
 using namespace std::chrono_literals;
+
+namespace
+{
+#if HAVE_NetworkManagerQt
+
+bool isUsingMeteredConnection()
+{
+    const auto metered = NetworkManager::metered();
+    return metered == NetworkManager::Device::MeteredStatus::GuessYes //
+        || metered == NetworkManager::Device::MeteredStatus::Yes;
+}
+#endif
+}
 
 PotdClient::PotdClient(const KPluginMetaData &metadata, const QVariantList &args, QObject *parent)
     : QObject(parent)
@@ -32,7 +48,12 @@ void PotdClient::updateSource(bool refresh)
     setLoading(true);
 
     // Check whether it is cached already...
+#if HAVE_NetworkManagerQt
+    // Use cache even if it's outdated when using metered connection
+    if (!refresh && (CachedProvider::isCached(m_identifier, m_args, false) || (m_doesUpdateOverMeteredConnection == 0 && isUsingMeteredConnection()))) {
+#else
     if (!refresh && CachedProvider::isCached(m_identifier, m_args, false)) {
+#endif
         qCDebug(WALLPAPERPOTD) << "A local cache is available for" << m_identifier << "with arguments" << m_args;
 
         CachedProvider *provider = new CachedProvider(m_identifier, m_args, this);
@@ -49,6 +70,15 @@ void PotdClient::updateSource(bool refresh)
         }
     }
 
+#if HAVE_NetworkManagerQt
+    if (m_doesUpdateOverMeteredConnection == 0 && isUsingMeteredConnection()) {
+        qCDebug(WALLPAPERPOTD) << "Skip updating wallpapers for" << m_identifier << m_args << "due to metered connection.";
+        setLoading(false);
+        Q_EMIT done(this, false);
+        return;
+    }
+#endif
+
     const auto pluginResult = KPluginFactory::instantiatePlugin<PotdProvider>(m_metadata, this, m_args);
 
     if (pluginResult) {
@@ -58,6 +88,20 @@ void PotdClient::updateSource(bool refresh)
         qCWarning(WALLPAPERPOTD) << "Error loading PoTD plugin:" << pluginResult.errorString;
     }
 }
+
+#if HAVE_NetworkManagerQt
+void PotdClient::setUpdateOverMeteredConnection(int value)
+{
+    if (m_doesUpdateOverMeteredConnection == value) {
+        return;
+    }
+
+    m_doesUpdateOverMeteredConnection = value;
+    if (m_doesUpdateOverMeteredConnection == 1 && isUsingMeteredConnection()) {
+        updateSource(true);
+    }
+}
+#endif
 
 void PotdClient::slotFinished(PotdProvider *provider)
 {

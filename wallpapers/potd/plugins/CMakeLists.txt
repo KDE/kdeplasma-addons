@@ -1,3 +1,5 @@
+configure_file(config-NetworkManagerQt.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-NetworkManagerQt.h)
+
 set(potd_engine_SRCS
 	cachedprovider.cpp
 	potdbackend.cpp
@@ -20,6 +22,10 @@ target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
     Qt::Qml
     Qt::Widgets # QFileDialog
 )
+if (HAVE_NetworkManagerQt)
+    target_link_libraries(plasma_wallpaper_potdplugin KF5::NetworkManagerQt)
+endif()
+
 install(TARGETS plasma_wallpaper_potdplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)
 install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)
 

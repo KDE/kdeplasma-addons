@@ -22,6 +22,7 @@ Kirigami.FormLayout {
     property string cfg_Category
     property int cfg_FillMode
     property alias cfg_Color: colorButton.color
+    property int cfg_UpdateOverMeteredConnection
     property alias formLayout: root
 
     PotdBackend {
@@ -53,6 +54,18 @@ Kirigami.FormLayout {
                 return;
             }
             cfg_Provider = currentValue;
+        }
+    }
+
+    QQC2.CheckBox {
+        id: updateOverMeteredConnectionCheckBox
+
+        checked: root.cfg_UpdateOverMeteredConnection === 1
+        visible: backend.networkManagerQtAvailable
+        text: i18nc("@option:check", "Update when using metered network connection")
+
+        onToggled: {
+            root.cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
         }
     }
 

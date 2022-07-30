@@ -14,6 +14,7 @@
 
 #include <KPluginMetaData>
 
+#include "config-NetworkManagerQt.h"
 #include "potdprovider.h"
 
 /**
@@ -27,6 +28,9 @@ public:
     PotdClient(const KPluginMetaData &metadata, const QVariantList &args, QObject *parent = nullptr);
 
     void updateSource(bool refresh = false);
+#if HAVE_NetworkManagerQt
+    void setUpdateOverMeteredConnection(int value);
+#endif
 
     KPluginMetaData m_metadata;
     PotdProviderData m_data;
@@ -58,6 +62,9 @@ private:
 
     QString m_identifier;
     QVariantList m_args;
+#if HAVE_NetworkManagerQt
+    int m_doesUpdateOverMeteredConnection = 0;
+#endif
 
     friend class PotdEngine;
 };
