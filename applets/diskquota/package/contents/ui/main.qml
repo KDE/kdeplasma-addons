@@ -60,12 +60,23 @@ Item {
             }
         }
 
-        PlasmaComponents3.Label {
-            visible: !diskQuota.quotaInstalled || listView.count == 0
-            anchors.fill: parent
-            text: diskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
+        Loader {
+            id: emptyHint
+
+            anchors.centerIn: parent
+            width: parent.width - PlasmaCore.Units.gridUnit * 4
+
+            active: !diskQuota.quotaInstalled || listView.count == 0
+            visible: active
+            asynchronous: true
+
+            sourceComponent: PlasmaExtras.PlaceholderMessage {
+                width: parent.width
+                readonly property bool hasText: model.filterRegExp.length > 0
+                iconName: diskQuota.quotaInstalled ? "edit-none" : "disk-quota"
+                text: diskQuota.quotaInstalled ? i18nc("@info:status", "No quota restrictions found") : i18nc("@info:status", "Quota tool not found")
+                explanation: diskQuota.quotaInstalled ? "" : i18nc("@info:usagetip", "Please install 'quota'")
+            }
         }
 
         PlasmaExtras.ScrollArea {
