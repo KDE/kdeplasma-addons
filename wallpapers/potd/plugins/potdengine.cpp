@@ -29,6 +29,10 @@ PotdClient::PotdClient(const KPluginMetaData &metadata, const QVariantList &args
 
 void PotdClient::updateSource(bool refresh)
 {
+    if (m_loading) {
+        return;
+    }
+
     setLoading(true);
 
     // Check whether it is cached already...
@@ -241,6 +245,10 @@ void PotdEngine::updateSource(bool refresh)
     m_lastUpdateSuccess = true;
 
     for (const auto &pr : std::as_const(m_clientMap)) {
+        if (pr.second.client->m_loading) {
+            continue;
+        }
+
         connect(pr.second.client, &PotdClient::done, this, &PotdEngine::slotDone);
         m_updateCount++;
         qCDebug(WALLPAPERPOTD) << pr.second.client->m_metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")) << "starts updating wallpaper.";
