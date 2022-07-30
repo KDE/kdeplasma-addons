@@ -318,6 +318,16 @@ Item {
             acceptedButtons: Qt.LeftButton | Qt.RightButton
             hoverEnabled: true
 
+            Keys.onPressed: {
+                switch (event.key) {
+                case Qt.Key_Space:
+                case Qt.Key_Enter:
+                case Qt.Key_Return:
+                case Qt.Key_Select:
+                    delegateMouse.clicked(null);
+                    break;
+                }
+            }
             Accessible.name: colorLabel.text
             Accessible.role: Accessible.ButtonMenu
 
