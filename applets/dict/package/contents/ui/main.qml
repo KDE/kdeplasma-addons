@@ -52,7 +52,9 @@ ColumnLayout {
             }
         }
         PlasmaComponents3.Button {
+            display: PlasmaComponents3.AbstractButton.IconOnly
             icon.name: "configure"
+            text: Plasmoid.action("configure").text
             onClicked: plasmoid.action("configure").trigger();
         }
     }
