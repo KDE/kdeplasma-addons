@@ -318,6 +318,10 @@ Item {
 
             acceptedButtons: Qt.LeftButton | Qt.RightButton
             hoverEnabled: true
+
+            Accessible.name: colorLabel.text
+            Accessible.role: Accessible.ButtonMenu
+
             onContainsMouseChanged: {
                 if (containsMouse) {
                     fullRoot.currentIndex = index
