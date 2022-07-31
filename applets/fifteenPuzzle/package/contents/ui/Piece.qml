@@ -65,14 +65,18 @@ Rectangle {
         z: 1
     }
 
-    Image {
-        id: pieceImage
-        width: parent.width
-        height: parent.height
-        visible: Plasmoid.configuration.useImage
-        source: "image://fifteenpuzzle/" + boardSize + "-" + number + "-" + pieceWidth + "-" + pieceHeight + "-" + Plasmoid.configuration.imagePath;
-        cache: false
+    Loader {
+        anchors.fill: parent
+
+        active: Plasmoid.configuration.useImage
+        asynchronous: true
         z: 0
+
+        sourceComponent: Image {
+            id: pieceImage
+            source: "image://fifteenpuzzle/" + boardSize + "-" + number + "-" + pieceWidth + "-" + pieceHeight + "-" + Plasmoid.configuration.imagePath
+            cache: false
+        }
     }
 
     MouseArea {
