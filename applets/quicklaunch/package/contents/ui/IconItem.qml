@@ -74,7 +74,7 @@ Item {
                 }
             }
             Accessible.name: iconItem.launcher.applicationName
-            Accessible.description: i18n("Launch %1", iconItem.launcher.genericName)
+            Accessible.description: i18n("Launch %1", iconItem.launcher.genericName || iconItem.launcher.applicationName)
             Accessible.role: Accessible.Button
 
             onPressed: {
