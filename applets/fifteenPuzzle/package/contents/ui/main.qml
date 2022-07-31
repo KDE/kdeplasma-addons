@@ -17,14 +17,8 @@ import org.kde.plasma.private.fifteenpuzzle 0.1 as Private
 Item {
     id: root
 
-    Plasmoid.switchWidth: Layout.minimumWidth - 20
-    Plasmoid.switchHeight: Layout.minimumHeight - 20
-
-    Layout.minimumWidth: width
-    Layout.minimumHeight: height
-
-    width: PlasmaCore.Units.gridUnit * 16
-    height: PlasmaCore.Units.gridUnit * 16
+    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 16 - 20
+    Plasmoid.switchHeight: Plasmoid.switchWidth
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 
