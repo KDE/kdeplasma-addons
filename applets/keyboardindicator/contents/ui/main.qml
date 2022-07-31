@@ -67,7 +67,14 @@ Item {
         MouseArea {
             id: compactMouse
             anchors.fill: parent
+
+            activeFocusOnTab: true
             hoverEnabled: true
+
+            Accessible.name: Plasmoid.title
+            Accessible.description: Plasmoid.toolTipSubText
+            Accessible.role: Accessible.Button
+
             onClicked: {
                 plasmoid.expanded = !plasmoid.expanded
             }
