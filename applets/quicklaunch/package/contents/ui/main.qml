@@ -161,6 +161,11 @@ Item {
             id: arrowMouseArea
             anchors.fill: parent
 
+            activeFocusOnTab: parent.visible
+
+            Accessible.name: parent.subText
+            Accessible.role: Accessible.Button
+
             onClicked: {
                 popup.visible = !popup.visible
             }
