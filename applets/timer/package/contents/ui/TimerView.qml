@@ -67,14 +67,16 @@ Item {
                  root.startTimer();
             }
         }
-        PlasmaCore.ToolTipArea {
-            anchors.fill: parent
-            subText: root.running ? i18n("Timer is running") : i18n("Use mouse wheel to change digits or choose from predefined timers in the context menu");
-        }
     }
 
     function resetOpacity() {
         timerDigits.opacity = 1.0;
+    }
+
+    PlasmaCore.ToolTipArea {
+        anchors.fill: parent
+        mainText: Plasmoid.toolTipMainText
+        subText: Plasmoid.toolTipSubText;
     }
 
     Component.onCompleted: {

@@ -37,7 +37,7 @@ Item {
         if (showTitle && title != "") {
             timerName = title;
         } else {
-            timerName = i18n("Timer");
+            timerName = Plasmoid.title;
         }
 
         var toolTipText = "";
@@ -48,7 +48,7 @@ Item {
         }
         return toolTipText;
     }
-    Plasmoid.toolTipSubText:  i18np("Remaining time left: %1 second", "Remaining time left: %1 seconds", seconds);
+    Plasmoid.toolTipSubText: running ? i18np("Remaining time left: %1 second", "Remaining time left: %1 seconds", seconds) : i18n("Use mouse wheel to change digits or choose from predefined timers in the context menu");
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
     Plasmoid.compactRepresentation: TimerView { }
@@ -190,6 +190,5 @@ Item {
     function action_timerReset() {
         resetTimer();
     }
-
 }
 
