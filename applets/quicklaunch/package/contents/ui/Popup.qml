@@ -5,6 +5,10 @@
  */
 
 import QtQuick 2.2
+
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+
 import org.kde.draganddrop 2.0 as DragAndDrop
 
 import "layout.js" as LayoutManager
@@ -64,7 +68,10 @@ Item {
     ListView {
         id: listView
         anchors.fill: parent
-        interactive: false
+
+        focus: true
+        interactive: true
+        keyNavigationWraps: true
 
         model: UrlModel {
             id: popupModel
@@ -73,6 +80,11 @@ Item {
         delegate: IconItem {
             isPopupItem: true
         }
+
+        highlight: PlasmaExtras.Highlight {}
+
+        highlightMoveDuration: PlasmaCore.Units.longDuration
+        highlightMoveVelocity: 1
     }
 
     Connections {
