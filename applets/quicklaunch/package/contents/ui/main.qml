@@ -142,7 +142,9 @@ Item {
         location: plasmoid.location
         visualParent: vertical ? popupArrow : root
 
-        mainItem: Popup { }
+        mainItem: Popup {
+            Keys.onEscapePressed: popup.visible = false
+        }
     }
 
     PlasmaCore.ToolTipArea {
