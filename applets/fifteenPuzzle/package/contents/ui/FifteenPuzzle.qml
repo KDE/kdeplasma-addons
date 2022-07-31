@@ -21,14 +21,92 @@ Item {
     readonly property int boardSize: Plasmoid.configuration.boardSize
     property Component piece: Piece {}
     property var pieces: []
+    property int currentPosition: -1
 
     property int seconds: 0
+
+    Keys.onPressed: {
+        let newPosition = main.currentPosition;
+        switch (event.key) {
+        case Qt.Key_Up: {
+            if (main.currentPosition < 0) {
+                newPosition = (main.boardSize - 1) * main.boardSize;  // Start from bottom
+            } else if (main.currentPosition >= main.boardSize) {
+                newPosition = main.currentPosition - main.boardSize;
+            }
+            if (pieces[newPosition].empty) {
+                if (main.currentPosition < 0) {
+                    newPosition = (main.boardSize - 2) * main.boardSize;
+                } else if (newPosition >= main.boardSize) {
+                    newPosition -= main.boardSize;
+                }
+            }
+            break;
+        }
+        case Qt.Key_Down: {
+            if (main.currentPosition < 0) {
+                newPosition = 0;  // Start from top
+            } else if (main.currentPosition < main.boardSize * (main.boardSize - 1)) {
+                newPosition = main.currentPosition + main.boardSize;
+            }
+            if (pieces[newPosition].empty) {
+                if (main.currentPosition < 0) {
+                    newPosition = main.boardSize;
+                } else if (newPosition < main.boardSize * (main.boardSize - 1)) {
+                    newPosition += main.boardSize;
+                }
+            }
+            break;
+        }
+        case Qt.Key_Left: {
+            if (main.currentPosition < 0) {
+                newPosition = main.boardSize - 1;  // Start from right
+            } else if (main.currentPosition % main.boardSize) {
+                newPosition = main.currentPosition - 1;
+            }
+            if (pieces[newPosition].empty) {
+                if (main.currentPosition < 0) {
+                    newPosition = main.boardSize - 2;
+                } else if (newPosition % main.boardSize) {
+                    newPosition -= 1;
+                }
+            }
+            break;
+        }
+        case Qt.Key_Right: {
+            if (main.currentPosition < 0) {
+                newPosition = 0;  // Start from left
+            } else if ((main.currentPosition + 1) % main.boardSize) {
+                newPosition = main.currentPosition + 1;
+            }
+            if (pieces[newPosition].empty) {
+                if (main.currentPosition < 0) {
+                    newPosition = 1;
+                } else if ((newPosition + 1) % main.boardSize) {
+                    newPosition += 1;
+                }
+            }
+            break;
+        }
+        default:
+            return;
+        }
+
+        // Edge empty case: don't move
+        if (pieces[newPosition].empty) {
+            newPosition = main.currentPosition;
+        }
+
+        pieces[newPosition].forceActiveFocus();
+        event.accepted = true;
+    }
 
     function fillBoard() {
         // Clear out old board
         for (const piece of pieces) {
             piece.destroy();
         }
+        main.currentPosition = -1;
 
         pieces = [];
         const count = boardSize * boardSize;
@@ -36,6 +114,11 @@ Item {
             for (let i = 0; i < count; ++i) {
                 const newPiece = piece.createObject(mainGrid, {"number": i, "position": i });
                 pieces[i] = newPiece;
+                newPiece.activeFocusChanged.connect(() => {
+                    if (newPiece.activeFocus) {
+                        main.currentPosition = newPiece.position;
+                    }
+                });
                 newPiece.activated.connect(pieceClicked);
             }
             shuffleBoard();
@@ -46,6 +129,7 @@ Item {
         // Hide the solved rectangle in case it was visible
         solvedRect.visible = false;
         main.seconds = 0;
+        main.currentPosition = -1;
 
         const count = boardSize * boardSize;
         for (let i = count - 1; i >= 0; --i) {
@@ -131,6 +215,7 @@ Item {
         for (const [row, col] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
             // stop at first direction that has (or rather "had" at this point) the empty piece
             if (swapWithEmptyPiece(position, row, col)) {
+                main.currentPosition += col + main.boardSize * row;
                 break;
             }
         }
@@ -182,6 +267,23 @@ Item {
             right: parent.right
             bottom: controlsRow.top
             bottomMargin: PlasmaCore.Units.smallSpacing
+        }
+
+        activeFocusOnTab: true
+
+        onActiveFocusChanged: {
+            // Move focus to the first non-empty piece
+            if (activeFocus) {
+                if (main.currentPosition < 0) {
+                    if (main.pieces[0].empty) {
+                        main.pieces[1].forceActiveFocus();
+                    } else {
+                        main.pieces[0].forceActiveFocus();
+                    }
+                } else {
+                    main.pieces[main.currentPosition].forceActiveFocus();
+                }
+            }
         }
     }
 

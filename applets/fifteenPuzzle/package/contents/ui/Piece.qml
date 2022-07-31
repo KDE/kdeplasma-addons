@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.15
 
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
 
 Rectangle {
@@ -43,6 +44,17 @@ Rectangle {
     property int number
     property int position
 
+    Keys.onPressed: {
+        switch (event.key) {
+        case Qt.Key_Space:
+        case Qt.Key_Enter:
+        case Qt.Key_Return:
+        case Qt.Key_Select:
+            tapHandler.tapped(null);
+            break;
+        }
+    }
+
     Behavior on x {
         NumberAnimation {
             duration: PlasmaCore.Units.longDuration
@@ -53,6 +65,17 @@ Rectangle {
         NumberAnimation {
             duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
+        }
+    }
+
+    Loader {
+        anchors.fill: parent
+        active: parent.activeFocus
+        asynchronous: true
+        z: 0
+
+        sourceComponent: PlasmaExtras.Highlight {
+            hovered: true
         }
     }
 
@@ -80,6 +103,11 @@ Rectangle {
     }
 
     TapHandler {
-        onTapped: piece.activated(position)
+        id: tapHandler
+
+        onTapped: {
+            piece.forceActiveFocus();
+            piece.activated(position);
+        }
     }
 }
