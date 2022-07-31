@@ -50,8 +50,8 @@ PlasmaCore.Dialog
                 enabled: true
 
                 onClicked: view.createJob(index)
-                Keys.onReturnPressed: view.createJob(index)
-                Keys.onEnterPressed: view.createJob(index)
+                Keys.onReturnPressed: clicked(null)
+                Keys.onEnterPressed: clicked(null)
                 Keys.onEscapePressed: window.hide()
 
                 RowLayout {
