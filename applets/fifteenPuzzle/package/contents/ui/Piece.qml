@@ -79,8 +79,7 @@ Rectangle {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: piece.activated(position)
+    TapHandler {
+        onTapped: piece.activated(position)
     }
 }
