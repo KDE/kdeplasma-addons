@@ -104,6 +104,8 @@ FocusScope {
                 hoverEnabled: true
                 text: model.name
 
+                Accessible.role: Accessible.Button
+
                 onClicked: {
                     openProfile();
                 }
