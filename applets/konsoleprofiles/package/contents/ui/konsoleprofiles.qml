@@ -87,19 +87,31 @@ FocusScope {
         ListView {
             id: view
 
-
             model: sortModel
             clip: true
             focus: true
             keyNavigationWraps: true
 
-            delegate: Item {
+            delegate: PlasmaComponents3.ItemDelegate {
                 id: listdelegate
-                height: textMetric.paintedHeight * 2
 
                 anchors {
                     left: parent.left
                     right: parent.right
+                }
+                height: textMetric.paintedHeight * 2
+
+                hoverEnabled: true
+                text: model.name
+
+                onClicked: {
+                    openProfile();
+                }
+
+                onHoveredChanged: {
+                    if (hovered) {
+                        view.currentIndex = index;
+                    }
                 }
 
                 function openProfile() {
@@ -108,41 +120,6 @@ FocusScope {
                     var  = service.startOperationCall(operation)*/
                     console.error(model.profileIdentifier)
                     profilesModel.openProfile(model.profileIdentifier)
-                }
-
-                PlasmaComponents3.Label {
-                    id: profileText
-
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        left: parent.left
-                        right: parent.right
-                        leftMargin: 10
-                        rightMargin: 10
-                    }
-
-                    verticalAlignment: Text.AlignVCenter
-                    text: model.name
-                    elide: Text.ElideRight
-                }
-
-                MouseArea {
-                    height: parent.height + 15
-                    anchors { left: parent.left; right: parent.right;}
-                    hoverEnabled: true
-
-                    onClicked: {
-                        openProfile();
-                    }
-
-                    onEntered: {
-                        view.currentIndex = index;
-                    }
-                }
-
-                Keys.onPressed: {
-                    if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return)
-                        openProfile();
                 }
             }
 
