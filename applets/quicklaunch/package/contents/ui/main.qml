@@ -163,6 +163,16 @@ Item {
 
             activeFocusOnTab: parent.visible
 
+            Keys.onPressed: {
+                switch (event.key) {
+                case Qt.Key_Space:
+                case Qt.Key_Enter:
+                case Qt.Key_Return:
+                case Qt.Key_Select:
+                    arrowMouseArea.clicked(null);
+                    break;
+                }
+            }
             Accessible.name: parent.subText
             Accessible.role: Accessible.Button
 
