@@ -54,6 +54,8 @@ Rectangle {
             break;
         }
     }
+    Accessible.name: pieceNumeral.text
+    Accessible.role: Accessible.Button
 
     Behavior on x {
         NumberAnimation {
