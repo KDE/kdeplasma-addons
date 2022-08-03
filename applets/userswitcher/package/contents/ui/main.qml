@@ -88,9 +88,9 @@ Item {
                 id: label
 
                 width: root.isVertical ? compactRoot.width : undefined
+                height: root.isVertical ? contentHeight : compactRoot.height
 
                 text: root.displayedName
-                height: compactRoot.height
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.NoWrap
