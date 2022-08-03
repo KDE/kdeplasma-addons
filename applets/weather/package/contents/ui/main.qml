@@ -378,7 +378,7 @@ Item {
     // workaround for now to ensure "Please configure" tooltip
     // TODO: remove when configurationRequired works
     Plasmoid.icon: needsConfiguration ? "configure" : generalModel.currentConditionIconName
-    Plasmoid.toolTipMainText: needsConfiguration ? i18nc("@info:tooltip", "Please configure") : generalModel.location
+    Plasmoid.toolTipMainText: needsConfiguration ? i18nc("@info:tooltip %1 is the translated plasmoid name", "Click to configure %1", Plasmoid.title) : generalModel.location
     Plasmoid.toolTipSubText: {
         if (!generalModel.location) {
             return "";
