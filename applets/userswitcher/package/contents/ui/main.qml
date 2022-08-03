@@ -197,6 +197,8 @@ Item {
                         KeyNavigation.up: index === 0 ? currentUserItem.nextItemInFocusChain() : userList.itemAtIndex(index - 1)
                         KeyNavigation.down: index === userList.count - 1 ? newSessionButton : userList.itemAtIndex(index + 1)
 
+                        Accessible.description: i18nc("@action:button", "Switch to User %1", text)
+
                         onClicked: sessionsModel.switchUser(model.vtNumber, sessionsModel.shouldLock)
                     }
                 }

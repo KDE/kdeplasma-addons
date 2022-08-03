@@ -21,6 +21,8 @@ PlasmaComponents3.ItemDelegate {
 
     highlighted: activeFocus
 
+    Accessible.name: `${text}${subText ? `: ${subText}` : ""}`
+
     onHoveredChanged: if (hovered) {
         if (ListView.view) {
             ListView.view.currentIndex = index;
