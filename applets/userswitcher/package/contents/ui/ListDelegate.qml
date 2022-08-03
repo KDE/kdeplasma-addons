@@ -11,45 +11,21 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
-Item {
+PlasmaComponents3.ItemDelegate {
     id: item
 
-    signal clicked()
-
-    property alias text: label.text
-    property alias subText: sublabel.text
-    property bool interactive: true
-    property alias iconItem: iconItem.children
-    readonly property bool containsMouse: area.containsMouse
-
-    property Item highlight
-
-    // sizing: top-down explicit width, bottom-up implicit height
-    implicitHeight: row.implicitHeight + 2 * PlasmaCore.Units.smallSpacing
-    implicitWidth: row.implicitWidth
     Layout.fillWidth: true
 
-    MouseArea {
-        id: area
-        anchors.fill: parent
-        enabled: item.interactive
-        hoverEnabled: true
-        onClicked: item.clicked()
-        onContainsMouseChanged: {
-            if (!highlight) {
-                return
-            }
+    property alias subText: sublabel.text
+    property alias iconItem: iconItem.children
 
-            if (containsMouse) {
-                highlight.parent = item
-            }
-        }
-    }
+    highlighted: hovered || activeFocus
 
-    RowLayout {
+    // sizing: top-down explicit width, bottom-up implicit height
+
+    contentItem: RowLayout {
         id: row
-        anchors.centerIn: parent
-        width: parent.width - 2 * PlasmaCore.Units.smallSpacing
+
         spacing: PlasmaCore.Units.smallSpacing
 
         Item {
@@ -64,12 +40,14 @@ Item {
         }
 
         ColumnLayout {
+            id: column
             Layout.fillWidth: true
             spacing: 0
 
             PlasmaComponents3.Label {
                 id: label
                 Layout.fillWidth: true
+                text: item.text
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
             }

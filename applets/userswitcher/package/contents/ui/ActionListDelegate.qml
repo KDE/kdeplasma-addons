@@ -11,10 +11,10 @@ import org.kde.plasma.core 2.1 as PlasmaCore
 ListDelegate {
     id: item
 
-    property alias icon: icon.source
+    activeFocusOnTab: true
 
     iconItem: PlasmaCore.IconItem {
-        id: icon
         anchors.fill: parent
+        source: item.icon.name
     }
 }

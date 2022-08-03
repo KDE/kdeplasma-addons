@@ -131,15 +131,6 @@ Item {
             id: sessionsModel
         }
 
-        property Item delegateHighlight: PlasmaExtras.Highlight {
-            id: delegateHighlight
-            parent: null
-            width: parent ? parent.width : undefined
-            height: parent ? parent.height : undefined
-            hovered: parent && parent.containsMouse
-            z: -1 // otherwise it shows ontop of the icon/label and tints them slightly
-        }
-
         ColumnLayout {
             id: column
 
@@ -151,7 +142,7 @@ Item {
                 text: root.displayedName
                 subText: i18n("Current user")
                 source: kuser.faceIconUrl.toString()
-                interactive: false
+                hoverEnabled: false
                 interactiveIcon: KCMShell.authorize("kcm_users.desktop").length > 0
                 onIconClicked: KCMShell.openSystemSettings("kcm_users")
             }
@@ -169,11 +160,16 @@ Item {
                     id: userList
                     model: sessionsModel
 
-                    highlight: PlasmaExtras.Highlight {}
-                    highlightMoveDuration: 0
+                    focus: true
+                    interactive: true
+                    keyNavigationWraps: true
 
                     delegate: UserListDelegate {
                         width: ListView.view.width
+
+                        activeFocusOnTab: true
+                        highlighted: ListView.view.isCurrentItem || hovered || activeFocus
+
                         text: {
                             if (!model.session) {
                                 return i18nc("Nobody logged in on that session", "Unused")
@@ -200,9 +196,6 @@ Item {
                         }
 
                         onClicked: sessionsModel.switchUser(model.vtNumber, sessionsModel.shouldLock)
-                        onContainsMouseChanged: {
-                            userList.currentIndex = containsMouse ? index : -1;
-                        }
                     }
                 }
             }
@@ -210,8 +203,7 @@ Item {
             ActionListDelegate {
                 id: newSessionButton
                 text: i18nc("@action", "New Session")
-                icon: "system-switch-user"
-                highlight: delegateHighlight
+                icon.name: "system-switch-user"
                 visible: sessionsModel.canStartNewSession
                 onClicked: sessionsModel.startNewSession(sessionsModel.shouldLock)
             }
@@ -219,8 +211,7 @@ Item {
             ActionListDelegate {
                 id: lockScreenButton
                 text: i18nc("@action", "Lock Screen")
-                icon: "system-lock-screen"
-                highlight: delegateHighlight
+                icon.name: "system-lock-screen"
                 visible: pmEngine.data["Sleep States"]["LockScreen"]
                 onClicked: pmEngine.performOperation("lockScreen")
             }
@@ -228,8 +219,7 @@ Item {
             ActionListDelegate {
                 id: leaveButton
                 text: i18nc("Show a dialog with options to logout/shutdown/restart", "Leave…")
-                highlight: delegateHighlight
-                icon: "system-shutdown"
+                icon.name: "system-shutdown"
                 onClicked: pmEngine.performOperation("requestShutDown")
             }
         }
