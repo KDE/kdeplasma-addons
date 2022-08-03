@@ -41,17 +41,20 @@ GridLayout {
         colorGroup: parent.PlasmaCore.ColorScope.colorGroup
     }
 
-    PlasmaExtras.Heading {
+    PlasmaExtras.PlasmoidHeading {
         id: locationLabel
 
         Layout.row: 0
         Layout.column: 0
         Layout.columnSpan: 3
         Layout.fillWidth: true
+        visible: contentItem.text.length > 0
 
-        wrapMode: Text.NoWrap
-
-        text: generalModel.location
+        contentItem: PlasmaExtras.Heading {
+            level: 3
+            horizontalAlignment: Text.AlignHCenter
+            text: generalModel.location
+        }
     }
 
     PlasmaCore.IconItem {
