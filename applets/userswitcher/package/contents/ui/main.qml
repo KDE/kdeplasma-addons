@@ -168,7 +168,6 @@ Item {
                         width: ListView.view.width
 
                         activeFocusOnTab: true
-                        highlighted: ListView.view.isCurrentItem || hovered || activeFocus
 
                         text: {
                             if (!model.session) {
@@ -195,6 +194,9 @@ Item {
                             return ""
                         }
 
+                        KeyNavigation.up: index === 0 ? currentUserItem.nextItemInFocusChain() : userList.itemAtIndex(index - 1)
+                        KeyNavigation.down: index === userList.count - 1 ? newSessionButton : userList.itemAtIndex(index + 1)
+
                         onClicked: sessionsModel.switchUser(model.vtNumber, sessionsModel.shouldLock)
                     }
                 }
@@ -205,6 +207,10 @@ Item {
                 text: i18nc("@action", "New Session")
                 icon.name: "system-switch-user"
                 visible: sessionsModel.canStartNewSession
+
+                KeyNavigation.up: userList.count > 0 ? userList.itemAtIndex(userList.count - 1) : currentUserItem.nextItemInFocusChain()
+                KeyNavigation.down: lockScreenButton
+
                 onClicked: sessionsModel.startNewSession(sessionsModel.shouldLock)
             }
 
@@ -213,6 +219,10 @@ Item {
                 text: i18nc("@action", "Lock Screen")
                 icon.name: "system-lock-screen"
                 visible: pmEngine.data["Sleep States"]["LockScreen"]
+
+                KeyNavigation.up: newSessionButton
+                KeyNavigation.down: leaveButton
+
                 onClicked: pmEngine.performOperation("lockScreen")
             }
 
@@ -220,6 +230,9 @@ Item {
                 id: leaveButton
                 text: i18nc("Show a dialog with options to logout/shutdown/restart", "Leave…")
                 icon.name: "system-shutdown"
+
+                KeyNavigation.up: lockScreenButton
+
                 onClicked: pmEngine.performOperation("requestShutDown")
             }
         }

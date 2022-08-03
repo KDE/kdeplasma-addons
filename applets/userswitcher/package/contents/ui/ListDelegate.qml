@@ -19,9 +19,14 @@ PlasmaComponents3.ItemDelegate {
     property alias subText: sublabel.text
     property alias iconItem: iconItem.children
 
-    highlighted: hovered || activeFocus
+    highlighted: activeFocus
 
-    // sizing: top-down explicit width, bottom-up implicit height
+    onHoveredChanged: if (hovered) {
+        if (ListView.view) {
+            ListView.view.currentIndex = index;
+        }
+        forceActiveFocus();
+    }
 
     contentItem: RowLayout {
         id: row
