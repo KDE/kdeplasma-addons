@@ -86,12 +86,15 @@ Item {
 
             PlasmaComponents3.Label {
                 id: label
+
+                width: root.isVertical ? compactRoot.width : undefined
+
                 text: root.displayedName
                 height: compactRoot.height
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.NoWrap
-                fontSizeMode: Text.VerticalFit
+                fontSizeMode: root.isVertical ? Text.HorizontalFit : Text.VerticalFit
                 font.pixelSize: tooSmall ? PlasmaCore.Theme.defaultFont.pixelSize : PlasmaCore.Units.roundToIconSize(PlasmaCore.Units.gridUnit * 2)
                 minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
                 visible: root.showName
