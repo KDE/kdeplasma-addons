@@ -250,21 +250,20 @@ Item {
             // If we see N/U (Not Used) we skip the item
             var weatherIconName = forecastDayTokens[1];
             if (weatherIconName && weatherIconName !== "N/U") {
-                var iconAndToolTip = Util.existingWeatherIconName(weatherIconName);
-
-                iconAndToolTip += "|";
-
+                let toolTip = "";
                 var condition = forecastDayTokens[2];
                 var probability = forecastDayTokens[5];
                 if (probability !== "N/U" &&
                     probability !== "N/A" &&
                     !!probability) {
-                    iconAndToolTip += i18nc("certain weather condition (probability percentage)",
-                                            "%1 (%2 %)", condition, probability);
+                    toolTip += i18nc("certain weather condition (probability percentage)", "%1 (%2 %)", condition, probability);
                 } else {
-                    iconAndToolTip += condition;
+                    toolTip += condition;
                 }
-                conditionItems.push(iconAndToolTip);
+                conditionItems.push({
+                    "icon": Util.existingWeatherIconName(weatherIconName),
+                    "text": toolTip,
+                });
             }
 
             var tempHigh = forecastDayTokens[3];

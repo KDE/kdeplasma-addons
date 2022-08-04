@@ -20,6 +20,37 @@ ColumnLayout {
 
     spacing: PlasmaCore.Units.smallSpacing
 
+    Accessible.description: {
+        if (model.length === 0) {
+            return "";
+        }
+
+        let description = [];
+        for (let i = 0; i < model[0].length; i++) {
+            const dayNumber = parseInt(model[0][i]);
+            if (isNaN(dayNumber)) {
+                // Day/Night label
+                description.push(model[0][i]);
+            } else {
+                const today = new Date();
+                const date = new Date(today.getFullYear(), today.getMonth(), dayNumber);
+                description.push(Qt.locale().standaloneDayName(date.getDay()));
+            }
+            description.push(": ");
+
+            if (model[1].length > 0) {
+                description.push(i18nc("@info", "Weather condition: %1; ", model[1][i].text));
+            }
+            if (model[2].length > 0) {
+                description.push(i18nc("@info", "Highest temperature: %1; ", model[2][i]));
+            }
+            if (model[3].length > 0) {
+                description.push(i18nc("@info", "Lowest temperature: %1; ", model[3][i]));
+            }
+        }
+        return description.join("");
+    }
+
     Component {
         id: timeDelegate
 
@@ -62,16 +93,14 @@ ColumnLayout {
             Layout.preferredHeight: preferredIconSize
             Layout.preferredWidth: preferredIconSize
 
+            source: cellData.icon
+
             PlasmaCore.ToolTipArea {
                 id: iconToolTip
 
                 anchors.fill: parent
-            }
 
-            Component.onCompleted: {
-                var values = cellData.split("|");
-                source = values[0];
-                iconToolTip.mainText = values[1];
+                mainText: cellData.text
             }
         }
     }

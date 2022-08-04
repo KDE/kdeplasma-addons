@@ -10,6 +10,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2 as QtControls
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ColumnLayout {
     id: root
@@ -87,7 +88,7 @@ ColumnLayout {
         Layout.minimumWidth: Math.max(forecastView.Layout.minimumWidth,
                                       detailsView.Layout.minimumWidth,
                                       noticesView.Layout.minimumWidth)
-        Layout.minimumHeight: Math.max(forecastView.Layout.minimumHeight,
+        Layout.minimumHeight: Math.max(forecastView.implicitHeight,
                                        detailsView.height,
                                        noticesView.Layout.minimumHeight)
 
@@ -95,12 +96,26 @@ ColumnLayout {
 
         currentIndex: tabBar.currentIndex
 
-        ColumnLayout {
+        Loader {
+            height: forecastView.implicitHeight
+
+            active: activeFocus
+            activeFocusOnTab: isCurrentItem
+            asynchronous: true
+
+            sourceComponent: PlasmaExtras.Highlight {
+                hovered: true
+            }
+
+            Accessible.description: forecastView.Accessible.description
+
             ForecastView {
                 id: forecastView
-
-                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                Layout.fillWidth: false
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                }
             }
         }
 
