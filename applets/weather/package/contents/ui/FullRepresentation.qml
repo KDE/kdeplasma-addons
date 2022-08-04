@@ -38,15 +38,36 @@ ColumnLayout {
         }
     }
 
-    TopPanel {
-        id: topPanel
+    Loader {
+        Layout.alignment: Qt.AlignTop
+        Layout.fillWidth: true
+        Layout.minimumWidth: topPanel.Layout.minimumWidth
+        Layout.preferredHeight: topPanel.implicitHeight
         visible: !root.needsConfiguration
 
-        Layout.fillWidth: true
+        active: activeFocus
+        activeFocusOnTab: true
+        asynchronous: true
+
+        Accessible.name: topPanel.Accessible.name
+        Accessible.description: topPanel.Accessible.description
+
+        sourceComponent: PlasmaExtras.Highlight {
+            hovered: true
+        }
+
+        TopPanel {
+            id: topPanel
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+        }
     }
 
     SwitchPanel {
         visible: !root.needsConfiguration
+        Layout.alignment: Qt.AlignTop
         Layout.fillWidth: true
 
         forecastViewTitle: generalModel.forecastTitle

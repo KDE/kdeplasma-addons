@@ -34,6 +34,23 @@ GridLayout {
 
     columns: 3
 
+    Accessible.name: locationLabel.text
+    Accessible.description: {
+        let description = [];
+
+        if (conditionLabel.text.length > 0) {
+            description.push(i18nc("@info", "Weather condition: %1", conditionLabel.text));
+        }
+        if (windSpeedLabel.text.length > 0) {
+            description.push(i18nc("@info", "Wind speed: %1", windSpeedLabel.text));
+        }
+        if (tempLabel.text.length > 0) {
+            description.push(i18nc("@info", "Temperature: %1", tempLabel.text));
+        }
+
+        return description.join("; ")
+    }
+
     PlasmaCore.Svg {
         id: windSvg
 
