@@ -4,20 +4,43 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.9
+import QtQuick 2.15
 
 import QtQuick.Layouts 1.3
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-ColumnLayout {
+Loader {
     id: root
+
+    Layout.minimumWidth: grid.implicitWidth
+    height: grid.implicitHeight
 
     property var model
 
+    active: activeFocus
+    activeFocusOnTab: isCurrentItem
+    asynchronous: true
+
+    sourceComponent: PlasmaExtras.Highlight {
+        hovered: true
+    }
+
+    Accessible.description: {
+        let description = [];
+        model.forEach((data) => {
+            description.push(`${data.label}: ${data.text};`);
+        });
+        return description.join(" ");
+    }
+
     GridLayout {
-        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+        id: grid
+
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
 
         rowSpacing: PlasmaCore.Units.smallSpacing
 

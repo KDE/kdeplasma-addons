@@ -88,7 +88,7 @@ ColumnLayout {
                                       detailsView.Layout.minimumWidth,
                                       noticesView.Layout.minimumWidth)
         Layout.minimumHeight: Math.max(forecastView.Layout.minimumHeight,
-                                       detailsView.Layout.minimumHeight,
+                                       detailsView.height,
                                        noticesView.Layout.minimumHeight)
 
         clip: true // previous/next views are prepared outside of view, do not render them
