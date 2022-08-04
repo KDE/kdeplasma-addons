@@ -32,6 +32,7 @@ public:
 
     void match(RunnerContext &context) override;
     void run(const RunnerContext &context, const QueryMatch &match) override;
+    QMimeData *mimeDataForMatch(const QueryMatch &match) override;
 
 private:
     std::unique_ptr<KUnitConversion::Converter> converter;

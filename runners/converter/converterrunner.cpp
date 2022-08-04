@@ -12,6 +12,8 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <QGuiApplication>
+#include <QLocale>
+#include <QMimeData>
 #include <QMutex>
 
 #include <cmath>
@@ -19,6 +21,8 @@
 static QMutex s_initMutex;
 
 K_PLUGIN_CLASS_WITH_JSON(ConverterRunner, "plasma-runner-converter.json")
+
+Q_DECLARE_METATYPE(KUnitConversion::Value)
 
 ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : AbstractRunner(parent, metaData, args)
@@ -114,7 +118,7 @@ void ConverterRunner::match(RunnerContext &context)
         } else {
             match.setText(QStringLiteral("%1 (%2)").arg(outputValue.toString(), outputUnit.symbol()));
         }
-        match.setData(outputValue.number());
+        match.setData(QVariant::fromValue(outputValue));
         match.setRelevance(1.0 - std::abs(std::log10(outputValue.number())) / 50.0);
         match.setActions(actionList);
         matches.append(match);
@@ -127,13 +131,24 @@ void ConverterRunner::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
 
+    const auto value = match.data().value<KUnitConversion::Value>();
+
     if (match.selectedAction()) {
-        const QString text = match.text();
-        QGuiApplication::clipboard()->setText(text.left(text.indexOf(QLatin1String(" ("))));
+        QGuiApplication::clipboard()->setText(value.toString());
     } else {
-        QGuiApplication::clipboard()->setText(match.data().toString());
+        QGuiApplication::clipboard()->setText(QString::number(value.number(), 'f', QLocale::FloatingPointShortest));
     }
 }
+
+QMimeData *ConverterRunner::mimeDataForMatch(const QueryMatch &match)
+{
+    const auto value = match.data().value<KUnitConversion::Value>();
+
+    auto *mimeData = new QMimeData();
+    mimeData->setText(value.toSymbolString());
+    return mimeData;
+}
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 QPair<bool, double> ConverterRunner::stringToDouble(const QStringRef &value)
 #else
