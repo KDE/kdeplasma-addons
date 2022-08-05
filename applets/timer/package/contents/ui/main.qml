@@ -12,6 +12,14 @@ import org.kde.plasma.private.timer 0.1 as TimerPlasmoid
 
 Item {
     id: root;
+
+    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 8
+    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 4
+
+    readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge, PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge]
+        .includes(Plasmoid.location)
+    readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
+
     readonly property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
 
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
@@ -53,8 +61,7 @@ Item {
     }
     Plasmoid.toolTipSubText: running ? i18np("Remaining time left: %1 second", "Remaining time left: %1 seconds", seconds) : i18n("Use mouse wheel to change digits or choose from predefined timers in the context menu");
 
-    Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
-    Plasmoid.compactRepresentation: TimerView { }
+    Plasmoid.compactRepresentation: CompactRepresentation { }
     Plasmoid.fullRepresentation: TimerView { }
 
     function toggleTimer() {
