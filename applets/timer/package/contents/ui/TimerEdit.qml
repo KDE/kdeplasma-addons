@@ -17,8 +17,6 @@ Row {
     property bool editable: true
     // in alert mode 2nd set of digits from svg file will be drawn
     property bool alertMode: false
-    // display seconds in addition to hours and minutes (default: enabled)
-    readonly property bool showSeconds: plasmoid.configuration.showSeconds;
 
     signal digitModified(int valueDelta)
 
@@ -26,7 +24,7 @@ Row {
         id: internal
         readonly property string digitSuffix: alertMode ? "_1" : ""
         // digits count include separators with 50% of digit width
-        readonly property real digits: showSeconds ? 7 : 4.5;
+        readonly property real digits: root.showSeconds ? 7 : 4.5;
         readonly property int digitH: (parent.height / 2) * digits < parent.width ? parent.height : parent.width / digits * 2
         readonly property int digitW: digitH / 2;
         property string valueString: "000000"
@@ -46,6 +44,8 @@ Row {
             MouseArea {
                 anchors.fill: parent
                 enabled: editable
+                propagateComposedEvents: true
+
                 onWheel: {
                     wheel.accepted = true
                     if (wheel.angleDelta.y > mouseWheelAngleThreshold) {
@@ -116,11 +116,11 @@ Row {
         }
     }
 
-    Loader { sourceComponent: showSeconds ? separator : undefined } // ":"
+    Loader { sourceComponent: root.showSeconds ? separator : undefined } // ":"
 
     Loader {
         id: second1
-        sourceComponent: showSeconds ? digit : undefined
+        sourceComponent: root.showSeconds ? digit : undefined
         onLoaded: {
             item.meaning = 10 //10s
             item.num = internal.valueString[4]
@@ -128,7 +128,7 @@ Row {
     }
     Loader {
         id: second2
-        sourceComponent: showSeconds ? digit : undefined
+        sourceComponent: root.showSeconds ? digit : undefined
         onLoaded: {
             item.meaning = 1 //1s
             item.num = internal.valueString[5]

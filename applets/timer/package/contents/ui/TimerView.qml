@@ -5,33 +5,69 @@
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
-Item {
-    id: main
-    readonly property int secondsForAlert: 60
+MouseArea {
+    Layout.preferredWidth: Math.max(Plasmoid.compactRepresentationItem.width, PlasmaCore.Units.gridUnit * 10)
+    Layout.preferredHeight: main.implicitHeight
 
-    Column {
+    onClicked: root.toggleTimer()
 
-        Text {
-            id: titleLabel
-            text: root.title
-            visible: root.showTitle;
-            horizontalAlignment: Text.AlignHCenter
-            height: 0.25 * main.height
-            font.pixelSize: 0.5 * height
+    Component {
+        id: popupHeadingComponent
+
+        PlasmaExtras.PlasmoidHeading {
+            leftPadding: PlasmaCore.Units.smallSpacing * 2
+            rightPadding: PlasmaCore.Units.smallSpacing * 2
+
+            contentItem: PlasmaExtras.Heading {
+                level: 3
+                elide: Text.ElideRight
+                horizontalAlignment: Text.AlignHCenter
+                text: root.title
+            }
         }
-        
+    }
+
+    Component {
+        id: desktopHeadingComponent
+
+        PlasmaComponents3.Label {
+            elide: Text.ElideRight
+            font.pixelSize: 0.3 * timerDigits.height
+            text: root.title
+        }
+    }
+
+    ColumnLayout {
+        id: main
+
+        width: parent.width
+
+        Loader {
+            Layout.fillWidth: true
+
+            active: root.showTitle
+
+            sourceComponent: root.inPanel ? popupHeadingComponent : desktopHeadingComponent
+        }
+
         TimerEdit {
             id: timerDigits
+
+            Layout.fillWidth: true
+
             value: root.seconds
             editable: !root.running
-            alertMode: root.running && (root.seconds < main.secondsForAlert)
-            width: main.width
-            height: main.height - titleLabel.height
+            alertMode: root.alertMode
             onDigitModified: root.seconds += valueDelta
             SequentialAnimation on opacity {
                 running: root.suspended;
@@ -56,31 +92,14 @@ Item {
                 }
             }
         }
-    }
 
-    MouseArea {
-        anchors.fill: parent;
-        onClicked: {
-            if (root.running) {
-                 root.stopTimer();
-            } else {
-                 root.startTimer();
-            }
+        function resetOpacity() {
+            timerDigits.opacity = 1.0;
+        }
+
+        Component.onCompleted: {
+            root.opacityNeedsReset.connect(resetOpacity);
         }
     }
-
-    function resetOpacity() {
-        timerDigits.opacity = 1.0;
-    }
-
-    PlasmaCore.ToolTipArea {
-        anchors.fill: parent
-        mainText: Plasmoid.toolTipMainText
-        subText: Plasmoid.toolTipSubText;
-    }
-
-    Component.onCompleted: {
-        root.opacityNeedsReset.connect(resetOpacity);
-    }
-
 }
+

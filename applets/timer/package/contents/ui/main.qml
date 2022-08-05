@@ -4,7 +4,7 @@
  *   SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import QtQuick 2.2
+import QtQuick 2.15
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
@@ -16,6 +16,8 @@ Item {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
 
+    // Display seconds in addition to hours and minutes (default: enabled)
+    readonly property bool showSeconds: Plasmoid.configuration.showSeconds
     property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);
 
     // show notification on timer completion (default: enabled)
@@ -27,6 +29,7 @@ Item {
     // show title (can be customized in the settings dialog, default: disabled)
     readonly property bool showTitle: plasmoid.configuration.showTitle;
     readonly property string title: plasmoid.configuration.title;
+    readonly property bool alertMode: root.running && root.seconds < 60
     property bool running: (plasmoid.configuration.running > 0) ? true : false;
     property bool suspended: false;
 
@@ -53,6 +56,14 @@ Item {
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
     Plasmoid.compactRepresentation: TimerView { }
     Plasmoid.fullRepresentation: TimerView { }
+
+    function toggleTimer() {
+        if (root.running) {
+            root.stopTimer();
+        } else {
+            root.startTimer();
+        }
+    }
 
     PlasmaCore.DataSource {
         id: notificationSource
