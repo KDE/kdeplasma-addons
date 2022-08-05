@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.5
+import QtQuick 2.15
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -38,8 +38,40 @@ Row {
             readonly property int mouseWheelAngleThreshold: 5
             width: internal.digitW
             height: internal.digitH
+
+            activeFocusOnTab: true
             svg: timerSvg
             elementId: num + internal.digitSuffix
+
+            Keys.onPressed: {
+                switch (event.key) {
+                case Qt.Key_Return:
+                case Qt.Key_Enter:
+                case Qt.Key_Space:
+                case Qt.Key_Select:
+                    root.toggleTimer();
+                    break;
+                case Qt.Key_Up:
+                    if (value + meaning < 24*60*60) {
+                        timerEdit.digitModified(meaning)
+                    }
+                    break;
+                case Qt.Key_Down:
+                    if (value - meaning >= 0) {
+                        timerEdit.digitModified(-meaning)
+                    }
+                    break;
+                case Qt.Key_Left:
+                    nextItemInFocusChain(false).forceActiveFocus(Qt.BacktabFocusReason);
+                    break;
+                case Qt.Key_Right:
+                    nextItemInFocusChain(true).forceActiveFocus(Qt.TabFocusReason);
+                    break;
+                default:
+                    return;
+                }
+                event.accepted = true;
+            }
 
             MouseArea {
                 anchors.fill: parent
