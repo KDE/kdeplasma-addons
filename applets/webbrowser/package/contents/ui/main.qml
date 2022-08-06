@@ -21,11 +21,15 @@ ColumnLayout {
             icon.name: "go-previous"
             onClicked: webview.goBack()
             enabled: webview.canGoBack
+            display: PlasmaComponents3.AbstractButton.IconOnly
+            text: i18nc("@action:button", "Go Back")
         }
         PlasmaComponents3.Button {
             icon.name: "go-next"
             onClicked: webview.goForward()
             enabled: webview.canGoForward
+            display: PlasmaComponents3.AbstractButton.IconOnly
+            text: i18nc("@action:button", "Go Forward")
         }
         PlasmaComponents3.TextField {
             Layout.fillWidth: true
@@ -43,6 +47,8 @@ ColumnLayout {
             }
 
             text: webview.url
+
+            Accessible.description: text.length > 0 ? text : i18nc("@info", "Type a URL")
         }
 
         // this shows page-related information such as blocked popups
@@ -76,7 +82,9 @@ ColumnLayout {
         }
 
         PlasmaComponents3.Button {
+            display: PlasmaComponents3.AbstractButton.IconOnly
             icon.name: webview.loading ? "process-stop" : "view-refresh"
+            text: webview.loading ? i18nc("@action:button", "Stop Loading This Page") : i18nc("@action:button", "Reload This Page")
             onClicked: webview.loading ? webview.stop() : webview.reload()
         }
     }
