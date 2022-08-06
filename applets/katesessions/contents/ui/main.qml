@@ -27,8 +27,6 @@ Item {
     Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 11
     Plasmoid.status: PlasmaCore.Types.ActiveStatus
     Plasmoid.toolTipMainText: i18n("Kate Sessions")
-    Plasmoid.icon: "kate"
-
 
     Component.onCompleted: {
         plasmoid.removeAction("configure");
