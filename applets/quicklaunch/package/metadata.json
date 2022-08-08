@@ -73,7 +73,7 @@
         "Description[uk]": "Запуск ваших улюблених програм",
         "Description[vi]": "Khởi chạy các ứng dụng bạn ưa thích",
         "Description[x-test]": "xxLaunch your favourite Applicationsxx",
-        "Description[zh_CN]": "启动您最常用的程序",
+        "Description[zh_CN]": "显示并启动您固定的程序",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop"

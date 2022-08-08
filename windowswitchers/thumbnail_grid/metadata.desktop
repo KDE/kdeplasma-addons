@@ -72,7 +72,7 @@ Comment[tr]=Küçük bir küçük resim ızgarası kullanan bir pencere değişt
 Comment[uk]=Компонування засобу перемикання вікон з малою таблицею мініатюр поточного стану вікон
 Comment[vi]=Bố cục trình chuyển cửa sổ dùng một lưới nhỏ các hình nhỏ
 Comment[x-test]=xxA window switcher layout using a small grid of thumbnailsxx
-Comment[zh_CN]=使用小网格缩略图布局的窗口切换器
+Comment[zh_CN]=将窗口缩略图按小型表格显示的窗口切换器布局
 Comment[zh_TW]=使用小格線縮圖的視窗切換器佈局
 
 Type=Service

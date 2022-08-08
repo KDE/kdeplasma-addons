@@ -71,7 +71,7 @@
         "Description[uk]": "Шукає профілі Konsole",
         "Description[vi]": "Tìm các hồ sơ Konsole",
         "Description[x-test]": "xxMatches Konsole Profilesxx",
-        "Description[zh_CN]": "匹配 Konsole 配置",
+        "Description[zh_CN]": "匹配 Konsole 配置方案",
         "EnabledByDefault": true,
         "Icon": "utilities-terminal",
         "Id": "konsoleprofiles",
@@ -109,6 +109,6 @@
         "Name[uk]": "Профілі Konsole",
         "Name[vi]": "Hồ sơ Konsole",
         "Name[x-test]": "xxKonsole Profilesxx",
-        "Name[zh_CN]": "Konsole 配置"
+        "Name[zh_CN]": "Konsole 配置方案"
     }
 }

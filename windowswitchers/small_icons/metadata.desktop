@@ -88,7 +88,7 @@ Comment[tr]=Pencereleri gösteren küçük simgeleri kullanan bir pencere deği�
 Comment[uk]=Компонування засобу перемикання вікон з малими піктограмами вікон
 Comment[vi]=Bố cục trình chuyển cửa sổ dùng các biểu tượng cỡ nhỏ để biểu diễn cửa sổ
 Comment[x-test]=xxA window switcher layout using small icons to represent the windowxx
-Comment[zh_CN]=一个用小图标表示窗口的窗口切换器布局
+Comment[zh_CN]=使用小图标代表窗口的窗口切换器布局
 Comment[zh_TW]=使用小圖示來表示視窗的視窗切換器佈局
 Icon=preferences-system-windows-switcher-small-icons
 

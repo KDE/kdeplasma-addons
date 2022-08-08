@@ -73,7 +73,7 @@
         "Description[uk]": "Групувати віджети Плазми",
         "Description[vi]": "Nhóm các phụ kiện Plasma lại với nhau",
         "Description[x-test]": "xxGroup Plasma widgets togetherxx",
-        "Description[zh_CN]": "组合多个 Plasma 小部件",
+        "Description[zh_CN]": "将多个 Plasma 挂件合并为一组",
         "EnabledByDefault": true,
         "Icon": "object-group",
         "Id": "org.kde.plasma.private.grouping",
@@ -111,7 +111,7 @@
         "Name[uk]": "Плазмоїд групування",
         "Name[vi]": "Plasmoid nhóm",
         "Name[x-test]": "xxGrouping Plasmoidxx",
-        "Name[zh_CN]": "分组小部件",
+        "Name[zh_CN]": "Plasma 小程序分组",
         "ServiceTypes": [
             "Plasma/Applet",
             "Plasma/Containment"

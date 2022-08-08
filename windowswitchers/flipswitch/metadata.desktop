@@ -28,7 +28,7 @@ Name[tr]=Deste Değiştirici
 Name[uk]=Тасування карток
 Name[vi]=Chuyển kiểu lật
 Name[x-test]=xxFlip Switchxx
-Name[zh_CN]=翻转切换
+Name[zh_CN]=3D 翻牌切换
 Comment=A Window Switcher layout showing thumbnails as a 3D card deck
 Comment[ar]=مبدل نوافذ يعرض كل النوافذ كمجموعة بطاقات ثلاثية الأبعاد
 Comment[az]=Pəncərə dəyişdiricisi qatı, eskizləri 3D kartdəsti kimi göstərir
@@ -58,7 +58,7 @@ Comment[tr]=Küçük resimleri 3B kart destesi olarak gösteren bir Pencere Değ
 Comment[uk]=Компонування засобу перемикання вікон з мініатюрами вікон у вигляді колоди карт
 Comment[vi]=Bố cục trình chuyển cửa sổ hiển thị các hình nhỏ thành một tập bài 3D
 Comment[x-test]=xxA Window Switcher layout showing thumbnails as a 3D card deckxx
-Comment[zh_CN]=一款将缩略图显示为 3D 卡片的窗口切换器。
+Comment[zh_CN]=使用 3D 翻牌风格显示缩略图的窗口切换器
 Icon=preferences-system-windows-effect-flipswitch
 
 X-Plasma-API=declarativeappletscript

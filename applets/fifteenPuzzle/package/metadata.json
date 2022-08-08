@@ -73,7 +73,7 @@
         "Description[uk]": "Спробуйте впорядкувати плитки",
         "Description[vi]": "Đảo các ô về đúng thứ tự",
         "Description[x-test]": "xxPut the pieces in orderxx",
-        "Description[zh_CN]": "按顺序摆放拼图块",
+        "Description[zh_CN]": "按顺序排列板块的小游戏",
         "Icon": "fifteenpuzzle",
         "Id": "org.kde.plasma.fifteenpuzzle",
         "License": "GPL-2.0+",
@@ -110,7 +110,7 @@
         "Name[uk]": "Гра у п’ятнашки",
         "Name[vi]": "Trò chơi đảo ô",
         "Name[x-test]": "xxFifteen Puzzlexx",
-        "Name[zh_CN]": "十五子拼图",
+        "Name[zh_CN]": "十五格拼图",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

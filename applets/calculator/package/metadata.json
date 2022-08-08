@@ -73,7 +73,7 @@
         "Description[uk]": "Обчисліть прості суми",
         "Description[vi]": "Tính các phép tính đơn giản",
         "Description[x-test]": "xxCalculate simple sumsxx",
-        "Description[zh_CN]": "简单求和计算",
+        "Description[zh_CN]": "简易四则运算计算器",
         "EnabledByDefault": true,
         "Icon": "accessories-calculator",
         "Id": "org.kde.plasma.calculator",

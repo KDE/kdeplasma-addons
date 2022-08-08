@@ -72,7 +72,7 @@
         "Description[uk]": "Визначення термінів",
         "Description[vi]": "Định nghĩa từ",
         "Description[x-test]": "xxDefine wordsxx",
-        "Description[zh_CN]": "查询单词含义",
+        "Description[zh_CN]": "查找单词含义",
         "EnabledByDefault": true,
         "Icon": "accessories-dictionary",
         "Id": "Dictionary",

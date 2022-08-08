@@ -73,7 +73,7 @@
         "Description[uk]": "Плазмоїд для керування нічними кольорами",
         "Description[vi]": "Plasmoid để điều khiển \"Màu buổi tối\"",
         "Description[x-test]": "xxPlasmoid for controlling Night Colorxx",
-        "Description[zh_CN]": "控制夜间颜色的小部件",
+        "Description[zh_CN]": "用于控制夜间颜色的 Plasma 小程序",
         "EnabledByDefault": true,
         "Icon": "redshift-status-on",
         "Id": "org.kde.plasma.nightcolorcontrol",

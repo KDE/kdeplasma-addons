@@ -73,7 +73,7 @@
         "Description[uk]": "Показує стрічку з жартами з Інтернету",
         "Description[vi]": "Xem các truyện tranh trên Liên Mạng",
         "Description[x-test]": "xxView comic strips from the Internetxx",
-        "Description[zh_CN]": "查看来自互联网的连环画",
+        "Description[zh_CN]": "阅读来自互联网的连环画",
         "EnabledByDefault": true,
         "Icon": "face-smile-big",
         "Id": "org.kde.plasma.comic",

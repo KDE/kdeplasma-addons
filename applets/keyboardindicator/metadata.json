@@ -72,7 +72,7 @@
         "Description[uk]": "Показує, чи задіяно Caps Lock або Num Lock",
         "Description[vi]": "Cho biết Caps Lock hay Num Lock có đang hoạt động không",
         "Description[x-test]": "xxShows whether Caps Lock or Num Lock are activexx",
-        "Description[zh_CN]": "显示大写锁定或小键盘数字锁定是否激活",
+        "Description[zh_CN]": "显示大写或小键盘数字锁定键的激活状态",
         "EnabledByDefault": true,
         "Icon": "input-keyboard",
         "Id": "org.kde.plasma.keyboardindicator",

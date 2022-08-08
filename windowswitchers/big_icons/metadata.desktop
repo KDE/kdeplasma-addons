@@ -89,7 +89,7 @@ Comment[tr]=Pencereleri gösteren büyük simgeleri kullanan bir pencere değiş
 Comment[uk]=Компонування засобу перемикання вікон з великими піктограмами вікон
 Comment[vi]=Bố cục trình chuyển cửa sổ dùng các biểu tượng cỡ lớn để biểu diễn cửa sổ
 Comment[x-test]=xxA window switcher layout using large icons to represent the windowxx
-Comment[zh_CN]=一个用大图标表示窗口的窗口切换器布局
+Comment[zh_CN]=使用大图标代表窗口的窗口切换器布局
 Comment[zh_TW]=使用大圖示來表示視窗的視窗切換器佈局
 Icon=preferences-system-windows-switcher-big-icons
 

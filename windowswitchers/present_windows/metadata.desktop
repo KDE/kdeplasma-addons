@@ -89,7 +89,7 @@ Comment[tr]=Tüm pencereleri ızgara içerisinde küçük resimler halinde göst
 Comment[uk]=Компонування засобу перемикання вікон з мініатюрами всіх вікон у форматі ґратки
 Comment[vi]=Bố cục trình chuyển cửa sổ hiển thị tất cả các cửa sổ thành các hình nhỏ trong một lưới
 Comment[x-test]=xxA Window Switcher layout showing all windows as thumbnails in a gridxx
-Comment[zh_CN]=一个用表格布局显示窗口预览的窗口切换器布局
+Comment[zh_CN]=将窗口缩略图按表格显示的窗口切换器布局
 Comment[zh_TW]=將所有視窗的縮圖顯示在格線中的視窗切換器佈局
 Icon=preferences-system-windows-switcher-present-windows
 
