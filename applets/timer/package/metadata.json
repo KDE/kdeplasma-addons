@@ -75,7 +75,7 @@
         "Description[uk]": "Зворотній відлік визначеного часу",
         "Description[vi]": "Đếm ngược một khoảng thời gian chỉ định",
         "Description[x-test]": "xxCountdown over a specified time periodxx",
-        "Description[zh_CN]": "对指定的时间长度进行倒计时",
+        "Description[zh_CN]": "指定时间长度进行倒计时",
         "EnabledByDefault": true,
         "Icon": "chronometer",
         "Id": "org.kde.plasma.timer",

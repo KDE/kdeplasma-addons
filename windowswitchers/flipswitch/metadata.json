@@ -61,7 +61,7 @@
         "Description[uk]": "Компонування засобу перемикання вікон з мініатюрами вікон у вигляді колоди карт",
         "Description[vi]": "Bố cục trình chuyển cửa sổ hiển thị các hình nhỏ thành một tập bài 3D",
         "Description[x-test]": "xxA Window Switcher layout showing thumbnails as a 3D card deckxx",
-        "Description[zh_CN]": "使用 3D 卡片风格显示缩略图的窗口切换器",
+        "Description[zh_CN]": "使用 3D 翻牌风格显示缩略图的窗口切换器",
         "Icon": "preferences-system-windows-effect-flipswitch",
         "Id": "flipswitch",
         "License": "GPL",
@@ -92,7 +92,7 @@
         "Name[uk]": "Тасування карток",
         "Name[vi]": "Chuyển kiểu lật",
         "Name[x-test]": "xxFlip Switchxx",
-        "Name[zh_CN]": "翻转切换",
+        "Name[zh_CN]": "3D 翻牌切换",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],

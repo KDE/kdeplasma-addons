@@ -95,7 +95,7 @@
         "Name[uk]": "Лише текст",
         "Name[vi]": "Chỉ chữ",
         "Name[x-test]": "xxText Onlyxx",
-        "Name[zh_CN]": "仅文本",
+        "Name[zh_CN]": "仅文字",
         "Name[zh_TW]": "只有文字",
         "ServiceTypes": [
             "KWin/WindowSwitcher"

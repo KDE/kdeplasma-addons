@@ -62,7 +62,7 @@
         "Description[uk]": "Інформативне компонування засобу перемикання вікон з назвами стільниць",
         "Description[vi]": "Bố cục mang nhiều thông tin cho trình chuyển cửa sổ, gồm cả tên bàn làm việc",
         "Description[x-test]": "xxAn informative window switcher layout including desktop namexx",
-        "Description[zh_CN]": "显示包含桌面名称在内的详尽信息的窗口切换器布局",
+        "Description[zh_CN]": "显示包含桌面名称在内的详细信息的窗口切换器布局",
         "Icon": "preferences-system-windows-switcher-informative",
         "Id": "informative",
         "License": "GPL",
@@ -94,7 +94,7 @@
         "Name[uk]": "Інформативне",
         "Name[vi]": "Nhiều thông tin",
         "Name[x-test]": "xxInformativexx",
-        "Name[zh_CN]": "详尽信息",
+        "Name[zh_CN]": "详细信息",
         "Name[zh_TW]": "資訊提供",
         "ServiceTypes": [
             "KWin/WindowSwitcher"

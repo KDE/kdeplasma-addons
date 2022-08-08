@@ -75,7 +75,7 @@
         "Description[uk]": "Вибір кольору зі стільниці",
         "Description[vi]": "Nhặt một màu trên bàn làm việc",
         "Description[x-test]": "xxPick a color from the desktopxx",
-        "Description[zh_CN]": "从桌面拾取颜色",
+        "Description[zh_CN]": "拾取桌面环境中的颜色",
         "Description[zh_TW]": "從桌面上提取顏色",
         "FormFactors": [
             "desktop"

@@ -75,7 +75,7 @@
         "Description[uk]": "Час, показаний у менш точному форматі",
         "Description[vi]": "Thời gian hiển thị ở dạng ít chính xác hơn",
         "Description[x-test]": "xxTime displayed in a less precise formatxx",
-        "Description[zh_CN]": "以不精确格式显示的时间",
+        "Description[zh_CN]": "用粗略格式显示时间",
         "Description[zh_TW]": "用比較不精確的方式顯示時間",
         "Icon": "preferences-system-time",
         "Id": "org.kde.plasma.fuzzyclock",
@@ -114,7 +114,7 @@
         "Name[uk]": "Нечіткий годинник",
         "Name[vi]": "Đồng mơ hồ",
         "Name[x-test]": "xxFuzzy Clockxx",
-        "Name[zh_CN]": "模糊时钟",
+        "Name[zh_CN]": "粗略时钟",
         "Name[zh_TW]": "模糊時鐘",
         "ServiceTypes": [
             "Plasma/Applet"

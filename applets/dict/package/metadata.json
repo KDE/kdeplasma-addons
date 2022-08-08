@@ -37,7 +37,7 @@
                 "Name[uk]": "Команда розробників Плазми",
                 "Name[vi]": "Đội Plasma",
                 "Name[x-test]": "xxThe Plasma Teamxx",
-                "Name[zh_CN]": "Plasma 开发团队",
+                "Name[zh_CN]": "The Plasma Team",
                 "Name[zh_TW]": "Plasma 團隊"
             }
         ],
@@ -75,7 +75,7 @@
         "Description[uk]": "Погляньте на значення слів та на їхній переклад іншими мовами",
         "Description[vi]": "Tra nghĩa của các từ và phần dịch của chúng sang các ngôn ngữ khác nhau",
         "Description[x-test]": "xxLook up the meaning of words and their translation into different languagesxx",
-        "Description[zh_CN]": "查阅单词词义以及其不同语言的翻译",
+        "Description[zh_CN]": "查找单词的含义和翻译",
         "Description[zh_TW]": "查詢詞彙的意思以及它們在不同語言的翻譯",
         "EnabledByDefault": true,
         "Icon": "accessories-dictionary",

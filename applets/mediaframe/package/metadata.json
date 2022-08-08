@@ -75,7 +75,7 @@
         "Description[uk]": "(Картинна) рамка",
         "Description[vi]": "Khung (ảnh)",
         "Description[x-test]": "xx(Picture) Framexx",
-        "Description[zh_CN]": "(图片) 相框",
+        "Description[zh_CN]": "图片相框",
         "Description[zh_TW]": "相框",
         "EnabledByDefault": true,
         "Icon": "image-x-generic",
