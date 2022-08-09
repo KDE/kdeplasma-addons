@@ -36,6 +36,7 @@
             }
         ],
         "Description": "A desktop switcher layout with previews of the desktops",
+        "Description[ar]": "تخطيط محوّل سطح المكتب مع معاينات لسطح المكتب",
         "Description[az]": "İş Masalarının miniatürləri ilə İş Masası dəyişdiricisi",
         "Description[bg]": "Програма за превключване на работни плотове с предварителен преглед",
         "Description[ca@valencia]": "Una disposició del commutador d'escriptori amb vistes prèvies dels escriptoris",
@@ -63,6 +64,7 @@
         "Id": "previews",
         "License": "GPL",
         "Name": "Previews",
+        "Name[ar]": "المعاينات",
         "Name[az]": "Miniatür",
         "Name[bg]": "Предварителен преглед",
         "Name[ca@valencia]": "Vistes prèvies",
