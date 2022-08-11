@@ -22,6 +22,9 @@ ColumnLayout {
     property alias generalModel: topPanel.generalModel
     property alias observationModel: topPanel.observationModel
 
+    Layout.minimumWidth: Math.max(PlasmaCore.Units.gridUnit * 10, topPanel.implicitWidth, switchPanel.implicitWidth)
+    Layout.minimumHeight: Math.max(PlasmaCore.Units.gridUnit * 10, topPanel.implicitHeight + switchPanel.implicitHeight + sourceLabel.implicitHeight + (spacing * 2))
+
     PlasmaExtras.PlaceholderMessage {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         Layout.margins: PlasmaCore.Units.largeSpacing
@@ -46,6 +49,7 @@ ColumnLayout {
     }
 
     SwitchPanel {
+        id: switchPanel
         visible: !root.needsConfiguration
         Layout.fillWidth: true
 
@@ -56,6 +60,7 @@ ColumnLayout {
     }
 
     PlasmaComponents.Label {
+        id: sourceLabel
         visible: !root.needsConfiguration
         readonly property string creditUrl: generalModel.creditUrl
 
