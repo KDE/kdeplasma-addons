@@ -2,6 +2,7 @@
 Name=Flip Switch
 Name[ar]=مبدل التقليب
 Name[az]=Kartlar kimi çevirmək
+Name[bg]=Прелистване
 Name[ca]=Canvi en roda
 Name[ca@valencia]=Canvi en roda
 Name[cs]=Kartotéka
@@ -31,6 +32,7 @@ Name[zh_CN]=翻转切换
 Comment=A Window Switcher layout showing thumbnails as a 3D card deck
 Comment[ar]=مبدل نوافذ يعرض كل النوافذ كمجموعة بطاقات ثلاثية الأبعاد
 Comment[az]=Pəncərə dəyişdiricisi qatı, eskizləri 3D kartdəsti kimi göstərir
+Comment[bg]=Оформление на превключвател на прозорци, показващо всички прозорци като миниатюри в триизмерен плот за игра на карти
 Comment[ca]=Una disposició del commutador de finestres que mostra les miniatures com una baralla de cartes en 3D
 Comment[ca@valencia]=Una disposició del commutador de finestres que mostra les miniatures com una baralla de cartes en 3D
 Comment[cs]=Rozvržení přepínače oken zobrazující náhledy jako 3D balíček karet

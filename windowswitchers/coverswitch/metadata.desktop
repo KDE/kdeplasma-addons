@@ -2,6 +2,7 @@
 Name=Cover Switch
 Name[ar]=مبدل الأغلفة
 Name[az]=Üz qabığı dəyişdiricisi
+Name[bg]=Параван
 Name[ca]=Canvi de capa
 Name[ca@valencia]=Canvi de capa
 Name[cs]=Přehlídka oken
@@ -31,6 +32,7 @@ Name[zh_CN]=封面切换
 Comment=A Window Switcher layout showing thumbnails as a 3D carousel
 Comment[ar]=مبدل نوافذ يعرض كل النوافذ كمصغرات على شكل دائري ثلاثي الأبعاد.
 Comment[az]=Pəncərə dəyişdiricisi qatı, eskizləri 3D karusel kimi göstərir
+Comment[bg]=Оформление на превключвател на прозорци, показващо всички прозорци като миниатюри в триизмерна въртележка
 Comment[ca]=Una disposició del commutador de finestres que mostra les miniatures com un carrusel en 3D
 Comment[ca@valencia]=Una disposició del commutador de finestres que mostra les miniatures com un carrusel en 3D
 Comment[cs]=Rozvržení přepínače oken zobrazující náhledy jako 3D kolotoč
