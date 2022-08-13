@@ -280,14 +280,14 @@ Kirigami.FormLayout {
         // HACK: If Kirigami.FormData.label is put inside a TextArea,
         // the label will not align with text in the TextArea.
         Kirigami.FormData.label: i18nc("@label", "Title:")
+
+        Layout.fillWidth: true
+        Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
         visible: wallpaperPreview.visible && backend.title.length > 0
 
         Kirigami.SelectableLabel {
             id: titleLabel
-
-            Layout.fillWidth: true
-            Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
-
+            width: parent.width
             font.bold: true
             text: backend.title
             Accessible.name: titleLabel.Kirigami.FormData.label
@@ -300,14 +300,14 @@ Kirigami.FormLayout {
 
     Row {
         Kirigami.FormData.label: i18nc("@label", "Author:")
+
+        Layout.fillWidth: true
+        Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
         visible: wallpaperPreview.visible && backend.author.length > 0
 
         Kirigami.SelectableLabel {
             id: authorLabel
-
-            Layout.fillWidth: true
-            Layout.maximumWidth: titleLabel.Layout.maximumWidth
-
+            width: parent.width
             text: backend.author
             Accessible.name: authorLabel.Kirigami.FormData.label
         }
