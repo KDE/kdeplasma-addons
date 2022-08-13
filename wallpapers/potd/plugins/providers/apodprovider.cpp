@@ -50,7 +50,7 @@ void ApodProvider::pageRequestFinished(KJob *_job)
          *
          * <a href="https://www.instagram.com/through_my_lens_84/">Elena Pinna</a>
          */
-        const QRegularExpression infoRegEx(QStringLiteral("<center>.*?<b>(.+?)</b>.*?Credit.*?:.*?</b>(.+?)</center>"));
+        const QRegularExpression infoRegEx(QStringLiteral("<center>.*?<b>(.+?)</b>.*?Credit.*?</b>(.+?)</center>"));
         const QRegularExpressionMatch match = infoRegEx.match(data);
 
         if (match.hasMatch()) {
