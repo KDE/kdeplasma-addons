@@ -2,6 +2,7 @@
 Name=Compact
 Name[ar]=متراصّ
 Name[az]=Yığcam
+Name[bg]=Компактен
 Name[ca]=Compacte
 Name[ca@valencia]=Compacte
 Name[cs]=Kompaktní
@@ -47,6 +48,7 @@ Name[zh_TW]=簡潔
 Comment=A compact window switcher layout
 Comment[ar]=مخطط مبدل نوافذ متراص
 Comment[az]=Yığcam pəncərə dəyişdiricisi
+Comment[bg]=Компактно оформление на програмата за превключване на прозорци
 Comment[ca]=Una disposició del commutador de finestres compacta
 Comment[ca@valencia]=Una disposició del commutador de finestres compacta
 Comment[cs]=Kompaktní rozvržení přepínače oken
