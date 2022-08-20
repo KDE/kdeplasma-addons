@@ -48,46 +48,46 @@ QQC2.Control {
                                               // When calculating 1/3 the answer is
                                               // 18 characters long.
 
-    Keys.onDigit0Pressed: { digitClicked(0); zeroButton.forceActiveFocus(); }
-    Keys.onDigit1Pressed: { digitClicked(1); oneButton.forceActiveFocus(); }
-    Keys.onDigit2Pressed: { digitClicked(2); twoButton.forceActiveFocus(); }
-    Keys.onDigit3Pressed: { digitClicked(3); threeButton.forceActiveFocus(); }
-    Keys.onDigit4Pressed: { digitClicked(4); fourButton.forceActiveFocus(); }
-    Keys.onDigit5Pressed: { digitClicked(5); fiveButton.forceActiveFocus(); }
-    Keys.onDigit6Pressed: { digitClicked(6); sixButton.forceActiveFocus(); }
-    Keys.onDigit7Pressed: { digitClicked(7); sevenButton.forceActiveFocus(); }
-    Keys.onDigit8Pressed: { digitClicked(8); eightButton.forceActiveFocus(); }
-    Keys.onDigit9Pressed: { digitClicked(9); nineButton.forceActiveFocus(); }
-    Keys.onEscapePressed: { allClearClicked(); allClearButton.forceActiveFocus(); }
-    Keys.onDeletePressed: { clearClicked(); clearButton.forceActiveFocus(); }
+    Keys.onDigit0Pressed: { digitClicked(0); zeroButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDigit1Pressed: { digitClicked(1); oneButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDigit2Pressed: { digitClicked(2); twoButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDigit3Pressed: { digitClicked(3); threeButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDigit4Pressed: { digitClicked(4); fourButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDigit5Pressed: { digitClicked(5); fiveButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDigit6Pressed: { digitClicked(6); sixButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDigit7Pressed: { digitClicked(7); sevenButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDigit8Pressed: { digitClicked(8); eightButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDigit9Pressed: { digitClicked(9); nineButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onEscapePressed: { allClearClicked(); allClearButton.forceActiveFocus(Qt.TabFocusReason); }
+    Keys.onDeletePressed: { clearClicked(); clearButton.forceActiveFocus(Qt.TabFocusReason); }
     Keys.onPressed: {
         switch (event.key) {
         case Qt.Key_Plus:
             setOperator("+");
-            plusButton.forceActiveFocus();
+            plusButton.forceActiveFocus(Qt.TabFocusReason);
             break;
         case Qt.Key_Minus:
             setOperator("-");
-            minusButton.forceActiveFocus();
+            minusButton.forceActiveFocus(Qt.TabFocusReason);
             break;
         case Qt.Key_Asterisk:
             setOperator("*");
-            multiplyButton.forceActiveFocus();
+            multiplyButton.forceActiveFocus(Qt.TabFocusReason);
             break;
         case Qt.Key_Slash:
             setOperator("/");
-            divideButton.forceActiveFocus();
+            divideButton.forceActiveFocus(Qt.TabFocusReason);
             break;
         case Qt.Key_Comma:
         case Qt.Key_Period:
             decimalClicked();
-            decimalButton.forceActiveFocus();
+            decimalButton.forceActiveFocus(Qt.TabFocusReason);
             break;
         case Qt.Key_Equal:
         case Qt.Key_Return:
         case Qt.Key_Enter:
             equalsClicked();
-            display.forceActiveFocus();
+            display.forceActiveFocus(Qt.TabFocusReason);
             break;
         default:
             if (event.matches(StandardKey.Copy)) {
