@@ -40,6 +40,7 @@ Kirigami.FormLayout {
             }
             return [];
         }
+        updateOverMeteredConnection: wallpaper.configuration.UpdateOverMeteredConnection
     }
 
     QQC2.ComboBox {
