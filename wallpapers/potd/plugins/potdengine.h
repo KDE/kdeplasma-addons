@@ -6,15 +6,19 @@
 
 #pragma once
 
+#include "config-NetworkManagerQt.h"
+
 #include <unordered_map>
 
 #include <QDate>
 #include <QObject>
 #include <QTimer>
 
+#if HAVE_NetworkManagerQt
+#include <NetworkManagerQt/Manager>
+#endif
 #include <KPluginMetaData>
 
-#include "config-NetworkManagerQt.h"
 #include "potdprovider.h"
 
 /**
@@ -96,6 +100,9 @@ private Q_SLOTS:
     void forceUpdateSource();
     void slotDone(PotdClient *client, bool success);
     void slotPrepareForSleep(bool sleep);
+#if HAVE_NetworkManagerQt
+    void slotConnectivityChanged(NetworkManager::Connectivity connectivity);
+#endif
 
 private:
     void loadPluginMetaData();

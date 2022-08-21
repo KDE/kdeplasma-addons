@@ -11,9 +11,6 @@
 #include <QDBusConnection>
 #include <QThreadPool>
 
-#if HAVE_NetworkManagerQt
-#include <NetworkManagerQt/Manager>
-#endif
 #include <KPluginFactory>
 
 #include "cachedprovider.h"
@@ -231,6 +228,10 @@ PotdEngine::PotdEngine(QObject *parent)
                                          QStringLiteral("PrepareForSleep"),
                                          this,
                                          SLOT(slotPrepareForSleep(bool)));
+
+#if HAVE_NetworkManagerQt
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::connectivityChanged, this, &PotdEngine::slotConnectivityChanged);
+#endif
 }
 
 PotdClient *PotdEngine::registerClient(const QString &identifier, const QVariantList &args)
@@ -337,10 +338,27 @@ void PotdEngine::slotPrepareForSleep(bool sleep)
         return;
     }
 
+#if HAVE_NetworkManagerQt
+    if (NetworkManager::connectivity() != NetworkManager::Connectivity::Full) {
+        qCDebug(WALLPAPERPOTD) << "Waking up from sleep but the network is not connected yet.";
+        return;
+    }
+#endif
+
     // Resume from sleep
     // Always force update to work around the current date not being updated
     forceUpdateSource();
 }
+
+#if HAVE_NetworkManagerQt
+void PotdEngine::slotConnectivityChanged(NetworkManager::Connectivity connectivity)
+{
+    if (connectivity == NetworkManager::Connectivity::Full) {
+        qCDebug(WALLPAPERPOTD) << "Network is connected.";
+        updateSource(false);
+    }
+}
+#endif
 
 void PotdEngine::loadPluginMetaData()
 {
