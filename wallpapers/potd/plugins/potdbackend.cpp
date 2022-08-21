@@ -57,11 +57,6 @@ void PotdBackend::componentComplete()
 
     // Register the identifier in the data engine
     registerClient();
-#if HAVE_NetworkManagerQt
-    if (m_client) {
-        m_client->setUpdateOverMeteredConnection(m_doesUpdateOverMeteredConnection);
-    }
-#endif
 }
 
 QString PotdBackend::identifier() const
@@ -294,4 +289,10 @@ void PotdBackend::registerClient()
     Q_EMIT remoteUrlChanged();
     Q_EMIT titleChanged();
     Q_EMIT authorChanged();
+
+#if HAVE_NetworkManagerQt
+    if (m_client) {
+        m_client->setUpdateOverMeteredConnection(m_doesUpdateOverMeteredConnection);
+    }
+#endif
 }

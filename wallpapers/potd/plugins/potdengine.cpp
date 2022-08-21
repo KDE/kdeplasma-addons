@@ -54,7 +54,8 @@ void PotdClient::updateSource(bool refresh)
     // Check whether it is cached already...
 #if HAVE_NetworkManagerQt
     // Use cache even if it's outdated when using metered connection
-    if (!refresh && (CachedProvider::isCached(m_identifier, m_args, false) || (m_doesUpdateOverMeteredConnection == 0 && isUsingMeteredConnection()))) {
+    const bool ignoreAge = m_doesUpdateOverMeteredConnection == 0 && isUsingMeteredConnection();
+    if (!refresh && (CachedProvider::isCached(m_identifier, m_args, ignoreAge))) {
 #else
     if (!refresh && CachedProvider::isCached(m_identifier, m_args, false)) {
 #endif
