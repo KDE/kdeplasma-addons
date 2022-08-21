@@ -222,6 +222,7 @@ PotdEngine::PotdEngine(QObject *parent)
     int interval = QDateTime::currentDateTime().msecsTo(QDate::currentDate().addDays(1).startOfDay()) + 1000;
     m_checkDatesTimer.setInterval(std::max(interval, 60 * 1000));
     m_checkDatesTimer.start();
+    qCDebug(WALLPAPERPOTD) << "Time to next update (h):" << m_checkDatesTimer.interval() / 1000.0 / 60.0 / 60.0;
 
     // Sleep checker
     QDBusConnection::systemBus().connect(QStringLiteral("org.freedesktop.login1"),
@@ -326,7 +327,7 @@ void PotdEngine::slotDone(PotdClient *client, bool success)
             m_checkDatesTimer.setInterval(10min);
         }
         m_checkDatesTimer.start();
-        qCDebug(WALLPAPERPOTD) << "Time to next update (ms):" << m_checkDatesTimer.interval();
+        qCDebug(WALLPAPERPOTD) << "Time to next update (h):" << m_checkDatesTimer.interval() / 1000.0 / 60.0 / 60.0;
     }
 }
 
