@@ -87,6 +87,7 @@ void PotdClient::updateSource(bool refresh)
     const auto pluginResult = KPluginFactory::instantiatePlugin<PotdProvider>(m_metadata, this, m_args);
 
     if (pluginResult) {
+        qCDebug(WALLPAPERPOTD) << "Downloading wallpaper from" << m_identifier << m_args;
         connect(pluginResult.plugin, &PotdProvider::finished, this, &PotdClient::slotFinished);
         connect(pluginResult.plugin, &PotdProvider::error, this, &PotdClient::slotError);
     } else {
