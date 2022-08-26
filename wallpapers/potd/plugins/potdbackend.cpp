@@ -169,11 +169,11 @@ int PotdBackend::doesUpdateOverMeteredConnection() const
 
 void PotdBackend::setUpdateOverMeteredConnection(int value)
 {
-    if (m_doesUpdateOverMeteredConnection == std::clamp(0, 2, value)) {
+    if (m_doesUpdateOverMeteredConnection == std::clamp(value, 0, 2)) {
         return;
     }
 
-    m_doesUpdateOverMeteredConnection = std::clamp(0, 2, value);
+    m_doesUpdateOverMeteredConnection = std::clamp(value, 0, 2);
     Q_EMIT updateOverMeteredConnectionChanged();
 
 #if HAVE_NetworkManagerQt
