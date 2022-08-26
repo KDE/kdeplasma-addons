@@ -95,13 +95,13 @@ void PotdClient::updateSource(bool refresh)
 #if HAVE_NetworkManagerQt
 void PotdClient::setUpdateOverMeteredConnection(int value)
 {
-    if (m_doesUpdateOverMeteredConnection == value) {
-        return;
-    }
+    // Don't return if values are the same because there can be multiple
+    // backends. Instead, let updateSource() decide whether to update
+    // the wallpaper.
 
     m_doesUpdateOverMeteredConnection = value;
     if (m_doesUpdateOverMeteredConnection == 1 && isUsingMeteredConnection()) {
-        updateSource(true);
+        updateSource();
     }
 }
 #endif
