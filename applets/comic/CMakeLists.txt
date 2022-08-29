@@ -25,7 +25,6 @@ target_link_libraries(org.kde.plasma.comic
                       KF5::KIOWidgets
                       KF5::NewStuff
                       KF5::Notifications
-                      KF5::Archive
                       plasma_engine_comic)
 
 install(FILES comic.knsrc DESTINATION ${KDE_INSTALL_KNSRCDIR})

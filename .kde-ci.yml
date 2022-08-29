@@ -6,7 +6,6 @@ Dependencies:
   'require':
     'frameworks/attica': '@latest'
     'frameworks/extra-cmake-modules': '@latest'
-    'frameworks/karchive': '@latest'
     'frameworks/kauth': '@latest'
     'frameworks/kcmutils': '@latest'
     'frameworks/kcodecs': '@latest'
