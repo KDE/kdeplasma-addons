@@ -5,9 +5,10 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.5
-import QtQuick.Layouts 1.3
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+
+import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.plasmoid 2.0
 import org.kde.draganddrop 2.0 as DnD
@@ -29,26 +30,27 @@ Item {
         addApplet(applet);
         //when we add an applet, select it straight away
         //we know it will always be at the end of the stack
-        tabbar.currentIndex = mainStack.count -1
+        tabbar.currentIndex = mainStack.count -1;
     }
     Containment.onAppletRemoved: {
-       for (var i=0; i<mainStack.count; i++) {
-            if (mainStack.children[i].itemId == applet.id) {
+        for (var i = 0; i < mainStack.count; i++) {
+            if (mainStack.children[i].itemId === applet.id) {
                 mainStack.children[i].destroy();
                 break;
             }
-       }
+        }
     }
 
     function addApplet(applet) {
         if (!plasmoidItemComponent) {
             plasmoidItemComponent = Qt.createComponent("items/PlasmoidItem.qml");
         }
-        if (plasmoidItemComponent.status == Component.Error) {
+
+        if (plasmoidItemComponent.status === Component.Error) {
             console.warn("Could not create PlasmoidItem", plasmoidItemComponent.errorString());
         }
 
-        var plasmoidContainer = plasmoidItemComponent.createObject(mainStack, {"applet": applet});
+        var plasmoidContainer = plasmoidItemComponent.createObject(mainStack, { applet });
 
         applet.anchors.fill = undefined;
         applet.parent = plasmoidContainer;
@@ -58,7 +60,7 @@ Item {
 
     Component.onCompleted: {
         var applets = Containment.applets;
-        for (var i =0 ; i < applets.length; i++) {
+        for (var i = 0 ; i < applets.length; i++) {
             addApplet(applets[i]);
         }
     }
@@ -97,15 +99,15 @@ Item {
         id: mainStack
         currentIndex: tabbar.currentIndex
         anchors.top: tabbar.bottom
-        anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
+        anchors.bottom: parent.bottom
     }
 
     DnD.DropArea {
         anchors.fill: parent
 
-        preventStealing: true;
+        preventStealing: true
 
         /** Extracts the name of the applet in the drag data if present
          * otherwise returns null*/
@@ -136,7 +138,7 @@ Item {
     PlasmaComponents.Label {
         anchors.fill: mainStack
         text: i18n("Drag applets here")
-        visible: mainStack.count == 0
+        visible: mainStack.count === 0
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter

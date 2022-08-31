@@ -24,7 +24,7 @@ Item {
     Component.onCompleted: {
         root.internalContainmentItem = plasmoid.nativeInterface.internalContainmentItem;
 
-        if (root.internalContainmentItem == null) {
+        if (root.internalContainmentItem === null) {
             return;
         }
         root.internalContainmentItem.anchors.fill = undefined;

@@ -5,8 +5,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick 2.15
+import org.kde.plasma.core 2.1 as PlasmaCore
 
 MouseArea {
     id: abstractItem
