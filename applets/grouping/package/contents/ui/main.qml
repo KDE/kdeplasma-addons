@@ -89,7 +89,7 @@ Item {
             }
         }
         //hack: PlasmaComponents.TabBar is being weird with heights. Probably a bug
-        height: contentChildren[0].height || 0
+        height: contentChildren[0] ? contentChildren[0].height : undefined
     }
 
     StackLayout {
