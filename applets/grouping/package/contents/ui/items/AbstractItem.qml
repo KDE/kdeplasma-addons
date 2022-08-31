@@ -15,7 +15,6 @@ MouseArea {
     property int status     //PlasmaCore.Types.ItemStatus
     property bool active
 
-    anchors.fill: abstractItem
     hoverEnabled: true
     drag.filterChildren: true
     acceptedButtons: Qt.RightButton
