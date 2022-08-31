@@ -50,6 +50,7 @@ Item {
 
         var plasmoidContainer = plasmoidItemComponent.createObject(mainStack, {"applet": applet});
 
+        applet.anchors.fill = undefined;
         applet.parent = plasmoidContainer;
         applet.anchors.fill = plasmoidContainer;
         applet.visible = true;

@@ -27,6 +27,7 @@ Item {
         if (root.internalContainmentItem == null) {
             return;
         }
+        root.internalContainmentItem.anchors.fill = undefined;
         root.internalContainmentItem.parent = root;
         root.internalContainmentItem.anchors.fill = root;
     }
