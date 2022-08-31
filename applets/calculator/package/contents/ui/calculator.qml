@@ -99,6 +99,11 @@ QQC2.Control {
         }
     }
 
+    KeyNavigation.up: zeroButton
+    KeyNavigation.down: clearButton
+    KeyNavigation.left: allClearButton
+    KeyNavigation.right: clearButton
+
     function digitClicked(digit) {
         if (showingResult) {
             allClearClicked();
@@ -296,6 +301,8 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: sevenButton
+                KeyNavigation.right: divideButton
 
                 text: i18nc("Text of the clear button", "C");
                 onClicked: clearClicked();
@@ -307,6 +314,9 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: eightButton
+                KeyNavigation.right: multiplyButton
+
                 text: i18nc("Text of the division button", "÷");
                 onClicked: setOperator("/");
             }
@@ -317,6 +327,9 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: nineButton
+                KeyNavigation.right: allClearButton
+
                 text: i18nc("Text of the multiplication button", "×");
                 onClicked: setOperator("*");
             }
@@ -326,6 +339,8 @@ QQC2.Control {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+                KeyNavigation.down: minusButton
 
                 text: i18nc("Text of the all clear button", "AC");
                 onClicked: allClearClicked();
@@ -338,6 +353,9 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: fourButton
+                KeyNavigation.right: eightButton
+
                 text: "7";
                 onClicked: digitClicked(7);
             }
@@ -347,6 +365,9 @@ QQC2.Control {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+                KeyNavigation.down: fiveButton
+                KeyNavigation.right: nineButton
 
                 text: "8";
                 onClicked: digitClicked(8);
@@ -358,6 +379,9 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: sixButton
+                KeyNavigation.right: minusButton
+
                 text: "9";
                 onClicked: digitClicked(9);
             }
@@ -367,6 +391,8 @@ QQC2.Control {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+                KeyNavigation.down: plusButton
 
                 text: i18nc("Text of the minus button", "-");
                 onClicked: setOperator("-");
@@ -379,6 +405,9 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: oneButton
+                KeyNavigation.right: fiveButton
+
                 text: "4";
                 onClicked: digitClicked(4);
             }
@@ -389,6 +418,8 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: twoButton
+                KeyNavigation.right: sixButton
 
                 text: "5";
                 onClicked: digitClicked(5);
@@ -400,6 +431,9 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: threeButton
+                KeyNavigation.right: plusButton
+
                 text: "6";
                 onClicked: digitClicked(6);
             }
@@ -409,6 +443,8 @@ QQC2.Control {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+                KeyNavigation.down: ansButton
 
                 text: i18nc("Text of the plus button", "+");
                 onClicked: setOperator("+");
@@ -421,6 +457,9 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: zeroButton
+                KeyNavigation.right: twoButton
+
                 text: "1";
                 onClicked: digitClicked(1);
             }
@@ -431,6 +470,9 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.down: zeroButton
+                KeyNavigation.right: threeButton
+
                 text: "2";
                 onClicked: digitClicked(2);
             }
@@ -440,6 +482,9 @@ QQC2.Control {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+                KeyNavigation.down: decimalButton
+                KeyNavigation.right: ansButton
 
                 text: "3";
                 onClicked: digitClicked(3);
@@ -462,6 +507,8 @@ QQC2.Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                KeyNavigation.right: decimalButton
+
                 Layout.columnSpan: 2
                 text: "0";
                 onClicked: digitClicked(0);
@@ -472,6 +519,8 @@ QQC2.Control {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+                KeyNavigation.right: ansButton
 
                 text: Qt.locale().decimalPoint;
                 onClicked: decimalClicked();
