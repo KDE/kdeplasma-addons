@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.2
+import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.0 as QtDialogs
 
@@ -260,11 +261,24 @@ Item {
         highlight: PlasmaExtras.Highlight {}
         highlightMoveDuration: 0
 
-        PlasmaComponents3.Button {
+        Loader {
+            width: parent.width - PlasmaCore.Units.largeSpacing * 2
             anchors.centerIn: parent
-            text: i18nc("@action:button", "Pick Color")
-            visible: fullRoot.count === 0
-            onClicked: root.pickColor()
+            visible: active
+
+            active: fullRoot.count === 0
+            asynchronous: true
+
+            sourceComponent: PlasmaExtras.PlaceholderMessage {
+                iconName: "edit-none"
+                text: i18nc("@info:usagetip", "No colors")
+
+                helpfulAction: QQC2.Action {
+                    icon.name: "color-picker"
+                    text: i18nc("@action:button", "Pick Color")
+                    onTriggered: root.pickColor()
+                }
+            }
         }
 
         Connections {
