@@ -170,7 +170,22 @@ Item {
         PlasmaComponents3.Label {
             id: remainingTimeLabel
 
-            Layout.fillWidth: true
+            Layout.alignment: layoutForm == CompactRepresentation.LayoutType.VerticalPanel || layoutForm === CompactRepresentation.LayoutType.VerticalDesktop ? Qt.AlignHCenter : Qt.AlignLeft
+            Layout.fillWidth: false
+            Layout.maximumWidth: textMetrics.width
+            Layout.minimumWidth: textMetrics.width
+
+            TextMetrics {
+                id: textMetrics
+                text: {
+                    if (root.isVertical) {
+                        return i18ncp("remaining time", "%1s", "%1s", root.seconds);
+                    }
+                    // make it not jump around: reserve space for one extra digit than reasonable
+                    return root.showSeconds ? "44:44:444" : "44:444";
+                }
+                font: remainingTimeLabel.font
+            }
 
             activeFocusOnTab: true
             elide: root.inPanel ? Text.ElideRight : Text.ElideNone
