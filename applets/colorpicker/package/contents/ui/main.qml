@@ -14,6 +14,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents // for ModelContextMenu and deficiencies with PC3 ToolButton+ToolTip (see inline TODOs)
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.draganddrop 2.0
 
@@ -25,22 +26,21 @@ Item {
 
     readonly property bool isVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
 
-    readonly property color recentColor: plasmoid.configuration.history[0] || "#00000000" // transparent as fallback
+    readonly property color recentColor: historyModel.count > 0 ? historyModel.get(0).color : "#00000000" // transparent as fallback
     readonly property string defaultFormat: plasmoid.configuration.defaultFormat
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
     Plasmoid.toolTipSubText: Logic.formatColor(recentColor, defaultFormat)
 
     function addColorToHistory(color) {
-        // this is needed, otherwise the first pick after plasma start isn't registered
-        var history = plasmoid.configuration.history
-
         // this .toString() is needed otherwise Qt completely screws it up
         // replacing *all* items in the list by the new items and other nonsense
-        history.unshift(color.toString())
-
+        historyModel.insert(0, {"color": color.toString()});
         // limit to 9 entries
-        plasmoid.configuration.history = history.slice(0, 9)
+        if (historyModel.count > 9) {
+            historyModel.remove(9);
+        }
+        historyModel.save();
     }
 
     function colorPicked(color) {
@@ -77,6 +77,18 @@ Item {
         onTriggered: root.pickColor()
     }
 
+    ListModel {
+        id: historyModel
+
+        function save() {
+            let history = [];
+            for (let i = 0; i < count; i++) {
+               history.push(get(i).color);
+            }
+            Plasmoid.configuration.history = history;
+        }
+    }
+
     Plasmoid.onActivated: {
         if (plasmoid.configuration.pickOnActivate) {
             delayedPickTimer.start()
@@ -84,7 +96,8 @@ Item {
     }
 
     function action_clear() {
-        plasmoid.configuration.history = []
+        historyModel.clear();
+        historyModel.save();
     }
 
     function action_colordialog() {
@@ -94,6 +107,7 @@ Item {
     Component.onCompleted: {
         plasmoid.setAction("colordialog", i18nc("@action", "Open Color Dialog"), "color-management")
         plasmoid.setAction("clear", i18nc("@action", "Clear History"), "edit-clear-history")
+        Plasmoid.configuration.history.forEach(item => historyModel.append({"color": item}));
     }
 
     Plasmoid.compactRepresentation: Grid {
@@ -256,7 +270,7 @@ Item {
         cellHeight: cellWidth
         boundsBehavior: Flickable.StopAtBounds
 
-        model: plasmoid.configuration.history
+        model: historyModel
 
         highlight: PlasmaExtras.Highlight {}
         highlightMoveDuration: 0
@@ -316,7 +330,7 @@ Item {
         delegate: MouseArea {
             id: delegateMouse
 
-            readonly property color currentColor: modelData
+            readonly property color currentColor: model.color
 
             width: fullRoot.cellWidth
             height: fullRoot.cellHeight
@@ -332,6 +346,7 @@ Item {
             acceptedButtons: Qt.LeftButton | Qt.RightButton
             hoverEnabled: true
 
+            Keys.onDeletePressed: remove()
             Keys.onPressed: {
                 switch (event.key) {
                 case Qt.Key_Space:
@@ -366,6 +381,11 @@ Item {
             onClicked: {
                 formattingMenu.model = Logic.menuForColor(delegateMouse.currentColor)
                 formattingMenu.open(0, rect.height)
+            }
+
+            function remove() {
+                historyModel.remove(index);
+                historyModel.save();
             }
 
             PlasmaCore.ToolTipArea {
@@ -415,6 +435,23 @@ Item {
                 PlasmaComponents.ModelContextMenu {
                     id: formattingMenu
                     onClicked: picker.copyToClipboard(model.text)
+                }
+            }
+
+            Loader {
+                active: parent.containsMouse || Kirigami.Settings.tabletMode || Kirigami.Settings.hasTransientTouchInput
+                anchors.right: parent.right
+                anchors.top: parent.top
+                sourceComponent: PlasmaComponents3.Button {
+                    text: i18nc("@action:button", "Delete")
+                    icon.name: "delete"
+                    display: PlasmaComponents3.AbstractButton.IconOnly
+
+                    onClicked: delegateMouse.remove()
+
+                    PlasmaComponents3.ToolTip {
+                        text: parent.text
+                    }
                 }
             }
         }
