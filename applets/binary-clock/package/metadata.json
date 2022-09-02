@@ -79,7 +79,15 @@
             },
             {
                 "Email": "piotrkakol@protonmail.com",
-                "Name": "Piotr Kąkol"
+                "Name": "Piotr Kąkol",
+                "Name[bg]": "Piotr Kąkol",
+                "Name[ca]": "Piotr Kąkol",
+                "Name[eu]": "Piotr Kąkol",
+                "Name[nl]": "Piotr Kąkol",
+                "Name[pt]": "Piotr Kąkol",
+                "Name[tr]": "Piotr Kąkol",
+                "Name[uk]": "Piotr Kąkol",
+                "Name[x-test]": "xxPiotr Kąkolxx"
             }
         ],
         "Category": "Date and Time",
