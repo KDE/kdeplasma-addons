@@ -24,6 +24,22 @@ Item {
     width: isPopupItem ? LayoutManager.popupItemWidth() : grid.cellWidth
     height: isPopupItem ? LayoutManager.popupItemHeight() : grid.cellHeight
 
+    Keys.onPressed: {
+        switch (event.key) {
+        case Qt.Key_Space:
+        case Qt.Key_Enter:
+        case Qt.Key_Return:
+        case Qt.Key_Select:
+            logic.openUrl(url);
+            break;
+        case Qt.Key_Menu:
+            contextMenu.refreshActions();
+            contextMenu.open(0,0);
+            event.accepted = true;
+            break;
+        }
+    }
+
     DragAndDrop.DragArea {
         id: dragArea
         width: Math.min(iconItem.width, iconItem.height)
@@ -58,21 +74,6 @@ Item {
             acceptedButtons: Qt.LeftButton | Qt.RightButton
 
             activeFocusOnTab: true
-            Keys.onPressed: {
-                switch (event.key) {
-                case Qt.Key_Space:
-                case Qt.Key_Enter:
-                case Qt.Key_Return:
-                case Qt.Key_Select:
-                    logic.openUrl(url);
-                    break;
-                case Qt.Key_Menu:
-                    contextMenu.refreshActions();
-                    contextMenu.open(0,0);
-                    event.accepted = true;
-                    break;
-                }
-            }
             Accessible.name: iconItem.launcher.applicationName
             Accessible.description: i18n("Launch %1", iconItem.launcher.genericName || iconItem.launcher.applicationName)
             Accessible.role: Accessible.Button
