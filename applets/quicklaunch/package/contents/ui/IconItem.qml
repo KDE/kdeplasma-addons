@@ -37,6 +37,11 @@ Item {
             contextMenu.open(0,0);
             event.accepted = true;
             break;
+        case Qt.Key_Backspace:
+        case Qt.Key_Delete:
+            removeLauncher();
+            event.accepted = true;
+            break;
         }
     }
 
