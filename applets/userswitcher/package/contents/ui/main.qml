@@ -114,17 +114,6 @@ Item {
         Layout.maximumWidth: Layout.preferredWidth
         Layout.maximumHeight: Screen.height / 2
 
-        PlasmaCore.DataSource {
-            id: pmEngine
-            engine: "powermanagement"
-            connectedSources: ["PowerDevil", "Sleep States"]
-
-            function performOperation(what) {
-                var service = serviceForSource("PowerDevil")
-                var operation = service.operationDescription(what)
-                service.startOperationCall(operation)
-            }
-        }
         Sessions.SessionManagement {
             id: sm
         }
@@ -222,12 +211,12 @@ Item {
                 id: lockScreenButton
                 text: i18nc("@action", "Lock Screen")
                 icon.name: "system-lock-screen"
-                visible: pmEngine.data["Sleep States"]["LockScreen"]
+                visible: sm.canLock
 
                 KeyNavigation.up: newSessionButton
                 KeyNavigation.down: leaveButton
 
-                onClicked: pmEngine.performOperation("lockScreen")
+                onClicked: sm.lock()
             }
 
             ActionListDelegate {
