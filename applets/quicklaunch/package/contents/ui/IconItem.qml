@@ -8,6 +8,7 @@ import QtQuick 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents // for ContextMenu+MenuItem
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.plasmoid 2.0
 import org.kde.draganddrop 2.0 as DragAndDrop
 
 import "layout.js" as LayoutManager
@@ -42,6 +43,97 @@ Item {
             removeLauncher();
             event.accepted = true;
             break;
+        }
+
+        // BEGIN Arrow keys
+        if (!(event.modifiers & Qt.ControlModifier) || !(event.modifiers & Qt.ShiftModifier)) {
+            return;
+        }
+
+        switch (event.key) {
+        case Qt.Key_Up: {
+            if (iconItem.isPopupItem && iconItem.itemIndex === 0 && Plasmoid.location === PlasmaCore.Types.TopEdge) {
+                iconItem.ListView.view.moveItemToGrid(iconItem, url);
+                break;
+            } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.BottomEdge) {
+                iconItem.GridView.view.moveItemToPopup(iconItem, url);
+                break;
+            }
+
+            decreaseIndex();
+            break;
+        }
+
+        case Qt.Key_Down: {
+            if (iconItem.isPopupItem && iconItem.itemIndex === iconItem.ListView.view.count - 1 && Plasmoid.location === PlasmaCore.Types.BottomEdge) {
+                iconItem.ListView.view.moveItemToGrid(iconItem, url);
+                break;
+            } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.TopEdge) {
+                iconItem.GridView.view.moveItemToPopup(iconItem, url);
+                break;
+            }
+
+            increaseIndex();
+            break;
+        }
+
+        case Qt.Key_Left: {
+            if (iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.LeftEdge) {
+                iconItem.ListView.view.moveItemToGrid(iconItem, url);
+                break;
+            } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.RightEdge) {
+                iconItem.GridView.view.moveItemToPopup(iconItem, url);
+                break;
+            }
+
+            decreaseIndex();
+            break;
+        }
+        case Qt.Key_Right: {
+            if (iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.RightEdge) {
+                iconItem.ListView.view.moveItemToGrid(iconItem, url);
+                break;
+            } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.LeftEdge) {
+                iconItem.GridView.view.moveItemToPopup(iconItem, url);
+                break;
+            }
+
+            increaseIndex();
+            break;
+        }
+        default:
+            return;
+        }
+
+        event.accepted = true;
+        // END Arrow keys
+    }
+
+    function decreaseIndex() {
+        const newIndex = iconItem.itemIndex - 1;
+        if (newIndex < 0) {
+            return;
+        }
+        if (iconItem.isPopupItem) {
+            popupModel.moveUrl(iconItem.itemIndex, newIndex);
+            iconItem.ListView.view.currentIndex = newIndex;
+        } else {
+            launcherModel.moveUrl(iconItem.itemIndex, newIndex);
+            iconItem.GridView.view.currentIndex = newIndex;
+        }
+    }
+
+    function increaseIndex() {
+        const newIndex = iconItem.itemIndex + 1;
+        if (newIndex === (iconItem.isPopupItem ? iconItem.ListView.view.count : iconItem.GridView.view.count)) {
+            return;
+        }
+        if (iconItem.isPopupItem) {
+            popupModel.moveUrl(iconItem.itemIndex, newIndex);
+            iconItem.ListView.view.currentIndex = newIndex;
+        } else {
+            launcherModel.moveUrl(iconItem.itemIndex, newIndex);
+            iconItem.GridView.view.currentIndex = newIndex;
         }
     }
 

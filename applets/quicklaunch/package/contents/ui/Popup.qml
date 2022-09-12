@@ -18,6 +18,7 @@ Item {
 
     property bool dragging: false
     property alias popupModel : popupModel
+    property alias listView: listView
 
     width: LayoutManager.popupItemWidth()
     height: Math.max(1, popupModel.count) * LayoutManager.popupItemHeight()
@@ -85,6 +86,12 @@ Item {
 
         highlightMoveDuration: PlasmaCore.Units.longDuration
         highlightMoveVelocity: 1
+
+        function moveItemToGrid(iconItem, url) {
+            launcherModel.insertUrl(launcherModel.count, url);
+            listView.currentIndex = launcherModel.count - 1;
+            iconItem.removeLauncher();
+        }
     }
 
     Connections {

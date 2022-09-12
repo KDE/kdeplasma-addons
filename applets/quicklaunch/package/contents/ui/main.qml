@@ -118,6 +118,17 @@ Item {
             }
 
             delegate: IconItem { }
+
+            function moveItemToPopup(iconItem, url) {
+                if (!popupArrow.visible) {
+                    return;
+                }
+
+                popup.visible = true;
+                popup.mainItem.popupModel.insertUrl(popup.mainItem.popupModel.count, url);
+                popup.mainItem.listView.currentIndex = popup.mainItem.popupModel.count - 1;
+                iconItem.removeLauncher();
+            }
         }
 
         PlasmaCore.IconItem {
