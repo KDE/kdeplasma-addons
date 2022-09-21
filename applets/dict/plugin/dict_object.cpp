@@ -32,8 +32,8 @@ Q_SIGNALS:
 
 DictObject::DictObject(QObject *parent)
     : QObject(parent)
+    , m_selectedDict(QStringLiteral("wn"))
 {
-    m_selectedDict = QStringLiteral("wn");
     m_webProfile = new QQuickWebEngineProfile(this);
     auto *schemeHandler = new DictSchemeHandler(this);
     connect(schemeHandler, &DictSchemeHandler::wordClicked, this, &DictObject::lookup);

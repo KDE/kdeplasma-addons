@@ -16,8 +16,8 @@
 
 NoteManager::NoteManager(QObject *parent)
     : QObject(parent)
+    , m_backend(loadBackend())
 {
-    m_backend = loadBackend();
 }
 
 Note *NoteManager::loadNote(const QString &id)
