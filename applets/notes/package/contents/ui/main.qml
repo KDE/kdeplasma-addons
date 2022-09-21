@@ -413,7 +413,7 @@ PlasmaCore.SvgItem {
                 left: parent.left
                 right: parent.right
             }
-
+            height: visible ? implicitHeight : 0
             visible: opacity > 0
             opacity: focusScope.activeFocus ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: PlasmaCore.Units.longDuration } }
