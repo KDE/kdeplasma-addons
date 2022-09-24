@@ -33,7 +33,6 @@ Column {
         width: Math.round(Screen.width / 10 + Kirigami.Units.smallSpacing * 2)
         height: Math.round(Screen.height / 10 + Kirigami.Units.smallSpacing * 2)
 
-        image: backend.image
         localUrl: backend.localUrl
         infoUrl: backend.infoUrl
         title: backend.title

@@ -21,11 +21,6 @@ FocusScope {
     readonly property alias isNull: wallpaperImage.null
 
     /**
-     * The wallpaper image
-     */
-    property alias image: wallpaperImage.image
-
-    /**
      * The background color of the preview area when the image is loaded
      */
     property color backgroundColor
@@ -142,6 +137,7 @@ FocusScope {
                 anchors.fill: parent
                 fillMode: wallpaper.configuration.FillMode || Image.PreserveAspectCrop
                 smooth: true
+                image: backend.image
 
                 Drag.dragType: Drag.Automatic
                 Drag.supportedActions: Qt.CopyAction
@@ -182,6 +178,12 @@ FocusScope {
 
                         transparentBorder: false
                     }
+                }
+
+                // Workaround for https://bugreports.qt.io/browse/QTBUG-73388
+                onImageChanged: {
+                    image.destroy();
+                    backend.image.destroy();
                 }
             }
 
