@@ -124,10 +124,10 @@ void PotdClient::slotFinished(PotdProvider *provider)
     } else {
         // Is cache provider
         setLocalUrl(CachedProvider::identifierToPath(m_identifier, m_args));
+        setLoading(false);
     }
 
     provider->deleteLater();
-    setLoading(false);
     Q_EMIT done(this, true);
 }
 
@@ -143,6 +143,7 @@ void PotdClient::slotError(PotdProvider *provider)
 void PotdClient::slotCachingFinished(const QString &, const PotdProviderData &data)
 {
     setLocalUrl(data.wallpaperLocalUrl);
+    setLoading(false);
 }
 
 void PotdClient::setImage(const QImage &image)
