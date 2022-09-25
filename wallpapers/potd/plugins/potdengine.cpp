@@ -65,14 +65,6 @@ void PotdClient::updateSource(bool refresh)
         return;
     }
 
-    // Find the old cached image and load it for now
-    if (m_data.wallpaperImage.isNull()) {
-        const QString path = CachedProvider::identifierToPath(m_identifier, m_args);
-        if (QFile::exists(path)) {
-            setImage(QImage(path));
-        }
-    }
-
 #if HAVE_NetworkManagerQt
     if (m_doesUpdateOverMeteredConnection == 0 && isUsingMeteredConnection()) {
         qCDebug(WALLPAPERPOTD) << "Skip updating wallpapers for" << m_identifier << m_args << "due to metered connection.";
@@ -110,7 +102,6 @@ void PotdClient::setUpdateOverMeteredConnection(int value)
 
 void PotdClient::slotFinished(PotdProvider *provider)
 {
-    setImage(provider->image());
     setInfoUrl(provider->infoUrl());
     setRemoteUrl(provider->remoteUrl());
     setTitle(provider->title());
@@ -118,6 +109,7 @@ void PotdClient::slotFinished(PotdProvider *provider)
 
     // Store in cache if it's not the response of a CachedProvider
     if (qobject_cast<CachedProvider *>(provider) == nullptr) {
+        m_data.wallpaperImage = provider->image();
         SaveImageThread *thread = new SaveImageThread(m_identifier, m_args, m_data);
         connect(thread, &SaveImageThread::done, this, &PotdClient::slotCachingFinished);
         QThreadPool::globalInstance()->start(thread);
@@ -144,12 +136,6 @@ void PotdClient::slotCachingFinished(const QString &, const PotdProviderData &da
 {
     setLocalUrl(data.wallpaperLocalUrl);
     setLoading(false);
-}
-
-void PotdClient::setImage(const QImage &image)
-{
-    m_data.wallpaperImage = image;
-    Q_EMIT imageChanged();
 }
 
 void PotdClient::setLoading(bool status)

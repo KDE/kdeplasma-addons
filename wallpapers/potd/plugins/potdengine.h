@@ -41,7 +41,6 @@ public:
     bool m_loading = false;
 
 Q_SIGNALS:
-    void imageChanged();
     void loadingChanged();
     void localUrlChanged();
     void infoUrlChanged();
@@ -56,7 +55,6 @@ private Q_SLOTS:
     void slotCachingFinished(const QString &source, const PotdProviderData &data);
 
 private:
-    void setImage(const QImage &image);
     void setLoading(bool status);
     void setLocalUrl(const QString &urlString);
     void setInfoUrl(const QUrl &url);

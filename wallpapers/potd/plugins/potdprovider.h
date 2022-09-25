@@ -49,7 +49,7 @@ public:
     /**
      * @deprecated Since 5.25. The constructor will be removed in Plasma 6.
      */
-    explicit PotdProvider(QObject *parent, const QVariantList &args);
+    PLASMA_POTD_DEPRECATED explicit PotdProvider(QObject *parent, const QVariantList &args);
 
     /**
      * Destroys the PoTD provider.

@@ -28,7 +28,6 @@ class PotdBackend : public QObject, public QQmlParserStatus
     /**
      * Read-only properties that expose data from the provider.
      */
-    Q_PROPERTY(QImage image READ image NOTIFY imageChanged)
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
     Q_PROPERTY(QString localUrl READ localUrl NOTIFY localUrlChanged)
     /**
@@ -93,7 +92,6 @@ public:
     QVariantList arguments() const;
     void setArguments(const QVariantList &args);
 
-    QImage image() const;
     bool loading() const;
     QString localUrl() const;
     QUrl infoUrl() const;
@@ -114,7 +112,6 @@ Q_SIGNALS:
     void identifierChanged();
     void argumentsChanged();
 
-    void imageChanged();
     void loadingChanged();
     void localUrlChanged();
     void infoUrlChanged();

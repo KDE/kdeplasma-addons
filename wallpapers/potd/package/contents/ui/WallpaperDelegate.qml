@@ -11,19 +11,18 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.15 as Kirigami
-import org.kde.kquickcontrolsaddons 2.0 as KQCAddons  // For QImageItem
 
 FocusScope {
     // FocusScope can pass Tab to inline buttons
     id: delegate
 
     readonly property int shadowOffset: thumbnail.shadow.size - thumbnail.shadow.yOffset
-    readonly property alias isNull: wallpaperImage.null
+    readonly property bool isNull: wallpaperImage.status !== Image.Ready
 
     /**
      * The wallpaper image
      */
-    property alias image: wallpaperImage.image
+    required property string source
 
     /**
      * The background color of the preview area when the image is loaded
@@ -76,6 +75,15 @@ FocusScope {
 
     Keys.onMenuPressed: contextMenu.popup(delegate, thumbnail.x, thumbnail.y + thumbnail.height)
     Keys.onSpacePressed: contextMenu.popup(delegate, thumbnail.x, thumbnail.y + thumbnail.height)
+
+    onThumbnailLoadingChanged: {
+        if (!thumbnailLoading) {
+            wallpaperImage.source = "";
+            wallpaperImage.source = delegate.source;
+        } else {
+            wallpaperImage.source = delegate.source;
+        }
+    }
 
     TapHandler {
         acceptedButtons: Qt.RightButton
@@ -136,10 +144,12 @@ FocusScope {
                                   : delegate.thumbnailLoading ? i18nc("@info:whatsthis", "The wallpaper is being fetched from the Internet.")
                                                               : i18nc("@info:whatsthis", "Failed to fetch the wallpaper from the Internet.")
 
-            KQCAddons.QImageItem {
+            Image {
                 id: wallpaperImage
 
                 anchors.fill: parent
+                autoTransform: false
+                cache: false
                 fillMode: wallpaper.configuration.FillMode || Image.PreserveAspectCrop
                 smooth: true
 
