@@ -24,7 +24,7 @@ QQC2.StackView {
     onSourceSizeChanged: Qt.callLater(root.loadImage)
 
     function loadImage() {
-        if (backend.loading) {
+        if (backend.localUrl.length === 0) {
             return;
         }
         if (root.pendingImage) {

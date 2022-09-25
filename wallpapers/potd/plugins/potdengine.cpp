@@ -65,6 +65,11 @@ void PotdClient::updateSource(bool refresh)
         return;
     }
 
+    if (auto url = CachedProvider::identifierToPath(m_identifier, m_args); QFile::exists(url)) {
+        setLocalUrl(url);
+        Q_EMIT loadingChanged();
+    }
+
 #if HAVE_NetworkManagerQt
     if (m_doesUpdateOverMeteredConnection == 0 && isUsingMeteredConnection()) {
         qCDebug(WALLPAPERPOTD) << "Skip updating wallpapers for" << m_identifier << m_args << "due to metered connection.";
