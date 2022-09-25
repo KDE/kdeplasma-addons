@@ -37,7 +37,8 @@ PotdClient::PotdClient(const KPluginMetaData &metadata, const QVariantList &args
     , m_identifier(metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")))
     , m_args(args)
 {
-    updateSource();
+    // updateSource() will be called in PotdClient::setUpdateOverMeteredConnection(bool)
+    // or PotdBackend::setUpdateOverMeteredConnection(bool)
 }
 
 void PotdClient::updateSource(bool refresh)
@@ -100,7 +101,8 @@ void PotdClient::setUpdateOverMeteredConnection(int value)
     // the wallpaper.
 
     m_doesUpdateOverMeteredConnection = value;
-    if (m_doesUpdateOverMeteredConnection == 1 && isUsingMeteredConnection()) {
+    const bool metered = isUsingMeteredConnection();
+    if (m_doesUpdateOverMeteredConnection == 1 || (m_doesUpdateOverMeteredConnection == 0 && !metered)) {
         updateSource();
     }
 }
