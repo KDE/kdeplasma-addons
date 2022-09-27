@@ -101,8 +101,7 @@ void PotdClient::setUpdateOverMeteredConnection(int value)
     // the wallpaper.
 
     m_doesUpdateOverMeteredConnection = value;
-    const bool metered = isUsingMeteredConnection();
-    if (m_doesUpdateOverMeteredConnection == 1 || (m_doesUpdateOverMeteredConnection == 0 && !metered)) {
+    if (m_doesUpdateOverMeteredConnection == 1 || (m_doesUpdateOverMeteredConnection == 0 && !isUsingMeteredConnection())) {
         updateSource();
     }
 }
