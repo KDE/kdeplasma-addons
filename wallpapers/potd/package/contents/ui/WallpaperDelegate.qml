@@ -78,7 +78,9 @@ FocusScope {
 
     onThumbnailLoadingChanged: {
         if (!thumbnailLoading) {
-            wallpaperImage.source = "";
+            if (wallpaperImage.source === Qt.resolvedUrl(delegate.source)) {
+                wallpaperImage.source = "";
+            }
             wallpaperImage.source = delegate.source;
         } else {
             wallpaperImage.source = delegate.source;
