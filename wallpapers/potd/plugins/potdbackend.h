@@ -112,6 +112,7 @@ Q_SIGNALS:
     void identifierChanged();
     void argumentsChanged();
 
+    void imageChanged();
     void loadingChanged();
     void localUrlChanged();
     void infoUrlChanged();

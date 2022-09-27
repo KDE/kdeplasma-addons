@@ -41,6 +41,10 @@ public:
     bool m_loading = false;
 
 Q_SIGNALS:
+    /**
+     * Emitted only when the image content has been updated
+     */
+    void imageChanged();
     void loadingChanged();
     void localUrlChanged();
     void infoUrlChanged();
@@ -64,6 +68,7 @@ private:
 
     QString m_identifier;
     QVariantList m_args;
+    bool m_imageChanged = false;
 #if HAVE_NetworkManagerQt
     int m_doesUpdateOverMeteredConnection = 0;
 #endif

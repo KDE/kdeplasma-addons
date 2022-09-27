@@ -67,7 +67,6 @@ void PotdClient::updateSource(bool refresh)
 
     if (auto url = CachedProvider::identifierToPath(m_identifier, m_args); QFile::exists(url)) {
         setLocalUrl(url);
-        Q_EMIT loadingChanged();
     }
 
 #if HAVE_NetworkManagerQt
@@ -115,12 +114,17 @@ void PotdClient::slotFinished(PotdProvider *provider)
     // Store in cache if it's not the response of a CachedProvider
     if (qobject_cast<CachedProvider *>(provider) == nullptr) {
         m_data.wallpaperImage = provider->image();
+        m_imageChanged = true;
         SaveImageThread *thread = new SaveImageThread(m_identifier, m_args, m_data);
         connect(thread, &SaveImageThread::done, this, &PotdClient::slotCachingFinished);
         QThreadPool::globalInstance()->start(thread);
     } else {
         // Is cache provider
         setLocalUrl(CachedProvider::identifierToPath(m_identifier, m_args));
+        if (m_imageChanged) {
+            m_imageChanged = false;
+            Q_EMIT imageChanged();
+        }
         setLoading(false);
     }
 
@@ -140,6 +144,7 @@ void PotdClient::slotError(PotdProvider *provider)
 void PotdClient::slotCachingFinished(const QString &, const PotdProviderData &data)
 {
     setLocalUrl(data.wallpaperLocalUrl);
+    Q_EMIT imageChanged();
     setLoading(false);
 }
 

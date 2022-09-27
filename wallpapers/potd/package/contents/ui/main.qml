@@ -72,7 +72,8 @@ QQC2.StackView {
         }
         updateOverMeteredConnection: wallpaper.configuration.UpdateOverMeteredConnection
 
-        onLoadingChanged: Qt.callLater(root.loadImage)
+        onImageChanged: Qt.callLater(root.loadImage)
+        onLocalUrlChanged: Qt.callLater(root.loadImage)
     }
 
     Component {

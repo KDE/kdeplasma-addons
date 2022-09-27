@@ -266,6 +266,7 @@ void PotdBackend::registerClient()
         return;
     }
 
+    connect(m_client, &PotdClient::imageChanged, this, &PotdBackend::imageChanged);
     connect(m_client, &PotdClient::loadingChanged, this, &PotdBackend::loadingChanged);
     connect(m_client, &PotdClient::localUrlChanged, this, &PotdBackend::localUrlChanged);
     connect(m_client, &PotdClient::infoUrlChanged, this, &PotdBackend::infoUrlChanged);
