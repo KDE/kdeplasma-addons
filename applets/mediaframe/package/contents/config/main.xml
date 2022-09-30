@@ -14,9 +14,6 @@
     <entry name="pauseOnMouseOver" type="Bool">
         <default>true</default>
     </entry>
-    <entry name="useBackground" type="Bool">
-        <default>true</default>
-    </entry>
     <entry name="leftClickOpenImage" type="Bool">
         <default>true</default>
     </entry>

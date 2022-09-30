@@ -16,7 +16,6 @@ Kirigami.FormLayout {
 
     property alias cfg_randomize: randomizeCheckBox.checked
     property alias cfg_pauseOnMouseOver: pauseOnMouseOverCheckBox.checked
-    property alias cfg_useBackground: useBackgroundCheckBox.checked
     property alias cfg_leftClickOpenImage: leftClickOpenImageCheckBox.checked
     //property alias cfg_showCountdown: showCountdownCheckBox.checked
     property alias cfg_fillMode: root.fillMode
@@ -191,11 +190,6 @@ Kirigami.FormLayout {
     CheckBox {
         id: pauseOnMouseOverCheckBox
         text: i18nc("@option:check", "Pause slideshow when cursor is over image")
-    }
-
-    CheckBox {
-        id: useBackgroundCheckBox
-        text: i18nc("@option:check", "Show background frame")
     }
 
     CheckBox {

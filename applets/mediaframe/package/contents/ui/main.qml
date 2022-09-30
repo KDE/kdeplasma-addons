@@ -30,7 +30,7 @@ Item {
     Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 5
     Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 5
 
-    Plasmoid.backgroundHints: plasmoid.configuration.useBackground ? PlasmaCore.Types.DefaultBackground : PlasmaCore.Types.NoBackground
+    Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
     width: PlasmaCore.Units.gridUnit * 20
     height: PlasmaCore.Units.gridUnit * 13
