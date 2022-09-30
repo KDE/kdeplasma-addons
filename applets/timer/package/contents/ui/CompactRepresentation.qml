@@ -18,30 +18,8 @@ Item {
 
     Layout.minimumHeight: root.inPanel ? Layout.preferredHeight : -1
 
-    Layout.preferredWidth: {
-        switch (layoutForm) {
-        case CompactRepresentation.LayoutType.HorizontalPanel:
-        case CompactRepresentation.LayoutType.HorizontalDesktop:
-            return iconItem.width + column.width;
-        case CompactRepresentation.LayoutType.VerticalPanel:
-        case CompactRepresentation.LayoutType.VerticalDesktop:
-            return parent.width;
-        case CompactRepresentation.LayoutType.IconOnly:
-            return -1;
-        }
-    }
-    Layout.preferredHeight: {
-        switch (layoutForm) {
-        case CompactRepresentation.LayoutType.HorizontalPanel:
-        case CompactRepresentation.LayoutType.HorizontalDesktop:
-            return parent.height;
-        case CompactRepresentation.LayoutType.VerticalPanel:
-        case CompactRepresentation.LayoutType.VerticalDesktop:
-            return iconItem.height + column.height;
-        case CompactRepresentation.LayoutType.IconOnly:
-            return -1;
-        }
-    }
+    Layout.preferredWidth: grid.width
+    Layout.preferredHeight: grid.height
 
     enum LayoutType {
         HorizontalPanel,
@@ -59,10 +37,10 @@ Item {
             if (root.inPanel) {
                 return root.isVertical ? CompactRepresentation.LayoutType.VerticalPanel : CompactRepresentation.LayoutType.HorizontalPanel;
             }
-            if (compactRepresentation.parent.width - Math.min(parent.width, parent.height) >= remainingTimeLabel.contentWidth) {
+            if (compactRepresentation.parent.width - iconItem.Layout.preferredWidth >= remainingTimeLabel.contentWidth) {
                 return CompactRepresentation.LayoutType.HorizontalDesktop;
             }
-            if (compactRepresentation.parent.height - Math.min(parent.width, parent.height) >= remainingTimeLabel.contentHeight) {
+            if (compactRepresentation.parent.height - iconItem.Layout.preferredHeight >= remainingTimeLabel.contentHeight) {
                 return CompactRepresentation.LayoutType.VerticalDesktop;
             }
             return CompactRepresentation.LayoutType.IconOnly;
@@ -92,119 +70,154 @@ Item {
         }
     }
 
-    PlasmaComponents3.ToolButton {
-        id: iconItem
+    GridLayout {
+        id: grid
 
-        anchors.left: parent.left
-        anchors.horizontalCenter: compactRepresentation.layoutForm >= 3 ? parent.horizontalCenter : undefined
-        width: Math.min(compactRepresentation.parent.width, compactRepresentation.parent.height)
-        height: width
-
-        display: PlasmaComponents3.AbstractButton.IconOnly
-        icon.name: {
-            if (root.running) {
-                return "chronometer-pause";
-            }
-            return root.seconds > 0 ? "chronometer-start" : "chronometer";
-        }
-        text: root.running ? i18nc("@action:button", "Pause Timer") : i18nc("@action:button", "Start Timer")
-
-        onClicked: {
-            if (root.seconds === 0) {
-                Plasmoid.expanded = !Plasmoid.expanded;
-            } else {
-                root.toggleTimer();
-            }
-        }
-    }
-
-    ColumnLayout {
-        id: column
-
-        anchors.left: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? iconItem.right : parent.left
-        anchors.top: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? parent.top : iconItem.bottom
         width: {
             switch (compactRepresentation.layoutForm) {
             case CompactRepresentation.LayoutType.HorizontalPanel:
-                return Math.min(implicitWidth, PlasmaCore.Units.gridUnit * 10);
             case CompactRepresentation.LayoutType.HorizontalDesktop:
-                return Math.min(implicitWidth, compactRepresentation.parent.width - iconItem.width);
+                return implicitWidth;
             case CompactRepresentation.LayoutType.VerticalPanel:
             case CompactRepresentation.LayoutType.VerticalDesktop:
                 return compactRepresentation.parent.width;
             case CompactRepresentation.LayoutType.IconOnly:
-                return 0;
+                return iconItem.Layout.preferredWidth;
             }
         }
         height: {
             switch (compactRepresentation.layoutForm) {
             case CompactRepresentation.LayoutType.HorizontalPanel:
             case CompactRepresentation.LayoutType.HorizontalDesktop:
+            case CompactRepresentation.LayoutType.VerticalDesktop:
                 return compactRepresentation.parent.height;
             case CompactRepresentation.LayoutType.VerticalPanel:
-            case CompactRepresentation.LayoutType.VerticalDesktop:
                 return implicitHeight;
             case CompactRepresentation.LayoutType.IconOnly:
-                return 0;
+                return iconItem.Layout.preferredHeight;
             }
         }
 
-        // Use opacity not visible to make contentHeight work
-        opacity: compactRepresentation.layoutForm !== CompactRepresentation.LayoutType.IconOnly ? 1 : 0
-        spacing: 0
-
-        PlasmaComponents3.Label {
-            id: titleLabel
-
-            Layout.fillWidth: true
-            visible: root.showTitle && root.title !== ""
-
-            elide: Text.ElideRight
-            font.bold: remainingTimeLabel.font.bold
-            fontSizeMode: remainingTimeLabel.fontSizeMode
-            horizontalAlignment: remainingTimeLabel.horizontalAlignment
-            minimumPointSize: remainingTimeLabel.minimumPointSize
-            text: root.title
+        rowSpacing: 0
+        columnSpacing: rowSpacing
+        flow: {
+            switch (compactRepresentation.layoutForm) {
+            case CompactRepresentation.LayoutType.VerticalPanel:
+            case CompactRepresentation.LayoutType.VerticalDesktop:
+                return GridLayout.TopToBottom;
+            default:
+                return GridLayout.LeftToRight;
+            }
         }
 
-        PlasmaComponents3.Label {
-            id: remainingTimeLabel
+        Item {
+            id: spacerItem
+            Layout.fillHeight: true
+            visible: layoutForm === CompactRepresentation.LayoutType.VerticalDesktop
+        }
 
-            Layout.alignment: layoutForm == CompactRepresentation.LayoutType.VerticalPanel || layoutForm === CompactRepresentation.LayoutType.VerticalDesktop ? Qt.AlignHCenter : Qt.AlignLeft
-            Layout.fillWidth: false
-            Layout.maximumWidth: textMetrics.width
-            Layout.minimumWidth: textMetrics.width
+        PlasmaComponents3.ToolButton {
+            id: iconItem
 
-            TextMetrics {
-                id: textMetrics
+            Layout.alignment: Qt.AlignVCenter
+            Layout.preferredWidth: Math.min(compactRepresentation.parent.width, compactRepresentation.parent.height)
+            Layout.preferredHeight: Layout.preferredWidth
+
+            display: PlasmaComponents3.AbstractButton.IconOnly
+            icon.name: {
+                if (root.running) {
+                    return "chronometer-pause";
+                }
+                return root.seconds > 0 ? "chronometer-start" : "chronometer";
+            }
+            text: root.running ? i18nc("@action:button", "Pause Timer") : i18nc("@action:button", "Start Timer")
+
+            onClicked: {
+                if (root.seconds === 0) {
+                    Plasmoid.expanded = !Plasmoid.expanded;
+                } else {
+                    root.toggleTimer();
+                }
+            }
+        }
+
+        ColumnLayout {
+            Layout.alignment: Qt.AlignVCenter
+            Layout.fillWidth: layoutForm === CompactRepresentation.LayoutType.VerticalPanel || layoutForm === CompactRepresentation.LayoutType.VerticalDesktop
+            Layout.maximumWidth: {
+                switch (layoutForm) {
+                case CompactRepresentation.LayoutType.HorizontalPanel:
+                    return PlasmaCore.Units.gridUnit * 10;
+                case CompactRepresentation.LayoutType.HorizontalDesktop:
+                    return compactRepresentation.parent.width - iconItem.Layout.preferredWidth;
+                default:
+                    return -1;
+                }
+            }
+            Layout.maximumHeight: textMetrics.height * 2
+            visible: compactRepresentation.layoutForm !== CompactRepresentation.LayoutType.IconOnly ? 1 : 0
+
+            spacing: parent.columnSpacing
+
+            PlasmaComponents3.Label {
+                id: titleLabel
+
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                visible: root.showTitle && root.title !== ""
+
+                elide: Text.ElideRight
+                font.bold: remainingTimeLabel.font.bold
+                fontSizeMode: remainingTimeLabel.fontSizeMode
+                horizontalAlignment: remainingTimeLabel.horizontalAlignment
+                minimumPointSize: remainingTimeLabel.minimumPointSize
+                text: root.title
+            }
+
+            PlasmaComponents3.Label {
+                id: remainingTimeLabel
+
+                Layout.fillWidth: parent.Layout.fillWidth
+                Layout.fillHeight: true
+                Layout.maximumWidth: Layout.fillWidth ? -1 : textMetrics.width
+                Layout.minimumWidth: Layout.maximumWidth
+
+                TextMetrics {
+                    id: textMetrics
+                    text: {
+                        if (root.isVertical) {
+                            return i18ncp("remaining time", "%1s", "%1s", root.seconds);
+                        }
+                        // make it not jump around: reserve space for one extra digit than reasonable
+                        return root.showSeconds ? "44:44:444" : "44:444";
+                    }
+                    font: remainingTimeLabel.font
+                }
+
+                activeFocusOnTab: true
+                elide: root.inPanel ? Text.ElideRight : Text.ElideNone
+                font.bold: root.alertMode
+                fontSizeMode: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
+                horizontalAlignment: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
+                minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
+
                 text: {
                     if (root.isVertical) {
                         return i18ncp("remaining time", "%1s", "%1s", root.seconds);
                     }
-                    // make it not jump around: reserve space for one extra digit than reasonable
-                    return root.showSeconds ? "44:44:444" : "44:444";
-                }
-                font: remainingTimeLabel.font
-            }
 
-            activeFocusOnTab: true
-            elide: root.inPanel ? Text.ElideRight : Text.ElideNone
-            font.bold: root.alertMode
-            fontSizeMode: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
-            horizontalAlignment: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
-            minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
-
-            text: {
-                if (root.isVertical) {
-                    return i18ncp("remaining time", "%1s", "%1s", root.seconds);
+                    return root.showSeconds ? TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss") : TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm");
                 }
 
-                return root.showSeconds ? TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss") : TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm");
+                Accessible.name: Plasmoid.toolTipMainText
+                Accessible.description: Plasmoid.toolTipSubText
+                Accessible.role: Accessible.Button
             }
+        }
 
-            Accessible.name: Plasmoid.toolTipMainText
-            Accessible.description: Plasmoid.toolTipSubText
-            Accessible.role: Accessible.Button
+        Item {
+            Layout.fillHeight: true
+            visible: spacerItem.visible
         }
 
         TapHandler {
