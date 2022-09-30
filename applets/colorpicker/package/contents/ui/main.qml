@@ -379,8 +379,15 @@ Item {
             }
 
             onClicked: {
-                formattingMenu.model = Logic.menuForColor(delegateMouse.currentColor)
-                formattingMenu.open(0, rect.height)
+                if (mouse.button === Qt.LeftButton) {
+                    picker.copyToClipboard(Logic.formatColor(delegateMouse.currentColor, root.defaultFormat))
+                    colorLabel.visible = false;
+                    copyIndicatorLabel.visible = true;
+                    colorLabelRestoreTimer.start()
+                } else {
+                    formattingMenu.model = Logic.menuForColor(delegateMouse.currentColor)
+                    formattingMenu.open(0, rect.height)
+                }
             }
 
             function remove() {
@@ -392,6 +399,15 @@ Item {
                 anchors.fill: parent
                 active: colorLabel.truncated
                 mainText: colorLabel.text
+            }
+
+            Timer {
+                id: colorLabelRestoreTimer
+                interval: Kirigami.Units.humanMoment
+                onTriggered: {
+                    colorLabel.visible = true;
+                    copyIndicatorLabel.visible = false;
+                }
             }
 
             Rectangle {
@@ -430,11 +446,28 @@ Item {
                         minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
                         text: Logic.formatColor(delegateMouse.currentColor, root.defaultFormat)
                     }
+
+                    PlasmaComponents3.Label {
+                        id: copyIndicatorLabel
+                        visible: false
+                        anchors.fill: parent
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        elide: Text.ElideLeft
+                        fontSizeMode: Text.HorizontalFit
+                        minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
+                        text: i18nc("@info:progress just copied a color to clipboard", "Copied!")
+                    }
                 }
 
                 PlasmaComponents.ModelContextMenu {
                     id: formattingMenu
-                    onClicked: picker.copyToClipboard(model.text)
+                    onClicked: {
+                        picker.copyToClipboard(model.text)
+                        colorLabel.visible = false;
+                        copyIndicatorLabel.visible = true;
+                        colorLabelRestoreTimer.start()
+                    }
                 }
             }
 
