@@ -1,0 +1,221 @@
+# translation of plasma_applet_org.kde.plasma.timer.po to Slovak
+# Roman Paholik <wizzardsk@gmail.com>, 2014, 2015.
+# Mthw <jari_45@hotmail.com>, 2018.
+# Matej Mrenica <matejm98mthw@gmail.com>, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2021-01-07 14:29+0100\n"
+"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
+"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Vzhľad"
+
+#: package/contents/config/config.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr "Preddefinované časovače"
+
+#: package/contents/config/config.qml:24
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Pokročilé"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "Časovač"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "Časovač"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr "Keď časovač skončí:"
+
+#: package/contents/ui/configAdvanced.qml:26
+#, kde-format
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "Vykonať príkaz:"
+
+#: package/contents/ui/configAppearance.qml:27
+#, kde-format
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "Zobraziť:"
+
+#: package/contents/ui/configAppearance.qml:33
+#, kde-format
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "Zobraziť titulok:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "Zobraziť sekundy"
+
+#: package/contents/ui/configAppearance.qml:62
+#, kde-format
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "Upozornenia:"
+
+#: package/contents/ui/configAppearance.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "Zobraziť text upozornenia:"
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+"Ak tu pridáte preddefinované časovače, zobrazia sa v kontextovej ponuke "
+"plazmoidu."
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr "Pridať"
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr "Rolovať nad číslami na zmenu času"
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr "Použiť"
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr "Zrušiť"
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr "Upraviť"
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr "Vymazať"
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr "%1 beží"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 nebeží"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] "Ostávajúci čas: %1 sekunda"
+msgstr[1] "Ostávajúci čas: %1 sekundy"
+msgstr[2] "Ostávajúci čas: %1 sekúnd"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+"Použite koliesko myši na zmenu číslic alebo vyberte z preddefinovaných "
+"časovačov v kontektovej ponuke"
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "Časovač"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr "Časovač ukončený"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action"
+msgid "&Start"
+msgstr "Spustiť"
+
+#: package/contents/ui/main.qml:138
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr "Zastaviť"
+
+#: package/contents/ui/main.qml:139
+#, kde-format
+msgctxt "@action"
+msgid "&Reset"
+msgstr "Vynulovať"
+
+#~ msgid "Timer is running"
+#~ msgstr "Časovač beží"
+
+#~ msgctxt "@title:group"
+#~ msgid "Run Command"
+#~ msgstr "Spustiť príkaz"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Command:"
+#~ msgstr "Príkaz:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Title:"
+#~ msgstr "Názov:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Text:"
+#~ msgstr "Text:"
+
+#~ msgctxt "separator of hours:minutes:seconds in timer strings"
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "Timer Configuration"
+#~ msgstr "Nastavenie časovača"

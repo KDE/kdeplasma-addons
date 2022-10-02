@@ -1,0 +1,362 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:51+0000\n"
+"PO-Revision-Date: 2022-08-11 06:57+0200\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 22.04.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+
+#: package/contents/ui/config.qml:48
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Provider:"
+msgstr "Ponudnik:"
+
+#: package/contents/ui/config.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Update when using metered network connection"
+msgstr "Posodobi, kadar je v rabi merjena povezava z omrežjem"
+
+#: package/contents/ui/config.qml:76
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Category:"
+msgstr "Kategorija:"
+
+#: package/contents/ui/config.qml:80
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "All"
+msgstr "Vse"
+
+#: package/contents/ui/config.qml:84
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "1080p"
+msgstr "1080p"
+
+#: package/contents/ui/config.qml:88
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "4K"
+msgstr "4K"
+
+#: package/contents/ui/config.qml:92
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Ultra Wide"
+msgstr "Ultra široko"
+
+#: package/contents/ui/config.qml:96
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Background"
+msgstr "Ozadje"
+
+#: package/contents/ui/config.qml:100
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Lock Screen"
+msgstr "Zaklep zaslona"
+
+#: package/contents/ui/config.qml:104
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Nature"
+msgstr "Narava"
+
+#: package/contents/ui/config.qml:108
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: package/contents/ui/config.qml:112
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Black"
+msgstr "Črno"
+
+#: package/contents/ui/config.qml:116
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flower"
+msgstr "Cvetlice"
+
+#: package/contents/ui/config.qml:120
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Funny"
+msgstr "Smešno"
+
+#: package/contents/ui/config.qml:124
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cute"
+msgstr "Ljubko"
+
+#: package/contents/ui/config.qml:128
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cool"
+msgstr "Cool"
+
+#: package/contents/ui/config.qml:132
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Fall"
+msgstr "Padec"
+
+#: package/contents/ui/config.qml:136
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Love"
+msgstr "Ljubezen"
+
+#: package/contents/ui/config.qml:140
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Design"
+msgstr "Design"
+
+#: package/contents/ui/config.qml:144
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Christmas"
+msgstr "Božič"
+
+#: package/contents/ui/config.qml:148
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Travel"
+msgstr "Potovanja"
+
+#: package/contents/ui/config.qml:152
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Beach"
+msgstr "Obala"
+
+#: package/contents/ui/config.qml:156
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Car"
+msgstr "Avtomobil"
+
+#: package/contents/ui/config.qml:160
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Sports"
+msgstr "Šport"
+
+#: package/contents/ui/config.qml:164
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Animal"
+msgstr "Žival"
+
+#: package/contents/ui/config.qml:168
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "People"
+msgstr "Ljudje"
+
+#: package/contents/ui/config.qml:172
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Music"
+msgstr "Glasba"
+
+#: package/contents/ui/config.qml:176
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Summer"
+msgstr "Poletje"
+
+#: package/contents/ui/config.qml:180
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Galaxy"
+msgstr "Galaksije"
+
+#: package/contents/ui/config.qml:184
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tabliss"
+msgstr "Tabliss"
+
+#: package/contents/ui/config.qml:214
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "Pozicioniranje:"
+
+#: package/contents/ui/config.qml:217
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled and Cropped"
+msgstr "Povečane in obrezane"
+
+#: package/contents/ui/config.qml:221
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "Povečane"
+
+#: package/contents/ui/config.qml:225
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled, Keep Proportions"
+msgstr "Povečane z obržanimi proporci"
+
+#: package/contents/ui/config.qml:229
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "Usredinjene"
+
+#: package/contents/ui/config.qml:233
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "Tlakovane"
+
+#: package/contents/ui/config.qml:254
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "Barva ozadja:"
+
+#: package/contents/ui/config.qml:255
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "Izbrana barva ozadja"
+
+#: package/contents/ui/config.qml:266
+#, kde-format
+msgctxt "@label"
+msgid "Today's picture:"
+msgstr "Današnja slika:"
+
+#: package/contents/ui/config.qml:283
+#, kde-format
+msgctxt "@label"
+msgid "Title:"
+msgstr "Naslov:"
+
+#: package/contents/ui/config.qml:303
+#, kde-format
+msgctxt "@label"
+msgid "Author:"
+msgstr "Avtor:"
+
+#: package/contents/ui/config.qml:329
+#, kde-format
+msgctxt "@action:button"
+msgid "Open Containing Folder"
+msgstr "Odpri vsebovano mapo"
+
+#: package/contents/ui/config.qml:333
+#, kde-format
+msgctxt "@info:whatsthis for a button"
+msgid "Open the destination folder where the wallpaper image was saved."
+msgstr "Odpri ciljno mapo, kjer je shranjena slika tapete."
+
+#: package/contents/ui/WallpaperDelegate.qml:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Today's picture"
+msgstr "Današnja slika"
+
+#: package/contents/ui/WallpaperDelegate.qml:143
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Loading"
+msgstr "Nalaganje"
+
+#: package/contents/ui/WallpaperDelegate.qml:144
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Unavailable"
+msgstr "Ni na voljo"
+
+#: package/contents/ui/WallpaperDelegate.qml:145
+#, kde-format
+msgctxt "@info:whatsthis for an image %1 title %2 author"
+msgid "%1 Author: %2. Right-click on the image to see more actions."
+msgstr "%1 Avtor: %2. Desni klik na sliko, da bi videli več dejavnosti."
+
+#: package/contents/ui/WallpaperDelegate.qml:146
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The wallpaper is being fetched from the Internet."
+msgstr "Tapeto dobavljamo iz interneta."
+
+#: package/contents/ui/WallpaperDelegate.qml:147
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Failed to fetch the wallpaper from the Internet."
+msgstr "NI mogoče dobaviti tapete iz interneta."
+
+#: package/contents/ui/WallpaperPreview.qml:50
+#, kde-format
+msgctxt "@action:inmenu wallpaper preview menu"
+msgid "Save Image as…"
+msgstr "Shrani sliko kot…"
+
+#: package/contents/ui/WallpaperPreview.qml:53
+#, kde-format
+msgctxt "@info:whatsthis for a button and a menu item"
+msgid "Save today's picture to local disk"
+msgstr "Shrani današnjo sliko na lokalni disk"
+
+#: package/contents/ui/WallpaperPreview.qml:59
+#, kde-format
+msgctxt ""
+"@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
+msgid "Open Link in Browser…"
+msgstr "Odpri povezavo v brskalniku…"
+
+#: package/contents/ui/WallpaperPreview.qml:62
+#, kde-format
+msgctxt "@info:whatsthis for a menu item"
+msgid "Open the website of today's picture in the default browser"
+msgstr "Odpri spletišče današnje slike v privzetem brskalniku"
+
+#: plugins/potdbackend.cpp:221
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Today's Picture"
+msgstr "Shrani današnjo sliko"
+
+#: plugins/potdbackend.cpp:223
+#, kde-format
+msgctxt "@label:listbox Template for file dialog"
+msgid "JPEG image (*.jpeg *.jpg *.jpe)"
+msgstr "Slike JPEG (*.jpeg *.jpg *.jpe)"
+
+#: plugins/potdbackend.cpp:240
+#, kde-format
+msgctxt "@info:status after a save action"
+msgid "The image was not saved."
+msgstr "Slika ni bila shranjena."
+
+#: plugins/potdbackend.cpp:246
+#, kde-format
+msgctxt "@info:status after a save action %1 file path %2 basename"
+msgid "The image was saved as <a href=\"%1\">%2</a>"
+msgstr "Slika je bila shranjena kot <a href=\"%1\">%2</a>"

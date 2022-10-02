@@ -1,0 +1,48 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Lasse Liehu <lasse.liehu@gmail.com>, 2010.
+# Lasse Liehu <lliehu@kolumbus.fi>, 2011.
+# Tommi Nieminen <translator@legisign.org>, 2020.
+#
+# KDE Finnish translation sprint participants:
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_runner_converterrunner\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-09 00:47+0000\n"
+"PO-Revision-Date: 2020-12-19 22:20+0200\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-POT-Import-Date: 2012-12-01 22:25:26+0000\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#: converterrunner.cpp:33
+#, kde-format
+msgid ""
+"Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
+"in] unit\". You can use the Unit converter applet to find all available "
+"units."
+msgstr ""
+"Muuntaa :q::n arvon, missä :q: on ”arvo yksikkö [yksikköön;yksikössä;->;in;"
+"to;as] yksikkö”. Voit katsoa Yksikkömuunnin-sovelmasta, mitä kaikkia "
+"yksikköjä on käytettävissä."
+
+# Jätin englanninkieliset muodot mukaan, koska tällainen ei toimi suomeksi kovin hyvin ja jotkut voivat niitä yrittää käyttää. Voi poistaa vapaasti.
+#: converterrunner.cpp:42
+#, kde-format
+msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
+msgid "in;to;as"
+msgstr "yksikköön;yksikössä;->;in;to;as"
+
+#: converterrunner.cpp:50
+#, kde-format
+msgid "Copy unit and number"
+msgstr "Kopioi yksikkö ja luku"
+
+#~ msgid "Copy number"
+#~ msgstr "Kopioi luku"

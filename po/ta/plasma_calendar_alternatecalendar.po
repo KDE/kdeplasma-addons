@@ -1,0 +1,73 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# Kishore G <kishore96@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-30 00:46+0000\n"
+"PO-Revision-Date: 2022-06-28 21:42+0530\n"
+"Last-Translator: Kishore G <kishore96@gmail.com>\n"
+"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.04.2\n"
+
+#: calendarsystem.h:53
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Julian"
+msgstr "ஜுலியன்"
+
+#: calendarsystem.h:57
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Milankovic"
+msgstr "மிலாங்கோவிக்"
+
+#: calendarsystem.h:61
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Solar Hijri Calendar (Persian)"
+msgstr "சூரியசார் ஹிஜ்ரி நாள்காட்டி (பார்சீகம்)"
+
+#: calendarsystem.h:65
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Islamic Civil Calendar"
+msgstr "இஸ்லாமிய நாள்காட்டி"
+
+#: calendarsystem.h:69
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Chinese Lunar Calendar"
+msgstr "சீன நிலவுசார் நாள்காட்டி"
+
+#: calendarsystem.h:73
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Indian National Calendar"
+msgstr "இந்திய தேசிய நாள்காட்டி"
+
+#: config/qml/AlternateCalendarConfig.qml:38
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Calendar system:"
+msgstr "நாள்காட்டு முறை:"
+
+#: config/qml/AlternateCalendarConfig.qml:50
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Date offset:"
+msgstr "தேதி வித்தியாசம்:"
+
+#: config/qml/AlternateCalendarConfig.qml:59
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 நாள்"
+msgstr[1] "%1 நாட்கள்"

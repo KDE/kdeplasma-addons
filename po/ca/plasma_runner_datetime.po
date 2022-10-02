@@ -1,0 +1,76 @@
+# Translation of plasma_runner_datetime.po to Catalan
+# Copyright (C) 2010-2021 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Josep M. Ferrer <txemaq@gmail.com>, 2010, 2015.
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-03-03 00:45+0000\n"
+"PO-Revision-Date: 2021-12-27 09:10+0100\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 21.12.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+
+#: datetimerunner.cpp:17
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "date"
+msgstr "data"
+
+#: datetimerunner.cpp:18
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "time"
+msgstr "hora"
+
+#: datetimerunner.cpp:25
+#, kde-format
+msgid "Displays the current date"
+msgstr "Mostra la data actual"
+
+#: datetimerunner.cpp:26
+#, kde-format
+msgid "Displays the current time"
+msgstr "Mostra l'hora actual"
+
+#: datetimerunner.cpp:27 datetimerunner.cpp:29
+#, kde-format
+msgctxt "The <> and space are part of the example query"
+msgid " <timezone>"
+msgstr "<Zona horària>"
+
+#: datetimerunner.cpp:28
+#, kde-format
+msgid "Displays the current date in a given timezone"
+msgstr "Mostra la data actual en la zona horària indicada"
+
+#: datetimerunner.cpp:30
+#, kde-format
+msgid "Displays the current time in a given timezone"
+msgstr "Mostra l'hora actual en la zona horària indicada"
+
+#: datetimerunner.cpp:43
+#, kde-format
+msgid "Today's date is %1"
+msgstr "La data d'avui és %1"
+
+#: datetimerunner.cpp:57
+#, kde-format
+msgid "Current time is %1"
+msgstr "L'hora actual és %1"
+
+#~ msgid "The date in %1 is %2"
+#~ msgstr "La data a %1 és %2"
+
+#~ msgid "The current time in %1 is %2"
+#~ msgstr "L'hora actual a %1 és %2"

@@ -1,0 +1,369 @@
+# Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
+# Xavier Besnard <xavier.besnard@neuf.fr>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:51+0000\n"
+"PO-Revision-Date: 2022-08-11 21:02+0200\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 22.04.3\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: package/contents/ui/config.qml:48
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Provider:"
+msgstr "Fournisseur :"
+
+#: package/contents/ui/config.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Update when using metered network connection"
+msgstr ""
+"Mettre à jour lors de l'utilisation d'une connection limitée à un réseau"
+
+#: package/contents/ui/config.qml:76
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Category:"
+msgstr "Catégorie :"
+
+#: package/contents/ui/config.qml:80
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "All"
+msgstr "Toutes"
+
+#: package/contents/ui/config.qml:84
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "1080p"
+msgstr "1080p"
+
+#: package/contents/ui/config.qml:88
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "4K"
+msgstr "4K"
+
+#: package/contents/ui/config.qml:92
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Ultra Wide"
+msgstr "Ultra Large"
+
+#: package/contents/ui/config.qml:96
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Background"
+msgstr "Arrière-plan"
+
+#: package/contents/ui/config.qml:100
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Lock Screen"
+msgstr "Écran de verrouillage"
+
+#: package/contents/ui/config.qml:104
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Nature"
+msgstr "Nature"
+
+#: package/contents/ui/config.qml:108
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: package/contents/ui/config.qml:112
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Black"
+msgstr "Noir"
+
+#: package/contents/ui/config.qml:116
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flower"
+msgstr "Fleur"
+
+#: package/contents/ui/config.qml:120
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Funny"
+msgstr "Amusant"
+
+#: package/contents/ui/config.qml:124
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cute"
+msgstr "Mignon"
+
+#: package/contents/ui/config.qml:128
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cool"
+msgstr "Sympa"
+
+#: package/contents/ui/config.qml:132
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Fall"
+msgstr "Automne"
+
+#: package/contents/ui/config.qml:136
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Love"
+msgstr "Amour"
+
+#: package/contents/ui/config.qml:140
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Design"
+msgstr "Design"
+
+#: package/contents/ui/config.qml:144
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Christmas"
+msgstr "Noël"
+
+#: package/contents/ui/config.qml:148
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Travel"
+msgstr "Voyages"
+
+#: package/contents/ui/config.qml:152
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Beach"
+msgstr "Plage"
+
+#: package/contents/ui/config.qml:156
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Car"
+msgstr "Voitures"
+
+#: package/contents/ui/config.qml:160
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Sports"
+msgstr "Sports"
+
+#: package/contents/ui/config.qml:164
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Animal"
+msgstr "Animaux"
+
+#: package/contents/ui/config.qml:168
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "People"
+msgstr "Personnes"
+
+#: package/contents/ui/config.qml:172
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Music"
+msgstr "Musique"
+
+#: package/contents/ui/config.qml:176
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Summer"
+msgstr "Été"
+
+#: package/contents/ui/config.qml:180
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Galaxy"
+msgstr "Galaxie"
+
+#: package/contents/ui/config.qml:184
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tabliss"
+msgstr "Tabliss"
+
+#: package/contents/ui/config.qml:214
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "Positionnement :"
+
+#: package/contents/ui/config.qml:217
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled and Cropped"
+msgstr "Adapté et rogné"
+
+#: package/contents/ui/config.qml:221
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "Adapté"
+
+#: package/contents/ui/config.qml:225
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled, Keep Proportions"
+msgstr "Adapté, conserver les proportions"
+
+#: package/contents/ui/config.qml:229
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "Centré"
+
+#: package/contents/ui/config.qml:233
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "Mosaïque"
+
+# unreviewed-context
+#: package/contents/ui/config.qml:254
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "Couleur d'arrière-plan :"
+
+#: package/contents/ui/config.qml:255
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "Sélectionner la couleur d'arrière-plan"
+
+#: package/contents/ui/config.qml:266
+#, kde-format
+msgctxt "@label"
+msgid "Today's picture:"
+msgstr "Image du jour :"
+
+#: package/contents/ui/config.qml:283
+#, kde-format
+msgctxt "@label"
+msgid "Title:"
+msgstr "Titre :"
+
+#: package/contents/ui/config.qml:303
+#, kde-format
+msgctxt "@label"
+msgid "Author:"
+msgstr "Auteur :"
+
+#: package/contents/ui/config.qml:329
+#, kde-format
+msgctxt "@action:button"
+msgid "Open Containing Folder"
+msgstr "Ouvrir le dossier contenant"
+
+#: package/contents/ui/config.qml:333
+#, kde-format
+msgctxt "@info:whatsthis for a button"
+msgid "Open the destination folder where the wallpaper image was saved."
+msgstr ""
+"Ouvrir le dossier de destination où l'image du fond d'écran a été "
+"enregistrée."
+
+#: package/contents/ui/WallpaperDelegate.qml:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Today's picture"
+msgstr "Image du jour"
+
+#: package/contents/ui/WallpaperDelegate.qml:143
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Loading"
+msgstr "Chargement en cours"
+
+#: package/contents/ui/WallpaperDelegate.qml:144
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Unavailable"
+msgstr "Indisponible"
+
+#: package/contents/ui/WallpaperDelegate.qml:145
+#, kde-format
+msgctxt "@info:whatsthis for an image %1 title %2 author"
+msgid "%1 Author: %2. Right-click on the image to see more actions."
+msgstr ""
+"Auteur %1 : %2. Faites un clic droit sur l'image pour afficher plus "
+"d'actions."
+
+#: package/contents/ui/WallpaperDelegate.qml:146
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The wallpaper is being fetched from the Internet."
+msgstr "Le fonds d'écran a été trouvé à partir d'Internet."
+
+#: package/contents/ui/WallpaperDelegate.qml:147
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Failed to fetch the wallpaper from the Internet."
+msgstr "Impossible de trouver le fonds d'écran à partir d'Internet."
+
+#: package/contents/ui/WallpaperPreview.qml:50
+#, kde-format
+msgctxt "@action:inmenu wallpaper preview menu"
+msgid "Save Image as…"
+msgstr "Enregistrer l'image comme..."
+
+#: package/contents/ui/WallpaperPreview.qml:53
+#, kde-format
+msgctxt "@info:whatsthis for a button and a menu item"
+msgid "Save today's picture to local disk"
+msgstr "Enregistrer l'image du jour sur un disque local"
+
+#: package/contents/ui/WallpaperPreview.qml:59
+#, kde-format
+msgctxt ""
+"@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
+msgid "Open Link in Browser…"
+msgstr "Ouvrir un lien dans le navigateur..."
+
+#: package/contents/ui/WallpaperPreview.qml:62
+#, kde-format
+msgctxt "@info:whatsthis for a menu item"
+msgid "Open the website of today's picture in the default browser"
+msgstr ""
+"Ouvrir le site Internet de l'image du jour dans le navigateur par défaut."
+
+#: plugins/potdbackend.cpp:221
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Today's Picture"
+msgstr "Enregistrer l'image du jour"
+
+#: plugins/potdbackend.cpp:223
+#, kde-format
+msgctxt "@label:listbox Template for file dialog"
+msgid "JPEG image (*.jpeg *.jpg *.jpe)"
+msgstr "Image JPEG (*.jpeg *.jpg *.jpe)"
+
+#: plugins/potdbackend.cpp:240
+#, kde-format
+msgctxt "@info:status after a save action"
+msgid "The image was not saved."
+msgstr "L'image n'a pas été enregistrée."
+
+#: plugins/potdbackend.cpp:246
+#, kde-format
+msgctxt "@info:status after a save action %1 file path %2 basename"
+msgid "The image was saved as <a href=\"%1\">%2</a>"
+msgstr "L'image a été enregistrée comme <a href=\"%1\">%2</a>."

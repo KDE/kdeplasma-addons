@@ -1,0 +1,54 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# Marek Laane <qiilaq69@gmail.com>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-12-13 00:44+0000\n"
+"PO-Revision-Date: 2020-03-05 18:37+0200\n"
+"Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
+"Language-Team: Estonian <kde-et@lists.linux.ee>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 19.08.1\n"
+
+#: package/contents/ui/main.qml:31
+#, kde-format
+msgid "Night Color Control"
+msgstr "Öörežiimi juhtimine"
+
+#: package/contents/ui/main.qml:34
+#, kde-format
+msgid "Night Color is inhibited"
+msgstr "Öörežiim on keelatud"
+
+#: package/contents/ui/main.qml:37
+#, kde-format
+msgid "Night Color is unavailable"
+msgstr "Öörežiim pole saadaval"
+
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgid "Night Color is disabled"
+msgstr "Öörežiim on välja lülitatud"
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Night Color is not running"
+msgstr "Öörežiim ei tööta"
+
+#: package/contents/ui/main.qml:45
+#, kde-format
+msgid "Night Color is active (%1K)"
+msgstr "Öörežiim on sisse lülitatud (%1K)"
+
+#: package/contents/ui/main.qml:94
+#, fuzzy, kde-format
+#| msgid "Configure Night Color..."
+msgid "Configure Night Color…"
+msgstr "Seadista öörežiimi ..."

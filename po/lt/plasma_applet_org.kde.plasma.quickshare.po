@@ -1,0 +1,120 @@
+# Lithuanian translations for trunk-kf package.
+# Copyright (C) 2014 This_file_is_part_of_KDE
+# This file is distributed under the same license as the trunk-kf package.
+#
+# Automatically generated, 2014.
+# liudas@aksioma.lt <liudas@aksioma.lt>, 2014.
+# Liudas Ališauskas <liudas@akmc.lt>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: trunk-kf 5\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-02-03 00:45+0000\n"
+"PO-Revision-Date: 2021-12-18 01:02+0200\n"
+"Last-Translator: Moo\n"
+"Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
+"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.0\n"
+
+#: contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Bendra"
+
+#: contents/ui/main.qml:225
+#, kde-format
+msgctxt "@action"
+msgid "Paste"
+msgstr "Įdėti"
+
+#: contents/ui/main.qml:253 contents/ui/main.qml:293
+#, kde-format
+msgid "Share"
+msgstr "Bendrinti"
+
+#: contents/ui/main.qml:254 contents/ui/main.qml:294
+#, kde-format
+msgid "Drop text or an image onto me to upload it to an online service."
+msgstr ""
+"Numeskite ant manęs tekstą ar paveikslą, kad įkeltumėte juos į internetą."
+
+#: contents/ui/main.qml:294
+#, kde-format
+msgid "Upload %1 to an online service"
+msgstr "Įkelti %1 į internetinę paslaugą"
+
+#: contents/ui/main.qml:307
+#, kde-format
+msgid "Sending…"
+msgstr "Siunčiama…"
+
+#: contents/ui/main.qml:308
+#, kde-format
+msgid "Please wait"
+msgstr "Palaukite"
+
+#: contents/ui/main.qml:315
+#, kde-format
+msgid "Successfully uploaded"
+msgstr "Sėkmingai įkelta"
+
+#: contents/ui/main.qml:316
+#, kde-format
+msgid "<a href='%1'>%1</a>"
+msgstr "<a href='%1'>%1</a>"
+
+#: contents/ui/main.qml:323
+#, kde-format
+msgid "Error during upload."
+msgstr "Klaida įkeliant."
+
+#: contents/ui/main.qml:324
+#, kde-format
+msgid "Please, try again."
+msgstr "Bandykite dar kartą."
+
+#: contents/ui/settingsGeneral.qml:21
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "History size:"
+msgstr "Istorijos dydis:"
+
+#: contents/ui/settingsGeneral.qml:31
+#, kde-format
+msgctxt "@option:check"
+msgid "Copy automatically:"
+msgstr "Automatiškai kopijuoti:"
+
+#: contents/ui/ShareDialog.qml:31
+#, kde-format
+msgid "Shares for '%1'"
+msgstr "Bendrinimai, skirti „%1“"
+
+#: contents/ui/ShowUrlDialog.qml:42
+#, kde-format
+msgid "The URL was just shared"
+msgstr "Ką tik buvo bendrintas URL"
+
+#: contents/ui/ShowUrlDialog.qml:48
+#, kde-format
+msgctxt "@option:check"
+msgid "Don't show this dialog, copy automatically."
+msgstr "Neberodyti šio dialogo, automatiškai kopijuoti."
+
+#: contents/ui/ShowUrlDialog.qml:56
+#, kde-format
+msgctxt "@action:button"
+msgid "Close"
+msgstr "Užverti"
+
+#~ msgid "Text Service:"
+#~ msgstr "Teksto paslauga:"
+
+#~ msgid "Image Service:"
+#~ msgstr "Paveikslėlio paslauga:"

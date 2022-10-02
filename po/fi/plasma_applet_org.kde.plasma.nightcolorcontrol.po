@@ -1,0 +1,53 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Tommi Nieminen <translator@legisign.org>, 2020, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-12-13 00:44+0000\n"
+"PO-Revision-Date: 2022-01-11 22:39+0200\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#: package/contents/ui/main.qml:31
+#, kde-format
+msgid "Night Color Control"
+msgstr "Yövärin hallinta"
+
+#: package/contents/ui/main.qml:34
+#, kde-format
+msgid "Night Color is inhibited"
+msgstr "Yöväri on lukittu"
+
+#: package/contents/ui/main.qml:37
+#, kde-format
+msgid "Night Color is unavailable"
+msgstr "Yöväri ei ole käytettävissä"
+
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgid "Night Color is disabled"
+msgstr "Yöväri on poistettu käytöstä"
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Night Color is not running"
+msgstr "Yöväri ei ole käynnissä"
+
+#: package/contents/ui/main.qml:45
+#, kde-format
+msgid "Night Color is active (%1K)"
+msgstr "Yöväri on aktiivinen (%1 K)"
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Configure Night Color…"
+msgstr "Yövärin asetukset…"

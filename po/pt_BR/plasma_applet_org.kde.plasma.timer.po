@@ -1,0 +1,196 @@
+# Translation of plasma_applet_org.kde.plasma.timer.po to Brazilian Portuguese
+# Copyright (C) 2014-2019 This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# André Marcelo Alvarenga <alvarenga@kde.org>, 2014, 2015, 2019.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2018, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2022-08-19 15:26-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Aparência"
+
+#: package/contents/config/config.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr "Temporizadores pré-definidos"
+
+#: package/contents/config/config.qml:24
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Avançado"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, kde-format
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "Pausar temporizador"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, kde-format
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "Iniciar temporizador"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] "%1s"
+msgstr[1] "%1s"
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr "Após terminar o temporizador:"
+
+#: package/contents/ui/configAdvanced.qml:26
+#, kde-format
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "Executar comando:"
+
+#: package/contents/ui/configAppearance.qml:27
+#, kde-format
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "Visor:"
+
+#: package/contents/ui/configAppearance.qml:33
+#, kde-format
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "Mostrar título:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "Mostrar segundos"
+
+#: package/contents/ui/configAppearance.qml:62
+#, kde-format
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "Notificações:"
+
+#: package/contents/ui/configAppearance.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "Mostrar texto da notificação"
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+"Se você adicionar temporizadores pré-definidos aqui, eles irão aparecer no "
+"menu de contexto do plasmoide."
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr "Adicionar"
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr "Role sobre os dígitos para alterar o tempo"
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr "Aplicar"
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr "Editar"
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr "Excluir"
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr "%1 está em execução"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 não está em execução"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] "Tempo restante: %1 segundo"
+msgstr[1] "Tempo restante: %1 segundos"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+"Use a roda do mouse para mudar os dígitos ou escolher os temporizadores "
+"predefinidos no menu de contexto"
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "Temporizador"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr "O temporizador terminou"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action"
+msgid "&Start"
+msgstr "&Iniciar"
+
+#: package/contents/ui/main.qml:138
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr "&Parar"
+
+#: package/contents/ui/main.qml:139
+#, kde-format
+msgctxt "@action"
+msgid "&Reset"
+msgstr "&Reiniciar"
+
+#~ msgid "Timer is running"
+#~ msgstr "O temporizador está em execução"

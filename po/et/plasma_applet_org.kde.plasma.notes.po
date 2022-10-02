@@ -1,0 +1,330 @@
+# translation of plasma_applet_notes.po to Estonian
+# Copyright (C) 2007, 2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Marek Laane <bald@starman.ee>, 2007-2008.
+# Marek Laane <bald@smail.ee>, 2009, 2016, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_notes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-30 00:46+0000\n"
+"PO-Revision-Date: 2019-11-01 23:49+0200\n"
+"Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
+"Language-Team: Estonian <kde-et@lists.linux.ee>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 19.08.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Välimus"
+
+#: package/contents/ui/configAppearance.qml:30
+#, kde-format
+msgid "%1pt"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:36
+#, fuzzy, kde-format
+#| msgid "Use custom font size:"
+msgid "Text font size:"
+msgstr "Kohandatud fondi suuruse kasutamine:"
+
+#: package/contents/ui/configAppearance.qml:41
+#, kde-format
+msgid "Background color"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:77
+#, kde-format
+msgid "A white sticky note"
+msgstr "Valge märkmepaber"
+
+#: package/contents/ui/configAppearance.qml:78
+#, kde-format
+msgid "A black sticky note"
+msgstr "Must märkmepaber"
+
+#: package/contents/ui/configAppearance.qml:79
+#, kde-format
+msgid "A red sticky note"
+msgstr "Punane märkmepaber"
+
+#: package/contents/ui/configAppearance.qml:80
+#, kde-format
+msgid "An orange sticky note"
+msgstr "Oranž märkmepaber"
+
+#: package/contents/ui/configAppearance.qml:81
+#, kde-format
+msgid "A yellow sticky note"
+msgstr "Kollane märkmepaber"
+
+#: package/contents/ui/configAppearance.qml:82
+#, kde-format
+msgid "A green sticky note"
+msgstr "Roheline märkmepaber"
+
+#: package/contents/ui/configAppearance.qml:83
+#, kde-format
+msgid "A blue sticky note"
+msgstr "Sinine märkmepaber"
+
+#: package/contents/ui/configAppearance.qml:84
+#, kde-format
+msgid "A pink sticky note"
+msgstr "Roosa märkmepaber"
+
+#: package/contents/ui/configAppearance.qml:85
+#, kde-format
+msgid "A translucent sticky note"
+msgstr "Läbipaistev märkmepaber"
+
+#: package/contents/ui/configAppearance.qml:86
+#, kde-format
+msgid "A translucent sticky note with light text"
+msgstr "Läbipaistev märkmepaber heleda tekstiga"
+
+#: package/contents/ui/main.qml:246
+#, kde-format
+msgid "Undo"
+msgstr "Võta tagasi"
+
+#: package/contents/ui/main.qml:254
+#, kde-format
+msgid "Redo"
+msgstr "Tee uuesti"
+
+#: package/contents/ui/main.qml:264
+#, kde-format
+msgid "Cut"
+msgstr "Lõika"
+
+#: package/contents/ui/main.qml:272
+#, kde-format
+msgid "Copy"
+msgstr "Kopeeri"
+
+#: package/contents/ui/main.qml:280
+#, kde-format
+msgid "Paste Without Formatting"
+msgstr "Aseta vormindamata"
+
+#: package/contents/ui/main.qml:286
+#, kde-format
+msgid "Paste"
+msgstr "Aseta"
+
+#: package/contents/ui/main.qml:295
+#, kde-format
+msgid "Delete"
+msgstr "Kustuta"
+
+#: package/contents/ui/main.qml:302
+#, kde-format
+msgid "Clear"
+msgstr "Puhasta"
+
+#: package/contents/ui/main.qml:312
+#, kde-format
+msgid "Select All"
+msgstr "Vali kõik"
+
+#: package/contents/ui/main.qml:440
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Bold"
+msgstr "Rasvane"
+
+#: package/contents/ui/main.qml:452
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Italic"
+msgstr "Kaldkiri"
+
+#: package/contents/ui/main.qml:464
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Underline"
+msgstr "Allajoonimine"
+
+#: package/contents/ui/main.qml:476
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Strikethrough"
+msgstr "Läbikriipsutus"
+
+#: package/contents/ui/main.qml:550
+#, kde-format
+msgid "Discard this note?"
+msgstr ""
+
+#: package/contents/ui/main.qml:551
+#, kde-format
+msgid "Are you sure you want to discard this note?"
+msgstr ""
+
+#: package/contents/ui/main.qml:564
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "White"
+msgstr "Valge"
+
+#: package/contents/ui/main.qml:565
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Black"
+msgstr "Must"
+
+#: package/contents/ui/main.qml:566
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Red"
+msgstr "Punane"
+
+#: package/contents/ui/main.qml:567
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Orange"
+msgstr "Oranž"
+
+#: package/contents/ui/main.qml:568
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Yellow"
+msgstr "Kollane"
+
+#: package/contents/ui/main.qml:569
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Green"
+msgstr "Roheline"
+
+#: package/contents/ui/main.qml:570
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Blue"
+msgstr "Sinine"
+
+#: package/contents/ui/main.qml:571
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Pink"
+msgstr "Roosa"
+
+#: package/contents/ui/main.qml:572
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent"
+msgstr "Läbipaistev"
+
+#: package/contents/ui/main.qml:573
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent Light"
+msgstr "Läbipaistev hele"
+
+#~ msgid "Toggle text format options"
+#~ msgstr "Teksti vormingu valikute lülitamine"
+
+#~ msgid "Notes Settings..."
+#~ msgstr "Märkmete seadistused..."
+
+#, fuzzy
+#~| msgid "Justify center"
+#~ msgid "Align center"
+#~ msgstr "Keskele joondus"
+
+#, fuzzy
+#~| msgid "Justify"
+#~ msgid "Justified"
+#~ msgstr "Rööpjoondus"
+
+#~ msgid "Font"
+#~ msgstr "Font"
+
+#~ msgid "Style:"
+#~ msgstr "Stiil:"
+
+#~ msgid "&Bold"
+#~ msgstr "&Rasvane"
+
+#~ msgid "&Italic"
+#~ msgstr "Kaldk&iri"
+
+#~ msgid "Size:"
+#~ msgstr "Suurus:"
+
+#~ msgid "Scale font size by:"
+#~ msgstr "Fondi suuruse skaleerimine:"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Color:"
+#~ msgstr "Värv"
+
+#~ msgid "Use theme color"
+#~ msgstr "Teema värvi kasutamine"
+
+#~ msgid "Use custom color:"
+#~ msgstr "Kohandatud värv:"
+
+#~ msgid "Active line highlight color:"
+#~ msgstr "Aktiivse rea esiletõstmise värv:"
+
+#~ msgid "Use no color"
+#~ msgstr "Värvi ei kasutata"
+
+#~ msgid "Theme"
+#~ msgstr "Teema"
+
+#~ msgid "Notes color:"
+#~ msgstr "Märkmete värv:"
+
+#~ msgid "Spell Check"
+#~ msgstr "Õigekirja kontroll"
+
+#~ msgid "Enable spell check:"
+#~ msgstr "Õigekirja kontrolli lubamine:"
+
+#~ msgid "Notes Color"
+#~ msgstr "Märkmete värv"
+
+#~ msgid "General"
+#~ msgstr "Üldine"
+
+#~ msgid "Formatting"
+#~ msgstr "Vormindus"
+
+#~ msgid "Unable to open file"
+#~ msgstr "Faili avamine nurjus"
+
+#~ msgid "Welcome to the Notes Plasmoid! Type your notes here..."
+#~ msgstr ""
+#~ "Tere tulemast kasutama märkmete plasmoidi! Siiin saab kirja panna oma "
+#~ "märkmed..."
+
+#~ msgid "Text Color"
+#~ msgstr "Teksti värv"
+
+#~ msgid "Notes Configuration"
+#~ msgstr "Märkmete seadistamine"
+
+#~ msgid "Select Font..."
+#~ msgstr "Vali font..."
+
+#~ msgid "Save Method"
+#~ msgstr "Salvestamisviis"
+
+#~ msgid "Save note at applet quit"
+#~ msgstr "Märkmed salvestatakse apleti sulgemisel"
+
+#~ msgid "Save note when applet looses focus"
+#~ msgstr "Märkmed salvestatakse, kui aplett pole fookuses"

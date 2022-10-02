@@ -1,0 +1,73 @@
+# Irish translation of plasma_runner_datetime
+# Copyright (C) 2011 This_file_is_part_of_KDE
+# This file is distributed under the same license as the plasma_runner_datetime package.
+# Kevin Scannell <kscanne@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_runner_datetime\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-03-03 00:45+0000\n"
+"PO-Revision-Date: 2011-12-28 12:28-0500\n"
+"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
+"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+"Language: ga\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+
+#: datetimerunner.cpp:17
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "date"
+msgstr "dáta"
+
+#: datetimerunner.cpp:18
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "time"
+msgstr "am"
+
+#: datetimerunner.cpp:25
+#, kde-format
+msgid "Displays the current date"
+msgstr "Taispeánann sé seo an dáta inniu"
+
+#: datetimerunner.cpp:26
+#, kde-format
+msgid "Displays the current time"
+msgstr "Taispeánann sé seo an t-am faoi láthair"
+
+#: datetimerunner.cpp:27 datetimerunner.cpp:29
+#, kde-format
+msgctxt "The <> and space are part of the example query"
+msgid " <timezone>"
+msgstr ""
+
+#: datetimerunner.cpp:28
+#, kde-format
+msgid "Displays the current date in a given timezone"
+msgstr "Taispeánann sé seo an dáta inniu i gcrios ama roghnaithe"
+
+#: datetimerunner.cpp:30
+#, kde-format
+msgid "Displays the current time in a given timezone"
+msgstr "Taispeánann sé seo an t-am i gcrios ama roghnaithe"
+
+#: datetimerunner.cpp:43
+#, kde-format
+msgid "Today's date is %1"
+msgstr "An Lá Inniu: %1"
+
+#: datetimerunner.cpp:57
+#, fuzzy, kde-format
+#| msgid "The current time is %1"
+msgid "Current time is %1"
+msgstr "An t-am anois: %1"
+
+#~ msgid "The date in %1 is %2"
+#~ msgstr "An Lá Inniu in %1: %2"
+
+#~ msgid "The current time in %1 is %2"
+#~ msgstr "An t-am anois i %1: %2"

@@ -1,0 +1,54 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Sergiu Bivol <sergiu@cip.md>, 2020, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-12-13 00:44+0000\n"
+"PO-Revision-Date: 2022-02-05 20:22+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.2\n"
+
+#: package/contents/ui/main.qml:31
+#, kde-format
+msgid "Night Color Control"
+msgstr "Control culoare nocturnă"
+
+#: package/contents/ui/main.qml:34
+#, kde-format
+msgid "Night Color is inhibited"
+msgstr "Culoarea nocturnă e inhibată"
+
+#: package/contents/ui/main.qml:37
+#, kde-format
+msgid "Night Color is unavailable"
+msgstr "Culoarea nocturnă e indisponibilă"
+
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgid "Night Color is disabled"
+msgstr "Culoarea nocturnă e dezactivată"
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Night Color is not running"
+msgstr "Culoarea nocturnă nu rulează"
+
+#: package/contents/ui/main.qml:45
+#, kde-format
+msgid "Night Color is active (%1K)"
+msgstr "Culoarea nocturnă e activă (%1 K)"
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Configure Night Color…"
+msgstr "Configurează culoarea nocturnă…"

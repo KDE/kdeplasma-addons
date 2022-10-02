@@ -1,0 +1,111 @@
+# Uyghur translation for plasma_applet_kolourpicker.
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sahran <sahran.ug@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_kolourpicker\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"PO-Revision-Date: 2013-09-08 07:05+0900\n"
+"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: package/contents/config/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:24
+#, fuzzy, kde-format
+#| msgid "Default Color Format"
+msgctxt "@label:listbox"
+msgid "Default color format:"
+msgstr "كۆڭۈلدىكى رەڭ پىچىمى"
+
+#: package/contents/ui/configGeneral.qml:32
+#, kde-format
+msgctxt "@option:check"
+msgid "Automatically copy color to clipboard"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:40
+#, kde-format
+msgctxt "@label"
+msgid "When pressing the keyboard shortcut:"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:41
+#, kde-format
+msgctxt "@option:radio"
+msgid "Pick a color"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:47
+#, kde-format
+msgctxt "@option:radio"
+msgid "Show history"
+msgstr ""
+
+#: package/contents/ui/logic.js:56
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgctxt "@action"
+msgid "Open Color Dialog"
+msgstr ""
+
+#: package/contents/ui/main.qml:109
+#, fuzzy, kde-format
+#| msgid "Clear History"
+msgctxt "@action"
+msgid "Clear History"
+msgstr "تارىخنى تازىلاش"
+
+#: package/contents/ui/main.qml:128
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr ""
+
+#: package/contents/ui/main.qml:193
+#, fuzzy, kde-format
+#| msgid "Color Options"
+msgctxt "@info:tooltip"
+msgid "Color options"
+msgstr "رەڭ تاللانمىسى"
+
+#: package/contents/ui/main.qml:288
+#, kde-format
+msgctxt "@info:usagetip"
+msgid "No colors"
+msgstr ""
+
+#: package/contents/ui/main.qml:292
+#, kde-format
+msgctxt "@action:button"
+msgid "Pick Color"
+msgstr ""
+
+#: package/contents/ui/main.qml:446
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete"
+msgstr ""
+
+#~ msgid "Default Format"
+#~ msgstr "كۆڭۈلدىكى پىچىم"
+
+#~ msgid "Latex Color"
+#~ msgstr "Latex رەڭ"

@@ -1,0 +1,362 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# Giovanni Sora <g.sora@tiscali.it>, 2019, 2020, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:51+0000\n"
+"PO-Revision-Date: 2022-07-14 19:13+0200\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: package/contents/ui/config.qml:48
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Provider:"
+msgstr "Fornitor (Provider):"
+
+#: package/contents/ui/config.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Update when using metered network connection"
+msgstr ""
+
+#: package/contents/ui/config.qml:76
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Category:"
+msgstr "Categoria:"
+
+#: package/contents/ui/config.qml:80
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "All"
+msgstr "Omne"
+
+#: package/contents/ui/config.qml:84
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "1080p"
+msgstr "1080p"
+
+#: package/contents/ui/config.qml:88
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "4K"
+msgstr "4K"
+
+#: package/contents/ui/config.qml:92
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Ultra Wide"
+msgstr "Ultra Large"
+
+#: package/contents/ui/config.qml:96
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Background"
+msgstr "Fundo"
+
+#: package/contents/ui/config.qml:100
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Lock Screen"
+msgstr "Bloca schermo"
+
+#: package/contents/ui/config.qml:104
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Nature"
+msgstr "Natura"
+
+#: package/contents/ui/config.qml:108
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tumblr"
+msgstr "Bicario"
+
+#: package/contents/ui/config.qml:112
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Black"
+msgstr "Nigre"
+
+#: package/contents/ui/config.qml:116
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flower"
+msgstr "Flor"
+
+#: package/contents/ui/config.qml:120
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Funny"
+msgstr "Divertente"
+
+#: package/contents/ui/config.qml:124
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cute"
+msgstr "Sympathic (Cute)"
+
+#: package/contents/ui/config.qml:128
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cool"
+msgstr "Fresc"
+
+#: package/contents/ui/config.qml:132
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Fall"
+msgstr "Autumno"
+
+#: package/contents/ui/config.qml:136
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Love"
+msgstr "Amar"
+
+#: package/contents/ui/config.qml:140
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Design"
+msgstr "Designo"
+
+#: package/contents/ui/config.qml:144
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Christmas"
+msgstr "Natal"
+
+#: package/contents/ui/config.qml:148
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Travel"
+msgstr "Viage"
+
+#: package/contents/ui/config.qml:152
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Beach"
+msgstr "Plagia"
+
+#: package/contents/ui/config.qml:156
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Car"
+msgstr "Automobile"
+
+#: package/contents/ui/config.qml:160
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Sports"
+msgstr "Sports"
+
+#: package/contents/ui/config.qml:164
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Animal"
+msgstr "Animal"
+
+#: package/contents/ui/config.qml:168
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "People"
+msgstr "Gente"
+
+#: package/contents/ui/config.qml:172
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Music"
+msgstr "Musica"
+
+#: package/contents/ui/config.qml:176
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Summer"
+msgstr "Estate"
+
+#: package/contents/ui/config.qml:180
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Galaxy"
+msgstr "Galaxia"
+
+#: package/contents/ui/config.qml:184
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tabliss"
+msgstr "Tabliss"
+
+#: package/contents/ui/config.qml:214
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "Positionar:"
+
+#: package/contents/ui/config.qml:217
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled and Cropped"
+msgstr "Scalate e Taliate"
+
+#: package/contents/ui/config.qml:221
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "Scalate"
+
+#: package/contents/ui/config.qml:225
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled, Keep Proportions"
+msgstr "Scalate, manteni le proportiones"
+
+#: package/contents/ui/config.qml:229
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "Centrate"
+
+#: package/contents/ui/config.qml:233
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "Tegulate"
+
+#: package/contents/ui/config.qml:254
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "Color de fundo:"
+
+#: package/contents/ui/config.qml:255
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "Selige le color de fundo"
+
+#: package/contents/ui/config.qml:266
+#, kde-format
+msgctxt "@label"
+msgid "Today's picture:"
+msgstr "Pictura de hodie:"
+
+#: package/contents/ui/config.qml:283
+#, kde-format
+msgctxt "@label"
+msgid "Title:"
+msgstr "Titulo:"
+
+#: package/contents/ui/config.qml:303
+#, kde-format
+msgctxt "@label"
+msgid "Author:"
+msgstr "Autor:"
+
+#: package/contents/ui/config.qml:329
+#, kde-format
+msgctxt "@action:button"
+msgid "Open Containing Folder"
+msgstr "Aperi dossier continente"
+
+#: package/contents/ui/config.qml:333
+#, kde-format
+msgctxt "@info:whatsthis for a button"
+msgid "Open the destination folder where the wallpaper image was saved."
+msgstr ""
+"Aperi le dossier de detination ubi le imagine de papiro es salveguardate."
+
+#: package/contents/ui/WallpaperDelegate.qml:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Today's picture"
+msgstr "Pictura de hodie"
+
+#: package/contents/ui/WallpaperDelegate.qml:143
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Loading"
+msgstr "Cargante"
+
+#: package/contents/ui/WallpaperDelegate.qml:144
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Unavailable"
+msgstr "Non disponibile"
+
+#: package/contents/ui/WallpaperDelegate.qml:145
+#, kde-format
+msgctxt "@info:whatsthis for an image %1 title %2 author"
+msgid "%1 Author: %2. Right-click on the image to see more actions."
+msgstr "%1 Autor; %2, Pulsa a dextera sur le image pro vider plus actiones."
+
+#: package/contents/ui/WallpaperDelegate.qml:146
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The wallpaper is being fetched from the Internet."
+msgstr "Le tapete de papiro reportate ab le internet."
+
+#: package/contents/ui/WallpaperDelegate.qml:147
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Failed to fetch the wallpaper from the Internet."
+msgstr "Falleva a reportar le tapete de papiro ab le Internet."
+
+#: package/contents/ui/WallpaperPreview.qml:50
+#, kde-format
+msgctxt "@action:inmenu wallpaper preview menu"
+msgid "Save Image as…"
+msgstr "Salveguarda imagine como…"
+
+#: package/contents/ui/WallpaperPreview.qml:53
+#, kde-format
+msgctxt "@info:whatsthis for a button and a menu item"
+msgid "Save today's picture to local disk"
+msgstr "Salveguarda le pictura del die al disco local"
+
+#: package/contents/ui/WallpaperPreview.qml:59
+#, kde-format
+msgctxt ""
+"@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
+msgid "Open Link in Browser…"
+msgstr "Aperi ligamine in Navigator..."
+
+#: package/contents/ui/WallpaperPreview.qml:62
+#, kde-format
+msgctxt "@info:whatsthis for a menu item"
+msgid "Open the website of today's picture in the default browser"
+msgstr "Aperi le sito web de pictura del die in le navigator predefinite"
+
+#: plugins/potdbackend.cpp:221
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Today's Picture"
+msgstr "Salveguarda Pictura del Die"
+
+#: plugins/potdbackend.cpp:223
+#, kde-format
+msgctxt "@label:listbox Template for file dialog"
+msgid "JPEG image (*.jpeg *.jpg *.jpe)"
+msgstr "Imagine JPEG (*.jpeg *.jpg *.jpe)"
+
+#: plugins/potdbackend.cpp:240
+#, kde-format
+msgctxt "@info:status after a save action"
+msgid "The image was not saved."
+msgstr "Le imagine non esseva salveguardate."
+
+#: plugins/potdbackend.cpp:246
+#, kde-format
+msgctxt "@info:status after a save action %1 file path %2 basename"
+msgid "The image was saved as <a href=\"%1\">%2</a>"
+msgstr "Le imagine esseva salveguardate como <a href=\"%1\">%2</a>"

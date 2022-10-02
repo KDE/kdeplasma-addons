@@ -1,0 +1,313 @@
+# Translation of plasma_applet_org.kde.plasma.notes.po to Catalan
+# Copyright (C) 2008-2021 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2 or later.
+#
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2015, 2018, 2021.
+# Joan Maspons <joanmaspons@gmail.com>, 2009.
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-30 00:46+0000\n"
+"PO-Revision-Date: 2021-11-06 20:37+0100\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Aparença"
+
+#: package/contents/ui/configAppearance.qml:30
+#, kde-format
+msgid "%1pt"
+msgstr "%1 pt"
+
+#: package/contents/ui/configAppearance.qml:36
+#, kde-format
+msgid "Text font size:"
+msgstr "Mida del tipus de lletra del text:"
+
+#: package/contents/ui/configAppearance.qml:41
+#, kde-format
+msgid "Background color"
+msgstr "Color de fons"
+
+#: package/contents/ui/configAppearance.qml:77
+#, kde-format
+msgid "A white sticky note"
+msgstr "Una nota adhesiva blanca"
+
+#: package/contents/ui/configAppearance.qml:78
+#, kde-format
+msgid "A black sticky note"
+msgstr "Una nota adhesiva negra"
+
+#: package/contents/ui/configAppearance.qml:79
+#, kde-format
+msgid "A red sticky note"
+msgstr "Una nota adhesiva vermella"
+
+#: package/contents/ui/configAppearance.qml:80
+#, kde-format
+msgid "An orange sticky note"
+msgstr "Una nota adhesiva taronja"
+
+#: package/contents/ui/configAppearance.qml:81
+#, kde-format
+msgid "A yellow sticky note"
+msgstr "Una nota adhesiva groga"
+
+#: package/contents/ui/configAppearance.qml:82
+#, kde-format
+msgid "A green sticky note"
+msgstr "Una nota adhesiva verda"
+
+#: package/contents/ui/configAppearance.qml:83
+#, kde-format
+msgid "A blue sticky note"
+msgstr "Una nota adhesiva blava"
+
+#: package/contents/ui/configAppearance.qml:84
+#, kde-format
+msgid "A pink sticky note"
+msgstr "Una nota adhesiva rosa"
+
+#: package/contents/ui/configAppearance.qml:85
+#, kde-format
+msgid "A translucent sticky note"
+msgstr "Una nota adhesiva translúcida"
+
+#: package/contents/ui/configAppearance.qml:86
+#, kde-format
+msgid "A translucent sticky note with light text"
+msgstr "Una nota adhesiva translúcida amb text clar"
+
+#: package/contents/ui/main.qml:246
+#, kde-format
+msgid "Undo"
+msgstr "Desfés"
+
+#: package/contents/ui/main.qml:254
+#, kde-format
+msgid "Redo"
+msgstr "Refés"
+
+#: package/contents/ui/main.qml:264
+#, kde-format
+msgid "Cut"
+msgstr "Retalla"
+
+#: package/contents/ui/main.qml:272
+#, kde-format
+msgid "Copy"
+msgstr "Copia"
+
+#: package/contents/ui/main.qml:280
+#, kde-format
+msgid "Paste Without Formatting"
+msgstr "Enganxa sense format"
+
+#: package/contents/ui/main.qml:286
+#, kde-format
+msgid "Paste"
+msgstr "Enganxa"
+
+#: package/contents/ui/main.qml:295
+#, kde-format
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: package/contents/ui/main.qml:302
+#, kde-format
+msgid "Clear"
+msgstr "Neteja"
+
+#: package/contents/ui/main.qml:312
+#, kde-format
+msgid "Select All"
+msgstr "Selecciona-ho tot"
+
+#: package/contents/ui/main.qml:440
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Bold"
+msgstr "Negreta"
+
+#: package/contents/ui/main.qml:452
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Italic"
+msgstr "Cursiva"
+
+#: package/contents/ui/main.qml:464
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Underline"
+msgstr "Subratllat"
+
+#: package/contents/ui/main.qml:476
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Strikethrough"
+msgstr "Barrat"
+
+#: package/contents/ui/main.qml:550
+#, kde-format
+msgid "Discard this note?"
+msgstr "Descarto aquesta nota?"
+
+#: package/contents/ui/main.qml:551
+#, kde-format
+msgid "Are you sure you want to discard this note?"
+msgstr "Esteu segur de voler descartar aquesta nota?"
+
+#: package/contents/ui/main.qml:564
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "White"
+msgstr "Blanc"
+
+#: package/contents/ui/main.qml:565
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Black"
+msgstr "Negre"
+
+#: package/contents/ui/main.qml:566
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Red"
+msgstr "Vermell"
+
+#: package/contents/ui/main.qml:567
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Orange"
+msgstr "Taronja"
+
+#: package/contents/ui/main.qml:568
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Yellow"
+msgstr "Groc"
+
+#: package/contents/ui/main.qml:569
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Green"
+msgstr "Verd"
+
+#: package/contents/ui/main.qml:570
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Blue"
+msgstr "Blau"
+
+#: package/contents/ui/main.qml:571
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Pink"
+msgstr "Rosa"
+
+#: package/contents/ui/main.qml:572
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent"
+msgstr "Translúcid"
+
+#: package/contents/ui/main.qml:573
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent Light"
+msgstr "Translúcid clar"
+
+#~ msgid "Toggle text format options"
+#~ msgstr "Commuta les opcions de format del text"
+
+#~ msgid "Notes Settings..."
+#~ msgstr "Configuració de les notes..."
+
+#~ msgid "Align left"
+#~ msgstr "Alineació a l'esquerra"
+
+#~ msgid "Align center"
+#~ msgstr "Alineació al centre"
+
+#~ msgid "Align right"
+#~ msgstr "Alineació a la dreta"
+
+#~ msgid "Justified"
+#~ msgstr "Justificat"
+
+#~ msgid "Font"
+#~ msgstr "Tipus de lletra"
+
+#~ msgid "Style:"
+#~ msgstr "Estil:"
+
+#~ msgid "&Bold"
+#~ msgstr "&Negreta"
+
+#~ msgid "&Italic"
+#~ msgstr "&Cursiva"
+
+#~ msgid "Size:"
+#~ msgstr "Mida:"
+
+#~ msgid "Scale font size by:"
+#~ msgstr "Escala la mida del tipus de lletra a:"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Color:"
+#~ msgstr "Color:"
+
+#~ msgid "Use theme color"
+#~ msgstr "Usa un tema de color"
+
+#~ msgid "Use custom color:"
+#~ msgstr "Usa un color personalitzat:"
+
+#~ msgid "Active line highlight color:"
+#~ msgstr "Color de ressaltat de la línia activa:"
+
+#~ msgid "Use no color"
+#~ msgstr "No usis cap color"
+
+#~ msgid "Theme"
+#~ msgstr "Tema"
+
+#~ msgid "Notes color:"
+#~ msgstr "Color de les notes:"
+
+#~ msgid "Spell Check"
+#~ msgstr "Verificació ortogràfica"
+
+#~ msgid "Enable spell check:"
+#~ msgstr "Habilita la verificació ortogràfica:"
+
+#~ msgid "Notes Color"
+#~ msgstr "Color de les notes"
+
+#~ msgid "General"
+#~ msgstr "General"
+
+#~ msgid "Formatting"
+#~ msgstr "Format"
+
+#~ msgid "Unable to open file"
+#~ msgstr "No s'ha pogut obrir el fitxer"
+
+#~ msgid "Text Color"
+#~ msgstr "Color del text"

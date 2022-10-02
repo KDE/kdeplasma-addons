@@ -1,0 +1,111 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Safa Alfulaij <safa1996alfulaij@gmail.com>, ٢٠١٥.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-02-03 00:45+0000\n"
+"PO-Revision-Date: 2022-01-22 22:28+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 21.07.70\n"
+
+#: contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "عامّ"
+
+#: contents/ui/main.qml:225
+#, kde-format
+msgctxt "@action"
+msgid "Paste"
+msgstr "ألصق"
+
+#: contents/ui/main.qml:253 contents/ui/main.qml:293
+#, kde-format
+msgid "Share"
+msgstr "شارك"
+
+#: contents/ui/main.qml:254 contents/ui/main.qml:294
+#, kde-format
+msgid "Drop text or an image onto me to upload it to an online service."
+msgstr "أسقط النّصّ أو الصّور عليّ لرفعها إلى خدمة إنترنتيّة."
+
+#: contents/ui/main.qml:294
+#, kde-format
+msgid "Upload %1 to an online service"
+msgstr "ارفع %1 إلى خدمة إنترنتيّة"
+
+#: contents/ui/main.qml:307
+#, kde-format
+msgid "Sending…"
+msgstr "يرسل..."
+
+#: contents/ui/main.qml:308
+#, kde-format
+msgid "Please wait"
+msgstr "فضلًا انتظر"
+
+#: contents/ui/main.qml:315
+#, kde-format
+msgid "Successfully uploaded"
+msgstr "رُفعت بنجاح"
+
+#: contents/ui/main.qml:316
+#, kde-format
+msgid "<a href='%1'>%1</a>"
+msgstr "<a href='%1'>%1</a>"
+
+#: contents/ui/main.qml:323
+#, kde-format
+msgid "Error during upload."
+msgstr "خطأ أثناء الرّفع."
+
+#: contents/ui/main.qml:324
+#, kde-format
+msgid "Please, try again."
+msgstr "فضلًا جرّب مجدّدًا."
+
+#: contents/ui/settingsGeneral.qml:21
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "History size:"
+msgstr "حجم التّأريخ:"
+
+#: contents/ui/settingsGeneral.qml:31
+#, kde-format
+msgctxt "@option:check"
+msgid "Copy automatically:"
+msgstr "انسخ آليًّا:"
+
+#: contents/ui/ShareDialog.qml:31
+#, kde-format
+msgid "Shares for '%1'"
+msgstr "مشاركات '%1'"
+
+#: contents/ui/ShowUrlDialog.qml:42
+#, kde-format
+msgid "The URL was just shared"
+msgstr "شُورك العنوان للتّوّ"
+
+#: contents/ui/ShowUrlDialog.qml:48
+#, kde-format
+msgctxt "@option:check"
+msgid "Don't show this dialog, copy automatically."
+msgstr "لا تظهر هذا الحواريّ وانسخ آليًّا."
+
+#: contents/ui/ShowUrlDialog.qml:56
+#, kde-format
+msgctxt "@action:button"
+msgid "Close"
+msgstr "أغلق"

@@ -1,0 +1,73 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sergiu Bivol <sergiu@cip.md>, 2010, 2020, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-03-03 00:45+0000\n"
+"PO-Revision-Date: 2022-02-05 20:25+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.2\n"
+
+#: datetimerunner.cpp:17
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "date"
+msgstr "data"
+
+#: datetimerunner.cpp:18
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "time"
+msgstr "ora"
+
+#: datetimerunner.cpp:25
+#, kde-format
+msgid "Displays the current date"
+msgstr "Afișează data curentă"
+
+#: datetimerunner.cpp:26
+#, kde-format
+msgid "Displays the current time"
+msgstr "Afișează ora curentă"
+
+#: datetimerunner.cpp:27 datetimerunner.cpp:29
+#, kde-format
+msgctxt "The <> and space are part of the example query"
+msgid " <timezone>"
+msgstr " <fus orar>"
+
+#: datetimerunner.cpp:28
+#, kde-format
+msgid "Displays the current date in a given timezone"
+msgstr "Afișează data curentă într-un fus orar dat"
+
+#: datetimerunner.cpp:30
+#, kde-format
+msgid "Displays the current time in a given timezone"
+msgstr "Afișează ora curentă într-un fus orar dat"
+
+#: datetimerunner.cpp:43
+#, kde-format
+msgid "Today's date is %1"
+msgstr "Astăzi este %1"
+
+#: datetimerunner.cpp:57
+#, kde-format
+msgid "Current time is %1"
+msgstr "Ora actuală e %1"
+
+#~ msgid "The date in %1 is %2"
+#~ msgstr "Data în %1 este %2"
+
+#~ msgid "The current time in %1 is %2"
+#~ msgstr "Ora curentă în %1 este %2"

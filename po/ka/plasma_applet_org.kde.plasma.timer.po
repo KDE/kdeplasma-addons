@@ -1,0 +1,195 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2022-09-12 19:43+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "გარეგნობა"
+
+#: package/contents/config/config.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr "წინასწარ აღწერილი ტაიმერები"
+
+#: package/contents/config/config.qml:24
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "დამატებითი"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, kde-format
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "წამმზომის შეჩერება"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, kde-format
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "წამმზომის გაშვება"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] "%1 წმ"
+msgstr[1] "%1 წმ"
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr "როცა წამმზომი მორჩება:"
+
+#: package/contents/ui/configAdvanced.qml:26
+#, kde-format
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "მითითებული ბრძანების შესრულება:"
+
+#: package/contents/ui/configAppearance.qml:27
+#, kde-format
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "ჩვენება:"
+
+#: package/contents/ui/configAppearance.qml:33
+#, kde-format
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "სათაურის ჩვენება:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "წამების ჩვენება"
+
+#: package/contents/ui/configAppearance.qml:62
+#, kde-format
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "შეტყობინებები:"
+
+#: package/contents/ui/configAppearance.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "გაფრთხილების ტექსტის ჩვენება:"
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+"თუ აქ დაამატებთ წინასწარ აღწერილ წამმზომემს, ისინი პლაზმოიდის კონტექსტურ "
+"მენიუშიც გამოჩნდება."
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr "დამატება"
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr "დროის შესაცვლელად თაგუნას რგოლი ზედ დაატრიალეთ"
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr "გამოყენება"
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr "ჩასწორება"
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr "წაშლა"
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr "%1 გაშვებულია"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 გაშვებული არაა"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] "დარჩენილი დრო: %1 წამი"
+msgstr[1] "დარჩენილი დრო: %1 წამი"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+"რიცხვების შესაცვლელად გამოიყენეთ თაგუნას რგოლი. ან აირჩიეთ წინასწარ "
+"განსაზღვრულები, კონტექსტური მენიუდან"
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "წამმზომი"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr "წამმზომი დასრულდა"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action"
+msgid "&Start"
+msgstr "&გაშვება"
+
+#: package/contents/ui/main.qml:138
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr "&გაჩერება"
+
+#: package/contents/ui/main.qml:139
+#, kde-format
+msgctxt "@action"
+msgid "&Reset"
+msgstr "&საწყისი მნიშვნელობებზე დაბრუნება"
+
+#~ msgid "Timer is running"
+#~ msgstr "წამმზომი გაშვებულია"

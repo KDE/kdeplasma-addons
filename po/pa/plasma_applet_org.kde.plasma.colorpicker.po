@@ -1,0 +1,111 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Amanpreet Singh Alam <aalam@users.sf.net>, 2008.
+# A S Alam <aalam@users.sf.net>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_kolourpicker\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"PO-Revision-Date: 2010-11-21 09:04+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi/Panjabi <punjab-l10n@list.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/config/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:24
+#, fuzzy, kde-format
+#| msgid "Default Color Format"
+msgctxt "@label:listbox"
+msgid "Default color format:"
+msgstr "ਡਿਫਾਲਟ ਰੰਗ ਫਾਰਮੈਟ"
+
+#: package/contents/ui/configGeneral.qml:32
+#, kde-format
+msgctxt "@option:check"
+msgid "Automatically copy color to clipboard"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:40
+#, kde-format
+msgctxt "@label"
+msgid "When pressing the keyboard shortcut:"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:41
+#, kde-format
+msgctxt "@option:radio"
+msgid "Pick a color"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:47
+#, fuzzy, kde-format
+#| msgid "History"
+msgctxt "@option:radio"
+msgid "Show history"
+msgstr "ਅਤੀਤ"
+
+#: package/contents/ui/logic.js:56
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: package/contents/ui/main.qml:108
+#, fuzzy, kde-format
+#| msgid "Copy Color Value"
+msgctxt "@action"
+msgid "Open Color Dialog"
+msgstr "ਰੰਗ ਮੁੱਲ ਕਾਪੀ ਕਰੋ"
+
+#: package/contents/ui/main.qml:109
+#, fuzzy, kde-format
+#| msgid "Clear History"
+msgctxt "@action"
+msgid "Clear History"
+msgstr "ਅਤੀਤ ਸਾਫ਼ ਕਰੋ"
+
+#: package/contents/ui/main.qml:128
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr ""
+
+#: package/contents/ui/main.qml:193
+#, fuzzy, kde-format
+#| msgid "Color Options"
+msgctxt "@info:tooltip"
+msgid "Color options"
+msgstr "ਰੰਗ ਚੋਣਾਂ"
+
+#: package/contents/ui/main.qml:288
+#, kde-format
+msgctxt "@info:usagetip"
+msgid "No colors"
+msgstr ""
+
+#: package/contents/ui/main.qml:292
+#, kde-format
+msgctxt "@action:button"
+msgid "Pick Color"
+msgstr ""
+
+#: package/contents/ui/main.qml:446
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete"
+msgstr ""
+
+#~ msgid "Default Format"
+#~ msgstr "ਡਿਫਾਲਟ ਫਾਰਮੈਟ"

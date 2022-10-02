@@ -1,0 +1,117 @@
+# Translation of plasma_applet_kolourpicker to Croatian
+#
+# Andrej Dundovic <adundovi@gmail.com>, 2009.
+# Marko Dimjasevic <marko@dimjasevic.net>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"PO-Revision-Date: 2010-07-18 14:26+0200\n"
+"Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
+"Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: package/contents/config/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:24
+#, fuzzy, kde-format
+#| msgid "Default Color Format"
+msgctxt "@label:listbox"
+msgid "Default color format:"
+msgstr "Zadani oblik boja"
+
+#: package/contents/ui/configGeneral.qml:32
+#, kde-format
+msgctxt "@option:check"
+msgid "Automatically copy color to clipboard"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:40
+#, kde-format
+msgctxt "@label"
+msgid "When pressing the keyboard shortcut:"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:41
+#, kde-format
+msgctxt "@option:radio"
+msgid "Pick a color"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:47
+#, fuzzy, kde-format
+#| msgid "History"
+msgctxt "@option:radio"
+msgid "Show history"
+msgstr "Povijest"
+
+#: package/contents/ui/logic.js:56
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: package/contents/ui/main.qml:108
+#, fuzzy, kde-format
+#| msgid "Copy Color Value"
+msgctxt "@action"
+msgid "Open Color Dialog"
+msgstr "Kopiraj vrijednost boje"
+
+#: package/contents/ui/main.qml:109
+#, fuzzy, kde-format
+#| msgid "Clear History"
+msgctxt "@action"
+msgid "Clear History"
+msgstr "Očisti povijest"
+
+#: package/contents/ui/main.qml:128
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr ""
+
+#: package/contents/ui/main.qml:193
+#, fuzzy, kde-format
+#| msgid "Color Options"
+msgctxt "@info:tooltip"
+msgid "Color options"
+msgstr "Opcije boja"
+
+#: package/contents/ui/main.qml:288
+#, kde-format
+msgctxt "@info:usagetip"
+msgid "No colors"
+msgstr ""
+
+#: package/contents/ui/main.qml:292
+#, kde-format
+msgctxt "@action:button"
+msgid "Pick Color"
+msgstr ""
+
+#: package/contents/ui/main.qml:446
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete"
+msgstr ""
+
+#~ msgid "Default Format"
+#~ msgstr "Zadani oblik"
+
+#~ msgid "Latex Color"
+#~ msgstr "Lateks boja"

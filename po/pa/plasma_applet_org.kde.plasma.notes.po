@@ -1,0 +1,319 @@
+# translation of plasma_applet_notes.po to Punjabi
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# A S Alam <aalam@users.sf.net>, 2007, 2008, 2009, 2010, 2016, 2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_notes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-30 00:46+0000\n"
+"PO-Revision-Date: 2018-11-08 22:44-0800\n"
+"Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
+"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "ਦਿੱਖ"
+
+#: package/contents/ui/configAppearance.qml:30
+#, kde-format
+msgid "%1pt"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:36
+#, fuzzy, kde-format
+#| msgid "Use custom font size:"
+msgid "Text font size:"
+msgstr "ਕਸਟਮ ਫੋਂਟ ਸਾਈਜ਼ ਵਰਤੋਂ:"
+
+#: package/contents/ui/configAppearance.qml:41
+#, kde-format
+msgid "Background color"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:77
+#, kde-format
+msgid "A white sticky note"
+msgstr "ਚਿੱਟਾ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/configAppearance.qml:78
+#, kde-format
+msgid "A black sticky note"
+msgstr "ਕਾਲਾ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/configAppearance.qml:79
+#, kde-format
+msgid "A red sticky note"
+msgstr "ਲਾਲ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/configAppearance.qml:80
+#, kde-format
+msgid "An orange sticky note"
+msgstr "ਸੰਤਰੀ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/configAppearance.qml:81
+#, kde-format
+msgid "A yellow sticky note"
+msgstr "ਪੀਲਾ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/configAppearance.qml:82
+#, kde-format
+msgid "A green sticky note"
+msgstr "ਹਰਾ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/configAppearance.qml:83
+#, kde-format
+msgid "A blue sticky note"
+msgstr "ਨੀਲਾ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/configAppearance.qml:84
+#, kde-format
+msgid "A pink sticky note"
+msgstr "ਗੁਲਾਬੀ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/configAppearance.qml:85
+#, kde-format
+msgid "A translucent sticky note"
+msgstr "ਬਲੌਰੀ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/configAppearance.qml:86
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note"
+msgid "A translucent sticky note with light text"
+msgstr "ਬਲੌਰੀ ਸਟਿੱਕੀ ਨੋਟ"
+
+#: package/contents/ui/main.qml:246
+#, kde-format
+msgid "Undo"
+msgstr ""
+
+#: package/contents/ui/main.qml:254
+#, kde-format
+msgid "Redo"
+msgstr ""
+
+#: package/contents/ui/main.qml:264
+#, kde-format
+msgid "Cut"
+msgstr ""
+
+#: package/contents/ui/main.qml:272
+#, kde-format
+msgid "Copy"
+msgstr ""
+
+#: package/contents/ui/main.qml:280
+#, kde-format
+msgid "Paste Without Formatting"
+msgstr ""
+
+#: package/contents/ui/main.qml:286
+#, kde-format
+msgid "Paste"
+msgstr ""
+
+#: package/contents/ui/main.qml:295
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: package/contents/ui/main.qml:302
+#, kde-format
+msgid "Clear"
+msgstr ""
+
+#: package/contents/ui/main.qml:312
+#, kde-format
+msgid "Select All"
+msgstr ""
+
+#: package/contents/ui/main.qml:440
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Bold"
+msgstr "ਗੂੜ੍ਹਾ"
+
+#: package/contents/ui/main.qml:452
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Italic"
+msgstr "ਤਿਰਛਾ"
+
+#: package/contents/ui/main.qml:464
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Underline"
+msgstr "ਹੇਠਾਂ ਲਾਈਨ"
+
+#: package/contents/ui/main.qml:476
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Strikethrough"
+msgstr "ਵਿੰਨ੍ਹੇ"
+
+#: package/contents/ui/main.qml:550
+#, kde-format
+msgid "Discard this note?"
+msgstr ""
+
+#: package/contents/ui/main.qml:551
+#, kde-format
+msgid "Are you sure you want to discard this note?"
+msgstr ""
+
+#: package/contents/ui/main.qml:564
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "White"
+msgstr "ਚਿੱਟਾ"
+
+#: package/contents/ui/main.qml:565
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Black"
+msgstr "ਕਾਲਾ"
+
+#: package/contents/ui/main.qml:566
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Red"
+msgstr "ਲਾਲ"
+
+#: package/contents/ui/main.qml:567
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Orange"
+msgstr "ਸੰਤਰੀ"
+
+#: package/contents/ui/main.qml:568
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Yellow"
+msgstr "ਪੀਲਾ"
+
+#: package/contents/ui/main.qml:569
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Green"
+msgstr "ਹਰਾ"
+
+#: package/contents/ui/main.qml:570
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Blue"
+msgstr "ਨੀਲਾ"
+
+#: package/contents/ui/main.qml:571
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Pink"
+msgstr "ਗੁਲਾਬੀ"
+
+#: package/contents/ui/main.qml:572
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent"
+msgstr "ਬਲੌਰੀ"
+
+#: package/contents/ui/main.qml:573
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent"
+msgctxt "@item:inmenu"
+msgid "Translucent Light"
+msgstr "ਬਲੌਰੀ"
+
+#~ msgid "Toggle text format options"
+#~ msgstr "ਟੈਕਸਟ ਫਾਰਮੈਟ ਚੋਣਾਂ ਬਦਲੋਂ"
+
+#~ msgid "Notes Settings..."
+#~ msgstr "ਨੋਟਿਸ ਸੈਟਿੰਗਾਂ..."
+
+#, fuzzy
+#~| msgid "Justify center"
+#~ msgid "Align center"
+#~ msgstr "ਸੈਂਟਰ ਵਿੱਚ"
+
+#, fuzzy
+#~| msgid "Justify"
+#~ msgid "Justified"
+#~ msgstr "ਇਕਸਾਰ"
+
+#~ msgid "Font"
+#~ msgstr "ਫੋਂਟ"
+
+#~ msgid "Style:"
+#~ msgstr "ਸਟਾਈਲ:"
+
+#~ msgid "&Bold"
+#~ msgstr "ਗੂੜਾ(&B)"
+
+#~ msgid "&Italic"
+#~ msgstr "ਤਿਰਛਾ(&I)"
+
+#~ msgid "Size:"
+#~ msgstr "ਸਾਈਜ਼:"
+
+#~ msgid "Scale font size by:"
+#~ msgstr "ਫੋਂਟ ਸਾਈਜ਼ ਰਾਹੀਂ ਸਕੇਲ ਕਰੋ:"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Color:"
+#~ msgstr "ਰੰਗ:"
+
+#~ msgid "Use theme color"
+#~ msgstr "ਥੀਮ ਰੰਗ ਵਰਤੋਂ"
+
+#~ msgid "Use custom color:"
+#~ msgstr "ਕਸਟਮ ਰੰਗ ਵਰਤੋਂ:"
+
+#~ msgid "Active line highlight color:"
+#~ msgstr "ਐਕਟਿਵ ਲਾਈਨ ਹਾਈਲਾਈਟ ਰੰਗ:"
+
+#~ msgid "Use no color"
+#~ msgstr "ਕੋਈ ਰੰਗ ਨਾ ਵਰਤੋਂ"
+
+#~ msgid "Theme"
+#~ msgstr "ਥੀਮ"
+
+#~ msgid "Notes color:"
+#~ msgstr "ਨੋਟਿਸ ਰੰਗ:"
+
+#~ msgid "Spell Check"
+#~ msgstr "ਸਪੈੱਲ ਚੈੱਕ"
+
+#~ msgid "Enable spell check:"
+#~ msgstr "ਸਪੈੱਲ ਚੈੱਕ ਚਾਲੂ:"
+
+#~ msgid "Notes Color"
+#~ msgstr "ਨੋਟਿਸ ਰੰਗ"
+
+#~ msgid "General"
+#~ msgstr "ਆਮ"
+
+#~ msgid "Formatting"
+#~ msgstr "ਫਾਰਮੈਟ"
+
+#~ msgid "Unable to open file"
+#~ msgstr "ਫਾਇਲ ਖੋਲ੍ਹਣ ਲਈ ਅਸਮਰੱਥ"
+
+#, fuzzy
+#~| msgid "Welcome to the Notes Plasmoid! Type your notes here..."
+#~ msgid "Welcome to the Notes Plasmoid! Type your notes here..."
+#~ msgstr "ਨੋਟਿਸ ਪਲਾਜਮੋਡ ਵਲੋਂ ਜੀ ਆਇਆਂ ਨੂੰ! ਆਪਣੇ ਨੋਟ ਇੱਥੇ ਲਿਖੋ..."
+
+#, fuzzy
+#~| msgid "Color:"
+#~ msgid "Text Color"
+#~ msgstr "ਰੰਗ:"

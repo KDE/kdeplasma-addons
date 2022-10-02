@@ -1,0 +1,213 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Wantoyo <wantoyek@gmail.com>, 2018, 2019.
+# Aziz Adam Adrian <4.adam.adrian@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2022-06-07 14:58+0700\n"
+"Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.04.1\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Penampilan"
+
+#: package/contents/config/config.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr "Prasetel Timer"
+
+#: package/contents/config/config.qml:24
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Tingkat-lanjut"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "Timer"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "Timer"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr "Setelah timer selesai:"
+
+#: package/contents/ui/configAdvanced.qml:26
+#, kde-format
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "Perintah eksekusi:"
+
+#: package/contents/ui/configAppearance.qml:27
+#, kde-format
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "Displai:"
+
+#: package/contents/ui/configAppearance.qml:33
+#, kde-format
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "Tampilkan judul:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "Tampilkan detik"
+
+#: package/contents/ui/configAppearance.qml:62
+#, kde-format
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "Notifikasi:"
+
+#: package/contents/ui/configAppearance.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "Tampilkan teks notifikasi:"
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+"Jika kamu menambahkan prasetel timer di sini, timer tersebut akan muncul di "
+"menu konteks plasmoid."
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr "Tambahkan"
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr "Gulir ke atas digit untuk mengubah waktu"
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr "Terapkan"
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr "Batal"
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr "Edit"
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr "Hapus"
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr "%1 telah berjalan"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 tidak berjalan"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] "Sisa waktu tinggal: %1 detik"
+msgstr[1] "Sisa waktu tinggal: %1 detik"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+"Gunakan roda mouse untuk mengubah digit atau memilih dari prasetel timer di "
+"dalam menu konteks"
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "Timer"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr "Timer selesai"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action"
+msgid "&Start"
+msgstr "&Mulai"
+
+#: package/contents/ui/main.qml:138
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr "Hen&tikan"
+
+#: package/contents/ui/main.qml:139
+#, kde-format
+msgctxt "@action"
+msgid "&Reset"
+msgstr "&Setel ulang"
+
+#~ msgid "Timer is running"
+#~ msgstr "Timer telah berjalan"
+
+#~ msgctxt "@title:group"
+#~ msgid "Run Command"
+#~ msgstr "Jalankan Perintah"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Command:"
+#~ msgstr "Perintah:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Title:"
+#~ msgstr "Judul:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Text:"
+#~ msgstr "Teks:"

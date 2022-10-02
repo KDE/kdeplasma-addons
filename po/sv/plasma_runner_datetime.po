@@ -1,0 +1,72 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2010, 2015, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-03-03 00:45+0000\n"
+"PO-Revision-Date: 2021-12-27 09:47+0100\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.08.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: datetimerunner.cpp:17
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "date"
+msgstr "datum"
+
+#: datetimerunner.cpp:18
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "time"
+msgstr "tid"
+
+#: datetimerunner.cpp:25
+#, kde-format
+msgid "Displays the current date"
+msgstr "Visar dagens datum"
+
+#: datetimerunner.cpp:26
+#, kde-format
+msgid "Displays the current time"
+msgstr "Visar aktuell tid"
+
+#: datetimerunner.cpp:27 datetimerunner.cpp:29
+#, kde-format
+msgctxt "The <> and space are part of the example query"
+msgid " <timezone>"
+msgstr " <tidszon>"
+
+#: datetimerunner.cpp:28
+#, kde-format
+msgid "Displays the current date in a given timezone"
+msgstr "Visar dagens datum i en given tidszon"
+
+#: datetimerunner.cpp:30
+#, kde-format
+msgid "Displays the current time in a given timezone"
+msgstr "Visar aktuell tid i en given tidszon"
+
+#: datetimerunner.cpp:43
+#, kde-format
+msgid "Today's date is %1"
+msgstr "Dagens datum är %1"
+
+#: datetimerunner.cpp:57
+#, kde-format
+msgid "Current time is %1"
+msgstr "Aktuell tid är %1"
+
+#~ msgid "The date in %1 is %2"
+#~ msgstr "Datumet i %1 är %2"
+
+#~ msgid "The current time in %1 is %2"
+#~ msgstr "Aktuell i %1 är %2"

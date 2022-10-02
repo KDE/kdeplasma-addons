@@ -1,0 +1,193 @@
+# translation of plasma_applet_timer.po to Chinese Traditional
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009.
+# Franklin Weng <franklin@goodhorse.idv.tw>, 2012, 2014, 2015.
+# pan93412 <pan93412@gmail.com>, 2018, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_timer\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2019-05-14 22:58+0800\n"
+"Last-Translator: pan93412 <pan93412@gmail.com>\n"
+"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 19.04.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "外觀"
+
+#: package/contents/config/config.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr ""
+
+#: package/contents/config/config.qml:24
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "進階"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "計時器"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "計時器"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] ""
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr "計時結束後："
+
+#: package/contents/ui/configAdvanced.qml:26
+#, kde-format
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "執行指令："
+
+#: package/contents/ui/configAppearance.qml:27
+#, kde-format
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "顯示："
+
+#: package/contents/ui/configAppearance.qml:33
+#, kde-format
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "顯示標題："
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "顯示秒數"
+
+#: package/contents/ui/configAppearance.qml:62
+#, kde-format
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "通知："
+
+#: package/contents/ui/configAppearance.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "顯示通知文字："
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr "正在執行 %1"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 尚未執行"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] "剩餘時間：%1 秒"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr "使用滑鼠滾輪變更數字，或從右鍵選單選擇預先設好的計時器"
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "計時器"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr "時間到！"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action"
+msgid "&Start"
+msgstr "開始(&S)"
+
+#: package/contents/ui/main.qml:138
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr "停止(&T)"
+
+#: package/contents/ui/main.qml:139
+#, kde-format
+msgctxt "@action"
+msgid "&Reset"
+msgstr "重置(&R)"
+
+#~ msgid "Timer is running"
+#~ msgstr "正在計時"

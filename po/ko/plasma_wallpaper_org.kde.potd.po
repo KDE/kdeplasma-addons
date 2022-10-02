@@ -1,0 +1,361 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Shinjo Park <kde@peremen.name>, 2018, 2019, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:51+0000\n"
+"PO-Revision-Date: 2022-07-13 13:26+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: package/contents/ui/config.qml:48
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Provider:"
+msgstr "공급자:"
+
+#: package/contents/ui/config.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Update when using metered network connection"
+msgstr ""
+
+#: package/contents/ui/config.qml:76
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Category:"
+msgstr "분류:"
+
+#: package/contents/ui/config.qml:80
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "All"
+msgstr "모두"
+
+#: package/contents/ui/config.qml:84
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "1080p"
+msgstr "1080p"
+
+#: package/contents/ui/config.qml:88
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "4K"
+msgstr "4K"
+
+#: package/contents/ui/config.qml:92
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Ultra Wide"
+msgstr "울트라 와이드"
+
+#: package/contents/ui/config.qml:96
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Background"
+msgstr "배경 화면"
+
+#: package/contents/ui/config.qml:100
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Lock Screen"
+msgstr "잠금 화면"
+
+#: package/contents/ui/config.qml:104
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Nature"
+msgstr "자연"
+
+#: package/contents/ui/config.qml:108
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: package/contents/ui/config.qml:112
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Black"
+msgstr "검은색"
+
+#: package/contents/ui/config.qml:116
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flower"
+msgstr "꽃"
+
+#: package/contents/ui/config.qml:120
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Funny"
+msgstr "재미있음"
+
+#: package/contents/ui/config.qml:124
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cute"
+msgstr "귀여움"
+
+#: package/contents/ui/config.qml:128
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cool"
+msgstr "쿨함"
+
+#: package/contents/ui/config.qml:132
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Fall"
+msgstr "가을"
+
+#: package/contents/ui/config.qml:136
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Love"
+msgstr "사랑"
+
+#: package/contents/ui/config.qml:140
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Design"
+msgstr "디자인"
+
+#: package/contents/ui/config.qml:144
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Christmas"
+msgstr "크리스마스"
+
+#: package/contents/ui/config.qml:148
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Travel"
+msgstr "여행"
+
+#: package/contents/ui/config.qml:152
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Beach"
+msgstr "해변"
+
+#: package/contents/ui/config.qml:156
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Car"
+msgstr "자동차"
+
+#: package/contents/ui/config.qml:160
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Sports"
+msgstr "스포츠"
+
+#: package/contents/ui/config.qml:164
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Animal"
+msgstr "동물"
+
+#: package/contents/ui/config.qml:168
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "People"
+msgstr "사람"
+
+#: package/contents/ui/config.qml:172
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Music"
+msgstr "음악"
+
+#: package/contents/ui/config.qml:176
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Summer"
+msgstr "여름"
+
+#: package/contents/ui/config.qml:180
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Galaxy"
+msgstr "은하계"
+
+#: package/contents/ui/config.qml:184
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tabliss"
+msgstr "초원"
+
+#: package/contents/ui/config.qml:214
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "위치:"
+
+#: package/contents/ui/config.qml:217
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled and Cropped"
+msgstr "크기 조정 후 자르기"
+
+#: package/contents/ui/config.qml:221
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "크기 조정"
+
+#: package/contents/ui/config.qml:225
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled, Keep Proportions"
+msgstr "크기 조정, 비율 유지"
+
+#: package/contents/ui/config.qml:229
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "가운데"
+
+#: package/contents/ui/config.qml:233
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "바둑판식 배열"
+
+#: package/contents/ui/config.qml:254
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "배경색:"
+
+#: package/contents/ui/config.qml:255
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "배경색 선택"
+
+#: package/contents/ui/config.qml:266
+#, kde-format
+msgctxt "@label"
+msgid "Today's picture:"
+msgstr "오늘의 그림:"
+
+#: package/contents/ui/config.qml:283
+#, kde-format
+msgctxt "@label"
+msgid "Title:"
+msgstr "제목:"
+
+#: package/contents/ui/config.qml:303
+#, kde-format
+msgctxt "@label"
+msgid "Author:"
+msgstr "제작자:"
+
+#: package/contents/ui/config.qml:329
+#, kde-format
+msgctxt "@action:button"
+msgid "Open Containing Folder"
+msgstr "포함하는 폴더 열기"
+
+#: package/contents/ui/config.qml:333
+#, kde-format
+msgctxt "@info:whatsthis for a button"
+msgid "Open the destination folder where the wallpaper image was saved."
+msgstr "배경 그림이 저장된 대상 폴더를 엽니다."
+
+#: package/contents/ui/WallpaperDelegate.qml:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Today's picture"
+msgstr "오늘의 그림"
+
+#: package/contents/ui/WallpaperDelegate.qml:143
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Loading"
+msgstr "불러오는 중"
+
+#: package/contents/ui/WallpaperDelegate.qml:144
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Unavailable"
+msgstr "사용할 수 없음"
+
+#: package/contents/ui/WallpaperDelegate.qml:145
+#, kde-format
+msgctxt "@info:whatsthis for an image %1 title %2 author"
+msgid "%1 Author: %2. Right-click on the image to see more actions."
+msgstr "%1 제작자: %2. 오른쪽 클릭하면 더 많은 동작을 볼 수 있습니다."
+
+#: package/contents/ui/WallpaperDelegate.qml:146
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The wallpaper is being fetched from the Internet."
+msgstr "배경 그림을 인터넷에서 가져오고 있습니다."
+
+#: package/contents/ui/WallpaperDelegate.qml:147
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Failed to fetch the wallpaper from the Internet."
+msgstr "배경 그림을 인터넷에서 가져올 수 없습니다."
+
+#: package/contents/ui/WallpaperPreview.qml:50
+#, kde-format
+msgctxt "@action:inmenu wallpaper preview menu"
+msgid "Save Image as…"
+msgstr "다른 이름으로 그림 저장..."
+
+#: package/contents/ui/WallpaperPreview.qml:53
+#, kde-format
+msgctxt "@info:whatsthis for a button and a menu item"
+msgid "Save today's picture to local disk"
+msgstr "오늘의 그림을 로컬 디스크에 저장"
+
+#: package/contents/ui/WallpaperPreview.qml:59
+#, kde-format
+msgctxt ""
+"@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
+msgid "Open Link in Browser…"
+msgstr "브라우저에서 링크 열기…"
+
+#: package/contents/ui/WallpaperPreview.qml:62
+#, kde-format
+msgctxt "@info:whatsthis for a menu item"
+msgid "Open the website of today's picture in the default browser"
+msgstr "오늘의 그림 웹 사이트를 기본 브라우저에서 열기"
+
+#: plugins/potdbackend.cpp:221
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Today's Picture"
+msgstr "오늘의 그림 저장"
+
+#: plugins/potdbackend.cpp:223
+#, kde-format
+msgctxt "@label:listbox Template for file dialog"
+msgid "JPEG image (*.jpeg *.jpg *.jpe)"
+msgstr "JPEG 그림 (*.jpeg *.jpg *.jpe)"
+
+#: plugins/potdbackend.cpp:240
+#, kde-format
+msgctxt "@info:status after a save action"
+msgid "The image was not saved."
+msgstr "그림을 저장하지 못했습니다."
+
+#: plugins/potdbackend.cpp:246
+#, kde-format
+msgctxt "@info:status after a save action %1 file path %2 basename"
+msgid "The image was saved as <a href=\"%1\">%2</a>"
+msgstr "그림을 <a href=\"%1\">%2</a>에 저장했습니다"

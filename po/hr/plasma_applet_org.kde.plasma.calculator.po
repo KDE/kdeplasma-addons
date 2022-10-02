@@ -1,0 +1,93 @@
+# Translation of plasma_applet_calculator to Croatian
+#
+# Andrej Dundovic <adundovi@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"PO-Revision-Date: 2010-01-24 17:16+0100\n"
+"Last-Translator: Andrej Dundovic <adundovi@gmail.com>\n"
+"Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: package/contents/ui/calculator.qml:307
+#, fuzzy, kde-format
+#| msgctxt "The C button of the calculator"
+#| msgid "C"
+msgctxt "Text of the clear button"
+msgid "C"
+msgstr "C"
+
+#: package/contents/ui/calculator.qml:320
+#, kde-format
+msgctxt "Text of the division button"
+msgid "÷"
+msgstr ""
+
+#: package/contents/ui/calculator.qml:333
+#, fuzzy, kde-format
+#| msgctxt "The × button of the calculator"
+#| msgid "×"
+msgctxt "Text of the multiplication button"
+msgid "×"
+msgstr "×"
+
+#: package/contents/ui/calculator.qml:345
+#, fuzzy, kde-format
+#| msgctxt "The AC button of the calculator"
+#| msgid "AC"
+msgctxt "Text of the all clear button"
+msgid "AC"
+msgstr "AC"
+
+#: package/contents/ui/calculator.qml:397
+#, kde-format
+msgctxt "Text of the minus button"
+msgid "-"
+msgstr ""
+
+#: package/contents/ui/calculator.qml:449
+#, fuzzy, kde-format
+#| msgctxt "The + button of the calculator"
+#| msgid "+"
+msgctxt "Text of the plus button"
+msgid "+"
+msgstr "+"
+
+#: package/contents/ui/calculator.qml:500
+#, fuzzy, kde-format
+#| msgctxt "The = button of the calculator"
+#| msgid "="
+msgctxt "Text of the equals button"
+msgid "="
+msgstr "="
+
+#~ msgctxt "The − button of the calculator"
+#~ msgid "−"
+#~ msgstr "−"
+
+#~ msgid "ERROR"
+#~ msgstr "POGREŠKA"
+
+#~ msgid "ERROR: DIV BY 0"
+#~ msgstr "POGREŠKA: DIJELJENJE S 0"
+
+#~ msgid "Copy"
+#~ msgstr "Kopiraj"
+
+#~ msgid "Paste"
+#~ msgstr "Zalijepi"
+
+#~ msgctxt "The ∕ button of the calculator"
+#~ msgid "∕"
+#~ msgstr "∕"

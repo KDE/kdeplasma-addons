@@ -1,0 +1,242 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Amanpreet Singh Alam <aalam@users.sf.net>, 2008.
+# A S Alam <aalam@users.sf.net>, 2009, 2010, 2014, 2016, 2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_timer\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2018-11-08 22:39-0800\n"
+"Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
+"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "ਦਿੱਖ"
+
+#: package/contents/config/config.qml:19
+#, fuzzy, kde-format
+#| msgid "Predefined Timers"
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr "ਪਹਿਲਾਂ-ਸੈੱਟ ਟਾਈਮ"
+
+#: package/contents/config/config.qml:24
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "ਤਕਨੀਕੀ"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "ਟਾਈਮਰ"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "ਟਾਈਮਰ"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr ""
+
+#: package/contents/ui/configAdvanced.qml:26
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Execute command"
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "ਕਮਾਂਡ ਨੂੰ ਚਲਾਓ"
+
+#: package/contents/ui/configAppearance.qml:27
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Display"
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "ਡਿਸਪਲੇਅ"
+
+#: package/contents/ui/configAppearance.qml:33
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show title"
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "ਟਾਈਟਲ ਵੇਖਾਓ"
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "ਸਕਿੰਟ ਦਿਖਾਓ"
+
+#: package/contents/ui/configAppearance.qml:62
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Notifications"
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ"
+
+#: package/contents/ui/configAppearance.qml:66
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification"
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨਾਂ ਨੂੰ ਵੇਖਾਓ"
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr "%1 ਚੱਲ ਰਿਹਾ ਹੈ"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 ਨਹੀਂ ਚੱਲਦਾ ਹੈ"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "ਟਾਈਮਰ"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr "ਟਾਈਮਰ ਪੂਰਾ ਹੋਇਆ"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action"
+msgid "&Start"
+msgstr "ਸ਼ੁਰੂ(&S)"
+
+#: package/contents/ui/main.qml:138
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr "ਰੋਕੋ(&t)"
+
+#: package/contents/ui/main.qml:139
+#, kde-format
+msgctxt "@action"
+msgid "&Reset"
+msgstr "ਮੁੜ-ਸੈੱਟ(&R)"
+
+#~ msgctxt "@title:group"
+#~ msgid "Run Command"
+#~ msgstr "ਕਮਾਂਡ ਨੂੰ ਚਲਾਓ"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Command:"
+#~ msgstr "ਕਮਾਂਡ:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Title:"
+#~ msgstr "ਟਾਈਟਲ:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Text:"
+#~ msgstr "ਲਿਖਤ:"
+
+#~ msgctxt "separator of hours:minutes:seconds in timer strings"
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "Timer Configuration"
+#~ msgstr "ਟਾਈਮਰ ਸੰਰਚਨਾ"
+
+#~ msgid "Stop"
+#~ msgstr "ਰੋਕੋ"
+
+#~ msgid "Timer Timeout"
+#~ msgstr "ਟਾਈਮਰ ਟਾਈਮ-ਆਉਟ"
+
+#~ msgid "General"
+#~ msgstr "ਆਮ"
+
+#~ msgid "Actions on Timeout"
+#~ msgstr "ਟਾਈਮ-ਆਉਟ ਉੱਤੇ ਐਕਸ਼ਨ"
+
+#~ msgid "Show a message:"
+#~ msgstr "ਸੁਨੇਹਾ ਵੇਖੋ:"
+
+#~ msgid "Message:"
+#~ msgstr "ਸੁਨੇਹਾ:"

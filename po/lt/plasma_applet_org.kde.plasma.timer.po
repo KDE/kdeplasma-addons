@@ -1,0 +1,227 @@
+# Lithuanian translations for plasma_applet_timer package.
+# This file is distributed under the same license as the plasma_applet_timer package.
+#
+# Andrius Štikonas <andrius@stikonas.eu>, 2008.
+# Remigijus Jarmalavičius <remigijus@jarmalavicius.lt>, 2011.
+# Liudas Ališauskas <liudas@akmc.lt>, 2012, 2014, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_timer\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2021-02-01 22:27+0200\n"
+"Last-Translator: Moo\n"
+"Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
+"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Išvaizda"
+
+#: package/contents/config/config.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr "Iš anksto nustatyti laikmačiai"
+
+#: package/contents/config/config.qml:24
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Išplėstiniai"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "Laikmatis"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "Laikmatis"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr "Pasibaigus laikmačio laikui:"
+
+#: package/contents/ui/configAdvanced.qml:26
+#, kde-format
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "Įvykdyti komandą:"
+
+#: package/contents/ui/configAppearance.qml:27
+#, kde-format
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "Rodyti:"
+
+#: package/contents/ui/configAppearance.qml:33
+#, kde-format
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "Rodyti antraštę:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "Rodyti sekundes"
+
+#: package/contents/ui/configAppearance.qml:62
+#, kde-format
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "Pranešimai:"
+
+#: package/contents/ui/configAppearance.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "Rodyti pranešimo tekstą:"
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+"Jeigu čia pridėsite iš anksto nustatytus laikmačius, jie atsiras Plasma "
+"įskiepio kontekstiniame meniu."
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr "Pridėti"
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr "Slinkite virš skaitmenų norėdami keisti laiką"
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr "Taikyti"
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr "Atsisakyti"
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr "Taisyti"
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr "Ištrinti"
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr "%1 veikia"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 neveikia"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] "Likęs laikas: %1 sekundė"
+msgstr[1] "Likęs laikas: %1 sekundės"
+msgstr[2] "Likęs laikas: %1 sekundžių"
+msgstr[3] "Likęs laikas: %1 sekundė"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+"Norėdami keisti skaitmenis, naudokite pelės ratuką arba kontekstiniame meniu "
+"pasirinkite iš anksto apibrėžtus laikmačius"
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "Laikmatis"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr "Pasibaigė laikmačio laikas"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action"
+msgid "&Start"
+msgstr "&Paleisti"
+
+#: package/contents/ui/main.qml:138
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr "S&tabdyti"
+
+#: package/contents/ui/main.qml:139
+#, kde-format
+msgctxt "@action"
+msgid "&Reset"
+msgstr "&Atstatyti"
+
+#~ msgid "Timer is running"
+#~ msgstr "Laikmatis veikia"
+
+#, fuzzy
+#~| msgid "Run command"
+#~ msgctxt "@title:group"
+#~ msgid "Run Command"
+#~ msgstr "Vykdyti komandą"
+
+#, fuzzy
+#~| msgid "Command:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Command:"
+#~ msgstr "Komanda:"
+
+#, fuzzy
+#~| msgid "Title:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Title:"
+#~ msgstr "Pavadinimas:"
+
+#, fuzzy
+#~| msgid "Text:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Text:"
+#~ msgstr "Tekstas:"

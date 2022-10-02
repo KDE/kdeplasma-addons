@@ -1,0 +1,53 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Paolo Zamponi <zapaolo@email.it>, 2020, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-12-13 00:44+0000\n"
+"PO-Revision-Date: 2021-12-15 14:59+0100\n"
+"Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.12.0\n"
+
+#: package/contents/ui/main.qml:31
+#, kde-format
+msgid "Night Color Control"
+msgstr "Controllo del colore notturno"
+
+#: package/contents/ui/main.qml:34
+#, kde-format
+msgid "Night Color is inhibited"
+msgstr "Il colore notturno è inibito"
+
+#: package/contents/ui/main.qml:37
+#, kde-format
+msgid "Night Color is unavailable"
+msgstr "Il colore notturno non è disponibile"
+
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgid "Night Color is disabled"
+msgstr "Il colore notturno è disabilitato"
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Night Color is not running"
+msgstr "Il colore notturno non è in esecuzione"
+
+#: package/contents/ui/main.qml:45
+#, kde-format
+msgid "Night Color is active (%1K)"
+msgstr "Il colore notturno è attivo (%1K)"
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Configure Night Color…"
+msgstr "Configura il colore notturno…"

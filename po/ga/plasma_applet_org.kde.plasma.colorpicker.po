@@ -1,0 +1,113 @@
+# Irish translation of plasma_applet_kolourpicker
+# Copyright (C) 2009 This_file_is_part_of_KDE
+# This file is distributed under the same license as the plasma_applet_kolourpicker package.
+# Kevin Scannell <kscanne@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: playground-base/plasma_applet_kolourpicker.po\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"PO-Revision-Date: 2007-09-07 08:33-0500\n"
+"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
+"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+"Language: ga\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+
+#: package/contents/config/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:24
+#, fuzzy, kde-format
+#| msgid "Default Color Format"
+msgctxt "@label:listbox"
+msgid "Default color format:"
+msgstr "Formáid Réamhshocraithe Datha"
+
+#: package/contents/ui/configGeneral.qml:32
+#, kde-format
+msgctxt "@option:check"
+msgid "Automatically copy color to clipboard"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:40
+#, kde-format
+msgctxt "@label"
+msgid "When pressing the keyboard shortcut:"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:41
+#, kde-format
+msgctxt "@option:radio"
+msgid "Pick a color"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:47
+#, fuzzy, kde-format
+#| msgid "History"
+msgctxt "@option:radio"
+msgid "Show history"
+msgstr "Stair"
+
+#: package/contents/ui/logic.js:56
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: package/contents/ui/main.qml:108
+#, fuzzy, kde-format
+#| msgid "Copy Color Value"
+msgctxt "@action"
+msgid "Open Color Dialog"
+msgstr "Cóipeáil Dath"
+
+#: package/contents/ui/main.qml:109
+#, fuzzy, kde-format
+#| msgid "Clear History"
+msgctxt "@action"
+msgid "Clear History"
+msgstr "Glan an Stair"
+
+#: package/contents/ui/main.qml:128
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr ""
+
+#: package/contents/ui/main.qml:193
+#, fuzzy, kde-format
+#| msgid "Color Options"
+msgctxt "@info:tooltip"
+msgid "Color options"
+msgstr "Roghanna Datha"
+
+#: package/contents/ui/main.qml:288
+#, kde-format
+msgctxt "@info:usagetip"
+msgid "No colors"
+msgstr ""
+
+#: package/contents/ui/main.qml:292
+#, kde-format
+msgctxt "@action:button"
+msgid "Pick Color"
+msgstr ""
+
+#: package/contents/ui/main.qml:446
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete"
+msgstr ""
+
+#~ msgid "Default Format"
+#~ msgstr "Formáid Réamhshocraithe"
+
+#~ msgid "Latex Color"
+#~ msgstr "Dath Latex"

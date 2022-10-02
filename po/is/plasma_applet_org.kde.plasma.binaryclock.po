@@ -1,0 +1,128 @@
+# translation of plasma_applet_binaryclock.po to
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sveinn í Felli <sveinki@nett.is>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_binaryclock\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-09-25 02:25+0200\n"
+"PO-Revision-Date: 2011-03-24 09:47+0000\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
+"\n"
+
+#: package/contents/config/config.qml:17
+#, fuzzy, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Útlit"
+
+#: package/contents/ui/configGeneral.qml:35
+#, kde-format
+msgid "Display:"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:36
+#: package/contents/ui/configGeneral.qml:90
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Grid"
+msgstr "Möskvi"
+
+#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:77
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Inactive LEDs"
+msgstr "Óvirk ljós:"
+
+#: package/contents/ui/configGeneral.qml:46
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Seconds"
+msgstr "Sekúndur:"
+
+#: package/contents/ui/configGeneral.qml:51
+#, kde-format
+msgctxt "@option:check"
+msgid "In BCD format (decimal)"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:60
+#, fuzzy, kde-format
+msgid "Use custom color for:"
+msgstr "Nota sérsniðinn lit fyrir virk ljós:"
+
+#: package/contents/ui/configGeneral.qml:64
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Active LEDs"
+msgstr "Virk ljós:"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "Show inactive LEDs"
+#~ msgstr "Sýna óvirk ljós"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "Use custom color for active LEDs"
+#~ msgstr "Nota sérsniðinn lit fyrir virk ljós:"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "Use custom color for inactive LEDs"
+#~ msgstr "Nota sérsniðinn lit fyrir óvirk ljós:"
+
+#, fuzzy
+#~ msgctxt "@title:group"
+#~ msgid "Appearance"
+#~ msgstr "Útlit"
+
+#, fuzzy
+#~ msgid "Check this if you want to see the inactive LEDs."
+#~ msgstr "Veldu þetta ef þú vilt að óvirk ljós séu birt."
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Sýna"
+
+#, fuzzy
+#~ msgid "Use theme color"
+#~ msgstr "Nota lit úr þema"
+
+#, fuzzy
+#~ msgid "Show the grid"
+#~ msgstr "Sýna möskva"
+
+#, fuzzy
+#~ msgid "Check this if you want to see a grid around leds."
+#~ msgstr "Veldu þetta ef þú vilt að möskvinn birtist í kringum ljósin."
+
+#, fuzzy
+#~ msgid "Use custom grid color:"
+#~ msgstr "Nota sérsniðnn lit á möskva:"
+
+#, fuzzy
+#~ msgid "Information"
+#~ msgstr "Upplýsingar"
+
+#, fuzzy
+#~ msgid "Show the seconds LEDs"
+#~ msgstr "Sýna ljós fyrir sekúndur"
+
+#, fuzzy
+#~ msgid ""
+#~ "Check this if you want to display seconds LEDs in order to see the "
+#~ "seconds."
+#~ msgstr ""
+#~ "Veldu þetta ef þú vilt að sérstök ljós séu birt til að sjá sekúndur."

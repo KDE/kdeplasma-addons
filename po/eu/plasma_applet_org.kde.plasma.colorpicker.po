@@ -1,0 +1,106 @@
+# Translation for plasma_applet_org.kde.plasma_colorpicker.po to Euskara/Basque (eu).
+# Copyright (C) 2017-2018, The Free Software Foundation.
+# Copyright (C) 2019-2022 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+#
+# Translators:
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2017, 2018, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"PO-Revision-Date: 2022-09-02 07:59+0200\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.08.0\n"
+
+#: package/contents/config/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Orokorra"
+
+#: package/contents/ui/configGeneral.qml:24
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Default color format:"
+msgstr "Lehenetsitako kolore formatua:"
+
+#: package/contents/ui/configGeneral.qml:32
+#, kde-format
+msgctxt "@option:check"
+msgid "Automatically copy color to clipboard"
+msgstr "Automatikoki kopiatu kolorea arbelera"
+
+#: package/contents/ui/configGeneral.qml:40
+#, kde-format
+msgctxt "@label"
+msgid "When pressing the keyboard shortcut:"
+msgstr "Teklatuko lasterbidea sakatzean:"
+
+#: package/contents/ui/configGeneral.qml:41
+#, kde-format
+msgctxt "@option:radio"
+msgid "Pick a color"
+msgstr "Hautatu kolore bat"
+
+#: package/contents/ui/configGeneral.qml:47
+#, kde-format
+msgctxt "@option:radio"
+msgid "Show history"
+msgstr "Erakutsi historia"
+
+#: package/contents/ui/logic.js:56
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr "Kopiatu arbelera"
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgctxt "@action"
+msgid "Open Color Dialog"
+msgstr "Ireki kolore elkarrizketa-koadroa"
+
+#: package/contents/ui/main.qml:109
+#, kde-format
+msgctxt "@action"
+msgid "Clear History"
+msgstr "Garbitu historia"
+
+#: package/contents/ui/main.qml:128
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr "Hautatu kolore bat"
+
+#: package/contents/ui/main.qml:193
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Color options"
+msgstr "Koloreen aukerak"
+
+#: package/contents/ui/main.qml:288
+#, kde-format
+msgctxt "@info:usagetip"
+msgid "No colors"
+msgstr "Kolorerik ez"
+
+#: package/contents/ui/main.qml:292
+#, kde-format
+msgctxt "@action:button"
+msgid "Pick Color"
+msgstr "Hautatu kolore bat"
+
+#: package/contents/ui/main.qml:446
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete"
+msgstr "Ezabatu"

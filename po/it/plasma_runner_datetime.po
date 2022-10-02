@@ -1,0 +1,72 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2010, 2015, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_runner_datetime\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-03-03 00:45+0000\n"
+"PO-Revision-Date: 2021-12-27 17:10+0100\n"
+"Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.12.0\n"
+
+#: datetimerunner.cpp:17
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "date"
+msgstr "data"
+
+#: datetimerunner.cpp:18
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "time"
+msgstr "ora"
+
+#: datetimerunner.cpp:25
+#, kde-format
+msgid "Displays the current date"
+msgstr "Visualizza la data attuale"
+
+#: datetimerunner.cpp:26
+#, kde-format
+msgid "Displays the current time"
+msgstr "Visualizza l'ora attuale"
+
+#: datetimerunner.cpp:27 datetimerunner.cpp:29
+#, kde-format
+msgctxt "The <> and space are part of the example query"
+msgid " <timezone>"
+msgstr " <fusoorario>"
+
+#: datetimerunner.cpp:28
+#, kde-format
+msgid "Displays the current date in a given timezone"
+msgstr "Visualizza la data attuale in un dato fuso orario"
+
+#: datetimerunner.cpp:30
+#, kde-format
+msgid "Displays the current time in a given timezone"
+msgstr "Visualizza l'ora attuale in un dato fuso orario"
+
+#: datetimerunner.cpp:43
+#, kde-format
+msgid "Today's date is %1"
+msgstr "La data odierna è %1"
+
+#: datetimerunner.cpp:57
+#, kde-format
+msgid "Current time is %1"
+msgstr "L'ora attuale è %1"
+
+#~ msgid "The date in %1 is %2"
+#~ msgstr "La data in %1 è %2"
+
+#~ msgid "The current time in %1 is %2"
+#~ msgstr "L'ora corrente in %1 è %2"

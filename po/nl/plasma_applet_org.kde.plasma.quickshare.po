@@ -1,0 +1,117 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2014, 2015, 2018, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-02-03 00:45+0000\n"
+"PO-Revision-Date: 2021-12-13 11:50+0100\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.08.3\n"
+
+#: contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Algemeen"
+
+#: contents/ui/main.qml:225
+#, kde-format
+msgctxt "@action"
+msgid "Paste"
+msgstr "Plakken"
+
+#: contents/ui/main.qml:253 contents/ui/main.qml:293
+#, kde-format
+msgid "Share"
+msgstr "Delen"
+
+#: contents/ui/main.qml:254 contents/ui/main.qml:294
+#, kde-format
+msgid "Drop text or an image onto me to upload it to an online service."
+msgstr ""
+"Sleep een stuk tekst of een afbeelding naar mij om het naar een online-"
+"service te uploaden."
+
+#: contents/ui/main.qml:294
+#, kde-format
+msgid "Upload %1 to an online service"
+msgstr "%1 naar een een online service uploaden"
+
+#: contents/ui/main.qml:307
+#, kde-format
+msgid "Sending…"
+msgstr "Bezig met verzenden…"
+
+#: contents/ui/main.qml:308
+#, kde-format
+msgid "Please wait"
+msgstr "Even geduld"
+
+#: contents/ui/main.qml:315
+#, kde-format
+msgid "Successfully uploaded"
+msgstr "Met succes geüpload"
+
+#: contents/ui/main.qml:316
+#, kde-format
+msgid "<a href='%1'>%1</a>"
+msgstr "<a href='%1'>%1</a>"
+
+#: contents/ui/main.qml:323
+#, kde-format
+msgid "Error during upload."
+msgstr "Fout bij het uploaden."
+
+#: contents/ui/main.qml:324
+#, kde-format
+msgid "Please, try again."
+msgstr "Probeer opnieuw."
+
+#: contents/ui/settingsGeneral.qml:21
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "History size:"
+msgstr "Geschiedenisgrootte:"
+
+#: contents/ui/settingsGeneral.qml:31
+#, kde-format
+msgctxt "@option:check"
+msgid "Copy automatically:"
+msgstr "Automatisch kopiëren:"
+
+#: contents/ui/ShareDialog.qml:31
+#, kde-format
+msgid "Shares for '%1'"
+msgstr "Shares voor '%1'"
+
+#: contents/ui/ShowUrlDialog.qml:42
+#, kde-format
+msgid "The URL was just shared"
+msgstr "De URL is gewoon gedeeld"
+
+#: contents/ui/ShowUrlDialog.qml:48
+#, kde-format
+msgctxt "@option:check"
+msgid "Don't show this dialog, copy automatically."
+msgstr "Deze dialoog niet tonen, automatisch kopiëren."
+
+#: contents/ui/ShowUrlDialog.qml:56
+#, kde-format
+msgctxt "@action:button"
+msgid "Close"
+msgstr "Sluiten"
+
+#~ msgid "Text Service:"
+#~ msgstr "Service voor tekst:"
+
+#~ msgid "Image Service:"
+#~ msgstr "Service voor afbeeldingen:"

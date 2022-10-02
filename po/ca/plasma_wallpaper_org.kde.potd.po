@@ -1,0 +1,365 @@
+# Translation of plasma_wallpaper_org.kde.potd.po to Catalan
+# Copyright (C) 2018-2022 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Josep M. Ferrer <txemaq@gmail.com>, 2018, 2019, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:51+0000\n"
+"PO-Revision-Date: 2022-08-10 18:33+0200\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+"X-Generator: Lokalize 20.12.0\n"
+
+#: package/contents/ui/config.qml:48
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Provider:"
+msgstr "Proveïdor:"
+
+#: package/contents/ui/config.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Update when using metered network connection"
+msgstr "Actualitza en usar una connexió de xarxa d'ús mesurat"
+
+#: package/contents/ui/config.qml:76
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Category:"
+msgstr "Categoria:"
+
+#: package/contents/ui/config.qml:80
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "All"
+msgstr "Tot"
+
+#: package/contents/ui/config.qml:84
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "1080p"
+msgstr "1080p"
+
+#: package/contents/ui/config.qml:88
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "4K"
+msgstr "4K"
+
+#: package/contents/ui/config.qml:92
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Ultra Wide"
+msgstr "Ultraample"
+
+#: package/contents/ui/config.qml:96
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Background"
+msgstr "Fons"
+
+#: package/contents/ui/config.qml:100
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Lock Screen"
+msgstr "Bloqueig de la pantalla"
+
+#: package/contents/ui/config.qml:104
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Nature"
+msgstr "Natura"
+
+#: package/contents/ui/config.qml:108
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: package/contents/ui/config.qml:112
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Black"
+msgstr "Negre"
+
+#: package/contents/ui/config.qml:116
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flower"
+msgstr "Flor"
+
+#: package/contents/ui/config.qml:120
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Funny"
+msgstr "Divertit"
+
+#: package/contents/ui/config.qml:124
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cute"
+msgstr "Bufó"
+
+#: package/contents/ui/config.qml:128
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cool"
+msgstr "Ferm"
+
+#: package/contents/ui/config.qml:132
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Fall"
+msgstr "Tardor"
+
+#: package/contents/ui/config.qml:136
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Love"
+msgstr "Amor"
+
+#: package/contents/ui/config.qml:140
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Design"
+msgstr "Disseny"
+
+#: package/contents/ui/config.qml:144
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Christmas"
+msgstr "Nadal"
+
+#: package/contents/ui/config.qml:148
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Travel"
+msgstr "Viatge"
+
+#: package/contents/ui/config.qml:152
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Beach"
+msgstr "Platja"
+
+#: package/contents/ui/config.qml:156
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Car"
+msgstr "Cotxe"
+
+#: package/contents/ui/config.qml:160
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Sports"
+msgstr "Esports"
+
+#: package/contents/ui/config.qml:164
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Animal"
+msgstr "Animal"
+
+#: package/contents/ui/config.qml:168
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "People"
+msgstr "Persones"
+
+#: package/contents/ui/config.qml:172
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Music"
+msgstr "Música"
+
+#: package/contents/ui/config.qml:176
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Summer"
+msgstr "Estiu"
+
+#: package/contents/ui/config.qml:180
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Galaxy"
+msgstr "Galàxia"
+
+#: package/contents/ui/config.qml:184
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tabliss"
+msgstr "Tabliss"
+
+#: package/contents/ui/config.qml:214
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "Posicionament:"
+
+#: package/contents/ui/config.qml:217
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled and Cropped"
+msgstr "Escalat i escapçat"
+
+#: package/contents/ui/config.qml:221
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "Escalat"
+
+#: package/contents/ui/config.qml:225
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled, Keep Proportions"
+msgstr "Escalat, mantenint les proporcions"
+
+#: package/contents/ui/config.qml:229
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "Centrat"
+
+#: package/contents/ui/config.qml:233
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "En mosaic"
+
+#: package/contents/ui/config.qml:254
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "Color de fons:"
+
+#: package/contents/ui/config.qml:255
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "Selecció del color de fons"
+
+#: package/contents/ui/config.qml:266
+#, kde-format
+msgctxt "@label"
+msgid "Today's picture:"
+msgstr "Imatge d'avui:"
+
+#: package/contents/ui/config.qml:283
+#, kde-format
+msgctxt "@label"
+msgid "Title:"
+msgstr "Títol:"
+
+#: package/contents/ui/config.qml:303
+#, kde-format
+msgctxt "@label"
+msgid "Author:"
+msgstr "Autor:"
+
+#: package/contents/ui/config.qml:329
+#, kde-format
+msgctxt "@action:button"
+msgid "Open Containing Folder"
+msgstr "Obre la carpeta contenidora"
+
+#: package/contents/ui/config.qml:333
+#, kde-format
+msgctxt "@info:whatsthis for a button"
+msgid "Open the destination folder where the wallpaper image was saved."
+msgstr ""
+"Obre la carpeta de destinació a on s'ha desat la imatge del fons de pantalla."
+
+#: package/contents/ui/WallpaperDelegate.qml:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Today's picture"
+msgstr "Imatge d'avui"
+
+#: package/contents/ui/WallpaperDelegate.qml:143
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Loading"
+msgstr "S'està carregant"
+
+#: package/contents/ui/WallpaperDelegate.qml:144
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Unavailable"
+msgstr "No disponible"
+
+#: package/contents/ui/WallpaperDelegate.qml:145
+#, kde-format
+msgctxt "@info:whatsthis for an image %1 title %2 author"
+msgid "%1 Author: %2. Right-click on the image to see more actions."
+msgstr "%1 Autor: %2. Feu un clic dret a la imatge per a veure més accions."
+
+#: package/contents/ui/WallpaperDelegate.qml:146
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The wallpaper is being fetched from the Internet."
+msgstr "S'està recuperant el fons de pantalla des d'Internet."
+
+#: package/contents/ui/WallpaperDelegate.qml:147
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Failed to fetch the wallpaper from the Internet."
+msgstr "Ha fallat en recuperar el fons de pantalla des d'Internet."
+
+#: package/contents/ui/WallpaperPreview.qml:50
+#, kde-format
+msgctxt "@action:inmenu wallpaper preview menu"
+msgid "Save Image as…"
+msgstr "Desa la imatge com a…"
+
+#: package/contents/ui/WallpaperPreview.qml:53
+#, kde-format
+msgctxt "@info:whatsthis for a button and a menu item"
+msgid "Save today's picture to local disk"
+msgstr "Desa la imatge d'avui al disc local"
+
+#: package/contents/ui/WallpaperPreview.qml:59
+#, kde-format
+msgctxt ""
+"@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
+msgid "Open Link in Browser…"
+msgstr "Obre l'enllaç en un navegador…"
+
+#: package/contents/ui/WallpaperPreview.qml:62
+#, kde-format
+msgctxt "@info:whatsthis for a menu item"
+msgid "Open the website of today's picture in the default browser"
+msgstr "Obre el lloc web de la imatge d'avui en el navegador predeterminat"
+
+#: plugins/potdbackend.cpp:221
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Today's Picture"
+msgstr "Desa la imatge d'avui"
+
+#: plugins/potdbackend.cpp:223
+#, kde-format
+msgctxt "@label:listbox Template for file dialog"
+msgid "JPEG image (*.jpeg *.jpg *.jpe)"
+msgstr "Imatge JPEG (*.jpeg *.jpg *.jpe)"
+
+#: plugins/potdbackend.cpp:240
+#, kde-format
+msgctxt "@info:status after a save action"
+msgid "The image was not saved."
+msgstr "La imatge no s'ha desat."
+
+#: plugins/potdbackend.cpp:246
+#, kde-format
+msgctxt "@info:status after a save action %1 file path %2 basename"
+msgid "The image was saved as <a href=\"%1\">%2</a>"
+msgstr "La imatge s'ha desat com a <a href=\"%1\">%2</a>"

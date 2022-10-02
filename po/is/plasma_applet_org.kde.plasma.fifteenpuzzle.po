@@ -1,0 +1,136 @@
+# translation of plasma_applet_fifteenPuzzle.po to
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sveinn í Felli <sveinki@nett.is>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_fifteenPuzzle\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-07 00:48+0000\n"
+"PO-Revision-Date: 2011-03-24 09:47+0000\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
+"\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:41
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Grid size:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgid "Background:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:56
+#, kde-format
+msgid "Color:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:71
+#, kde-format
+msgid "Image:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:79
+#, fuzzy, kde-format
+msgctxt "@info:placeholder"
+msgid "Path to custom image…"
+msgstr "Nota sérsniðna mynd:"
+
+#: package/contents/ui/configAppearance.qml:98
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Choose image…"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:106
+#, kde-format
+msgctxt "@title:window"
+msgid "Choose an Image"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:111
+#, kde-format
+msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:125
+#, kde-format
+msgid "Tiles:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:129
+#, kde-format
+msgid "Colored numbers:"
+msgstr ""
+
+#: package/contents/ui/FifteenPuzzle.qml:258
+#, kde-format
+msgctxt "The time since the puzzle started, in minutes and seconds"
+msgid "Time: %1"
+msgstr ""
+
+#: package/contents/ui/FifteenPuzzle.qml:301
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Shuffle"
+msgstr "Stokka"
+
+#: package/contents/ui/FifteenPuzzle.qml:338
+#, kde-format
+msgctxt "@info"
+msgid "Solved! Try again."
+msgstr ""
+
+#: package/contents/ui/main.qml:25
+#, fuzzy, kde-format
+msgid "Fifteen Puzzle"
+msgstr "Stilla FimmtánPúsl"
+
+#: package/contents/ui/main.qml:26
+#, kde-format
+msgid "Solve by arranging in order"
+msgstr ""
+
+#, fuzzy
+#~ msgctxt "@label:spinbox"
+#~ msgid "Size:"
+#~ msgstr "Stærð:"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "Use custom image"
+#~ msgstr "Nota sérsniðna mynd:"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "Show numerals"
+#~ msgstr "Sýna"
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Almennt"
+
+#, fuzzy
+#~ msgid "Shuffle Pieces"
+#~ msgstr "Stokka upp bita"
+
+#, fuzzy
+#~ msgid "Use plain pieces:"
+#~ msgstr "Nota venjuleg"

@@ -1,0 +1,604 @@
+# translation of krunner_converterrunner.po to Arabic
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# zayed <zayed.alsaidi@gmail.com>, 2008, 2021.
+# Safa Alfulaij <safa1996alfulaij@gmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: krunner_converterrunner\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-09 00:47+0000\n"
+"PO-Revision-Date: 2021-07-04 22:02+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 21.07.70\n"
+
+#: converterrunner.cpp:33
+#, kde-format
+msgid ""
+"Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
+"in] unit\". You can use the Unit converter applet to find all available "
+"units."
+msgstr ""
+"يحوّل قيمة :q: عندما تكون قيمة :q: هي \"القيمة الوحدة [>، إلى] الوحدة\". "
+"يمكنك استخدام بريمج محوّل الوحدات للعثور على كلّ الوحدات المتوفّرة."
+
+#: converterrunner.cpp:42
+#, kde-format
+msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
+msgid "in;to;as"
+msgstr "إلى"
+
+#: converterrunner.cpp:50
+#, kde-format
+msgid "Copy unit and number"
+msgstr "انسخ الوحدة والرقم"
+
+#, fuzzy
+#~| msgid "in"
+#~ msgctxt "amount of 'unit1' in 'unit2'"
+#~ msgid "in"
+#~ msgstr "بوصة"
+
+#, fuzzy
+#~| msgid "ton"
+#~ msgctxt "amount of 'unit1' to 'unit2'"
+#~ msgid "to"
+#~ msgstr "طن"
+
+#, fuzzy
+#~| msgctxt "amount of <unit1> as <unit2>"
+#~| msgid "as"
+#~ msgctxt "amount of 'unit1' as 'unit2'"
+#~ msgid "as"
+#~ msgstr "إلى"
+
+#~ msgctxt "amount of <unit1> in <unit2>"
+#~ msgid "in"
+#~ msgstr "إلى"
+
+#~ msgid "square meter"
+#~ msgstr "متر مربع"
+
+#~ msgid "square meters"
+#~ msgstr "أمتار مربعة"
+
+#~ msgid "square kilometer"
+#~ msgstr "كيلومتر مربع"
+
+#~ msgid "square kilometers"
+#~ msgstr "كليلومترات مربعة"
+
+#~ msgid "square centimeter"
+#~ msgstr "سنتيمتر مربع"
+
+#~ msgid "square centimeters"
+#~ msgstr "سنتيمترات مربعة"
+
+#~ msgid "square millimeter"
+#~ msgstr "ملليمتر مربع"
+
+#~ msgid "square millimeters"
+#~ msgstr "ملليمترات مربعة"
+
+#~ msgid "hectares"
+#~ msgstr "هكتارات"
+
+#~ msgid "hectare"
+#~ msgstr "هكتار"
+
+#~ msgid "hectometer"
+#~ msgstr "هكتومتر"
+
+#~ msgid "hectometers"
+#~ msgstr "هكتومترات"
+
+#~ msgid "acre"
+#~ msgstr "أكر"
+
+#~ msgid "square foot"
+#~ msgstr "قدم مربع"
+
+#~ msgid "square feet"
+#~ msgstr "أقدام مربعة"
+
+#~ msgid "square ft"
+#~ msgstr "قدم مربع"
+
+#~ msgid "sq foot"
+#~ msgstr "قدم مربع"
+
+#~ msgid "sq ft"
+#~ msgstr "قدم مربع"
+
+#~ msgid "sq feet"
+#~ msgstr "أقدام مربعة"
+
+#~ msgid "feet²"
+#~ msgstr "قدم²"
+
+#~ msgid "ft²"
+#~ msgstr "قدم²"
+
+#~ msgid "square inch"
+#~ msgstr "بوصة مربعة"
+
+#~ msgid "square inches"
+#~ msgstr "بوصات مربعة"
+
+#~ msgid "square in"
+#~ msgstr "بوصة مربعة"
+
+#~ msgid "sq inches"
+#~ msgstr "بوصة مربعة"
+
+#~ msgid "sq inch"
+#~ msgstr "بوصة مربعة"
+
+#~ msgid "sq in"
+#~ msgstr "بوصة مربعة"
+
+#~ msgid "inch²"
+#~ msgstr "بوصة²"
+
+#~ msgid "in²"
+#~ msgstr "بوصة²"
+
+#~ msgid "square mile"
+#~ msgstr "ميل مربع"
+
+#~ msgid "square mi"
+#~ msgstr "ميل مربع"
+
+#~ msgid "sq miles"
+#~ msgstr "أميال مربع"
+
+#~ msgid "sq mile"
+#~ msgstr "ميل مبريع"
+
+#~ msgid "sq mi"
+#~ msgstr "ميل مربع"
+
+#~ msgid "mile²"
+#~ msgstr "ميل²"
+
+#~ msgid "mi²"
+#~ msgstr "ميل²"
+
+#~ msgid "square miles"
+#~ msgstr "أميال مربعة"
+
+#~ msgid "Area"
+#~ msgstr "مساحة"
+
+#~ msgid "meter"
+#~ msgstr "متر"
+
+#~ msgid "meters"
+#~ msgstr "أمتار"
+
+#~ msgid "kilometer"
+#~ msgstr "كيلومتر"
+
+#~ msgid "kilometers"
+#~ msgstr "كيلومترات"
+
+#~ msgid "decimeter"
+#~ msgstr "ديسيمتر"
+
+#~ msgid "decimeters"
+#~ msgstr "ديسميترات"
+
+#~ msgid "centimeter"
+#~ msgstr "سنتيمتر"
+
+#~ msgid "centimeters"
+#~ msgstr "سنتيمترات"
+
+#~ msgid "millimeter"
+#~ msgstr "ميلليمتر"
+
+#~ msgid "millimeters"
+#~ msgstr "ميلليمترات"
+
+#~ msgid "micrometer"
+#~ msgstr "ميكرومتر"
+
+#~ msgid "micrometers"
+#~ msgstr "ميكرومترات"
+
+#~ msgid "nanometer"
+#~ msgstr "نانومتر"
+
+#~ msgid "nanometers"
+#~ msgstr "نانومترات"
+
+#~ msgid "picometer"
+#~ msgstr "بيكومتر"
+
+#~ msgid "picometers"
+#~ msgstr "بيكومترات"
+
+#~ msgid "femtometer"
+#~ msgstr "فيمتومتر"
+
+#~ msgid "inch"
+#~ msgstr "بوصة"
+
+#~ msgid "inches"
+#~ msgstr "بوصات"
+
+#~ msgid "\""
+#~ msgstr "\""
+
+#~ msgid "foot"
+#~ msgstr "قدم"
+
+#~ msgid "feet"
+#~ msgstr "أقدام"
+
+#~ msgid "ft"
+#~ msgstr "قدم"
+
+#~ msgid "yard"
+#~ msgstr "ياردة"
+
+#~ msgid "yards"
+#~ msgstr "ياردات"
+
+#~ msgid "yd"
+#~ msgstr "يادرة"
+
+#~ msgid "mile"
+#~ msgstr "كيل"
+
+#~ msgid "miles"
+#~ msgstr "أميال"
+
+#~ msgid "ml"
+#~ msgstr "ميل"
+
+#~ msgid "nautical mile"
+#~ msgstr "ميل بحري"
+
+#~ msgid "nautical miles"
+#~ msgstr "أميال بحرية"
+
+#~ msgid "nmi"
+#~ msgstr "ميل بحري"
+
+#~ msgid "ly"
+#~ msgstr "سنة ضوئية"
+
+#~ msgid "light-year"
+#~ msgstr "سنة ضوئية"
+
+#~ msgid "light-years"
+#~ msgstr "سنوات ضوئية"
+
+#~ msgid "lightyear"
+#~ msgstr "سنة ضوئية"
+
+#~ msgid "lightyears"
+#~ msgstr "سنوات ضوئية"
+
+#~ msgid "pc"
+#~ msgstr "فرسخ"
+
+#~ msgid "parsec"
+#~ msgstr "فرسخ"
+
+#~ msgid "parsecs"
+#~ msgstr "فراسخ"
+
+#~ msgid "au"
+#~ msgstr "وحدة فلكية"
+
+#~ msgid "astronomical unit"
+#~ msgstr "وحدة فلكية"
+
+#~ msgid "astronomical units"
+#~ msgstr "وحدات فلكية"
+
+#~ msgid "Length"
+#~ msgstr "طول"
+
+#~ msgid "gram"
+#~ msgstr "جرام"
+
+#~ msgid "grams"
+#~ msgstr "جرامات"
+
+#~ msgid "kilogram"
+#~ msgstr "كيلوجرام"
+
+#~ msgid "kilograms"
+#~ msgstr "كيلوجرامات"
+
+#~ msgid "decigram"
+#~ msgstr "ديسيجرام"
+
+#~ msgid "decigrams"
+#~ msgstr "ديسيجرامات"
+
+#~ msgid "centigram"
+#~ msgstr "سنتيجرام"
+
+#~ msgid "centigrams"
+#~ msgstr "سنتيجرامات"
+
+#~ msgid "milligram"
+#~ msgstr "ميلليجرام"
+
+#~ msgid "milligrams"
+#~ msgstr "ميلليجرامات"
+
+#~ msgid "microgram"
+#~ msgstr "ميكروجرام"
+
+#~ msgid "micrograms"
+#~ msgstr "ميكروجرامات"
+
+#~ msgid "tons"
+#~ msgstr "أطنان"
+
+#~ msgid "tonne"
+#~ msgstr "طن"
+
+#~ msgid "carat"
+#~ msgstr "قيراط"
+
+#~ msgid "carats"
+#~ msgstr "قراريط"
+
+#~ msgid "pound"
+#~ msgstr "رطل"
+
+#~ msgid "pounds"
+#~ msgstr "أرطال"
+
+#~ msgid "ounce"
+#~ msgstr "أونصة"
+
+#~ msgid "ounces"
+#~ msgstr "أونصات"
+
+#~ msgid "troy ounce"
+#~ msgstr "أوقية"
+
+#~ msgid "troy ounces"
+#~ msgstr "أوقيات"
+
+#~ msgid "newton"
+#~ msgstr "نيوتن"
+
+#~ msgid "kilonewton"
+#~ msgstr "كيلونيوتن"
+
+#~ msgid "Mass"
+#~ msgstr "كتلة"
+
+#~ msgid "meters per second"
+#~ msgstr "متر في الثانية"
+
+#~ msgid "kilometers per hour"
+#~ msgstr "كيلومتر في الساعة"
+
+#~ msgid "miles per hour"
+#~ msgstr "ميل في الساعة"
+
+#~ msgid "mph"
+#~ msgstr "ميل في الساعة"
+
+#~ msgid "foot per second"
+#~ msgstr "قدم في الثانية"
+
+#~ msgid "feet per second"
+#~ msgstr "قدم في الثانية"
+
+#~ msgid "ft/s"
+#~ msgstr "قدم/ث"
+
+#~ msgid "inch per second"
+#~ msgstr "بوصة في الثانية"
+
+#~ msgid "in/s"
+#~ msgstr "بوصة/ث"
+
+#~ msgid "knot"
+#~ msgstr "عقدة"
+
+#~ msgid "knots"
+#~ msgstr "عقد"
+
+#~ msgid "nautical miles per hour"
+#~ msgstr "أميال بحرية في الساعة"
+
+#~ msgid "speed of sound"
+#~ msgstr "سرعة الصوت"
+
+#~ msgid "machs"
+#~ msgstr "ماخ"
+
+#~ msgid "mach"
+#~ msgstr "ماخ"
+
+#~ msgid "speed of light"
+#~ msgstr "سرعة الضوء"
+
+#~ msgid "Speed"
+#~ msgstr "سرعة"
+
+#~ msgid "Temperature"
+#~ msgstr "درجة الحرارة"
+
+#~ msgid "cubic meter"
+#~ msgstr "متر مكعب"
+
+#~ msgid "cubic meters"
+#~ msgstr "أمتار مكعبة"
+
+#~ msgid "cubic kilometer"
+#~ msgstr "كيلومتر مكعب"
+
+#~ msgid "cubic kilometers"
+#~ msgstr "كيلومترات مكعبة"
+
+#~ msgid "cubic centimeter"
+#~ msgstr "سنتيمتر مكعب"
+
+#~ msgid "cubic centimeters"
+#~ msgstr "سنتيمترات مكعبة"
+
+#~ msgid "cubic millimeter"
+#~ msgstr "ميلليمتر مكعب"
+
+#~ msgid "cubic millimeters"
+#~ msgstr "ميلليمترات مكعبة"
+
+#~ msgid "liter"
+#~ msgstr "لتر"
+
+#~ msgid "liters"
+#~ msgstr "لترات"
+
+#~ msgid "centiliter"
+#~ msgstr "سنتيلتر"
+
+#~ msgid "centiliters"
+#~ msgstr "سنتيلترات"
+
+#~ msgid "milliliter"
+#~ msgstr "ميلليلتر"
+
+#~ msgid "milliliters"
+#~ msgstr "ميلليلترات"
+
+#~ msgid "cubic foot"
+#~ msgstr "قدم مكعب"
+
+#~ msgid "cubic feet"
+#~ msgstr "أقدام مكعبة"
+
+#~ msgid "cubic ft"
+#~ msgstr "قدم مكعب"
+
+#~ msgid "cu foot"
+#~ msgstr "قدم مكعب"
+
+#~ msgid "cu ft"
+#~ msgstr "قدم مكعب"
+
+#~ msgid "cu feet"
+#~ msgstr "أقدام مكعبة"
+
+#~ msgid "feet³"
+#~ msgstr "أقدام³"
+
+#~ msgid "ft³"
+#~ msgstr "قدم³"
+
+#~ msgid "cubic inch"
+#~ msgstr "بوصة مكعبة"
+
+#~ msgid "cubic inches"
+#~ msgstr "بوصات مكعبة"
+
+#~ msgid "cubic in"
+#~ msgstr "بوصة مكعبة"
+
+#~ msgid "cu inches"
+#~ msgstr "بوصات مكعبة"
+
+#~ msgid "cu inch"
+#~ msgstr "بوصة مكعبة"
+
+#~ msgid "cu in"
+#~ msgstr "بوصة مكعبة"
+
+#~ msgid "inch³"
+#~ msgstr "بوصة³"
+
+#~ msgid "in³"
+#~ msgstr "بوصة³"
+
+#~ msgid "cubic mile"
+#~ msgstr "ميل مكعب"
+
+#~ msgid "cubic mi"
+#~ msgstr "ميل مكعب"
+
+#~ msgid "cu miles"
+#~ msgstr "أميال مكعبة"
+
+#~ msgid "cu mile"
+#~ msgstr "ميل مكعب"
+
+#~ msgid "cu mi"
+#~ msgstr "ميل مكعب"
+
+#~ msgid "mile³"
+#~ msgstr "ميل³"
+
+#~ msgid "mi³"
+#~ msgstr "ميل³"
+
+#~ msgid "cubic miles"
+#~ msgstr "أميال مكعبة"
+
+#~ msgid "oz.fl."
+#~ msgstr "أوقية سائلة"
+
+#~ msgid "fluid ounces"
+#~ msgstr "أوقيات سائلة"
+
+#~ msgid "oz. fl."
+#~ msgstr "أوقية سائلة"
+
+#~ msgid "fl.oz."
+#~ msgstr "أوقية سائلة"
+
+#~ msgid "fl. oz."
+#~ msgstr "أوقية سائلة"
+
+#~ msgid "fl oz"
+#~ msgstr "أوقية سائلة"
+
+#~ msgid "fluid ounce"
+#~ msgstr "أوقية سائلة"
+
+#~ msgid "cp"
+#~ msgstr "كوب"
+
+#~ msgid "cups"
+#~ msgstr "أكواب"
+
+#~ msgid "cup"
+#~ msgstr "كوب"
+
+#~ msgid "gal"
+#~ msgstr "جالون"
+
+#~ msgid "gallons (U.S. liquid)"
+#~ msgstr "جالونات ( أمريكية)"
+
+#~ msgid "gallon"
+#~ msgstr "جالون"
+
+#~ msgid "gallons"
+#~ msgstr "جالونات"
+
+#~ msgid "pint"
+#~ msgstr "بنت"
+
+#~ msgid "pints (imperial)"
+#~ msgstr "بنتات (امبريالي)"
+
+#~ msgid "Volume"
+#~ msgstr "حجم"

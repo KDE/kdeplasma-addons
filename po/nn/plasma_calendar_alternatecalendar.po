@@ -1,0 +1,75 @@
+# Translation of plasma_calendar_alternatecalendar to Norwegian Nynorsk
+#
+# Karl Ove Hufthammer <karl@huftis.org>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-30 00:46+0000\n"
+"PO-Revision-Date: 2022-06-18 14:49+0200\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
+"Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
+"Language: nn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.04.2\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: calendarsystem.h:53
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Julian"
+msgstr "Den julianske kalenderen"
+
+#: calendarsystem.h:57
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Milankovic"
+msgstr "Den reviderte julianske kalenderen (Milanković)"
+
+#: calendarsystem.h:61
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Solar Hijri Calendar (Persian)"
+msgstr "Den iranske kalenderen"
+
+#: calendarsystem.h:65
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Islamic Civil Calendar"
+msgstr "Den islamske kalenderen"
+
+#: calendarsystem.h:69
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Chinese Lunar Calendar"
+msgstr "Den kinesiske kalenderen"
+
+#: calendarsystem.h:73
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Indian National Calendar"
+msgstr "Den indiske nasjonalkalenderen"
+
+#: config/qml/AlternateCalendarConfig.qml:38
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Calendar system:"
+msgstr "Kalendersystem:"
+
+#: config/qml/AlternateCalendarConfig.qml:50
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Date offset:"
+msgstr "Dato-forskyving:"
+
+#: config/qml/AlternateCalendarConfig.qml:59
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 dag"
+msgstr[1] "%1 dagar"

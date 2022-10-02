@@ -1,0 +1,241 @@
+# Thomas Reitelbach <tr@erdfunkstelle.de>, 2008.
+# Frederik Schwarzer <schwarzer@kde.org>, 2008, 2009, 2012, 2016.
+# Burkhard Lück <lueck@hube-lueck.de>, 2009, 2014, 2015, 2018, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_timer\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2021-05-12 06:02+0200\n"
+"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Erscheinungsbild"
+
+#: package/contents/config/config.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr "Vordefinierte Zeitmesser"
+
+#: package/contents/config/config.qml:24
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Erweitert"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "Eieruhr"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "Eieruhr"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr "Nach Zeitablauf:"
+
+#: package/contents/ui/configAdvanced.qml:26
+#, kde-format
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "Befehl ausführen:"
+
+#: package/contents/ui/configAppearance.qml:27
+#, kde-format
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "Anzeige:"
+
+#: package/contents/ui/configAppearance.qml:33
+#, kde-format
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "Titel anzeigen:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "Sekunden anzeigen"
+
+#: package/contents/ui/configAppearance.qml:62
+#, kde-format
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "Benachrichtigungen:"
+
+#: package/contents/ui/configAppearance.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "Benachrichtigungstext anzeigen:"
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+"Wenn Sie hier vordefinierte Zeitmesser hinzufügen, werden diese im Plasmoid-"
+"Kontextmenü angezeigt."
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr "Drehen Sie das Mausrad über den Ziffern, um die Zeit zu ändern"
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr "Anwenden"
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr "Löschen"
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr "%1 läuft"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 läuft nicht"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] "Verbleibende Zeit: %1 Sekunde"
+msgstr[1] "Verbleibende Zeit: %1 Sekunden"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+"Sie können mit dem Mausrad die Ziffern ändern oder vordefinierte Zeiten aus "
+"dem Kontextmenü wählen"
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "Eieruhr"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr "Zeit abgelaufen"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action"
+msgid "&Start"
+msgstr "&Starten"
+
+#: package/contents/ui/main.qml:138
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr "An&halten"
+
+#: package/contents/ui/main.qml:139
+#, kde-format
+msgctxt "@action"
+msgid "&Reset"
+msgstr "&Zurücksetzen"
+
+#~ msgid "Timer is running"
+#~ msgstr "Die Eieruhr läuft"
+
+#~ msgctxt "@title:group"
+#~ msgid "Run Command"
+#~ msgstr "Befehl ausführen"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Command:"
+#~ msgstr "Befehl:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Title:"
+#~ msgstr "Titel:"
+
+#~ msgctxt "@label:textbox"
+#~ msgid "Text:"
+#~ msgstr "Text:"
+
+#~ msgctxt "separator of hours:minutes:seconds in timer strings"
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "Timer Configuration"
+#~ msgstr "Zeitmessung einrichten"
+
+#~ msgid "Stop"
+#~ msgstr "Stoppen"
+
+#~ msgid "Timer Timeout"
+#~ msgstr "Zeit abgelaufen"
+
+#~ msgid "General"
+#~ msgstr "Allgemein"
+
+#~ msgid "Plasma Timer Applet"
+#~ msgstr "Eieruhr-Miniprogramm für Plasma"
+
+#~ msgid "Actions on Timeout"
+#~ msgstr "Aktionen nach Zeitablauf"
+
+#~ msgid "Show a message:"
+#~ msgstr "Meldung anzeigen:"
+
+#~ msgid "Message:"
+#~ msgstr "Meldung:"
+
+#~ msgid "Form"
+#~ msgstr "Form"

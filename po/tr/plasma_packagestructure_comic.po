@@ -1,0 +1,33 @@
+#
+# Translators:
+# obsoleteman <tulliana@gmail.com>, 2009
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons-kde4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-08-25 00:19+0000\n"
+"PO-Revision-Date: 2014-10-21 09:49+0000\n"
+"Last-Translator: Necdet <necdetyucel@gmail.com>\n"
+"Language-Team: Turkish (http://www.transifex.com/projects/p/kdeplasma-addons-"
+"k-tr/language/tr/)\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: comic_package.cpp:20
+#, kde-format
+msgid "Images"
+msgstr "Resimler"
+
+#: comic_package.cpp:25
+#, kde-format
+msgid "Executable Scripts"
+msgstr "Çalıştırılabilir Betikler"
+
+#: comic_package.cpp:29
+#, kde-format
+msgid "Main Script File"
+msgstr "Ana Betik Dosyası"

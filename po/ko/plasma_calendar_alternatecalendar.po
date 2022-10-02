@@ -1,0 +1,72 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Shinjo Park <kde@peremen.name>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-30 00:46+0000\n"
+"PO-Revision-Date: 2022-07-13 13:29+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: calendarsystem.h:53
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Julian"
+msgstr "율리우스력"
+
+#: calendarsystem.h:57
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Milankovic"
+msgstr "밀란코비치력(개정 율리우스력)"
+
+#: calendarsystem.h:61
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Solar Hijri Calendar (Persian)"
+msgstr "페르시아 양력"
+
+#: calendarsystem.h:65
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Islamic Civil Calendar"
+msgstr "이슬람 민간력"
+
+#: calendarsystem.h:69
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Chinese Lunar Calendar"
+msgstr "중국 음력"
+
+#: calendarsystem.h:73
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Indian National Calendar"
+msgstr "인도 국민력"
+
+#: config/qml/AlternateCalendarConfig.qml:38
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Calendar system:"
+msgstr "달력 체계:"
+
+#: config/qml/AlternateCalendarConfig.qml:50
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Date offset:"
+msgstr "날짜 보정:"
+
+#: config/qml/AlternateCalendarConfig.qml:59
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1일"

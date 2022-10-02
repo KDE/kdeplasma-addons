@@ -1,0 +1,88 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Frederik Schwarzer <schwarzer@kde.org>, 2015, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-31 00:48+0000\n"
+"PO-Revision-Date: 2016-11-22 20:33+0100\n"
+"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid "No quota restrictions found."
+msgctxt "@info:status"
+msgid "No quota restrictions found"
+msgstr "Kein Speicherplatzlimit gesetzt."
+
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid ""
+#| "Quota tool not found.\n"
+#| "\n"
+#| "Please install 'quota'."
+msgctxt "@info:status"
+msgid "Quota tool not found"
+msgstr ""
+"Werkzeug für Speicherplatzkontingent nicht gefunden.\n"
+"\n"
+"Bitte installieren Sie „quota“."
+
+#: package/contents/ui/main.qml:78
+#, fuzzy, kde-format
+#| msgid "Please install 'quota'"
+msgctxt "@info:usagetip"
+msgid "Please install 'quota'"
+msgstr "Bitte installieren Sie „quota“"
+
+#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:177 plugin/DiskQuota.cpp:264
+#, kde-format
+msgid "Disk Quota"
+msgstr "Speicherplatzkontingent"
+
+#: plugin/DiskQuota.cpp:45
+#, kde-format
+msgid "Please install 'quota'"
+msgstr "Bitte installieren Sie „quota“"
+
+#: plugin/DiskQuota.cpp:178
+#, kde-format
+msgid "Running quota failed"
+msgstr "„quota“ kann nicht gestartet werden"
+
+#: plugin/DiskQuota.cpp:239
+#, kde-format
+msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
+msgid "%1: %2% used"
+msgstr "%1: %2 % belegt"
+
+#: plugin/DiskQuota.cpp:240
+#, kde-format
+msgctxt "e.g.: 12 GiB of 20 GiB"
+msgid "%1 of %2"
+msgstr "%1 von %2"
+
+#: plugin/DiskQuota.cpp:241
+#, kde-format
+msgctxt "e.g.: 8 GiB free"
+msgid "%1 free"
+msgstr "%1 frei"
+
+#: plugin/DiskQuota.cpp:261
+#, kde-format
+msgctxt "example: Quota: 83% used"
+msgid "Quota: %1% used"
+msgstr "Speicherplatzkontingent: %1 % belegt"
+
+#: plugin/DiskQuota.cpp:265
+#, kde-format
+msgid "No quota restrictions found."
+msgstr "Kein Speicherplatzlimit gesetzt."

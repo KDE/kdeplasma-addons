@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-07 00:48+0000\n"
+"PO-Revision-Date: 2022-02-12 15:13+0100\n"
+"Last-Translator: mkkDr2010 <mkondarev@yahoo.de>\n"
+"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Външен вид"
+
+#: package/contents/ui/configAppearance.qml:41
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Grid size:"
+msgstr "Размер на мрежата:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, kde-format
+msgid "Background:"
+msgstr "Фон:"
+
+#: package/contents/ui/configAppearance.qml:56
+#, kde-format
+msgid "Color:"
+msgstr "Цвят:"
+
+#: package/contents/ui/configAppearance.qml:71
+#, kde-format
+msgid "Image:"
+msgstr "Образ:"
+
+#: package/contents/ui/configAppearance.qml:79
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Path to custom image…"
+msgstr "Път към персонализирано изображение…"
+
+#: package/contents/ui/configAppearance.qml:98
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Choose image…"
+msgstr "Избиране на изображение…"
+
+#: package/contents/ui/configAppearance.qml:106
+#, kde-format
+msgctxt "@title:window"
+msgid "Choose an Image"
+msgstr "Избиране на изображение"
+
+#: package/contents/ui/configAppearance.qml:111
+#, kde-format
+msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+msgstr "Файлове с изображения (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+
+#: package/contents/ui/configAppearance.qml:125
+#, kde-format
+msgid "Tiles:"
+msgstr "Фаянсови плочки:"
+
+#: package/contents/ui/configAppearance.qml:129
+#, kde-format
+msgid "Colored numbers:"
+msgstr "Цветни числа:"
+
+#: package/contents/ui/FifteenPuzzle.qml:258
+#, kde-format
+msgctxt "The time since the puzzle started, in minutes and seconds"
+msgid "Time: %1"
+msgstr "Време: %1"
+
+#: package/contents/ui/FifteenPuzzle.qml:301
+#, kde-format
+msgctxt "@action:button"
+msgid "Shuffle"
+msgstr "Разбъркване"
+
+#: package/contents/ui/FifteenPuzzle.qml:338
+#, kde-format
+msgctxt "@info"
+msgid "Solved! Try again."
+msgstr "Решено! Опитай пак."
+
+#: package/contents/ui/main.qml:25
+#, kde-format
+msgid "Fifteen Puzzle"
+msgstr "Петнадесет пъзела"
+
+#: package/contents/ui/main.qml:26
+#, kde-format
+msgid "Solve by arranging in order"
+msgstr "Решете, като подредите по ред"

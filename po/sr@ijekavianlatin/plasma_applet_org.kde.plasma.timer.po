@@ -1,0 +1,147 @@
+# Translation of plasma_applet_org.kde.plasma.timer.po into Serbian.
+# Slobodan Simic <slsimic@gmail.com>, 2008.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2009, 2010, 2012, 2014, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-11-30 03:36+0100\n"
+"PO-Revision-Date: 2015-04-24 13:57+0200\n"
+"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@ijekavianlatin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: package/contents/config/config.qml:25
+#, fuzzy, kde-format
+#| msgid "Appearance"
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Izgled"
+
+#: package/contents/config/config.qml:31
+#, fuzzy, kde-format
+#| msgid "Advanced"
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Napredno"
+
+#: package/contents/ui/configAdvanced.qml:34
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr ""
+
+#: package/contents/ui/configAdvanced.qml:38
+#, fuzzy, kde-format
+#| msgid "Execute command"
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "Izvrši naredbu"
+
+#: package/contents/ui/configAppearance.qml:39
+#, fuzzy, kde-format
+#| msgid "Display"
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "Prikaz"
+
+#: package/contents/ui/configAppearance.qml:45
+#, fuzzy, kde-format
+#| msgid "Show title"
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "Prikaži naslov"
+
+#: package/contents/ui/configAppearance.qml:62
+#, fuzzy, kde-format
+#| msgid "Show seconds"
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "Prikaži sekunde"
+
+#: package/contents/ui/configAppearance.qml:74
+#, fuzzy, kde-format
+#| msgid "Notifications"
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "Obaveštenja"
+
+#: package/contents/ui/configAppearance.qml:78
+#, fuzzy, kde-format
+#| msgid "Show notification"
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "Prikaži obaveštenje"
+
+#: package/contents/ui/main.qml:54 package/contents/ui/main.qml:115
+#, kde-format
+msgid "Timer"
+msgstr "Odbrojavač"
+
+#: package/contents/ui/main.qml:59
+#, kde-format
+msgid "%1 is running"
+msgstr "%1 u pogonu"
+
+#: package/contents/ui/main.qml:61
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 nije u pogonu"
+
+#: package/contents/ui/main.qml:65
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] "Preostalo vreme: %1 sekunda"
+msgstr[1] "Preostalo vreme: %1 sekunde"
+msgstr[2] "Preostalo vreme: %1 sekundi"
+msgstr[3] "Preostalo vreme: %1 sekunda"
+
+# rewrite-msgid: /Timer/Countdown/
+#: package/contents/ui/main.qml:117
+#, kde-format
+msgid "Timer finished"
+msgstr "Odbrojavanje završeno"
+
+#: package/contents/ui/main.qml:125
+#, fuzzy, kde-format
+#| msgid "&Start"
+msgctxt "@action"
+msgid "&Start"
+msgstr "&Pokreni"
+
+#: package/contents/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "S&top"
+msgctxt "@action"
+msgid "S&top"
+msgstr "&Zaustavi"
+
+#: package/contents/ui/main.qml:127
+#, fuzzy, kde-format
+#| msgid "&Reset"
+msgctxt "@action"
+msgid "&Reset"
+msgstr "&Resetuj"
+
+#: package/contents/ui/TimerView.qml:139
+#, kde-format
+msgid "Timer is running"
+msgstr "Odbrojavač u pogonu"
+
+#: package/contents/ui/TimerView.qml:139
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+"Menjajte cifre točkićem miša, ili izaberite neki od predefinisanih "
+"odbrojavača iz kontekstnog menija."

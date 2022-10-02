@@ -1,0 +1,103 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Wantoyo <wantoyek@gmail.com>, 2018, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"PO-Revision-Date: 2019-06-16 07:52+0700\n"
+"Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: package/contents/config/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Umum"
+
+#: package/contents/ui/configGeneral.qml:24
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Default color format:"
+msgstr "Format warna baku:"
+
+#: package/contents/ui/configGeneral.qml:32
+#, kde-format
+msgctxt "@option:check"
+msgid "Automatically copy color to clipboard"
+msgstr "Warna disalin secara otomatis ke papan-klip"
+
+#: package/contents/ui/configGeneral.qml:40
+#, kde-format
+msgctxt "@label"
+msgid "When pressing the keyboard shortcut:"
+msgstr "Ketika menekan tombol pintasan keyboard:"
+
+#: package/contents/ui/configGeneral.qml:41
+#, kde-format
+msgctxt "@option:radio"
+msgid "Pick a color"
+msgstr "Nukil sebuah warna"
+
+#: package/contents/ui/configGeneral.qml:47
+#, kde-format
+msgctxt "@option:radio"
+msgid "Show history"
+msgstr "Tampilkan histori"
+
+#: package/contents/ui/logic.js:56
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr "Salin ke Papan-klip"
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgctxt "@action"
+msgid "Open Color Dialog"
+msgstr "Buka Dialog Warna"
+
+#: package/contents/ui/main.qml:109
+#, kde-format
+msgctxt "@action"
+msgid "Clear History"
+msgstr "Bersihkan Histori"
+
+#: package/contents/ui/main.qml:128
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr "Nukil warna"
+
+#: package/contents/ui/main.qml:193
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Color options"
+msgstr "Opsi warna"
+
+#: package/contents/ui/main.qml:288
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Pick color"
+msgctxt "@info:usagetip"
+msgid "No colors"
+msgstr "Nukil warna"
+
+#: package/contents/ui/main.qml:292
+#, kde-format
+msgctxt "@action:button"
+msgid "Pick Color"
+msgstr "Nukil Warna"
+
+#: package/contents/ui/main.qml:446
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete"
+msgstr ""

@@ -1,0 +1,47 @@
+# Translation for plasma_runner_converterrunner.po to Euskara/Basque (eu).
+# Copyright (C) 2018, Free Software Foundation.
+# Copyright (C) 2019-2020, This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# KDE euskaratzeko proiektuko arduraduna <xalba@euskalnet.net>.
+#
+# Translators:
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2018, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-09 00:47+0000\n"
+"PO-Revision-Date: 2020-11-10 20:20+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.08.2\n"
+
+#: converterrunner.cpp:33
+#, kde-format
+msgid ""
+"Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
+"in] unit\". You can use the Unit converter applet to find all available "
+"units."
+msgstr ""
+":q:-(r)en balioa bihurtzen du :q: «balio unitate [>,  -ra, gisa, -tan] "
+"unitate» gisa eratua dagoenean. Unitateak bihurtzeko appleta erabili "
+"dezakezu unitate erabilgarri guztiak aurkitzeko."
+
+#: converterrunner.cpp:42
+#, kde-format
+msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
+msgid "in;to;as"
+msgstr "-ta;-ra;gisa"
+
+#: converterrunner.cpp:50
+#, kde-format
+msgid "Copy unit and number"
+msgstr "Kopiatu unitatea eta zenbakia"
+
+#~ msgid "Copy number"
+#~ msgstr "Kopiatu zenbakia"

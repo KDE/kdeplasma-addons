@@ -1,0 +1,371 @@
+# Traducerea plasma_applet_comic.po în Română
+# translation of plasma_applet_comic to Romanian
+# Copyright (C) 2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the plasma_applet_comic package.
+# Laurenţiu Buzdugan <lbuz@rolix.org>, 2008".
+# Sergiu Bivol <sergiu@cip.md>, 2008.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2013, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_comic\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-27 00:48+0000\n"
+"PO-Revision-Date: 2021-07-26 12:48+0100\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#: comic.cpp:87
+#, kde-format
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr ""
+
+#: comic.cpp:93
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr ""
+
+#: comic.cpp:97
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr ""
+
+#: comic.cpp:101
+#, fuzzy, kde-format
+#| msgid "Go to Strip"
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "Mergi la banda"
+
+#: comic.cpp:105
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr ""
+
+#: comic.cpp:109
+#, kde-format
+msgctxt "@action:inmenu %1 is the name of a web browser"
+msgid "View in %1"
+msgstr ""
+
+#: comic.cpp:117
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr ""
+
+#: comic.cpp:122
+#, fuzzy, kde-format
+#| msgid "&Save Comic As..."
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "&Salvare benzi ca..."
+
+#: comic.cpp:127
+#, fuzzy, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "Scalează la &conținut"
+
+#: comic.cpp:135
+#, fuzzy, kde-format
+#| msgctxt "@option:check Context menu of comic image"
+#| msgid "Store current &Position"
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr "Păstrează &poziția actuală"
+
+#: comicdata.cpp:86
+#, kde-format
+msgctxt "an abbreviation for Number"
+msgid "# %1"
+msgstr "nr. %1"
+
+#: package/contents/config/config.qml:13
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title"
+msgid "General"
+msgstr "General"
+
+#: package/contents/config/config.qml:18
+#, fuzzy, kde-format
+#| msgid "Appearance"
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Aspect"
+
+#: package/contents/config/config.qml:23
+#, fuzzy, kde-format
+#| msgid "Advanced"
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Avansat"
+
+#: package/contents/ui/ComicBottomInfo.qml:60
+#, fuzzy, kde-format
+#| msgid "Go to Strip"
+msgctxt "@info:tooltip"
+msgid "Jump to strip…"
+msgstr "Mergi la banda"
+
+#: package/contents/ui/ComicBottomInfo.qml:100
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Visit the comic website"
+msgstr ""
+
+#: package/contents/ui/configAdvanced.qml:36
+#, fuzzy, kde-format
+#| msgid "Comic:"
+msgctxt "@label:spinbox"
+msgid "Comic cache:"
+msgstr "Benzi desenate:"
+
+#: package/contents/ui/configAdvanced.qml:45
+#, kde-format
+msgctxt "@item:valuesuffix spacing to number + unit"
+msgid "strip per comic"
+msgid_plural "strips per comic"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: package/contents/ui/configAdvanced.qml:51
+#, kde-format
+msgctxt "@option:check"
+msgid "Display error when downloading comic fails"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:43
+#, kde-format
+msgctxt "Heading for showing various elements of a comic"
+msgid "Show:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:44
+#, fuzzy, kde-format
+#| msgid "Show comic &title:"
+msgctxt "@option:check"
+msgid "Comic title"
+msgstr "Arată &titlul benzii:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, fuzzy, kde-format
+#| msgid "Show comic &identifier:"
+msgctxt "@option:check"
+msgid "Comic identifier"
+msgstr "Arată &identificatorul benzii:"
+
+#: package/contents/ui/configAppearance.qml:56
+#, fuzzy, kde-format
+#| msgid "Show comic &author:"
+msgctxt "@option:check"
+msgid "Comic author"
+msgstr "Arată &autorul benzii:"
+
+#: package/contents/ui/configAppearance.qml:62
+#, fuzzy, kde-format
+#| msgid "Comic:"
+msgctxt "@option:check"
+msgid "Comic URL"
+msgstr "Benzi desenate:"
+
+#: package/contents/ui/configAppearance.qml:72
+#, kde-format
+msgid "Show navigation buttons:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:73
+#, kde-format
+msgctxt "@option:check"
+msgid "Always"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:80
+#, kde-format
+msgctxt "@option:check"
+msgid "Only on hover"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:52
+#, fuzzy, kde-format
+#| msgid "Comic:"
+msgctxt "@title:group"
+msgid "Comics:"
+msgstr "Benzi desenate:"
+
+#: package/contents/ui/configGeneral.qml:72
+#, fuzzy, kde-format
+#| msgid "Get New Comics..."
+msgctxt "@action:button"
+msgid "Get New Comics…"
+msgstr "Obținere benzi noi..."
+
+#: package/contents/ui/configGeneral.qml:83
+#, kde-format
+msgctxt "@option:check"
+msgid "Middle-click on comic to display at original size"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:92
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Check for new plugins every:"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:101
+#, fuzzy, kde-format
+#| msgid " days"
+msgctxt "@item:valuesuffix spacing to number + unit"
+msgid "day"
+msgid_plural "days"
+msgstr[0] " zile"
+msgstr[1] " zile"
+msgstr[2] " zile"
+
+#: package/contents/ui/configGeneral.qml:106
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Check for new comics every:"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:115
+#, fuzzy, kde-format
+#| msgid " minutes"
+msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] " minute"
+msgstr[1] " minute"
+msgstr[2] " minute"
+
+#: stripselector.cpp:31 stripselector.cpp:101
+#, fuzzy, kde-format
+#| msgid "Go to Strip"
+msgctxt "@title:window"
+msgid "Go to Strip"
+msgstr "Mergi la banda"
+
+#: stripselector.cpp:39
+#, fuzzy, kde-format
+#| msgid "&Strip Number:"
+msgctxt "@label:spinbox"
+msgid "&Strip number:"
+msgstr "&Numărul benzii:"
+
+#: stripselector.cpp:102
+#, fuzzy, kde-format
+#| msgid "Show comic identifier"
+msgctxt "@label:textbox"
+msgid "Strip identifier:"
+msgstr "Arată identificatorul benzii"
+
+#, fuzzy
+#~| msgid "&Save Comic As..."
+#~ msgctxt "@action"
+#~ msgid "&Create Comic Book Archive…"
+#~ msgstr "&Salvare benzi ca..."
+
+#, fuzzy
+#~| msgid "&Save Comic As..."
+#~ msgctxt "@title:window"
+#~ msgid "Create %1 Comic Book Archive"
+#~ msgstr "&Salvare benzi ca..."
+
+#~ msgid "Destination:"
+#~ msgstr "Destinație:"
+
+#, fuzzy
+#~| msgid "&Save Comic As..."
+#~ msgid "*.cbz|Comic Book Archive (Zip)"
+#~ msgstr "&Salvare benzi ca..."
+
+#~ msgid "Range:"
+#~ msgstr "Diapazon:"
+
+#~ msgid "All"
+#~ msgstr "Toate"
+
+#, fuzzy
+#~| msgid "From beginning to ..."
+#~ msgid "From beginning to …"
+#~ msgstr "De la început până la..."
+
+#, fuzzy
+#~| msgid "From end to ..."
+#~ msgid "From end to …"
+#~ msgstr "De la sfârșit până la..."
+
+#~ msgid "Manual range"
+#~ msgstr "Diapazon manual"
+
+#~ msgctxt "in a range: from to"
+#~ msgid "From:"
+#~ msgstr "De la:"
+
+#~ msgctxt "in a range: from to"
+#~ msgid "To:"
+#~ msgstr "Până la:"
+
+#~ msgid "dd.MM.yyyy"
+#~ msgstr "zz.LL.aaaa"
+
+#, fuzzy
+#~| msgid "Download new comics"
+#~ msgctxt "@title:window"
+#~ msgid "Download Comics"
+#~ msgstr "Descarcă benzi noi"
+
+#, fuzzy
+#~| msgid "Show arrows only on hover"
+#~ msgctxt "@option:check"
+#~ msgid "Show arrows only on mouse-over"
+#~ msgstr "Arată săgeți numai la planare"
+
+#, fuzzy
+#~| msgid "Information"
+#~ msgctxt "@title:group"
+#~ msgid "Information"
+#~ msgstr "Informații"
+
+#, fuzzy
+#~| msgid "Show comic &URL:"
+#~ msgctxt "@option:check"
+#~ msgid "Show comic URL"
+#~ msgstr "Arată &URL-ul benzii:"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "@title:group"
+#~ msgid "Update"
+#~ msgstr "Actualizează"
+
+#, fuzzy
+#~| msgid "Appearance"
+#~ msgctxt "@title:group"
+#~ msgid "Appearance"
+#~ msgstr "Aspect"
+
+#~ msgid "every "
+#~ msgstr "la fiecare "
+
+#~ msgid "never"
+#~ msgstr "niciodată"
+
+#~ msgid "Make comic resizable"
+#~ msgstr "Fă benzile redimensionabile"
+
+#~ msgid "Comic Configuration"
+#~ msgstr "Configurare benzi desenate"

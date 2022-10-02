@@ -1,0 +1,110 @@
+# translation of plasma_applet_kolourpicker.po to Italian
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Pino Toscano <toscano.pino@tiscali.it>, 2007.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2010, 2018, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_kolourpicker\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"PO-Revision-Date: 2022-09-05 19:01+0200\n"
+"Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.08.0\n"
+
+#: package/contents/config/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Generale"
+
+#: package/contents/ui/configGeneral.qml:24
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Default color format:"
+msgstr "Formato di colore predefinito:"
+
+#: package/contents/ui/configGeneral.qml:32
+#, kde-format
+msgctxt "@option:check"
+msgid "Automatically copy color to clipboard"
+msgstr "Copia automaticamente il colore negli appunti"
+
+#: package/contents/ui/configGeneral.qml:40
+#, kde-format
+msgctxt "@label"
+msgid "When pressing the keyboard shortcut:"
+msgstr "Quando premi la scorciatoia da tastiera:"
+
+#: package/contents/ui/configGeneral.qml:41
+#, kde-format
+msgctxt "@option:radio"
+msgid "Pick a color"
+msgstr "Scegli un colore"
+
+#: package/contents/ui/configGeneral.qml:47
+#, kde-format
+msgctxt "@option:radio"
+msgid "Show history"
+msgstr "Mostra la cronologia"
+
+#: package/contents/ui/logic.js:56
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr "Copia negli appunti"
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgctxt "@action"
+msgid "Open Color Dialog"
+msgstr "Apri finestra dei colori"
+
+#: package/contents/ui/main.qml:109
+#, kde-format
+msgctxt "@action"
+msgid "Clear History"
+msgstr "Cancella cronologia"
+
+#: package/contents/ui/main.qml:128
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr "Scegli un colore"
+
+#: package/contents/ui/main.qml:193
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Color options"
+msgstr "Opzioni di colore"
+
+#: package/contents/ui/main.qml:288
+#, kde-format
+msgctxt "@info:usagetip"
+msgid "No colors"
+msgstr "Nessun colore"
+
+#: package/contents/ui/main.qml:292
+#, kde-format
+msgctxt "@action:button"
+msgid "Pick Color"
+msgstr "Scegli colore"
+
+#: package/contents/ui/main.qml:446
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete"
+msgstr "Elimina"
+
+#~ msgid "Default Format"
+#~ msgstr "Formato predefinito"
+
+#~ msgid "Latex Color"
+#~ msgstr "Colore Latex"

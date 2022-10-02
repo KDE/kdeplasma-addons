@@ -1,0 +1,67 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# Mincho Kondarev <mkondarev@yahoo.de>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-31 00:48+0000\n"
+"PO-Revision-Date: 2022-06-19 19:05+0200\n"
+"Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
+"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 22.04.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Dictionaries"
+msgstr "Речници"
+
+#: package/contents/ui/AvailableDictSheet.qml:35
+#, kde-format
+msgid "Add More Dictionaries"
+msgstr "Добавяне на още речници"
+
+#: package/contents/ui/ConfigDictionaries.qml:89
+#, kde-format
+msgid "Unable to load dictionary list"
+msgstr "Не може да се зареди списъка с речници"
+
+#: package/contents/ui/ConfigDictionaries.qml:90
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgctxt "%2 human-readable error string"
+msgid "Error code: %1 (%2)"
+msgstr "Код за грешка: %1 (%2)"
+
+#: package/contents/ui/ConfigDictionaries.qml:101
+#, kde-format
+msgid "No dictionaries"
+msgstr "Няма речници"
+
+#: package/contents/ui/ConfigDictionaries.qml:112
+#, kde-format
+msgid "Add More…"
+msgstr "Добавяне на речник…"
+
+#: package/contents/ui/DictItemDelegate.qml:51
+#, kde-format
+msgid "Delete"
+msgstr "Изтриване"
+
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Enter word to define here…"
+msgstr "Въведете дума, която да се дефинира тук…"
+
+#: package/contents/ui/main.qml:120
+#, kde-format
+msgid "Unable to load definition"
+msgstr "Не може да се зареди определението"

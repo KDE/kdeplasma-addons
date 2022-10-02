@@ -1,0 +1,229 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Vít Pelčák <vit@pelcak.org>, 2014, 2015, 2017, 2018, 2019.
+# Vit Pelcak <vpelcak@suse.cz>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_notes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-30 00:46+0000\n"
+"PO-Revision-Date: 2021-04-21 15:45+0200\n"
+"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 20.12.3\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Vzhled"
+
+#: package/contents/ui/configAppearance.qml:30
+#, kde-format
+msgid "%1pt"
+msgstr "%1pt"
+
+#: package/contents/ui/configAppearance.qml:36
+#, kde-format
+msgid "Text font size:"
+msgstr "Velikost písma:"
+
+#: package/contents/ui/configAppearance.qml:41
+#, kde-format
+msgid "Background color"
+msgstr "Barva pozadí"
+
+#: package/contents/ui/configAppearance.qml:77
+#, kde-format
+msgid "A white sticky note"
+msgstr "Bílá poznámka na plochu"
+
+#: package/contents/ui/configAppearance.qml:78
+#, kde-format
+msgid "A black sticky note"
+msgstr "Černá poznámka na plochu"
+
+#: package/contents/ui/configAppearance.qml:79
+#, kde-format
+msgid "A red sticky note"
+msgstr "Červená poznámka na plochu"
+
+#: package/contents/ui/configAppearance.qml:80
+#, kde-format
+msgid "An orange sticky note"
+msgstr "Oranžová poznámka na plochu"
+
+#: package/contents/ui/configAppearance.qml:81
+#, kde-format
+msgid "A yellow sticky note"
+msgstr "Žlutá poznámka na plochu"
+
+#: package/contents/ui/configAppearance.qml:82
+#, kde-format
+msgid "A green sticky note"
+msgstr "Zelená poznámka na plochu"
+
+#: package/contents/ui/configAppearance.qml:83
+#, kde-format
+msgid "A blue sticky note"
+msgstr "Modrá poznámka na plochu"
+
+#: package/contents/ui/configAppearance.qml:84
+#, kde-format
+msgid "A pink sticky note"
+msgstr "Růžová poznámka na plochu"
+
+#: package/contents/ui/configAppearance.qml:85
+#, kde-format
+msgid "A translucent sticky note"
+msgstr "Průhledná poznámka na plochu"
+
+#: package/contents/ui/configAppearance.qml:86
+#, kde-format
+msgid "A translucent sticky note with light text"
+msgstr "Průhledná poznámka na plochu se světlým textem"
+
+#: package/contents/ui/main.qml:246
+#, kde-format
+msgid "Undo"
+msgstr "Zpět"
+
+#: package/contents/ui/main.qml:254
+#, kde-format
+msgid "Redo"
+msgstr "Znovu"
+
+#: package/contents/ui/main.qml:264
+#, kde-format
+msgid "Cut"
+msgstr "Vyjmout"
+
+#: package/contents/ui/main.qml:272
+#, kde-format
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: package/contents/ui/main.qml:280
+#, kde-format
+msgid "Paste Without Formatting"
+msgstr "Vložit bez formátování"
+
+#: package/contents/ui/main.qml:286
+#, kde-format
+msgid "Paste"
+msgstr "Vložit"
+
+#: package/contents/ui/main.qml:295
+#, kde-format
+msgid "Delete"
+msgstr "Smazat"
+
+#: package/contents/ui/main.qml:302
+#, kde-format
+msgid "Clear"
+msgstr "Vyprázdnit"
+
+#: package/contents/ui/main.qml:312
+#, kde-format
+msgid "Select All"
+msgstr "Vybrat vše"
+
+#: package/contents/ui/main.qml:440
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Bold"
+msgstr "Tučné"
+
+#: package/contents/ui/main.qml:452
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Italic"
+msgstr "Kurzíva"
+
+#: package/contents/ui/main.qml:464
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Underline"
+msgstr "Podtržené"
+
+#: package/contents/ui/main.qml:476
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Strikethrough"
+msgstr "Přeškrtnuté"
+
+#: package/contents/ui/main.qml:550
+#, kde-format
+msgid "Discard this note?"
+msgstr "Zahodit tuto poznámku?"
+
+#: package/contents/ui/main.qml:551
+#, kde-format
+msgid "Are you sure you want to discard this note?"
+msgstr "Opravdu si přejete smazat tuto poznámku?"
+
+#: package/contents/ui/main.qml:564
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "White"
+msgstr "Bílá"
+
+#: package/contents/ui/main.qml:565
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Black"
+msgstr "Černá"
+
+#: package/contents/ui/main.qml:566
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Red"
+msgstr "Červená"
+
+#: package/contents/ui/main.qml:567
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Orange"
+msgstr "Oranžová"
+
+#: package/contents/ui/main.qml:568
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Yellow"
+msgstr "Žlutá"
+
+#: package/contents/ui/main.qml:569
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Green"
+msgstr "Zelená"
+
+#: package/contents/ui/main.qml:570
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Blue"
+msgstr "Modrá"
+
+#: package/contents/ui/main.qml:571
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Pink"
+msgstr "Růžová"
+
+#: package/contents/ui/main.qml:572
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent"
+msgstr "Průhledné"
+
+#: package/contents/ui/main.qml:573
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent Light"
+msgstr "Průhledná světlá"

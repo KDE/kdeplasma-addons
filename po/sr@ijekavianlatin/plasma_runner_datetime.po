@@ -1,0 +1,62 @@
+# Translation of plasma_runner_datetime.po into Serbian.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2010, 2015.
+# Dalibor Djuric <daliborddjuric@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_runner_datetime\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-05-20 03:24+0200\n"
+"PO-Revision-Date: 2015-01-31 12:56+0100\n"
+"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@ijekavianlatin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: datetimerunner.cpp:29
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "date"
+msgstr "datum"
+
+#: datetimerunner.cpp:30
+#, kde-format
+msgctxt "Note this is a KRunner keyword"
+msgid "time"
+msgstr "vrijeme"
+
+#: datetimerunner.cpp:37
+#, kde-format
+msgid "Displays the current date"
+msgstr "Prikazuje trenutni datum"
+
+#: datetimerunner.cpp:38
+#, kde-format
+msgid "Displays the current date in a given timezone"
+msgstr "Prikazuje trenutni datum u zadatoj vremenskoj zoni"
+
+#: datetimerunner.cpp:39
+#, kde-format
+msgid "Displays the current time"
+msgstr "Prikazuje trenutno vrijeme"
+
+#: datetimerunner.cpp:40
+#, kde-format
+msgid "Displays the current time in a given timezone"
+msgstr "Prikazuje trenutno vrijeme u zadatoj vremenskoj zoni"
+
+#: datetimerunner.cpp:52
+#, kde-format
+msgid "Today's date is %1"
+msgstr "Današnji datum je %1"
+
+#: datetimerunner.cpp:62
+#, kde-format
+msgid "Current time is %1"
+msgstr "Trenutno vrijeme je %1"

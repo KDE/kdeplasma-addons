@@ -1,0 +1,67 @@
+#
+# Translators:
+# obsoleteman <tulliana@gmail.com>, 2008-2009
+# Volkan Gezer <volkangezer@gmail.com>, 2017, 2021
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons-kde4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-09-25 02:25+0200\n"
+"PO-Revision-Date: 2021-10-27 11:54+0200\n"
+"Last-Translator: Volkan Gezer <volkangezer@gmail.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 20.12.3\n"
+
+#: package/contents/config/config.qml:17
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Görünüm"
+
+#: package/contents/ui/configGeneral.qml:35
+#, kde-format
+msgid "Display:"
+msgstr "Görüntüle:"
+
+#: package/contents/ui/configGeneral.qml:36
+#: package/contents/ui/configGeneral.qml:90
+#, kde-format
+msgctxt "@option:check"
+msgid "Grid"
+msgstr "Izgara"
+
+#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:77
+#, kde-format
+msgctxt "@option:check"
+msgid "Inactive LEDs"
+msgstr "Etkin Olmayan Gösterge Işıkları"
+
+#: package/contents/ui/configGeneral.qml:46
+#, kde-format
+msgctxt "@option:check"
+msgid "Seconds"
+msgstr "Saniye"
+
+#: package/contents/ui/configGeneral.qml:51
+#, kde-format
+msgctxt "@option:check"
+msgid "In BCD format (decimal)"
+msgstr "BCD biçiminde (ondalık)"
+
+#: package/contents/ui/configGeneral.qml:60
+#, kde-format
+msgid "Use custom color for:"
+msgstr "Şunlar için özel renk kullan:"
+
+#: package/contents/ui/configGeneral.qml:64
+#, kde-format
+msgctxt "@option:check"
+msgid "Active LEDs"
+msgstr "Etkin Gösterge Işıkları"

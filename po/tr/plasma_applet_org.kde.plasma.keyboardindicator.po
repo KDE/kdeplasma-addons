@@ -1,0 +1,58 @@
+#
+# Translators:
+#
+# Emir SARI <emir_sari@icloud.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons-kde4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-01 00:45+0000\n"
+"PO-Revision-Date: 2022-05-08 11:21+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 22.04.0\n"
+
+#: contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Keys"
+msgstr "Düğmeler"
+
+#: contents/ui/configAppearance.qml:33
+#, kde-format
+msgctxt ""
+"@label show keyboard indicator when Caps Lock or Num Lock is activated"
+msgid "Show when activated:"
+msgstr "Etkinleştirildiğinde göster:"
+
+#: contents/ui/configAppearance.qml:36
+#, kde-format
+msgctxt "@option:check"
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: contents/ui/configAppearance.qml:43
+#, kde-format
+msgctxt "@option:check"
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: contents/ui/main.qml:29
+#, kde-format
+msgid "Caps Lock activated\n"
+msgstr "Caps Lock etkin\n"
+
+#: contents/ui/main.qml:30
+#, kde-format
+msgid "Num Lock activated\n"
+msgstr "Num Lock etkin\n"
+
+#: contents/ui/main.qml:108
+#, kde-format
+msgid "No lock keys activated"
+msgstr "Bir kilit düğmesi etkin değil"

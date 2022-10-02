@@ -1,0 +1,124 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Tamas Szanto <taszanto@gmail.com>, 2008.
+# Kristóf Kiszel <ulysses@kubuntu.org>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: KDE 4.3\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-09-25 02:25+0200\n"
+"PO-Revision-Date: 2019-11-16 21:16+0100\n"
+"Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.03.70\n"
+
+#: package/contents/config/config.qml:17
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#: package/contents/ui/configGeneral.qml:35
+#, kde-format
+msgid "Display:"
+msgstr "Megjelenítés:"
+
+#: package/contents/ui/configGeneral.qml:36
+#: package/contents/ui/configGeneral.qml:90
+#, kde-format
+msgctxt "@option:check"
+msgid "Grid"
+msgstr "Rács"
+
+#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:77
+#, kde-format
+msgctxt "@option:check"
+msgid "Inactive LEDs"
+msgstr "Inaktív LED-ek"
+
+#: package/contents/ui/configGeneral.qml:46
+#, kde-format
+msgctxt "@option:check"
+msgid "Seconds"
+msgstr "Másodperc"
+
+#: package/contents/ui/configGeneral.qml:51
+#, kde-format
+msgctxt "@option:check"
+msgid "In BCD format (decimal)"
+msgstr "BCD formátumban (decimális)"
+
+#: package/contents/ui/configGeneral.qml:60
+#, kde-format
+msgid "Use custom color for:"
+msgstr "Egyedi szín:"
+
+#: package/contents/ui/configGeneral.qml:64
+#, kde-format
+msgctxt "@option:check"
+msgid "Active LEDs"
+msgstr "Aktív LED-ek"
+
+#, fuzzy
+#~| msgid "Show the inactive LEDs"
+#~ msgctxt "@option:check"
+#~ msgid "Show inactive LEDs"
+#~ msgstr "Az inaktív LED-ek mutatása"
+
+#, fuzzy
+#~| msgid "Use custom color for active LEDs:"
+#~ msgctxt "@option:check"
+#~ msgid "Use custom color for active LEDs"
+#~ msgstr "Egyedi szín az aktív LED-eknél:"
+
+#, fuzzy
+#~| msgid "Use custom color for inactive LEDs:"
+#~ msgctxt "@option:check"
+#~ msgid "Use custom color for inactive LEDs"
+#~ msgstr "Egyedi szín megadása az inaktív LED-ekhez:"
+
+#, fuzzy
+#~| msgid "Appearance"
+#~ msgctxt "@title:group"
+#~ msgid "Appearance"
+#~ msgstr "Megjelenés"
+
+#~ msgid "Check this if you want to see the inactive LEDs."
+#~ msgstr ""
+#~ "Jelölje be, ha azt szeretné, hogy a nem világító LED-ek is látszódjanak."
+
+#~ msgid "Show"
+#~ msgstr "Mutatás"
+
+#~ msgid "Use theme color"
+#~ msgstr "A téma színét használja"
+
+#~ msgid "Show the grid"
+#~ msgstr "Rács megjelenítése"
+
+#~ msgid "Check this if you want to see a grid around leds."
+#~ msgstr "Jelölje be, ha rácsot szeretne megjeleníteni a LED-ek körül."
+
+#~ msgid "Use custom grid color:"
+#~ msgstr "Egyedi rácsszín:"
+
+#~ msgid "Information"
+#~ msgstr "Jellemzők"
+
+#~ msgid "Show the seconds LEDs"
+#~ msgstr "Másodpercmutató LED-ek"
+
+#~ msgid ""
+#~ "Check this if you want to display seconds LEDs in order to see the "
+#~ "seconds."
+#~ msgstr "Jelölje be, ha a másodperceket is ki szeretné íratni LED-ekkel."
+
+#~ msgid "General"
+#~ msgstr "Általános"

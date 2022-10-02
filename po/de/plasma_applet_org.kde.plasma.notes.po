@@ -1,0 +1,332 @@
+# Thomas Reitelbach <tr@erdfunkstelle.de>, 2007, 2008.
+# Frederik Schwarzer <schwarzer@kde.org>, 2008, 2009, 2016.
+# Burkhard Lück <lueck@hube-lueck.de>, 2011, 2014, 2015, 2018, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_notes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-30 00:46+0000\n"
+"PO-Revision-Date: 2021-04-15 08:47+0200\n"
+"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Erscheinungsbild"
+
+#: package/contents/ui/configAppearance.qml:30
+#, kde-format
+msgid "%1pt"
+msgstr "%1 pt"
+
+#: package/contents/ui/configAppearance.qml:36
+#, kde-format
+msgid "Text font size:"
+msgstr "Textschriftgröße:"
+
+#: package/contents/ui/configAppearance.qml:41
+#, kde-format
+msgid "Background color"
+msgstr "Hintergrundfarbe"
+
+#: package/contents/ui/configAppearance.qml:77
+#, kde-format
+msgid "A white sticky note"
+msgstr "Eine weiße Haftnotiz"
+
+#: package/contents/ui/configAppearance.qml:78
+#, kde-format
+msgid "A black sticky note"
+msgstr "Eine schwarze Haftnotiz"
+
+#: package/contents/ui/configAppearance.qml:79
+#, kde-format
+msgid "A red sticky note"
+msgstr "Eine rote Haftnotiz"
+
+#: package/contents/ui/configAppearance.qml:80
+#, kde-format
+msgid "An orange sticky note"
+msgstr "Eine orange Haftnotiz"
+
+#: package/contents/ui/configAppearance.qml:81
+#, kde-format
+msgid "A yellow sticky note"
+msgstr "Eine gelbe Haftnotiz"
+
+#: package/contents/ui/configAppearance.qml:82
+#, kde-format
+msgid "A green sticky note"
+msgstr "Eine grüne Haftnotiz"
+
+#: package/contents/ui/configAppearance.qml:83
+#, kde-format
+msgid "A blue sticky note"
+msgstr "Eine blaue Haftnotiz"
+
+#: package/contents/ui/configAppearance.qml:84
+#, kde-format
+msgid "A pink sticky note"
+msgstr "Eine rosa Haftnotiz"
+
+#: package/contents/ui/configAppearance.qml:85
+#, kde-format
+msgid "A translucent sticky note"
+msgstr "Eine transparente Haftnotiz"
+
+#: package/contents/ui/configAppearance.qml:86
+#, kde-format
+msgid "A translucent sticky note with light text"
+msgstr "Eine transparente Haftnotiz mit hellem Text"
+
+#: package/contents/ui/main.qml:246
+#, kde-format
+msgid "Undo"
+msgstr "Rückgängig"
+
+#: package/contents/ui/main.qml:254
+#, kde-format
+msgid "Redo"
+msgstr "Wiederherstellen"
+
+#: package/contents/ui/main.qml:264
+#, kde-format
+msgid "Cut"
+msgstr "Ausschneiden"
+
+#: package/contents/ui/main.qml:272
+#, kde-format
+msgid "Copy"
+msgstr "Kopieren"
+
+#: package/contents/ui/main.qml:280
+#, kde-format
+msgid "Paste Without Formatting"
+msgstr "Ohne Formatierung einfügen"
+
+#: package/contents/ui/main.qml:286
+#, kde-format
+msgid "Paste"
+msgstr "Einfügen"
+
+#: package/contents/ui/main.qml:295
+#, kde-format
+msgid "Delete"
+msgstr "Löschen"
+
+#: package/contents/ui/main.qml:302
+#, kde-format
+msgid "Clear"
+msgstr "Leeren"
+
+#: package/contents/ui/main.qml:312
+#, kde-format
+msgid "Select All"
+msgstr "Alle auswählen"
+
+#: package/contents/ui/main.qml:440
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Bold"
+msgstr "Fett"
+
+#: package/contents/ui/main.qml:452
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Italic"
+msgstr "Kursiv"
+
+#: package/contents/ui/main.qml:464
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Underline"
+msgstr "Unterstrichen"
+
+#: package/contents/ui/main.qml:476
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Strikethrough"
+msgstr "Durchgestrichen"
+
+#: package/contents/ui/main.qml:550
+#, kde-format
+msgid "Discard this note?"
+msgstr "Diese Notiz verwerfen?"
+
+#: package/contents/ui/main.qml:551
+#, kde-format
+msgid "Are you sure you want to discard this note?"
+msgstr "Möchten Sie diese Notiz wirklich verwerfen?"
+
+#: package/contents/ui/main.qml:564
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "White"
+msgstr "Weiß"
+
+#: package/contents/ui/main.qml:565
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Black"
+msgstr "Schwarz"
+
+#: package/contents/ui/main.qml:566
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Red"
+msgstr "Rot"
+
+#: package/contents/ui/main.qml:567
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Orange"
+msgstr "Orange"
+
+#: package/contents/ui/main.qml:568
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Yellow"
+msgstr "Gelb"
+
+#: package/contents/ui/main.qml:569
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Green"
+msgstr "Grün"
+
+#: package/contents/ui/main.qml:570
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Blue"
+msgstr "Blau"
+
+#: package/contents/ui/main.qml:571
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Pink"
+msgstr "Rosa"
+
+#: package/contents/ui/main.qml:572
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent"
+msgstr "Durchscheinend"
+
+#: package/contents/ui/main.qml:573
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent Light"
+msgstr "Transparent hell"
+
+#~ msgid "Toggle text format options"
+#~ msgstr "Text-Formatoptionen umschalten"
+
+#~ msgid "Notes Settings..."
+#~ msgstr "Notiz-Einstellungen ..."
+
+#~ msgid "Align left"
+#~ msgstr "Linksbündig"
+
+#~ msgid "Align center"
+#~ msgstr "Zentriert"
+
+#~ msgid "Align right"
+#~ msgstr "Rechtsbündig"
+
+#~ msgid "Justified"
+#~ msgstr "Blocksatz"
+
+#~ msgid "Font"
+#~ msgstr "Schriftart"
+
+#~ msgid "Style:"
+#~ msgstr "Design:"
+
+#~ msgid "&Bold"
+#~ msgstr "&Fett"
+
+#~ msgid "&Italic"
+#~ msgstr "&Kursiv"
+
+#~ msgid "Size:"
+#~ msgstr "Größe:"
+
+#~ msgid "Scale font size by:"
+#~ msgstr "Schriftgröße skalieren um:"
+
+#~ msgid "%"
+#~ msgstr " %"
+
+#~ msgid "Color:"
+#~ msgstr "Farbe:"
+
+#~ msgid "Use theme color"
+#~ msgstr "Farben des Designs verwenden"
+
+#~ msgid "Use custom color:"
+#~ msgstr "Eigene Farbe:"
+
+#~ msgid "Active line highlight color:"
+#~ msgstr "Hervorhebungsfarbe der aktiven Zeile:"
+
+#~ msgid "Use no color"
+#~ msgstr "Keine Farben verwenden"
+
+#~ msgid "Theme"
+#~ msgstr "Design"
+
+#~ msgid "Notes color:"
+#~ msgstr "Notiz-Farbe:"
+
+#~ msgid "Spell Check"
+#~ msgstr "Rechtschreibprüfung"
+
+#~ msgid "Enable spell check:"
+#~ msgstr "Rechtschreibprüfung aktivieren:"
+
+#~ msgid "Notes Color"
+#~ msgstr "Notiz-Farbe"
+
+#~ msgid "General"
+#~ msgstr "Allgemein"
+
+#~ msgid "Formatting"
+#~ msgstr "Formatierung"
+
+#~ msgid "Unable to open file"
+#~ msgstr "Datei kann nicht geöffnet werden"
+
+#~ msgid "Welcome to the Notes Plasmoid! Type your notes here..."
+#~ msgstr ""
+#~ "Willkommen beim Haftnotizen-Plasmoid. Geben Sie hier Ihre Notiz ein ..."
+
+#~ msgid "Text Color"
+#~ msgstr "Textfarbe"
+
+#~ msgid "Check spelling"
+#~ msgstr "Rechtschreibprüfung"
+
+#~ msgid "Notes Configuration"
+#~ msgstr "Notizen-Einrichtung"
+
+#~ msgid "Select Font..."
+#~ msgstr "Schriftart auswählen ..."
+
+#~ msgid "Notes size:"
+#~ msgstr "Größe von Notizen:"
+
+#~ msgid "Save Method"
+#~ msgstr "Speichermodus"
+
+#~ msgid "Save note at applet quit"
+#~ msgstr "Notiz bei Programmende speichern"
+
+#~ msgid "Save note when applet looses focus"
+#~ msgstr "Notiz bei Fokusverlust speichern"

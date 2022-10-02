@@ -1,0 +1,91 @@
+# Lithuanian translations for kdeplasma-addons package.
+# Copyright (C) 2019 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Automatically generated, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-31 00:48+0000\n"
+"PO-Revision-Date: 2019-06-06 12:47+0000\n"
+"Last-Translator: Moo\n"
+"Language-Team: lt\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
+"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid "No quota restrictions found."
+msgctxt "@info:status"
+msgid "No quota restrictions found"
+msgstr "Nerasta jokių leidžiamo duomenų kiekio apribojimų."
+
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid ""
+#| "Quota tool not found.\n"
+#| "\n"
+#| "Please install 'quota'."
+msgctxt "@info:status"
+msgid "Quota tool not found"
+msgstr ""
+"Nerastas leidžiamo duomenų kiekio įrankis.\n"
+"\n"
+"Įdiekite \"quota\" paketą."
+
+#: package/contents/ui/main.qml:78
+#, fuzzy, kde-format
+#| msgid "Please install 'quota'"
+msgctxt "@info:usagetip"
+msgid "Please install 'quota'"
+msgstr "Įdiekite \"quota\" paketą"
+
+#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:177 plugin/DiskQuota.cpp:264
+#, kde-format
+msgid "Disk Quota"
+msgstr "Leidžiamas disko duomenų kiekis"
+
+#: plugin/DiskQuota.cpp:45
+#, kde-format
+msgid "Please install 'quota'"
+msgstr "Įdiekite \"quota\" paketą"
+
+#: plugin/DiskQuota.cpp:178
+#, kde-format
+msgid "Running quota failed"
+msgstr "Leidžiamo duomenų kiekio paleidimas nepavyko"
+
+#: plugin/DiskQuota.cpp:239
+#, kde-format
+msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
+msgid "%1: %2% used"
+msgstr "%1: Panaudota %2%"
+
+#: plugin/DiskQuota.cpp:240
+#, kde-format
+msgctxt "e.g.: 12 GiB of 20 GiB"
+msgid "%1 of %2"
+msgstr "%1 iš %2"
+
+#: plugin/DiskQuota.cpp:241
+#, kde-format
+msgctxt "e.g.: 8 GiB free"
+msgid "%1 free"
+msgstr "%1 laisva"
+
+#: plugin/DiskQuota.cpp:261
+#, kde-format
+msgctxt "example: Quota: 83% used"
+msgid "Quota: %1% used"
+msgstr "Leidžiamas duomenų kiekis: Panaudota %1%"
+
+#: plugin/DiskQuota.cpp:265
+#, kde-format
+msgid "No quota restrictions found."
+msgstr "Nerasta jokių leidžiamo duomenų kiekio apribojimų."

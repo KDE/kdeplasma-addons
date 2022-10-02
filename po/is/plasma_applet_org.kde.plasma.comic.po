@@ -1,0 +1,347 @@
+# translation of plasma_applet_comic.po to
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sveinn í Felli <sveinki@nett.is>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_comic\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-27 00:48+0000\n"
+"PO-Revision-Date: 2011-03-24 09:47+0000\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
+"\n"
+
+#: comic.cpp:87
+#, kde-format
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr ""
+
+#: comic.cpp:93
+#, fuzzy, kde-format
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr "Hoppa á &fyrsta söguþáttinn"
+
+#: comic.cpp:97
+#, fuzzy, kde-format
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr "Hoppa á &núverandi söguþátt"
+
+#: comic.cpp:101
+#, fuzzy, kde-format
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "Hoppa á söguþáttinn ..."
+
+#: comic.cpp:105
+#, fuzzy, kde-format
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr "Heimsækja vefsvæði búðarinnar"
+
+#: comic.cpp:109
+#, kde-format
+msgctxt "@action:inmenu %1 is the name of a web browser"
+msgid "View in %1"
+msgstr ""
+
+#: comic.cpp:117
+#, fuzzy, kde-format
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr "Heimsækja vefsvæði búðarinnar"
+
+#: comic.cpp:122
+#, fuzzy, kde-format
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "Vi&sta myndasögu sem..."
+
+#: comic.cpp:127
+#, fuzzy, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "&Raunveruleg stærð"
+
+#: comic.cpp:135
+#, fuzzy, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr "&Vista núverandi stöðu"
+
+#: comicdata.cpp:86
+#, fuzzy, kde-format
+msgctxt "an abbreviation for Number"
+msgid "# %1"
+msgstr "nr. %1"
+
+#: package/contents/config/config.qml:13
+#, fuzzy, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Almennt"
+
+#: package/contents/config/config.qml:18
+#, fuzzy, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Útlit"
+
+#: package/contents/config/config.qml:23
+#, fuzzy, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Nánar"
+
+#: package/contents/ui/ComicBottomInfo.qml:60
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to strip…"
+msgstr "Hoppa á söguþáttinn ..."
+
+#: package/contents/ui/ComicBottomInfo.qml:100
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Visit the comic website"
+msgstr "Heimsækja vefsvæði myndasögunnar"
+
+#: package/contents/ui/configAdvanced.qml:36
+#, fuzzy, kde-format
+msgctxt "@label:spinbox"
+msgid "Comic cache:"
+msgstr "M&yndasaga:"
+
+#: package/contents/ui/configAdvanced.qml:45
+#, kde-format
+msgctxt "@item:valuesuffix spacing to number + unit"
+msgid "strip per comic"
+msgid_plural "strips per comic"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/configAdvanced.qml:51
+#, kde-format
+msgctxt "@option:check"
+msgid "Display error when downloading comic fails"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:43
+#, kde-format
+msgctxt "Heading for showing various elements of a comic"
+msgid "Show:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:44
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Comic title"
+msgstr "Sýna &titil myndasögu:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Comic identifier"
+msgstr "Sýna auðkenn&i myndasögu:"
+
+#: package/contents/ui/configAppearance.qml:56
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Comic author"
+msgstr "Sýn&a höfund myndasögu:"
+
+#: package/contents/ui/configAppearance.qml:62
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Comic URL"
+msgstr "Comic"
+
+#: package/contents/ui/configAppearance.qml:72
+#, kde-format
+msgid "Show navigation buttons:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:73
+#, kde-format
+msgctxt "@option:check"
+msgid "Always"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:80
+#, kde-format
+msgctxt "@option:check"
+msgid "Only on hover"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:52
+#, fuzzy, kde-format
+msgctxt "@title:group"
+msgid "Comics:"
+msgstr "Comic"
+
+#: package/contents/ui/configGeneral.qml:72
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Get New Comics…"
+msgstr "Sækja nýjar myndasö&gur..."
+
+#: package/contents/ui/configGeneral.qml:83
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Middle-click on comic to display at original size"
+msgstr "&Miðjusmella á mynasöguna til að sýna hana í upprunalegri stærð"
+
+#: package/contents/ui/configGeneral.qml:92
+#, fuzzy, kde-format
+msgctxt "@label:spinbox"
+msgid "Check for new plugins every:"
+msgstr "Velja myndasögu"
+
+#: package/contents/ui/configGeneral.qml:101
+#, kde-format
+msgctxt "@item:valuesuffix spacing to number + unit"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/configGeneral.qml:106
+#, fuzzy, kde-format
+msgctxt "@label:spinbox"
+msgid "Check for new comics every:"
+msgstr "Velja myndasögu"
+
+#: package/contents/ui/configGeneral.qml:115
+#, kde-format
+msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: stripselector.cpp:31 stripselector.cpp:101
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Go to Strip"
+msgstr "Fara á myndasöguþátt"
+
+#: stripselector.cpp:39
+#, fuzzy, kde-format
+msgctxt "@label:spinbox"
+msgid "&Strip number:"
+msgstr "&Söguþáttur númer:"
+
+#: stripselector.cpp:102
+#, fuzzy, kde-format
+msgctxt "@label:textbox"
+msgid "Strip identifier:"
+msgstr "Sýna auðkenn&i myndasögu:"
+
+#, fuzzy
+#~ msgctxt "@action"
+#~ msgid "&Create Comic Book Archive…"
+#~ msgstr "Vi&sta myndasögu sem..."
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Create %1 Comic Book Archive"
+#~ msgstr "Vi&sta myndasögu sem..."
+
+#, fuzzy
+#~ msgid "*.cbz|Comic Book Archive (Zip)"
+#~ msgstr "Vi&sta myndasögu sem..."
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Download Comics"
+#~ msgstr "Hala niður nýjum myndasögum"
+
+#, fuzzy
+#~ msgctxt "@title:group"
+#~ msgid "Cache"
+#~ msgstr "Skyndiminni"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "Show arrows only on mouse-over"
+#~ msgstr "Sýna örvar aðeins þegar bendli er &haldið yfir:"
+
+#, fuzzy
+#~ msgctxt "@title:group"
+#~ msgid "Information"
+#~ msgstr "Upplýsingar"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "Show comic URL"
+#~ msgstr "Sýna slóð myndasögu &URL:"
+
+#, fuzzy
+#~ msgctxt "@label:spinbox"
+#~ msgid "Automatically update comic plugins:"
+#~ msgstr "&Skipta sjálfkrafa um flipa:"
+
+#, fuzzy
+#~ msgctxt "@title:group"
+#~ msgid "Appearance"
+#~ msgstr "Útlit"
+
+#, fuzzy
+#~ msgid "Maximum &Size of Widget"
+#~ msgstr "Mesta &stærð græjunnar"
+
+#, fuzzy
+#~ msgid "Tabbar"
+#~ msgstr "Fela:"
+
+#, fuzzy
+#~ msgctxt "Tabbar will show text only"
+#~ msgid "Text only"
+#~ msgstr "Bara texti"
+
+#, fuzzy
+#~ msgctxt "Tabbar will show icons only"
+#~ msgid "Icons only"
+#~ msgstr "Aðeins táknmyndir"
+
+#, fuzzy
+#~ msgid "Press the \"Get New Comics ...\" button to install comics."
+#~ msgstr "Ýta á \"Sækja nýjar myndasögur\" til að setja inn myndasögur."
+
+#, fuzzy
+#~ msgid "Tabs"
+#~ msgstr "Flipar"
+
+#, fuzzy
+#~ msgid "Use &tabs:"
+#~ msgstr "No&ta flipa:"
+
+#, fuzzy
+#~ msgid "Pressing Ctrl and scrolling also changes the tabs."
+#~ msgstr "Að styðja á Ctrl og skruna breytir líka flipunum."
+
+#, fuzzy
+#~ msgid "&Hide Tabbar:"
+#~ msgstr "&Fela flipaslá:"
+
+#, fuzzy
+#~ msgid "Interacting with the comic widget restarts the timer."
+#~ msgstr "Að eiga við myndasögugræjuna endurræsir tímamælinguna."
+
+#, fuzzy
+#~ msgid "hh 'Hours' mm 'Mins' ss 'Secs'"
+#~ msgstr "hh 'Klst' mm 'Mín' ss 'Sek'"
+
+#, fuzzy
+#~ msgid "Automatically &switch tabs:"
+#~ msgstr "&Skipta sjálfkrafa um flipa:"

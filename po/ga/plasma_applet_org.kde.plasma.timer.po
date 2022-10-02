@@ -1,0 +1,250 @@
+# Irish translation of plasma_applet_timer
+# Copyright (C) 2009 This_file_is_part_of_KDE
+# This file is distributed under the same license as the plasma_applet_timer package.
+# Kevin Scannell <kscanne@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: playground-base/plasma_applet_timer.po\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2008-06-02 20:00-0500\n"
+"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
+"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+"Language: ga\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+
+#: package/contents/config/config.qml:13
+#, fuzzy, kde-format
+#| msgid "Appearance"
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Cuma"
+
+#: package/contents/config/config.qml:19
+#, fuzzy, kde-format
+#| msgid "Predefined Timers"
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr "Uaineadóirí Réamhshainithe"
+
+#: package/contents/config/config.qml:24
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr ""
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "Uaineadóir"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "Uaineadóir"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr ""
+
+#: package/contents/ui/configAdvanced.qml:26
+#, fuzzy, kde-format
+#| msgid "Run a command:"
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "Rith ordú:"
+
+#: package/contents/ui/configAppearance.qml:27
+#, kde-format
+msgctxt "@title:label"
+msgid "Display:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:33
+#, fuzzy, kde-format
+#| msgid "Show title:"
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "Taispeáin teideal:"
+
+#: package/contents/ui/configAppearance.qml:50
+#, fuzzy, kde-format
+#| msgid "Hide seconds"
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "Folaigh soicindí"
+
+#: package/contents/ui/configAppearance.qml:62
+#, kde-format
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:66
+#, kde-format
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr ""
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr ""
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "Uaineadóir"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr ""
+
+#: package/contents/ui/main.qml:137
+#, fuzzy, kde-format
+#| msgid "Start"
+msgctxt "@action"
+msgid "&Start"
+msgstr "Tosaigh"
+
+#: package/contents/ui/main.qml:138
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr ""
+
+#: package/contents/ui/main.qml:139
+#, fuzzy, kde-format
+#| msgid "Reset"
+msgctxt "@action"
+msgid "&Reset"
+msgstr "Athshocraigh"
+
+#, fuzzy
+#~| msgid "Time is up!"
+#~ msgid "Timer is running"
+#~ msgstr "Tá an t-am istigh!"
+
+#, fuzzy
+#~| msgid "Run a command:"
+#~ msgctxt "@title:group"
+#~ msgid "Run Command"
+#~ msgstr "Rith ordú:"
+
+#, fuzzy
+#~| msgid "Command:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Command:"
+#~ msgstr "Ordú:"
+
+#~ msgctxt "separator of hours:minutes:seconds in timer strings"
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "Timer Configuration"
+#~ msgstr "Cumraíocht an Uaineadóra"
+
+#~ msgid "Stop"
+#~ msgstr "Stad"
+
+#~ msgid "Timer Timeout"
+#~ msgstr "Teorainn Ama an Uaineadóra"
+
+#~ msgid "General"
+#~ msgstr "Ginearálta"
+
+#~ msgid "Plasma Timer Applet"
+#~ msgstr "Feidhmchláirín Amadóra Plasma"
+
+#~ msgid "Actions on Timeout"
+#~ msgstr "Gníomhartha ag an am istigh"
+
+#~ msgid "Show a message:"
+#~ msgstr "Taispeáin teachtaireacht:"
+
+#~ msgid "Message:"
+#~ msgstr "Teachtaireacht:"
+
+#~ msgid "Form"
+#~ msgstr "Foirm"

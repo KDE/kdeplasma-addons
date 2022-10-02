@@ -1,0 +1,71 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2017, 2018, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-31 00:48+0000\n"
+"PO-Revision-Date: 2022-06-04 10:17+0200\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 22.03.70\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Dictionaries"
+msgstr "Słowniki"
+
+#: package/contents/ui/AvailableDictSheet.qml:35
+#, kde-format
+msgid "Add More Dictionaries"
+msgstr "Dodaj więcej słowników"
+
+#: package/contents/ui/ConfigDictionaries.qml:89
+#, kde-format
+msgid "Unable to load dictionary list"
+msgstr "Nie udało się wczytać spisu słowników"
+
+#: package/contents/ui/ConfigDictionaries.qml:90
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgctxt "%2 human-readable error string"
+msgid "Error code: %1 (%2)"
+msgstr "Kod błędu: %1 (%2)"
+
+#: package/contents/ui/ConfigDictionaries.qml:101
+#, kde-format
+msgid "No dictionaries"
+msgstr "Bez słowników"
+
+#: package/contents/ui/ConfigDictionaries.qml:112
+#, kde-format
+msgid "Add More…"
+msgstr "Dodaj więcej..."
+
+#: package/contents/ui/DictItemDelegate.qml:51
+#, kde-format
+msgid "Delete"
+msgstr "Usuń"
+
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Enter word to define here…"
+msgstr "Tutaj wpisz słowo do zdefiniowania..."
+
+#: package/contents/ui/main.qml:120
+#, kde-format
+msgid "Unable to load definition"
+msgstr "Nie udało się wczytać definicji"
+
+#~ msgid "Looking up definition…"
+#~ msgstr "Wyszukiwanie definicji..."

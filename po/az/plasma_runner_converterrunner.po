@@ -1,0 +1,43 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# Kheyyam Gojayev <xxmn77@gmail.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-09 00:47+0000\n"
+"PO-Revision-Date: 2021-01-17 01:52+0400\n"
+"Last-Translator: Kheyyam Gojayev <xxmn77@gmail.com>\n"
+"Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.12.1\n"
+
+#: converterrunner.cpp:33
+#, kde-format
+msgid ""
+"Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
+"in] unit\". You can use the Unit converter applet to find all available "
+"units."
+msgstr ""
+":q: \"dəyərini, [>,] vahidi\" kimi olduqda :q: dəyərinə çevirir. Mövcud "
+"bütün bölmələri tapmaq üçün Vahid çevirici əlavəsindən istifadə edə "
+"bilərsiniz."
+
+#: converterrunner.cpp:42
+#, kde-format
+msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
+msgid "in;to;as"
+msgstr "vahid"
+
+#: converterrunner.cpp:50
+#, kde-format
+msgid "Copy unit and number"
+msgstr "Vahidi və sayı kopyalamaq"
+
+#~ msgid "Copy number"
+#~ msgstr "Sayı kopyalamaq"

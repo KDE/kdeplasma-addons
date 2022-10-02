@@ -1,0 +1,58 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Andrew Coles <andrew_coles@yahoo.co.uk>, 2009.
+# Steve Allewell <steve.allewell@gmail.com>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-09 00:47+0000\n"
+"PO-Revision-Date: 2020-10-24 12:36+0100\n"
+"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
+"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.08.2\n"
+
+#: converterrunner.cpp:33
+#, kde-format
+msgid ""
+"Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
+"in] unit\". You can use the Unit converter applet to find all available "
+"units."
+msgstr ""
+"Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
+"in] unit\". You can use the Unit converter applet to find all available "
+"units."
+
+#: converterrunner.cpp:42
+#, kde-format
+msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
+msgid "in;to;as"
+msgstr "in;to;as"
+
+#: converterrunner.cpp:50
+#, kde-format
+msgid "Copy unit and number"
+msgstr "Copy unit and number"
+
+#~ msgid "Copy number"
+#~ msgstr "Copy number"
+
+#, fuzzy
+#~| msgctxt "amount of <unit1> in <unit2>"
+#~| msgid "in"
+#~ msgctxt "amount of 'unit1' in 'unit2'"
+#~ msgid "in"
+#~ msgstr "in"
+
+#, fuzzy
+#~| msgctxt "amount of <unit1> as <unit2>"
+#~| msgid "as"
+#~ msgctxt "amount of 'unit1' as 'unit2'"
+#~ msgid "as"
+#~ msgstr "as"

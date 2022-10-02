@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-30 00:46+0000\n"
+"PO-Revision-Date: 2022-09-20 01:55\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf5-trunk/messages/kdeplasma-addons/"
+"plasma_calendar_alternatecalendar.pot\n"
+"X-Crowdin-File-ID: 27034\n"
+
+#: calendarsystem.h:53
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Julian"
+msgstr "儒略历"
+
+#: calendarsystem.h:57
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Milankovic"
+msgstr "儒略改革历"
+
+#: calendarsystem.h:61
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Solar Hijri Calendar (Persian)"
+msgstr "波斯历"
+
+#: calendarsystem.h:65
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Islamic Civil Calendar"
+msgstr "伊斯兰历"
+
+#: calendarsystem.h:69
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Chinese Lunar Calendar"
+msgstr "中国农历"
+
+#: calendarsystem.h:73
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Indian National Calendar"
+msgstr "印度国定历"
+
+#: config/qml/AlternateCalendarConfig.qml:38
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Calendar system:"
+msgstr "日历系统："
+
+#: config/qml/AlternateCalendarConfig.qml:50
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Date offset:"
+msgstr "日期偏移："
+
+#: config/qml/AlternateCalendarConfig.qml:59
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 天"

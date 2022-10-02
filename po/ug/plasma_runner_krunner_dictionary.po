@@ -1,0 +1,42 @@
+# Uyghur translation for plasma_runner_krunner_dictionary.
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sahran <sahran.ug@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_runner_krunner_dictionary\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"PO-Revision-Date: 2013-09-08 07:05+0900\n"
+"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: dictionaryrunner.cpp:32 dictionaryrunner_config.cpp:34
+#: dictionaryrunner_config.cpp:52
+#, kde-format
+msgctxt "Trigger word before word to define"
+msgid "define"
+msgstr "بەلگىلە"
+
+#: dictionaryrunner.cpp:39
+#, kde-format
+msgctxt "Dictionary keyword"
+msgid "%1:q:"
+msgstr "%1:q:"
+
+#: dictionaryrunner.cpp:39
+#, kde-format
+msgid "Finds the definition of :q:."
+msgstr ""
+
+#: dictionaryrunner_config.cpp:22
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Trigger word:"
+msgstr ""

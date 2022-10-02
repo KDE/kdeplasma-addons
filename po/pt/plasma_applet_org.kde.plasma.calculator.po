@@ -1,0 +1,56 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_calculator\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"PO-Revision-Date: 2012-11-10 15:28+0000\n"
+"Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
+"Language-Team: pt <kde-i18n-pt@kde.org>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-POFile-SpellExtra: DIV AC\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/ui/calculator.qml:307
+#, kde-format
+msgctxt "Text of the clear button"
+msgid "C"
+msgstr "C"
+
+#: package/contents/ui/calculator.qml:320
+#, kde-format
+msgctxt "Text of the division button"
+msgid "÷"
+msgstr "÷"
+
+#: package/contents/ui/calculator.qml:333
+#, kde-format
+msgctxt "Text of the multiplication button"
+msgid "×"
+msgstr "×"
+
+#: package/contents/ui/calculator.qml:345
+#, kde-format
+msgctxt "Text of the all clear button"
+msgid "AC"
+msgstr "AC"
+
+#: package/contents/ui/calculator.qml:397
+#, kde-format
+msgctxt "Text of the minus button"
+msgid "-"
+msgstr "-"
+
+#: package/contents/ui/calculator.qml:449
+#, kde-format
+msgctxt "Text of the plus button"
+msgid "+"
+msgstr "+"
+
+#: package/contents/ui/calculator.qml:500
+#, kde-format
+msgctxt "Text of the equals button"
+msgid "="
+msgstr "="

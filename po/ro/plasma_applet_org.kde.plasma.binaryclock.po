@@ -1,0 +1,165 @@
+# Traducerea plasma_applet_binaryclock.po în Română
+# translation of plasma_applet_binaryclock to Romanian
+# Copyright (C) 2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the plasma_applet_binaryclock package.
+# Laurenţiu Buzdugan <lbuz@rolix.org>, 2008".
+# Sergiu Bivol <sergiu@cip.md>, 2008.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_binaryclock\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-09-25 02:25+0200\n"
+"PO-Revision-Date: 2020-09-26 14:05+0100\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#: package/contents/config/config.qml:17
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Aspect"
+
+#: package/contents/ui/configGeneral.qml:35
+#, kde-format
+msgid "Display:"
+msgstr "Afișaj:"
+
+#: package/contents/ui/configGeneral.qml:36
+#: package/contents/ui/configGeneral.qml:90
+#, kde-format
+msgctxt "@option:check"
+msgid "Grid"
+msgstr "Grilă"
+
+#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:77
+#, kde-format
+msgctxt "@option:check"
+msgid "Inactive LEDs"
+msgstr "LED-uri inactive"
+
+#: package/contents/ui/configGeneral.qml:46
+#, kde-format
+msgctxt "@option:check"
+msgid "Seconds"
+msgstr "Secunde"
+
+#: package/contents/ui/configGeneral.qml:51
+#, kde-format
+msgctxt "@option:check"
+msgid "In BCD format (decimal)"
+msgstr "În format BCD (zecimal)"
+
+#: package/contents/ui/configGeneral.qml:60
+#, kde-format
+msgid "Use custom color for:"
+msgstr "Folosește culoare personalizată pentru:"
+
+#: package/contents/ui/configGeneral.qml:64
+#, kde-format
+msgctxt "@option:check"
+msgid "Active LEDs"
+msgstr "LED-uri active"
+
+#, fuzzy
+#~| msgid "Show the inactive LEDs"
+#~ msgctxt "@option:check"
+#~ msgid "Show inactive LEDs"
+#~ msgstr "Arată LED-urile inactive"
+
+#, fuzzy
+#~| msgid "Use custom color for active LEDs:"
+#~ msgctxt "@option:check"
+#~ msgid "Use custom color for active LEDs"
+#~ msgstr "Utilizează culoare personalizată pentru LED-uri active:"
+
+#, fuzzy
+#~| msgid "Use custom color for inactive LEDs:"
+#~ msgctxt "@option:check"
+#~ msgid "Use custom color for inactive LEDs"
+#~ msgstr "Utilizează culoare personalizată pentru LED-uri inactive:"
+
+#, fuzzy
+#~| msgid "Appearance"
+#~ msgctxt "@title:group"
+#~ msgid "Appearance"
+#~ msgstr "Aspect"
+
+#~ msgid "Check this if you want to see the inactive LEDs."
+#~ msgstr "Bifați dacă doriți să vedeți LED-urile inactive."
+
+#~ msgid "Show"
+#~ msgstr "Arată"
+
+#~ msgid "Use theme color"
+#~ msgstr "Utilizează culoarea tematicii"
+
+#~ msgid "Show the grid"
+#~ msgstr "Arată grila"
+
+#~ msgid "Check this if you want to see a grid around leds."
+#~ msgstr "Bifați dacă doriți să vedeți o grilă în jurul grafiturilor."
+
+#~ msgid "Use custom grid color:"
+#~ msgstr "Utilizează culoare personalizată a grilei:"
+
+#~ msgid "Information"
+#~ msgstr "Informații"
+
+#~ msgid "Show the seconds LEDs"
+#~ msgstr "Arată LED-urile secundelor"
+
+#~ msgid ""
+#~ "Check this if you want to display seconds LEDs in order to see the "
+#~ "seconds."
+#~ msgstr ""
+#~ "Bifați dacă doriți să se afișeze LED-urile secundelor pentru a vedea "
+#~ "secundele."
+
+#~ msgid "General"
+#~ msgstr "General"
+
+#~ msgid "Use custom on leds color:"
+#~ msgstr "Culoare personalizată pentru grafituri aprinse:"
+
+#~ msgid "Show the off leds"
+#~ msgstr "Arată grafiturile de deconectare"
+
+#~ msgid "Use custom off leds color:"
+#~ msgstr "Culoare personalizată pentru grafituri stinse:"
+
+#, fuzzy
+#~| msgid "Appearance"
+#~ msgid "Appareance"
+#~ msgstr "Aspect"
+
+#~ msgid "Show off leds"
+#~ msgstr "Afișează grafiturile de deconectare"
+
+#~ msgid "Timezones"
+#~ msgstr "Fusuri orare"
+
+#~ msgid "Use &local timezone"
+#~ msgstr "Folosește fusul orar &local"
+
+#~ msgid "Area"
+#~ msgstr "Zona"
+
+#~ msgid "Region"
+#~ msgstr "Regiunea"
+
+#~ msgid "Comment"
+#~ msgstr "Comentariu"
+
+#~ msgctxt "@title:window"
+#~ msgid "Configure Clock"
+#~ msgstr "Configurare ceas"

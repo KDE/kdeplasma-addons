@@ -1,0 +1,315 @@
+# translation of plasma_applet_notes.po to
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sveinn í Felli <sveinki@nett.is>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_notes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-30 00:46+0000\n"
+"PO-Revision-Date: 2011-03-24 09:47+0000\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
+"\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:30
+#, kde-format
+msgid "%1pt"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:36
+#, fuzzy, kde-format
+msgid "Text font size:"
+msgstr "Nota sérsniðna leturstærð:"
+
+#: package/contents/ui/configAppearance.qml:41
+#, kde-format
+msgid "Background color"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:77
+#, kde-format
+msgid "A white sticky note"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:78
+#, kde-format
+msgid "A black sticky note"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:79
+#, kde-format
+msgid "A red sticky note"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:80
+#, kde-format
+msgid "An orange sticky note"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:81
+#, kde-format
+msgid "A yellow sticky note"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:82
+#, kde-format
+msgid "A green sticky note"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:83
+#, kde-format
+msgid "A blue sticky note"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:84
+#, kde-format
+msgid "A pink sticky note"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:85
+#, kde-format
+msgid "A translucent sticky note"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:86
+#, kde-format
+msgid "A translucent sticky note with light text"
+msgstr ""
+
+#: package/contents/ui/main.qml:246
+#, kde-format
+msgid "Undo"
+msgstr ""
+
+#: package/contents/ui/main.qml:254
+#, kde-format
+msgid "Redo"
+msgstr ""
+
+#: package/contents/ui/main.qml:264
+#, kde-format
+msgid "Cut"
+msgstr ""
+
+#: package/contents/ui/main.qml:272
+#, kde-format
+msgid "Copy"
+msgstr ""
+
+#: package/contents/ui/main.qml:280
+#, kde-format
+msgid "Paste Without Formatting"
+msgstr ""
+
+#: package/contents/ui/main.qml:286
+#, kde-format
+msgid "Paste"
+msgstr ""
+
+#: package/contents/ui/main.qml:295
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: package/contents/ui/main.qml:302
+#, kde-format
+msgid "Clear"
+msgstr ""
+
+#: package/contents/ui/main.qml:312
+#, kde-format
+msgid "Select All"
+msgstr ""
+
+#: package/contents/ui/main.qml:440
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Bold"
+msgstr "Feitletrað"
+
+#: package/contents/ui/main.qml:452
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Italic"
+msgstr "Skáletrað"
+
+#: package/contents/ui/main.qml:464
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Underline"
+msgstr "Undirstrikað"
+
+#: package/contents/ui/main.qml:476
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Strikethrough"
+msgstr "Yfirstrikað"
+
+#: package/contents/ui/main.qml:550
+#, kde-format
+msgid "Discard this note?"
+msgstr ""
+
+#: package/contents/ui/main.qml:551
+#, kde-format
+msgid "Are you sure you want to discard this note?"
+msgstr ""
+
+#: package/contents/ui/main.qml:564
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "White"
+msgstr "Hvítur"
+
+#: package/contents/ui/main.qml:565
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "Black"
+msgstr "Svart"
+
+#: package/contents/ui/main.qml:566
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "Red"
+msgstr "Rauður"
+
+#: package/contents/ui/main.qml:567
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "Orange"
+msgstr "Appelsínugulur"
+
+#: package/contents/ui/main.qml:568
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "Yellow"
+msgstr "Gulur"
+
+#: package/contents/ui/main.qml:569
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "Green"
+msgstr "Grænn"
+
+#: package/contents/ui/main.qml:570
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "Blue"
+msgstr "Blár"
+
+#: package/contents/ui/main.qml:571
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "Pink"
+msgstr "Bleikur"
+
+#: package/contents/ui/main.qml:572
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent"
+msgstr "Hálfgegnsær"
+
+#: package/contents/ui/main.qml:573
+#, fuzzy, kde-format
+msgctxt "@item:inmenu"
+msgid "Translucent Light"
+msgstr "Hálfgegnsær"
+
+#, fuzzy
+#~ msgid "Align center"
+#~ msgstr "Jafna að miðju"
+
+#, fuzzy
+#~ msgid "Justified"
+#~ msgstr "Jafna"
+
+#, fuzzy
+#~ msgid "Font"
+#~ msgstr "Letur"
+
+#, fuzzy
+#~ msgid "Style:"
+#~ msgstr "Stíll:"
+
+#, fuzzy
+#~ msgid "&Bold"
+#~ msgstr "&Feitletrað"
+
+#, fuzzy
+#~ msgid "&Italic"
+#~ msgstr "&Skáletur"
+
+#, fuzzy
+#~ msgid "Size:"
+#~ msgstr "Stærð:"
+
+#, fuzzy
+#~ msgid "Scale font size by:"
+#~ msgstr "Skala stærð leturs um:"
+
+#, fuzzy
+#~ msgid "%"
+#~ msgstr "%"
+
+#, fuzzy
+#~ msgid "Color:"
+#~ msgstr "Litur:"
+
+#, fuzzy
+#~ msgid "Use theme color"
+#~ msgstr "Nota lit úr þema"
+
+#, fuzzy
+#~ msgid "Use custom color:"
+#~ msgstr "Nota sérsniðinn lit:"
+
+#, fuzzy
+#~ msgid "Active line highlight color:"
+#~ msgstr "Upplitun virkrar línu:"
+
+#, fuzzy
+#~ msgid "Use no color"
+#~ msgstr "Nota engan lit"
+
+#, fuzzy
+#~ msgid "Theme"
+#~ msgstr "Þema"
+
+#, fuzzy
+#~ msgid "Notes color:"
+#~ msgstr "Litur minnismiða:"
+
+#, fuzzy
+#~ msgid "Spell Check"
+#~ msgstr "Stafsetningarleiðrétting"
+
+#, fuzzy
+#~ msgid "Enable spell check:"
+#~ msgstr "Virkja stafsetningarleiðréttingu:"
+
+#, fuzzy
+#~ msgid "Notes Color"
+#~ msgstr "Litur minnismiða"
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Almennt"
+
+#, fuzzy
+#~ msgid "Formatting"
+#~ msgstr "Snið"

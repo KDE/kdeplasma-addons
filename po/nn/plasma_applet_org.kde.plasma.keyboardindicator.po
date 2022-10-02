@@ -1,0 +1,61 @@
+# Translation of plasma_applet_org.kde.plasma.keyboardindicator to Norwegian Nynorsk
+#
+# Karl Ove Hufthammer <karl@huftis.org>, 2018, 2021, 2022.
+# Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-01 00:45+0000\n"
+"PO-Revision-Date: 2022-06-18 14:43+0200\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
+"Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
+"Language: nn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.04.2\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Keys"
+msgstr "Tastar"
+
+#: contents/ui/configAppearance.qml:33
+#, kde-format
+msgctxt ""
+"@label show keyboard indicator when Caps Lock or Num Lock is activated"
+msgid "Show when activated:"
+msgstr "Vis når slått på:"
+
+#: contents/ui/configAppearance.qml:36
+#, kde-format
+msgctxt "@option:check"
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: contents/ui/configAppearance.qml:43
+#, kde-format
+msgctxt "@option:check"
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: contents/ui/main.qml:29
+#, kde-format
+msgid "Caps Lock activated\n"
+msgstr "Caps Lock-tasten er no slått på\n"
+
+#: contents/ui/main.qml:30
+#, kde-format
+msgid "Num Lock activated\n"
+msgstr "Num Lock-tasten er no slått på\n"
+
+#: contents/ui/main.qml:108
+#, kde-format
+msgid "No lock keys activated"
+msgstr "Ingen låsetastar er påslegne"

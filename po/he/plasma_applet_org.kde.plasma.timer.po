@@ -1,0 +1,230 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# david <vertigo.rus@gmail.com>, 2008.
+# elkana bardugo <ttv200@gmail.com>, 2016.
+# Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"PO-Revision-Date: 2017-05-16 06:56-0400\n"
+"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
+"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Zanata 3.9.6\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: package/contents/config/config.qml:13
+#, fuzzy, kde-format
+#| msgid "Appearance"
+msgctxt "@title"
+msgid "Appearance"
+msgstr "מראה"
+
+#: package/contents/config/config.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr ""
+
+#: package/contents/config/config.qml:24
+#, fuzzy, kde-format
+#| msgid "Advanced"
+msgctxt "@title"
+msgid "Advanced"
+msgstr "מתקדם"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "טימר"
+
+#: package/contents/ui/CompactRepresentation.qml:133
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "טימר"
+
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/configAdvanced.qml:22
+#, kde-format
+msgctxt "@title:label"
+msgid "After timer completes:"
+msgstr ""
+
+#: package/contents/ui/configAdvanced.qml:26
+#, fuzzy, kde-format
+#| msgid "Execute command"
+msgctxt "@option:check"
+msgid "Execute command:"
+msgstr "ביצוע פקודה"
+
+#: package/contents/ui/configAppearance.qml:27
+#, fuzzy, kde-format
+#| msgid "Display"
+msgctxt "@title:label"
+msgid "Display:"
+msgstr "תצוגה"
+
+#: package/contents/ui/configAppearance.qml:33
+#, fuzzy, kde-format
+#| msgid "Show title"
+msgctxt "@option:check"
+msgid "Show title:"
+msgstr "הראה כותרת"
+
+#: package/contents/ui/configAppearance.qml:50
+#, fuzzy, kde-format
+#| msgid "Show seconds"
+msgctxt "@option:check"
+msgid "Show seconds"
+msgstr "הראה שניות"
+
+#: package/contents/ui/configAppearance.qml:62
+#, fuzzy, kde-format
+#| msgid "Notifications"
+msgctxt "@title:label"
+msgid "Notifications:"
+msgstr "התראה"
+
+#: package/contents/ui/configAppearance.qml:66
+#, fuzzy, kde-format
+#| msgid "Show notification"
+msgctxt "@option:check"
+msgid "Show notification text:"
+msgstr "הראה התראה"
+
+#: package/contents/ui/configTimes.qml:76
+#, kde-format
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: package/contents/ui/main.qml:56
+#, kde-format
+msgid "%1 is running"
+msgstr "%1 פועל"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "%1 not running"
+msgstr "%1 לא פועל"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid "Remaining time left: %1 second"
+msgid_plural "Remaining time left: %1 seconds"
+msgstr[0] "שניה אחת נותרה"
+msgstr[1] "נותרו %1 שניות"
+
+#: package/contents/ui/main.qml:62
+#, kde-format
+msgid ""
+"Use mouse wheel to change digits or choose from predefined timers in the "
+"context menu"
+msgstr ""
+"השתמש בגלגלת כדי לשנות את הספרות או כדי לבחור זמן מוגדר מראש בתפריט ההקשר"
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Timer"
+msgstr "טימר"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Timer finished"
+msgstr "טיימר הסתיים"
+
+#: package/contents/ui/main.qml:137
+#, fuzzy, kde-format
+#| msgid "&Start"
+msgctxt "@action"
+msgid "&Start"
+msgstr "התחל"
+
+#: package/contents/ui/main.qml:138
+#, fuzzy, kde-format
+#| msgid "S&top"
+msgctxt "@action"
+msgid "S&top"
+msgstr "עצור"
+
+#: package/contents/ui/main.qml:139
+#, fuzzy, kde-format
+#| msgid "&Reset"
+msgctxt "@action"
+msgid "&Reset"
+msgstr "אפס"
+
+#~ msgid "Timer is running"
+#~ msgstr "טיימר פועל"
+
+#, fuzzy
+#~| msgid "Run command"
+#~ msgctxt "@title:group"
+#~ msgid "Run Command"
+#~ msgstr "הרץ פקודה"
+
+#, fuzzy
+#~| msgid "Command:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Command:"
+#~ msgstr "פקודה:"
+
+#, fuzzy
+#~| msgid "Title:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Title:"
+#~ msgstr "כותרת:"
+
+#, fuzzy
+#~| msgid "Text:"
+#~ msgctxt "@label:textbox"
+#~ msgid "Text:"
+#~ msgstr "טקסט:"
