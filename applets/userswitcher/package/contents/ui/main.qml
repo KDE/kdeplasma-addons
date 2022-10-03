@@ -73,7 +73,7 @@ Item {
                 id: icon
 
                 anchors.verticalCenter: parent.verticalCenter
-                height: compactRoot.height - PlasmaCore.Units.smallSpacing * 2
+                height: compactRoot.height - Math.round(PlasmaCore.Units.smallSpacing / 2)
                 width: height
 
                 border.color: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {alpha: 0.4*255})
