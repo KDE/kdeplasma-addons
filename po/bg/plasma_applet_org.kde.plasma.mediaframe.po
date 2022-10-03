@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-24 00:46+0000\n"
+"POT-Creation-Date: 2022-10-03 00:49+0000\n"
 "PO-Revision-Date: 2022-02-12 16:05+0100\n"
 "Last-Translator: mkkDr2010 <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -30,64 +30,64 @@ msgctxt "@title"
 msgid "Paths"
 msgstr "Пътища"
 
-#: package/contents/ui/ConfigGeneral.qml:49
+#: package/contents/ui/ConfigGeneral.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "Сменяне на снимката всеки:"
 
-#: package/contents/ui/ConfigGeneral.qml:66
+#: package/contents/ui/ConfigGeneral.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "Часове"
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: package/contents/ui/ConfigGeneral.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "Минути"
 
-#: package/contents/ui/ConfigGeneral.qml:94
+#: package/contents/ui/ConfigGeneral.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "Секунди"
 
-#: package/contents/ui/ConfigGeneral.qml:104
+#: package/contents/ui/ConfigGeneral.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Режим на запълване на изображение:"
 
-#: package/contents/ui/ConfigGeneral.qml:111
+#: package/contents/ui/ConfigGeneral.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Разтегнато"
 
-#: package/contents/ui/ConfigGeneral.qml:112
+#: package/contents/ui/ConfigGeneral.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Изображението се мащабира, за да се побере в рамката"
 
-#: package/contents/ui/ConfigGeneral.qml:116
+#: package/contents/ui/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Запазване на пропорциите"
 
-#: package/contents/ui/ConfigGeneral.qml:117
+#: package/contents/ui/ConfigGeneral.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr ""
 "Изображението се мащабира равномерно, за да се побере, без да се изрязва"
 
-#: package/contents/ui/ConfigGeneral.qml:121
+#: package/contents/ui/ConfigGeneral.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Запазване на пропорциите с изрязване"
 
-#: package/contents/ui/ConfigGeneral.qml:122
+#: package/contents/ui/ConfigGeneral.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
@@ -95,81 +95,75 @@ msgstr ""
 "Изображението се мащабира равномерно, за да се побере, като се изрязва, ако "
 "е необходимо"
 
-#: package/contents/ui/ConfigGeneral.qml:126
+#: package/contents/ui/ConfigGeneral.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Плочки"
 
-#: package/contents/ui/ConfigGeneral.qml:127
+#: package/contents/ui/ConfigGeneral.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Изображението се повтаря хоризонтално и вертикално"
 
-#: package/contents/ui/ConfigGeneral.qml:131
+#: package/contents/ui/ConfigGeneral.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Плочки вертикално"
 
-#: package/contents/ui/ConfigGeneral.qml:132
+#: package/contents/ui/ConfigGeneral.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr ""
 "Изображението се разгъва хоризонтално и се разпределя като плочки вертикално"
 
-#: package/contents/ui/ConfigGeneral.qml:136
+#: package/contents/ui/ConfigGeneral.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Плочки хоризонтално"
 
-#: package/contents/ui/ConfigGeneral.qml:137
+#: package/contents/ui/ConfigGeneral.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr ""
 "Изображението се разгъва вертикално и се разпределя като плочки хоризонтално"
 
-#: package/contents/ui/ConfigGeneral.qml:141
+#: package/contents/ui/ConfigGeneral.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Подложка"
 
-#: package/contents/ui/ConfigGeneral.qml:142
+#: package/contents/ui/ConfigGeneral.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Изображението не се трансформира"
 
-#: package/contents/ui/ConfigGeneral.qml:187
+#: package/contents/ui/ConfigGeneral.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Общи:"
 
-#: package/contents/ui/ConfigGeneral.qml:188
+#: package/contents/ui/ConfigGeneral.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Случаен ред"
 
-#: package/contents/ui/ConfigGeneral.qml:193
+#: package/contents/ui/ConfigGeneral.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "Пауза на слайдшоуто, когато курсорът е над изображението"
 
-#: package/contents/ui/ConfigGeneral.qml:198
-#, kde-format
-msgctxt "@option:check"
-msgid "Show background frame"
-msgstr "Показване на фонова рамка"
-
-#: package/contents/ui/ConfigGeneral.qml:203
+#: package/contents/ui/ConfigGeneral.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
@@ -211,3 +205,7 @@ msgstr "Добавяне на файлове…"
 msgctxt "@action:button"
 msgid "Configure…"
 msgstr "Конфигуриране…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show background frame"
+#~ msgstr "Показване на фонова рамка"

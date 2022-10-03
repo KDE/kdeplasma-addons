@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-24 00:46+0000\n"
+"POT-Creation-Date: 2022-10-03 00:49+0000\n"
 "PO-Revision-Date: 2022-07-24 15:17+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -30,142 +30,136 @@ msgctxt "@title"
 msgid "Paths"
 msgstr "Pfade"
 
-#: package/contents/ui/ConfigGeneral.qml:49
+#: package/contents/ui/ConfigGeneral.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "Bild wechseln alle:"
 
-#: package/contents/ui/ConfigGeneral.qml:66
+#: package/contents/ui/ConfigGeneral.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "Stunden"
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: package/contents/ui/ConfigGeneral.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "Minuten"
 
-#: package/contents/ui/ConfigGeneral.qml:94
+#: package/contents/ui/ConfigGeneral.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "Sekunden"
 
-#: package/contents/ui/ConfigGeneral.qml:104
+#: package/contents/ui/ConfigGeneral.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Bildfüllmodus:"
 
-#: package/contents/ui/ConfigGeneral.qml:111
+#: package/contents/ui/ConfigGeneral.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Strecken"
 
-#: package/contents/ui/ConfigGeneral.qml:112
+#: package/contents/ui/ConfigGeneral.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Das Bild wird skaliert, sodass es in den Rahmen passt"
 
-#: package/contents/ui/ConfigGeneral.qml:116
+#: package/contents/ui/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Seitenverhältnis beibehalten und einpassen"
 
-#: package/contents/ui/ConfigGeneral.qml:117
+#: package/contents/ui/ConfigGeneral.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "Das Bild wird gleichmäßig skaliert, sodass es ohne Zuschneiden passt"
 
-#: package/contents/ui/ConfigGeneral.qml:121
+#: package/contents/ui/ConfigGeneral.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Seitenverhältnis beibehalten und zuschneiden"
 
-#: package/contents/ui/ConfigGeneral.qml:122
+#: package/contents/ui/ConfigGeneral.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "Das Bild wird gleichmäßig skaliert und wenn nötig zugeschnitten"
 
-#: package/contents/ui/ConfigGeneral.qml:126
+#: package/contents/ui/ConfigGeneral.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Kacheln"
 
-#: package/contents/ui/ConfigGeneral.qml:127
+#: package/contents/ui/ConfigGeneral.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Das Bild wird waagerecht und senkrecht dupliziert"
 
-#: package/contents/ui/ConfigGeneral.qml:131
+#: package/contents/ui/ConfigGeneral.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Senkrecht kacheln"
 
-#: package/contents/ui/ConfigGeneral.qml:132
+#: package/contents/ui/ConfigGeneral.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Das Bild wird waagerecht gestreckt und senkrecht gekachelt"
 
-#: package/contents/ui/ConfigGeneral.qml:136
+#: package/contents/ui/ConfigGeneral.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Waagerecht kacheln"
 
-#: package/contents/ui/ConfigGeneral.qml:137
+#: package/contents/ui/ConfigGeneral.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Das Bild wird senkrecht gestreckt und waagerecht gekachelt"
 
-#: package/contents/ui/ConfigGeneral.qml:141
+#: package/contents/ui/ConfigGeneral.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Original"
 
-#: package/contents/ui/ConfigGeneral.qml:142
+#: package/contents/ui/ConfigGeneral.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Das Bild wird nicht verändert"
 
-#: package/contents/ui/ConfigGeneral.qml:187
+#: package/contents/ui/ConfigGeneral.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Allgemein:"
 
-#: package/contents/ui/ConfigGeneral.qml:188
+#: package/contents/ui/ConfigGeneral.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Zufällige Reihenfolge"
 
-#: package/contents/ui/ConfigGeneral.qml:193
+#: package/contents/ui/ConfigGeneral.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr ""
 "Präsentation anhalten, wenn der Mauszeiger sich über einem Bild befindet"
 
-#: package/contents/ui/ConfigGeneral.qml:198
-#, kde-format
-msgctxt "@option:check"
-msgid "Show background frame"
-msgstr "Hintergrundrahmen anzeigen"
-
-#: package/contents/ui/ConfigGeneral.qml:203
+#: package/contents/ui/ConfigGeneral.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
@@ -205,6 +199,10 @@ msgstr "Dateien hinzufügen ..."
 msgctxt "@action:button"
 msgid "Configure…"
 msgstr "Einrichten ..."
+
+#~ msgctxt "@option:check"
+#~ msgid "Show background frame"
+#~ msgstr "Hintergrundrahmen anzeigen"
 
 #~ msgctxt "@label:listbox"
 #~ msgid "Paths:"
