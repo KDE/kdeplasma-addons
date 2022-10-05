@@ -1,43 +1,35 @@
 # translation of plasma_applet_org.kde.plasma.diskquota.po Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2015, 2016.
+# Matej Mrenica <matejm98mthw@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.diskquota\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-31 00:48+0000\n"
-"PO-Revision-Date: 2016-11-20 19:59+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
-"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"PO-Revision-Date: 2022-10-04 17:53+0200\n"
+"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
+"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.08.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: package/contents/ui/main.qml:77
-#, fuzzy, kde-format
-#| msgid "No quota restrictions found."
+#, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
-msgstr "Nenašli sa žiadne obmedzenia kvóty."
+msgstr "Nenašli sa žiadne kvóty"
 
 #: package/contents/ui/main.qml:77
-#, fuzzy, kde-format
-#| msgid ""
-#| "Quota tool not found.\n"
-#| "\n"
-#| "Please install 'quota'."
+#, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
-msgstr ""
-"Nástroj na kvótu nenájdený.\n"
-"\n"
-"Prosím nainštalujte 'quota'."
+msgstr "Nástroj na kvóty nenájdený"
 
 #: package/contents/ui/main.qml:78
-#, fuzzy, kde-format
-#| msgid "Please install 'quota'"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
 msgstr "Prosím nainštalujte 'quota'"

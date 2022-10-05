@@ -1,19 +1,19 @@
 # translation of plasma_wallpaper_org.kde.potd.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2018.
-# Matej Mrenica <matejm98mthw@gmail.com>, 2019.
+# Matej Mrenica <matejm98mthw@gmail.com>, 2019, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-28 00:51+0000\n"
-"PO-Revision-Date: 2019-08-17 11:09+0200\n"
+"PO-Revision-Date: 2022-10-04 17:51+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.07.90\n"
+"X-Generator: Lokalize 22.08.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: package/contents/ui/config.qml:48
@@ -26,7 +26,7 @@ msgstr "Poskytovateľ:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
-msgstr ""
+msgstr "Aktualizácia pri používaní meraného sieťového pripojenia"
 
 #: package/contents/ui/config.qml:76
 #, kde-format
@@ -194,7 +194,7 @@ msgstr "Galaxia"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tabliss"
-msgstr ""
+msgstr "Tabliss"
 
 #: package/contents/ui/config.qml:214
 #, kde-format
@@ -248,113 +248,115 @@ msgstr "Výber farby pozadia"
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
-msgstr ""
+msgstr "Dnešný obrázok:"
 
 #: package/contents/ui/config.qml:283
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
-msgstr ""
+msgstr "Názov:"
 
 #: package/contents/ui/config.qml:303
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
-msgstr ""
+msgstr "Autor:"
 
 #: package/contents/ui/config.qml:329
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Otvoriť priečinok s obsahom"
 
 #: package/contents/ui/config.qml:333
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
-msgstr ""
+msgstr "Otvoriť cieľový priečinok, do ktorého bol uložený obrázok tapety."
 
 #: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
-msgstr ""
+msgstr "Dnešný obrázok"
 
 #: package/contents/ui/WallpaperDelegate.qml:143
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
-msgstr ""
+msgstr "Načítavam"
 
 #: package/contents/ui/WallpaperDelegate.qml:144
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
-msgstr ""
+msgstr "Nedostupné"
 
 #: package/contents/ui/WallpaperDelegate.qml:145
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
 msgstr ""
+"%1 Autor: %2. Kliknutím pravým tlačidlom myši na obrázok zobrazíte ďalšie "
+"akcie."
 
 #: package/contents/ui/WallpaperDelegate.qml:146
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
-msgstr ""
+msgstr "Tapeta sa načítava z internetu."
 
 #: package/contents/ui/WallpaperDelegate.qml:147
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
-msgstr ""
+msgstr "Nepodarilo sa načítať tapetu z internetu."
 
 #: package/contents/ui/WallpaperPreview.qml:50
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
-msgstr ""
+msgstr "Uložiť obrázok ako…"
 
 #: package/contents/ui/WallpaperPreview.qml:53
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
-msgstr ""
+msgstr "Uloženie dnešného obrázka na miestny disk"
 
 #: package/contents/ui/WallpaperPreview.qml:59
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
-msgstr ""
+msgstr "Otvoriť odkaz v prehliadači..."
 
 #: package/contents/ui/WallpaperPreview.qml:62
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr ""
+msgstr "Otvoriť webovú stránku s dnešným obrázkom v predvolenom prehliadači"
 
 #: plugins/potdbackend.cpp:221
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
-msgstr ""
+msgstr "Uložiť dnešný obrázok"
 
 #: plugins/potdbackend.cpp:223
 #, kde-format
 msgctxt "@label:listbox Template for file dialog"
 msgid "JPEG image (*.jpeg *.jpg *.jpe)"
-msgstr ""
+msgstr "Obrázok JPEG (*jpeg *.jpg *.jpe)"
 
 #: plugins/potdbackend.cpp:240
 #, kde-format
 msgctxt "@info:status after a save action"
 msgid "The image was not saved."
-msgstr ""
+msgstr "Obrázok nebol uložený."
 
 #: plugins/potdbackend.cpp:246
 #, kde-format
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
-msgstr ""
+msgstr "Obrázok bol uložený ako <a href=\"%1\">%2</a>"
