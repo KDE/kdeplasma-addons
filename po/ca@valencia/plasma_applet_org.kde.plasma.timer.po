@@ -180,7 +180,7 @@ msgstr "El temporitzador ha finalitzat"
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
-msgstr "&Inicia"
+msgstr "I&nicia"
 
 #: package/contents/ui/main.qml:138
 #, kde-format
