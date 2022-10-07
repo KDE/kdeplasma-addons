@@ -128,7 +128,3 @@ msgstr "ロックスクリーン"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Log Out"
 msgstr ""
-
-#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
-#~ msgid "Leave…"
-#~ msgstr "終了…"

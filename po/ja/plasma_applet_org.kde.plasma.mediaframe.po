@@ -196,7 +196,3 @@ msgstr "ファイルを追加…"
 msgctxt "@action:button"
 msgid "Configure…"
 msgstr "設定…"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show background frame"
-#~ msgstr "背景フレームを表示"

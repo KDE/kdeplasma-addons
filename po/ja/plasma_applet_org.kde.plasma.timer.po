@@ -193,6 +193,3 @@ msgstr "終了(&T)"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "リセット(&R)"
-
-#~ msgid "Timer is running"
-#~ msgstr "タイマーは動いています"

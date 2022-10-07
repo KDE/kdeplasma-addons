@@ -74,6 +74,3 @@ msgstr "定義する単語を入力してください"
 #| msgid "Available dictionaries:"
 msgid "Unable to load definition"
 msgstr "利用可能な辞書:"
-
-#~ msgid "Looking up definition…"
-#~ msgstr "定義を検索しています…"
