@@ -60,12 +60,14 @@ Item {
     readonly property real displayTop: (height - 4*dotSize-3*PlasmaCore.Units.smallSpacing)/2
     readonly property real displayLeft: (width - dots*dotSize-(dots-1)*PlasmaCore.Units.smallSpacing)/2
 
-    /* displaying calendar after clicking binary clock applet */
+    property bool wasExpanded: false
+
     MouseArea {
-        id:           mouseArea
+        id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        onClicked:    plasmoid.expanded = !plasmoid.expanded
+        onPressed: wasExpanded = plasmoid.expanded
+        onClicked: plasmoid.expanded = !wasExpanded
     }
 
     /* hours */
