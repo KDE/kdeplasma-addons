@@ -280,11 +280,14 @@ Item {
         }
     }
 
+    property bool wasExpanded: false
+
     MouseArea {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: plasmoid.expanded = !plasmoid.expanded
+        onPressed: wasExpanded = Plasmoid.expanded
+        onClicked: Plasmoid.expanded = !wasExpanded
     }
 
     Text {
