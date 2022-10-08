@@ -42,6 +42,9 @@ Item {
         Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
         Layout.minimumHeight: PlasmaCore.Units.gridUnit * 20
 
+        PlasmaCore.ColorScope.inherit: false
+        PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
+
         today: currentDateTime
     }
 }
