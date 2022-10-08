@@ -198,7 +198,3 @@ msgstr "Přidat soubory…"
 msgctxt "@action:button"
 msgid "Configure…"
 msgstr "Nastavit…"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show background frame"
-#~ msgstr "Zobrazit rámec pozadí"
