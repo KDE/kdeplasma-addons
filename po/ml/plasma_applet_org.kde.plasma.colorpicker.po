@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"POT-Creation-Date: 2022-10-09 00:49+0000\n"
 "PO-Revision-Date: 2019-03-16 03:30+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc."
@@ -96,7 +96,13 @@ msgctxt "@action:button"
 msgid "Pick Color"
 msgstr ""
 
-#: package/contents/ui/main.qml:446
+#: package/contents/ui/main.qml:459
+#, kde-format
+msgctxt "@info:progress just copied a color to clipboard"
+msgid "Copied!"
+msgstr ""
+
+#: package/contents/ui/main.qml:479
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
