@@ -28,6 +28,7 @@ ListView {
 
         source: model.icon
         active: index == iconsListView.currentIndex
+        usesPlasmaTheme: false
 
         TapHandler {
             onSingleTapped: {
