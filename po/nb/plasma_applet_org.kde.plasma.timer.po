@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"POT-Creation-Date: 2022-10-01 00:49+0000\n"
 "PO-Revision-Date: 2014-09-29 18:50+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -37,20 +37,20 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:110
+#: package/contents/ui/CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:110
+#: package/contents/ui/CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:182
-#: package/contents/ui/CompactRepresentation.qml:199
+#: package/contents/ui/CompactRepresentation.qml:189
+#: package/contents/ui/CompactRepresentation.qml:206
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"

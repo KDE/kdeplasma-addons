@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"POT-Creation-Date: 2022-10-09 00:49+0000\n"
 "PO-Revision-Date: 2010-06-10 15:26+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -97,7 +97,13 @@ msgctxt "@action:button"
 msgid "Pick Color"
 msgstr ""
 
-#: package/contents/ui/main.qml:446
+#: package/contents/ui/main.qml:459
+#, kde-format
+msgctxt "@info:progress just copied a color to clipboard"
+msgid "Copied!"
+msgstr ""
+
+#: package/contents/ui/main.qml:479
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
