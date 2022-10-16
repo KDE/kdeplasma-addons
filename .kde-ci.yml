@@ -32,3 +32,4 @@ Dependencies:
     'plasma/plasma-workspace': '@same'
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD']
+  cppcheck-ignore-files: ['templates/']
