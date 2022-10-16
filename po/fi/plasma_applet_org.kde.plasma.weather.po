@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-13 00:46+0000\n"
-"PO-Revision-Date: 2022-01-11 22:40+0200\n"
+"PO-Revision-Date: 2022-08-22 21:54+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:26+0000\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 20.12.0\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -392,7 +392,7 @@ msgstr "Säätiedon nouto kohteelle %1 aikakatkaistu."
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr ""
+msgstr "Aseta %1 napsauttamalla"
 
 #: package/contents/ui/main.qml:390
 #, kde-format

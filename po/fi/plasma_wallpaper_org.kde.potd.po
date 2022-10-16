@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-28 00:51+0000\n"
-"PO-Revision-Date: 2022-04-04 19:29+0300\n"
+"PO-Revision-Date: 2022-08-22 21:55+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 20.12.0\n"
 
 #: package/contents/ui/config.qml:48
 #, kde-format
@@ -27,7 +27,7 @@ msgstr "Tarjoaja:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
-msgstr ""
+msgstr "Päivitä käytettäessä mitattua verkkoyhteyttä"
 
 #: package/contents/ui/config.qml:76
 #, kde-format
