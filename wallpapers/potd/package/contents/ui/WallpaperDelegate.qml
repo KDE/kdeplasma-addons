@@ -160,7 +160,6 @@ FocusScope {
                         });
                     } else {
                         parent.Drag.active = false;
-                        parent.Drag.imageSource = "";
                     }
                 }
 
