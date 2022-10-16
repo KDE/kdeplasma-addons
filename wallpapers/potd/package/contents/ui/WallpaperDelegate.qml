@@ -143,6 +143,7 @@ FocusScope {
                 fillMode: wallpaper.configuration.FillMode || Image.PreserveAspectCrop
                 smooth: true
 
+                Drag.active: dragHandler.active
                 Drag.dragType: Drag.Automatic
                 Drag.supportedActions: Qt.CopyAction
                 Drag.mimeData: {
@@ -152,15 +153,6 @@ FocusScope {
 
                 DragHandler {
                     id: dragHandler
-
-                    onActiveChanged: if (active) {
-                        parent.grabToImage((result) => {
-                            parent.Drag.imageSource = result.url;
-                            parent.Drag.active = dragHandler.active;
-                        });
-                    } else {
-                        parent.Drag.active = false;
-                    }
                 }
 
                 // CachedProvider will load the image from cache, but we would like to show the real loading status.
