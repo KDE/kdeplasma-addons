@@ -1,4 +1,5 @@
 add_library(profiles_utility_static STATIC profilesmodel.cpp)
+target_compile_definitions(profiles_utility_static PRIVATE -DTRANSLATION_DOMAIN="plasma_addons_profiles_utility")
 target_link_libraries(profiles_utility_static PRIVATE Qt::Core KF5::I18n KF5::CoreAddons KF5::ConfigCore KF5::KIOGui)
 target_include_directories(profiles_utility_static
     PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
