@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-09 00:49+0000\n"
+"POT-Creation-Date: 2022-10-17 00:48+0000\n"
 "PO-Revision-Date: 2022-10-09 06:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -63,50 +63,48 @@ msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Panoya Kopyala"
 
-#: package/contents/ui/main.qml:108
+#: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Renk Penceresini Aç"
 
-#: package/contents/ui/main.qml:109
+#: package/contents/ui/main.qml:106
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Geçmişi Temizle"
 
-#: package/contents/ui/main.qml:128
+#: package/contents/ui/main.qml:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Bir renk seç"
 
-#: package/contents/ui/main.qml:193
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Color options"
-msgstr "Renk seçenekleri"
-
-#: package/contents/ui/main.qml:288
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Renk yok"
 
-#: package/contents/ui/main.qml:292
+#: package/contents/ui/main.qml:203
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Renk Seç"
 
-#: package/contents/ui/main.qml:459
+#: package/contents/ui/main.qml:370
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopyalandı!"
 
-#: package/contents/ui/main.qml:479
+#: package/contents/ui/main.qml:390
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Sil"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Color options"
+#~ msgstr "Renk seçenekleri"

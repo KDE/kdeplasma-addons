@@ -62,7 +62,7 @@ msgstr "Suprimix"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
-msgstr "Introduïu ací la paraula que cal definir…"
+msgstr "Introduïu ací la paraula que s'ha de definir…"
 
 #: package/contents/ui/main.qml:120
 #, kde-format

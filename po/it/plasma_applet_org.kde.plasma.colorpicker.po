@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-09 00:49+0000\n"
+"POT-Creation-Date: 2022-10-17 00:48+0000\n"
 "PO-Revision-Date: 2022-10-09 19:02+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -61,53 +61,51 @@ msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Copia negli appunti"
 
-#: package/contents/ui/main.qml:108
+#: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Apri finestra dei colori"
 
-#: package/contents/ui/main.qml:109
+#: package/contents/ui/main.qml:106
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Cancella cronologia"
 
-#: package/contents/ui/main.qml:128
+#: package/contents/ui/main.qml:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Scegli un colore"
 
-#: package/contents/ui/main.qml:193
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Color options"
-msgstr "Opzioni di colore"
-
-#: package/contents/ui/main.qml:288
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Nessun colore"
 
-#: package/contents/ui/main.qml:292
+#: package/contents/ui/main.qml:203
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Scegli colore"
 
-#: package/contents/ui/main.qml:459
+#: package/contents/ui/main.qml:370
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copiato!"
 
-#: package/contents/ui/main.qml:479
+#: package/contents/ui/main.qml:390
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Elimina"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Color options"
+#~ msgstr "Opzioni di colore"
 
 #~ msgid "Default Format"
 #~ msgstr "Formato predefinito"

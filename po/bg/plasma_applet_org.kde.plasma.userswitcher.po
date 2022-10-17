@@ -128,7 +128,3 @@ msgstr "Заключване на екрана"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Log Out"
 msgstr "Излизане от сесия"
-
-#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
-#~ msgid "Leave…"
-#~ msgstr "Напускане…"

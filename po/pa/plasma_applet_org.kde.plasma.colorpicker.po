@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-09 00:49+0000\n"
+"POT-Creation-Date: 2022-10-17 00:48+0000\n"
 "PO-Revision-Date: 2010-11-21 09:04+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjab-l10n@list.sf.net>\n"
@@ -62,56 +62,55 @@ msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr ""
 
-#: package/contents/ui/main.qml:108
+#: package/contents/ui/main.qml:105
 #, fuzzy, kde-format
 #| msgid "Copy Color Value"
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "ਰੰਗ ਮੁੱਲ ਕਾਪੀ ਕਰੋ"
 
-#: package/contents/ui/main.qml:109
+#: package/contents/ui/main.qml:106
 #, fuzzy, kde-format
 #| msgid "Clear History"
 msgctxt "@action"
 msgid "Clear History"
 msgstr "ਅਤੀਤ ਸਾਫ਼ ਕਰੋ"
 
-#: package/contents/ui/main.qml:128
+#: package/contents/ui/main.qml:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr ""
 
-#: package/contents/ui/main.qml:193
-#, fuzzy, kde-format
-#| msgid "Color Options"
-msgctxt "@info:tooltip"
-msgid "Color options"
-msgstr "ਰੰਗ ਚੋਣਾਂ"
-
-#: package/contents/ui/main.qml:288
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr ""
 
-#: package/contents/ui/main.qml:292
+#: package/contents/ui/main.qml:203
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr ""
 
-#: package/contents/ui/main.qml:459
+#: package/contents/ui/main.qml:370
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:479
+#: package/contents/ui/main.qml:390
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Color Options"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Color options"
+#~ msgstr "ਰੰਗ ਚੋਣਾਂ"
 
 #~ msgid "Default Format"
 #~ msgstr "ਡਿਫਾਲਟ ਫਾਰਮੈਟ"
