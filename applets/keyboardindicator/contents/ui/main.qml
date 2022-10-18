@@ -1,5 +1,6 @@
 /*
  *    SPDX-FileCopyrightText: 2018 Aleix Pol Gonzalez <aleixpol@kde.org>
+ *    SPDX-FileCopyrightText: 2022 ivan tkachenko <me@ratijas.tk>
  *
  *    SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -71,9 +72,9 @@ Item {
         Accessible.description: Plasmoid.toolTipSubText
         Accessible.role: Accessible.Button
 
-        onClicked: {
-            plasmoid.expanded = !plasmoid.expanded
-        }
+        property bool wasExpanded: false
+        onPressed: wasExpanded = Plasmoid.expanded
+        onClicked: Plasmoid.expanded = !wasExpanded
 
         PlasmaCore.IconItem {
             anchors.fill: parent
