@@ -11,7 +11,7 @@ import org.kde.plasma.configuration 2.0
 ConfigModel {
     ConfigCategory {
          name: i18nc("@title", "Keys")
-         icon: "input-keyboard"
+         icon: "input-caps-on"
          source: "configAppearance.qml"
     }
 }

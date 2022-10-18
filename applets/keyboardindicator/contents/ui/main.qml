@@ -56,28 +56,30 @@ Item {
             if (data && data.Locked)
                 return icon(source)
         }
-        return "input-keyboard"
+        return "input-caps-on"
     }
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
-    Plasmoid.compactRepresentation: PlasmaCore.IconItem {
-        source: plasmoid.icon
-        active: compactMouse.containsMouse
 
-        MouseArea {
-            id: compactMouse
+    Plasmoid.compactRepresentation: MouseArea {
+        id: compactMouse
+
+        activeFocusOnTab: true
+        hoverEnabled: true
+
+        Accessible.name: Plasmoid.title
+        Accessible.description: Plasmoid.toolTipSubText
+        Accessible.role: Accessible.Button
+
+        onClicked: {
+            plasmoid.expanded = !plasmoid.expanded
+        }
+
+        PlasmaCore.IconItem {
             anchors.fill: parent
-
-            activeFocusOnTab: true
-            hoverEnabled: true
-
-            Accessible.name: Plasmoid.title
-            Accessible.description: Plasmoid.toolTipSubText
-            Accessible.role: Accessible.Button
-
-            onClicked: {
-                plasmoid.expanded = !plasmoid.expanded
-            }
+            source: plasmoid.icon
+            active: compactMouse.containsMouse
+            enabled: root.lockedCount > 0
         }
     }
 
@@ -93,7 +95,7 @@ Item {
         }
     }
 
-    Plasmoid.status: lockedCount>0 ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
+    Plasmoid.status: root.lockedCount > 0 ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
     Plasmoid.toolTipSubText: {
         var ret = "";
         var found = false;
