@@ -1,17 +1,18 @@
 /*
-*  SPDX-FileCopyrightText: 2018 Aleix Pol Gonzalez <aleixpol@kde.org>
-*
-*  SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ *  SPDX-FileCopyrightText: 2018 Aleix Pol Gonzalez <aleixpol@kde.org>
+ *
+ *  SPDX-License-Identifier: GPL-2.0-or-later
+ */
 
-import QtQuick 2.2
-import QtQuick.Controls 2.2 as Controls
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as Controls
 
-import org.kde.kirigami 2.19 as Kirigami
+import org.kde.kirigami 2.20 as Kirigami
 
 Kirigami.FormLayout {
     id: layout
-    signal configurationChanged
+
+    signal configurationChanged()
 
     property var cfg_key: []
 
