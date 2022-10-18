@@ -281,7 +281,8 @@ QQC2.Control {
                 verticalAlignment: TextEdit.AlignVCenter;
                 readOnly: true;
 
-                Accessible.description: text
+                Accessible.name: text
+                Accessible.description: i18nc("@label calculation result", "Result")
             }
         }
 
