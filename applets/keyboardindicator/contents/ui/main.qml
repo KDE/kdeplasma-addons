@@ -19,7 +19,7 @@ Item {
     readonly property QtObject source: PlasmaCore.DataSource {
         id: keystateSource
         engine: "keystate"
-        connectedSources: plasmoid.configuration.key
+        connectedSources: Plasmoid.configuration.key
     }
 
     function translate(identifier) {
@@ -78,7 +78,7 @@ Item {
 
         PlasmaCore.IconItem {
             anchors.fill: parent
-            source: plasmoid.icon
+            source: Plasmoid.icon
             active: compactMouse.containsMouse
             enabled: root.lockedCount > 0
         }
@@ -91,8 +91,8 @@ Item {
         PlasmaExtras.PlaceholderMessage {
             anchors.centerIn: parent
             width: parent.width - (PlasmaCore.Units.gridUnit * 4)
-            iconName: plasmoid.icon
-            text: plasmoid.toolTipSubText
+            iconName: Plasmoid.icon
+            text: Plasmoid.toolTipSubText
         }
     }
 
