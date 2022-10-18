@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"POT-Creation-Date: 2022-10-18 00:46+0000\n"
 "PO-Revision-Date: 2018-04-22 09:12+0100\n"
 "Last-Translator: Adrian Chaves <adrian@chaves.io>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
@@ -56,7 +56,7 @@ msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Mostrar o historial"
 
-#: package/contents/ui/logic.js:56
+#: package/contents/ui/logic.js:58
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"

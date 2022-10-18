@@ -1,0 +1,101 @@
+# Translation of plasma_applet_org.kde.plasma.webbrowser.po to Catalan (Valencian)
+# Copyright (C) 2022 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Josep M. Ferrer <txemaq@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"PO-Revision-Date: 2022-10-17 08:37+0200\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca@valencia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.12.0\n"
+
+#: package/contents/config/config.qml:12
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "General"
+
+#: package/contents/ui/ConfigGeneral.qml:19
+#, kde-format
+msgctxt "@title:group"
+msgid "Content scaling:"
+msgstr "Canvieu l'escala del contingut:"
+
+#: package/contents/ui/ConfigGeneral.qml:23
+#, kde-format
+msgctxt "@option:radio"
+msgid "Fixed scale:"
+msgstr "Escala fixa:"
+
+#: package/contents/ui/ConfigGeneral.qml:57
+#, kde-format
+msgctxt "@option:radio"
+msgid "Automatic scaling if width is below"
+msgstr "Canvia l'escala automàticament si l'amplària és inferior a"
+
+#: package/contents/ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Go Back"
+msgstr "Retrocedix"
+
+#: package/contents/ui/main.qml:32
+#, kde-format
+msgctxt "@action:button"
+msgid "Go Forward"
+msgstr "Avança"
+
+#: package/contents/ui/main.qml:51
+#, kde-format
+msgctxt "@info"
+msgid "Type a URL"
+msgstr "Teclegeu un URL"
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgctxt "@action:button"
+msgid "Stop Loading This Page"
+msgstr "Para la càrrega d'esta pàgina"
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgctxt "@action:button"
+msgid "Reload This Page"
+msgstr "Torna a carregar esta pàgina"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Link in Browser"
+msgstr "Obri l'enllaç en un navegador"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy Link Address"
+msgstr "Copia l'adreça de l'enllaç"
+
+#: package/contents/ui/main.qml:205
+#, kde-format
+msgctxt "An unwanted popup was blocked"
+msgid "Popup blocked"
+msgstr "S'ha blocat la finestra emergent"
+
+#: package/contents/ui/main.qml:206
+#, kde-format
+msgid ""
+"Click here to open the following blocked popup:\n"
+"%1"
+msgstr ""
+"Feu clic ací per a obrir la següent finestra emergent bloquejada:\n"
+"%1"

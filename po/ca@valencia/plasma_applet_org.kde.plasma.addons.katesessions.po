@@ -46,12 +46,3 @@ msgstr "Sessions de Kate"
 #, kde-format
 msgid "Search…"
 msgstr "Busca…"
-
-#~ msgid "Delete session"
-#~ msgstr "Elimina la sessió"
-
-#~ msgid "Start Kate (no arguments)"
-#~ msgstr "Inicia Kate (sense arguments)"
-
-#~ msgid "New Kate Session"
-#~ msgstr "Sessió nova de Kate"

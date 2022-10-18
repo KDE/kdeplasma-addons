@@ -1,5 +1,5 @@
 # Translation for plasma_applet_org.kde.plasma.katesessions.po to Euskara/Basque (eu).
-# Copyright (C) 2018, Free Software Foundation.
+# Copyright (C) 2018 Free Software Foundation.
 # Copyright (C) 2019-2022 This file is copyright:
 # This package is distributed under the same license as the kate package.
 # KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
@@ -8,7 +8,7 @@
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_org.kde.plasma.katesessions\n"
+"Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:48+0000\n"
 "PO-Revision-Date: 2022-08-24 22:49+0200\n"

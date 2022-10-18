@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"POT-Creation-Date: 2022-10-18 00:46+0000\n"
 "PO-Revision-Date: 2019-06-16 07:52+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -52,7 +52,7 @@ msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Tampilkan histori"
 
-#: package/contents/ui/logic.js:56
+#: package/contents/ui/logic.js:58
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"

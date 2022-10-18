@@ -1,0 +1,93 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"PO-Revision-Date: 2022-10-17 10:16+0100\n"
+"Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
+"Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: package/contents/config/config.qml:12
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Geral"
+
+#: package/contents/ui/ConfigGeneral.qml:19
+#, kde-format
+msgctxt "@title:group"
+msgid "Content scaling:"
+msgstr "Escala do conteúdo:"
+
+#: package/contents/ui/ConfigGeneral.qml:23
+#, kde-format
+msgctxt "@option:radio"
+msgid "Fixed scale:"
+msgstr "Escala fixa:"
+
+#: package/contents/ui/ConfigGeneral.qml:57
+#, kde-format
+msgctxt "@option:radio"
+msgid "Automatic scaling if width is below"
+msgstr "Escala automática se a largura for menor que"
+
+#: package/contents/ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Go Back"
+msgstr "Recuar"
+
+#: package/contents/ui/main.qml:32
+#, kde-format
+msgctxt "@action:button"
+msgid "Go Forward"
+msgstr "Avançar"
+
+#: package/contents/ui/main.qml:51
+#, kde-format
+msgctxt "@info"
+msgid "Type a URL"
+msgstr "Escrever um URL"
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgctxt "@action:button"
+msgid "Stop Loading This Page"
+msgstr "Parar o Carregamento desta Página"
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgctxt "@action:button"
+msgid "Reload This Page"
+msgstr "Recarregar esta Página"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Link in Browser"
+msgstr "Abrir a Ligação no Navegador"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy Link Address"
+msgstr "Copiar o Endereço da Ligação"
+
+#: package/contents/ui/main.qml:205
+#, kde-format
+msgctxt "An unwanted popup was blocked"
+msgid "Popup blocked"
+msgstr "Janela bloqueada"
+
+#: package/contents/ui/main.qml:206
+#, kde-format
+msgid ""
+"Click here to open the following blocked popup:\n"
+"%1"
+msgstr ""
+"Carregue aqui para abrir a seguinte página bloqueada:\n"
+"%1"
