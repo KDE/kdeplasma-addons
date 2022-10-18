@@ -124,6 +124,8 @@
         "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
+    "Keywords": "CapsLock;NumLock;",
+    "Keywords[x-test]": "xxCapsLockxx;xxNumLockxx;",
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-NotificationArea": "true",
