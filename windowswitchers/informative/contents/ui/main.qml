@@ -9,7 +9,6 @@
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kwin 2.0 as KWin
 
 KWin.Switcher {
@@ -52,12 +51,13 @@ KWin.Switcher {
                     id: delegateItem
                     width: listView.width
                     height: listView.rowHeight
-                    QIconItem {
+                    PlasmaCore.IconItem {
                         id: iconItem
-                        icon: model.icon
+                        source: model.icon
+                        usesPlasmaTheme: false
                         width: PlasmaCore.Units.iconSizes.medium
                         height: PlasmaCore.Units.iconSizes.medium
-                        state: index == listView.currentIndex ? QIconItem.ActiveState : QIconItem.DisabledState
+                        enabled: index === listView.currentIndex
                         anchors {
                             verticalCenter: parent.verticalCenter
                             left: parent.left

@@ -10,7 +10,6 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kwin 2.0 as KWin
 
 KWin.Switcher {
@@ -90,9 +89,10 @@ KWin.Switcher {
 
                     spacing: 2 * PlasmaCore.Units.smallSpacing
 
-                    QIconItem {
+                    PlasmaCore.IconItem {
                         id: iconItem
-                        icon: model.icon
+                        source: model.icon
+                        usesPlasmaTheme: false
                         Layout.preferredWidth: PlasmaCore.Units.iconSizes.small
                         Layout.preferredHeight: PlasmaCore.Units.iconSizes.small
                         Layout.leftMargin: hoverItem.margins.left

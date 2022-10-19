@@ -11,7 +11,6 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kwin 2.0 as KWin
 
 // https://techbase.kde.org/Development/Tutorials/KWin/WindowSwitcher
@@ -139,14 +138,14 @@ KWin.Switcher {
                             id: captionRow
                             spacing: PlasmaCore.Units.smallSpacing
 
-                            QIconItem {
+                            PlasmaCore.IconItem {
                                 id: iconItem
                                 Layout.minimumHeight: thumbnailGridView.iconSize
                                 Layout.minimumWidth: thumbnailGridView.iconSize
                                 Layout.maximumHeight: Layout.minimumHeight
                                 Layout.maximumWidth: Layout.minimumWidth
-                                icon: model.icon
-                                state: index == thumbnailGridView.currentIndex ? QIconItem.ActiveState : QIconItem.DefaultState
+                                source: model.icon
+                                usesPlasmaTheme: false
                             }
 
                             PlasmaComponents3.Label {
