@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-01 00:45+0000\n"
+"POT-Creation-Date: 2022-10-19 00:47+0000\n"
 "PO-Revision-Date: 2022-08-17 08:15+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -27,36 +27,36 @@ msgctxt "@title"
 msgid "Keys"
 msgstr "Teklak"
 
-#: contents/ui/configAppearance.qml:33
+#: contents/ui/configAppearance.qml:34
 #, kde-format
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
 msgstr "Erakutsi aktibatutakoan:"
 
-#: contents/ui/configAppearance.qml:36
+#: contents/ui/configAppearance.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "Maius giltz"
 
-#: contents/ui/configAppearance.qml:43
+#: contents/ui/configAppearance.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Zenb giltz"
 
-#: contents/ui/main.qml:29
+#: contents/ui/main.qml:30
 #, kde-format
 msgid "Caps Lock activated\n"
 msgstr "«Blok Maius» aktibatuta\n"
 
-#: contents/ui/main.qml:30
+#: contents/ui/main.qml:31
 #, kde-format
 msgid "Num Lock activated\n"
 msgstr "«Blok Zk» aktibatuta\n"
 
-#: contents/ui/main.qml:108
+#: contents/ui/main.qml:111
 #, kde-format
 msgid "No lock keys activated"
 msgstr "Giltzatzeko teklak ez daude aktibatuta"

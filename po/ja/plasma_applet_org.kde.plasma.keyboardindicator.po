@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-01 00:45+0000\n"
+"POT-Creation-Date: 2022-10-19 00:47+0000\n"
 "PO-Revision-Date: 2021-10-16 18:26+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -21,7 +21,7 @@ msgctxt "@title"
 msgid "Keys"
 msgstr "キー"
 
-#: contents/ui/configAppearance.qml:33
+#: contents/ui/configAppearance.qml:34
 #, fuzzy, kde-format
 #| msgid "No lock keys activated"
 msgctxt ""
@@ -29,29 +29,29 @@ msgctxt ""
 msgid "Show when activated:"
 msgstr "有効なロックキーはありません"
 
-#: contents/ui/configAppearance.qml:36
+#: contents/ui/configAppearance.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: contents/ui/configAppearance.qml:43
+#: contents/ui/configAppearance.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: contents/ui/main.qml:29
+#: contents/ui/main.qml:30
 #, kde-format
 msgid "Caps Lock activated\n"
 msgstr "Caps Lock が有効になりました\n"
 
-#: contents/ui/main.qml:30
+#: contents/ui/main.qml:31
 #, kde-format
 msgid "Num Lock activated\n"
 msgstr "Num Lock が有効になりました\n"
 
-#: contents/ui/main.qml:108
+#: contents/ui/main.qml:111
 #, kde-format
 msgid "No lock keys activated"
 msgstr "有効なロックキーはありません"

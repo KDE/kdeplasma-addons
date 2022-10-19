@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-01 00:45+0000\n"
+"POT-Creation-Date: 2022-10-19 00:47+0000\n"
 "PO-Revision-Date: 2021-08-18 01:10+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -25,7 +25,7 @@ msgctxt "@title"
 msgid "Keys"
 msgstr "Klavišai"
 
-#: contents/ui/configAppearance.qml:33
+#: contents/ui/configAppearance.qml:34
 #, fuzzy, kde-format
 #| msgid "No lock keys activated"
 msgctxt ""
@@ -33,29 +33,29 @@ msgctxt ""
 msgid "Show when activated:"
 msgstr "Neįjungti jokie užrakto klavišai"
 
-#: contents/ui/configAppearance.qml:36
+#: contents/ui/configAppearance.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "Didžiosios raidės"
 
-#: contents/ui/configAppearance.qml:43
+#: contents/ui/configAppearance.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Skaitmeninė klaviatūra"
 
-#: contents/ui/main.qml:29
+#: contents/ui/main.qml:30
 #, kde-format
 msgid "Caps Lock activated\n"
 msgstr "Įjungtos didžiosios raidės\n"
 
-#: contents/ui/main.qml:30
+#: contents/ui/main.qml:31
 #, kde-format
 msgid "Num Lock activated\n"
 msgstr "Įjungta skaitmeninė klaviatūra\n"
 
-#: contents/ui/main.qml:108
+#: contents/ui/main.qml:111
 #, kde-format
 msgid "No lock keys activated"
 msgstr "Neįjungti jokie užrakto klavišai"

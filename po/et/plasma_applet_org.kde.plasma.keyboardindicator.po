@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-01 00:45+0000\n"
+"POT-Creation-Date: 2022-10-19 00:47+0000\n"
 "PO-Revision-Date: 2019-11-08 22:28+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -23,37 +23,37 @@ msgctxt "@title"
 msgid "Keys"
 msgstr "Klahvid"
 
-#: contents/ui/configAppearance.qml:33
+#: contents/ui/configAppearance.qml:34
 #, kde-format
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
 msgstr ""
 
-#: contents/ui/configAppearance.qml:36
+#: contents/ui/configAppearance.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: contents/ui/configAppearance.qml:43
+#: contents/ui/configAppearance.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: contents/ui/main.qml:29
+#: contents/ui/main.qml:30
 #, fuzzy, kde-format
 #| msgid "Caps Lock"
 msgid "Caps Lock activated\n"
 msgstr "Caps Lock"
 
-#: contents/ui/main.qml:30
+#: contents/ui/main.qml:31
 #, kde-format
 msgid "Num Lock activated\n"
 msgstr ""
 
-#: contents/ui/main.qml:108
+#: contents/ui/main.qml:111
 #, kde-format
 msgid "No lock keys activated"
 msgstr ""
