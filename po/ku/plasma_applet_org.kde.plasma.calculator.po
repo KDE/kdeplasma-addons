@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-02 00:47+0000\n"
+"POT-Creation-Date: 2022-10-20 00:50+0000\n"
 "PO-Revision-Date: 2009-01-10 23:30+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -19,7 +19,13 @@ msgstr ""
 "X-Poedit-Language: Kurdish\n"
 "X-Poedit-SourceCharset: utf8\n"
 
-#: package/contents/ui/calculator.qml:307
+#: package/contents/ui/calculator.qml:285
+#, kde-format
+msgctxt "@label calculation result"
+msgid "Result"
+msgstr ""
+
+#: package/contents/ui/calculator.qml:308
 #, fuzzy, kde-format
 #| msgctxt "The C button of the calculator"
 #| msgid "C"
@@ -27,13 +33,13 @@ msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: package/contents/ui/calculator.qml:320
+#: package/contents/ui/calculator.qml:321
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:333
+#: package/contents/ui/calculator.qml:334
 #, fuzzy, kde-format
 #| msgctxt "The × button of the calculator"
 #| msgid "×"
@@ -41,7 +47,7 @@ msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: package/contents/ui/calculator.qml:345
+#: package/contents/ui/calculator.qml:346
 #, fuzzy, kde-format
 #| msgctxt "The AC button of the calculator"
 #| msgid "AC"
@@ -49,13 +55,13 @@ msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "AC"
 
-#: package/contents/ui/calculator.qml:397
+#: package/contents/ui/calculator.qml:398
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:449
+#: package/contents/ui/calculator.qml:450
 #, fuzzy, kde-format
 #| msgctxt "The + button of the calculator"
 #| msgid "+"
@@ -63,7 +69,7 @@ msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: package/contents/ui/calculator.qml:500
+#: package/contents/ui/calculator.qml:501
 #, fuzzy, kde-format
 #| msgctxt "The = button of the calculator"
 #| msgid "="

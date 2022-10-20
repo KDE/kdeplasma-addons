@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-18 00:46+0000\n"
-"PO-Revision-Date: 2022-10-02 15:49\n"
+"PO-Revision-Date: 2022-10-19 13:22\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -82,7 +82,7 @@ msgstr "拾取颜色"
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr ""
+msgstr "没有颜色"
 
 #: package/contents/ui/main.qml:203
 #, kde-format
@@ -100,8 +100,4 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Color options"
-#~ msgstr "颜色选项"
+msgstr "移除"

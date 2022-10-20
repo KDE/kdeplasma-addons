@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-30 00:46+0000\n"
-"PO-Revision-Date: 2022-08-19 15:29-0300\n"
+"PO-Revision-Date: 2022-10-19 15:14-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -27,19 +27,19 @@ msgstr "Juliano"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Milankovic"
-msgstr ""
+msgstr "Milankovic"
 
 #: calendarsystem.h:61
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
-msgstr ""
+msgstr "O calendário solar Hijri (persa)"
 
 #: calendarsystem.h:65
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Islamic Civil Calendar"
-msgstr ""
+msgstr "O calendário civil islâmico"
 
 #: calendarsystem.h:69
 #, kde-format

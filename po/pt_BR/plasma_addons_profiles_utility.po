@@ -1,28 +1,28 @@
-# German translations for kdeplasma-addons package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Automatically generated, 2022.
 #
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:48+0000\n"
-"PO-Revision-Date: 2022-10-17 10:39+0200\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: de\n"
+"PO-Revision-Date: 2022-10-19 16:12-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: profilesmodel.cpp:48
 #, kde-format
 msgid "Start Kate (no arguments)"
-msgstr ""
+msgstr "Iniciar Kate (sem argumentos)"
 
 #: profilesmodel.cpp:49
 #, kde-format
 msgid "New Kate Session"
-msgstr ""
+msgstr "Nova sessão do Kate"

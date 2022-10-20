@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-05 00:47+0000\n"
+"POT-Creation-Date: 2022-10-17 00:48+0000\n"
 "PO-Revision-Date: 2022-10-19 13:22\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -14,11 +14,16 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/kdeplasma-addons/plasma_applet_org.kde."
-"plasma.private.grouping.pot\n"
-"X-Crowdin-File-ID: 4283\n"
+"X-Crowdin-File: /kf5-trunk/messages/kdeplasma-addons/"
+"plasma_addons_profiles_utility.pot\n"
+"X-Crowdin-File-ID: 41032\n"
 
-#: package/contents/ui/main.qml:140
+#: profilesmodel.cpp:48
 #, kde-format
-msgid "Drag applets here"
-msgstr "拖动小程序到此处"
+msgid "Start Kate (no arguments)"
+msgstr ""
+
+#: profilesmodel.cpp:49
+#, kde-format
+msgid "New Kate Session"
+msgstr ""
