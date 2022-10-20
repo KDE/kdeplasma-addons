@@ -97,6 +97,7 @@
                 "Name[nn]": "Piotr Kąkol",
                 "Name[pl]": "Piotr Kąkol",
                 "Name[pt]": "Piotr Kąkol",
+                "Name[pt_BR]": "Piotr Kąkol",
                 "Name[ru]": "Piotr Kąkol",
                 "Name[sk]": "Piotr Kąkol",
                 "Name[sl]": "Piotr Kąkol",
@@ -104,7 +105,8 @@
                 "Name[tr]": "Piotr Kąkol",
                 "Name[uk]": "Piotr Kąkol",
                 "Name[vi]": "Piotr Kąkol",
-                "Name[x-test]": "xxPiotr Kąkolxx"
+                "Name[x-test]": "xxPiotr Kąkolxx",
+                "Name[zh_CN]": "Piotr Kąkol"
             }
         ],
         "Category": "Date and Time",
