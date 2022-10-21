@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:50+0000\n"
-"PO-Revision-Date: 2012-11-10 15:28+0000\n"
+"PO-Revision-Date: 2022-10-20 09:32+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
-msgstr ""
+msgstr "Resultado"
 
 #: package/contents/ui/calculator.qml:308
 #, kde-format

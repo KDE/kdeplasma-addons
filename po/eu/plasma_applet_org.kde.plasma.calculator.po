@@ -1,30 +1,31 @@
-# Translation of plasma_applet_org.kde.plasma_calculator.po to Euskara/Basque (eu).
-# Copyright (C) 2009-2017, The Free Software Foundation, Inc.
-# This file is distributed under the same license as the kde-workspace package.
-# KDE euskaratzeko proiektuaren arduraduna <xalba@euskalnet.net>.
+# Translation for plasma_applet_org.kde.plasma.calculator.po to Euskara/Basque (eu).
+# Copyright (C) 2009-2017 The Free Software Foundation, Inc.
+# Copyright (C) 2018-2022 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2017.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2017, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:50+0000\n"
-"PO-Revision-Date: 2017-11-04 12:38+0100\n"
-"Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
-"Language-Team: Basque <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2022-10-20 06:29+0200\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.08.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: package/contents/ui/calculator.qml:285
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
-msgstr ""
+msgstr "Emaitza"
 
 #: package/contents/ui/calculator.qml:308
 #, kde-format
