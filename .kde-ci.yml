@@ -20,7 +20,6 @@ Dependencies:
     'frameworks/knewstuff': '@latest'
     'frameworks/knotifications': '@latest'
     'frameworks/kpackage': '@latest'
-    'frameworks/kross': '@latest'
     'frameworks/krunner': '@latest'
     'frameworks/kservice': '@latest'
     'frameworks/kwidgetsaddons': '@latest'
