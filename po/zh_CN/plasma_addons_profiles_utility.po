@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:48+0000\n"
-"PO-Revision-Date: 2022-10-19 13:22\n"
+"PO-Revision-Date: 2022-10-22 05:28\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -21,9 +21,9 @@ msgstr ""
 #: profilesmodel.cpp:48
 #, kde-format
 msgid "Start Kate (no arguments)"
-msgstr ""
+msgstr "启动 Kate (无参数)"
 
 #: profilesmodel.cpp:49
 #, kde-format
 msgid "New Kate Session"
-msgstr ""
+msgstr "新建 Kate 会话"
