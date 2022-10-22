@@ -3,6 +3,8 @@
 
 add_library(plasma_engine_comic STATIC)
 
+set_property(TARGET plasma_engine_comic PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 ecm_qt_declare_logging_category(plasma_engine_comic
     HEADER comic_debug.h
     IDENTIFIER PLASMA_COMIC

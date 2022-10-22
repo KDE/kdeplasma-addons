@@ -1,6 +1,7 @@
 add_definitions(-DTRANSLATION_DOMAIN="plasma_runner_spellcheckrunner")
 
 add_library(krunner_spellcheck_static STATIC spellcheck.cpp)
+set_property(TARGET krunner_spellcheck_static PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(krunner_spellcheck_static
     KF5::Runner
     KF5::KIOWidgets
