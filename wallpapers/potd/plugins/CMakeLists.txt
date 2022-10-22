@@ -65,7 +65,7 @@ write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/PlasmaPotdProviderC
     COMPATIBILITY SameMajorVersion
 )
 
-set(CMAKECONFIG_INSTALL_DIR ${KDE_INSTALL_LIBDIR}/cmake/PlasmaPotdProvider)
+set(CMAKECONFIG_INSTALL_DIR ${KDE_INSTALL_CMAKEPACKAGEDIR}/PlasmaPotdProvider)
 configure_package_config_file(PlasmaPotdProvider.cmake.in
         "${CMAKE_CURRENT_BINARY_DIR}/PlasmaPotdProviderConfig.cmake"
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
