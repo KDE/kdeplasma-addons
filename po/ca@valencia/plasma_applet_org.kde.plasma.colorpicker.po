@@ -104,7 +104,3 @@ msgstr "S'ha copiat!"
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Suprimix"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Color options"
-#~ msgstr "Opcions del color"
