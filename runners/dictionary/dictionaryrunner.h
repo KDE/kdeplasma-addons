@@ -18,6 +18,7 @@ class DictionaryRunner : public AbstractRunner
 public:
     explicit DictionaryRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
     void match(RunnerContext &context) override;
+    void run(const RunnerContext &context, const QueryMatch &match) override;
     void reloadConfiguration() override;
 
 private:

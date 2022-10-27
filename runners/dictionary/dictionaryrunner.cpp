@@ -7,7 +7,11 @@
 
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KNotifications/KNotification>
+#include <QClipboard>
 #include <QEventLoop>
+#include <QGuiApplication>
+#include <QIcon>
 #include <QMutex>
 #include <QMutexLocker>
 #include <QStringList>
@@ -104,6 +108,16 @@ void DictionaryRunner::match(RunnerContext &context)
         matches.append(match);
     }
     context.addMatches(matches);
+}
+
+void DictionaryRunner::run(const RunnerContext &context, const QueryMatch &match)
+{
+    QString query = context.query();
+    if (query.startsWith(m_triggerWord, Qt::CaseInsensitive)) {
+        query.remove(0, m_triggerWord.length());
+    }
+    QGuiApplication::clipboard()->setText(query + QLatin1Char(' ') + match.text());
+    KNotification::event(KNotification::Notification, name(), i18n("Definition for \"%1\" has been copied to clipboard", query), icon().name());
 }
 
 K_PLUGIN_CLASS_WITH_JSON(DictionaryRunner, "plasma-runner-dictionary.json")
