@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2022-10-28 00:47+0000\n"
 "PO-Revision-Date: 2020-01-23 16:09+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -21,23 +21,28 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 2.2.4\n"
 
-#: dictionaryrunner.cpp:32 dictionaryrunner_config.cpp:34
+#: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
 msgstr "določi"
 
-#: dictionaryrunner.cpp:39
+#: dictionaryrunner.cpp:43
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: dictionaryrunner.cpp:39
+#: dictionaryrunner.cpp:43
 #, kde-format
 msgid "Finds the definition of :q:."
 msgstr "Najde definicijo besede :q:."
+
+#: dictionaryrunner.cpp:120
+#, kde-format
+msgid "Definition for \"%1\" has been copied to clipboard"
+msgstr ""
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format

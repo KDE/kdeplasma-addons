@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-09 00:49+0000\n"
+"POT-Creation-Date: 2022-10-18 00:46+0000\n"
 "PO-Revision-Date: 2022-09-11 19:41+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -56,55 +56,49 @@ msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Vis logg"
 
-#: package/contents/ui/logic.js:56
+#: package/contents/ui/logic.js:58
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopier til utklippstavla"
 
-#: package/contents/ui/main.qml:108
+#: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Opna fargevindauge"
 
-#: package/contents/ui/main.qml:109
+#: package/contents/ui/main.qml:106
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Tøm loggen"
 
-#: package/contents/ui/main.qml:128
+#: package/contents/ui/main.qml:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Vel ein farge"
 
-#: package/contents/ui/main.qml:193
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Color options"
-msgstr "Fargeval"
-
-#: package/contents/ui/main.qml:288
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Ingen fargar"
 
-#: package/contents/ui/main.qml:292
+#: package/contents/ui/main.qml:203
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Vel farge"
 
-#: package/contents/ui/main.qml:459
+#: package/contents/ui/main.qml:370
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:479
+#: package/contents/ui/main.qml:390
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

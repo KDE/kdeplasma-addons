@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_krunner_dictionary\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2022-10-28 00:47+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -17,22 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: dictionaryrunner.cpp:32 dictionaryrunner_config.cpp:34
+#: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
 msgstr "بەلگىلە"
 
-#: dictionaryrunner.cpp:39
+#: dictionaryrunner.cpp:43
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: dictionaryrunner.cpp:39
+#: dictionaryrunner.cpp:43
 #, kde-format
 msgid "Finds the definition of :q:."
+msgstr ""
+
+#: dictionaryrunner.cpp:120
+#, kde-format
+msgid "Definition for \"%1\" has been copied to clipboard"
 msgstr ""
 
 #: dictionaryrunner_config.cpp:22
