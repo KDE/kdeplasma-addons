@@ -13,6 +13,7 @@
 #include <QTimeZone>
 
 #include <KLocalizedString>
+#include <math.h>
 
 static const QString dateWord = i18nc("Note this is a KRunner keyword", "date");
 static const QString timeWord = i18nc("Note this is a KRunner keyword", "time");
@@ -63,8 +64,15 @@ void DateTimeRunner::match(RunnerContext &context)
 #endif
         const auto times = datetime(tz);
         for (auto it = times.constBegin(), itEnd = times.constEnd(); it != itEnd; ++it) {
+            const int timeDiffHrs = round((double)QDateTime::currentDateTime().secsTo(QDateTime(it.value().date(), it.value().time()))
+                                          / 3600); // difference between remote and local time in hours
+            const QString timeZone = it.key();
             const QString time = QLocale().toString(*it, QLocale::ShortFormat);
-            addMatch(QStringLiteral("%1 - %2").arg(it.key(), time), time, context, QStringLiteral("clock"));
+            const QString timeDiff = (timeDiffHrs > 0       ? QStringLiteral("+")
+                                          : timeDiffHrs < 0 ? QStringLiteral("-")
+                                                            : QString::fromUtf8("\u00b1"))
+                + i18np("1 hour", "%1 hours", abs(timeDiffHrs));
+            addMatch(QStringLiteral("%1 - %2 (%3)").arg(timeZone, time, timeDiff), time, context, QStringLiteral("clock"));
         }
     }
 }
