@@ -2,7 +2,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Mikko Piippo <piippo@cc.helsinki.fi>, 2008.
-# Lasse Liehu <lliehu@kolumbus.fi>, 2011, 2015, 2017.
+# Lasse Liehu <lliehu@kolumbus.fi>, 2011, 2015, 2017, 2022.
 # Tommi Nieminen <translator@legisign.org>, 2018.
 #
 # KDE Finnish translation sprint participants:
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-18 00:46+0000\n"
-"PO-Revision-Date: 2018-07-10 21:59+0200\n"
-"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"PO-Revision-Date: 2022-10-28 22:41+0300\n"
+"Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:24+0000\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -83,12 +83,10 @@ msgid "Pick color"
 msgstr "Valitse väri"
 
 #: package/contents/ui/main.qml:199
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Pick color"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr "Valitse väri"
+msgstr "Ei värejä"
 
 #: package/contents/ui/main.qml:203
 #, kde-format
@@ -100,13 +98,13 @@ msgstr "Valitse väri"
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "Kopioitu!"
 
 #: package/contents/ui/main.qml:390
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
+msgstr "Poista"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_runner_krunner_dictionary\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-28 00:47+0000\n"
-"PO-Revision-Date: 2018-04-20 11:26+0100\n"
+"PO-Revision-Date: 2022-10-28 12:02+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -38,7 +38,7 @@ msgstr "Procura pela definição de :q:."
 #: dictionaryrunner.cpp:120
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr ""
+msgstr "A definição de \"%1\" foi copiada para a área de transferência"
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format
