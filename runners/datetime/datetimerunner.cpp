@@ -69,14 +69,14 @@ void DateTimeRunner::match(RunnerContext &context)
             const QString timeZone = it.key();
             const QString time = QLocale().toString(*it, QLocale::ShortFormat);
 
-            const int timeDiffInSeconds = QDateTime::currentDateTime().secsTo(QDateTime(it.value().date(), it.value().time()));
-            const int timeDiffHours = round((double)abs(timeDiffInSeconds) / 3600);
-            const int timeDiffMinutes = round((double)(abs(timeDiffInSeconds) % 3600) / 60);
+            const int timeDiffInMinutes = round((double)QDateTime::currentDateTime().secsTo(QDateTime(it.value().date(), it.value().time())) / 60);
+            const int timeDiffHours = (double)abs(timeDiffInMinutes) / 60;
+            const int timeDiffMinutes = (double)abs(timeDiffInMinutes) - timeDiffHours * 60;
             const QString timeDiff = (timeDiffHours ? QString("%1 h ").arg(timeDiffHours) : QString())
                 + (timeDiffMinutes ? QString("%1 min ").arg(timeDiffMinutes) : QString())
-                + ((timeDiffInSeconds > 0       ? i18nc("time zone difference", "later")
-                        : timeDiffInSeconds < 0 ? i18nc("time zone difference", "earlier")
-                                                : i18nc("no time zone difference", "same time")));
+                + ((timeDiffInMinutes > 0       ? i18nc("time zone difference", "later")
+                        : timeDiffInMinutes < 0 ? i18nc("time zone difference", "earlier")
+                                                : i18nc("no time zone difference", "no time difference")));
             addMatch(QStringLiteral("%1 - %2 (%3)").arg(timeZone, time, timeDiff), time, context, QStringLiteral("clock"));
         }
     }
