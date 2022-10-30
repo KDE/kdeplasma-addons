@@ -78,6 +78,7 @@
         "Description[vi]": "Dán chữ/ảnh vào một máy chủ ở xa",
         "Description[x-test]": "xxPaste text/images to a remote serverxx",
         "Description[zh_CN]": "粘贴文本/图像到远程服务器",
+        "Description[zh_TW]": "將文字或影像貼至遠端伺服器",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop",
@@ -121,6 +122,7 @@
         "Name[vi]": "Chia sẻ nhanh",
         "Name[x-test]": "xxQuick Sharexx",
         "Name[zh_CN]": "快速分享",
+        "Name[zh_TW]": "快速分享",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

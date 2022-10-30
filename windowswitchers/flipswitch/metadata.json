@@ -72,6 +72,7 @@
         "Description[vi]": "Bố cục trình chuyển cửa sổ hiển thị các hình nhỏ thành một tập bài 3D",
         "Description[x-test]": "xxA Window Switcher layout showing thumbnails as a 3D card deckxx",
         "Description[zh_CN]": "使用 3D 翻牌风格显示缩略图的窗口切换器",
+        "Description[zh_TW]": "用 3D 牌組顯示預覽的視窗切換器佈局",
         "Icon": "preferences-system-windows-effect-flipswitch",
         "Id": "flipswitch",
         "License": "GPL",

@@ -72,6 +72,7 @@
         "Description[vi]": "Bố cục trình chuyển cửa sổ hiển thị tất cả các cửa sổ thành các hình nhỏ trong một lưới",
         "Description[x-test]": "xxA Window Switcher layout showing all windows as thumbnails in a gridxx",
         "Description[zh_CN]": "将窗口缩略图按表格显示的窗口切换器布局",
+        "Description[zh_TW]": "用格線以縮圖顯示所有視窗的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-present-windows",
         "Id": "present_windows",
         "License": "GPL",

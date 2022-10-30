@@ -72,6 +72,7 @@
         "Description[vi]": "Bố cục trình chuyển cửa sổ dùng các hình nhỏ động",
         "Description[x-test]": "xxA window switcher layout using live thumbnailsxx",
         "Description[zh_CN]": "显示实时窗口预览的窗口切换器布局",
+        "Description[zh_TW]": "使用即時縮圖的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-thumbnails",
         "Id": "thumbnails",
         "License": "GPL",

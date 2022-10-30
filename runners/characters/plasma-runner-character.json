@@ -76,6 +76,7 @@
         "Description[vi]": "Tạo ra các kí tự đặc biệt từ mã thập lục phân",
         "Description[x-test]": "xxCreates special characters from their hexadecimal codesxx",
         "Description[zh_CN]": "输入十六进制码生成特殊字符",
+        "Description[zh_TW]": "用十六進位代碼建立特殊字元",
         "EnabledByDefault": true,
         "Icon": "accessories-character-map",
         "Id": "CharacterRunner",

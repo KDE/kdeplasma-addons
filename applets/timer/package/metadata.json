@@ -78,6 +78,7 @@
         "Description[vi]": "Đếm ngược một khoảng thời gian chỉ định",
         "Description[x-test]": "xxCountdown over a specified time periodxx",
         "Description[zh_CN]": "指定时间长度进行倒计时",
+        "Description[zh_TW]": "指定期間的倒數計時",
         "EnabledByDefault": true,
         "Icon": "chronometer",
         "Id": "org.kde.plasma.timer",
