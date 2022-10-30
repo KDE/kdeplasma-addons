@@ -30,6 +30,7 @@ public:
     ~DateTimeRunner() override;
 
     void match(RunnerContext &context) override;
+    void run(const RunnerContext &context, const QueryMatch &match) override;
 
 private:
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

@@ -81,6 +81,13 @@ void DateTimeRunner::match(RunnerContext &context)
         }
     }
 }
+
+void DateTimeRunner::run(const RunnerContext &context, const QueryMatch &match)
+{
+    const QString clipboardText = match.data().toString();
+    context.requestQueryStringUpdate(clipboardText, clipboardText.length());
+}
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringRef &tz)
 #else
@@ -133,7 +140,7 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
     QueryMatch match(this);
     match.setText(text);
     match.setData(clipboardText);
-    match.setType(QueryMatch::InformationalMatch);
+    match.setType(QueryMatch::HelperMatch);
     match.setIconName(iconName);
 
     context.addMatch(match);
