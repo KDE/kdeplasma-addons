@@ -72,6 +72,7 @@
         "Description[vi]": "Bố cục trình chuyển cửa sổ dùng các biểu tượng cỡ lớn để biểu diễn cửa sổ",
         "Description[x-test]": "xxA window switcher layout using large icons to represent the windowxx",
         "Description[zh_CN]": "使用大图标代表窗口的窗口切换器布局",
+        "Description[zh_TW]": "用大圖示代表視窗的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-big-icons",
         "Id": "big_icons",
         "License": "GPL",

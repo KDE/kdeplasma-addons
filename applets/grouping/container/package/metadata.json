@@ -117,6 +117,7 @@
         "Name[vi]": "Plasmoid nhóm",
         "Name[x-test]": "xxGrouping Plasmoidxx",
         "Name[zh_CN]": "Plasma 小程序分组",
+        "Name[zh_TW]": "群組元件",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

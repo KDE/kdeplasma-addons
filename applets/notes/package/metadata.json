@@ -78,6 +78,7 @@
         "Description[vi]": "GIấy nhớ trên bàn làm việc",
         "Description[x-test]": "xxDesktop sticky notexx",
         "Description[zh_CN]": "桌面便利贴",
+        "Description[zh_TW]": "桌面便條貼",
         "EnabledByDefault": true,
         "Icon": "knotes",
         "Id": "org.kde.plasma.notes",

@@ -71,6 +71,7 @@
         "Description[vi]": "Bố cục trình chuyển bàn làm việc với phần xem thử các bàn làm việc",
         "Description[x-test]": "xxA desktop switcher layout with previews of the desktopsxx",
         "Description[zh_CN]": "带桌面预览的桌面切换器布局",
+        "Description[zh_TW]": "有桌面預覽的桌面切換器佈局",
         "Icon": "preferences-system-desktop-switcher-previews",
         "Id": "previews",
         "License": "GPL",
@@ -108,6 +109,7 @@
         "Name[vi]": "Xem thử",
         "Name[x-test]": "xxPreviewsxx",
         "Name[zh_CN]": "预览",
+        "Name[zh_TW]": "預覽",
         "ServiceTypes": [
             "KWin/DesktopSwitcher"
         ],

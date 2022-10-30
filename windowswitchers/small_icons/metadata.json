@@ -72,6 +72,7 @@
         "Description[vi]": "Bố cục trình chuyển cửa sổ dùng các biểu tượng cỡ nhỏ để biểu diễn cửa sổ",
         "Description[x-test]": "xxA window switcher layout using small icons to represent the windowxx",
         "Description[zh_CN]": "使用小图标代表窗口的窗口切换器布局",
+        "Description[zh_TW]": "用小圖示代表視窗的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-small-icons",
         "Id": "small_icons",
         "License": "GPL",

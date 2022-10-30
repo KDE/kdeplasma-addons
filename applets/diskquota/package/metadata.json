@@ -77,6 +77,7 @@
         "Description[vi]": "Hiện các chi tiết về hạn ngạch đĩa",
         "Description[x-test]": "xxShows details about disk quotaxx",
         "Description[zh_CN]": "显示磁盘配额详情",
+        "Description[zh_TW]": "顯示磁碟配額詳細資訊",
         "EnabledByDefault": false,
         "Icon": "disk-quota",
         "Id": "org.kde.plasma.diskquota",
@@ -117,6 +118,7 @@
         "Name[vi]": "Hạn ngạch đĩa",
         "Name[x-test]": "xxDisk Quotaxx",
         "Name[zh_CN]": "磁盘配额",
+        "Name[zh_TW]": "磁碟配額",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

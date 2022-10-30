@@ -72,6 +72,7 @@
         "Description[vi]": "Bố cục trình chuyển cửa sổ hiển thị các hình nhỏ thành một băng chuyền 3D",
         "Description[x-test]": "xxA Window Switcher layout showing thumbnails as a 3D carouselxx",
         "Description[zh_CN]": "使用 3D 转盘风格显示缩略图的窗口切换器",
+        "Description[zh_TW]": "用 3D 幻燈片顯示預覽的視窗切換器佈局",
         "Icon": "preferences-system-windows-effect-coverswitch",
         "Id": "coverswitch",
         "License": "GPL",

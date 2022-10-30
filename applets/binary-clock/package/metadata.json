@@ -37,7 +37,8 @@
                 "Name[uk]": "Joseph Wenninger",
                 "Name[vi]": "Joseph Wenninger",
                 "Name[x-test]": "xxJoseph Wenningerxx",
-                "Name[zh_CN]": "Joseph Wenninger"
+                "Name[zh_CN]": "Joseph Wenninger",
+                "Name[zh_TW]": "Joseph Wenninger"
             },
             {
                 "Email": "davide.bettio@kdemail.net",
@@ -106,7 +107,8 @@
                 "Name[uk]": "Piotr Kąkol",
                 "Name[vi]": "Piotr Kąkol",
                 "Name[x-test]": "xxPiotr Kąkolxx",
-                "Name[zh_CN]": "Piotr Kąkol"
+                "Name[zh_CN]": "Piotr Kąkol",
+                "Name[zh_TW]": "Piotr Kąkol"
             }
         ],
         "Category": "Date and Time",

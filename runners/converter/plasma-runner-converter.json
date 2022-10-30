@@ -77,6 +77,7 @@
         "Description[vi]": "Đổi các giá trị sang các đơn vị khác nhau",
         "Description[x-test]": "xxConvert values to different unitsxx",
         "Description[zh_CN]": "转换数值到不同单位",
+        "Description[zh_TW]": "將數值轉換成不同單位",
         "EnabledByDefault": true,
         "Icon": "accessories-calculator",
         "Id": "unitconverter",

@@ -78,6 +78,7 @@
         "Description[vi]": "Khởi chạy các ứng dụng bạn ưa thích",
         "Description[x-test]": "xxLaunch your favourite Applicationsxx",
         "Description[zh_CN]": "显示并启动您固定的程序",
+        "Description[zh_TW]": "啟動您最愛的應用程式",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
@@ -121,6 +122,7 @@
         "Name[vi]": "Khởi chạy nhanh",
         "Name[x-test]": "xxQuicklaunchxx",
         "Name[zh_CN]": "快速启动",
+        "Name[zh_TW]": "快速啟動",
         "ServiceTypes": [
             "Plasma/Applet"
         ],

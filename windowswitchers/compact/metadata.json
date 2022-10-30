@@ -72,6 +72,7 @@
         "Description[vi]": "Bố cục gọn cho trình chuyển cửa sổ",
         "Description[x-test]": "xxA compact window switcher layoutxx",
         "Description[zh_CN]": "紧凑的窗口切换器布局",
+        "Description[zh_TW]": "簡潔的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-compact",
         "Id": "compact",
         "License": "GPL",

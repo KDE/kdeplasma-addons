@@ -72,6 +72,7 @@
         "Description[vi]": "Bố cục trình chuyển cửa sổ chỉ hiện các tiêu đề cửa sổ",
         "Description[x-test]": "xxA window switcher layout only showing window captionsxx",
         "Description[zh_CN]": "只显示窗口标题的窗口切换器布局",
+        "Description[zh_TW]": "只顯示視窗標題的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-text",
         "Id": "text",
         "License": "GPL",

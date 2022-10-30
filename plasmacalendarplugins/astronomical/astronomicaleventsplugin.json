@@ -76,6 +76,7 @@
         "Description[vi]": "Phần cài cắm lịch để hiển thị các sự kiện thiên văn",
         "Description[x-test]": "xxCalendar plugin for displaying astronomical eventsxx",
         "Description[zh_CN]": "显示天文事件的日历插件",
+        "Description[zh_TW]": "用於顯示天文事件的行事曆外掛程式",
         "Icon": "weather-clear-night",
         "Name": "Astronomical Events",
         "Name[ar]": "أحداث فلكية",
