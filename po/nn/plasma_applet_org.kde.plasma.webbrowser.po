@@ -1,94 +1,95 @@
+# Translation of plasma_applet_org.kde.plasma.webbrowser to Norwegian Nynorsk
+#
+# Karl Ove Hufthammer <karl@huftis.org>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:48+0000\n"
-"PO-Revision-Date: 2022-10-30 07:47\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2022-10-30 09:48+0100\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
+"Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
+"Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/kdeplasma-addons/plasma_applet_org.kde."
-"plasma.webbrowser.pot\n"
-"X-Crowdin-File-ID: 41028\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.2\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr "常规"
+msgstr "Generelt"
 
 #: package/contents/ui/ConfigGeneral.qml:19
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
-msgstr "网页缩放："
+msgstr "Innhalds­skalering:"
 
 #: package/contents/ui/ConfigGeneral.qml:23
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
-msgstr "固定比例："
+msgstr "Fast skalering:"
 
 #: package/contents/ui/ConfigGeneral.qml:57
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
-msgstr "自动缩放，若宽度小于"
+msgstr "Automatisk skalering viss breidda er under"
 
 #: package/contents/ui/main.qml:25
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
-msgstr "后退"
+msgstr "Gå tilbake"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
-msgstr "前进"
+msgstr "Gå fram"
 
 #: package/contents/ui/main.qml:51
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
-msgstr "请输入 URL"
+msgstr "Skriv inn nettadresse"
 
 #: package/contents/ui/main.qml:87
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
-msgstr "停止加载此页面"
+msgstr "Stopp innlasting av sida"
 
 #: package/contents/ui/main.qml:87
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
-msgstr "重新加载此页面"
+msgstr "Last sida på nytt"
 
 #: package/contents/ui/main.qml:137
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
-msgstr "用浏览器打开连接"
+msgstr "Opna lenkje i nettlesar"
 
 #: package/contents/ui/main.qml:143
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr "复制链接地址"
+msgstr "Kopier lenkjeadresse"
 
 #: package/contents/ui/main.qml:205
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
-msgstr "被拦截的弹窗"
+msgstr "Sprettoppsvindauge blokkert"
 
 #: package/contents/ui/main.qml:206
 #, kde-format
@@ -96,5 +97,5 @@ msgid ""
 "Click here to open the following blocked popup:\n"
 "%1"
 msgstr ""
-"点击此处以打开以下已屏蔽的弹窗：\n"
+"Trykk her for å opna det blokkerte sprettoppvindauget:\n"
 "%1"

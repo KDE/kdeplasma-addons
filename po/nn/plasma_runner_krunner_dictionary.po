@@ -1,14 +1,14 @@
 # Translation of plasma_runner_krunner_dictionary to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2015.
+# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2022.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-28 00:47+0000\n"
-"PO-Revision-Date: 2018-05-04 11:07+0100\n"
-"Last-Translator: Øystein Steffensen-Alværvik <ystein@posteo.net>\n"
+"PO-Revision-Date: 2022-10-30 09:46+0100\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
@@ -41,7 +41,7 @@ msgstr "Finn definisjonen til :q:."
 #: dictionaryrunner.cpp:120
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr ""
+msgstr "Definisjonen for «%1» er kopiert til utklippstavla"
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format

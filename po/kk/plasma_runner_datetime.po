@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-03-03 00:45+0000\n"
+"POT-Creation-Date: 2022-10-31 00:47+0000\n"
 "PO-Revision-Date: 2010-05-31 05:49+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -17,54 +17,72 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: datetimerunner.cpp:17
+#: datetimerunner.cpp:20
 #, kde-format
 msgctxt "Note this is a KRunner keyword"
 msgid "date"
 msgstr "date"
 
-#: datetimerunner.cpp:18
+#: datetimerunner.cpp:21
 #, kde-format
 msgctxt "Note this is a KRunner keyword"
 msgid "time"
 msgstr "time"
 
-#: datetimerunner.cpp:25
+#: datetimerunner.cpp:28
 #, kde-format
 msgid "Displays the current date"
 msgstr "Бүгінгі күнді көрсетеді"
 
-#: datetimerunner.cpp:26
+#: datetimerunner.cpp:29
 #, kde-format
 msgid "Displays the current time"
 msgstr "Қазіргі уақытты көрсетеді"
 
-#: datetimerunner.cpp:27 datetimerunner.cpp:29
+#: datetimerunner.cpp:30 datetimerunner.cpp:32
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid " <timezone>"
 msgstr ""
 
-#: datetimerunner.cpp:28
+#: datetimerunner.cpp:31
 #, kde-format
 msgid "Displays the current date in a given timezone"
 msgstr "Келтірілген белдеудегі бүгінгі күнін көрсетеді"
 
-#: datetimerunner.cpp:30
+#: datetimerunner.cpp:33
 #, kde-format
 msgid "Displays the current time in a given timezone"
 msgstr "Келтірілген белдеудегі қазіргі уақытын көрсетеді"
 
-#: datetimerunner.cpp:43
+#: datetimerunner.cpp:46
 #, kde-format
 msgid "Today's date is %1"
 msgstr "Бүгін %1"
 
-#: datetimerunner.cpp:57
+#: datetimerunner.cpp:60
 #, fuzzy, kde-format
 #| msgid "The current time is %1"
 msgid "Current time is %1"
 msgstr "Қазір %1"
+
+#: datetimerunner.cpp:77
+#, kde-format
+msgctxt "time zone difference"
+msgid "later"
+msgstr ""
+
+#: datetimerunner.cpp:78
+#, kde-format
+msgctxt "time zone difference"
+msgid "earlier"
+msgstr ""
+
+#: datetimerunner.cpp:79
+#, kde-format
+msgctxt "no time zone difference"
+msgid "no time difference"
+msgstr ""
 
 #~ msgid "The date in %1 is %2"
 #~ msgstr "%1 белдеуінде қазір %2"
