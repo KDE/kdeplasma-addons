@@ -32,10 +32,11 @@ public:
     void match(RunnerContext &context) override;
 
 private:
+    QHash<QString, QTimeZone> systemTimeZone();
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QHash<QString, QDateTime> datetime(const QStringRef &tz);
+    QHash<QString, QTimeZone> matchingTimeZones(const QStringRef &searchTerm, const QDateTime &atDateTime = QDateTime());
 #else
-    QHash<QString, QDateTime> datetime(const QStringView &tz);
+    QHash<QString, QTimeZone> matchingTimeZones(const QStringView &searchTerm, const QDateTime &atDateTime = QDateTime());
 #endif
     void addMatch(const QString &text, const QString &clipboardText, RunnerContext &context, const QString &iconName);
 };
