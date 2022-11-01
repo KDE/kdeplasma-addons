@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2020.
+# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2020, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:50+0000\n"
-"PO-Revision-Date: 2020-12-04 11:24+0100\n"
+"PO-Revision-Date: 2022-10-31 12:10+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
 "Language: vi\n"
@@ -15,13 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 22.08.1\n"
 
 #: package/contents/ui/calculator.qml:285
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
-msgstr ""
+msgstr "Kết quả"
 
 #: package/contents/ui/calculator.qml:308
 #, kde-format

@@ -1,0 +1,99 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"PO-Revision-Date: 2022-10-31 12:59+0100\n"
+"Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
+"Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 22.08.1\n"
+
+#: package/contents/config/config.qml:12
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Chung"
+
+#: package/contents/ui/ConfigGeneral.qml:19
+#, kde-format
+msgctxt "@title:group"
+msgid "Content scaling:"
+msgstr "Đổi cỡ nội dung:"
+
+#: package/contents/ui/ConfigGeneral.qml:23
+#, kde-format
+msgctxt "@option:radio"
+msgid "Fixed scale:"
+msgstr "Tỉ lệ cố định:"
+
+#: package/contents/ui/ConfigGeneral.qml:57
+#, kde-format
+msgctxt "@option:radio"
+msgid "Automatic scaling if width is below"
+msgstr "Tự động đổi cỡ nếu chiều rộng nhỏ hơn"
+
+#: package/contents/ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Go Back"
+msgstr "Đi lùi"
+
+#: package/contents/ui/main.qml:32
+#, kde-format
+msgctxt "@action:button"
+msgid "Go Forward"
+msgstr "Đi tiến"
+
+#: package/contents/ui/main.qml:51
+#, kde-format
+msgctxt "@info"
+msgid "Type a URL"
+msgstr "Nhập URL"
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgctxt "@action:button"
+msgid "Stop Loading This Page"
+msgstr "Dừng tải trang này"
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgctxt "@action:button"
+msgid "Reload This Page"
+msgstr "Tải lại trang này"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Link in Browser"
+msgstr "Mở liên kết trong trình duyệt"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy Link Address"
+msgstr "Chép địa chỉ liên kết"
+
+#: package/contents/ui/main.qml:205
+#, kde-format
+msgctxt "An unwanted popup was blocked"
+msgid "Popup blocked"
+msgstr "Ô bật lên bị chặn"
+
+#: package/contents/ui/main.qml:206
+#, kde-format
+msgid ""
+"Click here to open the following blocked popup:\n"
+"%1"
+msgstr ""
+"Bấm vào đây để mở ô bật lên bị chặn:\n"
+"%1"
