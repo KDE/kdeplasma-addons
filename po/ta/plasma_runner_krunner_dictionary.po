@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-28 00:47+0000\n"
-"PO-Revision-Date: 2022-06-28 21:33+0530\n"
+"PO-Revision-Date: 2022-11-03 21:38+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
@@ -28,7 +28,7 @@ msgstr ""
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
-msgstr ""
+msgstr "%1:q:"
 
 #: dictionaryrunner.cpp:43
 #, kde-format
@@ -38,7 +38,7 @@ msgstr ":q: என்பதன் சொற்பொருளை கண்டு
 #: dictionaryrunner.cpp:120
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr ""
+msgstr "\"%1\" என்பதன் விளக்கம் பிடிப்புப்பலகைக்கு நகலெடுக்கப்பட்டுள்ளது"
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format
