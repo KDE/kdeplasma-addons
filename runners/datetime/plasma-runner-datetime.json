@@ -40,6 +40,9 @@
                 "Name[x-test]": "xxPlasma Teamxx",
                 "Name[zh_CN]": "Plasma Team",
                 "Name[zh_TW]": "Plasma 團隊"
+            },
+            {
+                "Name": "GeoNames.org (city data, licensed under Creative Commons BY 4.0)"
             }
         ],
         "Description": "The current date and time, locally or in any timezone",

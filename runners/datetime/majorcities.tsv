@@ -1,0 +1,1245 @@
+# SPDX-FileCopyrightText: 2022 GeoNames
+# SPDX-License-Identifier: CC-BY-4.0
+Dubai	Dubai	Asia/Dubai
+Sharjah	Sharjah	Asia/Dubai
+Ajman City	Ajman City	Asia/Dubai
+Abu Dhabi	Abu Dhabi	Asia/Dubai
+Mazār-e Sharīf	Mazar-e Sharif	Asia/Kabul
+Kandahār	Kandahar	Asia/Kabul
+Kabul	Kabul	Asia/Kabul
+Herāt	Herat	Asia/Kabul
+Yerevan	Yerevan	Asia/Yerevan
+Luanda	Luanda	Africa/Luanda
+Mar del Plata	Mar del Plata	America/Argentina/Buenos_Aires
+La Plata	La Plata	America/Argentina/Buenos_Aires
+Buenos Aires	Buenos Aires	America/Argentina/Buenos_Aires
+Santa Fe	Santa Fe	America/Argentina/Cordoba
+San Miguel de Tucumán	San Miguel de Tucuman	America/Argentina/Tucuman
+San Juan	San Juan	America/Argentina/San_Juan
+Salta	Salta	America/Argentina/Salta
+Rosario	Rosario	America/Argentina/Cordoba
+Mendoza	Mendoza	America/Argentina/Mendoza
+Córdoba	Cordoba	America/Argentina/Cordoba
+Vienna	Vienna	Europe/Vienna
+Perth	Perth	Australia/Perth
+Adelaide	Adelaide	Australia/Adelaide
+Sydney	Sydney	Australia/Sydney
+Melbourne	Melbourne	Australia/Melbourne
+Gold Coast	Gold Coast	Australia/Brisbane
+Brisbane	Brisbane	Australia/Brisbane
+Baku	Baku	Asia/Baku
+Sarajevo	Sarajevo	Europe/Sarajevo
+Rājshāhi	Rajshahi	Asia/Dhaka
+Dhaka	Dhaka	Asia/Dhaka
+Chattogram	Chattogram	Asia/Dhaka
+Khulna	Khulna	Asia/Dhaka
+Brussels	Brussels	Europe/Brussels
+Antwerpen	Antwerpen	Europe/Brussels
+Ouagadougou	Ouagadougou	Africa/Ouagadougou
+Sofia	Sofia	Europe/Sofia
+Cotonou	Cotonou	Africa/Porto-Novo
+Santa Cruz de la Sierra	Santa Cruz de la Sierra	America/La_Paz
+La Paz	La Paz	America/La_Paz
+Cochabamba	Cochabamba	America/La_Paz
+Teresina	Teresina	America/Fortaleza
+São Luís	Sao Luis	America/Fortaleza
+Recife	Recife	America/Recife
+Natal	Natal	America/Fortaleza
+Maceió	Maceio	America/Maceio
+João Pessoa	Joao Pessoa	America/Fortaleza
+Jaboatão	Jaboatao	America/Recife
+Fortaleza	Fortaleza	America/Fortaleza
+Belém	Belem	America/Belem
+Ananindeua	Ananindeua	America/Belem
+Uberlândia	Uberlandia	America/Sao_Paulo
+Sorocaba	Sorocaba	America/Sao_Paulo
+São Paulo	Sao Paulo	America/Sao_Paulo
+São José dos Campos	Sao Jose dos Campos	America/Sao_Paulo
+São João de Meriti	Sao Joao de Meriti	America/Sao_Paulo
+São Bernardo do Campo	Sao Bernardo do Campo	America/Sao_Paulo
+Santos	Santos	America/Sao_Paulo
+Santo André	Santo Andre	America/Sao_Paulo
+Salvador	Salvador	America/Bahia
+Rio de Janeiro	Rio de Janeiro	America/Sao_Paulo
+Ribeirão Preto	Ribeirao Preto	America/Sao_Paulo
+Ribeirão das Neves	Ribeirao das Neves	America/Sao_Paulo
+Porto Alegre	Porto Alegre	America/Sao_Paulo
+Osasco	Osasco	America/Sao_Paulo
+Nova Iguaçu	Nova Iguacu	America/Sao_Paulo
+Niterói	Niteroi	America/Sao_Paulo
+Londrina	Londrina	America/Sao_Paulo
+Juiz de Fora	Juiz de Fora	America/Sao_Paulo
+Joinville	Joinville	America/Sao_Paulo
+Guarulhos	Guarulhos	America/Sao_Paulo
+Goiânia	Goiania	America/Sao_Paulo
+Florianópolis	Florianopolis	America/Sao_Paulo
+Feira de Santana	Feira de Santana	America/Bahia
+Duque de Caxias	Duque de Caxias	America/Sao_Paulo
+Curitiba	Curitiba	America/Sao_Paulo
+Cuiabá	Cuiaba	America/Cuiaba
+Contagem	Contagem	America/Sao_Paulo
+Campo Grande	Campo Grande	America/Campo_Grande
+Campinas	Campinas	America/Sao_Paulo
+Brasília	Brasilia	America/Sao_Paulo
+Belo Horizonte	Belo Horizonte	America/Sao_Paulo
+Belford Roxo	Belford Roxo	America/Sao_Paulo
+Aracaju	Aracaju	America/Maceio
+Manaus	Manaus	America/Manaus
+Aparecida de Goiânia	Aparecida de Goiania	America/Sao_Paulo
+Jaboatão dos Guararapes	Jaboatao dos Guararapes	America/Recife
+Minsk	Minsk	Europe/Minsk
+Homyel'	Homyel'	Europe/Minsk
+Brampton	Brampton	America/Toronto
+Calgary	Calgary	America/Edmonton
+Edmonton	Edmonton	America/Edmonton
+Hamilton	Hamilton	America/Toronto
+Laval	Laval	America/Toronto
+Mississauga	Mississauga	America/Toronto
+Montréal	Montreal	America/Toronto
+Ottawa	Ottawa	America/Toronto
+Toronto	Toronto	America/Toronto
+Vancouver	Vancouver	America/Vancouver
+Winnipeg	Winnipeg	America/Winnipeg
+Halifax	Halifax	America/Halifax
+Québec	Quebec	America/Toronto
+Mbuji-Mayi	Mbuji-Mayi	Africa/Lubumbashi
+Kisangani	Kisangani	Africa/Lubumbashi
+Kananga	Kananga	Africa/Lubumbashi
+Lubumbashi	Lubumbashi	Africa/Lubumbashi
+Likasi	Likasi	Africa/Lubumbashi
+Kolwezi	Kolwezi	Africa/Lubumbashi
+Kinshasa	Kinshasa	Africa/Kinshasa
+Masina	Masina	Africa/Kinshasa
+Bangui	Bangui	Africa/Bangui
+Pointe-Noire	Pointe-Noire	Africa/Brazzaville
+Brazzaville	Brazzaville	Africa/Brazzaville
+Bouaké	Bouake	Africa/Abidjan
+Abobo	Abobo	Africa/Abidjan
+Abidjan	Abidjan	Africa/Abidjan
+Santiago	Santiago	America/Santiago
+Puente Alto	Puente Alto	America/Santiago
+Yaoundé	Yaounde	Africa/Douala
+Kousséri	Kousseri	Africa/Douala
+Garoua	Garoua	Africa/Douala
+Douala	Douala	Africa/Douala
+Jiuquan	Jiuquan	Asia/Shanghai
+Kashgar	Kashgar	Asia/Urumqi
+Hotan	Hotan	Asia/Urumqi
+Baoshan	Baoshan	Asia/Shanghai
+Ürümqi	UEruemqi	Asia/Urumqi
+Shihezi	Shihezi	Asia/Urumqi
+Korla	Korla	Asia/Urumqi
+Aksu	Aksu	Asia/Urumqi
+Zunyi	Zunyi	Asia/Shanghai
+Ziyang	Ziyang	Asia/Shanghai
+Zigong	Zigong	Asia/Shanghai
+Zhuzhou	Zhuzhou	Asia/Shanghai
+Zhumadian	Zhumadian	Asia/Shanghai
+Shangqiu	Shangqiu	Asia/Shanghai
+Zhucheng	Zhucheng	Asia/Shanghai
+Zhoukou	Zhoukou	Asia/Shanghai
+Zhenjiang	Zhenjiang	Asia/Shanghai
+Zhengzhou	Zhengzhou	Asia/Shanghai
+Zhaotong	Zhaotong	Asia/Shanghai
+Zhaoqing	Zhaoqing	Asia/Shanghai
+Zhanjiang	Zhanjiang	Asia/Shanghai
+Zhangzhou	Zhangzhou	Asia/Shanghai
+Zhangye	Zhangye	Asia/Shanghai
+Zibo	Zibo	Asia/Shanghai
+Anyang	Anyang	Asia/Shanghai
+Zhabei	Zhabei	Asia/Shanghai
+Zaozhuang	Zaozhuang	Asia/Shanghai
+Kunshan	Kunshan	Asia/Shanghai
+Yunfu	Yunfu	Asia/Shanghai
+Yuncheng	Yuncheng	Asia/Shanghai
+Yulin	Yulin	Asia/Shanghai
+Heyuan	Heyuan	Asia/Shanghai
+Yongzhou	Yongzhou	Asia/Shanghai
+Yinchuan	Yinchuan	Asia/Shanghai
+Yichun	Yichun	Asia/Shanghai
+Yixing	Yixing	Asia/Shanghai
+Yichang	Yichang	Asia/Shanghai
+Yibin	Yibin	Asia/Shanghai
+Yantai	Yantai	Asia/Shanghai
+Yangzhou	Yangzhou	Asia/Shanghai
+Zhangjiagang	Zhangjiagang	Asia/Shanghai
+Yangquan	Yangquan	Asia/Shanghai
+Yancheng	Yancheng	Asia/Shanghai
+Yan’an	Yan'an	Asia/Shanghai
+Ya'an	Ya'an	Asia/Shanghai
+Shangrao	Shangrao	Asia/Shanghai
+Xuchang	Xuchang	Asia/Shanghai
+Xuanzhou	Xuanzhou	Asia/Shanghai
+Xinzhou	Xinzhou	Asia/Shanghai
+Xinyu	Xinyu	Asia/Shanghai
+Xinyang	Xinyang	Asia/Shanghai
+Xinxiang	Xinxiang	Asia/Shanghai
+Xining	Xining	Asia/Shanghai
+Xingtai	Xingtai	Asia/Shanghai
+Ankang	Ankang	Asia/Shanghai
+Xichang	Xichang	Asia/Shanghai
+Xiaogan	Xiaogan	Asia/Shanghai
+Xianyang	Xianyang	Asia/Shanghai
+Xianning	Xianning	Asia/Shanghai
+Zhuhai	Zhuhai	Asia/Shanghai
+Xiangtan	Xiangtan	Asia/Shanghai
+Xiangyang	Xiangyang	Asia/Shanghai
+Xi’an	Xi'an	Asia/Shanghai
+Xiamen	Xiamen	Asia/Shanghai
+Wuzhou	Wuzhou	Asia/Shanghai
+Wuxi	Wuxi	Asia/Shanghai
+Changde	Changde	Asia/Shanghai
+Wuhu	Wuhu	Asia/Shanghai
+Wuhan	Wuhan	Asia/Shanghai
+Wenzhou	Wenzhou	Asia/Shanghai
+Wenchang	Wenchang	Asia/Shanghai
+Weinan	Weinan	Asia/Shanghai
+Weihai	Weihai	Asia/Shanghai
+Weifang	Weifang	Asia/Shanghai
+Wanxian	Wanxian	Asia/Shanghai
+Wanning	Wanning	Asia/Shanghai
+Huangshan	Huangshan	Asia/Shanghai
+Tongling	Tongling	Asia/Shanghai
+Tianshui	Tianshui	Asia/Shanghai
+Tianjin	Tianjin	Asia/Shanghai
+Tangshan	Tangshan	Asia/Shanghai
+Tanggu	Tanggu	Asia/Shanghai
+Taizhou	Taizhou	Asia/Shanghai
+Taiyuan	Taiyuan	Asia/Shanghai
+Taicang	Taicang	Asia/Shanghai
+Tai’an	Tai'an	Asia/Shanghai
+Suzhou	Suzhou	Asia/Shanghai
+Suqian	Suqian	Asia/Shanghai
+Suizhou	Suizhou	Asia/Shanghai
+Suining	Suining	Asia/Shanghai
+Shouguang	Shouguang	Asia/Shanghai
+Shiyan	Shiyan	Asia/Shanghai
+Shijiazhuang	Shijiazhuang	Asia/Shanghai
+Shenzhen	Shenzhen	Asia/Shanghai
+Shaoxing	Shaoxing	Asia/Shanghai
+Shaoguan	Shaoguan	Asia/Shanghai
+Shanwei	Shanwei	Asia/Shanghai
+Shantou	Shantou	Asia/Shanghai
+Shangluo	Shangluo	Asia/Shanghai
+Shanghai	Shanghai	Asia/Shanghai
+Sanya	Sanya	Asia/Shanghai
+Sanming	Sanming	Asia/Shanghai
+Sanmenxia	Sanmenxia	Asia/Shanghai
+Rui’an	Rui'an	Asia/Shanghai
+Jieyang	Jieyang	Asia/Shanghai
+Quzhou	Quzhou	Asia/Shanghai
+Qujing	Qujing	Asia/Shanghai
+Quanzhou	Quanzhou	Asia/Shanghai
+Qinzhou	Qinzhou	Asia/Shanghai
+Qinhuangdao	Qinhuangdao	Asia/Shanghai
+Jinjiang	Jinjiang	Asia/Shanghai
+Huai'an	Huai'an	Asia/Shanghai
+Qingdao	Qingdao	Asia/Shanghai
+Qingyuan	Qingyuan	Asia/Shanghai
+Puyang	Puyang	Asia/Shanghai
+Putian	Putian	Asia/Shanghai
+Pingxiang	Pingxiang	Asia/Shanghai
+Pingliang	Pingliang	Asia/Shanghai
+Pingdu	Pingdu	Asia/Shanghai
+Pingdingshan	Pingdingshan	Asia/Shanghai
+Guang’an	Guang'an	Asia/Shanghai
+Ningbo	Ningbo	Asia/Shanghai
+Neijiang	Neijiang	Asia/Shanghai
+Nanyang	Nanyang	Asia/Shanghai
+Nantong	Nantong	Asia/Shanghai
+Nanping	Nanping	Asia/Shanghai
+Nanning	Nanning	Asia/Shanghai
+Nanjing	Nanjing	Asia/Shanghai
+Nanchong	Nanchong	Asia/Shanghai
+Nanchang	Nanchang	Asia/Shanghai
+Mianyang	Mianyang	Asia/Shanghai
+Meizhou	Meizhou	Asia/Shanghai
+Meishan	Meishan	Asia/Shanghai
+Maoming	Maoming	Asia/Shanghai
+Ma’anshan	Ma'anshan	Asia/Shanghai
+Luzhou	Luzhou	Asia/Shanghai
+Luoyang	Luoyang	Asia/Shanghai
+Luohe	Luohe	Asia/Shanghai
+Luancheng	Luancheng	Asia/Shanghai
+Lu’an	Lu'an	Asia/Shanghai
+Loudi	Loudi	Asia/Shanghai
+Longyan	Longyan	Asia/Shanghai
+Guankou	Guankou	Asia/Shanghai
+Puning	Puning	Asia/Shanghai
+Lishui	Lishui	Asia/Shanghai
+Liuzhou	Liuzhou	Asia/Shanghai
+Linyi	Linyi	Asia/Shanghai
+Linfen	Linfen	Asia/Shanghai
+Liaocheng	Liaocheng	Asia/Shanghai
+Wuwei	Wuwei	Asia/Shanghai
+Leshan	Leshan	Asia/Shanghai
+Lanzhou	Lanzhou	Asia/Shanghai
+Langfang	Langfang	Asia/Shanghai
+Laiwu	Laiwu	Asia/Shanghai
+Laibin	Laibin	Asia/Shanghai
+Kunming	Kunming	Asia/Shanghai
+Kaifeng	Kaifeng	Asia/Shanghai
+Jiujiang	Jiujiang	Asia/Shanghai
+Jining	Jining	Asia/Shanghai
+Jinhua	Jinhua	Asia/Shanghai
+Jingzhou	Jingzhou	Asia/Shanghai
+Jingmen	Jingmen	Asia/Shanghai
+Jingdezhen	Jingdezhen	Asia/Shanghai
+Jincheng	Jincheng	Asia/Shanghai
+Jinan	Jinan	Asia/Shanghai
+Jiaxing	Jiaxing	Asia/Shanghai
+Jiaozuo	Jiaozuo	Asia/Shanghai
+Jiaozhou	Jiaozhou	Asia/Shanghai
+Ningde	Ningde	Asia/Shanghai
+Jiangmen	Jiangmen	Asia/Shanghai
+Yangjiang	Yangjiang	Asia/Shanghai
+Ji’an	Ji'an	Asia/Shanghai
+Guangyuan	Guangyuan	Asia/Shanghai
+Qionghai	Qionghai	Asia/Shanghai
+Huzhou	Huzhou	Asia/Shanghai
+Cixi	Cixi	Asia/Shanghai
+Huizhou	Huizhou	Asia/Shanghai
+Huangshi	Huangshi	Asia/Shanghai
+Huainan	Huainan	Asia/Shanghai
+Huaihua	Huaihua	Asia/Shanghai
+Huaibei	Huaibei	Asia/Shanghai
+Heze	Heze	Asia/Shanghai
+Yiyang	Yiyang	Asia/Shanghai
+Hengyang	Hengyang	Asia/Shanghai
+Hengshui	Hengshui	Asia/Shanghai
+Hefei	Hefei	Asia/Shanghai
+Hebi	Hebi	Asia/Shanghai
+Hanzhong	Hanzhong	Asia/Shanghai
+Hangzhou	Hangzhou	Asia/Shanghai
+Changzhi	Changzhi	Asia/Shanghai
+Handan	Handan	Asia/Shanghai
+Jiaojiang	Jiaojiang	Asia/Shanghai
+Haikou	Haikou	Asia/Shanghai
+Guyuan	Guyuan	Asia/Shanghai
+Guli	Guli	Asia/Shanghai
+Guiyang	Guiyang	Asia/Shanghai
+Guilin	Guilin	Asia/Shanghai
+Guigang	Guigang	Asia/Shanghai
+Guangzhou	Guangzhou	Asia/Shanghai
+Ganzhou	Ganzhou	Asia/Shanghai
+Fuzhou	Fuzhou	Asia/Shanghai
+Fuzhou	Fuzhou	Asia/Shanghai
+Fuyang	Fuyang	Asia/Shanghai
+Foshan	Foshan	Asia/Shanghai
+Dongying	Dongying	Asia/Shanghai
+Dongguan	Dongguan	Asia/Shanghai
+Dingxi	Dingxi	Asia/Shanghai
+Dezhou	Dezhou	Asia/Shanghai
+Deyang	Deyang	Asia/Shanghai
+Zhangjiajie	Zhangjiajie	Asia/Shanghai
+Dazhou	Dazhou	Asia/Shanghai
+Dalian	Dalian	Asia/Shanghai
+Chuzhou	Chuzhou	Asia/Shanghai
+Yiwu	Yiwu	Asia/Shanghai
+Chongqing	Chongqing	Asia/Shanghai
+Chizhou	Chizhou	Asia/Shanghai
+Chenzhou	Chenzhou	Asia/Shanghai
+Jiangyin	Jiangyin	Asia/Shanghai
+Chengdu	Chengdu	Asia/Shanghai
+Chaozhou	Chaozhou	Asia/Shanghai
+Changzhou	Changzhou	Asia/Shanghai
+Changzhi	Changzhi	Asia/Shanghai
+Changsha	Changsha	Asia/Shanghai
+Cangzhou	Cangzhou	Asia/Shanghai
+Bozhou	Bozhou	Asia/Shanghai
+Baise	Baise	Asia/Shanghai
+Binzhou	Binzhou	Asia/Shanghai
+Bijie	Bijie	Asia/Shanghai
+Bengbu	Bengbu	Asia/Shanghai
+Beijing	Beijing	Asia/Shanghai
+Beihai	Beihai	Asia/Shanghai
+Basuo	Basuo	Asia/Shanghai
+Shaoyang	Shaoyang	Asia/Shanghai
+Baoding	Baoding	Asia/Shanghai
+Shangyu	Shangyu	Asia/Shanghai
+Anshun	Anshun	Asia/Shanghai
+Anqing	Anqing	Asia/Shanghai
+Suzhou	Suzhou	Asia/Shanghai
+Zhoushan	Zhoushan	Asia/Shanghai
+Banan	Banan	Asia/Shanghai
+Yueyang	Yueyang	Asia/Shanghai
+Zhangjiakou	Zhangjiakou	Asia/Shanghai
+Yingkou	Yingkou	Asia/Shanghai
+Tonghua	Tonghua	Asia/Shanghai
+Siping	Siping	Asia/Shanghai
+Shuangyashan	Shuangyashan	Asia/Shanghai
+Shenyang	Shenyang	Asia/Shanghai
+Qiqihar	Qiqihar	Asia/Shanghai
+Panshan	Panshan	Asia/Shanghai
+Mudanjiang	Mudanjiang	Asia/Shanghai
+Liaoyuan	Liaoyuan	Asia/Shanghai
+Liaoyang	Liaoyang	Asia/Shanghai
+Jixi	Jixi	Asia/Shanghai
+Jinzhou	Jinzhou	Asia/Shanghai
+Jilin	Jilin	Asia/Shanghai
+Jiamusi	Jiamusi	Asia/Shanghai
+Hohhot	Hohhot	Asia/Shanghai
+Hegang	Hegang	Asia/Shanghai
+Harbin	Harbin	Asia/Shanghai
+Fuxin	Fuxin	Asia/Shanghai
+Fushun	Fushun	Asia/Shanghai
+Datong	Datong	Asia/Shanghai
+Daqing	Daqing	Asia/Shanghai
+Dandong	Dandong	Asia/Shanghai
+Chengde	Chengde	Asia/Shanghai
+Chaoyang	Chaoyang	Asia/Shanghai
+Changchun	Changchun	Asia/Shanghai
+Benxi	Benxi	Asia/Shanghai
+Bei’an	Bei'an	Asia/Shanghai
+Baotou	Baotou	Asia/Shanghai
+Anshan	Anshan	Asia/Shanghai
+E’zhou	E'zhou	Asia/Shanghai
+Panzhihua	Panzhihua	Asia/Shanghai
+Zhongshan	Zhongshan	Asia/Shanghai
+Tongchuan	Tongchuan	Asia/Shanghai
+Changshu	Changshu	Asia/Shanghai
+Hezhou	Hezhou	Asia/Shanghai
+Zhu Cheng City	Zhu Cheng City	Asia/Shanghai
+Ordos	Ordos	Asia/Shanghai
+Taizhou	Taizhou	Asia/Shanghai
+Wenshan City	Wenshan City	Asia/Shanghai
+Liupanshui	Liupanshui	Asia/Shanghai
+Rizhao	Rizhao	Asia/Shanghai
+Puyang	Puyang	Asia/Shanghai
+Jianshui	Jianshui	Asia/Shanghai
+Xuzhou	Xuzhou	Asia/Shanghai
+Lianyungang	Lianyungang	Asia/Shanghai
+Jinzhong	Jinzhong	Asia/Shanghai
+Baoji	Baoji	Asia/Shanghai
+Bayan Nur	Bayan Nur	Asia/Shanghai
+Shizuishan	Shizuishan	Asia/Shanghai
+Wanzhou	Wanzhou	Asia/Shanghai
+Mianzhu, Deyang, Sichuan	Mianzhu, Deyang, Sichuan	Asia/Shanghai
+Valledupar	Valledupar	America/Bogota
+Santa Marta	Santa Marta	America/Bogota
+Pereira	Pereira	America/Bogota
+Montería	Monteria	America/Bogota
+Medellín	Medellin	America/Bogota
+Manizales	Manizales	America/Bogota
+Ibagué	Ibague	America/Bogota
+Cúcuta	Cucuta	America/Bogota
+Cartagena	Cartagena	America/Bogota
+Cali	Cali	America/Bogota
+Bucaramanga	Bucaramanga	America/Bogota
+Bogotá	Bogota	America/Bogota
+Barranquilla	Barranquilla	America/Bogota
+Santiago de Cuba	Santiago de Cuba	America/Havana
+Havana	Havana	America/Havana
+Prague	Prague	Europe/Prague
+Stuttgart	Stuttgart	Europe/Berlin
+Nürnberg	Nuernberg	Europe/Berlin
+Munich	Munich	Europe/Berlin
+Leipzig	Leipzig	Europe/Berlin
+Köln	Koeln	Europe/Berlin
+Kleinzschocher	Kleinzschocher	Europe/Berlin
+Hannover	Hannover	Europe/Berlin
+Wandsbek	Wandsbek	Europe/Berlin
+Hamburg	Hamburg	Europe/Berlin
+Großzschocher	Grosszschocher	Europe/Berlin
+Frankfurt am Main	Frankfurt am Main	Europe/Berlin
+Essen	Essen	Europe/Berlin
+Düsseldorf	Duesseldorf	Europe/Berlin
+Duisburg	Duisburg	Europe/Berlin
+Dresden	Dresden	Europe/Berlin
+Dortmund	Dortmund	Europe/Berlin
+Bremen	Bremen	Europe/Berlin
+Berlin	Berlin	Europe/Berlin
+Djibouti	Djibouti	Africa/Djibouti
+Copenhagen	Copenhagen	Europe/Copenhagen
+Santo Domingo	Santo Domingo	America/Santo_Domingo
+Santiago de los Caballeros	Santiago de los Caballeros	America/Santo_Domingo
+Santo Domingo Oeste	Santo Domingo Oeste	America/Santo_Domingo
+Santo Domingo Este	Santo Domingo Este	America/Santo_Domingo
+Boumerdas	Boumerdas	Africa/Algiers
+Tébessa	Tebessa	Africa/Algiers
+Oran	Oran	Africa/Algiers
+Constantine	Constantine	Africa/Algiers
+Algiers	Algiers	Africa/Algiers
+Santo Domingo de los Colorados	Santo Domingo de los Colorados	America/Guayaquil
+Quito	Quito	America/Guayaquil
+Guayaquil	Guayaquil	America/Guayaquil
+Cuenca	Cuenca	America/Guayaquil
+Ţanţā	Tanta	Africa/Cairo
+Shubrā al Khaymah	Shubra al Khaymah	Africa/Cairo
+Port Said	Port Said	Africa/Cairo
+Zagazig	Zagazig	Africa/Cairo
+Asyūţ	Asyut	Africa/Cairo
+Suez	Suez	Africa/Cairo
+Luxor	Luxor	Africa/Cairo
+Cairo	Cairo	Africa/Cairo
+Al Manşūrah	Al Mansurah	Africa/Cairo
+Al Maḩallah al Kubrá	Al Mahallah al Kubra	Africa/Cairo
+Al Khuşūş	Al Khusus	Africa/Cairo
+Giza	Giza	Africa/Cairo
+Ismailia	Ismailia	Africa/Cairo
+Alexandria	Alexandria	Africa/Cairo
+Al Fayyūm	Al Fayyum	Africa/Cairo
+Asmara	Asmara	Africa/Asmara
+Valencia	Valencia	Europe/Madrid
+Sevilla	Sevilla	Europe/Madrid
+Palma	Palma	Europe/Madrid
+Murcia	Murcia	Europe/Madrid
+Málaga	Malaga	Europe/Madrid
+Zaragoza	Zaragoza	Europe/Madrid
+Madrid	Madrid	Europe/Madrid
+Barcelona	Barcelona	Europe/Madrid
+Addis Ababa	Addis Ababa	Africa/Addis_Ababa
+Helsinki	Helsinki	Europe/Helsinki
+Toulouse	Toulouse	Europe/Paris
+Paris	Paris	Europe/Paris
+Marseille	Marseille	Europe/Paris
+Lyon	Lyon	Europe/Paris
+Libreville	Libreville	Africa/Libreville
+Sheffield	Sheffield	Europe/London
+London	London	Europe/London
+Liverpool	Liverpool	Europe/London
+Leicester	Leicester	Europe/London
+Leeds	Leeds	Europe/London
+Glasgow	Glasgow	Europe/London
+Edinburgh	Edinburgh	Europe/London
+Cardiff	Cardiff	Europe/London
+Bristol	Bristol	Europe/London
+Birmingham	Birmingham	Europe/London
+Tbilisi	Tbilisi	Asia/Tbilisi
+Kumasi	Kumasi	Africa/Accra
+Accra	Accra	Africa/Accra
+Conakry	Conakry	Africa/Conakry
+Camayenne	Camayenne	Africa/Conakry
+Athens	Athens	Europe/Athens
+Villa Nueva	Villa Nueva	America/Guatemala
+Mixco	Mixco	America/Guatemala
+Guatemala City	Guatemala City	America/Guatemala
+Tuen Mun	Tuen Mun	Asia/Hong_Kong
+Tseung Kwan O	Tseung Kwan O	Asia/Hong_Kong
+Sha Tin	Sha Tin	Asia/Hong_Kong
+Kowloon	Kowloon	Asia/Hong_Kong
+Hong Kong	Hong Kong	Asia/Hong_Kong
+Victoria	Victoria	Asia/Hong_Kong
+Tegucigalpa	Tegucigalpa	America/Tegucigalpa
+San Pedro Sula	San Pedro Sula	America/Tegucigalpa
+Zagreb	Zagreb	Europe/Zagreb
+Port-au-Prince	Port-au-Prince	America/Port-au-Prince
+Carrefour	Carrefour	America/Port-au-Prince
+Budapest	Budapest	Europe/Budapest
+Medan	Medan	Asia/Jakarta
+Yogyakarta	Yogyakarta	Asia/Jakarta
+Makassar	Makassar	Asia/Makassar
+Bandar Lampung	Bandar Lampung	Asia/Jakarta
+Tangerang	Tangerang	Asia/Jakarta
+Surakarta	Surakarta	Asia/Jakarta
+Surabaya	Surabaya	Asia/Jakarta
+Situbondo	Situbondo	Asia/Jakarta
+Serang	Serang	Asia/Jakarta
+Semarang	Semarang	Asia/Jakarta
+Samarinda	Samarinda	Asia/Makassar
+Pontianak	Pontianak	Asia/Pontianak
+Pekanbaru	Pekanbaru	Asia/Jakarta
+Palembang	Palembang	Asia/Jakarta
+Padang	Padang	Asia/Jakarta
+Mataram	Mataram	Asia/Makassar
+Manado	Manado	Asia/Makassar
+Malang	Malang	Asia/Jakarta
+Jambi City	Jambi City	Asia/Jakarta
+Jakarta	Jakarta	Asia/Jakarta
+Depok	Depok	Asia/Jakarta
+Denpasar	Denpasar	Asia/Makassar
+Cimahi	Cimahi	Asia/Jakarta
+Bogor	Bogor	Asia/Jakarta
+Bekasi	Bekasi	Asia/Jakarta
+Banjarmasin	Banjarmasin	Asia/Makassar
+Bandung	Bandung	Asia/Jakarta
+Balikpapan	Balikpapan	Asia/Makassar
+Kupang	Kupang	Asia/Makassar
+Jayapura	Jayapura	Asia/Jayapura
+Batam	Batam	Asia/Jakarta
+South Tangerang	South Tangerang	Asia/Jakarta
+Dublin	Dublin	Europe/Dublin
+Jerusalem	Jerusalem	Asia/Jerusalem
+Tel Aviv	Tel Aviv	Asia/Jerusalem
+West Jerusalem	West Jerusalem	Asia/Jerusalem
+Warangal	Warangal	Asia/Kolkata
+Visakhapatnam	Visakhapatnam	Asia/Kolkata
+Vijayawada	Vijayawada	Asia/Kolkata
+Vellore	Vellore	Asia/Kolkata
+Varanasi	Varanasi	Asia/Kolkata
+Vadodara	Vadodara	Asia/Kolkata
+Ulhasnagar	Ulhasnagar	Asia/Kolkata
+Ujjain	Ujjain	Asia/Kolkata
+Udaipur	Udaipur	Asia/Kolkata
+Thiruvananthapuram	Thiruvananthapuram	Asia/Kolkata
+Tiruppur	Tiruppur	Asia/Kolkata
+Tirunelveli	Tirunelveli	Asia/Kolkata
+Tiruchirappalli	Tiruchirappalli	Asia/Kolkata
+Thāne	Thane	Asia/Kolkata
+Teni	Teni	Asia/Kolkata
+Surat	Surat	Asia/Kolkata
+Srinagar	Srinagar	Asia/Kolkata
+Rajpur Sonarpur	Rajpur Sonarpur	Asia/Kolkata
+Shyamnagar	Shyamnagar	Asia/Kolkata
+Solāpur	Solapur	Asia/Kolkata
+Siliguri	Siliguri	Asia/Kolkata
+Sāngli	Sangli	Asia/Kolkata
+Salem	Salem	Asia/Kolkata
+Sahāranpur	Saharanpur	Asia/Kolkata
+Raurkela	Raurkela	Asia/Kolkata
+Ranchi	Ranchi	Asia/Kolkata
+Rāmgundam	Ramgundam	Asia/Kolkata
+Rājkot	Rajkot	Asia/Kolkata
+Raipur	Raipur	Asia/Kolkata
+Pune	Pune	Asia/Kolkata
+Puducherry	Puducherry	Asia/Kolkata
+Pimpri	Pimpri	Asia/Kolkata
+Patna	Patna	Asia/Kolkata
+Nowrangapur	Nowrangapur	Asia/Kolkata
+Nellore	Nellore	Asia/Kolkata
+Nashik	Nashik	Asia/Kolkata
+Narela	Narela	Asia/Kolkata
+Nanded	Nanded	Asia/Kolkata
+Najafgarh	Najafgarh	Asia/Kolkata
+Nagpur	Nagpur	Asia/Kolkata
+Mysore	Mysore	Asia/Kolkata
+Morādābād	Moradabad	Asia/Kolkata
+Meerut	Meerut	Asia/Kolkata
+Mangalore	Mangalore	Asia/Kolkata
+Mālegaon	Malegaon	Asia/Kolkata
+Madurai	Madurai	Asia/Kolkata
+Chennai	Chennai	Asia/Kolkata
+Ludhiāna	Ludhiana	Asia/Kolkata
+Lucknow	Lucknow	Asia/Kolkata
+Kurnool	Kurnool	Asia/Kolkata
+Kozhikode	Kozhikode	Asia/Kolkata
+Kota	Kota	Asia/Kolkata
+Korba	Korba	Asia/Kolkata
+Kolhāpur	Kolhapur	Asia/Kolkata
+Karol Bāgh	Karol Bagh	Asia/Kolkata
+Kanpur	Kanpur	Asia/Kolkata
+Kalyān	Kalyan	Asia/Kolkata
+Jalandhar	Jalandhar	Asia/Kolkata
+Jodhpur	Jodhpur	Asia/Kolkata
+Jhānsi	Jhansi	Asia/Kolkata
+Jamshedpur	Jamshedpur	Asia/Kolkata
+Jamnagar	Jamnagar	Asia/Kolkata
+Jammu	Jammu	Asia/Kolkata
+Jalgaon	Jalgaon	Asia/Kolkata
+Jaipur	Jaipur	Asia/Kolkata
+Jabalpur	Jabalpur	Asia/Kolkata
+Indore	Indore	Asia/Kolkata
+Hyderābād	Hyderabad	Asia/Kolkata
+Hubli	Hubli	Asia/Kolkata
+Hāora	Haora	Asia/Kolkata
+Gwalior	Gwalior	Asia/Kolkata
+Guntur	Guntur	Asia/Kolkata
+Gulbarga	Gulbarga	Asia/Kolkata
+Gorakhpur	Gorakhpur	Asia/Kolkata
+Gorakhpur	Gorakhpur	Asia/Kolkata
+Ghāziābād	Ghaziabad	Asia/Kolkata
+Gaya	Gaya	Asia/Kolkata
+Guwahati	Guwahati	Asia/Kolkata
+Faridabad	Faridabad	Asia/Kolkata
+Erode	Erode	Asia/Kolkata
+Durgapur	Durgapur	Asia/Kolkata
+Dombivli	Dombivli	Asia/Kolkata
+Dhanbad	Dhanbad	Asia/Kolkata
+Delhi	Delhi	Asia/Kolkata
+Dehra Dūn	Dehra Dun	Asia/Kolkata
+Davangere	Davangere	Asia/Kolkata
+Cuttack	Cuttack	Asia/Kolkata
+Coimbatore	Coimbatore	Asia/Kolkata
+Cochin	Cochin	Asia/Kolkata
+Chandīgarh	Chandigarh	Asia/Kolkata
+Kolkata	Kolkata	Asia/Kolkata
+Borivli	Borivli	Asia/Kolkata
+Mumbai	Mumbai	Asia/Kolkata
+Bokāro	Bokaro	Asia/Kolkata
+Bilimora	Bilimora	Asia/Kolkata
+Bīkaner	Bikaner	Asia/Kolkata
+Bhubaneshwar	Bhubaneshwar	Asia/Kolkata
+Bhopāl	Bhopal	Asia/Kolkata
+Bhiwandi	Bhiwandi	Asia/Kolkata
+Bhilai	Bhilai	Asia/Kolkata
+Bhayandar	Bhayandar	Asia/Kolkata
+Bhavnagar	Bhavnagar	Asia/Kolkata
+Bhātpāra	Bhatpara	Asia/Kolkata
+Belgaum	Belgaum	Asia/Kolkata
+Bareilly	Bareilly	Asia/Kolkata
+Bengaluru	Bengaluru	Asia/Kolkata
+Aurangabad	Aurangabad	Asia/Kolkata
+Āsansol	Asansol	Asia/Kolkata
+Amritsar	Amritsar	Asia/Kolkata
+Amrāvati	Amravati	Asia/Kolkata
+Allahābād	Allahabad	Asia/Kolkata
+Alīgarh	Aligarh	Asia/Kolkata
+Akola	Akola	Asia/Kolkata
+Ajmer	Ajmer	Asia/Kolkata
+Ahmedabad	Ahmedabad	Asia/Kolkata
+Agra	Agra	Asia/Kolkata
+Maheshtala	Maheshtala	Asia/Kolkata
+Navi Mumbai	Navi Mumbai	Asia/Kolkata
+Shivaji Nagar	Shivaji Nagar	Asia/Kolkata
+Thoothukudi	Thoothukudi	Asia/Kolkata
+Rohini	Rohini	Asia/Kolkata
+Kallakurichi	Kallakurichi	Asia/Kolkata
+Kirkuk	Kirkuk	Asia/Baghdad
+Karbala	Karbala	Asia/Baghdad
+Erbil	Erbil	Asia/Baghdad
+Baghdad	Baghdad	Asia/Baghdad
+As Sulaymānīyah	As Sulaymaniyah	Asia/Baghdad
+Nasiriyah	Nasiriyah	Asia/Baghdad
+Najaf	Najaf	Asia/Baghdad
+Al Mawşil al Jadīdah	Al Mawsil al Jadidah	Asia/Baghdad
+Mosul	Mosul	Asia/Baghdad
+Basrah	Basrah	Asia/Baghdad
+Abū Ghurayb	Abu Ghurayb	Asia/Baghdad
+Al Başrah al Qadīmah	Al Basrah al Qadimah	Asia/Baghdad
+Āzādshahr	Azadshahr	Asia/Tehran
+Kahrīz	Kahriz	Asia/Tehran
+Yazd	Yazd	Asia/Tehran
+Tehran	Tehran	Asia/Tehran
+Tabriz	Tabriz	Asia/Tehran
+Shiraz	Shiraz	Asia/Tehran
+Rasht	Rasht	Asia/Tehran
+Qom	Qom	Asia/Tehran
+Orūmīyeh	Orumiyeh	Asia/Tehran
+Mashhad	Mashhad	Asia/Tehran
+Kermanshah	Kermanshah	Asia/Tehran
+Kerman	Kerman	Asia/Tehran
+Karaj	Karaj	Asia/Tehran
+Hamadān	Hamadan	Asia/Tehran
+Ardabīl	Ardabil	Asia/Tehran
+Arāk	Arak	Asia/Tehran
+Ahvaz	Ahvaz	Asia/Tehran
+Isfahan	Isfahan	Asia/Tehran
+Zahedan	Zahedan	Asia/Tehran
+Pasragad Branch	Pasragad Branch	Asia/Tehran
+Palermo	Palermo	Europe/Rome
+Turin	Turin	Europe/Rome
+Rome	Rome	Europe/Rome
+Naples	Naples	Europe/Rome
+Milan	Milan	Europe/Rome
+Genoa	Genoa	Europe/Rome
+New Kingston	New Kingston	America/Jamaica
+Kingston	Kingston	America/Jamaica
+Irbid	Irbid	Asia/Amman
+Zarqa	Zarqa	Asia/Amman
+Amman	Amman	Asia/Amman
+Yokosuka	Yokosuka	Asia/Tokyo
+Yokohama	Yokohama	Asia/Tokyo
+Utsunomiya	Utsunomiya	Asia/Tokyo
+Toyota	Toyota	Asia/Tokyo
+Toyama	Toyama	Asia/Tokyo
+Tokyo	Tokyo	Asia/Tokyo
+Takamatsu	Takamatsu	Asia/Tokyo
+Shizuoka	Shizuoka	Asia/Tokyo
+Sakai	Sakai	Asia/Tokyo
+Osaka	Osaka	Asia/Tokyo
+Okayama	Okayama	Asia/Tokyo
+Ōita	Oita	Asia/Tokyo
+Nishinomiya-hama	Nishinomiya-hama	Asia/Tokyo
+Niigata	Niigata	Asia/Tokyo
+Nagoya	Nagoya	Asia/Tokyo
+Nagasaki	Nagasaki	Asia/Tokyo
+Matsudo	Matsudo	Asia/Tokyo
+Kyoto	Kyoto	Asia/Tokyo
+Kurashiki	Kurashiki	Asia/Tokyo
+Kumamoto	Kumamoto	Asia/Tokyo
+Kobe	Kobe	Asia/Tokyo
+Kitakyushu	Kitakyushu	Asia/Tokyo
+Kawasaki	Kawasaki	Asia/Tokyo
+Kawaguchi	Kawaguchi	Asia/Tokyo
+Kashiwa	Kashiwa	Asia/Tokyo
+Kanazawa	Kanazawa	Asia/Tokyo
+Kagoshima	Kagoshima	Asia/Tokyo
+Hiroshima	Hiroshima	Asia/Tokyo
+Hirakata	Hirakata	Asia/Tokyo
+Himeji	Himeji	Asia/Tokyo
+Higashi-ōsaka	Higashi-osaka	Asia/Tokyo
+Hamamatsu	Hamamatsu	Asia/Tokyo
+Hachiōji	Hachioji	Asia/Tokyo
+Gifu-shi	Gifu-shi	Asia/Tokyo
+Honchō	Honcho	Asia/Tokyo
+Fukuyama	Fukuyama	Asia/Tokyo
+Fukuoka	Fukuoka	Asia/Tokyo
+Fujisawa	Fujisawa	Asia/Tokyo
+Amagasaki	Amagasaki	Asia/Tokyo
+Matsuyama	Matsuyama	Asia/Tokyo
+Sendai	Sendai	Asia/Tokyo
+Chiba	Chiba	Asia/Tokyo
+Sapporo	Sapporo	Asia/Tokyo
+Saitama	Saitama	Asia/Tokyo
+Ruiru	Ruiru	Africa/Nairobi
+Nairobi	Nairobi	Africa/Nairobi
+Mombasa	Mombasa	Africa/Nairobi
+Kakamega	Kakamega	Africa/Nairobi
+Eldoret	Eldoret	Africa/Nairobi
+Bishkek	Bishkek	Asia/Bishkek
+Phnom Penh	Phnom Penh	Asia/Phnom_Penh
+Takeo	Takeo	Asia/Phnom_Penh
+Sunch’ŏn	Sunch'on	Asia/Pyongyang
+Pyongyang	Pyongyang	Asia/Pyongyang
+Namp’o	Namp'o	Asia/Pyongyang
+Hamhŭng	Hamhung	Asia/Pyongyang
+Ulsan	Ulsan	Asia/Seoul
+Uijeongbu-si	Uijeongbu-si	Asia/Seoul
+Daejeon	Daejeon	Asia/Seoul
+Daegu	Daegu	Asia/Seoul
+Suwon	Suwon	Asia/Seoul
+Seoul	Seoul	Asia/Seoul
+Busan	Busan	Asia/Seoul
+Bucheon-si	Bucheon-si	Asia/Seoul
+Pohang	Pohang	Asia/Seoul
+Masan	Masan	Asia/Seoul
+Gwangju	Gwangju	Asia/Seoul
+Gumi	Gumi	Asia/Seoul
+Goyang-si	Goyang-si	Asia/Seoul
+Kimhae	Kimhae	Asia/Seoul
+Incheon	Incheon	Asia/Seoul
+Hwaseong-si	Hwaseong-si	Asia/Seoul
+Jeonju	Jeonju	Asia/Seoul
+Cheongju-si	Cheongju-si	Asia/Seoul
+Cheonan	Cheonan	Asia/Seoul
+Jeju City	Jeju City	Asia/Seoul
+Changwon	Changwon	Asia/Seoul
+Anyang-si	Anyang-si	Asia/Seoul
+Ansan-si	Ansan-si	Asia/Seoul
+Seongnam-si	Seongnam-si	Asia/Seoul
+Al Aḩmadī	Al Ahmadi	Asia/Kuwait
+Karagandy	Karagandy	Asia/Almaty
+Aktobe	Aktobe	Asia/Aqtobe
+Shymkent	Shymkent	Asia/Almaty
+Almaty	Almaty	Asia/Almaty
+Ra’s Bayrūt	Ra's Bayrut	Asia/Beirut
+Beirut	Beirut	Asia/Beirut
+Colombo	Colombo	Asia/Colombo
+Monrovia	Monrovia	Africa/Monrovia
+Vilnius	Vilnius	Europe/Vilnius
+Riga	Riga	Europe/Riga
+Benghazi	Benghazi	Africa/Tripoli
+Ajdabiya	Ajdabiya	Africa/Tripoli
+Tripoli	Tripoli	Africa/Tripoli
+Tangier	Tangier	Africa/Casablanca
+Sale	Sale	Africa/Casablanca
+Rabat	Rabat	Africa/Casablanca
+Oujda-Angad	Oujda-Angad	Africa/Casablanca
+Meknès	Meknes	Africa/Casablanca
+Marrakesh	Marrakesh	Africa/Casablanca
+Fès	Fes	Africa/Casablanca
+Casablanca	Casablanca	Africa/Casablanca
+Agadir	Agadir	Africa/Casablanca
+Chisinau	Chisinau	Europe/Chisinau
+Antananarivo	Antananarivo	Indian/Antananarivo
+Skopje	Skopje	Europe/Skopje
+Bamako	Bamako	Africa/Bamako
+Yangon	Yangon	Asia/Yangon
+Mawlamyine	Mawlamyine	Asia/Yangon
+Mandalay	Mandalay	Asia/Yangon
+Nay Pyi Taw	Nay Pyi Taw	Asia/Yangon
+Ulan Bator	Ulan Bator	Asia/Ulaanbaatar
+Macau	Macau	Asia/Macau
+Nouakchott	Nouakchott	Africa/Nouakchott
+Lilongwe	Lilongwe	Africa/Blantyre
+Blantyre	Blantyre	Africa/Blantyre
+Xochimilco	Xochimilco	America/Mexico_City
+Álvaro Obregón	Alvaro Obregon	America/Mexico_City
+Gustavo Adolfo Madero	Gustavo Adolfo Madero	America/Mexico_City
+Veracruz	Veracruz	America/Mexico_City
+Tuxtla	Tuxtla	America/Mexico_City
+Toluca	Toluca	America/Mexico_City
+Tlalpan	Tlalpan	America/Mexico_City
+Tlalnepantla	Tlalnepantla	America/Mexico_City
+Cuautitlán Izcalli	Cuautitlan Izcalli	America/Mexico_City
+Santa María Chimalhuacán	Santa Maria Chimalhuacan	America/Mexico_City
+Reynosa	Reynosa	America/Matamoros
+Puebla	Puebla	America/Mexico_City
+Naucalpan de Juárez	Naucalpan de Juarez	America/Mexico_City
+Mérida	Merida	America/Merida
+Heroica Matamoros	Heroica Matamoros	America/Matamoros
+Xalapa de Enríquez	Xalapa de Enriquez	America/Mexico_City
+Iztapalapa	Iztapalapa	America/Mexico_City
+Ecatepec de Morelos	Ecatepec de Morelos	America/Mexico_City
+Coyoacán	Coyoacan	America/Mexico_City
+Ciudad Nezahualcoyotl	Ciudad Nezahualcoyotl	America/Mexico_City
+Mexico City	Mexico City	America/Mexico_City
+Cancún	Cancun	America/Cancun
+Azcapotzalco	Azcapotzalco	America/Mexico_City
+Ciudad López Mateos	Ciudad Lopez Mateos	America/Mexico_City
+Acapulco de Juárez	Acapulco de Juarez	America/Mexico_City
+Venustiano Carranza	Venustiano Carranza	America/Mexico_City
+Cuauhtémoc	Cuauhtemoc	America/Mexico_City
+Zapopan	Zapopan	America/Mexico_City
+Torreón	Torreon	America/Monterrey
+Tonalá	Tonala	America/Mexico_City
+Tlaquepaque	Tlaquepaque	America/Mexico_City
+Tijuana	Tijuana	America/Tijuana
+San Nicolás de los Garza	San Nicolas de los Garza	America/Monterrey
+San Luis Potosí	San Luis Potosi	America/Mexico_City
+Saltillo	Saltillo	America/Monterrey
+Santiago de Querétaro	Santiago de Queretaro	America/Mexico_City
+Morelia	Morelia	America/Mexico_City
+Monterrey	Monterrey	America/Monterrey
+Mexicali	Mexicali	America/Tijuana
+León de los Aldama	Leon de los Aldama	America/Mexico_City
+Hermosillo	Hermosillo	America/Hermosillo
+Guadalupe	Guadalupe	America/Monterrey
+Guadalajara	Guadalajara	America/Mexico_City
+Victoria de Durango	Victoria de Durango	America/Monterrey
+Culiacán	Culiacan	America/Mazatlan
+Ciudad Juárez	Ciudad Juarez	America/Ojinaga
+Chihuahua	Chihuahua	America/Chihuahua
+Ciudad Apodaca	Ciudad Apodaca	America/Monterrey
+Aguascalientes	Aguascalientes	America/Mexico_City
+Johor Bahru	Johor Bahru	Asia/Kuala_Lumpur
+Shah Alam	Shah Alam	Asia/Kuala_Lumpur
+Klang	Klang	Asia/Kuala_Lumpur
+Kota Kinabalu	Kota Kinabalu	Asia/Kuching
+Ipoh	Ipoh	Asia/Kuala_Lumpur
+Kuala Terengganu	Kuala Terengganu	Asia/Kuala_Lumpur
+Malacca	Malacca	Asia/Kuala_Lumpur
+Petaling Jaya	Petaling Jaya	Asia/Kuala_Lumpur
+Kuala Lumpur	Kuala Lumpur	Asia/Kuala_Lumpur
+Kuantan	Kuantan	Asia/Kuala_Lumpur
+Kuching	Kuching	Asia/Kuching
+Kota Bharu	Kota Bharu	Asia/Kuala_Lumpur
+Kampung Baru Subang	Kampung Baru Subang	Asia/Kuala_Lumpur
+Subang Jaya	Subang Jaya	Asia/Kuala_Lumpur
+Nampula	Nampula	Africa/Maputo
+Matola	Matola	Africa/Maputo
+Maputo	Maputo	Africa/Maputo
+Beira	Beira	Africa/Maputo
+Niamey	Niamey	Africa/Niamey
+Zaria	Zaria	Africa/Lagos
+Warri	Warri	Africa/Lagos
+Uyo	Uyo	Africa/Lagos
+Sokoto	Sokoto	Africa/Lagos
+Port Harcourt	Port Harcourt	Africa/Lagos
+Oyo	Oyo	Africa/Lagos
+Onitsha	Onitsha	Africa/Lagos
+Okene	Okene	Africa/Lagos
+Maiduguri	Maiduguri	Africa/Lagos
+Lekki	Lekki	Africa/Lagos
+Lagos	Lagos	Africa/Lagos
+Katsina	Katsina	Africa/Lagos
+Kano	Kano	Africa/Lagos
+Kaduna	Kaduna	Africa/Lagos
+Jos	Jos	Africa/Lagos
+Ilorin	Ilorin	Africa/Lagos
+Ibadan	Ibadan	Africa/Lagos
+Enugu	Enugu	Africa/Lagos
+Ebute Ikorodu	Ebute Ikorodu	Africa/Lagos
+Calabar	Calabar	Africa/Lagos
+Benin City	Benin City	Africa/Lagos
+Bauchi	Bauchi	Africa/Lagos
+Akure	Akure	Africa/Lagos
+Ado-Ekiti	Ado-Ekiti	Africa/Lagos
+Abuja	Abuja	Africa/Lagos
+Abeokuta	Abeokuta	Africa/Lagos
+Aba	Aba	Africa/Lagos
+Managua	Managua	America/Managua
+The Hague	The Hague	Europe/Amsterdam
+Rotterdam	Rotterdam	Europe/Amsterdam
+Amsterdam	Amsterdam	Europe/Amsterdam
+Oslo	Oslo	Europe/Oslo
+Kathmandu	Kathmandu	Asia/Kathmandu
+Auckland	Auckland	Pacific/Auckland
+Muscat	Muscat	Asia/Muscat
+Panamá	Panama	America/Panama
+Trujillo	Trujillo	America/Lima
+Piura	Piura	America/Lima
+Chiclayo	Chiclayo	America/Lima
+Lima	Lima	America/Lima
+Huancayo	Huancayo	America/Lima
+Cusco	Cusco	America/Lima
+Callao	Callao	America/Lima
+Arequipa	Arequipa	America/Lima
+Zamboanga	Zamboanga	Asia/Manila
+Taguig	Taguig	Asia/Manila
+Quezon City	Quezon City	Asia/Manila
+Pasay	Pasay	Asia/Manila
+Paranaque City	Paranaque City	Asia/Manila
+Mansilingan	Mansilingan	Asia/Manila
+Manila	Manila	Asia/Manila
+Mandaluyong City	Mandaluyong City	Asia/Manila
+Makati City	Makati City	Asia/Manila
+Las Piñas	Las Pinas	Asia/Manila
+General Santos	General Santos	Asia/Manila
+Davao	Davao	Asia/Manila
+Dasmariñas	Dasmarinas	Asia/Manila
+Cebu City	Cebu City	Asia/Manila
+Caloocan City	Caloocan City	Asia/Manila
+Calamba	Calamba	Asia/Manila
+Cagayan de Oro	Cagayan de Oro	Asia/Manila
+Budta	Budta	Asia/Manila
+Bacolod City	Bacolod City	Asia/Manila
+Antipolo	Antipolo	Asia/Manila
+Malingao	Malingao	Asia/Manila
+Pasig City	Pasig City	Asia/Manila
+Sukkur	Sukkur	Asia/Karachi
+Sialkot	Sialkot	Asia/Karachi
+Sargodha	Sargodha	Asia/Karachi
+Rawalpindi	Rawalpindi	Asia/Karachi
+Rahim Yar Khan	Rahim Yar Khan	Asia/Karachi
+Quetta	Quetta	Asia/Karachi
+Peshawar	Peshawar	Asia/Karachi
+Muzaffarābād	Muzaffarabad	Asia/Karachi
+Multan	Multan	Asia/Karachi
+Lahore	Lahore	Asia/Karachi
+Kotli	Kotli	Asia/Karachi
+Karachi	Karachi	Asia/Karachi
+Islamabad	Islamabad	Asia/Karachi
+Hyderabad	Hyderabad	Asia/Karachi
+Gujranwala	Gujranwala	Asia/Karachi
+Faisalabad	Faisalabad	Asia/Karachi
+Battagram	Battagram	Asia/Karachi
+Bahawalpur	Bahawalpur	Asia/Karachi
+Warsaw	Warsaw	Europe/Warsaw
+Wrocław	Wroclaw	Europe/Warsaw
+Szczecin	Szczecin	Europe/Warsaw
+Poznań	Poznan	Europe/Warsaw
+Łódź	Lodz	Europe/Warsaw
+Kraków	Krakow	Europe/Warsaw
+Gdańsk	Gdansk	Europe/Warsaw
+San Juan	San Juan	America/Puerto_Rico
+Gaza	Gaza	Asia/Gaza
+East Jerusalem	East Jerusalem	Asia/Hebron
+Lisbon	Lisbon	Europe/Lisbon
+Asunción	Asuncion	America/Asuncion
+Bucharest	Bucharest	Europe/Bucharest
+Belgrade	Belgrade	Europe/Belgrade
+Yaroslavl	Yaroslavl	Europe/Moscow
+Voronezh	Voronezh	Europe/Moscow
+Volgograd	Volgograd	Europe/Volgograd
+Ulyanovsk	Ulyanovsk	Europe/Ulyanovsk
+Ufa	Ufa	Asia/Yekaterinburg
+Tver	Tver	Europe/Moscow
+Tula	Tula	Europe/Moscow
+Tolyatti	Tolyatti	Europe/Samara
+Stavropol’	Stavropol'	Europe/Moscow
+Saratov	Saratov	Europe/Saratov
+Saint Petersburg	Saint Petersburg	Europe/Moscow
+Samara	Samara	Europe/Samara
+Ryazan’	Ryazan'	Europe/Moscow
+Rostov-na-Donu	Rostov-na-Donu	Europe/Moscow
+Perm	Perm	Asia/Yekaterinburg
+Penza	Penza	Europe/Moscow
+Orenburg	Orenburg	Asia/Yekaterinburg
+Nizhniy Novgorod	Nizhniy Novgorod	Europe/Moscow
+Naberezhnyye Chelny	Naberezhnyye Chelny	Europe/Moscow
+Moscow	Moscow	Europe/Moscow
+Makhachkala	Makhachkala	Europe/Moscow
+Magnitogorsk	Magnitogorsk	Asia/Yekaterinburg
+Lipetsk	Lipetsk	Europe/Moscow
+Kursk	Kursk	Europe/Moscow
+Krasnodar	Krasnodar	Europe/Moscow
+Kirov	Kirov	Europe/Kirov
+Kazan	Kazan	Europe/Moscow
+Kaliningrad	Kaliningrad	Europe/Kaliningrad
+Izhevsk	Izhevsk	Europe/Samara
+Ivanovo	Ivanovo	Europe/Moscow
+Cheboksary	Cheboksary	Europe/Moscow
+Bryansk	Bryansk	Europe/Moscow
+Astrakhan	Astrakhan	Europe/Astrakhan
+Yekaterinburg	Yekaterinburg	Asia/Yekaterinburg
+Tyumen	Tyumen	Asia/Yekaterinburg
+Tomsk	Tomsk	Asia/Tomsk
+Omsk	Omsk	Asia/Omsk
+Novosibirsk	Novosibirsk	Asia/Novosibirsk
+Novokuznetsk	Novokuznetsk	Asia/Novokuznetsk
+Krasnoyarsk	Krasnoyarsk	Asia/Krasnoyarsk
+Kemerovo	Kemerovo	Asia/Novokuznetsk
+Chelyabinsk	Chelyabinsk	Asia/Yekaterinburg
+Barnaul	Barnaul	Asia/Barnaul
+Vladivostok	Vladivostok	Asia/Vladivostok
+Khabarovsk	Khabarovsk	Asia/Vladivostok
+Irkutsk	Irkutsk	Asia/Irkutsk
+Khabarovsk Vtoroy	Khabarovsk Vtoroy	Asia/Vladivostok
+Kalininskiy	Kalininskiy	Europe/Moscow
+Kigali	Kigali	Africa/Kigali
+Tabuk	Tabuk	Asia/Riyadh
+Sulţānah	Sultanah	Asia/Riyadh
+Najrān	Najran	Asia/Riyadh
+Mecca	Mecca	Asia/Riyadh
+Jeddah	Jeddah	Asia/Riyadh
+Ha'il	Ha'il	Asia/Riyadh
+Buraydah	Buraydah	Asia/Riyadh
+Ta’if	Ta'if	Asia/Riyadh
+Riyadh	Riyadh	Asia/Riyadh
+Medina	Medina	Asia/Riyadh
+Al Kharj	Al Kharj	Asia/Riyadh
+Dammam	Dammam	Asia/Riyadh
+Omdurman	Omdurman	Africa/Khartoum
+Nyala	Nyala	Africa/Khartoum
+Kassala	Kassala	Africa/Khartoum
+Port Sudan	Port Sudan	Africa/Khartoum
+Khartoum	Khartoum	Africa/Khartoum
+Stockholm	Stockholm	Europe/Stockholm
+Göteborg	Goeteborg	Europe/Stockholm
+Singapore	Singapore	Asia/Singapore
+Bratislava	Bratislava	Europe/Bratislava
+Freetown	Freetown	Africa/Freetown
+Touba	Touba	Africa/Dakar
+Pikine	Pikine	Africa/Dakar
+Dakar	Dakar	Africa/Dakar
+Mogadishu	Mogadishu	Africa/Mogadishu
+Hargeysa	Hargeysa	Africa/Mogadishu
+Juba	Juba	Africa/Juba
+San Salvador	San Salvador	America/El_Salvador
+Homs	Homs	Asia/Damascus
+Ḩamāh	Hamah	Asia/Damascus
+Aleppo	Aleppo	Asia/Damascus
+Damascus	Damascus	Asia/Damascus
+N'Djamena	N'Djamena	Africa/Ndjamena
+Lomé	Lome	Africa/Lome
+Bangkok	Bangkok	Asia/Bangkok
+Dushanbe	Dushanbe	Asia/Dushanbe
+Ashgabat	Ashgabat	Asia/Ashgabat
+Tunis	Tunis	Africa/Tunis
+Şanlıurfa	Sanliurfa	Europe/Istanbul
+Mersin	Mersin	Europe/Istanbul
+Malatya	Malatya	Europe/Istanbul
+Konya	Konya	Europe/Istanbul
+Kayseri	Kayseri	Europe/Istanbul
+İzmir	Izmir	Europe/Istanbul
+Gaziantep	Gaziantep	Europe/Istanbul
+Eskişehir	Eskisehir	Europe/Istanbul
+Erzurum	Erzurum	Europe/Istanbul
+Diyarbakır	Diyarbakir	Europe/Istanbul
+Antalya	Antalya	Europe/Istanbul
+Ankara	Ankara	Europe/Istanbul
+Adana	Adana	Europe/Istanbul
+Üsküdar	UEskuedar	Europe/Istanbul
+Umraniye	Umraniye	Europe/Istanbul
+Maltepe	Maltepe	Europe/Istanbul
+Istanbul	Istanbul	Europe/Istanbul
+Esenler	Esenler	Europe/Istanbul
+Bursa	Bursa	Europe/Istanbul
+Bağcılar	Bagcilar	Europe/Istanbul
+Çankaya	Cankaya	Europe/Istanbul
+Bahçelievler	Bahcelievler	Europe/Istanbul
+Sultangazi	Sultangazi	Europe/Istanbul
+Karabağlar	Karabaglar	Europe/Istanbul
+Muratpaşa	Muratpasa	Europe/Istanbul
+Taipei	Taipei	Asia/Taipei
+Tainan	Tainan	Asia/Taipei
+Taichung	Taichung	Asia/Taipei
+Banqiao	Banqiao	Asia/Taipei
+Kaohsiung	Kaohsiung	Asia/Taipei
+Hsinchu	Hsinchu	Asia/Taipei
+Taoyuan City	Taoyuan City	Asia/Taipei
+Zanzibar	Zanzibar	Africa/Dar_es_Salaam
+Mwanza	Mwanza	Africa/Dar_es_Salaam
+Dar es Salaam	Dar es Salaam	Africa/Dar_es_Salaam
+Zaporizhzhya	Zaporizhzhya	Europe/Zaporozhye
+Sevastopol	Sevastopol	Europe/Simferopol
+Odesa	Odesa	Europe/Kyiv
+Mykolayiv	Mykolayiv	Europe/Kyiv
+Mariupol	Mariupol	Europe/Kyiv
+Lviv	Lviv	Europe/Kyiv
+Luhansk	Luhansk	Europe/Zaporozhye
+Kyiv	Kyiv	Europe/Kyiv
+Kryvyy Rih	Kryvyy Rih	Europe/Kyiv
+Kharkiv	Kharkiv	Europe/Kyiv
+Donetsk	Donetsk	Europe/Kyiv
+Dnipro	Dnipro	Europe/Kyiv
+Kampala	Kampala	Africa/Kampala
+Washington	Washington	America/New_York
+Jacksonville	Jacksonville	America/New_York
+Miami	Miami	America/New_York
+Atlanta	Atlanta	America/New_York
+Indianapolis	Indianapolis	America/Indiana/Indianapolis
+Baltimore	Baltimore	America/New_York
+Kansas City	Kansas City	America/Chicago
+Charlotte	Charlotte	America/New_York
+Raleigh	Raleigh	America/New_York
+Columbus	Columbus	America/New_York
+Oklahoma City	Oklahoma City	America/Chicago
+Tulsa	Tulsa	America/Chicago
+Philadelphia	Philadelphia	America/New_York
+Memphis	Memphis	America/Chicago
+Nashville	Nashville	America/Chicago
+New South Memphis	New South Memphis	America/Chicago
+Austin	Austin	America/Chicago
+Dallas	Dallas	America/Chicago
+Fort Worth	Fort Worth	America/Chicago
+Houston	Houston	America/Chicago
+San Antonio	San Antonio	America/Chicago
+Virginia Beach	Virginia Beach	America/New_York
+Chicago	Chicago	America/Chicago
+Boston	Boston	America/New_York
+South Boston	South Boston	America/New_York
+Detroit	Detroit	America/Detroit
+Minneapolis	Minneapolis	America/Chicago
+Omaha	Omaha	America/Chicago
+The Bronx	The Bronx	America/New_York
+Brooklyn	Brooklyn	America/New_York
+Manhattan	Manhattan	America/New_York
+New York City	New York City	America/New_York
+Queens	Queens	America/New_York
+Staten Island	Staten Island	America/New_York
+Milwaukee	Milwaukee	America/Chicago
+Mesa	Mesa	America/Phoenix
+Phoenix	Phoenix	America/Phoenix
+Tucson	Tucson	America/Phoenix
+Fresno	Fresno	America/Los_Angeles
+Long Beach	Long Beach	America/Los_Angeles
+Los Angeles	Los Angeles	America/Los_Angeles
+Oakland	Oakland	America/Los_Angeles
+Sacramento	Sacramento	America/Los_Angeles
+San Diego	San Diego	America/Los_Angeles
+San Francisco	San Francisco	America/Los_Angeles
+San Jose	San Jose	America/Los_Angeles
+Colorado Springs	Colorado Springs	America/Denver
+Denver	Denver	America/Denver
+Albuquerque	Albuquerque	America/Denver
+Las Vegas	Las Vegas	America/Los_Angeles
+El Paso	El Paso	America/Denver
+Portland	Portland	America/Los_Angeles
+Seattle	Seattle	America/Los_Angeles
+Montevideo	Montevideo	America/Montevideo
+Tashkent	Tashkent	Asia/Tashkent
+Namangan	Namangan	Asia/Tashkent
+Valencia	Valencia	America/Caracas
+Maracay	Maracay	America/Caracas
+Maracaibo	Maracaibo	America/Caracas
+Cumaná	Cumana	America/Caracas
+Ciudad Guayana	Ciudad Guayana	America/Caracas
+Ciudad Bolívar	Ciudad Bolivar	America/Caracas
+Caracas	Caracas	America/Caracas
+Barquisimeto	Barquisimeto	America/Caracas
+Barcelona	Barcelona	America/Caracas
+Maturín	Maturin	America/Caracas
+Ho Chi Minh City	Ho Chi Minh City	Asia/Ho_Chi_Minh
+Hanoi	Hanoi	Asia/Bangkok
+Haiphong	Haiphong	Asia/Bangkok
+Dĩ An	Di An	Asia/Ho_Chi_Minh
+Da Nang	Da Nang	Asia/Ho_Chi_Minh
+Cần Thơ	Can Tho	Asia/Ho_Chi_Minh
+Biên Hòa	Bien Hoa	Asia/Ho_Chi_Minh
+Thuận An	Thuan An	Asia/Ho_Chi_Minh
+Pristina	Pristina	Europe/Belgrade
+Taiz	Taiz	Asia/Aden
+Sanaa	Sanaa	Asia/Aden
+Al Ḩudaydah	Al Hudaydah	Asia/Aden
+Aden	Aden	Asia/Aden
+Welkom	Welkom	Africa/Johannesburg
+Vereeniging	Vereeniging	Africa/Johannesburg
+Tembisa	Tembisa	Africa/Johannesburg
+Soweto	Soweto	Africa/Johannesburg
+Pretoria	Pretoria	Africa/Johannesburg
+Port Elizabeth	Port Elizabeth	Africa/Johannesburg
+Pietermaritzburg	Pietermaritzburg	Africa/Johannesburg
+Newcastle	Newcastle	Africa/Johannesburg
+Johannesburg	Johannesburg	Africa/Johannesburg
+East London	East London	Africa/Johannesburg
+Durban	Durban	Africa/Johannesburg
+Boksburg	Boksburg	Africa/Johannesburg
+Bloemfontein	Bloemfontein	Africa/Johannesburg
+Benoni	Benoni	Africa/Johannesburg
+Cape Town	Cape Town	Africa/Johannesburg
+Lusaka	Lusaka	Africa/Lusaka
+Kitwe	Kitwe	Africa/Lusaka
+Harare	Harare	Africa/Harare
+Bulawayo	Bulawayo	Africa/Harare

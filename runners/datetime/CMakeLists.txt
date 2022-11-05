@@ -6,3 +6,5 @@ target_link_libraries(krunner_datetime
     KF5::KIOWidgets
     KF5::I18n
 )
+
+install(FILES majorcities.tsv DESTINATION ${KDE_INSTALL_DATADIR}/plasma/datetimerunner)

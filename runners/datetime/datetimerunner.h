@@ -38,6 +38,8 @@ private:
     QHash<QString, QDateTime> datetime(const QStringView &tz);
 #endif
     void addMatch(const QString &text, const QString &clipboardText, RunnerContext &context, const QString &iconName);
+    void parseCityTZData();
+    QList<QStringList> cityTZData;
 };
 
 #endif
