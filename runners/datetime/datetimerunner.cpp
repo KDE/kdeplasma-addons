@@ -16,6 +16,7 @@
 #include <KLocalizedString>
 
 #include <math.h>
+#include <qregularexpression.h>
 
 static const QString dateWord = i18nc("Note this is a KRunner keyword", "date");
 static const QString timeWord = i18nc("Note this is a KRunner keyword", "time");
@@ -98,40 +99,53 @@ void DateTimeRunner::match(RunnerContext &context)
         if (term.length() < minLen) {
             return; // query is too short to contain a time specification: not a match
         }
+
         QDate date;
         QTime time;
-        QString dtTerm;
-        // check all query substrings
-        for (int i = 0; i < term.length() - minLen + 1 && time.isNull(); ++i) {
-            for (int n = minLen; n < term.length() - i + 1 && time.isNull(); ++n) {
-                dtTerm = term.mid(i, n);
-                // try to parse substring as datetime or time
-                if (QDateTime dateTimeParse = QLocale::system().toDateTime(dtTerm, QLocale::ShortFormat); dateTimeParse.isValid()) {
-                    date = dateTimeParse.date();
-                    time = dateTimeParse.time();
-                } else if (QTime timeParse = QLocale::system().toTime(dtTerm, QLocale::ShortFormat); timeParse.isValid()) {
-                    time = timeParse;
-                    // unpsecified date will later be initialized to current date in the first timezone
-                }
+        int dtTermEnd;
+        // check all leftmost query substrings
+        for (int n = minLen; n <= term.length(); ++n) {
+            QString dtTerm = term.left(n);
+            dtTermEnd = n;
+            // try to parse substring as datetime or time
+            if (QDateTime dateTimeParse = QLocale::system().toDateTime(dtTerm, QLocale::ShortFormat); dateTimeParse.isValid()) {
+                date = dateTimeParse.date();
+                time = dateTimeParse.time();
+                break;
+            } else if (QTime timeParse = QLocale::system().toTime(dtTerm, QLocale::ShortFormat); timeParse.isValid()) {
+                time = timeParse;
+                // unpsecified date will later be initialized to current date in the first timezone
+                break;
             }
         }
         if (time.isNull()) {
             return; // no valid time specification in the query: not a match
         }
 
-        // time zone to convert from: left of time spec, otherwise default to current time zone
+        int convTermStart, convTermEnd;
+        const QRegularExpression convWordRegex(i18nc("expression to convert time between two timezones, e.g. 18:00 WET to EET", " in | to | as ")
+                                               + QStringLiteral("| ?> ?"));
+        if (QRegularExpressionMatch convWordMatch = convWordRegex.match(term); convWordMatch.hasMatch()) {
+            convTermStart = convWordMatch.capturedStart();
+            convTermEnd = convWordMatch.capturedEnd();
+        } else {
+            convTermStart = term.length();
+            convTermEnd = term.length();
+        }
+
+        // time zone to convert from: right of time spec and left of conversion word, otherwise default to current time zone
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        QStringRef fromZoneTerm = term.leftRef(term.indexOf(dtTerm)).trimmed();
+        QStringRef fromZoneTerm = term.midRef(dtTermEnd, convTermStart - dtTermEnd).trimmed();
 #else
-        QStringView fromZoneMatch = QStringView(term).left(term.indexOf(dtMatch)).trimmed();
+        QStringView fromZoneMatch = QStringView(term).mid(dtTermEnd, convTermStart - dtTermEnd).trimmed();
 #endif
         QHash<QString, QTimeZone> fromZones = fromZoneTerm.isEmpty() ? systemTimeZone() : matchingTimeZones(fromZoneTerm, QDateTime(date, time));
 
-        // time zone to convert to: right of time spec, otherwise default to current time zone
+        // time zone to convert to: right of conversion word, otherwise default to current time zone
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        QStringRef toZoneTerm = term.rightRef(term.length() - dtTerm.length() - term.indexOf(dtTerm)).trimmed();
+        QStringRef toZoneTerm = term.midRef(convTermEnd).trimmed();
 #else
-        QStringView toZoneMatch = QStringView(term).right(term.length() - dtMatch.length() - term.indexOf(dtMatch)).trimmed();
+        QStringView toZoneMatch = QStringView(term).mid(convTermEnd).trimmed();
 #endif
         QHash<QString, QTimeZone> toZones = toZoneTerm.isEmpty() ? systemTimeZone() : matchingTimeZones(toZoneTerm, QDateTime(date, time));
 
