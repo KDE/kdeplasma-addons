@@ -93,11 +93,11 @@ QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringView &tz)
 {
     QHash<QString, QDateTime> ret;
 
-    QStringList doneZones;
-    for (const QStringList &cityRow : cityTZData) {
-        if (cityRow[0].contains(tz, Qt::CaseInsensitive) || cityRow[1].contains(tz, Qt::CaseInsensitive)) {
-            ret[cityRow[0]] = QDateTime::currentDateTimeUtc().toTimeZone(QTimeZone({cityRow[2].toUtf8()}));
-            doneZones << cityRow[2];
+    QByteArrayList doneZones;
+    for (const City &city : cityTZData) {
+        if (city.name.contains(tz, Qt::CaseInsensitive) || city.nameAscii.contains(tz, Qt::CaseInsensitive)) {
+            ret[city.name] = QDateTime::currentDateTimeUtc().toTimeZone(QTimeZone({city.timeZoneId}));
+            doneZones << city.timeZoneId;
         }
     }
 
@@ -105,12 +105,12 @@ QHash<QString, QDateTime> DateTimeRunner::datetime(const QStringView &tz)
     for (const QByteArray &zoneId : timeZoneIds) {
         QTimeZone timeZone(zoneId);
 
-        const QString zoneName = QString::fromUtf8(zoneId);
-
-        if (doneZones.contains(zoneName)) {
+        if (doneZones.contains(zoneId)) {
             // avoid things like "Berlin" (from city data) and "Europe/Berlin" (from zone IDs) both showing up
             continue;
         }
+
+        const QString zoneName = QString::fromUtf8(zoneId);
 
         if (zoneName.contains(tz, Qt::CaseInsensitive)) {
             ret[zoneName] = QDateTime::currentDateTimeUtc().toTimeZone(timeZone);
@@ -155,19 +155,18 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
 
 void DateTimeRunner::parseCityTZData()
 {
-    QString databaseFilePath =
+    const QString databaseFilePath =
         QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("plasma/datetimerunner/majorcities.tsv"), QStandardPaths::LocateFile);
-    if (databaseFilePath.isEmpty()) {
-        return;
-    }
     QFile databaseFile;
     databaseFile.setFileName(databaseFilePath);
     if (databaseFile.open(QFile::ReadOnly)) {
         QTextStream in(&databaseFile);
         QString line;
         while (in.readLineInto(&line)) {
+            line = line.trimmed();
             if (!line.isEmpty() && !line.startsWith(QLatin1Char('#'))) {
-                cityTZData << line.split(QLatin1Char('\t'));
+                QStringList fields = line.split(QLatin1Char('\t'));
+                cityTZData.append({fields[0], fields[1], fields[2].toUtf8()});
             }
         }
     }

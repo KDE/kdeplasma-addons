@@ -21,6 +21,12 @@ using namespace Plasma;
  * that KService knows about, this runner can launch
  */
 
+struct City {
+    QString name;
+    QString nameAscii;
+    QByteArray timeZoneId;
+};
+
 class DateTimeRunner : public AbstractRunner
 {
     Q_OBJECT
@@ -39,7 +45,7 @@ private:
 #endif
     void addMatch(const QString &text, const QString &clipboardText, RunnerContext &context, const QString &iconName);
     void parseCityTZData();
-    QList<QStringList> cityTZData;
+    QList<City> cityTZData;
 };
 
 #endif
