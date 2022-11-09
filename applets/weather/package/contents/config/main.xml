@@ -22,6 +22,9 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <entry name="showTemperatureInCompactMode" type="bool">
       <default>false</default>
     </entry>
+    <entry name="showTemperatureInBadge" type="bool">
+      <default>false</default>
+    </entry>
 
     <entry name="showTemperatureInTooltip" type="bool">
       <default>true</default>
