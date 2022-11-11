@@ -9,6 +9,7 @@ import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.3
 
 import org.kde.kirigami 2.5 as Kirigami
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.private.weather 1.0
 
 
@@ -18,11 +19,11 @@ Kirigami.FormLayout {
     property string cfg_source
     property alias cfg_updateInterval: updateIntervalSpin.value
 
-    property var providers: plasmoid.nativeInterface.providers
+    property var providers: Plasmoid.nativeInterface.providers
 
     WeatherStationPickerDialog {
         id: stationPicker
-        providers: plasmoid.nativeInterface.providers
+        providers: Plasmoid.nativeInterface.providers
 
         onAccepted: {
             weatherStationConfigPage.cfg_source = source;
@@ -44,7 +45,7 @@ Kirigami.FormLayout {
                 var sourceDetails = cfg_source.split('|');
                 if (sourceDetails.length > 2) {
                     return i18nc("A weather station location and the weather service it comes from",
-                                    "%1 (%2)", sourceDetails[2], plasmoid.nativeInterface.providers[sourceDetails[0]]);
+                                    "%1 (%2)", sourceDetails[2], Plasmoid.nativeInterface.providers[sourceDetails[0]]);
                 }
                 return ""
             }

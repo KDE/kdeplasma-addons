@@ -18,10 +18,9 @@ ColumnLayout {
     property var generalModel
     property var observationModel
 
-    readonly property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
-
-    readonly property bool showTemperature: plasmoid.configuration.showTemperatureInCompactMode
-    readonly property bool useBadge: plasmoid.configuration.showTemperatureInBadge || plasmoid.nativeInterface.needsToBeSquare
+    readonly property bool vertical: (Plasmoid.formFactor == PlasmaCore.Types.Vertical)
+    readonly property bool showTemperature: Plasmoid.configuration.showTemperatureInCompactMode
+    readonly property bool useBadge: Plasmoid.configuration.showTemperatureInBadge || Plasmoid.nativeInterface.needsToBeSquare
 
     Loader {
         id: loader
@@ -39,7 +38,7 @@ ColumnLayout {
             hoverEnabled: true
 
             onClicked: {
-                plasmoid.expanded = !plasmoid.expanded;
+                Plasmoid.expanded = !Plasmoid.expanded;
             }
         }
    }

@@ -16,12 +16,12 @@ Item {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
-    readonly property string weatherSource: plasmoid.configuration.source
-    readonly property int updateInterval: plasmoid.configuration.updateInterval
-    readonly property int displayTemperatureUnit: plasmoid.configuration.temperatureUnit
-    readonly property int displaySpeedUnit: plasmoid.configuration.speedUnit
-    readonly property int displayPressureUnit: plasmoid.configuration.pressureUnit
-    readonly property int displayVisibilityUnit: plasmoid.configuration.visibilityUnit
+    readonly property string weatherSource: Plasmoid.configuration.source
+    readonly property int updateInterval: Plasmoid.configuration.updateInterval
+    readonly property int displayTemperatureUnit: Plasmoid.configuration.temperatureUnit
+    readonly property int displaySpeedUnit: Plasmoid.configuration.speedUnit
+    readonly property int displayPressureUnit: Plasmoid.configuration.pressureUnit
+    readonly property int displayVisibilityUnit: Plasmoid.configuration.visibilityUnit
 
     property bool connectingToSource: false
     readonly property bool needsConfiguration: !generalModel.location && !connectingToSource
@@ -348,7 +348,7 @@ Item {
         onConnectedSourcesChanged: {
             if (weatherSource) {
                 connectingToSource = true;
-                plasmoid.busy = true;
+                Plasmoid.busy = true;
                 connectionTimeoutTimer.start();
             }
         }
@@ -356,7 +356,7 @@ Item {
             if (currentData) {
                 connectionTimeoutTimer.stop();
                 connectingToSource = false;
-                plasmoid.busy = false;
+                Plasmoid.busy = false;
             }
         }
     }
@@ -368,7 +368,7 @@ Item {
         repeat: false
         onTriggered: {
             connectingToSource = false;
-            plasmoid.busy = false;
+            Plasmoid.busy = false;
             // TODO: inform user
             var sourceTokens = weatherSource.split("|");
             var foo = i18n("Weather information retrieval for %1 timed out.", sourceTokens.value(2));
@@ -384,14 +384,14 @@ Item {
             return "";
         }
         var tooltips = [];
-        var temperature = plasmoid.configuration.showTemperatureInTooltip ? observationModel.temperature : null;
+        var temperature = Plasmoid.configuration.showTemperatureInTooltip ? observationModel.temperature : null;
         if (observationModel.conditions && temperature) {
             tooltips.push(i18nc("weather condition + temperature",
                                 "%1 %2", observationModel.conditions, temperature));
         } else if (observationModel.conditions || temperature) {
             tooltips.push(observationModel.conditions || temperature);
         }
-        if (plasmoid.configuration.showWindInTooltip && observationModel.windSpeed) {
+        if (Plasmoid.configuration.showWindInTooltip && observationModel.windSpeed) {
             if (observationModel.windDirection) {
                 if (observationModel.windGust) {
                     tooltips.push(i18nc("winddirection windspeed (windgust)", "%1 %2 (%3)",
@@ -404,7 +404,7 @@ Item {
                 tooltips.push(observationModel.windSpeed);
             }
         }
-        if (plasmoid.configuration.showPressureInTooltip && observationModel.pressure) {
+        if (Plasmoid.configuration.showPressureInTooltip && observationModel.pressure) {
             if (observationModel.pressureTendency) {
                 tooltips.push(i18nc("pressure (tendency)", "%1 (%2)",
                                     observationModel.pressure, observationModel.pressureTendency));
@@ -412,7 +412,7 @@ Item {
                 tooltips.push(observationModel.pressure);
             }
         }
-        if (plasmoid.configuration.showHumidityInTooltip && observationModel.humidity) {
+        if (Plasmoid.configuration.showHumidityInTooltip && observationModel.humidity) {
             tooltips.push(i18n("Humidity: %1", observationModel.humidity));
         }
 
@@ -430,10 +430,10 @@ Item {
     }
 
     Binding {
-        target: plasmoid.nativeInterface
+        target: Plasmoid.nativeInterface
         property: "needsToBeSquare"
-        value: (plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
-                | (plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
+        value: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
+                | (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
     }
 
     onWeatherSourceChanged: {

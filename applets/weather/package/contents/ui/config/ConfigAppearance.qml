@@ -9,13 +9,14 @@ import QtQuick 2.5
 import QtQuick.Controls 2.5 as QtControls
 
 import org.kde.kirigami 2.5 as Kirigami
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.private.weather 1.0
 
 
 Kirigami.FormLayout {
     id: displayConfigPage
 
-    readonly property bool canShowMoreInCompactMode: !plasmoid.nativeInterface.needsToBeSquare
+    readonly property bool canShowMoreInCompactMode: !Plasmoid.nativeInterface.needsToBeSquare
 
     property bool cfg_showTemperatureInCompactMode
     property bool cfg_showTemperatureInBadge

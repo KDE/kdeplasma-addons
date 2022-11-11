@@ -29,14 +29,14 @@ ColumnLayout {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         Layout.margins: PlasmaCore.Units.largeSpacing
         // when not in panel, a configure button is already shown for needsConfiguration
-        visible: root.needsConfiguration && (plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal)
+        visible: root.needsConfiguration && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)
         iconName: "mark-location"
         text: i18n("Please set your location")
         helpfulAction: QQC2.Action {
             icon.name: "configure"
             text: i18n("Set location…")
             onTriggered: {
-                plasmoid.action("configure").trigger();
+                Plasmoid.action("configure").trigger();
             }
         }
     }
