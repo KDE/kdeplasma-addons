@@ -18,7 +18,7 @@ ColumnLayout {
     property var observationModel
 
     readonly property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
-    readonly property bool showTemperature: plasmoid.nativeInterface.temperatureShownInCompactMode &&
+    readonly property bool showTemperature: plasmoid.configuration.showTemperatureInCompactMode &&
                                             !plasmoid.nativeInterface.needsToBeSquare
 
     Loader {

@@ -15,37 +15,17 @@ import org.kde.plasma.private.weather 1.0
 Kirigami.FormLayout {
     id: weatherStationConfigPage
 
-    property string source
-
-    signal configurationChanged
-
-    function saveConfig() {
-        var config = {
-            source: source,
-            updateInterval: updateIntervalSpin.value
-        };
-
-        plasmoid.nativeInterface.saveConfig(config);
-        plasmoid.nativeInterface.configChanged();
-    }
+    property string cfg_source
+    property alias cfg_updateInterval: updateIntervalSpin.value
 
     property var providers: plasmoid.nativeInterface.providers
-
-    Component.onCompleted: {
-        var config = plasmoid.nativeInterface.configValues();
-
-        source = config.source;
-
-        updateIntervalSpin.value = config.updateInterval;
-    }
 
     WeatherStationPickerDialog {
         id: stationPicker
         providers: plasmoid.nativeInterface.providers
 
         onAccepted: {
-            weatherStationConfigPage.source = source;
-            weatherStationConfigPage.configurationChanged();
+            weatherStationConfigPage.cfg_source = source;
         }
     }
 
@@ -61,7 +41,7 @@ Kirigami.FormLayout {
             visible: text != ""
 
             text: {
-                var sourceDetails = source.split('|');
+                var sourceDetails = cfg_source.split('|');
                 if (sourceDetails.length > 2) {
                     return i18nc("A weather station location and the weather service it comes from",
                                     "%1 (%2)", sourceDetails[2], plasmoid.nativeInterface.providers[sourceDetails[0]]);
@@ -94,7 +74,5 @@ Kirigami.FormLayout {
         from: 30
         to: 3600
         editable: true
-
-        onValueChanged: weatherStationConfigPage.configurationChanged();
     }
 }

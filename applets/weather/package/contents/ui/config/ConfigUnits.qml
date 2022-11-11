@@ -1,87 +1,54 @@
 /*
  * SPDX-FileCopyrightText: 2016 Friedrich W. H. Kossebau <kossebau@kde.org>
+ * SPDX-FileCopyrightText: 2022 Ismael Asensio <isma.af@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.5
-import QtQuick.Controls 2.5 as QtControls
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as QtControls
 
-import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kirigami 2.15 as Kirigami
 import org.kde.plasma.private.weather 1.0
 
 
 Kirigami.FormLayout {
     id: unitsConfigPage
 
-    signal configurationChanged
+    property alias cfg_temperatureUnit: temperatureComboBox.unit
+    property alias cfg_pressureUnit: pressureComboBox.unit
+    property alias cfg_speedUnit: windSpeedComboBox.unit
+    property alias cfg_visibilityUnit: visibilityComboBox.unit
 
-    function saveConfig() {
-        var config = {};
+    component UnitSelector: QtControls.ComboBox {
+        property int unit
 
-        config.temperatureUnitId =
-            TemperatureUnitListModel.unitIdForListIndex(temperatureComboBox.currentIndex);
-        config.pressureUnitId =
-            PressureUnitListModel.unitIdForListIndex(pressureComboBox.currentIndex);
-        config.windSpeedUnitId =
-            WindSpeedUnitListModel.unitIdForListIndex(windSpeedComboBox.currentIndex);
-        config.visibilityUnitId =
-            VisibilityUnitListModel.unitIdForListIndex(visibilityComboBox.currentIndex);
-
-        plasmoid.nativeInterface.saveConfig(config);
-        plasmoid.nativeInterface.configChanged();
+        textRole: "display"
+        currentIndex: model.listIndexForUnitId(unit)
+        onActivated: unit = model.unitIdForListIndex(currentIndex)
     }
 
-    Component.onCompleted: {
-        var config = plasmoid.nativeInterface.configValues();
-
-        temperatureComboBox.currentIndex =
-            TemperatureUnitListModel.listIndexForUnitId(config.temperatureUnitId);
-        pressureComboBox.currentIndex =
-            PressureUnitListModel.listIndexForUnitId(config.pressureUnitId);
-        windSpeedComboBox.currentIndex =
-            WindSpeedUnitListModel.listIndexForUnitId(config.windSpeedUnitId);
-        visibilityComboBox.currentIndex =
-            VisibilityUnitListModel.listIndexForUnitId(config.visibilityUnitId);
-    }
-
-    QtControls.ComboBox {
+    UnitSelector {
         id: temperatureComboBox
-
         Kirigami.FormData.label: i18nc("@label:listbox", "Temperature:")
-
         model: TemperatureUnitListModel
-        textRole: "display"
-        onCurrentIndexChanged: unitsConfigPage.configurationChanged();
     }
 
-    QtControls.ComboBox {
+    UnitSelector {
         id: pressureComboBox
-
         Kirigami.FormData.label: i18nc("@label:listbox", "Pressure:")
-
         model: PressureUnitListModel
-        textRole: "display"
-        onCurrentIndexChanged: unitsConfigPage.configurationChanged();
     }
 
-    QtControls.ComboBox {
+    UnitSelector {
         id: windSpeedComboBox
-
         Kirigami.FormData.label: i18nc("@label:listbox", "Wind speed:")
-
         model: WindSpeedUnitListModel
-        textRole: "display"
-        onCurrentIndexChanged: unitsConfigPage.configurationChanged();
     }
 
-    QtControls.ComboBox {
+    UnitSelector {
         id: visibilityComboBox
-
         Kirigami.FormData.label: i18nc("@label:listbox", "Visibility:")
-
         model: VisibilityUnitListModel
-        textRole: "display"
-        onCurrentIndexChanged: unitsConfigPage.configurationChanged();
     }
 }

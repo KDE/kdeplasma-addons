@@ -16,12 +16,12 @@ Item {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
-    readonly property string weatherSource: plasmoid.nativeInterface.source
-    readonly property int updateInterval: plasmoid.nativeInterface.updateInterval
-    readonly property int displayTemperatureUnit: plasmoid.nativeInterface.displayTemperatureUnit
-    readonly property int displaySpeedUnit: plasmoid.nativeInterface.displaySpeedUnit
-    readonly property int displayPressureUnit: plasmoid.nativeInterface.displayPressureUnit
-    readonly property int displayVisibilityUnit: plasmoid.nativeInterface.displayVisibilityUnit
+    readonly property string weatherSource: plasmoid.configuration.source
+    readonly property int updateInterval: plasmoid.configuration.updateInterval
+    readonly property int displayTemperatureUnit: plasmoid.configuration.temperatureUnit
+    readonly property int displaySpeedUnit: plasmoid.configuration.speedUnit
+    readonly property int displayPressureUnit: plasmoid.configuration.pressureUnit
+    readonly property int displayVisibilityUnit: plasmoid.configuration.visibilityUnit
 
     property bool connectingToSource: false
     readonly property bool needsConfiguration: !generalModel.location && !connectingToSource
@@ -384,14 +384,14 @@ Item {
             return "";
         }
         var tooltips = [];
-        var temperature = plasmoid.nativeInterface.temperatureShownInTooltip ? observationModel.temperature : null;
+        var temperature = plasmoid.configuration.showTemperatureInTooltip ? observationModel.temperature : null;
         if (observationModel.conditions && temperature) {
             tooltips.push(i18nc("weather condition + temperature",
                                 "%1 %2", observationModel.conditions, temperature));
         } else if (observationModel.conditions || temperature) {
             tooltips.push(observationModel.conditions || temperature);
         }
-        if (plasmoid.nativeInterface.windShownInTooltip && observationModel.windSpeed) {
+        if (plasmoid.configuration.showWindInTooltip && observationModel.windSpeed) {
             if (observationModel.windDirection) {
                 if (observationModel.windGust) {
                     tooltips.push(i18nc("winddirection windspeed (windgust)", "%1 %2 (%3)",
@@ -404,7 +404,7 @@ Item {
                 tooltips.push(observationModel.windSpeed);
             }
         }
-        if (plasmoid.nativeInterface.pressureShownInTooltip && observationModel.pressure) {
+        if (plasmoid.configuration.showPressureInTooltip && observationModel.pressure) {
             if (observationModel.pressureTendency) {
                 tooltips.push(i18nc("pressure (tendency)", "%1 (%2)",
                                     observationModel.pressure, observationModel.pressureTendency));
@@ -412,7 +412,7 @@ Item {
                 tooltips.push(observationModel.pressure);
             }
         }
-        if (plasmoid.nativeInterface.humidityShownInTooltip && observationModel.humidity) {
+        if (plasmoid.configuration.showHumidityInTooltip && observationModel.humidity) {
             tooltips.push(i18n("Humidity: %1", observationModel.humidity));
         }
 
@@ -434,4 +434,10 @@ Item {
         property: "needsToBeSquare"
         value: plasmoid.containmentType === PlasmaCore.Types.CustomEmbeddedContainment
     }
+
+    onWeatherSourceChanged: {
+        Plasmoid.setConfigurationRequired(weatherSource.length === 0)
+    }
+
+    Component.onCompleted: weatherSourceChanged()
 }

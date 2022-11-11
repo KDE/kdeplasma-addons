@@ -3,6 +3,7 @@
  *   SPDX-FileCopyrightText: 2008 Marco Martin <notmart@gmail.com>
  *   SPDX-FileCopyrightText: 2012 Luís Gabriel Lima <lampih@gmail.com>
  *   SPDX-FileCopyrightText: 2017-2018 Friedrich W. H. Kossebau <kossebau@kde.org>
+ *   SPDX-FileCopyrightText: 2022 Ismael Asensio <isma.af@gmail.com>
  *
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -19,81 +20,6 @@
 
 using namespace KUnitConversion;
 
-namespace
-{
-namespace AppletConfigKeys
-{
-inline QString showTemperatureInTooltip()
-{
-    return QStringLiteral("showTemperatureInTooltip");
-}
-
-inline QString showWindInTooltip()
-{
-    return QStringLiteral("showWindInTooltip");
-}
-
-inline QString showPressureInTooltip()
-{
-    return QStringLiteral("showPressureInTooltip");
-}
-
-inline QString showHumidityInTooltip()
-{
-    return QStringLiteral("showHumidityInTooltip");
-}
-
-inline QString showTemperatureInCompactMode()
-{
-    return QStringLiteral("showTemperatureInCompactMode");
-}
-
-inline QString temperatureUnitId()
-{
-    return QStringLiteral("temperatureUnitId");
-}
-
-inline QString windSpeedUnitId()
-{
-    return QStringLiteral("windSpeedUnitId");
-}
-
-inline QString pressureUnitId()
-{
-    return QStringLiteral("pressureUnitId");
-}
-
-inline QString visibilityUnitId()
-{
-    return QStringLiteral("visibilityUnitId");
-}
-
-inline QString updateInterval()
-{
-    return QStringLiteral("updateInterval");
-}
-
-inline QString source()
-{
-    return QStringLiteral("source");
-}
-}
-namespace StorageConfigKeys
-{
-const char showTemperatureInTooltip[] = "showTemperatureInTooltip";
-const char showWindInTooltip[] = "showWindInTooltip";
-const char showPressureInTooltip[] = "showPressureInTooltip";
-const char showHumidityInTooltip[] = "showHumidityInTooltip";
-const char showTemperatureInCompactMode[] = "showTemperatureInCompactMode";
-const char temperatureUnit[] = "temperatureUnit";
-const char speedUnit[] = "speedUnit";
-const char pressureUnit[] = "pressureUnit";
-const char visibilityUnit[] = "visibilityUnit";
-const char updateInterval[] = "updateInterval";
-const char source[] = "source";
-}
-}
-
 WeatherApplet::WeatherApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
 {
@@ -108,168 +34,79 @@ WeatherApplet::WeatherApplet(QObject *parent, const KPluginMetaData &data, const
     Q_EMIT providersChanged();
 }
 
-void WeatherApplet::init()
-{
-    configChanged();
-}
-
-void WeatherApplet::configChanged()
-{
-    KConfigGroup cfg = config();
-
-    // snapshot current values
-    const QString oldSource = m_source;
-    const int oldUpdateInterval = m_updateInterval;
-    const bool oldTemperatureShownInTooltip = m_temperatureShownInTooltip;
-    const bool oldWindShownInTooltip = m_windShownInTooltip;
-    const bool oldPressureShownInTooltip = m_pressureShownInTooltip;
-    const bool oldHumidityShownInTooltip = m_humidityShownInTooltip;
-    const bool oldTemperatureShownInCompactMode = m_temperatureShownInCompactMode;
-    const Unit oldDisplayTemperatureUnit = m_displayTemperatureUnit;
-    const Unit oldDisplaySpeedUnit = m_displaySpeedUnit;
-    const Unit oldDisplayPressureUnit = m_displayPressureUnit;
-    const Unit oldDisplayVisibilityUnit = m_displayVisibilityUnit;
-
-    // read values from config storage
-    const bool useMetric = (QLocale().measurementSystem() == QLocale::MetricSystem);
-
-    m_displayTemperatureUnit = unit(cfg.readEntry(StorageConfigKeys::temperatureUnit, (useMetric ? "C" : "F")));
-    m_displaySpeedUnit = unit(cfg.readEntry(StorageConfigKeys::speedUnit, (useMetric ? "m/s" : "mph")));
-    m_displayPressureUnit = unit(cfg.readEntry(StorageConfigKeys::pressureUnit, (useMetric ? "hPa" : "inHg")));
-    m_displayVisibilityUnit = unit(cfg.readEntry(StorageConfigKeys::visibilityUnit, (useMetric ? "km" : "mi")));
-
-    m_updateInterval = cfg.readEntry(StorageConfigKeys::updateInterval, 30);
-    m_source = cfg.readEntry(StorageConfigKeys::source, QString());
-
-    m_temperatureShownInTooltip = cfg.readEntry(StorageConfigKeys::showTemperatureInTooltip, true);
-    m_windShownInTooltip = cfg.readEntry(StorageConfigKeys::showWindInTooltip, false);
-    m_pressureShownInTooltip = cfg.readEntry(StorageConfigKeys::showPressureInTooltip, false);
-    m_humidityShownInTooltip = cfg.readEntry(StorageConfigKeys::showHumidityInTooltip, false);
-    m_temperatureShownInCompactMode = cfg.readEntry(StorageConfigKeys::showTemperatureInCompactMode, false);
-
-    setConfigurationRequired(m_source.isEmpty());
-
-    if (oldTemperatureShownInTooltip != m_temperatureShownInTooltip) {
-        Q_EMIT temperatureShownInTooltipChanged();
-    }
-    if (oldWindShownInTooltip != m_windShownInTooltip) {
-        Q_EMIT windShownInTooltipChanged();
-    }
-    if (oldPressureShownInTooltip != m_pressureShownInTooltip) {
-        Q_EMIT pressureShownInTooltipChanged();
-    }
-    if (oldHumidityShownInTooltip != m_humidityShownInTooltip) {
-        Q_EMIT humidityShownInTooltipChanged();
-    }
-    if (oldTemperatureShownInCompactMode != m_temperatureShownInCompactMode) {
-        Q_EMIT temperatureShownInCompactModeChanged();
-    }
-    if (oldSource != m_source) {
-        Q_EMIT sourceChanged();
-    }
-    if (oldUpdateInterval != m_updateInterval) {
-        Q_EMIT updateIntervalChanged();
-    }
-    if (oldDisplayTemperatureUnit != m_displayTemperatureUnit //
-        || oldDisplaySpeedUnit != m_displaySpeedUnit //
-        || oldDisplayPressureUnit != m_displayPressureUnit //
-        || oldDisplayVisibilityUnit != m_displayVisibilityUnit) {
-        Q_EMIT displayUnitsChanged();
-    }
-}
-
 WeatherApplet::~WeatherApplet()
 {
 }
 
-QVariantMap WeatherApplet::configValues() const
+void WeatherApplet::init()
 {
-    KConfigGroup cfg = this->config();
+    migrateConfig();
+    setDefaultUnits();
+}
 
-    return QVariantMap{
-        // UI settings
-        {AppletConfigKeys::showTemperatureInTooltip(), cfg.readEntry(StorageConfigKeys::showTemperatureInTooltip, true)},
-        {AppletConfigKeys::showWindInTooltip(), cfg.readEntry(StorageConfigKeys::showWindInTooltip, false)},
-        {AppletConfigKeys::showPressureInTooltip(), cfg.readEntry(StorageConfigKeys::showPressureInTooltip, false)},
-        {AppletConfigKeys::showHumidityInTooltip(), cfg.readEntry(StorageConfigKeys::showHumidityInTooltip, false)},
-        {AppletConfigKeys::showTemperatureInCompactMode(), cfg.readEntry(StorageConfigKeys::showTemperatureInCompactMode, false)},
+// Old configuration was stored via config() and without further config sub group
+// [Containments][18][Applets][101][Configuration]
+// main.xml based config storage though uses additional subgroups using the name attribute of
+// the <group> containers, so e.g. <group name="General"> would use
+// [Containments][18][Applets][101][Configuration][General]
+void WeatherApplet::migrateConfig()
+{
+    KConfigGroup oldCfg = config();
 
-        // units
-        {AppletConfigKeys::temperatureUnitId(), m_displayTemperatureUnit.id()},
-        {AppletConfigKeys::windSpeedUnitId(), m_displaySpeedUnit.id()},
-        {AppletConfigKeys::pressureUnitId(), m_displayPressureUnit.id()},
-        {AppletConfigKeys::visibilityUnitId(), m_displayVisibilityUnit.id()},
+    const bool isConfigMigrated = oldCfg.readEntry(QStringLiteral("configMigrated"), false);
+    if (isConfigMigrated) {
+        return;
+    }
 
-        // data source
-        {AppletConfigKeys::updateInterval(), m_updateInterval},
-        {AppletConfigKeys::source(), m_source},
+    const QString pluginId = pluginMetaData().pluginId();
+
+    auto migrateKey = [&oldCfg, pluginId](const QString &key, const QString &group) {
+        if (oldCfg.hasKey(key)) {
+            qInfo() << pluginId << ": Moving config key" << key << "to group" << group;
+            KConfigGroup newCfg = KConfigGroup(&oldCfg, group);
+            const auto value = oldCfg.readEntry(key);
+            newCfg.writeEntry(key, value);
+            oldCfg.deleteEntry(key);
+        }
     };
+
+    qInfo() << pluginId << ": Migrate settings to plasma XML config";
+
+    // Appearance
+    migrateKey(QStringLiteral("showTemperatureInTooltip"), QStringLiteral("Appearance"));
+    migrateKey(QStringLiteral("showWindInTooltip"), QStringLiteral("Appearance"));
+    migrateKey(QStringLiteral("showPressureInTooltip"), QStringLiteral("Appearance"));
+    migrateKey(QStringLiteral("showHumidityInTooltip"), QStringLiteral("Appearance"));
+    migrateKey(QStringLiteral("showTemperatureInCompactMode"), QStringLiteral("Appearance"));
+    // Units
+    migrateKey(QStringLiteral("temperatureUnit"), QStringLiteral("Units"));
+    migrateKey(QStringLiteral("speedUnit"), QStringLiteral("Units"));
+    migrateKey(QStringLiteral("pressureUnit"), QStringLiteral("Units"));
+    migrateKey(QStringLiteral("visibilityUnit"), QStringLiteral("Units"));
+    // WeatherSource
+    migrateKey(QStringLiteral("updateInterval"), QStringLiteral("WeatherStation"));
+    migrateKey(QStringLiteral("source"), QStringLiteral("WeatherStation"));
+
+    oldCfg.writeEntry(QStringLiteral("configMigrated"), true);
 }
 
-void WeatherApplet::saveConfig(const QVariantMap &configChanges)
+// Plasma XML configuration is loaded at runtime, so it's not possible to set locale aware defaults.
+// We set them here if the corresponding key is not already in the configuration
+void WeatherApplet::setDefaultUnits()
 {
-    KConfigGroup cfg = config();
+    KConfigGroup cfg = config().group(QStringLiteral("Units"));
+    const bool isMetric = (QLocale().measurementSystem() == QLocale::MetricSystem);
 
-    // UI settings
-    auto it = configChanges.find(AppletConfigKeys::showTemperatureInTooltip());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::showTemperatureInTooltip, it.value().toBool());
-    }
-    it = configChanges.find(AppletConfigKeys::showWindInTooltip());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::showWindInTooltip, it.value().toBool());
-    }
-    it = configChanges.find(AppletConfigKeys::showPressureInTooltip());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::showPressureInTooltip, it.value().toBool());
-    }
-    it = configChanges.find(AppletConfigKeys::showHumidityInTooltip());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::showHumidityInTooltip, it.value().toBool());
-    }
-    it = configChanges.find(AppletConfigKeys::showTemperatureInCompactMode());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::showTemperatureInCompactMode, it.value().toBool());
-    }
+    auto setLocaleAwareDefault = [&cfg, isMetric](const QString &key, KUnitConversion::UnitId metricDefault, KUnitConversion::UnitId imperialDefault) {
+        if (!cfg.hasKey(key)) {
+            cfg.writeEntry(key, static_cast<int>(isMetric ? metricDefault : imperialDefault));
+        }
+    };
 
-    // units
-    it = configChanges.find(AppletConfigKeys::temperatureUnitId());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::temperatureUnit, it.value().toInt());
-    }
-    it = configChanges.find(AppletConfigKeys::windSpeedUnitId());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::speedUnit, it.value().toInt());
-    }
-    it = configChanges.find(AppletConfigKeys::pressureUnitId());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::pressureUnit, it.value().toInt());
-    }
-    it = configChanges.find(AppletConfigKeys::visibilityUnitId());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::visibilityUnit, it.value().toInt());
-    }
-
-    // data source
-    it = configChanges.find(AppletConfigKeys::updateInterval());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::updateInterval, it.value().toInt());
-    }
-    it = configChanges.find(AppletConfigKeys::source());
-    if (it != configChanges.end()) {
-        cfg.writeEntry(StorageConfigKeys::source, it.value().toString());
-    }
-
-    Q_EMIT configNeedsSaving();
-}
-
-Unit WeatherApplet::unit(const QString &unit)
-{
-    if (!unit.isEmpty() && unit[0].isDigit()) {
-        return m_converter.unit(static_cast<UnitId>(unit.toInt()));
-    }
-    // Support < 4.4 config values
-    return m_converter.unit(unit);
+    setLocaleAwareDefault(QStringLiteral("temperatureUnit"), KUnitConversion::Celsius, KUnitConversion::Fahrenheit);
+    setLocaleAwareDefault(QStringLiteral("speedUnit"), KUnitConversion::MeterPerSecond, KUnitConversion::MilePerHour);
+    setLocaleAwareDefault(QStringLiteral("pressureUnit"), KUnitConversion::Hectopascal, KUnitConversion::InchesOfMercury);
+    setLocaleAwareDefault(QStringLiteral("visibilityUnit"), KUnitConversion::Kilometer, KUnitConversion::Mile);
 }
 
 K_PLUGIN_CLASS(WeatherApplet)
