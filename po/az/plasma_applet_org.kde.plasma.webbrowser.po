@@ -1,0 +1,99 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# Kheyyam <xxmn77@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"PO-Revision-Date: 2022-11-11 17:48+0400\n"
+"Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
+"Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.3\n"
+
+#: package/contents/config/config.qml:12
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Əsas"
+
+#: package/contents/ui/ConfigGeneral.qml:19
+#, kde-format
+msgctxt "@title:group"
+msgid "Content scaling:"
+msgstr "Məzmunun miqyası:"
+
+#: package/contents/ui/ConfigGeneral.qml:23
+#, kde-format
+msgctxt "@option:radio"
+msgid "Fixed scale:"
+msgstr "SAbitlənmiş miqyas:"
+
+#: package/contents/ui/ConfigGeneral.qml:57
+#, kde-format
+msgctxt "@option:radio"
+msgid "Automatic scaling if width is below"
+msgstr "Genişlik aşağıdırsa avtomatik miqyaslansın"
+
+#: package/contents/ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Go Back"
+msgstr "Geriyə"
+
+#: package/contents/ui/main.qml:32
+#, kde-format
+msgctxt "@action:button"
+msgid "Go Forward"
+msgstr "İrəli"
+
+#: package/contents/ui/main.qml:51
+#, kde-format
+msgctxt "@info"
+msgid "Type a URL"
+msgstr "URL ünvanı yaz"
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgctxt "@action:button"
+msgid "Stop Loading This Page"
+msgstr "Bu səhifənin yüklənilməsini dayandır"
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgctxt "@action:button"
+msgid "Reload This Page"
+msgstr "Bu səhifəni yenidən yüklə"
+
+#: package/contents/ui/main.qml:137
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Link in Browser"
+msgstr "Keçidi veb-bələdçidə aç"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy Link Address"
+msgstr "Keçid ünvanını kopyala"
+
+#: package/contents/ui/main.qml:205
+#, kde-format
+msgctxt "An unwanted popup was blocked"
+msgid "Popup blocked"
+msgstr "Ani pəncərə əngəlləndi"
+
+#: package/contents/ui/main.qml:206
+#, kde-format
+msgid ""
+"Click here to open the following blocked popup:\n"
+"%1"
+msgstr ""
+"Aşağıdakı əngəllənmiş ani pəncərələri açmaq üçün vurun:\n"
+"%1"
