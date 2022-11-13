@@ -55,7 +55,6 @@ function roundComponent(n) {
 
 function menuForColor(color) {
     return [
-        {text: i18nc("@title:menu", "Copy to Clipboard"), section: true},
         {text: formatColor(color, "RRR,GGG,BBB")},
         {text: formatColor(color, "rgb")},
         {text: formatColor(color, "rgba")},
