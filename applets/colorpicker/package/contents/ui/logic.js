@@ -55,6 +55,7 @@ function roundComponent(n) {
 
 function menuForColor(color) {
     return [
+        {text: qsTr("Copy to Clipboard"), section: true},
         {text: formatColor(color, "RRR,GGG,BBB")},
         {text: formatColor(color, "rgb")},
         {text: formatColor(color, "rgba")},
