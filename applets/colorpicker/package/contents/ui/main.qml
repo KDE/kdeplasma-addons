@@ -11,7 +11,6 @@ import QtQuick.Dialogs 1.0 as QtDialogs
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents // for ModelContextMenu
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kirigami 2.20 as Kirigami
@@ -296,8 +295,7 @@ Item {
                     copyIndicatorLabel.visible = true;
                     colorLabelRestoreTimer.start()
                 } else {
-                    formattingMenu.model = Logic.menuForColor(delegateMouse.currentColor)
-                    formattingMenu.open(0, rect.height)
+                    Logic.createContextMenu(delegateMouse, delegateMouse.currentColor, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer).open(0, rect.height);
                 }
             }
 
@@ -368,16 +366,6 @@ Item {
                         fontSizeMode: Text.HorizontalFit
                         minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
                         text: i18nc("@info:progress just copied a color to clipboard", "Copied!")
-                    }
-                }
-
-                PlasmaComponents.ModelContextMenu {
-                    id: formattingMenu
-                    onClicked: {
-                        picker.copyToClipboard(model.text)
-                        colorLabel.visible = false;
-                        copyIndicatorLabel.visible = true;
-                        colorLabelRestoreTimer.start()
                     }
                 }
             }

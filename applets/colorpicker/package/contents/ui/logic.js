@@ -69,3 +69,15 @@ function menuForColor(color) {
         {text: formatColor(color, "LaTeX")}
     ]
 }
+
+function createContextMenu(visualParent, currentColor, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer) {
+    const initialArgs = {
+        model: menuForColor(currentColor),
+        visualParent: visualParent,
+        picker: picker,
+        colorLabel: colorLabel,
+        copyIndicatorLabel: copyIndicatorLabel,
+        colorLabelRestoreTimer: colorLabelRestoreTimer,
+    };
+    return Qt.createComponent("ColorContextMenu.qml").createObject(visualParent, initialArgs);
+}
