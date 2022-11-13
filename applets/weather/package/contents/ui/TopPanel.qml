@@ -88,6 +88,7 @@ GridLayout {
         PlasmaCore.SvgItem {
             id: windSpeedDirection
 
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             Layout.preferredHeight: naturalSize.height
             Layout.preferredWidth: naturalSize.width
 
