@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-18 00:46+0000\n"
+"POT-Creation-Date: 2022-11-14 00:47+0000\n"
 "PO-Revision-Date: 2016-12-16 16:43+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -62,59 +62,58 @@ msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Εμφάνιση ιστορικού"
 
-#: package/contents/ui/logic.js:58
-#, fuzzy, kde-format
-#| msgid "Copy to Clipboard"
-msgctxt "@title:menu"
-msgid "Copy to Clipboard"
-msgstr "Αντιγραφή στο πρόχειρο"
-
-#: package/contents/ui/main.qml:105
+#: package/contents/ui/main.qml:104
 #, fuzzy, kde-format
 #| msgid "Open Color Dialog"
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Άνοιγμα διαλόγου χρωμάτων"
 
-#: package/contents/ui/main.qml:106
+#: package/contents/ui/main.qml:105
 #, fuzzy, kde-format
 #| msgid "Clear History"
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Καθαρισμός ιστορικού"
 
-#: package/contents/ui/main.qml:124
+#: package/contents/ui/main.qml:123
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Επιλέξτε χρώμα"
 
-#: package/contents/ui/main.qml:199
+#: package/contents/ui/main.qml:198
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Επιλέξτε χρώμα"
 
-#: package/contents/ui/main.qml:203
+#: package/contents/ui/main.qml:202
 #, fuzzy, kde-format
 #| msgid "Pick Color"
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Επιλέξτε χρώμα"
 
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:368
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:390
+#: package/contents/ui/main.qml:378
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Copy to Clipboard"
+#~ msgctxt "@title:menu"
+#~ msgid "Copy to Clipboard"
+#~ msgstr "Αντιγραφή στο πρόχειρο"
 
 #, fuzzy
 #~| msgid "Color Options"

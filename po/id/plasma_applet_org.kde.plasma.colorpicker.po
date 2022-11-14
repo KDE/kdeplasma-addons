@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-18 00:46+0000\n"
+"POT-Creation-Date: 2022-11-14 00:47+0000\n"
 "PO-Revision-Date: 2019-06-16 07:52+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -52,31 +52,25 @@ msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Tampilkan histori"
 
-#: package/contents/ui/logic.js:58
-#, kde-format
-msgctxt "@title:menu"
-msgid "Copy to Clipboard"
-msgstr "Salin ke Papan-klip"
-
-#: package/contents/ui/main.qml:105
+#: package/contents/ui/main.qml:104
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Buka Dialog Warna"
 
-#: package/contents/ui/main.qml:106
+#: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Bersihkan Histori"
 
-#: package/contents/ui/main.qml:124
+#: package/contents/ui/main.qml:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Nukil warna"
 
-#: package/contents/ui/main.qml:199
+#: package/contents/ui/main.qml:198
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Pick color"
@@ -84,23 +78,27 @@ msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Nukil warna"
 
-#: package/contents/ui/main.qml:203
+#: package/contents/ui/main.qml:202
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Nukil Warna"
 
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:368
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:390
+#: package/contents/ui/main.qml:378
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr ""
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy to Clipboard"
+#~ msgstr "Salin ke Papan-klip"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

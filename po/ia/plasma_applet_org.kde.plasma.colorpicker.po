@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-18 00:46+0000\n"
+"POT-Creation-Date: 2022-11-14 00:47+0000\n"
 "PO-Revision-Date: 2021-05-16 23:03+0100\n"
 "Last-Translator: Giovanni Sora <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -53,31 +53,25 @@ msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Monstra Historia"
 
-#: package/contents/ui/logic.js:58
-#, kde-format
-msgctxt "@title:menu"
-msgid "Copy to Clipboard"
-msgstr "Copia in area de transferentia"
-
-#: package/contents/ui/main.qml:105
+#: package/contents/ui/main.qml:104
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Aperi dialogo de color"
 
-#: package/contents/ui/main.qml:106
+#: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Netta historia"
 
-#: package/contents/ui/main.qml:124
+#: package/contents/ui/main.qml:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Selige color"
 
-#: package/contents/ui/main.qml:199
+#: package/contents/ui/main.qml:198
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Pick color"
@@ -85,23 +79,27 @@ msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Selige color"
 
-#: package/contents/ui/main.qml:203
+#: package/contents/ui/main.qml:202
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Selige color"
 
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:368
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:390
+#: package/contents/ui/main.qml:378
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr ""
+
+#~ msgctxt "@title:menu"
+#~ msgid "Copy to Clipboard"
+#~ msgstr "Copia in area de transferentia"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"
