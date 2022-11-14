@@ -432,7 +432,8 @@ Item {
     Binding {
         target: plasmoid.nativeInterface
         property: "needsToBeSquare"
-        value: plasmoid.containmentType === PlasmaCore.Types.CustomEmbeddedContainment
+        value: (plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
+                | (plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
     }
 
     onWeatherSourceChanged: {

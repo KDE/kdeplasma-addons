@@ -34,12 +34,13 @@ Kirigami.FormLayout {
     QtControls.CheckBox {
         id: showTemperatureInCompactModeCheckBox
         Kirigami.FormData.label: i18nc("@label", "Show beside widget icon:")
-        enabled: canShowMoreInCompactMode
+        visible: canShowMoreInCompactMode
         text: i18nc("@option:check Show on widget icon: temperature", "Temperature")
     }
 
     Item {
         Kirigami.FormData.isSection: true
+        visible: showTemperatureInCompactModeCheckBox.visible
     }
 
     QtControls.CheckBox {
