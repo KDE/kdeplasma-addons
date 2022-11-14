@@ -57,7 +57,7 @@ Kirigami.FormLayout {
 
         Kirigami.FormData.label: i18nc("@label", "Show beside widget icon:")
 
-        enabled: canShowMoreInCompactMode
+        visible: canShowMoreInCompactMode
 
         text: i18nc("@option:check Show on widget icon: temperature", "Temperature")
         onCheckedChanged: displayConfigPage.configurationChanged();
@@ -66,6 +66,7 @@ Kirigami.FormLayout {
 
     Item {
         Kirigami.FormData.isSection: true
+        visible: showTemperatureInCompactModeCheckBox.visible
     }
 
 
