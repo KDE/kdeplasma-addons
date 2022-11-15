@@ -277,41 +277,29 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: false
     }
 
-    Row {
-        // HACK: If Kirigami.FormData.label is put inside a TextArea,
-        // the label will not align with text in the TextArea.
+    Kirigami.SelectableLabel {
+        id: titleLabel
         Kirigami.FormData.label: i18nc("@label", "Title:")
-
         Layout.fillWidth: true
         Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
         visible: wallpaperPreview.visible && backend.title.length > 0
-
-        Kirigami.SelectableLabel {
-            id: titleLabel
-            width: parent.width
-            font.bold: true
-            text: backend.title
-            Accessible.name: titleLabel.Kirigami.FormData.label
-        }
+        font.bold: true
+        text: backend.title
+        Accessible.name: titleLabel.Kirigami.FormData.label
     }
 
     Item {
         Kirigami.FormData.isSection: false
     }
 
-    Row {
+    Kirigami.SelectableLabel {
+        id: authorLabel
         Kirigami.FormData.label: i18nc("@label", "Author:")
-
         Layout.fillWidth: true
         Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
         visible: wallpaperPreview.visible && backend.author.length > 0
-
-        Kirigami.SelectableLabel {
-            id: authorLabel
-            width: parent.width
-            text: backend.author
-            Accessible.name: authorLabel.Kirigami.FormData.label
-        }
+        text: backend.author
+        Accessible.name: authorLabel.Kirigami.FormData.label
     }
 
     Kirigami.InlineMessage {
