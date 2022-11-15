@@ -1,18 +1,18 @@
 #
 # Translators:
-# Serdar Soytetir <tulliana@gmail.com>, 2008, 2009
-# Elfun K. <elfun@riseup.net>, 2009
-# Serhat Demirkol <serhat_demirkol@yahoo.com>, 2009
-# H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2010
-# Volkan Gezer <volkangezer@gmail.com>, 2013, 2021
-# Emir SARI <emir_sari@icloud.com>, 2022
 #
+# Serdar Soytetir <tulliana@gmail.com>, 2008, 2009.
+# Elfun K. <elfun@riseup.net>, 2009.
+# Serhat Demirkol <serhat_demirkol@yahoo.com>, 2009.
+# H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2010.
+# Volkan Gezer <volkangezer@gmail.com>, 2013, 2021.
+# Emir SARI <emir_sari@icloud.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-01 00:45+0000\n"
-"PO-Revision-Date: 2021-11-26 16:29+0100\n"
+"PO-Revision-Date: 2022-11-14 14:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -20,13 +20,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr "Görünüm"
+msgstr "Görünüş"
 
 #: package/contents/ui/configAppearance.qml:24
 #, kde-format
