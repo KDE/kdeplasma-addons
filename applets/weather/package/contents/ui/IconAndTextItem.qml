@@ -78,10 +78,7 @@ GridLayout {
             // These magic values are taken from the digital clock, so that the
             // text sizes here are identical with various clock text sizes
             height: {
-                var textHeightScaleFactor = 0.7;
-                if (parent.height <= 26) {
-                    textHeightScaleFactor = 0.9;
-                }
+                const textHeightScaleFactor = (parent.height > 26) ? 0.7 : 0.9;
                 return Math.min (parent.height * textHeightScaleFactor, 3 * PlasmaCore.Theme.defaultFont.pixelSize);
             }
             visible: false

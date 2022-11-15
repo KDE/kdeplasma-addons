@@ -41,7 +41,7 @@ ColumnLayout {
                 Plasmoid.expanded = !Plasmoid.expanded;
             }
         }
-   }
+    }
 
     Component {
         id: iconComponent

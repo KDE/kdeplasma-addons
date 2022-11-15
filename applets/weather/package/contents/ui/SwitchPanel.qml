@@ -24,7 +24,7 @@ ColumnLayout {
 
     function removePage(page) {
         // fill-in for removeItem, replace for QQC >= 2.3
-        for (var n = 0; n < swipeView.count; n++) {
+        for (let n = 0; n < swipeView.count; n++) {
             if (page === swipeView.itemAt(n)) {
                 swipeView.removeItem(n);
                 tabBar.itemAt(n).visible = false;
@@ -109,7 +109,7 @@ ColumnLayout {
         }
     }
 
-    // perhaps 
+    // perhaps
     onHasDetailsContentChanged: {
         if (hasDetailsContent) {
             tabBar.insertItem(1, detailsTabButton);

@@ -30,43 +30,43 @@ Item {
 
     // model providing final display strings for observation properties
     readonly property var observationModel: {
-        var model = {};
-        var data = weatherDataSource.currentData || {};
+        const model = {};
+        const data = weatherDataSource.currentData || {};
 
         function getNumber(key) {
-            var number = data[key];
+            const number = data[key];
             if (typeof number === "string") {
-                var parsedNumber = parseFloat(number);
+                const parsedNumber = parseFloat(number);
                 return isNaN(parsedNumber) ? null : parsedNumber;
             }
             return (typeof number !== "undefined") && (number !== "") ? number : null;
         }
         function getNumberOrString(key) {
-            var number = data[key];
+            const number = data[key];
             return (typeof number !== "undefined") && (number !== "") ? number : null;
         }
 
-        var reportTemperatureUnit = data["Temperature Unit"] || invalidUnit;
-        var reportPressureUnit =    data["Pressure Unit"] || invalidUnit;
-        var reportVisibilityUnit =  data["Visibility Unit"] || invalidUnit;
-        var reportWindSpeedUnit =   data["Wind Speed Unit"] || invalidUnit;
+        const reportTemperatureUnit = data["Temperature Unit"] || invalidUnit;
+        const reportPressureUnit =    data["Pressure Unit"] || invalidUnit;
+        const reportVisibilityUnit =  data["Visibility Unit"] || invalidUnit;
+        const reportWindSpeedUnit =   data["Wind Speed Unit"] || invalidUnit;
 
         model["conditions"] = data["Current Conditions"] || "";
 
-        var conditionIconName = data["Condition Icon"] || null;
+        const conditionIconName = data["Condition Icon"] || null;
         model["conditionIconName"] = conditionIconName ? Util.existingWeatherIconName(conditionIconName) : "weather-none-available";
 
-        var temperature = getNumber("Temperature");
+        const temperature = getNumber("Temperature");
         model["temperature"] = temperature !== null ? Util.temperatureToDisplayString(displayTemperatureUnit, temperature, reportTemperatureUnit, true, false) : "";
 
-        var windchill = getNumber("Windchill");
+        const windchill = getNumber("Windchill");
         // Use temperature unit to convert windchill temperature
         // we only show degrees symbol not actual temperature unit
         model["windchill"] = windchill !== null ?
             Util.temperatureToDisplayString(displayTemperatureUnit, windchill, reportTemperatureUnit, false, true) :
             "";
 
-        var humidex = getNumber("Humidex");
+        const humidex = getNumber("Humidex");
         // TODO: this seems wrong, does the humidex have temperature as units?
         // Use temperature unit to convert humidex temperature
         // we only show degrees symbol not actual temperature unit
@@ -74,36 +74,36 @@ Item {
             Util.temperatureToDisplayString(displayTemperatureUnit, humidex, reportTemperatureUnit, false, true) :
             "";
 
-        var dewpoint = getNumber("Dewpoint");
+        const dewpoint = getNumber("Dewpoint");
         model["dewpoint"] = dewpoint !== null ?
             Util.temperatureToDisplayString(displayTemperatureUnit, dewpoint, reportTemperatureUnit) : "";
 
-        var pressure = getNumber("Pressure");
+        const pressure = getNumber("Pressure");
         model["pressure"] = pressure !== null ?
             Util.valueToDisplayString(displayPressureUnit, pressure, reportPressureUnit, 2) : "";
 
-        var pressureTendency = (data && data["Pressure Tendency"]) || null;
+        const pressureTendency = (data && data["Pressure Tendency"]) || null;
         model["pressureTendency"] =
             pressureTendency === "rising"  ? i18nc("pressure tendency", "Rising")  :
             pressureTendency === "falling" ? i18nc("pressure tendency", "Falling") :
             pressureTendency === "steady"  ? i18nc("pressure tendency", "Steady")  :
             /* else */                       "";
 
-        var visibility = getNumberOrString("Visibility");
+        const visibility = getNumberOrString("Visibility");
         model["visibility"] = visibility !== null ?
             ((reportVisibilityUnit !== invalidUnit) ?
                 Util.valueToDisplayString(displayVisibilityUnit, visibility, reportVisibilityUnit, 1) : visibility) :
             "";
 
-        var humidity = getNumber("Humidity");
+        const humidity = getNumber("Humidity");
         model["humidity"] = humidity !== null ? Util.percentToDisplayString(humidity) : "";
 
         // TODO: missing check for windDirection validness
-        var windDirection = data["Wind Direction"] || "";
-        var windSpeed = getNumberOrString("Wind Speed");
-        var windSpeedText;
+        const windDirection = data["Wind Direction"] || "";
+        const windSpeed = getNumberOrString("Wind Speed");
+        let windSpeedText;
         if (windSpeed !== null && windSpeed !== "") {
-            var windSpeedNumeric = (typeof windSpeed !== 'number') ? parseFloat(windSpeed) : windSpeed;
+            const windSpeedNumeric = (typeof windSpeed !== 'number') ? parseFloat(windSpeed) : windSpeed;
             if (!isNaN(windSpeedNumeric)) {
                 if (windSpeedNumeric !== 0) {
                     windSpeedText = Util.valueToDisplayString(displaySpeedUnit, windSpeedNumeric, reportWindSpeedUnit, 1);
@@ -119,33 +119,29 @@ Item {
         model["windDirectionId"] = windDirection;
         model["windDirection"] = windDirection ? i18nc("wind direction", windDirection) : "";
 
-        var windGust = getNumber("Wind Gust");
+        const windGust = getNumber("Wind Gust");
         model["windGust"] = windGust !== null ? Util.valueToDisplayString(displaySpeedUnit, windGust, reportWindSpeedUnit, 1) : "";
 
         return model;
     }
 
     readonly property var generalModel: {
-        var model = {};
-        var data = weatherDataSource.currentData || {};
+        const model = {};
+        const data = weatherDataSource.currentData || {};
 
-        var todayForecastTokens = (data["Short Forecast Day 0"] || "").split("|");
+        const todayForecastTokens = (data["Short Forecast Day 0"] || "").split("|");
 
         model["location"] =  data["Place"] || "";
         model["courtesy"] =  data["Credit"] || "";
         model["creditUrl"] = data["Credit Url"] || "";
 
-        var forecastDayCount = parseInt(data["Total Weather Days"] || "");
-        var forecastTitle;
-        if (!isNaN(forecastDayCount) && forecastDayCount > 0) {
-            forecastTitle = i18ncp("Forecast period timeframe", "1 Day", "%1 Days", forecastDayCount);
-        }
-        model["forecastTitle"] = forecastTitle || "";
+        const forecastDayCount = parseInt(data["Total Weather Days"] || "");
+        const forecastTitle = (!isNaN(forecastDayCount) && forecastDayCount > 0) ?
+                                i18ncp("Forecast period timeframe", "1 Day", "%1 Days", forecastDayCount) : ""
+        model["forecastTitle"] = forecastTitle;
 
-        var conditionIconName = observationModel.conditionIconName;
-        if (!conditionIconName ||
-            conditionIconName === "weather-none-available") {
-
+        let conditionIconName = observationModel.conditionIconName;
+        if (!conditionIconName || conditionIconName === "weather-none-available") {
             // try icon from current weather forecast
             if (todayForecastTokens.length === 6 && todayForecastTokens[1] !== "N/U") {
                 conditionIconName = Util.existingWeatherIconName(todayForecastTokens[1]);
@@ -159,7 +155,7 @@ Item {
     }
 
     readonly property var detailsModel: {
-        var model = [];
+        const model = [];
 
         if (observationModel.windchill) {
             model.push({
@@ -221,24 +217,24 @@ Item {
     }
 
     readonly property var forecastModel: {
-        var model = [];
-        var data = weatherDataSource.currentData;
+        const model = [];
+        const data = weatherDataSource.currentData;
 
-        var forecastDayCount = parseInt((data && data["Total Weather Days"]) || "");
+        const forecastDayCount = parseInt((data && data["Total Weather Days"]) || "");
         if (isNaN(forecastDayCount) || forecastDayCount <= 0) {
             return model;
         }
 
-        var reportTemperatureUnit = (data && data["Temperature Unit"]) || invalidUnit;
+        const reportTemperatureUnit = (data && data["Temperature Unit"]) || invalidUnit;
 
-        var dayItems = [];
-        var conditionItems = [];
-        var hiItems = [];
-        var lowItems = [];
+        const dayItems = [];
+        const conditionItems = [];
+        const hiItems = [];
+        const lowItems = [];
 
-        for (var i = 0; i < forecastDayCount; ++i) {
-            var forecastDayKey = "Short Forecast Day " + i;
-            var forecastDayTokens = ((data && data[forecastDayKey]) || "").split("|");
+        for (let i = 0; i < forecastDayCount; ++i) {
+            const forecastDayKey = "Short Forecast Day " + i;
+            const forecastDayTokens = ((data && data[forecastDayKey]) || "").split("|");
 
             if (forecastDayTokens.length !== 6) {
                 // We don't have the right number of tokens, abort trying
@@ -248,14 +244,14 @@ Item {
             dayItems.push(forecastDayTokens[0]);
 
             // If we see N/U (Not Used) we skip the item
-            var weatherIconName = forecastDayTokens[1];
+            const weatherIconName = forecastDayTokens[1];
             if (weatherIconName && weatherIconName !== "N/U") {
-                var iconAndToolTip = Util.existingWeatherIconName(weatherIconName);
+                let iconAndToolTip = Util.existingWeatherIconName(weatherIconName);
 
                 iconAndToolTip += "|";
 
-                var condition = forecastDayTokens[2];
-                var probability = forecastDayTokens[5];
+                const condition = forecastDayTokens[2];
+                const probability = forecastDayTokens[5];
                 if (probability !== "N/U" &&
                     probability !== "N/A" &&
                     !!probability) {
@@ -267,7 +263,7 @@ Item {
                 conditionItems.push(iconAndToolTip);
             }
 
-            var tempHigh = forecastDayTokens[3];
+            const tempHigh = forecastDayTokens[3];
             if (tempHigh !== "N/U") {
                 if (tempHigh === "N/A" || !tempHigh) {
                     hiItems.push(i18nc("Short for no data available", "-"));
@@ -277,7 +273,7 @@ Item {
                 }
             }
 
-            var tempLow = forecastDayTokens[4];
+            const tempLow = forecastDayTokens[4];
             if (tempLow !== "N/U") {
                 if (tempLow === "N/A" || !tempLow) {
                     lowItems.push(i18nc("Short for no data available", "-"));
@@ -305,15 +301,15 @@ Item {
     }
 
     readonly property var noticesModel: {
-        var model = [];
-        var data = weatherDataSource.currentData;
+        const model = [];
+        const data = weatherDataSource.currentData;
 
-        var warnings = [];
-        var warningsCount = parseInt((data && data["Total Warnings Issued"]) || "");
+        const warnings = [];
+        let warningsCount = parseInt((data && data["Total Warnings Issued"]) || "");
         if (isNaN(warningsCount)) {
             warningsCount = 0;
         }
-        for (var i = 0; i < warningsCount; ++i) {
+        for (let i = 0; i < warningsCount; ++i) {
             warnings.push({
                 "description": data["Warning Description "+i],
                 "info":        data["Warning Info "+i]
@@ -321,12 +317,12 @@ Item {
         }
         model.push(warnings);
 
-        var watches = [];
-        var watchesCount = parseInt((data && data["Total Watches Issued"]) || "");
+        const watches = [];
+        let watchesCount = parseInt((data && data["Total Watches Issued"]) || "");
         if (isNaN(watchesCount)) {
             watchesCount = 0;
         }
-        for (var i = 0; i < watchesCount; ++i) {
+        for (let i = 0; i < watchesCount; ++i) {
             watches.push({
                 "description": data["Watch Description "+i],
                 "info":        data["Watch Info "+i]
@@ -370,8 +366,8 @@ Item {
             connectingToSource = false;
             Plasmoid.busy = false;
             // TODO: inform user
-            var sourceTokens = weatherSource.split("|");
-            var foo = i18n("Weather information retrieval for %1 timed out.", sourceTokens.value(2));
+            const sourceTokens = weatherSource.split("|");
+            const foo = i18n("Weather information retrieval for %1 timed out.", sourceTokens.value(2));
         }
     }
 
@@ -383,8 +379,8 @@ Item {
         if (!generalModel.location) {
             return "";
         }
-        var tooltips = [];
-        var temperature = Plasmoid.configuration.showTemperatureInTooltip ? observationModel.temperature : null;
+        const tooltips = [];
+        const temperature = Plasmoid.configuration.showTemperatureInTooltip ? observationModel.temperature : null;
         if (observationModel.conditions && temperature) {
             tooltips.push(i18nc("weather condition + temperature",
                                 "%1 %2", observationModel.conditions, temperature));

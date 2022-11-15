@@ -30,15 +30,8 @@ ColumnLayout {
             // still needed? was in old code
             opacity: (text.indexOf("ight") !== -1 || text.indexOf("nite") !== -1) ? 0.6 : 1
             horizontalAlignment: Text.AlignHCenter
-
-            text: {
-                var time = cellData;
-                // still needed? was in old code
-                if (time.indexOf("nt") !== -1) {
-                    time = time.replace(" nt", "");
-                }
-                return time;
-            }
+            // still needed? was in old code
+            text: cellData.replace(" nt", "")
         }
     }
 
@@ -69,7 +62,7 @@ ColumnLayout {
             }
 
             Component.onCompleted: {
-                var values = cellData.split("|");
+                const values = cellData.split("|");
                 source = values[0];
                 iconToolTip.mainText = values[1];
             }
@@ -95,9 +88,9 @@ ColumnLayout {
                 id: row
 
                 readonly property int maxItemPreferredWidth: {
-                    var mw = 0;
-                    for (var i = 0; i < rowRepeater.count; i++) {
-                        var item = rowRepeater.itemAt(i);
+                    let mw = 0;
+                    for (let i = 0; i < rowRepeater.count; i++) {
+                        const item = rowRepeater.itemAt(i);
                         if (!item) {
                             continue;
                         }

@@ -84,7 +84,7 @@ ColumnLayout {
         textFormat: Text.StyledText
 
         text: {
-            var result = generalModel.courtesy;
+            let result = generalModel.courtesy;
             if (creditUrl) {
                 result = "<a href=\"" + creditUrl + "\">" + result + "</a>";
             }

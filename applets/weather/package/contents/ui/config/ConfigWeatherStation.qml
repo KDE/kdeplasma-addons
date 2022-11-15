@@ -42,7 +42,7 @@ Kirigami.FormLayout {
             visible: text != ""
 
             text: {
-                var sourceDetails = cfg_source.split('|');
+                const sourceDetails = cfg_source.split('|');
                 if (sourceDetails.length > 2) {
                     return i18nc("A weather station location and the weather service it comes from",
                                     "%1 (%2)", sourceDetails[2], Plasmoid.nativeInterface.providers[sourceDetails[0]]);
