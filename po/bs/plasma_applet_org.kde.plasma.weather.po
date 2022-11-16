@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-14 00:47+0000\n"
+"POT-Creation-Date: 2022-11-16 00:48+0000\n"
 "PO-Revision-Date: 2012-09-03 13:02+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -148,33 +148,45 @@ msgctxt "@title"
 msgid "Units"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:28
+#: package/contents/ui/config/ConfigAppearance.qml:35
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:36
-#, kde-format
-msgctxt "@label"
-msgid "Show beside widget icon:"
-msgstr ""
-
-#: package/contents/ui/config/ConfigAppearance.qml:38
+#: package/contents/ui/config/ConfigAppearance.qml:43
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
-msgctxt "@option:check Show on widget icon: temperature"
-msgid "Temperature"
+msgctxt "@label"
+msgid "Show temperature:"
 msgstr "Pritisak: %1 %2"
 
-#: package/contents/ui/config/ConfigAppearance.qml:47
+#: package/contents/ui/config/ConfigAppearance.qml:46
+#, kde-format
+msgctxt "@option:radio Show temperature:"
+msgid "Over the widget icon"
+msgstr ""
+
+#: package/contents/ui/config/ConfigAppearance.qml:54
+#, kde-format
+msgctxt "@option:radio Show temperature:"
+msgid "Beside the widget icon"
+msgstr ""
+
+#: package/contents/ui/config/ConfigAppearance.qml:61
+#, kde-format
+msgctxt "@option:radio Show temperature:"
+msgid "Do not show"
+msgstr ""
+
+#: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:48
+#: package/contents/ui/config/ConfigAppearance.qml:71
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -182,13 +194,13 @@ msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Pritisak: %1 %2"
 
-#: package/contents/ui/config/ConfigAppearance.qml:53
+#: package/contents/ui/config/ConfigAppearance.qml:76
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:58
+#: package/contents/ui/config/ConfigAppearance.qml:81
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -196,7 +208,7 @@ msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Pritisak: %1 %2"
 
-#: package/contents/ui/config/ConfigAppearance.qml:63
+#: package/contents/ui/config/ConfigAppearance.qml:86
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"

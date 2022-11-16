@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-28 00:51+0000\n"
+"POT-Creation-Date: 2022-11-16 00:48+0000\n"
 "PO-Revision-Date: 2022-08-11 06:57+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -252,25 +252,25 @@ msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Današnja slika:"
 
-#: package/contents/ui/config.qml:283
+#: package/contents/ui/config.qml:282
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Naslov:"
 
-#: package/contents/ui/config.qml:303
+#: package/contents/ui/config.qml:297
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Avtor:"
 
-#: package/contents/ui/config.qml:329
+#: package/contents/ui/config.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Odpri vsebovano mapo"
 
-#: package/contents/ui/config.qml:333
+#: package/contents/ui/config.qml:321
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

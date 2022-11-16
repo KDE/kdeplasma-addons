@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-28 00:51+0000\n"
+"POT-Creation-Date: 2022-11-16 00:48+0000\n"
 "PO-Revision-Date: 2022-08-15 01:14+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -247,25 +247,25 @@ msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Imagem de hoje:"
 
-#: package/contents/ui/config.qml:283
+#: package/contents/ui/config.qml:282
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Título:"
 
-#: package/contents/ui/config.qml:303
+#: package/contents/ui/config.qml:297
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: package/contents/ui/config.qml:329
+#: package/contents/ui/config.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Abrir a Pasta Respectiva"
 
-#: package/contents/ui/config.qml:333
+#: package/contents/ui/config.qml:321
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

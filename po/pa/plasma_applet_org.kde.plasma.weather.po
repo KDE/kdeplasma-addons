@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-14 00:47+0000\n"
+"POT-Creation-Date: 2022-11-16 00:48+0000\n"
 "PO-Revision-Date: 2020-02-04 20:50-0800\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -146,49 +146,63 @@ msgctxt "@title"
 msgid "Units"
 msgstr "ਯੂਨਿਟਾਂ"
 
-#: package/contents/ui/config/ConfigAppearance.qml:28
+#: package/contents/ui/config/ConfigAppearance.qml:35
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "ਸੰਖੇਪ ਢੰਗ"
 
-#: package/contents/ui/config/ConfigAppearance.qml:36
-#, kde-format
+#: package/contents/ui/config/ConfigAppearance.qml:43
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show temperature"
 msgctxt "@label"
-msgid "Show beside widget icon:"
+msgid "Show temperature:"
+msgstr "ਤਾਮਮਾਨ ਵੇਖੋ:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:46
+#, kde-format
+msgctxt "@option:radio Show temperature:"
+msgid "Over the widget icon"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:38
+#: package/contents/ui/config/ConfigAppearance.qml:54
 #, kde-format
-msgctxt "@option:check Show on widget icon: temperature"
-msgid "Temperature"
-msgstr "ਤਾਮਮਾਨ"
+msgctxt "@option:radio Show temperature:"
+msgid "Beside the widget icon"
+msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:47
+#: package/contents/ui/config/ConfigAppearance.qml:61
+#, kde-format
+msgctxt "@option:radio Show temperature:"
+msgid "Do not show"
+msgstr ""
+
+#: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:48
+#: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "ਤਾਮਮਾਨ"
 
-#: package/contents/ui/config/ConfigAppearance.qml:53
+#: package/contents/ui/config/ConfigAppearance.qml:76
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "ਹਵਾ"
 
-#: package/contents/ui/config/ConfigAppearance.qml:58
+#: package/contents/ui/config/ConfigAppearance.qml:81
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "ਦਬਾਓ"
 
-#: package/contents/ui/config/ConfigAppearance.qml:63
+#: package/contents/ui/config/ConfigAppearance.qml:86
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
@@ -490,6 +504,10 @@ msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
+#~ msgctxt "@option:check Show on widget icon: temperature"
+#~ msgid "Temperature"
+#~ msgstr "ਤਾਮਮਾਨ"
+
 #~ msgctxt "@info:tooltip"
 #~ msgid "Please configure"
 #~ msgstr "ਸੰਰਚਨਾ ਕਰੋ ਜੀ"
@@ -571,10 +589,6 @@ msgstr "%1 (%2)"
 #~ msgctxt "@label"
 #~ msgid "Display:"
 #~ msgstr "ਡਿਸਪਲੇਅ:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show temperature"
-#~ msgstr "ਤਾਮਮਾਨ ਵੇਖੋ:"
 
 #~ msgctxt "@label"
 #~ msgid "Tooltip:"

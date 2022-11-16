@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-28 00:51+0000\n"
+"POT-Creation-Date: 2022-11-16 00:48+0000\n"
 "PO-Revision-Date: 2022-10-28 22:47+0300\n"
 "Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -252,25 +252,25 @@ msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Päivän kuva:"
 
-#: package/contents/ui/config.qml:283
+#: package/contents/ui/config.qml:282
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Otsikko:"
 
-#: package/contents/ui/config.qml:303
+#: package/contents/ui/config.qml:297
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Tekijä:"
 
-#: package/contents/ui/config.qml:329
+#: package/contents/ui/config.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Avaa sisältävä kansio"
 
-#: package/contents/ui/config.qml:333
+#: package/contents/ui/config.qml:321
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-14 00:47+0000\n"
+"POT-Creation-Date: 2022-11-16 00:48+0000\n"
 "PO-Revision-Date: 2020-09-14 07:32+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -143,49 +143,67 @@ msgctxt "@title"
 msgid "Units"
 msgstr "Einheiten"
 
-#: package/contents/ui/config/ConfigAppearance.qml:28
+#: package/contents/ui/config/ConfigAppearance.qml:35
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "Kompakter Modus"
 
-#: package/contents/ui/config/ConfigAppearance.qml:36
-#, kde-format
+#: package/contents/ui/config/ConfigAppearance.qml:43
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show temperature"
 msgctxt "@label"
-msgid "Show beside widget icon:"
+msgid "Show temperature:"
+msgstr "Temperatur anzeigen"
+
+#: package/contents/ui/config/ConfigAppearance.qml:46
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Show beside widget icon:"
+msgctxt "@option:radio Show temperature:"
+msgid "Over the widget icon"
 msgstr "Neben Symbol anzeigen:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:38
-#, kde-format
-msgctxt "@option:check Show on widget icon: temperature"
-msgid "Temperature"
-msgstr "Temperatur"
+#: package/contents/ui/config/ConfigAppearance.qml:54
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Show beside widget icon:"
+msgctxt "@option:radio Show temperature:"
+msgid "Beside the widget icon"
+msgstr "Neben Symbol anzeigen:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:47
+#: package/contents/ui/config/ConfigAppearance.qml:61
+#, kde-format
+msgctxt "@option:radio Show temperature:"
+msgid "Do not show"
+msgstr ""
+
+#: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "In Kurzinfo anzeigen:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:48
+#: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Temperatur"
 
-#: package/contents/ui/config/ConfigAppearance.qml:53
+#: package/contents/ui/config/ConfigAppearance.qml:76
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Windstärke"
 
-#: package/contents/ui/config/ConfigAppearance.qml:58
+#: package/contents/ui/config/ConfigAppearance.qml:81
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Luftdruck"
 
-#: package/contents/ui/config/ConfigAppearance.qml:63
+#: package/contents/ui/config/ConfigAppearance.qml:86
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
@@ -490,6 +508,10 @@ msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
+#~ msgctxt "@option:check Show on widget icon: temperature"
+#~ msgid "Temperature"
+#~ msgstr "Temperatur"
+
 #~ msgctxt "@info:tooltip"
 #~ msgid "Please configure"
 #~ msgstr "Bitte einrichten"
@@ -568,10 +590,6 @@ msgstr "%1 (%2)"
 #~ msgctxt "@label"
 #~ msgid "Display:"
 #~ msgstr "Anzeige:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show temperature"
-#~ msgstr "Temperatur anzeigen"
 
 #~ msgctxt "@label"
 #~ msgid "Tooltip:"

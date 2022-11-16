@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-14 00:47+0000\n"
+"POT-Creation-Date: 2022-11-16 00:48+0000\n"
 "PO-Revision-Date: 2020-04-26 12:58+0800\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -145,49 +145,67 @@ msgctxt "@title"
 msgid "Units"
 msgstr "單位"
 
-#: package/contents/ui/config/ConfigAppearance.qml:28
+#: package/contents/ui/config/ConfigAppearance.qml:35
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "緊湊模式"
 
-#: package/contents/ui/config/ConfigAppearance.qml:36
-#, kde-format
+#: package/contents/ui/config/ConfigAppearance.qml:43
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox"
+#| msgid "Temperature:"
 msgctxt "@label"
-msgid "Show beside widget icon:"
+msgid "Show temperature:"
+msgstr "溫度："
+
+#: package/contents/ui/config/ConfigAppearance.qml:46
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Show beside widget icon:"
+msgctxt "@option:radio Show temperature:"
+msgid "Over the widget icon"
 msgstr "在元件圖示旁顯示："
 
-#: package/contents/ui/config/ConfigAppearance.qml:38
-#, kde-format
-msgctxt "@option:check Show on widget icon: temperature"
-msgid "Temperature"
-msgstr "溫度"
+#: package/contents/ui/config/ConfigAppearance.qml:54
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Show beside widget icon:"
+msgctxt "@option:radio Show temperature:"
+msgid "Beside the widget icon"
+msgstr "在元件圖示旁顯示："
 
-#: package/contents/ui/config/ConfigAppearance.qml:47
+#: package/contents/ui/config/ConfigAppearance.qml:61
+#, kde-format
+msgctxt "@option:radio Show temperature:"
+msgid "Do not show"
+msgstr ""
+
+#: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "在工具提示中顯示："
 
-#: package/contents/ui/config/ConfigAppearance.qml:48
+#: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "溫度"
 
-#: package/contents/ui/config/ConfigAppearance.qml:53
+#: package/contents/ui/config/ConfigAppearance.qml:76
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "風"
 
-#: package/contents/ui/config/ConfigAppearance.qml:58
+#: package/contents/ui/config/ConfigAppearance.qml:81
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "氣壓"
 
-#: package/contents/ui/config/ConfigAppearance.qml:63
+#: package/contents/ui/config/ConfigAppearance.qml:86
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
@@ -486,6 +504,10 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgctxt "@option:check Show on widget icon: temperature"
+#~ msgid "Temperature"
+#~ msgstr "溫度"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Please configure"
