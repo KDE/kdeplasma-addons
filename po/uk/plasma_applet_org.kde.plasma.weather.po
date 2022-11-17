@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:48+0000\n"
-"PO-Revision-Date: 2022-08-04 09:10+0300\n"
+"PO-Revision-Date: 2022-11-16 18:40+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -153,34 +153,28 @@ msgid "Compact Mode"
 msgstr "Компактний режим"
 
 #: package/contents/ui/config/ConfigAppearance.qml:43
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Показувати температуру"
+msgstr "Показувати температуру:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Показувати під піктограмою віджета:"
+msgstr "Над піктограмою віджета"
 
 #: package/contents/ui/config/ConfigAppearance.qml:54
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Показувати під піктограмою віджета:"
+msgstr "Поряд із піктограмою віджета"
 
 #: package/contents/ui/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Не показувати"
 
 #: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
