@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:50+0000\n"
-"PO-Revision-Date: 2013-01-25 09:12+0200\n"
-"Last-Translator: Liudas Alisauskas <liudas@akmc.lt>\n"
+"PO-Revision-Date: 2022-11-17 23:46+0200\n"
+"Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #: package/contents/ui/calculator.qml:285
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
-msgstr ""
+msgstr "Rezultatas"
 
 #: package/contents/ui/calculator.qml:308
 #, kde-format

@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-01 00:49+0000\n"
-"PO-Revision-Date: 2021-02-01 22:27+0200\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2022-11-18 00:13+0200\n"
+"Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -39,18 +39,16 @@ msgid "Advanced"
 msgstr "Išplėstiniai"
 
 #: package/contents/ui/CompactRepresentation.qml:133
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
-msgstr "Laikmatis"
+msgstr "Pristabdyti laikmatį"
 
 #: package/contents/ui/CompactRepresentation.qml:133
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
-msgstr "Laikmatis"
+msgstr "Paleisti laikmatį"
 
 #: package/contents/ui/CompactRepresentation.qml:189
 #: package/contents/ui/CompactRepresentation.qml:206
@@ -58,10 +56,10 @@ msgstr "Laikmatis"
 msgctxt "remaining time"
 msgid "%1s"
 msgid_plural "%1s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1s"
+msgstr[1] "%1s"
+msgstr[2] "%1s"
+msgstr[3] "%1s"
 
 #: package/contents/ui/configAdvanced.qml:22
 #, kde-format

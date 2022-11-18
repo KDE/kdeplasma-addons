@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:48+0000\n"
-"PO-Revision-Date: 2014-11-03 16:53+0200\n"
-"Last-Translator: liudas@aksioma.lt <liudas@aksioma.lt>\n"
+"PO-Revision-Date: 2022-11-17 23:32+0200\n"
+"Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #: contents/ui/KateSessionsItemDelegate.qml:91
 #, kde-format
@@ -41,10 +41,9 @@ msgid "Kate Sessions"
 msgstr "Kate sesijos"
 
 #: contents/ui/main.qml:38
-#, fuzzy, kde-format
-#| msgid "Search"
+#, kde-format
 msgid "Search…"
-msgstr "Ieškoti"
+msgstr "Ieškoti…"
 
 #~ msgid "Delete session"
 #~ msgstr "Trinti sesiją"

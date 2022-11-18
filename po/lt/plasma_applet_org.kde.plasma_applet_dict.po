@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-31 00:48+0000\n"
-"PO-Revision-Date: 2021-12-18 00:57+0200\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2022-11-17 23:36+0200\n"
+"Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -26,57 +26,47 @@ msgid "Dictionaries"
 msgstr "Žodynai"
 
 #: package/contents/ui/AvailableDictSheet.qml:35
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Dictionaries"
+#, kde-format
 msgid "Add More Dictionaries"
-msgstr "Žodynai"
+msgstr "Pridėti daugiau žodynų"
 
 #: package/contents/ui/ConfigDictionaries.qml:89
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Available dictionaries:"
+#, kde-format
 msgid "Unable to load dictionary list"
-msgstr "Prieinami žodynai:"
+msgstr "Nepavyko įkelti žodynų sąrašo"
 
 #: package/contents/ui/ConfigDictionaries.qml:90
 #: package/contents/ui/main.qml:121
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
-msgstr ""
+msgstr "Klaidos kodas: %1 (%2)"
 
 #: package/contents/ui/ConfigDictionaries.qml:101
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Dictionaries"
+#, kde-format
 msgid "No dictionaries"
-msgstr "Žodynai"
+msgstr "Nėra žodynų"
 
 #: package/contents/ui/ConfigDictionaries.qml:112
 #, kde-format
 msgid "Add More…"
-msgstr ""
+msgstr "Pridėti daugiau…"
 
 #: package/contents/ui/DictItemDelegate.qml:51
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Ištrinti"
 
 #: package/contents/ui/main.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter word to define here"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
-msgstr "Čia įveskite norimą apibrėžti žodį"
+msgstr "Čia įveskite norimą apibrėžti žodį…"
 
 #: package/contents/ui/main.qml:120
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Available dictionaries:"
+#, kde-format
 msgid "Unable to load definition"
-msgstr "Prieinami žodynai:"
+msgstr "Nepavyko įkelti apibrėžimo"
 
 #~ msgid "Looking up definition…"
 #~ msgstr "Ieškoma apibrėžimo…"

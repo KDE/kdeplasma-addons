@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-31 00:48+0000\n"
-"PO-Revision-Date: 2019-06-06 12:47+0000\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2022-11-18 00:00+0200\n"
+"Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -17,34 +17,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #: package/contents/ui/main.qml:77
-#, fuzzy, kde-format
-#| msgid "No quota restrictions found."
+#, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
-msgstr "Nerasta jokių leidžiamo duomenų kiekio apribojimų."
+msgstr "Nerasta jokių leidžiamo duomenų kiekio apribojimų"
 
 #: package/contents/ui/main.qml:77
-#, fuzzy, kde-format
-#| msgid ""
-#| "Quota tool not found.\n"
-#| "\n"
-#| "Please install 'quota'."
+#, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
-msgstr ""
-"Nerastas leidžiamo duomenų kiekio įrankis.\n"
-"\n"
-"Įdiekite \"quota\" paketą."
+msgstr "Nerastas leidžiamo duomenų kiekio įrankis"
 
 #: package/contents/ui/main.qml:78
-#, fuzzy, kde-format
-#| msgid "Please install 'quota'"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
-msgstr "Įdiekite \"quota\" paketą"
+msgstr "Įdiekite „quota“ paketą"
 
 #: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:177 plugin/DiskQuota.cpp:264
 #, kde-format
@@ -54,7 +45,7 @@ msgstr "Leidžiamas disko duomenų kiekis"
 #: plugin/DiskQuota.cpp:45
 #, kde-format
 msgid "Please install 'quota'"
-msgstr "Įdiekite \"quota\" paketą"
+msgstr "Įdiekite „quota“ paketą"
 
 #: plugin/DiskQuota.cpp:178
 #, kde-format

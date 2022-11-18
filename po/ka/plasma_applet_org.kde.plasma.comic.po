@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-27 00:48+0000\n"
-"PO-Revision-Date: 2022-09-12 19:43+0200\n"
+"PO-Revision-Date: 2022-11-17 06:41+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #: comic.cpp:87
 #, kde-format
@@ -46,25 +46,25 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
-msgstr ""
+msgstr "ვებგვერდის მონახულება"
 
 #: comic.cpp:109
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
-msgstr ""
+msgstr "%1-ში ნახვა"
 
 #: comic.cpp:117
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
-msgstr ""
+msgstr "მაღაზიის &ვებგვერდის ნახვა"
 
 #: comic.cpp:122
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr ""
+msgstr "კომიქსის &შენახვა, როგორც…"
 
 #: comic.cpp:127
 #, kde-format
@@ -76,13 +76,13 @@ msgstr "&რეალური ზომა"
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
-msgstr ""
+msgstr "მიმდინარე &მდებარეობის შენახვა"
 
 #: comicdata.cpp:86
 #, kde-format
 msgctxt "an abbreviation for Number"
 msgid "# %1"
-msgstr ""
+msgstr "# %1"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -112,13 +112,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
-msgstr ""
+msgstr "კომიქსის ვებგვერდის მონახულება"
 
 #: package/contents/ui/configAdvanced.qml:36
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
-msgstr ""
+msgstr "კომიქსის ქეში:"
 
 #: package/contents/ui/configAdvanced.qml:45
 #, kde-format
@@ -144,30 +144,30 @@ msgstr "ჩვენება:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
-msgstr ""
+msgstr "კომიქსის სათაური"
 
 #: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
-msgstr ""
+msgstr "კომიქსის იდენტიფიკატორი"
 
 #: package/contents/ui/configAppearance.qml:56
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
-msgstr ""
+msgstr "კომიქსის ავტორი"
 
 #: package/contents/ui/configAppearance.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
-msgstr ""
+msgstr "კომიქსის URL"
 
 #: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgid "Show navigation buttons:"
-msgstr ""
+msgstr "ნავიგაციის ღილაკების ჩვენება:"
 
 #: package/contents/ui/configAppearance.qml:73
 #, kde-format
@@ -179,31 +179,31 @@ msgstr "ყოველთვის"
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
-msgstr ""
+msgstr "მხოლოდ გადატარებისას"
 
 #: package/contents/ui/configGeneral.qml:52
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
-msgstr ""
+msgstr "კომიქსები:"
 
 #: package/contents/ui/configGeneral.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
-msgstr ""
+msgstr "მიიღეთ ახალი კომიქსები…"
 
 #: package/contents/ui/configGeneral.qml:83
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
-msgstr ""
+msgstr "შუა წკაპი კომიქსზე მის საწყის ზომაში საჩვენებლად"
 
 #: package/contents/ui/configGeneral.qml:92
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
-msgstr ""
+msgstr "ახალი დამატებების შემოწმება ყოველ:"
 
 #: package/contents/ui/configGeneral.qml:101
 #, kde-format
@@ -217,7 +217,7 @@ msgstr[1] "დღე"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
-msgstr ""
+msgstr "ახალი კომიქსების შემოწმება ყოველ:"
 
 #: package/contents/ui/configGeneral.qml:115
 #, kde-format

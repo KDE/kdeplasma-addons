@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: plasma_runner_datetime\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-31 00:47+0000\n"
-"PO-Revision-Date: 2019-06-01 19:22+0000\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2022-11-18 00:05+0200\n"
+"Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #: datetimerunner.cpp:20
 #, kde-format
@@ -48,7 +48,7 @@ msgstr "Rodo dabartinį laiką"
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid " <timezone>"
-msgstr ""
+msgstr " <laiko juosta>"
 
 #: datetimerunner.cpp:31
 #, kde-format
@@ -74,19 +74,19 @@ msgstr "Dabar yra %1"
 #, kde-format
 msgctxt "time zone difference"
 msgid "later"
-msgstr ""
+msgstr "vėliau"
 
 #: datetimerunner.cpp:78
 #, kde-format
 msgctxt "time zone difference"
 msgid "earlier"
-msgstr ""
+msgstr "anksčiau"
 
 #: datetimerunner.cpp:79
 #, kde-format
 msgctxt "no time zone difference"
 msgid "no time difference"
-msgstr ""
+msgstr "nėra laiko skirtumo"
 
 #~ msgid "The date in %1 is %2"
 #~ msgstr "Data zononje %1 yra %2"

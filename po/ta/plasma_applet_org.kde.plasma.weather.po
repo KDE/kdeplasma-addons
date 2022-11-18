@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:48+0000\n"
-"PO-Revision-Date: 2022-08-07 11:41+0530\n"
+"PO-Revision-Date: 2022-11-17 21:26+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.07.90\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -129,7 +129,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
-msgstr ""
+msgstr "வானிலை நிலையம்"
 
 #: package/contents/config/config.qml:19
 #, kde-format
@@ -150,34 +150,28 @@ msgid "Compact Mode"
 msgstr "சுருக்கமான காட்சி முறை"
 
 #: package/contents/ui/config/ConfigAppearance.qml:43
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Temperature:"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "வெப்பநிலை:"
+msgstr "வெப்பநிலையைக் காட்டுவது:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "பிளாஸ்மாய்டின் சின்னத்துக்கு பக்கத்தில் காட்டு:"
+msgstr "சின்னத்துக்கு மேல்"
 
 #: package/contents/ui/config/ConfigAppearance.qml:54
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "பிளாஸ்மாய்டின் சின்னத்துக்கு பக்கத்தில் காட்டு:"
+msgstr "சின்னத்துக்குப் பக்கத்தில்"
 
 #: package/contents/ui/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "காட்டாதே"
 
 #: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format

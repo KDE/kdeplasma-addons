@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:48+0000\n"
-"PO-Revision-Date: 2019-07-31 16:44+0300\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2022-11-17 23:23+0200\n"
+"Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #: package/contents/ui/config.qml:48
 #, kde-format
@@ -29,7 +29,7 @@ msgstr "Teikėjas:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
-msgstr ""
+msgstr "Atnaujinti, kai naudojamas ribotų duomenų tinklo ryšys"
 
 #: package/contents/ui/config.qml:76
 #, kde-format
@@ -197,7 +197,7 @@ msgstr "Galaktika"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tabliss"
-msgstr ""
+msgstr "Tabliss"
 
 #: package/contents/ui/config.qml:214
 #, kde-format
@@ -251,113 +251,118 @@ msgstr "Pasirinkite fono spalvą"
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
-msgstr ""
+msgstr "Šiandienos paveikslas:"
 
 #: package/contents/ui/config.qml:282
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
-msgstr ""
+msgstr "Pavadinimas:"
 
 #: package/contents/ui/config.qml:297
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
-msgstr ""
+msgstr "Autorius:"
 
 #: package/contents/ui/config.qml:317
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Atverti vidinį aplanką"
 
 #: package/contents/ui/config.qml:321
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
 msgstr ""
+"Atverti paskirties aplanką, kuriame buvo įrašytas darbalaukio fono "
+"paveikslas."
 
 #: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
-msgstr ""
+msgstr "Šiandienos paveikslas"
 
 #: package/contents/ui/WallpaperDelegate.qml:143
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
-msgstr ""
+msgstr "Įkeliama"
 
 #: package/contents/ui/WallpaperDelegate.qml:144
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
-msgstr ""
+msgstr "Neprieinama"
 
 #: package/contents/ui/WallpaperDelegate.qml:145
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
 msgstr ""
+"%1 Autorius: %2. Spustelėkite dešiniuoju pelės mygtuku, norėdami matyti "
+"daugiau veiksmų."
 
 #: package/contents/ui/WallpaperDelegate.qml:146
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
-msgstr ""
+msgstr "Darbalaukio fonas yra gaunamas iš interneto."
 
 #: package/contents/ui/WallpaperDelegate.qml:147
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
-msgstr ""
+msgstr "Nepavyko gauti darbalaukio fono iš interneto."
 
 #: package/contents/ui/WallpaperPreview.qml:50
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
-msgstr ""
+msgstr "Įrašyti paveikslą kaip…"
 
 #: package/contents/ui/WallpaperPreview.qml:53
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
-msgstr ""
+msgstr "Įrašyti šiandienos paveikslą į vietinį diską"
 
 #: package/contents/ui/WallpaperPreview.qml:59
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
-msgstr ""
+msgstr "Atverti nuorodą naršyklėje…"
 
 #: package/contents/ui/WallpaperPreview.qml:62
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
 msgstr ""
+"Atverti šiandienos paveikslo internetinę svetainę numatytojoje naršyklėje"
 
 #: plugins/potdbackend.cpp:221
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
-msgstr ""
+msgstr "Įrašyti šiandienos paveikslą"
 
 #: plugins/potdbackend.cpp:223
 #, kde-format
 msgctxt "@label:listbox Template for file dialog"
 msgid "JPEG image (*.jpeg *.jpg *.jpe)"
-msgstr ""
+msgstr "JPEG paveikslas (*.jpeg *.jpg *.jpe)"
 
 #: plugins/potdbackend.cpp:240
 #, kde-format
 msgctxt "@info:status after a save action"
 msgid "The image was not saved."
-msgstr ""
+msgstr "Paveikslas nebuvo įrašytas."
 
 #: plugins/potdbackend.cpp:246
 #, kde-format
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
-msgstr ""
+msgstr "Paveikslas buvo įrašytas kaip <a href=\"%1\">%2</a>"

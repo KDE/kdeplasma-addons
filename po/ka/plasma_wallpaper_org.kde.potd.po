@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:48+0000\n"
-"PO-Revision-Date: 2022-08-23 04:43+0200\n"
+"PO-Revision-Date: 2022-11-17 06:30+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #: package/contents/ui/config.qml:48
 #, kde-format
@@ -136,7 +136,7 @@ msgstr "დიზაინი"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Christmas"
-msgstr "აღდგომა"
+msgstr "შობა"
 
 #: package/contents/ui/config.qml:148
 #, kde-format
@@ -148,7 +148,7 @@ msgstr "მოგზაურობა"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Beach"
-msgstr "ბიჩი"
+msgstr "პლაჟი"
 
 #: package/contents/ui/config.qml:156
 #, kde-format
@@ -341,7 +341,7 @@ msgstr "დღის სურათის ბმულის ნაგული
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
-msgstr "დრის სურათის შენახვა"
+msgstr "დღის სურათის შენახვა"
 
 #: plugins/potdbackend.cpp:223
 #, kde-format
