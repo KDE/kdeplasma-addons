@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:48+0000\n"
+"POT-Creation-Date: 2022-11-19 00:47+0000\n"
 "PO-Revision-Date: 2020-04-26 12:58+0800\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -145,13 +145,13 @@ msgctxt "@title"
 msgid "Units"
 msgstr "單位"
 
-#: package/contents/ui/config/ConfigAppearance.qml:35
+#: package/contents/ui/config/ConfigAppearance.qml:36
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "緊湊模式"
 
-#: package/contents/ui/config/ConfigAppearance.qml:43
+#: package/contents/ui/config/ConfigAppearance.qml:44
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Temperature:"
@@ -159,7 +159,7 @@ msgctxt "@label"
 msgid "Show temperature:"
 msgstr "溫度："
 
-#: package/contents/ui/config/ConfigAppearance.qml:46
+#: package/contents/ui/config/ConfigAppearance.qml:47
 #, fuzzy, kde-format
 #| msgctxt "@label"
 #| msgid "Show beside widget icon:"
@@ -167,7 +167,7 @@ msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "在元件圖示旁顯示："
 
-#: package/contents/ui/config/ConfigAppearance.qml:54
+#: package/contents/ui/config/ConfigAppearance.qml:55
 #, fuzzy, kde-format
 #| msgctxt "@label"
 #| msgid "Show beside widget icon:"
@@ -175,37 +175,37 @@ msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "在元件圖示旁顯示："
 
-#: package/contents/ui/config/ConfigAppearance.qml:61
+#: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:70
+#: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "在工具提示中顯示："
 
-#: package/contents/ui/config/ConfigAppearance.qml:71
+#: package/contents/ui/config/ConfigAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "溫度"
 
-#: package/contents/ui/config/ConfigAppearance.qml:76
+#: package/contents/ui/config/ConfigAppearance.qml:77
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "風"
 
-#: package/contents/ui/config/ConfigAppearance.qml:81
+#: package/contents/ui/config/ConfigAppearance.qml:82
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "氣壓"
 
-#: package/contents/ui/config/ConfigAppearance.qml:86
+#: package/contents/ui/config/ConfigAppearance.qml:87
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
@@ -235,20 +235,20 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "能見度："
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:34
+#: package/contents/ui/config/ConfigWeatherStation.qml:35
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "位置："
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:47
+#: package/contents/ui/config/ConfigWeatherStation.qml:48
 #: plugin/locationlistmodel.cpp:125
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:57
+#: package/contents/ui/config/ConfigWeatherStation.qml:58
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Choose..."
@@ -256,13 +256,13 @@ msgctxt "@action:button"
 msgid "Choose…"
 msgstr "選擇…"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:65
+#: package/contents/ui/config/ConfigWeatherStation.qml:66
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "更新間隔："
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:68
+#: package/contents/ui/config/ConfigWeatherStation.qml:69
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -334,109 +334,109 @@ msgctxt "Wind condition"
 msgid "Calm"
 msgstr "涼"
 
-#: package/contents/ui/main.qml:141
+#: package/contents/ui/main.qml:140
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
 msgid_plural "%1 Days"
 msgstr[0] "%1 天"
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgctxt "@label"
 msgid "Windchill:"
 msgstr "風力："
 
-#: package/contents/ui/main.qml:173
+#: package/contents/ui/main.qml:169
 #, kde-format
 msgctxt "@label"
 msgid "Humidex:"
 msgstr "濕度："
 
-#: package/contents/ui/main.qml:180
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "結露指數："
 
-#: package/contents/ui/main.qml:187
+#: package/contents/ui/main.qml:183
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "氣壓："
 
-#: package/contents/ui/main.qml:194
+#: package/contents/ui/main.qml:190
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "壓力趨勢："
 
-#: package/contents/ui/main.qml:201
+#: package/contents/ui/main.qml:197
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "能見度："
 
-#: package/contents/ui/main.qml:208
+#: package/contents/ui/main.qml:204
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "濕度："
 
-#: package/contents/ui/main.qml:215
+#: package/contents/ui/main.qml:211
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "風速："
 
-#: package/contents/ui/main.qml:263
+#: package/contents/ui/main.qml:259
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2 %)"
 msgstr "%1 (%2 %)"
 
-#: package/contents/ui/main.qml:273 package/contents/ui/main.qml:283
+#: package/contents/ui/main.qml:269 package/contents/ui/main.qml:279
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/main.qml:374
+#: package/contents/ui/main.qml:370
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr "查詢 %1 的天氣資訊時超過等待時間。"
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:377
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:390
+#: package/contents/ui/main.qml:386
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:397
+#: package/contents/ui/main.qml:393
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:400
+#: package/contents/ui/main.qml:396
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:409
+#: package/contents/ui/main.qml:405
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:416
+#: package/contents/ui/main.qml:412
 #, kde-format
 msgid "Humidity: %1"
 msgstr "濕度：%1"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:48+0000\n"
+"POT-Creation-Date: 2022-11-19 00:47+0000\n"
 "PO-Revision-Date: 2016-08-31 20:04+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -149,65 +149,65 @@ msgctxt "@title"
 msgid "Units"
 msgstr "Μονάδες"
 
-#: package/contents/ui/config/ConfigAppearance.qml:35
+#: package/contents/ui/config/ConfigAppearance.qml:36
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:43
+#: package/contents/ui/config/ConfigAppearance.qml:44
 #, fuzzy, kde-format
 #| msgid "Temperature:"
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Θερμοκρασία:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:46
+#: package/contents/ui/config/ConfigAppearance.qml:47
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:54
+#: package/contents/ui/config/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:61
+#: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:70
+#: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:71
+#: package/contents/ui/config/ConfigAppearance.qml:72
 #, fuzzy, kde-format
 #| msgid "Temperature:"
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Θερμοκρασία:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:76
+#: package/contents/ui/config/ConfigAppearance.qml:77
 #, fuzzy, kde-format
 #| msgid "Wind: %1"
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Άνεμος: %1"
 
-#: package/contents/ui/config/ConfigAppearance.qml:81
+#: package/contents/ui/config/ConfigAppearance.qml:82
 #, fuzzy, kde-format
 #| msgid "Pressure:"
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Πίεση:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:86
+#: package/contents/ui/config/ConfigAppearance.qml:87
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
@@ -243,34 +243,34 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Ορατότητα:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:34
+#: package/contents/ui/config/ConfigWeatherStation.qml:35
 #, fuzzy, kde-format
 #| msgid "Location:"
 msgctxt "@label"
 msgid "Location:"
 msgstr "Τοποθεσία:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:47
+#: package/contents/ui/config/ConfigWeatherStation.qml:48
 #: plugin/locationlistmodel.cpp:125
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:57
+#: package/contents/ui/config/ConfigWeatherStation.qml:58
 #, kde-format
 msgctxt "@action:button"
 msgid "Choose…"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:65
+#: package/contents/ui/config/ConfigWeatherStation.qml:66
 #, fuzzy, kde-format
 #| msgid "Update every:"
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Ενημέρωση κάθε:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:68
+#: package/contents/ui/config/ConfigWeatherStation.qml:69
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "%1 minute"
@@ -353,7 +353,7 @@ msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Ήρεμα"
 
-#: package/contents/ui/main.qml:141
+#: package/contents/ui/main.qml:140
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -361,7 +361,7 @@ msgid_plural "%1 Days"
 msgstr[0] "1 ημέρα"
 msgstr[1] "%1 ημέρες"
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:162
 #, fuzzy, kde-format
 #| msgctxt "windchill, unit"
 #| msgid "Windchill: %1"
@@ -369,7 +369,7 @@ msgctxt "@label"
 msgid "Windchill:"
 msgstr "Ψύχος ανέμου: %1"
 
-#: package/contents/ui/main.qml:173
+#: package/contents/ui/main.qml:169
 #, fuzzy, kde-format
 #| msgctxt "humidex, unit"
 #| msgid "Humidex: %1"
@@ -377,7 +377,7 @@ msgctxt "@label"
 msgid "Humidex:"
 msgstr "Δείκτης υγρασίας: %1"
 
-#: package/contents/ui/main.qml:180
+#: package/contents/ui/main.qml:176
 #, fuzzy, kde-format
 #| msgctxt "ground temperature, unit"
 #| msgid "Dewpoint: %1"
@@ -385,14 +385,14 @@ msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "Σημείο υγροποίησης: %1"
 
-#: package/contents/ui/main.qml:187
+#: package/contents/ui/main.qml:183
 #, fuzzy, kde-format
 #| msgid "Pressure:"
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "Πίεση:"
 
-#: package/contents/ui/main.qml:194
+#: package/contents/ui/main.qml:190
 #, fuzzy, kde-format
 #| msgctxt "pressure tendency, rising/falling/steady"
 #| msgid "Pressure Tendency: %1"
@@ -400,14 +400,14 @@ msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "Τάση πίεσης: %1"
 
-#: package/contents/ui/main.qml:201
+#: package/contents/ui/main.qml:197
 #, fuzzy, kde-format
 #| msgid "Visibility:"
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "Ορατότητα:"
 
-#: package/contents/ui/main.qml:208
+#: package/contents/ui/main.qml:204
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
@@ -415,7 +415,7 @@ msgctxt "@label"
 msgid "Humidity:"
 msgstr "Υγρασία: %1%2"
 
-#: package/contents/ui/main.qml:215
+#: package/contents/ui/main.qml:211
 #, fuzzy, kde-format
 #| msgctxt "winds exceeding wind speed briefly"
 #| msgid "Wind Gust: %1 %2"
@@ -423,7 +423,7 @@ msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "Ριπή ανέμου: %1 %2"
 
-#: package/contents/ui/main.qml:263
+#: package/contents/ui/main.qml:259
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition (probability percentage)"
 #| msgid "%1 (%2%)"
@@ -431,24 +431,24 @@ msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2 %)"
 msgstr "%1 (%2%)"
 
-#: package/contents/ui/main.qml:273 package/contents/ui/main.qml:283
+#: package/contents/ui/main.qml:269 package/contents/ui/main.qml:279
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/main.qml:374
+#: package/contents/ui/main.qml:370
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr ""
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:377
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:390
+#: package/contents/ui/main.qml:386
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature,  both come from the "
@@ -458,7 +458,7 @@ msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:397
+#: package/contents/ui/main.qml:393
 #, fuzzy, kde-format
 #| msgctxt "wind direction, speed"
 #| msgid "%1 %2 %3"
@@ -466,7 +466,7 @@ msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 %3"
 
-#: package/contents/ui/main.qml:400
+#: package/contents/ui/main.qml:396
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature,  both come from the "
@@ -476,7 +476,7 @@ msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:409
+#: package/contents/ui/main.qml:405
 #, fuzzy, kde-format
 #| msgctxt "A weather station location and the weather service it comes from"
 #| msgid "%1 (%2)"
@@ -484,7 +484,7 @@ msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:416
+#: package/contents/ui/main.qml:412
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
