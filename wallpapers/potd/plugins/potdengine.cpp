@@ -53,7 +53,7 @@ void PotdClient::updateSource(bool refresh)
 #if HAVE_NetworkManagerQt
     // Use cache even if it's outdated when using metered connection
     const bool ignoreAge = m_doesUpdateOverMeteredConnection == 0 && isUsingMeteredConnection();
-    if (!refresh && (CachedProvider::isCached(m_identifier, m_args, ignoreAge))) {
+    if ((!refresh || ignoreAge /* Allow force refresh only when no cached image is available */) && CachedProvider::isCached(m_identifier, m_args, ignoreAge)) {
 #else
     if (!refresh && CachedProvider::isCached(m_identifier, m_args, false)) {
 #endif
@@ -68,15 +68,6 @@ void PotdClient::updateSource(bool refresh)
     if (auto url = CachedProvider::identifierToPath(m_identifier, m_args); QFile::exists(url)) {
         setLocalUrl(url);
     }
-
-#if HAVE_NetworkManagerQt
-    if (m_doesUpdateOverMeteredConnection == 0 && isUsingMeteredConnection()) {
-        qCDebug(WALLPAPERPOTD) << "Skip updating wallpapers for" << m_identifier << m_args << "due to metered connection.";
-        setLoading(false);
-        Q_EMIT done(this, false);
-        return;
-    }
-#endif
 
     const auto pluginResult = KPluginFactory::instantiatePlugin<PotdProvider>(m_metadata, this, m_args);
 
@@ -97,9 +88,7 @@ void PotdClient::setUpdateOverMeteredConnection(int value)
     // the wallpaper.
 
     m_doesUpdateOverMeteredConnection = value;
-    if (m_doesUpdateOverMeteredConnection == 1 || (m_doesUpdateOverMeteredConnection == 0 && !isUsingMeteredConnection())) {
-        updateSource();
-    }
+    updateSource();
 }
 #endif
 
