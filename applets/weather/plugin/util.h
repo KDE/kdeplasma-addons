@@ -20,6 +20,15 @@ public:
     explicit Util(QObject *parent = nullptr);
 
 public:
+    enum Status {
+        Normal = 0,
+        Connecting,
+        NeedsConfiguration,
+        Timeout,
+    };
+    Q_ENUM(Status);
+
+public:
     /**
      * Returns the @p iconName if the current icon theme contains an icon with that name,
      * otherwise returns "weather-not-available" (expecting the icon theme to have that in any case).

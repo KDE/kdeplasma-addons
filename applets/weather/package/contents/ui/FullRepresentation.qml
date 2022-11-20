@@ -14,6 +14,8 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
+import org.kde.plasma.private.weather 1.0
+
 ColumnLayout {
     id: fullRoot
 
@@ -29,7 +31,7 @@ ColumnLayout {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         Layout.margins: PlasmaCore.Units.largeSpacing
         // when not in panel, a configure button is already shown for needsConfiguration
-        visible: root.needsConfiguration && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)
+        visible: (root.status === Util.NeedsConfiguration) && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)
         iconName: "mark-location"
         text: i18n("Please set your location")
         helpfulAction: QQC2.Action {
@@ -41,16 +43,28 @@ ColumnLayout {
         }
     }
 
+    PlasmaExtras.PlaceholderMessage {
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+        Layout.margins: PlasmaCore.Units.largeSpacing
+        Layout.maximumWidth: PlasmaCore.Units.gridUnit * 20
+        visible: root.status === Util.Timeout
+        iconName: "network-disconnect"
+        text: {
+            const sourceTokens = root.weatherSource.split("|");
+            return i18n("Weather information retrieval for %1 timed out.", sourceTokens[2]);
+        }
+    }
+
     TopPanel {
         id: topPanel
-        visible: !root.needsConfiguration
+        visible: root.status !== Util.NeedsConfiguration && root.status !== Util.Timeout
 
         Layout.fillWidth: true
     }
 
     SwitchPanel {
         id: switchPanel
-        visible: !root.needsConfiguration
+        visible: root.status === Util.Normal
         Layout.fillWidth: true
 
         forecastViewTitle: generalModel.forecastTitle
@@ -62,7 +76,7 @@ ColumnLayout {
 
     PlasmaComponents.Label {
         id: sourceLabel
-        visible: !root.needsConfiguration
+        visible: root.status === Util.Normal
         readonly property string creditUrl: generalModel.creditUrl
 
         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight

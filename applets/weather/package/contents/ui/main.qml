@@ -23,8 +23,7 @@ Item {
     readonly property int displayPressureUnit: Plasmoid.configuration.pressureUnit
     readonly property int displayVisibilityUnit: Plasmoid.configuration.visibilityUnit
 
-    property bool connectingToSource: false
-    readonly property bool needsConfiguration: !generalModel.location && !connectingToSource
+    property int status: Util.Normal
 
     readonly property int invalidUnit: -1 //TODO: make KUnitConversion::InvalidUnit usable here
 
@@ -339,16 +338,14 @@ Item {
         interval: updateInterval * 60 * 1000
         onConnectedSourcesChanged: {
             if (weatherSource) {
-                connectingToSource = true;
-                Plasmoid.busy = true;
+                status = Util.Connecting
                 connectionTimeoutTimer.start();
             }
         }
         onCurrentDataChanged: {
             if (currentData) {
+                status = Util.Normal
                 connectionTimeoutTimer.stop();
-                connectingToSource = false;
-                Plasmoid.busy = false;
             }
         }
     }
@@ -359,18 +356,20 @@ Item {
         interval: 60 * 1000 // 1 min
         repeat: false
         onTriggered: {
-            connectingToSource = false;
-            Plasmoid.busy = false;
-            // TODO: inform user
-            const sourceTokens = weatherSource.split("|");
-            const foo = i18n("Weather information retrieval for %1 timed out.", sourceTokens.value(2));
+            status = Util.Timeout;
         }
     }
 
     // workaround for now to ensure "Please configure" tooltip
     // TODO: remove when configurationRequired works
-    Plasmoid.icon: needsConfiguration ? "configure" : generalModel.currentConditionIconName
-    Plasmoid.toolTipMainText: needsConfiguration ? i18nc("@info:tooltip %1 is the translated plasmoid name", "Click to configure %1", Plasmoid.title) : generalModel.location
+    Plasmoid.icon: (status === Util.NeedsConfiguration) ? "configure" : generalModel.currentConditionIconName
+    Plasmoid.busy: status === Util.Connecting
+    Plasmoid.configurationRequired: status === Util.NeedsConfiguration
+
+    Plasmoid.toolTipMainText: (status === Util.NeedsConfiguration) ?
+        i18nc("@info:tooltip %1 is the translated plasmoid name", "Click to configure %1", Plasmoid.title) :
+        generalModel.location
+
     Plasmoid.toolTipSubText: {
         if (!generalModel.location) {
             return "";
@@ -429,7 +428,9 @@ Item {
     }
 
     onWeatherSourceChanged: {
-        Plasmoid.setConfigurationRequired(weatherSource.length === 0)
+        if (weatherSource.length === 0) {
+            status = Util.NeedsConfiguration
+        }
     }
 
     Component.onCompleted: weatherSourceChanged()
