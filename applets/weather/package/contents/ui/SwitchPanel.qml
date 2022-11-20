@@ -18,6 +18,7 @@ ColumnLayout {
     property alias detailsModel: detailsView.model
     property alias noticesModel: noticesView.model
     property alias forecastViewTitle: forecastTabButton.text
+    property alias forecastViewNightRow: forecastView.showNightRow
 
     readonly property bool hasDetailsContent: detailsModel && detailsModel.length > 0
     readonly property alias hasNoticesContent: noticesView.hasContent

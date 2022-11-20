@@ -54,6 +54,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         forecastViewTitle: generalModel.forecastTitle
+        forecastViewNightRow: generalModel.forecastNightRow
         forecastModel: root.forecastModel
         detailsModel: root.detailsModel
         noticesModel: root.noticesModel
