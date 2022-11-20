@@ -227,74 +227,50 @@ Item {
 
         const reportTemperatureUnit = (data && data["Temperature Unit"]) || invalidUnit;
 
-        const dayItems = [];
-        const conditionItems = [];
-        const hiItems = [];
-        const lowItems = [];
-
         for (let i = 0; i < forecastDayCount; ++i) {
+            const forecastInfo = {
+                period: "",
+                icon: "",
+                condition: "",
+                tempHigh: "",
+                tempLow: "",
+            }
+
             const forecastDayKey = "Short Forecast Day " + i;
             const forecastDayTokens = ((data && data[forecastDayKey]) || "").split("|");
 
             if (forecastDayTokens.length !== 6) {
                 // We don't have the right number of tokens, abort trying
-                break;
+                continue;
             }
-
-            dayItems.push(forecastDayTokens[0]);
+            forecastInfo["period"] = forecastDayTokens[0];
 
             // If we see N/U (Not Used) we skip the item
             const weatherIconName = forecastDayTokens[1];
             if (weatherIconName && weatherIconName !== "N/U") {
-                let iconAndToolTip = Util.existingWeatherIconName(weatherIconName);
-
-                iconAndToolTip += "|";
+                forecastInfo["icon"] = Util.existingWeatherIconName(weatherIconName);
 
                 const condition = forecastDayTokens[2];
                 const probability = forecastDayTokens[5];
-                if (probability !== "N/U" &&
-                    probability !== "N/A" &&
-                    !!probability) {
-                    iconAndToolTip += i18nc("certain weather condition (probability percentage)",
-                                            "%1 (%2 %)", condition, probability);
-                } else {
-                    iconAndToolTip += condition;
+
+                forecastInfo["condition"] = condition;
+                if (probability !== "N/U" && probability !== "N/A" && probability) {
+                    forecastInfo["condition"] = i18nc("certain weather condition (probability percentage)",
+                                                      "%1 (%2 %)", condition, probability);
                 }
-                conditionItems.push(iconAndToolTip);
             }
 
             const tempHigh = forecastDayTokens[3];
-            if (tempHigh !== "N/U") {
-                if (tempHigh === "N/A" || !tempHigh) {
-                    hiItems.push(i18nc("Short for no data available", "-"));
-                } else {
-                    hiItems.push(Util.temperatureToDisplayString(displayTemperatureUnit, tempHigh,
-                                                                 reportTemperatureUnit, true));
-                }
+            if (tempHigh !== "N/U" && tempHigh !== "N/A" && tempHigh) {
+                forecastInfo["tempHigh"] = Util.temperatureToDisplayString(displayTemperatureUnit, tempHigh, reportTemperatureUnit, true);
             }
 
             const tempLow = forecastDayTokens[4];
-            if (tempLow !== "N/U") {
-                if (tempLow === "N/A" || !tempLow) {
-                    lowItems.push(i18nc("Short for no data available", "-"));
-                } else {
-                    lowItems.push(Util.temperatureToDisplayString(displayTemperatureUnit, tempLow,
-                                                                  reportTemperatureUnit, true));
-                }
+            if (tempLow !== "N/U" && tempLow !== "N/A" && tempLow) {
+                forecastInfo["tempLow"] = Util.temperatureToDisplayString(displayTemperatureUnit, tempLow, reportTemperatureUnit, true);
             }
-        }
 
-        if (dayItems.length) {
-            model.push(dayItems);
-        }
-        if (conditionItems.length) {
-            model.push(conditionItems);
-        }
-        if (hiItems.length)  {
-            model.push(hiItems);
-        }
-        if (lowItems.length) {
-            model.push(lowItems);
+            model.push(forecastInfo);
         }
 
         return model;

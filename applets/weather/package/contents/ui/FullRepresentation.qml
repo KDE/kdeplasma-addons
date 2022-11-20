@@ -22,8 +22,8 @@ ColumnLayout {
     property alias generalModel: topPanel.generalModel
     property alias observationModel: topPanel.observationModel
 
-    Layout.minimumWidth: Math.max(PlasmaCore.Units.gridUnit * 10, topPanel.implicitWidth, switchPanel.implicitWidth)
-    Layout.minimumHeight: Math.max(PlasmaCore.Units.gridUnit * 10, topPanel.implicitHeight + switchPanel.implicitHeight + sourceLabel.implicitHeight + (spacing * 2))
+    Layout.minimumWidth: Math.max(PlasmaCore.Units.gridUnit * 10, implicitWidth)
+    Layout.minimumHeight: Math.max(PlasmaCore.Units.gridUnit * 10, implicitHeight)
 
     PlasmaExtras.PlaceholderMessage {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
