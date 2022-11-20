@@ -28,7 +28,7 @@ public:
     explicit FlickrProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
 private:
-    void sendXmlRequest(const QString &apiKey, const QString &apiSecret);
+    void sendXmlRequest(const QString &apiKey);
     void xmlRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
 

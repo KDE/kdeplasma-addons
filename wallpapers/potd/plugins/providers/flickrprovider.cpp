@@ -37,9 +37,8 @@ FlickrProvider::FlickrProvider(QObject *parent, const KPluginMetaData &data, con
     loadConfig();
 }
 
-void FlickrProvider::sendXmlRequest(const QString &apiKey, const QString &apiSecret)
+void FlickrProvider::sendXmlRequest(const QString &apiKey)
 {
-    Q_UNUSED(apiSecret);
     if (apiKey.isNull()) {
         refreshConfig();
         return;
