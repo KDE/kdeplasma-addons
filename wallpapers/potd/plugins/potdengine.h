@@ -13,8 +13,9 @@
 #include <QDate>
 #include <QObject>
 #include <QTimer>
-
-#if HAVE_NetworkManagerQt
+#if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
+#include <QNetworkInformation>
+#elif HAVE_NetworkManagerQt
 #include <NetworkManagerQt/Manager>
 #endif
 #include <KPluginMetaData>
@@ -32,7 +33,7 @@ public:
     PotdClient(const KPluginMetaData &metadata, const QVariantList &args, QObject *parent = nullptr);
 
     void updateSource(bool refresh = false);
-#if HAVE_NetworkManagerQt
+#if SUPPORT_METERED_DETECTION
     void setUpdateOverMeteredConnection(int value);
 #endif
 
@@ -69,7 +70,7 @@ private:
     QString m_identifier;
     QVariantList m_args;
     bool m_imageChanged = false;
-#if HAVE_NetworkManagerQt
+#if SUPPORT_METERED_DETECTION
     int m_doesUpdateOverMeteredConnection = 0;
 #endif
 
@@ -103,7 +104,10 @@ private Q_SLOTS:
     void forceUpdateSource();
     void slotDone(PotdClient *client, bool success);
     void slotPrepareForSleep(bool sleep);
-#if HAVE_NetworkManagerQt
+#if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
+    void slotReachabilityChanged(QNetworkInformation::Reachability newReachability);
+    void slotIsMeteredChanged(bool isMetered);
+#elif HAVE_NetworkManagerQt
     void slotConnectivityChanged(NetworkManager::Connectivity connectivity);
 #endif
 

@@ -60,14 +60,16 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     NewStuff
 )
 
-find_package(KF5NetworkManagerQt CONFIG QUIET)
-set_package_properties(KF5NetworkManagerQt PROPERTIES
-    DESCRIPTION "Qt wrapper for NetworkManager API"
-    PURPOSE "Disable wallpaper update when using metered connections"
-    TYPE OPTIONAL
-)
-if(KF5NetworkManagerQt_FOUND)
-    set(HAVE_NetworkManagerQt TRUE)
+if(${QT_MAJOR_VERSION} LESS 6)
+    find_package(KF5NetworkManagerQt CONFIG QUIET)
+    set_package_properties(KF5NetworkManagerQt PROPERTIES
+        DESCRIPTION "Qt wrapper for NetworkManager API"
+        PURPOSE "Disable wallpaper update when using metered connections"
+        TYPE OPTIONAL
+    )
+    if(KF5NetworkManagerQt_FOUND)
+        set(HAVE_NetworkManagerQt TRUE)
+    endif()
 endif()
 
 find_package(KF5Purpose CONFIG QUIET)

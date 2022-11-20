@@ -24,7 +24,7 @@ static int s_instanceCount = 0;
 
 PotdBackend::PotdBackend(QObject *parent)
     : QObject(parent)
-#if HAVE_NetworkManagerQt
+#if SUPPORT_METERED_DETECTION
     , m_networkManagerQtAvailable(true)
 #endif
 {
@@ -168,7 +168,7 @@ void PotdBackend::setUpdateOverMeteredConnection(int value)
     }
 
     if (m_ready && m_client) {
-#if HAVE_NetworkManagerQt
+#if SUPPORT_METERED_DETECTION
         m_client->setUpdateOverMeteredConnection(m_doesUpdateOverMeteredConnection);
 #else
         m_client->updateSource();

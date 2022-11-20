@@ -24,6 +24,8 @@ target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
 )
 if (HAVE_NetworkManagerQt)
     target_link_libraries(plasma_wallpaper_potdplugin KF5::NetworkManagerQt)
+elseif(${QT_MAJOR_VERSION} GREATER_EQUAL 6)
+    target_link_libraries(plasma_wallpaper_potdplugin Qt::Network)
 endif()
 
 install(TARGETS plasma_wallpaper_potdplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)

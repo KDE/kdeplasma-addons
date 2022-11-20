@@ -20,15 +20,43 @@ using namespace std::chrono_literals;
 
 namespace
 {
-#if HAVE_NetworkManagerQt
 
+#if SUPPORT_METERED_DETECTION
 bool isUsingMeteredConnection()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
+    const auto instance = QNetworkInformation::instance();
+    if (instance->supports(QNetworkInformation::Feature::Metered)) {
+        return instance->isMetered();
+    } else if (instance->supports(QNetworkInformation::Feature::TransportMedium)) {
+        const auto transport = instance->transportMedium();
+        return transport == QNetworkInformation::TransportMedium::Cellular //
+            || transport == QNetworkInformation::TransportMedium::Bluetooth;
+    }
+    return false;
+#elif HAVE_NetworkManagerQt
     const auto metered = NetworkManager::metered();
     return metered == NetworkManager::Device::MeteredStatus::GuessYes //
         || metered == NetworkManager::Device::MeteredStatus::Yes;
-}
 #endif
+    Q_UNREACHABLE();
+}
+#endif // SUPPORT_METERED_DETECTION
+
+bool isNetworkConnected()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
+    const auto instance = QNetworkInformation::instance();
+    if (instance->supports(QNetworkInformation::Feature::Reachability) && instance->reachability() != QNetworkInformation::Reachability::Online) {
+        return false;
+    }
+#elif HAVE_NetworkManagerQt
+    if (NetworkManager::connectivity() != NetworkManager::Connectivity::Full) {
+        return false;
+    }
+#endif
+    return true;
+}
 }
 
 PotdClient::PotdClient(const KPluginMetaData &metadata, const QVariantList &args, QObject *parent)
@@ -50,7 +78,7 @@ void PotdClient::updateSource(bool refresh)
     setLoading(true);
 
     // Check whether it is cached already...
-#if HAVE_NetworkManagerQt
+#if SUPPORT_METERED_DETECTION
     // Use cache even if it's outdated when using metered connection
     const bool ignoreAge = m_doesUpdateOverMeteredConnection == 0 && isUsingMeteredConnection();
     if ((!refresh || ignoreAge /* Allow force refresh only when no cached image is available */) && CachedProvider::isCached(m_identifier, m_args, ignoreAge)) {
@@ -80,7 +108,7 @@ void PotdClient::updateSource(bool refresh)
     }
 }
 
-#if HAVE_NetworkManagerQt
+#if SUPPORT_METERED_DETECTION
 void PotdClient::setUpdateOverMeteredConnection(int value)
 {
     // Don't return if values are the same because there can be multiple
@@ -216,7 +244,15 @@ PotdEngine::PotdEngine(QObject *parent)
                                          this,
                                          SLOT(slotPrepareForSleep(bool)));
 
-#if HAVE_NetworkManagerQt
+#if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
+    const auto instance = QNetworkInformation::instance();
+    if (instance->supports(QNetworkInformation::Feature::Metered)) {
+        connect(instance, &QNetworkInformation::isMeteredChanged, this, &PotdEngine::slotIsMeteredChanged);
+    }
+    if (instance->supports(QNetworkInformation::Feature::Reachability)) {
+        connect(instance, &QNetworkInformation::reachabilityChanged, this, &PotdEngine::slotReachabilityChanged);
+    }
+#elif HAVE_NetworkManagerQt
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::connectivityChanged, this, &PotdEngine::slotConnectivityChanged);
 #endif
 }
@@ -277,6 +313,11 @@ void PotdEngine::unregisterClient(const QString &identifier, const QVariantList 
 
 void PotdEngine::updateSource(bool refresh)
 {
+    if (!isNetworkConnected()) {
+        qCDebug(WALLPAPERPOTD) << "Network is not connected, so the backend will not update wallpapers.";
+        return;
+    }
+
     m_lastUpdateSuccess = true;
 
     for (const auto &[_, clientPair] : std::as_const(m_clientMap)) {
@@ -325,19 +366,29 @@ void PotdEngine::slotPrepareForSleep(bool sleep)
         return;
     }
 
-#if HAVE_NetworkManagerQt
-    if (NetworkManager::connectivity() != NetworkManager::Connectivity::Full) {
-        qCDebug(WALLPAPERPOTD) << "Waking up from sleep but the network is not connected yet.";
-        return;
-    }
-#endif
-
     // Resume from sleep
     // Always force update to work around the current date not being updated
     forceUpdateSource();
 }
 
-#if HAVE_NetworkManagerQt
+#if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
+void PotdEngine::slotReachabilityChanged(QNetworkInformation::Reachability newReachability)
+{
+    if (newReachability == QNetworkInformation::Reachability::Online) {
+        qCDebug(WALLPAPERPOTD) << "Network is connected.";
+        updateSource(false);
+    }
+}
+
+void PotdEngine::slotIsMeteredChanged(bool isMetered)
+{
+    if (isMetered) {
+        return;
+    }
+
+    updateSource(false);
+}
+#elif HAVE_NetworkManagerQt
 void PotdEngine::slotConnectivityChanged(NetworkManager::Connectivity connectivity)
 {
     if (connectivity == NetworkManager::Connectivity::Full) {
