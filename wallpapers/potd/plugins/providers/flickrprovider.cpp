@@ -15,7 +15,7 @@
 
 #include <KPluginFactory>
 
-static QUrl buildUrl(const QDate &date, const QString apiKey)
+static QUrl buildUrl(const QDate &date, const QString &apiKey)
 {
     QUrl url(QLatin1String("https://api.flickr.com/services/rest/"));
     QUrlQuery urlQuery(url);
