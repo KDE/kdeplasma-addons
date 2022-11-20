@@ -1,18 +1,20 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2015, 2018, 2019.
 # Frederik Schwarzer <schwarzer@kde.org>, 2016.
+# Alois Spitzbart <spitz234@hotmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-15 00:46+0000\n"
-"PO-Revision-Date: 2019-05-22 07:50+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2022-09-24 10:42+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.0\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -71,20 +73,16 @@ msgstr "Benutzerdefinierter Titel"
 #: package/contents/ui/IconItem.qml:175
 #, kde-format
 msgid "Launch %1"
-msgstr ""
+msgstr "%1 starten"
 
 #: package/contents/ui/IconItem.qml:259
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Add Launcher..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Starter hinzufügen ..."
 
 #: package/contents/ui/IconItem.qml:265
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Edit Launcher..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Starter bearbeiten ..."
@@ -118,9 +116,7 @@ msgid "Show hidden icons"
 msgstr "Ausgeblendete Symbole anzeigen"
 
 #: package/contents/ui/main.qml:285
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Add Launcher..."
+#, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"
 msgstr "Starter hinzufügen ..."

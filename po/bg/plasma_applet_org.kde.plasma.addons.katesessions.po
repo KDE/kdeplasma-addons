@@ -41,12 +41,3 @@ msgstr "Сесии на Kate"
 #, kde-format
 msgid "Search…"
 msgstr "Търсене…"
-
-#~ msgid "Delete session"
-#~ msgstr "Изтриване на сесия"
-
-#~ msgid "Start Kate (no arguments)"
-#~ msgstr "Стартиране на Kate (без аргументи)"
-
-#~ msgid "New Kate Session"
-#~ msgstr "Нова сесия на Kate"

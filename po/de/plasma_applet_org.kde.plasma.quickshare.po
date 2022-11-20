@@ -1,17 +1,19 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2014, 2015, 2018.
+# Alois Spitzbart <spitz234@hotmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-02-03 00:45+0000\n"
-"PO-Revision-Date: 2018-04-24 07:14+0100\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2022-09-24 10:42+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.0\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -43,8 +45,7 @@ msgid "Upload %1 to an online service"
 msgstr "%1 zu einem Online-Dienst hochladen"
 
 #: contents/ui/main.qml:307
-#, fuzzy, kde-format
-#| msgid "Sending..."
+#, kde-format
 msgid "Sending…"
 msgstr "Wird gesendet ..."
 

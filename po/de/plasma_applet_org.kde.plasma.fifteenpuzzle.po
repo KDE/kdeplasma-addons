@@ -1,21 +1,23 @@
-#  <tr@erdfunkstelle.de>, 2008.
+# <tr@erdfunkstelle.de>, 2008.
 # Thomas Reitelbach <tr@erdfunkstelle.de>, 2008.
 # Frederik Schwarzer <schwarzer@kde.org>, 2008, 2009.
 # Panagiotis Papadopoulos <pano_90@gmx.net>, 2010.
 # Burkhard Lück <lueck@hube-lueck.de>, 2014, 2015, 2017, 2018, 2019.
+# Alois Spitzbart <spitz234@hotmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-07 00:48+0000\n"
-"PO-Revision-Date: 2019-07-17 18:05+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2022-09-24 10:26+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -45,20 +47,16 @@ msgid "Image:"
 msgstr "Bild:"
 
 #: package/contents/ui/configAppearance.qml:79
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Path to custom image..."
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Pfad zum eigenes Bild ..."
 
 #: package/contents/ui/configAppearance.qml:98
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Choose image..."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
-msgstr "Bild auswählen ..."
+msgstr "Bild auswählen …"
 
 #: package/contents/ui/configAppearance.qml:106
 #, kde-format

@@ -94,11 +94,3 @@ msgstr "Копиран!"
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Изтриване"
-
-#~ msgctxt "@title:menu"
-#~ msgid "Copy to Clipboard"
-#~ msgstr "Копиране в клипборда"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Color options"
-#~ msgstr "Опции на цвят"

@@ -1,21 +1,23 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Frederik Schwarzer <schwarzer@kde.org>, 2016, 2018.
 # Burkhard Lück <lueck@hube-lueck.de>, 2016, 2018, 2019, 2020.
+# Alois Spitzbart <spitz234@hotmail.com>, 2022.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-19 00:47+0000\n"
-"PO-Revision-Date: 2020-09-14 07:32+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2022-09-24 10:50+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.0\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -247,9 +249,7 @@ msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:58
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Choose..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Choose…"
 msgstr "Auswählen ..."
@@ -300,14 +300,12 @@ msgstr "Abbrechen"
 #: package/contents/ui/FullRepresentation.qml:34
 #, kde-format
 msgid "Please set your location"
-msgstr ""
+msgstr "Bitte stellen Sie Ihren Standort ein"
 
 #: package/contents/ui/FullRepresentation.qml:37
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgid "Set location…"
-msgstr "Ort eingeben"
+msgstr "Standort einstellen ..."
 
 #: package/contents/ui/main.qml:87
 #, kde-format
@@ -412,7 +410,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr ""
+msgstr "Hier klicken zum Einrichten von %1"
 
 #: package/contents/ui/main.qml:386
 #, kde-format

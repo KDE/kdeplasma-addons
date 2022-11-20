@@ -1,21 +1,23 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Frederik Schwarzer <schwarzer@kde.org>, 2018.
 # Burkhard Lück <lueck@hube-lueck.de>, 2018, 2021.
+# Alois Spitzbart <spitz234@hotmail.com>, 2022.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-19 00:47+0000\n"
-"PO-Revision-Date: 2021-04-15 08:45+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2022-09-24 10:40+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.0\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -24,12 +26,11 @@ msgid "Keys"
 msgstr "Tasten"
 
 #: contents/ui/configAppearance.qml:34
-#, fuzzy, kde-format
-#| msgid "No lock keys activated"
+#, kde-format
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
-msgstr "Keine Tastensperre aktiviert"
+msgstr "Anzeigen, wenn aktiviert:"
 
 #: contents/ui/configAppearance.qml:37
 #, kde-format

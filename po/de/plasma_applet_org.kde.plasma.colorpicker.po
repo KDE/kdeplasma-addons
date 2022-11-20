@@ -1,19 +1,21 @@
 # Thomas Reitelbach <tr@erdfunkstelle.de>, 2007.
 # Frederik Schwarzer <schwarzer@kde.org>, 2010.
 # Burkhard Lück <lueck@hube-lueck.de>, 2015, 2016, 2018.
+# Alois Spitzbart <spitz234@hotmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-14 00:47+0000\n"
-"PO-Revision-Date: 2018-04-24 07:02+0100\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2022-09-24 10:25+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.0\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -70,12 +72,10 @@ msgid "Pick color"
 msgstr "Wählen Sie eine Farbe"
 
 #: package/contents/ui/main.qml:198
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Pick color"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr "Wählen Sie eine Farbe"
+msgstr "Keine Farben"
 
 #: package/contents/ui/main.qml:202
 #, kde-format
@@ -93,7 +93,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #~ msgctxt "@title:menu"
 #~ msgid "Copy to Clipboard"
