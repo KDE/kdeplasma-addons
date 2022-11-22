@@ -16,14 +16,14 @@ import org.kde.plasma.private.nightcolorcontrol 1.0
 Item {
     id: root
 
-    Plasmoid.icon: monitor.running ? 'redshift-status-on' : 'redshift-status-off'
+    Plasmoid.icon: monitor.running ? "redshift-status-on" : "redshift-status-off"
 
     Plasmoid.status: {
         // Display the applet in the system tray when Night Color is active.
-        if (monitor.enabled && monitor.targetTemperature != 6500) {
+        if (monitor.enabled && monitor.targetTemperature !== 6500) {
             return PlasmaCore.Types.ActiveStatus;
         }
-        if (inhibitor.state != Inhibitor.Uninhibited) {
+        if (inhibitor.state !== Inhibitor.Uninhibited) {
             return PlasmaCore.Types.ActiveStatus;
         }
         return PlasmaCore.Types.PassiveStatus;
@@ -31,7 +31,7 @@ Item {
 
     Plasmoid.toolTipMainText: i18n("Night Color Control")
     Plasmoid.toolTipSubText: {
-        if (inhibitor.state == Inhibitor.Inhibited) {
+        if (inhibitor.state === Inhibitor.Inhibited) {
             return i18n("Night Color is inhibited");
         }
         if (!monitor.available) {
@@ -86,6 +86,7 @@ Item {
     Inhibitor {
         id: inhibitor
     }
+
     Monitor {
         id: monitor
     }
