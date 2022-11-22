@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-19 00:47+0000\n"
+"POT-Creation-Date: 2022-11-22 00:47+0000\n"
 "PO-Revision-Date: 2022-08-22 21:54+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -299,6 +299,13 @@ msgctxt "@action:button"
 msgid "Cancel"
 msgstr "Peru"
 
+#: package/contents/ui/ForecastView.qml:73
+#: package/contents/ui/ForecastView.qml:80
+#, kde-format
+msgctxt "Short for no data available"
+msgid "-"
+msgstr "–"
+
 #: package/contents/ui/FullRepresentation.qml:34
 #, kde-format
 msgid "Please set your location"
@@ -333,7 +340,7 @@ msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Tyyntä"
 
-#: package/contents/ui/main.qml:140
+#: package/contents/ui/main.qml:149
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -341,102 +348,111 @@ msgid_plural "%1 Days"
 msgstr[0] "1 päivän"
 msgstr[1] "%1 päivän"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:171
 #, kde-format
 msgctxt "@label"
 msgid "Windchill:"
 msgstr "Tuulen hyytävyys:"
 
-#: package/contents/ui/main.qml:169
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@label"
 msgid "Humidex:"
 msgstr "Kosteusindeksi:"
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "Kastepiste:"
 
-#: package/contents/ui/main.qml:183
+#: package/contents/ui/main.qml:192
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "Ilmanpaine:"
 
-#: package/contents/ui/main.qml:190
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "Ilmanpaineen muutos:"
 
-#: package/contents/ui/main.qml:197
+#: package/contents/ui/main.qml:206
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "Näkyvyys:"
 
-#: package/contents/ui/main.qml:204
+#: package/contents/ui/main.qml:213
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "Ilmankosteus:"
 
-#: package/contents/ui/main.qml:211
+#: package/contents/ui/main.qml:220
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "Puuska:"
 
-#: package/contents/ui/main.qml:259
+#: package/contents/ui/main.qml:240
+#, fuzzy, kde-format
+#| msgctxt "Forecast period timeframe"
+#| msgid "1 Day"
+#| msgid_plural "%1 Days"
+msgctxt "Time of the day (from the duple Day/Night)"
+msgid "Day"
+msgstr "1 päivän"
+
+#: package/contents/ui/main.qml:241
+#, kde-format
+msgctxt "Time of the day (from the duple Day/Night)"
+msgid "Night"
+msgstr ""
+
+#: package/contents/ui/main.qml:279
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2 %)"
 msgstr "%1 (%2 %)"
 
-#: package/contents/ui/main.qml:269 package/contents/ui/main.qml:279
-#, kde-format
-msgctxt "Short for no data available"
-msgid "-"
-msgstr "–"
-
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:366
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr "Säätiedon nouto kohteelle %1 aikakatkaistu."
 
-#: package/contents/ui/main.qml:377
+#: package/contents/ui/main.qml:373
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr "Aseta %1 napsauttamalla"
 
-#: package/contents/ui/main.qml:386
+#: package/contents/ui/main.qml:382
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:393
+#: package/contents/ui/main.qml:389
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:396
+#: package/contents/ui/main.qml:392
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:405
+#: package/contents/ui/main.qml:401
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:412
+#: package/contents/ui/main.qml:408
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Ilmankosteus: %1"
@@ -453,13 +469,13 @@ msgctxt "@title:column weather watches"
 msgid "Watches Issued"
 msgstr "Annetut ennakkovaroitukset"
 
-#: package/contents/ui/SwitchPanel.qml:42
+#: package/contents/ui/SwitchPanel.qml:43
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Yksityiskohdat"
 
-#: package/contents/ui/SwitchPanel.qml:58
+#: package/contents/ui/SwitchPanel.qml:59
 #, kde-format
 msgctxt "@title:tab"
 msgid "Notices"
