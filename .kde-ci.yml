@@ -29,6 +29,9 @@ Dependencies:
     'frameworks/sonnet': '@latest'
     'frameworks/kunitconversion': '@latest'
     'plasma/plasma-workspace': '@same'
+- 'on': ['Linux']
+  'require':
+    'sdk/selenium-webdriver-at-spi': '@latest'
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD']
   cppcheck-ignore-files: ['templates/']
