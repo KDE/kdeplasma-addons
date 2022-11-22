@@ -112,6 +112,7 @@ add_subdirectory(desktopswitchers)
 add_subdirectory(plasmacalendarplugins)
 
 add_subdirectory(templates)
+add_subdirectory(appiumtests)
 
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
