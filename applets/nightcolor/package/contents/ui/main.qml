@@ -50,7 +50,7 @@ Item {
 
     Plasmoid.compactRepresentation: PlasmaCore.IconItem {
         active: compactMouseArea.containsMouse
-        source: plasmoid.icon
+        source: Plasmoid.icon
 
         MouseArea {
             id: compactMouseArea
@@ -91,9 +91,9 @@ Item {
     }
 
     Component.onCompleted: {
-        plasmoid.removeAction("configure");
+        Plasmoid.removeAction("configure");
         if (KCMShell.authorize("kcm_nightcolor.desktop").length > 0) {
-            plasmoid.setAction("configure", i18n("&Configure Night Color…"), "configure", "alt+d, s");
+            Plasmoid.setAction("configure", i18n("&Configure Night Color…"), "configure", "alt+d, s");
         }
     }
 }
