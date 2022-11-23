@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-22 00:47+0000\n"
-"PO-Revision-Date: 2022-11-17 06:29+0100\n"
+"PO-Revision-Date: 2022-11-22 07:07+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -166,7 +166,7 @@ msgstr "ვიჯეტის ხატულის ზემოდან"
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "ვიჯეტის ხატულის გვერდზე:"
+msgstr "ვიჯეტის ხატულის გვერდზე"
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
@@ -388,19 +388,16 @@ msgid "Wind Gust:"
 msgstr "ქარის სიჩქარე:"
 
 #: package/contents/ui/main.qml:240
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "%1 დღე"
+msgstr "დღე"
 
 #: package/contents/ui/main.qml:241
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "ღამე"
 
 #: package/contents/ui/main.qml:279
 #, kde-format

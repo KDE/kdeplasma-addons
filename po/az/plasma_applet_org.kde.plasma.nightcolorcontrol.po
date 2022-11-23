@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-12-13 00:44+0000\n"
+"POT-Creation-Date: 2022-11-23 00:49+0000\n"
 "PO-Revision-Date: 2021-12-21 22:24+0400\n"
 "Last-Translator: Kheyyam Gojayev <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -17,37 +17,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 21.12.0\n"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:32
 #, kde-format
 msgid "Night Color Control"
 msgstr "Gecə rəng sxemi idarəedilməsi"
 
-#: package/contents/ui/main.qml:34
+#: package/contents/ui/main.qml:35
 #, kde-format
 msgid "Night Color is inhibited"
 msgstr "Gecə rəng sxemi əngəlləndi"
 
-#: package/contents/ui/main.qml:37
+#: package/contents/ui/main.qml:38
 #, kde-format
 msgid "Night Color is unavailable"
 msgstr "Gecə rəng sxemi mövcud deyil"
 
-#: package/contents/ui/main.qml:40
+#: package/contents/ui/main.qml:41
 #, kde-format
 msgid "Night Color is disabled"
 msgstr "Gecə rəng sxemi söndürülüb"
 
-#: package/contents/ui/main.qml:43
+#: package/contents/ui/main.qml:44
 #, kde-format
 msgid "Night Color is not running"
 msgstr "Gecə rəng sxemi işləmir"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:46
 #, kde-format
 msgid "Night Color is active (%1K)"
 msgstr "Gecə rəng sxemi aktivdir (%1K)"
 
-#: package/contents/ui/main.qml:94
-#, kde-format
-msgid "Configure Night Color…"
+#: package/contents/ui/main.qml:96
+#, fuzzy, kde-format
+#| msgid "Configure Night Color…"
+msgid "&Configure Night Color…"
 msgstr "Gecə rəng sxemini tənzimləyin..."
