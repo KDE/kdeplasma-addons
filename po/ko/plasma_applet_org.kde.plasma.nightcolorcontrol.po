@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-23 00:49+0000\n"
+"POT-Creation-Date: 2022-11-24 00:47+0000\n"
 "PO-Revision-Date: 2022-02-20 22:16+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -47,7 +47,7 @@ msgstr "야간 색상이 실행 중이 아님"
 msgid "Night Color is active (%1K)"
 msgstr "야간 색상 활성화됨(%1K)"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:97
 #, fuzzy, kde-format
 #| msgid "Configure Night Color…"
 msgid "&Configure Night Color…"

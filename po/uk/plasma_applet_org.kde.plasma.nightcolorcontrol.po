@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.nightcolorcontrol\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-23 00:49+0000\n"
-"PO-Revision-Date: 2021-12-13 08:39+0200\n"
+"POT-Creation-Date: 2022-11-24 00:47+0000\n"
+"PO-Revision-Date: 2022-11-23 07:15+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -50,8 +50,7 @@ msgstr "Нічні кольори не запущено"
 msgid "Night Color is active (%1K)"
 msgstr "Нічні кольори задіяно (%1K)"
 
-#: package/contents/ui/main.qml:96
-#, fuzzy, kde-format
-#| msgid "Configure Night Color…"
+#: package/contents/ui/main.qml:97
+#, kde-format
 msgid "&Configure Night Color…"
-msgstr "Налаштувати нічні кольори…"
+msgstr "&Налаштувати нічні кольори…"

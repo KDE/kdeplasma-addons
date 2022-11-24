@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-23 00:49+0000\n"
+"POT-Creation-Date: 2022-11-24 00:47+0000\n"
 "PO-Revision-Date: 2022-08-17 09:49+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -50,7 +50,7 @@ msgstr "Gaueko kolorea ez dago martxan"
 msgid "Night Color is active (%1K)"
 msgstr "Gaueko kolorea aktibo dago (%1K)"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:97
 #, fuzzy, kde-format
 #| msgid "Configure Night Color…"
 msgid "&Configure Night Color…"

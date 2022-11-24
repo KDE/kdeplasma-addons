@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-23 00:49+0000\n"
+"POT-Creation-Date: 2022-11-24 00:47+0000\n"
 "PO-Revision-Date: 2022-06-28 21:16+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -47,7 +47,7 @@ msgstr "இரவு நிறமாற்றம் செயலில் இல
 msgid "Night Color is active (%1K)"
 msgstr "இரவு நிறமாற்றம் செயலில் உள்ளது (%1\")"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:97
 #, fuzzy, kde-format
 #| msgid "Configure Night Color…"
 msgid "&Configure Night Color…"

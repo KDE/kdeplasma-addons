@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-22 00:47+0000\n"
-"PO-Revision-Date: 2022-11-19 22:12+0100\n"
+"PO-Revision-Date: 2022-11-23 23:26+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -387,19 +387,16 @@ msgid "Wind Gust:"
 msgstr "Пориви на вятъра:"
 
 #: package/contents/ui/main.qml:240
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 ден"
+msgstr "Ден"
 
 #: package/contents/ui/main.qml:241
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Нощ"
 
 #: package/contents/ui/main.qml:279
 #, kde-format

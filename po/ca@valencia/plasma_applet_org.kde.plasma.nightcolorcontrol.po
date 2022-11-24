@@ -1,17 +1,17 @@
 # Translation of plasma_applet_org.kde.plasma.nightcolorcontrol.po to Catalan (Valencian)
-# Copyright (C) 2020-2021 This_file_is_part_of_KDE
+# Copyright (C) 2020-2022 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2020.
+# Josep M. Ferrer <txemaq@gmail.com>, 2020, 2022.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-23 00:49+0000\n"
-"PO-Revision-Date: 2021-12-13 18:28+0100\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"POT-Creation-Date: 2022-11-24 00:47+0000\n"
+"PO-Revision-Date: 2022-11-23 12:03+0100\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 20.12.0\n"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
@@ -51,8 +51,7 @@ msgstr "El color de nit no està executant-se"
 msgid "Night Color is active (%1K)"
 msgstr "El color de nit està actiu (%1K)"
 
-#: package/contents/ui/main.qml:96
-#, fuzzy, kde-format
-#| msgid "Configure Night Color…"
+#: package/contents/ui/main.qml:97
+#, kde-format
 msgid "&Configure Night Color…"
-msgstr "Configura el color de nit…"
+msgstr "&Configura el color de nit…"
