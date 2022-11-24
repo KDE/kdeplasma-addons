@@ -79,5 +79,8 @@ function createContextMenu(visualParent, currentColor, picker, colorLabel, copyI
         copyIndicatorLabel: copyIndicatorLabel,
         colorLabelRestoreTimer: colorLabelRestoreTimer,
     };
-    return Qt.createComponent("ColorContextMenu.qml").createObject(visualParent, initialArgs);
+    const component = Qt.createComponent("ColorContextMenu.qml");
+    const menu = component.createObject(visualParent, initialArgs);
+    component.destroy();
+    return menu;
 }
