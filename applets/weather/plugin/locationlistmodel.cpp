@@ -220,3 +220,14 @@ void LocationListModel::completeSearch()
     Q_EMIT locationSearchDone(success, m_searchString);
     Q_EMIT validatingInputChanged(false);
 }
+
+void LocationListModel::clear()
+{
+    beginResetModel();
+    m_locations.clear();
+    endResetModel();
+
+    m_checkedInCount = 0;
+    m_validatingInput = false;
+    Q_EMIT validatingInputChanged(false);
+}
