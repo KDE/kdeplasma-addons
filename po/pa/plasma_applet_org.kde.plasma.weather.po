@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2022-11-25 00:48+0000\n"
 "PO-Revision-Date: 2020-02-04 20:50-0800\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -232,69 +232,68 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "ਦਿੱਖ:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:35
-#, kde-format
-msgctxt "@label"
-msgid "Location:"
-msgstr "ਟਿਕਾਣਾ:"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
-#: plugin/locationlistmodel.cpp:125
-#, kde-format
-msgctxt "A weather station location and the weather service it comes from"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:58
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Choose..."
-msgctxt "@action:button"
-msgid "Choose…"
-msgstr "...ਚੁਣੋ"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:66
+#: package/contents/ui/config/ConfigWeatherStation.qml:46
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "ਅੱਪਡੇਟ ਕਰੋ ਹਰ:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:49
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 ਮਿੰਟ"
 msgstr[1] "%1 ਮਿੰਟ"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:36
+#: package/contents/ui/config/ConfigWeatherStation.qml:61
 #, kde-format
-msgctxt "@info"
-msgid "No weather stations found for '%1'"
-msgstr "'%1' ਲਈ ਕੋਈ ਮੌਸਮੀ ਸਟੇਸ਼ਨ ਨਹੀਂ ਲੱਭਿਆ"
+msgctxt "@label"
+msgid "Location:"
+msgstr "ਟਿਕਾਣਾ:"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:58
+#: package/contents/ui/config/ConfigWeatherStation.qml:67
+#, kde-format
+msgctxt "No location is currently selected"
+msgid "None selected"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#, kde-format
+msgctxt "@label"
+msgid "Provider:"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@info:placeholder"
+#| msgid "Enter location"
+msgctxt "@info:placeholder"
+msgid "Enter new location"
+msgstr "ਟਿਕਾਣਾ ਦਿਓ"
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "ਟਿਕਾਣਾ ਦਿਓ"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:28
+#: package/contents/ui/config/ConfigWeatherStation.qml:188
 #, kde-format
-msgctxt "@title:window"
-msgid "Select Weather Station"
-msgstr "ਮੌਸਮ ਸਟੇਸ਼ਨ ਚੁਣੋ"
+msgctxt "@info"
+msgid "No weather stations found for '%1'"
+msgstr "'%1' ਲਈ ਕੋਈ ਮੌਸਮੀ ਸਟੇਸ਼ਨ ਨਹੀਂ ਲੱਭਿਆ"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:87
+#: package/contents/ui/config/ConfigWeatherStation.qml:190
 #, kde-format
-msgctxt "@action:button"
-msgid "Select"
-msgstr "ਚੁਣੋ"
+msgctxt "@info"
+msgid "Search for a weather station to change your location"
+msgstr ""
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:94
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
-msgstr "ਰੱਦ ਕਰੋ"
+msgctxt "@info"
+msgid "Search for a weather station to set your location"
+msgstr ""
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -490,6 +489,12 @@ msgstr "'%1' '%2' ਦੀ ਵਰਤੋਂ ਨਾਲ ਲੱਭਿਆ ਨਹੀਂ 
 msgid "Connection to %1 weather server timed out."
 msgstr "%1 ਮੌਸਮ ਸਰਵਰ ਨਾਲ ਕੁਨੈਕਸ਼ਨ ਦੌਰਾਨ ਸਮਾਂ ਸਮਾਪਤ।"
 
+#: plugin/locationlistmodel.cpp:125
+#, kde-format
+msgctxt "A weather station location and the weather service it comes from"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
 #: plugin/util.cpp:43
 #, kde-format
 msgctxt "Degree, unit symbol"
@@ -519,6 +524,25 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#, fuzzy
+#~| msgctxt "@action:button"
+#~| msgid "Choose..."
+#~ msgctxt "@action:button"
+#~ msgid "Choose…"
+#~ msgstr "...ਚੁਣੋ"
+
+#~ msgctxt "@title:window"
+#~ msgid "Select Weather Station"
+#~ msgstr "ਮੌਸਮ ਸਟੇਸ਼ਨ ਚੁਣੋ"
+
+#~ msgctxt "@action:button"
+#~ msgid "Select"
+#~ msgstr "ਚੁਣੋ"
+
+#~ msgctxt "@action:button"
+#~ msgid "Cancel"
+#~ msgstr "ਰੱਦ ਕਰੋ"
 
 #~ msgctxt "@option:check Show on widget icon: temperature"
 #~ msgid "Temperature"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2022-11-25 00:48+0000\n"
 "PO-Revision-Date: 2009-09-09 23:03+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -242,36 +242,14 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Sichtigkeit: %1"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:35
-#, fuzzy, kde-format
-#| msgid "Location"
-msgctxt "@label"
-msgid "Location:"
-msgstr "Oort"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
-#: plugin/locationlistmodel.cpp:125
-#, fuzzy, kde-format
-#| msgctxt "certain weather condition, probability percentage"
-#| msgid "%1 (%2%)"
-msgctxt "A weather station location and the weather service it comes from"
-msgid "%1 (%2)"
-msgstr "%1 (%2%)"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:58
-#, kde-format
-msgctxt "@action:button"
-msgid "Choose…"
-msgstr ""
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:66
+#: package/contents/ui/config/ConfigWeatherStation.qml:46
 #, fuzzy, kde-format
 #| msgid "Update every:"
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Opfrischen jümmers na:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:49
 #, fuzzy, kde-format
 #| msgid " minute"
 #| msgid_plural " minutes"
@@ -280,37 +258,55 @@ msgid_plural "%1 minutes"
 msgstr[0] "Minuut"
 msgstr[1] "Minuut"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:36
+#: package/contents/ui/config/ConfigWeatherStation.qml:61
+#, fuzzy, kde-format
+#| msgid "Location"
+msgctxt "@label"
+msgid "Location:"
+msgstr "Oort"
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:67
 #, kde-format
-msgctxt "@info"
-msgid "No weather stations found for '%1'"
+msgctxt "No location is currently selected"
+msgid "None selected"
 msgstr ""
 
-#: package/contents/ui/config/WeatherStationPicker.qml:58
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#, kde-format
+msgctxt "@label"
+msgid "Provider:"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#, fuzzy, kde-format
+#| msgid "Weather Units"
+msgctxt "@info:placeholder"
+msgid "Enter new location"
+msgstr "Weder-Eenheiten"
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, fuzzy, kde-format
 #| msgid "Weather Units"
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Weder-Eenheiten"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:28
-#, fuzzy, kde-format
-#| msgid "Weather Units"
-msgctxt "@title:window"
-msgid "Select Weather Station"
-msgstr "Weder-Eenheiten"
-
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:87
-#, fuzzy, kde-format
-#| msgid "Selected city:"
-msgctxt "@action:button"
-msgid "Select"
-msgstr "Utsöcht Oort:"
-
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:94
+#: package/contents/ui/config/ConfigWeatherStation.qml:188
 #, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
+msgctxt "@info"
+msgid "No weather stations found for '%1'"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:190
+#, kde-format
+msgctxt "@info"
+msgid "Search for a weather station to change your location"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#, kde-format
+msgctxt "@info"
+msgid "Search for a weather station to set your location"
 msgstr ""
 
 #: package/contents/ui/ForecastView.qml:73
@@ -545,6 +541,14 @@ msgstr ""
 msgid "Connection to %1 weather server timed out."
 msgstr ""
 
+#: plugin/locationlistmodel.cpp:125
+#, fuzzy, kde-format
+#| msgctxt "certain weather condition, probability percentage"
+#| msgid "%1 (%2%)"
+msgctxt "A weather station location and the weather service it comes from"
+msgid "%1 (%2)"
+msgstr "%1 (%2%)"
+
 #: plugin/util.cpp:43
 #, kde-format
 msgctxt "Degree, unit symbol"
@@ -588,6 +592,18 @@ msgstr "%1 %2"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2%)"
+
+#, fuzzy
+#~| msgid "Weather Units"
+#~ msgctxt "@title:window"
+#~ msgid "Select Weather Station"
+#~ msgstr "Weder-Eenheiten"
+
+#, fuzzy
+#~| msgid "Selected city:"
+#~ msgctxt "@action:button"
+#~ msgid "Select"
+#~ msgstr "Utsöcht Oort:"
 
 #, fuzzy
 #~| msgid "&Temperature unit:"

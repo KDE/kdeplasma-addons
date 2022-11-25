@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2022-11-25 00:48+0000\n"
 "PO-Revision-Date: 2022-11-23 08:00+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
-"%100<=4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "X-Generator: Poedit 3.1.1\n"
 
@@ -230,32 +230,13 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Vidljivost:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:35
-#, kde-format
-msgctxt "@label"
-msgid "Location:"
-msgstr "Mesto:"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
-#: plugin/locationlistmodel.cpp:125
-#, kde-format
-msgctxt "A weather station location and the weather service it comes from"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:58
-#, kde-format
-msgctxt "@action:button"
-msgid "Choose…"
-msgstr "Izberi…"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:66
+#: package/contents/ui/config/ConfigWeatherStation.qml:46
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Posodobi vsakih:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:49
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -264,35 +245,55 @@ msgstr[1] "%1 minuti"
 msgstr[2] "%1 minute"
 msgstr[3] "%1 minut"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:36
+#: package/contents/ui/config/ConfigWeatherStation.qml:61
 #, kde-format
-msgctxt "@info"
-msgid "No weather stations found for '%1'"
-msgstr "Za '%1' ni najdene vremenske postaje"
+msgctxt "@label"
+msgid "Location:"
+msgstr "Mesto:"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:58
+#: package/contents/ui/config/ConfigWeatherStation.qml:67
+#, kde-format
+msgctxt "No location is currently selected"
+msgid "None selected"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#, kde-format
+msgctxt "@label"
+msgid "Provider:"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@info:placeholder"
+#| msgid "Enter location"
+msgctxt "@info:placeholder"
+msgid "Enter new location"
+msgstr "Vnesi lokacijo"
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Vnesi lokacijo"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:28
+#: package/contents/ui/config/ConfigWeatherStation.qml:188
 #, kde-format
-msgctxt "@title:window"
-msgid "Select Weather Station"
-msgstr "Izberi vremensko postajo"
+msgctxt "@info"
+msgid "No weather stations found for '%1'"
+msgstr "Za '%1' ni najdene vremenske postaje"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:87
+#: package/contents/ui/config/ConfigWeatherStation.qml:190
 #, kde-format
-msgctxt "@action:button"
-msgid "Select"
-msgstr "Izberi"
+msgctxt "@info"
+msgid "Search for a weather station to change your location"
+msgstr ""
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:94
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
-msgstr "Preklic"
+msgctxt "@info"
+msgid "Search for a weather station to set your location"
+msgstr ""
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -485,6 +486,12 @@ msgstr "Ni mogoče najti '%1' z uporabo %2."
 msgid "Connection to %1 weather server timed out."
 msgstr "Potek povezave %1 z vremenskim strežnikom je potekel."
 
+#: plugin/locationlistmodel.cpp:125
+#, kde-format
+msgctxt "A weather station location and the weather service it comes from"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
 #: plugin/util.cpp:43
 #, kde-format
 msgctxt "Degree, unit symbol"
@@ -514,6 +521,22 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgctxt "@action:button"
+#~ msgid "Choose…"
+#~ msgstr "Izberi…"
+
+#~ msgctxt "@title:window"
+#~ msgid "Select Weather Station"
+#~ msgstr "Izberi vremensko postajo"
+
+#~ msgctxt "@action:button"
+#~ msgid "Select"
+#~ msgstr "Izberi"
+
+#~ msgctxt "@action:button"
+#~ msgid "Cancel"
+#~ msgstr "Preklic"
 
 #~ msgctxt "@option:check Show on widget icon: temperature"
 #~ msgid "Temperature"

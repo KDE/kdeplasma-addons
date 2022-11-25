@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2022-11-25 00:48+0000\n"
 "PO-Revision-Date: 2022-11-23 23:26+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -227,67 +227,68 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Видимост:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:35
-#, kde-format
-msgctxt "@label"
-msgid "Location:"
-msgstr "Местоположение:"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
-#: plugin/locationlistmodel.cpp:125
-#, kde-format
-msgctxt "A weather station location and the weather service it comes from"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:58
-#, kde-format
-msgctxt "@action:button"
-msgid "Choose…"
-msgstr "Избиране…"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:66
+#: package/contents/ui/config/ConfigWeatherStation.qml:46
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Актуализиране на всеки:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:49
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 минута"
 msgstr[1] "%1 минути"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:36
+#: package/contents/ui/config/ConfigWeatherStation.qml:61
 #, kde-format
-msgctxt "@info"
-msgid "No weather stations found for '%1'"
-msgstr "Не са намерени метеорологични станции за \"%1\""
+msgctxt "@label"
+msgid "Location:"
+msgstr "Местоположение:"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:58
+#: package/contents/ui/config/ConfigWeatherStation.qml:67
+#, kde-format
+msgctxt "No location is currently selected"
+msgid "None selected"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#, kde-format
+msgctxt "@label"
+msgid "Provider:"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@info:placeholder"
+#| msgid "Enter location"
+msgctxt "@info:placeholder"
+msgid "Enter new location"
+msgstr "Въведете местоположение"
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Въведете местоположение"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:28
+#: package/contents/ui/config/ConfigWeatherStation.qml:188
 #, kde-format
-msgctxt "@title:window"
-msgid "Select Weather Station"
-msgstr "Избиране на метеорологична станция"
+msgctxt "@info"
+msgid "No weather stations found for '%1'"
+msgstr "Не са намерени метеорологични станции за \"%1\""
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:87
+#: package/contents/ui/config/ConfigWeatherStation.qml:190
 #, kde-format
-msgctxt "@action:button"
-msgid "Select"
-msgstr "Избиране"
+msgctxt "@info"
+msgid "Search for a weather station to change your location"
+msgstr ""
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:94
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
-msgstr "Отказ"
+msgctxt "@info"
+msgid "Search for a weather station to set your location"
+msgstr ""
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -478,6 +479,12 @@ msgstr "Не може да се намери \"%1\" с  %2."
 msgid "Connection to %1 weather server timed out."
 msgstr "Времето за връзка с %1 метеорологичния сървър изтече."
 
+#: plugin/locationlistmodel.cpp:125
+#, kde-format
+msgctxt "A weather station location and the weather service it comes from"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
 #: plugin/util.cpp:43
 #, kde-format
 msgctxt "Degree, unit symbol"
@@ -507,3 +514,19 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgctxt "@action:button"
+#~ msgid "Choose…"
+#~ msgstr "Избиране…"
+
+#~ msgctxt "@title:window"
+#~ msgid "Select Weather Station"
+#~ msgstr "Избиране на метеорологична станция"
+
+#~ msgctxt "@action:button"
+#~ msgid "Select"
+#~ msgstr "Избиране"
+
+#~ msgctxt "@action:button"
+#~ msgid "Cancel"
+#~ msgstr "Отказ"

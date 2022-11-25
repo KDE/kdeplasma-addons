@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2022-11-25 00:48+0000\n"
 "PO-Revision-Date: 2022-11-17 23:29+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -230,32 +230,13 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Matomumas:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:35
-#, kde-format
-msgctxt "@label"
-msgid "Location:"
-msgstr "Vietovė:"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
-#: plugin/locationlistmodel.cpp:125
-#, kde-format
-msgctxt "A weather station location and the weather service it comes from"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:58
-#, kde-format
-msgctxt "@action:button"
-msgid "Choose…"
-msgstr "Pasirinkti…"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:66
+#: package/contents/ui/config/ConfigWeatherStation.qml:46
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Atnaujinti kas:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:49
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -264,35 +245,55 @@ msgstr[1] "%1 minutes"
 msgstr[2] "%1 minučių"
 msgstr[3] "%1 minutę"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:36
+#: package/contents/ui/config/ConfigWeatherStation.qml:61
 #, kde-format
-msgctxt "@info"
-msgid "No weather stations found for '%1'"
-msgstr "Vietovei „%1“ nerasta jokių orų stočių"
+msgctxt "@label"
+msgid "Location:"
+msgstr "Vietovė:"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:58
+#: package/contents/ui/config/ConfigWeatherStation.qml:67
+#, kde-format
+msgctxt "No location is currently selected"
+msgid "None selected"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#, kde-format
+msgctxt "@label"
+msgid "Provider:"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@info:placeholder"
+#| msgid "Enter location"
+msgctxt "@info:placeholder"
+msgid "Enter new location"
+msgstr "Įveskite vietovę"
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Įveskite vietovę"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:28
+#: package/contents/ui/config/ConfigWeatherStation.qml:188
 #, kde-format
-msgctxt "@title:window"
-msgid "Select Weather Station"
-msgstr "Pasirinkite orų stotį"
+msgctxt "@info"
+msgid "No weather stations found for '%1'"
+msgstr "Vietovei „%1“ nerasta jokių orų stočių"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:87
+#: package/contents/ui/config/ConfigWeatherStation.qml:190
 #, kde-format
-msgctxt "@action:button"
-msgid "Select"
-msgstr "Pasirinkti"
+msgctxt "@info"
+msgid "Search for a weather station to change your location"
+msgstr ""
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:94
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
-msgstr "Atsisakyti"
+msgctxt "@info"
+msgid "Search for a weather station to set your location"
+msgstr ""
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -488,6 +489,12 @@ msgstr "Nepavyksta rasti \"%1\" naudojant %2."
 msgid "Connection to %1 weather server timed out."
 msgstr "Pasibaigė ryšiui prie %1 orų serverio skirtas laikas."
 
+#: plugin/locationlistmodel.cpp:125
+#, kde-format
+msgctxt "A weather station location and the weather service it comes from"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
 #: plugin/util.cpp:43
 #, kde-format
 msgctxt "Degree, unit symbol"
@@ -517,6 +524,22 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgctxt "@action:button"
+#~ msgid "Choose…"
+#~ msgstr "Pasirinkti…"
+
+#~ msgctxt "@title:window"
+#~ msgid "Select Weather Station"
+#~ msgstr "Pasirinkite orų stotį"
+
+#~ msgctxt "@action:button"
+#~ msgid "Select"
+#~ msgstr "Pasirinkti"
+
+#~ msgctxt "@action:button"
+#~ msgid "Cancel"
+#~ msgstr "Atsisakyti"
 
 #~ msgctxt "@option:check Show on widget icon: temperature"
 #~ msgid "Temperature"

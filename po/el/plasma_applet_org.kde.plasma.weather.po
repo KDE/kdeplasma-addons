@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2022-11-25 00:48+0000\n"
 "PO-Revision-Date: 2016-08-31 20:04+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -243,34 +243,14 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Ορατότητα:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:35
-#, fuzzy, kde-format
-#| msgid "Location:"
-msgctxt "@label"
-msgid "Location:"
-msgstr "Τοποθεσία:"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
-#: plugin/locationlistmodel.cpp:125
-#, kde-format
-msgctxt "A weather station location and the weather service it comes from"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:58
-#, kde-format
-msgctxt "@action:button"
-msgid "Choose…"
-msgstr ""
-
-#: package/contents/ui/config/ConfigWeatherStation.qml:66
+#: package/contents/ui/config/ConfigWeatherStation.qml:46
 #, fuzzy, kde-format
 #| msgid "Update every:"
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Ενημέρωση κάθε:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:49
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "%1 minute"
@@ -278,38 +258,56 @@ msgid_plural "%1 minutes"
 msgstr[0] " λεπτά"
 msgstr[1] " λεπτά"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:36
+#: package/contents/ui/config/ConfigWeatherStation.qml:61
 #, fuzzy, kde-format
-#| msgid "No weather stations found for '%1'"
-msgctxt "@info"
-msgid "No weather stations found for '%1'"
-msgstr "Δε βρέθηκαν μετεωρολογικοί σταθμοί για '%1'"
+#| msgid "Location:"
+msgctxt "@label"
+msgid "Location:"
+msgstr "Τοποθεσία:"
 
-#: package/contents/ui/config/WeatherStationPicker.qml:58
+#: package/contents/ui/config/ConfigWeatherStation.qml:67
+#, kde-format
+msgctxt "No location is currently selected"
+msgid "None selected"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#, kde-format
+msgctxt "@label"
+msgid "Provider:"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#, fuzzy, kde-format
+#| msgid "Weather Station"
+msgctxt "@info:placeholder"
+msgid "Enter new location"
+msgstr "Μετεωρολογικός σταθμός"
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, fuzzy, kde-format
 #| msgid "Weather Station"
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Μετεωρολογικός σταθμός"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:28
+#: package/contents/ui/config/ConfigWeatherStation.qml:188
 #, fuzzy, kde-format
-#| msgid "Weather Station"
-msgctxt "@title:window"
-msgid "Select Weather Station"
-msgstr "Μετεωρολογικός σταθμός"
+#| msgid "No weather stations found for '%1'"
+msgctxt "@info"
+msgid "No weather stations found for '%1'"
+msgstr "Δε βρέθηκαν μετεωρολογικοί σταθμοί για '%1'"
 
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:87
-#, fuzzy, kde-format
-#| msgid "Selected city:"
-msgctxt "@action:button"
-msgid "Select"
-msgstr "Επιλεγμένη πόλη:"
-
-#: package/contents/ui/config/WeatherStationPickerDialog.qml:94
+#: package/contents/ui/config/ConfigWeatherStation.qml:190
 #, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
+msgctxt "@info"
+msgid "Search for a weather station to change your location"
+msgstr ""
+
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#, kde-format
+msgctxt "@info"
+msgid "Search for a weather station to set your location"
 msgstr ""
 
 #: package/contents/ui/ForecastView.qml:73
@@ -547,6 +545,12 @@ msgstr ""
 msgid "Connection to %1 weather server timed out."
 msgstr ""
 
+#: plugin/locationlistmodel.cpp:125
+#, kde-format
+msgctxt "A weather station location and the weather service it comes from"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
 #: plugin/util.cpp:43
 #, kde-format
 msgctxt "Degree, unit symbol"
@@ -590,6 +594,18 @@ msgstr "%1 %2"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#, fuzzy
+#~| msgid "Weather Station"
+#~ msgctxt "@title:window"
+#~ msgid "Select Weather Station"
+#~ msgstr "Μετεωρολογικός σταθμός"
+
+#, fuzzy
+#~| msgid "Selected city:"
+#~ msgctxt "@action:button"
+#~ msgid "Select"
+#~ msgstr "Επιλεγμένη πόλη:"
 
 #, fuzzy
 #~| msgid "Temperature:"
