@@ -30,6 +30,12 @@ ColumnLayout {
     // We use a custom property to provide a more responsive feedback
     property bool isSearching: false
 
+    readonly property var historyModel: Plasmoid.nativeInterface.history.map(source => {
+        const sourceDetails = source.split('|');
+        return { display: locationListModel.displayName(sourceDetails[2], providers[sourceDetails[0]]),
+                 value: source };
+    });
+
     LocationListModel {
         id: locationListModel
         onLocationSearchDone: {
@@ -92,7 +98,9 @@ ColumnLayout {
 
         focus: true
         enabled: Object.keys(providers).length > 0
-        placeholderText: hasSource ? i18nc("@info:placeholder", "Enter new location") : i18nc("@info:placeholder", "Enter location")
+        placeholderText: historyModel.length === 0 ? i18nc("@info:placeholder", "Enter location") :
+                                         hasSource ? i18nc("@info:placeholder", "Search for a weather station to change your location")
+                                                   : i18nc("@info:placeholder", "Search for a weather station to set your location")
 
         Timer {
             id: searchDelayTimer
@@ -146,26 +154,34 @@ ColumnLayout {
 
         ListView {
             id: locationListView
-            model: locationListModel
+            model: canSearch ? locationListModel : historyModel
             focus: true
             activeFocusOnTab: true
             keyNavigationEnabled: true
 
-            onCurrentIndexChanged: {
-                const source = locationListModel.valueForListIndex(locationListView.currentIndex);
-                if (source) {
-                     weatherStationConfigPage.cfg_source = source;
+            onCurrentItemChanged: {
+                if (currentItem && currentItem.source) {
+                     weatherStationConfigPage.cfg_source = currentItem.source;
                 }
             }
 
-            delegate: QQC2.ItemDelegate {
-                width: locationListView.width
-                text: model.display
+            delegate: Kirigami.BasicListItem {
+                id: locationDelegate
+
+                readonly property string source: canSearch ? locationListModel.valueForListIndex(index) : modelData.value
+
+                label: canSearch ? model.display : modelData.display
                 highlighted: ListView.isCurrentItem
 
                 onClicked: {
                     locationListView.forceActiveFocus();
                     locationListView.currentIndex = index;
+                }
+
+                trailing: QQC2.ToolButton {
+                    icon.name: "delete"
+                    visible: !canSearch && locationDelegate.hovered
+                    onClicked: Plasmoid.nativeInterface.removeFromHistory(source)
                 }
             }
 

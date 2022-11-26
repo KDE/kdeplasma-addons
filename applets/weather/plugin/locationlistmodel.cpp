@@ -121,14 +121,19 @@ QString LocationListModel::nameForListIndex(int listIndex) const
     if (0 <= listIndex && listIndex < m_locations.count()) {
         const LocationItem &item = m_locations.at(listIndex);
         if (!item.weatherService.isEmpty()) {
-            return i18nc("A weather station location and the weather service it comes from",
-                         "%1 (%2)",
-                         item.weatherStation,
-                         m_serviceCodeToDisplayName.value(item.weatherService, item.weatherService));
+            return displayName(item.weatherStation, m_serviceCodeToDisplayName.value(item.weatherService, item.weatherService));
         }
     }
 
     return QString();
+}
+
+QString LocationListModel::displayName(const QString &station, const QString &service) const
+{
+    if (service.isEmpty()) {
+        return station;
+    }
+    return i18nc("A weather station location and the weather service it comes from", "%1 (%2)", station, service);
 }
 
 void LocationListModel::searchLocations(const QString &searchString, const QStringList &services)

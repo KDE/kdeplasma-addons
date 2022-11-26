@@ -85,6 +85,7 @@ public:
 public:
     Q_INVOKABLE QString nameForListIndex(int listIndex) const;
     Q_INVOKABLE QString valueForListIndex(int listIndex) const;
+    Q_INVOKABLE QString displayName(const QString &station, const QString &service) const;
     Q_INVOKABLE void searchLocations(const QString &searchString, const QStringList &services);
     Q_INVOKABLE void clear();
 

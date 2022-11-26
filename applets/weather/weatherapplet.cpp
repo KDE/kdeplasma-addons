@@ -20,6 +20,8 @@
 
 using namespace KUnitConversion;
 
+const int MAX_HISTORY_LENGTH = 10;
+
 WeatherApplet::WeatherApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
 {
@@ -107,6 +109,60 @@ void WeatherApplet::setDefaultUnits()
     setLocaleAwareDefault(QStringLiteral("speedUnit"), KUnitConversion::MeterPerSecond, KUnitConversion::MilePerHour);
     setLocaleAwareDefault(QStringLiteral("pressureUnit"), KUnitConversion::Hectopascal, KUnitConversion::InchesOfMercury);
     setLocaleAwareDefault(QStringLiteral("visibilityUnit"), KUnitConversion::Kilometer, KUnitConversion::Mile);
+}
+
+QStringList WeatherApplet::history() const
+{
+    return globalConfig().readEntry(QStringLiteral("history"), QStringList());
+}
+
+void WeatherApplet::setHistory(const QStringList &sources)
+{
+    if (sources == history()) {
+        return;
+    }
+
+    KConfigGroup globalCfg = globalConfig();
+    globalConfig().writeEntry(QStringLiteral("history"), sources);
+    globalCfg.sync();
+
+    Q_EMIT historyChanged();
+}
+
+void WeatherApplet::addToHistory(const QString &source)
+{
+    if (source.isEmpty()) {
+        return;
+    }
+
+    QStringList sources = history();
+    if (!sources.isEmpty() && sources.at(0) == source) {
+        return;
+    }
+
+    sources.push_front(source);
+    sources.removeDuplicates();
+    while (sources.length() > MAX_HISTORY_LENGTH) {
+        sources.removeLast();
+    }
+
+    setHistory(sources);
+}
+
+void WeatherApplet::removeFromHistory(const QString &source)
+{
+    if (source.isEmpty()) {
+        return;
+    }
+
+    QStringList sources = history();
+    if (sources.isEmpty() && !sources.contains(source)) {
+        return;
+    }
+
+    sources.removeAll(source);
+
+    setHistory(sources);
 }
 
 K_PLUGIN_CLASS(WeatherApplet)

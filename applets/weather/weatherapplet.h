@@ -22,6 +22,7 @@ class WeatherApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
     Q_OBJECT
     // used for making this information available to the config pages
     Q_PROPERTY(bool needsToBeSquare MEMBER m_needsToBeSquare NOTIFY needsToBeSquareChanged FINAL)
+    Q_PROPERTY(QStringList history READ history NOTIFY historyChanged FINAL)
 
     Q_PROPERTY(QVariantMap providers MEMBER m_providers NOTIFY providersChanged FINAL)
 
@@ -31,8 +32,15 @@ public:
 
     void init() override;
 
+    QStringList history() const;
+    void setHistory(const QStringList &sources);
+
+    Q_INVOKABLE void addToHistory(const QString &source);
+    Q_INVOKABLE void removeFromHistory(const QString &source);
+
 Q_SIGNALS:
     void needsToBeSquareChanged();
+    void historyChanged();
     void providersChanged();
 
 private:
