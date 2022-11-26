@@ -91,53 +91,66 @@ ColumnLayout {
         }
     }
 
-    Kirigami.SearchField {
-        id: searchStringEdit
+    RowLayout {
+        QQC2.Label {
+            id: recentLabel
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
 
-        Layout.fillWidth: true
+            visible: !searchStringEdit.expanded
+            text: i18n("Recent locations:")
+        }
 
-        focus: true
-        enabled: Object.keys(providers).length > 0
-        placeholderText: historyModel.length === 0 ? i18nc("@info:placeholder", "Enter location") :
-                                         hasSource ? i18nc("@info:placeholder", "Search for a weather station to change your location")
-                                                   : i18nc("@info:placeholder", "Search for a weather station to set your location")
+        Kirigami.SearchField {
+            id: searchStringEdit
 
-        Timer {
-            id: searchDelayTimer
-            interval: 500
-            onTriggered: {
-                if (!canSearch) {
-                    locationListModel.clear();
+            readonly property bool expanded: historyModel.length === 0 || weatherStationConfigPage.canSearch || searchStringEdit.activeFocus
+
+            Layout.fillWidth: expanded
+            Layout.minimumWidth: Kirigami.Units.gridUnit * 4
+
+            focus: true
+            enabled: Object.keys(providers).length > 0
+            placeholderText: hasSource ? i18nc("@info:placeholder", "Search for a new location") : i18nc("@info:placeholder", "Search to set a location")
+
+            Timer {
+                id: searchDelayTimer
+                interval: 500
+                onTriggered: {
+                    if (!canSearch) {
+                        locationListModel.clear();
+                        return;
+                    }
+                    locationListModel.searchLocations(searchStringEdit.text, Object.keys(providers));
+                }
+            }
+
+            onTextChanged: {
+                isSearching = text.length > 0
+                searchDelayTimer.restart();
+            }
+
+            Keys.onUpPressed: {
+                if (locationListView.currentIndex != 0) {
+                    locationListView.currentIndex--;
+                }
+                event.accepted = true;
+            }
+            Keys.onDownPressed: {
+                if (locationListView.currentIndex != locationListView.count - 1) {
+                    locationListView.currentIndex++;
+                }
+                event.accepted = true;
+            }
+            Keys.onEscapePressed: {
+                if (!expanded) {
+                    event.accepted = false;
                     return;
                 }
-                locationListModel.searchLocations(searchStringEdit.text, Object.keys(providers));
+                searchStringEdit.clear();
+                locationListView.forceActiveFocus();
+                event.accepted = true;
             }
-        }
-
-        onTextChanged: {
-            isSearching = text.length > 0
-            searchDelayTimer.restart();
-        }
-
-        Keys.onUpPressed: {
-            if (locationListView.currentIndex != 0) {
-                locationListView.currentIndex--;
-            }
-            event.accepted = true;
-        }
-        Keys.onDownPressed: {
-            if (locationListView.currentIndex != locationListView.count - 1) {
-                locationListView.currentIndex++;
-            }
-            event.accepted = true;
-        }
-        Keys.onEscapePressed: {
-            if (searchStringEdit.text.length === 0) {
-                event.accepted = false;
-                return;
-            }
-            searchStringEdit.clear();
-            event.accepted = true;
         }
     }
 
@@ -154,7 +167,8 @@ ColumnLayout {
 
         ListView {
             id: locationListView
-            model: canSearch ? locationListModel : historyModel
+
+            model: searchStringEdit.expanded ? locationListModel : historyModel
             focus: true
             activeFocusOnTab: true
             keyNavigationEnabled: true
@@ -168,9 +182,9 @@ ColumnLayout {
             delegate: Kirigami.BasicListItem {
                 id: locationDelegate
 
-                readonly property string source: canSearch ? locationListModel.valueForListIndex(index) : modelData.value
+                readonly property string source: searchStringEdit.expanded ? locationListModel.valueForListIndex(index) : modelData.value
 
-                label: canSearch ? model.display : modelData.display
+                label: searchStringEdit.expanded ? model.display : modelData.display
                 highlighted: ListView.isCurrentItem
 
                 onClicked: {
@@ -178,9 +192,14 @@ ColumnLayout {
                     locationListView.currentIndex = index;
                 }
 
+                onDoubleClicked: {
+                    locationListView.currentIndex = index;
+                    root.saveConfig();  // ConfigurationAppletPage.saveConfig()
+                }
+
                 trailing: QQC2.ToolButton {
                     icon.name: "delete"
-                    visible: !canSearch && locationDelegate.hovered
+                    visible: !searchStringEdit.expanded && locationDelegate.hovered
                     onClicked: Plasmoid.nativeInterface.removeFromHistory(source)
                 }
             }
