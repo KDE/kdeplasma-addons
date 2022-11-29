@@ -21,13 +21,21 @@ DropArea {
 
     property bool containsAcceptableDrag: false
 
-    onEntered: containsAcceptableDrag = (drag.hasColor || ColorPicker.Utils.isValidColor(drag.text))
+    onEntered: containsAcceptableDrag = (drag.hasColor || drag.hasUrls || ColorPicker.Utils.isValidColor(drag.text))
     onExited: containsAcceptableDrag = false
     onDropped: {
         if (drop.hasColor) {
             addColorToHistory(drop.colorData)
         } else if (ColorPicker.Utils.isValidColor(drop.text)) {
             addColorToHistory(drop.text)
+        } else if (drop.hasUrls) {
+            const component = Qt.createComponent("ImageColors.qml");
+            drop.urls.forEach(path => {
+                component.incubateObject(dropArea, {
+                    "source": path,
+                }, Qt.Asynchronous);
+            });
+            component.destroy();
         }
         containsAcceptableDrag = false
     }
