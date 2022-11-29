@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Giovanni Sora <g.sora@tiscali.it>, 2020, 2021.
+# Giovanni Sora <g.sora@tiscali.it>, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-24 00:47+0000\n"
-"PO-Revision-Date: 2021-12-19 23:36+0100\n"
+"PO-Revision-Date: 2022-11-28 16:09+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
@@ -48,7 +48,6 @@ msgid "Night Color is active (%1K)"
 msgstr "Color de Nocte es activate (%1K)"
 
 #: package/contents/ui/main.qml:97
-#, fuzzy, kde-format
-#| msgid "Configure Night Color…"
+#, kde-format
 msgid "&Configure Night Color…"
-msgstr "Configura Color de Nocte (Night Color) ..."
+msgstr "&Configura Color de Nocte (Night Color) ..."

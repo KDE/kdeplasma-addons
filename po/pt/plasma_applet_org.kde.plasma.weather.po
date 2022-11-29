@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-11-16 09:43+0000\n"
+"PO-Revision-Date: 2022-11-28 18:34+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -248,21 +248,19 @@ msgstr "Localização:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Nenhuma seleccionada"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Fornecedor:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Indique a localização"
+msgstr "Indique a nova localização"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -280,13 +278,13 @@ msgstr "Sem estações meteorológicas para '%1'"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Procurar por uma estação meteorológica para mudar a sua localização"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Procurar por uma estação meteorológica para definir a sua localização"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -391,19 +389,16 @@ msgid "Wind Gust:"
 msgstr "Rajada de Vento:"
 
 #: package/contents/ui/main.qml:239
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 Dia"
+msgstr "Dia"
 
 #: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Noite"
 
 #: package/contents/ui/main.qml:278
 #, kde-format
@@ -515,19 +510,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgctxt "@action:button"
-#~ msgid "Choose…"
-#~ msgstr "Escolher…"
-
-#~ msgctxt "@title:window"
-#~ msgid "Select Weather Station"
-#~ msgstr "Seleccionar a Estação Meteorológica"
-
-#~ msgctxt "@action:button"
-#~ msgid "Select"
-#~ msgstr "Seleccionar"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"

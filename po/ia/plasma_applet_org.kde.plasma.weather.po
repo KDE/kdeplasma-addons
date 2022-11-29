@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# giovanni <g.sora@tiscali.it>, 2017, 2020, 2021.
+# giovanni <g.sora@tiscali.it>, 2017, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2021-12-19 23:39+0100\n"
+"PO-Revision-Date: 2022-11-28 16:10+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -176,7 +176,7 @@ msgstr "Monstra ultra icone de widget:"
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Non monstrar"
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
@@ -255,13 +255,13 @@ msgstr "Location:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Necun seligite"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Fornitor (Provider):"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, fuzzy, kde-format
@@ -404,13 +404,13 @@ msgstr "Colpo de vento:"
 #| msgid_plural "%1 Days"
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 die"
+msgstr "Die"
 
 #: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Nocte"
 
 #: package/contents/ui/main.qml:278
 #, kde-format
@@ -422,7 +422,7 @@ msgstr "%1 (%2 %)"
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr ""
+msgstr "Pulsa  pro configurar %1"
 
 #: package/contents/ui/main.qml:381
 #, kde-format
