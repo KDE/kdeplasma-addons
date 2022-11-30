@@ -20,6 +20,7 @@ DropArea {
     property alias colorCircle: colorCircle
 
     property bool containsAcceptableDrag: false
+    property Item indicator: null
 
     onEntered: containsAcceptableDrag = (drag.hasColor || drag.hasUrls || ColorPicker.Utils.isValidColor(drag.text))
     onExited: containsAcceptableDrag = false
@@ -29,15 +30,30 @@ DropArea {
         } else if (ColorPicker.Utils.isValidColor(drop.text)) {
             addColorToHistory(drop.text)
         } else if (drop.hasUrls) {
+            showLoadingIndicator(drop.urls);
             const component = Qt.createComponent("ImageColors.qml");
             drop.urls.forEach(path => {
                 component.incubateObject(null /* Let garbage collector handle item destruction*/, {
                     "source": path,
+                    "indicator": dropArea.indicator,
                 }, Qt.Asynchronous);
             });
             component.destroy();
         }
         containsAcceptableDrag = false
+    }
+
+    function showLoadingIndicator(urls) {
+        const component = Qt.createComponent(Qt.resolvedUrl("LoadingIndicator.qml"));
+        if (dropArea.indicator == null) {
+            dropArea.indicator = component.createObject(dropArea, {
+                "dropArea": dropArea,
+                "jobRemaining": urls.length,
+            });
+        } else {
+            dropArea.indicator.jobRemaining += urls.length;
+        }
+        component.destroy();
     }
 
     PlasmaComponents3.ToolButton {
