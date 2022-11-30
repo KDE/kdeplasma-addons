@@ -11,7 +11,6 @@
 #include <QDBusMessage>
 #include <QDBusPendingCallWatcher>
 #include <QDBusPendingReply>
-#include <QDBusServiceWatcher>
 
 static const QString s_serviceName = QStringLiteral("org.kde.NightColor");
 static const QString s_nightColorPath = QStringLiteral("/ColorCorrect");
@@ -20,19 +19,6 @@ static const QString s_propertiesInterface = QStringLiteral("org.freedesktop.DBu
 
 MonitorPrivate::MonitorPrivate(QObject *parent)
     : QObject(parent)
-{
-    QDBusServiceWatcher *watcher = new QDBusServiceWatcher(s_serviceName, QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForOwnerChange, this);
-    connect(watcher, &QDBusServiceWatcher::serviceRegistered, this, &MonitorPrivate::handleServiceRegistered);
-    connect(watcher, &QDBusServiceWatcher::serviceUnregistered, this, &MonitorPrivate::handleServiceUnregistered);
-
-    handleServiceRegistered();
-}
-
-MonitorPrivate::~MonitorPrivate()
-{
-}
-
-void MonitorPrivate::handleServiceRegistered()
 {
     QDBusConnection bus = QDBusConnection::sessionBus();
 
@@ -66,20 +52,8 @@ void MonitorPrivate::handleServiceRegistered()
     });
 }
 
-void MonitorPrivate::handleServiceUnregistered()
+MonitorPrivate::~MonitorPrivate()
 {
-    QDBusConnection bus = QDBusConnection::sessionBus();
-
-    // clang-format off
-    bus.disconnect(s_serviceName,
-                   s_nightColorPath,
-                   s_propertiesInterface,
-                   QStringLiteral("PropertiesChanged"),
-                   this,
-                   SLOT(handlePropertiesChanged(QString,QVariantMap,QStringList)));
-    // clang-format on
-
-    setAvailable(false);
 }
 
 void MonitorPrivate::handlePropertiesChanged(const QString &interfaceName, const QVariantMap &changedProperties, const QStringList &invalidatedProperties)
