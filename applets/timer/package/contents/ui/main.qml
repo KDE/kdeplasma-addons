@@ -34,6 +34,9 @@ Item {
     // Display timer toggle control (default: enabled)
     readonly property bool showTimerToggle: Plasmoid.configuration.showTimerToggle
 
+    // Display progress bar (default: disabled)
+    readonly property bool showProgressBar: Plasmoid.configuration.showProgressBar
+
     // show notification on timer completion (default: enabled)
     property bool showNotification: plasmoid.configuration.showNotification;
     // run custom command on timer completion (default: disabled)

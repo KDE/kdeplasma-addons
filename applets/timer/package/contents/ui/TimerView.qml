@@ -94,6 +94,18 @@ MouseArea {
             }
         }
 
+        PlasmaComponents3.ProgressBar {
+            id: remainingTimeProgressBar
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            visible: root.showProgressBar
+
+            from: plasmoid.configuration.seconds
+            to: 0
+            value: root.seconds
+        }
+
         function resetOpacity() {
             timerDigits.opacity = 1.0;
         }

@@ -19,6 +19,7 @@ Kirigami.FormLayout {
     property alias cfg_showRemainingTime: showRemainingTime.checked
     property alias cfg_showSeconds: showSeconds.checked
     property alias cfg_showTimerToggle: showTimerToggle.checked
+    property alias cfg_showProgressBar: showProgressBar.checked
 
     property alias cfg_showNotification: showNotification.checked
     property alias cfg_notificationText: notificationText.text
@@ -61,6 +62,11 @@ Kirigami.FormLayout {
     QQC2.CheckBox {
         id: showTimerToggle
         text: i18nc("@option:check", "Show timer toggle");
+    }
+
+    QQC2.CheckBox {
+        id: showProgressBar
+        text: i18nc("@option:check", "Show progress bar");
     }
 
 

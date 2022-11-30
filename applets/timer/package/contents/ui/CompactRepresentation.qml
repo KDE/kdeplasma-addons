@@ -215,6 +215,20 @@ Item {
                 Accessible.description: Plasmoid.toolTipSubText
                 Accessible.role: Accessible.Button
             }
+
+            PlasmaComponents3.ProgressBar {
+                id: remainingTimeProgressBar
+
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.maximumWidth: (parent.visibleChildren.length > 1) ? Math.max(titleLabel.width, remainingTimeLabel.width) : -1
+                Layout.minimumWidth: Layout.maximumWidth
+                visible: root.showProgressBar
+
+                from: plasmoid.configuration.seconds
+                to: 0
+                value: root.seconds
+            }
         }
 
         Item {
