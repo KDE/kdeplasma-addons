@@ -122,6 +122,7 @@ Item {
             Layout.alignment: Qt.AlignVCenter
             Layout.preferredWidth: Math.min(compactRepresentation.parent.width, compactRepresentation.parent.height)
             Layout.preferredHeight: Layout.preferredWidth
+            visible: root.showTimerToggle
 
             display: PlasmaComponents3.AbstractButton.IconOnly
             icon.name: {

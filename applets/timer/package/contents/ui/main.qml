@@ -28,6 +28,9 @@ Item {
     readonly property bool showSeconds: Plasmoid.configuration.showSeconds
     property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);
 
+    // Display timer toggle control (default: enabled)
+    readonly property bool showTimerToggle: Plasmoid.configuration.showTimerToggle
+
     // show notification on timer completion (default: enabled)
     property bool showNotification: plasmoid.configuration.showNotification;
     // run custom command on timer completion (default: disabled)

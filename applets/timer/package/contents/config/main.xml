@@ -30,6 +30,10 @@
       <default>true</default>
     </entry>
 
+    <entry name="showTimerToggle" type="Bool">
+      <default>true</default>
+    </entry>
+
     <entry name="showNotification" type="Bool">
       <default>true</default>
     </entry>
