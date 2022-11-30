@@ -31,13 +31,6 @@ Image {
         }
     }
 
-    Timer {
-        interval: 5000
-        running: true
-
-        onTriggered: component.destroy()
-    }
-
     Kirigami.ImageColors {
         id: imageColors
 
