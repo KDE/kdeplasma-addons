@@ -14,7 +14,7 @@
 
 Q_LOGGING_CATEGORY(NIGHTCOLOR_CONTROL, "org.kde.plasma.nightcolorcontrol")
 
-static const QString s_serviceName = QStringLiteral("org.kde.KWin");
+static const QString s_serviceName = QStringLiteral("org.kde.NightColor");
 static const QString s_path = QStringLiteral("/ColorCorrect");
 static const QString s_interface = QStringLiteral("org.kde.kwin.ColorCorrect");
 
