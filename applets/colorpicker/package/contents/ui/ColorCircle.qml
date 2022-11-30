@@ -31,7 +31,7 @@ DropArea {
         } else if (drop.hasUrls) {
             const component = Qt.createComponent("ImageColors.qml");
             drop.urls.forEach(path => {
-                component.incubateObject(dropArea, {
+                component.incubateObject(null /* Let garbage collector handle item destruction*/, {
                     "source": path,
                 }, Qt.Asynchronous);
             });

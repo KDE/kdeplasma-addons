@@ -8,38 +8,13 @@ import QtQuick 2.15
 
 import org.kde.kirigami 2.20 as Kirigami
 
-Image {
-    id: component
+Kirigami.ImageColors {
+    id: imageColors
 
-    width: 128
-    height: width
-    visible: false
-
-    asynchronous: true
-    cache: false
-    autoTransform: true
-
-    onStatusChanged: {
-        switch (status) {
-        case Image.Loading:
-            break;
-        case Image.Ready:
-            imageColors.source = component;
-            break;
-        default:
-            component.destroy();
+    onPaletteChanged: {
+        if (imageColors.palette.length > 0) {
+            root.addColorToHistory(imageColors.average);
         }
-    }
-
-    Kirigami.ImageColors {
-        id: imageColors
-
-        onPaletteChanged: {
-            if (imageColors.palette.length > 0) {
-                root.addColorToHistory(imageColors.average);
-            }
-            component.destroy();
-        }
+        imageColors.destroy();
     }
 }
-
